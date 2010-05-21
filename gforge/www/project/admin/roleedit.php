@@ -68,6 +68,20 @@ if ($role_id=='observer') {
 		exit_error('Error',$role->getErrorMessage());
 	}
 
+	$old_data = $role->getSettingsForProject ($group) ;
+	$new_data = array () ;
+	foreach ($old_data as $section => $values) {
+		if (!array_key_exists ($section, $data)) {
+			continue ;
+		}
+		foreach ($values as $ref_id => $val) {
+			if (!array_key_exists ($ref_id, $data[$section])) {
+				continue ;
+			}
+			$new_data[$section][$ref_id] = $data[$section][$ref_id] ;
+		}
+	}
+
 	if (getStringFromRequest('submit')) {
 		$role_name = trim(getStringFromRequest('role_name'));
 		if (!$role_name) {

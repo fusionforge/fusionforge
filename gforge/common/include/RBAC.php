@@ -34,6 +34,194 @@ if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) {
 // Code shared between classes
 
 abstract class BaseRole extends Error {
+	var $role_values;
+	var $defaults;
+	var $global_settings;
+
+	public function BaseRole() {
+		if (USE_PFO_RBAC) {
+			$this->role_values = array (
+				'forge_admin' => array (0,1),
+				'approve_projects' => array (0,1),
+				'approve_news' => array (0,1),
+				'forge_stats' => array (0,1,2),
+
+				'project_read' => array (0,1),
+				'project_admin' => array (0,1),
+
+				'tracker_admin' => array (0,1),
+				'pm_admin' => array (0,1),
+				'forum_admin' => array (0,1),
+				
+				'tracker' => array (0,1,3,5,7),
+				'pm' => array (0,1,3,5,7),
+				'forum' => array (0,1,2,3,4),
+
+				'new_tracker' => array (0,1,3,5,7),
+				'new_pm' => array (0,1,3,5,7),
+				'new_forum' => array (0,1,2,3,4),
+
+				'scm' => array (0,1,2),
+				'docman' => array (0,1,2,3,4),
+				'frs' => array (0,1,2,3),
+
+				'webcal' => array (0,1,2),
+				);
+
+			$this->global_settings = array (
+				'forge_admin',
+				'approve_projects',
+				'approve_news',
+				'forge_stats'
+				);
+
+			$this->defaults = array(
+				'Admin' => array(            'project_admin'=> 1,
+							     'project_read' => 1,
+							     'frs' => 2,
+							     'scm' => 2,
+							     'docman' => 3,
+							     'forum_admin' => 1,
+							     'new_forum' => 3,
+							     'tracker_admin' => 1,
+							     'new_tracker' => 7,
+							     'pm_admin' => 1,
+							     'new_pm' => 7,
+							     'webcal' => 2,
+					),
+				'Senior Developer' => array( 'project_read' => 1,
+							     'frs' => 2,
+							     'scm' => 2,
+							     'docman' => 3,
+							     'forum_admin' => 1,
+							     'new_forum' => 3,
+							     'tracker_admin' => 1,
+							     'new_tracker' => 7,
+							     'pm_admin' => 1,
+							     'new_pm' => 7,
+							     'webcal' => 2,
+					),
+				'Junior Developer' => array( 'project_read' => 1,
+							     'frs' => 2,
+							     'scm' => 2,
+							     'docman' => 2,
+							     'new_forum' => 3,
+							     'new_tracker' => 3,
+							     'new_pm' => 3,
+							     'webcal' => 2,
+					),
+				'Doc Writer' => array(       'project_read' => 1,
+							     'frs' => 2,
+						       	     'docman' => 4,
+						       	     'new_forum' => 3,
+						       	     'new_tracker' => 1,
+						       	     'new_pm' => 1,
+						       	     'webcal' => 2,
+					),
+				'Support Tech' => array(     'project_read' => 1,
+							     'frs' => 2,
+							     'docman' => 1,
+							     'new_forum' => 3,
+							     'tracker_admin' => 1,
+							     'new_tracker' => 3,
+							     'pm_admin' => 1,
+							     'new_pm' => 7,
+							     'webcal' => 2,
+					),
+				);
+		} else {
+			$this->role_values = array(
+				'projectadmin' => array ('0','A'),
+				'frs'	       => array ('0','1'),
+				'scm'	       => array ('-1','0','1'),
+				'docman'       => array ('0','1'),
+				'forumadmin'   => array ('0','2'),
+				'forum'	       => array ('-1','0','1','2'),
+				'newforum'     => array ('-1','0','1','2'),
+				'trackeradmin' => array ('0','2'),
+				'tracker'      => array ('-1','0','1','2','3'),
+				'newtracker'   => array ('-1','0','1','2','3'),
+				'pmadmin'      => array ('0','2'),
+				'pm'	       => array ('-1','0','1','2','3'),
+				'newpm'	       => array ('-1','0','1','2','3'),
+				'webcal'       => array ('0','1','2'));
+			
+			$this->defaults = array(
+				'Admin'		  => array( 'projectadmin'=>'A',
+							    'frs'=>'1',
+							    'scm'=>'1',
+							    'docman'=>'1',
+							    'forumadmin'=>'2',
+							    'forum'=>'2',
+							    'newforum'=>'2',
+							    'trackeradmin'=>'2',
+							    'tracker'=>'2',
+							    'newtracker'=>'2',
+							    'pmadmin'=>'2',
+							    'pm'=>'2',
+							    'newpm'=>'2',
+							    'webcal'=>'1' ),
+				'Senior Developer'=> array( 'projectadmin'=>'0',
+							    'frs'=>'1',
+							    'scm'=>'1',
+							    'docman'=>'1',
+							    'forumadmin'=>'2',
+							    'forum'=>'2',
+							    'newforum'=>'2',
+							    'trackeradmin'=>'2',
+							    'tracker'=>'2',
+							    'newtracker'=>'2',
+							    'pmadmin'=>'2',
+							    'pm'=>'2',
+							    'newpm'=>'2',
+							    'webcal'=>'2' ),
+				'Junior Developer'=> array( 'projectadmin'=>'0',
+							    'frs'=>'0',
+							    'scm'=>'1',
+							    'docman'=>'0',
+							    'forumadmin'=>'0',
+							    'forum'=>'1',
+							    'newforum'=>'1',
+							    'trackeradmin'=>'0',
+							    'tracker'=>'1',
+							    'newtracker'=>'1',
+							    'pmadmin'=>'0',
+							    'pm'=>'1',
+							    'newpm'=>'1',
+							    'webcal'=>'2' ),
+				'Doc Writer'	  => array( 'projectadmin'=>'0',
+							    'frs'=>'0',
+							    'scm'=>'0',
+							    'docman'=>'1',
+							    'forumadmin'=>'0',
+							    'forum'=>'1',
+							    'newforum'=>'1',
+							    'trackeradmin'=>'0',
+							    'tracker'=>'0',
+							    'newtracker'=>'0',
+							    'pmadmin'=>'0',
+							    'pm'=>'0' ,
+							    'newpm'=>'0' ,
+							    'webcal'=>'2'),
+				'Support Tech'	  => array( 'projectadmin'=>'0',
+							    'frs'=>'0',
+							    'scm'=>'0',
+							    'docman'=>'1',
+							    'forumadmin'=>'0',
+							    'forum'=>'1',
+							    'newforum'=>'1',
+							    'trackeradmin'=>'0',
+							    'tracker'=>'2',
+							    'newtracker'=>'2',
+							    'pmadmin'=>'0',
+							    'pm'=>'0' ,
+							    'newpm'=>'0' ,
+							    'webcal'=>'2')
+				);
+
+		}
+	}
+
 	public function getUsers() {
 		throw new Exception ("Not implemented") ;
 	}
@@ -221,6 +409,43 @@ abstract class BaseRole extends Error {
 						       $section,
 						       $reference,
 						       $value)) ;
+	}
+
+	function getSettingsForProject ($project) {
+		$result = array () ;
+		$group_id = $project->getID() ;
+
+		if (USE_PFO_RBAC) {
+			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
+			foreach ($arr as $section) {
+				$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
+			}
+		} else {
+			$sections = array ('projectadmin', 'frs', 'scm', 'docman', 'trackeradmin', 'newtracker', 'forumadmin', 'newforum', 'pmadmin', 'newpm', 'webcal') ;
+			foreach ($arr as $section) {
+				$result[$section][0] = $this->getVal ($section, 0) ;
+			}
+		}
+
+		$atf = new ArtifactTypeFactory ($project) ;
+		$trackers = $atf->getArtifactTypes () ;
+		foreach ($trackers as $t) {
+			$result['tracker'][$t->getID()] = $this->getVal ('tracker', $t->getID()) ;
+		}
+
+		$ff = new ForumFactory ($project) ;
+		$forums = $ff->getForums () ;
+		foreach ($forums as $f) {
+			$result['forum'][$t->getID()] = $this->getVal ('forum', $f->getID()) ;
+		}
+
+		$pgf = new ProjectGroupFactory ($project) ;
+		$pgs = $pgf->getProjectGroups () ;
+		foreach ($pgs as $p) {
+			$result['tracker'][$p->getID()] = $this->getVal ('tracker', $p->getID()) ;
+		}
+
+		return $result ;
 	}
 
         function hasPermission($section, $reference, $action = NULL) {
