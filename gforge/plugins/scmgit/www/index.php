@@ -14,7 +14,7 @@ $func = getStringFromRequest ('func') ;
 switch ($func) {
 case 'request-personal-repo':
 	$group_id = getStringFromRequest ('group_id') ;
-	session_require (array('group' => $group_id)) ;
+	session_require_perm ('scm', $group_id, 'write') ;
 	$user = session_get_user(); // get the session user
 	$result = db_query_params ('SELECT * FROM plugin_scmgit_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2',
 				   array ($group_id,

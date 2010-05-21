@@ -14,14 +14,14 @@ class WikiTheme_gforge extends WikiTheme {
         
         //group is private
         if (!$project->isPublic()) {
-            //if it's a private group, you must be a member of that group
-            session_require(array('group'=>$group_id));
+		//if it's a private group, you must be a member of that group
+		session_require_perm ('project', $group_id) ;
         }
 
         //for dead projects must be member of admin project
         if (!$project->isActive()) {
-            //only SF group can view non-active, non-holding groups
-            session_require(array('group'=>'1'));
+		//only SF group can view non-active, non-holding groups
+		session_require_global_perm ('forge_admin') ;
         }
 
                 // FIXME: alcatel-lucent should not be hard-encoded here
