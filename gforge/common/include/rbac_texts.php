@@ -42,7 +42,7 @@ function setup_rbac_strings () {
 	if (USE_PFO_RBAC) {
 		$rbac_permission_names = array_replace_recursive ($rbac_permission_names, 
 								  array (
-									  'forge_admin0' => _('No access'),
+									  'forge_admin0' => _('No administrative access'),
 									  'forge_admin1' => _('Forge administration'),
 									  'approve_projects0' => _('No access'),
 									  'approve_projects1' => _('Approve projects'),
@@ -54,14 +54,14 @@ function setup_rbac_strings () {
 
 									  'project_read0' => _('Hidden'),
 									  'project_read1' => _('Visible'),
-									  'project_admin0' => _('No access'),
+									  'project_admin0' => _('No administrative access'),
 									  'project_admin1' => _('Project administration'),
 
-									  'tracker_admin0' => _('No access'),
+									  'tracker_admin0' => _('No administrative access'),
 									  'tracker_admin1' => _('Trackers administration'),
-									  'pm_admin0' => _('No access'),
+									  'pm_admin0' => _('No administrative access'),
 									  'pm_admin1' => _('Task managers administration'),
-									  'forum_admin0' => _('No access'),
+									  'forum_admin0' => _('No administrative access'),
 									  'forum_admin1' => _('Forums administration'),
 				
 									  'tracker0' => _('No access'),

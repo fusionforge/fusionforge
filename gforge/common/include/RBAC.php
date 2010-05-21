@@ -432,7 +432,7 @@ abstract class BaseRole extends Error {
 		$ff = new ForumFactory ($project) ;
 		$fids = $ff->getAllForumIds () ;
 		foreach ($fids as $fid) {
-			$result['forum'][$tid] = $this->getVal ('forum', $fid) ;
+			$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
 		}
 
 		$pgf = new ProjectGroupFactory ($project) ;
