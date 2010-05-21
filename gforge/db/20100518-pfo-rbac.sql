@@ -6,12 +6,6 @@ CREATE TABLE pfo_role_class (
        CONSTRAINT pfo_role_class_name_unique UNIQUE (class_name)
 ) ;
 
-INSERT INTO pfo_role_class (class_id, class_name) VALUES (1, 'PFO_RoleExplicit') ;
-INSERT INTO pfo_role_class (class_id, class_name) VALUES (2, 'PFO_RoleAnonymous') ;
-INSERT INTO pfo_role_class (class_id, class_name) VALUES (3, 'PFO_RoleLoggedIn') ;
-
-SELECT setval ('pfo_role_class_seq', 3) ;
-
 CREATE SEQUENCE pfo_role_seq ;
 CREATE TABLE pfo_role (
        role_id integer DEFAULT nextval ('pfo_role_seq') NOT NULL,
@@ -23,11 +17,6 @@ CREATE TABLE pfo_role (
        CONSTRAINT pfo_role_pkey PRIMARY KEY (role_id),
        CONSTRAINT pfo_role_name_unique UNIQUE (role_id, role_name)
 ) ;
-
-INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (1, 'Anonymous', '2', true) ;
-INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (2, 'LoggedIn', '3', true) ;
-
-SELECT setval ('pfo_role_seq', 2) ;
 
 CREATE TABLE role_project_refs (
        role_id integer DEFAULT 0 NOT NULL REFERENCES pfo_role,
@@ -49,20 +38,15 @@ CREATE TABLE pfo_user_role (
        CONSTRAINT pfo_user_role_unique UNIQUE (user_id, role_id)
 ) ;
 
-INSERT INTO pfo_role (SELECT nextval ('pfo_role_seq'), role_name, 1, group_id, false, role_id FROM role) ;
-
-INSERT INTO pfo_user_role (SELECT ug.user_id, r.role_id FROM user_group ug, pfo_role r WHERE ug.role_id = r.old_role_id) ;
-
-CREATE OR REPLACE FUNCTION insert_pfo_role_setting (role_id integer, section_name text, ref_id integer, perm_val integer) RETURNS void AS $$
+CREATE FUNCTION insert_pfo_role_setting (role_id integer, section_name text, ref_id integer, perm_val integer) RETURNS void AS $$
 BEGIN
-	-- RAISE NOTICE 'insert_pfo_role_setting (%,%,%,%)', role_id, section_name, ref_id, perm_val ;
 	IF perm_val != 0 THEN
 	   INSERT INTO pfo_role_setting VALUES (role_id, section_name, ref_id, perm_val) ;
 	END IF ;
 END ;
 $$ LANGUAGE plpgsql ;
 
-CREATE OR REPLACE FUNCTION migrate_rbac_permissions_to_pfo_rbac () RETURNS void AS $$
+CREATE FUNCTION migrate_rbac_permissions_to_pfo_rbac () RETURNS void AS $$
 DECLARE
 	r role%ROWTYPE ;
 	nrid integer := 0 ;
@@ -167,7 +151,7 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql ;
 
-CREATE OR REPLACE FUNCTION migrate_role_observer_to_pfo_rbac () RETURNS void AS $$
+CREATE FUNCTION migrate_role_observer_to_pfo_rbac () RETURNS void AS $$
 DECLARE
 	g groups%ROWTYPE ;
 	t artifact_group_list%ROWTYPE ;
@@ -226,7 +210,7 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql ;
 
-CREATE OR REPLACE FUNCTION pfo_rbac_permissions_from_old (rid integer, nsec text, nref integer) RETURNS integer AS $$
+CREATE FUNCTION pfo_rbac_permissions_from_old (rid integer, nsec text, nref integer) RETURNS integer AS $$
 DECLARE
 	os role_setting%ROWTYPE ;
 	onsec text ;
@@ -394,10 +378,33 @@ BEGIN
 END ;
 $$ LANGUAGE plpgsql ;
 
-SELECT migrate_rbac_permissions_to_pfo_rbac () ;
--- SELECT g.unix_group_name, r.role_name, s.section_name, s.ref_id, s.perm_val, pfo_rbac_permissions_from_old(r.old_role_id,s.section_name,s.ref_id) as calc FROM groups g, pfo_role r, pfo_role_setting s WHERE g.group_id = r.home_group_id AND r.role_id = s.role_id ORDER BY s.section_name, s.role_id, s.ref_id ;
+CREATE FUNCTION pfo_rbac_full_migration () RETURNS void AS $$
+DECLARE
+BEGIN
+	DELETE FROM pfo_user_role ;
+	DELETE FROM pfo_role_setting ;
+	DELETE FROM role_project_refs ;
+	DELETE FROM pfo_role ;
+	DELETE FROM pfo_role_class ;
 
+	INSERT INTO pfo_role_class (class_id, class_name) VALUES (1, 'PFO_RoleExplicit') ;
+	INSERT INTO pfo_role_class (class_id, class_name) VALUES (2, 'PFO_RoleAnonymous') ;
+	INSERT INTO pfo_role_class (class_id, class_name) VALUES (3, 'PFO_RoleLoggedIn') ;
 
-SELECT migrate_role_observer_to_pfo_rbac () ;
--- SELECT r.role_name, s.section_name, s.ref_id, s.perm_val FROM pfo_role r, pfo_role_setting s WHERE r.home_group_id IS NULL AND r.role_id = s.role_id ORDER BY s.role_id, s.ref_id ;
--- SELECT count(*) FROM pfo_role_setting ;
+	PERFORM setval ('pfo_role_class_seq', 3) ;
+
+	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (1, 'Anonymous', '2', true) ;
+	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (2, 'LoggedIn', '3', true) ;
+
+	PERFORM setval ('pfo_role_seq', 2) ;
+
+	INSERT INTO pfo_role (SELECT nextval ('pfo_role_seq'), role_name, 1, group_id, false, role_id FROM role) ;
+
+	INSERT INTO pfo_user_role (SELECT ug.user_id, r.role_id FROM user_group ug, pfo_role r WHERE ug.role_id = r.old_role_id) ;
+
+	PERFORM migrate_rbac_permissions_to_pfo_rbac () ;
+	PERFORM migrate_role_observer_to_pfo_rbac () ;
+END ;
+$$ LANGUAGE plpgsql ;
+
+SELECT pfo_rbac_full_migration () ;
