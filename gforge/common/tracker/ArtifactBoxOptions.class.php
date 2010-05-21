@@ -94,7 +94,7 @@ class ArtifactBoxOptions extends Error {
 			$this->setError(_('an element name is required'));
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -187,7 +187,7 @@ class ArtifactBoxOptions extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$boxid,$id) {
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

@@ -127,7 +127,7 @@ class ArtifactExtraFieldElement extends Error {
 		} else {
 			$status_id=0;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -243,7 +243,7 @@ class ArtifactExtraFieldElement extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($name,$status_id=0) {
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -287,7 +287,7 @@ class ArtifactExtraFieldElement extends Error {
 	 *  @return	boolean	success.
 	 */
 	function delete() {
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

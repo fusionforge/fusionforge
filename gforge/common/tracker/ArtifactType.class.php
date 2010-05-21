@@ -791,7 +791,7 @@ class ArtifactType extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -958,7 +958,7 @@ class ArtifactType extends Error {
 	function update($name,$description,$email_all,$email_address,
 		$due_period, $status_timeout,$use_resolution,$submit_instructions,$browse_instructions) {
 
-		if (!forge_check_perm ('tracker_admin', $this->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

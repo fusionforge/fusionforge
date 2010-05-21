@@ -497,7 +497,7 @@ class Artifact extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

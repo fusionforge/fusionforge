@@ -93,7 +93,7 @@ class ArtifactCanned extends Error {
 			$this->setError(_('ArtifactCanned: name and assignee are Required'));
 			return false;
 		}
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -182,7 +182,7 @@ class ArtifactCanned extends Error {
 	 *  @return	boolean	success.
 	 */
 	function update($title,$body) {
-		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID()) {
+		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}   
