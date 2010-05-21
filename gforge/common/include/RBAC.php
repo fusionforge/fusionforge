@@ -28,21 +28,35 @@ require "PFO-RBAC.interface.php" ;
 // Code shared between classes
 
 abstract class BaseRole extends Error implements PFO_Role {
-
 	public function getUsers() {
-		return array () ;
+		throw new Exception ("Not implemented") ;
 	}
 	public function hasUser($user) {
-		return false ;
+		throw new Exception ("Not implemented") ;
 	}
 	public function hasPermission($section, $reference, $permission) {
-		return false ;
+		throw new Exception ("Not implemented") ;
+	}
+	public function hasGlobalPermission($section, $permission) {
+		throw new Exception ("Not implemented") ;
 	}
 	public function getSettings() {
-		return array () ;
+		throw new Exception ("Not implemented") ;
 	}
 	public function setSettings($data) {
-		return true ;
+		throw new Exception ("Not implemented") ;
+	}
+	public function getLinkedProjects () {
+		throw new Exception ("Not implemented") ;
+	}
+	public function linkProject ($project) {
+		throw new Exception ("Not implemented") ;
+	}
+	public function unlinkProject ($project) {
+		throw new Exception ("Not implemented") ;
+	}
+	public function normalizeData () {
+		throw new Exception ("Not implemented") ;
 	}
 }
 
@@ -73,18 +87,6 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	public function getHomeProject () {
 		return NULL ;
 	}
-	public function getLinkedProjects () {
-		throw new Exception ("Not implemented") ;
-	}
-	public function linkProject ($project) {
-		throw new Exception ("Not implemented") ;
-	}
-	public function unlinkProject ($project) {
-		throw new Exception ("Not implemented") ;
-	}
-	public function normalizeData () {
-		throw new Exception ("Not implemented") ;
-	}
 	public function getName () {
 		return _('Anonymous/not logged in') ;
 	}
@@ -106,18 +108,6 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 	public function getHomeProject () {
 		return NULL ;
 	}
-	public function getLinkedProjects () {
-		throw new Exception ("Not implemented") ;
-	}
-	public function linkProject ($project) {
-		throw new Exception ("Not implemented") ;
-	}
-	public function unlinkProject ($project) {
-		throw new Exception ("Not implemented") ;
-	}
-	public function normalizeData () {
-		throw new Exception ("Not implemented") ;
-	}
 	public function getName () {
 		return _('Any user logged in') ;
 	}
@@ -128,10 +118,10 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 
 abstract class RoleUnion extends BaseRole implements PFO_RoleUnion {
 	public function addRole ($role) {
-		return true ;
+		throw new Exception ("Not implemented") ;
 	}
 	public function removeRole ($role) {
-		return true ;
+		throw new Exception ("Not implemented") ;
 	}
 }
 
