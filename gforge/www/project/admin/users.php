@@ -252,12 +252,7 @@ if (!USE_PFO_RBAC) {
 
 		*/
 
-		$res_memb = db_query_params('SELECT users.realname,users.user_id,
-			users.user_name,user_group.admin_flags,user_group.role_id
-			FROM users,user_group 
-			WHERE users.user_id=user_group.user_id 
-			AND user_group.group_id=$1 ORDER BY users.realname',
-			array($group_id));
+$members = $group->getUsers() ;
 
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('User name').'</th>';
@@ -265,21 +260,29 @@ echo '<th>'._('Role').'</th>';
 echo '<th>'._('Update').'</th>';
 echo '<th>'._('Remove').'</th>';
 echo '</tr></thead><tbody>';
-		while ($row_memb=db_fetch_array($res_memb)) {
 
-			echo '
+foreach ($members as $user) {
+	echo '
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
                         <tr>
                         <td style="white-space: nowrap;">
 			  <input type="hidden" name="submit" value="y" />
-			  <input type="hidden" name="user_id" value="'.$row_memb['user_id'].'" />
+			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
 			  <input type="hidden" name="group_id" value="'. $group_id .'" />
-			  <a href="/users/'.$row_memb['user_name'].'">'.$row_memb['realname'].'</a>
+			  <a href="/users/'.$user->getUnixName().'">'.$user->getRealName().'</a>
 			</td>
 			<td style="white-space: nowrap; text-align: right;">';
-			echo role_box($group_id,'role_id',$row_memb['role_id']);
-			echo '</td><td><input type="submit" name="updateuser" value="'._("Update").'" />';
-			echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
+
+	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+	foreach ($roles as $role) {
+		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
+			$role_id = $role->getID() ;
+			break ;
+		}
+	}
+	echo role_box($group_id,'role_id',$role_id);
+	echo '</td><td><input type="submit" name="updateuser" value="'._("Update").'" />';
+	echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
                         </td>
 			</tr>
                 </form>';
