@@ -652,25 +652,27 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 	// This role is implemented as a singleton
 	private static $_instance ;
-	private static $_role_id ;
+	private $_role_id ;
 	public static function getInstance() {
-		$c = __CLASS__ ;
-		if (!isset(self::$_instance)) {
-			self::$_instance = new $c ;
+		if (isset(self::$_instance)) {
+			return self::$_instance ;
 		}
 
+		$c = __CLASS__ ;
+		self::$_instance = new $c ;
+		
 		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
 					array ('PFO_RoleAnonymous')) ;
 		if (!$res || !db_numrows($res)) {
 			throw new Exception ("No PFO_RoleAnonymous role in the database") ;
 		}
-		self::$_role_id = db_result ($res, 0, 'class_name') ;
+		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
 
 		return self::$_instance ;
 	}
 
 	public function getID () {
-		return self::$_role_id ;
+		return $this->_role_id ;
 	}
 	public function isPublic () {
 		return true ;
@@ -692,25 +694,27 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 	// This role is implemented as a singleton
 	private static $_instance ;
-	private static $_role_id ;
+	private $_role_id ;
 	public static function getInstance() {
-		$c = __CLASS__ ;
-		if (!isset(self::$_instance)) {
-			self::$_instance = new $c ;
+		if (isset(self::$_instance)) {
+			return self::$_instance ;
 		}
 
+		$c = __CLASS__ ;
+		self::$_instance = new $c ;
+		
 		$res = db_query_params ('SELECT r.role_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND c.class_name = $1',
 					array ('PFO_RoleLoggedIn')) ;
 		if (!$res || !db_numrows($res)) {
 			throw new Exception ("No PFO_RoleLoggedIn role in the database") ;
 		}
-		self::$_role_id = db_result ($res, 0, 'class_name') ;
+		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
 
 		return self::$_instance ;
 	}
 
 	public function getID () {
-		return self::$_role_id ;
+		return $this->_role_id ;
 	}
 	public function isPublic () {
 		return true ;

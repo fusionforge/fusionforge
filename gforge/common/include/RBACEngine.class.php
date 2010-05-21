@@ -26,6 +26,7 @@ require_once $gfcommon.'include/RBAC.php' ;
 
 class RBACEngine extends Error implements PFO_RBACEngine {
 	private static $_instance ;
+	private $_cached_roles = array () ;
 
 	public static function getInstance() {
 		if (!isset(self::$_instance)) {
@@ -105,6 +106,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	}
 
 	public function getRoleById ($role_id) {
+		if (array_key_exists ($role_id, $this->_cached_roles)) {
+			return $this->_cached_roles[$role_id] ;
+		}
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT c.class_name, r.home_group_id FROM pfo_role r, pfo_role_class c WHERE r.role_class = c.class_id AND r.role_id = $1',
 						array ($role_id)) ;
@@ -117,11 +121,14 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			case 'PFO_RoleExplicit':
 				$group_id = db_result ($res, 0, 'home_group_id') ;
 				$group = group_get_object ($group_id) ;
-				return new Role ($group, $role_id) ;
+				$this->_cached_roles[$role_id] = new Role ($group, $role_id) ;
+				return $this->_cached_roles[$role_id] ;
 			case 'PFO_RoleAnonymous':
-				return RoleAnonymous::getInstance() ;
+				$this->_cached_roles[$role_id] = RoleAnonymous::getInstance() ;
+				return $this->_cached_roles[$role_id] ;
 			case 'PFO_RoleLoggedIn':
-				return RoleLoggedIn::getInstance() ;
+				$this->_cached_roles[$role_id] = RoleLoggedIn::getInstance() ;
+				return $this->_cached_roles[$role_id] ;
 			default:
 				throw new Exception ("Not implemented") ;
 			}
