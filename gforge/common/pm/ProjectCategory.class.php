@@ -96,8 +96,7 @@ class ProjectCategory extends Error {
 			return false;
 		}
 
-		$perm =& $this->ProjectGroup->Group->getPermission ();
-		if (!$perm || !$perm->isPMAdmin()) {
+		if (!forge_check_perm ('pm_admin', $this->ProjectGroup->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -175,8 +174,7 @@ class ProjectCategory extends Error {
 	 *  @return	boolean success.
 	 */
 	function update($name) {
-		$perm =& $this->ProjectGroup->Group->getPermission ();
-		if (!$perm || !$perm->isPMAdmin()) {
+		if (!forge_check_perm ('pm_admin', $this->ProjectGroup->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

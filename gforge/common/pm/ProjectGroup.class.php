@@ -144,9 +144,7 @@ class ProjectGroup extends Error {
 			}
 		}
 		
-		$perm =& $this->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+		if (!forge_check_perm ('pm_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -582,17 +580,7 @@ class ProjectGroup extends Error {
 	 *  @return boolean user_is_admin.
 	 */
 	function userIsAdmin() {
-		if (!session_loggedin()) {
-				return false;
-		} else {
-			$perm =& $this->Group->getPermission ();
-
-			if (($this->getCurrentUserPerm() >= 2) || ($perm->isPMAdmin())) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return forge_check_perm ('pm', $this->getID(), 'manager') ;
 	}
 
 	/**
@@ -601,17 +589,7 @@ class ProjectGroup extends Error {
 	 *  @return boolean user_is_technician.
 	 */
 	function userIsTechnician() {
-		if (!session_loggedin()) {
-				return false;
-		} else {
-			$perm =& $this->Group->getPermission ();
-
-			if (($this->getCurrentUserPerm() >= 1) || ($perm->isPMAdmin())) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		return forge_check_perm ('pm', $this->getID(), 'tech') ;
 	}
 
 	/**
