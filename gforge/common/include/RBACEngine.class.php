@@ -68,6 +68,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $this->_cached_available_roles ;
 	}
 
+	public function invalidateRoleCaches () {
+		$this->_cached_available_roles = NULL ;
+	}
+
 	public function getAvailableRolesForUser($user) {
 		$result = array () ;
 

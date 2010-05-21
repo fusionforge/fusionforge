@@ -112,6 +112,8 @@ function session_logout() {
 	// NB: cookies must be deleted with the same scope parameters they were set with
 	//
 	session_cookie('session_ser', '');
+
+	RBACEngine::getInstance()->invalidateRoleCaches() ;
 	return true;
 }
 
@@ -473,6 +475,7 @@ function session_set_new($user_id) {
 		}
 	}
 
+	RBACEngine::getInstance()->invalidateRoleCaches() ;
 }
 
 
@@ -561,6 +564,8 @@ function session_set() {
 		}
 	}
 	plugin_hook('session_set_return');
+
+	RBACEngine::getInstance()->invalidateRoleCaches() ;
 }
 
 //TODO - this should be generalized and used for pre.php, 
