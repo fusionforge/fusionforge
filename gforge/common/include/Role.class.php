@@ -235,11 +235,13 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	function getLinkedProjects () { // From the PFO spec
+		return $this->Group ;
+
 		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1',
 				       array ($this->getID()));
 		
-		$result = array (return $this->Group) ;
-		
+		$result = array () ;
+	
 		while ($arr =& db_fetch_array($res)) {
 			$result[] = group_get_object ($arr['group_id']) ;
 		}
