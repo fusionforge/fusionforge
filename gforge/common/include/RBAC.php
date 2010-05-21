@@ -332,6 +332,7 @@ abstract class BaseRole extends Error {
 			break ;
 			
 		case 'forum':
+		case 'new_forum':
 			switch ($action) {
 			case 'read':
 				$min = 1 ;
@@ -353,6 +354,7 @@ abstract class BaseRole extends Error {
 			break ;
 			
 		case 'tracker':
+		case 'new_tracker':
 			switch ($action) {
 			case 'read':
 				$mask = 1 ;
@@ -377,6 +379,7 @@ abstract class BaseRole extends Error {
 			break ;
 
 		case 'pm':
+		case 'new_pm':
 			switch ($action) {
 			case 'read':
 				$mask = 1 ;
