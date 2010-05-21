@@ -29,6 +29,14 @@ define ("PFO_ROLE_UNION",     2) ;
 define ("PFO_ROLE_ANONYMOUS", 3) ;
 define ("PFO_ROLE_LOGGEDIN",  4) ;
 
+// Interface for the RBAC engine
+interface PFO_RBACEngine {
+	public static function getInstance() ;
+	public function getAvailableRoles() ; // From session
+	public function isActionAllowed($section,$refid,$action) ;
+	public function isGlobalActionAllowed($section,$action) ;
+}
+
 // Interfaces for the capabilities
 interface PFO_Role {
 	public function getName() ;
