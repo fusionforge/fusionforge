@@ -54,11 +54,17 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $result ;
 	}
 
-	public function isActionAllowed($section,$refid,$action) {
+	public function isActionAllowed ($section, $reference, $action = NULL) {
+		$rlist = $this->getAvailableRoles () ;
+		foreach ($rlist as $r) {
+			if ($r->hasPermission ($section, $reference, $action)) {
+				return true ;
+			}
+		}
 		return false ;
 	}
 
-	public function isGlobalActionAllowed($section,$action) {
-		return false ;
+	public function isGlobalActionAllowed ($section, $action = NULL) {
+		return $this->isActionAllowed ($section, -1, $action) ;
 	}
 }
