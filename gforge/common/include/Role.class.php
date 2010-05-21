@@ -687,10 +687,18 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if (!$ref_id) {
 			$ref_id=0;
 		}
-		if (array_key_exists ($section, $this->setting_array)) {
-			return $this->setting_array[$section][$ref_id];
+		if (USE_PFO_RBAC) {
+			if (array_key_exists ($section, $this->perms_array)) {
+				return $this->perms_array[$section][$ref_id];
+			} else {
+				return 0 ;
+			}
 		} else {
-			return 0 ;
+			if (array_key_exists ($section, $this->setting_array)) {
+				return $this->setting_array[$section][$ref_id];
+			} else {
+				return 0 ;
+			}
 		}
 	}
 
