@@ -45,9 +45,6 @@ abstract class BaseRole extends Error {
 	public function setSettings($data) {
 		throw new Exception ("Not implemented") ;
 	}
-	public function getLinkedProjects () {
-		throw new Exception ("Not implemented") ;
-	}
 	public function linkProject ($project) {
 		throw new Exception ("Not implemented") ;
 	}
@@ -56,6 +53,32 @@ abstract class BaseRole extends Error {
 	}
 	public function normalizeData () {
 		throw new Exception ("Not implemented") ;
+	}
+
+	/**
+	 *   getLinkedProjects - List of projects referencing that role
+	 *
+	 *   Includes the home project (for roles that have one)
+	 *
+	 *   @return array Array of Group objects
+	 */
+	public function getLinkedProjects () {
+		$ids = array () ;
+
+		$hp = $this->getHomeProject () ;
+		if ($hp != NULL) {
+			$ids[] = $hp->getID() ;
+		}
+
+		$res = db_query_params ('SELECT group_id FROM pfo_role_project_refs WHERE role_id=$1',
+					array ($this->getID())) ;
+		if ($res) {
+			while ($arr = db_fetch_array ($res)) {
+				$ids[] = $arr['group_id'] ;
+			}
+		}
+
+		return group_get_objects (array_unique ($ids)) ;
 	}
 
 	/**
