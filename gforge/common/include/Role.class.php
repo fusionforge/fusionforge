@@ -205,6 +205,33 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	/**
+	 *	isPublic - is this role public (accessible from projects
+	 *      other than its home project)?
+	 *
+	 *	@return	boolean True if public
+	 */
+	function getName() {
+		return $this->data_array['is_public'];
+	}
+
+	/**
+	 *	setPublic - set the public flag for this role.
+	 *
+	 *	@param	boolean	The new value of the flag.
+	 *      @return boolean True if updated OK
+	 */
+	function setPublic ($flag) {
+		$res = db_query_params ('UPDATE role SET is_public=$1 WHERE role_id=$1',
+					array ($flag,
+					       $this->getID())) ;
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('update::is_public::'.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 *	create - create a new role in the database.
 	 *
 	 *	@param	string	The name of the role.

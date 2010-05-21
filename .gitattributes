@@ -176,6 +176,7 @@ gforge/db/20100308-forum-attachment-types.sql -text
 gforge/db/20100330-add-system-event.sql -text
 gforge/db/20100331-alter-system-event.sql -text
 gforge/db/20100402_add_query_options.sql -text
+gforge/db/20100415-pfo-rbac-publicrole.sql -text
 gforge/db/20100505-alter-user-preference.sql -text
 gforge/db/20100506-add-widgets.sql -text
 gforge/db/20100517-add-project-widgets.sql -text
