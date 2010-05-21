@@ -486,7 +486,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					switch ($newsection) {
 					case 'project_admin':
 						switch ($oldvalue) {
-						case 0: $newvalue = 0 ; break ;
+						case '0': $newvalue = 0 ; break ;
 						case 'A': $newvalue = 1 ; break ;
 						}
 					break;
@@ -495,19 +495,19 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					case 'pm_admin':
 					case 'forum_admin':
 						switch ($oldvalue) {
-						case 0: $newvalue = 0 ; break ;
-						case 2: $newvalue = 1 ; break ;
+						case '0': $newvalue = 0 ; break ;
+						case '2': $newvalue = 1 ; break ;
 						}
 					break;
 					
 					case 'tracker':
 					case 'pm':
-						switch ($value) {
-						case -1: $newvalue = 0 ; break ;
-						case 0: $newvalue = 1 ; break ;
-						case 1: $newvalue = 3 ; break ;
-						case 2: $newvalue = 7 ; break ;
-						case 3: $newvalue = 5 ; break ;
+						switch ($oldvalue) {
+						case '-1': $newvalue = 0 ; break ;
+						case '0': $newvalue = 1 ; break ;
+						case '1': $newvalue = 3 ; break ;
+						case '2': $newvalue = 7 ; break ;
+						case '3': $newvalue = 5 ; break ;
 						}
 					break ;
 
