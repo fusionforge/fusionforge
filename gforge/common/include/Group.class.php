@@ -2417,34 +2417,40 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	 *	@return	array of Role id of this group.
 	 */
 	function getRolesId () {
-		
-		$rolesId = Array();
+		$role_ids = array () ;
 		
 		if (USE_PFO_RBAC) {
-			$roles_group_res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
-							    array ($this->getID()));
-		} else {
-			$roles_group_res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
-							    array ($this->getID()));
-		}
-		if (!$roles_group_res) {
-			$this->setError('Error: Roles from group id '. $this->getID() . ' ' .db_error());
-			return false;
-		} else {
-		for ($i=0; $i<db_numrows($roles_group_res); $i++) {
-				 $rolesId[$i] = db_result($roles_group_res,$i,'role_id');
+			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
+						array ($this->getID()));
+			while ($arr =& db_fetch_array($res)) {
+				$role_ids[] = $arr['role_id'] ;
 			}
+			$res = db_query_params ('SELECT role_id FROM role_project_refs WHERE group_id=$1',
+						array ($this->getID()));
+			while ($arr =& db_fetch_array($res)) {
+				$role_ids[] = $arr['role_id'] ;
+			}
+		} else {
+			$res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
+							    array ($this->getID()));
 		}
 		
-		return $rolesId;
+		return array_unique ($role_ids) ;
 	}
 	
 	function getRoles () {
 		$result = array () ;
 
 		$roles = $this->getRolesId () ;
-		foreach ($roles as $role_id) {
-			$result[] = new Role ($this, $role_id) ;
+		if (USE_PFO_RBAC) {				
+			$engine = RBACEngine::getInstance() ;
+			foreach ($roles as $role_id) {
+				$result[] = $engine->getRoleById () ;
+			}
+		} else {
+			foreach ($roles as $role_id) {
+				$result[] = new Role ($this, $role_id) ;
+			}
 		}
 
 		return $result ;
