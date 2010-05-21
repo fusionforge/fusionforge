@@ -52,7 +52,7 @@ interface PFO_Role {
 
 	public function getUsers() ;
 	public function hasUser($user) ;
-	public function hasPermission($section, $reference, $action) ;
+	public function hasPermission($section, $reference, $action = NULL) ;
 	public function hasGlobalPermission($section, $action) ;
 	public function normalizeData() ;
 	public function getSettings() ;
