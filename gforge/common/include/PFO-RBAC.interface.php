@@ -33,8 +33,8 @@ define ("PFO_ROLE_UNION",     4) ;
 interface PFO_RBACEngine {
 	public static function getInstance() ;
 	public function getAvailableRoles() ; // From session
-	public function isActionAllowed($section,$reference,$action) ;
-	public function isGlobalActionAllowed($section,$action) ;
+	public function isActionAllowed($section, $reference, $action = NULL) ;
+	public function isGlobalActionAllowed($section, $action = NULL) ;
 }
 
 // Interfaces for the capabilities
