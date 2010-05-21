@@ -1919,12 +1919,41 @@ class Group extends Error {
 	function updateUser($user_id,$role_id) {
 		global $SYS;
 
-		$perm =& $this->getPermission ();
-		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
+		if (!forge_check_perm ('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
+		if (USE_PFO_RBAC) {
+			$newrole = RBACEngine::getInstance()->getRoleById ($role_id) ;
+			if (!$newrole || !is_object($newrole)) {
+				$this->setError(_('Could Not Get Role'));
+				return false;
+			} elseif ($newrole->isError()) {
+				$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
+				return false;
+			} elseif ($newrole->getHomeProject() == NULL 
+				  || $newrole->getHomeProject()->getID() != $this->getID()) {
+				$this->setError(_('Wrong destination role'));
+				return false;
+			}
+			$user = user_get_object ($user_id) ;
+			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+			$found_role = NULL ;
+			foreach ($roles as $role) {
+				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
+					$found_role = $role ;
+					break ;
+				}
+			}
+			if ($found_role == NULL) {
+				$this->setError(sprintf(_('ERROR: User not removed: %s')));
+				db_rollback();
+				return false;
+			}
+			$found_role->removeUser ($user) ;
+			$newrole->addUser ($user) ;
+		} else {
 		$role = new Role($this,$role_id);
 		if (!$role || !is_object($role)) {
 			$this->setError(_('Could Not Get Role'));
@@ -1938,7 +1967,7 @@ class Group extends Error {
 			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 			return false;
 		}
-		
+		}		
 		
 		$this->addHistory('Updated User',$user_id);
 		return true;
