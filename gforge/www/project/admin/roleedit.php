@@ -274,7 +274,13 @@ for ($i=0; $i<count($keys); $i++) {
 
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 		<td colspan="2"><strong>'.$rbac_edit_section_names[$keys[$i]].'</strong></td>
-		<td>'.html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][0]", $role->getVal($keys[$i],0), false, false ).'</td>
+		<td>';
+        	if (USE_PFO_RBAC) {
+			echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][$group_id]", $role->getVal($keys[$i],$group_id), false, false ) ;
+                } else {
+			echo html_build_select_box_from_assoc($role->getRoleVals($keys[$i]), "data[".$keys[$i]."][0]", $role->getVal($keys[$i],0), false, false ) ;
+                }
+		echo '</td>
 		</tr>';
 
 	}
