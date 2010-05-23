@@ -129,12 +129,13 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	function getLinkedProjects () { // From the PFO spec
-		return $this->Group ;
+		$result = array () ;
+
+		$result[] = $this->Group ;
 
 		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1',
 				       array ($this->getID()));
 		
-		$result = array () ;
 	
 		while ($arr =& db_fetch_array($res)) {
 			$result[] = group_get_object ($arr['group_id']) ;
@@ -421,7 +422,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		$new_pa['pm'] = array () ;
 		foreach ($projects as $p) {
 			$pgf = new ProjectGroupFactory ($p) ;
-			$pgs = $atf->getProjectGroups () ;
+			$pgs = $pgf->getProjectGroups () ;
 			foreach ($pgs as $g) {
 				if (USE_PFO_RBAC) {
 					if (array_key_exists ('pm', $this->perms_array)
