@@ -608,7 +608,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 
 		$engine = RBACEngine::getInstance () ;
-		$techs = $engine->getUsersByAllowedAction ('tracker', $ath->getID(), 'tech') ;
+		$techs = $engine->getUsersByAllowedAction ('tracker', $this->getID(), 'tech') ;
 
 		$ids = array () ;
 		$names = array () ;
