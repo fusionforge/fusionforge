@@ -65,7 +65,7 @@ class ArtifactTypeHtml extends ArtifactType {
  				$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';
   			}
 
-			if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+			if (forge_check_perm ('tracker', $this->getID(), 'manager')) {
 				$labels[] = _('Admin');
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID();
 			}
