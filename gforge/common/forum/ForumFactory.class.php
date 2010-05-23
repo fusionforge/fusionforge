@@ -98,14 +98,9 @@ ORDER BY group_forum_id',
 
 		$ids = $this->getAllForumIds() ;
 		
-		if (count ($ids) < 1) {
-			$this->setError(_('Forum not found').' : '.db_error());
-			$this->forums = false;
-		} else {
-			foreach ($ids as $id) {
-				if (forge_check_perm ('forum', $id, 'read')) {
-					$this->forums[] = new Forum($this->Group, $id);
-				}
+		foreach ($ids as $id) {
+			if (forge_check_perm ('forum', $id, 'read')) {
+				$this->forums[] = new Forum($this->Group, $id);
 			}
 		}
 		return $this->forums;

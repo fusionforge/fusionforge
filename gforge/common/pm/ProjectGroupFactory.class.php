@@ -98,14 +98,9 @@ class ProjectGroupFactory extends Error {
 
 		$ids = $this->getAllProjectGroupIds() ;
 
-		if (count ($ids) < 1) {
-			$this->setError('None Found '.db_error());
-			$this->projectGroups=NULL;
-		} else {
-			foreach ($ids as $id) {
-				if (forge_check_perm ('pm', $id, 'read')) {
-					$this->projectGroups[] = new ProjectGroup($this->Group, $id);
-				}
+		foreach ($ids as $id) {
+			if (forge_check_perm ('pm', $id, 'read')) {
+				$this->projectGroups[] = new ProjectGroup($this->Group, $id);
 			}
 		}
 		return $this->projectGroups;

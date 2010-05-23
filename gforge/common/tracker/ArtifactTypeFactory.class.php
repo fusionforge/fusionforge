@@ -111,18 +111,13 @@ class ArtifactTypeFactory extends Error {
 
 		$ids = $this->getAllArtifactTypeIds() ;
 
-		if (count ($ids) < 1) {
-			$this->setError('None Found '.db_error());
-			$this->ArtifactTypes=NULL;
-		} else {
-			foreach ($ids as $id) {
-				if (forge_check_perm ('tracker', $id, 'read')) {
-					$artifactType = new ArtifactType($this->Group, $id);
-					if($artifactType->isError()) {
-						$this->setError($artifactType->getErrorMessage());
-					} else {
-						$this->ArtifactTypes[] = $artifactType;
-					}
+		foreach ($ids as $id) {
+			if (forge_check_perm ('tracker', $id, 'read')) {
+				$artifactType = new ArtifactType($this->Group, $id);
+				if($artifactType->isError()) {
+					$this->setError($artifactType->getErrorMessage());
+				} else {
+					$this->ArtifactTypes[] = $artifactType;
 				}
 			}
 		}
