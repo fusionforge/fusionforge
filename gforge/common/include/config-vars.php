@@ -23,6 +23,7 @@
  */
 
 forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
+forge_define_config_item ('force_login', 'core', $GLOBALS['sys_force_login']) ;
 forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
 forge_define_config_item ('project_registration_restricted', 'core', $GLOBALS['sys_project_reg_restricted']) ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
