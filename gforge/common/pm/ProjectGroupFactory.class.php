@@ -96,6 +96,7 @@ class ProjectGroupFactory extends Error {
 			return $this->projectGroups;
 		}
 
+		$this->projectGroups = array () ;
 		$ids = $this->getAllProjectGroupIds() ;
 
 		foreach ($ids as $id) {

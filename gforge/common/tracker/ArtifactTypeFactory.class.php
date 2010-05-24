@@ -109,6 +109,7 @@ class ArtifactTypeFactory extends Error {
 			return $this->ArtifactTypes;
 		}
 
+		$this->ArtifactTypes = array () ;
 		$ids = $this->getAllArtifactTypeIds() ;
 
 		foreach ($ids as $id) {

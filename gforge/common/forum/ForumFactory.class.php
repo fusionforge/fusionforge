@@ -96,6 +96,7 @@ ORDER BY group_forum_id',
 			return $this->forums;
 		}
 
+		$this->forums = array () ;
 		$ids = $this->getAllForumIds() ;
 		
 		foreach ($ids as $id) {
