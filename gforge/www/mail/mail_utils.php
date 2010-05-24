@@ -27,8 +27,7 @@ function mail_header($params) {
 
 		site_project_header($params);
 		if (session_loggedin()) {
-			$perm =& $project->getPermission ();
-			if ($perm && is_object($perm) && !$perm->isError() && $perm->isAdmin()) {
+			if (forge_check_perm ('project_admin', $project->getID())) {
 				echo $HTML->subMenu(
 					array(
 						_('Admin')

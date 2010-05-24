@@ -62,15 +62,7 @@ $df->setLanguageID($language_id);
 
 
 // check if the user is docman's admin
-$perm =& $g->getPermission ();
-if (!$perm || $perm->isError() || !$perm->isDocEditor()) 
-{
-	$is_editor = false;
-} else 
-{
-	$is_editor = true;
-}
-
+$is_editor = forge_check_perm ('docman', $g->getID(), 'admin') ;
 
 docman_header(_('Document Manager: Display Document'),_('Project: %1$s'),'docman','',$g->getPublicName());
 

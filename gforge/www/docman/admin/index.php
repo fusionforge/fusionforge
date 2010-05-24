@@ -49,10 +49,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 
-$perm =& $g->getPermission ();
-if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
-	exit_permission_denied();
-}
+session_require_perm ('docman', $g->getID(), 'admin') ;
 
 $editdoc = getStringFromRequest('editdoc');
 $docid = getIntFromRequest('docid');

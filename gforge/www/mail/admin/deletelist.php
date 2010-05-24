@@ -27,10 +27,7 @@ if (!$Group || !is_object($Group) || $Group->isError()) {
 	exit_no_group();
 }
 
-$perm =& $Group->getPermission ();
-if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
-	exit_permission_denied();
-}
+session_require_perm ('project_admin', $Group->getID()) ;
 
 $ml = new MailingList($Group,getIntFromGet('group_list_id'));
 

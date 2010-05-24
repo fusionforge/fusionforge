@@ -25,10 +25,7 @@ if ($group_id) {
 		exit_no_group();
 	}
 	
-	$perm =& $Group->getPermission ();
-	if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
-		exit_permission_denied();
-	}
+	session_require_perm ('project_admin', $Group->getID()) ;
 	
 	//
 	//	Post Changes to database
