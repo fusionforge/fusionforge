@@ -368,28 +368,11 @@ class ForumMessage extends Error {
 		db_begin();
 		
 		//now we check the moderation status of the forum and act accordingly
-		$mod_level = $this->Forum->GetModerationLevel();
-		switch ($mod_level) {
-			case 0: {
-				//no moderation
-				return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
-			}
-			case 1: {
-				//moderation for anonymous & non project users
-				if ($this->Forum->userIsModLvl1()) {
-					return $this->insertmoderated($subject, $body, $thread_id, $is_followup_to,$user_id);
-				} else {
-					return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
-				}
-			}
-			case 2: {
-				//moderation for anyone who can post (even project members). admins can always post...
-				if ($this->Forum->userIsModLvl2()) {
-					return $this->insertmoderated($subject, $body, $thread_id, $is_followup_to,$user_id);
-				} else {
-					return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
-				}
-			}
+		if (forge_check_perm ('forum', $this->Forum->getID(), 'post_unmoderated')) {
+			//no moderation
+			return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
+		} else {
+			return $this->insertmoderated($subject, $body, $thread_id, $is_followup_to,$user_id);
 		}
 	}
 

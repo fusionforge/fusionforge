@@ -653,45 +653,6 @@ class Forum extends Error {
 		return true;
 	}
 
-	/*
-
-		USER PERMISSION FUNCTIONS
-
-	*/
-
-	/**
-	 *  userIsModLvl1 - see if the user goes into the moderated level 1 category
-	 *
-	 *  @return boolean user_is_mod_lvl1
-	 */
-	function userIsModLvl1() {
-		if (!session_loggedin()) {
-			if ( ($this->isPublic() && $this->allowAnonymous()) ) {
-				return true;//public forum, anonymous allowed, user not logged in
-			}
-		} else {
-			$perm =& $this->Group->getPermission ();
-			if (  (!$perm->isMember() )) {
-				//the user isn't a member of the project
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 *  userIsModLvl2 - see if the user goes into the moderated level 2 category
-	 *
-	 *  @return boolean user_is_mod_lvl1
-	 */
-	function userIsModLvl2() {
-		if ( forge_check_perm ('forum_admin', $this->Group->getID()) ) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
 }
 
 // Local Variables:

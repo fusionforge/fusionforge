@@ -43,8 +43,7 @@ class Widget_ProjectInfo extends Widget {
 			}
 			else {
 				$project =& group_get_object($group_id);
-				$perm =& $project->getPermission(session_get_user());
-				if ($perm->isAdmin()) {
+				if (forge_check_perm ('project_admin', $project->getID())) {
 					print '<p><a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.</p>';
 				}
 				else {
