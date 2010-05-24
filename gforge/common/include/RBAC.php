@@ -716,13 +716,13 @@ abstract class BaseRole extends Error {
 		case 'new_pm':
 			switch ($action) {
 			case 'read':
-				$mask = 1 ;
+				return (($value & 1) != 0) ;
 				break ;
 			case 'tech':
-				$mask = 2 ;
+				return (($value & 2) != 0) ;
 				break ;
 			case 'manager':
-				$mask = 4 ;
+				return (($value & 4) != 0) ;
 				break ;
 			}
 			break ;
