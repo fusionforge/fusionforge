@@ -16,6 +16,8 @@ require_once $gfcommon.'include/tag_cloud.php';
 //UNCOMMENT TO TEST WIDGETS
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
+session_require_perm ('project_read', $group_id) ;
+
 $title = _('Project Info');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));

@@ -20,6 +20,8 @@ $received_begin = getStringFromRequest("start_date");
 $received_end = getStringFromRequest("end_date");
 $show=getArrayFromRequest("show");
 
+session_require_perm ('project_admin', $group_id) ;
+
 $date_format = _('%Y-%m-%d') ;
 
 if (!$received_begin || $received_begin==0) {

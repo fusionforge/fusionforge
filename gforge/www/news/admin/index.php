@@ -181,7 +181,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 	}
 	news_footer(array());
 
-} else if (user_ismember(forge_get_config('news_group'),'A')) {
+} else if (forge_check_global_perm ('approve_news')) {
 	/*
 
 		News uber-user admin pages

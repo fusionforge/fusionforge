@@ -657,7 +657,7 @@ function site_project_header($params) {
 
 	//group is private
 	if (!$project->isPublic()) {
-		session_require_perm ('project', $group_id) ;
+		session_require_perm ('project_read', $group_id) ;
 	}
 
 	//for dead projects must be member of admin project

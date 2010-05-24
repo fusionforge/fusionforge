@@ -36,7 +36,7 @@ if ($docid) {
 	} elseif ($g->isError()) {
 		exit_error('Error',$g->getErrorMessage());
 	}
-	session_require_perm ('project', $group_id) ;
+	session_require_perm ('project_read', $group_id) ;
 
 	$d = new Document($g,$docid);
 	if (!$d || !is_object($d)) {

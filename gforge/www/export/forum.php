@@ -1,14 +1,10 @@
 <?php
-echo "Disabled Until Security Audited and Using Proper Accessor Functions";
-exit;
-
 /**
   *
-  * SourceForge Exports: Export project forums in RSS
+  * FusionForge Exports: Export project forums in RSS
   *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
   * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
+  * Copyright 2010, Roland Mas
   *
   */
 
@@ -19,26 +15,14 @@ header("Content-Type: text/plain");
 
 $group_id = getIntFromRequest('group_id');
 
-// group_id must be specified
-$res_grp = db_query_params ('SELECT group_id,group_name
-	FROM groups
-	WHERE is_public=1
-	AND status=$1
-	AND group_id=$2',
-			    array('A',
-				  $group_id)) ;
+session_require_perm ('project_read', $group_id) ;
+$group = group_get_object ($group_id) ;
 
-if (db_numrows($res_grp) < 1) {
-	print 'ERROR: This URL must be called with a valid group_id parameter';
-	exit;
-} else {
-	$row_grp = db_fetch_array($res_grp);
-}
 
 print '<?xml version="1.0"?>
 <!DOCTYPE sf_forum SYSTEM "http://'.forge_get_config('web_host').'/exports/sf_forum_0.1.dtd">
 ';
-print '<group name="'.$row_grp['group_name'].'">';
+print '<group name="'.$group->getPublicName().'">';
 
 $res_forum = db_query_params ('SELECT group_forum_id,forum_name
 	FROM forum_group_list
@@ -46,6 +30,9 @@ $res_forum = db_query_params ('SELECT group_forum_id,forum_name
 			      array ($group_id));
 
 while ($row_forum = db_fetch_array($res_forum)) {
+	if (!forge_check_perm ('forum', $row_forum['group_forum_id'], 'read')) {
+		continue ;
+	}
 	print ' <forum name="'.$row_forum['forum_name'].'">'."\n";
 
 	$res_post = db_query_params ('SELECT forum.msg_id AS msg_id,forum.subject AS subject,

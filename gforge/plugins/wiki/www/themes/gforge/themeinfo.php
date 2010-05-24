@@ -15,7 +15,7 @@ class WikiTheme_gforge extends WikiTheme {
         //group is private
         if (!$project->isPublic()) {
 		//if it's a private group, you must be a member of that group
-		session_require_perm ('project', $group_id) ;
+		session_require_perm ('project_read', $group_id) ;
         }
 
         //for dead projects must be member of admin project
