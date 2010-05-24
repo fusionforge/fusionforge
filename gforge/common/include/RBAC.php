@@ -328,7 +328,7 @@ abstract class BaseRole extends Error {
 			// ...and map section names and values to the new values
 
 			if ($this->data_array['group_id'] == forge_get_config ('stats_group')) {
-				$this->perms_array['forge_stats'][-1] = 1 ;
+				$this->perms_array['forge_stats'][-1] = 2 ;
 			}
 
 			$this->perms_array=array();
