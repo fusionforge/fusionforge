@@ -35,6 +35,10 @@ interface PFO_RBACEngine {
 	public function getAvailableRoles() ; // From session
 	public function isActionAllowed($section, $reference, $action = NULL) ;
 	public function isGlobalActionAllowed($section, $action = NULL) ;
+	public function isActionAllowedForUser($user, $section, $reference, $action = NULL) ;
+	public function isGlobalActionAllowedForUser($user, $section, $action = NULL) ;
+	public function getRolesByAllowedAction($section, $reference, $action = NULL) ;
+	public function getUsersByAllowedAction($section, $reference, $action = NULL) ;
 }
 
 // Interfaces for the capabilities
@@ -56,6 +60,7 @@ interface PFO_Role {
 	public function hasGlobalPermission($section, $action = NULL) ;
 	public function normalizeData() ;
 	public function getSettings() ;
+	public function getSettingsForProject($project) ;
 	public function setSettings($data) ;
 }
 
