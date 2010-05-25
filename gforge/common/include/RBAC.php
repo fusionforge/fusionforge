@@ -320,13 +320,13 @@ abstract class BaseRole extends Error {
 					$this->perms_array['tracker'][$arr['group_artifact_id']] = 1 ;
 				}
 
-				$res = db_query_params ('SELECT p.group_project_id FROM project_group_list t, groups g WHERE p.is_public=1 AND g.is_public=1 AND p.group_id = g.group_id',
+				$res = db_query_params ('SELECT p.group_project_id FROM project_group_list p, groups g WHERE p.is_public=1 AND g.is_public=1 AND p.group_id = g.group_id',
 							array ()) ;
 				while ($arr =& db_fetch_array($res)) {
 					$this->perms_array['pm'][$arr['group_project_id']] = 1 ;
 				}
 
-				$res = db_query_params ('SELECT f.group_forum_id, f.allow_anonymous, f.moderation_level FROM forum_group_list f, groups g WHERE .is_public=1 AND g.is_public=1 AND f.group_id = g.group_id',
+				$res = db_query_params ('SELECT f.group_forum_id, f.allow_anonymous, f.moderation_level FROM forum_group_list f, groups g WHERE f.is_public=1 AND g.is_public=1 AND f.group_id = g.group_id',
 							array ()) ;
 				while ($arr =& db_fetch_array($res)) {
 					if ($arr['allow_anonymous'] == 1) {
