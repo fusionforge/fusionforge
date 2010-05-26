@@ -3592,6 +3592,7 @@ gforge/utils/install-nsspgsql.sh -text
 gforge/utils/ldap/sql2ldifadd.pl -text
 gforge/utils/ldap/sql2ldifmod.pl -text
 gforge/utils/manage-translations.sh -text
+gforge/utils/migrate-to-ini-files.sh -text
 gforge/www/admin/pi.php -text
 gforge/www/docman/include/vtemplate.class.php -text
 gforge/www/docman/search.php -text
