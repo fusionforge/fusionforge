@@ -1754,8 +1754,6 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
-				db_commit();
-				return true;
 			}
 			} // USE_PFO_RBAC
 		} else {
