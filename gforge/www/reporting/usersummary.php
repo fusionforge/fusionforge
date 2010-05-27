@@ -42,10 +42,10 @@ $tstat = getStringFromRequest('tstat');
 
 $z =& $report->getWeekStartArr();
 if (!$start) {
-	$start = $z[count($z)-1];
+	$start = $z[0];
 }
 if (!$end) {
-	$end=$z[0];
+	$end=$z[count($z)-1];
 }
 if (!$tstat) {
 	$tstat='1';

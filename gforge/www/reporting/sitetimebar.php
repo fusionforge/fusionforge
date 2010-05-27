@@ -42,7 +42,12 @@ $end = getIntFromRequest('end');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[count($z)-1];
+	$start = $z[0];
+}
+
+if (!$end) {
+	$z =& $report->getMonthStartArr();
+	$end = $z[count($z)-1];
 }
 
 echo report_header(_('Site-Wide Time Tracking'));

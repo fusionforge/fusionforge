@@ -46,6 +46,8 @@ var $start_date;
 var $end_date;
 var $span_name=array(1=>'Daily',2=>'Weekly',3=>'Monthly',4=>'OverAll');
 var $graph_interval=array(1=>7,2=>1,3=>1,4=>1);
+var $max_weeks = 104;
+var $max_month = 24;
 
 function Report() {
 	$this->Error();
@@ -70,12 +72,13 @@ function getMinDate() {
 function &getMonthStartArr() {
 	if (count($this->month_start_arr) < 1) {
 		$min_date=$this->getMinDate();
-		for ($i=0; $i<24; $i++) {
+		for ($i=0; $i<$this->max_month; $i++) {
 			$this->month_start_arr[]=mktime(0,0,0,date('m')+1-$i,1,date('Y'));
 			if ($this->month_start_arr[$i] < $min_date) {
 				break;
 			}
 		}
+		sort($this->month_start_arr);
 	}
 	return $this->month_start_arr;
 }
@@ -84,12 +87,13 @@ function &getWeekStartArr() {
 	if (count($this->week_start_arr) < 1) {
 		$min_date=$this->getMinDate();
 		$start=mktime(0,0,0,date('m'),(date('d')+$this->adjust_days[date('D')]),date('Y'));
-		for ($i=0; $i<104; $i++) {
+		for ($i=0; $i<$this->max_weeks; $i++) {
 			$this->week_start_arr[]=($start-REPORT_WEEK_SPAN*$i);
 			if ($this->week_start_arr[$i] < $min_date) {
 				break;
 			}
 		}
+		sort($this->week_start_arr);
 	}
 	return $this->week_start_arr;
 }
