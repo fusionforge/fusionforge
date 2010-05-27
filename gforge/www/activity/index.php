@@ -33,7 +33,7 @@ if (!$received_begin || $received_begin==0) {
 		$begin = (time()-(30*86400));
 		$rendered_begin = strftime($date_format, $begin) ;
 	} else {
-		$begin = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year']);
+		$begin = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year'] + 1900);
 		$rendered_begin = $received_begin ;
 	}
 }
@@ -47,7 +47,7 @@ if (!$received_end || $received_end==0) {
 		$end = time() ;
 		$rendered_end = strftime($date_format, $end) ;
 	} else {
-		$end = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year']) + 86400;
+		$end = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year'] + 1900);
 		$rendered_end = $received_end ;
 	}
 }
