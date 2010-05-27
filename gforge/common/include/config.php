@@ -25,6 +25,7 @@
 class FusionForgeConfig {
 	static protected $instance = NULL ;
 	private $settings ;
+	private $bools = array () ;
     
 	public function get_instance () {
 		if (self::$instance == NULL) {
@@ -34,20 +35,20 @@ class FusionForgeConfig {
 	}
   
 	public function get_value ($section, $var) {
-		if (!isset (self::$instance->settings[$section])
-		    || !isset (self::$instance->settings[$section][$var])) {
+		if (!isset ($this->settings[$section])
+		    || !isset ($this->settings[$section][$var])) {
 			return NULL ;
 		}
-		return self::$instance->settings[$section][$var] ;
+		return $this->settings[$section][$var] ;
 	}
 
 	public function set_value ($section, $var, $value) {
-		if (!isset (self::$instance->settings[$section])) {
-			self::$instance->settings[$section] = array () ;
+		if (!isset ($this->settings[$section])) {
+			$this->settings[$section] = array () ;
 		}
 
-		if (!isset (self::$instance->settings[$section][$var])) {
-			self::$instance->settings[$section][$var] = $value ;
+		if (!isset ($this->settings[$section][$var])) {
+			$this->settings[$section][$var] = $value ;
 		}
 	}
 
@@ -57,12 +58,41 @@ class FusionForgeConfig {
 			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
 					foreach ($options as $var => $value) {
-						self::$instance->settings[$section][$var] = $value ;
+						if (isset ($this->bools[$section][$var])) {
+							$this->settings[$section][$var] = $this->_interpret_as_bool ($value) ;
+						} else {
+							$this->settings[$section][$var] = $value ;
+						}
 					}
 				}
 			}
 		}
 		return ;
+	}
+
+	function mark_as_bool ($section, $var) {
+		if (!array_has_key ($this->bools, $section)) {
+			$this->bools[$section] = array () ;
+		}
+		$this->bools[$section][$var] = true ;
+
+		if (isset ($this->settings[$section][$var])) {
+			$this->settings[$section][$var] = $this->_interpret_as_bool ($this->settings[$section][$var]) ;
+		}
+	}
+
+	private function _interpret_as_bool ($val) {
+		$val = strtolower ($val) ;
+		switch ($val) {
+		case 'true':
+		case 'on':
+		case 'yes':
+		case '1':
+		case true:
+			return true ;
+		}
+		
+		return false ;
 	}
 
   }
@@ -125,6 +155,12 @@ function forge_define_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
 
 	return $c->set_value ($section, $var, $default) ;
+}
+
+function forge_set_config_item_bool ($var, $section) {
+	$c = FusionForgeConfig::get_instance () ;
+
+	return $c->mark_as_bool ($section, $var) ;
 }
 
 function forge_read_config_file ($file) {
