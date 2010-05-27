@@ -31,9 +31,8 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-site_admin_header(array('title'=>_('Site admin')));
-
-echo '<h1>' . _('Site admin') . '</h1>';
+site_admin_header(array('title'=>_('Site Admin')));
+echo '<h1>' . _('Site Admin') . '</h1>';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 

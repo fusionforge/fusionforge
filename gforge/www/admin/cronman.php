@@ -22,13 +22,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfcommon.'include/cron_utils.php';
 
-site_admin_header(array('title'=>_('Site admin')));
+site_admin_header(array('title'=>_('Cron Manager')));
+echo '<h1>' . _('Cron Manager') . '</h1>';
 
 $which = getIntFromRequest('which', 100);
 

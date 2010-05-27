@@ -25,7 +25,8 @@ require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-site_admin_header(array('title'=>_('Group List')));
+site_admin_header(array('title'=>_('Project List')));
+echo '<h1>' . _('Project List') . '</h1>';
 
 $form_catroot = getStringFromRequest('form_catroot');
 $form_pending = getStringFromRequest('form_pending');

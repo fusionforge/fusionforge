@@ -27,12 +27,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 require_once('../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-site_admin_header(array('title'=>_('Site admin')));
+site_admin_header(array('title'=>_('Configuration Manager')));
+echo '<h1>' . _('Configuration Manager') . '</h1>';
 
 $gfcgfile = get_absolute_filename($gfcgfile);
 
