@@ -1,0 +1,5 @@
+[core]
+forge_name = FusionForge
+user_registration_restricted = false
+
+extra_config_dirs = /etc/fusionforge/config.ini.d/

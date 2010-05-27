@@ -250,7 +250,9 @@ gforge/docs/docbook/docbook/user_guide/project_functions/blocks.xml -text
 gforge/docs/fusionforge.doxygen -text
 gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
-gforge/etc/config.ini -text
+gforge/etc/config.ini-fhs -text
+gforge/etc/config.ini-opt -text
+gforge/etc/config.ini.d/scmsvn.ini -text
 gforge/etc/database.py.example -text
 gforge/etc/httpd.d/01common.ssl -text
 gforge/etc/httpd.d/060maindirhttp.vhost -text
@@ -1243,6 +1245,7 @@ gforge/plugins/scmhg/packaging/control/134plugin-scmhg -text
 gforge/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 gforge/plugins/scmhg/packaging/dirs/plugin-scmhg -text
 gforge/plugins/scmhg/packaging/install/plugin-scmhg -text
+gforge/plugins/scmsvn/etc/scmsvn.ini -text
 gforge/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 gforge/plugins/scmsvn/packaging/control/131plugin-scmsvn -text
 gforge/plugins/scmsvn/packaging/control/131plugin-scmsvn.shortdesc -text
