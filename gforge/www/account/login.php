@@ -43,9 +43,17 @@ $feedback = getStringFromRequest('feedback');
 //
 if ($return_to) {
 	$tmpreturn=explode('?',$return_to);
-	if (!@is_file(forge_get_config('url_root').$tmpreturn[0]) && !@is_dir(forge_get_config('url_root').$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1) && !(strpos($tmpreturn[0],'mediawiki') == 1)) {
-		$return_to='';
+	$rtpath = $tmpreturn[0] ;
+
+	if (@is_file(forge_get_config('url_root').$rtpath)
+	    || @is_dir(forge_get_config('url_root').$rtpath)
+	    || (strpos($rtpath,'/projects') == 0)
+	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
+		$newrt = $return_to ;
+	} else {
+		$newrt = '' ;
 	}
+	$return_to = $newrt ;
 }
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
