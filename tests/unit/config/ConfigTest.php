@@ -20,12 +20,13 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 	{
 		forge_define_config_item ('forge_name', 'core', 'default') ;
 		forge_define_config_item ('user_registration_restricted', 'core', true) ;
+		forge_set_config_item_bool ('user_registration_restricted', 'core') ;
 
 		$this->assertEquals('default', forge_get_config ('forge_name'));
 		$this->assertEquals('default', forge_get_config ('forge_name', 'core'));
 		$this->assertTrue(forge_get_config ('user_registration_restricted'));
 
-		forge_read_config_file (dirname(__FILE__) . '/../../../gforge/etc/config.ini') ;
+		forge_read_config_file (dirname(__FILE__) . '/../../../gforge/etc/config.ini-fhs') ;
 
 		$this->assertEquals('FusionForge', forge_get_config ('forge_name'));
 		$this->assertEquals('FusionForge', forge_get_config ('forge_name', 'core'));
@@ -33,12 +34,12 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 
 		$arr = forge_get_config_array ('forge_name', array ('user_registration_restricted', 'core')) ;
 		$this->assertEquals('FusionForge', $arr[0]);
-		$this->assertFalse(!!$arr[1]);
+		$this->assertFalse($arr[1]);
 
 		forge_set_vars_from_config ('forge_name', array ('user_registration_restricted', 'core')) ;
 		global $forge_name, $core__user_registration_restricted ;
 		$this->assertEquals('FusionForge', $forge_name);
-		$this->assertFalse(!!$core__user_registration_restricted);
+		$this->assertFalse($core__user_registration_restricted);
 
 	}
 

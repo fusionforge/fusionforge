@@ -71,7 +71,7 @@ class FusionForgeConfig {
 	}
 
 	function mark_as_bool ($section, $var) {
-		if (!array_has_key ($this->bools, $section)) {
+		if (!array_key_exists ($section, $this->bools)) {
 			$this->bools[$section] = array () ;
 		}
 		$this->bools[$section][$var] = true ;
