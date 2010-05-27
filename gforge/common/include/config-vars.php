@@ -102,6 +102,113 @@ forge_define_config_item ('database_port', 'core', @$GLOBALS['sys_dbport']) ;
 forge_define_config_item ('database_name', 'core', $GLOBALS['sys_dbname']) ;
 forge_define_config_item ('database_user', 'core', $GLOBALS['sys_dbuser']) ;
 forge_define_config_item ('database_password', 'core', $GLOBALS['sys_dbpasswd']) ;
+
+$pm = plugin_manager_get_object () ;
+
+if ($pm->PluginIsInstalled ('scmarch')) {
+	forge_define_config_item ('repos_path', 'scmarch', plugin_get_object('scmarch')->arch_root) ;
+	require_once $gfconfig.'plugins/scmarch/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmarch', $default_arch_server) ;
+	if (isset ($arch_root)) {
+		forge_define_config_item ('repos_path', 'scmarch', $arch_root) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmarch',
+					  forge_get_config('chroot').'/scmrepos/arch') ;
+	}
+}
+
+if ($pm->PluginIsInstalled ('scmbzr')) {
+	forge_define_config_item ('repos_path', 'scmbzr', plugin_get_object('scmbzr')->bzr_root) ;
+	require_once $gfconfig.'plugins/scmbzr/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmbzr', $default_bzr_server) ;
+	if (isset ($bzr_root)) {
+		forge_define_config_item ('repos_path', 'scmbzr', $bzr_root) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmbzr',
+					  forge_get_config('chroot').'/scmrepos/bzr') ;
+	}
+}
+
+if ($pm->PluginIsInstalled ('scmccase')) {
+	require_once $gfconfig.'plugins/scmccase/config.php' ;
+	forge_define_config_item ('default_server', 'scmccase', $default_ccase_server) ;
+	forge_define_config_item ('this_server', 'scmccase', $this_server) ;
+	forge_define_config_item ('tag_pattern', 'scmccase', $tag_pattern) ;
+}
+
+if ($pm->PluginIsInstalled ('scmcvs')) {
+	forge_define_config_item ('repos_path', 'scmcvs', plugin_get_object('scmcvs')->cvs_root) ;
+	require_once $gfconfig.'plugins/scmcvs/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmcvs', $default_cvs_server) ;
+	if (isset ($cvs_root)) {
+		forge_define_config_item ('repos_path', 'scmcvs', $cvs_root) ;
+	} elseif (isset ($cvsdir_prefix)) {
+		forge_define_config_item ('repos_path', 'scmcvs', $cvsdir_prefix) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmcvs',
+					  forge_get_config('chroot').'/scmrepos/cvs') ;
+	}
+}
+
+if ($pm->PluginIsInstalled ('scmdarcs')) {
+	forge_define_config_item ('repos_path', 'scmdarcs', plugin_get_object('scmdarcs')->darcs_root) ;
+	require_once $gfconfig.'plugins/scmdarcs/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmdarcs', $default_darcs_server) ;
+	if (isset ($darcs_root)) {
+		forge_define_config_item ('repos_path', 'scmdarcs', $darcs_root) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmdarcs',
+					  forge_get_config('chroot').'/scmrepos/darcs') ;
+	}
+}
+
+if ($pm->PluginIsInstalled ('scmgit')) {
+	forge_define_config_item ('repos_path', 'scmgit', plugin_get_object('scmgit')->git_root) ;
+	require_once $gfconfig.'plugins/scmgit/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmgit', $default_git_server) ;
+	if (isset ($git_root)) {
+		forge_define_config_item ('repos_path', 'scmgit', $git_root) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmgit',
+					  forge_get_config('chroot').'/scmrepos/git') ;
+	}
+}
+
+if ($pm->PluginIsInstalled ('scmhg')) {
+	forge_define_config_item ('repos_path', 'scmhg', plugin_get_object('scmhg')->hg_root) ;
+	require_once $gfconfig.'plugins/scmhg/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmhg', $default_hg_server) ;
+	if (isset ($hg_root)) {
+		forge_define_config_item ('repos_path', 'scmhg', $hg_root) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmhg',
+					  forge_get_config('chroot').'/scmrepos/hg') ;
+	}
+}
+
+if ($pm->PluginIsInstalled ('scmsvn')) {
+	forge_define_config_item ('repos_path', 'scmsvn', plugin_get_object('scmsvn')->svn_root) ;
+	require_once $gfconfig.'plugins/scmsvn/config.php' ;
+	
+	forge_define_config_item ('default_server', 'scmsvn', $default_svn_server) ;
+	if (isset ($svn_root)) {
+		forge_define_config_item ('repos_path', 'scmsvn', $svn_root) ;
+	} else {
+		forge_define_config_item ('repos_path', 'scmsvn',
+					  forge_get_config('chroot').'/scmrepos/svn') ;
+	}
+
+	forge_define_config_item ('use_ssh', 'scmsvn', $use_ssh ? 1 : 0) ;
+	forge_define_config_item ('use_dav', 'scmsvn', $use_dav ? 1 : 0) ;
+	forge_define_config_item ('use_ssl', 'scmsvn', $use_ssl ? 1 : 0) ;
+}
+
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:
@@ -110,5 +217,10 @@ forge_define_config_item ('database_password', 'core', $GLOBALS['sys_dbpasswd'])
  forge_define_config_item ('forge_name', 'core', $forge->software_name) ;
  forge_define_config_item ('user_registration_restricted', 'core', false) ;
 */
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
