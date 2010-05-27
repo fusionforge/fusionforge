@@ -2,121 +2,157 @@
 
 set -e
 
-variable_set=$1
-dest_file=$2
+lastsection=''
 
-case $variable_set in
-    public)
-	vars="
-account_manager_type
-admin_email
-apache_group
-apache_user
-bcc_all_emails
-chroot
-custom_path
-default_country_code
-default_language
-default_theme
-default_timezone
-default_trove_cat
-enable_uploads
-extra_config_dirs
-extra_config_files
-force_login
-forge_name
-forum_return_domain
-ftp_upload_dir
-ftp_upload_host
-groupdir_prefix
-homedir_prefix
-images_url
-jpgraph_path
-lists_host
-mailman_path
-master_path
-news_group
-peer_rating_group
-plugins_path
-project_registration_restricted
-projects_path
-require_unique_email
-scm_host
-scm_snapshots_path
-scm_tarballs_path
-sendmail_path
-show_source
-src_path
-stats_group
-sys_proxy
-template_group
-themes_root
-unix_cipher
-upload_dir
-url_prefix
-url_root
-use_docman
-use_forum
-use_frs
-use_fti
-use_ftp
-use_ftpuploads
-use_ftp_uploads
-use_gateways
-use_jabber
-use_mail
-use_manual_uploads
-use_news
-use_people
-use_pm
-use_project_database
-use_project_multimedia
-use_project_vhost
-use_ratings
-user_registration_restricted
-users_host
-use_scm
-use_shell
-use_snippet
-use_ssl
-use_survey
-use_tracker
-use_trove
-web_host"
-	;;
-    secret)
-	vars="
-database_host
-database_name
-database_password
-database_port
-database_user
-jabber_host
-jabber_password
-jabber_port
-jabber_user
-ldap_base_dn
-ldap_host
-ldap_password
-ldap_port
-ldap_version
-session_key"
-	;;
-    *)
-	echo "Unknown or missing variable set"
-	exit 1
-	;;
-esac
+add_config () {
+    section=$1
+    var=$2
+
+    value=$(forge_get_config $var $section)
+    if [ $value = '' ] ; then
+	return
+    fi
+
+    if [ $section != $lastsection ] ; then
+	echo
+	echo "[$section]"
+	lastsection=$section
+    fi
+
+    echo "$var = $value"
+}
 
 tmp=$(mktemp)
 cat > $tmp <<EOF
-# This is a generated file
+# This is a generated file with values migrated from your previous configuration
 # You may want to move the values in here to the main configuration files
-
-[core]
 EOF
-for v in $vars ; do
-    echo -n "$v = " ; forge_get_config $v
-done >> $tmp
 
-mv $tmp $dest_file
+add_config core account_manager_type >> $tmp
+add_config core admin_email >> $tmp
+add_config core apache_group >> $tmp
+add_config core apache_user >> $tmp
+add_config core bcc_all_emails >> $tmp
+add_config core chroot >> $tmp
+add_config core custom_path >> $tmp
+add_config core default_country_code >> $tmp
+add_config core default_language >> $tmp
+add_config core default_theme >> $tmp
+add_config core default_timezone >> $tmp
+add_config core default_trove_cat >> $tmp
+add_config core enable_uploads >> $tmp
+add_config core extra_config_dirs >> $tmp
+add_config core extra_config_files >> $tmp
+add_config core force_login >> $tmp
+add_config core forge_name >> $tmp
+add_config core forum_return_domain >> $tmp
+add_config core ftp_upload_dir >> $tmp
+add_config core ftp_upload_host >> $tmp
+add_config core groupdir_prefix >> $tmp
+add_config core homedir_prefix >> $tmp
+add_config core images_url >> $tmp
+add_config core jpgraph_path >> $tmp
+add_config core lists_host >> $tmp
+add_config core mailman_path >> $tmp
+add_config core master_path >> $tmp
+add_config core news_group >> $tmp
+add_config core peer_rating_group >> $tmp
+add_config core plugins_path >> $tmp
+add_config core project_registration_restricted >> $tmp
+add_config core projects_path >> $tmp
+add_config core require_unique_email >> $tmp
+add_config core scm_host >> $tmp
+add_config core scm_snapshots_path >> $tmp
+add_config core scm_tarballs_path >> $tmp
+add_config core sendmail_path >> $tmp
+add_config core show_source >> $tmp
+add_config core src_path >> $tmp
+add_config core stats_group >> $tmp
+add_config core sys_proxy >> $tmp
+add_config core template_group >> $tmp
+add_config core themes_root >> $tmp
+add_config core unix_cipher >> $tmp
+add_config core upload_dir >> $tmp
+add_config core url_prefix >> $tmp
+add_config core url_root >> $tmp
+add_config core use_docman >> $tmp
+add_config core use_forum >> $tmp
+add_config core use_frs >> $tmp
+add_config core use_fti >> $tmp
+add_config core use_ftp >> $tmp
+add_config core use_ftpuploads >> $tmp
+add_config core use_ftp_uploads >> $tmp
+add_config core use_gateways >> $tmp
+add_config core use_jabber >> $tmp
+add_config core use_mail >> $tmp
+add_config core use_manual_uploads >> $tmp
+add_config core use_news >> $tmp
+add_config core use_people >> $tmp
+add_config core use_pm >> $tmp
+add_config core use_project_database >> $tmp
+add_config core use_project_multimedia >> $tmp
+add_config core use_project_vhost >> $tmp
+add_config core use_ratings >> $tmp
+add_config core user_registration_restricted >> $tmp
+add_config core users_host >> $tmp
+add_config core use_scm >> $tmp
+add_config core use_shell >> $tmp
+add_config core use_snippet >> $tmp
+add_config core use_ssl >> $tmp
+add_config core use_survey >> $tmp
+add_config core use_tracker >> $tmp
+add_config core use_trove >> $tmp
+add_config core web_host >> $tmp
+
+add_config scmarch default_server >> $tmp
+add_config scmarch repos_path >> $tmp
+
+add_config scmbzr default_server >> $tmp
+add_config scmbzr repos_path >> $tmp
+    
+add_config scmccase default_server >> $tmp
+add_config scmccase this_server >> $tmp
+add_config scmccase tag_pattern >> $tmp
+    
+add_config scmcvs default_server >> $tmp
+add_config scmcvs repos_path >> $tmp
+    
+add_config scmgit default_server >> $tmp
+add_config scmgit repos_path >> $tmp
+    
+add_config scmhg default_server >> $tmp
+add_config scmhg repos_path >> $tmp
+    
+add_config scmsvn default_server >> $tmp
+add_config scmsvn repos_path >> $tmp
+add_config scmsvn use_dav >> $tmp
+add_config scmsvn use_ssh >> $tmp
+add_config scmsvn use_ssl >> $tmp
+
+mv $tmp /etc/fusionforge/config.ini.d/zzz-migrated-old-config.ini
+chmod 644 /etc/fusionforge/config.ini.d/zzz-migrated-old-config.ini
+
+tmp=$(mktemp)
+cat > $tmp <<EOF
+# This is a generated file with values migrated from your previous configuration
+# You may want to move the values in here to the main configuration files
+EOF
+
+add_config core database_host >> $tmp
+add_config core database_name >> $tmp
+add_config core database_password >> $tmp
+add_config core database_port >> $tmp
+add_config core database_user >> $tmp
+add_config core jabber_host >> $tmp
+add_config core jabber_password >> $tmp
+add_config core jabber_port >> $tmp
+add_config core jabber_user >> $tmp
+add_config core ldap_base_dn >> $tmp
+add_config core ldap_host >> $tmp
+add_config core ldap_password >> $tmp
+add_config core ldap_port >> $tmp
+add_config core ldap_version >> $tmp
+add_config core session_key >> $tmp
+
+mv $tmp /etc/fusionforge/config.ini.d/zzz-migrated-old-secrets.ini
+chmod 600 /etc/fusionforge/config.ini.d/zzz-migrated-old-secrets.ini
