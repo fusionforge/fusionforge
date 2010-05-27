@@ -10,7 +10,7 @@ echo '<p>' . util_make_link ('/tracker/admin/?group_id='.$group_id,
 echo _('Create a new tracker.') ;
 echo '</p>';
 
-echo '<p>' . util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;update_type=1',
+echo '<p>' . util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;update_type=1',
 			     '<strong>'._('Update Settings').'</strong>').'<br />' ;
 echo _('Set up preferences like expiration times, email addresses.') ;
 echo '</p>';
