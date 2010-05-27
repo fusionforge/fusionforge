@@ -51,9 +51,9 @@ if ( $group_name ) {
 }
 
 if (!$group || !is_object($group)) {
-	exit_error('Error','Could Not Get Group');
+    exit_no_group();
 } elseif ($group->isError()) {
-	exit_error('Error','Group: '.$group->getErrorMessage());
+    exit_error('Error', $group->getErrorMessage());
 }
 
 //
