@@ -37,6 +37,7 @@ $login = getStringFromRequest('login');
 $form_loginname = getStringFromRequest('form_loginname');
 $form_pw = getStringFromRequest('form_pw');
 $feedback = getStringFromRequest('feedback');
+$triggered = getIntFromRequest('triggered');
 
 //
 //	Validate return_to
@@ -120,10 +121,16 @@ if ($login && !$success) {
 	html_feedback_top($feedback);
 }
 
+echo '<p>';
+
+if ($triggered) {
+	echo '<span class="error">' ;
+	echo _('You\'ve been redirected to this login page because you have tried accessing a page that was not available to you as an anonymous user.');
+	echo '</span> ' ;
+}
+echo _('Cookies must be enabled past this point.');
+
 ?>
-	
-<p>
-<span class="error"><?php echo _('Cookies must be enabled past this point.'); ?></span>
 </p>
 <form action="<?php echo util_make_url('/account/login.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
