@@ -139,8 +139,8 @@ add_config scmsvn use_ssl >> $tmp
 
 add_config mediawiki enable_uploads >> $tmp
 
-mv $tmp $config_path/zzz-migrated-old-config.ini
-chmod 644 $config_path/zzz-migrated-old-config.ini
+mv $tmp $config_path/zzz-migrated-old-config
+chmod 644 $config_path/zzz-migrated-old-config
 
 tmp=$(mktemp)
 cat > $tmp <<EOF
@@ -164,5 +164,5 @@ add_config core ldap_port >> $tmp
 add_config core ldap_version >> $tmp
 add_config core session_key >> $tmp
 
-mv $tmp $config_path/zzz-migrated-old-secrets.ini
-chmod 600 $config_path/zzz-migrated-old-secrets.ini
+mv $tmp $config_path/zzz-migrated-old-secrets
+chmod 600 $config_path/zzz-migrated-old-secrets
