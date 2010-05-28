@@ -4523,6 +4523,7 @@ tests/unit/utils/TextSanitizerTest.php -text
 tests/unit/utils/UtilsTest.php -text
 tools/check_and_update_forum_role_settings.php -text
 tools/export-tracker.tcl -text
+tools/gource/gource.sh -text
 tools/jpgraph_pietest.php -text
 tools/make-mo.sh -text
 tools/rpmdev-setuptree -text
