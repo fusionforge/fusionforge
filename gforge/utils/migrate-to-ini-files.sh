@@ -104,6 +104,10 @@ add_config core use_tracker >> $tmp
 add_config core use_trove >> $tmp
 add_config core web_host >> $tmp
 
+add_config core source_path >> $tmp
+add_config core data_path >> $tmp
+add_config core config_path >> $tmp
+
 add_config scmarch default_server >> $tmp
 add_config scmarch repos_path >> $tmp
 
