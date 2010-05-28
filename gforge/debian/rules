@@ -57,33 +57,33 @@ debian/$(OLDPACKAGE)-plugin-%.cron.d:
 	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.cron.d:
-	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) > $@
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) | $(SED_REPLACE) > $@
 
 debian/$(OLDPACKAGE)-plugin-%.dirs:
-	cp $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* $@ 
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.dirs:
-	cp $(CURDIR)/packaging/dirs/$* $@ 
+	$(SED_REPLACE) $(CURDIR)/packaging/dirs/$* > $@ 
 
 debian/$(OLDPACKAGE)-plugin-%.links:
-	cp $(CURDIR)/plugins/$*/packaging/links/plugin-$* $@
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/links/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.links:
-	cp $(CURDIR)/packaging/links/$* $@ 
+	$(SED_REPLACE) $(CURDIR)/packaging/links/$* > $@ 
 
 debian/$(OLDPACKAGE)-plugin-%.install:
-	cp $(CURDIR)/plugins/$*/packaging/install/plugin-$* $@
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/install/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.install:
-	cp $(CURDIR)/packaging/install/$* $@ 
+	$(SED_REPLACE) $(CURDIR)/packaging/install/$* > $@ 
 
 debian/$(OLDPACKAGE)-plugin-%.docs:
-	cp $(CURDIR)/plugins/$*/packaging/docs/plugin-$* $@
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/docs/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.docs:
-	cp $(CURDIR)/packaging/docs/oldpkgname-$* $@
+	$(SED_REPLACE) $(CURDIR)/packaging/docs/oldpkgname-$* > $@
 debian/$(PACKAGE)-%.docs:
-	cp $(CURDIR)/packaging/docs/pkgname-$* $@
+	$(SED_REPLACE) $(CURDIR)/packaging/docs/pkgname-$* > $@
 
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[0-9][0-9][0-9]*) 
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* $(CURDIR)/plugins/*/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
