@@ -1,4 +1,4 @@
-#! /usr/bin/php4
+#! /usr/bin/php
 <?php
 /**
  * Class Generator for Gforge

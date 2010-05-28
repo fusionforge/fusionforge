@@ -301,8 +301,6 @@ if [ "$1" -eq "1" ]; then
  		useradd -m -s /bin/false anonymous
  	fi
  
- 	# [ ! -f /usr/bin/php4 ] && ln -s /usr/bin/php /usr/bin/php4
- 	
  	CHROOT=`grep '^gforge_chroot=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
  	if [ ! -d $CHROOT ] ; then
 		mkdir -p $CHROOT
@@ -351,8 +349,6 @@ if [ "$1" -eq "0" ]; then
  		userdel anonymous 2>/dev/null || :
  	fi
  
- 	#[ -L /usr/bin/php4 ] && rm -f /usr/bin/php4
-
 fi
 
 %clean

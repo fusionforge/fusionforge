@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php -f
 <?php
 /**
  * create_groups.php 

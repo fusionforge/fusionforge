@@ -4387,7 +4387,7 @@ Daniel Perez <daniel@gforgegroup.com>
 	* cronjobs/{check_stale_tracker_items.php, db_project_sums.php,
 	massmail.php,project_weekly_metric-backfill.php,
 	stats_projects-backfill.php}: Commonise magic headers to
-	'#! /usr/bin/php4 -f'
+	'#! /usr/bin/php -f'
 
 2002-12-24  Tim Perdue <tim@gforge.org>
 
