@@ -139,7 +139,6 @@ forge_define_config_item ('config_path', 'core', $GLOBALS['sys_etc_path']) ;
 $pm = plugin_manager_get_object () ;
 
 if ($pm->PluginIsInstalled ('scmarch')) {
-	forge_define_config_item ('repos_path', 'scmarch', plugin_get_object('scmarch')->arch_root) ;
 	require_once $gfconfig.'plugins/scmarch/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmarch', $default_arch_server) ;
@@ -152,7 +151,6 @@ if ($pm->PluginIsInstalled ('scmarch')) {
 }
 
 if ($pm->PluginIsInstalled ('scmbzr')) {
-	forge_define_config_item ('repos_path', 'scmbzr', plugin_get_object('scmbzr')->bzr_root) ;
 	require_once $gfconfig.'plugins/scmbzr/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmbzr', $default_bzr_server) ;
@@ -172,7 +170,6 @@ if ($pm->PluginIsInstalled ('scmccase')) {
 }
 
 if ($pm->PluginIsInstalled ('scmcvs')) {
-	forge_define_config_item ('repos_path', 'scmcvs', plugin_get_object('scmcvs')->cvs_root) ;
 	require_once $gfconfig.'plugins/scmcvs/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmcvs', $default_cvs_server) ;
@@ -187,7 +184,6 @@ if ($pm->PluginIsInstalled ('scmcvs')) {
 }
 
 if ($pm->PluginIsInstalled ('scmdarcs')) {
-	forge_define_config_item ('repos_path', 'scmdarcs', plugin_get_object('scmdarcs')->darcs_root) ;
 	require_once $gfconfig.'plugins/scmdarcs/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmdarcs', $default_darcs_server) ;
@@ -200,7 +196,6 @@ if ($pm->PluginIsInstalled ('scmdarcs')) {
 }
 
 if ($pm->PluginIsInstalled ('scmgit')) {
-	forge_define_config_item ('repos_path', 'scmgit', plugin_get_object('scmgit')->git_root) ;
 	require_once $gfconfig.'plugins/scmgit/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmgit', $default_git_server) ;
@@ -213,7 +208,6 @@ if ($pm->PluginIsInstalled ('scmgit')) {
 }
 
 if ($pm->PluginIsInstalled ('scmhg')) {
-	forge_define_config_item ('repos_path', 'scmhg', plugin_get_object('scmhg')->hg_root) ;
 	require_once $gfconfig.'plugins/scmhg/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmhg', $default_hg_server) ;
@@ -226,7 +220,6 @@ if ($pm->PluginIsInstalled ('scmhg')) {
 }
 
 if ($pm->PluginIsInstalled ('scmsvn')) {
-	forge_define_config_item ('repos_path', 'scmsvn', plugin_get_object('scmsvn')->svn_root) ;
 	require_once $gfconfig.'plugins/scmsvn/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmsvn', $default_svn_server) ;
