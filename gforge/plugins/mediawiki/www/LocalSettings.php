@@ -286,8 +286,8 @@ $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;
 
 // LOAD THE SITE-WIDE AND PROJECT-SPECIFIC EXTRA-SETTINGS 
-if (is_file("$sys_etc_path/plugins/mediawiki/LocalSettings.php")) {
-	include("$sys_etc_path/plugins/mediawiki/LocalSettings.php");
+if (is_file(forge_get_config('config_path')."/plugins/mediawiki/LocalSettings.php")) {
+	include(forge_get_config('config_path')."/plugins/mediawiki/LocalSettings.php");
 }
 
 // debian style system-wide mediawiki extensions

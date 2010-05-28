@@ -137,12 +137,12 @@ if (forge_get_config('use_tracker')) {
 	}
 }
 
-if (forge_get_config('use_mail') && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
+if (forge_get_config('use_mail') && file_exists(forge_get_config('data_path').'/dumps/mailman-aliases')) {
 	//
 	//	Read in the mailman aliases
 	//
-	$h2 = fopen($sys_var_path.'/dumps/mailman-aliases',"r");
-	$mailmancontents = fread($h2,filesize($sys_var_path.'/dumps/mailman-aliases'));
+	$h2 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases',"r");
+	$mailmancontents = fread($h2,filesize(forge_get_config('data_path').'/dumps/mailman-aliases'));
 	$mailmanlines = explode("\n",$mailmancontents);
 	for	($k = 0; $k < count($mailmanlines); $k++) {
 		$mailmanline = explode(":",$mailmanlines[$k], 2);

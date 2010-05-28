@@ -158,13 +158,13 @@ if (file_exists($svndir_prefix)) {
  * Backup config files
  **************************************/ 
 $output="";
-if (file_exists($sys_etc_path)) {
-	@exec('tar -jcvf '.$sys_path_to_backup.'etc-tmp-'.$datetime.'.tar.bz2 '.$sys_etc_path.' 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
+if (file_exists(forge_get_config('config_path'))) {
+	@exec('tar -jcvf '.$sys_path_to_backup.'etc-tmp-'.$datetime.'.tar.bz2 '.forge_get_config('config_path').' 2>&1' ,$output,$retval);   //proceed svnroot dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
 } else {
-	$err.= 'Unable to find '.$sys_etc_path.' dir.';
+	$err.= 'Unable to find '.forge_get_config('config_path').' dir.';
 }
 
 

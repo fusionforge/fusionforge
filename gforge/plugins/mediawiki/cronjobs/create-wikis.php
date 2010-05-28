@@ -129,8 +129,8 @@ while ( $row = db_fetch_array($project_res) ) {
 			exit;
 		}
 
-		$mwwrapper = $sys_share_path."/plugins/mediawiki/bin/mw-wrapper.php" ;
-		$dumpfile = $sys_etc_path."/mediawiki/initial-content.xml" ;
+		$mwwrapper = forge_get_config('source_path')."/plugins/mediawiki/bin/mw-wrapper.php" ;
+		$dumpfile = forge_get_config('config_path')."/mediawiki/initial-content.xml" ;
 		
 		if (file_exists ($dumpfile)) {
 			system ("$mwwrapper $project importDump.php $dumpfile") ;

@@ -271,14 +271,14 @@ class SVNPlugin extends SCMPlugin {
 		}
 		$password_data .= 'anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.'."\n";
 
-		$fname = $sys_var_path.'/svnroot-access' ;
+		$fname = forge_get_config('data_path').'/svnroot-access' ;
 		$f = fopen ($fname.'.new', 'w') ;
 		fwrite ($f, $password_data) ;
 		fclose ($f) ;
 		chmod ($fname.'.new', 0644) ;
 		rename ($fname.'.new', $fname) ;
 
-		$fname = $sys_var_path.'/svnroot-authfile' ;
+		$fname = forge_get_config('data_path').'/svnroot-authfile' ;
 		$f = fopen ($fname.'.new', 'w') ;
 		fwrite ($f, $access_data) ;
 		fclose ($f) ;

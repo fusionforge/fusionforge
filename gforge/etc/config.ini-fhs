@@ -2,4 +2,7 @@
 forge_name = FusionForge
 user_registration_restricted = false
 
+source_path = /usr/share/gforge
+data_path = /var/lib/gforge
+config_path = /etc/gforge
 extra_config_dirs = /etc/fusionforge/config.ini.d/

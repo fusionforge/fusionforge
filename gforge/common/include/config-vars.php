@@ -131,6 +131,10 @@ forge_define_config_item ('database_name', 'core', $GLOBALS['sys_dbname']) ;
 forge_define_config_item ('database_user', 'core', $GLOBALS['sys_dbuser']) ;
 forge_define_config_item ('database_password', 'core', $GLOBALS['sys_dbpasswd']) ;
 
+forge_define_config_item ('source_path', 'core', $GLOBALS['sys_share_path']) ;
+forge_define_config_item ('data_path', 'core', $GLOBALS['sys_var_path']) ;
+forge_define_config_item ('config_path', 'core', $GLOBALS['sys_etc_path']) ;
+
 $pm = plugin_manager_get_object () ;
 
 if ($pm->PluginIsInstalled ('scmarch')) {

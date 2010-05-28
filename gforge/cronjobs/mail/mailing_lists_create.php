@@ -56,7 +56,7 @@ $err .= db_error();
 $rows=db_numrows($res);
 $err .= "$rows rows returned from query\n";
 
-$h1 = fopen($sys_var_path.'/dumps/mailman-aliases',"w");
+$h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases',"w");
 
 $mailingListIds = array();
 

@@ -2,4 +2,7 @@
 forge_name = FusionForge
 user_registration_restricted = false
 
+source_path = /opt/fusionforge
+data_path = /opt/fusionforge/data
+config_path = /opt/fusionforge/etc
 extra_config_dirs = /opt/fusionforge/config.ini.d/

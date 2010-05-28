@@ -80,35 +80,35 @@ if (!($dh = opendir($src_path))) {
 	closedir ($dh);
 }
 
-# link LocalSettings.php from $sys_share_path/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php
-$from = "$sys_share_path/plugins/mediawiki/www/LocalSettings.php";
+// link LocalSettings.php from forge_get_config('source_path')/plugins/mediawiki/etc/plugins/mediawiki/LocalSettings.php
+$from = forge_get_config('source_path')."/plugins/mediawiki/www/LocalSettings.php";
 $to = "$master_path/LocalSettings.php";
 mysymlink($from, $to);
 
-# create skin directory
+// create skin directory
 $todir = "$master_path/skins";
 if (!is_dir($todir)) {
 	mkdir($todir);
 }
 
-# link FusionForge skin file
-$fromdir = "$sys_share_path/plugins/mediawiki/mediawiki-skin";
+// link FusionForge skin file
+$fromdir = forge_get_config('source_path')."/plugins/mediawiki/mediawiki-skin";
 $from = "$fromdir/FusionForge.php";
 $to = "$todir/FusionForge.php";
 mysymlink($from, $to);
 
-# create skin subdir
+// create skin subdir
 $todir = "$todir/fusionforge";
 if (!is_dir($todir))
 	mkdir($todir);
 
-# link fusionforge.css files
+// link fusionforge.css files
 $fromdir = "$fromdir/fusionforge";
 $from = "$fromdir/fusionforge.css";
 $to = "$todir/fusionforge.css";
 mysymlink($from, $to);
 
-# link the rest of the files from monobook skin
+// link the rest of the files from monobook skin
 $fromdir = "$mediawiki_src_path/skins/monobook";
 
 $dh = opendir($fromdir);

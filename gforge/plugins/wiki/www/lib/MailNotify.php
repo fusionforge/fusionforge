@@ -180,7 +180,7 @@ class MailNotify {
         $GLOBALS['sys_install_type'] == 'integration')) {
         	foreach ($emails as $to) {
         		if (preg_match('/^([a-z]+)\@debug.log$/', $to, $matches)) {
-        			$fl = fopen($GLOBALS['sys_var_path']."/logs/email-wiki.".$matches[1].".log", 'a');
+        			$fl = fopen(forge_get_config('data_path')."/logs/email-wiki.".$matches[1].".log", 'a');
         			fwrite($fl, $headers."\nSubject: [".WIKI_NAME."] $subject\n\n".$content);
         			fclose($fl);
         			return true;
