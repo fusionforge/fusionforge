@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * Send emails to users with open tasks

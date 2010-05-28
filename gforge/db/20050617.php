@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * Extra field alias - Create aliases for the extra fields

@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
   /* 
    * Copyright (C) 2010  Olaf Lenz

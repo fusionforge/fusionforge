@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * This script will get mails and store it into forum DB

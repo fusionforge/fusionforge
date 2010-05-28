@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * check_stale_tracker_items.php - Check for stale tracker items.

@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * Copyright 1999-2001 (c) VA Linux Systems

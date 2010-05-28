@@ -1,4 +1,4 @@
-#! /usr/bin/php5 -f
+#! /usr/bin/php -f
 <?php
 /**
  * FusionForge/Mediawiki integration

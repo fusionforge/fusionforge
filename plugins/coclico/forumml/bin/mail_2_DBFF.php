@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 #
 # Copyright (c) STMicroelectronics, 2005. All Rights Reserved.
