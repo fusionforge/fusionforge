@@ -3,6 +3,7 @@
 set -e
 
 lastsection=''
+config_path=$(forge_get_config config_path)
 
 add_config () {
     section=$1
@@ -133,8 +134,8 @@ add_config scmsvn use_dav >> $tmp
 add_config scmsvn use_ssh >> $tmp
 add_config scmsvn use_ssl >> $tmp
 
-mv $tmp /etc/fusionforge/config.ini.d/zzz-migrated-old-config.ini
-chmod 644 /etc/fusionforge/config.ini.d/zzz-migrated-old-config.ini
+mv $tmp $config_path/config.ini.d/zzz-migrated-old-config.ini
+chmod 644 $config_path/config.ini.d/zzz-migrated-old-config.ini
 
 tmp=$(mktemp)
 cat > $tmp <<EOF
@@ -158,5 +159,5 @@ add_config core ldap_port >> $tmp
 add_config core ldap_version >> $tmp
 add_config core session_key >> $tmp
 
-mv $tmp /etc/fusionforge/config.ini.d/zzz-migrated-old-secrets.ini
-chmod 600 /etc/fusionforge/config.ini.d/zzz-migrated-old-secrets.ini
+mv $tmp $config_path/config.ini.d/zzz-migrated-old-secrets.ini
+chmod 600 $config_path/config.ini.d/zzz-migrated-old-secrets.ini
