@@ -5,4 +5,6 @@ user_registration_restricted = false
 source_path = /usr/share/gforge
 data_path = /var/lib/gforge
 config_path = /etc/gforge
+chroot = /var/lib/gforge/chroot
+
 extra_config_dirs = /etc/fusionforge/config.ini.d/
