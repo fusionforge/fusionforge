@@ -287,7 +287,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="hidden" name="step2" value="1" />
 <fieldset><legend><strong><?php echo _("File Name") ?></strong></legend>
 <?php echo _("Upload a new file") ?>: <input type="file" name="userfile"  size="30" />
-<?php if (forge_get_config('use_ftpuploads')) {
+<?php if (forge_get_config('use_ftp_uploads')) {
 	echo '<p>';
 	  printf(_('Alternatively, you can use FTP to upload a new file at %1$s.'), forge_get_config('ftp_upload_host'));
 	echo '<br />';

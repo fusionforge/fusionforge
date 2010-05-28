@@ -1,4 +1,5 @@
 bin
+etc/fusionforge/config.ini.d
 etc/gforge/templates
 etc/gforge/local.d
 etc/gforge/httpd.d

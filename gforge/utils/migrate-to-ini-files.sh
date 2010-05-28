@@ -3,18 +3,23 @@
 set -e
 
 lastsection=''
-config_path=$(forge_get_config config_path)
+config_dir=$(forge_get_config extra_config_dirs | xargs -n 1 echo | head -1)
+if [ "$config_dir" = "" ] ; then
+    config_path=$(forge_get_config config_path)/config.ini.d
+else
+    config_path=$config_dir
+fi
 
 add_config () {
     section=$1
     var=$2
 
     value=$(forge_get_config $var $section)
-    if [ $value = '' ] ; then
+    if [ "$value" = '' ] ; then
 	return
     fi
 
-    if [ $section != $lastsection ] ; then
+    if [ "$section" != "$lastsection" ] ; then
 	echo
 	echo "[$section]"
 	lastsection=$section
@@ -41,7 +46,6 @@ add_config core default_language >> $tmp
 add_config core default_theme >> $tmp
 add_config core default_timezone >> $tmp
 add_config core default_trove_cat >> $tmp
-add_config core enable_uploads >> $tmp
 add_config core extra_config_dirs >> $tmp
 add_config core extra_config_files >> $tmp
 add_config core force_login >> $tmp
@@ -81,7 +85,6 @@ add_config core use_forum >> $tmp
 add_config core use_frs >> $tmp
 add_config core use_fti >> $tmp
 add_config core use_ftp >> $tmp
-add_config core use_ftpuploads >> $tmp
 add_config core use_ftp_uploads >> $tmp
 add_config core use_gateways >> $tmp
 add_config core use_jabber >> $tmp
@@ -134,8 +137,10 @@ add_config scmsvn use_dav >> $tmp
 add_config scmsvn use_ssh >> $tmp
 add_config scmsvn use_ssl >> $tmp
 
-mv $tmp $config_path/config.ini.d/zzz-migrated-old-config.ini
-chmod 644 $config_path/config.ini.d/zzz-migrated-old-config.ini
+add_config mediawiki enable_uploads >> $tmp
+
+mv $tmp $config_path/zzz-migrated-old-config.ini
+chmod 644 $config_path/zzz-migrated-old-config.ini
 
 tmp=$(mktemp)
 cat > $tmp <<EOF
@@ -159,5 +164,5 @@ add_config core ldap_port >> $tmp
 add_config core ldap_version >> $tmp
 add_config core session_key >> $tmp
 
-mv $tmp $config_path/config.ini.d/zzz-migrated-old-secrets.ini
-chmod 600 $config_path/config.ini.d/zzz-migrated-old-secrets.ini
+mv $tmp $config_path/zzz-migrated-old-secrets.ini
+chmod 600 $config_path/zzz-migrated-old-secrets.ini

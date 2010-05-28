@@ -60,7 +60,7 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	$ecda = explode (',', $ecd) ;
 	foreach ($ecda as $cd) {
 		$cd = trim ($cd) ;
-		forge_read_config_file ($cd) ;
+		forge_read_config_dir ($cd) ;
 	}
 }
 

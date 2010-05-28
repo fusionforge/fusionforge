@@ -24,11 +24,11 @@
 
 forge_define_config_item ('forge_name', 'core', $GLOBALS['sys_name']) ;
 forge_define_config_item ('force_login', 'core', $GLOBALS['sys_force_login']) ;
-forge_config_item_bool ('force_login', 'core') ;
+forge_set_config_item_bool ('force_login', 'core') ;
 forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_user_reg_restricted']) ;
-forge_config_item_bool ('user_registration_restricted', 'core') ;
+forge_set_config_item_bool ('user_registration_restricted', 'core') ;
 forge_define_config_item ('project_registration_restricted', 'core', $GLOBALS['sys_project_reg_restricted']) ;
-forge_config_item_bool ('project_registration_restricted', 'core') ;
+forge_set_config_item_bool ('project_registration_restricted', 'core') ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
 forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
 forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;
@@ -41,52 +41,51 @@ forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
 forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
 forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
 forge_define_config_item ('use_scm', 'core', $GLOBALS['sys_use_scm']) ;
-forge_config_item_bool ('use_scm', 'core') ;
+forge_set_config_item_bool ('use_scm', 'core') ;
 forge_define_config_item ('use_tracker', 'core', $GLOBALS['sys_use_tracker']) ;
-forge_config_item_bool ('use_tracker', 'core') ;
+forge_set_config_item_bool ('use_tracker', 'core') ;
 forge_define_config_item ('use_forum', 'core', $GLOBALS['sys_use_forum']) ;
-forge_config_item_bool ('use_forum', 'core') ;
-forge_item_bool_bool ('use_forum', 'core') ;
-forge_define_config_item ('use_pm') ;
-forge_config_item_bool ('use_pm') ;
-forge_define_config_item ('use_docman', 'core') ;
-forge_config_item_bool ('use_docman', 'core') ;
+forge_set_config_item_bool ('use_forum', 'core') ;
+forge_define_config_item ('use_pm', 'core', $GLOBALS['sys_use_pm']) ;
+forge_set_config_item_bool ('use_pm', 'core') ;
+forge_define_config_item ('use_docman', 'core', $GLOBALS['sys_use_docman']) ;
+forge_set_config_item_bool ('use_docman', 'core') ;
 forge_define_config_item ('use_news', 'core', $GLOBALS['sys_use_news']) ;
-forge_config_item_bool ('use_news', 'core') ;
+forge_set_config_item_bool ('use_news', 'core') ;
 forge_define_config_item ('use_mail', 'core', $GLOBALS['sys_use_mail']) ;
-forge_config_item_bool ('use_mail', 'core') ;
+forge_set_config_item_bool ('use_mail', 'core') ;
 forge_define_config_item ('use_survey', 'core', $GLOBALS['sys_use_survey']) ;
-forge_config_item_bool ('use_survey', 'core') ;
+forge_set_config_item_bool ('use_survey', 'core') ;
 forge_define_config_item ('use_frs', 'core', $GLOBALS['sys_use_frs']) ;
-forge_config_item_bool ('use_frs', 'core') ;
+forge_set_config_item_bool ('use_frs', 'core') ;
 forge_define_config_item ('use_fti', 'core', $GLOBALS['sys_use_fti']) ;
-forge_config_item_bool ('use_fti', 'core') ;
+forge_set_config_item_bool ('use_fti', 'core') ;
 forge_define_config_item ('use_ftp', 'core', $GLOBALS['sys_use_ftp']) ;
-forge_config_item_bool ('use_ftp', 'core') ;
+forge_set_config_item_bool ('use_ftp', 'core') ;
 forge_define_config_item ('use_trove', 'core', $GLOBALS['sys_use_trove']) ;
-forge_config_item_bool ('use_trove', 'core') ;
+forge_set_config_item_bool ('use_trove', 'core') ;
 forge_define_config_item ('use_snippet', 'core', $GLOBALS['sys_use_snippet']) ;
-forge_config_item_bool ('use_snippet', 'core') ;
+forge_set_config_item_bool ('use_snippet', 'core') ;
 forge_define_config_item ('use_ssl', 'core', $GLOBALS['sys_use_ssl']) ;
-forge_config_item_bool ('use_ssl', 'core') ;
+forge_set_config_item_bool ('use_ssl', 'core') ;
 forge_define_config_item ('use_people', 'core', $GLOBALS['sys_use_people']) ;
-forge_config_item_bool ('use_people', 'core') ;
+forge_set_config_item_bool ('use_people', 'core') ;
 forge_define_config_item ('use_shell', 'core', $GLOBALS['sys_use_shell']) ;
-forge_config_item_bool ('use_shell', 'core') ;
+forge_set_config_item_bool ('use_shell', 'core') ;
 forge_define_config_item ('use_ratings', 'core', $GLOBALS['sys_use_ratings']) ;
-forge_config_item_bool ('use_ratings', 'core') ;
-forge_define_config_item ('use_ftpuploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
-forge_config_item_bool ('use_ftpuploads', 'core') ;
+forge_set_config_item_bool ('use_ratings', 'core') ;
+forge_define_config_item ('use_ftp_uploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
+forge_set_config_item_bool ('use_ftp_uploads', 'core') ;
 forge_define_config_item ('use_manual_uploads', 'core', $GLOBALS['sys_use_manual_uploads']) ;
-forge_config_item_bool ('use_manual_uploads', 'core') ;
+forge_set_config_item_bool ('use_manual_uploads', 'core') ;
 forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) ;
-forge_config_item_bool ('use_gateways', 'core') ;
+forge_set_config_item_bool ('use_gateways', 'core') ;
 forge_define_config_item ('use_project_vhost', 'core', $GLOBALS['sys_use_project_vhost']) ;
-forge_config_item_bool ('use_project_vhost', 'core') ;
+forge_set_config_item_bool ('use_project_vhost', 'core') ;
 forge_define_config_item ('use_project_database', 'core', $GLOBALS['sys_use_project_database']) ;
-forge_config_item_bool ('use_project_database', 'core') ;
+forge_set_config_item_bool ('use_project_database', 'core') ;
 forge_define_config_item ('use_project_multimedia', 'core', $GLOBALS['sys_use_project_multimedia']) ;
-forge_config_item_bool ('use_project_multimedia', 'core') ;
+forge_set_config_item_bool ('use_project_multimedia', 'core') ;
 forge_define_config_item ('download_host', 'core', $GLOBALS['sys_download_host']) ;
 forge_define_config_item ('shell_host', 'core', $GLOBALS['sys_shell_host']) ;
 forge_define_config_item ('users_host', 'core', $GLOBALS['sys_users_host']) ;
@@ -94,7 +93,7 @@ forge_define_config_item ('lists_host', 'core', $GLOBALS['sys_lists_host']) ;
 forge_define_config_item ('scm_host', 'core', $GLOBALS['sys_scm_host']) ;
 forge_define_config_item ('forum_return_domain', 'core', $GLOBALS['sys_forum_return_domain']) ;
 forge_define_config_item ('use_jabber', 'core', $GLOBALS['sys_use_jabber']) ;
-forge_config_item_bool ('use_jabber', 'core') ;
+forge_set_config_item_bool ('use_jabber', 'core') ;
 forge_define_config_item ('jabber_host', 'core', $GLOBALS['sys_jabber_server']) ;
 forge_define_config_item ('jabber_port', 'core', $GLOBALS['sys_jabber_port']) ;
 forge_define_config_item ('jabber_user', 'core', $GLOBALS['sys_jabber_user']) ;
@@ -136,9 +135,7 @@ forge_define_config_item ('data_path', 'core', $GLOBALS['sys_var_path']) ;
 forge_define_config_item ('chroot', 'core', $GLOBALS['sys_chroot']) ;
 forge_define_config_item ('config_path', 'core', $GLOBALS['sys_etc_path']) ;
 
-$pm = plugin_manager_get_object () ;
-
-if ($pm->PluginIsInstalled ('scmarch')) {
+if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {
 	require_once $gfconfig.'plugins/scmarch/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmarch', $default_arch_server) ;
@@ -150,7 +147,7 @@ if ($pm->PluginIsInstalled ('scmarch')) {
 	}
 }
 
-if ($pm->PluginIsInstalled ('scmbzr')) {
+if (file_exists ($gfconfig.'plugins/scmbzr/config.php')) {
 	require_once $gfconfig.'plugins/scmbzr/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmbzr', $default_bzr_server) ;
@@ -162,14 +159,14 @@ if ($pm->PluginIsInstalled ('scmbzr')) {
 	}
 }
 
-if ($pm->PluginIsInstalled ('scmccase')) {
+if (file_exists ($gfconfig.'plugins/scmccase/config.php')) {
 	require_once $gfconfig.'plugins/scmccase/config.php' ;
 	forge_define_config_item ('default_server', 'scmccase', $default_ccase_server) ;
 	forge_define_config_item ('this_server', 'scmccase', $this_server) ;
 	forge_define_config_item ('tag_pattern', 'scmccase', $tag_pattern) ;
 }
 
-if ($pm->PluginIsInstalled ('scmcvs')) {
+if (file_exists ($gfconfig.'plugins/scmcvs/config.php')) {
 	require_once $gfconfig.'plugins/scmcvs/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmcvs', $default_cvs_server) ;
@@ -183,7 +180,7 @@ if ($pm->PluginIsInstalled ('scmcvs')) {
 	}
 }
 
-if ($pm->PluginIsInstalled ('scmdarcs')) {
+if (file_exists ($gfconfig.'plugins/scmdarcs/config.php')) {
 	require_once $gfconfig.'plugins/scmdarcs/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmdarcs', $default_darcs_server) ;
@@ -195,7 +192,7 @@ if ($pm->PluginIsInstalled ('scmdarcs')) {
 	}
 }
 
-if ($pm->PluginIsInstalled ('scmgit')) {
+if (file_exists ($gfconfig.'plugins/scmgit/config.php')) {
 	require_once $gfconfig.'plugins/scmgit/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmgit', $default_git_server) ;
@@ -207,7 +204,7 @@ if ($pm->PluginIsInstalled ('scmgit')) {
 	}
 }
 
-if ($pm->PluginIsInstalled ('scmhg')) {
+if (file_exists ($gfconfig.'plugins/scmhg/config.php')) {
 	require_once $gfconfig.'plugins/scmhg/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmhg', $default_hg_server) ;
@@ -219,7 +216,7 @@ if ($pm->PluginIsInstalled ('scmhg')) {
 	}
 }
 
-if ($pm->PluginIsInstalled ('scmsvn')) {
+if (file_exists ($gfconfig.'plugins/scmsvn/config.php')) {
 	require_once $gfconfig.'plugins/scmsvn/config.php' ;
 	
 	forge_define_config_item ('default_server', 'scmsvn', $default_svn_server) ;
@@ -231,11 +228,11 @@ if ($pm->PluginIsInstalled ('scmsvn')) {
 	}
 
 	forge_define_config_item ('use_ssh', 'scmsvn', $use_ssh ? 1 : 0) ;
-	forge_config_item_bool ('use_ssh', 'scmsvn') ;
+	forge_set_config_item_bool ('use_ssh', 'scmsvn') ;
 	forge_define_config_item ('use_dav', 'scmsvn', $use_dav ? 1 : 0) ;
-	forge_config_item_bool ('use_dav', 'scmsvn') ;
+	forge_set_config_item_bool ('use_dav', 'scmsvn') ;
 	forge_define_config_item ('use_ssl', 'scmsvn', $use_ssl ? 1 : 0) ;
-	forge_config_item_bool ('use_ssl', 'scmsvn') ;
+	forge_set_config_item_bool ('use_ssl', 'scmsvn') ;
 }
 
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;

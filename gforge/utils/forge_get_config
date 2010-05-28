@@ -27,9 +27,21 @@ require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 if (count ($argv) == 3) {
-	echo forge_get_config ($argv[1], $argv[2]) . "\n" ;
+	$v = forge_get_config ($argv[1], $argv[2]) ;
+	if ($v === true) {
+		$v = 'yes' ;
+	} elseif ($v === false) {
+		$v = 'no' ;
+	}
+	echo "$v\n" ;
 } elseif (count($argv) == 2) {
-	echo forge_get_config ($argv[1]) . "\n" ;
+	$v = forge_get_config ($argv[1]) ;
+	if ($v === true) {
+		$v = 'yes' ;
+	} elseif ($v === false) {
+		$v = 'no' ;
+	}
+	echo "$v\n" ;
 } else {
 	echo "Usage: .../forge-get-config <variable> [ <section> ]
 For instance: .../forge-get-config web_host

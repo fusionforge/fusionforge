@@ -154,6 +154,9 @@ install: build
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
 	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
 
+# Rename config file
+	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/fusionforge/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/fusionforge/config.ini
+
 # Remove Windows files
 	rm -rf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
 
