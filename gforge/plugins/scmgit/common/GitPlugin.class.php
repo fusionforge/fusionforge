@@ -22,6 +22,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmgit', forge_get_config ('web_host')) ;
+forge_define_config_item ('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git') ;
+
 class GitPlugin extends SCMPlugin {
 	function GitPlugin () {
 		global $gfconfig;
@@ -33,20 +36,11 @@ class GitPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_gather_stats' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
 
-		require_once $gfconfig.'plugins/scmgit/config.php' ;
-
-		$this->default_git_server = $default_git_server ;
-		if (isset ($git_root)) {
-			$this->git_root = $git_root;
-		} else {
-			$this->git_root = forge_get_config('chroot').'/scmrepos/git' ;
-		}
-
 		$this->register () ;
 	}
 
 	function getDefaultServer() {
-		return $this->default_git_server ;
+		return forge_get_config('default_server', 'scmgit') ;
 	}
 
         function printShortStats ($params) {
@@ -107,10 +101,10 @@ class GitPlugin extends SCMPlugin {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
-			$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 		} else {
 			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 		}
 
 		if (session_loggedin()) {
@@ -121,7 +115,7 @@ class GitPlugin extends SCMPlugin {
 								  $u->getID())) ;
 				if ($result && db_numrows ($result) > 0) {
 					$b .= _('<p><b>Access to your personal repository</b></p><p>You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.</p>');
-					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . $this->git_root .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
+					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
 				} else {
 					$glist = $u->getGroups();
 					foreach ($glist as $g) {
@@ -233,7 +227,7 @@ class GitPlugin extends SCMPlugin {
 		}
 
 		$project_name = $project->getUnixName() ;
-		$root = $this->git_root . '/' . $project_name ;
+		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name ;
 		$unix_group = 'scm_' . $project_name ;
                 system ("mkdir -p $root") ;
 
@@ -315,7 +309,7 @@ class GitPlugin extends SCMPlugin {
 		$config_dir = '/etc/gforge/plugins/scmgit' ;
 		$fname = $config_dir . '/gitweb.conf' ;
 		$config_f = fopen ($fname.'.new', 'w') ;
-		$rootdir = $this->git_root;
+		$rootdir = forge_get_config('repos_path', 'scmgit');
 		fwrite($config_f, "\$projectroot = '$rootdir';\n");
 		fwrite($config_f, "\$projects_list = '$config_dir/gitweb.list';\n");
 		fwrite($config_f, "@git_base_url_list = ('". util_make_url ('/anonscm/git') . "');\n");
@@ -386,7 +380,7 @@ class GitPlugin extends SCMPlugin {
 		}
 
                 // TODO: ideally we generate one snapshot per git repository
-		$toprepo = $this->git_root ;
+		$toprepo = forge_get_config('repos_path', 'scmgit') ;
 		$repo = $toprepo . '/' . $project->getUnixName() . '/' .  $project->getUnixName() . '.git' ;
 
 		if (!is_dir ($repo)) {
@@ -442,7 +436,7 @@ class GitPlugin extends SCMPlugin {
 			$adds    = 0 ;
 			$updates = 0 ;
 
-			$repo = $this->git_root . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
+			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 			if (!is_dir ($repo) || !is_dir ("$repo/refs")) {
 				// echo "No repository\n" ;
 				db_rollback () ;

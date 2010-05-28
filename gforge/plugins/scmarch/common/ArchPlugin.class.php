@@ -21,6 +21,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmarch', forge_get_config ('web_host')) ;
+forge_define_config_item ('repos_path', 'scmarch', forge_get_config('chroot').'/scmrepos/arch') ;
+
 class ArchPlugin extends SCMPlugin {
 	function ArchPlugin () {
 		global $gfconfig;
@@ -29,20 +32,11 @@ class ArchPlugin extends SCMPlugin {
 		$this->text = 'Arch';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 
-		require_once $gfconfig.'plugins/scmarch/config.php' ;
-		
-		$this->default_arch_server = $default_arch_server ;
-		if (isset ($arch_root)) {
-			$this->arch_root = $arch_root;
-		} else {
-			$this->arch_root = forge_get_config('chroot').'/scmrepos/arch' ;
-		}
-
 		$this->register () ;
 	}
 	
 	function getDefaultServer() {
-		return $this->default_arch_server ;
+		return forge_get_config('default_server', 'scmarch') ;
 	}
 
 	function getBlurb () {
@@ -59,7 +53,7 @@ class ArchPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->arch_root . '/' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmarch') . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		$repo_exists = false ;
@@ -100,7 +94,7 @@ class ArchPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$toprepo = $this->arch_root ;
+		$toprepo = forge_get_config('repos_path', 'scmarch') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {

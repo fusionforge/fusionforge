@@ -21,6 +21,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmbzr', forge_get_config ('web_host')) ;
+forge_define_config_item ('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr') ;
+
 class BzrPlugin extends SCMPlugin {
 	function BzrPlugin () {
 		global $gfconfig;
@@ -31,15 +34,6 @@ class BzrPlugin extends SCMPlugin {
                 $this->hooks[] = 'scm_browser_page';
                 $this->hooks[] = 'scm_update_repolist' ;
                 $this->hooks[] = 'scm_gather_stats' ;
-
-		require_once $gfconfig.'plugins/scmbzr/config.php' ;
-		
-		$this->default_bzr_server = $default_bzr_server ;
-		if (isset ($bzr_root)) {
-			$this->bzr_root = $bzr_root;
-		} else {
-			$this->bzr_root = forge_get_config('chroot').'/scmrepos/bzr' ;
-		}
 
 		$this->main_branch_names = array () ;
 		$this->main_branch_names[] = 'trunk' ;
@@ -52,7 +46,7 @@ class BzrPlugin extends SCMPlugin {
 	}
 	
 	function getDefaultServer() {
-		return $this->default_bzr_server ;
+		return forge_get_config('default_server', 'scmbzr') ;
 	}
 
 	function printShortStats ($params) {
@@ -94,10 +88,10 @@ class BzrPlugin extends SCMPlugin {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
-			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $project->getSCMBox() . $this->bzr_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		} else {
 			$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
-			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->bzr_root .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
+			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		}
 		return $b ;
 	}
@@ -147,7 +141,7 @@ class BzrPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->bzr_root . '/' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmbzr') . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		$repo_exists = false ;
@@ -220,7 +214,7 @@ class BzrPlugin extends SCMPlugin {
 			unlink ($dir . '/' . $del) ;
 		}
 		foreach ($createlist as $create) {
-			symlink ($this->bzr_root . '/' . $create, $dir . '/' . $create) ;
+			symlink (forge_get_config('repos_path', 'scmbzr') . '/' . $create, $dir . '/' . $create) ;
 		}
         }
 
@@ -251,7 +245,7 @@ class BzrPlugin extends SCMPlugin {
 			$usr_updates = array () ;
 			$usr_adds = array () ;
 
-			$toprepo = $this->bzr_root ;
+			$toprepo = forge_get_config('repos_path', 'scmbzr') ;
 			$repo = $toprepo . '/' . $project->getUnixName() ;
 
 			$branch = $this->findMainBranch ($project) ;
@@ -387,7 +381,7 @@ class BzrPlugin extends SCMPlugin {
         }
 
 	function findMainBranch ($project) {
-		$toprepo = $this->bzr_root ;
+		$toprepo = forge_get_config('repos_path', 'scmbzr') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		$branch = '' ;
@@ -426,7 +420,7 @@ class BzrPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$toprepo = $this->bzr_root ;
+		$toprepo = forge_get_config('repos_path', 'scmbzr') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {

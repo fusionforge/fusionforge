@@ -21,6 +21,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmdarcs', forge_get_config ('web_host')) ;
+forge_define_config_item ('repos_path', 'scmdarcs', forge_get_config('chroot').'/scmrepos/darcs') ;
+
 class DarcsPlugin extends SCMPlugin {
 	function DarcsPlugin () {
 		global $gfconfig;
@@ -32,20 +35,11 @@ class DarcsPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_browser_page' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 		
-		require_once $gfconfig.'plugins/scmdarcs/config.php' ;
-		
-		$this->default_darcs_server = $default_darcs_server ;
-		if (isset ($darcs_root)) {
-			$this->darcs_root = $darcs_root;
-		} else {
-			$this->darcs_root = forge_get_config('chroot').'/scmrepos/darcs' ;
-		}
-		
 		$this->register () ;
 	}
 	
 	function getDefaultServer() {
-		return $this->default_darcs_server ;
+		return forge_get_config('default_server', 'scmdarcs') ;
 	}
 
 	function printShortStats ($params) {
@@ -83,7 +77,7 @@ class DarcsPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		$b = _('<p><b>Developer Darcs Access via SSH</b></p><p>Only project developers can access the Darcs tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>darcs get '.$project->getSCMBox() . ':'. $this->darcs_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+		$b .= '<p><tt>darcs get '.$project->getSCMBox() . ':'. forge_get_config('repos_path', 'scmdarcs') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		return $b ;
 	}
 
@@ -179,7 +173,7 @@ class DarcsPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->darcs_root . '/' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmdarcs') . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		if (!is_dir ($repo."/_darcs")) {
@@ -219,7 +213,7 @@ class DarcsPlugin extends SCMPlugin {
 			$classname = str_replace ('-', '_',
 						  'repo_' . $project->getUnixName()) ;
 			
-			$repo = $this->darcs_root . '/' . $project->getUnixName() ;
+			$repo = forge_get_config('repos_path', 'scmdarcs') . '/' . $project->getUnixName() ;
 			fwrite ($f, "class $classname:\n"
 				."\treponame = '".$project->getUnixName()."'\n"
 				."\t".'repodesc = """'.$project->getPublicName().'"""'."\n"
@@ -255,7 +249,7 @@ class DarcsPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$toprepo = $this->darcs_root ;
+		$toprepo = forge_get_config('repos_path', 'scmdarcs') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo)) {
@@ -314,7 +308,7 @@ class DarcsPlugin extends SCMPlugin {
 			$usr_updates = array () ;
 			$usr_deletes = array ();
 		
-			$repo = $this->darcs_root . '/' . $project->getUnixName() ;
+			$repo = forge_get_config('repos_path', 'scmdarcs') . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_dir ("$repo/_darcs")) {
 				echo "No repository\n" ;
 				db_rollback () ;

@@ -21,6 +21,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmcvs', forge_get_config ('web_host')) ;
+forge_define_config_item ('repos_path', 'scmcvs', forge_get_config('chroot').'/scmrepos/cvs') ;
+
 class CVSPlugin extends SCMPlugin {
 	function CVSPlugin () {
 		global $cvs_root;
@@ -33,22 +36,11 @@ class CVSPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 
-		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
-
-		$this->default_cvs_server = $default_cvs_server ;
-		if ($cvs_root) {
-			$this->cvs_root = $cvs_root;
-		} elseif ($cvsdir_prefix) {
-			$this->cvs_root = $cvsdir_prefix;
-		} else {
-			$this->cvs_root = forge_get_config('chroot').'/scmrepos/cvs' ;
-		} 
-
 		$this->register () ;
 	}
 	
 	function getDefaultServer() {
-		return $this->default_cvs_server;
+		return forge_get_config('default_server', 'scmcvs');
 	}
 
 	function printShortStats ($params) {
@@ -77,7 +69,7 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
+		$cvsrootend = $project->getSCMBox().':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
 		$b = _('<p><b>Anonymous CVS Access</b></p><p>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>');
 		$b .= '<p>
 		       <tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
@@ -88,7 +80,7 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForRW ($project) {
-		$cvsrootend = $project->getSCMBox().':'.$this->cvs_root.'/'.$project->getUnixName();
+		$cvsrootend = $project->getSCMBox().':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
@@ -199,8 +191,8 @@ class CVSPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
-		$locks_dir = $this->cvs_root . '/cvs-locks/' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmcvs') . '/' . $project->getUnixName() ;
+		$locks_dir = forge_get_config('repos_path', 'scmcvs') . '/cvs-locks/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		$repo_exists = false ;
@@ -242,7 +234,7 @@ class CVSPlugin extends SCMPlugin {
 			$day_begin = gmmktime( 0, 0, 0, $month, $day, $year);
 			$day_end = $day_begin + 86400;
 			
-			$repo = $this->cvs_root . '/' . $project->getUnixName() ;
+			$repo = forge_get_config('repos_path', 'scmcvs') . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_dir ("$repo/CVSROOT")) {
 				echo "No repository\n" ;
 				db_rollback () ;
@@ -388,7 +380,7 @@ class CVSPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$toprepo = $this->cvs_root ;
+		$toprepo = forge_get_config('repos_path', 'scmcvs') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		$repo_exists = false ;

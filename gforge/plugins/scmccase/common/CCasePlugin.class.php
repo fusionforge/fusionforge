@@ -22,6 +22,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmccase', forge_get_config ('web_host')) ;
+forge_define_config_item ('tag_pattern', 'scmccase', '') ;
+
 class CCasePlugin extends SCMPlugin {
 	function CCasePlugin () {
 		global $gfconfig;
@@ -34,12 +37,6 @@ class CCasePlugin extends SCMPlugin {
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "scm_createrepo";
 		$this->hooks[] = "scm_plugin";
-
-		require_once $gfconfig.'plugins/scmccase/config.php' ;
-		
-		$this->default_ccase_server = $default_ccase_server ;
-		$this->this_server = $this_server ;
-		$this->tag_pattern = $tag_pattern ;
 
 		$this->register () ;
 	}
@@ -79,7 +76,7 @@ class CCasePlugin extends SCMPlugin {
 		$project =& group_get_object($group_id);
 		
 		if ($project->usesPlugin ("scmccase")) {
-			$vob_tag = ereg_replace ("GROUPNAME", $project->getUnixName (), $this->tag_pattern) ;
+			$vob_tag = ereg_replace ("GROUPNAME", $project->getUnixName (), forge_get_config('tag_pattern', 'scmccase')) ;
 	
 			print '<h2>ClearCase</h2>
 		                <p>Documentation for ClearCase is probably available somewhere.
@@ -173,14 +170,14 @@ class CCasePlugin extends SCMPlugin {
 	
 
 	function GetDefaultServer () {
-		return $this->default_ccase_server ;
+		return forge_get_config('default_server', 'scmccase') ;
 	}
 
 	function GetGroupServer ($group_id) {
 		$res = db_query_params ('SELECT ccase_host FROM plugin_scmccase_group_usage WHERE group_id = $1',
 			array ($group_id));
 		if (db_numrows($res) == 0) {
-			return $this->default_ccase_server ;
+			return forge_get_config('default_server', 'scmccase') ;
 		} else {
 			return db_result($res,0,'ccase_host');
 		}

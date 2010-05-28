@@ -21,6 +21,9 @@
  * USA
  */
 
+forge_define_config_item ('default_server', 'scmhg', forge_get_config ('web_host')) ;
+forge_define_config_item ('repos_path', 'scmhg', forge_get_config('chroot').'/scmrepos/hg') ;
+
 class HgPlugin extends SCMPlugin {
 	function HgPlugin () {
 		global $gfconfig;
@@ -29,20 +32,11 @@ class HgPlugin extends SCMPlugin {
 		$this->text = 'Mercurial';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		
-		require_once $gfconfig.'plugins/scmhg/config.php' ;
-		
-		$this->default_hg_server = $default_hg_server ;
-		if (isset ($hg_root)) {
-			$this->hg_root = $hg_root;
-		} else {
-			$this->hg_root = forge_get_config('chroot').'/scmrepos/hg' ;
-		}
-		
 		$this->register () ;
 	}
 	
 	function getDefaultServer() {
-		return $this->default_hg_server ;
+		return forge_get_config('default_server', 'scmhg') ;
 	}
 
 	function getBlurb () {
@@ -62,11 +56,11 @@ class HgPlugin extends SCMPlugin {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
-			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . $this->hg_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		} else {
 			$d = '<i>developername</i>';
 			$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
-			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . $this->hg_root .'/'. $project->getUnixName().'/ .</tt></p>' ;
+			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		}
 		return $b ;
 	}
@@ -93,7 +87,7 @@ class HgPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->hg_root . '/' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmhg') . '/' . $project->getUnixName() ;
 		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		system ("mkdir -p $repo") ;
@@ -131,7 +125,7 @@ class HgPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$toprepo = $this->hg_root ;
+		$toprepo = forge_get_config('repos_path', 'scmhg') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo)) {
