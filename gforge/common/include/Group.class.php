@@ -966,16 +966,26 @@ class Group extends Error {
 	 *	@return boolean enable_scm.
 	 */
 	function enableAnonSCM() {
+		if (USE_PFO_RBAC) {
+			$r = RoleAnonymous::getInstance () ;
+			return $r->hasPermission ('scm', $this->getID(), 'read') ;
+		} else {
 		if ($this->isPublic() && $this->usesSCM()) {
 			return $this->data_array['enable_anonscm'];
 		} else {
 			return false;
+		}
 		}
 	}
 
 	function SetUsesAnonSCM ($booleanparam) {
 		db_begin () ;
 		$booleanparam = $booleanparam ? 1 : 0 ;
+		if (USE_PFO_RBAC) {
+			$r = RoleAnonymous::getInstance () ;
+			$r->setSetting ('scm', $this->getID(), $booleanparam) ;
+			db_commit () ;
+		} else {
 		$res = db_query_params ('UPDATE groups SET enable_anonscm=$1 WHERE group_id=$2',
 					array ($booleanparam, $this->getID()));
 		if ($res) {
@@ -984,6 +994,7 @@ class Group extends Error {
 		} else {
 			db_rollback ();
 			return false;
+		}
 		}
 	}
 
