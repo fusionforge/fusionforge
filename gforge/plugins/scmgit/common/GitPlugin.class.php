@@ -285,7 +285,7 @@ class GitPlugin extends SCMPlugin {
         }
 
 	function generateSnapshots ($params) {
-		global $sys_scm_tarballs_path ;
+		global $sys_scm_tarballs_path, $sys_scm_snapshots_path ;
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
