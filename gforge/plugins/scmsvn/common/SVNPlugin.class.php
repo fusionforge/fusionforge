@@ -1,7 +1,7 @@
 <?php
 /** FusionForge Subversion plugin
  *
- * Copyright 2003-2009, Roland Mas
+ * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  *
  * This file is part of FusionForge.
@@ -30,6 +30,8 @@ forge_define_config_item ('use_dav', 'scmsvn', true) ;
 forge_set_config_item_bool ('use_dav', 'scmsvn') ;
 forge_define_config_item ('use_ssl', 'scmsvn', true) ;
 forge_set_config_item_bool ('use_ssl', 'scmsvn') ;
+forge_define_config_item ('anonsvn_login','scmsvn', 'anonsvn');
+forge_define_config_item ('anonsvn_password','scmsvn', 'anonsvn');
 
 class SVNPlugin extends SCMPlugin {
 	function SVNPlugin () {
@@ -81,8 +83,8 @@ class SVNPlugin extends SCMPlugin {
 			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().'/trunk</tt><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-			$b .= '<tt>svn checkout --username anonsvn http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'/trunk</tt><br/><br/>';
-			$b .= _('The password is \'anonsvn\'').'<br/>';
+			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_user', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'/trunk</tt><br/><br/>';
+			$b .= _('The password is ').forge_get_config('anonsvn_pass', 'scmsvn').'<br/>';
 		}
 		$b .= '</p>';
 		return $b ;
