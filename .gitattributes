@@ -252,6 +252,13 @@ gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
 gforge/etc/config.ini-fhs -text
 gforge/etc/config.ini-opt -text
+gforge/etc/config.ini.d/scmarch.ini -text
+gforge/etc/config.ini.d/scmbzr.ini -text
+gforge/etc/config.ini.d/scmccase.ini -text
+gforge/etc/config.ini.d/scmcvs.ini -text
+gforge/etc/config.ini.d/scmdarcs.ini -text
+gforge/etc/config.ini.d/scmgit.ini -text
+gforge/etc/config.ini.d/scmhg.ini -text
 gforge/etc/config.ini.d/scmsvn.ini -text
 gforge/etc/database.py.example -text
 gforge/etc/httpd.d/01common.ssl -text
@@ -1203,6 +1210,7 @@ gforge/plugins/quota_management/www/quota_project.php -text
 gforge/plugins/scmarch/common/ArchPlugin.class.php -text
 gforge/plugins/scmarch/common/scmarch-init.php -text
 gforge/plugins/scmarch/etc/plugins/scmarch/config.php -text
+gforge/plugins/scmarch/etc/scmarch.ini -text
 gforge/plugins/scmarch/packaging/control/136plugin-scmarch -text
 gforge/plugins/scmarch/packaging/control/136plugin-scmarch.shortdesc -text
 gforge/plugins/scmarch/packaging/dirs/plugin-scmarch -text
@@ -1211,11 +1219,14 @@ gforge/plugins/scmbzr/common/BzrPlugin.class.php -text
 gforge/plugins/scmbzr/common/scmbzr-init.php -text
 gforge/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
 gforge/plugins/scmbzr/etc/plugins/scmbzr/serve-branches.conf -text
+gforge/plugins/scmbzr/etc/scmbzr.ini -text
 gforge/plugins/scmbzr/packaging/control/132plugin-scmbzr -text
 gforge/plugins/scmbzr/packaging/control/132plugin-scmbzr.shortdesc -text
 gforge/plugins/scmbzr/packaging/dirs/plugin-scmbzr -text
 gforge/plugins/scmbzr/packaging/install/plugin-scmbzr -text
+gforge/plugins/scmccase/etc/scmccase.ini -text
 gforge/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
+gforge/plugins/scmcvs/etc/scmcvs.ini -text
 gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
 gforge/plugins/scmcvs/packaging/control/130plugin-scmcvs -text
 gforge/plugins/scmcvs/packaging/control/130plugin-scmcvs.shortdesc -text
@@ -1224,6 +1235,7 @@ gforge/plugins/scmcvs/packaging/install/plugin-scmcvs -text
 gforge/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 gforge/plugins/scmdarcs/common/scmdarcs-init.php -text
 gforge/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
+gforge/plugins/scmdarcs/etc/scmdarcs.ini -text
 gforge/plugins/scmdarcs/packaging/control/135plugin-scmdarcs -text
 gforge/plugins/scmdarcs/packaging/control/135plugin-scmdarcs.shortdesc -text
 gforge/plugins/scmdarcs/packaging/dirs/plugin-scmdarcs -text
@@ -1235,6 +1247,7 @@ gforge/plugins/scmgit/common/GitPlugin.class.php -text
 gforge/plugins/scmgit/common/scmgit-init.php -text
 gforge/plugins/scmgit/db/scmgit-init.sql -text
 gforge/plugins/scmgit/etc/plugins/scmgit/config.php -text
+gforge/plugins/scmgit/etc/scmgit.ini -text
 gforge/plugins/scmgit/packaging/control/133plugin-scmgit -text
 gforge/plugins/scmgit/packaging/control/133plugin-scmgit.shortdesc -text
 gforge/plugins/scmgit/packaging/dirs/plugin-scmgit -text
@@ -1244,6 +1257,7 @@ gforge/plugins/scmgit/www/index.php -text
 gforge/plugins/scmhg/common/HgPlugin.class.php -text
 gforge/plugins/scmhg/common/scmhg-init.php -text
 gforge/plugins/scmhg/etc/plugins/scmhg/config.php -text
+gforge/plugins/scmhg/etc/scmhg.ini -text
 gforge/plugins/scmhg/packaging/control/134plugin-scmhg -text
 gforge/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 gforge/plugins/scmhg/packaging/dirs/plugin-scmhg -text
