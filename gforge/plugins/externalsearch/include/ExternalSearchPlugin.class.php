@@ -15,7 +15,7 @@ global $gfplugins;
 require_once $gfplugins.'externalsearch/include/ExternalSearchEngine.class.php';
 
 forge_define_config_item('engines','externalsearch',
-			 '{"Google":"http:\/\/www.google.com\/search?as_sitesearch=%web_host%&as_q=","AllTheWeb":"http:\/\/alltheweb.com\/search?advanced=1&dincl=%web_host%&q="}'
+			 '{"Google":"http:\/\/www.google.com\/search?as_sitesearch=$core/web_host&as_q=","AllTheWeb":"http:\/\/alltheweb.com\/search?advanced=1&dincl=$core/web_host&q="}'
 	) ;
 
 class ExternalSearchPlugin extends Plugin {
@@ -34,12 +34,9 @@ class ExternalSearchPlugin extends Plugin {
 				$externalSearchEngines = json_decode (forge_get_config ('engines', 'externalsearch')) ;
 				foreach($externalSearchEngines AS $name => $url) {
 					$type = SEARCH__TYPE_IS_EXTERNAL.'_'.$name;
-					$parsedurl = preg_replace ('%web_host%',
-								   forge_get_config ('web_host',
-										     $url)) ;
 					$searchManager->addSearchEngine(
 						$type,
-						new ExternalSearchEngine($type, $name, $parsedurl)
+						new ExternalSearchEngine($type, $name, $url)
 					);
 				}
 				break;
