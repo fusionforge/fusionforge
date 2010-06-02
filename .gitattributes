@@ -341,6 +341,7 @@ gforge/packaging/links/web-apache2 -text
 gforge/plugins/blocks/common/blocks-init.php -text
 gforge/plugins/blocks/common/blocksPlugin.class.php -text
 gforge/plugins/blocks/db/blocks-init.sql -text
+gforge/plugins/blocks/etc/plugins/blocks/config.ini -text
 gforge/plugins/blocks/etc/plugins/blocks/config.php -text
 gforge/plugins/blocks/www/index.php -text
 gforge/plugins/contribtracker/INSTALL -text
