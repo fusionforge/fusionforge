@@ -256,6 +256,13 @@ if (file_exists ($gfconfig.'plugins/externalsearch/config.php')) {
 	forge_define_config_item ('engines', 'externalsearch', json_encode($externalSearchEngines)) ;
 }
 
+// Blocks plugin
+if (file_exists ($gfconfig.'plugins/blocks/config.php')) {
+	require_once $gfconfig.'plugins/blocks/config.php' ;
+	
+	forge_define_config_item ('templates', 'blocks', json_encode($plugins_blocks_templates)) ;
+}
+
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

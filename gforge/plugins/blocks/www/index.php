@@ -328,11 +328,12 @@ if (!$type) {
 		print "<input type=\"hidden\" name=\"name\" value=\"$name\" />\n";
 
 		// Get default page from the templates defined in the config file.
+		$templates=json_decode(forge_get_config('templates','blocks')) ;
 		if (!$body) {
-			if (isset($plugins_blocks_templates[$name])) {
-				$body = $plugins_blocks_templates[$name];
+			if (isset($templates[$name])) {
+				$body = $templates[$name];
 			} else {
-				$body = $plugins_blocks_templates['*'];
+				$body = $templates['*'];
 			}
 		}
 			

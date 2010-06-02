@@ -44,6 +44,8 @@
  * ALONE BASIS."
  */
 
+forge_define_config_item('templates','blocks','{"summary_right":"{boxTop Project}\nEnter your text here\n{boxBottom}","summary_description":"Enter your description here","*":"{boxHeader}Enter your text here{boxFooter}"}');
+
 class blocksPlugin extends Plugin {
 	function blocksPlugin () {
 		$this->Plugin() ;
