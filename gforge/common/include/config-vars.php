@@ -135,6 +135,7 @@ forge_define_config_item ('data_path', 'core', $GLOBALS['sys_var_path']) ;
 forge_define_config_item ('chroot', 'core', $GLOBALS['sys_chroot']) ;
 forge_define_config_item ('config_path', 'core', $GLOBALS['sys_etc_path']) ;
 
+// Arch plugin
 if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {
 	require_once $gfconfig.'plugins/scmarch/config.php' ;
 	
@@ -147,6 +148,7 @@ if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {
 	}
 }
 
+// Bazaar plugin
 if (file_exists ($gfconfig.'plugins/scmbzr/config.php')) {
 	require_once $gfconfig.'plugins/scmbzr/config.php' ;
 	
@@ -159,6 +161,7 @@ if (file_exists ($gfconfig.'plugins/scmbzr/config.php')) {
 	}
 }
 
+// ClearCase plugin
 if (file_exists ($gfconfig.'plugins/scmccase/config.php')) {
 	require_once $gfconfig.'plugins/scmccase/config.php' ;
 	forge_define_config_item ('default_server', 'scmccase', $default_ccase_server) ;
@@ -166,6 +169,7 @@ if (file_exists ($gfconfig.'plugins/scmccase/config.php')) {
 	forge_define_config_item ('tag_pattern', 'scmccase', $tag_pattern) ;
 }
 
+// CVS plugin
 if (file_exists ($gfconfig.'plugins/scmcvs/config.php')) {
 	require_once $gfconfig.'plugins/scmcvs/config.php' ;
 	
@@ -180,6 +184,7 @@ if (file_exists ($gfconfig.'plugins/scmcvs/config.php')) {
 	}
 }
 
+// Darcs plugin
 if (file_exists ($gfconfig.'plugins/scmdarcs/config.php')) {
 	require_once $gfconfig.'plugins/scmdarcs/config.php' ;
 	
@@ -192,6 +197,7 @@ if (file_exists ($gfconfig.'plugins/scmdarcs/config.php')) {
 	}
 }
 
+// Git plugin
 if (file_exists ($gfconfig.'plugins/scmgit/config.php')) {
 	require_once $gfconfig.'plugins/scmgit/config.php' ;
 	
@@ -204,6 +210,7 @@ if (file_exists ($gfconfig.'plugins/scmgit/config.php')) {
 	}
 }
 
+// Mercurial plugin
 if (file_exists ($gfconfig.'plugins/scmhg/config.php')) {
 	require_once $gfconfig.'plugins/scmhg/config.php' ;
 	
@@ -216,6 +223,7 @@ if (file_exists ($gfconfig.'plugins/scmhg/config.php')) {
 	}
 }
 
+// Subversion plugin
 if (file_exists ($gfconfig.'plugins/scmsvn/config.php')) {
 	require_once $gfconfig.'plugins/scmsvn/config.php' ;
 	
@@ -233,6 +241,12 @@ if (file_exists ($gfconfig.'plugins/scmsvn/config.php')) {
 	forge_set_config_item_bool ('use_dav', 'scmsvn') ;
 	forge_define_config_item ('use_ssl', 'scmsvn', $use_ssl ? 1 : 0) ;
 	forge_set_config_item_bool ('use_ssl', 'scmsvn') ;
+}
+
+// Mediawiki plugin
+if (isset ($sys_use_mwframe)) {
+	forge_define_config_item ('use_frame', 'mediawiki', $sys_use_mwframe ? 1 : 0) ;
+	forge_set_config_item_bool ('use_frame', 'mediawiki') ;
 }
 
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;

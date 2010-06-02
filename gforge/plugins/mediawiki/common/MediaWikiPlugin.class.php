@@ -21,6 +21,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
+
+forge_define_config_item('var_path','mediawiki', forge_get_config('data_path')."/plugins/mediawiki");
+forge_define_config_item('master_path', 'mediawiki', forge_get_config('source_path')."/plugins/mediawiki/www");
+forge_define_config_item('projects_path', 'mediawiki', forge_get_config('data_path')."/plugins/mediawiki/projects");
+
+forge_define_config_item('enable_uploads', 'mediawiki', false);
+forge_set_config_item_bool('enable_uploads', 'mediawiki');
+forge_define_config_item('use_frame', 'mediawiki', false);
+forge_set_config_item_bool('use_frame', 'mediawiki');
+
+
 class MediaWikiPlugin extends Plugin {
 	function MediaWikiPlugin () {
 		$this->Plugin() ;
@@ -37,8 +49,6 @@ class MediaWikiPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $use_mediawikiplugin,$G_SESSION,$HTML;
-
 		if (isset($params['group_id'])) {
 			$group_id=$params['group_id'];
 		} elseif (isset($params['group'])) {
@@ -59,7 +69,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				if ($GLOBALS['sys_use_mwframe']){
+				if (forge_get_config('use_frame', 'mediawiki')){
 					$params['DIRS'][]=util_make_url ('/plugins/mediawiki/frame.php?group_id=' . $project->getID()) ; 
 				} else {
 					$params['DIRS'][]=util_make_url('/plugins/mediawiki/wiki/'.$project->getUnixName().'/index.php');

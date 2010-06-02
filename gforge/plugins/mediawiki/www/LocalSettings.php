@@ -25,16 +25,7 @@
 include dirname(__FILE__) . '/../../env.inc.php';
 include $gfcgfile;
 
-if ( isset( $_SERVER ) && 
-     array_key_exists( 'REQUEST_METHOD', $_SERVER ) ) {
-	// when loaded from the server
-	include $gfwww. 'include/pre.php';
-} else {
-	// when run from the command line
-        include $gfconfig . 'database.inc';
-}
-
-include $gfplugins . 'mediawiki/common/config-vars.php';
+include $gfwww. 'include/pre.php';
 
 $IP = forge_get_config('master_path', 'mediawiki');
 

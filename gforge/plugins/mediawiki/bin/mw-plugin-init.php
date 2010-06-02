@@ -26,7 +26,6 @@
 
 include (dirname(__FILE__) . '/../../env.inc.php');
 require_once $gfwww.'include/pre.php';
-include ($gfplugins . 'mediawiki/common/config-vars.php');
 
 $echo_links = $argc >= 1;
 

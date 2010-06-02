@@ -34,7 +34,6 @@
 include dirname(__FILE__) . '/../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 include $gfcommon.'include/cron_utils.php';
-include $gfplugins . 'mediawiki/common/config-vars.php';
 
 $src_path = forge_get_config('src_path', 'mediawiki');
 $master_path = forge_get_config('master_path', 'mediawiki');

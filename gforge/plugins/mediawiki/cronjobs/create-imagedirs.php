@@ -29,7 +29,6 @@
 include dirname(__FILE__) . '/../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 include $gfcommon.'include/cron_utils.php';
-include $gfplugins . 'mediawiki/common/config-vars.php';
 
 if (forge_get_config('enable_uploads', 'mediawiki')) {
 	$upload_dir_basename = "images";

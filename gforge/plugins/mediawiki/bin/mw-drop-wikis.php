@@ -28,7 +28,6 @@ if ($argc < 2 ) {
 
 include dirname(__FILE__) . '/../../env.inc.php';
 require_once $gfwww.'include/pre.php';
-include $gfplugins . 'mediawiki/common/config-vars.php';
 
 $projects_path = forge_get_config('projects_path', 'mediawiki');
 
