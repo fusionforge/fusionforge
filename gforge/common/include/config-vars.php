@@ -249,6 +249,13 @@ if (isset ($sys_use_mwframe)) {
 	forge_set_config_item_bool ('use_frame', 'mediawiki') ;
 }
 
+// Externalsearch plugin
+if (file_exists ($gfconfig.'plugins/externalsearch/config.php')) {
+	require_once $gfconfig.'plugins/externalsearch/config.php' ;
+	
+	forge_define_config_item ('engines', 'externalsearch', json_encode($externalSearchEngines)) ;
+}
+
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:

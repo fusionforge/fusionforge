@@ -139,6 +139,8 @@ add_config scmsvn use_ssl >> $tmp
 
 add_config mediawiki enable_uploads >> $tmp
 
+add_config externalsearch engines >> $tmp
+
 mv $tmp $config_path/zzz-migrated-old-config
 chmod 644 $config_path/zzz-migrated-old-config
 
