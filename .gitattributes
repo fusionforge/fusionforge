@@ -252,6 +252,9 @@ gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
 gforge/etc/config.ini-fhs -text
 gforge/etc/config.ini-opt -text
+gforge/etc/config.ini.d/blocks.ini -text
+gforge/etc/config.ini.d/externalsearch.ini -text
+gforge/etc/config.ini.d/mantis.ini -text
 gforge/etc/config.ini.d/mediawiki.ini -text
 gforge/etc/config.ini.d/scmarch.ini -text
 gforge/etc/config.ini.d/scmbzr.ini -text
@@ -349,7 +352,7 @@ gforge/packaging/links/web-apache2 -text
 gforge/plugins/blocks/common/blocks-init.php -text
 gforge/plugins/blocks/common/blocksPlugin.class.php -text
 gforge/plugins/blocks/db/blocks-init.sql -text
-gforge/plugins/blocks/etc/plugins/blocks/config.ini -text
+gforge/plugins/blocks/etc/blocks.ini -text
 gforge/plugins/blocks/etc/plugins/blocks/config.php -text
 gforge/plugins/blocks/www/index.php -text
 gforge/plugins/contribtracker/INSTALL -text
@@ -370,7 +373,7 @@ gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#appli
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2+free.tar.gz -text svneol=unset#unset
 gforge/plugins/env.inc.php -text
-gforge/plugins/externalsearch/etc/config.ini -text
+gforge/plugins/externalsearch/etc/externalsearch.ini -text
 gforge/plugins/extratabs/README -text
 gforge/plugins/extratabs/bin/db-delete.pl -text
 gforge/plugins/extratabs/bin/db-upgrade.pl -text
@@ -1032,7 +1035,7 @@ gforge/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 gforge/plugins/globalsearch/www/edit_assoc_sites.php -text
 gforge/plugins/globalsearch/www/index.php -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
-gforge/plugins/mantis/etc/plugins/mantis/config.ini -text
+gforge/plugins/mantis/etc/mantis.ini -text
 gforge/plugins/mantisbt/action/addAttachment.php -text
 gforge/plugins/mantisbt/action/addIssue.php -text
 gforge/plugins/mantisbt/action/addNote.php -text
