@@ -534,7 +534,7 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ( 1 ) && do {
-		  $sql .= $l ;
+		  $sql .= $l."\n" ;
 
 		  $l = <F> ;
 		  unless ($l) {
@@ -661,7 +661,7 @@ sub parse_sql_file ( $ ) {
 }
 
 sub sql_parser_debug ( $ ) {
-    # return ;
+    return ;
     my $v = shift ;
     chomp $v ;
     print STDERR "$v\n" ;
