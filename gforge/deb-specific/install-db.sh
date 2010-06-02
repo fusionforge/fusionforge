@@ -210,6 +210,31 @@ EOF
 		fi
 	fi
 	
+        # Grant appropriate permissions to the database (for schema creation)
+	tmp1=$(mktemp /tmp/$pattern)
+	tmp2=$(mktemp /tmp/$pattern)
+	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<EOF \
+	    && [ "$(tail -n +2 $tmp1 | head -1)" = 'GRANT' ] ; 
+SET LC_MESSAGES = 'C' ;
+GRANT CREATE ON DATABASE $db_name TO $db_user ;
+EOF
+	then
+  	    # Grant OK 
+	    echo -n ""
+	    rm -f $tmp1 $tmp2
+	else
+	    echo "Cannot grant permissions to PostgreSQL database...  This shouldn't have happened."
+	    echo "Maybe a problem in your PostgreSQL configuration?"
+	    echo "Please report a bug to the Debian bug tracking system"
+	    echo "Please include the following output:"
+	    echo "GRANT CREATE's STDOUT:"
+	    cat $tmp1
+	    echo "GRANT CREATE's STDERR:"
+	    cat $tmp2
+	    rm -f $tmp1 $tmp2
+	    exit 1
+	fi
+	
 	# Enable plpgsql language
 	if [ -f /usr/bin/createlang ]
 	then 

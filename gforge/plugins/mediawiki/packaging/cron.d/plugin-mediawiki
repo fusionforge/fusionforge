@@ -13,5 +13,5 @@ MAILTO=""
 #
 
 # Create new mediawikis four times an hour
-0,15,30,45 * * * * $FFUSER [ -x $MWCRON/create-wikis.php ] && $PHP $MWCRON/create-wikis.php
+0,15,30,45 * * * * root [ -x $MWCRON/create-wikis.php ] && $PHP $MWCRON/create-wikis.php
 1,16,31,46 * * * * root [ -x $MWCRON/create-imgdirs.php ] && $PHP $MWCRON/create-imagedirs.php
