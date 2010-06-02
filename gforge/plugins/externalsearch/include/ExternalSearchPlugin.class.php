@@ -37,7 +37,7 @@ class ExternalSearchPlugin extends Plugin {
 					$searchManager->addSearchEngine(
 						$type,
 						new ExternalSearchEngine($type, $name, str_replace('%web_host%',forge_get_config('web_host'),$url)
-					);
+							));
 				}
 				break;
 		}
