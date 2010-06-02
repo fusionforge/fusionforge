@@ -1024,6 +1024,7 @@ gforge/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 gforge/plugins/globalsearch/www/edit_assoc_sites.php -text
 gforge/plugins/globalsearch/www/index.php -text
 gforge/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
+gforge/plugins/mantis/etc/plugins/mantis/config.ini -text
 gforge/plugins/mantisbt/action/addAttachment.php -text
 gforge/plugins/mantisbt/action/addIssue.php -text
 gforge/plugins/mantisbt/action/addNote.php -text

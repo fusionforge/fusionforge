@@ -2,7 +2,6 @@
 
 set -e
 
-lastsection=''
 config_dir=$(forge_get_config extra_config_dirs | xargs -n 1 echo | head -1)
 if [ "$config_dir" = "" ] ; then
     config_path=$(forge_get_config config_path)/config.ini.d
@@ -28,6 +27,7 @@ add_config () {
     echo "$var = $value"
 }
 
+lastsection=''
 tmp=$(mktemp)
 cat > $tmp <<EOF
 # This is a generated file with values migrated from your previous configuration
@@ -143,9 +143,12 @@ add_config externalsearch engines >> $tmp
 
 add_config blocks templates >> $tmp
 
+add_config mantis server >> $tmp
+
 mv $tmp $config_path/zzz-migrated-old-config
 chmod 644 $config_path/zzz-migrated-old-config
 
+lastsection=''
 tmp=$(mktemp)
 cat > $tmp <<EOF
 # This is a generated file with values migrated from your previous configuration
@@ -167,6 +170,11 @@ add_config core ldap_password >> $tmp
 add_config core ldap_port >> $tmp
 add_config core ldap_version >> $tmp
 add_config core session_key >> $tmp
+
+add_config mantis db_name >> $tmp
+add_config mantis db_host >> $tmp
+add_config mantis db_user >> $tmp
+add_config mantis db_passwd >> $tmp
 
 mv $tmp $config_path/zzz-migrated-old-secrets
 chmod 600 $config_path/zzz-migrated-old-secrets

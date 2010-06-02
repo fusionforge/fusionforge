@@ -21,6 +21,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+forge_define_config_item ('server', 'mantis', 'mantis') ;
+forge_define_config_item ('db_name', 'mantis', 'mantis') ;
+forge_define_config_item ('db_host', 'mantis', 'localhost') ;
+forge_define_config_item ('db_passwd', 'mantis', 'secret') ;
+forge_define_config_item ('db_user', 'mantis', 'GForge') ;
+
 class MantisPlugin extends Plugin {
 	function MantisPlugin () {
 		$this->Plugin() ;

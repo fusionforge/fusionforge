@@ -133,8 +133,8 @@ function insert_mantis_user ($id) {
 	. db_now() . ", TRUE, 5, 1, '', '"
 	.str_replace("'","\\'",$realuser->getRealName())
 	."')";
-	$mycn = mysql_connect($mantis_db_host,$mantis_db_user,$mantis_db_passwd);
-	$test = mysql_select_db($mantis_db_db,$mycn);
+	$mycn = mysql_connect(forge_get_config('db_host','mantis'),forge_get_config('db_user','mantis'),forge_get_config('db_passwd','mantis'));
+	$test = mysql_select_db(forge_get_config('db_name','mantis'),$mycn);
 	$test = mysql_query($sql,$mycn);
 	if ($test) {
 		echo "Insertion dans Mantis BT OK";
@@ -146,8 +146,8 @@ function insert_mantis_user ($id) {
 function update_mantis_user ($id) {
 	$realuser = user_get_object($id);
 	$sql = "UPDATE users SET (username='".$realuser->getUnixName()."',email='".$realuser->getEmail()."',password='".$realuser->getMD5Passwd()."',realname='".str_replace("'","\\'",$realuser->getRealName())."') WHERE id=$id";
-	$mycn = mysql_connect($mantis_db_host,$mantis_db_user,$mantis_db_passwd);
-	$test = mysql_select_db($mantis_db_db,$mycn);
+	$mycn = mysql_connect(forge_get_config('db_host','mantis'),forge_get_config('db_user','mantis'),forge_get_config('db_passwd','mantis'));
+	$test = mysql_select_db(forge_get_config('db_name','mantis'),$mycn);
 	$test = mysql_query($sql,$mycn);
 	if ($test) {
 		echo "Mise à jour dans Mantis BT OK";

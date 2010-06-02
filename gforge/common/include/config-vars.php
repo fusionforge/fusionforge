@@ -263,6 +263,16 @@ if (file_exists ($gfconfig.'plugins/blocks/config.php')) {
 	forge_define_config_item ('templates', 'blocks', json_encode($plugins_blocks_templates)) ;
 }
 
+// Mantis plugin
+if (file_exists ($gfconfig.'plugins/mantis/config.php')) {
+	require_once $gfconfig.'plugins/mantis/config.php' ;
+	
+	forge_define_config_item ('server', 'mantis', $serveur_mantis) ;
+	forge_define_config_item ('db_host', 'mantis', $mantis_db_host) ;
+	forge_define_config_item ('db_user', 'mantis', $mantis_db_user) ;
+	forge_define_config_item ('db_passwd', 'mantis', $mantis_db_passwd) ;
+}
+
 // forge_define_config_item ('', 'core', $GLOBALS['sys_']) ;
 
 /* Long-term:
