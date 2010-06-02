@@ -252,6 +252,7 @@ gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
 gforge/etc/config.ini-fhs -text
 gforge/etc/config.ini-opt -text
+gforge/etc/config.ini.d/mediawiki.ini -text
 gforge/etc/config.ini.d/scmarch.ini -text
 gforge/etc/config.ini.d/scmbzr.ini -text
 gforge/etc/config.ini.d/scmccase.ini -text
@@ -1085,12 +1086,11 @@ gforge/plugins/mediawiki/bin/mw-drop-wikis.php -text
 gforge/plugins/mediawiki/bin/mw-plugin-init.php -text
 gforge/plugins/mediawiki/bin/mw-wrapper.php -text
 gforge/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
-gforge/plugins/mediawiki/common/config-vars.php -text
 gforge/plugins/mediawiki/common/mediawiki-init.php -text
 gforge/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 gforge/plugins/mediawiki/cronjobs/create-wikis.php -text
-gforge/plugins/mediawiki/etc/config.ini -text
 gforge/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki -text
+gforge/plugins/mediawiki/etc/mediawiki.ini -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.patch -text
 gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php.reference -text

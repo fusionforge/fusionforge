@@ -29,7 +29,6 @@
 # TODO: How to use cronjob history?
 # Required config variables:
 #   src_path: the directory where the mediawiki sources are installed
-#   var_path: the directory where mediawiki can store its data (i.e. LocalSettings.php and images/)
 
 include dirname(__FILE__) . '/../../env.inc.php';
 require_once $gfwww.'include/pre.php';
