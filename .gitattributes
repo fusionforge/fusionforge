@@ -354,6 +354,7 @@ gforge/plugins/blocks/common/blocksPlugin.class.php -text
 gforge/plugins/blocks/db/blocks-init.sql -text
 gforge/plugins/blocks/etc/blocks.ini -text
 gforge/plugins/blocks/etc/plugins/blocks/config.php -text
+gforge/plugins/blocks/etc/templates.json -text
 gforge/plugins/blocks/www/index.php -text
 gforge/plugins/contribtracker/INSTALL -text
 gforge/plugins/contribtracker/bin/db-delete.pl -text
@@ -373,6 +374,7 @@ gforge/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#appli
 gforge/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge/plugins/eirc/EIRC-1.0.2+free.tar.gz -text svneol=unset#unset
 gforge/plugins/env.inc.php -text
+gforge/plugins/externalsearch/etc/engines.json -text
 gforge/plugins/externalsearch/etc/externalsearch.ini -text
 gforge/plugins/extratabs/README -text
 gforge/plugins/extratabs/bin/db-delete.pl -text
