@@ -1212,6 +1212,17 @@ function util_path_info_last_numeric_component() {
 	return false;
 }
 
+function get_cvs_binary_version () {
+	$string = `cvs --version 2>/dev/null | grep ^Concurrent.Versions.System.*client/server` ;
+	if (preg_match ('/^Concurrent Versions System .CVS. 1.11.[0-9]*/', $string)) {
+		return '1.11' ;
+	} elseif (preg_match ('/^Concurrent Versions System .CVS. 1.12.[0-9]*/', $string)) {
+		return '1.12' ;
+	} else {
+		return '' ;
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

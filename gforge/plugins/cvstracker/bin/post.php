@@ -30,12 +30,12 @@
  *
  */
  
-//require ('local.inc'); we don't need this file. also, in some installations this file cannot be accessed by the caller (perms problem)
 require dirname(__FILE__).'/../../env.inc.php';
-require_once ($gfconfig.'plugins/cvstracker/config.php');
+require_once $gfwww.'include/pre.php';
 require_once ($gfcommon.'common/include/utils.php');
 require_once ($gfplugins.'cvstracker/common/Snoopy.class.php');
 
+$cvs_binary_version = get_cvs_binary_version () ;
 
 if ($cvs_binary_version != "1.12" &&
 	$cvs_binary_version != "1.11" )
@@ -117,12 +117,6 @@ function getLog($Input)
 }
 
 $files = array();
-
-if($cvs_tracker_debug) {
-	echo "Arguments count: ".$argc."\n";
-	echo "Arguments passed to post.php:\n";
-	print_r($argv);
-}
 
 if( $cvs_binary_version == "1.11" ) {
 	if ($argc <= 3 ) {
@@ -206,12 +200,7 @@ foreach ( $files as $file )
 	$i++;
 }
 	
-	if($cvs_tracker_debug) {
-		echo "Variables submitted to newcommit.php:\n";
-		print_r($SubmitVars);
-	}
-	$vars['data'] = serialize($SubmitVars);
-	$snoopy->submit($SubmitUrl,$vars);
-	print $snoopy->results;
+$vars['data'] = serialize($SubmitVars);
+$snoopy->submit($SubmitUrl,$vars);
 
 ?>

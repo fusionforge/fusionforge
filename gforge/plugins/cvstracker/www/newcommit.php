@@ -41,10 +41,6 @@ foreach ($SubmittedVars as $SubmittedVar) {
 	$Configs[$i]['Log']             = $SubmittedVar['Log'];
 	$Configs[$i]['CvsDate']         = $SubmittedVar['CvsDate'];
 	$i++;
-	if($cvs_tracker_debug) {
-		echo "Variables received by newcommit.php:\n";
-		print_r($Configs[$i]);
-	}
 }
 
 
@@ -60,7 +56,7 @@ foreach ($SubmittedVars as $SubmittedVar) {
  */
 function parseConfig($Config)
 {
-	global $sys_cvsroot_path, $cvs_tracker_debug;
+	$repos_path = forge_get_config ('repos_path', 'scmcvs') ;
 	
 	$Result = array();
 	$Result['check'] = true;
@@ -68,19 +64,14 @@ function parseConfig($Config)
 	$UserName = $Config['UserName'];
 
 	// add a trailing / if needed
-	if($sys_cvsroot_path[strlen($sys_cvsroot_path)-1]!='/') {
-		$sys_cvsroot_path.='/';
+	if($repos_path[strlen($repos_path)-1]!='/') {
+		$repos_path.='/';
 	}
-	if(strncmp($Repository,$sys_cvsroot_path, strlen($sys_cvsroot_path)) == 0) {
-		$GroupName = substr($Repository, strlen($sys_cvsroot_path));
+	if(strncmp($Repository,$repos_path, strlen($repos_path)) == 0) {
+		$GroupName = substr($Repository, strlen($repos_path));
 	} else {
 		$GroupName = $Repository;
 	}
-	if($cvs_tracker_debug) {
-		echo "GroupName = ".$GroupName."\n";
-		echo "CVSRootPath = ".$sys_cvsroot_path."\n";
-	}
-
 	
 	$Result['user']     = user_get_object_by_name($UserName);
 	if (!$Result['user'] || !is_object($Result['user']) ||

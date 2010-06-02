@@ -18,11 +18,6 @@
 
 require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfwww.'include/pre.php';
-require_once $gfconfig.'plugins/svntracker/config.php';
-
-if ($svn_tracker_debug) {
-	$file = fopen($svn_tracker_debug_file,"a+");	
-}
 
 /**
  * Getting POST variables
@@ -67,19 +62,19 @@ foreach ($SubmittedVars as $SubmittedVar) {
  */
 function parseConfig(&$Config)
 {
-	global $sys_svnroot_path, $svn_tracker_debug,$file;
+	$repos_path = forge_get_config ('repos_path', 'scmsvn') ;
 	
 	$Result = array();
 	$Result['check'] = true;
 	$Repository = $Config['Repository'];
 	$UserName = $Config['UserName'];
 
-	if($sys_svnroot_path[strlen($sys_svnroot_path)-1]!='/') {
-		$sys_svnroot_path.='/';
+	if($repos_path[strlen($repos_path)-1]!='/') {
+		$repos_path.='/';
 	}
 	$repo_root = substr($Repository,0,strrpos($Repository,"/") + 1); //we get the directory of the repository root (with trailing slash)
 	
-	if(fileinode($sys_svnroot_path) == fileinode($repo_root)) { // since the $sys_svnroot_path is usually $sys_svnroot, and that one is a symlink, we check that the inode is the same for both
+	if(fileinode($repos_path) == fileinode($repo_root)) { // since the $repos_path is usually $sys_svnroot, and that one is a symlink, we check that the inode is the same for both
 		$GroupName = substr($Repository, strrpos($Repository,"/") + 1);
 		$Config['FileName'] = substr($Config['FileName'],strlen($Repository)); //get only the filename relative to the repo
 	} else {
@@ -89,11 +84,7 @@ function parseConfig(&$Config)
 	
 	if($svn_tracker_debug) {
 		echo "GroupName = ".$GroupName."\n";
-		echo "SVNRootPath = ".$sys_svnroot_path."\n";
-	}
-	
-	if ($svn_tracker_debug) {
-		fwrite($file,$GroupName."\n");
+		echo "SVNRootPath = ".$repos_path."\n";
 	}
 	
 	$Result['group']    = group_get_object_by_name($GroupName);
@@ -129,7 +120,6 @@ function parseConfig(&$Config)
  */
 function addArtifactLog($Config, $GroupId, $Num)
 {
-	global $file, $svn_tracker_debug;
 	$return = array();
 	$Result = db_query_params ('SELECT * FROM artifact,artifact_group_list WHERE 
 artifact.group_artifact_id=artifact_group_list.group_artifact_id 
@@ -137,10 +127,6 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 				   array ($GroupId,
 					  $Num));
 	$Rows = db_numrows($Result);
-	if ($svn_tracker_debug) {
-		fwrite($file,"query : " . $Query ."\n");
-		fwrite($file,"rows : " . $Rows ."\n");
-	}
 	if ($Rows == 0) {
 		$return['Error'] = "Artifact ".$Num." Not Found.";
 	}

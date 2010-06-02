@@ -26,6 +26,7 @@
 require dirname(__FILE__).'/../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
+require $gfcommon.'include/utils.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 
@@ -142,7 +143,8 @@ function cvs_write_file($filePath, $content, $append=1) {
  */
 function add_sync_mail($unix_group_name) {
 
-	global  $cvsdir_prefix, $cvs_binary_version;
+	global  $cvsdir_prefix ;
+	$cvs_binary_version = get_cvs_binary_version () ;
 	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (!$loginfo_file) {
@@ -182,7 +184,8 @@ function add_sync_mail($unix_group_name) {
  *
  */
 function add_cvstracker($unix_group_name) {
-	global $cvsdir_prefix, $cvs_binary_version;
+	global $cvsdir_prefix;
+	$cvs_binary_version = get_cvs_binary_version () ;
 	$loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (!$loginfo_file) {
@@ -247,7 +250,8 @@ function add_cvstracker($unix_group_name) {
 }
 
 function add_acl_check($unix_group_name) {
-	global $cvsdir_prefix, $cvs_binary_version;
+	global $cvsdir_prefix;
+	$cvs_binary_version = get_cvs_binary_version () ;
 
 	$commitinfofile = $cvsdir_prefix."/".$unix_group_name.'/CVSROOT/commitinfo';
 

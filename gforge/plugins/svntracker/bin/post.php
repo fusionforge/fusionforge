@@ -30,13 +30,8 @@
  *
  */
 
-
-require $gfconfig.'plugins/svntracker/config.php';
+require_once $gfwww.'include/pre.php';
 require $gfplugins.'svntracker/common/Snoopy.class.php';
-
-if ($svn_tracker_debug) {
-	$file = fopen($svn_tracker_debug_file,"a+");	
-}
 
 /**
  * It returns the usage and exit program
@@ -168,16 +163,7 @@ foreach ($changed as $onefile) {
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
 
-if ($use_ssl) {
-	$http = "https://";
-} else {
-	$http = "http://";
-}
-
 $SubmitUrl = util_make_url('/plugins/svntracker/newcommit.php');
-if ($svn_tracker_debug) {
-	fwrite($file,"submiturl : " . $SubmitUrl . "\n");
-}
 
 $tasks_involved= getInvolvedTasks($log);
 $artifacts_involved= getInvolvedArtifacts($log);
@@ -201,20 +187,6 @@ foreach ( $files as $onefile )
 	$SubmitVars[$i]["SvnDate"]         = time();
 	$i++;
 }
-	$vars['data'] = serialize($SubmitVars);
-	if($svn_tracker_debug) {
-		echo "Variables submitted to newcommit.php:\n";
-		print_r($SubmitVars);
-		fwrite($file,"Variables submitted to newcommit.php:\n");
-		fwrite($file,print_r($SubmitVars));
-	}
-	$snoopy->submit($SubmitUrl,$vars);
-	if ($svn_tracker_debug) {
-	    print_r($snoopy->results);
-	    print_r($snoopy->error);
-	    fwrite($file,$snoopy->results);
-		fwrite($file,$snoopy->error);
-	}
-
-
+$vars['data'] = serialize($SubmitVars);
+$snoopy->submit($SubmitUrl,$vars);
 ?>
