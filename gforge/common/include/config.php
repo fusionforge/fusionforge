@@ -39,7 +39,18 @@ class FusionForgeConfig {
 		    || !isset ($this->settings[$section][$var])) {
 			return NULL ;
 		}
-		return $this->settings[$section][$var] ;
+
+		$tmp = $this->settings[$section][$var] ;
+		preg_match_all ('/\$[a-z_]+\/[a-z_]+/', $tmp, $matches) ;
+
+		foreach ($matches[0] as $m) {
+			$c = explode ('/', substr($m,1)) ;
+			
+			if (isset ($this->settings[$c[0]][$c[1]])) {
+				$tmp = str_replace ($m, $this->get_value($c[0],$c[1]), $tmp) ;
+			}
+		}
+		return $tmp ;
 	}
 
 	public function set_value ($section, $var, $value) {
@@ -179,8 +190,8 @@ function forge_read_config_dir ($path) {
 			while (false !== ($file = readdir($handle))) {
 				if ($file != "." 
 			    	&& $file != ".."
-			    	// Avoid .bak, .old, .dpkg-old and so on
-			    	&& preg_match ('/^[0-9a-zA-Z_-]+$/', $file)) {
+			    	// Avoid .bak, .old, .dpkg-old and so on, but keep .ini
+			    	&& preg_match ('/^[0-9a-zA-Z_-]+(.ini)?$/', $file)) {
 					$files[] = "$path/$file" ;
 				}
 			}

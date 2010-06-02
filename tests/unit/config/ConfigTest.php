@@ -41,6 +41,10 @@ class Config_Tests extends PHPUnit_Framework_TestCase
 		$this->assertEquals('FusionForge', $forge_name);
 		$this->assertFalse($core__user_registration_restricted);
 
+		forge_read_config_dir (dirname(__FILE__) . '/../../../gforge/etc/config.ini.d') ;
+
+		$this->assertEquals('anonsvn', forge_get_config ('anonsvn_login', 'scmsvn'));
+		$this->assertEquals('/var/lib/gforge/chroot/scmrepos/svn', forge_get_config ('repos_path', 'scmsvn'));
 	}
 
 	/**
