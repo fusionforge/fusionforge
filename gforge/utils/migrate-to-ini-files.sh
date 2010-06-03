@@ -24,7 +24,11 @@ add_config () {
 	lastsection=$section
     fi
 
-    echo "$var = \"$value\""
+    if echo $value | grep -q [^[:alnum:]] ; then
+	echo $var = \"$value\"
+    else
+	echo $var = $value
+    fi
 }
 
 lastsection=''

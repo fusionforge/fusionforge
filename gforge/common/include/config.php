@@ -99,7 +99,6 @@ class FusionForgeConfig {
 		case 'on':
 		case 'yes':
 		case '1':
-		case true:
 			return true ;
 		}
 		
