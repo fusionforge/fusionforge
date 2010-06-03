@@ -24,7 +24,7 @@ add_config () {
 	lastsection=$section
     fi
 
-    echo "$var = $value"
+    echo "$var = \"$value\""
 }
 
 lastsection=''
