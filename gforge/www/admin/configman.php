@@ -277,9 +277,54 @@ function updateVars($vars,$filepath) {
 ?>
 
 </form>
+<hr/>
 
 <?php
+echo "<h2>".sprintf (_('Configuration from the config API (*.ini files) (experimental)'))."</h2>" ;
 
+$title_arr = array(_('Variable'),_('Configured value'),_('Result (possibly after interpolation)'));
+echo $HTML->listTableTop($title_arr);
+
+$c = FusionForgeConfig::get_instance () ;
+$counter = 0 ;
+$sections = $c->get_sections () ;
+natsort($sections) ;
+array_unshift ($sections, 'core') ;
+$seen_core = false ;
+foreach ($sections as $section) {
+	if ($section == 'core') {
+		if ($seen_core) {
+			continue ;
+		}
+		$seen_core = true ;
+	}
+	echo '<tr><th colspan="3"><strong>'.sprintf (_('Section %s'), $section)."</th></tr>" ;
+
+	$variables = $c->get_variables ($section) ;
+	natsort($variables) ;
+	foreach ($variables as $var) {
+		echo '<tr '. $HTML->boxGetAltRowStyle($counter++) .'><td>'.$var ;
+		if ($c->is_bool ($section, $var)) {
+			print " (boolean)" ;
+		}
+		print "</td><td>" ;
+		print $c->get_raw_value ($section, $var) ;
+		print "</td><td>" ;
+		$v = $c->get_value ($section, $var) ;
+		if ($c->is_bool ($section, $var)) {
+			if ($v) {
+				print "true" ;
+			} else {
+				print "false" ;
+			}
+		} else {
+			print "$v" ;
+		}
+		print "</td></tr>" ;
+	}
+}
+
+echo $HTML->listTableBottom();
 
 site_admin_footer(array());
 
