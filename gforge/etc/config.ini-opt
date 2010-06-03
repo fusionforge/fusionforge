@@ -5,6 +5,6 @@ user_registration_restricted = false
 source_path = /opt/fusionforge
 data_path = /opt/fusionforge/data
 config_path = /opt/fusionforge/etc
-chroot = /opt/fusionforge/data/chroot
+chroot = "$core/data_path/chroot"
 
-extra_config_dirs = /opt/fusionforge/config.ini.d/
+extra_config_dirs = "$core/config_path/config.ini.d"
