@@ -92,48 +92,6 @@ function docman_header($title,$pagehead,$style='xyz') {
 
 }
 
-function doc_droplist_count($l_group_id, $language_id, $g) {
-	$pub = array () ;
-	$pub[] = 1 ;
-	if (session_loggedin()) {
-		$perm =& $g->getPermission ();
-		if ($perm && is_object($perm) && $perm->isMember()) {
-			$pub[] = 4 ;
-			$pub[] = 5 ;
-		}
-	}
-	$gresult = db_query_params ('SELECT dd.language_id, sl.name, COUNT(*) AS count
-		 FROM doc_groups AS dg, doc_data AS dd, supported_languages AS sl
-		 WHERE dg.doc_group = dd.doc_group
-		 AND dg.group_id = $1
-		 AND dd.stateid = ANY ($2)
-		 AND sl.language_id = dd.language_id
-		 GROUP BY dd.language_id, sl.name',
-				    array ($l_group_id,
-					   db_int_array_to_any_clause ($pub))) ;
-	if (db_numrows($gresult) >= 1) {
-
-		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"post\"><table border=\"0\">
- <tr><td valign=\"middle\"><strong>"._('Language')." </strong></td>
- <td valign=\"middle\"><select name=\"language_id\">\n\n";
-		print "<option value=\"*\">"._('All Languages')." </option>";
-		while($grow = db_fetch_array($gresult)) {
-
-			if ($language_id == $grow['language_id']) {
-
-				print "<option value=\"".$grow['language_id']."\" selected=\"selected\">".$grow['name']." (".$grow['count'].") </option>";
-			} else {
-				print "<option value=\"".$grow['language_id']."\">".$grow['name']." (".$grow['count'].") </option>";
-			}
-		}
-		print "</select></td><td valign=\"middle\"><input type=\"submit\" value=\""._('Go')."\" /></td></tr></table></form>";
-	} else {
-		echo db_error();
-	}
-
-
-}
-
 function doc_get_state_box($checkedval='xzxz') {
 	$res_states=db_query_params ('select * from doc_states;',
 			array()) ;
@@ -176,7 +134,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			} else {
 				$icon = 'cfolder15.png';
 			}
-			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group_id=".$doc_group->getID()."&amp;language_id=".@$GLOBALS['selected_language'];
+			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group_id=".$doc_group->getID();
 			if ($from_admin && $stateid) {	// if we're sorting by the state, pass the state as a variable
 				echo "&amp;selected_stateid=".$stateid;
 			}

@@ -108,7 +108,7 @@ class Document extends Error {
 	 *	@param	string	The description of this document.
 	 *	@return	boolean	success.
 	 */
-	function create($filename,$filetype,$data,$doc_group,$title,$language_id,$description) {
+	function create($filename,$filetype,$data,$doc_group,$title,$description) {
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -152,15 +152,14 @@ class Document extends Error {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
-			stateid,language_id,filename,filetype,filesize,data,data_words,created_by)
-                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)',
+			stateid,filename,filetype,filesize,data,data_words,created_by)
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',
 					  array($this->Group->getId(),
 						htmlspecialchars($title),
 						htmlspecialchars($description),
 						time(),
 						$doc_group,
 						$doc_initstatus,
-						$language_id,
 						$filename,
 						$filetype,
 						$filesize,
@@ -300,24 +299,6 @@ class Document extends Error {
 	}
 
 	/**
-	 *	getLanguageID - get this language_id.
-	 *
-	 *	@return	int	The language_id.
-	 */
-	function getLanguageID() {
-		return $this->data_array['language_id'];
-	}
-
-	/**
-	 *	getLanguageName - the language_name of this document.
-	 *
-	 *	@return string	The language_name.
-	 */
-	function getLanguageName() {
-		return $this->data_array['language_name'];
-	}
-
-	/**
 	 *	getDocGroupID - get this doc_group_id.
 	 *
 	 *	@return	int	The doc_group_id.
@@ -442,7 +423,7 @@ class Document extends Error {
 	 *	@param	int	The state id of the doc_states table.
 	 *	@return	boolean	success.
 	 */
-	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
+	function update($filename,$filetype,$data,$doc_group,$title,$description,$stateid) {
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -466,17 +447,15 @@ class Document extends Error {
 			doc_group=$4,
 			filetype=$5,
 			filename=$6,
-			language_id=$7,
-			updatedate=$8
-			WHERE group_id=$9
-			AND docid=$10',
+			updatedate=$7
+			WHERE group_id=$8
+			AND docid=$9',
 					array (htmlspecialchars($title),
 					       htmlspecialchars($description),
 					       $stateid,
 					       $doc_group,
 					       $filetype,
 					       $filename,
-					       $language_id,
 					       time(),
 					       $this->Group->getID(),
 					       $this->getID())) ;

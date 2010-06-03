@@ -67,7 +67,6 @@ if (getStringFromRequest('submit')) {
 		$doc_group = getIntFromRequest('doc_group');
 		$title = getStringFromRequest('title');
 		$description = getStringFromRequest('description');
-		$language_id = getIntFromRequest('language_id');
 		$data = getStringFromRequest('data');
 		$file_url = getStringFromRequest('file_url');
 		//$ftp_filename = getStringFromRequest('ftp_filename');
@@ -116,7 +115,7 @@ if (getStringFromRequest('submit')) {
 			$filename=$d->getFileName();
 			$filetype=$d->getFileType();
 		}
-		if (!$d->update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid)) {
+		if (!$d->update($filename,$filetype,$data,$doc_group,$title,$description,$stateid)) {
 			exit_error('Error',$d->getErrorMessage());
 		}
 		$feedback = _('Updated successfully');
@@ -274,16 +273,6 @@ if ($editdoc && $docid) {
 	}
 	
 	?>
-
-	<tr>
-		<td>
-		<strong><?php echo _('Language') ?></strong><br />
-		<?php
-
-			echo html_get_language_popup('language_id',$d->getLanguageID());
-
-		?></td>
-	</tr>
 
 	<tr>
 		<td>

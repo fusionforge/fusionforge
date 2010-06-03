@@ -48,7 +48,6 @@ function docman_recursive_display($docgroup) {
 }
 
 $group_id = getIntFromRequest('group_id');
-$language_id = getStringFromRequest('language_id');
 $feedback = getStringFromRequest('feedback');
 
 if (!$group_id) {
@@ -70,42 +69,12 @@ if ($dgf->isError()) {
 }
 
 
-// Save chosen language in docman and print document details in documents list
-if ($language_id)
-{
-       setcookie("my_language_id", "$language_id", time()+3600*24*999);
-}
-if (!$language_id && isset($_COOKIE["my_language_id"]))
-{
-       $language_id = $_COOKIE["my_language_id"];
-}
-
-// the "selected language" variable will be used in the links to navigate the
-// document groups tree
-
-if (!$language_id) {
-	if (session_loggedin()) {
-		$language_id = $LUSER->getLanguage();
-	} else {
-		$language_id = 1;
-	}
-	
-	$selected_language = $language_id;
-} else if ($language_id == "*") {
-	$language_id = 0 ;
-	$selected_language = "*";
-} else {
-	$selected_language = $language_id;
-}
-
 // check if the user is docman's admin
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	$is_editor = true;
 } else {
 	$is_editor = false;
 }
-
-$df->setLanguageID($language_id);
 
 docman_header(_('Document Manager: Display Document'),_('Project: %1$s'));
 echo '<h1>'.sprintf(_('Documents for %1$s'), $g->getPublicName()) .'</h1>';
@@ -119,8 +88,6 @@ if (!$d_arr || count($d_arr) <1){
 if (!$d_arr || count($d_arr) < 1) {
 	print '<div class="warning_msg">'._('This project has no visible documents').'</div>';
 } else {
-	doc_droplist_count($group_id, $language_id, $g);
-
 	// Get the document groups info
 	$nested_groups =& $dgf->getNested();	
 

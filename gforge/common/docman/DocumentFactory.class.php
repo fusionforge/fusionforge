@@ -87,15 +87,6 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 *	setLanguageID - call this before getDocuments() if you want to limit to a specific language.
-	 *
-	 *	@param	int	The language_id from the supported_languages table.
-	 */
-	function setLanguageID($languageid) {
-		$this->languageid=$languageid;
-	}
-
-	/**
 	 *	setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
 	 *
 	 *	@param	int	The doc_group from the doc_groups table.

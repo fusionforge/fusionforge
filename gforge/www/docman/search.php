@@ -21,7 +21,6 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
 $group_id = getIntFromRequest('group_id');
-$language_id = getIntFromRequest('language_id');
 
 if (!$group_id) {
     exit_no_group();
@@ -40,26 +39,6 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError()) {
 	exit_error(_('Error'),$dgf->getErrorMessage());
 }
-
-// the "selected language" variable will be used in the links to navigate the
-// document groups tree
-
-if (!$language_id) {
-	if (session_loggedin()) {
-		$language_id = $LUSER->getLanguage();
-	} else {
-		$language_id = 1;
-	}
-	
-	$selected_language = $language_id;
-} else if ($language_id == "*") {
-	$language_id = 0 ;
-	$selected_language = "*";
-} else {
-	$selected_language = $language_id;
-}
-$df->setLanguageID($language_id);
-
 
 // check if the user is docman's admin
 $is_editor = forge_check_perm ('docman', $g->getID(), 'admin') ;
@@ -90,7 +69,7 @@ if (getStringFromPost('cmd') == "search")
 	$textsearch = getStringFromPost("textsearch");
 	$textsearch = prepare_search_text ($textsearch);
 	$mots = preg_split("/[\s,]+/",$textsearch);
-	$qpa = db_construct_qpa (false, 'SELECT filename, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, language_id, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
+	$qpa = db_construct_qpa (false, 'SELECT filename, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
 
 	if (getStringFromPost('search_type') == "one")
 	{
@@ -174,7 +153,7 @@ if (getStringFromPost('cmd') == "search")
 		$vtp->SetVar($handle,"RESULT.N",$count);
 		$vtp->SetVar($handle,"RESULT.SEARCHTITLE",$item["title"]);
 		$vtp->SetVar($handle,"RESULT.SEARCHCOMMENT",$item["description"]);
-		$s = get_path_document ($groupsarr, $item["doc_group"], "$_GET[group_id]", "$item[language_id]");
+		$s = get_path_document ($groupsarr, $item["doc_group"], "$_GET[group_id]");
 		$vtp->SetVar($handle,"RESULT.SEARCHPATH",$s);
 		$vtp->SetVar($handle,"RESULT.GROUP_ID",$_GET["group_id"]);
 		$vtp->SetVar($handle,"RESULT.DOC_ID",$item["docid"]);
@@ -198,7 +177,7 @@ function print_debug ($text)
 	echo "<pre>$text</pre>";
 }
 
-function get_path_document ($groupsarr, $doc_group, $group_id, $language_id="1")
+function get_path_document ($groupsarr, $doc_group, $group_id)
 {
 	$rep = "";
 	foreach ($groupsarr as $group)
@@ -207,12 +186,12 @@ function get_path_document ($groupsarr, $doc_group, $group_id, $language_id="1")
 		{
 			if ($group["parent_doc_group"] == 0) 
 			{
-				$href = util_make_url ("/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]&language_id=$language_id");
+				$href = util_make_url ("/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]");
 				$rep .= "<a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 				break;
 			}
-			$s = get_path_document ($groupsarr,  $group["parent_doc_group"], $group_id, $language_id);
-			$href = util_make_url ("/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]&language_id=$language_id");
+			$s = get_path_document ($groupsarr,  $group["parent_doc_group"], $group_id);
+			$href = util_make_url ("/docman/index.php?group_id=$group_id&selected_doc_group_id=$group[doc_group]");
 			$rep .= "$s / <a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 			break;
 		}

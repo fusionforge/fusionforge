@@ -48,7 +48,6 @@ if (getStringFromRequest('submit')) {
 	$file_url = getStringFromRequest('file_url');
 	//$ftp_filename = getStringFromRequest('ftp_filename');
 	$uploaded_data = getUploadedFile('uploaded_data');
-	$language_id = getIntFromRequest('language_id');
 	$type = getStringFromRequest('type');
 	$name = getStringFromRequest('name');
 
@@ -104,7 +103,7 @@ if (getStringFromRequest('submit')) {
 		*/
 	}
 	
-	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
+	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description)) {
 			exit_error(_('Error'),$d->getErrorMessage());
 	} else {		
 		if ($type == 'editor') {
@@ -213,12 +212,6 @@ if (getStringFromRequest('submit')) {
 		*/
 		
 		echo '
-			<tr>
-				<td>
-				<strong>'. _('Language').' :</strong><br />
-				'. html_get_language_popup('language_id',1) .'
-				</td>
-			</tr>
 			<tr>
 				<td>
 				<strong>'. _('Group that document belongs in').' :</strong><br />';
