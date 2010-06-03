@@ -5,9 +5,9 @@
 ## DP: Disable SVN-over-WebDAV
 
 @DPATCH@
-diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php
---- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2010-05-03 21:30:18.000000000 +0200
-+++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2010-05-26 21:17:23.000000000 +0200
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php
+--- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php	2010-06-03 13:39:24.000000000 +0200
++++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php	2010-06-03 16:59:44.000000000 +0200
 @@ -3,8 +3,8 @@
  //$default_svn_server = forge_get_config('web_host') ;
  //$default_svn_server = "svn." . forge_get_config('web_host') ;
@@ -19,36 +19,17 @@ diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php gforge/plugins/
  $use_ssl = true;
  // $svn_root = forge_get_config('chroot').'/scmrepos/svn' ;
  
-diff -urNad gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~
---- gforge~/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~	1970-01-01 01:00:00.000000000 +0100
-+++ gforge/plugins/scmsvn/etc/plugins/scmsvn/config.php.~1~	2010-05-26 21:17:23.000000000 +0200
-@@ -0,0 +1,18 @@
-+<?php
-+ 
-+//$default_svn_server = forge_get_config('web_host') ;
-+//$default_svn_server = "svn." . forge_get_config('web_host') ;
-+$default_svn_server = forge_get_config('scm_host');
-+$use_ssh = false;
-+$use_dav = true;
-+$use_ssl = true;
-+// $svn_root = forge_get_config('chroot').'/scmrepos/svn' ;
-+
-+$svn_bin = "/usr/bin/svn";
-+
-+// Local Variables:
-+// mode: php
-+// c-file-style: "bsd"
-+// End:
-+ 
-+?>
-diff -urNad gforge~/plugins/scmsvn/etc/scmsvn.ini gforge/plugins/scmsvn/etc/scmsvn.ini
---- gforge~/plugins/scmsvn/etc/scmsvn.ini	2010-05-26 21:14:09.000000000 +0200
-+++ gforge/plugins/scmsvn/etc/scmsvn.ini	2010-05-26 21:17:49.000000000 +0200
-@@ -1,4 +1,4 @@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/scmsvn/etc/scmsvn.ini gforge/plugins/scmsvn/etc/scmsvn.ini
+--- gforge~/plugins/scmsvn/etc/scmsvn.ini	2010-06-03 16:56:59.000000000 +0200
++++ gforge/plugins/scmsvn/etc/scmsvn.ini	2010-06-03 16:59:45.000000000 +0200
+@@ -1,8 +1,8 @@
  [scmsvn]
+ 
 -use_dav = yes
--use_ssl = yes
--use_ssh = no
 +use_dav = no
-+use_ssl = no
+ use_ssl = "$core/use_ssl"
+-use_ssh = no
 +use_ssh = yes
+ anonsvn_login = anonsvn
+ anonsvn_password = anonsvn
+ default_server = "$core/web_host"

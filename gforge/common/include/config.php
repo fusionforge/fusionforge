@@ -34,6 +34,17 @@ class FusionForgeConfig {
 		return self::$instance ;
 	}
   
+	public function get_sections () {
+		return array_keys ($this->settings) ;
+	}
+
+	public function get_variables ($section='core') {
+		if (isset ($this->settings[$section])) {
+			return array_keys ($this->settings[$section]) ;
+		}
+		return array () ;
+	}
+
 	public function get_value ($section, $var) {
 		if (!isset ($this->settings[$section])
 		    || !isset ($this->settings[$section][$var])) {
@@ -50,7 +61,18 @@ class FusionForgeConfig {
 				$tmp = str_replace ($m, $this->get_value($c[0],$c[1]), $tmp) ;
 			}
 		}
+		if ($this->is_bool ($section, $var)) {
+			$tmp = $this->_interpret_as_bool ($tmp) ;
+		}
 		return $tmp ;
+	}
+
+	public function get_raw_value ($section, $var) {
+		if (!isset ($this->settings[$section])
+		    || !isset ($this->settings[$section][$var])) {
+			return NULL ;
+		}
+		return $this->settings[$section][$var] ;
 	}
 
 	public function set_value ($section, $var, $value) {
@@ -69,11 +91,7 @@ class FusionForgeConfig {
 			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
 					foreach ($options as $var => $value) {
-						if (isset ($this->bools[$section][$var])) {
-							$this->settings[$section][$var] = $this->_interpret_as_bool ($value) ;
-						} else {
-							$this->settings[$section][$var] = $value ;
-						}
+						$this->settings[$section][$var] = $value ;
 					}
 				}
 			}
@@ -86,10 +104,14 @@ class FusionForgeConfig {
 			$this->bools[$section] = array () ;
 		}
 		$this->bools[$section][$var] = true ;
+	}
 
-		if (isset ($this->settings[$section][$var])) {
-			$this->settings[$section][$var] = $this->_interpret_as_bool ($this->settings[$section][$var]) ;
+	function is_bool ($section, $var) {
+		if (isset ($this->bools[$section])
+		    && isset ($this->bools[$section][$var])) {
+			return $this->bools[$section][$var] ;
 		}
+		return false ;
 	}
 
 	private function _interpret_as_bool ($val) {
