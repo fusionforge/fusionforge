@@ -4,34 +4,17 @@
 ##############################
 # Global Variables
 ##############################
-$db_include	=	"/etc/gforge/local.pl";	# Local Include file for database username and password
+$config_file	=	"/etc/gforge/local.pl";	# Local Include file for database username and password
 
 $dummy_uid      =       getpwnam('scm-gforge');                  # UserID of the dummy user that will own group's files
 $date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
 
-require $db_include;
-##################################
-# Configuration parsing Functions
-##################################
-sub parse_local_inc {
-    require $db_include;
-#  	my ($foo, $bar);
-#  	# open up database include file and get the database variables
-#  	open(FILE, $db_include) || die "Can't open $db_include: $!\n";
-#  	while (<FILE>) {
-#  		next if ( /^\s*\/\// );
-#  		($foo, $bar) = split /=/;
-#  		if ($foo) { eval $_ };
-#  	}
-#  	close(FILE);
-}
+require $config_file;
 
 ##############################
 # Database Connect Functions
 ##############################
 sub db_connect ( ) {
-    &parse_local_inc;
-
     $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd") ;
     if (! $dbh) {
 	die "Error while connecting to database: $!" ;

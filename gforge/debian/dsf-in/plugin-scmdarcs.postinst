@@ -28,7 +28,7 @@ case "$1" in
 	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmdarcs "Darcs"'
+	/usr/share/gforge/bin/register-plugin scmdarcs "Darcs"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

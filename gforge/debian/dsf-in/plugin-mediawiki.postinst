@@ -25,7 +25,7 @@ set -e
 
 case "$1" in
     configure)
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin mediawiki "Mediawiki"'
+	/usr/share/@OLDPACKAGE@/bin/register-plugin mediawiki "Mediawiki"
 	@OLDPACKAGE@-config
 	for flavour in apache apache-perl apache-ssl apache2 ; do
 	    if [ -x /usr/sbin/$flavour ]; then

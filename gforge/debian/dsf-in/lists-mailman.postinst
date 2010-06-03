@@ -31,7 +31,7 @@ case "$1" in
 	
 	echo "Fixing past damage in mailing-lists..."
 	if [ -z "$2" ] || dpkg --compare-versions $2 le 3rc2-4 ; then
-	    su -s /bin/sh @OLDPACKAGE@ -c /usr/share/@OLDPACKAGE@/bin/fix-mailing-lists.pl
+	    /usr/share/@OLDPACKAGE@/bin/fix-mailing-lists.pl
 	fi
     ;;
 

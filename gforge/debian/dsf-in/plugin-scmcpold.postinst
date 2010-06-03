@@ -28,7 +28,7 @@ case "$1" in
 	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmcpold "CPOLD"'
+	/usr/share/gforge/bin/register-plugin scmcpold "CPOLD"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

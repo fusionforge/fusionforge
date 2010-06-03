@@ -28,7 +28,7 @@ case "$1" in
 	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmbzr "Bazaar"'
+	/usr/share/gforge/bin/register-plugin scmbzr "Bazaar"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

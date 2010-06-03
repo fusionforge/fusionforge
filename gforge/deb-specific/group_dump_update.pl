@@ -4,11 +4,11 @@
 #		     scripts can process it without needing to access the database.
 use DBI;
 
+require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
+
 # Run as gforge
 my($name,$passwd,$uid,$gid,$quota,$comment,$gcos,$dir,$shell) = getpwnam("gforge");
 $> = $uid;
-
-require("/usr/share/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $verbose = 0;
 my $user_array = ();

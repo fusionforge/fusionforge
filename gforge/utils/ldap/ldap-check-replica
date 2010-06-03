@@ -4,7 +4,6 @@
 #  by pfalcon@sourceforge.net 2001-01-16
 
 require("include.pl");  # Include all the predefined functions
-&parse_local_inc;
 
 $ldap1="sf-ldap1";
 $ldap2="sf-ldap2";

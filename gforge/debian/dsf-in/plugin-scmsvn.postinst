@@ -28,7 +28,7 @@ case "$1" in
 	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmsvn "Subversion"'
+	/usr/share/gforge/bin/register-plugin scmsvn "Subversion"
 	test -f /etc/default/apache2 && . /etc/default/apache2
 	if [ "$NO_START" != "0" ]; then
 		if [ -x /usr/sbin/apache ]; then

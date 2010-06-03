@@ -25,8 +25,8 @@ set -e
 
 case "$1" in
     configure)
-        su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/extratabs/bin/db-upgrade.pl'
-        su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin extratabs "Extra Tabs"'
+        /usr/share/@OLDPACKAGE@/plugins/extratabs/bin/db-upgrade.pl
+        /usr/share/@OLDPACKAGE@/bin/register-plugin extratabs "Extra Tabs"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -23,7 +23,7 @@ case "$1" in
 	if [ -f /var/run/postgresql/.s.PGSQL.5432 ]
 	then
 		/usr/share/@OLDPACKAGE@/bin/unregister-plugin scmgit
-		su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/plugins/scmgit/bin/db-delete.pl'
+		/usr/share/gforge/plugins/scmgit/bin/db-delete.pl
 	else
 		echo "WARNING: database not available to unregister scmgit plugin"
 	fi

@@ -28,7 +28,7 @@ case "$1" in
 	@OLDPACKAGE@-config
 
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/gforge/bin/register-plugin scmhg "Mercurial"'
+	/usr/share/gforge/bin/register-plugin scmhg "Mercurial"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
