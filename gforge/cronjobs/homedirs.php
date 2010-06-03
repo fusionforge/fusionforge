@@ -60,7 +60,7 @@ define('USER_DEFAULT_GROUP','users');
 //error variable
 $err = '';
 
-if (forge_get_config('groupdir_prefix') == '') {		// this should be set in local.inc
+if (forge_get_config('groupdir_prefix') == '') {		// this should be set in configuration
 	exit () ;
 }
 
@@ -68,7 +68,7 @@ if (!is_dir(forge_get_config('groupdir_prefix'))) {
 	@mkdir(forge_get_config('groupdir_prefix'),0755,true);
 }
 
-if (forge_get_config('homedir_prefix') == '') {		// this should be set in local.inc
+if (forge_get_config('homedir_prefix') == '') {		// this should be set in configuration
 	exit () ;
 }
 

@@ -26,7 +26,7 @@ if (!file_exists(forge_get_config('jpgraph_path').'/jpgraph.php')) {
     exit_error('Error', 'Package JPGraph not installed');
 }
 
-// Read jPGraph libraries. Make sure the forge_get_config('jpgraph_path') is correct in local.inc
+// Read jPGraph libraries.
 require_once forge_get_config('jpgraph_path').'/jpgraph.php';
 require_once forge_get_config('jpgraph_path').'/jpgraph_line.php';
 require_once forge_get_config('jpgraph_path').'/jpgraph_bar.php';

@@ -7,8 +7,8 @@
 
 @DPATCH@
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/cvstracker/bin/post.php gforge/plugins/cvstracker/bin/post.php
---- gforge~/plugins/cvstracker/bin/post.php	2010-06-02 17:03:55.000000000 +0200
-+++ gforge/plugins/cvstracker/bin/post.php	2010-06-02 20:08:55.000000000 +0200
+--- gforge~/plugins/cvstracker/bin/post.php	2010-06-02 20:10:15.000000000 +0200
++++ gforge/plugins/cvstracker/bin/post.php	2010-06-03 13:38:29.000000000 +0200
 @@ -33,7 +33,7 @@
  require dirname(__FILE__).'/../../env.inc.php';
  require_once $gfwww.'include/pre.php';
@@ -19,20 +19,20 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
  $cvs_binary_version = get_cvs_binary_version () ;
  
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/scmcvs/bin/aclcheck.php gforge/plugins/scmcvs/bin/aclcheck.php
---- gforge~/plugins/scmcvs/bin/aclcheck.php	2010-05-28 15:36:11.000000000 +0200
-+++ gforge/plugins/scmcvs/bin/aclcheck.php	2010-06-02 20:08:55.000000000 +0200
+--- gforge~/plugins/scmcvs/bin/aclcheck.php	2010-06-03 13:36:11.000000000 +0200
++++ gforge/plugins/scmcvs/bin/aclcheck.php	2010-06-03 13:38:29.000000000 +0200
 @@ -31,7 +31,7 @@
- require $gfcgfile;
+ require_once $gfwww. 'include/pre.php';
  require_once $gfcommon.'include/utils.php';
  require_once $gfconfig.'plugins/scmcvs/config.php';
--require $gfplugins.'scmcvs/common/Snoopy.class.php';
-+require '/usr/share/php/libphp-snoopy/Snoopy.class.php';
+-require_once $gfplugins.'scmcvs/common/Snoopy.class.php';
++require_once '/usr/share/php/libphp-snoopy/Snoopy.class.php';
  
  // Input cleansing
  $env_cvsroot = (string) $_ENV['CVSROOT'];
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/plugins/svntracker/bin/post.php gforge/plugins/svntracker/bin/post.php
---- gforge~/plugins/svntracker/bin/post.php	2010-06-02 16:32:18.000000000 +0200
-+++ gforge/plugins/svntracker/bin/post.php	2010-06-02 20:08:55.000000000 +0200
+--- gforge~/plugins/svntracker/bin/post.php	2010-06-02 20:10:15.000000000 +0200
++++ gforge/plugins/svntracker/bin/post.php	2010-06-03 13:38:29.000000000 +0200
 @@ -31,7 +31,7 @@
   */
  

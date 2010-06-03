@@ -3,7 +3,7 @@
 *
 * These are pairs of internal user variables and LDAP attributes used when
 * creating new accounts, top half are required, bottom half are optional.
-* Note you can use global config variables defined in local.inc or elsewhere.
+* Note you can use global config variables with forge_get_config()
 */
 
 function plugin_ldapextauth_mapping ($entry) {

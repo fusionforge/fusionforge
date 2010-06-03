@@ -25,9 +25,9 @@ require_once $gfwww.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 
-$database=forge_get_config('database_name'); //Database name from local.inc
-$username=forge_get_config('database_user'); //Username used to log on to data base
-$password=forge_get_config('database_password'); //Db Password 
+$database=forge_get_config('database_name');
+$username=forge_get_config('database_user');
+$password=forge_get_config('database_password');
 
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
@@ -81,7 +81,7 @@ if (file_exists(forge_get_config('upload_dir'))) {
 		$err.= implode("\n", $output);
 	}
 } else {
-		$err.= 'Unable to find Upload Dir. Value on local.inc is:'.forge_get_config('upload_dir');
+		$err.= 'Unable to find upload dir. Configured value is:'.forge_get_config('upload_dir');
 }
 
 /**************************************
@@ -109,7 +109,7 @@ if (file_exists($cvsdir_prefix)) {
 		$err.= implode("\n", $output);
 	}
 } else {
-	$err.= 'Unable to find CVSROOT Dir. Value on local.inc is:'.$cvsdir_prefix;
+	$err.= 'Unable to find CVSROOT dir. Configured value is:'.$cvsdir_prefix;
 }
 
 /**************************************
@@ -151,7 +151,7 @@ if (file_exists($svndir_prefix)) {
 		@exec("rm -rf ".$repos_backup_dir);
 	}
 } else {
-	$err.= 'Unable to find SVNROOT Dir. Value on local.inc is:'.$svndir_prefix;
+	$err.= 'Unable to find SVNROOT dir. Configured value is:'.$svndir_prefix;
 }
 
 /**************************************

@@ -28,10 +28,10 @@ if (((int) $_SERVER['argc']) < 1) {
 }
 
 require_once dirname(__FILE__).'/../../env.inc.php';
-require $gfcgfile;
+require_once $gfwww. 'include/pre.php';
 require_once $gfcommon.'include/utils.php';
 require_once $gfconfig.'plugins/scmcvs/config.php';
-require $gfplugins.'scmcvs/common/Snoopy.class.php';
+require_once $gfplugins.'scmcvs/common/Snoopy.class.php';
 
 // Input cleansing
 $env_cvsroot = (string) $_ENV['CVSROOT'];
