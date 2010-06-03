@@ -252,6 +252,7 @@ gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/phpdoc/phpDocumentor.ini.patch -text
 gforge/etc/config.ini-fhs -text
 gforge/etc/config.ini-opt -text
+gforge/etc/config.ini-usrlocal -text
 gforge/etc/config.ini.d/blocks.ini -text
 gforge/etc/config.ini.d/externalsearch.ini -text
 gforge/etc/config.ini.d/mantis.ini -text
