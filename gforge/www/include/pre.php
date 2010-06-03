@@ -22,6 +22,7 @@
  */
 
 require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfcommon.'include/config.php';
 
 if (isset($_SERVER) && array_key_exists('PHP_SELF', $_SERVER) && $_SERVER['PHP_SELF']) {
 	$_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
@@ -43,9 +44,58 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
 
-require $gfcgfile;
-require $gfcommon.'include/config.php';
-require $gfcommon.'include/config-vars.php';
+// Database access and other passwords when on the web
+function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
+	if (getenv ('SERVER_SOFTWARE')) {
+		if (function_exists ('apache_request_headers')) {
+			$headers = apache_request_headers() ;
+		} else {
+			$headers = array () ;
+		}
+
+		if (isset ($headers[$serv])) {
+			forge_define_config_item ($var, $sec,
+						  $headers[$serv]) ;
+			return ;
+		} 
+	}
+	if (isset ($_ENV[$env])) {
+		forge_define_config_item ($var, $sec,
+					  getenv($env)) ;
+		return ;
+	}
+	if (isset ($GLOBALS[$glob])) {
+		forge_define_config_item ($var, $sec,
+					  $GLOBALS[$glob]) ;
+		return ;
+	}
+}
+
+if (file_exists ($gfcgfile)) {
+	require_once $gfcgfile ;
+}
+
+setconfigfromoldsources ('core', 'database_host',
+			 'GForgeDbhost', 'sys_gfdbhost', 'sys_dbhost') ;
+setconfigfromoldsources ('core', 'database_port',
+			 'GForgeDbport', 'sys_gfdbport', 'sys_dbport') ;
+setconfigfromoldsources ('core', 'database_name',
+			 'GForgeDbname', 'sys_gfdbname', 'sys_dbname') ;
+setconfigfromoldsources ('core', 'database_user',
+			 'GForgeDbuser', 'sys_gfdbuser', 'sys_dbuser') ;
+setconfigfromoldsources ('core', 'database_password',
+			 'GForgeDbpasswd', 'sys_gfdbpasswd', 'sys_dbpasswd') ;
+setconfigfromoldsources ('core', 'ldap_password',
+			 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
+setconfigfromoldsources ('core', 'jabber_password',
+			 'GForgeJabberPasswd', 'sys_gfjabber_pass', NULL) ;
+
+forge_define_config_item ('source_path', 'core', $fusionforge_basedir) ;
+forge_define_config_item ('data_path', 'core', '/var/lib/gforge') ;
+forge_define_config_item ('chroot', 'core', '$core/data_path/chroot') ;
+forge_define_config_item ('config_path', 'core', '/etc/gforge') ;
+
+require_once $gfcommon.'include/config-vars.php';
 
 forge_read_config_file ($gfconfig.'/config.ini') ;
 forge_read_config_dir ($gfconfig.'/config.ini.d/') ;
@@ -85,9 +135,7 @@ require_once $gfcommon.'include/RBACEngine.class.php';
 
 // System library
 require_once $gfcommon.'include/System.class.php';
-if (!forge_get_config('account_manager_type')) {
-	$sys_account_manager_type='UNIX';
-}
+forge_define_config_item('account_manager_type', 'core', 'UNIX') ;
 require_once $gfcommon.'include/system/'.forge_get_config('account_manager_type').'.class.php';
 $amt = forge_get_config('account_manager_type') ;
 $SYS = new $amt();
@@ -163,7 +211,7 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 		header ('Cache-Control: private');
 	}
 
-	require_once forge_get_config('themes_root').forge_get_config('default_theme').'/Theme.class.php';
+	require_once forge_get_config('themes_root').'/'.forge_get_config('default_theme').'/Theme.class.php';
 	$HTML = new Theme () ;
 } else {		     // Script run from cron or a command line
 	require_once $gfwww.'include/squal_exit.php';

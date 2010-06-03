@@ -32,10 +32,10 @@ forge_set_config_item_bool ('project_registration_restricted', 'core') ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
 forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
 forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;
-forge_define_config_item ('scm_tarballs_path', 'core', $GLOBALS['sys_scm_tarballs_path']) ;
-forge_define_config_item ('scm_snapshots_path', 'core', $GLOBALS['sys_scm_snapshots_path']) ;
-forge_define_config_item ('plugins_path', 'core', $GLOBALS['sys_plugins_path']) ;
-forge_define_config_item ('themes_root', 'core', $GLOBALS['sys_themeroot']) ;
+forge_define_config_item ('scm_tarballs_path', 'core', '$core/data_path/scmtarballs') ;
+forge_define_config_item ('scm_snapshots_path', 'core', '$core/data_path/scmsnapshots') ;
+forge_define_config_item ('plugins_path', 'core', '$core/source_path/plugins') ;
+forge_define_config_item ('themes_root', 'core', '$core/source_path/www/themes') ;
 forge_define_config_item ('default_theme', 'core', $GLOBALS['sys_theme']) ;
 forge_define_config_item ('default_language', 'core', $GLOBALS['sys_lang']) ;
 forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_timezone']) ;
@@ -124,16 +124,6 @@ forge_define_config_item ('admin_email', 'core', $GLOBALS['sys_admin_email']) ;
 forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
 forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
 forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
-forge_define_config_item ('database_host', 'core', $GLOBALS['sys_dbhost']) ;
-forge_define_config_item ('database_port', 'core', @$GLOBALS['sys_dbport']) ;
-forge_define_config_item ('database_name', 'core', $GLOBALS['sys_dbname']) ;
-forge_define_config_item ('database_user', 'core', $GLOBALS['sys_dbuser']) ;
-forge_define_config_item ('database_password', 'core', $GLOBALS['sys_dbpasswd']) ;
-
-forge_define_config_item ('source_path', 'core', $GLOBALS['sys_share_path']) ;
-forge_define_config_item ('data_path', 'core', $GLOBALS['sys_var_path']) ;
-forge_define_config_item ('chroot', 'core', $GLOBALS['sys_chroot']) ;
-forge_define_config_item ('config_path', 'core', $GLOBALS['sys_etc_path']) ;
 
 // Arch plugin
 if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {

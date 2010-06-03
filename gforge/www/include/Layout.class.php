@@ -133,7 +133,7 @@ class Layout extends Error {
 		}
 
 		// determine theme{dir,url}
-		$this->themedir = forge_get_config('themes_root') . forge_get_config('default_theme') . '/';
+		$this->themedir = forge_get_config('themes_root') . '/' . forge_get_config('default_theme') . '/';
 		if (!file_exists ($this->themedir)) {
 			html_error_top(_("Can't find theme directory!"));
 			return;

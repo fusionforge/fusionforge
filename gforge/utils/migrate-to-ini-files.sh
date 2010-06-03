@@ -139,10 +139,6 @@ add_config scmsvn use_ssl >> $tmp
 
 add_config mediawiki enable_uploads >> $tmp
 
-add_config externalsearch engines >> $tmp
-
-add_config blocks templates >> $tmp
-
 add_config mantis server >> $tmp
 
 mv $tmp $config_path/zzz-migrated-old-config
