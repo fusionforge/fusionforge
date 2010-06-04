@@ -36,10 +36,9 @@ class ForumAdmin extends Error {
 	var $group_id;
 	var $p,$g;
 	
-	function ForumAdmin($gid=0) {
-		global $group_id;
+	function ForumAdmin($group_id) {
 		$this->group_id = $group_id; 
-		if ($gid) {
+		if ($group_id) {
 			$this->group_id = $group_id;
 			$this->g =& group_get_object($group_id);
 			$this->p =& $this->g->getPermission ();
@@ -275,8 +274,8 @@ class ForumAdmin extends Error {
 			if ($this->isGroupAdmin()) {
 				$this->PrintAdminOptions();
 			}
-			$res = db_query_params ('SELECT forum_name, group_forum_id FROM forum_group_list WHERE group_id=$1 and moderation_level > 0',
-			array ($group_id));
+			$res = db_query_params ('SELECT fgl.forum_name, fgl.group_forum_id FROM forum_group_list fgl, forum_pending_messages fpm WHERE fgl.group_id=$1 AND fpm.group_forum_id = fgl.group_forum_id GROUP BY fgl.forum_name, fgl.group_forum_id',
+						array ($group_id));
 			if (!$res) {
 				echo db_error();
 				return;			
@@ -289,7 +288,7 @@ class ForumAdmin extends Error {
 			}
 			
 			if (count($moderated_forums)==0) {
-				echo $HTML->feedback(_('No forums are moderated for this group'));
+				echo $HTML->feedback(_('No forum messages are pending moderation for this group'));
 				forum_footer(array());
 				exit();
 			}
@@ -319,8 +318,7 @@ class ForumAdmin extends Error {
 
 			';
 			
-			//$moderated_forums["A"] = "All Forums for this group"; // to show all
-			echo html_build_select_box_from_assoc($moderated_forums,forum_id,$forum_id);
+			echo html_build_select_box_from_assoc($moderated_forums,'forum_id',$forum_id);
 			echo '    <input name="Go" type="submit" value="Go" />';
 			
 			$title = array();
@@ -338,6 +336,7 @@ class ForumAdmin extends Error {
 
 			$options = array("1" => "No action","2" => "Delete","3" => "Release"); //array with the supported actions
 			//i'll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
+			$ids='';
 			for($i=0;$i<db_numrows($res);$i++) {
 				$ids .= db_result($res,$i,'msg_id') . ",";
 			}
@@ -441,7 +440,7 @@ class ForumAdmin extends Error {
 						$has_followups = db_result($res1,0,"has_followups");
 						$most_recent_date = db_result($res1,0,"most_recent_date");
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
-							$feedback .= "( $subject ) " . _('Pending forum released') . "<br />";
+							$feedback .= "( $subject ) " . _('Pending message released') . "<br />";
 							if (db_numrows($res2)>0) {
 								//if there's an attachment
 								$am = NEW AttachManager();//object that will handle and insert the attachment into the db

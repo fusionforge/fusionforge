@@ -120,7 +120,7 @@ if ($msg_id) {
 	echo _("By:").' '. util_make_link_u($fm->getPosterName(), $fm->getPosterID(), $fm->getPosterRealName());
 	echo ' on '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'</td><td align="right">';
 	echo '<a href="'.$url.'">[forum:'.$msg_id.']</a><br/>';
-	$fa = new ForumAdmin();
+	$fa = new ForumAdmin($f->Group->getID());
 	if (forge_check_perm ('forum_admin', $f->Group->getID())) {
 		echo $fa->PrintAdminMessageOptions($msg_id,$group_id,0,$forum_id); // 0 in thread id because that tells us to go back to message.php instead of forum.php
 	}

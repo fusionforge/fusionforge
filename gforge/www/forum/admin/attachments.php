@@ -42,7 +42,7 @@ require_once $gfcommon.'forum/ForumMessage.class.php';
 $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');
 
-$fa = new ForumAdmin();
+$fa = new ForumAdmin($group_id);
 
 session_require_perm ('forum_admin', $group_id) ;
 

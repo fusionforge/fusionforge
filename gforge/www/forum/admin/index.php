@@ -124,7 +124,7 @@ if (getStringFromRequest('add_forum')) {
 
 	forum_header(array('title'=>_('Change forum status')));
 	echo '<p>'._('You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.').'</p>';
-	$fa = new ForumAdmin();
+	$fa = new ForumAdmin($f->Group->getID());
 	$fa->PrintAdminPendingOption($group_forum_id);
 		
 	echo '
@@ -185,11 +185,13 @@ if (getStringFromRequest('add_forum')) {
 } elseif ( getStringFromRequest("deletemsg") ) {
 	// delete message handling
 		
-	$fa = new ForumAdmin();
-
 	$forum_id = getStringFromRequest("forum_id");
 	$thread_id = getStringFromRequest("thread_id");
 	$msg_id = getStringFromRequest("deletemsg");
+
+	$f = forum_get_object ($forum_id) ;
+
+	$fa = new ForumAdmin($f->Group->getID());
 
 	if (getStringFromRequest("ok")) {
 		//actually delete the message
@@ -229,7 +231,9 @@ if (getStringFromRequest('add_forum')) {
 	$forum_id = getStringFromRequest("forum_id");
 	$thread_id = getStringFromRequest("thread_id");
 	$msg_id = getStringFromRequest("editmsg");
-	$fa = new ForumAdmin();
+
+	$f = forum_get_object ($forum_id) ;
+	$fa = new ForumAdmin($f->Group->getID());
 
 	if (getStringFromRequest("ok")) {
 		//actually finish editing the message and save the contents
@@ -304,7 +308,8 @@ if (getStringFromRequest('add_forum')) {
 	$forum_id = getIntFromRequest("forum_id");
 	$return_to_message = getIntFromRequest("return_to_message");
 	$new_forum_id = getIntFromRequest("new_forum_id");
-	$fa = new ForumAdmin();
+	$f = forum_get_object ($forum_id) ;
+	$fa = new ForumAdmin($f->Group->getID());
 
 	if (getStringFromRequest("ok")) {
 		if ($forum_id == $new_forum_id) {
@@ -420,7 +425,8 @@ if (getStringFromRequest('add_forum')) {
 	//
 	//	Add new forum
 	//
-	$fa = new ForumAdmin();
+	$fa = new ForumAdmin($g->getID());
+
 	$fa->PrintAdminOptions();
 
 	if ($f)

@@ -42,7 +42,7 @@ $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');
 $forum_id = getStringFromRequest("forum_id");
 
-$fa = new ForumAdmin ();
+$fa = new ForumAdmin ($group_id);
 
 // If there's no forum_id input, then the user must have access to all forums, thus he's a group admin for the forums
 if (!$forum_id) {

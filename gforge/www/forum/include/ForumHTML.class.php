@@ -250,8 +250,8 @@ class ForumHTML extends Error {
 			$bold_end = '';
 		}
 		$am = new AttachManager();
-		$fa = new ForumAdmin();
 		$msgforum =& $msg->getForum();
+		$fa = new ForumAdmin($msgforum->Group->getID());
 		$url = util_make_url('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
 		$ret_val = 		
 		'<table border="0" width="100%" cellspacing="0">

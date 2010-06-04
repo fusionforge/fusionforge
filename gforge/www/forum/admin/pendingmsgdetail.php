@@ -43,7 +43,7 @@ $forum_id = getIntFromRequest("forum_id");
 
 global $HTML;
 
-$fa = new ForumAdmin();
+$fa = new ForumAdmin($group_id);
 
 if ( (!$forum_id) || (!$group_id) || (!$msg_id) ) {
 	exit_missing_param();
