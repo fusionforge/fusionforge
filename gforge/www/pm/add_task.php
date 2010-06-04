@@ -29,7 +29,7 @@ echo notepad_func();
 <input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 
 <table border="0" width="100%">
-
+<tbody>
 	<tr>
 		<td>
 		<strong><?php echo _('Category') ?></strong><br />
@@ -139,6 +139,7 @@ will add duration and parent_id choices at some point
 		</td>
 	</tr>
 -->
+</tbody>
 </table>
 </form>
 <?php
