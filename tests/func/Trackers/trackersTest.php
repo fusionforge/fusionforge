@@ -195,8 +195,6 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("This is a new tracker"));
 		$this->click("link=newTracker");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[@href='".URL."tracker/admin/?group_id=6&atid=105']");
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Delete");
 		$this->waitForPageToLoad("30000");
 		$this->click("sure");
