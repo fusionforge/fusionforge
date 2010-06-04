@@ -47,7 +47,7 @@ function &forum_get_object($forum_id) {
 	$Group =& group_get_object($data["group_id"]);
 	$f =  new Forum ($Group, $data["group_artifact_id"]);
 
-	$f->fetchData () ;
+	$f->fetchData ($forum_id) ;
 
 	return $f ;
 }	
