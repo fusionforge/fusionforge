@@ -124,7 +124,7 @@ class ForumAdmin extends Error {
 	 *
 	 */
 	function isGroupAdmin() {
-		return forge_check_perm ('forum_admin', $this->g->getID()) ;
+		return forge_check_perm ('forum_admin', $this->group_id) ;
 	}
 	
 	/**
@@ -282,7 +282,6 @@ class ForumAdmin extends Error {
 				return;			
 			}
 			
-			global $sys_db_row_pointer;
 			$moderated_forums = array();
 			for ($i=0;$i<db_numrows($res);$i++) {
 				$aux = db_fetch_array($res);
