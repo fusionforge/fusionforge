@@ -368,7 +368,7 @@ class ForumMessage extends Error {
 		db_begin();
 		
 		//now we check the moderation status of the forum and act accordingly
-		if (forge_check_perm ('forum', $this->Forum->getID(), 'post_unmoderated')) {
+		if (forge_check_perm ('forum', $this->Forum->getID(), 'unmoderated_post')) {
 			//no moderation
 			return $this->insertmsg($subject, $body, $thread_id, $is_followup_to,$user_id,$has_attach);
 		} else {
