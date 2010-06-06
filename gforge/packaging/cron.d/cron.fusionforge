@@ -1,15 +1,5 @@
-#
-# GForge
-# Copyright 1999-2001 (c) VA Linux Systems
-# Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
-# http://gforge.org/
-#
-# YOUR php.ini FOR PHP CLI MUST HAVE APPROPRIATE include_path
-FFUSER=gforge
-
-# Change path to the GForge directory.
-GFORGE="/opt/gforge"
 FFCRON="/opt/gforge/cronjobs"
+FFUSER=gforge
 
 # You may need to change the pathname to php CLI (command line interface)
 PHP="/usr/bin/php -f"
@@ -64,10 +54,10 @@ MAILTO=""
 0 * * * * root $PHP $FFCRON/create_scm_repos.php
 
 # Gather commit stats from SCM repositories
-2 * * * * root $PHP $FFCRON/gather_scm_stats.php
+0 2 * * * root $PHP $FFCRON/gather_scm_stats.php
 
 # Generate snapshots and tarballs from SCM repositories
-3 * * * * root $PHP $FFCRON/generate_scm_snapshots.php
+0 3 * * * root $PHP $FFCRON/generate_scm_snapshots.php
 
 # this cronjob analyse the apache log and instert them in the db table stats_subd_pages
 # this is not used in fusionforge IHM.
@@ -76,13 +66,13 @@ MAILTO=""
 
 # this cronjob send a mail to the admin with all news that have been posted less than 30 days and that have not be validated.
 # Daily mail for not approved news
-30 17 * * * root $FFCRON/get_news_notapproved.pl
+#30 17 * * * root $FFCRON/get_news_notapproved.pl
 
 # Daily site backup
 0 2 * * *  root $PHP $FFCRON/backup_site.php
 
 #
-#	IMPORTANT!! READ THE INSTALL file before continuing!
+# IMPORTANT!! READ THE README.root file before continuing!
 #
 
 # Create the new mailing lists
@@ -95,10 +85,8 @@ MAILTO=""
 #30 5 * * 1,2,3,4,5 root $PHP $FFCRON/daily_task_email.php
 
 # Create the /etc/* files needed for CVS
-10 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/usergroup.php
+10 * * * * root $PHP $FFCRON/plugins/scmcvs/cronjobs/usergroup.php
 
 # Upload the SSH key files needed for CVS
-15 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
+15 * * * * root $PHP $FFCRON/plugins/scmcvs/cronjobs/ssh_create.php
 
-# Create SVN tarballs
-5 3 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php

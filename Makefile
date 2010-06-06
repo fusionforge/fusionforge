@@ -27,8 +27,10 @@ else
 	TAG=$(shell LANG=C svn log $(URL) -r $(ID) -l 1 2>/dev/null | awk '{ if ($$1=="Tag-Release") print $$1}')
 endif
 ifeq ($(TAG),)
+	VERSION_ID=$(VER)-$(ID)
 	VERSION=fusionforge-$(VER)-$(ID)
 else
+	VERSION_ID=$(VER)
 	VERSION=fusionforge-$(VER)
 endif
 

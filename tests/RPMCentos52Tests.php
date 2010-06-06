@@ -5,9 +5,9 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
-require_once 'func/Testing/TarSeleniumRemoteSuite.php';
+require_once 'func/Testing/RPMSeleniumRemoteSuite.php';
 
-class TarCentos52Tests
+class RPMCentos52Tests
 {
 	public static function main()
 	{
@@ -16,7 +16,7 @@ class TarCentos52Tests
 
 	public static function suite()
 	{
-		$suite = new TarSeleniumRemoteSuite('PHPUnit');
+		$suite = new RPMSeleniumRemoteSuite('PHPUnit');
 
 		// Selenium tests
 		$suite->addTestFiles(glob("func/Site/*Test.php"));

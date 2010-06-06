@@ -250,7 +250,6 @@ gforge/docs/docbook/docbook/user_guide/project_functions/activity.xml -text
 gforge/docs/docbook/docbook/user_guide/project_functions/blocks.xml -text
 gforge/docs/fusionforge.doxygen -text
 gforge/docs/images/sflogo2-105a.png -text
-gforge/docs/phpdoc/phpDocumentor.ini.patch -text
 gforge/etc/config.ini-fhs -text
 gforge/etc/config.ini-opt -text
 gforge/etc/config.ini-usrlocal -text
@@ -3579,7 +3578,16 @@ gforge/plugins/wiki/www/wikiconfig.php -text
 gforge/plugins/wiki/www/www -text
 gforge/plugins/wiki/www/z -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
+gforge/rpm-specific/dag-rpmforge.repo -text
+gforge/rpm-specific/fusionforge.repo -text
 gforge/rpm-specific/httpd.d/gforge.conf -text
+gforge/rpm-specific/patches/LocalSettings.php -text
+gforge/rpm-specific/patches/README.mediawiki.jlbond -text
+gforge/rpm-specific/patches/fusionforge-4.8.3-ereg_preg.patch -text
+gforge/rpm-specific/patches/fusionforge-4.8.3-mediawiki.patch -text
+gforge/rpm-specific/patches/fusionforge-4.8.3-misc_fixes.patch -text
+gforge/rpm-specific/patches/fusionforge-4.8.3-register_globals.patch -text
+gforge/rpm-specific/patches/fusionforge-4.8.3-webcalendar.patch -text
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/install-svn.sh -text
 gforge/translations/bg.po -text
@@ -4508,6 +4516,7 @@ plugins/templates/scmcpold/packaging/dirs/plugin-scmcpold -text
 plugins/templates/scmcpold/packaging/install/plugin-scmcpold -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
+tests/RPMCentos52Tests.php -text
 tests/SeleniumTests.php -text
 tests/TarCentos52Tests.php -text
 tests/build/documentation/DocumentationTest.php -text
@@ -4528,8 +4537,10 @@ tests/func/Soap/checks.php -text
 tests/func/Soap/login.php -text
 tests/func/Soap/usergroup.php -text
 tests/func/Tasks/createTaskTest.php -text
+tests/func/Testing/RPMSeleniumRemoteSuite.php -text
 tests/func/Testing/SeleniumGforge.php -text
 tests/func/Testing/SeleniumRemoteSuite.php -text
+tests/func/Testing/TarSeleniumRemoteSuite.php -text
 tests/func/Trackers/relationTest.php -text
 tests/func/Trackers/trackersTest.php -text
 tests/func/Trackers/workflowTest.php -text

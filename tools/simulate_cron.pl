@@ -16,6 +16,12 @@ while (<F>) {
  if (/^([A-Z]+)="(.*)"/) {
   $ENV{$1}=$2;
   print "Loading $1=$2\n";
+  next;
+ }
+ if (/^([A-Z]+)=(.*)/) {
+  $ENV{$1}=$2;
+  print "Loading $1=$2\n";
+  next;
  }
  if (/\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+root\s+(.*)/) {
   print "Running $1 (as root)\n";

@@ -1,41 +1,58 @@
-#%define dbhost			localhost
+#
+# RPM spec file for FusionForge
+#
+# Developed for 4.8 by JL Bond Consulting
+# Reworked for 5.1 by Alain Peyrat <aljeux@free.fr>
+#
+
+# Global Definitions
 %define dbname			gforge
 %define dbuser			gforge
-
-%if %{?hostname:0}%{!?hostname:1}
-	%define hostname `hostname`
-%endif
-%if %{?sitename:0}%{!?sitename:1}
-	%define sitename MyForge
-%endif
-%if %{?adminemail:0}%{!?adminemail:1}
-	%if "%hostname" == "localhost"
-		%define adminemail root@localhost.localdomain
-	%else
-		%define adminemail root@%hostname
-	%endif
-%endif
-%{!?release:%define release 1}
 
 %define gfuser			gforge
 %define gfgroup			gforge
 
+%define httpduser		apache
+%define httpdgroup		apache
+
+%define fforge_admin		fforgeadmin
+%define fforge_passwd		fforgeadmin
+
+%define GFORGE_DIR		%{_datadir}/gforge
+%define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
+%define GFORGE_LANG_DIR         %{_datadir}/locale
+%define GFORGE_VAR_LIB		%{_var}/lib/gforge
+
+#%define reloadhttpd() /sbin/service httpd reload >/dev/null 2>&1
+%define reloadhttpd() /etc/init.d/httpd httpd reload >/dev/null 2>&1
+
+# RPM spec preamble
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
-Version: 4.8.2
-Release: %{release}
+Version: @@VERSION@@
+Release: 1%{?dist}
 BuildArch: noarch
 License: GPL
 Group: Development/Tools
 Source0: %{name}-%{version}.tar.bz2
-URL: http://www.gforge.org/
+Source1: README.mediawiki.jlbond
+Source2: LocalSettings.php
+Patch0: fusionforge-4.8.3-ereg_preg.patch
+Patch1: fusionforge-4.8.3-webcalendar.patch
+Patch2: fusionforge-4.8.3-mediawiki.patch
+Patch3: fusionforge-4.8.3-register_globals.patch
+Patch4: fusionforge-4.8.3-misc_fixes.patch
+URL: http://www.fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
+Packager: Alain Peyrat <aljeux@free.fr>
 
-Patch1000: gforge-4.0-deb_rpm.patch
+# requirements as derived from fusionforge-install-1-deps.php script
+Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman, cvs, subversion
+Requires: postgresql, postgresql-libs, postgresql-server, postgresql-contrib
+Requires: postfix, rcs, wget, openssh, inetd, which, liberation-fonts
 
-AutoReqProv: off
 Requires: /bin/sh, /bin/bash
-Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail
+Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail, perl-Sort-Versions
 Requires: cronolog
 Requires: php-jpgraph php-gd
 #update sys_path_to_jpgraph in gforge.conf if you remove this line
@@ -43,72 +60,14 @@ Requires: php-jpgraph php-gd
 #Requires: libnss-pgsql >= 1.4
 Requires: mailman
 Requires: gettext
+Requires: htmlpurifier >= 4.0.0
+Requires: sed
+Requires: coreutils
+Requires: /usr/bin/newaliases
  
-BuildRequires: perl
+# BuildRequires: sed, perl
 
-# RedHat specific - distribution specific (fc = Fedora Core (or RHEL4 and Centos 4) - rh9 = RHL 9 - el3 = RHEL 3 or CentOS 3)
-%if "%{_vendor}" == "redhat"
-	%if %{?dist:0}%{!?dist:1}
-		%define dist fc
-	%endif
-	
-	%define httpduser		apache
-	%define httpdgroup		apache
-	%define httpddir		httpd
-
-Requires: httpd
-Requires: perl-DBD-Pg, php-pgsql
-	
-	%if "%{dist}" == "fc" 
-Requires: php-mbstring
-	%endif
-	%if "%{dist}" == "el3"
-Requires: rh-postgresql, rh-postgresql-server
-		%define postgresqlservice rhdb
-	%else
-Requires: postgresql, postgresql-server
-		%define postgresqlservice postgresql
-	%endif
-	
-	%define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
-	%define reloadpostgresql() service %postgresqlservice reload
-	%define gracefulhttpd() service httpd graceful >/dev/null 2>&1
-%endif
-
-# SuSE specific
-%if "%{_vendor}" == "suse"
-	%define httpduser		wwwrun
-	%define httpdgroup		www
-	%define httpddir		apache2
-	
-Requires: postgresql, postgresql-server
-Requires: pgperl, jpeg
-Requires: php5
-Requires: php5-pgsql, php5-mbstring
-
-		# Start the postgresql service if needed
-		%define startpostgresql() /etc/init.d/postgresql status | grep 'running' >/dev/null 2>&1 || /etc/init.d/postgresql start
-		%define reloadpostgresql() /etc/init.d/postgresql reload >/dev/null 2>&1
-		%define gracefulhttpd() /etc/init.d/httpd graceful >/dev/null 2>&1
-%endif
-
-# Mandrake specific
-%if "%{_vendor}" == "MandrakeSoft"
-	%define httpduser		apache
-	%define httpdgroup		apache
-	%define httpddir		httpd
-	%define postgresqlservice postgresql
-	
-Requires: php-mbstring, webserver
-Requires: postgresql, postgresql-server
-Requires: perl-DBD-Pg, php-pgsql
-
-	%define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
-	%define reloadpostgresql() service %postgresqlservice reload
-	%define gracefulhttpd() service httpd graceful >/dev/null 2>&1
-%endif
-
-Provides: gforge = %{Version}
+Provides: gforge = %{version}
 
 %description
 FusionForge provides many tools to aid collaboration in a
@@ -117,297 +76,841 @@ mailing-lists, SCM repository, forums, support request helper,
 web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
-# Macro for generating an environment variable (%1) with %2 random characters
-%define randstr() %1=`perl -e 'for ($i = 0, $bit = "!", $key = ""; $i < %2; $i++) {while ($bit !~ /^[0-9A-Za-z]$/) { $bit = chr(rand(90) + 32); } $key .= $bit; $bit = "!"; } print "$key";'`
+%package aselectextauth
+Summary: A-select external authentication for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description aselectextauth
+A system for authenticating users in fusionforge. A-Select is a framework
+where users can be authenticated by several means with Authentication
+Service Providers.
 
-# Change password for admin user
-%define changepassword() echo "UPDATE users SET user_pw='%1', email='%{adminemail}' WHERE user_name='admin'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
+%package cvssyncmail
+Summary: Provides email notifications of changes to CVS repositories
+Group: Development/Tools
+Requires: %{name} >= %{version}, %{name}-scmcvs, python, php
+%description cvssyncmail
+This plugin adds the capability to notify users of changes to CVS repositories
+in FusionForge.
 
-%define GFORGE_DIR		%{_datadir}/gforge
-%define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
-%define GFORGE_LANG_DIR         %{_datadir}/locale
-%define GFORGE_LIB_DIR		%{GFORGE_DIR}/lib
-%define GFORGE_DB_DIR		%{GFORGE_DIR}/db
-%define GFORGE_BIN_DIR		%{GFORGE_DIR}/bin
-%define PLUGINS_LIB_DIR		%{GFORGE_DIR}/plugins
-%define PLUGINS_CONF_DIR	%{GFORGE_CONF_DIR}/plugins
-#%define CACHE_DIR		/var/cache/gforge
-%define UPLOAD_DIR		/var/lib/gforge/upload
-%define SCM_TARBALLS_DIR	/var/lib/gforge/scmtarballs
-%define SCM_SNAPSHOTS_DIR	/var/lib/gforge/scmsnapshots
-%define CROND_DIR		/%{_sysconfdir}/cron.d
-%define HTTPD_CONF_DIR		/%{_sysconfdir}/%{httpddir}
-%define SBIN_DIR		%{_sbindir}
+%package cvstracker
+Summary: Links CVS log messages to trackers and tasks.
+Group: Development/Tools
+Requires: %{name} >= %[version}, %{name}-scmcvs, php, postgresql
+%description cvstracker
+This is a fusionforge plugin that allows linking CVS log messages to
+trackers and tasks. It will review all commits in a project and search for
+specific string to know which task or tracker is related.
+
+%package externalsearch
+Summary: external search plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description externalsearch
+This plugin adds a new search engine to your FusionForge site. It allows
+your users to search your FusionForge site through external search engines
+which have indexed it. You can define search engines you want to use in
+the configuration file.
+
+%package fckeditor
+Summary: FCKEditor plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description fckeditor
+FCKEditor is a text editor that displays within a web browser.
+
+#%package helloworld
+#Summary: Hello World sample FusionForge plugin
+#Group: Development/Tools
+#Requires: %{name} >= %{version}, php
+#%description helloworld
+#Helloworld plugin is just a sample FusionForge plugin to aid developers.
+
+%package ldapextauth
+Summary: external LDAP authentication for FusionForge plugin
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description ldapextauth
+This plugin provides LDAP authentication capability for FusionForge.
+
+%package mantis
+Summary: MantisBT plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description mantis
+A plugin to use the MantisBT web-based bug tracking system with FusionForge.
+
+%package mediawiki
+Summary: Mediawiki plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, mediawiki
+%description mediawiki
+This is a plugin to integrate MediaWiki within FusionForge.
+
+%package online_help
+Summary: online_help plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description online_help
+This is a online_help plugin within FusionForge.
+
+%package projects_hierarchy
+Summary: projects_hierarchy plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description projects_hierarchy
+This is a projects_hierarchy plugin within FusionForge.
+
+%package quota_management
+Summary: quota_management plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description quota_management
+This is a quota_management plugin within FusionForge.
+
+%package scmarch
+Summary: Arch version control plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, arch
+%description scmarch
+This is a plugin to integrate Arch version control system with FusionForge
+
+%package scmbzr
+Summary: Bazaar version control plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, bazaar
+%description scmbzr
+This is a plugin to integrate Bazaar version control system with FusionForge
+
+%package scmdarcs
+Summary: DARCS version control plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, darcs
+%description scmdarcs
+This is a plugin to integrate DARCS version control system with FusionForge
+
+%package scmgit
+Summary: Bazaar version control plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, git
+%description scmgit
+This is a plugin to integrate Bazaar version control system with FusionForge
+
+%package scmhg
+Summary: Mercurial (hg) version control plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, hg
+%description scmhg
+This is a plugin to integrate Mercurial (hg) version control system with FusionForge
+
+%package scmccase
+Summary: Clear Case plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description scmccase
+This is the Clear Case plugin for FusionForge. It creats Clear Case repositories
+for projects within FusionForge.
+
+%package scmcvs
+Summary: CVS plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, cvs
+%description scmcvs
+FusionForge is a web-based Collaborative Development Environment offering
+easy access to CVS, mailing lists, bug tracking, message
+boards/forums, task management, permanent file archival, and total
+web-based administration.
+
+This RPM installs SCM CVS plugin for FusionForge and provides CVS support
+to FusionForge.
+
+It also provides a specific version of CVSWeb wrapped in FusionForge.
+
+%package scmsvn
+Summary: Subversion plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, subversion
+%description scmsvn
+This RPM installs SCM SVN plugin for FusionForge and provides svn support
+to FusionForge.
+
+%package svncommitemail
+Summary: subversion commit email plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, subversion, perl
+%description svncommitemail
+This RPM installs subversion commit email notification plugin for FusionForge.
+
+%package svntracker
+Summary: SVNTracker plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, subversion, perl, postgresql
+%description svntracker
+SVNTracker plugin allows linking SVN log messages to Trackers and tasks.
+It will review all commits in a project and search for a specific string
+to know which task or tracker is related.
+
+%package webcalendar
+Summary: webcalendar plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description webcalendar
+WebCalendar plugin for FusionForge.
+
+%package blocks
+Summary: Blocks plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}
+%description blocks
+HTML blocks plugin for FusionForge. 
+
+%package extratabs
+Summary: extratabs plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}
+%description extratabs
+HTML extratabs plugin for FusionForge. 
+
+%package wiki
+Summary: Wiki plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description wiki
+Wiki plugin for FusionForge. Allows for one wiki per project, integrated search,
+page edits displayed on activity tab, and multi-project wiki preferences.
+
+%package projectlabels
+Summary: Labels plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description projectlabels
+Project Labels plugin for FusionForge. 
+
+%package contribtracker
+Summary: contribtracker plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description contribtracker
+contribtracker plugin for FusionForge. 
+
+%package globalsearch
+Summary: globalsearch plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description globalsearch
+globalsearch plugin for FusionForge. 
+
+%package mantisbt
+Summary: mantisbt plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description mantisbt
+mantisbt plugin for FusionForge. 
 
 %prep
 %setup
-%patch1000 -p1
+#%patch0 -p1
+#%patch1 -p1
+#%patch2 -p1
+#%patch3 -p1
+#%patch4 -p1
 
 %build
+# empty build section
 
 %install
-# cleaning build environment
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 # creating required directories
-install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{UPLOAD_DIR}
-#install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{SCM_TARBALLS_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{SCM_SNAPSHOTS_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{PLUGINS_LIB_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{SBIN_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d
-install -m 755 -d $RPM_BUILD_ROOT/%{CROND_DIR}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
+%{__install} -m 755 -d $RPM_BUILD_ROOT/bin
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}/lib
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/{httpd.d,plugins}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_LANG_DIR}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{upload,scmtarballs,scmsnapshots}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{homedirs,svnroot,cvsroot,dumps}
+%{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
+# mock mediawiki directory because we symlink GForge skin to Monobook
+%{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
+
+# we define a search and replace function, we'll be using this a lot
+# to fix several parts of the installation
+search_and_replace()
+{
+    for i in `/usr/bin/find . -type f`
+    do
+	if $(grep -q ${1} $i) ; then
+	    %{__sed} -i -e "s+${1}+${2}+g" $i
+	fi
+    done
+}
+
+# we need to fix up the fusionforge-install-3-db.php script to ref %{GFORGE_DIR}
+search_and_replace "/opt/gforge" "/usr/share/gforge"
 
 # installing gforge
-for i in common cronjobs etc rpm-specific utils www ; do
-	cp -rp $i $RPM_BUILD_ROOT/%{GFORGE_DIR}/
-done
-#create a repository to link the plugins web pages
-install -m 755 -d $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins
+%{__cp} -a * $RPM_BUILD_ROOT/%{GFORGE_DIR}/
 
-install -m 750 setup $RPM_BUILD_ROOT/%{GFORGE_DIR}/
-chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/utils/fill-in-the-blanks.pl
-chmod 755 $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/scm/viewvc/bin/cgi/viewvc.cgi
+# create project vhost space symlink
+%{__ln_s} /home/groups $RPM_BUILD_ROOT/%{GFORGE_VAR_LIB}/homedirs/groups
+# create SVN repo default location symlink
+%{__ln_s} %{GFORGE_VAR_LIB}/svnroot $RPM_BUILD_ROOT/svnroot
+# create CVS repo default location symlink
+%{__ln_s} %{GFORGE_VAR_LIB}/cvsroot $RPM_BUILD_ROOT/cvsroot
+# install restricted shell for cvs accounts
+%{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
 
-cp -rp db/. $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
-cp -p deb-specific/sf-2.6-complete.sql $RPM_BUILD_ROOT/%{GFORGE_DB_DIR}/
+# copy over configuration files
+# - main configuration file
+## fix up local.inc.example before we use it
+### - replace apacheuser / apachegroup with %{httpduser} and %{httpdgroup}
+%{__sed} -i -e "s/apacheuser/%{httpduser}/g" etc/local.inc.example
+%{__sed} -i -e "s/apachegroup/%{httpdgroup}/g" etc/local.inc.example
+%{__sed} -i -e "s!/path/to/gforge!%{GFORGE_DIR}!g" etc/local.inc.example
 
-for i in deb-specific/sqlhelper.pm deb-specific/sqlparser.pm utils/include.pl ; do
-	cp -p $i $RPM_BUILD_ROOT/%{GFORGE_LIB_DIR}/
-done
-for i in db-upgrade.pl register-plugin unregister-plugin register-theme unregister-theme install-db.sh; do
-	install -m 755 deb-specific/$i $RPM_BUILD_ROOT/%{GFORGE_BIN_DIR}/
-done
+### - replace sys_dbname and sys_dbuser with %{dbname} and %{dbuser}
+### - fix various sys_* variables
+%{__cp} -a etc/local.inc.example $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s/\$sys_dbname=.*/\$sys_dbname='%{dbname}';/g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s/\$sys_dbuser=.*/\$sys_dbuser='%{dbuser}';/g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s|\$sys_plugins_path=.*|\$sys_plugins_path=\"%{GFORGE_DIR}/plugins\";|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s|\$sys_upload_dir=.*|\$sys_upload_dir=\"\$sys_var_path/upload\";|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s|\$sys_urlroot=.*|\$sys_urlroot=\"%{GFORGE_DIR}/www\";|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+### - replace sys_localinc, sys_gfdbname, sys_gfdbuser
+%{__cp} -a etc/httpd.secrets.example $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
+%{__sed} -i -e "s|sys_localinc.*$|sys_localinc %{GFORGE_CONF_DIR}/local.inc|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
+%{__sed} -i -e "s|sys_gfdbname.*$|sys_gfdbname %{dbname}|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
+%{__sed} -i -e "s|sys_gfdbuser.*$|sys_gfdbname %{dbuser}|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
+# - apache configuration file
+%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+# install fusionforge crontab
+%{__install} -m 644 packaging/cron.d/cron.fusionforge $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
 
-# configuring apache
-## use post install setup script instead
-install -m 644 rpm-specific/httpd.d/gforge.conf $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR}/conf.d/gforge.conf
+%{__install} -m 644 deb-specific/sqlhelper.pm $RPM_BUILD_ROOT%{GFORGE_DIR}/lib/sqlhelper.pm
 
-# configuring GForge
-install -m 600 rpm-specific/conf/gforge.conf $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
-install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
+# Install locale files in Redhat standard location
+%{__cp} -a locales/* $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
 
-#install *.mo
-cp -rp locales/* $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
+# create symlink for jpgraph
+%{__ln_s} /usr/share/jpgraph $RPM_BUILD_ROOT%{GFORGE_DIR}/jpgraph
 
-# setting crontab
-install -m 664 packaging/cron.d/fusionforge $RPM_BUILD_ROOT/%{CROND_DIR}/
+%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/utils/fusionforge-shell-postgresql.spec
+%{__rm} -f $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins/helloworld
+%{__rm} -f $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins/mailman
+
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/packaging
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/deb-specific
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/rpm-specific
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/*/packaging
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/*/*.spec
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/tinderbox
+%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/viewcvs
+
+### Plugin setup ###
+%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/
+%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
+
+# plugin: aselectextauth
+
+# plugin: cvssyncmail
+
+# plugin: cvstracker
+# delete stuff that is clearly outdated/obsolete so we don't package this and confuse others
+%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/cvstracker/httpd.conf
+%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/cvstracker/Makefile
+%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/cvstracker/rpm-specific
+# this is pre-activated, so create the config symlink
+%{__ln_s} %{GFORGE_DIR}/plugins/cvstracker/etc/plugins/cvstracker $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/cvstracker
+
+# plugin: eirc
+# obsolete, deleting completely
+%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/eirc
+%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/eirc
+
+# plugin: externalsearch
+
+# plugin: fckeditor
+
+# plugin: helloworld
+# this is pre-activated, so create the config symlink
+#%{__mv} $RPM_BUILD_ROOT/plugins/helloworld $RPM_BUILD_ROOT%{GFORGE_DIR}
+#%{__ln_s} %{GFORGE_DIR}/plugins/helloworld/etc/plugins/helloworld $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/helloworld
+
+# plugin: ldapextauth
+%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/ldapextauth/rpm-specific
+
+# plugin: mantis
+
+# plugin: mediawiki
+# create symlink for apache configuration for mediawiki plugin
+## first, delete the php_admin_value include_path
+%{__sed} -i -e "/^.*php_admin_value[[:space:]]*include_path.*/d" $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki
+%{__ln_s} %{GFORGE_DIR}/plugins/mediawiki/etc/httpd.d/61plugin-mediawiki $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
+# this is pre-activated, so create the config symlink
+#%{__ln_s} %{GFORGE_DIR}/plugins/mediawiki/etc/plugins/mediawiki $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/mediawiki
+# create symlinks to use MonoBook as the GForge skin
+%{__ln_s} monobook $RPM_BUILD_ROOT/usr/share/mediawiki/skins/gforge
+%{__ln_s} MonoBook.deps.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/GForge.deps.php
+%{__ln_s} MonoBook.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/GForge.php
+# sort out the GForge skin files and remove obsolete code
+%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/mediawiki/mediawiki-skin
+%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/mediawiki/usr/share/gforge
+%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/mediawiki/usr/share/mediawiki/skins
+# insert our own LocalSettings.php
+#%{__cp} -f %{SOURCE2} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/mediawiki/usr/share/mediawiki/LocalSettings.php
+# insert our own README file
+%{__cp} -f %{SOURCE1} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/mediawiki/README.jlbond
+
+# plugin: online_help
+
+# plugin: projects_hierarchy
+
+# plugin: quota_management
+
+# plugin: scmarch
+
+# plugin: scmbzr
+
+# plugin: scmccase
+
+# plugin: scmcvs
+%{__ln_s} ../../plugins/scmcvs $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/scmcvs
+%{__install} -m 644 plugins/scmcvs/cron.d/%{name}-plugin-scmcvs $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
+
+# plugin: scmdarcs
+
+# plugin: scmsvn
+# this is pre-activated, so create the config symlink
+%{__ln_s} ../../plugins/scmsvn $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/scmsvn
+
+# plugin: scmgit
+%{__ln_s} ../../plugins/scmgit $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/scmgit
+
+# plugin: scmhg
+
+# plugin: svncommitemail
+
+# plugin: svntracker
+# install crontab
+%{__install} -m 644 plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
+
+# plugin: webcalendar
+
+# plugin: blocks
+%{__ln_s} ../../plugins/blocks/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/blocks
+
+# plugin: extratabs
+%{__ln_s} ../../plugins/extratabs/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/extratabs
+
+# plugin: wiki
+%{__ln_s} ../../plugins/wiki/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/wiki
+
+# plugin: projectlabels
+%{__ln_s} ../../plugins/projectlabels/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/projectlabels
+
+# plugin: contribtracker
+%{__ln_s} ../../plugins/contribtracker/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/contribtracker
+
+# plugin: globalsearch
+%{__ln_s} ../../plugins/globalsearch/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/globalsearch
+
+# plugin: mantisbt
+%{__ln_s} ../../plugins/mantisbt/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/mantisbt
+
+### END OF PLUGIN SETUP ###
 
 %pre
-%startpostgresql
-if ! id -u %gfuser >/dev/null 2>&1; then
-	groupadd -r %{gfgroup}
-	useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "GForge User" %{gfuser}
+# we will need postgresql to be running. we start it, even if it already is running
+# this won't hurt anything, just ensure we have a running database
+/sbin/service postgresql start >>/var/log/%{name}-install.log 2>&1
+
+# setup user/group for gforge
+if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -eq 0 ] ; then
+    echo "Did not find existing fusionforge user. Adding fusionforge group and user..." >>/var/log/%{name}-install.log 2>&1
+    /usr/sbin/groupadd -r %{gfgroup}
+    /usr/sbin/useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "FusionForge User" %{gfuser}
 fi
 
 %post
-if [ "$1" -eq "1" ]; then
-
-	# TODO : USE install-db.sh
-	# creating the database
-	%startpostgresql
-	su -l postgres -s /bin/sh -c "createdb -E UNICODE %{dbname} >/dev/null 2>&1"
-	su -l postgres -s /bin/sh -c "createlang plpgsql %{dbname} >/dev/null 2>&1"
-
-	# generating and updating site admin password
-	%randstr SITEADMIN_PASSWORD 8
-	
-	# updating admin_password in gforge.conf
-	perl -pi -e "
-		s#^admin_password=.*#admin_password="$SITEADMIN_PASSWORD"#g" %{GFORGE_CONF_DIR}/gforge.conf
-	
-	SITEADMIN_PASSWORD=`echo -n $SITEADMIN_PASSWORD | md5sum | awk '{print $1}'`
-
-	# creating gforge database user
-	%randstr GFORGEDATABASE_PASSWORD 8
-
-	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
-	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
-	su -l postgres -c "psql -c \"CREATE USER gforge_mta WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
-	
-	# replacing variables in configuration files
-        perl -pi -e "
-                s/DB_HOST/"%{dbhost}"/g;
-                s/DB_NAME/"%{dbname}"/g;
-                s/DB_USER/"%{dbuser}"/g;
-                s/DB_PASSWORD/"$GFORGEDATABASE_PASSWORD"/g;
-                s/SYSTEM_NAME/"%{sitename}"/g;
-                s/RANDOM_ID/"$SESSID"/g;
-                s/HOST_NAME/"%{hostname}"/g" %{GFORGE_CONF_DIR}/gforge.conf
-
-        #admin email
-        adminemail=$(echo "%{adminemail}"| sed 's|@|\\\@|g')
-        perl -pi -e "
-                s/SERVER_ADMIN/"$adminemail"/g" %{GFORGE_CONF_DIR}/gforge.conf
-	
-	# updating PostgreSQL configuration
-	#if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
-	#	echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
- 	#	echo 'local %{dbname} gforge_mta md5md5md5md5md5' >> /var/lib/pgsql/data/pg_hba.conf
-	#	echo 'local %{dbname} gforge_nss trust' >> /var/lib/pgsql/data/pg_hba.conf
-	#	%reloadpostgresql
-	#fi
-
-	%{GFORGE_BIN_DIR}/install-db.sh configure-files
-        mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf-orig
-        mv /var/lib/pgsql/data/pg_hba.conf.gforge-new /var/lib/pgsql/data/pg_hba.conf
-        %reloadpostgresql
-
-	# adding "noreply" alias
-	for i in /etc/postfix/aliases /etc/mail/aliases /etc/aliases ; do
-		if [ -f $i ]; then
-			if ! grep -i '^ *noreply:' $i >/dev/null 2>&1; then
-				echo 'noreply: /dev/null' >> $i
-				newaliases
-			fi
-			break
-		fi
-	done
-
-	# generating random session ID
-	%randstr SESSID 32
-
- 	#path of jpgraph.php
- 	path_jpgraph=$(rpm -ql php-jpgraph | grep jpgraph.php | sed 's/\(.*\)jpgraph.php/\1/')
- 	perl -pi -e "
-		s#^sys_path_to_jpgraph=.*#sys_path_to_jpgraph=$path_jpgraph#g" %{GFORGE_CONF_DIR}/gforge.conf
- 	
- 	#wrong 20list http template for mailman on rpm
- 	rm -f %{GFORGE_CONF_DIR}/httpd.d/20list
- 	
- 	perl -pi -e "
- 		s#^GFORGE_CONF_DIR=.*#GFORGE_CONF_DIR="%{GFORGE_CONF_DIR}"#g" %{SBIN_DIR}/gforge-config
- 
- 	## plugins installs apache templates in GFORGE_CONF_DIR
- 	ln -s %{GFORGE_DIR}/etc/httpd.d %{GFORGE_CONF_DIR}/httpd.d
-	
-	# initializing configuration
-	%{SBIN_DIR}/gforge-config
-	
-	# creating the database
-	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
-	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname} >/dev/null 2>&1"
-	%changepassword $SITEADMIN_PASSWORD
-	
-	%gracefulhttpd
-	
-	if ! id -u anonymous >/dev/null 2>&1; then
- 		useradd -m -s /bin/false anonymous
- 	fi
- 
- 	CHROOT=`grep '^gforge_chroot=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
- 	if [ ! -d $CHROOT ] ; then
-		mkdir -p $CHROOT
-	fi
-	
-	GROUPS_DIR=`grep '^groupdir=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
-	if [ ! -d ${CHROOT}${GROUPS_DIR} ] ; then
-                mkdir -p ${CHROOT}${GROUPS_DIR}
-        fi	
-
-	ln -s %{GFORGE_DIR}/www/env.inc.php %{PLUGINS_LIB_DIR}/env.inc.php
-	
-	#creation of scm-gforge user
-	adduser --home-dir /var/lib/gforge/chroot/ scm-gforge
+# check to see if the database already exists. if not, we proceed to create it.
+# if so, we print a warning message.
+echo "\q" | su - postgres -c "/usr/bin/psql %{dbname}" 1>/dev/null 2>&1
+ret=$?
+if [ $ret -ne 0 ] ; then
+    FFORGE_DB=%{dbname}
+    FFORGE_USER=%{dbuser}
+    FFORGE_ADMIN_USER=%{fforge_admin}
+    FFORGE_ADMIN_PASSWORD=%{fforge_passwd}
+    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
+    /usr/bin/php %{GFORGE_DIR}/fusionforge-install-3-db.php >>/var/log/%{name}-install.log 2>&1
 else
-	# upgrading database
-	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
-
-	# updating configuration
-	%{SBIN_DIR}/gforge-config || :
-	
+    echo "Database %{dbname} already exists. Will not proceed with database setup."
+    echo "Please see %{GFORGE_DIR}/fusionforge-install-3-db.php and run it manually"
+    echo "if deemed necessary."
 fi
+
+/usr/bin/php %{GFORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
+
+HOSTNAME=`hostname -f`
+%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
+
+/etc/init.d/httpd restart >/dev/null 2>&1
+
+# generate random hash for session_key
+HASH=$(/bin/dd if=/dev/urandom bs=1024 count=100 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
+%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{GFORGE_CONF_DIR}/local.inc
+
+# add noreply mail alias
+echo "noreply: /dev/null" >> /etc/aliases
+/usr/bin/newaliases >/dev/null 2>&1
+
+# display message about default admin account
+echo ""
+echo "You can now connect to your FusionForge installation using:"
+echo ""
+echo "   http://$HOSTNAME/"
+echo ""
+echo "The default fusionforge administrator account and password is:"
+echo ""
+echo "Account Name = %{fforge_admin}"
+echo "Password = %{fforge_passwd}"
+#echo "Please change it to something appropriate upon initial login."
+# give user a few seconds to read the message
+sleep 10
 
 %preun
 
 %postun
-if [ "$1" -eq "0" ]; then
-	# dropping gforge users
-	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropuser gforge_nss >/dev/null 2>&1 ; dropuser gforge_mta >/dev/null 2>&1"
-	
-	for file in local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
-		rm -f %{GFORGE_CONF_DIR}/$file
-	done
-	# Remove PostgreSQL access
-	if grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
-		perl -ni -e 'm@^ *host.*%{dbname}.*@ or print;' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1
-		perl -ni -e 'm@^ *local.*%{dbname}.*@ or print;' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1
-	fi
-	# Remove user/group
-	if id -u %{gfuser} >/dev/null 2>&1; then
-		userdel %{gfuser} >/dev/null 2>&1
-		groupdel %{gfgroup} >/dev/null 2>&1
-	fi
-	
-	if ! id -u anonymous >/dev/null 2>&1; then
- 		userdel anonymous 2>/dev/null || :
- 	fi
- 
+# Remove user/group
+if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -ne 0 ] ; then
+    echo "Removing fusionforge user..."
+    /usr/sbin/userdel %{gfuser}
 fi
 
+if [ `/usr/bin/getent group | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -ne 0 ] ; then
+    echo "Removing fusionforge group..."
+    /usr/sbin/groupdel %{gfgroup}
+fi
+
+%post aselectextauth
+/usr/bin/psql -U %{dbuser} %{dbname} -f %{GFORGE_DIR}/plugins/aselectextauth/db/install_aselectextauth.psql
+
+%preun aselectextauth
+/usr/bin/psql -U %{dbuser} %{dbname} -f %{GFORGE_DIR}/plugins/aselectextauth/db/uninstall_aselectextauth.psql
+
 %clean
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
+[ "$RPM_BUILD_ROOT" != "/" ] && %{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-, root, root)
-%doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL* README*
+%doc AUTHORS AUTHORS.gforge AUTHORS.sourceforge COPYING ChangeLog INSTALL* README* CHANGES NEWS
 %doc docs/*
-%attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/gforge.conf
-%attr(0750, root, root) %{SBIN_DIR}/gforge-config
-%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
-%attr(0644, root, root) %{CROND_DIR}/fusionforge
-%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}
-#%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{CACHE_DIR}
-%{GFORGE_DIR}
+%attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/local.inc
+%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
+%attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
+%attr(0775, %{httpduser}, %{httpdgroup}) %dir %{GFORGE_VAR_LIB}/upload
+%attr(755, root, %{httpdgroup}) %dir %{GFORGE_DIR}
+# Files under %{GFORGE_DIR}
+%{GFORGE_DIR}/AUTHORS*
+%{GFORGE_DIR}/CHANGES
+%{GFORGE_DIR}/COPYING
+%{GFORGE_DIR}/ChangeLog
+%{GFORGE_DIR}/INSTALL*
+%{GFORGE_DIR}/NEWS
+%{GFORGE_DIR}/README*
+%{GFORGE_DIR}/fusionforge.spec
+%{GFORGE_DIR}/fusionforge-install*
+%{GFORGE_DIR}/gforge-restricted.sh
+%{GFORGE_DIR}/install.sh
+%{GFORGE_DIR}/jpgraph
+# Directories under %{GFORGE_DIR}
+%{GFORGE_DIR}/backend
+%{GFORGE_DIR}/common
+%{GFORGE_DIR}/contrib
+%{GFORGE_DIR}/cronjobs
+%{GFORGE_DIR}/db
+%{GFORGE_DIR}/docs
+%{GFORGE_DIR}/etc
+%{GFORGE_DIR}/image-sources
+%{GFORGE_DIR}/lib
+%{GFORGE_DIR}/locales
+%{GFORGE_DIR}/monitor
+%{GFORGE_DIR}/translations
+%{GFORGE_DIR}/utils
+%{GFORGE_DIR}/setup
+%dir %{GFORGE_DIR}/www
+# files under %{GFORGE_DIR}/www
+%{GFORGE_DIR}/www/*.php
+%{GFORGE_DIR}/www/users
+%{GFORGE_DIR}/www/favicon.ico
+%{GFORGE_DIR}/www/projects
+# directories under %{GFORGE_DIR}/www
+%{GFORGE_DIR}/www/account
+%{GFORGE_DIR}/www/activity
+%{GFORGE_DIR}/www/admin
+%{GFORGE_DIR}/www/developer
+%{GFORGE_DIR}/www/docman
+%{GFORGE_DIR}/www/export
+%{GFORGE_DIR}/www/forum
+%{GFORGE_DIR}/www/frs
+%{GFORGE_DIR}/www/help
+%{GFORGE_DIR}/www/images
+%{GFORGE_DIR}/www/include
+%{GFORGE_DIR}/www/jscook
+%{GFORGE_DIR}/www/js
+%{GFORGE_DIR}/www/mail
+%{GFORGE_DIR}/www/my
+%{GFORGE_DIR}/www/new
+%{GFORGE_DIR}/www/news
+%{GFORGE_DIR}/www/people
+%{GFORGE_DIR}/www/pm
+%{GFORGE_DIR}/www/project
+%{GFORGE_DIR}/www/register
+%{GFORGE_DIR}/www/reporting
+%{GFORGE_DIR}/www/scm
+%{GFORGE_DIR}/www/scripts
+%{GFORGE_DIR}/www/search
+%{GFORGE_DIR}/www/snippet
+%{GFORGE_DIR}/www/soap
+%{GFORGE_DIR}/www/softwaremap
+%{GFORGE_DIR}/www/squal
+%{GFORGE_DIR}/www/stats
+%{GFORGE_DIR}/www/survey
+%{GFORGE_DIR}/www/tabber
+%{GFORGE_DIR}/www/themes
+%{GFORGE_DIR}/www/top
+%{GFORGE_DIR}/www/tracker
+%{GFORGE_DIR}/www/trove
+%{GFORGE_DIR}/www/widgets
+%{GFORGE_DIR}/www/plugins
+#%{GFORGE_DIR}/www/plugins/online_help
+#%{GFORGE_DIR}/www/plugins/projects_hierarchy
+#%{GFORGE_DIR}/www/plugins/quota_management
+%dir %{GFORGE_DIR}/plugins
+%{GFORGE_DIR}/plugins/env.inc.php
+#%{GFORGE_DIR}/plugins/online_help
+#%{GFORGE_DIR}/plugins/projects_hierarchy
+#%{GFORGE_DIR}/plugins/quota_management
 %{GFORGE_LANG_DIR}
-%{GFORGE_CONF_DIR}
-%{SCM_TARBALLS_DIR}
-%{SCM_SNAPSHOTS_DIR}
+%dir %{GFORGE_CONF_DIR}
+%config(noreplace) %{GFORGE_CONF_DIR}/httpd.secrets
+%dir %{GFORGE_CONF_DIR}/httpd.d
+%dir %attr(0775,root,%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins
+%dir %{GFORGE_VAR_LIB}/scmtarballs
+%dir %{GFORGE_VAR_LIB}/scmsnapshots
+%dir %{GFORGE_VAR_LIB}/svnroot
+/svnroot
+%dir %{GFORGE_VAR_LIB}/cvsroot
+/cvsroot
+%dir %{GFORGE_VAR_LIB}/dumps
+%{GFORGE_VAR_LIB}/homedirs
+/home/groups
+/bin/cvssh.pl
+
+%files aselectextauth
+%defattr(-, root, root)
+%dir %{GFORGE_DIR}/plugins/aselectextauth
+%{GFORGE_DIR}/plugins/aselectextauth/INSTALL
+%{GFORGE_DIR}/plugins/aselectextauth/UNINSTALL
+%{GFORGE_DIR}/plugins/aselectextauth/ChangeLog
+%{GFORGE_DIR}/plugins/aselectextauth/db/
+%{GFORGE_DIR}/plugins/aselectextauth/include/
+
+%files cvssyncmail
+%defattr(-,root,root)
+%dir %{GFORGE_DIR}/plugins/cvssyncmail
+%{GFORGE_DIR}/plugins/cvssyncmail/INSTALL
+%{GFORGE_DIR}/plugins/cvssyncmail/bin
+%{GFORGE_DIR}/plugins/cvssyncmail/common
+%{GFORGE_DIR}/plugins/cvssyncmail/include
+
+%files cvstracker
+%defattr(-,root,root)
+%config(noreplace) %{GFORGE_DIR}/plugins/cvstracker/etc/plugins/cvstracker/config.php
+%dir %{GFORGE_DIR}/plugins/cvstracker
+%{GFORGE_DIR}/plugins/cvstracker/README
+%{GFORGE_DIR}/plugins/cvstracker/AUTHORS
+%{GFORGE_DIR}/plugins/cvstracker/COPYING
+%{GFORGE_DIR}/plugins/cvstracker/bin
+%{GFORGE_DIR}/plugins/cvstracker/common
+%{GFORGE_DIR}/plugins/cvstracker/db
+%{GFORGE_DIR}/plugins/cvstracker/www
+%{GFORGE_DIR}/www/plugins/cvstracker
+%attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/cvstracker
+
+%files externalsearch
+%config(noreplace) %{GFORGE_CONF_DIR}/externalsearch.ini
+%{GFORGE_DIR}/plugins/externalsearch
+
+%files fckeditor
+%{GFORGE_DIR}/plugins/fckeditor
+%{GFORGE_DIR}/www/plugins/fckeditor
+
+
+#%files helloworld
+#%attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/helloworld
+#%config(noreplace) %{GFORGE_DIR}/plugins/helloworld/etc/plugins/helloworld/config.php
+#%{GFORGE_DIR}/plugins/helloworld/httpd.conf
+#%{GFORGE_DIR}/plugins/helloworld/INSTALL
+#%{GFORGE_DIR}/plugins/helloworld/bin
+#%{GFORGE_DIR}/plugins/helloworld/common
+#%{GFORGE_DIR}/plugins/helloworld/db
+#%{GFORGE_DIR}/plugins/helloworld/www
+#%{GFORGE_DIR}/www/plugins/helloworld
+
+%files ldapextauth
+#%{GFORGE_CONF_DIR}/plugins/ldapextauth
+%config(noreplace) %{GFORGE_DIR}/plugins/ldapextauth/etc/plugins/ldapextauth/config.php
+%config(noreplace) %{GFORGE_DIR}/plugins/ldapextauth/etc/plugins/ldapextauth/mapping.php
+%{GFORGE_DIR}/plugins/ldapextauth/README
+%{GFORGE_DIR}/plugins/ldapextauth/db
+%{GFORGE_DIR}/plugins/ldapextauth/bin
+%{GFORGE_DIR}/plugins/ldapextauth/include
+
+%files mantis
+%config(noreplace) %{GFORGE_CONF_DIR}/mantis.ini
+%{GFORGE_DIR}/plugins/mantis
+%{GFORGE_DIR}/www/plugins/mantis
+
+%files mediawiki
+%config(noreplace) %{GFORGE_CONF_DIR}/mediawiki.ini
+%{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
+%{GFORGE_DIR}/plugins/mediawiki/README
+%{GFORGE_DIR}/plugins/mediawiki/README.jlbond
+%{GFORGE_DIR}/plugins/mediawiki/bin
+%{GFORGE_DIR}/plugins/mediawiki/common
+%{GFORGE_DIR}/plugins/mediawiki/cronjobs
+%{GFORGE_DIR}/plugins/mediawiki/etc
+#%{GFORGE_DIR}/plugins/mediawiki/mediawiki-skin
+%{GFORGE_DIR}/plugins/mediawiki/www
+/usr/share/mediawiki/skins/gforge
+/usr/share/mediawiki/skins/GForge.deps.php
+/usr/share/mediawiki/skins/GForge.php
+%{GFORGE_DIR}/www/plugins/mediawiki
+
+%files online_help
+%{GFORGE_DIR}/plugins/online_help
+%{GFORGE_DIR}/www/plugins/online_help
+
+%files projects_hierarchy
+%{GFORGE_DIR}/plugins/projects_hierarchy
+%{GFORGE_DIR}/www/plugins/projects_hierarchy
+
+%files quota_management
+%{GFORGE_DIR}/plugins/quota_management
+%{GFORGE_DIR}/www/plugins/quota_management
+
+%files scmarch
+%config(noreplace) %{GFORGE_CONF_DIR}/scmarch.ini
+%{GFORGE_DIR}/plugins/scmarch
+
+%files scmbzr
+%config(noreplace) %{GFORGE_CONF_DIR}/scmbzr.ini
+%{GFORGE_DIR}/plugins/scmbzr
+
+%files scmdarcs
+%config(noreplace) %{GFORGE_CONF_DIR}/scmdarcs.ini
+%{GFORGE_DIR}/plugins/scmdarcs
+
+%files scmgit
+%config(noreplace) %{GFORGE_CONF_DIR}/scmgit.ini
+%{GFORGE_DIR}/plugins/scmgit
+%{GFORGE_DIR}/www/plugins/scmgit
+
+%files scmhg
+%config(noreplace) %{GFORGE_CONF_DIR}/scmhg.ini
+%{GFORGE_DIR}/plugins/scmhg
+
+%files scmccase
+%config(noreplace) %{GFORGE_CONF_DIR}/scmccase.ini
+%{GFORGE_DIR}/plugins/scmccase
+
+%files scmcvs
+%config(noreplace) %{GFORGE_CONF_DIR}/scmcvs.ini
+%{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
+%{GFORGE_DIR}/plugins/scmcvs
+%{GFORGE_DIR}/www/plugins/scmcvs
+
+%files scmsvn
+%config(noreplace) %{GFORGE_CONF_DIR}/scmsvn.ini
+%{GFORGE_DIR}/plugins/scmsvn
+%{GFORGE_DIR}/www/plugins/scmsvn
+
+%files svncommitemail
+%{GFORGE_DIR}/plugins/svncommitemail
+
+%files svntracker
+%{_sysconfdir}/cron.d/gforge-plugin-svntracker
+%config(noreplace) %{GFORGE_DIR}/plugins/svntracker/etc/plugins/svntracker/config.php
+%{GFORGE_DIR}/plugins/svntracker/AUTHORS
+%{GFORGE_DIR}/plugins/svntracker/COPYING
+%{GFORGE_DIR}/plugins/svntracker/README
+%{GFORGE_DIR}/plugins/svntracker/httpd.conf
+%{GFORGE_DIR}/plugins/svntracker/postcommit.example
+%{GFORGE_DIR}/plugins/svntracker/bin
+%{GFORGE_DIR}/plugins/svntracker/common
+%{GFORGE_DIR}/plugins/svntracker/db
+%{GFORGE_DIR}/plugins/svntracker/rpm-specific
+%{GFORGE_DIR}/plugins/svntracker/www
+%{GFORGE_DIR}/www/plugins/svntracker
+
+%files webcalendar
+%{GFORGE_DIR}/plugins/webcalendar
+%{GFORGE_DIR}/www/plugins/webcalendar
+
+%files blocks
+%config(noreplace) %{GFORGE_CONF_DIR}/blocks.ini
+%{GFORGE_DIR}/plugins/blocks
+%{GFORGE_DIR}/www/plugins/blocks
+
+%files extratabs
+%{GFORGE_DIR}/plugins/extratabs
+%{GFORGE_DIR}/www/plugins/extratabs
+
+%files wiki
+%{_sysconfdir}/cron.d/cron.wiki
+%{GFORGE_DIR}/plugins/wiki
+%{GFORGE_DIR}/www/wiki
+
+%files projectlabels
+%{GFORGE_DIR}/plugins/projectlabels
+%{GFORGE_DIR}/www/plugins/projectlabels
+
+%files contribtracker
+%{GFORGE_DIR}/plugins/contribtracker
+%{GFORGE_DIR}/www/plugins/contribtracker
+
+%files globalsearch
+%{GFORGE_DIR}/plugins/globalsearch
+%{GFORGE_DIR}/www/plugins/globalsearch
+
+%files mantisbt
+%{GFORGE_DIR}/plugins/mantisbt
+%{GFORGE_DIR}/www/plugins/mantisbt
 
 %changelog
-* Wed Jun 29 2005 Open Wide <guillaume.smet@openwide.fr>
-- fixed Xavier's patch
-- added Mandrake support based on patch [#1194] by Kevin R. Bulgrien
-* Wed Apr 27 2005 Rameau Xavier <xrameau@gmail.com> (for e-LaSer : http://www.e-laser.fr)
-- Adding specification for SuSE Linux Enterprise Server 9 (in .spec)
-- Moving all static definitions to global variables (in .spec)
-* Thu Mar 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
-- removed useless stuff thanks to Christian's work on db-upgrade.pl
-- s/refresh.sh/gforge-config to improve consistency with debian packaging
-- it's better to display the output of db-upgrade.pl
-* Sun Feb 20 2005 Guillaume Smet <guillaume-gforge@smet.org>
-- added a dependency on gforge-lib-jpgraph
-- added gforge-4.1-project_task_sql.patch
-* Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
-- 4.1
-- forced the vhost on port 80
-- modified the db-upgrade.pl patch to keep nss stuff
-- detects if tcpip_socket is set to true before installing the RPM
-- fixed dependencies problem for RH9 and RHEL3
-- creates gforge_nss and gforge_mta postgresql users
-- drops created postgresql users on uninstall
-- replaced -f test with ls
-* Fri Jan 28 2005 Thales Information Systems <guillaume.smet@openwide.fr>
-- fixed default values for release, sitename and hostname
-- fixed remaining issues on upgrade
-* Thu Jan 27 2005 Thales Information Systems <guillaume.smet@openwide.fr>
-- it's now possible to add custom stuff in /etc/gforge/custom/
-* Thu Dec 30 2004 Guillaume Smet <guillaume-gforge@smet.org>
-- added Allow from all in vhost config
-* Wed Dec 29 2004 Guillaume Smet <guillaume-gforge@smet.org>
-- added the magic_quotes_gpc On in vhost as the default value for FC3 is now Off
-* Sat Dec 25 2004 Guillaume Smet <guillaume-gforge@smet.org>
-- it's now possible to add specific language files in the RPM
-* Fri Dec 03 2004 Dassault Aviation <guillaume.smet@openwide.fr>
-- fixed the vhost configuration
-- fixed the default crontab
-- the crontab is now a config file and is not replaced on update
-- added refresh.sh in /etc/gforge/ to refresh the configuration easily
-* Wed Nov 03 2004 Guillaume Smet <guillaume-gforge@smet.org>
-- new RPM packaging
+* Fri May 28 2010 - Alain Peyrat <aljeux@free.fr> - 5.0.50-1
+- ported to 5.1 tree.
+- reworked logic with rights on configuration files.
+- adapted to changes like scm refactoring.
+- adapted to changes to .ini configuration file.
+- lots of new plugins added.
+
+* Tue May 13 2010 - Bond Masuda <bond.masuda@JLBond.com> - 4.8.3-2
+- fixed plugin symlinks and plugin directory permissions
+- patched mediawiki, webcalendar plugins
+- patch to fix various references to global variables
+- add symlinks to use mediawiki Monobook skin as GForge
+- patch to replace ereg_replace() with preg_replace()
+- added jpgraph symlink
+- setup httpd.secrets
+- delete obsolete mediawiki plugin code
+
+* Fri Apr 16 2010 - Bond Masuda <bond.masuda@JLBond.com> - 4.8.3-1
+- My first packaging of fusionforge 4.8.3-1 and plugins

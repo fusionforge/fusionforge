@@ -4,6 +4,28 @@
 # TODO : document the role of this Makefile
 #
 
+RPM_TMP=~/rpmbuild
+BUILDRESULT=~/fusionforge_repo
+
+HTMLPURIFIER_VERSION=4.1.1
+
+VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
+in_svn_repo:= $(wildcard .svn/)
+ifeq ($(strip $(in_svn_repo)),)
+	ID=unknown
+	URL=unknown
+	TAG=unknown
+else
+	ID=$(shell LANG=C svnversion)
+	URL=$(shell LANG=C svn info | grep 'Root:' | awk '{print $$3}')
+	TAG=$(shell LANG=C svn log $(URL) -r $(ID) -l 1 2>/dev/null | awk '{ if ($$1=="Tag-Release") print $$1}')
+endif
+ifeq ($(TAG),)
+	version=$(VER).$(ID)
+else
+	version=$(VER)
+endif
+
 list:
 	@echo ======================================================================================
 	@echo '=                    Available target are listed below                               ='
@@ -11,58 +33,9 @@ list:
 	@echo ======================================================================================
 	@cat Makefile.rh | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
-#Do it all
-all: fusionforge allplugins allmodules allexternals dist          # Build fusionforge and plugins #
-clean: cleanff cleanplugins   # Clean fusionforge and plugins #
+all: fusionforge externals dist
 
-#GForge
-fusionforge: build          # Build fusionforge #
-
-#Plugins 
-#allplugins: cvsplugin cvstrackerplugin ldapextauthplugin
-allplugins: cvsplugin svnplugin
-#cleanplugins: cleancvs cleansvn cleancvstracker cleanldapextauth cleanexternalsearch
-cleanplugins: cleancvs
-
-cvsplugin: buildcvs  # package cvs plugin #
-svnplugin: cleansvn buildsvn  # package svn plugin #
-#cvstrackerplugin: cleancvstracker buildcvstracker  # package cvstracker plugin #
-#ldapextauthplugin: cleanldapextauth buildldapextauth  # package ldapextauth plugin #
-#externalsearchplugin: cleanexternalsearch buildexternalsearch  # package externalsearch plugin #
-
-#Modules
-allmodules : libnsspgsql
-
-#Exterals
-allexternals : htmlpurifier php-jpgraph
-
-libnsspgsql : buildlibnsspgsql
-
-RPM_TMP=~/rpmbuild
-BUILDRESULT=~/fusionforge_repo
-
-# build a custom rpmmacro file and rpmrc to point to it for rpmbuild
-#rpmrc:
-#	echo 'include: /usr/lib/rpm/rpmrc' > ./rpmrc
-
-#rpmmacro:
-#	echo '$(shell rpmbuild --showrc | grep '^macrofiles'):./rpmmacros' >> ./rpmrc
-#	echo '%_topdir $(RPM_TMP)' > ./rpmmacros
-#	echo '%_rpmtopdir %{_topdir}' >> ./rpmmacros
-#	echo '%_builddir %{_rpmtopdir}/BUILD' >> ./rpmmacros
-#	echo '%_rpmdir %{_rpmtopdir}/RPMS' >> ./rpmmacros
-#	echo '%_sourcedir %{_rpmtopdir}/SOURCE' >> ./rpmmacros
-#	echo '%_specdir %{_rpmtopdir}/SPEC' >> ./rpmmacros
-#	echo '%_srcrpmdir %{_rpmtopdir}/SRPMS' >> ./rpmmacros
-#	echo '%_tmppath %{_rpmtopdir}/TMP' >> ./rpmmacros
-#	echo '%_buildroot %{_tmppath}/%{name}-root' >> ./rpmmacros
-
-#rpmprep: rpmrc rpmmacro
-#	-mkdir -p $(RPM_TMP)/BUILD $(RPM_TMP)/RPMS $(RPM_TMP)/SOURCE $(RPM_TMP)/SPEC $(RPM_TMP)/SRPMS $(RPM_TMP)/TMP 2> /dev/null
-
-#dist: rpmprep
-#	-mkdir ./dist 2> /dev/null
-#	mv ./*.bz2 $(RPM_TMP)/SRPMS/*.rpm ./dist
+externals : htmlpurifier php-jpgraph
 
 rpmprep:
 	-rm -Rf $(RPM_TMP)/*
@@ -70,6 +43,7 @@ rpmprep:
 	sh tools/rpmdev-setuptree
 	echo '%_tmppath %{_topdir}/TMP' >> ~/.rpmmacros
 	echo '%_buildroot %{_tmppath}/%{name}-root' >> ~/.rpmmacros
+	echo '%_sysconfdir /etc' >> ~/.rpmmacros
 	mkdir $(RPM_TMP)/TMP
 
 dist:
@@ -78,118 +52,24 @@ dist:
 	cp $(RPM_TMP)/RPMS/noarch/*.rpm  $(BUILDRESULT)
 	createrepo $(BUILDRESULT)
 
-#
-# FUSIONFORGE
-#
-target cleanff build : override version=$(shell grep '^Version:' gforge/fusionforge.spec | sed 's/.*:\s*\(.*\)/\1/')
+clean:		# Clean files of fusionforge build                         #
+	cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-$(version).tar.bz2 fusionforge-$(version)
 
-cleanff:		# Clean files of fusionforge build                         #
-	@cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-$(version).tar.bz2 fusionforge-$(version)
-	@echo cleanff Done
-
-build: rpmprep		# Build rpm fusionforge packages                               #
-	cd gforge; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | grep -v docs/phpdoc/docs | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-$(version)
-	cd $(RPM_TMP)/SOURCES/fusionforge-$(version); mv plugins ../;mkdir ../utils;mv utils/install-nsspgsql.sh ../utils/;mv utils/fusionforge-shell-postgresql.spec ../utils/
-	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/;  utils/manage-translations.sh build
-	cd $(RPM_TMP)/SOURCES/; cp fusionforge-$(version)/rpm-specific/patches/gforge-4.0-deb_rpm.patch .
+fusionforge: rpmprep		# Build rpm fusionforge packages                               #
+	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-$(version)
+	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/; utils/manage-translations.sh build
+	rm -f $(RPM_TMP)/SOURCES/fusionforge-$(version)/utils/fusionforge-shell-postgresql.spec
+	cd $(RPM_TMP)/SOURCES/; cp fusionforge-$(version)/rpm-specific/patches/* .
 	cd $(RPM_TMP)/SOURCES/; tar cjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
-	cd $(RPM_TMP)/SOURCES/; rpmbuild -ts --nodeps fusionforge-$(version).tar.bz2
+	sed -e 's/@@VERSION@@/$(version)/g' < gforge/fusionforge.spec > $(RPM_TMP)/TMP/fusionforge.spec
+	rpmbuild -bb $(RPM_TMP)/TMP/fusionforge.spec
 
 #
-# CVS PLUGIN
+# Building RPM for external components
 #
-target cleancvs buildcvs : override version=$(shell grep '^Version:' gforge/plugins/scmcvs/fusionforge-plugin-scmcvs.spec | sed 's/.*:\s*\(.*\)/\1/')
-
-cleancvs:               # Clean files of gforge-plugin-scmcvs build           #
-	@cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
-	@echo cleancvs Done
-
-buildcvs:               # Build rpm fusionforge-plugin-scmcvs package                  #
-	cd gforge/plugins/scmcvs; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-plugin-scmcvs-$(version)
-	cd $(RPM_TMP)/SOURCES; tar cjf fusionforge-plugin-scmcvs-$(version).tar.bz2 fusionforge-plugin-scmcvs-$(version)
-	cd $(RPM_TMP)/SOURCES; rpmbuild -ts --nodeps fusionforge-plugin-scmcvs-$(version).tar.bz2
-
-#
-# SVN PLUGIN
-#
-target cleansvn buildsvn : override version=$(shell grep '^Version:' gforge/plugins/scmsvn/fusionforge-plugin-scmsvn.spec | sed 's/.*:\s*\(.*\)/\1/')
-
-cleansvn:               # Clean files of gforge-plugin-scmcvs build           #
-	@cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-plugin-scmsvn-$(version).tar.bz2 fusionforge-plugin-scmsvn-$(version)
-	@echo cleansvn Done
-
-buildsvn:               # Build rpm gforge-plugin-scmsvn package                  #
-	cd gforge/plugins/scmsvn; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v contrib | grep -v '/debian/' | cpio -pdumvB --quiet $(RPM_TMP)/SOURCES/fusionforge-plugin-scmsvn-$(version)
-	mkdir -p $(RPM_TMP)/SOURCES/fusionforge-plugin-scmsvn-$(version)/bin
-	cp -rp gforge/rpm-specific/scripts/install-svn.sh $(RPM_TMP)/SOURCES/fusionforge-plugin-scmsvn-$(version)/bin
-	cd $(RPM_TMP)/SOURCES; tar cjf fusionforge-plugin-scmsvn-$(version).tar.bz2 fusionforge-plugin-scmsvn-$(version)
-	cd $(RPM_TMP)/SOURCES; rpmbuild -ta fusionforge-plugin-scmsvn-$(version).tar.bz2
-
-#
-# CVSTRACKER PLUGIN
-#
-#versioncvstracker:
-#override version=$(shell grep '^Version:' gforge-plugin-cvstracker/gforge-plugin-cvstracker.spec | sed 's/.*:\s*\(.*\)/\1/')
-
-#cleancvstracker: versioncvstracker               # Clean files of gforge-plugin-cvstracker build           #
-#	@rm -rf gforge-plugin-cvstracker-$(version).tar.bz2 gforge-plugin-cvstracker-$(version)
-#	@echo cleantracker Done
-#buildcvstracker: rpmprep versioncvstracker               # Build rpm gforge-plugin-cvstracker package                  #
-#	cd gforge-plugin-cvstracker ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-cvstracker-$(version)
-#	tar cjf gforge-plugin-cvstracker-$(version).tar.bz2 gforge-plugin-cvstracker-$(version)
-#	rpmbuild -ta --rcfile rpmrc gforge-plugin-cvstracker-$(version).tar.bz2
-
-#
-# LDAPAUTH PLUGIN
-#
-#versionldapextauth:
-#override version=$(shell grep '^Version:' gforge-plugin-ldapextauth/gforge-plugin-ldapextauth.spec | sed 's/.*:\s*\(.*\)/\1/')
-
-#cleanldapextauth: versionldapextauth               # Clean files of gforge-plugin-ldapextauth build           #
-#	@rm -rf gforge-plugin-ldapextauth-$(version).tar.bz2 gforge-plugin-ldapextauth-$(version)
-#	@echo cleanldapextauth Done
-#buildldapextauth: rpmprep versionldapextauth               # Build rpm gforge-plugin-ldapextauth package                  #
-#	cd gforge-plugin-ldapextauth ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-ldapextauth-$(version)
-#	tar cjf gforge-plugin-ldapextauth-$(version).tar.bz2 gforge-plugin-ldapextauth-$(version)
-#	rpmbuild -ta --rcfile rpmrc gforge-plugin-ldapextauth-$(version).tar.bz2
-
-#
-# EXTERNALSEARCH PLUGIN
-#
-#versionexternalsearch:
-#override version=$(shell grep '^Version:' gforge-plugin-externalsearch/gforge-plugin-externalsearch.spec | sed 's/.*:\s*\(.*\)/\1/')
-
-#cleanexternalsearch: versionexternalsearch               # Clean files of gforge-plugin-externalsearch build           #
-#	@rm -rf gforge-plugin-externalsearch-$(version).tar.bz2 gforge-plugin-externalsearch-$(version)
-#	@echo cleanexternalsearch Done
-#buildexternalsearch: rpmprep versionexternalsearch               # Build rpm gforge-plugin-externalsearch package                  #
-#	cd gforge-plugin-externalsearch ; find . -type f | grep -v '/CVS/' | grep -v contrib | grep -v debian | cpio -pdumvB ../gforge-plugin-externalsearch-$(version)
-#	tar cjf gforge-plugin-externalsearch-$(version).tar.bz2 gforge-plugin-externalsearch-$(version)
-#	rpmbuild -ta --rcfile rpmrc gforge-plugin-externalsearch-$(version).tar.bz2
-
-
-#
-# LIBNSS-PGSQL MODULE
-#
-target cleanlibnsspgsql buildlibnsspgsql : override version=$(shell grep '^Version:' gforge/utils/fusionforge-shell-postgresql.spec | sed 's/.*:\s*\(.*\)/\1/')
-
-cleanlibnsspgsql:               # Clean files of fusionforge-shell-postgresql          #
-	@cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-shell-postgresql-$(version).tar.bz2 fusionforge-shell-postgresql-$(version)
-	@echo cleanlibnsspgsql Done
-
-buildlibnsspgsql:               # Build rpm fusionforge-shell-postgresql package                  #
-	cd gforge/utils; find . -type f | grep -v '/CVS/' | grep -v '/.svn/' | grep -v '/contrib/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-shell-postgresql-$(version)
-	cd $(RPM_TMP)/SOURCES; tar cjf fusionforge-shell-postgresql-$(version).tar.bz2 fusionforge-shell-postgresql-$(version)
-	cd $(RPM_TMP)/SOURCES/; rpmbuild -ts --nodeps fusionforge-shell-postgresql-$(version).tar.bz2
-
-#
-# Building RPM for third party plugins
-#
-HTMLPURIFIER_VERSION=4.1.1
 htmlpurifier: rpmprep depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
 	cp depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz $(RPM_TMP)/SOURCES/
 	rpmbuild --quiet --clean -ba 3rd-party/htmlpurifier/htmlpurifier.spec
-
 
 php-jpgraph: rpmprep
 	cp 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz $(RPM_TMP)/SOURCES/jpgraph-1.5.2.tar.gz
