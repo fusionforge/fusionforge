@@ -182,6 +182,7 @@ gforge/db/20100506-add-widgets.sql -text
 gforge/db/20100517-add-project-widgets.sql -text
 gforge/db/20100518-pfo-rbac.sql -text
 gforge/db/20100524-pfo-rbac.sql -text
+gforge/db/20100606-clean-perm-views.sql -text
 gforge/db/FTI-20061025.sql -text
 gforge/db/gforge-data-mysql.sql -text
 gforge/db/gforge-struct-mysql.sql -text
