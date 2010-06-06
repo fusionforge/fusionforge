@@ -2,7 +2,7 @@
  
 require dirname(__FILE__).'/SeleniumRemoteSuite.php';
 
-class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
+class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 {
 	protected function setUp()
 	{
