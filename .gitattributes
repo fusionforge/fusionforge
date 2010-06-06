@@ -3579,6 +3579,7 @@ gforge/plugins/wiki/www/www -text
 gforge/plugins/wiki/www/z -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/dag-rpmforge.repo -text
+gforge/rpm-specific/fusionforge-ci.repo -text
 gforge/rpm-specific/fusionforge.repo -text
 gforge/rpm-specific/httpd.d/gforge.conf -text
 gforge/rpm-specific/patches/LocalSettings.php -text
