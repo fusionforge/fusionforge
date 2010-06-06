@@ -399,7 +399,7 @@ if ($add_cat && $group_project_id) {
 	//
 	//	Show link to create new subproject
 	//
-	if ($perm->isPMAdmin()) {
+	if (forge_check_perm ('pm_admin', $group_id)) {
 		?>
 		<p />
 		<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo _('Add a Subproject') ?></a><br />
