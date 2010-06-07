@@ -119,13 +119,6 @@ Requires: %{name} >= %{version}, php
 %description fckeditor
 FCKEditor is a text editor that displays within a web browser.
 
-#%package helloworld
-#Summary: Hello World sample FusionForge plugin
-#Group: Development/Tools
-#Requires: %{name} >= %{version}, php
-#%description helloworld
-#Helloworld plugin is just a sample FusionForge plugin to aid developers.
-
 %package ldapextauth
 Summary: external LDAP authentication for FusionForge plugin
 Group: Development/Tools
@@ -328,7 +321,7 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}/lib
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/{httpd.d,plugins}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/{httpd.d,config.ini.d,plugins}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_LANG_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{upload,scmtarballs,scmsnapshots}
@@ -412,7 +405,7 @@ search_and_replace "/opt/gforge" "/usr/share/gforge"
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/viewcvs
 
 ### Plugin setup ###
-%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/
+%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
 
 # plugin: aselectextauth
@@ -435,11 +428,6 @@ search_and_replace "/opt/gforge" "/usr/share/gforge"
 # plugin: externalsearch
 
 # plugin: fckeditor
-
-# plugin: helloworld
-# this is pre-activated, so create the config symlink
-#%{__mv} $RPM_BUILD_ROOT/plugins/helloworld $RPM_BUILD_ROOT%{GFORGE_DIR}
-#%{__ln_s} %{GFORGE_DIR}/plugins/helloworld/etc/plugins/helloworld $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/helloworld
 
 # plugin: ldapextauth
 %{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/ldapextauth/rpm-specific
@@ -688,7 +676,6 @@ fi
 %{GFORGE_DIR}/www/tracker
 %{GFORGE_DIR}/www/trove
 %{GFORGE_DIR}/www/widgets
-%{GFORGE_DIR}/www/plugins
 #%{GFORGE_DIR}/www/plugins/online_help
 #%{GFORGE_DIR}/www/plugins/projects_hierarchy
 #%{GFORGE_DIR}/www/plugins/quota_management
@@ -714,55 +701,24 @@ fi
 /bin/cvssh.pl
 
 %files aselectextauth
-%defattr(-, root, root)
-%dir %{GFORGE_DIR}/plugins/aselectextauth
-%{GFORGE_DIR}/plugins/aselectextauth/INSTALL
-%{GFORGE_DIR}/plugins/aselectextauth/UNINSTALL
-%{GFORGE_DIR}/plugins/aselectextauth/ChangeLog
-%{GFORGE_DIR}/plugins/aselectextauth/db/
-%{GFORGE_DIR}/plugins/aselectextauth/include/
+%{GFORGE_DIR}/plugins/aselectextauth
 
 %files cvssyncmail
-%defattr(-,root,root)
-%dir %{GFORGE_DIR}/plugins/cvssyncmail
-%{GFORGE_DIR}/plugins/cvssyncmail/INSTALL
-%{GFORGE_DIR}/plugins/cvssyncmail/bin
-%{GFORGE_DIR}/plugins/cvssyncmail/common
-%{GFORGE_DIR}/plugins/cvssyncmail/include
+%{GFORGE_DIR}/plugins/cvssyncmail
 
 %files cvstracker
-%defattr(-,root,root)
 %config(noreplace) %{GFORGE_DIR}/plugins/cvstracker/etc/plugins/cvstracker/config.php
-%dir %{GFORGE_DIR}/plugins/cvstracker
-%{GFORGE_DIR}/plugins/cvstracker/README
-%{GFORGE_DIR}/plugins/cvstracker/AUTHORS
-%{GFORGE_DIR}/plugins/cvstracker/COPYING
-%{GFORGE_DIR}/plugins/cvstracker/bin
-%{GFORGE_DIR}/plugins/cvstracker/common
-%{GFORGE_DIR}/plugins/cvstracker/db
-%{GFORGE_DIR}/plugins/cvstracker/www
+%{GFORGE_DIR}/plugins/cvstracker
 %{GFORGE_DIR}/www/plugins/cvstracker
 %attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/cvstracker
 
 %files externalsearch
-%config(noreplace) %{GFORGE_CONF_DIR}/externalsearch.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/externalsearch.ini
 %{GFORGE_DIR}/plugins/externalsearch
 
 %files fckeditor
 %{GFORGE_DIR}/plugins/fckeditor
 %{GFORGE_DIR}/www/plugins/fckeditor
-
-
-#%files helloworld
-#%attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/helloworld
-#%config(noreplace) %{GFORGE_DIR}/plugins/helloworld/etc/plugins/helloworld/config.php
-#%{GFORGE_DIR}/plugins/helloworld/httpd.conf
-#%{GFORGE_DIR}/plugins/helloworld/INSTALL
-#%{GFORGE_DIR}/plugins/helloworld/bin
-#%{GFORGE_DIR}/plugins/helloworld/common
-#%{GFORGE_DIR}/plugins/helloworld/db
-#%{GFORGE_DIR}/plugins/helloworld/www
-#%{GFORGE_DIR}/www/plugins/helloworld
 
 %files ldapextauth
 #%{GFORGE_CONF_DIR}/plugins/ldapextauth
@@ -774,12 +730,12 @@ fi
 %{GFORGE_DIR}/plugins/ldapextauth/include
 
 %files mantis
-%config(noreplace) %{GFORGE_CONF_DIR}/mantis.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mantis.ini
 %{GFORGE_DIR}/plugins/mantis
 %{GFORGE_DIR}/www/plugins/mantis
 
 %files mediawiki
-%config(noreplace) %{GFORGE_CONF_DIR}/mediawiki.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mediawiki.ini
 %{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
 %{GFORGE_DIR}/plugins/mediawiki/README
 %{GFORGE_DIR}/plugins/mediawiki/README.jlbond
@@ -807,38 +763,38 @@ fi
 %{GFORGE_DIR}/www/plugins/quota_management
 
 %files scmarch
-%config(noreplace) %{GFORGE_CONF_DIR}/scmarch.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmarch.ini
 %{GFORGE_DIR}/plugins/scmarch
 
 %files scmbzr
-%config(noreplace) %{GFORGE_CONF_DIR}/scmbzr.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmbzr.ini
 %{GFORGE_DIR}/plugins/scmbzr
 
 %files scmdarcs
-%config(noreplace) %{GFORGE_CONF_DIR}/scmdarcs.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmdarcs.ini
 %{GFORGE_DIR}/plugins/scmdarcs
 
 %files scmgit
-%config(noreplace) %{GFORGE_CONF_DIR}/scmgit.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmgit.ini
 %{GFORGE_DIR}/plugins/scmgit
 %{GFORGE_DIR}/www/plugins/scmgit
 
 %files scmhg
-%config(noreplace) %{GFORGE_CONF_DIR}/scmhg.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmhg.ini
 %{GFORGE_DIR}/plugins/scmhg
 
 %files scmccase
-%config(noreplace) %{GFORGE_CONF_DIR}/scmccase.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmccase.ini
 %{GFORGE_DIR}/plugins/scmccase
 
 %files scmcvs
-%config(noreplace) %{GFORGE_CONF_DIR}/scmcvs.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmcvs.ini
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
 %{GFORGE_DIR}/plugins/scmcvs
 %{GFORGE_DIR}/www/plugins/scmcvs
 
 %files scmsvn
-%config(noreplace) %{GFORGE_CONF_DIR}/scmsvn.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmsvn.ini
 %{GFORGE_DIR}/plugins/scmsvn
 %{GFORGE_DIR}/www/plugins/scmsvn
 
@@ -865,7 +821,7 @@ fi
 %{GFORGE_DIR}/www/plugins/webcalendar
 
 %files blocks
-%config(noreplace) %{GFORGE_CONF_DIR}/blocks.ini
+%config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/blocks.ini
 %{GFORGE_DIR}/plugins/blocks
 %{GFORGE_DIR}/www/plugins/blocks
 
