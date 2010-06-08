@@ -1,8 +1,9 @@
-fusionforge (5.0.1-1+) UNRELEASED; urgency=low
+fusionforge (5.0.1+svn10006-1) unstable; urgency=low
 
+  * New snapshot from upstream SVN (Branch_5_0).
   * Removed dependency on perl-suid (closes: #581944).
 
- --
+ -- Roland Mas <lolando@debian.org>  Tue, 08 Jun 2010 15:54:59 +0200
 
 fusionforge (5.0.1-1) unstable; urgency=low
 
