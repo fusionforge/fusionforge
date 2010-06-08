@@ -45,7 +45,7 @@ Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version}), gforge
 Replaces: gforge
 Provides: gforge
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, gforge-plugin-contribtracker, gforge-plugin-extratabs, gforge-plugin-globalsearch, gforge-plugin-mediawiki, gforge-plugin-projectlabels, gforge-plugin-scmarch, gforge-plugin-scmbzr, gforge-plugin-scmcvs, gforge-plugin-scmdarcs, gforge-plugin-scmgit, gforge-plugin-scmhg, gforge-plugin-scmsvn, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-web-apache2-vhosts, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, gforge-lists-mailman | gforge-lists, gforge-plugin-contribtracker, gforge-plugin-extratabs, gforge-plugin-globalsearch, gforge-plugin-mediawiki, gforge-plugin-projectlabels, gforge-plugin-scmarch, gforge-plugin-scmbzr, gforge-plugin-scmcvs, gforge-plugin-scmdarcs, gforge-plugin-scmgit, gforge-plugin-scmhg, gforge-plugin-scmsvn, ${misc:Depends}
 Description: FusionForge collaborative development tool - full metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -84,7 +84,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), ${misc:Depends}
 Recommends: libphp-jpgraph, locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web
