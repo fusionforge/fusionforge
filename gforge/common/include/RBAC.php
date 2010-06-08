@@ -407,7 +407,7 @@ abstract class BaseRole extends Error {
 						$tohandle[] = array ('forge_admin', -1) ;
 					}
 					if ($this->data_array['group_id'] == forge_get_config ('news_group') && $t[0] == 'A') {
-						$tohandle[] = array ('forge_admin', -1) ;
+						$tohandle[] = array ('approve_news', -1) ;
 					}
 					if ($this->data_array['group_id'] == forge_get_config ('stats_group') && $t[0] == 'A') {
 						$tohandle[] = array ('forge_stats', -1) ;
