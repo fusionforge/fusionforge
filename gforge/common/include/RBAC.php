@@ -399,6 +399,9 @@ abstract class BaseRole extends Error {
 			$this->perms_array=array();
 			$tohandle = array () ;
 			$gid = $this->data_array['group_id'] ;
+        		if ($gid == 1 && count ($this->setting_array) == 0) {
+				$tohandle[] = array ('forge_admin', -1) ;
+			}
 			foreach ($this->setting_array as $oldsection => $t) {
 				switch ($oldsection) {
 				case 'projectadmin':

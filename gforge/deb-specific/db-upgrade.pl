@@ -2912,6 +2912,8 @@ eval {
     &update_with_sql("20100517-add-project-widgets","5.0.1-3");
     &update_with_sql("20100518-pfo-rbac","5.0.1-4");
     &update_with_sql("20100524-pfo-rbac","5.0.1-5");
+    &update_with_sql("20100606-clean-perm-views","5.0.1-6");
+    &update_with_sql("20100610-pfo-rbac","5.0.1-7");
 
     ########################### INSERT HERE #################################
 
