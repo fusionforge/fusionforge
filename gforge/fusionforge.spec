@@ -117,7 +117,7 @@ Summary: FCKEditor plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
 %description fckeditor
-FCKEditor is a text editor that displays within a web browser.
+FCKEditor is a WYSIWYG text editor that displays within a web browser.
 
 %package ldapextauth
 Summary: external LDAP authentication for FusionForge plugin
@@ -804,16 +804,7 @@ fi
 %files svntracker
 %{_sysconfdir}/cron.d/gforge-plugin-svntracker
 %config(noreplace) %{GFORGE_DIR}/plugins/svntracker/etc/plugins/svntracker/config.php
-%{GFORGE_DIR}/plugins/svntracker/AUTHORS
-%{GFORGE_DIR}/plugins/svntracker/COPYING
-%{GFORGE_DIR}/plugins/svntracker/README
-%{GFORGE_DIR}/plugins/svntracker/httpd.conf
-%{GFORGE_DIR}/plugins/svntracker/postcommit.example
-%{GFORGE_DIR}/plugins/svntracker/bin
-%{GFORGE_DIR}/plugins/svntracker/common
-%{GFORGE_DIR}/plugins/svntracker/db
-%{GFORGE_DIR}/plugins/svntracker/rpm-specific
-%{GFORGE_DIR}/plugins/svntracker/www
+%{GFORGE_DIR}/plugins/svntracker
 %{GFORGE_DIR}/www/plugins/svntracker
 
 %files webcalendar
