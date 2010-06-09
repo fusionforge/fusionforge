@@ -33,6 +33,7 @@ function htpasswd_apr1_md5($plainpasswd) {
     $len = strlen($plainpasswd);
     $text = $plainpasswd.'$apr1$'.$salt;
     $bin = pack("H32", md5($plainpasswd.$salt.$plainpasswd));
+    $tmp = '';
     for($i = $len; $i > 0; $i -= 16) { $text .= substr($bin, 0, min(16, $i)); }
     for($i = $len; $i > 0; $i >>= 1) { $text .= ($i & 1) ? chr(0) : $plainpasswd{0}; }
     $bin = pack("H32", md5($text));
