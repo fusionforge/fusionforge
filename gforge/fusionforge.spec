@@ -41,7 +41,6 @@ Patch0: fusionforge-4.8.3-ereg_preg.patch
 Patch1: fusionforge-4.8.3-webcalendar.patch
 Patch2: fusionforge-4.8.3-mediawiki.patch
 Patch3: fusionforge-4.8.3-register_globals.patch
-Patch4: fusionforge-4.8.3-misc_fixes.patch
 URL: http://www.fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
@@ -306,7 +305,6 @@ mantisbt plugin for FusionForge.
 #%patch1 -p1
 #%patch2 -p1
 #%patch3 -p1
-#%patch4 -p1
 
 %build
 # empty build section

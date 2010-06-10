@@ -3587,7 +3587,6 @@ gforge/rpm-specific/patches/LocalSettings.php -text
 gforge/rpm-specific/patches/README.mediawiki.jlbond -text
 gforge/rpm-specific/patches/fusionforge-4.8.3-ereg_preg.patch -text
 gforge/rpm-specific/patches/fusionforge-4.8.3-mediawiki.patch -text
-gforge/rpm-specific/patches/fusionforge-4.8.3-misc_fixes.patch -text
 gforge/rpm-specific/patches/fusionforge-4.8.3-register_globals.patch -text
 gforge/rpm-specific/patches/fusionforge-4.8.3-webcalendar.patch -text
 gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
