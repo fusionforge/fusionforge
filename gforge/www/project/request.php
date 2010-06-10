@@ -48,7 +48,7 @@ if ($submit) {
 	if (!$gjr->create($usr->getId(),$comments)) {
 		exit_error('Error',$gjr->getErrorMessage());
 	} else {
-		$feedback .= _('Your request has been submitted.');
+		$feedback = _('Your request has been submitted.');
 	}
 }
 
