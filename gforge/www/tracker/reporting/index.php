@@ -51,11 +51,11 @@ $report->site_start_date=db_result($res,0,'register_time');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[0];
+	$start = $z[count($z)-1];
 }
 if (!$end || $end <= $start) {
 	$z =& $report->getMonthStartArr();
-	$end = $z[count($z)-1];
+	$end = $z[0];
 }
 
 $group =& group_get_object($group_id);
@@ -95,7 +95,7 @@ $restracker = db_query_params ('SELECT DISTINCT agl.group_artifact_id,agl.name
         AND (
                            (rs.section_name = $3 AND rs.value = $4)
                            OR (rs.section_name = $5 AND rs.value = $6)
-                           OR (rs.section_name = $6 AND rs.value::integer >= 1 AND rs.ref_id = agl.group_artifact_id)
+                           OR (rs.section_name = $7 AND rs.value::integer >= 1 AND rs.ref_id = agl.group_artifact_id)
         )',
 			array($group_id,
 			      user_getid() ,
