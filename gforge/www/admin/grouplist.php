@@ -39,9 +39,15 @@ if (!$form_catroot) {
 	$form_catroot = 1;
 }
 
-if (!isset($sortorder) || empty($sortorder)) {
-	$sortorder = "group_name";
-}
+$sortorder = util_ensure_value_in_set ($sortorder,
+				       array ('group_name',
+					      'register_time',
+					      'unix_group_name',
+					      'status',
+					      'is_public',
+					      'license_name',
+					      'members')) ;
+
 if ($form_catroot == 1) {
 	if (isset($group_name_search)) {
 		echo "<p>"._('Groups that begin with'). " <strong>".$group_name_search."</strong></p>\n";
@@ -51,7 +57,8 @@ LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
 WHERE license_id=license
 AND lower(group_name) LIKE $1
 AND (status=$2 OR 1!=$3)
-GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name',
+GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name
+ORDER BY '.$sortorder,
 					array (strtolower ("$group_name_search%"),
 					       'P',
 					       $form_pending ? 1 : 0)) ;
@@ -66,17 +73,8 @@ GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,stat
 } else {
 	echo "<p>"._('Group List for Category:').' ';
 	echo "<strong>" . category_fullname($form_catroot) . "</strong></p>\n";
-	$res = db_query_params("SELECT groups.group_name,groups.register_time,groups.unix_group_name,groups.group_id,"
-		. "groups.is_public,"
-		. "licenses.license_name,"
-		. "groups.status "
-		. "COUNT(user_group.group_id) AS members "
-		. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id,group_category,licenses "
-		. "WHERE groups.group_id=group_category.group_id AND "
-		. "group_category.category_id=$1 AND "
-		. "licenses.license_id=groups.license "
-		. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name "
-		. "ORDER BY $2", array($form_catroot, $sortorder));
+	$res = db_query_params('SELECT groups.group_name,groups.register_time,groups.unix_group_name,groups.group_id,groups.is_public,licenses.license_name,groups.status, count(user_group.group_id) AS members FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id,group_category,licenses WHERE groups.group_id=group_category.group_id AND group_category.category_id=$1 AND licenses.license_id=groups.license GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name ORDER BY '.$sortorder,
+			       array($form_catroot));
 }
 
 $headers = array(

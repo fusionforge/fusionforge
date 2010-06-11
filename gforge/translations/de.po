@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-07 18:16+0100\n"
-"PO-Revision-Date: 2010-04-30 10:30+0200\n"
+"PO-Revision-Date: 2010-06-10 10:32+0200\n"
 "Last-Translator: Nils Kollat <n.kollat@tarent.de>\n"
 "Language-Team:  <de@li.org>\n"
 "Language: de\n"
@@ -585,7 +585,7 @@ msgstr "ATS%d: %s"
 
 #: common/include/Group.class.php:2060
 msgid "Open-Discussion"
-msgstr "Offene Diskussion"
+msgstr "Offene-Diskussion"
 
 #: common/include/Group.class.php:2060
 msgid "General Discussion"
@@ -607,7 +607,7 @@ msgstr "Öffentliche Hilfe bekommen"
 
 #: common/include/Group.class.php:2074
 msgid "Developers-Discussion"
-msgstr "Entwickler Diskussion"
+msgstr "Entwickler-Diskussion"
 
 #: common/include/Group.class.php:2074
 msgid "Project Developer Discussion"
