@@ -61,11 +61,6 @@ function format_name($name, $status) {
 	Main code
 */
 if ($usersearch) {
-
-	$sql = "
-		SELECT DISTINCT * 
-		FROM users WHERE ";
-	
 	if (is_numeric($search)) {
 		$result = db_query_params ('SELECT DISTINCT * FROM users
 WHERE user_id = $1
@@ -122,39 +117,33 @@ OR lower(realname) LIKE $1',
 if (getStringFromRequest('groupsearch')) {
 	$status = getStringFromRequest('status');
 	$is_public = getIntFromRequest('is_public', -1);
-	$crit_desc = getStringFromRequest('crit_desc');
-	$crit_sql = '';
+	$crit_desc = '' ;
+	$qpa = db_construct_qpa () ;
+	
+	if(is_numeric($search)) {
+		$qpa = db_construct_qpa ($qpa, 'SELECT DISTINCT * FROM groups
+WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE $2)',
+					    array ($search,
+						   strtolower ("%$search%"))) ;
+	} else {
+		$qpa = db_construct_qpa ($qpa, 'SELECT DISTINCT * FROM groups WHERE (lower (unix_group_name) LIKE $1 OR lower (group_name) LIKE $1)',
+					    array (strtolower ("%$search%"))) ;
+	}
 
 	if ($status) {
-		$crit_sql  .= " AND status='$status'";
+		$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 		$crit_desc .= " status=$status";
 	}
-	if ($is_public !== -1) {
-		$crit_sql  .= " AND is_public='$is_public'";
+	if ($is_public != -1) {
+		$qpa = db_construct_qpa ($qpa, ' AND is_public=$1', array ($is_public)) ;
 		$crit_desc .= " is_public=$is_public";
 	}
 
-	$sql = "
-		SELECT DISTINCT *
-		FROM groups WHERE (";
-	
-	if(is_numeric($search)) {
-		$result = db_query_params ('SELECT DISTINCT * FROM groups
-WHERE group_id=$1
-OR lower (unix_group_name) LIKE $2
-OR lower (group_name) LIKE $2',
-					   array ($search,
-						  strtolower ("%$search%"))) ;
-	} else {
-		$result = db_query_params ('SELECT DISTINCT * FROM groups
-WHERE lower (unix_group_name) LIKE $2
-OR lower (group_name) LIKE $2',
-					   array (strtolower ("%$search%"))) ;
+	if ($crit_desc) {
+		$crit_desc = "(".trim($crit_desc).")";
 	}
 
-	if ($crit_desc) {
-		$crit_desc = "($crit_desc )";
-	}
+	$result = db_query_qpa ($qpa) ;
 	print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', db_numrows($result)), $crit_desc, db_numrows($result)).'</strong></p>';
 	
 	if (db_numrows($result) < 1) {
