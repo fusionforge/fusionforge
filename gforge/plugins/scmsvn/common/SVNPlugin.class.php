@@ -227,6 +227,7 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function updateRepositoryList ($params) {
+		global $sys_var_path ;
 		$groups = $this->getGroups () ;
 
 		// Update WebDAV stuff
@@ -240,16 +241,17 @@ class SVNPlugin extends SCMPlugin {
 		$svnusers = array () ;
 		foreach ($groups as $project) {
 			$users = $project->getMembers () ;
-			$perm = $project->getPermission ($user) ;
-			if ($perm->isMember ('scm', 0)) {
-				$svnusers[$user->getID()] = $user ;
-			}
-
-			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
-			if ($perm->isMember ('scm', 1)) {
-				$access_data .= $user->getUnixName() . "= rw\n" ;
-			} elseif ($perm->isMember ('scm', 0)) {
-				$access_data .= $user->getUnixName() . "= r\n" ;
+			foreach ($users as $user) {
+				$perm = $project->getPermission ($user) ;
+				if ($perm->isMember ('scm', 0)) {
+					$svnusers[$user->getID()] = $user ;
+				}
+				$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
+				if ($perm->isMember ('scm', 1)) {
+					$access_data .= $user->getUnixName() . "= rw\n" ;
+				} elseif ($perm->isMember ('scm', 0)) {
+					$access_data .= $user->getUnixName() . "= r\n" ;
+				}
 			}
 			if ( $project->enableAnonSCM() ) {
 				$access_data .= "anonsvn= r\n" ;
@@ -264,14 +266,14 @@ class SVNPlugin extends SCMPlugin {
 		}
 		$password_data .= 'anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.'."\n";
 
-		$fname = $sys_var_path.'/svnroot-access' ;
+		$fname = $sys_var_path.'/svnroot-authfile' ;
 		$f = fopen ($fname.'.new', 'w') ;
 		fwrite ($f, $password_data) ;
 		fclose ($f) ;
 		chmod ($fname.'.new', 0644) ;
 		rename ($fname.'.new', $fname) ;
 
-		$fname = $sys_var_path.'/svnroot-authfile' ;
+		$fname = $sys_var_path.'/svnroot-access' ;
 		$f = fopen ($fname.'.new', 'w') ;
 		fwrite ($f, $access_data) ;
 		fclose ($f) ;
