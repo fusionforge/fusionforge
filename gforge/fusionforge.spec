@@ -300,7 +300,7 @@ Requires: %{name} >= %{version}, php, postgresql
 mantisbt plugin for FusionForge. 
 
 %prep
-%setup
+%setup -q
 #%patch0 -p1
 #%patch1 -p1
 #%patch2 -p1
@@ -341,7 +341,7 @@ search_and_replace()
 }
 
 # we need to fix up the fusionforge-install-3-db.php script to ref %{GFORGE_DIR}
-search_and_replace "/opt/gforge" "/usr/share/gforge"
+search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 
 # installing gforge
 %{__cp} -a * $RPM_BUILD_ROOT/%{GFORGE_DIR}/
@@ -403,7 +403,7 @@ search_and_replace "/opt/gforge" "/usr/share/gforge"
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/viewcvs
 
 ### Plugin setup ###
-%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d
+%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d/
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
 
 # plugin: aselectextauth
@@ -523,65 +523,71 @@ if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -eq 0 
 fi
 
 %post
-# check to see if the database already exists. if not, we proceed to create it.
-# if so, we print a warning message.
-echo "\q" | su - postgres -c "/usr/bin/psql %{dbname}" 1>/dev/null 2>&1
-ret=$?
-if [ $ret -ne 0 ] ; then
-    FFORGE_DB=%{dbname}
-    FFORGE_USER=%{dbuser}
-    FFORGE_ADMIN_USER=%{fforge_admin}
-    FFORGE_ADMIN_PASSWORD=%{fforge_passwd}
-    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
-    /usr/bin/php %{GFORGE_DIR}/fusionforge-install-3-db.php >>/var/log/%{name}-install.log 2>&1
+if [ "$1" -eq "1" ]; then
+	# check to see if the database already exists. if not, we proceed to create it.
+	# if so, we print a warning message.
+	echo "\q" | su - postgres -c "/usr/bin/psql %{dbname}" 1>/dev/null 2>&1
+	ret=$?
+	if [ $ret -ne 0 ] ; then
+	    FFORGE_DB=%{dbname}
+	    FFORGE_USER=%{dbuser}
+	    FFORGE_ADMIN_USER=%{fforge_admin}
+	    FFORGE_ADMIN_PASSWORD=%{fforge_passwd}
+	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
+	    /usr/bin/php %{GFORGE_DIR}/fusionforge-install-3-db.php >>/var/log/%{name}-install.log 2>&1
+	else
+	    echo "Database %{dbname} already exists. Will not proceed with database setup." >>/var/log/%{name}-install.log 2>&1
+	    echo "Please see %{GFORGE_DIR}/fusionforge-install-3-db.php and run it manually" >>/var/log/%{name}-install.log 2>&1
+	    echo "if deemed necessary." >>/var/log/%{name}-install.log 2>&1
+	fi
+
+	/usr/bin/php %{GFORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
+
+	HOSTNAME=`hostname -f`
+	%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{GFORGE_CONF_DIR}/local.inc
+	%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
+
+	/etc/init.d/httpd restart >/dev/null 2>&1
+
+	# generate random hash for session_key
+	HASH=$(/bin/dd if=/dev/urandom bs=1024 count=100 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
+	%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{GFORGE_CONF_DIR}/local.inc
+
+	# add noreply mail alias
+	echo "noreply: /dev/null" >> /etc/aliases
+	/usr/bin/newaliases >/dev/null 2>&1
+
+	# display message about default admin account
+	echo ""
+	echo "You can now connect to your FusionForge installation using:"
+	echo ""
+	echo "   http://$HOSTNAME/"
+	echo ""
+	echo "The default fusionforge administrator account and password is:"
+	echo ""
+	echo "Account Name = %{fforge_admin}"
+	echo "Password = %{fforge_passwd}"
+	#echo "Please change it to something appropriate upon initial login."
+	# give user a few seconds to read the message
+	sleep 10
 else
-    echo "Database %{dbname} already exists. Will not proceed with database setup."
-    echo "Please see %{GFORGE_DIR}/fusionforge-install-3-db.php and run it manually"
-    echo "if deemed necessary."
+	/usr/bin/php %{GFORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-upgrade.log 2>&1
 fi
-
-/usr/bin/php %{GFORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
-
-HOSTNAME=`hostname -f`
-%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{GFORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
-
-/etc/init.d/httpd restart >/dev/null 2>&1
-
-# generate random hash for session_key
-HASH=$(/bin/dd if=/dev/urandom bs=1024 count=100 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
-%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{GFORGE_CONF_DIR}/local.inc
-
-# add noreply mail alias
-echo "noreply: /dev/null" >> /etc/aliases
-/usr/bin/newaliases >/dev/null 2>&1
-
-# display message about default admin account
-echo ""
-echo "You can now connect to your FusionForge installation using:"
-echo ""
-echo "   http://$HOSTNAME/"
-echo ""
-echo "The default fusionforge administrator account and password is:"
-echo ""
-echo "Account Name = %{fforge_admin}"
-echo "Password = %{fforge_passwd}"
-#echo "Please change it to something appropriate upon initial login."
-# give user a few seconds to read the message
-sleep 10
 
 %preun
 
 %postun
-# Remove user/group
-if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -ne 0 ] ; then
-    echo "Removing fusionforge user..."
-    /usr/sbin/userdel %{gfuser}
-fi
+if [ "$1" -eq "0" ]; then
+	# Remove user/group
+	if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -ne 0 ] ; then
+	    echo "Removing fusionforge user..."
+	    /usr/sbin/userdel %{gfuser}
+	fi
 
-if [ `/usr/bin/getent group | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -ne 0 ] ; then
-    echo "Removing fusionforge group..."
-    /usr/sbin/groupdel %{gfgroup}
+	if [ `/usr/bin/getent group | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -ne 0 ] ; then
+	    echo "Removing fusionforge group..."
+	    /usr/sbin/groupdel %{gfgroup}
+	fi
 fi
 
 %post aselectextauth
