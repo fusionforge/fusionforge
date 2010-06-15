@@ -140,7 +140,6 @@ gforge/common/widget/Widget_ProjectMembers.class.php -text
 gforge/common/widget/Widget_ProjectPublicAreas.class.php -text
 gforge/common/widget/Widget_ProjectRss.class.php -text
 gforge/common/widget/Widget_Rss.class.php -text
-gforge/contrib/cmd-line-prototype.tar.gz -text
 gforge/contrib/fusionforge.dia -text
 gforge/contrib/migrate-from-gforge-as.pl -text
 gforge/cronjobs/auth_unix.php -text
