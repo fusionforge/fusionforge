@@ -111,7 +111,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	public function isActionAllowedForUser ($user, $section, $reference, $action = NULL) {
 		$rlist = $this->getAvailableRolesForUser ($user) ;
 		foreach ($rlist as $r) {
-			if ($r->hasPermission ($user, $section, $reference, $action)) {
+			if ($r->hasPermission ($section, $reference, $action)) {
 				return true ;
 			}
 		}
