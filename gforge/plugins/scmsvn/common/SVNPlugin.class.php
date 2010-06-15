@@ -3,6 +3,7 @@
  *
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
+ * Copyright 2010, Alain Peyrat <aljeux@free.fr>
  *
  * This file is part of FusionForge.
  *
@@ -35,10 +36,10 @@ forge_define_config_item ('anonsvn_password','scmsvn', 'anonsvn');
 
 class SVNPlugin extends SCMPlugin {
 	function SVNPlugin () {
-		global $gfconfig;
 		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
-		$this->text = 'SVN';
+		$this->text = 'Subversion';
+		$this->svn_root = '/svn';
 		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
@@ -84,7 +85,7 @@ class SVNPlugin extends SCMPlugin {
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
 			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_login', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'/trunk</tt><br/><br/>';
-			$b .= _('The password is ').forge_get_config('anonsvn_pass', 'scmsvn').'<br/>';
+			$b .= _('The password is ').forge_get_config('anonsvn_password', 'scmsvn').'<br/>';
 		}
 		$b .= '</p>';
 		return $b ;
@@ -174,8 +175,6 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage ($params) {
-		global $HTML;
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
@@ -198,16 +197,16 @@ class SVNPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$repo = $this->svn_root . '/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			system ("svnadmin create $repo") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches") ;
-			system ("find $repo -type d | xargs chmod g+s") ;
 		}
 
 		if (forge_get_config('use_ssh', 'scmsvn')) {
+			$unix_group = 'scm_' . $project->getUnixName() ;
+			system ("find $repo -type d | xargs chmod g+s") ;
 			system ("chgrp -R $unix_group $repo") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod -R g+wX,o+rX-w $repo") ;
@@ -216,12 +215,9 @@ class SVNPlugin extends SCMPlugin {
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');
+			$unix_group = forge_get_config('apache_group');
 			system ("chown -R $unix_user:$unix_group $repo") ;
-			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+wX,o+rX-w $repo") ;
-			} else {
-				system ("chmod -R g+wX,o-rwx $repo") ;
-			}
+			system ("chmod -R g-rwx,o-rwx $repo") ;
 		}
 	}
 
@@ -316,15 +312,15 @@ class SVNPlugin extends SCMPlugin {
 			$usr_adds = array () ;
 			$usr_updates = array () ;
 
-			$repo = $this->svn_root . '/' . $project->getUnixName() ;
+			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
 				echo "No repository\n" ;
 				db_rollback () ;
 				return false ;
 			}
 	
-                        $d1 = date ('Y-m-d', $start_time - 150000) ;
-                        $d2 = date ('Y-m-d', $end_time + 150000) ;
+			$d1 = date ('Y-m-d', $start_time - 150000) ;
+			$d2 = date ('Y-m-d', $end_time + 150000) ;
 
 			$pipe = popen ("svn log file://$repo --xml -v -q -r '".'{'.$d2.'}:{'.$d1.'}'."' 2> /dev/null", 'r' ) ;
 
@@ -441,7 +437,7 @@ class SVNPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$toprepo = $this->svn_root ;
+		$toprepo = forge_get_config('repos_path', 'scmsvn') ;
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
