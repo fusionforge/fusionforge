@@ -1,25 +1,16 @@
-# translation of de.po to
-# German translations for PACKAGE package.
-# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
-# Automatically generated, 2007.
-# Thorsten Glaser <t.glaser@tarent.de>, 2010.
-# Nils Kollat <n.kollat@tarent.de>, 2010.
+# German translations for FusionForge.
 msgid ""
 msgstr ""
-"Project-Id-Version: de\n"
+"Project-Id-Version: FusionForge 5.0 branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-07 18:16+0100\n"
-"PO-Revision-Date: 2010-06-10 10:32+0200\n"
-"Last-Translator: Nils Kollat <n.kollat@tarent.de>\n"
-"Language-Team:  <de@li.org>\n"
-"Language: de\n"
+"POT-Creation-Date: 2010-06-04 16:50+0200\n"
+"PO-Revision-Date: 2010-06-15 12:03+0200\n"
+"Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
+"Language-Team: german\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:347
@@ -9943,11 +9934,11 @@ msgstr "nächste 50"
 
 #: www/pm/browse_task.php:337 www/tracker/browse.php:517
 msgid "Check &nbsp;all"
-msgstr "Markiere alle   "
+msgstr "Alle auswählen"
 
 #: www/pm/browse_task.php:339 www/tracker/browse.php:519
 msgid "Clear &nbsp;all"
-msgstr "Lösche alle   "
+msgstr "Alle abwählen"
 
 #: www/pm/browse_task.php:342 www/tracker/browse.php:522
 #, fuzzy
