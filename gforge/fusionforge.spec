@@ -46,9 +46,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
 
 # requirements as derived from fusionforge-install-1-deps.php script
-Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman, cvs, subversion
+Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman
 Requires: postgresql, postgresql-libs, postgresql-server, postgresql-contrib
-Requires: postfix, rcs, wget, openssh, inetd, which, liberation-fonts
+Requires: postfix, openssh, inetd, which, liberation-fonts
 
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail, perl-Sort-Versions
@@ -323,7 +323,8 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_LANG_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{upload,scmtarballs,scmsnapshots}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{homedirs,svnroot,cvsroot,dumps}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{homedirs,dumps}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/chroot/scmrepos/{svn,cvs}
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
 # mock mediawiki directory because we symlink GForge skin to Monobook
 %{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
@@ -348,35 +349,27 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 
 # create project vhost space symlink
 %{__ln_s} /home/groups $RPM_BUILD_ROOT/%{GFORGE_VAR_LIB}/homedirs/groups
-# create SVN repo default location symlink
-%{__ln_s} %{GFORGE_VAR_LIB}/svnroot $RPM_BUILD_ROOT/svnroot
-# create CVS repo default location symlink
-%{__ln_s} %{GFORGE_VAR_LIB}/cvsroot $RPM_BUILD_ROOT/cvsroot
 # install restricted shell for cvs accounts
 %{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
 
-# copy over configuration files
-# - main configuration file
-## fix up local.inc.example before we use it
-### - replace apacheuser / apachegroup with %{httpduser} and %{httpdgroup}
-%{__sed} -i -e "s/apacheuser/%{httpduser}/g" etc/local.inc.example
-%{__sed} -i -e "s/apachegroup/%{httpdgroup}/g" etc/local.inc.example
-%{__sed} -i -e "s!/path/to/gforge!%{GFORGE_DIR}!g" etc/local.inc.example
-
-### - replace sys_dbname and sys_dbuser with %{dbname} and %{dbuser}
-### - fix various sys_* variables
+# Fix configuration files entries (various sys_* variables)
 %{__cp} -a etc/local.inc.example $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s!/path/to/gforge!%{GFORGE_DIR}!g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s/\$sys_dbname=.*/\$sys_dbname='%{dbname}';/g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s/\$sys_dbuser=.*/\$sys_dbuser='%{dbuser}';/g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s/\$sys_apache_user=.*/\$sys_apache_user='%{httpduser}';/g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s/\$sys_apache_group=.*/\$sys_apache_group='%{httpdgroup}';/g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s|\$sys_plugins_path=.*|\$sys_plugins_path=\"%{GFORGE_DIR}/plugins\";|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s|\$sys_upload_dir=.*|\$sys_upload_dir=\"\$sys_var_path/upload\";|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s|\$sys_urlroot=.*|\$sys_urlroot=\"%{GFORGE_DIR}/www\";|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/local.inc
-### - replace sys_localinc, sys_gfdbname, sys_gfdbuser
+
+# Replace sys_localinc, sys_gfdbname, sys_gfdbuser
 %{__cp} -a etc/httpd.secrets.example $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
 %{__sed} -i -e "s|sys_localinc.*$|sys_localinc %{GFORGE_CONF_DIR}/local.inc|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
 %{__sed} -i -e "s|sys_gfdbname.*$|sys_gfdbname %{dbname}|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
 %{__sed} -i -e "s|sys_gfdbuser.*$|sys_gfdbname %{dbuser}|g" $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.secrets
-# - apache configuration file
+
+# Apache configuration file
 %{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
 %{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
 # install fusionforge crontab
@@ -695,10 +688,6 @@ fi
 %dir %attr(0775,root,%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins
 %dir %{GFORGE_VAR_LIB}/scmtarballs
 %dir %{GFORGE_VAR_LIB}/scmsnapshots
-%dir %{GFORGE_VAR_LIB}/svnroot
-/svnroot
-%dir %{GFORGE_VAR_LIB}/cvsroot
-/cvsroot
 %dir %{GFORGE_VAR_LIB}/dumps
 %{GFORGE_VAR_LIB}/homedirs
 /home/groups
@@ -796,11 +785,13 @@ fi
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
 %{GFORGE_DIR}/plugins/scmcvs
 %{GFORGE_DIR}/www/plugins/scmcvs
+%{GFORGE_VAR_LIB}/chroot/scmrepos/cvs
 
 %files scmsvn
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmsvn.ini
 %{GFORGE_DIR}/plugins/scmsvn
 %{GFORGE_DIR}/www/plugins/scmsvn
+%{GFORGE_VAR_LIB}/chroot/scmrepos/svn
 
 %files svncommitemail
 %{GFORGE_DIR}/plugins/svncommitemail
