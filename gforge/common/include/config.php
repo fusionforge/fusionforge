@@ -86,7 +86,7 @@ class FusionForgeConfig {
 	}
 
 	function read_config_file ($file) {
-		if (file_exists($file)) {
+		if (file_exists($file) && is_readable($file)) {
 			$sections = parse_ini_file ($file, true) ;
 			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
