@@ -1,10 +1,10 @@
-ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) {usr_share_gforge}/plugins/$1/cgi-bin/$2
+ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) {core/source_path}/plugins/$1/cgi-bin/$2
 
-Alias {sys_urlprefix}anonscm/ {var_lib_gforge}/chroot/scmrepos/
+Alias {core/url_prefix}anonscm/ {core/data_path}/chroot/scmrepos/
 
-<DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*>
+<DirectoryMatch {core/data_path}/chroot/scmrepos/[^/]*>
   Options -Indexes
 </DirectoryMatch>
-<DirectoryMatch {var_lib_gforge}/chroot/scmrepos/[^/]*/.*>
+<DirectoryMatch {core/data_path}/chroot/scmrepos/[^/]*/.*>
   Options +Indexes
 </DirectoryMatch>
