@@ -1,0 +1,4 @@
+RedirectMatch 301 ^(/plugins/mediawiki/wiki/[-a-zA-Z0-9_]*)/*$ $1/index.php
+AliasMatch ^/plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php {usr_share_gforge}/www/plugins/mediawiki/index.php
+AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) {var_lib_gforge}/plugins/mediawiki/wikidata/$1/images/$2
+AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/mediawiki/skins/$2
