@@ -1,18 +1,18 @@
 #! /bin/sh -e
 
-if [ -e gforge/etc/httpd.conf.d ] ; then        # We're in the parent dir
-    cd gforge/etc
-elif [ -e etc/httpd.conf.d ] ; then             # probably in gforge/ (or a renamed gforge/)
-    cd etc
-elif [ -e ../etc/httpd.conf.d ] ; then          # possibly in gforge/etc
-    cd ../etc
-else
-    echo "Couldn't find Apache config directory..."
-    exit 1
-fi
-
 case $1 in
     build)
+	if [ -e gforge/etc/httpd.conf.d ] ; then        # We're in the parent dir
+	    cd gforge/etc
+	elif [ -e etc/httpd.conf.d ] ; then             # probably in gforge/ (or a renamed gforge/)
+	    cd etc
+	elif [ -e ../etc/httpd.conf.d ] ; then          # possibly in gforge/etc
+	    cd ../etc
+	else
+	    echo "Couldn't find Apache config directory..."
+	    exit 1
+	fi
+
 	mkdir -p httpd.conf.d-fhs
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
@@ -58,16 +58,16 @@ case $1 in
 	
     install)
 	dir=$(forge_get_config config_path)/httpd.conf.d
-	cd dir
+	cd $dir
 	files=$(ls *.inc *.conf | xargs grep -l {[a-z_]*/[a-z_]*})
-	for f in files ; do
+	for f in $files ; do
 	    ftmp=$(mktemp $f.generated.XXXXXX)
 	    cp -a $f $ftmp
-	    for v in config_path source_path data_path log_path chroot custom_path url_prefix groupdir_prefix web_gost lists_host database_host database_name database_user database_password ldap_password jabber_password ; do
+	    for v in config_path source_path data_path log_path chroot custom_path url_prefix groupdir_prefix web_host lists_host database_host database_name database_user database_password ldap_password jabber_password ; do
 		
-		sed -i -e s,{core/$v},$(forge_get_config $v),g $ftmp
+		grep -q {core/$v} $ftmp && sed -i -e s,{core/$v},$(forge_get_config $v),g $ftmp
 	    done
-	    sed -i -e s,{mediawiki/src_path},$(forge_get_config src_path mediawiki),g $ftmp
+	    grep -q {mediawiki/src_path} $ftmp && sed -i -e s,{mediawiki/src_path},$(forge_get_config src_path mediawiki),g $ftmp
 	    mv $ftmp $f.generated
 	done
 	;;
