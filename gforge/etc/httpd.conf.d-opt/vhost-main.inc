@@ -1,6 +1,6 @@
-ServerName {domain_name}
-ServerAlias www.{domain_name}
-ServerAdmin {server_admin}
+ServerName {core/web_host}
+ServerAlias www.{core/web_host}
+ServerAdmin webmaster@{core/web_host}
 DocumentRoot /opt/fusionforge/www
 DirectoryIndex index.html index.php
 

@@ -1,1 +1,1 @@
-ServerName {lists_host}
+ServerName {core/lists_host}

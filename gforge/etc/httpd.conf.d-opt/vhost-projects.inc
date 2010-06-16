@@ -1,7 +1,7 @@
 # per-project vhost content
 
-ServerName siteadmin.{domain_name}
-ServerAlias *.{domain_name}
+ServerName siteadmin.{core/web_host}
+ServerAlias *.{core/web_host}
 DirectoryIndex index.html index.php index.htm
 
 # This is magic for virtual hosting!

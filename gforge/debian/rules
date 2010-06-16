@@ -115,7 +115,7 @@ build: patch remove-binary-files debian/po/templates.pot conffiles
 	utils/manage-translations.sh build
 
 # Build FHS-compatible Apache config files
-	utils/manage-apache-config.sh
+	utils/manage-apache-config.sh build
 
 # Preprocess files with DSF-Helper
 	perl $(CURDIR)/deb-specific/dsf-helper.pl
