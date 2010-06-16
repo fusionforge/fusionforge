@@ -24,6 +24,7 @@ case $1 in
 		-e 's,{core/url_prefix},/,g' \
 		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
+		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
 		$i > httpd.conf.d-fhs/$(basename $i)
 	done
 	
@@ -38,6 +39,7 @@ case $1 in
 		-e 's,{core/url_prefix},/,g' \
 		-e 's,{core/groupdir_prefix},/opt/fusionforge/data/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
+		-e 's,{scmsvn/repos_path},/var/lib/gforge/svnroot,g' \
 		$i > httpd.conf.d-opt/$(basename $i)
 	done
 	
@@ -52,6 +54,7 @@ case $1 in
 		-e 's,{core/url_prefix},/,g' \
 		-e 's,{core/groupdir_prefix},/var/local/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
+		-e 's,{scmsvn/repos_path},/var/lib/gforge/chroot/scmrepos/svn,g' \
 		$i > httpd.conf.d-usrlocal/$(basename $i)
 	done
 	;;

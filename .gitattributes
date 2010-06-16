@@ -354,6 +354,7 @@ gforge/etc/httpd.conf.d/plugin-mediawiki.inc -text
 gforge/etc/httpd.conf.d/plugin-scmbzr.inc -text
 gforge/etc/httpd.conf.d/plugin-scmdarcs.inc -text
 gforge/etc/httpd.conf.d/plugin-scmgit.inc -text
+gforge/etc/httpd.conf.d/plugin-scmsvn.inc -text
 gforge/etc/httpd.conf.d/projects-in-mainvhost.inc -text
 gforge/etc/httpd.conf.d/secrets.inc -text
 gforge/etc/httpd.conf.d/ssl-off.inc -text
