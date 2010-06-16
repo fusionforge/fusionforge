@@ -7,4 +7,7 @@ data_path = /var/lib/gforge
 config_path = /etc/gforge
 chroot = "$core/data_path/chroot"
 
+homedir_prefix = "$core/chroot/home/users"
+groupdir_prefix = "$core/chroot/home/groups"
+
 extra_config_dirs = "$core/config_path/config.ini.d"
