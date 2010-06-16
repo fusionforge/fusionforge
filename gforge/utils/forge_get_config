@@ -35,17 +35,30 @@ if (count ($argv) == 3) {
 	}
 	echo "$v\n" ;
 } elseif (count($argv) == 2) {
-	$v = forge_get_config ($argv[1]) ;
-	if ($v === true) {
-		$v = 'yes' ;
-	} elseif ($v === false) {
-		$v = 'no' ;
+	if ($argv[1] == 'list-all-variables') {
+		$c = FusionForgeConfig::get_instance () ;
+		$sections = $c->get_sections() ;
+		foreach ($sections as $s) {
+			$variables = $c->get_variables($s) ;
+			foreach ($variables as $v) {
+				print "$s/$v\n" ;
+			}
+		}
+	} else {
+		$v = forge_get_config ($argv[1]) ;
+		if ($v === true) {
+			$v = 'yes' ;
+		} elseif ($v === false) {
+			$v = 'no' ;
+		}
+		echo "$v\n" ;
 	}
-	echo "$v\n" ;
 } else {
 	echo "Usage: .../forge-get-config <variable> [ <section> ]
 For instance: .../forge-get-config web_host
               .../forge-get-config repo_prefix scmsvn
+
+Or:           .../forge-get-config list-all-variables
 " ;
         exit (1) ;
 }

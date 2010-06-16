@@ -60,14 +60,13 @@ case $1 in
 	dir=$(forge_get_config config_path)/httpd.conf.d
 	cd $dir
 	files=$(ls *.inc *.conf | xargs grep -l {[a-z_]*/[a-z_]*})
+	vars=$(forge_get_config list-all-variables)
 	for f in $files ; do
 	    ftmp=$(mktemp $f.generated.XXXXXX)
 	    cp -a $f $ftmp
-	    for v in config_path source_path data_path log_path chroot custom_path url_prefix groupdir_prefix web_host lists_host database_host database_name database_user database_password ldap_password jabber_password ; do
-		
-		grep -q {core/$v} $ftmp && sed -i -e s,{core/$v},$(forge_get_config $v),g $ftmp
+	    for v in $vars ; do
+		grep -q {$v} $ftmp && sed -i -e s,{$v},$(forge_get_config ${v##*/} ${v%%/*}),g $ftmp
 	    done
-	    grep -q {mediawiki/src_path} $ftmp && sed -i -e s,{mediawiki/src_path},$(forge_get_config src_path mediawiki),g $ftmp
 	    mv $ftmp $f.generated
 	done
 	;;
