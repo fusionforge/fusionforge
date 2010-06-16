@@ -146,24 +146,24 @@
 		system("cp etc/local.inc.example /etc/gforge/local.inc");
 	}
 	if (!is_file("/etc/gforge/httpd.conf")) {
-		system("cp etc/httpd.conf-fhs /etc/gforge/httpd.conf");
+		system("cp etc/httpd.conf-opt /etc/gforge/httpd.conf");
 	}
 	system("mkdir -p /etc/gforge/httpd.conf.d");
-	$h = opendir ('etc/httpd.conf.d-fhs') ;
+	$h = opendir ('etc/httpd.conf.d-opt') ;
 	while (false !== ($file = readdir($h))) {
 		if ($file != "." 
 		    && $file != ".."
 		    && (preg_match ('/^[0-9a-zA-Z_-]+(.conf)?$/', $file)
 			|| preg_match ('/^[0-9a-zA-Z_-]+(.inc)?$/', $file))) {
 			if (!is_file("/etc/gforge/httpd.conf.d/$file")) {
-				system("cp etc/httpd.conf.d-fhs/$file /etc/gforge/httpd.conf.d");
+				system("cp etc/httpd.conf.d-opt/$file /etc/gforge/httpd.conf.d");
 			}
 		}
 	}
 	closedir($h);
 
 	if (!is_file("/etc/gforge/httpd.conf")) {
-		system("cp etc/httpd.conf-fhs /etc/gforge/httpd.conf");
+		system("cp etc/httpd.conf-opt /etc/gforge/httpd.conf");
 	}
 
 	// Install default configuration files for all plugins.
