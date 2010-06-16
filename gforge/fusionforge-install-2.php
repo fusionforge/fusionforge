@@ -105,6 +105,8 @@
 	system("mkdir -p uploads");
 	system("mkdir -p scmtarballs");
 	system("mkdir -p scmsnapshots");
+	system("mkdir -p etc");
+	system("touch etc/httpd.vhosts");
 
 	//#project vhost space
 	system("mkdir -p homedirs");
