@@ -40,15 +40,6 @@ case "$1" in
 	add_onevar_mainconfile sys_show_source 0
 	add_onevar_mainconfile sys_force_login 0
 
-	if [ -f /usr/bin/cronolog ]; then  # this is the preferred location for debian
-	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
-	elif [ -f /usr/sbin/cronolog ]; then	   # this location is deprecated in debian
-	    add_onevar_mainconfile cronolog_path /usr/sbin/cronolog
-	else
-	    echo "can't find cronolog in usual places" >&2
-	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
-	fi
-
 	if [ ! -e /etc/@OLDPACKAGE@/ssl-cert.pem ] || [ ! -e /etc/@OLDPACKAGE@/ssl-cert.key ] ; then
 	    # Uh-oh, no SSL cert, let's make sure at least a dummy one exists.
 	    if [ ! -e /etc/ssl/certs/ssl-cert-snakeoil.pem ] || [ ! -e /etc/ssl/private/ssl-cert-snakeoil.key ] ; then
@@ -58,15 +49,6 @@ case "$1" in
 	    # Right.  At this point, it should be safe to set the symlinks.
 	    ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /etc/@OLDPACKAGE@/ssl-cert.pem
 	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/@OLDPACKAGE@/ssl-cert.key
-	    if grep -q ^sys_use_ssl=false$ /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf \
-		&& grep -q ^sys_sslcrt=$ /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf \
-		&& grep -q ^sys_sslkey=$ /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf ; then
-		# Okay, previous installations failed to locate SSL certs
-		# and disabled SSL altogether.  Let's fix that
-		sed -i -e 's,^sys_use_ssl=false$,sys_use_ssl=true,' /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf 
-		sed -i -e 's,^sys_sslcrt=$,sys_sslcrt=/etc/@OLDPACKAGE@/ssl-cert.pem,' /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf 
-		sed -i -e 's,^sys_sslkey=$,sys_sslkey=/etc/@OLDPACKAGE@/ssl-cert.key,' /etc/@OLDPACKAGE@/@OLDPACKAGE@.conf
-	    fi
 	fi
 	
         @OLDPACKAGE@-config

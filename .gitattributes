@@ -266,6 +266,9 @@ gforge/etc/config.ini.d/scmgit.ini -text
 gforge/etc/config.ini.d/scmhg.ini -text
 gforge/etc/config.ini.d/scmsvn.ini -text
 gforge/etc/database.py.example -text
+gforge/etc/httpd.conf-fhs -text
+gforge/etc/httpd.conf-opt -text
+gforge/etc/httpd.conf-usrlocal -text
 gforge/etc/httpd.conf.d-fhs/01-namevhost.conf -text
 gforge/etc/httpd.conf.d-fhs/02-config-main.conf -text
 gforge/etc/httpd.conf.d-fhs/10-vhosts-main.conf -text
