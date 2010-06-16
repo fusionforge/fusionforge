@@ -16,6 +16,7 @@ for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
     sed -e 's,{core/config_path},/etc/gforge,g' \
 	-e 's,{core/source_path},/usr/share/gforge,g' \
 	-e 's,{core/data_path},/var/lib/gforge,g' \
+	-e 's,{core/log_path},/var/log/gforge,g' \
 	-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
 	-e 's,{core/custom_path},/etc/gforge/custom,g' \
 	-e 's,{core/url_prefix},/,g' \
@@ -29,6 +30,7 @@ for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
     sed -e 's,{core/config_path},/opt/fusionforge/etc,g' \
 	-e 's,{core/source_path},/opt/fusionforge,g' \
 	-e 's,{core/data_path},/opt/fusionforge/data,g' \
+	-e 's,{core/log_path},/opt/fusionforge/log,g' \
 	-e 's,{core/chroot},/opt/fusionforge/data/chroot,g' \
 	-e 's,{core/custom_path},/opt/fusionforge/etc/custom,g' \
 	-e 's,{core/url_prefix},/,g' \
@@ -42,6 +44,7 @@ for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
     sed -e 's,{core/config_path},/etc/gforge,g' \
 	-e 's,{core/source_path},/usr/local/share/gforge,g' \
 	-e 's,{core/data_path},/var/local/lib/gforge,g' \
+	-e 's,{core/log_path},/var/log/gforge,g' \
 	-e 's,{core/chroot},/var/local/lib/gforge/chroot,g' \
 	-e 's,{core/custom_path},/etc/gforge/custom,g' \
 	-e 's,{core/url_prefix},/,g' \
