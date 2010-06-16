@@ -162,10 +162,6 @@
 	}
 	closedir($h);
 
-	if (!is_file("/etc/gforge/httpd.conf")) {
-		system("cp etc/httpd.conf-opt /etc/gforge/httpd.conf");
-	}
-
 	// Install default configuration files for all plugins.
 	system("mkdir -p /etc/gforge/plugins/");
 	chdir("/opt/gforge/plugins");
