@@ -1,0 +1,20 @@
+#RequestHeader unset GForgeDbhost
+#RequestHeader append GForgeDbhost {db_host}
+
+RequestHeader unset GForgeDbport
+RequestHeader append GForgeDbport {db_port}
+
+RequestHeader unset GForgeDbname
+RequestHeader append GForgeDbname {db_name}
+
+RequestHeader unset GForgeDbuser
+RequestHeader append GForgeDbuser {db_user}
+
+RequestHeader unset GForgeDbpasswd
+RequestHeader append GForgeDbpasswd {db_password}
+
+RequestHeader unset GForgeLdapPasswd
+RequestHeader append GForgeLdapPasswd {ldap_web_add_password}
+
+RequestHeader unset GForgeJabberPasswd
+RequestHeader append GForgeJabberPasswd {sys_jabber_pass}
