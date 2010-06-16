@@ -2,4 +2,4 @@ www                                 usr/share/gforge/
 www/index_std.php                   etc/gforge/custom/
 utils/install-apache.sh             usr/share/gforge/bin/
 utils/manage-apache-config.sh	    usr/share/gforge/bin/
-etc/httpd.conf.d-fhs		    etc/gforge/
+etc/httpd.conf.d-fhs		    usr/share/gforge/etc/

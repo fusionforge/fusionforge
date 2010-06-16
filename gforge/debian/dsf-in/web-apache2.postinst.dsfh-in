@@ -71,6 +71,19 @@ case "$1" in
 	
         @OLDPACKAGE@-config
 
+	for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
+	    if [ ! -e /etc/gforge/httpd.conf.d/$i ] ; then
+		cp /usr/share/gforge/etc/httpd.conf.d-fhs/$i /etc/gforge/httpd.conf.d/$i
+		if [ $i = "secrets.inc" ] ; then
+		    chmod 700 $i
+		fi
+		PATH=/usr/share/gforge/bin:$PATH manage-apache-config.sh install
+		mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i
+	    fi
+	done
+
+	touch /var/lib/gforge/etc/httpd.vhosts
+
 	db_stop
 
         # Setup our FRS
