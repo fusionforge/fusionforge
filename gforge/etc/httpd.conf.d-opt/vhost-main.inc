@@ -9,7 +9,7 @@ DirectoryIndex index.html index.php
 </IfModule>
 
 <Directory /opt/fusionforge/www>
-  Include /opt/fusionforge/etc/httpd.conf.d/secrets.inc
+  Include /etc/gforge/httpd.conf.d/secrets.inc
 </Directory>
 
 <Location /projects>
@@ -21,9 +21,9 @@ DirectoryIndex index.html index.php
 
 Alias /images/ /opt/fusionforge/www/images/
 
-Include /opt/fusionforge/etc/httpd.conf.d/plugin-*.inc
+Include /etc/gforge/httpd.conf.d/plugin-*.inc
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf
-# Include /opt/fusionforge/etc/httpd.conf.d/projects-in-mainvhost.inc
+# Include /etc/gforge/httpd.conf.d/projects-in-mainvhost.inc
   

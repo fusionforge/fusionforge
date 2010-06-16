@@ -1,8 +1,8 @@
 <IfModule mod_ssl.c>
   SSLEngine on
   
-  SSLCertificateFile /opt/fusionforge/etc/ssl-cert.pem
-  SSLCertificateKeyFile /opt/fusionforge/etc/ssl-cert.key
+  SSLCertificateFile /etc/gforge/ssl-cert.pem
+  SSLCertificateKeyFile /etc/gforge/ssl-cert.key
   # Add extra SSL configuration (e.g. SSLCACertificatePath) here
   
   <Files ~ "\.(cgi|shtml)$">

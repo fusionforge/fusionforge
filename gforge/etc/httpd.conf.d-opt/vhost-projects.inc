@@ -13,7 +13,7 @@ VirtualScriptAlias /opt/fusionforge/data/chroot/home/groups/%1/cgi-bin
 SetEnvIf Host "(.*)\.{domain_name}" AWSTATS_FORCE_CONFIG=group-$1
 
 php_admin_value default_charset "UTF-8"
-php_admin_value include_path "/opt/fusionforge/etc/custom:/opt/fusionforge/etc:/opt/fusionforge:/opt/fusionforge/www/include:."
+php_admin_value include_path "/etc/gforge/custom:/etc/gforge:/opt/fusionforge:/opt/fusionforge/www/include:."
 
 Alias /themes-gforge/ /opt/fusionforge/www/themes/
 
@@ -21,5 +21,5 @@ Alias /themes-gforge/ /opt/fusionforge/www/themes/
   Options Indexes FollowSymlinks
   AllowOverride All
   
-  Include /opt/fusionforge/etc/httpd.conf.d/auth-projects.inc
+  Include /etc/gforge/httpd.conf.d/auth-projects.inc
 </Directory>

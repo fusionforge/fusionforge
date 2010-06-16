@@ -30,12 +30,12 @@ case $1 in
 	
 	mkdir -p httpd.conf.d-opt
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
-	    sed -e 's,{core/config_path},/opt/fusionforge/etc,g' \
+	    sed -e 's,{core/config_path},/etc/gforge,g' \
 		-e 's,{core/source_path},/opt/fusionforge,g' \
 		-e 's,{core/data_path},/opt/fusionforge/data,g' \
 		-e 's,{core/log_path},/opt/fusionforge/log,g' \
 		-e 's,{core/chroot},/opt/fusionforge/data/chroot,g' \
-		-e 's,{core/custom_path},/opt/fusionforge/etc/custom,g' \
+		-e 's,{core/custom_path},/etc/gforge/custom,g' \
 		-e 's,{core/url_prefix},/,g' \
 		-e 's,{core/groupdir_prefix},/opt/fusionforge/data/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
