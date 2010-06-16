@@ -5,6 +5,7 @@ user_registration_restricted = false
 source_path = /opt/fusionforge
 data_path = /opt/fusionforge/data
 config_path = /opt/fusionforge/etc
+log_path = /opt/fusionforge/log
 chroot = "$core/data_path/chroot"
 
 homedir_prefix = "$core/chroot/home/users"
