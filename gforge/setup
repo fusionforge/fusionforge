@@ -2,7 +2,7 @@
 # This script is used by the debian and RPM packages to set up fusionforge.
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-novhost] [-home homepath] [-group grouppath] [-listen80|nolisten80] [-nossl]"
+	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-novhost] [-home homepath] [-group grouppath] [-listen80|nolisten80] [-nossl]"
 }
 
 getval(){
@@ -319,13 +319,6 @@ setupinout(){
 		echo "SSL Enabled"
 	fi
 
-	echo "Creating $HTTPDCONF"
-	ls $ETCDIR/[0-9][0-9]*.gforge-new | sort | xargs cat > $HTTPDCONF
-	rm $ETCDIR/[0-9][0-9]*.gforge-new
-	echo "Creating $HTTPDSECRETS"
-	cat $ETCDIR/httpd.secrets.gforge-new > $HTTPDSECRETS
-	rm $ETCDIR/httpd.secrets.gforge-new
-	
 	echo "Creating $LOCALINC"
 	find $ETCTEMPLATEDIR/local.d -follow -type f -regex "$ETCTEMPLATEDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i
 	do
@@ -358,7 +351,7 @@ setupinout(){
 		fi
 		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
-	chmod 600 $HTTPDSECRETS $CONFFILEIN $CONFFILEOUT
+	chmod 600 $CONFFILEIN $CONFFILEOUT
 	chmod 640 $CONFFILEOUTDIR/local.pl $CONFFILEOUTDIR/database.inc
 	chown gforge:gforge $CONFFILEOUTDIR/local.pl $CONFFILEOUTDIR/database.inc
 }
@@ -413,10 +406,8 @@ CONFFILEOUTDIR=$ETCDIR
 CONFFILEIN=$ETCDIR/gforge.conf
 CONFFILEOUT=$ETCDIR/gforge.conf
 LOCALINC=$ETCDIR/local.inc
-HTTPDCONF=$ETCDIR/httpd.conf
-HTTPDSECRETS=$ETCDIR/httpd.secrets
 SYSTEM=pgsql
-export ETCDIR ETCTEMPLATEDIR BINDIR GFGDIR CONFFILEOUTDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS DOAPACHE SYSTEM
+export ETCDIR ETCTEMPLATEDIR BINDIR GFGDIR CONFFILEOUTDIR CONFFILEIN CONFFILEOUT LOCALINC DOAPACHE SYSTEM
 interact=false
 noapache=false
 database=env
@@ -434,14 +425,6 @@ do
 		-help )
 			usage
 			exit 0
-			;;
-		-httpdsecrets )
-			shift
-			HTTPDSECRETS=$1
-			;;
-		-httpdconf )
-			shift
-			HTTPDCONF=$1
 			;;
 		-localinc )
 			shift
@@ -465,8 +448,6 @@ do
 			CONFFILEIN=$1/gforge.conf
 			CONFFILEOUT=$1/gforge.conf
 			LOCALINC=$1/local.inc
-			HTTPDCONF=$1/httpd.conf
-			HTTPDSECRETS=$1/httpd.secrets
 			echo Using $1 as config directory
 			;;
 		-fhs )
@@ -485,8 +466,6 @@ do
 			CONFFILEIN=/etc/gforge/gforge.conf
 			CONFFILEOUT=/etc/gforge/gforge.conf
 			LOCALINC=/etc/gforge/local.inc
-			HTTPDCONF=/etc/gforge/httpd.conf
-			HTTPDSECRETS=/etc/gforge/httpd.secrets
 			;;
 		-simple )
 			database=simple
@@ -514,8 +493,6 @@ do
 			CONFFILEIN=$ETCDIR/gforge.conf.example
 			CONFFILEOUT=$ETCDIR/gforge.conf.example
 			LOCALINC=$ETCDIR/local.inc.example
-			HTTPDCONF=$ETCDIR/httpd.conf.example
-			HTTPDSECRETS=$ETCDIR/httpd.secrets.example
 			database=simple
 			noapache=true
 			;;
@@ -531,8 +508,6 @@ do
 			[ -f $CONFFILEIN ] && echo Removing $CONFFILEIN && rm -f $CONFFILEIN
 			[ -f $CONFFILEOUT ] && echo Removing $CONFFILEOUT && rm -f $CONFFILEOUT
 			[ -f $LOCALINC ] && echo Removing $LOCALINC && rm -f $LOCALINC
-			[ -f $HTTPDCONF ] && echo Removing $HTTPDCONF && rm -f $HTTPDCONF
-			[ -f $HTTPDSECRETS ] && echo Removing $HTTPDSECRETS && rm -f $HTTPDSECRETS
 			exit 0
 			;;
 		-debug )
