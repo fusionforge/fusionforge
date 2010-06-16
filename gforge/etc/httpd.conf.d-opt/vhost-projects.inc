@@ -21,5 +21,5 @@ Alias /themes-gforge/ /opt/fusionforge/www/themes/
   Options Indexes FollowSymlinks
   AllowOverride All
   
-  Include /opt/fusionforge/etc/httpd.conf.d/auth.projects.inc
+  Include /opt/fusionforge/etc/httpd.conf.d/auth-projects.inc
 </Directory>

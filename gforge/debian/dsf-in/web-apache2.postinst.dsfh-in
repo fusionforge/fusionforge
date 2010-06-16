@@ -75,7 +75,7 @@ case "$1" in
 	    if [ ! -e /etc/gforge/httpd.conf.d/$i ] ; then
 		cp /usr/share/gforge/etc/httpd.conf.d-fhs/$i /etc/gforge/httpd.conf.d/$i
 		if [ $i = "secrets.inc" ] ; then
-		    chmod 700 $i
+		    chmod 700 /etc/gforge/httpd.conf.d/$i
 		fi
 		PATH=/usr/share/gforge/bin:$PATH manage-apache-config.sh install
 		mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i

@@ -21,5 +21,5 @@ Alias /themes-gforge/ {core/source_path}/www/themes/
   Options Indexes FollowSymlinks
   AllowOverride All
   
-  Include {core/config_path}/httpd.conf.d/auth.projects.inc
+  Include {core/config_path}/httpd.conf.d/auth-projects.inc
 </Directory>

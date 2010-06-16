@@ -21,5 +21,5 @@ Alias /themes-gforge/ /usr/local/share/gforge/www/themes/
   Options Indexes FollowSymlinks
   AllowOverride All
   
-  Include /etc/gforge/httpd.conf.d/auth.projects.inc
+  Include /etc/gforge/httpd.conf.d/auth-projects.inc
 </Directory>
