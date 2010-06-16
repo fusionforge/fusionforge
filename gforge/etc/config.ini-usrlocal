@@ -10,4 +10,6 @@ chroot = "$core/data_path/chroot"
 homedir_prefix = "$core/chroot/home/users"
 groupdir_prefix = "$core/chroot/home/groups"
 
+custom_path = "$core/config_path/custom"
+
 extra_config_dirs = "$core/config_path/config.ini.d"
