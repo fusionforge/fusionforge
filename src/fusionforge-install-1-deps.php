@@ -60,7 +60,7 @@ function installRHEL4() {
 function installDebian() {
 
 	INFO("Installing Packages with apt-get");
-	passthru("apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release");
+	passthru("apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release php-htmlpurifier");
 	passthru("a2enmod headers");
 	passthru("a2enmod proxy");
 	passthru("a2enmod ssl");
