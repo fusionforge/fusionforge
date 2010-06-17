@@ -666,6 +666,7 @@ src/etc/httpd.conf.d-fhs/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d-fhs/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d-fhs/plugin-scmdarcs.inc -text
 src/etc/httpd.conf.d-fhs/plugin-scmgit.inc -text
+src/etc/httpd.conf.d-fhs/plugin-scmsvn.inc -text
 src/etc/httpd.conf.d-fhs/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d-fhs/secrets.inc -text
 src/etc/httpd.conf.d-fhs/ssl-off.inc -text
@@ -689,6 +690,7 @@ src/etc/httpd.conf.d-opt/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d-opt/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d-opt/plugin-scmdarcs.inc -text
 src/etc/httpd.conf.d-opt/plugin-scmgit.inc -text
+src/etc/httpd.conf.d-opt/plugin-scmsvn.inc -text
 src/etc/httpd.conf.d-opt/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d-opt/secrets.inc -text
 src/etc/httpd.conf.d-opt/ssl-off.inc -text
@@ -712,6 +714,7 @@ src/etc/httpd.conf.d-usrlocal/plugin-mediawiki.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-scmbzr.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-scmdarcs.inc -text
 src/etc/httpd.conf.d-usrlocal/plugin-scmgit.inc -text
+src/etc/httpd.conf.d-usrlocal/plugin-scmsvn.inc -text
 src/etc/httpd.conf.d-usrlocal/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d-usrlocal/secrets.inc -text
 src/etc/httpd.conf.d-usrlocal/ssl-off.inc -text

@@ -3,9 +3,9 @@ forge_name = FusionForge
 user_registration_restricted = false
 
 source_path = /opt/fusionforge
-data_path = /opt/fusionforge/data
+data_path = /var/lib/gforge
 config_path = /etc/gforge
-log_path = /opt/fusionforge/log
+log_path = /var/log/gforge
 chroot = "$core/data_path/chroot"
 
 homedir_prefix = "$core/chroot/home/users"

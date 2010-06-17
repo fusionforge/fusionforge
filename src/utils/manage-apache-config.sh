@@ -2,11 +2,11 @@
 
 case $1 in
     build)
-	if [ -e gforge/etc/httpd.conf.d ] ; then        # We're in the parent dir
-	    cd gforge/etc
-	elif [ -e etc/httpd.conf.d ] ; then             # probably in gforge/ (or a renamed gforge/)
+	if [ -e src/etc/httpd.conf.d ] ; then # We're in the parent dir
+	    cd src/etc
+	elif [ -e etc/httpd.conf.d ] ; then # probably in src/ (or a renamed gforge/)
 	    cd etc
-	elif [ -e ../etc/httpd.conf.d ] ; then          # possibly in gforge/etc
+	elif [ -e ../etc/httpd.conf.d ] ; then # possibly in src/etc
 	    cd ../etc
 	else
 	    echo "Couldn't find Apache config directory..."
@@ -32,8 +32,8 @@ case $1 in
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
 		-e 's,{core/source_path},/opt/fusionforge,g' \
-		-e 's,{core/data_path},/opt/fusionforge/data,g' \
-		-e 's,{core/log_path},/opt/fusionforge/log,g' \
+		-e 's,{core/data_path},/var/lib/gforge,g' \
+		-e 's,{core/log_path},/var/log/gforge,g' \
 		-e 's,{core/chroot},/opt/fusionforge/data/chroot,g' \
 		-e 's,{core/custom_path},/etc/gforge/custom,g' \
 		-e 's,{core/url_prefix},/,g' \
