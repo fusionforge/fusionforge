@@ -172,6 +172,9 @@
 	}
 	closedir($h);
 
+	system("cp etc/config.ini-opt /etc/gforge/config.ini");
+	system("cp -rL etc/config.ini.d /etc/gforge/config.ini.d");
+
 	// Install default configuration files for all plugins.
 	system("mkdir -p /etc/gforge/plugins/");
 	chdir("/opt/gforge/plugins");
@@ -285,8 +288,8 @@
 	print "\n";
 
 
-	# Set up Apache config
+	# Set up config
 
+	system('PATH=/opt/gforge/utils/:$PATH migrate-to-ini-files.sh') ;
 	system('PATH=/opt/gforge/utils/:$PATH manage-apache-config.sh install') ;
 	system('rename -f s/.generated// /etc/gforge/httpd.conf.d/*.generated') ;
-
