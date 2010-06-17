@@ -100,6 +100,8 @@
 
 
 	system("cp -r * /opt/gforge");
+	system("chmod 755 /opt/gforge/utils/forge_get_config");
+	system("chmod 755 /opt/gforge/utils/manage-apache-config.sh");
 
 	chdir("/var/lib/gforge");
 	system("mkdir -p uploads");
