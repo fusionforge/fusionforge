@@ -319,7 +319,7 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}/lib
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/{httpd.d,config.ini.d,plugins}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/{httpd.d,httpd.conf.d,config.ini.d,plugins}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_LANG_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{upload,scmtarballs,scmsnapshots}
@@ -535,6 +535,7 @@ if [ "$1" -eq "1" ]; then
 	fi
 
 	/usr/bin/php %{GFORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
+	/usr/bin/php %{GFORGE_DIR}/fusionforge-install-4-config.php >>/var/log/%{name}-install.log 2>&1
 
 	HOSTNAME=`hostname -f`
 	%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{GFORGE_CONF_DIR}/local.inc
