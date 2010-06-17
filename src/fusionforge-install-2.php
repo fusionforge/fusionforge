@@ -273,3 +273,9 @@
 		system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
 	}
 	print "\n";
+
+	# Set up Apache config
+
+	system('PATH=/opt/gforge/utils/:$PATH manage-apache-config.sh install') ;
+	system('rename -f s/.generated// /etc/gforge/httpd.conf.d/*.generated') ;
+
