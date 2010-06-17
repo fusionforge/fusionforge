@@ -39,7 +39,7 @@ function INFO($message)
 {
     global $depth, $myLog;
     if(VERBOSE) for ($i=0; $i < $depth; $i++) echo " ";
-        if(VERBOSE) echo $message;
+        if(VERBOSE) echo $message."\n";
     for($i=0; $i < $depth; $i++ ) $myLog.=" ";
     $myLog.=$message;
 }
@@ -54,7 +54,7 @@ function installRedhat() {
 function installRHEL4() {
 	INFO("Installing packages: Executing UP2DATE. Please wait...\n\n\n");
 	passthru("up2date --install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
-	INFO(RED."You Must Install htmlpurifier manually.");
+	INFO(RED."You Must Install htmlpurifier manually.".NORMAL);
 }
 
 function installDebian() {
@@ -67,7 +67,7 @@ function installDebian() {
 	passthru("a2enmod rewrite");
 	passthru("a2enmod vhost_alias");
 
-	INFO(RED."You Must Install Mailman Manually: apt-get install mailman postfix");
+	INFO(RED."You Must Install Mailman Manually: apt-get install mailman postfix".NORMAL);
 }
 
 function installSUSE() {
@@ -89,7 +89,7 @@ function installSUSE() {
 	INFO("Starting Apache");
 	passthru("/etc/init.d/apache2 start");
 
-	INFO(RED."You Must Install htmlpurifier manually.");
+	INFO(RED."You Must Install htmlpurifier manually.".NORMAL);
 }
 
 function installOPENSUSE() {
@@ -102,7 +102,7 @@ function installOPENSUSE() {
 	INFO("Restarting Apache...");
 	passthru("rcapache2 restart");
 
-	INFO(RED."You Must Install htmlpurifier manually.");
+	INFO(RED."You Must Install htmlpurifier manually.".NORMAL);
 }
 
 function installArk() {
@@ -113,7 +113,7 @@ function installArk() {
 	INFO("Restarting PostgreSQL\n");
 	passthru("/sbin/service postgresql restart");
 
-	INFO(RED."You Must Install htmlpurifier manually.");
+	INFO(RED."You Must Install htmlpurifier manually.".NORMAL);
 }
 
 function addFusionForgeYumRepo() {
