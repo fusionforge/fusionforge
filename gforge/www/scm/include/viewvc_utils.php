@@ -70,9 +70,11 @@ function viewcvs_execute($repos_name, $repos_type) {
 	}
 	
 	if ($repos_type == "cvs") {
-		$repos_root = $GLOBALS['cvsdir_prefix'].'/'.$repos_name;
+		$p = plugin_get_object ('scmcvs') ;
+		$repos_root = $p->cvs_root.'/'.$repos_name;
 	} else if ($repos_type == "svn") {
-		$repos_root = $GLOBALS['svndir_prefix'].'/'.$repos_name;
+		$p = plugin_get_object ('scmsvn') ;
+		$repos_root = $p->svn_root.'/'.$repos_name;
 	} else {
 		die("Invalid repository type");
 	}
