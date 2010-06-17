@@ -65,6 +65,7 @@ function installDebian() {
 	passthru("a2enmod proxy");
 	passthru("a2enmod ssl");
 	passthru("a2enmod rewrite");
+	passthru("a2enmod vhost_alias");
 
 	INFO(RED."You Must Install Mailman Manually: apt-get install mailman postfix");
 }
