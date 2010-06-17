@@ -105,6 +105,7 @@ then
 	then
 		php fusionforge-install-3-db.php
 		php db/upgrade-db.php
+		php fusionforge-install-4-config.php
 
 		# Post installation fixes.
 		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf

@@ -758,6 +758,7 @@ src/etc/httpd.d/99maindirhttp -text
 src/etc/templates/database.py -text
 src/fusionforge-install-2.php -text
 src/fusionforge-install-3-db.php -text
+src/fusionforge-install-4-config.php -text
 src/image-sources/README -text
 src/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
