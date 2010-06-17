@@ -51,11 +51,11 @@ $report->site_start_date=db_result($res,0,'register_time');
 
 if (!$start) {
 	$z =& $report->getMonthStartArr();
-	$start = $z[0];
+	$start = $z[count($z)-1];
 }
 if (!$end || $end <= $start) {
 	$z =& $report->getMonthStartArr();
-	$end = $z[count($z)-1];
+	$end = $z[0];
 }
 
 $group =& group_get_object($group_id);
