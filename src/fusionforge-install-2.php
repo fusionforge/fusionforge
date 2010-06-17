@@ -98,6 +98,8 @@
 	}
 	echo "OK\n";
 
+	echo "Creating /var/log/gforge  ";
+	system("mkdir -p /var/log/gforge  ");
 
 	system("cp -r * /opt/gforge");
 	system("chmod 755 /opt/gforge/utils/forge_get_config");
