@@ -339,7 +339,7 @@ Description: collaborative development tool - Bazaar plugin
 
 Package: gforge-plugin-scmcvs
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
 Provides: gforge-plugin-scm
 Description: collaborative development tool - CVS plugin
  FusionForge provides many tools to aid collaboration in a
@@ -399,7 +399,7 @@ Description: collaborative development tool - Mercurial (Hg) plugin
 
 Package: gforge-plugin-scmsvn
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, viewvc | viewcvs, python-subversion, python (>= 2.3), php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, viewvc | viewcvs, python-subversion, python (>= 2.3), php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
 Provides: gforge-plugin-scm
 Description: collaborative development tool - Subversion plugin
  FusionForge provides many tools to aid collaboration in a
