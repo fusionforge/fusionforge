@@ -61,6 +61,10 @@ function installDebian() {
 
 	INFO("Installing Packages with apt-get");
 	passthru("apt-get -y install apache2 php5 php5-cli php5-pgsql cvs postgresql postgresql-contrib libipc-run-perl liburi-perl libapache2-svn libapache2-mod-php5 subversion subversion-tools php5-curl curl ssh lsb-release");
+	passthru("a2enmod headers");
+	passthru("a2enmod proxy");
+	passthru("a2enmod ssl");
+	passthru("a2enmod rewrite");
 
 	INFO(RED."You Must Install Mailman Manually: apt-get install mailman postfix");
 }
