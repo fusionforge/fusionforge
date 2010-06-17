@@ -104,6 +104,10 @@ elseif (is_file('/etc/postgresql/8.2/main/pg_hba.conf'))
 {
 	$PGHBA='/etc/postgresql/8.2/main/pg_hba.conf';
 }
+elseif (is_file('/etc/postgresql/8.4/main/pg_hba.conf'))
+{
+	$PGHBA='/etc/postgresql/8.4/main/pg_hba.conf';
+}
 elseif (is_file('/opt/csw/var/pgdata/pg_hba.conf'))
 {
 	$PGHBA='/opt/csw/var/pgdata/pg_hba.conf';
@@ -127,6 +131,14 @@ elseif (is_file('/usr/share/postgresql/contrib/tsearch2.sql'))
 elseif (is_file('/usr/share/postgresql/8.2/contrib/tsearch2.sql'))
 {
 	$tsearch2_sql='/usr/share/postgresql/8.2/contrib/tsearch2.sql';
+}
+elseif (is_file('/usr/share/postgresql/8.3/contrib/tsearch2.sql'))
+{
+	$tsearch2_sql='/usr/share/postgresql/8.3/contrib/tsearch2.sql';
+}
+elseif (is_file('/usr/share/postgresql/8.4/contrib/tsearch2.sql'))
+{
+	$tsearch2_sql='/usr/share/postgresql/8.4/contrib/tsearch2.sql';
 }
 elseif (is_file('/opt/csw/postgresql/share/contrib/tsearch2.sql'))
 {
