@@ -7,17 +7,17 @@ DirectoryIndex index.html index.php index.htm
 # This is magic for virtual hosting!
 UseCanonicalName Off
 
-VirtualDocumentRoot /opt/fusionforge/data/chroot/home/groups/%1/htdocs
-VirtualScriptAlias /opt/fusionforge/data/chroot/home/groups/%1/cgi-bin
+VirtualDocumentRoot /var/lib/gforge/chroot/home/groups/%1/htdocs
+VirtualScriptAlias /var/lib/gforge/chroot/home/groups/%1/cgi-bin
 
 SetEnvIf Host "(.*)\.{domain_name}" AWSTATS_FORCE_CONFIG=group-$1
 
 php_admin_value default_charset "UTF-8"
-php_admin_value include_path "/etc/gforge/custom:/etc/gforge:/opt/fusionforge:/opt/fusionforge/www/include:."
+php_admin_value include_path "/etc/gforge/custom:/etc/gforge:/opt/gforge:/opt/gforge/www/include:."
 
-Alias /themes-gforge/ /opt/fusionforge/www/themes/
+Alias /themes-gforge/ /opt/gforge/www/themes/
 
-<Directory /opt/fusionforge/data/chroot/home/groups>
+<Directory /var/lib/gforge/chroot/home/groups>
   Options Indexes FollowSymlinks
   AllowOverride All
   

@@ -31,13 +31,13 @@ case $1 in
 	mkdir -p httpd.conf.d-opt
 	for i in httpd.conf.d/*.inc httpd.conf.d/*.conf ; do
 	    sed -e 's,{core/config_path},/etc/gforge,g' \
-		-e 's,{core/source_path},/opt/fusionforge,g' \
+		-e 's,{core/source_path},/opt/gforge,g' \
 		-e 's,{core/data_path},/var/lib/gforge,g' \
 		-e 's,{core/log_path},/var/log/gforge,g' \
-		-e 's,{core/chroot},/opt/fusionforge/data/chroot,g' \
+		-e 's,{core/chroot},/var/lib/gforge/chroot,g' \
 		-e 's,{core/custom_path},/etc/gforge/custom,g' \
 		-e 's,{core/url_prefix},/,g' \
-		-e 's,{core/groupdir_prefix},/opt/fusionforge/data/chroot/home/groups,g' \
+		-e 's,{core/groupdir_prefix},/var/lib/gforge/chroot/home/groups,g' \
 		-e 's,{mediawiki/src_path},/usr/share/mediawiki,g' \
 		-e 's,{scmsvn/repos_path},/var/lib/gforge/svnroot,g' \
 		$i > httpd.conf.d-opt/$(basename $i)

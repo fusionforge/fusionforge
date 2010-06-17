@@ -2,7 +2,7 @@
 forge_name = FusionForge
 user_registration_restricted = false
 
-source_path = /opt/fusionforge
+source_path = /opt/gforge
 data_path = /var/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge

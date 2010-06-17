@@ -1,14 +1,14 @@
 ServerName {core/web_host}
 ServerAlias www.{core/web_host}
 ServerAdmin webmaster@{core/web_host}
-DocumentRoot /opt/fusionforge/www
+DocumentRoot /opt/gforge/www
 DirectoryIndex index.html index.php
 
 <IfModule mod_userdir.c>
   UserDir disabled
 </IfModule>
 
-<Directory /opt/fusionforge/www>
+<Directory /opt/gforge/www>
   Include /etc/gforge/httpd.conf.d/secrets.inc
 </Directory>
 
@@ -19,7 +19,7 @@ DirectoryIndex index.html index.php
   ForceType application/x-httpd-php
 </Location>
 
-Alias /images/ /opt/fusionforge/www/images/
+Alias /images/ /opt/gforge/www/images/
 
 Include /etc/gforge/httpd.conf.d/plugin-*.inc
 
