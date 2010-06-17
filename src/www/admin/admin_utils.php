@@ -24,6 +24,9 @@
 function site_admin_header($params) {
 	session_require_global_perm ('forge_admin');
 
+	if (version_compare(PHP_VERSION, '5.1.0', '<')) {
+		$GLOBALS['warning_msg'] = 'WARNING: Your php version must not be lower than 5.1.0, please upgrade';
+	}
 	if (get_magic_quotes_gpc()) {
 		$GLOBALS['warning_msg'] = 'WARNING: Your installation is running with php magic_quotes_gpc ON, please change to OFF';
 	}
