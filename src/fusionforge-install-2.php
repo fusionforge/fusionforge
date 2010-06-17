@@ -100,6 +100,12 @@
 
 	echo "Creating /var/log/gforge  ";
 	system("mkdir -p /var/log/gforge  ");
+	if (!is_dir("/var/log/gforge"))
+	{
+		echo "FAIL\n  /var/log/gforge didn't exist - error - make sure you've got permission";
+		exit(2);
+	}
+	echo "OK\n";
 
 	system("cp -r * /opt/gforge");
 	system("chmod 755 /opt/gforge/utils/forge_get_config");
