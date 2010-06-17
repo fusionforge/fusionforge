@@ -108,8 +108,6 @@
 	echo "OK\n";
 
 	system("cp -r * /opt/gforge");
-	system("chmod 755 /opt/gforge/utils/forge_get_config");
-	system("chmod 755 /opt/gforge/utils/manage-apache-config.sh");
 
 	chdir("/var/lib/gforge");
 	system("mkdir -p uploads");
@@ -247,6 +245,10 @@
 	system("chown -R $args[2]:$args[3] /var/lib/gforge/uploads");
 	system("chmod -R 755 /opt/gforge/cronjobs/");
 	system("chmod 755 /opt/gforge/www/scm/viewvc/bin/cgi/viewvc.cgi");
+	system("chmod 755 /opt/gforge/utils/forge_get_config");
+	system("chmod 755 /opt/gforge/utils/manage-apache-config.sh");
+	system("chmod 755 /opt/gforge/utils/manage-translations.sh");
+	system("chmod 755 /opt/gforge/utils/migrate-to-ini-files.sh");
 	
 	if (!is_dir("/etc/gforge"))
 	{
@@ -281,6 +283,7 @@
 		system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
 	}
 	print "\n";
+
 
 	# Set up Apache config
 
