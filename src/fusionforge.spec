@@ -6,24 +6,23 @@
 #
 
 # Global Definitions
-%define dbname			gforge
-%define dbuser			gforge
+%define dbname          gforge
+%define dbuser          gforge
 
-%define gfuser			gforge
-%define gfgroup			gforge
+%define gfuser          gforge
+%define gfgroup         gforge
 
-%define httpduser		apache
-%define httpdgroup		apache
+%define httpduser       apache
+%define httpdgroup      apache
 
-%define fforge_admin		fforgeadmin
-%define fforge_passwd		fforgeadmin
+%define fforge_admin    fforgeadmin
+%define fforge_passwd   fforgeadmin
 
-%define GFORGE_DIR		%{_datadir}/gforge
-%define GFORGE_CONF_DIR		%{_sysconfdir}/gforge
-%define GFORGE_LANG_DIR         %{_datadir}/locale
-%define GFORGE_VAR_LIB		%{_var}/lib/gforge
+%define GFORGE_DIR      %{_datadir}/gforge
+%define GFORGE_CONF_DIR %{_sysconfdir}/gforge
+%define GFORGE_LANG_DIR %{_datadir}/locale
+%define GFORGE_VAR_LIB  %{_var}/lib/gforge
 
-#%define reloadhttpd() /sbin/service httpd reload >/dev/null 2>&1
 %define reloadhttpd() /etc/init.d/httpd httpd reload >/dev/null 2>&1
 
 # RPM spec preamble
@@ -390,8 +389,6 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/rpm-specific
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/*/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/*/*.spec
-%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/tinderbox
-%{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/plugins/viewcvs
 
 ### Plugin setup ###
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d/
@@ -712,10 +709,7 @@ fi
 #%{GFORGE_CONF_DIR}/plugins/ldapextauth
 %config(noreplace) %{GFORGE_DIR}/plugins/ldapextauth/etc/plugins/ldapextauth/config.php
 %config(noreplace) %{GFORGE_DIR}/plugins/ldapextauth/etc/plugins/ldapextauth/mapping.php
-%{GFORGE_DIR}/plugins/ldapextauth/README
-%{GFORGE_DIR}/plugins/ldapextauth/db
-%{GFORGE_DIR}/plugins/ldapextauth/bin
-%{GFORGE_DIR}/plugins/ldapextauth/include
+%{GFORGE_DIR}/plugins/ldapextauth
 
 %files mantis
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mantis.ini

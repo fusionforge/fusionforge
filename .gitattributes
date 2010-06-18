@@ -4108,7 +4108,6 @@ src/www/jscook/ThemeXP/spacer.gif svneol=native#unset
 src/www/my/dashboard.php -text
 src/www/my/my_utils.php -text
 src/www/plugins/cvstracker -text
-src/www/plugins/eirc -text
 src/www/plugins/fckeditor -text
 src/www/plugins/mantis -text
 src/www/plugins/mediawiki -text
