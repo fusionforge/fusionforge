@@ -71,7 +71,9 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeBody - write the Body of the output
 	 */
 	function writeBody() {
-		site_project_header(array('title' => _('Advanced project search'), 'group' => $this->groupId, 'toptab'=>'none'));
+		$title = _('Entire project search');
+		site_project_header(array('title' => $title, 'group' => $this->groupId));
+		echo '<h1>' . $title . '</h1>';
 		echo $this->getResult();
 	}
 	
@@ -166,7 +168,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		if ($title === '')
 			$title = $section;
 		
-		$result .= '<h3><a name="'.$section.'"></a>'.$title.'</h3>';
+		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 		
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);

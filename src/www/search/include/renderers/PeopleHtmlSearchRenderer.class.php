@@ -38,8 +38,9 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		$GLOBALS['HTML']->header(array('title'=>_('Search')));
+		$GLOBALS['HTML']->header(array('title'=>_('People Search')));
 		parent::writeHeader();
+		echo '<h1>' . _('People Search') . '</h1>';
 	}
 	
 	/**
