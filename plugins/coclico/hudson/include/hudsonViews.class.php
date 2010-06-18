@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright (c) 2010 Alcatel-Lucent
  *
  * This file is a part of Codendi.
  *
@@ -37,11 +38,12 @@ class hudsonViews extends Views {
 
 	function header() {
 		parent::header();
-		echo $this->_getHelp();
-		echo '<h2>'.$this->_getTitle().'</h2>';
+//		echo $this->_getHelp();
+		echo '<h1>'.$this->_getTitle().'</h1>';
 	}
 	function _getTitle() {
-		return _("Continuous Integration");
+//		return _("Continuous Integration");
+		return _("Hudson");
 	}
 	function _getHelp($section = '', $questionmark = false) {
 		if (trim($section) !== '' && $section{0} !== '#') {
@@ -384,13 +386,13 @@ class hudsonViews extends Views {
 		echo '<a href="#" onclick="toggle_addurlform(); return false;">' . getIcon("ic/add.png") . ' '._("Add job").'</a>';
 		echo ' '.$this->_getHelp('HudsonService', true);
 		echo '<div id="hudson_add_job">';
-		echo ' <form>';
-		echo '   <label for="hudson_job_url">'._("Job URL:").'</label>';
-		echo '   <input id="hudson_job_url" name="hudson_job_url" type="text" size="64" />';
-		echo '   <input type="hidden" name="group_id" value="'.$group_id.'" />';
-		echo '   <input type="hidden" name="action" value="add_job" />';
-		echo '   <br />';
-		echo '   <span class="legend">'._("eg: http://myCIserver/hudson/job/myJob").'</span>';
+		echo ' <form action="">'."\n";
+		echo '   <label for="hudson_job_url">'._("Job URL:").'</label>'."\n";
+		echo '   <input id="hudson_job_url" name="hudson_job_url" type="text" size="64" />'."\n";
+		echo '   <input type="hidden" name="group_id" value="'.$group_id.'" />'."\n";
+		echo '   <input type="hidden" name="action" value="add_job" />'."\n";
+		echo '   <br />'."\n";
+		echo '   <span class="legend">'._("eg: http://myCIserver/hudson/job/myJob").'</span>'."\n";
 		echo '   <br />';
 		//echo '  <p>';
 		if ($project->usesService('scmsvn') || $project->usesService('svn')) {
@@ -413,7 +415,7 @@ class hudsonViews extends Views {
 		echo '   <input type="submit" value="Add job" />';
 		echo ' </form>';
 		echo '</div>';
-		echo "<script>Element.toggle('hudson_add_job', 'slide');</script>";
+		echo "<script type=\"text/javascript\">Element.toggle('hudson_add_job', 'slide');</script>\n";
 	}
 
 	function _display_iframe($url = '') {
@@ -422,7 +424,7 @@ class hudsonViews extends Views {
 		echo '</div>';
 	}
 	function _hide_iframe() {
-		echo "<script>Element.toggle('hudson_iframe_div', 'slide');</script>";
+		echo "<script type=\"text/javascript\">Element.toggle('hudson_iframe_div', 'slide');</script>";
 	}
 }
 

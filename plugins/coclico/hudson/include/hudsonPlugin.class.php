@@ -16,8 +16,8 @@ class hudsonPlugin extends Plugin {
 	function hudsonPlugin($id=0) {
 		$this->Plugin($id);
 		$this->name = "hudson" ;
-		$this->text = _('Continuous Integration') ; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user�s personal part of the plugin
+		$this->text = _('Hudson'); // To show in the tabs, use...
+		$this->_addHook("user_personal_links"); //to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu") ;
 		$this->_addHook("groupmenu");	// To put into the project tabs
 		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
@@ -42,7 +42,7 @@ class hudsonPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("hudson")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
+				$param = '?type=user&amp;id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						array ('/plugins/hudson/index.php' . $param ));				
 			}
@@ -60,7 +60,7 @@ class hudsonPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/hudson/index.php?group_id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we�re calling is the project one
+				$params['DIRS'][]='/plugins/hudson/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the project one
 			} 
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 
@@ -73,12 +73,12 @@ class hudsonPlugin extends Plugin {
 			$group = &group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_hudsonplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo '<input type="checkbox" name="use_hudsonplugin" value="1" ';
+			// checked or unchecked?
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo 'checked="checked"';
 			}
-			echo "><br/>";
+			echo " /><br />";
 			echo "</td>";
 			echo "<td>";
 			echo "<strong>Use ".$this->text." Plugin</strong>";
@@ -101,16 +101,16 @@ class hudsonPlugin extends Plugin {
 			$user = $params['user'];
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_hudsonplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo '<input type="checkbox" name="use_hudsonplugin" value="1" ';
+			// checked or unchecked?
 			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo 'checked="checked"';
 			}
-			echo ">    Use ".$this->text." Plugin";
+			echo " />Use ".$this->text." Plugin";
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
+			// this code actually activates/deactivates the plugin after the form was submitted in the user account maintenance page
 			$user = $params['user'];
 			$use_hudsonplugin = getStringFromRequest('use_hudsonplugin');
 			if ( $use_hudsonplugin == 1 ) {
@@ -120,13 +120,14 @@ class hudsonPlugin extends Plugin {
 			}
 			echo "<tr>";
 			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_hudsonplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
+			echo '<input type="checkbox" name="use_hudsonplugin" value="1" ';
+			// checked or unchecked?
 			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
+				echo 'checked="checked"';
 			}
-			echo ">    Use ".$this->text." Plugin";
+			echo " />Use ".$this->text." Plugin";
 			echo "</td>";
+			echo "</tr>";
 		} elseif ($hookname == "cssfile") {
 			$this->cssFile($params);
 		} elseif ($hookname == "javascript_file") {
