@@ -664,8 +664,8 @@ class ArtifactType extends Error {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
 			if (!$nef->create( addslashes(util_unconvert_htmlspecialchars($ef['field_name'])), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
-				db_rollback();
 				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
+				db_rollback();
 				return false;
 			}
 			//

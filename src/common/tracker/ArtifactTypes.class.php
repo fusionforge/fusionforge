@@ -84,16 +84,16 @@ class ArtifactTypes extends Error {
 		foreach ($trackers as $trk) {
 			$at = new ArtifactType($this->Group);
 			if (!$at || !is_object($at)) {
-				db_rollback();
 				$this->setError('Error Getting Tracker Object');
+				db_rollback();
 				return false;
 			}
 			//
 			//	Create a tracker
 			//
 			if (!$at->create($trk[0], $trk[1], $trk[2], $trk[3], $trk[4], $trk[5], $trk[6], $trk[7], $trk[8], $trk[9], $trk[10])) {
-				db_rollback();
 				$this->setError('Error Creating Tracker: '.$at->getErrorMessage());
+				db_rollback();
 				return false;
 			} else {
 				//
@@ -103,8 +103,8 @@ class ArtifactTypes extends Error {
 					$aef = new ArtifactExtraField($at);
 //print($fld[0])."***|";
 					if (!$aef->create($fld[0], $fld[1], $fld[2], $fld[3], $fld[4])) {
-						db_rollback();
 						$this->setError('Error Creating Extra Field: '.$aef->getErrorMessage());
+						db_rollback();
 						return false;
 					} else {
 						//
@@ -127,8 +127,8 @@ class ArtifactTypes extends Error {
 								$el_status = $el[1];
 							}
 							if (!$aefe->create($el_name,$el_status)) {
-								db_rollback();
 								$this->setError('Error Creating Extra Field Element: '.$aefe->getErrorMessage());
+								db_rollback();
 								return false;
 							}
 						}
