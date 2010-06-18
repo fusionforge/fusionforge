@@ -191,6 +191,16 @@ class Layout extends Error {
 		$this->imgroot = $this->imgbaseurl;
 	}
 
+	function addJavascript($js) {
+		if (isset($this->js_min[$js])) {
+			$js = $this->js_min[$js];
+		}
+		if (!isset($this->js[$js])) {
+			$this->js[$js] = true;
+			echo '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+		}
+	}
+
 	/** 
 	 * header() - generates the complete header of page by calling 
 	 * headerStart() and bodyHeader().

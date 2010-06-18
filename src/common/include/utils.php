@@ -1159,6 +1159,10 @@ function check_email_available($group, $email, &$response) {
 	return true;
 }
 
+function use_javascript($js) {
+	return $GLOBALS['HTML']->addJavascript($js);
+}
+
 // array_replace_recursive only appeared in PHP 5.3.0
 if (!function_exists('array_replace_recursive')) {
 	function array_replace_recursive ($a1, $a2) {
