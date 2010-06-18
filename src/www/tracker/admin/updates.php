@@ -171,14 +171,13 @@
 						} elseif ($aefe->isError()) {
 							$feedback .= $aefe->getErrorMessage();			
 						} else {
-							$name=addslashes($ath->getElementName($copyid[$k]));
+							$name=$ath->getElementName($copyid[$k]);
 							$status=$ath->getElementStatusID($copyid[$k]);
 							if (!$aefe->create($name,$status)) {
 								$feedback .= _('Error inserting an element').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
-								$feedback .= '- Copied choice:';
-								$feedback .= stripslashes($name);
+								$feedback .= '- Copied choice:'. $name;
 							}
 						}
 					} 
