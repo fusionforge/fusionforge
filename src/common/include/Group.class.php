@@ -1227,15 +1227,19 @@ class Group extends Error {
 	}
 	/**
 	 *  added for Codendi compatibility
-	 *  usesServices - returns true if the group uses a particular plugin 
+	 *  usesServices - returns true if the group uses a particular plugin or feature
 	 *
 	 *  @param	string	name of the plugin
 	 *  @return	boolean	whether plugin is being used or not
 	 */
-	function usesService($pluginname) {
+	function usesService($feature) {
 		$plugins_data = $this->getPlugins() ;
+		$pm = plugin_manager_get_object();
 		foreach ($plugins_data as $p_id => $p_name) {
-			if ($p_name == $pluginname) {
+			if ($p_name == $feature) {
+				return true ;
+			}
+			if ($pm->getPluginByName($p_name)->provide($feature) ) {
 				return true ;
 			}
 		}

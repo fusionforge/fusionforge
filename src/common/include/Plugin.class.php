@@ -74,6 +74,16 @@ class Plugin extends Error {
 		else
 			return 'plugins/'.$this->name ;
 	}
+
+	/**
+	 * provide() - return true if plugin provides the feature.
+	 *
+	 * @return bool if feature is provided or not.
+	 */
+	function provide($feature) {
+		return (isset($this->provides) && $this->provides[$feature]);
+	}
+
 	/**
 	 * Added for Codendi compatibility
 	 * getPluginPath() - get installation dir for the plugin

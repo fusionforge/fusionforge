@@ -224,7 +224,7 @@ class hudsonViews extends Views {
 				echo '  <p>';
 				echo '   <span class="legend">'.vsprintf(_("Name (with no space) used to make a reference to this job. Eg: job #%s"),  array($row['name'])).'</span>';
 				echo '  </p>';
-				if ($project->usesService('scmsvn') || $project->usesService('svn')) {
+				if ($project->usesService('svn')) {
 					echo '  <p>';
 					echo '   <label for="new_hudson_use_svn_trigger">'._("Trigger a build after SVN commits:").'</label>';
 					if ($row['use_svn_trigger'] == 1) {
@@ -235,7 +235,7 @@ class hudsonViews extends Views {
 					echo '   <input id="new_hudson_use_svn_trigger" name="new_hudson_use_svn_trigger" type="checkbox" '.$checked.' />';
 					echo '  </p>';
 				}
-				if ($project->usesService('scmcvs') || $project->usesService('cvs')) {
+				if ($project->usesService('cvs')) {
 					echo '  <p>';
 					echo '   <label for="new_hudson_use_cvs_trigger">'._("Trigger a build after CVS commits:").'</label>';
 					if ($row['use_cvs_trigger'] == 1) {
@@ -246,7 +246,7 @@ class hudsonViews extends Views {
 					echo '   <input id="new_hudson_use_cvs_trigger" name="new_hudson_use_cvs_trigger" type="checkbox" '.$checked.' />';
 					echo '  </p>';
 				}
-				if ($project->usesService('scmsvn') || $project->usesService('svn') || $project->usesService('scmcvs') || $project->usesService('cvs')) {
+				if ($project->usesService('svn') || $project->usesService('cvs')) {
 					echo '  <p>';
 					echo '   <label for="new_hudson_trigger_token">'._("with (optional) token:").'</label>';
 					echo '   <input id="new_hudson_trigger_token" name="new_hudson_trigger_token" type="text" value="'.$row['token'].'" size="32" />';
@@ -288,10 +288,10 @@ class hudsonViews extends Views {
 			echo '  <th class="boxtitle">'._("Last Success").'</th>';
 			echo '  <th class="boxtitle">'._("Last Failure").'</th>';
 			echo '  <th class="boxtitle">'._("RSS").'</th>';
-			if ($project->usesService('scmsvn') || $project->usesService('svn')) {
+			if ($project->usesService('svn')) {
 				echo '  <th class="boxtitle">'._("SVN trigger").'</th>';
 			}
-			if ($project->usesService('scmcvs') || $project->usesService('cvs')) {
+			if ($project->usesService('cvs')) {
 				echo '  <th class="boxtitle">'._("CVS trigger").'</th>';
 			}
 			if ($user->isMember($request->get('group_id'), 'A')) {
@@ -327,14 +327,14 @@ class hudsonViews extends Views {
 					}
 					echo '  <td align="center"><a href="'.$job->getUrl().'/rssAll" onclick="toggle_iframe(this); return false;"><img src="'.$this->getControler()->getIconsPath().'rss_feed.png" alt="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" title="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'"></a></td>';
 
-					if ($project->usesService('scmsvn') || $project->usesService('svn')) {
+					if ($project->usesService('svn')) {
 						if ($row['use_svn_trigger'] == 1) {
 							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("SVN commit will trigger a build").'" title="'._("SVN commit will trigger a build").'"></td>';
 						} else {
 							echo '  <td>&nbsp;</td>';
 						}
 					}
-					if ($project->usesService('scmcvs') || $project->usesService('cvs')) {
+					if ($project->usesService('cvs')) {
 						if ($row['use_cvs_trigger'] == 1) {
 							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("CVS commit will trigger a build").'" title="'._("CVS commit will trigger a build").'"></td>';
 						} else {
@@ -345,8 +345,8 @@ class hudsonViews extends Views {
 				} catch (Exception $e) {
 					echo '  <td><img src="'.$this->getControler()->getIconsPath().'link_error.png" alt="'.$e->getMessage().'" title="'.$e->getMessage().'" /></td>';
 					$nb_columns = 4;
-					if ($project->usesService('scmsvn') || $project->usesService('svn')) { $nb_columns++; }
-					if ($project->usesService('scmcvs') || $project->usesService('cvs')) { $nb_columns++; }
+					if ($project->usesService('svn')) { $nb_columns++; }
+					if ($project->usesService('cvs')) { $nb_columns++; }
 					echo '  <td colspan="'.$nb_columns.'"><span class="error">'.$e->getMessage().'</span></td>';
 				}
 
@@ -395,13 +395,13 @@ class hudsonViews extends Views {
 		echo '   <span class="legend">'._("eg: http://myCIserver/hudson/job/myJob").'</span>'."\n";
 		echo '   <br />';
 		//echo '  <p>';
-		if ($project->usesService('scmsvn') || $project->usesService('svn')) {
+		if ($project->usesService('svn')) {
 			echo _("Trigger a build after commits:");
-			if ($project->usesService('scmsvn') || $project->usesService('svn')) {
+			if ($project->usesService('svn')) {
 				echo '   <label for="hudson_use_svn_trigger">'._("SVN").'</label>';
 				echo '   <input id="hudson_use_svn_trigger" name="hudson_use_svn_trigger" type="checkbox" />';
 			}
-			if ($project->usesService('scmsvn') || $project->usesService('svn')) {
+			if ($project->usesService('cvs')) {
 				echo '   <label for="hudson_use_cvs_trigger">'._("CVS").'</label>';
 				echo '   <input id="hudson_use_cvs_trigger" name="hudson_use_cvs_trigger" type="checkbox" />';
 			}

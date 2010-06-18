@@ -36,6 +36,8 @@ class CVSPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 
+		$this->provides['cvs'] = true;
+
 		$this->register () ;
 	}
 	
