@@ -59,7 +59,6 @@
 3rd-party/yui/yui_2.8.0r4-1.diff.gz -text svneol=unset#unset
 3rd-party/yui/yui_2.8.0r4-1.dsc -text
 3rd-party/yui/yui_2.8.0r4.orig.tar.gz -text svneol=unset#unset
-/README -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
