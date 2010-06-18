@@ -6,7 +6,7 @@ require_once('plugins_utils.php');
 //require_once('www/my/my_utils.php');
 require_once('common/widget/WidgetLayoutManager.class.php');
 require_once('common/widget/Valid_Widget.class.php');
-echo "<script type=javascript src='/scripts/codendi/LayoutManager.js'></script>";
+
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {
     
@@ -27,10 +27,11 @@ if (isLogged()) {
                 case WidgetLayoutManager::OWNER_TYPE_USER:
                     $owner_id = user_getid();
 
-		    $userm=UserManager::instance();
-		    $current=$userm->getCurrentUser();
-		    echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
-                    //my_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
+		    		$userm=UserManager::instance();
+		    		$current=$userm->getCurrentUser();
+		    		echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
+ 					use_javascript('/scripts/codendi/LayoutManager.js');
+                   //my_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
                     $lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
                     site_footer(array());
                     
@@ -44,6 +45,7 @@ if (isLogged()) {
                         if (user_ismember($group_id, 'A') || user_is_super_user()) {
                             $title = _("Project info").' - '. $project->getPublicName();
                             site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'));
+							use_javascript('/scripts/codendi/LayoutManager.js');
                             $lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
                             site_footer(array());
                         } else {
