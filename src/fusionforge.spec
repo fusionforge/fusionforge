@@ -384,8 +384,6 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 %{__ln_s} /usr/share/jpgraph $RPM_BUILD_ROOT%{GFORGE_DIR}/jpgraph
 
 %{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/utils/fusionforge-shell-postgresql.spec
-%{__rm} -f $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins/helloworld
-%{__rm} -f $RPM_BUILD_ROOT/%{GFORGE_DIR}/www/plugins/mailman
 
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/deb-specific

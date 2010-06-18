@@ -4110,8 +4110,6 @@ src/www/my/my_utils.php -text
 src/www/plugins/cvstracker -text
 src/www/plugins/eirc -text
 src/www/plugins/fckeditor -text
-src/www/plugins/helloworld -text
-src/www/plugins/mailman -text
 src/www/plugins/mantis -text
 src/www/plugins/mediawiki -text
 src/www/plugins/online_help -text
