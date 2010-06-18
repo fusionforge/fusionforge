@@ -1,3 +1,9 @@
+fusionforge (5.0.1+svn10088-1) unstable; urgency=low
+
+  * New snapshot from upstream SVN (Branch_5_0).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 18 Jun 2010 13:14:11 +0200
+
 fusionforge (5.0.1+svn10006-1) unstable; urgency=low
 
   * New snapshot from upstream SVN (Branch_5_0).
