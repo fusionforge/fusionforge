@@ -229,14 +229,14 @@ to FusionForge.
 %package svncommitemail
 Summary: subversion commit email plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion, perl
+Requires: %{name} >= %{version}, php, subversion, perl, %{name}-scmsvn >= %{version}
 %description svncommitemail
 This RPM installs subversion commit email notification plugin for FusionForge.
 
 %package svntracker
 Summary: SVNTracker plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion, perl, postgresql
+Requires: %{name} >= %{version}, php, subversion, perl, postgresql, %{name}-scmsvn >= %{version}
 %description svntracker
 SVNTracker plugin allows linking SVN log messages to Trackers and tasks.
 It will review all commits in a project and search for a specific string
@@ -503,11 +503,13 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 # this won't hurt anything, just ensure we have a running database
 /sbin/service postgresql start >>/var/log/%{name}-install.log 2>&1
 
-# setup user/group for gforge
-if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -eq 0 ] ; then
-    echo "Did not find existing fusionforge user. Adding fusionforge group and user..." >>/var/log/%{name}-install.log 2>&1
-    /usr/sbin/groupadd -r %{gfgroup}
-    /usr/sbin/useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "FusionForge User" %{gfuser}
+if [ "$1" -eq "1" ]; then
+	# setup user/group for gforge
+	if [ `/usr/bin/getent passwd | /bin/cut -d: -f1 | /bin/grep -c %{gfuser}` -eq 0 ] ; then
+		echo "Did not find existing fusionforge user. Adding fusionforge group and user..." >>/var/log/%{name}-install.log 2>&1
+		/usr/sbin/groupadd -r %{gfgroup}
+		/usr/sbin/useradd -r -g %{gfgroup} -d %{GFORGE_DIR} -s /bin/bash -c "FusionForge User" %{gfuser}
+	fi
 fi
 
 %post
