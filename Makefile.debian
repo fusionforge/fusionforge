@@ -13,7 +13,7 @@
 #
 
 FUSIONFORGE=FusionForge
-PKGDIR=gforge
+PKGDIR=src
 PKGNAME=$(shell head -1 $(PKGDIR)/debian/changelog | sed 's/ .*//')
 PKGLETTER=$(shell echo $(PKGNAME) | cut -c1)
 ORIGIN=debian.fusionforge.org
