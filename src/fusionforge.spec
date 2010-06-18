@@ -587,7 +587,7 @@ fi
 
 %files
 %defattr(-, root, root)
-%doc AUTHORS AUTHORS.gforge AUTHORS.sourceforge COPYING ChangeLog INSTALL* README* CHANGES NEWS
+%doc AUTHORS* CHANGES COPYING INSTALL* NEWS README*
 %doc docs/*
 %attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/local.inc
 %attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
