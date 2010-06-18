@@ -23,7 +23,7 @@ $group_project_id = getIntFromRequest('group_project_id');
 
 $words = getStringFromRequest('words');
 $type_of_search = getStringFromRequest('type_of_search');
-$exact = getStringFromRequest('exact');
+$exact = getStringFromRequest('exact', 1);
 
 // Support for short aliases
 
