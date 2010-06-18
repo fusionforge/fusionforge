@@ -853,7 +853,6 @@ src/plugins/contribtracker/www/project_admin.php -text
 src/plugins/cvstracker/db/cvstracker-init-mysql.sql -text
 src/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 src/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
-src/plugins/eirc/EIRC-1.0.2+free.tar.gz -text svneol=unset#unset
 src/plugins/env.inc.php -text
 src/plugins/externalsearch/etc/engines.json -text
 src/plugins/externalsearch/etc/externalsearch.ini -text

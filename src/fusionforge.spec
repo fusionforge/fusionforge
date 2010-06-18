@@ -411,11 +411,6 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 # this is pre-activated, so create the config symlink
 %{__ln_s} %{GFORGE_DIR}/plugins/cvstracker/etc/plugins/cvstracker $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/cvstracker
 
-# plugin: eirc
-# obsolete, deleting completely
-%{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/eirc
-%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/eirc
-
 # plugin: externalsearch
 
 # plugin: fckeditor
@@ -606,7 +601,6 @@ fi
 %{GFORGE_DIR}/AUTHORS*
 %{GFORGE_DIR}/CHANGES
 %{GFORGE_DIR}/COPYING
-%{GFORGE_DIR}/ChangeLog
 %{GFORGE_DIR}/INSTALL*
 %{GFORGE_DIR}/NEWS
 %{GFORGE_DIR}/README*
