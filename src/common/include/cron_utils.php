@@ -77,22 +77,6 @@ function checkChroot() {
 	return false;
 }
 
-function chrootPath($path) {
-
-	if(checkChroot()) {
-		$path = forge_get_config('chroot').$path;
-	}
-	return $path;
-}
-
-function chrootCommand($command) {
-
-	if(checkChroot()) {
-		$command = 'chroot '.forge_get_config('chroot').' '.$command;
-	}
-	return $command;
-}
-
 //
 //  Create lock via semaphore so long running jobs don't overlap
 //

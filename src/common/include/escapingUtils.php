@@ -318,43 +318,6 @@ function unInputSpecialchars($string) {
 }
 
 /**
-* optionSpecialchars - escape a string which is in a <option>string</option>
-*
-* @param string $string string to escape
-* @return string escaped string
-*/
-function optionSpecialchars($string) {
-	return htmlSpecialchars($string);
-}
-
-$htmlTranslationTable = get_html_translation_table(HTML_SPECIALCHARS);
-unset($htmlTranslationTable['&']);
-
-/**
-* textareaSpecialchars - escape a string which is in a textarea
-*
-* @param string $string string to escape
-* @return string escaped string
-*/
-function textareaSpecialchars($string) {
-	global $htmlTranslationTable;
-
-	return strtr($string, $htmlTranslationTable);
-}
-
-/**
-* unTextareaSpecialchars - clean a string escaped with textareaSpecialchars
-*
-* @param string $string escaped string
-* @return string clean string
-*/
-function unTextareaSpecialchars($string) {
-	global $htmlTranslationTable;
-	
-	return strtr($string, array_flip($htmlTranslationTable));
-}
-
-/**
  * getFilteredStringFromRequest - get a string from REQUEST
  *
  * @param string $key key of the wanted value
