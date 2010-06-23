@@ -65,7 +65,7 @@ class hudsonPlugin extends Plugin {
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 
 		} elseif ($hookname =='cssfile') {
-			echo '<link rel="stylesheet" type="text/css" href="/plugins/hudson/themes/default/css/style.css" />';
+			use_stylesheet('/plugins/hudson/themes/default/css/style.css');
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
@@ -161,7 +161,7 @@ class hudsonPlugin extends Plugin {
 				strpos($_SERVER['REQUEST_URI'], '/projects/') === 0 ||
 				strpos($_SERVER['REQUEST_URI'], '/widgets/') === 0 
 		   ) {
-			echo '<link rel="stylesheet" type="text/css" href="'.$this->getThemePath().'/css/style.css" />';
+			use_stylesheet($this->getThemePath().'/css/style.css');
 		}
 	}
 
