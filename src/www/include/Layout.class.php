@@ -197,7 +197,28 @@ class Layout extends Error {
 		}
 		if (!isset($this->js[$js])) {
 			$this->js[$js] = true;
+			$filename = $GLOBALS['fusionforge_basedir'].'/www'.$js;
+			if (file_exists($filename)) {
+				$js .= '?'.date ("U", filemtime($filename));
+			}
 			echo '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+		}
+	}
+
+	function addStylesheet($css, $media) {
+		if (isset($this->css_min[$css])) {
+			$css = $this->css_min[$css];
+		}
+		if (!isset($this->js[$css])) {
+			$this->js[$css] = true;
+			$filename = $GLOBALS['fusionforge_basedir'].'/www'.$css;
+			if (file_exists($filename)) {
+				$css .= '?'.date ("U", filemtime($filename));
+			}
+			if ($media) {
+				$media = ' media="'.$media.'"';
+			}
+			echo '    <link rel="stylesheet" type="text/css" href="'.$css.'"'.$media.' />'."\n";
 		}
 	}
 
