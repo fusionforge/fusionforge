@@ -365,7 +365,7 @@ function db_free_result($qhandle) {
  */
 function db_reset_result($qhandle,$row=0) {
 	global $sys_db_row_pointer;
-	return $sys_db_row_pointer[$qhandle]=$row;
+	return $sys_db_row_pointer[(int)$qhandle]=$row;
 }
 
 /**
@@ -421,10 +421,10 @@ function db_affected_rows($qhandle) {
 function db_fetch_array($qhandle) {
 	global $sys_db_row_pointer;
 	if(!isset($sys_db_row_pointer[$qhandle])) {
-		$sys_db_row_pointer[$qhandle] = 0;
+		$sys_db_row_pointer[(int)$qhandle] = 0;
 	}
-	$sys_db_row_pointer[$qhandle]++;
-	return @pg_fetch_array($qhandle,($sys_db_row_pointer[$qhandle]-1));
+	$sys_db_row_pointer[(int)$qhandle]++;
+	return @pg_fetch_array($qhandle,($sys_db_row_pointer[(int)$qhandle]-1));
 }
 
 /**

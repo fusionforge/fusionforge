@@ -58,7 +58,7 @@ function forum_get_groupid ($forum_id) {
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-	$arr =& db_fetch_array ($res);
+	$arr = db_fetch_array ($res);
 	return $arr['group_id'] ;
 }
 

@@ -202,7 +202,7 @@ class FRSPackage extends Error {
 			$this->setError('FRSPackage::fetchData()  Invalid package_id'.db_error());
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

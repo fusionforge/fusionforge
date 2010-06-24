@@ -53,7 +53,7 @@ class Widget_MySurveys extends Widget {
 			$html_my_surveys .= '<table style="width:100%">';
 			for ($j=0; $j<$rows; $j++) {
 				$group_id = db_result($result,$j,'group_id');
-				$surveyfacto       =& new SurveyFactory(group_get_object($group_id));
+				$surveyfacto = new SurveyFactory(group_get_object($group_id));
 				$surveys = $surveyfacto->getSurveys();
 				$vItemId = new Valid_UInt('hide_item_id');
 				$vItemId->required();

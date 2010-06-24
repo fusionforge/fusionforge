@@ -49,7 +49,7 @@ require_once('Widget.class.php');
 			if (!is_dir(forg_get_config('sys_var_path') .'/rss')) {
 				mkdir(forg_get_config('sys_var_path') .'/rss');
 			}
-			$rss =& new SimplePie($this->rss_url, forg_get_config('sys_var_path') .'/rss', null, forg_get_config('sys_proxy'));
+			$rss = new SimplePie($this->rss_url, forg_get_config('sys_var_path') .'/rss', null, forg_get_config('sys_proxy'));
 			$max_items = 10;
 			$items = array_slice($rss->get_items(), 0, $max_items);
 			$content .= '<table width="100%">';
@@ -137,7 +137,7 @@ require_once('Widget.class.php');
 				if (!is_dir(forg_get_config('sys_var_path') .'/rss')) {
 					mkdir(forg_get_config('sys_var_path') .'/rss');
 				}
-				$rss_reader =& new SimplePie($rss['url'], forg_get_config('sys_var_path') .'/rss', null, forge_get_config('sys_proxy'));
+				$rss_reader = new SimplePie($rss['url'], forg_get_config('sys_var_path') .'/rss', null, forge_get_config('sys_proxy'));
 				$rss['title'] = $rss_reader->get_title();
 			}
 			$sql = 'INSERT INTO widget_rss (owner_id, owner_type, title, url) VALUES ($1,$2,$3,$4)';

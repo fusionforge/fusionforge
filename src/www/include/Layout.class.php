@@ -608,7 +608,7 @@ class Layout extends Error {
 	}
 
 	function outerTabs($params) {
-		$menu =& $this->navigation->getSiteMenu();
+		$menu = $this->navigation->getSiteMenu();
 
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], false, $menu['selected'], '');
 

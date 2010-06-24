@@ -21,7 +21,7 @@ require_once $gfwww.'search/include/engines/ForumSearchEngine.class.php';
 
 function & getSearchManager() {
 	if(!isset($GLOBALS['OBJ_SEARCH_MANAGER'])) {
-		$GLOBALS['OBJ_SEARCH_MANAGER'] =& new SearchManager();
+		$GLOBALS['OBJ_SEARCH_MANAGER'] = new SearchManager();
 	}
 	return $GLOBALS['OBJ_SEARCH_MANAGER'];
 }

@@ -80,7 +80,7 @@ ORDER BY group_forum_id',
 		if (!$res) {
 			return $result ;
 		}
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$result[] = $arr['group_forum_id'] ;
 		}
 		return $result ;

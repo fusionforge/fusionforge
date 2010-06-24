@@ -645,7 +645,7 @@ class ArtifactType extends Error {
 			$this->setError('Template Group Error '.$g->getErrorMessage());
 			return false;
 		}
-		$at =& new ArtifactType($g,$clone_tracker_id);
+		$at = new ArtifactType($g,$clone_tracker_id);
 		if (!$at || !is_object($at)) {
 			$this->setError('Could Not Get Tracker To Clone');
 			return false;

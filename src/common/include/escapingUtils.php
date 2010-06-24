@@ -174,7 +174,7 @@ function getStringFromServer($key) {
  * @param int $defaultValue an int which is returned if we can't find the key in the array
  * @return int the wanted value
  */
-function _getIntFromArray(& $array, $key, $defaultValue = 0) {
+function _getIntFromArray( $array, $key, $defaultValue = 0) {
 	if(isset($array[$key]) && is_numeric($array[$key]) &&
 		$array[$key] <= 2147483647 && $array[$key] >= -2147483648 ) {
 		return (int) $array[$key];
@@ -195,7 +195,7 @@ function _getIntFromArray(& $array, $key, $defaultValue = 0) {
  * @param int $defaultValue an int which is returned if we can't find the key in the array
  * @return string the wanted value
  */
-function _getStringFromArray(& $array, $key, $defaultValue = '') {
+function _getStringFromArray( $array, $key, $defaultValue = '') {
 	if(isset($array[$key])) {
 		return $array[$key];
 	}

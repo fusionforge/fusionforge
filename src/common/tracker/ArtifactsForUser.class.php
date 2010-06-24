@@ -61,7 +61,7 @@ class ArtifactsForUser extends Error {
 		for ($i=0; $i < $rows; $i++) {
 			$id  = db_result($result,$i,'artifact_id');
 			$arr = db_fetch_array($result);
-			$afi =& new ArtifactFromID($id,$arr);
+			$afi = new ArtifactFromID($id,$arr);
 			if ($afi->isError()) {
 				$this->setError($afi->getErrorMessage());
 			} elseif($afi->Artifact->ArtifactType->Group->getStatus() == 'A') {
@@ -118,7 +118,7 @@ ORDER BY group_name DESC',
 			$group_id = db_result($result,$i,'group_id');
 			$group_artifact_id = db_result($result,$i,'group_artifact_id');
 			$group =& group_get_object($group_id);
-			$artifact =& new ArtifactType($group,$group_artifact_id);
+			$artifact = new ArtifactType($group,$group_artifact_id);
 			$ag = $artifact->getGroup();
 			if ($artifact->isError()) {
 				$this->setError($artifact->getErrorMessage());
