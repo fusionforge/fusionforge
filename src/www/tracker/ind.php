@@ -16,6 +16,7 @@ $at_arr =& $atf->getArtifactTypes();
 
 //required params for site_project_header();
 $params['group']=$group_id;
+$params['title']=sprintf(_('Trackers for %1$s'), $group->getPublicName());
 $params['toptab']='tracker';
 
 echo site_project_header($params);
