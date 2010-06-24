@@ -209,8 +209,8 @@ class Layout extends Error {
 		if (isset($this->css_min[$css])) {
 			$css = $this->css_min[$css];
 		}
-		if (!isset($this->js[$css])) {
-			$this->js[$css] = true;
+		if (!isset($this->css[$css])) {
+			$this->css[$css] = true;
 			$filename = $GLOBALS['fusionforge_basedir'].'/www'.$css;
 			if (file_exists($filename)) {
 				$css .= '?'.date ("U", filemtime($filename));
