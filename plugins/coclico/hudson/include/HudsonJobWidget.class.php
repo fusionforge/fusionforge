@@ -93,11 +93,11 @@ abstract class HudsonJobWidget extends HudsonWidget {
         }
         return true;
     }
-/**
+	/**
      * Returns the jobs selected for this widget
      */
     function getSelectedJobsId() {
-        $sql = "SELECT * FROM plugin_hudson_widget WHERE widget_name='" . $this->widget_id . "' AND owner_id = ". $this->owner_id ." AND owner_type = '". $this->owner_type ."'";
+        $sql = "SELECT job_id FROM plugin_hudson_widget WHERE widget_name='" . $this->widget_id . "' AND owner_id = ". $this->owner_id ." AND owner_type = '". $this->owner_type ."'";
         $res = db_query($sql);
 
         $selected_jobs_id = array();
