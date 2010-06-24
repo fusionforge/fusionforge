@@ -165,7 +165,7 @@ extends Valid {
      * @param  String Index of file to check in $_FILES array.
      * @return Boolean
      */
-    function validate($files, $index) {
+    function validate($files, $index='') {
         if(is_array($files) && isset($files[$index])) {
             $this->addRule(new Rule_File());
             return parent::validate($files[$index]);

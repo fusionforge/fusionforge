@@ -187,7 +187,7 @@ class DocumentFactory extends Error {
 			exit_error('Error', db_error());
 		}
 		
-		while ($arr =& db_fetch_array($result)) {
+		while ($arr = db_fetch_array($result)) {
 			$doc_group_id = $arr['doc_group'];
 			if (!is_array(@$this->Documents[$doc_group_id])) {
 				$this->Documents[$doc_group_id] = array();

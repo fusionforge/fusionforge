@@ -27,7 +27,7 @@ class FusionForgeConfig {
 	private $settings ;
 	private $bools = array () ;
     
-	public function get_instance () {
+	static public function get_instance () {
 		if (self::$instance == NULL) {
 			self::$instance = new FusionForgeConfig () ;
 		}

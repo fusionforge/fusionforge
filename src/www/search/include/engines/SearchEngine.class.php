@@ -36,7 +36,7 @@ class GFSearchEngine {
 		require_once $gfwww.'search/include/renderers/'.$this->rendererClassName.'.class.php';
 	}
 	
-	function & getSearchRenderer($words, $offset, $exact) {
+	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
 		$rendererClassName = $this->rendererClassName;
 		$renderer = new $rendererClassName($words, $offset, $exact);

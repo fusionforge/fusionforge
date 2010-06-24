@@ -75,7 +75,7 @@ class HTTPRequest extends Codendi_Request {
      *
      * @return mixed HTTPRequest Object.
      */
-    function &instance() {
+    static function &instance() {
         static $_httprequest_instance;
         if (!$_httprequest_instance) {
             $_httprequest_instance = new HTTPRequest();

@@ -40,7 +40,8 @@ if ($request->valid($vOwner)) {
     if ($good) {
         if ($request->exist('name')) {
             $param = $request->get('name');
-            $name = array_pop(array_keys($param));
+            $v = array_keys($param);
+            $name = array_pop($v);
             $instance_id = (int)$param[$name];
             if ($widget =& Widget::getInstance($name)) {
                 if ($widget->isAvailable()) {

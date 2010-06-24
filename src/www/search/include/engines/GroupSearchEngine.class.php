@@ -43,7 +43,7 @@ class GroupSearchEngine extends GFSearchEngine {
 		return false;
 	}
 	
-	function & getSearchRenderer($words, $offset, $exact, $parameters) {
+	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
 		$rendererClassName = $this->rendererClassName;
 		$renderer = new $rendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID]);

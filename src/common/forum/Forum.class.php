@@ -245,7 +245,7 @@ class Forum extends Error {
 			$this->setError(_('Invalid forum group identifier'));
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}
@@ -298,7 +298,7 @@ class Forum extends Error {
 	 *	@return	int	The unix time.
 	 */
 	function getSavedDate() {
-		if (@$this->save_date) {
+		if (isset($this->save_date)) {
 			return $this->save_date;
 		} else {
 			if (session_loggedin()) {
