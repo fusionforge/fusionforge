@@ -114,6 +114,11 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	}
 }
 
+// Load extra func to add extras func like debug
+if ($sys_install_type == 'development' || $sys_install_type == 'integration') {
+	require $gfcommon.'include/extras-debug.php';
+}
+
 // Get constants used for flags or status
 require $gfcommon.'include/constants.php';
 

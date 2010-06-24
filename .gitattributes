@@ -476,6 +476,7 @@ src/common/include/TextSanitizer.class.php -text
 src/common/include/UserManager.class.php -text
 src/common/include/config-vars.php -text
 src/common/include/config.php -text
+src/common/include/extras-debug.php -text
 src/common/include/group_section_texts.php -text
 src/common/include/minijson.php -text
 src/common/include/rbac_texts.php -text

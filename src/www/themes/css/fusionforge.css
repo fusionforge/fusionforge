@@ -338,3 +338,25 @@ table.progress td :hover { background: none }
     background-image:url('../../images/widget/widget-preview-project_svn-stats.png');
 }
 /* }}} */
+
+#ffErrors {
+	z-index: 10;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	opacity: 0.9;
+	color: black;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffc0cb; /* pink */
+    border-color: red;
+    padding: 0.5em;
+}
+
+#ffErrors .error {
+    border-width: 0px;
+    padding: 0px;
+	color: red;
+}
