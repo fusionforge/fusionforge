@@ -289,7 +289,7 @@ Description: collaborative development tool - Bazaar plugin
 
 Package: gforge-plugin-scmgit
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git-core, gitweb (>= 1.7), php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
 Provides: gforge-plugin-scm
 Description: collaborative development tool - Git plugin
  FusionForge provides many tools to aid collaboration in a
