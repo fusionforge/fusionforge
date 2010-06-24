@@ -69,7 +69,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 	<td><?php echo _('Your Email Address') ?>: </td>
 	<td>
 	<strong><?php 
-		//$user_mail=$user->getEmail();
+		$user_mail=$user->getEmail();
 		$user_mailsha1=$user->getSha1Email();
 		// Removed for privacy reasons
 		//print '<span property="sioc:email" content="'. $user_mail .'">';
