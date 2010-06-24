@@ -61,13 +61,13 @@ function browser_is_netscape() {
 */
 
 
-if (ereg( 'MSIE ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
+if (preg_match('/MSIE ([0-9].[0-9]{1,2})/',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
 	$GLOBALS['BROWSER_VER']=$log_version[1];
 	$GLOBALS['BROWSER_AGENT']='IE';
-} elseif (ereg( 'Opera ([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
+} elseif (preg_match('/Opera ([0-9].[0-9]{1,2})/',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
 	$GLOBALS['BROWSER_VER']=$log_version[1];
 	$GLOBALS['BROWSER_AGENT']='OPERA';
-} elseif (ereg( 'Mozilla/([0-9].[0-9]{1,2})',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
+} elseif (preg_match('/Mozilla\/([0-9].[0-9]{1,2})/',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
 	$GLOBALS['BROWSER_VER']=$log_version[1];
 	$GLOBALS['BROWSER_AGENT']='MOZILLA';
 } else {
