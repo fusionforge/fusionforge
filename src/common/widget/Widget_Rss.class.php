@@ -174,7 +174,7 @@ require_once('Widget.class.php');
 		return $done;
 	}
 	function destroy($id) {
-		$sql = 'DELETE FROM widget_rss WHERE id = $1 AND owner_id = $2AND owner_type = $3';
+		$sql = 'DELETE FROM widget_rss WHERE id = $1 AND owner_id = $2 AND owner_type = $3';
 		db_query_params($sql,array($id,$this->owner_id,$this->owner_type));
 	}
 	function isUnique() {
