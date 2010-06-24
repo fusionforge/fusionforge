@@ -76,7 +76,7 @@ class MockConfig extends FusionForgeConfig {
 		parent::$instance = NULL ;
 	}
 		
-	public function get_instance () {
+	static public function get_instance () {
 		if (parent::$instance == NULL) {
 			parent::$instance = new MockConfig () ;
 		}
