@@ -1,3 +1,10 @@
+fusionforge (5.0.1+svn10088-1+) unstable; urgency=low
+
+  * Adapted URLs to logos and CSS for gitweb >= 1.7.  Added versioned
+    dependency accordingly.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 24 Jun 2010 14:02:29 +0200
+
 fusionforge (5.0.1+svn10088-1) unstable; urgency=low
 
   * New snapshot from upstream SVN (Branch_5_0).
