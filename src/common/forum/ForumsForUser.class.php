@@ -74,7 +74,7 @@ class ForumsForUser extends Error {
 			$group_id = db_result($result,$i,'group_id');
 			$forum_id = db_result($result,$i,'group_forum_id');
 			$group =& group_get_object($group_id);
-			$forum =& new Forum($group,$forum_id);
+			$forum = new Forum($group,$forum_id);
 			if ($forum->isError()) {
 				$this->setError($forum->getErrorMessage());
 			} else {

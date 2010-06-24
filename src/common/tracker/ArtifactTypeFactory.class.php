@@ -93,7 +93,7 @@ class ArtifactTypeFactory extends Error {
 		if (!$res) {
 			return $result ;
 		}
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$result[] = $arr['group_artifact_id'] ;
 		}
 		return $result ;

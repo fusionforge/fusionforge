@@ -132,7 +132,7 @@ function &group_get_objects($id_arr) {
 	if (count($fetch) > 0) {
 		$res=db_query_params ('SELECT * FROM groups WHERE group_id = ANY ($1)',
 				      array (db_int_array_to_any_clause ($fetch))) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
 			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
 		}

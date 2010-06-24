@@ -45,7 +45,7 @@ require_once $gfcommon.'include/Error.class.php';
 					$PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
 					return false;
 				}
-				$data =& db_fetch_array($res);
+				$data = db_fetch_array($res);
 			}
 			$Group =& group_get_object($data["group_id"]);
 			$PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
@@ -64,7 +64,7 @@ function projectgroup_get_groupid ($group_project_id) {
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-	$arr =& db_fetch_array ($res);
+	$arr = db_fetch_array ($res);
 	return $arr['group_id'] ;
 }
 
@@ -198,7 +198,7 @@ class ProjectGroup extends Error {
 			$this->setError('ProjectGroup:: Invalid group_project_id');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

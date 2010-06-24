@@ -80,7 +80,7 @@ class ProjectGroupFactory extends Error {
 		if (!$res) {
 			return $result ;
 		}
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$result[] = $arr['group_project_id'] ;
 		}
 		return $result ;

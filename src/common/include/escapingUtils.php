@@ -212,7 +212,7 @@ function _getStringFromArray( $array, $key, $defaultValue = '') {
  * @param int $defaultValue an array which is returned if we can't find the key in the array
  * @return string the wanted value
  */
-function _getArrayFromArray(& $array, $key, $defaultValue = array()) {
+function _getArrayFromArray( $array, $key, $defaultValue = array()) {
 	if(isset($array[$key])) {
 		return $array[$key];
 	}

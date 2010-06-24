@@ -311,7 +311,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$this->setError('RBACEngine::getRolesByAllowedAction()::'.db_error());
 			return false;
 		}
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$result[] = $arr['role_id'] ;
 		}
 

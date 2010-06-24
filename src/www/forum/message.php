@@ -146,7 +146,7 @@ if ($msg_id) {
 	echo '<br /><br />
 		<h3>'._('Thread View').'</h3>';
 
-	$msg_arr =& $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
+	$msg_arr = $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
 	if ($fmf->isError()) {
 		echo $fmf->getErrorMessage();
 	}

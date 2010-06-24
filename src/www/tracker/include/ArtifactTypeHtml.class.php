@@ -346,7 +346,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return	string	HTML template.
 	 */
 	function generateRenderHTML($filter='', $mode) {
-		$efarr =& $this->getExtraFields($filter);
+		$efarr = $this->getExtraFields($filter);
 		//each two columns, we'll reset this and start a new row
 
 		$return = '
@@ -472,7 +472,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($text_100 == 'none'){
 			$text_100=_('None');
 		}
-		$arr =& $this->getExtraFieldElements($extra_field_id);
+		$arr = $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];

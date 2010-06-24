@@ -117,7 +117,7 @@ $res=db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 
 echo db_error();
 
 $results = array();
-while ($arr =& db_fetch_array($res)) {
+while ($arr = db_fetch_array($res)) {
 	$results[] = $arr;
 }
 

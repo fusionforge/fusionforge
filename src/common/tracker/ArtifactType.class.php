@@ -46,7 +46,7 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 			if (!$res || db_numrows($res) < 1 ){
 				$ARTIFACTTYPE_OBJ["_".$artType_id."_"]=false;
 			} else {
-				$data =& db_fetch_array($res);
+				$data = db_fetch_array($res);
 				$Group =& group_get_object($data["group_id"]);
 				$ARTIFACTTYPE_OBJ["_".$artType_id."_"]= new ArtifactType($Group,$data["group_artifact_id"],$data);
 			}
@@ -65,7 +65,7 @@ function artifacttype_get_groupid ($artifact_type_id) {
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-	$arr =& db_fetch_array ($res);
+	$arr = db_fetch_array ($res);
 	return $arr['group_id'] ;
 }
 
@@ -284,7 +284,7 @@ class ArtifactType extends Error {
 			$this->setError('ArtifactType: Invalid ArtifactTypeID');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}
@@ -720,7 +720,7 @@ class ArtifactType extends Error {
 				ORDER BY element_pos ASC, element_id ASC',
 						 array ($id)) ;
 			$i=0;
-			while($arr =& db_fetch_array($res)) {
+			while($arr = db_fetch_array($res)) {
 				$this->extra_field[$id][$i++] = $arr;
 			}
 //			if (count($this->extra_field[$id]) == 0) {

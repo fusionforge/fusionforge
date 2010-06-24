@@ -425,7 +425,7 @@ class ArtifactFactory extends Error {
 			$this->setError('Database Error: '.db_error());
 			return false;
 		} else {
-			while ($arr =& db_fetch_array($result)) {
+			while ($arr = db_fetch_array($result)) {
 				$this->artifacts[] = new Artifact($this->ArtifactType, $arr);
 			}
 		}

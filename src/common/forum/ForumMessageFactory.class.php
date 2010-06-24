@@ -141,7 +141,7 @@ class ForumMessageFactory extends Error {
 	 *
 	 *	@return	array	The nested multi-dimensional associative array.
 	 */
-	function &nestArray(&$row) {
+	function &nestArray($row) {
 		$cnt=count($row);
 		for ($i=0; $i<$cnt; $i++) {
 			if ($row[$i]) {

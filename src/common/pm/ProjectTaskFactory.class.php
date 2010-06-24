@@ -193,7 +193,7 @@ class ProjectTaskFactory extends Error {
 		}
 
 		$this->project_tasks = array();
-		while ($arr =& db_fetch_array($result)) {
+		while ($arr = db_fetch_array($result)) {
 			if ($this->status && ($this->status != 100)) {
 				if ($this->status == 1) {
 					if ($arr['status_id'] != 1 && $arr['status_id'] != 100)
