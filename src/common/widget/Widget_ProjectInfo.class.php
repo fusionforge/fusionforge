@@ -69,7 +69,11 @@ class Widget_ProjectInfo extends Widget {
 		if ($project->usesStats()) {
 			$actv = db_query_params ('SELECT ranking FROM project_weekly_metric WHERE group_id=$1',
 					array($group_id));
-			$actv_res = db_result($actv,0,"ranking");
+			if (db_numrows($actv) > 0){
+				$actv_res = db_result($actv,0,"ranking");
+			} else {
+				$actv_res = 0;
+			}
 			if (!$actv_res) {
 				$actv_res=0;
 			}

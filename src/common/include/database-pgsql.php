@@ -410,7 +410,7 @@ function db_fetch_array($qhandle, $row=false) {
  *	@return associative array of fieldname/value key pairs.
  */
 function db_fetch_array_by_row($qhandle, $row) {
-	return @pg_rfetch_array($qhandle, $row);
+	return @pg_fetch_array($qhandle, $row);
 }
 
 /**
