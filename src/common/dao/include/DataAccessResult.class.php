@@ -64,7 +64,7 @@ class DataAccessResult  implements Iterator {
     
     function next() {
         $this->_current++;
-        $this->_row = db_fetch_array($this->result);
+        $this->_row = db_fetch_array_by_row($this->result, $this->_current);   
     }
     
     function valid() {
@@ -73,9 +73,8 @@ class DataAccessResult  implements Iterator {
     
     function rewind() {
         if ($this->rowCount() > 0) {
-            db_reset_result($this->result, 0);
+            $this->_current = -1;
             $this->next();
-            $this->_current = 0;
         }
     }
     

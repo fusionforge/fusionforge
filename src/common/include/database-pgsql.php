@@ -25,13 +25,6 @@
  */
 
 /**
- * Current row for each result set
- *
- * @var			array	$sys_db_row_pointer
- */
-$sys_db_row_pointer=array(); //current row for each result set
-
-/**
  * pg_connectstring() - builds a postgres connection string.
  * Combines the supplied arguments into a valid, specific, postgresql
  * connection string. It only includes the host and port options
@@ -356,19 +349,6 @@ function db_free_result($qhandle) {
 }
 
 /**
- *  db_reset_result() - Reset is useful for db_fetch_array
- *  sometimes you need to start over.
- *
- *	@param		int		Query result set handle.
- *  @param		integer	Row number.
- *	@return int row.
- */
-function db_reset_result($qhandle,$row=0) {
-	global $sys_db_row_pointer;
-	return $sys_db_row_pointer[(int)$qhandle]=$row;
-}
-
-/**
  *  db_result() - Returns a field from a result set.
  *
  *	@param		int		Query result set handle.
@@ -413,18 +393,24 @@ function db_affected_rows($qhandle) {
 /**
  *  db_fetch_array() - Returns an associative array from 
  *  the current row of this database result
- *  Use db_reset_result to seek a particular row.
  *
  *	@param		int		Query result set handle.
  *	@return associative array of fieldname/value key pairs.
  */
-function db_fetch_array($qhandle) {
-	global $sys_db_row_pointer;
-	if(!isset($sys_db_row_pointer[$qhandle])) {
-		$sys_db_row_pointer[(int)$qhandle] = 0;
-	}
-	$sys_db_row_pointer[(int)$qhandle]++;
-	return @pg_fetch_array($qhandle,($sys_db_row_pointer[(int)$qhandle]-1));
+function db_fetch_array($qhandle, $row=false) {
+	return @pg_fetch_array($qhandle);
+}
+
+/**
+ *  db_fetch_array_by_row() - Returns an associative array from
+ *  the given row of this database result
+ *
+ *	@param		int		Query result set handle.
+ *	@param		int		Given row to fetch
+ *	@return associative array of fieldname/value key pairs.
+ */
+function db_fetch_array_by_row($qhandle, $row) {
+	return @pg_rfetch_array($qhandle, $row);
 }
 
 /**

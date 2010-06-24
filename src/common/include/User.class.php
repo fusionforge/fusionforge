@@ -195,8 +195,7 @@ class GFUser extends Error {
 				return false;
 			} else {
 				//set up an associative array for use by other functions
-				db_reset_result($res);
-				$this->data_array = db_fetch_array($res);
+				$this->data_array = db_fetch_array_by_row($res, 0);
 			}
 		}
 		$this->is_super_user=false;

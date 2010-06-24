@@ -152,20 +152,6 @@ function db_free_result($qhandle) {
 }
 
 /**
- *  db_reset_result() - Reset a result set
- *
- *  Reset is useful for db_fetch_array
- *  sometimes you need to start over
- *
- *  @param		string	Query result set handle
- *  @param		int		Row number
- */
-function db_reset_result($qhandle,$row=0) {
-	global $sys_db_row_pointer;
-	return $sys_db_row_pointer[$qhandle]=$row;
-}
-
-/**
  *  db_result() - Returns a field from a result set
  *
  *  @param		string	Query result set handle
@@ -210,7 +196,6 @@ function db_affected_rows($qhandle) {
  *
  *  Returns an associative array from 
  *  the current row of this database result
- *  Use db_reset_result to seek a particular row
  *
  *  @param		string	Query result set handle
  */

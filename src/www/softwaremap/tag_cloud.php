@@ -92,7 +92,6 @@ if ($selected_tag) {
 			$groups[] = "'" . $group['group_id'] . "'";
 		}
 		$cond_rq = ' AND group_id IN (' . join(',', $groups) . ') ';
-		db_reset_result($res_grp);
 	}
 
 	echo db_error();
@@ -139,7 +138,7 @@ if ($selected_tag) {
 	// print actual project listings
 	// note that the for loop starts at 1, not 0
 	for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
-		$row_grp = db_fetch_array($res_grp);
+		$row_grp = db_fetch_array_by_row($res_grp, $i_proj-1);
 
 		// check to see if row is in page range
 		if (($i_proj > (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj <= ($page*$TROVE_BROWSELIMIT))) {
