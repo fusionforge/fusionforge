@@ -4,7 +4,6 @@
  *
  * @version 
  * @author 
- * @copyright 
  * Copyright 2005 GForge, LLC
  * http://gforge.org/
  *
@@ -178,7 +177,7 @@ if (getStringFromRequest('update')) {
 	}
 }
 
-if ($feedback) echo '<div class="feedback">' . $feedback . '</div>';
+if (isset($feedback)) echo '<div class="feedback">' . $feedback . '</div>';
 echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br /><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br />Be <strong>extra</strong> careful not to run the init-script again when the plugin is reactivated, because some scripts have DROP TABLE statements.</span><br /><br />');
 $title_arr = array( _('Plugin Name'),
 		    _('Status'),

@@ -183,7 +183,7 @@ function updateVars($vars,$filepath) {
 			// Open readonly but tell you can't write
 			$handle = fopen($filepath,'r');
 			$has_write = false;
-			$feedback .= sprintf(_("Could not open %s file for read/write. Check the permissions for apache."), $filepath).'<br />';
+			$feedback = sprintf(_("Could not open %s file for read/write. Check the permissions for apache."), $filepath).'<br />';
 		}
 		if ($handle){
 			fclose($handle); // we had to open it in r+ because we need to check we'll be able to save it later

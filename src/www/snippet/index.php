@@ -47,8 +47,8 @@ function snippet_mainpage() {
 	$existing_snippets = create_snippet_hash($qpa, "language");
 	for ($i=1; $i<count($SCRIPT_LANGUAGE); $i++) {
 		$return .= '<li>'.util_make_link ('/snippet/browse.php?by=lang&amp;lang='.$i,$SCRIPT_LANGUAGE[$i]).' (';
-		// Remove warning
-		if (@$existing_snippets[$i]) {
+
+		if (isset($existing_snippets[$i])) {
 			$return .= $existing_snippets[$i].')</li>';
 		} else {
 			$return .= '0)</li>';
@@ -65,8 +65,8 @@ function snippet_mainpage() {
 	for ($i=1; $i<count($SCRIPT_CATEGORY); $i++) {
 		// Remove warning
 		@$return .= '<li>'.util_make_link ('/snippet/browse.php?by=cat&amp;cat='.$i,$SCRIPT_CATEGORY[$i]).' (';
-		// Remove warning
-		if (@$existing_categories[$i]) {
+
+		if (isset($existing_categories[$i])) {
 			$return .= $existing_categories[$i].')</li>';
 		} else {
 			$return .= '0)</li>';

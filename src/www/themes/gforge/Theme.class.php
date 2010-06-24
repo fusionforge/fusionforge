@@ -355,7 +355,7 @@ class Theme extends Layout {
 		$return= '
         <tr class="ff" '.$row_attr;
 		if ( $istitle ) {
-			$return .=' align="center" bgcolor="'. $this->COLOR_HTMLBOX_TITLE .'"';
+			$return .=' align="center"';
 		}
 		$return .= '>';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
@@ -365,11 +365,11 @@ class Theme extends Layout {
 			}
 			$return .= '>';
 			if ( $istitle ) {
-				$return .='<font color="'.$this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>';
+				$return .='<strong>';
 			}
 			$return .= $cell_data[$c][0];
 			if ( $istitle ) {
-				$return .='</strong></font>';
+				$return .='</strong>';
 			}
 			$return .= '</td>';
 
