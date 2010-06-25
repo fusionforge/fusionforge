@@ -215,13 +215,13 @@ function prepare_search_text ($text)
 	
 	$rep = $text; 
 	$rep = utf8_decode($rep);
-	$rep = ereg_replace ("é", "e", $rep);
-	$rep = ereg_replace ("è", "e", $rep);
-	$rep = ereg_replace ("ê", "e", $rep);
-	$rep = ereg_replace ("à", "a", $rep);
-	$rep = ereg_replace ("ù", "u", $rep);
-	$rep = ereg_replace ("ç", "c", $rep);
-	$rep = ereg_replace ("é", "e", $rep);
+	$rep = preg_replace ("/é/", "/e/", $rep);
+	$rep = preg_replace ("/è/", "/e/", $rep);
+	$rep = preg_replace ("/ê/", "/e/", $rep);
+	$rep = preg_replace ("/à/", "/a/", $rep);
+	$rep = preg_replace ("/ù/", "/u/", $rep);
+	$rep = preg_replace ("/ç/", "/c/", $rep);
+	$rep = preg_replace ("/é/", "/e/", $rep);
 	$rep = strtolower ($rep);
 	return $rep;
 }
