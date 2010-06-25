@@ -99,9 +99,11 @@ ORDER BY group_forum_id',
 		$this->forums = array () ;
 		$ids = $this->getAllForumIds() ;
 		
-		foreach ($ids as $id) {
-			if (forge_check_perm ('forum', $id, 'read')) {
-				$this->forums[] = new Forum($this->Group, $id);
+		if (!empty($ids) ) {
+			foreach ($ids as $id) {
+				if (forge_check_perm ('forum', $id, 'read')) {
+					$this->forums[] = new Forum($this->Group, $id);
+				}
 			}
 		}
 		return $this->forums;
