@@ -1005,8 +1005,8 @@ function util_is_root_dir($dir) {
  */
 function normalized_urlprefix () {
 	$prefix = forge_get_config('url_prefix') ;
-	$prefix = ereg_replace ("^/", "", $prefix) ;
-	$prefix = ereg_replace ("/$", "", $prefix) ;
+	$prefix = preg_replace ("/^\//", "", $prefix) ;
+	$prefix = preg_replace ("/\/\$/", "", $prefix) ;
 	$prefix = "/$prefix/" ;
 	if ($prefix == '//') 
 		$prefix = '/' ;
