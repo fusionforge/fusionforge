@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
  * Copyright 2009, Roland Mas
+ * Copyright 2010 (c) Capgemini - Franck Villaume
  *
  * This file is part of FusionForge.
  *
@@ -80,9 +81,9 @@ class SearchQuery extends Error {
 	 */	
 	var $sections = SEARCH__ALL_SECTIONS;
 
-	var $words;
+	var $words = array();
 
-	var $phrases;
+	var $phrases = array();
 
 	/**
 	 * Constructor
