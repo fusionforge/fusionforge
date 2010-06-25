@@ -88,7 +88,6 @@ echo '<h1>'.sprintf(_('Documents for %1$s'), $g->getPublicName()) .'</h1>';
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1){
-	$df->setLanguageId(0);
 	$d_arr = &$df->getDocuments();
 }
 
