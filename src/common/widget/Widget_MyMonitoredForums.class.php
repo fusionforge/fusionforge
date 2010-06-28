@@ -133,7 +133,7 @@ class Widget_MyMonitoredForums extends Widget {
 	    return 'forums';
     }
     function getDescription() {
-	    return _("List forums that you are currently monitoring, by project. <br>To cancel any of the monitored items just click on the trash icon next to the item label.");;
+	    return _("List forums that you are currently monitoring, by project.<br />To cancel any of the monitored items just click on the trash icon next to the item label.");
     }
     function isAjax() {
 	    return true;

@@ -119,7 +119,7 @@ class Widget_MyMonitoredFp extends Widget {
         return 'frs';
     }
     function getDescription() {
-        return _("List packages that you are currently monitoring, by project.<br>To cancel any of the monitored items just click on the trash icon next to the item label.");;
+        return _("List packages that you are currently monitoring, by project.<br />To cancel any of the monitored items just click on the trash icon next to the item label.");
     }
     function isAjax() {
         return true;

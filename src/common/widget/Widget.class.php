@@ -82,7 +82,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 	}
 	function getPreferencesForm($layout_id, $owner_id, $owner_type) {
 		$prefs  = '';
-		$prefs .= '<form method="POST" action="/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=update&amp;name['. $this->id .']='. $this->getInstanceId() .'&amp;content_id='. $this->getInstanceId() .'&amp;layout_id='. $layout_id .'">';
+		$prefs .= '<form method="post" action="/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=update&amp;name['. $this->id .']='. $this->getInstanceId() .'&amp;content_id='. $this->getInstanceId() .'&amp;layout_id='. $layout_id .'">';
 		$prefs .= '<fieldset><legend>'. _("Preferences") .'</legend>';
 		$prefs .= $this->getPreferences();
 		$prefs .= '<br />';
@@ -331,7 +331,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=ajax&name['. $this->id .']='. $this->getInstanceId();
 	}
 	function getIframeUrl($owner_id, $owner_type) {
-		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&action=iframe&name['. $this->id .']='. $this->getInstanceId();
+		return '/widgets/widget.php?owner='. $owner_type.$owner_id .'&amp;action=iframe&amp;name['. $this->id .']='. $this->getInstanceId();
 	}
 }
 ?>

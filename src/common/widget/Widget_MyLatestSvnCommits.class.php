@@ -86,7 +86,7 @@ class Widget_MyLatestSvnCommits extends Widget {
     function getPreferences() {
         $prefs  = '';
         $prefs .= _("Maximum number of SVN commits to display per project");
-        $prefs .= ' <input name="nb_svn_commits" type="text" size="2" maxlenght="3" value="'.user_get_preference('my_latests_svn_commits_nb_display').'">';
+        $prefs .= ' <input name="nb_svn_commits" type="text" size="2" maxlenght="3" value="'.user_get_preference('my_latests_svn_commits_nb_display').'" />';
         return $prefs;
     }
     function updatePreferences(&$request) {
