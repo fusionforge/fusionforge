@@ -363,7 +363,7 @@ function session_require($req, $reason='') {
 	if (array_key_exists('group', $req)) {
 		$group =& group_get_object($req['group']);
 		if (!$group || !is_object($group)) {
-			exit_error('Error',$reason == '' ? _('Could Not Get Group') : $reason);
+			exit_no_group();
 		} elseif ($group->isError()) {
 			exit_error('Error',$reason == '' ? $group->getErrorMessage() : $reason);
 		}
