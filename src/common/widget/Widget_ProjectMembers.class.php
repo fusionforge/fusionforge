@@ -53,14 +53,14 @@ class Widget_ProjectMembers extends Widget {
 			while ($row_admin = db_fetch_array($res_admin)) {
 				if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
 					$started_developers=true;
-					echo '<span class="develtitle">'. _('Developers').':</span><br />';
+					echo '<span class="develtitle">'. _('Members').':</span><br />';
 				}
 				if (!$started_developers) {
 					echo '<div rel="doap:maintainer">'."\n";
 				} else {
 					echo '<div rel="doap:developer">'."\n";
 				}
-# a foaf:Person that holds an account on the forge
+				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($row_admin['user_name'],$row_admin['user_id']);
 				echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
 					$developer_url.'#me' .'" >'."\n";
