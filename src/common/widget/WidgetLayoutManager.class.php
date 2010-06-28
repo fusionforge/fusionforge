@@ -230,21 +230,24 @@ class WidgetLayoutManager {
 			$used_widgets[] = $data['name'];
 		}
 		echo '<ul class="widget_toolbar">';
+		$url = "/widgets/widgets.php?owner=".HTTPRequest::instance()->get('owner').
+			"&amp;layout_id=".HTTPRequest::instance()->get('layout_id');
+
 		if ($update_layout = HTTPRequest::instance()->get('update') == 'layout') {
-			echo '<li><a href="'. str_replace('&update=layout', '', $_SERVER['REQUEST_URI']) .'">'. _("Add widgets") .'</a></li>';
-			echo '<li class="current"><a href="'. $_SERVER['REQUEST_URI'] .'">'. _("Customize layout") .'</a></li>';
+			echo '<li><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
+			echo '<li class="current"><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
 			$action = 'layout';
 		} else {
-			echo '<li class="current"><a href="'. $_SERVER['REQUEST_URI'] .'">'. _("Add widgets") .'</a></li>';
-			echo '<li><a href="'. $_SERVER['REQUEST_URI'] .'&amp;update=layout">'. _("Customize layout") .'</a></li>';
+			echo '<li class="current"><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
+			echo '<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
 			$action = 'widget';
 		}
 		echo '</ul>';
-		echo '<form action="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action='. $action .'&amp;layout_id='. $layout_id .'" method="POST">';
+		echo '<form action="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action='. $action .'&amp;layout_id='. $layout_id .'" method="post">';
 		if ($update_layout) {
 			$sql = "SELECT * FROM layouts WHERE scope='S' ORDER BY id ";
 			$req_layouts = db_query_params($sql,array());
-			echo '<table cellspacing="0" cellpading="0">';
+			echo '<table cellspacing="0" cellpadding="0">';
 			$is_custom = true;
 			while ($data = db_fetch_array($req_layouts)) {
 				$checked = $layout_id == $data['id'] ? 'checked="checked"' : '';
@@ -356,22 +359,15 @@ class WidgetLayoutManager {
 					if (count($rows)) {
 						$sql = "INSERT INTO layouts(name, description, scope) 
 							VALUES ('custom', '', 'P')";
-						//                       if (db_query_params($sql,array())) {
-						//                          $sql = "SELECT LAST_INSERT_ID() AS id";
 						if ($res = db_query_params($sql,array())) {
-							if ($data = db_insert_id($res,'layouts')) {
-								$new_layout_id = $data['id'];
-
+							if ($new_layout_id = db_insertid($res,'layouts', 'id')) {
 								//Create rows & columns
 								$rank = 0;
 								foreach($rows as $cols) {
 									$sql = "INSERT INTO layouts_rows(layout_id, rank) 
 										VALUES ($1,$2)";
-									if (db_query_params($sql,array($new_layout_id,$rank++))) {
-										$sql = "SELECT LAST_INSERT_ID() AS id";
-										if ($res = db_query_params($sql,array())) {
-											if ($data = db_fetch_array($res)) {
-												$row_id = $data['id'];
+									if ($res = db_query_params($sql,array($new_layout_id,$rank++))) {
+										if ($row_id = db_insertid($res,'layouts_rows', 'id')) {
 												foreach($cols as $width) {
 													$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width) 
 														VALUES ($1,$2)";
@@ -381,9 +377,7 @@ class WidgetLayoutManager {
 										}
 									}
 								}
-								//                        }
 						}
-					}
 					}
 				} else {
 					$new_layout_id = $layout;
@@ -396,7 +390,7 @@ class WidgetLayoutManager {
 					//Retrieve columns of new layout
 					$new = $this->_retrieveStructureOfLayout($new_layout_id);
 
-					//Switch content from old columns to knew columns
+					// Switch content from old columns to new columns
 					$last_new_col_id = null;
 					reset($new['columns']);
 					foreach($old['columns'] as $old_col) {
