@@ -60,11 +60,15 @@ abstract class HudsonJobWidget extends HudsonWidget {
 	$selected_jobs_id = $this->getSelectedJobsId();
         
         foreach ($jobs as $job_id => $job) {
-            $prefs .= '<input type="radio" name="job_id" value="'.$job_id.'"> '.$job->getName();
-                if (in_array($job_id, $selected_jobs_id)) {
-                        $prefs .= ' <em>('._('Already used') .')</em>';
-                }
-                $prefs .= '<br />';
+            if (in_array($job_id, $selected_jobs_id)) {
+    			$options = ' disabled="disabled"';
+    			$comment = ' <em>('._('Already used') .')</em>';
+    		} else {
+    			$options = '';
+    			$comment = '';
+            }
+    		$prefs .= '<input type="radio" name="job_id" value="'.$job_id.'"'.$options.'/> '.$job->getName().$comment;
+            $prefs .= '<br />';
         }
         return $prefs;
     }
@@ -74,12 +78,22 @@ abstract class HudsonJobWidget extends HudsonWidget {
     function getPreferences() {
         $prefs  = '';
         $prefs .= '<strong>'._("Monitored job:").'</strong><br />';
-        
         $jobs = $this->getAvailableJobs();
+    	$selected_jobs_id = $this->getSelectedJobsId();
         
         foreach ($jobs as $job_id => $job) {
-            $selected = ($job_id == $this->job_id)?'checked="checked"':'';
-            $prefs .= '<input type="radio" name="' . $this->id . '" value="'.$job_id.'" ' . $selected . '> '.$job->getName().'<br />';
+    		if (in_array($job_id, $selected_jobs_id)) {
+    			$options = ' disabled="disabled"';
+    			$comment = ' <em>('._('Already used') .')</em>';
+    		} else {
+    			$options = '';
+    			$comment = '';
+    		}
+    		if ($job_id == $this->job_id) {
+    			$options = ' checked="checked"';
+    			$comment = ' <em>('._('Current used') .')</em>';
+    		}
+    		$prefs .= '<input type="radio" name="' . $this->id . '" value="'.$job_id.'"' . $options . '> '.$job->getName().$comment.'<br />';
         }
         return $prefs;
     }
