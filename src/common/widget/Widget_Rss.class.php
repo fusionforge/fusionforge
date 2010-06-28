@@ -41,11 +41,11 @@ require_once('Widget.class.php');
 		$content = '';
 		if ($this->rss_url) {
 			if (function_exists('idn_to_utf8()')) {
-				require_once('simplepie/simplepie.inc');
+				function idn_to_utf8($param) {
+					return idn_to_unicode($param);
+				}
 			}
-			else {
-				require_once('common/rss/simplepie.inc');
-			}
+			require_once('common/rss/simplepie.inc');
 			if (!is_dir(forg_get_config('sys_var_path') .'/rss')) {
 				mkdir(forg_get_config('sys_var_path') .'/rss');
 			}
