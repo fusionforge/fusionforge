@@ -141,7 +141,15 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	$hook_params = array () ;
 	$hook_params['loginname'] = $loginname ;
 	$hook_params['passwd'] = $passwd ;
-	plugin_hook ("session_before_login", $hook_params) ;
+	$result = plugin_hook ("session_before_login", $hook_params) ;
+
+	// Refuse login if not all the plugins are ok.
+	if (!$result) {
+		if (!$feedback) {
+			$feedback=_('Invalid Password Or User Name');
+		}
+		return false;
+	}
 
 	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
 }
