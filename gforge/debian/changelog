@@ -1,11 +1,11 @@
-fusionforge (5.0.1+svn10088-1+) unstable; urgency=low
+fusionforge (5.0.1+svn10137-1) unstable; urgency=low
 
   * Adapted URLs to logos and CSS for gitweb >= 1.7.  Added versioned
     dependency accordingly.
   * Use local YUI library (over HTTPS if needed) rather than possibly
     leaking informations to Yahoo's servers (closes: #579459).
 
- -- Roland Mas <lolando@debian.org>  Mon, 28 Jun 2010 10:27:51 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 28 Jun 2010 13:34:14 +0200
 
 fusionforge (5.0.1+svn10088-1) unstable; urgency=low
 
