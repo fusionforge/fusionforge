@@ -16,6 +16,7 @@ class DataAccessResult  implements Iterator {
 
     var $_current;
     var $_row;
+    var $nb_rows;
     
     function DataAccessResult($result) {
         $this->result       = $result;
@@ -41,7 +42,10 @@ class DataAccessResult  implements Iterator {
     * @return int
     */
     function rowCount() {
-        return db_numrows($this->result);
+        if (!isset($this->nb_rows)) {
+            $this->nb_rows = db_numrows($this->result);
+        }
+        return $this->nb_rows;
     }
 
     /**
@@ -64,7 +68,11 @@ class DataAccessResult  implements Iterator {
     
     function next() {
         $this->_current++;
+        if ($this->_current < $this->rowCount()) {
         $this->_row = db_fetch_array_by_row($this->result, $this->_current);   
+        } else {
+            $this->_row = false;
+        }
     }
     
     function valid() {
