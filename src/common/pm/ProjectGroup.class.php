@@ -170,8 +170,8 @@ class ProjectGroup extends Error {
 						  htmlspecialchars($description),
 						  $send_all_posts_to)) ;
 		if (!$result) {
-			db_rollback();
 			$this->setError('Error Adding ProjectGroup: '.db_error());
+			db_rollback();
 			return false;
 		}
 		$this->group_project_id=db_insertid($result,'project_group_list','group_project_id');
