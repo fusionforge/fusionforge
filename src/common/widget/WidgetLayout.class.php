@@ -48,6 +48,7 @@ class WidgetLayout {
             $cells = "['". implode("', '", $this->getColumnIds()) ."']";
            echo <<<EOS
             <script type="text/javascript">
+            <!--
             var cells = $cells;
             Event.observe(window, 'load', function() {
                   cells.each(function (cell_id) {
@@ -69,6 +70,7 @@ class WidgetLayout {
                     Sortable.destroy(cell_id);
                 });
             });
+            //-->
             </script>
 EOS;
         }
