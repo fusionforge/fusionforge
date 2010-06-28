@@ -103,6 +103,7 @@ gforge/debian/dsf-in/plugin-scmsvn.prerm -text
 gforge/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
 gforge/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
 gforge/debian/dsf-in/web-apache2.config.dsfh-in -text
+gforge/debian/dsf-in/web-apache2.links -text
 gforge/debian/dsf-in/web-apache2.postinst.dsfh-in -text
 gforge/debian/dsf-in/web-apache2.prerm -text
 gforge/debian/dsf-in/web-apache2.templates.dsfh-in -text
@@ -118,6 +119,7 @@ gforge/debian/gforge-plugin-contribtracker.prerm -text
 gforge/debian/patches/disable-dav.dpatch -text
 gforge/debian/patches/use-nusoap-from-distro.dpatch -text
 gforge/debian/patches/use-snoopy-from-distro.dpatch -text
+gforge/debian/patches/use-yui-from-distro.dpatch -text
 gforge/debian/po/README -text
 gforge/debian/watch -text
 gforge/docs/README.gettext -text
