@@ -254,7 +254,7 @@ class Survey extends Error {
 			$this->setError(_('No Survey is found').db_error());
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

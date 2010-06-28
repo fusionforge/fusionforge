@@ -197,7 +197,7 @@ class SurveyQuestion extends Error {
 			$this->setError(_('Error finding question').db_error());
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

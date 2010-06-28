@@ -39,7 +39,7 @@ class PluginManager extends Error {
 		$this->hooks_to_plugins = array () ;
 	}
 	//to work with Codendi files
-	function instance() {
+	static function instance() {
 		global $PLUGINMANAGER_OBJ;
 		if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
 			$PLUGINMANAGER_OBJ = new PluginManager ;
@@ -70,10 +70,13 @@ class PluginManager extends Error {
 	 * GetPluginObject() - get a particular plugin object
 	 *
 	 * @param pluginname - name of plugin
-	 * @return a plugin object
+	 * @return a plugin object or false if not available
 	 */
 	function GetPluginObject ($pluginname) {
-		return @$this->plugins_objects [$pluginname] ;
+		if (!isset($this->plugins_objects [$pluginname])) {
+			return false; 
+		}
+		return $this->plugins_objects [$pluginname] ;
 	}
 
 	//Added for Codendi compatibility
