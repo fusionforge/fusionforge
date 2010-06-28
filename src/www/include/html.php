@@ -641,7 +641,7 @@ function site_project_header($params) {
 	$project =& group_get_object($group_id);
 
 	if (!$project || !is_object($project)) {
-		exit_error("GROUP PROBLEM","PROBLEM CREATING GROUP OBJECT");
+		exit_no_group();
 	} else if ($project->isError()) {
 		if ($project->isPermissionDeniedError() && !session_get_user()) {
  			$next = '/account/login.php?feedback='.urlencode($project->getErrorMessage());
@@ -692,8 +692,7 @@ function site_project_header($params) {
  *	@param params array() empty
  */
 function site_project_footer($params) {
-	GLOBAL $HTML;
-	echo $HTML->footer($params);
+	site_footer($params);
 }
 
 /**

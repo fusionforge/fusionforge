@@ -150,7 +150,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
-		$return .= html_image("ic/forum20g.png","20","20",array("border"=>"0","alt"=>"Forums"));
+		$return .= html_image("ic/forum20g.png","20","20",array("alt"=>"Forums"));
 		$return .= '&nbsp;Forums</a>';
 
 		if ($mode != 'compact') {
@@ -166,7 +166,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
-		$return .= html_image("ic/docman16b.png","20","20",array("border"=>"0","alt"=>"Docs"));
+		$return .= html_image("ic/docman16b.png","20","20",array("alt"=>"Docs"));
 		$return .= '&nbsp;Doc&nbsp;Manager</a>';
 	}
 
@@ -177,7 +177,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/mail/?group_id='.$group_id).'">';
-		$return .= html_image("ic/mail16b.png","20","20",array("border"=>"0","alt"=>"Mail Lists"));
+		$return .= html_image("ic/mail16b.png","20","20",array("alt"=>"Mail Lists"));
 		$return .= '&nbsp;Mailing&nbsp;Lists</a>';
 
 		if ($mode != 'compact') {
@@ -192,7 +192,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/pm/?group_id='.$group_id).'">';
-		$return .= html_image("ic/taskman20g.png","20","20",array("border"=>"0","alt"=>"Tasks"));
+		$return .= html_image("ic/taskman20g.png","20","20",array("alt"=>"Tasks"));
 		$return .= '&nbsp;Task&nbsp;Manager</a>';
 
 		if ($mode != 'compact') {
@@ -219,7 +219,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/survey/?group_id='.$group_id).'">';
-		$return .= html_image("ic/survey16b.png","20","20",array("border"=>"0","alt"=>"Surveys"));
+		$return .= html_image("ic/survey16b.png","20","20",array("alt"=>"Surveys"));
 		$return .= "&nbsp;Surveys</a>";
 		if ($mode != 'compact') {
 			$return .= ' ( <strong>'. project_get_survey_count($group_id) .'</strong> surveys )';
@@ -233,7 +233,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
-		$return .= html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
+		$return .= html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
 		$return .= "&nbsp;SCM&nbsp;Tree</a>";
 
 		if ($mode != 'compact') {
@@ -250,7 +250,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<hr size="1" />';
 		$return .= '<a href="'.util_make_url ('/project/showfiles.php?group_id='.$group_id).'">';
-		$return .= html_image("ic/ftp16b.png","20","20",array("border"=>"0","alt"=>"FTP"));
+		$return .= html_image("ic/ftp16b.png","20","20",array("alt"=>"FTP"));
 		$return .= "&nbsp;Released&nbsp;Files</a>";
 	}
 
