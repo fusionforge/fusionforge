@@ -61,6 +61,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 	var $content_id;
 	var $id;
 	var $hasPreferences;
+	var $buttons;
 	var $owner_id;
 	var $owner_type;
 	/**
@@ -99,6 +100,9 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 		return '';
 	}
 	function hasPreferences() {
+		return false;
+	}
+	function hasButtons() {
 		return false;
 	}
 	function updatePreferences(&$request) {
@@ -254,7 +258,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 		}
 		return $o;
 	}
-	/* static */ function getCodendiWidgets($owner_type) {
+	static function getCodendiWidgets($owner_type) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks', 
