@@ -130,7 +130,7 @@ function &user_get_objects($id_arr) {
 }
 
 function &user_get_objects_by_name($username_arr) {
-	$res = db_query_params ('SELECT user_id FROM users WHERE user_name = ANY ($1)',
+	$res = db_query_params ('SELECT user_id FROM users WHERE lower(user_name) = ANY ($1)',
 				array (db_string_array_to_any_clause ($username_arr))) ;
 	$arr =& util_result_column_to_array($res,0);
 	return user_get_objects($arr);
@@ -849,7 +849,7 @@ Enjoy the site.
 	 */
 	function setEmail($email) {
 
-		if (!strcasecmp($this->getEmail(), stripslashes($email))) {
+		if (!strcasecmp($this->getEmail(), $email)) {
 			return true;
 		}
 
