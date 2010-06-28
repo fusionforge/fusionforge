@@ -62,8 +62,9 @@ class hudsonPlugin extends Plugin {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/plugins/hudson/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the project one
 			} 
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-
+			if (isset($params['toptab'])) {
+				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+			}
 		} elseif ($hookname =='cssfile') {
 			use_stylesheet('/plugins/hudson/themes/default/css/style.css');
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -148,7 +149,7 @@ class hudsonPlugin extends Plugin {
 	function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'hudsonPluginInfo')) {
 			require_once('hudsonPluginInfo.class.php');
-			$this->pluginInfo =& new hudsonPluginInfo($this);
+			$this->pluginInfo = new hudsonPluginInfo($this);
 		}
 		return $this->pluginInfo;
 	}
@@ -348,7 +349,7 @@ class hudsonPlugin extends Plugin {
 
 	function process() {
 		require_once('hudson.class.php');
-		$controler =& new hudson();
+		$controler = new hudson();
 		$controler->process();
 	}
 

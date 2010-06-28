@@ -38,7 +38,8 @@ abstract class HudsonWidget extends Widget {
     }
     
     protected function getJobsByGroup($group_id) {
-        $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
+    	$dao = CodendiDataAccess::instance();
+        $job_dao = new PluginHudsonJobDao($dao);
         $dar = $job_dao->searchByGroupID($group_id);
         $jobs = array();
         while ($dar->valid()) {

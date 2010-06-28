@@ -94,7 +94,7 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
     function hasRss() {
         return true;
     }
-    function getRssUrl() {
+    function getRssUrl($owner_id, $owner_type) {
         if ($this->job) {
             return $this->job->getUrl().'/rssAll';
         } else {
