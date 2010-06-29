@@ -52,8 +52,8 @@ keywordsList = ["and", "assert", "break", "class", "continue", "def",
                 ]
 
 # First a little helper, since I don't like to repeat things. (Tismer speaking)
-def replace(where, what, with):
-    return string.join(string.split(where, what), with)
+def replace(where, what, whatwith):
+    return string.join(string.split(where, what), whatwith)
 
 # A regexp for matching Python comments.
 commentPat = "#.*"
