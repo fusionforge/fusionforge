@@ -33,7 +33,7 @@ class GitPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_gather_stats' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
 
-		require_once $gfconfig.'plugins/scmgit/config.php' ;
+		require $gfconfig.'plugins/scmgit/config.php' ;
 
 		$this->default_git_server = $default_git_server ;
 		if (isset ($git_root)) {

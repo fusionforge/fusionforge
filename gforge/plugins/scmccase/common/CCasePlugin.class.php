@@ -35,7 +35,7 @@ class CCasePlugin extends SCMPlugin {
 		$this->hooks[] = "scm_createrepo";
 		$this->hooks[] = "scm_plugin";
 
-		require_once $gfconfig.'plugins/scmccase/config.php' ;
+		require $gfconfig.'plugins/scmccase/config.php' ;
 		
 		$this->default_ccase_server = $default_ccase_server ;
 		$this->this_server = $this_server ;

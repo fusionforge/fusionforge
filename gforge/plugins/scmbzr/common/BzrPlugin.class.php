@@ -32,7 +32,7 @@ class BzrPlugin extends SCMPlugin {
                 $this->hooks[] = 'scm_update_repolist' ;
                 $this->hooks[] = 'scm_gather_stats' ;
 
-		require_once $gfconfig.'plugins/scmbzr/config.php' ;
+		require $gfconfig.'plugins/scmbzr/config.php' ;
 		
 		$this->default_bzr_server = $default_bzr_server ;
 		if (isset ($bzr_root)) {

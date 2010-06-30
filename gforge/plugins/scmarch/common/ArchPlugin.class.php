@@ -29,7 +29,7 @@ class ArchPlugin extends SCMPlugin {
 		$this->text = 'Arch';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 
-		require_once $gfconfig.'plugins/scmarch/config.php' ;
+		require $gfconfig.'plugins/scmarch/config.php' ;
 		
 		$this->default_arch_server = $default_arch_server ;
 		if (isset ($arch_root)) {

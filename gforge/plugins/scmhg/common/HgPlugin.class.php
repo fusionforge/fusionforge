@@ -29,7 +29,7 @@ class HgPlugin extends SCMPlugin {
 		$this->text = 'Mercurial';
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		
-		require_once $gfconfig.'plugins/scmhg/config.php' ;
+		require $gfconfig.'plugins/scmhg/config.php' ;
 		
 		$this->default_hg_server = $default_hg_server ;
 		if (isset ($hg_root)) {

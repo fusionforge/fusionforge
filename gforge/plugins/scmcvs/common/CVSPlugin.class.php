@@ -33,7 +33,7 @@ class CVSPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 
-		require_once $GLOBALS['gfconfig'].'plugins/scmcvs/config.php' ;
+		require $gfconfig.'plugins/scmcvs/config.php' ;
 
 		$this->default_cvs_server = $default_cvs_server ;
 		if ($cvs_root) {

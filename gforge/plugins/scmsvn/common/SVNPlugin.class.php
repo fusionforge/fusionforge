@@ -33,8 +33,8 @@ class SVNPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 
-		require_once $gfconfig.'plugins/scmsvn/config.php' ;
-		
+		require $gfconfig.'plugins/scmsvn/config.php' ;
+
 		$this->default_svn_server = $default_svn_server ;
 		$this->use_ssh = $use_ssh;
 		$this->use_dav = $use_dav;

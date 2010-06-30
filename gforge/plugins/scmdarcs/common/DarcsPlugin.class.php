@@ -32,7 +32,7 @@ class DarcsPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_browser_page' ;
 		$this->hooks[] = 'scm_gather_stats' ;
 		
-		require_once $gfconfig.'plugins/scmdarcs/config.php' ;
+		require $gfconfig.'plugins/scmdarcs/config.php' ;
 		
 		$this->default_darcs_server = $default_darcs_server ;
 		if (isset ($darcs_root)) {
