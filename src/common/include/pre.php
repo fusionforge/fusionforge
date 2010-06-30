@@ -221,7 +221,7 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 	require_once forge_get_config('themes_root').'/'.forge_get_config('default_theme').'/Theme.class.php';
 	$HTML = new Theme () ;
 } else {		     // Script run from cron or a command line
-	require_once $gfwww.'include/squal_exit.php';
+	require_once $gfcommon.'include/squal_exit.php';
 }
 
 // Determine locale
