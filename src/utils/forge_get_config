@@ -23,7 +23,7 @@
  * USA
  */
         
-require (dirname(__FILE__).'/../www/env.inc.php');
+require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
 if (count ($argv) == 3) {
