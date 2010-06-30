@@ -67,7 +67,7 @@ EOF
 		mv $t /etc/gforge/config.ini.d/debian-install-secrets.ini
 	    fi
 	elif dpkg --compare-versions $2 lt 5.0.51-1 ; then
-	    # Upgrading from a pre-*.ini system, let's migrate
+	    echo "Migrating existing configuration to *.ini files"
 	    PATH=$PATH:/usr/share/gforge/bin migrate-to-ini-files.sh
 	fi 
 
