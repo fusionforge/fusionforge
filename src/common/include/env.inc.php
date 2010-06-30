@@ -8,7 +8,7 @@
  */
 
 // Attempt to set up the include path, to fix problems with relative includes
-$fusionforge_basedir = dirname(dirname( __FILE__ )) ;
+$fusionforge_basedir = dirname(dirname(dirname( __FILE__ ))) ;
 $include_path = join(PATH_SEPARATOR, 
 	array("/etc/gforge/custom", "/etc/gforge", ".", 
 		"$fusionforge_basedir/common", "$fusionforge_basedir/www",

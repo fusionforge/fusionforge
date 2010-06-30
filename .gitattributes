@@ -476,6 +476,7 @@ src/common/include/TextSanitizer.class.php -text
 src/common/include/UserManager.class.php -text
 src/common/include/config-vars.php -text
 src/common/include/config.php -text
+src/common/include/env.inc.php -text
 src/common/include/extras-debug.php -text
 src/common/include/group_section_texts.php -text
 src/common/include/minijson.php -text
@@ -3960,7 +3961,6 @@ src/www/admin/pi.php -text
 src/www/docman/include/vtemplate.class.php -text
 src/www/docman/search.php -text
 src/www/docman/search.tpl.html -text
-src/www/env.inc.php -text
 src/www/export/rss20_docman.php -text
 src/www/export/rss20_forum.php -text
 src/www/export/rss20_tasks.php -text
