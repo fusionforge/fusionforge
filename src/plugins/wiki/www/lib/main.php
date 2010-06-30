@@ -1393,7 +1393,7 @@ function main () {
     $request->finish();
 }
 
-if (isset($GLOBALS['sys_install_type']) && $GLOBALS['sys_install_type'] != 'production') {
+if (forge_get_config ('installation_purpose') != 'production') {
 	//$x = error_reporting();  // DEBUG: why is it 1 here? should be E_ALL
 	if (defined('E_STRICT') and (E_ALL & E_STRICT)) // strict php5?
 	    error_reporting(E_ALL & ~E_STRICT); 	// exclude E_STRICT
