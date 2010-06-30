@@ -175,8 +175,8 @@ class MailNotify {
 
         // On development or integration environements, emails sent to
         // <login>@debug.log are rerouted to a simple file (for test suite)..
-	$install_purpose = forge_get_config ('installation_purpose') ;
-	if ($install_purpose == 'development' || $install_purpose == 'integration') {
+	$installation_environment = forge_get_config ('installation_environment') ;
+	if ($installation_environment == 'development' || $installation_environment == 'integration') {
         	foreach ($emails as $to) {
         		if (preg_match('/^([a-z]+)\@debug.log$/', $to, $matches)) {
         			$fl = fopen(forge_get_config('data_path')."/logs/email-wiki.".$matches[1].".log", 'a');
