@@ -4,3 +4,4 @@ use-snoopy-from-distro
 disable-dav
 use-nusoap-from-distro
 
+production-environment

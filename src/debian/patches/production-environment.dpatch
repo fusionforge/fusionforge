@@ -1,0 +1,18 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/etc/config.ini-fhs src/etc/config.ini-fhs
+--- src~/etc/config.ini-fhs	2010-06-30 16:50:49.000000000 +0200
++++ src/etc/config.ini-fhs	2010-06-30 16:58:03.000000000 +0200
+@@ -15,5 +15,5 @@
+ 
+ extra_config_dirs = "$core/config_path/config.ini.d"
+ 
+-# Switch to "production" to remove extra debugging
+-installation_environment = development
++# Switch to "development" or "integration" to add extra debugging
++installation_environment = production

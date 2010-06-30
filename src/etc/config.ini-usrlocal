@@ -14,3 +14,6 @@ groupdir_prefix = "$core/chroot/home/groups"
 custom_path = "$core/config_path/custom"
 
 extra_config_dirs = "$core/config_path/config.ini.d"
+
+# Switch to "production" to remove extra debugging
+installation_environment = development
