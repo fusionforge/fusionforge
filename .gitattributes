@@ -4085,6 +4085,7 @@ src/www/images/widget/widget-preview-rss.png -text svneol=unset#unset
 src/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#unset
 src/www/images/widget/widget-preview.png -text svneol=unset#unset
 src/www/include/plugins_utils.php -text
+src/www/include/pre.php -text
 src/www/include/preplugins.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text
