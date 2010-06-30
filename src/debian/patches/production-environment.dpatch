@@ -5,14 +5,14 @@
 ## DP: No description.
 
 @DPATCH@
-diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/etc/config.ini-fhs src/etc/config.ini-fhs
---- src~/etc/config.ini-fhs	2010-06-30 16:50:49.000000000 +0200
-+++ src/etc/config.ini-fhs	2010-06-30 16:58:03.000000000 +0200
+diff -urNad src~/etc/config.ini-fhs src/etc/config.ini-fhs
+--- src~/etc/config.ini-fhs	2010-06-30 16:52:00.000000000 +0200
++++ src/etc/config.ini-fhs	2010-06-30 16:53:50.000000000 +0200
 @@ -15,5 +15,5 @@
  
  extra_config_dirs = "$core/config_path/config.ini.d"
  
--# Switch to "production" to remove extra debugging
+-; Switch to "production" to remove extra debugging
 -installation_environment = development
-+# Switch to "development" or "integration" to add extra debugging
++; Switch to "development" or "integration" to add extra debugging
 +installation_environment = production
