@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
-"Report-Msgid-Bugs-To: @PACKAGENAME@@packages.debian.org\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2009-06-12 23:23+0200\n"
 "PO-Revision-Date: 2008-03-25 03:47+0000\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
@@ -26,8 +26,8 @@ msgstr "Servidor de shell:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ shell "
-#| "accounts."
+#| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#| "shell accounts."
 msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ shell "
 "accounts."
@@ -51,7 +51,8 @@ msgstr "Servidor de descargas:"
 msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ "
 "packages."
-msgstr "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
+msgstr ""
+"Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -80,14 +81,14 @@ msgstr "Nome do usuario administrador de @FORGENAME@:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #, fuzzy
 #| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the system. "
-#| "It will be used to approve the creation of new projects."
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "system. It will be used to approve the creation of new projects."
 msgstr ""
-"A conta de administrador de @FORGENAME@ ha ter tódolos privilexios no sistema. "
-"Hase empregar para aprobar a creación de novos proxectos."
+"A conta de administrador de @FORGENAME@ ha ter tódolos privilexios no "
+"sistema. Hase empregar para aprobar a creación de novos proxectos."
 
 #. Type: string
 #. Description
@@ -114,7 +115,8 @@ msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
 "installation."
 msgstr ""
-"Introduza o enderezo IP do servidor que ha hospedar a instalación de @FORGENAME@."
+"Introduza o enderezo IP do servidor que ha hospedar a instalación de "
+"@FORGENAME@."
 
 #. Type: string
 #. Description
@@ -162,17 +164,17 @@ msgstr "Lista inicial de coñecementos:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 #, fuzzy
 #| msgid ""
-#| "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-#| "those present in the database. This list is the initial list of skills "
-#| "that will enter the database."
+#| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#| "from those present in the database. This list is the initial list of "
+#| "skills that will enter the database."
 msgid ""
 "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"@FORGENAME@ permítelle aos usuarios facer unha lista cos seus coñecementos, que "
-"poden escoller entre os que figuran na base de datos. Esta lista é a lista "
-"inicial de coñecementos que han entrar na base de datos."
+"@FORGENAME@ permítelle aos usuarios facer unha lista cos seus coñecementos, "
+"que poden escoller entre os que figuran na base de datos. Esta lista é a "
+"lista inicial de coñecementos que han entrar na base de datos."
 
 #. Type: string
 #. Description
@@ -233,13 +235,14 @@ msgstr "¿Quere que se descarten as mensaxes enviadas a ${noreply}?"
 #: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 #, fuzzy
 #| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}\" "
-#| "address."
+#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#| "\"${noreply}\" address."
 msgid ""
 "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
 "\" address."
 msgstr ""
-"@FORGENAME@ envía e recibe moito email desde e para o enderezo \"${noreply}\"."
+"@FORGENAME@ envía e recibe moito email desde e para o enderezo \"${noreply}"
+"\"."
 
 #. Type: boolean
 #. Description
@@ -271,8 +274,9 @@ msgid ""
 "Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
 msgstr ""
-"Introduza o dominio que ha hospedar a instalación de @FORGENAME@. Algúns servizos "
-"(scm, listas, etc.) han ter o seu propio subdominio dentro dese dominio."
+"Introduza o dominio que ha hospedar a instalación de @FORGENAME@. Algúns "
+"servizos (scm, listas, etc.) han ter o seu propio subdominio dentro dese "
+"dominio."
 
 #. Type: string
 #. Description
@@ -287,14 +291,14 @@ msgstr "Enderezo de email do administrador de @FORGENAME@:"
 #: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the e-mail address of the @FORGENAME@ administrator of this site. "
-#| "It will be used when problems occur."
+#| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#| "site. It will be used when problems occur."
 msgid ""
 "Please enter the e-mail address of the @FORGENAME@ administrator of this "
 "site. It will be used when problems occur."
 msgstr ""
-"Introduza o enderezo de email do administrador de @FORGENAME@ deste sitio. Hase "
-"empregar se aparecen problemas."
+"Introduza o enderezo de email do administrador de @FORGENAME@ deste sitio. "
+"Hase empregar se aparecen problemas."
 
 #. Type: string
 #. Description
@@ -309,13 +313,14 @@ msgstr "Nome do sistema @FORGENAME@:"
 #: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various places "
-#| "throughout the system."
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
 msgid ""
 "Please enter the name of the @FORGENAME@ system. It is used in various "
 "places throughout the system."
 msgstr ""
-"Introduza o nome do sistema @FORGENAME@. Emprégase en varios lugares do sistema."
+"Introduza o nome do sistema @FORGENAME@. Emprégase en varios lugares do "
+"sistema."
 
 #. Type: string
 #. Description
@@ -348,12 +353,14 @@ msgstr "Nome da base de datos:"
 #: ../dsf-helper/dbhost-variables.templates:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the name of the database that will host the @FORGENAME@ database."
+#| "Please enter the name of the database that will host the @FORGENAME@ "
+#| "database."
 msgid ""
 "Please enter the name of the database that will host the @FORGENAME@ "
 "database."
 msgstr ""
-"Introduza o nome da base de datos que ha hospedar as contas shell de @FORGENAME@"
+"Introduza o nome da base de datos que ha hospedar as contas shell de "
+"@FORGENAME@"
 
 #. Type: string
 #. Description
@@ -404,7 +411,8 @@ msgstr "Escolla o contrasinal para a conexión."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "packages."
-msgstr "Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
+msgstr ""
+"Introduza o nome do servidor que ha hospedar os paquetes de @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -417,18 +425,18 @@ msgstr "ID do grupo de administradores de novas:"
 #: ../dsf-helper/groupid-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "The members of the news admin group can approve news for the @FORGENAME@ main "
-#| "page. This group's ID must not be 1. This should be changed only if you "
-#| "upgrade from a previous version and want to keep the data."
+#| "The members of the news admin group can approve news for the @FORGENAME@ "
+#| "main page. This group's ID must not be 1. This should be changed only if "
+#| "you upgrade from a previous version and want to keep the data."
 msgid ""
 "The members of the news admin group can approve news for the @FORGENAME@ "
 "main page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
 "Os membros do grupo de administradores de novas poden aprobar as novas da "
-"páxina principal de @FORGENAME@. Este ID de grupo non debe ser 1. Só se debería "
-"cambiar se está a se actualizar dunha versión anterior e quere conservar os "
-"datos."
+"páxina principal de @FORGENAME@. Este ID de grupo non debe ser 1. Só se "
+"debería cambiar se está a se actualizar dunha versión anterior e quere "
+"conservar os datos."
 
 #. Type: string
 #. Description
@@ -459,15 +467,16 @@ msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "mailing lists."
 msgstr ""
-"Introduza o nome do servidor que ha hospedar as listas de correo de @FORGENAME@."
+"Introduza o nome do servidor que ha hospedar as listas de correo de "
+"@FORGENAME@."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/shellhost-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ shell "
-#| "accounts."
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "shell accounts."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "shell accounts."
@@ -485,8 +494,8 @@ msgstr "Redirector de correo dos usuarios:"
 #: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ user "
-#| "mail redirector."
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "user mail redirector."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ user "
 "mail redirector."

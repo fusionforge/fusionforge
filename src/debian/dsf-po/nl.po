@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
-"Report-Msgid-Bugs-To: @PACKAGENAME@@packages.debian.org\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2009-06-12 23:23+0200\n"
 "PO-Revision-Date: 2008-03-28 14:19+0100\n"
 "Last-Translator: Bart Cornelis <cobaco@skolelinux.no>\n"
@@ -40,8 +40,8 @@ msgstr "Shell-server:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ shell "
-#| "accounts."
+#| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#| "shell accounts."
 msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ shell "
 "accounts."
@@ -71,8 +71,8 @@ msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ "
 "packages."
 msgstr ""
-"Wat is de computernaam van de server waarop de @FORGENAME@-pakketten gehost gaan "
-"worden?"
+"Wat is de computernaam van de server waarop de @FORGENAME@-pakketten gehost "
+"gaan worden?"
 
 #. Type: string
 #. Description
@@ -105,14 +105,14 @@ msgstr "Gebruikersnaam @FORGENAME@-beheerder:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #, fuzzy
 #| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the system. "
-#| "It will be used to approve the creation of new projects."
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "system. It will be used to approve the creation of new projects."
 msgstr ""
-"De @FORGENAME@-beheerdersaccount krijgt volledige rechten binnen @FORGENAME@-systeem, "
-"en wordt gebruikt om nieuwe projecten goed te keuren."
+"De @FORGENAME@-beheerdersaccount krijgt volledige rechten binnen @FORGENAME@-"
+"systeem, en wordt gebruikt om nieuwe projecten goed te keuren."
 
 #. Type: string
 #. Description
@@ -143,7 +143,8 @@ msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
 "installation."
 msgstr ""
-"Wat is de computernaam van de server die de @FORGENAME@-installatie gaat hosten?"
+"Wat is de computernaam van de server die de @FORGENAME@-installatie gaat "
+"hosten?"
 
 #. Type: string
 #. Description
@@ -203,17 +204,17 @@ msgstr "Initiële lijst van vaardigheden:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 #, fuzzy
 #| msgid ""
-#| "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-#| "those present in the database. This list is the initial list of skills "
-#| "that will enter the database."
+#| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#| "from those present in the database. This list is the initial list of "
+#| "skills that will enter the database."
 msgid ""
 "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
 "will enter the database."
 msgstr ""
-"@FORGENAME@ geeft gebruikers de mogelijkheid om een lijst met hun vaardigheden op "
-"te geven, gekozen uit deze aanwezig in de database. Dit is de de initiële "
-"lijst van vaardigheden voor de database."
+"@FORGENAME@ geeft gebruikers de mogelijkheid om een lijst met hun "
+"vaardigheden op te geven, gekozen uit deze aanwezig in de database. Dit is "
+"de de initiële lijst van vaardigheden voor de database."
 
 #. Type: string
 #. Description
@@ -286,14 +287,14 @@ msgstr "Wilt u dat e-mail voor ${noreply} weggegooid wordt?"
 #: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 #, fuzzy
 #| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}\" "
-#| "address."
+#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#| "\"${noreply}\" address."
 msgid ""
 "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
 "\" address."
 msgstr ""
-"@FORGENAME@ verstuurt en ontvangt een heleboel e-mails van en naar  het adres "
-"'${noreply}'."
+"@FORGENAME@ verstuurt en ontvangt een heleboel e-mails van en naar  het "
+"adres '${noreply}'."
 
 #  Type: boolean
 #  Description
@@ -352,8 +353,8 @@ msgstr "E-mailadres van de @FORGENAME@-beheerder:"
 #: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the e-mail address of the @FORGENAME@ administrator of this site. "
-#| "It will be used when problems occur."
+#| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#| "site. It will be used when problems occur."
 msgid ""
 "Please enter the e-mail address of the @FORGENAME@ administrator of this "
 "site. It will be used when problems occur."
@@ -378,8 +379,8 @@ msgstr "Naam van het @FORGENAME@-systeem:"
 #: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various places "
-#| "throughout the system."
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
 msgid ""
 "Please enter the name of the @FORGENAME@ system. It is used in various "
 "places throughout the system."
@@ -426,7 +427,8 @@ msgstr "Databasenaam:"
 #: ../dsf-helper/dbhost-variables.templates:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the name of the database that will host the @FORGENAME@ database."
+#| "Please enter the name of the database that will host the @FORGENAME@ "
+#| "database."
 msgid ""
 "Please enter the name of the database that will host the @FORGENAME@ "
 "database."
@@ -491,7 +493,8 @@ msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "packages."
 msgstr ""
-"Wat is de computernaam van de server die de @FORGENAME@-pakketten gaat hosten?"
+"Wat is de computernaam van de server die de @FORGENAME@-pakketten gaat "
+"hosten?"
 
 #. Type: string
 #. Description
@@ -506,9 +509,9 @@ msgstr "Groep-ID van de nieuws-beheerdersgroep:"
 #: ../dsf-helper/groupid-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "The members of the news admin group can approve news for the @FORGENAME@ main "
-#| "page. This group's ID must not be 1. This should be changed only if you "
-#| "upgrade from a previous version and want to keep the data."
+#| "The members of the news admin group can approve news for the @FORGENAME@ "
+#| "main page. This group's ID must not be 1. This should be changed only if "
+#| "you upgrade from a previous version and want to keep the data."
 msgid ""
 "The members of the news admin group can approve news for the @FORGENAME@ "
 "main page. This group's ID must not be 1. This should be changed only if you "
@@ -552,7 +555,8 @@ msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "mailing lists."
 msgstr ""
-"Wat is de computernaam van de server die de @FORGENAME@-e-maillijsten gaat hosten?"
+"Wat is de computernaam van de server die de @FORGENAME@-e-maillijsten gaat "
+"hosten?"
 
 #  Type: string
 #  Description
@@ -561,8 +565,8 @@ msgstr ""
 #: ../dsf-helper/shellhost-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ shell "
-#| "accounts."
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "shell accounts."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "shell accounts."
@@ -585,8 +589,8 @@ msgstr "De e-mail-doorstuur-server:"
 #: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ user "
-#| "mail redirector."
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "user mail redirector."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ user "
 "mail redirector."

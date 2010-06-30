@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
-"Report-Msgid-Bugs-To: @PACKAGENAME@@packages.debian.org\n"
+"Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2009-06-12 23:23+0200\n"
 "PO-Revision-Date: 2008-03-30 14:36+0200\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
@@ -35,12 +35,13 @@ msgstr "Server se shellovými účty:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the hostname of the server that will host the @FORGENAME@ shell "
-#| "accounts."
+#| "Please enter the hostname of the server that will host the @FORGENAME@ "
+#| "shell accounts."
 msgid ""
 "Please enter the hostname of the server that will host the @FORGENAME@ shell "
 "accounts."
-msgstr "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+msgstr ""
+"Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -88,14 +89,14 @@ msgstr "Přihlašovací jméno správce @FORGENAME@:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:10001
 #, fuzzy
 #| msgid ""
-#| "The @FORGENAME@ administrator account will have full privileges on the system. "
-#| "It will be used to approve the creation of new projects."
+#| "The @FORGENAME@ administrator account will have full privileges on the "
+#| "system. It will be used to approve the creation of new projects."
 msgid ""
 "The @FORGENAME@ administrator account will have full privileges on the "
 "system. It will be used to approve the creation of new projects."
 msgstr ""
-"Správce @FORGENAME@ bude mít v systému @FORGENAME@ všechna práva. Používá se například "
-"pro schvalování vytváření nových projektů."
+"Správce @FORGENAME@ bude mít v systému @FORGENAME@ všechna práva. Používá se "
+"například pro schvalování vytváření nových projektů."
 
 #. Type: string
 #. Description
@@ -121,7 +122,8 @@ msgstr "IP adresa:"
 msgid ""
 "Please enter the IP address of the server that will host the @FORGENAME@ "
 "installation."
-msgstr "Zadejte prosím IP adresu serveru, který bude hostit instalaci @FORGENAME@."
+msgstr ""
+"Zadejte prosím IP adresu serveru, který bude hostit instalaci @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -169,9 +171,9 @@ msgstr "Počáteční seznam schopností:"
 #: ../dsf-in/db-postgresql.templates.dsfh-in:12001
 #, fuzzy
 #| msgid ""
-#| "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
-#| "those present in the database. This list is the initial list of skills "
-#| "that will enter the database."
+#| "@FORGENAME@ allows users to define a list of their skills, to be chosen "
+#| "from those present in the database. This list is the initial list of "
+#| "skills that will enter the database."
 msgid ""
 "@FORGENAME@ allows users to define a list of their skills, to be chosen from "
 "those present in the database. This list is the initial list of skills that "
@@ -238,14 +240,14 @@ msgstr "Chcete, aby se pošta doručená na ${noreply} zahazovala?"
 #: ../dsf-in/mta-postfix.templates.dsfh-in:3001
 #, fuzzy
 #| msgid ""
-#| "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}\" "
-#| "address."
+#| "@FORGENAME@ sends and receives plenty of e-mail to and from the "
+#| "\"${noreply}\" address."
 msgid ""
 "@FORGENAME@ sends and receives plenty of e-mail to and from the \"${noreply}"
 "\" address."
 msgstr ""
-"@FORGENAME@ využívá adresu „${noreply}“ k odesílání i příjmu velkého množství "
-"pošty."
+"@FORGENAME@ využívá adresu „${noreply}“ k odesílání i příjmu velkého "
+"množství pošty."
 
 #. Type: boolean
 #. Description
@@ -293,14 +295,14 @@ msgstr "Emailová adresa správce @FORGENAME@:"
 #: ../dsf-helper/common-variables.templates:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the e-mail address of the @FORGENAME@ administrator of this site. "
-#| "It will be used when problems occur."
+#| "Please enter the e-mail address of the @FORGENAME@ administrator of this "
+#| "site. It will be used when problems occur."
 msgid ""
 "Please enter the e-mail address of the @FORGENAME@ administrator of this "
 "site. It will be used when problems occur."
 msgstr ""
-"Zadejte prosím emailovou adresu správce tohoto systému @FORGENAME@. Adresa se "
-"použije v případě výskytu problémů."
+"Zadejte prosím emailovou adresu správce tohoto systému @FORGENAME@. Adresa "
+"se použije v případě výskytu problémů."
 
 #. Type: string
 #. Description
@@ -315,14 +317,14 @@ msgstr "Jméno @FORGENAME@ systému:"
 #: ../dsf-helper/common-variables.templates:4001
 #, fuzzy
 #| msgid ""
-#| "Please enter the name of the @FORGENAME@ system. It is used in various places "
-#| "throughout the system."
+#| "Please enter the name of the @FORGENAME@ system. It is used in various "
+#| "places throughout the system."
 msgid ""
 "Please enter the name of the @FORGENAME@ system. It is used in various "
 "places throughout the system."
 msgstr ""
-"Zadejte prosím jméno @FORGENAME@ systému. Toto jméno je v systému používáno na "
-"několika místech."
+"Zadejte prosím jméno @FORGENAME@ systému. Toto jméno je v systému používáno "
+"na několika místech."
 
 #. Type: string
 #. Description
@@ -341,8 +343,8 @@ msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "@FORGENAME@ database."
 msgstr ""
-"Zadejte prosím IP adresu (nebo jméno) serveru, který bude hostit vaši @FORGENAME@ "
-"databázi."
+"Zadejte prosím IP adresu (nebo jméno) serveru, který bude hostit vaši "
+"@FORGENAME@ databázi."
 
 #. Type: string
 #. Description
@@ -355,11 +357,13 @@ msgstr "Jméno databáze:"
 #: ../dsf-helper/dbhost-variables.templates:3001
 #, fuzzy
 #| msgid ""
-#| "Please enter the name of the database that will host the @FORGENAME@ database."
+#| "Please enter the name of the database that will host the @FORGENAME@ "
+#| "database."
 msgid ""
 "Please enter the name of the database that will host the @FORGENAME@ "
 "database."
-msgstr "Zadejte prosím jméno databáze, která bude obsahovat databázi @FORGENAME@."
+msgstr ""
+"Zadejte prosím jméno databáze, která bude obsahovat databázi @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -422,17 +426,17 @@ msgstr "ID skupiny správců novinek:"
 #: ../dsf-helper/groupid-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "The members of the news admin group can approve news for the @FORGENAME@ main "
-#| "page. This group's ID must not be 1. This should be changed only if you "
-#| "upgrade from a previous version and want to keep the data."
+#| "The members of the news admin group can approve news for the @FORGENAME@ "
+#| "main page. This group's ID must not be 1. This should be changed only if "
+#| "you upgrade from a previous version and want to keep the data."
 msgid ""
 "The members of the news admin group can approve news for the @FORGENAME@ "
 "main page. This group's ID must not be 1. This should be changed only if you "
 "upgrade from a previous version and want to keep the data."
 msgstr ""
 "Členové správcovské skupiny pro novinky mohou schvalovat novinky pro hlavní "
-"stránku @FORGENAME@. Tato skupina nesmí mít ID 1. Toto byste měli měnit jen v "
-"případě, že přecházíte z dřívější verze a chcete zachovat svá data."
+"stránku @FORGENAME@. Tato skupina nesmí mít ID 1. Toto byste měli měnit jen "
+"v případě, že přecházíte z dřívější verze a chcete zachovat svá data."
 
 #. Type: string
 #. Description
@@ -463,19 +467,21 @@ msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "mailing lists."
 msgstr ""
-"Zadejte prosím jméno serveru, který bude hostit poštovní konference @FORGENAME@."
+"Zadejte prosím jméno serveru, který bude hostit poštovní konference "
+"@FORGENAME@."
 
 #. Type: string
 #. Description
 #: ../dsf-helper/shellhost-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ shell "
-#| "accounts."
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "shell accounts."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ "
 "shell accounts."
-msgstr "Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
+msgstr ""
+"Zadejte prosím jméno serveru, který bude hostit shellové účty @FORGENAME@."
 
 #. Type: string
 #. Description
@@ -488,8 +494,8 @@ msgstr "Server pro přesměrování pošty:"
 #: ../dsf-helper/users-variables.templates:2001
 #, fuzzy
 #| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ user "
-#| "mail redirector."
+#| "Please enter the host name of the server that will host the @FORGENAME@ "
+#| "user mail redirector."
 msgid ""
 "Please enter the host name of the server that will host the @FORGENAME@ user "
 "mail redirector."
