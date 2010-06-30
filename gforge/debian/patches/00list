@@ -5,3 +5,4 @@ disable-dav
 use-nusoap-from-distro
 
 use-yui-from-distro
+db-on-localhost

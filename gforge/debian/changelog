@@ -1,3 +1,9 @@
+fusionforge (5.0.1+svn10155-1+) UNRELEASED; urgency=low
+
+  * Switch to Unix sockets for DB access by default.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 30 Jun 2010 16:10:58 +0200
+
 fusionforge (5.0.1+svn10155-1) unstable; urgency=low
 
   * Fixed embedded copy of viewvc for Python 2.6 (closes: #582012).
