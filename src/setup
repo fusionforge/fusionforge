@@ -292,33 +292,6 @@ setupinout(){
 	#rm -f $ETCDIR/httpd.d/20list
 	#
 
-	find $ETCTEMPLATEDIR/httpd.d  -follow -type f -regex "$ETCTEMPLATEDIR/httpd.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.ssl\|.secrets\|$EXCLUDEVHOST.vhost.ssl\)" | sort | while read i
-	do
-		if [ "$ETCTEMPLATEDIR" != "$ETCDIR" -a -f $ETCDIR/httpd.d/`basename $i` ]
-		then
-			if diff -q $i $ETCDIR/httpd.d/`basename $i` 
-			then
-				rm -f $ETCDIR/httpd.d/`basename $i`
-			else
-				i=$ETCDIR/httpd.d/`basename $i`
-			fi
-		fi
-		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
-	done
-	
-	if [ $listen80 = false ]
-	then
-		rm -f $ETCDIR/00listen80.gforge-new
-	fi
-
-	if [ $usessl = false -o -z "$(findkey)" -o -z "$(findcrt)" ]
-	then
-		echo "SSL Disabled"
-		rm -f $ETCDIR/[0-9][0-9]*.ssl.gforge-new
-	else
-		echo "SSL Enabled"
-	fi
-
 	echo "Creating $LOCALINC"
 	find $ETCTEMPLATEDIR/local.d -follow -type f -regex "$ETCTEMPLATEDIR/local.d/\([a-z0-9]+\|_?([a-z0-9_.]+-)+[a-z0-9]+\|[a-z0-9][a-z0-9-]*\)\(\|.$database\)" | sort | while read i
 	do
