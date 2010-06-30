@@ -114,8 +114,10 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 	}
 }
 
+forge_define_config_item ('installation_purpose', 'core', 'production') ;
+$install_purpose = forge_get_config ('installation_purpose') ;
 // Load extra func to add extras func like debug
-if ($sys_install_type == 'development' || $sys_install_type == 'integration') {
+if ($install_purpose == 'development' || $install_purpose == 'integration') {
 	require $gfcommon.'include/extras-debug.php';
 }
 
