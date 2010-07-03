@@ -399,7 +399,7 @@ Description: collaborative development tool - Mercurial (Hg) plugin
 
 Package: gforge-plugin-scmsvn
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, python-subversion, python (>= 2.3), php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, libapache2-svn, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, python-subversion, python (>= 2.3), php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
 Provides: gforge-plugin-scm
 Description: collaborative development tool - Subversion plugin
  FusionForge provides many tools to aid collaboration in a
