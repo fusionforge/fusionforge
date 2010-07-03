@@ -68,7 +68,7 @@ case $1 in
 	    ftmp=$(mktemp $f.generated.XXXXXX)
 	    cp -a $f $ftmp
 	    for v in $vars ; do
-		curvar=`echo $(forge_get_config ${v##*/} ${v%%/*})`
+		curvar=$(forge_get_config ${v##*/} ${v%%/*})
 		grep -q {$v} $ftmp && sed -i -e s,{$v},$curvar,g $ftmp
 	    done
 	    mv $ftmp $f.generated
