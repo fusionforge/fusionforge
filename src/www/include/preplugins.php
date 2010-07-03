@@ -10,4 +10,3 @@ require_once 'common/valid/ValidFactory.class.php';
 require_once 'common/include/ProjectManager.class.php';
 require_once 'common/include/UserManager.class.php';
 ?>
-
