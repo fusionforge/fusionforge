@@ -25,7 +25,7 @@ add_config () {
     fi
 
     if echo $value | grep -q [^[:alnum:]] ; then
-	echo $var = \"`echo $value`\"
+	echo $var = \"$value\"
     else
 	echo $var = $value
     fi
