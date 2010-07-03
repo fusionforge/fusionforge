@@ -69,7 +69,7 @@ case $1 in
 	    cp -a $f $ftmp
 	    for v in $vars ; do
 		curvar=`echo $(forge_get_config ${v##*/} ${v%%/*})`
-		grep -q {$v} $ftmp && sed -i -e s,{$v},{$curvar},g $ftmp
+		grep -q {$v} $ftmp && sed -i -e s,{$v},$curvar,g $ftmp
 	    done
 	    mv $ftmp $f.generated
 	done
