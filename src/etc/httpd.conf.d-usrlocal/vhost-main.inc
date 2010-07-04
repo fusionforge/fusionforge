@@ -19,9 +19,9 @@ DirectoryIndex index.html index.php
   ForceType application/x-httpd-php
 </Location>
 
-Alias /images/ /usr/local/share/gforge/www/images/
-
 Include /etc/gforge/httpd.conf.d/plugin-*.inc
+
+Alias /images/ /usr/local/share/gforge/www/images/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf

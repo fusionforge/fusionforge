@@ -19,9 +19,9 @@ DirectoryIndex index.html index.php
   ForceType application/x-httpd-php
 </Location>
 
-Alias /images/ {core/source_path}/www/images/
-
 Include {core/config_path}/httpd.conf.d/plugin-*.inc
+
+Alias /images/ {core/source_path}/www/images/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf
