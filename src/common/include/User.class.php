@@ -1532,7 +1532,11 @@ Enjoy the site.
 		}
 		return $role;
 	}
-	
+
+	/* Codendi Glue */
+	function isMember($group_id,$type){
+		return user_ismember($group_id,$type);
+	}
 }
 
 /*
