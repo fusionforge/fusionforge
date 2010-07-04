@@ -647,7 +647,7 @@ class Layout extends Error {
 						echo '
 							<option value="' . $menu['urls'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
 							. $menu['titles'][$j] . '</option>';
-						if ($menu['adminurls'][$j]) {
+						if (@$menu['adminurls'][$j]) {
 							echo  '
 								<option value="' . $menu['adminurls'][$j] 
 								. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
