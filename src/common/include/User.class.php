@@ -1534,7 +1534,7 @@ Enjoy the site.
 	}
 
 	/* Codendi Glue */
-	function isMember($group_id,$type){
+	function isMember($group_id,$type=0){
 		return user_ismember($group_id,$type);
 	}
 }
