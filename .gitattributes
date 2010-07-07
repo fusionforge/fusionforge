@@ -822,9 +822,9 @@ src/packaging/cron.d/web-apache2 -text
 src/packaging/cron.d/web-apache2-vhosts -text
 src/packaging/dirs/web-apache2 -text
 src/packaging/dirs/web-apache2-vhosts -text
-src/packaging/docs/oldpkgname-web-apache2 -text
-src/packaging/docs/pkgname-full -text
-src/packaging/docs/pkgname-standard -text
+src/packaging/docs/full -text
+src/packaging/docs/standard -text
+src/packaging/docs/web-apache2 -text
 src/packaging/install/common -text
 src/packaging/install/db-postgresql -text
 src/packaging/install/dns-bind9 -text
