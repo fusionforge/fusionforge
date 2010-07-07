@@ -29,8 +29,8 @@ PLINKSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.links,$(shell ls  plugins/*/pack
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
 PINSTALLFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.install,$(shell ls  plugins/*/packaging/install/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
-DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)%.docs,$(wildcard packaging/docs/[a-z]*)) \
-		$(patsubst packaging/docs/%,debian/$(PACKAGE)%.docs,$(wildcard packaging/docs/[a-z]*)
+DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
+		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
 PDOCSFILES=$(patsubst %,debian/$(OLDPACKAGE)-%.docs,$(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
 
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
