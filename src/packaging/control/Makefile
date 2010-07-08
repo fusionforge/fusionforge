@@ -1,9 +1,6 @@
-OLDPACKAGE=gforge
-PACKAGE=fusionforge
-SRCPACKAGE=fusionforge
-FORGENAME=FusionForge
+default: ../../debian/control
 
-SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'
+../../debian/control:
+	cd ../../ ; pwd ; fakeroot debian/rules debian/control
 
-../../debian/control: $(wildcard *) $(wildcard ../../../gforge/plugins/*/packaging/control/*)
-	ls [0-9][0-9][0-9]* ../../../gforge/plugins/*/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
+.PHONY: ../../debian/control
