@@ -1,7 +1,7 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php' ;
-require_once dirname(__FILE__) . '/../../../gforge/common/include/database-pgsql.php' ;
+require_once dirname(__FILE__) . '/../../../src/common/include/database-pgsql.php' ;
 
 /**
  * Simple tests for the utils library.

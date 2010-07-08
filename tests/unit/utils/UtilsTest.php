@@ -1,7 +1,7 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once dirname(__FILE__) . '/../../../gforge/common/include/utils.php';
+require_once dirname(__FILE__) . '/../../../src/common/include/utils.php';
 
 /**
  * Simple tests for the utils library.

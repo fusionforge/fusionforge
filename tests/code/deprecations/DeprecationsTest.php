@@ -17,12 +17,12 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	 */
 	public function testdb_query()
 	{
-		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
+		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
 					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
-					   | grep -v ^gforge/db/upgrade-db.php \
-					   | grep -v ^gforge/www/include/database-oci8.php \
-					   | grep -v ^gforge/common/include/database-pgsql.php \
-					   | grep -v ^gforge/common/include/database-mysql.php`;
+					   | grep -v ^src/db/upgrade-db.php \
+					   | grep -v ^src/www/include/database-oci8.php \
+					   | grep -v ^src/common/include/database-pgsql.php \
+					   | grep -v ^src/common/include/database-mysql.php`;
 		$this->assertEquals('', $output);
 	}
 	
@@ -125,12 +125,12 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 
 		$pattern = implode ('|', $vars) ;
 		
-		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b(?! *=[^=])' \
-					   | grep -v ^gforge/common/include/config-vars.php`;
+		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b(?! *=[^=])' \
+					   | grep -v ^src/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$var for var in ($pattern):");
 
-		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\](?! *=[^=])' \
-					   | grep -v ^gforge/common/include/config-vars.php`;
+		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\](?! *=[^=])' \
+					   | grep -v ^src/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$GLOBALS['\$var'] for var in ($pattern):");
 	}
 		
@@ -139,9 +139,9 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	 */
 	public function testsession_require()
 	{
-		$output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\bsession_require[^_]' \
+		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -l '\bsession_require[^_]' \
 					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
-					   | grep -v ^gforge/common/include/session.php`;
+					   | grep -v ^src/common/include/session.php`;
 		$this->assertEquals('', $output);
 	}
 	

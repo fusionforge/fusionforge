@@ -11,8 +11,8 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("scp -r ../tests root@".HOST.":/usr/share");
 		
 		system("scp -rp ~/fusionforge_repo root@".HOST.":");
-		system("scp -rp ".dirname(__FILE__)."/../../../gforge/rpm-specific/dag-rpmforge.repo root@".HOST.":/etc/yum.repos.d/");
-		system("scp -rp ".dirname(__FILE__)."/../../../gforge/rpm-specific/fusionforge-ci.repo root@".HOST.":/etc/yum.repos.d/");
+		system("scp -rp ".dirname(__FILE__)."/../../../src/rpm-specific/dag-rpmforge.repo root@".HOST.":/etc/yum.repos.d/");
+		system("scp -rp ".dirname(__FILE__)."/../../../src/rpm-specific/fusionforge-ci.repo root@".HOST.":/etc/yum.repos.d/");
 
 		# Prefill yum cache to reduce real downloads.
 		//system("scp -rp ~/yum-cache-prefill/* root@".HOST.":/var/cache/yum/");

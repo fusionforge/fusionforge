@@ -19,7 +19,7 @@ class Documentation_Tests extends PHPUnit_Framework_TestCase
     {
 	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
 	    $base = dirname( $tests );
-	    system("cd ../gforge/docs/docbook; make TARGET=$base/build/documentation/ html", $retval);
+	    system("cd ../src/docs/docbook; make TARGET=$base/build/documentation/ html", $retval);
 	    $this->assertEquals(0, $retval);
     }
 
@@ -30,7 +30,7 @@ class Documentation_Tests extends PHPUnit_Framework_TestCase
     {
 	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
 	    $base = dirname( $tests );
-	    system("cd ../gforge/docs/docbook; make TARGET=$base/build/documentation/ pdf", $retval);
+	    system("cd ../src/docs/docbook; make TARGET=$base/build/documentation/ pdf", $retval);
 	    $this->assertEquals(0, $retval);
     }
 }

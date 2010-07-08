@@ -1,8 +1,8 @@
 <?php
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once dirname(__FILE__) . '/../../../gforge/common/include/Error.class.php';
-require_once dirname(__FILE__) . '/../../../gforge/common/include/TextSanitizer.class.php';
+require_once dirname(__FILE__) . '/../../../src/common/include/Error.class.php';
+require_once dirname(__FILE__) . '/../../../src/common/include/TextSanitizer.class.php';
 
 /**
  * Simple tests for the text sanitizer class.

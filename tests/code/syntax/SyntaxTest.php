@@ -30,11 +30,11 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
    */
   public function testPath()
   {
-    $output = `ls ../gforge >/dev/null; echo $?`;
+    $output = `ls ../src >/dev/null; echo $?`;
     $rc = trim($output);
     if ($rc != '0') {
-      $output = `ls ../gforge`;
-      $this->fail('Must be run from inside the "tests/" subdir : `ls ../gforge` reports "'.$output);
+      $output = `ls ../src`;
+      $this->fail('Must be run from inside the "tests/" subdir : `ls ../src` reports "'.$output);
     }
   }
     /**
@@ -42,7 +42,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testPhpSyntax()
     {
-	    $output = `cd .. ; find gforge tests -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
+	    $output = `cd .. ; find src tests -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
 	    $this->assertEquals('', $output);
     }
 
@@ -52,13 +52,13 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     public function testUTF8Chars()
     {
 	    // Skip the wiki part which is not UTF-8 encoded.
-	    $output = `cd .. ; find gforge tests -name '*.php' -not -path 'gforge/plugins/wiki/www/*' -type f | xargs isutf8`;
+	    $output = `cd .. ; find src tests -name '*.php' -not -path 'src/plugins/wiki/www/*' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.sql' -type f | xargs isutf8`;
+	    $output = `cd .. ; find src tests -name '*.sql' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.sh' -type f | xargs isutf8`;
+	    $output = `cd .. ; find src tests -name '*.sh' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.pl' -type f | xargs isutf8`;
+	    $output = `cd .. ; find src tests -name '*.pl' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
     }
 
@@ -67,13 +67,13 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testUnixLineEndings()
     {
-	    $output = `cd .. ; find gforge tests -name '*.php' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find src tests -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find src tests -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find gforge tests -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
+	    $output = `cd .. ; find src tests -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
     }
 
@@ -82,7 +82,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testEmptyLastLine()
     {
-	    $output = `cd .. ; find gforge tests -name '*.php' -type f | while read i ; do [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
+	    $output = `cd .. ; find src tests -name '*.php' -type f | while read i ; do [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
 	    $this->assertEquals('', $output);
     }
 }
