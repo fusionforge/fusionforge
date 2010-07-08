@@ -1611,6 +1611,7 @@ src/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 src/plugins/scmsvn/packaging/control/131plugin-scmsvn -text
 src/plugins/scmsvn/packaging/control/131plugin-scmsvn.shortdesc -text
 src/plugins/scmsvn/packaging/dirs/plugin-scmsvn -text
+src/plugins/scmsvn/packaging/docs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/install/plugin-scmsvn -text
 src/plugins/svncommitemail/bin/commit-email.php -text
 src/plugins/svntracker/AUTHORS -text
