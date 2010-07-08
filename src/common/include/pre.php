@@ -170,7 +170,7 @@ if (forge_get_config('use_jabber')) {
 	require_once $gfcommon.'include/Jabber.class.php';
 }
 
-ini_set('date.timezone', $sys_default_timezone);
+ini_set('date.timezone', forge_get_config ('default_timezone'));
 
 if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 	// exit_error() and variants (for the web)
