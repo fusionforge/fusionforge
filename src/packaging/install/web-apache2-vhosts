@@ -1,4 +1,4 @@
-etc/httpd.d/[4-5][0-9]*             usr/share/gforge/etc/httpd.d/
-deb-specific/create-vhosts.sh       usr/share/gforge/bin/
-deb-specific/prepare-vhosts-file.pl usr/share/gforge/bin/
-deb-specific/gforge.logrotate       etc/logrotate.d/gforge-web-apache2
+etc/httpd.d/[4-5][0-9]*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+deb-specific/create-vhosts.sh       usr/share/@OLDPACKAGE@/bin/
+deb-specific/prepare-vhosts-file.pl usr/share/@OLDPACKAGE@/bin/
+deb-specific/@OLDPACKAGE@.logrotate       etc/logrotate.d/@OLDPACKAGE@-web-apache2

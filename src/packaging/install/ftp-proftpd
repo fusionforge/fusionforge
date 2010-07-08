@@ -1,2 +1,2 @@
-deb-specific/install-ftp.sh  usr/share/gforge/bin/
-deb-specific/sf-proftpd.conf etc/gforge/
+deb-specific/install-ftp.sh  usr/share/@OLDPACKAGE@/bin/
+deb-specific/sf-proftpd.conf etc/@OLDPACKAGE@/

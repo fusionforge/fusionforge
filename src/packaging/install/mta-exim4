@@ -1,1 +1,1 @@
-deb-specific/install-exim4.sh usr/share/gforge/bin/
+deb-specific/install-exim4.sh usr/share/@OLDPACKAGE@/bin/

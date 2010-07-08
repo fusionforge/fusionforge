@@ -1,1 +1,1 @@
-utils/install-nsspgsql.sh usr/share/gforge/bin/
+utils/install-nsspgsql.sh usr/share/@OLDPACKAGE@/bin/

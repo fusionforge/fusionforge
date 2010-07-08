@@ -1,5 +1,5 @@
-etc/gforge/templates
-usr/share/gforge/bin
-var/lib/gforge/bind
-var/lib/gforge/tmp
-var/lib/gforge/etc
+etc/@OLDPACKAGE@/templates
+usr/share/@OLDPACKAGE@/bin
+var/lib/@OLDPACKAGE@/bind
+var/lib/@OLDPACKAGE@/tmp
+var/lib/@OLDPACKAGE@/etc
