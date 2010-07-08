@@ -133,6 +133,4 @@ function my_item_count($total, $new) {
     return '['.$total.($new ? ", <b>".vsprintf(_('%s new items'), array($new))."</b>]" : ']');
 }
 
-
-
-
+?>

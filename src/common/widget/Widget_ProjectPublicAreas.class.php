@@ -203,5 +203,5 @@ class Widget_ProjectPublicAreas extends Widget {
 
 
 }
-?>
 
+?>

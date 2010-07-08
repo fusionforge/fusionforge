@@ -65,5 +65,5 @@ function displayRss() {
         return _('List the last 10 pieces of news posted by the project members.');
     }
 }
-?>
 
+?>

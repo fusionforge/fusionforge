@@ -126,5 +126,5 @@ class Widget_ProjectInfo extends Widget {
 		return _('Some infos about the project.');
 	}
 }
-?>
 
+?>
