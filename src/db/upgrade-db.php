@@ -72,7 +72,7 @@ if (!apply_fixes($version)) {
 	exit();
 }
 
-$scripts = &get_scripts($db_path);
+$scripts = get_scripts($db_path);
 
 foreach ($scripts as $script) {
 	if ((int) $script['date'] > $date) {
