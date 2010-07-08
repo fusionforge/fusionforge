@@ -868,6 +868,7 @@ src/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol
 src/plugins/env.inc.php -text
 src/plugins/externalsearch/etc/engines.json -text
 src/plugins/externalsearch/etc/externalsearch.ini -text
+src/plugins/externalsearch/packaging/docs/plugin-externalsearch -text
 src/plugins/extratabs/README -text
 src/plugins/extratabs/bin/db-delete.pl -text
 src/plugins/extratabs/bin/db-upgrade.pl -text
@@ -877,9 +878,11 @@ src/plugins/extratabs/db/extratabs-init.sql -text
 src/plugins/extratabs/packaging/control/170plugin-extratabs -text
 src/plugins/extratabs/packaging/control/170plugin-extratabs.shortdesc -text
 src/plugins/extratabs/packaging/dirs/plugin-extratabs -text
+src/plugins/extratabs/packaging/docs/plugin-extratabs -text
 src/plugins/extratabs/packaging/install/plugin-extratabs -text
 src/plugins/extratabs/www/index.php -text
 src/plugins/fckeditor/common/fckeditorPlugin.class.php -text
+src/plugins/fckeditor/packaging/docs/plugin-fckeditor -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/fckplugin.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/find.gif -text svneol=unset#unset
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/en.js -text
@@ -1372,9 +1375,11 @@ src/plugins/globalsearch/packaging/control/180plugin-globalsearch -text
 src/plugins/globalsearch/packaging/control/180plugin-globalsearch.shortdesc -text
 src/plugins/globalsearch/packaging/cron.d/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/dirs/plugin-globalsearch -text
+src/plugins/globalsearch/packaging/docs/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
+src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
 src/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 src/plugins/mantis/etc/mantis.ini -text
 src/plugins/mantisbt/action/addAttachment.php -text
@@ -1445,6 +1450,7 @@ src/plugins/mediawiki/packaging/control/160plugin-mediawiki -text
 src/plugins/mediawiki/packaging/control/160plugin-mediawiki.shortdesc -text
 src/plugins/mediawiki/packaging/cron.d/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/dirs/plugin-mediawiki -text
+src/plugins/mediawiki/packaging/docs/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/install/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/links/plugin-mediawiki -text
 src/plugins/mediawiki/www/LocalSettings.php -text
@@ -1504,6 +1510,7 @@ src/plugins/projectlabels/db/projectlabels-init.sql -text
 src/plugins/projectlabels/packaging/control/190plugin-projectlabels -text
 src/plugins/projectlabels/packaging/control/190plugin-projectlabels.shortdesc -text
 src/plugins/projectlabels/packaging/dirs/plugin-projectlabels -text
+src/plugins/projectlabels/packaging/docs/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/install/plugin-projectlabels -text
 src/plugins/projectlabels/www/index.php -text
 src/plugins/projects_hierarchy/AUTHORS -text
@@ -1569,12 +1576,14 @@ src/plugins/scmbzr/packaging/control/132plugin-scmbzr.shortdesc -text
 src/plugins/scmbzr/packaging/dirs/plugin-scmbzr -text
 src/plugins/scmbzr/packaging/install/plugin-scmbzr -text
 src/plugins/scmccase/etc/scmccase.ini -text
+src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 src/plugins/scmcvs/etc/scmcvs.ini -text
 src/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
 src/plugins/scmcvs/packaging/control/130plugin-scmcvs -text
 src/plugins/scmcvs/packaging/control/130plugin-scmcvs.shortdesc -text
 src/plugins/scmcvs/packaging/dirs/plugin-scmcvs -text
+src/plugins/scmcvs/packaging/docs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/install/plugin-scmcvs -text
 src/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 src/plugins/scmdarcs/common/scmdarcs-init.php -text
@@ -1626,6 +1635,7 @@ src/plugins/svntracker/db/svntracker-init-mysql.sql -text
 src/plugins/svntracker/db/svntracker-init.sql -text
 src/plugins/svntracker/etc/plugins/svntracker/config.php -text
 src/plugins/svntracker/httpd.conf -text
+src/plugins/svntracker/packaging/docs/plugin-svntracker -text
 src/plugins/svntracker/postcommit.example -text
 src/plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker -text
 src/plugins/svntracker/www/newcommit.php -text
@@ -1636,6 +1646,7 @@ src/plugins/webcalendar/README -text
 src/plugins/webcalendar/common/webcalendar-init.php -text
 src/plugins/webcalendar/common/webcalendarPlugin.class.php -text
 src/plugins/webcalendar/db/webcalendar-init.sql -text
+src/plugins/webcalendar/packaging/docs/plugin-webcalendar -text
 src/plugins/webcalendar/script/webcalendar-init.php -text
 src/plugins/webcalendar/www/.project -text
 src/plugins/webcalendar/www/AUTHORS -text
@@ -1852,6 +1863,7 @@ src/plugins/wiki/include/WikiPlugin.class.php -text
 src/plugins/wiki/include/WikiSearchEngine.class.php -text
 src/plugins/wiki/include/WikiSearchQuery.class.php -text
 src/plugins/wiki/include/wiki-init.php -text
+src/plugins/wiki/packaging/docs/plugin-wiki -text
 src/plugins/wiki/www/.htaccess -text
 src/plugins/wiki/www/GoogleSearch.wsdl -text
 src/plugins/wiki/www/INSTALL -text
