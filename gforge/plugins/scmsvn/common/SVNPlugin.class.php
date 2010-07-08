@@ -262,7 +262,7 @@ class SVNPlugin extends SCMPlugin {
 		}
 
 		foreach ($svnusers as $user_id => $user) {
-			$password_data .= $user->getUnixName ().':'.$user->getMD5Passwd ()."\n" ;
+			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n" ;
 		}
 		$password_data .= 'anonsvn:$apr1$Kfr69/..$J08mbyNpD81y42x7xlFDm.'."\n";
 
