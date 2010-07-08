@@ -210,7 +210,7 @@ plugins/coclico/forumml/www/themes/default/images/ic/resultset_next.png -text sv
 plugins/coclico/forumml/www/themes/default/images/ic/resultset_next_disabled.png -text svneol=unset#image/png
 plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous.png -text svneol=unset#image/png
 plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous_disabled.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#unset
+plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#image/gif
 plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#image/png
 plugins/coclico/forumml/www/upload.php -text
 plugins/coclico/hudson/bin/db-delete.pl -text
@@ -283,11 +283,11 @@ plugins/coclico/hudson/www/test_result_pie_chart.php -text
 plugins/coclico/hudson/www/themes/default/css/style.css -text
 plugins/coclico/hudson/www/themes/default/images/ic/cross.png -text svneol=unset#image/png
 plugins/coclico/hudson/www/themes/default/images/ic/edit.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/health_00_to_19.gif -text svneol=unset#unset
-plugins/coclico/hudson/www/themes/default/images/ic/health_20_to_39.gif -text svneol=unset#unset
-plugins/coclico/hudson/www/themes/default/images/ic/health_40_to_59.gif -text svneol=unset#unset
-plugins/coclico/hudson/www/themes/default/images/ic/health_60_to_79.gif -text svneol=unset#unset
-plugins/coclico/hudson/www/themes/default/images/ic/health_80_plus.gif -text svneol=unset#unset
+plugins/coclico/hudson/www/themes/default/images/ic/health_00_to_19.gif -text svneol=unset#image/gif
+plugins/coclico/hudson/www/themes/default/images/ic/health_20_to_39.gif -text svneol=unset#image/gif
+plugins/coclico/hudson/www/themes/default/images/ic/health_40_to_59.gif -text svneol=unset#image/gif
+plugins/coclico/hudson/www/themes/default/images/ic/health_60_to_79.gif -text svneol=unset#image/gif
+plugins/coclico/hudson/www/themes/default/images/ic/health_80_plus.gif -text svneol=unset#image/gif
 plugins/coclico/hudson/www/themes/default/images/ic/link_error.png -text svneol=unset#image/png
 plugins/coclico/hudson/www/themes/default/images/ic/rss_feed.png -text svneol=unset#image/png
 plugins/coclico/hudson/www/themes/default/images/ic/server_lightning.png -text svneol=unset#image/png
@@ -884,11 +884,11 @@ src/plugins/extratabs/www/index.php -text
 src/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 src/plugins/fckeditor/packaging/docs/plugin-fckeditor -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/fckplugin.js -text
-src/plugins/fckeditor/www/_samples/_plugins/findreplace/find.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/_samples/_plugins/findreplace/find.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/en.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/fr.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/it.js -text
-src/plugins/fckeditor/www/_samples/_plugins/findreplace/replace.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/_samples/_plugins/findreplace/replace.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/_samples/_plugins/samples/fckplugin.js -text
 src/plugins/fckeditor/www/_samples/adobeair/application.xml -text
 src/plugins/fckeditor/www/_samples/adobeair/icons/128.png -text svneol=unset#image/png
@@ -1091,7 +1091,7 @@ src/plugins/fckeditor/www/editor/_source/internals/fckxhtml.js -text
 src/plugins/fckeditor/www/editor/_source/internals/fckxhtml_gecko.js -text
 src/plugins/fckeditor/www/editor/_source/internals/fckxhtml_ie.js -text
 src/plugins/fckeditor/www/editor/_source/internals/fckxhtmlentities.js -text
-src/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text
+src/plugins/fckeditor/www/editor/css/behaviors/hiddenfield.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/css/images/block_address.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/css/images/block_blockquote.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/css/images/block_div.png -text svneol=unset#image/png
@@ -1103,25 +1103,25 @@ src/plugins/fckeditor/www/editor/css/images/block_h5.png -text svneol=unset#imag
 src/plugins/fckeditor/www/editor/css/images/block_h6.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/css/images/block_p.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/css/images/block_pre.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/css/images/fck_anchor.gif -text
-src/plugins/fckeditor/www/editor/css/images/fck_flashlogo.gif -text
-src/plugins/fckeditor/www/editor/css/images/fck_hiddenfield.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/css/images/fck_pagebreak.gif -text
-src/plugins/fckeditor/www/editor/css/images/fck_plugin.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/dialog/common/images/locked.gif -text
-src/plugins/fckeditor/www/editor/dialog/common/images/reset.gif -text
-src/plugins/fckeditor/www/editor/dialog/common/images/unlocked.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_about/logo_fckeditor.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_about/logo_fredck.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_about/sponsors/spellchecker_net.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/css/images/fck_anchor.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/css/images/fck_flashlogo.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/css/images/fck_hiddenfield.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/css/images/fck_pagebreak.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/css/images/fck_plugin.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/common/images/locked.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/common/images/reset.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/common/images/unlocked.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_about/logo_fckeditor.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_about/logo_fredck.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_about/sponsors/spellchecker_net.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/fck_div.html -text
 src/plugins/fckeditor/www/editor/dialog/fck_flash/fck_flash_preview.html -text
 src/plugins/fckeditor/www/editor/dialog/fck_image/fck_image_preview.html -text
-src/plugins/fckeditor/www/editor/dialog/fck_template/images/template1.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_template/images/template2.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_template/images/template3.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_universalkey/00.gif -text
-src/plugins/fckeditor/www/editor/dialog/fck_universalkey/keyboard_layout.gif -text
+src/plugins/fckeditor/www/editor/dialog/fck_template/images/template1.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_template/images/template2.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_template/images/template3.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_universalkey/00.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/fck_universalkey/keyboard_layout.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dtd/fck_dtd_test.html -text
 src/plugins/fckeditor/www/editor/dtd/fck_xhtml10strict.js -text
 src/plugins/fckeditor/www/editor/dtd/fck_xhtml10transitional.js -text
@@ -1144,67 +1144,67 @@ src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/io.
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/upload_fck.pl -text
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/util.pl -text
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/py/connector.py -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/ButtonArrow.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/Folder.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/Folder32.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderOpened.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderOpened32.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderUp.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/ai.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/avi.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/bmp.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/cs.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/default.icon.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/dll.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/doc.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/exe.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/fla.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/gif.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/htm.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/html.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/jpg.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/js.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/mdb.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/mp3.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/pdf.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/png.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/ppt.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/rdp.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/swf.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/swt.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/txt.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/vsd.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/xls.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/xml.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/zip.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/ai.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/avi.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/bmp.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/cs.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/default.icon.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/dll.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/doc.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/exe.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/fla.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/gif.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/htm.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/html.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/jpg.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/js.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/mdb.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/mp3.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/pdf.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/png.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/ppt.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/rdp.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/swf.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/swt.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/txt.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/vsd.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/xls.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/xml.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/zip.gif -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/images/spacer.gif -text
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/ButtonArrow.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/Folder.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/Folder32.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderOpened.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderOpened32.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/FolderUp.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/ai.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/avi.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/bmp.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/cs.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/default.icon.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/dll.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/doc.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/exe.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/fla.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/gif.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/htm.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/html.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/jpg.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/js.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/mdb.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/mp3.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/pdf.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/png.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/ppt.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/rdp.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/swf.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/swt.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/txt.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/vsd.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/xls.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/xml.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/32/zip.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/ai.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/avi.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/bmp.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/cs.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/default.icon.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/dll.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/doc.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/exe.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/fla.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/gif.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/htm.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/html.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/jpg.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/js.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/mdb.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/mp3.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/pdf.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/png.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/ppt.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/rdp.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/swf.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/swt.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/txt.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/vsd.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/xls.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/xml.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/icons/zip.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/filemanager/browser/default/images/spacer.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/filemanager/connectors/asp/basexml.asp -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/asp/class_upload.asp -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/asp/commands.asp -text
@@ -1266,32 +1266,32 @@ src/plugins/fckeditor/www/editor/filemanager/upload/cfm/config.cfm -text
 src/plugins/fckeditor/www/editor/filemanager/upload/cfm/upload.cfm -text
 src/plugins/fckeditor/www/editor/filemanager/upload/lasso/config.lasso -text
 src/plugins/fckeditor/www/editor/filemanager/upload/lasso/upload.lasso -text
-src/plugins/fckeditor/www/editor/images/anchor.gif -text
-src/plugins/fckeditor/www/editor/images/arrow_ltr.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/images/arrow_rtl.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/images/smiley/msn/angel_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/angry_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/broken_heart.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/cake.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/confused_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/cry_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/devil_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/embaressed_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/envelope.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/heart.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/kiss.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/lightbulb.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/omg_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/regular_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/sad_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/shades_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/teeth_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/thumbs_down.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/thumbs_up.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/tounge_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/whatchutalkingabout_smile.gif -text
-src/plugins/fckeditor/www/editor/images/smiley/msn/wink_smile.gif -text
-src/plugins/fckeditor/www/editor/images/spacer.gif -text
+src/plugins/fckeditor/www/editor/images/anchor.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/arrow_ltr.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/arrow_rtl.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/angel_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/angry_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/broken_heart.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/cake.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/confused_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/cry_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/devil_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/embaressed_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/envelope.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/heart.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/kiss.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/lightbulb.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/omg_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/regular_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/sad_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/shades_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/teeth_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/thumbs_down.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/thumbs_up.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/tounge_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/whatchutalkingabout_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/smiley/msn/wink_smile.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/images/spacer.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/js/fckadobeair.js -text
 src/plugins/fckeditor/www/editor/js/fckeditorcode_gecko.js -text
 src/plugins/fckeditor/www/editor/js/fckeditorcode_ie.js -text
@@ -1310,52 +1310,52 @@ src/plugins/fckeditor/www/editor/plugins/bbcode/fckplugin.js -text
 src/plugins/fckeditor/www/editor/plugins/dragresizetable/fckplugin.js -text
 src/plugins/fckeditor/www/editor/plugins/placeholder/lang/es.js -text
 src/plugins/fckeditor/www/editor/plugins/placeholder/lang/pl.js -text
-src/plugins/fckeditor/www/editor/plugins/placeholder/placeholder.gif -text
+src/plugins/fckeditor/www/editor/plugins/placeholder/placeholder.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/_fckviewstrips.html -text
 src/plugins/fckeditor/www/editor/skins/default/fck_dialog_ie6.js -text
-src/plugins/fckeditor/www/editor/skins/default/fck_strip.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/skins/default/images/dialog.sides.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/skins/default/fck_strip.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/dialog.sides.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/default/images/dialog.sides.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/skins/default/images/dialog.sides.rtl.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/skins/default/images/sprites.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/skins/default/images/sprites.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/default/images/sprites.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.arrowright.gif -text
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.buttonarrow.gif -text
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.collapse.gif -text
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.end.gif -text
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.expand.gif -text
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.separator.gif -text
-src/plugins/fckeditor/www/editor/skins/default/images/toolbar.start.gif -text
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.arrowright.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.buttonarrow.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.collapse.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.end.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.expand.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.separator.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/default/images/toolbar.start.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/office2003/fck_dialog_ie6.js -text
-src/plugins/fckeditor/www/editor/skins/office2003/fck_strip.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/skins/office2003/images/dialog.sides.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/skins/office2003/fck_strip.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/dialog.sides.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/office2003/images/dialog.sides.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/skins/office2003/images/dialog.sides.rtl.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/skins/office2003/images/sprites.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/skins/office2003/images/sprites.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/office2003/images/sprites.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.arrowright.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.bg.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.buttonarrow.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.collapse.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.end.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.expand.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.separator.gif -text
-src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.start.gif -text
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.arrowright.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.bg.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.buttonarrow.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.collapse.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.end.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.expand.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.separator.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/office2003/images/toolbar.start.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/silver/fck_dialog_ie6.js -text
-src/plugins/fckeditor/www/editor/skins/silver/fck_strip.gif -text svneol=unset#unset
-src/plugins/fckeditor/www/editor/skins/silver/images/dialog.sides.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/skins/silver/fck_strip.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/dialog.sides.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/silver/images/dialog.sides.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/editor/skins/silver/images/dialog.sides.rtl.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/skins/silver/images/sprites.gif -text svneol=unset#unset
+src/plugins/fckeditor/www/editor/skins/silver/images/sprites.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/silver/images/sprites.png -text svneol=unset#image/png
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.arrowright.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.buttonarrow.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.buttonbg.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.collapse.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.end.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.expand.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.separator.gif -text
-src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.start.gif -text
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.arrowright.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.buttonarrow.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.buttonbg.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.collapse.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.end.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.expand.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.separator.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.start.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/fckeditor.py -text
 src/plugins/fckeditor/www/fckeditor_php4.php -text
 src/plugins/fckeditor/www/fckeditor_php5.php -text
@@ -1417,16 +1417,16 @@ src/plugins/mantisbt/view/viewNote.php -text
 src/plugins/mantisbt/www/admin/index.php -text
 src/plugins/mantisbt/www/getAttachment.php -text
 src/plugins/mantisbt/www/group/index.php -text
-src/plugins/mantisbt/www/img/down.gif -text
-src/plugins/mantisbt/www/img/priority_1.gif -text
-src/plugins/mantisbt/www/img/priority_2.gif -text
-src/plugins/mantisbt/www/img/priority_3.gif -text
-src/plugins/mantisbt/www/img/priority_low_1.gif -text
-src/plugins/mantisbt/www/img/priority_low_2.gif -text
-src/plugins/mantisbt/www/img/priority_low_3.gif -text
-src/plugins/mantisbt/www/img/priority_normal.gif -text
-src/plugins/mantisbt/www/img/protected.gif -text
-src/plugins/mantisbt/www/img/up.gif -text
+src/plugins/mantisbt/www/img/down.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_1.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_2.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_3.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_low_1.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_low_2.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_low_3.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/priority_normal.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/protected.gif -text svneol=unset#image/gif
+src/plugins/mantisbt/www/img/up.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/update.png -text svneol=unset#image/png
 src/plugins/mantisbt/www/index.php -text
 src/plugins/mantisbt/www/user/index.php -text
@@ -1526,26 +1526,26 @@ src/plugins/projects_hierarchy/www/del_son.php -text
 src/plugins/projects_hierarchy/www/dtree.css -text
 src/plugins/projects_hierarchy/www/dtree.js -text
 src/plugins/projects_hierarchy/www/hierarchy_utils.php -text
-src/plugins/projects_hierarchy/www/img/base.gif -text
-src/plugins/projects_hierarchy/www/img/cd.gif -text
-src/plugins/projects_hierarchy/www/img/empty.gif -text
-src/plugins/projects_hierarchy/www/img/folder.gif -text
-src/plugins/projects_hierarchy/www/img/folderopen.gif -text
-src/plugins/projects_hierarchy/www/img/globe.gif -text
-src/plugins/projects_hierarchy/www/img/imgfolder.gif -text
-src/plugins/projects_hierarchy/www/img/join.gif -text
-src/plugins/projects_hierarchy/www/img/joinbottom.gif -text
-src/plugins/projects_hierarchy/www/img/line.gif -text
-src/plugins/projects_hierarchy/www/img/minus.gif -text
-src/plugins/projects_hierarchy/www/img/minusbottom.gif -text
-src/plugins/projects_hierarchy/www/img/musicfolder.gif -text
-src/plugins/projects_hierarchy/www/img/nolines_minus.gif -text
-src/plugins/projects_hierarchy/www/img/nolines_plus.gif -text
-src/plugins/projects_hierarchy/www/img/page.gif -text
-src/plugins/projects_hierarchy/www/img/plus.gif -text
-src/plugins/projects_hierarchy/www/img/plusbottom.gif -text
-src/plugins/projects_hierarchy/www/img/question.gif -text
-src/plugins/projects_hierarchy/www/img/trash.gif -text
+src/plugins/projects_hierarchy/www/img/base.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/cd.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/empty.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/folder.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/folderopen.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/globe.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/imgfolder.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/join.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/joinbottom.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/line.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/minus.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/minusbottom.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/musicfolder.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/nolines_minus.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/nolines_plus.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/page.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/plus.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/plusbottom.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/question.gif -text svneol=unset#image/gif
+src/plugins/projects_hierarchy/www/img/trash.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/index.php -text
 src/plugins/projects_hierarchy/www/softwaremap.php -text
 src/plugins/projects_hierarchy/www/wait_son.php -text
@@ -1665,7 +1665,7 @@ src/plugins/webcalendar/www/assistant_edit_handler.php -text
 src/plugins/webcalendar/www/availability.php -text
 src/plugins/webcalendar/www/category.php -text
 src/plugins/webcalendar/www/category_handler.php -text
-src/plugins/webcalendar/www/circle.gif -text
+src/plugins/webcalendar/www/circle.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/colors.php -text
 src/plugins/webcalendar/www/datesel.php -text
 src/plugins/webcalendar/www/day.php -text
@@ -1676,7 +1676,7 @@ src/plugins/webcalendar/www/docs/WebCalendar-Database.html -text
 src/plugins/webcalendar/www/docs/WebCalendar-DeveloperGuide.html -text
 src/plugins/webcalendar/www/docs/WebCalendar-Styling.html -text
 src/plugins/webcalendar/www/docs/WebCalendar-SysAdmin.html -text
-src/plugins/webcalendar/www/docs/newwin.gif -text
+src/plugins/webcalendar/www/docs/newwin.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/edit_entry.php -text
 src/plugins/webcalendar/www/edit_entry_handler.php -text
 src/plugins/webcalendar/www/edit_layer.php -text
@@ -1695,7 +1695,7 @@ src/plugins/webcalendar/www/gradient.php -text
 src/plugins/webcalendar/www/group_edit.php -text
 src/plugins/webcalendar/www/group_edit_handler.php -text
 src/plugins/webcalendar/www/groups.php -text
-src/plugins/webcalendar/www/help.gif -text
+src/plugins/webcalendar/www/help.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/help_admin.php -text
 src/plugins/webcalendar/www/help_bug.php -text
 src/plugins/webcalendar/www/help_edit_entry.php -text
@@ -1753,30 +1753,30 @@ src/plugins/webcalendar/www/install-datebook.patch -text
 src/plugins/webcalendar/www/install/index.php -text
 src/plugins/webcalendar/www/layers.php -text
 src/plugins/webcalendar/www/layers_toggle.php -text
-src/plugins/webcalendar/www/leftarrow.gif -text
-src/plugins/webcalendar/www/leftarrowsmall.gif -text
+src/plugins/webcalendar/www/leftarrow.gif -text svneol=unset#image/gif
+src/plugins/webcalendar/www/leftarrowsmall.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/list_unapproved.php -text
-src/plugins/webcalendar/www/login.gif -text
+src/plugins/webcalendar/www/login.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/login.php -text
 src/plugins/webcalendar/www/month.php -text
-src/plugins/webcalendar/www/new.gif -text
+src/plugins/webcalendar/www/new.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/nonusers.php -text
 src/plugins/webcalendar/www/nonusers_handler.php -text
-src/plugins/webcalendar/www/pix.gif -text
-src/plugins/webcalendar/www/pixb.gif -text
+src/plugins/webcalendar/www/pix.gif -text svneol=unset#image/gif
+src/plugins/webcalendar/www/pixb.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/pref.php -text
 src/plugins/webcalendar/www/pref_handler.php -text
 src/plugins/webcalendar/www/publish.php -text
 src/plugins/webcalendar/www/purge.php -text
 src/plugins/webcalendar/www/reject_entry.php -text
 src/plugins/webcalendar/www/report.php -text
-src/plugins/webcalendar/www/rightarrow.gif -text
-src/plugins/webcalendar/www/rightarrowsmall.gif -text
+src/plugins/webcalendar/www/rightarrow.gif -text svneol=unset#image/gif
+src/plugins/webcalendar/www/rightarrowsmall.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/search.php -text
 src/plugins/webcalendar/www/search_handler.php -text
 src/plugins/webcalendar/www/select_user.php -text
 src/plugins/webcalendar/www/set_entry_cat.php -text
-src/plugins/webcalendar/www/spacer.gif -text
+src/plugins/webcalendar/www/spacer.gif -text svneol=unset#image/gif
 src/plugins/webcalendar/www/tables-db2.sql -text
 src/plugins/webcalendar/www/tables-ibase.sql -text
 src/plugins/webcalendar/www/tables-mysql.sql -text
@@ -3388,36 +3388,36 @@ src/plugins/wiki/www/themes/default/Wikiwyg/Wikiwyg/Preview.js -text
 src/plugins/wiki/www/themes/default/Wikiwyg/Wikiwyg/Toolbar.js -text
 src/plugins/wiki/www/themes/default/Wikiwyg/Wikiwyg/Wikitext.js -text
 src/plugins/wiki/www/themes/default/Wikiwyg/Wikiwyg/Wysiwyg.js -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/bold.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/h1.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/h2.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/h3.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/h4.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/h5.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/h6.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/help.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/hr.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/image.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/indent.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/italic.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/link.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/ordered.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/outdent.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/p.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/pre.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/preview.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/save_button.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/separator.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/strike.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/sub.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/sup.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/table.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/toc.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/underline.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/unlink.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/unordered.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/wikitext.gif -text
-src/plugins/wiki/www/themes/default/Wikiwyg/images/www.gif -text
+src/plugins/wiki/www/themes/default/Wikiwyg/images/bold.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/h1.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/h2.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/h3.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/h4.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/h5.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/h6.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/help.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/hr.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/image.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/indent.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/italic.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/link.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/ordered.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/outdent.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/p.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/pre.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/preview.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/save_button.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/separator.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/strike.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/sub.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/sup.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/table.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/toc.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/underline.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/unlink.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/unordered.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/wikitext.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/Wikiwyg/images/www.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/buttons/asc_order.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/atom.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/desc_order.png -text svneol=unset#image/png
@@ -3524,9 +3524,9 @@ src/plugins/wiki/www/themes/default/moacdropdown/css/dropdown.css -text
 src/plugins/wiki/www/themes/default/moacdropdown/examples.html -text
 src/plugins/wiki/www/themes/default/moacdropdown/i/al.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/moacdropdown/i/ar.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/moacdropdown/i/arrowdown.gif -text
+src/plugins/wiki/www/themes/default/moacdropdown/i/arrowdown.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/moacdropdown/i/code.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/moacdropdown/i/conf.gif -text
+src/plugins/wiki/www/themes/default/moacdropdown/i/conf.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/moacdropdown/i/ial.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/moacdropdown/i/iar.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/moacdropdown/js/Makefile -text
@@ -3595,7 +3595,7 @@ src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/css/advimage.css -
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/editor_plugin_src.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/image.htm -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/img/sample.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/img/sample.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/js/image.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/advimage/langs/en_dlg.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/advlink/css/advlink.css -text
@@ -3617,28 +3617,28 @@ src/plugins/wiki/www/themes/default/tiny_mce/plugins/directionality/editor_plugi
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/editor_plugin_src.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/emotions.htm -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-cool.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-cry.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-embarassed.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-frown.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-innocent.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-kiss.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-laughing.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-money-mouth.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-sealed.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-smile.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-surprised.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-tongue-out.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-undecided.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-wink.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-yell.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-cool.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-cry.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-embarassed.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-frown.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-innocent.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-kiss.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-laughing.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-money-mouth.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-sealed.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-smile.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-surprised.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-tongue-out.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-undecided.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-wink.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/img/smiley-yell.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/js/emotions.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/emotions/langs/en_dlg.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/dialog.htm -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/editor_plugin_src.js -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/img/example.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/img/example.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/js/dialog.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/langs/en.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/example/langs/en_dlg.js -text
@@ -3655,13 +3655,13 @@ src/plugins/wiki/www/themes/default/tiny_mce/plugins/iespell/editor_plugin.js -t
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/iespell/editor_plugin_src.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/editor_plugin_src.js -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/inlinepopups/template.htm -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/insertdatetime/editor_plugin.js -text
@@ -3672,13 +3672,13 @@ src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/css/content.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/css/media.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/editor_plugin_src.js -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/flash.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/flash.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/flv_player.swf -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/quicktime.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/realmedia.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/shockwave.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/trans.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/windowsmedia.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/quicktime.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/realmedia.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/shockwave.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/trans.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/img/windowsmedia.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/js/embed.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/js/media.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/media/langs/en_dlg.js -text
@@ -3690,8 +3690,8 @@ src/plugins/wiki/www/themes/default/tiny_mce/plugins/noneditable/editor_plugin_s
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/css/content.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/editor_plugin_src.js -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/img/pagebreak.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/img/trans.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/img/pagebreak.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/pagebreak/img/trans.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/paste/blank.htm -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/paste/css/blank.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/paste/css/pasteword.css -text
@@ -3723,7 +3723,7 @@ src/plugins/wiki/www/themes/default/tiny_mce/plugins/searchreplace/searchreplace
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/spellchecker/css/content.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/spellchecker/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/spellchecker/editor_plugin_src.js -text
-src/plugins/wiki/www/themes/default/tiny_mce/plugins/spellchecker/img/wline.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/plugins/spellchecker/img/wline.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/style/css/props.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/style/editor_plugin.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/plugins/style/editor_plugin_src.js -text
@@ -3779,7 +3779,7 @@ src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/editor_template.js 
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/editor_template_src.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/image.htm -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/img/colorpicker.jpg -text svneol=unset#image/jpeg
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/img/icons.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/img/icons.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/js/about.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/js/anchor.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/js/charmap.js -text
@@ -3793,11 +3793,11 @@ src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/link.htm -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/content.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/dialog.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/buttons.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/items.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/menu_check.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/progress.gif -text
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/tabs.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/items.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/menu_check.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/progress.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/img/tabs.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/default/ui.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/o2k7/content.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/o2k7/dialog.css -text
@@ -3810,7 +3810,7 @@ src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/skins/o2k7/ui_silve
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/source_editor.htm -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/editor_template.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/editor_template_src.js -text
-src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/img/icons.gif -text
+src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/img/icons.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/langs/en.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/skins/default/content.css -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/simple/skins/default/ui.css -text
@@ -4043,29 +4043,29 @@ src/www/images/pointer_left.png -text svneol=unset#image/png
 src/www/images/pointer_right.png -text svneol=unset#image/png
 src/www/images/pow-fusionforge.png -text svneol=unset#image/png
 src/www/images/sf-for-debian.png -text svneol=unset#image/png
-src/www/images/smiles/icon_arrow.gif -text
-src/www/images/smiles/icon_biggrin.gif -text
-src/www/images/smiles/icon_confused.gif -text
-src/www/images/smiles/icon_cool.gif -text
-src/www/images/smiles/icon_cry.gif -text
-src/www/images/smiles/icon_eek.gif -text
-src/www/images/smiles/icon_evil.gif -text
-src/www/images/smiles/icon_exclaim.gif -text
-src/www/images/smiles/icon_frown.gif -text
-src/www/images/smiles/icon_idea.gif -text
-src/www/images/smiles/icon_lol.gif -text
-src/www/images/smiles/icon_mad.gif -text
-src/www/images/smiles/icon_mrgreen.gif -text
-src/www/images/smiles/icon_neutral.gif -text
-src/www/images/smiles/icon_question.gif -text
-src/www/images/smiles/icon_razz.gif -text
-src/www/images/smiles/icon_redface.gif -text
-src/www/images/smiles/icon_rolleyes.gif -text
-src/www/images/smiles/icon_sad.gif -text
-src/www/images/smiles/icon_smile.gif -text
-src/www/images/smiles/icon_surprised.gif -text
-src/www/images/smiles/icon_twisted.gif -text
-src/www/images/smiles/icon_wink.gif -text
+src/www/images/smiles/icon_arrow.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_biggrin.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_confused.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_cool.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_cry.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_eek.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_evil.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_exclaim.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_frown.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_idea.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_lol.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_mad.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_mrgreen.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_neutral.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_question.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_razz.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_redface.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_rolleyes.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_sad.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_smile.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_surprised.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_twisted.gif -text svneol=unset#image/gif
+src/www/images/smiles/icon_wink.gif -text svneol=unset#image/gif
 src/www/images/t.png -text svneol=unset#image/png
 src/www/images/t2.png -text svneol=unset#image/png
 src/www/images/widget/widget-header.png -text svneol=unset#image/png
@@ -4114,23 +4114,23 @@ src/www/include/preplugins.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text
 src/www/js/sortable.js -text
-src/www/jscook/ThemePanel/arrow.gif svneol=native#unset
-src/www/jscook/ThemePanel/arrowdown.gif svneol=native#unset
-src/www/jscook/ThemePanel/blank.gif svneol=native#unset
-src/www/jscook/ThemeXP/folder1.gif svneol=native#unset
-src/www/jscook/ThemeXP/folder2.gif svneol=native#unset
-src/www/jscook/ThemeXP/folderopen1.gif svneol=native#unset
-src/www/jscook/ThemeXP/folderopen2.gif svneol=native#unset
-src/www/jscook/ThemeXP/home.gif svneol=native#unset
-src/www/jscook/ThemeXP/join.gif svneol=native#unset
-src/www/jscook/ThemeXP/joinbottom.gif svneol=native#unset
-src/www/jscook/ThemeXP/line.gif svneol=native#unset
-src/www/jscook/ThemeXP/minus.gif svneol=native#unset
-src/www/jscook/ThemeXP/minusbottom.gif svneol=native#unset
-src/www/jscook/ThemeXP/page.gif svneol=native#unset
-src/www/jscook/ThemeXP/plus.gif svneol=native#unset
-src/www/jscook/ThemeXP/plusbottom.gif svneol=native#unset
-src/www/jscook/ThemeXP/spacer.gif svneol=native#unset
+src/www/jscook/ThemePanel/arrow.gif -text svneol=native#image/gif
+src/www/jscook/ThemePanel/arrowdown.gif -text svneol=native#image/gif
+src/www/jscook/ThemePanel/blank.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/folder1.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/folder2.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/folderopen1.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/folderopen2.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/home.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/join.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/joinbottom.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/line.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/minus.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/minusbottom.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/page.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/plus.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/plusbottom.gif -text svneol=native#image/gif
+src/www/jscook/ThemeXP/spacer.gif -text svneol=native#image/gif
 src/www/my/dashboard.php -text
 src/www/my/my_utils.php -text
 src/www/plugins/cvstracker -text
@@ -4212,9 +4212,9 @@ src/www/themes/gforge-classic/images/ic/cvs16b.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/images/ic/docman16b.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/images/ic/forum20g.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/images/ic/forum20w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/forum_add.gif -text
-src/www/themes/gforge-classic/images/ic/forum_delete.gif -text
-src/www/themes/gforge-classic/images/ic/forum_edit.gif -text
+src/www/themes/gforge-classic/images/ic/forum_add.gif -text svneol=unset#image/gif
+src/www/themes/gforge-classic/images/ic/forum_delete.gif -text svneol=unset#image/gif
+src/www/themes/gforge-classic/images/ic/forum_edit.gif -text svneol=unset#image/gif
 src/www/themes/gforge-classic/images/ic/ftp16b.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/images/ic/halfcheck.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/images/ic/home16b.png -text svneol=unset#image/png
@@ -4301,19 +4301,19 @@ src/www/themes/gforge/README.txt -text
 src/www/themes/gforge/Theme.class.php -text
 src/www/themes/gforge/css/theme-pages.css -text
 src/www/themes/gforge/css/theme.css -text
-src/www/themes/gforge/images/bottomtab-new/middle.gif -text
-src/www/themes/gforge/images/bottomtab-new/selected-middle.gif -text
-src/www/themes/gforge/images/bottomtab-new/selected-separator.gif -text
-src/www/themes/gforge/images/bottomtab-new/separator.gif -text
+src/www/themes/gforge/images/bottomtab-new/middle.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/bottomtab-new/selected-middle.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/bottomtab-new/selected-separator.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/bottomtab-new/separator.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/box-grad.png -text svneol=unset#image/png
 src/www/themes/gforge/images/box-topleft.png -text svneol=unset#image/png
 src/www/themes/gforge/images/box-topright.png -text svneol=unset#image/png
 src/www/themes/gforge/images/category.png -text svneol=unset#image/png
 src/www/themes/gforge/images/clear.png -text svneol=unset#image/png
-src/www/themes/gforge/images/header/top-logo.blank.gif -text
+src/www/themes/gforge/images/header/top-logo.blank.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/header/top-logo.png -text svneol=unset#image/png
-src/www/themes/gforge/images/header/top-middle.gif -text
-src/www/themes/gforge/images/header/top-right.gif -text
+src/www/themes/gforge/images/header/top-middle.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/header/top-right.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/ic/acl_roles20.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/adddoc12.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/btn_down.png -text svneol=unset#image/png
@@ -4326,10 +4326,10 @@ src/www/themes/gforge/images/ic/cvs16b.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/docman16b.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/forum20g.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/forum20w.png -text svneol=unset#image/png
-src/www/themes/gforge/images/ic/forum_add.gif -text
-src/www/themes/gforge/images/ic/forum_delete.gif -text
-src/www/themes/gforge/images/ic/forum_edit.gif -text
-src/www/themes/gforge/images/ic/forum_move.gif -text svneol=unset#unset
+src/www/themes/gforge/images/ic/forum_add.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/ic/forum_delete.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/ic/forum_edit.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/ic/forum_move.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/ic/ftp16b.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/halfcheck.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/home16b.png -text svneol=unset#image/png
@@ -4363,15 +4363,15 @@ src/www/themes/gforge/images/layout/left.png -text svneol=unset#image/png
 src/www/themes/gforge/images/layout/right.png -text svneol=unset#image/png
 src/www/themes/gforge/images/logo200x200.png -text svneol=unset#image/png
 src/www/themes/gforge/images/notes.png -text svneol=unset#image/png
-src/www/themes/gforge/images/spacer.gif -text svneol=unset#unset
+src/www/themes/gforge/images/spacer.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/t.png -text svneol=unset#image/png
 src/www/themes/gforge/images/t2.png -text svneol=unset#image/png
-src/www/themes/gforge/images/toptab-new/left.gif -text
-src/www/themes/gforge/images/toptab-new/middle.gif -text
-src/www/themes/gforge/images/toptab-new/right.gif -text
-src/www/themes/gforge/images/toptab-new/selected-left.gif -text
-src/www/themes/gforge/images/toptab-new/selected-middle.gif -text
-src/www/themes/gforge/images/toptab-new/selected-right.gif -text
+src/www/themes/gforge/images/toptab-new/left.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/toptab-new/middle.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/toptab-new/right.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/toptab-new/selected-left.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/toptab-new/selected-middle.gif -text svneol=unset#image/gif
+src/www/themes/gforge/images/toptab-new/selected-right.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/vert-grad.png -text svneol=unset#image/png
 src/www/themes/gforge/images/wgLogo.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/help.css -text
@@ -4410,9 +4410,9 @@ src/www/themes/osx/images/ic/cvs16b.png -text svneol=unset#image/png
 src/www/themes/osx/images/ic/docman16b.png -text svneol=unset#image/png
 src/www/themes/osx/images/ic/forum20g.png -text svneol=unset#image/png
 src/www/themes/osx/images/ic/forum20w.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/forum_add.gif -text
-src/www/themes/osx/images/ic/forum_delete.gif -text
-src/www/themes/osx/images/ic/forum_edit.gif -text
+src/www/themes/osx/images/ic/forum_add.gif -text svneol=unset#image/gif
+src/www/themes/osx/images/ic/forum_delete.gif -text svneol=unset#image/gif
+src/www/themes/osx/images/ic/forum_edit.gif -text svneol=unset#image/gif
 src/www/themes/osx/images/ic/ftp16b.png -text svneol=unset#image/png
 src/www/themes/osx/images/ic/halfcheck.png -text svneol=unset#image/png
 src/www/themes/osx/images/ic/home16b.png -text svneol=unset#image/png
@@ -4462,9 +4462,9 @@ src/www/themes/osx/images/tabs/rightselect.png -text svneol=unset#image/png
 src/www/themes/osx/images/tabs/ruledeselect.png -text svneol=unset#image/png
 src/www/themes/osx/images/tabs/ruleselect.png -text svneol=unset#image/png
 src/www/themes/osx/images/tabs/select.png -text svneol=unset#image/png
-src/www/themes/ultralite/images/forum_add.gif -text
-src/www/themes/ultralite/images/forum_delete.gif -text
-src/www/themes/ultralite/images/forum_edit.gif -text
+src/www/themes/ultralite/images/forum_add.gif -text svneol=unset#image/gif
+src/www/themes/ultralite/images/forum_delete.gif -text svneol=unset#image/gif
+src/www/themes/ultralite/images/forum_edit.gif -text svneol=unset#image/gif
 src/www/themes/ultralite/images/new.png -text svneol=unset#image/png
 src/www/tracker/admin/form-customizelist.php -text
 src/www/tracker/admin/form-deleteextrafieldelement.php -text
