@@ -82,7 +82,7 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testEmptyLastLine()
     {
-	    $output = `cd .. ; find src tests -name '*.php' -type f | while read i ; do [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
+	    $output = `cd .. ; find src tests -name '*.php' -type f | while read i ; do [ -s \$i ] && [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
 	    $this->assertEquals('', $output);
     }
 }
