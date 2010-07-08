@@ -68,7 +68,7 @@ hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text svneol=unset#image/png
 htdocs/favicon.ico -text
 htdocs/fusionforge-resized-transp.png -text svneol=unset#image/png
-htdocs/gforge47etch.jpg -text
+htdocs/gforge47etch.jpg -text svneol=unset#image/jpeg
 htdocs/index-ajax-0.html -text
 htdocs/index-ajax-1.html -text
 htdocs/index-ajax-2.html -text
@@ -3009,27 +3009,27 @@ src/plugins/wiki/www/themes/Crao/templates/top.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/wikiblog.tmpl -text
 src/plugins/wiki/www/themes/Crao/themeinfo.php -text
 src/plugins/wiki/www/themes/Hawaiian/Hawaiian.css -text
-src/plugins/wiki/www/themes/Hawaiian/images/PalmBeach.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/Submersible.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/WaterFall.jpg -text
+src/plugins/wiki/www/themes/Hawaiian/images/PalmBeach.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/Submersible.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/WaterFall.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/images/flower.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Hawaiian/images/interwiki.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/BeachPalmDusk.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/Coastline.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/HawaiiMauiFromSpace.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/LavaTwilight.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/LoihiSeamount.jpg -text
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/BeachPalmDusk.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/Coastline.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/HawaiiMauiFromSpace.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/LavaTwilight.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/LoihiSeamount.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/images/pictures/PhotoAlbum.csv -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/SteamVolcanoDusk.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/SubmersiblePiscesV.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/SwimmingPoolWater.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/Waterfall.jpg -text
-src/plugins/wiki/www/themes/Hawaiian/images/pictures/WhaleRainbow.jpg -text
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/SteamVolcanoDusk.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/SubmersiblePiscesV.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/SwimmingPoolWater.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/Waterfall.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/themes/Hawaiian/images/pictures/WhaleRainbow.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/images/tchecker-sand.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Hawaiian/images/tchecker-white.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Hawaiian/images/uhhbackground.jpg -text
+src/plugins/wiki/www/themes/Hawaiian/images/uhhbackground.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/lib/random.php -text
-src/plugins/wiki/www/themes/Hawaiian/preview.jpg -text
+src/plugins/wiki/www/themes/Hawaiian/preview.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/themeinfo.php -text
 src/plugins/wiki/www/themes/MacOSX/MacOSX-topbottombars.css -text
 src/plugins/wiki/www/themes/MacOSX/MacOSX.css -text
@@ -3172,7 +3172,7 @@ src/plugins/wiki/www/themes/MacOSX/images/mailto.png -text svneol=unset#image/pn
 src/plugins/wiki/www/themes/MacOSX/images/signature.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/wikiuser.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/lib/RecentChanges.php -text
-src/plugins/wiki/www/themes/MacOSX/preview.jpg -text
+src/plugins/wiki/www/themes/MacOSX/preview.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/MacOSX/themeinfo.php -text
 src/plugins/wiki/www/themes/MonoBook/IE50Fixes.css -text
 src/plugins/wiki/www/themes/MonoBook/IE55Fixes.css -text
@@ -3192,7 +3192,7 @@ src/plugins/wiki/www/themes/MonoBook/images/Signature.png -text svneol=unset#ima
 src/plugins/wiki/www/themes/MonoBook/images/bullet.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/discussionitem_icon.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/file_icon.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MonoBook/images/headbg.jpg -text
+src/plugins/wiki/www/themes/MonoBook/images/headbg.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/MonoBook/images/link_icon.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/lock_icon.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/magnify-clip.png -text svneol=unset#image/png
@@ -3314,7 +3314,7 @@ src/plugins/wiki/www/themes/Sidebar/templates/top.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/themeinfo.php -text
 src/plugins/wiki/www/themes/Sidebar/wikibits.js -text
 src/plugins/wiki/www/themes/SpaceWiki/SpaceWiki.css -text
-src/plugins/wiki/www/themes/SpaceWiki/images/Ufp-logo.jpg -text
+src/plugins/wiki/www/themes/SpaceWiki/images/Ufp-logo.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/SpaceWiki/images/hr.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/SpaceWiki/images/lights.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/SpaceWiki/images/starfield.png -text svneol=unset#image/png
@@ -3778,7 +3778,7 @@ src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/color_picker.htm -t
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/editor_template.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/editor_template_src.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/image.htm -text
-src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/img/colorpicker.jpg -text
+src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/img/colorpicker.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/img/icons.gif -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/js/about.js -text
 src/plugins/wiki/www/themes/default/tiny_mce/themes/advanced/js/anchor.js -text
@@ -4001,7 +4001,7 @@ src/www/images/debian-sf-icon.png -text svneol=unset#image/png
 src/www/images/favicon.ico svneol=native#unset
 src/www/images/fusionforge-resized.png -text svneol=unset#image/png
 src/www/images/gantt.png -text svneol=unset#image/png
-src/www/images/gforge.jpg svneol=native#unset
+src/www/images/gforge.jpg -text svneol=native#image/jpeg
 src/www/images/ic/caret.png -text svneol=unset#image/png
 src/www/images/ic/cfolder15.png -text svneol=unset#image/png
 src/www/images/ic/check.png -text svneol=unset#image/png
@@ -4023,7 +4023,7 @@ src/www/images/ic/notes16.png -text svneol=unset#image/png
 src/www/images/ic/ofolder15.png -text svneol=unset#image/png
 src/www/images/ic/pencil.png -text svneol=unset#image/png
 src/www/images/ic/save.png -text svneol=unset#image/png
-src/www/images/ic/support16b.jpg svneol=native#unset
+src/www/images/ic/support16b.jpg -text svneol=native#image/jpeg
 src/www/images/ic/survey16b.png -text svneol=unset#image/png
 src/www/images/ic/taskman16b.png -text svneol=unset#image/png
 src/www/images/ic/taskman20g.png -text svneol=unset#image/png
@@ -4153,14 +4153,14 @@ src/www/scm/viewvc/templates/docroot/images/annotate.png -text svneol=unset#imag
 src/www/scm/viewvc/templates/docroot/images/back.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/back_small.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/broken.png -text svneol=unset#image/png
-src/www/scm/viewvc/templates/docroot/images/chalk.jpg svneol=native#unset
+src/www/scm/viewvc/templates/docroot/images/chalk.jpg -text svneol=native#image/jpeg
 src/www/scm/viewvc/templates/docroot/images/cvsgraph_16x16.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/cvsgraph_32x32.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/diff.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/dir.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/down.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/download.png -text svneol=unset#image/png
-src/www/scm/viewvc/templates/docroot/images/feed-icon-16x16.jpg svneol=native#unset
+src/www/scm/viewvc/templates/docroot/images/feed-icon-16x16.jpg -text svneol=native#image/jpeg
 src/www/scm/viewvc/templates/docroot/images/forward.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/list.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/log.png -text svneol=unset#image/png
@@ -4168,8 +4168,8 @@ src/www/scm/viewvc/templates/docroot/images/logo.png -text svneol=unset#image/pn
 src/www/scm/viewvc/templates/docroot/images/text.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/up.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/view.png -text svneol=unset#image/png
-src/www/scm/viewvc/viewvc.org/images/bg-grad.jpg svneol=native#unset
-src/www/scm/viewvc/viewvc.org/images/title.jpg svneol=native#unset
+src/www/scm/viewvc/viewvc.org/images/bg-grad.jpg -text svneol=native#image/jpeg
+src/www/scm/viewvc/viewvc.org/images/title.jpg -text svneol=native#image/jpeg
 src/www/scm/viewvc/viewvc.org/images/title.xcf svneol=native#unset
 src/www/scm/viewvc/windows/aspfool/aspfool.dll svneol=native#unset
 src/www/scripts/codendi/LayoutManager.js -text
@@ -4277,14 +4277,14 @@ src/www/themes/gforge-classic/viewvc/images/annotate.png -text svneol=unset#imag
 src/www/themes/gforge-classic/viewvc/images/back.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/back_small.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/broken.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/chalk.jpg svneol=native#unset
+src/www/themes/gforge-classic/viewvc/images/chalk.jpg -text svneol=native#image/jpeg
 src/www/themes/gforge-classic/viewvc/images/cvsgraph_16x16.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/cvsgraph_32x32.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/diff.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/dir.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/down.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/download.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/feed-icon-16x16.jpg svneol=native#unset
+src/www/themes/gforge-classic/viewvc/images/feed-icon-16x16.jpg -text svneol=native#image/jpeg
 src/www/themes/gforge-classic/viewvc/images/forward.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/list.png -text svneol=unset#image/png
 src/www/themes/gforge-classic/viewvc/images/log.png -text svneol=unset#image/png
@@ -4383,14 +4383,14 @@ src/www/themes/gforge/viewvc/images/annotate.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/back.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/back_small.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/broken.png -text svneol=unset#image/png
-src/www/themes/gforge/viewvc/images/chalk.jpg -text
+src/www/themes/gforge/viewvc/images/chalk.jpg -text svneol=unset#image/jpeg
 src/www/themes/gforge/viewvc/images/cvsgraph_16x16.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/cvsgraph_32x32.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/diff.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/dir.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/down.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/download.png -text svneol=unset#image/png
-src/www/themes/gforge/viewvc/images/feed-icon-16x16.jpg -text
+src/www/themes/gforge/viewvc/images/feed-icon-16x16.jpg -text svneol=unset#image/jpeg
 src/www/themes/gforge/viewvc/images/forward.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/list.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/log.png -text svneol=unset#image/png
