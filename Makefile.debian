@@ -422,3 +422,6 @@ cleancache: # Clean $(APTCACHE) (apt cache) #
 
 cleanorig: # Clean $(TARBALLS)/$(ORIGFILE) #
 	rm -f $(TARBALLS)/$(ORIGFILE)
+
+control:
+	cd src/packaging/control; $(MAKE)
