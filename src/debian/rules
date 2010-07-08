@@ -159,15 +159,15 @@ install: build
 	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
 
 # Rename config files
-	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/fusionforge/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/fusionforge/config.ini
-	cp -r $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/gforge/etc/httpd.conf.d-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/gforge/httpd.conf.d
-	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/gforge/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/gforge/httpd.conf
+	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
+	cp -r $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf.d-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d
+	cp $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/$(OLDPACKAGE)/etc/httpd.conf-fhs $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf
 
 # Remove those that need to be generated at install time
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/gforge/httpd.conf.d/secrets.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/gforge/httpd.conf.d/vhost-list.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/gforge/httpd.conf.d/vhost-main.inc
-	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/gforge/httpd.conf.d/vhost-projects.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/secrets.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-list.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-main.inc
+	rm $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/etc/$(OLDPACKAGE)/httpd.conf.d/vhost-projects.inc
 
 # Remove Windows files
 	rm -rf $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/scm/viewvc/windows
