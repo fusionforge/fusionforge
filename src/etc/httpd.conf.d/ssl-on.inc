@@ -1,23 +1,7 @@
-<IfModule mod_ssl.c>
-  SSLEngine on
-  
-  SSLCertificateFile {core/config_path}/ssl-cert.pem
-  SSLCertificateKeyFile {core/config_path}/ssl-cert.key
-  # Add extra SSL configuration (e.g. SSLCACertificatePath) here
-  
-  <Files ~ "\.(cgi|shtml)$">
-    SSLOptions +StdEnvVars
-  </Files>
-  
-  <Directory "/usr/lib/cgi-bin">
-    SSLOptions +StdEnvVars
-  </Directory>
-  
-  SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
-</IfModule>
+# SSL is off by default to not provide a false sense of security
+# If/when you have a real SSL certificate, uncomment the "really-on" line and 
+# comment out the "off" line.
 
-<IfModule apache_ssl.c>
-  SSLEnable
-  
-  SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
-</IfModule>
+Include {core/config_path}/httpd.conf.d/ssl-off.inc
+# Include {core/config_path}/httpd.conf.d/ssl-really-on.inc
+

@@ -674,6 +674,7 @@ src/etc/httpd.conf.d-fhs/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d-fhs/secrets.inc -text
 src/etc/httpd.conf.d-fhs/ssl-off.inc -text
 src/etc/httpd.conf.d-fhs/ssl-on.inc -text
+src/etc/httpd.conf.d-fhs/ssl-really-on.inc -text
 src/etc/httpd.conf.d-fhs/vhost-list.inc -text
 src/etc/httpd.conf.d-fhs/vhost-main.inc -text
 src/etc/httpd.conf.d-fhs/vhost-projects.inc -text
@@ -699,6 +700,7 @@ src/etc/httpd.conf.d-opt/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d-opt/secrets.inc -text
 src/etc/httpd.conf.d-opt/ssl-off.inc -text
 src/etc/httpd.conf.d-opt/ssl-on.inc -text
+src/etc/httpd.conf.d-opt/ssl-really-on.inc -text
 src/etc/httpd.conf.d-opt/vhost-list.inc -text
 src/etc/httpd.conf.d-opt/vhost-main.inc -text
 src/etc/httpd.conf.d-opt/vhost-projects.inc -text
@@ -724,6 +726,7 @@ src/etc/httpd.conf.d-usrlocal/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d-usrlocal/secrets.inc -text
 src/etc/httpd.conf.d-usrlocal/ssl-off.inc -text
 src/etc/httpd.conf.d-usrlocal/ssl-on.inc -text
+src/etc/httpd.conf.d-usrlocal/ssl-really-on.inc -text
 src/etc/httpd.conf.d-usrlocal/vhost-list.inc -text
 src/etc/httpd.conf.d-usrlocal/vhost-main.inc -text
 src/etc/httpd.conf.d-usrlocal/vhost-projects.inc -text
@@ -749,6 +752,7 @@ src/etc/httpd.conf.d/projects-in-mainvhost.inc -text
 src/etc/httpd.conf.d/secrets.inc -text
 src/etc/httpd.conf.d/ssl-off.inc -text
 src/etc/httpd.conf.d/ssl-on.inc -text
+src/etc/httpd.conf.d/ssl-really-on.inc -text
 src/etc/httpd.conf.d/vhost-list.inc -text
 src/etc/httpd.conf.d/vhost-main.inc -text
 src/etc/httpd.conf.d/vhost-projects.inc -text
