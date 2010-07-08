@@ -213,6 +213,15 @@ function NoLinkOnMainPage(&$personal_urls){
 }
 $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
+function DisableLogInOut(&$mList) {
+	unset($mList['Userlogin']);
+	unset($mList['CreateAccount']);
+	unset($mList['Resetpass']);
+	unset($mList['Userlogout']);
+	return true;
+}
+$GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
+
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
 $g = group_get_object_by_name ($fusionforgeproject) ;
