@@ -76,4 +76,18 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	    $output = `cd .. ; find gforge tests -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
     }
+
+    /**
+     * Ensure no script has an empty last line
+     */
+    public function testEmptyLastLine()
+    {
+	    $output = `cd .. ; find gforge tests -name '*.php' -type f | while read i ; do [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
+	    $this->assertEquals('', $output);
+    }
 }
+	
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
