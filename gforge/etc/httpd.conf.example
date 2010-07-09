@@ -154,6 +154,7 @@ UseCanonicalName Off
 		SSLEngine on
 		SSLCertificateFile /etc/apache2/ssl/apache.pem
 		SSLCertificateKeyFile /etc/apache2/ssl/apache.pem
+		SSLCertificateChainFile /etc/apache2/ssl/chain.pem
 		<Files ~ "\.(cgi|shtml)$">
 			SSLOptions +StdEnvVars
 		</Files>

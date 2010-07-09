@@ -125,6 +125,7 @@ computedefault(){
 	DEFAULTsys_plugins_path=$SHAREDIR/plugins/
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)
+	DEFAULTsys_ssl_apache_extra_cmd=
 	DEFAULTnoreply_to_bitbucket=true
 	DEFAULTsys_simple_dns=true
 	DEFAULTsys_apache_user=$(findapacheowner)

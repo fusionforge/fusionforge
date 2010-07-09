@@ -94,6 +94,7 @@ sys_jabber_pass=
 sys_plugins_path=/usr/share/gforge/plugins/
 sys_sslcrt=/etc/apache2/ssl/apache.pem
 sys_sslkey=/etc/apache2/ssl/apache.pem
+sys_ssl_apache_extra_cmd=SSLCertificateChainFile /etc/ssl/chain.pem
 noreply_to_bitbucket=true
 sys_simple_dns=true
 sys_apache_user=www-gforge
