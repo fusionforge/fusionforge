@@ -44,3 +44,5 @@ $grpdir_prefix = qx!$fgcpath/forge_get_config groupdir_prefix!;
 chomp $grpdir_prefix ;
 $file_dir = qx!$fgcpath/forge_get_config data_path!;
 chomp $file_dir ;
+
+1 ;
