@@ -32,8 +32,8 @@ class SoapChecksProcess extends PHPUnit_Framework_TestCase
   function testHostnameResolves()
   {
     
-    $ip = gethostbyname(FORGE_HOSTNAME);
-    $this->assertNotEquals(FORGE_HOSTNAME, $ip);
+    $ip = gethostbyname(HOST);
+    $this->assertNotEquals(HOST, $ip);
     
   }
   

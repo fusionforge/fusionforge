@@ -34,8 +34,8 @@ class SoapUserGroupProcess extends PHPUnit_Framework_TestCase
 	  //	  try {
 
 	  // see comments in SoapLoginProcess:setup() for details about this
-	  $ip = gethostbyname(FORGE_HOSTNAME);
-	  if ($ip != FORGE_HOSTNAME) 
+	  $ip = gethostbyname(HOST);
+	  if ($ip != HOST) 
 	    {
 
 		$this->soapclient = new SoapClient(WSDL_URL,

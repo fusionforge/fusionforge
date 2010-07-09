@@ -40,8 +40,8 @@ class SoapLoginProcess extends PHPUnit_Framework_TestCase
 	  // resolving the hostname doesn't work under phpunit. If
 	  // this fails, the hostname and IP address should be
 	  // different and the WSDL retrieval should work
-	  $ip = gethostbyname(FORGE_HOSTNAME);
-	  if ($ip != FORGE_HOSTNAME) 
+	  $ip = gethostbyname(HOST);
+	  if ($ip != HOST) 
 	    {
 
 	      // Instantiate the SOAP client with WSDL

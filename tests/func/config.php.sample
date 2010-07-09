@@ -14,9 +14,10 @@
 define ('SELENIUM_RC_HOST', 'localhost');
 
 // The forge's hostname
-define ('FORGE_HOSTNAME', 'test.local');
+define ('HOST', 'centos52.local');
 
 // Base URL where FusionForge is installed
+define ('ROOT', '');
 define ('BASE', '');
 
 // Database connection parameters.
@@ -41,7 +42,7 @@ define('CONFIGURED', false);
 // These are deduced from the previous definitions.
 
 // URL to access the application
-define ('URL', 'http://'.FORGE_HOSTNAME.'/');
+define ('URL', 'http://'.HOST.'/');
 
 // WSDL of the forges SOAP API
 define ('WSDL_URL', URL.'soap/index.php?wsdl');
