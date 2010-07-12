@@ -59,9 +59,6 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		echo '<div align="center">';
-		echo $GLOBALS['HTML']->searchBox();
-		echo '</div>';
 	}
 
 	/**
