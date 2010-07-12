@@ -85,7 +85,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		if (strlen($this->words) < 3) {
-			echo '<br><h1>'._('Error: Under min length search').'</h1><br />';
+			echo '<div class="error">'._('Error: Under min length search').'</div>';
 		} else {
 			echo $this->getResult();
 		}
@@ -170,7 +170,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		if ($title === '')
 			$title = $section;
 		
-		$result .= '<h3><a name="'.$section.'"></a>'.$title.'</h3>';
+		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 		
 		if ($renderer->searchQuery->getRowsCount() > 0) {
 			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
@@ -179,9 +179,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();			
 			$result .= $GLOBALS['HTML']->listTableBottom();			
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found - No sections available (check your permissions)'), htmlspecialchars($query['words'])).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $query['words']).'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found'), htmlspecialchars($query['words'])).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em>'), $query['words']).'</p>';
 		}
 		return $result;
 	}

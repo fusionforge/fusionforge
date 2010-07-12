@@ -29,7 +29,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_SOFTWARE, $words, $isExact, $searchQuery);
 		
 		$this->tableHeaders = array(
-			_('Group Name'),
+			_('Project Name'),
 			_('Description')
 		);
 	}
@@ -62,7 +62,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 			}		
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
 				.'<td width="30%"><a href="'.util_make_url('/'.$what.'/'.db_result($result, $i, 'unix_group_name').'/').'">'
-				.html_image('ic/msg.png', '10', '12', array('border'=>'0'))
+				.html_image('ic/msg.png', '10', '12')
 				.' '.$this->highlightTargetWords(db_result($result, $i, 'group_name')).'</a></td>'
 				.'<td width="70%">'.$this->highlightTargetWords(db_result($result, $i, 'short_description')).'</td></tr>';
 		}

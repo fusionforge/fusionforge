@@ -52,7 +52,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. db_result($result, $i, 'forum_id')).'">'
-				. html_image('ic/msg.png', '10', '12', array('border' => '0'))
+				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'summary').'</a></td>
 				<td width="15%">'.db_result($result, $i, 'realname').'</td>
 				<td width="15%">'.date($dateFormat, db_result($result, $i, 'post_date')).'</td></tr>';

@@ -55,7 +55,7 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-				'<td width="40%"><a href="'.util_make_url_u (db_result($result, $i, 'user_name'),db_result($result, $i, 'user_id')).'">'.html_image('ic/msg.png', '10', '12', array('border'=>'0')).' '.db_result($result, $i, 'user_name').'</a></td>'.
+				'<td width="40%"><a href="'.util_make_url_u (db_result($result, $i, 'user_name'),db_result($result, $i, 'user_id')).'">'.html_image('ic/msg.png', '10', '12').' '.db_result($result, $i, 'user_name').'</a></td>'.
 				'<td width="60%">'.db_result($result, $i, 'realname').'</td>'.
 				'</tr>';
 		}

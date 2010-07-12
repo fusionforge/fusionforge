@@ -41,7 +41,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		if($searchQuery->isError()) {
 			$this->writeHeader();
-			echo '<h2>'.$searchQuery->getErrorMessage().'</h2>';
+			echo '<div class="error">'.$searchQuery->getErrorMessage().'</div>';
 			$this->writeFooter();
 		} else {
 			$searchQuery->executeQuery();
@@ -84,14 +84,11 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
 		
-		$html = '';
-		
+		$html = '<h1>'.sprintf(_('Search results for <em>%1$s</em>'), $query['words']).'</h1>';
 		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
-			$html .= '<h2>'.sprintf(_('No matches found for <em>%1$s</em>'), htmlspecialchars($query['words'])).'</h2>';
+			$html .= '<p><strong>'.sprintf(_('No matches found for <em>%1$s</em>'), $query['words']).'</strong></p>';
 			$html .= db_error();
 		} else {
-			$html .= '<h3>'.sprintf(_('Search results for <em>%1$s</em>'), htmlspecialchars($query['words'])).'</h3>';
-		
 			$html .= $GLOBALS['HTML']->listTableTop($this->tableHeaders);
 			$html .= $this->getRows();
 			$html .= $GLOBALS['HTML']->listTableBottom();
@@ -112,14 +109,13 @@ class HtmlSearchRenderer extends SearchRenderer {
 	function getNavigationPanel() {
 		$searchQuery =& $this->searchQuery;
 		
-		$html = '';
-		$html .= '<br />';
+		$html = '<br />';
 		$html .= '<table class="tablecontent" width="100%" cellpadding="5" cellspacing="0">';
 		$html .= '<tr>';
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
 			$html .= '<a href="'.$this->getPreviousResultsUrl().'" class="prev">'
-				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
+				. html_image('t2.png', '15', '15')
 				. ' '._('Previous Results').'</a>';
 		} else {
 			$html .= '&nbsp;';
@@ -128,7 +124,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
 			$html .= '<a href="'.$this->getNextResultsUrl().'" class="next">'
 				._('Next Results').' '
-				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
+				. html_image('t.png', '15', '15') . '</a>';
 		} else {
 			$html .= '&nbsp;';
 		}

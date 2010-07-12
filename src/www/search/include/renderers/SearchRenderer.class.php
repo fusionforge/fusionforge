@@ -27,11 +27,7 @@ class SearchRenderer extends Error {
 	function SearchRenderer($typeOfSearch, $words, $isExact, $searchQuery) {
 		$this->query['typeOfSearch'] = $typeOfSearch;
 		$this->query['isExact'] = $isExact;
-		if (get_magic_quotes_gpc()) {
-			$this->query['words'] = stripslashes($words);
-		}else{
-			$this->query['words'] = $words;
-		}
+		$this->query['words'] = $words;
 		
 		$this->searchQuery = $searchQuery;
 	}

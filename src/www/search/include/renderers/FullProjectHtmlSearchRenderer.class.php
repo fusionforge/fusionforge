@@ -54,7 +54,6 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->groupId = $groupId;
 		$this->words = $words;
 		$this->isExact = $isExact;
-		$searchQuery =& $this->searchQuery;
 		
 		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
 	}
@@ -85,24 +84,24 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getResult() {
 		$html = '';
 
-		$Group =& group_get_object($this->groupId);
+		$group =& group_get_object($this->groupId);
 
-		if ($Group->usesForum()) {
+		if ($group->usesForum()) {
 			$forumsRenderer		= new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		}
-		if ($Group->usesTracker()) {
+		if ($group->usesTracker()) {
 			$trackersRenderer	= new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		}
-		if ($Group->usesPM()) {
+		if ($group->usesPM()) {
 			$tasksRenderer		= new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		}
-		if ($Group->usesDocman()) {
+		if ($group->usesDocman()) {
 			$docsRenderer		= new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		}
-		if ($Group->usesFRS()) {
+		if ($group->usesFRS()) {
 			$frsRenderer 		= new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		}
-		if ($Group->usesNews()) {
+		if ($group->usesNews()) {
 			$newsRenderer		= new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		}
 
@@ -183,9 +182,9 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();			
 			$result .= $GLOBALS['HTML']->listTableBottom();			
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found - No sections available (check your permissions)'), htmlspecialchars($query['words'])).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $query['words']).'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found'), htmlspecialchars($query['words'])).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> '), $query['words']).'</p>';
 		}
 		return $result;
 	}
