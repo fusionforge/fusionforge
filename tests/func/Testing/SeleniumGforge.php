@@ -50,6 +50,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
     protected function setUp()
     {
+		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
+			$this->captureScreenshotOnFailure = true;
+			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
+			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
+		}
 	if (defined('DB_INIT_CMD')) {
 		// Reload a fresh database before running this test suite.
 		system(DB_INIT_CMD);
@@ -111,6 +116,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		
 		// Create a simple project.
 		$this->open( BASE );
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent('Log In'));
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", "admin");

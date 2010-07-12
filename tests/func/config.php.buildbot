@@ -11,11 +11,11 @@
  */
 
 // Host where selenium-rc is running
-define ('SELENIUM_RC_HOST', 'localhost');
-define ('SELENIUM_RC_DIR', 'D:');
+define ('SELENIUM_RC_HOST', getenv('SELENIUM_RC_HOST'));
+define ('SELENIUM_RC_DIR', getenv('SELENIUM_RC_DIR');
 
 // The forge's hostname
-define ('HOST', 'centos52.local');
+define ('HOST', getenv('HOST'));
 
 // Base URL where FusionForge is installed
 define ('ROOT', '');
@@ -33,8 +33,14 @@ define('DB_INIT_CMD', 'php '.dirname(__FILE__).'/db_reload.php');
 define ('EXISTING_USER', 'admin');
 define ('PASSWD_OF_EXISTING_USER', 'xxxxx');
 
+// Where CLI is installed
+define ('CLI_CMD', '/opt/gforge/acde/tools/gforge-cli/gforge.php');
+
+// Where Java CLI is installed
+define ('JAGOSI_CMD', '/opt/gforge/acde/tools/gforge-java-cli/');
+
 // Enter true when file is configured.
-define('CONFIGURED', false);
+define('CONFIGURED', getenv('CONFIGURED'));
 
 //
 // DON'T MODIFY BELOW THIS LINE UNLESS YOU KNOW WHAT YOU DO

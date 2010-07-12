@@ -53,7 +53,8 @@
 
 ini_set('memory_limit', '16M');
 
-require_once dirname(__FILE__).'/config.php';
+$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): dirname(__FILE__).'/config.php';
+require_once $config;
 
 if ( !CONFIGURED ) {
 	print "File 'config.php' is not correctly configured, aborting.\n";

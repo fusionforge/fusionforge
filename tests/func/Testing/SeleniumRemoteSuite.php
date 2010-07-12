@@ -4,6 +4,12 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 {
 	protected function setUp()
 	{
+		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
+			$this->captureScreenshotOnFailure = true;
+			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
+			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
+		}
+
 		system("cd scripts; ./start_vm.sh ".HOST);
 
 		//system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/*pend.php root@centos52:/opt/tests");
@@ -15,8 +21,9 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 
 	protected function tearDown()
 	{
-		system("scp root@".HOST.":/var/log/httpd/error_log /tmp/centos52_error_log");
-		system("scp root@".HOST.":/var/log/httpd/access_log /tmp/centos52_access_log");
+		if (getenv('SELENIUM_RC_DIR')) {
+			system("scp -r root@".HOST.":/var/log ".getenv('SELENIUM_RC_DIR'));
+		}
 		system("cd scripts; ./stop_vm.sh ".HOST);
 	}
 }
