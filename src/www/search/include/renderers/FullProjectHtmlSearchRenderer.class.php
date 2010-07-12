@@ -132,6 +132,14 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$html .= $this->getPartResult($newsRenderer, 'short_news', _('News Search Results'));
 		}
 
+		if (! $html && ! $validLength) {
+			$html .= '<div class="error">'._('Error: search query too short').'</div>';
+		}
+
+		plugin_hook('full_search_engines', $this);
+		$plugin = plugin_manager_get_object();
+		$html .= $plugin->getReturnedValue('full_search_engines');
+
 /*		
 		$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
 		$html .= $this->getPartResult($renderer, 'short_forum', _('Forum Search Results'));
