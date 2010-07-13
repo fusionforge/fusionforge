@@ -1,21 +1,21 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FCurrentTime 6355 2008-12-13 19:19:17Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FCurrentTimePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=Help%2FCurrentTime;
-  flags=PAGE_LOCKED;
+  pagename=Help%2FCurrentTimePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~CurrentTime* [[Help:WikiPlugin|plugin]] displays current time and date (when page was saved).
+The **~CurrentTime** [[Help:WikiPlugin|plugin]] displays current time and date (when page was saved).
 
-== Usage
-<verbatim>
-<?plugin CurrentTime format=xxx ?>
-</verbatim>
+== Usage ==
+{{{
+<<CurrentTime format=xxx>>
+}}}
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -23,41 +23,43 @@ The *~CurrentTime* [[Help:WikiPlugin|plugin]] displays current time and date (wh
 ! Description
 ! Default value
 |-
-| <b>format</b>
+| **format**
 | Display format (strftime format, or 'date' or 'time')
 | Date and time in ISO 8601:2004 format
 |}
 
-== Examples
+== Examples ==
 
-<verbatim>
-<?plugin CurrentTime ?>
-</verbatim>
+{{{
+<<CurrentTime>>
+}}}
 
-<?plugin CurrentTime ?>
+<<CurrentTime>>
 
-<verbatim>
-<?plugin CurrentTime format=date ?>
-</verbatim>
+{{{
+<<CurrentTime format=date>>
+}}}
 
-<?plugin CurrentTime format=date ?>
+<<CurrentTime format=date>>
 
-<verbatim>
-<?plugin CurrentTime format=time ?>
-</verbatim>
+{{{
+<<CurrentTime format=time>>
+}}}
 
-<?plugin CurrentTime format=time ?>
+<<CurrentTime format=time>>
 
-<verbatim>
-<?plugin CurrentTime format='%d %h %Y %H h %M m %S s %Z' ?>
-</verbatim>
+{{{
+<<CurrentTime format='%d %h %Y %H h %M m %S s %Z'>>
+}}}
 
-<?plugin CurrentTime format='%d %h %Y %H h %M m %S s %Z' ?>
+<<CurrentTime format='%d %h %Y %H h %M m %S s %Z'>>
 
-== Author
+== Author ==
 * Marc-Etienne Vargenau, Alcatel-Lucent
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

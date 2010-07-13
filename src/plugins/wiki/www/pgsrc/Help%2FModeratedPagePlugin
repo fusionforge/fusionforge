@@ -1,14 +1,14 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FModeratedPagePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FModeratedPagePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FModeratedPagePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== What is a ModeratedPage?
+== What is a ModeratedPage? ==
 
 A ModeratedPage is a page-internal setting, which restricts certain actions on certain pages. 
 The requested action and page is stored internally and an email is sent to the moderators
@@ -20,7 +20,7 @@ In both cases the author is notified, so it's recommended for the
 moderator to click on either the approve or reject links in the moderation email. 
 In case of multiple moderators: first comes, first serves.
 
-== How to enable ModeratedPage on a single page?
+== How to enable ModeratedPage on a single page? ==
 
 * Check the status of this action page, esp. the moderators in the
   plugin line, if they had their emails stored in their
@@ -29,34 +29,34 @@ In case of multiple moderators: first comes, first serves.
 * Save the page.
 * Lock the page to actually change the moderation status. You may want to unlock it then.
 
-== How to disable ModeratedPage on a single page?
+== How to disable ModeratedPage on a single page? ==
 
 * Remove the link to this action page in the page(s) in question.
 * Save the page.
 * Lock the page to actually change the moderation status. You may want to unlock it then.
 
-== Usage
-<verbatim>
-  <?plugin ModeratedPage ?>
-</verbatim>
+== Usage ==
+{{{
+<<ModeratedPage>>
+}}}
 
-== Arguments
+== Arguments ==
 
 * moderators: comma seperated list of registered usernames or groups.
   Each user should have his email defined in his prefs. Default: "Administrators" or 
-  <?plugin SystemInfo ADMIN_USER ?>
+<<SystemInfo ADMIN_USER>>
 * requirelevel: one of 0, 1, 2 or 10 on which moderation is used. Default: false (use requireaccess instead)
 * requireaccess: comma separated list of access perms, on which the moderation is used
   "view,edit,create,list,remove,change"
   Default: edit,remove,change
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin ModeratedPage ?>
-</verbatim>
+{{{
+<<ModeratedPage>>
+}}}
 
-== How does it work internally?
+== How does it work internally? ==
 
 You need to lock the page additionally, so that the link parser performs 
 some magic whether the ModeratedPage link is present or not, for efficiency 
@@ -71,7 +71,7 @@ There's no timeout on moderated actions, so the actions may stack up.
 The delayed actions may be performed in any order, there's no strict ordering to 
 follow for the moderator.
 
-== How to enable ModeratedPage on multiple/all pages?
+== How to enable ModeratedPage on multiple/all pages? ==
 
 If you enable the config option ENABLE_MODERATEDPAGE_ALL, the page moderation status on 
 every page is automatically set to check this action page ModeratedPage.
@@ -79,8 +79,10 @@ every page is automatically set to check this action page ModeratedPage.
 There may come another administrative plugin to change the moderation 
 status on selected pages.
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

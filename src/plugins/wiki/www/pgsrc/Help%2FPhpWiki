@@ -1,0 +1,20 @@
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FPhpWiki 7566 2010-06-23 19:43:46Z rurban $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPhpWiki;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+You are using ~PhpWiki at this very moment. Incredible, ain't it?
+
+Visit our home page at http://phpwiki.sourceforge.net/ and see ~PhpWiki
+in action at http://phpwiki.sourceforge.net/phpwiki/ (and of course
+here too :-)).
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

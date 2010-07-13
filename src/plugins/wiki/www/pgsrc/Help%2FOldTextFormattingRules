@@ -1,11 +1,11 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FOldTextFormattingRules 6451 2009-01-24 21:40:21Z vargenau $
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FOldTextFormattingRules 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FOldTextFormattingRules;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 ! Synopsis
@@ -16,9 +16,8 @@ Content-Transfer-Encoding: binary
 <strong>Footnotes:</strong> Use ~[1],~[2],~[3],...%%%
 <strong>Preventing linking:</strong> Prefix with "~!": ~!~DoNotHyperlink, name links like ~[~[text | URL] (double up on the "[").%%%
 <strong>Misc:</strong> "~!", "~!~!", "~!~!~!" make headings, "%%<em></em>%" makes a linebreak, "-<em></em>-<em></em>-<em></em>-" makes a horizontal rule.%%%
-<strong>Tables:</strong> »|« as first char, »|« for more columns, »|>« align right, »|<« align left, »|^« centered (default), »||« span columns, »|v« span rows
+<strong>Tables:</strong> Â»|Â« as first char, Â»|Â« for more columns, Â»|>Â« align right, Â»|<Â« align left, Â»|^Â« centered (default), Â»||Â« span columns, Â»|vÂ« span rows
 
-----
 ! Paragraphs
 
 * Don't indent paragraphs
@@ -26,7 +25,6 @@ Content-Transfer-Encoding: binary
 * Use blank lines as separators
 * Four or more minus signs make a horizontal rule
 * %%<em></em>% makes a linebreak (in headings and lists too)
-
 
 ! Lists
 
@@ -100,7 +98,6 @@ will not work''
 ;:Note that multiple <strong>|</strong>'s lead to spanned columns, and <strong>v</strong>'s can be used to span rows.  A <strong>></strong> generates a right justified column, <strong><</strong> a left justified column and <strong>^</strong> a centered column (which is the default.)
 ;:With the new [Help:TextFormatingsRules] tables are only supported with the [Help:OldStyleTablePlugin].
 
-
 ! HTML Mark-Up Language
 
 * Don't bother
@@ -108,11 +105,11 @@ will not work''
 * The & characters will not work
 * If you really must use HTML, your system administrator can enable this feature. Start each line with a bar (|). Note that this feature is disabled by default.
 
-
------
-
-! Footnotes:
+! Footnotes
 
 #[|ftnt_1]~[[1|#ftnt_ref_1]~]  By using ~[1] a second time (in the first column) the footnote itself is <em>defined</em>.  You may refer to a footnote as many times as you want, but you may only define it once on the page.  Note the the ~[1] in the footnote links back to the first reference, if there are multiple references there will be +'s after the ~[1] which will link to the other references.  (References which come <em>after</em> the footnote <em>definition</em> will not be linked to.)
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]]
+</noinclude>

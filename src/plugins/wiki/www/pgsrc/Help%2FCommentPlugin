@@ -1,45 +1,44 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FCommentPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FCommentPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCommentPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *Comment* [[Help:WikiPlugin|plugin]] lets you hide parts of a Wiki page without actually
-deleting the text. Comments will only be visible in the Wiki markup
-when editing or viewing the source.
+The **Comment** [[Help:WikiPlugin|plugin]] lets you hide parts of a Wiki page without actually deleting the text. Comments will only be visible in the Wiki markup when editing or viewing the source.
 
-== Usage
+== Usage ==
 
-Simply place the text to be commented out between =<~?plugin Comment=
-and =?~>=:
+Simply place the text to be commented out between {{{<<Comment}}} and {{{>>}}}:
 
-<verbatim>
-<?plugin Comment
+{{{
+<<Comment
 
-== A Hidden Section
+== A Hidden Section ==
 
 This text will not show up in the generated HTML page, but it is still
 visible when editing the WikiMarkup.
 
-?>
-</verbatim>
+>>
+}}}
 
-== Author
+== Author ==
+* [[mailto:gimpster@gimpster.com|Martin Geisler]]
 
-Martin Geisler mailto:gimpster@gimpster.com.
+<<Comment
 
-<?plugin Comment
-
-== "Fuzzy" Logic
+== "Fuzzy" Logic ==
 Theorem: a cat has nine tails.
 Proof:
     No cat has eight tails. A cat has one tail more than no cat.
     Therefore, a cat has nine tails.
 
-?>
+>>
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

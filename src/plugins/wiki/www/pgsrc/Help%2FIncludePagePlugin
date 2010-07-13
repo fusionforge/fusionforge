@@ -1,21 +1,23 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FIncludePagePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FIncludePagePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludePagePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~IncludePage* [[Help:WikiPlugin|plugin]] will "include" other pages in this wiki. In the language of hypertext this is called <i>transclusion</i>. The pages will render in distinct tables. You can also load external pages in a more limited fashion with the [FrameInclude|Help:FrameIncludePlugin] plugin.
+The **~IncludePage** [[Help:WikiPlugin|plugin]] will "include" other pages in this wiki. In the language of hypertext this is called //transclusion//.
+The pages will render in distinct tables. You can also load external pages in a more limited fashion with the [[Help:FrameIncludePlugin|FrameInclude]] plugin.
 
-== Usage
-<verbatim>
-<?plugin IncludePage page=OtherPage rev=6 quiet=1 words=50 lines=6 ?>
-</verbatim>
+== Usage ==
 
-== Arguments
+{{{
+<<IncludePage page=OtherPage rev=6 quiet=1 words=50 lines=6>>
+}}}
+
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -23,76 +25,81 @@ The *~IncludePage* [[Help:WikiPlugin|plugin]] will "include" other pages in this
 ! Description
 ! Default value
 |-
-| <b>page</b>
+| **page**
 | The page to include
-| ''None'' (mandatory argument)
+| //None// (mandatory argument)
 |-
-| <b>rev</b>
+| **rev**
 | the revision
 | defaults to most recent
 |-
-| <b>quiet</b>
+| **quiet**
 | if set, inclusion appears as normal content
 | false
 |-
-| <b>bytes</b>
+| **bytes**
 | maximum number of bytes to include
-| ''None'' (include all page)
+| //None// (include all page)
 |-
-| <b>words</b>
+| **words**
 | maximum number of words to include
-| ''None'' (include all page)
+| //None// (include all page)
 |-
-| <b>lines</b>
+| **lines**
 | maximum number of lines to include
-| ''None'' (include all page)
+| //None// (include all page)
 |-
-| <b>sections</b>
+| **sections**
 | maximum number of sections to include
-| ''None'' (include all sections)
+| //None// (include all sections)
 |-
-| <b>section</b>
+| **section**
 | include a named section
-| ''None''
+| //None//
 |-
-| <b>sectionhead</b>
+| **sectionhead**
 | when including a named section show the heading
 | false
 |}
 
-== Examples
+== Examples ==
 
-=== ~IncludePage page=Help/~AllPagesPlugin
-<?plugin IncludePage page=Help/AllPagesPlugin ?>
+=== ~IncludePage page=Help/~AllPagesPlugin ===
+<<IncludePage page=Help/AllPagesPlugin>>
 
-=== ~IncludePage page=Help/~AllPagesPlugin lines=6
-<?plugin IncludePage page=Help/AllPagesPlugin lines=6 ?>
+=== ~IncludePage page=Help/~AllPagesPlugin lines=6 ===
+<<IncludePage page=Help/AllPagesPlugin lines=6>>
 
-=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments"
-<?plugin IncludePage page=Help/AllPagesPlugin section="Arguments" ?>
+=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments" ===
+<<IncludePage page=Help/AllPagesPlugin section="Arguments">>
 
-=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments" sectionhead=true
-<?plugin IncludePage page=Help/AllPagesPlugin section="Arguments" sectionhead=true ?>
+=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments" sectionhead=true ===
+<<IncludePage page=Help/AllPagesPlugin section="Arguments" sectionhead=true>>
 
-=== ~IncludePage page=Help/~AllPagesPlugin sections=2
-<?plugin IncludePage page=Help/AllPagesPlugin sections=2 ?>
+=== ~IncludePage page=Help/~AllPagesPlugin sections=2 ===
 
-== Known bugs
+Does not work in Wikicreole syntax
+<!-- <<IncludePage page=Help/AllPagesPlugin sections=2>> -->
 
-* [~RedirectTo|Help:RedirectToPlugin] plugin is not handled correctly.
+== Known bugs ===
+
 * Line and word limit doesn't work if the included page itself includes a plugin.
+* "sections" parameter does not work if sections to include are in Wikicreole syntax.
+* "section" parameter does not always work if sections to include use both Wikicreole/Mediawiki and classic Phpwiki syntax.
 
-== Authors
+== Authors ==
 
 * Joe Edelman
-* bug fixes by [Reini Urban|PhpWiki:ReiniUrban]
+* bug fixes by [[PhpWiki:ReiniUrban|Reini Urban]]
 * "sections" parameter implemented by Marc-Etienne Vargenau, Alcatel-Lucent
 
-== See Also
+== See Also ==
 
-* [Help:IncludePagesPlugin] (to include multiple pages)
-* [Help:TemplatePlugin] (to include a page with parameters)
-* [Help:FrameIncludePlugin] (to include an external page)
+* [[Help:IncludePagesPlugin]] (to include multiple pages)
+* [[Help:TemplatePlugin]] (to include a page with parameters)
+* [[Help:FrameIncludePlugin]] (to include an external page)
 
------
+<noinclude>
+----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

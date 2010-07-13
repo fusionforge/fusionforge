@@ -1,45 +1,42 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRichTablePlugin 6451 2009-01-24 21:40:21Z vargenau $ 
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRichTablePlugin 7419 2010-05-19 16:49:33Z vargenau $ 
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRichTablePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~RichTable* [[Help:WikiPlugin|plugin]] is a plugin that takes off from the [OldStyleTable|Help:OldStyleTablePlugin] plugin. It allows a user to specify arbitrary properties of <tt><table></tt>, <tt><tr></tt> and <tt><td></tt> with a very simple markup.
+The **~RichTable** [[Help:WikiPlugin|plugin]] is a plugin that takes off from the [[Help:OldStyleTablePlugin|OldStyleTable]] plugin. It allows a user to specify arbitrary properties of ##<table>##, ##<tr>## and ##<td>## with a very simple markup.
 
-The contents of each cell are individually processed by the ~BlockParser. This means that you can do interesting things like put *invoke plugins*, use *enumerated lists* etc within each cell!
+The contents of each cell are individually processed by the ~BlockParser. This means that you can do interesting things like put **invoke plugins**, use **enumerated lists** etc within each cell!
 
-*A <tt>"-"</tt> (dash) at the start of a new line represents a new row in the table.
-*A <tt>"|"</tt> (vertical bar or pipe) at the start of a new line represents a cell.
-*Attributes for the tags
-  *A line that starts with a <tt>"*"</tt> (star or asterisk) after a <tt>"|"</tt> is parsed for attributes for the corresponding cell.
-  *Attributes for the table are given on line that starts with a <tt>"*"</tt>, only if the line appears before any other line except whitespace.
-  *A line that starts with a <tt>-</tt> is always parsed for attributes since it can't have any content, unlike a cell.
-*Cell contents
-  *Cell contents are processed by the ~BlockParser.
-  *Any line that starts with a <tt>"*"</tt> anywhere other than the table attribute line is treated as normal content.
-  *Any line that starts with whitespace is also treated as content.
-  *Any cell line that does not have a <tt>"*"</tt> after the <tt>"|"</tt> is treated as normal content.
-  *All content lines that follow a cell line are added to that cell. They can contain arbitrary text except the above cases.
-  *If there is no cell in the current row, content lines are dropped silently.
-*The two special characters <tt>"~~"</tt> and <tt>"?>"</tt> should be escaped as <tt>"\~~"</tt> and <tt>"?\>"</tt>. I havn't discovered any other characters yet that might need to be escaped. This is required for the block parser to work.
+* A ##"-"## (dash) at the start of a new line represents a new row in the table.
+* A ##"|"## (vertical bar or pipe) at the start of a new line represents a cell.
+* Attributes for the tags
+** A line that starts with a ##"*"## (star or asterisk) after a ##"|"## is parsed for attributes for the corresponding cell.
+** Attributes for the table are given on line that starts with a ##"*"##, only if the line appears before any other line except whitespace.
+** A line that starts with a ##-## is always parsed for attributes since it can't have any content, unlike a cell.
+* Cell contents
+** Cell contents are processed by the ~BlockParser.
+** Any line that starts with a ##"*"## anywhere other than the table attribute line is treated as normal content.
+** Any line that starts with whitespace is also treated as content.
+** Any cell line that does not have a ##"*"## after the ##"|"## is treated as normal content.
+** All content lines that follow a cell line are added to that cell. They can contain arbitrary text except the above cases.
+** If there is no cell in the current row, content lines are dropped silently.
+* The two special characters ##"~~"## and ##"?>"## should be escaped as ##"\~~"## and ##"?\>"##. I havn't discovered any other characters yet that might need to be escaped. This is required for the block parser to work.
 
 We allow attributes with or without quotes (")
-<verbatim>
+{{{
 border=1, cellpadding="5"
 style="font-family: sans-serif; border-top:1px solid #dddddd;"
-</verbatim>
-What will not work is style with comma inside, e. g.
-<verbatim>
 style="font-family: Verdana, Arial, Helvetica, sans-serif"
-</verbatim>
+}}}
 
-== Example
+== Example ==
 
-<?plugin RichTable
+<<RichTable
 
 *border=1, cellpadding=5, bgcolor=#f0f8f8, width=75%, align=center
 -
@@ -55,11 +52,11 @@ BackLinks
 ?\>
 - bgcolor=white
 |
-#One
-#Two
+# One
+# Two
 |
-*Foo
-*Bar
+* Foo
+* Bar
 - bgcolor=cyan
 This line gets dropped ... no cell to contain it!
 |* bgcolor=#f0f0ff, align=center
@@ -69,12 +66,12 @@ Another paragraph?
 |* align=left
 This cell uses the row color
 | I wish this cell had a nested table inside it! :(
-?>
+>>
 
 The above table is rendered from:
 
-<verbatim>
-<?plugin RichTable
+{{{
+<<RichTable
 
 *border=1, cellpadding=5, bgcolor=#f0f8f8, width=75%, align=center
 -
@@ -90,11 +87,11 @@ BackLinks
 ?\>
 - bgcolor=white
 |
-#One
-#Two
+# One
+# Two
 |
-*Foo
-*Bar
+* Foo
+* Bar
 - bgcolor=cyan
 This line gets dropped ... no cell to contain it!
 |* bgcolor=#f0f0ff, align=center
@@ -104,14 +101,16 @@ Another paragraph?
 |* align=left
 This cell uses the row color
 | I wish this cell had a nested table inside it! :(
-?>
-</verbatim>
+>>
+}}}
 
-== Known Bugs
+== Known Bugs ==
 * The plugin can't nest itself yet. Thus nested tables are currently not possible.
 
-== Author
+== Author ==
 * [Sameer D. Sahasrabuddhe|http://www.it.iitb.ac.in/~sameerds/phpwiki/index.php/RichTablePlugin]
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

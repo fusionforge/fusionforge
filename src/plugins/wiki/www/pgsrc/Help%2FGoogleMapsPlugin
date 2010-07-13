@@ -1,37 +1,103 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FGoogleMapsPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FGoogleMapsPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FGoogleMapsPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~GoogleMaps**  [[Help:WikiPlugin|plugin]] displays a marker
+with further infos (when clicking) on given coordinates.
 
-== Usage
-<verbatim>
-  <?plugin GoogleMaps ?>
-</verbatim>
+You need to sign up for a Google Maps API key!
 
-== Arguments
+http://www.google.com/apis/maps/signup.html
 
-page _(default: current pagename)_:
-  The page to execute upon.
+Then enter the key in {{{config/config.ini}}} under {{{GOOGLE_LICENSE_KEY=}}}
 
-== Example
+== Usage ==
 
-<verbatim>
-<?plugin GoogleMaps ?>
-</verbatim>
+{{{
+<<GoogleMaps arguments>>
+}}}
 
-<?plugin GoogleMaps ?>
+== Arguments ==
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **Longitude**
+| Longitude
+| //none//
+|-
+| **Latitude**
+| Latitude
+| //none//
+|-
+| **~ZoomFactor**
+| Zoom factor
+| 5
+|-
+| **Marker**
+|
+| true
+|-
+| **~InfoText**
+|
+| //none//
+|-
+| **~MapType**
+| Map or Satellite or Hybrid
+| Hybrid
+|-
+| **~SmallMapControl**
+| large or small
+| false
+|-
+| **width**
+| width
+| 500px
+|-
+| **height**
+| height
+| 400px
+|}
 
-== See Also
+== Example ==
 
+{{{
+<<GoogleMaps
+          Latitude=53.053
+          Longitude=7.803
+          ZoomFactor=10
+          Marker=true
+          MapType=Hybrid
+          width=500px
+          height=400px
+>>
+}}}
+
+<<GoogleMaps
+          Latitude=53.053
+          Longitude=7.803
+          ZoomFactor=10
+          Marker=true
+          MapType=Hybrid
+          width=500px
+          height=400px
+>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

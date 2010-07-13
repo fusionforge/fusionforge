@@ -1,71 +1,90 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FSiteMapPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FSiteMapPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSiteMapPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-This is a quick mod of BackLinks to do the job recursively. If your
+This is a quick mod of [[Help:BackLinksPlugin|BackLinks plugin]] to do the job recursively. If your
 site is categorized correctly, and all the categories are listed in
-CategoryCategory, then a RecBackLinks there will produce a contents
+[[:CategoryCategory|CategoryCategory]], then a recursive ~BackLinks there will produce a contents
 page for the entire site.
 
 The list is as deep as the recursion level.
 
-== Usage
+== Usage ==
 
-<verbatim>
-  <?plugin SiteMap direction=back|forward reclimit=4 ?>
-</verbatim>
+{{{
+<<SiteMap direction=back|forward reclimit=4>>
+}}}
 
-== Arguments
+== Arguments ==
 
-direction: 
-  Get BackLinks or forward links (links listed on the page)
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **direction**
+| Get BackLinks or forward links (links listed on the page)
+|
+|-
+| **firstreversed** 
+| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
+|
+|-
+| **excludeunknown** 
+| If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
+|
+|-
+| **exclude**
+|
+|
+|-
+| **include_self**
+|
+| 0
+|-
+| **noheader**
+|
+| 0
+|-
+| **page**
+|
+| The current page
+|-
+| **description**
+| Override default Description. Printed as header.
+|
+|-
+| **reclimit**
+|
+| 4
+|-
+| **info**
+|
+| false 
+|}
 
-firstreversed: 
-  If true, get BackLinks for the first page and forward
-  links for the rest. 
-  Only applicable when direction = 'forward'.
+== Example ==
 
-excludeunknown: 
-  If true (default) then exclude any mentioned pages
-  which don't exist yet.
-  Only applicable when direction = 'forward'.
+{{{
+<<SiteMap page=PhpWikiDocumentation>>
+}}}
 
-exclude:
-  Default: ''
-include_self:
-  Default: 0
-noheader:
-  Default: 0
-page:
-  Default: [pagename] The current page
-description:
-  Override default Description. Printed as header.
-reclimit:
-  Default: 4
-info:
-  Default: false 
+<<SiteMap page=PhpWikiDocumentation>>
 
-== Example
+== Author ==
+* Cuthbert Cat (cuthbertcat)
 
-<verbatim>
-<?plugin SiteMap page=PhpWikiDocumentation ?>
-</verbatim>
+== See Also ==
+* [[Help:BackLinksPlugin]]
 
-<?plugin SiteMap page=PhpWikiDocumentation ?>
-
-== Author
-
-Cuthbert Cat (cuthbertcat)
-
-== See Also
-
-Help:BackLinksPlugin
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

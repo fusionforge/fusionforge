@@ -1,0 +1,52 @@
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FWikiAdminChmodPlugin 7419 2010-05-19 16:49:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikiAdminChmodPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~WikiAdminChmod** [[Help:WikiPlugin|plugin]] allows to change the mode bits of pages.
+
+== Usage ==
+{{{
+<<WikiAdminChmod arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| Pages to select
+| //None//
+|-
+| **perm**
+| Page permissions
+| //None//
+|}
+
+== Example ==
+
+{{{
+<<WikiAdminChmod s=Temp*>>
+}}}
+
+<<WikiAdminChmod s=Temp*>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+* [[PhpWikiAdministration]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

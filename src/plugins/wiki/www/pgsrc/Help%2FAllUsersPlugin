@@ -1,37 +1,54 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAllUsersPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAllUsersPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAllUsersPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~AllUsers* [[Help:WikiPlugin|plugin]] lists all once authenticated users.
+The **~AllUsers** [[Help:WikiPlugin|plugin]] lists all once authenticated users.
 
-== Usage
-<verbatim>
-  <?plugin AllUsers ?>
-</verbatim>
+== Usage ==
 
-== Arguments
+{{{
+<<AllUsers arguments>>
+}}}
 
-noheader _(default: false)_:
-  Do not display the header
+== Arguments ==
 
-== Example
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
-<verbatim>
-<?plugin AllUsers ?>
-</verbatim>
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **noheader**
+| Do not display the header
+| false
+|-
+| **include_empty**
+| shows also users which stored their preferences, but never saved their homepage
+| true
+|}
 
-<?plugin AllUsers ?>
+== Example ==
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+{{{
+<<AllUsers limit=10>>
+}}}
 
-== See Also
+<<AllUsers limit=10>>
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

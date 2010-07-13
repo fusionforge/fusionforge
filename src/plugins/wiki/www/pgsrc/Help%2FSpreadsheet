@@ -1,11 +1,11 @@
-Date: Sat, 24 Jan 2009 8:15:24 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FSpreadsheet 6436 2009-01-24 10:59:01Z vargenau $
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FSpreadsheet 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSpreadsheet;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Phpwiki has extented the [[Help:Wikicreole|Wikicreole]] syntax of tables so that some simple
@@ -51,8 +51,7 @@ Other wiki text can be placed in the cell, but there can be only one formula per
 
 === Sum ===
 
-<verbatim>
-<< WikicreoleTable
+{{{
 |=Region          |=Telecom Sales  |=Power Sales |=Other       |=TOTAL      |
 |=Europe          |            320 |          80 |         120 |@@=SUM(R)@@ |
 |=Asia            |            580 |         723 |         564 |@@=SUM(R)@@ |
@@ -60,10 +59,8 @@ Other wiki text can be placed in the cell, but there can be only one formula per
 |=South America   |            120 |          35 |          82 |@@=SUM(R)@@ |
 |=Antarctica      |              0 |           0 |          12 |@@=SUM(R)@@ |
 |=TOTAL           |    @@=SUM(C)@@ | @@=SUM(C)@@ | @@=SUM(C)@@ |Grand total: @@=SUM(R)@@ |
->>
-</verbatim>
+}}}
 
-<< WikicreoleTable
 |=Region          |=Telecom Sales  |=Power Sales |=Other       |=TOTAL      |
 |=Europe          |            320 |          80 |         120 |@@=SUM(R)@@ |
 |=Asia            |            580 |         723 |         564 |@@=SUM(R)@@ |
@@ -71,59 +68,80 @@ Other wiki text can be placed in the cell, but there can be only one formula per
 |=South America   |            120 |          35 |          82 |@@=SUM(R)@@ |
 |=Antarctica      |              0 |           0 |          12 |@@=SUM(R)@@ |
 |=TOTAL           |    @@=SUM(C)@@ | @@=SUM(C)@@ | @@=SUM(C)@@ |Grand total: @@=SUM(R)@@ |
->>
 
 Total of both colums and rows is calculated automatically by wiki.
 
 === Count and Sum ===
 
-<verbatim>
-<< WikicreoleTable
+{{{
 |=Bug                |=Priority   |=Subject             |=Status     |=Days to fix
-| 1231 	             | Low        | File Open ...       | Open       | 3
-| 1232 	             | High       | Memory Window ...   | Fixed      | 2
-| 1233 	             | Medium     | Usability issue ... | Assigned   | 5
-| 1234 	             | High       | No arrange ...      | Fixed      | 1
+| 1231               | Low        | File Open ...       | Open       | 3
+| 1232               | High       | Memory Window ...   | Fixed      | 2
+| 1233               | Medium     | Usability issue ... | Assigned   | 5
+| 1234               | High       | No arrange ...      | Fixed      | 1
 | Number of bugs: @@=COUNT(C)@@ | |                     |            | Total: @@=SUM(C)@@ days
->>
-</verbatim>
+}}}
 
-<< WikicreoleTable
 |=Bug                |=Priority   |=Subject             |=Status     |=Days to fix
-| 1231 	             | Low        | File Open ...       | Open       | 3
-| 1232 	             | High       | Memory Window ...   | Fixed      | 2
-| 1233 	             | Medium     | Usability issue ... | Assigned   | 5
-| 1234 	             | High       | No arrange ...      | Fixed      | 1
+| 1231               | Low        | File Open ...       | Open       | 3
+| 1232               | High       | Memory Window ...   | Fixed      | 2
+| 1233               | Medium     | Usability issue ... | Assigned   | 5
+| 1234               | High       | No arrange ...      | Fixed      | 1
 | Number of bugs: @@=COUNT(C)@@ | |                     |            | Total: @@=SUM(C)@@ days
->>
 
 === Min, Max and Average ===
 
-<verbatim>
-<< WikicreoleTable
+{{{
 |=Location            |=Morning     |=Noon        |=Evening     |=Average temperature |
-| Paris 	      | 7           | 13          | 10          | @@=AVERAGE(R)@@     |
-| London 	      | 3           | 10          | 8           | @@=AVERAGE(R)@@     |
-| Berlin 	      | 9           | 15          | 12          | @@=AVERAGE(R)@@     |
-| Tokyo 	      | 12          | 20          | 16          | @@=AVERAGE(R)@@     |
+| Paris               | 7           | 13          | 10          | @@=AVERAGE(R)@@     |
+| London              | 3           | 10          | 8           | @@=AVERAGE(R)@@     |
+| Berlin              | 9           | 15          | 12          | @@=AVERAGE(R)@@     |
+| Tokyo               | 12          | 20          | 16          | @@=AVERAGE(R)@@     |
 | Maximum temperature | @@=MAX(C)@@ | @@=MAX(C)@@ | @@=MAX(C)@@ |                     |
 | Minimum temperature | @@=MIN(C)@@ | @@=MIN(C)@@ | @@=MIN(C)@@ |                     |
->>
-</verbatim>
+}}}
 
-<< WikicreoleTable
 |=Location            |=Morning     |=Noon        |=Evening     |=Average temperature |
-| Paris 	      | 7           | 13          | 10          | @@=AVERAGE(R)@@     |
-| London 	      | 3           | 10          | 8           | @@=AVERAGE(R)@@     |
-| Berlin 	      | 9           | 15          | 12          | @@=AVERAGE(R)@@     |
-| Tokyo 	      | 12          | 20          | 16          | @@=AVERAGE(R)@@     |
+| Paris               | 7           | 13          | 10          | @@=AVERAGE(R)@@     |
+| London              | 3           | 10          | 8           | @@=AVERAGE(R)@@     |
+| Berlin              | 9           | 15          | 12          | @@=AVERAGE(R)@@     |
+| Tokyo               | 12          | 20          | 16          | @@=AVERAGE(R)@@     |
 | Maximum temperature | @@=MAX(C)@@ | @@=MAX(C)@@ | @@=MAX(C)@@ |                     |
 | Minimum temperature | @@=MIN(C)@@ | @@=MIN(C)@@ | @@=MIN(C)@@ |                     |
->>
+
+== Limitations ==
+
+The formulas are evaluated line per line, from left to right.
+
+So this will work:
+
+{{{
+|          10 |         -13 | @@=SUM(R)@@ |
+|          15 |          17 | @@=SUM(R)@@ |
+| @@=SUM(C)@@ | @@=SUM(C)@@ | @@=SUM(R)@@ |
+}}}
+
+|          10 |         -13 | @@=SUM(R)@@ |
+|          15 |          17 | @@=SUM(R)@@ |
+| @@=SUM(C)@@ | @@=SUM(C)@@ | @@=SUM(R)@@ |
+
+And this will not:
+
+{{{
+| @@=SUM(R)@@ |          10 |         -13 |
+| @@=SUM(R)@@ |          15 |          17 |
+| @@=SUM(R)@@ | @@=SUM(C)@@ | @@=SUM(C)@@ |
+}}}
+
+| @@=SUM(R)@@ |          10 |         -13 |
+| @@=SUM(R)@@ |          15 |          17 |
+| @@=SUM(R)@@ | @@=SUM(C)@@ | @@=SUM(C)@@ |
 
 == Author ==
 
 * Marc-Etienne Vargenau, Alcatel-Lucent
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]]
+</noinclude>

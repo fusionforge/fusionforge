@@ -1,32 +1,32 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FGraphVizPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FGraphVizPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FGraphVizPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~GraphViz* [[Help:WikiPlugin|plugin]] passes all its arguments to the grapviz =dot=
+The **~GraphViz** [[Help:WikiPlugin|plugin]] passes all its arguments to the grapviz =dot=
 binary and displays the result as cached image (PNG,GIF,SVG) or
 imagemap.  See http://www.graphviz.org/Documentation.php,
 esp. http://www.graphviz.org/doc/info/lang.html for the *dot* language
 specs.
 
-== Note
-  - We support all image types supported by GD so far, PNG most likely.
-  - On imgtype = imap, cpamx, ismap, cmap an additional mapfile will be produced.
+== Notes ==
+* We support all image types supported by GD so far, PNG most likely.
+* On imgtype = imap, cpamx, ismap, cmap an additional mapfile will be produced.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin GraphViz [options...]
+{{{
+<<GraphViz [options...]
    multiline dot script ...
-?>
-</verbatim>
+>>
+}}}
 
-== Arguments
+== Arguments ==
 
 =imgtype= |
   Default: png
@@ -39,10 +39,10 @@ specs.
 =help= |
   Display argument help.
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin GraphViz
+{{{
+<<GraphViz
 digraph automata_0 {
 	size ="8.5, 11";
 	node  [ shape  = circle];
@@ -56,12 +56,12 @@ digraph automata_0 {
 	2 -> 1 [ label = "other " ];
 	"Machine: a" [ shape = plaintext ];
 }
-?>
-</verbatim>
+>>
+}}}
 
 is rendered as
 
-<?plugin GraphViz
+<<GraphViz
 digraph automata_0 {
 	size ="8.5, 11";
 	node  [shape  = circle];
@@ -75,11 +75,12 @@ digraph automata_0 {
 	2 -> 1 [ label = "other " ];
 	"Machine: a" [ shape = plaintext ];
 }
-?>
+>>
 
-== Author
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
- [Reini Urban|PhpWiki:ReiniUrban]
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

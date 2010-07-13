@@ -1,59 +1,59 @@
-Date: Mon, 26 Jun 2008 14:15:24 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: FindPage 6184 2008-08-22 10:33:41Z vargenau $
+Date: Wed, 12 May 2010 10:23:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: FindPage 7393 2010-05-12 08:25:16Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=FindPage;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Here are some good starting points for browsing.
 
-* [HowToUseWiki|Help:HowToUseWiki] gives you the quick lowdown on Wiki markup.
-* [RecentChanges] recorded automatically.
-* [MoreAboutMechanics|Help:MoreAboutMechanics] of browsing and editing on this server.
+* [[Help:HowToUseWiki|HowToUseWiki]] gives you the quick lowdown on Wiki markup.
+* [[RecentChanges]] recorded automatically.
+* [[Help:MoreAboutMechanics|MoreAboutMechanics]] of browsing and editing on this server.
 
-Here's a title search. Try something like <tt>wiki or sandwich</tt>.
+Here's a title search. Try something like ##wiki or sandwich##.
 
-<?plugin WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
   editbox[] name=s text=""
   submit[]
   checkbox[] name=case_exact
-  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql" ?>
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
 Use the following for a full text search. This takes a few seconds.
 The results will show all lines on a given page which contain a
 match.
 
-<?plugin WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
   editbox[] name=s text=""
   submit[]
   checkbox[] name=case_exact
-  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql" ?>
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
 In a fuzzy pages search the titles of all pages are examined to find
-those which are similarly spelled or similar sounding (english).
+those which are similarly spelled or similar sounding (English).
 
 <?plugin-form FuzzyPages ?>
 
 ------
 
-! Tips
-Separate words with a space. All words have to match as substrings. %%%
-'OR', grouping with parenthesis, string-quoting and some glob-style wildcard 
-characters are also supported. %%%
-To exclude words from a title search or full text search, prepend a '-'. %%%
-Use '^xx' or 'xx*' to match words starting with 'xx'. %%%
-Use '~*xx' or 'xx$' to match words ending with 'xx'. %%%
-Use '^word$' to match exact words. %%%
-Use regex=auto and 're:' like 're:word.*xx' or regex=posix to use posix regular expressions. (not yet) %%%
-Use regex=auto and '//' like '/^word$/' or regex=pcre to match using perl-style regular expressions. %%%
-Use regex=sql to match using SQL-style wildcards '%' and '_'. %%%
-Use regex=none to match any wildcards verbatim. %%%
+== Tips ==
 
-Example: 'wiki text -php' looks for all pages containing the words 'wiki' and 'text',  %%%
-         but not containing the word 'php'.
+* Separate words with a space. All words have to match as substrings.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* To exclude words from a title search or full text search, prepend a '##-##'.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+=== Example ===
+* '##wiki text -php##' looks for all pages containing the words '##wiki##' and '##text##', but not containing the word '##php##'.
 
 ----
-[CategoryActionPage]
+[[PhpWikiDocumentation]]

@@ -1,18 +1,18 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRawHtmlPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRawHtmlPlugin 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRawHtmlPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 With this [[Help:WikiPlugin|plugin]] you can embed raw unfiltered HTML in the page source; say, for example, you want to put in a complicated set of nested tables to display data. By default, raw HTML is not allowed in most Wikis due to security problems (because malicious users can insert redirects, Javascript, etc.)
 
 For this plugin to work, the page must be locked by the administrator. If you are seeing the raw HTML being displayed below, instead of rendered, try locking the page (log in as the administrator first).
 
-<?plugin RawHtml
+<<RawHtml
 
 <!-- Keep link lines at 72 characters or lynx will break them poorly. -->
 <!-- Obviously, we list ONLY the most useful/important URLs here. -->
@@ -49,7 +49,9 @@ For this plugin to work, the page must be locked by the administrator. If you ar
 </td>
 </tr>
 </table>
-?>
+>>
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

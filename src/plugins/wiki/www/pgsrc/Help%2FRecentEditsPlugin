@@ -1,37 +1,39 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRecentEditsPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRecentEditsPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRecentEditsPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 _short description_
 
-== Usage
-<verbatim>
-  <?plugin RecentEdits ?>
-</verbatim>
+== Usage ==
+{{{
+<<RecentEdits>>
+}}}
 
-== Arguments
+== Arguments ==
 
 page _(default: current pagename)_:
   The page to execute upon.
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin RecentEdits ?>
-</verbatim>
+{{{
+<<RecentEdits limit=10>>
+}}}
 
-<?plugin RecentEdits ?>
+<<RecentEdits limit=10>>
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,37 +1,80 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FTitleSearchPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FTitleSearchPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTitleSearchPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~TitleSearch**  [[Help:WikiPlugin|plugin]] displays results of pagename search.
 
-== Usage
-<verbatim>
-  <?plugin TitleSearch ?>
-</verbatim>
+If only one page is found and auto_redirect is true, this page is displayed immediately,
+otherwise the found page list is displayed.
 
-== Arguments
+== Usage ==
+{{{
+<?plugin-form TitleSearch arguments ?>
+}}}
 
-page _(default: current pagename)_:
-  The page to execute upon.
+== Arguments ==
 
-== Example
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
-<verbatim>
-<?plugin TitleSearch ?>
-</verbatim>
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| string to search
+| //none//
+|-
+| **auto_redirect**
+| if true and only one page is found, this page is displayed immediately
+| false
+|-
+| **noheader**
+|
+| false
+|-
+| **exclude**
+|
+| false
+|-
+| **info**
+|
+| false
+|-
+| **case_exact**
+|
+| false
+|-
+| **regex**
+|
+| auto
+|-
+| **format**
+|
+| false
+|}
 
-<?plugin TitleSearch ?>
+== Example ==
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+{{{
+<?plugin-form TitleSearch ?>
+}}}
 
-== See Also
+<?plugin-form TitleSearch ?>
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

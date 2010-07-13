@@ -1,21 +1,21 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FWhoIsOnlinePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FWhoIsOnlinePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWhoIsOnlinePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~WhoIsOnline* [[Help:WikiPlugin|plugin]] shows summary information of the current user sessions.
+The **~WhoIsOnline** [[Help:WikiPlugin|plugin]] shows summary information of the current user sessions.
 
-== Usage
-<verbatim>
-<?plugin WhoIsOnline ?>
-</verbatim>
+== Usage ==
+{{{
+<<WhoIsOnline arguments>>
+}}}
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -23,35 +23,37 @@ The *~WhoIsOnline* [[Help:WikiPlugin|plugin]] shows summary information of the c
 ! Description
 ! Default value
 |-
-| mode
+| **mode**
 | summary or detail
 | summary
 |-
-| pagename
-| refer to the page with the other mode
+| **pagename**
+| Refer to the page with the other mode
 | [pagename]
 |-
-| allow_detail
-| if false, page is ignored
+| **allow_detail**
+| If false, page is ignored
 | false
 |-
-| mode
+| **mode**
 | 
 | false
 |}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin WhoIsOnline ?>
-</verbatim>
+{{{
+<<WhoIsOnline>>
+}}}
 
-<?plugin WhoIsOnline ?>
+<<WhoIsOnline>>
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

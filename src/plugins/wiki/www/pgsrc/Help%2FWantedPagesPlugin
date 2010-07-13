@@ -1,37 +1,72 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FWantedPagesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FWantedPagesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWantedPagesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~WantedPages** [[Help:WikiPlugin|plugin]] returns a list of referenced pages which do not exist yet.
 
-== Usage
-<verbatim>
-  <?plugin WantedPages ?>
-</verbatim>
+All empty pages which are linked from any page - with an ending question mark, or for just a single page, when the page argument is present.
 
-== Arguments
+== Usage ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{{{
+<<WantedPages arguments>>
+}}}
 
-== Example
+== Arguments ==
 
-<verbatim>
-<?plugin WantedPages ?>
-</verbatim>
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
-<?plugin WantedPages ?>
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| just for a single page
+| pagename
+|-
+| **withlinks**
+| display links
+| 0
+|-
+| **noheader**
+| do not display header
+| false
+|-
+| **exclude_from**
+| pages to exclude
+| PgsrcTranslation, InterWikiMap
+|-
+| **limit**
+| maximum number of wanted pages to display
+| 100
+|-
+| **paging**
+| 
+| auto
+|}
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== Example ==
 
-== See Also
+{{{
+<<WantedPages>>
+}}}
 
+<<WantedPages>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

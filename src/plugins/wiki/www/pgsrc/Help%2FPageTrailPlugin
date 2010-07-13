@@ -1,26 +1,26 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FPageTrailPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FPageTrailPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageTrailPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~PageTrail* [[Help:WikiPlugin|plugin]] displays the recently visited pages.
+The **~PageTrail** [[Help:WikiPlugin|plugin]] displays the recently visited pages.
 
-== Usage
+== Usage ==
 
 Typically add to some template at the top or at the bottom. See themes/blog.
 
-<verbatim>
-<?plugin PageTrail ?>
-<?plugin PageTrail numberlinks=5 ?>
-<?plugin PageTrail invisible=1 ?>
-</verbatim>
+{{{
+<<PageTrail>>
+<<PageTrail numberlinks=5>>
+<<PageTrail invisible=1>>
+}}}
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -28,35 +28,37 @@ Typically add to some template at the top or at the bottom. See themes/blog.
 ! Description
 ! Default value
 |-
-| numberlinks
+| **numberlinks**
 | number of links to display
 | 5
 |-
-| invisible
+| **invisible**
 | 
 | false
 |-
-| duplicates
+| **duplicates**
 | 
 | false
 |}
 
-== Optional Configuration
+== Optional Configuration ==
 
 define('PAGETRAIL_ARROW', " => ") in the sourcecode or add it to config.ini
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin PageTrail ?>
-</verbatim>
+{{{
+<<PageTrail>>
+}}}
 
-<?plugin PageTrail ?>
+<<PageTrail>>
 
-== Author
-* [Carsten Klapp|PhpWiki:CarstenKlapp]
+== Author ==
+* [[PhpWiki:CarstenKlapp|Carsten Klapp]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

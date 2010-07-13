@@ -1,37 +1,45 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Template%2FNewPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Template%2FNewPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Template%2FNewPlugin;
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+//short description of the plugin//
 
-== Usage
-<verbatim>
-  <?plugin New ?>
-</verbatim>
+== Usage ==
+{{{
+<<New arguments>> 
+}}}
 
-== Arguments
+== Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| The page to execute upon
+| current pagename
+|}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin New ?>
-</verbatim>
+{{{
+<<New page=HomePage>> 
+}}}
 
-<?plugin New ?>
+== Author ==
+* //plugin author name//
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== See Also ==
 
-== See Also
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

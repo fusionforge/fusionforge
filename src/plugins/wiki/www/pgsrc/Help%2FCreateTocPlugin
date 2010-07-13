@@ -1,25 +1,25 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FCreateTocPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FCreateTocPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCreateTocPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~CreateToc* [[Help:WikiPlugin|plugin]] allows to create a dynamical *Table of Contents* of all headers. It also allows to number the headers in the page.
+The **~CreateToc** [[Help:WikiPlugin|plugin]] allows to create a dynamical **Table of Contents** of all headers. It also allows to number the headers in the page.
 
 The headers might be in classic Phpwiki syntax or in Wikicreole/Mediawiki syntax (see below).
 
 The Table of Contents can easily be inserted by clicking on the TOC button in the Edit toolbar.
 
-!!! Usage
-<verbatim>
-<?plugin CreateToc arguments ?>
-</verbatim>
+== Usage ==
+{{{
+<<CreateToc arguments>>
+}}}
 
-!!! Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -27,69 +27,69 @@ The Table of Contents can easily be inserted by clicking on the TOC button in th
 ! Description
 ! Default value
 |-
-| <b>extracollapse</b>
+| **extracollapse**
 | Provide a button to hide/display the Table of Contents
 | true
 |-
-| <b>firstlevelstyle</b>
+| **firstlevelstyle**
 | Style of first level numbering: number, letter or roman.
 | number
 |-
-| <b>headers</b>
+| **headers**
 | Which headers to include. See below.
 | 1,2,3,4,5
 |-
-| <b>indentstr</b>
+| **indentstr**
 | Indent string.
 | &nbsp;&nbsp;
 |-
-| <b>jshide</b>
+| **jshide**
 | Boolean if the Table of Contents should be initially hidden and on click expanded.
 | false
 |-
-| <b>liststyle</b>
+| **liststyle**
 | List style: dl or ol or ul. Using ol is equivalent to with_counter=1.
 | dl
 |-
-| <b>noheader</b>
+| **noheader**
 | Boolean if the Table of Contents header should be omitted.
 | false
 |-
-| <b>notoc</b>
+| **notoc**
 | Boolean if the Table of Contents should no be displayed (headers are numbered).
 | false
 |-
-| <b>pagename</b>
+| **pagename**
 | Table of Contents of which page?
 | current pagename
 |-
-| <b>position</b>
+| **position**
 | Where to display the Table of Contents: full, left or right.
 | full
 |-
-| <b>width</b>
+| **width**
 | Width of Table of Contents (if position is left or right)
 | 200px
 |-
-| <b>with_counter</b>
+| **with_counter**
 | Boolean if hierarchical prefixes should be added.
 | false
 |-
-| <b>with_toclink</b>
+| **with_toclink**
 | Boolean if headers should link back to the Table of Contents.
 | false
 |}
 
-!! Headers
+=== Headers ===
 
 Syntax: a comma-separated list of levels. !!!,!!,! also allowed
 
 {| class="bordered"
 |-
-| Level
-| Phpwiki syntax
-| Wikicreole/Mediawiki syntax
-| HTML rendering
+! Level
+! Phpwiki syntax
+! Wikicreole/Mediawiki syntax
+! HTML rendering
 |-
 | 1 || ~!~!~! || ~=~= || h2
 |-
@@ -97,50 +97,52 @@ Syntax: a comma-separated list of levels. !!!,!!,! also allowed
 |-
 | 3 || ~! || ~=~=~=~= || h4
 |-
-| 4 || ''None'' || ~=~=~=~=~= || h5
+| 4 || //None// || ~=~=~=~=~= || h5
 |-
-| 5 || ''None'' || ~=~=~=~=~=~= || h6
+| 5 || //None// || ~=~=~=~=~=~= || h6
 |}
 
-!!! Examples
+== Examples ==
 
-!! Default values
-<verbatim>
-<?plugin CreateToc ?>
-</verbatim>
+=== Default values ===
+{{{
+<<CreateToc>>
+}}}
 
-!! Only two levels of headers
-<verbatim>
-<?plugin CreateToc headers=1,2 ?>
-</verbatim>
+=== Only two levels of headers ===
+{{{
+<<CreateToc headers=1,2>>
+}}}
 
-!! Table of Contents with hierarchical numbering
-<verbatim>
-<?plugin CreateToc with_counter=1 ?>
-</verbatim>
+=== Table of Contents with hierarchical numbering ===
+{{{
+<<CreateToc with_counter=1>>
+}}}
 
-!! No Table of Contents, but headers are numbered
-<verbatim>
-<?plugin CreateToc notoc=1 ?>
-</verbatim>
+=== No Table of Contents, but headers are numbered ===
+{{{
+<<CreateToc notoc=1>>
+}}}
 
-!! Table of Contents with hierarchical numbering, first level in roman
-<verbatim>
-<?plugin CreateToc with_counter=1 firstlevelstyle=roman ?>
-</verbatim>
+=== Table of Contents with hierarchical numbering, first level in roman ===
+{{{
+<<CreateToc with_counter=1 firstlevelstyle=roman>>
+}}}
 
-See also [PhpWikiDemo:en/TextFormattingRules]
+== See Also ==
+* [[PhpWikiDemo:en/TextFormattingRules]]
 
-!!! Known Problems
+== Known Problems ==
 
-* If you include pages via [Template|Help:TemplatePlugin] or [IncludePage|Help:IncludePagePlugin] plugins, the Table of Contents will not contain the headers of the included pages.
+* If you include pages via [[Help:TemplatePlugin|Template]] or [[Help:IncludePagePlugin|IncludePage]] plugins, the Table of Contents will not contain the headers of the included pages.
 * The Table of Contents will be incorrect if a header contains:
-** a [Template|Help:TemplatePlugin] plugin call via ~{~{ ~}~},
+** a [[Help:TemplatePlugin|Template]] plugin call via ~{~{ ~}~},
 ** an image,
 ** or a ~~.
 * If you preview the page, the Table of Contents will not be correct if you modified headers. The Table of Contents will be taken from the last saved revision.
 * If you display an old revision of a page, the Table of Contents will not be correct. The Table of Contents will be taken from the last saved revision.
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
-
+</noinclude>

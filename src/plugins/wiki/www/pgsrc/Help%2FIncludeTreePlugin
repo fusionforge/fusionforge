@@ -1,0 +1,36 @@
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FIncludeTreePlugin 7566 2010-06-23 19:43:46Z rurban $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FIncludeTreePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Dynamic Category Tree
+
+== Usage ==
+
+{{{
+<<IncludeTree arguments>>
+}}}
+
+== Arguments ==
+
+TBD
+
+== Example ==
+
+TBD
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+* [[Help:SiteMapPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

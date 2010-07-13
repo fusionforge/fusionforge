@@ -1,39 +1,39 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FPagePermissions 6451 2009-01-24 21:40:21Z vargenau $
+Date: Tue,  1 Jun 2010 17:01:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FPagePermissions 7461 2010-06-01 15:08:17Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPagePermissions;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== Full recursive ACL page permissions support (Solaris / Windows style)
+== Full recursive ACL page permissions support (Solaris / Windows style) ==
 
-Boolean permissions per page and action (*granted* or *denied*) based on the current users
+Boolean permissions per page and action (**granted** or **denied**) based on the current users
 group membership is implemented with ACL's (Access Control Lists).
-Opposed to the simplier unix like ugo:rwx system. <br>
+Opposed to the simplier unix like ugo:rwx system. \\
 The previous system was only based on action and current user, independent of pages.
 
 A individual page permission may be inherited from its parent pages, and
-from an optional master page ("." or _dotpage'). <br>
-Use predefined default permissions, if a "." page does not exist. <br>
+from an optional master page ("." or _dotpage'). \\
+Use predefined default permissions, if a "." page does not exist. \\
 Pagenames starting with "." have tighter default permissions. (edit, change, list disallowed)
 
-=== Order of Evaluation (denial overrides granted, or vice versa?)
+=== Order of Evaluation (denial overrides granted, or vice versa?) ==
 
-The array of permissions is evaluated from top to bottom. <br>
-Access is granted if the next matching *group membership* returns true, denied if false. <br>
-If the group membership is false, the next group is tried. <br>
-If no group membership matches the upper permissions are tried recursively: <br>
-  current page => basepage => "." page => default perms. <br>
+The array of permissions is evaluated from top to bottom. \\
+Access is granted if the next matching **group membership** returns true, denied if false. \\
+If the group membership is false, the next group is tried. \\
+If no group membership matches the upper permissions are tried recursively: \\
+  current page => basepage => "." page => default perms. \\
 If no group-perm pair grants access, access is denied.
 
 Consider the following perm:
-<verbatim>
+{{{
      'change' => array(ACL_ADMIN => false,
                        ACL_OWNER => true));
-</verbatim>
+}}}
   => "Members of ADMIN may not change, the owner may change."
 
 -----
@@ -47,7 +47,7 @@ Enable/Disable it in config/config.ini:
   ENABLE_PAGEPERM = true
 
 The defined (and extendable) main.php actions map to simplier access types:
-<verbatim>
+{{{
        browse => view
        edit   => edit
        create => edit or create
@@ -55,20 +55,19 @@ The defined (and extendable) main.php actions map to simplier access types:
        rename => change
        store prefs => change
        list in PageList => list
-</verbatim>
+}}}
 
 For simplicity we also map the ACL to the posix-style _owner_, _group_ and _world_ groups
 and _read_, _write_, _execute_ perms, in cygwin fashion.
 
-== Groups - definition of group membership
+== Groups - definition of group membership ==
 
-See WikiGroup how to enable and where to store user-specific group membership.
+See ~WikiGroup how to enable and where to store user-specific group membership.
 Group methods: database, file, ldap, wikipage, none
 
-ToDo: _explain better._
+To do: _explain better._
 
 The following special groups are always predefined, even if no other group methods are provided:
-
 * _EVERY
 * _ANONYMOUS
 * _BOGOUSER
@@ -80,53 +79,43 @@ The following special groups are always predefined, even if no other group metho
 * _CREATOR
 
 Those special groups are stored in a page acl as locale-independent string.
-  *Todo*: See the available translations for these special groups.
+
+**To do**: See the available translations for these special groups.
+
 Other group names are safed as defined by the group methods. (e.g. "Other Users")
 
-== Perms - mapping of actions to permissions
+== Perms - mapping of actions to permissions ==
 
-PhpWiki supports individual actions, the default is browse. To simplify ACL's these
+~PhpWiki supports individual actions, the default is browse. To simplify ACL's these
 actions are mapped to some special permissions (vulgo _'perms'_).
 
 We currently support the following permissions which can be stored in every page, for every group.
 
-* 'list'     List this page and all subpages (for PageList)
-* 'view'     View this page and all subpages
-* 'edit'     Edit this page and all subpages
-* 'create'   Create a new (sub)page
-* 'dump'     Download the page contents
-* 'change'   Change page attributes
-* 'remove'   Remove this page
+|= list   | List this page and all subpages (for PageList)
+|= view   | View this page and all subpages
+|= edit   | Edit this page and all subpages
+|= create | Create a new (sub)page
+|= dump   | Download the page contents
+|= change | Change page attributes
+|= remove | Remove this page
 
 There are no plans to support additional custom perms. The API can handle that, but there's no UI,
 and it would be only specific for certain plugins, which check permissions by their own.
 
-=== Action <=> Perm mapping
+=== Action <=> Perm mapping ===
 
-Those perms are mapped to those actions. [ActionPages|Help:ActionPage] (plugins) check their access restrictions by themselves.
+Those perms are mapped to those actions. [[Help:ActionPage|Action Pages]] (plugins) check their access restrictions by themselves.
 
-list:
-  _none, 'list' is checked for every pagename listed in PageList, to prevent from being listed in AllPages._
+|= list   | //none, 'list' is checked for every pagename listed in PageList, to prevent from being listed in AllPages.//
+|= view   | browse, viewsource, diff, select, xmlrpc, search, pdf 
+|= dump   | zip, ziphtml, dumpserial, dumphtml 
+|= edit   | revert, edit 
+|= create | //edit or create, if the page doesn't exist yet//
+|= change | upload, loadfile, remove, lock, unlock, upgrade, chown, setacl, rename. \\ All other actionpages which are not wikiwords.
 
-view:
-  browse, viewsource, diff, select, xmlrpc, search, pdf
+=== Default Permissions ===
 
-dump:
-  zip, ziphtml, dumpserial, dumphtml
-
-edit:
-  revert, edit
-
-create:
-  _edit or create, if the page doesn't exist yet_
-
-change:
-  upload, loadfile, remove, lock, unlock, upgrade, chown, setacl, rename. %%%
-  all other actionpages which are not wikiwords.
-
-=== Default Permissions
-
-<verbatim>
+{{{
         $perm = array('view'   => array(ACL_EVERY => true),
                       'edit'   => array(ACL_EVERY => true),
                       'create' => array(ACL_EVERY => true),
@@ -158,8 +147,9 @@ change:
             $perm['create'] = $perm['edit'];
         }
         return $perm;
-</verbatim>
+}}}
 
-Source: [PhpWikiCvs:lib/PagePerm.php]
------
+<noinclude>
+----
 [[PhpWikiDocumentation]]
+</noinclude>

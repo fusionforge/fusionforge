@@ -1,16 +1,16 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FTranscludePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FTranscludePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTranscludePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *Transclude* [[Help:WikiPlugin|plugin]] can be used to embed include whole (external) web pages within a wiki page.
+The **Transclude** [[Help:WikiPlugin|plugin]] can be used to embed include whole (external) web pages within a wiki page.
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -18,48 +18,40 @@ The *Transclude* [[Help:WikiPlugin|plugin]] can be used to embed include whole (
 ! Description
 ! Default value
 |-
-| src
+| **src**
 | The URL of the page to transclude
-| ''none''
+| //none//
 |-
-| title
+| **title**
 | The title of the page to transclude
-| ''Transcluded page''
+| //Transcluded page//
 |-
-| height
+| **height**
 | The (initial) height of the transclusion frame. If, possible, after the transcluded page is loaded, the frame is resized via Javascript so that it fits the entire transcluded page. (See below for more.)
 | 450
 |-
-| quiet
+| **quiet**
 | If set, frame appears as normal content
 | false 
 |}
 
-== Bugs / Caveats
+== Bugs / Caveats ==
 
-o Pages are transcluded using =<iframe>= tags.  Older browsers do not
-  support ''iframe''s.  In that case the user will be presented with a
-  link to the transcluded material.
+* Pages are transcluded using ##<iframe>## tags.  Older browsers do not support //iframe//s.  In that case the user will be presented with a link to the transcluded material.
+* When possible, Javascript code is used to adjust the height of the //iframe// so that it fits the entire transcluded page.  Unfortunately, this seems possible only when the transcluded page comes from the same server as the wiki page.  (This restriction is due to security checks built in to the Javascript language.)
+* The recursion detection code does not currently work.  Be careful to avoid recursive transclusions, or you'll be sorry (or at least amused.)
 
-o When possible, Javascript code is used to adjust the height of the
-  _iframe_ so that it fits the entire transcluded page.
-  Unfortunately, this seems possible only when the transcluded page
-  comes from the same server as the wiki page.  (This restriction is
-  due to security checks built in to the Javascript language.)
+== Example ==
 
-o The recursion detection code does not currently work.  Be careful to
-  avoid recursive transclusions, or you'll be sorry (or at least
-  amused.)
-
-== Example
-
-<verbatim>
-<?plugin Transclude src="http://phpwiki.sourceforge.net/demo/ChangeLog" ?>
-</verbatim>
+{{{
+<<Transclude src="http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/ReleaseNotes?view=markup">>
+}}}
 
 will get you
 
-<?plugin Transclude src="http://phpwiki.sourceforge.net/demo/ChangeLog" ?>
+<<Transclude src="http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/pgsrc/ReleaseNotes?view=markup">>
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

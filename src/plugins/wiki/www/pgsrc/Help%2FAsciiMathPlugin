@@ -1,38 +1,40 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAsciiMathPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAsciiMathPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAsciiMathPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== Usage
-<verbatim>
-<?plugin AsciiMath  sum_(i=1)^n i = (n(n+1))/2  ?>
-</verbatim>
+== Usage ==
+{{{
+<<AsciiMath formula >>
+}}}
 
-== Arguments
+== Arguments ==
 
-All arguments are passed to the ASCIIMath PHP library and rendered as
-MATHML.
+All arguments are passed to the
+[[http://www1.chapman.edu/~jipsen/asciimath.html|ASCII Math PHP library]]
+and rendered as
+[[http://www.w3.org/Math/|Math ML]].
 
-See [http://www1.chapman.edu/~jipsen/asciimath.html]
+== Example ==
 
-== Example
+{{{
+<<AsciiMath sum_(i=1)^n i = (n(n+1))/2 >>
+}}}
 
-<verbatim>
-<?plugin AsciiMath  sum_(i=1)^n i = (n(n+1))/2 ?>
-</verbatim>
+<<AsciiMath sum_(i=1)^n i = (n(n+1))/2 >>
 
-<?plugin AsciiMath   sum_(i=1)^n i = (n(n+1))/2 ?>
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== Author
-* [Reini Urban|PhpWiki:ReiniUrban]
+== See Also ==
+* Help:AsciiSVGPlugin
 
-== See Also
-Help:AsciiSvgPlugin
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

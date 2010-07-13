@@ -1,37 +1,39 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FHtmlConverterPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FHtmlConverterPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FHtmlConverterPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~HtmlConverter* [[Help:WikiPlugin|plugin]] will convert HTML tags as far to Wiki markup as possible and eliminate all other HTML markup, so the output can be copied and pasted into a wiki page.
+The **~HtmlConverter** [[Help:WikiPlugin|plugin]] will convert HTML tags as far to Wiki markup as possible and eliminate all other HTML markup, so the output can be copied and pasted into a wiki page.
 
-== Usage
-<verbatim>
-  <?plugin HtmlConverter ?>
-</verbatim>
+== Usage ==
+{{{
+<<HtmlConverter>>
+}}}
 
-== Arguments
+== Arguments ==
 
 None
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin HtmlConverter ?>
-</verbatim>
+{{{
+<<HtmlConverter>>
+}}}
 
-<?plugin HtmlConverter ?>
+<<HtmlConverter>>
 
-== Authors
+== Authors ==
 * [Hendrik Scheider|mailto:hendrik.scheider@wincor-nixdorf.com]
-* [Reini Urban|PhpWiki:ReiniUrban]
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

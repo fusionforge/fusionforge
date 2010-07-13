@@ -1,40 +1,42 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FVisualWikiPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FVisualWikiPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FVisualWikiPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~VisualWiki* [[Help:WikiPlugin|plugin]] produces a graphical site map of ~PhpWiki.
+The **~VisualWiki** [[Help:WikiPlugin|plugin]] produces a graphical site map of ~PhpWiki.
 
 It produces a graphical sitemap of ~PhpWiki by calling the <code>dot</code> commandline tool from Graphviz (http://www.graphviz.org).
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin VisualWiki ?>
-</verbatim>
+{{{
+<<VisualWiki>>
+}}}
 
-== Arguments
+== Arguments ==
 
 page _(default: current pagename)_:
   The page to execute upon.
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin VisualWiki ?>
-</verbatim>
+{{{
+<<VisualWiki>>
+}}}
 
-<?plugin VisualWiki ?>
+<<VisualWiki>>
 
-== Author
+== Author ==
 * Johannes Grosse
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

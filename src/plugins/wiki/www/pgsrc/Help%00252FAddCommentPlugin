@@ -1,41 +1,60 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAddCommentPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAddCommentPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAddCommentPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~AddComment* [[Help:WikiPlugin|plugin]] lets users attach comments to the end of a page.
+The **~AddComment** [[Help:WikiPlugin|plugin]] lets users attach comments to the end of a page.
 Change the layout via the templates comment.tmpl and addcomment.tmpl, and the CSS classes
 wikicomment, wikicomment-header, wikicomment-body, wikicomment-footer
 
-== Usage
-<verbatim>
-<?plugin AddComment order||=normal jshide||=0 mode||=show,add noheader||=0 ?>
-</verbatim>
+== Usage ==
+{{{
+<<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0>>
+}}}
 
-== Arguments
-__jshide__: |
-  Boolean if the comments and/or textbox should be initially hidden and on click expanded. Default: 0
-__order__:  |
-  List comments in chronological (order=normal) or reverse order (order=reverse)
-__mode__:  |
-  List of add and/or show.  Default: add,show
-__noheader__:  |
-  Boolean if the "Comments" header should be omitted. Default: 0
-__pagename__:  |
-  Attach to which page? Default: current pagename
+== Arguments ==
 
-== Known Problems
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **jshide**
+| Boolean if the comments and/or textbox should be initially hidden and on click expanded. 
+| 0
+|-
+| **order**
+| List comments in chronological (order=normal) or reverse order (order=reverse)
+| normal
+|-
+| **mode**
+| List of add and/or show.  
+| add,show
+|-
+| **noheader**
+| Boolean if the "Comments" header should be omitted. 
+| 0
+|-
+| **pagename**
+| Attach to which page? 
+| current pagename
+|}
 
-jshide does not work yet. Not very well tested.
+== Known Problems ==
 
-== Examples
+* jshide does not work yet. Not very well tested.
 
-<?plugin AddComment jshide||=1 ?>
+== Examples ==
 
+<<AddComment jshide||=1>>
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

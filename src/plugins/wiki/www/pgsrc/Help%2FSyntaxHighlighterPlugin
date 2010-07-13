@@ -1,62 +1,80 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FSyntaxHighlighterPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Fri,  7 May 2010 15:25:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FSyntaxHighlighterPlugin 7389 2010-05-10 12:05:19Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSyntaxHighlighterPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~SyntaxHighlighter* [[Help:WikiPlugin|plugin]] passes all its arguments through a C++
+The **~SyntaxHighlighter** [[Help:WikiPlugin|plugin]] passes all its arguments through a C++
 highlighter called "highlight" (available at http://www.andre-simon.de/).
 
-== Arguments
-syntax |
-  (required), See http://www.andre-simon.de/doku/highlight/highlight.html 
-style |
-  ~[ "ansi", "gnu", "kr", "java", "linux" ~] (required)
-color |
-  null (optional), see =highlight/themes=
-number |
-  0  (optional)
-wrap |
-  0  (optional)
+== Arguments ==
 
-== Example
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **syntax**
+| 
+| (required), See http://www.andre-simon.de/doku/highlight/highlight.html
+|-
+| **style**
+| 
+| ~[ "ansi", "gnu", "kr", "java", "linux" ~] (required)
+|-
+| **color**
+| 
+| null (optional), see ##highlight/themes##
+|-
+| **number**
+| 
+| 0  (optional)
+|-
+| **wrap**
+| 
+| 0  (optional)
+|}
 
-<verbatim>
-<?plugin SyntaxHighlighter syntax=c style=kr color=emacs
+== Example ==
+
+{{{
+<<SyntaxHighlighter syntax=c style=kr color=emacs
  #include <stdio.h>
 
  int main() {
  printf("Lalala\n");
  }
-?>
-</verbatim>
+>>
+}}}
 
-=>
+will give:
 
-<?plugin SyntaxHighlighter syntax=c style=kr color=emacs
+<<SyntaxHighlighter syntax=c style=kr color=emacs
  #include <stdio.h>
 
  int main() {
  printf("Lalala\n");
  }
-?>
+>>
 
 I did not use beautifier, because it used up more than 8M of memory on
 my system and PHP killed it. I'm not sure whether this is a problem
 with my integration, or with beautifier itself.
 
-== Author 
+== Authors ==
 
-alecthomas
-
-Fixes by [Reini Urban|PhpWiki:ReiniUrban]:
-* support options: syntax, style, color.
-* php version switch
-* HIGHLIGHT_DATA_DIR, HIGHLIGHT_EXE constants
-
+* alecthomas
+* Fixes by [[PhpWiki:ReiniUrban|Reini Urban]]:
+** support options: syntax, style, color,
+** php version switch,
+** HIGHLIGHT_DATA_DIR, HIGHLIGHT_EXE constants,
+ 
+<noinclude>
 ----
-[[PhpWikiDocumentation]] [[CategoryWikiPlugin]] 
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

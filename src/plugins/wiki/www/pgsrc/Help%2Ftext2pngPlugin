@@ -1,11 +1,11 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2Ftext2pngPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2Ftext2pngPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2Ftext2pngPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Convert text into a png image using GD without using [WikiPluginCached|Help:WikiPlugin].
@@ -14,12 +14,13 @@ which are not timestamp checked at all. Delete the .png file(s) if you change an
 
 This is a really simple and stupid plugin, which might need some work.
 
-== Usage
-<verbatim>
-  <?plugin text2png text="some text" ?>
-</verbatim>
+== Usage ==
 
-== Arguments
+{{{
+<<text2png text="some text">>
+}}}
+
+== Arguments ==
 
 text:
   some text to display
@@ -38,22 +39,23 @@ shadowcolor:
 backcolor:
   #ffffff
 
-
-=== Configurable Options
+=== Configurable Options ===
 
 See the sourcecode. You'd probably need to adjust $ttfont and text2png_debug.
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin text2png text='Hello WikiWorld!' ?>
-</verbatim>
+{{{
+<<text2png text='Hello WikiWorld!'>>
+}}}
 would produce:
-<?plugin text2png text='Hello WikiWorld!' ?>
+<<text2png text='Hello WikiWorld!'>>
 
-== See Also
-* [Help:TeX2PngPlugin]
-* [Help:TexToPngPlugin]
+== See Also ==
+* [[Help:TeX2PngPlugin]]
+* [[Help:TexToPngPlugin]]
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,27 +1,69 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAuthorHistoryPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAuthorHistoryPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAuthorHistoryPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~AuthorHistory* [[Help:WikiPlugin|plugin]] allows you to list the history of edits by a particular
-author; you can specify the page name as well (default is the current
-page).
+The **~AuthorHistory** [[Help:WikiPlugin|plugin]] allows you to list the history of edits by a particular
+author; you can specify the page name as well (default is the current page).
 
-<verbatim>
-<?plugin AuthorHistory user="test" ?>
+== Usage ==
+{{{
+<<AuthorHistory arguments>>
+}}}
 
-<?plugin AuthorHistory page=HomePage ?>
-</verbatim>
+== Arguments ==
 
-The second example will default to the current page. We can't provide
-examples for you since we don't know any potential usernames for your
-wiki.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **exclude**
+| Pages to exclude
+| none
+|-
+| **noheader**
+| Do not display page header
+| false
+|-
+| **includeminor**
+| Include minor modifications
+| false
+|-
+| **includedeleted**
+| Include deleted pages
+| false
+|-
+| **author**
+| Display modification by this author
+| Current user
+|-
+| **page**
+| Give a page name or "all"
+| Current page
+|-
+| **info**
+| Info to display in the table
+| version, minor, author, summary, mtime
+|}
 
--------------
+== Examples ==
 
+{{{
+<<AuthorHistory page=HomePage includeminor=1>>
+}}}
+
+{{{
+<<AuthorHistory page=all>>
+}}}
+
+<noinclude>
+----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

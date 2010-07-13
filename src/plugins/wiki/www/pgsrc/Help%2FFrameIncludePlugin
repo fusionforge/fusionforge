@@ -1,32 +1,34 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FFrameIncludePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FFrameIncludePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FFrameIncludePlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~FrameInclude* [[Help:WikiPlugin|plugin]] will create an HTML frame that will fill the entire display area of the page (that is, the whole area the user is allowed to edit). All other text will be discarded when the page is rendered (anything outside the call to plugin, that is). In the language of hypertext this is called <i>transclusion</i>.
+The **~FrameInclude** [[Help:WikiPlugin|plugin]] will create an HTML frame that will fill the entire display area of the page (that is, the whole area the user is allowed to edit). All other text will be discarded when the page is rendered (anything outside the call to plugin, that is). In the language of hypertext this is called //transclusion//.
 
-You might also be interested in the [IncludePage|Help:IncludePagePlugin] plugin.
+You might also be interested in the [[Help:IncludePagePlugin|IncludePage]] plugin.
 
-== Examples 
+== Examples ==
 
-To include a page from another site, use the <b>src</b> attribute:
+To include a page from another site, use the **src** attribute:
 
-<verbatim>
-<?plugin FrameInclude src="http://phpwiki.org/" ?>
-</verbatim>
+{{{
+<<FrameInclude src="http://phpwiki.org/">>
+}}}
 
-To include a page from within this wiki, use the <b>page</b> attribute:
+To include a page from within this wiki, use the **page** attribute:
 
-<verbatim>
-<?plugin FrameInclude page=HomePage ?>
-</verbatim>
+{{{
+<<FrameInclude page=HomePage>>
+}}}
 
 For more information on this plugin please read the PHP source code in the /lib/plugin directory.
 
------
+<noinclude>
+----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

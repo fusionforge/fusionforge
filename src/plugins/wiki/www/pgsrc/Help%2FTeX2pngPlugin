@@ -1,26 +1,27 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FTeX2pngPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FTeX2pngPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTeX2pngPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~TeX2png* [[Help:WikiPlugin|plugin]] allows to display mathematical formulae in a Wiki page.
+The **~TeX2png** [[Help:WikiPlugin|plugin]] allows to display mathematical formulae in a Wiki page.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$" ?>
-</verbatim>
+{{{
+<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$">>
+}}}
 
 gives
 
-<?plugin TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$" ?>
+<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$">>
 
-== Arguments
+== Arguments ==
+
 There is only one argument which is the text of the mathematical
 expression. This text *must be* enclosed by a dollar $ within a
 paragraph or two dollars $$ on a separate line. In the last case,
@@ -29,37 +30,39 @@ all is centered.
 To write mathematical formulae, the syntax is the one
 of [LaTeX | http://www.latex-project.org].
 
-== Caveats
+== Caveats ==
 
 This plugin is only to produce readable mathematical formulae. Any
 other text is not allowed : so if an expression is not enclosed by
 dollars then it will be displayed by a red text. It is all the same
-possible to display raw text as <?plugin TeX2png text="$\textrm{\LaTeX}$" ?> by using :
+possible to display raw text as <<TeX2png text="$\textrm{\LaTeX}$">> by using :
 
-<verbatim>
-<?plugin TeX2png text="$\textrm{\LaTeX}$" ?>
-</verbatim>
+{{{
+<<TeX2png text="$\textrm{\LaTeX}$">>
+}}}
 
-This [[Help:WikiPlugin|plugin]] is not able to produce sophisticated mathematicals texts
+This* [[Help:WikiPlugin|plugin]] is not able to produce sophisticated mathematicals texts
 with links, cross references... For that, you can use for example
 [LaTeX2html|http://www.latex2html.org/].
 
-== Examples
+== Examples ==
 
-Some Greeks letters : <?plugin TeX2png text="$\alpha$" ?>, <?plugin TeX2png text="$\beta$" ?>, ... and a formula <?plugin TeX2png text="$\sum_{i=1}^n \frac1{i^2}=\frac{\pi^2}{6}$" ?> to test display in a paragraph.
+Some Greeks letters : <<TeX2png text="$\alpha$">>, <<TeX2png text="$\beta$">>, ... and a formula <<TeX2png text="$\sum_{i=1}^n \frac1{i^2}=\frac{\pi^2}{6}$">> to test display in a paragraph.
 
-*Exercise 1* Consider the function <?plugin TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$" ?>
+*Exercise 1* Consider the function <<TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$">>
 
 #Give the largest real domain for which f(x) is well defined.
-#Give a domain on which the function is one-to-one. Using this domain derive a formula for the inverse function <?plugin TeX2png text="$f^{-1}(x)$" ?>.
+#Give a domain on which the function is one-to-one. Using this domain derive a formula for the inverse function <<TeX2png text="$f^{-1}(x)$">>.
 #Calculate the derivative f'(x).
 
 *Exercise 2* Consider the function :
 
-<?plugin TeX2png text="$$f(x) = \int_0^x e^{-t^2}\,dt, x\in\mathbb R$$" ?>
+<<TeX2png text="$$f(x) = \int_0^x e^{-t^2}\,dt, x\in\mathbb R$$">>
 
-#Show that for all r > 0 :<?plugin TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$" ?> *Help* : you can use polar coordinates.
-#Hence find the limit of <?plugin TeX2png text="$f(x)$" ?> as x tends <?plugin TeX2png text="to $\infty$" ?>.
+#Show that for all r > 0 :<<TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$">> *Help* : you can use polar coordinates.
+#Hence find the limit of <<TeX2png text="$f(x)$">> as x tends <<TeX2png text="to $\infty$">>.
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

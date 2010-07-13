@@ -1,37 +1,69 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FGooglePluginPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FGooglePluginPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FGooglePluginPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~GooglePlugin** [[Help:WikiPlugin|plugin]] is a wrapper for the Google Web APIs.
+It allows you to do Google searches, retrieve pages from the Google cache,
+and ask Google for spelling suggestions.
 
-== Usage
-<verbatim>
-  <?plugin GooglePlugin ?>
-</verbatim>
+Note: You must first obtain a license key at http://www.google.com/apis/
 
-== Arguments
+Max 1000 queries per day.
 
-page _(default: current pagename)_:
-  The page to execute upon.
+== Usage ==
+{{{
+<<GooglePlugin arguments>>
+}}}
 
-== Example
+== Arguments ==
 
-<verbatim>
-<?plugin GooglePlugin ?>
-</verbatim>
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **q**
+|
+|
+|-
+| **mode**
+| search, cache or spell
+| search
+|-
+| **startIndex**
+| 
+| 1
+|-
+| **maxResults**
+| 
+| 10
+|-
+| **formsize**
+| 
+| 30
+|}
 
-<?plugin GooglePlugin ?>
+== Example ==
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+{{{
+<<GooglePlugin>>
+}}}
 
-== See Also
+<<GooglePlugin>>
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

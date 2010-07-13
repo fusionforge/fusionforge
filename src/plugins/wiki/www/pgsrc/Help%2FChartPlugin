@@ -1,21 +1,26 @@
-Date: Sat, 24 Jan 2009 8:15:24 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FChartPlugin 6436 2009-01-24 10:59:01Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FChartPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FChartPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 The **Chart** [[Help:WikiPlugin|plugin]] allows to easily draw simple graphs on a wiki page.
 
+Three graph formats are possible: line, bar and pie. In pie mode, negative values are ignored.
+
 The browser must support SVG in order graphs to be displayed.
+If you are using Internet Explorer 6 + Adobe SVGviewer (often included
+by default with Windows XP) or SVG-enabled Firefox (2.0 or above)
+then you should see the examples.
 
 == Usage ==
-<verbatim>
+{{{
 <<Chart width=200 height=200 type=line color=green data="5, 7, 11, 3, 15" >>
-</verbatim>
+}}}
 
 == Arguments ==
 
@@ -25,19 +30,19 @@ The browser must support SVG in order graphs to be displayed.
 ! Description
 ! Default value
 |-
-| <b>width</b>
+| **width**
 | Graph width in pixels
 | 200
 |-
-| <b>height</b>
+| **height**
 | Graph height in pixels
 | 200
 |-
-| <b>type</b>
+| **type**
 | line, bar or pie
 | line
 |-
-| <b>data</b>
+| **data**
 | Graph data: a list of numbers separated by comma
 | //none//
 |}
@@ -46,11 +51,11 @@ The browser must support SVG in order graphs to be displayed.
 
 === Line chart ===
 
-<verbatim>
+{{{
 <<Chart type=line
         data="5, 7, 11, 3, 15"
 >>
-</verbatim>
+}}}
 
 <<Chart type=line
         data="5, 7, 11, 3, 15"
@@ -58,12 +63,12 @@ The browser must support SVG in order graphs to be displayed.
 
 === Bar chart ===
 
-<verbatim>
+{{{
 <<Chart type=bar
         color=red
         data="5, 7, 11, 3, 15"
 >>
-</verbatim>
+}}}
 
 <<Chart type=bar
         color=red
@@ -72,23 +77,29 @@ The browser must support SVG in order graphs to be displayed.
 
 === Pie chart ===
 
-<verbatim>
+{{{
 <<Chart type=pie
         color=blue
         data="5, 7, 11, 3, 15"
 >>
-</verbatim>
+}}}
 
 <<Chart type=pie
         color=blue
         data="5, 7, 11, 3, 15"
 >>
+
+== Known Problems ==
+
+With multiple Chart plugins on the same page the 2nd and
+subsequent ones will have the same width and height.
 
 == Author ==
 * Marc-Etienne Vargenau
 
 == See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
-
+</noinclude>

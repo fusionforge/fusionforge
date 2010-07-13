@@ -1,69 +1,110 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FUnfoldSubpagesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FUnfoldSubpagesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FUnfoldSubpagesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~UnfoldSubpages* [[Help:WikiPlugin|plugin]] is used to display all or some subpages
-of the current or a given page.  This gives a overview for a
-WikiBlogPlugin, CalendarPlugin or similar subpages.
+The **~UnfoldSubpages** [[Help:WikiPlugin|plugin]] is used to display all or some subpages
+of the current or a given page.  This gives an overview for a
+[[Help:WikiBlogPlugin]], [[Help:CalendarPlugin]] or similar subpages.
 
-Warning: Don't use it with subpages with non-existant sections! 
+Warning: Don't use it with subpages with non-existant sections!
 The section extractor is currently quite unstable.
 
-== Usage
-<verbatim>
-     <?plugin UnfoldSubpages ?>
-  or <?plugin UnfoldSubpages sortby=-mtime words=50 maxpages=5 ?>
-  or <?plugin UnfoldSubpages quiet=1 smalltitle=1 ?>
-  or <?plugin UnfoldSubpages sections=2 words=100 ?>
-  or <?plugin UnfoldSubpages lines=3 ?>
-  or <?plugin UnfoldSubpages pagename="PhpWikiAdministration" 
-              section="Plugin Arguments" sectionhead=1 ?>
-</verbatim>
+== Usage ==
 
-== Arguments
-<strong>pagename</strong>:
-  Any pagename or if empty the current page. Default: ""
-<strong>quiet</strong>:
-  Print no header.  Default: false
-<strong>sortby</strong>:
-  Sort by + (ASC) or - (DESC) and one column. 
-  Multiple columns like sortby="-hits,-mtime" not yet supported.
-  Supported columns: ~[+|-]pagename, ~[+|-]mtime, ~[+|-]hits. 
-  Default: "pagename"
-<strong>maxpages</strong>:
-  Maximum number of pages to include or all if not defined. 
-  Default: false
-<strong>sections</strong>:
-  Maximum number of sections per page to include or all if not defined. 
-  Default: false
-<strong>section</strong>:
-  Include this named section per page only if defined. Default: ""
-<strong>sectionhead</strong>:
-  When including a named section show the heading. Default: false
-<strong>smalltitle</strong>:
-  If set, hide transclusion-title, just have a small link at the start of 
-  the page. Default: false
-<strong>words</strong>:
-  Maximum number of words per page to include. Default: false
-<strong>lines</strong>:
-  Maximum number of lines per page to include. Default: false
-<strong>bytes</strong>:
-  Maximum number of bytes per page to include. Default: false
+{{{
+<<UnfoldSubpages>>
+<<UnfoldSubpages sortby=-mtime words=50 maxpages=5>>
+<<UnfoldSubpages quiet=1 smalltitle=1>>
+<<UnfoldSubpages sections=2 words=100>>
+<<UnfoldSubpages lines=3>>
+<<UnfoldSubpages pagename="PhpWikiAdministration"
+                 section="Plugin Arguments" sectionhead=1>>
+}}}
 
-=== Deprecated Arguments
-<strong>pages</strong>:
-  deprecated. renamed to maxpages.
-<strong>sort</strong>:
-  'asc' or 'desc'. deprecated: use "+" or "-" before the column name with sortby.
+== Arguments ==
 
-== Example
-<?plugin UnfoldSubpages pagename=PgsrcTranslation limit=20 ?>
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **pagename**
+| Any pagename or if empty the current page
+| empty
+|-
+| **quiet**
+| Print no header
+| false
+|-
+| **sortby**
+| Sort by + (ASC) or - (DESC) and one column.\\Multiple columns like sortby="-hits,-mtime" not yet supported.\\Supported columns: ~[+|-]pagename, ~[+|-]mtime, ~[+|-]hits.
+| pagename
+|-
+| **maxpages**
+| Maximum number of pages to include or all if not defined.
+| false
+|-
+| **sections**
+| Maximum number of sections per page to include or all if not defined.
+| false
+|-
+| **section**
+| Include this named section per page only if defined.
+| empty
+|-
+| **sectionhead**
+| When including a named section show the heading.
+| false
+|-
+| **smalltitle**
+| If set, hide transclusion-title, just have a small link at the start of  the page.
+| false
+|-
+| **words**
+| Maximum number of words per page to include.
+| false
+|-
+| **lines**
+| Maximum number of lines per page to include.
+| false
+|-
+| **bytes**
+| Maximum number of bytes per page to include.
+| false
+|}
+
+=== Deprecated Arguments ===
+
+{| class="bordered"
+|-
+! Argument
+! Description
+|-
+| **pages**
+| Deprecated. Renamed to maxpages.
+|-
+| **sort**
+| 'asc' or 'desc'. Deprecated: use "+" or "-" before the column name with sortby.
+|}
+
+== Example ==
+
+{{{
+<<UnfoldSubpages pagename=Help maxpages=5 lines=10>>
+}}}
+
+<<UnfoldSubpages pagename=Help maxpages=5 lines=10>>
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

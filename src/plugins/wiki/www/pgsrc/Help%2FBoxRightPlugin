@@ -1,51 +1,52 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FBoxRightPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FBoxRightPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FBoxRightPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~BoxRight* [[Help:WikiPlugin|plugin]] displays its content as a wiki-formatted
+The **~BoxRight** [[Help:WikiPlugin|plugin]] displays its content as a wiki-formatted
 right-floating div box with border.
 
-If ENABLE_MARKUP_DIVSPAN is enabled then you can produce the same result with a simple =~<div~>=:
+== Example ==
 
-~<~div class=boxright~> <br>
-<strong>Example text</strong>
-([What is a Wiki?|WikiWikiWeb])
-~</div~>
+{{{
+<<BoxRight
+**This Wiki** ([[Help:WikiWikiWeb|What is a Wiki?]]) is a place where problems and
+solutions are being documented.
 
+See [[Help/HowToUseWiki|How to use this Wiki]] for instructions.
+
+//Don't be afraid - it's easy and you can't break anything!//
+}}}
+
+<<BoxRight
+**This Wiki** ([[Help:WikiWikiWeb|What is a Wiki?]]) is a place where problems and
+solutions are being documented.
+
+See [[Help/HowToUseWiki|How to use this Wiki]] for instructions.
+
+//Don't be afraid - it's easy and you can't break anything!//
+>>
+
+== Remark ==
+
+If ENABLE_MARKUP_DIVSPAN is enabled then you can produce the same result with a simple {{{<div>}}}:
+{{{
 <div class=boxright>
-<strong>Example text</strong>
-([What is a Wiki?|WikiWikiWeb])
+**This Wiki** ([[Help:WikiWikiWeb|What is a Wiki?]]) is a place where problems and
+solutions are being documented.
+
+See [[Help/HowToUseWiki|How to use this Wiki]] for instructions.
+
+//Don't be afraid - it's easy and you can't break anything!//
 </div>
+}}}
 
-== Typical Usage
-
-<verbatim>
-<?plugin BoxRight
-<strong>This Wiki</strong> ([What is a Wiki?|WikiWikiWeb]) is a place where problems and
-solutions are being documented.
-
-See [How to use this Wiki|Help/HowToUseWiki] for instructions.
-
-<em>Don't be afraid - it's easy and you can't break anything!</em>
-?>
-</verbatim>
-
-== Examples
-
-<?plugin BoxRight
-<strong>This Wiki</strong> ([What is a Wiki?|WikiWikiWeb]) is a place where problems and
-solutions are being documented.
-
-See [How to use this Wiki|Help/HowToUseWiki] for instructions.
-
-<em>Don't be afraid - it's easy and you can't break anything!</em>
-?>
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

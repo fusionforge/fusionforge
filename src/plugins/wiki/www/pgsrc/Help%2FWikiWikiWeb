@@ -1,0 +1,35 @@
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FWikiWikiWeb 7566 2010-06-23 19:43:46Z rurban $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FWikiWikiWeb;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+A **~WikiWikiWeb** is a site where everyone can collaborate on the
+content. The most well-known and widely used Wiki is the Portland
+Pattern Repository at http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+
+You and I will find these statements there particularly relevant:
+
+//The point is to make the [EditText|Help:EditText] form simple and the [FindPage]
+search fast.//
+
+//In addition to being quick, this site also aspires to Zen ideals
+generally labeled [WabiSabi|Help:WabiSabi]. Zen finds beauty in the imperfect and
+ephemeral. When it comes down to it, that's all you need.//
+
+//The Universe tends toward chaos. The Universe tends toward Wiki.//
+
+You can say hello on [RecentVisitors], or read about [HowToUseWiki|Help:HowToUseWiki] and
+[AddingPages|Help:AddingPages]. Currently this Wiki has no theme for discussion, so go
+ahead and play with it and have fun!!
+
+--SteveWainstead.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

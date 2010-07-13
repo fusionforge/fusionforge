@@ -1,11 +1,11 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FSemanticRelations 6451 2009-01-24 21:40:21Z vargenau $
+Date: Tue,  1 Jun 2010 17:01:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FSemanticRelations 7460 2010-06-01 15:04:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticRelations;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 The PhpWiki:SemanticWeb implementation follows closely the
@@ -17,7 +17,7 @@ implementation of the semantic mediawiki extension. It features:
 * Support for using physical units of measurement in all numerical attributes, 
   without need for prior configuration.
 
-Relations can be searched for with regular experssions, attributes can be 
+Relations can be searched for with regular expressions, attributes can be 
 searched for with full mathematical expressions.
 
 The annotation data will be combined with annotations from the current
@@ -26,33 +26,33 @@ can be fully processed with tools that support OWL DL or OWL Lite,
 but which can also be treated in a meaningful way by software that
 supports RDF, RDFS or XML.
 
-== Relations
+== Relations ==
 
 Relations (link-types) are defined as link with the following syntax:
-<verbatim>
+{{{
   relation::pagename
-</verbatim>
+}}}
 
-== Attributes
+== Attributes ==
 
 Attributes are defined as link to numbers (understandable by 
 [GNU Units|http://www.gnu.org/software/units/units.html]) with 
 the following markup syntax:
  
-<verbatim>
+{{{
   attribute:=value
-</verbatim>
+}}}
 
 Attributes and relations refer only to the current page - the current
 page is the subject, the relation the predicate, the linked page the
 object in a RDF triple. Relations always refer to another page,
 attributes not.
 
-== Example
+== Example ==
 
 <em>Sample taken from http://wiki.ontoworld.org/index.php/San_Diego</em>
 
-<verbatim>
+{{{
 San Diego [is_a::city] located in the southwestern corner of
 [California|located_in::California], the extreme southwestern corner
 of the [United States|country::United States]. It is the county seat
@@ -63,24 +63,25 @@ is the second-largest in California and the seventh-largest in the
 United States and is noted for its temperate climate and many beaches.
 
 According to the United States Census Bureau, the city has a total
-area of [963.6 km²|area:=963.6 km^2] (372.0 mi²). 840.0 km² 
-(324.3 mi²) of it is land and 123.5 km² (47.7 mi²) of it is water.
+area of [963.6 kmÂ²|area:=963.6 km^2] (372.0 miÂ²). 840.0 kmÂ² 
+(324.3 miÂ²) of it is land and 123.5 kmÂ² (47.7 miÂ²) of it is water.
 The total area is 12.82% water.
 
 Most notably, San Diego is the location of the 2005 International
 Symposium on Wikis 2005, and the San Diego Zoo, and the San Diego
 Chargers.
 
-<?plugin SemanticRelations ?>
-</verbatim>
+<<SemanticRelations>>
+}}}
 
-== See Also
+== See Also ==
+* [[PhpWiki:SemanticWeb]]
+* [[SemanticRelations]], [[ListRelations]], [[SemanticSearch]]
+* [[Help:SemanticRelationsPlugin|SemanticRelationsPlugin]], [[Help:SemanticSearchPlugin|SemanticSearchPlugin]]
+* [[PhpWiki:ImportRdf]], [[PhpWiki:ImportRdfs]], [[PhpWiki:ImportOwl]]
+* [[PhpWiki:ExportRdf]], [[PhpWiki:ExportRdfs]], [[PhpWiki:ExportOwl]]
 
-See PhpWiki:SemanticWeb, 
-SemanticRelations, ListRelations, SemanticSearch, SemanticSearchAdvanced,
-[SemanticRelationsPlugin|Help:SemanticRelationsPlugin], [SemanticSearchPlugin|Help:SemanticSearchPlugin], 
-PhpWiki:ImportRdf, PhpWiki:ImportRdfs, PhpWiki:ImportOwl, 
-PhpWiki::ExportRdf, PhpWiki::ExportRdfs, PhpWiki::ExportOwl
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]]
+</noinclude>

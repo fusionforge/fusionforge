@@ -1,44 +1,64 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAppendTextPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAppendTextPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAppendTextPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-*~AppendText* is a [[Help:WikiPlugin|plugin]] to automatically add text to a page. For general
-usage better use the [AddComment|Help:AddCommentPlugin] plugin.
+**~AppendText** is a [[Help:WikiPlugin|plugin]] to automatically add text to a page. For general
+usage better use the [[Help:AddCommentPlugin|AddComment]] plugin.
 
-<verbatim>
-<?plugin AppendText ?>
-</verbatim>
+{{{
+<<AppendText>>
+}}}
 
-== Arguments
-__page__: |
-  Append to which page. Default: Current page.
-__s__:  |
-  What text to add. Note: A \n is always prepended.
-__before__:  |
-  (Optional) Add before the matching line beginning with before.
-__after__:  |
-  (Optional) Add after the matching line beginning with after.
+== Arguments ==
 
-== Examples
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| Append to which page
+| Current page.
+|-
+| **s**
+| What text to add. Note: A \n is always prepended.
+|
+|-
+| **before**
+| (Optional) Add before the matching line beginning with before.
+|
+|-
+| **after**
+| (Optional) Add after the matching line beginning with after.
+|
+|}
+
+== Examples ==
 
 Add from a list of all available plugins one to the current page.
-<verbatim>
-  <?plugin WikiFormRich action=AppendText buttontext="AddPlugin"
-  	   pulldown[] name=s text="Plugins: " value=<!plugin-list BackLinks page=WikiPlugin !>
-  	   ?>
-</verbatim>
+
+{{{
+<<WikiFormRich action=AppendText buttontext="AddPlugin"
+               pulldown[] name=s text="Plugins: " value=<!plugin-list BackLinks page=WikiPlugin !>
+>>
+}}}
 
 Add from a list of all available Categories to the current page.
-<verbatim>
-  <?plugin WikiFormRich action=AppendText buttontext="AddCategory"
-  	   pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
-  	   ?>
-</verbatim>
+
+{{{
+<<WikiFormRich action=AppendText buttontext="AddCategory"
+               pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
+>>
+}}}
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

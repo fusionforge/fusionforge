@@ -1,48 +1,64 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FUpLoadPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Fri,  7 May 2010 15:21:10 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FUpLoadPlugin 7387 2010-05-07 13:24:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FUpLoadPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~UpLoad* [[Help:WikiPlugin|plugin]] displays an editbox and two buttons. 
+The **~UpLoad** [[Help:WikiPlugin|plugin]] displays an editbox and two buttons. 
 The first button let's you choose the file to be uploaded at your local filesystem. 
 The textvalue of this button is localised from your browser. 
 The second "Upload" button actually uploads the given filename to the upload directory.
 This directory is not browsable, any file there may be accessed by using the "Upload~:" 
-InterWikiMap prefix to the given filename. This way you can easily inline uploaded images.
-See PhpWiki:InlineUploadedImages
+[[InterWikiMap]] prefix to the given filename. This way you can easily inline uploaded images.
+See [[PhpWiki:InlineUploadedImages]].
 
-== Usage
-<verbatim>
-     <?plugin UpLoad ?>
-</verbatim>
+== Usage ==
 
-== Arguments
-__logfile__:
-  local path. Default: "phpwiki-upload.log"
-  The format is currently HTML - a new <tr> row per entry - and not log file syntax.
-__autolink__:
-  Add the uploaded filename to the list of uploaded files at the page.
-  Default: true
-__page__:
-  The page where the uploaded files are publicly listed, if autolink is true. 
-  Default: current page.
+{{{
+<<UpLoad arguments>>
+}}}
 
-== Conflicts
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **logfile**
+| Local path. The format is currently HTML - a new {{{<tr>}}} row per entry - and not log file syntax.
+| phpwiki-upload.log
+|-
+| **autolink**
+| Add the uploaded filename to the list of uploaded files at the page.
+| true
+|-
+| **page**
+| The page where the uploaded files are publicly listed, if autolink is true.
+| Current page
+|}
+
+== Notes ==
 
 # The user must be authenticated to be able to upload.
 # The filename may not end with certain disallowed extensions, to prevent from abuse.
-# MAX_FILE_SITE is configured by the config.ini option MAX_UPLOAD_SIZE, which defaults to 16MB.
-  Your webserver and php may add another limit.
+# MAX_FILE_SITE is configured by the config.ini option MAX_UPLOAD_SIZE, which defaults to 16MB. Your webserver and PHP may add another limit.
 # Already existing uploaded files are NOT overwritten.
-# Certain internal PHP problems for Windows and Mac OS X have been fixed with 1.3.9.
 
-== Example
-<?plugin UpLoad ?>
+== Example ==
 
+{{{
+<<UpLoad>>
+}}}
+
+<<UpLoad>>
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

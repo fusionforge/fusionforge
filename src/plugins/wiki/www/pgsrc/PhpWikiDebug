@@ -1,23 +1,23 @@
-Date: Mon, 17 Nov 2008 14:15:24 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: PhpWikiDebug 6346 2008-11-18 10:43:26Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiDebug 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiDebug;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_*Note:*_  _Most of the actions on this page require administrative privileges._
+**//Note://** //Most of the actions on this page require administrative privileges.//
 
-<?plugin CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1 ?>
+<<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1 >>
 
 These are here mostly for debugging purposes (at least, that is the hope.)
 
 In normal use, you should not need to use these, though, then again,
 they should not really do any harm.
 
-!!! Purge Markup Cache
+== Purge Markup Cache ==
 
 (If your wiki is so configured,) the transformed (almost-HTML) content
 of the most recent version of each page is cached. This speeds up page
@@ -27,63 +27,45 @@ Hitting this button will delete all cached transformed
 content. (Each pages content will be transformed and re-cached next
 time someone views it.)
 
-<?plugin WikiAdminUtils
-         action=purge-cache
-         label="Purge Markup Cache"
-?>
+<<WikiAdminUtils action=purge-cache label="Purge Markup Cache" >>
 
-!!! Clean Wiki Database of Illegal Filenames
+== Clean Wiki Database of Illegal Filenames ==
 
 Page names beginning with the subpage-separator, usually a slash
-(=/=), are not allowed. Sometimes though an errant plugin or something
+(##/##), are not allowed. Sometimes though an errant plugin or something
 might create one....
 
 This button will delete any pages with illegal page names, without possibility to restore.
 
-<?plugin WikiAdminUtils
-         action=purge-bad-pagenames
-         label="Purge bad pagenames"
-?>
+<<WikiAdminUtils action=purge-bad-pagenames label="Purge bad pagenames" >>
 
-!!! Clean Wiki Database of empty and unreferenced pages
+== Clean Wiki Database of empty and unreferenced pages ==
 
-<b>Warning!</b> This button will delete every empty and unreferenced page, without any possibility to restore them again.
+**Warning!** This button will delete every empty and unreferenced page, without any possibility to restore them again.
 This will disable the possibility to revert or get back any deleted page.
 
-<?plugin WikiAdminUtils
-         action=purge-empty-pages
-         label="Purge all empty unreferenced pages"
-?>
+<<WikiAdminUtils action=purge-empty-pages label="Purge all empty unreferenced pages" >>
 
-!!! Convert cached_html to new SQL column
+== Convert cached_html to new SQL column ==
 
 This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the
 new page.cached_html field seperately, and now you want to move this data from
 page.pagedata over to page.cached_html.
 
-<?plugin WikiAdminUtils
-         action=convert-cached-html
-         label="Convert cached_html"
-?>
+<<WikiAdminUtils action=convert-cached-html label="Convert cached_html" >>
 
-!!! Check Wiki Database
+== Check Wiki Database ==
 
 This button will check the Wiki page database for consistency. This can last several minutes.
 
-<?plugin WikiAdminUtils
-         action=db-check
-         label="Check Wiki Database"
-?>
+<<WikiAdminUtils action=db-check label="Check Wiki Database" >>
 
-!!! Rebuild Wiki Database
+== Rebuild Wiki Database ==
 
 This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates.
 This can last several minutes, eat a lot of memory and possibly times out!!
 
-<?plugin WikiAdminUtils
-         action=db-rebuild
-         label="Rebuild Wiki Database"
-?>
+<<WikiAdminUtils action=db-rebuild label="Rebuild Wiki Database" >>
 
 ----
-[CategoryActionPage]
+[[CategoryActionPage]]

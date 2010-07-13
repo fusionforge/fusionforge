@@ -1,48 +1,60 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FWikiAdminUtilsPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FWikiAdminUtilsPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiAdminUtilsPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Some special actions for [PhpWikiAdministration].
+Some special actions for [[PhpWikiAdministration]] and [[PhpWikiDebug]].
 
-== Usage
-<verbatim>
-<?plugin WikiAdminUtils purge-cache ?>
-<?plugin WikiAdminUtils purge-bad-pagenames ?>
-<?plugin WikiAdminUtils purge-empty-pages ?>
-<?plugin WikiAdminUtils access-restrictions ?>
-<?plugin WikiAdminUtils action=email-verification ?>
-<?plugin WikiAdminUtils convert-cached-html ?>
-<?plugin WikiAdminUtils db-check ?>
-<?plugin WikiAdminUtils db-rebuild ?>
-</verbatim>
+== Usage ==
+{{{
+<<WikiAdminUtils action="purge-cache" >>
+<<WikiAdminUtils action="purge-bad-pagenames" >>
+<<WikiAdminUtils action="purge-empty-pages" >>
+<<WikiAdminUtils action="access-restrictions" >>
+<<WikiAdminUtils action="email-verification" >>
+<<WikiAdminUtils action="convert-cached-html" >>
+<<WikiAdminUtils action="db-check" >>
+<<WikiAdminUtils action="db-rebuild" >>
+}}}
 
-== Arguments
+== Arguments ==
 
-action:
-  special name.
-label:
-  button text.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **action**
+| Valid action are: "purge-cache", "purge-bad-pagenames", "purge-empty-pages", "access-restrictions", "email-verification", "convert-cached-html", "db-check" and "db-rebuild"
+| //None//
+|-
+| **label**
+| Custom button text
+| Each action has a default button text
+|}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin WikiAdminUtils purge-bad-pagenames ?>
-</verbatim>
+{{{
+<<WikiAdminUtils action="purge-cache" >>
+}}}
 
-<?plugin WikiAdminUtils purge-bad-pagenames ?>
+<<WikiAdminUtils action="purge-cache" >>
 
-== Authors
-* [Jeff Dairiki|PhpWiki:JeffDairiki] 
-* [Reini Urban|PhpWiki:ReiniUrban]
+== Authors ==
+* [[PhpWiki:JeffDairiki|Jeff Dairiki]]
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
-* [PhpWikiAdministration]
+== See Also ==
+* [[PhpWikiAdministration]]
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

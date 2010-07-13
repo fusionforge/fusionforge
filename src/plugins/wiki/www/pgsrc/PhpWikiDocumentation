@@ -1,30 +1,30 @@
-Date: Sat, 24 Jan 2009 19:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: PhpWikiDocumentation 6450 2009-01-24 21:25:12Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiDocumentation 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiDocumentation;
-  flags="";
+  flags=EXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== Contents
+== Contents ==
 
-<?plugin SiteMap
+<<SiteMap
          noheader=true
          exclude=HomePage,PgsrcTranslation
          reclimit=1
          direction=forward
          firstreversed=1
-?>
+>>
 
-== Pages in this category
+== Pages in this category ==
 
-<?plugin BackLinks
+<<BackLinks
          exclude||=''
          include_self||=1
          noheader||=0
          page||=[pagename]
          info||=pagename,mtime
          sortby||=pagename
-?>
+>>

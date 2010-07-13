@@ -1,27 +1,42 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FSearchHighlightPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FSearchHighlightPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSearchHighlightPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~SearchHighLight* [[Help:WikiPlugin|plugin]] is an [Help:ActionPage] plugin, 
+The **~SearchHighLight** [[Help:WikiPlugin|plugin]] is an [[Help:ActionPage|action page]] plugin,
 which is only used internally.
 
 When someone is referred from a search engine like Google, Yahoo
 or our own fulltextsearch, the terms the user searched for are highlighted.
 See also http://wordpress.org/about/shots/1.2/plugins.png
 
-== Arguments
-__s__: |
-  The search term
-__case_exact__:  |
-  boolean. 
-__regex__:  |
-  boolean.
+== Arguments ==
 
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| The search term
+|
+|-
+| **case_exact**
+| boolean
+|
+|-
+| **regex**
+| boolean
+|
+|}
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,15 +1,15 @@
-Date: Mon, 16 Jun 2008 14:15:24 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: SemanticSearch 6184 2008-08-22 10:33:41Z vargenau $
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: SemanticSearch 7364 2010-04-29 13:41:37Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SemanticSearch;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Search for semantic relations and attributes.
-<?plugin Comment
+<<Comment
 <''?plugin WikiFormRich action=SemanticSearch buttontext=Relations method=GET nobr=1 class=wikiaction
   editbox[] name=page value="*" autocomplete=1 method="dynxmlrpc:wiki.titleSearch ^[S] 4" style="width:100px"
   editbox[] name=relation text="::" autocomplete=1 method="plugin:listRelations mode=relations" style="width:100px"
@@ -24,9 +24,9 @@ Search for semantic relations and attributes.
   editbox[] name=s value="*" text=""
   checkbox[] name=case_exact
   submit[]
-?>
+>>
 
-<?plugin SemanticSearch ?>
+<<SemanticSearch>>
 
 ----
-[CategoryActionPage]
+[[CategoryActionPage]]

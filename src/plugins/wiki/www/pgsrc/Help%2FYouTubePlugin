@@ -1,16 +1,16 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FYouTubePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FYouTubePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FYouTubePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== Usage
-<verbatim>
-  <?plugin YouTube v=-dnL00TdmLY
+== Usage ==
+{{{
+  <<YouTube v=-dnL00TdmLY
 	   width=425 height=350
 	   size=medium|small|large
            style=inline|link
@@ -24,77 +24,104 @@ Content-Transfer-Encoding: binary
 		   News & Politics|People & Blogs|Pets & Animals|
 	           Sports|Travel & Places"
 	   language="All|English|Spanish|Japanese|German|Chinese|French"
-  ?>
-</verbatim>
+ >>
+}}}
 
-== Arguments
+== Arguments ==
 
-  * v=... (required, or define browse)
-    key of the video
-  * browse=... (optional, if v is empty)
-    One of "Daily Pick", "Most Recent", "Most Viewed", "Top Rated",
-    "Most Discussed", "Top Favorites", "Most Linked", "Recently Featured",
-    "Most Responded", "Watch on Mobile"
-  * time=Today (optional)
-    One of "Today", "This Week", "This Month", "All Time"
-  * category=All (optional)
-    One of "All", "Autos & Vehicles", "Comedy", "Entertainment",
-    "Film & Animation", "Gadgets & Games", "Howto & DIY", "Music",
-    "News & Politics", "People & Blogs", "Pets & Animals", "Sports",
-    "Travel & Places"
-  * language=All (optional)
-    One of "All", "English", "Spanish", "Japanese", "German", "Chinese", "French"
-  * width=425 (optional. Default: 425)
-  * height=350 (optional. Default: 350)
-  * autoplay=0 (optional. Default: 0)
-    if autoplay=1 it starts automatically to play, otherwise to have to click on it.
-  * style=inline or link (optional. Default: inline)
-    if link will display a small icon with a link to the youtube video
-  * size=medium or small or large (optional. Default: medium).
-    Overrides width and height.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **v**
+| key of the video
+| required, or define browse
+|-
+| **browse**
+| One of "Daily Pick", "Most Recent", "Most Viewed", "Top Rated",
+"Most Discussed", "Top Favorites", "Most Linked", "Recently Featured",
+"Most Responded", "Watch on Mobile"
+| optional, if v is empty
+|-
+| **time**
+| One of "Today", "This Week", "This Month", "All Time" (optional).
+| Today
+|-
+| **category**
+| One of "All", "Autos & Vehicles", "Comedy", "Entertainment",
+"Film & Animation", "Gadgets & Games", "Howto & DIY", "Music",
+"News & Politics", "People & Blogs", "Pets & Animals", "Sports",
+"Travel & Places" (optional).
+| All
+|-
+| **language**
+| One of "All", "English", "Spanish", "Japanese", "German", "Chinese", "French" (optional).
+| All
+|-
+| **width**
+| Video width (optional).
+| 425
+|-
+| **height**
+| Video height (optional).
+| 350
+|-
+| **autoplay**
+| If autoplay=1 it starts automatically to play, otherwise to have to click on it (optional).
+| 0
+|-
+| **style**
+| If link will display a small icon with a link to the Youtube video (optional).
+| inline
+|-
+| **size**
+| Video size (medium or small or large). Overrides width and height (optional).
+| medium
+|}
 
-== Examples
+== Examples ==
 
-=== Link
+=== Link ===
 
-<verbatim>
-<?plugin YouTube v=-dnL00TdmLY style=link ?>
-</verbatim>
+{{{
+<<YouTube v=-dnL00TdmLY style=link>>
+}}}
 
-<?plugin YouTube v=-dnL00TdmLY style=link ?>
+<<YouTube v=-dnL00TdmLY style=link>>
 
-=== Inline
+=== Inline ===
 
-<verbatim>
-<?plugin YouTube v=-dnL00TdmLY ?>
-</verbatim>
+{{{
+<<YouTube v=-dnL00TdmLY>>
+}}}
 
-<?plugin YouTube v=-dnL00TdmLY ?>
+<<YouTube v=-dnL00TdmLY>>
 
-=== Daily Pick
+=== Daily Pick ===
 
-<verbatim>
-<?plugin YouTube browse="Daily Pick" ?>
-</verbatim>
+{{{
+<<YouTube browse="Daily Pick">>
+}}}
 
-<?plugin YouTube browse="Daily Pick" ?>
+<!-- <<YouTube browse="Daily Pick">> -->
 
-=== Top Rated (This Month)
+=== Top Rated (This Month) ===
 
-<verbatim>
-<?plugin YouTube browse="Top Rated" time="This Month" ?>
-</verbatim>
+{{{
+<<YouTube browse="Top Rated" time="This Month">>
+}}}
 
-<?plugin YouTube browse="Top Rated" time="This Month" ?>
+<!-- <<YouTube browse="Top Rated" time="This Month">> -->
 
-== See also
+== See Also ==
+* [[Help:VideoPlugin]]
 
-* [LisaNova]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== Author
-
-* [Reini Urban|PhpWiki:ReiniUrban]
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
-
+</noinclude>

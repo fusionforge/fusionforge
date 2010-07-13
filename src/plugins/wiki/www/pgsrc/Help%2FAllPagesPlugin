@@ -1,43 +1,59 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAllPagesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAllPagesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAllPagesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~AllPages* [[Help:WikiPlugin|plugin]] lists all pages in this wiki.
+The **~AllPages** [[Help:WikiPlugin|plugin]] lists all pages in this wiki.
 
-== Usage
-<verbatim>
-  <?plugin AllPages [pagelist args] ?>
-</verbatim>
+== Usage ==
+{{{
+<<AllPages arguments>>
+}}}
 
-== Arguments
+== Arguments ==
 
-All [PageList|Help:PageList] options.<br>
-Plus:
-	'noheader'      => false,
-        'include_empty' => false,
-        'info'          => '',
-        'debug'         => false
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
-== Example
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **noheader**
+| Boolean header should be omitted.
+| false
+|-
+| **include_empty**
+| Boolean
+| false
+|-
+| **info**
+|
+| none
+|}
 
-<verbatim>
-<?plugin AllPages limit=20 cols=3 ?>
-</verbatim>
+== Example ==
 
-<?plugin AllPages  limit=20 cols=3 ?>
+{{{
+<<AllPages limit=20 cols=3>>
+}}}
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+<<AllPages  limit=20 cols=3>>
 
-== See Also
-* [AllPages]
-* [Help:ListPagesPlugin]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
+== See Also ==
+* [[AllPages]]
+* [[Help:ListPagesPlugin]]
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

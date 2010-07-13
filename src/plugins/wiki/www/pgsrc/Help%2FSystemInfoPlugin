@@ -1,28 +1,30 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FSystemInfoPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FSystemInfoPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSystemInfoPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~SystemInfo* [[Help:WikiPlugin|plugin]] provides access to lower level system information for the platform PhpWiki is installed on.
+The **~SystemInfo** [[Help:WikiPlugin|plugin]] provides access to lower level system information for the platform ~PhpWiki is installed on.
 
-== Usage 
+== Usage ==
 
-<verbatim>
-         <?plugin SystemInfo all ?>
-      or <?plugin SystemInfo pagestats cachestats discspace hitstats ?>
-      or <?plugin SystemInfo version ?>
-      or <?plugin SystemInfo current_theme ?>
-      or <?plugin SystemInfo PHPWIKI_DIR ?>
-</verbatim>
+{{{
+         <<SystemInfo all>>
+      or <<SystemInfo pagestats cachestats discspace hitstats>>
+      or <<SystemInfo version>>
+      or <<SystemInfo current_theme>>
+      or <<SystemInfo PHPWIKI_DIR>>
+}}}
 
-== Example
+== Example ==
 
-<?plugin SystemInfo all ?>
+<<SystemInfo all>>
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

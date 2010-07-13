@@ -1,22 +1,24 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FListSubpagesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FListSubpagesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FListSubpagesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~ListSubpages* [[Help:WikiPlugin|plugin]] lists the names of all sub-pages of a given page (by default the current page).
+The **~ListSubpages** [[Help:WikiPlugin|plugin]] lists the names of all sub-pages of a given page (by default the current page).
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin ListSubpages ?>
-</verbatim>
+{{{
+<<ListSubpages arguments>>
+}}}
 
-== Arguments
+== Arguments ==
+
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
 {| class="bordered"
 |-
@@ -24,27 +26,37 @@ The *~ListSubpages* [[Help:WikiPlugin|plugin]] lists the names of all sub-pages 
 ! Description
 ! Default value
 |-
-| <b>basepage</b>
+| **basepage**
 | The page to execute upon
 | Current pagename
 |-
-| <b>maxpages</b>
+| **maxpages**
 | Maximum number of pages to include
+| none
+|-
+| **noheader**
+| Do not display header
+| false
+|-
+| **info**
+| List of columns to display
 | none
 |}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin ListSubpages basepage=Help maxpages=10 ?>
-</verbatim>
+{{{
+<<ListSubpages basepage=Help maxpages=20 cols=3>>
+}}}
 
-<?plugin ListSubpages basepage=Help maxpages=10 ?>
+<<ListSubpages basepage=Help maxpages=20 cols=3>>
 
-== Author
-* [Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

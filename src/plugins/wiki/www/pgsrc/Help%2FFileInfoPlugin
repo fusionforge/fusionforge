@@ -1,44 +1,57 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FFileInfoPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FFileInfoPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FFileInfoPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~FileInfo* [[Help:WikiPlugin|plugin]] displays the version, date, size,
+The **~FileInfo** [[Help:WikiPlugin|plugin]] displays the version, date, size,
 perms of an uploaded file.  Only files relative and below to the uploads path
 can be handled.
 
-For exe files the *version* argument might work to display the VERSIONINFO ressource string. (highly experimental).
+For exe files the **version** argument might work to display the VERSIONINFO ressource string. (highly experimental).
 
-Since v1.3.13.
+== Typical Usage ==
 
-== Typical Usage
+{{{
+<<FileInfo file=uploads/setup.exe display=version,date>>
+<<FileInfo file=uploads/setup.exe display=name,version,date
+                                  format="%s (version: %s, date: %s)">>
+}}}
 
-<verbatim>
-  <?plugin FileInfo file=uploads/setup.exe display=version,date ?>
-  <?plugin FileInfo file=uploads/setup.exe display=name,version,date 
-                    format="%s (version: %s, date: %s)" ?>
-</verbatim>
+== Arguments ==
 
-== Arguments
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **file**
+| Relative path from PHPWIKI_DIR.
+| (required)
+|-
+| **display**
+| Comma-seperated string of version, size, phonysize, date, mtime, owner, name, path, dirname, link, mime-typ, magic.
+| (required)
+|-
+| **format**
+| printf format string with %s only, all display modes from above vars return strings
+| (optional)
+|-
+| **quiet**
+| print no error if file not found
+| false 
+|}
 
-__file__:
-  relative path from PHPWIKI_DIR. (required)
+== Examples ==
 
-__display__:
-  Comma-seperated string of version,size,phonysize,date,mtime,owner,name,path,dirname,
-  link,mime-typ,magic. (required)
+This wiki was installed at <<FileInfo file=config/config.ini display=date>>.
 
-__format__:
-  printf format string with %s only, all display modes from above vars return strings (optional)
-
-== Examples
-
-This wiki was installed at <?plugin FileInfo file=config/config.ini display=date ?>.
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

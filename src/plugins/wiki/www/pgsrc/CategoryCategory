@@ -1,24 +1,29 @@
-Date: Sat, 24 Jan 2009 19:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: CategoryCategory 6450 2009-01-24 21:25:12Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: CategoryCategory 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=CategoryCategory;
-  flags="";
+  flags=EXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 This is the base Category.
 
-<?plugin BackLinks info||=pagename,mtime,hits,author sortby||=pagename ?>
+The following pages are part of this category:
+<<BackLinks sortby||=pagename noheader||=1 exclude="Category*" limit=1000 >>
 
------
-== Category
+This category has the following subcategories:
+<<BackLinks sortby||=pagename noheader||=1 exclude="-Category*" limit=1000 >>
 
-<em>This is a Category. Adding a link to this page puts the page under this Category. 
-When [editing|Help:EditText] a page, point your cursor to the end and use the ~[C~] Button 
-to insert a Category into your page.</em>
+== Category ==
 
-== Create a new Category
+This is a Category. Adding a link to this page puts the page under this Category.
+When [[Help:EditText|editing]] a page, use the {{/themes/default/images/ed_category.png|[C]}}
+button of the edit toolbar to insert a category into your page.
+
+== Create a new Category ==
+
+To create a new category, enter its name (starting with "Category") and hit button.
 
 <?plugin-form CreatePage s=CategoryBla template=Template/Category ?>

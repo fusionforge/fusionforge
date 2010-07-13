@@ -1,37 +1,70 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FPageGroupPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FPageGroupPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageGroupPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~PageGroup** [[Help:WikiPlugin|plugin]] allows to browse pages groups.
 
-== Usage
-<verbatim>
-  <?plugin PageGroup ?>
-</verbatim>
+== Usage ==
+{{{
+<<PageGroup arguments>>
+}}}
 
-== Arguments
+== Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **parent**
+| 
+|
+|-
+| **rev**
+| 
+| false
+|-
+| **section**
+| 
+| "Contents"
+|-
+| **label**
+| 
+|
+|-
+| **loop**
+| 
+| false
+|}
 
-== Example
+== Examples ==
 
-<verbatim>
-<?plugin PageGroup ?>
-</verbatim>
+{{{
+<<PageGroup parent=MyTableOfContents >>
 
-<?plugin PageGroup ?>
+<<PageGroup
+         parent=MyTableOfContents
+         label="Visit more pages in MyTableOfContents"
+>>
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+<<PageGroup parent=MyTableOfContents section=PartTwo loop=true >>
 
-== See Also
+<<PageGroup parent=MyTableOfContents loop=1 >>
+}}}
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

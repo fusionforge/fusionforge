@@ -1,37 +1,62 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FBackLinksPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FBackLinksPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FBackLinksPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~BackLinks* [[Help:WikiPlugin|plugin]] lists all pages which link to a given page.
+The **~BackLinks** [[Help:WikiPlugin|plugin]] lists all pages which link to a given page.
 
-== Usage
-<verbatim>
-  <?plugin BackLinks ?>
-</verbatim>
+== Usage ==
 
-== Arguments
+{{{
+<<BackLinks arguments>>
+}}}
 
-page _(default: current pagename)_:
-  The page to execute upon.
+== Arguments ==
 
-== Example
+All [[Help:PageList|PageList]] arguments, plus the following ones.
 
-<verbatim>
-<?plugin BackLinks page=HomePage ?>
-</verbatim>
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| Page from which the back links are calculated.
+| Current page
+|-
+| **include_self**
+| Include yourself in the results.
+| false
+|-
+| **noheader**
+| Do not display header.
+| false
+|-
+| **linkmore**
+| If count > 0 and limit > 0 display a link with the number of all results, linked to the given pagename. 
+|
+|}
 
-<?plugin BackLinks page=HomePage ?>
+== Example ==
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+{{{
+<<BackLinks page=HomePage>>
+}}}
 
-== See Also
+<<BackLinks page=HomePage>>
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

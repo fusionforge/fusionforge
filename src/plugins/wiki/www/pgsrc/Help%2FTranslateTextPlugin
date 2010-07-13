@@ -1,0 +1,39 @@
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FTranslateTextPlugin 7419 2010-05-19 16:49:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FTranslateTextPlugin;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+_short description_
+
+== Usage ==
+{{{
+<<TranslateText>>
+}}}
+
+== Arguments ==
+
+page _(default: current pagename)_:
+  The page to execute upon.
+
+== Example ==
+
+{{{
+<<TranslateText>>
+}}}
+
+<<TranslateText>>
+
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

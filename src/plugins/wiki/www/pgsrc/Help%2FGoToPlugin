@@ -1,40 +1,42 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FGoToPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FGoToPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FGoToPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~GoTo* [[Help:WikiPlugin|plugin]] displays a form with text entry box and 'Go' button.
+The **~GoTo** [[Help:WikiPlugin|plugin]] displays a form with text entry box and 'Go' button.
 The user enters a page name... if it exists, browse that page; if not, edit (create) that page.
 
 Note: pagenames are absolute, not relative to the actual subpage.
 
-== Usage
-<verbatim>
-  <?plugin GoTo ?>
-</verbatim>
+== Usage ==
+{{{
+<<GoTo>>
+}}}
 
-== Arguments
+== Arguments ==
 
 None.
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin GoTo ?>
-</verbatim>
+{{{
+<<GoTo>>
+}}}
 
-<?plugin GoTo ?>
+<<GoTo>>
 
-== Authors
+== Authors ==
 * Michael van Dam
-* [Reini Urban|PhpWiki:ReiniUrban]
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

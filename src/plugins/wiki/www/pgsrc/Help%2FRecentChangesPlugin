@@ -1,37 +1,120 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRecentChangesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRecentChangesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRecentChangesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~RecentChanges** [[Help:WikiPlugin|plugin]] lists the most recent
+modifications in the wiki.
 
-== Usage
-<verbatim>
-  <?plugin RecentChanges ?>
-</verbatim>
+== Usage ==
+{{{
+<<RecentChanges arguments>>
+}}}
 
-== Arguments
+== Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **pagename**
+| The page to execute upon
+| current pagename
+|-
+| **days**
+| Number of days. Specifying 0 will display modifications since wiki creation.
+| 2
+|-
+| **show_minor**
+| Show minor modifications
+| false
+|-
+| **show_major**
+| Show major modifications
+| true
+|-
+| **show_all**
+| Display a page multiple times if it was modified more that once.
+| false
+|-
+| **show_deleted**
+| Show deleted pages
+| sometimes
+|-
+| **only_new**
+| Show only new pages
+| false
+|-
+| **author**
+| Show only modifications from a specific author
+| false
+|-
+| **owner**
+| Show only pages from a specific owner
+| false
+|-
+| **limit**
+| Do not show more pages that the limit.
+| false
+|-
+| **format**
+| Default is HTML. Other: rss, rss2, rss091, atom, sidebar, box, contribs
+| false
+|-
+| **daylist**
+| Comma-separated list of days
+| false
+|-
+| **difflinks**
+| Show diff links
+| true
+|-
+| **historylinks**
+| Show history links
+| false (true for Monobook and Gforge)
+|-
+| **caption**
+| Custom caption
+|
+|-
+| **category**
+| Limit pages to a given category
+|
+|-
+| **pagematch**
+| Limit to pages matching pattern
+|
+|}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin RecentChanges ?>
-</verbatim>
+{{{
+<<RecentChanges limit=10>>
+}}}
 
-<?plugin RecentChanges ?>
+<<RecentChanges limit=10>>
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+{{{
+<<RecentChanges show_minor=1>>
+}}}
 
-== See Also
+{{{
+<<RecentChanges days=30>>
+}}}
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

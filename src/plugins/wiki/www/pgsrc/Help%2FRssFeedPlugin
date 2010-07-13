@@ -1,22 +1,22 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRssFeedPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRssFeedPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRssFeedPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~RssFeed* [[Help:WikiPlugin|plugin]] allows to display external RSS feeds.
+The **~RssFeed** [[Help:WikiPlugin|plugin]] allows to display external RSS feeds.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin RssFeed url=http://somesite.tld/linktofeed.rss ?>
-</verbatim>
+{{{
+<<RssFeed url=http://somesite.tld/linktofeed.rss>>
+}}}
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -24,35 +24,41 @@ The *~RssFeed* [[Help:WikiPlugin|plugin]] allows to display external RSS feeds.
 ! Description
 ! Default value
 |-
-| url
+| **url**
 | RSS Feed URL
 | (empty)
 |-
-| feed
+| **feed**
 | RSS Feed Name
 | (empty)
 |-
-| description
+| **description**
 | Description of the RSS Feed
 | (empty)
 |-
-| maxitem
+| **maxitem**
 | Max. number of entries (0 = unlimited)
-| ~0
+| 0
+|-
+| **titleonly**
+| If //true//, do not display item body (boolean)
+| false
 |}
 
-== Examples
+== Examples ==
 
-=== ~PhpWikiRss feed for [PhpWiki:RecentChanges]
+=== ~PhpWikiRss feed for [[PhpWiki:RecentChanges]] ===
 
-<verbatim>
-<?plugin RssFeed feed=PhpWikiRss description="PhpWiki:RecentChanges"
-                 url=http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss ?>
-</verbatim>
+{{{
+<<RssFeed feed=PhpWikiRss description="PhpWiki:RecentChanges"
+                 url=http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss>>
+}}}
 
-=== Example as sidebar box
+=== Example as sidebar box ===
 
-[PhpWikiDemo:sidebar/]
+[[PhpWikiDemo:sidebar/]]
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,42 +1,42 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FOldStyleTablePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FOldStyleTablePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FOldStyleTablePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~OldStyleTable* [[Help:WikiPlugin|plugin]] can be used to include tables within a wiki
+The **~OldStyleTable** [[Help:WikiPlugin|plugin]] can be used to include tables within a wiki
 page using the old-style markup syntax for tables.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin OldStyleTable caption="OldStyleTable" border||=2
+{{{
+<<OldStyleTable caption="OldStyleTable" border||=2
 ||^  *Name*                |v *Cost*   |v *Notes*
 | *First*     | *Last*
 |> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
 |> Marco      |< Polo      | Cheaper   |< Not available
-?>
-</verbatim>
+>>
+}}}
 
 will get you
 
-<?plugin OldStyleTable caption="OldStyleTable" border||=2
+<<OldStyleTable caption="OldStyleTable" border||=2
 ||^  *Name*                |v *Cost*   |v *Notes*
 | *First*     | *Last*
 |> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
 |> Marco      |< Polo      | Cheaper   |< Not available
-?>
+>>
 
 Note that multiple __|__s lead to spanned columns, and __v__s can be
 used to span rows.  A __>__ generates a right justified column, __<__
 a left justified column and __^__ a centered column (which is the
 default.)
 
-== Arguments
+== Arguments ==
 
 __caption__:
 
@@ -68,5 +68,7 @@ table cells.
 include multi-line plugin invocations using the old-style markup
 rules.)
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,40 +1,50 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRedirectToPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRedirectToPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRedirectToPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~RedirectTo* [[Help:WikiPlugin|plugin]] can be used to redirect a user to another page.
-In other words it makes a page an _alias_ for another page.
+The **~RedirectTo** [[Help:WikiPlugin|plugin]] can be used to redirect a user to another page.
+In other words it makes a page an //alias// for another page.
 
-== Arguments
+== Arguments ==
 
 Use only one of these arguments at a time.
 
-page |
-  The page to redirect to (a wiki page name).
-href |
-  An external URL to redirect to.  Redirection to external URLs will only work
-  on locked pages.  (If the URL contains funny characters, you'll probably have
-  to put quotes around the URL.)
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| The page to redirect to (a wiki page name).
+| none
+|-
+| **href**
+| An external URL to redirect to.  Redirection to external URLs will only work on locked pages. (If the URL contains funny characters, you'll probably have to put quotes around the URL.)
+| none
+|}
 
-=== Caveats
+== Caveats ==
 
 The ~RedirectToPlugin invocation must be the first thing on a page.
 For most purposes it makes any other content on the page inaccessible.
 
-== Example
+== Example ==
 
 A page may be made a alias for the HomePage by placing this code at the top:
-<verbatim>
-<?plugin RedirectTo page="HomePage" ?>
-</verbatim>
+{{{
+<<RedirectTo page="HomePage">>
+}}}
 
 To see the example in action, visit HomePageAlias.
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

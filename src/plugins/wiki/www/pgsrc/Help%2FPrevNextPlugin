@@ -1,21 +1,21 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FPrevNextPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FPrevNextPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPrevNextPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~PrevLink* [[Help:WikiPlugin|plugin]] allows to display Previous and Next buttons on a wiki page for easy navigation.
+The **~PrevLink** [[Help:WikiPlugin|plugin]] allows to display Previous and Next buttons on a wiki page for easy navigation.
 
-== Usage
-<verbatim>
-<?plugin PrevNext prev=PrevLink next=NextLink ?>
-</verbatim>
+== Usage ==
+{{{
+<<PrevNext prev=PrevLink next=NextLink>>
+}}}
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -23,161 +23,162 @@ The *~PrevLink* [[Help:WikiPlugin|plugin]] allows to display Previous and Next b
 ! Description
 ! Default value
 |-
-| <b>prev</b>
-| Link to the *Previous* page
+| **prev**
+| Link to the **Previous** page
 | empty
 |-
-| <b>next</b>
-| Link to the *Next* page
+| **next**
+| Link to the **Next** page
 | empty
 |-
-| <b>up</b>
-| Link to the *Up* page
+| **up**
+| Link to the **Up** page
 | empty
 |-
-| <b>contents</b>
-| Link to the *Contents* page
+| **contents**
+| Link to the **Contents** page
 | empty
 |-
-| <b>index</b>
-| Link to the *Index* page
+| **index**
+| Link to the **Index** page
 | empty
 |-
-| <b>first</b>
-| Link to the *First* page
+| **first**
+| Link to the **First** page
 | empty
 |-
-| <b>last</b>
-| Link to the *Last* page
+| **last**
+| Link to the **Last** page
 | empty
 |-
-| <b>order</b>
+| **order**
 | Reorder the buttons: comma-delimited
 | empty
 |-
-| <b>order</b>
-| Can be ''left'', ''right'' or ''center''
+| **align**
+| Can be //left//, //right// or //center//
 | left
 |-
-| <b>style</b>
-| Can be ''button'' or ''text''
+| **style**
+| Can be //button// or //text//
 | button
 |-
-| <b>class</b>
-| Can be ''wikiaction'' or another class
+| **class**
+| Can be //wikiaction// or another class
 | wikiaction
 |}
 
-== Examples
+== Examples ==
 
-<verbatim>
-<?plugin PrevNext prev="Help/CreateTocPlugin" next="Help/MediawikiTablePlugin" ?>
-</verbatim>
+{{{
+<<PrevNext prev="Help/CreateTocPlugin" next="Help/MediawikiTablePlugin">>
+}}}
 
-<?plugin PrevNext prev="Help/CreateTocPlugin" next="Help/MediawikiTablePlugin" ?>
+<<PrevNext prev="Help/CreateTocPlugin" next="Help/MediawikiTablePlugin">>
 
-<verbatim>
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+{{{
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   contents="Help"
-?>
-</verbatim>
+>>
+}}}
 
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   contents="Help"
-?>
+>>
 
-<verbatim>
-<?plugin PrevNext prev="Help/CreateTocPlugin"
-                  next="Help/MediawikiTablePlugin"
-                  contents="Help"
-                  align="right"
-?>
-</verbatim>
-
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+{{{
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   contents="Help"
                   align="right"
-?>
+>>
+}}}
 
-<verbatim>
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+<<PrevNext prev="Help/CreateTocPlugin"
+                  next="Help/MediawikiTablePlugin"
+                  contents="Help"
+                  align="right"
+>>
+
+{{{
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   contents="Help"
                   align="center"
-?>
-</verbatim>
+>>
+}}}
 
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   contents="Help"
                   align="center"
-?>
+>>
 
-<verbatim>
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+{{{
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   up="Help"
                   style="text"
-?>
-</verbatim>
+>>
+}}}
 
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   up="Help"
                   style="text"
-?>
+>>
 
-<verbatim>
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+{{{
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   index="Help"
-?>
-</verbatim>
+>>
+}}}
 
-<?plugin PrevNext prev="Help/CreateTocPlugin"
+<<PrevNext prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   index="Help"
-?>
+>>
 
-<verbatim>
-<?plugin PrevNext first="Help/AddCommentPlugin"
+{{{
+<<PrevNext first="Help/AddCommentPlugin"
                   prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   last="Help/YouTubePlugin"
-?>
-</verbatim>
+>>
+}}}
 
-<?plugin PrevNext first="Help/AddCommentPlugin"
+<<PrevNext first="Help/AddCommentPlugin"
                   prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   last="Help/YouTubePlugin"
-?>
+>>
 
-<verbatim>
-<?plugin PrevNext first="Help/AddCommentPlugin"
+{{{
+<<PrevNext first="Help/AddCommentPlugin"
                   prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   last="Help/YouTubePlugin"
                   order="first,last,prev,next"
-?>
-</verbatim>
+>>
+}}}
 
-<?plugin PrevNext first="Help/AddCommentPlugin"
+<<PrevNext first="Help/AddCommentPlugin"
                   prev="Help/CreateTocPlugin"
                   next="Help/MediawikiTablePlugin"
                   last="Help/YouTubePlugin"
                   order="first,last,prev,next"
-?>
+>>
 
-== Author
-* [Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 * [PageGroup|Help:PageGroupPlugin], [[Help:WikiPlugin|plugin]] which automatically tries to extract the various links.
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
-
+</noinclude>

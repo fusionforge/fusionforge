@@ -1,14 +1,14 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FPloticusPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FPloticusPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPloticusPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *Ploticus* [[Help:WikiPlugin|plugin]] passes all its arguments to the ploticus
+The **Ploticus** [[Help:WikiPlugin|plugin]] passes all its arguments to the ploticus
 binary and displays the result as PNG, GIF, EPS, SVG, SVGZ or SWF.
 Ploticus is a free, GPL, non-interactive software package
 for producing plots, charts, and graphics from data.
@@ -16,29 +16,29 @@ See http://ploticus.sourceforge.net/doc/welcome.html
 
 Ploticus uses a cache expire date of days.
 
-== Usage
-<verbatim>
-  <?plugin Ploticus device||=png [ploticus options...]
+== Usage ==
+{{{
+<<Ploticus device||=png [ploticus options...]
      multiline ploticus script ...
-  ?>
-</verbatim>
+>>
+}}}
 
 or without any script: (not tested)
 
-<verbatim>
-<?plugin Ploticus -prefab vbars
+{{{
+<<Ploticus -prefab vbars
 	data=myfile.dat delim=tab y=1 
 	clickmapurl="http://mywiki.url/wiki/?pagename=@2" 
 	clickmaplabel="@3" -csmap 
-?>
-</verbatim>
+>>
+}}}
 
 TODO: ~PloticusSql - create intermediate data from SQL. Similar to [SqlResult|Help:SqlResultPlugin], 
 just in graphic form.
 For example to produce nice looking pagehit statistics or ratings statistics.
 Ploticus has its own sql support within #getproc data, but this would expose security information.
 
-== Arguments
+== Arguments ==
 __device__: |
   gif, png, jpeg, svg, svgz, eps, swf. Any -T parameter supported by ploticus. Default: png
 __data__:  |
@@ -55,13 +55,13 @@ __help__:  |
 
 All other arguments are used as source to ploticus.
 
-== Known Problems
+== Known Problems ==
 
 For Windows you need either a gd library with GIF support or
 a Ploticus with PNG support. This comes only with the Cygwin 
 build so far.
 
-== Optional Configuration
+== Optional Configuration ==
 
 config.ini:
   PLOTICUS_EXE = pl.exe (on windows)
@@ -72,9 +72,9 @@ Maybe also set by the config variable PLOTICUS_PREFABS.
 
 See also [WikiPluginCached|Help:WikiPluginCached] options in config.ini.
 
-== Examples
+== Examples ==
 
-<?plugin Ploticus device||=png
+<<Ploticus device||=png
 #proc page
 #if @DEVICE in gif,png
   scale: 0.7
@@ -104,13 +104,13 @@ center: 4 4
 radius: 2
 colors: yellow pink pink pink pink yellow pink
 labelfarout: 1.05
-?>
+>>
 
 The pie chart above was produced by this code from the ploticus
 testsuite:
 
-<verbatim>
-<?plugin Ploticus device||=png alt="Sample Pie Chart"
+{{{
+<<Ploticus device||=png alt="Sample Pie Chart"
 #proc page
 #if @DEVICE in gif,png
   scale: 0.7
@@ -140,14 +140,16 @@ center: 4 4
 radius: 2
 colors: yellow pink pink pink pink yellow pink
 labelfarout: 1.05
-?>
-</verbatim>
+>>
+}}}
 
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== See Also ==
+* [[Help:GraphVizPlugin]]
 
-== See Also
-Help:GraphVizPlugin
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

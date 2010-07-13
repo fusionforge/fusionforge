@@ -1,37 +1,45 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FNoCachePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FNoCachePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FNoCachePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+Don't cache the following page. Mostly used for plugins, which display dynamic content.
 
-== Usage
-<verbatim>
-  <?plugin NoCache ?>
-</verbatim>
+== Usage ==
+{{{
+<<NoCache>>
+}}}
 
-== Arguments
+== Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **nocache**
+| if nocache=purge, delete the whole cache for this page
+| 1
+|}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin NoCache ?>
-</verbatim>
+{{{
+<<NoCache>>
+}}}
 
-<?plugin NoCache ?>
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== See Also ==
 
-== See Also
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

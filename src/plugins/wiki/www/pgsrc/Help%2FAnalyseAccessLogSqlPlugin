@@ -1,66 +1,83 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAnalyseAccessLogSqlPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAnalyseAccessLogSqlPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAnalyseAccessLogSqlPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~AnalyseAccessLogSql* [[Help:WikiPlugin|plugin]] provides a framework to analyse the SQL access log 
+The **~AnalyseAccessLogSql** [[Help:WikiPlugin|plugin]] provides a framework to analyse the SQL access log 
 and display the results.
 This information may be sensitive and therefore this plugin is limited to 
 administrator access only.
 
 A small number of queries that may (or might not) use the ~MySQL
-specific dialect of SQL are provided in <tt>lib/plugin/~AnalyseAccessLogSql.php</tt>. 
+specific dialect of SQL are provided in ##lib/plugin/~AnalyseAccessLogSql.php##. 
 For more information, please see the section *Adding new queries* below.
 
-== Usage
+== Usage ==
 
 Experimental! Will change a lot.
 
-<verbatim>
-  <?plugin AnalyseAccessLogSql mode=<QUERY NAME> ?>
-</verbatim>
+{{{
+<<AnalyseAccessLogSql mode=<QUERY NAME> >>
+}}}
 
-== Parameters
+== Parameters ==
 
-mode _(required parameter)_:
-  The name of the query to execute. See *Adding new queries* below.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **mode**
+| The name of the query to execute. See *Adding new queries* below. Required parameter.
+| referring_domains
+|-
+| **period**
+| Use in combination with the _count_ parameter. The type of history period to retrieve from the SQL access log. Blank (the default) for all history, or one of "*weeks*", "*days*", "*hours*", or "*minutes*".
+|
+|-
+| **count**
+| Use in combination with the _period_ parameter. Must be a number. The number of periods to retrieve from the access log.
+| 0
+|-
+| **caption**
+| The value of this parameter is used as the caption for the output. If not set, the caption on the table defaults to the mode.
+|
+|-
+| **center**
+| If set, the table is centered on the page, otherwise left justified.
+|
+|-
+| **debugShowQuery**
+| If set, the SQL will be displayed in the table footer. Useful while debugging new queries or just for interest.
+|
+|-
+| **user**
+| Blank (the default) to retrieve all users, or a specific user, or "*<NONE>*" for SQL access log entries with no user.
+|
+|-
+| **host**
+| Blank (the default) to retrieve all remote_hosts, or a specific host.
+|
+|-
+| **referrer**
+| Blank (the default) to retrieve all referrers, "*<NONE>*" to retrieve entries with no referrer, otherwise any referrer that matches this parameter, truncating longer referrers before matching. So a parameter of referrer='~http://localhost' will match '~http://localhost/wiki/index.php', '~http://localhost/wiki/index.php/~HomePage' etc.
+|
+|-
+| **local_referrers**
+| If set (the default), return all referrers. If not set, return only external referring sites, excluding references from within the wiki.
+| true
+|}
 
-period:
-  Use in combination with the _count_ parameter. The type of history period to retrieve from the SQL access log. Blank (the default) for all history, or one of "*weeks*", "*days*", "*hours*", or "*minutes*".
+== Adding new queries ==
 
-count:
-  Use in combination with the _period_ parameter. Must be a number. The number of periods to retrieve from the access log.
-
-caption:
-  The value of this parameter is used as the caption for the output. If not set, the caption on the table defaults to the mode.
-
-center:
-  If set, the table is centered on the page, otherwise left justified.
-
-debugShowQuery:
-  If set, the SQL will be displayed in the table footer. Useful while debugging new queries or just for interest.
-
-user:
-  Blank (the default) to retrieve all users, or a specific user, or "*<NONE>*" for SQL access log entries with no user.
-
-host:
-  Blank (the default) to retrieve all remote_hosts, or a specific host.
-
-referrer:
-  Blank (the default) to retrieve all referrers, "*<NONE>*" to retrieve entries with no referrer, otherwise any referrer that matches this parameter, truncating longer referrers before matching. So a parameter of referrer='~http://localhost' will match '~http://localhost/wiki/index.php', '~http://localhost/wiki/index.php/~HomePage' etc.
-
-local_referrers:
-  If set (the default), return all referrers. If not set, return only external referring sites, excluding references from within the wiki.
-
-==Adding new queries
-
-The file <tt>lib/plugin/~AnalyseAccessLogSql.php</tt> contains a default set of queries against the SQL access log.
-Feel free to change this file to suit your own needs, but please note that this requires filesystem access to the web server where PhpWiki is running.
+The file ##lib/plugin/~AnalyseAccessLogSql.php## contains a default set of queries against the SQL access log.
+Feel free to change this file to suit your own needs, but please note that this requires filesystem access to the web server where ~PhpWiki is running.
 In particular, this file may need to be modified to correctly query databases other than MySQL.
 The queries supplied by default are: "*Referring URLs*", "*Referring Domains*", "*Remote Hosts*", "*Users*" and "*Host Users*".
 
@@ -75,9 +92,9 @@ To add a new query, add a new section towards the end of the file, using one of 
         ."GROUP BY User";
 </pre>
 
-If you do add a query, please consider contributing it back to the PhpWiki project at http://sourceforge.net/projects/phpwiki
+If you do add a query, please consider contributing it back to the ~PhpWiki project at http://sourceforge.net/projects/phpwiki
 
-== API for ~AnalyseAccessLogSql
+== API for ~AnalyseAccessLogSql ==
 
 * input arguments:
   - *$mode* contains the name of the query requested in the plugin parameters.
@@ -102,10 +119,11 @@ If you do add a query, please consider contributing it back to the PhpWiki proje
   - strings enclosed in single quotes may not contain substrings enclosed in single quotes (actually the truth is more complex but let's leave it like that here), and
   - strings enclosed in double quotes will evaluate and replace variable names so that, for example, *"FROM $accesslog "* might be evaluated to *"FROM phpwiki_accesslog "*.
 
-== Author
+== Authors ==
+* [[PhpWiki:CharlesCorrigan|Charles Corrigan]]
+* Changes by [[PhpWiki:ReiniUrban|Reini Urban]]
 
-[Charles Corrigan|PhpWiki:CharlesCorrigan] %%%
-Changes by [Reini Urban|PhpWiki:ReiniUrban]
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,35 +1,43 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FAddingPages 6451 2009-01-24 21:40:21Z vargenau $
+Date: Fri,  4 Jun 2010 16:06:47 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FAddingPages 7463 2010-06-04 14:15:43Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAddingPages;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-To add a new page to Wiki, all you have to do is come up with a
-meaningful title, capitalize all the words and
-StringThemTogetherLikeThis. Wiki automagically recognizes it as a
-hyperlink. Alternatively, you can put anything into ~[brackets~].
+To add a new page to the wiki, all you have to do is come up with a
+meaningful title and put it between {{{[[double brackets]]}}}.
 
-Then you can go ahead and ClickTheQuestionMark at the end of your new
-hyperlink, and the Wiki will give you a window for making the new
-page.
+Then you can go ahead and click the question mark at the end of your new
+hyperlink, and the Wiki will give you a window for making the new page.
 
-If you wish to add documents with complex markup to the Wiki, you
+The page name can contain any character, except:
+* angle brackets (<>),
+* square brackets ([]),
+* curly brackets ({}),
+* double quotes ("),
+* pipe (|),
+* and hash sign (#) that is used for anchors.
+
+If you wish to add documents with complex markup to the wiki, you
 might be better off providing a URL to it than trying to add the text
 of the document here, like so:
+{{{
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
+}}}
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
 
-PhpWiki project homepage: http://phpwiki.sourceforge.net/
-
-The Wiki does not support most HTML tags, only the simpliest. See [TextFormattingRules|Help:TextFormattingRules].
+The Wiki does not support most HTML tags, only the simpliest. See [[Help:TextFormattingRules|TextFormattingRules]].
 <tags>They will just render like text.</tags> Wiki is meant to be as
 simple as possible to encourage use.
 
 Note that there is a feature that your system administrator can enable
 to allow embedded HTML, but there are security risks involved.
 
+<noinclude>
 ----
-
 [[PhpWikiDocumentation]]
+</noinclude>

@@ -1,26 +1,30 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FFoafViewerPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FFoafViewerPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FFoafViewerPlugin;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~FoafViewer* [[Help:WikiPlugin|plugin]] is written to facilitate the viewing of FOAF / RDF files in human readable form. Please note, it provides only basic features at this time.
+The **~FoafViewer** [[Help:WikiPlugin|plugin]] is written to facilitate the viewing of FOAF / RDF files in human readable form. Please note, it provides only basic features at this time.
 
-== Usage
-<verbatim>
-<?plugin FoafViewer foaf=http://www.myfoaf.com/foaf.rdf ?>
+== Usage ==
+
+{{{
+<<FoafViewer foaf=http://www.myfoaf.com/foaf.rdf>>
 /FoafViewerPlugin?foaf=http://www.myfoaf.com/foaf.rdf
-</verbatim>
+}}}
 
-== Download
+== Download ==
+
 http://www.ahsonline.com.au/dod/FoafViewerPlugin.zip
 
-== Example
-<?plugin FoafViewer foaf=http://www.ahsonline.com.au/dod/FOAF.rdf ?>
+== Example ==
+<<FoafViewer foaf=http://www.ahsonline.com.au/dod/FOAF.rdf>>
 
------
+<noinclude>
+----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

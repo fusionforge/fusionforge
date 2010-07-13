@@ -1,109 +1,110 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FCalendarPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FCalendarPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *Calendar* [[Help:WikiPlugin|plugin]] can be used to generate a monthly calendar in a
-wiki page. It's handy for [personal wikis|PhpWiki:PersonalWiki].
+The **Calendar** [[Help:WikiPlugin|plugin]] can be used to generate a monthly calendar in a
+wiki page. It's handy for [[PhpWiki:PersonalWiki|personal wikis]].
 
 Individual dates in the calendar link to specially named wiki pages.
 The names for the "day pages" are by default formed by appending the
 date to the pagename on which the calendar appears.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin Calendar ?>
-</verbatim>
-
-will get you:
-<?plugin Calendar ?>
-
-== Arguments
-
-=== Selection of Month
-
-<strong>year</strong>:
-
-  Specify the year for the calendar.  (Default: current year.)
-
-<strong>month</strong>:
-
-  Specify the month for the calendar.  (Default: current month.)
-
-<strong>month_offset</strong>:
-
-  Added to ''month''. Can be used to include several months worth of
-  calendars on a single wiki page.
-
-=== "Day Page" Names
-
-<strong>date_format</strong>:
-
-  [Strftime|php-function:strftime] style format string used to
-  generate page names for the "day pages." The default value is
-  =%Y-%m-%d=.
-
-<strong>prefix</strong>:
-
-  Prepended to the date (formatted per ''date_format'') to generate
-  the "day page" names. The default value is =~[pagename]/=.
-
-=== Appearance
-
-<strong>month_format</strong>:
-
-  [Strftime| php-function:strftime] style format string used to
-  generate the title of the calendar. (Default: =%B %Y=.)
-
-<strong>wday_format</strong>:
-
-  [Strftime| php-function:strftime] style format string used to
-  generate the day-of-week names at the top of the calendar.
-
-<strong>start_wday</strong>:
-
-  What day of the week does the calendar start on. This should be
-  specified as an integer in the range zero (Sunday) through six
-  (Saturday), inclusive.
-
-== Examples
-
-<verbatim>
-<?plugin Calendar month_offset=+1 ?>
-</verbatim>
+{{{
+<<Calendar>>
+}}}
 
 will get you:
-<?plugin Calendar month_offset=+1 ?>
+<<Calendar>>
 
-<verbatim>
-<?plugin Calendar start_wday=0 ?>
-</verbatim>
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| colspan="3" align="center" | **Selection of Month**
+|-
+| **year**
+| Specify the year for the calendar.
+| Current year
+|-
+| **month**
+| Specify the month for the calendar.
+| Current month
+|-
+| **month_offset**
+| Added to //month//. Can be used to include several months worth of calendars on a single wiki page.
+| 0
+|-
+| colspan="3" align="center" | **"Day Page" Names**
+|-
+| **date_format**
+| [[php-function:strftime|strftime]] style format string used to generate page names for the "day pages."
+| The default value is =%Y-%m-%d=.
+|-
+| **prefix**
+| Prepended to the date (formatted per //date_format//) to generate the "day page" names.
+| The default value is =~[pagename]/=.
+|-
+| colspan="3" align="center" | **Appearance**
+|-
+| **month_format**
+| [[php-function:strftime|strftime]] style format string used to generate the title of the calendar.
+| (Default: =%B %Y=.)
+|-
+| **wday_format**
+| [[php-function:strftime|strftime]] style format string used to generate the day-of-week names at the top of the calendar.
+|
+|-
+| **start_wday**
+| What day of the week does the calendar start on. This should be specified as an integer in the range zero (Sunday) through six (Saturday), inclusive.
+|
+|}
+
+== Examples ==
+
+{{{
+<<Calendar month_offset=+1>>
+}}}
 
 will get you:
-<?plugin Calendar start_wday=0 ?>
+<<Calendar month_offset=+1>>
 
-== See Also
+{{{
+<<Calendar start_wday=0>>
+}}}
 
-Help:CalendarListPlugin.
+will get you:
+<<Calendar start_wday=0>>
+
+== See Also ==
+
+* [[Help:CalendarListPlugin]]
 
 Often used together like this:
 
-<verbatim>
-<?plugin Calendar ?>
-<?plugin CalendarList ?>
-</verbatim>
+{{{
+<<Calendar>>
+<<CalendarList>>
+}}}
 
-== Authors
+== Authors ==
 
-This feature was inspired by [Calendar|http://manila.userland.com/],
-and first implemented by [Gary Benson|PhpWiki:GaryBenson]. It was later implemented as a
-[[Help:WikiPlugin|plugin]] by [Jeff Dairiki|PhpWiki:JeffDairiki].
+This feature was inspired by [[http://manila.userland.com/|Calendar]],
+and first implemented by [[PhpWiki:GaryBenson|Gary Benson]]. It was later implemented as a
+[[Help:WikiPlugin|plugin]] by [[PhpWiki:JeffDairiki|Jeff Dairiki]].
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

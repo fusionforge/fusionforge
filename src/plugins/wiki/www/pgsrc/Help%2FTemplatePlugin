@@ -1,44 +1,59 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FTemplatePlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FTemplatePlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTemplatePlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *Template* [[Help:WikiPlugin|plugin]] allows to include text from a wiki page and replace certain placeholders by parameters.
+The **Template** [[Help:WikiPlugin|plugin]] allows to include text from a wiki page and replace certain placeholders by parameters.
 
-A template can be seen as a parametrized block. It is similiar to [CreatePage] with the template argument, but at run-time.
+A template can be seen as a parametrized block. It is similiar to [[CreatePage]] with the template argument, but at run-time.
 
 There are two syntaxes to call a template, the usual Phpwiki syntax for plugins, and a more
 concise syntax similar to Mediawiki templates.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin Template page=Templates/Footer?>
-<?plugin Template page=Templates/Film vars="title=SomeFilm&year=1999" ?>
-{{Templates/Film|title=SomeFilm|year=1999}}
-</verbatim>
+=== Without parameters ===
 
-With a specific revision of the page:
-<verbatim>
-<?plugin Template page=somepage rev=5 ?>
+Plugin syntax:
+{{{
+<<Template page=Footer>>
+}}}
+
+Short syntax:
+{{{
+{{Footer}}
+}}}
+
+=== With parameters ===
+
+Plugin syntax:
+{{{
+<<Template page=Film vars="title=SomeFilm&year=1999">>
+}}}
+
+Short syntax:
+{{{
+{{Film|title=SomeFilm|year=1999}}
+}}}
+
+=== With a specific revision of the page ===
+
+Plugin syntax:
+{{{
+<<Template page=somepage rev=5>>
+}}}
+
+Short syntax:
+{{{
 {{somepage?version=5}}
-</verbatim>
+}}}
 
-If ENABLE_MARKUP_TEMPLATE is true, we support a Mediawiki-style syntax extension which maps
-<verbatim>
-{{TemplateFilm|title=Some Good Film|year=1999}}
-</verbatim>
-to
-<verbatim>
-<?plugin Template page=TemplateFilm vars="title=Some Good Film&year=1999" ?>
-</verbatim>
-
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -46,39 +61,51 @@ to
 ! Description
 ! Default value
 |-
-| <b>page</b>
+| **page**
 | pagename to be included as template
 | (empty)
 |-
-| <b>vars</b>
+| **vars**
 | optional parameters to be expanded inside the template
 | (empty)
 |-
-| <b>rev</b>
+| **rev**
 | page revision
 | most recent revision
 |-
-| <b>section</b>
+| **section**
 | just include a named section
 | (empty)
 |-
-| <b>sectionhead</b>
+| **sectionhead**
 | when including a named section show the heading
 | (empty)
 |}
 
-=== Parameter expansion
+=== Page to include ===
 
-  vars="var1=value1&var2=value2"
+If "Template:$page" exists, it is used.
+
+Else, if "Template/$page" exists, it is used.
+
+Else "$page" is used.
+
+This allows compatibility with Mediawiki that puts templates in the "Template:" namespace.
+
+=== Parameter expansion ===
 
 We only support named parameters, not numbered ones as in Mediawiki, and
 the placeholder is %%var%% and not ~{~{~{var~}~}~} as in Mediawiki.
 
+{{{
+vars="var1=value1&var2=value2"
+}}}
+
 The following predefined variables are automatically expanded if existing:
 {| class="bordered"
 |-
-| Variable
-| Description
+! Variable
+! Description
 |-
 | pagename
 |
@@ -114,23 +141,13 @@ The following predefined variables are automatically expanded if existing:
 |
 |}
 
-== Inclusion
+== Inclusion ==
 
-<noinclude> .. </noinclude> is stripped.
+~<noinclude> .. ~</noinclude> is stripped.
 
-<includeonly> .. </includeonly> is only expanded in pages using the template, not in the template itself.
+~<includeonly> .. ~</includeonly> is only expanded in pages using the template, not in the template itself.
 
-== Examples
-
-Standard syntax:
-<verbatim>
-<?plugin Template page=TemplateExample vars="title=TestTitle" ?>
-</verbatim>
-
-Shorter syntax:
-<verbatim>
-{{TemplateExample|title=TestTitle}}
-</verbatim>
-
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

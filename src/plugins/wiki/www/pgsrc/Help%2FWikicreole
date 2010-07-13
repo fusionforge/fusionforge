@@ -1,11 +1,11 @@
-Date: Sat, 24 Jan 2009 11:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FWikicreole 6437 2009-01-24 11:06:22Z vargenau $
+Date: Thu, 15 Apr 2010 16:32:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FWikicreole 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikicreole;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 <<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1 >>
@@ -26,9 +26,9 @@ Complete information about Wikicreole can be found at: http://www.wikicreole.org
 
 Bold text is made using two stars:
 
-<verbatim>
+{{{
 This sentence contains **words in bold**.
-</verbatim>
+}}}
 
 This sentence contains **words in bold**.
 
@@ -36,9 +36,9 @@ This sentence contains **words in bold**.
 
 Italics text is made using two slashes:
 
-<verbatim>
+{{{
 This sentence contains //words in italics//.
-</verbatim>
+}}}
 
 This sentence contains //words in italics//.
 
@@ -46,9 +46,9 @@ This sentence contains //words in italics//.
 
 Underline text is made using two hashes:
 
-<verbatim>
+{{{
 This sentence contains __underlined text__.
-</verbatim>
+}}}
 
 This sentence contains __underlined text__.
 
@@ -56,9 +56,9 @@ This sentence contains __underlined text__.
 
 Monospace text is made using two hashes:
 
-<verbatim>
+{{{
 This sentence contains ##monospace text##.
-</verbatim>
+}}}
 
 This sentence contains ##monospace text##.
 
@@ -66,9 +66,9 @@ This sentence contains ##monospace text##.
 
 Superscript text is made using two carets:
 
-<verbatim>
+{{{
 The XX^^th^^ century.
-</verbatim>
+}}}
 
 The XX^^th^^ century.
 
@@ -76,9 +76,9 @@ The XX^^th^^ century.
 
 Subscript text is made using two commas:
 
-<verbatim>
+{{{
 Water is H,,2,,O.
-</verbatim>
+}}}
 
 Water is H,,2,,O.
 
@@ -100,41 +100,41 @@ The content of the headers is parsed, allowing for instance to use subscript and
 
 === Simple link ===
 
-<verbatim>
+{{{
 This is a [[link]].
-</verbatim>
+}}}
 
 This is a [[link]].
 
 === Link with alternate text ===
 
-<verbatim>
+{{{
 This is a [[link|link with alternate text]].
-</verbatim>
+}}}
 
 This is a [[link|link with alternate text]].
 
 === External link (URL) ===
 
-<verbatim>
+{{{
 [[http://www.wikicreole.org]]
-</verbatim>
+}}}
 
 [[http://www.wikicreole.org]]
 
 === Raw external link (URL) ===
 
-<verbatim>
+{{{
 http://www.wikicreole.org
-</verbatim>
+}}}
 
 http://www.wikicreole.org
 
 === External link with alternate text ===
 
-<verbatim>
+{{{
 [[http://www.wikicreole.org|Visit the Wikicreole website]]
-</verbatim>
+}}}
 
 [[http://www.wikicreole.org|Visit the Wikicreole website]]
 
@@ -146,9 +146,9 @@ Paragraphs are made of text separated by a blank line.
 
 A line break is made with two backslashes.
 
-<verbatim>
+{{{
 This is the first line,\\and this is the second.
-</verbatim>
+}}}
 
 This is the first line,\\and this is the second.
 
@@ -156,13 +156,13 @@ This is the first line,\\and this is the second.
 
 === Unordered lists ===
 
-<verbatim>
+{{{
 * Item 1
 * Item 2
 ** Item 2.1
 ** Item 2.2
 * Item 3
-</verbatim>
+}}}
 
 * Item 1
 * Item 2
@@ -172,13 +172,13 @@ This is the first line,\\and this is the second.
 
 === Ordered lists ===
 
-<verbatim>
+{{{
 # Item 1
 # Item 2
 ## Item 2.1
 ## Item 2.2
 # Item 3
-</verbatim>
+}}}
 
 # Item 1
 # Item 2
@@ -190,9 +190,9 @@ This is the first line,\\and this is the second.
 
 A horizontal rule is made with four hyphens (or more)
 
-<verbatim>
+{{{
 ----
-</verbatim>
+}}}
 
 ----
 
@@ -201,23 +201,23 @@ A horizontal rule is made with four hyphens (or more)
 A inline image is created with curly brackets.
 An alternate text can be put after a pipe. If there is none, an empty alternate text will be created.
 
-<verbatim>
+{{{
 {{myimage.png}}
-</verbatim>
+}}}
 
-<verbatim>
+{{{
 {{myimage.png|this is my image}}
-</verbatim>
+}}}
 
 == Tables ==
 
 All cells are separated by single pipes. Leading spaces are permitted before the first cell of a row and trailing spaces are permitted at the end of a line. The ending pipe is optional. You can embed links, bold, italics, line breaks, and nowiki in table cells. Equal sign directly following pipe defines a header. Headers can be arranged horizontally or vertically.
 
-<verbatim>
+{{{
 |=Heading Col 1 |=Heading Col 2         |
 |Cell 1.1       |Two lines\\in Cell 1.2 |
 |Cell 2.1       |Cell 2.2               |
-</verbatim>
+}}}
 
 |=Heading Col 1 |=Heading Col 2         |
 |Cell 1.1       |Two lines\\in Cell 1.2 |
@@ -227,19 +227,13 @@ All cells are separated by single pipes. Leading spaces are permitted before the
 
 Between three opening curly brackets and three closing curly brackets, no wiki markup is interpreted.
 
-<verbatim>
-{{{
-//This// does **not** get [[formatted]]
-}}}
-</verbatim>
-
 {{{
 //This// does **not** get [[formatted]]
 }}}
 
-<verbatim>
+{{{
 Some examples of markup are: {{{** <i>this</i> ** }}}
-</verbatim>
+}}}
 
 Some examples of markup are: {{{** <i>this</i> ** }}}
 
@@ -253,15 +247,15 @@ It disables the automatic conversion of the URL immediately following it.
 
 It disables camel case in the word following it.
 
-<verbatim>
+{{{
 ~http://www.foo.com/
-</verbatim>
+}}}
 
 ~http://www.foo.com/
 
-<verbatim>
+{{{
 ~CamelCaseLink
-</verbatim>
+}}}
 
 ~CamelCaseLink
 
@@ -269,11 +263,13 @@ It disables camel case in the word following it.
 
 Plugins use double angle brackets.
 
-<verbatim>
+{{{
 <<CurrentTime format="date">>
-</verbatim>
+}}}
 
 <<CurrentTime format="date">>
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]]
+</noinclude>

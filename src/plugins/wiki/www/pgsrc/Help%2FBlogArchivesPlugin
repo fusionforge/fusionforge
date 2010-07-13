@@ -1,22 +1,22 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FBlogArchivesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FBlogArchivesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FBlogArchivesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The *~BlogArchives* [[Help:WikiPlugin|plugin]] lists monthly links for the current users blog if signed, or the ADMIN_USER's blog if not.
+The **~BlogArchives** [[Help:WikiPlugin|plugin]] lists monthly links for the current users blog if signed, or the ADMIN_USER's blog if not.
 
-== Usage
+== Usage ==
 
-<verbatim>
-<?plugin BlogArchives ?>
-</verbatim>
+{{{
+<<BlogArchives arguments>>
+}}}
 
-== Arguments
+== Arguments ==
 
 {| class="bordered"
 |-
@@ -24,27 +24,29 @@ The *~BlogArchives* [[Help:WikiPlugin|plugin]] lists monthly links for the curre
 ! Description
 ! Default value
 |-
-| <b>user</b>
+| **user**
 | Blog of given user
 | empty
 |-
-| <b>month</b>
+| **month**
 | List the blog titles per month
 | empty
 |}
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin BlogArchives ?>
-</verbatim>
+{{{
+<<BlogArchives user="John Smith">>
+}}}
 
-<?plugin BlogArchives ?>
+<!-- <<BlogArchives user="John Smith">> -->
 
-== Author
-* [Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
-== See Also
+== See Also ==
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,42 +1,42 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FHelloWorldPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 10:52:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FHelloWorldPlugin 7414 2010-05-19 08:57:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FHelloWorldPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 A simple example plugin.
 
-<?plugin HelloWorld salutation="Hello," name="Wiki User" ?>
+<<HelloWorld salutation="Hello," name="Wiki User" >>
 
 From the source of this page:
 
-<verbatim>
-<?plugin HelloWorld salutation="Hello," name="Wiki User" ?>
-</verbatim>
+{{{
+<<HelloWorld salutation="Hello," name="Wiki User" >>
+}}}
 
------
-PhpWiki's plugin architecture allows you to add custom page elements to your wiki. All you have to do is extend (subclass) the ~WikiPlugin class and create your output via the run() method, dependend on the Wiki- or Request arguments, 
+----
+~PhpWiki's plugin architecture allows you to add custom page elements to your wiki. All you have to do is extend (subclass) the ~WikiPlugin class and create your output via the run() method, dependend on the Wiki- or Request arguments,
 
 * either with the predefined HTML classes to create valid XHTML,
 * or by using templates, which are easier customizable, but generally more a mess to use and easier to create invalid XHTML.
 
-<?plugin PhpHighlight
+<<PhpHighlight
 
 /**
  * A simple demonstration WikiPlugin.
  *
  * Usage:
- * <?plugin HelloWorld?&gt;
- * <?plugin HelloWorld
+ * <<HelloWorld> >
+ * <<HelloWorld
  *          salutation="Greetings, "
  *          name=Wikimeister
- * ? >
- * <?plugin HelloWorld salutation=Hi ? >
- * <?plugin HelloWorld name=WabiSabi ? >
+ * > >
+ * <<HelloWorld salutation=Hi > >
+ * <<HelloWorld name=WabiSabi > >
  */
 
 // Constants are defined before the class.
@@ -57,11 +57,6 @@ extends WikiPlugin
 
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.5 $");
-    }
-
     // Establish default values for each of this plugin's arguments.
     function getDefaultArguments() {
         return array('salutation' => "Hello,",
@@ -78,7 +73,9 @@ extends WikiPlugin
         return $html;
     }
 };
-?>
+>>
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

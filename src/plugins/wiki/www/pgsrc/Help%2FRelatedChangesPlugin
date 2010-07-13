@@ -1,35 +1,36 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: Help%2FRelatedChangesPlugin 6451 2009-01-24 21:40:21Z vargenau $
+Date: Wed, 19 May 2010 18:15:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Help%2FRelatedChangesPlugin 7419 2010-05-19 16:49:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRelatedChangesPlugin;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~RelatedChanges** [[Help:WikiPlugin|plugin]] gives a list of changes on all pages which are linked to from this page.
 
-== Usage
-<verbatim>
-  <?plugin RelatedChanges ?>
-</verbatim>
+== Usage ==
+{{{
+<<RelatedChanges arguments>>
+}}}
 
-== Arguments
+== Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+The arguments are the same as for [[Help:RecentChanges|RecentChanges]] plugin.
 
-== Example
+== Example ==
 
-<verbatim>
-<?plugin RelatedChanges ?>
-</verbatim>
+{{{
+<<RelatedChanges>>
+}}}
 
-<?plugin RelatedChanges ?>
+<<RelatedChanges>>
 
-== Author
-[Reini Urban|PhpWiki:ReiniUrban]
+== Author ==
+* [[PhpWiki:ReiniUrban|Reini Urban]]
 
+<noinclude>
 ----
 [[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

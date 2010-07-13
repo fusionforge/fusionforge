@@ -1,16 +1,16 @@
-Date: Sat, 24 Jan 2009 20:18:24 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.14-20080124)
-X-Rcs-Id: $Id: PhpWikiPoll 6451 2009-01-24 21:40:21Z vargenau $
+Date: Sun, 20 Jun 2010 20:05:08 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiPoll 7553 2010-06-20 18:10:16Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiPoll;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Please answer our poll about PhpWiki:
+Please answer our poll about [[Help:PhpWiki|PhpWiki]]:
 
-<?plugin WikiPoll require_all=0 require_least=2
+<<WikiPoll require_all=0 require_least=2
            question[1]="Do you like PhpWiki?"
              answer[1][1]="Yes" answer[1][2]="Do not know" answer[1][3]="No"
            question[2]="Do you have PhpWiki installed by your own?"
@@ -23,8 +23,8 @@ Please answer our poll about PhpWiki:
              answer[4][6]="Mediawiki" answer[4][7]="Other"
            question[5]="Which PhpWiki version do you use?"
              answer[5][1]="1.2.x" answer[5][2]="1.3.1-12" answer[5][3]="1.3.13"
-             answer[5][4]="1.3.14"
-?>
+             answer[5][4]="1.3.14" answer[5][5]="1.4.0"
+>>
 
 ----
 [[PhpWikiDocumentation]]
