@@ -94,7 +94,7 @@ class CreateNews extends FForge_SeleniumTestCase
 		// Check modification of a news.
 		$this->click("link=News");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '" . BASE . "/news/admin/?group_id=6')]");
+		$this->click("//a[contains(@href, '" . ROOT . "/news/admin/?group_id=6')]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Second news");
 		$this->waitForPageToLoad("30000");
@@ -123,7 +123,7 @@ class CreateNews extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Special ' chars \""));
 		$this->click("link=News");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '". BASE . "/news/admin/?group_id=6')]");
+		$this->click("//a[contains(@href, '". ROOT . "/news/admin/?group_id=6')]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Test3");
 		$this->waitForPageToLoad("30000");

@@ -26,7 +26,7 @@ class Trove extends FForge_SeleniumTestCase
 {
 	function testTroveAdmin()
 	{
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->login('admin');
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");

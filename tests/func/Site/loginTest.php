@@ -53,7 +53,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 	function testLogin()
 	{
 		// Test with a normal login.
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", "admin");
@@ -65,7 +65,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->logout();
 				
 		// Test with an empty password.
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", "admin");
@@ -77,7 +77,7 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log In"));
 		
 		// Test with a wrong password.
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", "admin");

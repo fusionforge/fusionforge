@@ -19,7 +19,6 @@ define ('HOST', 'centos52.local');
 
 // Base URL where FusionForge is installed
 define ('ROOT', '');
-define ('BASE', '');
 
 // Database connection parameters.
 define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql

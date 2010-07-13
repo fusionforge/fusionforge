@@ -52,14 +52,14 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 		$this->createProject('ProjectA');
 					
 		// Testing extra-fields
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=ProjectA");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".BASE. "/tracker/admin/?group_id=6&atid=101')]");
+		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/?group_id=6&atid=101')]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");

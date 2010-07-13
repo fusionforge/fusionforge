@@ -52,7 +52,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->createProject('ProjectA');
 
 		// Test: Create a simple bug report (Message1/Text1).
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=ProjectA");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
@@ -126,14 +126,14 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->createProject('ProjectA');
 
 		// Testing extra-fields
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=ProjectA");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".BASE. "/tracker/admin/?group_id=6&atid=101')]");
+		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/?group_id=6&atid=101')]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
@@ -142,7 +142,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("field_type");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".BASE. "/tracker/admin/index.php?add_opt=1&boxid=22&group_id=6&atid=101')]");
+		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/index.php?add_opt=1&boxid=22&group_id=6&atid=101')]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "1");
 		$this->click("post_changes");
@@ -160,7 +160,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Element inserted"));
 
 		// Testing [#3649]: 0 not accepted when modifying a select list value
-		$this->open(BASE."/tracker/admin/index.php?group_id=6&atid=101&add_extrafield=1");
+		$this->open(ROOT."/tracker/admin/index.php?group_id=6&atid=101&add_extrafield=1");
 		$this->click("//tr[@id='field-number']/td[3]/a[5]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "10");
@@ -179,7 +179,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->createProject('ProjectA');
 
 		// Create a new tracker and delete it after.
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=ProjectA");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");

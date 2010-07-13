@@ -52,7 +52,7 @@ class CreateProject extends FForge_SeleniumTestCase
 	// After creation, project is visible on the main page.
 	function testSimpleCreate()
 	{
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", "admin");
@@ -89,7 +89,7 @@ class CreateProject extends FForge_SeleniumTestCase
 
 	function testCharsCreateTestCase()
 	{
-		$this->open( BASE );
+		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", "admin");

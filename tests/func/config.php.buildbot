@@ -12,21 +12,20 @@
 
 // Host where selenium-rc is running
 define ('SELENIUM_RC_HOST', getenv('SELENIUM_RC_HOST'));
-define ('SELENIUM_RC_DIR', getenv('SELENIUM_RC_DIR');
+define ('SELENIUM_RC_DIR', getenv('SELENIUM_RC_DIR'));
 
 // The forge's hostname
 define ('HOST', getenv('HOST'));
 
 // Base URL where FusionForge is installed
 define ('ROOT', '');
-define ('BASE', '');
 
 // Database connection parameters.
 define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql
 define('DB_NAME', 'fforge');
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', 'php '.dirname(__FILE__).'/db_reload.php');
+define('DB_INIT_CMD', "ssh root@".HOST." 'cd /usr/share/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot php db_reload.php'");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'xxxxxx')

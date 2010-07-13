@@ -17,7 +17,7 @@ define ('SELENIUM_RC_HOST', '192.168.0.204');
 define ('URL', 'http://centos52.local/');
 
 // Base URL where FusionForge is installed
-define ('BASE', '');
+define ('ROOT', '');
 
 // Database connection parameters.
 define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql

@@ -100,10 +100,10 @@ $session_hash = '000TESTSUITE000';
 // Temporary.
 $sys_default_theme_id = 5;
 
-set_include_path(".:/opt/gforge/:/opt/gforge/www/include/:/etc/gforge/");
+//set_include_path(".:/opt/gforge/:/opt/gforge/www/include/:/etc/gforge/");
 
 require_once '../../gforge/www/env.inc.php';    
-require_once $gfwww.'include/squal_pre.php';    
+require_once $gfwww.'include/pre.php';
 
 // Add alcatel theme to the database.
 db_query_params ('INSERT INTO themes (theme_id, dirname, fullname, enabled) VALUES (5, $1, $2, true)',

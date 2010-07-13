@@ -49,7 +49,7 @@ class Top extends FForge_SeleniumTestCase
 {
     function testWalkInTop()
     {
-    	$this->open( BASE );
+    	$this->open( ROOT );
 
 		// Test that from the main page we access the most active this week.    
 	    $this->click("link=[ More ]");
