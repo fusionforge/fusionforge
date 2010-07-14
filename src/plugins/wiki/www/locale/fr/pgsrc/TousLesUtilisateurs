@@ -1,18 +1,16 @@
-Date: Thu, 11 Jan 2007 22:55:55 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.13)
-X-Rcs-Id: $Id: TousLesUtilisateurs 6197 2008-08-25 12:33:05Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: TousLesUtilisateurs 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=TousLesUtilisateurs;
-  pgsrc_version="2 $Revision: 6197 $";
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-
-Voici la liste de tous les utilisateurs qui se sont dÈj‡ connectÈs,
-ont crÈÈ leur page personnelle et ont dÈfinis des prÈfÈrences. 
+Voici la liste de tous les utilisateurs qui se sont d√©j√† connect√©s,
+ont cr√©√© leur page personnelle et ont d√©finis des pr√©f√©rences. 
 ----
-<?plugin AllUsers?>
+<<AllUsers>>
 ----
-[CategoryPluginWiki] GestionDesPlugins
+[[CategoryPluginWiki]]

@@ -1,40 +1,39 @@
-Date: Sat, 5 Jun 2004 16:49:56 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.10)
-X-Rcs-Id: $Id: Aide%2FPluginListeDuCalendrier 6197 2008-08-25 12:33:05Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Aide%2FPluginListeDuCalendrier 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PluginListeDuCalendrier;
-  pgsrc_version="2 $Revision: 6197 $";
+  pagename=Aide%2FPluginListeDuCalendrier;
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-!!Description
+===Description
 
-Ce plugin est utilisÈ avec PluginCalendrier. Il a ÈtÈ Ècrit pour ceux qui
-veulent utilisÈ wiki comme un gestionnaire d'informations personnelles. 
+Ce plugin est utilis√© avec PluginCalendrier. Il a √©t√© √©crit pour ceux qui
+veulent utilis√© wiki comme un gestionnaire d'informations personnelles. 
 
-!!Usage
+===Usage
 
-Il suffit de cliquer sur une date du calendrier, d'Èditer la t‚che pour ce jour 
-puis de revenir sur la page courante. L'ÈvËnement doit apparaÓtre dans une liste
+Il suffit de cliquer sur une date du calendrier, d'√©diter la t√¢che pour ce jour 
+puis de revenir sur la page courante. L'√©v√®nement doit appara√Ætre dans une liste
 sous le calendrier.
 
-<verbatim>
-<?plugin Calendar ?>
-<?plugin CalendarList ?>
-</verbatim>
+{{{
+<<Calendar >>
+<<CalendarList >>
+}}}
 
-!!Exemple
+===Exemple
 
-Cliquez sur une date, Èditer puis revenir sur cette page :
+Cliquez sur une date, √©diter puis revenir sur cette page :
 
-<?plugin Calendar ?>
+<<Calendar >>
 
-<?plugin CalendarList ?>
+<<CalendarList >>
 
 ----
 
-[CategoryPluginWiki]
+[[CategoryPluginWiki]]
 
 

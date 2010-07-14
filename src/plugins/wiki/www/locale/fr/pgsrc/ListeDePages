@@ -1,15 +1,14 @@
-Date: Fri, 18 Jun 2004 11:56:12 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.11pre)
-X-Rcs-Id: $Id: ListeDePages 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: ListeDePages 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ListeDePages;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Ein einfaches Beispiel für das PluginListeDePages. Hauptsächlich für ein wikilens Thema benutzt, 
+Ein einfaches Beispiel fÃ¼r das PluginListeDePages. HauptsÃ¤chlich fÃ¼r ein wikilens Thema benutzt, 
 um Ratings Info anzuzeigen.
 
-<?plugin ListPages pages=HomePage,FindPage,WikiWikiWeb ?>
+<<ListPages pages=HomePage,FindPage,WikiWikiWeb >>

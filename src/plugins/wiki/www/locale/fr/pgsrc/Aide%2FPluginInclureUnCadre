@@ -1,36 +1,35 @@
-Date: Sat, 5 Jun 2004 16:49:56 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.10)
-X-Rcs-Id: $Id: Aide%2FPluginInclureUnCadre 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Aide%2FPluginInclureUnCadre 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PluginInclureUnCadre;
-  pgsrc_version="2 $Revision: 6193 $";
+  pagename=Aide%2FPluginInclureUnCadre;
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Ce plugin créera un cadre HTML qui remplira complètement la surface de la 
-page (c'est-à-dire toute la surface que l'utilisateur peut éditer). Tout 
-autre texte sera rejeté quand la page est affichée (tout ce qui est en 
-dehors de l'appel du plugin). Dans le langage de l'hypertexte, ça s'appelle 
+Ce plugin crÃ©era un cadre HTML qui remplira complÃ¨tement la surface de la 
+page (c'est-Ã -dire toute la surface que l'utilisateur peut Ã©diter). Tout 
+autre texte sera rejetÃ© quand la page est affichÃ©e (tout ce qui est en 
+dehors de l'appel du plugin). Dans le langage de l'hypertexte, Ã§a s'appelle 
 la <i>transclusion</i>.
 
-Vous pouvez être intéressé également par PluginInclureUnePage.
+Vous pouvez Ãªtre intÃ©ressÃ© Ã©galement par PluginInclureUnePage.
 
 Exemples: pour inclure une page depuis un autre site, utilisez l'argument <b>src</b> :
 
-<verbatim>
-<?plugin FrameInclude src="http://phpwiki.org/" ?>
-</verbatim>
+{{{
+<<FrameInclude src="http://phpwiki.org/" >>
+}}}
 
 Pour inclure une page depuis ce wiki, utilisez l'argument <b>page</b> :
 
-<verbatim>
-<?plugin FrameInclude page=PageAccueil ?>
-</verbatim>
+{{{
+<<FrameInclude page=PageAccueil >>
+}}}
 
-Pour plus d'informations sur ce plugin, lisez s'il vous plaît, la source
-PHP dans le répertoire /lib/plugin.
+Pour plus d'informations sur ce plugin, lisez s'il vous plaÃ®t, la source
+PHP dans le rÃ©pertoire /lib/plugin.
 
 
 

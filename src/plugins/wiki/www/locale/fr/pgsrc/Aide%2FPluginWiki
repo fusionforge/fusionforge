@@ -1,120 +1,103 @@
-Date: Sat, 5 Jun 2004 16:49:57 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.10)
-X-Rcs-Id: $Id: Aide%2FPluginWiki 6197 2008-08-25 12:33:05Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Aide%2FPluginWiki 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PluginWiki;
-  pgsrc_version="3 $Revision: 6197 $";
+  pagename=Aide%2FPluginWiki;
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 PhpWiki supporte les plugins depuis 1.3.x
 
-~Les plugins Wiki permettent à chacun d'ajouter un nouveau type de contenu
-dynamique (ou autre fonctionnalité) aux pages wiki avec PhpWiki. Par exemple,
-dans ce wiki, les DernièresModifs, RétroLiens, PagesSemblables et la plupart
-des autres pages indexées sont toutes implémentées en utilisant les plugins.
+~Les plugins Wiki permettent Ã  chacun d'ajouter un nouveau type de contenu
+dynamique (ou autre fonctionnalitÃ©) aux pages wiki avec PhpWiki. Par exemple,
+dans ce wiki, les DerniÃ¨resModifs, RÃ©troLiens, PagesSemblables et la plupart
+des autres pages indexÃ©es sont toutes implÃ©mentÃ©es en utilisant les plugins.
 
-À plus ou moins court terme, l'ancien style phpwiki [URLMagiquesPhpWiki] sera
-remplacé par des plugins également.
+Ã€ plus ou moins court terme, l'ancien style phpwiki [URLMagiquesPhpWiki] sera
+remplacÃ© par des plugins Ã©galement.
 
-!!!Exemple
+== Exemple
 
-Habituellement, on appelle un plugin en écrivant quelque chose comme ceci :
+Habituellement, on appelle un plugin en Ã©crivant quelque chose comme ceci :
 
-<verbatim>
-<?plugin BackLinks?>
-</verbatim>
+{{{
+<<BackLinks>>
+}}}
 
-dans une page wiki classique. Cet exemple particulier génère une liste des 
-pages qui sont liées à la page courante. Ici on a :
+dans une page wiki classique. Cet exemple particulier gÃ©nÃ¨re une liste des 
+pages qui sont liÃ©es Ã  la page courante. Ici on a :
 
-<?plugin BackLinks?>
+<<BackLinks>>
 
-(C'est intéressant pour les pages Catégorie ou Sujets. Vous pouvez l'utiliser
+(C'est intÃ©ressant pour les pages CatÃ©gorie ou Sujets. Vous pouvez l'utiliser
 pour en obtenir une liste automatique)
 
-!!!Détails
+== DÃ©tails
 
-Les plugins peuvent être utilisés avec une liste d'arguments. Il existe 
-quatre moyens pour spécifier leur valeur. Dans l'ordre de priorité :
+Les plugins peuvent Ãªtre utilisÃ©s avec une liste d'arguments. Il existe 
+quatre moyens pour spÃ©cifier leur valeur. Dans l'ordre de prioritÃ© :
 
-# L'appel du plugin peut spécifier la valeur d'un argument comme ceci :
-  <verbatim>
-  <?plugin BackLinks page=OtherPage ?>
-  </verbatim>
+# L'appel du plugin peut spÃ©cifier la valeur d'un argument comme ceci :
+  {{{
+  <<BackLinks page=OtherPage >>
+  }}}
 
-# L'arguement peut être spécifié via l'argument d'une requête HTTP. Ceci ne 
-  devrait pas se produire (ce n'est pas permis) à moins que l'argument soit 
-  mentionné dans l'appel du plugin : 
+# L'arguement peut Ãªtre spÃ©cifiÃ© via l'argument d'une requÃªte HTTP. Ceci ne 
+  devrait pas se produire (ce n'est pas permis) Ã  moins que l'argument soit 
+  mentionnÃ© dans l'appel du plugin : 
 
-  <verbatim>
-  <?plugin BackLinks page ?>
-  </verbatim>
+  {{{
+  <<BackLinks page >>
+  }}}
 
-# Valeurs par défaut spécifiées dans l'appel du plugin :
+# Valeurs par dÃ©faut spÃ©cifiÃ©es dans l'appel du plugin :
 
-  <verbatim>
-  <?plugin BackLinks page||=OtherPage ?>
-  </verbatim>
+  {{{
+  <<BackLinks page||=OtherPage >>
+  }}}
 
-# Le plugin remplace les valeurs par défaut pour chaque argument utilisé
+# Le plugin remplace les valeurs par dÃ©faut pour chaque argument utilisÃ©
   par des arguments d'URL comme ceci :
-  <verbatim>
+  {{{
     BackLinks?page=ThisPage&sortby=-mtime
-  </verbatim>
-  (Le plugin RétroLiens utilise la page courante comme valeur par défaut
+  }}}
+  (Le plugin RÃ©troLiens utilise la page courante comme valeur par dÃ©faut
   pour l'argument ''page'')
 
-!!! Il y a quatre types de base pour les plugins :
+== Il y a quatre types de base pour les plugins :
 
-Tous les plugins viennent de la classe PluginWiki étendant la méthode run
-qui retourne un objet arbre des objets HTML, et doivent réagir sur chaque 
+Tous les plugins viennent de la classe PluginWiki Ã©tendant la mÃ©thode run
+qui retourne un objet arbre des objets HTML, et doivent rÃ©agir sur chaque 
 arguments fournit depuis une ~WikiPage (voir les arguments plus loin) ou
-passé par l'URL (arguments GET et POST définit via '||=').
+passÃ© par l'URL (arguments GET et POST dÃ©finit via '||=').
 
-  *plugin-form* est utilisé pour afficher une boîte input type=text box 
-   comme argument par défaut.
+  *plugin-form* est utilisÃ© pour afficher une boÃ®te input type=text box 
+   comme argument par dÃ©faut.
 
-  *plugin-head* n'existe plus !
+{{{
+<<PluginName [args...] >>
+}}}
 
-  *plugin-link* peut être utilisé pour changer les liens sortants pour 
-  cette page.
-
-<verbatim>
-<?plugin PluginName [args...] ?>
-</verbatim>
-
-<verbatim>
+{{{
 <?plugin-form PluginName [args...] ?>
-</verbatim>
+}}}
 
-<verbatim>
-<?plugin-link PluginName [args...] ?>
-</verbatim>
-;:Ce n'est pas utilisé.
+== Plugins existants :
 
-<verbatim>
-<?plugin-head PluginName [args...] ?>
-</verbatim>
-;:Ce n'est plus utilisé.
-
-
-!!!Plugins existants :
-
-Voir GestionDesPlugins pour la liste actuelle. La plupart des plugins ont leur 
-propre page de documentation avec le mot *Plugin* ajouté.
+Voir [[GestionDesPlugins]] pour la liste actuelle. La plupart des plugins ont leur 
+propre page de documentation avec le mot *Plugin* ajoutÃ©.
 
 -----
 
-Pages dans cette catégorie :
+Pages dans cette catÃ©gorie :
 
-<?plugin BackLinks page=[pagename] noheader=1?>
+<<BackLinks page=[pagename] noheader=1>>
 
-* RechercheEnTexteIntégral : ChercherUnePage
+* RechercheEnTexteIntÃ©gral : ChercherUnePage
 * RechercheParTitre : PagesSemblables (match_head, match_tail).
 
 -----
 
-[DocumentationDePhpWiki]
+[[DocumentationDePhpWiki]]

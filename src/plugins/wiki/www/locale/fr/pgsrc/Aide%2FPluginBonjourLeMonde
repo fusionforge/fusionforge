@@ -1,46 +1,45 @@
-Date: Sat, 5 Jun 2004 16:49:56 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.10)
-X-Rcs-Id: $Id: Aide%2FPluginBonjourLeMonde 6213 2008-08-26 18:20:08Z vargenau $
+Date: Wed, 19 May 2010 10:52:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Aide%2FPluginBonjourLeMonde 7414 2010-05-19 08:57:58Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PluginBonjourLeMonde;
-  pgsrc_version="2 $Revision: 6213 $";
+  pagename=Aide%2FPluginBonjourLeMonde;
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 Un simple exemple de plugin :
 
-<?plugin HelloWorld salutation="Bonjour," name="UtilisateurWiki" ?>
+<<HelloWorld salutation="Bonjour," name="UtilisateurWiki" >>
 
 Depuis la source de cette page :
 
-<verbatim>
-<?plugin HelloWorld salutation="Bonjour," name="UtilisateurWiki" ?>
-</verbatim>
+{{{
+<<HelloWorld salutation="Bonjour," name="UtilisateurWiki" >>
+}}}
 
 -----
-L'architecture d'un plugin vous permet d'ajouter des éléments personnalisé à votre wiki.
-Tout ce que vous avez à faire est d'étendre la classe ~WikiPlugin et créer une sortie via 
-la méthode run() dépendant du Wiki- ou des arguments de requête,
+L'architecture d'un plugin vous permet d'ajouter des Ã©lÃ©ments personnalisÃ© Ã  votre wiki.
+Tout ce que vous avez Ã  faire est d'Ã©tendre la classe ~WikiPlugin et crÃ©er une sortie via 
+la mÃ©thode run() dÃ©pendant du Wiki- ou des arguments de requÃªte,
 
-* soit avec les classes HTML prédéfinis pour créer du XHTML valide
-* ou en utilisant les modèles (templates) qui sont plus facilement personnalisables mais
-généralement plus sale à utiliser et plus facile pour créer du XHTML non valide.
+* soit avec les classes HTML prÃ©dÃ©finis pour crÃ©er du XHTML valide
+* ou en utilisant les modÃ¨les (templates) qui sont plus facilement personnalisables mais
+gÃ©nÃ©ralement plus sale Ã  utiliser et plus facile pour crÃ©er du XHTML non valide.
 
-<?plugin PhpHighlight
+<<PhpHighlight
 
 /**
  * A simple demonstration WikiPlugin.
  *
  * Usage:
- * <?plugin HelloWorld?&gt;
- * <?plugin HelloWorld
+ * <<HelloWorld> >
+ * <<HelloWorld
  *          salutation="Greetings, "
  *          name=Wikimeister
- * ? >
- * <?plugin HelloWorld salutation=Hi ? >
- * <?plugin HelloWorld name=WabiSabi ? >
+ * > >
+ * <<HelloWorld salutation=Hi > >
+ * <<HelloWorld name=WabiSabi > >
  */
 
 // Constants are defined before the class.
@@ -61,11 +60,6 @@ extends WikiPlugin
 
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6213 $");
-    }
-
     // Establish default values for each of this plugin's arguments.
     function getDefaultArguments() {
         return array('salutation' => "Hello,",
@@ -82,8 +76,8 @@ extends WikiPlugin
         return $html;
     }
 };
-?>
+>>
 
 ----
 
-[CategoryPluginWiki]
+[[CategoryPluginWiki]]

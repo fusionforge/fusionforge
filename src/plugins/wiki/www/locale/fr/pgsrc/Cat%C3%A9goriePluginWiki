@@ -1,0 +1,13 @@
+Date: Thu, 15 Apr 2010 16:34:12 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: CategoryWikiPlugin 6184 2008-08-22 10:33:41Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Cat%C3%A9goriePluginWiki;
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+<<BackLinks info||=pagename,mtime,hits,author sortby||=pagename >>
+
+----
+[[CatégorieCatégorie]]
