@@ -1,22 +1,22 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: WikiWikiWeb 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:33:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: WikiWikiWeb 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=WikiWikiWeb;
   flags="";
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-En WikiWikiWeb är en webbplats där alla kan bidra till innehållet. Den mest välkända och mest använda Wikin är Portland Pattern Repository på http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+En WikiWikiWeb Ã¤r en webbplats dÃ¤r alla kan bidra till innehÃ¥llet. Den mest vÃ¤lkÃ¤nda och mest anvÃ¤nda Wikin Ã¤r Portland Pattern Repository pÃ¥ http://c2.com/cgi-bin/wiki?WikiWikiWeb.
 
-Där fann jag följande relevanta uttalanden (översatta till svenska):
+DÃ¤r fann jag fÃ¶ljande relevanta uttalanden (Ã¶versatta till svenska):
 
-''Meningen är att göra formuläret i RedigeraText enkelt och få [SökEfterSida] att söka snabbt.''
+''Meningen Ã¤r att gÃ¶ra formulÃ¤ret i RedigeraText enkelt och fÃ¥ [SÃ¶kEfterSida] att sÃ¶ka snabbt.''
 
-''Förutom att vara snabb, strävar den här webbplatsen även efter zen-idealen som generellt kallas WabiSabi. Zen finner skönhet i det imperfekta och kortlivade. När det kommer till kritan är det allt som behövs.''
+''FÃ¶rutom att vara snabb, strÃ¤var den hÃ¤r webbplatsen Ã¤ven efter zen-idealen som generellt kallas WabiSabi. Zen finner skÃ¶nhet i det imperfekta och kortlivade. NÃ¤r det kommer till kritan Ã¤r det allt som behÃ¶vs.''
 
-Du kan säga hej i [Gästboken] eller läsa om [HurManAnvänderWiki] och
-[LäggaTillSidor]. Varsågod, börja diskutera, lek och ha roligt!
+Du kan sÃ¤ga hej i [GÃ¤stboken] eller lÃ¤sa om [HurManAnvÃ¤nderWiki] och
+[LÃ¤ggaTillSidor]. VarsÃ¥god, bÃ¶rja diskutera, lek och ha roligt!
 
 --SteveWainstead
 

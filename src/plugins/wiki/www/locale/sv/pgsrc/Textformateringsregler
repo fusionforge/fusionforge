@@ -1,80 +1,80 @@
-Date: Thu, 28 Mar 2002 14:57:00 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: Textformateringsregler 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:33:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Textformateringsregler 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Textformateringsregler;
   flags=PAGE_LOCKED;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-! Översikt
+! Ã–versikt
 [Textformateringsregler]%%%
-__Markering:__ '____' för ''lutande'', _''''_ för __fet__, '____'_''''_ för ''__både och__''.%%%
-__Listor:__ * för punktlistor, # för numrerade listor, ''__;__ term __:__ definition'' för definitionslistor.%%%
-__Referenser:__ !BindIhopOrdMedStoraBokstäver eller använd hakar för en [[länk] eller URL [[!http://cool.wiki.int/].%%%
-__''Footnotes'':__ Använd [[1],[[2],[[3],...%%%
-__''och Redigera Länkar'':__ Undvik länkning med "!": !!SkapaEjHyperlänk, namnge länkar med [[[[text | URL].%%%
+__Markering:__ '____' fÃ¶r ''lutande'', _''''_ fÃ¶r __fet__, '____'_''''_ fÃ¶r ''__bÃ¥de och__''.%%%
+__Listor:__ * fÃ¶r punktlistor, # fÃ¶r numrerade listor, ''__;__ term __:__ definition'' fÃ¶r definitionslistor.%%%
+__Referenser:__ !BindIhopOrdMedStoraBokstÃ¤ver eller anvÃ¤nd hakar fÃ¶r en [[lÃ¤nk] eller URL [[!http://cool.wiki.int/].%%%
+__''Footnotes'':__ AnvÃ¤nd [[1],[[2],[[3],...%%%
+__''och Redigera LÃ¤nkar'':__ Undvik lÃ¤nkning med "!": !!SkapaEjHyperlÃ¤nk, namnge lÃ¤nkar med [[[[text | URL].%%%
 __Blandat:__ "!", "!!", "!!!" skapar rubriker, "%''''%%" skapar radbrytning, "-''''---" skapar en horisontell linje.%%%
 
 ----
 ! Paragrafer
 
 * Indentera inte paragrafer
-* Rader radbryts där det behövs
-* Använd blankrader som separatorer
-* Fyra eller mer streck gör en horisontell linje
-* %%''''% gör en radbrytning (i rubriker och listor också)
+* Rader radbryts dÃ¤r det behÃ¶vs
+* AnvÃ¤nd blankrader som separatorer
+* Fyra eller mer streck gÃ¶r en horisontell linje
+* %%''''% gÃ¶r en radbrytning (i rubriker och listor ocksÃ¥)
 
 
 ! Listor
 
-* asterisk för första nivån
-** asterisk-asterisk för andra nivån, osv.
-* Använd * för punktlistor, # för numrerade listor (blanda hur du vill)
-* semikolon-term-kolon-definition för definitionslistor:
-;term här:definition här, som i en lista med <DL><DT><DD>
-* En rad för varje punkt i listan
-* Andra inledande mellanslag signalerar förformaterad text och ändrar teckensnittet
+* asterisk fÃ¶r fÃ¶rsta nivÃ¥n
+** asterisk-asterisk fÃ¶r andra nivÃ¥n, osv.
+* AnvÃ¤nd * fÃ¶r punktlistor, # fÃ¶r numrerade listor (blanda hur du vill)
+* semikolon-term-kolon-definition fÃ¶r definitionslistor:
+;term hÃ¤r:definition hÃ¤r, som i en lista med <DL><DT><DD>
+* En rad fÃ¶r varje punkt i listan
+* Andra inledande mellanslag signalerar fÃ¶rformaterad text och Ã¤ndrar teckensnittet
 
 ! Rubriker
 
-* "!" vid början av raden för en liten rubrik
-* "!!" vid början av raden för en mellanrubrik
-* "!!!" vid början av raden för en stor rubrik
+* "!" vid bÃ¶rjan av raden fÃ¶r en liten rubrik
+* "!!" vid bÃ¶rjan av raden fÃ¶r en mellanrubrik
+* "!!!" vid bÃ¶rjan av raden fÃ¶r en stor rubrik
 
 ! Teckensnitt
 
-* Indentera med ett eller flera mellanslag för att få text med lika breda tecken:
+* Indentera med ett eller flera mellanslag fÃ¶r att fÃ¥ text med lika breda tecken:
 
- Detta är text med lika breda tecken
-Detta är inte det
+ Detta Ã¤r text med lika breda tecken
+Detta Ã¤r inte det
 
 !Indenterade paragrafer
 ''(Citat)''
 
 * semikolon-kolon -- fungerar som <BLOCKQUOTE>
 
-;: detta är ett indenterat block med text
+;: detta Ã¤r ett indenterat block med text
 
 ! Markering
 
-* Använd dubbla apostrofer ('') för vanlig betoning (vanligtvis ''lutande stil'')
-* Använd dubbla understreck (__) för stark betoning (vanligtvis __fet stil__)
+* AnvÃ¤nd dubbla apostrofer ('') fÃ¶r vanlig betoning (vanligtvis ''lutande stil'')
+* AnvÃ¤nd dubbla understreck (__) fÃ¶r stark betoning (vanligtvis __fet stil__)
 * Blanda dem om du vill: __''fet lutande stil''__
-* ''Markering'' kan användas ''flera'' gånger på en rad, men ''kan inte'' användas över radgränser:
+* ''Markering'' kan anvÃ¤ndas ''flera'' gÃ¥nger pÃ¥ en rad, men ''kan inte'' anvÃ¤ndas Ã¶ver radgrÃ¤nser:
 
 ''detta
 kommer inte att fungera''
 
 ! Referenser
 
-* Hyperlänkar till andra sidor inom Wikin görs genom att sätta sidnamnet innanför hakparenteser: [detta är en länk] eller genom att [AnvändaWikiOrd] (föredras)
-* Hyperlänkar till externa sidor görs så här: [http://www.wcsb.org/]
-* Du kan namnge länkarna genom att skriva ett namn, ett lodrätt streck och sedan hyperlänken eller sidnamnet: [PhpWiki-hemsidan | http://phpwiki.sourceforge.net/] - [framsidan | Framsida]
-* Du kan undvika att länkar skapas genom att sätta "!" framför ordet som du inte vill vara en länk, t.ex. !InteEnWikilänk, !http://inte.heller.en.länk/
+* HyperlÃ¤nkar till andra sidor inom Wikin gÃ¶rs genom att sÃ¤tta sidnamnet innanfÃ¶r hakparenteser: [detta Ã¤r en lÃ¤nk] eller genom att [AnvÃ¤ndaWikiOrd] (fÃ¶redras)
+* HyperlÃ¤nkar till externa sidor gÃ¶rs sÃ¥ hÃ¤r: [http://www.wcsb.org/]
+* Du kan namnge lÃ¤nkarna genom att skriva ett namn, ett lodrÃ¤tt streck och sedan hyperlÃ¤nken eller sidnamnet: [PhpWiki-hemsidan | http://phpwiki.sourceforge.net/] - [framsidan | Framsida]
+* Du kan undvika att lÃ¤nkar skapas genom att sÃ¤tta "!" framfÃ¶r ordet som du inte vill vara en lÃ¤nk, t.ex. !InteEnWikilÃ¤nk, !http://inte.heller.en.lÃ¤nk/
 * You can create footnotes by using [[1], [[2], [[3], ... like this here [1]. See footnote for counterpart.  (If the [[ is in the first column, it is a footnote ''definition'' rather than a footnote ''reference'' [1].)
-* Det gamla sättet att skapa länkar av URL:er stöds fortfarande: Föregå varje URL med "http:", "ftp:" eller "mailto:" för att skapa länkar automatiskt, så här: http://c2.com/
-* Bilder med URL:er som slutar med .png, .gif eller .jpg innanför hakparenteser läggs in i dokumentet av sig själv: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+* Det gamla sÃ¤ttet att skapa lÃ¤nkar av URL:er stÃ¶ds fortfarande: FÃ¶regÃ¥ varje URL med "http:", "ftp:" eller "mailto:" fÃ¶r att skapa lÃ¤nkar automatiskt, sÃ¥ hÃ¤r: http://c2.com/
+* Bilder med URL:er som slutar med .png, .gif eller .jpg innanfÃ¶r hakparenteser lÃ¤ggs in i dokumentet av sig sjÃ¤lv: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
 
 ! Tables
 
@@ -94,6 +94,6 @@ kommer inte att fungera''
 ! HTML
 
 * Bry dig inte
-* < och > är sig själva
+* < och > Ã¤r sig sjÃ¤lva
 * &-tecknet fungerar inte
-* Om du verkligen måste använda HTML kan systemadministratören slå på detta tillval. Börja varje rad med ett lodrätt streck (|). Observera att detta tillval är avslaget som standard.
+* Om du verkligen mÃ¥ste anvÃ¤nda HTML kan systemadministratÃ¶ren slÃ¥ pÃ¥ detta tillval. BÃ¶rja varje rad med ett lodrÃ¤tt streck (|). Observera att detta tillval Ã¤r avslaget som standard.

@@ -1,0 +1,32 @@
+Date: Thu, 15 Apr 2010 16:33:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: L%C3%A4ggaTillSidor 7339 2010-04-15 15:26:08Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=L%C3%A4ggaTillSidor;
+  flags="";
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Allt du behöver göra för att skapa en sida i Wiki är att komma på en
+meningsfull titel, skriva alla ord med stor bokstav i början av ordet
+och [SättaIhopDemSåHär]. Wiki kommer automatiskt att känna igen det som
+en hyperlänk. Alternativt kan du sätt vad som helst innanför
+[hakparenteser]. Wiki känner inte igen länkar med sammansatta ord om
+orden innehåller å,ä eller ö, t.ex. GratisÖlÅtAllaÄlgar. I dessa fall
+måste hakparenteser användas.
+
+Sedan kan du [KlickaPåFrågetecknet] efter hyperlänken så öppnar Wiki ett
+fönster där du kan beskriva den nya sidan.
+
+Vill du lägga till ett dokument med komplicerad design till Wiki är det
+bättre om du ger en URL istället för att försöka skriva dokumentet här. Det
+gör du på det här sättet:
+
+Projekthemsidan för PhpWiki: http://phpwiki.sourceforge.net
+
+Wiki stöder inte HTML-taggar (se [Textformateringsregler]). <taggar>De
+kommer att rendreras som text.</taggar> Wiki är menat att vara så
+enkelt som möjligt för att uppmuntra dess användning.
+
+Observera att det är möjligt för systemadministratören att tillåta
+inbäddad HTML, men det innebär säkerhetsrisker.

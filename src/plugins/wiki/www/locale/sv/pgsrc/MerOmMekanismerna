@@ -1,36 +1,36 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: MerOmMekanismerna 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:33:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: MerOmMekanismerna 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=WikiWikiWeb;
+  pagename=MerOmMekanismerna;
   flags="";
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-PhpWiki är skriven i skriptspråket PHP, tillgängligt på
+PhpWiki Ã¤r skriven i skriptsprÃ¥ket PHP, tillgÃ¤ngligt pÃ¥
 http://www.php.net/. PHP liknar C och Perl till syntaxen och fungerar
 som ASP, EmbPerl eller JSP.
 
-PhpWiki består av dussin filer med en blandning av PHP och
-HTML. Webbsidorna som en PHP-baserad WikiWikiWeb består av finns i en
+PhpWiki bestÃ¥r av dussin filer med en blandning av PHP och
+HTML. Webbsidorna som en PHP-baserad WikiWikiWeb bestÃ¥r av finns i en
 DBM-fil med backupkopior av tidigare versioner i en andra DBM-fil.
 
-Varje gång en användare vill titta på en sida tas den från DBM-filen
-och rendreras. Användaren anropar bara filen index.php, som sedan
-bestämmer vilka andra php-filer som ska inkluderas.
+Varje gÃ¥ng en anvÃ¤ndare vill titta pÃ¥ en sida tas den frÃ¥n DBM-filen
+och rendreras. AnvÃ¤ndaren anropar bara filen index.php, som sedan
+bestÃ¤mmer vilka andra php-filer som ska inkluderas.
 
-Länkar till andra sidor i wikin länkas automatiskt: PhpWiki. Detta är
-kanske den bästa aspekten med en wiki, möjligheten att lägga till
-sidor endast genom att länka till dem. Den näst bästa saken är hur
-lätt det är att skapa externa länkar:
+LÃ¤nkar till andra sidor i wikin lÃ¤nkas automatiskt: PhpWiki. Detta Ã¤r
+kanske den bÃ¤sta aspekten med en wiki, mÃ¶jligheten att lÃ¤gga till
+sidor endast genom att lÃ¤nka till dem. Den nÃ¤st bÃ¤sta saken Ã¤r hur
+lÃ¤tt det Ã¤r att skapa externa lÃ¤nkar:
 # http://www.wcsb.org/
 # ftp://ftp.redhat.com/
 # news://news.mozilla.org/
 # http://www.slashdot.com/
 # http://theregister.co.uk/
 
-Kombinerat med en namnrymd och ett enkelt uppmärkningsspråk gör att
-Wiki visar mycket av det som är karaktäristiskt för WabiSabi.
+Kombinerat med en namnrymd och ett enkelt uppmÃ¤rkningssprÃ¥k gÃ¶r att
+Wiki visar mycket av det som Ã¤r karaktÃ¤ristiskt fÃ¶r WabiSabi.
 
-PhpWiki är licensierat under Gnu General Public license som du kan
-läsa här: http://www.gnu.org/copyleft/gpl.txt
+PhpWiki Ã¤r licensierat under Gnu General Public license som du kan
+lÃ¤sa hÃ¤r: http://www.gnu.org/copyleft/gpl.txt
