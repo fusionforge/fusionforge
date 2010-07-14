@@ -3243,7 +3243,6 @@ src/plugins/wiki/www/themes/MonoBook/images/wiki_stamp.png -text svneol=unset#im
 src/plugins/wiki/www/themes/MonoBook/images/wikiuser.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/main.css -text
 src/plugins/wiki/www/themes/MonoBook/monobook.css -text
-src/plugins/wiki/www/themes/MonoBook/pgsrc/TemplateTalk -text
 src/plugins/wiki/www/themes/MonoBook/preview.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/rtl.css -text
 src/plugins/wiki/www/themes/MonoBook/sticky.js -text
@@ -3889,7 +3888,6 @@ src/plugins/wiki/www/themes/gforge/pgsrc/InterWikiMap -text
 src/plugins/wiki/www/themes/gforge/pgsrc/PhpWikiAdministration -text
 src/plugins/wiki/www/themes/gforge/pgsrc/SandBox -text
 src/plugins/wiki/www/themes/gforge/pgsrc/SpecialPages -text
-src/plugins/wiki/www/themes/gforge/pgsrc/TemplateTalk -text
 src/plugins/wiki/www/themes/gforge/pgsrc/TextFormattingRules -text
 src/plugins/wiki/www/themes/gforge/pgsrc/UpLoad -text
 src/plugins/wiki/www/themes/gforge/pgsrc/colorbox -text
