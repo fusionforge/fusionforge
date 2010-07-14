@@ -1,21 +1,21 @@
-Date: Mon, 28 Jun 2004 14:28:30 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.3)
-X-Rcs-Id: $Id: AmministrazioneDiPhpWiki 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: AmministrazioneDiPhpWiki 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AmministrazioneDiPhpWiki;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 _*Note:*_ _Most of the actions on this page require administrative
 privileges. They won't work unless you have set an admin username and
 password in the PhpWiki config file._
 
-<?plugin CreateToc jshide||=1 with_toclink||=1 ?>
+<<CreateToc jshide||=1 with_toclink||=1 >>
 
 ----
-!!! Page Explorer
+== Page Explorer
 
 First select pages and then define the action:
 
@@ -31,26 +31,26 @@ or call the available ~WikiAdmin actions directly:
           [/Chown]
 
 ----
-!!! User Management
+== User Management
 
 PhpWiki:EmailVerification is currently non-strict, leaving some possible holes, which can be administrated below.
 
   This button will show a list of all users with registered emails and buttons to set the verification status manually.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=email-verification
            label="Email Verification"
-   ?>
+   >>
 
 To prevent from robots eating all possible ressources in a short time, blocking from certain IP's or not-well-behaving user agents can be defined below. See PhpWiki:HowToBlockRobots and MeatBall:SurgeProtector. _Note: Not yet enabled._
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=access-restrictions
            label="Access Restrictions"
-   ?>
+   >>
 
 ----
-!!! Cleanup
+== Cleanup
 
 A Wiki SandBox is very easy to clean. Here you can restore it to
 pristine condition by loading the default from pgsrc.
@@ -59,9 +59,9 @@ pristine condition by loading the default from pgsrc.
 
 ----------
 
-!!! Making Snapshots or Backups
+== Making Snapshots or Backups
 
-!! ZIP files of database
+=== ZIP files of database
 
 These links lead to zip files, generated on the fly, which contain all
 the pages in your Wiki. The zip file will be downloaded to your local
@@ -77,18 +77,18 @@ computer.
 If your php has ''zlib'' support, the files in the archive will be
 compressed, otherwise they will just be stored.
 
-!! Dump to directory
+=== Dump to directory
 
 Here you can dump pages of your Wiki into a directory of your choice.
 
-  <?plugin WikiForm action=dumpserial?>
+  <<WikiForm action=dumpserial>>
 
 The most recent version of each page will written out to the
 directory, one page per file. Your server must have write permissions
 to the directory!
 
 -----------
-!!! Restoring
+== Restoring
 
 If you have dumped a set of pages from PhpWiki, you can reload them
 here. Note that pages in your database will be overwritten; thus, if
@@ -97,23 +97,23 @@ overwrite the one in your database now. If you want to be selective
 just delete the pages from the directory (or zip file) which you don't
 want to load.
 
-!! Upload File
+=== Upload File
 
 Here you can upload ZIP archives, or individual files from your
 (client) machine.
 
-  <?plugin WikiForm action=upload?>
+  <<WikiForm action=upload>>
 
-!! Load File
+=== Load File
 
 Here you can load ZIP archives, individual files or entire
 directories. The file or directory must be local to the http
 server. You can also use this form to load from an http: or ftp: URL.
 
-  <?plugin WikiForm action=loadfile?>
-  <?plugin WikiForm action=loadfile buttontext="Load & Overwrite" overwrite=1?>
+  <<WikiForm action=loadfile>>
+  <<WikiForm action=loadfile buttontext="Load & Overwrite" overwrite=1>>
 
-!! Upgrade
+=== Upgrade
 
 Do some verification checks and upgrade changes automatically, after having installed a 
 new phpwiki engine update:
@@ -124,7 +124,7 @@ new phpwiki engine update:
 
 -----------
 
-!!! Format of the files
+== Format of the files
 
 Currently the pages are stored, one per file, as MIME (RFC:2045)
 e-mail (RFC:822) messages. The content-type ''application/x-phpwiki''
@@ -134,7 +134,7 @@ have type ''multipart/mixed'', and contain several sub-parts, each
 with type ''application/x-phpwiki''.)  The message body contains the
 page text.
 
-!! Old Formats
+=== Old Formats
 
 __Serialized Files__
 
@@ -153,9 +153,9 @@ these three types of files, and handle them accordingly.
 
 ----
 
-!!! Dump pages as XHTML
+== Dump pages as XHTML
 
-  <?plugin WikiForm action=dumphtml?>
+  <<WikiForm action=dumphtml>>
 
 This will generate a directory of static pages suitable for
 distribution on disk where no web server is available. The various
@@ -167,7 +167,7 @@ pages.
 
 ----
 
-!!! Phpwiki Internals
+== Phpwiki Internals
 
 These are here mostly for debugging purposes (at least, that's the
 hope.)
@@ -175,7 +175,7 @@ hope.)
 In normal use, you shouldn't need to use these, though, then again,
 they shouldn't really do any harm.
 
-!! Purge Markup Cache
+=== Purge Markup Cache
 
 (If your wiki is so configured,) the transformed (almost-HTML) content
 of the most recent version of each page is cached. This speeds up page
@@ -185,12 +185,12 @@ rendering since parsing of the wiki-text takes a fair amount of juice.
   content. (Each pages content will be transformed and re-cached next
   time someone views it.)
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-cache
            label="Purge Cache"
-   ?>
+   >>
 
-!! Clean WikiDB of Illegal Filenames
+=== Clean WikiDB of Illegal Filenames
 
 Page names beginning with the subpage-separator, usually a slash
 (=/=), are not allowed. Sometimes though an errant plugin or something
@@ -198,10 +198,10 @@ might create one....
 
   This button will delete any pages with illegal page names.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-bad-pagenames
            label="Exorcise WikiDB"
-   ?>
+   >>
 
 ----
 PhpWikiDocumentation

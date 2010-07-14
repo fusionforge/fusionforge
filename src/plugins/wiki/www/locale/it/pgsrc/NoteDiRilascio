@@ -1,25 +1,25 @@
-Date: Mon, 28 Jun 2004 14:28:30 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: NoteDiRilascio 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: NoteDiRilascio 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=NoteDiRilascio;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-PhpWiki 1.2 Ë avanzato di molto rispetto alla versione 1.0:
+PhpWiki 1.2 √® avanzato di molto rispetto alla versione 1.0:
 
 * Supporto per MySQL, Postgresql, mSQL, flat file e sono incluse le nuove librerie dba_ di PHP4
-* Internazionalizzazione: supporto per differenti linguaggi. Tedesco, Spagnolo, Svedese e Olandese sono inclusi in PhpWiki. » possibile aggiungere facilmente nuovi linguaggi 
+* Internazionalizzazione: supporto per differenti linguaggi. Tedesco, Spagnolo, Svedese e Olandese sono inclusi in PhpWiki. √à possibile aggiungere facilmente nuovi linguaggi 
 * Nuovo sistema per i link usando le parentesi quadre in aggiunta al !BumpyText  vecchio stile
 * Le caratteristiche di amministrazione includono blocco delle pagina, compattare il Wiki in un file zip e cancellare pagine.
-* La pagina PiuPopolari mostra le pagine pi˘ frequentemente viste.
+* La pagina PiuPopolari mostra le pagine pi√π frequentemente viste.
 * Pienamente compatibile HTML.
-* I link in basso alle pagine descrivono le relazioni tra i link in entrata dalle altre pagine ed i link in uscita, e le pagine pi˘ popolari
+* I link in basso alle pagine descrivono le relazioni tra i link in entrata dalle altre pagine ed i link in uscita, e le pagine pi√π popolari
 * Le differenze di colore tra la versione corrente e quella precedente
 * Una pagina informativa per visualizzare metadati
-* Pi˘ facilit‡ di personalizzazione da parte dell'amministratore
+* Pi√π facilit√† di personalizzazione da parte dell'amministratore
 * Un sistema di template per separare la pagina HTML generata dal codice stesso
 * Nuovi marcatori per <B>, <I>, <DD>, <BR>  ed altri 
 * Il marcaggio senza tab rimpiazza il vecchio stile di markup (in ogni caso entrambi sono supportati
@@ -33,14 +33,14 @@ HISTORY per maggiori informazioni su: http://phpwiki.sourceforge.net/phpwiki/HIS
 
 ----
 
-PhpWiki 1.1.6 Ë una versione notevolmente migliorata di PhpWiki. Ha la
-possibilit‡ di avere temi tramite un sistema facilmente modificabile;
-Questo schema per MySQL Ë stato completamente riscritto, spezzando i dettagli
+PhpWiki 1.1.6 √® una versione notevolmente migliorata di PhpWiki. Ha la
+possibilit√† di avere temi tramite un sistema facilmente modificabile;
+Questo schema per MySQL √® stato completamente riscritto, spezzando i dettagli
 delle pagine in colonne (per efficenza ci siamo accordati di non mettere
-references in tabelle separate, cosÏ da non completamente normalizzare
+references in tabelle separate, cos√¨ da non completamente normalizzare
 il db. "Non lasciare che il meglio sia il nemico del buono.");
 
-Il supporto per Postgresql Ë stato aggiunto e il linguaggio di
+Il supporto per Postgresql √® stato aggiunto e il linguaggio di
 marcatura si sta evolvendo, ora permette di usare i tag
 !!!<h1>
 !!<h2>
@@ -48,13 +48,13 @@ marcatura si sta evolvendo, ora permette di usare i tag
 e *un nuovo modo per rendere il testo in grassetto*, ed ovviamente un
 [nuovo sistema di linking]
 
-C'Ë una nuova funzione su tutte le pagine chiamata _more info_ che
+C'√® una nuova funzione su tutte le pagine chiamata _more info_ che
 permette una visione a _basso livello_ della pagina, molto utile per
 questioni di debugging
 
-Dalla release 1.2 abbiamo aggiunto il logging, le 10 pagine pi˘ attive
-and altre funzionalit‡ con il nuovo schema del database (e si, queste
-funzionalit‡ funzionano anche con la versione DBM). Vorrei anche
+Dalla release 1.2 abbiamo aggiunto il logging, le 10 pagine pi√π attive
+and altre funzionalit√† con il nuovo schema del database (e si, queste
+funzionalit√† funzionano anche con la versione DBM). Vorrei anche
 aggiungere il supporto per mSQL a testarlo con Zend, il nuovo PHP4
 
 Da qui in poi si trovano le note di rilascio della versione 1.03,
@@ -62,17 +62,17 @@ l'ultimo rilascio della serie 1.0 di PhpWiki.
 --Steve Wainstead, mailto:swain@panix.com
 ----
 
-PhpWiki Ë stato scritto perchË ero cosÏ interessato ai WikiWikiWebs,
+PhpWiki √® stato scritto perch√® ero cos√¨ interessato ai WikiWikiWebs,
 e non avevo usato il php dalla versione 2.0. Volevo vedere come era
 progredito
 
-La versione 1.0 Ë un clone quasi perfetto del Portland Pattern Repository http://c2.com/cgi-bin/wiki?WikiWikiWeb. In verit‡, stavo usando lo script Wiki che Ë scaricabile come modello di partenza. Wiki manca di un numero di funzionalit‡ che PPR ha, come EditCopy. CosÏ in verit‡ PhpWiki ha un Ë un ibrido tra PPR e il wiki generico che puoi ottenere li (che Ë stato scritto in perl)
+La versione 1.0 √® un clone quasi perfetto del Portland Pattern Repository http://c2.com/cgi-bin/wiki?WikiWikiWeb. In verit√†, stavo usando lo script Wiki che √® scaricabile come modello di partenza. Wiki manca di un numero di funzionalit√† che PPR ha, come EditCopy. Cos√¨ in verit√† PhpWiki ha un √® un ibrido tra PPR e il wiki generico che puoi ottenere li (che √® stato scritto in perl)
 
-Una particolarit‡ di PhpWiki Ë quello di permettere l'uso dell'HTML se
-la linea Ë preceduta da una | pipe. Ë stato molto semplice da
-aggiungere a l'idea Ë scaturita da un posting sul PPR a proposito dic
+Una particolarit√† di PhpWiki √® quello di permettere l'uso dell'HTML se
+la linea √® preceduta da una | pipe. √® stato molto semplice da
+aggiungere a l'idea √® scaturita da un posting sul PPR a proposito dic
 ome la AT&T e il loro clone Wiki interno era usato con la stessa
-tecnica. La abilit‡ di includere l'HTML Ë disabilitata per default per
+tecnica. La abilit√† di includere l'HTML √® disabilitata per default per
 ragioni di sicurezza.                       
 
 La versione 1.01 include una patch che corregge un piccolo errore nel

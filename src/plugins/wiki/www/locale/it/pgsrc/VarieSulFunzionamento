@@ -1,13 +1,13 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: VarieSulFunzionamento 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: VarieSulFunzionamento 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=VarieSulFunzionamento;
   flags="";
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-PhpWiki Ë scritto in PHP, linguaggio di scripting lato-server,
+PhpWiki √® scritto in PHP, linguaggio di scripting lato-server,
 disponibile su http://www.php.net/. PHP riassume nella sua sintassi il C
 e il Perl, e funziona molto similmente a ASP, EmbPerl e JPS.
 
@@ -18,12 +18,12 @@ DBM.
 
 Ogni volta che un utente raggiunge il sito la pagina richiesta viene
 presa da DBM e renderizzata al volo. L'utente richiede solo il file
-index.php, che sceglier‡ gli altri file php da includere.
+index.php, che sceglier√† gli altri file php da includere.
 
 Nel wiki i links alle pagine sono automaticamente linkati PhpWiki.
-Questo puÚ essere l'aspetto pi˘ interessante di un wiki,
-l'abilit‡  di aggiungere pagine semplicemente linkandole. L'altro
-aspetto interessante Ë la possibilit‡ di creare link
+Questo pu√≤ essere l'aspetto pi√π interessante di un wiki,
+l'abilit√†  di aggiungere pagine semplicemente linkandole. L'altro
+aspetto interessante √® la possibilit√† di creare link
 # http://www.wcsb.org/
 # ftp://ftp.redhat.com/
 # news://news.mozilla.org/
@@ -33,5 +33,5 @@ aspetto interessante Ë la possibilit‡ di creare link
 Compinato con un namespace e una semplice marcatura, un Wiki mostra
 molte delle caratteristiche di un WabiSabi
 
-PhpWiki Ë sotto la GNU General Public License, che Ë
+PhpWiki √® sotto la GNU General Public License, che √®
 possibile trovare a questo indirizzo: http://www.gnu.org/copyleft/gpl.txt.
