@@ -1,21 +1,21 @@
-Date: Mon, 17 Jan 2005 08:44:07 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.11)
-X-Rcs-Id: $Id: PhpWikiBeheer 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:51 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiBeheer 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiBeheer;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 *Noot*: Het merendeel van de acties op deze pagina vereist beheer
 privileges.  Ze zullen niet werken tenzij je een beheer gebruikersnaam
 en wachtwoord in het PhpWiki configuratiebestand hebt gezet.
 
-<?plugin CreateToc jshide||=1 with_toclink||=1 ?>
+<<CreateToc jshide||=1 with_toclink||=1 >>
 
 ----
-!!! Page Explorer
+== Page Explorer
 
 First select pages and then define the action:
 
@@ -31,7 +31,7 @@ or call the available ~WikiAdmin actions directly:
           [/Chown]
 
 ----
-!!! User Management
+== User Management
 
 PhpWiki:EmailVerification is currently non-strict, leaving some possible holes, which can be 
 administrated below.
@@ -39,22 +39,22 @@ administrated below.
   This button will show a list of all users with registered emails and buttons to set the 
   verification status manually.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=email-verification
            label="Email Verification"
-   ?>
+   >>
 
 ----------
-!! Cleanup
+=== Cleanup
 A Wiki ZandBak is very easy to clean. Here you can restore it to pristine condition by loading the default from pgsrc:
 
 [ Rake the SandBox | phpwiki:?action=loadfile&source=locale/nl/pgsrc/ZandBak ].
 
 ----------
 
-!! Kiekjes of Backups maken
+=== Kiekjes of Backups maken
 
-! ZIP bestanden van database
+==== ZIP bestanden van database
 
 Deze koppelingen leiden naar zip bestanden, aangemaakt terwijl je
 wacht, die alle pagina's van je Wiki bevatten.  Het zip bestand wordt
@@ -68,11 +68,11 @@ zip bestand downloaden.
 Als je php _zlib_ ondersteuning heeft, worden de bestanden is het
 archief gecomprimeerd, anders worden ze simpelweg opgeslagen.
 
-! Stort in directory
+==== Stort in directory
 
 Hier kun je pagina's van je Wiki in een willekeurige directory storten.
 
-<?plugin WikiForm action=dumpserial?>
+<<WikiForm action=dumpserial>>
 
 De meest recente versie van elke pagina wordt naar de directory geschreven,
 een pagina be bestand.  Je server moet schrijfpermissies naar die directory
@@ -80,7 +80,7 @@ hebben.
 
 -----------
 
-!! Herladen
+=== Herladen
 
 Als je een stel pagina's van PhpWiki hebt gestort, kun je ze hier
 herladen.  Noot dat pagina's in je database zullen worden
@@ -90,24 +90,24 @@ overschreven.  Als je een selectie wilt maken, verwijder dan de
 pagina's uit de directory (of uit het zip bestand) die je niet wil
 laden.
 
-! Upload bestand
+==== Upload bestand
 
 Hier kun je ZIP archieven uploaden, of individuele bestanden van je (client)
 machine.
 
-<?plugin WikiForm action=upload?>
+<<WikiForm action=upload>>
 
-! Laad bestand
+==== Laad bestand
 
 Here you can load ZIP archives, individual files or entire directories.
 The file or directory must be local to the http server.
 You can also use this form to load from an http: or ftp: URL.
 
-<?plugin WikiForm action=loadfile?>
+<<WikiForm action=loadfile>>
 
 -----------
 
-!! Formaat van de bestanden
+=== Formaat van de bestanden
 
 Momenteel worden de pagina's opgeslagen, een per bestand, als MIME ([
 RFC2045 | http://www.faqs.org/rfcs/rfc2045.html ]) e-mail ([ RFC822 |
@@ -119,7 +119,7 @@ _multipart/mixed_, en bevat een aantal onderdelen, elke van type
 _application/x-phpwiki_.)
 De body van het bericht bevat de tekst van de pagina.
 
-! Oude formaten
+==== Oude formaten
 
 *Geserialiseerde bestanden*
 

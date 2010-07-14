@@ -1,13 +1,13 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: ToverPhpWikiURLs 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:51 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: ToverPhpWikiURLs 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ToverPhpWikiURLs;
   flags=PAGE_LOCKED;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-!!! Over phpwiki: URLs
+== Over phpwiki: URLs
 
 Een speciaal typen URL is beschikbaar voor het maken van koppelingen
 naar beheers- en andere speciale functies in PhpWiki.  Hier is een
@@ -40,7 +40,7 @@ Sommige van deze acties accepteren andere parameters.
 ;__save__: Accepteert __editversion__, __minor_edit__, en __content__.
 ;__setprefs__: Accepteert __edit_area_width__, __edit_area_height__.
 
-!! Tover Koppelingen Schrijven in Wiki Pagina's
+=== Tover Koppelingen Schrijven in Wiki Pagina's
 
 Een toverkoppeling ziet eruit als:
 
@@ -53,7 +53,7 @@ Als dit is opgegeven wordt dit het etiket voor de koppeling.
 Het ''phpwiki-url'' gedeelte is ook optioneel.  Als dit wordt
 weggelaten, wijst de koppeling naar de huidige wiki-pagina.
 
-!Enkele voorbeelden
+==== Enkele voorbeelden
 
   [[ Verander de !ZandBak | phpwiki:!ZandBak?action=edit ]
 zal een koppeling maken die je direct naar het wijzigen van de ZandBak brengt,
@@ -66,7 +66,7 @@ Andere mogelijkheden:
 * [ Krijg een Volledige Zip Stort | phpwiki:?action=zip&include=all ],
 * [ Paginatitels die 'wiki' bevatten | phpwiki:?action=search&searchterm=wiki ],
 
-!! Tover Formulieren schrijven in Wiki Pagina's
+=== Tover Formulieren schrijven in Wiki Pagina's
 
 Als een van de ''vraag-argen'' een waarde heeft als
   ''arg''__=__''opt-breedte''__(__''opt-verstek-waarde''__)__
