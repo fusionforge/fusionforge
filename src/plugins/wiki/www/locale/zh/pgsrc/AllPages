@@ -1,9 +1,8 @@
-Date: Sun, 16 Nov 2003 01:25:42 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
-X-Rcs-Id: $Id: AllPages 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: AllPages 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AllPages;
-  pgsrc_version="2 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -11,4 +10,4 @@ Content-Transfer-Encoding: binary
 
 在此 Wiki 上的所有頁面列表, 包含任何可能存取不到的 OrphanedPages.
 
-<?plugin AllPages?>
+<<AllPages>>

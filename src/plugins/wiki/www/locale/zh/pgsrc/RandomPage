@@ -1,9 +1,8 @@
-Date: Wed, 30 Jan 2002 18:00:02 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: RandomPage 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: RandomPage 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=RandomPage;
-  pgsrc_version="2 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -12,4 +11,4 @@ Content-Transfer-Encoding: binary
 隨機頁面的數量應該是 1 到 20 之間的數字.
 
 ----
-<?plugin RandomPage pages||=10 info||=''?>
+<<RandomPage pages||=10 info||=''>>

@@ -1,33 +1,32 @@
-Date: Tue, 17 Sep 2002 12:48:59 -0700
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.4pre)
-X-Rcs-Id: $Id: OldStyleTablePlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: OldStyleTablePlugin 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=OldStyleTablePlugin;
   flags="";
-  pgsrc_version="2 $Revision: 6193 $";
   markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 OldStyleTablePlugin 用來在 wiki 頁面含括使用舊風格標記語法的表格.
 
-<verbatim>
-<?plugin OldStyleTable
+{{{
+<<OldStyleTable
 ||^  *Name*                |v *Cost*   |v *Notes*
 | *First*     | *Last*
 |> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
 |> Marco      |< Polo      | Cheaper   |< Not available
-?>
-</verbatim>
+>>
+}}}
 
 將會得到
 
-<?plugin OldStyleTable
+<<OldStyleTable
 ||^  *Name*                |v *Cost*   |v *Notes*
 | *First*     | *Last*
 |> Jeff       |< Dairiki   |^  Cheap   |< Not worth it
 |> Marco      |< Polo      | Cheaper   |< Not available
-?>
+>>
 
 置首的多重 __|__ 用來展延欄, 而 __v__ 用來展延列.
 __>__ 產生靠右對齊的欄, __<__ 產生靠左對齊的欄, 而 __^__ 則產生置中的欄 (預設).

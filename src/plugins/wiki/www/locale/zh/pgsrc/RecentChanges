@@ -1,9 +1,8 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: RecentChanges 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: RecentChanges 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=RecentChanges;
-  pgsrc_version="2 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -12,4 +11,4 @@ Content-Transfer-Encoding: binary
 這裡提供了此 wiki 最新的變更頁面. (參閱 RecentEdits 取得所有最新的次要編輯與變更).
 
 --------
-<?plugin RecentChanges days||=7 daylist=1,3,7,30,90, 0 ?>
+<<RecentChanges days||=7 daylist=1,3,7,30,90, 0 >>

@@ -1,9 +1,8 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: WikiPlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: WikiPlugin 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=WikiPlugin;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
   charset=UTF-8
@@ -18,23 +17,23 @@ The latest hacks include support for ~WikiPlugins.
 我期盼搜尋結果頁面或是 PhpWikiAdministration 等能夠很快地以 plugin 形式被實
 作出來. (我想 oh-so-ugly [MagicPhpWikiURLs] 也能被 plugins 替代.)
 
-!!!Example
+== Example
 
 現在,有人放了這麼一行字想要使用 plugin:
 
-<verbatim>
-<?plugin BackLinks?>
-</verbatim>
+{{{
+<<BackLinks>>
+}}}
 
 到一個一般的 wiki-page. 這個特有的範例產生了連結到此頁面的頁面列表.
 結果如下:
 
-<?plugin BackLinks?>
+<<BackLinks>>
 
 (這對分類與主題頁面來說是很棒的. 你可以使用它取得自動 in-line 的存在於分
 類或主題的頁面列表.)
 
-!!!Details
+== Details
 
 (This is all subject to change.)
 
@@ -43,29 +42,29 @@ these arguments can be determined four different ways.  In order of
 precedence:
 
 # The plugin invocation can specify the value for an argument, like so:
-  <verbatim>
-  <?plugin BackLinks page=OtherPage ?>
-  </verbatim>
+  {{{
+  <<BackLinks page=OtherPage >>
+  }}}
 
 # The argument can be specified via an HTTP query argument.  This
   doesn't happen (is not allowed) unless the argument is mentioned in
   the plugin invocation:
 
-  <verbatim>
-  <?plugin BackLinks page ?>
-  </verbatim>
+  {{{
+  <<BackLinks page >>
+  }}}
 
 # Default values specified in the plugin invocation:
 
-  <verbatim>
-  <?plugin BackLinks page||=OtherPage ?>
-  </verbatim>
+  {{{
+  <<BackLinks page||=OtherPage >>
+  }}}
 
 # The plugin must supply default values for each argument it uses.
   (The BackLinks plugin uses the current page as the default value for
   the ''page'' argument.
 
-!!!Existing Plugins
+== Existing Plugins
 
 * BackLinks
 * CalendarPlugin
@@ -82,13 +81,13 @@ precedence:
 * walkabout
 * PhpHighlightPlugin
 
-!!!More Ideas for Plugins
+== More Ideas for Plugins
 
 * Integrate Search form with individual InterWiki map entries
   e.g. Search Php Website for:[ ] (Search)
 * WantedPages, OrphanedPages, other various indexing schemes.
 * Diff, PageHistory
-* Redirect plugin -- =<?plugin Redirect target=~OtherPage ?>=
+* Redirect plugin -- =<<Redirect target=~OtherPage >>=
 * Insert XML/RSS/RDF news content from =location=xxx= where location
   is a parameter to the plugin, maybe include some formatting control
   of the output generated.
@@ -97,7 +96,7 @@ precedence:
 
 Pages in this category:
 
-<?plugin BackLinks page=[pagename] noheader=1?>
+<<BackLinks page=[pagename] noheader=1>>
 
 * FullTextSearch: FindPage
 * TitleSearch: LikePages (match_head, match_tail).

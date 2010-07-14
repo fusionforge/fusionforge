@@ -1,9 +1,8 @@
-Date: Thu, 28 Mar 2002 14:57:00 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: LinkIcons 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: LinkIcons 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=LinkIcons;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
   charset=UTF-8
@@ -30,16 +29,16 @@ __注意__: 部份預設圖示使用了
 alpha channel 特色以便能夠平順的在任何有顏色或有背景頁面被畫出來.
 舊的瀏覽器可能無法顯示圖片.
 
-!!!Examples
+== Examples
 
 如果管理者有啟始這個特色的話,以下的範例將會只以上面的連結圖示顯示.
 
-!! InterWiki links
+=== InterWiki links
 
 * InterWiki link PhpWiki:InterWiki
 * A named InterWiki [read WhyWikiWorks at c2|Wiki:WhyWikiWorks].
 
-!!URLs
+===URLs
 
 * Email address [PhpWiki-talk mailing list|mailto:phpwiki-talk@lists.sourceforge.net]
 * Normal http link [PhpWiki's Home Page|http://phpwiki.sourceforge.net/phpwiki/]

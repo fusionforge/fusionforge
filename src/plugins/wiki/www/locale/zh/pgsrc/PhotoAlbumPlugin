@@ -1,20 +1,19 @@
-Date: Sat, 4 Jan 2003 23:05:22 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.4)
-X-Rcs-Id: $Id: PhotoAlbumPlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhotoAlbumPlugin 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhotoAlbumPlugin;
   flags="";
-  pgsrc_version="2 $Revision: 6193 $";
   markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-!!! Summary
+== Summary
 藉著顯示帶有說明以及相片檔名的文字檔以製作相簿.
 
-!!! Usage
-<verbatim>
-<?plugin PhotoAlbum
+== Usage
+{{{
+<<PhotoAlbum
          src=http://server/textfile
          mode=[column|row]
          align=[center|left|right]
@@ -22,10 +21,10 @@ Content-Transfer-Encoding: binary
          sort=false
          height=100%
          width=100%
-?>
-</verbatim>
+>>
+}}}
 
-!!! Arguments
+== Arguments
 ''只有 ='src'= 參數是必要的.''
 
 __src__:
@@ -48,22 +47,22 @@ __height__, __width__:
   高度與寬度用來與用 [php-function:getimagesize] 取得的原始高度與寬度做比較,
   可以指定絕對值或百分比 (例如 "50%").
 
-!!! Examples
-!! Text file
+== Examples
+=== Text file
 正確文字檔的內容應該是:
 
-<verbatim>
+{{{
 photo-01.jpg; My girlfriend and I
 photo-02.jpg
 christmas.gif; Merry Christmas!
-</verbatim>
+}}}
 
-!! Sample Album
-<?plugin PhotoAlbum
+=== Sample Album
+<<PhotoAlbum
          src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum"
-?>
+>>
 
-!!! Plugin Author
+== Plugin Author
 [Ted Vinke|mailto:teddy@jouwfeestje.com] <teddy@jouwfeestje.com>
 ----
 PhpWikiDocumentation WikiPlugin

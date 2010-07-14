@@ -1,5 +1,5 @@
-Date: Sat, 15 Nov 2003 17:23:27 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
+Date: Wed, 19 May 2010 10:51:54 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
 Content-Type: application/x-phpwiki;
   pagename=HelloWorldPlugin;
   flags="";
@@ -14,29 +14,31 @@ Content-Transfer-Encoding: binary
 
 簡單的範例 plugin.
 
-<?plugin HelloWorld salutation="Hello," name="WikiUser" ?>
+<<HelloWorld salutation="Hello," name="WikiUser" >>
 
 From the source of this page:
 
-<verbatim>
-<?plugin HelloWorld salutation="Hello," name="WikiUser" ?>
-</verbatim>
+{{{
+<<HelloWorld salutation="Hello," name="WikiUser" >>
+}}}
 
 -----
 PhpWiki 的 plugin 架構允許你加入自訂的頁面元素. 你所要做的就是繼承 ~WikiPlugin
 類別並實作你的 run() 方法.
 
+<<PhpHighlight
+
 /**
  * A simple demonstration WikiPlugin.
  *
  * Usage:
- * <?plugin HelloWorld?&gt;
- * <?plugin HelloWorld
+ * <<HelloWorld> >
+ * <<HelloWorld
  *          salutation="Greetings, "
  *          name=Wikimeister
- * ? >
- * <?plugin HelloWorld salutation=Hi ? >
- * <?plugin HelloWorld name=WabiSabi ? >
+ * > >
+ * <<HelloWorld salutation=Hi > >
+ * <<HelloWorld name=WabiSabi > >
  */
 
 // Constants are defined before the class.
@@ -57,11 +59,6 @@ extends WikiPlugin
 
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6193 $");
-    }
-
     // Establish default values for each of this plugin's arguments.
     function getDefaultArguments() {
         return array('salutation' => "Hello,",
@@ -78,4 +75,4 @@ extends WikiPlugin
         return $html;
     }
 };
-?>
+>>

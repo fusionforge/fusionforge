@@ -1,9 +1,8 @@
-Date: Wed, 26 Nov 2003 18:34:06 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.7pre)
-X-Rcs-Id: $Id: PhpWikiAdministration 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:35:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiAdministration 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
-  pgsrc_version="2 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -13,7 +12,7 @@ _*注意:*_ _此頁面上的大部分動作需要管理者權限. 除非你在 P
 設置了管理者的使用者帳號與密碼,否則他們是無法運作的._
 
 ----------
-!!! #[Contents]
+== #[Contents]
 * [清理 Cleanup|#Cleanup]
 * [建立快照或備份 Making Snapshots or Backups|#Making Snapshots or Backups]
 * [回存 Restoring|#Restoring]
@@ -22,7 +21,7 @@ _*注意:*_ _此頁面上的大部分動作需要管理者權限. 除非你在 P
 * [PhpWiki Internals|#PhpWiki Internals]
 
 ----
-!!! #[|Cleanup][清理 Cleanup|#Contents]
+== #[|Cleanup][清理 Cleanup|#Contents]
 
 Wiki SandBox 是很容易被清理的. 你可以藉著直接回存 pgsrc 中的預設網頁來重設.
 
@@ -32,9 +31,9 @@ Wiki SandBox 是很容易被清理的. 你可以藉著直接回存 pgsrc 中的�
 
 ----------
 
-!!! #[|Making Snapshots or Backups][建立快照或備份 Making Snapshots or Backups|#Contents]
+== #[|Making Snapshots or Backups][建立快照或備份 Making Snapshots or Backups|#Contents]
 
-!! 資料庫的 ZIP 檔案
+=== 資料庫的 ZIP 檔案
 
 這些連結引領你下載動態產生的 zip 檔案,裡面包含了 Wiki 裡的所有頁面.
 你可以直接下載這些 zip 檔案到你的本地電腦中.
@@ -46,39 +45,39 @@ Wiki SandBox 是很容易被清理的. 你可以藉著直接回存 pgsrc 中的�
 
 如果你的 php 支援 ''zlib'', 所有檔案將被壓縮,否則他們只會被存放到 zip 檔案中.
 
-!! 傾印到目錄
+=== 傾印到目錄
 
 你可以選擇傾印 Wiki 頁面到目錄中.
 
-  <?plugin WikiForm action=dumpserial?>
+  <<WikiForm action=dumpserial>>
 
 每個頁面較新的版本將會被寫到目錄中,一個檔案一個頁面. 
 該目錄必須要有寫的權限方能寫入!
 
 -----------
-!!! #[|Restoring][回存 Restoring|#Contents]
+== #[|Restoring][回存 Restoring|#Contents]
 
 如果你從 PhpWiki 傾印了頁面, 你可以在這兒重新載入他們.
 在資料庫中的頁面將會被覆寫; 因此,當你要載入之前你所傾印的 HomePage 時
 ,這將會覆寫資料庫中的 HomePage. 如果你只想要載入某個頁面,那麼只要將從
 目錄 (或 zip 檔案) 刪掉不要的頁面就行了.
 
-!! 上傳檔案
+=== 上傳檔案
 
 你可以上傳 ZIP 文件,或你本地端的個別檔案.
 
-  <?plugin WikiForm action=upload?>
+  <<WikiForm action=upload>>
 
-!! 載入檔案
+=== 載入檔案
 
 你可以載入 ZIP 文件,個別檔案或整個目錄. 檔案或目錄必須在 http 伺服器上.
 你也可以利用這個表單載入位 http: 或 ftp: URL 上的檔案.
 
-  <?plugin WikiForm action=loadfile?>
+  <<WikiForm action=loadfile>>
 
 -----------
 
-!!! #[|Format of the files][檔案格式 Format of the files|#Contents]
+== #[|Format of the files][檔案格式 Format of the files|#Contents]
 
 目前頁面被存為 MIME (RFC:2045) e-mail(RFC:822) 訊息格式,一個頁面一個檔.
 content-type 設為 ''application/x-phpwiki'', 而頁面的 meta-data
@@ -86,7 +85,7 @@ content-type 設為 ''application/x-phpwiki'', 而頁面的 meta-data
 ''multipart/mixed'',並包含了數個子部份,每個子部份前面則有 
 ''application/x-phpwiki''.) 訊息的本文包含了頁面文字.
 
-!! Old Formats
+=== Old Formats
 
 __Serialized Files__
 
@@ -102,9 +101,9 @@ __Plain Files__
 
 ----
 
-!!! #[|Dump pages as XHTML][傾印頁面為 XHTML Dump pages as XHTML|#Contents]
+== #[|Dump pages as XHTML][傾印頁面為 XHTML Dump pages as XHTML|#Contents]
 
-  <?plugin WikiForm action=dumphtml?>
+  <<WikiForm action=dumphtml>>
 
 這將會產生包含靜態頁面的目錄,以便於儲存於磁片上,並在沒有 web server 存
 在的環境上使用. 頁面編輯與巡覽的連結將會從頁面上移除.
@@ -114,13 +113,13 @@ __Plain Files__
 
 ----
 
-!!! #[|PhpWiki Internals][PhpWiki Internals|#Contents]
+== #[|PhpWiki Internals][PhpWiki Internals|#Contents]
 
 在這兒的大部分東西都是為了除錯而存在 (at least, that's the hope.)
 
 在正常情況下,你不需要使用這些,不過他們應該也不會造成任何損害.
 
-!! 清理標記快取 Purge Markup Cache
+=== 清理標記快取 Purge Markup Cache
 
 (如果你的 wiki 已經設置,) 每個頁面的最新版本的轉換內容(幾乎是 HTML)都被
 快取了. 這會避免再剖析 wiki-text ,而使得頁面輸出的速度加快一些.
@@ -128,22 +127,22 @@ __Plain Files__
   點擊這個按鈕將會清除所有快取的轉換內容. (每個頁面內容在下次有人想看這些頁面時
   進行轉換並重新放到快取裡面去.)
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-cache
            label="Purge Cache"
-   ?>
+   >>
 
-!! 清理 WikiDB 裡的非法檔案名稱 Clean WikiDB of Illegal Filenames
+=== 清理 WikiDB 裡的非法檔案名稱 Clean WikiDB of Illegal Filenames
 
 頁面名稱以子頁面分隔子(通常是 =/= )開始的,是不被允許的. 有時候是錯誤
 的 plugin 或某些事情而導致.
 
   這個按鈕將會刪除任何有非法頁面名稱的頁面.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-bad-pagenames
            label="Exorcise WikiDB"
-   ?>
+   >>
 
 ----
 
