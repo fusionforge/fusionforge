@@ -1,23 +1,23 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: WikiWikiWeb 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: WikiWikiWeb 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=WikiWikiWeb;
   flags="";
-  charset=iso-8859-1;
+  charset=utf-8;
   markup=2
 Content-Transfer-Encoding: binary
 
-Un WikiWikiWeb es un sitio donde todos pueden colaborar con el contenido. El Wiki más conocido y usado es el Portland Pattern Repository en http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+Un WikiWikiWeb es un sitio donde todos pueden colaborar con el contenido. El Wiki mÃ¡s conocido y usado es el Portland Pattern Repository en http://c2.com/cgi-bin/wiki?WikiWikiWeb.
 
-Alli encontré estas frases particularmente relevantes:
+Alli encontrÃ© estas frases particularmente relevantes:
 
-_La clave es poder EditarElTexto de una manera sencilla y la búsqueda de BuscarPágina rápida._
+_La clave es poder EditarElTexto de una manera sencilla y la bÃºsqueda de BuscarPÃ¡gina rÃ¡pida._
 
-_Aparte de ser rápido, éste sitio también aspira a los ideales del Zen generalmente etiquetados WabiSabi. El Zen encuentra belleza en lo imperfecto y efímero. Cuando se llega a esto, es todo lo que se necesita._
+_Aparte de ser rÃ¡pido, Ã©ste sitio tambiÃ©n aspira a los ideales del Zen generalmente etiquetados WabiSabi. El Zen encuentra belleza en lo imperfecto y efÃ­mero. Cuando se llega a esto, es todo lo que se necesita._
 
-También se puede firmar en VisitantesRecientes, o leer acerca de ComoUsarWiki y AgregarPaginas. Actualmente este wiki no tiene "tema" de discusión así que ¡adelante, a jugar con él y a divertirse!
+TambiÃ©n se puede firmar en VisitantesRecientes, o leer acerca de ComoUsarWiki y AgregarPaginas. Actualmente este wiki no tiene "tema" de discusiÃ³n asÃ­ que Â¡adelante, a jugar con Ã©l y a divertirse!
 
 --SteveWainstead 
---traducido al español por [KBrown]
+--traducido al espaÃ±ol por [KBrown]
 

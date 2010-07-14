@@ -2380,7 +2380,7 @@ src/plugins/wiki/www/locale/es/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/es/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/es/pgsrc/AgregarPaginas -text
 src/plugins/wiki/www/locale/es/pgsrc/BuenEstilo -text
-src/plugins/wiki/www/locale/es/pgsrc/BuscarP%E1gina -text
+src/plugins/wiki/www/locale/es/pgsrc/BuscarP%C3%A1gina -text
 src/plugins/wiki/www/locale/es/pgsrc/CajaDeArena -text
 src/plugins/wiki/www/locale/es/pgsrc/CambiosRecientes -text
 src/plugins/wiki/www/locale/es/pgsrc/ComoUsarWiki -text
@@ -2388,7 +2388,7 @@ src/plugins/wiki/www/locale/es/pgsrc/EditarElTexto -text
 src/plugins/wiki/www/locale/es/pgsrc/KBrown -text
 src/plugins/wiki/www/locale/es/pgsrc/MasAcercadeLaMecanica -text
 src/plugins/wiki/www/locale/es/pgsrc/MasPopulares -text
-src/plugins/wiki/www/locale/es/pgsrc/P%E1ginaPrincipal -text
+src/plugins/wiki/www/locale/es/pgsrc/P%C3%A1ginaPrincipal -text
 src/plugins/wiki/www/locale/es/pgsrc/PhpWiki -text
 src/plugins/wiki/www/locale/es/pgsrc/ReglasDeFormatoDeTexto -text
 src/plugins/wiki/www/locale/es/pgsrc/TodasLasPaginas -text

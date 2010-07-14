@@ -1,15 +1,14 @@
-Date: Wed, 12 May 2004 11:53:46 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.10pre)
-X-Rcs-Id: $Id: CambiosRecientes 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: CambiosRecientes 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=CambiosRecientes;
-  pgsrc_version="3 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 Here's a list of recently changed pages on this wiki. (See RecentEdits for all recent minor edits and changes).
 
 --------
-<?plugin RecentChanges days||=7 daylist=1,3,7,30,90,0 ?>
+<<RecentChanges days||=7 daylist=1,3,7,30,90,0 >>

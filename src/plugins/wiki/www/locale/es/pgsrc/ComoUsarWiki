@@ -1,26 +1,26 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: ComoUsarWiki 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: ComoUsarWiki 7339 2010-04-15 15:26:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ComoUsarWiki;
   flags="";
-  charset=iso-8859-1;
+  charset=utf-8;
   markup=2
 Content-Transfer-Encoding: binary
 
-_"Wiki wiki"_ significa "r·pido" en Hawaiano.
+_"Wiki wiki"_ significa "r√°pido" en Hawaiano.
 
 *Lo que necesita saber es:*
 
-* Para editar cualquier p·gina haga click en el vÌnculo que hay
-al final de la p·gina. DeberÌa hacer esto ahora y leer el cÛdigo fuente
-de esta p·gina. Se har· una idea mas clara de como funciona esto.
+* Para editar cualquier p√°gina haga click en el v√≠nculo que hay
+al final de la p√°gina. Deber√≠a hacer esto ahora y leer el c√≥digo fuente
+de esta p√°gina. Se har√° una idea mas clara de como funciona esto.
 * Se obtiene cursiva poniendo rodeando las palabras con dos comillas simples
 a cada lado _como este_.
 * Se consigue *texto en negrita*_ usando "two underscores."
 * Y, *_cursiva negrilla_* "with commilas simples y underscores."
 * Para tener una lista con puntos se hace poniendo un tablulador y un asterisco *
-* Si usa Windows, no se puede utilizar la tecla TAB. Es culpa de Bill Gates. Pero puede marcar el pequeÒo cuadrado que dice Convierte Espacios En Tabs. Se pueden poner muchos espacios y Wiki los reconocer· como un tabulador.
+* Si usa Windows, no se puede utilizar la tecla TAB. Es culpa de Bill Gates. Pero puede marcar el peque√±o cuadrado que dice Convierte Espacios En Tabs. Se pueden poner muchos espacios y Wiki los reconocer√° como un tabulador.
 * Para tener texto monoespaciado, indentelo con un espacio:
 
  esto es un poema
@@ -32,15 +32,15 @@ a cada lado _como este_.
 
 Yo soy un parrafo.
 
-Yo tambien soy un parrafo. Ambos somos pequeÒos parrafos.
+Yo tambien soy un parrafo. Ambos somos peque√±os parrafos.
 
 
-* Se pueden poner lineas horizontales con cuatro o m·s guiones como estos:
+* Se pueden poner lineas horizontales con cuatro o m√°s guiones como estos:
 ----
-* Para crear hipervÌnculos solamente hay que poner las palabras juntas y capitalizarlas. Imaginemonos que quiere crear una p·gina sobre como Steve Wainstead come gusanos. Todo lo que tiene que hacer es algo parecido a: SteveWainsteadComeGusanos. Si la p·gina no existe, entonces aparecer· un simbolo ? despuÈs del vÌnculo, invitandole a crear la p·gina: EstaPaginaNoDeberiaExistir. (Y por favor no arruine este ejemplo creando una aquÌ) 
-* Para vincular p·ginas fuera del Wiki, simplementa hay que poner la URL y Wiki lo vincular· por usted: http://www.nytimes.com/
-* Para poner im·genes, simplemente ponga el hipervÌnculo entre corchetes, por ejemplo: [[http://www.yourhost.yourdomain/images/picture.png]. Las URL de imagenes que no esten entre corchetes aparecer·n como vÌnculos a la imagen.
-* Ahora est· listo para comenzar a AgregarPaginas.
+* Para crear hiperv√≠nculos solamente hay que poner las palabras juntas y capitalizarlas. Imaginemonos que quiere crear una p√°gina sobre como Steve Wainstead come gusanos. Todo lo que tiene que hacer es algo parecido a: SteveWainsteadComeGusanos. Si la p√°gina no existe, entonces aparecer√° un simbolo ? despu√©s del v√≠nculo, invitandole a crear la p√°gina: EstaPaginaNoDeberiaExistir. (Y por favor no arruine este ejemplo creando una aqu√≠) 
+* Para vincular p√°ginas fuera del Wiki, simplementa hay que poner la URL y Wiki lo vincular√° por usted: http://www.nytimes.com/
+* Para poner im√°genes, simplemente ponga el hiperv√≠nculo entre corchetes, por ejemplo: [[http://www.yourhost.yourdomain/images/picture.png]. Las URL de imagenes que no esten entre corchetes aparecer√°n como v√≠nculos a la imagen.
+* Ahora est√° listo para comenzar a AgregarPaginas.
 
 ----
-Un WikiWikiWeb est· preparado para ser r·pido y de facil ediciÛn. Tiene un cÛdigo muy simple, sobre el cual se puede leer en ReglasDeFormatoDeTexto.
+Un WikiWikiWeb est√° preparado para ser r√°pido y de facil edici√≥n. Tiene un c√≥digo muy simple, sobre el cual se puede leer en ReglasDeFormatoDeTexto.
