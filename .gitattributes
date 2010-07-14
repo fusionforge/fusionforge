@@ -3880,13 +3880,17 @@ src/plugins/wiki/www/themes/gforge/interwiki.map -text
 src/plugins/wiki/www/themes/gforge/pgsrc/CategoryActionPage -text
 src/plugins/wiki/www/themes/gforge/pgsrc/CategoryCategory -text
 src/plugins/wiki/www/themes/gforge/pgsrc/CategoryWiki%20templates -text
+src/plugins/wiki/www/themes/gforge/pgsrc/ExternalPages -text
+src/plugins/wiki/www/themes/gforge/pgsrc/FindPage -text
 src/plugins/wiki/www/themes/gforge/pgsrc/Help%2FOldTextFormattingRules -text
 src/plugins/wiki/www/themes/gforge/pgsrc/Help%2FTextFormattingRules -text
 src/plugins/wiki/www/themes/gforge/pgsrc/HomePage -text
 src/plugins/wiki/www/themes/gforge/pgsrc/InterWikiMap -text
+src/plugins/wiki/www/themes/gforge/pgsrc/PhpWikiAdministration -text
 src/plugins/wiki/www/themes/gforge/pgsrc/SandBox -text
 src/plugins/wiki/www/themes/gforge/pgsrc/SpecialPages -text
 src/plugins/wiki/www/themes/gforge/pgsrc/TemplateTalk -text
+src/plugins/wiki/www/themes/gforge/pgsrc/TextFormattingRules -text
 src/plugins/wiki/www/themes/gforge/pgsrc/UpLoad -text
 src/plugins/wiki/www/themes/gforge/pgsrc/colorbox -text
 src/plugins/wiki/www/themes/gforge/pgsrc/titlebar -text
@@ -3954,6 +3958,7 @@ src/plugins/wiki/www/themes/wikilens/images/tabwhitebg.png -text svneol=unset#im
 src/plugins/wiki/www/themes/wikilens/images/tabwhitegray.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/wikilens/images/tabwhiteleft.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/wikilens/images/tabwhiteright.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/wikilens/pgsrc/LeftbarContent -text
 src/plugins/wiki/www/themes/wikilens/templates/body.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/categorypage.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/head.tmpl -text
