@@ -64,6 +64,18 @@ function ffOutputHandler($buffer) {
 	if (!isset($ffErrors))
 		$ffErrors = array();
 
+	$divstring = "\n\n" . '<script type="text/javascript"><!-- <![CDATA[
+		function toggle_ffErrors() {
+			var errorsblock = document.getElementById("ffErrorsBlock");
+			if (errorsblock.style.display == "none") {
+				errorsblock.style.display = "block";
+			} else {
+				errorsblock.style.display = "none";
+			}
+		}' . "\n//]]> --></script>\n<div id=\"ffErrors\">\n" .
+	    '<a href="javascript:toggle_ffErrors();">Click to toggle</a>' .
+	    "\n<div id=\"ffErrorsBlock\">";
+
 	/* cut off </body></html> (hopefully only) at the end */
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
 	if (substr($buffer, -strlen("</html>")) != "</html>") {
@@ -85,7 +97,7 @@ function ffOutputHandler($buffer) {
 	$has_div = false;
 	foreach ($ffErrors as $msg) {
 		if (!$has_div) {
-			$buffer .= "\n\n<div id=\"ffErrors\">\n";
+			$buffer .= $divstring;
 			$has_div = true;
 		}
 		$buffer .= "\n	<div class=\"" . $msg['type'] . '">' .
@@ -94,7 +106,7 @@ function ffOutputHandler($buffer) {
 
 	/* return final buffer */
 	if ($has_div)
-		$buffer .= "\n</div>";
+		$buffer .= "\n</div></div>";
 	return ($buffer . "\n</body></html>\n");
 }
 
