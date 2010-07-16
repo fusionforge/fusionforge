@@ -446,6 +446,7 @@ plugins/templates/scmcpold/packaging/dirs/plugin-scmcpold -text
 plugins/templates/scmcpold/packaging/install/plugin-scmcpold -text
 src/AUTHORS -text
 src/CHANGES -text
+src/COPYING.php -text
 src/INSTALL.restricted -text
 src/NEWS -text
 src/backend/shell/apache.sh svneol=native#unset
