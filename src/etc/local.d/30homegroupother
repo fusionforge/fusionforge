@@ -104,10 +104,3 @@ $sys_custom_path=$sys_etc_path.'/custom';
 // Gettext files (default: /usr/share/locale).
 $sys_gettext_path=$sys_share_path.'/locales';
 
-// Define the type of installation
-//    * development: 
-//    * integration: 
-//    * staging: 
-//    * production: normal mode.
-$sys_install_type = 'production';
-
