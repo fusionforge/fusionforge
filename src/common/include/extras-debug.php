@@ -110,7 +110,9 @@ function ffOutputHandler($buffer) {
 	return ($buffer . "\n</body></html>\n");
 }
 
-// set to the user defined error handler
-set_error_handler("ffErrorHandler");
+if (forge_get_config('sysdebug_phphandler')) {
+	// set to the user defined error handler
+	set_error_handler("ffErrorHandler");
+}
 
 ob_start("ffOutputHandler", 0, false);
