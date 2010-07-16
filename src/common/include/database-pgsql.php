@@ -97,6 +97,16 @@ function db_connect() {
 }
 
 /**
+ *  db_connect_if_needed() - Set up the DB connection if it's unset
+ */
+function db_connect_if_needed () {
+        global $gfconn ;
+        if (!isset ($gfconn)) {
+                db_connect () ;
+        }
+}
+
+/**
  *  db_query() - Query the database.
  *
  *  @deprecated since 4.8. Use db_query_params() instead!
@@ -108,6 +118,7 @@ function db_connect() {
  *	@return int result set handle.
  */
 function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+	db_connect_if_needed () ;
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
@@ -141,6 +152,7 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
  *  @return int result set handle.
  */
 function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+	db_connect_if_needed () ;
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
@@ -178,6 +190,7 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY
  *	@return int result set handle.
  */
 function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+	db_connect_if_needed () ;
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
