@@ -536,7 +536,7 @@ if [ "$1" -eq "1" ]; then
 	/etc/init.d/httpd restart >/dev/null 2>&1
 
 	# generate random hash for session_key
-	HASH=$(/bin/dd if=/dev/urandom bs=1024 count=100 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
+	HASH=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
 	%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{GFORGE_CONF_DIR}/local.inc
 
 	# add noreply mail alias
