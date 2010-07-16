@@ -384,6 +384,7 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 
 %{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/utils/fusionforge-shell-postgresql.spec
 
+%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/COPYING.php
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/deb-specific
 %{__rm} -fr $RPM_BUILD_ROOT/%{GFORGE_DIR}/rpm-specific
