@@ -65,3 +65,4 @@ $sys_user_reg_restricted={sys_user_reg_restricted};
 $sys_require_accept_conditions={sys_require_accept_conditions};
 // Block anonymous downloads?
 $sys_block_anonymous_downloads={sys_block_anonymous_downloads};
+

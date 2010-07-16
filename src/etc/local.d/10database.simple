@@ -1,7 +1,8 @@
-//Databases, html/php/other paths
-//server to use for updates and reads
-//If this is null (i.e. ""), then gforge will use Unix sockets to connect
-//to the database.
+// Databases, html/php/other paths
+
+// server to use for updates and reads
+// If this is null (i.e. ""), then gforge will use Unix sockets to connect
+// to the database.
 $sys_dbhost='{db_host}';
 $sys_dbname='{db_name}';
 $sys_dbuser='{db_user}';

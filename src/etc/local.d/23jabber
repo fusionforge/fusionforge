@@ -11,3 +11,4 @@ $sys_jabber_user='noreply';
 if (!isset($sys_jabber_pass)) {
    $sys_jabber_pass='';
 }
+
