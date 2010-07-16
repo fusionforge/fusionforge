@@ -84,8 +84,8 @@ if ( DB_TYPE == 'mysql') {
 	system("service postgresql restart 2>&1 >/dev/null");
 	system("su - postgres -c 'dropdb -q ".DB_NAME."'");
 	system("su - postgres -c 'createdb -q --encoding UNICODE ".DB_NAME."'");
-	system("psql -q -U".DB_USER." ".DB_NAME." -f /opt/gforge/db/gforge.sql");
-	system("php /opt/gforge/db/upgrade-db.php");
+	system("psql -q -U".DB_USER." ".DB_NAME." -f /opt/gforge/db/gforge.sql >> /var/log/gforge-import.log 2>&1");
+	system("php /opt/gforge/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
 } else {
 	print "Unsupported database type: ".DB_TYPE. "\n";
 	exit;
