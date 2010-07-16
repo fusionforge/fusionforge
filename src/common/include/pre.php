@@ -116,8 +116,23 @@ if (($ecd = forge_get_config ('extra_config_dirs')) != NULL) {
 
 forge_define_config_item ('installation_environment', 'core', 'production') ;
 $installation_environment = forge_get_config ('installation_environment') ;
+if ($installation_environment == 'development' || $installation_environment == 'integration')
+	$default_sysdebug_enable = 'true';
+else
+	$default_sysdebug_enable = 'false';
+forge_define_config_item ('sysdebug_enable', 'core', $default_sysdebug_enable) ;
+forge_set_config_item_bool ('sysdebug_enable', 'core') ;
+forge_define_config_item ('sysdebug_phphandler', 'core', 'true') ;
+forge_set_config_item_bool ('sysdebug_phphandler', 'core') ;
+forge_define_config_item ('sysdebug_ignored', 'core', 'false') ;
+forge_set_config_item_bool ('sysdebug_ignored', 'core') ;
+forge_define_config_item ('sysdebug_xmlstarlet', 'core', 'false') ;
+forge_set_config_item_bool ('sysdebug_xmlstarlet', 'core') ;
+forge_define_config_item ('sysdebug_akelos', 'core', 'false') ;
+forge_set_config_item_bool ('sysdebug_akelos', 'core') ;
 // Load extra func to add extras func like debug
-if ($installation_environment == 'development' || $installation_environment == 'integration') {
+$sysdebug_enable = forge_get_config('sysdebug_enable');
+if ($sysdebug_enable) {
 	require $gfcommon.'include/extras-debug.php';
 }
 
