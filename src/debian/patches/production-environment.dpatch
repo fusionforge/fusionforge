@@ -1,14 +1,12 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Default deployment is production, not development.
 
 @DPATCH@
-diff -urNad src~/etc/config.ini-fhs src/etc/config.ini-fhs
---- src~/etc/config.ini-fhs	2010-06-30 16:52:00.000000000 +0200
-+++ src/etc/config.ini-fhs	2010-06-30 16:53:50.000000000 +0200
-@@ -15,5 +15,5 @@
+--- src/etc/config.ini-fhs.orig	2010-07-16 17:50:05.000000000 +0200
++++ src/etc/config.ini-fhs	2010-07-16 17:51:19.000000000 +0200
+@@ -15,13 +15,13 @@ custom_path = "$core/config_path/custom"
  
  extra_config_dirs = "$core/config_path/config.ini.d"
  
@@ -16,3 +14,12 @@ diff -urNad src~/etc/config.ini-fhs src/etc/config.ini-fhs
 -installation_environment = development
 +; Switch to "development" or "integration" to add extra debugging
 +installation_environment = production
+ 
+ ; fine-grained control over debugging
+ 
+ ; enable debugging at all (overlay the page with pink box)
+-sysdebug_enable = true
++sysdebug_enable = false
+ 
+ ; enable the PHP Error Handler (default if sysdebug_enable)
+ sysdebug_phphandler = true
