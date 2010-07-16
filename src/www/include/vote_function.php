@@ -455,19 +455,6 @@ GROUP BY rate_field',
 	}
 }
 
-/**
- * vote_remove_all_ratings_by() - Remove all ratings by a particular user
- *
- * @param		int		The user ID
- */
-function vote_remove_all_ratings_by($user_id) {
-	db_query_params ('
-		DELETE FROM user_ratings
-		WHERE rated_by=$1
-	',
-			 array($user_id));
-}
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
