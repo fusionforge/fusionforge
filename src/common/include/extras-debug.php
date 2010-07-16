@@ -61,6 +61,10 @@ function ffOutputHandler($buffer) {
 	/* stop calling ffErrorHandler */
 	restore_error_handler();
 
+	$dtdpath = $gfcommon . 'include/';
+	// this is, sadly, necessary (especially in ff-plugin-mediawiki)
+	$pre_tag = "<pre style=\"margin:0; padding:0; border:0;\">";
+
 	if (!isset($ffErrors))
 		$ffErrors = array();
 
@@ -106,7 +110,7 @@ function ffOutputHandler($buffer) {
 
 	/* generate buffer for checking */
 	$cbuf = str_ireplace('http://www.w3.org/TR/xhtml1/DTD/',
-	    'file://' . $gfcommon . 'include/', $buffer);
+	    'file://' . $dtdpath, $buffer);
 	if ($has_div)
 		$cbuf .= "\n</div></div>";
 	$cbuf .= "\n</body></html>\n";
@@ -123,7 +127,7 @@ function ffOutputHandler($buffer) {
 			2 => array("pipe", "w"),
 		    );
 		$xmlstarlet = proc_open("xmlstarlet val -d " .
-		    escapeshellarg($gfcommon . 'include/xhtml1-transitional.dtd') .
+		    escapeshellarg($dtdpath . 'xhtml1-transitional.dtd') .
 		    " -", $dspec, $pipes);
 		$rv = 0;
 		if (is_resource($xmlstarlet)) {
@@ -141,7 +145,7 @@ function ffOutputHandler($buffer) {
 		if ($rv) {
 			$valck[] = array(
 				'msg' => "xmlstarlet found that this document is not valid (errorlevel $rv)!",
-				'extra' => "<pre style=\"margin:0; padding:0; border:0;\">" . htmlspecialchars(trim($serr .
+				'extra' => $pre_tag . htmlspecialchars(trim($serr .
 				    "\n\n" . $sout)) . "</pre>",
 				'type' => "error"
 			    );
@@ -173,9 +177,9 @@ function ffOutputHandler($buffer) {
 	/* append XHTML source code, if validation failed */
 	if ($appsrc) {
 		if (!$sysdebug_akelos || $vbuf == $sbuf[1])
-			$vbuf = "<ol><li><pre style=\"margin:0; padding:0; border:0;\">" . join("</pre></li>\n<li><pre style=\"margin:0; padding:0; border:0;\">", explode("\n", htmlentities(rtrim($cbuf)))) . "</pre></li></ol>";
+			$vbuf = "<ol><li>" . $pre_tag . join("</pre></li>\n<li>" . $pre_tag, explode("\n", htmlentities(rtrim($cbuf)))) . "</pre></li></ol>";
 		else
-			$vbuf = "<pre style=\"margin:0; padding:0; border:0;\">" . htmlentities(rtrim($sbuf[0])) . "</pre>" . $vbuf;
+			$vbuf = $pre_tag . htmlentities(rtrim($sbuf[0])) . "</pre>" . $vbuf;
 		$valck[] = array(
 			'msg' => "Since XHTML validation failed, here’s the checked document for you to look at:",
 			'extra' => $vbuf,
