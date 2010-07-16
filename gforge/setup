@@ -20,7 +20,7 @@ computedefault(){
 	DEFAULTdb_port=5432
 	DEFAULTdb_name=gforge
 	DEFAULTdb_user=gforge
-	DEFAULTdb_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTdb_password=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTip_address=`hostname -i`
 	DEFAULTscm_host=scm.$DEFAULTdomain_name
 	DEFAULTshell_host=shell.$DEFAULTdomain_name
@@ -42,12 +42,12 @@ computedefault(){
 	DEFAULTpeerrating_groupid=4
 	DEFAULTtemplate_project=5
 	DEFAULTadmin_login=admin
-	DEFAULTadmin_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTadmin_password=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTskill_list="Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
 	DEFAULTdefault_trove_cat=18
 	DEFAULTldap_host=localhost
 	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
-	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_path_to_mailman=$(if test -d /usr/lib/mailman; then echo /usr/lib/mailman; else echo /var/mailman; fi)
 	DEFAULTcgidir=$CGIDIR
 	DEFAULTcronolog_path=$(findcronolog)
@@ -64,14 +64,14 @@ computedefault(){
 	# The place where file uploaded with http are stored for download
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_urlroot=$SHAREDIR/www/
-	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTusr_share_gforge=$SHAREDIR
 	DEFAULTusr_lib_gforge=$LIBDIR
 	DEFAULTvar_lib_gforge=$GFGDIR/var/lib/gforge
 	DEFAULTvar_log_gforge=$GFGDIR/var/log/gforge
 	DEFAULTsys_show_source=0
 	DEFAULTsys_force_login=0
-	DEFAULTsys_session_key=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
+	DEFAULTsys_session_key=$(dd if=/dev/urandom count=1 bs=16 2> /dev/null | md5sum | cut -b1-32)
 	DEFAULTsys_session_expire='60 * 60 * 24 * 7'
 	DEFAULTsys_show_contact_info=1
 	DEFAULTsys_themeroot=$SHAREDIR/www/themes/
@@ -121,7 +121,7 @@ computedefault(){
 	DEFAULTsys_require_accept_conditions=false
 	DEFAULTsys_require_unique_email=false
 	DEFAULTsys_localinc=$ETCDIR/local.inc
-	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
+	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_plugins_path=$SHAREDIR/plugins/
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)
