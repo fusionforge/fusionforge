@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-06-04 16:50+0200\n"
-"PO-Revision-Date: 2010-06-15 12:03+0200\n"
+"PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
 "MIME-Version: 1.0\n"
@@ -13896,7 +13896,7 @@ msgstr ""
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:50
 msgid "Download .csv"
-msgstr ".CVS herunterladen"
+msgstr ".csv herunterladen"
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:53
 msgid "Submit New"
