@@ -24,15 +24,24 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 	switch ($errno) {
 		case E_USER_ERROR:
+		case E_ERROR:
 			$type = 'error';
 			break;
 
 		case E_USER_WARNING:
+		case E_WARNING:
 			$type = 'warning';
 			break;
 
 		case E_USER_NOTICE:
+		case E_NOTICE:
 			$type = 'notice';
+			break;
+
+		case E_STRICT:
+		case E_USER_DEPRECATED:
+		case E_DEPRECATED:
+			$type = "strict";
 			break;
 
 		default:
