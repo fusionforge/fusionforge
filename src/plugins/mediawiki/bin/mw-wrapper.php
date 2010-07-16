@@ -36,8 +36,8 @@ $fusionforgeproject = array_shift ($argv) ;
 $mwscript = array_shift ($argv) ;
 
 include (dirname(__FILE__).'/../../env.inc.php');
-include ($gfwww.'include/pre.php');
-include ($gfcommon.'include/cron_utils.php');
+require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 // Plugins subsystem
 require_once($gfcommon.'include/Plugin.class.php');

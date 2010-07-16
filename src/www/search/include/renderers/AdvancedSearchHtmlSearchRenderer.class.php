@@ -9,7 +9,7 @@
  *
  */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 
 class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {

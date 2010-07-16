@@ -27,7 +27,7 @@
    */
 
 include dirname(__FILE__) . '/../../env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 include $gfcommon.'include/cron_utils.php';
 
 if (forge_get_config('enable_uploads', 'mediawiki')) {

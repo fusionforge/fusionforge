@@ -9,7 +9,7 @@
  */
 
 require_once('../../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'mail/admin/../mail_utils.php';
 
 require_once $gfcommon.'mail/MailingList.class.php';

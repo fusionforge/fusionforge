@@ -12,7 +12,7 @@
 	By Sung Kim, GForge, 02/2004
 */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
 
 /**

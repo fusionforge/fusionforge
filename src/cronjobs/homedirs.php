@@ -52,7 +52,7 @@ creates a group home directory with a template in it.
 </VirtualHost> 
 */
 require_once dirname(__FILE__).'/../www/env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 setup_gettext_from_sys_lang();	

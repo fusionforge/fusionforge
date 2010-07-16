@@ -8,7 +8,7 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfconfig.'plugins/quota_management/config.php';
 
 // the header that displays for the user portion of the plugin

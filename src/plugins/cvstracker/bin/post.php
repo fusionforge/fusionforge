@@ -31,7 +31,7 @@
  */
  
 require dirname(__FILE__).'/../../env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once ($gfcommon.'common/include/utils.php');
 require_once ($gfplugins.'cvstracker/common/Snoopy.class.php');
 

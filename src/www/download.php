@@ -4,7 +4,7 @@
 */
 
 require_once('env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 Header("Location: /frs" . getStringFromServer('REQUEST_URI'));
 
 ?>

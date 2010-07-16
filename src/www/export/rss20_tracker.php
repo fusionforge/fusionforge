@@ -13,7 +13,7 @@
 // Keep in mind to write "&" in URLs as &amp; in RSS feeds
 
 require_once '../env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
 if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group_id'])) {

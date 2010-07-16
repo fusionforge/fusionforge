@@ -25,7 +25,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
 require_once(forge_get_config('jpgraph_path').'/jpgraph_line.php');
 require_once $gfcommon.'reporting/ReportGroupAdded.class.php';

@@ -17,7 +17,7 @@
  Complete OO rewrite by Tim Perdue 12/2002
  */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'news/news_utils.php';

@@ -48,7 +48,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
 require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';

@@ -21,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $group_id = getIntFromRequest('group_id');
 $sub_group_id = getIntFromRequest('sub_group_id');

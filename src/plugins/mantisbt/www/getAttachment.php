@@ -24,7 +24,7 @@
 $no_gz_buffer=true;
 
 require_once('../../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'ldap/ldapUtils.php';
 require_once $gfconfig.'plugins/mantisbt/config.php';
 

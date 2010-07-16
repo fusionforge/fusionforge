@@ -25,7 +25,7 @@
  */
 
 require_once '../../env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $group_id = getIntFromRequest('group_id');
 $sub_project_id = getIntFromRequest('sub_project_id');

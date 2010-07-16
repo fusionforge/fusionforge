@@ -1,7 +1,7 @@
 #! /usr/bin/php
 <?php
 require_once dirname(__FILE__).'/../www/env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'include/Group.class.php';
 

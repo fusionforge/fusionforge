@@ -24,7 +24,7 @@
  */
 
 require dirname(__FILE__).'/../../env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 require $gfcommon.'include/utils.php';
 require_once $gfcommon.'mail/MailingList.class.php';

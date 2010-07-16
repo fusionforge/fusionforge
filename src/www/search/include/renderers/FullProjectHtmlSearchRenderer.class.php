@@ -9,7 +9,7 @@
  *
  */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfwww.'search/include/renderers/ForumsHtmlSearchRenderer.class.php';
 require_once $gfwww.'search/include/renderers/TrackersHtmlSearchRenderer.class.php';

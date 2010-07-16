@@ -11,7 +11,7 @@
   */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
 
 $group_id = getIntFromRequest('group_id');

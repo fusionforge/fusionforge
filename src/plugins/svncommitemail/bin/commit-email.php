@@ -2,7 +2,7 @@
 <?php
 
 require dirname(__FILE__).'/../../env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 # Begin configuration
 $svnlook = '/usr/bin/svnlook';

@@ -25,7 +25,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $confirm_hash = getStringFromRequest('confirm_hash');
 

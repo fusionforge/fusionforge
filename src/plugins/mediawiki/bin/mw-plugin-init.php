@@ -25,7 +25,7 @@
   */
 
 include (dirname(__FILE__) . '/../../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $echo_links = $argc >= 1;
 

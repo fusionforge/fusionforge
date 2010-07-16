@@ -19,7 +19,7 @@
 $no_gz_buffer=true;
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'docman/include/doc_utils.php';
 require_once $gfcommon.'docman/Document.class.php';
 

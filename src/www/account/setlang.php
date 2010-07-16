@@ -22,7 +22,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $language_id=getStringFromRequest('language_id');
 setcookie('cookie_language_id',$language_id,(time()+2592000),'/','',0);

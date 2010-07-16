@@ -22,7 +22,7 @@
  */
 
 require_once('env.inc.php');
-require_once $gfwww.'include/pre.php';    // Initial db and session library, opens session
+require_once $gfcommon.'include/pre.php';
 
 $HTML->header(array('title'=>_('Requested Page not Found (Error 404)')));
 

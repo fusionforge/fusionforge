@@ -30,7 +30,7 @@
 	by Daniel Perez - 2005
 */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 class ForumAdmin extends Error {
 	var $group_id;

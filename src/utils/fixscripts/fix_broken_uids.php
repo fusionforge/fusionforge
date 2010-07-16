@@ -10,7 +10,7 @@
 */
 exit;
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
         exit_permission_denied();

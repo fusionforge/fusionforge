@@ -23,7 +23,7 @@
  */
 
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 $_quota_block_size = 1024;

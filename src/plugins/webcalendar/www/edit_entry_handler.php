@@ -1,5 +1,5 @@
 <?php
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 include_once $gfplugins.'webcalendar/www/includes/init.php';
 include_once $gfplugins.'webcalendar/www/includes/site_extras.php';
 load_user_categories ();

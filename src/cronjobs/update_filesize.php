@@ -30,7 +30,7 @@
  * Thanks
  */
 
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 db_begin();
 

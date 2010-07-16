@@ -25,7 +25,7 @@
  */
 
 require ('../env.inc.php');    
-require $gfwww.'include/pre.php';    
+require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/Stats.class.php';    
 
 $offset = getIntFromRequest('offset');

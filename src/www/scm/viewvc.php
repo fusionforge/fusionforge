@@ -16,7 +16,7 @@ if (isset($_GET['view']) && $_GET['view'] == 'tar') {
 }
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfwww.'scm/include/viewvc_utils.php';
 

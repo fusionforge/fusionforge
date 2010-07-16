@@ -18,7 +18,7 @@
  */ 
 
 require_once('../../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 // Check if we have jpgraph
 if (!file_exists(forge_get_config('jpgraph_path').'/jpgraph.php')) {

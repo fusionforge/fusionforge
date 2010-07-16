@@ -24,7 +24,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $trove_cat_id = getIntFromRequest('trove_cat_id');
 

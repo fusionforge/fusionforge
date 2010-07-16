@@ -23,7 +23,7 @@
    */
 
 require_once dirname(__FILE__) . '/../../env.inc.php';
-require_once $gfwww. 'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $IP = forge_get_config('master_path', 'mediawiki');
 

@@ -1,7 +1,7 @@
 <?php
 
 require_once('../../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $group_id = getIntFromRequest('group_id');
 site_project_header(array('title'=>'Webcalendar','group'=>$group_id,'toptab'=>'webcalendar' ));

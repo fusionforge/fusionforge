@@ -24,7 +24,7 @@
  */
 
 require_once ('../../../www/env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'/include/FusionForge.class.php';
 
 function show_globalsearch_stats_boxes() {

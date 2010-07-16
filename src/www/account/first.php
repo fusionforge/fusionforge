@@ -24,7 +24,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 site_user_header(array('title'=>sprintf(_('Welcome to %1$s'), forge_get_config ('forge_name'))));
 

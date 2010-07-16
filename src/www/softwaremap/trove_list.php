@@ -24,7 +24,7 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfwww.'include/pre.php'; 
+require_once $gfcommon.'include/pre.php';
 
 // entry for hierarchy plugin
 // we didn't find any other way to do it :(
