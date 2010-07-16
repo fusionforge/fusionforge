@@ -480,6 +480,7 @@ src/common/include/env.inc.php -text
 src/common/include/extras-debug.php -text
 src/common/include/group_section_texts.php -text
 src/common/include/minijson.php -text
+src/common/include/pre-compat.php -text
 src/common/include/rbac_texts.php -text
 src/common/include/tag_cloud.php -text
 src/common/include/utils_crossref.php -text

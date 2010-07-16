@@ -1,6 +1,6 @@
 <?php
 /**
- * pre.php - Automatically prepend to every page.
+ * pre-compat.php - Automatically prepend to every page.
  *
  * Copyright 2010, Roland Mas <lolando@debian.org>
  *
@@ -20,6 +20,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/pre-compat.php';
+require_once (dirname(__FILE__).'/pre.php');
 
 ?>
