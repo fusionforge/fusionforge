@@ -55,19 +55,50 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 }
 
 
-function ffErrorDisplay() {
+function ffOutputHandler($buffer) {
 	global $ffErrors;
 
-	if (isset($ffErrors) && $ffErrors) {
-		echo '<div id="ffErrors">';
-		foreach ($ffErrors as $msg) {
-			echo '<div class="'.$msg['type'].'">'.$msg['message'].'</div>'."\n";
+	/* stop calling ffErrorHandler */
+	restore_error_handler();
+
+	if (!isset($ffErrors))
+		$ffErrors = array();
+
+	/* cut off </body></html> (hopefully only) at the end */
+	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
+	if (substr($buffer, -strlen("</html>")) != "</html>") {
+		$ffErrors[] = array('type' => "error",
+		    'message' => htmlentities("does not end with </html> tag"));
+		$buffer = str_ireplace("</html>", "", $buffer);
+	} else
+		$buffer = substr($buffer, 0, -strlen("</html>"));
+	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
+	if (substr($buffer, -strlen("</body>")) != "</body>") {
+		$ffErrors[] = array('type' => "error",
+		    'message' => htmlentities("does not end with </body> tag"));
+		$buffer = str_ireplace("</body>", "", $buffer);
+	} else
+		$buffer = substr($buffer, 0, -strlen("</body>"));
+	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
+
+	/* append errors, if any */
+	$has_div = false;
+	foreach ($ffErrors as $msg) {
+		if (!$has_div) {
+			$buffer .= "\n\n<div id=\"ffErrors\">\n";
+			$has_div = true;
 		}
-		echo '</div>';
+		$buffer .= "\n	<div class=\"" . $msg['type'] . '">' .
+		    $msg['message'] . "</div>";
 	}
+
+	/* return final buffer */
+	if ($has_div)
+		$buffer .= "\n</div>";
+	return ($buffer . "\n</body></html>\n");
 }
 
 // set to the user defined error handler
 set_error_handler("ffErrorHandler");
 
-register_shutdown_function('ffErrorDisplay');
+ob_start("ffOutputHandler", 0, false);
