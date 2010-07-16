@@ -1,9 +1,15 @@
 <?php
 
+$sysdebug_ignored = forge_get_config('sysdebug_ignored');
+
 // error handler function
 function ffErrorHandler($errno, $errstr, $errfile, $errline)
 {
-	global $ffErrors;
+	global $ffErrors, $sysdebug_ignored;
+
+	if ($sysdebug_ignored && error_reporting() == 0)
+		/* prepended @ to statement => ignore */
+		return false;
 
 	if (!isset($ffErrors))
 		$ffErrors = array();
