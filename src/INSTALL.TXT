@@ -296,6 +296,21 @@ from gforge.org and set USE_CACHE=false as shown here.
 DEFINE("USE_CACHE",false);
 
 
+ADDITIONAL FILES
+----------------
+
+For XHTML validation against the DTD, the following files must be
+placed under the gforge/common/include/ directory:
+* xhtml-lat1.ent
+* xhtml-special.ent
+* xhtml-symbol.ent
+* xhtml1-strict.dtd
+* xhtml1-transitional.dtd
+They can be downloaded from http://www.w3.org/TR/xhtml1/dtds.html
+as tarball (xhtml1.tgz).
+
+Installation of xmlstarlet is also required.
+
 MOST COMMON PROBLEMS
 --------------------
 
@@ -373,6 +388,3 @@ Q: Large uploads into FRS or the doc manager fail.
 
 A: Apache and the php.ini file need to have upload limits and possibly 
 memory limits increased.
-
-
-

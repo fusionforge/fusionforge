@@ -27,6 +27,18 @@ set -e
 
 case "$1" in
     configure)
+	for file in \
+	    /usr/share/xml/xhtml/schema/dtd/1.0/xhtml1-strict.dtd \
+	    /usr/share/xml/xhtml/schema/dtd/1.0/xhtml1-transitional.dtd \
+	    /usr/share/xml/entities/xhtml/xhtml-lat1.ent \
+	    /usr/share/xml/entities/xhtml/xhtml-special.ent \
+	    /usr/share/xml/entities/xhtml/xhtml-symbol.ent \
+	    ; do
+		fname=${file##*/}
+		test -s /usr/share/gforge/common/include/$fname || \
+		    ln -sf $file /usr/share/gforge/common/include/
+	done
+
 	adduser --system --group --home /var/www/@OLDPACKAGE@ @OLDPACKAGE@ > /dev/null 2>&1
 	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot anonscm-@OLDPACKAGE@ > /dev/null 2>&1
 	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot scm-@OLDPACKAGE@ > /dev/null 2>&1

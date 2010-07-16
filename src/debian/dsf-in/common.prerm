@@ -21,6 +21,18 @@ fi
 
 case "$1" in
     remove)
+	for file in \
+	    /usr/share/xml/xhtml/schema/dtd/1.0/xhtml1-strict.dtd \
+	    /usr/share/xml/xhtml/schema/dtd/1.0/xhtml1-transitional.dtd \
+	    /usr/share/xml/entities/xhtml/xhtml-lat1.ent \
+	    /usr/share/xml/entities/xhtml/xhtml-special.ent \
+	    /usr/share/xml/entities/xhtml/xhtml-symbol.ent \
+	    ; do
+		fname=${file##*/}
+		test x"$(readlink /usr/share/gforge/common/include/$fname") = \
+		    x"$file" && rm -f /usr/share/gforge/common/include/$fname
+	done
+
 	rm -f /etc/@OLDPACKAGE@/local.pl
 	;;
     upgrade|deconfigure|failed-upgrade)
