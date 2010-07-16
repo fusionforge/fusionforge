@@ -486,6 +486,11 @@ src/common/include/pre-compat.php -text
 src/common/include/rbac_texts.php -text
 src/common/include/tag_cloud.php -text
 src/common/include/utils_crossref.php -text
+src/common/include/xhtml-lat1.ent -text
+src/common/include/xhtml-special.ent -text
+src/common/include/xhtml-symbol.ent -text
+src/common/include/xhtml1-strict.dtd -text
+src/common/include/xhtml1-transitional.dtd -text
 src/common/mail/Mail.class.php -text
 src/common/mvc/Actions.class.php -text
 src/common/mvc/Controler.class.php -text
