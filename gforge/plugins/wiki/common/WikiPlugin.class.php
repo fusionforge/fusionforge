@@ -205,7 +205,7 @@ class GforgeWikiPlugin extends Plugin {
 						WHERE plugin_wiki_page.id=plugin_wiki_version.id
 							AND mtime BETWEEN $2 AND $3
 							AND minor_edit=0
-							AND substring(plugin_wiki_page.pagename from 0 for $1) = $4
+							AND substring(plugin_wiki_page.pagename from 0 for $1::int) = $4
 						ORDER BY mtime DESC',
 								 array ($len,
 									$params['begin'],
