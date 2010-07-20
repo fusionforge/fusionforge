@@ -33,7 +33,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 	function multipleAssignedBox ($name='assigned_to[]') {
 		$engine = RBACEngine::getInstance () ;
-		$techs = $engine->getUsersByAllowedAction ('pm', $this->getID(), 'tech') ;
+		$techs = $engine->getUsersByAllowedAction ('pm', $this->ProjectGroup->getID(), 'tech') ;
 
 		$tech_id_arr = array () ;
 		$tech_name_arr = array () ;
