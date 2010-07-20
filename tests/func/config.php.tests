@@ -24,7 +24,7 @@ define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql
 define('DB_NAME', 'fforge');
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "ssh root@centos52 'cd /opt/tests/func; php db_reload.php'");
+define('DB_INIT_CMD', "ssh root@centos52 'cd /opt/tests/func 2>/dev/null || cd /usr/share/tests/func; php db_reload.php'");
 
 // Enter true when file is configured.
 define('CONFIGURED', true);
