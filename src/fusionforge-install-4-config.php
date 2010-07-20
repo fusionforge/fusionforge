@@ -26,4 +26,4 @@
 
 system('PATH=/opt/gforge/utils/:$PATH migrate-to-ini-files.sh') ;
 system('PATH=/opt/gforge/utils/:$PATH manage-apache-config.sh install') ;
-system('rename -f s/.generated// /etc/gforge/httpd.conf.d/*.generated') ;
+system('for i in /etc/gforge/httpd.conf.d/*.generated ; do mv $i ${i%%.generated} ; done') ;
