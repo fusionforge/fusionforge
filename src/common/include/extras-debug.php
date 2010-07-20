@@ -58,6 +58,10 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 function ffOutputHandler($buffer) {
 	global $ffErrors, $gfcommon;
 
+	if (! getenv ('SERVER_SOFTWARE')) {
+		return $buffer ;
+	}
+
 	/* stop calling ffErrorHandler */
 	restore_error_handler();
 
