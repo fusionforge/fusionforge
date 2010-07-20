@@ -1,6 +1,6 @@
-Date: Thu, 15 Apr 2010 16:32:58 +0000
+Date: Tue, 13 Jul 2010 17:31:16 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: AllPagesCreatedByMe 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: AllPagesCreatedByMe 7614 2010-07-15 15:56:21Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AllPagesCreatedByMe;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,7 +10,7 @@ Content-Transfer-Encoding: binary
 
 The list of pages which were created by you. (If you are authenticated only)
 
-<<AllPages creator=[] info||=mtime,author,hits limit||=1000 sortby||=pagename>>
+<<AllPages creator=[] info||=mtime,author,hits sortby||=pagename>>
 
 ----
 [[CategoryActionPage]]

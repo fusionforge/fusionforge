@@ -1,6 +1,6 @@
-Date: Fri,  2 Jul 2010 13:54:01 +0000
+Date: Tue, 13 Jul 2010 17:31:16 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: MyRatings 7594 2010-07-02 11:55:36Z vargenau $
+X-Rcs-Id: $Id: MyRatings 7614 2010-07-15 15:56:21Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=MyRatings;
   flags=PAGE_LOCKED;
@@ -8,7 +8,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<UserRatings info=ratingvalue limit||=1000 >>
+<<UserRatings info=ratingvalue>>
 
 ----
 [[CategoryActionPage]]

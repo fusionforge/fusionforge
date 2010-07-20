@@ -1,6 +1,6 @@
 Date: Wed, 19 May 2010 18:15:54 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: Help%2FModeratedPagePlugin 7419 2010-05-19 16:49:33Z vargenau $
+X-Rcs-Id: $Id: Help%2FModeratedPagePlugin 7627 2010-07-20 15:39:34Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FModeratedPagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -37,18 +37,31 @@ In case of multiple moderators: first comes, first serves.
 
 == Usage ==
 {{{
-<<ModeratedPage>>
+<<ModeratedPage arguments>>
 }}}
 
 == Arguments ==
 
-* moderators: comma seperated list of registered usernames or groups.
-  Each user should have his email defined in his prefs. Default: "Administrators" or 
-<<SystemInfo ADMIN_USER>>
-* requirelevel: one of 0, 1, 2 or 10 on which moderation is used. Default: false (use requireaccess instead)
-* requireaccess: comma separated list of access perms, on which the moderation is used
-  "view,edit,create,list,remove,change"
-  Default: edit,remove,change
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **moderators**
+| comma-separated list of registered usernames or groups. 
+Each user should have his email defined in his prefs.
+| "Administrators" or "<<SystemInfo ADMIN_USER>>"
+|-
+| **requirelevel**
+| one of 0, 1, 2 or 10 on which moderation is used
+| false (use requireaccess instead)
+|-
+| **requireaccess** 
+| comma-separated list of access perms, on which the moderation is used
+"view,edit,create,list,remove,change"
+| edit,remove,change
+|}
 
 == Example ==
 

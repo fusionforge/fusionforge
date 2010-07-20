@@ -1,6 +1,6 @@
-Date: Thu, 20 May 2010 14:16:02 +0000
+Date: Tue, 20 Jul 2010 18:01:30 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: PhpWikiManual 7421 2010-05-20 12:16:27Z vargenau $
+X-Rcs-Id: $Id: PhpWikiManual 7628 2010-07-20 16:01:50Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiManual;
   flags=EXTERNAL_PAGE;
@@ -29,4 +29,5 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="Help/SemanticRelations">>
 <<IncludePage page="Help/Spreadsheet">>
 <<IncludePage page="Help/PageList">>
+<<IncludePage page="Help/Advice for Mediawiki users">>
 <<IncludePages pages=<!plugin-list BackLinks page=CategoryWikiPlugin sortby=pagename exclude="Template/*" !> >>

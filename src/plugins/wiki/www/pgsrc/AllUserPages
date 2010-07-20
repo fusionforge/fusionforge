@@ -1,6 +1,6 @@
-Date: Thu, 15 Apr 2010 16:32:58 +0000
+Date: Tue, 13 Jul 2010 17:31:16 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: AllUserPages 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: AllUserPages 7614 2010-07-15 15:56:21Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AllUserPages;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,7 +10,7 @@ Content-Transfer-Encoding: binary
 
 Here is the list of **all user pages** on this Wiki (pages that were not created at initialisation of the wiki). [[AllPages|Show all pages]].
 
-<<AllPages userpages=1 info||=mtime,author,hits limit||=1000 sortby||=pagename>>
+<<AllPages userpages=1 info||=mtime,author,hits sortby||=pagename>>
 
 ----
 [[CategoryActionPage]]

@@ -2689,6 +2689,7 @@ src/plugins/wiki/www/pgsrc/Help -text
 src/plugins/wiki/www/pgsrc/Help%00252FActionPage -text
 src/plugins/wiki/www/pgsrc/Help%00252FAddCommentPlugin -text
 src/plugins/wiki/www/pgsrc/Help%00252FAddingPages -text
+src/plugins/wiki/www/pgsrc/Help%00252FAdvice%20for%20Mediawiki%20users -text
 src/plugins/wiki/www/pgsrc/Help%2FAllPagesPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FAllUsersPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FAnalyseAccessLogSqlPlugin -text
@@ -2904,6 +2905,7 @@ src/plugins/wiki/www/pgsrc/Template%2FExample -text
 src/plugins/wiki/www/pgsrc/Template%2FLinkto -text
 src/plugins/wiki/www/pgsrc/Template%2FNewPlugin -text
 src/plugins/wiki/www/pgsrc/Template%2FRelation -text
+src/plugins/wiki/www/pgsrc/Template%2FUserPage -text
 src/plugins/wiki/www/pgsrc/TemplateTalk -text
 src/plugins/wiki/www/pgsrc/TitleSearch -text
 src/plugins/wiki/www/pgsrc/TranslateText -text

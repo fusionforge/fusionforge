@@ -1,0 +1,13 @@
+Date: Sun, 18 Jul 2010 14:38:36 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Template%2FUserPage 7624 2010-07-18 12:40:33Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Template%2FUserPage;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+This is your user page.
+
+Please describe yourself and what you intend to contribute in this wiki.
