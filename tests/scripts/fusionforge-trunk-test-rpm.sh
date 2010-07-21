@@ -4,7 +4,7 @@ export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=192.168.0.204
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-export FFORGE_RPM_REPO=${HUDSON_URL}job/fusionforge-trunk-build-source/ws/build/packages
+export FFORGE_RPM_REPO=${HUDSON_URL}job/fusionforge-trunk-build-rpm/ws/build/packages
 export HOST=centos52.local
 export CONFIGURED=true
 
