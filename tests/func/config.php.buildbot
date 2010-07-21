@@ -25,7 +25,7 @@ define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "ssh root@".HOST." 'cd /opt/tests/func 2>/dev/null || cd /usr/share/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot php db_reload.php'");
+define('DB_INIT_CMD', "ssh root@".HOST." 'cd /opt/tests/func 2>/dev/null || cd /usr/share/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=".DB_NAME." php db_reload.php'");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'xxxxxx')
