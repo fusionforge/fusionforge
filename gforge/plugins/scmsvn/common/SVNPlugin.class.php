@@ -240,6 +240,9 @@ class SVNPlugin extends SCMPlugin {
 
 		$svnusers = array () ;
 		foreach ($groups as $project) {
+			if ( !$project->isActive()) {
+				continue;
+			}
 			$users = $project->getMembers () ;
 			foreach ($users as $user) {
 				$perm = $project->getPermission ($user) ;
