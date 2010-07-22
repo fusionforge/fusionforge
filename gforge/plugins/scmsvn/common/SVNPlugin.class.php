@@ -200,15 +200,15 @@ class SVNPlugin extends SCMPlugin {
 		}
 
 		$repo = $this->svn_root . '/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			system ("svnadmin create $repo") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches") ;
-			system ("find $repo -type d | xargs chmod g+s") ;
 		}
 
 		if ($this->use_ssh) {
+			$unix_group = 'scm_' . $project->getUnixName() ;
+			system ("find $repo -type d | xargs chmod g+s") ;
 			system ("chgrp -R $unix_group $repo") ;
 			if ($project->enableAnonSCM()) {
 				system ("chmod -R g+wX,o+rX-w $repo") ;
@@ -217,12 +217,9 @@ class SVNPlugin extends SCMPlugin {
 			}
 		} else {
 			$unix_user = $GLOBALS['sys_apache_user'];
+			$unix_group = $GLOBALS['sys_apache_group'];
 			system ("chown -R $unix_user:$unix_group $repo") ;
-			if ($project->enableAnonSCM()) {
-				system ("chmod -R g+wX,o+rX-w $repo") ;
-			} else {
-				system ("chmod -R g+wX,o-rwx $repo") ;
-			}
+			system ("chmod -R g-rwx,o-rwx $repo") ;
 		}
 	}
 
