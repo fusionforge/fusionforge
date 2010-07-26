@@ -178,7 +178,7 @@ class DocumentGroup extends Error {
 						$project_group_id));
 		/* make a recursive call */
 		while ($arr = db_fetch_array($result)) {
-			$this->delete($arr,$project_group_id);
+			$this->delete($arr['doc_group'],$project_group_id);
 		}
 
 		if (!$result) {
