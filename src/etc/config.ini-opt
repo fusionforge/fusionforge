@@ -25,7 +25,7 @@ sysdebug_enable = true
 
 ; enable the PHP Error Handler (default if sysdebug_enable)
 sysdebug_phphandler = true
-; also report ignored errors (@call)
+; also report (display) ignored errors, e.g. from @call
 sysdebug_ignored = false
 
 ; output validation (if sysdebug_enable)

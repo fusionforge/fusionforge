@@ -7,7 +7,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 {
 	global $ffErrors, $sysdebug_ignored;
 
-	if ($sysdebug_ignored && error_reporting() == 0)
+	if (!$sysdebug_ignored && error_reporting() == 0)
 		/* prepended @ to statement => ignore */
 		return false;
 
