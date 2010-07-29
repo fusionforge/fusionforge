@@ -259,7 +259,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 			}
 		}
 		if (!$at_found) {
-			echo '<tr><td colspan="2" bgcolor="#FFFFFF"><center><strong>'._('You are not monitoring any trackers.').'</strong></center></td></tr>';
+			echo '<tr><td colspan="2">'._('You are not monitoring any trackers.').'</td></tr>';
 		}
 		echo $HTML->listTableBottom();
 	}
@@ -275,7 +275,7 @@ title="<?php echo _('Submitted Artifacts'); ?>">
 		$forumsForUser = new ForumsForUser(session_get_user());
 		$forums = $forumsForUser->getMonitoredForums();
 		if (count($forums) < 1) {
-			echo '<tr><td colspan="2"><strong>'._('You are not monitoring any forums.').'</strong></td></tr>';
+			echo '<tr><td colspan="2">'._('You are not monitoring any forums.').'</td></tr>';
 		} else {
 			echo '<tr><td colspan="2"><strong>'.util_make_link ('/forum/myforums.php',_('My Monitored Forums')).'</strong></td></tr>';
 			foreach ($forums as $f) {
@@ -314,7 +314,7 @@ AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
 				user_getid()));
 		$rows=db_numrows($result);
 		if (!$result || $rows < 1) {
-			echo '<tr><td colspan="2"><strong>'._('You are not monitoring any files.').'</strong></td></tr>';
+			echo '<tr><td colspan="2">'._('You are not monitoring any files.').'</td></tr>';
 		} else {
 			for ($i=0; $i<$rows; $i++) {
 				if (db_result($result,$i,'group_id') != $last_group) {
@@ -340,16 +340,13 @@ AND filemodule_monitor.user_id=$2 ORDER BY group_name DESC',
 	/*
 		   Personal bookmarks
 	*/
-	echo $HTML->boxTop(_('My Bookmarks'), 'My_Bookmarks');
-
 	echo '<a href="'.util_make_url ('/my/bookmark_add.php').'">'._('Add bookmark').'</a><br/><br/>';
 	$result = db_query_params ('SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where 
 user_id=$1 ORDER BY bookmark_title',
 			array(user_getid() ));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
-		<strong>'._('You currently do not have any bookmarks saved.').'</strong>';
+			echo '<tr><td colspan="2">'._('You currently do not have any bookmarks saved.').'</td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -362,7 +359,6 @@ user_id=$1 ORDER BY bookmark_title',
 			util_make_link ('/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id'),_('[Edit]'));
 		}
 	}
-	echo $HTML->boxBottom();
 ?>
 </div>
 <?php } ?>
@@ -391,7 +387,7 @@ user_id=$1 ORDER BY bookmark_title',
 					  'A')) ;
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td colspan="3"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
+		echo '<tr><td colspan="3">'._('You\'re not a member of any active projects.').'</td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
