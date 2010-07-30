@@ -456,6 +456,16 @@ src/common/dao/include/DataAccessException.class.php -text
 src/common/dao/include/DataAccessObject.class.php -text
 src/common/dao/include/DataAccessResult.class.php -text
 src/common/docman/Parsedata.class.php -text
+src/common/docman/actions/addfile.php -text
+src/common/docman/actions/addsubdocgroup.php -text
+src/common/docman/actions/deldir.php -text
+src/common/docman/actions/editdocgroup.php -text
+src/common/docman/actions/editfile.php -text
+src/common/docman/actions/emptytrash.php -text
+src/common/docman/actions/forcereindexenginesearch.php -text
+src/common/docman/actions/trashdir.php -text
+src/common/docman/actions/trashfile.php -text
+src/common/docman/actions/updateenginesearch.php -text
 src/common/docman/engine/parser_doc.php -text
 src/common/docman/engine/parser_html.php -text
 src/common/docman/engine/parser_list.txt -text
@@ -463,6 +473,21 @@ src/common/docman/engine/parser_oo.php -text
 src/common/docman/engine/parser_pdf.php -text
 src/common/docman/engine/parser_text.inc.php -text
 src/common/docman/engine/parser_text.php -text
+src/common/docman/include/utils.php -text
+src/common/docman/include/vtemplate.class.php -text
+src/common/docman/views/addfile.php -text
+src/common/docman/views/addsubdocgroup.php -text
+src/common/docman/views/admin.php -text
+src/common/docman/views/editdocgroup.php -text
+src/common/docman/views/editfile.php -text
+src/common/docman/views/help.php -text
+src/common/docman/views/listfile.php -text
+src/common/docman/views/listpendingfile.php -text
+src/common/docman/views/listtrashfile.php -text
+src/common/docman/views/menu.php -text
+src/common/docman/views/search.php -text
+src/common/docman/views/tree.php -text
+src/common/docman/views/views.php -text
 src/common/event/Event.class.php -text
 src/common/include/Codendi_HTMLPurifier.class.php -text
 src/common/include/Codendi_Request.class.php -text
@@ -568,6 +593,7 @@ src/db/20100518-pfo-rbac.sql -text
 src/db/20100524-pfo-rbac.sql -text
 src/db/20100606-clean-perm-views.sql -text
 src/db/20100610-pfo-rbac.sql -text
+src/db/20100730-docman.sql -text
 src/db/FTI-20061025.sql -text
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
@@ -4019,7 +4045,6 @@ src/utils/manage-apache-config.sh -text
 src/utils/manage-translations.sh -text
 src/utils/migrate-to-ini-files.sh -text
 src/www/admin/pi.php -text
-src/www/docman/include/vtemplate.class.php -text
 src/www/docman/search.php -text
 src/www/docman/search.tpl.html -text
 src/www/env.inc.php -text
@@ -4348,6 +4373,18 @@ src/www/themes/gforge/images/box-topleft.png -text svneol=unset#image/png
 src/www/themes/gforge/images/box-topright.png -text svneol=unset#image/png
 src/www/themes/gforge/images/category.png -text svneol=unset#image/png
 src/www/themes/gforge/images/clear.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/configure-directory.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/delete-directory.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/directory.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/edit-file.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/file_type_image.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/file_type_pdf.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/file_type_unknown.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/image-x-generic.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/insert-directory.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/insert-file.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/new.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/trash-empty.png -text svneol=unset#image/png
 src/www/themes/gforge/images/header/top-logo.blank.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/header/top-logo.png -text svneol=unset#image/png
 src/www/themes/gforge/images/header/top-middle.gif -text svneol=unset#image/gif

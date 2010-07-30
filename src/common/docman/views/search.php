@@ -24,37 +24,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once('../env.inc.php');
-require_once $gfcommon.'include/pre.php';
+/* NEED A REAL REWRITE */
 require_once $gfwww.'docman/include/vtemplate.class.php';
-require_once $gfwww.'docman/include/doc_utils.php';
-require_once $gfcommon.'docman/DocumentFactory.class.php';
-require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
-$group_id = getIntFromRequest('group_id');
-
-if (!$group_id) {
-    exit_no_group();
-}
-$g =& group_get_object($group_id);
-if (!$g || !is_object($g) || $g->isError()) {
-	exit_no_group();
-}
-
-$df = new DocumentFactory($g);
-if ($df->isError()) {
-	exit_error(_('Error'),$df->getErrorMessage());
-}
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError()) {
-	exit_error(_('Error'),$dgf->getErrorMessage());
-}
-
-// check if the user is docman's admin
 $is_editor = forge_check_perm ('docman', $g->getID(), 'admin') ;
-
-docman_header(_('Document Manager: Display Document'),_('Project: %1$s'),'docman','',$g->getPublicName());
 
 $vtp = new VTemplate;
 $handle = $vtp->Open("search.tpl.html");
@@ -82,13 +55,10 @@ if (getStringFromPost('cmd') == "search")
 	$mots = preg_split("/[\s,]+/",$textsearch);
 	$qpa = db_construct_qpa (false, 'SELECT filename, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
 
-	if (getStringFromPost('search_type') == "one")
-	{
-		if (count($mots) > 0)
-		{
+	if (getStringFromPost('search_type') == "one") {
+		if (count($mots) > 0) {
 			$qpa = db_construct_qpa ($qpa, ' AND (FALSE') ;
-			foreach ($mots as $mot)
-			{
+			foreach ($mots as $mot) {
 				$mot = strtolower($mot); 
 				$qpa = db_construct_qpa ($qpa, ' OR title LIKE $1 OR description LIKE $1 OR data_words LIKE $1',
 							 array ("%$mot%")) ;
@@ -97,11 +67,9 @@ if (getStringFromPost('cmd') == "search")
 		}
 	} else {
 		// search_type = all
-		if (count($mots) > 0)
-		{
+		if (count($mots) > 0) {
 			$qpa = db_construct_qpa ($qpa, ' AND (TRUE') ;
-			foreach ($mots as $mot)
-			{
+			foreach ($mots as $mot) {
 				$mot = strtolower($mot); 
 				$qpa = db_construct_qpa ($qpa, ' AND (title LIKE $1 OR description LIKE $1 OR data_words LIKE $1)',
 							 array ("%$mot%")) ;
@@ -121,22 +89,16 @@ if (getStringFromPost('cmd') == "search")
 	$qpa = db_construct_qpa ($qpa, 'ORDER BY updatedate, createdate') ;
 	$resarr = array();
 	$result = db_query_qpa ($qpa);
-	if (!$result)
-	{
+	if (!$result) {
 		$vtp->AddSession($handle,"MESSAGE");
 		$vtp->SetVar($handle,"MESSAGE.TEXT",_('Database query error'));
 		$vtp->CloseSession($handle,"MESSAGE");
-	}
-	elseif (db_numrows($result) < 1) 
-	{
+	} elseif (db_numrows($result) < 1) {
 		$vtp->AddSession($handle,"MESSAGE");
 		$vtp->SetVar($handle,"MESSAGE.TEXT",_('Your search did not match any documents'));
 		$vtp->CloseSession($handle,"MESSAGE");
-	}
-	else
-	{
-		while ($arr = db_fetch_array($result))
-		{
+	} else {
+		while ($arr = db_fetch_array($result)) {
 			$resarr[] = $arr;
 		}
 	}
@@ -146,10 +108,8 @@ if (getStringFromPost('cmd') == "search")
 	$groupsarr = array();
 	$result = db_query_params ('SELECT doc_group, groupname, parent_doc_group FROM doc_groups WHERE group_id=$1',
 				   array (getIntFromRequest ('group_id')));
-	if ($result && db_numrows($result) > 0)
-	{
-		while ($arr = db_fetch_array($result))
-		{
+	if ($result && db_numrows($result) > 0) {
+		while ($arr = db_fetch_array($result)) {
 			$groupsarr[] = $arr;
 		}
 	}
@@ -157,8 +117,7 @@ if (getStringFromPost('cmd') == "search")
 	
 	$vtp->AddSession($handle,"RESULTSEARCH");
 	$count = 0;
-	foreach ($resarr as $item)
-	{
+	foreach ($resarr as $item) {
 		$count++;
 		$vtp->AddSession($handle,"RESULT");
 		$vtp->SetVar($handle,"RESULT.N",$count);
@@ -181,28 +140,23 @@ $vtp->Display();
 // print_debug (print_r($_POST,true));
 // print_debug (print_r($groupsarr,true));
 
-docman_footer(array());
-
-function print_debug ($text)
-{
+function print_debug ($text) {
 	echo "<pre>$text</pre>";
 }
 
-function get_path_document ($groupsarr, $doc_group, $group_id)
-{
+function get_path_document ($groupsarr, $doc_group, $group_id) {
 	$rep = "";
-	foreach ($groupsarr as $group)
-	{
+	foreach ($groupsarr as $group) {
 		if ($group["doc_group"] == $doc_group)
 		{
 			if ($group["parent_doc_group"] == 0) 
 			{
-				$href = util_make_url ("?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
+				$href = util_make_url ("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
 				$rep .= "<a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 				break;
 			}
 			$s = get_path_document ($groupsarr,  $group["parent_doc_group"], $group_id);
-			$href = util_make_url ("?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
+			$href = util_make_url ("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
 			$rep .= "$s / <a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 			break;
 		}
@@ -210,8 +164,7 @@ function get_path_document ($groupsarr, $doc_group, $group_id)
 	return $rep;
 }
 
-function prepare_search_text ($text)
-{
+function prepare_search_text ($text) {
 	
 	$rep = $text; 
 	$rep = utf8_decode($rep);

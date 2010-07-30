@@ -43,7 +43,6 @@ class DocumentFactory extends Error {
 	 */
 	var $Documents;
 	var $stateid;
-	var $languageid;
 	var $docgroupid;
 	var $sort='group_name, title';
 
@@ -155,11 +154,6 @@ class DocumentFactory extends Error {
 						$valid = false;
 					}
 				}
-				
-				if ($this->languageid && $doc->getLanguageID() != $this->languageid) {
-					$valid = false;
-				}
-				
 				
 				if ($valid) {
 					$return[] =& $doc;

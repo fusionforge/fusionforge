@@ -561,7 +561,7 @@ class Group extends Error {
 
 		//XXX not yet actived logo_image_id='$logo_image_id', 
 		$res = db_query_params ('UPDATE groups
-			SET 	group_name=$1,
+			SET group_name=$1,
 				homepage=$2,
 				short_description=$3,
 				use_mail=$4,
@@ -572,7 +572,7 @@ class Group extends Error {
 				use_scm=$9,
 				use_news=$10,
 				use_docman=$11,
-                                is_public=$12,
+				is_public=$12,
 				new_doc_address=$13,
 				send_all_docs=$14,
 				use_ftp=$15,
@@ -1140,6 +1140,19 @@ class Group extends Error {
 
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman'];
+		} else {
+			return false;
+		}
+	}
+	/**
+	 *  usesDocmanSearch - whether or not this group has opted to use docman search engine.
+	 *
+	 *  @return	boolean	use_docman_search.
+	 */
+	function useDocmanSearch() {
+
+		if (forge_get_config('use_docman')) {
+			return $this->data_array['use_docman_search'];
 		} else {
 			return false;
 		}
@@ -2625,6 +2638,42 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		}
 
 		return $users;
+	}
+
+	function setDocmanSearchStatus($status) {
+		db_begin();
+		/* if we activate search engine, we probably want to reindex */
+		$res = db_query_params ('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
+					array ($status,
+					       $this->getID())) ;
+	
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR - Could Not Update Group UseDocmanSearch Status: %s'),db_error()));
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['use_docman_search']=$status;
+			db_commit();
+			return true;
+		}
+	}
+
+	function setDocmanForceReindexSearch($status) {
+		db_begin();
+		/* if we activate search engine, we probably want to reindex */
+		$res = db_query_params ('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
+					array ($status,
+					       $this->getID())) ;
+	
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR - Could Not Update Group force_docman_reindex %s'),db_error()));
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['force_docman_reindex']=$status;
+			db_commit();
+			return true;
+		}
 	}
 }
 

@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2010, Franck Villaume
  *
  * This file is part of FusionForge.
  *
@@ -72,15 +73,16 @@ class DocumentGroupFactory extends Error {
 	/**
 	 *	getNested - Return an array of DocumentGroup objects arranged for nested views.
 	 *
+	 *	@param int		The stateid of DocumentGroup
 	 *	@return	array	The array of DocumentGroup.
 	 */
-	function &getNested() {
+	function &getNested($stateid=1) {
 		if ($this->nested_groups) {
 			return $this->nested_groups;
 		}
 		
-		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 ORDER BY groupname ASC',
-					   array ($this->Group->getID())) ;
+		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
+					   array ($this->Group->getID(),$stateid)) ;
 		$rows = db_numrows($result);
 		
 		if (!$result || $rows < 1) {
@@ -106,15 +108,16 @@ class DocumentGroupFactory extends Error {
 		/**
 	 *	getDocumentGroups - Return an array of DocumentGroup objects.
 	 *
+	 *	@param int		The stateid of DocumentGroups
 	 *	@return	array	The array of DocumentGroup.
 	 */
-	function &getDocumentGroups() {
+	function &getDocumentGroups($stateid=1) {
 		if ($this->flat_groups) {
 			return $this->flat_groups;
 		}
 		
-		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 ORDER BY groupname ASC',
-					   array ($this->Group->getID())) ;
+		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
+					   array ($this->Group->getID(),$stateid)) ;
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {

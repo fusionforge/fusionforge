@@ -118,13 +118,6 @@ class Document extends Error {
 			return false;
 		}
 
-/*
-		$perm =& $this->Group->getPermission ();
-		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-*/
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
 		$doc_initstatus = '3';
@@ -145,8 +138,12 @@ class Document extends Error {
 		$data1 = $data;
 
 		// key words for in-document search
-		$kw = new Parsedata ($this->engine_path);
-		$kwords = $kw->get_parse_data ($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+		if ($this->Group->useDocmanSearch()) {
+			$kw = new Parsedata ($this->engine_path);
+			$kwords = $kw->get_parse_data ($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+		} else {
+			$kwords ='';
+		}
 
 		$filesize = strlen($data);
 
@@ -411,6 +408,29 @@ class Document extends Error {
 	}
 
 	/**
+	 *  setState - set the stateid of the document.
+	 *
+	 *	@param	int	The state id of the doc_states table.
+	 *  @return boolean success.
+	 */
+	function setState($stateid) {
+		$res = db_query_params ('UPDATE doc_data SET
+								stateid=$1
+								WHERE group_id=$2
+								AND docid=$3',
+								array ($stateid,
+					       			$this->Group->getID(),
+									$this->getID())
+								);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setOnUpdateError(db_error());
+			return false;
+		}
+		$this->sendNotice(false);
+		return true;
+	}
+
+	/**
 	 *	update - use this function to update an existing entry in the database.
 	 *
 	 *	@param	string	The filename of this document. Can be a URL.
@@ -469,8 +489,12 @@ class Document extends Error {
 			$data1 = $data;
 
 			// key words for in-document search
-			$kw = new Parsedata ($this->engine_path);
-			$kwords = $kw->get_parse_data ($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+			if ($this->Group->useDocmanSearch()) {
+				$kw = new Parsedata ($this->engine_path);
+				$kwords = $kw->get_parse_data ($data1, htmlspecialchars($title), htmlspecialchars($description), $filetype);
+			} else {
+				$kwords = '';
+			}
 
 			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2, data_words=$3 WHERE group_id=$4 AND docid=$5',
 						array (base64_encode($data),

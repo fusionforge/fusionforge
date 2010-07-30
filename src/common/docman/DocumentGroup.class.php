@@ -150,7 +150,6 @@ class DocumentGroup extends Error {
 	/**
 	 * delete - delete a DocumentGroup.
 	 *          delete is recursive and permanent
-	 *       TODO : use the delete status as document ?
 	 * @param integer Document Group Id, integer Project Group Id
 	 * @return boolean
 	 */
@@ -172,12 +171,13 @@ class DocumentGroup extends Error {
 						$project_group_id));
 
 		db_commit();
+
 		/* is there any subdir ? */
-		$result = db_query_params ('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
+		$subdir = db_query_params ('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
 					array($doc_groupid,
 						$project_group_id));
 		/* make a recursive call */
-		while ($arr = db_fetch_array($result)) {
+		while ($arr = db_fetch_array($subdir)) {
 			$this->delete($arr['doc_group'],$project_group_id);
 		}
 
@@ -239,6 +239,15 @@ class DocumentGroup extends Error {
 	 */
 	function getName() {
 		return $this->data_array['groupname'];
+	}
+
+	/**
+	 *	getState - get the state id.
+	 *
+	 *	@return	Int	The state id.
+	 */
+	function getState() {
+		return $this->data_array['stateid'];
 	}
 
 	/**
@@ -366,6 +375,25 @@ class DocumentGroup extends Error {
 		
 		return false;
 	}
+
+	/**
+	 * setStateID - set the state id of this document group
+	 *
+	 * @param int State ID
+	 */
+	function setStateID($stateid) {
+		$res = db_query_params ('UPDATE doc_groups SET stateid=$1
+								WHERE doc_group=$2
+								AND group_id=$3',
+								array ($stateid,$this->getID(),$this->Group->getID()));
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setOnUpdateError(db_error());
+			return false;
+		}
+		return true;
+	}
+
 }
 
 // Local Variables:
