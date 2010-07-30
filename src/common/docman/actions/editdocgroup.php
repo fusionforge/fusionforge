@@ -41,4 +41,3 @@ Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile
 exit;
 
 ?>
-

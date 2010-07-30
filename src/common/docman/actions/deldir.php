@@ -38,4 +38,3 @@ Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.ur
 exit;
 
 ?>
-

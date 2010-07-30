@@ -45,4 +45,3 @@ echo '<input id="submitaddsubgroup" type="button" value="create" onclick="javasc
 echo '</form>';
 
 ?>
-
