@@ -52,17 +52,7 @@ echo '</div>';
 
 echo '<a href="#" onclick="javascript:displayAdminDiv(\'admintrash\')" ><h4>'. _('Admin Trash') .'</h4></a>';
 echo '<div id="admintrash" style="display:none;" >';
-echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
-echo '<ul>';
-echo '<li>'. _('Delete permanenty all documents and document groups with deleted status ') .' <input id="submitemptytrash" type="button" value="Yes" onclick="javascript:doIt(\'emptytrash\')" ></li>';
-echo '</ul>';
-echo '</form>';
-echo '<ul>';
-echo '<li><a href="#" onclick="javascript:displayAdminDiv(\'listtrash\')">'. _('Select dir or files to be resurrected from deleted status') .'</a></li>';
-echo '</ul>';
-echo '<div id="listtrash" style="display:none;" >';
 include ('docman/views/listtrashfile.php');
-echo '</div>';
 echo '</div>';
 
 echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminsearchengine\')" ><h4>'. _('Admin Engine Options') .'</h4></a>';

@@ -4045,7 +4045,6 @@ src/utils/manage-apache-config.sh -text
 src/utils/manage-translations.sh -text
 src/utils/migrate-to-ini-files.sh -text
 src/www/admin/pi.php -text
-src/www/docman/search.php -text
 src/www/docman/search.tpl.html -text
 src/www/env.inc.php -text
 src/www/export/rss20_docman.php -text

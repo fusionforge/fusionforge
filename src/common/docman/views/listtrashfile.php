@@ -35,7 +35,17 @@ $d_trash_arr =& $df->getDocuments();
 if (!$d_trash_arr || count($d_trash_arr) < 1) {
     echo '<div class="warning_msg">'._('Trash is empty').'</div>';
 } else {
+	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
+	echo '<ul>';
+	echo '<li>'. _('Delete permanently all documents and document groups with deleted status ') .' <input id="submitemptytrash" type="button" value="Yes" onclick="javascript:doIt(\'emptytrash\')" ></li>';
+	echo '</ul>';
+	echo '</form>';
+	echo '<ul>';
+	echo '<li><a href="#" onclick="javascript:displayAdminDiv(\'listtrash\')">'. _('Select dir or files to be resurrected from deleted status') .'</a></li>';
+	echo '</ul>';
+	echo '<div id="listtrash" style="display:none;" >';
 	docman_display_trash($dgf);
+	echo '</div>';
 }
 
 ?>
