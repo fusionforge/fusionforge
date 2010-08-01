@@ -24,35 +24,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('docman/DocumentFactory.class.php');
-require_once ('docman/DocumentGroupFactory.class.php');
-require_once ('docman/include/utils.php');
-
-$dirid = getIntFromRequest('dirid');
-if (empty($dirid))
-	$dirid = 0;
-
-$df = new DocumentFactory($g);
-if ($df->isError()) {
-	exit_error(_('Error'),$df->getErrorMessage());
-}
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError()) {
-	exit_error(_('Error'),$dgf->getErrorMessage());
-}
-
-
-$d_arr =& $df->getDocuments();
-if (!$d_arr || count($d_arr) <1){
-	$d_arr = &$df->getDocuments();
-}
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $d_arr; // documents array
 
 if (!$d_arr || count($d_arr) < 1) {
 	print '<div class="warning_msg">'._('This project has no visible documents').'</div>';
 } else {
 	// Get the document groups info
-	$nested_groups =& $dgf->getNested();
 	$nested_docs=array();
 	$idExposeTreeIndex = 0;
 	$idhtml = 0;

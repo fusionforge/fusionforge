@@ -24,15 +24,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-$df = new DocumentFactory($g);
-if ($df->isError())
-    exit_error(_('Error'),$df->getErrorMessage());
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $df; // document factory
+global $nested_groups; // flat docs arrays
 
 $df->setStateID('3');
+$d_pending_arr =& $df->getDocuments();
 
-$d_arr =& $df->getDocuments();
-
-if (!$d_arr || count($d_arr) < 1) {
+if (!$d_pending_arr || count($d_pending_arr) < 1) {
     echo '<div class="warning_msg">'._('No pending documents').'</div>';
 } else {
 	docman_display_documents($nested_groups,$df,true,3,0);

@@ -22,6 +22,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; //group object
+global $group_id; // id of group
+
 if ($_POST['status']) {
 	$status = 1;
 	$feedback= _('Search Engine Reindex Forced : search results will be available within 24h');

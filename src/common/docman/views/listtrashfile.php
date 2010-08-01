@@ -24,19 +24,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-$df = new DocumentFactory($g);
-if ($df->isError())
-    exit_error(_('Error'),$df->getErrorMessage());
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
-    exit_error(_('Error'),$dgf->getErrorMessage());
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $df; // document factory
+global $dgf; // document factory
 
 $df->setStateID('2');
+$d_trash_arr =& $df->getDocuments();
 
-$d_arr =& $df->getDocuments();
-
-if (!$d_arr || count($d_arr) < 1) {
+if (!$d_trash_arr || count($d_trash_arr) < 1) {
     echo '<div class="warning_msg">'._('Trash is empty').'</div>';
 } else {
 	docman_display_trash($dgf);

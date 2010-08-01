@@ -24,15 +24,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; // group object
+global $group_id; // id of the group
+global $dirid; //id of the doc_group
+global $dgh; // document group html object
+
 /* display the add new documentation form */
-
-require_once ('docman/DocumentGroupFactory.class.php');
-require_once ('docman/include/DocumentGroupHTML.class.php');
-
-$group_id = getIntFromRequest('group_id');
-$dirid = getIntFromRequest('dirid');
-//session_require_perm ('docman', $group_id, 'submit') ;
-
 echo '<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title<br />') .'</p>';
 
 if ($g->useDocmanSearch()) 
@@ -67,16 +66,6 @@ if ($dirid) {
 			<tr>
 				<td>
 					<strong>'. _('Group that document belongs in').' :</strong><br />';
-	$dgf = new DocumentGroupFactory($g);
-
-	if ($dgf->isError())
-		exit_error('Error',$dgf->getErrorMessage());
-
-	$dgh = new DocumentGroupHTML($g);
-
-	if ($dgh->isError())
-		exit_error('Error',$dgh->getErrorMessage());
-
 	$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
 	echo '
 				</td>

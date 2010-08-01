@@ -24,36 +24,27 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; //group object
+global $dirid; //id of doc_group
+global $group_id; // id of group
+global $dgf; // document group factory of this group
+global $d_arr; // documents array of this group
+
 /* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
-
-require_once ('docman/DocumentFactory.class.php');
-require_once ('docman/DocumentGroupFactory.class.php');
-require_once ('docman/include/utils.php');
-
-$dirid = getIntFromRequest('dirid');
-
-$df = new DocumentFactory($g);
-if ($df->isError())
-	exit_error(_('Error'),$df->getErrorMessage());
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
-	exit_error(_('Error'),$dgf->getErrorMessage());
-
-$d_arr =& $df->getDocuments();
-if (!$d_arr || count($d_arr) <1)
-	$d_arr = &$df->getDocuments();
-
-// Get the document groups info
+/* Get the document groups info */
 $trashnested_groups =& $dgf->getNested();
 $trashnested_docs=array();
-//put the doc objects into an array keyed off the docgroup
+/* put the doc objects into an array keyed off the docgroup */
 foreach ($d_arr as $doc) {
 	$trashnested_docs[$doc->getDocGroupID()][] = $doc;
 }
 
-docman_recursive_stateid($dirid,$trashnested_groups,$trashnested_docs);
+/* set to trash content of this dirid */
+docman_recursive_stateid($dirid,$trashnested_groups,$trashnested_docs,2);
 
+/* set this dirid to trash */
 $dg = new DocumentGroup($g,$dirid);
 $dg->setStateID('2');
 

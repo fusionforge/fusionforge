@@ -24,14 +24,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-foreach ($nested_docs[$dirid] as $d) {
-	$dgf = new DocumentGroupFactory($g);
-	if ($dgf->isError())
-		exit_error('Error',$dgf->getErrorMessage());
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; //group object
+global $group_id; // id of the group
+global $dirid; // id of doc_group
+global $dgf; // document group factory of this group
+global $dgh; // document group html
+global $nested_docs; // flat docs array
 
-	$dgh = new DocumentGroupHTML($g);
-	if ($dgh->isError())
-		exit_error('Error',$dgh->getErrorMessage());
+foreach ($nested_docs[$dirid] as $d) {
 
 ?>
 <script language="javascript">

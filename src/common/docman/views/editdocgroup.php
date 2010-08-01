@@ -24,21 +24,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once 'docman/include/DocumentGroupHTML.class.php';
-
-$dirid = getIntFromRequest('dirid');
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; //group object
+global $group_id; // id of the group
+global $dirid; // id of doc_group
+global $dgf; // document group factory of this group
+global $dgh; // document group html
 
 $dg = new DocumentGroup($g,$dirid);
 if ($dg->isError())
     exit_error('Error',$dg->getErrorMessage());
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
-	exit_error('Error',$dgf->getErrorMessage());
-
-$dgh = new DocumentGroupHTML($g);
-if ($dgh->isError())
-	exit_error('Error',$dgh->getErrorMessage());
 
 ?>
 <form name="editgroup" action="?group_id=<?php echo $group_id; ?>&action=editdocgroup" method="post">

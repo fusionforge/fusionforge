@@ -25,9 +25,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('docman/include/utils.php');
-
-$dirid = getIntFromRequest('dirid');
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $group_id; // id of the group
+global $dirid; // id of doc_group
+global $nested_docs; // flat docs array
 
 ?>
 
@@ -139,11 +141,17 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '</td>';
 		echo '<td>'.$d->getStateName().'</td>';
 		echo '<td>';
-		if ($d->getFileSize() > 1024 ) {
-			echo floor ($d->getFilesize()/1024) . "KB";
-		} else {
-			echo $d->getFilesize() . "B";
+		$metric = 'B';
+		$size = $d->getFileSize();
+		if ($size > 1024 ) {
+			$metric = 'KB';
+			$size = floor ($size/1024);
+			if ($size > 1024 ) {
+				$metric = 'MB';
+				$size = floor ($size/1024);
+			}
 		}
+		echo $size . $metric;
 		echo '</td>';
 
 		if (forge_check_perm ('docman', $group_id, 'approve')) {

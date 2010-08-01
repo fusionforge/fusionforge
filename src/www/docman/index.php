@@ -24,7 +24,14 @@
  */
 
 require_once('../env.inc.php');
-require_once $gfcommon.'include/pre.php';
+require_once ('include/pre.php');
+require_once ('docman/Document.class.php');
+require_once ('docman/DocumentFactory.class.php');
+require_once ('docman/DocumentGroup.class.php');
+require_once ('docman/DocumentGroupFactory.class.php');
+require_once ('docman/include/DocumentGroupHTML.class.php');
+require_once ('docman/include/utils.php');
+require_once ('include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
 
 /* are we using docman ? */
 if (!forge_get_config('use_docman'))
@@ -46,6 +53,29 @@ if (!$g || !is_object($g) || $g->isError()) {
 /* is this group using docman ? */
 if (!$g->usesDocman())
 	exit_error(_('Error'),_('This project has turned off the Doc Manager.'));
+
+$dirid = getIntFromRequest('dirid');
+if (empty($dirid))
+	$dirid = 0;
+
+$df = new DocumentFactory($g);
+if ($df->isError())
+	exit_error(_('Error'),$df->getErrorMessage());
+
+$dgf = new DocumentGroupFactory($g);
+if ($dgf->isError())
+	exit_error(_('Error'),$dgf->getErrorMessage());
+
+$nested_groups =& $dgf->getNested();
+
+$dgh = new DocumentGroupHTML($g);
+
+if ($dgh->isError())
+	exit_error('Error',$dgh->getErrorMessage());
+
+$d_arr =& $df->getDocuments();
+if (!$d_arr || count($d_arr) <1)
+	$d_arr = &$df->getDocuments();
 
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');

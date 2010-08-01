@@ -24,9 +24,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('docman/include/DocumentGroupHTML.class.php');
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
 global $g; //group object
 global $group_id; // id of the group
+global $d_arr; // documents array of this group
 ?>
 
 <script language="javascript">
@@ -78,16 +80,6 @@ if ($g->useDocmanSearch()) {
 echo '<li>'.$labelSearchEngine.' <input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="Yes" onclick="javascript:doIt(\'searchengine\')"></li>';
 echo '</ul>';
 echo '</form>';
-
-$df = new DocumentFactory($g);
-if ($df->isError()) {
-	exit_error(_('Error'),$df->getErrorMessage());
-}
-
-$d_arr =& $df->getDocuments();
-if (!$d_arr || count($d_arr) <1){
-	    $d_arr = &$df->getDocuments();
-}
 
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {

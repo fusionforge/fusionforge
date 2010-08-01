@@ -24,8 +24,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
-require_once ('docman/Document.class.php');
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; //group object
+global $dirid; //id of doc_group
+global $group_id; // id of group
 
 $doc_group = getIntFromRequest('doc_group');
 

@@ -25,6 +25,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $HTML; // html object
+global $d_arr; // document array
+global $group_id; // id of group
+
 /* create the submenu following role, rules and content */
 $menu_text=array();
 $menu_links=array();

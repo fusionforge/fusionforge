@@ -24,7 +24,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-$dirid = getIntFromRequest('dirid');
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $group_id; // id of the group
+global $dirid; //id of the doc_group
 
 ?>
 <script language="javascript">

@@ -24,9 +24,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once $gfcommon.'docman/DocumentGroup.class.php';
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; // group object
+global $dirid; // id of doc_group
+global $group_id; // id of group
 
-$dirid = getIntFromRequest('dirid');
 $groupname = $_POST['groupname'];
 
 $dg = new DocumentGroup($g);

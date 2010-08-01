@@ -1,27 +1,33 @@
 <?php
 /**
- * GForge Doc Mgr Facility
+ * FusionForge Documentation Manager
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 2000, Quentin Cregan/Sourceforge
+ * Copyright 2002-2003, Tim Perdue/GForge, LLC
+ * Copyright 2010, Franck Villaume
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
-/*
-	Document Manager
-
-	by Quentin Cregan, SourceForge 06/2000
-
-	Complete OO rewrite by Tim Perdue 1/2003
-*/
 
 $no_gz_buffer=true;
 
 require_once('../env.inc.php');
-require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'docman/include/doc_utils.php';
-require_once $gfcommon.'docman/Document.class.php';
+require_once ('include/pre.php');
+require_once ('docman/Document.class.php');
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
@@ -57,7 +63,6 @@ if ($docid) {
 	if ($d->getFileName() != $docname) {
 		exit_error(_('No document data'),
 			   _('No document to display - invalid or inactive document number'));
-
 	}
 
 	Header ('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()).'"');

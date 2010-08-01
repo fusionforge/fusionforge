@@ -24,7 +24,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once $gfcommon.'docman/Document.class.php';
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $g; //group object
+global $group_id; // id of group
+global $sys_engine_path; // path to the docman search engine
 
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
 
@@ -45,6 +49,9 @@ if (!$doc_group || $doc_group == 100) {
 if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) )) {		
 	exit_missing_param();
 }
+
+if (!isset($sys_engine_path))
+	$sys_engine_path = dirname(__FILE__).'/../engine/';
 
 $d = new Document($g, false, false,$sys_engine_path);
 if (!$d || !is_object($d)) {		
