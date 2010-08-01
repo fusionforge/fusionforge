@@ -25,6 +25,8 @@
  */
 
 require_once ('docman/include/DocumentGroupHTML.class.php');
+global $g; //group object
+global $group_id; // id of the group
 ?>
 
 <script language="javascript">
@@ -76,6 +78,16 @@ if ($g->useDocmanSearch()) {
 echo '<li>'.$labelSearchEngine.' <input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="Yes" onclick="javascript:doIt(\'searchengine\')"></li>';
 echo '</ul>';
 echo '</form>';
+
+$df = new DocumentFactory($g);
+if ($df->isError()) {
+	exit_error(_('Error'),$df->getErrorMessage());
+}
+
+$d_arr =& $df->getDocuments();
+if (!$d_arr || count($d_arr) <1){
+	    $d_arr = &$df->getDocuments();
+}
 
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {
