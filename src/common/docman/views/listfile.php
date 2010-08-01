@@ -37,6 +37,8 @@ global $nested_docs; // flat docs array
 function displaySubGroup() {
 	if ( 'none' == document.getElementById('addsubdocgroup').style.display ) {
 		document.getElementById('addsubdocgroup').style.display = 'inline';
+		document.getElementById('addfile').style.display = 'none';
+		document.getElementById('editdocgroup').style.display = 'none';
 	} else {
 		document.getElementById('addsubdocgroup').style.display = 'none';
 	}
@@ -44,6 +46,8 @@ function displaySubGroup() {
 function displayAddFile() {
 	if ( 'none' == document.getElementById('addfile').style.display ) {
 		document.getElementById('addfile').style.display = 'inline';
+		document.getElementById('addsubdocgroup').style.display = 'none';
+		document.getElementById('editdocgroup').style.display = 'none';
 	} else {
 		document.getElementById('addfile').style.display = 'none';
 	}
@@ -51,6 +55,8 @@ function displayAddFile() {
 function displayEditDocGroup() {
 	if ( 'none' == document.getElementById('editdocgroup').style.display ) {
 		document.getElementById('editdocgroup').style.display = 'inline';
+		document.getElementById('addsubdocgroup').style.display = 'none';
+		document.getElementById('addfile').style.display = 'none';
 	} else {
 		document.getElementById('editdocgroup').style.display = 'none';
 	}
