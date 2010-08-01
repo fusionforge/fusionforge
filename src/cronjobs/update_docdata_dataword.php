@@ -24,23 +24,23 @@
  * USA
  */
 
-require dirname(__FILE__).'/../www/env.inc.php';
+require (dirname(__FILE__).'/../www/env.inc.php');
 
-require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'docman/include/doc_utils.php';
-require_once $gfcommon.'docman/Parsedata.class.php';
-require_once $gfcommon.'docman/Document.class.php';
-require_once $gfcommon.'docman/DocumentFactory.class.php';
-require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
+require_once ('include/pre.php');
+require_once ('docman/include/doc_utils.php');
+require_once ('docman/Parsedata.class.php');
+require_once ('docman/Document.class.php');
+require_once ('docman/DocumentFactory.class.php');
+require_once ('docman/DocumentGroupFactory.class.php');
 
-$engine_path = $gfcommon.'docman/engine/';
+$engine_path = dirname(__FILE__).'/../common/docman/engine/';
 $p = new Parsedata ($engine_path);
 
 $timestarttrait = microtime_float();
 // documents list
 $resarr = array();
-$result = db_query_params ('SELECT docid, group_id, filename, title, createdate, filename, description, filetype, data FROM doc_data',
-			   array());
+$result = db_query_params ('SELECT doc_data.docid, doc_data.group_id, doc_data.filename, doc_data.title, doc_data.createdate, doc_data.filename, doc_data.description, doc_data.filetype,doc_data.data from doc_data,groups where doc_data.group_id = groups.group_id and groups.force_docman_reindex = $1',
+			   array('1'));
 if ($result)
 {
 	while ($arr = db_fetch_array($result))
@@ -68,6 +68,7 @@ foreach ($resarr as $item)
 }
 $timeendtrait = microtime_float();
 $timetot = $timeendtrait - $timestarttrait;
+db_query_params('UPDATE groups set force_docman_reindex = $1', array('0'));
 print_debug ("End analyze : $compt files, $timetot secs.");
 
 

@@ -44,6 +44,9 @@ MAILTO=""
 # Daily sweep of the stats into final tables
 45 0 * * * $FFUSER $PHP $FFCRON/db_stats_agg.php
 
+# Daily reindex search engine doc_data , if any
+0 4 * * * root $PHP $FFCRON/update_docdata_dataword.php
+
 # Hourly send pending massmailings, if any
 48 * * * * root $PHP $FFCRON/massmail.php
 
