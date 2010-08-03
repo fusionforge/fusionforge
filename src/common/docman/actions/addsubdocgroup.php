@@ -32,7 +32,11 @@ global $group_id; // id of group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$feedback = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	if ($dirid) {
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	} else {
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	}
 	exit;
 } else {
 	$groupname = $_POST['groupname'];

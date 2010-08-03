@@ -28,10 +28,11 @@
 /* tooling library */
 
 function getNameDocGroup($id,$group) {
+	$group_object = & group_get_object($group);;
 	$res = db_query_params ('SELECT groupname FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
 							array ($id,$group));
 	if (!$res || db_numrows($res) < 1) {
-		$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
+		$group_object->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
 		return false;
 	} else {
 		return (db_result($res,0,'groupname'));
@@ -39,10 +40,11 @@ function getNameDocGroup($id,$group) {
 }
 
 function getStateDocGroup($id,$group) {
+	$group_object = & group_get_object($group);;
 	$res = db_query_params ('SELECT stateid FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
 							array ($id,$group));
 	if (!$res || db_numrows($res) < 1) {
-		$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
+		$group_object->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
 		return false;
 	} else {
 		return (db_result($res,0,'stateid'));

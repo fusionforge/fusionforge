@@ -31,6 +31,12 @@ global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $nested_docs; // flat docs array
 
+$DocGroupName = getNameDocGroup($dirid,$group_id);
+if (!$DocGroupName) {
+	$feedback = $g->getErrorMessage();
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	exit;
+}
 ?>
 
 <script language="javascript">
@@ -72,7 +78,7 @@ function displayEditFile(id) {
 </script>
 
 <?php
-echo '<h3>Directory : <i>'.getNameDocGroup($dirid,$group_id).'</i>&nbsp;';
+echo '<h3>Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	echo '<a href="#" onclick="javascript:displayEditDocGroup()" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 	echo '<a href="#" onclick="javascript:displaySubGroup()" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
