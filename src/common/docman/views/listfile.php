@@ -125,10 +125,23 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		switch ($d->getFileType()) {
 			case "image/png":
 			case "image/jpeg":
+			case "image/gif":
+			case "image/tiff":
 				echo html_image('docman/file_type_image.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "application/pdf":
 				echo html_image('docman/file_type_pdf.png',22,22,array('alt'=>$d->getFileType()));
+				break;
+			case "application/msword":
+				echo html_image('docman/file_type_writer.png',22,22,array('alt'=>$d->getFileType()));
+				break;
+			case "application/vnd.ms-excel":
+			case "application/vnd.oasis.opendocument.spreadsheet":
+				echo html_image('docman/file_type_spreadsheet.png',22,22,array('alt'=>$d->getFileType()));
+				break;
+			case "application/zip":
+			case "application/x-tar":
+				echo html_image('docman/file_type_archive.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			default:
 				echo html_image('docman/file_type_unknown.png',22,22,array('alt'=>$d->getFileType()));
