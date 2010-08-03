@@ -110,7 +110,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		.'<td>Description</td>'
 		.'<td>Author</td>'
 		.'<td>Last time</td>'
-		.'<td>Etat</td>'
+		.'<td>Status</td>'
 		.'<td>Size</td>';
 
 	if (forge_check_perm ('docman', $group_id, 'approve'))
@@ -155,7 +155,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '</td>';
 		echo '<td>'.$d->getName().'</td>';
 		echo '<td>'.$d->getDescription().'</td>';
-		echo '<td>'.$d->getCreatorRealName().'</td>';
+		echo '<td>'.make_user_link($d->getCreatorUserName(),$d->getCreatorRealName()).'</td>';
 		echo '<td>';
 		if ( $d->getUpdated() ) {
 			echo date(_('Y-m-d H:i'),$d->getUpdated());
