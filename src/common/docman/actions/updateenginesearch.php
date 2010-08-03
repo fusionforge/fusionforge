@@ -22,18 +22,25 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-if ($_POST['status']) {
-	$status = 1;
-	$feedback= _('Search Engine Status updated successfully : Active');
+if ( !forge_check_perm ('docman', $group_id, 'approve')) {
+	$feedback= _('Docman Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	exit;
 } else {
-	$status = 0;
-	$feedback= _('Search Engine Status updated successfully : Off');
+
+	if ($_POST['status']) {
+		$status = 1;
+		$feedback= _('Search Engine Status updated successfully : Active');
+	} else {
+		$status = 0;
+		$feedback= _('Search Engine Status updated successfully : Off');
+	}
+
+	if (!$g->setDocmanSearchStatus($status))
+		exit_error('Error',$g->getErrorMessage());
+
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($feedback)));
+	exit;
 }
-
-if (!$g->setDocmanSearchStatus($status))
-	exit_error('Error',$g->getErrorMessage());
-
-Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($feedback)));
-exit;
 
 ?>

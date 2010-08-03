@@ -32,24 +32,30 @@ global $group_id; // id of group
 global $dgf; // document group factory of this group
 global $d_arr; // documents array of this group
 
-/* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
-/* Get the document groups info */
-$trashnested_groups =& $dgf->getNested();
-$trashnested_docs=array();
-/* put the doc objects into an array keyed off the docgroup */
-foreach ($d_arr as $doc) {
-	$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+if (!forge_check_perm ('docman', $group_id, 'approve')) {
+	$feedback = _('Document Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	exit;
+} else {
+
+	/* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
+	/* Get the document groups info */
+	$trashnested_groups =& $dgf->getNested();
+	$trashnested_docs=array();
+	/* put the doc objects into an array keyed off the docgroup */
+	foreach ($d_arr as $doc) {
+		$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+	}
+
+	/* set to trash content of this dirid */
+	docman_recursive_stateid($dirid,$trashnested_groups,$trashnested_docs,2);
+
+	/* set this dirid to trash */
+	$dg = new DocumentGroup($g,$dirid);
+	$dg->setStateID('2');
+
+	$feedback = _('Document Group moved to trash successfully');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	exit;
 }
-
-/* set to trash content of this dirid */
-docman_recursive_stateid($dirid,$trashnested_groups,$trashnested_docs,2);
-
-/* set this dirid to trash */
-$dg = new DocumentGroup($g,$dirid);
-$dg->setStateID('2');
-
-$feedback = _('Document Group moved to trash successfully');
-Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
-exit;
-
 ?>

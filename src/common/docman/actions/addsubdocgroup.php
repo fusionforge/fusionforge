@@ -30,24 +30,29 @@ global $g; // group object
 global $dirid; // id of doc_group
 global $group_id; // id of group
 
-$groupname = $_POST['groupname'];
-
-$dg = new DocumentGroup($g);
-
-if ($dg->isError())
-    exit_error('Error',$dg->getErrorMessage());
-
-if (!$dg->create($groupname, $dirid))
-    exit_error('Error',$dg->getErrorMessage());
-
-if ($dirid) {
-	$feedback = _('Document Sub Group successfully created');
+if (!forge_check_perm ('docman', $group_id, 'approve')) {
+	$feedback = _('Document Action Denied');
 	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
 	exit;
 } else {
-	$feedback = _('Document Group successfully created');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($feedback)));
-	exit;
-}
+	$groupname = $_POST['groupname'];
 
+	$dg = new DocumentGroup($g);
+
+	if ($dg->isError())
+    	exit_error('Error',$dg->getErrorMessage());
+
+	if (!$dg->create($groupname, $dirid))
+    	exit_error('Error',$dg->getErrorMessage());
+
+	if ($dirid) {
+		$feedback = _('Document Sub Group successfully created');
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+		exit;
+	} else {
+		$feedback = _('Document Group successfully created');
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($feedback)));
+		exit;
+	}
+}
 ?>

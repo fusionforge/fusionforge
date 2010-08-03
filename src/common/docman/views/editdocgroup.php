@@ -32,9 +32,14 @@ global $dirid; // id of doc_group
 global $dgf; // document group factory of this group
 global $dgh; // document group html
 
-$dg = new DocumentGroup($g,$dirid);
-if ($dg->isError())
-    exit_error('Error',$dg->getErrorMessage());
+if (!forge_check_perm ('docman', $group_id, 'approve')) {
+	$feedback = _('Docman Access Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	exit;
+} else {
+	$dg = new DocumentGroup($g,$dirid);
+	if ($dg->isError())
+    		exit_error('Error',$dg->getErrorMessage());
 
 ?>
 <form name="editgroup" action="?group_id=<?php echo $group_id; ?>&action=editdocgroup" method="post">
@@ -49,7 +54,7 @@ if ($dg->isError())
 <th><?php echo _('Belongs to') ?>:</th>
 <td>
 <?php
-$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
+	$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
 ?>
 </td>
 <td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
@@ -59,3 +64,6 @@ $dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getPa
 <?php echo _('Group name will be used as a title, so it should be formatted correspondingly.') ?>
 </p>
 </form>
+<?php
+}
+?>

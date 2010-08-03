@@ -30,15 +30,21 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
-$dg = new DocumentGroup($g,$dirid);
-if ($dg->isError())
-	exit_error('Error',$dg->getErrorMessage());
+if (!forge_check_perm ('docman', $group_id, 'approve')) {
+	$feedback = _('Document Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	exit;
+} else {
 
-if (!$dg->delete($dirid,$group_id))
-	exit_error('Error',$dg->getErrorMessage());
+	$dg = new DocumentGroup($g,$dirid);
+	if ($dg->isError())
+		exit_error('Error',$dg->getErrorMessage());
 
-$feedback = _('Document Group deleted successfully');
-Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
-exit;
+	if (!$dg->delete($dirid,$group_id))
+		exit_error('Error',$dg->getErrorMessage());
 
+	$feedback = _('Document Group deleted successfully');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	exit;
+}
 ?>

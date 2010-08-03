@@ -81,8 +81,7 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'">'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 }
 
-if (forge_check_perm ('docman', $group_id, 'submit'))
-	echo '<a href="#" onclick="javascript:displayAddFile()" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
+echo '<a href="#" onclick="javascript:displayAddFile()" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
 
 echo '</h3>';
 
