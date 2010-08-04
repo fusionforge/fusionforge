@@ -112,7 +112,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 	echo '<script language="javascript">';
 	echo 'function EditData(iddiv) {';
 	echo '	if ( "none" == document.getElementById(iddiv).style.display ) {';
-	echo '		document.getElementById(iddiv).style.display = "inline";';
+	echo '		document.getElementById(iddiv).style.display = "block";';
 	echo '	} else {';
 	echo '		document.getElementById(iddiv).style.display = "none";';
 	echo '	}';
@@ -156,7 +156,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 				echo '<li>'.  html_image('docman/file_type_unknown.png',"22","22",array("border"=>"0")). 
 					$docs[$j]->getName().  ' - ' . $tooltip . '&nbsp;<a href="#" onclick="javascript:EditData(\'editdata'.$docs[$j]->getID().'\')" >'. html_image('docman/edit-file.png',22,22,array('alt'=>'editfile')) .'</a></li>';
 				echo "<i>".$docs[$j]->getDescription()."</i><br/>";
-				echo '<div id="editdata'.$docs[$j]->getID().'" style="display:none">';
+				echo '<div class="docman_div_include" id="editdata'.$docs[$j]->getID().'" style="display:none">';
 				document_editdata($docs[$j]);
 				echo '</div>';
 			}
@@ -176,8 +176,8 @@ function document_editdata(&$document) {
         if ($dgf->isError())
                 exit_error('Error',$dgf->getErrorMessage());
 
-
 ?>
+<div class="docmanDivIncluded">
 <p>
 <?php echo _("<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.") ?>
 </p>
@@ -188,29 +188,34 @@ function document_editdata(&$document) {
 
 	<form id="editdata<?php echo $document->getID(); ?>" name="editdata<?php echo $document->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
 
-<table border="0">
+<table>
 	<tr>
-		<td>
-			<strong><?php echo _('Document Title') ?>: </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 5) ?><br />
+		<td style="text-align:right;"> <strong><?php echo _('Document Title') ?></strong><?php echo utils_requiredField(); ?>
+        </td>
+        <td>
 			<input type="text" name="title" size="40" maxlength="255" value="<?php echo $document->getName(); ?>" />
-			<br />
+            <?php printf(_('(at least %1$s characters)'), 5) ?>
 		</td>
 	</tr>
-
     <tr>
+		<td style="text-align:right;">
+            <strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?>
+        </td>
         <td>
-        <strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
-        <input type="text" name="description" size="50" maxlength="255" value="<?php echo $document->getDescription(); ?>" />
-        <br /></td>
+            <input type="text" name="description" size="50" maxlength="255" value="<?php echo $document->getDescription(); ?>" />
+            <?php printf(_('(at least %1$s characters)'), 10) ?>
+        </td>
     </tr>
 
     <tr>
+		<td style="text-align:right;">
+            <strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?>
+        </td>
         <td>
-        <strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?><br />
         <?php if ($document->isURL()) {
             echo '<a href="'.inputSpecialchars($d->getFileName()).'">[View File URL]</a>';
         } else { ?>
-        <a target="_blank" href="../view.php/<?php echo $group_id.'/'.$document->getID().'/'.urlencode($document->getFileName()) ?>"><?php echo $document->getName(); ?></a>
+            <a target="_blank" href="../view.php/<?php echo $group_id.'/'.$document->getID().'/'.urlencode($document->getFileName()) ?>"><?php echo $document->getName(); ?></a>
         <?php } ?>
         </td>
     </tr>
@@ -219,7 +224,7 @@ function document_editdata(&$document) {
 
     if ((!$document->isURL()) && ($document->isText())) {
         echo '<tr>
-	                <td>
+	                <td colspan="2">
 		                ';
 	
 		echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
@@ -232,29 +237,34 @@ function document_editdata(&$document) {
 ?>
 
     <tr>
+		<td style="text-align:right;">
+            <strong><?php echo _('Group that document belongs in') ?></strong>
+        </td>
         <td>
-        <strong><?php echo _('Group that document belongs in') ?></strong><br />
-        <?php
-				$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $document->getDocGroupID());
-
-	     ?></td>
+            <?php $dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $document->getDocGroupID()); ?>
+        </td>
     </tr>
 
     <tr>
+		<td style="text-align:right;">
+            <strong><?php echo _('State') ?></strong>
+        </td>
         <td>
-        <br /><strong><?php echo _('State') ?>:</strong><br />
-        <?php
-		     doc_get_state_box($document->getStateID());
-        ?></td>
+            <?php doc_get_state_box($document->getStateID()); ?>
+        </td>
     </tr>
     <tr>
-        <td>
+        <td style="text-align:right;">
         <?php if ($document->isURL()) { ?>
-        <strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?><br />
-        <input type="text" name="file_url" size="50" value="<?php echo $document->getFileName() ?>" />
+            <strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?>
+        </td>
+        <td>
+            <input type="text" name="file_url" size="50" value="<?php echo $document->getFileName() ?>" />
         <?php } else { ?>
-        <strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
-        <input type="file" name="uploaded_data" size="30" /><br/><br />
+            <strong><?php echo _('OPTIONAL: Upload new file') ?></strong>
+        </td>
+        <td>
+            <input type="file" name="uploaded_data" size="30" />
             <?php
             	if (forge_get_config('use_ftp_uploads')) {
                 	echo '<strong>' ;
@@ -262,7 +272,6 @@ function document_editdata(&$document) {
                 	echo '</strong><br />' ;
                 	$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
                 	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
-                	echo '<br /><br />';
             	}
 			}
 	        ?>
@@ -273,6 +282,7 @@ function document_editdata(&$document) {
     <input type="hidden" name="docid" value="<?php echo $document->getID(); ?>" />
     <input type="submit" id="submiteditdata<?php echo $document->getID(); ?>" value="<?php echo _('Submit Edit') ?>" /><br /><br />
     </form>
+</div>
 
 <?php
 }

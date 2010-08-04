@@ -83,7 +83,7 @@ echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	echo '<a href="#" onclick="javascript:displayEditDocGroup()" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 	echo '<a href="#" onclick="javascript:displaySubGroup()" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
-	echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
+	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
 		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'">'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 }

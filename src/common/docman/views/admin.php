@@ -37,11 +37,17 @@ if ( !forge_check_perm ('docman', $group_id, 'approve')) {
 } else {
 ?>
 
-<div class="docmanDivIncluded">
+<div id="principalAdminDiv" class="docmanDivIncluded">
 <script language="javascript">
 function displayAdminDiv(id) {
+    var mainDiv = document.getElementById('principalAdminDiv');
+    for (var i = 0; i < mainDiv.childNodes.length; i++) {
+        if ('DIV' == mainDiv.childNodes[i].nodeName.toUpperCase() && id != mainDiv.childNodes[i].id) {
+            mainDiv.childNodes[i].style.display = 'none';
+        }
+    }
 	if ( 'none' == document.getElementById(id).style.display ) {
-		document.getElementById(id).style.display = 'inline';
+		document.getElementById(id).style.display = 'block';
 	} else {
 		document.getElementById(id).style.display = 'none';
 	}
