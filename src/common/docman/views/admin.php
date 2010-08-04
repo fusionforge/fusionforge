@@ -37,6 +37,7 @@ if ( !forge_check_perm ('docman', $group_id, 'approve')) {
 } else {
 ?>
 
+<div class="docmanDivIncluded">
 <script language="javascript">
 function displayAdminDiv(id) {
 	if ( 'none' == document.getElementById(id).style.display ) {
@@ -86,6 +87,6 @@ function doIt(formid) {
 			echo '</form>';
 		}
 	}
-	echo '</div>';
+	echo '</div></div>';
 }
 ?>
