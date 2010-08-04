@@ -38,16 +38,15 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
     		exit_error('Error',$dg->getErrorMessage());
 
 ?>
+<div class="docmanDivIncluded">
 <form name="editgroup" action="?group_id=<?php echo $group_id; ?>&action=editdocgroup" method="post">
 <input type="hidden" name="dirid" value="<?php echo $dirid; ?>" />
 <table>
 <tr>
-<th><?php echo _('Group Name') ?>:</th>
+<th><?php echo _('Directory Name') ?></th>
 <td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
 <td>&nbsp;</td>
-</tr>
-<tr>
-<th><?php echo _('Belongs to') ?>:</th>
+<th><?php echo _('belongs to') ?></th>
 <td>
 <?php
 	$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
@@ -57,9 +56,10 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 </tr>
 </table>
 <p>
-<?php echo _('Group name will be used as a title, so it should be formatted correspondingly.') ?>
+<?php echo _('Directory name will be used as a title, so it should be formatted correspondingly.') ?>
 </p>
 </form>
+</div>
 <?php
 }
 ?>

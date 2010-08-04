@@ -30,6 +30,7 @@
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $nested_docs; // flat docs array
+global $HTML; // Layout object
 
 $DocGroupName = getNameDocGroup($dirid,$group_id);
 if (!$DocGroupName) {
@@ -42,7 +43,7 @@ if (!$DocGroupName) {
 <script language="javascript">
 function displaySubGroup() {
 	if ( 'none' == document.getElementById('addsubdocgroup').style.display ) {
-		document.getElementById('addsubdocgroup').style.display = 'inline';
+		document.getElementById('addsubdocgroup').style.display = 'block';
 		document.getElementById('addfile').style.display = 'none';
 		document.getElementById('editdocgroup').style.display = 'none';
 	} else {
@@ -51,7 +52,7 @@ function displaySubGroup() {
 }
 function displayAddFile() {
 	if ( 'none' == document.getElementById('addfile').style.display ) {
-		document.getElementById('addfile').style.display = 'inline';
+		document.getElementById('addfile').style.display = 'block';
 		document.getElementById('addsubdocgroup').style.display = 'none';
 		document.getElementById('editdocgroup').style.display = 'none';
 	} else {
@@ -60,7 +61,7 @@ function displayAddFile() {
 }
 function displayEditDocGroup() {
 	if ( 'none' == document.getElementById('editdocgroup').style.display ) {
-		document.getElementById('editdocgroup').style.display = 'inline';
+		document.getElementById('editdocgroup').style.display = 'block';
 		document.getElementById('addsubdocgroup').style.display = 'none';
 		document.getElementById('addfile').style.display = 'none';
 	} else {
@@ -70,7 +71,7 @@ function displayEditDocGroup() {
 function displayEditFile(id) {
 	var divid = 'editfile'+id;
 	if ( 'none' == document.getElementById(divid).style.display ) {
-		document.getElementById(divid).style.display = 'inline';
+		document.getElementById(divid).style.display = 'block';
 	} else {
 		document.getElementById(divid).style.display = 'none';
 	}
@@ -78,7 +79,7 @@ function displayEditFile(id) {
 </script>
 
 <?php
-echo '<h3>Directory : <i>'.$DocGroupName.'</i>&nbsp;';
+echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	echo '<a href="#" onclick="javascript:displayEditDocGroup()" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 	echo '<a href="#" onclick="javascript:displaySubGroup()" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
@@ -91,35 +92,29 @@ echo '<a href="#" onclick="javascript:displayAddFile()" >'. html_image('docman/i
 
 echo '</h3>';
 
-echo '<div id="editdocgroup" style="display:none">';
+echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
+echo '<h4 class="docman_h4">'. _('Edit this directory') .'</h4>';
 include ('docman/views/editdocgroup.php');
 echo '</div>';
-echo '<div id="addsubdocgroup" style="display:none">';
+echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
+echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';
 include ('docman/views/addsubdocgroup.php');
 echo '</div>';
-echo '<div id="addfile" style="display:none">';
+echo '<div class="docman_div_include" id="addfile" style="display:none">';
+echo '<h4 class="docman_h4">'. _('Add a new document') .'</h4>';
 include ('docman/views/addfile.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	echo '<table style="width:100%">';
-	echo '<tr>';
-	echo '<td>Type</td>'
-		.'<td>Filename</td>'
-		.'<td>Title</td>'
-		.'<td>Description</td>'
-		.'<td>Author</td>'
-		.'<td>Last time</td>'
-		.'<td>Status</td>'
-		.'<td>Size</td>';
-
+    $tabletop = array('','Filename','Title','Description','Author','Last time','Status','Size');
 	if (forge_check_perm ('docman', $group_id, 'approve'))
-		echo '<td>Actions</td>';
-
-	echo '</tr>';
+		$tabletop[] = 'Actions';
+    echo '<div class="docmanDiv">';
+    echo $HTML->listTableTop($tabletop);
 	$time_new = 604800;
+    $rowid = 0;
 	foreach ($nested_docs[$dirid] as $d) {
-		echo '<tr>';
+		echo '<tr ' . $HTML->boxGetAltRowStyle($rowid).'>';
 		$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 		echo '<td><a href="'.$docurl.'">';
 		switch ($d->getFileType()) {
@@ -133,14 +128,20 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				echo html_image('docman/file_type_pdf.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "application/msword":
+            case "application/vnd.oasis.opendocument.text":
 				echo html_image('docman/file_type_writer.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "application/vnd.ms-excel":
 			case "application/vnd.oasis.opendocument.spreadsheet":
 				echo html_image('docman/file_type_spreadsheet.png',22,22,array('alt'=>$d->getFileType()));
 				break;
+            case "application/vnd.oasis.opendocument.presentation":
+            case "application/vnd.ms-powerpoint":
+				echo html_image('docman/file_type_presentation.png',22,22,array('alt'=>$d->getFileType()));
+				break;
 			case "application/zip":
 			case "application/x-tar":
+            case "application/x-rpm":
 				echo html_image('docman/file_type_archive.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			default:
@@ -185,9 +186,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo '</td>';
 		}
 		echo '</tr>';
+        $rowid++;
 	}
-	echo '</table>';
-	echo '<div >'.html_image('docman/new.png',14,14,array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
+    echo $HTML->listTableBottom();
+    echo '</div>';
+	echo '<div class="docmanDiv">'.html_image('docman/new.png',14,14,array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
 	include 'docman/views/editfile.php';
 }
 

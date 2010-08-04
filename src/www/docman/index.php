@@ -98,11 +98,11 @@ $title = _('Document Manager: Display Document');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
-echo '<div style="float:left; width:20%;">';
+echo '<div style="float:left; width:17%;">';
 include('docman/views/tree.php');
 echo '</div>';
 
-echo '<div style="float:right; width:78%;">';
+echo '<div style="float:right; width:82%;">';
 include('docman/views/menu.php');
 include('docman/views/views.php');
 echo '</div>';

@@ -105,11 +105,11 @@ if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,
 	}
 	// check if the user is docman's admin
 	if (forge_check_perm ('docman', $group_id, 'approve')) {
-		$feedback= _('Document submitted sucessfully');
+		$feedback= _('Document submitted successfully');
 		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($feedback)));
 		exit;
     } else {
-		$feedback= _('Document submitted sucessfully : pending state (need validation)');
+		$feedback= _('Document submitted successfully : pending state (need validation)');
 		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
 		exit;
 	}
