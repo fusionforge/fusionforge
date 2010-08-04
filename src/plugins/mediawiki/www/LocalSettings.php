@@ -34,7 +34,11 @@ $exppath = explode ('/', $_SERVER['PHP_SELF']) ;
 
 # determine $fusionforgeproject from the URL
 while (count ($exppath) >= 4) {
-        if (($exppath[0] == 'plugins') && ($exppath[1] == 'mediawiki') && ($exppath[2] == 'wiki') && ($exppath[4] == 'index.php')) {
+        if (($exppath[0] == 'plugins') &&
+	    ($exppath[1] == 'mediawiki') &&
+	    ($exppath[2] == 'wiki') &&
+	    (($exppath[4] == 'index.php') || ($exppath[4] == 'api.php'))
+	    ) {
                 $fusionforgeproject = $exppath[3] ;
                 break ;
         } else {
@@ -42,6 +46,7 @@ while (count ($exppath) >= 4) {
         }
 }
 
+$gconfig_dir = forge_get_config('mwdata_path', 'mediawiki');
 $project_dir = forge_get_config('projects_path', 'mediawiki') . "/" 
 	. $fusionforgeproject ;
 
@@ -297,6 +302,10 @@ if (file_exists("$wgUploadDirectory/.wgLogo.png")) {
 	$wgLogo = "$wgScriptPath/images/.wgLogo.png";
 }
 
+// forge global settings
+if (is_file("$gconfig_dir/ForgeSettings.php")) {
+	include ("$gconfig_dir/ForgeSettings.php") ;
+}
 // project specific settings
 if (is_file("$project_dir/ProjectSettings.php")) {
         include ("$project_dir/ProjectSettings.php") ;
