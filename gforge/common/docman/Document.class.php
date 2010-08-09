@@ -253,7 +253,7 @@ class Document extends Error {
 	 */
 	function isText() {
 		$doctype = $this->data_array['filetype'];
-		if (preg_match('/text/i',$doctype)) { // text plain, text html, text x-patch, etc
+		if (preg_match('|^text/|i',$doctype)) { // text plain, text html, text x-patch, etc
 			return true;
 		}	
 		return false;
