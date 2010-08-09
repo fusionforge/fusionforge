@@ -127,6 +127,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			case "application/pdf":
 				echo html_image('docman/file_type_pdf.png',22,22,array('alt'=>$d->getFileType()));
 				break;
+			case "text/html":
+				echo html_image('docman/file_type_html.png',22,22,array('alt'=>$d->getFileType()));
+				break;
+			case "text/plain":
+				echo html_image('docman/file_type_plain.png',22,22,array('alt'=>$d->getFileType()));
+				break;
 			case "application/msword":
             case "application/vnd.oasis.opendocument.text":
 				echo html_image('docman/file_type_writer.png',22,22,array('alt'=>$d->getFileType()));
