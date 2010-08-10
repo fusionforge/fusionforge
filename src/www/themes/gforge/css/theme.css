@@ -285,3 +285,41 @@ ul.tabbernav li.tabberactive a:hover {
 #ft {
   text-align:center;
 }
+
+/* error_msg, warning_msg or feedback function
+----------------------------------------------- */
+.error {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ff4940; /* red */
+    border-color: red; /* red */
+    padding: 0.5em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.warning {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffd297; /* orange */
+    border-color: #ffa500; /* orange */
+    padding: 0.5em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.feedback {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #aef26d; /* green */
+    border-color: green; /* green */
+    padding: 0.5em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}

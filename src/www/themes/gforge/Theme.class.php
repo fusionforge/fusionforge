@@ -381,21 +381,6 @@ class Theme extends Layout {
 	}
 
 	/**
-	 * feedback() - returns the htmlized feedback string when an action is performed.
-	 *
-	 * @param string feedback string
-	 * @return string htmlized feedback
-	 */
-	function feedback($feedback) {
-		if (!$feedback) {
-			return '';
-		} else {
-			return '
-                <h3 style="color:red">'.strip_tags($feedback, '<br>').'</h3>';
-		}
-	}
-
-	/**
 	 * getThemeIdFromName()
 	 *
 	 * @param    string  the dirname of the theme
