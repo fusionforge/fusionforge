@@ -29,23 +29,25 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if ( !forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback= _('Docman Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	$return_msg= _('Docman Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg)));
 	exit;
 } else {
 
 	/* you must first delete files before dirs because of database constraints */
 	$emptyFile = db_query_params('DELETE FROM doc_data WHERE stateid=$1 and group_id=$2',array('2',$group_id));
 	if (!$emptyFile) {
-		exit_error(_('Error'),db_error());
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode(db_error())));
+	    exit;
 	}
 	$emptyDir = db_query_params('DELETE FROM doc_groups WHERE stateid=$1 and group_id=$2',array('2',$group_id));
 	if (!$emptyDir) {
-		exit_error(_('Error'),db_error());
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode(db_error())));
+	    exit;
 	}
 
-	$feedback = _('Emptied Trash successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($feedback)));
+	$return_msg = _('Emptied Trash successfully');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg)));
 	exit;
 }
 ?>

@@ -28,20 +28,21 @@ global $g; //group object
 global $group_id; // id of group
 
 if ( !forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback= _('Docman Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	$return_msg= _('Docman Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg)));
 	exit;
 } else {
-
 	if ($_POST['status']) {
 		$status = 1;
-		$feedback= _('Search Engine Reindex Forced : search results will be available within 24h');
+		$return_msg= _('Search Engine Reindex Forced : search results will be available within 24h');
 	}
 
-	if (!$g->setDocmanForceReindexSearch($status))
-		exit_error('Error',$g->getErrorMessage());
+	if (!$g->setDocmanForceReindexSearch($status)) {
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($g->getErrorMessage())));
+	    exit;
+    }
 
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($feedback)));
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg)));
 	exit;
 }
 ?>

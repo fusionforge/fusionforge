@@ -29,7 +29,7 @@
 global $d_arr; // documents array
 
 if (!$d_arr || count($d_arr) < 1) {
-	print '<div class="warning_msg">'._('This project has no visible documents').'</div>';
+	print '<div class="feedback">'._('This project has no visible documents').'</div>';
 } else {
 	// Get the document groups info
 	$nested_docs=array();

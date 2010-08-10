@@ -34,7 +34,7 @@ $df->setStateID('2');
 $d_trash_arr =& $df->getDocuments();
 
 if (!$d_trash_arr || count($d_trash_arr) < 1) {
-    echo '<div class="warning_msg">'._('Trash is empty').'</div>';
+    echo '<div class="feedback">'._('Trash is empty').'</div>';
 } else {
 ?>
 <script language="javascript">
@@ -57,7 +57,6 @@ function displayTrashDiv() {
 	echo '</ul>';
 	echo '<div id="listtrash" style="display:none;" >';
     docman_display_documents($nested_groups,$df,true,2,0);
-	//docman_display_trash($dgf);
 	echo '</div>';
 }
 

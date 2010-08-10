@@ -33,7 +33,7 @@ $df->setStateID('3');
 $d_pending_arr =& $df->getDocuments();
 
 if (!$d_pending_arr || count($d_pending_arr) < 1) {
-    echo '<div class="warning_msg">'._('No pending documents').'</div>';
+    echo '<div class="feedback">'._('No pending documents').'</div>';
 } else {
 	docman_display_documents($nested_groups,$df,true,3,0);
 }

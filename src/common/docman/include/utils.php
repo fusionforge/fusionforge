@@ -186,7 +186,7 @@ function document_editdata(&$document) {
 		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
 ?>
 
-	<form id="editdata<?php echo $document->getID(); ?>" name="editdata<?php echo $document->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
+	<form id="editdata<?php echo $document->getID(); ?>" name="editdata<?php echo $document->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&fromview=admin&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
 
 <table>
 	<tr>

@@ -31,11 +31,10 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	$return_msg = _('Document Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
 	exit;
 } else {
-
 	$doc_group = getIntFromRequest('doc_group');
 	$docid = getIntFromRequest('docid');
 	$title = getStringFromRequest('title');
@@ -47,10 +46,22 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$stateid = getIntFromRequest('stateid');
 	$filetype = getStringFromRequest('filetype');
 	$editor = getStringFromRequest('editor');
+    $fromview = getStringFromRequest('fromview');
+    if ( 'admin' == $fromview ) {
+        $urlparam = '&view='.$fromview;
+    } else {
+        $urlparam = '&view=listfile&dirid='.$doc_group;
+    }
 
-	$d= new Document($g,$docid,false,$sys_engine_path);
-	if ($d->isError())
-		exit_error(_('Error'),$d->getErrorMessage());
+    $engine_path = '';
+    if (isset($sys_engine_path))
+        $engine_path = $sys_engine_path;
+
+	$d= new Document($g,$docid,false,$engine_path);
+	if ($d->isError()) {
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage())));
+	    exit;
+    }
 
 	$sanitizer = new TextSanitizer();
 	$data = $sanitizer->SanitizeHtml($data);
@@ -60,8 +71,11 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 			$filetype = $d->getFileType();
 
 	} elseif ($uploaded_data['name']) {
-		if (!is_uploaded_file($uploaded_data['tmp_name']))
-			exit_error(_('Error'),sprintf(_('Invalid file attack attempt %1$s'), $uploaded_data['name']));
+		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+			$return_msg = sprintf(_('Invalid file attack attempt %1$s'), $uploaded_data['name']);
+	        Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($return_msg)));
+	        exit;
+        }
 
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 		$filename=$uploaded_data['name'];
@@ -87,11 +101,13 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 		$filename=$d->getFileName();
 		$filetype=$d->getFileType();
 	}
-	if (!$d->update($filename,$filetype,$data,$doc_group,$title,$description,$stateid))
-		exit_error('Error',$d->getErrorMessage());
+	if (!$d->update($filename,$filetype,$data,$doc_group,$title,$description,$stateid)) {
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage())));
+	    exit;
+    }
 
-	$feedback = _('Document Updated successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($feedback)));
+	$return_msg = _('Document Updated successfully');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg)));
 	exit;
 }
 ?>

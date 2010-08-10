@@ -33,8 +33,8 @@ global $dgf; // document group factory of this group
 global $d_arr; // documents array of this group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	$return_msg = _('Document Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
 	exit;
 } else {
 
@@ -54,8 +54,8 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$dg = new DocumentGroup($g,$dirid);
 	$dg->setStateID('2');
 
-	$feedback = _('Document Group moved to trash successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	$return_msg = _('Document Group moved to trash successfully');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg)));
 	exit;
 }
 ?>

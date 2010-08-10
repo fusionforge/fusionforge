@@ -43,7 +43,9 @@ $name = getStringFromRequest('name');
 
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided		
-	exit_error(_('Error'),_('No valid Document Group was selected.'));
+    $return_msg= _('No valid Document Group was selected.');
+    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
+    exit;
 }
 	
 if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) )) {		
@@ -55,9 +57,12 @@ if (!isset($sys_engine_path))
 
 $d = new Document($g, false, false,$sys_engine_path);
 if (!$d || !is_object($d)) {		
-	exit_error(_('Error'),_('Error getting blank document.'));
+    $return_msg= _('Error getting blank document.');
+    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
+    exit;
 } elseif ($d->isError()) {	
-	exit_error(_('Error'),$d->getErrorMessage());
+    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage())));
+    exit;
 }
 	
 switch ($type) {
@@ -67,7 +72,9 @@ switch ($type) {
 		$sanitizer = new TextSanitizer();
 		$data = $sanitizer->SanitizeHtml($data);
 		if (strlen($data)<1) {
-			exit_error(_('Error'),_('Error getting blank document.'));
+	        $return_msg= _('Error getting blank document.');
+		    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
+		    exit;
 		}
 		$uploaded_data_type='text/html';
 		break;
@@ -80,7 +87,9 @@ switch ($type) {
 	}
 	case 'httpupload' : {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {			
-			exit_error(_('Error'),_('Invalid file name.'));
+	        $return_msg= _('Invalid file name.');
+		    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
+		    exit;
 		}
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 		$file_url='';
@@ -97,22 +106,27 @@ switch ($type) {
 }
 
 if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description)) {
-		exit_error(_('Error'),$d->getErrorMessage());
-} else {		
+	if (forge_check_perm ('docman', $group_id, 'approve')) {
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&error_msg='.urlencode($d->getErrorMessage())));
+        exit;
+    } else {
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage())));
+		exit;
+    }
+} else {
 	if ($type == 'editor') {
 		//release the cookie for the document contents (should expire at the end of the session anyway)
 		setcookie ("gforgecurrentdocdata", "", time() - 3600);
 	}
 	// check if the user is docman's admin
 	if (forge_check_perm ('docman', $group_id, 'approve')) {
-		$feedback= _('Document submitted successfully');
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($feedback)));
+		$return_msg= _('Document submitted successfully');
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg)));
 		exit;
     } else {
-		$feedback= _('Document submitted successfully : pending state (need validation)');
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+		$return_msg= _('Document submitted successfully : pending state (need validation)');
+		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg)));
 		exit;
 	}
 }
-
 ?>

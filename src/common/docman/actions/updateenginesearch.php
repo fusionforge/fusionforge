@@ -23,24 +23,25 @@
  */
 
 if ( !forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback= _('Docman Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
+	$return_msg= _('Docman Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg)));
 	exit;
 } else {
 
 	if ($_POST['status']) {
 		$status = 1;
-		$feedback= _('Search Engine Status updated successfully : Active');
+		$return_msg= _('Search Engine Status updated successfully : Active');
 	} else {
 		$status = 0;
-		$feedback= _('Search Engine Status updated successfully : Off');
+		$return_msg= _('Search Engine Status updated successfully : Off');
 	}
 
-	if (!$g->setDocmanSearchStatus($status))
-		exit_error('Error',$g->getErrorMessage());
+	if (!$g->setDocmanSearchStatus($status)) {
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($g->getErrorMessage())));
+	    exit;
+    }
 
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($feedback)));
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg)));
 	exit;
 }
-
 ?>

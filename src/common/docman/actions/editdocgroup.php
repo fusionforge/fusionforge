@@ -34,14 +34,17 @@ $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
 
 $dg = new DocumentGroup($g,$dirid);
-if ($dg->isError())
-	exit_error('Error',$dg->getErrorMessage());
+if ($dg->isError()) {
+    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage())));
+    exit;
+}
 
-if (!$dg->update($groupname,$parent_dirid))
-	exit_error('Error',$dg->getErrorMessage());
+if (!$dg->update($groupname,$parent_dirid)) {
+    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage())));
+    exit;
+}
 
-$feedback = _('Document Group Updated successfully');
-Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+$return_msg = _('Document Group Updated successfully');
+Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg)));
 exit;
-
 ?>

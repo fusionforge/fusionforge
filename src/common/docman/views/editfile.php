@@ -51,7 +51,7 @@ foreach ($nested_docs[$dirid] as $d) {
 		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
 ?>
 
-	<form id="editdata<?php echo $d->getID(); ?>" name="editdata<?php echo $d->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
+	<form id="editdata<?php echo $d->getID(); ?>" name="editdata<?php echo $d->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&fromview=listfile&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
 
 <table border="0">
 	<tr>

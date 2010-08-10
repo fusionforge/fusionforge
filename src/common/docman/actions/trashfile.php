@@ -31,23 +31,26 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	$return_msg = _('Document Action Denied');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
 	exit;
 } else {
 
 	$fileid = getIntFromRequest('fileid');
-
 	$d= new Document($g,$fileid);
 
-	if ($d->isError())
-		exit_error('Error',$d->getErrorMessage());
+	if ($d->isError()) {
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage())));
+	    exit;
+    }
 
-	if ( !$d->setState('2') )
-		exit_error('Error',$d->getErrorMessage());
+	if ( !$d->setState('2') ) {
+	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage())));
+	    exit;
+    }
 
-	$feedback = _('Document moved to trash successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($feedback)));
+	$return_msg = _('Document moved to trash successfully');
+	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg)));
 	exit;
 }
 ?>
