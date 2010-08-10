@@ -34,8 +34,7 @@ global $d_arr; // documents array of this group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 } else {
 
 	/* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
@@ -55,7 +54,6 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$dg->setStateID('2');
 
 	$return_msg = _('Document Group moved to trash successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 }
 ?>

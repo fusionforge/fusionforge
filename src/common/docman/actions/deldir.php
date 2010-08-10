@@ -32,23 +32,17 @@ global $group_id; // id of group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 } else {
 
 	$dg = new DocumentGroup($g,$dirid);
-	if ($dg->isError()) {
-	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage())));
-	    exit;
-    }
+	if ($dg->isError())
+	    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-	if (!$dg->delete($dirid,$group_id)) {
-	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage())));
-	    exit;
-    }
+	if (!$dg->delete($dirid,$group_id))
+	    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 	$return_msg = _('Document Group deleted successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 }
 ?>

@@ -35,7 +35,7 @@ global $dgh; // document group html
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	$dg = new DocumentGroup($g,$dirid);
 	if ($dg->isError())
-    		exit_error('Error',$dg->getErrorMessage());
+        session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 ?>
 <div class="docmanDivIncluded">

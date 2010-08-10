@@ -31,9 +31,8 @@ global $group_id; // id of the group
 global $d_arr; // documents array of this group
 
 if ( !forge_check_perm ('docman', $group_id, 'approve')) {
-	$feedback= _('Docman Admin Page Access Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
-	exit;
+	$return_msg= _('Docman Admin Page Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 } else {
 ?>
 

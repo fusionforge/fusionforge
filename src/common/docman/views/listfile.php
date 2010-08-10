@@ -34,9 +34,7 @@ global $HTML; // Layout object
 
 $DocGroupName = getNameDocGroup($dirid,$group_id);
 if (!$DocGroupName) {
-	$feedback = $g->getErrorMessage();
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($feedback)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
 }
 ?>
 

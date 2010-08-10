@@ -44,13 +44,11 @@ $name = getStringFromRequest('name');
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided		
     $return_msg= _('No valid Document Group was selected.');
-    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
-    exit;
+    session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 }
 	
-if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) )) {		
+if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) ))
 	exit_missing_param();
-}
 
 if (!isset($sys_engine_path))
 	$sys_engine_path = dirname(__FILE__).'/../engine/';
@@ -58,13 +56,11 @@ if (!isset($sys_engine_path))
 $d = new Document($g, false, false,$sys_engine_path);
 if (!$d || !is_object($d)) {		
     $return_msg= _('Error getting blank document.');
-    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
-    exit;
+    session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 } elseif ($d->isError()) {	
-    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage())));
-    exit;
+    session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage()));
 }
-	
+
 switch ($type) {
 	case 'editor' : {
 		$data = getStringFromRequest('data');
@@ -73,8 +69,7 @@ switch ($type) {
 		$data = $sanitizer->SanitizeHtml($data);
 		if (strlen($data)<1) {
 	        $return_msg= _('Error getting blank document.');
-		    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
-		    exit;
+		    session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 		}
 		$uploaded_data_type='text/html';
 		break;
@@ -88,8 +83,7 @@ switch ($type) {
 	case 'httpupload' : {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {			
 	        $return_msg= _('Invalid file name.');
-		    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg)));
-		    exit;
+		    session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 		}
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 		$file_url='';
@@ -107,11 +101,9 @@ switch ($type) {
 
 if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description)) {
 	if (forge_check_perm ('docman', $group_id, 'approve')) {
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&error_msg='.urlencode($d->getErrorMessage())));
-        exit;
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&error_msg='.urlencode($d->getErrorMessage()));
     } else {
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage())));
-		exit;
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($d->getErrorMessage()));
     }
 } else {
 	if ($type == 'editor') {
@@ -121,12 +113,10 @@ if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,
 	// check if the user is docman's admin
 	if (forge_check_perm ('docman', $group_id, 'approve')) {
 		$return_msg= _('Document submitted successfully');
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg)));
-		exit;
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg));
     } else {
 		$return_msg= _('Document submitted successfully : pending state (need validation)');
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg)));
-		exit;
+		session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 	}
 }
 ?>

@@ -34,17 +34,12 @@ $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
 
 $dg = new DocumentGroup($g,$dirid);
-if ($dg->isError()) {
-    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage())));
-    exit;
-}
+if ($dg->isError())
+    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-if (!$dg->update($groupname,$parent_dirid)) {
-    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage())));
-    exit;
-}
+if (!$dg->update($groupname,$parent_dirid))
+    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 $return_msg = _('Document Group Updated successfully');
-Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg)));
-exit;
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>

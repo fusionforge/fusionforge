@@ -33,36 +33,27 @@ global $group_id; // id of group
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Action Denied');
 	if ($dirid) {
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
-        exit;
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 	} else {
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg)));
-        exit;
+		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 	}
-	exit;
 } else {
 	$groupname = $_POST['groupname'];
 
 	$dg = new DocumentGroup($g);
 
-	if ($dg->isError()) {
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage())));
-        exit;
-    }
+	if ($dg->isError())
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-	if (!$dg->create($groupname, $dirid)) {
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage())));
-        exit;
-    }
+	if (!$dg->create($groupname, $dirid))
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 	if ($dirid) {
 		$return_msg = _('Document Sub Group successfully created');
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg)));
-		exit;
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 	} else {
 		$return_msg = _('Document Group successfully created');
-		Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($return_msg)));
-		exit;
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dg->getID().'&feedback='.urlencode($return_msg));
 	}
 }
 ?>

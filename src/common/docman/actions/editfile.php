@@ -32,8 +32,7 @@ global $group_id; // id of group
 
 if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Action Denied');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 } else {
 	$doc_group = getIntFromRequest('doc_group');
 	$docid = getIntFromRequest('docid');
@@ -58,10 +57,8 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
         $engine_path = $sys_engine_path;
 
 	$d= new Document($g,$docid,false,$engine_path);
-	if ($d->isError()) {
-	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage())));
-	    exit;
-    }
+	if ($d->isError())
+	    session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
 	$sanitizer = new TextSanitizer();
 	$data = $sanitizer->SanitizeHtml($data);
@@ -73,8 +70,7 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	} elseif ($uploaded_data['name']) {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 			$return_msg = sprintf(_('Invalid file attack attempt %1$s'), $uploaded_data['name']);
-	        Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($return_msg)));
-	        exit;
+	        session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($return_msg));
         }
 
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
@@ -101,13 +97,10 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 		$filename=$d->getFileName();
 		$filetype=$d->getFileType();
 	}
-	if (!$d->update($filename,$filetype,$data,$doc_group,$title,$description,$stateid)) {
-	    Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage())));
-	    exit;
-    }
+	if (!$d->update($filename,$filetype,$data,$doc_group,$title,$description,$stateid))
+	    session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
 	$return_msg = _('Document Updated successfully');
-	Header('Location: '.util_make_url('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg)));
-	exit;
+	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg));
 }
 ?>
