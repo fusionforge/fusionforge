@@ -216,7 +216,7 @@ require_once 'install-common.inc' ;
 	chdir("$fusionforge_src_dir");
 	system("chown -R root:$args[3] $fusionforge_src_dir");
 	system("chmod -R 644 $fusionforge_src_dir/");
-	system("cd $fusionforge_src_dir && find -type d | xargs chmod 755");
+	system("cd $fusionforge_src_dir && find . -type d | xargs chmod 755");
 	system("chown -R $args[2]:$args[3] $fusionforge_data_dir/uploads");
 	system("chmod -R 755 $fusionforge_src_dir/cronjobs/");
 	system("chmod 755 $fusionforge_src_dir/www/scm/viewvc/bin/cgi/viewvc.cgi");
@@ -228,10 +228,10 @@ require_once 'install-common.inc' ;
 	}
 	system("chown -R root:$args[3] $fusionforge_etc_dir/");
 	system("chmod -R 644 $fusionforge_etc_dir/");
-	system("cd $fusionforge_etc_dir && find -type d | xargs chmod 755");
-	system("cd $fusionforge_etc_dir && find -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
-	system("cd $fusionforge_etc_dir && find -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
-	system("cd $fusionforge_etc_dir && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
+	system("cd $fusionforge_etc_dir && find . -type d | xargs chmod 755");
+	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
+	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
+	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
 // Generate a random hash for the session_key
