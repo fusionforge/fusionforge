@@ -73,21 +73,11 @@ if ($pgservice == '/etc/init.d/postgresql') {
 // Might fail if it's already running, so we'll ingnore the result
 run("$pgservice start", true);
 
-// Where the PHP code will live
-//$gforge_lib_dir = '/opt/gforge5';   //CAMBIE ESTO
-$gforge_lib_dir = '/opt/gforge';
+require_once 'install-common.inc' ;
 
-if (!is_dir($gforge_lib_dir))
+if (!is_dir($fusionforge_src_dir))
 {
 	die("Error: GForge folder doesn't exist. Run fusionforge-install-2.php first.");
-}
-
-
-// Where the configuration files will live
-$gforge_etc_dir = getenv('GFORGE_ETC_DIR');
-if (empty($gforge_etc_dir))
-{
-	$gforge_etc_dir = '/etc/gforge';
 }
 
 // Where the PGHBA config file is
@@ -137,7 +127,7 @@ else
 
 function install()
 {
-	global $PGHBA, $gforge_lib_dir, $gforge_etc_dir, $tsearch2_sql, $pgservice, $STDIN, $STDOUT;
+	global $PGHBA, $fusionforge_src_dir, $fusionforge_etc_dir, $tsearch2_sql, $pgservice, $STDIN, $STDOUT;
 
 	show("\n * Enter the Database Name (gforge): ");
 
@@ -208,20 +198,20 @@ function install()
 		}
 //	} else {
 //		show(" * Creating FTS default configuation (Full Text Search)");
-//		run("su - postgres -c \"psql $gforge_db < $gforge_lib_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
+//		run("su - postgres -c \"psql $gforge_db < $fusionforge_src_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
 	}
 
 
 	show(' * Dumping FusionForge DB');
-	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/gforge.sql\" >> /tmp/gforge-import.log");
+	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/gforge.sql\" >> /tmp/gforge-import.log");
 
 //	show(' * Dumping FusionForge FTI DB');
-//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
-//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
-//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
-//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
-//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
-//	run("su $susufix $gforge_user -c \"psql $gforge_db < $gforge_lib_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20050315.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20050401.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20050530.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20060130.sql\" >> /tmp/gforge-import.log");
+//	run("su $susufix $gforge_user -c \"psql $gforge_db < $fusionforge_src_dir/db/FTI-20061025.sql\" >> /tmp/gforge-import.log");
 
 	show(" * Enter the Admin Username (fforgeadmin): ");
 	if (getenv('FFORGE_ADMIN_USER')) {
@@ -299,13 +289,13 @@ function install()
 //$t = trim(fgets($STDIN));
 
 	}
-	if (!is_dir($gforge_etc_dir)) {
-		mkdir($gforge_etc_dir);
+	if (!is_dir($fusionforge_etc_dir)) {
+		mkdir($fusionforge_etc_dir);
 	}
 
 
 	show(' * Saving database configuration in FForge config file');
-	$data = file_get_contents("$gforge_etc_dir/local.inc");
+	$data = file_get_contents("$fusionforge_etc_dir/local.inc");
 	$lines = explode("\n",$data);
 	$config = '';
 	foreach ($lines as $l) {
@@ -314,7 +304,7 @@ function install()
 		$config .= $l."\n";
 	}
 
-	if ($fp = fopen("$gforge_etc_dir/local.inc", "w")) {
+	if ($fp = fopen("$fusionforge_etc_dir/local.inc", "w")) {
 		fwrite ($fp, $config);
 		fclose($fp);	
 	}
@@ -323,7 +313,7 @@ function install()
 }
 /*
 function uninstall() {
-	global $PGHBA, $gforge_lib_dir, $gforge_var_dir, $gforge_etc_dir, $gforge_db, $gforge_user, $tsearch2_sql;
+	global $PGHBA, $fusionforge_src_dir, $gforge_var_dir, $fusionforge_etc_dir, $gforge_db, $gforge_user, $tsearch2_sql;
 
 	show(" * Removing DATABASE \n";
 	system("su - $gforge_user -c \"dropdb $gforge_db\"", $ret );

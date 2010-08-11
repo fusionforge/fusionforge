@@ -148,6 +148,7 @@ gforge/image-sources/README -text
 gforge/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 gforge/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 gforge/image-sources/top-logo.xcf -text svneol=unset#unset
+gforge/install-common.inc -text
 gforge/install.sh -text
 gforge/packaging/control/000source -text
 gforge/packaging/control/010meta-standard -text

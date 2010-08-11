@@ -80,28 +80,30 @@
 	 	exit(2);
 	}
 
-	echo "Creating /opt/gforge  ";
-	system("mkdir -p /opt/gforge");
-	if (!is_dir("/opt/gforge"))
+require_once 'install-common.inc' ;
+
+	echo "Creating $fusionforge_src_dir";
+	system("mkdir -p $fusionforge_src_dir");
+	if (!is_dir("$fusionforge_src_dir"))
 	{
-		echo "FAIL\n  /opt/gforge didn't exist - error - make sure you've got permission";
+		echo "FAIL\n  $fusionforge_src_dir didn't exist - error - make sure you've got permission";
 		exit(2);
 	}
 	echo "OK\n";
 
-	echo "Creating /var/lib/gforge  ";
-	system("mkdir -p /var/lib/gforge  ");
-	if (!is_dir("/var/lib/gforge"))
+	echo "Creating $fusionforge_data_dir  ";
+	system("mkdir -p $fusionforge_data_dir  ");
+	if (!is_dir("$fusionforge_data_dir"))
 	{
-		echo "FAIL\n  /var/lib/gforge didn't exist - error - make sure you've got permission";
+		echo "FAIL\n  $fusionforge_data_dir didn't exist - error - make sure you've got permission";
 		exit(2);
 	}
 	echo "OK\n";
 
 
-	system("cp -r * /opt/gforge");
+	system("cp -r * $fusionforge_src_dir");
 
-	chdir("/var/lib/gforge");
+	chdir("$fusionforge_data_dir");
 	system("mkdir -p uploads");
 	system("mkdir -p scmtarballs");
 	system("mkdir -p scmsnapshots");
@@ -118,21 +120,20 @@
 	system("mkdir -p svnroot");
 	if (!is_dir("/svnroot"))
 	{
-		symlink("/var/lib/gforge/svnroot", "/svnroot");
+		symlink("$fusionforge_data_dir/svnroot", "/svnroot");
 	}
 
 	// Create default location for CVS repositories
 	system("mkdir -p cvsroot");
 	if (!is_dir("/cvsroot"))
 	{
-		symlink("/var/lib/gforge/cvsroot", "/cvsroot");
+		symlink("$fusionforge_data_dir/cvsroot", "/cvsroot");
 	}
 
 	// Create default dumps dir
-	system("mkdir -p /var/lib/gforge/dumps");
+	system("mkdir -p $fusionforge_data_dir/dumps");
 
-	//cd /opt/gforge
-	chdir("/opt/gforge");
+	chdir("$fusionforge_src_dir");
 
 	//#restricted shell for cvs accounts
 	//echo "linea 1\n";
@@ -141,24 +142,24 @@
 	system("chmod 755 /bin/cvssh.pl");
 
 	// Create default location for gforge config files
-	system("mkdir -p /etc/gforge");
-	if (!is_file("/etc/gforge/local.inc")) {
-		system("cp etc/local.inc.example /etc/gforge/local.inc");
+	system("mkdir -p $fusionforge_etc_dir");
+	if (!is_file("$fusionforge_etc_dir/local.inc")) {
+		system("cp etc/local.inc.example $fusionforge_etc_dir/local.inc");
 	}
-	if (!is_file("/etc/gforge/httpd.conf")) {
-		system("cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf");
+	if (!is_file("$fusionforge_etc_dir/httpd.conf")) {
+		system("cp etc/gforge-httpd.conf.example $fusionforge_etc_dir/httpd.conf");
 	}
 
-	system("mkdir -p /etc/gforge/httpd.d");
-	system("cp plugins/*/etc/httpd.d/*.conf /etc/gforge/httpd.d");
+	system("mkdir -p $fusionforge_etc_dir/httpd.d");
+	system("cp plugins/*/etc/httpd.d/*.conf $fusionforge_etc_dir/httpd.d");
 
 	// Install default configuration files for all plugins.
-	system("mkdir -p /etc/gforge/plugins/");
-	chdir("/opt/gforge/plugins");
+	system("mkdir -p $fusionforge_etc_dir/plugins/");
+	chdir("$fusionforge_src_dir/plugins");
 	foreach( glob("*") as $plugin) {
-		$source = "/opt/gforge/plugins/$plugin/etc/plugins/$plugin";
+		$source = "$fusionforge_src_dir/plugins/$plugin/etc/plugins/$plugin";
 		if (is_dir($source)) {
-			system("cp -r $source /etc/gforge/plugins/");
+			system("cp -r $source $fusionforge_etc_dir/plugins/");
 		}
 	}
 
@@ -175,21 +176,20 @@
 
 	foreach ($apacheconffiles as $apacheconffile) {
 		echo('Setting FusionForge Include For Apache...');
-		system("grep \"^Include /etc/gforge/httpd.conf\" $apacheconffile > /dev/null", $ret);
+		system("grep \"^Include $fusionforge_etc_dir/httpd.conf\" $apacheconffile > /dev/null", $ret);
 		if ($ret == 1) {
-			system("echo \"Include /etc/gforge/httpd.conf\" >> $apacheconffile");
+			system("echo \"Include $fusionforge_etc_dir/httpd.conf\" >> $apacheconffile");
 		}
 	}
 
 	// Create symlink for the wiki plugin.
-	if (!is_dir("/opt/gforge/www/wiki"))
+	if (!is_dir("$fusionforge_src_dir/www/wiki"))
 	{
-		symlink ("../plugins/wiki/www/", "/opt/gforge/www/wiki");
+		symlink ("../plugins/wiki/www/", "$fusionforge_src_dir/www/wiki");
 	}
 
 	//#symlink plugin www's
-	//cd /opt/gforge/www
-	chdir("/opt/gforge/www");
+	chdir("$fusionforge_src_dir/www");
 	if (!is_dir("plugins"))
 	{
 		system("mkdir -p plugins");
@@ -213,39 +213,38 @@
 		symlink ("../../plugins/fckeditor/www", "fckeditor");
 	}
 
-	//cd /opt/gforge
-	chdir("/opt/gforge");
-	system("chown -R root:$args[3] /opt/gforge");
-	system("chmod -R 644 /opt/gforge/");
-	system("cd /opt/gforge && find -type d | xargs chmod 755");
-	system("chown -R $args[2]:$args[3] /var/lib/gforge/uploads");
-	system("chmod -R 755 /opt/gforge/cronjobs/");
-	system("chmod 755 /opt/gforge/www/scm/viewvc/bin/cgi/viewvc.cgi");
+	chdir("$fusionforge_src_dir");
+	system("chown -R root:$args[3] $fusionforge_src_dir");
+	system("chmod -R 644 $fusionforge_src_dir/");
+	system("cd $fusionforge_src_dir && find -type d | xargs chmod 755");
+	system("chown -R $args[2]:$args[3] $fusionforge_data_dir/uploads");
+	system("chmod -R 755 $fusionforge_src_dir/cronjobs/");
+	system("chmod 755 $fusionforge_src_dir/www/scm/viewvc/bin/cgi/viewvc.cgi");
 	
-	if (!is_dir("/etc/gforge"))
+	if (!is_dir("$fusionforge_etc_dir"))
 	{
-		echo "/etc/gforge didn't exist - error - make sure you've got permission";
+		echo "$fusionforge_etc_dir didn't exist - error - make sure you've got permission";
 		exit(2);
 	}
-	system("chown -R root:$args[3] /etc/gforge/");
-	system("chmod -R 644 /etc/gforge/");
-	system("cd /etc/gforge && find -type d | xargs chmod 755");
-	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
-	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
-	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
+	system("chown -R root:$args[3] $fusionforge_etc_dir/");
+	system("chmod -R 644 $fusionforge_etc_dir/");
+	system("cd $fusionforge_etc_dir && find -type d | xargs chmod 755");
+	system("cd $fusionforge_etc_dir && find -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
+	system("cd $fusionforge_etc_dir && find -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
+	system("cd $fusionforge_etc_dir && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
-	# Generate a random hash for the session_key
+// Generate a random hash for the session_key
 	$hash = md5(microtime());
-	system("perl -spi -e \"s/sys_session_key = 'foobar'/sys_session_key = '$hash'/\" /etc/gforge/local.inc");
+	system("perl -spi -e \"s/sys_session_key = 'foobar'/sys_session_key = '$hash'/\" $fusionforge_etc_dir/local.inc");
 
-	# Use liberation fonts if jpgraph provided in the archive.
-	if (is_dir("/opt/gforge/jpgraph")) {
-		system("perl -spi -e \"s!//(.gantt_title_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_title_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_title_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_task_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_task_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
+// Use liberation fonts if jpgraph provided in the archive.
+	if (is_dir("$fusionforge_src_dir/jpgraph")) {
+		system("perl -spi -e \"s!//(.gantt_title_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" $fusionforge_etc_dir/local.inc");
+		system("perl -spi -e \"s!//(.gantt_title_font_style=.*)!\\$1!\" $fusionforge_etc_dir/local.inc");
+		system("perl -spi -e \"s!//(.gantt_title_font_size=.*)!\\$1!\" $fusionforge_etc_dir/local.inc");
+		system("perl -spi -e \"s!//(.gantt_task_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" $fusionforge_etc_dir/local.inc");
+		system("perl -spi -e \"s!//(.gantt_task_font_style=.*)!\\$1!\" $fusionforge_etc_dir/local.inc");
+		system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" $fusionforge_etc_dir/local.inc");
 	}
 	print "\n";
