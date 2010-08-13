@@ -1,0 +1,18 @@
+Date: Fri, 13 Aug 2010 15:31:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiAdministration%2FSetAclSimple 7644 2010-08-13 13:34:26Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiAdministration%2FSetAclSimple;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+For more complex Access Rights modifications, see **[[phpwiki:?action=setacl|SetAcl]]**.
+
+----
+
+<<WikiAdminSetAclSimple>>
+
+----
+[[CategoryActionPage]]

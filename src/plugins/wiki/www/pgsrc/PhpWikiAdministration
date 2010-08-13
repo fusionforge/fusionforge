@@ -1,6 +1,6 @@
-Date: Wed, 19 May 2010 18:15:54 +0000
+Date: Fri, 13 Aug 2010 15:31:59 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: PhpWikiAdministration 7419 2010-05-19 16:49:33Z vargenau $
+X-Rcs-Id: $Id: PhpWikiAdministration 7644 2010-08-13 13:34:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
@@ -20,7 +20,12 @@ First select pages and then define the action:
 
 or call the available ~WikiAdmin actions directly:
 
-| [[/Chown]] | [[/Markup]] | [[/Purge]] | [[/Remove]] | [[/Rename]] | [[/SearchReplace]] | [[/SetAcl]]
+| [[/Chown]] | [[/Markup]] | [[/Purge]] | [[/Remove]] | [[/Rename]] | [[/SearchReplace]] | [[/SetAcl]] | [[/SetAclSimple]]
+
+== Global Access Rights ==
+
+* [[SetGlobalAccessRightsSimple]]
+* [[SetGlobalAccessRights]]
 
 == User Management ==
 

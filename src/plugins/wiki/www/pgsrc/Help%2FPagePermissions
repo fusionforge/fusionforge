@@ -1,6 +1,6 @@
-Date: Tue,  1 Jun 2010 17:01:57 +0000
+Date: Fri, 13 Aug 2010 15:31:59 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: Help%2FPagePermissions 7461 2010-06-01 15:08:17Z vargenau $
+X-Rcs-Id: $Id: Help%2FPagePermissions 7644 2010-08-13 13:34:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPagePermissions;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -111,7 +111,7 @@ Those perms are mapped to those actions. [[Help:ActionPage|Action Pages]] (plugi
 |= dump   | zip, ziphtml, dumpserial, dumphtml 
 |= edit   | revert, edit 
 |= create | //edit or create, if the page doesn't exist yet//
-|= change | upload, loadfile, remove, lock, unlock, upgrade, chown, setacl, rename. \\ All other actionpages which are not wikiwords.
+|= change | upload, loadfile, remove, lock, unlock, upgrade, chown, setacl, setaclsimple, rename. \\ All other actionpages which are not wikiwords.
 
 === Default Permissions ===
 

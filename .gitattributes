@@ -2851,6 +2851,7 @@ src/plugins/wiki/www/pgsrc/Help%2FWikiAdminRenamePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminSearchReplacePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminSelectPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminSetAclPlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FWikiAdminSetAclSimplePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminUtilsPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiBlogPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiFormPlugin -text
@@ -2898,6 +2899,7 @@ src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FRemove -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FRename -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FSearchReplace -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FSetAcl -text
+src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FSetAclSimple -text
 src/plugins/wiki/www/pgsrc/PhpWikiDebug -text
 src/plugins/wiki/www/pgsrc/PhpWikiDocumentation -text
 src/plugins/wiki/www/pgsrc/PhpWikiManual -text
@@ -2921,6 +2923,8 @@ src/plugins/wiki/www/pgsrc/SandBox -text
 src/plugins/wiki/www/pgsrc/SearchHighlight -text
 src/plugins/wiki/www/pgsrc/SemanticRelations -text
 src/plugins/wiki/www/pgsrc/SemanticSearch -text
+src/plugins/wiki/www/pgsrc/SetGlobalAccessRights -text
+src/plugins/wiki/www/pgsrc/SetGlobalAccessRightsSimple -text
 src/plugins/wiki/www/pgsrc/SpecialPages -text
 src/plugins/wiki/www/pgsrc/SpellCheck -text
 src/plugins/wiki/www/pgsrc/SteveWainstead -text
@@ -2931,8 +2935,8 @@ src/plugins/wiki/www/pgsrc/Template%2FExample -text
 src/plugins/wiki/www/pgsrc/Template%2FLinkto -text
 src/plugins/wiki/www/pgsrc/Template%2FNewPlugin -text
 src/plugins/wiki/www/pgsrc/Template%2FRelation -text
+src/plugins/wiki/www/pgsrc/Template%2FTalk -text
 src/plugins/wiki/www/pgsrc/Template%2FUserPage -text
-src/plugins/wiki/www/pgsrc/TemplateTalk -text
 src/plugins/wiki/www/pgsrc/TitleSearch -text
 src/plugins/wiki/www/pgsrc/TranslateText -text
 src/plugins/wiki/www/pgsrc/UpLoad -text

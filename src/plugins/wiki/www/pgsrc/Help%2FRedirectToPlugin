@@ -1,6 +1,6 @@
-Date: Wed, 19 May 2010 18:15:54 +0000
+Date: Mon,  9 Aug 2010 14:02:27 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: Help%2FRedirectToPlugin 7419 2010-05-19 16:49:33Z vargenau $
+X-Rcs-Id: $Id: Help%2FRedirectToPlugin 7632 2010-08-09 12:06:15Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRedirectToPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,6 +10,11 @@ Content-Transfer-Encoding: binary
 
 The **~RedirectTo** [[Help:WikiPlugin|plugin]] can be used to redirect a user to another page.
 In other words it makes a page an //alias// for another page.
+
+When redirecting to another wiki page, a note is added to the top of the target
+page saying  //(Redirected from SomeRedirectingPage)//.
+
+Redirection to external URLs will only work on locked pages.
 
 == Arguments ==
 
@@ -32,17 +37,16 @@ Use only one of these arguments at a time.
 
 == Caveats ==
 
-The ~RedirectToPlugin invocation must be the first thing on a page.
-For most purposes it makes any other content on the page inaccessible.
+For most purposes, the ~RedirectToPlugin invocation makes any other content on the page inaccessible.
 
 == Example ==
 
-A page may be made a alias for the HomePage by placing this code at the top:
+A page may be made a alias for the [[HomePage]] by using this code:
 {{{
 <<RedirectTo page="HomePage">>
 }}}
 
-To see the example in action, visit HomePageAlias.
+To see the example in action, visit [[HomePageAlias]].
 
 <noinclude>
 ----
