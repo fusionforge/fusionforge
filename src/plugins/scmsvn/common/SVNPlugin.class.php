@@ -236,6 +236,9 @@ class SVNPlugin extends SCMPlugin {
 
 		$svnusers = array () ;
 		foreach ($groups as $project) {
+			if ( !$project->isActive()) {
+				continue;
+			}
 			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
 			
 			$users = $project->getMembers () ;
@@ -434,8 +437,12 @@ class SVNPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (is_file($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (is_file($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false;
 		}
 
@@ -443,8 +450,12 @@ class SVNPlugin extends SCMPlugin {
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (is_file($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (is_file($tarball)) {
+				unlink ($tarball) ;
+			}
 			return false ;
 		}
 
@@ -456,7 +467,7 @@ class SVNPlugin extends SCMPlugin {
 		$dir = $project->getUnixName ()."-$today" ;
 		system ("mkdir -p $tmp") ;
 		$code = 0 ;
-		system ("svn ls file://$repo/trunk", $code) ;
+		system ("svn ls file://$repo/trunk > /dev/null", $code) ;
 		if ($code == 0) {
 			system ("cd $tmp ; svn checkout file://$repo/trunk $dir > /dev/null 2>&1") ;
 			system ("tar czCf $tmp $tmp/snapshot.tar.gz $dir") ;
@@ -465,7 +476,9 @@ class SVNPlugin extends SCMPlugin {
 			unlink ("$tmp/snapshot.tar.gz") ;
 			system ("rm -rf $tmp/$dir") ;
 		} else {
-			unlink ($snapshot) ;
+			if (is_file($snapshot)) {
+				unlink ($snapshot) ;
+			}
 		}
 
 		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
