@@ -170,9 +170,9 @@ echo "</div>\n\n";
 $incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming" ;
 
 	echo '<p>';
-	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the project\'s incoming directory (%1$s).'),
-	       $incoming);
-	echo '<br />';
+	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
+	       $incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
+	echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
 	echo _('Choose an already uploaded file:').'<br />';
 	$manual_files_arr=ls($incoming,true);
 	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename',''); ?>
