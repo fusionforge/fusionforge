@@ -31,6 +31,9 @@ require_once $gfwww.'admin/admin_utils.php';
 function printnode ($nodeid,$text) {
 	print ('<br />');
 
+	if (!isset($GLOBALS['depth']))
+		$GLOBALS['depth'] = 0;
+
 	for ($i=0;$i<$GLOBALS['depth'];$i++) {
 		print "&nbsp; &nbsp; ";
 	}
