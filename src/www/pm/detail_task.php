@@ -54,6 +54,14 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 		<strong><?php echo _('Priority') ?>:</strong><br />
 		<?php echo $pt->getPriority(); ?>
 		</td>
+
+		<td>
+		<?php echo util_make_link("/export/rssAboTask.php?tid=" .
+		    $project_task_id, html_image('ic/rss.png',
+		    16, 16, array('border' => '0')) . " " .
+		    _('Subscribe to task'));
+		?>
+		</td>
 	</tr>
 
 	<tr>

@@ -170,6 +170,7 @@ if ($rows < 1) {
 		'priority'=>0);
 
 	$title_arr=array();
+	$title_arr[] = "";
 	$title_arr[]=_('Task Id');
 	if ($display_col['summary'])
 		$title_arr[]=_('Task Summary');
@@ -194,7 +195,11 @@ if ($rows < 1) {
 		$url = getStringFromServer('PHP_SELF')."?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
 		
 		echo '
-			<tr class="priority'.$pt_arr[$i]->getPriority().'">'.
+			<tr class="priority'.$pt_arr[$i]->getPriority().'"><td style="width:16px; background-color:#FFFFFF">' .
+			util_make_link("/export/rssAboTask.php?tid=" .
+			    $pt_arr[$i]->getID(), html_image('ic/rss.png',
+			    16, 16, array('border' => '0'))
+			) . "</td>\n" .
 			'<td>'.
 			($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
 			$pt_arr[$i]->getID() .'" /> ':'').

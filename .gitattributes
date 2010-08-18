@@ -4056,6 +4056,7 @@ src/www/export/rss20_forum.php -text
 src/www/export/rss20_tasks.php -text
 src/www/export/rss20_tracker.php -text
 src/www/export/rss20_version.php -text
+src/www/export/rssAboTask.php -text
 src/www/export/search_plugin.php -text
 src/www/favicon.ico svneol=native#unset
 src/www/forum/admin/ForumAdmin.class.php -text

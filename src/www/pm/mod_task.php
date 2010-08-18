@@ -83,6 +83,13 @@ echo notepad_func();
 		<td colspan="2">
 		<a href="<?php echo getStringFromServer('PHP_SELF')."?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo _('Delete this task') ?></a>
 		</td>
+		<td>
+		<?php echo util_make_link("/export/rssAboTask.php?tid=" .
+		    $project_task_id, html_image('ic/rss.png',
+		    16, 16, array('border' => '0')) . " " .
+		    _('Subscribe to task'));
+		?>
+		</td>
 	</tr>
 
 	<tr>
