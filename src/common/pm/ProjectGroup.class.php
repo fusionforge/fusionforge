@@ -152,7 +152,7 @@ class ProjectGroup extends Error {
 		if ($send_all_posts_to) {
 			$invalid_mails = validate_emails($send_all_posts_to);
 			if (count($invalid_mails) > 0) {
-				$this->setInvalidEmailError();
+				$this->setInvalidEmailError($send_all_posts_to);
 				return false;
 			}
 		}
@@ -336,7 +336,7 @@ class ProjectGroup extends Error {
 		if ($send_all_posts_to) {
 			$invalid_mails = validate_emails($send_all_posts_to);
 			if (count($invalid_mails) > 0) {
-				$this->setInvalidEmailError();
+				$this->setInvalidEmailError($send_all_posts_to);
 				return false;
 			}
 		}

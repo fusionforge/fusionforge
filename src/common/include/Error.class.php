@@ -139,8 +139,13 @@ class Error {
 	 * setInvalidEmailError() - sets a Invalid Email error
 	 *  retrieves the localized error string for Invalid Email and calls exit_error()
 	 */
-	function setInvalidEmailError(){
-		$this->setError(_('Invalid Email Address'), ERROR__INVALID_EMAIL_ERROR);
+	function setInvalidEmailError($adr=false){
+		$e = _('Invalid Email Address');
+		if ($adr)
+			$e .= " '" . htmlspecialchars($adr) . "'";
+		else if ($adr !== false)
+			$e .= ' ' . _('(none given)');
+		$this->setError($e, ERROR__INVALID_EMAIL_ERROR);
 	}
 	
 	/**

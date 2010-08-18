@@ -275,7 +275,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError(_('Invalid Email Address'));
+			$this->setError(_('Invalid Email Address') . $email);
 			return false;
 		}
 		if ($jabber_address && !validate_email($jabber_address)) {

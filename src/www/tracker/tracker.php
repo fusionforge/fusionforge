@@ -71,7 +71,7 @@ switch (getStringFromRequest('func')) {
 			} else {
 				if (!validate_email($user_email)) {
 					form_release_key(getStringFromRequest('form_key'));
-					exit_error('ERROR', _('Invalid Email Address'));
+					exit_error('ERROR', _('Invalid Email Address') . htmlspecialchars($user_email));
 				}
 			}
 			if ($user_email) {
