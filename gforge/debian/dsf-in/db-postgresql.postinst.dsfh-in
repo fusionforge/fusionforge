@@ -63,9 +63,14 @@ case "$1" in
 	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf
 	rm ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new
 
-	# Make sure the database accepts connections from these new users
-	pg_name=postgresql-$pg_version
-	invoke-rc.d ${pg_name} reload
+	# Reload postgresql to make sure the database accepts connections from the new users
+	# Trying "postgresql" init script...
+	invoke-rc.d postgresql reload || v=$?
+	if [ "$v" = 100 ] ; then
+	    # No "postgresql" init script (for packages < 8.4.4-2)
+	    pg_name=postgresql-$pg_version
+	    invoke-rc.d ${pg_name} reload
+	fi
 
         # Setup our DB
 	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure
