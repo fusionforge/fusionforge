@@ -1,22 +1,23 @@
-<?php // -*-html-*- ?>
-<!-- $Id: savepage.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: savepage.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <?php
     $signatureURL = $WikiTheme->getImageURL('signature');
 ?>
-<p><?=fmt("Thank you for editing %s.", WikiLink($page))?> 
-<?=_("Your careful attention to detail is much appreciated.")?></p>
+<p><?php echo fmt("Thank you for editing %s.", WikiLink($page))?> 
+<?php echo _("Your careful attention to detail is much appreciated.")?></p>
 
 <?php if (!empty($WARNINGS)) { ?>
-  <p><?= $WARNINGS ?></p>
+  <?php echo $WARNINGS ?>
 <?php } ?>
 
 <?php if ($signatureURL) { ?>
-  <p><img src="<?=$signatureURL?>" id="signature" alt="signature" /></p>
+  <p><img src="<?php echo $signatureURL?>" id="signature" alt="signature" /></p>
 <?php } ?>
 
 <?php if (!empty($LOCK_CHANGED_MSG)) { ?>
-  <p><?=$LOCK_CHANGED_MSG?></p>
+  <p><?php echo $LOCK_CHANGED_MSG?></p>
 <?php } ?>
 
-<hr noshade="noshade" />
-<?= Template('browse') ?>
+<hr />
+<?php echo Template('browse') ?>

@@ -1,5 +1,5 @@
 /**
- * $Id: shamino_com.css 6464 2009-01-30 18:07:40Z vargenau $
+ * $Id: shamino_com.css 6600 2009-02-27 16:24:31Z vargenau $
  *
  * shamino.com style sheet based on the original Wiki
  *
@@ -148,7 +148,15 @@ div#logo {
   float: right;
 }
 
-div.boxright { width: 200px; right: 10px; padding: 0.5em; float: right; border: thin solid #888888; padding: 0.5em; }
+/* plugin BoxRight */
+div.boxright {
+  width: 200px;
+  right: 10px;
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
+  padding: 0.5em;
+}
 
 /**
  * Search Results

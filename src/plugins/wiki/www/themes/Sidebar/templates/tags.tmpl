@@ -1,9 +1,9 @@
 <?php // -*-php-*- 
-rcs_id('$Id: signin.tmpl 6261 2008-09-14 10:37:29Z vargenau $');
+// rcs_id('$Id: tags.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 <!-- list of most popular categories -->
 <div class="portlet" id="p-tags">
-  <h5><?= _("Favorite Categories") ?> <?= $WikiTheme->folderArrow('p-tags', 'Open') ?></h5>
+  <h5><?php echo _("Favorite Categories") ?> <?php echo $WikiTheme->folderArrow('p-tags', 'Open') ?></h5>
   <div class="pBody" id="p-tags-body">
     <?plugin PopularTags ?>
   </div>

@@ -1,23 +1,26 @@
-<?php // -*-php-*- ?>
-<?= Template("default/info") ?>
+<?php // -*-php-*-
+// rcs_id('$Id: info.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
+
+<?php echo Template("default/info") ?>
 
 <div id="actionbuttons">
-    <?= Button("viewsource", _("View Source")) ?>
-    <?=$SEP?><?= Button("PageHistory", _("PageHistory")) ?>
-    <?=$SEP?><?= Button("AuthorHistory", _("AuthorHistory")) ?>
-    <?=$SEP?><?= Button("Diff") ?>
-    <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?>
-    <?=$SEP?><?= Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?>
-    <?=$SEP?><?= Button("PageDump", _("PageDump")) ?>
+    <?php echo Button("viewsource", _("View Source")) ?>
+    <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
+    <?php echo $SEP?><?php echo Button("AuthorHistory", _("AuthorHistory")) ?>
+    <?php echo $SEP?><?php echo Button("Diff") ?>
+    <?php echo $SEP?><?php echo Button(array('action'=>'diff','previous' => 'minor'),_("Diff previous Revision"),$page->getName()) ?>
+    <?php echo $SEP?><?php echo Button(array('action'=>'diff','previous' => 'author'),_("Diff previous Author"),$page->getName()) ?>
+    <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
   <?php if ((defined('DEBUG') && DEBUG) || $user->isAdmin()) { ?>
     <!-- Buttons really only for debugging -->
-    <?=$SEP?><?= Button("DebugInfo", _("DebugInfo")) ?>
+    <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?>
 <?php
     $PurgeCache = Button(array('nocache' => 'purge'),
                      _("PurgeHtmlCache"), $page->getName());
     $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."));
 ?>
-    <?=$SEP?><?= $PurgeCache ?>
+    <?php echo $SEP?><?php echo $PurgeCache ?>
     <!-- End debugging buttons -->
   <?php } ?>
 </div>

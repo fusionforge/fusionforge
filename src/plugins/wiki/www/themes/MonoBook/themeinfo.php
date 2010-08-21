@@ -1,5 +1,12 @@
 <?php
-rcs_id('$Id: themeinfo.php 6409 2009-01-17 14:40:16Z rurban $');
+// Avoid direct call to this file.
+// PHPWIKI_VERSION is defined in lib/prepend.php
+if (!defined('PHPWIKI_VERSION')) {
+    header("Location: /");
+    exit;
+}
+
+// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
  * The new mediawiki (Wikipedia.org) default style.
  * Mediawiki 'monobook' style sheet for CSS2-capable browsers.
@@ -9,19 +16,15 @@ rcs_id('$Id: themeinfo.php 6409 2009-01-17 14:40:16Z rurban $');
  * Problems with IE: signin is at the left.
  *
  * We don't (yet) support all mediawiki UI options, but we try to.
- * Besides that, maybe the mediawiki folks will see how much better phpwiki 
+ * Besides that, maybe the mediawiki folks will see how much better phpwiki
  * will scale, esp. with a true database, not just mysql.
- * Technically phpwiki has about 2-3 years advantage and our plugins 
+ * Technically phpwiki has about 2-3 years advantage and our plugins
  * cannot destroy the layout.
  * Anyway, the WikiParser perl module (and our php version) will be able to import
  * and convert back and forth.
  */
 require_once('lib/WikiTheme.php');
 require_once('themes/wikilens/themeinfo.php');
-if (!defined("ENABLE_MARKUP_TEMPLATE"))
-    define("ENABLE_MARKUP_TEMPLATE", true);
-if (!defined("ENABLE_MARKUP_MEDIAWIKI_TABLE"))
-    define("ENABLE_MARKUP_MEDIAWIKI_TABLE", true);
 
 function ActionButton ($action, $label = false, $page_or_rev = false, $options = false) {
     global $WikiTheme;
@@ -29,7 +32,7 @@ function ActionButton ($action, $label = false, $page_or_rev = false, $options =
     if (is_array($action)) {
         $attr = $action;
         $act = isset($attr['action']) ? $attr['action'] : 'browse';
-    } else 
+    } else
         $act = $action;
     $class = is_safe_action($act) ? 'named-wiki' : 'wikiadmin';
     /* if selected action is current then prepend selected */
@@ -42,17 +45,17 @@ function ActionButton ($action, $label = false, $page_or_rev = false, $options =
         else
             $class = $options['class'];
     }
-    return HTML::li(array('class' => $class), 
+    return HTML::li(array('class' => $class),
                     $WikiTheme->makeActionButton($action, $label, $page_or_rev, $options));
 }
 
-class WikiTheme_MonoBook 
+class WikiTheme_MonoBook
 /* extends WikiTheme */
 extends WikiTheme_Wikilens
 {
-    
+  
     /* this adds selected to the class */
-    function makeActionButton ($action, $label = false, $page_or_rev = false, $options = false) {
+    function makeActionButton ($action, $label=false, $page_or_rev=false, $options=false) {
         extract($this->_get_name_and_rev($page_or_rev));
 
         if (is_array($action)) {
@@ -101,20 +104,7 @@ extends WikiTheme_Wikilens
 	    $this->addMoreHeaders(JavaScript('',array('src' => $this->_findData("IEFixes.js"))));
 	    $this->addMoreHeaders("\n");
 	    $this->addMoreHeaders(HTML::Raw('<meta http-equiv="imagetoolbar" content="no" />'));
-	} 
-	// better done in wikibits.js
-	/*elseif (isBrowserSafari()) {
-	  $this->addMoreHeaders($this->_CSSlink(0,$this->_findFile('IEMacFixes.css'),'all'));
-	  } elseif (isBrowserKonqueror()) {
-	  $this->addMoreHeaders($this->_CSSlink(0,$this->_findFile('KHTMLFixes.css'),'all'));
-	  } elseif (isBrowserOpera()) {
-	  $this->addMoreHeaders($this->_CSSlink
-	  (0,
-	  isBrowserOpera(7) ? $this->_findFile('Opera7Fixes.css')
-	  : $this->_findFile('Opera6Fixes.css'),'all'));
-	  }
-	*/
-	// TODO: IEMAC, KHTML, Opera6, Opera7
+	}
 	$this->addMoreAttr('body', "class-ns-0", HTML::Raw('class="ns-0"'));
 
 	// CSS file defines fonts, colors and background images for this
@@ -144,11 +134,11 @@ extends WikiTheme_Wikilens
 	 * is set to false then the "Thank you for editing..." screen will
 	 * be omitted.
 	 */
-	
+
 	$this->addImageAlias('signature', "Signature.png");
 	// Uncomment this next line to disable the signature.
 	$this->addImageAlias('signature', false);
-	
+
 	/*
 	 * Link icons.
 	 */
@@ -163,7 +153,7 @@ extends WikiTheme_Wikilens
 	//$this->setLinkIcon('*', 'url');
 	// front or after
 	//$this->setLinkIconAttr('after');
-	
+
 	//$this->setButtonSeparator("\n | ");
 
 	/**
@@ -174,9 +164,9 @@ extends WikiTheme_Wikilens
 
 	/**
 	 * Layout improvement with dangling links for mostly closed wiki's:
-	 * If false, only users with edit permissions will be presented the 
+	 * If false, only users with edit permissions will be presented the
 	 * special wikiunknown class with "?" and Tooltip.
-	 * If true (default), any user will see the ?, but will be presented 
+	 * If true (default), any user will see the ?, but will be presented
 	 * the PrintLoginForm on a click.
 	 */
 	$this->setAnonEditUnknownLinks(false);
@@ -196,19 +186,17 @@ extends WikiTheme_Wikilens
 	 * To suppress times in the "Last edited on" messages, give a
 	 * give a second argument of false:
 	 */
-	//$this->setDateFormat("%B %d, %Y", false); 
+	//$this->setDateFormat("%B %d, %Y", false);
     }
 }
 
 $WikiTheme = new WikiTheme_MonoBook('MonoBook');
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

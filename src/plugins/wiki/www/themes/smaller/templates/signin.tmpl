@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: signin.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: signin.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 
 if (empty($FORMNAME))
     $FORMNAME = 'signin';
@@ -7,8 +7,8 @@ else
     $NOFORM = true;
 ?>
 <?php if (empty($NOFORM)) { ?>
-  <form style="display:inline" method="post" action="<?= $request->getPostURL() ?>" accept-charset="<?=$charset?>" name="<?=$FORMNAME?>">
-  <?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
+  <form style="display:inline" method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="<?php echo $charset?>" name="<?php echo $FORMNAME?>">
+  <?php echo HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php } ?>
 <?php 
 if ($user->isAuthenticated()) {
@@ -23,8 +23,8 @@ if ($user->isAuthenticated()) {
     }
     document.write(\''.AsXML($SignOutB).'\');');
 ?>
-  <?=$SignOutJS?>
-  <noscript><?= Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?></noscript>
+  <?php echo $SignOutJS?>
+  <noscript><?php echo Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?></noscript>
 <?php } else {
     $SignInInput = HTML::input(array('type' => 'text',
 				     'name' => "auth[userid]",
@@ -49,9 +49,9 @@ if ($user->isAuthenticated()) {
       form.submit();
     }');
 ?>
-  <?= $SignInJS ?>
-  <?= $SignInInput ?>
-  <?= Button("submit:auth[login]", _("Sign In"), 'wikiaction')?>
+  <?php echo $SignInJS ?>
+  <?php echo $SignInInput ?>
+  <?php echo Button("submit:auth[login]", _("Sign In"), 'wikiaction')?>
 <?php } ?>
 <?php if (empty($NOFORM)) { ?>
   </form>

@@ -1,5 +1,5 @@
 /**
- * $Id: SpaceWiki.css 6471 2009-01-31 14:24:54Z vargenau $
+ * $Id: SpaceWiki.css 7331 2010-04-15 09:04:51Z vargenau $
  *
  * This theme will probably be renamed something like "Space" to
  * avoid any potential copyright issues.
@@ -281,27 +281,25 @@ caption { font-family: Arial, Helvetica, sans-serif; }
 .pagelist tr.evenrow { background: #111; }
 .pagelist tr.oddrow  { background: black; }
 th.gridbutton {
-  background-color: threedlightshadow;
+  background-color: ThreeDLightShadow;
   color: black;
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
   margin: 5px 0px;
   white-space: nowrap;
   max-height: 24px;
   padding: 5px 0px 5px 0px;
   border-width: 1px;
   border-style: solid;
-  border-color: threedhighlight threeddarkshadow threeddarkshadow threedhighlight;
+  border-color: ThreeDHighlight ThreeDDarkShadow ThreeDDarkShadow ThreeDHighlight;
 }
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   text-decoration: none;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
-  background-color: threedlightshadow;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  background-color: ThreeDLightShadow;
   color: black;
 }
 

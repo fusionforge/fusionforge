@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-  rcs_id('$Id: navbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
   $NSEP = HTML::br();
 ?>
 <!-- The left navigation/search bar -->
@@ -7,30 +7,30 @@
 <?php if (ENABLE_DISCUSSION_LINK) { ?>
 <?php // This requires Talk: map to end in "/Discussion"
   if (!string_ends_with($page->getName(), _("Discussion"))) { ?>
-    <?=$NSEP?><?= WikiLink(new WikiPagename('Talk:'.$page->getName(), $page->getName()), 
+    <?php echo $NSEP?><?php echo WikiLink(new WikiPagename('Talk:'.$page->getName(), $page->getName()), 
                'button', _("Discussion")) ?>
   <?php } else { ?>
-    <?=$NSEP?><?= Button(array(),_("Article"),$page->getName()) ?>
+    <?php echo $NSEP?><?php echo Button(array(),_("Article"),$page->getName()) ?>
   <?php } ?>
-  <?=$NSEP?>
+  <?php echo $NSEP?>
 <?php } ?>
-<?= WikiLink(_("RecentChanges"), "button") ?>
-<?=$NSEP?><?= Template('search', 
+<?php echo WikiLink(_("RecentChanges"), "button") ?>
+<?php echo $NSEP?><?php echo Template('search', 
 		      array('SEARCH_BEFORE' => HTML::Button(_("FindPage"))))
 ?><?php if (!empty($revision)) { ?>
-<?=$NSEP?><?= $WikiTheme->makeLinkButton($revision,_("LikePages"),_("LikePages")) 
-?><?=$NSEP?><?= $WikiTheme->makeLinkButton($revision,_("BackLinks"),_("BackLinks"))
-?><?=$NSEP?><?= WikiLink(_("UserPreferences"), 'button',_("Preferences")) ?><?php
+<?php echo $NSEP?><?php echo $WikiTheme->makeLinkButton($revision,_("LikePages"),_("LikePages")) 
+?><?php echo $NSEP?><?php echo $WikiTheme->makeLinkButton($revision,_("BackLinks"),_("BackLinks"))
+?><?php echo $NSEP?><?php echo WikiLink(_("UserPreferences"), 'button',_("Preferences")) ?><?php
     /* Today's calendar page for the user, if the Calender subpage is defined. */
     $UserCalPageTitle = $user->getId() . SUBPAGE_SEPARATOR . _("Calendar");
     $dbi = $request->getDbh();
     if ($dbi->isWikiPage($UserCalPageTitle)) {
         $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
         //$UserCalPageTodayUrl = WikiURL($UserCalPageTodayTitle);
-?><?=$NSEP?><?= WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
+?><?php echo $NSEP?><?php echo WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
 <?php }} ?><?php if (!empty($user) && $user->isAdmin()) { ?>
-<?=$NSEP?><?= WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?>
-<?php } ?></div>
+<?php echo $NSEP?><?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?>
+<?php } ?>
 <?php if (DEBUG & 2) {
         if (isset($links)) {
             $p = $links->next();

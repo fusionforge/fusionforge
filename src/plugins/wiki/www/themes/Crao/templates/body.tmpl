@@ -1,22 +1,22 @@
-<?php // -*-html-*-
-rcs_id('$Id: body.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: body.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
-<body<?= $WikiTheme->getMoreAttr('body') ?>>
+<body<?php echo $WikiTheme->getMoreAttr('body') ?>>
 <div id="header"><?php // for top toolbars style sheet ?>
-  <?= Template('top') ?>
+  <?php echo Template('top') ?>
 </div>
-<div class="toolbar"><?= Template('navbar') ?></div>
+<div class="toolbar"><?php echo Template('navbar') ?></div>
 <!-- Page content -->
 <div id="content">
 <?php if (isset($HEADER)) { ?>
 <!-- Page title -->
-<h1><?= $HEADER ?></h1>
+<h1><?php echo $HEADER ?></h1>
 <?php } ?>
-<?= $CONTENT ?>
-<?= Template('bottom') ?>
+<?php echo $CONTENT ?>
+<?php echo Template('bottom') ?>
 </div>
 <?php if (isset($revision)) { ?>
 <!-- Actionbar -->
-<?= Template('actionbar') ?>
+<?php echo Template('actionbar') ?>
 <?php } ?>
 </body>

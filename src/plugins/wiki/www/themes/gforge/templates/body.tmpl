@@ -1,19 +1,8 @@
+<?php // -*-php-*-
+// rcs_id('$Id: body.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
-<td nowrap="nowrap" valign="top">
-<br/>
-<br/>
-<span id="actionbuttons">
-<span class="wikiaction"><strong>Wiki Menu</strong></span>
-</span>
-<br />
-<div class="wikiaction">
-<table
-<?= Template('navbar') ?>
-</table>
-</div>
-</td>
-<td>&nbsp;</td>
 <td valign="top">
 <?php
 global $HIDE_TOOLBARS;
@@ -21,16 +10,37 @@ if (!$HIDE_TOOLBARS) {
 ?>
 <div class="toolpalettes">
 <div class="toolbar">
-<?= Template('actionbar') ?>
+<?php echo Template('actionbar') ?>
 </div>
 </div>
 <?php } ?>
 <div id="content">
-<h1><?= $HEADER ?></h1>
-<br />
-<?= $CONTENT ?>
+<?php
+if (ENABLE_RATEIT && $page->exists())
+    $rating = 1;
+else
+    $rating = 0;
+?>
+<a id="contentTop"></a>
+<h1>
+<span class="firstHeading<?php echo $rating ? '-rating' : '' ?>">
+<span style="float: left;"><?php echo $HEADER ?></span>
+<?php if ($rating && $request->getArg('action') == 'browse') { ?>
+<span style="float: right;">
+<?php echo Template('ratings') ?>
+</span>
+<?php } elseif ($rating && $WikiTheme->DUMP_MODE) { ?>
+<span id="rateit-widget-top">
+<?php
+  $loader = new WikiPluginLoader();
+  printXML($loader->expandPI("<"."?plugin RateIt show=text ?".">", $request, $dbi->_markup));
+?></span>
+<?php } ?>
+</span>
+</h1>
+<?php echo $CONTENT ?>
 </div>
 </td>
 </tr>
 </table>
-<?= Template('bottom') ?>
+<?php echo Template('bottom') ?>

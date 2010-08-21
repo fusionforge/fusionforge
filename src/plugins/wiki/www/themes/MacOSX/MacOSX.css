@@ -1,5 +1,5 @@
 /*
- $Id: MacOSX.css 6470 2009-01-31 12:29:03Z vargenau $
+ $Id: MacOSX.css 7331 2010-04-15 09:04:51Z vargenau $
 
  Classes:
 
@@ -411,13 +411,15 @@ div.wiki-message {
 /**
  * PageList output
  */
+.pagelist {
+  font-size: smaller;
+}
 .pagelist tr.evenrow { background: #f8f8f8; }
 .pagelist tr.oddrow  { background: #eee; }
 .pagelist thead td {
   background: #e8e8e8;
   text-decoration: none;
   font-weight: bold;
-  font-size: smaller;
 }
 .pagelist thead td u { text-decoration: none; }
 /* Yellow highlight for every td of mouseover'd tr in pagelist tbody
@@ -432,12 +434,11 @@ div.wiki-message {
   border: solid transparent 2px;
 }
 th.gridbutton {
-  background-color: threedlightshadow;
+  background-color: ThreeDLightShadow;
   color: black;
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
   height: 18px;
   white-space: nowrap;
   max-height: 24px;
@@ -446,15 +447,14 @@ th.gridbutton {
   float: none;
   border-width: 1px;
   border-style: solid;
-  border-color: threedhighlight threeddarkshadow threeddarkshadow threedhighlight;
+  border-color: ThreeDHighlight ThreeDDarkShadow ThreeDDarkShadow ThreeDHighlight;
 }
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   text-decoration: none;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
-  background-color: threedlightshadow;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  background-color: ThreeDLightShadow;
   color: black;
 }
 
@@ -807,13 +807,14 @@ td.spacerow{background:#cad9ea;color:#000000}
 
 /* Sidebar */
 .box { background:#ffffff; border: 1px solid silver }
-.box-title { font-family: Tahoma; font-weight: normal; /*font-size: 11pt; */ background-color: #ccc; color: black; /*font-style: menu;*/ text-align: center; border: none; padding: 2px 0 2px 0;}
+.box-title { font-family: Tahoma, sans-serif; font-weight: normal; background-color: #ccc; color: black; text-align: center; border: none; padding: 2px 0 2px 0;}
 .box-data { width: 160px; font-size: 9pt; font-weight: normal; border: none; }
 .box-data .wiki { font-weight: normal; }
 td.sidebar { border-spacing: 0px; margin: 0ex;}
 
 /* plugin BoxRight */
 div.boxright {
+  background-color: #e9fbff;
   width: 200px; 
   right: 10px;
   padding: 0.5em; 

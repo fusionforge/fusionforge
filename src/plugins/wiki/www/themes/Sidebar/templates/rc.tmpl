@@ -1,9 +1,9 @@
 <?php // -*-php-*- 
-rcs_id('$Id: signin.tmpl 6261 2008-09-14 10:37:29Z vargenau $');
+// rcs_id('$Id: rc.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 <!-- RecentChangesCached Box -->
 <div class="portlet" id="p-rc">
-  <h5><?= _("RecentChanges") ?> <?= $WikiTheme->folderArrow('p-rc', 'Closed') ?></h5>
+  <h5><?php echo _("RecentChanges") ?> <?php echo $WikiTheme->folderArrow('p-rc', 'Closed') ?></h5>
   <div class="pBody" id="p-rc-body" style="display:none;">
 <?php
   require_once("lib/WikiTheme.php");

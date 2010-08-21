@@ -1,5 +1,5 @@
 /**
- *  $Id: main.css 6464 2009-01-30 18:07:40Z vargenau $
+ *  $Id: main.css 7331 2010-04-15 09:04:51Z vargenau $
  */ 
 
 /*
@@ -90,13 +90,6 @@ a:hover {
 a.stub {
 	color: #772233;
 }
-a.new, #p-personal a.new {
-	color: #ba0000;
-}
-a.new:visited, #p-personal a.new:visited {
-	color: #a55858;
-}
-
 img {
 	border: none;
 	vertical-align: middle;
@@ -137,6 +130,10 @@ h4, h5, h6 {
 	border-bottom: none;
 	font-weight: normal;
 }
+
+/* Because in some cases there is a <p> in nested lists */
+li p { margin:0; }
+
 ul { 
 	line-height: 1.5em;
 	list-style-type: square;
@@ -267,10 +264,6 @@ span.subpages { display: block; }
 	margin: 0;
 	padding: 0;
 }
-.error {
-	color: red;
-	font-size: larger;
-}
 .errorbox, .successbox {
 	font-size: larger;
 	border: 2px solid;
@@ -350,6 +343,7 @@ table.small {
   	clear: right;
 }
 #toc #toctitle,
+.toc .toctitle,
 .toc #toctitle {
 	display: inline;
 	border: none;
@@ -357,6 +351,7 @@ table.small {
 	font-size: 110%;
 	font-weight: bold;
 }
+.toc .toclist,
 .toc #toclist {
 	width: auto;
 	border: none;
@@ -713,6 +708,13 @@ td.pageinfo { font-weight: bold; }
 	font-size: smaller;
 	font-style: oblique;
 }
+
+/* RssFeed */
+div.rss { margin: 1em; padding: 1em; font-size: 0.9em; background-color: #eeeeee; border: thin dashed #aaaaaa; }
+div.feed { color: #333; margin: -0.5em; margin-bottom: 0em; padding: 0.3em; font-weight: bold; background-color: #f2f2f2; font-size: 1.2em; }
+div.itemdesc {  padding-left: 1em; }
+div.rssitem { border-top: thin dashed #aaaaaa; }
+a.rssicon { font-weight:normal; font-size:small; vertical-align:middle; }
 
 /**
  * Calendar plugin
@@ -1119,9 +1121,9 @@ li#pt-login {
 	text-decoration: none;
 	background-color: #dedede;
 }
-/* http://www.aboutus.org/UniversalWikiEditButton */
+/* http://universaleditbutton.org */
 #p-cactions li a#btn-edit {
-	background:  url('images/Edit-chalk-10gs.png') top left no-repeat;
+	background:  url('images/UEB16.png') top left no-repeat;
 	background-repeat: no-repeat;
 	padding-left: 20px !important;
 	text-transform: none;
@@ -1241,7 +1243,6 @@ fieldset.operaprefsection { margin-left: 15em }
 * > html #f-copyrightico { width: 88px; }
 * > html #bodyContent,
 * > html #bodyContent pre {
-	overflow-x: auto;
 	width: 100%;
 	padding-bottom: 25px;
 }
@@ -1558,7 +1559,6 @@ div.multipageimagenavbox {
 	 border: solid 1px silver;
 	 padding: 4px;
 	 margin: 1em;
-	 -moz-border-radius: 6px;
 	 background: #f0f0f0;
 }
 
@@ -1602,53 +1602,53 @@ table.multipageimage td {
 /**
  * PhpWiki Tables
  */
-.pagelist { }
+.pagelist {
+	font-size: smaller;
+}
 .pagelist thead td {
 	background: #e8e8e8;
 	text-decoration: none;
 	font-weight: bold;
-	font-size: smaller;
 }
 .pagelist thead td u { text-decoration: none; }
+.pagelist tr { vertical-align: top; }
 .pagelist tr.evenrow { background: #eee; }
 .pagelist tr.oddrow  { background: white; }
 th.gridbutton {
-	background-color: ThreedLightShadow;
+	background-color: ThreeDLightShadow;
 	color: black;
-	font-family: Tahoma, sans-serif, Arial, Helvetica;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
 	font-size: small;
 	font-weight: normal;
-	/*font-style: menu;*/
 	white-space: nowrap;
 	margin: 5px 0px;
 	max-height: 24px;
 	padding: 5px 0px 5px 0px;
 	border-width: 1px;
 	border-style: solid;
-	border-color: ThreedHighlight ThreedDarkShadow ThreedDarkShadow ThreedHighlight;
+	border-color: ThreeDHighlight ThreeDDarkShadow ThreeDDarkShadow ThreeDHighlight;
 }
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 	text-decoration: none;
 	font-size: small;
 	font-weight: normal;
-	/*font-style: menu;*/
-	font-family: Tahoma, sans-serif, Arial, Helvetica;
-	background-color: ThreedLightShadow;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	background-color: ThreeDLightShadow;
 	color: black;
 }
 
 .wikipaging { font-size: 80% }
 .wikipaging-disabled { color: #999 }
 
-/* <?plugin RawHtml <div class="boxright"> </div> */
-
+/* plugin BoxRight */
 div.boxright {
-	width: 200px; 
-	right: 10px;
-	padding: 0.5em; 
-	float: right; 
-	border: thin solid #888888; 
-	padding: 0.5em;
+  background-color: #e9fbff;
+  width: 200px; 
+  right: 10px;
+  padding: 0.5em; 
+  float: right; 
+  border: thin solid #888888; 
+  padding: 0.5em;
 }
 
 div#bottom {   
@@ -1685,8 +1685,6 @@ div.warning {
 	border: thin solid blue;
 	clear: both;
 }
-.error { font-family: monospace; font-size: 120%; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -1838,6 +1836,19 @@ h1 .backlinks { text-decoration: underline; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
 /*
+ * "E-mail" style blockquote
+ */
+blockquote.mail-style-quote {
+  border-left: medium #284 solid;
+  padding-left: 1em;
+  margin-left: 0;
+  margin-right: 0;
+}
+.mail-style-quote blockquote.mail-style-quote {
+  margin-left: -0.6em;
+}
+
+/*
  * table class="boxed"
  * will put a border around the table (but not around the cells)
  *
@@ -1908,7 +1919,61 @@ td.tdunselected {
      padding: 0.5em;
 }
 
+/* style for error messages
+   Use this style if you need to display an error, e.g:
+     User does not exist
+*/
+.error {
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffc0cb; /* pink */
+    border-color: red;
+    padding: 0.5em;
+}
+
 #edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {
 	background-color: #ffce7b;
 	border: 1px solid #ffa500;
+}
+
+/* PageTrail plugin */
+.pagetrail {
+     background-color: #FFFF99;
+     padding: 0.2em;
+}
+
+/* IncludePage plugin */
+.transclusion-title {
+  text-align: right;
+  font-style: oblique;
+  font-size:  smaller;
+  text-decoration: underline;
+  margin-bottom: 0.25ex;
+  margin-right:  0.25em;
+}
+.transclusion, .wiki-edithelp {
+  font-size: smaller;
+}
+.transclusion {
+  border: 1px solid gray;
+  padding-left:  0.8em;
+  padding-right: 0.8em;
+  padding-top:     0px;
+  padding-bottom:  0px;
+  margin-left:   0.25em;
+  margin-right:  0.25em;
+  margin-bottom: 0.1ex;
+}
+.wiki-edithelp {
+  background: white;
+  border: medium solid #fff8dc; /* darker ivory */
+  padding-left:  0.5em;
+  padding-right: 0.5em;
+  padding-top:    0.75ex;
+  padding-bottom: 0.75ex;
+  margin-left:  0;
+  margin-right: 0;
+  margin-top: 1ex;
+  margin-bottom: 1ex;
 }

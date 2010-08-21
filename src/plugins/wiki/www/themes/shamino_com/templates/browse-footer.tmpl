@@ -1,12 +1,12 @@
-<?php // -*-html-*-
-  rcs_id('$Id: browse-footer.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: browse-footer.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 <div class="toolbar">
 <?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
-  <?= Template('actionbar') ?>
-  <?= $WikiTheme->getButtonSeparator() ?>
+  <?php echo Template('actionbar') ?>
+  <?php echo $WikiTheme->getButtonSeparator() ?>
 <?php } ?>
-  <span class="editdate"><?= $WikiTheme->getOwnerMessage($page) ?>  <?= $WikiTheme->getLastModifiedMessage($revision) ?> <?= $WikiTheme->getAuthorMessage($revision) ?></span>
+  <span class="editdate"><?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?></span>
 <br />
-<a href="<?= PHPWIKI_BASE_URL ?>"><?=WIKI_NAME?></a> created with <a href="http://phpwiki.org/">PhpWiki</a> © 1998-2007 | <?= WikiLink(_("TermsOfUse")) ?>
+<a href="<?php echo PHPWIKI_BASE_URL ?>"><?php echo WIKI_NAME?></a> created with <a href="http://phpwiki.org/">PhpWiki</a> Â© 1998-2007 | <?php echo WikiLink(_("TermsOfUse")) ?>
 </div>

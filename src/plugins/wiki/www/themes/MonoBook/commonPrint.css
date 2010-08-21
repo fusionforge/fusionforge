@@ -1,5 +1,5 @@
 /**
- *  $Id: commonPrint.css 6413 2009-01-19 10:33:24Z vargenau $
+ *  $Id: commonPrint.css 7183 2009-10-05 16:59:27Z vargenau $
  */ 
 
 /*
@@ -10,10 +10,61 @@
 ** Copyright Alexander Limi
 */
 
+@page { 
+  size: A4 portrait; 
+  margin: 17mm 10mm 17mm 10mm;
+} 
+
+h1 {
+  string-set: header content();
+}
+
+@page :left {
+  @top-left {
+    content: "Phpwiki";
+  }
+  @top-right {
+    content: string(header); 
+  }
+  @bottom-left {
+    content: "Page " counter(page) " of " counter(pages);
+  }
+}
+
+@page :right {
+  @top-left {
+    content: string(header); 
+  }
+  @top-right {
+    content: "Phpwiki";
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+  }
+}
+
+@page :first {
+  @top-right {
+    content: normal;
+  }
+  @top-left {
+    content: normal;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 { page-break-after: avoid; } 
+
+/* Do not cut tables with class "nobreak" */
+
+table.nobreak {
+    page-break-inside: avoid !important;
+}
+
 /* Thanks to A List Apart (http://alistapart.com/) for useful extras */
 a.stub,
 a.new{ color:#ba0000; text-decoration:none; }
 
+.toc,
 #toc { 
     /*border:1px solid #2f6fab;*/
     border:1px solid #aaaaaa;
@@ -28,6 +79,10 @@ a.new{ color:#ba0000; text-decoration:none; }
 }
 .toctoggle, .editsection {
 	font-size: smaller;
+}
+
+div.toclist a::after {
+    content: leader('.') target-counter(attr(href), page);
 }
 
 /* images */
@@ -97,6 +152,7 @@ body {
     padding: 0;
 }
 
+div#p-personal,
 div.top,
 div#column-one,
 #colophon,
@@ -112,6 +168,7 @@ li#pt-logout,
 li#pt-login,
 div#p-logo,
 div.hint,
+fieldset.wiki-rc-action,
 span.debug {
     /* Hides all the elements irrelevant for printing */
     display: none;
@@ -130,7 +187,7 @@ ul {
     text-align: left;
 }
 #footer {
-    border-top: 1px solid black;
+    border: 1px solid black;
 }
 
 h1, h2, h3, h4, h5, h6
@@ -148,7 +205,7 @@ pre {
     white-space: pre;
     font-size: 8pt;
     overflow: auto;
-    padding: 1em 0;
+    padding: 0;
 }
 
 table.listing,

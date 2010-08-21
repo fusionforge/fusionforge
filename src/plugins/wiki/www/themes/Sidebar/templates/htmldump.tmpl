@@ -1,5 +1,5 @@
-<?php  // -*-html-*-
-rcs_id('$Id: htmldump.tmpl,v 1.8 2007/01/02 13:28:16 rurban Exp $');
+<?php  // -*-php-*-
+// rcs_id('$Id: htmldump.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 /*
  * This template is used only for html file dumps, and is responsible
  * mainly for the outer level <html> stuff and the and <head>.
@@ -10,7 +10,7 @@ rcs_id('$Id: htmldump.tmpl,v 1.8 2007/01/02 13:28:16 rurban Exp $');
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?=$charset?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset?>" />
 <?php /**
        * Additional navigation links are provided here in the html header for browsers
        * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
@@ -18,30 +18,30 @@ rcs_id('$Id: htmldump.tmpl,v 1.8 2007/01/02 13:28:16 rurban Exp $');
        * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
        *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
        */ ?>
-<link rel="home" title="<?=HOME_PAGE?>" href="<?=WikiURL(HOME_PAGE)?>" />
-<link rel="help" title="<?=_("HowToUseWiki")?>" href="<?=WikiURL(_("HowToUseWiki"))?>" />
-<link rel="copyright" title="<?=COPYRIGHTPAGE_TITLE?>" href="<?=COPYRIGHTPAGE_URL?>" />
-<link rel="author" title="<?=AUTHORPAGE_TITLE?>" href="<?=AUTHORPAGE_URL?>" />
+<link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
+<link rel="help" title="<?php echo _("HowToUseWiki")?>" href="<?php echo WikiURL(_("HowToUseWiki"))?>" />
+<link rel="copyright" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />
+<link rel="author" title="<?php echo AUTHORPAGE_TITLE?>" href="<?php echo AUTHORPAGE_URL?>" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Language" content="<?=$GLOBALS['LANG']?>" />
+<meta http-equiv="Content-Language" content="<?php echo $GLOBALS['LANG']?>" />
 <?php $ROBOTS_CONTENT = isset($ROBOTS_META) ? $ROBOTS_META : "noindex,nofollow"; ?>
-<meta name="robots" content="<?= $ROBOTS_CONTENT ?>" />
+<meta name="robots" content="<?php echo $ROBOTS_CONTENT ?>" />
 <?php if (!empty($PAGE_DESCRIPTION)) { ?>
-<meta name="description" content="<?=$PAGE_DESCRIPTION?>" />
+<meta name="description" content="<?php echo $PAGE_DESCRIPTION?>" />
 <?php } ?>
 <?php if (!empty($PAGE_KEYWORDS)) { ?>
-<meta name="keywords" content="<?=$PAGE_KEYWORDS?>" />
+<meta name="keywords" content="<?php echo $PAGE_KEYWORDS?>" />
 <?php } ?>
-<meta name="language" content="<?=$GLOBALS['LANG']?>" />
+<meta name="language" content="<?php echo $GLOBALS['LANG']?>" />
 <meta name="document-type" content="Public" />
 <meta name="document-rating" content="General" />
 <meta name="generator" content="PhpWiki" />
-<meta name="PHPWIKI_VERSION" content="<?=PHPWIKI_VERSION?>" />
+<meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
 
 <?php if (!empty($relative_base)) { ?>
-<base href="<?=$relative_base?>" />
+<base href="<?php echo $relative_base?>" />
 <?php } ?>
-<?= $WikiTheme->getCSS() ?>
+<?php echo $WikiTheme->getCSS() ?>
 <?php
   // avoid redundant bookmark title for custom home page
   if ($page->getName() == WIKI_NAME && HOME_PAGE == WIKI_NAME)
@@ -49,13 +49,13 @@ rcs_id('$Id: htmldump.tmpl,v 1.8 2007/01/02 13:28:16 rurban Exp $');
   else
       $pagetitle = " - ". AsString($TITLE);
 ?>
-<title><?=WIKI_NAME.$pagetitle?></title>
+<title><?php echo WIKI_NAME.$pagetitle?></title>
 </head>
 <?php if ($WikiTheme->DUMP_MODE) { ?>
-<?= Template('logo') ?>
+<?php echo Template('logo') ?>
 <?php } ?>
-<?= Template('body') ?>
+<?php echo Template('body') ?>
 <div id="footer">
-  <?= Template('dump-footer') ?>
+  <?php echo Template('dump-footer') ?>
 </div>
 </html>

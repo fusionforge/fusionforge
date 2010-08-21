@@ -1,5 +1,7 @@
-<?php // -*-php-*- ?>
-<!-- $Id: actionbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: actionbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
+
 <div id="actionbar">
 
 <?php
@@ -13,17 +15,17 @@
 ?>
 
  <ul>
-   <li><a class="wikilink" href="<?=WikiURL(HOME_PAGE)?>"><?= WIKI_NAME ?></a>
+   <li><a class="wikilink" href="<?php echo WikiURL(HOME_PAGE)?>"><?php echo WIKI_NAME ?></a>
      <ul>
        <li>
-         <?= WikiLink(_("HomePage"), "button") ?>
+         <?php echo WikiLink(_("HomePage"), "button") ?>
        </li>
        <li>
-         <?= WikiLink(_("RecentChanges"), "button") ?>
+         <?php echo WikiLink(_("RecentChanges"), "button") ?>
        </li>
        <?php if (!empty($user) && $user->isAdmin()) { ?>
        <li>
-       <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "button") ?>
+       <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "button") ?>
        </li>
        <?php } ?>
        <?php if (!empty($user)) { ?>
@@ -35,45 +37,45 @@
           $UserCalPageTodayTitle = $UserCalPageTitle . SUBPAGE_SEPARATOR . strftime("%Y-%m-%d", time());
          ?>
          <li>
-         <?=$SEP?><?= WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
+         <?php echo $SEP?><?php echo WikiLink($UserCalPageTodayTitle, "button", _("Today")) ?>
          </li>
        <?php } ?>
       <?php } ?>
       <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
-        <li><?=$SEP?><?= Button("pdf") ?></li>
+        <li><?php echo $SEP?><?php echo Button("pdf") ?></li>
        <?php } ?>
      </ul>
    </li>
    <li>Editing
      <ul>
-       <li><?= $EditB ?></li>
+       <li><?php echo $EditB ?></li>
        <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
-        <li><?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock')?></li>
+        <li><?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock')?></li>
         <?php if (ENABLE_PAGEPERM) { ?>
-          <li><?=$SEP?><?= Button('chown') ?></li>
-          <li><?=$SEP?><?= Button('setacl') ?></li>
+          <li><?php echo $SEP?><?php echo Button('chown') ?></li>
+          <li><?php echo $SEP?><?php echo Button('setacl') ?></li>
         <?php } ?>
        <?php } ?>
        <?php if ($user->isAdmin() or mayAccessPage('remove', $page->getName())) { ?>
-        <li><?=$SEP?><?= Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></li>
-        <li><?=$SEP?><?= Button('remove') ?></li>
+        <li><?php echo $SEP?><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></li>
+        <li><?php echo $SEP?><?php echo Button('remove') ?></li>
        <?php } ?>
      </ul>
    </li>
    <li>Information
      <ul>
        <li>
-         <a href="<?=WikiURL($revision,array('action'=>'diff'))?>" >
-         <?= $WikiTheme->getLastModifiedMessage($revision) ?></a>
+         <a href="<?php echo WikiURL($revision,array('action'=>'diff'))?>" >
+         <?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
        </li>
        <li>
-         <?=$SEP?><?= Button("PageHistory", _("PageHistory")) ?><?=$SEP?>
+         <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?><?php echo $SEP?>
        </li>
-       <li> <?= Button("PageInfo", _("PageInfo")) ?> </li>
+       <li> <?php echo Button("PageInfo", _("PageInfo")) ?> </li>
          <?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?>
          <li>
-           <?=$SEP?><?= Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
-           <?=$SEP?><?= Button("PageDump", _("PageDump")) ?>
+           <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
+           <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
          </li>
          <?php } ?>
      </ul>
@@ -88,14 +90,14 @@
        </li>
        <li>
          <?php if ($revision) { ?>
-           <?= Button("LikePages", _("LikePages")) ?>
+           <?php echo Button("LikePages", _("LikePages")) ?>
          <?php } ?>
        </li>
      </ul>
    </li>
    <li>User info
      <ul>
-       <?= Template('signin') ?>
+       <?php echo Template('signin') ?>
      </ul>
    </li>
  </ul>

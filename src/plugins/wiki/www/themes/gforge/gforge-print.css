@@ -1,4 +1,6 @@
-/*
+/**
+ * $Id: gforge-print.css 7312 2010-03-31 09:49:47Z vargenau $
+ *
  * Copyright (C) 2008 Alcatel-Lucent
  *
  * This file is part of PhpWiki.
@@ -43,10 +45,25 @@
 /* Do not print the wiki navigation and edition bars */
 .toolpalettes { display: none; }
 
+/* Do not print Page Trail line */
+.pagetrail { display: none; }
+
+/* Do not print main wiki browse banner */
+.browsebanner { display: none; }
+
+/* Do not print date of last edition */
+.editdate { display: none; }
+
+/* Print links in black */
+a { color: black; }
+
 /* Do not print icons in front of hyperlinks */
 a.interwiki img { display: none; }
 a.named-interwiki img { display: none; }
 a.namedurl img { display: none; }
+
+/* Do not print "none" sorting icon */
+img[src="/wiki/themes/gforge/buttons/no_order.png"] { display: none; }
 
 /**
  * Table of content
@@ -58,9 +75,15 @@ div.toc {
 /* Do not print TOC toggle image */
 #toctoggle { display: none; }
 
-div.toc p#toctitle, h1, h2, h3, h4, h5, h6 {
+div.toc p.toctitle, h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid black;
 }
+
+/*
+div.toclist a::after {
+    content: leader('.') target-counter(attr(href), page);
+}
+*/
 
 table.boxed, table.bordered, table.bordered th, table.bordered td {
     border-color: black;
@@ -71,7 +94,8 @@ table.boxed, table.bordered, table.bordered th, table.bordered td {
     border: none;
 }
 
-hr {
-    color: black;
-    background-color: black;
+/* Do not cut tables with class "nobreak" */
+
+table.nobreak {
+    page-break-inside: avoid !important;
 }

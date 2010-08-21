@@ -12,7 +12,7 @@ function hookit() {
 // png alpha transparency fixes
 function fixalpha(){
     // bg
-    if(version >= 5.5) {
+    if(version >= 5.5 && document.getElementById('p-logo')) {
         var logoa = document.getElementById('p-logo').firstChild;
         var bg = logoa.currentStyle.backgroundImage;
         if (bg.match(/\.png/i) != null){

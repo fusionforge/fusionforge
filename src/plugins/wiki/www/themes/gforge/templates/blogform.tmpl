@@ -1,0 +1,28 @@
+<?php // -*- php -*-
+// rcs_id('$Id: blogform.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
+<div class="wikiblog wikiblog-form">
+<form action="<?php echo $request->getPostURL()?>" method="post" name="editpage"
+      accept-charset="<?php echo $charset?>" id="wikiblog-form">
+  <input type="hidden" name="edit[pagename]" value="<?php echo $PAGENAME?>" />
+  <input type="hidden" name="mode" value="add" />
+  <div class="wikiblog-form">
+     <?php echo _("Headline").': ' ?><br />
+     <input id="wikiblog-summary" class="wikitext" type="text" style="width:540px" size="60"
+                   maxlength="256" name="edit[summary]" value="" />
+     <?php echo $EDIT_TOOLBAR ?>
+     <a id="editarea"></a>
+     <textarea id="edit-content" class="edit-content" rows="8" cols="68" style="width:540px"
+               name="edit[content]"></textarea>
+     <br />
+     <input id="wikiblog-submit" type="submit" value="<?php echo _("Add Entry")?>"
+                     name="edit[save]" class="wikiaction" />
+  </div>
+
+<hr noshade="noshade" />
+<div id="newMarkup" class="wiki-edithelp">
+  <?plugin IncludePage page=_("TextFormattingRules") section=_("Synopsis") quiet=1?>
+</div>
+<?php echo $HIDDEN_INPUTS?>
+</form>
+</div>

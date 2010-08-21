@@ -1,28 +1,27 @@
 <?php
-  rcs_id('$Id: forumadd.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: forumadd.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+  // This template is used for the WikiForum plugin.
 ?>
-
 <div class="wikiforum wikiforum-reply">
-<form action="<?=$request->getPostURL()?>" method="post" class="wikiaction"
-      accept-charset="<?=CHARSET?>">
-  <input type="hidden" name="forum[pagename]" value="<?=$PAGENAME?>" />
-  <?= HiddenInputs($request->getArgs()) ?>
+<form action="<?php echo $request->getPostURL()?>" method="post" class="wikiaction"
+      accept-charset="<?php echo CHARSET?>">
+  <input type="hidden" name="forum[pagename]" value="<?php echo $PAGENAME?>" />
+  <?php echo HiddenInputs($request->getArgs()) ?>
   <table class="wikiforum-reply">
-     <caption><?=_("Post new")?></caption>
+     <caption><?php echo _("Post new")?></caption>
      <col class="label" width="1*" /><col class="input" width="100*" />
-     <tr><th align="right"><?=_("Title:")?></th>
+     <tr><th align="right"><?php echo _("Title:")?></th>
          <td><input class="wikitext" type="text" size="60"
-                    maxlength="256" name="forum[summary]" value="<?= isset($forum['summary']) ? $forum['summary'] : '' ?>" /></td>
+                    maxlength="256" name="forum[summary]" value="<?php echo isset($forum['summary']) ? $forum['summary'] : '' ?>" /></td>
      </tr>
-    <tr><th align="right"><?=_("Reply")?>:</th>
+    <tr><th align="right"><?php echo _("Reply")?>:</th>
          <td><textarea class="forumedit" rows="5" cols="60"
-                       name="forum[body]"><?= isset($forum['body']) ? $forum['body'] : ''?></textarea></td>
+                       name="forum[body]"><?php echo isset($forum['body']) ? $forum['body'] : ''?></textarea></td>
      </tr>
      <tr><td colspan="2" align="center" class="submit-button"
-             ><input type="submit" value="<?=_("Add Message")?>"
+             ><input type="submit" value="<?php echo _("Add Message")?>"
                      name="forum[add]" class="wikiaction" /></td>
      </tr>
   </table>
 </form>
 </div>
-

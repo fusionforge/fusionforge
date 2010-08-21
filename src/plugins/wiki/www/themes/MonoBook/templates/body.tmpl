@@ -1,36 +1,36 @@
-<?php // -*-html-*-
-rcs_id('$Id: body.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: body.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 // Todo: set the body attr dynamically. here class="ns-2" for mozilla
 ?>
-<body <?= $WikiTheme->getMoreAttr('body') ?>>
+<body <?php echo $WikiTheme->getMoreAttr('body') ?>>
     <div id="global-wrapper">
       <div id="column-content">
 	<div id="content">
-	  <?= Template('top') ?>
+	  <?php echo Template('top') ?>
 	  <div id="bodyContent">
-	    <?= $CONTENT ?>
+	    <?php echo $CONTENT ?>
 
 	    <!-- end content -->
 	    <div class="visualClear"></div>
 	  </div>
 	</div>
 	<?php if (empty($NOSIGNIN)) { ?>
-	  <?= Template('signin') ?>
+	  <?php echo Template('signin') ?>
 	<?php } ?>
-	<?= Template('logo') ?>
+	<?php echo Template('logo') ?>
       </div>
       <div id="column-one">
-	<?= Template('navbar') ?>
+	<?php echo Template('navbar') ?>
 	<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
-	  <?= Template('actionbar') ?>
-	  <?= Template('tags') ?>
+	  <?php echo Template('actionbar') ?>
+	  <?php echo Template('tags') ?>
 	<?php } ?>
       </div>
       <div id="footer"><?php // for top & bottom toolbars stylesheet ?>
-        <?= Template('browse-footer') ?>
+        <?php echo Template('browse-footer') ?>
       </div>
       <div id="bottom">
-	<?= Template('bottom') ?>
+	<?php echo Template('bottom') ?>
       </div>
     </div>
 </body>

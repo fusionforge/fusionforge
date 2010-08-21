@@ -1,33 +1,34 @@
-<!-- -*-html-*- -->
-<!-- $Id: viewsource.tmpl 6211 2008-08-26 16:45:07Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: viewsource.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 
 <div class="wikitext" id="viewform">
 
 <?php 
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
 if ($page->get('locked') && !$user->isAdmin()) { ?>
-  <p><strong><?=_("Note:")?></strong>
-  <?=_("This page has been locked by the administrator and cannot be edited.")?></p>
+  <p><strong><?php echo _("Note:")?></strong>
+  <?php echo _("This page has been locked by the administrator and cannot be edited.")?></p>
 <?php } ?>
 
 <?php if (! $revision->isCurrent()) { ?>
-  <p><?=_("You are viewing an old revision of this page.")?>
-  <?= Button('viewsource', _("View the current version"), $page)?>.</p>
+  <p><?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('viewsource', _("View the current version"), $page)?>.</p>
 <?php } ?>
 
 <!-- Dummy form else NS4 does not like the textarea -->
-<form method="post" action="<?=$request->getPostURL()?>" accept-charset="<?=CHARSET?>">
+<form method="post" action="<?php echo $request->getPostURL()?>" accept-charset="<?php echo CHARSET?>">
 <textarea class="wikiedit"
           name="content"
-          rows="<?=$request->getPref('editHeight')?>"
-          cols="<?=$request->getPref('editWidth')?>"
+          rows="<?php echo $request->getPref('editHeight')?>"
+          cols="<?php echo $request->getPref('editWidth')?>"
 	  readonly="readonly"
-          ><?= $PAGE_SOURCE ?></textarea>
-<?= HiddenInputs($request->getArgs()) ?>
+          ><?php echo $PAGE_SOURCE ?></textarea>
+<?php echo HiddenInputs($request->getArgs()) ?>
 </form>
 <hr />
-<a href="<?=WikiURL($page,array('action'=>_("PageHistory")))?>"
-   ><?= $WikiTheme->getLastModifiedMessage($revision) ?></a>
+<a href="<?php echo WikiURL($page,array('action'=>_("PageHistory")))?>"
+   ><?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
 <br />
 
 </div>

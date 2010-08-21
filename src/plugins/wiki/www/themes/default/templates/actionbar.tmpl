@@ -1,71 +1,67 @@
 <?php // -*-php-*-
-rcs_id('$Id: actionbar.tmpl 6409 2009-01-17 14:40:16Z rurban $');
+// rcs_id('$Id: actionbar.tmpl 7591 2010-07-02 08:05:07Z vargenau $');
 ?>
-<?php
-  $dbh = $request->getDbh();
-  $isAdmin = $user->isAdmin();
-  $pagename = $page->getName();
-  $isActionPage = $request->_isActionPage($pagename, false);
-?>
-<div class="portlet" id="p-cactions">
-  <h5>Views</h5>
-  <ul>
-    <?php if ($request->getArg('action') != "") { ?>
-      <?= ActionButton("browse", _("View Page"), false, array('title' => "View the page [alt-c]")) ?>
-    <?php } else { ?>
-      <li class="selected"><a class="named-wiki" name="browse"><?= _("View Page") ?></a></li>
-    <?php } ?>
-    <?php if (($isAdmin or mayAccessPage('edit', $pagename)) and $revision) {
-            $label = $revision->isCurrent() ? _("Edit") : _("Edit Old Revision"); ?>
-      <?= ActionButton("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision"), 
-		       false, array('id' => 'btn-edit', 'title' => "You can edit this page. Please use the preview button before saving. [alt-e]")) ?>
+<?php if (!$WikiTheme->DUMP_MODE) { ?>
+<?php /* I would like not to have to use these tables, and managed to
+       * get this stuff to work more or less correctly using
+       * CSSs float:left; and float:right;.  However float:right; seems
+       * to cause MSIE4.01/NT to hang. 
+       * So, we use tables...  */ ?>
+<table summary="Toolbar 1: Page actions and user login."
+       width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr valign="baseline">
+  <td>
+  <div id="actionbuttons">
+    <?php if ((!$page->get('locked') || $user->isAdmin()) and $revision) { ?>
+      <?php echo Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision"), false, array('id'=>'btn-edit')) ?>
       <?php if (ENABLE_WYSIWYG) { ?>
-        <?= ActionButton(array("action" => "edit", "mode"=> "wysiwyg"), "Wysiwyg Editor", false, array('id' => 'btn-wysiwyg-edit')) ?>
+        <?php echo $SEP?><?php echo Button(array("action" => "edit", "mode"=> "wysiwyg"), "Wysiwyg Editor", false, array('id' => 'btn-wysiwyg-edit')) ?>
       <?php } ?>
     <?php } else { ?>
-      <?= ActionButton("viewsource", _("View Source")) ?>
+      <?php echo Button("viewsource", _("View Source")) ?>
     <?php } ?>
-    <?= ActionButton(_("PageHistory"),_("History"),false,array('title'=>"Past versions of this page. [alt-h]")) ?>
-    <?= ActionButton("diff") ?> 
-    <? if ( $user->isSignedIn() ) { ?>
-      <?= ActionButton("WatchPage", _("Watch"), false, 
-		       array('title'=>"Add/Remove this to/from the list of pages you're monitoring for changes [alt-l]")) ?>
+    <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
+      <?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock') ?>
+    <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
+      <?php echo $SEP?><?php echo Button('chown') ?>
+      <?php echo $SEP?><?php echo Button('setacl') ?>
+      <?php echo $SEP?><?php echo Button('rename') ?>
+    <?php }} ?>
+    <?php if ($revision and ($user->isAdmin() or mayAccessPage('remove', $page->getName()))) { ?>
+      <?php echo $SEP?><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
+      <?php echo $SEP?><?php echo Button('remove') ?>
     <?php } ?>
-  </ul>
-</div>
-
-<?php if ($user->isSignedIn()) { ?>
-<div class="portlet" id="p-tbx">
-  <h5>Special Actions <?= $WikiTheme->folderArrow('p-tbx', 'Closed') ?></h5>
-  <div class="pBody" id="p-tbx-body" style="display:none;">
-  <ul>
-     <?php if ($isAdmin or mayAccessPage('edit', $pagename)) { ?>
-      <?= ActionButton('rename') ?>
-     <?php } ?>
-     <?php if (!empty($revision) and ($isAdmin or mayAccessPage('remove', $pagename))) { ?>
-      <?= ActionButton('remove') ?>
-      <?= ActionButton('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
-     <?php } ?>
-     <?php if ($isAdmin or mayAccessPage('change', $pagename)) { ?>
-      <?= ActionButton($page->get('locked') ? 'unlock' : 'lock') ?>
-      <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $pagename)) { ?>
-       <?= ActionButton('chown') ?>
-       <?= ActionButton('setacl') ?>
-     <?php }} ?>
-     <?= ActionButton(array('action'=>'PageInfo'), _("PageInfo"),$pagename) ?>
-     <?= ActionButton(_("AuthorHistory")) ?>
-     <?= ActionButton(_("PageHistory")) ?>
-     <?= ActionButton("diff") ?> 
-     <?php if ($isAdmin) { ?>
-      <?= ActionButton(_("PageDump")) ?>
-      <?php if (DEBUG & _DEBUG_SQL and USECACHE) {
-        $PurgeCache = Button(array('nocache' => 'purge'),
-                     _("PurgeHtmlCache"), $pagename);
-        $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed.")); ?>
-        <?= $PurgeCache ?>
-      <?php } ?>
-    <?php } // isAdmin ?>
-  </ul>
+    <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
+    <?php echo $SEP?><?php echo Button("diff") ?> 
+    <?php echo $SEP?><?php echo Button("PageInfo", _("PageInfo")) ?>
+<?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?> 
+    <!-- Buttons really only for debugging -->
+    <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?>
+    <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
+<?php
+    if (DEBUG & _DEBUG_SQL and USECACHE) {
+      $PurgeCache = Button(array('nocache' => 'purge'),
+                     _("PurgeHtmlCache"), $page->getName());
+      $PurgeCache->addTooltip(_("Purge HTML cache for this page. Regenerate from WikiMarkup when next accessed."));
+?>
+      <?php echo $SEP?><?php echo $PurgeCache ?>
+<?php } ?>
+    <!-- End debugging buttons -->
+<?php } ?>
+<?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+      <?php echo $SEP?><?php echo Button("pdf","Pdf",'wikiclear',array('id'=>'btn-pdf')) ?>
+<?php } ?>
   </div>
-</div>
-<?php } //isSignedIn ?>
+  </td>
+<?php if (empty($NOSIGNIN)) { ?>
+<?php
+/* valign="top" is not ideal here but required to get reasonable alignment
+   with the other action buttons in some browsers, like OmniWeb and Safari
+   (therefore probably Konquorer too) */ ?>
+  <td align="right" valign="top">
+    <div id="signin"><?php echo Template('signin') ?></div>
+  </td>
+<?php } ?>
+</tr>
+</table>
+<?php } ?>

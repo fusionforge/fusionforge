@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: redirect.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: redirect.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 /* 
  * Redirect output.
  */
@@ -9,17 +9,16 @@ if (browserVersion() >= 4.0)
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- $Id: redirect.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
-<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET?>" />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="generator" content="PhpWiki" />
-<meta name="PHPWIKI_VERSION" content="<?=PHPWIKI_VERSION?>" />
-<base href="<?=PHPWIKI_BASE_URL?>" />
-<?= $WikiTheme->getCSS() ?>
-<title><?=WIKI_NAME . ' - ' . _("Redirect")?></title>
+<meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
+<base href="<?php echo PHPWIKI_BASE_URL?>" />
+<?php echo $WikiTheme->getCSS() ?>
+<title><?php echo WIKI_NAME . ' - ' . _("Redirect")?></title>
 
 <!-- Sneaky tricks to try to get browser to "redirect" -->
-<meta http-equiv="Refresh" content="2;url=<?=$REDIRECT_URL?>"/>
+<meta http-equiv="Refresh" content="2;url=<?php echo $REDIRECT_URL?>"/>
 <script type="text/javascript"><!--
   function redirect(url) {
     if (typeof location.replace == 'function')
@@ -36,18 +35,13 @@ if (browserVersion() >= 4.0)
 <body>
 
 <script type="text/javascript"><!--
-redirect("<?=new RawXML(addslashes($REDIRECT_URL))?>");
+redirect("<?php echo new RawXML(addslashes($REDIRECT_URL))?>");
 --></script>
 
-<h1><?=_("Redirect")?></h1>
+<h1><?php echo _("Redirect")?></h1>
 <p class="redirect-message">
-  <?= fmt("Your browser should have redirected you to %s.",
+  <?php echo fmt("Your browser should have redirected you to %s.",
           HTML::a(array('href' => $REDIRECT_URL), $REDIRECT_URL)) ?>
 </p>
 </body>
-<?php
-if (defined('DEBUG') and DEBUG) {
-    printf("<!-- phpwiki source: \n%s-->\n", $RCS_IDS);
-}
-?>
 </html>

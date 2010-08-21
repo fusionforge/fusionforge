@@ -18,7 +18,7 @@ function cDomExtension( hParent, aSelectors, hInitFunction )
 	this.hInitFunction = hInitFunction
 }
 
-cDomExtensionManager = 
+var cDomExtensionManager = 
 {
 	aExtensions : new Array()
 }
@@ -149,44 +149,44 @@ cDomExtensionManager.initSelector = function( hParent, sSelector, hInitFunction 
 				switch( aSelectorData[ 2 ] )
 				{
 					case '.' : 	if( hGroup[ nI ].className == aSelectorData[ 3 ] )
-								{
-									hInitFunction( hGroup[ nI ] )
-								}
-								break
+							{
+								hInitFunction( hGroup[ nI ] )
+							}
+							break
 								
 					case '#' : 	if( hGroup[ nI ].id == aSelectorData[ 3 ] )
+							{
+								hInitFunction( hGroup[ nI ] )
+							}
+							break
+								
+					case '@' : 	aAttributeData = hAttributeRegEx.exec( aSelectorData[ 3 ] )
+							sAttribute = hGroup[ nI ].getAttribute( aAttributeData[ 1 ] )
+							if(  sAttribute != null && sAttribute.length > 0  )
+							{					
+								if( aAttributeData[ 3 ] != '' )
+								{
+									if( aAttributeData[ 2 ] == '=' )
+									{
+										if( sAttribute == aAttributeData[ 3 ] )
+										{
+											hInitFunction( hGroup[ nI ] )
+										}
+									}
+									else /* the case is like ~ */
+									{
+										if( sAttribute.indexOf( aAttributeData[ 3 ] ) >= 0 )
+										{
+											hInitFunction( hGroup[ nI ] )
+										}
+									}
+								}
+								else
 								{
 									hInitFunction( hGroup[ nI ] )
 								}
-								break
-								
-					case '@' : 	aAttributeData = hAttributeRegEx.exec( aSelectorData[ 3 ] )
-								sAttribute = hGroup[ nI ].getAttribute( aAttributeData[ 1 ] )
-								if(  sAttribute != null && sAttribute.length > 0  )
-								{					
-									if( aAttributeData[ 3 ] != '' )
-									{
-										if( aAttributeData[ 2 ] == '=' )
-										{
-											if( sAttribute == aAttributeData[ 3 ] )
-											{
-												hInitFunction( hGroup[ nI ] )
-											}
-										}
-										else /* the case is like ~ */
-										{
-											if( sAttribute.indexOf( aAttributeData[ 3 ] ) >= 0 )
-											{
-												hInitFunction( hGroup[ nI ] )
-											}
-										}
-									}
-									else
-									{
-										hInitFunction( hGroup[ nI ] )
-									}
-								}
-								break
+							}
+							break
 				}
 			}
 		}

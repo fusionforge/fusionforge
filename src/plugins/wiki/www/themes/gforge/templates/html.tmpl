@@ -1,18 +1,12 @@
-<?php  // -*-html-*-
-rcs_id('$Id: html.tmpl 6189 2008-08-22 13:18:48Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: html.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
+<?php
 /*
  * No header for Gforge (already provided)
- *
  */
 ?>
 <?php $WikiTheme->header() ?>
-<?= $WikiTheme->getMoreHeaders() ?>
-<?= Template('body') ?>
+<?php echo $WikiTheme->getMoreHeaders() ?>
+<?php echo Template('body') ?>
 <?php $WikiTheme->footer() ?>
-<?php 
-if (defined('DEBUG') and DEBUG) {
-    echo "<!-- phpwiki source: \n";
-    echo $RCS_IDS;
-    echo "-->\n";
-}
-?>

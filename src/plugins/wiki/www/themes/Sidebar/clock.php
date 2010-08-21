@@ -1,7 +1,8 @@
 <?php 
+  // rcs_id('$Id: clock.php 7589 2010-07-02 07:31:33Z vargenau $');
   $ora = isset($GLOBALS['WikiTheme']) ? DATA_PATH . '/' . $GLOBALS['WikiTheme']->_findFile("ora.swf") : "ora.swf";
 ?>
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="160" height="160" align="middle">
-   <param name="movie" value="<?= $ora ?>"><param name="quality" value="high">
-   <embed src="<?= $ora ?>" quality="high" type="application/x-shockwave-flash" width="160" height="160"></embed>
+   <param name="movie" value="<?php echo $ora ?>"><param name="quality" value="high">
+   <embed src="<?php echo $ora ?>" quality="high" type="application/x-shockwave-flash" width="160" height="160"></embed>
 </object>

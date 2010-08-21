@@ -1,17 +1,18 @@
-<?php // -*-html-*- ?>
-<!-- $Id: body.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
-<body<?= $WikiTheme->getMoreAttr('body') ?>>
+<?php // -*-php-*-
+// rcs_id('$Id: body.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
+<body<?php echo $WikiTheme->getMoreAttr('body') ?>>
 <!-- Page title and logo -->
 <h1><a class="wikilink"
-       href="<?=WikiURL(HOME_PAGE)?>"
-       ><img src="<?=$WikiTheme->getImageURL('logo')?>"
-             border="0" alt="<?=fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>"
-             align="bottom" /></a> <?=$HEADER?></h1>
-<?= $CONTENT ?>
-<?= Template('navbar') ?>
+       href="<?php echo WikiURL(HOME_PAGE)?>"
+       ><img src="<?php echo $WikiTheme->getImageURL('logo')?>"
+             border="0" alt="<?php echo fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>"
+             align="bottom" /></a> <?php echo $HEADER?></h1>
+<?php echo $CONTENT ?>
+<?php echo Template('navbar') ?>
 <!-- RELATEDPAGES were here. -->
 
-<?= $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+<?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
 
-<?php if (defined('DEBUG') && DEBUG) { ?><?= Template('debug') ?><?php } ?>
+<?php if (defined('DEBUG') && DEBUG) { ?><?php echo Template('debug') ?><?php } ?>
 </body>

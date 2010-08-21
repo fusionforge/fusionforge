@@ -1,5 +1,12 @@
 <?php
-rcs_id('$Id: themeinfo.php 6248 2008-09-07 15:13:56Z vargenau $');
+// Avoid direct call to this file.
+// PHPWIKI_VERSION is defined in lib/prepend.php
+if (!defined('PHPWIKI_VERSION')) {
+    header("Location: /");
+    exit;
+}
+
+// rcs_id('$Id: themeinfo.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
  * tiny actionbar, only Edit (if signed in) and Info => PageInfo,
  *   all other Actionbars buttons in info.tmpl

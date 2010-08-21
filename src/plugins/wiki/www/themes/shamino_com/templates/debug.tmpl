@@ -1,13 +1,13 @@
-<?php // -*-html-*-
-  rcs_id('$Id: debug.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: debug.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 <!-- shamino.com debug -->
 <div class="debug">
 <?php global $RUNTIMER; ?>
-<span id="xhtml-validator"><a class="wikilink" href="http://validator.w3.org/check/referer" target="_top">Valid XHTML 1.0</a> &nbsp; <a class="wikilink" href="http://jigsaw.w3.org/css-validator/check/referer" target="_top">Valid CSS</a>
+<span id="xhtml-validator"><a class="wikilink" href="http://validator.w3.org/check/referer">Valid XHTML 1.0</a> &nbsp; <a class="wikilink" href="http://jigsaw.w3.org/css-validator/check/referer">Valid CSS</a>
 </span>
-  <span><?=fmt("Page Execution took %s seconds", $RUNTIMER->getStats()) ?>
+  <span><?php echo fmt("Page Execution took %s seconds", $RUNTIMER->getStats()) ?>
 <?php $mem = @getMemoryUsage(); if ($mem) { ?>
-  <?=fmt(", Memory: %s", $mem) ?>
+  <?php echo fmt(", Memory: %s", $mem) ?>
 <?php } ?></span></div>
-<br clear="all" class="clear-floats" />
+<br class="clear-floats" />

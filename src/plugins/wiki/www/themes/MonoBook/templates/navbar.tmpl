@@ -1,5 +1,6 @@
-<?php // -*-php-*- ?>
-<!-- $Id: navbar.tmpl 6261 2008-09-14 10:37:29Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <?php
 // With MonoBook it is similar to Sidebar, named boxes at the left.
 // actionbuttons, navigation, search, toolbox
@@ -8,35 +9,35 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
 <!-- The left navigation/search bar -->
 <!-- Here you should add favorite Links and Categories -->
 <div class="portlet" id="p-navigation">
-  <h5><?= _("Navigation") ?></h5>
+  <h5><?php echo _("Navigation") ?></h5>
   <div class="pBody">
     <ul>
-      <li id="n-mainpage"><?= WikiLink(HOME_PAGE, "",_("Home page")) ?></li>
-      <li><? $link = WikiLink(_("RecentChanges"), "",_("Recent changes")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?= $link ?></li>
-      <li id="n-recentcomments"><?= WikiLink(_("RecentComments"), "",_("Recent comments")) ?></li>
-      <li id="n-recentnewpages"><?= WikiLink(_("RecentNewPages"), "",_("Recent new pages")) ?></li>
-      <li id="n-likepages"><?= Button(array('action'=>'LikePages'),_("Like pages"), $page->getName()) ?></li>
-      <li id="n-randompage"><?= WikiLink(_("RandomPage"), "",_("Random page")) ?></li>
-<li id="n-help"><?= WikiLink(_("PhpWikiDocumentation"),"",_("Help")) ?></li>
+      <li id="n-mainpage"><?php echo WikiLink(HOME_PAGE, "",_("Home page")) ?></li>
+      <li><? $link = WikiLink(_("RecentChanges"), "",_("Recent changes")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?php echo $link ?></li>
+      <li id="n-recentcomments"><?php echo WikiLink(_("RecentComments"), "",_("Recent comments")) ?></li>
+      <li id="n-recentnewpages"><?php echo WikiLink(_("RecentNewPages"), "",_("Recent new pages")) ?></li>
+      <li id="n-likepages"><?php echo Button(array('action'=>'LikePages'),_("Like pages"), $page->getName()) ?></li>
+      <li id="n-randompage"><?php echo WikiLink(_("RandomPage"), "",_("Random page")) ?></li>
+<li id="n-help"><?php echo WikiLink(_("PhpWikiDocumentation"),"",_("Help")) ?></li>
     </ul>
   </div>
 </div>
 
 <div class="portlet" id="p-search">
-  <h5><?= _("Search") ?></h5>
+  <h5><?php echo _("Search") ?></h5>
   <div class="pBody">
-<?= Template("search",
+<?php echo Template("search",
              array('SEARCH_BEFORE' => WikiLink(_("FindPage"), "",_("Find page")),
 		   'SEARCH_AFTER' => HTML::input(array('id' => 'searchGoButton',
 						       'type'=>'submit',
 						       'value'=>_("Go"))))) ?>
-<!-- <form action="<?= WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?=$charset?>">
-      <?= WikiLink(_("FindPage"), "searchButton",_("Search:")) ?>
+<!-- <form action="<?php echo WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?php echo $charset?>">
+      <?php echo WikiLink(_("FindPage"), "searchButton",_("Search:")) ?>
       <input type="hidden" name="auto_redirect" value="1" />
       <input type="text"  name="s" size="12" maxlength="256"
-	      title='<?=_("Quick Search")?>'
-	      onmouseover="window.status='<?=_("Quick Search")?>'; return true;"
+	      title='<?php echo _("Quick Search")?>'
+	      onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
 	      onmouseout="window.status=''; return true;" />
     </form>
 -->
@@ -44,37 +45,37 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
 </div>
 
 <div class="portlet" id="p-tb">
-  <h5><?= _("Toolbox") ?></h5>
+  <h5><?php echo _("Toolbox") ?></h5>
   <div class="pBody">
     <ul>
     <?php if ($revision) { ?>
-      <li id="t-whatlinkshere"><?= Button(array('action'=>'BackLinks'), _("What links here"), $page->getName()) ?></li>
+      <li id="t-whatlinkshere"><?php echo Button(array('action'=>'BackLinks'), _("What links here"), $page->getName()) ?></li>
     <?php } ?>
     <?php $links = $page->getPageLinks(); if ($links->count() > 1) { ?>
-      <li id="t-recentchangeslinked"><?= $WikiTheme->makeLinkButton($revision,_("Related changes"),_("RelatedChanges")) ?></li>
+      <li id="t-recentchangeslinked"><?php echo $WikiTheme->makeLinkButton($revision,_("Related changes"),_("RelatedChanges")) ?></li>
     <?php } ?> 
     <?php if ($user->isAdmin()) { ?>
-      <li><?= WikiLink(_("PhpWikiAdministration"), "", _("Administration")) ?></li>
+      <li><?php echo WikiLink(_("PhpWikiAdministration"), "", _("Administration")) ?></li>
     <?php } ?>
     <?php if ($user->isSignedIn()) { ?>
-      <li><? $link = WikiLink(_("UpLoad"),"",_("Upload file")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?= $link ?></li>
+      <li><? $link = WikiLink(_("UpLoad"),"",_("Upload file")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?php echo $link ?></li>
     <?php } ?>
     <li>
       <?php $PrintableLink = $WikiTheme->makeButton(_("Printable version"), "javascript:PrinterStylesheet();", 'wikiaction'); ?>
 <script type="text/javascript"><!--
-document.write('<?= $PrintableLink ?>'); // -->
+document.write('<?php echo $PrintableLink ?>'); // -->
 </script>
 <noscript>
-  <?= $WikiTheme->makeButton(_("Printable version"), "?format=printable", 'wikiaction') ?>
+  <?php echo $WikiTheme->makeButton(_("Printable version"), "?format=printable", 'wikiaction') ?>
 </noscript>
 </li>
     <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { 
       // Do not display the pdf icon
       $btn = new Button(_("Display as Pdf"), WikiURL($page->getName(), array('action' => 'pdf')), 'wikiaction');
       ?>
-      <li><?= $btn ?></li>
+      <li><?php echo $btn ?></li>
     <?php } ?>
-    <li><?= WikiLink(_("AllPages"), "",_("All pages")) ?></li>
+    <li><?php echo WikiLink(_("AllPages"), "",_("All pages")) ?></li>
   </ul>
   </div>
 </div>

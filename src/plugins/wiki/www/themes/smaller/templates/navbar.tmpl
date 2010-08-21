@@ -1,25 +1,26 @@
-<?php // -*-html-*- ?>
-<!-- $Id: navbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <!-- The top navigation/search bar -->
-<form action="<?= WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?=$charset?>">
+<form action="<?php echo WikiURL(_("TitleSearch"))?>"
+      method="get" accept-charset="<?php echo $charset?>">
   <div id="navbuttons">
-   <?= WikiLink(_("RecentChanges"), "","News") ?>
-   <?=$SEP?><?= WikiLink(_("FindPage"), "","Search:") ?>
+   <?php echo WikiLink(_("RecentChanges"), "","News") ?>
+   <?php echo $SEP?><?php echo WikiLink(_("FindPage"), "","Search:") ?>
    <input type="hidden" name="auto_redirect" value="1" />
       <input type="text"  name="s" size="12" maxlength="256"
-             title='<?=_("Quick Search")?>'
-             onmouseover="window.status='<?=_("Quick Search")?>'; return true;"
+             title='<?php echo _("Quick Search")?>'
+             onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
              onmouseout="window.status=''; return true;" />
     <?php if (!empty($revision)) { ?>
-     <?=$SEP?><?= Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?>
-     <?=$SEP?><?= Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?>
     <?php } ?>
     <?php if (!empty($user) && $user->isAdmin()) { ?>
-     <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
+     <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
     <?php } ?>
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
-     <?=$SEP?><?= WikiLink(_("UserPreferences"), "","Preferences") ?>
+     <?php echo $SEP?><?php echo WikiLink(_("UserPreferences"), "","Preferences") ?>
     <?php } ?>
   </div>
 </form>

@@ -1,9 +1,16 @@
 <?php //-*-php-*-
-rcs_id('$Id: themeinfo.php 6248 2008-09-07 15:13:56Z vargenau $');
+// Avoid direct call to this file.
+// PHPWIKI_VERSION is defined in lib/prepend.php
+if (!defined('PHPWIKI_VERSION')) {
+    header("Location: /");
+    exit;
+}
+
+// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /**
  * A PhpWiki theme inspired by the Aqua appearance of Mac OS X.
- * 
+ *
  * The images used with this theme depend on the PNG alpha channel to
  * blend in with whatever background color or texture is on the page.
  * When viewed with an older browser, the images may be incorrectly
@@ -64,7 +71,7 @@ class WikiTheme_MacOSX extends WikiTheme {
         else {
             $default_text = $wikiword;
         }
-        
+      
         $url = WikiURL($wikiword, array('action' => 'create'));
         //$link = HTML::span(HTML::a(array('href' => $url), '?'));
         $button = $this->makeButton('?', $url);
@@ -80,8 +87,6 @@ class WikiTheme_MacOSX extends WikiTheme {
             $link->unshiftContent(HTML::u($this->maybeSplitWikiWord($default_text)));
             $link->setAttr('class', 'wikiunknown');
         }
-        if ($request->getArg('frame'))
-            $link->setAttr('target', '_top');
 
         return $link;
     }
@@ -156,13 +161,11 @@ class WikiTheme_MacOSX extends WikiTheme {
 
 $WikiTheme = new WikiTheme_MacOSX('MacOSX');
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

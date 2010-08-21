@@ -1,26 +1,29 @@
-<?php // -*-html-*- ?>
-<!-- $Id: navbar.tmpl 6189 2008-08-22 13:18:48Z vargenau $ -->
-<!-- The top navigation/search bar -->
-
+<?php // -*-php-*-
+// rcs_id('$Id: navbar.tmpl 7625 2010-07-20 09:09:04Z vargenau $');
+?>
 <?php 
 $curuserprefs = $user->getPreferences();
+$dbh = $request->getDbh();
+$username = $user->UserName();
 ?>
 
-   <tr><td class="submenu"><?= WikiLink(_("HomePage"), "","Home Page") ?></td></tr>
-      <tr><td class="submenu"><?= WikiLink(_("RecentChanges"), "","Recent Changes") ?></td></tr>
-      <tr><td class="submenu"><?= WikiLink(_("SpecialPages"), "","Special Pages") ?></td></tr>
-   <?php if ($curuserprefs->get('searchMenuItem')) { ?>
-     <tr><td class="submenu"><?= WikiLink(_("FindPage"), "","Search") ?></td></tr>
+   <tr><td class="submenu"><?php echo WikiLink(_("HomePage"), "","Home Page") ?></td></tr>
+   <tr><td class="submenu"><?php echo WikiLink(_("RecentChanges"), "","Recent Changes") ?></td></tr>
+   <tr><td class="submenu"><?php echo WikiLink(_("SpecialPages"), "","Special Pages") ?></td></tr>
+   <tr><td class="submenu"><?php echo WikiLink(_("FindPage"), "","Search") ?></td></tr>
+   <?php if ($curuserprefs->get('randomPageMenuItem')) { ?>
+     <tr><td class="submenu"><?php echo WikiLink(_("RandomPage"), "","Random Page") ?></td></tr>
    <?php } ?>
-    <?php if (!empty($revision)) { ?>
-     <?php if (0) { ?>
-       <tr><td class="submenu"><?= Button(array('action'=>'LikePages'),_("Like Pages"),$page->getName()) ?></td></tr>
+   <?php if ($curuserprefs->get('likePagesMenuItem')) { ?>
+     <tr><td class="submenu"><?php echo Button(array('action'=>'LikePages'),_("Like Pages"),$page->getName()) ?></td></tr>
+   <?php } ?>
+   <tr><td class="submenu"><?php echo WikiLink(_("UpLoad"), "","Upload File") ?></td></tr>
+   <?php if (!empty($user) && $user->isAdmin()) { ?>
+     <tr><td class="submenu"><?php echo WikiLink(_("PhpWikiAdministration"), "","Wiki Admin") ?></td></tr>
+   <?php } ?>
+   <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     <?php if ($dbh->isWikiPage($username)) { ?>
+       <tr><td class="submenu"><?php echo WikiLink($username, "","My User Page") ?></td></tr>
      <?php } ?>
-    <?php } ?>
-   <tr><td class="submenu"><?= WikiLink(_("UpLoad"), "","Upload File") ?></td></tr>
-    <?php if (!empty($user) && $user->isAdmin()) { ?>
-     <tr><td class="submenu"><?= WikiLink(_("PhpWikiAdministration"), "","Admin") ?></td></tr>
-    <?php } ?>
-    <?php if (!empty($user) && $user->isSignedIn()) { ?>
-     <tr><td class="submenu"><?= WikiLink(_("UserPreferences"), "","Preferences") ?></td></tr>
-    <?php } ?>
+     <tr><td class="submenu"><?php echo WikiLink(_("UserPreferences"), "","User Preferences") ?></td></tr>
+   <?php } ?>

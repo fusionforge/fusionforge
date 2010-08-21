@@ -12,7 +12,7 @@ backgroundcolor[7] = '#8888aa';
 function changebg(color) { document.bgColor = backgroundcolor[color]; }
 //--></script>
 </head><body bgcolor="#8888aa">
-<?
+<?php
 $dir = opendir(".");
 while($fileName = readdir($dir)) 
 if (!(strcmp(substr($fileName, -4), ".png")))
@@ -23,7 +23,7 @@ bgcolor:
 <script type="text/javascript"><!--
 for (var n = 0; n < backgroundcolor.length; n++)
 { document.write(
-' <a href="#" onMouseOver="javascript:changebg(' + n + ')">' + backgroundcolor[n] + '</a>'
+' <a href="#" onmouseover="javascript:changebg(' + n + ')">' + backgroundcolor[n] + '</a>'
 ); }
 //--></script>
 <hr>

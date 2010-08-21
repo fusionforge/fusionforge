@@ -109,6 +109,13 @@ function myCreateElementXHTML(t) {
 }
 
 function isSVGavailable() {
+  var ua = navigator.userAgent;
+  if (ua.match("AppleWebKit")) {
+      return null;
+  }
+  if (navigator.appName.slice(0,5)=="Opera") {
+      return null;
+  }
   var nd = myCreateElementXHTML("center");
   nd.appendChild(document.createTextNode("To view the "));
   var an = myCreateElementXHTML("a");

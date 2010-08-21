@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css 6480 2009-02-02 14:13:24Z vargenau $
+ * $Id: phpwiki.css 7331 2010-04-15 09:04:51Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -209,38 +209,37 @@ h1 { margin: 0; font-size: 140% }
  */
 table, td { font-family: Arial, Helvetica, sans-serif; }
 caption { font-family: Arial, Helvetica, sans-serif; }
-.pagelist { }
+.pagelist { 
+  font-size: smaller;
+}
 .pagelist thead td {
   background: #e8e8e8;
   text-decoration: none;
   font-weight: bold;
-  font-size: smaller;
 }
 .pagelist thead td u { text-decoration: none; }
 .pagelist tr.evenrow { background: #eee; }
 .pagelist tr.oddrow  { background: white; }
 th.gridbutton {
-  background-color: ThreedLightShadow;
+  background-color: ThreeDLightShadow;
   color: black;
   font-family: Tahoma, Arial, Helvetica, sans-serif;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
   white-space: nowrap;
   margin: 5px 0px;
   max-height: 24px;
   padding: 5px 0px 5px 0px;
   border-width: 1px;
   border-style: solid;
-  border-color: ThreedHighlight ThreedDarkShadow ThreedDarkShadow ThreedHighlight;
+  border-color: ThreeDHighlight ThreeDDarkShadow ThreeDDarkShadow ThreeDHighlight;
 }
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   text-decoration: none;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
-  background-color: ThreedLightShadow;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  background-color: ThreeDLightShadow;
   color: black;
 }
 
@@ -844,13 +843,14 @@ td.spacerow{background:#cad9ea;color:#000000}
 
 /* Sidebar */
 .box { background:#ffffff; border: 1px solid silver }
-.box-title { font-family: Tahoma, Arial, Helvetica, sans-serif; font-weight: normal; /*font-size: 11pt; */ background-color: #ccc; color: black; /*font-style: menu;*/ text-align: center; border: none; padding: 2px 0 2px 0;}
+.box-title { font-family: Tahoma, Arial, Helvetica, sans-serif; font-weight: normal; background-color: #ccc; color: black; text-align: center; border: none; padding: 2px 0 2px 0;}
 .box-data { width: 160px; font-size: 9pt; font-weight: normal; border: none; }
 .box-data .wiki { font-weight: normal; }
 td.sidebar { border-spacing: 0px; margin: 0ex;}
 
 /* plugin BoxRight */
 div.boxright {
+  background-color: #e9fbff;
   width: 200px; 
   right: 10px;
   padding: 0.5em; 
@@ -1046,9 +1046,9 @@ img.linkicon { vertical-align: middle; }
  */
 /* color: inherit; and background: inherit; display as lime in NS4 */
 
-/* http://www.aboutus.org/UniversalWikiEditButton */
+/* http://universaleditbutton.org */
 div#actionbuttons a#btn-edit {
-  background:  url('images/Edit-chalk-10g.png') bottom left no-repeat;
+  background:  url('images/UEB16.png') bottom left no-repeat;
   background-repeat: no-repeat;
   padding-left: 20px !important;
   padding-right: 0.5em !important;

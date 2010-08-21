@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: random.php 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // rcs_id('$Id: random.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
  */
 class randomImage {
@@ -45,14 +45,11 @@ class imageSet extends fileSet {
     }
 };
 
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

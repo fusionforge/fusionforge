@@ -1,6 +1,12 @@
 <?php // -*-php-*-
+// Avoid direct call to this file.
+// PHPWIKI_VERSION is defined in lib/prepend.php
+if (!defined('PHPWIKI_VERSION')) {
+    header("Location: /");
+    exit;
+}
 
-rcs_id('$Id: themeinfo.php 6248 2008-09-07 15:13:56Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /**
  * This theme is by design completely css-based so unfortunately it
@@ -32,7 +38,7 @@ class WikiTheme_SpaceWiki extends WikiTheme {
             return false;       // use default
         return '_SpaceWiki_PageHistory_Formatter';
     }
-    
+  
     function load() {
 	// CSS file defines fonts, colors and background images for this
 	// style.  The companion '*-heavy.css' file isn't defined, it's just
@@ -83,14 +89,11 @@ class WikiTheme_SpaceWiki extends WikiTheme {
 
 $WikiTheme = new WikiTheme_SpaceWiki('SpaceWiki');
 
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

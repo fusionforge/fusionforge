@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: RecentChanges.php 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // rcs_id('$Id: RecentChanges.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
  * Extensions/modifications to the stock RecentChanges (and PageHistory) format.
  */
@@ -41,18 +41,11 @@ extends _PageHistory_HtmlFormatter
 }
 */
 
-// $Log: not supported by cvs2svn $
-// Revision 1.1  2004/12/15 17:47:32  rurban
-// fix RecentChanges links
-// fix footer layout
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

@@ -1,13 +1,50 @@
 /**
- * $Id: phpwiki.css,v 1.49 2005/04/11 19:41:23 rurban Exp $
+ * $Id: gforge.css 7376 2010-05-04 13:37:54Z vargenau $
  *
- * This incarnation of this stylesheet is a complete rewrite from the
- * ground up.
+ * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
+ * Copyright (C) 2008-2009 Alcatel-Lucent
  *
- * Mozilla's "DOM Inspector" Sidebar was an invaluable troubleshooting
- * tool for mapping the more complex CSS node selectors, such as those
- * used to reference the various CalendarPlugin elements.
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Style Sheet ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
  */
+
+/* Because in some cases there is a <p> in nested lists */
+li p { margin:0; }
 
 /* Hide the elements we put in just to get around NS4 bugs. */
 div.br { display: none; }
@@ -18,6 +55,7 @@ div.br { display: none; }
 /* This breaks NS4, but is necessary for IE4. */
 div.wikitext { width: auto; }
 
+div.wikitext table p { margin-top: 0.3em;  margin-bottom: 0.3em;}
 
 /**
  * General
@@ -27,6 +65,14 @@ img { vertical-align: baseline; }
 input { margin: 0.1em; }
 input.numeric { text-align: right; }
 
+fieldset {
+    background-color: #e0f3f7;
+}
+
+legend {
+    border: 1px solid #d8d8e7;
+    background-color: white;
+}
 
 /**
  * Wiki Forms
@@ -52,16 +98,6 @@ div.wikiaction, form.wikiadmin div {
 /* Add space between the input field and following buttons, but not after the last button. */
 div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin input[type=file] { margin-right: 0.5em; }
 
-
-/**
- * Links
-  border-top:  1px solid #b2b2d1;
-  border-left: 1px solid #d2d2f1;
-  border-bottom: 1px solid #86929e;
-  border-right:  1px solid #86929e;
- */
-
-
 div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
 
 /* QuestionMark */
@@ -79,6 +115,7 @@ div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
 /* Link icons */
 img.linkicon { vertical-align: middle; }
 
+img.inlineimage { vertical-align: middle; }
 
 /**
  * Edit Page & View Source
@@ -99,13 +136,6 @@ img.linkicon { vertical-align: middle; }
 }
 
 /**
- * Other
- */
-/* PHP Warnings */
-div.errors { font-size: smaller }
-
-
-/**
  * General
  */ 
 img { border: 0ex; }
@@ -121,17 +151,11 @@ caption {
   caption-side: top;
   text-align: left;
   margin-bottom: .5ex;
-  /* Allow the caption to extend to the full page width
-     Mac ie5.1 ignores this*/
-  width: 100%;
 }
-
 
 /**
  * Wiki
  */
-
-div.wikitext hr { height: 1px; }
 
 div.wikitext pre { 
   font-family: monospace; 
@@ -149,15 +173,12 @@ div.wikitext {
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  border-bottom: 1px #aaaaaa solid;
   padding-bottom: 1em;
   clear: both;
 }
-/* .interwiki-map thead td { text-decoration: underline; } */
 
 /* Mozilla RecentChanges Sidebar */
 body.sidebar {
-/*  font-size: smaller; */
   margin: 0.5em;
 }
 body.sidebar div.wikitext {
@@ -166,24 +187,11 @@ body.sidebar div.wikitext {
 body.sidebar div.wikitext ul { padding-left: 1em; }
 body.sidebar h2 { margin-top: 0; }
 
-
-/**
- * Wiki Forms
- * 
- * The div inside the wikiadmin upload form does not
- * have a class yet, so it must be referenced indirectly
- */
-/* div.wikiaction { background-color: #eee; } */
-/* div.wikiadmin { background-color: #fee; } */
-/* form.wikiadmin div { background-color: #fee; } */
-
-
 /**
  * Link styles
  */
 .wiki, .named-wiki {
   /* text-decoration: none; */
-  /* font-weight: normal; */
   font-weight: bold;
 }
 
@@ -191,10 +199,13 @@ body.sidebar h2 { margin-top: 0; }
 a.wikiaction, a.wiki-rc-action, a.wikiunsafe,
 input.wikiaction, input.button, input.wikiadmin {
   text-decoration: none;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
   /* don't wrap text buttons */
   white-space: nowrap;
-  /*font-size: inherit; */
+}
+
+input.wikiaction, input.button, input.wikiadmin {
+  margin-right: 1em;
+  margin-left: 1em;
 }
 
 .wikiunsafe { background-color: #fcc; }
@@ -217,12 +228,10 @@ input.wikiaction, input.button, input.wikiadmin {
 .backlinks {
   text-decoration: underline;
 }
-h1 .backlinks { text-decoration: none; }
+h1 .backlinks { text-decoration: none; color: inherit; }
 
 /* Interwiki links */
-/* .wikipage  { font-weight: bold; } */
 .wikipage  { font-weight: normal; }
-/* .interwiki { text-decoration: none; } */
 .interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
@@ -237,25 +246,19 @@ div.toc {
 
 div.toc ul { list-style: none }
 
-div.toc p#toctitle { font-weight: bold; font-size: 1.6em; margin-bottom: 1ex; }
+div.toc p.toctitle { font-weight: bold; font-size: 1.6em; margin-bottom: 1ex; }
 div.toc p { margin: 0; }
 
-#toclist a { text-decoration: none; }
+.toclist a { text-decoration: none; }
 
 /**
  * headings
  */
-div.toc p#toctitle, h1, h2, h3, h4, h5, h6 { 
+div.toc p.toctitle, h2, h3, h4, h5, h6 { 
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
         padding-top: .5em;
         padding-bottom: .17em;
         border-bottom: 1px solid #aaaaaa;
-}
-
-h1 { margin: 0; /* font-size: 140% */ }
-
-h1, h1 .backlinks, h2, h3, h4, h5, h6 {
-    color: #565c5e; /* Alcatel-Lucent grey */
 }
 
 h1, h1 .backlinks, h2, .wikitext h2 a, h3, .wikitext h3 a, h4, .wikitext h4 a, h5, h6 {
@@ -271,6 +274,7 @@ h1, h1 .backlinks, h2, .wikitext h2 a, h3, .wikitext h3 a, h4, .wikitext h4 a, h
   font-weight: bold;
 }
 .pagelist thead td u { text-decoration: none; }
+.pagelist tr { vertical-align: top; }
 .pagelist tr.evenrow { background: #eee; }
 .pagelist tr.oddrow  { background: white; }
 th.gridbutton {
@@ -300,8 +304,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 .toolbar {
   padding: 0;
   margin:  0;
-  /* background: white; */
-  /* border: 1px solid; */
 }
 .toolbar li {
   margin-left: -20px; /* Because there is no list symbol */
@@ -371,18 +373,12 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-  padding-top: 0.25ex;
+  padding-top: 0.5ex;
+  border-top: 1px #aaaaaa solid;
 }
-/*
-div#logo {
-  float: right;
-}
-*/
+
 #logo img {
   float: right;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
   border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
@@ -459,6 +455,12 @@ li.LSRow {
   list-style-image: none;
 }
 
+/* PageTrail plugin */
+.pagetrail {
+     background-color: #FFFF99;
+     padding: 0.2em;
+}
+
 /* IncludePage plugin */
 .transclusion-title {
   text-align: right;
@@ -493,9 +495,6 @@ li.LSRow {
   margin-top: 1ex;
   margin-bottom: 1ex;
 }
-.wiki-edithelp .wiki {
-  /* color: #5454ff;*/
-}
 .wiki-edithelp p {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   padding-left:  0.5em;
@@ -504,7 +503,6 @@ li.LSRow {
   padding-bottom: 0.5ex;
   margin: 0;
 }
-
 
 /**
  * Calendar plugin
@@ -560,9 +558,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
   border: 1px #ccc solid;
   color: black;
   border-top: 1px solid #494f5d;
@@ -574,27 +569,11 @@ table.cal td.cal-today a.cal-hide {  }
   padding-left:  .125em;
   padding-right: .125em;
   padding: 0;
-  /* "paper" borders */
-  /*border-top: 2px #d2d2d2 solid;
-  border-left:  2px #b2b2b2 solid;
-  border-bottom:  2px #e8e6df solid;
-  border-right: 2px #e8e6df solid;*/
-/*  padding-left:  0em; 
-  padding-bottom: 0ex;*/
-/*  border-style: inset;*/
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
-  /* I'm not sure what the intent of this was, but it's
-   *  not valid CSS: */
-  /* display: editarea; */
   clear: both;
 }
 .diff .block {
   background: #ddd;
   padding-left: 1em;
-  /* for NS4 */
-  /*border: none;*/
 }
 
 /* individual blocks */
@@ -608,11 +587,7 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    0;
   margin-bottom: 0;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
   border: 1px black solid;
-  /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
@@ -621,9 +596,6 @@ table.cal td.cal-today a.cal-hide {  }
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
 }
 /* + - line prefix */
@@ -631,7 +603,6 @@ table.cal td.cal-today a.cal-hide {  }
   font-weight: normal;
   font-family: monospace;
   color: black;
-  /* for NS4 */
   margin-left: 0;
   border: none;
 }
@@ -649,22 +620,18 @@ table.cal td.cal-today a.cal-hide {  }
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
   background: #fcc;
-  /* for NS4 */
   border: none;
 }
 /* blocks containing added words */
 .diff .final, .diff .added {
   background: #cfc;
-  /* for NS4 */
   border: none;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del { background: #f99; }
 /* added words */
 .diff ins { background: #9f9; }
-
 
 /**
  * PageHistory, Info
@@ -675,31 +642,15 @@ td.pageinfo { font-weight: bold; }
   font-style: oblique;
 }
 
-
-/**
- * Other
- */
-.printer, .no-css { display: none; }
-
-/* PHP Warnings */
 div.errors {
-  color: black;
-  background: #eee;
-  margin-top:    1em;
-  margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
-  padding-top:    0.8ex;
-  padding-bottom: 0;
-  border: medium solid red;
-  clear: both;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffc0cb; /* pink */
+    border-color: red;
+    padding: 0.5em;
 }
-h4.errors {
-  color: red;
-  margin:  0;
-  padding: 0;
-  text-decoration: underline;
-}
+
 div.warning {
   color: black;
   background: #eee;
@@ -728,7 +679,6 @@ div.warning {
 .hint {
   color: black;
   background: #eeeeee;
-   /* font-size: smaller; */
   font-style: italic;
   margin-left: 3em;
   padding: 0.5ex 0.5em;
@@ -843,17 +793,12 @@ h3.wikiblog-summary {
   margin: 0 0 1ex 0;
 }
 
-div.wikiblog.wikiblog-form {
-  /* background-color: #eee; */
-}
-
 table.wikiblog-form {
   width: auto;
   border-collapse: collapse;
   margin: 0.25em 0;
 }
 .wikiblog-form caption {
-  /* background-color: #ccf; */
   caption-side: top;
   font-weight: bold;
   text-align: left;
@@ -921,7 +866,6 @@ table.interwiki-map {
   margin: 1em 0 0.5em 0;
 }
 
-
 .clear-floats {
   clear: both;
 }
@@ -942,20 +886,25 @@ td.spacerow{background:#cad9ea;color:#000000}
 
 /* Sidebar */
 .box { background:#ffffff; border: 1px solid #888888 }
-.box-title { font-weight: normal; /*font-size: 11pt; */ background-color: #ccc; color: black; /*font-style: menu;*/ text-align: center; }
+.box-title { font-weight: normal; background-color: #ccc; color: black; text-align: center; }
 .box-data { width: 160px; font-size: 9pt; font-weight: normal; }
 .box-data .wiki { font-weight: normal; }
 td.sidebar { border-spacing: 0px; margin: 0ex;}
 
 /* RssFeed */
-div.rss { margin: 1em; padding: 1em; font-size: 0.9em; background-color: #eeeeee; border: thin dashed #aaaaaa; }
-div.feed { color: #333; margin: -0.5em; margin-bottom: 0em; padding: 0.3em; font-weight: bold; background-color: #f2f2f2; font-size: 1.2em; }
-div.itemdesc {  padding-left: 1em; }
-div.rssitem { border-top: thin dashed #aaaaaa; }
+div.rss { margin: 1em; padding: 1em; }
+div.feed { margin: -0.5em; margin-bottom: 0em; padding: 0.3em;
+           font-weight: bold; font-size: 1.2em; }
+.chandesc { font-weight: bold; }
+div.rssitem { padding-top:1em; padding-bottom: 1em;
+              border-top: 2px solid #565c5e; /* Alcatel-Lucent grey */ }
+div.itemname { padding-bottom: 1em; font-weight: bold; }
+div.itemdesc { padding-left: 1em; }
+div.authordate { font-style: italic; }
 a.rssicon { font-weight:normal; font-size:small; vertical-align:middle; }
 
 /* SqlResult */
-table.sqlresult { 
+table.sqlresult {
   border: 1px outset gray;
   background: white;
   margin: 0.5ex 0.5em;
@@ -1043,6 +992,7 @@ table.boxed th, table.bordered th {
 
 /* plugin BoxRight */
 div.boxright {
+  background-color: #e9fbff;
   width: 200px; 
   right: 10px;
   padding: 0.5em; 
@@ -1066,6 +1016,27 @@ td.tdselected {
 td.tdunselected {
    color: black;
    background-color: #e9e8de;
+}
+
+/* Main wiki browse banner */
+.browsebanner table {
+   width: 100%;
+   background-color: #e9fbff;
+   border-style: solid;
+   border-color: blue;
+   border-width: 2px;
+}
+
+.browsebanner table td {
+   text-align: center;
+   font-weight: bold;
+   font-style: oblique;
+}
+
+.rateit {
+   font-size: 60%;
+   font-weight: bold;
+   vertical-align: middle;
 }
 
 /* For emacs users

@@ -1,5 +1,5 @@
-<?php // -*-html-*-
-rcs_id('$Id: signin.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: signin.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 
 if (empty($FORMNAME))
     $FORMNAME = 'signin';
@@ -7,27 +7,27 @@ else
     $NOFORM = true;
 ?>
 <?php if (empty($NOFORM)) { ?>
-  <form method="post" action="<?= $request->getPostURL() ?>" accept-charset="<?=$charset?>" name="<?=$FORMNAME?>">
-  <?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
+  <form method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="<?php echo $charset?>" name="<?php echo $FORMNAME?>">
+  <?php echo HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php } ?>
 <?php if ($user->isSignedIn()) {
   $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
 ?>
 <span>
-  <?= fmt("You are signed in as %s", WikiLink($user->getId(), 'auto')) ?>
-  <?=$SEP?>
+  <?php echo fmt("You are signed in as %s", WikiLink($user->getId(), 'auto')) ?>
+  <?php echo $SEP?>
 </span>
-  <script language="JavaScript" type="text/javascript"><!--
+  <script type="text/javascript"><!--
     document.write('<input type="hidden" name="auth[logout]" value="0" />');
     function SignOut(form) { 
-      var form = document.forms["<?=$FORMNAME?>"];
+      var form = document.forms["<?php echo $FORMNAME?>"];
       form.elements["auth[logout]"].value = 1;
       form.submit();
     }
-    document.write('<?=$SignOutB?>'); // -->
+    document.write('<?php echo $SignOutB?>'); // -->
   </script>
   <noscript>
-    <?= Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?>
+    <?php echo Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?>
   </noscript>
 <?php } else {
   $SignInInput = HTML::input(array('type' => 'text',
@@ -49,11 +49,11 @@ else
       form.submit();
     }
     //-->
-    document.write('&nbsp;<?=
+    document.write('&nbsp;<?php echo 
     _("Sign In")
     ?>');
   </script>
-  <?= $SignInInput ?>
+  <?php echo $SignInInput ?>
 <?php } ?>
 <?php if (empty($NOFORM)) { ?>
   </form>

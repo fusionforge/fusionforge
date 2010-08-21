@@ -1,18 +1,18 @@
-<?php // -*-html-*-
-rcs_id('$Id: top.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: top.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 <div id="header">
 <?php if ( $request->getArg('action') == 'browse' ) { ?>
 <div id="yoursiteheader">
 <!-- Insert Flash or Logo here -->
-<a href=""><?= WIKI_NAME ?></a>
+<a href=""><?php echo WIKI_NAME ?></a>
 </div>
 <?php } ?>
 </div>
 <?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
 <div id="actionbar">
-<?= Template('actionbar') ?>
+<?php echo Template('actionbar') ?>
 </div>
-<div id="pagetrail"><p><?=_("Page Trail")?>: <?plugin PageTrail numberlinks=7 ?></p></div>
+<div id="pagetrail"><?php echo _("Page Trail")?>: <?plugin PageTrail numberlinks=7 ?></div>
 <?php } ?>
 

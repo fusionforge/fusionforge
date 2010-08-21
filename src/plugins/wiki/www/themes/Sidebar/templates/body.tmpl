@@ -1,37 +1,37 @@
 <?php // -*-php-*-
-rcs_id('$Id: body.tmpl 6409 2009-01-17 14:40:16Z rurban $');
+// rcs_id('$Id: body.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 // Set the body attr dynamically. here class="ns-2" for Mozilla
 ?>
-  <body <?= $WikiTheme->getMoreAttr('body') ?>>
+  <body <?php echo $WikiTheme->getMoreAttr('body') ?>>
     <div id="global-wrapper">
       <div id="column-content">
 	<div id="content">
-	  <?= Template('top') ?>
+	  <?php echo Template('top') ?>
 	  <div id="bodyContent">
-	    <?= $CONTENT ?>
+	    <?php echo $CONTENT ?>
 
 	    <!-- end content -->
 	    <div class="visualClear"></div>
 	  </div>
 	</div>
 <?php if (!$WikiTheme->DUMP_MODE) { ?>
-	<?= Template('logo') ?>
+	<?php echo Template('logo') ?>
         <div id="footer"><?php // for top & bottom toolbars stylesheet ?>
-          <?= Template('browse-footer') ?>
+          <?php echo Template('browse-footer') ?>
         </div>
         <div id="bottom">
-	  <?= Template('bottom') ?>
+	  <?php echo Template('bottom') ?>
         </div>
       </div>
       <div id="column-one">
 <?php if (ALLOW_ANON_USER or $user->isAuthenticated()) { ?>
-	<?= Template('navbar') ?>
+	<?php echo Template('navbar') ?>
 	<?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
-	  <?= Template('actionbar') ?>
+	  <?php echo Template('actionbar') ?>
 	<?php } ?>
 <?php } // isAuthenticated ?>
 	<?php if (empty($NOSIGNIN)) { ?>
-	  <?= Template('signin', array('NOFORM' => 0)) ?>
+	  <?php echo Template('signin', array('NOFORM' => 0)) ?>
 	<?php } ?>
       </div>
 <?php } // !DUMP_MODE ?>

@@ -1,11 +1,18 @@
 <?php
-rcs_id('$Id: themeinfo.php 6248 2008-09-07 15:13:56Z vargenau $');
+// Avoid direct call to this file.
+// PHPWIKI_VERSION is defined in lib/prepend.php
+if (!defined('PHPWIKI_VERSION')) {
+    header("Location: /");
+    exit;
+}
+
+// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
  * A minimalistic design by walter rafelsberger
  * See http://www.shamino.com/wiki/
  *
- * Tiny actionbar: PageInfo, Edit and 
- *   all other Actionbars buttons in info.tmpl, 
+ * Tiny actionbar: PageInfo, Edit and
+ *   all other Actionbars buttons in info.tmpl,
  * Signin implictly after Edit.
  * tiny navbar: without buttons, just links
  * no logo
@@ -91,9 +98,9 @@ class WikiTheme_shamino_com extends WikiTheme {
 
 	/**
 	 * Layout improvement with dangling links for mostly closed wiki's:
-	 * If false, only users with edit permissions will be presented the 
+	 * If false, only users with edit permissions will be presented the
 	 * special wikiunknown class with "?" and Tooltip.
-	 * If true (default), any user will see the ?, but will be presented 
+	 * If true (default), any user will see the ?, but will be presented
 	 * the PrintLoginForm on a click.
 	 */
 	$this->setAnonEditUnknownLinks(false);
@@ -113,20 +120,17 @@ class WikiTheme_shamino_com extends WikiTheme {
 	 * To suppress times in the "Last edited on" messages, give a
 	 * give a second argument of false:
 	 */
-	//$this->setDateFormat("%B %d, %Y", false); 
+	//$this->setDateFormat("%B %d, %Y", false);
     }
 }
 
 $WikiTheme = new WikiTheme_shamino_com('shamino_com');
 
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

@@ -1,6 +1,6 @@
-Date: Thu, 15 Apr 2010 16:33:18 +0000
+Date: Tue, 13 Jul 2010 17:28:03 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: ExternalPages 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: ExternalPages 7614 2010-07-15 15:56:21Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ExternalPages;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -8,7 +8,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<AllPages info=external,author sortby=-external limit=10000>>
+<<AllPages info=external,author sortby=-external>>
 
 ----
 [[CategoryActionPage]]

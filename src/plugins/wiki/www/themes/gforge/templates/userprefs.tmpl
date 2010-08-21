@@ -1,5 +1,6 @@
-<?php // -*-html-*- ?>
-<!-- $Id: userprefs.tmpl 6189 2008-08-22 13:18:48Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: userprefs.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <?php
 // Todo: Move the logic and code to the plugin
 // This is very experimental and the read-only part an ugly hack so far.
@@ -8,7 +9,7 @@ foreach (explode(',','errmsg,isForm') as $var) {
 }
 
 $plugin = $request->getArg('pagename');
-if ($request->isActionPage($request->getArg('pagename')) 
+if (isActionPage($request->getArg('pagename')) 
     and $isForm and $plugin == _("PreferencesInfo")) {
     $isForm = false;
 }
@@ -85,10 +86,14 @@ $RecentChangesMenuItem = HTML::input(array('type' => 'checkbox',
                                      'name' => 'pref[recentChangesMenuItem]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('recentChangesMenuItem')));
-$SearchMenuItem = HTML::input(array('type' => 'checkbox',
-                                     'name' => 'pref[searchMenuItem]',
+$RandomPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[randomPageMenuItem]',
                                      'value' => '1',
-                                     'checked' => (bool) $pref->get('searchMenuItem')));
+                                     'checked' => (bool) $pref->get('randomPageMenuItem')));
+$LikePagesPageMenuItem = HTML::input(array('type' => 'checkbox',
+                                     'name' => 'pref[likePagesMenuItem]',
+                                     'value' => '1',
+                                     'checked' => (bool) $pref->get('likePagesMenuItem')));
 $SpecialPagesMenuItem = HTML::input(array('type' => 'checkbox',
                                      'name' => 'pref[specialPagesMenuItem]',
                                      'value' => '1',
@@ -97,6 +102,10 @@ $RelativeDatesCB = HTML::input(array('type' => 'checkbox',
                                      'name' => 'pref[relativeDates]',
                                      'value' => '1',
                                      'checked' => (bool) $pref->get('relativeDates')));
+$PageTrailCB = HTML::input(array('type' => 'checkbox',
+                                 'name' => 'pref[pageTrail]',
+                                 'value' => '1',
+                                 'checked' => (bool) $pref->get('pageTrail')));
 $NoLinkIconsCB = HTML::input(array('type' => 'checkbox',
                                    'name' => 'pref[noLinkIcons]',
                                    'value' => '1',
@@ -167,84 +176,70 @@ if ( $isForm ) {
     $SelectLanguages = $pref->get('lang');
 }
 
-if ($errmsg) $msg = HTML(HTML::h4(array('class' => 'errors'), $errmsg),HTML::hr());
 ?>
-<?= $errmsg ?>
+<?php echo $errmsg ?>
 
 <h2>
-<?= fmt("User preferences for user '%s'", $user->UserName()) ?>
+<?php echo fmt("User preferences for user %s", WikiLink($user->UserName())) ?>
 </h2>
 
 <?php if ($isForm) { ?>
-<form action="<?=$request->getPostURL()?>" method="post">
-<?php } else { 
-  $fill = "&nbsp;";
-  // See also plugin _AuthInfo
-  $authmethod = ENABLE_USER_NEW ? @$user->_authmethod : @$user->auth_how;
-?>
-<?= HTML::pre(sprintf("%12s: [% 10s]  %s\n",_("UserId"),$pref->get('userid'), " from " . $authmethod),
-	      sprintf("%12s: [% 10s]  %16s: [% 10s] | %8s: [%2s]\n","getId",$user->getId(),"getAuthenticatedId",$user->getAuthenticatedId(),"isSignedIn", $user->isSignedIn()),
-	      //sprintf("%12s: [% 10s]\n",_("Password"),empty($pref->get('passwd')) ? _("<empty>") : _("<not empty>")),
-	      sprintf("%12s: [% 10s]  %15s: [% 8s]\n",
-		      _("Auth Level"),$user->_level,_("Auth Method"),$authmethod),
-	      sprintf("%12s: [% 10s]\n",_("HomePage"),$user->hasHomePage() ? (ENABLE_USER_NEW ? $user->_HomePagehandle->_pagename : $user->_homepage->_pagename ) : ''),
-	      sprintf("%12s: [% 10s]\n",_("E-Mail"),$pref->get('email')),
-	      //sprintf("%12s: [% 10s]\n",_("Notify"),$pref->get('notifyPages')),
-	      sprintf("%12s: [% 10s] %16s: [% 10s] \n",_("Language"),$pref->get('lang'),_("Current Language"),$GLOBALS['LANG'])
-	      ) ?>
+<form action="<?php echo $request->getPostURL()?>" method="post">
 <?php } ?>
 
-<fieldset>
+<fieldset style="margin-bottom: 1em;">
 <legend><strong>User preferences for this project</strong></legend>
-<table border="0">
-<?php if ($isForm and $user->mayChangePass()) { ?>
-  <tr><td colspan="3"><h3><?= ($request->getPref('passwd') ?  _("Change Password") :  _("Set Password")) ?></h3></td></tr>
+<table border="0" width="100%">
 
-    <tr><td align="right"><?=_("New password")?>:</td>
-        <td><input type="password" name="pref[passwd]" size="16" maxlength="16" class="text" value="" /></td>
-        <td></td></tr>
-    <tr><td align="right"><?=_("Type it again")?>:</td>
-        <td><input type="password" name="pref[passwd2]" size="16" maxlength="16" class="text" value="" /></td>
-        <td></td></tr>
-<?php } ?>
-
-<?php if (ENABLE_USER_NEW) { ?>
-  <tr><td colspan="3"><h3><?=_("E-mail Notification")?></h3></td></tr>
+  <tr><td colspan="3"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
 
    <tr><td colspan="2">
-    <?=_("Get an email notification at changes of the following pages:")?><br />
+    <?php echo _("Get an email notification at changes of the following pages:")?>
+   </td></tr>
+   <tr>
     <?php if ($isForm) { ?>
-      <blockquote><textarea name="pref[notifyPages]" cols="30" rows="4"><?=$pref->get('notifyPages')?></textarea></blockquote></td>
-    <td><p class="hint"><?=_("Enter pages seperated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+      <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
+    <td><p class="hint"><?php echo _("Enter pages seperated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
     <?php } else { ?>
-     <td><?=$pref->get('notifyPages')?></td><td></td>
+     <td><?php echo $pref->get('notifyPages')?></td><td></td>
     <?php } ?>
    </tr>
-<?php } ?>
 
 </table>
 </fieldset>
-<br />
-<fieldset>
+
+<fieldset style="margin-bottom: 1em;">
 <legend><strong>Global user preferences (for all projects)</strong></legend>
 
-<table border="0">
+<table border="0" width="100%">
 
-  <tr><td colspan="3"><h3><?=_("E-mail Notification")?></h3></td></tr>
+  <tr><td colspan="3"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
 
   <tr>
       <td>
-         <p><?=_("Do not send my own modifications:")?></p>
+         <p><?php echo _("Do not send my own modifications:")?></p>
       </td>
       <td>
-         <p><?= $OwnModificationsCB ?></p>
+         <p><?php echo $OwnModificationsCB ?></p>
       </td>
       <td>
-         <p class="hint"><?=_("Check if you do not want to be notified of your own modifications.")?></p>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of your own modifications.")?></p>
       </td>
   </tr>
 
-  <tr><td colspan="3"><h3><?=_("Menus")?></h3></td></tr>
+  <tr>
+      <td>
+         <p><?php echo _("Do not send minor modifications:")?></p>
+      </td>
+      <td>
+         <p><?php echo $MajorModificationsOnlyCB ?></p>
+      </td>
+      <td>
+         <p class="hint"><?php echo _("Check if you do not want to be notified of minor modifications.")?></p>
+      </td>
+  </tr>
+
+  <tr><td colspan="3"><h3><?php echo _("Menus")?></h3></td></tr>
   <tr>
      <td>
        <fieldset>
@@ -252,34 +247,34 @@ if ($errmsg) $msg = HTML(HTML::h4(array('class' => 'errors'), $errmsg),HTML::hr(
        <table cellpadding="0" cellspacing="0">
          <tr>
             <td>
-               <p><?= $DiffMenuItem ?> <?=_("Last Difference")?></p>
+               <p><?php echo $DiffMenuItem ?> <?php echo _("Last Difference")?></p>
             </td>
          </tr>
          <tr>
             <td>
-               <p><?= $RevertMenuItem ?> <?=_("Revert")?></p>
+               <p><?php echo $RevertMenuItem ?> <?php echo _("Revert")?></p>
             </td>
          </tr>
          <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
            <tr>
              <td>
-                <p><?= $PDFMenuItem ?> <?=_("PDF")?></p>
+                <p><?php echo $PDFMenuItem ?> <?php echo _("PDF")?></p>
              </td>
            </tr>
          <?php } ?>
          <tr>
             <td>
-               <p><?= $LockMenuItem ?> <?=_("Lock")?></p>
+               <p><?php echo $LockMenuItem ?> <?php echo _("Lock")?></p>
             </td>
          </tr>
          <tr>
             <td>
-               <p><?= $ChownMenuItem ?> <?=_("Change Owner")?></p>
+               <p><?php echo $ChownMenuItem ?> <?php echo _("Change Owner")?></p>
             </td>
          </tr>
          <tr>
             <td>
-               <p><?= $SetaclMenuItem ?> <?=_("Access Rights")?></p>
+               <p><?php echo $SetaclMenuItem ?> <?php echo _("Access Rights")?></p>
             </td>
          </tr>
        </table>
@@ -292,7 +287,12 @@ if ($errmsg) $msg = HTML(HTML::h4(array('class' => 'errors'), $errmsg),HTML::hr(
        <table cellpadding="0" cellspacing="0">
          <tr>
             <td>
-               <p><?= $SearchMenuItem ?> <?=_("Search")?></p>
+               <p><?php echo $RandomPageMenuItem ?> <?php echo _("Random Page")?></p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p><?php echo $LikePagesPageMenuItem ?> <?php echo _("Like Pages")?></p>
             </td>
          </tr>
        </table>
@@ -300,77 +300,74 @@ if ($errmsg) $msg = HTML(HTML::h4(array('class' => 'errors'), $errmsg),HTML::hr(
     </td>
 
     <td valign="top">
-      <p class="hint"><?=_("Check menu items to display.")?></p>
+      <p class="hint"><?php echo _("Check menu items to display.")?></p>
     </td>
   </tr>
 
-  <tr><td colspan="3"><h3><?=_("Appearance")?></h3></td></tr>
+  <tr><td colspan="3"><h3><?php echo _("Appearance")?></h3></td></tr>
 
-  <tr><td colspan="2"><?=_("Here you can override site-specific default values.") ?></td>
-      <td><p class="hint"><?= _("Currently not recommended!") ?></p></td></tr>
-  <?php /* Alternatively this could be done with <fieldset> and <legend>. */ ?>
-      <tr><td align="right"><?=fmt("Hide %s:", WikiLink("LinkIcons"))?></td>
-          <td><?=$NoLinkIconsCB?></td>
-          <td><p class="hint"><?=_("Hide or show LinkIcons (if supported by the current theme). Useful for text-only browsers or slow connections.")?></p></td></tr>
-      <tr><td align="right"><?=fmt("Add %s:", WikiLink("GoogleLink"))?></td>
-          <td><?=$GoogleLinkCB?></td>
-          <td><p class="hint"><?=fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt"))?></p></td></tr>
-      <tr><td align="right"><?=fmt("Enable DoubleClick Edit")?></td>
-          <td><?=$DoubleClickCB?></td>
-  <td><p class="hint"><?=fmt("Enabled makes it hard to double-click words and sentences for cut and paste. See %s.", WikiLink("PhpWiki:DoubleClickToEditPage"))?></p></td></tr>
+  <tr><td colspan="3"><?php echo _("Here you can override site-specific default values.") ?></td></tr>
+      <tr><td align="right"><?php echo _("Show Page Trail")?></td>
+          <td><?php echo $PageTrailCB?></td>
+          <td><p class="hint"><?php echo _("Show Page Trail at top of page.")?></p></td></tr>
+      <tr><td align="right"><?php echo fmt("Hide %s:", WikiLink("Help:LinkIcons"))?></td>
+          <td><?php echo $NoLinkIconsCB?></td>
+          <td><p class="hint"><?php echo _("Hide or show LinkIcons.")?></p></td></tr>
+      <tr><td align="right"><?php echo fmt("Add %s:", WikiLink("Help:GoogleLink"))?></td>
+          <td><?php echo $GoogleLinkCB?></td>
+          <td><p class="hint"><?php echo fmt("Add Google links to unknown pages behind the '?', and the create action behind the pagename instead. See %s.", WikiLink("MeatBall:GooglePrompt"))?></p></td></tr>
 
-
-  <tr><td colspan="3"><h3><?=_("Edit Area Size")?></h3></td></tr>
+  <tr><td colspan="3"><h3><?php echo _("Edit Area Size")?></h3></td></tr>
 
   <tr><td colspan="2">
-    <?=_("Height")?>:&nbsp;
+    <?php echo _("Height")?>:&nbsp;
     <?php if ($isForm) { ?>
      <input type="text" name="pref[editHeight]" size="4" maxlength="4" class="numeric"
-            value="<?=$pref->get('editHeight')?>" />
+            value="<?php echo $pref->get('editHeight')?>" />
     <?php } else { ?>
-      <?=$pref->get('editHeight')?>
+      <?php echo $pref->get('editHeight')?>
     <?php } ?>
-    &nbsp;&nbsp;<?=_("Width")?>:&nbsp;
+    &nbsp;&nbsp;<?php echo _("Width")?>:&nbsp;
     <?php if ($isForm) { ?>
      <input type="text" name="pref[editWidth]" size="4" maxlength="4" class="numeric"
-            value="<?=$pref->get('editWidth')?>" />
+            value="<?php echo $pref->get('editWidth')?>" />
     <?php } else { ?>
-      <?=$pref->get('editWidth')?>
+      <?php echo $pref->get('editWidth')?>
     <?php } ?>
     </td>
     <td><p class="hint">
-      <?=_("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.")?></p>
+      <?php echo _("Note that many browsers will automatically adjust the width of the editing area so that it fills the browser window.  In this case, the width preference will be ignored.")?></p>
     </td></tr>
 
-  <tr><td colspan="3"><h3><?=_("Time Zone")?></h3></td></tr>
+  <tr><td colspan="3"><h3><?php echo _("Time Zone")?></h3></td></tr>
 
   <tr><td colspan="2"><p>
-    <?=fmt("Add %s hours to the server's local time when reporting times.",
+    <?php echo fmt("Add %s hours to the server's local time when reporting times.",
            $timeOffsetInput)?>
   </p></td><td>
   <p class="hint">
-    <?=fmt("The current time at the server is %s.",
+    <?php echo fmt("The current time at the server is %s.",
             HTML::strong($WikiTheme->formatDateTime($serverTime)))?>
-    <?=fmt("With the current offset, this would be reported as %s.",
+    <?php echo fmt("With the current offset, this would be reported as %s.",
            HTML::strong($WikiTheme->formatDateTime($time)))?>
   </p>
   </td></tr>
 
-  <tr><td colspan="3"><h3><?=_("Date Format")?></h3></td></tr>
+  <tr><td colspan="3"><h3><?php echo _("Date Format")?></h3></td></tr>
 
   <tr><td colspan="2"><p>
-    <?=_("Show relative dates using 'Today' and 'Yesterday'")?>:
-    <?= $RelativeDatesCB ?>
+    <?php echo _("Show relative dates using 'Today' and 'Yesterday'")?>:
+    <?php echo $RelativeDatesCB ?>
   </p></td><td></td></tr>
 </table>
 </fieldset>
 
 <?php if ($isForm) { ?>
-  <br />
-  <p><?=Button("submit:", _("Update Preferences"), 'wikiadmin')?>
-  <?=Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
-  <?=Button("submit:cancel", _("Cancel"), 'button')?></p>
-
-<?= HiddenInputs($request->getArgs(), false, array('pref')) ?>
+<p>
+  <?php echo Button("submit:", _("Update Preferences"), 'wikiadmin')?>
+  <?php echo Button("submit:delete", _("Reset Preferences"), 'wikiadmin')?>
+  <?php echo Button("submit:cancel", _("Cancel"), 'button')?>
+  <?php echo HiddenInputs($request->getArgs(), false, array('pref')) ?>
+</p>
 </form>
 <?php } ?>

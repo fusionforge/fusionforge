@@ -1,0 +1,36 @@
+<?php // -*-php-*-
+// rcs_id('$Id: browse.tmpl 7593 2010-07-02 09:04:25Z vargenau $');
+?>
+<?php
+$curuserprefs = $user->getPreferences();
+?>
+
+<?php if ($revision and !$revision->isCurrent()) { ?>
+  <p class="warning_msg"><strong><?php echo _("Note:")?></strong>
+     <?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('browse', _("View the current version"), $page)?>.
+  </p>
+<?php } ?>
+<?php if (!empty($redirected)) { ?>
+  <p><?php echo $redirected ?></p>
+<?php } ?>
+
+<?php if (WIKI_NAME == "help") { ?>
+<div class="browsebanner">
+<table>
+<tr>
+<td>This Help page is located in the Forge Help wiki. You are not in your project's wiki.</td>
+</tr>
+</table>
+</div>
+<?php } ?>
+
+<?php if ($curuserprefs->get('pageTrail')) { ?>
+<?plugin PageTrail ?>
+<?php } ?>
+
+<?php echo $CONTENT?>
+
+<div id="footer"><?php // for top & bottom toolbars stylesheet ?>
+  <?php echo Template('browse-footer')?>
+</div>

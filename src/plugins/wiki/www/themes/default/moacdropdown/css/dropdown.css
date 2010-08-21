@@ -8,9 +8,8 @@ div.acinputContainer
 	padding: 0px;
 	border-width: 1px;
 	border-style: solid;
-/*	border-color: buttonshadow buttonhighlight buttonhighlight buttonshadow;*/
 	border-color: #aaa #eee #eee #aaa;
-	background-color: buttonface;
+	background-color: ButtonFace;
 	/*overflow: show;*/
 	/*box-sizing: border-box;*/
 	-moz-box-sizing: border-box;
@@ -78,8 +77,7 @@ div.autocomplete_firstborder
 {
 	border-width: 1px;
 	border-style: solid;
-	border-color: buttonshadow;
-	/*border-color: buttonshadow buttonhighlight buttonhighlight buttonshadow;*/
+	border-color: ButtonShadow;
 	padding: 0px;
         margin-left: 3px;
         margin-bottom: 5px;
@@ -151,8 +149,8 @@ ul.autocomplete li a
 
 ul.autocomplete li a:hover
 {
-	color: highlighttext;
-	background-color: highlight;
+	color: HighlightText;
+	background-color: Highlight;
 	border-color: #e0e0e0;
 }
 

@@ -1,21 +1,22 @@
-<!-- -*-php-*- -->
-<?php rcs_id('$Id: signin.tmpl 6409 2009-01-17 14:40:16Z rurban $'); ?>
+<?php // -*-php-*-
+// rcs_id('$Id: signin.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <div class="portlet" id="p-personal"><div class="pBody"><ul>
 <?php if ($user->isAuthenticated()) {
      $sp = HTML::Raw("&nbsp;"); $id = $user->getAuthenticatedId(); ?>
-     <li id="pt-mypages"><?= WikiLink("RecentChangesMyPages", 'auto', HTML($sp,"MyPages",$sp)) ?></li>
-     <li id="pt-mychanges"><?= WikiLink("MyRecentChanges", 'auto', HTML($sp,"MyChanges",$sp)) ?></li>
-     <li id="pt-userpage"><?= WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
-     <li id="pt-logout"><?= HTML::a(array('href'=>'?auth[logout]=1'), $sp,_("Logout"),$sp) ?></li>
+     <li id="pt-mypages"><?php echo WikiLink("RecentChangesMyPages", 'auto', HTML($sp,"MyPages",$sp)) ?></li>
+     <li id="pt-mychanges"><?php echo WikiLink("MyRecentChanges", 'auto', HTML($sp,"MyChanges",$sp)) ?></li>
+     <li id="pt-userpage"><?php echo WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
+     <li id="pt-logout"><?php echo HTML::a(array('href'=>'?auth[logout]=1'), $sp,_("Logout"),$sp) ?></li>
 <?php } elseif (ALLOW_ANON_USER) {
   $sp = HTML::Raw("&nbsp;"); $id = $user->getAuthenticatedId();
   if ($id) { ?>
-    <li id="pt-userpage"><?= WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
+    <li id="pt-userpage"><?php echo WikiLink($id, 'auto', HTML($sp,$id,$sp)) ?></li>
   <?php } ?>
   <!-- Login -->
-  <li id="pt-login"><?= HTML::a(array('href'=>'?auth[login]=1'),$sp,_("Login"),$sp) ?></li>
+  <li id="pt-login"><?php echo HTML::a(array('href'=>'?auth[login]=1'),$sp,_("Login"),$sp) ?></li>
 <?php } else { ?>
-     <li id="pt-login"><a name="login"><?= _("Login required...") ?></a></li>
+     <li id="pt-login"><a id="login"><?php echo _("Login required...") ?></a></li>
 <?php } ?>
   </ul>
  </div>

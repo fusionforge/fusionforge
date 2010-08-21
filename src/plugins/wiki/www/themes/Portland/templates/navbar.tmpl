@@ -1,14 +1,15 @@
-<?php // -*-html-*- ?>
-<!-- $Id: navbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 <!-- The bottom navigation/search bar -->
 
-    <?= WikiLink(_("FindPage"), "button") ?> by searching
+    <?php echo WikiLink(_("FindPage"), "button") ?> by searching
     <?php if ($revision) { ?>
-      (or browse <?= Button("LikePages", _("LikePages")) ?>)
+      (or browse <?php echo Button("LikePages", _("LikePages")) ?>)
     <?php } ?>
     <?php if ($user->isAdmin()) { ?>
-     <?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock')?>
-     <?=$SEP?><?= Button('remove') ?>
+     <?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock')?>
+     <?php echo $SEP?><?php echo Button('remove') ?>
     <?php } ?>
    <hr />
 <!-- I would like not to have to use these tables, and managed to
@@ -22,12 +23,12 @@
        id="actionbar">
 <tr valign="baseline">
   <td>
-   <?= WikiLink(_("RecentChanges"), "button") ?>
+   <?php echo WikiLink(_("RecentChanges"), "button") ?>
     <?php if ($user->isAdmin()) { ?>
-     <?=$SEP?><?= WikiLink(_("PhpWikiAdministration"), "button") ?>
+     <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "button") ?>
     <?php } ?>
   </td>
   <td align="right">
-    <?= Template('signin') ?>
+    <?php echo Template('signin') ?>
   </td>
 </tr></table>

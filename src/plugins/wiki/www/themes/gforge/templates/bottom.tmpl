@@ -1,0 +1,10 @@
+<?php // -*-php-*-
+// rcs_id('$Id: bottom.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
+<?php if (!$WikiTheme->DUMP_MODE) { ?>
+<?php if (defined('DEBUG') and DEBUG) { ?>
+<?php echo empty($WARNINGS) ? '' : $WARNINGS ?>
+<?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
+<?php echo Template('debug') ?>
+<?php } ?>
+<?php } ?>

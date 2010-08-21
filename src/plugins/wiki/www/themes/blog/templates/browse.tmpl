@@ -1,21 +1,21 @@
-<?php // -*-html-*-
-rcs_id('$Id: browse.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php // -*-php-*-
+// rcs_id('$Id: browse.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 
 <?php if ($revision and !$revision->isCurrent()) { ?>
-  <p><strong><?=_("Note:")?></strong>
-     <?=_("You are viewing an old revision of this page.")?>
-  <?= Button('browse', _("View the current version"), $page)?>.
+  <p><strong><?php echo _("Note:")?></strong>
+     <?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('browse', _("View the current version"), $page)?>.
   </p>
 <?php } ?>
 <?php if (!empty($redirected)) { ?>
-  <p><?= $redirected ?></p>
+  <p><?php echo $redirected ?></p>
 <?php } ?>
 
 <!--{{{ Content-->
 <div id="content" class="narrowcolumn">
 
-<?=$CONTENT?>
+<?php echo $CONTENT?>
 
 <!--{{{ Comments-->
 <div class="comments">
@@ -27,5 +27,5 @@ rcs_id('$Id: browse.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
 </div>
 
 <!--{{{ Sidebar-->
-<?=Template('sidebar')?>
+<?php echo Template('sidebar')?>
 <!--}}}-->

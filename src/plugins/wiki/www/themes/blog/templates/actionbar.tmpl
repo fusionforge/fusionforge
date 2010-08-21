@@ -1,18 +1,18 @@
 <?php // -*-php-*-
-  rcs_id('$Id: actionbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: actionbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 ?>
 <table summary="Toolbar: Mani Navigation"
        width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr valign="baseline">
   <td>
   <div class="actionbuttons">
-    <?= WikiLink(HOME_PAGE, "known",_("Home")) ?>
-    <?=$SEP?><?= WikiLink(_("About")) ?>
-    <?=$SEP?><?= WikiLink(_("BlogArchives"),'',_("Archives")) ?>
-    <?=$SEP?><?= WikiLink(_("PhotoAlbum")) ?>
-    <?=$SEP?><?= WikiLink(_("HowTo")) ?>
-    <?=$SEP?><?= WikiLink(_("RecentChanges")) ?>
-    <?=$SEP?><?= Button("PageInfo", _("Info")) ?>
+    <?php echo WikiLink(HOME_PAGE, "known",_("Home")) ?>
+    <?php echo $SEP?><?php echo WikiLink(_("About")) ?>
+    <?php echo $SEP?><?php echo WikiLink(_("BlogArchives"),'',_("Archives")) ?>
+    <?php echo $SEP?><?php echo WikiLink(_("PhotoAlbum")) ?>
+    <?php echo $SEP?><?php echo WikiLink(_("HowTo")) ?>
+    <?php echo $SEP?><?php echo WikiLink(_("RecentChanges")) ?>
+    <?php echo $SEP?><?php echo Button("PageInfo", _("Info")) ?>
 <?php 
 if ($user->isAuthenticated()) {
     if (mayAccessPage('edit', $page->getName()))
@@ -20,12 +20,12 @@ if ($user->isAuthenticated()) {
     else
         $EditB = Button("viewsource", _("View Source")); 
 ?>
-    <?= $SEP?><?= $EditB ?>
+    <?php echo $SEP?><?php echo $EditB ?>
     <?php } ?>
   </div>
   </td>
   <td>
-    <?= Template("search") ?>
+    <?php echo Template("search") ?>
   </td>
 </tr>
 </table>

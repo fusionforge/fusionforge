@@ -1,6 +1,6 @@
-Date: Thu, 15 Apr 2010 16:33:18 +0000
+Date: Thu, 15 Jul 2010 16:58:46 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: UpLoad 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: UpLoad 7611 2010-07-15 14:59:44Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=UpLoad;
   markup=2;
@@ -10,8 +10,8 @@ Content-Transfer-Encoding: binary
 This page allows you to upload files that can later be used in the wiki. It is especially useful for uploading images.
 
 You give access to the uploaded file with the following syntax:
-* **~{~{my_image.gif~}~}** or **~[~[~Upload:my_image.gif]]** inlines the image
-* **~Upload:my_image.gif** shows a plain link
+* **~{~{my_image.gif~}~}** or **~[~[~Upload:my_image.gif]]** inlines the image,
+* **~Upload:my_image.gif** shows a plain link,
 * **~[~[~Upload:my_image.gif|my image]]** shows the image under a link named "my image".
 
 The uploaded files will be publicly accessible. They are stored in the Webdav subdirectory **www/uploads**. They can be used in the wiki, in the project web site and in blocks.

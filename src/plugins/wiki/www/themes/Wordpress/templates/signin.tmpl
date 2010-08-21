@@ -1,6 +1,6 @@
 <?php // -*-php-*-
 // MPickering: modified; this will be enclosed within an ul
-rcs_id('$Id: signin.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: signin.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 
 if (empty($FORMNAME))
     $FORMNAME = 'signin';
@@ -9,28 +9,28 @@ else
 ?>
 <?php if (empty($NOFORM)) { ?>
  <li>
-  <form method="post" action="<?=$request->getPostURL()?>" accept-charset="<?=CHARSET?>" name="<?=$FORMNAME?>">
-  <?= HiddenInputs($request->getArgs(), false, array('auth')) ?>
+  <form method="post" action="<?php echo $request->getPostURL()?>" accept-charset="<?php echo CHARSET?>" name="<?php echo $FORMNAME?>">
+  <?php echo HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php } ?>
 <?php
 if ($user->isAuthenticated()) {
     $SignOutB = $WikiTheme->makeButton(_("Sign Out"), "javascript:SignOut();", 'wikiaction');
 ?>
 <span>
-  <?= fmt("Authenticated as %s", WikiLink($user->getAuthenticatedId(), 'auto')) ?>
-  <?=$SEP?>
+  <?php echo fmt("Authenticated as %s", WikiLink($user->getAuthenticatedId(), 'auto')) ?>
+  <?php echo $SEP?>
 </span>
-  <script language="JavaScript" type="text/javascript"><!--
+  <script type="text/javascript"><!--
     document.write('<br /><input type="hidden" name="auth[logout]" value="0" />');
     function SignOut() {
-      var form = document.forms["<?=$FORMNAME?>"];
+      var form = document.forms["<?php echo $FORMNAME?>"];
       form.elements["auth[logout]"].value = 1;
       form.submit();
     }
-    document.write('<?=$SignOutB?>'); // -->
+    document.write('<?php echo $SignOutB?>'); // -->
   </script>
   <noscript>
-    <?= Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?>
+    <?php echo Button("submit:auth[logout]", _("Sign Out"), 'wikiaction') ?>
   </noscript>
 <?php } else {
     $SignInInput = HTML::input(array('type' => 'text',
@@ -52,7 +52,7 @@ if ($user->isAuthenticated()) {
      function SignIn(form,userid) {
       <?php if (defined('EDITING_POLICY') and $request->_dbi->isWikiPage(EDITING_POLICY)) { ?>
       if (window.focus) {
-        window.open('<?= WikiUrl(EDITING_POLICY) ?>',<!-- url -->
+        window.open('<?php echo WikiUrl(EDITING_POLICY) ?>',<!-- url -->
                     'PleaseReadThisFirst',<!-- window name -->
                     'width=600,height=430,scrollbars=yes,resizable=yes,toolbar=yes');
       }
@@ -64,11 +64,11 @@ if ($user->isAuthenticated()) {
     }
     //-->
   </script>
-  <?= Button("submit:auth[login]", _("Sign in as:"), 'wikiaction')?>
-  <?= $SignInInput ?>
+  <?php echo Button("submit:auth[login]", _("Sign in as:"), 'wikiaction')?>
+  <?php echo $SignInInput ?>
 <?php /* // sf.net bug #950841 "Sign In:" button appears twice
   <noscript>
-    <?= Button("submit:auth[login]", _("Sign in as:"), 'wikiaction')?>
+    <?php echo Button("submit:auth[login]", _("Sign in as:"), 'wikiaction')?>
   </noscript>
 */ ?>
 <?php } ?>

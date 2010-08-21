@@ -1,5 +1,5 @@
 <?php // -*- php -*-
-rcs_id('$Id: wikiblog.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: wikiblog.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 $CDATE = $WikiTheme->formatDateTime($BLOG_CTIME);
 $buttons = $modified = '';
 
@@ -20,25 +20,25 @@ if ($rev->get('mtime') != $BLOG_CTIME) {
                                 WikiLink($rev->get('author'))));
 }
 ?>
-<div title="<?= fmt("Entry on %s by %s.", $BLOG_PARENT, $BLOG_CREATOR)?>"
+<div title="<?php echo fmt("Entry on %s by %s.", $BLOG_PARENT, $BLOG_CREATOR)?>"
      class="wikiblog wikitext">
   <!-- <div class="wikiblog-header">
-    <strong class="floatleft"><?= WikiLink($page, 'known', $CDATE) ?></strong>
-    <strong class="floatright"><?= WikiLink($BLOG_CREATOR, 'if_known') ?></strong>
-    <br clear="all" class="clear-floats" />
+    <strong class="floatleft"><?php echo WikiLink($page, 'known', $CDATE) ?></strong>
+    <strong class="floatright"><?php echo WikiLink($BLOG_CREATOR, 'if_known') ?></strong>
+    <br class="clear-floats" />
   </div> -->
   <div class="wikiblog-body">
     <?php if ($rev->get('summary')) { ?> 
-      <h3 class="wikiblog-summary"><?= $rev->get('summary') ?></h3>
+      <h3 class="wikiblog-summary"><?php echo $rev->get('summary') ?></h3>
     <?php } ?>  
-    <?= $CONTENT ?>
+    <?php echo $CONTENT ?>
   </div>
 
   <?php if ($buttons or $modified) { ?>
     <div class="wikiblog-footer">
-      <?= $buttons ?>
-      <?= $modified ?>
-      <br clear="all" class="clear-floats" />
+      <?php echo $buttons ?>
+      <?php echo $modified ?>
+      <br class="clear-floats" />
     </div>
   <?php } ?>
 

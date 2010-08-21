@@ -50,9 +50,9 @@ body {
   /*height: 40px;*/
 }
 
-/* http://www.aboutus.org/UniversalWikiEditButton */
+/* http://universaleditbutton.org */
 div.actionbuttons a#btn-edit {
-  background:  url('images/Edit-chalk-10bo12.png') bottom left no-repeat;
+  background:  url('images/UEB16.png') bottom left no-repeat;
   background-repeat: no-repeat;
   padding-left: 13px !important;
 }
@@ -316,7 +316,7 @@ table.referrerlist td {
   font-size: 0.71em;
 }
 
-table.pagelist td {
+table.pagelist {
   font-size: 0.81em;
 }
 
@@ -829,6 +829,7 @@ td.pageinfo { font-weight: bold; }
 
 /* plugin BoxRight */
 div.boxright {
+  background-color: #e9fbff;
   width: 200px; 
   right: 10px;
   padding: 0.5em; 

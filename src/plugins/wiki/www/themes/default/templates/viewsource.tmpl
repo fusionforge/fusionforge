@@ -1,29 +1,30 @@
-<?php // -*-html-*- ?>
-<!-- $Id: viewsource.tmpl 6204 2008-08-26 15:12:03Z vargenau $ -->
+<?php // -*-php-*-
+// rcs_id('$Id: viewsource.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+?>
 
 <?php if ($page->get('locked') && !$user->isAdmin()) { ?>
-  <p><strong><?=_("Note:")?></strong>
-  <?=_("This page has been locked by the administrator and cannot be edited.")?>
+  <p><strong><?php echo _("Note:")?></strong>
+  <?php echo _("This page has been locked by the administrator and cannot be edited.")?>
   </p>
   <?php } ?>
 <?php if ($revision and !$revision->isCurrent()) { ?>
-  <p><?=_("You are viewing an old revision of this page.")?>
-  <?= Button('edit', _("View the current version"), $page) ?>.
+  <p><?php echo _("You are viewing an old revision of this page.")?>
+  <?php echo Button('edit', _("View the current version"), $page) ?>.
   </p>
   <?php } ?>
 <!-- Dummy form else NS4 does not like the textarea -->
-<form method="post" action="<?=$request->getPostURL()?>" accept-charset="<?=CHARSET?>">
+<form method="post" action="<?php echo $request->getPostURL()?>" accept-charset="<?php echo CHARSET?>">
 <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
-<br clear="all" class="clear-floats" />
+<br class="clear-floats" />
 <textarea class="wikiedit"
 name="content"
-rows="<?=$request->getPref('editHeight')?>"
-cols="<?=$request->getPref('editWidth')?>"
+rows="<?php echo $request->getPref('editHeight')?>"
+cols="<?php echo $request->getPref('editWidth')?>"
 readonly="readonly"
-><?= $PAGE_SOURCE ?></textarea>
-<?=$HIDDEN_INPUTS?>
+><?php echo $PAGE_SOURCE ?></textarea>
+<?php echo $HIDDEN_INPUTS?>
 </form>
 
 <div id="footer"><!-- for top & bottom toolbars stylesheet -->
-<?=Template('browse-footer')?>
+<?php echo Template('browse-footer')?>
 </div>

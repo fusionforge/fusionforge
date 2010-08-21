@@ -1,5 +1,5 @@
-<?php  // -*-html-*-
-rcs_id('$Id: htmldump.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+<?php  // -*-php-*-
+// rcs_id('$Id: htmldump.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 /*
  * This template is used only for html file dumps, and is responsible
  * mainly for the outer level <html> stuff and the and <head>.
@@ -10,7 +10,7 @@ printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET?>" />
 <?php /**
        * Additional navigation links are provided here in the html header for browsers
        * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
@@ -18,12 +18,12 @@ printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
        * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
        *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
        */ ?>
-<link rel="home" title="<?=HOME_PAGE?>" href="<?=WikiURL(HOME_PAGE)?>" />
-<link rel="help" title="<?=_("HowToUseWiki")?>" href="<?=WikiURL(_("HowToUseWiki"))?>" />
-<link rel="copyright" title="<?=COPYRIGHTPAGE_TITLE?>" href="<?=COPYRIGHTPAGE_URL?>" />
-<link rel="author" title="<?=AUTHORPAGE_TITLE?>" href="<?=AUTHORPAGE_URL?>" />
+<link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
+<link rel="help" title="<?php echo _("HowToUseWiki")?>" href="<?php echo WikiURL(_("HowToUseWiki"))?>" />
+<link rel="copyright" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />
+<link rel="author" title="<?php echo AUTHORPAGE_TITLE?>" href="<?php echo AUTHORPAGE_URL?>" />
 
-<?= $WikiTheme->getCSS() ?>
+<?php echo $WikiTheme->getCSS() ?>
 <?php
   // avoid redundant bookmark title for custom home page
   if ($page->getName() == WIKI_NAME && HOME_PAGE == WIKI_NAME)
@@ -31,12 +31,7 @@ printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", CHARSET);
   else
       $pagetitle = " - ". AsString($TITLE);
 ?>
-<title><?=WIKI_NAME.$pagetitle?></title>
+<title><?php echo WIKI_NAME.$pagetitle?></title>
 </head>
-<?= Template('body') ?>
-<?php
-if (defined('DEBUG') and DEBUG) {
-    printf("<!-- phpwiki source: \n%s-->\n", $RCS_IDS); 
-}
-?>
+<?php echo Template('body') ?>
 </html>

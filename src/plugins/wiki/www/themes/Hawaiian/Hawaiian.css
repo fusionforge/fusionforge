@@ -1,5 +1,5 @@
 /**
- * $Id: Hawaiian.css 6469 2009-01-31 12:24:13Z vargenau $
+ * $Id: Hawaiian.css 7331 2010-04-15 09:04:51Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up. It has not yet been tested against NS4.
@@ -150,27 +150,25 @@ caption { font-family: Arial, Helvetica, sans-serif; }
 .pagelist tr.evenrow { background: #eee; }
 .pagelist tr.oddrow  { background: white; }
 th.gridbutton {
-  background-color: threedlightshadow;
+  background-color: ThreeDLightShadow;
   color: black;
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
   margin: 5px 0px;
   white-space: nowrap;
   max-height: 24px;
   padding: 5px 0px 5px 0px;
   border-width: 1px;
   border-style: solid;
-  border-color: threedhighlight threeddarkshadow threeddarkshadow threedhighlight;
+  border-color: ThreeDHighlight ThreeDDarkShadow ThreeDDarkShadow ThreeDHighlight;
 }
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   text-decoration: none;
   font-size: small;
   font-weight: normal;
-  /*font-style: menu;*/
-  font-family: Tahoma, sans-serif, Arial, Helvetica;
-  background-color: threedlightshadow;
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  background-color: ThreeDLightShadow;
   color: black;
 }
 

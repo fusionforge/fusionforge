@@ -406,8 +406,7 @@ throw new Error("Your browser does not support XmlDocument objects");};if(window
 this.removeChild(this.lastChild);for(var i=0;i<doc2.childNodes.length;i++){this.appendChild(this.importNode(doc2.childNodes[i],true));}};Document.prototype.__defineGetter__("xml",function(){return(new XMLSerializer()).serializeToString(this);});}
 function cAutocomplete(sInputId)
 {this.init(sInputId)}
-xmlrpc_url=data_path+'/RPC2.php'
-cAutocomplete.CS_NAME='Autocomplete component'
+var xmlrpc_url;cAutocomplete.CS_NAME='Autocomplete component'
 cAutocomplete.CS_OBJ_NAME='AC_COMPONENT'
 cAutocomplete.CS_LIST_PREFIX='ACL_'
 cAutocomplete.CS_BUTTON_PREFIX='ACB_'
@@ -763,6 +762,7 @@ else
 {this.afterRemoteLoadXMLRPC()}}}
 cAutocomplete.prototype.loadXMLRPCListArray=function()
 {var sURL=this.sListURL
+var xmlrpc_url=data_path+'/RPC2.php'
 var aMethodArgs=sURL.split(' ')
 var sMethodName=aMethodArgs[0]
 var sStartWith=this.getStringForAutocompletion(this.sActiveValue,this.nInsertPoint)

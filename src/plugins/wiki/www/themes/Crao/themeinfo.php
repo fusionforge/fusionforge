@@ -1,5 +1,12 @@
 <?php
-rcs_id('$Id: themeinfo.php 6248 2008-09-07 15:13:56Z vargenau $');
+// Avoid direct call to this file.
+// PHPWIKI_VERSION is defined in lib/prepend.php
+if (!defined('PHPWIKI_VERSION')) {
+    header("Location: /");
+    exit;
+}
+
+// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /*
  * This file defines the default appearance ("theme") of PhpWiki.
@@ -19,7 +26,7 @@ class WikiTheme_Crao extends WikiTheme {
 	$this->setDefaultCSS('Crao',
 				  array(''      => 'crao.css',
 					'print'	=> ''));
-	
+
 	// This allows one to manually select "Printer" style (when browsing page)
 	// to see what the printer style looks like.
 	//$this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css');
@@ -75,24 +82,22 @@ class WikiTheme_Crao extends WikiTheme {
 	 * To suppress times in the "Last edited on" messages, give a
 	 * give a second argument of false:
 	 */
-	//$this->setDateFormat("%B %d, %Y", false); 
+	//$this->setDateFormat("%B %d, %Y", false);
 	$this->setDateFormat("%A %e %B %Y"); // must not contain time
 	//$this->setDateFormat("%x"); // must not contain time
 	$this->setTimeFormat("%H:%M:%S");
 	//$this->setTimeFormat("%X");
-	
+
     }
 }
 
 $WikiTheme = new WikiTheme_Crao('Crao');
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

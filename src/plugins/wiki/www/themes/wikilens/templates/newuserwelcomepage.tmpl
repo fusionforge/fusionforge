@@ -1,0 +1,28 @@
+<?php // -*-php-*-
+// rcs_id('$Id: newuserwelcomepage.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+  $dbi = $request->getDbh();
+?>
+<div>
+<h2>Welcome <?php echo $FRIEND ?></h2>
+<p>Welcome to <?php echo WIKI_NAME ?>.  A good place to learn about <?php echo WIKI_NAME ?> is to check out the <a href="<?php echo WikiUrl(WIKI_NAME.'/'
+._("Tutorial"), '', true); ?>"><?php echo WIKI_NAME ?> Tutorial</a></p>
+<br />
+<?php if ($PAGE1 || $PAGE2 || $PAGE3) { ?>
+Here are pages on <?php echo WIKI_NAME ?> that <?php echo $SENDER ?> thinks you will be interested in:<br />
+<?php
+    foreach (array($PAGE1, $PAGE2, $PAGE3) as $pagename) {
+      if ($dbi->isWikiPage($pagename)) {
+?>
+        <a href="<?php echo WikiUrl($pagename, '', true); ?>"><?php echo $pagename ?></a><br>
+<?php
+      }
+    }
+  }
+?>
+<br />
+<?php if ($dbi->isWikiPage($SENDERUSERNAME)) { ?>
+<p>Also, <?php echo $SENDER; ?> has his own homepage at <?php echo WIKI_NAME ?>: <a href="<?php echo WikiUrl($SENDERUSERNAME, '', true); ?>"><?php echo $SENDER ?>'s page</a></p> 
+<?php } ?>
+<br>
+<p>To create your own login on <?php echo WIKI_NAME ?>, you can <a href="<?php echo WikiUrl('NewUserRegister', '', true) ?>">Register</a></p> 
+</div>

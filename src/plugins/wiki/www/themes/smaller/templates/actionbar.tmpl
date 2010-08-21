@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: actionbar.tmpl 6204 2008-08-26 15:12:03Z vargenau $');
+// rcs_id('$Id: actionbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
 if (!$WikiTheme->DUMP_MODE) {
 // Only [Info] button when not signed in.
 // The rest behind Info
@@ -15,40 +15,40 @@ if (!$WikiTheme->DUMP_MODE) {
   <td>
   <div id="actionbuttons">
      <?php if ((!$page->get('locked') || $user->isAdmin()) and $revision) { ?>
-       <?= Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
+       <?php echo Button("edit", $revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) ?>
      <?php } else { ?>
-       <?= Button("viewsource", _("View Source")) ?>
+       <?php echo Button("viewsource", _("View Source")) ?>
      <?php } ?>
      <?php if ( $user->isSignedIn()) { ?>
       <?php if ($user->isAdmin() or mayAccessPage('change', $page->getName())) { ?>
-       <?=$SEP?><?= Button($page->get('locked') ? 'unlock' : 'lock') ?>
+       <?php echo $SEP?><?php echo Button($page->get('locked') ? 'unlock' : 'lock') ?>
        <?php if (ENABLE_PAGEPERM and mayAccessPage('change', $page->getName())) { ?>
-        <?=$SEP?><?= Button('chown') ?>
-        <?=$SEP?><?= Button('setacl') ?>
-        <?=$SEP?><?= Button('rename') ?>
+        <?php echo $SEP?><?php echo Button('chown') ?>
+        <?php echo $SEP?><?php echo Button('setacl') ?>
+        <?php echo $SEP?><?php echo Button('rename') ?>
      <?php }} ?>
      <?php if ($revision and ($user->isAdmin() or mayAccessPage('remove', $page->getName()))) { ?>
-      <?=$SEP?><?= Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
-      <?=$SEP?><?= Button('remove') ?>
+      <?php echo $SEP?><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
+      <?php echo $SEP?><?php echo Button('remove') ?>
      <?php } ?>
-     <?=$SEP?>
+     <?php echo $SEP?>
     <?php } ?>
-   <?= Button(array('action'=>'PageInfo'),_("Info"), $page->getName()) ?>
+   <?php echo Button(array('action'=>'PageInfo'),_("Info"), $page->getName()) ?>
 <?php if (((defined('DEBUG') and DEBUG and $request->getArg('action') == 'browse')) || $user->isAdmin()) { ?>
       <!-- Buttons really only for debugging -->
-      <?=$SEP?><?= Button(_("PageHistory")) ?>
-      <?=$SEP?><?= Button("diff") ?>
-      <?=$SEP?><?= Button(_("PageDump")) ?>
+      <?php echo $SEP?><?php echo Button(_("PageHistory")) ?>
+      <?php echo $SEP?><?php echo Button("diff") ?>
+      <?php echo $SEP?><?php echo Button(_("PageDump")) ?>
     <!-- End debugging buttons -->
     <?php } ?>
 <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
-    <?=$SEP?><?= Button("pdf") ?>
+    <?php echo $SEP?><?php echo Button("pdf") ?>
 <?php } ?>
   </div>
   </td>
 <?php if (empty($NOSIGNIN)) { ?>
   <td align="right">
-    <div id="signin"><?= Template('signin') ?></div>
+    <div id="signin"><?php echo Template('signin') ?></div>
   </td>
 <?php } ?>
 </tr>
