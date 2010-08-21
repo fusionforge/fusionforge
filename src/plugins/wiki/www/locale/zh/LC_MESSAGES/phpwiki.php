@@ -70,12 +70,8 @@ $locale["%s of this page"] =
    "此頁面的 %s";
 $locale["%s or %s parameter missing"] =
    "%s 或 %s 參數遺漏";
-$locale["%s pages changed."] =
-   "%s 個頁面已經變更.";
 $locale["%s pages have been changed."] =
    "%s 頁面已經變更.";
-$locale["%s pages have been permanently renamed."] =
-   "%s pages 已經永久更名了.";
 $locale["%s pages link to %s:"] =
    "%s 個頁面連結到 %s:";
 $locale["%s pages would link to %s:"] =
@@ -112,12 +108,8 @@ $locale["'%s': corrupt file"] =
    "'%s': 壞檔";
 $locale["(Copy your changes to the clipboard. You can try editing a different page or save your text in a text editor.)"] =
    "(複製你的更動到剪貼簿中. 你可以試著編輯另一個不同的頁面或存到文字編輯器中.)";
-$locale["(Pages which have been deleted at least %s days are already checked.)"] =
-   "(列出過去 %s 天內已被刪除且檢查過的頁面.)";
 $locale["(Redirected from %s)"] =
    "(已從 %s 重導向)";
-$locale["(User: %s)"] =
-   "(user: %s)";
 $locale["(Your preferences are stored as hidden data within this page)."] =
    "(你的偏好設定已經存放並隱藏在此頁面中).";
 $locale["(diff)"] =
@@ -208,8 +200,6 @@ $locale["Are you sure you want to permanently change the selected files?"] =
    "你確定你想要永久變更選定的檔案?";
 $locale["Are you sure you want to permanently remove the selected files?"] =
    "你確定你想要永久移除選定的檔案?";
-$locale["Are you sure you want to permanently search & replace text in the selected files?"] =
-   "你確定你想要永久新增並取代選定檔案中的文字?";
 $locale["Arguments"] =
    "引數";
 $locale["Attempting to use the directory '%s' instead."] =
@@ -376,8 +366,6 @@ $locale["Current language: '%s'"] =
    "目前語言: '%s'";
 $locale["Current theme: '%s'"] =
    "目前佈景主題: '%s'";
-$locale["Currently not recommended!"] =
-   "現在不建議使用!";
 $locale["Database"] =
    "資料庫";
 $locale["Date Format"] =
@@ -402,8 +390,6 @@ $locale["Describe %s here."] =
    "在這兒描述 %s.";
 $locale["Description"] =
    "描述";
-$locale["Description: Provides a list of plugins on this wiki."] =
-   "描述: 提供在此 wiki 上的 plugin 列表.";
 $locale["Dialog"] =
    "對話盒";
 $locale["Diff"] =
@@ -538,8 +524,6 @@ $locale["FrameIncludePlugin"] =
    "FrameIncludePlugin";
 $locale["From english to %s: "] =
    "從英文到 %s:";
-$locale["Full Search"] =
-   "完整搜尋";
 $locale["Full text search results for '%s'"] =
    "以 '%s' 全文搜尋的結果";
 $locale["FullDump"] =
@@ -694,8 +678,6 @@ $locale["List all pages in this wiki."] =
    "在此 wiki 列出所有頁面.";
 $locale["List all pages which link to %s."] =
    "列出所有連結到 %s 的頁面.";
-$locale["List all pages."] =
-   "列出所有頁面.";
 $locale["List page names which share an initial or final title word with '%s'."] =
    "列出分享為 '%s' 開頭或結尾的標題字的頁面名稱";
 $locale["List pages which are not linked to by any other page."] =
@@ -800,8 +782,6 @@ $locale["No pagename specified"] =
    "沒有指定頁面名稱";
 $locale["No pages changed."] =
    "沒有頁面被變更.";
-$locale["No pages renamed."] =
-   "沒有頁面被更名";
 $locale["No revisions found"] =
    "沒找到修訂";
 $locale["No uploaded file to upload?"] =
@@ -912,8 +892,6 @@ $locale["Perform searches on InterWiki sites listed in InterWikiMap."] =
    "在列在 InterWikiMap 清單中的 InterWiki 站台進行搜尋.";
 $locale["Permanently remove all selected pages."] =
    "永久移除選定的頁面.";
-$locale["Permanently remove the selected files:"] =
-   "永久移除選定的檔案:";
 $locale["Permission"] =
    "權限";
 $locale["Personal Auth Settings for '%s'"] =
@@ -1040,16 +1018,12 @@ $locale["Recursively get BackLinks or links"] =
    "遞迴地取得 BackLinks 或連結";
 $locale["Redirect"] =
    "重導向";
-$locale["Redirect to an external url"] =
-   "重導向到另一個外部 url";
 $locale["RedirectTo"] =
    "RedirectTo";
 $locale["RedirectToPlugin"] =
    "RedirectToPlugin";
 $locale["Redirects to an external web site based on form input"] =
    "以表單輸入方式重導向到另外一個外部站台";
-$locale["Redirects to another url or page."] =
-   "重導向到另一個 url 或頁面.";
 $locale["References"] =
    "偏好設定";
 $locale["Registered Users"] =
@@ -1134,8 +1108,6 @@ $locale["Select the pages to change:"] =
    "選擇頁面以進行更名:";
 $locale["Select the pages to rename:"] =
    "選擇頁面以進行更名:";
-$locale["Select the pages to search:"] =
-   "選擇頁面以進行搜尋:";
 $locale["Select: "] =
    "選擇";
 $locale["Selected page '%s' passed to '%s'."] =
@@ -1146,8 +1118,6 @@ $locale["Set individual page permissions."] =
    "設定個別頁面的權限.";
 $locale["SetAcl"] =
    "SetAcl";
-$locale["Show all changes for:"] =
-   "顯示所有變更:";
 $locale["Show and add blogs for %s"] =
    "顯示並增加 blogs - %s";
 $locale["Show and add comments for %s"] =
@@ -1156,8 +1126,6 @@ $locale["Show changes for:"] =
    "顯示變更:";
 $locale["Show extra page Info and statistics for %s."] =
    "顯示額外的頁面資訊與統計 - %s.";
-$locale["Show minor edits for:"] =
-   "顯示次要編輯:";
 $locale["Show relative dates using 'Today' and 'Yesterday'"] =
    "使用'今天'和'昨天'來顯示相對日期.";
 $locale["Show summary information of the current user sessions."] =
@@ -1248,6 +1216,8 @@ $locale["SystemInfoPlugin"] =
    "SystemInfoPlugin";
 $locale["TODO: Google can only translate from english and french. Find a translation service for %s to language %s"] =
    "TODO: Google 只能從英文與法文轉換. 為 %s 尋找轉換到語言 %s 的服務.";
+$locale["TextFormattingRules"] =
+   "TextFormattingRules";
 $locale["Thank you for editing %s."] =
    "謝謝你編輯了 %s.";
 $locale["Thanks for adding this translation!"] =
@@ -1278,8 +1248,6 @@ $locale["The PhpWeather plugin provides weather reports from the Internet."] =
    "PhpWeather plugin 由網路取得資訊並提供天氣報告";
 $locale["The PhpWiki access log file"] =
    "PhpWiki 存取日誌檔案";
-$locale["The PhpWiki programming team"] =
-   "PhpWiki 開發團隊";
 $locale["The crypt function is not available in this version of PHP."] =
    "此版本的 PHP 沒有 crypt 函數.";
 $locale["The current page has no subpages defined."] =
@@ -1310,8 +1278,6 @@ $locale["This internal action page cannot viewed."] =
    "內部動作頁面無法瀏覽.";
 $locale["This is a minor change."] =
    "這是次要變更.";
-$locale["This page already exists"] =
-   "此頁面已經存在";
 $locale["This page has been locked by the administrator and cannot be edited."] =
    "此頁面已經被管理者鎖定,並且無法編輯.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
@@ -1398,12 +1364,8 @@ $locale["Use old markup"] =
    "使用舊標記";
 $locale["User page"] =
    "使用者頁面";
-$locale["User preferences for user '%s':"] =
-   "使用者 '%s' 的偏好設定:";
 $locale["User statistics"] =
    "使用者統計";
-$locale["User: %s"] =
-   "User: %s";
 $locale["UserId"] =
    "帳號";
 $locale["UserId:"] =
@@ -1480,8 +1442,6 @@ $locale["WikiAdminRename"] =
    "WikiAdminRename";
 $locale["WikiAdminSearchReplace"] =
    "WikiAdminSearchReplace";
-$locale["WikiAdminSearchReplace %s by %s"] =
-   "WikiAdminSearchReplace %s 被 %s";
 $locale["WikiAdminSelect"] =
    "WikiAdminSelect";
 $locale["WikiAdminSetAcl"] =
@@ -1508,8 +1468,6 @@ $locale["Wikiname regexp"] =
    "Wikiname regexp";
 $locale["With the current offset, this would be reported as %s."] =
    "以目前時差,這將被顯示為 %s.";
-$locale["World"] =
-   "World";
 $locale["Wrong password. Try again."] =
    "錯誤的密碼.再試一次.";
 $locale["XML-RPC access"] =
@@ -1614,8 +1572,6 @@ $locale["has edit conflicts - skipped"] =
    "編輯衝突 - 跳過";
 $locale["home page"] =
    "首頁";
-$locale["invidual page permission"] =
-   "個別頁面權限";
 $locale["load files into this wiki"] =
    "載入檔案到此 wiki";
 $locale["lock this page"] =
@@ -1636,8 +1592,6 @@ $locale["minor edit"] =
    "次要編輯";
 $locale["minor edits"] =
    "次要編輯";
-$locale["n/a"] =
-   "n/a";
 $locale["no cache used"] =
    "沒有快取被使用";
 $locale["no page specified"] =
