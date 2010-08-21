@@ -1,12 +1,13 @@
-# $Id: Makefile 6236 2008-09-07 10:19:23Z vargenau $
+# $Id: Makefile 7341 2010-04-19 09:09:13Z rurban $
+# gnu make only
+
 # user-definable settings:
-VERSION=
 # for mysqladmin
 DBADMIN_USER=root
 DBADMIN_PASS=secret
 
 # etags (GNU Emacs 21.4.x)
-ETAGS_21_5=$(shell etags --version|egrep "Ctags 5.[67]")
+ETAGS_21_5=$(shell etags --version|egrep "Ctags 5.[6789]")
 ifeq ("$(ETAGS_21_5)", "")
   ETAGS_STDIN = /usr/bin/etags -
 else
@@ -14,10 +15,12 @@ else
   ETAGS_STDIN = /usr/bin/etags -L -
 endif
 
+VERSION=$(shell admin/dump-version.pl)
+
 ifeq ("$(VERSION)", "")
-  TARDIST = ../phpwiki.tar.bz2
+  TARDIST = phpwiki.tar.bz2
 else
-  TARDIST = ../phpwiki-$(VERSION).tar.bz2
+  TARDIST = phpwiki-$(VERSION).tar.bz2
 endif
 DB_SQLITE_DBFILE = /tmp/phpwiki-sqlite.db
 
@@ -74,7 +77,11 @@ locale:
 	cd locale
 	make
 
-install:	install-config install-database
+themes:
+	cd themes
+	make
+
+install: install-config install-database themes
 
 install-config: config/config.ini
 
@@ -128,9 +135,11 @@ ${DB_SQLITE_DBFILE}: schemas/sqlite.sql
 
 dist: $(TARDIST)
 
+cvstar: ../$(TARDIST)
+
 # --exclude='\.*'
-$(TARDIST) :
-	tar cfj $(TARDIST) --exclude=CVS \
+../$(TARDIST) : $(PHP_SRC)
+	  tar cfj $(TARDIST) --exclude=CVS \
 		--exclude=config.ini \
 		--exclude='*~'     \
 		--exclude='*.bak'  \
@@ -142,3 +151,6 @@ $(TARDIST) :
 		--exclude=TAGS.full \
 		--exclude='*.tar.bz2' \
 		.
+
+$(TARDIST) : $(PHP_SRC)
+	svn list -R | egrep -v "/\$" | tar cfj $(TARDIST)

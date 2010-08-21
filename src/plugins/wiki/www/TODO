@@ -1,26 +1,34 @@
+== Blockers ==
+* can no longer save UserPreferences: Warning: "Attempt to assign property of non-object"
+* AllPages give too many pages
+* WantedPages give too many pages (from interwiki map)
+  (to be tested in both Pear and ADODB)
+
+== Others==
+* Minimizer for JS/CSS
+** no "make clean" in themes
+** "make clean" does not work in themes with no Javascript
+** in MonoBook, IEFixes.js cannot be minimized, yuicompressor-2.4.2 gives syntax errors
+* plugin Video does not work
+
+
 short-term TODO:
 * rename should check existing subpages and rename these also.
-* Sidebar: merge AVL theme (internal MonoBook derivate with customizable box states) with Sidebar
-* fix session loss on php-5.2 (with or without DB_SESSION)
+* Sidebar: merge AVL theme (internal MonoBook derivate with customizable 
+  box states) with Sidebar
 * clarify issues with pagenames: "," breaks PageList. Escape with "~" or "\"?
+  or htmlencode forbidden chars.
 * fix Wikiwys with prettyurl, link labels and killing plugin args
-* ImportMediaWiki, ImportRdf, ImportOwl, ExportMediaWiki, ExportRdf, ExportOwl
-* WikiUser/OpenID (from DokuWiki) - Status::in_work
-* more meta stuff: OpenSearch, format=dc (Dublin Core)
-* format=mm (FreeMind) for RecentChanges, SemanticWeb's and simple PageList's. 
-  See http://wikkawiki.org/FreeMind. Maybe format=mmap for the commercial MindMap.
-* format=printable (?) for non js/dom
 * WatchList (?)
-* Spellcheck AJAX backend (see DokuWiki)
-* GeSHi Highlighter plugin
 
-TODO for 1.4.0:
+TODO:
 architecture:
+* flush <head> before <body> to parallelize css/js requests
 * Optimization: try template_lite or try simple regex replacements as before.
-* Add some xml syntax for plugins: 
-  <IncludePages pages=<!plugin-list BackLinks !> />
+* Evaluate some xml syntax for plugins (as in MediaWiki): 
+  <IncludePages pages=<plugin-list BackLinks/> />
   <BackLink include_self=false />
-  And/or fix PLUGIN_MARKUP_MAP aliases which break the InlineParser.
+4  And/or fix PLUGIN_MARKUP_MAP aliases which break the InlineParser.
 * Fix postgresql stored procedures.
 * Move serialized data from page_data / version_data to seperate SQL columns.
 * WikiDB hooks. (?)
@@ -41,6 +49,16 @@ new:
 * lang: mapping
 * fix ENABLE_MARKUP_DIVSPAN
 * WikiUser/EMailConfirm (?)
+* ImportMediaWiki, ImportRdf, ImportOwl, ExportMediaWiki, ExportRdf, ExportOwl
+* WikiUser/OpenID (from DokuWiki) - Status::in_work
+* more meta stuff: OpenSearch, format=dc (Dublin Core)
+* support missing REST interfaces (optional): action=remove => DELETE,
+  action=editpage and minor updates (rating,...) => PUT.
+  with fallbacks to POST
+* format=mm (FreeMind) for RecentChanges, SemanticWeb's and simple PageList's. 
+  See http://wikkawiki.org/FreeMind. Maybe format=mmap for the commercial MindMap.
+* Spellcheck AJAX backend (see DokuWiki)
+* GeSHi Highlighter plugin
 
 fixes:
 * fix pagelist nopage unification (store just key as names?)
@@ -48,6 +66,7 @@ fixes:
 * SQL textsearch with multiple words: AND 
   (the two new failing unit tests)
 * fix textsearch optimize with "word -word -word"
+* format=printable (?) for non js/dom
 
 OLDER TODO's:
 Maybe (probably defer):

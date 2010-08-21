@@ -1930,6 +1930,7 @@ src/plugins/wiki/www/doc/HISTORY -text
 src/plugins/wiki/www/doc/INSTALL.MacOSX -text
 src/plugins/wiki/www/doc/INSTALL.flatfile -text
 src/plugins/wiki/www/doc/INSTALL.mSQL -text
+src/plugins/wiki/www/doc/INSTALL.mssqlnative -text
 src/plugins/wiki/www/doc/INSTALL.mysql -text
 src/plugins/wiki/www/doc/INSTALL.oci8 -text
 src/plugins/wiki/www/doc/INSTALL.pgsql -text

@@ -57,7 +57,7 @@ USER_AUTH_ORDER = "Db"
 USER_AUTH_POLICY = first-only
 
 ; Store group information in wiki pages
-; there’s no need to develop a complex front end for a database.
+; there's no need to develop a complex front end for a database.
 ; Note that in performance terms this is the most expensive option.
 GROUP_METHOD = WIKIPAGE
 
@@ -133,7 +133,7 @@ The recommended way to do this is to
   - -Authenticated Users
   - -Signed Users
   - -Bogo Users
-* _Where + means the ACL allows that kind of access and – means the ACL
+* _Where + means the ACL allows that kind of access and x means the ACL
   does not allow that kind of access._
 * change the ACLs for CHANGE and REMOVE to
   - +Administrators

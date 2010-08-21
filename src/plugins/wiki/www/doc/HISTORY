@@ -263,7 +263,7 @@ some more fixes, docs, themes and plugins.
 * PageList (Jeff and Reini)
 * Several new plugins: RedirectTo, plugin-head architecture. 
   Normalize template names. WikiAdminSelect architecture: WikiAdminRemove
-* VisualWiki, TexToPng, text2png + several cached plugins (by Johannes Groﬂe)
+* VisualWiki, TexToPng, text2png + several cached plugins (by Johannes Gro√üe)
 * PhpWeather (?), PrevNext, image buttons, 
 * IncludePage (Joe Edelman), FrameInclude (Reini), Transclude (Jeff)
 * Calendar (contributed by ?), CalendarList, WikiBlog, ...
@@ -360,7 +360,7 @@ Bug fixes:
 1.2.0 02/01/01
 * Support for PHP 4.0.4 (using the dba_* interface for DBM files),
   thanks to Joel Uckelman
-* Swedish translation added, thanks to Jon ≈slund
+* Swedish translation added, thanks to Jon √Öslund
 * dbmlib.php has all functions in mysql/postgresql, thanks to Jan Hidder
 * German version updated
 * Dutch translation updated
@@ -375,7 +375,7 @@ Bug fixes:
 
 1.1.9 11/05/00: 
 * Spanish language support added, thanks to Sandino Araico 
-  S·nchez <sandino@sandino.net>
+  S√°nchez <sandino@sandino.net>
 * German language support thanks to Arno Hollosi
 * Postgresql version brought up to date (plus fixes from Sandino)
 * Neil Brown contributed a patch Arno worked in to heavily modify
@@ -596,4 +596,4 @@ URL's.
 Prior to 0.02, there were no numbered releases, and in fact there
 was only one release, so I guess that would be 0.01 :-)
 
-$Id: HISTORY 6202 2008-08-26 13:14:32Z vargenau $
+$Id: HISTORY 6718 2009-03-26 12:47:00Z vargenau $

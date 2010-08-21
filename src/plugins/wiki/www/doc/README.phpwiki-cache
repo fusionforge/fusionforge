@@ -138,7 +138,7 @@ At the moment, the source documentation is incomplete, but the example files sho
 * There is a bug in RecentChangesCached which scrambles the rss link during the first run.
 * VisualWiki and TexToPng use png image type for communication with the image creating scripts (dot and pstoimg), so they rely on CreateImageFromPNG(...) which is not necessary.
 
---JohannesGroﬂe
+--JohannesGro√üe
 
 ----
 WikiPlugin TexToPng VisualWiki

@@ -1,7 +1,8 @@
-<?php // -*-php-*- $Id: configurator.php 6385 2009-01-08 15:26:25Z rurban $
+<?php // -*-php-*- $Id: configurator.php 7568 2010-06-24 14:45:19Z vargenau $
 /*
- * Copyright 2002,2003,2005 $ThePhpWikiProgrammingTeam
+ * Copyright 2002,2003,2005,2008-2010 $ThePhpWikiProgrammingTeam
  * Copyright 2002 Martin Geisler <gimpster@gimpster.com> 
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  * Parts of this file were based on PHPWeather's configurator.php file.
@@ -156,14 +157,14 @@ if (file_exists($fs_config_file)) {
     IniConfig($fs_def_file);
 }
 
-echo '<','?xml version="1.0" encoding="iso-8859-1"?',">\n";
+echo '<','?xml version="1.0" encoding="utf-8"?',">\n";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- $Id: configurator.php 6385 2009-01-08 15:26:25Z rurban $ -->
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<!-- $Id: configurator.php 7568 2010-06-24 14:45:19Z vargenau $ -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Configuration tool for PhpWiki <?php echo $config_file ?></title>
 <style type="text/css" media="screen">
 <!--
@@ -172,7 +173,7 @@ body { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 80%; }
 pre { font-size: 120%; }
 td { border: thin solid black }
 tr { border: none }
-div.hint { border: thin solid red, background-color: #eeeeee; }
+div.hint { background-color: #eeeeee; }
 tr.hidden { border: none; display: none; }
 td.part { background-color: #eeeeee; color: inherit; }
 td.instructions { background-color: #ffffee; width: <?php echo $tdwidth ?>px; color: inherit; }
@@ -180,7 +181,7 @@ td.unchangeable-variable-top   { border-bottom: none; background-color: #ffffee;
 td.unchangeable-variable-left  { border-top: none; background-color: #ffffee; color:inherit; }
 -->
 </style>
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 <!--
 function update(accepted, error, value, output) {
   var msg = document.getElementById(output);
@@ -271,6 +272,7 @@ function do_init() {
 </div>
 
 <?php
+define('DEBUG', 0);
 //define('DEBUG', 1);
 /**
  * The Configurator is a php script to aid in the configuration of PhpWiki.
@@ -523,42 +525,35 @@ This controls how PhpWiki sets the HTTP cache control
 headers (Expires: and Cache-Control:) 
 
 Choose one of:
-
 <dl>
 <dt>NO_CACHE</dt>
 <dd>This is roughly the old (pre 1.3.4) behaviour.  PhpWiki will
     instruct proxies and browsers never to cache PhpWiki output.</dd>
-
 <dt>STRICT</dt>
 <dd>Cached pages will be invalidated whenever the database global
     timestamp changes.  This should behave just like NONE (modulo
     bugs in PhpWiki and your proxies and browsers), except that
     things will be slightly more efficient.</dd>
-
 <dt>LOOSE</dt>
 <dd>Cached pages will be invalidated whenever they are edited,
     or, if the pages include plugins, when the plugin output could
     concievably have changed.
-
     <p>Behavior should be much like STRICT, except that sometimes
        wikilinks will show up as undefined (with the question mark)
        when in fact they refer to (recently) created pages.
        (Hitting your browsers reload or perhaps shift-reload button
        should fix the problem.)</p></dd>
-
 <dt>ALLOW_STALE</dt>
 <dd>Proxies and browsers will be allowed to used stale pages.
     (The timeout for stale pages is controlled by CACHE_CONTROL_MAX_AGE.)
-
     <p>This setting will result in quirky behavior.  When you edit a
        page your changes may not show up until you shift-reload the
        page, etc...</p>
-
     <p>This setting is generally not advisable, however it may be useful
        in certain cases (e.g. if your wiki gets lots of page views,
        and few edits by knowledgable people who won't freak over the quirks.)</p>
 </dd>
-
+</dl>
 The default is currently LOOSE.");
 
 $properties["HTTP Cache Control Max Age"] =
@@ -639,6 +634,7 @@ new _variable_selection('_dsn_sqltype',
               array('mysql'  => "MySQL",
                     'pgsql'  => "PostgreSQL",
                     'mssql'  => "Microsoft SQL Server",
+                    'mssqlnative'  => "Microsoft SQL Server (native)",
                     'oci8'   => "Oracle 8",
                     'mysqli' => "mysqli (only ADODB)",
                     'mysqlt' => "mysqlt (only ADODB)",
@@ -723,7 +719,7 @@ new _define_selection('DATABASE_DBA_HANDLER',
                     'db2'  => "DB2 - BerkeleyDB (Sleepycat) DB2",
                     'db3'  => "DB3 - BerkeleyDB (Sleepycat) DB3. Default on Windows but not on every Linux",
                     'db4'  => "DB4 - BerkeleyDB (Sleepycat) DB4."), "
-Use 'gdbm', 'dbm', 'db2', 'db3' or 'db4' depending on your DBA handler methods supported: <br >  "
+Use 'gdbm', 'dbm', 'db2', 'db3' or 'db4' depending on your DBA handler methods supported: <br />  "
                       . (function_exists("dba_handlers") ? join(", ",dba_handlers()) : "")
 		      . "\n\nBetter not use other hacks such as inifile, flatfile or cdb");
 
@@ -910,6 +906,9 @@ separate the name of each one with colons.
   USER_AUTH_ORDER = 'PersonalPage : Db'
   USER_AUTH_ORDER = 'BogoLogin : PersonalPage'
 </pre>");
+
+$properties["ENABLE_AUTH_OPENID"] =
+new boolean_define('ENABLE_AUTH_OPENID');
 
 $properties["PASSWORD_LENGTH_MINIMUM"] =
 new numeric_define('PASSWORD_LENGTH_MINIMUM', PASSWORD_LENGTH_MINIMUM);
@@ -1268,26 +1267,21 @@ Most of the page appearance is controlled by files in the theme
 subdirectory.
 
 There are a number of pre-defined themes shipped with PhpWiki.
-Or you may create your own, e.g. by copying and then modifying one of
-stock themes.
+Or you may create your own, deriving from existing ones.
 <pre>
+  THEME = Sidebar (default)
   THEME = default
   THEME = MacOSX
   THEME = MonoBook (WikiPedia)
   THEME = smaller
   THEME = Wordpress
   THEME = Portland
-  THEME = Sidebar
   THEME = Crao
   THEME = wikilens (with Ratings)
   THEME = Hawaiian
   THEME = SpaceWiki
   THEME = Hawaiian
-</pre>
-  
-Problems:
-<pre>
-  THEME = blog     (Kubrick)   [experimental. Several links missing]
+  THEME = blog     (Kubrick)   [experimental]
 </pre>");
 
 $properties["Character Set"] =
@@ -1299,26 +1293,26 @@ $properties["Ignore Charset Not Supported Warning"] =
 $properties["Language"] =
 new _define_selection_optional('DEFAULT_LANGUAGE',
                array('en' => "English",
-                     ''   => "<empty> (user-specific)",
-                     'fr' => "Fran~is",
+                     ''   => "&lt;empty&gt; (user-specific)",
+                     'fr' => "Français",
                      'de' => "Deutsch",
                      'nl' => "Nederlands",
-                     'es' => "Espa~l",
+                     'es' => "Español",
                      'sv' => "Svenska",
                      'it' => "Italiano",
                      'ja' => "Japanese",
                      'zh' => "Chinese"), "
 Select your language/locale - default language is \"en\" for English.
 Other languages available:<pre>
-English \"en\"  (English    - HomePage)
-German  \"de\" (Deutsch    - StartSeite)
-French  \"fr\" (Fran~is   - Accueil)
-Dutch   \"nl\" (Nederlands - ThuisPagina)
-Spanish \"es\" (Espa~l    - P~inaPrincipal)
-Swedish \"sv\" (Svenska    - Framsida)
-Italian \"it\" (Italiano   - PaginaPrincipale)
-Japanese \"ja\" (Japanese   - ~~~~~~)
-Chinese  \"zh\" (Chinese)
+English  \"en\" (English    - HomePage)
+German   \"de\" (Deutsch    - StartSeite)
+French   \"fr\" (Français   - Accueil)
+Dutch    \"nl\" (Nederlands - ThuisPagina)
+Spanish  \"es\" (Español    - PáginaPrincipal)
+Swedish  \"sv\" (Svenska    - Framsida)
+Italian  \"it\" (Italiano   - PaginaPrincipale)
+Japanese \"ja\" (Japanese   - ホームページ)
+Chinese  \"zh\" (Chinese    - 首頁)
 </pre>
 If you set DEFAULT_LANGUAGE to the empty string, your systems default language
 (as determined by the applicable environment variables) will be
@@ -1368,7 +1362,7 @@ URL of these types will be automatically linked.
 within a named link [name|uri] one more protocol is defined: phpwiki");
 
 $properties["Inline Images"] =
-    new list_define('INLINE_IMAGES', 'png|jpg|gif');
+    new list_define('INLINE_IMAGES', 'png|jpg|jpeg|gif');
 
 $properties["WikiName Regexp"] =
 new _define('WIKI_NAME_REGEXP', "(?<![[:alnum:]])(?:[[:upper:]][[:lower:]]+){2,}(?![[:alnum:]])", "
@@ -1407,7 +1401,7 @@ The default behavior is to match Category* or Topic* links.");
 $properties["Author and Copyright Site Navigation Links"] =
 new _define_commented_optional('COPYRIGHTPAGE_TITLE', "GNU General Public License", "
 
-These will be inserted as <link rel> tags in the html header of
+These will be inserted as &lt;link rel&gt; tags in the html header of
 every page, for search engines and for browsers like Mozilla which
 take advantage of link rel site navigation.
 
@@ -1437,12 +1431,6 @@ new boolean_define_optional('TOC_FULL_SYNTAX');
 
 $properties["ENABLE_MARKUP_COLOR"] =
 new boolean_define_optional('ENABLE_MARKUP_COLOR');
-
-$properties["ENABLE_MARKUP_TEMPLATE"] =
-new boolean_define_optional('ENABLE_MARKUP_TEMPLATE');
-
-$properties["ENABLE_MARKUP_MEDIAWIKI_TABLE"] =
-new boolean_define_optional('ENABLE_MARKUP_MEDIAWIKI_TABLE');
 
 $properties["DISABLE_MARKUP_WIKIWORD"] =
 new boolean_define_optional('DISABLE_MARKUP_WIKIWORD');
@@ -1728,6 +1716,10 @@ class _variable {
 	    $this->prefix = "";
     }
 
+    function _define($config_item_name, $default_value='', $description = '', $jscheck = '') {
+    	$this->_variable($config_item_name, $default_value, $description, $jscheck);
+    }
+
     function value() {
       global $HTTP_POST_VARS;
       if (isset($HTTP_POST_VARS[$this->config_item_name]))
@@ -1861,8 +1853,9 @@ extends _variable {
 	    $this->default_value = constant($this->get_config_item_name());
 	else
 	    $this->default_value = null;
-        while(list($option, $label) = each($values)) {
-	    if (!is_null($this->default_value) and $this->default_value === $option)
+
+        foreach ($values as $option => $label) {
+	    if (!is_null($this->default_value) && $this->default_value === $option)
 		$output .= "  <option value=\"$option\" selected=\"selected\">$label</option>\n";
 	    else
 		$output .= "  <option value=\"$option\">$label</option>\n";
@@ -2514,7 +2507,7 @@ if (!empty($HTTP_POST_VARS['action'])
     }
     
     if ($fp) {
-        fputs($fp, $config);
+        fputs($fp, utf8_encode($config));
         fclose($fp);
         echo "<p>The configuration was written to <code><b>$config_file</b></code>.</p>\n";
         if ($new_filename) {
@@ -2531,7 +2524,7 @@ if (!empty($HTTP_POST_VARS['action'])
     echo "<hr />\n<p>Here's the configuration file based on your answers:</p>\n";
     echo "<form method=\"get\" action=\"", $configurator, "\">\n";
     echo "<textarea id='config-output' readonly='readonly' style='width:100%;' rows='30' cols='100'>\n";
-    echo htmlentities($config);
+    echo htmlentities($config, ENT_COMPAT, "UTF-8");
     echo "</textarea></form>\n";
     echo "<hr />\n";
 

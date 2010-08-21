@@ -1,4 +1,4 @@
-<?php
+<?php // -*-php-*- $Id: ImageTile.php 7507 2010-06-09 10:10:41Z vargenau $
 // FIXME! This is a mess. Everything.
 require_once('lib/stdlib.php');
 
@@ -11,7 +11,7 @@ if (preg_match('/^(http|ftp|https):\/\//i',$_REQUEST['url'])) {
     $fp = fopen('config/config.ini','r');
     while ($config = fgetcsv($fp,1024,';')) {
         if (preg_match('/DATA_PATH/',$config[0])) {
-            list($key,$value) = split('=',$config[0]);
+            list($key,$value) = explode('=', $config[0]);
             $data_path = trim($value).'/';
 	    break;
 	}
@@ -140,16 +140,6 @@ function show_plain () {
     readfile($_REQUEST['url']);
     exit();
 }
-
-/*
- $Log: not supported by cvs2svn $
- Revision 1.5  2007/01/04 16:44:18  rurban
- mkdir 0775
-
- Revision 1.4  2005/10/31 17:03:19  rurban
- fix "r"
-
-*/
 
 // Local Variables:
 // mode: php

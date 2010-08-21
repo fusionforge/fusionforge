@@ -1,4 +1,4 @@
-<?php // $Id: index.php 6204 2008-08-26 15:12:03Z vargenau $ 
+<?php // $Id: index.php 7102 2009-09-09 13:11:38Z vargenau $ 
 	header( "Location: ../index.php?pagename=UpLoad" );
 	exit();
 ?>

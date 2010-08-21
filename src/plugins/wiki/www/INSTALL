@@ -1,17 +1,12 @@
 REQUIREMENTS
 
-PhpWiki requires a web server with at least PHP version 4.0.6.
-PhpWiki was tested 4.0.4pl1 and 4.0.5 also, but several bugs in these 
-releases make them unstable for production sites.
+PhpWiki requires a web server with at least PHP version 4.3.10.
+PhpWiki was tested with 4.4.7 (centos4), 4.3.10, 4.4.9, 5.0.3,
+5.1.6 (centos5), 5.2.10, 5.3, 6.0.
 
-Due to a security issue found in all versions of PHP (including 3.x
-and 4.x), all users of PHP are strongly encouraged to either upgrade
-to at least PHP 4.2.2, or install a patch available for PHP 3.0.18, 
-4.0.6 and 4.1.0/4.1.1. Visit <http://www.php.net> for downloads and 
-information. 
-Larger phpwiki installations (big pages or > 500 pages) 
-with PHP <= 4.3.9 suffer from a PCRE memory problem and might not 
-work with the 8MB default PHP memory limit.
+All users of PHP are strongly encouraged to upgrade to PHP 5.2.13
+or PHP 5.3.2 that are the supported versions.
+Visit <http://www.php.net> for downloads and information.
 
 You need the Perl regular expressions package compiled in; this is the
 default for PHP, so you probably have it. If you don't you'll see an
@@ -19,15 +14,15 @@ error like "function preg_replace() not defined."
 
 PHP must also be compiled with support for the type of database you
 want to use, i.e. --with-gdbm, --with-db2, --with-db3, --with-msql,
---with-pgsql. (With PHP4 MySQL support is always enabled. With PHP5 
-sqlite instead). Consult the PHP installation manual for specific 
-installation and configure options. 
+--with-pgsql. (With PHP4 MySQL support is always enabled. With PHP5
+sqlite instead). Consult the PHP installation manual for specific
+installation and configure options.
 <http://www.php.net/manual/en/installation.php>
 
 Since version 1.3.0 PhpWiki uses the 'DB.php' from PEAR, a database
 abstraction layer which is part of PHP. PhpWiki version 1.3.3 and later
-includes the necessary PEAR libraries and will use it if your system 
-PEAR library can not be found. For more information about PEAR 
+includes the necessary PEAR libraries and will use it if your system
+PEAR library can not be found. For more information about PEAR
 see <http://pear.php.net/>.
 PhpWiki version 1.3.7 and later includes the ADODB libraries and will
 use it for DATABASE_TYPE=ADODB. ADODB has more features, can use yet
@@ -39,19 +34,19 @@ PDO for php5.
 
 QUICK START INSTRUCTIONS
 
-Copy 'config/config-dist.ini' to 'config/config.ini' and edit the 
+Copy 'config/config-dist.ini' to 'config/config.ini' and edit the
 settings in 'config/config.ini' to your liking.
 
 By default PhpWiki is configured to use a dba database. If there
 is no dba on your system, you will see an error like this the first
 time you try to use PhpWiki:
- 
-    "Fatal error: Call to undefined function: dba_open() in 
+
+    "Fatal error: Call to undefined function: dba_open() in
      phpwiki/lib/DbaDatabase.php on line 32"
 
-To correct this you will have to check the available dba handlers 
-(default: db3 for Windows, otherwise gdbm), install the dba extension 
-or preferably an sql-compatible database such as MySQL or PostgreSQL 
+To correct this you will have to check the available dba handlers
+(default: db3 for Windows, otherwise gdbm), install the dba extension
+or preferably an sql-compatible database such as MySQL or PostgreSQL
 and make the necessary configuration changes to 'lib/config/config.ini'.
 
 
@@ -71,7 +66,7 @@ live. That's it.
 bash$ gzip -d phpwiki-X.XX.tar.gz
 bash$ tar -xvf phpwiki-X.XX.tar
 
-In the config subdirectory copy 'config-dist.ini' to 'config.ini' and 
+In the config subdirectory copy 'config-dist.ini' to 'config.ini' and
 edit the settings in 'config.ini' to your liking.
 
 
@@ -125,7 +120,7 @@ evil to happen:
 
     <http://www.cert.org/advisories/CA-2000-02.html>
 
-Set the ENABLE_RAW_HTML to true in ' config/config.ini' to allow
+Set the ENABLE_RAW_HTML to true in 'config/config.ini' to allow
 embedded HTML, but you should NEVER do this if your Wiki is publicly
 accessible!
 
@@ -156,4 +151,4 @@ You can join this list at:
 
 FIN
 
-$Id: INSTALL 6198 2008-08-26 09:14:36Z vargenau $
+$Id: INSTALL 7539 2010-06-17 09:36:41Z vargenau $

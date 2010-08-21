@@ -1,15 +1,15 @@
-<?php
+<?php // -*-php-*- $Id: SOAP.php 7638 2010-08-11 11:58:40Z vargenau $
 /**
  * SOAP server
  * Taken from http://www.wlug.org.nz/archive/
  * Please see http://phpwiki.sourceforge.net/phpwiki/PhpWiki.wdsl
  * for the wdsl discussion.
  *
- * Todo: 
- * checkCredentials: set the $GLOBALS['request']->_user object for 
+ * Todo:
+ * checkCredentials: set the $GLOBALS['request']->_user object for
  *                   mayAccessPage
  * enable native pecl extension (xml-rpc or soap)
- * serverurl: 
+ * serverurl:
  *   Installer helper which changes server url of the default PhpWiki.wdsl
  *   Or do it dynamically in the soap class? No, the client must connect to us.
  *
@@ -51,7 +51,7 @@ function checkCredentials(&$server, &$credentials, $access, $pagename) {
                 $credentials['username'] = $_SERVER['REMOTE_ADDR'];
             elseif (isset($GLOBALS['REMOTE_ADDR']))
                 $credentials['username'] = $GLOBALS['REMOTE_ADDR'];
-            else 
+            else
                 $credentials['username'] = $server->host;
         }
     }
@@ -63,7 +63,7 @@ function checkCredentials(&$server, &$credentials, $access, $pagename) {
     } else {
         $request->_user = new WikiUser($request, $credentials['username']);
     }
-    $request->_user->AuthCheck(array('userid' => $credentials['username'], 
+    $request->_user->AuthCheck(array('userid' => $credentials['username'],
 				     'passwd' => $credentials['password']));
     if (! mayAccessPage ($access, $pagename))
         $server->fault(401,'',"no permission");
@@ -73,8 +73,8 @@ $GLOBALS['SERVER_NAME'] = SERVER_URL;
 $GLOBALS['SCRIPT_NAME'] = DATA_PATH . "/SOAP.php";
 $url = SERVER_URL . DATA_PATH . "/SOAP.php";
 
-// Local or external wdsl support is experimental. 
-// It works without also. Just the client has to 
+// Local or external wdsl support is experimental.
+// It works without also. Just the client has to
 // know the wdsl definitions.
 $server = new soap_server(/* 'PhpWiki.wdsl' */);
 // Now change the server url to ours, because in the wdsl is the original PhpWiki address
@@ -213,7 +213,7 @@ function getRecentChanges($limit=false, $since=false, $include_minor=false, $cre
     global $server;
     checkCredentials($server,$credentials,'view',_("RecentChanges"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
-    $params = array('limit' => $limit, 'since' => $since, 
+    $params = array('limit' => $limit, 'since' => $since,
 		    'include_minor_revisions' => $include_minor);
     $page_iter = $dbi->mostRecent($params);
     $pages = array();
@@ -303,13 +303,13 @@ function callPlugin($pluginname, $pluginargs, $credentials=false) {
     }
     return $pages;
 }
-/** 
+/**
  * array listRelations([ Integer option = 1 ])
  *
  * Returns an array of all available relation names.
  *   option: 1 relations only ( with 0 also )
  *   option: 2 attributes only
- *   option: 3 both, all names of relations and attributes 
+ *   option: 3 both, all names of relations and attributes
  *   option: 4 unsorted, this might be added as bitvalue: 7 = 4+3. default: sorted
  * For some semanticweb autofill methods.
  *
@@ -318,8 +318,8 @@ function callPlugin($pluginname, $pluginargs, $credentials=false) {
 function listRelations($option = 1, $credentials=false) {
     global $server;
     checkCredentials($server,$credentials,'view',_("HomePage"));
-    $also_attributes = $option & 2; 
-    $only_attributes = $option & 2 and !($option & 1); 
+    $also_attributes = $option & 2;
+    $only_attributes = $option & 2 and !($option & 1);
     $sorted = !($option & 4);
     return $dbh->listRelations($also_attributes,
 			       $only_attributes,
@@ -351,12 +351,11 @@ function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=
 
 $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>
