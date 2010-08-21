@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: xmlrpc-servers.php 7181 2009-10-05 14:25:48Z vargenau $
 /**
   * List of various interop and wiki servers to test against.
   * interop for the basic library functionality, and then the wiki API.

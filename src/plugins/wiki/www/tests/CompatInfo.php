@@ -2,28 +2,27 @@
 /* Get the Compatibility info for phpwiki
    http://pear.php.net/package/PHP_CompatInfo
 
-   $Id: CompatInfo.php 6206 2008-08-26 15:20:22Z vargenau $
+   $Id: CompatInfo.php 7638 2010-08-11 11:58:40Z vargenau $
 */
 /*
  * Copyright (C) 2004 Reini Urban <rurban@x-ray.at>
  *
  * This file is part of PhpWiki.
- * 
+ *
  * PhpWiki is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
- 
 
 require_once 'PHP/CompatInfo.php';
 
@@ -36,8 +35,8 @@ function out_row($row, $header = false) {
     if (!empty($file) and substr($file,0,3) != '<b>' and $file != 'File') {
         $row[0] = '<a href="'.$PHP_SELF.'?file='.urlencode($file).'">'.$file.'</a>';
     }
-    foreach ($row as $r) { 
-        echo "<$tag>", empty($r) ? '&nbsp;' : "$r", "</$tag>"; 
+    foreach ($row as $r) {
+        echo "<$tag>", empty($r) ? '&nbsp;' : "$r", "</$tag>";
     }
     echo "</tr>\n";
 }
@@ -103,7 +102,7 @@ foreach ($r as $key => $info) {
                 $const = array_shift($info['constants']);
             }
             out_row(array($file, $info['version'], $ext, $const));
-            
+          
             if (is_array($info['extensions'])
                 and sizeof($info['extensions']) >= sizeof($info['constants'])) {
                 foreach ($info['extensions'] as $i => $ext) {
@@ -153,22 +152,11 @@ if ($debug) {
     echo "</pre>\n";
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2004/08/24 00:27:29  rurban
-// Turn recursion on
-//
-// Revision 1.1  2004/08/24 00:21:57  rurban
-// Print the PHP compatibility info for phpwiki.
-// per file and per project,
-// (which function is dependend on which php version?)
-// 
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:    
+// End:  
 ?>

@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: InlineParserTest.php 6208 2008-08-26 15:25:38Z vargenau $');
+// rcs_id('$Id: InlineParserTest.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /* Copyright (C) 2004 Dan Frankowski <dfrankow@cs.umn.edu>
  *           (C) 2006, 2007 Reini Urban <rurban@x-ray.at>
@@ -9,7 +9,7 @@ require_once 'lib/InlineParser.php';
 require_once 'PHPUnit.php';
 
 class InlineParserTest extends phpwiki_TestCase {
-	
+
     function _tests() {
         $uplink = getUploadDataPath().'/image.jpg';
         // last update: 1.3.13
@@ -52,14 +52,14 @@ class InlineParserTest extends phpwiki_TestCase {
 	    call_user_func(array(&$this, $this->_name));
 	}
     }
-    
+  
     function testNoWikiWords() {
         $str1 = 'This has no wiki words, and is all text.';
         $xmlc1 = TransformInline($str1);
         $this->assertTrue(isa($xmlc1, 'XmlContent'));
         $c1 = $xmlc1->getContent();
-        $this->assertEquals(1, count($c1)); 
-        $this->assertEquals($str1, $c1[0]); 
+        $this->assertEquals(1, count($c1));
+        $this->assertEquals($str1, $c1[0]);
     }
 
     function testWikiWord() {
@@ -69,18 +69,18 @@ class InlineParserTest extends phpwiki_TestCase {
         $this->assertTrue(isa($xml, 'XmlContent'));
         $c1 = $xml->getContent();
         $this->assertEquals(3, count($c1));
-        $this->assertTrue(isa($c1[1], 'Cached_WikiLink')); 
+        $this->assertTrue(isa($c1[1], 'Cached_WikiLink'));
 
-        $this->assertEquals('This has 1 ', $c1[0]); 
-        $this->assertEquals($ww, $c1[1]->asString()); 
-        $this->assertEquals('.', $c1[2]); 
+        $this->assertEquals('This has 1 ', $c1[0]);
+        $this->assertEquals($ww, $c1[1]->asString());
+        $this->assertEquals('.', $c1[2]);
     }
-    
+  
     function _testLink($wiki, $expected = null) {
         if (is_null($expected)) {
             $ta = $this->_tests();
             $expected = $ta[$wiki];
-        }     
+        }   
         $xml = TransformInline($wiki);
         $this->assertTrue(isa($xml, 'XmlContent'));
         $expectobj = unserialize($expected);
@@ -95,12 +95,11 @@ foreach (InlineParserTest::_tests() as $wiki => $expected) {
     $GLOBALS['suite']->addTest(new InlineParserTest($name));
 }
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

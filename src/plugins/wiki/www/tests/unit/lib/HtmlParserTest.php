@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: HtmlParserTest.php 6208 2008-08-26 15:25:38Z vargenau $');
+// rcs_id('$Id: HtmlParserTest.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /* Copyright (C) 2004, Reini Urban <rurban@x-ray.at>
  */
@@ -20,7 +20,7 @@ class HtmlParserTest extends phpwiki_TestCase {
                            "<HR>"		     => "----",
                            "<DT><DD>Indent</DD></DT>" => ";:Indent",
                            "<NOWIKI>nowiki</NOWIKI>"  => "<verbatim>\nnowiki\n</verbatim>",
-                           "<DL><DT> Def </DT><DD> List</DD></DL>" => "; Def : List", 
+                           "<DL><DT> Def </DT><DD> List</DD></DL>" => "; Def : List",
                            );
         if (USE_GLOBAL_SAX)
             $parser = new HtmlParser("PhpWiki2"); // will not work!
@@ -38,16 +38,14 @@ class HtmlParserTest extends phpwiki_TestCase {
                 $parser->__destruct();
         }
     }
-  
+
 }
 
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

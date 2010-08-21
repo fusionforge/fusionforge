@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: xmlrpc_utils.php 7181 2009-10-05 14:25:48Z vargenau $
 
 // This file has moved. keeping below for legacy compat reasons.
 

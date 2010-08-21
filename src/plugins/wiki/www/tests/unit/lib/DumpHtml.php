@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: DumpHtml.php 7181 2009-10-05 14:25:48Z vargenau $
 /**
  * 2nd important test:
  *   Check if all standard pages can be rendered (dumped)

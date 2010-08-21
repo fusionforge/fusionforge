@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: XmlRpcTest.php 6208 2008-08-26 15:25:38Z vargenau $');
+// rcs_id('$Id: XmlRpcTest.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /* Copyright (C) 2007 Reini Urban
  */
@@ -49,12 +49,11 @@ class XmlRpcTest extends phpwiki_TestCase {
     */
 }
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

@@ -7,6 +7,7 @@
  * http://www.ecyrd.com/JSPWiki/Wiki.jsp?page=WikiRPCInterface
 
  * Author: Reini Urban
+ * $Id: xmlrpc-client.php 7181 2009-10-05 14:25:48Z vargenau $
  */
 
 /*

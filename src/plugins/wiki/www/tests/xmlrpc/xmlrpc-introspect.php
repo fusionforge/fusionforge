@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: xmlrpc-introspect.php 7181 2009-10-05 14:25:48Z vargenau $
 
 /*********************************
 * system.describeMethods Support *

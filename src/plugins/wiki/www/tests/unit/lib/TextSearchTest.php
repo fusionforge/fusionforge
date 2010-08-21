@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: TextSearchTest.php 7181 2009-10-05 14:25:48Z vargenau $
 
 require_once 'lib/TextSearchQuery.php';
 require_once 'PHPUnit.php';

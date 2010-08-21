@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: pcre-crash.php 7181 2009-10-05 14:25:48Z vargenau $
 	$blockpats=array();
 
         $blockpats[] = '[ \t]+\S(?:.*\s*\n[ \t]+\S)*';

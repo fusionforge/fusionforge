@@ -3014,6 +3014,7 @@ src/plugins/wiki/www/tests/makemakebuild.pl -text
 src/plugins/wiki/www/tests/maketest.pl -text
 src/plugins/wiki/www/tests/unit/_mem_pl.ploticus -text
 src/plugins/wiki/www/tests/unit/combine_define.pl -text
+src/plugins/wiki/www/tests/unit/lib/AtomParserTest.php -text
 src/plugins/wiki/www/tests/unit/lib/DumpHtml.php -text
 src/plugins/wiki/www/tests/unit/lib/HtmlParserTest.php -text
 src/plugins/wiki/www/tests/unit/lib/InlineParserTest.php -text
@@ -3023,10 +3024,12 @@ src/plugins/wiki/www/tests/unit/lib/TextSearchTest.php -text
 src/plugins/wiki/www/tests/unit/lib/XmlRpcTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/AllPagesTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/AllUsersTest.php -text
+src/plugins/wiki/www/tests/unit/lib/plugin/AtomFeedTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/IncludePageTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/ListPagesTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/OrphanedPagesTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/WantedPagesTest.php -text
+src/plugins/wiki/www/tests/unit/lib/plugin/atom-example.xml -text
 src/plugins/wiki/www/tests/unit/mysql-test-destroy.sql -text
 src/plugins/wiki/www/tests/unit/mysql-test-initialize.sql -text
 src/plugins/wiki/www/tests/unit/pcre-crash.php -text

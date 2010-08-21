@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: validate.php 7181 2009-10-05 14:25:48Z vargenau $
 
 /*
   This file is part of, or distributed with, libXMLRPC - a C library for 

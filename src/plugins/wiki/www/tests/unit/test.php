@@ -1,28 +1,29 @@
 <?php // #!/usr/local/bin/php -Cq
 /* Copyright (C) 2004 Dan Frankowski <dfrankow@cs.umn.edu>
  * Copyright (C) 2004,2005,2006 Reini Urban <rurban@x-ray.at>
+ * $Id: test.php 7638 2010-08-11 11:58:40Z vargenau $
  *
  * This file is part of PhpWiki.
- * 
+ *
  * PhpWiki is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Unit tests for PhpWiki. 
+ * Unit tests for PhpWiki.
  *
- * You must have PEAR's PHPUnit package <http://pear.php.net/package/PHPUnit>. 
+ * You must have PEAR's PHPUnit package <http://pear.php.net/package/PHPUnit>.
  * These tests are unrelated to test/maketest.pl, which do not use PHPUnit.
  * These tests run from the command-line as well as from the browser.
  * Use the argv (from cli) or tests (from browser) params to run only certain tests.
@@ -61,7 +62,7 @@ if (substr(PHP_OS,0,3) == 'WIN')
     $cur_dir = str_replace("\\","/", $cur_dir);
 $rootdir = $cur_dir . '/../../';
 $ini_sep = substr(PHP_OS,0,3) == 'WIN' ? ';' : ':';
-$include_path = ini_get('include_path') . $ini_sep 
+$include_path = ini_get('include_path') . $ini_sep
               . $rootdir . $ini_sep . $rootdir . "lib/pear";
 ini_set('include_path', $include_path);
 define('DEFAULT_LANGUAGE','en'); // don't use browser detection
@@ -88,16 +89,16 @@ $database_backends = array(
                            'ADODB', // same backend as defined in the config.ini DSN
 			   // specific backends (need to be setup as db=test_phpwiki)
 			   'PearDB_pgsql', 'PearDB_sqlite', 'PearDB_mysql',
-			   //'PearDB_oci8','PearDB_mssql', 
-			   'ADODB_postgres7', 'ADODB_sqlite', 'ADODB_mysql', 
-			   //'ADODB_oci8', 'ADODB_mssql', 
+			   //'PearDB_oci8','PearDB_mssql',
+			   'ADODB_postgres7', 'ADODB_sqlite', 'ADODB_mysql',
+			   //'ADODB_oci8', 'ADODB_mssql',
                            // 'cvs'
                            );
 if ((int)substr(phpversion(), 1) >= 5)
     array_push($database_backends, 'PDO_pqsql', 'PDO_sqlite', 'PDO_mysql');
                                    //'PDO_oci', 'PDO_odbc'
 
-//TODO: convert cvs test                           
+//TODO: convert cvs test                         
 // For "cvs" see the seperate tests/unit_test_backend_cvs.php (cvs is experimental)
 //TODO: read some database values from config.ini, just use the "test_" prefix
 // "flatfile" testing occurs in "tests/unit/.testbox/flatfile"
@@ -123,7 +124,7 @@ function printMemoryUsage($msg = '') {
         $mem = getMemoryUsage();
         if (!$initmem) $initmem = $mem;
         // old libc on sf.net server doesn't understand "%+4d"
-        echo sprintf("%8d\t[%s%4d]\t[+%4d]\n", $mem, $mem > $oldmem ? "+" : ($mem == $oldmem ? " " : ""), 
+        echo sprintf("%8d\t[%s%4d]\t[+%4d]\n", $mem, $mem > $oldmem ? "+" : ($mem == $oldmem ? " " : ""),
                      $mem - $oldmem, $mem - $initmem);
         // TODO: print time
         flush();
@@ -162,7 +163,7 @@ if (defined('E_STRICT') and (E_ALL & E_STRICT)) // strict php5?
 else
     error_reporting(E_ALL); // php4
 
-// This is too strict, fails on every notice and warning. 
+// This is too strict, fails on every notice and warning.
 /*
 function myErrorHandler$errno, $errstr, $errfile, $errline) {
    echo "$errfile: $errline: error# $errno: $errstr\n";
@@ -198,7 +199,7 @@ function purge_dir($dir) {
 }
 
 function purge_testbox() {
-    global $DBParams;	
+    global $DBParams;
     if (isset($GLOBALS['request'])) {
         $dbi = $GLOBALS['request']->getDbh();
     }
@@ -243,8 +244,8 @@ function html_option_form() {
     global $debug_level, $user_level, $start_debug;
 
     $form = HTML();
-    $option = HTML::div(array('class' => 'option'), 
-                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;','onDblClick'=>'flipAll(\'test[\')'), 
+    $option = HTML::div(array('class' => 'option'),
+                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;','onDblClick'=>'flipAll(\'test[\')'),
                                    ' test: '),
                         HTML::br());
     $i = 0;
@@ -256,8 +257,8 @@ function html_option_form() {
     }
     $form->pushContent(HTML::td($option));
 
-    $option = HTML::div(array('class' => 'option'), 
-                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;', 'onDblClick'=>'flipAll(\'db[\')'), 
+    $option = HTML::div(array('class' => 'option'),
+                        HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;', 'onDblClick'=>'flipAll(\'db[\')'),
                                    ' db: '),
                         HTML::br());
     foreach ($GLOBALS['database_backends'] as $s) {
@@ -274,7 +275,7 @@ function html_option_form() {
   formObj = document.forms[0];
   for (var i=0; i < formObj.length; i++) {
       fldObj = formObj.elements[i];
-      if ((fldObj.type == 'checkbox') && (fldObj.name.substring(0,formName.length) == formName)) { 
+      if ((fldObj.type == 'checkbox') && (fldObj.name.substring(0,formName.length) == formName)) {
          if (isFirstSet == -1)
            isFirstSet = (fldObj.checked) ? true : false;
          fldObj.checked = (isFirstSet) ? false : true;
@@ -285,7 +286,7 @@ function updateDebugEdit(formObj) {
   val=0;
   for (var i=0; i < formObj.length; i++) {
       fldObj = formObj.elements[i];
-      if ((fldObj.type == 'checkbox') && (fldObj.name.substring(0,7) == '_debug[')) { 
+      if ((fldObj.type == 'checkbox') && (fldObj.name.substring(0,7) == '_debug[')) {
          if (fldObj.checked) val = val + parseInt(fldObj.value);
        }
    }
@@ -304,7 +305,7 @@ function updateLevelEdit(formObj) {
 }");
     $option = HTML::div(array('class' => 'option'),
                         HTML::span(array('title' => 'doubleclick to (un)select all', 'style'=>'font-weight: bold; padding: 1px; border: 2px outset;',
-                                         'onDblClick'=>'flipAll(\'_debug[\')'), 
+                                         'onDblClick'=>'flipAll(\'_debug[\')'),
                                    ' debug: '),' ',
                         HTML::input(array('name'=>'debug','id'=>'debug',
                                           'value'=>$debug_level,'size'=>5)),
@@ -327,7 +328,7 @@ function updateLevelEdit(formObj) {
     }
     $form->pushContent(HTML::td($option));
 
-    $option = HTML::div(array('class' => 'option'), 
+    $option = HTML::div(array('class' => 'option'),
                         HTML::span(array('style'=>'font-weight: bold;'), "level: "),
                         HTML::input(array('name'=>'level','id'=>'level',
                                           'value'=>$user_level,'size'=>5)),
@@ -385,7 +386,7 @@ elseif (!empty($HTTP_SERVER_VARS['argv']))
 elseif (!ini_get("register_argc_argv"))
     echo "Could not read cmd args (register_argc_argv=Off?)\n";
 // purge the testbox
-    
+  
 $debug_level = 1; //was 9, _DEBUG_VERBOSE | _DEBUG_TRACE
 //if (defined('E_STRICT')) $debug_level = 5; // add PARSER flag on php5
 $user_level  = 1; // BOGO (conflicts with RateIt)
@@ -399,6 +400,7 @@ $alltests = array(/* valid tests without clean virgin setup */
                   /* valid tests only with clean virgin setup */
                   'AllPagesTest','AllUsersTest','OrphanedPagesTest',
                   'WantedPagesTest','TextSearchTest','IncludePageTest',
+                  'AtomParserTest','AtomFeedTest',
                   /* final tests which require all valid pages and consumes > 32MB */
                   'DumpHtml');
 // support db=file db=dba test=SetupWiki test=DumpHtml debug=num -dconstant=value
@@ -415,7 +417,7 @@ if (isset($HTTP_SERVER_VARS['REQUEST_METHOD'])) {
     }
 } elseif (!empty($argv) and preg_match("/test\.php$/", $argv[0])) {
     array_shift($argv);
-}    
+}  
 if (!empty($argv)) {
     $runtests = array();
     $define = array();
@@ -468,7 +470,7 @@ flush();
 if (!defined('DEBUG'))
     define('DEBUG', $debug_level);
 // override defaults:
-if (!defined('RATING_STORAGE')) 
+if (!defined('RATING_STORAGE'))
    define('RATING_STORAGE', 'WIKIPAGE');
 if (!defined('GROUP_METHOD'))
     define('GROUP_METHOD', 'NONE');
@@ -493,7 +495,7 @@ ob_end_flush();
 
 if ($debug_level & 1) {
     //echo "\n";
-    echo "PHPWIKI_VERSION=",PHPWIKI_VERSION, 
+    echo "PHPWIKI_VERSION=",PHPWIKI_VERSION,
         strstr(PHPWIKI_VERSION,"pre") ? strftime(" / %Y%m%d") : "","\n";
     if ($debug_level & 9) {
         // which constants affect memory?
@@ -567,7 +569,7 @@ if (isset($HTTP_SERVER_VARS['REQUEST_METHOD'])) {
 
 // save and restore all args for each test.
 class phpwiki_TestCase extends PHPUnit_TestCase {
-    function setUp() { 
+    function setUp() {
         global $request, $WikiTheme;
 	include_once("themes/" . THEME . "/themeinfo.php");
         $this->_savedargs = $request->_args;
@@ -606,7 +608,7 @@ foreach ($run_database_backends as $dbtype) {
 	$DBParams['dsn'] = preg_replace("/^([^:]+):/", substr($dbtype, 4).":", $DBParams['dsn']);
         echo "dsn: ",$DBParams['dsn'],"\n";
     }
-    // sqlite fix: 
+    // sqlite fix:
     if (preg_match('/sqlite$/', $dbtype)) {
 	$DBParams['dsn'] = preg_replace("/127\.0\.0\.1/", '', $DBParams['dsn']);
         echo "dsn: ",$DBParams['dsn'],"\n";
@@ -633,12 +635,12 @@ foreach ($run_database_backends as $dbtype) {
         $suite  = new PHPUnit_TestSuite("phpwiki");
         if (file_exists(dirname(__FILE__).'/lib/'.$test.'.php'))
             require_once dirname(__FILE__).'/lib/'.$test.'.php';
-        else    
+        else  
             require_once dirname(__FILE__).'/lib/plugin/'.$test.'.php';
         $suite->addTest( new PHPUnit_TestSuite($test) );
 
-        @set_time_limit(240); 
-        $result = PHPUnit::run($suite); 
+        @set_time_limit(240);
+        $result = PHPUnit::run($suite);
         echo "ran " . $result->runCount() . " tests, " . $result->failureCount() . " failures.\n";
         ob_end_flush();
         if ($result->failureCount() > 0) {
@@ -659,26 +661,11 @@ foreach ($run_database_backends as $dbtype) {
 if (isset($HTTP_SERVER_VARS['REQUEST_METHOD']))
     echo "</pre>\n";
 
-// $Log: not supported by cvs2svn $
-// Revision 1.46  2007/01/21 12:26:38  rurban
-// Improve UI (label, button)
-//
-// Revision 1.45  2007/01/04 16:48:15  rurban
-// Do sqlite
-//
-// Revision 1.44  2006/12/23 11:44:56  rurban
-// deal with strict references and the order of deletion
-//
-// Revision 1.43  2006/06/05 09:35:02  rurban
-// add experimental backend flatfile, minor fixes
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

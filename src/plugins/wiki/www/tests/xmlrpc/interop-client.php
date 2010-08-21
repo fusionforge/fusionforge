@@ -5,6 +5,7 @@
 
   Author: Dan Libby (dan@libby.com)
   Epinions.com may be contacted at feedback@epinions-inc.com
+  $Id: interop-client.php 7181 2009-10-05 14:25:48Z vargenau $
 */
 
 /*  
@@ -214,7 +215,7 @@ function run_stress_tests($server, $debug=0, $output=null) {
                    "varInt" => 186000,
                    "varString" => "18 > 2 && 2 < 18 && 42 == the answer to life, the universe, and everything" ));
     run_test($server, $debug, $output, "interopEchoTests.echoStringArray", 
-             array($decl_1, $decl_2, $decl_3, $decl_4, "non-ascii chars above 127 (165-170): ¥, ¦, §, ¨, ©, ª"));
+             array($decl_1, $decl_2, $decl_3, $decl_4, "non-ascii chars above 127 (165-170): Â¥, Â¦, Â§, Â¨, Â©, Âª"));
     run_test($server, $debug, $output, "interopEchoTests.echoIntegerArray", 
              array(23, 234, 1, 0, -10, 999));
     run_test($server, $debug, $output, "interopEchoTests.echoFloatArray", 

@@ -5,12 +5,11 @@
  * is designed to be run directly using the php4 command.
  *
  * Author: Gerrit Riessen, gerrit.riessen@open-source-consultants.de
+ * $Id: unit_test_backend_cvs.php 7417 2010-05-19 12:57:42Z vargenau $
  */
 
 // assume that the we've cd'ed to the tests directory
 ini_set('include_path', '..' );
-
-function rcs_id() {}
 
 if ( $USER == "root" ) {
   // root user can't check in to a CVS repository

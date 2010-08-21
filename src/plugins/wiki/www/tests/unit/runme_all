@@ -8,7 +8,7 @@ fi
 
 for db in file dba SQL ADODB cvs \
     PearDB_mysql PearDB_pgsql PearDB_sqlite \
-    ADODB_mysql ADODB_postgres7 ADODB_sqlite
+    ADODB_mysql ADODB_postgres7 ADODB_sqlite \
     PDO_mysql PDO_pgsql PDO_sqlite
 do
     php -Cq -d register_argc_argv=1 test.php debug=1 level=10 db=$db | \

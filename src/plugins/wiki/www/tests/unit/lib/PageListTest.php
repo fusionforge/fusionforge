@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: PageListTest.php 7181 2009-10-05 14:25:48Z vargenau $
 
 require_once 'lib/PageList.php';
 require_once 'PHPUnit.php';
