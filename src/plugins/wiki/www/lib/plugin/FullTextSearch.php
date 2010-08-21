@@ -1,24 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: FullTextSearch.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: FullTextSearch.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
-Copyright 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
-
-This file is part of PhpWiki.
-
-PhpWiki is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-PhpWiki is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with PhpWiki; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+ * Copyright 1999-2002,2004,2005,2007,2009 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('lib/TextSearchQuery.php');
 require_once("lib/PageList.php");
@@ -28,15 +28,16 @@ require_once("lib/PageList.php");
  * Options: case_exact, regex, hilight
  *          Stoplist
  *
- * TODO: Hooks to search in external documents: ExternalTextSearch
- *   Only uploaded: textfiles, PDF, HTML, DOC, XLS, ... or 
- *   External apps: xapian-omages seems to be the best, over lucene.net, 
- *   swish, nakamazu, ...
+ * See also:
+ *   Hooks to search in external documents: ExternalTextSearch
+ *   Only uploaded: textfiles, PDF, HTML, DOC, XLS, ... or
+ *   External apps: xapian-omages seems to be the better than lucene,
+ *   lucene.net, swish, nakamazu, ...
  *
  * See http://sf.net/tracker/index.php?aid=927395&group_id=6121&atid=106121
  * Wordaround to let the dead locks occur somewhat later:
- * increased the memory limit of PHP4 from 8 MB to 32 MB
- * php.ini: memory_limit = 32 MB
+ *   Increase the memory limit of PHP from 8 MB to 32 MB
+ *   php.ini: memory_limit = 32 MB
  */
 class WikiPlugin_FullTextSearch
 extends WikiPlugin
@@ -49,11 +50,6 @@ extends WikiPlugin
         return _("Search the content of all pages in this wiki.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return array_merge
             (
@@ -62,7 +58,7 @@ extends WikiPlugin
                    'hilight'  => true,
                    'case_exact' => false,
                    'regex'    => 'auto',
-		   'sortby'   => '-hi_content',
+                   'sortby'   => '-hi_content',
                    'noheader' => false,
                    'exclude'  => false,   // comma-seperated list of glob
                    'quiet'    => true));  // be less verbose
@@ -71,8 +67,10 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
 
         $args = $this->getArgs($argstr, $request);
-        if (empty($args['s']))
-            return '';
+
+        if (empty($args['s'])) {
+            return HTML();
+        }
         extract($args);
 
         $query = new TextSearchQuery($s, $case_exact, $regex);
@@ -84,8 +82,8 @@ extends WikiPlugin
         if ($quiet) { // see how easy it is with PageList...
             unset($args['info']);
             $args['listtype'] = 'dl';
-	    $args['types'] = array(new _PageList_Column_content
-	      ('rev:hi_content', _("Content"), "left", $s));
+            $args['types'] = array(new _PageList_Column_content
+              ('rev:hi_content', _("Content"), "left", $s, $hilight_re));
             $list = new PageList(false, $exclude, $args);
             $list->setCaption(fmt("Full text search results for '%s'", $s));
             while ($page = $pages->next()) {
@@ -101,7 +99,7 @@ extends WikiPlugin
         if (!$limit or !is_int($limit))
             $limit = 0;
         // expand all page wildcards to a list of pages which should be ignored
-        if ($exclude) $exclude = explodePageList($exclude); 
+        if ($exclude) $exclude = explodePageList($exclude);
         while ($page = $pages->next() and (!$limit or ($count < $limit))) {
             $name = $page->getName();
             if ($exclude and in_array($name,$exclude)) continue;
@@ -117,8 +115,8 @@ extends WikiPlugin
             $list->pushContent(HTML::dd(_("<no matches>")));
 
         if (!empty($pages->stoplisted))
-            $list = HTML(HTML::p(fmt(_("Ignored stoplist words '%s'"), 
-                                     join(', ', $pages->stoplisted))), 
+            $list = HTML(HTML::p(fmt(_("Ignored stoplist words '%s'"),
+                                     join(', ', $pages->stoplisted))),
                          $list);
         if ($noheader)
             return $list;
@@ -158,75 +156,13 @@ class _PageList_Column_hilight extends _PageList_Column {
         $this->_PageList_Column($params[0],$params[1],$params[2]);
     }
     function _getValue(&$page, $revision_handle) {
-    	$html = false;
-	$pagename = $page->getName();
-	$count = count($this->parentobj->_wpagelist[$pagename]);
-        return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false), 
-			fmt("(%d Links)", $count));
+            $html = false;
+        $pagename = $page->getName();
+        $count = count($this->parentobj->_wpagelist[$pagename]);
+        return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false),
+                        fmt("(%d Links)", $count));
     }
 }
-
-
-// $Log: not supported by cvs2svn $
-// Revision 1.28  2007/06/07 17:02:42  rurban
-// fix display of pagenames containing ":" in certain lists
-//
-// Revision 1.27  2007/01/04 16:46:40  rurban
-// Only notes
-//
-// Revision 1.26  2005/11/14 22:33:04  rurban
-// print ignored stoplist words
-//
-// Revision 1.25  2005/09/11 14:55:05  rurban
-// implement fulltext stoplist
-//
-// Revision 1.24  2004/11/26 18:39:02  rurban
-// new regex search parser and SQL backends (90% complete, glob and pcre backends missing)
-//
-// Revision 1.23  2004/11/23 15:17:19  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
-// Revision 1.22  2004/05/28 11:01:58  rurban
-// support to disable highlighting
-// example: s=ReiniUrban&hilight=0&noheader=1
-//
-// Revision 1.21  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-// Revision 1.20  2004/02/28 21:14:08  rurban
-// generally more PHPDOC docs
-//   see http://xarch.tu-graz.ac.at/home/rurban/phpwiki/xref/
-// fxied WikiUserNew pref handling: empty theme not stored, save only
-//   changed prefs, sql prefs improved, fixed password update,
-//   removed REPLACE sql (dangerous)
-// moved gettext init after the locale was guessed
-// + some minor changes
-//
-// Revision 1.19  2004/02/26 04:27:39  rurban
-// wrong limit notification
-//
-// Revision 1.18  2004/02/26 04:24:03  rurban
-// simplify quiet handling by using PageList
-//
-// Revision 1.17  2004/02/26 04:03:39  rurban
-// added quiet, limit and exclude to FullTextSearch,
-// fixed explodePageList with previously unloaded PageList
-//
-// Revision 1.16  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.15  2003/01/18 21:41:01  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

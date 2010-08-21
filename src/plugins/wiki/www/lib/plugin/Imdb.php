@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: Imdb.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: Imdb.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
- 
- This file is (not yet) part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is (not yet) part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -26,11 +26,11 @@ rcs_id('$Id: Imdb.php 6185 2008-08-22 11:40:14Z vargenau $');
  * "imdb = mysql://user:pass@localhost/imdb" in lib/plugin/SqlResult.ini
  *
  * Queries:
- * <?plugin Imdb query=movie_main title||="Sample Movie (2002)" ?>
- * <?plugin Imdb query=movie_combined title||="Sample Movie (2002)" ?>
- * <?plugin Imdb query=movie_full title||="Sample Movie (2002)" ?>
- * <?plugin Imdb query=movie_company_credits title||="Sample Movie (2002)" ?>
- * <?plugin Imdb query=name name||="Lastname, Firstname (I)" ?>
+ * <<Imdb query=movie_main title||="Sample Movie (2002)" >>
+ * <<Imdb query=movie_combined title||="Sample Movie (2002)" >>
+ * <<Imdb query=movie_full title||="Sample Movie (2002)" >>
+ * <<Imdb query=movie_company_credits title||="Sample Movie (2002)" >>
+ * <<Imdb query=name name||="Lastname, Firstname (I)" >>
  * More title queries:
  *  business, moviebudgets, colorinfo, mpaaratingsreasons,
  *  akatitles, alternateversions, miscellaneouscompanies, moviecountries,
@@ -51,13 +51,12 @@ include_once("lib/plugin/SqlResult.php");
 class WikiPlugin_Imdb
 extends WikiPlugin_SqlResult
 {
-    function getDescription () {
-        return _("Query a local imdb database");
+    function getName () {
+        return _("Imdb");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
+    function getDescription () {
+        return _("Query a local imdb database");
     }
 
     function getDefaultArguments() {
@@ -68,7 +67,7 @@ extends WikiPlugin_SqlResult
                      'title'       => false, // custom filter for the query
                      'name'        => false, // custom filter for the query
                      'sortby'      => false, // for paging, default none
-                     'limit'       => false, // for paging, default: only the first 50 
+                     'limit'       => false, // for paging, default: only the first 50
                     );
     }
 
@@ -106,10 +105,6 @@ extends WikiPlugin_SqlResult
     }
 };
 
-// $Log: not supported by cvs2svn $
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

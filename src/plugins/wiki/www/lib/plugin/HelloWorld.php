@@ -1,36 +1,36 @@
 <?php // -*-php-*-
-rcs_id('$Id: HelloWorld.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: HelloWorld.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * A simple demonstration WikiPlugin.
  *
  * Usage:
- * <?plugin HelloWorld?>
- * <?plugin HelloWorld
+ * <<HelloWorld?>
+ * <<HelloWorld
  *          salutation="Greetings, "
  *          name=Wikimeister
- * ?>
- * <?plugin HelloWorld salutation=Hi ?>
- * <?plugin HelloWorld name=WabiSabi ?>
+ * >>
+ * <<HelloWorld salutation=Hi >>
+ * <<HelloWorld name=WabiSabi >>
  */
 
 // Constants are defined before the class.
@@ -40,7 +40,7 @@ if (!defined('THE_END'))
 class WikiPlugin_HelloWorld
 extends WikiPlugin
 {
-    // Five required functions in a WikiPlugin.
+    // Four required functions in a WikiPlugin.
 
     function getName () {
         return _("HelloWorld");
@@ -49,11 +49,6 @@ extends WikiPlugin
     function getDescription () {
         return _("Simple Sample Plugin");
 
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     // Establish default values for each of this plugin's arguments.
@@ -73,14 +68,6 @@ extends WikiPlugin
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.12  2003/01/18 21:41:02  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,5 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: RecentComments.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: RecentComments.php 7638 2010-08-11 11:58:40Z vargenau $');
+/*
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * List of basepages with recently added comments.
@@ -16,16 +35,13 @@ extends WikiPlugin_RecentChanges
     function getName () {
         return _("RecentComments");
     }
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
+
+    function getDescription () {
+        return _("List basepages with recently added comments.");
     }
+
     function getDefaultArguments() {
-    	//php-4.0.4pl1 breaks at the parent:: line even if the 
-    	// code doesn't reach this line
-        //if (!check_php_version(4,0,6))
-        $args = WikiPlugin_RecentChanges::getDefaultArguments();
-        //else $args = parent::getDefaultArguments();
+        $args = parent::getDefaultArguments();
         $args['show_minor'] = false;
         $args['show_all'] = true;
         $args['caption'] = _("Recent Comments");
@@ -34,7 +50,7 @@ extends WikiPlugin_RecentChanges
 
     function format ($changes, $args) {
         $fmt = new _RecentChanges_CommentFormatter($args);
-	$fmt->action = _("RecentComments");
+        $fmt->action = _("RecentComments");
         return $fmt->format($changes);
     }
 
@@ -71,9 +87,9 @@ extends _RecentChanges_HtmlFormatter {
     }
 
     function format_revision ($rev) {
-    	static $doublettes = array();
-    	if (isset($doublettes[$rev->getPageName()])) return;
-    	$doublettes[$rev->getPageName()] = 1;
+            static $doublettes = array();
+            if (isset($doublettes[$rev->getPageName()])) return;
+            $doublettes[$rev->getPageName()] = 1;
         $args = &$this->_args;
         $class = 'rc-' . $this->importance($rev);
         $time = $this->time($rev);
@@ -109,13 +125,13 @@ class RecentCommentsRevisionIterator extends WikiDB_PageRevisionIterator
     }
 
     function next () {
-    	if (!empty($this->comments) and $this->_current) {
+            if (!empty($this->comments) and $this->_current) {
             if (isset($this->comments[$this->_current])) {
                 return $this->comments[$this->_current++];
             } else {
-            	$this->_current = 0;
+                    $this->_current = 0;
             }
-    	}
+            }
         while (($rev = $this->_revisions->next())) {
             $this->comments = $this->_blog->findBlogs($this->_wikidb, $rev->getPageName(), 'comment');
             if ($this->comments) {
@@ -127,21 +143,15 @@ class RecentCommentsRevisionIterator extends WikiDB_PageRevisionIterator
                     return $this->comments[$this->_current++];
                 }
             } else {
-		$this->_current = 0;
+                $this->_current = 0;
             }
-    	}
+            }
         $this->free();
         return false;
     }
 
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.3  2004/05/14 20:55:03  rurban
-// simplified RecentComments
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

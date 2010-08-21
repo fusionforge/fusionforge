@@ -1,37 +1,37 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiForum.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: WikiForum.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
- 
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * This plugin handles a threaded list of comments/news associated with a
- * particular page (one page per topic) and provides an input form for 
+ * particular page (one page per topic) and provides an input form for
  * adding a new message.
  *
- *   <?plugin WikiForum ?>
+ *   <<WikiForum>>
  *
  * To provide information for the MainForum page (CategoryForum)
  * summary output mode is possible.
  *
- *   <?plugin WikiForum page=SubTopic1 mode=summary info=title,numposts,ctime,author ?>
- *   <?plugin WikiForum page=SubTopic2 mode=summary info=title,numposts,ctime,author ?>
+ *   <<WikiForum page=SubTopic1 mode=summary info=title,numposts,ctime,author >>
+ *   <<WikiForum page=SubTopic2 mode=summary info=title,numposts,ctime,author >>
  *
  * TODO: For admin user, put checkboxes beside comments to allow for bulk removal.
  * threaded identation for level of reply
@@ -54,11 +54,6 @@ extends WikiPlugin_WikiBlog
 
     function getDescription () {
         return _("Handles threaded topics with comments/news and provide a input form");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -90,7 +85,7 @@ extends WikiPlugin_WikiBlog
             if (!empty($seen[$show]))
                 continue;
             $seen[$show] = 1;
-                
+
             switch ($show) {
             case 'summary': // main page: list of all titles
                 $html->pushContent($this->showTopics($request, $args));
@@ -135,27 +130,6 @@ extends WikiPlugin_WikiBlog
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.3  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.2  2004/04/19 18:27:46  rurban
-// Prevent from some PHP5 warnings (ref args, no :: object init)
-//   php5 runs now through, just one wrong XmlElement object init missing
-// Removed unneccesary UpgradeUser lines
-// Changed WikiLink to omit version if current (RecentChanges)
-//
-// Revision 1.1  2004/04/18 05:43:12  rurban
-// .
-//
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,28 +1,28 @@
 <?php // -*-php-*-
-rcs_id('$Id: WhoIsOnline.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: WhoIsOnline.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
- 
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * Show summary information of the current user sessions.
- * We support two modes: summary and detail. The optional page argument 
+ * We support two modes: summary and detail. The optional page argument
  * links to the page with the other mode.
  *
  * Formatting and idea borrowed from postnuke. Requires USE_DB_SESSION.
@@ -42,15 +42,10 @@ extends WikiPlugin
         return _("Show summary information of the current user sessions.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         // two modes: summary and detail, page links to the page with the other mode
         return array(
-                     'mode' 	    => 'summary',    // or "detail"
+                     'mode'             => 'summary',    // or "detail"
                      'pagename'     => '[pagename]', // refer to the page with the other mode
                      'allow_detail' => false,        // if false, page is ignored
                      'dispose_admin' => false,
@@ -65,11 +60,9 @@ extends WikiPlugin
         // todo: check which arguments are really needed in the template.
         $stats = $this->getStats($dbi,$request,$args['mode']);
         if ($src = $WikiTheme->getImageURL("whosonline"))
-            $img = HTML::img(array('src' => $src,
-                                   'alt' => $this->getName(),
-                                   'border' => 0));
+            $img = HTML::img(array('src' => $src, 'alt' => $this->getName()));
         else $img = '';
-        $other = array(); 
+        $other = array();
         $other['ONLINE_ICON'] = $img;
         return new Template('online', $request, array_merge($args, $stats, $other));
     }
@@ -102,8 +95,8 @@ extends WikiPlugin
         $num_online = 0; $num_guests = 0; $num_registered = 0;
         $registered = array(); $guests = array();
         $admins = array(); $uniquenames = array();
-	$sess_time = ini_get('session.gc_maxlifetime'); // in seconds
-	if (!$sess_time) $sess_time = 24*60;
+        $sess_time = ini_get('session.gc_maxlifetime'); // in seconds
+        if (!$sess_time) $sess_time = 24*60;
         if (isset($request->_dbsession)) { // only ADODB and SQL backends
             $dbsession =& $request->_dbsession;
             if (method_exists($dbsession->_backend, "gc"))
@@ -116,7 +109,7 @@ extends WikiPlugin
                 $date = $row['date'];
                 //Todo: Security issue: Expose REMOTE_ADDR?
                 //      Probably only to WikiAdmin
-                $ip   = $row['ip'];  
+                $ip   = $row['ip'];
                 if (empty($date)) continue;
                 $num_online++;
                 $user = @unserialize($data);
@@ -127,8 +120,8 @@ extends WikiPlugin
                     if ($mode == 'summary' and in_array($userid, $uniquenames)) continue;
                     $uniquenames[] = $userid;
                     $page = _("<unknown>");  // where is he?
-	            $action = 'browse';
-	            $objvars = array_keys(get_object_vars($user));
+                    $action = 'browse';
+                    $objvars = array_keys(get_object_vars($user));
                     if (in_array('action',$objvars))
                         $action = @$user->action;
                     if (in_array('page',$objvars))
@@ -184,85 +177,22 @@ extends WikiPlugin
             $dbi->set('stats',$stats);
         }
         return array('SESSDATA_BOOL'    => !empty($dbsession),
-                     'NUM_PAGES' 	=> $num_pages,
-                     'NUM_USERS'  	=> $num_users,
-                     'NUM_ONLINE' 	=> $num_online,
-                     'NUM_REGISTERED' 	=> $num_registered,
-                     'NUM_GUESTS'	=> $num_guests,
-                     'NEWEST_USER' 	=> '', // todo
-                     'MAX_ONLINE_NUM' 	=> $stats['max_online_num'],
-                     'MAX_ONLINE_TIME' 	=> $stats['max_online_time'],
-                     'REGISTERED' 	=> $registered,
-                     'ADMINS' 	        => $admins,
+                     'NUM_PAGES'         => $num_pages,
+                     'NUM_USERS'          => $num_users,
+                     'NUM_ONLINE'         => $num_online,
+                     'NUM_REGISTERED'         => $num_registered,
+                     'NUM_GUESTS'        => $num_guests,
+                     'NEWEST_USER'         => '', // todo
+                     'MAX_ONLINE_NUM'         => $stats['max_online_num'],
+                     'MAX_ONLINE_TIME'         => $stats['max_online_time'],
+                     'REGISTERED'         => $registered,
+                     'ADMINS'                 => $admins,
                      'GUESTS'           => $guests,
-                     'SESSION_TIME' 	=> sprintf(_("%d minutes"),$sess_time / 60),
+                     'SESSION_TIME'         => sprintf(_("%d minutes"),$sess_time / 60),
                      );
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.11  2005/02/02 19:39:42  rurban
-// better box layout
-//
-// Revision 1.10  2005/02/01 16:22:58  rurban
-// avoid __PHP_incomplete_Class notice
-//
-// Revision 1.9  2004/12/18 17:04:24  rurban
-// stabilize not to call UserName() of an incomplete (not loaded) object
-//
-// Revision 1.8  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.7  2004/05/27 17:49:06  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-// Revision 1.6  2004/05/02 15:10:08  rurban
-// new finally reliable way to detect if /index.php is called directly
-//   and if to include lib/main.php
-// new global AllActionPages
-// SetupWiki now loads all mandatory pages: HOME_PAGE, action pages, and warns if not.
-// WikiTranslation what=buttons for Carsten to create the missing MacOSX buttons
-// PageGroupTestOne => subpages
-// renamed PhpWikiRss to PhpWikiRecentChanges
-// more docs, default configs, ...
-//
-// Revision 1.5  2004/04/06 20:27:05  rurban
-// fixed guests (no wiki_user session)
-// added ip (to help in ip-throttling)
-//
-// Revision 1.4  2004/03/30 02:14:04  rurban
-// fixed yet another Prefs bug
-// added generic PearDb_iter
-// $request->appendValidators no so strict as before
-// added some box plugin methods
-// PageList commalist for condensed output
-//
-// Revision 1.3  2004/03/12 15:48:08  rurban
-// fixed explodePageList: wrong sortby argument order in UnfoldSubpages
-// simplified lib/stdlib.php:explodePageList
-//
-// Revision 1.2  2004/03/10 15:38:49  rurban
-// store current user->page and ->action in session for WhoIsOnline
-// better WhoIsOnline icon
-// fixed WhoIsOnline warnings
-//
-// Revision 1.1  2004/02/26 19:15:37  rurban
-// new WhoIsOnline plugin: session explorer (postnuke style)
-//
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

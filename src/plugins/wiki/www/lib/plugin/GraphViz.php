@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: GraphViz.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: GraphViz.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -26,18 +26,18 @@ rcs_id('$Id: GraphViz.php 6185 2008-08-22 11:40:14Z vargenau $');
  *
  * @Author: Reini Urban
  *
- * Note: 
- * - We support only images supported by GD so far (PNG most likely). 
+ * Note:
+ * - We support only images supported by GD so far (PNG most likely).
  *   EPS, PS, SWF, SVG or SVGZ and imagemaps need to be tested.
  *
  * Usage:
-<?plugin GraphViz [options...]
+<<GraphViz [options...]
    multiline dot script ...
-?>
+>>
 
  * See also: VisualWiki, which depends on GraphViz and WikiPluginCached.
  *
- * TODO: 
+ * TODO:
  * - neato binary ?
  * - expand embedded <!plugin-list pagelist !> within the digraph script.
  */
@@ -61,7 +61,7 @@ elseif (isWindows()) {
     if (!defined("GRAPHVIZ_EXE"))
         define('GRAPHVIZ_EXE','/home/groups/p/ph/phpwiki/bin/dot');
     if (!defined('VISUALWIKIFONT'))
-        define('VISUALWIKIFONT', 'luximr'); 
+        define('VISUALWIKIFONT', 'luximr');
 } else { // other os
     if (!defined("GRAPHVIZ_EXE"))
         define('GRAPHVIZ_EXE','/usr/local/bin/dot');
@@ -75,14 +75,14 @@ elseif (isWindows()) {
     //$fontpath = "/usr/share/fonts/default/TrueType/";
 }
 
-require_once "lib/WikiPluginCached.php"; 
+require_once "lib/WikiPluginCached.php";
 
 class WikiPlugin_GraphViz
 extends WikiPluginCached
 {
 
     function _mapTypes() {
-    	return array("imap", "cmapx", "ismap", "cmap");
+            return array("imap", "cmapx", "ismap", "cmap");
     }
 
     /**
@@ -95,20 +95,20 @@ extends WikiPluginCached
         if ($type == $this->_args['imgtype'])
             return PLUGIN_CACHED_IMG_INLINE;
         $device = strtolower($this->_args['imgtype']);
-    	if (in_array($device, $this->_mapTypes()))
-    	    return PLUGIN_CACHED_MAP;
-    	if (in_array($device, array('svg','swf','svgz','eps','ps'))) {
+            if (in_array($device, $this->_mapTypes()))
+                return PLUGIN_CACHED_MAP;
+            if (in_array($device, array('svg','swf','svgz','eps','ps'))) {
             switch ($this->_args['imgtype']) {
-            	case 'svg':
-            	case 'svgz':
+                    case 'svg':
+                    case 'svgz':
                    return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_SVG_PNG;
-            	case 'swf':
+                    case 'swf':
                    return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_SWF;
-                default: 
+                default:
                    return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_HTML;
             }
         }
-    	else
+            else
             return PLUGIN_CACHED_IMG_INLINE; // normal cached libgd image handles
     }
     function getName () {
@@ -119,10 +119,6 @@ extends WikiPluginCached
     }
     function managesValidators() {
         return true;
-    }
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array(
@@ -180,7 +176,7 @@ extends WikiPluginCached
         $imgtypes = $GLOBALS['PLUGIN_CACHED_IMGTYPES'];
         $imgtypes = array_merge($imgtypes, array("svg", "svgz", "ps"), $this->_mapTypes());
         $helparr = array(
-            '<?plugin GraphViz ' .
+            '<<GraphViz ' .
             'imgtype'          => ' = "' . $def['imgtype'] . "(default)|" . join('|',$imgtypes).'"',
             'alt'              => ' = "alternate image text"',
             'pages'            => ' = "pagenames,*" or <!plugin-list !> pagelist as input',
@@ -213,8 +209,8 @@ extends WikiPluginCached
             $source = "digraph GraphViz {\n";  // }
             foreach ($argarray['pages'] as $name) { // support <!plugin-list !> pagelists
                 // allow Page/SubPage
-                $url = str_replace(urlencode(SUBPAGE_SEPARATOR), SUBPAGE_SEPARATOR, 
-				   rawurlencode($name));
+                $url = str_replace(urlencode(SUBPAGE_SEPARATOR), SUBPAGE_SEPARATOR,
+                                   rawurlencode($name));
                 $source .= "  \"$name\" [URL=\"$url\"];\n";
             }
             // {
@@ -234,7 +230,7 @@ extends WikiPluginCached
              $source = $src;
         }
         */
-	return $source;
+        return $source;
     }
 
     function createDotFile($tempfile='', $argarray=false) {
@@ -259,7 +255,7 @@ extends WikiPluginCached
         if (in_array($gif, array("imap", "cmapx", "ismap", "cmap"))) {
             $this->_mapfile = "$tempfiles.map";
             $gif = $this->decideImgType($argarray['imgtype']);
-	    if ($gif == $argarray['imgtype']) $gif = 'png';
+            if ($gif == $argarray['imgtype']) $gif = 'png';
         }
 
         $ImageCreateFromFunc = "ImageCreateFrom$gif";
@@ -291,39 +287,39 @@ extends WikiPluginCached
           sleep(0.1);
         }
         if (! file_exists($outfile) ) {
-            $this->complain(sprintf(_("%s error: outputfile '%s' not created"), 
+            $this->complain(sprintf(_("%s error: outputfile '%s' not created"),
                                     "GraphViz", $outfile));
             $this->complain("\ncmd-line: $cmdline");
             return false;
         }
         if (function_exists($ImageCreateFromFunc)) {
             $img = $ImageCreateFromFunc( $outfile );
-	    // clean up tempfiles
-	    @unlink($tempfiles);
-	    if (empty($argarray['debug']))
-		foreach (array(".$gif",'.dot') as $ext) {
-		    //if (file_exists($tempfiles.$ext))
-		    @unlink($tempfiles.$ext);
-		}
-	    return $img;
-	}
+            // clean up tempfiles
+            @unlink($tempfiles);
+            if (empty($argarray['debug']))
+                foreach (array(".$gif",'.dot') as $ext) {
+                    //if (file_exists($tempfiles.$ext))
+                    @unlink($tempfiles.$ext);
+                }
+            return $img;
+        }
         return $outfile;
     }
-    
+
     // which argument must be set to 'png', for the fallback image when svg will fail on the client.
     // type: SVG_PNG
     function pngArg() {
-    	return 'imgtype';
+            return 'imgtype';
     }
-    
+
     function getMap($dbi, $argarray, $request) {
-    	$result = $this->invokeDot($argarray);
+            $result = $this->invokeDot($argarray);
         if (isa($result, 'HtmlElement'))
             return array(false, $result);
         else
             return $result;
         // $img = $this->getImage($dbi, $argarray, $request);
-    	//return array($this->_mapfile, $img);
+            //return array($this->_mapfile, $img);
     }
 
     /**
@@ -355,24 +351,24 @@ extends WikiPluginCached
             $this->complain("No dot graph given");
             return array(false, $this->GetError());
         }
-	//$ok = $ok and $this->createDotFile($tempfiles.'.dot', $argarray);
+        //$ok = $ok and $this->createDotFile($tempfiles.'.dot', $argarray);
 
         $args = "-T$gif $tempfiles.dot -o $outfile";
         $cmdline1 = "$dotbin $args";
         if ($debug) $cmdline1 .= " > $tempout";
-	$ok = $ok and $this->filterThroughCmd($source, $cmdline1);
-	//$ok = $this->execute("$dotbin -T$gif $tempfiles.dot -o $outfile" . 
-	//		     ($debug ? " > $tempout 2>&1" : " 2>&1"), $outfile)
+        $ok = $ok and $this->filterThroughCmd($source, $cmdline1);
+        //$ok = $this->execute("$dotbin -T$gif $tempfiles.dot -o $outfile" .
+        //                     ($debug ? " > $tempout 2>&1" : " 2>&1"), $outfile)
 
         $args = "-Timap $tempfiles.dot -o $tempfiles.map";
         $cmdline2 = "$dotbin $args";
         if ($debug) $cmdline2 .= " > $tempout";
         $ok = $ok and $this->filterThroughCmd($source, $cmdline2);
-	// $this->execute("$dotbin -Timap $tempfiles.dot -o ".$tempfiles.".map" . 
+        // $this->execute("$dotbin -Timap $tempfiles.dot -o ".$tempfiles.".map" .
         //                    ($debug ? " > $tempout 2>&1" : " 2>&1"), $tempfiles.".map")
-	$ok = $ok and file_exists( $outfile );
-	$ok = $ok and file_exists( $tempfiles.'.map' );
-	$ok = $ok and ($img = $ImageCreateFromFunc($outfile));
+        $ok = $ok and file_exists( $outfile );
+        $ok = $ok and file_exists( $tempfiles.'.map' );
+        $ok = $ok and ($img = $ImageCreateFromFunc($outfile));
         $ok = $ok and ($fp = fopen($tempfiles.'.map', 'r'));
 
         $map = HTML();
@@ -389,7 +385,7 @@ extends WikiPluginCached
                 $map = $tempdir . "/".$this->getName().".map";
             $img = $ImageCreateFromFunc($img);
             $fp = fopen($map, 'r');
-            $map = HTML();	
+            $map = HTML();
             $ok = true;
         }
         if ($ok and $fp) {
@@ -433,7 +429,7 @@ extends WikiPluginCached
         @unlink($tempfiles);
         if ($ok and !$argarray['debug'])
             foreach (array('',".$gif",'.map','.dot') as $ext) {
-		@unlink($tempfiles.$ext);
+                @unlink($tempfiles.$ext);
             }
 
         if ($ok)
@@ -444,33 +440,6 @@ extends WikiPluginCached
 
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.8  2007/01/10 22:28:43  rurban
-// use temp dotfile on windows
-//
-// Revision 1.7  2006/12/22 17:55:06  rurban
-// fix source handling
-//
-// Revision 1.6  2005/10/12 06:19:07  rurban
-// protect unsafe calls
-//
-// Revision 1.5  2005/09/26 06:39:14  rurban
-// use cached img and map - again. Remove execute from here
-//
-// Revision 1.4  2005/05/06 16:54:59  rurban
-// add failing cmdline for .map
-//
-// Revision 1.3  2004/12/17 16:49:52  rurban
-// avoid Invalid username message on Sign In button click
-//
-// Revision 1.2  2004/12/14 21:34:22  rurban
-// fix syntax error
-//
-// Revision 1.1  2004/12/13 14:45:33  rurban
-// new generic GraphViz plugin: similar to Ploticus
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

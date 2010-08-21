@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: Calendar.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: Calendar.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 if (!defined('SECONDS_PER_DAY'))
@@ -45,11 +45,6 @@ extends WikiPlugin
         return _("Calendar");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return array('prefix'           => '[pagename]' . SUBPAGE_SEPARATOR,
                      'date_format'      => '%Y-%m-%d',
@@ -59,21 +54,21 @@ extends WikiPlugin
                      'month_format'     => '%B %Y',
                      'wday_format'      => '%a',
                      'start_wday'       => '1', // start now with Monday
-		     'display_weeknum'  => 0);
+                     'display_weeknum'  => 0);
     }
 
     /**
-     * return links (static only as of action=edit) 
+     * return links (static only as of action=edit)
      *
      * @param string $argstr The plugin argument string.
      * @param string $basepage The pagename the plugin is invoked from.
      * @return array List of pagenames linked to (or false).
      */
     function getWikiPageLinks ($argstr, $basepage) {
-        if (isset($this->_links)) 
+        if (isset($this->_links))
             return $this->_links;
         else {
-            global $request;	
+            global $request;
             $this->run($request->_dbi, $argstr, $request, $basepage);
             return $this->_links;
         }
@@ -126,7 +121,7 @@ extends WikiPlugin
         $fs = $this->args['wday_format'];
         $row = HTML::tr();
         $row->setattr('class', 'cal-dayname');
-	if ($this->args['display_weeknum'])
+        if ($this->args['display_weeknum'])
             $row->pushContent(HTML::td(array('class' => 'cal-dayname',
                                              'align' => 'center'),
                                        _("Wk")));
@@ -197,7 +192,7 @@ extends WikiPlugin
                        1,                                      // mday (1-31)
                        $args['year']);
 
-	$colnum = $args['display_weeknum'] ? 8 : 7;
+        $colnum = $args['display_weeknum'] ? 8 : 7;
         $cal = HTML::table(array('cellspacing' => 0,
                                  'cellpadding' => 2,
                                  'class'       => 'cal'),
@@ -216,9 +211,9 @@ extends WikiPlugin
         $tbody = HTML::tbody();
         $row = HTML::tr();
 
-	if ($args['display_weeknum'])
+        if ($args['display_weeknum'])
             $row->pushContent(HTML::td(array('class' => 'cal-weeknum'),
-				       ((int)strftime("%U", $time))+1)); // %U problem. starts with 0
+                                       ((int)strftime("%U", $time))+1)); // %U problem. starts with 0
         $col = (7 + $t['tm_wday'] - $args['start_wday']) % 7;
         if ($col > 0)
             $row->pushContent(HTML::td(array('colspan' => $col)));
@@ -235,9 +230,9 @@ extends WikiPlugin
             $time += SECONDS_PER_DAY;
             $t     = localtime($time, 1);
             $done  = $t['tm_mday'] == 1;
-	    if (!$col and !$done and $args['display_weeknum'])
-		$row->pushContent(HTML::td(array('class' => 'cal-weeknum'),
-					   ((int)strftime("%U", $time))+1)); // starts with 0
+            if (!$col and !$done and $args['display_weeknum'])
+                $row->pushContent(HTML::td(array('class' => 'cal-weeknum'),
+                                           ((int)strftime("%U", $time))+1)); // starts with 0
         }
 
         if ($row->getContent()) {
@@ -249,38 +244,6 @@ extends WikiPlugin
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.34  2007/08/25 18:52:21  rurban
-// Calendar weekday: change from Sunday to start now with Monday
-//
-// Revision 1.33  2007/01/22 23:48:54  rurban
-// Fix Calendar %U: weeknum starting with 1
-//
-// Revision 1.32  2007/01/03 21:23:24  rurban
-// add display_weeknum support.
-//
-// Revision 1.31  2006/03/19 14:26:29  rurban
-// sf.net patch by Matt Brown: Add rel=nofollow to more actions
-//
-// Revision 1.30  2005/04/02 03:05:44  uckelman
-// Removed & from vars passed by reference (not needed, causes PHP to complain).
-//
-// Revision 1.29  2004/12/06 19:15:04  rurban
-// save edit-time links as requested in #946679
-//
-// Revision 1.28  2004/05/08 14:06:13  rurban
-// new support for inlined image attributes: [image.jpg size=50x30 align=right]
-// minor stability and portability fixes
-//
-// Revision 1.27  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.26  2003/01/18 21:19:25  carstenklapp
-// Code cleanup:
-// Reformatting; added copyleft, getVersion, getDescription
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

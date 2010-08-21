@@ -1,5 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: CacheTest.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: CacheTest.php 7639 2010-08-11 12:15:16Z vargenau $');
+/*
+ * Copyright (C) 2002 Johannes GroÃŸe
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
 // +---------------------------------------------------------------------+
 // | CacheTest.php                                                       |
 // +---------------------------------------------------------------------+
@@ -7,7 +27,6 @@ rcs_id('$Id: CacheTest.php 6185 2008-08-22 11:40:14Z vargenau $');
 // | text to image conversion.                                           |
 // | This is a usage example of WikiPluginCached.                        |
 // |                                                                     |
-// | Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)            |
 // | You may copy this code freely under the conditions of the GPL       |
 // +---------------------------------------------------------------------+
 
@@ -17,7 +36,7 @@ rcs_id('$Id: CacheTest.php 6185 2008-08-22 11:40:14Z vargenau $');
  |
  | You may call this plugin as follows:
  |
- |        <?plugin CacheTest text="What a wonderful test!" ?>
+ |        <<CacheTest text="What a wonderful test!" >>
  |
 
 /*-----------------------------------------------------------------------
@@ -47,11 +66,6 @@ extends WikiPluginCached
 
     function getDescription() {
         return 'This is a simple example using WikiPluginCached.';
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -148,14 +162,11 @@ extends WikiPluginCached
                                array(255, 255, 255));
     } // lazy_produceGraphics
 
-} // WikiPlugin_CacheTest
+}
 
-// $Log: not supported by cvs2svn $
-
-// For emacs users
 // Local Variables:
 // mode: php
-// tab-width: 4
+// tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil

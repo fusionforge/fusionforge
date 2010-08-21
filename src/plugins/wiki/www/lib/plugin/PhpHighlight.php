@@ -1,23 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: PhpHighlight.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: PhpHighlight.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -25,9 +26,9 @@ rcs_id('$Id: PhpHighlight.php 6185 2008-08-22 11:40:14Z vargenau $');
  * arguments to pretty-print PHP code.
  *
  * Usage:
- * <?plugin PhpHighlight default='#FF0000' comment='#0000CC'
+ * <<PhpHighlight default='#FF0000' comment='#0000CC'
  * code that should be highlighted
- * ?>
+ * >>
  *
  * You do not have to add '<?php' and '?>' to the code - the plugin
  * does this automatically if you do not set wrap to 0.
@@ -40,15 +41,13 @@ rcs_id('$Id: PhpHighlight.php 6185 2008-08-22 11:40:14Z vargenau $');
  *
  * Author: Martin Geisler <gimpster@gimpster.com>.
  *
- * Added compatibility for PHP < 4.2.0, where the highlight_string()
- * function has no second argument.
  * Added ability to override colors defined in php.ini --Carsten Klapp
  *
  * Known Problems:
- *   <?plugin PhpHighlight
+ *   <<PhpHighlight
  *   testing[somearray];
  *   testing~[badworkaround~];
- *   ?>
+ *   >>
  * will swallow "[somearray]"
  */
 
@@ -63,12 +62,6 @@ extends WikiPlugin
 
     function getDescription () {
         return _("PHP syntax highlighting");
-
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     // Establish default values for each of this plugin's arguments.
@@ -102,26 +95,20 @@ extends WikiPlugin
                                   array('<?php', '?>'), $source);
         }
 
-        if (!check_php_version(4,2,0)) {
-            ob_start();
-            highlight_string($source);
-            $str = ob_get_contents();
-            ob_end_clean();
-        } else {
-            $str = highlight_string($source, true);
-        }
+        $str = highlight_string($source, true);
 
         if ($wrap)
             /* Remove "<?php\n" and "\n?>" again: */
             $str = str_replace(array('&lt;?php<br />', '?&gt;'), '', $str);
 
-        /**
-         * We might have made some empty font tags. (The following
-         * str_replace string does not produce results on my system,
-         * maybe a php bug? '<font color="$color"></font>')
-         */
+        /* We might have made some empty font tags. */
         foreach (array($string, $comment, $keyword, $bg, $default, $html) as $color) {
             $search = "<font color=\"$color\"></font>";
+            $str = str_replace($search, '', $str);
+        }
+        /* Remove also empty span tags. */
+        foreach (array($string, $comment, $keyword, $bg, $default, $html) as $color) {
+            $search = "<span style=\"color: $color\"></span>";
             $str = str_replace($search, '', $str);
         }
 
@@ -187,17 +174,6 @@ extends WikiPlugin
 
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.8  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.7  2003/01/18 22:01:43  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,14 +1,29 @@
 <?php // -*-php-*-
-rcs_id('$Id: BlogArchives.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: BlogArchives.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-//require_once('lib/PageList.php');
 require_once('lib/plugin/WikiBlog.php');
 
 /**
- * BlogArchives - List monthly links for the current users blog if signed, 
+ * BlogArchives - List monthly links for the current users blog if signed,
  * or the ADMIN_USER's Blog if not.
  * On month=... list the blog titles per month.
  *
@@ -28,15 +43,10 @@ extends WikiPlugin_WikiBlog
         return _("List blog months links for the current or ADMIN user");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return //array_merge
                //(
-               //PageList::supportedArgs(), 
+               //PageList::supportedArgs(),
              array('user'     => '',
                    'order'    => 'reverse',        // latest first
                    'info'     => 'month,numpages', // ignored
@@ -62,9 +72,9 @@ extends WikiPlugin_WikiBlog
         }
         if (!$args['user'] or $args['user'] == ADMIN_USER) {
             if (BLOG_DEFAULT_EMPTY_PREFIX)
-                $args['user'] = ''; 	    // "Blogs/day" pages 
+                $args['user'] = '';             // "Blogs/day" pages
             else
-                $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages 
+                $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages
         }
         $parent = (empty($args['user']) ? '' : $args['user'] . SUBPAGE_SEPARATOR);
 
@@ -72,15 +82,15 @@ extends WikiPlugin_WikiBlog
         //$pagelist = new PageList($args['info'], $args['exclude'], $args);
         //if (!is_array('pagename'), explode(',', $info))
         //    unset($pagelist->_columns['pagename']);
-        
+
         $sp = HTML::Raw('&middot; ');
         if (!empty($args['month'])) {
             $prefix = $parent . $this->_blogPrefix('wikiblog') . SUBPAGE_SEPARATOR . $args['month'];
             $pages = $dbi->titleSearch(new TextSearchQuery("^".$prefix, true, 'posix'));
             $html = HTML::ul();
             while ($page = $pages->next()) {
-            	$rev = $page->getCurrentRevision(false);
-            	if ($rev->get('pagetype') != 'wikiblog') continue;
+                    $rev = $page->getCurrentRevision(false);
+                    if ($rev->get('pagetype') != 'wikiblog') continue;
                 $blog = $this->_blog($rev);
                 $html->pushContent(HTML::li(WikiLink($page, 'known', $rev->get('summary'))));
             }
@@ -102,13 +112,13 @@ extends WikiPlugin_WikiBlog
             $months = array();
             foreach ($blogs as $rev) {
                 $blog = $this->_blog($rev);
-            	$mon = $blog['month'];
+                    $mon = $blog['month'];
                 if (empty($months[$mon]))
-                    $months[$mon] = 
+                    $months[$mon] =
                         array('title' => $this->_monthTitle($mon),
                               'num'   => 1,
                               'month' => $mon,
-                              'link'  => WikiURL($basepage, 
+                              'link'  => WikiURL($basepage,
                                          $this->_nonDefaultArgs(array('month' => $mon))));
                 else
                     $months[$mon]['num']++;
@@ -122,7 +132,7 @@ extends WikiPlugin_WikiBlog
                 return HTML(HTML::h3(_("Blog Archives:")), $html);
             else
                 return $html;
-        } else 
+        } else
             return '';
     }
 
@@ -134,24 +144,6 @@ extends WikiPlugin_WikiBlog
         return $this->makeBox(_("Archives"), $this->run($request->_dbi, $args, $request, $basepage));
     }
 };
-
-// $Log: not supported by cvs2svn $
-// Revision 1.5  2005/10/29 09:06:37  rurban
-// move common blog methods to WikiBlog
-//
-// Revision 1.4  2004/12/16 18:29:00  rurban
-// allow empty Blog prefix
-//
-// Revision 1.3  2004/12/15 17:45:08  rurban
-// fix box method
-//
-// Revision 1.2  2004/12/14 21:35:15  rurban
-// support new BLOG_EMPTY_DEFAULT_PREFIX
-//
-// Revision 1.1  2004/12/13 13:22:57  rurban
-// new BlogArchives plugin for the new blog theme. enable default box method
-// for all plugins. Minor search improvement.
-//
 
 // Local Variables:
 // mode: php

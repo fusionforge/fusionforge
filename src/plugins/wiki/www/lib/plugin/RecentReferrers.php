@@ -1,5 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: RecentReferrers.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: RecentReferrers.php 7638 2010-08-11 11:58:40Z vargenau $');
+/*
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * Analyze our ACCESS_LOG
@@ -14,9 +33,8 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
         return _("RecentReferrers");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
+    function getDescription () {
+        return _("Analyse access log.");
     }
 
     function getDefaultArguments() {
@@ -24,15 +42,16 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
             (
              PageList::supportedArgs(),
              array(
-                   'limit' 	   => 15,
+                   'limit'            => 15,
                    'noheader'      => false,
-                   'debug'         => false
                    ));
     }
 
-    function run($dbi, $argstr, &$request, $basepage) { 
-        if (!ACCESS_LOG) return;
-        $args = $this->getArgs($argstr, $request); 
+    function run($dbi, $argstr, &$request, $basepage) {
+        if (!ACCESS_LOG) {
+            return HTML::div(array('class' => "error"), "Error: no ACCESS_LOG");
+        }
+        $args = $this->getArgs($argstr, $request);
         $table = HTML::table(array('cellpadding' => 1,
                                    'cellspacing' => 2,
                                    'border'      => 0,
@@ -58,12 +77,6 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.1  2004/11/06 04:52:29  rurban
-// simple version at first
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

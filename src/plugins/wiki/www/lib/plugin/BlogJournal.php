@@ -1,16 +1,32 @@
 <?php // -*-php-*-
-rcs_id('$Id: BlogJournal.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: BlogJournal.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+ * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('lib/plugin/WikiBlog.php');
 
 /**
- * BlogJournal - Include the latest blog entries for the current users blog if signed, 
+ * BlogJournal - Include the latest blog entries for the current users blog if signed,
  *               or the ADMIN_USER's Blog if not.
  * UnfoldSubpages for blogs.
- * Rui called this plugin "JournalLast", but this was written completely independent, 
+ * Rui called this plugin "JournalLast", but this was written completely independent,
  * without having seen the src.
  *
  * @author: Reini Urban
@@ -24,11 +40,6 @@ extends WikiPlugin_WikiBlog
 
     function getDescription() {
         return _("Include latest blog entries for the current or ADMIN user");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -57,9 +68,9 @@ extends WikiPlugin_WikiBlog
         }
         if (!$args['user'] or $args['user'] == ADMIN_USER) {
             if (BLOG_DEFAULT_EMPTY_PREFIX) {
-                $args['user'] = ''; 	    // "Blogs/day" pages 
+                $args['user'] = '';             // "Blogs/day" pages
             } else {
-                $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages 
+                $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages
             }
         }
         $parent = (empty($args['user']) ? '' : $args['user'] . SUBPAGE_SEPARATOR);
@@ -80,8 +91,8 @@ extends WikiPlugin_WikiBlog
         }
         if ($args['user'] == $user->UserName() or $args['user'] == '')
             $html->pushContent(Button(array('action'=>'WikiBlog',
-					    'mode'=>'add'), 
-				      _("New entry"), $base));
+                                            'mode'=>'add'),
+                                      _("New entry"), $base));
         if (!$i)
             return HTML(HTML::h3(_("No Blog Entries")), $html);
         if (!$args['noheader'])
@@ -91,24 +102,6 @@ extends WikiPlugin_WikiBlog
             return $html;
     }
 };
-
-// $Log: not supported by cvs2svn $
-// Revision 1.4  2005/11/21 20:56:23  rurban
-// no duplicate headline and no direct page link anymore
-//
-// Revision 1.3  2005/11/21 20:47:21  rurban
-// fix count error
-//
-// Revision 1.2  2005/10/29 09:06:37  rurban
-// move common blog methods to WikiBlog
-//
-// Revision 1.1  2005/10/29 09:03:17  rurban
-// Include the latest blog entries for the current users blog if signed,
-// or the ADMIN_USER's Blog if not.
-// UnfoldSubpages for blogs.
-// Rui called this plugin "JournalLast", but this was written completely
-// independently, without having seen the src (yet).
-//
 
 // Local Variables:
 // mode: php

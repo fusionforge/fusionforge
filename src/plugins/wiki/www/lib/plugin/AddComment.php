@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: AddComment.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: AddComment.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright (C) 2004 $ThePhpWikiProgrammingTeam
- 
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -43,11 +43,6 @@ extends WikiPlugin_WikiBlog
         return sprintf(_("Show and add comments for %s"),'[pagename]');
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     // Arguments:
     //
     //  page - page where the comment is attached at (default current page)
@@ -59,7 +54,7 @@ extends WikiPlugin_WikiBlog
     //         'add'      - only show entry box for new comment
     //         'show,add' - show old comments, then entry box
     //         'add,show' - show entry box followed by list of comments
-    //  jshide - boolean  - quick javascript expansion of the comments 
+    //  jshide - boolean  - quick javascript expansion of the comments
     //                      and addcomment box
 
     function getDefaultArguments() {
@@ -80,7 +75,7 @@ extends WikiPlugin_WikiBlog
         // Get our form args.
         $comment = $request->getArg("comment");
         $request->setArg('comment', false);
-            
+
         if ($request->isPost() and !empty($comment['addcomment'])) {
             $this->add($request, $comment, 'comment'); // noreturn
         }
@@ -125,12 +120,12 @@ function togglecomments(a) {
                 $div->pushContent($show);
                 break;
             case 'add':
-		global $WikiTheme;
-		if (!$WikiTheme->DUMP_MODE) {
-		    $add = $this->showForm($request, $args, 'addcomment');
-		    //if ($args['jshide']) $add->setAttr('style','display:none;');
-		    $div->pushContent($add);
-		}
+                global $WikiTheme;
+                if (!$WikiTheme->DUMP_MODE) {
+                    $add = $this->showForm($request, $args, 'addcomment');
+                    //if ($args['jshide']) $add->setAttr('style','display:none;');
+                    $div->pushContent($add);
+                }
                 break;
             default:
                 return $this->error(sprintf("Bad mode ('%s')", $show));
@@ -139,42 +134,9 @@ function togglecomments(a) {
         $html->pushContent($div);
         return $html;
     }
-   
+
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.8  2004/06/13 09:45:23  rurban
-// display bug workaround for MacIE browsers, jshide: 0
-//
-// Revision 1.7  2004/03/29 21:33:32  rurban
-// possible fix for problem reported by Whit Blauvelt
-//   Message-ID: <20040327211707.GA22374@free.transpect.com>
-// create intermediate redirect subpages for blog/comment/forum
-//
-// Revision 1.6  2004/03/16 15:44:34  rurban
-// jshide not default as in CreateToc
-//
-// Revision 1.5  2004/03/15 09:52:59  rurban
-// jshide button: dynamic titles
-//
-// Revision 1.4  2004/03/14 20:30:21  rurban
-// jshide button
-//
-// Revision 1.3  2004/03/14 16:26:21  rurban
-// copyright line
-//
-// Revision 1.2  2004/03/12 20:59:18  rurban
-// important cookie fix by Konstantin Zadorozhny
-// new editpage feature: JS_SEARCHREPLACE
-//
-// Revision 1.1  2004/03/12 17:32:41  rurban
-// new base class PageType_attach as base class for WikiBlog, Comment, and WikiForum.
-// new plugin AddComment, which is a WikiBlog with different pagetype and template,
-//   based on WikiBlog. WikiForum comes later.
-//
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

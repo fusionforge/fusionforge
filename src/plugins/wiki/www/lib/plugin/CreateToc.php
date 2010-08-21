@@ -1,39 +1,41 @@
 <?php // -*-php-*-
-rcs_id('$Id: CreateToc.php 6230 2008-09-04 16:01:29Z vargenau $');
+// rcs_id('$Id: CreateToc.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004,2005 $ThePhpWikiProgrammingTeam
- Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * CreateToc:  Create a Table of Contents and automatically link to headers
  *
- * Usage:   
- *  <?plugin CreateToc arguments ?>
+ * Usage:
+ *  <<CreateToc arguments>>
  * @author:  Reini Urban, Marc-Etienne Vargenau
  *
- * Known problems: 
+ * Known problems:
  * - MacIE will not work with jshide.
  * - it will crash with old markup and Apache2 (?)
- * - Certain corner-edges will not work with TOC_FULL_SYNTAX. 
+ * - Certain corner-edges will not work with TOC_FULL_SYNTAX.
  *   I believe I fixed all of them now, but who knows?
  * - bug #969495 "existing labels not honored" seems to be fixed.
+ * - some constructs might incorrectly be recognized as a header
+ *   (e.g. lines starting with "!!!" or "==" inside <verbatim>)
  */
 
 if (!defined('TOC_FULL_SYNTAX'))
@@ -48,11 +50,6 @@ extends WikiPlugin
 
     function getDescription() {
         return _("Create a Table of Contents and automatically link to headers");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6230 $");
     }
 
     function getDefaultArguments() {
@@ -128,9 +125,9 @@ extends WikiPlugin
 
     function preg_quote ($heading) {
         return str_replace(array("/",".","?","*"),
-    		           array('\/','\.','\?','\*'), $heading);
+                               array('\/','\.','\?','\*'), $heading);
     }
-    
+
     // Get HTML header corresponding to current level (level is set of ! or =)
     function _getHeader($level) {
 
@@ -156,70 +153,70 @@ extends WikiPlugin
             $theading = TransformInline($heading);
             if ($theading)
                 return preg_quote($theading->asXML(), "/");
-            else 
+            else
                 return XmlContent::_quote(preg_quote($heading, "/"));
         } else {
             return XmlContent::_quote(preg_quote($heading, "/"));
         }
     }
-    
+
     /*
      * @param $hstart id (in $content) of heading start
      * @param $hend   id (in $content) of heading end
      */
-    function searchHeader ($content, $start_index, $heading, 
+    function searchHeader ($content, $start_index, $heading,
                            $level, &$hstart, &$hend, $basepage=false) {
         $hstart = 0;
         $hend = 0;
-    	$h = $this->_getHeader($level);
+            $h = $this->_getHeader($level);
         $qheading = $this->_quote($heading);
-    	for ($j=$start_index; $j < count($content); $j++) {
+            for ($j=$start_index; $j < count($content); $j++) {
             if (is_string($content[$j])) {
-    		if (preg_match("/<$h>$qheading<\/$h>/", 
-    		               $content[$j]))
-    		    return $j;
+                    if (preg_match("/<$h>$qheading<\/$h>/",
+                                   $content[$j]))
+                        return $j;
             }
             elseif (isa($content[$j], 'cached_link'))
             {
-		if (method_exists($content[$j],'asXML')) {
-		    $content[$j]->_basepage = $basepage;
-		    $content[$j] = $content[$j]->asXML();
-		} else
-		    $content[$j] = $content[$j]->asString();
-		// shortcut for single wikiword or link headers
-		if ($content[$j] == $heading
-		    and substr($content[$j-1],-4,4) == "<$h>" 
-		    and substr($content[$j+1],0,5) == "</$h>") 
-		{
-		    $hstart = $j-1;
-		    $hend = $j+1;
-		    return $j; // single wikiword
-		} 
-		elseif (TOC_FULL_SYNTAX) {
-		    //DONE: To allow "!! WikiWord link" or !! http://anylink/
-		    // Check against joined content (after cached_plugininvocation).
-		    // The first link is the anchor then.
-		    if (preg_match("/<$h>(?!.*<\/$h>)/", $content[$j-1])) {
-			$hstart = $j-1;    	    	    
-			$joined = '';
-			for ($k=max($j-1,$start_index);$k<count($content);$k++) {
-			    if (is_string($content[$k]))
-			        $joined .= $content[$k];
-			    elseif (method_exists($content[$k],'asXML'))
-		                $joined .= $content[$k]->asXML();
-			    else
-		                $joined .= $content[$k]->asString();
-			    if (preg_match("/<$h>$qheading<\/$h>/",$joined)) {
-				$hend=$k;
-				return $k;
-			    }
-			}
-		    }
+                if (method_exists($content[$j],'asXML')) {
+                    $content[$j]->_basepage = $basepage;
+                    $content[$j] = $content[$j]->asXML();
+                } else
+                    $content[$j] = $content[$j]->asString();
+                // shortcut for single wikiword or link headers
+                if ($content[$j] == $heading
+                    and substr($content[$j-1],-4,4) == "<$h>"
+                    and substr($content[$j+1],0,5) == "</$h>")
+                {
+                    $hstart = $j-1;
+                    $hend = $j+1;
+                    return $j; // single wikiword
                 }
-    	    }
-    	}
-    	trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
-    	return 0;
+                elseif (TOC_FULL_SYNTAX) {
+                    //DONE: To allow "!! WikiWord link" or !! http://anylink/
+                    // Check against joined content (after cached_plugininvocation).
+                    // The first link is the anchor then.
+                    if (preg_match("/<$h>(?!.*<\/$h>)/", $content[$j-1])) {
+                        $hstart = $j-1;
+                        $joined = '';
+                        for ($k=max($j-1,$start_index);$k<count($content);$k++) {
+                            if (is_string($content[$k]))
+                                $joined .= $content[$k];
+                            elseif (method_exists($content[$k],'asXML'))
+                                $joined .= $content[$k]->asXML();
+                            else
+                                $joined .= $content[$k]->asString();
+                            if (preg_match("/<$h>$qheading<\/$h>/",$joined)) {
+                                $hend=$k;
+                                return $k;
+                            }
+                        }
+                    }
+                }
+                }
+            }
+            trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
+            return 0;
     }
 
     /** prevent from duplicate anchors,
@@ -237,27 +234,49 @@ extends WikiPlugin
         $anchors[$anchor] = $i;
         return $anchor;
     }
-    
+
+    // We have to find headers in both:
+    // - classic Phpwiki syntax (lines starting with "!", "!!" or "!!!")
+    // - Wikicreole syntax (lines starting with "==", "===", etc.)
+    // We must omit lines starting with "!" if inside a Mediawiki table
+    // (they represent a table header)
+    // Some constructs might incorrectly be recognized as a header
+    // (e.g. lines starting with "!!!" or "==" inside <verbatim>)
     // Feature request: proper nesting; multiple levels (e.g. 1,3)
-    function extractHeaders (&$content, &$markup, $backlink=0, 
+    function extractHeaders (&$content, &$markup, $backlink=0,
                              $counter=0, $levels=false, $firstlevelstyle='number', $basepage='')
     {
+
         if (!$levels) $levels = array(1,2);
-        $tocCounter = $this->_initTocCounter();        
+        $tocCounter = $this->_initTocCounter();
         reset($levels);
         sort($levels);
         $headers = array();
         $j = 0;
+        $insidetable = false;
         for ($i=0; $i<count($content); $i++) {
+            if (preg_match('/^\s*{\|/', $content[$i])) {
+               $insidetable = true;
+               continue;
+            }
+            if (preg_match('/^\s*\|}/', $content[$i])) {
+               $insidetable = false;
+               continue;
+            }
+            if ($insidetable) {
+               continue;
+            }
             foreach ($levels as $level) {
                 if ($level < 1 or $level > 5) continue;
                 $phpwikiclassiclevel = 4 -$level;
                 $wikicreolelevel = $level + 1;
-                if ($phpwikiclassiclevel < 1 or $phpwikiclassiclevel > 3) continue;
-                if ((preg_match('/^\s*(!{'.$phpwikiclassiclevel.','.$phpwikiclassiclevel.'})([^!].*)$/', $content[$i], $match))
-                 or (preg_match('/^\s*(={'.$wikicreolelevel.','.$wikicreolelevel.'})([^=].*)$/', $content[$i], $match)) )
-                {
-                    $this->_tocCounter($tocCounter, $level);                	
+                $trim = trim($content[$i]);
+
+                if ((((strpos($trim, '=') === 0))
+                      && (preg_match('/^\s*(={'.$wikicreolelevel.','.$wikicreolelevel.'})([^=].*)$/', $content[$i], $match)))
+                   or (((strpos($trim, '!') === 0))
+                      && ((preg_match('/^\s*(!{'.$phpwikiclassiclevel.','.$phpwikiclassiclevel.'})([^!].*)$/', $content[$i], $match))))) {
+                    $this->_tocCounter($tocCounter, $level);
                     if (!strstr($content[$i],'#[')) {
                         $s = trim($match[2]);
                         // If it is Wikicreole syntax, remove '='s at the end
@@ -271,8 +290,8 @@ extends WikiPlugin
                         if($counter) {
                             $texts = $this->_getCounter($tocCounter, $level, $firstlevelstyle).' '.$s;
                         }
-                        $headers[] = array('text' => $texts, 
-                                           'anchor' => $anchor, 
+                        $headers[] = array('text' => $texts,
+                                           'anchor' => $anchor,
                                            'level' => $level);
                         // Change original wikitext, but that is useless art...
                         $content[$i] = $match[1]." #[|$manchor][$s|#TOC]";
@@ -280,22 +299,23 @@ extends WikiPlugin
                         // Search <hn>$s</hn> line in markup
                         /* Url for backlink */
                         $url = WikiURL(new WikiPageName($basepage,false,"TOC"));
-                        $j = $this->searchHeader($markup->_content, $j, $s, 
-                                                 $match[1], $hstart, $hend, 
+
+                        $j = $this->searchHeader($markup->_content, $j, $s,
+                                                 $match[1], $hstart, $hend,
                                                  $markup->_basepage);
                         if ($j and isset($markup->_content[$j])) {
                             $x = $markup->_content[$j];
-			    $qheading = $this->_quote($s);
-			    if ($counter)
-				 $counterString = $this->_getCounter($tocCounter, $level, $firstlevelstyle);
+                            $qheading = $this->_quote($s);
+                            if ($counter)
+                                 $counterString = $this->_getCounter($tocCounter, $level, $firstlevelstyle);
                             if (($hstart === 0) && is_string($markup->_content[$j])) {
                                 if ($backlink) {
                                     if ($counter)
-                                        $anchorString = "<a href=\"$url\" name=\"$manchor\">$counterString</a> - \$2";
+                                        $anchorString = "<a href=\"$url\" id=\"$manchor\">$counterString</a> - \$2";
                                     else
-                                        $anchorString = "<a href=\"$url\" name=\"$manchor\">\$2</a>";
+                                        $anchorString = "<a href=\"$url\" id=\"$manchor\">\$2</a>";
                                 } else {
-                                    $anchorString = "<a name=\"$manchor\"></a>";
+                                    $anchorString = "<a id=\"$manchor\"></a>";
                                     if ($counter)
                                         $anchorString .= "$counterString - ";
                                 }
@@ -313,23 +333,23 @@ extends WikiPlugin
                                 $h = $this->_getHeader($match[1]);
 
                                 if ($backlink) {
-                                    if ($counter)
-                                        $anchorString = "\$1<a href=\"$url\" name=\"$manchor\">$counterString</a> - ";
-                                    else {
+                                    if ($counter) {
+                                        $anchorString = "\$1<a href=\"$url\" id=\"$manchor\">$counterString</a> - ";
+                                    } else {
                                         /* Not possible to make a backlink on a
                                          * title with a WikiWord */
-                                        $anchorString = "\$1<a name=\"$manchor\"></a>";
+                                        $anchorString = "\$1<a id=\"$manchor\"></a>";
                                     }
                                 }
                                 else {
-                                    $anchorString = "\$1<a name=\"$manchor\"></a>";
+                                    $anchorString = "\$1<a id=\"$manchor\"></a>";
                                     if ($counter)
                                         $anchorString .= "$counterString - ";
                                 }
-                                $x = preg_replace("/(<$h>)(?!.*<\/$h>)/", 
+                                $x = preg_replace("/(<$h>)(?!.*<\/$h>)/",
                                                   $anchorString, $x, 1);
                                 if ($backlink) {
-                                    $x =  preg_replace("/(<$h>)(?!.*<\/$h>)/", 
+                                    $x =  preg_replace("/(<$h>)(?!.*<\/$h>)/",
                                                       $anchorString,
                                                       $markup->_content[$hstart],1);
                                 }
@@ -342,7 +362,7 @@ extends WikiPlugin
         }
         return $headers;
     }
-                
+
     function run($dbi, $argstr, &$request, $basepage) {
         global $WikiTheme;
         extract($this->getArgs($argstr, $request));
@@ -361,26 +381,34 @@ extends WikiPlugin
         if (($notoc) or ($liststyle == 'ol')) {
             $with_counter = 1;
         }
+
+        // Check if user is allowed to get the Page.
+        if (!mayAccessPage ('view', $pagename)) {
+                return $this->error(sprintf(_("Illegal access to page %s: no read access"),
+                $pagename));
+        }
+
         $page = $dbi->getPage($pagename);
         $current = $page->getCurrentRevision();
         //FIXME: I suspect this only to crash with Apache2
         if (!$current->get('markup') or $current->get('markup') < 2) {
-	    if (in_array(php_sapi_name(),array('apache2handler','apache2filter'))) {
+            if (in_array(php_sapi_name(),array('apache2handler','apache2filter'))) {
                 trigger_error(_("CreateToc disabled for old markup"), E_USER_WARNING);
                 return '';
-	    }
+            }
         }
         $content = $current->getContent();
-        $html = HTML::div(array('class' => 'toc', 'id'=>'toc'));
+        $html = HTML::div(array('class' => 'toc', 'id'=> GenerateId("toc")));
         if ($notoc) {
             $html->setAttr('style','display:none;');
         }
         if (($position == "left") or ($position == "right")) {
             $html->setAttr('style','float:'.$position.'; width:'.$width.';');
         }
-        $list = HTML::div(array('id'=>'toclist'));
+        $toclistid = GenerateId("toclist");
+        $list = HTML::div(array('id'=>$toclistid, 'class'=>'toclist'));
         if (!strstr($headers,",")) {
-            $headers = array($headers);	
+            $headers = array($headers);
         } else {
             $headers = explode(",",$headers);
         }
@@ -398,8 +426,8 @@ extends WikiPlugin
         }
         if (TOC_FULL_SYNTAX)
             require_once("lib/InlineParser.php");
-        if ($headers = $this->extractHeaders($content, $dbi->_markup, 
-                                             $with_toclink, $with_counter, 
+        if ($headers = $this->extractHeaders($content, $dbi->_markup,
+                                             $with_toclink, $with_counter,
                                              $levels, $firstlevelstyle, $basepage))
         {
             foreach ($headers as $h) {
@@ -408,52 +436,38 @@ extends WikiPlugin
                 $indent = $level - 1;
                 $link = new WikiPageName($pagename,$page,$h['anchor']);
                 $li = WikiLink($link,'known',$h['text']);
+                // Hack to suppress pagename before #
+                // $li->_attr["href"] = strstr($li->_attr["href"], '#');
                 $list->pushContent(HTML::p(HTML::raw
                        (str_repeat($indentstr,$indent)),$li));
             }
         }
-	$list->setAttr('style','display:'.($jshide?'none;':'block;'));
+        $list->setAttr('style','display:'.($jshide?'none;':'block;'));
         $open = DATA_PATH.'/'.$WikiTheme->_findFile("images/folderArrowOpen.png");
         $close = DATA_PATH.'/'.$WikiTheme->_findFile("images/folderArrowClosed.png");
-	$html->pushContent(Javascript("
-function toggletoc(a) {
-  var toc=document.getElementById('toclist')
-  //toctoggle=document.getElementById('toctoggle')
-  var open='".$open."'
-  var close='".$close."'
-  if (toc.style.display=='none') {
-    toc.style.display='block'
-    a.title='"._("Click to hide the TOC")."'
-    a.src = open
-  } else {
-    toc.style.display='none';
-    a.title='"._("Click to display")."'
-    a.src = close
-  }
-}"));
       if ($noheader) {
       } else {
-	if ($extracollapse)
-	    $toclink = HTML(_("Table of Contents"),
-			    " ",
-                            HTML::a(array('name'=>'TOC')),
-			    HTML::img(array(
-                                            'id'=>'toctoggle',
+        $toctoggleid = GenerateId("toctoggle");
+        if ($extracollapse)
+            $toclink = HTML(_("Table of Contents"),
+                            " ",
+                            HTML::a(array('id'=>'TOC')),
+                            HTML::img(array(
+                                            'id'=>$toctoggleid,
                                             'class'=>'wikiaction',
                                             'title'=>_("Click to display to TOC"),
-                                            'onclick'=>"toggletoc(this)",
-                                            'border' => 0,
+                                            'onclick'=>"toggletoc(this, '".$open."', '".$close."', '".$toclistid."')",
                                             'alt' => 'toctoggle',
                                             'src' => $jshide ? $close : $open )));
-	else
-	    $toclink = HTML::a(array('name'=>'TOC',
-				     'class'=>'wikiaction',
-				     'title'=>_("Click to display"),
-				     'onclick'=>"toggletoc(this)"),
-			       _("Table of Contents"),
-			       HTML::span(array('style'=>'display:none',
-						'id'=>'toctoggle')," "));
-	$html->pushContent(HTML::p(array('id'=>'toctitle'), $toclink));
+        else
+            $toclink = HTML::a(array('id'=>'TOC',
+                                     'class'=>'wikiaction',
+                                     'title'=>_("Click to display"),
+                                     'onclick'=>"toggletoc(this, '".$open."', '".$close."', '".$toclistid."')"),
+                               _("Table of Contents"),
+                               HTML::span(array('style'=>'display:none',
+                                                'id'=>$toctoggleid)," "));
+        $html->pushContent(HTML::p(array('class'=>'toctitle'), $toclink));
       }
       $html->pushContent($list);
       if (count($headers) == 0) {
@@ -464,7 +478,6 @@ function toggletoc(a) {
     }
 };
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

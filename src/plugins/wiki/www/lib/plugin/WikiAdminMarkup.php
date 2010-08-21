@@ -1,32 +1,30 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminMarkup.php 6286 2008-10-02 10:01:29Z vargenau $');
+// rcs_id('$Id: WikiAdminMarkup.php 7448 2010-05-31 12:01:38Z vargenau $');
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
- Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Usage:   <?plugin WikiAdminMarkup s||=* ?> or called via WikiAdminSelect
+ * Usage:   <<WikiAdminMarkup s||=* >> or called via WikiAdminSelect
  * @author:  Reini Urban <rurban@x-ray.at>
  *
- * KNOWN ISSUES:
- * Requires PHP 4.2 so far.
  */
 require_once('lib/PageList.php');
 require_once('lib/plugin/WikiAdminSelect.php');
@@ -42,24 +40,19 @@ extends WikiPlugin_WikiAdminSelect
         return _("Change the markup type of selected pages.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6286 $");
-    }
-
     function getDefaultArguments() {
-        return array_merge 
+        return array_merge
             (
-             PageList::supportedArgs(),
+             WikiPlugin_WikiAdminSelect::getDefaultArguments(),
              array(
-                   's' 		=> false,
-                   'markup' 	=> 2,
+                   'markup'         => 2,
                    /* Columns to include in listing */
                    'info'     => 'pagename,markup,mtime',
                    ));
     }
 
     function chmarkupPages(&$dbi, &$request, $pages, $newmarkup) {
+        $result = HTML::div();
         $ul = HTML::ul();
         $count = 0;
         foreach ($pages as $name) {
@@ -68,7 +61,8 @@ extends WikiPlugin_WikiAdminSelect
             $markup = $current->get('markup');
             if ( !$markup or $newmarkup != $markup ) {
                 if (!mayAccessPage('change', $name)) {
-                    $ul->pushContent(HTML::li(fmt("Access denied to change page '%s'.",
+                    $result->setAttr('class', 'error');
+                    $result->pushContent(HTML::p(fmt("Access denied to change page '%s'.",
                                                   WikiLink($name))));
                 } else {
                     $version = $current->getVersion();
@@ -76,7 +70,10 @@ extends WikiPlugin_WikiAdminSelect
                     $meta['markup'] = $newmarkup;
                     // convert text?
                     $text = $current->getPackedContent();
-                    $meta['summary'] = sprintf(_("WikiAdminMarkup from %s to %s"), $markup, $newmarkup);
+                    $meta['summary'] = sprintf(_("Change markup type from %s to %s"), $markup, $newmarkup);
+                    $meta['is_minor_edit'] = 1;
+                    $meta['author'] =  $request->_user->UserName();
+                    unset($meta['mtime']); // force new date
                     $page->save($text, $version + 1, $meta);
                     $current = $page->getCurrentRevision();
                     if ($current->get('markup') === $newmarkup) {
@@ -84,7 +81,7 @@ extends WikiPlugin_WikiAdminSelect
                                                       WikiLink($name), $newmarkup)));
                         $count++;
                     } else {
-                        $ul->pushContent(HTML::li(fmt("Couldn't change page '%s' to markup type '%s'.", 
+                        $ul->pushContent(HTML::li(fmt("Couldn't change page '%s' to markup type '%s'.",
                                                       WikiLink($name), $newmarkup)));
                     }
                 }
@@ -92,18 +89,26 @@ extends WikiPlugin_WikiAdminSelect
         }
         if ($count) {
             $dbi->touch();
-            return HTML($ul, HTML::p(fmt("%s pages have been permanently changed.",
-                                         $count)));
+            $result->setAttr('class', 'feedback');
+            if ($count == 1) {
+                $result->pushContent(HTML::p("One page has been permanently changed:"));
+            } else {
+                $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
+            }
+            $result->pushContent($ul);
+            return $result;
         } else {
-            return HTML($ul, HTML::p(fmt("No pages changed.")));
+            $result->setAttr('class', 'error');
+            $result->pushContent(HTML::p("No pages changed."));
+            return $result;
         }
     }
-    
+
     function run($dbi, $argstr, &$request, $basepage) {
         if ($request->getArg('action') != 'browse')
             if (!$request->getArg('action') == _("PhpWikiAdministration/Markup"))
                 return $this->disabled("(action != 'browse')");
-        
+
         $args = $this->getArgs($argstr, $request);
         $this->_args = $args;
         $this->preSelectS($args, $request);
@@ -127,7 +132,7 @@ extends WikiPlugin_WikiAdminSelect
             // DONE: error message if not allowed.
             if ($post_args['action'] == 'verify') {
                 // Real action
-                return $this->chmarkupPages($dbi, $request, array_keys($p), 
+                return $this->chmarkupPages($dbi, $request, array_keys($p),
                                             $post_args['markup']);
             }
             if ($post_args['action'] == 'select') {
@@ -139,13 +144,18 @@ extends WikiPlugin_WikiAdminSelect
             }
         }
         if ($next_action == 'select' and empty($pages)) {
-            $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'], 
+            $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'],
                                          $args['exclude']);
         }
-        $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
+
+        if ($next_action == 'select') {
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
+        } else {
+            $pagelist = new PageList_Unselectable($args['info'], $args['exclude'], $args);
+        }
         $pagelist->addPageList($pages);
 
-        $header = HTML::p();
+        $header = HTML::fieldset();
         if ($next_action == 'verify') {
             $button_label = _("Yes");
             $header->pushContent(
@@ -155,17 +165,17 @@ extends WikiPlugin_WikiAdminSelect
         }
         else {
             $button_label = _("Change markup type");
-            $header->pushContent(HTML::p(_("Select the pages to change the markup type:")));
+            $header->pushContent(HTML::legend(_("Select the pages to change the markup type")));
             $header = $this->chmarkupForm($header, $post_args);
         }
 
         $buttons = HTML::p(Button('submit:admin_markup[button]', $button_label, 'wikiadmin'),
                            Button('submit:admin_markup[cancel]', _("Cancel"), 'button'));
+        $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
-                          $buttons,
                           $pagelist->getContent(),
                           HiddenInputs($request->getArgs(),
                                         false,
@@ -181,7 +191,6 @@ extends WikiPlugin_WikiAdminSelect
         $header->pushContent(' '._("to").': ');
         $header->pushContent(HTML::input(array('name' => 'admin_markup[markup]',
                                                'value' => $post_args['markup'])));
-        $header->pushContent(HTML::p());
         return $header;
     }
 }

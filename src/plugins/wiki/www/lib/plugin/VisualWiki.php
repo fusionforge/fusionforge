@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: VisualWiki.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: VisualWiki.php 7447 2010-05-31 11:29:39Z vargenau $');
 /*
- Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright (C) 2002 Johannes GroÃŸe (Johannes Gro&szlig;e)
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -25,7 +25,7 @@ rcs_id('$Id: VisualWiki.php 6185 2008-08-22 11:40:14Z vargenau $');
  * Example for an image map creating plugin. It produces a graphical
  * sitemap of PhpWiki by calling the <code>dot</code> commandline tool
  * from graphviz (http://www.graphviz.org).
- * @author Johannes Große
+ * @author Johannes GroÃŸe
  * @version 0.9
  */
 /* define('VISUALWIKI_ALLOWOPTIONS', true); */
@@ -41,8 +41,8 @@ extends WikiPlugin_GraphViz
      * Sets plugin type to map production
      */
     function getPluginType() {
-        return ($GLOBALS['request']->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND 
-	    					      : PLUGIN_CACHED_MAP;
+        return ($GLOBALS['request']->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND
+                                                          : PLUGIN_CACHED_MAP;
     }
 
     /**
@@ -52,11 +52,6 @@ extends WikiPlugin_GraphViz
      */
     function getName() {
         return "VisualWiki";
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     /**
@@ -162,7 +157,7 @@ extends WikiPlugin_GraphViz
         $this->extract_wikipages($dbi, $argarray);
         /* ($dbi,  $large, $recent, $refined, $backlink,
             $neighbour, $excludelist, $includelist, $color); */
-    	$result = $this->invokeDot($argarray);
+            $result = $this->invokeDot($argarray);
         if (isa($result, 'HtmlElement'))
             return array(false, $result);
         else
@@ -181,7 +176,7 @@ extends WikiPlugin_GraphViz
         $other_imgtypes = $GLOBALS['PLUGIN_CACHED_IMGTYPES'];
         unset ($other_imgtypes[$def['imgtype']]);
         $helparr = array(
-            '<?plugin '.$this->getName() .
+            '<<'.$this->getName() .
             ' img'             => ' = "' . $def['imgtype'] . "(default)|" . join('|',$GLOBALS['PLUGIN_CACHED_IMGTYPES']).'"',
             'width'            => ' = "width in inches"',
             'height'           => ' = "height in inches"',
@@ -197,7 +192,7 @@ extends WikiPlugin_GraphViz
             'backlink_nb'      => ' = "number of pages with most backlinks"',
             'neighbour_list'   => ' = "find pages linked from and to these pages"',
             'exclude_list'     => ' = "colon separated list of pages to be excluded"',
-            'include_list'     => ' = "colon separated list"     ?>'
+            'include_list'     => ' = "colon separated list"     >>'
             );
         $length = 0;
         foreach($helparr as $alignright => $alignleft) {
@@ -299,9 +294,9 @@ extends WikiPlugin_GraphViz
 
         // remove INCLUDED from EXCLUDED, includes override excludes.
         if ($exclude_list and $include_list) {
-        	$diff = array_diff($exclude_list, $include_list);
-        	if ($diff)
-        	    $exclude_list = $diff;
+                $diff = array_diff($exclude_list, $include_list);
+                if ($diff)
+                    $exclude_list = $diff;
         }
 
         // collect all pages
@@ -313,7 +308,7 @@ extends WikiPlugin_GraphViz
 
             // skip excluded pages
             if (in_array($name, $exclude_list)) {
-            	$page->free();	
+                    $page->free();
                 continue;
             }
 
@@ -508,7 +503,7 @@ extends WikiPlugin_GraphViz
                 $legend[] = $name;
             }
             $dot .= '        '. join(' -> ', $legend)
-		. ";\n    }\n";
+                . ";\n    }\n";
         }
 
         // {
@@ -522,8 +517,8 @@ extends WikiPlugin_GraphViz
     }
 
 
-    /** 
-     * static workaround on broken Cache or broken dot executable, 
+    /**
+     * static workaround on broken Cache or broken dot executable,
      * called only if debug=static.
      *
      * @access private
@@ -531,10 +526,10 @@ extends WikiPlugin_GraphViz
      * @param  map      string  &lt;area&gt; tags defining active
      *                          regions in the map
      * @param  dbi      WikiDB  database abstraction class
-     * @param  argarray array   complete (!) arguments to produce 
-     *                          image. It is not necessary to call 
+     * @param  argarray array   complete (!) arguments to produce
+     *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
-     * @param  request  Request ??? 
+     * @param  request  Request ???
      * @return          string  html output
      */
     function embedImg($url,&$dbi,$argarray,&$request) {
@@ -551,7 +546,7 @@ extends WikiPlugin_GraphViz
         $file_dir = getUploadFilePath();
         $upload_dir = getUploadDataPath();
         $tmpfile = tempnam($file_dir,"VisualWiki").".".$argarray['imgtype'];
-        WikiPluginCached::writeImage($argarray['imgtype'], $imagehandle, $tmpfile);             
+        WikiPluginCached::writeImage($argarray['imgtype'], $imagehandle, $tmpfile);
         ImageDestroy($imagehandle);
         return WikiPluginCached::embedMap(1,$upload_dir.basename($tmpfile),$content['html'],
                                           $dbi,$argarray,$request);
@@ -618,83 +613,6 @@ extends WikiPlugin_GraphViz
 function interpolate($a, $b, $pos) {
     return $a + ($b - $a) * $pos;
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.21  2007/01/04 16:43:00  rurban
-// Whitespace only
-//
-// Revision 1.20  2006/12/22 17:57:10  rurban
-// use getUploadxxxPath
-// improve error display
-//
-// Revision 1.19  2005/10/12 06:19:31  rurban
-// remove INCLUDED from EXCLUDED, includes override excludes.
-//
-// Revision 1.18  2004/12/17 16:49:52  rurban
-// avoid Invalid username message on Sign In button click
-//
-// Revision 1.17  2004/10/14 19:19:34  rurban
-// loadsave: check if the dumped file will be accessible from outside.
-// and some other minor fixes. (cvsclient native not yet ready)
-//
-// Revision 1.16  2004/10/12 15:34:47  rurban
-// redirect stderr to display the failing msg
-//
-// Revision 1.15  2004/09/08 13:38:00  rurban
-// improve loadfile stability by using markup=2 as default for undefined markup-style.
-// use more refs for huge objects.
-// fix debug=static issue in WikiPluginCached
-//
-// Revision 1.14  2004/09/07 13:26:31  rurban
-// new WikiPluginCached option debug=static and some more sf.net defaults for VisualWiki
-//
-// Revision 1.13  2004/09/06 12:13:00  rurban
-// provide sf.net default dotbin
-//
-// Revision 1.12  2004/09/06 12:08:50  rurban
-// memory_limit on unix workaround
-// VisualWiki: default autosize image
-//
-// Revision 1.11  2004/09/06 10:10:27  rurban
-// fixed syntax error
-//
-// Revision 1.10  2004/06/19 10:06:38  rurban
-// Moved lib/plugincache-config.php to config/*.ini
-// use PLUGIN_CACHED_* constants instead of global $CacheParams
-//
-// Revision 1.9  2004/06/03 09:40:57  rurban
-// WikiPluginCache improvements
-//
-// Revision 1.8  2004/01/26 09:18:00  rurban
-// * changed stored pref representation as before.
-//   the array of objects is 1) bigger and 2)
-//   less portable. If we would import packed pref
-//   objects and the object definition was changed, PHP would fail.
-//   This doesn't happen with an simple array of non-default values.
-// * use $prefs->retrieve and $prefs->store methods, where retrieve
-//   understands the interim format of array of objects also.
-// * simplified $prefs->get() and fixed $prefs->set()
-// * added $user->_userid and class '_WikiUser' portability functions
-// * fixed $user object ->_level upgrading, mostly using sessions.
-//   this fixes yesterdays problems with loosing authorization level.
-// * fixed WikiUserNew::checkPass to return the _level
-// * fixed WikiUserNew::isSignedIn
-// * added explodePageList to class PageList, support sortby arg
-// * fixed UserPreferences for WikiUserNew
-// * fixed WikiPlugin for empty defaults array
-// * UnfoldSubpages: added pagename arg, renamed pages arg,
-//   removed sort arg, support sortby arg
-//
-// Revision 1.7  2003/03/03 13:57:31  carstenklapp
-// Added fontpath (see PhpWiki:VisualWiki), tries to be smart about which OS.
-// (This plugin still doesn't work for me on OS X, but at least image files
-// are actually being created now in '/tmp/cache'.)
-//
-// Revision 1.6  2003/01/18 22:11:45  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

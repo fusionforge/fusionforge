@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: CurrentTime.php 6430 2009-01-23 12:33:28Z vargenau $');
+// rcs_id('$Id: CurrentTime.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -46,15 +46,13 @@ rcs_id('$Id: CurrentTime.php 6430 2009-01-23 12:33:28Z vargenau $');
  * A simple plugin that displays current time and date.
  *
  * Usage:
- * <?plugin CurrentTime?>
- * <?plugin CurrentTime format=XXX ?>
+ * <<CurrentTime>>
+ * <<CurrentTime format=XXX >>
  */
 
 class WikiPlugin_CurrentTime
 extends WikiPlugin
 {
-    // Five required functions in a WikiPlugin.
-
     function getName () {
         return _("CurrentTime");
     }
@@ -62,11 +60,6 @@ extends WikiPlugin
     function getDescription () {
         return _("A simple plugin that displays current time and date");
 
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     // Establish default values for each of this plugin's arguments.
@@ -88,7 +81,6 @@ extends WikiPlugin
     }
 };
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

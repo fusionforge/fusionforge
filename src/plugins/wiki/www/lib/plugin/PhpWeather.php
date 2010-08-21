@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id PhpWeather.php 2002-08-26 15:30:13 rurban$');
+// rcs_id('$Id PhpWeather.php 2002-08-26 15:30:13 rurban$');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -28,12 +28,12 @@ rcs_id('$Id PhpWeather.php 2002-08-26 15:30:13 rurban$');
  *
  * Usage:
  *
- * <?plugin PhpWeather ?>
- * <?plugin PhpWeather menu=true ?>
- * <?plugin PhpWeather icao=KJFK ?>
- * <?plugin PhpWeather language=en ?>
- * <?plugin PhpWeather units=only_metric ?>
- * <?plugin PhpWeather icao||=CYYZ cc||=CA language||=en menu=true ?>
+ * <<PhpWeather >>
+ * <<PhpWeather menu=true >>
+ * <<PhpWeather icao=KJFK >>
+ * <<PhpWeather language=en >>
+ * <<PhpWeather units=only_metric >>
+ * <<PhpWeather icao||=CYYZ cc||=CA language||=en menu=true >>
  *
  * If you want a menu, and you also want to change the default station
  * or language, then you have to use the ||= form, or else the user
@@ -43,7 +43,7 @@ rcs_id('$Id PhpWeather.php 2002-08-26 15:30:13 rurban$');
  * both_metric, or both_imperial.
  */
 
-// We require the base class from PHP Weather. Try some default directories. 
+// We require the base class from PHP Weather. Try some default directories.
 // Better define PHPWEATHER_BASE_DIR to the directory on your server:
 if (!defined('PHPWEATHER_BASE_DIR')) {
     /* PhpWeather has not been loaded before. We include the base
@@ -65,11 +65,6 @@ extends WikiPlugin
 
     function getDescription () {
         return _("The PhpWeather plugin provides weather reports from the Internet.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -198,26 +193,6 @@ extends WikiPlugin
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.11  2004/05/01 15:59:29  rurban
-// more php-4.0.6 compatibility: superglobals
-//
-// Revision 1.10  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.9  2003/01/28 21:10:38  zorloc
-// Better error messages from PhpWeather Plugin -- Martin Geisler
-//
-// Revision 1.8  2003/01/18 22:01:43  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-// Revision 1.7  2002/12/31 20:53:40  carstenklapp
-// Bugfixes: Fixed menu language selection (incorrect parameters to
-// $w->get_languages_select() & form input 'language' instead of 'lang').
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

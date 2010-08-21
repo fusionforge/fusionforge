@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiBlog.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: WikiBlog.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2002,2003,2007 $ThePhpWikiProgrammingTeam
- 
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2002,2003,2007,2009 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 /**
  * @author: MichaelVanDam, major refactor by JeffDairiki (as AddComment)
@@ -31,25 +31,25 @@ require_once('lib/TextSearchQuery.php');
  * particular page and provides an input form for adding a new blog.
  *
  * USAGE:
- * Add <?plugin WikiBlog ?> at your PersonalPage and BlogArchive and 
+ * Add <<WikiBlog >> at your PersonalPage and BlogArchive and
  * BlogJournal will find the Blog entries automatically.
  *
- * Now it is also the base class for all attachable pagetypes: 
+ * Now it is also the base class for all attachable pagetypes:
  *    "wikiblog", "comment" and "wikiforum"
  *
  * HINTS/COMMENTS:
  *
  * To have the blog show up on a seperate page:
  * On TopPage, use
- *   <?plugin WikiBlog mode=add?>
+ *   <<WikiBlog mode=add>>
  * Create TopPage/Blog with this page as actionpage:
- *   <?plugin WikiBlog pagename=TopPage mode=show?>
+ *   <<WikiBlog pagename=TopPage mode=show>>
  *
  * To have the main ADMIN_USER Blog appear under Blog and not under WikiBlog/Blog
  * or UserName/Blog as for other users blogs,
- * define BLOG_DEFAULT_EMPTY_PREFIX=true 
+ * define BLOG_DEFAULT_EMPTY_PREFIX=true
  * use the page Blog as basepage
- * and user="" (as default for ADMIN or current user) and pagename="Blog" 
+ * and user="" (as default for ADMIN or current user) and pagename="Blog"
  * in the various blog plugins (BlogArchives, BlogJournal)
  *
  * TODO:
@@ -91,11 +91,6 @@ extends WikiPlugin
         return sprintf(_("Show and add blogs for %s"),'[pagename]');
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     // Arguments:
     //  page - page which is blogged to (default current page)
     //
@@ -134,11 +129,11 @@ extends WikiPlugin
         // Get our form args.
         $blog = $request->getArg("edit");
         $request->setArg("edit", false);
-            
+
         if ($request->isPost() and !empty($blog['save'])) {
             $this->add($request, $blog, 'wikiblog', $basepage); // noreturn
         }
-	//TODO: preview
+        //TODO: preview
 
         // Now we display previous comments and/or provide entry box
         // for new comments
@@ -147,7 +142,7 @@ extends WikiPlugin
             if (!empty($seen[$show]))
                 continue;
             $seen[$show] = 1;
-                
+
             switch ($show) {
             case 'show':
                 $html->pushContent($this->showAll($request, $args));
@@ -166,23 +161,23 @@ extends WikiPlugin
      * posted: required: pagename, content. optional: summary
      */
     function add (&$request, $posted, $type='wikiblog') {
-	// This is similar to editpage. Shouldn't we use just this for preview?
+        // This is similar to editpage. Shouldn't we use just this for preview?
         $parent = $posted['pagename'];
         if (empty($parent)) {
             $prefix = "";   // allow empty parent for default "Blog/day"
             $parent = HOME_PAGE;
         } elseif (($parent == 'Blog' or $parent == 'WikiBlog') and $type == 'wikiblog')
-	{ // avoid Blog/Blog/2003-01-11/14:03:02+00:00
+        { // avoid Blog/Blog/2003-01-11/14:03:02+00:00
             $prefix = "";
-	    $parent = ''; // 'Blog';
+            $parent = ''; // 'Blog';
         } elseif ($parent == 'Comment' and $type == "comment")
-	{
+        {
             $prefix = "";
-	    $parent = ''; // 'Comment';
+            $parent = ''; // 'Comment';
         } elseif ($parent == 'Forum' and $type == "wikiforum")
-	{
+        {
             $prefix = "";
-	    $parent = ''; // 'Forum';
+            $parent = ''; // 'Forum';
         } else {
             $prefix = $parent . SUBPAGE_SEPARATOR;
         }
@@ -191,7 +186,7 @@ extends WikiPlugin
         $now = time();
         $dbi = $request->getDbh();
         $user = $request->getUser();
-        
+
         /*
          * Page^H^H^H^H Blog meta-data
          * This method is reused for all attachable pagetypes: wikiblog, comment and wikiforum
@@ -209,10 +204,13 @@ extends WikiPlugin
                            'creator'    => $user->getId(),
                            'creator_id' => $user->getAuthenticatedId(),
                            );
-        
+
 
         // Version meta-data
         $summary = trim($posted['summary']);
+        // edit: private only
+        $perm = new PagePermission();
+        $perm->perm['edit'] = $perm->perm['remove'];
         $version_meta = array('author'    => $blog_meta['creator'],
                               'author_id' => $blog_meta['creator_id'],
                               'markup'    => 2.0,   // assume new markup
@@ -220,6 +218,7 @@ extends WikiPlugin
                               'mtime'     => $now,
                               'pagetype'  => $type,
                               $type       => $blog_meta,
+                              'perm'      => $perm->perm,
                               );
         if ($type == 'comment')
             unset($version_meta['summary']);
@@ -228,29 +227,29 @@ extends WikiPlugin
         $body = trim($posted['content']);
 
         $saved = false;
-	if ($type != 'wikiforum')
-	    $pagename = $this->_blogPrefix($type);
-	else {
-	    $pagename = substr($summary,0,12);
-	    if (empty($pagename)) {
-		$saved = true;
-		trigger_error("Empty title", E_USER_WARNING);
-	    }
-	}
+        if ($type != 'wikiforum')
+            $pagename = $this->_blogPrefix($type);
+        else {
+            $pagename = substr($summary,0,12);
+            if (empty($pagename)) {
+                $saved = true;
+                trigger_error("Empty title", E_USER_WARNING);
+            }
+        }
         while (!$saved) {
             // Generate the page name.  For now, we use the format:
             //   Rootname/Blog/2003-01-11/14:03:02+00:00
-	    // Rootname = $prefix, Blog = $pagename, 
+            // Rootname = $prefix, Blog = $pagename,
             // This gives us natural chronological order when sorted
             // alphabetically. "Rootname/" is optional.
-	    // Esp. if Rootname is named Blog, it is omitted.
+            // Esp. if Rootname is named Blog, it is omitted.
 
             $time = Iso8601DateTime();
             // Check intermediate pages. If not existing they should RedirectTo the parent page.
             // Maybe add the BlogArchives plugin instead for the new interim subpage.
             $redirected = $prefix . $pagename;
             if (!$dbi->isWikiPage($redirected)) {
-            	if (!$parent) $parent = HOME_PAGE;
+                    if (!$parent) $parent = HOME_PAGE;
                 require_once('lib/loadsave.php');
                 $pageinfo = array('pagename' => $redirected,
                                   'content'  => '<?plugin RedirectTo page="'.$parent.'" ?>',
@@ -261,7 +260,7 @@ extends WikiPlugin
             }
             $redirected = $prefix . $pagename . SUBPAGE_SEPARATOR . preg_replace("/T.*/", "", "$time");
             if (!$dbi->isWikiPage($redirected)) {
-            	if (!$parent) $parent = HOME_PAGE;
+                    if (!$parent) $parent = HOME_PAGE;
                 require_once('lib/loadsave.php');
                 $pageinfo = array('pagename' => $redirected,
                                   'content'  => '<?plugin RedirectTo page="'.$parent.'" ?>',
@@ -271,7 +270,7 @@ extends WikiPlugin
                 SavePage($request, $pageinfo, '', '');
             }
 
-            $p = $dbi->getPage($prefix . $pagename . SUBPAGE_SEPARATOR 
+            $p = $dbi->getPage($prefix . $pagename . SUBPAGE_SEPARATOR
                                . str_replace("T", SUBPAGE_SEPARATOR, "$time"));
             $pr = $p->getCurrentRevision();
 
@@ -287,17 +286,11 @@ extends WikiPlugin
             // have just created a blog with the same name,
             // we'll have locked it before we discover that the name
             // is taken.
-            /*
-             * FIXME:  For now all blogs are locked.  It would be
-             * nice to allow only the 'creator' to edit by default.
-             */
-            $p->set('locked', true); //lock by default
-	    // TOOD: use ACL perms
             $saved = $p->save($body, 1, $version_meta);
 
             $now++;
         }
-        
+
         $dbi->touch();
         $request->setArg("mode", "show");
         $request->redirect($request->getURLtoSelf()); // noreturn
@@ -312,9 +305,9 @@ extends WikiPlugin
         // get results, so results are in alphabetical order.
         // When PageTypes fully implemented, could have smarter
         // blogSearch implementation / naming scheme.
-        
+
         $dbi = $request->getDbh();
-	$basepage = $args['pagename'];
+        $basepage = $args['pagename'];
         $blogs = $this->findBlogs($dbi, $basepage, $type);
         $html = HTML();
         if ($blogs) {
@@ -338,12 +331,12 @@ extends WikiPlugin
                 }
                 $html->pushContent($content);
             }
-            
+
         }
         return $html;
     }
 
-    // Subpage for the basepage. All Blogs/Forum/Comment entries are 
+    // Subpage for the basepage. All Blogs/Forum/Comment entries are
     // Subpages under this pagename, to find them faster.
     function _blogPrefix($type='wikiblog') {
         if ($type == 'wikiblog')
@@ -351,8 +344,8 @@ extends WikiPlugin
         elseif ($type == 'comment')
             $basepage = "Comment";
         elseif ($type == 'wikiforum')
-	    $basepage = substr($summary,0,12);
-	    //$basepage = _("Message"); // FIXME: we use now the first 12 chars of the summary
+            $basepage = substr($summary,0,12);
+            //$basepage = _("Message"); // FIXME: we use now the first 12 chars of the summary
         return $basepage;
     }
 
@@ -369,9 +362,9 @@ extends WikiPlugin
     }
 
     function findBlogs (&$dbi, $basepage='', $type='wikiblog') {
-        $prefix = (empty($basepage) 
-		   ? "" 
-		   :  $basepage . SUBPAGE_SEPARATOR) . $this->_blogPrefix($type);
+        $prefix = (empty($basepage)
+                   ? ""
+                   :  $basepage . SUBPAGE_SEPARATOR) . $this->_blogPrefix($type);
         $pages = $dbi->titleSearch(new TextSearchQuery('"'.$prefix.'"', true, 'none'));
 
         $blogs = array();
@@ -390,30 +383,30 @@ extends WikiPlugin
         return(strcmp($a->get('mtime'),
                       $b->get('mtime')));
     }
-    
+
     function showForm (&$request, $args, $template='blogform') {
         // Show blog-entry form.
-	$args = array('PAGENAME' => $args['pagename'],
-		      'HIDDEN_INPUTS' => 
-		      HiddenInputs($request->getArgs()));
-	if (ENABLE_EDIT_TOOLBAR and !ENABLE_WYSIWYG and ($template != 'addcomment')) {
+        $args = array('PAGENAME' => $args['pagename'],
+                      'HIDDEN_INPUTS' =>
+                      HiddenInputs($request->getArgs()));
+        if (ENABLE_EDIT_TOOLBAR and !ENABLE_WYSIWYG and ($template != 'addcomment')) {
             include_once("lib/EditToolbar.php");
             $toolbar = new EditToolbar();
             $args = array_merge($args, $toolbar->getTokens());
-	}
-	return new Template($template, $request, $args);
+        }
+        return new Template($template, $request, $args);
     }
 
     // "2004-12" => "December 2004"
     function _monthTitle($month){
-    	if (!$month) $month = strftime("%Y-%m");
+            if (!$month) $month = strftime("%Y-%m");
         //list($year,$mon) = explode("-",$month);
         return strftime("%B %Y", strtotime($month."-01"));
     }
 
     // "UserName/Blog/2004-12-13/12:28:50+01:00" => array('month' => "2004-12", ...)
     function _blog($rev_or_page) {
-    	$pagename = $rev_or_page->getName();
+            $pagename = $rev_or_page->getName();
         if (preg_match("/^(.*Blog)\/(\d\d\d\d-\d\d)-(\d\d)\/(.*)/", $pagename, $m))
             list(,$prefix,$month,$day,$time) = $m;
         return array('pagename' => $pagename,
@@ -427,111 +420,11 @@ extends WikiPlugin
     }
 
     function _nonDefaultArgs($args) {
-    	return array_diff_assoc($args, $this->getDefaultArguments());
+            return array_diff_assoc($args, $this->getDefaultArguments());
     }
 
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.28  2007/07/14 12:05:22  rurban
-// create interim pages as minor for RecentChanges
-//
-// Revision 1.27  2007/06/01 06:39:07  rurban
-// no edittoolbar for comments
-//
-// Revision 1.26  2007/02/17 14:17:03  rurban
-// redirect page=""
-//
-// Revision 1.25  2007/01/20 11:23:37  rurban
-// Fix forum parent. Fix addcomment header.
-//
-// Revision 1.24  2007/01/07 18:46:40  rurban
-// Add EditToolbar support. Omit Blog/Blog/
-//
-// Revision 1.23  2005/10/29 09:06:37  rurban
-// move common blog methods to WikiBlog
-//
-// Revision 1.22  2004/12/15 15:33:18  rurban
-// Blogs => Blog
-//
-// Revision 1.21  2004/12/14 21:35:15  rurban
-// support new BLOG_EMPTY_DEFAULT_PREFIX
-//
-// Revision 1.20  2004/12/13 13:22:57  rurban
-// new BlogArchives plugin for the new blog theme. enable default box method
-// for all plugins. Minor search improvement.
-//
-// Revision 1.19  2004/11/26 18:39:02  rurban
-// new regex search parser and SQL backends (90% complete, glob and pcre backends missing)
-//
-// Revision 1.18  2004/05/14 20:55:04  rurban
-// simplified RecentComments
-//
-// Revision 1.17  2004/05/14 17:33:12  rurban
-// new plugin RecentChanges
-//
-// Revision 1.16  2004/04/19 18:27:46  rurban
-// Prevent from some PHP5 warnings (ref args, no :: object init)
-//   php5 runs now through, just one wrong XmlElement object init missing
-// Removed unneccesary UpgradeUser lines
-// Changed WikiLink to omit version if current (RecentChanges)
-//
-// Revision 1.15  2004/04/18 05:42:17  rurban
-// more fixes for page="0"
-// better WikiForum support
-//
-// Revision 1.14  2004/03/29 21:33:32  rurban
-// possible fix for problem reported by Whit Blauvelt
-//   Message-ID: <20040327211707.GA22374@free.transpect.com>
-// create intermediate redirect subpages for blog/comment/forum
-//
-// Revision 1.13  2004/03/15 10:59:40  rurban
-// fix also early attach type bug, attached as wikiblog pagetype
-//
-// Revision 1.11  2004/03/12 20:59:31  rurban
-// important cookie fix by Konstantin Zadorozhny
-// new editpage feature: JS_SEARCHREPLACE
-//
-// Revision 1.10  2004/03/12 17:32:41  rurban
-// new base class PageType_attach as base class for WikiBlog, Comment, and WikiForum.
-// new plugin AddComment, which is a WikiBlog with different pagetype and template,
-//   based on WikiBlog. WikiForum comes later.
-//
-// Revision 1.9  2004/02/27 02:10:50  rurban
-// Patch #891133 by pablom517
-//   "WikiBlog Plugin now sorts logs correctly"
-//
-// Revision 1.8  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.7  2003/11/17 16:23:55  carstenklapp
-// Switched to Iso8601DateTime and more use of SUBPAGE_SEPARATOR. This
-// allows plugin UnfoldSubpages (for example) to be added to page
-// XxYy/Blog/ where desired, for a view of all Blogs in one day. This
-// change should not break existing BLOGs, we are only checking for
-// pagetype == 'wikiblog' now instead of relying on the subpage name to
-// collect blog subpages. (** WARNING: Do not add UnfoldSubpages to both
-// XxYy/Blog/ and XxYy/Blog/2003-11/16/ pages, due to recursion bug in
-// UnfoldSubpages plugin.)
-//
-// Revision 1.6  2003/02/21 04:20:09  dairiki
-// Big refactor. Formatting now done by the stuff in PageType.php.
-// Split the template into two separate ones: one for the add comment form,
-// one for comment display.
-//
-// Revision 1.5  2003/02/16 19:47:17  dairiki
-// Update WikiDB timestamp when editing or deleting pages.
-//
-// Revision 1.4  2003/01/11 22:23:00  carstenklapp
-// More refactoring to use templated output. Use page meta "summary" field.
-//
-// Revision 1.3  2003/01/06 02:29:02  carstenklapp
-// New: use blog.tmpl template to format output. Some cosmetic
-// issues, it mostly works but code still needs cleanup. Added
-// getVersion() for PluginManager.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

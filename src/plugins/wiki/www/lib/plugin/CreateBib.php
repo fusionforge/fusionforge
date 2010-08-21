@@ -1,31 +1,32 @@
 <?php // -*-php-*-
-rcs_id('$Id: CreateBib.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: CreateBib.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * CreateBib:  Automatically create a BibTex file from page
+ * Based on CreateTOC
  *
- * Usage:   
- *  <?plugin CreateBib pagename||=whatever ?>
- *                     
+ * Usage:
+ *  <<CreateBib pagename||=whatever >>
+ *
  * @author:  Lea Viljanen
  */
 
@@ -40,11 +41,6 @@ extends WikiPlugin
         return _("Automatically create a Bibtex file from linked pages");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return array( 'pagename'  => '[pagename]', // The page from which the BibTex file is generated
                       );
@@ -52,18 +48,18 @@ extends WikiPlugin
 
     function preg_quote ($heading) {
         return str_replace(array("/",".","?","*"),
-    		           array('\/','\.','\?','\*'), $heading);
+                               array('\/','\.','\?','\*'), $heading);
     }
-    
+
 
     // Have to include the $starttag and $endtag to the regexps...
-    function extractBibTeX (&$content, $starttag, $endtag) 
+    function extractBibTeX (&$content, $starttag, $endtag)
     {
         $bib = array();
 
         $start = false;
         $stop = false;
-        for ($i=0; $i<count($content); $i++) 
+        for ($i=0; $i<count($content); $i++)
         {
             // $starttag shows when to start
             if (preg_match('/^@/',$content[$i],$match)) {
@@ -87,7 +83,7 @@ extends WikiPlugin
         $articles = array();
         for ($i=0; $i<count($content); $i++) {
             // Should match "* [WikiPageName] whatever"
-            //if (preg_match('/^\s*\*\s+(\[.+\])/',$content[$i],$match)) 
+            //if (preg_match('/^\s*\*\s+(\[.+\])/',$content[$i],$match))
             if (preg_match('/^\s*\*\s+\[(.+)\]/',$content[$i],$match))
             {
                 $articles[] = $match[1];
@@ -95,7 +91,7 @@ extends WikiPlugin
         }
         return $articles;
     }
-                
+
 
     function dumpFile(&$thispage, $filename) {
       include_once("lib/loadsave.php");
@@ -126,16 +122,15 @@ extends WikiPlugin
         $current = $page->getCurrentRevision();
         $content = $current->getContent();
 
-	// Prepare the button to trigger dumping
-	$dump_url = $request->getURLtoSelf(array("file" => "tube.bib"));
+        // Prepare the button to trigger dumping
+        $dump_url = $request->getURLtoSelf(array("file" => "tube.bib"));
         global $WikiTheme;
-        $dump_button = $WikiTheme->makeButton("To File", 
-					  $dump_url , 'foo');
+        $dump_button = $WikiTheme->makeButton("To File",
+                                          $dump_url , 'foo');
 
         $html = HTML::div(array('class' => 'bib','align' => 'left'));
-	$html->pushContent($dump_button, ' ');
-        $list = HTML::pre(array('name'=>'biblist','id'=>'biblist',
-				'class' => 'bib'));
+        $html->pushContent($dump_button, ' ');
+        $list = HTML::pre(array('id'=>'biblist', 'class' => 'bib'));
 
         // Let's find the subpages
         if ($articles = $this->extractArticles($content)) {
@@ -163,16 +158,12 @@ extends WikiPlugin
             $c = $p->getCurrentRevision();
             $pagedata = $c->getContent();
             $this->dumpFile($pagedata, $request->getArg('file'));
-	}
+        }
 
         return $html;
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Based on CreateTOC
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

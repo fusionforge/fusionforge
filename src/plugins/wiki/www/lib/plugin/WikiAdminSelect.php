@@ -1,30 +1,31 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminSelect.php 6242 2008-09-07 11:12:43Z vargenau $');
+// rcs_id('$Id: WikiAdminSelect.php 7447 2010-05-31 11:29:39Z vargenau $');
 /*
- Copyright 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * Allows selection of multiple pages which get passed to other
  * WikiAdmin plugins then. Then do Rename, Remove, Chmod, Chown, ...
  *
- * Usage:   <?plugin WikiAdminSelect?>
+ * Usage:   <<WikiAdminSelect>>
  * Author:  Reini Urban <rurban@x-ray.at>
  *
  * This is the base class for most WikiAdmin* classes, using
@@ -44,24 +45,19 @@ extends WikiPlugin
         return _("Allows selection of multiple pages which get passed to other WikiAdmin plugins.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6242 $");
-    }
-
     function getDefaultArguments() {
         return array('s'       => '', // preselect pages
                      /* select pages by meta-data: */
                      'author'   => false,
                      'owner'    => false,
                      'creator'  => false,
-
                      'only'    => '',
                      'exclude' => '',
                      'info'    => 'most',
                      'sortby'  => 'pagename',
-                     'limit'    => 150,
-                     'debug'   => false);
+                     'limit'   => 0,
+                     'paging'  => 'none'
+                    );
     }
 
     /**
@@ -124,7 +120,6 @@ extends WikiPlugin
         $this->preSelectS($args, $request);
 
         $info = $args['info'];
-        $this->debug = $args['debug'];
 
         // array_multisort($this->_list, SORT_NUMERIC, SORT_DESC);
         $pagename = $request->getArg('pagename');
@@ -144,7 +139,38 @@ extends WikiPlugin
                                    HTML::input(array('type' => 'submit',
                                                      'name' => 'WikiAdminSelect',
                                                      'value' => _("Go")))));
-        if ($request->isPost() 
+        if (! $request->getArg('verify')) {
+            $form->pushContent(HTML::input(array('type' => 'hidden',
+                                                 'name' => 'action',
+                                                 'value' => 'verify')));
+            $form->pushContent(Button('submit:verify', _("Select pages"),
+                                      'wikiadmin'),
+                               Button('submit:cancel', _("Cancel"), 'button'));
+        } else {
+            global $WikiTheme;
+            $form->pushContent(HTML::input(array('type' => 'hidden',
+                                                 'name' => 'action',
+                                                 'value' => 'WikiAdminSelect'))
+                               );
+            // Add the Buttons for all registered WikiAdmin plugins
+            $plugin_dir = 'lib/plugin';
+            if (defined('PHPWIKI_DIR'))
+                $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
+            $fs = new fileSet($plugin_dir, 'WikiAdmin*.php');
+            $actions = $fs->getFiles();
+            sort($actions);
+            foreach ($actions as $f) {
+                $f = preg_replace('/.php$/','', $f);
+                $s = preg_replace('/^WikiAdmin/','', $f);
+                if (!in_array($s,array("Select","Utils"))) { // disable Select and Utils
+                    $form->pushContent(Button("submit:wikiadmin[$f]", _($s), "wikiadmin"));
+                    $form->pushContent($WikiTheme->getButtonSeparator());
+                }
+            }
+            // $form->pushContent(Button('submit:cancel', _("Cancel"), 'button'));
+        }
+
+        if ($request->isPost()
             && ! $request->getArg('wikiadmin')
             && !empty($p)) {
             $this->_list = array();
@@ -154,7 +180,7 @@ extends WikiPlugin
             }
         }
         elseif ($request->isPost()
-        	and $request->_user->isAdmin()
+                and $request->_user->isAdmin()
                 and !empty($p)
                 //and $request->getArg('verify')
                 and ($request->getArg('action') == 'WikiAdminSelect')
@@ -203,41 +229,6 @@ extends WikiPlugin
             if (!in_array($k,array('s','WikiAdminSelect','action','verify')))
                 $form->pushContent(HiddenInputs(array($k => $v))); // plugin params
         }
-        /*
-        foreach ($_GET as $k => $v) {
-            if (!in_array($k,array('s','WikiAdminSelect','action')))
-                $form->pushContent(HiddenInputs(array($k => $v))); // debugging params, ...
-        }
-        */
-        if (! $request->getArg('verify')) {
-            $form->pushContent(HTML::input(array('type' => 'hidden',
-                                                 'name' => 'action',
-                                                 'value' => 'verify')));
-            $form->pushContent(Button('submit:verify', _("Select pages"),
-                                      'wikiadmin'),
-                               Button('submit:cancel', _("Cancel"), 'button'));
-        } else {
-            global $WikiTheme;
-            $form->pushContent(HTML::input(array('type' => 'hidden',
-                                                 'name' => 'action',
-                                                 'value' => 'WikiAdminSelect'))
-                               );
-            // Add the Buttons for all registered WikiAdmin plugins
-            $plugin_dir = 'lib/plugin';
-            if (defined('PHPWIKI_DIR'))
-                $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
-            $fs = new fileSet($plugin_dir, 'WikiAdmin*.php');
-            $actions = $fs->getFiles();
-            foreach ($actions as $f) {
-                $f = preg_replace('/.php$/','', $f);
-                $s = preg_replace('/^WikiAdmin/','', $f);
-                if (!in_array($s,array("Select","Utils"))) { // disable Select and Utils
-                    $form->pushContent(Button("submit:wikiadmin[$f]", _($s), "wikiadmin"));
-                    $form->pushContent($WikiTheme->getButtonSeparator());
-                }
-            }
-            $form->pushContent(Button('submit:cancel', _("Cancel"), 'button'));
-        }
         if (! $request->getArg('select')) {
             return $form;
         } else {
@@ -247,9 +238,9 @@ extends WikiPlugin
 
     function _tablePush(&$table, $first, $second) {
         $table->pushContent(
-			    HTML::tr(
-				     HTML::td($first),
-				     HTML::td($second)));
+                            HTML::tr(
+                                     HTML::td($first),
+                                     HTML::td($second)));
     }
 
 }

@@ -1,30 +1,31 @@
 <?php // -*-php-*-
-rcs_id('$Id: PopUp.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: PopUp.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 2004 Nicolas Noble <pixels@users.sf.net>
-
- This file is (not yet) part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 Nicolas Noble <pixels@users.sf.net>
+ * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * Display a page in a clickable popup link.
  *
  * Usage:
- * <?plugin PopUp
+ * <<PopUp
  *     link="HomePage"
  *     title="PopUpped HomePage"
  *     text="Click here to popup the HomePage"
@@ -38,8 +39,8 @@ rcs_id('$Id: PopUp.php 6185 2008-08-22 11:40:14Z vargenau $');
  *     status=no
  *     menubar=no
  *     copyhistory=no
- * ?>
- * <?plugin PopUp close=yes ?>
+ * >>
+ * <<PopUp close=yes >>
  */
 
 class WikiPlugin_PopUp
@@ -50,58 +51,49 @@ extends WikiPlugin
     }
     function getDescription () {
         return _("Used to create a clickable popup link.");
-
-    }
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array('link'        => "HomePage",
-	             'title'       => "",
-	             'text'        => "",
-		     'width'       => "500",
-		     'height'      => "400",
-		     'resizable'   => "no",
-		     'scrollbars'  => "no",
-		     'toolbar'     => "no",
-		     'location'    => "no",
-		     'directories' => "no",
-		     'status'      => "no",
-		     'menubar'     => "no",
-		     'copyhistory' => "no",
-		     'close'       => "no",
-		    );
+                     'title'       => "",
+                     'text'        => "",
+                     'width'       => "500",
+                     'height'      => "400",
+                     'resizable'   => "no",
+                     'scrollbars'  => "no",
+                     'toolbar'     => "no",
+                     'location'    => "no",
+                     'directories' => "no",
+                     'status'      => "no",
+                     'menubar'     => "no",
+                     'copyhistory' => "no",
+                     'close'       => "no",
+                    );
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
         extract($this->getArgs($argstr, $request));
         return HTML::a(array('href' => WikiURL($link),
-	                      'target' => "_blank",
-	                      'onClick' => ($close == "yes" ? "window.close()" : ("window.open('" .
-			          WikiURL($link) . "', '" .
-				  ($title == "" ? ($text == "" ? $link : $text) : $title) . "', '" .
-				  "width=$width," .
-				  "height=$height," .
-				  "resizable=$resizable," .
-				  "scrollbars=$scrollbars," .
-				  "toolbar=$toolbar," .
-				  "location=$location," .
-				  "directories=$directories," .
-				  "status=$status," .
-				  "menubar=$menubar," .
-				  "copyhistory=$copyhistory')"
-				  )) . ";return false;"
-	                     ),
-		        ($text == "" ? ($close == "yes" ? "Close window" : $link) : $text)
-		       );
+                              'target' => "_blank",
+                              'onclick' => ($close == "yes" ? "window.close()" : ("window.open('" .
+                                  WikiURL($link) . "', '" .
+                                  ($title == "" ? ($text == "" ? $link : $text) : $title) . "', '" .
+                                  "width=$width," .
+                                  "height=$height," .
+                                  "resizable=$resizable," .
+                                  "scrollbars=$scrollbars," .
+                                  "toolbar=$toolbar," .
+                                  "location=$location," .
+                                  "directories=$directories," .
+                                  "status=$status," .
+                                  "menubar=$menubar," .
+                                  "copyhistory=$copyhistory')"
+                                  )) . ";return false;"
+                             ),
+                        ($text == "" ? ($close == "yes" ? "Close window" : $link) : $text)
+                       );
     }
 };
 
-// $Log: not supported by cvs2svn $
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

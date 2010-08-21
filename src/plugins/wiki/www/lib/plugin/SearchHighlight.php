@@ -1,29 +1,29 @@
 <?php // -*-php-*-
-rcs_id('$Id: SearchHighlight.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: SearchHighlight.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
-Copyright 2004,2007 $ThePhpWikiProgrammingTeam
-
-This file is NOT part of PhpWiki.
-
-PhpWiki is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-PhpWiki is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with PhpWiki; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+ * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
+ *
+ * This file is NOT part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once("lib/TextSearchQuery.php");
 require_once("lib/PageList.php");
 
-/** 
+/**
  * When someone is referred from a search engine like Google, Yahoo
  * or our own fulltextsearch, the terms they search for are highlighted.
  * See http://wordpress.org/about/shots/1.2/plugins.png
@@ -41,11 +41,6 @@ extends WikiPlugin
 
     function getDescription() {
         return _("Hilight referred search terms.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -70,9 +65,9 @@ extends WikiPlugin
         if (!$noheader and isset($request->_searchhighlight)) {
             $engine = $request->_searchhighlight['engine'];
             $html->pushContent(HTML::div(array('class' => 'search-context'),
-            				 fmt("%s: Found %s through %s", 
-            				     $basepage,
-                                             $request->_searchhighlight['query'], 
+                                             fmt("%s: Found %s through %s",
+                                                 $basepage,
+                                             $request->_searchhighlight['query'],
                                              $engine)));
         }
         if ($hits) {
@@ -102,21 +97,12 @@ extends WikiPlugin
         while (preg_match("/^(.*?)($hilight_re)/i", $line, $m)) {
             $line = substr($line, strlen($m[0]));
             // prematch + match
-            $html->pushContent($m[1], HTML::strong(array('class' => 'search-term'), $m[2])); 
+            $html->pushContent($m[1], HTML::strong(array('class' => 'search-term'), $m[2]));
         }
         $html->pushContent($line);       // postmatch
         return $html;
     }
 };
-
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2007/01/20 15:53:51  rurban
-// Rewrite of SearchHighlight: through ActionPage and InlineParser
-//
-// Revision 1.1  2004/09/26 14:58:36  rurban
-// naive SearchHighLight implementation
-//
-//
 
 // Local Variables:
 // mode: php

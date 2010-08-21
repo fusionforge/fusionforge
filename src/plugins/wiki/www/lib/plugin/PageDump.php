@@ -1,15 +1,35 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageDump.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: PageDump.php 7638 2010-08-11 11:58:40Z vargenau $');
+/*
+ * Copyright (C) 2003 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
 /**
  * PhpWikiPlugin for PhpWiki developers to generate single page dumps
  * for checking into cvs, or for users or the admin to produce a
  * downloadable page dump of a single page.
- * 
+ *
  * This plugin will also be useful to (semi-)automatically sync pages
  * directly between two wikis. First the LoadFile function of
  * PhpWikiAdministration needs to be updated to handle URLs again, and
  * add loading capability from InterWiki addresses.
-
+ *
  * Multiple revisions in one file handled by format=backup
  *
  * TODO: What about comments/summary field? quoted-printable?
@@ -20,9 +40,9 @@ rcs_id('$Id: PageDump.php 6185 2008-08-22 11:40:14Z vargenau $');
  *   http://...phpwiki/index.php?PageDump&page=HomePage
  *   http://...phpwiki/index.php?PageDump&page=HomePage&download=1
  *  Static:
- *   <?plugin PageDump page=HomePage?>
+ *   <<PageDump page=HomePage>>
  *  Dynamic form (put both on the page):
- *   <?plugin PageDump?>
+ *   <<PageDump>>
  *   <?plugin-form PageDump?>
  *  Typical usage: as actionbar button
  */
@@ -37,11 +57,6 @@ extends WikiPlugin
     }
     function getDescription() {
         return _("View a single page dump online.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -65,6 +80,12 @@ extends WikiPlugin
             return fmt("Page %s not found.",
                        WikiLink($page, 'unknown'));
 
+        // Check if user is allowed to get the Page.
+        if (!mayAccessPage ('view', $page)) {
+                return $this->error(sprintf(_("Illegal access to page %s: no read access"),
+                                        $page));
+        }
+
         $p = $dbi->getPage($page);
         include_once("lib/loadsave.php");
         $mailified = MailifyPage($p, ($format == 'backup') ? 99 : 1);
@@ -87,7 +108,7 @@ extends WikiPlugin
             $this->fixup_headers($mailified);
 
         if ($download) {
-            // TODO: we need a way to hook into the generated headers, to override 
+            // TODO: we need a way to hook into the generated headers, to override
             // Content-Type, Set-Cookie, Cache-control, ...
             $request->discardOutput(); // Hijack the http request from PhpWiki.
             ob_end_clean();            // clean up after hijacking $request
@@ -102,7 +123,7 @@ extends WikiPlugin
             if (!$charset) $charset = $GLOBALS['charset'];
             // We generate 3 Content-Type headers! first in loadsave,
             // then here and the mimified string $mailified also has it!
-	    // This one is correct and overwrites the others.
+            // This one is correct and overwrites the others.
             Header("Content-Type: application/octet-stream; name=\""
                    . $filename . "\"; charset=\"" . $charset
                    . "\"");
@@ -110,7 +131,7 @@ extends WikiPlugin
             // let $request provide last modified & etag
             Header("Content-Id: <" . $this->MessageId . ">");
             // be nice to http keepalive~s
-            Header("Content-Length: " . strlen($mailified)); 
+            Header("Content-Length: " . strlen($mailified));
 
             // Here comes our prepared mime file
             echo $mailified;
@@ -119,7 +140,7 @@ extends WikiPlugin
         }
         // We are displaing inline preview in a WikiPage, so wrap the
         // text if it is too long--unless quoted-printable (TODO).
-        $mailified = safe_wordwrap($mailified, 70);
+        $mailified = wordwrap($mailified, 70);
 
         $dlcvs = Button(array(//'page' => $page,
                               'action' => $this->getName(),
@@ -290,92 +311,6 @@ _("PhpWiki developers should manually inspect the downloaded file for nested mar
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.19  2007/01/03 21:23:40  rurban
-// fix Content-Type header to application/octet-stream to avoid pesty .txt suffixes on windows clients
-//
-// Revision 1.18  2004/10/14 19:19:34  rurban
-// loadsave: check if the dumped file will be accessible from outside.
-// and some other minor fixes. (cvsclient native not yet ready)
-//
-// Revision 1.17  2004/09/16 07:49:01  rurban
-// use the page charset instead if the global one on download
-//   (need to clarify header order, since we print the same header type 3 times!)
-// wordwrap workaround (security concern)
-//
-// Revision 1.16  2004/07/01 06:31:23  rurban
-// doc upcase only
-//
-// Revision 1.15  2004/06/29 10:09:06  rurban
-// better desc
-//
-// Revision 1.14  2004/06/29 10:07:40  rurban
-// added dump of all revisions by format=backup (screen and download)
-//
-// Revision 1.13  2004/06/17 10:39:18  rurban
-// fix reverse translation of possible actionpage
-//
-// Revision 1.12  2004/06/16 13:32:43  rurban
-// fix urlencoding of pagename in PageDump buttons
-//
-// Revision 1.11  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.10  2004/06/07 22:28:05  rurban
-// add acl field to mimified dump
-//
-// Revision 1.9  2004/06/07 19:50:41  rurban
-// add owner field to mimified dump
-//
-// Revision 1.8  2004/05/25 12:43:29  rurban
-// ViewSource link, better actionpage usage
-//
-// Revision 1.7  2004/05/04 17:21:06  rurban
-// revert previous patch
-//
-// Revision 1.6  2004/05/03 20:44:55  rurban
-// fixed gettext strings
-// new SqlResult plugin
-// _WikiTranslation: fixed init_locale
-//
-// Revision 1.5  2004/05/03 17:42:44  rurban
-// fix cvs tags: "$tag$" => "$tag: $"
-//
-// Revision 1.4  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-// Revision 1.3  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.2  2003/12/12 01:08:30  carstenklapp
-// QuickFix for invalid Message-Id header format.
-//
-// Revision 1.1  2003/12/12 00:52:55  carstenklapp
-// New feature: Plugin to download page dumps of individual pages. In the
-// future this could be used as a rudimentary way to sync pages between
-// wikis.
-// Internal changes: enhanced and renamed from the experimental
-// _MailifyPage plugin.
-//
-// Revision 1.3  2003/11/16 00:11:25  carstenklapp
-// Fixed previous Log comment interfering with PHP (sorry).
-// Improved error handling.
-//
-// Revision 1.2  2003/11/15 23:37:51  carstenklapp
-// Enhanced plugin to allow invocation with \<\?plugin-form PageDump\?\>.
-//
-// Revision 1.1  2003/02/20 18:03:04  carstenklapp
-// New experimental WikiPlugin for internal use only by PhpWiki developers.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

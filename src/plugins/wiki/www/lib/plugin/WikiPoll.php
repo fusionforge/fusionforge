@@ -1,30 +1,30 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiPoll.php 6306 2008-10-16 09:17:59Z vargenau $');
+// rcs_id('$Id: WikiPoll.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
- Copyright 2008 Marc-Etienne Vargenau, Alcatel-lucent
- 
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ * Copyright 2008 Marc-Etienne Vargenau, Alcatel-lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 /**
  * This plugin provides configurable polls.
  *
  * Usage:
-<?plugin WikiPoll require_all=0 require_least=2
+<<WikiPoll require_all=0 require_least=2
            question[1]="Do you like PhpWiki?"
              answer[1][1]="Yes" answer[1][2]="Do not know" answer[1][3]="No"
            question[2]="Do you have PhpWiki installed by your own?"
@@ -38,10 +38,10 @@ rcs_id('$Id: WikiPoll.php 6306 2008-10-16 09:17:59Z vargenau $');
            question[5]="Which PhpWiki version do you use?"
              answer[5][1]="1.2.x" answer[5][2]="1.3.1-12" answer[5][3]="1.3.13"
              answer[5][4]="1.3.14"
-?>
+>>
  *
  * Administration:
- * <?plugin WikiPoll page=PhpWikiPoll admin=1 ?>
+ * <<WikiPoll page=PhpWikiPoll admin=1 >>
  * and protect this page properly (e.g. PhpWikiPoll/Admin)
  *
  * TODO:
@@ -54,19 +54,14 @@ rcs_id('$Id: WikiPoll.php 6306 2008-10-16 09:17:59Z vargenau $');
 class WikiPlugin_WikiPoll
 extends WikiPlugin
 {
-    var $_args;	
-    
+    var $_args;
+
     function getName () {
         return _("WikiPoll");
     }
 
     function getDescription () {
         return _("Enable configurable polls");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6306 $");
     }
 
     function getDefaultArguments() {
@@ -91,7 +86,7 @@ extends WikiPlugin
                   $args['answer'][$i] = $array;
           }
         }
-        
+
         if (!empty($defaults))
           foreach ($defaults as $arg => $default_val) {
             if (isset($argstr_args[$arg]))
@@ -118,31 +113,31 @@ extends WikiPlugin
 
         return $args;
     }
-    
+
     function handle_plugin_args_cruft($argstr, $args) {
-    	$argstr = str_replace("\n"," ",$argstr);
-    	$argstr = str_replace(array("[","]"),array("_",""),$argstr);
-    	$this->_args = $this->getArgs($argstr, $GLOBALS['request']);
+            $argstr = str_replace("\n"," ",$argstr);
+            $argstr = str_replace(array("[","]"),array("_",""),$argstr);
+            $this->_args = $this->getArgs($argstr, $GLOBALS['request']);
         return;
     }
 
     function str2array($var, $obarray=false) {
-    	if (!$obarray) $obarray = $GLOBALS;
-    	$i = 0; $array = array();
-    	$name = sprintf("%s_%d",$var,$i);
-    	if (isset($obarray[$name])) $array[$i] = $obarray[$name];
-    	do {
+            if (!$obarray) $obarray = $GLOBALS;
+            $i = 0; $array = array();
+            $name = sprintf("%s_%d",$var,$i);
+            if (isset($obarray[$name])) $array[$i] = $obarray[$name];
+            do {
           $i++;
           $name = sprintf("%s_%d",$var,$i);
           if (isset($obarray[$name])) $array[$i] = $obarray[$name];
-    	} while (isset($obarray[$name]));
-    	return $array;
+            } while (isset($obarray[$name]));
+            return $array;
     }
-    
+
     function run($dbi, $argstr, &$request, $basepage) {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
-    	$request->setArg('nocache','purge');
+            $request->setArg('nocache','purge');
         $args = $this->getArgs($argstr, $request);
         if (!$args['page'])
             return $this->error("No page specified");
@@ -150,8 +145,8 @@ extends WikiPlugin
             // reset statistics
             return $this->doPollAdmin($dbi, $request, $page);
         }
-	extract($this->_args);
-	$page = $dbi->getPage($args['page']);
+        extract($this->_args);
+        $page = $dbi->getPage($args['page']);
         // check ip and last visit
         $poll = $page->get("poll");
         $ip = $_SERVER['REMOTE_ADDR'];
@@ -163,7 +158,7 @@ extends WikiPlugin
             $html->pushContent($this->doPoll($page, $request, $request->getArg('answer'),true));
             return $html;
         }
-            
+
         $poll['ip'][$ip] = time();
         // purge older ip's
         foreach ($poll['ip'] as $ip => $time) {
@@ -178,7 +173,7 @@ extends WikiPlugin
             if ($request->getArg('answer') and (
                  ($args['require_all'] and
                   count($request->getArg('answer')) == count($question))
-                 or 
+                 or
                  ($args['require_least'] and
                   count($request->getArg('answer')) >= $args['require_least']))) {
                 $page->set("poll", $poll);
@@ -188,14 +183,14 @@ extends WikiPlugin
                 $html->pushContent(HTML::p(HTML::strong(_("Not enough questions answered!"))));
             }
         }
-       
+
         $init = isset($question[0]) ? 0 : 1;
         for ($i = $init; $i <= count($question); $i++) {
             if (!isset($question[$i])) break;
-            $q = $question[$i]; 
+            $q = $question[$i];
             if (!isset($answer[$i]))
-            	trigger_error(fmt("Missing %s for %s","answer"."[$i]","question"."[$i]"),
-            	              E_USER_ERROR);
+                    trigger_error(fmt("Missing %s for %s","answer"."[$i]","question"."[$i]"),
+                                  E_USER_ERROR);
             $a = $answer[$i];
             if (! is_array($a)) {
                 // a simple checkbox
@@ -220,13 +215,13 @@ extends WikiPlugin
         }
         if (!$disable_submit)
             $html->pushContent(HTML::p(
-        	HTML::input(array('type' => 'submit',
+                HTML::input(array('type' => 'submit',
                                   'name' => "WikiPoll",
                                   'value' => _("OK"))),
-        	HTML::input(array('type' => 'reset',
+                HTML::input(array('type' => 'reset',
                                   'name' => "reset",
                                   'value' => _("Reset")))));
-        else 
+        else
              $html->pushContent(HTML::p(),HTML::strong(
                  _("Sorry! You must wait at least 20 minutes until you can vote again!")));
         return $html;
@@ -245,18 +240,18 @@ extends WikiPlugin
     }
 
     function doPoll($page, $request, $answers, $readonly = false) {
-    	$question = $this->_args['question'];
-    	$answer   = $this->_args['answer'];
+            $question = $this->_args['question'];
+            $answer   = $this->_args['answer'];
         $html = HTML::table(array('cellspacing' => 2));
         $init = isset($question[0]) ? 0 : 1;
         for ($i = $init; $i <= count($question); $i++) {
             if (!isset($question[$i])) break;
             $poll = $page->get('poll');
             @$poll['data']['all'][$i]++;
-            $q = $question[$i]; 
+            $q = $question[$i];
             if (!isset($answer[$i]))
-            	trigger_error(fmt("Missing %s for %s","answer"."[$i]","question"."[$i]"),
-            	              E_USER_ERROR);
+                    trigger_error(fmt("Missing %s for %s","answer"."[$i]","question"."[$i]"),
+                                  E_USER_ERROR);
             if (!$readonly)
                 $page->set('poll',$poll);
             $a = $answer[$i];
@@ -266,16 +261,16 @@ extends WikiPlugin
                                               'name' => "answer[$i]",
                                               'value' => $a));
                 if ($result >= 0)
-                    $checkbox->setAttr('checked',1);
-	        if (!$readonly)
+                    $checkbox->setAttr('checked', "checked");
+                if (!$readonly)
                     list($percent,$count,$all) = $this->storeResult($page, $i, $result ? 1 : 0);
-                else 
+                else
                     list($percent,$count,$all) = $this->getResult($page, $i, 1);
                 $print = sprintf(_("  %d%% (%d/%d)"), $percent, $count, $all);
                 $html->pushContent(HTML::tr(HTML::th(array('colspan' => 4,'align'=>'left'),$q)));
                 $html->pushContent(HTML::tr(HTML::td($checkbox),
                                             HTML::td($a),
-                       		            HTML::td($this->bar($percent)),
+                                                   HTML::td($this->bar($percent)),
                                             HTML::td($print)));
             } else {
                 $html->pushContent(HTML::tr(HTML::th(array('colspan' => 4,'align'=>'left'),$q)));
@@ -284,16 +279,16 @@ extends WikiPlugin
                     $this->storeResult($page, $i, $answers[$i]);
                 for ($j=0; $j <= count($a); $j++) {
                     if (isset($a[$j])) {
-                    	list($percent,$count,$all) = $this->getResult($page,$i,$j);
+                            list($percent,$count,$all) = $this->getResult($page,$i,$j);
                         $print = sprintf(_("  %d%% (%d/%d)"), $percent, $count, $all);
                         $radio = HTML::input(array('type' => 'radio',
                                                    'name' => "answer[$i]",
                                                    'value' => $j));
                         if ($result == $j)
-                            $radio->setAttr('checked',1);
+                            $radio->setAttr('checked', "checked");
                         $row->pushContent(HTML::tr(HTML::td($radio),
-                        		           HTML::td($a[$j]),
-                        		           HTML::td($this->bar($percent)),
+                                                   HTML::td($a[$j]),
+                                                   HTML::td($this->bar($percent)),
                                                    HTML::td($print)));
                     }
                 }
@@ -302,35 +297,34 @@ extends WikiPlugin
         }
         if (!$readonly)
             return HTML(HTML::h3(_("The result of this poll so far:")),$html,HTML::p(_("Thanks for participating!")));
-        else  
+        else
             return HTML(HTML::h3(_("The result of this poll so far:")),$html);
-  
+
     }
-    
+
     function getResult($page,$i,$j) {
-    	$poll = $page->get("poll");
-    	@$count = $poll['data']['count'][$i][$j];
-    	@$all = $poll['data']['all'][$i];
-    	$percent = sprintf("%d", $count * 100.0 / $all);
-    	return array($percent,$count,$all);
+            $poll = $page->get("poll");
+            @$count = $poll['data']['count'][$i][$j];
+            @$all = $poll['data']['all'][$i];
+            $percent = sprintf("%d", $count * 100.0 / $all);
+            return array($percent,$count,$all);
     }
-    
+
     function storeResult($page, $i, $j) {
-    	$poll = $page->get("poll");
-    	if (!$poll) {
-    	    $poll = array('data' => array('count' => array(),
-    	    				  'all'   => array()));
-    	}
-    	@$poll['data']['count'][$i][$j]++;
-    	//@$poll['data']['all'][$i];
-    	$page->set("poll",$poll);
-  	$percent = sprintf("%d", $poll['data']['count'][$i][$j] * 100.0 / $poll['data']['all'][$i]);
-	return array($percent,$poll['data']['count'][$i][$j],$poll['data']['all'][$i]);
+            $poll = $page->get("poll");
+            if (!$poll) {
+                $poll = array('data' => array('count' => array(),
+                                                  'all'   => array()));
+            }
+            @$poll['data']['count'][$i][$j]++;
+            //@$poll['data']['all'][$i];
+            $page->set("poll",$poll);
+          $percent = sprintf("%d", $poll['data']['count'][$i][$j] * 100.0 / $poll['data']['all'][$i]);
+        return array($percent,$poll['data']['count'][$i][$j],$poll['data']['all'][$i]);
     }
 
 };
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

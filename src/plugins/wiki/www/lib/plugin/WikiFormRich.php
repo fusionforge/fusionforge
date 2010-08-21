@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiFormRich.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: WikiFormRich.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2004,2006,2007 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004,2006,2007 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -25,18 +25,18 @@ rcs_id('$Id: WikiFormRich.php 6185 2008-08-22 11:40:14Z vargenau $');
  * Previously encoded with the "phpwiki:" syntax.
  *
  * Enhanced WikiForm to be more generic:
- * - editbox[] 		name=.. value=.. text=.. autocomplete=1
- * - checkbox[] 	name=.. value=0|1 checked text=..
- * - radio[] 	        name=.. value=.. text=..
- * - pulldown[]		name=.. value=.. selected=.. text=.. autocomplete=1
- * - combobox[]		name=.. value=.. text=.. method=.. args=.. 
- * - hidden[]		name=.. value=..
+ * - editbox[]                 name=.. value=.. text=.. autocomplete=1
+ * - checkbox[]         name=.. value=0|1 checked text=..
+ * - radio[]                 name=.. value=.. text=..
+ * - pulldown[]                name=.. value=.. selected=.. text=.. autocomplete=1
+ * - combobox[]                name=.. value=.. text=.. method=.. args=..
+ * - hidden[]                name=.. value=..
  * - submit[]
  * - action, submit buttontext, optional cancel button (bool)
  * - method=get or post, Default: post.
- 
+
  * Valid arguments for pulldown and editbox: autocomplete=1, Default: 0
- * If autocomplete=1, additional arguments method and args may be used. 
+ * If autocomplete=1, additional arguments method and args may be used.
  * If no method is given, value will be used to fill in the valid values.
  * method="xmlrpc:server:name" or "url:http://server/wiki/method" or "array:jsvariable"
  * or "plugin:pluginname"
@@ -46,54 +46,54 @@ rcs_id('$Id: WikiFormRich.php 6185 2008-08-22 11:40:14Z vargenau $');
  * @Author: Reini Urban
 
  * Values which are constants are evaluated.
- * The cancel button must be supported by the action. 
+ * The cancel button must be supported by the action.
  *   (just some wikiadmin actions so far)
  * improve layout by: nobr=1
  * some allow values as list from from <!plugin-list !>
 
  Samples:
-   <?plugin WikiFormRich action=dumpserial method=get 
-            checkbox[] name=include value="all" 
+   <<WikiFormRich action=dumpserial method=get
+            checkbox[] name=include value="all"
             editbox[] name=directory value=DEFAULT_DUMP_DIR
             editbox[] name=pages value=*
-            editbox[] name=exclude value="" ?>
-   <?plugin WikiFormRich action=dumphtml method=get 
+            editbox[] name=exclude value="" >>
+   <<WikiFormRich action=dumphtml method=get
             editbox[] name=directory value=HTML_DUMP_DIR
             editbox[] name=pages value="*"
-            editbox[] name=exclude value="" ?>
-   <?plugin WikiFormRich action=loadfile method=get 
+            editbox[] name=exclude value="" >>
+   <<WikiFormRich action=loadfile method=get
             editbox[]  name=source value=DEFAULT_WIKI_PGSRC
             checkbox[] name=overwrite value=1
-            editbox[]  name=exclude value="" ?>
-  <?plugin WikiFormRich action=TitleSearch method=get class=wikiadmin nobr=1
-  	   editbox[] name=s text=""
+            editbox[]  name=exclude value="" >>
+  <<WikiFormRich action=TitleSearch method=get class=wikiadmin nobr=1
+             editbox[] name=s text=""
            submit[]
-  	   checkbox[] name=case_exact
-  	   checkbox[] name=regex ?>
-  <?plugin WikiFormRich action=FullTextSearch method=get class=wikiadmin nobr=1
-  	   editbox[] name=s text=""
+             checkbox[] name=case_exact
+             checkbox[] name=regex >>
+  <<WikiFormRich action=FullTextSearch method=get class=wikiadmin nobr=1
+             editbox[] name=s text=""
            submit[]
-  	   checkbox[] name=case_exact
-  	   checkbox[] name=regex ?>
-  <?plugin WikiFormRich action=FuzzyPages method=get class=wikiadmin nobr=1
-  	   editbox[] name=s text=""
+             checkbox[] name=case_exact
+             checkbox[] name=regex >>
+  <<WikiFormRich action=FuzzyPages method=get class=wikiadmin nobr=1
+             editbox[] name=s text=""
            submit[]
-  	   checkbox[] name=case_exact ?>
-  <?plugin WikiFormRich action=AppendText buttontext="AddPlugin"
-  	   radio[] name=s value=<!plugin-list BackLinks page=WikiPlugin limit=10 !>
-  	   ?>
-  <?plugin WikiFormRich action=AppendText buttontext="AddPlugin"
-  	   pulldown[] name=s text="Plugins: " value=<!plugin-list BackLinks page=WikiPlugin !>
-  	   ?>
-  <?plugin WikiFormRich action=AppendText buttontext="AddCategory"
-  	   pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
-  	   ?>
-  <?plugin WikiFormRich action=SemanticSearch buttontext="AddRelation"
-  	   combobox[] name=relation text="Relation: " method=listRelations
-  	   ?>
-  <?plugin WikiFormRich action=AppendText buttontext="InsertTemplate"
-  	   combobox[] name=s text="Template: " method=titleSearch args="Template/"
-  	   ?>
+             checkbox[] name=case_exact ?>
+  <<WikiFormRich action=AppendText buttontext="AddPlugin"
+             radio[] name=s value=<!plugin-list BackLinks page=WikiPlugin limit=10 !>
+             ?>
+  <<WikiFormRich action=AppendText buttontext="AddPlugin"
+             pulldown[] name=s text="Plugins: " value=<!plugin-list BackLinks page=WikiPlugin !>
+             ?>
+  <<WikiFormRich action=AppendText buttontext="AddCategory"
+             pulldown[] name=s text="Categories: " value=<!plugin-list TitleSearch s=Category !>
+             ?>
+  <<WikiFormRich action=SemanticSearch buttontext="AddRelation"
+             combobox[] name=relation text="Relation: " method=listRelations
+             ?>
+  <<WikiFormRich action=AppendText buttontext="InsertTemplate"
+             combobox[] name=s text="Template: " method=titleSearch args="Template/"
+             ?>
 */
 
 class WikiPlugin_WikiFormRich
@@ -104,10 +104,6 @@ extends WikiPlugin
     }
     function getDescription () {
         return _("Provide generic WikiForm input buttons");
-    }
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
     function getDefaultArguments() {
         return array('action' => false,     // required argument
@@ -122,20 +118,20 @@ extends WikiPlugin
     /* TODO: support better block alignment: <br>, tables, indent
      */
     function handle_plugin_args_cruft($argstr, $args) {
-    	$allowed = array("editbox", "hidden", "checkbox", "radiobutton"/*deprecated*/,
-    			 "radio", "pulldown", "submit", "reset", "combobox");
-    	// no editbox[] = array(...) allowed (space)
-    	$arg_array = preg_split("/\n/", $argstr);
-    	// for security we should check this better
+            $allowed = array("editbox", "hidden", "checkbox", "radiobutton"/*deprecated*/,
+                             "radio", "pulldown", "submit", "reset", "combobox");
+            // no editbox[] = array(...) allowed (space)
+            $arg_array = preg_split("/\n/", $argstr);
+            // for security we should check this better
         $arg = '';
-    	for ($i = 0; $i < count($arg_array); $i++) {
-    	    //TODO: we require an name=value pair here, but submit may go without also.
-    	    if (preg_match("/^\s*(".join("|",$allowed).")\[\](.*)$/", $arg_array[$i], $m)) {
-    	    	$name = $m[1]; // one of the allowed input types
+            for ($i = 0; $i < count($arg_array); $i++) {
+                //TODO: we require an name=value pair here, but submit may go without also.
+                if (preg_match("/^\s*(".join("|",$allowed).")\[\](.*)$/", $arg_array[$i], $m)) {
+                        $name = $m[1]; // one of the allowed input types
                 $this->inputbox[][$name] = array(); $j = count($this->inputbox) - 1;
                 $curargs = trim($m[2]);
                 // must match name=NAME and also value=<!plugin-list name !>
-                while (preg_match("/^(\w+?)=((?:\".*?\")|(?:\w+)|(?:\"?<!plugin-list.+?!>\"?))\s*/", 
+                while (preg_match("/^(\w+?)=((?:\".*?\")|(?:\w+)|(?:\"?<!plugin-list.+?!>\"?))\s*/",
                                   $curargs, $m)) {
                     $attr = $m[1]; $value = $m[2];
                     $curargs = substr($curargs, strlen($m[0]));
@@ -143,31 +139,31 @@ extends WikiPlugin
                         $value = $m[1];
                     if (in_array($name, array("pulldown","checkbox","radio","radiobutton","combobox"))
                             and preg_match('/^<!plugin-list.+!>$/', $value, $m))
-            	    // like pulldown[] name=test value=<!plugin-list BackLinks page=HomePage!>
+                        // like pulldown[] name=test value=<!plugin-list BackLinks page=HomePage!>
                     {
-            		$loader = new WikiPluginLoader();
-            		$markup = null;
-            		$basepage = null;
-            		$plugin_str = preg_replace(array("/^<!/","/!>$/"),array("<?","?>"), $value);
-            		// will return a pagelist object! pulldown,checkbox,radiobutton
-            		$value = $loader->expandPI($plugin_str, $GLOBALS['request'], $markup, $basepage);
-            		if (isa($value, 'PageList')) 
-            		    $value = $value->pageNames(); // apply limit
-            		elseif (!is_array($value))
-    	    		    trigger_error(sprintf("Invalid argument %s ignored", htmlentities($arg_array[$i])), 
-    	    	                          E_USER_WARNING);
+                            $loader = new WikiPluginLoader();
+                            $markup = null;
+                            $basepage = null;
+                            $plugin_str = preg_replace(array("/^<!/","/!>$/"),array("<?","?>"), $value);
+                            // will return a pagelist object! pulldown,checkbox,radiobutton
+                            $value = $loader->expandPI($plugin_str, $GLOBALS['request'], $markup, $basepage);
+                            if (isa($value, 'PageList'))
+                                $value = $value->pageNames(); // apply limit
+                            elseif (!is_array($value))
+                                    trigger_error(sprintf("Invalid argument %s ignored", htmlentities($arg_array[$i])),
+                                                  E_USER_WARNING);
                     }
                     elseif (defined($value))
                         $value = constant($value);
                     $this->inputbox[$j][$name][$attr] = $value;
                 }
-    	    	//trigger_error("not yet finished");
+                        //trigger_error("not yet finished");
                 //eval('$this->inputbox[]["'.$m[1].'"]='.$m[2].';');
             } else {
-    	    	trigger_error(sprintf("Invalid argument %s ignored", htmlentities($arg_array[$i])), 
-    	    	              E_USER_WARNING);
+                        trigger_error(sprintf("Invalid argument %s ignored", htmlentities($arg_array[$i])),
+                                      E_USER_WARNING);
             }
-    	}
+            }
         return;
     }
 
@@ -196,7 +192,7 @@ extends WikiPlugin
                   $text = $input['text'];
                   unset($input['text']);
               }
-	      switch($inputtype) {
+              switch($inputtype) {
               case 'checkbox': // text right
               case 'radio':
                 if (empty($input['value'])) $input['value'] = 1;
@@ -210,7 +206,7 @@ extends WikiPlugin
                         if ($request->getArg($name)) {
                             if ($request->getArg($name) == $val)
                                 $input['checked'] = 'checked';
-                            else 
+                            else
                                 unset($input['checked']);
                         }
                         $div->pushContent(HTML::input($input), $nbsp, $val, $nbsp, "\n");
@@ -235,22 +231,22 @@ extends WikiPlugin
                   $input['type'] = 'text';
                   if (empty($input['value']) and ($s = $request->getArg($input['name'])))
                       $input['value'] = $s;
-		  if (!empty($input['autocomplete']))
-		      $this->_doautocomplete($form, $inputtype, $input, $input['value']);
+                  if (!empty($input['autocomplete']))
+                      $this->_doautocomplete($form, $inputtype, $input, $input['value']);
                   if ($nobr)
                       $form->pushContent($text, $nbsp, HTML::input($input));
                   else
                       $form->pushContent(HTML::div(array('class' => $class), $text, $nbsp, HTML::input($input)));
                   break;
               case 'combobox': // text left
-		  $input['autocomplete'] = 1;
+                  $input['autocomplete'] = 1;
               case 'pulldown':
                   $values = @$input['value'];
                   unset($input['value']);
                   unset($input['type']);
                   if (is_string($values)) $values = explode(",", $values);
-		  if (!empty($input['autocomplete']))
-		      $this->_doautocomplete($form, $inputtype, $input, $values);
+                  if (!empty($input['autocomplete']))
+                      $this->_doautocomplete($form, $inputtype, $input, $values);
                   $select = HTML::select($input);
                   if (empty($values) and ($s = $request->getArg($input['name']))) {
                       $select->pushContent(HTML::option(array('value'=> $s), $s));
@@ -269,8 +265,8 @@ extends WikiPlugin
                           $select->pushContent(HTML::option($input, $val));
                       }
                   } else { // force empty option
-		      $select->pushContent(HTML::option(array(), ''));
-		  }
+                      $select->pushContent(HTML::option(array(), ''));
+                  }
                   $form->pushContent($text, $nbsp, $select);
                   break;
               case 'reset':
@@ -306,7 +302,7 @@ extends WikiPlugin
             if ($cancel) {
                 $form->pushContent(HTML::span
                                    (array('class' => $class),
-                                    $submit, 
+                                    $submit,
                                     Button('submit:cancel', _("Cancel"), $class)));
             } else {
                 $form->pushContent(HTML::span(array('class' => $class),
@@ -317,154 +313,86 @@ extends WikiPlugin
     }
 
     function _doautocomplete(&$form, $inputtype, &$input, &$values) {
-	global $request;
-	$input['class'] = "dropdown";
-	$input['acdropdown'] = "true"; 
-	//$input['autocomplete'] = "OFF";
-	$input['autocomplete_complete'] = "true";
-	// only match begin: autocomplete_matchbegin, or
-	$input['autocomplete_matchsubstring'] = "true";
-	if (empty($values)) {
-	    if ($input['method']) {
-		if (empty($input['args'])) {
-		    if (preg_match("/^(.*?) (.*)$/",$input['method'],$m)) {
-		        $input['method'] = $m[1];
-		        $input['args'] = $m[2];
-		    } else 
-		        $input['args'] = null;
-		}
-		static $tmpArray = 'tmpArray00';
-		// deferred remote xmlrpc call
-		if (string_starts_with($input['method'], "dynxmlrpc:")) {
-		    // how is server + method + args encoding parsed by acdropdown? 
-		    $input['autocomplete_list'] = substr($input['method'],3);
-		    if ($input['args']) 
-		        $input['autocomplete_list'] .= (" ".$input['args']);
-		// static xmlrpc call, local only
-		} elseif (string_starts_with($input['method'], "xmlrpc:")) {
-		    include_once("lib/XmlRpcClient.php");
-		    $values = wiki_xmlrpc_post(substr($input['method'],7), $input['args']);
-		} elseif (string_starts_with($input['method'], "url:")) {
-		    include_once("lib/HttpClient.php");
-		    $html = HttpClient::quickGet(substr($input['method'],4));
-		    //TODO: how to parse the HTML result into a list?
-		} elseif (string_starts_with($input['method'], "dynurl:")) {
-		    $input['autocomplete_list'] = substr($input['method'],3);
-		} elseif (string_starts_with($input['method'], "plugin:")) {
-		    $dbi = $request->getDbh();
-		    $pluginName = substr($input['method'],7);
-		    $basepage = '';
-		    require_once("lib/WikiPlugin.php");
-		    $w = new WikiPluginLoader;
-		    $p = $w->getPlugin($pluginName, false); // second arg?
-		    if (!is_object($p))
-			trigger_error("invalid input['method'] ".$input['method'], E_USER_WARNING);
-		    $pagelist = $p->run($dbi, @$input['args'], $request, $basepage);
-		    $values = array();
-		    if (is_object($pagelist) and isa($pagelist, 'PageList')) {
-			foreach ($pagelist->_pages as $page) {
-			    if (is_object($page))
-			        $values[] = $page->getName();
-			    else
-			        $values[] = (string)$page;
-			}
-		    }
-		} elseif (string_starts_with($input['method'], "array:")) {
-		    // some predefined values (e.g. in a template or themeinfo.php)
-		    $input['autocomplete_list'] = $input['method'];
-		} else {
-		    trigger_error("invalid input['method'] ".$input['method'], E_USER_WARNING);
-		}
-		if (empty($input['autocomplete_list'])) 
-		{
-		    $tmpArray++;
-		    $input['autocomplete_list']="array:".$tmpArray;
-		    $svalues = empty($values) ? "" : join("','", $values);
-		    $form->pushContent(JavaScript("var $tmpArray = new Array('".$svalues."')"));
-		}
-		if (count($values) == 1)
-		    $input['value'] = $values[0];
-		else
-		    $input['value'] = "";    
-		unset($input['method']);
-		unset($input['args']);
-		//unset($input['autocomplete']);
-	    }
-	    elseif ($s = $request->getArg($input['name']))
-		$input['value'] = $s;
-	}
-	return true;
+        global $request;
+        $input['class'] = "dropdown";
+        $input['acdropdown'] = "true";
+        //$input['autocomplete'] = "OFF";
+        $input['autocomplete_complete'] = "true";
+        // only match begin: autocomplete_matchbegin, or
+        $input['autocomplete_matchsubstring'] = "true";
+        if (empty($values)) {
+            if ($input['method']) {
+                if (empty($input['args'])) {
+                    if (preg_match("/^(.*?) (.*)$/",$input['method'],$m)) {
+                        $input['method'] = $m[1];
+                        $input['args'] = $m[2];
+                    } else
+                        $input['args'] = null;
+                }
+                static $tmpArray = 'tmpArray00';
+                // deferred remote xmlrpc call
+                if (string_starts_with($input['method'], "dynxmlrpc:")) {
+                    // how is server + method + args encoding parsed by acdropdown?
+                    $input['autocomplete_list'] = substr($input['method'],3);
+                    if ($input['args'])
+                        $input['autocomplete_list'] .= (" ".$input['args']);
+                // static xmlrpc call, local only
+                } elseif (string_starts_with($input['method'], "xmlrpc:")) {
+                    include_once("lib/XmlRpcClient.php");
+                    $values = wiki_xmlrpc_post(substr($input['method'],7), $input['args']);
+                } elseif (string_starts_with($input['method'], "url:")) {
+                    include_once("lib/HttpClient.php");
+                    $html = HttpClient::quickGet(substr($input['method'],4));
+                    //TODO: how to parse the HTML result into a list?
+                } elseif (string_starts_with($input['method'], "dynurl:")) {
+                    $input['autocomplete_list'] = substr($input['method'],3);
+                } elseif (string_starts_with($input['method'], "plugin:")) {
+                    $dbi = $request->getDbh();
+                    $pluginName = substr($input['method'],7);
+                    $basepage = '';
+                    require_once("lib/WikiPlugin.php");
+                    $w = new WikiPluginLoader;
+                    $p = $w->getPlugin($pluginName, false); // second arg?
+                    if (!is_object($p))
+                        trigger_error("invalid input['method'] ".$input['method'], E_USER_WARNING);
+                    $pagelist = $p->run($dbi, @$input['args'], $request, $basepage);
+                    $values = array();
+                    if (is_object($pagelist) and isa($pagelist, 'PageList')) {
+                        foreach ($pagelist->_pages as $page) {
+                            if (is_object($page))
+                                $values[] = $page->getName();
+                            else
+                                $values[] = (string)$page;
+                        }
+                    }
+                } elseif (string_starts_with($input['method'], "array:")) {
+                    // some predefined values (e.g. in a template or themeinfo.php)
+                    $input['autocomplete_list'] = $input['method'];
+                } else {
+                    trigger_error("invalid input['method'] ".$input['method'], E_USER_WARNING);
+                }
+                if (empty($input['autocomplete_list']))
+                {
+                    $tmpArray++;
+                    $input['autocomplete_list']="array:".$tmpArray;
+                    $svalues = empty($values) ? "" : join("','", $values);
+                    $form->pushContent(JavaScript("var $tmpArray = new Array('".$svalues."')"));
+                }
+                if (count($values) == 1)
+                    $input['value'] = $values[0];
+                else
+                    $input['value'] = "";
+                unset($input['method']);
+                unset($input['args']);
+                //unset($input['autocomplete']);
+            }
+            elseif ($s = $request->getArg($input['name']))
+                $input['value'] = $s;
+        }
+        return true;
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.18  2007/01/20 11:41:47  rurban
-// Updated (c) year
-//
-// Revision 1.17  2007/01/03 21:24:33  rurban
-// remove debugging cruft.
-//
-// Revision 1.16  2007/01/02 13:23:38  rurban
-// support more WikiFormRich method arguments: url, dynurl, xmlrpc, dynxmlrpc, the autocomplete option for pulldown[] and editbox[] and the new combobox[] widget. fix name=value parsing. fix limit with plugin-list invocations
-//
-// Revision 1.15  2004/11/26 18:25:33  rurban
-// pulldown[] values="val1,val2,val3,..." simple comma seperated values
-//
-// Revision 1.14  2004/11/25 17:20:52  rurban
-// and again a couple of more native db args: backlinks
-//
-// Revision 1.13  2004/11/25 12:04:17  rurban
-// support extra submit[] and reste[] buttons to place it before. renamed radiobutton to radio
-//
-// Revision 1.12  2004/11/24 15:21:19  rurban
-// docs
-//
-// Revision 1.11  2004/11/24 15:19:57  rurban
-// allow whitespace in quoted text args
-//
-// Revision 1.10  2004/11/24 15:07:49  rurban
-// added pulldown support, fixed plugin-list whitespace splitting
-//
-// Revision 1.9  2004/11/24 13:55:42  rurban
-// omit unneccessary pagename arg
-//
-// Revision 1.8  2004/11/24 10:58:50  rurban
-// just docs
-//
-// Revision 1.7  2004/11/24 10:40:04  rurban
-// better nobr, allow empty text=""
-//
-// Revision 1.5  2004/11/24 10:14:36  rurban
-// fill-in request args as with plugin-form
-//
-// Revision 1.4  2004/11/23 15:17:20  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
-// Revision 1.3  2004/07/09 13:05:34  rurban
-// just aesthetics
-//
-// Revision 1.2  2004/07/09 10:25:52  rurban
-// fix the args parser
-//
-// Revision 1.1  2004/07/02 11:03:53  rurban
-// renamed WikiFormMore to WikiFormRich: better syntax, no eval (safer)
-//
-// Revision 1.3  2004/07/01 13:59:25  rurban
-// enhanced to allow arbitrary order of args and stricter eval checking
-//
-// Revision 1.2  2004/07/01 13:14:01  rurban
-// desc only
-//
-// Revision 1.1  2004/07/01 13:11:53  rurban
-// more generic forms
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

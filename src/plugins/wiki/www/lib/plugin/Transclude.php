@@ -1,32 +1,32 @@
 <?php // -*-php-*-
-rcs_id('$Id: Transclude.php 6344 2008-11-07 14:20:31Z vargenau $');
+// rcs_id('$Id: Transclude.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * Transclude:  Include an external web page within the body of a wiki page.
  *
  * Usage:
- *  <?plugin Transclude
+ *  <<Transclude
  *           src=http://www.internet-technology.de/fourwins_de.htm
- *  ?>
+ *  >>
  *
  * @author Geoffrey T. Dairiki
  *
@@ -55,11 +55,6 @@ extends WikiPlugin
       return _("Include an external web page within the body of a wiki page.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6344 $");
-    }
-
     function getDefaultArguments() {
         return array( 'src'     => false, // the src url to include
                       'title'   =>  _("Transcluded page"), // title of the iframe
@@ -77,15 +72,15 @@ extends WikiPlugin
         if (!$src) {
             return $this->error(fmt("%s parameter missing", "'src'"));
         }
-	// Expand possible interwiki link for src
-	if (strstr($src,':')
+        // Expand possible interwiki link for src
+        if (strstr($src,':')
             and (!strstr($src,'://'))
-            and ($intermap = getInterwikiMap()) 
-            and preg_match("/^" . $intermap->getRegexp() . ":/", $src)) 
+            and ($intermap = getInterwikiMap())
+            and preg_match("/^" . $intermap->getRegexp() . ":/", $src))
         {
-	    $link = $intermap->link($src);
-	    $src = $link->getAttr('href');
-	}
+            $link = $intermap->link($src);
+            $src = $link->getAttr('href');
+        }
 
         // FIXME: Better recursion detection.
         // FIXME: Currently this doesnt work at all.
@@ -163,7 +158,6 @@ extends WikiPlugin
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

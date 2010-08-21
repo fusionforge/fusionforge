@@ -1,26 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: FuzzyPages.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: FuzzyPages.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-//require_once('lib/PageList.php');
 
 /**
  * FuzzyPages is plugin which searches for similar page titles.
@@ -43,11 +42,6 @@ extends WikiPlugin
     function getDescription() {
         return sprintf(_("Search for page titles similar to %s."),
                        '[pagename]');
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -106,8 +100,10 @@ extends WikiPlugin
     function addTableHead(&$table) {
         $row = HTML::tr(HTML::th(_("Name")),
                         HTML::th(array('align' => 'right'), _("Score")));
-        if ($this->debug)
+
+        if (defined('DEBUG') && DEBUG && $this->debug) {
             $this->_pushDebugHeadingTDinto($row);
+        }
 
         $table->pushContent(HTML::thead($row));
     }
@@ -125,8 +121,9 @@ extends WikiPlugin
                             HTML::td(array('align' => 'right'),
                                      round($score)));
 
-            if ($this->debug)
+            if (defined('DEBUG') && DEBUG && $this->debug) {
                 $this->_pushDebugTDinto($row, $found_pagename);
+            }
 
             $tbody->pushContent($row);
         }
@@ -135,6 +132,9 @@ extends WikiPlugin
 
     function formatTable(&$list, &$dbi) {
 
+        if (empty($list)) {
+           return HTML::p(fmt("No fuzzy matches with '%s'", $this->_searchterm));
+        }
         $table = HTML::table(array('cellpadding' => 2,
                                    'cellspacing' => 1,
                                    'border'      => 0,
@@ -149,9 +149,13 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
         extract($args);
-        if (empty($s))
-            return '';
-        $this->debug = $debug;
+        if (empty($s)) {
+            return HTML();
+        }
+
+        if (defined('DEBUG') && DEBUG) {
+            $this->debug = $debug;
+        }
 
         $this->_searchterm = $s;
         $this->_list = array();
@@ -160,8 +164,6 @@ extends WikiPlugin
         $this->sortCollectedPages($this->_list);
         return $this->formatTable($this->_list, $dbi);
     }
-
-
 
     function _pushDebugHeadingTDinto(&$row) {
         $row->pushContent(HTML::td(_("Spelling Score")),
@@ -182,19 +184,6 @@ extends WikiPlugin
                           HTML::td($debug_metaphone));
     }
 };
-
-// $Log: not supported by cvs2svn $
-// Revision 1.11  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.10  2003/02/22 20:49:55  dairiki
-// Fixes for "Call-time pass by reference has been deprecated" errors.
-//
-// Revision 1.9  2003/01/18 21:41:02  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

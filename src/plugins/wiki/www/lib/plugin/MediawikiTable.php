@@ -1,14 +1,9 @@
 <?php // -*-php-*-
-rcs_id('$Id: MediawikiTable.php 6422 2009-01-20 14:30:22Z vargenau $');
-/**
-  MediawikiTablePlugin
-  A PhpWiki plugin that allows insertion of tables using a Mediawiki-like
-  syntax.
-*/
+// rcs_id('$Id: MediawikiTable.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -30,25 +25,30 @@ rcs_id('$Id: MediawikiTable.php 6422 2009-01-20 14:30:22Z vargenau $');
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
- * "The MediawikiTablePlugin ("Contribution") has not been tested and/or 
+ * "The MediawikiTablePlugin ("Contribution") has not been tested and/or
  * validated for release as or in products, combinations with products or
- * other commercial use. Any use of the Contribution is entirely made at 
+ * other commercial use. Any use of the Contribution is entirely made at
  * the user's own responsibility and the user can not rely on any features,
- * functionalities or performances Alcatel-Lucent has attributed to the 
+ * functionalities or performances Alcatel-Lucent has attributed to the
  * Contribution.
  *
- * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY 
- * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
  * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
- * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE 
- * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL 
- * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
- * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER 
- * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND 
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
 
+/**
+ * MediawikiTablePlugin
+ * A PhpWiki plugin that allows insertion of tables using a Mediawiki-like
+ * syntax.
+*/
 class WikiPlugin_MediawikiTable
 extends WikiPlugin
 {
@@ -64,13 +64,7 @@ extends WikiPlugin
         return array();
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6422 $");
-    }
-
     function run($dbi, $argstr, &$request, $basepage) {
-    	global $WikiTheme;
         include_once("lib/BlockParser.php");
         // MediawikiTablePlugin markup is new.
         $markup = 2.0;
@@ -78,11 +72,16 @@ extends WikiPlugin
         // We allow the compact Mediawiki syntax with:
         // - multiple cells on the same line (separated by "||"),
         // - multiple header cells on the same line (separated by "!!").
-        $argstr = str_replace("||", "\n|", $argstr);
-        $argstr = str_replace("!!", "\n!", $argstr);
+        $argstr = str_replace("||", "\n| ", $argstr);
+        $argstr = str_replace("!!", "\n! ", $argstr);
 
         $lines = preg_split('/\n/', $argstr);
         $table = HTML::table();
+
+        // We always generate an Id for the table.
+        // This is convenient for tables of class "sortable".
+        // If user provides an Id, the generated Id will be overwritten below.
+        $table->setAttr("id", GenerateId("MediawikiTable"));
 
         if (substr($lines[0],0,2) == "{|") {
             // Start of table
@@ -99,6 +98,10 @@ extends WikiPlugin
                     $table->setAttr($key, $value);
                 }
             }
+        }
+
+        if (count($lines) == 1) { // empty table, we only have closing "|}" line
+            return HTML::raw('');
         }
 
         foreach ($lines as $line){
@@ -121,12 +124,12 @@ extends WikiPlugin
                         unset($cell);
                     }
                     if (isset($thead)) {
-                    	$thead->pushContent($row);
-                    	$table->pushContent($thead);
-                    	unset($thead);
-                    	$tbody = HTML::tbody();
+                            $thead->pushContent($row);
+                            $table->pushContent($thead);
+                            unset($thead);
+                            $tbody = HTML::tbody();
                     } else {
-                    	$tbody->pushContent($row);
+                            $tbody->pushContent($row);
                     }
                 }
                 $row = HTML::tr();
@@ -183,7 +186,7 @@ extends WikiPlugin
                 if (substr($line,0,1) == "!") {
                     $cell = HTML::th();   // Header
                     $thead = HTML::thead();
-                } else { 
+                } else {
                     $cell = HTML::td();
                     if (!isset($tbody)) $tbody = HTML::tbody();
                 }
@@ -192,16 +195,20 @@ extends WikiPlugin
                 // If there is a "|" in the line, the start of line
                 // (before the "|") is made of attributes.
                 // The end of the line (after the "|") is the cell content
-                // This is not true if the pipe is inside []
-                // | [foo|bar] 
+                // This is not true if the pipe is inside [], {{}} or {{{}}}
+                // | [foo|bar]
                 // The following cases must work:
-                // | foo    
+                // | foo
                 // | [foo|bar]
                 // | class="xxx" | foo
                 // | class="xxx" | [foo|bar]
+                // | {{tmpl|arg=val}}
+                // | {{image.png|alt}}
+                // | {{{ xxx | yyy }}}
                 $pospipe = strpos($line, "|");
                 $posbracket = strpos($line, "[");
-                if (($pospipe !== false) && (($posbracket === false) || ($posbracket > $pospipe))) {
+                $poscurly = strpos($line, "{");
+                if (($pospipe !== false) && (($posbracket === false) || ($posbracket > $pospipe)) && (($poscurly === false) || ($poscurly > $pospipe))) {
                     $attrs = parse_attributes(substr($line, 0, $pospipe));
                     foreach ($attrs as $key => $value) {
                         if (in_array ($key, array("id", "class", "title", "style",
@@ -245,7 +252,6 @@ extends WikiPlugin
     }
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

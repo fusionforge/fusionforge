@@ -1,23 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: TexToPng.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: TexToPng.php 7639 2010-08-11 12:15:16Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright (C) 2002 Johannes GroÃŸe
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 // +---------------------------------------------------------------------+
@@ -28,7 +29,6 @@ rcs_id('$Id: TexToPng.php 6185 2008-08-22 11:40:14Z vargenau $');
 // | engines into a gif, png or jpeg file.                               |
 // | TexToPng is usage example for WikiPluginCached.                     |
 // |                                                                     |
-// | Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)            |
 // | You may copy this code freely under the conditions of the GPL       |
 // +---------------------------------------------------------------------+
 
@@ -41,32 +41,32 @@ $texbin = '/usr/bin/tex';
 $dvipsbin = '/usr/bin/dvips';
 $pstoimgbin = '/usr/bin/pstoimg';
 
-// output mere debug messages (should be set to false in a stable 
+// output mere debug messages (should be set to false in a stable
 // version)
-   define('TexToPng_debug', false);                                          
+   define('TexToPng_debug', false);
 
 /*-----------------------------------------------------------------------
- | OPTION DEFAULTS                                                      
- *----------------------------------------------------------------------*/ 
+ | OPTION DEFAULTS
+ *----------------------------------------------------------------------*/
 /*----
  | use antialias for rendering;
  | anitalias: blurs, _looks better_, needs twice space, renders slowlier
- |                                                                      */  
-   define('TexToPng_antialias', true);    
+ |                                                                      */
+   define('TexToPng_antialias', true);
 
 /*----
- | Use transparent background; dont combine with antialias on a dark 
- | background. Seems to have a bug: produces strange effects for some 
- | ps-files (almost non readable,blurred output) even when directly 
+ | Use transparent background; dont combine with antialias on a dark
+ | background. Seems to have a bug: produces strange effects for some
+ | ps-files (almost non readable,blurred output) even when directly
  | invoked from shell. So its probably a pstoimg bug.
- |                                                                      */  
+ |                                                                      */
    define('TexToPng_transparent', false);
 
 /*----
  | default value for rescaling
- | allowed range: 0 - 5 (integer) 
- |                                                                      */  
-   define('TexToPng_magstep', 3);            
+ | allowed range: 0 - 5 (integer)
+ |                                                                      */
+   define('TexToPng_magstep', 3);
 
 
 /*-----------------------------------------------------------------------
@@ -88,24 +88,17 @@ $pstoimgbin = '/usr/bin/pstoimg';
 require_once "lib/WikiPluginCached.php";
 
 class WikiPlugin_TexToPng extends WikiPluginCached
-{   
-    /* --------- overwrite virtual or abstract methods ---------------- */ 
-
+{
     function getPluginType() {
         return PLUGIN_CACHED_IMG_ONDEMAND;
     }
- 
+
     function getName() {
         return "TexToPng";
     }
 
     function getDescription() {
         return _("Converts TeX to an image. May be used to embed formulas in PhpWiki.");
-    }
-    
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -114,7 +107,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
                      'img'          => 'png',
                      'subslash'     => 'off',
                      'antialias'    => TexToPng_antialias   ? 'on' : 'off',
-                     'transparent'  => TexToPng_transparent ? 'on' : 'off', 
+                     'transparent'  => TexToPng_transparent ? 'on' : 'off',
                      'center'       => 'off');
     }
 
@@ -134,15 +127,15 @@ class WikiPlugin_TexToPng extends WikiPluginCached
     }
 
     function getAlt($dbi, $argarray, $request) {
-        extract($argarray); 
-        return $tex; 
+        extract($argarray);
+        return $tex;
     }
 
     function embedImg($url,$dbi,$argarray,$request) {
-        $html = HTML::img( array( 
+        $html = HTML::img( array(
             'src'   => $url,
             'alt'   => htmlspecialchars($this->getAlt($dbi,$argarray,$request))
-            )); 
+            ));
         if ($argarray['center']=='on')
             return HTML::div( array('style' => 'text-align:center;'), $html);
         return $html;
@@ -156,7 +149,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
             $this->complain( $out."\n" );
         } else {
             if (!$this->_errortext) {
-                // yeah, I've been told to be quiet, but obviously 
+                // yeah, I've been told to be quiet, but obviously
                 // an error occured. So at least complain silently.
                 $this->complain(' ');
             }
@@ -169,7 +162,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
     function helptext() {
         $aa= TexToPng_antialias  ?'on(default)$|$off':'on$|$off(default)';
         $tp= TexToPng_transparent?'on(default)$|$off':'on$|$off(default)';
-        $help = 
+        $help =
           '/settabs/+/indent&$<$?plugin /bf{Tex} & [{/tt transparent}] & = "png(default)$|$jpeg$|$gif"& /cr'."\n".
           '/+&$<$?plugin /bf{TexToPng} & /hfill {/tt tex}           & = "/TeX/  commands"& /cr'."\n".
           '/+&                         & /hfill [{/tt img}]         & = "png(default)$|$jpeg$|$gif"& /cr'."\n".
@@ -178,12 +171,12 @@ class WikiPlugin_TexToPng extends WikiPluginCached
           '/+&                         & /hfill [{/tt subslash}]    & = "on$|$off(default)"& /cr'."\n".
           '/+&                         & /hfill [{/tt antialias}]   & = "'.$aa.'"& /cr'."\n".
           '/+&                         & /hfill [{/tt transparent}] & = "'.$tp.'"&?$>$ /cr'."\n";
-      
+
         return strtr($help, '/', '\\' );
-    } // helptext    
+    } // helptext
 
 
-    function checkParams( &$tex, &$magstep, $subslash, &$aalias, &$transp ) {  
+    function checkParams( &$tex, &$magstep, $subslash, &$aalias, &$transp ) {
 
         if ($subslash=='on') {
             // WORKAROUND for backslashes
@@ -197,7 +190,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
         if ($magstep < 0 || $magstep > 5 ) { $magstep = $def["magstep"]; }
         // calculate magnification factor
-        $magstep = floor(10*pow(1.2,$magstep))/10; 
+        $magstep = floor(10*pow(1.2,$magstep))/10;
 
         $aalias = $aalias != 'off';
         $transp = $transp != 'off';
@@ -209,16 +202,16 @@ class WikiPlugin_TexToPng extends WikiPluginCached
     function execute($cmd,$complainvisibly=false) {
         exec($cmd, $errortxt, $returnval);
         $ok = $returnval == 0;
-        
+
         if (!$ok) {
             if (!$complainvisibly) {
-                 $this->dbg('Error during execution of '.$cmd );                         
+                 $this->dbg('Error during execution of '.$cmd );
             };
             while (list($key,$value)=each($errortxt)) {
-                if ($complainvisibly) { 
+                if ($complainvisibly) {
                     $this->complain( $value."\n" );
                 } else {
-                    $this->dbg( $value );             
+                    $this->dbg( $value );
                 }
             }
         }
@@ -230,16 +223,16 @@ class WikiPlugin_TexToPng extends WikiPluginCached
     function createTexFile($texfile,$texstr) {
         if ($ok=($fp=fopen($texfile, 'w'))!=0 ) {
             // prepare .tex file
-            $texcommands = 
+            $texcommands =
                 '\nopagenumbers'   . "\n" .
                 '\hoffset=0cm'     . "\n" .
-                '\voffset=0cm'     . "\n" . 
+                '\voffset=0cm'     . "\n" .
             //    '\hsize=20cm'    . "\n" .
             //    '\vsize=10ex'    . "\n" .
                 $texstr            . "\n" .
                 '\vfill\eject'     . "\n" .
                 '\end'             . "\n\n";
-            
+
             $ok = fwrite($fp, $texcommands);
             $ok = fclose($fp) && $ok;  // close anyway
         }
@@ -249,26 +242,26 @@ class WikiPlugin_TexToPng extends WikiPluginCached
         return $ok;
     } // createTexFile
 
-    /* ---------------------------------------------------------------- */            
+    /* ---------------------------------------------------------------- */
 
     function TexToImg($texstr, $scale, $aalias, $transp) {
-        //$cacheparams = $GLOBALS['CacheParams'];        
+        //$cacheparams = $GLOBALS['CacheParams'];
         $tempfiles = $this->tempnam('TexToPng');
         $img = 0; // $size = 0;
 
         // procuce options for pstoimg
-        $options = 
+        $options =
            ($aalias ? '-aaliastext -color 8 ' : '-color 1 ') .
            ($transp ? '-transparent ' : '') .
            '-scale ' . $scale . ' ' .
            '-type png -crop btlr -geometry 600x150 -margins 0,0';
 
-        // rely on intelligent bool interpretation 
+        // rely on intelligent bool interpretation
         $ok= $tempfiles &&
              $this->createTexFile($tempfiles.'.tex',$texstr) &&
              $this->execute('cd '.$cacheparams['cache_dir'].'; '.
-                            "$texbin ".$tempfiles.'.tex',true) &&                  
-             $this->execute("$dvipsbin -o".$tempfiles.'.ps '.$tempfiles.'.dvi') &&  
+                            "$texbin ".$tempfiles.'.tex',true) &&
+             $this->execute("$dvipsbin -o".$tempfiles.'.ps '.$tempfiles.'.dvi') &&
              $this->execute("$pstoimgbin $options"
                             .' -out '.$tempfiles.'.png '.
                             $tempfiles.'.ps'               ) &&
@@ -278,7 +271,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
             if (!($img = ImageCreateFromPNG( $tempfiles.'.png' ))) {
                 $this->dbg("Could not open just created image file: $tempfiles");
                 $ok = false;
-            }     
+            }
         }
 
         // clean up tmpdir; in debug mode only if no error occured
@@ -286,7 +279,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
         if ( !TexToPng_debug || (TexToPng_debug && $ok))  {
             if ($tempfiles) {
                 unlink($tempfiles);
-                unlink($tempfiles . '.ps');        
+                unlink($tempfiles . '.ps');
                 unlink($tempfiles . '.tex');
                 //unlink($tempfiles . '.aux');
                 unlink($tempfiles . '.dvi');
@@ -296,23 +289,15 @@ class WikiPlugin_TexToPng extends WikiPluginCached
         }
 
         if ($ok) {
-            return $img; 
+            return $img;
         }
         return false;
     } // TexToImg
-} // WikiPlugin_TexToPng
+}
 
-// $Log: not supported by cvs2svn $
-// Revision 1.4  2003/01/18 22:08:01  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
-// tab-width: 4
+// tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil

@@ -1,5 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: RelatedChanges.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: RelatedChanges.php 7638 2010-08-11 11:58:40Z vargenau $');
+/*
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * List of changes on all pages which are linked to from this page.
@@ -19,7 +38,6 @@ extends _RecentChanges_HtmlFormatter
     }
 }
 
-
 class WikiPlugin_RelatedChanges
 extends WikiPlugin_RecentChanges
 {
@@ -27,17 +45,12 @@ extends WikiPlugin_RecentChanges
         return _("RecentEdits");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
+    function getDescription () {
+        return _("List of changes on all pages which are linked to from this page.");
     }
 
     function getDefaultArguments() {
-    	//php-4.0.4pl1 breaks at the parent:: line even if the 
-    	// code doesn't reach this line
-        //if (!check_php_version(4,0,6))
-        $args = WikiPlugin_RecentChanges::getDefaultArguments();
-        //else $args = parent::getDefaultArguments();
+        $args = parent::getDefaultArguments();
         $args['page'] = '[pagename]';
         $args['show_minor'] = true;
         $args['show_all'] = true;
@@ -95,7 +108,7 @@ extends WikiPlugin_RecentChanges
             else
                 $fmt_class = '_RelatedChanges_HtmlFormatter';
         }
-  
+
         $fmt = new $fmt_class($args);
         return $fmt->format($changes);
     }
@@ -129,25 +142,6 @@ class RelatedChangesRevisionIterator extends WikiDB_PageRevisionIterator
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.4  2005/01/24 23:15:27  uckelman
-// The extra description for RelatedChanges was appearing in RecentChanges
-// and PageHistory due to a bad test in _RecentChanges_HtmlFormatter. Fixed.
-//
-// Revision 1.3  2004/06/03 18:58:27  rurban
-// days links requires action=RelatedChanges arg
-//
-// Revision 1.2  2004/05/08 14:06:13  rurban
-// new support for inlined image attributes: [image.jpg size=50x30 align=right]
-// minor stability and portability fixes
-//
-// Revision 1.1  2004/04/21 04:29:10  rurban
-// Two convenient RecentChanges extensions
-//   RelatedChanges (only links from current page)
-//   RecentEdits (just change the default args)
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

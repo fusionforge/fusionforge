@@ -1,23 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: OldStyleTable.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: OldStyleTable.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -25,12 +26,12 @@ rcs_id('$Id: OldStyleTable.php 6185 2008-08-22 11:40:14Z vargenau $');
  *
  * Usage:
  * <pre>
- *  <?plugin OldStyleTable border||=0 summary=""
+ *  <<OldStyleTable border||=0 summary=""
  *  ||  __Name__               |v __Cost__   |v __Notes__
  *  | __First__   | __Last__
  *  |> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
  *  |> Marco      |< Polo      | Cheaper     |< Not available
- *  ?>
+ *  >>
  * </pre>
  *
  * Note that multiple <code>|</code>'s lead to spanned columns,
@@ -51,11 +52,6 @@ extends WikiPlugin
 
     function getDescription() {
       return _("Layout tables using the old markup style.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -86,9 +82,9 @@ extends WikiPlugin
         $lines = preg_split('/\s*?\n\s*/', $argstr);
         $table_args = array();
         $default_args = array_keys($default);
-        foreach ($default_args as $arg) { 
-            if ($args[$arg] == '' and $default[$arg] == '')  
-                continue;			// ignore '' arguments
+        foreach ($default_args as $arg) {
+            if ($args[$arg] == '' and $default[$arg] == '')
+                continue;                        // ignore '' arguments
             if ($arg == 'caption')
                 $caption = $args[$arg];
             else
@@ -96,19 +92,19 @@ extends WikiPlugin
         }
         $table = HTML::table($table_args);
         if (!empty($caption))
-            $table->pushContent(HTML::caption(array('valign'=>'top'),$caption));
-        if (preg_match("/^\s*(cellpadding|cellspacing|border|caption|summary)/", $lines[0])) 
+            $table->pushContent(HTML::caption($caption));
+        if (preg_match("/^\s*(cellpadding|cellspacing|border|caption|summary)/", $lines[0]))
             $lines[0] = '';
         foreach ($lines as $line) {
             if (!$line)
                 continue;
             if (strstr($line,"=")) {
-            	$tmp = explode("=",$line);
-            	if (in_array(trim($tmp[0]),$default_args))
+                    $tmp = explode("=",$line);
+                    if (in_array(trim($tmp[0]),$default_args))
                     continue;
             }
             if ($line[0] != '|') {
-            	// bogus error if argument
+                    // bogus error if argument
                 trigger_error(sprintf(_("Line %s does not begin with a '|'."), $line), E_USER_WARNING);
             } else {
                 $table->pushContent($this->_parse_row($line, $basepage));
@@ -121,7 +117,7 @@ extends WikiPlugin
     function _parse_row ($line, $basepage) {
         $brkt_link = "\\[ .*? [^]\s] .*? \\]";
         $cell_content  = "(?: [^[] | ".ESCAPE_CHAR."\\[ | $brkt_link )*?";
-        
+
         preg_match_all("/(\\|+) (v*) ([<>^]?) \s* ($cell_content) \s* (?=\\||\$)/x",
                        $line, $matches, PREG_SET_ORDER);
 
@@ -152,38 +148,6 @@ extends WikiPlugin
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.10  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.9  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.8  2004/01/24 23:37:08  rurban
-// Support more options: caption (seperate tag), border, summary, cellpadding,
-// cellspacing
-// Fixes some errors from the version from the mailinglist.
-//
-// Revision 1.7  2003/02/21 23:00:35  dairiki
-// Fix SF bug #676309.
-//
-// Also fix new bugs introduced with cached markup changes.
-//
-// Revision 1.6  2003/02/21 04:12:06  dairiki
-// Minor fixes for new cached markup.
-//
-// Revision 1.5  2003/01/18 21:48:59  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

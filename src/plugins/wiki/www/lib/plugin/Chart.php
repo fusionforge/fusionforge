@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: Chart.php 6395 2009-01-12 16:48:53Z vargenau $');
+// rcs_id('$Id: Chart.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
  * Copyright 2007 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -54,20 +54,15 @@ extends WikiPlugin
         return _("Render SVG charts");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return array('width'  => 200,
                      'height' => 200,
-		     'type' => 'line', // or 'area', 'bar', 'pie'
+                     'type' => 'line', // or 'area', 'bar', 'pie'
                      // 'xlabel' => 'x', // TODO
                      // 'ylabel' => 'y', // TODO
-		     'color' => 'green',
-		     // 'legend' => false, // TODO
-		     'data' => false // mandatory
+                     'color' => 'green',
+                     // 'legend' => false, // TODO
+                     'data' => false // mandatory
                      );
     }
     function handle_plugin_args_cruft(&$argstr, &$args) {
@@ -87,17 +82,24 @@ extends WikiPlugin
 
         // x_min = 0
         // x_max = number of elements in data
-        // y_min = 0
+        // y_min = 0 or smallest element in data if negative
         // y_max = biggest element in data
 
-        $x_max = sizeof($values);
+        $x_max = sizeof($values) + 1;
+        $y_min = min($values);
+        if ($y_min > 0) {
+            $y_min = 0;
+        }
         $y_max = max($values);
+        // sum is used for the pie only, so we ignore negative values
         $sum = 0;
         foreach ($values as $value) {
-            $sum += $value;
+            if ($value > 0) {
+                $sum += $value;
+            }
         }
 
-        $source = 'initPicture(0,'.$x_max.',0,'.$y_max.'); axes(); stroke = "'.$color.'"; strokewidth = 5;';
+        $source = 'initPicture(0,'.$x_max.','.$y_min.','.$y_max.'); axes(); stroke = "'.$color.'"; strokewidth = 5;';
 
         if ($type == "bar") {
             $abscisse = 1;
@@ -126,14 +128,16 @@ extends WikiPlugin
                     . 'point = [1, 0]; line(center, point);';
             $angle = 0;
             foreach ($values as $value) {
-                $angle += $value/$sum;
-                $source .= 'point = [cos(2*pi*'.$angle.'), sin(2*pi*'.$angle.')]; line(center, point);';
+                if ($value > 0) {
+                    $angle += $value/$sum;
+                    $source .= 'point = [cos(2*pi*'.$angle.'), sin(2*pi*'.$angle.')]; line(center, point);';
+                }
             }
         }
 
-	$embedargs = array('width'  => $args['width'],
-			   'height' => $args['height'],
-			   'script' => $source);
+        $embedargs = array('width'  => $args['width'],
+                           'height' => $args['height'],
+                           'script' => $source);
         $embed = new SVG_HTML("embed", $embedargs);
         $html->pushContent($embed);
         return $html;

@@ -1,5 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: GoTo.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: GoTo.php 7447 2010-05-31 11:29:39Z vargenau $');
+/*
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  *  Display a form with text entry box and 'Go' button.
@@ -7,7 +26,7 @@ rcs_id('$Id: GoTo.php 6185 2008-08-22 11:40:14Z vargenau $');
  *  that page; if not, edit (create) that page.
  *  Note: pagenames are absolute, not relative to the actual subpage.
  *
- *  Usage: <?plugin GoTo ?>
+ *  Usage: <<GoTo >>
  *  @author: Michael van Dam
  */
 
@@ -20,11 +39,6 @@ extends WikiPlugin
 
     function getDescription () {
         return _("Go to or create page.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -48,13 +62,13 @@ extends WikiPlugin
             $request->redirect($url);
             // User should see nothing after redirect
             return '';
-        } 
+        }
 
         $action = $request->getURLtoSelf();
         $form = HTML::form(array('action'=>$action,
                                  'method'=>'post'
                           ));
- 
+
         $form->pushContent(HiddenInputs($request->getArgs()));
 
         $textfield = HTML::input(array('type' => 'text',
@@ -70,25 +84,11 @@ extends WikiPlugin
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.4  2004/07/08 20:30:07  rurban
-// plugin->run consistency: request as reference, added basepage.
-// encountered strange bug in AllPages (and the test) which destroys ->_dbi
-//
-// Revision 1.3  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-// Revision 1.2  2004/04/12 16:21:01  rurban
-// fix lib/plugin/RssFeed.php:81: Notice[8]: Undefined variable: th
-//
-        
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

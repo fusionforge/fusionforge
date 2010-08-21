@@ -1,27 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageHistory.php 6248 2008-09-07 15:13:56Z vargenau $');
+// rcs_id('$Id: PageHistory.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002, 2007 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002, 2007 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/**
- */
 require_once("lib/plugin/RecentChanges.php");
 
 class _PageHistory_PageRevisionIter
@@ -92,9 +90,9 @@ extends _RecentChanges_HtmlFormatter
                          WikiLink($this->_args['page'])),
                      "\n",
                      $this->rss_icon(),
-		     $this->rss2_icon(),
-		     $this->atom_icon(),
-		     $this->rdf_icon());
+                     $this->rss2_icon(),
+                     $this->atom_icon(),
+                     $this->rdf_icon());
     }
 
     function title() {
@@ -125,8 +123,8 @@ extends _RecentChanges_HtmlFormatter
         $pagename = $this->_args['page'];
 
         $fmt = _RecentChanges_HtmlFormatter::format($changes);
-	$fmt->action = _("PageHistory");
-	$html[] = $fmt;
+        $fmt->action = _("PageHistory");
+        $html[] = $fmt;
 
         $html[] = HTML::input(array('type'  => 'hidden',
                                     'name'  => 'action',
@@ -143,7 +141,7 @@ extends _RecentChanges_HtmlFormatter
 
         return HTML(HTML::form(array('method' => 'get',
                                      'action' => $action,
-                                     'name'   => 'diff-select'),
+                                     'id'     => 'diff-select'),
                                $html),
                     "\n",
                     JavaScript('
@@ -177,7 +175,7 @@ extends _RecentChanges_HtmlFormatter
     }
 
     function format_revision ($rev) {
-	global $WikiTheme;
+        global $WikiTheme;
         $class = 'rc-' . $this->importance($rev);
 
         $time = $this->time($rev);
@@ -191,26 +189,26 @@ extends _RecentChanges_HtmlFormatter
             $minor_flag = '';
         }
         $line = HTML::li(array('class' => $class));
-	if (isa($WikiTheme,'WikiTheme_MonoBook')) {
-	    $line->pushContent(
-			       $this->diffLink($rev), ' ',
-			       $this->pageLink($rev), ' ',
-			       $time,' ',$this->date($rev), ' . . ',
-			       $this->authorLink($rev),' ',
-			       $this->authorContribs($rev),' ',
-			       $this->summaryAsHTML($rev),' ',
-			       $minor_flag);
-	} else {
-	    $line->pushContent(
-			       $this->diffLink($rev), ' ',
-			       $this->pageLink($rev), ' ',
-			       $time, ' ',
-			       $this->summaryAsHTML($rev),
-			       ' ... ',
-			       $this->authorLink($rev),
-			       $minor_flag);
-	}
-	return $line;
+        if (isa($WikiTheme,'WikiTheme_MonoBook')) {
+            $line->pushContent(
+                               $this->diffLink($rev), ' ',
+                               $this->pageLink($rev), ' ',
+                               $time,' ',$this->date($rev), ' . . ',
+                               $this->authorLink($rev),' ',
+                               $this->authorContribs($rev),' ',
+                               $this->summaryAsHTML($rev),' ',
+                               $minor_flag);
+        } else {
+            $line->pushContent(
+                               $this->diffLink($rev), ' ',
+                               $this->pageLink($rev), ' ',
+                               $time, ' ',
+                               $this->summaryAsHTML($rev),
+                               ' ... ',
+                               $this->authorLink($rev),
+                               $minor_flag);
+        }
+        return $line;
     }
 }
 
@@ -273,11 +271,6 @@ extends WikiPlugin_RecentChanges
         return sprintf(_("List PageHistory for %s"),'[pagename]');
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6248 $");
-    }
-
     function getDefaultArguments() {
         return array('days'         => false,
                      'show_minor'   => true,
@@ -320,7 +313,7 @@ extends WikiPlugin_RecentChanges
         }
 
         $fmt = new $fmt_class($args);
-	$fmt->action = _("PageHistory");
+        $fmt->action = _("PageHistory");
         return $fmt->format($changes);
     }
 
@@ -342,7 +335,6 @@ extends WikiPlugin_RecentChanges
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

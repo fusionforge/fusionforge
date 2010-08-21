@@ -1,31 +1,31 @@
 <?php // -*-php-*-
-rcs_id('$Id: FrameInclude.php 6248 2008-09-07 15:13:56Z vargenau $');
+// rcs_id('$Id: FrameInclude.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2002 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * FrameInclude:  Displays a url or page in a seperate frame inside our body.
  *
  * Usage:
- *  <?plugin FrameInclude src=http://www.internet-technology.de/fourwins_de.htm ?>
- *  <?plugin FrameInclude page=OtherPage ?>
+ *  <<FrameInclude src=http://www.internet-technology.de/fourwins_de.htm >>
+ *  <<FrameInclude page=OtherPage >>
  *  at the VERY BEGINNING in the content!
  *
  * Author:  Reini Urban <rurban@x-ray.at>, rewrite by Jeff Dairiki <dairiki@dairiki.org>
@@ -56,11 +56,6 @@ extends WikiPlugin
         return _("Displays a url in a seperate frame inside our body. Only one frame allowed.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6248 $");
-    }
-
     function getDefaultArguments() {
         return array( 'src'         => false,       // the src url to include
                       'page'        => false,
@@ -87,7 +82,7 @@ extends WikiPlugin
             return $this->disabled("(action != 'browse')");
         if (! $request->isGetOrHead())
             return $this->disabled("(method != 'GET')");
-        
+
         if (!$src and $page) {
             if ($page == $request->get('pagename')) {
                 return $this->error(sprintf(_("recursive inclusion of page %s"),
@@ -129,12 +124,12 @@ extends WikiPlugin
                                    'scrolling' => (string)$scrolling,
                                    'noresize' => (bool)$noresize,
                                    ));
-        
+
         if ($marginwidth)
             $frame->setArg('marginwidth', $marginwidth);
         if ($marginheight)
             $frame->setArg('marginheight', $marginheight);
-        
+
         $tokens = array('CONTENT_FRAME' => $frame,
                         'ROWS' => $rows,
                         'COLS' => $cols,
@@ -148,7 +143,6 @@ extends WikiPlugin
     }
 };
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

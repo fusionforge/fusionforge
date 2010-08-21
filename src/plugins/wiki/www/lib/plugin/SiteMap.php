@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: SiteMap.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: SiteMap.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -55,11 +55,6 @@ extends WikiPlugin
         return _("Recursively get BackLinks or links");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return array('exclude'        => '',
                      'include_self'   => 0,
@@ -71,14 +66,16 @@ extends WikiPlugin
                      'direction'      => 'back',
                      'firstreversed'  => false,
                      'excludeunknown' => true,
-                     'includepages'   => '' // to be used only from the IncludeSiteMap plugin
+                     'includepages'   => '', // only for IncludeSiteMap and IncludeTree
+                     'category'       => '', // optional category filter (comma-delimited)
+                     'dtree'          => false, // optional for IncludeTree
                      );
     }
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames
     // exclude=HomePage,RecentChanges
-    
+
     // Fixme: overcome limitation if two SiteMap plugins are in the same page!
     // static $VisitedPages still holds it
     function recursivelyGetBackLinks($startpage, $pagearr, $level = '*',
@@ -124,7 +121,7 @@ extends WikiPlugin
         $pagelinks = $startpage->getLinks($reversed);
         while ($link = $pagelinks->next()) {
             $linkpagename = $link->getName();
-            if (($linkpagename != $startpagename) and 
+            if (($linkpagename != $startpagename) and
                 (!$this->ExcludedPages or !preg_match("/$this->ExcludedPages/", $linkpagename)))
             {
                 if (!$this->excludeunknown or $this->dbi->isWikiPage($linkpagename)) {
@@ -141,7 +138,7 @@ extends WikiPlugin
 
     function run($dbi, $argstr, &$request, $basepage) {
         include_once('lib/BlockParser.php');
-        
+
         $args = $this->getArgs($argstr, $request, false);
         extract($args);
         if (!$page)
@@ -175,8 +172,7 @@ extends WikiPlugin
 
         $pagearr = array();
         if ($direction == 'back') {
-            $pagearr = $this->recursivelyGetBackLinks($p, $pagearr, "*",
-                                                      $limit);
+            $pagearr = $this->recursivelyGetBackLinks($p, $pagearr, "*", $limit);
         }
         else {
             $this->dbi = $dbi;
@@ -187,17 +183,17 @@ extends WikiPlugin
         }
 
         reset($pagearr);
-        if (!empty($includepages)) { 
+        if (!empty($includepages)) {
             // disallow direct usage, only via child class IncludeSiteMap
-            if (!isa($this,"WikiPlugin_IncludeSiteMap"))
+            if (!isa($this,"WikiPlugin_IncludeSiteMap") and !isa($this,"WikiPlugin_IncludeTree"))
                 $includepages = '';
             if (!is_string($includepages))
                 $includepages = ' '; // avoid plugin loader problems
             $loader = new WikiPluginLoader();
-            $plugin = $loader->getPlugin('IncludePage',false);
+            $plugin = $loader->getPlugin($dtree ? 'DynamicIncludePage' : 'IncludePage', false);
             $nothing = '';
         }
-        
+
         while (list($key, $link) = each($pagearr)) {
             if (!empty($includepages)) {
                 $a = substr_count($key, '*');
@@ -206,8 +202,8 @@ extends WikiPlugin
                 // quote linkname, by Stefan Schorn
                 $plugin_args = 'page=\'' . $link->getName() . '\' ' . $includepages;
                 $pagehtml = $plugin->run($dbi, $plugin_args, $request, $basepage);
-                $html->pushContent($pagehtml); 
-                //$html->pushContent( HTML(TransformText($indenter, 1.0, $page), $pagehtml)); 
+                $html->pushContent($pagehtml);
+                //$html->pushContent( HTML(TransformText($indenter, 1.0, $page), $pagehtml));
                 //$out .= $indenter . $pagehtml . "\n";
             }
             else {
@@ -215,58 +211,13 @@ extends WikiPlugin
             }
         }
         if (empty($includepages)) {
-            return TransformText($out, 2.0, $page); 
+            return TransformText($out, 2.0, $page);
         } else {
-            return $html; 
+            return $html;
         }
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.13  2004/12/14 21:36:06  rurban
-// exclude is already handled by getArgs
-//
-// Revision 1.12  2004/11/01 09:14:25  rurban
-// avoid ConvertOldMarkup step, using markup=2 (memory problems)
-//
-// Revision 1.11  2004/03/24 19:39:03  rurban
-// php5 workaround code (plus some interim debugging code in XmlElement)
-//   php5 doesn't work yet with the current XmlElement class constructors,
-//   WikiUserNew does work better than php4.
-// rewrote WikiUserNew user upgrading to ease php5 update
-// fixed pref handling in WikiUserNew
-// added Email Notification
-// added simple Email verification
-// removed emailVerify userpref subclass: just a email property
-// changed pref binary storage layout: numarray => hash of non default values
-// print optimize message only if really done.
-// forced new cookie policy: delete pref cookies, use only WIKI_ID as plain string.
-//   prefs should be stored in db or homepage, besides the current session.
-//
-// Revision 1.10  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.9  2004/02/12 13:05:50  rurban
-// Rename functional for PearDB backend
-// some other minor changes
-// SiteMap comes with a not yet functional feature request: includepages (tbd)
-//
-// Revision 1.8  2004/01/24 23:24:07  rurban
-// Patch by Alec Thomas, allows Perl regular expressions in SiteMap exclude lists.
-//   exclude=WikiWikiWeb,(?:Category|Topic).*
-// It is backwards compatible unless old exclude lists, and therefore Wiki
-// page names, contain regular expression characters.
-//
-// Revision 1.7  2003/02/21 04:12:06  dairiki
-// Minor fixes for new cached markup.
-//
-// Revision 1.6  2003/01/18 22:08:01  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

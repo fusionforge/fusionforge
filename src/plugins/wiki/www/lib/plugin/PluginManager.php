@@ -1,23 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: PluginManager.php,v 1.20 2007/01/03 21:23:57 rurban Exp $');
+// rcs_id('$Id: PluginManager.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 // Set this to true if you don't want regular users to view this page.
@@ -32,12 +33,7 @@ extends WikiPlugin
     }
 
     function getDescription () {
-        return _("Description: Provides a list of plugins on this wiki.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.20 $");
+        return _("List of plugins on this wiki");
     }
 
     function getDefaultArguments() {
@@ -54,12 +50,9 @@ extends WikiPlugin
             $h->pushContent(HTML::h2(_("Plugins")));
 
             $table = HTML::table(array('class' => "pagelist"));
-            $this->_generateColgroups($info, $table);
             $this->_generateColheadings($info, $table);
             $this->_generateTableBody($info, $dbi, $request, $table);
             $h->pushContent($table);
-
-            //$h->pushContent(HTML::h2(_("Disabled Plugins")));
         }
         else {
             $h->pushContent(fmt("You must be an administrator to %s.",
@@ -72,33 +65,21 @@ extends WikiPlugin
         $html->pushContent(HTML::p($this->getDescription()));
     }
 
-    function _generateColgroups(&$info, &$table) {
-        // specify last two column widths
-        $colgroup = HTML::colgroup();
-        $colgroup->pushContent(HTML::col(array('width' => '0*')));
-        $colgroup->pushContent(HTML::col(array('width' => '0*',
-                                               'align' => 'right')));
-        $colgroup->pushContent(HTML::col(array('width' => '9*')));
-        if ($info == 'args')
-            $colgroup->pushContent(HTML::col(array('width' => '2*')));
-        $table->pushcontent($colgroup);
-    }
-
     function _generateColheadings(&$info, &$table) {
         // table headings
         $tr = HTML::tr();
-        $headings = array(_("Plugin"), _("Version"), _("Description"));
+        $headings = array(_("Plugin"), _("Description"));
         if ($info == 'args')
             $headings []= _("Arguments");
         foreach ($headings as $title) {
-            $tr->pushContent(HTML::td($title));
+            $tr->pushContent(HTML::th($title));
         }
         $table->pushContent(HTML::thead($tr));
     }
 
     function _generateTableBody(&$info, &$dbi, &$request, &$table) {
 
-        global $WikiTheme;
+        global $AllAllowedPlugins;
 
         $plugin_dir = 'lib/plugin';
         if (defined('PHPWIKI_DIR'))
@@ -114,8 +95,12 @@ extends WikiPlugin
 
         $w = new WikiPluginLoader;
         foreach ($plugins as $pluginName) {
-            // instantiate a plugin
+
             $pluginName = str_replace(".php", "", $pluginName);
+            if (in_array($pluginName, $AllAllowedPlugins) === false) {
+                continue;
+            }
+            // instantiate a plugin
             $temppluginclass = "<? plugin $pluginName ?>"; // hackish
             $p = $w->getPlugin($pluginName, false); // second arg?
             // trap php files which aren't WikiPlugin~s
@@ -128,14 +113,16 @@ extends WikiPlugin
                 continue; // skip this non WikiPlugin file
             }
             $desc = $p->getDescription();
-            $ver = $p->getVersion();
             $arguments = $p->getArgumentsDescription();
             unset($p); //done querying plugin object, release from memory
 
             // This section was largely improved by Pierrick Meignen:
             // make a link if an actionpage exists
             $pluginNamelink = $pluginName;
-            $pluginDocPageName = _("Help").":" . $pluginName . "Plugin";
+            $pluginDocPageName = _("Help")."/" . $pluginName . "Plugin";
+            if (defined('GFORGE') and GFORGE) {
+                $pluginDocPageName = _("Help").":" . $pluginName . "Plugin";
+            }
 
             $pluginDocPageNamelink = false;
             $localizedPluginName = '';
@@ -146,23 +133,23 @@ extends WikiPlugin
                     $localizedPluginName = _($pluginName);
                 if($localizedPluginName && $dbi->isWikiPage($localizedPluginName))
                     $pluginDocPageNamelink = WikiLink($localizedPluginName,'if_known');
-                
+
                 if (_($pluginDocPageName) != $pluginDocPageName)
                     $localizedPluginDocPageName = _($pluginDocPageName);
-                if($localizedPluginDocPageName && 
+                if($localizedPluginDocPageName &&
                    $dbi->isWikiPage($localizedPluginDocPageName))
-                    $pluginDocPageNamelink = 
-			WikiLink($localizedPluginDocPageName, 'if_known');
+                    $pluginDocPageNamelink =
+                        WikiLink($localizedPluginDocPageName, 'if_known');
             }
             else {
                 $pluginNamelink = WikiLink($pluginName, 'if_known');
-                
+
                 if ($dbi->isWikiPage($pluginDocPageName))
                     $pluginDocPageNamelink = WikiLink($pluginDocPageName,'if_known');
             }
 
-            if (isa($WikiTheme, 'WikiTheme_gforge')) {
-                $pluginDocPageNamelink = WikiLink($pluginDocPageName, 'known'); 
+            if (defined('GFORGE') and GFORGE) {
+                $pluginDocPageNamelink = WikiLink($pluginDocPageName, 'known');
             }
 
             // highlight alternate rows
@@ -172,7 +159,7 @@ extends WikiPlugin
             // generate table row
             $tr = HTML::tr(array('class' => $class));
             if ($pluginDocPageNamelink) {
-                // plugin has a description page 'Help:' . 'PluginName' . 'Plugin'
+                // plugin has a description page 'Help/' . 'PluginName' . 'Plugin'
                 $tr->pushContent(HTML::td($pluginNamelink, HTML::br(),
                                           $pluginDocPageNamelink));
                 $pluginDocPageNamelink = false;
@@ -181,7 +168,7 @@ extends WikiPlugin
                 // plugin just has an actionpage
                 $tr->pushContent(HTML::td($pluginNamelink));
             }
-            $tr->pushContent(HTML::td($ver), HTML::td($desc));
+            $tr->pushContent(HTML::td($desc));
             if ($info == 'args') {
                 // add Arguments column
                 $style = array('style'

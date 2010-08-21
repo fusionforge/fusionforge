@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: IncludeSiteMap.php 6186 2008-08-22 11:50:25Z vargenau $');
+// rcs_id('$Id: IncludeSiteMap.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 2003,2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2003,2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -28,7 +28,7 @@ rcs_id('$Id: IncludeSiteMap.php 6186 2008-08-22 11:50:25Z vargenau $');
  *
  * This is a quick mod of BackLinks to do the job recursively. If your
  * site is categorized correctly, and all the categories are listed in
- * CategoryCategory, then a RecBackLinks there will produce one BIG(!) 
+ * CategoryCategory, then a RecBackLinks there will produce one BIG(!)
  * contents page for the entire site.
  * The list is as deep as the recursion level ('reclimit').
  *
@@ -54,12 +54,7 @@ extends WikiPlugin_SiteMap
 
   function getDescription () {
     return sprintf(_("Include recursively all linked pages starting at %s"),
-		   $this->_pagename);
-  }
-
-  function getVersion() {
-      return preg_replace("/[Revision: $]/", '',
-                          "\$Revision: 6186 $");
+                   $this->_pagename);
   }
 
   function getDefaultArguments() {
@@ -82,12 +77,6 @@ extends WikiPlugin_SiteMap
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.1  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

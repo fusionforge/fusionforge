@@ -1,31 +1,32 @@
 <?php // -*-php-*-
-rcs_id('$Id: SystemInfo.php 6264 2008-09-16 18:39:14Z vargenau $');
+// rcs_id('$Id: SystemInfo.php 7562 2010-06-23 15:31:48Z vargenau $');
 /**
- Copyright (C) 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright (C) 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Usage: <?plugin SystemInfo all ?>
- *        or <?plugin SystemInfo pagestats cachestats discspace hitstats ?>
- *        or <?plugin SystemInfo version ?>
- *        or <?plugin SystemInfo current_theme ?>
- *        or <?plugin SystemInfo PHPWIKI_DIR ?>
+ * Usage: <<SystemInfo all >>
+ *        or <<SystemInfo pagestats cachestats discspace hitstats >>
+ *        or <<SystemInfo version >>
+ *        or <<SystemInfo current_theme >>
+ *        or <<SystemInfo PHPWIKI_DIR >>
  *
  * Provide access to phpwiki's lower level system information.
  *
@@ -55,11 +56,6 @@ extends WikiPluginCached
         return _("Provides access to PhpWiki's lower level system information.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6264 $");
-    }
-
     /* From lib/WikiPlugin.php:
      * If the plugin can deduce a modification time, or equivalent
      * sort of tag for it's content, then the plugin should
@@ -74,7 +70,7 @@ extends WikiPluginCached
     }
     function getHtml($dbi, $argarray, $request, $basepage) {
         $loader = new WikiPluginLoader;
-        return $loader->expandPI('<?plugin SystemInfo '
+        return $loader->expandPI('<<SystemInfo '
                                  . WikiPluginCached::glueArgs($argarray) // all
                                  . ' ?>', $request, $this, $basepage);
     }
@@ -97,9 +93,9 @@ extends WikiPluginCached
             $s .= (DATABASE_TYPE == 'SQL') ? 'PearDB' : 'ADODB';
             if (preg_match('/^(\w+):/', $dsn, $m)) {
                 $backend = $m[1];
-                $s .= " $backend, ";
+                $s .= " $backend";
             }
-            $s .= "DATABASE_PREFIX: \"".DATABASE_PREFIX."\", ";
+            $s .= ", DATABASE_PREFIX: \"".DATABASE_PREFIX."\", ";
             break;
         case 'dba':
             $s .= "DATABASE_DBA_HANDLER: ".DATABASE_DBA_HANDLER.", ";
@@ -114,7 +110,7 @@ extends WikiPluginCached
             break;
         }
         // hack: suppress error when using sql, so no timeout
-        @$s .= "DATABASE_TIMEOUT: " . DATABASE_TIMEOUT . ", ";
+        @$s .= "DATABASE_TIMEOUT: " . DATABASE_TIMEOUT;
         return $s;
     }
     function cachestats() {
@@ -233,7 +229,7 @@ extends WikiPluginCached
                      'treshold'    => $treshold,
                      'nmin'        => $nmin,
                      'mintreshold' => $mintreshold,
-                     'nmax'        => $nmax, 
+                     'nmax'        => $nmax,
                      'maxtreshold' => $maxtreshold);
     }
 
@@ -318,22 +314,22 @@ extends WikiPluginCached
             $stats['sum']['major'] += $stats['page']['major'];
             $stats['sum']['minor'] += $stats['page']['minor'];
             $stats['page'] = array();
-*/            
+*/
         }
         $page_iter->free();
         $stats['numpages'] = $stats['latest']['major'] + $stats['latest']['minor'];
         $stats['latest']['major_perc'] = $stats['latest']['major'] * 100.0 / $stats['numpages'];
         $stats['latest']['minor_perc'] = $stats['latest']['minor'] * 100.0 / $stats['numpages'];
-        $empty = sprintf("empty pages: %d (%02.1f%%) / %d (100%%)\n", 
+        $empty = sprintf("empty pages: %d (%02.1f%%) / %d (100%%)\n",
                          $stats['empty'], $stats['empty'] * 100.0 / $stats['numpages'],
                          $stats['numpages']);
-        $latest = sprintf("latest revision: major %d (%02.1f%%) / minor %d (%02.1f%%) / all %d (100%%)\n", 
-                          $stats['latest']['major'], $stats['latest']['major_perc'], 
+        $latest = sprintf("latest revision: major %d (%02.1f%%) / minor %d (%02.1f%%) / all %d (100%%)\n",
+                          $stats['latest']['major'], $stats['latest']['major_perc'],
                           $stats['latest']['minor'], $stats['latest']['minor_perc'], $stats['numpages']);
-/*                          
+/*
         $stats['sum']['major_perc'] = $stats['sum']['major'] * 100.0 / $stats['sum']['all'];
         $stats['sum']['minor_perc'] = $stats['sum']['minor'] * 100.0 / $stats['sum']['all'];
-        $sum = sprintf("number of revisions: major %d (%02.1f%%) / minor %d (%02.1f%%) / all %d (100%%)\n", 
+        $sum = sprintf("number of revisions: major %d (%02.1f%%) / minor %d (%02.1f%%) / all %d (100%%)\n",
                        $stats['sum']['major'], $stats['sum']['major_perc'],
                        $stats['sum']['minor'], $stats['sum']['minor_perc'], $stats['sum']['all']);
 
@@ -343,7 +339,7 @@ extends WikiPluginCached
         $stats['perpage']['minor_perc'] = 100 - $stats['perpage']['major_perc'];
         $stats['perpage_minor']['sum']  = $stats['perpage']['sum'] - $stats['perpage_major']['sum'];
         $stats['perpage_minor']['mean'] = $stats['perpage_minor']['sum'] / ($stats['perpage']['n'] - $stats['perpage_major']['n']);
-        $perpage = sprintf("revisions per page: all %d, mean %02.1f / major %d (%02.1f%%) / minor %d (%02.1f%%)\n", 
+        $perpage = sprintf("revisions per page: all %d, mean %02.1f / major %d (%02.1f%%) / minor %d (%02.1f%%)\n",
                            $stats['perpage']['sum'], $stats['perpage']['mean'],
                            $stats['perpage_major']['mean'], $stats['perpage']['major_perc'],
                            $stats['perpage_minor']['mean'], $stats['perpage']['minor_perc']);
@@ -356,12 +352,12 @@ extends WikiPluginCached
         $content = $empty . $latest;
 
         // regenerate cache every 30 minutes
-        $cache->save($id, $content, '+1800', $cachedir); 
+        $cache->save($id, $content, '+1800', $cachedir);
         return $content;
     }
     // Size of databases/files/cvs are possible plus the known size of the app.
-    // Cache this costly operation. 
-    // Even if the whole plugin call is stored internally, we cache this 
+    // Cache this costly operation.
+    // Even if the whole plugin call is stored internally, we cache this
     // seperately with a seperate key.
     function discspace() {
         global $DBParams, $request;
@@ -395,7 +391,7 @@ extends WikiPluginCached
             $content = array('appsize' => $appsize,
                              'pagesize' => $pagesize);
             // regenerate cache every 30 minutes
-            $cache->save($id, $content, '+1800', $cachedir); 
+            $cache->save($id, $content, '+1800', $cachedir);
         } else {
             $appsize = $content['appsize'];
             $pagesize = $content['pagesize'];
@@ -455,7 +451,7 @@ extends WikiPluginCached
         if (!empty($availableargs[$arg]))
             return $availableargs[$arg]();
         elseif (method_exists($this, $arg)) // any defined SystemInfo->method()
-            return call_user_func_array(array(&$this, $arg), '');
+            return call_user_func_array(array(&$this, $arg), array());
         elseif (defined($arg) && // any defined constant
                 !in_array($arg,array('ADMIN_PASSWD','DATABASE_DSN','DBAUTH_AUTH_DSN')))
             return constant($arg);
@@ -505,14 +501,13 @@ extends WikiPluginCached
 //                           '' => _(""),
                              '' => ""
                              );
-            $table = HTML::table(array('border' => 1,'cellspacing' => 3,
-                                       'cellpadding' => 3));
+            $table = HTML::table(array('class' => 'bordered'));
             foreach ($allargs as $arg => $desc) {
                 if (!$arg)
                     continue;
                 if (!$desc)
                     $desc = _($arg);
-                $table->pushContent(HTML::tr(HTML::td(HTML::strong($desc . ':')),
+                $table->pushContent(HTML::tr(HTML::th(array('style' => "white-space:nowrap"), $desc),
                                              HTML::td(HTML($this->call($arg, $availableargs)))));
             }
             return $table;
@@ -553,12 +548,6 @@ function mean(&$hits, $total = false) {
     if (!$total)
         $total = array_reduce($hits, 'rsum');
     return (float) $total / ($n * 1.0);
-}
-function gensym($prefix = "_gensym") {
-    $i = 0;
-    while (isset($GLOBALS[$prefix . $i]))
-        $i++;
-    return $prefix . $i;
 }
 
 function stddev(&$hits, $total = false) {

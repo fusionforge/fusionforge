@@ -1,27 +1,27 @@
 <?php // -*-php-*-
-rcs_id('$Id: RawHtml.php 6264 2008-09-16 18:39:14Z vargenau $');
+// rcs_id('$Id: RawHtml.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 // Moved to IniConfig and config-default.ini
-// Define ENABLE_RAW_HTML to false (in config.ini) to disable the RawHtml 
+// Define ENABLE_RAW_HTML to false (in config.ini) to disable the RawHtml
 // plugin completely
 /*
 if (!defined('ENABLE_RAW_HTML'))
@@ -32,7 +32,7 @@ if (!defined('ENABLE_RAW_HTML_LOCKEDONLY'))
 // sanitize to safe html code
 if (!defined('ENABLE_RAW_HTML_SAFE'))
     define('ENABLE_RAW_HTML_SAFE', true);
-*/    
+*/
 
 /** We defined a better policy when to allow RawHtml:
  *   ENABLE_RAW_HTML_LOCKEDONLY:
@@ -57,11 +57,6 @@ extends WikiPlugin
         return _("A plugin to provide for raw HTML within wiki pages.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6264 $");
-    }
-
     function getDefaultArguments() {
         return array();
     }
@@ -72,7 +67,7 @@ extends WikiPlugin
         // validators have already been handled by displayPage.
         return true;
     }
-    
+
     function run($dbi, $argstr, &$request, $basepage) {
         if (!defined('ENABLE_RAW_HTML') || ! ENABLE_RAW_HTML) {
             return $this->disabled(_("Raw HTML is disabled in this wiki."));
@@ -80,7 +75,7 @@ extends WikiPlugin
         if (!$basepage) {
             return $this->error("$basepage unset?");
         }
-        
+
         $page = $request->getPage($basepage);
         if (ENABLE_RAW_HTML_LOCKEDONLY) {
             if (! $page->get('locked')) {
@@ -112,7 +107,7 @@ extends WikiPlugin
 /*
 Copyright 2003 Chris Snyder. All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, 
+Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
    1. Redistributions of source code must retain the above copyright
@@ -132,7 +127,7 @@ PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;  LOSS OF USE, DATA, OR PROFITS;
 OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 /*
@@ -154,7 +149,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             unset($attrs);
             $attrs= $array;
         }
-        
+
         foreach ($attrs AS $attribute) {
             // once for ", once for ', s makes the dot match linebreaks, too.
             $search[]= "/".$attribute.'\s*=\s*".+"/Uis';
@@ -163,7 +158,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             $search[]= "/".$attribute."\s*=\s*\S+/i";
         }
         $html= preg_replace($search, "", $html);
-    
+
         // check for additional matches and strip all tags if found
         foreach ($search AS $pattern) {
             if (preg_match($pattern, $html)) {
@@ -177,7 +172,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     function safe_html ($html, $allowedtags="") {
         $version= "safe_html.php/0.4";
-    
+
         // anything with ="javascript: is right out -- strip all tags and return if found
         $pattern= "/=\s*\S+script:\S+/Ui";
         if (preg_match($pattern, $html)) {
@@ -187,10 +182,10 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         // setup -- $allowedtags is an array of $tag=>$closeit pairs, where $tag is an HTML tag to allow and $closeit is 1 if the tag requires a matching, closing tag
         if ($allowedtags=="") {
-            $allowedtags= array ( "p"=>1, "br"=>0, "a"=>1, "img"=>0, "li"=>1, 
-                "ol"=>1, "ul"=>1, "b"=>1, "i"=>1, "em"=>1, "strong"=>1, "del"=>1, "ins"=>1, 
-                "u"=>1, "blockquote"=>1, "pre"=>1, "hr"=>0,
-                "table"=>1, "tr"=>1, "td"=>1,
+            $allowedtags= array ( "p"=>1, "br"=>0, "a"=>1, "img"=>0, "li"=>1,
+                "ol"=>1, "ul"=>1, "b"=>1, "i"=>1, "em"=>1, "strong"=>1, "del"=>1, "ins"=>1,
+                "sub"=>1, "sup"=>1, "u"=>1, "blockquote"=>1, "pre"=>1, "hr"=>0,
+                "table"=>1, "thead"=>1, "tfoot"=>1, "tbody"=>1, "tr"=>1, "td"=>1, "th"=>1,
                 );
         }
         elseif (!is_array($allowedtags)) {
@@ -198,14 +193,14 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             unset($allowedtags);
             $allowedtags= $array;
         }
-        
+
         // there's some debate about this.. is strip_tags() better than rolling your own regex?
         // note: a bug in PHP 4.3.1 caused improper handling of ! in tag attributes when using strip_tags()
         $stripallowed= "";
         foreach ($allowedtags AS $tag=>$closeit) {
             $stripallowed.= "<$tag>";
         }
-    
+
         //print "Stripallowed: $stripallowed -- ".print_r($allowedtags,1);
         $html= strip_tags($html, $stripallowed);
 
@@ -224,14 +219,13 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 $html.= str_repeat("</$tag>", ($totalopen - $totalclose));
             }
         }
-        
+
         // close any open <!--'s and identify version just in case
         $html.= "<!-- $version -->";
         return $html;
     }
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

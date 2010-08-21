@@ -1,10 +1,6 @@
 <?php // -*-php-*-
-rcs_id('$Id: RichTable.php 6388 2009-01-09 13:04:37Z vargenau $');
-/**
-  RichTablePlugin
-  A PhpWiki plugin that allows insertion of tables using a richer syntax.
-*/
-/* 
+// rcs_id('$Id: RichTable.php 7638 2010-08-11 11:58:40Z vargenau $');
+/*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -15,18 +11,21 @@ rcs_id('$Id: RichTable.php 6388 2009-01-09 13:04:37Z vargenau $');
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-// error_reporting (E_ALL & ~E_NOTICE);
+/**
+ * RichTablePlugin
+ * A PhpWiki plugin that allows insertion of tables using a richer syntax.
+*/
 
 class WikiPlugin_RichTable
 extends WikiPlugin
@@ -43,20 +42,15 @@ extends WikiPlugin
         return array();
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6388 $");
-    }
-
     function run($dbi, $argstr, &$request, $basepage) {
-    	global $WikiTheme;
+            global $WikiTheme;
         include_once("lib/BlockParser.php");
         // RichTablePlugin markup is new.
-        $markup = 2.0; 
+        $markup = 2.0;
 
         $lines = preg_split('/\n/', $argstr);
         $table = HTML::table();
- 
+
         if ($lines[0][0] == '*') {
             $line = substr(array_shift($lines),1);
             $attrs = parse_attributes($line);
@@ -69,7 +63,7 @@ extends WikiPlugin
                 }
             }
         }
-        
+
         foreach ($lines as $line){
             if (substr($line,0,1) == "-") {
                 if (isset($row)) {
@@ -86,7 +80,7 @@ extends WikiPlugin
                         unset($cell);
                     }
                     $table->pushContent($row);
-                }	
+                }
                 $row = HTML::tr();
                 $attrs = parse_attributes(substr($line,1));
                 foreach ($attrs as $key => $value) {
@@ -121,8 +115,8 @@ extends WikiPlugin
                         }
                     }
                     continue;
-                } 
-            } 
+                }
+            }
             if (isset($row) and isset($cell)) {
                 $line = str_replace("?\>", "?>", $line);
                 $line = str_replace("\~", "~", $line);
@@ -147,7 +141,6 @@ extends WikiPlugin
     }
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

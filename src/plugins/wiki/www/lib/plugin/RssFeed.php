@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: RssFeed.php 6272 2008-09-19 11:26:56Z vargenau $');
+// rcs_id('$Id: RssFeed.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2003 Arnaud Fontaine
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2003 Arnaud Fontaine
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 /**
  * @author: Arnaud Fontaine
@@ -27,7 +27,6 @@ include("lib/RssParser.php");
 class WikiPlugin_RssFeed
 extends WikiPlugin
 {
-    // Five required functions in a WikiPlugin.
     function getName () {
         return _("RssFeed");
     }
@@ -37,18 +36,14 @@ extends WikiPlugin
 
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6272 $");
-    }
-
     // Establish default values for each of this plugin's arguments.
     function getDefaultArguments() {
-        return array('feed' 		=> "",
-                     'description' 	=> "",
-                     'url' 		=> "", //"http://phpwiki.org/RecentChanges?format=rss",
-                     'maxitem' 		=> 0,
-                     'debug' 		=> false,
+        return array('feed'        => "",
+                     'description' => "",
+                     'url'         => "", //"http://phpwiki.org/RecentChanges?format=rss",
+                     'maxitem'     => 0,
+                     'titleonly'   => false,
+                     'debug'       => false,
                      );
    }
 
@@ -56,22 +51,22 @@ extends WikiPlugin
         extract($this->getArgs($argstr, $request));
 
         if (defined('CHARSET'))
-        	$rss_parser = new RSSParser(CHARSET);
+                $rss_parser = new RSSParser(CHARSET);
         else
-        	$rss_parser = new RSSParser();
-        
+                $rss_parser = new RSSParser();
+
         if (!empty($url))
             $rss_parser->parse_url( $url, $debug );
 
         if (!empty($rss_parser->channel['title'])) $feed = $rss_parser->channel['title'];
         if (!empty($rss_parser->channel['link']))  $url  = $rss_parser->channel['link'];
-        if (!empty($rss_parser->channel['description'])) 
+        if (!empty($rss_parser->channel['description']))
             $description = $rss_parser->channel['description'];
-        
+
         if (!empty($feed)) {
             if (!empty($url)) {
                 $titre = HTML::span(HTML::a(array('href'=>$rss_parser->channel['link']),
-                                            $rss_parser->channel['title'])); 
+                                            $rss_parser->channel['title']));
             } else {
                 $titre = HTML::span($rss_parser->channel['title']);
             }
@@ -86,7 +81,7 @@ extends WikiPlugin
         if (!empty($rss_parser->channel['date']))
             $th->pushContent(HTML::raw("<!--".$rss_parser->channel['date']."-->"));
         $html = HTML::div(array('class'=> 'rss'), $th);
-        if ($rss_parser->items) { 
+        if ($rss_parser->items) {
             // only maxitem's
             if ( $maxitem > 0 )
                 $rss_parser->items = array_slice($rss_parser->items, 0, $maxitem);
@@ -98,7 +93,12 @@ extends WikiPlugin
                                         HTML::a(array('href'=>$item['link']),
                                                 HTML::raw($item['title'])));
                 $cell->pushContent($cell_title);
-                if (!empty($item['description']))
+                $cell_author = HTML::raw($item['author']);
+                $cell_pubDate = HTML::raw($item['pubDate']);
+                $cell_authordate = HTML::div(array('class'=> 'authordate'),
+                                             $cell_author, HTML::raw(" - "), $cell_pubDate);
+                $cell->pushContent($cell_authordate);
+                if ((!$titleonly) && (!empty($item['description'])))
                     $cell->pushContent(HTML::div(array('class'=> 'itemdesc'),
                                                  HTML::raw($item['description'])));
                 $html->pushContent($cell);
@@ -124,7 +124,6 @@ extends WikiPlugin
 
 };
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

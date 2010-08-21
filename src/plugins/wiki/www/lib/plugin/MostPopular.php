@@ -1,26 +1,24 @@
 <?php // -*-php-*-
-rcs_id('$Id: MostPopular.php,v 1.32 2004/12/26 17:14:03 rurban Exp $');
+// rcs_id('$Id: MostPopular.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
- Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-
-/**
+ * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('lib/PageList.php');
@@ -36,32 +34,27 @@ extends WikiPlugin
         return _("List the most popular pages.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 1.32 $");
-    }
-
     function getDefaultArguments() {
         return array_merge
             (
              PageList::supportedArgs(),
              array('pagename' => '[pagename]', // hackish
                    //'exclude'  => '',
-                   'limit'    => 1000, // limit <0 returns least popular pages
+                   'limit'    => 20, // limit <0 returns least popular pages
                    'noheader' => 0,
                    'sortby'   => '-hits',
                    'info'     => false,
                    //'paging'   => 'auto'
                    ));
     }
-    
+
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
     // sortby: only pagename or hits. mtime not!
 
     function run($dbi, $argstr, &$request, $basepage) {
-    	$args = $this->getArgs($argstr, $request);
+            $args = $this->getArgs($argstr, $request);
         extract($args);
         if (strstr($sortby,'mtime')) {
             trigger_error(_("sortby=mtime not supported with MostPopular"),
@@ -70,7 +63,7 @@ extends WikiPlugin
         }
         $columns = $info ? explode(",", $info) : array();
         array_unshift($columns, 'hits');
-        
+
         if (! $request->getArg('count')) {
             //$args['count'] = $dbi->numPages(false,$exclude);
             $allpages = $dbi->mostPopular(0, $sortby);
@@ -83,8 +76,7 @@ extends WikiPlugin
         $pagelist = new PageList($columns, $exclude, $args);
         while ($page = $pages->next()) {
             $hits = $page->get('hits');
-            // don't show pages with no hits if most popular pages
-            // wanted
+            // don't show pages with no hits if most popular pages wanted
             if ($hits == 0 && $limit > 0) {
                 break;
             }
@@ -94,13 +86,12 @@ extends WikiPlugin
 
         if (! $noheader) {
             if ($limit > 0) {
-                $pagelist->setCaption(_("The most popular pages of this wiki:"));
+                $pagelist->setCaption(fmt("The %d most popular pages of this wiki:", $limit));
+            } else if ($limit < 0) {
+                $pagelist->setCaption(fmt("The %d least popular pages of this wiki:", -$limit));
             } else {
-                if ($limit < 0) {
-                    $pagelist->setCaption(_("The least popular pages of this wiki:"));
-                } else {
-                    $pagelist->setCaption(_("Visited pages on this wiki, ordered by popularity:"));
-                }}
+                $pagelist->setCaption(_("Visited pages on this wiki, ordered by popularity:"));
+            }
         }
 
         return $pagelist;

@@ -1,32 +1,30 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminChown.php 6286 2008-10-02 10:01:29Z vargenau $');
+// rcs_id('$Id: WikiAdminChown.php 7448 2010-05-31 12:01:38Z vargenau $');
 /*
- Copyright 2004 $ThePhpWikiProgrammingTeam
- Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Usage:   <?plugin WikiAdminChown s||=* ?> or called via WikiAdminSelect
+ * Usage:   <<WikiAdminChown s||=* >> or called via WikiAdminSelect
  * @author:  Reini Urban <rurban@x-ray.at>
  *
- * KNOWN ISSUES:
- * Requires PHP 4.2 so far.
  */
 require_once('lib/PageList.php');
 require_once('lib/plugin/WikiAdminSelect.php');
@@ -39,44 +37,48 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function getDescription() {
-        return _("Chown selected pages.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6286 $");
+        return _("Change owner of selected pages.");
     }
 
     function getDefaultArguments() {
-        return array_merge 
+        return array_merge
             (
-             PageList::supportedArgs(),
+             WikiPlugin_WikiAdminSelect::getDefaultArguments(),
              array(
-                   's' 		=> false,
-                   'user' 	=> false,
+                   'user'         => false,
                    /* Columns to include in listing */
                    'info'     => 'pagename,owner,mtime',
                    ));
     }
 
     function chownPages(&$dbi, &$request, $pages, $newowner) {
+        $result = HTML::div();
         $ul = HTML::ul();
         $count = 0;
         foreach ($pages as $name) {
             $page = $dbi->getPage($name);
-            if ( ($owner = $page->getOwner()) and 
+            $current = $page->getCurrentRevision();
+            if ( ($owner = $page->getOwner()) and
                  $newowner != $owner ) {
                 if (!mayAccessPage('change', $name)) {
                     $ul->pushContent(HTML::li(fmt("Access denied to change page '%s'.",
                                                   WikiLink($name))));
                 } else {
+                    $version = $current->getVersion();
+                    $meta = $current->_data;
+                    $text = $current->getPackedContent();
+                    $meta['summary'] = "Change page owner from '".$owner."' to '".$newowner."'";
+                    $meta['is_minor_edit'] = 1;
+                    $meta['author'] =  $request->_user->UserName();
+                    unset($meta['mtime']); // force new date
                     $page->set('owner', $newowner);
+                    $page->save($text, $version + 1, $meta);
                     if ($page->get('owner') === $newowner) {
-                        $ul->pushContent(HTML::li(fmt("Chown page '%s' to '%s'.",
+                        $ul->pushContent(HTML::li(fmt("Change owner of page '%s' to '%s'.",
                                                       WikiLink($name), WikiLink($newowner))));
                         $count++;
                     } else {
-                        $ul->pushContent(HTML::li(fmt("Couldn't chown page '%s' to '%s'.", 
+                        $ul->pushContent(HTML::li(fmt("Could not change owner of page '%s' to '%s'.",
                                                       WikiLink($name), $newowner)));
                     }
                 }
@@ -84,18 +86,26 @@ extends WikiPlugin_WikiAdminSelect
         }
         if ($count) {
             $dbi->touch();
-            return HTML($ul, HTML::p(fmt("%s pages have been permanently changed.",
-                                         $count)));
+            $result->setAttr('class', 'feedback');
+            if ($count == 1) {
+                $result->pushContent(HTML::p("One page has been permanently changed:"));
+            } else {
+                $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
+            }
+            $result->pushContent($ul);
+            return $result;
         } else {
-            return HTML($ul, HTML::p(fmt("No pages changed.")));
+            $result->setAttr('class', 'error');
+            $result->pushContent(HTML::p("No pages changed."));
+            return $result;
         }
     }
-    
+
     function run($dbi, $argstr, &$request, $basepage) {
         if ($request->getArg('action') != 'browse')
             if (!$request->getArg('action') == _("PhpWikiAdministration/Chown"))
                 return $this->disabled("(action != 'browse')");
-        
+
         $args = $this->getArgs($argstr, $request);
         $this->_args = $args;
         if (empty($args['user']))
@@ -125,8 +135,8 @@ extends WikiPlugin_WikiAdminSelect
             // DONE: error message if not allowed.
             if ($post_args['action'] == 'verify') {
                 // Real action
-                return $this->chownPages($dbi, $request, array_keys($p), 
-                                          $post_args['user']);
+                return $this->chownPages($dbi, $request, array_keys($p),
+                                          trim($post_args['user']));
             }
             if ($post_args['action'] == 'select') {
                 if (!empty($post_args['user']))
@@ -138,7 +148,7 @@ extends WikiPlugin_WikiAdminSelect
         }
         if ($next_action == 'select' and empty($pages)) {
             // List all pages to select from.
-            $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'], 
+            $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'],
                                          $args['exclude']);
         }
         /* // let the user decide which info
@@ -146,30 +156,34 @@ extends WikiPlugin_WikiAdminSelect
             $args['info'] = "checkbox,pagename,owner,mtime";
         }
         */
-        $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
+        if ($next_action == 'select') {
+            $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
+        } else {
+            $pagelist = new PageList_Unselectable($args['info'], $args['exclude'], $args);
+        }
         $pagelist->addPageList($pages);
 
-        $header = HTML::div();
+        $header = HTML::fieldset();
         if ($next_action == 'verify') {
             $button_label = _("Yes");
             $header->pushContent(
               HTML::p(HTML::strong(
-                _("Are you sure you want to permanently chown the selected files?"))));
+                _("Are you sure you want to permanently change the owner of the selected pages?"))));
             $header = $this->chownForm($header, $post_args);
         }
         else {
-            $button_label = _("Chown selected pages");
-            $header->pushContent(HTML::p(_("Select the pages to change the owner:")));
+            $button_label = _("Change owner of selected pages");
+            $header->pushContent(HTML::legend(_("Select the pages to change the owner")));
             $header = $this->chownForm($header, $post_args);
         }
 
         $buttons = HTML::p(Button('submit:admin_chown[chown]', $button_label, 'wikiadmin'),
                            Button('submit:admin_chown[cancel]', _("Cancel"), 'button'));
+        $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
-                          $buttons,
                           $pagelist->getContent(),
                           HiddenInputs($request->getArgs(),
                                         false,
@@ -181,11 +195,11 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function chownForm(&$header, $post_args) {
-        $header->pushContent(_("Chown")." ");
+        $header->pushContent(_("Change owner")." ");
         $header->pushContent(' '._("to").': ');
         $header->pushContent(HTML::input(array('name' => 'admin_chown[user]',
-                                               'value' => $post_args['user'])));
-        $header->pushContent(HTML::p());
+                                               'value' => $post_args['user'],
+                                               'size' => 40)));
         return $header;
     }
 }

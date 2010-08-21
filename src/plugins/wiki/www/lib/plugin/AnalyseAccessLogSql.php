@@ -1,22 +1,22 @@
 <?php
-rcs_id('$Id: AnalyseAccessLogSql.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: AnalyseAccessLogSql.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
- Copyright 2005 Charles Corrigan and $ThePhpWikiProgrammingTeam
-
- This file is (not yet) part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
+ * Copyright 2005 Charles Corrigan and $ThePhpWikiProgrammingTeam
+ *
+ * This file is (not yet) part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
@@ -66,12 +66,12 @@ extends WikiPlugin
         $query = '';
         $backend_type = $request->_dbi->_backend->backendType();
         switch ($backend_type) {
-        case 'mysql': 
+        case 'mysql':
             $Referring_URL = "left(referer,length(referer)-instr(reverse(referer),'?'))"; break;
-        case 'pgsql': 
-        case 'postgres7': 
+        case 'pgsql':
+        case 'postgres7':
             $Referring_URL = "substr(referer,0,position('?' in referer))"; break;
-        default: 
+        default:
             $Referring_URL = "referer";
         }
         switch ($args['mode']) {
@@ -101,12 +101,12 @@ extends WikiPlugin
             if ($where_conditions<>'')
                 $where_conditions = 'WHERE '.$where_conditions.' ';
             switch ($backend_type) {
-            case 'mysql': 
+            case 'mysql':
                 $Referring_Domain = "left(referer, if(locate('/', referer, 8) > 0,locate('/', referer, 8) -1, length(referer)))"; break;
-            case 'pgsql': 
-            case 'postgres7': 
+            case 'pgsql':
+            case 'postgres7':
                 $Referring_Domain = "substr(referer,0,8) || regexp_replace(substr(referer,8), '/.*', '')"; break;
-            default: 
+            default:
                 $Referring_Domain = "referer"; break;
             }
             $query = "SELECT "
@@ -183,13 +183,13 @@ extends WikiPlugin
             // If PHPSESSID appears in the URI, just display the URI to the left of this
             $sessname = session_name();
             switch ($backend_type) {
-            case 'mysql': 
+            case 'mysql':
                 $Request_URI = "IF(instr(request_uri, '$sessname')=0, request_uri,left(request_uri, instr(request_uri, '$sessname')-2))";
                 break;
-            case 'pgsql': 
-            case 'postgres7': 
+            case 'pgsql':
+            case 'postgres7':
                 $Request_URI = "regexp_replace(request_uri, '$sessname.*', '')"; break;
-            default: 
+            default:
                 $Request_URI = 'request_uri'; break;
             }
             $now = time();
@@ -239,7 +239,7 @@ extends WikiPlugin
         return array(
                      'mode'             => 'referring_domains',
                      // referring_domains, referring_urls, remote_hosts, users, host_users, search_bots, search_bots_hits
-                     'caption'          => '', 
+                     'caption'          => '',
                      // blank means use the mode as the caption/title for the output
                      'local_referrers'  => 'true',  // only show external referring sites
                      'period'           => '',      // the type of period to report:
@@ -254,11 +254,6 @@ extends WikiPlugin
 
     function getDescription () {
         return _("Show summary information from the access log table.");
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
@@ -356,19 +351,19 @@ extends WikiPlugin
             $len = strlen($localhost);
             $backend_type = $request->_dbi->_backend->backendType();
             switch ($backend_type) {
-            case 'mysql': 
+            case 'mysql':
                 $ref_localhost = "left(referer,$len)<>'$localhost'"; break;
-            case 'pgsql': 
-            case 'postgres7': 
+            case 'pgsql':
+            case 'postgres7':
                 $ref_localhost = "substr(referer,0,$len)<>'$localhost'"; break;
-            default: 
+            default:
                 $ref_localhost = "";
             }
             $where_conditions = $where_conditions.$ref_localhost;
         }
 
         // The assumed contract is that there is a space at the end of the
-        // conditions string, so that following SQL clauses (such as GROUP BY) 
+        // conditions string, so that following SQL clauses (such as GROUP BY)
         // will not cause a syntax error
         if ($where_conditions<>'')
             $where_conditions = $where_conditions.' ';
@@ -387,15 +382,6 @@ extends WikiPlugin
 
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.1  2005/02/12 17:26:24  rurban
-// renamed to Sql. Added translations (inc not yet)
-//
-// Revision 1.1  2005/02/02 20:41:02  rurban
-// Accesslog sql queries
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

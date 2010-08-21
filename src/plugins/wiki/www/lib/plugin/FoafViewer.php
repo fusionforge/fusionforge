@@ -1,7 +1,24 @@
 <?php
-rcs_id('$Id: FoafViewer.php 6185 2008-08-22 11:40:14Z vargenau $');
-
-//ini_set('include_path','.;C:/php/pear');
+// rcs_id('$Id: FoafViewer.php 7638 2010-08-11 11:58:40Z vargenau $');
+/*
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
 * Basic FoafViewPlugin for PHPWiki.
@@ -15,7 +32,7 @@ rcs_id('$Id: FoafViewer.php 6185 2008-08-22 11:40:14Z vargenau $');
 * @author Davey Shafik <http://pear.php.net/user/davey>
 * @date 2004-06-07
 * @version 0.0.2
-* @bug XML_FOAF 0.2 has problems with named RDF nodes (ie, http://www.ahsonline.com.au/dod/FOAF.rdf). 
+* @bug XML_FOAF 0.2 has problems with named RDF nodes (ie, http://www.ahsonline.com.au/dod/FOAF.rdf).
 *      Davey knows, will be fixing this soon.
 * @todo "Friends" component
 * @todo Named URLs (DC metadata)
@@ -27,10 +44,10 @@ rcs_id('$Id: FoafViewer.php 6185 2008-08-22 11:40:14Z vargenau $');
  * FoafViewer:  Parse an RDF FOAF file and extract information to render as HTML
  * usage:   &lt;?plugin FoafViewer foaf=http://www.ahsonline.com.au/dod/rawksuga.rdf original=true?&gt;
  * author:  Daniel O'Connor <http://www.ahsonline.com.au/dod/FOAF.rdf>
- * 
+ *
  * phpwiki version based on version 0.0.2 by Daniel O'Connor
  *
- * TODO: 
+ * TODO:
  *  - use a template.
  *  - use the phpwiki internal user foaf data (stored by a UserPreferences extension)
  *  - fix the pear FOAF Parser or we'll write our own (based on our XmlParser)
@@ -38,7 +55,7 @@ rcs_id('$Id: FoafViewer.php 6185 2008-08-22 11:40:14Z vargenau $');
 class WikiPlugin_FoafViewer
 extends WikiPlugin
 {
-    // The handler is handled okay. The only problem is that it still 
+    // The handler is handled okay. The only problem is that it still
     // throws a fatal.
     function _error_handler($error) {
         if (strstr($error->errstr,"Failed opening required 'XML/FOAF/Parser.php'"))
@@ -56,18 +73,13 @@ extends WikiPlugin
         return _("Parse an RDF FOAF file and extract information to render as HTML");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     function getDefaultArguments() {
         return array( 'foaf'     => false, // the URI to parse
                       //'userid'   => false,
                       'original' => false
                       );
     }
-                
+
     function run($dbi, $argstr, &$request, $basepage) {
 
         /* ignore fatal on loading */
@@ -106,11 +118,11 @@ extends WikiPlugin
             if (substr($foaf,0,7) != "http://") {
                 return $this->error(_("foaf must be a URI starting with http://"));
             }
-	    // Start of output
-   	    if (!empty($original)) {
+            // Start of output
+               if (!empty($original)) {
                 $request->redirect($foaf);
-	    }
-	    else {
+            }
+            else {
                 $foaffile = url_get_contents($foaf);
                 if (!$foaffile) {
                     //TODO: get errormsg
@@ -121,29 +133,29 @@ extends WikiPlugin
                 // Parser FOAF into $foaffile
                 $parser->parseFromMem($foaffile);
                 $a = $parser->toArray();
-			
+
                 $html = HTML(HTML::h1(@$a[0]["name"]),
                             HTML::table(
                                         HTML::thead(),
                                         HTML::tbody(
-                                                    @$a[0]["title"] ? 
+                                                    @$a[0]["title"] ?
                                                         HTML::tr(HTML::td(_("Title")),
                                                                  HTML::td($a[0]["title"])) : null,
-                                                    (@$a[0]["homepage"][0]) ? 
+                                                    (@$a[0]["homepage"][0]) ?
                                                         $this->iterateHTML($a[0],"homepage",$a["dc"]) : null,
                                                     (@$a[0]["weblog"][0]) ?
                                                         $this->iterateHTML($a[0],"weblog",$a["dc"]) : null,
                                                     //This seems broken?
                                                     /*
                                                      HTML::tr(HTML::td("Full Name"),
-							               (@$a[0]["name"][0]) ?					
+                                                                       (@$a[0]["name"][0]) ?
                                                                        HTML::td(@$a[0]["name"]) :
                                                                        (@$a[0]["firstname"][0] && @$a[0]["surname"][0]) ?
                                                                        HTML::td(@$a[0]["firstname"][0] . " " . @$a[0]["surname"][0])
                                                                        : null
                                                     */
                                                     HTML::tr(HTML::td("Full Name"),
-                                                             (@$a[0]["name"][0]) ?					
+                                                             (@$a[0]["name"][0]) ?
                                                              HTML::td(@$a[0]["name"]) : null
                                                              ),
                                                     (@$a[0]["nick"][0]) ?
@@ -191,12 +203,12 @@ extends WikiPlugin
                 $string = '<a href="http://beta.plink.org/profile/' . $array[$index][$i] . '">'
                     .'<img src="http://beta.plink.org/images/plink.png" alt="Plink - ' . $array[$index][$i] . '" /></a>';
             }
-            else if ($index == "depiction") { 
+            else if ($index == "depiction") {
                 $string = '<img src="' . $array[$index][$i] . '" />';
             }
-            else if ((substr($array[$index][$i],0,7) == "http://") || (substr($array[$index][$i],0,7) == "mailto:")) { 
+            else if ((substr($array[$index][$i],0,7) == "http://") || (substr($array[$index][$i],0,7) == "mailto:")) {
                 $string = '<a href="' . $array[$index][$i] . '"';
-				
+
                 if (@$dc["description"][$array[$index][$i]]) {
                     $string .= ' title="' . $dc["description"][$array[$index][$i]] . '"';
                 }
@@ -206,39 +218,16 @@ extends WikiPlugin
                 }
                 else {
                     $string .= $array[$index][$i];
-                }				
+                }
                 $string .= '</a>';
             }
             @$html .= "<tr><td>" . $index . "</td><td>" . $string . "</td></tr>";
         }
-	
+
         return HTML::raw($html);
     }
 }
 
-
-// $Log: not supported by cvs2svn $
-// Revision 1.3  2004/06/16 10:38:59  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.2  2004/06/13 13:54:25  rurban
-// Catch fatals on the four dump calls (as file and zip, as html and mimified)
-// FoafViewer: Check against external requirements, instead of fatal.
-// Change output for xhtmldumps: using file:// urls to the local fs.
-// Catch SOAP fatal by checking for GOOGLE_LICENSE_KEY
-// Import GOOGLE_LICENSE_KEY and FORTUNE_DIR from config.ini.
-//
-// Revision 1.1  2004/06/08 21:38:21  rurban
-// based on dans version 0.0.2 - simplified
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

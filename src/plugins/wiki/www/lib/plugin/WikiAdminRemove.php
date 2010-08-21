@@ -1,34 +1,33 @@
 <?php // -*-php-*-
-rcs_id('$Id: WikiAdminRemove.php 6286 2008-10-02 10:01:29Z vargenau $');
+// rcs_id('$Id: WikiAdminRemove.php 7448 2010-05-31 12:01:38Z vargenau $');
 /*
- Copyright 2002,2004 $ThePhpWikiProgrammingTeam
- Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Usage:   <?plugin WikiAdminRemove?>
+ * Usage:   <<WikiAdminRemove>>
  * Author:  Reini Urban <rurban@x-ray.at>
  *
  * KNOWN ISSUES:
  * Currently we must be Admin.
  * Future versions will support PagePermissions.
- * requires PHP 4.2 so far.
  */
 // maybe display more attributes with this class...
 require_once('lib/PageList.php');
@@ -45,17 +44,11 @@ extends WikiPlugin_WikiAdminSelect
         return _("Permanently remove all selected pages.");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6286 $");
-    }
-
     function getDefaultArguments() {
         return array_merge
             (
-             PageList::supportedArgs(),
+             WikiPlugin_WikiAdminSelect::getDefaultArguments(),
              array(
-                   's' 	=> false,
                      /*
                       * Show only pages which have been 'deleted' this
                       * long (in days).  (negative or non-numeric
@@ -81,7 +74,7 @@ extends WikiPlugin_WikiAdminSelect
         extract($this->_args);
 
         $now = time();
-        
+
         $allPages = $dbi->getAllPages('include_empty',$sortby,$limit);
         while ($pagehandle = $allPages->next()) {
             $pagename = $pagehandle->getName();
@@ -108,6 +101,7 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function removePages(&$request, $pages) {
+        $result = HTML::div();
         $ul = HTML::ul();
         $dbi = $request->getDbh(); $count = 0;
         foreach ($pages as $name) {
@@ -117,19 +111,31 @@ extends WikiPlugin_WikiAdminSelect
                 $ul->pushContent(HTML::li(fmt("Removed page '%s' successfully.", $name)));
                 $count++;
             } else {
-            	$ul->pushContent(HTML::li(fmt("Didn't removed page '%s'. Access denied.", $name)));
+                    $ul->pushContent(HTML::li(fmt("Didn't remove page '%s'. Access denied.", $name)));
             }
         }
-        if ($count) $dbi->touch();
-        return HTML($ul,
-                    HTML::p(fmt("%d pages have been permanently removed.",$count)));
+        if ($count) {
+            $dbi->touch();
+            $result->setAttr('class', 'feedback');
+            if ($count == 1) {
+                $result->pushContent(HTML::p("One page has been permanently removed:"));
+            } else {
+                $result->pushContent(HTML::p(fmt("%s pages have been permanently removed:", $count)));
+            }
+            $result->pushContent($ul);
+            return $result;
+        } else {
+            $result->setAttr('class', 'error');
+            $result->pushContent(HTML::p("No pages removed."));
+            return $result;
+        }
     }
-    
+
     function run($dbi, $argstr, &$request, $basepage) {
         if ($request->getArg('action') != 'browse')
             if ($request->getArg('action') != _("PhpWikiAdministration/Remove"))
                 return $this->disabled("(action != 'browse')");
-        
+
         $args = $this->getArgs($argstr, $request);
         if (!is_numeric($args['min_age']))
             $args['min_age'] = -1;
@@ -178,47 +184,43 @@ extends WikiPlugin_WikiAdminSelect
             // List all pages to select from.
             $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'], $args['exclude']);
         }
-        $pagelist = new PageList_Selectable($args['info'], $args['exclude'], 
-                                            array('types' => 
+        $pagelist = new PageList_Selectable($args['info'], $args['exclude'],
+                                            array('types' =>
                                                   array('remove'
                                                         => new _PageList_Column_remove('remove', _("Remove")))));
         $pagelist->addPageList($pages);
 
-        $header = HTML::p();
+        $header = HTML::fieldset();
         if ($next_action == 'verify') {
             $button_label = _("Yes");
-            $header->pushContent(HTML::strong(
-                _("Are you sure you want to permanently remove the selected files?")));
+            $header->pushContent(HTML::p(HTML::strong(
+                _("Are you sure you want to permanently remove the selected files?"))));
         }
         else {
             $button_label = _("Remove selected pages");
-            $header->pushContent(_("Permanently remove the selected files:"),HTML::br());
+            $header->pushContent(HTML::legend(_("Select the files to remove")));
             if ($args['min_age'] > 0) {
                 $header->pushContent(
                     fmt("Also pages which have been deleted at least %s days.",
                         $args['min_age']));
             }
-            else {
-                $header->pushContent(_("List all pages."));
-            }
-            
+
             if ($args['max_age'] > 0) {
                 $header->pushContent(
                     " ",
-                    fmt("(Pages which have been deleted at least %s days are already checked.)",
+                    fmt("Pages which have been deleted at least %s days are already checked.",
                         $args['max_age']));
             }
         }
 
-
         $buttons = HTML::p(Button('submit:admin_remove[remove]', $button_label, 'wikiadmin'),
                            Button('submit:admin_remove[cancel]', _("Cancel"), 'button'));
+        $header->pushContent($buttons);
 
         // TODO: quick select by regex javascript?
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           $header,
-                          $buttons,
                           $pagelist->getContent(),
                           HiddenInputs($request->getArgs(),
                                         false,

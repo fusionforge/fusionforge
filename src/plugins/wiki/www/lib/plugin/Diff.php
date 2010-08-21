@@ -1,33 +1,32 @@
 <?php // -*-php-*-
-rcs_id('$Id: Diff.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: Diff.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999, 2000, 2001, 2002, 2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002, 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 /**
- * lib/diff.php converted to a plugin by electrawn, 
+ * lib/diff.php converted to a plugin by electrawn,
  * plugin cleaned up by rurban,
  * code by dairiki
  *
  * Would make sense to see arbitrary diff's between any files or revisions.
  */
 
-//require_once('lib/difflib.php');
 require_once('lib/diff.php');
 
 class WikiPlugin_Diff
@@ -41,16 +40,10 @@ extends WikiPlugin {
         return _("Display differences between revisions");
     }
 
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-
     // Establish default values for each of this plugin's arguments.
     // todo: makes only sense with more args.
     function getDefaultArguments() {
         return array('pagename' => '[pagename]',
-                     'name'     => _("World"),
                      'versions' => false,
                      'version'  => false,
                      'previous' => 'major', // author, minor or major
@@ -68,7 +61,7 @@ extends WikiPlugin {
 
             $iswikipage = (isWikiWord($author) && $dbi->isWikiPage($author));
             $authorlink = $iswikipage ? WikiLink($author) : $author;
-            
+
             $linked_version = WikiLink($rev, 'existing', $rev->getVersion());
             $row->pushContent(HTML::td(fmt("version %s", $linked_version)),
                               HTML::td($WikiTheme->getLastModifiedMessage($rev,
@@ -79,13 +72,19 @@ extends WikiPlugin {
         }
         return $row;
     }
-    
+
     function run($dbi, $argstr, &$request, $basepage) {
         extract($this->getArgs($argstr, $request));
         if (is_array($versions)) {
             // Version selection from pageinfo.php display:
             rsort($versions);
             list ($version, $previous) = $versions;
+        }
+
+        // Check if user is allowed to get the Page.
+        if (!mayAccessPage ('view', $pagename)) {
+                return $this->error(sprintf(_("Illegal access to page %s: no read access"),
+                                        $pagename));
         }
 
         // abort if page doesn't exist
@@ -142,11 +141,11 @@ extends WikiPlugin {
                 break;
             }
         }
-        
+
         $new_link = WikiLink($new, '', $new_version);
         $old_link = $old ? WikiLink($old, '', $old_version) : $old_version;
         $page_link = WikiLink($page);
-        
+
         $html = HTML(HTML::p(fmt("Differences between %s and %s of %s.",
                                  $new_link, $old_link, $page_link)));
 
@@ -166,7 +165,7 @@ extends WikiPlugin {
         }
         $html->pushContent($otherdiffs);
 
-        
+
         if ($old and $old->getVersion() == 0)
             $old = false;
 
@@ -177,52 +176,28 @@ extends WikiPlugin {
 
         if ($new && $old) {
             $diff = new Diff($old->getContent(), $new->getContent());
-            
+
             if ($diff->isEmpty()) {
                 $html->pushContent(HTML::hr(),
-                                   HTML::p('[', _("Versions are identical"),
-                                           ']'));
-            }
-            else {
-                // New CSS formatted unified diffs (ugly in NS4).
+                                   HTML::p(_("Content of versions "), $old->getVersion(),
+                                           _(" and "), $new->getVersion(), _(" is identical.")));
+                // If two consecutive versions have the same content, it is because the page was
+                // renamed, or metadata changed: ACL, owner, markup.
+                // We give the reason by printing the summary.
+                if (($new->getVersion() - $old->getVersion()) == 1) {
+                    $html->pushContent(HTML::p(_("Version "), $new->getVersion(),
+                                               _(" was created because: "), $new->get('summary')));
+                }
+            } else {
                 $fmt = new HtmlUnifiedDiffFormatter;
-
-                // Use this for old table-formatted diffs.
-                //$fmt = new TableUnifiedDiffFormatter;
                 $html->pushContent($fmt->format($diff));
             }
         }
 
-        //$html = HTML::tt(fmt('%s: %s', $salutation, WikiLink($name, 'auto')),
-        //                 THE_END);
-        
         return $html;
     }
 };
 
-// $Log: not supported by cvs2svn $
-// Revision 1.3  2005/09/30 18:53:10  uckelman
-// 'final' is a reserved keyword as of PHP5, so shouldn't be used as a
-//  function name here.
-//
-// Revision 1.2  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.1  2004/02/26 23:02:17  rurban
-// lib/diff.php converted to a plugin by electrawn,
-// plugin cleaned up by rurban,
-// code by dairiki
-//
-// Would make sense to see arbitrary diff's between any files or revisions.
-//
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

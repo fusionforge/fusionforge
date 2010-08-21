@@ -1,38 +1,39 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageGroup.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: PageGroup.php 7447 2010-05-31 11:29:39Z vargenau $');
 /**
- Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
+ * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * Usage:
  *
- * <?plugin PageGroup parent=MyTableOfContents ?>
+ * <<PageGroup parent=MyTableOfContents >>
  *
- * <?plugin PageGroup
+ * <<PageGroup
  *          parent=MyTableOfContents
  *          label="Visit more pages in MyTableOfContents"
- * ?>
+ * >>
  *
- * <?plugin PageGroup parent=MyTableOfContents section=PartTwo loop=true ?>
+ * <<PageGroup parent=MyTableOfContents section=PartTwo loop=true >>
  *
- * <?plugin PageGroup parent=MyTableOfContents loop=1 ?>
+ * <<PageGroup parent=MyTableOfContents loop=1 >>
  *
  *
  * Updated to use new HTML(). It mostly works, but it's still a giant hackish mess.
@@ -46,11 +47,6 @@ extends WikiPlugin
 
     function getDescription() {
         return sprintf(_("PageGroup for %s"),'[pagename]');
-    }
-
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
     }
 
     function getDefaultArguments() {
@@ -72,15 +68,15 @@ extends WikiPlugin
                        . "  (?= ^\\1 | \\Z)/xm", // sec header (same or higher level) (or EOF)
                        implode("\n", $content),
                        $match)) {
-            $result = array();           	
+            $result = array();
             //FIXME: return list of Wiki_Pagename objects
             foreach (explode("\n", $match[2]) as $line) {
-            	$text = trim($line);
+                    $text = trim($line);
                 // Strip trailing blanks lines and ---- <hr>s
                 $text = preg_replace("/\\s*^-{4,}\\s*$/", "", $text);
                 // Strip leading list chars: * or #
                 $text = preg_replace("/^[\*#]+\s*(\S.+)$/", "\\1", $text);
-                // Strip surrounding [] 
+                // Strip surrounding []
                 // FIXME: parse [ name | link ]
                 $text = preg_replace("/^\[\s*(\S.+)\s*\]$/", "\\1", $text);
                 if (!empty($text))
@@ -95,15 +91,12 @@ extends WikiPlugin
 
         $args = $this->getArgs($argstr, $request);
         extract($args);
-        $html="";
         if (empty($parent)) {
             // FIXME: WikiPlugin has no way to report when
             // required args are missing?
-            $error_text = fmt("%s: %s", "WikiPlugin_" .$this->getName(),
-                              $error_text);
-            $error_text .= " " . sprintf(_("A required argument '%s' is missing."), 'parent');
-            $html = $error_text;
-            return $html;
+            $error_text = sprintf("%s: ", "WikiPlugin_" .$this->getName());
+            $error_text .= sprintf(_("A required argument '%s' is missing."), 'parent');
+            return HTML::div(array('class' => "error"), $error_text);
         }
         $directions = array ('next'     => _("Next"),
                              'previous' => _("Previous"),
@@ -208,28 +201,6 @@ extends WikiPlugin
         return $links;
     }
 };
-
-// $Log: not supported by cvs2svn $
-// Revision 1.8  2004/06/14 11:31:39  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.7  2004/05/03 15:53:20  rurban
-// Support [] links, but no [name|page] links yet
-// Support subpages
-//
-// Revision 1.6  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.5  2003/01/18 21:49:00  carstenklapp
-// Code cleanup:
-// Reformatting & tabs to spaces;
-// Added copyleft, getVersion, getDescription, rcs_id.
-//
 
 // Local Variables:
 // mode: php

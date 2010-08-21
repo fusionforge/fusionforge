@@ -1,27 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: BackLinks.php 6185 2008-08-22 11:40:14Z vargenau $');
+// rcs_id('$Id: BackLinks.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/**
- */
 require_once('lib/PageList.php');
 
 class WikiPlugin_BackLinks
@@ -30,16 +28,11 @@ extends WikiPlugin
     function getName() {
         return _("BackLinks");
     }
-    
+
     function getDescription() {
         return sprintf(_("List all pages which link to %s."), '[pagename]');
     }
-    
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6185 $");
-    }
-    
+
     function getDefaultArguments() {
         return array_merge
             (
@@ -47,8 +40,8 @@ extends WikiPlugin
              array('include_self' => false,
                    'noheader'     => false,
                    'page'         => '[pagename]',
-		   'linkmore'     => '',  // If count>0 and limit>0 display a link with 
-		     // the number of all results, linked to the given pagename.
+                   'linkmore'     => '',  // If count>0 and limit>0 display a link with
+                     // the number of all results, linked to the given pagename.
                    ));
     }
 
@@ -59,6 +52,7 @@ extends WikiPlugin
     // page=foo,bar : backlinks to both pages
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
+
         extract($args);
         if (empty($page) and $page != '0')
             return '';
@@ -69,39 +63,39 @@ extends WikiPlugin
         if ($info) {
             $info = explode(",", $info);
             if (in_array('count',$info))
-                $args['types']['count'] = 
+                $args['types']['count'] =
                     new _PageList_Column_BackLinks_count('count', _("#"), 'center');
         }
-	if (!empty($limit))
-	    $args['limit'] = $limit;
+        if (!empty($limit))
+            $args['limit'] = $limit;
         $args['dosort'] = !empty($args['sortby']); // override DB sort (??)
         $pagelist = new PageList($info, $exclude, $args);
 
         // support logical AND: page1,page2
-	$pages = explodePageList($page);
-	$count = count($pages);
-	if (count($pages) > 1) {
-	    // AND: the intersection of all these pages
-	    $bl = array();
-	    foreach ($pages as $p) {
-		$dp = $dbi->getPage($p);
-		$bi = $dp->getBackLinks(false, $sortby, 0, $exclude);
-		while ($b = $bi->next()) {
-		    $name = $b->getName();
-	            if (isset($bl[$name]))
-	                $bl[$name]++;
-	            else 
-	                $bl[$name] = 1;   
-                } 
-	    }
-	    foreach ($bl as $b => $v)
-	        if ($v == $count)
-	            $pagelist->addPage($b);
-	} else {
-	    $p = $dbi->getPage($page);
-	    $pagelist->addPages($p->getBackLinks(false, $sortby, 0, $exclude));
-	}
-	$total = $pagelist->getTotal();
+        $pages = explodePageList($page);
+        $count = count($pages);
+        if (count($pages) > 1) {
+            // AND: the intersection of all these pages
+            $bl = array();
+            foreach ($pages as $p) {
+                $dp = $dbi->getPage($p);
+                $bi = $dp->getBackLinks(false, $sortby, 0, $exclude);
+                while ($b = $bi->next()) {
+                    $name = $b->getName();
+                    if (isset($bl[$name]))
+                        $bl[$name]++;
+                    else
+                        $bl[$name] = 1;
+                }
+            }
+            foreach ($bl as $b => $v)
+                if ($v == $count)
+                    $pagelist->addPage($b);
+        } else {
+            $p = $dbi->getPage($page);
+            $pagelist->addPages($p->getBackLinks(false, $sortby, 0, $exclude));
+        }
+        $total = $pagelist->getTotal();
 
         // Localization note: In English, the differences between the
         // various phrases spit out here may seem subtle or negligible
@@ -111,8 +105,8 @@ extends WikiPlugin
         // distinction as it does with English in this case. :)
         if (!$noheader) {
             if ($page == $request->getArg('pagename')
-                and !$dbi->isWikiPage($page)) 
-	    {
+                and !$dbi->isWikiPage($page))
+            {
                     // BackLinks plugin is more than likely being called
                     // upon for an empty page on said page, while either
                     // 'browse'ing, 'create'ing or 'edit'ing.
@@ -121,10 +115,10 @@ extends WikiPlugin
                     // the Un~WikiLink~ified (plain) name of the uncreated
                     // page currently being viewed.
                     $pagelink = $page;
-                    
+
                     if ($pagelist->isEmpty())
                         return HTML::p(fmt("No other page links to %s yet.", $pagelink));
-                    
+
                     if ($total == 1)
                         $pagelist->setCaption(fmt("One page would link to %s:",
                                                   $pagelink));
@@ -139,21 +133,21 @@ extends WikiPlugin
                                                   $total, $pagelink));
             }
             else {
-		if ($count) {
-		    $tmp_pages = $pages;
-		    $p = array_shift($tmp_pages);
-		    $pagelink = HTML(WikiLink($p, 'auto'));
-		    foreach ($tmp_pages as $p)
-		        $pagelink->pushContent(" ",_("AND")," ",WikiLink($p, 'auto')); 
-		} else
-            	    // BackLinks plugin is being displayed on a normal page.
+                if ($count) {
+                    $tmp_pages = $pages;
+                    $p = array_shift($tmp_pages);
+                    $pagelink = HTML(WikiLink($p, 'auto'));
+                    foreach ($tmp_pages as $p)
+                        $pagelink->pushContent(" ",_("AND")," ",WikiLink($p, 'auto'));
+                } else
+                        // BackLinks plugin is being displayed on a normal page.
                     $pagelink = WikiLink($page, 'auto');
-                
+
                 if ($pagelist->isEmpty())
                     return HTML::p(fmt("No page links to %s.", $pagelink));
-                
+
                 //trigger_error("DEBUG: " . $pagelist->getTotal());
-                
+
                 if ($total == 1)
                     $pagelist->setCaption(fmt("One page links to %s:",
                                               $pagelink));
@@ -165,18 +159,18 @@ extends WikiPlugin
                 //                               $pagelink));
                 else
                     $pagelist->setCaption(fmt("%s pages link to %s:",
-                                              $limit > 0 ? $total : _("Those"), 
-					      $pagelink));
+                                              $limit > 0 ? $total : _("Those"),
+                                              $pagelink));
             }
         }
-	if (!empty($args['linkmore']) 
-	    and $dbi->isWikiPage($args['linkmore'])
-	    and $limit > 0 and $total > $limit
-	    )
-	    $pagelist->addCaption(WikiLink($args['linkmore'], "auto", _("More...")));
+        if (!empty($args['linkmore'])
+            and $dbi->isWikiPage($args['linkmore'])
+            and $limit > 0 and $total > $limit
+            )
+            $pagelist->addCaption(WikiLink($args['linkmore'], "auto", _("More...")));
         return $pagelist;
     }
-    
+
 };
 
 // how many links from this backLink to other pages
@@ -188,77 +182,6 @@ class _PageList_Column_BackLinks_count extends _PageList_Column {
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.34  2007/05/19 13:31:20  rurban
-// Fix AND warnings: de-perlify array access
-//
-// Revision 1.33  2007/01/04 16:46:22  rurban
-// Add linkmore. Support multiple pages logically AND them.
-//
-// Revision 1.32  2004/12/06 19:50:05  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
-// Revision 1.31  2004/11/26 18:39:02  rurban
-// new regex search parser and SQL backends (90% complete, glob and pcre backends missing)
-//
-// Revision 1.30  2004/11/25 17:20:52  rurban
-// and again a couple of more native db args: backlinks
-//
-// Revision 1.29  2004/11/23 15:17:19  rurban
-// better support for case_exact search (not caseexact for consistency),
-// plugin args simplification:
-//   handle and explode exclude and pages argument in WikiPlugin::getArgs
-//     and exclude in advance (at the sql level if possible)
-//   handle sortby and limit from request override in WikiPlugin::getArgs
-// ListSubpages: renamed pages to maxpages
-//
-// Revision 1.28  2004/10/14 17:16:22  rurban
-// override DB sort: not applicable
-//
-// Revision 1.27  2004/09/25 16:33:52  rurban
-// add support for all PageList options
-//
-// Revision 1.26  2004/09/14 10:32:32  rurban
-// support exclude = plugin-list
-//
-// Revision 1.25  2004/09/13 15:00:50  rurban
-// info=count: number of links at this subpage
-//
-// Revision 1.24  2004/04/18 05:42:17  rurban
-// more fixes for page="0"
-// better WikiForum support
-//
-// Revision 1.23  2004/02/22 23:20:33  rurban
-// fixed DumpHtmlToDir,
-// enhanced sortby handling in PageList
-//   new button_heading th style (enabled),
-// added sortby and limit support to the db backends and plugins
-//   for paging support (<<prev, next>> links on long lists)
-//
-// Revision 1.22  2004/02/17 12:11:36  rurban
-// added missing 4th basepage arg at plugin->run() to almost all plugins. This caused no harm so far, because it was silently dropped on normal usage. However on plugin internal ->run invocations it failed. (InterWikiSearch, IncludeSiteMap, ...)
-//
-// Revision 1.21  2003/12/22 07:31:57  carstenklapp
-// Bugfix: commented out debugging code that snuck into the release.
-//
-// Revision 1.20  2003/12/14 05:36:31  carstenklapp
-// Internal changes to prepare for an upcoming feature: Added some
-// conditions and alternate phrases (alternate wording of text srings
-// when referring to a non-existant page (i.e. WikiLink 'unknown')) when
-// calling the BackLinks plugin *within* a non-existant page, such as
-// from within an editpage or browse template while editing a new page.
-//
-// Revision 1.19  2003/01/18 21:19:25  carstenklapp
-// Code cleanup:
-// Reformatting; added copyleft, getVersion, getDescription
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

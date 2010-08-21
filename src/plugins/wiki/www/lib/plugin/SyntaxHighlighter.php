@@ -1,41 +1,41 @@
 <?php // -*-php-*-
-rcs_id('$Id: SyntaxHighlighter.php 6424 2009-01-21 09:35:42Z vargenau $');
+// rcs_id('$Id: SyntaxHighlighter.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 2004 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * The SyntaxHighlighter plugin passes all its arguments through a C++ 
+ * The SyntaxHighlighter plugin passes all its arguments through a C++
  * highlighter called "highlight" (available at http://www.andre-simon.de/).
  *
  * @author: alecthomas
- * 
+ *
  * syntax: See http://www.andre-simon.de/doku/highlight/highlight.html
  * style = ["ansi", "gnu", "kr", "java", "linux"]
- 
-<?plugin SyntaxHighlighter syntax=c style=kr color=emacs
+
+<<SyntaxHighlighter syntax=c style=kr color=emacs
  #include <stdio.h>
- 
+
  int main() {
  printf("Lalala\n");
  }
-?>
+>>
 
  I did not use beautifier, because it used up more than 8M of memory on
  my system and PHP killed it. I'm not sure whether this is a problem
@@ -52,7 +52,7 @@ if (!defined('HIGHLIGHT_EXE'))
 //define('HIGHLIGHT_EXE','/home/groups/p/ph/phpwiki/bin/highlight');
 
 // highlight requires two subdirs themes and langDefs somewhere.
-// Best by highlight.conf in $HOME, but the webserver user usually 
+// Best by highlight.conf in $HOME, but the webserver user usually
 // doesn't have a $HOME
 if (!defined('HIGHLIGHT_DATA_DIR'))
     if (isWindows())
@@ -72,10 +72,6 @@ extends WikiPlugin
     }
     function managesValidators() {
         return true;
-    }
-    function getVersion() {
-        return preg_replace("/[Revision: $]/", '',
-                            "\$Revision: 6424 $");
     }
     function getDefaultArguments() {
         return array(
@@ -123,30 +119,6 @@ extends WikiPlugin
         }
     }
 
-    /* PHP versions < 4.3
-     * TODO: via temp file looks more promising
-     */
-    function OldFilterThroughCmd($input, $commandLine) {
-         $input = str_replace ("\\", "\\\\", $input);
-         $input = str_replace ("\"", "\\\"", $input);
-         $input = str_replace ("\$", "\\\$", $input);
-         $input = str_replace ("`", "\`", $input);
-         $input = str_replace ("'", "\'", $input);
-         //$input = str_replace (";", "\;", $input);
-
-         $pipe = popen("echo \"$input\"|$commandLine", 'r');
-         if (!$pipe) {
-            print "pipe failed.";
-            return "";
-         }
-         $output = '';
-         while (!feof($pipe)) {
-            $output .= fread($pipe, 1024);
-         }
-         pclose($pipe);
-         return $output;
-    }
-
     function run($dbi, $argstr, &$request, $basepage) {
         extract($this->getArgs($argstr, $request));
         $source =& $this->source;
@@ -165,10 +137,7 @@ extends WikiPlugin
             if (!empty($color)) $args .= " --style $color --inline-css";
             if (!empty($style)) $args .= " -F $style";
             $commandLine = HIGHLIGHT_EXE . "$args -q -X -f -S $syntax";
-            if (check_php_version(4,3,0))
-                $code = $this->newFilterThroughCmd($source, $commandLine);
-            else 
-                $code = $this->oldFilterThroughCmd($source, $commandLine);
+            $code = $this->newFilterThroughCmd($source, $commandLine);
             if (empty($code))
                 return $this->error(fmt("Couldn't start commandline '%s'",$commandLine));
             $pre = HTML::pre(HTML::raw($code));
@@ -180,7 +149,6 @@ extends WikiPlugin
     }
 };
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8
