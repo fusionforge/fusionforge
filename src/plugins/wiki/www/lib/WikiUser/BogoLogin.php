@@ -1,16 +1,32 @@
 <?php //-*-php-*-
-rcs_id('$Id: BogoLogin.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: BogoLogin.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/** Without stored password. A _BogoLoginPassUser with password 
+/** Without stored password. A _BogoLoginPassUser with password
  *  is automatically upgraded to a PersonalPagePassUser.
  */
 class _BogoLoginPassUser extends _PassUser {
 
     var $_authmethod = 'BogoLogin';
-    
+
     function userExists() {
         if (isWikiWord($this->_userid)) {
             $this->_level = WIKIAUTH_BOGO;
@@ -60,30 +76,6 @@ class _BogoLoginPassUser extends _PassUser {
         return $this->_level;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.5  2005/02/14 12:28:27  rurban
-// fix policy strict. Thanks to Mikhail Vladimirov
-//
-// Revision 1.4  2004/12/26 17:11:15  rurban
-// just copyright
-//
-// Revision 1.3  2004/11/06 03:07:03  rurban
-// make use of dumped static config state in config/config.php (if writable)
-//
-// Revision 1.2  2004/11/05 20:53:36  rurban
-// login cleanup: better debug msg on failing login,
-// checked password less immediate login (bogo or anon),
-// checked olduser pref session error,
-// better PersonalPage without password warning on minimal password length=0
-//   (which is default now)
-//
-// Revision 1.1  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

@@ -1,14 +1,14 @@
 <?php // -*-php-*-
-/** 
+/**
  * SQLite PearDB backend by Matthew Palmer
  * The SQLite DB will gain popularity with the current MySQL vs PHP license drama.
  * It's in core since PHP-5.0, MySQL not anymore.
  *
  * Initial setup:
- * sqlite -init /tmp/phpwiki-sqlite.db 
+ * sqlite -init /tmp/phpwiki-sqlite.db
  * sqlite /tmp/phpwiki-sqlite.db < schemas/sqlite.sql
  */
-rcs_id('$Id: PearDB_sqlite.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: PearDB_sqlite.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend/PearDB.php');
 
@@ -16,7 +16,7 @@ require_once('lib/WikiDB/backend/PearDB.php');
 /*
     $db = &new DB_sqlite();
     $db->connect($DBParams['dsn'], array('persistent'=> true) );
-    $result = $db->query("CREATE TABLE $table (comment varchar(50), 
+    $result = $db->query("CREATE TABLE $table (comment varchar(50),
       datetime varchar(50));");
 */
 
@@ -91,13 +91,12 @@ extends WikiDB_backend_PearDB
    }
 
 };
-    
-// (c-file-style: "gnu")
+  
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

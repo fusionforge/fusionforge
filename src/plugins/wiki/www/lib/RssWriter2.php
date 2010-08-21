@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: RssWriter2.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: RssWriter2.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
  * Code for creating RSS 2.0
  * Author: Reini Urban for PhpWiki
@@ -12,7 +12,7 @@ include_once("lib/RssWriter.php");
  *
  * @see http://blogs.law.harvard.edu/tech/rss,
  *      http://www.usemod.com/cgi-bin/mb.pl?ModWiki
- * no namespace! 
+ * no namespace!
  * http://sourceforge.net/mailarchive/forum.php?thread_id=4872845&forum_id=37467
  */
 class RssWriter2 extends RssWriter
@@ -48,13 +48,13 @@ class RssWriter2 extends RssWriter
     //  none
     function cloud($properties) {
         // xml-rpc or soap or http-post
-        if (!isset($properties['protocol'])) $properties['protocol'] = 'xml-rpc'; 
-        if (!isset($properties['registerProcedure'])) 
+        if (!isset($properties['protocol'])) $properties['protocol'] = 'xml-rpc';
+        if (!isset($properties['registerProcedure']))
             $properties['registerProcedure'] = 'rssPleaseNotify';
         if (!isset($properties['path'])) $properties['path'] = DATA_PATH.'/RPC2.php';
-        if (!isset($properties['port'])) 
-            $properties['port'] = !SERVER_PORT 
-                ? '80' 
+        if (!isset($properties['port']))
+            $properties['port'] = !SERVER_PORT
+                ? '80'
                 : (SERVER_PROTOCOL == 'https' ? '443' : '80');
         if (!isset($properties['domain'])) $properties['domain'] = SERVER_NAME;
         $this->_cloud = $this->__node('cloud', $properties);
@@ -65,22 +65,21 @@ class RssWriter2 extends RssWriter
      */
     function __spew() {
         header("Content-Type: application/rss+xml; charset=" . RSS_ENCODING);
-        printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
+        echo('<'.'?xml version="1.0" encoding="'.RSS_ENCODING.'"?'.">\n");
         //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         //RSS2 really is 0.92
-        //echo '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.92.dtd">',"\n";
-        //echo "<!DOCTYPE rss [<!ENTITY % HTMLlat1 PUBLIC \"-//W3C//ENTITIES Latin 1 for XHTML//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent\">\n";
-        //echo "              %HTMLlat1;]>\n";
+        echo '<!DOCTYPE rss SYSTEM "http://my.netscape.com/publish/formats/rss-0.92.dtd">',"\n";
+        echo "<!DOCTYPE rss [<!ENTITY % HTMLlat1 PUBLIC \"-//W3C//ENTITIES Latin 1 for XHTML//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent\">\n";
+        echo "              %HTMLlat1;]>\n";
         $this->printXML();
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

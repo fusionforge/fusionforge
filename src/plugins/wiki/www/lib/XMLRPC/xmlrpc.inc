@@ -1,7 +1,7 @@
 <?php					// -*-c++-*-
 // by Edd Dumbill (C) 1999-2002
 // <edd@usefulinc.com>
-// $Id: xmlrpc.inc 6209 2008-08-26 15:30:39Z vargenau $
+// $Id: xmlrpc.inc 7506 2010-06-09 10:06:37Z vargenau $
 
 
 // Copyright (c) 1999,2000,2002 Edd Dumbill.
@@ -201,7 +201,7 @@
 	*/
 	function xmlrpc_entity_decode($string)
 	{
-		$top=split('&', $string);
+		$top=explode('&', $string);
 		$op='';
 		$i=0;
 		while($i<sizeof($top))
@@ -1500,7 +1500,7 @@
 					}
 				}
 				// be tolerant to line endings, and extra empty lines
-				$ar = split("\r?\n", trim(substr($data, 0, $pos)));
+				$ar = explode("\r?\n", trim(substr($data, 0, $pos)));
 				while (list(,$line) = @each($ar))
 				{
 					// take care of multi-line headers

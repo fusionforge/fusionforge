@@ -17,7 +17,7 @@
 // |          Ian Eure <ieure@php.net>                                    |
 // +----------------------------------------------------------------------+
 //
-// $Id: trifile.php 6209 2008-08-26 15:30:39Z vargenau $
+// $Id: trifile.php 6888 2009-06-04 13:01:12Z vargenau $
 
 require_once 'Cache/Container/file.php';
 

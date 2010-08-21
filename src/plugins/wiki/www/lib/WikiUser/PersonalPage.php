@@ -1,7 +1,23 @@
 <?php //-*-php-*-
-rcs_id('$Id: PersonalPage.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: PersonalPage.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -13,7 +29,7 @@ extends _PassUser
 {
     var $_authmethod = 'PersonalPage';
 
-    /* Very loose checking, since we properly quote the PageName. 
+    /* Very loose checking, since we properly quote the PageName.
        Just trim spaces, ... See lib/stdlib.php
     */
     function isValidName ($userid = false) {
@@ -27,14 +43,14 @@ extends _PassUser
     }
 
     /** A PersonalPagePassUser requires PASSWORD_LENGTH_MINIMUM.
-     *  BUT if the user already has a homepage with an empty password 
+     *  BUT if the user already has a homepage with an empty password
      *  stored, allow login but warn him to change it.
      */
     function checkPass($submitted_password) {
         if ($this->userExists()) {
             $stored_password = $this->_prefs->get('passwd');
             if (empty($stored_password)) {
-            	if (PASSWORD_LENGTH_MINIMUM > 0) {
+                    if (PASSWORD_LENGTH_MINIMUM > 0) {
                   trigger_error(sprintf(
                     _("PersonalPage login method:")."\n".
                     _("You stored an empty password in your '%s' page.")."\n".
@@ -42,8 +58,8 @@ extends _PassUser
                     _("Please set a password in UserPreferences."),
                                         $this->_userid), E_USER_WARNING);
                   $this->_level = WIKIAUTH_BOGO;
-            	} else {
-            	  if (!empty($submitted_password))
+                    } else {
+                      if (!empty($submitted_password))
                     trigger_error(sprintf(
                       _("PersonalPage login method:")."\n".
                       _("You stored an empty password in your '%s' page.")."\n".
@@ -51,7 +67,7 @@ extends _PassUser
                       _("Please set a password in UserPreferences."),
                                         $this->_userid), E_USER_WARNING);
                   $this->_level = WIKIAUTH_USER;
-            	}
+                    }
                 return $this->_level;
             }
             if ($this->_checkPass($submitted_password, $stored_password))
@@ -62,33 +78,6 @@ extends _PassUser
         }
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.6  2005/06/22 05:36:52  rurban
-// looser isValidName method
-//
-// Revision 1.5  2005/02/14 12:28:27  rurban
-// fix policy strict. Thanks to Mikhail Vladimirov
-//
-// Revision 1.4  2004/12/26 17:11:17  rurban
-// just copyright
-//
-// Revision 1.3  2004/11/05 22:09:39  rurban
-// empty passwd PersonalPage case
-//
-// Revision 1.2  2004/11/05 20:53:36  rurban
-// login cleanup: better debug msg on failing login,
-// checked password less immediate login (bogo or anon),
-// checked olduser pref session error,
-// better PersonalPage without password warning on minimal password length=0
-//   (which is default now)
-//
-// Revision 1.1  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: ziplib.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: ziplib.php 7541 2010-06-17 11:34:55Z vargenau $');
 
 /**
  * GZIP stuff.
@@ -268,10 +268,7 @@ class ZipWriter
     function addSrcFile ($target, $src, $attrib = false) {
 	if (empty($attrib['mtime']))
 	    $attrib = array('mtime' => filemtime($src), 'is_ascii' => 0);
-	if (check_php_version(4,3))
-	    $this->addRegularFile($target, file_get_contents($src), $attrib);
-	else
-	    $this->addRegularFile($target, join('', file($src)), $attrib);
+	$this->addRegularFile($target, file_get_contents($src), $attrib);
     }
     
   function addRegularFile ($filename, $content, $attrib = false) {
@@ -603,6 +600,8 @@ function MimeifyPageRevision (&$page, &$revision) {
         $params['created'] = $page->get('mtime');
     if ($page->get('locked'))
         $params['flags'] = 'PAGE_LOCKED';
+    if (ENABLE_EXTERNAL_PAGES && $page->get('external'))
+        $params['flags'] = ($params['flags'] ? $params['flags'] . ',EXTERNAL_PAGE' : 'EXTERNAL_PAGE');
     if ($revision->get('author_id'))
         $params['author_id'] = $revision->get('author_id');
     if ($revision->get('markup')) // what is the default? we must use 1
@@ -765,10 +764,10 @@ function ParseMimeifiedPerm($string) {
         return '';
     }
     $hash = array();
-    foreach (split(";",trim($string)) as $accessgroup) {
-        list($access,$groupstring) = split(":",trim($accessgroup));
+    foreach (explode(";", trim($string)) as $accessgroup) {
+        list($access,$groupstring) = explode(":", trim($accessgroup));
         $access = trim($access);
-        $groups = split(",",trim($groupstring));
+        $groups = explode(",", trim($groupstring));
         foreach ($groups as $group) {
             $group = trim($group);
             $bool = (boolean) (substr($group,0,1) != '-');
@@ -830,6 +829,8 @@ function ParseMimeifiedPages ($data)
         case 'flags':
             if (preg_match('/PAGE_LOCKED/', $value))
                 $pagedata['locked'] = 'yes';
+            if (ENABLE_EXTERNAL_PAGES && preg_match('/EXTERNAL_PAGE/', $value))
+                $pagedata['external'] = 'yes';
             break;
         case 'owner':
         case 'created':
@@ -872,7 +873,7 @@ function ParseMimeifiedPages ($data)
         ExitWiki( sprintf("Unknown %s", 'encoding type: $encoding') );
 
     if (empty($params['charset']))
-        $params['charset'] = 'iso-8859-1';
+        $params['charset'] = 'utf-8';
 
     // compare to target charset
     if (strtolower($params['charset']) != strtolower($GLOBALS['charset'])) {
@@ -891,84 +892,6 @@ function ParseMimeifiedPages ($data)
     
     return array($page);
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.53  2007/05/19 14:41:14  rurban
-// add owner to header to set correct owner on input
-//
-// Revision 1.52  2007/05/15 16:36:36  rurban
-// nowarn on nosummary
-//
-// Revision 1.51  2007/03/27 07:12:06  rurban
-// Patch #1688929 by Erwann Penet: force $crc32 unsigned also
-//
-// Revision 1.50  2007/02/17 14:15:59  rurban
-// also charset convert summary
-//
-// Revision 1.49  2007/01/03 21:25:10  rurban
-// Use convert_charset()
-//
-// Revision 1.48  2006/12/22 17:44:15  rurban
-// support importing foreign charsets. e.g latin1 => utf8
-//
-// Revision 1.47  2006/10/08 12:32:26  rurban
-// workaround signed-unsigned issue (not solved). patch by Bob Apthorpe
-//
-// Revision 1.46  2006/03/07 20:47:36  rurban
-// MimeifyPageRevision refactoring. see loadsave
-//
-// Revision 1.45  2005/12/27 18:05:48  rurban
-// start with GZIP reading within ZipReader (not yet ready)
-//
-// Revision 1.44  2005/01/31 00:28:48  rurban
-// fix bug 1044945: pgsrc upgrade problem if mime wo/body
-//
-// Revision 1.43  2005/01/25 08:00:09  rurban
-// use unix type to support subdirs with forward slash and long filenames
-//
-// Revision 1.42  2004/11/16 16:17:51  rurban
-// support ENABLE_PAGEPERM=false mime load/save
-//
-// Revision 1.41  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.40  2004/06/19 12:32:37  rurban
-// new TEMP_DIR for ziplib
-//
-// Revision 1.39  2004/06/08 10:54:47  rurban
-// better acl dump representation, read back acl and owner
-//
-// Revision 1.38  2004/06/08 10:05:11  rurban
-// simplified admin action shortcuts
-//
-// Revision 1.37  2004/06/07 22:28:04  rurban
-// add acl field to mimified dump
-//
-// Revision 1.36  2004/06/07 19:50:40  rurban
-// add owner field to mimified dump
-//
-// Revision 1.35  2004/05/02 21:26:38  rurban
-// limit user session data (HomePageHandle and auth_dbi have to invalidated anyway)
-//   because they will not survive db sessions, if too large.
-// extended action=upgrade
-// some WikiTranslation button work
-// revert WIKIAUTH_UNOBTAINABLE (need it for main.php)
-// some temp. session debug statements
-//
-// Revision 1.34  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-// Revision 1.33  2004/04/12 13:04:50  rurban
-// added auth_create: self-registering Db users
-// fixed IMAP auth
-// removed rating recommendations
-// ziplib reformatting
-//
 
 // Local Variables:
 // mode: php

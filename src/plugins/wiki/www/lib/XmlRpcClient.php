@@ -1,5 +1,5 @@
 <?php // -*- php -*-
-// $Id: XmlRpcClient.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: XmlRpcClient.php 7638 2010-08-11 11:58:40Z vargenau $
 /* Copyright (C) 2002, Lawrence Akka <lakka@users.sourceforge.net>
  * Copyright (C) 2004,2005,2006 $ThePhpWikiProgrammingTeam
  */
@@ -23,7 +23,7 @@ define('XMLRPC_EXT_LOADED', true);
 if (loadPhpExtension('xmlrpc')) { // fast c lib
     global $xmlrpc_util_path;
     $xmlrpc_util_path = dirname(__FILE__)."/XMLRPC/";
-    include_once("lib/XMLRPC/xmlrpc_emu.inc"); 
+    include_once("lib/XMLRPC/xmlrpc_emu.inc");
  } else { // slow php lib
     // Include the php XML-RPC library
     include_once("lib/XMLRPC/xmlrpc.inc");
@@ -88,7 +88,7 @@ function wiki_xmlrpc_post($method, $args = null, $url = null, $auth = null) {
     if (empty($server['host'])) {
 	$server['host'] = 'localhost';
     }
-    if (!empty($_GET['start_debug'])) { 
+    if (!empty($_GET['start_debug'])) {
 	$debug = 2;
     }
     if (DEBUG & _DEBUG_REMOTE) {  // xmlrpc remote debugging
@@ -96,9 +96,9 @@ function wiki_xmlrpc_post($method, $args = null, $url = null, $auth = null) {
 	$server['path'] .= '?start_debug=1';
     }
     $params = array('method' => $method,
-		    'args'   => $args, 
-		    'host'   => $server['host'], 
-		    'uri'    => $server['path'], 
+		    'args'   => $args,
+		    'host'   => $server['host'],
+		    'uri'    => $server['path'],
 		    'debug'  => $debug,
 		    'output' => null);
     //TODO: auth and/or session cookie
@@ -112,25 +112,11 @@ function wiki_xmlrpc_post($method, $args = null, $url = null, $auth = null) {
     return $result;
 }
 
-/*
- $Log: not supported by cvs2svn $
- Revision 1.3  2007/01/22 23:42:13  rurban
- Back to WIKI_XMLRPC_VERSION 1. Explain why
-
- Revision 1.2  2007/01/03 21:25:43  rurban
- use explicit RPC2 url because of still unresolved dba problem.
-
- Revision 1.1  2007/01/02 13:21:12  rurban
- split client from server
-
- */
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

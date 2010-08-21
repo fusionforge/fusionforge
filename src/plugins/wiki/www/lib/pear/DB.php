@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: DB.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: DB.php 7639 2010-08-11 12:15:16Z vargenau $
 //
 // Database independent query interface.
 
@@ -264,7 +264,7 @@ define('DB_PORTABILITY_ALL', 63);
  * @author   Stig Bakken <ssb@php.net>
  * @author   Tomas V.V.Cox <cox@idecnet.com>
  * @since    PHP 4.0
- * @version  $Id: DB.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: DB.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  */
 class DB
@@ -307,7 +307,7 @@ class DB
             return $tmp;
         }
 
-        @$obj =& new $classname;
+        @$obj = new $classname;
 
         foreach ($options as $option => $value) {
             $test = $obj->setOption($option, $value);
@@ -381,7 +381,7 @@ class DB
             return $tmp;
         }
 
-        @$obj =& new $classname;
+        @$obj = new $classname;
 
         foreach ($options as $option => $value) {
             $test = $obj->setOption($option, $value);
@@ -887,7 +887,7 @@ class DB_result
                 if ($object_class == 'stdClass') {
                     $arr = (object) $arr;
                 } else {
-                    $arr = &new $object_class($arr);
+                    $arr = new $object_class($arr);
                 }
             }
             return $arr;
@@ -1106,7 +1106,7 @@ class DB_row
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

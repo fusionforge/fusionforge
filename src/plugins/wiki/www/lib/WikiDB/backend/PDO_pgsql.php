@@ -1,25 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: PDO_pgsql.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: PDO_pgsql.php 7641 2010-08-11 13:00:46Z vargenau $');
 
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/ 
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * @author: Reini Urban
@@ -37,9 +37,9 @@ extends WikiDB_backend_PDO
         if ($limit) {
             list($offset, $count) = $this->limit($limit);
             if ($offset)
-                $limit = " LIMIT $count OFFSET $from"; 
+                $limit = " LIMIT $count OFFSET $from";
             else
-                $limit = " LIMIT $count"; 
+                $limit = " LIMIT $count";
         } else
             $limit = '';
         return $limit;
@@ -50,14 +50,11 @@ extends WikiDB_backend_PDO
     }
 }
 
-// $Log: not supported by cvs2svn $
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

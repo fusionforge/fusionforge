@@ -1,22 +1,22 @@
-<?php rcs_id('$Id: imdb.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: imdb.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- Copyright 2004 Reini Urban
-
- This file is (not yet) part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 Reini Urban
+ *
+ * This file is (not yet) part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -40,8 +40,8 @@ class imdb {
             }
             $parsed = parseDSN($dsn);
             $this->_dbh = &ADONewConnection($parsed['phptype']);
-            $conn = $this->_dbh->Connect($parsed['hostspec'],$parsed['username'], 
-                                         $parsed['password'], $parsed['database']); 
+            $conn = $this->_dbh->Connect($parsed['hostspec'],$parsed['username'],
+                                         $parsed['password'], $parsed['database']);
             $this->_dbtype = "ADODB";
         }
         $this->_title_1_1 = array
@@ -293,7 +293,7 @@ create table characters (name_id integer unsigned not null, title_id integer uns
 
     /* Search functions */
     function searchTitle($title) {
-        return $this->_search($title, '_sql_title_clause', 
+        return $this->_search($title, '_sql_title_clause',
                               "SELECT m.title_id, m.title, m.date".
                               " FROM movies as m".
                               " WHERE ",
@@ -301,7 +301,7 @@ create table characters (name_id integer unsigned not null, title_id integer uns
     }
 
     function searchName($name) {
-        return $this->_search($name, '_sql_name_clause', 
+        return $this->_search($name, '_sql_name_clause',
                               "SELECT n.name_id, n.name, j.description, c.role, m.title_id, m.title".
                               " FROM names as n, jobs as j, characters as c, movies as m".
                               " WHERE n.name_id = c.name_id".
@@ -315,7 +315,7 @@ create table characters (name_id integer unsigned not null, title_id integer uns
     // quote the LIKE argument and construct the WHERE clause
     function _sql_match_clause($field, $word) {
         //not sure if we need this.  ADODB may do it for us
-        $word = preg_replace('/(?=[%_\\\\])/', "\\", $word);  
+        $word = preg_replace('/(?=[%_\\\\])/', "\\", $word);
         // (we need it for at least % and _ --- they're the wildcard characters
         //  for the LIKE operator, and we need to quote them if we're searching
         //  for literal '%'s or '_'s.  --- I'm not sure about \, but it seems to
@@ -334,7 +334,7 @@ create table characters (name_id integer unsigned not null, title_id integer uns
     function _search($what, $callback_fn, $query, $order = '') {
         include_once("lib/TextSearchQuery.php");
         // $dbh = $GLOBALS['request']->getDbh();
-        //TODO: check if the db is mysql resp. capable of google like search. 
+        //TODO: check if the db is mysql resp. capable of google like search.
         //      postgresql tsearch2 for example
         // See TextSearchQuery.php
         $search = new TextSearchQuery($what);
@@ -357,14 +357,11 @@ SELECT m.title, m.date, n.name, c.role
 
 };
 
-// $Log: not supported by cvs2svn $
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

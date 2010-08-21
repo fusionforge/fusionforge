@@ -1,5 +1,24 @@
 <?php
-rcs_id('$Id: EditToolbar.php 6477 2009-02-01 14:40:29Z vargenau $');
+// rcs_id('$Id: EditToolbar.php 7473 2010-06-07 10:59:48Z rurban $');
+/* Copyright 2004-2010 $ThePhpWikiProgrammingTeam
+ * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * EDIT Toolbar Initialization.
@@ -49,12 +68,13 @@ msg_repl_close     = '"._("Close")."'
         }
     
         if (ENABLE_EDIT_TOOLBAR) {
-	    $js = JavaScript('',array('src' => $WikiTheme->_findData("toolbar.js")));
-            if (empty($WikiTheme->_headers_printed))
-		$WikiTheme->addMoreHeaders($js);
+            $js = JavaScript('',array('src' => $WikiTheme->_findData("toolbar.js")));
+            if (empty($WikiTheme->_headers_printed)) {
+                $WikiTheme->addMoreHeaders($js);
+            }
 	    else { // from an actionpage: WikiBlog, AddComment, WikiForum
-		printXML($js);
-		printXML(JavaScript('define_f()'));
+                printXML($js);
+                printXML(JavaScript('define_f()'));
 	    }
         }
 
@@ -63,7 +83,7 @@ msg_repl_close     = '"._("Close")."'
         $dbi = $GLOBALS['request']->getDbh();
         // regenerate if number of pages changes (categories, pages, templates)
         $key = $dbi->numPages();
-        $key .= '+categories+plugin';
+        $key .= '+categories+plugin' . (isBrowserSafari() ? '+safari' : '');
         if (TOOLBAR_PAGELINK_PULLDOWN) {
             $key .= "+pages";
         }
@@ -77,8 +97,8 @@ msg_repl_close     = '"._("Close")."'
             $this->tokens['EDIT_TOOLBAR'] =& $content;
         } else {
             $content = $this->_generate();
-            // regenerate buttons every 3600 seconds
-            $cache->save($id, $content, '+3600', 'toolbarcache'); 
+            // regenerate buttons every 1 hr/6 hrs
+            $cache->save($id, $content, DEBUG ? '+3600' : '+21600', 'toolbarcache'); 
             $this->tokens['EDIT_TOOLBAR'] =& $content;
         }
     }
@@ -91,14 +111,13 @@ msg_repl_close     = '"._("Close")."'
         global $WikiTheme, $request;
 
         $toolbar = "document.writeln(\"<div class=\\\"edit-toolbar\\\" id=\\\"toolbar\\\">\");\n";
-        $accessKeyPrefix = $WikiTheme->tooltipAccessKeyPrefix();
 
         if (ENABLE_EDIT_TOOLBAR) {
             $username = $request->_user->UserName();
-            if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($username))) {
-                $username = '['.$username.']';
+            if (GFORGE or DISABLE_MARKUP_WIKIWORD or (!isWikiWord($username))) {
+                $username = '[['.$username.']]';
             }
-	    $signature = " --".$username." ".CTime();
+	    $signature = " ––".$username." ".CTime();
             $toolarray = array(
                            array(
                                  "image"=>"ed_format_bold.png",
@@ -210,9 +229,12 @@ msg_repl_close     = '"._("Close")."'
                 $title = addslashes( $tool["title"] );
                 $toolbar .= ("addTagButton('$image','$title','$open','$close','$sample');\n");
             }
-            $toolbar .= ("addInfobox('" 
-                         . addslashes( _("Click a button to get an example text") ) 
-                         . "');\n");
+            /* Fails with Chrome */
+            if (!isBrowserSafari()) {
+                $toolbar .= ("addInfobox('" 
+                             . addslashes( _("Click a button to get an example text") ) 
+                             . "');\n");
+            }
         }
 
         if (JS_SEARCHREPLACE) {
@@ -233,8 +255,7 @@ msg_repl_close     = '"._("Close")."'
                             (array('class'=>"toolbar",
                                    'src'  => $sr_btn,
                                    'alt'  =>_("Search & Replace"),
-                                   'title'=>_("Search & Replace")." [$accessKeyPrefix-h]",
-                                   'accesskey' => 'h',
+                                   'title'=>_("Search & Replace"),
                                    'onclick'=>"replace()")));
         } else {
             $sr_html = '';
@@ -281,7 +302,13 @@ msg_repl_close     = '"._("Close")."'
             $categories = array();
             while ($p = $pages->next()) {
 		$page = $p->getName();
-		$categories[] = "['$page', '%5B%5B".$page."%5D%5D']";
+                if (GFORGE) {
+                    $categories[] = "['$page', '%0A----%0A%5B%5B".$page."%5D%5D']";
+		} else if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page))) {
+		    $categories[] = "['$page', '%0A%5B".$page."%5D']";
+		} else {
+		    $categories[] = "['$page', '%0A".$page."']";
+                }
             }
             if (!$categories) return '';
 	    // Ensure this to be inserted at the very end. Hence we added the id to the function.
@@ -291,7 +318,7 @@ msg_repl_close     = '"._("Close")."'
                                             'title'=>_("AddCategory"),
                                             'alt'=>"AddCategory", // to detect this at js
                                             'onclick'=>"showPulldown('".
-                                            _("Insert Categories (double-click)")
+                                            _("Insert Categories")
                                             ."',[".join(",",$categories)."],'"
                                             ._("Insert")."','"
                                             ._("Close")."','tb-categories')"));
@@ -303,6 +330,7 @@ msg_repl_close     = '"._("Close")."'
     // result is cached. Esp. the args are expensive
     function pluginPulldown() {
         global $WikiTheme;
+        global $AllAllowedPlugins;
 
         $plugin_dir = 'lib/plugin';
         if (defined('PHPWIKI_DIR'))
@@ -317,18 +345,20 @@ msg_repl_close     = '"._("Close")."'
             $w = new WikiPluginLoader;
             foreach ($plugins as $plugin) {
                 $pluginName = str_replace(".php", "", $plugin);
-                $p = $w->getPlugin($pluginName, false); // second arg?
-                // trap php files which aren't WikiPlugin~s
-                if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
-                    $plugin_args = '';
-                    $desc = $p->getArgumentsDescription();
-                    $src = array("\n",'"',"'",'|','[',']','\\');
-                    $replace = array('%0A','%22','%27','%7C','%5B','%5D','%5C');
-                    $desc = str_replace("<br />",' ',$desc->asXML());
-                    if ($desc)
-                        $plugin_args = ' '.str_replace($src, $replace, $desc);
-                    $toinsert = "%0A<<".$pluginName.$plugin_args.">>"; // args?
-                    $plugin_js .= ",['$pluginName','$toinsert']";
+                if (in_array($pluginName, $AllAllowedPlugins)) {
+                    $p = $w->getPlugin($pluginName, false); // second arg?
+                    // trap php files which aren't WikiPlugin~s
+                    if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
+                        $plugin_args = '';
+                        $desc = $p->getArgumentsDescription();
+                        $src = array("\n",'"',"'",'|','[',']','\\');
+                        $replace = array('%0A','%22','%27','%7C','%5B','%5D','%5C');
+                        $desc = str_replace("<br />",' ',$desc->asXML());
+                        if ($desc)
+                            $plugin_args = ' '.str_replace($src, $replace, $desc);
+                        $toinsert = "%0A<<".$pluginName.$plugin_args.">>"; // args?
+                        $plugin_js .= ",['$pluginName','$toinsert']";
+                    }
                 }
             }
             $plugin_js = substr($plugin_js, 1);
@@ -338,7 +368,7 @@ msg_repl_close     = '"._("Close")."'
                                             'title'=>_("AddPlugin"),
                                             'alt'=>_("AddPlugin"),
                                             'onclick'=>"showPulldown('".
-                                            _("Insert Plugin (double-click)")
+                                            _("Insert Plugin")
                                             ."',[".$plugin_js."],'"
                                             ._("Insert")."','"
                                             ._("Close")."','tb-plugins')"));
@@ -352,7 +382,7 @@ msg_repl_close     = '"._("Close")."'
         require_once('lib/TextSearchQuery.php');
         $dbi =& $GLOBALS['request']->_dbi;
         $page_iter = $dbi->titleSearch(new TextSearchQuery($query, $case_exact, $regex));
-        if ($page_iter->count()) {
+        if ($page_iter->count() > 0) {
             global $WikiTheme;
             $pages = array();
             while ($p = $page_iter->next()) {
@@ -368,7 +398,7 @@ msg_repl_close     = '"._("Close")."'
                                               'title'=>_("AddPageLink"),
                                               'alt'=>_("AddPageLink"),
                                               'onclick'=>"showPulldown('".
-                                              _("Insert PageLink (double-click)")
+                                              _("Insert PageLink")
                                               ."',[".join(",",$pages)."],'"
                                               ._("Insert")."','"
                                               ._("Close")."','tb-pages')")));
@@ -380,18 +410,22 @@ msg_repl_close     = '"._("Close")."'
     function imagePulldown($query, $case_exact=false, $regex='auto') {
         global $WikiTheme;
 
-        $image_dir = '.';
-        if (defined('UPLOAD_FILE_PATH'))
-            $image_dir = UPLOAD_FILE_PATH . "/$image_dir";
+        $image_dir = getUploadFilePath();
         $pd = new fileSet($image_dir, '*');
         $images = $pd->getFiles();
         unset($pd);
+        if (UPLOAD_USERDIR) {
+            $image_dir .= "/" . $request->_user->_userid;
+            $pd = new fileSet($image_dir, '*');
+            $images = array_merge($images, $pd->getFiles());
+            unset($pd);
+        }
         sort($images);
         if (!empty($images)) {
             $image_js = '';
             foreach ($images as $image) {
-                // Select only files ending in ".png", ".gif", ".jpg", ".jpeg"
-                if (is_image($image)) {
+                // Select only image and video files
+                if (is_image($image) or is_video($image)) {
                     $image_js .= ",['$image','{{".$image."}}']";
                 }
             }
@@ -399,10 +433,10 @@ msg_repl_close     = '"._("Close")."'
             $more_buttons = HTML::img(array('class'=>"toolbar",
 					    'id' => 'tb-images',
                                             'src'  => $WikiTheme->getImageURL("ed_image.png"),
-                                            'title'=>_("AddImage"),
-                                            'alt'=>_("AddImage"),
+                                            'title'=>_("Add Image or Video"),
+                                            'alt'=>_("Add Image or Video"),
                                             'onclick'=>"showPulldown('".
-                                            _("Insert Image (double-click)")
+                                            _("Insert Image or Video")
                                             ."',[".$image_js."],'"
                                             ._("Insert")."','"
                                             ._("Close")."','tb-images')"));
@@ -437,7 +471,7 @@ msg_repl_close     = '"._("Close")."'
                                    'title'=>_("AddTemplate"),
                                    'alt'=>_("AddTemplate"),
                                    'onclick'=>"showPulldown('".
-                                   _("Insert Template (double-click)")
+                                   _("Insert Template")
                                    ."',[".$pages_js."],'"
                                    ._("Insert")."','"
                                    ._("Close")."','tb-templates')")));
@@ -446,63 +480,6 @@ msg_repl_close     = '"._("Close")."'
     }
 
 }
-
-/*
-$Log: not supported by cvs2svn $
-Revision 1.17  2008/08/06 09:25:56  vargenau
-Button to add images, display in extra window as popup and insert
-
-Revision 1.16  2008/08/03 15:21:45  vargenau
-Less arguments for CreateToc button
-
-Revision 1.15  2008/04/02 18:07:05  vargenau
-New Edit Toolbar icons for TOC and Color text
-
-Revision 1.14  2008/02/19 19:07:23  vargenau
-More icons for toolbar
-
-Revision 1.13  2007/07/14 12:03:12  rurban
-just aesthetics
-
-Revision 1.12  2007/06/02 18:23:36  rurban
-Added accesskeys
-
-Revision 1.11  2007/02/17 14:16:21  rurban
-move define_f after toolbar.js
-
-Revision 1.10  2007/01/07 18:42:19  rurban
-Improve id: edit: to edit-. Move search&replace js from body (defined in EditToolbar) to the toolbar.js. Support actionpages. Add tb-name argument to showPulldown
-
-Revision 1.9  2007/01/02 13:18:26  rurban
-fix id to edit:content
-
-Revision 1.8  2006/12/22 00:17:06  rurban
-add time to signature
-
-Revision 1.7  2006/09/06 05:45:26  rurban
-use html tags for emphasis. workaround ^* problem
-
-Revision 1.6  2006/08/30 05:25:40  rurban
-Handle inserting DISABLE_MARKUP_WIKIWORD and non wikiword links.
-
-Revision 1.5  2005/10/29 14:16:17  rurban
-fix typo
-
-Revision 1.4  2005/09/29 23:07:58  rurban
-cache toolbar
-
-Revision 1.3  2005/09/26 06:25:50  rurban
-EditToolbar enhancements by Thomas Harding: add plugins args, properly quote control chars. added plugin method getArgumentsDescription to override the default description string
-
-Revision 1.3  2005/09/22 13:40:00 tharding
-add modules arguments
- 
-Revision 1.2  2005/05/06 18:43:41  rurban
-add AddTemplate EditToolbar icon
-
-Revision 1.1  2005/01/25 15:19:09  rurban
-extract Toolbar code from editpage.php
-*/
 
 // Local Variables:
 // mode: php

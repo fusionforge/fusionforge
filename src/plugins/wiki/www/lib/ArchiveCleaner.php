@@ -1,5 +1,5 @@
 <?php 
-rcs_id('$Id: ArchiveCleaner.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: ArchiveCleaner.php 7417 2010-05-19 12:57:42Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  *
  * This file is part of PhpWiki.
@@ -163,11 +163,6 @@ class ArchiveCleaner_Counter
         return $age <= $this->max_age && $count <= $this->keep;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.7  2005/10/29 08:57:57  rurban
-// added (c)
-//
 
 // Local Variables:
 // mode: php

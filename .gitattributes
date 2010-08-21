@@ -1949,9 +1949,13 @@ src/plugins/wiki/www/getimg.php -text
 src/plugins/wiki/www/gforge.php -text
 src/plugins/wiki/www/index.php -text
 src/plugins/wiki/www/lib/.htaccess -text
+src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP-2.0.cfg.php -text
+src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP-2.0.class.php -text
 src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP.cfg.php -text
 src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP.class.php -text
+src/plugins/wiki/www/lib/AccessLog.php -text
 src/plugins/wiki/www/lib/ArchiveCleaner.php -text
+src/plugins/wiki/www/lib/AtomParser.php -text
 src/plugins/wiki/www/lib/BlockParser.php -text
 src/plugins/wiki/www/lib/CachedMarkup.php -text
 src/plugins/wiki/www/lib/Captcha.php -text
@@ -1969,6 +1973,7 @@ src/plugins/wiki/www/lib/ExternalReferrer.php -text
 src/plugins/wiki/www/lib/FileFinder.php -text
 src/plugins/wiki/www/lib/Google.php -text
 src/plugins/wiki/www/lib/HtmlElement.php -text
+src/plugins/wiki/www/lib/HtmlElement5.php -text
 src/plugins/wiki/www/lib/HtmlParser.php -text
 src/plugins/wiki/www/lib/HttpClient.php -text
 src/plugins/wiki/www/lib/IniConfig.php -text
@@ -2017,6 +2022,7 @@ src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-informix.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-informix72.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ldap.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssql.inc.php -text
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssqlnative.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssqlpo.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mysql.inc.php -text
 src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mysqli.inc.php -text
@@ -2046,6 +2052,7 @@ src/plugins/wiki/www/lib/WikiDB/adodb/readme.txt -text
 src/plugins/wiki/www/lib/WikiDB/backend.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/ADODB.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/ADODB_mssql.php -text
+src/plugins/wiki/www/lib/WikiDB/backend/ADODB_mssqlnative.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/ADODB_mysql.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/ADODB_oci8po.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/ADODB_postgres7.php -text
@@ -2055,6 +2062,7 @@ src/plugins/wiki/www/lib/WikiDB/backend/PDO_mysql.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/PDO_oci8.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/PDO_pgsql.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/PearDB.php -text
+src/plugins/wiki/www/lib/WikiDB/backend/PearDB_ffpgsql.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/PearDB_mysql.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/PearDB_oci8.php -text
 src/plugins/wiki/www/lib/WikiDB/backend/PearDB_pgsql.php -text
@@ -2084,6 +2092,7 @@ src/plugins/wiki/www/lib/WikiUser/AdoDb.php -text
 src/plugins/wiki/www/lib/WikiUser/BogoLogin.php -text
 src/plugins/wiki/www/lib/WikiUser/Db.php -text
 src/plugins/wiki/www/lib/WikiUser/EMailConfirm.php -text
+src/plugins/wiki/www/lib/WikiUser/Facebook.php -text
 src/plugins/wiki/www/lib/WikiUser/File.php -text
 src/plugins/wiki/www/lib/WikiUser/Forbidden.php -text
 src/plugins/wiki/www/lib/WikiUser/GForge.php -text
@@ -2092,6 +2101,7 @@ src/plugins/wiki/www/lib/WikiUser/HttpAuthUpper.php -text
 src/plugins/wiki/www/lib/WikiUser/IMAP.php -text
 src/plugins/wiki/www/lib/WikiUser/LDAP.php -text
 src/plugins/wiki/www/lib/WikiUser/LdapUpper.php -text
+src/plugins/wiki/www/lib/WikiUser/OpenID.php -text
 src/plugins/wiki/www/lib/WikiUser/POP3.php -text
 src/plugins/wiki/www/lib/WikiUser/PdoDb.php -text
 src/plugins/wiki/www/lib/WikiUser/PearDb.php -text
@@ -2175,6 +2185,7 @@ src/plugins/wiki/www/lib/pear/DB/sqlite.php -text
 src/plugins/wiki/www/lib/pear/DB/storage.php -text
 src/plugins/wiki/www/lib/pear/DB/sybase.php -text
 src/plugins/wiki/www/lib/pear/File_Passwd.php -text
+src/plugins/wiki/www/lib/pear/JSON.php -text
 src/plugins/wiki/www/lib/pear/LICENSE -text
 src/plugins/wiki/www/lib/pear/PEAR.php -text
 src/plugins/wiki/www/lib/plugin/AddComment.php -text
@@ -2325,7 +2336,6 @@ src/plugins/wiki/www/lib/purgepage.php -text
 src/plugins/wiki/www/lib/removepage.php -text
 src/plugins/wiki/www/lib/spam_babycart.php -text
 src/plugins/wiki/www/lib/stdlib.php -text
-src/plugins/wiki/www/lib/updateinterwikimap -text
 src/plugins/wiki/www/lib/upgrade.php -text
 src/plugins/wiki/www/lib/wikilens/Buddy.php -text
 src/plugins/wiki/www/lib/wikilens/CustomPrefs.php -text

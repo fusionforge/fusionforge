@@ -46,11 +46,6 @@ class WysiwygEdit_spaw extends WysiwygEdit {
     }
 }
 
-/*
- $Log: not supported by cvs2svn $
-
-*/
-
 // Local Variables:
 // mode: php
 // tab-width: 8

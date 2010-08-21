@@ -1,10 +1,10 @@
 <?php // -*-php-*-
-rcs_id('$Id: PDO.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: PDO.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB.php');
 
 /**
- * WikiDB layer for PDO, the new php5 abstraction layer, with support for 
+ * WikiDB layer for PDO, the new php5 abstraction layer, with support for
  * prepared statements and transactions.
  *
  * "The PHP Data Objects (PDO) extension defines a lightweight,
@@ -35,7 +35,7 @@ class WikiDB_PDO extends WikiDB
         $backend = new $backend_class($dbparams);
         $this->WikiDB($backend, $dbparams);
     }
-    
+  
     /**
      * Determine whether page exists (in non-default form).
      * @see WikiDB::isWikiPage
@@ -88,7 +88,7 @@ class WikiDB_PDO extends WikiDB
             }
             if ($sth->execute())
                 $result = $sth->fetch(PDO_FETCH_BOTH);
-            else 
+            else
                 return false;
         }
         catch (PDOException $e) {
@@ -106,8 +106,7 @@ class WikiDB_PDO extends WikiDB
     }
 
 };
-  
-// For emacs users
+
 // Local Variables:
 // mode: php
 // tab-width: 8

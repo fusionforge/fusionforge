@@ -1,24 +1,24 @@
-<?php rcs_id('$Id: WikiPluginCached.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: WikiPluginCached.php 7639 2010-08-11 12:15:16Z vargenau $');
 /*
- Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)
- Copyright (C) 2004,2007 Reini Urban
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */ 
+ * Copyright (C) 2002 Johannes GroÃŸe
+ * Copyright (C) 2004,2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * You should set up the options in config/config.ini at Part seven:
@@ -43,9 +43,9 @@ define('PLUGIN_CACHED_IMG_ONDEMAND', 64);// don't cache
 define('PLUGIN_CACHED_STATIC', 128); 	 // make it available via /uploads/, not via /getimg.php?id=
 
 /**
- * An extension of the WikiPlugin class to allow image output and      
- * cacheing.                                                         
- * There are several abstract functions to be overloaded. 
+ * An extension of the WikiPlugin class to allow image output and    
+ * cacheing.                                                       
+ * There are several abstract functions to be overloaded.
  * Have a look at the example files
  * <ul><li>plugin/TexToPng.php</li>
  *     <li>plugin/CacheTest.php (extremely simple example)</li>
@@ -54,22 +54,22 @@ define('PLUGIN_CACHED_STATIC', 128); 	 // make it available via /uploads/, not v
  *     <li>plugin/Ploticus.php</li>
  * </ul>
  *
- * @author  Johannes Große, Reini Urban
- */                                                                
+ * @author  Johannes GroÃŸe, Reini Urban
+ */                                                              
 class WikiPluginCached extends WikiPlugin
-{   
+{ 
     var $_static;
-    /** 
+    /**
      * Produces URL and id number from plugin arguments which later on,
-     * will allow to find a cached image or to reconstruct the complete 
+     * will allow to find a cached image or to reconstruct the complete
      * plugin call to recreate the image.
-     * 
+     *
      * @param cache    object the cache object used to store the images
-     * @param argarray array  all parameters (including those set to 
+     * @param argarray array  all parameters (including those set to
      *                        default values) of the plugin call to be
      *                        prepared
      * @access private
-     * @return array(id,url)  
+     * @return array(id,url)
      *
      * TODO: check if args is needed at all (on lost cache)
      */
@@ -77,12 +77,12 @@ class WikiPluginCached extends WikiPlugin
     	global $request;
         //$cacheparams = $GLOBALS['CacheParams'];
 
-        $plugincall = serialize( array( 
+        $plugincall = serialize( array(
             'pluginname' => $this->getName(),
-            'arguments'  => $argarray ) ); 
+            'arguments'  => $argarray ) );
         $id = $cache->generateId( $plugincall );
         $plugincall_arg = rawurlencode($plugincall);
-        //$plugincall_arg = md5($plugincall); 
+        //$plugincall_arg = md5($plugincall);
         // will not work if plugin has to recreate content and cache is lost
 
         $url = DATA_PATH . '/getimg.php?';
@@ -90,10 +90,10 @@ class WikiPluginCached extends WikiPlugin
             $url = substr($url, 0, -1);
         }
         if (strlen($plugincall_arg) > PLUGIN_CACHED_MAXARGLEN) {
-            // we can't send the data as URL so we just send the id  
+            // we can't send the data as URL so we just send the id
             if (!$request->getSessionVar('imagecache'.$id)) {
                 $request->setSessionVar('imagecache'.$id, $plugincall);
-            } 
+            }
             $plugincall_arg = false; // not needed anymore
         }
 
@@ -104,10 +104,10 @@ class WikiPluginCached extends WikiPlugin
         } else {
             // Not yet supported.
             // We are supposed to use the indirect 404 ErrorDocument method
-            // ($url is assumed to be the url of the image in 
-            //  cache_dir and the image creation script is referred to in the 
+            // ($url is assumed to be the url of the image in
+            //  cache_dir and the image creation script is referred to in the
             //  ErrorDocument 404 directive.)
-            $url .= '/' . PLUGIN_CACHED_FILENAME_PREFIX . $id . '.img' 
+            $url .= '/' . PLUGIN_CACHED_FILENAME_PREFIX . $id . '.img'
                 . ($plugincall_arg ? '?args='.$plugincall_arg : '');
         }
         if ($request->getArg("start_debug") and (DEBUG & _DEBUG_REMOTE))
@@ -115,14 +115,14 @@ class WikiPluginCached extends WikiPlugin
         return array($id, $url);
     } // genUrl
 
-    /** 
+    /**
      * Replaces the abstract run method of WikiPlugin to implement
-     * a cache check which can avoid redundant runs. 
+     * a cache check which can avoid redundant runs.
      * <b>Do not override this method in a subclass. Instead you may
      * rename your run method to getHtml, getImage or getMap.
      * Have a close look on the arguments and required return values,
-     * however. </b>  
-     * 
+     * however. </b>
+     *
      * @access protected
      * @param  dbi       WikiDB  database abstraction class
      * @param  argstr    string  plugin arguments in the call from PhpWiki
@@ -144,13 +144,13 @@ class WikiPluginCached extends WikiPlugin
         $this->_args =& $sortedargs;
         $this->_type = $this->getPluginType();
         $this->_static = false;
-        if ($this->_type & PLUGIN_CACHED_STATIC 
+        if ($this->_type & PLUGIN_CACHED_STATIC
             or $request->getArg('action') == 'pdf') // htmldoc doesn't grok subrequests
-        {    
+        {  
             $this->_type = $this->_type & ~PLUGIN_CACHED_STATIC;
             $this->_static = true;
         }
-    
+  
         // ---------- embed static image, no getimg.php? url -----------------
         if (0 and $this->_static) {
             //$content = $cache->get($id, 'imagecache');
@@ -185,7 +185,7 @@ class WikiPluginCached extends WikiPlugin
                         return HTML();
                     }
                     $do_save = true;
-                } 
+                }
                 break;
             case PLUGIN_CACHED_IMG_INLINE:
                 if (PLUGIN_CACHED_USECACHE && (!$content || !$content['image'])) { // new
@@ -204,7 +204,7 @@ class WikiPluginCached extends WikiPlugin
                 if (!$content || !$content['image'] || !$content['html'] ) {
                     $do_save = $this->produceImage($content, $this, $dbi, $sortedargs, $request, 'html');
                     if ($this->_static) $url = $content['url'];
-                    $content['html'] = $do_save 
+                    $content['html'] = $do_save
                         ? $this->embedMap($id, $url, $content['html'], $dbi, $sortedargs, $request)
                         : false;
                 }
@@ -216,7 +216,7 @@ class WikiPluginCached extends WikiPlugin
                     $args = array(); //width+height => object args
                     if (!empty($sortedargs['width'])) $args['width'] = $sortedargs['width'];
                     if (!empty($sortedargs['height'])) $args['height'] = $sortedargs['height'];
-                    $content['html'] = $do_save 
+                    $content['html'] = $do_save
                         ? $this->embedObject($url, 'image/svg+xml', $args,
                                              HTML::embed(array_merge(
                                              array('src'=>$url, 'type'=>'image/svg+xml'),
@@ -235,8 +235,8 @@ class WikiPluginCached extends WikiPlugin
                     $args = array(); //width+height => object args
                     if (!empty($sortedargs['width'])) $args['width'] = $sortedargs['width'];
                     if (!empty($sortedargs['height'])) $args['height'] = $sortedargs['height'];
-                    $content['html'] = $do_save_svg 
-                        ? $this->embedObject($url, 'image/svg+xml', $args, 
+                    $content['html'] = $do_save_svg
+                        ? $this->embedObject($url, 'image/svg+xml', $args,
                                              $this->embedImg($pngcontent['url'], $dbi, $sortedargs, $request))
                         : false;
                 }
@@ -256,59 +256,59 @@ class WikiPluginCached extends WikiPlugin
     /* --------------------- virtual or abstract functions ----------- */
 
     /**
-     * Sets the type of the plugin to html, image or map 
+     * Sets the type of the plugin to html, image or map
      * production
      *
-     * @access protected 
-     * @return int determines the plugin to produce either html, 
-     *             an image or an image map; uses on of the 
+     * @access protected
+     * @return int determines the plugin to produce either html,
+     *             an image or an image map; uses on of the
      *             following predefined values
-     *             <ul> 
+     *             <ul>
      *             <li>PLUGIN_CACHED_HTML</li>
      *             <li>PLUGIN_CACHED_IMG_INLINE</li>
      *             <li>PLUGIN_CACHED_IMG_ONDEMAND</li>
      *             <li>PLUGIN_CACHED_MAP</li>
-     *             </ul>    
+     *             </ul>  
      */
     function getPluginType() {
         return PLUGIN_CACHED_IMG_ONDEMAND;
     }
 
-    /** 
-     * Creates an image handle from the given user arguments. 
-     * This method is only called if the return value of 
-     * <code>getPluginType</code> is set to 
+    /**
+     * Creates an image handle from the given user arguments.
+     * This method is only called if the return value of
+     * <code>getPluginType</code> is set to
      * PLUGIN_CACHED_IMG_INLINE or PLUGIN_CACHED_IMG_ONDEMAND.
      *
      * @access protected pure virtual
      * @param  dbi       WikiDB       database abstraction class
-     * @param  argarray  array        complete (!) arguments to produce 
-     *                                image. It is not necessary to call 
+     * @param  argarray  array        complete (!) arguments to produce
+     *                                image. It is not necessary to call
      *                                WikiPlugin->getArgs anymore.
-     * @param  request   Request      ??? 
+     * @param  request   Request      ???
      * @return           imagehandle  image handle if successful
      *                                false if an error occured
      */
     function getImage($dbi,$argarray,$request) {
-        trigger_error('WikiPluginCached::getImage: pure virtual function in file ' 
+        trigger_error('WikiPluginCached::getImage: pure virtual function in file '
                       . __FILE__ . ' line ' . __LINE__, E_USER_ERROR);
         return false;
     }
 
-    /** 
-     * Sets the life time of a cache entry in seconds. 
+    /**
+     * Sets the life time of a cache entry in seconds.
      * Expired entries are not used anymore.
      * During a garbage collection each expired entry is
      * removed. If removing all expired entries is not
      * sufficient, the expire time is ignored and removing
      * is determined by the last "touch" of the entry.
-     * 
+     *
      * @access protected virtual
      * @param  dbi       WikiDB       database abstraction class
      * @param  argarray  array        complete (!) arguments. It is
-     *                                not necessary to call 
+     *                                not necessary to call
      *                                WikiPlugin->getArgs anymore.
-     * @param  request   Request      ??? 
+     * @param  request   Request      ???
      * @return           string       format: '+seconds'
      *                                '0' never expires
      */
@@ -316,18 +316,18 @@ class WikiPluginCached extends WikiPlugin
         return '0'; // persist forever
     }
 
-    /** 
-     * Decides the image type of an image output. 
+    /**
+     * Decides the image type of an image output.
      * Always used unless plugin type is PLUGIN_CACHED_HTML.
-     * 
+     *
      * @access protected virtual
      * @param  dbi       WikiDB       database abstraction class
      * @param  argarray  array        complete (!) arguments. It is
-     *                                not necessary to call 
+     *                                not necessary to call
      *                                WikiPlugin->getArgs anymore.
-     * @param  request   Request      ??? 
+     * @param  request   Request      ???
      * @return           string       'png', 'jpeg' or 'gif'
-     */    
+     */  
     function getImageType(&$dbi, $argarray, &$request) {
         if (in_array($argarray['imgtype'], preg_split('/\s*:\s*/', PLUGIN_CACHED_IMGTYPES)))
             return $argarray['imgtype'];
@@ -335,53 +335,53 @@ class WikiPluginCached extends WikiPlugin
             return 'png';
     }
 
-    /** 
+    /**
      * Produces the alt text for an image.
-     * <code> &lt;img src=... alt="getAlt(...)"&gt; </code> 
+     * <code> &lt;img src=... alt="getAlt(...)"&gt; </code>
      *
      * @access protected virtual
      * @param  dbi       WikiDB       database abstraction class
      * @param  argarray  array        complete (!) arguments. It is
-     *                                not necessary to call 
+     *                                not necessary to call
      *                                WikiPlugin->getArgs anymore.
-     * @param  request   Request      ??? 
+     * @param  request   Request      ???
      * @return           string       "alt" description of the image
      */
     function getAlt($dbi,$argarray,$request) {
         return '<?plugin '.$this->getName().' '.$this->glueArgs($argarray).'?>';
     }
 
-    /** 
-     * Creates HTML output to be cached.  
-     * This method is only called if the plugin_type is set to 
+    /**
+     * Creates HTML output to be cached.
+     * This method is only called if the plugin_type is set to
      * PLUGIN_CACHED_HTML.
      *
      * @access protected pure virtual
      * @param  dbi       WikiDB       database abstraction class
-     * @param  argarray  array        complete (!) arguments to produce 
-     *                                image. It is not necessary to call 
+     * @param  argarray  array        complete (!) arguments to produce
+     *                                image. It is not necessary to call
      *                                WikiPlugin->getArgs anymore.
-     * @param  request   Request      ??? 
+     * @param  request   Request      ???
      * @param  string    $basepage    Pagename to use to interpret links [/relative] page names.
      * @return           string       html to be printed in place of the plugin command
      *                                false if an error occured
      */
     function getHtml($dbi, $argarray, $request, $basepage) {
-        trigger_error('WikiPluginCached::getHtml: pure virtual function in file ' 
+        trigger_error('WikiPluginCached::getHtml: pure virtual function in file '
                       . __FILE__ . ' line ' . __LINE__, E_USER_ERROR);
     }
 
-    /** 
-     * Creates HTML output to be cached.  
-     * This method is only called if the plugin_type is set to 
+    /**
+     * Creates HTML output to be cached.
+     * This method is only called if the plugin_type is set to
      * PLUGIN_CACHED_HTML.
      *
      * @access protected pure virtual
      * @param  dbi       WikiDB       database abstraction class
-     * @param  argarray  array        complete (!) arguments to produce 
-     *                                image. It is not necessary to call 
+     * @param  argarray  array        complete (!) arguments to produce
+     *                                image. It is not necessary to call
      *                                WikiPlugin->getArgs anymore.
-     * @param  request   Request      ??? 
+     * @param  request   Request      ???
      * @return array(html,handle)     html for the map interior (to be specific,
      *                                only &lt;area;&gt; tags defining hot spots)
      *                                handle is an imagehandle to the corresponding
@@ -389,13 +389,13 @@ class WikiPluginCached extends WikiPlugin
      *                                array(false,false) if an error occured
      */
     function getMap($dbi, $argarray, $request) {
-        trigger_error('WikiPluginCached::getHtml: pure virtual function in file ' 
+        trigger_error('WikiPluginCached::getHtml: pure virtual function in file '
                       . __FILE__ . ' line ' . __LINE__, E_USER_ERROR);
     }
 
     /* --------------------- produce Html ----------------------------- */
 
-    /** 
+    /**
      * Creates an HTML map hyperlinked to the image specified
      * by url and containing the hotspots given by map.
      *
@@ -405,10 +405,10 @@ class WikiPluginCached extends WikiPlugin
      * @param  map      string  &lt;area&gt; tags defining active
      *                          regions in the map
      * @param  dbi      WikiDB  database abstraction class
-     * @param  argarray array   complete (!) arguments to produce 
-     *                          image. It is not necessary to call 
+     * @param  argarray array   complete (!) arguments to produce
+     *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
-     * @param  request  Request ??? 
+     * @param  request  Request ???
      * @return          string  html output
      */
     function embedMap($id,$url,$map,&$dbi,$argarray,&$request) {
@@ -416,14 +416,13 @@ class WikiPluginCached extends WikiPlugin
         $key = substr($id,0,8).substr(microtime(),0,6);
         return HTML(HTML::map(array( 'name' => $key ), $map ),
                     HTML::img( array(
-                   'src'    => $url, 
-                   'border' => 0,
-                   //  'alt'    => htmlspecialchars($this->getAlt($dbi,$argarray,$request)) 
+                   'src'    => $url,
+                   //  'alt'    => htmlspecialchars($this->getAlt($dbi,$argarray,$request))
                    'usemap' => '#'.$key ))
                );
     }
 
-    /** 
+    /**
      * Creates an HTML &lt;img&gt; tag hyperlinking to the specified
      * url and produces an alternative text for non-graphical
      * browsers.
@@ -433,16 +432,15 @@ class WikiPluginCached extends WikiPlugin
      * @param  map      string  &lt;area&gt; tags defining active
      *                          regions in the map
      * @param  dbi      WikiDB  database abstraction class
-     * @param  argarray array   complete (!) arguments to produce 
-     *                          image. It is not necessary to call 
+     * @param  argarray array   complete (!) arguments to produce
+     *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
-     * @param  request  Request ??? 
+     * @param  request  Request ???
      * @return          string  html output
      */
     function embedImg($url, $dbi, $argarray, $request) {
-        return HTML::img( array( 
+        return HTML::img( array(
             'src' => $url,
-            'border' => 0,
             'alt' => htmlspecialchars($this->getAlt($dbi, $argarray, $request)) ) );
     }
 
@@ -476,7 +474,7 @@ class WikiPluginCached extends WikiPlugin
 // ---------------------- static member functions ---------------------------
 // --------------------------------------------------------------------------
 
-    /** 
+    /**
      * Creates one static PEAR Cache object and returns copies afterwards.
      * FIXME: There should be references returned
      *
@@ -485,7 +483,7 @@ class WikiPluginCached extends WikiPlugin
      */
     function newCache() {
         static $staticcache;
-  
+
         if (!is_object($staticcache)) {
             if (!class_exists('Cache')) {
                 // uuh, pear not in include_path! should print a warning.
@@ -504,7 +502,7 @@ class WikiPluginCached extends WikiPlugin
             $cacheparams['imgtypes'] = preg_split('/\s*:\s*/', PLUGIN_CACHED_IMGTYPES);
             $staticcache = new Cache(PLUGIN_CACHED_DATABASE, $cacheparams);
             $staticcache->gc_maxlifetime = PLUGIN_CACHED_MAXLIFETIME;
- 
+
             if (! PLUGIN_CACHED_USECACHE ) {
                 $staticcache->setCaching(false);
             }
@@ -512,8 +510,8 @@ class WikiPluginCached extends WikiPlugin
         return $staticcache; // FIXME: use references ?
     }
 
-    /** 
-     * Determines whether a needed image type may is available 
+    /**
+     * Determines whether a needed image type may is available
      * from the GD library and gives an alternative otherwise.
      *
      * @access  public static
@@ -523,14 +521,14 @@ class WikiPluginCached extends WikiPlugin
      */
 
     function decideImgType($wish) {
-        if ($wish=='html') return $wish;                 
+        if ($wish=='html') return $wish;               
         if ($wish=='jpg') { $wish = 'jpeg'; }
 
         $supportedtypes = array();
         // Todo: swf, pdf, ...
-        $imagetypes = array(  
+        $imagetypes = array(
             'png'   => IMG_PNG,
-            'gif'   => IMG_GIF,                             
+            'gif'   => IMG_GIF,                           
             'jpeg'  => IMG_JPEG,
             'wbmp'  => IMG_WBMP,
             'xpm'   => IMG_XPM,
@@ -544,25 +542,25 @@ class WikiPluginCached extends WikiPlugin
             $presenttypes = ImageTypes();
             foreach ($imagetypes as $imgtype => $bitmask)
                 if ( $presenttypes && $bitmask )
-                    array_push($supportedtypes, $imgtype);        
+                    array_push($supportedtypes, $imgtype);      
         } else {
             foreach ($imagetypes as $imgtype => $bitmask)
                 if (function_exists("Image".$imgtype))
                     array_push($supportedtypes, $imgtype);
         }
-        if (in_array($wish, $supportedtypes)) 
+        if (in_array($wish, $supportedtypes))
             return $wish;
         elseif (!empty($supportedtypes))
             return reset($supportedtypes);
         else
             return 'html';
-        
+      
     } // decideImgType
 
 
-    /** 
+    /**
      * Writes an image into a file or to the browser.
-     * Note that there is no check if the image can 
+     * Note that there is no check if the image can
      * be written.
      *
      * @access  public static
@@ -584,16 +582,16 @@ class WikiPluginCached extends WikiPlugin
     } // writeImage
 
 
-    /** 
+    /**
      * Sends HTTP Header for some predefined file types.
      * There is no parameter check.
      *
      * @access  public static
      * @param   doctype string 'gif', 'png', 'jpeg', 'html'
-     * @return  void 
+     * @return  void
      */
     function writeHeader($doctype) {
-        static $IMAGEHEADER = array( 
+        static $IMAGEHEADER = array(
             'gif'  => 'Content-type: image/gif',
             'png'  => 'Content-type: image/png',
             'jpeg' => 'Content-type: image/jpeg',
@@ -608,9 +606,9 @@ class WikiPluginCached extends WikiPlugin
     }
 
 
-    /** 
-     * Converts argument array to a string of format option="value". 
-     * This should only be used for displaying plugin options for 
+    /**
+     * Converts argument array to a string of format option="value".
+     * This should only be used for displaying plugin options for
      * the quoting of arguments is not safe, yet.
      *
      * @access public static
@@ -621,7 +619,7 @@ class WikiPluginCached extends WikiPlugin
         if (!empty($argarray)) {
             $argstr = '';
             while (list($key,$value)=each($argarray)) {
-                $argstr .= $key. '=' . '"' . $value . '" ';  
+                $argstr .= $key. '=' . '"' . $value . '" ';
                 // FIXME: How are values quoted? Can a value contain '"'?
                 // TODO: rawurlencode(value)
             }
@@ -632,7 +630,7 @@ class WikiPluginCached extends WikiPlugin
 
     // ---------------------- FetchImageFromCache ------------------------------
 
-    /** 
+    /**
      * Extracts the cache entry id from the url and the plugin call
      * parameters if available.
      *
@@ -651,7 +649,7 @@ class WikiPluginCached extends WikiPlugin
      */
     function checkCall1(&$id, &$plugincall, $cache, $request, $errorformat) {
         $id = $request->getArg('id');
-        $plugincall = rawurldecode($request->getArg('args')); 
+        $plugincall = rawurldecode($request->getArg('args'));
 
         if (!$id) {
            if (!$plugincall) {
@@ -662,21 +660,21 @@ class WikiPluginCached extends WikiPlugin
             } else {
                 $id = $cache->generateId( $plugincall );
             }
-        }   
-        return true;     
+        } 
+        return true;   
     } // checkCall1
 
 
-    /** 
+    /**
      * Extracts the parameters necessary to reconstruct the plugin
-     * call needed to produce the requested image. 
+     * call needed to produce the requested image.
      *
-     * @access static private  
-     * @param  plugincall string   reference to serialized array containing both 
+     * @access static private
+     * @param  plugincall string   reference to serialized array containing both
      *                             name and parameters of the plugin call
      * @param  request    Request  ???
      * @return            boolean  false if an error occurs, true otherwise.
-     *                 
+     *               
      */
     function checkCall2(&$plugincall, $request) {
         // if plugincall wasn't sent by URL, it must have been
@@ -687,19 +685,19 @@ class WikiPluginCached extends WikiPlugin
                 // without having written bad code. So gettextify it.
                 $errortext = sprintf(
                     gettext ("There is no image creation data available to id '%s'. Please reload referring page." ),
-                    $id );  
+                    $id );
                 $this->printError($errorformat, $errortext);
-                return false; 
-            }       
+                return false;
+            }     
         }
         $plugincall = unserialize($plugincall);
         return true;
     } // checkCall2
 
 
-    /** 
-     * Creates an image or image map depending on the plugin type. 
-     * @access static private 
+    /**
+     * Creates an image or image map depending on the plugin type.
+     * @access static private
      * @param  content array             reference to created array which overwrite the keys
      *                                   'image', 'imagetype' and possibly 'html'
      * @param  plugin  WikiPluginCached  plugin which is called to create image or map
@@ -718,21 +716,21 @@ class WikiPluginCached extends WikiPlugin
             $imagehandle = $plugin->getImage($dbi, $argarray, $request);
         }
 
-        $content['imagetype'] 
+        $content['imagetype']
             = $this->decideImgType($plugin->getImageType($dbi, $argarray, $request));
         $errortext = $plugin->getError();
 
         if (!$imagehandle||$errortext) {
             if (!$errortext) {
                 $errortext = "'<?plugin ".$plugin->getName(). ' '
-                    . $this->glueArgs($argarray)." ?>' returned no image, " 
+                    . $this->glueArgs($argarray)." ?>' returned no image, "
                     . " although no error was reported.";
             }
             $this->printError($errorformat, $errortext);
-            return false; 
+            return false;
         }
 
-        // image handle -> image data        
+        // image handle -> image data      
         if (!empty($this->_static)) {
             $ext = "." . $content['imagetype'];
             if (is_string($imagehandle) and file_exists($imagehandle)) {
@@ -791,7 +789,7 @@ class WikiPluginCached extends WikiPlugin
 	} else {
 	    $ext = isWindows()? ".tmp" : "";
 	}
-        $temp = tempnam(isWindows() ? str_replace('/', "\\", PLUGIN_CACHED_CACHE_DIR) 
+        $temp = tempnam(isWindows() ? str_replace('/', "\\", PLUGIN_CACHED_CACHE_DIR)
                                     : PLUGIN_CACHED_CACHE_DIR,
                        $prefix ? $prefix : PLUGIN_CACHED_FILENAME_PREFIX);
         if (isWindows()) {
@@ -803,7 +801,7 @@ class WikiPluginCached extends WikiPlugin
         return $temp;
     }
 
-    /** 
+    /**
      * Main function for obtaining images from cache or generating on-the-fly
      * from parameters sent by url or session vars.
      *
@@ -813,31 +811,31 @@ class WikiPluginCached extends WikiPlugin
      * @param  errorformat string        outputs errors in 'png', 'gif', 'jpeg' or 'html'
      */
     function fetchImageFromCache($dbi, $request, $errorformat='png') {
-        $cache   = $this->newCache();      
+        $cache   = $this->newCache();    
         $errorformat = $this->decideImgType($errorformat);
         // get id
         if (!$this->checkCall1($id, $plugincall, $cache, $request, $errorformat)) return false;
-        // check cache 
+        // check cache
         $content = $cache->get($id, 'imagecache');
 
         if (!empty($content['image'])) {
             $this->writeHeader($content['imagetype']);
-            print $content['image']; 
+            print $content['image'];
             return true;
-        } 
+        }
         if (!empty($content['html'])) {
-            print $content['html']; 
+            print $content['html'];
             return true;
-        } 
+        }
         // static version?
         if (!empty($content['file']) && !empty($content['url']) && file_exists($content['file'])) {
             print $this->embedImg($content['url'], $dbi, array(), $request);
             return true;
-        } 
+        }
 
         // re-produce image. At first, we need the plugincall parameters.
         // Cached args with matching id override given args to shorten getimg.php?id=md5
-        if (!empty($content['args'])) 
+        if (!empty($content['args']))
             $plugincall['arguments'] = $content['args'];
         if (!$this->checkCall2($plugincall, $request)) return false;
 
@@ -854,7 +852,7 @@ class WikiPluginCached extends WikiPlugin
             $this->printError($errorformat, $errortext);
         }
 
-        if (!$this->produceImage($content, $plugin, $dbi, $argarray, 
+        if (!$this->produceImage($content, $plugin, $dbi, $argarray,
                                  $request, $errorformat))
             return false;
 
@@ -862,19 +860,19 @@ class WikiPluginCached extends WikiPlugin
 
         if ($content['image']) {
             $cache->save($id, $content, $expire, 'imagecache');
-            $this->writeHeader($content['imagetype']); 
+            $this->writeHeader($content['imagetype']);
             print $content['image'];
             return true;
         }
 
         $errortext = "Could not create image file from imagehandle.";
         $this->printError($errorformat, $errortext);
-        return false; 
+        return false;
     } // FetchImageFromCache
 
-    // -------------------- error handling ---------------------------- 
+    // -------------------- error handling ----------------------------
 
-    /** 
+    /**
      * Resets buffer containing all error messages. This is allways
      * done before invoking any abstract creation routines like
      * <code>getImage</code>.
@@ -885,9 +883,9 @@ class WikiPluginCached extends WikiPlugin
     function resetError() {
         $this->_errortext = '';
     }
-       
-    /** 
-     * Returns all accumulated error messages. 
+     
+    /**
+     * Returns all accumulated error messages.
      *
      * @access protected
      * @return string error messages printed with <code>complain</code>.
@@ -896,13 +894,13 @@ class WikiPluginCached extends WikiPlugin
         return $this->_errortext;
     }
 
-    /** 
-     * Collects the error messages in a string for later output 
+    /**
+     * Collects the error messages in a string for later output
      * by WikiPluginCached. This should be used for any errors
      * that occur during data (html,image,map) creation.
-     * 
+     *
      * @access protected
-     * @param  addtext string errormessage to be printed (separate 
+     * @param  addtext string errormessage to be printed (separate
      *                        multiple lines with '\n')
      * @return void
      */
@@ -910,8 +908,8 @@ class WikiPluginCached extends WikiPlugin
         $this->_errortext .= $addtext;
     }
 
-    /** 
-     * Outputs the error as image if possible or as html text 
+    /**
+     * Outputs the error as image if possible or as html text
      * if wished or html header has already been sent.
      *
      * @access static protected
@@ -933,24 +931,24 @@ class WikiPluginCached extends WikiPlugin
            if (is_object($errortext))
                $errortext = $errortext->asString();
            $im = $this->text2img($errortext, 2, $red, $grey);
-           if (!$im) { 
+           if (!$im) {
                trigger_error($errortext, E_USER_WARNING);
                return;
            }
            $this->writeHeader($imgtype);
-           $this->writeImage($imgtype, $im); 
+           $this->writeImage($imgtype, $im);
            ImageDestroy($im);
        }
     } // printError
 
 
-    /** 
+    /**
      * Basic text to image converter for error handling which allows
      * multiple line output.
-     * It will only output the first 25 lines of 80 characters. Both 
+     * It will only output the first 25 lines of 80 characters. Both
      * values may be smaller if the chosen font is to big for there
      * is further restriction to 600 pixel in width and 350 in height.
-     * 
+     *
      * @access static public
      * @param  txt     string  multi line text to be converted
      * @param  fontnr  integer number (1-5) telling gd which internal font to use;
@@ -978,8 +976,8 @@ class WikiPluginCached extends WikiPlugin
             }
         }
 
-        // prepare Parameters 
-        
+        // prepare Parameters
+      
         // set maximum values
         $IMAGESIZE  = array(
             'cols'   => 80,
@@ -991,7 +989,7 @@ class WikiPluginCached extends WikiPlugin
             $charx    = ImageFontWidth($fontnr);
             $chary    = ImageFontHeight($fontnr);
         } else {
-            $charx = 10; $chary = 10; 
+            $charx = 10; $chary = 10;
         }
         $marginx  = $charx;
         $marginy  = floor($chary/2);
@@ -1013,27 +1011,27 @@ class WikiPluginCached extends WikiPlugin
             }
             $lines[$y] = chop(substr($txt, 0, $breaklen));
             $wx = max($wx,strlen($lines[$y++]));
-            $txt = substr($txt, $breaklen); 
+            $txt = substr($txt, $breaklen);
         } while ($txt && ($y < $IMAGESIZE['rows']));
 
         // recalculate image size
         $IMAGESIZE['rows'] = $y;
         $IMAGESIZE['cols'] = $wx;
- 
+
         $IMAGESIZE['width']  = $IMAGESIZE['cols'] * $charx + 2*$marginx;
         $IMAGESIZE['height'] = $IMAGESIZE['rows'] * $chary + 2*$marginy;
 
         // create blank image
         $im = @ImageCreate($IMAGESIZE['width'],$IMAGESIZE['height']);
 
-        $col = ImageColorAllocate($im, $textcol[0], $textcol[1], $textcol[2]); 
-        $bg  = ImageColorAllocate($im, $bgcol[0], $bgcol[1], $bgcol[2]); 
+        $col = ImageColorAllocate($im, $textcol[0], $textcol[1], $textcol[2]);
+        $bg  = ImageColorAllocate($im, $bgcol[0], $bgcol[1], $bgcol[2]);
 
         ImageFilledRectangle($im, 0, 0, $IMAGESIZE['width']-1, $IMAGESIZE['height']-1, $bg);
-    
+  
         // write text lines
         foreach($lines as $nr => $textstr) {
-            ImageString( $im, $fontnr, $marginx, $marginy+$nr*$chary, 
+            ImageString( $im, $fontnr, $marginx, $marginy+$nr*$chary,
                          $textstr, $col );
         }
         return $im;
@@ -1072,59 +1070,9 @@ class WikiPluginCached extends WikiPlugin
         }
     }
 
-    function oldFilterThroughCmd_File($input, $commandLine) {
-	$ext = ".txt";
-	$tmpfile = tempnam(getUploadFilePath(), $ext);
-	$fp = fopen($tmpfile,'wb');
-	fwrite($fp, $input);
-	fclose($fp);
-	$cat = isWindows() ? 'cat' : 'type';
-	$pipe = popen("$cat \"$tmpfile\" | $commandLine", 'r');
-	if (!$pipe) {
-            print "pipe failed.";
-            return "";
-	}
-	$output = '';
-	while (!feof($pipe)) {
-            $output .= fread($pipe, 1024);
-	}
-	pclose($pipe);
-	unlink($tmpfile);
-	return $output;
-    }
-
-    /* PHP versions < 4.3
-     * TODO: via temp file looks more promising
-     */
-    function oldFilterThroughCmd($input, $commandLine) {
-         $input = str_replace ("\\", "\\\\", $input);
-         $input = str_replace ("\"", "\\\"", $input);
-         $input = str_replace ("\$", "\\\$", $input);
-         $input = str_replace ("`", "\`", $input);
-         $input = str_replace ("'", "\'", $input);
-         //$input = str_replace (";", "\;", $input);
-
-         $pipe = popen("echo \"$input\" | $commandLine", 'r');
-         if (!$pipe) {
-            print "pipe failed.";
-            return "";
-         }
-         $output = '';
-         while (!feof($pipe)) {
-            $output .= fread($pipe, 1024);
-         }
-         pclose($pipe);
-         return $output;
-    }
-
     // run "echo $source | $commandLine" and return result
     function filterThroughCmd($source, $commandLine) {
-        if (check_php_version(4,3,0))
-            return $this->newFilterThroughCmd($source, $commandLine);
-        elseif (strlen($source) < 255)
-            return $this->oldFilterThroughCmd($source, $commandLine);
-        else
-            return $this->oldFilterThroughCmd_File($source, $commandLine);
+        return $this->newFilterThroughCmd($source, $commandLine);
     }
 
     /**
@@ -1159,64 +1107,11 @@ class WikiPluginCached extends WikiPlugin
         return $ok;
     }
 
-} // WikiPluginCached
+}
 
-
-// $Log: not supported by cvs2svn $
-// Revision 1.24  2007/09/22 12:38:57  rurban
-// smaller cached args footprint
-//
-// Revision 1.23  2007/09/12 19:38:41  rurban
-// improve tempnam on windows, cleanup zero-sized files
-//
-// Revision 1.22  2007/01/25 07:42:09  rurban
-// Remove early Cache.php loader. Do it later and better.
-//
-// Revision 1.21  2007/01/20 11:24:23  rurban
-// Use cat/type for text pipe commands if input > 255 chars
-//
-// Revision 1.20  2005/09/26 06:28:46  rurban
-// beautify tempnam() on Windows. Move execute() from above here
-//
-// Revision 1.19  2004/12/16 18:30:59  rurban
-// avoid ugly img border
-//
-// Revision 1.18  2004/11/01 10:43:57  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.17  2004/10/12 15:06:02  rurban
-// fixes for older php, removed warnings
-//
-// Revision 1.16  2004/10/12 14:56:57  rurban
-// lib/WikiPluginCached.php:731: Notice[8]: Undefined property: _static
-//
-// Revision 1.15  2004/09/26 17:09:23  rurban
-// add SVG support for Ploticus (and hopefully all WikiPluginCached types)
-// SWF not yet.
-//
-// Revision 1.14  2004/09/25 16:26:08  rurban
-// some plugins use HTML
-//
-// Revision 1.13  2004/09/22 13:46:25  rurban
-// centralize upload paths.
-// major WikiPluginCached feature enhancement:
-//   support _STATIC pages in uploads/ instead of dynamic getimg.php? subrequests.
-//   mainly for debugging, cache problems and action=pdf
-//
-// Revision 1.12  2004/09/07 13:26:31  rurban
-// new WikiPluginCached option debug=static and some more sf.net defaults for VisualWiki
-//
-// Revision 1.11  2004/09/06 09:12:46  rurban
-// improve pear handling with silent fallback to ours
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
-// tab-width: 4
+// tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil

@@ -1,10 +1,10 @@
 <?php // -*-php-*-
-rcs_id('$Id: backend.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: backend.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /*
   Pagedata
 
-   maintained by WikiPage 
+   maintained by WikiPage
     //:latestversion
     //:deleted (*)     (Set if latest content is empty.)
     //:pagename (*)
@@ -27,11 +27,11 @@ rcs_id('$Id: backend.php 6184 2008-08-22 10:33:41Z vargenau $');
     //version
     //created (*)
     //%superceded
-	
+
     //:serial
 
      (types are scalars: strings, ints, bools)
-*/     
+*/   
 
 /**
  * A WikiDB_backend handles the storage and retrieval of data for a WikiDB.
@@ -64,7 +64,7 @@ class WikiDB_backend
      *  <dt> locked  <dd> If the page is locked.
      *  <dt> hits    <dd> The page hit count.
      *  <dt> created <dd> Unix time of page creation. (FIXME: Deprecated: I
-     *                    don't think we need this...) 
+     *                    don't think we need this...)
      * </dl>
      */
     function get_pagedata($pagename) {
@@ -80,7 +80,7 @@ class WikiDB_backend
      *
      * For example:
      * <pre>
-     *   $backend->update_pagedata($pagename, array('locked' => 1)); 
+     *   $backend->update_pagedata($pagename, array('locked' => 1));
      * </pre>
      * will set the value of 'locked' to 1 for the specified page, but it
      * will not affect the value of 'hits' (or whatever other meta-data
@@ -88,7 +88,7 @@ class WikiDB_backend
      *
      * To delete a particular piece of meta-data, set its value to false.
      * <pre>
-     *   $backend->update_pagedata($pagename, array('locked' => false)); 
+     *   $backend->update_pagedata($pagename, array('locked' => false));
      * </pre>
      *
      * @param $pagename string Page name.
@@ -97,7 +97,7 @@ class WikiDB_backend
     function update_pagedata($pagename, $newdata) {
         trigger_error("virtual", E_USER_ERROR);
     }
-    
+  
 
     /**
      * Get the current version number for a page.
@@ -109,7 +109,7 @@ class WikiDB_backend
     function get_latest_version($pagename) {
         trigger_error("virtual", E_USER_ERROR);
     }
-    
+  
     /**
      * Get preceding version number.
      *
@@ -121,7 +121,7 @@ class WikiDB_backend
     function get_previous_version($pagename, $version) {
         trigger_error("virtual", E_USER_ERROR);
     }
-    
+  
     /**
      * Get revision meta-data and content.
      *
@@ -173,9 +173,9 @@ class WikiDB_backend
         $this->set_links($pagename, false); // links are purged.
         // SQL needs to invalidate the non_empty id
         if (! WIKIDB_NOCACHE_MARKUP) {
-            // need the hits, perms and LOCKED, otherwise you can reset the perm 
+            // need the hits, perms and LOCKED, otherwise you can reset the perm
             // by action=remove and re-create it with default perms
-            $pagedata = $this->get_pagedata($pagename); 
+            $pagedata = $this->get_pagedata($pagename);
             unset($pagedata['_cached_html']);
             $this->update_pagedata($pagename, $pagedata);
         }
@@ -248,7 +248,7 @@ class WikiDB_backend
         }
         $this->set_versiondata($pagename, $version, $data);
     }
-    
+  
     /**
      * Set links for page.
      *
@@ -259,7 +259,7 @@ class WikiDB_backend
     function set_links($pagename, $links) {
         trigger_error("virtual", E_USER_ERROR);
     }
-        
+      
     /**
      * Find pages which link to or are linked from a page.
      *
@@ -285,7 +285,7 @@ class WikiDB_backend
         include_once('lib/WikiDB/backend/dumb/AllRevisionsIter.php');
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     }
-    
+  
     /**
      * Get all pages in the database.
      *
@@ -308,7 +308,7 @@ class WikiDB_backend
     function get_all_pages($include_defaulted, $orderby=false, $limit='', $exclude='') {
         trigger_error("virtual", E_USER_ERROR);
     }
-        
+      
     /**
      * Title or full text search.
      *
@@ -317,7 +317,7 @@ class WikiDB_backend
      *
      * @access protected
      *
-     * @param $search object A TextSearchQuery object describing the parsed query string, 
+     * @param $search object A TextSearchQuery object describing the parsed query string,
      *                       with efficient methods for SQL and PCRE match.
      *
      * @param $fullsearch boolean If true, a full text search is performed,
@@ -327,8 +327,8 @@ class WikiDB_backend
      *
      * @see WikiDB::titleSearch
      */
-    function text_search($search, $fulltext=false, $sortby='', 
-			 $limit='', $exclude='') 
+    function text_search($search, $fulltext=false, $sortby='',
+			 $limit='', $exclude='')
     {
         // This method implements a simple linear search
         // through all the pages in the database.
@@ -338,8 +338,8 @@ class WikiDB_backend
         include_once('lib/WikiDB/backend/dumb/TextSearchIter.php');
         // ignore $limit
         $pages = $this->get_all_pages(false, $sortby, false, $exclude);
-        return new WikiDB_backend_dumb_TextSearchIter($this, $pages, $search, $fulltext, 
-                                                      array('limit'   => $limit, 
+        return new WikiDB_backend_dumb_TextSearchIter($this, $pages, $search, $fulltext,
+                                                      array('limit'   => $limit,
                                                             'exclude' => $exclude));
     }
 
@@ -348,7 +348,7 @@ class WikiDB_backend
      *
      * @access protected
      * @param $pages     object A TextSearchQuery object.
-     * @param $linkvalue object A TextSearchQuery object for the linkvalues 
+     * @param $linkvalue object A TextSearchQuery object for the linkvalues
      *                          (linkto, relation or backlinks or attribute values).
      * @param $linktype  string One of the 4 linktypes.
      * @param $relation  object A TextSearchQuery object or false.
@@ -471,7 +471,7 @@ class WikiDB_backend
     }
 
     /**
-     * Put the database into a consistent state 
+     * Put the database into a consistent state
      * by reparsing and restoring all pages.
      *
      * This should put the database into a consistent state.
@@ -504,7 +504,7 @@ class WikiDB_backend
         $search = strtolower(trim($search));
         if (!$search)
             return array(array(),array());
-        
+      
         $words = preg_split('/\s+/', $search);
         $exclude = array();
         foreach ($words as $key => $word) {
@@ -517,20 +517,29 @@ class WikiDB_backend
         return array($words, $exclude);
     }
 
-    /** 
+    /**
      * Split the given limit parameter into offset,limit. (offset is optional. default: 0)
-     * Duplicate the PageList function here to avoid loading the whole PageList.php 
-     * Usage: 
+     * Duplicate the PageList function here to avoid loading the whole PageList.php
+     * Usage:
      *   list($offset,$count) = $this->limit($args['limit']);
      */
     function limit($limit) {
-        if (strstr($limit, ','))
-            return split(',', $limit);
-        else
+        if (strstr($limit, ',')) {
+            list($from, $limit) = explode(',', $limit);
+            if ((!empty($from) && !is_numeric($from)) or (!empty($limit) && !is_numeric($limit))) {
+                return $this->error(_("Illegal 'limit' argument: must be numeric"));
+            }
+            return array($from, $limit);
+        }
+        else {
+            if (!empty($limit) && !is_numeric($limit)) {
+                return $this->error(_("Illegal 'limit' argument: must be numeric"));
+            }
             return array(0, $limit);
+        }
     }
-    
-    /** 
+  
+    /**
      * Handle sortby requests for the DB iterator and table header links.
      * Prefix the column with + or - like "+pagename","-mtime", ...
      * supported actions: 'flip_order' "mtime" => "+mtime" => "-mtime" ...
@@ -538,7 +547,7 @@ class WikiDB_backend
      * In PageList all columns are sortable. (patch by DanFr)
      * Here with the backend only some, the rest is delayed to PageList.
      * (some kind of DumbIter)
-     * Duplicate the PageList function here to avoid loading the whole 
+     * Duplicate the PageList function here to avoid loading the whole
      * PageList.php, and it forces the backend specific sortable_columns()
      */
     function sortby ($column, $action, $sortable_columns=false) {
@@ -571,8 +580,8 @@ class WikiDB_backend
             $this->_sortby[$column] = $order;
             return $order . $column;
         } elseif ($action == 'check') {
-            return (!empty($this->_sortby[$column]) or 
-                    ($GLOBALS['request']->getArg('sortby') and 
+            return (!empty($this->_sortby[$column]) or
+                    ($GLOBALS['request']->getArg('sortby') and
                      strstr($GLOBALS['request']->getArg('sortby'),$column)));
         } elseif ($action == 'db') {
             // native sort possible?
@@ -581,7 +590,7 @@ class WikiDB_backend
             if (in_array($column, $sortable_columns))
                 // asc or desc: +pagename, -pagename
                 return $column . ($order == '+' ? ' ASC' : ' DESC');
-            else 
+            else
                 return '';
         }
         return '';
@@ -591,7 +600,7 @@ class WikiDB_backend
         return array('pagename'/*,'mtime','author_id','author'*/);
     }
 
-    // adds surrounding quotes 
+    // adds surrounding quotes
     function quote ($s) { return "'".$s."'"; }
     // no surrounding quotes because we know it's a string
     function qstr ($s)  { return $s; }
@@ -618,14 +627,14 @@ class WikiDB_backend
                           // Problem: date formats are backend specific. Either use unixtime as %d (long),
                           // or the native timestamp format.
                           $entry->time,
-                          $entry->host, 
+                          $entry->host,
                           $entry->user,
                           $entry->request_method,
                           $entry->request,
                           $entry->request_args,
                           $entry->request_uri,
-                          $entry->_ncsa_time($entry->time), 
-                          $entry->status, 
+                          $entry->_ncsa_time($entry->time),
+                          $entry->status,
                           (int)$entry->size,
                           $entry->referer,
                           $entry->user_agent,
@@ -669,7 +678,7 @@ class WikiDB_backend_iterator
     	if (!empty($this->_pages))
 	    return count($this->_pages);
 	else
-	    return 0;    
+	    return 0;  
     }
 
     function asArray() {
@@ -682,6 +691,15 @@ class WikiDB_backend_iterator
     	        $result[] = $page;
             return $result;
     	}
+    }
+  
+    /**
+     * limit - if empty the pagelist iterator will do nothing.
+     * Some backends limit the result set itself (dba, file, flatfile),
+     * Some SQL based leave it to WikiDB/PageList - deferred filtering in the iterator.
+     */
+    function limit() {
+    	return empty($this->_options['limit']) ? 0 : $this->_options['limit'];
     }
 
     /**
@@ -718,7 +736,7 @@ class WikiDB_backend_search
         return "preg_match(\"/\".$word.\"/\"".($this->_case_exact ? "i":"").")";
     }
     /* Eliminate stoplist words.
-     *  Keep a list of Stoplisted words to inform the poor user. 
+     *  Keep a list of Stoplisted words to inform the poor user.
      */
     function isStoplisted ($node) {
     	// check only on WORD or EXACT fulltext search
@@ -746,7 +764,7 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
         if ($word == '%') // ALL shortcut
             return "1=1";
         else
-            return ($this->_case_exact 
+            return ($this->_case_exact
                     ? "pagename LIKE '$word'"
                     : "LOWER(pagename) LIKE '$word'");
     }
@@ -759,35 +777,11 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
         else
             return $this->_pagename_match_clause($node)
                 // probably convert this MATCH AGAINST or SUBSTR/POSITION without wildcards
-                . ($this->_case_exact ? " OR content LIKE '$word'" 
+                . ($this->_case_exact ? " OR content LIKE '$word'"
                                       : " OR LOWER(content) LIKE '$word'");
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.36  2008/03/17 19:13:22  rurban
-// define default $backend_type
-//
-// Revision 1.35  2007/08/25 18:17:46  rurban
-// rearrange access_log columns into natural order: request_args
-//
-// Revision 1.34  2007/07/14 12:03:51  rurban
-// just typo
-//
-// Revision 1.33  2007/06/07 21:35:04  rurban
-// fixed backend asArray access to iterators (DebugInfo with SQL)
-//
-// Revision 1.32  2007/02/17 14:14:41  rurban
-// enforce accesslog types
-//
-// Revision 1.31  2007/01/28 22:49:55  rurban
-// use backend specific SQL write_accesslog
-//
-// Revision 1.30  2007/01/02 13:20:26  rurban
-// added link_search. Clarify API: sortby,limit and exclude are strings.
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,6 +1,6 @@
 <?php // -*-php-*-
-rcs_id('$Id: AllRevisionsIter.php 6209 2008-08-26 15:30:39Z vargenau $');
-    
+// rcs_id('$Id: AllRevisionsIter.php 7638 2010-08-11 11:58:40Z vargenau $');
+  
 /**
  * An iterator which returns all revisions of page.
  *
@@ -22,7 +22,7 @@ extends WikiDB_backend_iterator
         $this->_pagename = $pagename;
         $this->_lastversion = -1;
     }
-    
+  
     /**
      * Get next revision in sequence.
      *
@@ -42,22 +42,23 @@ extends WikiDB_backend_iterator
         if ($version)
             $vdata = $backend->get_versiondata($pagename, $version);
         //$backend->unlock();
-        
+      
         if ($version == 0)
             return false;
-            
-	if (is_string($vdata)) {
-    	    $vdata =  @unserialize($vdata);
-    	    if (empty($vdata)) {
-    	    	if (DEBUG)
-    	    	    trigger_error ("broken page $pagename ignored", E_USER_WARNING);
+          
+	if (is_string($vdata) and !empty($vdata)) {
+    	    $vdata1 =  @unserialize($vdata);
+    	    if (empty($vdata1)) {
+    	    	if (DEBUG) // string but unseriazible
+    	    	    trigger_error ("Broken page $pagename ignored. Run Check WikiDB", E_USER_WARNING);
     		return false;
     	    }
+    	    $vdata = $vdata1;
 	}
         $rev = array('versiondata' => $vdata,
                      'pagename' => $pagename,
                      'version' => $version);
-        
+      
         if (!empty($vdata['%pagedata'])) {
             $rev['pagedata'] = $vdata['%pagedata'];
         }
@@ -66,12 +67,11 @@ extends WikiDB_backend_iterator
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

@@ -1,11 +1,11 @@
 <?php
 // display.php: fetch page or get default content
-rcs_id('$Id: display.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: display.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/Template.php');
 
 /**
- * Extract keywords from Category* links on page. 
+ * Extract keywords from Category* links on page.
  */
 function GleanKeywords ($page) {
     if (!defined('KEYWORDS')) return '';
@@ -37,9 +37,10 @@ function RedirectorLink($pagename) {
                    $pagename);
 }
 
-    
+/* only on ?action= */  
 function actionPage(&$request, $action) {
     global $WikiTheme;
+    global $robots;
 
     $pagename = $request->getArg('pagename');
     $version = $request->getArg('version');
@@ -51,7 +52,7 @@ function actionPage(&$request, $action) {
     $actionpage = $dbi->getPage($action);
     $actionrev = $actionpage->getCurrentRevision();
 
-    $pagetitle = HTML(fmt("%s: %s", 
+    $pagetitle = HTML(fmt("%s: %s",
                           $actionpage->getName(),
                           $WikiTheme->linkExistingWikiWord($pagename, false, $version)));
 
@@ -63,22 +64,24 @@ function actionPage(&$request, $action) {
                                      '%mtime' => $actionrev->get('mtime')));
 
     $transformedContent = $actionrev->getTransformedContent();
- 
+
    /* Optionally tell google (and others) not to take notice of action pages.
       RecentChanges or AllPages might be an exception.
    */
     $args = array();
-    if (GOOGLE_LINKS_NOFOLLOW)
-	$args = array('ROBOTS_META' => "noindex,nofollow");
+    if (GOOGLE_LINKS_NOFOLLOW) {
+        $robots = "noindex,nofollow";
+	$args = array('ROBOTS_META' => $robots);
+    }
 
     /* Handle other formats: So far we had html only.
-       xml is requested by loaddump, rss is handled by recentchanges, 
+       xml is requested by loaddump, rss is handled by recentchanges,
        pdf is a special action, but should be a format to dump multiple pages
        if the actionpage plugin returns a pagelist.
        rdf and owl are handled by SemanticWeb.
     */
     $format = $request->getArg('format');
-    
+  
     /* At first the single page formats: html, xml */
     if ($pagename == _("LinkDatabase")) {
         $template = Template('browse', array('CONTENT' => $transformedContent));
@@ -87,11 +90,12 @@ function actionPage(&$request, $action) {
 	$template = Template('browse', array('CONTENT' => $transformedContent));
 	GeneratePage($template, $pagetitle, $revision, $args);
     } elseif ($format == 'xml') {
+    	$request->setArg('format','');
 	$template = new Template('browse', $request,
                                  array('revision' => $revision,
                                        'CONTENT'  => $transformedContent,
 				       ));
-	$html = GeneratePageAsXML($template, $pagename, $revision /*, 
+	$html = GeneratePageAsXML($template, $pagename, $revision /*,
 				  array('VALID_LINKS' => $args['VALID_LINKS'])*/);
 	header("Content-Type: application/xhtml+xml; charset=" . $GLOBALS['charset']);
 	echo $html;
@@ -106,21 +110,21 @@ function actionPage(&$request, $action) {
 	        $loader = new WikiPluginLoader;
 	        $markup = null;
 	        // return the first found pagelist
-	        $pagelist = $loader->expandPI($cached_element->_pi, $request, 
+	        $pagelist = $loader->expandPI($cached_element->_pi, $request,
 	                                      $markup, $pagename);
 	        if (is_a($pagelist, 'PageList'))
 	            break;
 	    }
 	}
-        $args['VALID_LINKS'] = array($pagename);
         if (!$pagelist or !is_a($pagelist, 'PageList')) {
 	    if (!in_array($format, array("rss91","rss2","rss","atom","rdf")))
-		trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.", 
+		trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.",
 				      $format)
 			      ."\n".("Fall back to single page mode"), E_USER_WARNING);
 	    require_once('lib/PageList.php');
 	    $pagelist = new PageList();
-	    $pagelist->addPage($page);
+	    if ($format == 'pdf')
+	        $pagelist->addPage($page);
 	} else {
             foreach ($pagelist->_pages as $page) {
             	$name = $page->getName();
@@ -130,16 +134,20 @@ function actionPage(&$request, $action) {
 	}
 	if ($format == 'pdf') {
 	    require_once("lib/pdf.php");
+	    array_unshift($args['VALID_LINKS'], $pagename);
 	    ConvertAndDisplayPdfPageList($request, $pagelist, $args);
 	}
 	elseif ($format == 'ziphtml') { // need to fix links
 	    require_once('lib/loadsave.php');
+	    array_unshift($args['VALID_LINKS'], $pagename);
 	    $request->setArg('zipname', FilenameForPage($pagename).".zip");
 	    $request->setArg('pages', $args['VALID_LINKS']);
+	    $request->setArg('format','');
 	    MakeWikiZipHtml($request);
-	} // time-sorted RDF แ la RecentChanges 
+	} // time-sorted RDF รก la RecentChanges
 	elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
             $args = $request->getArgs();
+            //$request->setArg('format','');
             if ($pagename == _("RecentChanges")) {
                 $template->printExpansion($args);
 	    } else {
@@ -147,6 +155,22 @@ function actionPage(&$request, $action) {
 	        $plugin = new WikiPlugin_RecentChanges();
                 return $plugin->format($plugin->getChanges($request->_dbi, $args), $args);
 	    }
+	} elseif ($format == 'json') { // for faster autocompletion on searches
+	    $req_args =& $request->args;
+	    unset($req_args['format']);
+            $json = array('count' => count($pagelist->_pages),
+                          'list'  => $args['VALID_LINKS'],
+                          'args'  => $req_args,
+                          'phpwiki-version' => PHPWIKI_VERSION);
+            if (loadPhpExtension('json')) {
+                $json_enc = json_encode($json);
+            } else {
+                require_once("lib/pear/JSON.php");
+                $j = new Services_JSON();
+                $json_enc = $j->encode($json);
+            }
+            header("Content-Type: application/json");
+            die($json_enc);
 	} elseif ($format == 'rdf') { // all semantic relations and attributes
 	    require_once("lib/SemanticWeb.php");
 	    $rdf = new RdfWriter($request, $pagelist);
@@ -174,6 +198,7 @@ function actionPage(&$request, $action) {
 
 function displayPage(&$request, $template=false) {
     global $WikiTheme;
+    global $robots;
     $pagename = $request->getArg('pagename');
     $version = $request->getArg('version');
     $page = $request->getPage();
@@ -182,10 +207,36 @@ function displayPage(&$request, $template=false) {
         if (!$revision)
             NoSuchRevision($request, $page, $version);
         /* Tell Google (and others) to ignore old versions of pages */
-	$toks['ROBOTS_META'] = "noindex,nofollow";
+        $robots = "noindex,nofollow";
+	$toks['ROBOTS_META'] = $robots;
     }
     else {
         $revision = $page->getCurrentRevision();
+    }
+    $format = $request->getArg('format');
+    if ($format == 'xml') {  // fast ajax: include page content asynchronously
+        global $charset;
+        header("Content-Type: text/xml");
+        echo "<","?xml version=\"1.0\" encoding=\"$charset\"?", ">\n";
+        // DOCTYPE html needed to allow unencoded entities like &nbsp; without !CDATA[]
+        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',"\n";
+	if ($page->exists()) {
+	    header("Last-Modified: " . Rfc1123DateTime($revision->get('mtime')));
+	    $request->cacheControl();
+	    $request->setArg('format','');
+            $page_content = $revision->getTransformedContent();
+            $page_content->printXML();
+            $request->_is_buffering_output = false; // avoid wrong Content-Length with errors
+            $request->finish();
+        }
+        else {
+	    $request->cacheControl();
+            echo('<div style="display:none;" />');
+            $request->_is_buffering_output = false; // avoid wrong Content-Length with errors
+            $request->finish();
+            exit();
+        }
     }
 
     if (isSubPage($pagename)) {
@@ -224,8 +275,8 @@ function displayPage(&$request, $template=false) {
         $redirect_message = HTML::span(array('class' => 'redirectfrom'),
                                        fmt("(Redirected from %s)",
                                            RedirectorLink($redirect_from)));
-    // abuse the $redirected template var for some status update notice                                       
-    } elseif ($request->getArg('errormsg')) { 
+    // abuse the $redirected template var for some status update notice                                     
+    } elseif ($request->getArg('errormsg')) {
         $redirect_message = $request->getArg('errormsg');
         $request->setArg('errormsg', false);
     }
@@ -249,7 +300,7 @@ function displayPage(&$request, $template=false) {
     $toks['HEADER'] = $pageheader; // h1 with backlink
     $toks['revision'] = $revision;
 
-    // On external searchengine (google) referrer, highlight the searchterm and 
+    // On external searchengine (google) referrer, highlight the searchterm and
     // pass through the Searchhighlight actionpage.
     if ($result = isExternalReferrer($request)) {
     	if (!empty($result['query'])) {
@@ -257,7 +308,7 @@ function displayPage(&$request, $template=false) {
                 $request->_searchhighlight = $result;
                 $request->appendValidators(array('%mtime' => time())); // force no cache(?)
                 // Should be changed to check the engine and search term only
-                // $request->setArg('nocache', 1); 
+                // $request->setArg('nocache', 1);
                 $page_content = new TransformedText($revision->getPage(),
                                                     $revision->getPackedContent(),
                                                     $revision->getMetaData());
@@ -267,7 +318,7 @@ function displayPage(&$request, $template=false) {
                 if ($actionpage = $request->findActionPage('SearchHighlight')) {
                     $actionpage = $request->getPage($actionpage);
                     $actionrev = $actionpage->getCurrentRevision();
-                    $pagetitle = HTML(fmt("%s: %s", 
+                    $pagetitle = HTML(fmt("%s: %s",
                                           $actionpage->getName(),
                                           $WikiTheme->linkExistingWikiWord($pagename, false, $version)));
                     $request->appendValidators(array('actionpagerev' => $actionrev->getVersion(),
@@ -289,24 +340,31 @@ function displayPage(&$request, $template=false) {
     } else {
         $page_content = $revision->getTransformedContent();
     }
-   
+ 
     /* Check for special pagenames, which are no actionpages. */
     /*
     if ( $pagename == _("RecentVisitors")) {
-        $toks['ROBOTS_META']="noindex,follow";
+        $robots = "noindex,follow";
+        $toks['ROBOTS_META'] = $robots;
     } else
     */
     if ($pagename == _("SandBox")) {
-        $toks['ROBOTS_META']="noindex,nofollow";
+        $robots = "noindex,nofollow";
+        $toks['ROBOTS_META'] = $robots;
+    } else if (isActionPage($pagename)) {
+        // AllPages must not be indexed, but must be followed to get all pages
+        $robots = "noindex,follow";
+        $toks['ROBOTS_META'] = $robots;
     } else if (!isset($toks['ROBOTS_META'])) {
-        $toks['ROBOTS_META'] = "index,follow";
+        $robots = "index,follow";
+        $toks['ROBOTS_META'] = $robots;
     }
     if (!isset($toks['CONTENT']))
         $toks['CONTENT'] = new Template('browse', $request, $page_content);
     if (!empty($redirect_message))
         $toks['redirected'] = $redirect_message;
 
-    // Massive performance problem parsing at run-time into all xml objects 
+    // Massive performance problem parsing at run-time into all xml objects
     // looking for p's. Should be optional, if not removed at all.
     //$toks['PAGE_DESCRIPTION'] = $page_content->getDescription();
     $toks['PAGE_KEYWORDS'] = GleanKeywords($page);
@@ -314,17 +372,13 @@ function displayPage(&$request, $template=false) {
         $template = new Template('html', $request);
 
     // Handle other formats: So far we had html only.
-    // xml is requested by loaddump, rss is handled by RecentChanges, 
+    // xml is requested by loaddump, rss is handled by RecentChanges,
     // pdf is a special action, but should be a format to dump multiple pages
     // if the actionpage plugin returns a pagelist.
     // rdf, owl, kbmodel, daml, ... are handled by SemanticWeb.
-    $format = $request->getArg('format');
     /* Only single page versions. rss only if not already handled by RecentChanges.
      */
     if (!$format or $format == 'html' or $format == 'sidebar' or $format == 'contribs') {
-	$template->printExpansion($toks);
-    } elseif ($format == 'xml') {
-        $template = new Template('htmldump', $request);
 	$template->printExpansion($toks);
     } else {
 	// No pagelist here. Single page version only
@@ -333,12 +387,14 @@ function displayPage(&$request, $template=false) {
 	$pagelist->addPage($page);
 	if ($format == 'pdf') {
 	    require_once("lib/pdf.php");
+	    $request->setArg('format','');
 	    ConvertAndDisplayPdfPageList($request, $pagelist);
 	// time-sorted rdf a la RecentChanges
 	} elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
+	    //$request->setArg('format','');
             if ($pagename == _("RecentChanges"))
                 $template->printExpansion($toks);
-            else {    
+            else {  
 	        require_once("lib/plugin/RecentChanges.php");
 	        $plugin = new WikiPlugin_RecentChanges();
                 $args = $request->getArgs();
@@ -352,6 +408,27 @@ function displayPage(&$request, $template=false) {
 	    require_once("lib/SemanticWeb.php");
 	    $rdf = new OwlWriter($request, $pagelist);
 	    $rdf->format();
+	} elseif ($format == 'json') { // include page content asynchronously
+	    $request->setArg('format','');
+	    if ($page->exists())
+            	$content = $page_content->asXML();
+            else
+                $content = '';
+	    $req_args = $request->args;
+	    unset($req_args['format']);
+	    // no meta-data so far, just the content
+            $json = array('content' => $content,
+                          'args'    => $req_args,
+                          'phpwiki-version' => PHPWIKI_VERSION);
+            if (loadPhpExtension('json')) {
+                $json_enc = json_encode($json);
+            } else {
+                require_once("lib/pear/JSON.php");
+                $j = new Services_JSON();
+                $json_enc = $j->encode($json);
+            }
+            header("Content-Type: application/json");
+            die($json_enc);
 	} else {
 	    if (!in_array($pagename, array(_("LinkDatabase"))))
 		trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
@@ -359,131 +436,16 @@ function displayPage(&$request, $template=false) {
 	    $template->printExpansion($toks);
 	}
     }
-    
+  
     $page->increaseHitCount();
 
-    if ($request->getArg('action') != 'pdf')
+    if ($request->getArg('action') != 'pdf') {
         $request->checkValidators();
-    flush();
+    	flush();
+    }
     return '';
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.78  2008/02/14 18:48:42  rurban
-// VALID_LINKS only for existing pages
-//
-// Revision 1.77  2007/09/12 19:32:29  rurban
-// link only VALID_LINKS with pagelist HTML_DUMP
-//
-// Revision 1.76  2007/08/10 21:59:27  rurban
-// fix missing PageList dependency
-// add format=rdfs
-//
-// Revision 1.75  2007/07/01 09:17:45  rurban
-// add ATOM support, a very questionable format
-//
-// Revision 1.74  2007/06/07 17:01:27  rurban
-// actionPage has no toks: fix format=rss* on actionpages
-//
-// Revision 1.73  2007/05/30 20:43:31  rurban
-// added MonoBook UserContribs
-//
-// Revision 1.72  2007/05/13 18:13:12  rurban
-// LinkDatabase format exceptions
-//
-// Revision 1.71  2007/02/17 22:39:05  rurban
-// format=rss overhaul
-//
-// Revision 1.70  2007/01/22 23:43:06  rurban
-// Add RecentChanges format=sidebar
-//
-// Revision 1.69  2007/01/20 15:53:51  rurban
-// Rewrite of SearchHighlight: through ActionPage and InlineParser
-//
-// Revision 1.68  2007/01/20 11:25:19  rurban
-// actionPage: request is already global
-//
-// Revision 1.67  2007/01/07 18:44:20  rurban
-// Support format handlers for single- and multi-page: pagelists from actionpage plugins. Use USE_SEARCHHIGHLIGHT. Fix InlineHighlight (still experimental).
-//
-// Revision 1.66  2006/03/19 14:26:29  rurban
-// sf.net patch by Matt Brown: Add rel=nofollow to more actions
-//
-// Revision 1.65  2005/05/05 08:54:40  rurban
-// fix pagename split for title and header
-//
-// Revision 1.64  2005/04/23 11:21:55  rurban
-// honor theme-specific SplitWikiWord in the HEADER
-//
-// Revision 1.63  2004/11/30 17:48:38  rurban
-// just comments
-//
-// Revision 1.62  2004/11/30 09:51:35  rurban
-// changed KEYWORDS from pageprefix to search term. added installer detection.
-//
-// Revision 1.61  2004/11/21 11:59:19  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.60  2004/11/19 19:22:03  rurban
-// ModeratePage part1: change status
-//
-// Revision 1.59  2004/11/17 20:03:58  rurban
-// Typo: call SearchHighlight not SearchHighLight
-//
-// Revision 1.58  2004/11/09 17:11:16  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.57  2004/11/01 10:43:57  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.56  2004/10/14 13:44:14  rurban
-// fix lib/display.php:159: Warning[2]: Argument to array_reverse() should be an array
-//
-// Revision 1.55  2004/09/26 14:58:35  rurban
-// naive SearchHighLight implementation
-//
-// Revision 1.54  2004/09/17 14:19:41  rurban
-// disable Content-Type header for now, until it is fixed
-//
-// Revision 1.53  2004/06/25 14:29:20  rurban
-// WikiGroup refactoring:
-//   global group attached to user, code for not_current user.
-//   improved helpers for special groups (avoid double invocations)
-// new experimental config option ENABLE_XHTML_XML (fails with IE, and document.write())
-// fixed a XHTML validation error on userprefs.tmpl
-//
-// Revision 1.52  2004/06/14 11:31:37  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.51  2004/05/18 16:23:39  rurban
-// rename split_pagename to SplitPagename
-//
-// Revision 1.50  2004/05/04 22:34:25  rurban
-// more pdf support
-//
-// Revision 1.49  2004/04/18 01:11:52  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

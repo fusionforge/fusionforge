@@ -1,7 +1,23 @@
 <?php //-*-php-*-
-rcs_id('$Id: POP3.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004 $ThePhpWikiProgrammingTeam
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: POP3.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once("lib/WikiUser/IMAP.php");
@@ -15,11 +31,11 @@ extends _IMAPPassUser {
     function checkPass($submitted_password) {
         if (!$this->isValidName()) {
             trigger_error(_("Invalid username."), E_USER_WARNING);
-	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed isValidName", E_USER_WARNING);
+            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed isValidName", E_USER_WARNING);
             return $this->_tryNextPass($submitted_password);
         }
         if (!$this->_checkPassLength($submitted_password)) {
-	    if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed checkPassLength", E_USER_WARNING);
+            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed checkPassLength", E_USER_WARNING);
             return WIKIAUTH_FORBIDDEN;
         }
         $userid = $this->_userid;
@@ -28,7 +44,7 @@ extends _IMAPPassUser {
         if (defined('POP3_AUTH_PORT'))
             $port = POP3_AUTH_PORT;
         elseif (strstr($host,':')) {
-            list(,$port) = split(':',$host);
+            list(,$port) = explode(':', $host);
         } else {
             $port = 110;
         }
@@ -62,7 +78,7 @@ extends _IMAPPassUser {
                           E_USER_WARNING);
         }
         $this->_authmethod = 'POP3';
-	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => $retval", E_USER_WARNING);
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => $retval", E_USER_WARNING);
         if ($retval) {
             $this->_level = WIKIAUTH_USER;
         } else {
@@ -72,36 +88,10 @@ extends _IMAPPassUser {
     }
 
     function __userExists() {
-	if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => true (dummy)", E_USER_WARNING);
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => true (dummy)", E_USER_WARNING);
         return true;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.6  2005/04/23 11:17:41  rurban
-// bug #1186291
-//
-// Revision 1.5  2005/03/19 07:30:52  rurban
-// fixed missing IMAP dependency. Thanks to sun-man
-//
-// Revision 1.4  2004/12/26 17:11:17  rurban
-// just copyright
-//
-// Revision 1.3  2004/12/20 16:05:01  rurban
-// gettext msg unification
-//
-// Revision 1.2  2004/12/19 00:58:02  rurban
-// Enforce PASSWORD_LENGTH_MINIMUM in almost all PassUser checks,
-// Provide an errormessage if so. Just PersonalPage and BogoLogin not.
-// Simplify httpauth logout handling and set sessions for all methods.
-// fix main.php unknown index "x" getLevelDescription() warning.
-//
-// Revision 1.1  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

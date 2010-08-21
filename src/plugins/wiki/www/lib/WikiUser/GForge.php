@@ -1,75 +1,94 @@
 <?php //-*-php-*-
-rcs_id('$Id: GForge.php,v 1.6 2005/08/06 13:21:37 rurban Exp $');
-/* Copyright (C) 2006 Alain Peyrat
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: GForge.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2006 Alain Peyrat
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/** Call the gforge functions to get the username 
- *  
+/** Call the gforge functions to get the username
+ *
  */
 class _GForgePassUser extends _PassUser {
 
+    var $_is_external = 0;
+
     function _GForgePassUser($UserName='',$prefs=false) {
-        if ($prefs) $this->_prefs = $prefs;        
+        if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
            _PassUser::_PassUser($UserName);
         if ($UserName) $this->_userid = $UserName;
         $this->_authmethod = 'GForge';
-        
-        // Is this double check really needed? 
+
+        // Is this double check really needed?
         // It is not expensive so we keep it for now.
         if ($this->userExists())
             return $this;
-        else 
+        else
             return $GLOBALS['ForbiddenUser'];
     }
 
     function userExists() {
-    	global $group_id;
+            global $group_id;
 
-		// Mapping (phpWiki vs GForge) performed is:
-		//     ANON  for non logged or non member
-		//     USER  for member of the project.
-		//     ADMIN for member having admin rights
-		if (session_loggedin()){
+        // Mapping (phpWiki vs GForge) performed is:
+        //     ANON  for non logged or non member
+        //     USER  for member of the project.
+        //     ADMIN for member having admin rights
+        if (session_loggedin()){
 
-			// Get project object (if error => ANON)
-			$project =& group_get_object($group_id);
-			
-			if (!$project || !is_object($project)) {
-		       	$this->_level = WIKIAUTH_ANON;
-				return false;
-			} elseif ($project->isError()) {
-		       	$this->_level = WIKIAUTH_ANON;
-				return false;
-			}
+            // Get project object (if error => ANON)
+            $project =& group_get_object($group_id);
 
-			$member = false ;
-			$user = session_get_user();
-			$perm =& $project->getPermission ();
-			if (!$perm || !is_object($perm)) {
-		       	$this->_level = WIKIAUTH_ANON;
-				return false;
-			} elseif (!$perm->isError()) {
-				$member = $perm->isMember();
-			}
+            if (!$project || !is_object($project)) {
+                $this->_level = WIKIAUTH_ANON;
+                return false;
+            } elseif ($project->isError()) {
+                $this->_level = WIKIAUTH_ANON;
+                return false;
+            }
 
-			if ($member) {			
-				$this->_userid = $user->getRealName();
-				if ($perm->isAdmin()) {
-					$this->_level = WIKIAUTH_ADMIN;
-				} else {
-        			$this->_level = WIKIAUTH_USER;
-				}
-        		return $this;
-        	}
-		}
-       	$this->_level = WIKIAUTH_ANON;
-       	return false;
+            $member = false ;
+            $user = session_get_user();
+            $perm =& $project->getPermission($user);
+            if (!$perm || !is_object($perm)) {
+                $this->_level = WIKIAUTH_ANON;
+                return false;
+            } elseif (!$perm->isError()) {
+                $member = $perm->isMember();
+            }
+
+            if ($member) {
+                $this->_userid = $user->getRealName();
+                $this->_is_external = $user->getIsExternal();
+                if ($perm->isAdmin()) {
+                    $this->_level = WIKIAUTH_ADMIN;
+                } else {
+                    $this->_level = WIKIAUTH_USER;
+                }
+                return $this;
+            }
+        }
+               $this->_level = WIKIAUTH_ANON;
+               return false;
     }
 
     function checkPass($submitted_password) {
-        return $this->userExists() 
+        return $this->userExists()
             ? ($this->isAdmin() ? WIKIAUTH_ADMIN : WIKIAUTH_USER)
             : WIKIAUTH_ANON;
     }
@@ -78,15 +97,6 @@ class _GForgePassUser extends _PassUser {
         return false;
     }
 }
-
-// $Log: GForge.php,v $
-//
-// Revision 1.1  2006/11/01 10:43:58  aljeux
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

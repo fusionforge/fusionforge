@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: FileFinder.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: FileFinder.php 7543 2010-06-17 13:22:59Z vargenau $');
 
 require_once(dirname(__FILE__).'/stdlib.php');
 
@@ -63,8 +63,7 @@ class FileFinder
     	    return $result;
     	} else {
             if (isWindows() or $this->_isOtherPathsep()) {
-                if (isMac()) $from = ":";
-                elseif (isWindows()) $from = "\\";
+                if (isWindows()) $from = "\\";
                 else $from = "\\";
                 // PHP is stupid enough to use \\ instead of \
                 if (isWindows()) {
@@ -119,7 +118,6 @@ class FileFinder
     	if (!empty($this->_pathsep)) return $this->_pathsep;
         elseif (isWindowsNT()) return "/"; // we can safely use '/'
         elseif (isWindows()) return "\\";  // FAT might use '\'
-        elseif (isMac()) return ':';    // MacOsX is /
         // VMS or LispM is really weird, we ignore it.
         else return '/';
     }
@@ -140,9 +138,6 @@ class FileFinder
         if (isWindows95()) {
             if (empty($path)) return "\\";
             else return (strchr($path,"\\")) ? "\\" : '/';
-        } elseif (isMac()) {
-            if (empty($path)) return ":";
-            else return (strchr($path,":")) ? ":" : '/';
         } else {
             return $this->_get_syspath_separator();
         }
@@ -156,9 +151,15 @@ class FileFinder
      * @return bool True if path is absolute. 
      */
     function _is_abs($path) {
-        if (ereg('^/', $path)) return true;
-        elseif (isWindows() and (eregi('^[a-z]:[/\\]', $path))) return true;
-        else return false;
+        if (substr($path,0,1) == '/') {
+            return true;
+        } elseif (isWindows() and preg_match("/^[a-z]:/i", $path)
+                  and (substr($path,3,1) == "/" or substr($path,3,1) == "\\")) 
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -169,13 +170,8 @@ class FileFinder
      * @return bool New path (destructive)
      */
     function _strip_last_pathchar(&$path) {
-        if (isMac()) {
-            if (substr($path,-1) == ':' or substr($path,-1) == "/") 
-                $path = substr($path,0,-1);
-        } else {
-            if (substr($path,-1) == '/' or substr($path,-1) == "\\") 
-                $path = substr($path,0,-1);
-        }
+        if (substr($path,-1) == '/' or substr($path,-1) == "\\") 
+            $path = substr($path,0,-1);
         return $path;
     }
 
@@ -572,90 +568,6 @@ function isWindowsNT() {
         $winnt = false;         // FIXME: punt.
     return $winnt;
 }
-
-/** 
- * This is for the OLD Macintosh OS, NOT MacOSX or Darwin!
- * This has really ugly pathname semantics.
- * ":path" is relative, "Desktop:path" (I think) is absolute. 
- * FIXME: Please fix this someone. So far not supported.
- */
-function isMac() {
-    return (substr(PHP_OS,0,9) == 'Macintosh'); // not tested!
-}
-
-// probably not needed, same behaviour as on unix.
-function isCygwin() {
-    return (substr(PHP_OS,0,6) == 'CYGWIN');
-}
-
-// $Log: not supported by cvs2svn $
-// Revision 1.32  2007/01/04 16:44:47  rurban
-// Remove VMS from internal note.
-//
-// Revision 1.31  2005/02/28 21:24:32  rurban
-// ignore forbidden ini_set warnings. Bug #1117254 by Xavier Roche
-//
-// Revision 1.30  2004/11/10 19:32:21  rurban
-// * optimize increaseHitCount, esp. for mysql.
-// * prepend dirs to the include_path (phpwiki_dir for faster searches)
-// * Pear_DB version logic (awful but needed)
-// * fix broken ADODB quote
-// * _extract_page_data simplification
-//
-// Revision 1.29  2004/11/09 17:11:03  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.28  2004/11/06 17:02:33  rurban
-// Workaround some php-win \\ duplication bug
-//
-// Revision 1.27  2004/10/14 19:23:58  rurban
-// remove debugging prints
-//
-// Revision 1.26  2004/10/14 19:19:33  rurban
-// loadsave: check if the dumped file will be accessible from outside.
-// and some other minor fixes. (cvsclient native not yet ready)
-//
-// Revision 1.25  2004/10/12 13:13:19  rurban
-// php5 compatibility (5.0.1 ok)
-//
-// Revision 1.24  2004/08/05 17:33:51  rurban
-// strange problem with WikiTheme
-//
-// Revision 1.23  2004/06/19 12:33:25  rurban
-// prevent some warnings in corner cases
-//
-// Revision 1.22  2004/06/14 11:31:20  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.21  2004/06/02 18:01:45  rurban
-// init global FileFinder to add proper include paths at startup
-//   adds PHPWIKI_DIR if started from another dir, lib/pear also
-// fix slashify for Windows
-// fix USER_AUTH_POLICY=old, use only USER_AUTH_ORDER methods (besides HttpAuth)
-//
-// Revision 1.20  2004/05/27 17:49:05  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-//
 
 // Local Variables:
 // mode: php

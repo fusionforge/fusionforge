@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RssParser.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: RssParser.php 7641 2010-08-11 13:00:46Z vargenau $');
 /**
  * Simple RSSParser Class
  * Based on Duncan Gough RSSParser class
@@ -12,27 +12,27 @@ rcs_id('$Id: RssParser.php 6184 2008-08-22 10:33:41Z vargenau $');
  */
 
 /*
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * 2004-04-09 16:30:50 rurban: 
+ * 2004-04-09 16:30:50 rurban:
  *   added fsockopen allow_url_fopen = Off workaround
- * 2004-04-12 20:04:12 rurban: 
+ * 2004-04-12 20:04:12 rurban:
  *   fixes for IMAGE element (sf.net)
  * 2005-04-10 11:17:35 rurban
  *   certain RSS dont contain <item> tags to describe the list of <items>
@@ -41,10 +41,12 @@ rcs_id('$Id: RssParser.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 require_once('lib/XmlParser.php');
 
-class RSSParser 
+class RSSParser
 extends XmlParser {
 
     var $title = "";
+    var $author = "";
+    var $pubDate = "";
     var $link  = "";
     var $description = "";
     var $inside_item = false;
@@ -73,7 +75,7 @@ extends XmlParser {
 
         if ($tagName == "ITEM") {
             if (empty($this->items)) {
-                $this->items = array();	
+                $this->items = array();
                 $GLOBALS['rss_parser_items'] =& $this->items;
             } elseif (!empty($this->items[0]['link']) and $this->items[0]['title'] == '') {
             	// override the initial <items> list with detailed <item>'s
@@ -81,6 +83,8 @@ extends XmlParser {
                 $GLOBALS['rss_parser_items'] =& $this->items;
             }
             $this->items[] = array("title"       => $this->item['TITLE'],
+                                   "author"      => $this->item['AUTHOR'],
+                                   "pubDate"     => $this->item['PUBDATE'],
                                    "description" => @$this->item['DESCRIPTION'],
                                    "link"        => $this->item['LINK']);
             $this->item = array("TITLE"       => "",
@@ -156,11 +160,11 @@ extends XmlParser {
             }
         }
     }
-    
+
     function parse($content, $is_final = true) {
-        xml_parse($this->_parser, $content, $is_final) or 
-            trigger_error(sprintf("XML error: %s at line %d", 
-                                  xml_error_string(xml_get_error_code($this->_parser)), 
+        xml_parse($this->_parser, $content, $is_final) or
+            trigger_error(sprintf("XML error: %s at line %d",
+                                  xml_error_string(xml_get_error_code($this->_parser)),
                                   xml_get_current_line_number($this->_parser)),
                           E_USER_WARNING);
         //OO workaround: parser object looses its params. we have to store them in globals
@@ -175,33 +179,6 @@ extends XmlParser {
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.10  2005/01/22 11:45:09  rurban
-// docs
-//
-// Revision 1.9  2004/06/08 21:12:02  rurban
-// is_final fix for incremental parsing
-//
-// Revision 1.8  2004/06/08 21:03:20  rurban
-// updated RssParser for XmlParser quirks (store parser object params in globals)
-//
-// Revision 1.7  2004/05/24 17:31:31  rurban
-// new XmlParser and HtmlParser, RssParser based on that.
-//
-// Revision 1.6  2004/05/18 16:18:36  rurban
-// AutoSplit at subpage seperators
-// RssFeed stability fix for empty feeds or broken connections
-//
-// Revision 1.5  2004/04/26 20:44:34  rurban
-// locking table specific for better databases
-//
-// Revision 1.4  2004/04/18 01:11:51  rurban
-// more numeric pagename fixes.
-// fixed action=upload with merge conflict warnings.
-// charset changed from constant to global (dynamic utf-8 switching)
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: PageType.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: PageType.php 7641 2010-08-11 13:00:46Z vargenau $');
 /*
- Copyright 1999,2000,2001,2002,2003,2004,2005,2006 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999,2000,2001,2002,2003,2004,2005,2006 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('lib/CachedMarkup.php');
@@ -57,7 +57,7 @@ class TransformedText extends CacheableMarkup {
  * Currently the only information encapsulated is how to format
  * the specific page type.  In the future or capabilities may be
  * added, e.g. the abilities to edit different page types (differently.)
- * e.g. Support for the javascript htmlarea editor, which can only edit 
+ * e.g. Support for the javascript htmlarea editor, which can only edit
  * pure HTML.
  *
  * IMPORTANT NOTE: Since the whole PageType class gets stored (serialized)
@@ -142,7 +142,7 @@ class PageType_interwikimap extends PageType
                 trigger_error(_("WARNING: InterWikiMap page is unlocked, so not using those links."));
                 $intermap = false;
             }
-            else 
+            else
                 $intermap = false;
         } else {
             $intermap = $this->_getMapFromWikiText($pagetext);
@@ -170,8 +170,8 @@ class PageType_interwikimap extends PageType
 
     function link ($link, $linktext = false) {
 	global $WikiTheme;
-        list ($moniker, $page) = split (":", $link, 2);
-        
+        list ($moniker, $page) = explode (":", $link, 2);
+
         if (!isset($this->_map[$moniker])) {
             return HTML::span(array('class' => 'bad-interwiki'),
                               $linktext ? $linktext : $link);
@@ -198,7 +198,7 @@ class PageType_interwikimap extends PageType
         	$link_prefix = NormalizeWebFileName(substr($url, strlen($wikiroot)));
 	    }
 	}
-        
+
         // Urlencode page only if it's a query arg.
         // FIXME: this is a somewhat broken heuristic.
         if ($moniker == 'Upload') {
@@ -223,7 +223,7 @@ class PageType_interwikimap extends PageType
             $link->pushContent(PossiblyGlueIconToText('interwiki', $linktext));
             $link->setAttr('class', 'named-interwiki');
         }
-        
+
         return $link;
     }
 
@@ -240,13 +240,13 @@ class PageType_interwikimap extends PageType
         // Add virtual monikers: "Upload:" "Talk:" "User:", ":"
         // and expand special variables %u, %b, %d
 
-        // Upload: Should be expanded later to user-specific upload dirs. 
+        // Upload: Should be expanded later to user-specific upload dirs.
         // In the Upload plugin, not here: Upload:ReiniUrban/uploaded-file.png
         if (empty($map['Upload'])) {
             $map['Upload'] = getUploadDataPath();
         }
         // User:ReiniUrban => ReiniUrban or Users/ReiniUrban
-        // Can be easily overriden by a customized InterWikiMap: 
+        // Can be easily overriden by a customized InterWikiMap:
         //   User Users/%s
         if (empty($map["User"])) {
             $map["User"] = "%s";
@@ -270,15 +270,15 @@ class PageType_interwikimap extends PageType
             // %s is expanded later to the pagename
             if (strstr($map[$special], '%u'))
                 $map[$special] = str_replace($map[$special],
-                                             '%u', 
+                                             '%u',
                                              $GLOBALS['request']->_user->_userid);
             if (strstr($map[$special], '%b'))
                 $map[$special] = str_replace($map[$special],
-                                             '%b', 
+                                             '%b',
                                              PHPWIKI_BASE_URL);
             if (strstr($map[$special], '%d'))
                 $map[$special] = str_replace($map[$special],
-                                             '%d', 
+                                             '%d',
                                              // such as 2003-01-11T14:03:02+00:00
                                              Iso8601DateTime());
         }
@@ -295,7 +295,7 @@ class PageType_interwikimap extends PageType
 
     function _getMapFromFile ($filename) {
         if (defined('WARN_NONPUBLIC_INTERWIKIMAP') and WARN_NONPUBLIC_INTERWIKIMAP) {
-            $error_html = sprintf(_("Loading InterWikiMap from external file %s."), 
+            $error_html = sprintf(_("Loading InterWikiMap from external file %s."),
                                   $filename);
             trigger_error( $error_html, E_USER_NOTICE );
         }
@@ -313,7 +313,7 @@ class PageType_interwikimap extends PageType
     function _getRegexp () {
         if (!$this->_map)
             return '(?:(?!a)a)'; //  Never matches.
-        
+
         foreach (array_keys($this->_map) as $moniker)
             $qkeys[] = preg_quote($moniker, '/');
         return "(?:" . join("|", $qkeys) . ")";
@@ -335,7 +335,7 @@ class PageFormatter {
 	if (!empty($meta['markup']))
 	    $this->_markup = $meta['markup'];
 	else
-	    $this->_markup = 2; // dump used old-markup as empty. 
+	    $this->_markup = 2; // dump used old-markup as empty.
         // FIXME: To be able to restore old plain-backups we should keep markup 1 as default.
         // New policy: default = new markup (old crashes quite often)
     }
@@ -355,7 +355,7 @@ class PageFormatter {
     }
 }
 
-class PageFormatter_wikitext extends PageFormatter 
+class PageFormatter_wikitext extends PageFormatter
 {
     function format(&$text) {
 	return HTML::div(array('class' => 'wikitext'),
@@ -379,12 +379,12 @@ class PageFormatter_interwikimap extends PageFormatter
     function _getFooter($text) {
 	return preg_replace('@.*?(</verbatim>|\Z)@s', '', $text, 1);
     }
-    
+
     function _getMap($pagetext) {
         $map = getInterwikiMap($pagetext, 'force');
         return $map->_map;
     }
-    
+
     function _formatMap($pagetext) {
 	$map = $this->_getMap($pagetext);
 	if (!$map)
@@ -392,14 +392,14 @@ class PageFormatter_interwikimap extends PageFormatter
 
         $mon_attr = array('class' => 'interwiki-moniker');
         $url_attr = array('class' => 'interwiki-url');
-        
+
         $thead = HTML::thead(HTML::tr(HTML::th($mon_attr, _("Moniker")),
 				      HTML::th($url_attr, _("InterWiki Address"))));
 	foreach ($map as $moniker => $interurl) {
 	    $rows[] = HTML::tr(HTML::td($mon_attr, new Cached_WikiLinkIfKnown($moniker)),
 			       HTML::td($url_attr, HTML::tt($interurl)));
         }
-	
+
 	return HTML::table(array('class' => 'interwiki-map'),
 			   $thead,
 			   HTML::tbody(false, $rows));
@@ -422,7 +422,7 @@ class FakePageRevision {
 class PageFormatter_attach extends PageFormatter
 {
     var $type, $prefix;
-    
+
     // Display templated contents for wikiblog, comment and wikiforum
     function format($text) {
     	if (empty($this->type))
@@ -439,7 +439,7 @@ class PageFormatter_attach extends PageFormatter
         $meta = $this->_meta[$this->type];
         foreach(array('ctime', 'creator', 'creator_id') as $key)
             $tokens[$this->prefix . "_" . strtoupper($key)] = $meta[$key];
-        
+
         return new Template($this->type, $request, $tokens);
     }
 }
@@ -454,12 +454,12 @@ class PageFormatter_wikiforum extends PageFormatter_attach {
     var $type = 'wikiforum', $prefix = "FORUM";
 }
 
-/** wikiabuse for htmlarea editing. not yet used.  
+/** wikiabuse for htmlarea editing. not yet used.
  *
  * Warning! Once a page is edited with a htmlarea like control it is
  * stored in HTML and cannot be converted back to WikiText as long as
- * we have no HTML => WikiText or any other interim format (WikiExchangeFormat e.g. XML) 
- * converter. See lib/HtmlParser.php for ongoing work on that. 
+ * we have no HTML => WikiText or any other interim format (WikiExchangeFormat e.g. XML)
+ * converter. See lib/HtmlParser.php for ongoing work on that.
  * So it has a viral effect and certain plugins will not work anymore.
  * But a lot of wikiusers seem to like it.
  */
@@ -497,7 +497,7 @@ class PageFormatter_pdf extends PageFormatter
 
         // We can make use of several pdf extensions. This one - fpdf
         // - is pure php and very easy, but looks quite ugly and has a
-        // terrible interface, as terrible as most of the othes. 
+        // terrible interface, as terrible as most of the othes.
         // The closest to HTML is htmldoc which needs an external cgi
         // binary.
         // We use a custom HTML->PDF class converter from PHPWebthings
@@ -545,67 +545,6 @@ class PageFormatter_MediaWiki extends PageFormatter
     }
 }
 
-
-// $Log: not supported by cvs2svn $
-// Revision 1.54  2007/09/12 19:35:29  rurban
-// Windows fix for local path detection
-//
-// Revision 1.53  2007/07/14 17:55:29  rurban
-// SemanticWeb.php
-//
-// Revision 1.52  2007/02/17 14:17:41  rurban
-// localize Upload:links for WIKIDUMP: esp. for pdf images
-//
-// Revision 1.51  2007/01/07 18:43:17  rurban
-// Disallow ":" as interwikmap and use it as proper LinkedBracket match.
-//
-// Revision 1.50  2007/01/04 16:44:57  rurban
-// Force interwiki updates and page edits
-//
-// Revision 1.49  2006/10/12 06:25:09  rurban
-// use the same class for $moniker == ""
-//
-// Revision 1.48  2006/10/08 12:38:11  rurban
-// New special interwiki link markup [:LinkTo] without storing the backlink
-//
-// Revision 1.47  2005/08/07 09:14:38  rurban
-// fix comments
-//
-// Revision 1.46  2005/08/06 13:09:33  rurban
-// allow spaces in interwiki paths, even implicitly. fixes bug #1218733
-//
-// Revision 1.45  2005/05/06 16:48:41  rurban
-// support %u, %b, %d expansion for Upload: User: and Talk: interwiki monikers
-//
-// Revision 1.44  2005/04/23 11:07:34  rurban
-// cache map
-//
-// Revision 1.43  2005/02/02 20:40:12  rurban
-// fix Talk: and User: names and links
-//
-// Revision 1.42  2005/02/02 19:36:56  rurban
-// more plans
-//
-// Revision 1.41  2005/02/02 19:34:09  rurban
-// more maps: Talk, User
-//
-// Revision 1.40  2005/01/31 12:15:08  rurban
-// avoid some cornercase intermap warning. Thanks to Stefan <sonstiges@bayern-mail.de>
-//
-// Revision 1.39  2005/01/25 06:59:35  rurban
-// fix bogus InterWikiMap warning
-//
-// Revision 1.38  2004/12/26 17:10:44  rurban
-// just docs or whitespace
-//
-// Revision 1.37  2004/12/06 19:49:55  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
 
 // Local Variables:
 // mode: php

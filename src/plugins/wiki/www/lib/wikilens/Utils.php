@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: Utils.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: Utils.php 7641 2010-08-11 13:00:46Z vargenau $');
 /*
- Copyright 2004 Mike Cassano
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2004 Mike Cassano
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -25,7 +25,7 @@ rcs_id('$Id: Utils.php 6184 2008-08-22 10:33:41Z vargenau $');
 
 function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM) {
     // This is largely lifted from the TranslateText plugin, which performs a
-    // similar set of functions (retrieves a user's homepage, modifies it 
+    // similar set of functions (retrieves a user's homepage, modifies it
     // progmatically, and saves the changes)
     $homepage = $user->_HomePagehandle;
     $transpagename = $homepage->getName();
@@ -44,7 +44,7 @@ function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM) {
     // add new data to the appropriate line
     if(preg_match('/^' . preg_quote($START_DELIM) . '/', $text)) {
         // need multiline modifier to match EOL correctly
-        $text = preg_replace('/(^' . preg_quote($START_DELIM) . '.*)$/m', 
+        $text = preg_replace('/(^' . preg_quote($START_DELIM) . '.*)$/m',
                              '$1' . $DELIM . $new_data, $text);
     } else {
         // handle case where the line does not yet exist
@@ -54,10 +54,10 @@ function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM) {
     // advance version counter, save
     $page->save($text, $version + 1, $meta);
 }
- 
+
 function getMembers($groupName, $dbi, $START_DELIM = false, $DELIM = ",") {
-    if (!$START_DELIM) $START_DELIM = _("Members:");	
-    return getPageTextData($groupName, $dbi, $START_DELIM, $DELIM);	
+    if (!$START_DELIM) $START_DELIM = _("Members:");
+    return getPageTextData($groupName, $dbi, $START_DELIM, $DELIM);
 }
 
 function getPageTextData($fromUser, $dbi, $START_DELIM, $DELIM) {
@@ -74,16 +74,16 @@ function getPageTextData($fromUser, $dbi, $START_DELIM, $DELIM) {
             if(!((strpos($pageArray[$i], $START_DELIM)) === FALSE)){
             	$p = $i;
                 break;
-            }	
+            }
         }
     }
     $retArray = array();
     if ($p >= 0){
         $singles = $pageArray[$p];
         $singles = substr($singles, strpos($singles, $START_DELIM) + strlen($START_DELIM));
-        
-        $retArray = split($DELIM, $singles);
-    }    
+
+        $retArray = explode($DELIM, $singles);
+    }
     for ($i = 0; $i < count($retArray); $i++) {
         $retArray[$i] = trim($retArray[$i]);
     }
@@ -96,11 +96,6 @@ function getPageTextData($fromUser, $dbi, $START_DELIM, $DELIM) {
 function notEmptyName($var) {
     return $var != "";
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.1  2004/06/18 14:42:17  rurban
-// added wikilens libs (not yet merged good enough, some work for DanFr)
-// 
 
 // Local Variables:
 // mode: php

@@ -1,18 +1,34 @@
 <?php //-*-php-*-
-rcs_id('$Id: HttpAuthUpper.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004,2007 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: HttpAuthUpper.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004,2007 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
  * We have two possibilities here:
- * 1) The webserver location is already HTTP protected. 
- *    Usually Basic by some auth module (ldap, mysql, ...), but also NTLM or Digest. 
+ * 1) The webserver location is already HTTP protected.
+ *    Usually Basic by some auth module (ldap, mysql, ...), but also NTLM or Digest.
  *    Then just use this username and do nothing.
  * 2) The webserver location is not protected, so we enforce basic HTTP Protection
  *    by sending a 401 error and let the client display the login dialog.
  *    This makes only sense if HttpAuth is the last method in USER_AUTH_ORDER,
- *    since the other methods cannot be transparently called after this enforced 
+ *    since the other methods cannot be transparently called after this enforced
  *    external dialog.
  *    Try the available auth methods (most likely Bogo) and sent this header back.
  *    header('Authorization: Basic '.base64_encode("$userid:$passwd")."\r\n";
@@ -24,11 +40,11 @@ extends _PassUser
         if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
            _PassUser::_PassUser($UserName);
-        if ($UserName) 
+        if ($UserName)
             $this->_userid = $UserName;
         $this->_authmethod = 'HttpAuthUpper';
-        
-        // Is this double check really needed? 
+
+        // Is this double check really needed?
         // It is not expensive so we keep it for now.
         if ($this->userExists()) {
             return $this;
@@ -40,8 +56,8 @@ extends _PassUser
     // FIXME! This doesn't work yet!
     // Allow httpauth by other method: Admin for now only
     function _fake_auth($userid, $passwd) {
-    	return false;
-    	
+            return false;
+
         header('WWW-Authenticate: Basic realm="'.WIKI_NAME.'"');
         header("Authorization: Basic ".base64_encode($userid.":".$passwd));
         if (!isset($_SERVER))
@@ -55,14 +71,14 @@ extends _PassUser
     function logout() {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
-        // Maybe we should random the realm to really force a logout. 
+        // Maybe we should random the realm to really force a logout.
         // But the next login will fail.
         // better_srand(); $realm = microtime().rand();
         // TODO: On AUTH_TYPE=NTLM this will fail. Only Basic supported so far.
         header('WWW-Authenticate: Basic realm="'.WIKI_NAME.'"');
         if (strstr(php_sapi_name(), 'apache'))
-            header('HTTP/1.0 401 Unauthorized'); 
-        else    
+            header('HTTP/1.0 401 Unauthorized');
+        else
             header("Status: 401 Access Denied"); //IIS and CGI need that
         unset($GLOBALS['REMOTE_USER']);
         unset($_SERVER['PHP_AUTH_USER']);
@@ -72,38 +88,38 @@ extends _PassUser
     function _http_username() {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
-	if (!empty($_SERVER['PHP_AUTH_USER']))
-	    return $_SERVER['PHP_AUTH_USER'];
-	if (!empty($_SERVER['REMOTE_USER']))
-	    return $_SERVER['REMOTE_USER'];
+        if (!empty($_SERVER['PHP_AUTH_USER']))
+            return $_SERVER['PHP_AUTH_USER'];
+        if (!empty($_SERVER['REMOTE_USER']))
+            return $_SERVER['REMOTE_USER'];
         if (!empty($GLOBALS['HTTP_ENV_VARS']['REMOTE_USER']))
-	    return $GLOBALS['HTTP_ENV_VARS']['REMOTE_USER'];
-	if (!empty($GLOBALS['REMOTE_USER']))
-	    return $GLOBALS['REMOTE_USER'];
-	// IIS + Basic
-	if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
-            list($userid, $passwd) = explode(':', 
+            return $GLOBALS['HTTP_ENV_VARS']['REMOTE_USER'];
+        if (!empty($GLOBALS['REMOTE_USER']))
+            return $GLOBALS['REMOTE_USER'];
+        // IIS + Basic
+        if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
+            list($userid, $passwd) = explode(':',
                 base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
             return $userid;
-	}    
-	return '';
+        }
+        return '';
     }
 
     // special: force upcase username
     function UserName() {
         if (!empty($this->_userid)) {
-	    $this->_userid = strtoupper($this->_userid);
+            $this->_userid = strtoupper($this->_userid);
             return strtoupper($this->_userid);
-	}
+        }
     }
-    
+
     // force http auth authorization
     function userExists() {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
         $username = strtoupper($this->_http_username());
-        if (strstr($username, "\\") 
-            and isset($_SERVER['AUTH_TYPE']) 
+        if (strstr($username, "\\")
+            and isset($_SERVER['AUTH_TYPE'])
             and $_SERVER['AUTH_TYPE'] == 'NTLM')
         {
             // allow domain\user, change userid to domain/user
@@ -113,7 +129,7 @@ extends _PassUser
         }
         // FIXME: if AUTH_TYPE = NTLM there's a domain\\name <> domain\name mismatch
         if (empty($username)
-            or strtolower($username) != strtolower($this->_userid)) 
+            or strtolower($username) != strtolower($this->_userid))
         {
             $this->logout();
             $user = $GLOBALS['ForbiddenUser'];
@@ -123,17 +139,17 @@ extends _PassUser
             //exit;
         }
         $this->_userid = strtoupper($username);
-        // we should check if he is a member of admin, 
+        // we should check if he is a member of admin,
         // because HttpAuth has its own logic.
         $this->_level = WIKIAUTH_USER;
         if ($this->isAdmin())
             $this->_level = WIKIAUTH_ADMIN;
         return $this;
     }
-    
+
     // ignore password, this is checked by the webservers http auth.
     function checkPass($submitted_password) {
-        return $this->userExists() 
+        return $this->userExists()
             ? ($this->isAdmin() ? WIKIAUTH_ADMIN : WIKIAUTH_USER)
             : WIKIAUTH_ANON;
     }
@@ -142,9 +158,6 @@ extends _PassUser
         return false;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.7  2006/09/03 10:10:00  rurban
 
 // Local Variables:
 // mode: php

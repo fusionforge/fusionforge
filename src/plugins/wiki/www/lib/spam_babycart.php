@@ -1,7 +1,7 @@
 <?php
-rcs_id('$Id: spam_babycart.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: spam_babycart.php 7417 2010-05-19 12:57:42Z vargenau $');
 /*
-* $Id: spam_babycart.php 6184 2008-08-22 10:33:41Z vargenau $
+* $Id: spam_babycart.php 7417 2010-05-19 12:57:42Z vargenau $
 * Author: Bob Apthorpe <apthorpe+babycart@cynistar.net>
 * Proof-of-concept PHP fragment to flag blog/wiki spam
 *

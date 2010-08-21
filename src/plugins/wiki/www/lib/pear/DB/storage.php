@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: storage.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: storage.php 7639 2010-08-11 12:15:16Z vargenau $
 
 require_once 'DB.php';
 
@@ -28,7 +28,7 @@ require_once 'DB.php';
  * statements.
  *
  * @package  DB
- * @version  $Id: storage.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: storage.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  * @author   Stig Bakken <stig@php.net>
  */
@@ -487,7 +487,7 @@ class DB_storage extends PEAR
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

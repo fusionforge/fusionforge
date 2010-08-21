@@ -1,7 +1,23 @@
 <?php //-*-php-*-
-rcs_id('$Id: File.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: File.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 class _FilePassUser
@@ -15,7 +31,7 @@ extends _PassUser
 {
     var $_file, $_may_change;
 
-    // This can only be called from _PassUser, because the parent class 
+    // This can only be called from _PassUser, because the parent class
     // sets the pref methods, before this class is initialized.
     function _FilePassUser($UserName='', $prefs=false, $file='') {
         if (!$this->_prefs and isa($this, "_FilePassUser")) {
@@ -29,7 +45,7 @@ extends _PassUser
         if (empty($file) and defined('AUTH_USER_FILE'))
             $file = AUTH_USER_FILE;
         // same style as in main.php
-        include_once(dirname(__FILE__)."/../pear/File_Passwd.php"); 
+        include_once(dirname(__FILE__)."/../pear/File_Passwd.php");
         // "__PHP_Incomplete_Class"
         if (!empty($file) or empty($this->_file) or !isa($this->_file, "File_Passwd"))
             $this->_file = new File_Passwd($file, false, $file.'.lock');
@@ -37,7 +53,7 @@ extends _PassUser
             return false;
         return $this;
     }
- 
+
     function mayChangePass() {
         return $this->_may_change;
     }
@@ -49,7 +65,7 @@ extends _PassUser
         $this->_authmethod = 'File';
         if (isset($this->_file->users[$this->_userid]))
             return true;
-            
+
         return $this->_tryNextUser();
     }
 
@@ -69,7 +85,7 @@ extends _PassUser
                 $this->_level = WIKIAUTH_ADMIN;
             return $this->_level;
         }
-        
+
         return $this->_tryNextPass($submitted_password);
     }
 
@@ -78,7 +94,7 @@ extends _PassUser
             return false;
         }
         if ($this->_may_change) {
-            $this->_file = new File_Passwd($this->_file->filename, true, 
+            $this->_file = new File_Passwd($this->_file->filename, true,
                                            $this->_file->filename.'.lock');
             $result = $this->_file->modUser($this->_userid, $submitted_password);
             $this->_file->close();
@@ -89,35 +105,6 @@ extends _PassUser
     }
 
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.7  2005/08/06 13:21:37  rurban
-// only cosmetics
-//
-// Revision 1.6  2005/05/04 05:37:34  rurban
-// fix #1191096 by Karel
-//
-// Revision 1.5  2005/02/14 12:28:27  rurban
-// fix policy strict. Thanks to Mikhail Vladimirov
-//
-// Revision 1.4  2004/12/26 17:11:16  rurban
-// just copyright
-//
-// Revision 1.3  2004/12/20 16:05:01  rurban
-// gettext msg unification
-//
-// Revision 1.2  2004/12/19 00:58:02  rurban
-// Enforce PASSWORD_LENGTH_MINIMUM in almost all PassUser checks,
-// Provide an errormessage if so. Just PersonalPage and BogoLogin not.
-// Simplify httpauth logout handling and set sessions for all methods.
-// fix main.php unknown index "x" getLevelDescription() warning.
-//
-// Revision 1.1  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

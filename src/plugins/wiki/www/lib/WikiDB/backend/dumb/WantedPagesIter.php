@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: WantedPagesIter.php 6209 2008-08-26 15:30:39Z vargenau $');
+// rcs_id('$Id: WantedPagesIter.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 //require_once('lib/WikiDB/backend.php');
 
@@ -18,12 +18,12 @@ extends WikiDB_backend_iterator
         $this->_backend = &$backend;
         if (!is_array($exclude))
             $this->exclude = $exclude ? PageList::explodePageList($exclude) : array();
-        else 
+        else
             $this->exclude = $exclude;
         $this->sortby = $sortby; // ignored
         if ($limit) { // extract from,count from limit
             list($this->from, $this->limit) = $backend->limit($limit);
-        } else { 
+        } else {
             $this->limit = 0;
             $this->from = 0;
         }
@@ -67,7 +67,6 @@ extends WikiDB_backend_iterator
     }
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

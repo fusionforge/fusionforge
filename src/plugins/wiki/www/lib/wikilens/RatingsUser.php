@@ -1,19 +1,20 @@
 <?php //-*-php-*-
-rcs_id('$Id: RatingsUser.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: RatingsUser.php 7417 2010-05-19 12:57:42Z vargenau $');
 /* Copyright (C) 2004 Dan Frankowski
+ * Copyright (C) 2010 Roger Guignard, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
- * 
+ *
  * PhpWiki is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -167,11 +168,11 @@ class RatingsUser {
     {
         // XXX: does this really want to do a full ratings load?  (scalability?)
         if (RATING_STORAGE == 'SQL')
-	    $this->_load_ratings();
-	else {
-	    $rdbi = $this->_get_rating_dbi();
-	    return $rdbi->metadata_get_rating($this->getId(), $pagename, $dimension);
-	}
+            $this->_load_ratings();
+        else {
+            $rdbi = $this->_get_rating_dbi();
+            return $rdbi->metadata_get_rating($this->getId(), $pagename, $dimension);
+        }
 
         if ($this->has_rated($pagename, $dimension))
         {
@@ -362,6 +363,9 @@ class RatingsUser {
 
             while($rating = $rating_iter->next())
             {
+                if (defined('GFORGE') and GFORGE) {
+                    $rating['pagename'] = preg_replace('/^'.PAGE_PREFIX.'/', '', $rating['pagename']);
+                }
                 $this->_num_ratings++;
                 $this->_ratings[$rating['pagename']][$rating['dimension']]
                   = new _UserRating($this->_userid, 
@@ -426,25 +430,6 @@ class _UserRating
         $this->dimension = (int)$dimension;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.5  2004/11/15 16:00:02  rurban
-// enable RateIt imgPrefix: '' or 'Star' or 'BStar',
-// enable blue prediction icons,
-// enable buddy predictions.
-//
-// Revision 1.4  2004/07/08 19:04:49  rurban
-// more unittest fixes (file backend, metadata RatingsDb)
-//
-// Revision 1.3  2004/06/30 20:06:44  dfrankow
-// Use RatingsDb singleton.
-//
-// Revision 1.2  2004/06/21 17:01:41  rurban
-// fix typo and rating method call
-//
-// Revision 1.1  2004/06/18 14:42:17  rurban
-// added wikilens libs (not yet merged good enough, some work for DanFr)
-//
 
 // Local Variables:
 // mode: php

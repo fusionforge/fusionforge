@@ -1,11 +1,11 @@
-<?php rcs_id('$Id: XmlElement.php 6302 2008-10-15 08:07:42Z vargenau $');
+<?php // rcs_id('$Id: XmlElement.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
  * Code for writing XML.
  * @package Markup
  * @author: Jeff Dairiki,
  *          Reini Urban (php5 tricks)
  *
- * WARNING: This module is very php5 sensitive. 
+ * WARNING: This module is very php5 sensitive.
  *          Fixed for 1.3.9, 1.3.11 and 1.3.13 (php-5.2).
  *          With allow_call_time_pass_reference clean fixes.
  */
@@ -40,7 +40,7 @@ class XmlContent
     }
 
     function _pushContent ($item) {
-        if (strtolower(get_class($item)) == 'xmlcontent')
+        if (is_object($item) && strtolower(get_class($item)) == 'xmlcontent')
             array_splice($this->_content, count($this->_content), 0,
                          $item->_content);
         else
@@ -71,7 +71,7 @@ class XmlContent
         else
             array_unshift($this->_content, $item);
     }
-    
+  
     function getContent () {
         return $this->_content;
     }
@@ -188,13 +188,10 @@ class XmlContent
         }
         return true;
     }
-    
+  
     function _quote ($string) {
     	if (!$string) return $string;
-        if (check_php_version(4,1) and isset($GLOBALS['charset']))
-            return htmlspecialchars($string, ENT_COMPAT, $GLOBALS['charset']);
-        else
-            return htmlspecialchars($string);
+	return htmlspecialchars($string, ENT_COMPAT, $GLOBALS['charset']);
     }
 };
 
@@ -218,7 +215,7 @@ class XmlElement extends XmlContent
         assert(count($args) >= 1);
         //assert(is_string($args[0]));
         $this->_tag = array_shift($args);
-        
+      
         if ($args && is_array($args[0]))
             $this->_attr = array_shift($args);
         else {
@@ -229,7 +226,7 @@ class XmlElement extends XmlContent
 
         $this->setContent($args);
     }
-    
+  
     /** Methods only needed for XmlParser,
      *  to be fully compatible to perl Html::Element
      */
@@ -244,7 +241,7 @@ class XmlElement extends XmlContent
         unset($this->_attr);
         unset($this->_content);
     }
-    
+  
     function getChildren () {
         return $this->_children;
     }
@@ -258,7 +255,7 @@ class XmlElement extends XmlContent
     function getTag () {
         return $this->_tag;
     }
-    
+  
     function setAttr ($attr, $value = false) {
 	if (is_array($attr)) {
             assert($value === false);
@@ -270,7 +267,7 @@ class XmlElement extends XmlContent
 	}
 
         assert(is_string($attr));
-            
+          
         if ($value === false) {
             unset($this->_attr[$attr]);
         }
@@ -335,7 +332,7 @@ class XmlElement extends XmlContent
 	$class = trim($class);
 	if ($in_class)
 	    $this->_classes[$class] = $class;
-	else 
+	else
 	    unset($this->_classes[$class]);
     }
 
@@ -373,12 +370,12 @@ class XmlElement extends XmlContent
         return substr($this->startTag(), 0, -1) . "/>";
     }
 
-    
+  
     function endTag() {
         return "</$this->_tag>";
     }
-    
-        
+  
+      
     function printXML () {
         if ($this->isEmpty())
             echo $this->emptyTag();
@@ -425,7 +422,7 @@ class XmlElement extends XmlContent
             return false;
         return true;
     }
-    
+  
     /**
      * Is this element part of inline content?
      *
@@ -435,7 +432,7 @@ class XmlElement extends XmlContent
     function isInlineElement () {
         return false;
     }
-    
+  
 };
 
 class RawXml {
@@ -455,7 +452,7 @@ class RawXml {
     function asXML () {
         return $this->_xml;
     }
-    
+  
     function asString () {
     	return $this->_xml;
     }
@@ -489,13 +486,13 @@ class FormattedText {
                 // strings uncluttered
                 trigger_error(sprintf(_("Can't mix '%s' with '%s' type format strings"),
                                       '%1\$s','%s'), E_USER_WARNING);
-        
+      
             $this->_fs = preg_replace('/(?<!%)%\d+\$/x', '%', $this->_fs);
 
             $this->_args = array();
             foreach($m[1] as $argnum) {
                 if ($argnum < 1 || $argnum > count($args))
-                    trigger_error(sprintf("%s: argument index out of range", 
+                    trigger_error(sprintf("%s: argument index out of range",
                                           $argnum), E_USER_WARNING);
                 $this->_args[] = $args[$argnum - 1];
             }
@@ -534,12 +531,12 @@ class FormattedText {
 /**
  * PHP5 compatibility
  * Error[2048]: Non-static method XmlContent::_quote() should not be called statically
- * Note: There's lot of room for performance increase if the right charset variant can 
+ * Note: There's lot of room for performance increase if the right charset variant can
  * be created on load-time.
  */
 function XmlContent_quote ($string) {
     if (!$string) return $string;
-    if (check_php_version(4,1) and isset($GLOBALS['charset'])
+    if (isset($GLOBALS['charset'])
         and (!defined('IGNORE_CHARSET_NOT_SUPPORTED_WARNING') or !IGNORE_CHARSET_NOT_SUPPORTED_WARNING))
     {
         return htmlspecialchars($string, ENT_COMPAT, $GLOBALS['charset']);
@@ -633,7 +630,7 @@ function AsString ($val) {
             $str .= AsString($x);
         return $str;
     }
-    
+  
     return (string) $val;
 }
 
@@ -646,12 +643,11 @@ function fmt ($fs /* , ... */) {
     return $s;
 }
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

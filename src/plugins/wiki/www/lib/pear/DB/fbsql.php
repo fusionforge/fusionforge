@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: fbsql.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: fbsql.php 7639 2010-08-11 12:15:16Z vargenau $
 
 
 // XXX legend:
@@ -37,7 +37,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: fbsql.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: fbsql.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  * @author   Frank M. Kromann <frank@frontbase.com>
  */
@@ -647,7 +647,7 @@ class DB_fbsql extends DB_common
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

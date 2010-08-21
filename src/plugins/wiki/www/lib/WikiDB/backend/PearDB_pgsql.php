@@ -1,16 +1,16 @@
 <?php // -*-php-*-
-rcs_id('$Id: PearDB_pgsql.php,v 1.27 2007/06/07 21:37:39 rurban Exp $');
+// rcs_id('$Id: PearDB_pgsql.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/ErrorManager.php');
 require_once('lib/WikiDB/backend/PearDB.php');
 
 if (!defined("USE_BYTEA")) // see schemas/psql-initialize.sql
-    //define("USE_BYTEA", true);
-    define("USE_BYTEA", false);
+    define("USE_BYTEA", true);
+    //define("USE_BYTEA", false);
 
 /*
 Since 1.3.12 changed to use:
- * Foreign Keys 
+ * Foreign Keys
  * ON DELETE CASCADE
  * tsearch2
 */
@@ -28,7 +28,7 @@ extends WikiDB_backend_PearDB
         //
         // This stuff is all just to catch and ignore these warnings,
         // so that they don't get reported to the user.  (They are
-        // not consequential.)  
+        // not consequential.)
 
         global $ErrorManager;
         $ErrorManager->pushErrorHandler(new WikiMethodCb($this,'_pgsql_open_error'));
@@ -42,9 +42,9 @@ extends WikiDB_backend_PearDB
             return true;        // Ignore error
         return false;
     }
-            
+          
     /**
-     * Pack tables. 
+     * Pack tables.
      * NOTE: Only the table owner can do this. Either fix the schema or setup autovacuum.
      */
     function optimize() {
@@ -76,7 +76,6 @@ extends WikiDB_backend_PearDB
 
     // Until the binary escape problems on pear pgsql are solved */
     function get_cached_html($pagename) {
-        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $data = $dbh->GetOne(sprintf("SELECT cached_html FROM $page_tbl WHERE pagename='%s'",
@@ -86,14 +85,13 @@ extends WikiDB_backend_PearDB
     }
 
     function set_cached_html($pagename, $data) {
-        $pagename = '_g'.$GLOBALS['group_id'].'_'.$pagename;
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         if (USE_BYTEA)
             $sth = $dbh->query(sprintf("UPDATE $page_tbl"
                                        . " SET cached_html='%s'"
                                        . " WHERE pagename='%s'",
-                                       $this->_quote($data), 
+                                       $this->_quote($data),
                                        $dbh->escapeSimple($pagename)));
         else
             $sth = $dbh->query("UPDATE $page_tbl"
@@ -109,10 +107,10 @@ extends WikiDB_backend_PearDB
     function _todo_set_versiondata($pagename, $version, $data) {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
-        
+      
         $minor_edit = (int) !empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
-        
+      
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
@@ -120,7 +118,7 @@ extends WikiDB_backend_PearDB
         @$content = (string) $data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
-        
+      
         $this->lock();
         $id = $this->_get_pageid($pagename, true);
         $dbh->query(sprintf("DELETE FROM version WHERE id=%d AND version=%d", $id, $version));
@@ -149,7 +147,7 @@ extends WikiDB_backend_PearDB
     function _todo_rename_page ($pagename, $to) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        
+      
         $this->lock();
         if (($id = $this->_get_pageid($pagename, false)) ) {
             if ($new = $this->_get_pageid($to, false)) {
@@ -182,12 +180,12 @@ extends WikiDB_backend_PearDB
     /**
      * Serialize data
      */
-//    function _serialize($data) {
-//        if (empty($data))
-//            return '';
-//        assert(is_array($data));
-//        return $this->_quote(serialize($data));
-//    }
+    function _serialize($data) {
+        if (empty($data))
+            return '';
+        assert(is_array($data));
+        return $this->_quote(serialize($data));
+    }
 
     /**
      * Unserialize data
@@ -205,13 +203,11 @@ extends WikiDB_backend_PearDB
     /**
      * Title search.
      */
-    function text_search($search, $fulltext=false, $sortby='', $limit='', 
-                         $exclude='') 
+    function text_search($search, $fulltext=false, $sortby='', $limit='',
+                         $exclude='')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        $pat = '_g'.$GLOBALS['group_id'].'_';
-        $len = strlen($pat)+1;
         $orderby = $this->sortby($sortby, 'db');
         if ($sortby and $orderby) $orderby = ' ORDER BY ' . $orderby;
 
@@ -220,7 +216,7 @@ extends WikiDB_backend_PearDB
         if (!class_exists($searchclass))
             $searchclass = "WikiDB_backend_PearDB_search";
         $searchobj = new $searchclass($search, $dbh);
-        
+      
         $table = "$nonempty_tbl, $page_tbl";
         $join_clause = "$nonempty_tbl.id=$page_tbl.id";
         $fields = $this->page_tbl_fields;
@@ -237,17 +233,14 @@ extends WikiDB_backend_PearDB
             $callback = new WikiMethodCb($searchobj, "_fulltext_match_clause");
             $search_string = $search->makeTsearch2SqlClauseObj($callback);
             $search_string = str_replace(array("%"," "), array("","&"), $search_string);
-            $search_clause = "substring(plugin_wiki_page.pagename from 0 for $len) = '$pat') AND (";
-
-            $search_clause .= "idxFTI @@ to_tsquery('$search_string')";
+            $search_clause = "idxFTI @@ to_tsquery('$search_string')";
             if (!$orderby)
                $orderby = " ORDER BY rank(idxFTI, to_tsquery('$search_string')) DESC";
         } else {
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
-            $search_clause = "substring(plugin_wiki_page.pagename from 0 for $len) = '$pat') AND (";
-            $search_clause .= $search->makeSqlClauseObj($callback);
+            $search_clause = $search->makeSqlClauseObj($callback);
         }
-        
+      
         $sql = "SELECT $fields FROM $table"
             . " WHERE $join_clause"
             . "  AND ($search_clause)"
@@ -258,30 +251,11 @@ extends WikiDB_backend_PearDB
          } else {
              $result = $dbh->query($sql);
          }
-        
+      
         $iter = new WikiDB_backend_PearDB_iter($this, $result);
         $iter->stoplisted = @$searchobj->stoplisted;
         return $iter;
     }
-
-     function exists_link($pagename, $link, $reversed=false) {
-         $dbh = &$this->_dbh;
-         extract($this->_table_names);
-
-         if ($reversed)
-             list($have, $want) = array('linkee', 'linker');
-         else
-             list($have, $want) = array('linker', 'linkee');
-         $qpagename = $dbh->escapeSimple($pagename);
-         $qlink = $dbh->escapeSimple($link);
-         $row = $dbh->GetRow("SELECT $want.pagename as result"
-                                 . " FROM $link_tbl, $page_tbl linker, $page_tbl linkee, $nonempty_tbl"
-                                 . " WHERE linkfrom=linker.id AND linkto=linkee.id"
-                                 . " AND $have.pagename='$qpagename'"
-                                 . " AND $want.pagename='$qlink'"
-                                 . " LIMIT 1");
-         return $row['result'] ? 1 : 0;
-     }
 
 };
 
@@ -290,15 +264,14 @@ extends WikiDB_backend_PearDB_search
 {
     function _pagename_match_clause($node) {
         $word = $node->sql();
-        $len = strlen('_g'.$GLOBALS['group_id'].'_')+1;
         if ($node->op == 'REGEX') { // posix regex extensions
-            return ($this->_case_exact 
-                    ? "substring(pagename from $len) ~* '$word'"
-                    : "substring(pagename from $len) ~ '$word'");
+            return ($this->_case_exact
+                    ? "pagename ~* '$word'"
+                    : "pagename ~ '$word'");
         } else {
-            return ($this->_case_exact 
-                    ? "substring(pagename from $len) LIKE '$word'" 
-                    : "substring(pagename from $len) ILIKE '$word'");
+            return ($this->_case_exact
+                    ? "pagename LIKE '$word'"
+                    : "pagename ILIKE '$word'");
         }
     }
 
@@ -318,9 +291,9 @@ select * from stat('select idxfti from version') order by ndoc desc, nentry desc
  see             |   42 |     69
  default         |   39 |    124
     */
-    
-    /** 
-     * use tsearch2. See schemas/psql-tsearch2.sql and /usr/share/postgresql/contrib/tsearch2.sql 
+  
+    /**
+     * use tsearch2. See schemas/psql-tsearch2.sql and /usr/share/postgresql/contrib/tsearch2.sql
      * TODO: don't parse the words into nodes. rather replace "[ +]" with & and "-" with "!" and " or " with "|"
      * tsearch2 query language: @@ "word | word", "word & word", ! word
      * ~* '.*something that does not exist.*'
@@ -344,26 +317,11 @@ select * from stat('select idxfti from version') order by ndoc desc, nentry desc
     }
 }
 
-// $Log: PearDB_pgsql.php,v $
-// Revision 1.27  2007/06/07 21:37:39  rurban
-// add native asArray methods to generic iters (for DebugInfo)
-//
-// Revision 1.26  2007/01/04 16:45:49  rurban
-// Clarify API: sortby,limit and exclude are strings.
-//
-// Revision 1.25  2006/12/23 11:56:17  rurban
-// note about vacuum permissions
-//
-// Revision 1.24  2006/12/22 00:27:37  rurban
-// just add Log
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

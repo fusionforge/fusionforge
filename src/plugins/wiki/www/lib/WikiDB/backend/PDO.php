@@ -1,25 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: PDO.php 6226 2008-08-29 15:42:34Z vargenau $');
+// rcs_id('$Id: PDO.php 7641 2010-08-11 13:00:46Z vargenau $');
 
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/ 
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * @author: Reini Urban
@@ -75,8 +75,8 @@ extends WikiDB_backend
                     $this->_parsedDSN[$option] = $value;
                 }
             }
-            $this->_dbh->database = isset($this->_parsedDSN['database']) 
-                ? $this->_parsedDSN['database'] 
+            $this->_dbh->database = isset($this->_parsedDSN['database'])
+                ? $this->_parsedDSN['database']
                 : $this->_parsedDSN['dbname'];
         }
         if (empty($this->_parsedDSN['password'])) $this->_parsedDSN['password'] = '';
@@ -85,15 +85,15 @@ extends WikiDB_backend
             // try to load it dynamically (unix only)
             if (!loadPhpExtension("pdo_$driver")) {
                 echo $GLOBALS['php_errormsg'], "<br>\n";
-                trigger_error(sprintf("dl() problem: Required extension '%s' could not be loaded!", 
+                trigger_error(sprintf("dl() problem: Required extension '%s' could not be loaded!",
                                       "pdo_$driver"),
                               E_USER_WARNING);
             }
 
             // persistent is defined as DSN option, or with a config value.
             //   phptype://username:password@hostspec/database?persistent=false
-            $this->_dbh = new PDO($dbparams['dsn'], 
-                                  $this->_parsedDSN['username'], 
+            $this->_dbh = new PDO($dbparams['dsn'],
+                                  $this->_parsedDSN['username'],
                                   $this->_parsedDSN['password'],
                                   array(PDO_ATTR_AUTOCOMMIT => true,
                                         PDO_ATTR_TIMEOUT    => DATABASE_TIMEOUT,
@@ -111,7 +111,7 @@ extends WikiDB_backend
             if (isset($dbparams['_tryroot_from_upgrade']))
                 trigger_error(sprintf("Can't connect to database: %s", $e->getMessage()),
                               E_USER_WARNING);
-            else 
+            else
                 exit();
         }
         if (DEBUG & _DEBUG_SQL) { // not yet implemented
@@ -184,7 +184,7 @@ extends WikiDB_backend
         $sth = $this->_dbh->prepare($sql);
         if ($sth->execute())
             return $sth->fetch(PDO_FETCH_BOTH);
-        else 
+        else
             return false;
     }
 
@@ -195,7 +195,7 @@ extends WikiDB_backend
         if (!$this->_dbh)
             return;
         if ($this->_lock_count) {
-            trigger_error("WARNING: database still locked " . 
+            trigger_error("WARNING: database still locked " .
                           '(lock_count = $this->_lock_count)' . "\n<br />",
                           E_USER_WARNING);
         }
@@ -220,7 +220,7 @@ extends WikiDB_backend
         else
             return false;
     }
-        
+
     function get_all_pagenames() {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -267,7 +267,7 @@ extends WikiDB_backend
     function  _extract_page_data($data, $hits) {
         if (empty($data))
             return array('hits' => $hits);
-        else 
+        else
             return array_merge(array('hits' => $hits), $this->_unserialize($data));
     }
 
@@ -292,7 +292,7 @@ extends WikiDB_backend
             $data = array();
             $this->_get_pageid($pagename, true); // Creates page record
         }
-        
+
         $hits = (empty($data['hits'])) ? 0 : (int)$data['hits'];
         unset($data['hits']);
 
@@ -354,7 +354,7 @@ extends WikiDB_backend
 
 	// attributes play this game.
         if ($pagename === '') return 0;
-        
+
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $sth = $dbh->prepare("SELECT id FROM $page_tbl WHERE pagename=? LIMIT 1");
@@ -386,7 +386,7 @@ extends WikiDB_backend
                 $sth->bindParam(2, $pagename, PDO_PARAM_STR, 100);
                 if ($sth->execute())
                     $this->commit();
-                else 
+                else
                     $this->rollBack();
             }
         }
@@ -422,7 +422,7 @@ extends WikiDB_backend
         $sth->execute();
         return $sth->fetchSingle();
     }
-    
+
     /**
      * Get version data.
      *
@@ -435,10 +435,10 @@ extends WikiDB_backend
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         extract($this->_expressions);
-                
+
         assert(is_string($pagename) and $pagename != '');
         assert($version > 0);
-        
+
         // FIXME: optimization: sometimes don't get page data?
         if ($want_content) {
             $fields = $this->page_tbl_fields . ", $page_tbl.pagedata AS pagedata"
@@ -508,10 +508,10 @@ extends WikiDB_backend
     function set_versiondata($pagename, $version, $data) {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
-        
+
         $minor_edit = (int) !empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
-        
+
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
@@ -519,7 +519,7 @@ extends WikiDB_backend
         @$content = (string) $data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
-        
+
         $this->lock(array('page','recent','version','nonempty'));
         $this->beginTransaction();
         $id = $this->_get_pageid($pagename, true);
@@ -559,7 +559,7 @@ extends WikiDB_backend
         else $this->rollBack( );
         $this->unlock(array('page','recent','version','nonempty'));
     }
-    
+
     /**
      * Delete an old revision of a page.
      */
@@ -582,10 +582,10 @@ extends WikiDB_backend
     /**
      * Delete page from the database with backup possibility.
      * i.e save_page('') and DELETE nonempty id
-     * 
-     * deletePage increments latestversion in recent to a non-existent version, 
+     *
+     * deletePage increments latestversion in recent to a non-existent version,
      * and removes the nonempty row,
-     * so that get_latest_version returns id+1 and get_previous_version returns prev id 
+     * so that get_latest_version returns id+1 and get_previous_version returns prev id
      * and page->exists returns false.
      */
     function delete_page($pagename) {
@@ -606,7 +606,7 @@ extends WikiDB_backend
         $this->lock(array('version','recent','nonempty','page','link'));
         $version = $this->get_latest_version($pagename);
         if ($dbh->query("UPDATE $recent_tbl SET latestversion=latestversion+1,"
-                        . "latestmajor=latestversion+1,latestminor=NULL WHERE id=$id")) 
+                        . "latestmajor=latestversion+1,latestminor=NULL WHERE id=$id"))
         {
             $insert = $dbh->prepare("INSERT INTO $version_tbl"
                                     . " (id,version,mtime,minor_edit,content,versiondata)"
@@ -620,16 +620,16 @@ extends WikiDB_backend
             if ($insert->execute()
                 and $dbh->query("DELETE FROM $nonempty_tbl WHERE id=$id")
                 and $this->set_links($pagename, false)) {
-                    // need to keep perms and LOCKED, otherwise you can reset the perm 
+                    // need to keep perms and LOCKED, otherwise you can reset the perm
                     // by action=remove and re-create it with default perms
-                    // keep hits but delete meta-data 
-                    //and $dbh->Execute("UPDATE $page_tbl SET pagedata='' WHERE id=$id") 
+                    // keep hits but delete meta-data
+                    //and $dbh->Execute("UPDATE $page_tbl SET pagedata='' WHERE id=$id")
                 $this->unlock(array('version','recent','nonempty','page','link'));
                 $this->commit();
                 return true;
             }
         } else {
-            $this->unlock(array('version','recent','nonempty','page','link'));	
+            $this->unlock(array('version','recent','nonempty','page','link'));
             $this->rollBack();
             return false;
         }
@@ -638,7 +638,7 @@ extends WikiDB_backend
     function purge_page($pagename) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        
+
         $this->lock(array('version','recent','nonempty','page','link'));
         if ( ($id = $this->_get_pageid($pagename, false)) ) {
             $dbh->query("DELETE FROM $version_tbl  WHERE id=$id");
@@ -716,7 +716,7 @@ extends WikiDB_backend
         $this->unlock(array('link'));
         return true;
     }
-    
+
     /**
      * Find pages which link to or are linked from a page.
      *
@@ -734,10 +734,10 @@ extends WikiDB_backend
         else
             list($have,$want) = array('linker', 'linkee');
         $orderby = $this->sortby($sortby, 'db', array('pagename'));
-        if ($orderby) $orderby = ' ORDER BY $want.' . $orderby;
+        if ($orderby) $orderby = " ORDER BY $want." . $orderby;
         if ($exclude) // array of pagenames
             $exclude = " AND $want.pagename NOT IN ".$this->_sql_set($exclude);
-        else 
+        else
             $exclude='';
         $limit = $this->_limit_sql($limit);
 
@@ -787,7 +787,7 @@ extends WikiDB_backend
         if ($orderby) $orderby = ' ORDER BY ' . $orderby;
         if ($exclude) // array of pagenames
             $exclude = " AND $page_tbl.pagename NOT IN ".$this->_sql_set($exclude);
-        else 
+        else
             $exclude='';
         $limit = $this->_limit_sql($limit);
 
@@ -827,12 +827,12 @@ extends WikiDB_backend
                     . $orderby;
             }
         }
-        $sth = $dbh->prepare($sql . $limit); 
+        $sth = $dbh->prepare($sql . $limit);
         $sth->execute();
         $result = $sth->fetch(PDO_FETCH_BOTH);
         return new WikiDB_backend_PDO_iter($this, $result, $this->page_tbl_field_list);
     }
-        
+
     /**
      * Title search.
      */
@@ -848,7 +848,7 @@ extends WikiDB_backend
         $fields = $this->page_tbl_fields;
         $field_list = $this->page_tbl_field_list;
         $searchobj = new WikiDB_backend_PDO_search($search, $dbh);
-        
+
         if ($fullsearch) {
             $table .= ", $recent_tbl";
             $join_clause .= " AND $page_tbl.id=$recent_tbl.id";
@@ -862,7 +862,7 @@ extends WikiDB_backend
         } else {
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
         }
-        
+
         $search_clause = $search->makeSqlClauseObj($callback);
         $sth = $dbh->prepare("SELECT $fields FROM $table"
                              . " WHERE $join_clause"
@@ -877,8 +877,8 @@ extends WikiDB_backend
     }
 
     /*
-     * TODO: efficiently handle wildcards exclusion: exclude=Php* => 'Php%', 
-     *       not sets. See above, but the above methods find too much. 
+     * TODO: efficiently handle wildcards exclusion: exclude=Php* => 'Php%',
+     *       not sets. See above, but the above methods find too much.
      * This is only for already resolved wildcards:
      * " WHERE $page_tbl.pagename NOT IN ".$this->_sql_set(array('page1','page2'));
      */
@@ -897,8 +897,8 @@ extends WikiDB_backend
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $order = "DESC";
-        if ($limit < 0){ 
-            $order = "ASC"; 
+        if ($limit < 0){
+            $order = "ASC";
             $limit = -$limit;
             $where = "";
         } else {
@@ -909,7 +909,7 @@ extends WikiDB_backend
             else $orderby = "";
         } else
             $orderby = " ORDER BY hits $order";
-        $sql = "SELECT " 
+        $sql = "SELECT "
             . $this->page_tbl_fields
             . " FROM $nonempty_tbl, $page_tbl"
             . " WHERE $nonempty_tbl.id=$page_tbl.id"
@@ -942,7 +942,7 @@ extends WikiDB_backend
         $pick = array();
         if ($since)
             $pick[] = "mtime >= $since";
-        
+
         if ($include_all_revisions) {
             // Include all revisions of each page.
             $table = "$page_tbl, $version_tbl";
@@ -962,7 +962,7 @@ extends WikiDB_backend
             $join_clause = "$page_tbl.id=$recent_tbl.id";
             $table .= ", $version_tbl";
             $join_clause .= " AND $version_tbl.id=$page_tbl.id";
-                
+
             if ($exclude_major_revisions) {
                 // Include only most recent minor revision
                 $pick[] = 'version=latestminor';
@@ -996,7 +996,7 @@ extends WikiDB_backend
         }
         $sth->execute();
         $result = $sth->fetch(PDO_FETCH_NUM);
-        return new WikiDB_backend_PDO_iter($this, $result, 
+        return new WikiDB_backend_PDO_iter($this, $result,
             array_merge($this->page_tbl_field_list, $this->version_tbl_field_list));
     }
 
@@ -1008,24 +1008,24 @@ extends WikiDB_backend
         extract($this->_table_names);
         if ($orderby = $this->sortby($sortby, 'db', array('pagename','wantedfrom')))
             $orderby = 'ORDER BY ' . $orderby;
-            
+
         if ($exclude_from) // array of pagenames
             $exclude_from = " AND linked.pagename NOT IN ".$this->_sql_set($exclude_from);
         if ($exclude) // array of pagenames
             $exclude = " AND $page_tbl.pagename NOT IN ".$this->_sql_set($exclude);
 
-        /* 
+        /*
          all empty pages, independent of linkstatus:
            select pagename as empty from page left join nonempty using(id) where isnull(nonempty.id);
          only all empty pages, which have a linkto:
-           select page.pagename, linked.pagename as wantedfrom from link, page as linked 
-             left join page on(link.linkto=page.id) left join nonempty on(link.linkto=nonempty.id) 
-             where isnull(nonempty.id) and linked.id=link.linkfrom;  
+           select page.pagename, linked.pagename as wantedfrom from link, page as linked
+             left join page on(link.linkto=page.id) left join nonempty on(link.linkto=nonempty.id)
+             where isnull(nonempty.id) and linked.id=link.linkfrom;
         */
         $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
             . " FROM $page_tbl p JOIN $link_tbl linked"
             . " LEFT JOIN $page_tbl pp ON linked.linkto = pp.id"
-            . " LEFT JOIN $nonempty_tbl ne ON linked.linkto = ne.id" 
+            . " LEFT JOIN $nonempty_tbl ne ON linked.linkto = ne.id"
             . " WHERE ne.id is NULL"
 	    .       " AND p.id = linked.linkfrom"
             . $exclude_from
@@ -1047,7 +1047,7 @@ extends WikiDB_backend
     function rename_page($pagename, $to) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        
+
         $this->lock(array('page','version','recent','nonempty','link'));
         if ( ($id = $this->_get_pageid($pagename, false)) ) {
             if ($new = $this->_get_pageid($to, false)) {
@@ -1153,7 +1153,7 @@ extends WikiDB_backend
         }
         $this->_dbh->query("LOCK TABLES " . join(",", $locks));
     }
-    
+
     /**
      * Release a write lock on the tables in the SQL database.
      *
@@ -1222,7 +1222,7 @@ extends WikiDB_backend
     }
 
     /*
-     * LIMIT with OFFSET is not SQL specified. 
+     * LIMIT with OFFSET is not SQL specified.
      *   mysql: LIMIT $offset, $count
      *   pgsql,sqlite: LIMIT $count OFFSET $offset
      *   InterBase,FireBird: ROWS $offset TO $last
@@ -1242,10 +1242,10 @@ extends WikiDB_backend
         if ($limit) {
             list($offset, $count) = $this->limit($limit);
             if ($offset) {
-                $limit = " LIMIT $count"; 
+                $limit = " LIMIT $count";
                 trigger_error("unsupported OFFSET in SQL ignored", E_USER_WARNING);
             } else
-                $limit = " LIMIT $count"; 
+                $limit = " LIMIT $count";
         } else
             $limit = '';
         return $limit;
@@ -1286,7 +1286,7 @@ extends WikiDB_backend_iterator
         $this->_result = $query_result;
         //$this->_fields = $field_list;
     }
-    
+
     function count() {
         if (!is_object($this->_result)) {
             return false;
@@ -1491,51 +1491,11 @@ class WikiDB_backend_PDO_search extends WikiDB_backend_search_sql {}
         return $parsed;
     }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.11  2007/01/04 16:57:32  rurban
-// Clarify API: sortby,limit and exclude are strings. fix upgrade test connection
-//
-// Revision 1.10  2006/12/22 01:04:12  rurban
-// fix syntax error
-//
-// Revision 1.9  2006/11/19 14:04:39  rurban
-// Oops. Syntax error in prev commit
-//
-// Revision 1.8  2006/11/19 14:03:32  rurban
-// Replace IF by CASE in exists_link()
-//
-// Revision 1.7  2006/05/14 12:28:03  rurban
-// mysql 5.x fix for wantedpages join
-//
-// Revision 1.6  2005/11/14 22:24:33  rurban
-// fix fulltext search,
-// Eliminate stoplist words,
-// don't extract %pagedate twice in ADODB,
-// add SemanticWeb support: link(relation),
-// major postgresql update: stored procedures, tsearch2 for fulltext
-//
-// Revision 1.5  2005/09/14 06:04:43  rurban
-// optimize searching for ALL (ie %), use the stoplist on PDO
-//
-// Revision 1.4  2005/09/11 13:25:12  rurban
-// enhance LIMIT support
-//
-// Revision 1.3  2005/09/10 21:30:16  rurban
-// enhance titleSearch
-//
-// Revision 1.2  2005/02/11 14:45:45  rurban
-// support ENABLE_LIVESEARCH, enable PDO sessions
-//
-// Revision 1.1  2005/02/10 19:01:22  rurban
-// add PDO support
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: tinymce.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: tinymce.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
  * Multiple browser support, currently Mozilla (PC, Mac and Linux), 
  * MSIE (PC) and FireFox (PC, Mac and Linux) and some limited Safari support.
@@ -62,16 +62,6 @@ tinyMCE.init({
         return $out;
     }
 }
-
-/*
- $Log: not supported by cvs2svn $
- Revision 1.2  2005/10/31 16:41:46  rurban
- added FCKeditor + spaw
-
- Revision 1.1  2005/10/30 14:22:15  rurban
- refactor WysiwygEdit
-
-*/
 
 // Local Variables:
 // mode: php

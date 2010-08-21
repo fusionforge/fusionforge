@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: Units.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: Units.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
  *
  * Interface to man units(1), /usr/share/units.dat

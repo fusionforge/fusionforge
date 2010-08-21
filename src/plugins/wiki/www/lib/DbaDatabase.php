@@ -1,8 +1,11 @@
-<?php rcs_id('$Id: DbaDatabase.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: DbaDatabase.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/ErrorManager.php');
 
-define('DBA_DATABASE_DEFAULT_TIMEOUT', 5);
+if (isWindows())
+    define('DBA_DATABASE_DEFAULT_TIMEOUT', 60);
+else
+    define('DBA_DATABASE_DEFAULT_TIMEOUT', 5);
 
 class DbaDatabase
 {
@@ -16,9 +19,10 @@ class DbaDatabase
                 $this->_error(
                     sprintf(
                 	    _("The DBA handler %s is unsupported!")."\n".
-                    	    _("Supported handlers are: %s"), 
+                    	    _("Supported handlers are: %s"),
                     	    $handler, join(",",dba_handlers())));
         }
+        $this->readonly = false;
         if ($mode)
             $this->open($mode);
     }
@@ -26,11 +30,11 @@ class DbaDatabase
     function set_timeout($timeout) {
         $this->_timeout = $timeout;
     }
-    
+  
     function open($mode = 'w') {
         if ($this->_dbh)
             return;             // already open.
-        
+      
         $watchdog = $this->_timeout;
 
         global $ErrorManager;
@@ -41,9 +45,12 @@ class DbaDatabase
         if (!function_exists("dba_open")) {
             echo "You don't seem to have DBA support compiled into PHP.";
         }
-	
-        // lock supported since 4.3.0:
-        if (check_php_version(4,3,0) and (strlen($mode) == 1)) {
+
+        if (READONLY) {
+            $mode = 'r';
+        }
+
+        if ((strlen($mode) == 1)) {
             // PHP 4.3.x Windows lock bug workaround: http://bugs.php.net/bug.php?id=23975
             if (isWindows()) {
                 $mode .= "-"; 			// suppress locking, or
@@ -54,9 +61,19 @@ class DbaDatabase
         while (($dbh = dba_open($this->_file, $mode, $this->_handler)) < 1) {
             if ($watchdog <= 0)
                 break;
-            flush();
             // "c" failed, try "w" instead.
-            if (substr($mode,0,1) == "c" and file_exists($this->_file))
+            if ($mode == "w"
+                and file_exists($this->_file)
+                and (isWindows() or !is_writable($this->_file)))
+            {
+                // try to continue with read-only
+                if (!defined("READONLY"))
+                    define("READONLY", true);
+                $GLOBALS['request']->_dbi->readonly = true;
+                $this->readonly = true;
+                $mode = "r";
+            }
+            if (substr($mode,0,1) == "c" and file_exists($this->_file) and !READONLY)
                 $mode = "w";
             // conflict: wait some random time to unlock (as with ethernet)
             $secs = 0.5 + ((double)rand(1,32767)/32767);
@@ -72,7 +89,15 @@ class DbaDatabase
                 $error->errstr .= "\nfile: " . $this->_file
                                .  "\nmode: " . $mode
                                .  "\nhandler: " . $this->_handler;
-                $ErrorManager->handleError($error);
+                // try to continue with read-only
+                if (!defined("READONLY"))
+                    define("READONLY", true);
+                $GLOBALS['request']->_dbi->readonly = true;
+                $this->readonly = true;
+                if (!file_exists($this->_file)) {
+                    $ErrorManager->handleError($error);
+	            flush();
+                }
             }
             else {
                 trigger_error("dba_open failed", E_USER_ERROR);
@@ -91,7 +116,7 @@ class DbaDatabase
     function exists($key) {
         return dba_exists($key, $this->_dbh);
     }
-    
+  
     function fetch($key) {
         $val = dba_fetch($key, $this->_dbh);
         if ($val === false)
@@ -109,7 +134,7 @@ class DbaDatabase
             return $this->_error("replace($key)");
     }
 
-    
+  
     function firstkey() {
         return dba_firstkey($this->_dbh);
     }
@@ -119,6 +144,7 @@ class DbaDatabase
     }
 
     function delete($key) {
+        if ($this->readonly) return;
         if (!dba_delete($key, $this->_dbh))
             return $this->_error("delete($key)");
     }
@@ -129,6 +155,7 @@ class DbaDatabase
 
     function set($key, $val) {
         $dbh = &$this->_dbh;
+        if ($this->readonly) return;
         if (dba_exists($key, $dbh)) {
             if ($val !== false) {
                 if (!dba_replace($key, $val, $dbh))
@@ -155,7 +182,7 @@ class DbaDatabase
             return $this->_error("optimize()");
         return 1;
     }
-    
+  
     function _error($mes) {
         //trigger_error("DbaDatabase: $mes", E_USER_WARNING);
         //return false;
@@ -174,23 +201,11 @@ class DbaDatabase
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.21  2006/09/06 05:42:54  rurban
-// unify dbh arg
-//
-// Revision 1.20  2006/08/15 13:35:33  rurban
-// just aesthetics
-//
-// Revision 1.19  2006/06/18 11:01:25  rurban
-// add rcsid log
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

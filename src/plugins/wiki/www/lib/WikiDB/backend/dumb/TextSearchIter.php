@@ -1,11 +1,11 @@
 <?php // -*-php-*-
-rcs_id('$Id: TextSearchIter.php 6209 2008-08-26 15:30:39Z vargenau $');
+// rcs_id('$Id: TextSearchIter.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 class WikiDB_backend_dumb_TextSearchIter
 extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_dumb_TextSearchIter(&$backend, &$pages, $search, $fulltext=false, 
-                                                $options=array()) 
+    function WikiDB_backend_dumb_TextSearchIter(&$backend, &$pages, $search, $fulltext=false,
+                                                $options=array())
     {
         $this->_backend = &$backend;
         $this->_pages = $pages;
@@ -27,14 +27,14 @@ extends WikiDB_backend_iterator
     function _get_content(&$page) {
         $backend = &$this->_backend;
         $pagename = $page['pagename'];
-        
+      
         if (!isset($page['versiondata'])) {
             $version = $backend->get_latest_version($pagename);
             $page['versiondata'] = $backend->get_versiondata($pagename, $version, true);
         }
         return $page['versiondata']['%content'];
     }
-        
+      
     function _match(&$page) {
         $text = $page['pagename'];
         if ($result = $this->_search->match($text)) { // first match the pagename only
@@ -71,7 +71,7 @@ extends WikiDB_backend_iterator
                 }*/
                 if (is_array($page))
 		    $page['score'] = $score;
-		else    
+		else  
 		    $page->score = $score;
                 return $page;
             }
@@ -84,12 +84,11 @@ extends WikiDB_backend_iterator
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

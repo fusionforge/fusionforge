@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: TextSearchQuery.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: TextSearchQuery.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
  * A text search query, converting queries to PCRE and SQL matchers.
  *
@@ -13,8 +13,11 @@
  *        'word' OR the substring 'page'.
  * <dt> auto-detect regex hints, glob-style or regex-style, and converts them 
  *      to PCRE and SQL matchers:
- *   <dd> "^word$" => EXACT(word)
- *   <dd> "^word"  => STARTS_WITH(word)
+ *   <dd> "^word$" => EXACT(phrase)
+ *   <dd> "^word"  => STARTS_WITH(phrase)
+ *   <dd> "word$"  => ENDS_WITH(phrase)
+ *   <dd> "^word" ... => STARTS_WITH(word)
+ *   <dd> "word$" ... => ENDS_WITH(word)
  *   <dd> "word*"  => STARTS_WITH(word)
  *   <dd> "*word"  => ENDS_WITH(word)
  *   <dd> "/^word.* /" => REGEX(^word.*)
@@ -651,7 +654,7 @@ class TextSearchQuery_node
 }
 
 /**
- * A word. exact or substring?
+ * A word. Exact or substring?
  */
 class TextSearchQuery_node_word
 extends TextSearchQuery_node
@@ -678,6 +681,7 @@ extends TextSearchQuery_node {
     function regexp() { return '(?=.*)'; }
     function sql()    { return '%'; }
 }
+
 class TextSearchQuery_node_starts_with
 extends TextSearchQuery_node_word {
     var $op = "STARTS_WITH";
@@ -686,12 +690,24 @@ extends TextSearchQuery_node_word {
     function sql ()   { return $this->_sql_quote($this->word).'%'; }
 }
 
+// ^word: full phrase starts with
+class TextSearchQuery_phrase_starts_with
+extends TextSearchQuery_node_starts_with {
+    function regexp() { return '(?=^' . preg_quote($this->word, '/') . ')'; }
+}
+
 class TextSearchQuery_node_ends_with
 extends TextSearchQuery_node_word {
     var $op = "ENDS_WITH";
     var $_op = TSQ_TOK_ENDS_WITH;
     function regexp() { return '(?=.*' . preg_quote($this->word, '/') . '\b)'; }
     function sql ()   { return '%'.$this->_sql_quote($this->word); }
+}
+
+// word$: full phrase ends with
+class TextSearchQuery_phrase_ends_with
+extends TextSearchQuery_node_ends_with {
+    function regexp() { return '(?=' . preg_quote($this->word, '/') . '$)'; }
 }
 
 class TextSearchQuery_node_exact
@@ -935,7 +951,7 @@ class TextSearchQuery_Parser
      * /"[^"]*"/	  WORD
      * /'[^']*'/	  WORD
      *
-     * ^WORD              STARTS_WITH
+     * ^WORD              TextSearchQuery_phrase_starts_with
      * WORD*              STARTS_WITH
      * *WORD              ENDS_WITH
      * ^WORD$             EXACT
@@ -946,7 +962,9 @@ class TextSearchQuery_Parser
         $this->lexer = new TextSearchQuery_Lexer($search_expr, $case_exact, $regex);
         $this->_regex = $regex;
         $tree = $this->get_list('toplevel');
-        assert($this->lexer->eof());
+        // Assert failure when using the following URL in debug mode.
+        // /TitleSearch?action=FullTextSearch&s=WFXSSProbe'")/>&case_exact=1&regex=sql
+        //        assert($this->lexer->eof());
         unset($this->lexer);
         return $tree;
     }
@@ -971,6 +989,12 @@ class TextSearchQuery_Parser
                 return new TextSearchQuery_node;
             else
                 return false;
+        }
+        if ($is_toplevel and count($list) == 1) {
+            if ($this->lexer->query_str[0] == '^')
+                return new TextSearchQuery_phrase_starts_with($list[0]->word);
+            else
+                return $list[0];
         }
         return new TextSearchQuery_node_and($list);
     }
@@ -1038,7 +1062,14 @@ class TextSearchQuery_Parser
             if ( $accept & $const and 
                 (($word = $this->lexer->get($const)) !== false))
             {
-                $classname = "TextSearchQuery_node_".strtolower($tok);
+                // phrase or word level?
+                if ($tok == 'STARTS_WITH' and $this->lexer->query_str[0] == '^')
+                    $classname = "TextSearchQuery_phrase_".strtolower($tok);
+                elseif ($tok == 'ENDS_WITH' and 
+                        string_ends_with($this->lexer->query_str,'$'))
+                    $classname = "TextSearchQuery_phrase_".strtolower($tok);
+                else
+                    $classname = "TextSearchQuery_node_".strtolower($tok);
                 return new $classname($word);
             }
         }
@@ -1051,6 +1082,7 @@ class TextSearchQuery_Lexer {
                                     $regex=TSQ_REGEX_AUTO) 
     {
         $this->tokens = $this->tokenize($query_str, $case_exact, $regex);
+        $this->query_str = $query_str;
         $this->pos = 0;
     }
 
@@ -1074,19 +1106,10 @@ class TextSearchQuery_Lexer {
         $tokens = array();
         $buf = $case_exact ? ltrim($string) : strtolower(ltrim($string));
         while (!empty($buf)) {
-            if (preg_match('/^(and|or)\b\s*/i', $buf, $m)) {
-                $val = strtolower($m[1]);
-                $type = TSQ_TOK_BINOP;
-            }
-            elseif (preg_match('/^(-|not\b)\s*/i', $buf, $m)) {
-                $val = strtolower($m[1]);
-                $type = TSQ_TOK_NOT;
-            }
-            elseif (preg_match('/^([()])\s*/', $buf, $m)) {
+            if (preg_match('/^([()])\s*/', $buf, $m)) {
                 $val = $m[1];
                 $type = $m[1] == '(' ? TSQ_TOK_LPAREN : TSQ_TOK_RPAREN;
             }
-            
             // * => ALL
             elseif ($regex & (TSQ_REGEX_AUTO|TSQ_REGEX_POSIX|TSQ_REGEX_GLOB)
                     and preg_match('/^\*\s*/', $buf, $m)) {
@@ -1135,6 +1158,14 @@ class TextSearchQuery_Lexer {
                     and preg_match('/^\^([^-()][^()\s]*)\$\s*/', $buf, $m)) {
                 $val = $m[1];
                 $type = TSQ_TOK_EXACT;
+            }
+            elseif (preg_match('/^(and|or)\b\s*/i', $buf, $m)) {
+                $val = strtolower($m[1]);
+                $type = TSQ_TOK_BINOP;
+            }
+            elseif (preg_match('/^(-|not\b)\s*/i', $buf, $m)) {
+                $val = strtolower($m[1]);
+                $type = TSQ_TOK_NOT;
             }
             
             // "words "
@@ -1185,41 +1216,6 @@ class TextSearchQuery_Lexer {
         return $val;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.33  2008/05/21 04:28:38  rurban
-// for the previous pcre short-cut
-//
-// Revision 1.32  2008/05/06 19:25:55  rurban
-// perfomance optimisation: do numeric checks. Change EXACT semantics: ignore case_exact, always do strcmp. Change WORD match to use \b word boundary checks
-//
-// Revision 1.31  2007/09/12 19:36:47  rurban
-// Fix Bug#1792170: Handle " ( " or "(test" without closing ")" as plain word. Allow single string token "0"
-//
-// Revision 1.30  2007/07/14 12:31:00  rurban
-// fix bug#1752172 undefined method TextSearchQuery_node_or::_sql_quote()
-//
-// Revision 1.29  2007/07/14 12:03:38  rurban
-// support ranked search: simple score() function
-//
-// Revision 1.28  2007/03/18 17:35:26  rurban
-// Improve comments
-//
-// Revision 1.27  2007/01/21 23:27:32  rurban
-// Fix ->_backend->qstr()
-//
-// Revision 1.26  2007/01/04 16:41:52  rurban
-// Improve error description. Fix the function parser for illegal functions, when the tokenizer cannot be used.
-//
-// Revision 1.25  2007/01/03 21:22:34  rurban
-// add getType(). NumericSearchQuery::check Improve hacker detection using token_get_all(). Better support for multiple attributes. Add getVars().
-//
-// Revision 1.24  2007/01/02 13:19:05  rurban
-// add NumericSearchQuery. change on pcre: no parsing done, detect modifiers
-//
-// Revision 1.23  2006/04/13 19:30:44  rurban
-// make TextSearchQuery->_stoplist localizable and overridable within config.ini
-// 
 
 // Local Variables:
 // mode: php

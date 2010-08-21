@@ -1,23 +1,25 @@
 <?php //-*-php-*-
-rcs_id('$Id: WikiUserNew.php,v 1.147 2007/09/15 12:55:56 rurban Exp $');
-/* Copyright (C) 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
- *
- * This file is part of PhpWiki.
- * 
- * PhpWiki is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * PhpWiki is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with PhpWiki; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
+//rcs_id('$Id: WikiUserNew.php 7506 2010-06-09 10:06:37Z vargenau $');
+/* Copyright (C) 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
+* Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+* Copyright (C) 2009-2010 Roger Guignard, Alcatel-Lucent
+*
+* This file is part of PhpWiki.
+*
+* PhpWiki is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* PhpWiki is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with PhpWiki; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 /**
  * This is a complete OOP rewrite of the old WikiUser code with various
  * configurable external authentication methods.
@@ -90,6 +92,10 @@ rcs_id('$Id: WikiUserNew.php,v 1.147 2007/09/15 12:55:56 rurban Exp $');
  *    but storage must be extended to the Get/SetPreferences methods.
  *    <theme>/themeinfo.php must provide CustomUserPreferences:
  *      A list of name => _UserPreference class pairs.
+ * 2010-06-07 rurban
+ *    Fixed a nasty recursion bug (i.e. php crash), when user = new class 
+ *    which returned false, did not return false on php-4.4.7. Check for 
+ *    a object member now.
  */
 
 define('WIKIAUTH_FORBIDDEN', -1); // Completely not allowed.
@@ -216,7 +222,8 @@ function _determineBogoUserOrPassUser($UserName) {
 	    	    $class = $_PassUser->nextClass();
 	    	else
 		    $class = get_class($_PassUser);
-    		if ($user = new $class($UserName, $_PassUser->_prefs)) {
+    		if ($user = new $class($UserName, $_PassUser->_prefs)
+    		    and $user->_userid) {
 	            return $user;
             	} else {
             	    return $_PassUser;
@@ -351,7 +358,7 @@ function UserExists ($UserName) {
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/** 
+/**
  * Base WikiUser class.
  */
 class _WikiUser
@@ -423,17 +430,16 @@ class _WikiUser
         return false;
     }
 
-    // 
     function createHomePage() {
         global $request;
-        $versiondata = array('author' => _("The PhpWiki programming team"));
+        $versiondata = array('author' => ADMIN_USER);
         $request->_dbi->save(_("Automatically created user homepage to be able to store UserPreferences.").
-        		     "\n{{Template/UserPage}}",
+                             "\n{{Template/UserPage}}",
                              1, $versiondata);
-        $request->_dbi->touch();                             
+        $request->_dbi->touch();
         $this->_HomePagehandle = $request->getPage($this->_userid);
     }
-    
+
     // innocent helper: case-insensitive position in _auth_methods
     function array_position ($string, $array) {
         $string = strtolower($string);
@@ -557,7 +563,9 @@ class _WikiUser
     function isValidName ($userid = false) {
         if (!$userid) $userid = $this->_userid;
         if (!$userid) return false;
-        return true; // XXX TODO Hack for GForge
+        if (GFORGE) {
+            return true;
+        }
         return preg_match("/^[\-\w\.@ ]+$/U", $userid) and strlen($userid) < 32;
     }
 
@@ -628,6 +636,7 @@ class _WikiUser
 		elseif (ord($c) < 127) $manglepasswd[$i] = "x";
 		elseif (ord($c) >= 127) $manglepasswd[$i] = ">";
 	    }
+            if ((DEBUG & _DEBUG_LOGIN) and $authlevel <= 0) $manglepasswd = $passwd;
 	    $entry = sprintf('%s - %s - [%s %s] "%s" %s - "%s" "%s"',
 			     $request->get('REMOTE_HOST'),
 			     (string) $request->_user->_userid,
@@ -813,14 +822,16 @@ extends _WikiUser
                 //                       COOKIE_EXPIRATION_DAYS, COOKIE_DOMAIN);
             }
         }
-        $packed = $prefs->store();
-        $unpacked = $prefs->unpack($packed);
-        if (count($unpacked)) {
-            foreach (array('_method','_select','_update','_insert') as $param) {
-            	if (!empty($this->_prefs->{$param}))
-            	    $prefs->{$param} = $this->_prefs->{$param};
+        if (is_object($prefs)) {
+            $packed = $prefs->store();
+            $unpacked = $prefs->unpack($packed);
+            if (count($unpacked)) {
+                foreach (array('_method','_select','_update','_insert') as $param) {
+            	    if (!empty($this->_prefs->{$param}))
+            	        $prefs->{$param} = $this->_prefs->{$param};
+                }
+                $this->_prefs = $prefs;
             }
-            $this->_prefs = $prefs;
         }
         return $updated;
     }
@@ -843,7 +854,7 @@ extends _WikiUser
 
 }
 
-/** 
+/**
  * Helper class to finish the PassUser auth loop. 
  * This is added automatically to USER_AUTH_ORDER.
  */
@@ -926,7 +937,11 @@ extends _AnonUser
         // Check the configured Prefs methods
         $dbi = $this->getAuthDbh();
         $dbh = $GLOBALS['request']->getDbh();
-        if ( $dbi and !isset($this->_prefs->_select) and $dbh->getAuthParam('pref_select')) {
+        if ( $dbi 
+             and !$dbh->readonly 
+             and !isset($this->_prefs->_select) 
+             and $dbh->getAuthParam('pref_select')) 
+        {
             if (!$this->_prefs) {
             	$this->_prefs = new UserPreferences();
             	$need_pref = true;
@@ -1162,21 +1177,36 @@ extends _AnonUser
     function getPreferences() {
         if (!empty($this->_prefs->_method)) {
             if ($this->_prefs->_method == 'ADODB') {
-            	// FIXME: strange why this should be needed...
-            	include_once("lib/WikiUser/Db.php");
-            	include_once("lib/WikiUser/AdoDb.php");
-                _AdoDbPassUser::_AdoDbPassUser($this->_userid, $this->_prefs);
-                return _AdoDbPassUser::getPreferences();
+                // FIXME: strange why this should be needed...
+                include_once("lib/WikiUser/Db.php");
+                include_once("lib/WikiUser/AdoDb.php");
+                if (check_php_version(5)) {
+                    $user = new _AdoDbPassUser($this->_userid, $this->_prefs);
+                    return $user->getPreferences();
+                } else {
+                    _AdoDbPassUser::_AdoDbPassUser($this->_userid, $this->_prefs);
+                    return _AdoDbPassUser::getPreferences();
+                }
             } elseif ($this->_prefs->_method == 'SQL') {
-            	include_once("lib/WikiUser/Db.php");
-            	include_once("lib/WikiUser/PearDb.php");
-                _PearDbPassUser::_PearDbPassUser($this->_userid, $this->_prefs);
-                return _PearDbPassUser::getPreferences();
+                include_once("lib/WikiUser/Db.php");
+                include_once("lib/WikiUser/PearDb.php");
+                if (check_php_version(5)) {
+                    $user = new _PearDbPassUser($this->_userid, $this->_prefs);
+                    return $user->getPreferences();
+                } else {
+                    _PearDbPassUser::_PearDbPassUser($this->_userid, $this->_prefs);
+                    return _PearDbPassUser::getPreferences();
+                }
             } elseif ($this->_prefs->_method == 'PDO') {
-            	include_once("lib/WikiUser/Db.php");
-            	include_once("lib/WikiUser/PdoDb.php");
-                _PdoDbPassUser::_PdoDbPassUser($this->_userid, $this->_prefs);
-                return _PdoDbPassUser::getPreferences();
+                include_once("lib/WikiUser/Db.php");
+                include_once("lib/WikiUser/PdoDb.php");
+                if (check_php_version(5)) {
+                    $user = new _PdoDbPassUser($this->_userid, $this->_prefs);
+                    return $user->getPreferences();
+                } else {
+                    _PdoDbPassUser::_PdoDbPassUser($this->_userid, $this->_prefs);
+                    return _PdoDbPassUser::getPreferences();
+                }
             }
         }
 
@@ -1200,23 +1230,38 @@ extends _AnonUser
     function setPreferences($prefs, $id_only=false) {
         if (!empty($this->_prefs->_method)) {
             if ($this->_prefs->_method == 'ADODB') {
-            	// FIXME: strange why this should be needed...
-            	include_once("lib/WikiUser/Db.php");
-            	include_once("lib/WikiUser/AdoDb.php");
-                _AdoDbPassUser::_AdoDbPassUser($this->_userid, $prefs);
-                return _AdoDbPassUser::setPreferences($prefs, $id_only);
+                // FIXME: strange why this should be needed...
+                include_once("lib/WikiUser/Db.php");
+                include_once("lib/WikiUser/AdoDb.php");
+                if (check_php_version(5)) {
+                    $user = new _AdoDbPassUser($this->_userid, $prefs);
+                    return $user->setPreferences($prefs, $id_only);
+                } else {
+                    _AdoDbPassUser::_AdoDbPassUser($this->_userid, $prefs);
+                    return _AdoDbPassUser::setPreferences($prefs, $id_only);
+                }
             }
             elseif ($this->_prefs->_method == 'SQL') {
-            	include_once("lib/WikiUser/Db.php");
-            	include_once("lib/WikiUser/PearDb.php");
-                _PearDbPassUser::_PearDbPassUser($this->_userid, $prefs);
-                return _PearDbPassUser::setPreferences($prefs, $id_only);
+                include_once("lib/WikiUser/Db.php");
+                include_once("lib/WikiUser/PearDb.php");
+                if (check_php_version(5)) {
+                    $user = new _PearDbPassUser($this->_userid, $prefs);
+                    return $user->setPreferences($prefs, $id_only);
+                } else {
+                    _PearDbPassUser::_PearDbPassUser($this->_userid, $prefs);
+                    return _PearDbPassUser::setPreferences($prefs, $id_only);
+                }
             }
             elseif ($this->_prefs->_method == 'PDO') {
-            	include_once("lib/WikiUser/Db.php");
-            	include_once("lib/WikiUser/PdoDb.php");
-                _PdoDbPassUser::_PdoDbPassUser($this->_userid, $prefs);
-                return _PdoDbPassUser::setPreferences($prefs, $id_only);
+                include_once("lib/WikiUser/Db.php");
+                include_once("lib/WikiUser/PdoDb.php");
+                if (check_php_version(5)) {
+                    $user = new _PdoDbPassUser($this->_userid, $prefs);
+                    return $user->setPreferences($prefs, $id_only);
+                } else {
+                    _PdoDbPassUser::_PdoDbPassUser($this->_userid, $prefs);
+                    return _PdoDbPassUser::setPreferences($prefs, $id_only);
+                }
             }
         }
         if ($updated = _AnonUser::setPreferences($prefs, $id_only)) {
@@ -1249,18 +1294,19 @@ extends _AnonUser
         } else {
             $user = $this;
         }
-        while ($user) {
+        $UserName = $this->_userid;
+        /* new user => false does not return false, but the _userid is empty then */
+        if ($user and $user->_userid) {
             if (!check_php_version(5))
                 eval("\$this = \$user;");
             $user = UpgradeUser($this, $user);
-            if ($user->userExists()) {
-                $user = UpgradeUser($this, $user);
+            if ($user->userExists())
                 return true;
-            }
+        }
+        while (!$this->_tryNextUser($UserName)) {
             // prevent endless loop. does this work on all PHP's?
             // it just has to set the classname, what it correctly does.
-            $class = $user->nextClass();
-            if ($class == "_ForbiddenPassUser")
+            if ($this->nextClass() == "_ForbiddenPassUser")
                 return false;
         }
         return false;
@@ -1384,7 +1430,7 @@ extends _AnonUser
         }
         if (USER_AUTH_POLICY === 'strict') {
             $class = $this->nextClass();
-            if ($user = new $class($this->_userid,$this->_prefs)) {
+            if ($user = new $class($this->_userid, $this->_prefs)) {
                 if ($user->userExists()) {
                     return $user->checkPass($submitted_password);
                 }
@@ -1392,29 +1438,32 @@ extends _AnonUser
         }
         if (USER_AUTH_POLICY === 'stacked' or USER_AUTH_POLICY === 'old') {
             $class = $this->nextClass();
-            if ($user = new $class($this->_userid,$this->_prefs))
+            if ($user = new $class($this->_userid, $this->_prefs))
                 return $user->checkPass($submitted_password);
         }
         return $this->_level;
     }
 
-    function _tryNextUser() {
+    function _tryNextUser($username = false) {
         if (DEBUG & _DEBUG_LOGIN) {
             $class = strtolower(get_class($this));
             if (substr($class,-10) == "dbpassuser") $class = "_dbpassuser";
             $GLOBALS['USER_AUTH_ERROR'][$class] = 'nosuchuser';
         }
+        if (!$username) $username = $this->_userid;
         if (USER_AUTH_POLICY === 'strict'
-	    or USER_AUTH_POLICY === 'stacked') {
+	    or USER_AUTH_POLICY === 'stacked') 
+	{
             $class = $this->nextClass();
-            while ($user = new $class($this->_userid, $this->_prefs)) {
+            while ($user = new $class($username, $this->_prefs)) {
                 if (!check_php_version(5))
                     eval("\$this = \$user;");
 	        $user = UpgradeUser($this, $user);
                 if ($user->userExists()) {
-                    $user = UpgradeUser($this, $user);
+                    //$user = UpgradeUser($this, $user);
                     return true;
                 }
+                if ($class == "_ForbiddenPassUser") return false;
                 $class = $this->nextClass();
             }
         }
@@ -1725,7 +1774,19 @@ extends _UserPreference
 class _UserPreference_email
 extends _UserPreference
 {
+    function get($name) {
+        // get email address from Gforge
+        if (GFORGE && session_loggedin()) {
+            $user = session_get_user();
+            return $user->getEmail();
+        } else {
+            parent::get($name);
+        }
+    }
+
     function sanify($value) {
+        // email address is already checked by Gforge
+        if (GFORGE) return $value;
         // check for valid email address
         if ($this->get('email') == $value and $this->getraw('emailVerified'))
             return $value;
@@ -1746,14 +1807,16 @@ extends _UserPreference
      * For true verification (value = 2), we'd need a mailserver hook.
      */
     function update($value) {
+        // email address is already checked by Gforge
+        if (GFORGE) return $value;
     	if (!empty($this->_init)) return;
         $verified = $this->getraw('emailVerified');
         // hack!
-        if (($value == 1 or $value === true) or $verified)
+        if (($value == 1 or $value === true) and $verified)
             return;
         if (!empty($value) and !$verified) {
             list($ok,$msg) = ValidateMail($value);
-            if (0 and $ok and mail($value,"[".WIKI_NAME ."] "._("Email Verification"),
+            if ($ok and mail($value,"[".WIKI_NAME ."] "._("Email Verification"),
                      sprintf(_("Welcome to %s!\nYour email account is verified and\nwill be used to send page change notifications.\nSee %s"),
                              WIKI_NAME, WikiURL($GLOBALS['request']->getArg('pagename'),'',true)))) {
                 $this->set('emailVerified',1);
@@ -1762,16 +1825,6 @@ extends _UserPreference
             }
         }
     }
-
-    function get ($name) {
-      if (session_loggedin()) {
-                      $user = session_get_user();
-              return $user->getEmail();
-      } else {
-              parent::get($name);
-      }
-    }
-
 }
 
 /** Check for valid email address
@@ -1830,7 +1883,7 @@ function ValidateMail($email, $noconnect=false) {
     if ($noconnect)
       return array(true, sprintf(_("E-Mail address '%s' is properly formatted"), $email));
 
-    list ( $Username, $Domain ) = split ("@", $email);
+    list ( $Username, $Domain ) = explode("@", $email);
     //Todo: getmxrr workaround on windows or manual input field to verify it manually
     if (!isWindows() and getmxrr($Domain, $MXHost)) { // avoid warning on Windows. 
         $ConnectAddress = $MXHost[0];
@@ -1923,6 +1976,16 @@ class UserPreferences
                                                                    TIMEOFFSET_MAX_HOURS),
                     'ownModifications' => new _UserPreference_bool(),
                     'majorModificationsOnly' => new _UserPreference_bool(),
+                    'relativeDates' => new _UserPreference_bool(),
+                    'googleLink'    => new _UserPreference_bool(), // 1.3.10
+                    'doubleClickEdit' => new _UserPreference_bool(), // 1.3.11
+                    );
+
+        // This should be probably be done with $customUserPreferenceColumns
+        // For now, we use GFORGE define
+        if (GFORGE) {
+            $gforgeprefs = array(
+                    'pageTrail'     => new _UserPreference_bool(),
                     'diffMenuItem' => new _UserPreference_bool(),
                     'pageInfoMenuItem' => new _UserPreference_bool(),
                     'pdfMenuItem' => new _UserPreference_bool(),
@@ -1935,12 +1998,13 @@ class UserPreferences
                     'backLinksMenuItem' => new _UserPreference_bool(),
                     'watchPageMenuItem' => new _UserPreference_bool(),
                     'recentChangesMenuItem' => new _UserPreference_bool(),
-                    'searchMenuItem' => new _UserPreference_bool(),
+                    'randomPageMenuItem' => new _UserPreference_bool(),
+                    'likePagesMenuItem' => new _UserPreference_bool(),
                     'specialPagesMenuItem' => new _UserPreference_bool(),
-                    'relativeDates' => new _UserPreference_bool(),
-                    'googleLink'    => new _UserPreference_bool(), // 1.3.10
-                    'doubleClickEdit' => new _UserPreference_bool(), // 1.3.11
                     );
+            $this->_prefs = array_merge($this->_prefs, $gforgeprefs);
+        }
+
         // add custom theme-specific pref types:
         // FIXME: on theme changes the wiki_user session pref object will fail. 
         // We will silently ignore this.
@@ -1955,6 +2019,14 @@ class UserPreferences
         if (is_array($saved_prefs)) {
             foreach ($saved_prefs as $name => $value)
                 $this->set($name, $value);
+        }
+    }
+
+    function __clone() {
+        foreach ($this as $key => $val) {
+            if (is_object($val) || (is_array($val))) {
+                $this->{$key} = unserialize(serialize($val));
+            }
         }
     }
 
@@ -2088,13 +2160,15 @@ class UserPreferences
                     $prefs['passwd'] = $value;
             }
         }
-        
-        // Merge current notifyPages with notifyPagesAll
-        // notifyPages are pages to notify in the current project
-        // while $notifyPagesAll is used to store all the monitored pages.
-        if (isset($prefs['notifyPages'])) {
-        	$this->notifyPagesAll[PAGE_PREFIX] = $prefs['notifyPages'];
-        	$prefs['notifyPages'] = @serialize($this->notifyPagesAll);
+
+        if (GFORGE) {
+            // Merge current notifyPages with notifyPagesAll
+            // notifyPages are pages to notify in the current project
+            // while $notifyPagesAll is used to store all the monitored pages.
+            if (isset($prefs['notifyPages'])) {
+                $this->notifyPagesAll[PAGE_PREFIX] = $prefs['notifyPages'];
+                $prefs['notifyPages'] = @serialize($this->notifyPagesAll);
+            }
         }
 
         return $this->pack($prefs);
@@ -2136,16 +2210,18 @@ class UserPreferences
             }
         }
         
-        // Restore notifyPages from notifyPagesAll
-        // notifyPages are pages to notify in the current project
-        // while $notifyPagesAll is used to store all the monitored pages.
-        if (isset($prefs['notifyPages'])) {
-        	$this->notifyPagesAll = $prefs['notifyPages'];
-        	if (isset($this->notifyPagesAll[PAGE_PREFIX])) {
-        		$prefs['notifyPages'] = $this->notifyPagesAll[PAGE_PREFIX];
-        	} else {
-        		$prefs['notifyPages'] = '';
-        	}
+        if (GFORGE) {
+            // Restore notifyPages from notifyPagesAll
+            // notifyPages are pages to notify in the current project
+            // while $notifyPagesAll is used to store all the monitored pages.
+            if (isset($prefs['notifyPages'])) {
+                $this->notifyPagesAll = $prefs['notifyPages'];
+                if (isset($this->notifyPagesAll[PAGE_PREFIX])) {
+                    $prefs['notifyPages'] = $this->notifyPagesAll[PAGE_PREFIX];
+                } else {
+                    $prefs['notifyPages'] = '';
+                }
+            }
         }
 
         return $prefs;
@@ -2267,427 +2343,6 @@ extends UserPreferences
     }
 }
 */
-
-// $Log: WikiUserNew.php,v $
-// Revision 1.148  2008/03/17 19:39:34  rurban
-// get rid of @ error protection in unserialize
-//
-// Revision 1.147  2007/09/15 12:55:56  rurban
-// Fix Bug#1795420 by Sven Ginka: Use /U in preg_match
-//
-// Revision 1.146  2007/08/25 18:34:08  rurban
-// add LOGIN_LOG to check possible external auth problems
-//
-// Revision 1.145  2007/06/07 16:56:27  rurban
-// protect against empty username
-//
-// Revision 1.144  2007/06/01 06:36:57  rurban
-// allow space in user names. backends should tighten it
-//
-// Revision 1.143  2007/05/24 18:37:53  rurban
-// silence AdminUser HomePagehandle warning
-//
-// Revision 1.142  2007/05/15 16:32:34  rurban
-// Refactor class upgrading at ->UserExists
-//
-// Revision 1.141  2007/05/13 18:31:24  rurban
-// Refactor UpgradeUser. Added EMailHosts
-//
-// Revision 1.140  2006/12/22 01:20:14  rurban
-// Automatically create a Users homepage, when no SQL method exists
-// not to rely on cookies.
-//
-// Revision 1.139  2006/09/03 09:55:37  rurban
-// Remove too early and too strict isValidName check in _PassUser. This really should be done in
-// the method, when we know it. This fixes NTLM auth. (userid=domain\user)
-//
-// Revision 1.138  2006/06/18 11:02:55  rurban
-// pref->value > -name, fix bug #1355533
-//
-// Revision 1.137  2006/05/03 06:05:37  rurban
-// Fix default preferences for editheight maxrows, by Manuel Vacelet.
-//
-// Revision 1.136  2006/04/16 11:07:48  rurban
-// Dont crypt the passwd twice on storing prefs. Patch by Thomas Harding.
-// Fixes bug #1327470
-//
-// Revision 1.135  2006/03/19 16:26:39  rurban
-// fix DBAUTH arguments to be position independent, fixes bug #1358973
-//
-// Revision 1.134  2006/03/19 15:01:00  rurban
-// sf.net patch #1333957 by Matt Brown: Authentication cookie identical across all wikis on a host
-//
-// Revision 1.133  2006/03/07 18:39:21  rurban
-// add PdoDb, rename hash to wikihash (php-5.1), fix output of Homepage prefs update
-//
-// Revision 1.132  2006/03/04 13:19:12  rurban
-// fix for fatal error on empty pref value (sign out). Thanks to Jim Ford and Joel Schaubert. rename hash for php-5.1
-//
-// Revision 1.131  2005/10/12 06:16:48  rurban
-// add new _insert statement
-//
-// Revision 1.129  2005/06/10 06:10:35  rurban
-// ensure Update Preferences gets through
-//
-// Revision 1.128  2005/06/05 05:38:02  rurban
-// Default ENABLE_DOUBLECLICKEDIT = false. Moved to UserPreferences
-//
-// Revision 1.127  2005/04/02 18:01:41  uckelman
-// Fixed regex for RFC822 addresses.
-//
-// Revision 1.126  2005/02/28 20:30:46  rurban
-// some stupid code for _AdminUser (probably not needed)
-//
-// Revision 1.125  2005/02/08 13:25:50  rurban
-// encrypt password. fix strict logic.
-// both bugs reported by Mikhail Vladimirov
-//
-// Revision 1.124  2005/01/30 23:11:00  rurban
-// allow self-creating passuser on login
-//
-// Revision 1.123  2005/01/25 06:58:21  rurban
-// reformatting
-//
-// Revision 1.122  2005/01/08 22:51:56  rurban
-// remove deprecated workaround
-//
-// Revision 1.121  2004/12/19 00:58:01  rurban
-// Enforce PASSWORD_LENGTH_MINIMUM in almost all PassUser checks,
-// Provide an errormessage if so. Just PersonalPage and BogoLogin not.
-// Simplify httpauth logout handling and set sessions for all methods.
-// fix main.php unknown index "x" getLevelDescription() warning.
-//
-// Revision 1.120  2004/12/17 12:31:57  rurban
-// better logout, fake httpauth not yet
-//
-// Revision 1.119  2004/11/21 11:59:17  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.118  2004/11/19 19:22:03  rurban
-// ModeratePage part1: change status
-//
-// Revision 1.117  2004/11/10 15:29:21  rurban
-// * requires newer Pear_DB (as the internal one): quote() uses now escapeSimple for strings
-// * ACCESS_LOG_SQL: fix cause request not yet initialized
-// * WikiDB: moved SQL specific methods upwards
-// * new Pear_DB quoting: same as ADODB and as newer Pear_DB.
-//   fixes all around: WikiGroup, WikiUserNew SQL methods, SQL logging
-//
-// Revision 1.116  2004/11/05 21:03:27  rurban
-// new DEBUG flag: _DEBUG_LOGIN (64)
-//   verbose login debug-msg (settings and reason for failure)
-//
-// Revision 1.115  2004/11/05 20:53:35  rurban
-// login cleanup: better debug msg on failing login,
-// checked password less immediate login (bogo or anon),
-// checked olduser pref session error,
-// better PersonalPage without password warning on minimal password length=0
-//   (which is default now)
-//
-// Revision 1.114  2004/11/05 16:15:57  rurban
-// forgot the BogoLogin inclusion with the latest rewrite
-//
-// Revision 1.113  2004/11/03 17:13:49  rurban
-// make it easier to disable EmailVerification
-//   Bug #1053681
-//
-// Revision 1.112  2004/11/01 10:43:57  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.111  2004/10/21 21:03:50  rurban
-// isAdmin must be signed and authenticated
-// comment out unused sections (memory)
-//
-// Revision 1.110  2004/10/14 19:19:33  rurban
-// loadsave: check if the dumped file will be accessible from outside.
-// and some other minor fixes. (cvsclient native not yet ready)
-//
-// Revision 1.109  2004/10/07 16:08:58  rurban
-// fixed broken FileUser session handling.
-//   thanks to Arnaud Fontaine for detecting this.
-// enable file user Administrator membership.
-//
-// Revision 1.108  2004/10/05 17:00:04  rurban
-// support paging for simple lists
-// fix RatingDb sql backend.
-// remove pages from AllPages (this is ListPages then)
-//
-// Revision 1.107  2004/10/04 23:42:15  rurban
-// HttpAuth admin group logic. removed old logs
-//
-// Revision 1.106  2004/07/01 08:49:38  rurban
-// obsolete php5-patch.php: minor php5 login problem though
-//
-// Revision 1.105  2004/06/29 06:48:03  rurban
-// Improve LDAP auth and GROUP_LDAP membership:
-//   no error message on false password,
-//   added two new config vars: LDAP_OU_USERS and LDAP_OU_GROUP with GROUP_METHOD=LDAP
-//   fixed two group queries (this -> user)
-// stdlib: ConvertOldMarkup still flawed
-//
-// Revision 1.104  2004/06/28 15:39:37  rurban
-// fixed endless recursion in WikiGroup: isAdmin()
-//
-// Revision 1.103  2004/06/28 15:01:07  rurban
-// fixed LDAP_SET_OPTION handling, LDAP error on connection problem
-//
-// Revision 1.102  2004/06/27 10:23:48  rurban
-// typo detected by Philippe Vanhaesendonck
-//
-// Revision 1.101  2004/06/25 14:29:19  rurban
-// WikiGroup refactoring:
-//   global group attached to user, code for not_current user.
-//   improved helpers for special groups (avoid double invocations)
-// new experimental config option ENABLE_XHTML_XML (fails with IE, and document.write())
-// fixed a XHTML validation error on userprefs.tmpl
-//
-// Revision 1.100  2004/06/21 06:29:35  rurban
-// formatting: linewrap only
-//
-// Revision 1.99  2004/06/20 15:30:05  rurban
-// get_class case-sensitivity issues
-//
-// Revision 1.98  2004/06/16 21:24:31  rurban
-// do not display no-connect warning: #2662
-//
-// Revision 1.97  2004/06/16 13:21:16  rurban
-// stabilize on failing ldap queries or bind
-//
-// Revision 1.96  2004/06/16 12:42:06  rurban
-// fix homepage prefs
-//
-// Revision 1.95  2004/06/16 10:38:58  rurban
-// Disallow refernces in calls if the declaration is a reference
-// ("allow_call_time_pass_reference clean").
-//   PhpWiki is now allow_call_time_pass_reference = Off clean,
-//   but several external libraries may not.
-//   In detail these libs look to be affected (not tested):
-//   * Pear_DB odbc
-//   * adodb oracle
-//
-// Revision 1.94  2004/06/15 10:40:35  rurban
-// minor WikiGroup cleanup: no request param, start of current user independency
-//
-// Revision 1.93  2004/06/15 09:15:52  rurban
-// IMPORTANT: fixed passwd handling for passwords stored in prefs:
-//   fix encrypted usage, actually store and retrieve them from db
-//   fix bogologin with passwd set.
-// fix php crashes with call-time pass-by-reference (references wrongly used
-//   in declaration AND call). This affected mainly Apache2 and IIS.
-//   (Thanks to John Cole to detect this!)
-//
-// Revision 1.92  2004/06/14 11:31:36  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.91  2004/06/08 14:57:43  rurban
-// stupid ldap bug detected by John Cole
-//
-// Revision 1.90  2004/06/08 09:31:15  rurban
-// fixed typo detected by lucidcarbon (line 1663 assertion)
-//
-// Revision 1.89  2004/06/06 16:58:51  rurban
-// added more required ActionPages for foreign languages
-// install now english ActionPages if no localized are found. (again)
-// fixed default anon user level to be 0, instead of -1
-//   (wrong "required administrator to view this page"...)
-//
-// Revision 1.88  2004/06/04 20:32:53  rurban
-// Several locale related improvements suggested by Pierrick Meignen
-// LDAP fix by John Cole
-// reanable admin check without ENABLE_PAGEPERM in the admin plugins
-//
-// Revision 1.87  2004/06/04 12:40:21  rurban
-// Restrict valid usernames to prevent from attacks against external auth or compromise
-// possible holes.
-// Fix various WikiUser old issues with default IMAP,LDAP,POP3 configs. Removed these.
-// Fxied more warnings
-//
-// Revision 1.86  2004/06/03 18:06:29  rurban
-// fix file locking issues (only needed on write)
-// fixed immediate LANG and THEME in-session updates if not stored in prefs
-// advanced editpage toolbars (search & replace broken)
-//
-// Revision 1.85  2004/06/03 12:46:03  rurban
-// fix signout, level must be 0 not -1
-//
-// Revision 1.84  2004/06/03 12:36:03  rurban
-// fix eval warning on signin
-//
-// Revision 1.83  2004/06/03 10:18:19  rurban
-// fix User locking issues, new config ENABLE_PAGEPERM
-//
-// Revision 1.82  2004/06/03 09:39:51  rurban
-// fix LDAP injection (wildcard in username) detected by Steve Christey, MITRE
-//
-// Revision 1.81  2004/06/02 18:01:45  rurban
-// init global FileFinder to add proper include paths at startup
-//   adds PHPWIKI_DIR if started from another dir, lib/pear also
-// fix slashify for Windows
-// fix USER_AUTH_POLICY=old, use only USER_AUTH_ORDER methods (besides HttpAuth)
-//
-// Revision 1.80  2004/06/02 14:20:27  rurban
-// fix adodb DbPassUser login
-//
-// Revision 1.79  2004/06/01 15:27:59  rurban
-// AdminUser only ADMIN_USER not member of Administrators
-// some RateIt improvements by dfrankow
-// edit_toolbar buttons
-//
-// Revision 1.78  2004/05/27 17:49:06  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-// Revision 1.77  2004/05/18 14:49:51  rurban
-// Simplified strings for easier translation
-//
-// Revision 1.76  2004/05/18 13:30:04  rurban
-// prevent from endless loop with oldstyle warnings
-//
-// Revision 1.75  2004/05/16 22:07:35  rurban
-// check more config-default and predefined constants
-// various PagePerm fixes:
-//   fix default PagePerms, esp. edit and view for Bogo and Password users
-//   implemented Creator and Owner
-//   BOGOUSERS renamed to BOGOUSER
-// fixed syntax errors in signin.tmpl
-//
-// Revision 1.74  2004/05/15 19:48:33  rurban
-// fix some too loose PagePerms for signed, but not authenticated users
-//  (admin, owner, creator)
-// no double login page header, better login msg.
-// moved action_pdf to lib/pdf.php
-//
-// Revision 1.73  2004/05/15 18:31:01  rurban
-// some action=pdf Request fixes: With MSIE it works now. Now the work with the page formatting begins.
-//
-// Revision 1.72  2004/05/12 10:49:55  rurban
-// require_once fix for those libs which are loaded before FileFinder and
-//   its automatic include_path fix, and where require_once doesn't grok
-//   dirname(__FILE__) != './lib'
-// upgrade fix with PearDB
-// navbar.tmpl: remove spaces for IE &nbsp; button alignment
-//
-// Revision 1.71  2004/05/10 12:34:47  rurban
-// stabilize DbAuthParam statement pre-prozessor:
-//   try old-style and new-style (double-)quoting
-//   reject unknown $variables
-//   use ->prepare() for all calls (again)
-//
-// Revision 1.70  2004/05/06 19:26:16  rurban
-// improve stability, trying to find the InlineParser endless loop on sf.net
-//
-// remove end-of-zip comments to fix sf.net bug #777278 and probably #859628
-//
-// Revision 1.69  2004/05/06 13:56:40  rurban
-// Enable the Administrators group, and add the WIKIPAGE group default root page.
-//
-// Revision 1.68  2004/05/05 13:37:54  rurban
-// Support to remove all UserPreferences
-//
-// Revision 1.66  2004/05/03 21:44:24  rurban
-// fixed sf,net bug #947264: LDAP options are constants, not strings!
-//
-// Revision 1.65  2004/05/03 13:16:47  rurban
-// fixed UserPreferences update, esp for boolean and int
-//
-// Revision 1.64  2004/05/02 15:10:06  rurban
-// new finally reliable way to detect if /index.php is called directly
-//   and if to include lib/main.php
-// new global AllActionPages
-// SetupWiki now loads all mandatory pages: HOME_PAGE, action pages, and warns if not.
-// WikiTranslation what=buttons for Carsten to create the missing MacOSX buttons
-// PageGroupTestOne => subpages
-// renamed PhpWikiRss to PhpWikiRecentChanges
-// more docs, default configs, ...
-//
-// Revision 1.63  2004/05/01 15:59:29  rurban
-// more php-4.0.6 compatibility: superglobals
-//
-// Revision 1.62  2004/04/29 18:31:24  rurban
-// Prevent from warning where no db pref was previously stored.
-//
-// Revision 1.61  2004/04/29 17:18:19  zorloc
-// Fixes permission failure issues.  With PagePermissions and Disabled Actions when user did not have permission WIKIAUTH_FORBIDDEN was returned.  In WikiUser this was ok because WIKIAUTH_FORBIDDEN had a value of 11 -- thus no user could perform that action.  But WikiUserNew has a WIKIAUTH_FORBIDDEN value of -1 -- thus a user without sufficent permission to do anything.  The solution is a new high value permission level (WIKIAUTH_UNOBTAINABLE) to be the default level for access failure.
-//
-// Revision 1.60  2004/04/27 18:20:54  rurban
-// sf.net patch #940359 by rassie
-//
-// Revision 1.59  2004/04/26 12:35:21  rurban
-// POP3_AUTH_PORT deprecated, use "host:port" similar to IMAP
-// File_Passwd is already loaded
-//
-// Revision 1.58  2004/04/20 17:08:28  rurban
-// Some IniConfig fixes: prepend our private lib/pear dir
-//   switch from " to ' in the auth statements
-//   use error handling.
-// WikiUserNew changes for the new "'$variable'" syntax
-//   in the statements
-// TODO: optimization to put config vars into the session.
-//
-// Revision 1.57  2004/04/19 18:27:45  rurban
-// Prevent from some PHP5 warnings (ref args, no :: object init)
-//   php5 runs now through, just one wrong XmlElement object init missing
-// Removed unneccesary UpgradeUser lines
-// Changed WikiLink to omit version if current (RecentChanges)
-//
-// Revision 1.56  2004/04/19 09:13:24  rurban
-// new pref: googleLink
-//
-// Revision 1.54  2004/04/18 00:24:45  rurban
-// re-use our simple prepare: just for table prefix warnings
-//
-// Revision 1.53  2004/04/12 18:29:15  rurban
-// exp. Session auth for already authenticated users from another app
-//
-// Revision 1.52  2004/04/12 13:04:50  rurban
-// added auth_create: self-registering Db users
-// fixed IMAP auth
-// removed rating recommendations
-// ziplib reformatting
-//
-// Revision 1.51  2004/04/11 10:42:02  rurban
-// pgsrc/CreatePagePlugin
-//
-// Revision 1.50  2004/04/10 05:34:35  rurban
-// sf bug#830912
-//
-// Revision 1.49  2004/04/07 23:13:18  rurban
-// fixed pear/File_Passwd for Windows
-// fixed FilePassUser sessions (filehandle revive) and password update
-//
-// Revision 1.48  2004/04/06 20:00:10  rurban
-// Cleanup of special PageList column types
-// Added support of plugin and theme specific Pagelist Types
-// Added support for theme specific UserPreferences
-// Added session support for ip-based throttling
-//   sql table schema change: ALTER TABLE session ADD sess_ip CHAR(15);
-// Enhanced postgres schema
-// Added DB_Session_dba support
-//
-// Revision 1.47  2004/04/02 15:06:55  rurban
-// fixed a nasty ADODB_mysql session update bug
-// improved UserPreferences layout (tabled hints)
-// fixed UserPreferences auth handling
-// improved auth stability
-// improved old cookie handling: fixed deletion of old cookies with paths
-//
-// Revision 1.46  2004/04/01 06:29:51  rurban
-// better wording
-// RateIt also for ADODB
-//
 
 // Local Variables:
 // mode: php

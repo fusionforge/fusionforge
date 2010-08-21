@@ -1,10 +1,10 @@
-<?php rcs_id('$Id: ErrorManager.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: ErrorManager.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 if (isset($GLOBALS['ErrorManager'])) return;
 
 // php5: ignore E_STRICT (var warnings)
 /*
-if (defined('E_STRICT') 
+if (defined('E_STRICT')
     and (E_ALL & E_STRICT)
     and (error_reporting() & E_STRICT)) {
     echo " errormgr: error_reporting=", error_reporting();
@@ -12,14 +12,14 @@ if (defined('E_STRICT')
     error_reporting(E_ALL & ~E_STRICT);
 }
 */
-define ('EM_FATAL_ERRORS', E_ERROR | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | ~2048);
+define ('EM_FATAL_ERRORS', E_ERROR | E_PARSE | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | ~2048 & ((check_php_version(5,3)) ? ~E_DEPRECATED : ~0));
 define ('EM_WARNING_ERRORS',
-	E_WARNING | E_CORE_WARNING | E_COMPILE_WARNING | E_USER_WARNING);
+	E_WARNING | E_CORE_WARNING | E_COMPILE_WARNING | E_USER_WARNING | ((check_php_version(5,3)) ? E_DEPRECATED : 0));
 define ('EM_NOTICE_ERRORS', E_NOTICE | E_USER_NOTICE);
 
-/* It is recommended to leave assertions on. 
+/* It is recommended to leave assertions on.
    You can simply comment the two lines below to leave them on.
-   Only where absolute speed is necessary you might want to turn 
+   Only where absolute speed is necessary you might want to turn
    them off.
 */
 //also turn it on if phpwiki_version notes no release
@@ -40,8 +40,8 @@ function wiki_assert_handler ($file, $line, $code) {
  * of it --- you can access the one instance via $GLOBALS['ErrorManager'].
  *
  * FIXME: more docs.
- */ 
-class ErrorManager 
+ */
+class ErrorManager
 {
     /**
      * Constructor.
@@ -55,7 +55,7 @@ class ErrorManager
         $this->_postpone_mask = 0;
         $this->_postponed_errors = array();
 
-        set_error_handler('ErrorManager_errorHandler');
+        // set_error_handler('ErrorManager_errorHandler');
     }
 
     /**
@@ -97,7 +97,7 @@ class ErrorManager
         else
             echo $this->_flush_errors();
     }
-    
+  
     /**
      * Get rid of all pending error messages in case of all non-html
      * - pdf or image - output.
@@ -112,7 +112,7 @@ class ErrorManager
      *
      * This also flushes the postponed error queue.
      *
-     * @return object HTML describing any queued errors (or false, if none). 
+     * @return object HTML describing any queued errors (or false, if none).
      */
     function getPostponedErrorsAsHTML() {
         $flushed = $this->_flush_errors();
@@ -129,14 +129,14 @@ class ErrorManager
         }
         if ($worst_err->isNotice())
             return $flushed;
-        $class = $worst_err->getHtmlClass(); 
+        $class = $worst_err->getHtmlClass();
         $html = HTML::div(array('style' => 'border: none', 'class' => $class),
-                          HTML::h4(array('class' => 'errors'), 
+                          HTML::h4(array('class' => 'errors'),
                                    "PHP " . $worst_err->getDescription()));
         $html->pushContent($flushed);
         return $html;
     }
-    
+  
     /**
      * Push a custom error handler on the handler stack.
      *
@@ -228,7 +228,7 @@ class ErrorManager
         if (!empty($GLOBALS['request']->_finishing)) {
             $this->_postpone_mask = 0;
 	}
-        
+      
         $in_handler = true;
 
         foreach ($this->_handlers as $handler) {
@@ -260,9 +260,20 @@ class ErrorManager
         // Handle it ourself.
         if ($error->isFatal()) {
             $this->_noCacheHeaders();
-            echo "<html><body><div style=\"font-weight:bold; color:red\">Fatal Error:</div>\n";
+            echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n";
+	    echo "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
+            echo "<html>\n";
+            echo "<head>\n";
+            echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
+            echo "<title>Fatal Error</title>\n";
+            echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"themes/default/phpwiki.css\" />\n";
+            echo "</head>\n";
+            echo "<body>\n";
+            echo "<div style=\"font-weight:bold; color:red\">Fatal Error:</div>\n";
+
             if (defined('DEBUG') and (DEBUG & _DEBUG_TRACE)) {
-                echo "error_reporting=",error_reporting(),"\n<br>";
+                echo "error_reporting=",error_reporting(),"\n<br />";
                 if (function_exists("debug_backtrace")) // >= 4.3.0
                     $error->printSimpleTrace(debug_backtrace());
             }
@@ -271,7 +282,7 @@ class ErrorManager
         else if (($error->errno & error_reporting()) != 0) {
             if  (($error->errno & $this->_postpone_mask) != 0) {
                 if ((function_exists('isa') and isa($error, 'PhpErrorOnce'))
-                    or (!function_exists('isa') and 
+                    or (!function_exists('isa') and
                     (
                      // stdlib independent isa()
                      (strtolower(get_class($error)) == 'phperroronce')
@@ -300,7 +311,7 @@ class ErrorManager
     function warning($msg, $errno = E_USER_NOTICE) {
         $this->handleError(new PhpWikiError($errno, $msg, '?', '?'));
     }
-    
+  
     /**
      * @access private
      */
@@ -344,7 +355,7 @@ class ErrorManager
             $request->_validators->_mtime = false;
         }
         if ($already) return;
-        
+      
         // FIXME: Howto announce that to Request->cacheControl()?
         if (!headers_sent()) {
             header( "Cache-control: no-cache" );
@@ -359,19 +370,20 @@ class ErrorManager
  *
  * This is necessary since PHP's set_error_handler() does not allow
  * one to set an object method as a handler.
- * 
+ *
  * @access private
  */
-function ErrorManager_errorHandler($errno, $errstr, $errfile, $errline) 
+function ErrorManager_errorHandler($errno, $errstr, $errfile, $errline)
 {
     if (!isset($GLOBALS['ErrorManager'])) {
       $GLOBALS['ErrorManager'] = new ErrorManager;
     }
-	
-    if (defined('DEBUG') and DEBUG)
-        $error = new PhpWikiError($errno, $errstr, $errfile, $errline);
-    else
-	$error = new PhpErrorOnce($errno, $errstr, $errfile, $errline);
+
+    if (defined('DEBUG') and DEBUG) {
+        $error = new PhpError($errno, $errstr, $errfile, $errline);
+    } else {
+        $error = new PhpErrorOnce($errno, $errstr, $errfile, $errline);
+    }
     $GLOBALS['ErrorManager']->handleError($error);
 }
 
@@ -449,7 +461,7 @@ class PhpError {
             return 'errors';
         }
     }
-    
+  
     function getDescription() {
         if ($this->isNotice()) {
             return 'Notice';
@@ -470,7 +482,7 @@ class PhpError {
            $dir = str_replace('/','\\',$dir);
            $this->errfile = str_replace('/','\\',$this->errfile);
            $dir .= "\\";
-        } else 
+        } else
            $dir .= '/';
         $errfile = preg_replace('|^' . preg_quote($dir) . '|', '', $this->errfile);
         $lines = explode("\n", $this->errstr);
@@ -490,7 +502,7 @@ class PhpError {
                          $this->getDescription(),
                          array_shift($lines));
         }
-        
+      
         $html = HTML::div(array('class' => $this->getHtmlClass()), HTML::p($msg));
         // The class is now used for the div container.
         // $html = HTML::div(HTML::p($msg));
@@ -500,7 +512,7 @@ class PhpError {
                 $list->pushContent(HTML::li($line));
             $html->pushContent($list);
         }
-        
+      
         return $html;
     }
 
@@ -557,7 +569,7 @@ class PhpWikiError extends PhpError {
     }
 
     function _getDetail() {
-        return HTML::div(array('class' => $this->getHtmlClass()), 
+        return HTML::div(array('class' => $this->getHtmlClass()),
                          HTML::p($this->getDescription() . ": $this->errstr"));
     }
 }
@@ -565,7 +577,7 @@ class PhpWikiError extends PhpError {
 /**
  * A class representing a Php warning, printed only the first time.
  *
- * Similar to PhpError, except only the first same error message is printed, 
+ * Similar to PhpError, except only the first same error message is printed,
  * with number of occurences.
  */
 class PhpErrorOnce extends PhpError {
@@ -594,7 +606,7 @@ class PhpErrorOnce extends PhpError {
         }
         return $this->_count;
     }
-    
+  
     function _getDetail($count=0) {
     	if (!$count) $count = $this->_count;
 	$dir = defined('PHPWIKI_DIR') ? PHPWIKI_DIR : substr(dirname(__FILE__),0,-4);
@@ -602,7 +614,7 @@ class PhpErrorOnce extends PhpError {
            $dir = str_replace('/','\\',$dir);
            $this->errfile = str_replace('/','\\',$this->errfile);
            $dir .= "\\";
-        } else 
+        } else
            $dir .= '/';
         $errfile = preg_replace('|^' . preg_quote($dir) . '|', '', $this->errfile);
         if (is_string($this->errstr))
@@ -624,7 +636,7 @@ class PhpErrorOnce extends PhpError {
 			 array_shift($lines),
 			 $count > 1 ? sprintf(" (...repeated %d times)",$count) : "");
 	}
-        $html = HTML::div(array('class' => $this->getHtmlClass()), 
+        $html = HTML::div(array('class' => $this->getHtmlClass()),
                           HTML::p($msg));
         if ($lines) {
             $list = HTML::ul();
@@ -632,126 +644,21 @@ class PhpErrorOnce extends PhpError {
                 $list->pushContent(HTML::li($line));
             $html->pushContent($list);
         }
-        
+      
         return $html;
     }
 }
 
-require_once(dirname(__FILE__).'/HtmlElement.php');
+if (check_php_version(5,2)) {
+    require_once(dirname(__FILE__).'/HtmlElement5.php');
+} else {
+    require_once(dirname(__FILE__).'/HtmlElement.php');
+}
 
 if (!isset($GLOBALS['ErrorManager'])) {
     $GLOBALS['ErrorManager'] = new ErrorManager;
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.53  2008/03/17 19:04:05  rurban
-// added destroyPostponedErrors: Get rid of all pending error messages in case of all
-// non-html - pdf or image - output.
-//
-// Revision 1.52  2007/09/19 17:59:26  rurban
-// use duplicates to save memory with DEBUG
-//
-// Revision 1.51  2007/09/15 12:31:37  rurban
-// dont fatal on multi-page dumps
-//
-// Revision 1.50  2007/01/09 12:35:28  rurban
-// release ready: turn off assert
-//
-// Revision 1.49  2006/12/22 00:17:49  rurban
-// improve and unify error messages
-//
-// Revision 1.48  2006/03/19 14:29:40  rurban
-// sf.net patch #1438439 by Matt Brown: Only set no-cache headers when error output is generated
-//
-// Revision 1.47  2005/10/31 17:20:40  rurban
-// fix ConvertBefore
-//
-// Revision 1.46  2005/10/30 16:38:13  rurban
-// minor fixes
-//
-// Revision 1.45  2005/10/29 14:28:08  uckelman
-// existence of isa should be checked, not built-in is_a()
-//
-// Revision 1.44  2005/08/07 10:52:43  rurban
-// stricter error handling: dba errors are fatal, display errors on Request->finish or session_close
-//
-// Revision 1.43  2005/04/11 19:41:23  rurban
-// Improve postponed errors+warnins list layout.
-//
-// Revision 1.42  2005/02/26 18:29:07  rurban
-// re-enable colored boxed errors
-//
-// Revision 1.41  2004/12/26 17:08:36  rurban
-// php5 fixes: case-sensitivity, no & new
-//
-// Revision 1.40  2004/12/13 14:39:46  rurban
-// aesthetics
-//
-// Revision 1.39  2004/11/05 18:04:20  rurban
-// print errno only if _DEBUG_VERBOSE
-//
-// Revision 1.38  2004/10/19 17:34:55  rurban
-// <4.3 fix
-//
-// Revision 1.37  2004/10/14 19:23:58  rurban
-// remove debugging prints
-//
-// Revision 1.36  2004/10/12 15:35:43  rurban
-// avoid Php Notice header
-//
-// Revision 1.35  2004/10/12 13:13:19  rurban
-// php5 compatibility (5.0.1 ok)
-//
-// Revision 1.34  2004/09/24 18:52:19  rurban
-// in deferred html error messages use the worst header and class
-// (notice => warning => errors)
-//
-// Revision 1.33  2004/09/14 10:28:21  rurban
-// use assert, maybe we should only turn it off for releases
-//
-// Revision 1.32  2004/07/08 13:50:32  rurban
-// various unit test fixes: print error backtrace on _DEBUG_TRACE; allusers fix; new PHPWIKI_NOMAIN constant for omitting the mainloop
-//
-// Revision 1.31  2004/07/02 09:55:58  rurban
-// more stability fixes: new DISABLE_GETIMAGESIZE if your php crashes when loading LinkIcons: failing getimagesize in old phps; blockparser stabilized
-//
-// Revision 1.30  2004/06/25 14:29:12  rurban
-// WikiGroup refactoring:
-//   global group attached to user, code for not_current user.
-//   improved helpers for special groups (avoid double invocations)
-// new experimental config option ENABLE_XHTML_XML (fails with IE, and document.write())
-// fixed a XHTML validation error on userprefs.tmpl
-//
-// Revision 1.29  2004/06/20 15:30:04  rurban
-// get_class case-sensitivity issues
-//
-// Revision 1.28  2004/06/16 11:51:04  rurban
-// fixed typo: undefined object #235
-//
-// Revision 1.27  2004/06/13 09:38:20  rurban
-// isa() workaround, if stdlib.php is not loaded
-//
-// Revision 1.26  2004/06/02 18:01:45  rurban
-// init global FileFinder to add proper include paths at startup
-//   adds PHPWIKI_DIR if started from another dir, lib/pear also
-// fix slashify for Windows
-// fix USER_AUTH_POLICY=old, use only USER_AUTH_ORDER methods (besides HttpAuth)
-//
-// Revision 1.25  2004/06/02 10:18:36  rurban
-// assert only if DEBUG is non-false
-//
-// Revision 1.24  2004/05/27 17:49:05  rurban
-// renamed DB_Session to DbSession (in CVS also)
-// added WikiDB->getParam and WikiDB->getAuthParam method to get rid of globals
-// remove leading slash in error message
-// added force_unlock parameter to File_Passwd (no return on stale locks)
-// fixed adodb session AffectedRows
-// added FileFinder helpers to unify local filenames and DATA_PATH names
-// editpage.php: new edit toolbar javascript on ENABLE_EDIT_TOOLBAR
-//
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8

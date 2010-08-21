@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: difflib.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: difflib.php 7502 2010-06-09 06:23:12Z rurban $');
 
 // difflib.php
 //
@@ -8,11 +8,6 @@ rcs_id('$Id: difflib.php 6184 2008-08-22 10:33:41Z vargenau $');
 // Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
 // You may copy this code freely under the conditions of the GPL.
 //
-
-// FIXME: possibly remove assert()'s for production version?
-
-// PHP3 does not have assert()
-define('USE_ASSERTS', function_exists('assert'));
 
 class _DiffOp {
     var $type;
@@ -164,8 +159,8 @@ class _DiffEngine
         $edits = array();
         $xi = $yi = 0;
         while ($xi < $n_from || $yi < $n_to) {
-            USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
-            USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
+            assert($yi < $n_to || $this->xchanged[$xi]);
+            assert($xi < $n_from || $this->ychanged[$yi]);
 
             // Skip matching "snake".
             $copy = array();
@@ -253,13 +248,13 @@ class _DiffEngine
 		while (list ($junk, $y) = each($matches))
 		    if (empty($this->in_seq[$y])) {
 			$k = $this->_lcs_pos($y);
-			USE_ASSERTS && assert($k > 0);
+			assert($k > 0);
 			$ymids[$k] = $ymids[$k-1];
 			break;
                     }
 		while (list ($junk, $y) = each($matches)) {
 		    if ($y > $this->seq[$k-1]) {
-			USE_ASSERTS && assert($y < $this->seq[$k]);
+			assert($y < $this->seq[$k]);
 			// Optimization: this is a common case:
 			//  next match is just replacing previous match.
 			$this->in_seq[$this->seq[$k]] = false;
@@ -268,7 +263,7 @@ class _DiffEngine
                     }
 		    else if (empty($this->in_seq[$y])) {
 			$k = $this->_lcs_pos($y);
-			USE_ASSERTS && assert($k > 0);
+			assert($k > 0);
 			$ymids[$k] = $ymids[$k-1];
                     }
                 }
@@ -304,7 +299,7 @@ class _DiffEngine
 		$end = $mid;
         }
 
-	USE_ASSERTS && assert($ypos != $this->seq[$end]);
+	assert($ypos != $this->seq[$end]);
 
 	$this->in_seq[$this->seq[$end]] = false;
 	$this->seq[$end] = $ypos;
@@ -384,7 +379,7 @@ class _DiffEngine
 	$i = 0;
 	$j = 0;
 
-	USE_ASSERTS && assert('sizeof($lines) == sizeof($changed)');
+	assert('sizeof($lines) == sizeof($changed)');
 	$len = sizeof($lines);
 	$other_len = sizeof($other_changed);
 
@@ -404,7 +399,7 @@ class _DiffEngine
 		$j++;
 	
 	    while ($i < $len && ! $changed[$i]) {
-		USE_ASSERTS && assert('$j < $other_len && ! $other_changed[$j]');
+		assert('$j < $other_len && ! $other_changed[$j]');
 		$i++; $j++;
 		while ($j < $other_len && $other_changed[$j])
 		    $j++;
@@ -436,10 +431,10 @@ class _DiffEngine
 		    $changed[--$i] = false;
 		    while ($start > 0 && $changed[$start - 1])
 			$start--;
-		    USE_ASSERTS && assert('$j > 0');
+		    assert('$j > 0');
 		    while ($other_changed[--$j])
 			continue;
-		    USE_ASSERTS && assert('$j >= 0 && !$other_changed[$j]');
+		    assert('$j >= 0 && !$other_changed[$j]');
                 }
 
 		/*
@@ -462,7 +457,7 @@ class _DiffEngine
 		    while ($i < $len && $changed[$i])
 			$i++;
 
-		    USE_ASSERTS && assert('$j < $other_len && ! $other_changed[$j]');
+		    assert('$j < $other_len && ! $other_changed[$j]');
 		    $j++;
 		    if ($j < $other_len && $other_changed[$j]) {
 			$corresponding = $i;
@@ -479,10 +474,10 @@ class _DiffEngine
 	    while ($corresponding < $i) {
 		$changed[--$start] = 1;
 		$changed[--$i] = 0;
-		USE_ASSERTS && assert('$j > 0');
+		assert('$j > 0');
 		while ($other_changed[--$j])
 		    continue;
-		USE_ASSERTS && assert('$j >= 0 && !$other_changed[$j]');
+		assert('$j >= 0 && !$other_changed[$j]');
             }
         }
     }
@@ -907,32 +902,6 @@ class BlockDiffFormatter extends DiffFormatter
         $this->_added($final);
     }
 }
-
-/**
- $Log: not supported by cvs2svn $
- Revision 1.11  2004/11/21 11:59:19  rurban
- remove final \n to be ob_cache independent
-
- Revision 1.10  2004/04/08 01:22:53  rurban
- fixed PageChange Notification
-
- Revision 1.9  2003/11/30 18:43:18  carstenklapp
- Fixed careless mistakes in my last optimization commit.
-
- Revision 1.8  2003/11/30 18:20:34  carstenklapp
- Minor code optimization: reduce invariant loops
-
- Revision 1.7  2003/01/03 22:27:17  carstenklapp
- Minor adjustments to diff block markers ("<<<<<<<"). Source reformatting.
-
- Revision 1.6  2003/01/02 22:51:43  carstenklapp
- Specifying a leading diff context size larger than the available
- context now returns the available number of lines instead of the
- default. (Prevent negative offsets to array_slice() when $nlead >
- sizeof($context)). Added BlockDiffFormatter, to be used by future
- enhancements to reload / upgrade pgsrc.
-
- */
 
 // Local Variables:
 // mode: php

@@ -1,11 +1,11 @@
 <?php // -*-php-*-
-rcs_id('$Id: MostPopularIter.php 6209 2008-08-26 15:30:39Z vargenau $');
+// rcs_id('$Id: MostPopularIter.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend.php');
 
 
 /**
- * An inefficient but general most_popular iterator. 
+ * An inefficient but general most_popular iterator.
  *
  * This iterator will work with any backend which implements the
  * backend::get_all_pages() and backend::get_pagedata()
@@ -42,14 +42,14 @@ extends WikiDB_backend_iterator
     function next() {
         return array_shift($this->_pages);
     }
-    
+  
     function free() {
         unset($this->_pages);
     }
 }
 
 function WikiDB_backend_dumb_MostPopularIter_sortf($a,$b) {
-    $ahits = $bhits = 0; 
+    $ahits = $bhits = 0;
     if (isset($a['pagedata']['hits']))
         $ahits = (int)$a['pagedata']['hits'];
     if (isset($b['pagedata']['hits']))
@@ -58,7 +58,7 @@ function WikiDB_backend_dumb_MostPopularIter_sortf($a,$b) {
 }
 
 function WikiDB_backend_dumb_MostPopularIter_sortf_rev($a,$b) {
-    $ahits = $bhits = 0; 
+    $ahits = $bhits = 0;
     if (isset($a['pagedata']['hits']))
         $ahits = (int)$a['pagedata']['hits'];
     if (isset($b['pagedata']['hits']))
@@ -66,9 +66,6 @@ function WikiDB_backend_dumb_MostPopularIter_sortf_rev($a,$b) {
     return $ahits - $bhits;
 }
 
-// $Log: not supported by cvs2svn $
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

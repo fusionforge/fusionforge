@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: removepage.php 6234 2008-09-05 15:18:45Z vargenau $');
+// rcs_id('$Id: removepage.php 7638 2010-08-11 11:58:40Z vargenau $');
 require_once('lib/Template.php');
 
 function RemovePage (&$request) {
@@ -22,26 +22,23 @@ function RemovePage (&$request) {
         $removeB = Button('submit:verify', _("Remove Page"), 'wikiadmin');
         $cancelB = Button('submit:cancel', _("Cancel"), 'button'); // use generic wiki button look
 
-        $html = HTML(HTML::p(fmt("You are about to remove '%s'!", $pagelink)),
+        $fieldset = HTML::fieldset(HTML::p(fmt("You are about to remove '%s'!", $pagelink)),
                      HTML::form(array('method' => 'post',
                                       'action' => $request->getPostURL()),
                                 HiddenInputs(array('currentversion' => $version,
                                                    'pagename' => $page->getName(),
                                                    'action' => 'remove')),
-                                
                                 HTML::div(array('class' => 'toolbar'),
                                           $removeB,
                                           $WikiTheme->getButtonSeparator(),
-                                          $cancelB)),
-                     HTML::hr()
+                                          $cancelB))
                      );
         $sample = HTML::div(array('class' => 'transclusion'));
         // simple and fast preview expanding only newlines
         foreach (explode("\n", firstNWordsOfContent(100, $current->getPackedContent())) as $s) {
             $sample->pushContent($s, HTML::br());
         }
-        $html->pushContent(HTML::div(array('class' => 'wikitext'), 
-                                     $sample));
+        $html = HTML($fieldset, HTML::div(array('class' => 'wikitext'), $sample));
     }
     elseif ($request->getArg('currentversion') != $version) {
         $html = HTML(HTML::p(array('class' => 'error'), (_("Someone has edited the page!"))),
@@ -59,8 +56,6 @@ function RemovePage (&$request) {
     GeneratePage($html, _("Remove Page"));
 }
 
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

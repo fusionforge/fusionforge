@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PearDB_oci8.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: PearDB_oci8.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /**
  * Oracle extensions for the Pear DB backend.
@@ -28,7 +28,7 @@ extends WikiDB_backend_PearDB_pgsql
         // - No persistent conections (I don't like them)
         $dbh->setOption('persistent', false);
         // - Set lowercase compatibility option
-        // - Set numrows as well -- sure why this is needed, but some queries 
+        // - Set numrows as well -- sure why this is needed, but some queries
         //   are triggering DB_ERROR_NOT_CAPABLE
         $dbh->setOption('portability',
             DB_PORTABILITY_LOWERCASE | DB_PORTABILITY_NULL_TO_EMPTY | DB_PORTABILITY_NUMROWS);
@@ -48,7 +48,7 @@ extends WikiDB_backend_PearDB_pgsql
      */
     function _lock_tables($write_lock=true) {
         $dbh = &$this->_dbh;
-        
+      
         // Not sure if we really need to lock tables here, the Oracle row
         // locking mechanism should be more than enough
         // For the time being, lets stay on the safe side and lock...
@@ -85,14 +85,14 @@ extends WikiDB_backend_PearDB_pgsql
                           // Problem: date formats are backend specific. Either use unixtime as %d (long),
                           // or the native timestamp format.
                           date('d-M-Y H:i:s', $entry->time),
-                          $entry->host, 
+                          $entry->host,
                           $entry->user,
-                          $entry->request_method, 
-                          $entry->request, 
-                          $entry->request_uri,    
+                          $entry->request_method,
+                          $entry->request,
+                          $entry->request_uri,  
                           $entry->request_args,
-                          $entry->_ncsa_time($entry->time), 
-                          $entry->status, 
+                          $entry->_ncsa_time($entry->time),
+                          $entry->status,
                           $entry->size,
                           $entry->referer,
                           $entry->user_agent,
@@ -119,21 +119,11 @@ extends WikiDB_backend_PearDB_search
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.13  2007/01/04 16:41:14  rurban
-// Allow missing connection permissions on upgrade::_try_dbadmin_user.
-//
-// Revision 1.12  2006/12/22 00:27:37  rurban
-// just add Log
-//
-
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

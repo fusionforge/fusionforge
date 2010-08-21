@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: SpamBlocklist.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: SpamBlocklist.php 7417 2010-05-19 12:57:42Z vargenau $');
 /* Copyright (C) 2005 Reini Urban
  *
  * This file is part of PhpWiki.
@@ -118,13 +118,6 @@ function BlackListDebug($host) {
 	echo " not blacklisted.\n";
 }
 */
-
-// $Log: not supported by cvs2svn $
-// Revision 1.1  2005/10/29 08:21:58  rurban
-// ENABLE_SPAMBLOCKLIST:
-//   Check for links to blocked external tld domains in new edits, against
-//   multi.surbl.org and bl.spamcop.net.
-//
 
 // Local Variables:
 // mode: php

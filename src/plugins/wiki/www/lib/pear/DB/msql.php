@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: msql.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: msql.php 7639 2010-08-11 12:15:16Z vargenau $
 
 require_once 'DB/common.php';
 
@@ -26,7 +26,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: msql.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: msql.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  * @author   Sterling Hughes <sterling@php.net>
  */
@@ -234,7 +234,7 @@ class DB_msql extends DB_common
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

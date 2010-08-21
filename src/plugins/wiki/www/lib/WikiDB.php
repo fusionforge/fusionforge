@@ -1,6 +1,4 @@
-<?php //-*-php-*-
-rcs_id('$Id: WikiDB.php 6373 2009-01-07 08:56:46Z rurban $');
-
+<?php //rcs_id('$Id: WikiDB.php 7614 2010-07-15 15:56:21Z vargenau $');
 require_once('lib/PageType.php');
 
 /**
@@ -91,6 +89,10 @@ class WikiDB {
      *
      *      Which dba handler to use. Good choices are probably either
      *      'gdbm' or 'db2'.
+     *
+     * <dt> readonly
+     * <dd> Either set by config.ini: READONLY = true or detected automatically
+     *      when a database can be read but cannot be updated.
      * </dl>
      *
      * @return WikiDB A WikiDB object.
@@ -126,6 +128,8 @@ class WikiDB {
         if ((int)DEBUG & _DEBUG_SQL) {
             $this->_backend->check();
 	}
+        // might be changed when opening the database fails
+        $this->readonly = defined("READONLY") ? READONLY : false;
     }
     
     /**
@@ -210,6 +214,7 @@ class WikiDB {
      * @see purgePage
      */
     function deletePage($pagename) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
     	// don't create empty revisions of already purged pages.
         if ($this->_backend->get_latest_version($pagename))
             $result = $this->_cache->delete_page($pagename);
@@ -242,6 +247,7 @@ class WikiDB {
      * @see deletePage
      */
     function purgePage($pagename) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         $result = $this->_cache->purge_page($pagename);
         $this->deletePage($pagename); // just for the notification
         return $result;
@@ -269,21 +275,13 @@ class WikiDB {
      */
     function getAllPages($include_empty=false, $sortby='', $limit='', $exclude='') 
     {
-        // HACK: memory_limit=8M will fail on too large pagesets. old php on unix only!
-        if (USECACHE) {
-            $mem = ini_get("memory_limit");
-            if ($mem and !$limit and !isWindows() and !check_php_version(4,3)) {
-                $limit = 450;
-                $GLOBALS['request']->setArg('limit', $limit);
-                $GLOBALS['request']->setArg('paging', 'auto');
-            }
-        }
         $result = $this->_backend->get_all_pages($include_empty, $sortby, $limit, 
                                                  $exclude);
         return new WikiDB_PageIterator($this, $result, 
                                        array('include_empty' => $include_empty, 
                                              'exclude' => $exclude,
-                                             'limit' => $limit));
+                                             'limit_by_db' => $result->_options['limit_by_db'],
+                                             'limit' => $result->limit()));
     }
 
     /**
@@ -509,6 +507,7 @@ class WikiDB {
      * @return boolean     true or false
      */
     function renamePage($from, $to, $updateWikiLinks = false) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         assert(is_string($from) && $from != '');
         assert(is_string($to) && $to != '');
         $result = false;
@@ -520,12 +519,6 @@ class WikiDB {
             if ($updateWikiLinks) {
 		$lookbehind = "/(?<=[\W:])\Q";
 		$lookahead = "\E(?=[\W:])/";
-		if (!check_php_version(4,3,3)) {
-		    $lookbehind = "/(?<=[\W:])";
-		    $lookahead  = "(?=[\W:])/";
-		    $from = preg_quote($from, "/");
-		    $to   = preg_quote($to, "/");
-		}
                 require_once('lib/plugin/WikiAdminSearchReplace.php');
                 $links = $oldpage->getBackLinks();
                 while ($linked_page = $links->next()) {
@@ -660,6 +653,7 @@ class WikiDB {
      * @param string $newval  New value.
      */
     function set($key, $newval) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         if (!$key || $key[0] == '%')
             return;
         
@@ -788,6 +782,7 @@ class WikiDB_Page
      *  use a WikiDB_PageRevision object here.)
      */
     function deleteRevision($version) {
+        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
         $backend = &$this->_wikidb->_backend;
         $cache = &$this->_wikidb->_cache;
         $pagename = &$this->_pagename;
@@ -837,6 +832,7 @@ class WikiDB_Page
      * </ul>
      */
     function mergeRevision($version) {
+        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
         $backend = &$this->_wikidb->_backend;
         $cache = &$this->_wikidb->_cache;
         $pagename = &$this->_pagename;
@@ -903,6 +899,7 @@ class WikiDB_Page
      * $version was incorrect, returns false
      */
     function createRevision($version, &$content, $metadata, $links) {
+        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
         $backend = &$this->_wikidb->_backend;
         $cache = &$this->_wikidb->_cache;
         $pagename = &$this->_pagename;
@@ -981,6 +978,7 @@ class WikiDB_Page
      * @param hash $meta  Meta-data for new revision.
      */
     function save($wikitext, $version, $meta, $formatted = null) {
+        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
 	if (is_null($formatted))
 	    $formatted = new TransformedText($this, $wikitext, $meta);
         $type = $formatted->getType();
@@ -988,7 +986,7 @@ class WikiDB_Page
 	$links = $formatted->getWikiPageLinks(); // linkto => relation
         $attributes = array();
         foreach ($links as $link) {
-            if ($link['linkto'] === "" and $link['relation']) {
+            if ($link['linkto'] === "" and !empty($link['relation'])) {
                 $attributes[$link['relation']] = $this->getAttribute($link['relation']);
             }
         }
@@ -1028,7 +1026,11 @@ class WikiDB_Page
             $newrevision->_transformedContent = $formatted;
         }
         // more pagechange callbacks: (in a hackish manner for now)
-        if (ENABLE_RECENTCHANGESBOX and empty($meta['is_minor_edit'])) {
+        if (ENABLE_RECENTCHANGESBOX 
+            and empty($meta['is_minor_edit'])
+            and !in_array($GLOBALS['request']->getArg('action'), 
+                          array('loadfile','upgrade')))
+        {
             require_once("lib/WikiPlugin.php");
             $w = new WikiPluginLoader;
             $p = $w->getPlugin("RecentChangesCached", false);
@@ -1311,6 +1313,7 @@ class WikiDB_Page
             and $key == '_cached_html' 
             and method_exists($backend, 'set_cached_html'))
         {
+            if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
             return $backend->set_cached_html($pagename, $newval);
         }
 
@@ -1325,6 +1328,7 @@ class WikiDB_Page
                 return;         // values identical, skip update.
         }
 
+        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
         $cache->update_pagedata($pagename, array($key => $newval));
     }
 
@@ -1345,6 +1349,7 @@ class WikiDB_Page
      * @access public
      */
     function increaseHitCount() {
+        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_NOTICE); return; }
         if (method_exists($this->_wikidb->_backend, 'increaseHitCount'))
             $this->_wikidb->_backend->increaseHitCount($this->_pagename);
         else {
@@ -1398,7 +1403,7 @@ class WikiDB_Page
     // May be empty. Either the stored owner (/Chown), or the first authorized author
     function getOwner() {
         if ($owner = $this->get('owner'))
-            return ($owner == _("The PhpWiki programming team")) ? ADMIN_USER : $owner;
+            return $owner;
         // check all revisions forwards for the first author_id
         $backend = &$this->_wikidb->_backend;
         $pagename = &$this->_pagename;
@@ -1406,7 +1411,7 @@ class WikiDB_Page
         for ($v=1; $v <= $latestversion; $v++) {
             $rev = $this->getRevision($v,false);
             if ($rev and $owner = $rev->get('author_id')) {
-            	return ($owner == _("The PhpWiki programming team")) ? ADMIN_USER : $owner;
+            	return $owner;
             }
         }
         return '';
@@ -1458,7 +1463,9 @@ class WikiDB_PageRevision
 {
     //var $_transformedContent = false; // set by WikiDB_Page::save()
     
-    function WikiDB_PageRevision(&$wikidb, $pagename, $version, $versiondata = false) {
+    function WikiDB_PageRevision(&$wikidb, $pagename, $version, 
+                                 $versiondata = false) 
+    {
         $this->_wikidb = &$wikidb;
         $this->_pagename = $pagename;
         $this->_version = $version;
@@ -1504,7 +1511,9 @@ class WikiDB_PageRevision
      */
     function hasDefaultContents() {
         $data = &$this->_data;
-        return empty($data['%content']); // FIXME: what if it's the number 0? <>'' or === false
+        if (!isset($data['%content'])) return true;
+        if ($data['%content'] === true) return false;
+        return $data['%content'] === false or $data['%content'] === "";
     }
 
     /**
@@ -1791,10 +1800,13 @@ class WikiDB_PageIterator
         $this->_iter = $iter; // a WikiDB_backend_iterator
         $this->_wikidb = &$wikidb;
         $this->_options = $options;
-    }
+     }
     
     function count () {
         return $this->_iter->count();
+    }
+    function limit () {
+        return empty($this->_options['limit']) ? 0 : $this->_options['limit'];
     }
 
     /**
@@ -2078,6 +2090,9 @@ class WikiDB_cache
         array_push ($this->_versiondata_cache, array());
         $this->_glv_cache = array();
         $this->_id_cache = array(); // formerly ->_dbi->_iwpcache (nonempty pages => id)
+
+        if (isset($GLOBALS['request']->_dbi))
+            $this->readonly = $GLOBALS['request']->_dbi->readonly;
     }
     
     function close() {
@@ -2104,6 +2119,7 @@ class WikiDB_cache
     
     function update_pagedata($pagename, $newdata) {
         assert(is_string($pagename) && $pagename != '');
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
        
         $this->_backend->update_pagedata($pagename, $newdata);
 
@@ -2128,12 +2144,14 @@ class WikiDB_cache
     }
     
     function delete_page($pagename) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         $result = $this->_backend->delete_page($pagename);
         $this->invalidate_cache($pagename);
         return $result;
     }
 
     function purge_page($pagename) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         $result = $this->_backend->purge_page($pagename);
         $this->invalidate_cache($pagename);
         return $result;
@@ -2186,6 +2204,7 @@ class WikiDB_cache
     function set_versiondata($pagename, $version, $data) {
         //unset($this->_versiondata_cache[$pagename][$version]);
         
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         $new = $this->_backend->set_versiondata($pagename, $version, $data);
         // Update the cache
         $this->_versiondata_cache[$pagename][$version]['1'] = $data;
@@ -2195,6 +2214,7 @@ class WikiDB_cache
     }
 
     function update_versiondata($pagename, $version, $data) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         $new = $this->_backend->update_versiondata($pagename, $version, $data);
         // Update the cache
         $this->_versiondata_cache[$pagename][$version]['1'] = $data;
@@ -2205,6 +2225,7 @@ class WikiDB_cache
     }
 
     function delete_versiondata($pagename, $version) {
+        if (!empty($this->readonly)) { trigger_error("readonly database", E_USER_WARNING); return; }
         $new = $this->_backend->delete_versiondata($pagename, $version);
         if (isset($this->_versiondata_cache[$pagename][$version]))
             unset ($this->_versiondata_cache[$pagename][$version]);

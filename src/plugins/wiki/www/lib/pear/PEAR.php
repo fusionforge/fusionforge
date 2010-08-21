@@ -18,8 +18,8 @@
 // |          Tomas V.V.Cox <cox@idecnet.com>                             |
 // +----------------------------------------------------------------------+
 //
-rcs_id('$Id: PEAR.php 6184 2008-08-22 10:33:41Z vargenau $');
-rcs_id('From Pear CVS: Id: PEAR.php,v 1.59 2003/04/03 23:10:10 ssb Exp');
+// rcs_id('$Id: PEAR.php 7639 2010-08-11 12:15:16Z vargenau $');
+// rcs_id('From Pear CVS: Id: PEAR.php,v 1.59 2003/04/03 23:10:10 ssb Exp');
 //
 
 define('PEAR_ERROR_RETURN',   1);
@@ -956,7 +956,7 @@ register_shutdown_function("_PEAR_call_destructors");
 /*
  * Local Variables:
  * mode: php
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

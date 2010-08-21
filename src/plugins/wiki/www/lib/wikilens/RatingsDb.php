@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: RatingsDb.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: RatingsDb.php 7417 2010-05-19 12:57:42Z vargenau $');
 
 /*
  * @author:  Dan Frankowski (wikilens group manager), Reini Urban (as plugin)
@@ -24,7 +24,7 @@ rcs_id('$Id: RatingsDb.php 6184 2008-08-22 10:33:41Z vargenau $');
 */
 
 // For other than SQL backends. dba + adodb SQL ratings are allowed but deprecated.
-// We will probablöy drop this hack.
+// We will probably drop this hack.
 if (!defined('RATING_STORAGE'))
     // for DATABASE_TYPE=dba and forced RATING_STORAGE=SQL we must use ADODB,
     // but this is problematic.
@@ -517,7 +517,7 @@ class RatingsDb extends WikiDB {
                . " FROM $rating_tbl r, $page_tbl p "
                . $where
                . $orderbyStr;
-        $result = $dbi->query($query);
+        $result = $dbi->_dbh->query($query);
         return $result;
     }
 
@@ -737,72 +737,6 @@ extends WikiDB_backend_PearDB {
     }
 } 
 */
-
-// $Log: not supported by cvs2svn $
-// Revision 1.16  2007/12/21 17:00:02  rurban
-// Do not overwrite other ratings with metadata DB
-//
-// Revision 1.15  2007/05/29 16:56:54  rurban
-// Fix dba
-//
-// Revision 1.14  2007/01/21 23:16:29  rurban
-// Fix dba with RATING_STORAGE=SQL
-//
-// Revision 1.13  2005/10/10 19:51:41  rurban
-// fix aesthetic issues by John Stevens
-//
-// Revision 1.12  2004/11/15 16:00:02  rurban
-// enable RateIt imgPrefix: '' or 'Star' or 'BStar',
-// enable blue prediction icons,
-// enable buddy predictions.
-//
-// Revision 1.11  2004/11/01 10:44:00  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.10  2004/10/05 17:00:04  rurban
-// support paging for simple lists
-// fix RatingDb sql backend.
-// remove pages from AllPages (this is ListPages then)
-//
-// Revision 1.9  2004/10/05 00:33:44  rurban
-// intermediate fix for non-sql WikiDB and SQL rating
-//
-// Revision 1.8  2004/07/20 18:00:50  dfrankow
-// Add EXPLICIT_RATINGS_DIMENSION constant.  More dimensions on the way
-// for lists.
-//
-// Fix delete_rating().
-//
-// Revision 1.7  2004/07/08 19:14:57  rurban
-// more metadata fixes
-//
-// Revision 1.6  2004/07/08 19:04:45  rurban
-// more unittest fixes (file backend, metadata RatingsDb)
-//
-// Revision 1.5  2004/07/08 13:50:33  rurban
-// various unit test fixes: print error backtrace on _DEBUG_TRACE; allusers fix; new PHPWIKI_NOMAIN constant for omitting the mainloop
-//
-// Revision 1.4  2004/07/07 19:47:36  dfrankow
-// Fixes to get PreferencesApp to work-- thanks syilek
-//
-// Revision 1.3  2004/06/30 20:05:36  dfrankow
-// + Add getTheRatingsDb() singleton.
-// + Remove defaulting of dimension, userid, pagename in getRating--
-//   it didn't work
-// + Fix typo in get_rating.
-// + Fix _sql_get_rating_result
-// + Fix sql_rate().  It's now not transactionally safe yet, but at least it
-//   works.
-//
-// Revision 1.2  2004/06/19 10:22:41  rurban
-// outcomment the pear specific methods to let all pages load
-//
-// Revision 1.1  2004/06/18 14:42:17  rurban
-// added wikilens libs (not yet merged good enough, some work for DanFr)
-// 
 
 // Local Variables:
 // mode: php

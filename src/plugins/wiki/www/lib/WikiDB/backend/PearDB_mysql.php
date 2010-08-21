@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: PearDB_mysql.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: PearDB_mysql.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend/PearDB.php');
 
@@ -20,7 +20,7 @@ extends WikiDB_backend_PearDB
         $row = $this->_dbh->GetOne("SELECT version()");
         if (!DB::isError($row) and !empty($row)) {
             $arr = explode('.',$row);
-            $this->_serverinfo['version'] = (string)(($arr[0] * 100) + $arr[1]) . 
+            $this->_serverinfo['version'] = (string)(($arr[0] * 100) + $arr[1]) .
                                             "." . (integer)$arr[2];
             if ($this->_serverinfo['version'] < 323.0) {
                 // Older MySQL's don't have CASE WHEN ... END
@@ -35,27 +35,27 @@ extends WikiDB_backend_PearDB
                 //http://dev.mysql.com/doc/mysql/en/charset-connection.html
                 if (isset($aliases[strtolower($charset)])) {
                     // mysql needs special unusual names and doesn't resolve aliases
-                    mysql_query("SET NAMES '". $aliases[$charset] . "'");
+                    mysql_query("SET NAMES '". $aliases[strtolower($charset)] . "'");
                 } else {
                     mysql_query("SET NAMES '$charset'");
                 }
             }
         }
     }
-    
+  
     /**
      * Kill timed out processes. ( so far only called on about every 50-th save. )
      */
     function _timeout() {
     	if (empty($this->_dbparams['timeout'])) return;
 	$result = mysql_query("SHOW processlist");
-	while ($row = mysql_fetch_array($result)) { 
+	while ($row = mysql_fetch_array($result)) {
 	    if ($row["db"] == $this->_dbh->dsn['database']
 	        and $row["User"] == $this->_dbh->dsn['username']
 	        and $row["Time"] > $this->_dbparams['timeout']
-	        and $row["Command"] == "Sleep") 
+	        and $row["Command"] == "Sleep")
             {
-	            $process_id = $row["Id"]; 
+	            $process_id = $row["Id"];
 	            mysql_query("KILL $process_id");
 	    }
 	}
@@ -67,10 +67,10 @@ extends WikiDB_backend_PearDB
     function set_versiondata($pagename, $version, $data) {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
-        
+      
         $minor_edit = (int) !empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
-        
+      
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
@@ -78,7 +78,7 @@ extends WikiDB_backend_PearDB
         @$content = (string) $data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
-        
+      
         $this->lock();
         $id = $this->_get_pageid($pagename, true);
         // requires PRIMARY KEY (id,version)!
@@ -129,7 +129,7 @@ extends WikiDB_backend_PearDB
         $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
             . " FROM $page_tbl p, $link_tbl linked"
             . " LEFT JOIN $page_tbl pp ON (linked.linkto = pp.id)"
-            . " LEFT JOIN $nonempty_tbl ne ON (linked.linkto = ne.id)" 
+            . " LEFT JOIN $nonempty_tbl ne ON (linked.linkto = ne.id)"
             . " WHERE ISNULL(ne.id)"
             .       " AND p.id = linked.linkfrom"
             . $exclude_from
@@ -163,7 +163,7 @@ extends WikiDB_backend_PearDB
                     . ( $pageid ? " AND $recent_tbl.id=$pageid" : ""));
     }
     */
-   
+ 
     /**
      * Pack tables.
      */
@@ -213,29 +213,23 @@ extends WikiDB_backend_PearDB
 class WikiDB_backend_PearDB_mysql_search
 extends WikiDB_backend_PearDB_search
 {
-    function _pagename_match_clause($node) { 
+    function _pagename_match_clause($node) {
         $word = $node->sql();
         if ($node->op == 'REGEX') { // posix regex extensions
             return "pagename REGEXP '$word'";
         } else {
-            return ($this->_case_exact 
-                    ? "pagename LIKE '$word'" 
+            return ($this->_case_exact
+                    ? "pagename LIKE '$word'"
                     : "LOWER(pagename) LIKE '$word'");
         }
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.26  2006/12/22 17:49:05  rurban
-// add Log
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

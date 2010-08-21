@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-rcs_id('$Id: Buddy.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: Buddy.php 7417 2010-05-19 12:57:42Z vargenau $');
 
 // It is anticipated that when userid support is added to phpwiki,
 // this object will hold much more information (e-mail,
@@ -55,11 +55,12 @@ function getBuddies($fromUser, $dbi, $thePage = ""){
 	    extract($dbh->_table_names);
 	    $query = "SELECT raterpage, COUNT(rateepage) as numrating"
 		. " FROM $rating_tbl r, $page_tbl p "
-		. " WHERE ratingvalue > 0 AND numrating > 5"
+//		. " WHERE ratingvalue > 0 AND numrating > 5"
+		. " WHERE ratingvalue > 0"
 		. " GROUP BY raterpage"
 		. " ORDER BY numrating"
 		. " LIMIT 10";
-	    $result = $dbh->query($query);
+	    $result = $dbh->_dbh->query($query);
 	} else {
 	    // from 10 random raters of this page (non-SQL)
 	    ;
@@ -167,19 +168,6 @@ function AverageRating($dbi, $page, $users, $active_userid){
         return $total / $count;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.3  2004/11/21 11:59:26  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.2  2004/11/15 16:00:02  rurban
-// enable RateIt imgPrefix: '' or 'Star' or 'BStar',
-// enable blue prediction icons,
-// enable buddy predictions.
-//
-// Revision 1.1  2004/06/18 14:42:17  rurban
-// added wikilens libs (not yet merged good enough, some work for DanFr)
-// 
 
 // Local Variables:
 // mode: php

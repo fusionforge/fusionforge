@@ -14,11 +14,11 @@
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
 // | Authors: Sterling Hughes <sterling@php.net>                          |
-// |          Antônio Carlos Venâncio Júnior <floripa@php.net>            |
+// |          AntÃ´nio Carlos VenÃ¢ncio JÃºnior <floripa@php.net>            |
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: sybase.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: sybase.php 7639 2010-08-11 12:15:16Z vargenau $
 
 
 // TODO
@@ -33,10 +33,10 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: sybase.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: sybase.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  * @author   Sterling Hughes <sterling@php.net>
- * @author   Antônio Carlos Venâncio Júnior <floripa@php.net>
+ * @author   AntÃ´nio Carlos VenÃ¢ncio JÃºnior <floripa@php.net>
  */
 class DB_sybase extends DB_common
 {
@@ -829,7 +829,7 @@ class DB_sybase extends DB_common
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

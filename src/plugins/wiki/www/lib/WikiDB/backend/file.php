@@ -1,39 +1,39 @@
 <?php // -*-php-*-
-rcs_id('$Id: file.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: file.php 7641 2010-08-11 13:00:46Z vargenau $');
 
 /**
- Copyright 1999, 2000, 2001, 2002, 2003 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 1999, 2000, 2001, 2002, 2003 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Backend for handling file storage. 
+ * Backend for handling file storage.
  *
  * Author: Jochen Kalmbach, Jochen@kalmbachnet.de
  */
 
 /*
- * TODO: 
+ * TODO:
  * - Implement "optimize" / "sync" / "check" / "rebuild"
  * - Optimize "get_previous_version"
  * - Optimize "get_links" (reversed = true)
  * - Optimize "get_all_revisions"
- * - Optimize "most_popular" (separate file for "hitcount", 
+ * - Optimize "most_popular" (separate file for "hitcount",
  *   which contains all pages)
  * - Optimize "most_recent"
  * - What should be done in "lock"/"unlock"/"close" ?
@@ -98,8 +98,8 @@ extends WikiDB_backend
       if (!filesize($filename)) return array();
       if ($fd = @fopen($filename, "rb")) {
          $locked = flock($fd, 1); # Read lock
-         if (!$locked) { 
-            ExitWiki("Timeout while obtaining lock. Please try again"); 
+         if (!$locked) {
+            ExitWiki("Timeout while obtaining lock. Please try again");
          }
          if ($data = fread($fd, filesize($filename))) {
             $pd = unserialize($data);
@@ -112,7 +112,7 @@ extends WikiDB_backend
 				 htmlspecialchars($filename)));
             else
               return $pd;
-	 }	
+	 }
 	 fclose($fd);
       }
       return NULL;
@@ -120,17 +120,17 @@ extends WikiDB_backend
 
     function _savePage($type, $pagename, $version, $data) {
         $filename = $this->_pagename2filename($type, $pagename, $version);
-        if($fd = fopen($filename, 'a+b')) { 
-            $locked = flock($fd,2); // Exclusive blocking lock 
-           if (!$locked) { 
-              ExitWiki("Timeout while obtaining lock. Please try again"); 
+        if($fd = fopen($filename, 'a+b')) {
+            $locked = flock($fd,2); // Exclusive blocking lock
+           if (!$locked) {
+              ExitWiki("Timeout while obtaining lock. Please try again");
            }
 
            rewind($fd);
            ftruncate($fd, 0);
            $pagedata = serialize($data);
            $len = strlen($pagedata);
-           $num = fwrite($fd, $pagedata, $len); 
+           $num = fwrite($fd, $pagedata, $len);
            assert($num == $len);
            fclose($fd);
         } else {
@@ -152,7 +152,7 @@ extends WikiDB_backend
     // Load/Save Version-Data
     function _loadVersionData($pagename, $version) {
         if ($this->_page_version_data != NULL) {
-            if ( ($this->_page_version_data['pagename'] == $pagename) && 
+            if ( ($this->_page_version_data['pagename'] == $pagename) &&
                 ($this->_page_version_data['version'] == $version) ) {
                 return $this->_page_version_data;
              }
@@ -160,7 +160,7 @@ extends WikiDB_backend
         $vd = $this->_loadPage('ver_data', $pagename, $version);
         if ($vd != NULL) {
             $this->_page_version_data = $vd;
-            if ( ($this->_page_version_data['pagename'] == $pagename) && 
+            if ( ($this->_page_version_data['pagename'] == $pagename) &&
                 ($this->_page_version_data['version'] == $version) ) {
                 return $this->_page_version_data;
              }
@@ -271,7 +271,7 @@ extends WikiDB_backend
      *  <dt> locked  <dd> If the page is locked.
      *  <dt> hits    <dd> The page hit count.
      *  <dt> created <dd> Unix time of page creation. (FIXME: Deprecated: I
-     *                    don't think we need this...) 
+     *                    don't think we need this...)
      * </dl>
      */
     function get_pagedata($pagename) {
@@ -287,7 +287,7 @@ extends WikiDB_backend
      *
      * For example:
      * <pre>
-     *   $backend->update_pagedata($pagename, array('locked' => 1)); 
+     *   $backend->update_pagedata($pagename, array('locked' => 1));
      * </pre>
      * will set the value of 'locked' to 1 for the specified page, but it
      * will not affect the value of 'hits' (or whatever other meta-data
@@ -295,7 +295,7 @@ extends WikiDB_backend
      *
      * To delete a particular piece of meta-data, set it's value to false.
      * <pre>
-     *   $backend->update_pagedata($pagename, array('locked' => false)); 
+     *   $backend->update_pagedata($pagename, array('locked' => false));
      * </pre>
      *
      * @param $pagename string Page name.
@@ -311,7 +311,7 @@ extends WikiDB_backend
             $this->_savePageData($pagename, $newdata);  // create a new pagedata-file
             return;
         }
-        
+
         foreach ($newdata as $key => $val) {
             if (empty($val))
                 unset($data[$key]);
@@ -320,7 +320,7 @@ extends WikiDB_backend
         }
         $this->_savePageData($pagename, $data);  // write new pagedata-file
     }
-    
+
 
     /**
      * Get the current version number for a page.
@@ -332,7 +332,7 @@ extends WikiDB_backend
     function get_latest_version($pagename) {
         return $this->_getLatestVersion($pagename);
     }
-    
+
     /**
      * Get preceding version number.
      *
@@ -350,7 +350,7 @@ extends WikiDB_backend
     	}
     	return $prev;
     }
-    
+
     /**
      * Get revision meta-data and content.
      *
@@ -397,7 +397,7 @@ extends WikiDB_backend
                 @rename($filename,$new);
             }
         }
-        $this->update_pagedata($pagename, array('pagename' => $to)); 
+        $this->update_pagedata($pagename, array('pagename' => $to));
         return true;
     }
 
@@ -426,7 +426,7 @@ extends WikiDB_backend
         // remove page from latest_version...
         $this->_setLatestVersion($pagename, 0);
     }
-            
+
     /**
      * Delete an old revision of a page.
      *
@@ -443,8 +443,8 @@ extends WikiDB_backend
         if ($this->get_latest_version($pagename) == $version) {
             // try to delete the latest version!
             // so check if an older version exist:
-            if ($this->get_versiondata($pagename, 
-                                       $this->get_previous_version($pagename, $version), 
+            if ($this->get_versiondata($pagename,
+                                       $this->get_previous_version($pagename, $version),
                                        false) == false) {
               // there is no older version....
               // so the completely page will be removed:
@@ -453,7 +453,7 @@ extends WikiDB_backend
             }
         }
         $this->_removePage('ver_data', $pagename, $version);
-    }				
+    }
 
     /**
      * Create a new page revision.
@@ -497,7 +497,7 @@ extends WikiDB_backend
         }
         $this->set_versiondata($pagename, $version, $data);
     }
-    
+
     /**
      * Set links for page.
      *
@@ -508,7 +508,7 @@ extends WikiDB_backend
     function set_links($pagename, $links) {
         $this->_savePageLinks($pagename, $links);
     }
-        
+
     /**
      * Find pages which link to or are linked from a page.
      *
@@ -520,7 +520,7 @@ extends WikiDB_backend
      */
     function get_links($pagename, $reversed=true, $include_empty=false,
                        $sortby='', $limit='', $exclude='',
-                       $want_relations=false) 
+                       $want_relations=false)
     {
         if ($reversed == false)
             return new WikiDB_backend_file_iter($this, $this->_loadPageLinks($pagename));
@@ -552,7 +552,7 @@ extends WikiDB_backend
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     }
     */
-    
+
     /**
      * Get all pages in the database.
      *
@@ -678,7 +678,7 @@ extends WikiDB_backend
         $search = strtolower(trim($search));
         if (!$search)
             return array(array(),array());
-        
+
         $words = preg_split('/\s+/', $search);
         $exclude = array();
         foreach ($words as $key => $word) {
@@ -690,19 +690,20 @@ extends WikiDB_backend
         }
         return array($words, $exclude);
     }
-       
+
 };
 
 class WikiDB_backend_file_iter extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_file_iter(&$backend, &$query_result) {
+    function WikiDB_backend_file_iter(&$backend, &$query_result, $options=array()) {
         $this->_backend = &$backend;
         $this->_result = $query_result;
+        $this->_options = $options;
 
         if (count($this->_result) > 0)
             reset($this->_result);
     }
-    
+
     function next() {
         if (!$this->_result)
             return false;
@@ -713,7 +714,7 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
         if ($e == false) {
             return false;
         }
-        
+
         $pn = $e[1];
         if (is_array($pn) and isset($pn['linkto'])) { // support relation link iterator
             $pn = $pn['linkto'];
@@ -744,116 +745,6 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.24  2007/02/17 20:24:56  rurban
-// fix getLinks for relation and linkto
-//
-// Revision 1.23  2007/01/04 16:45:49  rurban
-// Clarify API: sortby,limit and exclude are strings.
-//
-// Revision 1.22  2004/12/06 19:50:04  rurban
-// enable action=remove which is undoable and seeable in RecentChanges: ADODB ony for now.
-// renamed delete_page to purge_page.
-// enable action=edit&version=-1 to force creation of a new version.
-// added BABYCART_PATH config
-// fixed magiqc in adodb.inc.php
-// and some more docs
-//
-// Revision 1.21  2004/11/25 17:20:52  rurban
-// and again a couple of more native db args: backlinks
-//
-// Revision 1.20  2004/11/23 13:35:49  rurban
-// add case_exact search
-//
-// Revision 1.19  2004/11/21 11:59:26  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.18  2004/11/09 17:11:17  rurban
-// * revert to the wikidb ref passing. there's no memory abuse there.
-// * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-//   store page ids with getPageLinks (GleanDescription) of all existing pages, which
-//   are also needed at the rendering for linkExistingWikiWord().
-//   pass options to pageiterator.
-//   use this cache also for _get_pageid()
-//   This saves about 8 SELECT count per page (num all pagelinks).
-// * fix passing of all page fields to the pageiterator.
-// * fix overlarge session data which got broken with the latest ACCESS_LOG_SQL changes
-//
-// Revision 1.17  2004/07/09 13:05:34  rurban
-// just aesthetics
-//
-// Revision 1.16  2004/07/09 12:47:45  rurban
-// dont cache _ cached_html and pagename in flatfile page iterators
-//
-// Revision 1.15  2004/07/09 10:06:50  rurban
-// Use backend specific sortby and sortable_columns method, to be able to
-// select between native (Db backend) and custom (PageList) sorting.
-// Fixed PageList::AddPageList (missed the first)
-// Added the author/creator.. name to AllPagesBy...
-//   display no pages if none matched.
-// Improved dba and file sortby().
-// Use &$request reference
-//
-// Revision 1.14  2004/07/08 17:31:43  rurban
-// improve numPages for file (fixing AllPagesTest)
-//
-// Revision 1.13  2004/07/08 15:23:59  rurban
-// less verbose for tests
-//
-// Revision 1.12  2004/07/08 13:50:32  rurban
-// various unit test fixes: print error backtrace on _DEBUG_TRACE; allusers fix; new PHPWIKI_NOMAIN constant for omitting the mainloop
-//
-// Revision 1.11  2004/07/08 11:12:49  rurban
-// quiet the testruns
-//
-// Revision 1.10  2004/06/03 22:08:17  rurban
-// fix bug #963268 (check existing previous version)
-//
-// Revision 1.9  2004/04/27 16:03:05  rurban
-// missing pageiter::count methods
-//
-// Revision 1.8  2004/03/01 13:48:45  rurban
-// rename fix
-// p[] consistency fix
-//
-// Revision 1.7  2004/02/12 14:11:36  rurban
-// more rename_page backend methods: only tested for PearDB! please help
-//
-// Revision 1.6  2004/01/26 09:17:51  rurban
-// * changed stored pref representation as before.
-//   the array of objects is 1) bigger and 2)
-//   less portable. If we would import packed pref
-//   objects and the object definition was changed, PHP would fail.
-//   This doesn't happen with an simple array of non-default values.
-// * use $prefs->retrieve and $prefs->store methods, where retrieve
-//   understands the interim format of array of objects also.
-// * simplified $prefs->get() and fixed $prefs->set()
-// * added $user->_userid and class '_WikiUser' portability functions
-// * fixed $user object ->_level upgrading, mostly using sessions.
-//   this fixes yesterdays problems with loosing authorization level.
-// * fixed WikiUserNew::checkPass to return the _level
-// * fixed WikiUserNew::isSignedIn
-// * added explodePageList to class PageList, support sortby arg
-// * fixed UserPreferences for WikiUserNew
-// * fixed WikiPlugin for empty defaults array
-// * UnfoldSubpages: added pagename arg, renamed pages arg,
-//   removed sort arg, support sortby arg
-//
-// Revision 1.5  2004/01/25 08:17:29  rurban
-// ORDER BY support for all other backends,
-// all non-SQL simply ignoring it, using plain old dumb_iter instead
-//
-// Revision 1.4  2003/02/24 01:53:28  dairiki
-// Bug fix.  Don't need to urldecode pagenames in WikiDB_backend_file_iter.
-//
-// Revision 1.3  2003/01/04 03:41:51  wainstead
-// Added copyleft flowerboxes
-//
-// Revision 1.2  2003/01/04 03:30:34  wainstead
-// added log tag, converted file to unix format
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

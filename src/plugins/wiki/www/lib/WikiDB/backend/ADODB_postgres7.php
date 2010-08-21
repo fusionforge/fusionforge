@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_postgres7.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: ADODB_postgres7.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend/ADODB.php');
 
@@ -9,10 +9,10 @@ if (!defined("USE_BYTEA"))     // see schemas/psql-initialize.sql
 
 /**
  * WikiDB layer for ADODB-postgres (7 or 8), called by lib/WikiDB/ADODB.php.
- * Changes 1.3.12: 
+ * Changes 1.3.12:
  *  - use Foreign Keys and ON DELETE CASCADE.
  *  - bytea blob type
- * 
+ *
  * @author: Reini Urban
  */
 class WikiDB_backend_ADODB_postgres7
@@ -83,7 +83,7 @@ extends WikiDB_backend_ADODB
 	    $dbh->Execute(sprintf("UPDATE $page_tbl"
 				  . " SET cached_html='%s'"
 				  . " WHERE pagename=%s",
-				  $this->_quote($data), 
+				  $this->_quote($data),
 				  $dbh->qstr($pagename)));
 	    */
 	} else {
@@ -141,12 +141,12 @@ extends WikiDB_backend_ADODB_search
     function _pagename_match_clause($node) {
         $word = $node->sql();
         if ($node->op == 'REGEX') { // posix regex extensions
-            return ($this->_case_exact 
+            return ($this->_case_exact
                     ? "pagename ~* '$word'"
                     : "pagename ~ '$word'");
         } else {
-            return ($this->_case_exact 
-                    ? "pagename LIKE '$word'" 
+            return ($this->_case_exact
+                    ? "pagename LIKE '$word'"
                     : "pagename ILIKE '$word'");
         }
     }
@@ -155,12 +155,11 @@ extends WikiDB_backend_ADODB_search
     //function _fulltext_match_clause($node)
 }
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

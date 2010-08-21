@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: common.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: common.php 7639 2010-08-11 12:15:16Z vargenau $
 
 require_once 'PEAR.php';
 
@@ -27,7 +27,7 @@ require_once 'PEAR.php';
  * inherited by all such
  *
  * @package  DB
- * @version  $Id: common.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: common.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  * @author   Tomas V.V.Cox <cox@idecnet.com>
@@ -944,7 +944,7 @@ class DB_common extends PEAR
      * @see DB_common::prepare()
      * @access public
      */
-    function &execute($stmt, $data = array())
+    function execute($stmt, $data = array())
     {
         $realquery = $this->executeEmulateQuery($stmt, $data);
         if (DB::isError($realquery)) {
@@ -955,7 +955,7 @@ class DB_common extends PEAR
         if (DB::isError($result) || $result === DB_OK) {
             return $result;
         } else {
-            $tmp =& new DB_result($this, $result);
+            $tmp = new DB_result($this, $result);
             return $tmp;
         }
     }
@@ -1137,7 +1137,7 @@ class DB_common extends PEAR
             if (DB::isError($sth)) {
                 return $sth;
             }
-            $ret =& $this->execute($sth, $params);
+            $ret = $this->execute($sth, $params);
             $this->freePrepared($sth);
             return $ret;
         } else {
@@ -2019,7 +2019,7 @@ class DB_common extends PEAR
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: chinese.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: chinese.php 7617 2010-07-15 19:22:14Z vargenau $');
 
 // PDF functions taken from FPDF http://www.fpdf.org
 
@@ -322,8 +322,11 @@ class PDF_Chinese extends PDF
 		$this->_out('<</Type /Encoding /BaseEncoding /WinAnsiEncoding /Differences ['.$diff.']>>');
 		$this->_out('endobj');
 	}
-	$mqr=get_magic_quotes_runtime();
-	set_magic_quotes_runtime(0);
+
+	if (!check_php_version(5,3)) {
+		$mqr=get_magic_quotes_runtime();
+		set_magic_quotes_runtime(0);
+	}
 	foreach($this->FontFiles as $file=>$info)
 	{
 		//Font file embedding
@@ -346,7 +349,9 @@ class PDF_Chinese extends PDF
 		fclose($f);
 		$this->_out('endobj');
 	}
-	set_magic_quotes_runtime($mqr);
+	if (!check_php_version(5,3)) {
+		set_magic_quotes_runtime($mqr);
+	}
 	foreach($this->fonts as $k=>$font)
 	{
 		//Font objects

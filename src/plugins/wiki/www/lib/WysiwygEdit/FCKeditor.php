@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: FCKeditor.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: FCKeditor.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
  * FCKeditor is compatible with most internet browsers which
  * include: IE 5.5+ (Windows), Firefox 1.0+, Mozilla 1.3+
@@ -105,15 +105,6 @@ oFCKeditor.Create();"),
     }
 
 }
-
-
-/*
- $Log: not supported by cvs2svn $
- Revision 1.1  2005/10/31 16:41:46  rurban
- added FCKeditor + spaw
-
-
-*/
 
 // Local Variables:
 // mode: php

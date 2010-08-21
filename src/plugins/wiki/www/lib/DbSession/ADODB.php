@@ -1,25 +1,25 @@
-<?php rcs_id('$Id: ADODB.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: ADODB.php 7641 2010-08-11 13:00:46Z vargenau $');
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/ 
-
-/** 
+/**
  * ADODB db sessions, based on pear DB Sessions.
  *
  * @author: Reini Urban
@@ -52,13 +52,13 @@ extends DbSession
         if (!$dbh or !is_resource($dbh->_connectionID)) {
             if (!$parsed) $parsed = parseDSN($request->_dbi->getParam('dsn'));
             $this->_dbh =& ADONewConnection($parsed['phptype']); // Probably only MySql works just now
-            $this->_dbh->Connect($parsed['hostspec'],$parsed['username'], 
+            $this->_dbh->Connect($parsed['hostspec'],$parsed['username'],
                                  $parsed['password'], $parsed['database']);
-            $dbh = &$this->_dbh;                             
+            $dbh = &$this->_dbh;
         }
         return $dbh;
     }
-    
+
     function query($sql) {
         return $this->_dbh->Execute($sql);
     }
@@ -78,7 +78,7 @@ extends DbSession
      * Actually this function is a fake for session_set_save_handle.
      * @param  string $save_path a path to stored files
      * @param  string $session_name a name of the concrete file
-     * @return boolean true just a variable to notify PHP that everything 
+     * @return boolean true just a variable to notify PHP that everything
      * is good.
      * @access private
      */
@@ -92,7 +92,7 @@ extends DbSession
      *
      * This function is called just after <i>write</i> call.
      *
-     * @return boolean true just a variable to notify PHP that everything 
+     * @return boolean true just a variable to notify PHP that everything
      * is good.
      * @access private
      */
@@ -129,11 +129,11 @@ extends DbSession
         }
         return $res;
     }
-  
+
     /**
      * Saves the session data into DB.
      *
-     * Just  a  comment:       The  "write"  handler  is  not 
+     * Just  a  comment:       The  "write"  handler  is  not
      * executed until after the output stream is closed. Thus,
      * output from debugging statements in the "write" handler
      * will  never be seen in the browser. If debugging output
@@ -147,8 +147,8 @@ extends DbSession
      * @access private
      */
     function write ($id, $sess_data) {
-        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;    	
-        
+        if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;
+
         $dbh = $this->_connect();
         $table = $this->_table;
         $qid = $dbh->qstr($id);
@@ -181,7 +181,7 @@ extends DbSession
             }
         }
         $result = ! $rs->EOF;
-        if ($result) $rs->free();                        
+        if ($result) $rs->free();
         $this->_disconnect();
         return $result;
     }
@@ -192,7 +192,7 @@ extends DbSession
      * Removes a session from the table.
      *
      * @param  string $id
-     * @return boolean true 
+     * @return boolean true
      * @access private
      */
     function destroy ($id) {
@@ -203,7 +203,7 @@ extends DbSession
         $dbh->Execute("DELETE FROM $table WHERE sess_id=$qid");
 
         $this->_disconnect();
-        return true;     
+        return true;
     }
 
     /**
@@ -224,7 +224,7 @@ extends DbSession
         return true;
     }
 
-    // WhoIsOnline support. 
+    // WhoIsOnline support.
     // TODO: ip-accesstime dynamic blocking API
     function currentSessions() {
         $sessions = array();
@@ -257,14 +257,6 @@ extends DbSession
         return $sessions;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2005/11/21 20:48:48  rurban
-// fix ref warnings reported by schorni
-//
-// Revision 1.1  2005/02/11 14:41:40  rurban
-// seperate DbSession classes: less memory, a bit slower
-//
 
 // Local Variables:
 // mode: php

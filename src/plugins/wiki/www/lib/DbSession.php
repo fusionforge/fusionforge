@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: DbSession.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: DbSession.php 7449 2010-05-31 12:38:21Z vargenau $');
 
 /**
  * Store sessions data in Pear DB / ADODB / dba / PDO, ....
@@ -28,15 +28,6 @@ class DbSession
         // Check for existing DbSession handler
         $db_type = $dbh->getParam('dbtype');
         if (isa($dbh, 'WikiDB')) {
-            // will fail with php4 and case-sensitive filesystem
-            //$db_type = substr(get_class($dbh),7); 
-            
-            // < 4.1.2 crash on dba sessions at session_write_close(). 
-            // (Tested with 4.1.1 and 4.1.2)
-            // Didn't try postgres sessions.
-            if (!check_php_version(4,1,2) and $db_type == 'dba')
-                return false;
-
             @include_once("lib/DbSession/".$db_type.".php");
             
             $class = "DbSession_".$db_type;
@@ -61,17 +52,6 @@ class DbSession
     }
     function quote($string) { return $string; }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.34  2005/08/07 10:08:33  rurban
-// dba simplification: no _backend in the subclass
-//
-// Revision 1.33  2005/02/27 19:40:36  rurban
-// fix for php4 and case-sensitive filesystems
-//
-// Revision 1.32  2005/02/11 14:41:57  rurban
-// seperate DbSession classes: less memory, a bit slower
-//
 
 // Local Variables:
 // mode: php

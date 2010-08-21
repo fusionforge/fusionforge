@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: dba.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: dba.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend/dbaBase.php');
 require_once('lib/DbaDatabase.php');
@@ -18,7 +18,7 @@ extends WikiDB_backend_dbaBase
         // FIXME: error checking.
         $db = new DbaDatabase($dbfile, false, $dba_handler);
         $db->set_timeout($timeout);
-	
+
 	// Workaround for BDB 4.1 bugs
 	if (file_exists($dbfile)) {
             $mode = 'w';
@@ -35,12 +35,11 @@ extends WikiDB_backend_dbaBase
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: diff.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: diff.php 7546 2010-06-17 14:09:32Z vargenau $');
 // diff.php
 //
 // PhpWiki diff output code.
@@ -9,7 +9,6 @@ rcs_id('$Id: diff.php 6184 2008-08-22 10:33:41Z vargenau $');
 //
 
 require_once('lib/difflib.php');
-require_once('lib/HtmlElement.php');
 
 class _HWLDF_WordAccumulator {
     function _HWLDF_WordAccumulator () {
@@ -45,7 +44,7 @@ class _HWLDF_WordAccumulator {
 
         foreach ($words as $word) {
             // new-line should only come as first char of word.
-            if (!$word)
+            if ($word === "") 
                 continue;
             if ($word[0] == "\n") {
                 $this->_group .= " ";
@@ -174,63 +173,6 @@ class HtmlUnifiedDiffFormatter extends UnifiedDiffFormatter
         $diff = new WordLevelDiff($orig, $final);
         $this->_lines($diff->orig(), 'original', '-');
         $this->_lines($diff->_final(), 'final', '+');
-    }
-}
-
-/**
- * HTML table-based unified diff formatter.
- *
- * This class formats a diff into a table-based
- * unified diff format.  (Similar to what was produced
- * by previous versions of PhpWiki.)
- *
- * Within groups of changed lines, diffs are highlit
- * at the character-diff level.
- */
-class TableUnifiedDiffFormatter extends HtmlUnifiedDiffFormatter
-{
-    function TableUnifiedDiffFormatter($context_lines = 4) {
-        $this->HtmlUnifiedDiffFormatter($context_lines);
-    }
-
-    function _start_diff() {
-        $this->_top = HTML::table(array('width' => '100%',
-                                        'class' => 'diff',
-                                        'cellspacing' => 1,
-                                        'cellpadding' => 1,
-                                        'border' => 1));
-    }
-
-    function _start_block($header) {
-        $this->_block = HTML::table(array('width' => '100%',
-                                          'class' => 'block',
-                                          'cellspacing' => 0,
-                                          'cellpadding' => 1,
-                                          'border' => 0),
-                                    HTML::tr(HTML::td(array('colspan' => 2),
-                                                      HTML::tt($header))));
-    }
-
-    function _end_block() {
-        $this->_top->pushContent(HTML::tr(HTML::td($this->_block)));
-        unset($this->_block);
-    }
-
-    function _lines($lines, $class, $prefix = false, $elem = false) {
-        if (!$prefix)
-            $prefix = HTML::raw('&nbsp;');
-        $prefix = HTML::td(array('class' => 'prefix',
-                                 'width' => "1%"), $prefix);
-        foreach ($lines as $line) {
-            if (! trim($line))
-                $line = HTML::raw('&nbsp;');
-            elseif ($elem)
-                $line = new HtmlElement($elem, $line);
-            $this->_block->pushContent(HTML::tr(array('valign' => 'top'),
-                                                $prefix,
-                                                HTML::td(array('class' => $class),
-                                                         $line)));
-        }
     }
 }
 
@@ -375,19 +317,21 @@ function showDiff (&$request) {
 
         if ($diff->isEmpty()) {
             $html->pushContent(HTML::hr(),
-                               HTML::p('[', _("Versions are identical"),
-                                       ']'));
-        }
-        else {
-            // New CSS formatted unified diffs (ugly in NS4).
+                               HTML::p(_("Content of versions "), $old->getVersion(),
+                                       _(" and "), $new->getVersion(), _(" is identical.")));
+            // If two consecutive versions have the same content, it is because the page was
+            // renamed, or metadata changed: ACL, owner, markup.
+            // We give the reason by printing the summary.
+            if (($new->getVersion() - $old->getVersion()) == 1) {
+                $html->pushContent(HTML::p(_("Version "), $new->getVersion(), 
+                                           _(" was created because: "), $new->get('summary')));
+            }
+        } else {
             $fmt = new HtmlUnifiedDiffFormatter;
-
-            // Use this for old table-formatted diffs.
-            //$fmt = new TableUnifiedDiffFormatter;
             $html->pushContent($fmt->format($diff));
         }
 
-        $html->pushContent(HTML::hr(), HTML::h1($new_version));
+        $html->pushContent(HTML::hr(), HTML::h2($new_version));
         require_once("lib/BlockParser.php");
         $html->pushContent(TransformText($new,$new->get('markup'),$pagename));
     }
@@ -395,59 +339,6 @@ function showDiff (&$request) {
     require_once('lib/Template.php');
     GeneratePage($html, sprintf(_("Diff: %s"), $pagename), $new);
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.54  2007/01/02 13:18:16  rurban
-// omit want_content if not necessary
-//
-// Revision 1.53  2006/12/02 13:58:27  rurban
-// Fix MonoBook layout (id content forbidden here)
-// Add new revision to the bottom of the diff as in mediawiki.
-//
-// Revision 1.52  2005/04/01 14:45:14  rurban
-// fix dirty side-effect: dont printf too early bypassing ob_buffering.
-// fixes MSIE.
-//
-// Revision 1.51  2005/02/04 15:26:57  rurban
-// need div=content for blog
-//
-// Revision 1.50  2005/02/04 13:44:45  rurban
-// prevent from php5 nameclash
-//
-// Revision 1.49  2004/11/21 11:59:19  rurban
-// remove final \n to be ob_cache independent
-//
-// Revision 1.48  2004/06/14 11:31:36  rurban
-// renamed global $Theme to $WikiTheme (gforge nameclash)
-// inherit PageList default options from PageList
-//   default sortby=pagename
-// use options in PageList_Selectable (limit, sortby, ...)
-// added action revert, with button at action=diff
-// added option regex to WikiAdminSearchReplace
-//
-// Revision 1.47  2004/06/08 13:51:57  rurban
-// some comments only
-//
-// Revision 1.46  2004/05/01 15:59:29  rurban
-// nothing changed
-//
-// Revision 1.45  2004/01/25 03:57:15  rurban
-// use isWikiWord()
-//
-// Revision 1.44  2003/02/17 02:17:31  dairiki
-// Fix so that action=diff will work when the most recent version
-// of a page has been "deleted".
-//
-// Revision 1.43  2003/01/29 19:17:37  carstenklapp
-// Bugfix for &nbsp showing on diff page.
-//
-// Revision 1.42  2003/01/11 23:05:04  carstenklapp
-// Tweaked diff formatting.
-//
-// Revision 1.41  2003/01/08 02:23:02  carstenklapp
-// Don't perform a diff when the page doesn't exist (such as a
-// nonexistant calendar day/sub-page)
-//
 
 // Local Variables:
 // mode: php

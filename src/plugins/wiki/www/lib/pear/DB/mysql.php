@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: mysql.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: mysql.php 7639 2010-08-11 12:15:16Z vargenau $
 
 
 // XXX legend:
@@ -39,7 +39,7 @@ require_once 'DB/common.php';
  * This is for MySQL versions 4.0 and below.
  *
  * @package  DB
- * @version  $Id: mysql.php 6184 2008-08-22 10:33:41Z vargenau $
+ * @version  $Id: mysql.php 7639 2010-08-11 12:15:16Z vargenau $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  */
@@ -907,7 +907,7 @@ class DB_mysql extends DB_common
 
 /*
  * Local variables:
- * tab-width: 4
+ * tab-width: 8
  * c-basic-offset: 4
  * End:
  */

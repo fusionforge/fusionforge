@@ -1,12 +1,12 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_sqlite.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: ADODB_sqlite.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend/ADODB.php');
 
 /**
  * WikiDB layer for ADODB-sqlite, called by lib/WikiDB/ADODB.php.
  * Just to create a not existing database.
- * 
+ *
  * @author: Reini Urban
  */
 class WikiDB_backend_ADODB_sqlite
@@ -26,7 +26,7 @@ extends WikiDB_backend_ADODB
         }
         $this->WikiDB_backend_ADODB($dbparams);
     }
-    
+  
     function _get_pageid($pagename, $create_if_missing = false) {
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
@@ -41,7 +41,7 @@ extends WikiDB_backend_ADODB
 
         $row = $dbh->GetRow($query);
         if (! $row ) {
-            // atomic version 	
+            // atomic version 
             // TODO: we have auto-increment since sqlite-2.3.4
             //   http://www.sqlite.org/faq.html#q1
             $rs = $dbh->Execute(sprintf("INSERT INTO $page_tbl"
@@ -56,12 +56,11 @@ extends WikiDB_backend_ADODB
     }
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

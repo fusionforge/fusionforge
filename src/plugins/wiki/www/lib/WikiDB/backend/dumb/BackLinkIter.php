@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: BackLinkIter.php 6209 2008-08-26 15:30:39Z vargenau $');
+// rcs_id('$Id: BackLinkIter.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend.php');
 
@@ -17,7 +17,7 @@ extends WikiDB_backend_iterator
         $this->_backend = &$backend;
         $this->_target = $pagename;
     }
-    
+  
     function next() {
         while ($page = $this->_pages->next()) {
             $pagename = $page['pagename'];
@@ -30,13 +30,12 @@ extends WikiDB_backend_iterator
             }
         }
     }
-    
+  
     function free() {
         $this->_pages->free();
     }
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

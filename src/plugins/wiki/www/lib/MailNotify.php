@@ -1,5 +1,24 @@
-<?php //-*-php-*-
-rcs_id('$Id: MailNotify.php,v 1.11 2007/07/01 09:01:16 rurban Exp $');
+<?php
+// rcs_id('$Id: MailNotify.php 7566 2010-06-23 19:43:46Z rurban $');
+/* Copyright (C) 2006-2007,2009 Reini Urban
+ * Copyright (C) 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * Handle the pagelist pref[notifyPages] logic for users
@@ -42,14 +61,18 @@ class MailNotify {
 
     function fromId() {
         global $request;
-        return $request->_user->getId();
+        if (GFORGE) {
+            return $request->_user->getId();
+        } else {
+            return $request->_user->getId() . '@' .  $request->get('REMOTE_HOST');
+        }
     }
 
     function userEmail($userid, $doverify = true) {
         global $request;
 
         // Disable verification of emails for corporate env.
-        if (defined('GFORGE') and GFORGE) {
+        if (GFORGE) {
             $doverify = false;
         }
 
@@ -88,19 +111,19 @@ class MailNotify {
         $emails = array(); $userids = array();
         foreach ($notify as $page => $users) {
             if (glob_match($page, $this->pagename)) {
- 
+
                 global $request;
                 $curuser = $request->getUser();
                 $curusername = $curuser->UserName();
                 $curuserprefs = $curuser->getPreferences();
                 $curuserprefsemail = $curuserprefs->get('email');
                 $ownModifications = $curuserprefs->get('ownModifications');
-                // $majorModificationsOnly = $curuserprefs->get('majorModificationsOnly');
+                $majorModificationsOnly = $curuserprefs->get('majorModificationsOnly');
 
                 foreach ($users as $userid => $user) {
 
                     $usermail = $user['email'];
- 
+
                     if (($usermail == $curuserprefsemail)
                         and ($ownModifications)) {
                         // It's my own modification
@@ -108,16 +131,16 @@ class MailNotify {
                         continue;
                     }
 
-                    // if ($majorModificationsOnly) {
-                    //     $backend = &$request->_dbi->_backend;
-                    //     $version = $backend->get_latest_version($page);
-                    //     $versiondata = $backend->get_versiondata($page, $version, true);
-                    //     if ($versiondata['is_minor_edit']) {
-                    //         // It's a minor modification
-                    //         // and I do not want to receive it
-                    //         continue;
-                    //     }
-                    // }
+                    if ($majorModificationsOnly) {
+                        $backend = &$request->_dbi->_backend;
+                        $version = $backend->get_latest_version($this->pagename);
+                        $versiondata = $backend->get_versiondata($this->pagename, $version, true);
+                        if ($versiondata['is_minor_edit']) {
+                            // It's a minor modification
+                            // and I do not want to receive it
+                            continue;
+                        }
+                    }
 
                     if (!$user) { // handle the case for ModeratePage: 
                         	  // no prefs, just userid's.
@@ -153,17 +176,19 @@ class MailNotify {
         return array($this->emails, $this->userids);
     }
     
-    function sendMail($subject, $content, 
+    function sendMail($subject,
+                      $content,
                       $notice = false,
-                      $silent = 0)
+                      $silent = true)
     {
-        global $request;
-	if (!DEBUG and $silent === 0)
-	    $silent = true;
+        // Add WIKI_NAME to Subject
+        $subject = "[".WIKI_NAME."] ".$subject;
+        // Encode $subject if needed
+        $encoded_subject = $this->subject_encode($subject);
         $emails = $this->emails;
         $from = $this->from;
         // Do not send if modification is from Gforge admin
-        if ($from == "ACOS Forge Administrator") {
+        if (GFORGE and $from == ADMIN_USER) {
             return;
         }
         if (!$notice) $notice = _("PageChange Notification of %s");
@@ -173,22 +198,8 @@ class MailNotify {
                    "Content-Type: text/plain; charset=".CHARSET."; format=flowed\r\n" .
                    "Content-Transfer-Encoding: 8bit";
 
-        // On development or integration environements, emails sent to
-        // <login>@debug.log are rerouted to a simple file (for test suite)..
-	$installation_environment = forge_get_config ('installation_environment') ;
-	if ($installation_environment == 'development' || $installation_environment == 'integration') {
-        	foreach ($emails as $to) {
-        		if (preg_match('/^([a-z]+)\@debug.log$/', $to, $matches)) {
-        			$fl = fopen(forge_get_config('data_path')."/logs/email-wiki.".$matches[1].".log", 'a');
-        			fwrite($fl, $headers."\nSubject: [".WIKI_NAME."] $subject\n\n".$content);
-        			fclose($fl);
-        			return true;
-        		}
-        	}
-        }
-
         $ok = mail(($to = array_shift($emails)),
-                 "[".WIKI_NAME."] ".$subject, 
+                   $encoded_subject, 
 		   $subject."\n".$content,
 		   $headers
 		   );
@@ -198,11 +209,12 @@ class MailNotify {
 	    if (!$ok) {
 		global $ErrorManager;
 		// get last error message
-		$last_err = $ErrorManager->_postponed_errors[count($ErrorHandler->_postponed_errors)-1];
+		$last_err = 
+                    $ErrorManager->_postponed_errors[count($ErrorHandler->_postponed_errors)-1];
 		fwrite($f, "\nX-MailFailure: " . $last_err);
 	    }
 	    fwrite($f, "\nDate: " . CTime());
-	    fwrite($f, "\nSubject: $subject");
+	    fwrite($f, "\nSubject: $encoded_subject");
 	    fwrite($f, "\nFrom: $from");
 	    fwrite($f, "\nTo: $to");
 	    fwrite($f, "\nBcc: ".join(',', $emails));
@@ -241,7 +253,7 @@ class MailNotify {
             return;
         }
         $backend = &$request->_dbi->_backend;
-        $subject = _("Page change").' '.urlencode($this->pagename);
+        $subject = _("Page change").' '.($this->pagename);
         $previous = $backend->get_previous_version($this->pagename, $version);
         if (!isset($meta['mtime'])) $meta['mtime'] = time();
         if ($previous) {
@@ -269,11 +281,13 @@ class MailNotify {
             $content = $this->pagename . " " . $version . " " .  
                 Iso8601DateTime($meta['mtime']) . "\n";
             $content .= _("New page");
+            $content .= "\n\n";
+            $content .= $wikitext;
         }
         $editedby = sprintf(_("Edited by: %s"), $this->from);
-        //$editedby = sprintf(_("Edited by: %s"), $meta['author']);
+        $summary = sprintf(_("Summary: %s"), $meta['summary']);
         $this->sendMail($subject, 
-                        $editedby."\n".$difflink."\n\n".$content);
+                        $editedby."\n".$summary."\n".$difflink."\n\n".$content);
     }
 
     /** 
@@ -287,9 +301,8 @@ class MailNotify {
                 array($this->pagename, $to, $meta, $this->emails, $this->userids);
         } else {
             $pagename = $this->pagename;
-            //$editedby = sprintf(_("Edited by: %s"), $meta['author']) . ' ' . $meta['author_id'];
             $editedby = sprintf(_("Edited by: %s"), $this->from);
-            $subject = sprintf(_("Page rename %s to %s"), urlencode($pagename), urlencode($to));
+            $subject = sprintf(_("Page rename %s to %s"), $pagename, $to);
             $link = WikiURL($to, true);
             $this->sendMail($subject, 
                             $editedby."\n".$link."\n\n"."Renamed $pagename to $to");
@@ -319,34 +332,19 @@ class MailNotify {
 
     function onDeletePage (&$wikidb, $pagename) {
         $result = true;
-	/* Generate notification emails? */
-	if (! $wikidb->isWikiPage($pagename) and !isa($GLOBALS['request'],'MockRequest')) {
-	    $notify = $wikidb->get('notify');
-	    if (!empty($notify) and is_array($notify)) {
-		//TODO: deferr it (quite a massive load if you remove some pages).
-		$this->getPageChangeEmails($notify);
-		if (!empty($this->emails)) {
-		    $editedby = sprintf(_("Removed by: %s"), $this->from); // Todo: host_id
-		    //$emails = join(',', $this->emails);
-		    $subject = sprintf(_("Page removed %s"), urlencode($pagename));
-		    $page = $wikidb->getPage($pagename);
-		    $rev = $page->getCurrentRevision(true);
-		    $content = $rev->getPackedContent();
-                    $result = $this->sendMail($subject, 
-                                              $editedby."\n"."Deleted $pagename"."\n\n".$content);
-		}
-	    }
-	}
-	//How to create a RecentChanges entry with explaining summary? Dynamically
-	/*
-	  $page = $this->getPage($pagename);
-	  $current = $page->getCurrentRevision();
-	  $meta = $current->_data;
-	  $version = $current->getVersion();
-	  $meta['summary'] = _("removed");
-	  $page->save($current->getPackedContent(), $version + 1, $meta);
-	*/
-	return $result;
+        /* Generate notification emails? */
+        if (! $wikidb->isWikiPage($pagename) and !isa($GLOBALS['request'],'MockRequest')) {
+            $notify = $wikidb->get('notify');
+            if (!empty($notify) and is_array($notify)) {
+                //TODO: deferr it (quite a massive load if you remove some pages).
+                $this->getPageChangeEmails($notify);
+                if (!empty($this->emails)) {
+                    $subject = sprintf(_("User %s removed page %s"), $this->from, $pagename);
+                    $result = $this->sendMail($subject, $subject."\n\n");
+                }
+            }
+        }
+        return $result;
     }
 
     function onRenamePage (&$wikidb, $oldpage, $new_pagename) {
@@ -377,7 +375,7 @@ class MailNotify {
         while(!empty($data[$id])) { // id collision
             $id = rand_ascii_readable(16);
         }
-        $subject = WIKI_NAME . " " . _("e-mail address confirmation");
+        $subject = _("E-Mail address confirmation");
         $ip = $request->get('REMOTE_HOST');
         $expire_date = time() + 7*86400;
         $content = fmt("Someone, probably you from IP address %s, has registered an
@@ -437,6 +435,25 @@ will expire at %s.",
         $wikidb->set('ConfirmEmail', $data);
         return HTML(HTML::h1("Confirm E-mail address"),
                     HTML::p("Your e-mail address has now been confirmed."));
+    }
+
+    function subject_encode ($subject) {
+        // We need to encode the subject if it contains non-ASCII characters
+        // The page name may contain non-ASCII characters, as well as
+        // the translation of the messages, e.g. _("PageChange Notification of %s");
+
+        // If all characters are ASCII, do nothing
+        if (isAsciiString($subject)) {
+            return $subject;
+        }
+
+        // Let us try quoted printable first
+        if (function_exists('quoted_printable_encode')) { // PHP 5.3
+            return "=?UTF-8?Q?".quoted_printable_encode($subject)."?=";
+        }
+
+        // If not, encode in base64 (less human-readable)
+        return "=?UTF-8?B?".base64_encode($subject)."?=";
     }
 }
 

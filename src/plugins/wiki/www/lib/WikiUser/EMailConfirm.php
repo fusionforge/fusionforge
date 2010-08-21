@@ -1,13 +1,29 @@
 <?php //-*-php-*-
-rcs_id('$Id: EMailConfirm.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2006 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: EMailConfirm.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2006 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 class _EMailConfirmPassUser
 extends _PassUser
 /**
- * Unconfirmed users have ANON access, 
+ * Unconfirmed users have ANON access,
  * confirmed users are equal to passusers WIKIAUTH_USER.
  *
  * Users give their email at registration, phpwiki sends a link per email,
@@ -16,7 +32,7 @@ extends _PassUser
  * Preferences are handled in _PassUser
  */
 {
-    // This can only be called from _PassUser, because the parent class 
+    // This can only be called from _PassUser, because the parent class
     // sets the pref methods, before this class is initialized.
     function _EMailConfirmPassUser($UserName='', $prefs=false, $file='') {
         if (!$this->_prefs and isa($this, "_EMailPassUser")) {
@@ -39,8 +55,6 @@ extends _PassUser
         return $this->_tryNextUser();
     }
 }
-
-// $Log: not supported by cvs2svn $
 
 // Local Variables:
 // mode: php

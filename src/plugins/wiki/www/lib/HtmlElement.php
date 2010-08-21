@@ -1,9 +1,13 @@
-<?php rcs_id('$Id: HtmlElement.php 6248 2008-09-07 15:13:56Z vargenau $');
+<?php // rcs_id('$Id: HtmlElement.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
  * Code for writing the HTML subset of XML.
  * @author: Jeff Dairiki
  *
  * This code is now php5 compatible. --2004-04-19 23:51:43 rurban
+ * php-5.3 uses now HtmlElement5.php with public static
+ *
+ * Todo: Add support for a JavaScript backend, a php2js compiler.
+ * HTML::div(array('onClick' => 'HTML::div(...)'))
  */
 if (!class_exists("XmlElement"))
     require_once(dirname(__FILE__)."/XmlElement.php");
@@ -29,7 +33,7 @@ class HtmlElement extends XmlElement
         assert(count($args) >= 1);
         assert(is_string($args[0]));
         $this->_tag = array_shift($args);
-        
+      
         if ($args && is_array($args[0]))
             $this->_attr = array_shift($args);
         else {
@@ -52,7 +56,7 @@ class HtmlElement extends XmlElement
             elseif ($args[0] === false)
                 array_shift($args);
         }
-        
+      
         if (count($args) == 1 && is_array($args[0]))
             $args = $args[0];
         $this->_content = $args;
@@ -84,12 +88,17 @@ class HtmlElement extends XmlElement
         if (!empty($this->_attr['title'])) {
 	    if (preg_match("/\[(alt-)?(.)\]$/", $this->_attr['title'], $m))
 	    {
-		$this->_attr['title'] = preg_replace("/\[(alt-)?(.)\]$/", "[".$WikiTheme->tooltipAccessKeyPrefix()."-\\2]", $this->_attr['title']);
+		$this->_attr['title'] = preg_replace
+                    ("/\[(alt-)?(.)\]$/",
+                     "[".$WikiTheme->tooltipAccessKeyPrefix()."-\\2]",
+                     $this->_attr['title']);
 	    } else  {
-		$this->_attr['title'] .= " [".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
+		$this->_attr['title'] .=
+                    " [".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
 	    }
 	} else {
-	    $this->_attr['title'] = "[".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
+	    $this->_attr['title'] =
+                "[".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
 	}
     }
 
@@ -117,7 +126,7 @@ class HTML extends HtmlElement {
     function raw ($html_text) {
         return new RawXml($html_text);
     }
-    
+  
     function getTagProperties($tag) {
         $props = &$GLOBALS['HTML_TagProperties'];
         return isset($props[$tag]) ? $props[$tag] : 0;
@@ -137,40 +146,7 @@ class HTML extends HtmlElement {
         }
     }
 
-    //
-    // Shell script to generate the following static methods:
-    //
-    // #!/bin/sh
-    // function mkfuncs () {
-    //     for tag in "$@"
-    //     do
-    //         echo "    function $tag (/*...*/) {"
-    //         echo "        \$el = new HtmlElement('$tag');"
-    //         echo "        return \$el->_init2(func_get_args());"
-    //         echo "    }"
-    //     done
-    // }
-    // d='
-    //     /****************************************/'
-    // mkfuncs link meta style script noscript
-    // echo "$d"
-    // mkfuncs a img br span
-    // echo "$d"
-    // mkfuncs h1 h2 h3 h4 h5 h6
-    // echo "$d"
-    // mkfuncs hr div p pre blockquote
-    // echo "$d"
-    // mkfuncs em strong small
-    // echo "$d"
-    // mkfuncs tt u sup sub
-    // echo "$d"
-    // mkfuncs ul ol dl li dt dd
-    // echo "$d"
-    // mkfuncs table caption thead tbody tfoot tr td th colgroup col
-    // echo "$d"
-    // mkfuncs form input option select textarea
-    // echo "$d"
-    // mkfuncs area map frame frameset iframe nobody
+    // See admin/mkfuncs shell script to generate the following static methods
 
     function link (/*...*/) {
         $el = new HtmlElement('link');
@@ -426,8 +402,18 @@ class HTML extends HtmlElement {
         $el = new HtmlElement('param');
         return $el->_init2(func_get_args());
     }
+    function fieldset (/*...*/) {
+        $el = new HtmlElement('fieldset');
+        return $el->_init2(func_get_args());
+    }
     function legend (/*...*/) {
         $el = new HtmlElement('legend');
+        return $el->_init2(func_get_args());
+    }
+
+    /****************************************/
+    function video (/*...*/) {
+        $el = new HtmlElement('video');
         return $el->_init2(func_get_args());
     }
 }
@@ -453,7 +439,7 @@ HTML::_setTagProperty(HTMLTAG_ACCEPTS_INLINE,
                       . 'div fieldset frameset'
 
                       // other with inline content
-                      . 'caption dt label legend '
+                      . 'caption dt label legend video '
                       // other with either inline or block
                       . 'dd del ins li td th colgroup');
 
@@ -558,8 +544,7 @@ function IfJavaScript($if_content = false, $else_content = false) {
     }
     return HTML($html);
 }
-    
-// (c-file-style: "gnu")
+  
 // Local Variables:
 // mode: php
 // tab-width: 8

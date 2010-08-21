@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: editpage.php 6468 2009-01-31 12:13:51Z vargenau $');
+// rcs_id('$Id: editpage.php 7546 2010-06-17 14:09:32Z vargenau $');
 
 require_once('lib/Template.php');
 
@@ -75,6 +75,7 @@ class PageEditor
         $saveFailed = false;
         $tokens = &$this->tokens;
         $tokens['PAGE_LOCKED_MESSAGE'] = '';
+        $tokens['LOCK_CHANGED_MSG'] = '';
         $tokens['CONCURRENT_UPDATE_MESSAGE'] = '';
         $r =& $this->request;
 
@@ -234,7 +235,7 @@ class PageEditor
 
     function updateLock() {
         $changed = false;
-        if (!ENABLE_PAGE_PUBLIC) {
+        if (!ENABLE_PAGE_PUBLIC && !ENABLE_EXTERNAL_PAGES) {
             if ((bool)$this->page->get('locked') == (bool)$this->locked)
                 return false;       // Not changed.
         }
@@ -243,23 +244,32 @@ class PageEditor
             // FIXME: some sort of message
             return false;         // not allowed.
         }
-
-        if (ENABLE_PAGE_PUBLIC) {
-            if ((bool)$this->page->get('public') != (bool)$this->public) {
-                $this->page->set('public', (bool)$this->public);
-                $this->tokens['LOCK_CHANGED_MSG']
-                    = ($this->public 
-                       ? _("Page now public.")
-                       : _("Page now not-public.")) . " ";
-                $changed = true;
-            }
-
+        if ((bool)$this->page->get('locked') != (bool)$this->locked) {
             $this->page->set('locked', (bool)$this->locked);
             $this->tokens['LOCK_CHANGED_MSG']
-                .= $this->locked 
-                ? _("Page now locked.") 
-                : _("Page now unlocked.");
+                .= ($this->locked
+                    ? _("Page now locked.") 
+                    : _("Page now unlocked.") . " ");
             $changed = true;
+        }
+        if (ENABLE_PAGE_PUBLIC and (bool)$this->page->get('public') != (bool)$this->public) {
+            $this->page->set('public', (bool)$this->public);
+            $this->tokens['LOCK_CHANGED_MSG']
+                .= ($this->public 
+                ? _("Page now public.")
+                : _("Page now not-public."));
+            $changed = true;
+        }
+        
+    	if (ENABLE_EXTERNAL_PAGES) {
+            if ((bool)$this->page->get('external') != (bool)$this->external) {
+                $this->page->set('external', (bool)$this->external);
+                $this->tokens['LOCK_CHANGED_MSG']
+                    = ($this->external 
+                       ? _("Page now external.")
+                       : _("Page now not-external.")) . " ";
+                $changed = true;
+            }
         }
         return $changed;            // lock changed.
     }
@@ -397,7 +407,8 @@ class PageEditor
      * Need to check dynamically some blacklist wikipage settings 
      * (plugin WikiAccessRestrictions) and some static blacklist.
      * DONE: 
-     *   Always: More then 20 new external links
+     *   More than NUM_SPAM_LINKS (default: 20) new external links. 
+     *        Disabled if NUM_SPAM_LINKS is 0
      *   ENABLE_SPAMASSASSIN:  content patterns by babycart (only php >= 4.3 for now)
      *   ENABLE_SPAMBLOCKLIST: content domain blacklist
      */
@@ -412,8 +423,8 @@ class PageEditor
         // FIXME: in longer texts the NUM_SPAM_LINKS number should be increased.
         //        better use a certain text : link ratio.
 
-        // 1. Not more then 20 new external links
-        if ($newlinks >= NUM_SPAM_LINKS)
+        // 1. Not more than NUM_SPAM_LINKS (default: 20) new external links
+        if ((NUM_SPAM_LINKS > 0) and ($newlinks >= NUM_SPAM_LINKS))
         {
             // Allow strictly authenticated users?
             // TODO: mail the admin?
@@ -518,8 +529,6 @@ class PageEditor
 	else {
 	    // New CSS formatted unified diffs
 	    $fmt = new HtmlUnifiedDiffFormatter;
-	    // Use this for old table-formatted diffs.
-	    //$fmt = new TableUnifiedDiffFormatter;
 	    $html->pushContent($fmt->format($diff));
 	}
         return $html;
@@ -662,9 +671,8 @@ class PageEditor
             = HTML::input(array('type' => 'checkbox',
                                 'name' => 'edit[locked]',
                                 'id'   => 'edit-locked',
-                                'disabled' => (bool) !$this->user->isadmin(),
+                                'disabled' => (bool) !$this->user->isAdmin(),
                                 'checked'  => (bool) $this->locked));
-
         if (ENABLE_PAGE_PUBLIC) {
             $el['PUBLIC_CB']
             = HTML::input(array('type' => 'checkbox',
@@ -672,6 +680,14 @@ class PageEditor
                                 'id'   => 'edit-public',
                                 'disabled' => (bool) !$this->user->isAdmin(),
                                 'checked'  => (bool) $this->page->get('public')));
+        }
+    	if (ENABLE_EXTERNAL_PAGES) {
+            $el['EXTERNAL_CB']
+            = HTML::input(array('type' => 'checkbox',
+                                'name' => 'edit[external]',
+                                'id'   => 'edit-external',
+                                'disabled' => (bool) !$this->user->isAdmin(),
+                                'checked'  => (bool) $this->page->get('external')));
         }
         if (ENABLE_WYSIWYG) {
 	    if (($this->version == 0) and ($request->getArg('mode') != 'wysiwyg')) {
@@ -767,6 +783,8 @@ class PageEditor
         $this->locked = !empty($posted['locked']);
         if (ENABLE_PAGE_PUBLIC)
             $this->public = !empty($posted['public']);
+        if (ENABLE_EXTERNAL_PAGES)
+            $this->external = !empty($posted['external']);
 
 	foreach (array('preview','save','edit_convert',
 		       'keep_old','overwrite','diff','upload') as $o) 

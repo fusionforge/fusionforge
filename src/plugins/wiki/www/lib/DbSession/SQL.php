@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: SQL.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: SQL.php 7417 2010-05-19 12:57:42Z vargenau $');
 
 /**
  * DB sessions for pear DB
@@ -239,15 +239,6 @@ extends DbSession
         return $sessions;
     }
 }
-
-
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2005/11/21 20:57:58  rurban
-// fix ref warnings, analog to ADODB
-//
-// Revision 1.1  2005/02/11 14:41:40  rurban
-// seperate DbSession classes: less memory, a bit slower
-//
 
 // Local Variables:
 // mode: php

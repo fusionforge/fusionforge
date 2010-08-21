@@ -1,11 +1,11 @@
 <?php // -*-php-*-
-rcs_id('$Id: MostRecentIter.php 6209 2008-08-26 15:30:39Z vargenau $');
+// rcs_id('$Id: MostRecentIter.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend.php');
 
 
 /**
- * An inefficient but general most_recent iterator. 
+ * An inefficient but general most_recent iterator.
  *
  * This iterator will work with any backends.
  */
@@ -57,11 +57,11 @@ extends WikiDB_backend_iterator
             array_splice($this->_revisions, $limit);
         }
     }
-    
+  
     function next() {
         return array_shift($this->_revisions);
     }
-    
+  
     function free() {
         unset($this->_revisions);
     }
@@ -79,17 +79,11 @@ function WikiDB_backend_dumb_MostRecentIter_sortf_rev($a, $b) {
     return $acreated - $bcreated;
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.8  2006/12/22 00:27:37  rurban
-// just add Log
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

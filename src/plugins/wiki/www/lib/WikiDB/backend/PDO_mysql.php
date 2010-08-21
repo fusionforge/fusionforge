@@ -1,25 +1,25 @@
 <?php // -*-php-*-
-rcs_id('$Id: PDO_mysql.php 6226 2008-08-29 15:42:34Z vargenau $');
+// rcs_id('$Id: PDO_mysql.php 7641 2010-08-11 13:00:46Z vargenau $');
 
 /*
- Copyright 2005 $ThePhpWikiProgrammingTeam
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/ 
+ * Copyright 2005 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 /**
  * @author: Reini Urban
@@ -68,13 +68,13 @@ extends WikiDB_backend_PDO
     	if (empty($this->_dbparams['timeout'])) return;
 	$sth = $this->_dbh->prepare("SHOW processlist");
         if ($sth->execute())
-	  while ($row = $sth->fetch(PDO_FETCH_ASSOC)) { 
+	  while ($row = $sth->fetch(PDO_FETCH_ASSOC)) {
 	    if ($row["db"] == $this->_dsn['database']
 	        and $row["User"] == $this->_dsn['username']
 	        and $row["Time"] > $this->_dbparams['timeout']
 	        and $row["Command"] == "Sleep")
             {
-                $process_id = $row["Id"]; 
+                $process_id = $row["Id"];
                 $this->query("KILL $process_id");
 	    }
 	}
@@ -107,7 +107,7 @@ extends WikiDB_backend_PDO
                 $dsn = preg_replace("/dbname=\w+;/", "dbname=".$database, $this->_dsn);
                 $dsn = preg_replace("/database=\w+;/", "database=".$database, $dsn);
                 $conn = new PDO($dsn,
-                                DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'], 
+                                DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'],
                                 DBADMIN_PASSWD ? DBADMIN_PASSWD : $this->_parsedDSN['password']);
             }
             catch (PDOException $e) {
@@ -122,7 +122,7 @@ extends WikiDB_backend_PDO
         $sth = $conn->prepare("SHOW COLUMNS FROM $table");
         $sth->execute();
         $field_list = array();
-        while ($row = $sth->fetch(PDO_FETCH_NUM)) { 
+        while ($row = $sth->fetch(PDO_FETCH_NUM)) {
             $field_list[] = $row[0];
         }
         if ($database != $old_db) {
@@ -140,9 +140,9 @@ extends WikiDB_backend_PDO
             list($offset, $count) = $this->limit($limit);
             if ($offset)
                 // pgsql needs "LIMIT $count OFFSET $from"
-                $limit = " LIMIT $offset, $count"; 
+                $limit = " LIMIT $offset, $count";
             else
-                $limit = " LIMIT $count"; 
+                $limit = " LIMIT $count";
         } else
             $limit = '';
         return $limit;
@@ -150,20 +150,11 @@ extends WikiDB_backend_PDO
 
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2005/04/10 10:43:25  rurban
-// more mysql-4.1 quirks: add utf8 to the charset aliases table. (Bug #1180108)
-//
-// Revision 1.1  2005/02/10 19:01:24  rurban
-// add PDO support
-//
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

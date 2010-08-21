@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: CustomPrefs.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: CustomPrefs.php 7417 2010-05-19 12:57:42Z vargenau $');
 
 /**
  * Custom UserPreferences:
@@ -32,7 +32,7 @@ extends _UserPreference
          'itemProb', // Item-based Top-N recommendation algorithm with probability-based similarity function. 
                      // This algorithms tends to outperform the rest.
          'userCos',  // User-based Top-N recommendation algorithm with cosine-based similarity function.
-         'bayes');   // Naïve Bayesian Classifier
+         'bayes');   // NaÃ¯ve Bayesian Classifier
     var $default_value = 'itemProb';
 
     function sanify ($value) {
@@ -52,9 +52,6 @@ $WikiTheme->customUserPreferences
           //recnnbr: typically 15-30 for item-based, 40-80 for user-based algos
           'recnnbr'   => new _UserPreference_recnnbr(10,14,80),
           ));
-
-
-// $Log: not supported by cvs2svn $ 
 
 // Local Variables:
 // mode: php

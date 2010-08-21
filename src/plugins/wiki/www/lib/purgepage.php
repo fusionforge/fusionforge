@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: purgepage.php,v 1.26 2004/12/20 12:12:31 rurban Exp $');
+// rcs_id('$Id: purgepage.php 7638 2010-08-11 11:58:40Z vargenau $');
 require_once('lib/Template.php');
 
 function PurgePage (&$request) {
@@ -22,26 +22,23 @@ function PurgePage (&$request) {
         $purgeB = Button('submit:verify', _("Purge Page"), 'wikiadmin');
         $cancelB = Button('submit:cancel', _("Cancel"), 'button'); // use generic wiki button look
 
-        $html = HTML(HTML::p(fmt("You are about to purge '%s'!", $pagelink)),
+        $fieldset = HTML::fieldset(HTML::p(fmt("You are about to purge '%s'!", $pagelink)),
                      HTML::form(array('method' => 'post',
                                       'action' => $request->getPostURL()),
                                 HiddenInputs(array('currentversion' => $version,
                                                    'pagename' => $page->getName(),
                                                    'action' => 'purge')),
-                                
                                 HTML::div(array('class' => 'toolbar'),
                                           $purgeB,
                                           $WikiTheme->getButtonSeparator(),
-                                          $cancelB)),
-                     HTML::hr()
+                                          $cancelB))
                      );
         $sample = HTML::div(array('class' => 'transclusion'));
         // simple and fast preview expanding only newlines
         foreach (explode("\n", firstNWordsOfContent(100, $current->getPackedContent())) as $s) {
             $sample->pushContent($s, HTML::br());
         }
-        $html->pushContent(HTML::div(array('class' => 'wikitext'), 
-                                     $sample));
+        $html = HTML($fieldset, HTML::div(array('class' => 'wikitext'), $sample));
     }
     elseif ($request->getArg('currentversion') != $version) {
         $html = HTML(HTML::p(array('class' => 'error'), (_("Someone has edited the page!"))),
@@ -59,7 +56,6 @@ function PurgePage (&$request) {
     GeneratePage($html, _("Purge Page"));
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,6 +1,6 @@
 <?php
-rcs_id('PHP Fortune - Made by henrik@aasted.org. HP: http://www.aasted.org');
-rcs_id('$Id: fortune.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('PHP Fortune - Made by henrik@aasted.org. HP: http://www.aasted.org');
+// rcs_id('$Id: fortune.php 7417 2010-05-19 12:57:42Z vargenau $');
 /* 
 Main methods to use:
  quoteFromDir($dir):

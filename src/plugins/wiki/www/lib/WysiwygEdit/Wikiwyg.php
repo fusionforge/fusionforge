@@ -1,5 +1,5 @@
 <?php
-rcs_id('$Id: Wikiwyg.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: Wikiwyg.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
  * Wikiwyg is compatible with most internet browsers which
  * include: IE 5.5+ (Windows), Firefox 1.0+, Mozilla 1.3+
@@ -296,54 +296,6 @@ function replace_rich_table($matched) {
         return $xmlcontent->AsXML();
   }
 }
-
-/*
- $Log: not supported by cvs2svn $
- Revision 1.13  2007/09/12 19:42:53  rurban
- take global js vars
-
- Revision 1.12  2007/07/19 09:33:41  labbenes
- Remove Internet Explorer Security Warning about non secure contents display.
-
- Revision 1.11  2007/07/17 14:38:40  labbenes
- Remove the mode selector from wikiwyg toolbar.
-
- Revision 1.9  2007/01/07 18:44:00  rurban
- Improve id: edit: to edit-
-
- Revision 1.8  2007/01/02 13:20:57  rurban
- use the new _DEBUG_REMOTE flag. simplify default utf-8 charset conversion, not requiring iconv
-
- Revision 1.7  2006/12/22 16:53:38  rurban
- Try to dl() load the iconv extension, if not already loaded
-
- Revision 1.6  2006/08/25 22:42:51  rurban
- warn user about beta quality, not to save wrong edits
-
- Revision 1.5  2006/06/28 14:28:14  jeannicolas
- Add preview and save button on the toolbar.
- Fix an IE issue in wikitext mode.
-
- Revision 1.4  2006/06/19 17:33:06  jeannicolas
- Add button to insert table of content plugin
- Add button to insert wikitext section in wysiwyg mode
-
- Fix internet explorer issue in wikitext mode. The toolbar in this mode didn't work.
-
- Revision 1.3  2006/05/31 19:59:57  jeannicolas
- Added wysiwyg_editor 1.1b
-
- Revision 1.2  2006/05/14 17:52:20  rurban
- fix syntax error. delete a left-over attempt to add CSS links also. 
- We did put everything into phpwiki.css for browser compatibility.
-
- Revision 1.1  2006/05/13 19:59:55  rurban
- added wysiwyg_editor-1.3a feature by Jean-Nicolas GEREONE <jean-nicolas.gereone@st.com>
- converted wysiwyg_editor-1.3a js to WysiwygEdit framework
- changed default ENABLE_WYSIWYG = true and added WYSIWYG_BACKEND = Wikiwyg
-
-
-*/
 
 // Local Variables:
 // mode: php

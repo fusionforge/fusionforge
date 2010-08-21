@@ -1,4 +1,4 @@
-<?php
+<?php // $Id: ASCIIMathPHP.cfg.php 7181 2009-10-05 14:25:48Z vargenau $
 
 $symbol_arr = array(
 

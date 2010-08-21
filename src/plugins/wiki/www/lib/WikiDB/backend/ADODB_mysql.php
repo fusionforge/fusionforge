@@ -1,19 +1,19 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_mysql.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: ADODB_mysql.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 require_once('lib/WikiDB/backend/ADODB.php');
 
 /*
- * PROBLEM: mysql seems to be the simpliest (or most stupid) db on earth. 
+ * PROBLEM: mysql seems to be the simpliest (or most stupid) db on earth.
  * (tested with 4.0.18)
  * See http://sql-info.de/mysql/gotchas.html for mysql specific quirks.
  *
- * Whenever a table is write-locked, you cannot even write to other unrelated 
+ * Whenever a table is write-locked, you cannot even write to other unrelated
  * tables. So it seems that we have to lock all tables!
- * As workaround we try it with application locks, uniquely named locks, 
+ * As workaround we try it with application locks, uniquely named locks,
  * to prevent from concurrent writes of locks with the same name.
  * The lock name is a strcat of the involved tables.
- * 
+ *
  * See also http://use.perl.org/~Smylers/journal/34246 for strict mode and warnings.
  */
 define('DO_APP_LOCK',true);
@@ -21,10 +21,10 @@ define('DO_FULL_LOCK',false);
 
 /**
  * WikiDB layer for ADODB-mysql, called by lib/WikiDB/ADODB.php.
- * Now with support for the newer ADODB library, the ADODB extension library 
+ * Now with support for the newer ADODB library, the ADODB extension library
  * and more database drivers.
  * To use transactions use the mysqlt driver: "mysqlt:..."
- * 
+ *
  * @author: Lawrence Akka, Reini Urban
  */
 class WikiDB_backend_ADODB_mysql
@@ -36,7 +36,7 @@ extends WikiDB_backend_ADODB
     function WikiDB_backend_ADODB_mysql($dbparams) {
         $this->WikiDB_backend_ADODB($dbparams);
         if (!$this->_dbh->_connectionID) return;
-        
+      
         $this->_serverinfo = $this->_dbh->ServerInfo();
         if (!empty($this->_serverinfo['version'])) {
             $arr = explode('.',$this->_serverinfo['version']);
@@ -62,20 +62,20 @@ extends WikiDB_backend_ADODB
             }
         }
     }
-    
+  
     /**
      * Kill timed out processes. ( so far only called on about every 50-th save. )
      */
     function _timeout() {
     	if (empty($this->_dbparams['timeout'])) return;
 	$result = mysql_query("SHOW processlist");
-	while ($row = mysql_fetch_array($result)) { 
+	while ($row = mysql_fetch_array($result)) {
 	    if ($row["db"] == $this->_dsn['database']
 	        and $row["User"] == $this->_dsn['username']
 	        and $row["Time"] > $this->_dbparams['timeout']
 	        and $row["Command"] == "Sleep")
             {
-                $process_id = $row["Id"]; 
+                $process_id = $row["Id"];
                 mysql_query("KILL $process_id");
 	    }
 	}
@@ -94,8 +94,8 @@ extends WikiDB_backend_ADODB
     }
 
     /**
-     * Lock tables. As fine-grained application lock, which locks only the 
-     * same transaction (conflicting updates and edits), and as full table 
+     * Lock tables. As fine-grained application lock, which locks only the
+     * same transaction (conflicting updates and edits), and as full table
      * write lock.
      *
      * New: which tables as params,
@@ -109,7 +109,7 @@ extends WikiDB_backend_ADODB
             if (!$result or $result[0] == 0) {
                 trigger_error( "WARNING: Couldn't obtain application lock " . $lock . "\n<br />",
                                E_USER_WARNING);
-                return;                          
+                return;                        
             }
     	}
         if (DO_FULL_LOCK) {
@@ -166,7 +166,7 @@ extends WikiDB_backend_ADODB
                 return $cache[$pagename];
             }
         }
-        
+      
 	// attributes play this game.
         if ($pagename === '') return 0;
 
@@ -199,10 +199,10 @@ extends WikiDB_backend_ADODB
     function set_versiondata($pagename, $version, $data) {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
-        
+      
         $minor_edit = (int) !empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
-        
+      
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
@@ -210,7 +210,7 @@ extends WikiDB_backend_ADODB
         @$content = (string) $data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
-        
+      
         $this->lock(array('page','recent','version','nonempty'));
         $dbh->BeginTrans( );
         $dbh->CommitLock($version_tbl);
@@ -229,15 +229,14 @@ extends WikiDB_backend_ADODB
         else $dbh->RollbackTrans( );
         $this->unlock(array('page','recent','version','nonempty'));
     }
-    
+  
 };
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

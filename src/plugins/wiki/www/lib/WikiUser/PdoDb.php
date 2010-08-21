@@ -1,7 +1,23 @@
 <?php //-*-php-*-
-rcs_id('$Id: PdoDb.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004, 2005 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: PdoDb.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004, 2005 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 include_once("lib/WikiUser/Db.php");
@@ -31,14 +47,14 @@ extends _DbPassUser
             return false;
         }
         $this->_userid = $UserName;
-        // make use of session data. generally we only initialize this every time, 
+        // make use of session data. generally we only initialize this every time,
         // but do auth checks only once
         $this->_auth_crypt_method = $GLOBALS['request']->_dbi->getAuthParam('auth_crypt_method');
         return $this;
     }
 
     function getPreferences() {
-        // override the generic slow method here for efficiency and not to 
+        // override the generic slow method here for efficiency and not to
         // clutter the homepage metadata with prefs.
         _AnonUser::getPreferences();
         $this->getAuthDbh();
@@ -47,7 +63,7 @@ extends _DbPassUser
             $db_result = $dbh->query(sprintf($this->_prefs->_select, $dbh->quote($this->_userid)));
             // patched by frederik@pandora.be
             $prefs = $db_result->fetch(PDO_FETCH_BOTH);
-            $prefs_blob = @$prefs["prefs"]; 
+            $prefs_blob = @$prefs["prefs"];
             if ($restored_from_db = $this->_prefs->retrieve($prefs_blob)) {
                 $updated = $this->_prefs->updatePrefs($restored_from_db);
                 //$this->_prefs = new UserPreferences($restored_from_db);
@@ -116,7 +132,7 @@ extends _DbPassUser
             }
         }
         //NOTE: for auth_crypt_method='crypt' no special auth_user_exists is needed
-        if ( !$dbi->getAuthParam('auth_user_exists') 
+        if ( !$dbi->getAuthParam('auth_user_exists')
              and $this->_auth_crypt_method == 'crypt'
              and $this->_authselect)
         {
@@ -142,8 +158,8 @@ extends _DbPassUser
                 return true;
         }
         // User does not exist yet.
-        // Maybe the user is allowed to create himself. Generally not wanted in 
-        // external databases, but maybe wanted for the wiki database, for performance 
+        // Maybe the user is allowed to create himself. Generally not wanted in
+        // external databases, but maybe wanted for the wiki database, for performance
         // reasons
         if (empty($this->_authcreate) and $dbi->getAuthParam('auth_create')) {
             try {
@@ -154,9 +170,9 @@ extends _DbPassUser
                 return false;
             }
         }
-        if (!empty($this->_authcreate) and 
+        if (!empty($this->_authcreate) and
             isset($GLOBALS['HTTP_POST_VARS']['auth']) and
-            isset($GLOBALS['HTTP_POST_VARS']['auth']['passwd'])) 
+            isset($GLOBALS['HTTP_POST_VARS']['auth']['passwd']))
         {
             $passwd = $GLOBALS['HTTP_POST_VARS']['auth']['passwd'];
             try {
@@ -173,7 +189,7 @@ extends _DbPassUser
         }
         return $this->_tryNextUser();
     }
- 
+
     function checkPass($submitted_password) {
         //global $DBAuthParams;
         $this->getAuthDbh();
@@ -276,14 +292,6 @@ extends _DbPassUser
         return true;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2005/06/10 06:12:36  rurban
-// finish missing db calls
-//
-// Revision 1.1  2005/05/06 16:56:48  rurban
-// add PdoDbPassUser
-//
 
 // Local Variables:
 // mode: php

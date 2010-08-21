@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: RssWriter.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: RssWriter.php 7638 2010-08-11 11:58:40Z vargenau $');
 /*
  * Code for creating RSS 1.0.
  */
@@ -53,7 +53,7 @@ class RssWriter extends XmlElement
     function channel($properties, $uri = false) {
         $this->_channel = $this->__node('channel', $properties, $uri);
     }
-    
+  
     // Args should include:
     //  'title', 'link'
     // and can include:
@@ -94,7 +94,7 @@ class RssWriter extends XmlElement
                 $seq->pushContent($this->__ref('rdf:li', $item));
         }
         $channel->pushContent(new XmlElement('items', false, $seq));
-     
+   
 	if (isset($this->_image)) {
             $channel->pushContent($this->__ref('image', $this->_image));
 	    $items[] = $this->_image;
@@ -111,18 +111,18 @@ class RssWriter extends XmlElement
         $this->__spew();
         $this->_finished = true;
     }
-            
+          
     /**
      * Write output to HTTP client.
      */
     function __spew() {
         header("Content-Type: application/xml; charset=" . RSS_ENCODING);
-        printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
+        echo('<'.'?xml version="1.0" encoding="'.RSS_ENCODING.'"?'.">\n");
         //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         $this->printXML();
     }
-        
-    
+      
+  
     /**
      * Create a new RDF <em>typedNode</em>.
      */
@@ -156,8 +156,8 @@ class RssWriter extends XmlElement
 	    $this->__check_predicate($prop);
 	    if (is_array($val))
 	        $out[] = new XmlElement($prop, $val);
-	    elseif (is_object($val))    
-		    $out[] = $val; 
+	    elseif (is_object($val))  
+		    $out[] = $val;
 	    else
 	        $out[] = new XmlElement($prop, false, $val);
 	}
@@ -187,11 +187,11 @@ class RssWriter extends XmlElement
     }
 };
 
-/* Taken from mediawiki. 
- * See http://www.atomenabled.org/developers/syndication/ 
+/* Taken from mediawiki.
+ * See http://www.atomenabled.org/developers/syndication/
  */
 class AtomFeed extends RssWriter {
-  
+
     // Args should include:
     //  'title', 'link', 'description'
     // and can include:
@@ -209,7 +209,7 @@ class AtomFeed extends RssWriter {
      */
     function __spew() {
         header("Content-Type: application/atom+xml; charset=" . RSS_ENCODING);
-        printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
+        echo('<'.'?xml version="1.0" encoding="'.RSS_ENCODING.'"?'.">\n");
         //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         $this->printXML();
     }
@@ -251,13 +251,11 @@ class AtomFeed extends RssWriter {
     }
 }
 
-
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

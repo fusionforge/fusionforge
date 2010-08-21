@@ -1,4 +1,4 @@
-<?php rcs_id('$Id: dba.php 6184 2008-08-22 10:33:41Z vargenau $');
+<?php // rcs_id('$Id: dba.php 7417 2010-05-19 12:57:42Z vargenau $');
 
 /** DBA Sessions
  *  session:
@@ -136,20 +136,6 @@ extends DbSession
         return $sessions;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.4  2006/02/22 20:56:24  rurban
-// fix more refs
-//
-// Revision 1.3  2005/08/07 10:49:57  rurban
-// do not connect/disconnect each time. fix refs
-//
-// Revision 1.2  2005/08/07 10:07:55  rurban
-// dba simplification: use default timeout
-//
-// Revision 1.1  2005/02/11 14:41:40  rurban
-// seperate DbSession classes: less memory, a bit slower
-//
 
 // Local Variables:
 // mode: php

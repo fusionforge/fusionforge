@@ -1,11 +1,11 @@
 <?php
-rcs_id('$Id: ExternalReferrer.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: ExternalReferrer.php 7638 2010-08-11 11:58:40Z vargenau $');
 
-/** 
+/**
  * Detect external referrers
  * Currently only search engines, and highlight the searched item.
  *
- * Todo: 
+ * Todo:
  *   store all external referrers in (rotatable) log/db for a RecentReferrers plugin.
  */
 if (!function_exists('isExternalReferrer')) { // also defined in stdlib.php
@@ -23,7 +23,7 @@ if (!function_exists('isExternalReferrer')) { // also defined in stdlib.php
 
 class SearchEngines {
 
-    var $searchEngines = 
+    var $searchEngines =
     array(
           "search.sli.sympatico.ca/" => array("engine" => "Sympatico", "query1" => "query=", "query2" => "", "url" => "http://www1.sympatico.ca/"),
           "www.search123.com/cgi-bin/" => array("engine" => "Search123", "query1" => "query=", "query2" => "", "url" => "http://www.search123.com/"),
@@ -64,10 +64,10 @@ class SearchEngines {
           "lycos." => array("engine" => "Lycos", "query1" => "query=", "query2" => "", "url" => "http://www.lycos.com/"),
           "msn." => array("engine" => "MSN", "query1" => "q=", "query2" => "", "url" => "http://search.msn.com/"),
           "dmoz." => array("engine" => "Dmoz", "query1" => "search=", "query2" => "", "url" => "http://www.dmoz.org/"),
-          
+
           );
 
-    /** 
+    /**
      * parseSearchQuery(url)
      * Parses the passed refering url looking for search engine data.  If search info is found,
      * the method determines the name of the search engine, it's URL, and the search keywords
@@ -115,21 +115,6 @@ class SearchEngines {
     }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.4  2007/01/07 18:42:29  rurban
-// Update comment only
-//
-// Revision 1.3  2004/10/12 14:22:14  rurban
-// lib/ExternalReferrer.php:99: Notice[8]: Undefined index: query
-//
-// Revision 1.2  2004/09/26 14:55:55  rurban
-// fixed warning
-//
-// Revision 1.1  2004/09/26 12:20:28  rurban
-// Detect external referrers, handle search engines
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

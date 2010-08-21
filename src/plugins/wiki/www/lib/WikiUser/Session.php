@@ -1,12 +1,28 @@
 <?php //-*-php-*-
-rcs_id('$Id: Session.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: Session.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/** 
+/**
  * Support reuse of existing user session from another application.
- * You have to define which session variable holds the userid, and 
+ * You have to define which session variable holds the userid, and
  * at what level is that user then. 1: BogoUser, 2: PassUser
  *   define('AUTH_SESS_USER','userid');
  *   define('AUTH_SESS_LEVEL',2);
@@ -27,14 +43,14 @@ extends _PassUser
         if (strstr(AUTH_SESS_USER,"][")) {
             $sess = $GLOBALS['HTTP_SESSION_VARS'];
             // recurse into hashes: "[user][userid]", sess = sess[user] => sess = sess[userid]
-            foreach (split("][",AUTH_SESS_USER) as $v) {
+            foreach (explode("][", AUTH_SESS_USER) as $v) {
                 $v = str_replace(array("[","]"),'',$v);
                 $sess = $sess[$v];
             }
             $this->_userid = $sess;
         } elseif (strstr(AUTH_SESS_USER,"->")) {
             // object "user->id" (no objects inside hashes supported!)
-            list($obj,$key) = split("->",AUTH_SESS_USER);
+            list($obj,$key) = explode("->", AUTH_SESS_USER);
             $this->_userid = $sess[$obj]->$key;
         } else {
             $this->_userid = $sess[AUTH_SESS_USER];
@@ -54,20 +70,6 @@ extends _PassUser
         return false;
     }
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.2  2004/12/19 00:58:02  rurban
-// Enforce PASSWORD_LENGTH_MINIMUM in almost all PassUser checks,
-// Provide an errormessage if so. Just PersonalPage and BogoLogin not.
-// Simplify httpauth logout handling and set sessions for all methods.
-// fix main.php unknown index "x" getLevelDescription() warning.
-//
-// Revision 1.1  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-rcs_id('$Id: ADODB_oci8po.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: ADODB_oci8po.php 7638 2010-08-11 11:58:40Z vargenau $');
 
 /**
  * Oracle extensions for the ADODB DB backend.
@@ -30,7 +30,7 @@ extends WikiDB_backend_ADODB
 
         $this->_prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
     }
-    
+  
     /**
      * Pack tables.
      */
@@ -43,7 +43,7 @@ extends WikiDB_backend_ADODB
     /**
      * Lock tables.
      *
-     * We don't really need to lock exclusive, but I'll relax it when I fully 
+     * We don't really need to lock exclusive, but I'll relax it when I fully
      * understand phpWiki locking ;-)
      *
      */
@@ -92,11 +92,11 @@ extends WikiDB_backend_ADODB
     function _fullsearch_sql_match_clause($word) {
         $word = preg_replace('/(?=[%_\\\\])/', "\\", $word);
         $wordq = $this->_dbh->qstr("%$word%");
-        return "LOWER(pagename) LIKE $wordq " 
+        return "LOWER(pagename) LIKE $wordq "
                . "OR DBMS_LOB.INSTR(content, '$word') > 0";
     }
     */
-    
+  
     /**
      * Serialize data
      */
@@ -132,14 +132,14 @@ extends WikiDB_backend_ADODB
                           // Problem: date formats are backend specific. Either use unixtime as %d (long),
                           // or the native timestamp format.
                           date('d-M-Y H:i:s', $entry->time),
-                          $entry->host, 
+                          $entry->host,
                           $entry->user,
-                          $entry->request_method, 
-                          $entry->request, 
-                          $entry->request_uri,    
+                          $entry->request_method,
+                          $entry->request,
+                          $entry->request_uri,  
                           $entry->request_args,
-                          $entry->_ncsa_time($entry->time), 
-                          $entry->status, 
+                          $entry->_ncsa_time($entry->time),
+                          $entry->status,
                           $entry->size,
                           $entry->referer,
                           $entry->user_agent,
@@ -155,7 +155,7 @@ extends WikiDB_backend_ADODB_search
     // Index on the CLOB. While it is very efficient, it requires the
     // Intermedia Text option, so let's stick to the 'simple' thing
     // Note that this does only an exact fulltext search, not using MATCH or LIKE.
-    function _fulltext_match_clause($node) { 
+    function _fulltext_match_clause($node) {
         if ($this->isStoplisted($node))
             return "1=1";
         $page = $node->sql();
@@ -166,12 +166,11 @@ extends WikiDB_backend_ADODB_search
     }
 }
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

@@ -1,23 +1,23 @@
 <?php // -*-php-*-
-rcs_id('$Id: LinkSearchIter.php 6209 2008-08-26 15:30:39Z vargenau $');
+// rcs_id('$Id: LinkSearchIter.php 7641 2010-08-11 13:00:46Z vargenau $');
 /*
- Copyright 2007 Reini Urban
-
- This file is part of PhpWiki.
-
- PhpWiki is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- PhpWiki is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with PhpWiki; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Copyright 2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -26,9 +26,9 @@ rcs_id('$Id: LinkSearchIter.php 6209 2008-08-26 15:30:39Z vargenau $');
  * This iterator will work with any WikiDB_backend
  * which has a working get_links() method with want_relation support.
  * Currently we iterate over all pages, check for all matching links.
- * As optimization a backend could iterate over the linktable instead 
- * and check the matching page there. There are most likely less links 
- * than pages and links are smaller than pages.  
+ * As optimization a backend could iterate over the linktable instead
+ * and check the matching page there. There are most likely less links
+ * than pages and links are smaller than pages.
  *
  * This is mostly here for testing, very slow.
  *
@@ -39,8 +39,8 @@ rcs_id('$Id: LinkSearchIter.php 6209 2008-08-26 15:30:39Z vargenau $');
 class WikiDB_backend_dumb_LinkSearchIter
 extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_dumb_LinkSearchIter(&$backend, &$pageiter, $search, $linktype, 
-						$relation=false, $options=array()) 
+    function WikiDB_backend_dumb_LinkSearchIter(&$backend, &$pageiter, $search, $linktype,
+						$relation=false, $options=array())
     {
         $this->_backend  = &$backend;
         $this->_pages    = $pageiter;
@@ -78,7 +78,7 @@ extends WikiDB_backend_iterator
 	    } else {
 	    	$page = $this->_page;
 	    }
-	    // iterate the links. the links are pushed into the handy triple by _get_links 
+	    // iterate the links. the links are pushed into the handy triple by _get_links
 	    while ($link = array_shift($this->_links)) {
 		// unmatching relations are already filtered out
 		if ($this->search->match($link['linkvalue'])) { //pagename or attr-value
@@ -117,10 +117,10 @@ extends WikiDB_backend_iterator
 	    $attribs = $page->get('attributes');
 	    if ($attribs) {
 	      foreach ($attribs as $attribute => $value) {
-		  if ($this->relation and !$this->relation->match($attribute)) continue; 
-		  // The logical operator and unit unification (not yet) is encoded into 
+		  if ($this->relation and !$this->relation->match($attribute)) continue;
+		  // The logical operator and unit unification (not yet) is encoded into
 		  // a seperate search object.
-		  if (!$this->search->match($value)) continue; 
+		  if (!$this->search->match($value)) continue;
 		  $links[] = array('pagename'  => $pagename,
 				   'linkname'  => $attribute,
 				   'linkvalue' => $value);
@@ -129,11 +129,11 @@ extends WikiDB_backend_iterator
 	    unset($attribs);
 	} else {
 	    $link_iter = $this->_backend->get_links($pagename, $this->_reverse, true,
-						    $this->sortby, $this->limit, 
+						    $this->sortby, $this->limit,
 						    $this->exclude, $this->_want_relations);
 	    // we already stepped through all links. make use of that.
 	    if ($this->_want_relations
-	        and isset($link_iter->_options['found_relations']) 
+	        and isset($link_iter->_options['found_relations'])
 		and $link_iter->_options['found_relations'] == 0)
 	    {
 		$link_iter->free();
@@ -141,8 +141,8 @@ extends WikiDB_backend_iterator
 	    }
 	    while ($link = $link_iter->next()) {
 	    	if (empty($link[$this->_field])) continue;
-		if ($this->_want_relations and $this->relation 
-		    and !$this->relation->match($link['linkrelation'])) continue; 
+		if ($this->_want_relations and $this->relation
+		    and !$this->relation->match($link['linkrelation'])) continue;
 		// check hash values, with/out want_relations
 		$links[] = array('pagename'  => $pagename,
 		                 'linkname'  => $this->_want_relations ? $link['linkrelation'] : '',
@@ -160,7 +160,6 @@ extends WikiDB_backend_iterator
     }
 }
 
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

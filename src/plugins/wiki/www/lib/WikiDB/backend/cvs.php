@@ -1,9 +1,9 @@
 <?php
-rcs_id('$Id: cvs.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: cvs.php 7638 2010-08-11 11:58:40Z vargenau $');
 /**
- * Backend for handling CVS repository. 
+ * Backend for handling CVS repository.
  *
- * ASSUMES: that the shell commands 'cvs', 'grep', 'rm', are all located 
+ * ASSUMES: that the shell commands 'cvs', 'grep', 'rm', are all located
  * ASSUMES: in the path of the server calling this script.
  *
  * Author: Gerrit Riessen, gerrit.riessen@open-source-consultants.de
@@ -12,8 +12,8 @@ rcs_id('$Id: cvs.php 6184 2008-08-22 10:33:41Z vargenau $');
 require_once('lib/WikiDB/backend.php');
 require_once('lib/ErrorManager.php');
 
-/** 
- * Constants used by the CVS backend 
+/**
+ * Constants used by the CVS backend
  **/
 // these are the parameters defined in db_params
 define( 'CVS_DOC_DIR',              'doc_dir' );
@@ -48,14 +48,14 @@ extends WikiDB_backend
      * In the following parameters should be defined in dbparam:
      *   . wiki ==> directory where the pages should be stored
      *              this is not the CVS repository location
-     *   . repository ==> local directory where the repository should be 
+     *   . repository ==> local directory where the repository should be
      *                    created. This can also be a :pserver: but then
      *                    set check_for_repository to false and checkout
      *                    the documents beforehand. (This is basically CVSROOT)
-     *   . check_for_repository ==> boolean flag to indicate whether the 
+     *   . check_for_repository ==> boolean flag to indicate whether the
      *                              repository should be created, this only
      *                              applies to local directories, for pserver
-     *                              set this to false and check out the 
+     *                              set this to false and check out the
      *                              document base beforehand
      *   . debug_file ==> file name where debug information should be sent.
      *                    If file doesn't exist then it's created, if this
@@ -67,12 +67,12 @@ extends WikiDB_backend
      * The class also adds a parameter 'module_name' to indicate the name
      * of the cvs module that is being used to version the documents. The
      * module_name is assumed to be the base name of directory given in
-     * wiki, e.g. if wiki == '/some/path/to/documents' then module_name 
-     * becomes 'documents' and this module will be created in the CVS 
+     * wiki, e.g. if wiki == '/some/path/to/documents' then module_name
+     * becomes 'documents' and this module will be created in the CVS
      * repository or assumed to exist. If on the other hand the parameter
      * already exists, then it is not overwritten.
      */
-    function WikiDB_backend_cvs( $dbparam ) 
+    function WikiDB_backend_cvs( $dbparam )
     {
         // setup all the instance values.
         $this->_docDir = $dbparam{CVS_DOC_DIR};
@@ -92,15 +92,15 @@ extends WikiDB_backend
 
             $this->_cvsDebug( sprintf("Creating new repository [%s]", $this->_repository) );
 
-            // doesn't exist, need to create it and the replace the wiki 
+            // doesn't exist, need to create it and the replace the wiki
             // document directory.
             $this->_mkdir( $this->_repository, 0775 );
-    
+  
             // assume that the repository is a local directory, prefix :local:
             if ( !ereg( "^:local:", $this->_repository ) ) {
                 $this->_repository = ":local:" . $this->_repository;
             }
-            
+          
             $cmdLine = sprintf( "cvs -d \"%s\" init", $this->_repository);
             $this->_execCommand( $cmdLine, $cmdOutput, true );
 
@@ -109,14 +109,14 @@ extends WikiDB_backend
                                ."%s V R", $this->_docDir, $this->_repository,
                                $this->_module_name );
             $this->_execCommand( $cmdLine, $cmdOutput, true );
-            
-            // remove the wiki directory and check it out from the 
+          
+            // remove the wiki directory and check it out from the
             // CVS repository
             $cmdLine = sprintf( "rm -fr %s; cd %s; cvs -d \"%s\" co %s",
-                                $this->_docDir, dirname($this->_docDir), 
+                                $this->_docDir, dirname($this->_docDir),
                                 $this->_repository, $this->_module_name);
             $this->_execCommand( $cmdLine, $cmdOutput, true );
-            
+          
             // add the default pages using the update_pagedata
             $metaData = array();
             $metaData[$AUTHOR] = "PhpWiki -- CVS Backend";
@@ -126,7 +126,7 @@ extends WikiDB_backend
                 while ( $entry = readdir( $d ) ) {
                     $filename = $dbparam[CVS_PAGE_SOURCE] . "/" . $entry;
                     $this->_cvsDebug( sprintf("Found [%s] in [%s]", $entry, $dbparam[CVS_PAGE_SOURCE]) );
-                    
+                  
                     if ( is_file( $filename ) ) {
                         $metaData[CMD_CONTENT] = join('',file($filename));
                         $this->update_pagedata( $entry, $metaData );
@@ -134,7 +134,7 @@ extends WikiDB_backend
                 }
                 closedir( $d );
             }
-            
+          
             // ensure that the results of the is_dir are cleared
             clearstatcache();
         }
@@ -143,16 +143,16 @@ extends WikiDB_backend
     /**
      * Return: metadata about page
      */
-    function get_pagedata($pagename) 
+    function get_pagedata($pagename)
     {
-        // the metadata information about a page is stored in the 
+        // the metadata information about a page is stored in the
         // CVS directory of the document root in serialized form. The
         // file always has the name, i.e. '_$pagename'.
         $metaFile = $this->_docDir . "/CVS/_" . $pagename;
 
         if ( file_exists( $metaFile ) ) {
-            
-            $megaHash = 
+          
+            $megaHash =
                  unserialize(join( '',$this->_readFileWithPath($metaFile)));
 
             $filename = $this->_docDir . "/" . $pagename;
@@ -175,11 +175,11 @@ extends WikiDB_backend
      * This will create a new page if page being requested does not
      * exist.
      */
-    function update_pagedata($pagename, $newdata = array() ) 
+    function update_pagedata($pagename, $newdata = array() )
     {
         // check argument
         if ( ! is_array( $newdata ) ) {
-            trigger_error("update_pagedata: Argument 'newdata' was not array", 
+            trigger_error("update_pagedata: Argument 'newdata' was not array",
                           E_USER_WARNING);
         }
 
@@ -233,7 +233,7 @@ extends WikiDB_backend
         $this->_writeMetaInfo( $pagename, $metaData );
     }
 
-    function get_latest_version($pagename) 
+    function get_latest_version($pagename)
     {
         $metaData = $this->get_pagedata( $pagename );
         if ( $metaData ) {
@@ -245,7 +245,7 @@ extends WikiDB_backend
         }
     }
 
-    function get_previous_version($pagename, $version) 
+    function get_previous_version($pagename, $version)
     {
         // cvs increments the version numbers, so this is real easy ;-)
         return ($version > 0 ? $version - 1 : 0);
@@ -255,23 +255,23 @@ extends WikiDB_backend
      * the version parameter is assumed to be everything after the '1.'
      * in the CVS versioning system.
      */
-    function get_versiondata($pagename, $version, $want_content = false) 
+    function get_versiondata($pagename, $version, $want_content = false)
     {
         $this->_cvsDebug( "get_versiondata: [$pagename] [$version] [$want_content]" );
-      
+    
         $filedata = "";
         if ( $want_content ) {
             // retrieve the version from the repository
-            $cmdLine = sprintf("cvs -d \"%s\" co -p -r 1.%d %s/%s 2>&1", 
-                               $this->_repository, $version, 
+            $cmdLine = sprintf("cvs -d \"%s\" co -p -r 1.%d %s/%s 2>&1",
+                               $this->_repository, $version,
                                $this->_module_name, $pagename );
             $this->_execCommand( $cmdLine, $filedata, true );
-        
+      
             // TODO: DEBUG: 5 is a magic number here, depending on the
             // TODO: DEBUG: version of cvs used here, 5 might have to
             // TODO: DEBUG: change. Basically find a more reliable way of
             // TODO: DEBUG: doing this.
-            // the first 5 lines contain various bits of 
+            // the first 5 lines contain various bits of
             // administrative information that can be ignored.
             for ( $i = 0; $i < 5; $i++ ) {
                 array_shift( $filedata );
@@ -302,7 +302,7 @@ extends WikiDB_backend
         foreach ( $rVal as $key => $value ) {
             $this->_cvsDebug( "$key == [$value]" );
         }
-      
+    
         return $rVal;
     }
 
@@ -316,19 +316,19 @@ extends WikiDB_backend
      * This returns false if page was not deleted or could not be deleted
      * else return true.
      */
-    function purge_page($pagename) 
+    function purge_page($pagename)
     {
         $this->_cvsDebug( "delete_page [$pagename]") ;
         $filename = $this->_docDir . "/" . $pagename;
         $metaFile = $this->_docDir . "/CVS/_" . $pagename;
-        
+      
         // obtain a write block before deleting the file
         if ( $this->_deleteFile( $filename ) == false ) {
             return false;
         }
-        
+      
         $this->_deleteFile( $metaFile );
-        
+      
         $this->_removePage( $pagename );
 
         return true;
@@ -340,7 +340,7 @@ extends WikiDB_backend
      * This returns false if page was not renamed,
      * else return true.
      */
-    function rename_page($pagename, $to) 
+    function rename_page($pagename, $to)
     {
         $this->_cvsDebug( "rename_page [$pagename,$to]") ;
 	$data = get_pagedata($pagename);
@@ -354,7 +354,7 @@ extends WikiDB_backend
 	return true;
     }
 
-    function delete_versiondata($pagename, $version) 
+    function delete_versiondata($pagename, $version)
     {
         // TODO: Not Implemented.
         // TODO: This is, for CVS, difficult because it implies removing a
@@ -363,7 +363,7 @@ extends WikiDB_backend
         trigger_error("delete_versiondata: Not Implemented", E_USER_WARNING);
     }
 
-    function set_versiondata($pagename, $version, $data) 
+    function set_versiondata($pagename, $version, $data)
     {
         // TODO: Not Implemented.
         // TODO: requires changing the log(commit) message for a particular
@@ -373,13 +373,13 @@ extends WikiDB_backend
         trigger_error("set_versiondata: Not Implemented", E_USER_WARNING);
     }
 
-    function update_versiondata($pagename, $version, $newdata) 
+    function update_versiondata($pagename, $version, $newdata)
     {
         // TODO: same problem as set_versiondata
         trigger_error("set_versiondata: Not Implemented", E_USER_WARNING);
     }
 
-    function set_links($pagename, $links) 
+    function set_links($pagename, $links)
     {
         // TODO: needs to be tested ....
         $megaHash = get_pagedata( $pagename );
@@ -393,7 +393,7 @@ extends WikiDB_backend
         // TODO: ignores the $reversed argument and returns
         // TODO: the value of _links_ attribute of the meta information
         // TODO: to implement a reversed version, i guess, we going to
-        // TODO: need to do a grep on all files for the pagename in 
+        // TODO: need to do a grep on all files for the pagename in
         // TODO: in question and return all those page names that contained
         // TODO: the required pagename!
         $megaHash = get_pagedata( $pagename );
@@ -406,19 +406,19 @@ extends WikiDB_backend
         return new WikiDB_backend_dumb_AllRevisionsIter($this, $pagename);
     } */
 
-    function get_all_pages($include_empty=false, $sortby='', $limit='') 
+    function get_all_pages($include_empty=false, $sortby='', $limit='')
     {
         // FIXME: this ignores the parameters.
         return new Cvs_Backend_Array_Iterator(
                               $this->_getAllFileNamesInDir( $this->_docDir ));
     }
 
-    function text_search($search, $fullsearch = false, $orderby=false, $limit='', $exclude='') 
+    function text_search($search, $fullsearch = false, $orderby=false, $limit='', $exclude='')
     {
         if ( $fullsearch ) {
             $iter = new Cvs_Backend_Full_Search_Iterator(
-                               $this->_getAllFileNamesInDir( $this->_docDir ), 
-                               $search, 
+                               $this->_getAllFileNamesInDir( $this->_docDir ),
+                               $search,
                                $this->_docDir );
             $iter->stoplisted =& $search->stoplisted;
             return $iter;
@@ -439,7 +439,7 @@ extends WikiDB_backend
             arsort( $mp, SORT_NUMERIC );
         }
         $returnVal = array();
-        
+      
         while ( (list($key, $val) = each($a)) && $limit > 0 ) {
             $returnVal[] = $key;
             $limit--;
@@ -451,7 +451,7 @@ extends WikiDB_backend
      * This only accepts the 'since' and 'limit' attributes, everything
      * else is ignored.
      */
-    function most_recent($params) 
+    function most_recent($params)
     {
         // TODO: needs to be tested ...
         // most recent are those pages with the highest time value ...
@@ -474,7 +474,7 @@ extends WikiDB_backend
             }
         } else if ( isset( $params['since'] ) ) {
             while ( (list($key, $val) = each($a)) ) {
-                
+              
                 if ( $val > $params['since'] ) {
                     $returnVal[] = $key;
                 }
@@ -484,27 +484,27 @@ extends WikiDB_backend
         return new Cvs_Backend_Array_Iterator( $returnVal );
     }
 
-    function lock($write_lock = true) 
+    function lock($write_lock = true)
     {
         // TODO: to be implemented
         trigger_error("lock: Not Implemented", E_USER_WARNING);
     }
 
-    function unlock($force = false) 
+    function unlock($force = false)
     {
         // TODO: to be implemented
         trigger_error("unlock: Not Implemented", E_USER_WARNING);
     }
 
-    function close () 
+    function close ()
     {
     }
 
-    function sync() 
+    function sync()
     {
     }
 
-    function optimize() 
+    function optimize()
     {
     }
 
@@ -514,10 +514,10 @@ extends WikiDB_backend
      * file is created for the page.
      *
      * This can happen if rebuild() was called and someone has added
-     * files to the CVS repository not via PhpWiki. These files are 
+     * files to the CVS repository not via PhpWiki. These files are
      * added to the document directory but without any metadata files.
      */
-    function check() 
+    function check()
     {
         // TODO:
         // TODO: test this .... i.e. add test to unit test file.
@@ -535,9 +535,9 @@ extends WikiDB_backend
     }
 
     /**
-     * Do an update of the CVS repository 
+     * Do an update of the CVS repository
      */
-    function rebuild() 
+    function rebuild()
     {
         // TODO:
         // TODO: test this .... i.e. add test to unit test file.
@@ -546,10 +546,10 @@ extends WikiDB_backend
         $this->_execCommand( $cmdLine, $cmdOutput, true );
         return true;
     }
-    
-    // 
+  
+    //
     // ..-.-..-.-..-.-.. .--..-......-.--. --.-....----.....
-    // The rest are all internal methods, not to be used 
+    // The rest are all internal methods, not to be used
     // directly.
     // ..-.-..-.-..-.-.. .--..-......-.--. --.-....----.....
     //
@@ -561,7 +561,7 @@ extends WikiDB_backend
         $backend->update_pagedata( $page_name, array() );
     }
 
-    function _strip_leading_underscore( &$item ) 
+    function _strip_leading_underscore( &$item )
     {
         $item = ereg_replace( "^_", "", $item );
     }
@@ -579,7 +579,7 @@ extends WikiDB_backend
         } else {
             $mp[$pagename] = 1;
         }
-        $this->_writeFileWithPath( $this->_docDir . "/CVS/" . CVS_MP_FILE, 
+        $this->_writeFileWithPath( $this->_docDir . "/CVS/" . CVS_MP_FILE,
                                    serialize( $mp ) );
     }
 
@@ -610,13 +610,13 @@ extends WikiDB_backend
     {
         $mr = $this->_getMostRecent();
         $mr[$pagename] = time();
-        $this->_writeFileWithPath( $this->_docDir . "/CVS/" . CVS_MR_FILE, 
+        $this->_writeFileWithPath( $this->_docDir . "/CVS/" . CVS_MR_FILE,
                                    serialize( $mr ) );
     }
 
     function _writeMetaInfo( $pagename, $hashInfo )
     {
-        $this->_writeFileWithPath( $this->_docDir . "/CVS/_" . $pagename, 
+        $this->_writeFileWithPath( $this->_docDir . "/CVS/_" . $pagename,
                                    serialize( $hashInfo ) );
     }
     function _writePage( $pagename, $content )
@@ -626,9 +626,9 @@ extends WikiDB_backend
     function _removePage( $pagename )
     {
         $cmdLine = sprintf("cd %s; cvs remove %s 2>&1; cvs commit -m '%s' "
-                           ."%s 2>&1", $this->_docDir, $pagename, 
+                           ."%s 2>&1", $this->_docDir, $pagename,
                            "remove page", $pagename );
-        
+      
         $this->_execCommand( $cmdLine, $cmdRemoveOutput, true );
     }
 
@@ -637,8 +637,8 @@ extends WikiDB_backend
      */
     function _commitPage( $pagename, &$meta_data )
     {
-        $cmdLine = sprintf( "cd %s; cvs commit -m \"%s\" %s 2>&1", 
-                            $this->_docDir, 
+        $cmdLine = sprintf( "cd %s; cvs commit -m \"%s\" %s 2>&1",
+                            $this->_docDir,
                             escapeshellcmd( serialize( $meta_data ) ),
                             $pagename );
         $this->_execCommand( $cmdLine, $cmdOutput, true );
@@ -667,17 +667,17 @@ extends WikiDB_backend
     {
         // TODO: need to add a check for the mimetype so that binary
         // TODO: files are added as binary files
-        $cmdLine = sprintf("cd %s; cvs add %s 2>&1", $this->_docDir, 
+        $cmdLine = sprintf("cd %s; cvs add %s 2>&1", $this->_docDir,
                            $pagename );
         $this->_execCommand( $cmdLine, $cmdAddOutput, true );
     }
 
     /**
      * Returns an array containing all the names of files contained
-     * in a particular directory. The list is sorted according the 
+     * in a particular directory. The list is sorted according the
      * string representation of the filenames.
      */
-    function _getAllFileNamesInDir( $dirName ) 
+    function _getAllFileNamesInDir( $dirName )
     {
         $namelist = array();
         $d = opendir( $dirName );
@@ -692,24 +692,24 @@ extends WikiDB_backend
     /**
      * Recursively create all directories.
      */
-    function _mkdir( $path, $mode ) 
+    function _mkdir( $path, $mode )
     {
         $directoryName = dirname( $path );
-        if ( $directoryName != "/" && $directoryName != "\\"  
+        if ( $directoryName != "/" && $directoryName != "\\"
              && !is_dir( $directoryName ) && $directoryName != "" ) {
             $rVal = $this->_mkdir( $directoryName, $mode );
         }
         else {
             $rVal = true;
         }
-      
+    
         return ($rVal && @mkdir( $path, $mode ) );
     }
 
     /**
      * Recursively create all directories and then the file.
      */
-    function _createFile( $path, $mode ) 
+    function _createFile( $path, $mode )
     {
         $this->_mkdir( dirname( $path ), $mode );
         touch( $path );
@@ -721,14 +721,14 @@ extends WikiDB_backend
      */
     function _deleteFile( $filename )
     {
-        if( $fd = fopen($filename, 'a') ) { 
-            
-            $locked = flock($fd,2);  // Exclusive blocking lock 
+        if( $fd = fopen($filename, 'a') ) {
+          
+            $locked = flock($fd,2);  // Exclusive blocking lock
 
-            if (!$locked) { 
+            if (!$locked) {
                 $this->_cvsError("Unable to delete file, lock was not obtained.",
                                  __LINE__, $filename, EM_NOTICE_ERRORS );
-            } 
+            }
 
             if ( ($rVal = unlink( $filename )) != 0 ) {
                 $this->_cvsDebug( "[$filename] --> Unlink returned [$rVal]" );
@@ -743,11 +743,11 @@ extends WikiDB_backend
     }
 
     /**
-     * Called when something happened that causes the CVS backend to 
+     * Called when something happened that causes the CVS backend to
      * fail.
      */
-    function _cvsError( $msg     = "no message", 
-                        $errline = 0, 
+    function _cvsError( $msg     = "no message",
+                        $errline = 0,
                         $errfile = "lib/WikiDB/backend/cvs.php",
                         $errno   = EM_FATAL_ERRORS)
     {
@@ -762,12 +762,12 @@ extends WikiDB_backend
      * Debug function specifically for the CVS database functions.
      * Can be deactived by setting the WikiDB['debug_file'] to ""
      */
-    function _cvsDebug( $msg )  
+    function _cvsDebug( $msg )
     {
         if ( $this->_debug_file == "" ) {
             return;
         }
-        
+      
         if ( !file_exists( $this->_debug_file  ) ) {
             $this->_createFile( $this->_debug_file, 0755 );
         }
@@ -778,7 +778,7 @@ extends WikiDB_backend
                 fclose( $fdlock );
                 return;
             }
-            
+          
             $fdappend = @fopen( $this->_debug_file, 'a' );
             fwrite( $fdappend, ($msg . "\n") );
             fclose( $fdappend );
@@ -792,7 +792,7 @@ extends WikiDB_backend
     }
 
     /**
-     * Execute a command and potentially exit if the flag exitOnNonZero is 
+     * Execute a command and potentially exit if the flag exitOnNonZero is
      * set to true and the return value was nonZero
      */
     function _execCommand( $cmdLine, &$cmdOutput, $exitOnNonZero )
@@ -800,7 +800,7 @@ extends WikiDB_backend
         $this->_cvsDebug( sprintf("Preparing to execute [%s]", $cmdLine) );
         exec( $cmdLine, $cmdOutput, $cmdReturnVal );
         if ( $exitOnNonZero && ($cmdReturnVal != 0) ) {
-            $this->_cvsDebug( sprintf("Command failed [%s], Output: ", $cmdLine) ."[". 
+            $this->_cvsDebug( sprintf("Command failed [%s], Output: ", $cmdLine) ."[".
                               join("\n",$cmdOutput) . "]" );
             $this->_cvsError( sprintf("Command failed [%s], Return value: %s", $cmdLine, $cmdReturnVal),
                             __LINE__ );
@@ -813,7 +813,7 @@ extends WikiDB_backend
     /**
      * Read locks a file, reads it, and returns it contents
      */
-    function _readFileWithPath( $filename ) 
+    function _readFileWithPath( $filename )
     {
         if ( $fd = @fopen( $filename, "r" ) )  {
             $locked = flock( $fd, 1 ); // read lock
@@ -833,28 +833,28 @@ extends WikiDB_backend
     }
 
     /**
-     * Either replace the contents of an existing file or create a 
+     * Either replace the contents of an existing file or create a
      * new file in the particular store using the page name as the
      * file name.
-     * 
+     *
      * Nothing is returned, might be useful to return something ;-)
      */
     function _writeFileWithPath( $filename, $contents )
-    { 
+    {
         // TODO: $contents should probably be a reference parameter ...
-        if( $fd = fopen($filename, 'a') ) { 
-            $locked = flock($fd,2);  // Exclusive blocking lock 
-            if (!$locked) { 
+        if( $fd = fopen($filename, 'a') ) {
+            $locked = flock($fd,2);  // Exclusive blocking lock
+            if (!$locked) {
                 $this->_cvsError( "Timeout while obtaining lock.", __LINE__ );
-            } 
+            }
 
             // Second filehandle -- we use this to write the contents
-            $fdsafe = fopen($filename, 'w'); 
-            fwrite($fdsafe, $contents); 
-            fclose($fdsafe); 
+            $fdsafe = fopen($filename, 'w');
+            fwrite($fdsafe, $contents);
+            fclose($fdsafe);
             fclose($fd);
         } else {
-            $this->_cvsError( sprintf("Could not open file '%s' for writing", $filename), 
+            $this->_cvsError( sprintf("Could not open file '%s' for writing", $filename),
                               __LINE__ );
         }
     }
@@ -886,7 +886,7 @@ extends WikiDB_backend
     }
 
     /**
-     * Unescape a string value. Normally this comes from doing an 
+     * Unescape a string value. Normally this comes from doing an
      * escapeshellcmd. This converts the following:
      *    \{ --> {
      *    \} --> }
@@ -899,7 +899,7 @@ extends WikiDB_backend
         $val = str_replace( "\\}", "}", $val );
         $val = str_replace( "\\;", ";", $val );
         $val = str_replace( "\\\"", "\"", $val );
-        
+      
         return $val;
     }
 
@@ -927,7 +927,7 @@ extends WikiDB_backend_iterator
         $this->_array = $arrayValue;
     }
 
-    function next() 
+    function next()
     {
         while ( ($rVal = array_pop( $this->_array )) != NULL ) {
             return $rVal;
@@ -964,7 +964,7 @@ extends Cvs_Backend_Array_Iterator
     {
         do {
             $pageName = Cvs_Backend_Array_Iterator::next();
-        } while ( !$this->_searchFile( $_searchString, 
+        } while ( !$this->_searchFile( $_searchString,
                                        $_docDir . "/" . $pageName ));
 
         return $pageName;
@@ -972,7 +972,7 @@ extends Cvs_Backend_Array_Iterator
 
     /**
      * Does nothing more than a grep and search the entire contents
-     * of the given file. Returns TRUE of the searchstring was found, 
+     * of the given file. Returns TRUE of the searchstring was found,
      * false if the search string wasn't find or the file was a directory
      * or could not be read.
      */
@@ -981,10 +981,10 @@ extends Cvs_Backend_Array_Iterator
         // TODO: using grep here, it might make more sense to use
         // TODO: some sort of inbuilt/language specific method for
         // TODO: searching files.
-        $cmdLine = sprintf( "grep -E -i '%s' %s > /dev/null 2>&1", 
+        $cmdLine = sprintf( "grep -E -i '%s' %s > /dev/null 2>&1",
                             $searchString, $fileName );
-        
-        return ( WikiDB_backend_cvs::_execCommand( $cmdLine, $cmdOutput, 
+      
+        return ( WikiDB_backend_cvs::_execCommand( $cmdLine, $cmdOutput,
                                                    false ) == 0 );
     }
 }
@@ -1014,12 +1014,11 @@ extends Cvs_Backend_Array_Iterator
     }
 }
 
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End: 
 ?>

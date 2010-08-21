@@ -1,14 +1,14 @@
 <?php // -*-php-*-
-rcs_id('$Id: HttpClient.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: HttpClient.php 7638 2010-08-11 11:58:40Z vargenau $');
 
-/** 
+/**
    Version 0.9, 6th April 2003 - Simon Willison ( http://simon.incutio.com/ )
    Manual: http://scripts.incutio.com/httpclient/
 
-   Copyright © 2003 Incutio Limited
+   Copyright Â© 2003 Incutio Limited
    License: http://www.opensource.org/licenses/artistic-license.php
 
-   File upload and xmlrpc support by Reini Urban for PhpWiki, 2006-12-28 18:12:47 
+   File upload and xmlrpc support by Reini Urban for PhpWiki, 2006-12-28 18:12:47
    Todo: proxy support
 */
 
@@ -30,7 +30,7 @@ class HttpClient {
     var $timeout = 10;
     var $use_gzip = true;
     var $persist_cookies = true;  // If true, received cookies are placed in the $this->cookies array ready for the next request
-                                  // Note: This currently ignores the cookie path (and time) completely. Time is not important, 
+                                  // Note: This currently ignores the cookie path (and time) completely. Time is not important,
                                   //       but path could possibly lead to security problems.
     var $persist_referers = true; // For each request, sends path of last request as referer
     var $debug = false;
@@ -72,7 +72,7 @@ class HttpClient {
         $this->method = 'POST';
 	$boundary = $this->boundary; //"httpclient_boundary";
 	$headers[] = "Content-Type: multipart/form-data; boundary=\"$boundary\"";
-	$basename = basename($filename); 
+	$basename = basename($filename);
 	$this->postdata =
 	    "\r\n--$boundary\r\n"
 	    ."Content-Disposition: form-data; filename=\"$basename\"\r\n"
@@ -121,12 +121,11 @@ class HttpClient {
             }
             return false;
         }
-        if (check_php_version(4,3,0))
-            socket_set_timeout($fp, $this->timeout);
+        socket_set_timeout($fp, $this->timeout);
 	if ( $this->method == 'POST' and preg_match("/\<methodCall\>/", $this->postdata))
 	    $request = $this->buildRequest("text/xml"); //xmlrpc
-	else if ( $this->method == 'POST' and strstr("\r\nContent-Disposition: form-data; filename=", 
-						     $this->postdata)) 
+	else if ( $this->method == 'POST' and strstr("\r\nContent-Disposition: form-data; filename=",
+						     $this->postdata))
 	{
 	    //file upload
 	    $boundary = $this->boundary;
@@ -148,6 +147,10 @@ class HttpClient {
     	    if ($atStart) {
     	        // Deal with first line of returned data
     	        $atStart = false;
+    	        if ($line === false) {
+    	            $this->errormsg = "Empty ". $this->method. " response";
+    	            return false;
+    	        }
     	        if (!preg_match('/HTTP\/(\\d\\.\\d)\\s*(\\d+)\\s*(.*)/', $line, $m)) {
     	            $this->errormsg = "Status code line invalid: ".htmlentities($line);
     	            $this->debug($this->errormsg);
@@ -233,18 +236,18 @@ class HttpClient {
                 $url = parse_url($location.$uri);
                 if ($this->method == 'POST')
                     return $this->doRequest();
-                else    
+                else
                     // This will FAIL if redirect is to a different site
                     return $this->get($url['path']);
             }
         }
         return true;
     }
-    
+
     function buildRequest($ContentType = 'application/x-www-form-urlencoded') {
         $headers = array();
 	// Using 1.1 leads to all manner of problems, such as "chunked" encoding
-        $headers[] = "{$this->method} {$this->path} HTTP/1.0"; 
+        $headers[] = "{$this->method} {$this->path} HTTP/1.0";
         $headers[] = "Host: {$this->host}";
         $headers[] = "User-Agent: {$this->user_agent}";
         $headers[] = "Accept: {$this->accept}";
@@ -380,33 +383,9 @@ class HttpClient {
             }
             print '</div>';
         }
-    }   
+    }
 }
 
-// $Log: not supported by cvs2svn $
-// Revision 1.9  2007/03/18 10:16:30  rurban
-// Fix POST redirects
-//
-// Revision 1.8  2007/01/02 13:18:35  rurban
-// added postfile and xmlrpc support. added ContentType arg to buildRequest
-//
-// Revision 1.7  2006/06/18 11:02:01  rurban
-// assume https <>80
-//
-// Revision 1.6  2004/11/01 10:43:55  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
-// Revision 1.5  2004/04/29 19:34:24  rurban
-// omit "socket_set_timeout() is not supported in this PHP build" warning
-//
-// Revision 1.4  2004/04/12 18:15:28  rurban
-// standard footer
-//
-
-// For emacs users
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,7 +1,23 @@
 <?php //-*-php-*-
-rcs_id('$Id: Db.php 6184 2008-08-22 10:33:41Z vargenau $');
-/* Copyright (C) 2004 ReiniUrban
- * This file is part of PhpWiki. Terms and Conditions see LICENSE. (GPL2)
+// rcs_id('$Id: Db.php 7640 2010-08-11 12:33:25Z vargenau $');
+/*
+ * Copyright (C) 2004 ReiniUrban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -13,15 +29,15 @@ rcs_id('$Id: Db.php 6184 2008-08-22 10:33:41Z vargenau $');
  * libnss-mysql.
  *
  * We support only the SQL and ADODB backends.
- * The other WikiDB backends (flat, cvs, dba, ...) should be used for pages, 
- * not for auth stuff. If one would like to use e.g. dba for auth, he should 
- * use PearDB (SQL) with the right $DBAuthParam['auth_dsn']. 
- * (Not supported yet, since we require SQL. SQLite would make since when 
+ * The other WikiDB backends (flat, cvs, dba, ...) should be used for pages,
+ * not for auth stuff. If one would like to use e.g. dba for auth, he should
+ * use PearDB (SQL) with the right $DBAuthParam['auth_dsn'].
+ * (Not supported yet, since we require SQL. SQLite would make since when
  * it will come to PHP)
  *
  * @tables: user, pref
  *
- * Preferences are handled in the parent class _PassUser, because the 
+ * Preferences are handled in the parent class _PassUser, because the
  * previous classes may also use DB pref_select and pref_update.
  *
  * Flat files auth is handled by the auth method "File".
@@ -31,7 +47,7 @@ extends _PassUser
 {
     var $_authselect, $_authupdate, $_authcreate;
 
-    // This can only be called from _PassUser, because the parent class 
+    // This can only be called from _PassUser, because the parent class
     // sets the auth_dbi and pref methods, before this class is initialized.
     function _DbPassUser($UserName='',$prefs=false) {
         if (!$this->_prefs) {
@@ -81,7 +97,7 @@ extends _PassUser
         return false;
     }
 
-    /* Since we properly quote the username, we allow most chars here. 
+    /* Since we properly quote the username, we allow most chars here.
        Just " ; and ' is forbidden, max length: 48 as defined in the schema.
     */
     function isValidName ($userid = false) {
@@ -96,20 +112,6 @@ extends _PassUser
     }
 
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.3  2005/06/10 06:11:56  rurban
-// special validname method
-//
-// Revision 1.2  2004/12/26 17:11:15  rurban
-// just copyright
-//
-// Revision 1.1  2004/11/01 10:43:58  rurban
-// seperate PassUser methods into seperate dir (memory usage)
-// fix WikiUser (old) overlarge data session
-// remove wikidb arg from various page class methods, use global ->_dbi instead
-// ...
-//
 
 // Local Variables:
 // mode: php

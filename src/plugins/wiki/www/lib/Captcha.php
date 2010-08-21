@@ -1,26 +1,26 @@
 <?php
-rcs_id('$Id: Captcha.php 6184 2008-08-22 10:33:41Z vargenau $');
+// rcs_id('$Id: Captcha.php 7417 2010-05-19 12:57:42Z vargenau $');
 /**
-  Session Captcha v1.0
-    by Gavin M. Roy <gmr@bteg.net>
-  Modified by Benjamin Drieu <bdrieu@april.org> - 2005 for PhpWiki
-  get_captcha_random_word() contributed by Dan Frankowski 2005 for PhpWiki
-  objectified and randomized 2005 by Reini Urban
-
-  This File is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
-  
-  This File is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with This File; if not, write to the Free Software Foundation,
-  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-*/
+ * Session Captcha v1.0
+ *   by Gavin M. Roy <gmr@bteg.net>
+ * Modified by Benjamin Drieu <bdrieu@april.org> - 2005 for PhpWiki
+ * get_captcha_random_word() contributed by Dan Frankowski 2005 for PhpWiki
+ * objectified and randomized 2005 by Reini Urban
+ *
+ * This File is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This File is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with This File; if not, write to the Free Software Foundation,
+ * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 
 class Captcha {
 
@@ -174,18 +174,6 @@ class Captcha {
     }
 
 }
-
-// $Log: not supported by cvs2svn $
-// Revision 1.5  2005/10/31 16:44:13  rurban
-// fallback to PNG or GIF if JPEG support does not exist
-//
-// Revision 1.4  2005/10/30 14:20:42  rurban
-// move Captcha specific vars and methods into a Captcha object
-// randomize Captcha chars positions and angles (smoothly)
-//
-// Revision 1.3  2005/10/29 07:37:56  rurban
-// USE_CAPTCHA_RANDOM_WORD by Dan Frankowski
-//
 
 // Local Variables:
 // mode: php
