@@ -1,4 +1,4 @@
--- $Id: psql-destroy.sql,v 1.11 2006/12/23 11:48:58 rurban Exp $
+-- $Id: psql-destroy.sql 6203 2008-08-26 13:23:56Z vargenau $
 
 \set QUIET
 
@@ -8,7 +8,7 @@
 -- You should set this to the same value you specify for
 -- DATABASE_PREFIX in config/config.ini
 
-\set prefix 	'plugin_wiki2_'
+\set prefix 	''
 
 --================================================================
 --

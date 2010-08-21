@@ -1,4 +1,4 @@
--- $Id: mysql-initialize.sql 6203 2008-08-26 13:23:56Z vargenau $
+-- $Id: mysql-initialize.sql 7117 2009-09-15 08:02:20Z rurban $
 
 CREATE TABLE page (
 	id              INT NOT NULL AUTO_INCREMENT,
@@ -113,7 +113,11 @@ CREATE TABLE rating (
         rateepage INT(11) NOT NULL,
         ratingvalue FLOAT NOT NULL,
         rateeversion INT(11) NOT NULL,
-        tstamp TIMESTAMP(14) NOT NULL,
+        tstamp TIMESTAMP,
+-- before:
+--      tstamp TIMESTAMP(14) NOT NULL,
+-- since mysql 5.1 better use:
+--      tstamp TIMESTAMP DEFAULT 0,
         PRIMARY KEY (dimension, raterpage, rateepage)
 );
 -- for empty dimensions use extra indices. see lib/wikilens/RatingsDb.php

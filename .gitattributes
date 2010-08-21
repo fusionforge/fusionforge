@@ -3003,6 +3003,8 @@ src/plugins/wiki/www/schemas/psql-initialize.sql -text
 src/plugins/wiki/www/schemas/psql-tsearch2.sql -text
 src/plugins/wiki/www/schemas/sqlite-destroy.sql -text
 src/plugins/wiki/www/schemas/sqlite-initialize.sql -text
+src/plugins/wiki/www/schemas/sqlsrv-destroy.sql -text
+src/plugins/wiki/www/schemas/sqlsrv-initialize.sql -text
 src/plugins/wiki/www/tests/.htaccess -text
 src/plugins/wiki/www/tests/AAA_GetHomePage.inputs -text
 src/plugins/wiki/www/tests/AAB_EditSandBox.inputs -text

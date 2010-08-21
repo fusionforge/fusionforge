@@ -1,4 +1,4 @@
--- $Id: psql-initialize.sql,v 1.18 2007/02/17 14:15:28 rurban Exp $
+-- $Id: psql-initialize.sql 6481 2009-02-05 14:48:07Z vargenau $
 
 \set QUIET
 
@@ -8,7 +8,7 @@
 -- You should set this to the same value you specify for
 -- DATABASE_PREFIX in config/config.ini
 
-\set prefix 	'plugin_wiki_'
+\set prefix 	''
 
 --================================================================
 -- Which postgres user gets access to the tables?
@@ -25,7 +25,7 @@
 -- Commonly, connections from php are made under
 -- the user name of 'nobody', 'apache' or 'www'.
 
-\set httpd_user	'gforge'
+\set httpd_user	'wikiuser'
 
 --================================================================
 --
@@ -36,19 +36,17 @@
 \set qprefix '\'' :prefix '\''
 \set qhttp_user '\'' :httpd_user '\''
 
---\echo At first init the database with: 
---\echo '$ createdb phpwiki'
---\echo '$ createuser -S -R -d ' :qhttp_user
---\echo '$ psql -U ' :qhttp_user ' phpwiki < /usr/share/pgsql/contrib/tsearch2.sql'
---\echo '$ psql -U ' :qhttp_user ' phpwiki < psql-initialize.sql'
---
---\echo Initializing PhpWiki tables with:
---\echo '       prefix = ' :qprefix
---
---
---\echo '   httpd_user = ' :qhttp_user
---\echo
---\echo 'Expect some \'NOTICE:  CREATE ... will create implicit sequence/index ...\' messages '
+\echo At first init the database with: 
+\echo '$ createdb phpwiki'
+\echo '$ createuser -S -R -d ' :qhttp_user
+\echo '$ psql -U ' :qhttp_user ' phpwiki < /usr/share/pgsql/contrib/tsearch2.sql'
+\echo '$ psql -U ' :qhttp_user ' phpwiki < psql-initialize.sql'
+
+\echo Initializing PhpWiki tables with:
+\echo '       prefix = ' :qprefix
+\echo '   httpd_user = ' :qhttp_user
+\echo
+\echo 'Expect some \'NOTICE:  CREATE ... will create implicit sequence/index ...\' messages '
 
 \set page_tbl 		:prefix 'page'
 \set page_id_seq 	:prefix 'page_id_seq'
@@ -77,8 +75,8 @@
 \set pageperm_tbl 	:prefix 'pageperm'
 \set pageperm_id_idx	:prefix 'pageperm_id_idx'
 \set pageperm_access_idx :prefix 'pageperm_access_idx'
-\set existing_page_view :prefix 'existing_page'
-\set curr_page_view	:prefix 'curr_page'
+-- \set existing_page_view :prefix 'existing_page'
+-- \set curr_page_view	:prefix 'curr_page'
 
 \set session_tbl 	:prefix 'session'
 \set sess_id_idx 	:prefix 'sess_id_idx'
@@ -106,9 +104,9 @@
 \echo Creating :page_tbl
 CREATE TABLE :page_tbl (
 	id 		SERIAL PRIMARY KEY,
-	pagename 	VARCHAR(100) NOT NULL UNIQUE CHECK (pagename <> ''),
+        pagename 	VARCHAR(100) NOT NULL UNIQUE CHECK (pagename <> ''),
 	hits 		INT4 NOT NULL DEFAULT 0,
-	pagedata 	TEXT NOT NULL DEFAULT '',
+        pagedata 	TEXT NOT NULL DEFAULT '',
 	--cached_html  	bytea DEFAULT ''
 	cached_html  	TEXT DEFAULT ''
 );
@@ -121,7 +119,7 @@ INSERT INTO :page_tbl VALUES (0,'global_data',0,'','');
 \echo Creating :version_tbl
 CREATE TABLE :version_tbl (
 	id		INT4 REFERENCES :page_tbl,
-	version		INT4 NOT NULL,
+        version		INT4 NOT NULL,
 	mtime		INT4 NOT NULL,
 -- FIXME: should use boolean, but that returns 't' or 'f'. not 0 or 1. 
 	minor_edit	INT2 DEFAULT 0,
@@ -138,9 +136,9 @@ CREATE TABLE :recent_tbl (
 	id		INT4 REFERENCES :page_tbl,
 	latestversion	INT4, 
 	latestmajor	INT4,
-	latestminor	INT4
---	FOREIGN KEY (id, latestversion) REFERENCES :version_tbl (id, version),
---	CHECK (latestminor >= latestmajor)
+	latestminor	INT4,
+	FOREIGN KEY (id, latestversion) REFERENCES :version_tbl (id, version),
+	CHECK (latestminor >= latestmajor)
 );
 CREATE UNIQUE INDEX :recent_id_idx ON :recent_tbl (id);
 CREATE INDEX :recent_lv_idx ON :recent_tbl (latestversion);
@@ -158,7 +156,7 @@ CREATE TABLE :pagedata_tbl (
 	locked  BOOLEAN,
         rest	TEXT NOT NULL DEFAULT ''
 );
-CREATE INDEX :pagedata_id_idx ON :pagedata_tbl (id);
+CREATE INDEX :pagedata_id_idx ON pagedata (id);
 
 \echo Creating experimental versiondata (not yet used)
 CREATE TABLE :versiondata_tbl (
@@ -179,22 +177,22 @@ CREATE TABLE :pageperm_tbl (
 	groupname VARCHAR(48),
 	allowed  BOOLEAN
 );
-CREATE INDEX :pageperm_id_idx ON :pageperm_tbl (id);
-CREATE INDEX :pageperm_access_idx ON :pageperm_tbl (access);
+CREATE INDEX :pageperm_id_idx ON pageperm (id);
+CREATE INDEX :pageperm_access_idx ON pageperm (access);
 
-\echo Creating experimental page views (not yet used)
-
+-- \echo Creating experimental page views (not yet used)
+-- 
 -- nonempty versiondata
-CREATE VIEW :existing_page_view AS
-  SELECT * FROM :page_tbl P INNER JOIN :nonempty_tbl N USING (id);
-
+-- CREATE VIEW :existing_page_view AS
+--   SELECT * FROM :page_tbl P INNER JOIN :nonempty_tbl N USING (id);
+-- 
 -- latest page version
-CREATE VIEW :curr_page_view AS
-  SELECT P.id,P.pagename,P.hits,P.pagedata,P.cached_html,
-	 V.version,V.mtime,V.minor_edit,V.content,V.versiondata
-  FROM :page_tbl P 
-    JOIN :version_tbl V USING (id)
-    JOIN :recent_tbl  R ON (V.id=R.id AND V.version=R.latestversion);
+-- CREATE VIEW :curr_page_view AS
+--  SELECT P.id,P.pagename,P.hits,P.pagedata,P.cached_html,
+--	 V.version,V.mtime,V.minor_edit,V.content,V.versiondata
+--  FROM :page_tbl P 
+--    JOIN :version_tbl V USING (id)
+--    JOIN :recent_tbl  R ON (V.id=R.id AND V.version=R.latestversion);
 
 \echo Creating :link_tbl
 CREATE TABLE :link_tbl (
@@ -226,7 +224,7 @@ CREATE UNIQUE INDEX :rating_id_idx ON :rating_tbl (dimension, raterpage, rateepa
 
 \echo Creating :session_tbl
 CREATE TABLE :session_tbl (
-    	sess_id 	CHAR(32) PRIMARY KEY,
+	sess_id 	CHAR(32) PRIMARY KEY,
     	sess_data 	bytea NOT NULL,
     	sess_date 	INT4,
     	sess_ip 	CHAR(40) NOT NULL
@@ -293,15 +291,15 @@ CREATE INDEX :accesslog_host_idx ON :accesslog_tbl (remote_host);
 -- example of synonym dict
 --   UPDATE pg_ts_dict SET dict_initoption='/usr/local/share/ispell/english.syn' WHERE dict_id=5; 
 
---\echo Initializing tsearch2 indices (skipping)
--- GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO :httpd_user;
+\echo Initializing tsearch2 indices
+GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO :httpd_user;
 ALTER TABLE :version_tbl ADD COLUMN idxFTI tsvector;
 UPDATE :version_tbl SET idxFTI=to_tsvector('default', content);
--- VACUUM FULL ANALYZE;
+VACUUM FULL ANALYZE;
 CREATE INDEX idxFTI_idx ON :version_tbl USING gist(idxFTI);
--- VACUUM FULL ANALYZE;
+VACUUM FULL ANALYZE;
 CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON :version_tbl
-     FOR EACH ROW EXECUTE PROCEDURE tsearch2(idxFTI, content);
+       FOR EACH ROW EXECUTE PROCEDURE tsearch2(idxFTI, content);
 
 -- this might be needed:
 -- see http://www.sai.msu.su/~megera/oddmuse/index.cgi/Tsearch_V2_Notes
@@ -309,8 +307,8 @@ CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON :version_tbl
 
 --================================================================
 
---\echo You might want to ignore the following errors or run 
---\echo /usr/sbin/createuser -S -R -d  :httpd_user
+\echo You might want to ignore the following errors or run 
+\echo /usr/sbin/createuser -S -R -d  :httpd_user
 
 \echo Applying permissions for role :httpd_user
 GRANT SELECT,INSERT,UPDATE,DELETE ON :page_tbl		TO :httpd_user;
@@ -334,36 +332,32 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON :accesslog_tbl	TO :httpd_user;
 
 -- id, version
 CREATE OR REPLACE FUNCTION :update_recent_fn (INT4, INT4) 
-	RETURNS integer AS 
-'
-DELETE FROM plugin_wiki_recent WHERE id = $1;
-INSERT INTO plugin_wiki_recent (id, latestversion, latestmajor, latestminor)
+	RETURNS integer AS $$
+DELETE FROM recent WHERE id = $1;
+INSERT INTO recent (id, latestversion, latestmajor, latestminor)
   SELECT id, MAX(version) AS latestversion, 
 	     MAX(CASE WHEN minor_edit =  0 THEN version END) AS latestmajor, 
              MAX(CASE WHEN minor_edit <> 0 THEN version END) AS latestminor
-    FROM plugin_wiki_version WHERE id = $2 GROUP BY id;
-DELETE FROM plugin_wiki_nonempty WHERE id = $1;
-INSERT INTO plugin_wiki_nonempty (id) 
-  SELECT plugin_wiki_recent.id
-    FROM plugin_wiki_recent, plugin_wiki_version
-    WHERE plugin_wiki_recent.id = plugin_wiki_version.id
+    FROM version WHERE id = $2 GROUP BY id;
+DELETE FROM nonempty WHERE id = $1;
+INSERT INTO nonempty (id) 
+  SELECT recent.id
+    FROM recent, version
+    WHERE recent.id = version.id
           AND version = latestversion
-          AND content <> ''''
-          AND plugin_wiki_recent.id = $1;
-SELECT id FROM plugin_wiki_nonempty WHERE id = $1;
-'
-  LANGUAGE SQL;
+          AND content <> ''
+          AND recent.id = $1;
+SELECT id FROM nonempty WHERE id = $1;
+$$ LANGUAGE SQL;
 
 -- oldid, newid
 CREATE OR REPLACE FUNCTION :prepare_rename_fn (INT4, INT4) 
-        RETURNS void AS
-'
-DELETE FROM plugin_wiki_page WHERE id = $2;
-DELETE FROM plugin_wiki_version  WHERE id = $2;
-DELETE FROM plugin_wiki_recent   WHERE id = $2;
-DELETE FROM plugin_wiki_nonempty WHERE id = $2;
+        RETURNS void AS $$
+DELETE FROM page     WHERE id = $2;
+DELETE FROM version  WHERE id = $2;
+DELETE FROM recent   WHERE id = $2;
+DELETE FROM nonempty WHERE id = $2;
 -- We have to fix all referring tables to the old id
-UPDATE plugin_wiki_link SET linkfrom = $1 WHERE linkfrom = $2;
-UPDATE plugin_wiki_link SET linkto = $1   WHERE linkto = $2;
-'
- LANGUAGE SQL;
+UPDATE link SET linkfrom = $1 WHERE linkfrom = $2;
+UPDATE link SET linkto = $1   WHERE linkto = $2;
+$$ LANGUAGE SQL;
