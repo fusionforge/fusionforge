@@ -1,16 +1,16 @@
-Date: Sun, 16 Nov 2003 00:02:14 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
-X-Rcs-Id: $Id: TextBearbeiten 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:38:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: TextBearbeiten 7604 2010-07-15 09:41:32Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=TextBearbeiten;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 Alle Seiten (mit Ausnahme von Suchergebnissen) haben unten einen Link
 __Bearbeiten__. Man kann die aktuelle Seite edieren, indem man diesen
 Link anklickt.
+
 ----
-PhpWikiDokumentation
+[[PhpWikiDokumentation]]

@@ -1,15 +1,14 @@
-Date: Fri, 19 Sep 2003 22:22:00 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
-X-Rcs-Id: $Id: ZufallsSeite 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: ZufallsSeite 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ZufallsSeite;
   flags=PAGE_LOCKED;
-  pgsrc_version="2 $Revision: 6193 $";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Die Anzahl der zuf‰lligen ausgesuchten Seiten ist eine Zahl von 1
+Die Anzahl der zuf√§lligen ausgesuchten Seiten ist eine Zahl von 1
 bis 20.
 ----
-<?plugin RandomPage pages||=10 info||=''?>
+<<RandomPage pages||=10 info||=''>>

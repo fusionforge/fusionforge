@@ -1,19 +1,18 @@
-Date: Fri, 1 Mar 2002 23:29:46 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.3-jeffs-hacks)
-X-Rcs-Id: $Id: FuzzySuche 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: FuzzySuche 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=FuzzySuche;
   flags=PAGE_LOCKED;
-  pgsrc_version="1 $Revision: 6193 $";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-<?plugin FuzzyPages ?>
+<<FuzzyPages>>
 ----
 Suche erneut:
 <?plugin-form TitleSearch?>
 <?plugin-form FullTextSearch?>
 <?plugin-form FuzzyPages?>
 ----
-<?plugin IncludePage page=SeiteFinden quiet=1 section=Tips sectionhead=1 ?>
+<<IncludePage page=SeiteFinden quiet=1 section=Tips sectionhead=1 >>

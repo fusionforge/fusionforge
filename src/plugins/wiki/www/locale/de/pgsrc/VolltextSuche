@@ -1,17 +1,17 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: VolltextSuche 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: VolltextSuche 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=VolltextSuche;
   flags=PAGE_LOCKED;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-<?plugin FullTextSearch ?>
+<<FullTextSearch >>
 ----
 Suche erneut:
 <?plugin-form TitleSearch?>
 <?plugin-form FullTextSearch?>
 <?plugin-form FuzzyPages?>
 ----
-<?plugin IncludePage page=SeiteFinden quiet=1 section=Tips sectionhead=1 ?>
+<<IncludePage page=SeiteFinden quiet=1 section=Tips sectionhead=1 >>

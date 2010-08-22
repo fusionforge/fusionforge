@@ -1,53 +1,53 @@
-Date: Wed, 16 Jun 2004 14:50:15 +0200
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.11pre)
-X-Rcs-Id: $Id: Hilfe%2FNeueSeitePlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:57:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Hilfe%2FNeueSeitePlugin 7606 2010-07-15 09:58:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FNeueSeitePlugin;
-  pgsrc_version="2 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 WikiPlugin um leicht neue Seiten zu erzeugen, optional mit vorgegebenem Inhalt. Seit v1.3.8
 
-Sie können den neuen Seitennamen von einer Eingabebox bekommen, optional mit 
+Sie kÃ¶nnen den neuen Seitennamen von einer Eingabebox bekommen, optional mit 
 neuem Inhalt von einer bestehenden Vorgabe oder Kategorieseite.
 
 Schreibe "<~?plugin-form ~CreatePage ?~>" in eine Seite, zeige diese Seite an, 
 gebe den Namen der neuen Seite an und klicke auf den NeueSeite Knopf.
 
-!! Benutzung
-<verbatim>
+=== Benutzung
+{{{
      <?plugin-form CreatePage ?>
      <?plugin-form CreatePage template=KategorieStartSeite ?>
-</verbatim>
+}}}
 
-!! Argumente
+=== Argumente
 __s__: |
-  Der Name für die neue Seite. Vorgabe: ""
+  Der Name fÃ¼r die neue Seite. Vorgabe: ""
 __initial_content__:  |
   Die neue Seite wird mit diesem Inhalt erzeugt. Vorgabe: ""
 __template__:  |
   Die neue Seite wird mit dem Inhalt dieser Seite erzeugt. Vorgabe: ""
 
-!! Bekannte Probleme
+=== Bekannte Probleme
 
 Keine
 
-!! Pläne
+=== PlÃ¤ne
 
 The content might hold some variables, which will be expanded on creation. 
 The syntax is not clear yet.
 
-!! Autor
+=== Autor
 
 Dan Frankowski
 
-!! Beispiel
+=== Beispiel
 
 <?plugin-form CreatePage s=MyHomePage ?>
 
 Siehe auch PhpWiki:EasilyCreateNewPages 
+
 ----
-PhpWikiDokumentation Hilfe:WikiPlugin
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

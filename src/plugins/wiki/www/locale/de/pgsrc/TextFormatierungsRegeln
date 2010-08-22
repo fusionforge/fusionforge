@@ -1,14 +1,14 @@
-Date: Thu, 28 Mar 2002 14:57:00 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: TextFormatierungsRegeln 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:38:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: TextFormatierungsRegeln 7604 2010-07-15 09:41:32Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=TextFormatierungsRegeln;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-! Übersicht
+! Ãœbersicht
 TextFormatierungsRegeln%%%
 *Hervorhebung:* <tt>~_</tt> for _italics_, <tt>~*</tt> for *bold*,
 <tt>~_~*</tt> for _*both*_, <tt>~=</tt> for =fixed width=.%%%
@@ -16,7 +16,7 @@ TextFormatierungsRegeln%%%
 _Term<b>:</b>~<new-line> definition_ for definition lists.%%%
 *Unformatiert:* Enclose text in <tt>~<pre>~</pre></tt> or
 <tt>~<verbatim>~</verbatim></tt>.%%%
-*Text einrücken:* Indent the paragraph with whitespaces.%%%
+*Text einrÃ¼cken:* Indent the paragraph with whitespaces.%%%
 *Querverweise:* ~JoinCapitalizedWords or use square brackets for a
 <tt>~[page link]</tt> or URL <tt>~[~http://cool.wiki.int/]</tt>.%%%
 *Links verhindern:* Prefix with "<tt>~~</tt>":
@@ -32,22 +32,22 @@ _Term<b>:</b>~<new-line> definition_ for definition lists.%%%
 
 ----
 ! Tip
-Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den Link zum Editieren klickst. Dann verstehst du die Beispiele besser.
+Schau dir am besten auch den Â»QuelltextÂ« dieser Seite an, indem du unten auf den Link zum Editieren klickst. Dann verstehst du die Beispiele besser.
 
-!!! Absätze
+!!! AbsÃ¤tze
 
-* Rücke Absätze nicht ein
-* Zeilenumbrüche werden automatisch erstellt
-* Absätze werden durch Leerzeilen getrennt
+* RÃ¼cke AbsÃ¤tze nicht ein
+* ZeilenumbrÃ¼che werden automatisch erstellt
+* AbsÃ¤tze werden durch Leerzeilen getrennt
 * Vier oder mehr Minuszeichen am Zeilenanfang erzeugen eine horizontale Linie
-* =~%%%= oder =~<br>= erstellt einen Zeilenumbruch (auch in Überschriften und Listen)
+* =~%%%= oder =~<br>= erstellt einen Zeilenumbruch (auch in Ãœberschriften und Listen)
 
 
 !!! Listen
 
-* Ein Sternchen für die erste Ebene
-  * eingerückte Sternchen (mind 2 Zeichen) für die zweite Ebene, usw.
-* Verwende <tt>~*</tt>, <tt>-</tt>, <tt>+</tt> oder <tt>o</tt> für Aufzählungslisten, <tt>#</tt> für numerierte Listen (auch durcheinander)
+* Ein Sternchen fÃ¼r die erste Ebene
+  * eingerÃ¼ckte Sternchen (mind 2 Zeichen) fÃ¼r die zweite Ebene, usw.
+* Verwende <tt>~*</tt>, <tt>-</tt>, <tt>+</tt> oder <tt>o</tt> fÃ¼r AufzÃ¤hlungslisten, <tt>#</tt> fÃ¼r numerierte Listen (auch durcheinander)
 * Definitions Listen:
   <pre>
   Term:
@@ -59,11 +59,11 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den
   wie in einer =<DL><DT><DD>= Liste
 * Andere Leerzeichen als Tab am Zeilenanfang erstellen vorformatierten Text mit einer anderen Schriftart
 
-!!! Überschriften
+!!! Ãœberschriften
 
-* '=!=' am Zeilenanfang erstellt eine kleine Überschrift ''H3''
+* '=!=' am Zeilenanfang erstellt eine kleine Ãœberschrift ''H3''
 * '=!!=' eine mittlere ''H2''
-* '=!!!='' eine große ''H1''
+* '=!!!='' eine groÃŸe ''H1''
 
 !!! Unformatierter Text
 
@@ -88,20 +88,20 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den
   Preformatted text. WikiLinks do not work.
   </verbatim>
 
-!!! Eingerückte Absätze
+!!! EingerÃ¼ckte AbsÃ¤tze
 
-* Zwei oder mehr Leerzeichen am Anfgang erzeugen eingerückte Absätze. Einrückungen dürfen sich steigern.
+* Zwei oder mehr Leerzeichen am Anfgang erzeugen eingerÃ¼ckte AbsÃ¤tze. EinrÃ¼ckungen dÃ¼rfen sich steigern.
 
-    Dieser Absatz ist eingerückt.
+    Dieser Absatz ist eingerÃ¼ckt.
 
-      Dieser Absatz ist noch mehr eingerückt.
+      Dieser Absatz ist noch mehr eingerÃ¼ckt.
 
 !!! Hervorhebung
 
-* Verwende einen Unterstrich (<tt>~_</tt>) für _Betonung_ (wird normalerweise _kursiv_ dargestellt)
-* Verwende Sternchen (<tt>~*</tt>) für *starke Betonung* (wird normalerweise *fett* dargestellt)
+* Verwende einen Unterstrich (<tt>~_</tt>) fÃ¼r _Betonung_ (wird normalerweise _kursiv_ dargestellt)
+* Verwende Sternchen (<tt>~*</tt>) fÃ¼r *starke Betonung* (wird normalerweise *fett* dargestellt)
 * Du kannst sie auch zusammen verwenden: *_fett & kursiv_*
-* _Betonungen_ können _mehrfach_ in einer Zeile verwendet werden, aber sie können _nicht_ über das Zeilenende hinausgehen:
+* _Betonungen_ kÃ¶nnen _mehrfach_ in einer Zeile verwendet werden, aber sie kÃ¶nnen _nicht_ Ã¼ber das Zeilenende hinausgehen:
 
   _So etwas
 
@@ -110,7 +110,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den
 !!! Querverweise (Links)
 
 * Hyperlinks zu anderen Seiten im Wiki werden erstellt, indem man den Namen in eckige Klammern 
-  einschließt [das ist ein Link] oder besser WikiWörterVerwendet.
+  einschlieÃŸt [das ist ein Link] oder besser WikiWÃ¶rterVerwendet.
 * Hyperlinks zu externen Seiten werden so erstellt: [http://www.wcsb.org/]
 * Du kannst Links zu externen Seiten einen Namen geben, indem du in der eckigen Klammer erst 
   den Namen und dann, getrennt durch einen senkrechten Strich (|), die Adresse angibst:
@@ -123,7 +123,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den
 * Wenn du im Text Adressen eingibst, die mit __http:__, __ftp:__ oder __mailto:__ beginnen, 
   werden diese auch automatisch in Links umgewandelt, zum Beispiel http://c2.com/
 * Adressen, die mit __.png__ oder __.jpg__ enden (d.h. Bilder) werden in die Seite 
-  eingefügt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+  eingefÃ¼gt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
 
 !!! Tabellen
 
@@ -165,19 +165,19 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den
   <samp>samp</samp>, <var>var</var>, <sup>sup</sup> and <sub>sub</sub>
 * < und > erscheinen einfach so im Text
 * Sonderzeichen mit & funktionieren nicht
-* Im Prinzip benötigst du keine HTML-Formatierungen
+* Im Prinzip benÃ¶tigst du keine HTML-Formatierungen
 
 !!! Inserting plugins
 
 * Several plugins permit embedding additional functionality to Wiki
   pages. For example,
   <verbatim>
-  <?plugin BackLinks page=StartSeite info=hits ?>
+  <<BackLinks page=StartSeite info=hits >>
   </verbatim>
   ergibt
-  <?plugin BackLinks page=StartSeite info=hits ?>
+  <<BackLinks page=StartSeite info=hits >>
 
-* Für weitere Informationen zu plugins, siehe WikiPlugin.
+* FÃ¼r weitere Informationen zu plugins, siehe WikiPlugin.
 
 ----
-PhpWikiDokumentation
+[[PhpWikiDokumentation]]

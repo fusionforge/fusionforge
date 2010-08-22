@@ -1,45 +1,44 @@
-Date: Sun, 4 Jan 2004 17:18:08 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.8)
-X-Rcs-Id: $Id: Hilfe%2FAutorenProtokollPlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:57:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Hilfe%2FAutorenProtokollPlugin 7606 2010-07-15 09:58:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FAutorenProtokollPlugin;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Liste aller Versionen eines Autors mit Diff-Links, oder eine SeitenProtokoll-ähnliche Liste einer oder aller (page=all) Seiten nur für einen Autor.
+Liste aller Versionen eines Autors mit Diff-Links, oder eine SeitenProtokoll-Ã¤hnliche Liste einer oder aller (page=all) Seiten nur fÃ¼r einen Autor.
 
-Dieses experimentelle Hilfe:WikiPlugin erlaubt nur die Änderungen eines bestimmten Autors anzuzeigen; man kann auch das Protokoll für eine spezielle Seite bestimmen, die Vorgabe ist das Protokoll für die aktuelle Seite. Carsten sagt: _EXPERIMENTAL PLUGIN Needs a lot of work! Use at your own risk._
+Dieses experimentelle [[Hilfe:WikiPlugin|WikiPlugin]] erlaubt nur die Ã„nderungen eines bestimmten Autors anzuzeigen; man kann auch das Protokoll fÃ¼r eine spezielle Seite bestimmen, die Vorgabe ist das Protokoll fÃ¼r die aktuelle Seite. Carsten sagt: _EXPERIMENTAL PLUGIN Needs a lot of work! Use at your own risk._
 
-<verbatim>
-<?plugin AuthorHistory page=StartSeite ?>
+{{{
+<<AuthorHistory page=StartSeite >>
 
-<?plugin AuthorHistory page=all author="test" ?>
-</verbatim>
+<<AuthorHistory page=all author="test" >>
+}}}
 
-Das erste Beispiel zeigt alle Änderungen der Seite "StartSeite" für jeweils andere Benutzer,
-das zweite Beispiel alle Änderungen des Autors "test" im gesamten Wiki.
+Das erste Beispiel zeigt alle Ã„nderungen der Seite "StartSeite" fÃ¼r jeweils andere Benutzer,
+das zweite Beispiel alle Ã„nderungen des Autors "test" im gesamten Wiki.
 
-!! Benutzung
+=== Benutzung
 
-<verbatim>
-<?plugin AuthorHistory page=StartSeite ?>
-</verbatim> 
+{{{
+<<AuthorHistory page=StartSeite >>
+}}}
 
 ergibt:
-<?plugin AuthorHistory page=StartSeite ?>
+<<AuthorHistory page=StartSeite >>
 
 ----
 
-!! Argumente
+=== Argumente
 
 __author__ |
   Benutzername. Vorgabe: aktueller Benutzername
 __page__ |
   Seitenname.  Vorgabe: aktuelle Seite. 
-  Besondere Werte: page=username: page=author, page=all: Liste aller Seiten mit Änderungen dieses Benutzers.
+  Besondere Werte: page=username: page=author, page=all: Liste aller Seiten mit Ã„nderungen dieses Benutzers.
 __info__|
   Liste der Spaltentypen. Vorgabe: version,minor,author,summary,mtime
   Beispiel: info=mtime,hits,summary,version,author,locked,minor
@@ -53,5 +52,4 @@ __includedeleted__ |
   boolean. Vorgabe: false
 
 ----
-
-PhpWikiDokumentation
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

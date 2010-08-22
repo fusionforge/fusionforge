@@ -1,11 +1,10 @@
 Date: Thu, 15 Apr 2010 16:34:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: ListeRelationen 7602 2010-07-15 09:22:45Z vargenau $
+X-Rcs-Id: $Id: Verlinkte%C3%84nderungen 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=ListeRelationen;
+  pagename=Verlinkte%C3%84nderungen;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-<<ListRelations >>
+<<RelatedChanges show_minor||=1 days||=7 daylist=1,3,7,30,90,0 >> 

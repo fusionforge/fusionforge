@@ -1,22 +1,21 @@
-Date: Mon, 17 Nov 2003 23:42:00 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
-X-Rcs-Id: $Id: SeiteFinden 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: SeiteFinden 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SeiteFinden;
-  pgsrc_version="2 $Revision: 6193 $";
   flags=PAGE_LOCKED;
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Als Startpunkt zum Herumstöbern im Wiki eignen sich am besten die
+Als Startpunkt zum HerumstÃ¶bern im Wiki eignen sich am besten die
 folgenden Seiten:
 
 * WieManWikiBenutzt sagt wie die Sache hier in einem Wiki
   funktioniert.
-* NeuesteÄnderungen ist eine automatisch erstellte Liste der zuletzt 
-  geänderten Seiten.
-* WikiTechnik erklärt die Technik, mit der PhpWiki arbeitet.
+* NeuesteÃ„nderungen ist eine automatisch erstellte Liste der zuletzt 
+  geÃ¤nderten Seiten.
+* WikiTechnik erklÃ¤rt die Technik, mit der PhpWiki arbeitet.
 
 
 Hier ist eine Suche nach Seitentiteln. Suchen Sie zum Beispiel nach
@@ -30,16 +29,16 @@ angezeigt, in denen ein Suchbegriff gefunden wurde.
 
 <?plugin-form FullTextSearch?>
 
-Mit der FuzzySuche findet man alle Seitentitel, die ähnlich
+Mit der FuzzySuche findet man alle Seitentitel, die Ã¤hnlich
 ausgesprochen werden.
 
 <?plugin-form FuzzyPages?>
 
 ------
-! Tips
-Wörter mit Leerzeichen trennen. Alle Wörter müssen enthalten sein.
-(UND-Verknüpfung)
+==== Tips
+WÃ¶rter mit Leerzeichen trennen. Alle WÃ¶rter mÃ¼ssen enthalten sein.
+(UND-VerknÃ¼pfung)
 %%%Um Seiten zu finden, in denen ein Wort nicht vorkommt, ein '-'
-davor hängen.
-%%%Beispiel: 'wiki text -php' sucht nach Seiten mit dem Wörtern
+davor hÃ¤ngen.
+%%%Beispiel: 'wiki text -php' sucht nach Seiten mit dem WÃ¶rtern
 'wiki' __und__ 'text', die das Wort 'php' __nicht__ enthalten.

@@ -1,27 +1,26 @@
-Date: Tue, 2 Jan 2007 13:30:17 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.8)
-X-Rcs-Id: $Id: Hilfe%2FNeuerKommentarPlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:57:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Hilfe%2FNeuerKommentarPlugin 7606 2010-07-15 09:58:26Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=NeuerKommentarPlugin;
-  pgsrc_version="2 $Revision: 6193 $";
+  pagename=Hilfe%2FNeuerKommentarPlugin;
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-<?plugin CreateToc jshide||=1 ?>
+<<CreateToc jshide||=1 >>
 
-Hilfe:WikiPlugin um Benutzer Kommentare zu Seiten ans Ende einer Seite anhängen zu lassen. Seit v1.3.8.
-Anpassungs des Layouts über die Vorlagen comment.tmpl und addcomment.tmpl, und die CSS Klassen
+[[Hilfe:WikiPlugin|WikiPlugin]] um Benutzer Kommentare zu Seiten ans Ende einer Seite anhÃ¤ngen zu lassen. Seit v1.3.8.
+Anpassungs des Layouts Ã¼ber die Vorlagen comment.tmpl und addcomment.tmpl, und die CSS Klassen
 wikicomment, wikicomment-header, wikicomment-body, wikicomment-footer
 
-!! Benutzung
+=== Benutzung
 
-<verbatim>
-     <?plugin AddComment order||=normal jshide||=0 mode||=show,add noheader||=0 ?>
-</verbatim>
+{{{
+     <<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0 >>
+}}}
 
-!! Argumente
+=== Argumente
 
 __jshide__: |
   Bool'sche Variable, ob die Kommentare oder Eingabe-Textbox zuerst versteckt sein soll, und erst auf Klick erscheint. Vorgabe: 0
@@ -30,12 +29,13 @@ __order__:  |
 __mode__:  |
   Liste von "add" und/oder "show".  Vorgabe: "add,show"
 __noheader__:  |
-  Bool'sche Variable, ob die "Kommentare" h2 Überschrift weggelassen soll. Vorgabe: 0
+  Bool'sche Variable, ob die "Kommentare" h2 Ãœberschrift weggelassen soll. Vorgabe: 0
 __pagename__:  |
-  Hänge Kommentare an welche Seite an? Vorgabe: Aktueller Seitenname
+  HÃ¤nge Kommentare an welche Seite an? Vorgabe: Aktueller Seitenname
 
-!! Beispiele
+=== Beispiele
 
-<?plugin AddComment jshide||=1 ?>
+<<AddComment jshide||=1 >>
+
 ----
-PhpWikiDokumentation Hilfe:WikiPlugin
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

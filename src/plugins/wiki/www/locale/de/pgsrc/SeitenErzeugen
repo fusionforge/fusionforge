@@ -1,22 +1,23 @@
-Date: Sun, 27 Jan 2002 17:28:55 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.2-jeffs-hacks)
-X-Rcs-Id: $Id: SeitenErzeugen 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:38:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: SeitenErzeugen 7604 2010-07-15 09:41:32Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SeitenErzeugen;
   flags="";
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Um dem Wiki eine neue Seite hinzuzufügen mußt du dir nur einen sinnvollen Titel einfallen lassen, alle Wörter im Titel großschreiben und sie AufDieseArtZusammenfuegen. Wiki erkennt dies automatisch als einen Hyperlink. __Umlaute kannst du in Titeln auch verwenden: [[den Namen in eckige Klammern so einschließen].__
+Um dem Wiki eine neue Seite hinzuzufÃ¼gen muÃŸt du dir nur einen sinnvollen Titel einfallen lassen, alle WÃ¶rter im Titel groÃŸschreiben und sie AufDieseArtZusammenfuegen. Wiki erkennt dies automatisch als einen Hyperlink. __Umlaute kannst du in Titeln auch verwenden: [[den Namen in eckige Klammern so einschlieÃŸen].__
 
-Dann kannst du das Fragezeichen am Ende des neuen Hyperlinks anklicken, und Wiki öffnet einen Editor zum Erstellen der neuen Seite.
+Dann kannst du das Fragezeichen am Ende des neuen Hyperlinks anklicken, und Wiki Ã¶ffnet einen Editor zum Erstellen der neuen Seite.
 
-Wenn du ein Dokument mit aufwendigen Formatierungen zum Wiki hinzufügen willst, ist es vielleicht einfacher, einen Link zu diesem Dokument ins Wiki einzufügen statt das Dokument selbst. Zum Beispiel:
+Wenn du ein Dokument mit aufwendigen Formatierungen zum Wiki hinzufÃ¼gen willst, ist es vielleicht einfacher, einen Link zu diesem Dokument ins Wiki einzufÃ¼gen statt das Dokument selbst. Zum Beispiel:
 
 Die Homepage des PhpWiki Projektes: http://phpwiki.sourceforge.net/
 
-Wiki unterstüzt keine HTML-Tags (siehe TextFormatierungsRegeln). <tags>werden einfach wie normaler Text angezeigt.</tags> Wiki soll so einfach wie möglich sein, damit es jeder benutzen kann.
+Wiki unterstÃ¼zt keine HTML-Tags (siehe TextFormatierungsRegeln). <tags>werden einfach wie normaler Text angezeigt.</tags> Wiki soll so einfach wie mÃ¶glich sein, damit es jeder benutzen kann.
 
-Es gibt eine Funktion, durch die der Systemverwalter HTML in Dokumenten erlauben kann, das führt aber zu Sicherheitsrisiken.
+Es gibt eine Funktion, durch die der Systemverwalter HTML in Dokumenten erlauben kann, das fÃ¼hrt aber zu Sicherheitsrisiken.
+
 ----
-PhpWikiDokumentation
+[[PhpWikiDokumentation]]

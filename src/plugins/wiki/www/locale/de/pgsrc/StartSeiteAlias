@@ -1,14 +1,13 @@
-Date: Mon, 27 Oct 2003 19:54:54 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.5pre)
-X-Rcs-Id: $Id: StartSeiteAlias 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: StartSeiteAlias 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=StartSeiteAlias;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-<?plugin RedirectTo page=StartSeite ?>
+<<RedirectTo page=StartSeite >>
 
 (This is a demonstration of the RedirectToPlugin.)

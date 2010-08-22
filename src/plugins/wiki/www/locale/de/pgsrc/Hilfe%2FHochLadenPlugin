@@ -1,43 +1,42 @@
-Date: Thu, 10 Jun 2004 04:48:06 -0700
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.11)
-X-Rcs-Id: $Id: Hilfe%2FHochLadenPlugin 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:57:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Hilfe%2FHochLadenPlugin 7606 2010-07-15 09:58:26Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FHochLadenPlugin;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-Das HochLaden Hilfe:WikiPlugin zeigt eine Eingabebox und zwei Knöpfe. 
+Das HochLaden [[Hilfe:WikiPlugin|WikiPlugin]] zeigt eine Eingabebox und zwei KnÃ¶pfe. 
 Mit dem ersten Knopf "Durchsuchen..." kann man eine Datei aus dem 
-lokalem Dateisystem auswählen, die man hochladen möchte. 
-Der Textwert dieses Knopfes ("Durchsuchen...") hängt von Ihrem Browser ab. 
-Der zweite "HochLaden" Knopf lädt die Datei dann in das upload Verzeichnis auf dem 
+lokalem Dateisystem auswÃ¤hlen, die man hochladen mÃ¶chte. 
+Der Textwert dieses Knopfes ("Durchsuchen...") hÃ¤ngt von Ihrem Browser ab. 
+Der zweite "HochLaden" Knopf lÃ¤dt die Datei dann in das upload Verzeichnis auf dem 
 Server hoch.
 Der Inhalt dieses Verzeichnis ist geheim, jede Datei dort kann mit dem "Upload~:" 
 [InterWikiKarte]n Prefix zum Dateinamen verwendet werden.
-So können Sie z.B. leicht hochgeladene Bilder anzeigen. Siehe PhpWiki:InlineUploadedImages
+So kÃ¶nnen Sie z.B. leicht hochgeladene Bilder anzeigen. Siehe PhpWiki:InlineUploadedImages
 
-! Benutzung:
-<verbatim>
-     <?plugin UpLoad ?>
-</verbatim>
+==== Benutzung:
+{{{
+     <<UpLoad >>
+}}}
 
-!! Argumente:
+=== Argumente:
 __logfile__:
   Lokaler Pfad. Vorgabe: "phpwiki-upload.log"
-  Das Format ist momentan HTML - eine neue <tr> Zeile per Datei - und nicht die sonst übliche 
+  Das Format ist momentan HTML - eine neue <tr> Zeile per Datei - und nicht die sonst Ã¼bliche 
   Log Datei Syntax.
 __autolink__:
-  Füge den hochgeladene Dateinamen zur Liste der hochgeladenen Dateien auf der Seite 'page' dazu.
+  FÃ¼ge den hochgeladene Dateinamen zur Liste der hochgeladenen Dateien auf der Seite 'page' dazu.
   Vorgabe: true
 __page__:
   Die Seite auf der hochgeladene Dateien aufgelistet werden, wenn 'autolink' 
   auf true gesetzt ist. 
   Vorgabe: current page.
 
-! Probleme:
+==== Probleme:
 
 # The user must be authenticated to be able to upload.
 # The filename may not end with certain disallowed extensions, to prevent from abuse.
@@ -48,8 +47,8 @@ __page__:
 
 ----
 
-! Beispiel:
-<?plugin UpLoad ?>
+==== Beispiel:
+<<UpLoad >>
 
 ----
-PhpWikiDokumentation Hilfe:WikiPlugin
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

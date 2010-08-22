@@ -1,17 +1,17 @@
-Date: Sat, 3 Feb 2002 17:28:00 -0500
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.3-jeffs-hacks)
-X-Rcs-Id: $Id: StartSeite 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: StartSeite 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=StartSeite;
   flags="";
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 * Was ist ein WikiWikiWeb? Eine kurze Beschreibung dieser Anwendung.
 * Lerne WieManWikiBenutzt und wie mann SeitenErzeugen kann.
 * Die SandKiste ist zum Spielen und zum Experimentieren.
-* Bitte trage dich im GästeBuch ein.
-* Die letzten Änderungen und neue Seiten findet man unter NeuesteÄnderungen.
+* Bitte trage dich im GÃ¤steBuch ein.
+* Die letzten Ã„nderungen und neue Seiten findet man unter NeuesteÃ„nderungen.
 * Eine Liste der [MeistBesucht]en Seiten.
 * ReleaseNotes (in Englisch)
 * Dieses Wiki wird verwaltet unter PhpWikiSystemverwalten.

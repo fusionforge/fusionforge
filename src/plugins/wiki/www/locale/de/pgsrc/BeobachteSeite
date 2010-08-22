@@ -1,12 +1,11 @@
-Date: Sat, 2 Dec 2006 14:25:30 +0100
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.13)
-X-Rcs-Id: $Id: BeobachteSeite 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: BeobachteSeite 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=BeobachteSeite;
-  pgsrc_version="2 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-<?plugin WatchPage ?>
+<<WatchPage >>

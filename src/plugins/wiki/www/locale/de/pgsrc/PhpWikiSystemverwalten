@@ -1,29 +1,28 @@
-Date: Wed, 3 Jan 2007 18:08:55 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.13)
-X-Rcs-Id: $Id: PhpWikiSystemverwalten 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Jul 2010 11:38:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: PhpWikiSystemverwalten 7604 2010-07-15 09:41:32Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiSystemverwalten;
   flags=PAGE_LOCKED;
-  pgsrc_version="2 $Revision: 6193 $";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
-_*Beachte:*_ _Du mußt den Systemverwalter-Zugang zuerst mit einem
-Passwort schützen, sonst werden die meisten Links auf dieser Seite
+_*Beachte:*_ _Du muÃŸt den Systemverwalter-Zugang zuerst mit einem
+Passwort schÃ¼tzen, sonst werden die meisten Links auf dieser Seite
 nicht funktionieren._
 
-<?plugin CreateToc jshide||=1 with_toclink||=1 ?>
+<<CreateToc jshide||=1 with_toclink||=1 >>
 ----
-!!! Seiten Explorer
+== Seiten Explorer
 
-Entweder wähle zuerst die Seiten und führe dann die Aktion aus:
+Entweder wÃ¤hle zuerst die Seiten und fÃ¼hre dann die Aktion aus:
 
 <?plugin-form WikiAdminSelect s="*" ?>
 
-oder rufe die möglichen ~WikiAdmin Aktionen direkt auf:
+oder rufe die mÃ¶glichen ~WikiAdmin Aktionen direkt auf:
 
-[/Löschen] | 
+[/LÃ¶schen] | 
   [/Umbenennen] |
     [/SuchenErsetzen] |
       [/AclSetzen] |
@@ -31,125 +30,125 @@ oder rufe die möglichen ~WikiAdmin Aktionen direkt auf:
           [/Chmod]
 
 ----
-!!! Benutzerverwaltung
+== Benutzerverwaltung
 
 
-Setze ein Benutzer Passwort zurück:
+Setze ein Benutzer Passwort zurÃ¼ck:
 
   <?plugin-form PasswordReset textinput=user method=post ?>
 
 Email Verification:
 
-  Die PhpWiki:EmailVerification ist momentan nicht strikt, d.h. einige mögliche falsche Ergebnisse der 
-  automatischen Überprüfung auf gültige E-Mail Addressen kann hier verwaltet werden. Manche Domains oder 
-  Email server können nicht automatisch überprüft werden.
+  Die PhpWiki:EmailVerification ist momentan nicht strikt, d.h. einige mÃ¶gliche falsche Ergebnisse der 
+  automatischen ÃœberprÃ¼fung auf gÃ¼ltige E-Mail Addressen kann hier verwaltet werden. Manche Domains oder 
+  Email server kÃ¶nnen nicht automatisch Ã¼berprÃ¼ft werden.
 
   Dieser Link zeigt eine Liste aller mit E-Mail registrierten Benutzer, und Checkboxes um die 
-  Verifizierung manuell zu ändern.
+  Verifizierung manuell zu Ã¤ndern.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=email-verification
            label="E-Mail Verifizierung"
-   ?>
+   >>
 
-Zugangsbeschränkungen (disabled):
+ZugangsbeschrÃ¤nkungen (disabled):
 
   To prevent from robots eating all possible ressources in a short time, blocking from certain IP's or not-well-behaving user agents can be defined below. See PhpWiki:HowToBlockRobots and MeatBall:SurgeProtector. _Note: Not yet enabled._
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=access-restrictions
-           label="Zugangsbeschränkungen"
-   ?>
+           label="ZugangsbeschrÃ¤nkungen"
+   >>
 
 ----------
-!!! Aufräumen
+== AufrÃ¤umen
 
-Räume die Wiki SandKiste auf. Hiermit kann man die Seite mit der
+RÃ¤ume die Wiki SandKiste auf. Hiermit kann man die Seite mit der
 Version von locale/de/pgsrc/SandKiste erneut initialisieren: 
 
-[ SandKiste löschen | phpwiki:?action=loadfile&overwrite=1&source=locale/de/pgsrc/SandKiste ].
+[ SandKiste lÃ¶schen | phpwiki:?action=loadfile&overwrite=1&source=locale/de/pgsrc/SandKiste ].
 
 ----------
-!!! Speichern und Archivieren
+== Speichern und Archivieren
 
-! Backup der PhpWiki Datenbank als ZIP Dateien
+==== Backup der PhpWiki Datenbank als ZIP Dateien
 
 Diese Links erzeugen automatisch ZIP Archive, mit allen Seiten in
 deinem Wiki. Die ZIP Datei wird auf deinen lokalen Computer
-heruntergeladen, und muß dort gespeichert werden.
+heruntergeladen, und muÃŸ dort gespeichert werden.
 
-Diese __[ kleine ZIP Datei | phpwiki:?action=zip]__ enthält nur die
-aktuellste Versionen aller Seiten, und diese __[ große ZIP Datei |
-phpwiki:?action=zip&include=all]__ enthält zusätzlich alle
+Diese __[ kleine ZIP Datei | phpwiki:?action=zip]__ enthÃ¤lt nur die
+aktuellste Versionen aller Seiten, und diese __[ groÃŸe ZIP Datei |
+phpwiki:?action=zip&include=all]__ enthÃ¤lt zusÃ¤tzlich alle
 archivierten, vorigen Versionen.%%%
 (Wenn dein PhpWiki insoweit konfiguriert ist, darf jeder die ZIP Datei herunterladen.)
 
-Wenn von diesem PHP die _zlib_ Bibliothek unterstützt wird, werden
+Wenn von diesem PHP die _zlib_ Bibliothek unterstÃ¼tzt wird, werden
 alle Seiten in dem Archiv komprimiert, ansonsten nur unkomprimiert
 gespeichert.
 
-! Wiki Seiten als Dateien in lokales Verzeichnis speichern
+==== Wiki Seiten als Dateien in lokales Verzeichnis speichern
 
 Hier kannst du alle Seiten aus deinem Wiki in eine lokales Verzeichnis
 deiner Wahl herunterladen.
 
-  <?plugin WikiForm action=dumpserial?>
+  <<WikiForm action=dumpserial>>
 
 Nur die neuesten Versionen aller Seiten wird als Einzeldatei in dieses
 Verzeichnis geschrieben. Beachte, dass evtl. deine Benutzerrechte dazu
-ausreichen müssen.
+ausreichen mÃ¼ssen.
 
 -----------
 
-!!! Wiederherstellen
+== Wiederherstellen
 
 Wenn du ein PhpWiki Backup besitzt, kannst du dieses hier wieder
 restaurieren. Beachte das alle Seiten in der Datenbank damit
-überschrieben werden! Das heißt, das Hochladen einer lokalen
-StartSeite überschreibt die aktuelle Seite in der Datenbank. Um nur
+Ã¼berschrieben werden! Das heiÃŸt, das Hochladen einer lokalen
+StartSeite Ã¼berschreibt die aktuelle Seite in der Datenbank. Um nur
 einzelne Dateien zu restaurieren, musst du dein Verzeichnis oder ZIP
 Archiv insosoweit anpassen.
 
-! Datei Hochladen
+==== Datei Hochladen
 
 Hier kannst du ein ZIP Archiv hochladen, oder einzelne Dateien von deinem Computer.
 
-  <?plugin WikiForm action=upload?>
+  <<WikiForm action=upload>>
 
-! Datei Laden
+==== Datei Laden
 
 Hier kann man ZIP Archive, einzelne Dateien oder ganze Verzeichnisse
-ins Wiki laden. Die Dateien oder Verzeichnisse müssen lokal auf dem
+ins Wiki laden. Die Dateien oder Verzeichnisse mÃ¼ssen lokal auf dem
 HTTP Server bestehen. Du kannst den Pfad allerdings auch mit der http:
 oder einer ftp: URL von externen Quellen laden.
 
-  <?plugin WikiForm action=loadfile?>
-  <?plugin WikiForm action=loadfile buttontext="Laden & Überschreiben" overwrite=1?>
+  <<WikiForm action=loadfile>>
+  <<WikiForm action=loadfile buttontext="Laden & Ãœberschreiben" overwrite=1>>
 
 
-!! Updaten
+=== Updaten
 
-Führe einige Systemchecks aus und bringe geänderte Seiten auf den letzten Stand,
+FÃ¼hre einige Systemchecks aus und bringe geÃ¤nderte Seiten auf den letzten Stand,
 nachdem Sie die PhpWiki Version auf den letzten Stand gebracht haben:
-* Upgrade neue oder geänderte Seiten von pgsrc,
+* Upgrade neue oder geÃ¤nderte Seiten von pgsrc,
 * Upgrade das Datenbank Schema (mysql _page.id auto_increment_, ADD _session.sess_ip_, ...),
 
 ;:[ Upgrade | phpwiki:HomePage?action=upgrade ]
 
 -----------
 
-!!! Daten-Format
+== Daten-Format
 
 Momentan werden alle Seiten dateiweise als MIME (RFC:2045) E-Mail's
 (RFC:822) gespeichert. Der Content-type _application/x-phpwiki_ wird
 benutzt, und die Seiten Meta Daten sind als Content-type Parameter
-codiert. (Wenn die Datei mehrere Versionen der Seite enthält, wird der
+codiert. (Wenn die Datei mehrere Versionen der Seite enthÃ¤lt, wird der
 MIME Typ _multipart/mixed_ verwendet, und jede Version als Teil
-_application/x-phpwiki_ codiert). Der Email Body enthält die aktuelle
+_application/x-phpwiki_ codiert). Der Email Body enthÃ¤lt die aktuelle
 Version des Seiteninhaltes, der Kopf die anderen Daten aus der
 Datenbank. (Datum, Autor, ...)
 
-! Alte Daten-Formate
+==== Alte Daten-Formate
 
 __Serialisierte Dateien__
 
@@ -160,19 +159,19 @@ __Serialisierte Dateien__
 __Textdateien__
 
   Davor wurde der Seiteninhalt als einfache Textdatei gespeichert,
-  d.h. alle zusätzlichen Daten (Meta-Daten) gingen verloren. (Datum,
+  d.h. alle zusÃ¤tzlichen Daten (Meta-Daten) gingen verloren. (Datum,
   Autor, Version, ...). Der Seitenname entsprach dem Dateinamen.
 
 Die Hochlade- und Lade-Funktionen erkennen jeden dieser drei
-Dateitypen automatisch. Es werden noch alle unterstützt. (ZIP,
+Dateitypen automatisch. Es werden noch alle unterstÃ¼tzt. (ZIP,
 Verzeichnis oder Einzeldateien als MIME E-Mail, Serialisiert oder
 einfache Textdatei.)
 
 ----
 
-!!! Seiten als XHTML Dateien speichern
+== Seiten als XHTML Dateien speichern
 
-  <?plugin WikiForm action=dumphtml?>
+  <<WikiForm action=dumphtml>>
 
 Erzeugt ein Verzeichnis aller Wiki Dateien als statische XHTML Dateien, die 
 auch ohne Webserver und Datenbank betrachtbar sind.
@@ -182,7 +181,7 @@ auch ohne Webserver und Datenbank betrachtbar sind.
 
 ----
 
-!!! PhpWiki Internals
+== PhpWiki Internals
 
 These are here mostly for debugging purposes (at least, that's the
 hope.)
@@ -190,7 +189,7 @@ hope.)
 In normal use, you shouldn't need to use these, though, then again,
 they shouldn't really do any harm.
 
-!! Purge Markup Cache
+=== Purge Markup Cache
 
 (If your wiki is so configured,) the transformed (almost-HTML) content
 of the most recent version of each page is cached. This speeds up page
@@ -200,12 +199,12 @@ rendering since parsing of the wiki-text takes a fair amount of juice.
   content. (Each pages content will be transformed and re-cached next
   time someone views it.)
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-cache
-           label="Cache Löschen"
-   ?>
+           label="Cache LÃ¶schen"
+   >>
 
-!! Clean WikiDB of Illegal Filenames
+=== Clean WikiDB of Illegal Filenames
 
 Page names beginning with the subpage-separator, usually a slash
 (=/=), are not allowed. Sometimes though an errant plugin or something
@@ -213,52 +212,52 @@ might create one....
 
   This button will delete any pages with illegal page names.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-bad-pagenames
            label="WikiDB Bereinigen"
-   ?> 
+   >> 
 
 
-!! Clean WikiDB of empty and unreferenced pages
+=== Clean WikiDB of empty and unreferenced pages
 
   *Warning!* This button will delete every empty and unreferenced page, without any possibility to restore them again.
   This will disable the possibility to revert or get back any deleted page.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=purge-empty-pages
            label="Purge all empty unreferenced pages"
-   ?>
+   >>
 
-!! Convert cached_html to new SQL column
+=== Convert cached_html to new SQL column
 
   This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the 
   new page.cached_html field seperately, and now you want to move this data from 
   page.pagedata over to page.cached_html.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=convert-cached-html
            label="Convert cached_html"
-   ?>
+   >>
 
 
-!! Check WikiDB
+=== Check WikiDB
 
   This button will check the Wiki page database for consistency. This can last several minutes.
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=db-check
            label="Check WikiDB"
-   ?>
+   >>
 
-!! Rebuild WikiDB
+=== Rebuild WikiDB
 
   This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates. 
-  This can last several minutes, eat a lot of memory and possibly times out!!
+  This can last several minutes, eat a lot of memory and possibly times out===
 
-  <?plugin WikiAdminUtils
+  <<WikiAdminUtils
            action=db-rebuild
            label="Rebuild WikiDB"
-   ?>
+   >>
 
 ----
-PhpWikiDokumentation
+[[PhpWikiDokumentation]]

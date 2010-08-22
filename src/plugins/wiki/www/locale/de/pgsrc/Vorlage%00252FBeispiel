@@ -1,12 +1,11 @@
-Date: Tue, 2 Jan 2007 13:30:17 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.3.13)
-X-Rcs-Id: $Id: Vorlage%2FBeispiel 6193 2008-08-23 17:49:48Z vargenau $
+Date: Thu, 15 Apr 2010 16:34:41 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
+X-Rcs-Id: $Id: Vorlage%2FBeispiel 7602 2010-07-15 09:22:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Vorlage%2FBeispiel;
-  pgsrc_version="1 $Revision: 6193 $";
   flags="";
   markup=2;
-  charset=iso-8859-1
+  charset=utf-8
 Content-Transfer-Encoding: binary
 
 <noinclude>
@@ -25,9 +24,9 @@ Titel: %%title%%   Jahr: %%year%%
 ---
 * Seitenname: %%pagename%%
 * Autor: %%author%%
-* Datum der letzten Änderung: %%mtime%%
+* Datum der letzten Ã„nderung: %%mtime%%
 * Datum der Erzeugung: %%ctime%%
-* Eigentümer: %%owner%%
+* EigentÃ¼mer: %%owner%%
 * Erzeuger: %%creator%%
 
 * SERVER_URL: %%SERVER_URL%%
