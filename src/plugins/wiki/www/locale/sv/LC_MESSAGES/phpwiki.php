@@ -3,17 +3,17 @@
 $locale["%4d  %s\n"] =
    "%4d  %s\n";
 $locale["%d best incoming links: "] =
-   "De %d mest använda ingående länkarna: ";
+   "De %d mest anvÃ¤nda ingÃ¥ende lÃ¤nkarna: ";
 $locale["%d best outgoing links: "] =
-   "De %d mest använda utgående länkarna: ";
+   "De %d mest anvÃ¤nda utgÃ¥ende lÃ¤nkarna: ";
 $locale["%d most popular nearby: "] =
-   "De %d mest populära grannarna: ";
+   "De %d mest populÃ¤ra grannarna: ";
 $locale["%s at %s"] =
    "%s i %s";
 $locale["%s days"] =
    "%s dar";
 $locale["%s of this page"] =
-   "%s för den här sidan";
+   "%s fÃ¶r den hÃ¤r sidan";
 $locale["%s: %s"] =
    "%s: %s";
 $locale["%s: file not found"] =
@@ -33,9 +33,9 @@ $locale["Cancel"] =
 $locale["Complete."] =
    "Komplett.";
 $locale["Contents"] =
-   "Innehåll";
+   "InnehÃ¥ll";
 $locale["Describe %s here."] =
-   "Beskriv %s här.";
+   "Beskriv %s hÃ¤r.";
 $locale["Diff"] =
    "Diff";
 $locale["Diff: %s"] =
@@ -53,67 +53,67 @@ $locale["Empty pagename!"] =
 $locale["Fatal PhpWiki Error"] =
    "PhpWiki Fatal Error";
 $locale["FindPage"] =
-   "SökEfterSida";
+   "SÃ¶kEfterSida";
 $locale["Full text search results for '%s'"] =
-   "Sökresultat för fulltextsökning för '%s'";
+   "SÃ¶kresultat fÃ¶r fulltextsÃ¶kning fÃ¶r '%s'";
 $locale["FullTextSearch"] =
-   "Fulltextsökning";
+   "FulltextsÃ¶kning";
 $locale["Go"] =
-   "\"Gå till sidan\"";
+   "\"GÃ¥ till sidan\"";
 $locale["H"] =
    "H";
 $locale["Height"] =
-   "Höjd";
+   "HÃ¶jd";
 $locale["Hits"] =
-   "Träffar";
+   "TrÃ¤ffar";
 $locale["Hits:"] =
-   "Träffar:";
+   "TrÃ¤ffar:";
 $locale["HomePage"] =
    "Framsida";
 $locale["Included from %s"] =
-   "Insättning från %s";
+   "InsÃ¤ttning frÃ¥n %s";
 $locale["Last"] =
    "Senaste";
 $locale["Last Author"] =
-   "Göregående Författare";
+   "GÃ¶regÃ¥ende FÃ¶rfattare";
 $locale["Last Modified"] =
-   "Ändringsdatum";
+   "Ã„ndringsdatum";
 $locale["Last Summary"] =
    "Senaste Kommentar";
 $locale["Last edited %s"] =
-   "Senast ändrad %s";
+   "Senast Ã¤ndrad %s";
 $locale["Last edited on %s"] =
-   "Senast ändrad %s";
+   "Senast Ã¤ndrad %s";
 $locale["Lock Page"] =
-   "Lås Sida";
+   "LÃ¥s Sida";
 $locale["Locked"] =
-   "Låst";
+   "LÃ¥st";
 $locale["Modern"] =
    "Ny|modig";
 $locale["MostPopular"] =
-   "MestPopulär";
+   "MestPopulÃ¤r";
 $locale["Next"] =
-   "Nästa";
+   "NÃ¤sta";
 $locale["Next Month"] =
-   "Följande Månad";
+   "FÃ¶ljande MÃ¥nad";
 $locale["None"] =
    "Ingen";
 $locale["Page Locked"] =
-   "Sidan är Låst";
+   "Sidan Ã¤r LÃ¥st";
 $locale["Page Name"] =
-   "Namn på Sidan";
+   "Namn pÃ¥ Sidan";
 $locale["Preview"] =
-   "Översikt";
+   "Ã–versikt";
 $locale["Previous"] =
-   "Föregående";
+   "FÃ¶regÃ¥ende";
 $locale["Previous Author"] =
-   "Göregående Författare";
+   "GÃ¶regÃ¥ende FÃ¶rfattare";
 $locale["Previous Month"] =
-   "Föregående Månad";
+   "FÃ¶regÃ¥ende MÃ¥nad";
 $locale["Printer"] =
    "Skrivare";
 $locale["RecentChanges"] =
-   "SenasteÄndringar";
+   "SenasteÃ„ndringar";
 $locale["Remove Page"] =
    "Ta bort sida";
 $locale["Removed page '%s' successfully."] =
@@ -125,7 +125,7 @@ $locale["Save"] =
 $locale["Saved: %s"] =
    "Sparade: %s";
 $locale["Search"] =
-   "Sök";
+   "SÃ¶k";
 $locale["See %s tips for editing."] =
    "%s: Redigeringstips.";
 $locale["Sign In"] =
@@ -133,29 +133,31 @@ $locale["Sign In"] =
 $locale["Sign Out"] =
    "Logga ut";
 $locale["Sorry for the inconvenience."] =
-   "Ledsen för allt besvär.";
+   "Ledsen fÃ¶r allt besvÃ¤r.";
 $locale["String \"%s\" not found."] =
    "\"%s\" ingen funna.";
 $locale["Synopsis"] =
-   "Översikt";
+   "Ã–versikt";
+$locale["TextFormattingRules"] =
+   "Textformateringsregler";
 $locale["Thank you for editing %s."] =
-   "Tack för att du redigerade %s.";
+   "Tack fÃ¶r att du redigerade %s.";
 $locale["The %d most popular pages of this wiki:"] =
-   "De %d mest populära sidorna för den här wikin:";
+   "De %d mest populÃ¤ra sidorna fÃ¶r den hÃ¤r wikin:";
 $locale["The %d most recent %s are listed below."] =
    "De %d senaste %s sidorna listas nedan.";
 $locale["This page has been locked by the administrator and cannot be edited."] =
-   "Den här sidan är låst av administratören och kan ej redigeras.";
+   "Den hÃ¤r sidan Ã¤r lÃ¥st av administratÃ¶ren och kan ej redigeras.";
 $locale["Time Zone"] =
    "Timme Zon";
 $locale["Title Search"] =
-   "Titelsökningen";
+   "TitelsÃ¶kningen";
 $locale["Title search results for '%s'"] =
-   "Sökresultat för titelsökningen för '%s'";
+   "SÃ¶kresultat fÃ¶r titelsÃ¶kningen fÃ¶r '%s'";
 $locale["TitleSearch"] =
-   "Titelsökningen";
+   "TitelsÃ¶kningen";
 $locale["Unlock Page"] =
-   "Lås upp Sida";
+   "LÃ¥s upp Sida";
 $locale["UserId"] =
    "Namn";
 $locale["Version"] =
@@ -167,17 +169,17 @@ $locale["Version %s, saved %s"] =
 $locale["Version %s, saved on %s"] =
    "Version %s, sparade %s";
 $locale["Versions are identical"] =
-   "Versionerna är identiska";
+   "Versionerna Ã¤r identiska";
 $locale["View Source"] =
-   "Visa Källkoden";
+   "Visa KÃ¤llkoden";
 $locale["View Source: %s"] =
-   "Visa Källkoden: %s";
+   "Visa KÃ¤llkoden: %s";
 $locale["W"] =
    "B";
 $locale["Width"] =
    "Bredd";
 $locale["Your careful attention to detail is much appreciated."] =
-   "Din omstänksamhet för detaljer är mycket uppskattad.";
+   "Din omstÃ¤nksamhet fÃ¶r detaljer Ã¤r mycket uppskattad.";
 $locale["by %s"] =
    "av %s";
 $locale["current version"] =
@@ -185,11 +187,11 @@ $locale["current version"] =
 $locale["diff"] =
    "diff";
 $locale["from %s"] =
-   "från %s";
+   "frÃ¥n %s";
 $locale["locked"] =
-   "låst";
+   "lÃ¥st";
 $locale["revision by previous author"] =
-   "version från föregående författare";
+   "version frÃ¥n fÃ¶regÃ¥ende fÃ¶rfattare";
 $locale["today"] =
    "i dag";
 $locale["version %d"] =
@@ -197,6 +199,6 @@ $locale["version %d"] =
 $locale["version %s"] =
    "version %s";
 $locale["yesterday"] =
-   "i går";
+   "i gÃ¥r";
 
 ?>
