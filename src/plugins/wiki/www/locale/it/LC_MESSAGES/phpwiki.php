@@ -3,7 +3,7 @@
 $locale[" ... first %d bytes"] =
    " ... i primi %d byte";
 $locale[" Sorry, cannot merge."] =
-   " Spiacente, non può fondersi.";
+   " Spiacente, non puÃ² fondersi.";
 $locale["%4d  %s\n"] =
    "%4d  %s\n";
 $locale["%d best incoming links: "] =
@@ -11,7 +11,7 @@ $locale["%d best incoming links: "] =
 $locale["%d best outgoing links: "] =
    "%d migliori link in uscita: ";
 $locale["%d most popular nearby: "] =
-   "%d più popolari: ";
+   "%d piÃ¹ popolari: ";
 $locale["%s Kb (%s bytes)"] =
    "%s Kb (%s byte)";
 $locale["%s at %s"] =
@@ -77,7 +77,7 @@ $locale["Authenticated as %s"] =
 $locale["Author"] =
    "Autore";
 $locale["Author will be logged as %s."] =
-   "L'autore sarà annotato come %s.";
+   "L'autore sarÃ  annotato come %s.";
 $locale["Bogo Users"] =
    "Utenti Bogo";
 $locale["Calendar"] =
@@ -168,8 +168,6 @@ $locale["HomePageAlias"] =
    "AliasPaginaPrincipale";
 $locale["In the time since you started editing this page, another user has saved a new version of it."] =
    "Nel tempo da quando avete cominciato pubblicare questa pagina, un altro utente ha conservato una nuova versione di esso.";
-$locale["Include of '%s' failed."] =
-   "Inserimento di '%s' fallito.";
 $locale["IncludePage"] =
    "InserireLaPagina";
 $locale["IncludePagePlugin"] =
@@ -235,7 +233,7 @@ $locale["Modern"] =
 $locale["Modified"] =
    "Modifica";
 $locale["MostPopular"] =
-   "PiùPopolari";
+   "PiÃ¹Popolari";
 $locale["Name"] =
    "Nome";
 $locale["New page"] =
@@ -272,8 +270,6 @@ $locale["Page now locked."] =
    "Pagina bloccata.";
 $locale["Page now unlocked."] =
    "Pagina sbloccata.";
-$locale["Page removed %s"] =
-   "Pagina rimosso %s";
 $locale["Page rename %s to %s"] =
    "La pagina cambia titolo %s a %s";
 $locale["PageChange Notification Error: Couldn't send %s to %s"] =
@@ -328,10 +324,8 @@ $locale["Remove Page"] =
    "Cancella la Pagina";
 $locale["Remove this page"] =
    "Rimuovi la pagina";
-$locale["Removed by: %s"] =
-   "Rimosso vicino: %s";
 $locale["Removed page '%s' successfully."] =
-   "La pagina '%s' è stata rimossa correttamente.";
+   "La pagina '%s' Ã¨ stata rimossa correttamente.";
 $locale["Removing pages"] =
    "Rimuovi la pagina";
 $locale["Restore Anyway"] =
@@ -346,8 +340,6 @@ $locale["Search"] =
    "Ricerca";
 $locale["See %s tips for editing."] =
    "Vedere %s consigli per le modifiche.";
-$locale["Show minor edits for:"] =
-   "Mostrare le modifiche secondarie per:";
 $locale["Sign In"] =
    "Login";
 $locale["Sign Out"] =
@@ -374,16 +366,18 @@ $locale["Summary"] =
    "Commenti";
 $locale["Synopsis"] =
    "Sommario";
+$locale["TextFormattingRules"] =
+   "RegoleFormattazioneTesto";
 $locale["Thank you for editing %s."] =
    "La pagina %s <E8> stata modificata.";
 $locale["Thanks for adding this translation!"] =
    "Grazie per la translatione!";
 $locale["The %d most popular pages of this wiki:"] =
-   "Le %d pagine più popolari di questo wiki sono:";
+   "Le %d pagine piÃ¹ popolari di questo wiki sono:";
 $locale["This page has been locked by the administrator and cannot be edited."] =
-   "Questa pagina è stata bloccata dall'amministratore e non può essere modificata.";
+   "Questa pagina Ã¨ stata bloccata dall'amministratore e non puÃ² essere modificata.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
-   "Spiacente, ma questa pagina è stata bloccata dall'amministratore,quindi le tue modifiche non possono essere salvate.";
+   "Spiacente, ma questa pagina Ã¨ stata bloccata dall'amministratore,quindi le tue modifiche non possono essere salvate.";
 $locale["Time Zone"] =
    "Fuso Orario";
 $locale["Title Search"] =
@@ -437,9 +431,9 @@ $locale["You are signed in as %s"] =
 $locale["Your careful attention to detail is much appreciated."] =
    "Si prega di controllare che le modifiche siano quelle volute. Grazie.";
 $locale["Your changes can not be saved as they are, since doing so would overwrite the other author's changes. So, your changes and those of the other author have been combined. The result is shown below."] =
-   "I vostri cambiamenti non possono essere conservati mentre sono, dal fare in modo da scriverebbero sopra i cambiamenti dell'altro autore. Così, i vostri cambiamenti e quelli dell'altro autore sono stati uniti. Il risultato è indicato sotto.";
+   "I vostri cambiamenti non possono essere conservati mentre sono, dal fare in modo da scriverebbero sopra i cambiamenti dell'altro autore. CosÃ¬, i vostri cambiamenti e quelli dell'altro autore sono stati uniti. Il risultato Ã¨ indicato sotto.";
 $locale["Your home page is locked so your preferences cannot not be saved."] =
-   "Questa pagina è stata bloccata dall'amministratore in modo da i vostri cambiamenti non possono essere salvati.";
+   "Questa pagina Ã¨ stata bloccata dall'amministratore in modo da i vostri cambiamenti non possono essere salvati.";
 $locale["Your version"] =
    "La versione corrente";
 $locale["authenticated"] =
