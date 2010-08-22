@@ -56,8 +56,6 @@ $locale["Home"] =
    "Thuis";
 $locale["HomePage"] =
    "ThuisPagina";
-$locale["Include of '%s' failed."] =
-   "Insert van '%s' gefaald.";
 $locale["Last Author"] =
    "Vorige Auteur";
 $locale["Last Modified"] =
@@ -77,7 +75,7 @@ $locale["Loading up virgin wiki"] =
 $locale["Lock Page"] =
    "Open Pagina";
 $locale["Locked"] =
-   "Låst";
+   "LÃ¥st";
 $locale["MIME file %s"] =
    "MIME bestand %s";
 $locale["MostPopular"] =
@@ -91,11 +89,9 @@ $locale["Next"] =
 $locale["None"] =
    "Geen";
 $locale["Page Locked"] =
-   "Sidan är Låst";
+   "Sidan Ã¤r LÃ¥st";
 $locale["Page Name"] =
    "Pagina Naam";
-$locale["Page removed %s"] =
-   "Verwijder %s";
 $locale["PageHistory"] =
    "PaginaGeschiedenis";
 $locale["PhpWikiAdministration"] =
@@ -124,8 +120,6 @@ $locale["ReleaseNotes"] =
    "UitgaveNoten";
 $locale["Remove Page"] =
    "Verwijder Pagina";
-$locale["Removed by: %s"] =
-   "Verwijder von: %s";
 $locale["Removed page '%s' successfully."] =
    "Pagina '%s' verwijderd.";
 $locale["Return to %s"] =
@@ -148,14 +142,14 @@ $locale["Skipping"] =
    "Overgeslagen";
 $locale["Sorry for the inconvenience."] =
    "Excuses voor het ongemak.";
+$locale["TextFormattingRules"] =
+   "TekstFormatteringsRegels";
 $locale["Thank you for editing %s."] =
    "Bedankt voor het veranderen van %s.";
 $locale["The %d most popular pages of this wiki:"] =
    "De %d meestbezochte pagina's van deze Wiki:";
 $locale["The %d most recent %s are listed below."] =
    "De %d meest recent %s staan hieronder.";
-$locale["The PhpWiki programming team"] =
-   "Het PhpWiki programmeerteam";
 $locale["This page has been locked by the administrator and cannot be edited."] =
    "Deze pagina is afgesloten door de beheerder en kan niet veranderd worden.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
@@ -209,7 +203,7 @@ $locale["diff"] =
 $locale["from %s"] =
    "van %s";
 $locale["locked"] =
-   "låst";
+   "lÃ¥st";
 $locale["plain file %s"] =
    "plat bestand %s";
 $locale["saved as %s"] =
