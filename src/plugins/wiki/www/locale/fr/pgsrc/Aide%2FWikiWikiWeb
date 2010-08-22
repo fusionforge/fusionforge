@@ -1,8 +1,8 @@
 Date: Thu, 15 Apr 2010 16:34:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: WikiWikiWeb 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: Aide%2FWikiWikiWeb$
 Content-Type: application/x-phpwiki;
-  pagename=WikiWikiWeb;
+  pagename=Aide%2FWikiWikiWeb;
   flags="";
   markup=2;
   charset=utf-8
@@ -18,8 +18,9 @@ Vous et moi pourrons trouver là-bas ces déclarations particulièrement pertine
 
  ''L'Univers tend vers le chaos. L'Univers tend vers Wiki.''
 
-Vosu pouvez dire bonjour sur DerniersVisiteurs, ou en lire plus sur CommentUtiliserUnWiki et comment AjouterDesPages. Pour le moment ce Wiki n'a pas de thème de discussion, alors allez-y, jouez avec et amusez-vous !!
+Vous pouvez dire bonjour sur DerniersVisiteurs, ou en lire plus sur CommentUtiliserUnWiki et comment AjouterDesPages. Pour le moment ce Wiki n'a pas de thème de discussion, alors allez-y, jouez avec et amusez-vous !!
 
 --SteveWainstead.
+
 ----
 [[DocumentationDePhpWiki]]

@@ -1,14 +1,14 @@
 Date: Thu, 15 Apr 2010 16:34:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: InfosDeD%C3%A9boguage 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: InfosDeD%C3%A9bogage$
 Content-Type: application/x-phpwiki;
-  pagename=InfosDeD%C3%A9boguage;
+  pagename=InfosDeD%C3%A9bogage;
   flags=PAGE_LOCKED;
   markup=2;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
 Vue détaillée d'une page, ce qui est probablement plus utile que n'importe 
-quoi d'autre pour le déboguage.
+quoi d'autre pour le débogage.
 
 <<_BackendInfo page||='' >>

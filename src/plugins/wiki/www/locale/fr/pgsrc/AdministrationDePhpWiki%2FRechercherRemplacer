@@ -1,11 +1,11 @@
 Date: Thu, 15 Apr 2010 16:34:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: AdministrationDePhpWiki%2FRemplacer 7339 2010-04-15 15:26:08Z vargenau $
+X-Rcs-Id: $Id: AdministrationDePhpWiki%2FRechercherRemplacer$
 Content-Type: application/x-phpwiki;
-  pagename=AdministrationDePhpWiki%2FRemplacer;
+  pagename=AdministrationDePhpWiki%2FRechercherRemplacer;
   flags=PAGE_LOCKED;
   markup=2;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-<<WikiAdminSearchReplace >>
+<<WikiAdminSearchReplace>>

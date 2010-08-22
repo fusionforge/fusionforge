@@ -2470,13 +2470,14 @@ src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FChown -text
 src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FD%C3%A9finirAcl -text
 src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FDroits -text
-src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FRemplacer -text
+src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FRechercherRemplacer -text
 src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FRenommer -text
 src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FSupprimer -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FAjouterDesPages -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FAnciennesR%C3%A8glesDeFormatage -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FCommentUtiliserUnWiki -text
+src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPlugin%C3%89diterMetaData -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginAlbumPhotos -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginBeauTableau -text
@@ -2506,6 +2507,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FR%C3%A8glesDeFormatageDesTextes -tex
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FStyleCorrect -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FURLMagiquesPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FWabiSabi -text
+src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FWikiWikiWeb -text
 src/plugins/wiki/www/locale/fr/pgsrc/AjouterDesCommentaires -text
 src/plugins/wiki/www/locale/fr/pgsrc/AliasAccueil -text
 src/plugins/wiki/www/locale/fr/pgsrc/Bac%C3%80Sable -text
@@ -2529,7 +2531,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/GestionDesPlugins -text
 src/plugins/wiki/www/locale/fr/pgsrc/HistoriqueDeLaPage -text
 src/plugins/wiki/www/locale/fr/pgsrc/Ic%C3%B4nesDeLien -text
 src/plugins/wiki/www/locale/fr/pgsrc/InfosAuthentification -text
-src/plugins/wiki/www/locale/fr/pgsrc/InfosDeD%C3%A9boguage -text
+src/plugins/wiki/www/locale/fr/pgsrc/InfosDeD%C3%A9bogage -text
 src/plugins/wiki/www/locale/fr/pgsrc/InfosSurLaPage -text
 src/plugins/wiki/www/locale/fr/pgsrc/InterWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/LesPlusVisit%C3%A9es -text
@@ -2543,7 +2545,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/PagesFloues -text
 src/plugins/wiki/www/locale/fr/pgsrc/PagesOrphelines -text
 src/plugins/wiki/www/locale/fr/pgsrc/PagesRecherch%C3%A9es -text
 src/plugins/wiki/www/locale/fr/pgsrc/PagesSemblables -text
-src/plugins/wiki/www/locale/fr/pgsrc/PhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/PierrickMeignen -text
 src/plugins/wiki/www/locale/fr/pgsrc/Pr%C3%A9f%C3%A9rencesUtilisateurs -text
 src/plugins/wiki/www/locale/fr/pgsrc/QuiEstEnLigne -text
@@ -2561,7 +2562,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/ToutesLesPages -text
 src/plugins/wiki/www/locale/fr/pgsrc/TraduireUnTexte -text
 src/plugins/wiki/www/locale/fr/pgsrc/VersionsR%C3%0025A9centes -text
 src/plugins/wiki/www/locale/fr/pgsrc/VisiteursR%C3%0025A9cents -text
-src/plugins/wiki/www/locale/fr/pgsrc/WikiWikiWeb -text
 src/plugins/wiki/www/locale/it/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/it/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/it/pgsrc/AggiungerePagine -text
