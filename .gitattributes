@@ -1908,17 +1908,20 @@ src/plugins/wiki/www/TODO -text
 src/plugins/wiki/www/UPGRADING -text
 src/plugins/wiki/www/admin/.htaccess -text
 src/plugins/wiki/www/admin/README -text
+src/plugins/wiki/www/admin/dump-version.pl -text
 src/plugins/wiki/www/admin/dump-wikidb -text
+src/plugins/wiki/www/admin/mkfuncs -text
 src/plugins/wiki/www/admin/odt2phpwiki.xsl -text
+src/plugins/wiki/www/admin/updateinterwikimap -text
 src/plugins/wiki/www/admin/wiki2index.script -text
 src/plugins/wiki/www/admin/wiki2omega -text
+src/plugins/wiki/www/admin/wiki2public.php -text
 src/plugins/wiki/www/admin/wikircs-backup -text
 src/plugins/wiki/www/blank.htm -text
 src/plugins/wiki/www/config/.htaccess -text
 src/plugins/wiki/www/config/SqlResult.ini -text
 src/plugins/wiki/www/config/config-default.ini -text
 src/plugins/wiki/www/config/config-dist.ini -text
-src/plugins/wiki/www/config/config.ini -text
 src/plugins/wiki/www/config/make-dbhelper.pl -text
 src/plugins/wiki/www/config/migrate-phpwiki-config -text
 src/plugins/wiki/www/config/phpwiki.spec -text
@@ -1947,7 +1950,6 @@ src/plugins/wiki/www/doc/phpwiki_architecture.png -text svneol=unset#image/png
 src/plugins/wiki/www/favicon.ico -text
 src/plugins/wiki/www/g -text
 src/plugins/wiki/www/getimg.php -text
-src/plugins/wiki/www/gforge.php -text
 src/plugins/wiki/www/index.php -text
 src/plugins/wiki/www/lib/.htaccess -text
 src/plugins/wiki/www/lib/ASCIIMathPHP/ASCIIMathPHP-2.0.cfg.php -text
@@ -2964,7 +2966,6 @@ src/plugins/wiki/www/pgsrc/area -text
 src/plugins/wiki/www/pgsrc/is_a -text
 src/plugins/wiki/www/pgsrc/located_in -text
 src/plugins/wiki/www/pgsrc/population -text
-src/plugins/wiki/www/phpwiki.php -text
 src/plugins/wiki/www/schemas/.htaccess -text
 src/plugins/wiki/www/schemas/README.txt -text
 src/plugins/wiki/www/schemas/mssql-destroy.sql -text
@@ -3851,12 +3852,9 @@ src/plugins/wiki/www/themes/wikilens/wikilens-min.css -text
 src/plugins/wiki/www/themes/wikilens/wikilens-min.js -text
 src/plugins/wiki/www/themes/wikilens/wikilens.css -text
 src/plugins/wiki/www/themes/wikilens/wikilens.js -text
-src/plugins/wiki/www/u -text
 src/plugins/wiki/www/uploads/index.php -text
 src/plugins/wiki/www/wiki -text
-src/plugins/wiki/www/wikiconfig.php -text
-src/plugins/wiki/www/www -text
-src/plugins/wiki/www/z -text
+src/plugins/wiki/www/wikiadmin.php -text
 src/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 src/rpm-specific/dag-rpmforge.repo -text
 src/rpm-specific/fusionforge-ci.repo -text

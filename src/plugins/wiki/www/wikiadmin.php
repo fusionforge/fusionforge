@@ -1,0 +1,176 @@
+<?php // -*-php-*- $Id: wikiadmin.php 7560 2010-06-23 14:43:29Z vargenau $
+/*
+ * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PhpWiki; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+/*
+ * Standard Alcatel-Lucent disclaimer for contributing to open source
+ *
+ * "The Wiki Configurator ("Contribution") has not been tested and/or
+ * validated for release as or in products, combinations with products or
+ * other commercial use. Any use of the Contribution is entirely made at
+ * the user's own responsibility and the user can not rely on any features,
+ * functionalities or performances Alcatel-Lucent has attributed to the
+ * Contribution.
+ *
+ * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
+ * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
+ * NON-INTERFERENCE AND/OR INTERWORKING WITH THE SOFTWARE TO WHICH THE
+ * CONTRIBUTION HAS BEEN MADE, TITLE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * ALCATEL-LUCENT BE LIABLE FOR ANY DAMAGES OR OTHER LIABLITY, WHETHER IN
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * CONTRIBUTION OR THE USE OR OTHER DEALINGS IN THE CONTRIBUTION, WHETHER
+ * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
+ * ALONE BASIS."
+ */
+
+require_once dirname(__FILE__)."/../../env.inc.php";
+require_once $gfwww.'include/pre.php';
+require_once $sys_plugins_path.'wiki/common/WikiPlugin.class.php';
+require_once $sys_plugins_path.'wiki/common/wikiconfig.class.php';
+
+// the header that displays for the user portion of the plugin
+function wiki_Project_Header($params) {
+    global $id;
+    $params['toptab']='wiki';
+    $params['group']=$id;
+    /*
+        Show horizontal links
+    */
+    site_project_header($params);
+}
+
+$user = session_get_user(); // get the session user
+
+if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
+    exit_error("Invalid User", "Cannot Process your request for this user.");
+}
+
+$type = getStringFromRequest('type');
+$id = getIntFromRequest('id');
+$pluginname = 'wiki';
+$config = getArrayFromRequest('config');
+
+if (!$type) {
+    exit_error("Cannot Process your request","No TYPE specified");
+} elseif (!$id) {
+    exit_error("Cannot Process your request","No ID specified");
+} else {
+    if ($type == 'admin_post') {
+        $group = group_get_object($id);
+        if ( !$group) {
+            exit_error(_('Invalid Project'), _('Inexistent Project'));
+        }
+        if (!($group->usesPlugin($pluginname))) { //check if the group has the wiki plugin active
+            exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
+        }
+        $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
+        if ( !$userperm->IsMember()) {
+            exit_error(_('Access Denied'), _('You are not a member of this project'));
+        }
+        //only project admin can access here
+        if ( $userperm->isAdmin() ) {
+
+            $wc = new WikiConfig($id);
+
+            foreach ($wc->getWikiConfigNames() as $c) {
+                if ( ! array_key_exists($c, $config)) {
+                    $config[$c] = 0;
+                }
+            }
+ 
+            foreach ($config as $config_name => $config_value) {
+                $r = $wc->updateWikiConfig($config_name, $config_value);
+                if (!$r) exit_error("Error", $wc->getErrorMessage());
+            }
+
+            $type = 'admin';
+            $feedback = _('Configuration saved.');
+        } else {
+            exit_error(_('Access Denied'), _('You are not a project Admin'));
+        }
+    }
+    if ($type == 'admin') {
+        $group = group_get_object($id);
+        if ( !$group) {
+            exit_error(_('Invalid Project'), _('Inexistent Project'));
+        }
+        if ( ! ($group->usesPlugin ($pluginname)) ) {//check if the group has the plugin active
+            exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
+        }
+        $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
+        if ( !$userperm->IsMember()) {
+            exit_error(_('Access Denied'), _('You are not a member of this project'));
+        }
+        //only project admin can access here
+        if ( $userperm->isAdmin() ) {
+            wiki_Project_Header(array('title'=>"Configuration for your project's Wiki",'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+
+            $wc = new WikiConfig($id);
+
+            print "\n<h1>"._("Configuration for your project's Wiki")."</h1>\n";
+
+            print "<table>\n";
+            print "<tr>\n";
+            print "<td>\n";
+            print "<fieldset>\n";
+            print "<legend>"._('Wiki Configuration')."</legend>\n";
+            print "<form action=\"/plugins/wiki/wikiadmin.php\" method=\"post\">\n";
+            print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
+            print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
+            print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
+
+            print '<table class="listing">';
+            print "\n<thead>\n<tr>\n<th>".
+                    _("Parameter").
+                    "</th>" .
+                    "<th>".
+                    _("Value").
+                    "</th>\n" .
+                    "</tr>\n</thead>\n";
+
+            foreach ($wc->getWikiConfigNames() as $c) {
+                $checked = $wc->getWikiConfig($c) ? ' checked="checked"' : '';
+                $desc = $wc->getWikiConfigDescription($c);
+
+                print "<tr>\n<td>$desc</td>\n" .
+                      "<td align=\"center\">" .
+                      "<input type=\"checkbox\" name=\"config[$c]\" value=\"1\"$checked /></td>\n" .
+                      "</tr>\n";
+            }
+            print "</table>\n";
+            print "<p align=\"right\"><input type=\"submit\" value=\"" .
+                            _("Save Configuration").
+                            "\" /></p>";
+            print "</form>\n";
+            print "</fieldset>\n";
+            print "</td>\n";
+            print "</tr>\n";
+            print "</table>\n";
+        } else {
+            exit_error(_('Access Denied'), _('You are not a project Admin'));
+        }
+    }
+}
+
+site_project_footer(array());
+
+?>
