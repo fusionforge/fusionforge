@@ -4,12 +4,14 @@
 for po in po/??.po; do
   to="`echo $po|sed -e's/\.po/.utf8.po/'`"
   from=iso-8859-1
-  if [ "$po" = "po/ja.po" ]; then from=euc-jp; fi
-  if [ "$po" = "po/zh.po" ]; then from=utf-8; 
+  if [ "$po" = "po/ja.po" ]; then from=utf-8; fi
+  if [ "$po" = "po/zh.po" ]
+  then 
+    from=utf-8
   else
     iconv -f $from -t utf-8 $po > $to
     mv $po $po.$from
-    perl -pi.bak -e"s/charset=$from/charset=utf-8/" $to
+    perl -pi -e"s/charset=$from/charset=utf-8/" $to
     mv $to $po
   fi
 done
@@ -17,15 +19,18 @@ done
 for po in ??; do
   to="$po.utf8"
   from=iso-8859-1
-  if [ "$po" = "ja" ]; then from=euc-jp; fi
-  if [ "$po" = "zh" ]; then from=utf-8; else
+  if [ "$po" = "ja" ]; then from=utf-8; fi
+  if [ "$po" = "zh" ]
+  then 
+    from=utf-8
+  else
     if [ "$po" != "po" ]; then
-	cp -Ru $po/* $to/
+	cp -Ru $po $to
 	for pgsrc in $to/pgsrc/*; do
 	    case "$pgsrc" in
 	    $to/pgsrc/CVS) ;;
 	    $to/pgsrc/*.bak) ;;
-	    *)     iconv -f $from -t utf-8 $pgsrc > .tmp && mv .tmp $pgsrc
+	    *)  iconv -f $from -t utf-8 $pgsrc > .tmp && mv .tmp $pgsrc
 		perl -pi.bak -e"s/charset=$from/charset=utf-8/" $pgsrc
 		;;
 	    esac
