@@ -1887,12 +1887,6 @@ src/plugins/wiki/db/wiki-init.sql -text
 src/plugins/wiki/etc/cron.d/cron.wiki -text
 src/plugins/wiki/etc/httpd.d/03wiki.conf -text
 src/plugins/wiki/etc/plugins/wiki/config.php -text
-src/plugins/wiki/include/WikiGroupSearchEngine.class.php -text
-src/plugins/wiki/include/WikiHtmlSearchRenderer.class.php -text
-src/plugins/wiki/include/WikiPlugin.class.php -text
-src/plugins/wiki/include/WikiSearchEngine.class.php -text
-src/plugins/wiki/include/WikiSearchQuery.class.php -text
-src/plugins/wiki/include/wiki-init.php -text
 src/plugins/wiki/packaging/docs/plugin-wiki -text
 src/plugins/wiki/www/.htaccess -text
 src/plugins/wiki/www/GoogleSearch.wsdl -text
