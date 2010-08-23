@@ -1880,6 +1880,7 @@ src/plugins/wiki/common/WikiPlugin.class.php -text
 src/plugins/wiki/common/WikiSearchEngine.class.php -text
 src/plugins/wiki/common/WikiSearchQuery.class.php -text
 src/plugins/wiki/common/wiki-init.php -text
+src/plugins/wiki/common/wikiconfig.class.php -text
 src/plugins/wiki/cronjobs/create_groups.php -text
 src/plugins/wiki/cronjobs/template_groups/www/index.html -text
 src/plugins/wiki/db/wiki-drop.sql -text

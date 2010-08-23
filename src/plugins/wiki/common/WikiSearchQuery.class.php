@@ -1,15 +1,29 @@
 <?php
 /**
- * GForge Search Engine
+ * WikiPlugin Class
+ * Wiki Search Engine for Fusionforge
  *
- * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright 2004 (c) Dominik Haas, Gforge Team
+ * Copyright 2006 (c) Alain Peyrat
  *
- * http://gforge.org
+ * This file is part of Fusionforge.
  *
- * @version $Id: NewsSearchQuery.class,v 1.2 2005/01/28 20:36:44 ruben Exp $
+ * Fusionforge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Fusionforge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Fusionforge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
+require_once $gfcommon.'search/SearchQuery.class.php';
 
 class WikiSearchQuery extends SearchQuery {
 	
@@ -35,20 +49,17 @@ class WikiSearchQuery extends SearchQuery {
 	}
 
 	/**
-	 * getQuery - get the query built to get the search results
+	 * getQuery - get the sql query built to get the search results
 	 *
-	 * @return array query+params array
+	 * @return string sql query to execute
 	 */
 	function getQuery() {
 		
 		$pat = '_g'.$this->groupId.'_';
 		$len = strlen($pat)+1;
 		$words = addslashes(join('&', $this->words));
-
-		$qpa = db_construct_qpa () ;
-		$qpa = db_construct_qpa ($qpa,
-					 'SELECT plugin_wiki_page.id AS id, 
-					substring(plugin_wiki_page.pagename from $1) AS pagename,
+		$sql = "SELECT plugin_wiki_page.id AS id, 
+					substring(plugin_wiki_page.pagename from $len) AS pagename,
 					plugin_wiki_page.hits AS hits, 
 					plugin_wiki_page.pagedata as pagedata, 
 					plugin_wiki_version.version AS version,
@@ -62,13 +73,10 @@ class WikiSearchQuery extends SearchQuery {
 					AND plugin_wiki_page.id=plugin_wiki_recent.id 
 					AND plugin_wiki_page.id=plugin_wiki_version.id 
 					AND latestversion=version 
-					AND substring(plugin_wiki_page.pagename from 0 for $1) = $2
-					AND (idxFTI @@ to_tsquery($3))
-				ORDER BY rank(idxFTI, to_tsquery($3)) DESC',
-					 array ($len,
-						$pat,
-						$words)) ;
-		return $qpa ;
+					AND substring(plugin_wiki_page.pagename from 0 for $len) = '$pat'
+					AND (idxFTI @@ to_tsquery('$words'))
+				ORDER BY ts_rank(idxFTI, to_tsquery('$words')) DESC";
+		return $sql;
 	}
 }
 

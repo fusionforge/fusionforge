@@ -1,13 +1,28 @@
 <?php
 /**
- * Wiki Search Engine for GForge
+ * WikiPlugin Class
+ * Wiki Search Engine for Fusionforge
  *
  * Copyright 2006 (c) Alain Peyrat
  *
- * @version $Id: NewsHtmlSearchRenderer.class,v 1.1 2004/10/16 16:36:31 gsmet Exp $
+ * This file is part of Fusionforge.
+ *
+ * Fusionforge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Fusionforge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Fusionforge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
  
-require_once $GLOBALS['gfwww'].'search/include/renderers/HtmlGroupSearchRenderer.class.php';
+require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once 'WikiSearchQuery.class.php';
 
 class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
@@ -52,12 +67,9 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		for($i = 0; $i < $rowsCount; $i++) {
 			$data = unserialize(db_result($result, $i, 'versiondata'));
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-				. '<td>' ;
-			$return .= util_make_link ('/wiki/g/'. $group_name.'/'.db_result($result, $i, 'pagename'),
-						   html_image('ic/msg.png', '10', '12', array('border' => '0'))
-						   . ' '.db_result($result, $i, 'pagename')
-				) ;
-			$return .= '</td>
+				. '<td><a href="/wiki/g/'. $group_name.'/'.db_result($result, $i, 'pagename').'">'
+				. html_image('ic/msg.png', '10', '12')
+				. ' '.db_result($result, $i, 'pagename').'</a></td>
 				<td width="15%">'.$data['author'].'</td>
 				<td width="15%">'.date($dateFormat, db_result($result, $i, 'mtime')).'</td></tr>';
 		}
