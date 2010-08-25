@@ -64,11 +64,14 @@ $wgImageMagickConvertCommand = "/usr/bin/convert";
 $wgLocalInterwiki   = $wgSitename;
 $wgShowExceptionDetails = true ;
 
-$wgLanguageCode = "en";
 $wgDefaultSkin = 'fusionforge';
 $wgStyleDirectory = '/usr/share/mediawiki/skins' ;
 
 require ('/etc/gforge/local.inc') ;
+$wgLanguageCode = "en";
+if (!empty($sys_default_country_code)) {
+	$wgLanguageCode = strtolower($sys_default_country_code);
+}
 require ('/usr/share/gforge/www/env.inc.php') ;
 $GLOBALS['sys_dbhost'] = $sys_dbhost ;
 $GLOBALS['sys_dbport'] = $sys_dbport ;
