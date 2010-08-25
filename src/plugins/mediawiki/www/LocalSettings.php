@@ -92,7 +92,8 @@ $wgImageMagickConvertCommand = "/usr/bin/convert";
 $wgLocalInterwiki   = $wgSitename;
 $wgShowExceptionDetails = true ;
 
-$wgLanguageCode = "en";
+$wgLanguageCode = strtolower(forge_get_config('default_country_code'));
+
 $wgDefaultSkin = 'fusionforge';
 
 $GLOBALS['sys_dbhost'] = forge_get_config('database_host') ;
