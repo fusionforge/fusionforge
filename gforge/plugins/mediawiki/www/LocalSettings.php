@@ -125,8 +125,8 @@ function FusionForgeMWAuth( $user, &$result ) {
                         if (!in_array ('Members', $current_groups)) {
                                 $user->addGroup ('Members') ;
                         }
-                        if (!in_array ('ForgeUsers', $current_groups)) {
-                                $user->addGroup ('ForgeUsers') ;
+                        if (!in_array ('user', $current_groups)) {
+                                $user->addGroup ('user') ;
                         }
                 } elseif ($perm && is_object($perm) && $perm->isMember()) {
                         if (in_array ('sysop', $current_groups)) {
@@ -135,8 +135,8 @@ function FusionForgeMWAuth( $user, &$result ) {
                         if (!in_array ('Members', $current_groups)) {
                                 $user->addGroup ('Members') ;
                         }
-                        if (!in_array ('ForgeUsers', $current_groups)) {
-                                $user->addGroup ('ForgeUsers') ;
+                        if (!in_array ('user', $current_groups)) {
+                                $user->addGroup ('user') ;
                         }
                 } else {
                         if (in_array ('sysop', $current_groups)) {
@@ -145,8 +145,8 @@ function FusionForgeMWAuth( $user, &$result ) {
                         if (in_array ('Members', $current_groups)) {
                                 $user->removeGroup ('Members') ;
                         }
-                        if (!in_array ('ForgeUsers', $current_groups)) {
-                                $user->addGroup ('ForgeUsers') ;
+                        if (!in_array ('user', $current_groups)) {
+                                $user->addGroup ('user') ;
                         }
                 }
 
@@ -177,23 +177,38 @@ function NoLinkOnMainPage(&$personal_urls){
 }
 $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
+function DisableLogInOut(&$mList) {
+  unset($mList['Userlogin']);
+  unset($mList['CreateAccount']);
+  unset($mList['Resetpass']);
+  unset($mList['Userlogout']);
+  return true;
+}
+//$GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
+
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
-$wgGroupPermissions['Members']['createaccount'] = true;
+// !! 'read' action is defined in the local project localSettings.php to allow swicth
+// for public or private project switching
+
+// No one can manage the accounts with Mediawiki interface
+$wgGroupPermissions['sysop']['createaccount'] = false;
+$wgGroupPermissions['sysop']['read'] 	      = true;
+
+// Members are user who belongs to the current project, they can create or edit pages
+$wgGroupPermissions['Members']['createaccount'] = false;
+$wgGroupPermissions['Members']['read'] 		= true;
 $wgGroupPermissions['Members']['edit']          = true;
 $wgGroupPermissions['Members']['createpage']    = true;
 $wgGroupPermissions['Members']['createtalk']    = true;
 
-$wgGroupPermissions['ForgeUsers']['createaccount'] = false;
-$wgGroupPermissions['ForgeUsers']['edit']          = false;
-$wgGroupPermissions['ForgeUsers']['createpage']    = false;
-$wgGroupPermissions['ForgeUsers']['createtalk']    = false;
-
+// logged users can only read all public projects - required because implicitly loaded
 $wgGroupPermissions['user']['createaccount'] = false;
 $wgGroupPermissions['user']['edit']          = false;
 $wgGroupPermissions['user']['createpage']    = false;
 $wgGroupPermissions['user']['createtalk']    = false;
 
+// Not logged users can only read all public projects - required because implicitly loaded
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit']          = false;
 $wgGroupPermissions['*']['createpage']    = false;

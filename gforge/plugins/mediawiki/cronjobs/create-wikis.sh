@@ -22,19 +22,19 @@ for project in $projects ; do
 // Don't forget to "chown www-data $wdprefix/$project/images"
 
 // Edit permissions for group members
-\$wgGroupPermissions['Members']['edit']          = true;
-\$wgGroupPermissions['Members']['createpage']    = true;
-\$wgGroupPermissions['Members']['createtalk']    = true;
+//\$wgGroupPermissions['Members']['edit']          = true;
+//\$wgGroupPermissions['Members']['createpage']    = true;
+//\$wgGroupPermissions['Members']['createtalk']    = true;
 
 // Edit permissions for non-members
-\$wgGroupPermissions['ForgeUsers']['edit']          = false;
-\$wgGroupPermissions['ForgeUsers']['createpage']    = false;
-\$wgGroupPermissions['ForgeUsers']['createtalk']    = false;
+//\$wgGroupPermissions['user']['edit']          = false;
+//\$wgGroupPermissions['user']['createpage']    = false;
+//\$wgGroupPermissions['user']['createtalk']    = false;
 
 // Edit permissions for anonymous users
-\$wgGroupPermissions['*']['edit']          = false;
-\$wgGroupPermissions['*']['createpage']    = false;
-\$wgGroupPermissions['*']['createtalk']    = false;
+//\$wgGroupPermissions['*']['edit']          = false;
+//\$wgGroupPermissions['*']['createpage']    = false;
+//\$wgGroupPermissions['*']['createtalk']    = false;
 
 // Override default wiki logo
 //\$wgLogo = "/themes/\$sys_theme/images/wgLogo.png";
@@ -107,14 +107,20 @@ for project in $projects ; do
 			| grep '^ ')
 
 	# Purge anonymous read
-	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['Members'\]\['read'\]" > $tmp4
+	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['user'\]\['read'\]" > $tmp4
 	cat $tmp4 > $wdprefix/$project/LocalSettings.php
 	cat $wdprefix/$project/LocalSettings.php | grep -vi "\$wgGroupPermissions\['\*'\]\['read'\]" > $tmp4
 	cat $tmp4 > $wdprefix/$project/LocalSettings.php
 
+
 	if [ $ispublic = '0' ] ; then
-		echo "\$wgGroupPermissions['Members']['read']    = true;" >> $wdprefix/$project/LocalSettings.php
+		# private
+		echo "\$wgGroupPermissions['user']['read']       = false;" >> $wdprefix/$project/LocalSettings.php
 		echo "\$wgGroupPermissions['*']['read']          = false;" >> $wdprefix/$project/LocalSettings.php
+	else
+		#public
+		echo "\$wgGroupPermissions['user']['read']       = true;" >> $wdprefix/$project/LocalSettings.php
+		echo "\$wgGroupPermissions['*']['read']          = true;" >> $wdprefix/$project/LocalSettings.php
 	fi
 
 done
