@@ -3632,7 +3632,7 @@ class soap_parser extends nusoap_base {
 * @version  v 0.6.3
 * @access   public
 */
-class soapclient extends nusoap_base  {
+class pwsoapclient extends nusoap_base  {
 
     var $username = '';
     var $password = '';
