@@ -205,27 +205,31 @@ class GforgeWikiPlugin extends Plugin {
 
 					$pat = '_g'.$group_id.'_';
 					$len = strlen($pat)+1;
-					$sql = "SELECT plugin_wiki_page.id AS id, 
-							substring(plugin_wiki_page.pagename from $len) AS pagename,
+					$wres = db_query_params ('SELECT plugin_wiki_page.id AS id,
+							substring(plugin_wiki_page.pagename from $1) AS pagename,
 							plugin_wiki_version.version AS version, 
 							plugin_wiki_version.mtime AS activity_date, 
 							plugin_wiki_version.minor_edit AS minor_edit,
 							plugin_wiki_version.versiondata AS versiondata
 						FROM plugin_wiki_page, plugin_wiki_version 
 						WHERE plugin_wiki_page.id=plugin_wiki_version.id 
-							AND mtime BETWEEN '".$params['begin']."' AND '".$params['end']."'
+							AND mtime BETWEEN $2 AND $3
 							AND minor_edit=0
-							AND substring(plugin_wiki_page.pagename from 0 for $len) = '$pat' 
-						ORDER BY mtime DESC";
-					$wres=db_query($sql);
+							AND substring(plugin_wiki_page.pagename from 0 for $1) = $4
+						ORDER BY mtime DESC',
+                                                                 array ($len,
+                                                                        $params['begin'],
+                                                                        $params['end'],
+                                                                        $pat));
 
 					$cache = array();
 					while ($arr = db_fetch_array($wres)) {
 						$group_name = $group->getUnixName();
 						$data = unserialize($arr['versiondata']);
 						if (!isset($cache[$data['author']])) {
-							$s = "SELECT user_name FROM users WHERE realname = '".$data['author']."'";
-							$r = db_query($s);
+							$r = db_query_params ('SELECT user_name FROM users WHERE realname = $1',
+										array ($data['author']));
+
 							if ($a = db_fetch_array($r)) {
 								$cache[$data['author']] = $a['user_name'];
 							} else {
