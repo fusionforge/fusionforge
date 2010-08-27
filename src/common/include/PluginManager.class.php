@@ -225,7 +225,11 @@ class PluginManager extends Error {
 			$p_list = $this->hooks_to_plugins[$hookname];
 			foreach ($p_list as $p_name) {
 				$p_obj = $this->plugins_objects[$p_name] ;
-				$returned = $p_obj->CallHook ($hookname, $params);
+				if (method_exists($p_obj, $hookname)) {
+					$returned = $p_obj->$hookname($params);
+				} else {
+					$returned = $p_obj->CallHook ($hookname, $params);
+				}
 				$this->returned_value[$hookname] = $returned;
 				$result = $result && $returned ;
 			}

@@ -81,7 +81,7 @@ class Plugin extends Error {
 	 * @return bool if feature is provided or not.
 	 */
 	function provide($feature) {
-		return (isset($this->provides) && $this->provides[$feature]);
+		return (isset($this->provides[$feature]) && $this->provides[$feature]);
 	}
 
 	/**
@@ -138,6 +138,43 @@ class Plugin extends Error {
 		$role =& $params['role'] ;
 	}
 		
+	function userisactivecheckbox (&$params) {
+		//check if user is active
+		// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
+		$user = $params['user'];
+		$flag = strtolower('use_'.$this->name);
+		echo "<tr>";
+		echo "<td>";
+		echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
+		// checked or unchecked?
+		if ( $user->usesPlugin ( $this->name ) ) {
+			echo "checked";
+		}
+		echo " />    Use ".$this->text." Plugin";
+		echo "</td>";
+		echo "</tr>";
+	}
+
+	function userisactivecheckboxpost (&$params) {
+		// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
+		$user = $params['user'];
+		$flag = strtolower('use_'.$this->name);
+		if ( getStringFromRequest($flag) == 1 ) {
+			$user->setPluginUse ( $this->name );
+		} else {
+			$user->setPluginUse ( $this->name, false );
+		}
+		echo "<tr>";
+		echo "<td>";
+		echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
+		// checked or unchecked?
+		if ( $user->usesPlugin ( $this->name ) ) {
+			echo "checked";
+		}
+		echo " />    Use ".$this->text." Plugin";
+		echo "</td>";
+		echo "</tr>";
+	}
 }
 
 class PluginSpecificRoleSetting {
