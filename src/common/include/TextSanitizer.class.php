@@ -60,10 +60,19 @@ Class TextSanitizer extends Error {
 		$text = str_replace("&acute;","'",$text); //it's better to see that char in the email than the html entity
 		$text = str_replace("&amp;","&",$text);
 		$text = str_replace("&quot;",'"',$text);
+		$text = str_replace("&rsquo;","’",$text);
 		$text = str_replace("&nbsp;",' ',$text);
 		$text = str_replace("&lt;",'<',$text);
 		$text = str_replace("&gt;",'>',$text);
 		$text = str_replace("&deg;",'°',$text);
+		$text = str_replace("&sup2;",'²',$text);
+		$text = str_replace("&euro;",'€',$text);
+		$text = str_replace("&uml;",'¨',$text);
+		$text = str_replace("&pound;",'£',$text);
+		$text = str_replace("&curren;",'¤',$text);
+		$text = str_replace("&micro;",'µ',$text);
+		$text = str_replace("&sect;",'§',$text);
+		$text = str_replace("&oelig;",'œ',$text);
 		$text = str_replace("&lt;br&gt;","\n",$text);
 		$text = str_replace("&lt;br /&gt;","\n",$text);
 
