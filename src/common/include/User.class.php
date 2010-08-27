@@ -120,7 +120,7 @@ function &user_get_objects($id_arr) {
 	if (count($fetch) > 0) {
 		$res = db_query_params ('SELECT * FROM users WHERE user_id = ANY ($1)',
 					array (db_int_array_to_any_clause ($fetch))) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'],$arr);
 			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
 		}
@@ -1366,7 +1366,6 @@ Enjoy the site.
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
-			$sql="" ;
 			$res = db_query_params ('SELECT user_plugin.plugin_id, plugins.plugin_name
 			                         FROM user_plugin, plugins
                                                  WHERE user_plugin.user_id=$1
