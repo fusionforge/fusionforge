@@ -254,7 +254,7 @@ class FRSFile extends Error {
 	 *  @return int	The size.
 	 */
 	function getSize() {
-		return $this->data_array['size'];
+		return $this->data_array['file_size'];
 	}
 
 	/**
@@ -312,12 +312,12 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *  getPostDate - get the post time of this file.
+	 *  getPostDate - get the post date of this file.
 	 *
-	 *  @return int	The post time in unix time.
+	 *  @return int	The post date in unix time.
 	 */
 	function getPostDate() {
-		return $this->data_array['post_time'];
+		return $this->data_array['post_date'];
 	}
 
 	/**
