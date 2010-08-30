@@ -106,7 +106,7 @@ d-i preseed/late_command string apt-install zsh; \
 in-target chsh -s /bin/zsh ; \
 in-target chmod o+rw /dev/null ; \
 apt-install postgresql-8.4; \
-chroot /target invoke-rc.d postgresql-8.4 start ; \
+chroot /target sh -c 'invoke-rc.d postgresql start || invoke-rc.d postgresql-8.4 start' ; \
 UCF_FORCE_CONFFNEW=yes apt-install fusionforge-full ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/cvs /cvsroot ; \
 in-target ln -s /var/lib/gforge/chroot/scmrepo/svn /svnroot ; \

@@ -279,7 +279,18 @@ EOF
 	cat ${pg_hba_dir}/pg_hba.conf >> $newpg
 	mv $newpg ${pg_hba_dir}/pg_hba.conf
 	chmod 644 ${pg_hba_dir}/pg_hba.conf
-	invoke-rc.d ${pg_name} restart
+
+	# Trying "postgresql" init script...
+	invoke-rc.d postgresql restart || v=$?
+	if test x"$v" = x"100"; then
+		# No "postgresql" init script (for packages << 8.4.4-2)
+		pg_name=postgresql-$pg_version
+		invoke-rc.d ${pg_name} restart
+	elif test x"$v" != x"0"; then
+		# Needed, since we run under "set -e"...
+		exit $v
+	fi
+
 	if [ "x$2" != "x" ] ;then
 		RESTFILE=$2
 	else
@@ -291,6 +302,16 @@ EOF
 	su -s /bin/sh postgres -c "/usr/bin/psql -f $RESTFILE $db_name"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" ${pg_hba_dir}/pg_hba.conf
         perl -pi -e "s/$localtrust\n//" ${pg_hba_dir}/pg_hba.conf
-	invoke-rc.d ${pg_name} reload
+
+	# Trying "postgresql" init script...
+	invoke-rc.d postgresql reload || v=$?
+	if test x"$v" = x"100"; then
+		# No "postgresql" init script (for packages << 8.4.4-2)
+		pg_name=postgresql-$pg_version
+		invoke-rc.d ${pg_name} reload
+	elif test x"$v" != x"0"; then
+		# Needed, since we run under "set -e"...
+		exit $v
+	fi
 	;;
 esac

@@ -56,10 +56,13 @@ case "$1" in
 
 	# Trying "postgresql" init script...
 	invoke-rc.d postgresql reload || v=$?
-	if [ "$v" = 100 ] ; then
-	    # No "postgresql" init script (for packages < 8.4.4-2)
-	    pg_name=postgresql-$pg_version
-	    invoke-rc.d ${pg_name} reload
+	if test x"$v" = x"100"; then
+		# No "postgresql" init script (for packages << 8.4.4-2)
+		pg_name=postgresql-$pg_version
+		invoke-rc.d ${pg_name} reload
+	elif test x"$v" != x"0"; then
+		# Needed, since we run under "set -e"...
+		exit $v
 	fi
 	;;
     upgrade|deconfigure|failed-upgrade)
