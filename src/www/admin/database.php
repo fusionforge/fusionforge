@@ -76,7 +76,7 @@ if (getStringFromRequest('submit')) {
 		if (!$res || db_affected_rows($res) < 1) {
 			$feedback .= _('Error Adding Database') .db_error();
 		} else {
-			$feedback .= _('Group'). " <em>".$group->getUnixName()."</em>" ._('added already active database');
+			$feedback .= _('Project'). " <em>".$group->getUnixName()."</em>" ._('added already active database');
 		}
 
 	} else {
@@ -161,7 +161,7 @@ if ($displaydb) {
 <table>
 
 <tr>
-<td><?php echo _('Group Unix Name:'); ?><?php echo utils_requiredField(); ?></td>
+<td><?php echo _('Project Unix Name:'); ?><?php echo utils_requiredField(); ?></td>
 <td><input type="text" name="groupname" /></td>
 </tr>
 

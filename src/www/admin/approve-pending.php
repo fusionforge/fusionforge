@@ -52,9 +52,9 @@ function activate_group($group_id) {
 
 
 	if ($group->approve(session_get_user())) {
-		$feedback .= sprintf(_('Approving Group: %1$s'), $group->getUnixName()).'<br />';
+		$feedback .= sprintf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
 	} else {
-		$feedback .= sprintf(_('Error when approving Group: %1$s'), $group->getUnixName()).'<br />';
+		$feedback .= sprintf(_('Error when approving Project: %1$s'), $group->getUnixName()).'<br />';
 		$feedback .= $group->getErrorMessage().'<br />';
 		return false;
 	}
@@ -203,7 +203,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	// ########################## OTHER INFO
 
 	print "<p><strong>" ._('Other Information')."</strong></p>";
-	print "<p>" ._('Unix Group Name:'). " ".$row_grp['unix_group_name']."</p>";
+	print "<p>" ._('Unix Project Name:'). " ".$row_grp['unix_group_name']."</p>";
 
 	print "<p>" ._('Submitted Description:'). "</p><blockquote>".$row_grp['register_purpose']."</blockquote>";
 

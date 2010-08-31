@@ -85,7 +85,7 @@ if (getStringFromRequest('submit')) {
 
 }
 
-site_admin_header(array('title'=>_('Site Admin: Group Info')));
+site_admin_header(array('title'=>_('Site Admin: Project Info')));
 
 echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
@@ -148,7 +148,7 @@ if($status == 'P') {
 
 <tr>
 <td>
-<?php echo _('Unix Group Name:'); ?>
+<?php echo _('Unix Project Name:'); ?>
 </td>
 <td>
 <?php echo $group->getUnixName(); ?>

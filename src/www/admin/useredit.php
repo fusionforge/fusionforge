@@ -225,11 +225,11 @@ if ($u->getStatus() == 'D') {
 
 <hr />
 
-<h3><?php echo _('Groups Membership'); ?></h3>
+<h3><?php echo _('Projects Membership'); ?></h3>
 
 <?php
 /*
-	Iterate and show groups this user is in
+	Iterate and show projects this user is in
 */
 $res_cat = db_query_params ('
 	SELECT groups.unix_group_name, groups.group_name AS group_name, 

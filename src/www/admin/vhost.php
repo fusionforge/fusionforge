@@ -123,7 +123,7 @@ site_admin_header(array('title'=>_('Site admin')));
 <table border="0">
 
 <tr>
-<td><?php echo _('Group Unix Name'); ?></td>
+<td><?php echo _('Project Unix Name'); ?></td>
 <td><input type="text" name="groupname" /></td>
 </tr>
 

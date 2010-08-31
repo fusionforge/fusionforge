@@ -76,7 +76,7 @@ if ($group_id) {
 		} else {
 			switch ($farr[$j]->getModerationLevel()) {
 				case 0 : $modlvl = _('No Moderation');break;
-				case 1 : $modlvl = _('Anonymous & Non Group Users');break;
+				case 1 : $modlvl = _('Anonymous & Non Project Users');break;
 				case 2 : $modlvl = _('All Except Admins');break;
 			}
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .

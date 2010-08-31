@@ -137,7 +137,7 @@ print "<p>" ._('User list for group:');
 if (!$group_id) {
 	$user_name_search = getStringFromRequest('user_name_search');
 
-	print "<strong>" ._('All Groups'). "</strong>";
+	print "<strong>" ._('All Projects'). "</strong>";
 	print "\n</p>";
 
 	if ($user_name_search) {

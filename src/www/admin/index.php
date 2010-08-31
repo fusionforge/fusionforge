@@ -104,7 +104,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 ?>
 	<br />
 		<form name="gpsrch" action="search.php" method="post">
-		<?php echo _('Search <em>(groupid, group unix name, full name)</em>'); ?>:
+		<?php echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
