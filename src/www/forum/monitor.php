@@ -7,7 +7,6 @@
  *
  */
 
-
 /*
     Message Forums
     By Tim Perdue, Sourceforge, 11/99
@@ -21,7 +20,6 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'forum/include/ForumHTML.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
-
 
 if (session_loggedin()) {
 	$forum_id = getIntFromRequest('forum_id');
@@ -50,7 +48,7 @@ if (session_loggedin()) {
 				exit;
 			}
 			if (!$confirm) {
-				forum_header(array('title'=>_('My Monitored Forums')));
+				forum_header(array('title'=>_('Stop Monitoring')));
 				echo $HTML->confirmBox('You are about to stop monitoring the '.$f->getName().
 					' forum.<br/><br/>Do you really want to unsubscribe ?', 
 					array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),

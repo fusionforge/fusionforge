@@ -93,7 +93,7 @@ if ($action=='activate') {
 	
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
-		exit_error('Error','Could Not Get Group');
+		exit_no_group();
 	} elseif ($group->isError()) {
 		exit_error('Error',$group->getErrorMessage());
 	}
@@ -123,8 +123,8 @@ if ($action=='activate') {
 	}
 }
 
-
 site_admin_header(array('title'=>_('Approving Pending Projects')));
+echo '<h1>' . _('Approving Pending Projects') . '</h1>';
 
 // get current information
 $res_grp = db_query_params("SELECT * FROM groups WHERE status='P'", array(), $LIMIT);
@@ -132,8 +132,7 @@ $res_grp = db_query_params("SELECT * FROM groups WHERE status='P'", array(), $LI
 $rows = db_numrows($res_grp);
 
 if ($rows < 1) {
-	print "<h1>"._('None Found'). "</h1>";
-	print "<p>"._('No Pending Projects to Approve')."</p>";
+	print '<div class="warning_msg">'._('No Pending Projects to Approve').'</div>';
 	site_admin_footer(array());
 	exit;
 }
@@ -227,8 +226,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 			.'</p>' ;
 	}
 	
-	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";
-
+	echo "<hr />";
 }
 
 //list of group_id's of pending projects
@@ -236,12 +234,13 @@ $arr=util_result_column_to_array($res_grp,0);
 $group_list=implode($arr,',');
 
 echo '
-	<div align="center">
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+	<p style="text-align: center;">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
 	<input type="submit" name="submit" value="'._('Approve All On This Page').'" />
-	</form></div>
+	</p>
+	</form>
 	';
 
 site_admin_footer(array());

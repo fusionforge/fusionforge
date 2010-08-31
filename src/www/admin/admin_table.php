@@ -136,8 +136,10 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 
 	if ($result) {
 		$cols = db_numfields($result);
-
-		printf(_('Are you sure you want to delete this %1$s?'), getUnitLabel($unit)).'<ul>';
+		echo '<p>';
+		printf(_('Are you sure you want to delete this %1$s?'), getUnitLabel($unit));
+		echo '</p>';
+		echo '<ul>';
 		for ($i = 0; $i < $cols; $i++) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}

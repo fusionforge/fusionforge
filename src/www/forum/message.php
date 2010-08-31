@@ -213,13 +213,13 @@ if ($msg_id) {
 		/*
 			Show post followup form
 		*/
-		echo '<div align="center"><h3>'._('Post a followup to this message').'</h3></div>';
+		echo '<h3>'._('Post a followup to this message').'</h3>';
 		$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 	}
 
 } else {
-	forum_header(array('title'=>_('Must Choose A Message First')));
-	echo '<h1>'._('You Must Choose A Message First').'</h1>';
+	forum_header(array('title'=>_('You Must Choose a Message First')));
+	echo '<div class="error">'._('You Must Choose a Message First').'</div>';
 
 }
 

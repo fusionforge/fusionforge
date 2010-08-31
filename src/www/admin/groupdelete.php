@@ -45,13 +45,13 @@ if (getStringFromPost('submit')) {
 		exit_error('Error',$group->getErrorMessage());
 	} else {
 		plugin_hook('delete_link',$_GET['group_id']) ;
-		header("Location: ".util_make_url("/admin/?feedback=DELETED"));
+		header("Location: ".util_make_url("/admin/?feedback=Project+successfully+deleted"));
 	}
 }
 
-site_admin_header(array('title'=>_('Permanently Delete Project')));
-
-echo '<h2>'._('Permanently and irretrievably delete project').': '.$group->getPublicName().'</h2>' ;?>
+$title = _('Permanently and irretrievably delete project').': '.$group->getPublicName();
+site_admin_header(array('title'=>$title));
+echo '<h1>'.$title.'</h1>'; ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 <input type="checkbox" value="1" name="sure" /> <?php echo _('Confirm Delete'); ?><br />
