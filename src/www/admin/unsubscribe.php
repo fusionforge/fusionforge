@@ -46,7 +46,7 @@ if (getStringFromRequest('submit') && $user_name) {
 		site_admin_header(array('title'=>_('Site Mailings Subscription Maintenance')));
 		?>
 
-		<h4><?php echo _('Unsubscribe user:'); ?> <?php echo $user_name; ?></h4>
+		<h1><?php echo _('Unsubscribe user:'); ?> <?php echo $user_name; ?></h1>
 		<p>
 		<?php echo _('You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).'); ?>
 		</p>

@@ -256,7 +256,7 @@ foreach ($filelist as $filename) {
 			}
 		}
 		$link .= "','$filename');" . '">' . _('Deactivate') . "</a>";
-		$init = '<input id="'.$filename.'" type="checkbox" disabled name="script[]" value="'.$filename.'" />';
+		$init = '<input id="'.$filename.'" type="checkbox" disabled="disabled" name="script[]" value="'.$filename.'" />';
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
@@ -284,7 +284,6 @@ echo $HTML->listTableBottom();
 </form>
 
 <?php
-
 
 site_admin_footer(array());
 
