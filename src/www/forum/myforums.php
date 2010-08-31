@@ -130,7 +130,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			foreach ($forum_msg_arr as $forum_msg) {
 				if ($f->getSavedDate() < $forum_msg->getPostDate()) {
 				//we've got ourselves a new message or followup for this forum. note that, exit the search
-				$newcontent = "<center>" . html_image("ic/new.png","25","11",array("border"=>"0")) . "</center>";
+				$newcontent = "<center>" . html_image("ic/new.png","25","11") . "</center>";
 				break;
 				}
 			}
@@ -143,7 +143,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 			$total_rows++;
 			if ($f->getSavedDate() < $msg->getPostDate()) {
 				//we've got ourselves a new message for this forum. note that, exit the search
-				$newcontent = "<center>" . html_image("ic/new.png","25","11",array("border"=>"0")) . "</center>";
+				$newcontent = "<center>" . html_image("ic/new.png","25","11") . "</center>";
 				break;
 			}
 			$j++;
@@ -153,7 +153,7 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td>' . $this_forum_group->getPublicName() . '</td>
 			<td><a href="forum.php?forum_id='. $f->getID() .'">'.
-			html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
+			html_image("ic/forum20w.png","20","20") .
 			'&nbsp;' .
 			$f->getName() .'</a></td>
 			<td>'.$f->getDescription().'</td>

@@ -93,7 +93,7 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 		if ($offset != 0) {
 			$previousUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset - ADMIN_CRONMAN_ROWS);
 			echo '<a href="'.$previousUrl.'" class="prev">'
-				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
+				. html_image('t2.png', '15', '15')
 				. ' '._('Previous').'</a>';
 		} else {
 			echo '&nbsp;';
@@ -103,7 +103,7 @@ if($totalCount > ADMIN_CRONMAN_ROWS) {
 			$nextUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset + ADMIN_CRONMAN_ROWS);
 			echo '<a href="'.$nextUrl.'" class="next">'
 				._('Next').' '
-				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
+				. html_image('t.png', '15', '15') . '</a>';
 		} else {
 			echo '&nbsp;';
 		}

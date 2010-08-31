@@ -81,7 +81,7 @@ if ($group_id) {
 			}
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .
 				'&amp;group_id=' . $group_id . '">'.
-				html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
+				html_image("ic/forum20w.png","20","20") .
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a></td>
 				<td>'.$farr[$j]->getDescription().'</td>

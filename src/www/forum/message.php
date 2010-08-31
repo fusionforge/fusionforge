@@ -181,7 +181,7 @@ if ($msg_id) {
 		}
 		$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 			<td>'. $ah_begin .
-			html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
+			html_image('ic/msg.png',"10","12").' ';
 		/*
 			See if this message is new or not
 			If so, highlite it in bold

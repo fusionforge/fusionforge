@@ -252,7 +252,7 @@ if ($forum_id) {
 			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 				<td><a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
 							      '&amp;group_id='.$group_id).'&amp;reply=0">'.
-				html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
+				html_image('ic/msg.png',"10","12").' ';
 			/*
 				See if this message is new or not
 				If so, highlite it in bold
@@ -326,7 +326,7 @@ ORDER BY f.most_recent_date DESC',
 				$ret_val .= '
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_url ('/forum/forum.php?thread_id='.
 															$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
-					html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
+					html_image('ic/cfolder15.png',"15","13") . '  &nbsp; ';
 				/*
 						See if this message is new or not
 						If so, highlite it in bold
@@ -361,7 +361,7 @@ ORDER BY f.most_recent_date DESC',
 	if ($offset != 0) {
 		$ret_val .= '<span class="prev">
 		<a href="javascript:history.back()"><strong>' .
-		html_image('t2.png',"15","15",array("border"=>"0","align"=>"middle")) ._('Previous Messages').'</strong></a></span>';
+			html_image('t2.png',"15","15") ._('Newer Messages').'</strong></a></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -372,8 +372,8 @@ ORDER BY f.most_recent_date DESC',
 		$ret_val .= '<span class="next">
 		<a href="'.util_make_url ('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
 					  '&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">
-		<strong> '._('Next Messages') .
-		html_image('t.png',"15","15",array("border"=>"0","align"=>"middle")) . '</strong></a></span>';
+		<strong> '._('Older Messages') .
+			html_image('t.png',"15","15") . '</strong></a></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
