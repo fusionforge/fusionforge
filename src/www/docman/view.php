@@ -26,8 +26,8 @@
 $no_gz_buffer=true;
 
 require_once('../env.inc.php');
-require_once ('include/pre.php');
-require_once ('docman/Document.class.php');
+require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'docman/Document.class.php';
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
