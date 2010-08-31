@@ -31,6 +31,8 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
+
 site_admin_header(array('title'=>_('Site Admin')));
 echo '<h1>' . _('Site Admin') . '</h1>';
 
@@ -153,7 +155,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>
 	<li><a href="edit_licenses.php"><?php echo _('Add, Delete, or Edit Licenses'); ?></a></li>
-	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Recent logins'); ?></a></li>
+	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Last Logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>
 	<li><a href="configman.php"><?php echo _('Config Manager'); ?></a></li>
