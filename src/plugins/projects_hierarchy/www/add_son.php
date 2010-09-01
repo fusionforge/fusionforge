@@ -1,8 +1,8 @@
 <?php
 /**
  * Copyright 2004 (c) GForge LLC
- * Copyright 2006 (c) Sogeti : Fabien Regnier
- * Copyright 2010 (c) Capgemini : Franck Villaume
+ * Copyright 2006 (c) Fabien Regnier - Sogeti
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *

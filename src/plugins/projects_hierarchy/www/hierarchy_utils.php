@@ -1,28 +1,26 @@
 <?php
 /*
- * Copyright 2004 GForge, LLC
+ * Copyright 2004 (c) GForge LLC
+ * Copyright 2006 (c) Fabien Regnier - Sogeti
  *
- * @author Fabien Regnier fabien.regnier@sogeti.com
- * @date 2006-10-10
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
  
- function son_box ($group_id,$name,$selected='xzxzxz') {
+function son_box ($group_id,$name,$selected='xzxzxz') {
 	global $son;
 	if (!$son) {
 		
@@ -47,7 +45,7 @@ WHERE status=$1 AND type_id=1 AND group_id != $2 AND group_id <> ALL ($3) AND gr
 	return html_build_select_box($son,$name,$selected,false);
 }
 
- function link_box ($group_id,$name,$selected='xzxzxz') {
+function link_box ($group_id,$name,$selected='xzxzxz') {
 	global $link;
 	if (!$link) {
 		$link = db_query_params ('SELECT group_id,group_name,register_time FROM groups 
@@ -65,7 +63,7 @@ AND  group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE
 }
 
 
- function type_son_box () {
+function type_son_box () {
 	return "<select name='link_type' onchange=\"javascript:
 if(this.value!= 0){
 document.formson.son.disabled=false
