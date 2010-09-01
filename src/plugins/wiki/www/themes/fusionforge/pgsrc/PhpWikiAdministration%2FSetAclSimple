@@ -1,28 +1,29 @@
-Date: Tue, 31 Aug 2010 11:36:04 +0000
+Date: Tue, 31 Aug 2010 11:36:17 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: SetGlobalAccessRightsSimple 7655 2010-08-31 11:37:18Z vargenau $
+X-Rcs-Id: $Id: PhpWikiAdministration%2FSetAclSimple 7656 2010-08-31 11:42:09Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=SetGlobalAccessRightsSimple;
+  pagename=PhpWikiAdministration%2FSetAclSimple;
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-This action page will allow you to set the default access rights for wiki pages.
-Pages without individual access rights will use these default access rights.
+For more complex Access Rights modifications, see **[[phpwiki:?action=setacl|SetAcl]]**.
 
 ----
 
-//Liberal Access Rights// means //Everyone can edit//.
+//Liberal Access Rights// means //Everyone can edit//, even if not member of the project.
 
 view:_EVERY; edit:_EVERY; create:_EVERY; list:_EVERY; remove:_ADMIN,_OWNER; purge:_ADMIN,_OWNER; dump:_ADMIN,_OWNER; change:_ADMIN,_OWNER'
 
 
-//Restrictive Access Rights// means //Only logged users can see the page//.
+//Restrictive Access Rights// means //Only project members can see the page//.
 
 view:_AUTHENTICATED,-_EVERY; edit:_AUTHENTICATED,-_EVERY; create:_AUTHENTICATED,-_EVERY; list:_AUTHENTICATED,-_EVERY; remove:_ADMIN,_OWNER; purge:_ADMIN,_OWNER; dump:_ADMIN,_OWNER; change:_ADMIN,_OWNER
 
-<<WikiAdminSetAclSimple s=. info=pagename>>
+----
+
+<<WikiAdminSetAclSimple>>
 
 ----
 [[CategoryActionPage]]

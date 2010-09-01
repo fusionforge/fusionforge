@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: RatingsUser.php 7417 2010-05-19 12:57:42Z vargenau $');
+// rcs_id('$Id: RatingsUser.php 7659 2010-08-31 14:55:29Z vargenau $');
 /* Copyright (C) 2004 Dan Frankowski
  * Copyright (C) 2010 Roger Guignard, Alcatel-Lucent
  *
@@ -363,7 +363,7 @@ class RatingsUser {
 
             while($rating = $rating_iter->next())
             {
-                if (defined('GFORGE') and GFORGE) {
+                if (defined('FUSIONFORGE') and FUSIONFORGE) {
                     $rating['pagename'] = preg_replace('/^'.PAGE_PREFIX.'/', '', $rating['pagename']);
                 }
                 $this->_num_ratings++;

@@ -1,6 +1,6 @@
 Date: Wed, 19 May 2010 18:15:54 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: Help%2FRecentChangesPlugin 7419 2010-05-19 16:49:33Z vargenau $
+X-Rcs-Id: $Id: Help%2FRecentChangesPlugin 7666 2010-08-31 16:02:45Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRecentChangesPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -78,7 +78,7 @@ modifications in the wiki.
 |-
 | **historylinks**
 | Show history links
-| false (true for Monobook and Gforge)
+| false (true for Monobook and FusionForge)
 |-
 | **caption**
 | Custom caption

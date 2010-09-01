@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: WikiTheme.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // rcs_id('$Id: WikiTheme.php 7666 2010-08-31 16:02:45Z vargenau $');
 /* Copyright (C) 2002,2004,2005,2006,2008,2009,2010 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
@@ -223,8 +223,8 @@ class WikiTheme {
             return;
         }
         $this->addMoreHeaders(JavaScript('',array('src' => $this->_findData("wikicommon.js"))));
-        if (!GFORGE) {
-            // Gforge already loads this
+        if (!FUSIONFORGE) {
+            // FusionForge already loads this
             $this->addMoreHeaders(JavaScript('',array('src' => $this->_findData("sortable.js"))));
         }
         // by pixels

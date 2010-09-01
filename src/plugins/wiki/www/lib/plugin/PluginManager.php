@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PluginManager.php 7417 2010-05-19 12:57:42Z vargenau $');
+// rcs_id('$Id: PluginManager.php 7659 2010-08-31 14:55:29Z vargenau $');
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -120,7 +120,7 @@ extends WikiPlugin
             // make a link if an actionpage exists
             $pluginNamelink = $pluginName;
             $pluginDocPageName = _("Help")."/" . $pluginName . "Plugin";
-            if (defined('GFORGE') and GFORGE) {
+            if (defined('FUSIONFORGE') and FUSIONFORGE) {
                 $pluginDocPageName = _("Help").":" . $pluginName . "Plugin";
             }
 
@@ -148,7 +148,7 @@ extends WikiPlugin
                     $pluginDocPageNamelink = WikiLink($pluginDocPageName,'if_known');
             }
 
-            if (defined('GFORGE') and GFORGE) {
+            if (defined('FUSIONFORGE') and FUSIONFORGE) {
                 $pluginDocPageNamelink = WikiLink($pluginDocPageName, 'known');
             }
 

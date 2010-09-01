@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: info.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// rcs_id('$Id: info.tmpl 7651 2010-08-24 14:24:17Z vargenau $');
 ?>
 <?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
@@ -140,7 +140,7 @@ if ($type == 'inherited') {
   </tr>
   <tr>
     <td align="right" valign="top" class="pageinfo">ACL</td>
-    <td><?php echo $perm->asAclGroupLines() ?></td>
+    <td><?php echo $perm->asAclLines() ?></td>
   </tr>
 <?php } ?>
 

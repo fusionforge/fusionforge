@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: upgrade.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: upgrade.php 7664 2010-08-31 15:42:34Z vargenau $');
 /*
  * Copyright 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -146,7 +146,7 @@ class Upgrade {
 
     // see loadsave.php for saving new pages.
     function CheckPgsrcUpdate() {
-        // Check some theme specific pgsrc files (blog, wikilens, gforge, custom).
+        // Check some theme specific pgsrc files (blog, wikilens, fusionforge, custom).
         // We check theme specific pgsrc first in case the page is present in both
         // theme specific and global pgsrc
         global $WikiTheme;

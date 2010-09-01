@@ -1,5 +1,5 @@
 /**
- * $Id: gforge-print.css 7312 2010-03-31 09:49:47Z vargenau $
+ * $Id: fusionforge-print.css 7662 2010-08-31 15:12:14Z vargenau $
  *
  * Copyright (C) 2008 Alcatel-Lucent
  *
@@ -63,7 +63,7 @@ a.named-interwiki img { display: none; }
 a.namedurl img { display: none; }
 
 /* Do not print "none" sorting icon */
-img[src="/wiki/themes/gforge/buttons/no_order.png"] { display: none; }
+img[src="/wiki/themes/fusionforge/buttons/no_order.png"] { display: none; }
 
 /**
  * Table of content

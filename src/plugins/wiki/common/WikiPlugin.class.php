@@ -185,11 +185,11 @@ class GforgeWikiPlugin extends Plugin {
 		} elseif ($hookname == 'cssfile') {
 			if (strncmp(preg_replace('/^\/+/', '/', $_SERVER['REQUEST_URI']), '/wiki/', 6) == 0) {
 				echo '<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
-				echo '<link rel="stylesheet" type="text/css" href="/wiki/themes/gforge/gforge.css" />';
-				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/gforge/gforge-fullscreen.css" media="screen" title="Fullscreen" />';
-				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/gforge/gforge-autonumbering.css" title="Autonumbering" />';
-				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/gforge/gforge-rereading.css" title="Rereading Mode" />';
-				echo "\n".'<link rel="stylesheet" type="text/css" href="/wiki/themes/gforge/gforge-print.css" media="print" />';
+				echo '<link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge.css" />';
+				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
+				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
+				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-rereading.css" title="Rereading Mode" />';
+				echo "\n".'<link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-print.css" media="print" />';
 				echo "\n".'<base href="'.PHPWIKI_BASE_URL.'" />';
 				echo "\n";
 			}

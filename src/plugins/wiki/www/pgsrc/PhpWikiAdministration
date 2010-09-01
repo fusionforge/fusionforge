@@ -1,6 +1,6 @@
-Date: Fri, 13 Aug 2010 15:31:59 +0000
+Date: Tue, 31 Aug 2010 11:36:04 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: PhpWikiAdministration 7644 2010-08-13 13:34:26Z vargenau $
+X-Rcs-Id: $Id: PhpWikiAdministration 7654 2010-08-31 09:41:22Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
@@ -24,6 +24,8 @@ or call the available ~WikiAdmin actions directly:
 
 == Global Access Rights ==
 
+These action pages will allow you to set the default access rights for wiki pages.
+Pages without individual access rights will use these default access rights.
 * [[SetGlobalAccessRightsSimple]]
 * [[SetGlobalAccessRights]]
 

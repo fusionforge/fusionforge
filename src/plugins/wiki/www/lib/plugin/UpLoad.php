@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: UpLoad.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: UpLoad.php 7659 2010-08-31 14:55:29Z vargenau $');
 /*
  * Copyright 2003,2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -174,7 +174,7 @@ ws[cfh]");
             // Make sure that the user is logged in.
             $user = $request->getUser();
             if (!$user->isAuthenticated()) {
-                if (defined('GFORGE') and GFORGE) {
+                if (defined('FUSIONFORGE') and FUSIONFORGE) {
                     $message->pushContent(HTML::div(array('class' => 'error'),
                                             HTML::p(_("You cannot upload files.")),
                                             HTML::ul(

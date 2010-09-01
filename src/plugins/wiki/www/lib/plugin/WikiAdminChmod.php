@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminChmod.php 7448 2010-05-31 12:01:38Z vargenau $');
+// rcs_id('$Id: WikiAdminChmod.php 7647 2010-08-23 15:10:10Z vargenau $');
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -187,16 +187,6 @@ extends WikiPlugin_WikiAdminSelect
         return $header;
     }
 }
-
-// conflicts with WikiAdminSetAcl
-class _PageList_Column_chmod_perm extends _PageList_Column {
-    function _getValue ($page_handle, &$revision_handle) {
-        $perm_array = pagePermissions($page_handle->_pagename);
-        return pagePermissionsSimpleFormat($perm_array,
-                                           $page_handle->get('author'),
-                                           $page_handle->get('group'));
-    }
-};
 
 // Local Variables:
 // mode: php

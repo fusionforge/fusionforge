@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: SemanticWeb.php 7641 2010-08-11 13:00:46Z vargenau $');
+<?php // rcs_id('$Id: SemanticWeb.php 7663 2010-08-31 15:23:17Z vargenau $');
 /**
  * What to do on ?format=rdf  What to do on ?format=owl
  *
@@ -77,7 +77,7 @@
  *   http://phpwiki.org/SemanticWeb,
  *   http://en.wikipedia.org/wiki/Knowledge_representation
  *   http://www.ontoweb.org/
- *   http://www.semwebcentral.org/ (OWL on top of GForge)
+ *   http://www.semwebcentral.org/ (OWL on top of FusionForge)
  *
  *
  * Author: Reini Urban <rurban@x-ray.at>

@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-//rcs_id('$Id: WikiUserNew.php 7506 2010-06-09 10:06:37Z vargenau $');
+//rcs_id('$Id: WikiUserNew.php 7666 2010-08-31 16:02:45Z vargenau $');
 /* Copyright (C) 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
 * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
 * Copyright (C) 2009-2010 Roger Guignard, Alcatel-Lucent
@@ -563,7 +563,7 @@ class _WikiUser
     function isValidName ($userid = false) {
         if (!$userid) $userid = $this->_userid;
         if (!$userid) return false;
-        if (GFORGE) {
+        if (FUSIONFORGE) {
             return true;
         }
         return preg_match("/^[\-\w\.@ ]+$/U", $userid) and strlen($userid) < 32;
@@ -1775,8 +1775,8 @@ class _UserPreference_email
 extends _UserPreference
 {
     function get($name) {
-        // get email address from Gforge
-        if (GFORGE && session_loggedin()) {
+        // get e-mail address from FusionForge
+        if (FUSIONFORGE && session_loggedin()) {
             $user = session_get_user();
             return $user->getEmail();
         } else {
@@ -1785,8 +1785,8 @@ extends _UserPreference
     }
 
     function sanify($value) {
-        // email address is already checked by Gforge
-        if (GFORGE) return $value;
+        // e-mail address is already checked by FusionForge
+        if (FUSIONFORGE) return $value;
         // check for valid email address
         if ($this->get('email') == $value and $this->getraw('emailVerified'))
             return $value;
@@ -1807,8 +1807,8 @@ extends _UserPreference
      * For true verification (value = 2), we'd need a mailserver hook.
      */
     function update($value) {
-        // email address is already checked by Gforge
-        if (GFORGE) return $value;
+        // e-mail address is already checked by FusionForge
+        if (FUSIONFORGE) return $value;
     	if (!empty($this->_init)) return;
         $verified = $this->getraw('emailVerified');
         // hack!
@@ -1982,9 +1982,9 @@ class UserPreferences
                     );
 
         // This should be probably be done with $customUserPreferenceColumns
-        // For now, we use GFORGE define
-        if (GFORGE) {
-            $gforgeprefs = array(
+        // For now, we use FUSIONFORGE define
+        if (FUSIONFORGE) {
+            $fusionforgeprefs = array(
                     'pageTrail'     => new _UserPreference_bool(),
                     'diffMenuItem' => new _UserPreference_bool(),
                     'pageInfoMenuItem' => new _UserPreference_bool(),
@@ -2002,7 +2002,7 @@ class UserPreferences
                     'likePagesMenuItem' => new _UserPreference_bool(),
                     'specialPagesMenuItem' => new _UserPreference_bool(),
                     );
-            $this->_prefs = array_merge($this->_prefs, $gforgeprefs);
+            $this->_prefs = array_merge($this->_prefs, $fusionforgeprefs);
         }
 
         // add custom theme-specific pref types:
@@ -2161,7 +2161,7 @@ class UserPreferences
             }
         }
 
-        if (GFORGE) {
+        if (FUSIONFORGE) {
             // Merge current notifyPages with notifyPagesAll
             // notifyPages are pages to notify in the current project
             // while $notifyPagesAll is used to store all the monitored pages.
@@ -2210,7 +2210,7 @@ class UserPreferences
             }
         }
         
-        if (GFORGE) {
+        if (FUSIONFORGE) {
             // Restore notifyPages from notifyPagesAll
             // notifyPages are pages to notify in the current project
             // while $notifyPagesAll is used to store all the monitored pages.

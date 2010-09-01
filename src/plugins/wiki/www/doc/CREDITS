@@ -23,8 +23,8 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 ! Developers
 
 ;[ Marc-Etienne Vargenau | mailto:vargenau@users.sourceforge.net ] :
-;: Chief of gforge integration, WikiCreole integration, 
-;: html conformity, documentation, ...
+;: Chief of FusionForge integration, WikiCreole integration, 
+;: HTML conformity, documentation, ...
 
 ;Sabri Labbenes
 ;: Wikiwyg
@@ -217,7 +217,7 @@ Dietrich Ayala (NuSphere Corporation) for nusoap
 Michael Heilemann (Kubrick css)
 Gabriel Wicke (MonoBook layout, CSS and js)
 Chris Snyder (RawHtml safe mode)
-Martin Langhoff <martin@catalyst.net.nz> (gforge integration)
+Martin Langhoff <martin@catalyst.net.nz> (Gforge integration)
 Ry4an Brase (IRC gateway)
 Sara von Mosch (Word to wiki converter)
 </pre>
@@ -230,4 +230,4 @@ Sara von Mosch (Word to wiki converter)
 * Grant Morgan http://c2.com/cgi-bin/wiki?GrantMorgan,
 * and especially Clifford A. Adams: http://c2.com/cgi-bin/wiki?CliffordAdams
 
- $Id: CREDITS 7556 2010-06-23 13:13:12Z rurban $
+ $Id: CREDITS 7664 2010-08-31 15:42:34Z vargenau $

@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: GForge.php 7640 2010-08-11 12:33:25Z vargenau $');
+// rcs_id('$Id: FusionForge.php 7663 2010-08-31 15:23:17Z vargenau $');
 /*
  * Copyright (C) 2006 Alain Peyrat
  *
@@ -20,19 +20,19 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/** Call the gforge functions to get the username
+/** Call the FusionForge functions to get the username
  *
  */
-class _GForgePassUser extends _PassUser {
+class _FusionForgePassUser extends _PassUser {
 
     var $_is_external = 0;
 
-    function _GForgePassUser($UserName='',$prefs=false) {
+    function _FusionForgePassUser($UserName='',$prefs=false) {
         if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
            _PassUser::_PassUser($UserName);
         if ($UserName) $this->_userid = $UserName;
-        $this->_authmethod = 'GForge';
+        $this->_authmethod = 'FusionForge';
 
         // Is this double check really needed?
         // It is not expensive so we keep it for now.
@@ -45,7 +45,7 @@ class _GForgePassUser extends _PassUser {
     function userExists() {
             global $group_id;
 
-        // Mapping (phpWiki vs GForge) performed is:
+        // Mapping (PhpWiki vs FusionForge) performed is:
         //     ANON  for non logged or non member
         //     USER  for member of the project.
         //     ADMIN for member having admin rights

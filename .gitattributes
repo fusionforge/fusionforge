@@ -2093,7 +2093,7 @@ src/plugins/wiki/www/lib/WikiUser/EMailConfirm.php -text
 src/plugins/wiki/www/lib/WikiUser/Facebook.php -text
 src/plugins/wiki/www/lib/WikiUser/File.php -text
 src/plugins/wiki/www/lib/WikiUser/Forbidden.php -text
-src/plugins/wiki/www/lib/WikiUser/GForge.php -text
+src/plugins/wiki/www/lib/WikiUser/FusionForge.php -text
 src/plugins/wiki/www/lib/WikiUser/HttpAuth.php -text
 src/plugins/wiki/www/lib/WikiUser/HttpAuthUpper.php -text
 src/plugins/wiki/www/lib/WikiUser/IMAP.php -text
@@ -2695,6 +2695,7 @@ src/plugins/wiki/www/locale/zh/pgsrc/WikiWikiWeb -text
 src/plugins/wiki/www/passencrypt.php -text
 src/plugins/wiki/www/pgsrc/.htaccess -text
 src/plugins/wiki/www/pgsrc/AllPages -text
+src/plugins/wiki/www/pgsrc/AllPagesByAcl -text
 src/plugins/wiki/www/pgsrc/AllPagesCreatedByMe -text
 src/plugins/wiki/www/pgsrc/AllPagesLastEditedByMe -text
 src/plugins/wiki/www/pgsrc/AllPagesOwnedByMe -text
@@ -3711,71 +3712,73 @@ src/plugins/wiki/www/themes/default/toolbar.js -text
 src/plugins/wiki/www/themes/default/wikicommon-min.js -text
 src/plugins/wiki/www/themes/default/wikicommon.js -text
 src/plugins/wiki/www/themes/default/yuicompressor-2.4.2.jar -text
-src/plugins/wiki/www/themes/gforge/Makefile -text
-src/plugins/wiki/www/themes/gforge/buttons/asc_order.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/buttons/desc_order.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/buttons/no_order.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/gforge-autonumbering-min.css -text
-src/plugins/wiki/www/themes/gforge/gforge-autonumbering.css -text
-src/plugins/wiki/www/themes/gforge/gforge-fullscreen-min.css -text
-src/plugins/wiki/www/themes/gforge/gforge-fullscreen.css -text
-src/plugins/wiki/www/themes/gforge/gforge-min.css -text
-src/plugins/wiki/www/themes/gforge/gforge-print-min.css -text
-src/plugins/wiki/www/themes/gforge/gforge-print.css -text
-src/plugins/wiki/www/themes/gforge/gforge-rereading-min.css -text
-src/plugins/wiki/www/themes/gforge/gforge-rereading.css -text
-src/plugins/wiki/www/themes/gforge/gforge.css -text
-src/plugins/wiki/www/themes/gforge/images/RateItAction.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarCancel.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarCancelN.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarNk0.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarNk1.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarOk0.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarOk1.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarRk0.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarRk1.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarRmk0.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarRmk1.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarRpk0.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/RateItBStarRpk1.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/cellpic1.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/folderArrowClosed.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/folderArrowLoading.gif -text svneol=unset#image/gif
-src/plugins/wiki/www/themes/gforge/images/folderArrowOpen.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/http.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/https.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/interwiki.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/images/spacer.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/gforge/interwiki.map -text
-src/plugins/wiki/www/themes/gforge/pgsrc/CategoryWiki%20templates -text
-src/plugins/wiki/www/themes/gforge/pgsrc/CategoryWiki%20user -text
-src/plugins/wiki/www/themes/gforge/pgsrc/ExternalPages -text
-src/plugins/wiki/www/themes/gforge/pgsrc/FindPage -text
-src/plugins/wiki/www/themes/gforge/pgsrc/HomePage -text
-src/plugins/wiki/www/themes/gforge/pgsrc/InterWikiMap -text
-src/plugins/wiki/www/themes/gforge/pgsrc/PhpWikiAdministration -text
-src/plugins/wiki/www/themes/gforge/pgsrc/SpecialPages -text
-src/plugins/wiki/www/themes/gforge/pgsrc/TextFormattingRules -text
-src/plugins/wiki/www/themes/gforge/pgsrc/UpLoad -text
-src/plugins/wiki/www/themes/gforge/pgsrc/colorbox -text
-src/plugins/wiki/www/themes/gforge/pgsrc/titlebar -text
-src/plugins/wiki/www/themes/gforge/templates/actionbar.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/blogform.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/body.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/bottom.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/browse-footer.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/browse.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/debug.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/editpage.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/html.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/login.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/navbar.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/pagelink.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/ratings.tmpl -text
-src/plugins/wiki/www/themes/gforge/templates/userprefs.tmpl -text
-src/plugins/wiki/www/themes/gforge/themeinfo.php -text
-src/plugins/wiki/www/themes/gforge/wikilens-min.js -text
-src/plugins/wiki/www/themes/gforge/wikilens.js -text
+src/plugins/wiki/www/themes/fusionforge/Makefile -text
+src/plugins/wiki/www/themes/fusionforge/buttons/asc_order.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/buttons/desc_order.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/buttons/no_order.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/fusionforge-autonumbering-min.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-autonumbering.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-fullscreen-min.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-fullscreen.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-min.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-print-min.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-print.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-rereading-min.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge-rereading.css -text
+src/plugins/wiki/www/themes/fusionforge/fusionforge.css -text
+src/plugins/wiki/www/themes/fusionforge/images/RateItAction.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarCancel.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarCancelN.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarNk0.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarNk1.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarOk0.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarOk1.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarRk0.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarRk1.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarRmk0.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarRmk1.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarRpk0.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/RateItBStarRpk1.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/cellpic1.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/folderArrowClosed.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/folderArrowLoading.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/fusionforge/images/folderArrowOpen.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/http.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/https.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/interwiki.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/images/spacer.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/fusionforge/interwiki.map -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/CategoryWiki%20templates -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/CategoryWiki%20user -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/ExternalPages -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/FindPage -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/HomePage -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/InterWikiMap -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/PhpWikiAdministration -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/PhpWikiAdministration%2FSetAclSimple -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/SetGlobalAccessRightsSimple -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/SpecialPages -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/TextFormattingRules -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/UpLoad -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/colorbox -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/titlebar -text
+src/plugins/wiki/www/themes/fusionforge/templates/actionbar.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/blogform.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/body.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/bottom.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/browse-footer.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/browse.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/debug.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/editpage.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/html.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/login.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/navbar.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/pagelink.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/ratings.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/userprefs.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/themeinfo.php -text
+src/plugins/wiki/www/themes/fusionforge/wikilens-min.js -text
+src/plugins/wiki/www/themes/fusionforge/wikilens.js -text
 src/plugins/wiki/www/themes/shamino_com/Makefile -text
 src/plugins/wiki/www/themes/shamino_com/shamino_com-min.css -text
 src/plugins/wiki/www/themes/shamino_com/shamino_com.css -text

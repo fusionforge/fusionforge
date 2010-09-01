@@ -11,7 +11,6 @@
 ** in MonoBook, IEFixes.js cannot be minimized, yuicompressor-2.4.2 gives syntax errors
 * plugin Video does not work
 
-
 short-term TODO:
 * rename should check existing subpages and rename these also.
 * Sidebar: merge AVL theme (internal MonoBook derivate with customizable 
@@ -161,7 +160,7 @@ already done lately:
 
     * change remove_page in WikiDb API, so that RecentChanges displays it.
       (just purge all revisions?)
-    * rename global $Theme to $WikiTheme (gforge nameclash) (100%)
+    * rename global $Theme to $WikiTheme (Gforge nameclash) (100%)
 
 1.4.0 Goals:
 

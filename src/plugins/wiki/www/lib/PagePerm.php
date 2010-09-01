@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PagePerm.php 7634 2010-08-09 15:30:20Z vargenau $');
+// rcs_id('$Id: PagePerm.php 7659 2010-08-31 14:55:29Z vargenau $');
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -236,7 +236,7 @@ function _requiredAuthorityForPagename($access, $pagename) {
     $page = $request->getPage($pagename);
 
     // Exceptions:
-    if (GFORGE) {
+    if (FUSIONFORGE) {
     	if ($pagename != '.' && isset($request->_user->_is_external) && $request->_user->_is_external && ! $page->get('external')) {
     		$permcache[$pagename][$access] = 0;
     		return 0;
@@ -702,32 +702,6 @@ class PagePermission {
         }
         if (substr($s,-2) == '; ')
             $s = substr($s,0,-2);
-        return $s;
-    }
-
-    // Print ACL as group followed by actions allowed for the group
-    function asAclGroupLines() {
-
-        $s = '';
-        $perm =& $this->perm;
-        $actions = array("view", "edit", "create", "list", "remove", "purge", "dump", "change");
-        $groups = array(ACL_EVERY, ACL_ANONYMOUS, ACL_BOGOUSER, ACL_HASHOMEPAGE, ACL_SIGNED, ACL_AUTHENTICATED, ACL_ADMIN, ACL_OWNER, ACL_CREATOR);
-
-        foreach ($groups as $group) {
-            $none = true;
-            foreach ($actions as $action) {
-                if (isset($perm[$action][$group])) {
-                    if ($none) {
-                        $none = false;
-                        $s .= "$group:";
-                    }
-                    $s .= (($perm[$action][$group] ? " " : " -") . $action);
-                }
-            }
-            if (!($none)) {
-                $s .= "; ";
-            }
-        }
         return $s;
     }
 

@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: MailNotify.php 7566 2010-06-23 19:43:46Z rurban $');
+// rcs_id('$Id: MailNotify.php 7666 2010-08-31 16:02:45Z vargenau $');
 /* Copyright (C) 2006-2007,2009 Reini Urban
  * Copyright (C) 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -61,7 +61,7 @@ class MailNotify {
 
     function fromId() {
         global $request;
-        if (GFORGE) {
+        if (FUSIONFORGE) {
             return $request->_user->getId();
         } else {
             return $request->_user->getId() . '@' .  $request->get('REMOTE_HOST');
@@ -72,7 +72,7 @@ class MailNotify {
         global $request;
 
         // Disable verification of emails for corporate env.
-        if (GFORGE) {
+        if (FUSIONFORGE) {
             $doverify = false;
         }
 
@@ -187,8 +187,8 @@ class MailNotify {
         $encoded_subject = $this->subject_encode($subject);
         $emails = $this->emails;
         $from = $this->from;
-        // Do not send if modification is from Gforge admin
-        if (GFORGE and $from == ADMIN_USER) {
+        // Do not send if modification is from FusionForge admin
+        if (FUSIONFORGE and $from == ADMIN_USER) {
             return;
         }
         if (!$notice) $notice = _("PageChange Notification of %s");

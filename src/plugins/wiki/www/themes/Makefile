@@ -1,4 +1,4 @@
-# $Id: Makefile 7353 2010-04-27 02:12:12Z vargenau $
+# $Id: Makefile 7664 2010-08-31 15:42:34Z vargenau $
 #
 # themes/Makefile
 #
@@ -7,7 +7,7 @@
 
 .PHONY: all css js
 
-THEMES = default MonoBook wikilens Sidebar SpaceWiki blog MacOSX gforge \
+THEMES = default MonoBook wikilens Sidebar SpaceWiki blog MacOSX fusionforge \
 	Portland shamino_com Crao Wordpress smaller Hawaiian
 
 # http://developer.yahoo.com/yui/compressor/

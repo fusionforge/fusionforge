@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: g 7645 2010-08-13 14:22:15Z vargenau $
+<?php // -*-php-*- $Id: g 7666 2010-08-31 16:02:45Z vargenau $
 
 /*
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -66,17 +66,17 @@ if (!$group_id || !$project) {
     define('VIRTUAL_PATH', '/wiki/g/'.$group_name);
     define('PAGE_PREFIX', '_g'.$group_id.'_');
 
-    define('THEME', 'gforge');
+    define('THEME', 'fusionforge');
 
-    // For Gforge, we create some specific pages, located in the theme
+    // For FusionForge, we create some specific pages, located in the theme
     // except for project "help"
     if ($group_name == "help") {
         define('WIKI_PGSRC', 'pgsrc');
     } else {
-        define('WIKI_PGSRC', 'themes/gforge/pgsrc');
+        define('WIKI_PGSRC', 'themes/fusionforge/pgsrc');
     }
 
-    define('GFORGE', true);
+    define('FUSIONFORGE', true);
 
     define('PATH_INFO_PREFIX', '/'.$group_name . '/');
     define('USE_PATH_INFO', true);
@@ -102,7 +102,7 @@ if (!$group_id || !$project) {
     // Get the maximum upload filesize from PHP config
     define('MAX_UPLOAD_SIZE', octets(ini_get('upload_max_filesize')));
 
-    // Disable access log (already in apache & gforge).
+    // Disable access log (already in Apache & FusionForge).
     define('ACCESS_LOG_SQL', 0);
 
     define('DEBUG', ($sys_install_type != 'production'));
@@ -115,7 +115,7 @@ if (!$group_id || !$project) {
     // Disable VACUUM (they are performed every night)
     define('DATABASE_OPTIMISE_FREQUENCY', 0);
 
-    // TBD: the name should be taken from Gforge
+    // TBD: the name should be taken from FusionForge
     // define('ADMIN_USER', 'ACOS Forge Administrator');
     define('ADMIN_USER', 'The PhpWiki programming team');
     // Dummy value
@@ -160,9 +160,9 @@ if (!$group_id || !$project) {
     // Do not allow fake user
     define('ALLOW_BOGO_LOGIN', false);
 
-    // A dedicated auth has been created to get auth from GForge
-    $USER_AUTH_ORDER = array("GForge");
-    define('USER_AUTH_ORDER', 'GForge');
+    // A dedicated auth has been created to get auth from FusionForge
+    $USER_AUTH_ORDER = array("FusionForge");
+    define('USER_AUTH_ORDER', 'FusionForge');
     define('USER_AUTH_POLICY', 'strict');
 
     define('EXTERNAL_LINK_TARGET', '_top');
@@ -171,7 +171,7 @@ if (!$group_id || !$project) {
     $LANG='en'; $LC_ALL='en_US';
 
     // We use a local interwiki map file
-    define('INTERWIKI_MAP_FILE', 'themes/gforge/interwiki.map');
+    define('INTERWIKI_MAP_FILE', 'themes/fusionforge/interwiki.map');
 
     define('DEFAULT_WIKI_PAGES', "");
 

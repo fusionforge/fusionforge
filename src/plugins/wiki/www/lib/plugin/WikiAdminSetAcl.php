@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSetAcl.php 7637 2010-08-10 12:30:47Z vargenau $');
+// rcs_id('$Id: WikiAdminSetAcl.php 7651 2010-08-24 14:24:17Z vargenau $');
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -95,9 +95,9 @@ extends WikiPlugin_WikiAdminSelect
                     $result->pushContent(HTML::p(fmt("ACL changed for page '%s'",
                                                      $pagename)));
                     $result->pushContent(HTML::p(fmt("from '%s'",
-                                                     $oldperm ? $oldperm->asAclGroupLines() : "None")));
+                                                     $oldperm ? $oldperm->asAclLines() : "None")));
                     $result->pushContent(HTML::p(fmt("to '%s'.",
-                                                     $perm->asAclGroupLines())));
+                                                     $perm->asAclLines())));
 
                     // Create new revision so that ACL change appears in history.
                     $current = $page->getCurrentRevision();
@@ -106,8 +106,8 @@ extends WikiPlugin_WikiAdminSelect
                     $text = $current->getPackedContent();
                     $meta['summary'] = sprintf(_("ACL changed for page '%s' from '%s' to '%s'."),
                                                $pagename,
-                                               $oldperm ? $oldperm->asAclGroupLines() : "None",
-                                               $perm->asAclGroupLines());
+                                               $oldperm ? $oldperm->asAclLines() : "None",
+                                               $perm->asAclLines());
                     $meta['is_minor_edit'] = 1;
                     $meta['author'] =  $request->_user->UserName();
                     unset($meta['mtime']); // force new date
@@ -242,7 +242,7 @@ extends WikiPlugin_WikiAdminSelect
         elseif ($type == 'default')
             $type = _("default page permission");
         $header->pushContent(HTML::strong(_("Type").': '), HTML::tt($type),HTML::br());
-        $header->pushContent(HTML::strong(_("ACL").': '), HTML::tt($perm->asAclGroupLines()),HTML::br());
+        $header->pushContent(HTML::strong(_("ACL").': '), HTML::tt($perm->asAclLines()),HTML::br());
 
         $header->pushContent(HTML::p(HTML::strong(_("Description").': '),
                                      _("Selected Grant checkboxes allow access, unselected checkboxes deny access."),
@@ -277,35 +277,6 @@ extends WikiPlugin_WikiAdminSelect
         return $header;
     }
 }
-
-class _PageList_Column_acl extends _PageList_Column {
-    function _getValue ($page_handle, &$revision_handle) {
-        $perm_tree = pagePermissions($page_handle->_pagename);
-
-        list($type, $perm) = pagePermissionsAcl($perm_tree[0], $perm_tree);
-        if ($type == 'inherited') {
-            $type = sprintf(_("page permission inherited from %s"), $perm_tree[1][0]);
-        } elseif ($type == 'page') {
-            $type = _("individual page permission");
-        } elseif ($type == 'default') {
-            $type = _("default page permission");
-        }
-        $result = HTML::span();
-        $result->pushContent($type);
-        $result->pushContent(HTML::br());
-        $result->pushContent($perm->asAclGroupLines());
-        return $result;
-    }
-};
-
-class _PageList_Column_perm extends _PageList_Column {
-    function _getValue ($page_handle, &$revision_handle) {
-        $perm_array = pagePermissions($page_handle->_pagename);
-        return pagePermissionsSimpleFormat($perm_array,
-                                           $page_handle->get('author'),
-                                           $page_handle->get('group'));
-    }
-};
 
 // Local Variables:
 // mode: php

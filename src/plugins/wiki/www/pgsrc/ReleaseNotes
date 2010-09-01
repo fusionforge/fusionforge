@@ -1,6 +1,6 @@
 Date: Tue,  8 Jun 2010 17:22:57 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: ReleaseNotes 7514 2010-06-10 06:35:13Z rurban $
+X-Rcs-Id: $Id: ReleaseNotes 7665 2010-08-31 15:54:37Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ReleaseNotes;
   flags=PAGE_LOCKED;
@@ -25,8 +25,8 @@ paragraphs).
 Improved dumping, pageset handling for format= with ~ActionPages.
 e.g. dump pagesets or multi-page pdf's.
 
-The Sidebar theme is now an extension of the Monobook theme (known from wikipedia), 
-the new gforge theme is to be used together with gforge (the successor of Sourceforge).
+The Sidebar theme is now an extension of the Monobook theme (known from Wikipedia), 
+the new fusionforge theme is to be used together with FusionForge (the successor of Gforge).
 
 === Fixes ===
 * fix ~PagePerm for multiple groups: not a member and undecided: check other groups
@@ -535,7 +535,7 @@ Because of SQL changes you'd need to ?action=upgrade to update for SQL.
 * brought ~WikiUser (old) uptodate
 * added owner and acl fields to dumps
 * import GOOGLE_LICENSE_KEY and FORTUNE_DIR from config.ini
-* renamed global $Theme to $~WikiTheme (gforge nameclash)
+* renamed global $Theme to $~WikiTheme (Gforge nameclash)
 * aggressive WikiDB and cache memory optimization: don't cache %content
   and _cached_html if not needed.
 * PageDump added format=backup: dump all revisions.

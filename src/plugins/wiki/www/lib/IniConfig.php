@@ -1,10 +1,10 @@
 <?php
-// rcs_id('$Id: IniConfig.php 7644 2010-08-13 13:34:26Z vargenau $');
+// rcs_id('$Id: IniConfig.php 7666 2010-08-31 16:02:45Z vargenau $');
 /**
  * A configurator intended to read its config from a PHP-style INI file,
  * instead of a PHP file.
  *
- * Pass a filename to the IniConfig() function and it will read all it's
+ * Pass a filename to the IniConfig() function and it will read all its
  * definitions from there, all by itself, and proceed to do a mass-define
  * of all valid PHPWiki config items.  In this way, we can hopefully be
  * totally backwards-compatible with the old index.php method, while still
@@ -44,7 +44,7 @@
  * - Old-style index.php => config/config.ini converter.
  *
  * - Don't use too much globals for easier integration into other projects
- *   (namespace pollution). (gforge, phpnuke, postnuke, phpBB2, carolina, ...)
+ *   (namespace pollution). (FusionForge, phpnuke, postnuke, phpBB2, carolina, ...)
  *   Use one global $phpwiki object instead which holds the cfg vars, constants
  *   and all other globals.
  *     (global $FieldSeparator, $charset, $WikiNameRegexp, $KeywordLinkRegexp;
@@ -194,7 +194,7 @@ function IniConfig($file) {
          'DISABLE_HTTP_REDIRECT',
          'PLUGIN_CACHED_USECACHE', 'PLUGIN_CACHED_FORCE_SYNCMAP',
          'BLOG_DEFAULT_EMPTY_PREFIX', 'DATABASE_PERSISTENT',
-         'GFORGE',
+         'FUSIONFORGE',
          'ENABLE_DISCUSSION_LINK', 'ENABLE_CAPTCHA',
          'ENABLE_WYSIWYG', 'WYSIWYG_DEFAULT_PAGETYPE_HTML',
          'DISABLE_MARKUP_WIKIWORD', 'ENABLE_MARKUP_COLOR', 'ENABLE_MARKUP_TEMPLATE',
@@ -620,8 +620,8 @@ function fixup_static_configs($file) {
       .'UserRatings:' // UserRatings works only in wikilens derived themes
       .'WantedPages:WatchPage:WhoIsOnline:WikiAdminSelect');
 
-    // The GFORGE theme omits them
-    if (!GFORGE) {
+    // The FUSIONFORGE theme omits them
+    if (!FUSIONFORGE) {
        // Add some some action pages depending on configuration
        if (DEBUG) {
           $ActionPages[] = 'DebugInfo';
@@ -708,8 +708,8 @@ function fixup_static_configs($file) {
     $AllAllowedPlugins[] = 'WikiPoll';
     $AllAllowedPlugins[] = 'YouTube';
 
-    // The GFORGE theme omits them
-    if (!GFORGE) {
+    // The FUSIONFORGE theme omits them
+    if (!FUSIONFORGE) {
         $AllAllowedPlugins[] = 'AddComment';
         $AllAllowedPlugins[] = 'AnalyseAccessLogSql';
         $AllAllowedPlugins[] = 'AsciiMath';
@@ -743,18 +743,19 @@ function fixup_static_configs($file) {
         $AllAllowedPlugins[] = '_WikiTranslation';
     }
 
-    // Used by SetupWiki to pull in required pages, if not translated, then in english.
+    // Used by SetupWiki to pull in required pages, if not translated, then in English.
     // Also used by _WikiTranslation. Really important are only those which return pagelists
     // or contain basic functionality.
     $AllActionPages = $ActionPages;
     $AllActionPages[] = 'AllPagesCreatedByMe';
     $AllActionPages[] = 'AllPagesLastEditedByMe';
     $AllActionPages[] = 'AllPagesOwnedByMe';
+    $AllActionPages[] = 'AllPagesByAcl';
     $AllActionPages[] = 'AllUserPages';
     $AllActionPages[] = 'FullRecentChanges';
     $AllActionPages[] = 'LeastPopular';
     $AllActionPages[] = 'LockedPages';
-    $AllActionPages[] = 'MyRatings'; // MyRatings works only in wikilens derived themes
+    $AllActionPages[] = 'MyRatings'; // MyRatings works only in wikilens-derived themes
     $AllActionPages[] = 'MyRecentEdits';
     $AllActionPages[] = 'MyRecentChanges';
     $AllActionPages[] = 'PhpWikiAdministration';
@@ -772,8 +773,8 @@ function fixup_static_configs($file) {
     $AllActionPages[] = 'SetGlobalAccessRightsSimple';
     $AllActionPages[] = 'UserContribs';
 
-    // The GFORGE theme omits them
-    if (!GFORGE) {
+    // The FUSIONFORGE theme omits them
+    if (!FUSIONFORGE) {
        // Add some some action pages depending on configuration
        if (DEBUG) {
           $AllActionPages[] = 'PhpWikiAdministration/Chmod';
@@ -781,7 +782,7 @@ function fixup_static_configs($file) {
        $AllActionPages[] = 'PhpWikiAdministration/Markup';
     }
 
-    if (GFORGE) {
+    if (FUSIONFORGE) {
        if (ENABLE_EXTERNAL_PAGES) {
           $AllAllowedPlugins[] = 'WikiAdminSetExternal';
           $AllActionPages[] = 'ExternalPages';
@@ -917,8 +918,8 @@ function fixup_dynamic_configs($file) {
     if (!defined('DEFAULT_LANGUAGE'))   // not needed anymore
         define('DEFAULT_LANGUAGE', ''); // detect from client
 
-    // Gforge hack
-    if (!GFORGE) {
+    // FusionForge hack
+    if (!FUSIONFORGE) {
         // Disable update_locale because Zend Debugger crash
         if(! extension_loaded('Zend Debugger')) {
             update_locale(isset($LANG) ? $LANG : DEFAULT_LANGUAGE);

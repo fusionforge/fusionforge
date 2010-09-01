@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WatchPage.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: WatchPage.php 7666 2010-08-31 16:02:45Z vargenau $');
 /**
  * Copyright (C) 2006 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -104,8 +104,8 @@ extends WikiPlugin
         $page = $args['page'];
         if (!$user->isAuthenticated() or empty($userid)) {
             // wrong or unauthenticated user
-            if (defined('GFORGE') and GFORGE) {
-                // No login banner for Gforge
+            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+                // No login banner for FusionForge
                 return HTML::div(array('class' => 'error'),
                                  HTML::p(_("You must sign in to watch pages.")));
             }
@@ -113,7 +113,7 @@ extends WikiPlugin
         } else {
             $pref = &$request->_prefs;
             $messages = "";
-            if (!defined('GFORGE') or !GFORGE) {
+            if (!defined('FUSIONFORGE') or !FUSIONFORGE) {
                 $email = $pref->get("email");
                 if (empty($email)) {
                     return HTML::div(

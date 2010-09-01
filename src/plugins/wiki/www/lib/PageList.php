@@ -1,5 +1,5 @@
 <?php
-//rcs_id('$Id: PageList.php 7638 2010-08-11 11:58:40Z vargenau $');
+//rcs_id('$Id: PageList.php 7659 2010-08-31 14:55:29Z vargenau $');
 /* Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -22,42 +22,8 @@
 
 /**
  * List a number of pagenames, optionally as table with various columns.
- * This library relieves some work for these plugins:
  *
- * AllPages, BackLinks, LikePages, MostPopular, TitleSearch, WikiAdmin* and more
- *
- * It also allows dynamic expansion of those plugins to include more
- * columns in their output.
- *
- * Column 'info=' arguments:
- *
- * 'pagename' _("Page Name")
- * 'mtime'    _("Last Modified")
- * 'hits'     _("Hits")
- * 'summary'  _("Last Summary")
- * 'version'  _("Version")),
- * 'author'   _("Last Author")),
- * 'locked'   _("Locked"), _("locked")
- * 'minor'    _("Minor Edit"), _("minor")
- * 'markup'   _("Markup")
- * 'size'     _("Size")
- * 'creator'  _("Creator")
- * 'owner'    _("Owner")
- * 'checkbox'  selectable checkbox at the left.
- * 'content'
- *
- * Special, custom columns: Either theme or plugin (WikiAdmin*) specific.
- * 'remove'   _("Remove")   
- * 'perm'     _("Permission Mask")
- * 'acl'      _("ACL")
- * 'renamed_pagename'   _("Rename to")
- * 'ratingwidget', ... wikilens theme specific.
- * 'custom'   See plugin/_WikiTranslation
- *
- * Symbolic 'info=' arguments:
- * 'all'       All columns except the special columns
- * 'most'      pagename, mtime, author, size, hits, ...
- * 'some'      pagename, mtime, author
+ * See pgsrc/Help%2FPageList for arguments and details
  *
  * FIXME: In this refactoring I (Jeff) have un-implemented _ctime, _cauthor, and
  * number-of-revision.  Note the _ctime and _cauthor as they were implemented
@@ -543,6 +509,35 @@ class _PageList_Column_pagename extends _PageList_Column_base {
      **/
     function _compare($colvala, $colvalb) {
         return strcmp($colvala, $colvalb);
+    }
+};
+
+class _PageList_Column_perm extends _PageList_Column {
+    function _getValue ($page_handle, &$revision_handle) {
+        $perm_array = pagePermissions($page_handle->_pagename);
+        return pagePermissionsSimpleFormat($perm_array,
+                                           $page_handle->get('author'),
+                                           $page_handle->get('group'));
+    }
+};
+
+class _PageList_Column_acl extends _PageList_Column {
+    function _getValue ($page_handle, &$revision_handle) {
+        $perm_tree = pagePermissions($page_handle->_pagename);
+
+        list($type, $perm) = pagePermissionsAcl($perm_tree[0], $perm_tree);
+        if ($type == 'inherited') {
+            $type = sprintf(_("page permission inherited from %s"), $perm_tree[1][0]);
+        } elseif ($type == 'page') {
+            $type = _("individual page permission");
+        } elseif ($type == 'default') {
+            $type = _("default page permission");
+        }
+        $result = HTML::span();
+        $result->pushContent($type);
+        $result->pushContent(HTML::br());
+        $result->pushContent($perm->asAclLines());
+        return $result;
     }
 };
 
@@ -1176,11 +1171,11 @@ class PageList {
                   // initialised by the plugin
                   'renamed_pagename'
                   => new _PageList_Column_renamed_pagename('rename', _("Rename to")),
+                  */
                   'perm'
                   => new _PageList_Column_perm('perm', _("Permission")),
                   'acl'
                   => new _PageList_Column_acl('acl', _("ACL")),
-                  */
                   'checkbox'
                   => new _PageList_Column_checkbox('p', _("All")),
                   'pagename'
@@ -1287,7 +1282,7 @@ class PageList {
                 trigger_error(sprintf("%s: Bad column", $column), E_USER_NOTICE);
             return false;
         }
-        if (!GFORGE) {
+        if (!FUSIONFORGE) {
             // FIXME: anon users might rate and see ratings also.
             // Defer this logic to the plugin.
             if ($column == 'rating' and !$GLOBALS['request']->_user->isSignedIn()) {

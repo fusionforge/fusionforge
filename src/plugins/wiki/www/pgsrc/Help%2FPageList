@@ -1,6 +1,6 @@
-Date: Tue,  1 Jun 2010 17:01:57 +0000
+Date: Tue, 24 Aug 2010 17:10:44 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: Help%2FPageList 7461 2010-06-01 15:08:17Z vargenau $
+X-Rcs-Id: $Id: Help%2FPageList 7652 2010-08-24 15:11:11Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageList;
   flags="";
@@ -54,7 +54,7 @@ It also allows dynamic expansion of those plugins to include more columns in the
 |-
 | **limit**
 | number of rows 
-| 5000
+| 50
 |-
 | **paging**
 | auto (top + bottom rows if applicable) \\ top (top only if applicable) \\ bottom (bottom only if applicable) \\ none (don't page at all)
@@ -111,11 +111,11 @@ Column 'info=' arguments:
 |= owner     | Owner
 |= checkbox  | Selectable checkbox at the left
 |= content   | Page content
+|= perm      | Permission Mask
+|= acl       | ACL
 
 Special, custom columns, either theme or plugin (~WikiAdmin*) specific:
 |= remove              | Remove
-|= perm                | Permission Mask
-|= acl                 | ACL
 |= renamed_pagename    | Rename to
 |= ratingwidget        | wikilens theme specific.
 |= custom              | See plugin/_WikiTranslation

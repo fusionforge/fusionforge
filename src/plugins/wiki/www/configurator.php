@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: configurator.php 7568 2010-06-24 14:45:19Z vargenau $
+<?php // -*-php-*- $Id: configurator.php 7664 2010-08-31 15:42:34Z vargenau $
 /*
  * Copyright 2002,2003,2005,2008-2010 $ThePhpWikiProgrammingTeam
  * Copyright 2002 Martin Geisler <gimpster@gimpster.com> 
@@ -163,7 +163,7 @@ echo '<','?xml version="1.0" encoding="utf-8"?',">\n";
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- $Id: configurator.php 7568 2010-06-24 14:45:19Z vargenau $ -->
+<!-- $Id: configurator.php 7664 2010-08-31 15:42:34Z vargenau $ -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Configuration tool for PhpWiki <?php echo $config_file ?></title>
 <style type="text/css" media="screen">
@@ -889,7 +889,7 @@ Try any of these in the given order:
 <dt>POP3</dt>
 	<dd>Authenticate against POP3_AUTH_HOST (email account)</dd>
 <dt>Session</dt>
-	<dd>Get username and level from a PHP session variable. (e.g. for gforge)</dd>
+	<dd>Get username and level from a PHP session variable. (e.g. for FusionForge)</dd>
 <dt>File</dt>
 	<dd>Store username:crypted-passwords in .htaccess like files. 
          Use Apache's htpasswd to manage this file.</dd>

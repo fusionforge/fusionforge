@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: RecentChanges.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: RecentChanges.php 7664 2010-08-31 15:42:34Z vargenau $');
 /**
  * Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -494,7 +494,7 @@ extends _RecentChanges_Formatter
             $linkorname = $this->pageLink($rev);
         }
 
-        if ((isa($WikiTheme, 'WikiTheme_MonoBook')) or (isa($WikiTheme, 'WikiTheme_gforge'))) {
+        if ((isa($WikiTheme, 'WikiTheme_MonoBook')) or (isa($WikiTheme, 'WikiTheme_fusionforge'))) {
             $line->pushContent(
                                $args['historylinks'] ? '' : $this->historyLink($rev),
                                ' . . ', $linkorname, '; ',

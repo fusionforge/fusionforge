@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: UserPreferences.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: UserPreferences.php 7659 2010-08-31 14:55:29Z vargenau $');
 /**
  * Copyright (C) 2001,2002,2003,2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -68,7 +68,7 @@ extends WikiPlugin
         $user->_request = $request;
         if (isa($request,'MockRequest'))
             return '';
-        if (defined('GFORGE') and GFORGE) {
+        if (defined('FUSIONFORGE') and FUSIONFORGE) {
             if (!($user->isAuthenticated())) {
                 return HTML::div(array('class' => 'errors'),
                                  _("Error: You are not logged in, cannot display UserPreferences."));

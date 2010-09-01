@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: CachedMarkup.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: CachedMarkup.php 7664 2010-08-31 15:42:34Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -37,13 +37,13 @@ class CacheableMarkup extends XmlContent {
 
     function pack() {
 
-        // Gforge hack
+        // FusionForge hack
         // This causes a strange bug when a comment containing
         // a single quote is entered in the Summary box:
         // - the history is wrong (user and comment missing)
         // - the table of contents plugin no longer works
         global $WikiTheme;
-        if (isa($WikiTheme, 'WikiTheme_gforge')) {
+        if (isa($WikiTheme, 'WikiTheme_fusionforge')) {
             return serialize($this);
         }
 

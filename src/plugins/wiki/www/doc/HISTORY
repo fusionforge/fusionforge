@@ -81,7 +81,7 @@ changes:
 * brought WikiUser (old) uptodate
 * added owner and acl fields to dumps
 * import GOOGLE_LICENSE_KEY and FORTUNE_DIR from config.ini
-* renamed global $Theme to $WikiTheme (gforge nameclash)
+* renamed global $Theme to $WikiTheme (Gforge nameclash)
 
 new:
 * new ENABLE_EDIT_TOOLBAR (from mediawiki), JS_SEARCHREPLACE currently broken.
@@ -596,4 +596,4 @@ URL's.
 Prior to 0.02, there were no numbered releases, and in fact there
 was only one release, so I guess that would be 0.01 :-)
 
-$Id: HISTORY 6718 2009-03-26 12:47:00Z vargenau $
+$Id: HISTORY 7665 2010-08-31 15:54:37Z vargenau $

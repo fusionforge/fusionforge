@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: RedirectTo.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: RedirectTo.php 7653 2010-08-30 10:41:28Z vargenau $');
 /*
  * Copyright 2002 $ThePhpWikiProgrammingTeam
  *
@@ -59,14 +59,14 @@ extends WikiPlugin
         $href = $args['href'];
         $page = $args['page'];
         if ($href) {
-            /*
-             * Use quotes on the href argument value, like:
-             *   <<RedirectTo href="http://funky.com/a b \" c.htm" ?>
-             *
-             * Do we want some checking on href to avoid malicious
-             * uses of the plugin? Like stripping tags or hexcode.
-             */
-            $url = preg_replace('/%\d\d/','',strip_tags($href));
+            // If URL is urlencoded, decode it.
+            if (strpos('%', $href) !== false) {
+                $href = urldecode($href);
+            }
+            $url = strip_tags($href);
+            if ($url != $href) { // URL contains tags
+                return $this->disabled(_("Illegal characters in external URL."));
+            }
             $thispage = $request->getPage();
             if (! $thispage->get('locked')) {
                 return $this->disabled(_("Redirect to an external URL is only allowed in locked pages."));

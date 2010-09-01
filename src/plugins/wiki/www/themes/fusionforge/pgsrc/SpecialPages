@@ -1,6 +1,6 @@
-Date: Thu, 15 Jul 2010 16:58:46 +0000
+Date: Tue, 24 Aug 2010 11:59:55 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: SpecialPages 7610 2010-07-15 14:59:08Z vargenau $
+X-Rcs-Id: $Id: SpecialPages 7649 2010-08-24 10:03:52Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SpecialPages;
   flags=EXTERNAL_PAGE;
@@ -21,6 +21,7 @@ Content-Transfer-Encoding: binary
 * [[AllPagesCreatedByMe]]
 * [[AllPagesOwnedByMe]]
 * [[AllPagesLastEditedByMe]]
+* [[AllPagesByAcl]]
 * [[NewPagesPerUser]]
 * [[LockedPages]]
 * [[OrphanedPages]]

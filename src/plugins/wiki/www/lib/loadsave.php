@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: loadsave.php 7641 2010-08-11 13:00:46Z vargenau $');
+// rcs_id('$Id: loadsave.php 7664 2010-08-31 15:42:34Z vargenau $');
 
 /*
  * Copyright 1999,2000,2001,2002,2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
@@ -113,7 +113,7 @@ function EndLoadDump(&$request)
     PrintXML(HTML::p(HTML::strong(_("Complete."))),
              HTML::p(fmt("Return to %s", $pagelink)));
     // Ugly hack to get valid XHTML code
-    if (isa($WikiTheme, 'WikiTheme_gforge')) {
+    if (isa($WikiTheme, 'WikiTheme_fusionforge')) {
         echo "</div>\n";
         echo "</td></tr>\n";
         echo "</table>\n";
@@ -1527,7 +1527,7 @@ function SetupWiki (&$request)
     // Ensure that all mandatory pages are loaded
     $finder = new FileFinder;
 
-    if (!GFORGE) {
+    if (!FUSIONFORGE) {
         $mandatory = explode(':','SandBox:Template/Category:Template/Talk:SpecialPages:CategoryCategory:CategoryActionPage:Help/OldTextFormattingRules:Help/TextFormattingRules:PhpWikiAdministration');
     } else if (WIKI_NAME == "help") {
         $mandatory = explode(':','SandBox:Template/Category:Template/Talk:SpecialPages:CategoryCategory:CategoryActionPage:Help/TextFormattingRules:PhpWikiAdministration');

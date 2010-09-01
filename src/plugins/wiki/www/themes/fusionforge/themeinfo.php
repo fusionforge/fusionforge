@@ -6,12 +6,12 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7665 2010-08-31 15:54:37Z vargenau $');
 
 require_once('lib/WikiTheme.php');
 require_once('themes/wikilens/themeinfo.php');
 
-class WikiTheme_gforge extends WikiTheme_Wikilens {
+class WikiTheme_fusionforge extends WikiTheme_Wikilens {
 
     function header() {
         global $HTML, $group_id, $group_public_name, $request, $project;
@@ -23,13 +23,13 @@ class WikiTheme_gforge extends WikiTheme_Wikilens {
         //group is private
         if (!$project->isPublic()) {
             //if it's a private group, you must be a member of that group
-            session_require_perm ('project_read', $group_id);
+            session_require(array('group'=>$group_id));
         }
 
         //for dead projects must be member of admin project
         if (!$project->isActive()) {
             //only SF group can view non-active, non-holding groups
-            session_require_global_perm ('forge_admin');
+            session_require(array('group'=>'1'));
         }
 
         $HTML->header(array('title'=> $group_public_name.': '.htmlspecialchars($pagename),
@@ -148,7 +148,7 @@ class WikiTheme_gforge extends WikiTheme_Wikilens {
     }
 }
 
-$WikiTheme = new WikiTheme_gforge('gforge');
+$WikiTheme = new WikiTheme_fusionforge('fusionforge');
 
 // Local Variables:
 // mode: php

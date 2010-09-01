@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: main.php 7644 2010-08-13 13:34:26Z vargenau $');
+// rcs_id('$Id: main.php 7664 2010-08-31 15:42:34Z vargenau $');
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -115,7 +115,7 @@ class WikiRequest extends Request {
                 if (isset($this->_user) and
                      ( ! isa($this->_user, WikiUserClassname())
                        or (strtolower(get_class($this->_user)) == '_passuser')
-                       or (strtolower(get_class($this->_user)) == '_gforgepassuser')))
+                       or (strtolower(get_class($this->_user)) == '_fusionforgepassuser')))
                 {
                     $this->_user = WikiUser($userid, $this->_user->_prefs);
                 }
@@ -954,7 +954,7 @@ class WikiRequest extends Request {
             // Switched auth between sessions.
             // Note: There's no way to demandload a missing class-definition
             // afterwards! Stupid php.
-            if (defined('GFORGE') and GFORGE) {
+            if (defined('FUSIONFORGE') and FUSIONFORGE) {
                 if (empty($HTTP_SERVER_VARS['PHP_AUTH_USER'])) {
                     return false;
                 }
@@ -1413,11 +1413,14 @@ function main () {
     $request->finish();
 }
 
-//$x = error_reporting();  // DEBUG: why is it 1 here? should be E_ALL
-if (defined('E_STRICT') and (E_ALL & E_STRICT)) // strict php5?
-	error_reporting(E_ALL & ~E_STRICT);         // exclude E_STRICT
-else
-	error_reporting(E_ALL); // php4
+if ((!FUSIONFORGE) || (forge_get_config('installation_environment') != 'production')) {
+    if (defined('E_STRICT') and (E_ALL & E_STRICT)) // strict php5?
+        error_reporting(E_ALL & ~E_STRICT);         // exclude E_STRICT
+    else
+        error_reporting(E_ALL); // php4
+} else {
+    error_reporting(E_ERROR);
+}
 
 // don't run the main loop for special requests (test, getimg, xmlrpc, soap, ...)
 if (!defined('PHPWIKI_NOMAIN') or !PHPWIKI_NOMAIN)

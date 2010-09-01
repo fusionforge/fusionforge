@@ -1,0 +1,1 @@
+@import url(fusionforge-autonumbering.css);#content{counter-reset:paragraph;}div.wikitext p:before{content:"{" counter(paragraph) ";}";counter-increment:paragraph;color:red;}
