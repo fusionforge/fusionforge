@@ -24,14 +24,14 @@
  */
 
 require_once('../env.inc.php');
-require_once ('include/pre.php');
-require_once ('docman/Document.class.php');
-require_once ('docman/DocumentFactory.class.php');
-require_once ('docman/DocumentGroup.class.php');
-require_once ('docman/DocumentGroupFactory.class.php');
-require_once ('docman/include/DocumentGroupHTML.class.php');
-require_once ('docman/include/utils.php');
-require_once ('include/TextSanitizer.class.php'); // to make the HTML input by the user safe to store
+require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
+require_once $gfcommon.'docman/include/DocumentGroupHTML.class.php';
+require_once $gfcommon.'docman/include/utils.php';
+require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
 /* are we using docman ? */
 if (!forge_get_config('use_docman'))
