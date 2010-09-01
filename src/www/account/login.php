@@ -124,9 +124,9 @@ if ($login && !$success) {
 echo '<p>';
 
 if ($triggered) {
-	echo '<span class="error">' ;
+	echo '<div class="warning">' ;
 	echo _('You\'ve been redirected to this login page because you have tried accessing a page that was not available to you as an anonymous user.');
-	echo '</span> ' ;
+	echo '</div> ' ;
 }
 echo _('Cookies must be enabled past this point.');
 
