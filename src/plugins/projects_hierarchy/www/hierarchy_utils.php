@@ -28,10 +28,10 @@
 		
 		$family = get_family($group_id);
 		$cond = '';
+		$skipped = array() ;
 		if($family != NULL){
 			
 			reset($family);
-			$skipped = array() ;
 			while (list($key, $val) = each($family)) {
 				$skipped[] = $val ;
 			}

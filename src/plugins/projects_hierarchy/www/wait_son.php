@@ -21,6 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require_once('../../env.inc.php');    
 require_once $gfcommon.'include/pre.php';
 
 $group_id = getIntFromRequest('group_id');
@@ -30,8 +31,7 @@ session_require_perm ('project_admin', $group_id) ;
 //update the link when the son allow the father
 db_begin();
 db_query_params ('UPDATE plugin_projects_hierarchy SET activated = true WHERE project_id  = $1 AND sub_project_id = $2',
-		 array ($group_id,
-			$sub_group_id)
+		 array ($group_id, $sub_group_id)
 	) or die(db_error());
 db_commit();
 

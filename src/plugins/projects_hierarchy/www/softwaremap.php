@@ -13,7 +13,6 @@ session_start();
 require_once('../../env.inc.php');    
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
-require_once $gfwww.'docman/include/doc_utils.php';
 
 if (!forge_get_config('use_trove')) {
 	exit_disabled();
@@ -412,8 +411,6 @@ else {
 		aff_tree($tree, 0);
 
 }
-//docman_display_documents($nested_groups,$df,$is_editor);
-docman_display_documents($nested_groups,$df,'');
 
 $HTML->footer(array());
 
