@@ -1,10 +1,10 @@
 <?php
-require_once('env.inc.php');
-require_once('pre.php');
-require_once('preplugins.php');
-require_once('plugins_utils.php');
-require_once('common/widget/WidgetLayoutManager.class.php');
-require_once('common/widget/Widget.class.php');
+require_once('../env.inc.php');
+require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/preplugins.php';
+require_once $gfcommon.'include/plugins_utils.php';
+require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
+require_once $gfcommon.'/widget/Widget.class.php';
 
 $request =& HTTPRequest::instance();
 
