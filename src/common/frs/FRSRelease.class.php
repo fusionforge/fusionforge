@@ -45,7 +45,7 @@ function &frsrelease_get_object($release_id, $data=false) {
 				$FRSRELEASE_OBJ['_'.$release_id.'_']=false;
 				return false;
 			}
-			$data =& db_fetch_array($res);
+			$data = db_fetch_array($res);
 		}
 		$FRSPackage =& frspackage_get_object($data['package_id']);
 		$FRSRELEASE_OBJ['_'.$release_id.'_']= new FRSRelease($FRSPackage,$data['release_id'],$data);
@@ -156,8 +156,8 @@ class FRSRelease extends Error {
 						user_getid(),
 						1)) ;
 		if (!$result) {
-			db_rollback();
 			$this->setError('FRSRelease::create() Error Adding Release: '.db_error());
+			db_rollback();
 			return false;
 		}
 		$this->release_id=db_insertid($result,'frs_release','release_id');
@@ -188,7 +188,7 @@ class FRSRelease extends Error {
 			$this->setError('FRSRelease::fetchData()  Invalid release_id');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}
@@ -439,15 +439,15 @@ notified in the future, please login to %7$s and click this link:
 					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			db_rollback();
 			$this->setError('FRSRelease::update() Error On Update: '.db_error());
+			db_rollback();
 			return false;
 		}
 
 		$oldfilename = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			db_rollback();
 			$this->setError("FRSRelease::update() Error Updating Release: Couldn't fetch data");
+			db_rollback();
 			return false;
 		}
 		$newfilename = $this->getFileName();
@@ -456,13 +456,13 @@ notified in the future, please login to %7$s and click this link:
 	
 		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
 			if (is_dir($newdirlocation)) {
-				db_rollback();
 				$this->setError('FRSRelease::update() Error Updating Release: Directory Already Exists');
+				db_rollback();
 				return false;	
 			} else {
 				if(!rename($olddirlocation,$newdirlocation)) {
-					db_rollback();
 					$this->setError("FRSRelease::update() Error Updating Release: Couldn't rename dir");
+					db_rollback();
 					return false;
 				}
 			}

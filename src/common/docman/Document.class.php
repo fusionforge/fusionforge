@@ -192,7 +192,7 @@ class Document extends Error {
 			$this->setError(_('Document:: Invalid docid'));
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

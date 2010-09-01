@@ -161,8 +161,8 @@ class MailingList extends Error {
 						  $description)) ;
 		
 		if (!$result) {
-			db_rollback();
 			$this->setError(sprintf(_('Error Creating %1$s'), _('Error Creating %1$s')).db_error());
+			db_rollback();
 			return false;
 		}
 			
@@ -217,7 +217,7 @@ Thank you for registering your project with %1$s.
 			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')));
 			return false;
 		}
-		$this->dataArray =& db_fetch_array($res);
+		$this->dataArray = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

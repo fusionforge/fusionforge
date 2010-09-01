@@ -44,7 +44,7 @@ function &artifactfile_get_object($artifact_file_id,$data=false) {
 				$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"]=false;
 				return false;
 			}
-			$data =& db_fetch_array($res);
+			$data = db_fetch_array($res);
 		}
 		$Artifact =& artifact_get_object($data["artifact_id"]);
 		$ARTIFACTFILE_OBJ["_".$artifact_file_id."_"]= new ArtifactFile($Artifact,$data);

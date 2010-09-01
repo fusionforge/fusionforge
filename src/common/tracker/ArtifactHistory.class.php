@@ -130,7 +130,7 @@ class ArtifactHistory extends Error {
 			$this->setError('ArtifactHistory: Invalid ArtifactHistory ID');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

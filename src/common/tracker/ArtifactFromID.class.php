@@ -41,7 +41,7 @@ class ArtifactFromID extends Error {
 				$this->setError("Invalid Artifact ID");
 				return false;
 			} else {
-				$art_arr =& db_fetch_array($res);
+				$art_arr = db_fetch_array($res);
 			}
 		} 
 

@@ -24,7 +24,7 @@ class DataAccessObject {
     * @return mixed either false if error or object DataAccessResult
     */
     function &retrieve($sql,$params) {
-        $result =& new DataAccessResult(db_query_params($sql,$params));
+        $result = new DataAccessResult(db_query_params($sql,$params));
         
         return $result;
     }

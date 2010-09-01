@@ -61,7 +61,7 @@ class ProjectTasksForUser extends Error {
 		$rows=db_numrows($result);
 		for ($i=0; $i < $rows; $i++) {
 			$project_task_id = db_result($result,$i,'project_task_id');
-			$arr =& db_fetch_array($result);
+			$arr = db_fetch_array($result);
 			$task =& projecttask_get_object($project_task_id,$arr);
 			$tasks[] =& $task;
 		}

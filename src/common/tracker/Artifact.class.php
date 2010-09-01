@@ -75,7 +75,7 @@ define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 					$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
 					return false;
 				}
-				$data =& db_fetch_array($res);
+				$data = db_fetch_array($res);
 			}
 			$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
 			$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
@@ -319,7 +319,7 @@ class Artifact extends Error {
 			$this->setError('Artifact: Invalid ArtifactID');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

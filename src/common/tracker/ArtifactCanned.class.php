@@ -133,7 +133,7 @@ class ArtifactCanned extends Error {
 			$this->setError('ArtifactCanned: Invalid ArtifactCanned ID');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

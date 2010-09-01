@@ -234,7 +234,7 @@ class ArtifactExtraField extends Error {
 			$this->setError('ArtifactExtraField: Invalid ArtifactExtraField ID');
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}
@@ -317,7 +317,7 @@ class ArtifactExtraField extends Error {
 	 *
 	 *	@return	array	types.
 	 */
-	function getAvailableTypes() {
+	static function getAvailableTypes() {
 		return array(
 			1=>_('Select Box'),
 			2=>_('Check Box'),

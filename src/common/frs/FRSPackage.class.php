@@ -58,7 +58,7 @@ function &frspackage_get_object($package_id, $data=false) {
 				$FRSPACKAGE_OBJ['_'.$package_id.'_']=false;
 				return false;
 			}
-			$data =& db_fetch_array($res);			
+			$data = db_fetch_array($res);			
 		}
 		$Group =& group_get_object($data['group_id']);
 		$FRSPACKAGE_OBJ['_'.$package_id.'_']= new FRSPackage($Group,$data['package_id'],$data);
@@ -159,8 +159,8 @@ class FRSPackage extends Error {
 						  1,
 						  $is_public)) ;
 		if (!$result) {
-			db_rollback();
 			$this->setError('FRSPackage::create() Error Adding Package: '.db_error());
+			db_rollback();
 			return false;
 		}
 		$this->package_id=db_insertid($result,'frs_package','package_id');
@@ -388,15 +388,15 @@ class FRSPackage extends Error {
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
-			db_rollback();
 			$this->setError('FRSPackage::update() Error On Update: '.db_error());
+			db_rollback();
 			return false;
 		}
 
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			db_rollback();
 			$this->setError("FRSPackage::update() Error Updating Package: Couldn't fetch data");
+			db_rollback();
 			return false;
 		}
 		$newdirname = $this->getFileName();
@@ -405,13 +405,13 @@ class FRSPackage extends Error {
 		
 		if(($olddirname!=$newdirname)){
 			if(is_dir($newdirlocation)){
-				db_rollback();
 				$this->setError('FRSPackage::update() Error Updating Package: Directory Already Exists');
+				db_rollback();
 				return false;	
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
-					db_rollback();
 					$this->setError("FRSPackage::update() Error Updating Package: Couldn't rename dir");
+					db_rollback();
 					return false;
 				}
 			}

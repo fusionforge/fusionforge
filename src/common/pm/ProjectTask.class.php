@@ -40,7 +40,7 @@ function &projecttask_get_object($project_task_id,$data=false) {
 					$PROJECTTASK_OBJ["_".$project_task_id."_"]=false;
 					return false;
 				}
-				$data =& db_fetch_array($res);
+				$data = db_fetch_array($res);
 
 			}
 			$ProjectGroup =& projectgroup_get_object($data["group_project_id"]);
@@ -226,7 +226,7 @@ class ProjectTask extends Error {
 			$this->setError('ProjectTask::fetchData() Invalid Task ID'.db_error());
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}
