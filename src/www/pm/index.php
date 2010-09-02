@@ -158,7 +158,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		}
 	}
 		
-	usort (&$pg_arr, 'project_group_comparator') ;
+	usort ($pg_arr, 'project_group_comparator') ;
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
 		if (!is_object($pg_arr[$j])) {
