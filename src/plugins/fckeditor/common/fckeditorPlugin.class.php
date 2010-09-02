@@ -1,23 +1,23 @@
 <?php
 /**
- * GForge Plugin FCKeditor Plugin Class
+ * FusionForge Plugin FCKeditor Plugin Class
  *
  * Copyright 2005 (c) Daniel A. Pérez <daniel@gforgegroup.com> , <danielperez.arg@gmail.com>
  *
- * This file is part of GForge-plugin-fckeditor
+ * This file is part of FusionForge-plugin-fckeditor
  *
- * GForge-plugin-fckeditor is free software; you can redistribute it
+ * FusionForge-plugin-fckeditor is free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
  *
- * GForge-plugin-fckeditor is distributed in the hope that it will
+ * FusionForge-plugin-fckeditor is distributed in the hope that it will
  * be useful, but WITHOUT ANY WARRANTY; without even the implied
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge-plugin-fckeditor; if not, write to the Free Software
+ * along with FusionForge-plugin-fckeditor; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  *
  */
@@ -105,7 +105,7 @@ class fckeditorPlugin extends Plugin {
 				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
 				$oFCKeditor->Width = $params['width'];
 				$oFCKeditor->Height = $params['height'];
-				$oFCKeditor->ToolbarSet = "GForge";
+				$oFCKeditor->ToolbarSet = "FusionForge";
 				$oFCKeditor->Create() ;
 				$GLOBALS['editor_was_set_up'] = true;
 			} else {

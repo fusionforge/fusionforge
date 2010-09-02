@@ -115,7 +115,7 @@ FCKConfig.ToolbarSets["Default"] = [
 	['FitWindow','ShowBlocks','-','About']		// No comma for the last row.
 ] ;
 
-FCKConfig.ToolbarSets["GForge"] = [
+FCKConfig.ToolbarSets["FusionForge"] = [
 	['Source','Preview'],
 	['Cut','Copy','Paste','PasteText','PasteWord'],
 	['Undo','Redo','-','RemoveFormat'],
