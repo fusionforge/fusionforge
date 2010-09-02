@@ -43,9 +43,9 @@
  */
 
 require_once dirname(__FILE__)."/../../env.inc.php";
-require_once $gfwww.'include/pre.php';
-require_once $sys_plugins_path.'wiki/common/WikiPlugin.class.php';
-require_once $sys_plugins_path.'wiki/common/wikiconfig.class.php';
+require_once $gfcommon.'include/pre.php';
+require_once forge_get_config('plugins_path').'wiki/common/WikiPlugin.class.php';
+require_once forge_get_config('plugins_path').'wiki/common/wikiconfig.class.php';
 
 // the header that displays for the user portion of the plugin
 function wiki_Project_Header($params) {
