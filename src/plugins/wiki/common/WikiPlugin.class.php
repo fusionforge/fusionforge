@@ -207,20 +207,19 @@ class GforgeWikiPlugin extends Plugin {
 
 					$pat = '_g'.$group_id.'_';
 					$len = strlen($pat)+1;
-					$wres = db_query_params ('SELECT plugin_wiki_page.id AS id,
-							substring(plugin_wiki_page.pagename from $1) AS pagename,
-							plugin_wiki_version.version AS version, 
-							plugin_wiki_version.mtime AS activity_date, 
+					$wres = db_query_params ("SELECT plugin_wiki_page.id AS id,
+							substring(plugin_wiki_page.pagename from $len) AS pagename,
+							plugin_wiki_version.version AS version,
+							plugin_wiki_version.mtime AS activity_date,
 							plugin_wiki_version.minor_edit AS minor_edit,
 							plugin_wiki_version.versiondata AS versiondata
-						FROM plugin_wiki_page, plugin_wiki_version 
-						WHERE plugin_wiki_page.id=plugin_wiki_version.id 
-							AND mtime BETWEEN $2 AND $3
+						FROM plugin_wiki_page, plugin_wiki_version
+						WHERE plugin_wiki_page.id=plugin_wiki_version.id
+							AND mtime BETWEEN $1 AND $2
 							AND minor_edit=0
-							AND substring(plugin_wiki_page.pagename from 0 for $1) = $4
-						ORDER BY mtime DESC',
-                                                                 array ($len,
-                                                                        $params['begin'],
+							AND substring(plugin_wiki_page.pagename from 0 for $len) = $3
+						ORDER BY mtime DESC",
+                                                                 array ($params['begin'],
                                                                         $params['end'],
                                                                         $pat));
 
