@@ -25,7 +25,7 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/timezones.php';
 
-$feedback = getStringFromRequest('feedback');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 session_require_login () ;
 
