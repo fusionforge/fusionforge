@@ -1,22 +1,21 @@
 <?php
 
 /**
- * GForge Monitored Forums Track Page
+ * FusionForge Monitored Forums Track Page
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2005 (c) - Daniel Perez
+ * http://fusionforge.org/
  *
- * @version   
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -25,10 +24,6 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-/* my monitored forums
-	by Daniel Perez - 2005
-*/
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -59,8 +54,13 @@ echo "<h1>" . _('My Monitored Forums') . "</h1>";
 //get the user monitored forums
 $result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',
 			   array ($user_id));
-if (!$result || db_numrows($result) < 1) {
-	exit_error(_('You have no monitored forums'),_('You are not monitoring any forums.').' '.db_error(), 'forums');
+if (!$result) {
+    echo '<div class="error">Database error :'.db_error().'</div>';
+    exit;
+}
+if ( db_numrows($result) < 1) {
+    echo '<div class="feedback">'._('You have no monitored forums').'</div>';
+    exit;
 }
 
 //now, i need to create a forum object per each forum that the user is monitoring
