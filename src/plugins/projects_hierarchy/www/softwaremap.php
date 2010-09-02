@@ -404,7 +404,7 @@ else {
 				reset($arbre);
 				//construction automatique de l'arbre format : (num_fils, num_pere,nom,nom_unix)
 				while (list($key2, $sons2) = each($arbre)) {
-					print "d.add(".$key2.",".$sons2.",'".$project_name[$key2][0]."','".util_make_link ("/projects/".$project_name[$key2][1] ."/") . "');\n";
+					echo "d.add('".$key2."','".$sons2."','".$project_name[$key2][0]."','".util_make_url( '/projects/'.$project_name[$key2][1] .'/', $project_name[$key2][1] ) ."');";
 				}
 				?>
 		
