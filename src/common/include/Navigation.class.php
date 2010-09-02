@@ -471,7 +471,7 @@ class Navigation extends Error {
                                 $menu['titles'][] = _('Docs');
                                 $menu['urls'][] = util_make_url ('/docman/?group_id=' . $group_id);
                                 if (forge_check_perm ('docman', $group_id, 'approve')) {
-                                        $menu['adminurls'][] = util_make_url ('/docman/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_url ('/docman/?group_id='.$group_id.'&view=admin');
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
