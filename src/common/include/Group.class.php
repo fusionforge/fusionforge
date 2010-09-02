@@ -1347,7 +1347,7 @@ class Group extends Error {
 			return false;
 		}
 		$inserted = array();
-		$tags_array = split('[;,]', $tags);
+		$tags_array = explode('[;,]', $tags);
 		foreach ($tags_array as $tag) {
 			$tag = stripslashes($tag);
 			$tag = preg_replace('/[\t\r\n]/', ' ', $tag);
