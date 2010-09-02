@@ -240,7 +240,7 @@ class GforgeWikiPlugin extends Plugin {
 						$arr['realname'] = $data['author'];
 						$arr['icon']=html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
 						$arr['title'] = 'Wiki Page '.$arr['pagename'];
-						$arr['link'] = '/wiki/g/'.$group_name.'/'.$arr['pagename'];
+						$arr['link'] = '/wiki/g/'.$group_name.'/'.urlencode($arr['pagename']);
 						$arr['description']= $arr['title'];
 						$params['results'][] = $arr;
 					}
