@@ -77,7 +77,9 @@ class GforgeWikiPlugin extends Plugin {
 				//$params['DIRS'][]='/plugins/wiki/index.php?off=true';
 			}
 							
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+			if (isset($params['toptab'])) {
+				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+			}
 		} elseif ($hookname == "groupisactivecheckbox") {
                         //Check if the group is active
 			$group = &group_get_object($group_id);
