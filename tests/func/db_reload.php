@@ -66,12 +66,14 @@ if (isset($argv[1]) && $argv[1] == '-no-restart') {
 	$opt_restart = false;
 }
 
+$forge_root = dirname(dirname(dirname(__FILE__))).'/src';
+
 if ( DB_TYPE == 'mysql') {
 	// Reload a fresh database before running this test suite.
 	system("mysqladmin -f -u".DB_USER." -p".DB_PASSWORD." drop ".DB_NAME." &>/dev/null");
 	system("mysqladmin -u".DB_USER." -p".DB_PASSWORD." create ".DB_NAME);
-	system("mysql -u".DB_USER." -p".DB_PASSWORD." ".DB_NAME." < ".dirname(dirname(__FILE__))."/src/db/gforge-struct-mysql.sql");
-	system("mysql -u".DB_USER." -p".DB_PASSWORD." ".DB_NAME." < ".dirname(dirname(__FILE__))."/src/db/gforge-data-mysql.sql");
+	system("mysql -u".DB_USER." -p".DB_PASSWORD." ".DB_NAME." < $forge_root/db/gforge-struct-mysql.sql");
+	system("mysql -u".DB_USER." -p".DB_PASSWORD." ".DB_NAME." < $forge_root/db/gforge-data-mysql.sql");
 } elseif ( DB_TYPE == 'pgsql') {
 	if (!function_exists('pg_connect')) {
 		print "ERROR: Missing pgsql on PHP to run tests on PostgreSQL.\n";
@@ -84,8 +86,8 @@ if ( DB_TYPE == 'mysql') {
 	system("service postgresql restart 2>&1 >/dev/null");
 	system("su - postgres -c 'dropdb -q ".DB_NAME."'");
 	system("su - postgres -c 'createdb -q --encoding UNICODE ".DB_NAME."'");
-	system("psql -q -U".DB_USER." ".DB_NAME." -f /opt/gforge/db/gforge.sql >> /var/log/gforge-import.log 2>&1");
-	system("php /opt/gforge/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
+	system("psql -q -U".DB_USER." ".DB_NAME." -f $forge_root/db/gforge.sql >> /var/log/gforge-import.log 2>&1");
+	system("php $forge_root/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
 } else {
 	print "Unsupported database type: ".DB_TYPE. "\n";
 	exit;
