@@ -32,7 +32,7 @@ require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML in
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
 $deleteforum = getStringFromRequest('deleteforum');
-$feedback = getStringFromRequest('feedback');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 global $HTML;
 

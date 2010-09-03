@@ -36,7 +36,7 @@ require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
 $group_id = getIntFromRequest('group_id');
-$feedback = getStringFromRequest('feedback');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 session_require_perm ('project_admin', $group_id) ;
 
 // get current information

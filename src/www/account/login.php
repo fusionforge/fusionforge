@@ -36,7 +36,7 @@ $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
 $form_loginname = getStringFromRequest('form_loginname');
 $form_pw = getStringFromRequest('form_pw');
-$feedback = getStringFromRequest('feedback');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $triggered = getIntFromRequest('triggered');
 
 //
