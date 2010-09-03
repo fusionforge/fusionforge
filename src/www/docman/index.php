@@ -39,9 +39,9 @@ if (!forge_get_config('use_docman'))
 
 /* get informations from request or $_POST */
 $group_id = getIntFromRequest('group_id');
-$feedback = getStringFromRequest('feedback');
-$error_msg = getStringFromRequest('error_msg');
-$warning_msg = getStringFromRequest('warning_msg');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
+$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
 /* validate group */
 if (!$group_id) {
