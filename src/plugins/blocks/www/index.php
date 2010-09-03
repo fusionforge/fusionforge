@@ -156,6 +156,7 @@ $pluginname = getStringFromRequest('pluginname');
 $name = getStringFromRequest('name');
 $body = getStringFromRequest('body');
 $activate = getArrayFromRequest('activate');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 $blocks_text = array(
 	'forum' => _('Forums'),
@@ -232,7 +233,7 @@ if (!$type) {
 		$blocks = getAvailableBlocks($group);
 		foreach ($blocks as $b => $help) {
 			
-			$class = ($class == 'even') ? "odd" : "even";
+			$class = (! isset($class) || $class == 'bgcolor-white') ? "bgcolor-grey" : "bgcolor-white";
 			
 			$match = '';
 			if (preg_match('/(.*) index$/', $b, $match)) {
@@ -298,8 +299,8 @@ if (!$type) {
 							array($activate[$b], $id, $b));
 				}
 		}
-		header("Location: /plugins/blocks/index.php?id=$id&type=admin&pluginname=blocks");
-		exit;
+        $msg = _('Block Saved');
+		session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
 	} elseif ($type == 'configure') {
 		$group = group_get_object($id);
 		if ( !$group) {
@@ -313,6 +314,7 @@ if (!$type) {
 		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
 		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
 			
+		$blocks = getAvailableBlocks($group);
 		$res = db_query_params('SELECT content FROM plugin_blocks WHERE group_id=$1 AND name=$2',
 				       array($id, $name));
 		$body = db_result($res,0,"content");
@@ -380,8 +382,8 @@ if (!$type) {
 					WHERE group_id=$2 AND name=$3',
 					array($body, $id, $name));
 		}
-		header("Location: /plugins/blocks/index.php?id=$id&type=admin&pluginname=blocks");
-		exit;
+        $msg = $name .' : '. _('Block configuration saved');
+		session_redirect('/plugins/blocks/index.php?id='.$id.'&type=admin&pluginname=blocks&feedback='.urlencode($msg));
 	}
 }
 	
