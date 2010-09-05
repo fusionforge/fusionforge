@@ -57,7 +57,7 @@ $config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): dirname(__FILE__).'/confi
 require_once $config;
 
 if ( !CONFIGURED ) {
-	print "File 'config.php' is not correctly configured, aborting.\n";
+	print "ERROR: File 'config.php' is not correctly configured, aborting.\n";
 	exit(1);
 }
 
@@ -66,7 +66,15 @@ if (isset($argv[1]) && $argv[1] == '-no-restart') {
 	$opt_restart = false;
 }
 
+// Search location of fusionforge main directory (gforge).
 $forge_root = dirname(dirname(dirname(__FILE__))).'/src';
+if (!file_exists($forge_root)) {
+	$forge_root = dirname(dirname(dirname(__FILE__))).'/gforge';
+	if (!file_exists($forge_root)) {
+		print "ERROR: Unable to guess location of fusionforge main directory (gforge), aborting.\n";
+		exit(1);
+	}
+}
 
 if ( DB_TYPE == 'mysql') {
 	// Reload a fresh database before running this test suite.
@@ -76,7 +84,7 @@ if ( DB_TYPE == 'mysql') {
 	system("mysql -u".DB_USER." -p".DB_PASSWORD." ".DB_NAME." < $forge_root/db/gforge-data-mysql.sql");
 } elseif ( DB_TYPE == 'pgsql') {
 	if (!function_exists('pg_connect')) {
-		print "ERROR: Missing pgsql on PHP to run tests on PostgreSQL.\n";
+		print "ERROR: Missing pgsql on PHP to run tests on PostgreSQL, aborting.\n";
 		exit;
 	}
 	// Drop & create a fresh database before running this test suite.
@@ -89,7 +97,7 @@ if ( DB_TYPE == 'mysql') {
 	system("psql -q -U".DB_USER." ".DB_NAME." -f $forge_root/db/gforge.sql >> /var/log/gforge-import.log 2>&1");
 	system("php $forge_root/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
 } else {
-	print "Unsupported database type: ".DB_TYPE. "\n";
+	print "ERROR: Unsupported database type: ".DB_TYPE.", aborting.\n";
 	exit;
 }
 
@@ -136,14 +144,14 @@ $user_id = $user->create('admin', $sitename, 'Admin', $adminPassword, $adminPass
 	$adminEmail, 1, 1, 1,'GMT','',0,$GLOBALS['sys_default_theme_id'],'', '','','','','','US',false, 'admin');
 
 if (!$user_id) {
-	print "ERROR:creating user: ".$user->getErrorMessage()."\n";
+	print "ERROR: Creating user: ".$user->getErrorMessage()."\n";
 	exit(1);
 }
 
 $user->setStatus('A');
 
 if (!$user_id) {
-	print "ERROR: Error creating admin account, no id returned";
+	print "ERROR: Error creating admin account, no id returned, aborting.\n";
 } else {
 	// Register the user in master group to get full admin rights.
 	$res = db_query_params ('INSERT INTO user_group (user_id,group_id,admin_flags, role_id) VALUES ($1,1,$2,17)',
