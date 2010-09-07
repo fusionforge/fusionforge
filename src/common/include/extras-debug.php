@@ -48,7 +48,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 			break;
 	}
 
-	if (forge_get_config('sysdebug_backtraces))
+	if (forge_get_config('sysdebug_backtraces'))
 		$msg .= "\n" .
 		    '<pre style="font-weight:normal; font-size:90%; color:#000066;">' .
 		    htmlentities(debug_string_backtrace()) . "</pre>";
