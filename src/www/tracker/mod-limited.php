@@ -40,14 +40,14 @@ if (session_loggedin()) {
 				}
 				echo '
 				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
-					html_image('ic/'.$img.'','20','20',array()).' '.$key.'</strong></a>';
+					html_image('ic/'.$img.'','20','20').' '.$key.'</strong></a>';
 				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
 					echo '
 				<a href="'.getStringFromServer('PHP_SELF').'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'">'.
-					html_image('ic/taskman20w.png','20','20',array()).'<strong>'._('Build Task Relation').'</strong></a>';
+					html_image('ic/taskman20w.png','20','20').'<strong>'._('Build Task Relation').'</strong></a>';
 				}
 				?>
 			</td>

@@ -54,7 +54,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td><a href="'.util_make_url ('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">'.
- 				html_image("ic/tracker20w.png","20","20",array("border"=>"0", "align"=>"middle")).' &nbsp;'.
+ 				html_image("ic/tracker20w.png","20","20").' &nbsp;'.
 				$at_arr[$j]->getName() .'</a>
 			</td>
 			<td>' .  $at_arr[$j]->getDescription() .'
