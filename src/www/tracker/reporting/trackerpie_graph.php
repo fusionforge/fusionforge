@@ -137,7 +137,7 @@ $graph  = new PieGraph(640, 480,"auto");
 
 $arr=array();
 $arr['category']='By Category';
-$arr['group']='By Group';
+$arr['group']='By Project';
 $arr['resolution']='By Resolution';
 $arr['assignee']='By Assignee';
 $graph->title->Set($arr[$area]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");

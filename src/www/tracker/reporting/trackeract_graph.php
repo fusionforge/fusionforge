@@ -37,7 +37,7 @@ $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
 //
-// Get Group Object
+// Get Project Object
 //
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {

@@ -28,7 +28,7 @@ if (!$group_id) {
 	exit_no_group();
 }
 //
-//  get the Group object
+//  get the Project object
 //
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group) || $group->isError()) {
