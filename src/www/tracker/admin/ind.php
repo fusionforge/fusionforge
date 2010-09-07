@@ -81,8 +81,7 @@
 	);
 
 	if (!$at_arr || count($at_arr) < 1) {
-		echo "<h1>"._('No trackers found')."</h1>";
-		echo "<p>&nbsp;</p>";
+		echo '<div class="error">'._('No trackers found').'</div>';
 	} else {
 
 		echo '
