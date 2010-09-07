@@ -13,6 +13,9 @@ if (!$group || !is_object($group) || $group->isError()) {
 }
 
 $at_arr =& $atf->getArtifactTypes();
+if ($at_arr === false) {
+	exit_permission_denied();
+}
 
 //required params for site_project_header();
 $params['group']=$group_id;
