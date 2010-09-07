@@ -48,7 +48,7 @@ ini_set("memory_limit", "64M");
 $no_gz_buffer=true;
 
 require_once('../../env.inc.php');
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 require_once $gfplugins.'wiki/common/wikiconfig.class.php';
 
 if (!$group_id || !$project) {
