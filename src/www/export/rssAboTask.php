@@ -41,7 +41,7 @@ $tid = getIntFromRequest('tid');
 if (!$tid)
 	$tid = util_path_info_last_numeric_component();
 if (!$tid) {
-	sysdebug_off("HTTP/1.0 404 Not Found");
+	header("HTTP/1.0 404 Not Found");
 	echo "You forgot to pass the tid.\n";
 	exit;
 }
@@ -49,7 +49,7 @@ if (!$tid) {
 $tinfo = getGroupProjectIdGroupId($tid);
 
 if (!$tinfo) {
-	sysdebug_off("HTTP/1.0 404 Not Found");
+	header("HTTP/1.0 404 Not Found");
 	echo "There is no task with id ".$tid."!\n";
 	exit;
 }
@@ -123,7 +123,7 @@ function writeRssFeedBegin($objProjectTask, $objGroup, $objProjectGroup) {
 	/* It is possible to format a rss feed with cascading style sheet and xsl, but it does not work with
 	* Firefox version 3.6.6, so I did not make use of it. */
 
-	sysdebug_off('Content-Type: application/rss+xml; charset=utf-8');
+	header('Content-Type: application/rss+xml; charset=utf-8');
 
 	print'<?xml version="1.0" encoding="utf-8"?>';
 	print'<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">';

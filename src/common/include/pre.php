@@ -124,6 +124,8 @@ forge_define_config_item ('sysdebug_enable', 'core', $default_sysdebug_enable) ;
 forge_set_config_item_bool ('sysdebug_enable', 'core') ;
 forge_define_config_item ('sysdebug_phphandler', 'core', 'true') ;
 forge_set_config_item_bool ('sysdebug_phphandler', 'core') ;
+forge_define_config_item ('sysdebug_backtraces', 'core', 'false') ;
+forge_set_config_item_bool ('sysdebug_backtraces', 'core') ;
 forge_define_config_item ('sysdebug_ignored', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_ignored', 'core') ;
 forge_define_config_item ('sysdebug_xmlstarlet', 'core', 'false') ;

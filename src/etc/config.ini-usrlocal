@@ -25,6 +25,8 @@ sysdebug_enable = true
 
 ; enable the PHP Error Handler (default if sysdebug_enable)
 sysdebug_phphandler = true
+; show backtraces for those (can be VERY long, esp. in gf-p-mediawiki) 
+sysdebug_backtraces = false  
 ; also report (display) ignored errors, e.g. from @call
 sysdebug_ignored = false
 

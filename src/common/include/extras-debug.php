@@ -1,6 +1,8 @@
 <?php
 
 $sysdebug_ignored = forge_get_config('sysdebug_ignored');
+if (!isset($ffErrors))
+	$ffErrors = array();
 
 // error handler function
 function ffErrorHandler($errno, $errstr, $errfile, $errline)
@@ -10,9 +12,6 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 	if (!$sysdebug_ignored && error_reporting() == 0)
 		/* prepended @ to statement => ignore */
 		return false;
-
-	if (!isset($ffErrors))
-		$ffErrors = array();
 
 	$msg = "[$errno] $errstr ($errfile at $errline)";
 
@@ -48,6 +47,11 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 			$type = 'unknown';
 			break;
 	}
+
+	if (forge_get_config('sysdebug_backtraces))
+		$msg .= "\n" .
+		    '<pre style="font-weight:normal; font-size:90%; color:#000066;">' .
+		    htmlentities(debug_string_backtrace()) . "</pre>";
 	
 	$ffErrors[] = array('type' => $type, 'message' => $msg);
 	/* Don't execute PHP internal error handler */
@@ -68,9 +72,6 @@ function ffOutputHandler($buffer) {
 	$dtdpath = $gfcommon . 'include/';
 	// this is, sadly, necessary (especially in ff-plugin-mediawiki)
 	$pre_tag = "<pre style=\"margin:0; padding:0; border:0;\">";
-
-	if (!isset($ffErrors))
-		$ffErrors = array();
 
 	$divstring = "\n\n" . '<script type="text/javascript"><!-- <![CDATA[
 		function toggle_ffErrors() {
