@@ -456,7 +456,7 @@ switch (getStringFromRequest('func')) {
 		case 'deleteartifact' : {
 			session_require_perm ('tracker', $ath->getID(), 'manager') ;
 
-			$aid = getStringFromRequest('aid');
+			$aid = getIntFromRequest('aid');
 			$ah= new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
 				exit_error('ERROR','Artifact Could Not Be Created');
