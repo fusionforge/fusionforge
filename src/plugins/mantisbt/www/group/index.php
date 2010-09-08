@@ -1,9 +1,8 @@
 <?php
 
 /*
- * Group MantisBT page
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2010 (c) : Franck Villaume - Capgemini
+ * Project MantisBT page
  *
  * This file is part of FusionForge.
  *
@@ -52,6 +51,8 @@ $userperm = $group->getPermission($user);
 if ( $userperm->isAdmin() ) {
 	$labelTitle[] = _('Admin');
 	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
+	$labelTitle[] = _('Stats');
+	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
 }
 
 echo $HTML->subMenu( $labelTitle, $labelPage );

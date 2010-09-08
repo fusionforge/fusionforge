@@ -3,8 +3,7 @@
 /**
  * MantisBPlugin Class
  *
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2009 - 2010 (c) : Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +22,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-require_once $gfcommon.'include/database-pgsql.php';
+require_once 'include/database-pgsql.php';
 
 class MantisBTPlugin extends Plugin {
 	function MantisBTPlugin () {
@@ -39,6 +38,7 @@ class MantisBTPlugin extends Plugin {
 		$this->hooks[] = "userisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
 		$this->hooks[] = "change_cal_permission";
+		$this->hooks[] = "change_cal_mail";
 		$this->hooks[] = "add_cal_link_father";
 		$this->hooks[] = "del_cal_link_father";
 		$this->hooks[] = "group_approved";
@@ -61,19 +61,13 @@ class MantisBTPlugin extends Plugin {
 			case "groupmenu":
 				$group_id=$params['group'];
 				$project = &group_get_object($group_id);
-				if (!$project || !is_object($project)) {
+				if (!$project || !is_object($project) || $project->isError() || !$project->isProject()) {
 					return;
 				}
-				if ($project->isError()) {
-					return;
-				}
-				if (!$project->isProject()) {
-					return;
-				}
-			
+
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][]=$this->text;
-					$params['DIRS'][]='/plugins/' . $this->name . '/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name;
+					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&id=' . $group_id . "&pluginname=" . $this->name;
 				} else {
 					$params['TITLES'][]='<font color="#444444">'.$this->text.'</font>';
 					if ($G_SESSION && $project->getPermission(user_get_object($G_SESSION->getId()))->isAdmin()) {
@@ -82,7 +76,9 @@ class MantisBTPlugin extends Plugin {
 							$params['DIRS'][]='#';
 					}
 				}
-				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
+				if ($params['toptab'] == $this->name) {
+                    $params['selected']=(count($params['TITLES'])-1);
+                } 
 				break;
 
 			case "groupisactivecheckbox":
@@ -95,7 +91,7 @@ class MantisBTPlugin extends Plugin {
 				echo ' <input type="CHECKBOX" name="use_mantisbtplugin" value="1" ';
 				// CHECKED OR UNCHECKED?
 				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "CHECKED disabled";
+					echo "CHECKED";
 				}
 				echo "><br/>";
 				echo "</td>";
@@ -117,7 +113,7 @@ class MantisBTPlugin extends Plugin {
 					
 						// ajout du projet mantis s'il n'existe pas
 						if (!isProjetMantisCreated($group->data_array['group_id'])){
-							addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['description']);
+							addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
 						}
 						// mise a jour des utilisateurs avec les roles
 						$members = array ();
@@ -222,6 +218,12 @@ class MantisBTPlugin extends Plugin {
 				}
 				updateUsersProjetMantis($group->data_array['group_id'],$members);
 				break;
+
+            // mise a jour de l'adresse mail utilisateur
+            case "change_cal_mail":
+                $user_id=$params[1];
+                updateUserInMantis($user_id);
+                break;
 
 			case "add_cal_link_father":
 			case "del_cal_link_father":
@@ -383,6 +385,23 @@ function getIdProjetMantis($idProjet){
 	
 }
 
+function updateUserInMantis($user_id) {
+	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
+    // recuperation du nouveau mail
+	$resUser = db_query_params ('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
+	echo db_error();
+	$row =& db_fetch_array($resUser);
+	$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
+	if(!$dbConnection){
+		$errMantis1 =  "Error : Could not open connection" . db_error($dbConnection);
+		echo $errMantis1;
+		db_rollback($dbConnection);
+	} else {
+        db_query_params('UPDATE mantis_user_table set email = $1 where username = $2',array($row['email'],$row['user_name']),'-1','0',$dbConnection);
+        echo db_error();
+    }
+}
+
 function updateUsersProjetMantis($idProjet, $members){
 	
 	global $role;
@@ -447,39 +466,48 @@ function updateUsersProjetMantis($idProjet, $members){
 }
 
 function refreshHierarchyMantisBt(){
-        global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
+    global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 
-        $hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true');
-	echo db_error();
-        $dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-        if(!$dbConnection){
-                db_rollback($dbConnection);
-                return false;
+    $hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true',array());
+    echo db_error();
+    $dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
+    if(!$dbConnection){
+        db_rollback($dbConnection);
+        return false;
+    }
+
+    db_begin($dbConnection);
+    db_query_params('TRUNCATE TABLE mantis_project_hierarchy_table',array() , '-1', 0, $dbConnection);
+    while ($hierarchy = db_fetch_array($hierarchies)) {
+        $result = db_query_params ('INSERT INTO mantis_project_hierarchy_table (child_id, parent_id, inherit_parent) VALUES ($1, $2, $3)',
+                                array (getIdProjetMantis($hierarchy['sub_project_id']), getIdProjetMantis($hierarchy['project_id']), 1),
+                                '-1',
+                                0,
+                                $dbConnection) ;
+
+        if (!$result) {
+            $this->setError(_('Insert Failed') . db_error($dbConnection));
+            db_rollback();
+            return false;
         }
+    }
 
-        db_begin($dbConnection);
-        db_query_params('TRUNCATE TABLE mantis_project_hierarchy_table',array() , '-1', 0, $dbConnection);
-        while ($hierarchy = db_fetch_array($hierarchies)) {
-                $result = db_query_params ('INSERT INTO mantis_project_hierarchy_table (child_id, parent_id, inherit_parent)
-                                                                        VALUES ($1, $2, $3)',
-                                                                        array (getIdProjetMantis($hierarchy['sub_project_id']),
-                                                                                  getIdProjetMantis($hierarchy['project_id']),
-                                                                                  1
-                                                                        ),
-                                                                        '-1',
-                                                                        0,
-                                                                        $dbConnection) ;
+    db_commit($dbConnection);
+    pg_close($dbConnection);
+    return true;
+}
 
-                if (!$result) {
-                        $this->setError(_('Insert Failed') . db_error($dbConnection));
-                        db_rollback();
-                        return false;
-                }
-        }
+function getGroupIdByName($name){
 
-        db_commit($dbConnection);
-        pg_close($dbConnection);
-        return true;
+    $child_query = db_query_params('select group_id from groups where group_name = $1',array($name));
+    echo db_error();
+    $row =& db_fetch_array($child_query);
+
+    if ($row == null) {
+	return 0;
+    }else{
+	return $row['group_id'];
+    }
 }
 
 // Local Variables:

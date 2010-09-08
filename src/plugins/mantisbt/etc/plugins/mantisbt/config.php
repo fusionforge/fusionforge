@@ -30,4 +30,10 @@ $prioritiesImg[60] = 'priority_3.gif';
 
 $bugPerPage = 20;
 
+// correspondance role forge:mantisbt (mais non utilisé car bug inclusion)
+$role['Manager'] = 70;
+$role['Concepteur'] = 55;
+$role['Collaborateur'] = 55;
+$role['Rapporteur'] = 55;
+
 ?>

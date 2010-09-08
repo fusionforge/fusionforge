@@ -2,8 +2,7 @@
 
 /*
  * User MantisBT page
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *

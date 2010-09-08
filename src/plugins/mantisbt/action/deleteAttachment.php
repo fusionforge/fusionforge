@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,10 +21,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 $idAttachment = getIntFromRequest('idAttachment');
 if ($idAttachment) {
-	return $clientSOAP->__soapCall('mc_issue_attachment_delete', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
+    try {
+        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	    $clientSOAP->__soapCall('mc_issue_attachment_delete', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
+    } catch (SoapFault $soapFault) {
+        echo 'Error : '.$soapFault->faultstring;
+        echo '<br/>';
+    }
 }
-
 ?>

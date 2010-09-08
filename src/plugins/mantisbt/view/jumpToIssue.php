@@ -21,12 +21,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-echo '<form method="POST" Action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
-echo	'<table class="innertabs">';
-echo '<tr><td>';
-echo '     Fichier : <input type="file" name="attachment">';
-echo '</td></tr></table>';
-echo '<br/><input type="button" onclick="this.form.submit();this.disabled=true;" name="envoyer" value="Envoyer le fichier">';
+echo '<div style="width:98%; text-align:right; padding:5px;" >';
+echo '<form name="jump" method="post" action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&view=viewIssue">';
+echo '<span>Aller au ticket :</span>';
+echo '<input type="text" name="idBug">';
+echo '<input type="submit" value="Ok" />';
 echo '</form>';
-
+echo '</div>';
 ?>

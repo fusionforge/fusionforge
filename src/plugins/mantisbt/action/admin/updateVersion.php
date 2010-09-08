@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,24 +21,42 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$version_name = $_POST['version_name'];
-$version_date_order = $_POST['version_date_order'];
-$version_release = $_POST['version_release'];
+/* update a version action page */
+
 $version_id = $_POST['version_id'];
 
 $version_data = array();
-if ( $version_release == 1 ) {
+if ( $_POST['version_release'] == 1 ) {
 	$version_data['released'] = 1;
 } else {
 	$version_data['released'] = 0;
 }
 $version_data['project_id'] = $idProjetMantis;
-$version_data['name'] = $version_name;
-list($day, $month, $year) = split('[/.-]', $version_date_order);
+$version_data['name'] = $_POST['version_name'];
+list($day, $month, $year) = split('[/.-]', $_POST['version_date_order']);
 $version_data['date_order'] = $month."/".$day."/".$year;
 $version_data['description'] = '';
 
-$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-$clientSOAP->__soapCall('mc_project_version_update', array("username" => $username, "password" => $password, "version_id" => $version_id, "version" => $version_data));
+try {
+    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+    $clientSOAP->__soapCall('mc_project_version_update', array("username" => $username, "password" => $password, "version_id" => $version_id, "version" => $version_data));
+    if (isset($_POST['transverse'])) {
+        $listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
+        foreach ($listChild as $key => $child) {
+            $listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
+            foreach ($listVersions as $key => $version) {
+                if ($version->name == $_POST['version_old_name'])
+                    $child_version_id = $version->id;
+            }
+            $version_data['project_id'] = $child;
+            $clientSOAP->__soapCall('mc_project_version_update', array("username" => $username, "password" => $password, "version_id" => $child_version_id, "version" => $version_data));
+        }
+    }
+} catch (SoapFault $soapFault) {
+    $msg = 'Erreur : '.$version_data['name'].' '.$soapFault->faultstring;
+    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisb&error_msg='.urlencode($msg));
+}
+$feedback = 'Op&eacute;ration r&eacute;ussie';
+session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
 
 ?>

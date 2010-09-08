@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,8 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 $noteEdit;
+$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 foreach($defect->notes as $key => $note){
 	if ($note->id == $idNote){
@@ -33,7 +33,12 @@ foreach($defect->notes as $key => $note){
 
 if (isset($_POST['edit_texte_note'])){
 	$noteEdit->text = $_POST['edit_texte_note'];
-	return  $clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue_note_id" => $idNote, "note" => $noteEdit, "type_update" => "text"));
+    try {
+	    $clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue_note_id" => $idNote, "note" => $noteEdit, "type_update" => "text"));
+    } catch (SoapFault $soapFault) {
+        $feedback = 'Erreur : '.$soapFault->faultstring;
+        session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
+    }
 } else {
 	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
 	foreach($listViewStates as $state){
@@ -44,7 +49,15 @@ if (isset($_POST['edit_texte_note'])){
 		}
 	}
 
-return  $clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue_note_id" => $idNote, "note" => $noteEdit, "type_update" => "state"));
+    try {
+        $clientSOAP->__soapCall('mc_issue_note_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue_note_id" => $idNote, "note" => $noteEdit, "type_update" => "state"));
+    } catch (SoapFault $soapFault) {
+        $feedback = 'Erreur : '.$soapFault->faultstring;
+        session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
+    }
 }
+
+$feedback = 'Op&eacute;ration r&eacute;ussie';
+session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 
 ?>

@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * Author: Franck Villaume -- Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,12 +21,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-echo '<form method="POST" Action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
-echo	'<table class="innertabs">';
-echo '<tr><td>';
-echo '     Fichier : <input type="file" name="attachment">';
-echo '</td></tr></table>';
-echo '<br/><input type="button" onclick="this.form.submit();this.disabled=true;" name="envoyer" value="Envoyer le fichier">';
-echo '</form>';
+/* main display */
+global $HTML;
 
+echo "TO BE IMPLEMENTED";
+}
 ?>

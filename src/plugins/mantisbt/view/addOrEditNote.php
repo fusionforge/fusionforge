@@ -2,7 +2,8 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
+ *          Antoine Mercadal - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,43 +22,49 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-// included the hability to use $HTML tool to create box
-GLOBAL $HTML;
-
 $noteEdit;
-$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-if ($view == "editNote"){
-	foreach($defect->notes as $key => $note){
-		if ($note->id == $idNote){
-			$noteEdit = $note;
-			break;
-		}
-	}
+try {
+    /* do not recreate $clientSOAP object if already created by other pages */
+    if (!isset($clientSOAP))
+        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+
+    $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+    if ($view == "editNote"){
+	    foreach($defect->notes as $key => $note){
+		    if ($note->id == $idNote){
+			    $noteEdit = $note;
+			    break;
+		    }
+	    }
+    }
+} catch (SoapFault $soapFault) {
+    $msg = $soapFault->faultstring;
+    $errorPage = true;
 }
-if($view == "editNote"){
-	$labelboxTitle = 'Modifier la note';
-	$actionform = 'updateNote';
-	$labelButtonSubmit = 'Mettre à jour';
+
+if ($errorPage){
+    echo    '<div class="warning">Un probl&egrave;me est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$msg.'</div>';
 } else {
-	$labelboxTitle = 'Ajouter la note';
-	$actionform = 'addNote';
-	$labelButtonSubmit = 'Valider';
+    if($view == "editNote"){
+	    $labelboxTitle = 'Modifier la note';
+	    $actionform = 'updateNote';
+	    $labelButtonSubmit = 'Mettre à jour';
+    } else {
+	    $labelboxTitle = 'Ajouter la note';
+	    $actionform = 'addNote';
+	    $labelButtonSubmit = 'Valider';
+    }
+
+    echo 		'<div align="center" id="add_edit_note">';
+    echo 		'<form Method="POST" Action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue">';
+    echo				'<table class="innertabs">';
+    echo 					'<tr>';
+    echo						'<td class="FullBox" ><textarea name="edit_texte_note" style="width:99%;" rows=12>'.$noteEdit->text.'</textarea></td>';
+    echo 					'</tr>';
+    echo				'</table>';
+    echo 				'<input type=button onclick="this.form.submit();this.disabled=true;" value="'.$labelButtonSubmit.'">';
+    echo 			'</form>';
+    echo 		'</div>';
 }
-
-$boxTitle = $labelboxTitle.' (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$defect->id.'&view=viewIssue">Retour Ticket '.$defect->id.'</a>)';
-
-echo $HTML->boxTop($boxTitle,InTextBorder);
-echo 		'<div align="center" id="add_edit_note">';
-echo 		'<form Method="POST" Action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue">';
-echo				'<table class="innertabs">';
-echo 					'<tr>';
-echo						'<td class="FullBox" ><textarea name="edit_texte_note" style="width:99%;" rows=12>'.$noteEdit->text.'</textarea></td>';
-echo 					'</tr>';
-echo				'</table>';
-echo 				'<input type=submit value="'.$labelButtonSubmit.'">';
-echo 			'</form>';
-echo 		'</div>';
-echo $HTML->boxBottom();
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
 /*
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2010 (c) : Franck Villaume - Capgemini
+ * Admin MantisBT page
  *
  * This file is part of FusionForge.
  *
@@ -19,10 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
- */
-
-/*
- * Admin MantisBT page
  */
 
 $action = getStringFromRequest('action');
@@ -50,12 +46,15 @@ $userperm = $group->getPermission($user);
 if ( $userperm->isAdmin() ) {
         $labelTitle[] = _('Admin');
         $labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
+        $labelTitle[] = _('Stats');
+        $labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
 }
 
 echo $HTML->subMenu( $labelTitle, $labelPage );
 
 switch($view) {
 	case "editVersion":
+	case "stat":
 		include ("mantisbt/view/admin/$view.php");
 		exit;
 	default:

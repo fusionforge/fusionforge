@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,7 +21,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-return $clientSOAP->__soapCall('mc_issue_note_delete', array("username" => $username, "password" => $password, "issue_note_id" => $idNote));
-
+try {
+    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+    $clientSOAP->__soapCall('mc_issue_note_delete', array("username" => $username, "password" => $password, "issue_note_id" => $idNote));
+} catch (SoapFault $soapFault) {
+    $feedback = 'Error : '.$soapFault->faultstring;
+    session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
+}
+$feedback = 'Op&eacute;ration r&eacute;ussie';
+session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 ?>

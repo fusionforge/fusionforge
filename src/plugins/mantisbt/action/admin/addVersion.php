@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,17 +21,42 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$version = $_POST['version'];
-
-if ($version != "") {
+/* addVersion action page */
+if (isset($_POST['version'])) {
 	$versionStruct = array();
-	$versionStruct['name'] = $version;
+	$versionStruct['name'] = $_POST['version'];
 	$versionStruct['project_id'] = $idProjetMantis;
 	$versionStruct['released'] = '';
 	$versionStruct['description'] = '';
 	$versionStruct['date_order'] = '';
+    try {
         $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
         $clientSOAP->__soapCall('mc_project_version_add', array("username" => $username, "password" => $password, "version" => $versionStruct));
+        if (isset($_POST['transverse'])) {
+            $listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
+            foreach ($listChild as $key => $child) {
+                $listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
+                $todo = 1;
+                foreach ($listVersions as $key => $version ) {
+                    if ($version->name == $versionStruct['name'])
+                        $todo = 0;
+                }
+                if ($todo) {
+                    try {
+                        $versionStruct['project_id'] = $child;
+                        $clientSOAP->__soapCall('mc_project_version_add', array("username" => $username, "password" => $password, "version" => $versionStruct));
+                    } catch (SoapFault $soapFault) {
+                        echo 'Error : '.$versionStruct['name'].' '.$soapFault->faultstring;
+                        echo "<br/>";
+                    }
+                }
+            }
+        }
+    } catch (SoapFault $soapFault) {
+        $msg = 'Erreur : '.$versionStruct['name'].' '.$soapFault->faultstring;
+        session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($msg));
+    }
+    $feedback = 'Op&eacute;ration r&eacute;ussie';
+    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
 }
-
 ?>

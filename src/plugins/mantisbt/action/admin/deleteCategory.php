@@ -2,7 +2,7 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,10 +21,22 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+/* deleteCategory action page */
+
 $deleteCategory = $_POST['deleteCategory'];
 
 if ($deleteCategory) {
-	$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	$clientSOAP->__soapCall('mc_project_delete_category', array("username" => $username, "password" => $password, "p_project_id" => $idProjetMantis, "p_category_name" => $deleteCategory));
+    try {
+	    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	    $clientSOAP->__soapCall('mc_project_delete_category', array("username" => $username, "password" => $password, "p_project_id" => $idProjetMantis, "p_category_name" => $deleteCategory));
+    } catch (SoapFault $soapFault) {
+        $msg = 'Error : '.$soapFault->faultstring;
+        session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($msg));
+    }
+    $feedback = 'Op&eacute;ration r&eacute;ussie';
+    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+} else {
+    $warning = 'Param&egravetres manquants';
+    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&warning_msg='.urlencode($warning));
 }
 ?>

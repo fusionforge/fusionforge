@@ -27,6 +27,7 @@ echo '<form method="POST" name="addVersion" action="index.php?type=admin&id='.$i
 echo $HTML->boxTop('Ajouter une version');
 echo '<td>';
 echo '<input name="version" type="text"></input>';
+echo '<input name="transverse" type="checkbox" value="1" >version transverse (fils inclus)</input>';
 echo '</td>';
 echo '<td>';
 print'<div style="float:left"><img src="'.util_make_url('themes/gforge/images/bouton_gauche.png').'"></img></div>

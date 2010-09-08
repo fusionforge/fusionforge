@@ -2,7 +2,8 @@
 
 /*
  * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Authors: Franck Villaume - capgemini
+ *          Antoine Mercadal - capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,25 +22,23 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-// included the hability to use $HTML tool to create box
-GLOBAL $HTML;
-
-if (!isset($defect)){
+if (!isset($defect)) {
 	try {
-		$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+        /* do not recreate $clientSOAP object if already created by other pages */
+        if (!isset($clientSOAP))
+		    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+
 		$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-	}catch (SoapFault $soapFault) {
-		echo $soapFault->faultstring;
-		echo "<br/>";
+	} catch (SoapFault $soapFault) {
+		$msg = $soapFault->faultstring;
 		$errorPage = true;
 	}
 }
-$boxTitle = 'Détail Ticket : '.sprintf($format,$defect->id).' (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.sprintf($format,$defect->id).'&view=editIssue">Editer</a>)';
-echo $HTML->boxTop($boxTitle,InTextBorder);
 if ($errorPage){
-	echo 	'<div>Un problème est survenu lors de la récupération des données</div>';
-	echo $HTML->boxBottom();
-}else {
+	echo 	'<div class="warning" >Un probl&egrave;me est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : Ticket '.$idBug.' : <i>'.$msg.'</i></div>';
+} else {
+    include('jumpToIssue.php');
+    echo "<h2 style='border-bottom: 1px solid black'>Détail du ticket #$idBug</h2>";
 	echo	'<table class="innertabs">';
 	echo		'<tr>';
 	echo 			'<td width="14%" class="FullBoxTitle">Catégorie</td>';
@@ -82,17 +81,51 @@ if ($errorPage){
 	echo	'<table class="innertabs">';
 	echo		'<tr>';
 	echo 			'<td width="25%" class="FullBoxTitle">Résumé</td>';
-	echo			'<td width="75%" class="FullBox">'.$defect->summary.'</td>';
+	echo			'<td width="75%" class="FullBox">'.htmlspecialchars($defect->summary,ENT_QUOTES).'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td width="25%" class="FullBoxTitle">Description</td>';
-	echo			'<td width="75%" class="FullBox">'.$defect->description.'</td>';
+	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td width="25%" class="FullBoxTitle">Informations complémentaires</td>';
-	echo			'<td width="75%" class="FullBox">'.$defect->additional_information.'</td>';
+	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->additional_information, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
-	echo $HTML->boxBottom();
-	}
 ?>
+<style>
+.notice_title {
+    background-color: #D7E0EB; 
+    padding: 10px; 
+    font-weight: bold; 
+    margin-bottom:0px;
+    cursor: pointer;
+    color: #4F93C3;
+}
+
+.notice_content {
+    border: 1px solid #D7E0EB;
+    padding: 10px; 
+    font-weight: bold; 
+    -moz-border-radius-bottomright: 8px; 
+    -moz-border-radius-bottomleft: 8px; 
+    -webkit-border-bottom-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    margin-top:0px;
+}
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#expandable_edition").hide();
+    });    
+
+</script>
+<p class="notice_title" onclick='$("#expandable_edition").slideToggle(300)'>Editer le ticket</p>
+<div id='expandable_edition' class="notice_content">
+<?php
+    include("editIssue.php");
+}
+?>
+</div>
+
+<br/>

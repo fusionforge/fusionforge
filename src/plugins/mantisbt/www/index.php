@@ -1,9 +1,9 @@
 <?php
-
 /*
- * MantisBT plugin
  * Copyright 2010, Capgemini
  * Author: Franck Villaume - Capgemini
+ * Author: Fabien Dubois - Capgemini
+ * Author: Antoine Mercadal - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -20,6 +20,11 @@
  * You should have received a copy of the GNU General Public License
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
+
+/*
+ * MantisBT plugin
+ *
  */
 
 require_once('../../env.inc.php');
@@ -72,6 +77,9 @@ $type = getStringFromRequest('type');
 $id = getStringFromRequest('id');
 $idProjetMantis = getIdProjetMantis($id);
 $pluginname = getStringFromRequest('pluginname');
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
+$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
 $password = getPasswordFromLDAP($user);
 $username = $user->getUnixName();
@@ -81,107 +89,111 @@ if (!$type) {
 } elseif (!$id) {
 	exit_error("Cannot Process your request","No ID specified");
 } else {
-	if ($type == 'group') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_error("Invalid Project", "Inexistent Project");
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
-			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
-		}
-		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
-		if ( !$userperm->IsMember()) {
-			exit_error("Access Denied", "You are not a member of this project");
-		}
-		// other perms checks here...
-		mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+    switch ($type) {
+	    case 'group':
+		    $group = group_get_object($id);
+		    if ( !$group) {
+			    exit_error("Invalid Project", "Inexistent Project");
+		    }
+		    if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
+			    exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
+		    }
+		    $userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
+		    if ( !$userperm->IsMember()) {
+			    exit_error("Access Denied", "You are not a member of this project");
+		    }
+		    // other perms checks here...
+		    mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 			
-		// recuperer les info de URL
-		$sort = getStringFromRequest('sort');
-		$dir = getStringFromRequest('dir');
-		$action = getStringFromRequest('action');
-		$idBug = getStringFromRequest('idBug');
+		    // recuperer les info de URL
+		    $sort = getStringFromRequest('sort');
+		    $dir = getStringFromRequest('dir');
+		    $action = getStringFromRequest('action');
+		    $idBug = getStringFromRequest('idBug');
 			
-		$idNote = getStringFromRequest('idNote');
-		$idAttachment = getStringFromRequest('idAttachment');
-		$actionAttachment = getStringFromRequest('actionAttachment');
-		$page = getStringFromRequest('page');
-		// Si la variable $_GET['page'] existe...
-		if($page != null && $page != ''){
-			$pageActuelle=intval($page);
-		}
-		else {
-			$pageActuelle=1; // La page actuelle est la n°1 
-		}
+		    $idNote = getStringFromRequest('idNote');
+		    $idAttachment = getStringFromRequest('idAttachment');
+		    $actionAttachment = getStringFromRequest('actionAttachment');
+		    $page = getStringFromRequest('page');
+
+		    // Si la variable $_GET['page'] existe...
+		    if($page != null && $page != ''){
+			    $pageActuelle=intval($page);
+		    }
+		    else {
+			    $pageActuelle=1; // La page actuelle est la n°1 
+		    }
 			
-		$format = "%07d";
+		    $format = "%07d";
 
 
-		if($idProjetMantis == 0){
-		 	echo "Projet non initialisé. Pour forcer son activation, il faut désactiver/activer mantis pour ce projet";
-		} else if (is_int($password)){
-			echo "Impossible de récupérer les identifiants de connexions depuis le LDAP";
-		} else {
-			// do the job
-			include ('mantisbt/www/group/index.php');
-		}
-	} elseif ($type == 'user') {
-		$realuser = user_get_object($id);//
-		if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
-			exit_error("Error", "First activate the User's $pluginname plugin through Account Manteinance Page");
-		}
-		if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private MantisBT part of this user
-			exit_error("Access Denied", "You cannot access other user's personal $pluginname");
-		}
-		mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
+		    if($idProjetMantis == 0){
+		 	    echo "Projet non initialisé. Pour forcer son activation, il faut désactiver/activer mantis pour ce projet";
+		    } else if (is_int($password)){
+			    echo "Impossible de récupérer les identifiants de connexions depuis le LDAP";
+		    } else {
+			    // do the job
+			    include ('mantisbt/www/group/index.php');
+		    }
+            break;
+        case 'user':
+		    $realuser = user_get_object($id);//
+		    if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
+			    exit_error("Error", "First activate the User's $pluginname plugin through Account Manteinance Page");
+		    }
+		    if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private MantisBT part of this user
+			    exit_error("Access Denied", "You cannot access other user's personal $pluginname");
+		    }
+		    mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
 			
-		$password = getPasswordFromLDAP($realuser);
-		$username = $realuser->getUnixName();
+		    $password = getPasswordFromLDAP($realuser);
+		    $username = $realuser->getUnixName();
 			
-		// recuperer les info de URL
-		$sort = getStringFromRequest('sort');
-		$dir = getStringFromRequest('dir');
-		$action = getStringFromRequest('action');
-		$idBug = getStringFromRequest('idBug');
+		    // recuperer les info de URL
+		    $sort = getStringFromRequest('sort');
+		    $dir = getStringFromRequest('dir');
+		    $action = getStringFromRequest('action');
+		    $idBug = getStringFromRequest('idBug');
 			
-		$idNote = getStringFromRequest('idNote');
-		$page = getStringFromRequest('page');
-		// Si la variable $_GET['page'] existe...
-		if($page != null && $page != ''){
-			$pageActuelle=intval($page);
-		}
-		else {
-			$pageActuelle=1; // La page actuelle est la n°1 
-		}
+		    $idNote = getStringFromRequest('idNote');
+		    $page = getStringFromRequest('page');
+		    // Si la variable $_GET['page'] existe...
+		    if($page != null && $page != ''){
+			    $pageActuelle=intval($page);
+		    } else {
+			    $pageActuelle=1; // La page actuelle est la n°1 
+		    }
 		
-		$format = "%07d";
+		    $format = "%07d";
 			
-		if (!is_int($password)){
-			// do the job
-			include ('mantisbt/www/user/index.php');
-		} else {
-			echo "Un problème est survenu lors de la récupération des tickets";
-		}
-	} elseif ($type == 'admin') {
-		$group = group_get_object($id);
-		if ( !$group) {
-			exit_error("Invalid Project", "Inexistent Project");
-		}
-		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
-			exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
-		}
-		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
-		if ( !$userperm->IsMember()) {
-			exit_error("Access Denied", "You are not a member of this project");
-		}
-		//only project admin can access here
-		if ( $userperm->isAdmin() ) {
-			// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-			mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));	
-			include ('mantisbt/www/admin/index.php');
-		} else {
-			exit_error("Access Denied", "You are not a project Admin");
-		}
+		    if (!is_int($password)){
+			    // do the job
+			    include ('mantisbt/www/user/index.php');
+		    } else {
+			    echo "Un problème est survenu lors de la récupération des tickets";
+		    }
+            break;
+        case 'admin':
+		    $group = group_get_object($id);
+		    if ( !$group) {
+			    exit_error("Invalid Project", "Inexistent Project");
+		    }
+		    if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
+			    exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
+		    }
+		    $userperm = $group->getPermission($user);//we'll check if the user belongs to the group
+		    if ( !$userperm->IsMember()) {
+			    exit_error("Access Denied", "You are not a member of this project");
+		    }
+		    //only project admin can access here
+		    if ( $userperm->isAdmin() ) {
+			    // DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+			    mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));	
+			    include ('mantisbt/www/admin/index.php');
+		    } else {
+			    exit_error("Access Denied", "You are not a project Admin");
+		    }
+            break;
 	}
 }
 
