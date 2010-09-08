@@ -103,7 +103,7 @@ ORDER BY group_name',
 
                         $group_id = db_result($result,$i,'group_id');
 
-                        //  get the Group object
+                        //  get the Project object
                         //
                         $group =& group_get_object($group_id);
                         if (!$group || !is_object($group) || $group->isError()) {

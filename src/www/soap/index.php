@@ -87,7 +87,7 @@ $server->register(
 	$uri,
 	$uri.'#version');
 //
-//	Include Group Functions
+//	Include Project Functions
 //
 require_once $gfwww.'soap/common/group.php';
 

@@ -336,7 +336,7 @@ function &getProjectGroups($session_ser,$group_id) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getProjectGroups','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','getProjectGroups','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','getProjectGroups',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
@@ -380,7 +380,7 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addProjectTask','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','addProjectTask','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','addProjectTask',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
@@ -422,7 +422,7 @@ function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_ta
     continue_session($session_ser);
     $grp =& group_get_object($group_id);
     if (!$grp || !is_object($grp)) {
-        return new soap_fault ('','updateProjectTask','Could Not Get Group','Could Not Get Group');
+        return new soap_fault ('','updateProjectTask','Could Not Get Project','Could Not Get Project');
     } elseif ($grp->isError()) {
         return new soap_fault ('','updateProjectTask',$grp->getErrorMessage(),$grp->getErrorMessage());
     }
@@ -462,7 +462,7 @@ function &getProjectTaskCategories($session_ser,$group_id,$group_project_id) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getProjectTaskCategories','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','getProjectTaskCategories','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','getProjectTaskCategories',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
@@ -504,7 +504,7 @@ function &getProjectTechnicians($session_ser,$group_id,$group_project_id) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getProjectTechnicians','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','getProjectTechnicians','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','getProjectTechnicians',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
@@ -526,7 +526,7 @@ function &getProjectTasks($session_ser,$group_id,$group_project_id,$assigned_to,
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getProjectTasks','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','getProjectTasks','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','getProjectTasks',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
@@ -610,7 +610,7 @@ function &getProjectMessages($session_ser,$group_id,$group_project_id,$project_t
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','getProjectMessages','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','getProjectMessages','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','getProjectMessages',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}
@@ -658,7 +658,7 @@ function &addProjectMessage($session_ser,$group_id,$group_project_id,$project_ta
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','addProjectMessage','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','addProjectMessage','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','addProjectMessage',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}

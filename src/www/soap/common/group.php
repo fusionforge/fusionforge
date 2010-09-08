@@ -92,7 +92,7 @@ function &getGroups($session_ser,$group_ids) {
 
 	$grps =& group_get_objects($group_ids);
 	if (!$grps) {
-		return new soap_fault ('2001','group','Could Not Get Groups by Id'.$inputArgs,$feedback);
+		return new soap_fault ('2001','group','Could Not Get Projects by Id'.$inputArgs,$feedback);
 	}
 
 	return groups_to_soap($grps);
@@ -102,7 +102,7 @@ function &getGroupsByName($session_ser,$group_names) {
 	session_continue($session_ser);
 	$grps =& group_get_objects_by_name($group_names);
 	if (!$grps) {
-		return new soap_fault ('2002','group','Could Not Get Groups by Name','Could Not Get Groups by Name');
+		return new soap_fault ('2002','group','Could Not Get Projects by Name','Could Not Get Projects by Name');
 	}
 
 	return groups_to_soap($grps);
@@ -115,7 +115,7 @@ function &getPublicProjectNames($session_ser) {
 	$forge = new FusionForge();
 	$result = $forge->getPublicProjectNames();
 	if ($forge->isError()) {
-		$errMsg = 'Could Not Get Public Group Names: '.$forge->getErrorMessage();
+		$errMsg = 'Could Not Get Public Projects Names: '.$forge->getErrorMessage();
 		return new soap_fault ('2003','group',$errMsg,$errMsg);
 	}
 	return $result;

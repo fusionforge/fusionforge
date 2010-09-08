@@ -235,7 +235,7 @@ function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) 
 	$group = group_get_object($groupid);
 	if (!$group || !is_object($group)) {
 		$res['code']="error";
-		$res['description']="No Such Group";
+		$res['description']="No Such Project";
 		return $res;
 	} else {
 		if (!forge_check_perm ('pm_admin', $group_id)) {

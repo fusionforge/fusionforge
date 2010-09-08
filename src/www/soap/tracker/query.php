@@ -119,7 +119,7 @@ function artifactGetViews($session_ser, $group_id, $group_artifact_id) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
-		return new soap_fault ('','artifactGetViews','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','artifactGetViews','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
 		return new soap_fault ('','artifactGetViews',$grp->getErrorMessage(),$grp->getErrorMessage());
 	}

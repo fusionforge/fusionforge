@@ -303,7 +303,7 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$lan
 
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g)) {
-		return new soap_fault ('','addDocument','Could Not Get Group','Could Not Get Group');
+		return new soap_fault ('','addDocument','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
 		return new soap_fault ('','addDocument',$g->getErrorMessage(),$g->getErrorMessage());
 	}

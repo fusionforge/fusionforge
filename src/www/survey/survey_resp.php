@@ -47,7 +47,7 @@ if (!$survey_id) {
 	/*
 		Quit if params are not provided
 	*/
-	echo '<div class="error">'._('For some reason, the Group ID or Survey ID did not make it to this page').'</div>';
+	echo '<div class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</div>';
 	$sh->footer(array());
 	exit;
 }

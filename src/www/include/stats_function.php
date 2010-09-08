@@ -48,7 +48,7 @@ function stats_sf_stats() {
 	echo '<p>&nbsp;</p>';
 
 /*
-	Groups added by week
+	Projects added by week
 */
 	$result = db_query_params ('select (round((register_time/604800),0)*604800) AS time ,count(*) from groups group by time',
 				   array ());

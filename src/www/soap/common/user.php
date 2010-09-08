@@ -115,7 +115,7 @@ function &userGetGroups($session_ser,$user_id) {
 	continue_session($session_ser);
 	$user =& user_get_object($user_id);
 	if (!$user) {
-		return new soap_fault ('3003','user','Could Not Get Users Groups','Could Not Get Users Groups');
+		return new soap_fault ('3003','user','Could Not Get Users Projects','Could Not Get Users Projects');
 	}
 	return groups_to_soap($user->getGroups());
 }
