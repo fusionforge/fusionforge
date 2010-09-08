@@ -3562,8 +3562,8 @@ src/plugins/wiki/www/themes/default/buttons/valid-rss.png -text svneol=unset#ima
 src/plugins/wiki/www/themes/default/buttons/valid-xhtml10.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/vcss.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/xml.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/flowplayer-3.1.4.swf -text
-src/plugins/wiki/www/themes/default/flowplayer.controls-3.1.4.swf -text
+src/plugins/wiki/www/themes/default/flowplayer-3.2.4.swf -text
+src/plugins/wiki/www/themes/default/flowplayer.controls-3.2.2.swf -text
 src/plugins/wiki/www/themes/default/highlight-min.css -text
 src/plugins/wiki/www/themes/default/highlight.css -text
 src/plugins/wiki/www/themes/default/images/Edit-chalk-10g.png -text svneol=unset#image/png

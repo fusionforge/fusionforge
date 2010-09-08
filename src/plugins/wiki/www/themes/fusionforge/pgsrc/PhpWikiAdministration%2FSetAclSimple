@@ -1,6 +1,6 @@
-Date: Tue, 31 Aug 2010 11:36:17 +0000
+Date: Wed,  8 Sep 2010 12:17:19 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: PhpWikiAdministration%2FSetAclSimple 7656 2010-08-31 11:42:09Z vargenau $
+X-Rcs-Id: $Id: PhpWikiAdministration%2FSetAclSimple 7677 2010-09-08 10:19:29Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration%2FSetAclSimple;
   flags=PAGE_LOCKED;
@@ -8,18 +8,14 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
+{| style="width: 100%; background-color: #e9fbff; border-style: solid; border-color: blue; border-width: 2px;"
+|-
+| {{(on)}} **//Liberal Access Rights//** means **//Everyone can edit//**, even if not member of the project.
+|-
+| {{(on)}} **//Restrictive Access Rights//** means **//Only project members can see the page//**.
+|}
+
 For more complex Access Rights modifications, see **[[phpwiki:?action=setacl|SetAcl]]**.
-
-----
-
-//Liberal Access Rights// means //Everyone can edit//, even if not member of the project.
-
-view:_EVERY; edit:_EVERY; create:_EVERY; list:_EVERY; remove:_ADMIN,_OWNER; purge:_ADMIN,_OWNER; dump:_ADMIN,_OWNER; change:_ADMIN,_OWNER'
-
-
-//Restrictive Access Rights// means //Only project members can see the page//.
-
-view:_AUTHENTICATED,-_EVERY; edit:_AUTHENTICATED,-_EVERY; create:_AUTHENTICATED,-_EVERY; list:_AUTHENTICATED,-_EVERY; remove:_ADMIN,_OWNER; purge:_ADMIN,_OWNER; dump:_ADMIN,_OWNER; change:_ADMIN,_OWNER
 
 ----
 

@@ -1,6 +1,6 @@
-Date: Tue, 31 Aug 2010 11:36:04 +0000
+Date: Wed,  8 Sep 2010 12:17:19 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: SetGlobalAccessRightsSimple 7657 2010-08-31 12:07:02Z vargenau $
+X-Rcs-Id: $Id: SetGlobalAccessRightsSimple 7677 2010-09-08 10:19:29Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SetGlobalAccessRightsSimple;
   flags=PAGE_LOCKED;
@@ -11,16 +11,14 @@ Content-Transfer-Encoding: binary
 This action page will allow you to set the default access rights for wiki pages.
 Pages without individual access rights will use these default access rights.
 
+{| style="width: 100%; background-color: #e9fbff; border-style: solid; border-color: blue; border-width: 2px;"
+|-
+| {{(on)}} **//Liberal Access Rights//** means **//Everyone can edit//**, even if not member of the project.
+|-
+| {{(on)}} **//Restrictive Access Rights//** means **//Only project members can see the page//**.
+|}
+
 ----
-
-//Liberal Access Rights// means //Everyone can edit//, even if not member of the project.
-
-view:_EVERY; edit:_EVERY; create:_EVERY; list:_EVERY; remove:_ADMIN,_OWNER; purge:_ADMIN,_OWNER; dump:_ADMIN,_OWNER; change:_ADMIN,_OWNER'
-
-
-//Restrictive Access Rights// means //Only project members can see the page//.
-
-view:_AUTHENTICATED,-_EVERY; edit:_AUTHENTICATED,-_EVERY; create:_AUTHENTICATED,-_EVERY; list:_AUTHENTICATED,-_EVERY; remove:_ADMIN,_OWNER; purge:_ADMIN,_OWNER; dump:_ADMIN,_OWNER; change:_ADMIN,_OWNER
 
 <<WikiAdminSetAclSimple s=. info=pagename>>
 

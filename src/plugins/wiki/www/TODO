@@ -9,7 +9,9 @@
 ** no "make clean" in themes
 ** "make clean" does not work in themes with no Javascript
 ** in MonoBook, IEFixes.js cannot be minimized, yuicompressor-2.4.2 gives syntax errors
-* plugin Video does not work
+* plugin Video does not work (code reverted to r7204 to make it work again)
+
+----
 
 short-term TODO:
 * rename should check existing subpages and rename these also.
