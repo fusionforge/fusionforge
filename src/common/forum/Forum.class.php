@@ -206,8 +206,8 @@ class Forum extends Error {
 						 $allow_anonymous,
 						 $moderation_level)) ;
 		if (!$result) {
-			db_rollback();
 			$this->setError(_('Error Adding Forum').db_error());
+			db_rollback();
 			return false;
 		}
 		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
