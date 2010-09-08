@@ -41,8 +41,9 @@ if (getStringFromRequest('post_changes')) {
 	$question = getStringFromRequest('question');
 	$question_type = getStringFromRequest('question_type');
 
-	$result = db_query_params ('INSERT INTO survey_questions (group_id,question,question_type) VALUES ($group_id,$1,$2)',
-				   array (htmlspecialchars($question),
+	$result = db_query_params ('INSERT INTO survey_questions (group_id,question,question_type) VALUES ($1,$2,$3)',
+				   array ($group_id,
+						htmlspecialchars($question),
 					  $question_type));
 	if ($result) {
 		$feedback .= _('Question Added');
