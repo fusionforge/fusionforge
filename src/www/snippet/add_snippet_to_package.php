@@ -176,7 +176,7 @@ AND snippet_package_item.snippet_package_version_id=$1',
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td style="text-align:center">
 				<a href="'.util_make_url ('/snippet/delete.php?type=frompackage&snippet_version_id='.db_result($result,$i,'snippet_version_id').'&snippet_package_version_id='.$snippet_package_version_id).
-				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td><td width="99%">'.
+				'">' . html_image("ic/trash.png","16","16") . '</a></td><td width="99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</td></tr>";
 
 			$last_group=db_result($result,$i,'group_id');

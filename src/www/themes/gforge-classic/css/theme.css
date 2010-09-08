@@ -19,6 +19,7 @@ h6 { font-size: xx-small; font-family: verdana,arial,helvetica,sans-serif; }
 
 pre,tt { font-family: courier,sans-serif }
 
+img { border: 0; vertical-align: middle; }
 
 a:link { text-decoration:none; color: #0000be }
 a:visited { text-decoration:none; color: #0000be }

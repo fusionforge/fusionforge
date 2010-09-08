@@ -14,6 +14,8 @@ OL,UL,P,BODY,TR,TD,TH,FORM {
 		color: #202020;
 	}
 
+img { border: 0; vertical-align: middle; }
+
 /* give the rule a bit of extra space (above and below), since its being used to divide
    sections on some pages (project summary) */
 HR { margin: 5px 0px 5px 0px }

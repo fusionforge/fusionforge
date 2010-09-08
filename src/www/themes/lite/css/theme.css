@@ -4,6 +4,8 @@ body {
         background-color: #fcaf3c;
 }
 
+img { border: 0; vertical-align: middle; }
+
 div.header {
 
         background-color: #fcaf3c;

@@ -158,10 +158,10 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 				date(_('Y-m-d H:i'),db_result($result,$i,'post_date')).'</td><td>'.
 				util_make_link_u (db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'),db_result($result, $i, 'realname')).'</td>'.
 				'<td style="text-align:center"><a href="'.util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
-				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
+				'">' . html_image("ic/pencil.png","20","25") .
 				'</a> &nbsp; &nbsp; &nbsp; <a href="'.
 				util_make_url ('/snippet/delete.php?type=package&snippet_package_version_id='.db_result($result,$i,'snippet_package_version_id')).
-				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
+				'">' . html_image("ic/trash.png","16","16") . '</a></td></tr>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();
