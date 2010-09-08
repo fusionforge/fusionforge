@@ -1,10 +1,10 @@
 /* stylesheet for gforge theme
 */
 BODY {
-		margin-top: 3;
-		margin-left: 3;
-		margin-right: 3;
-		margin-bottom: 3;
+		margin-top: 3px;
+		margin-left: 3px;
+		margin-right: 3px;
+		margin-bottom: 3px;
 		background-image: url("../images/theme-top-blue.png");
 	}
 ol,ul,p,body,td,tr,th,form { font-family: verdana,arial,helvetica,sans-serif; font-size:small;
@@ -47,7 +47,6 @@ A.lnkutility:hover { COLOR: #ffffff }
 
 /* header style */
 .header {
-//background: rgb(66, 69, 82) url("../images/theme-top-blue.png") top left
 background: url("../images/theme-top-blue.png") top left
 repeat-x;
 /* padding-right: 1em; */

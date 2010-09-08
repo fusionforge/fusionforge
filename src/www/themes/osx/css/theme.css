@@ -1,10 +1,10 @@
 /* Stylesheet for osx theme */
 
 BODY {
-		margin-top: 3;
-		margin-left: 3;
-		margin-right: 3;
-		margin-bottom: 3;
+		margin-top: 3px;
+		margin-left: 3px;
+		margin-right: 3px;
+		margin-bottom: 3px;
 		background-image: url(/themes/osx/images/background.png);
 	}
 
@@ -31,7 +31,7 @@ H6 { font-size: xx-small; font-family: Lucida Grande,verdana,arial,helvetica,san
 PRE,TT { font-family: courier,sans-serif }
 
 A:link { text-decoration:none; color:#0000EE }
-A:visited { text-decoration:none color:#551A8B}
+A:visited { text-decoration:none; color:#551A8B}
 A:active { text-decoration:none; color:#00ff00 }
 A:hover { text-decoration:underline; color:#008000 }
 

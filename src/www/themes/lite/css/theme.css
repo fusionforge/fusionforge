@@ -30,7 +30,7 @@ div.toptab {
 	padding-left: 1em;
 	font-size: 1.05em;
 	background-color: #F57900;
-	overflow: none;
+	overflow: hidden;
 }
 
 div.bottomtab {
@@ -124,8 +124,7 @@ a.tabsellink {
 
 tr.tableheading {
 	background: #Fcaf3c;
-	text-color: white;
-
+	color: white;
 }
 
 td .tableheading {
