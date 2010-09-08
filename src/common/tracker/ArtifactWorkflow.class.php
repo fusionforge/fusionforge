@@ -94,6 +94,22 @@ class ArtifactWorkflow extends Error {
 		$this->_addEvent('100', $element_id);
 	}
 	
+	/*
+	 * When a new element is removed, remove all the events in the workflow.
+	 */
+	function removeNode($element_id) {
+		$elearray = $this->ath->getExtraFieldElements($this->field_id);
+		foreach ($elearray as $e) {
+			if ($element_id !== $e['element_id']) {
+				$this->_removeEvent($e['element_id'], $element_id);
+				$this->_removeEvent($element_id, $e['element_id']);
+			}
+		}
+		
+		// Allow the new element for the Submit form (Initial values).
+		$this->_removeEvent('100', $element_id);
+	}
+
 	// Returns all the possible following nodes (no roles involved).
 	function getNextNodes($from) {
 
