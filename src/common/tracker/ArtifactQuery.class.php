@@ -205,7 +205,7 @@ class ArtifactQuery extends Error {
 			$this->setError('ArtifactQuery: Invalid ArtifactQuery ID'.db_error());
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 			$res = db_query_params ('SELECT * FROM artifact_query_fields WHERE artifact_query_id=$1',
 						array ($id)) ;
