@@ -33,6 +33,16 @@ $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
 $sh->header(array('title'=>_('Survey Administration')));
 
+if (!$group_id) {
+    exit_no_group();
+}
+$group=group_get_object($group_id);
+if (!$group || !is_object($group)) {
+    exit_no_group();
+} elseif ($group->isError()) {
+    exit_error('Error', $group->getErrorMessage());
+}
+
 echo '<h1>'._('Survey Administration').'</h1>';
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {

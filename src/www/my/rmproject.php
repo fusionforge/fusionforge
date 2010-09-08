@@ -35,7 +35,7 @@ $group_id = getIntFromRequest('group_id');
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error('Error','Could Not Get Group');
+    exit_no_group();
 } elseif ($group->isError()) {
 	exit_error('Error',$group->getErrorMessage());
 }
