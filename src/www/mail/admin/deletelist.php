@@ -22,14 +22,14 @@ if (!$group_id) {
 	exit_no_group();
 }
 
-$Group =& group_get_object($group_id);
-if (!$Group || !is_object($Group) || $Group->isError()) {
+$group =& group_get_object($group_id);
+if (!$group || !is_object($group) || $group->isError()) {
 	exit_no_group();
 }
 
-session_require_perm ('project_admin', $Group->getID()) ;
+session_require_perm ('project_admin', $group->getID()) ;
 
-$ml = new MailingList($Group,getIntFromGet('group_list_id'));
+$ml = new MailingList($group,getIntFromGet('group_list_id'));
 
 if (getStringFromPost('submit')) {
 	$sure = getStringFromPost('sure');
@@ -37,7 +37,7 @@ if (getStringFromPost('submit')) {
 	if (!$ml->delete($sure,$really_sure)) {
 		exit_error('Error',$ml->getErrorMessage());
 	} else {
-		header("Location: index.php?group_id=$group_id&feedback=DELETED");
+		header("Location: index.php?group_id=$group_id&feedback=Mailing+List+successfully+deleted");
 	}
 }
 
