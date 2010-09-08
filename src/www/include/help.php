@@ -37,7 +37,7 @@ function help_header($title) {
 <title><?php print $title; ?></title>
 </head>
 <body>
-<h4><?php echo forge_get_config ('forge_name'); ?> Site Help System:</h4>
+<h1><?php echo forge_get_config ('forge_name'); ?> Site Help System:</h1>
 <h2><?php print $title; ?></h2>
 <hr />
 <?php

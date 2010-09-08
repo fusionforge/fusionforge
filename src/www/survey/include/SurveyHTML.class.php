@@ -179,7 +179,7 @@ class SurveyHTML extends Error {
 			$survey_title = ''; 
 		}
 
-		$ret = '<h2>'. $title. '</h2>';
+		$ret = '<h1>'. $title. '</h1>';
 		$ret.= $warning;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<input type="hidden" name="post" value="Y" />';

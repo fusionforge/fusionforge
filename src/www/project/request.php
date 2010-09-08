@@ -63,7 +63,7 @@ $nbadmins = count($group->getAdmins());
 echo ngettext('You can request to join a project by clicking the submit button. The administrator will be emailed to approve or deny your request.', 'You can request to join a project by clicking the submit button. The administrators will be emailed to approve or deny your request.', $nbadmins); ?></p>
 <form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id"; ?>" method="post">
 <p>
-<?php echo ngettext('You must send a comment to the administrator:', 'You must send a comment to the administrators:',$nbadmins); echo utils_requiredField(); ?><br>
+<?php echo ngettext('You must send a comment to the administrator:', 'You must send a comment to the administrators:',$nbadmins); echo utils_requiredField(); ?>
 </p>
 <textarea name="comments" rows="15" cols="60"><?php echo $comments ?></textarea>
 <p>

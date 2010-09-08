@@ -67,9 +67,9 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 
        	if ($rows < 1) {
        		echo '
-       			<h4>'._('No Queued Items Found').'</h4>';
+       			<h2>'._('No Queued Items Found').'</h2>';
        	} else {
-       		echo '<h4>'.sprintf(_('These items need to be approved (total: %1$s)'), $rows).'</h4>';
+       		echo '<h2>'.sprintf(_('These items need to be approved (total: %1$s)'), $rows).'</h2>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,true);
@@ -89,7 +89,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
        		echo '
        			<h2>'._('No rejected items found for this week').'</h2>';
        	} else {
-       		echo '<h2>'.sprintf(_('These items were rejected this past week (total: %1$s)'), $rows).'</h2>';
+       		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %1$s)'), $rows).'</h2>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,false);

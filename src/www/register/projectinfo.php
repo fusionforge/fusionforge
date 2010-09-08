@@ -146,7 +146,8 @@ site_header(array('title'=>_('Register Project')));
 echo '<h1>' . _('Register Project') . '</h1>';
 ?>
 
-<p><?php echo _('To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.') ?>
+<p>
+<?php echo _('To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.') ?>
 </p>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">

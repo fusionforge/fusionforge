@@ -52,8 +52,9 @@ if (!$g || !is_object($g) || $g->isError()) {
 $is_admin_page='y';
 $sh = new  SurveyHtml();
 
-$is_admin_page='y';
-$sh->header(array('title'=>_('Survey Results')));
+$title = _('Survey Results');
+$sh->header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>';
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo '<div class="error">'._('Permission denied').'</div>';
