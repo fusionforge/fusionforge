@@ -51,9 +51,11 @@ if ($submit) {
 	}
 }
 
-site_project_header(array('title'=>_('Request to join project'),'group'=>$group_id,'toptab'=>'summary'));
+$title = _('Request to join project') . ' '.$group->getPublicName();
 
-echo '<h1>' . _('Request to join project') . '</h1>';
+site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'));
+
+echo '<h1>'. $title.'</h1>';
 
 plugin_hook ("blocks", "request_join");
 
