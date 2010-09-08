@@ -672,7 +672,7 @@ function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
 		<input type="hidden" name="search" value="1"/>
 		<input type="hidden" name="group_id" value="'.$group_id.'"/>
 		<div id="advancedsearchtext">
-						<input type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
+						<input type="text" size="60" name="words" value="'.htmlspecialchars($words).'" />
 						<input type="submit" name="submitbutton" value="'._('Search').'" />
 						<input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'._('with all words').'
 						<input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'._('with one word').'
