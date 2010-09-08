@@ -124,7 +124,7 @@ function html_abs_image($url, $width, $height, $args) {
  * @param		array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
  * @param		bool	DEPRECATED
  */
-function html_image($src,$width,$height,$args = array(),$display = 1) {
+function html_image($src,$width='',$height='',$args=array(),$display=1) {
 	global $HTML;
 	$s = ((session_issecure()) ? forge_get_config('images_secure_url') : forge_get_config('images_url') );
 	return html_abs_image($s.$HTML->imgroot.$src, $width, $height, $args);
@@ -660,16 +660,19 @@ function site_project_header($params) {
 	if (!$project || !is_object($project)) {
 		exit_no_group();
 	} else if ($project->isError()) {
-		if ($project->isPermissionDeniedError() && !session_get_user()) {
+		if ($project->isPermissionDeniedError()) {
+			if (!session_get_user()) {
  			$next = '/account/login.php?feedback='.urlencode($project->getErrorMessage());
  			if (getStringFromServer('REQUEST_METHOD') != 'POST') {
 				$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
  			}
-			// @alu: change url.
  			header("Location: $next");
  			exit;
 		}
-		exit_error("Group Problem",$project->getErrorMessage());
+			else
+				exit_error("Project access problem: ",$project->getErrorMessage());
+		}
+		exit_error("Project Problem: ",$project->getErrorMessage());
 	}
 
 	//group is private
@@ -687,17 +690,9 @@ function site_project_header($params) {
 	} else {
 		$params['title']=$project->getPublicName();
 	}
-	echo $HTML->header($params);
 	
-	if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
-		echo html_error_top($GLOBALS['error_msg']);
-	}
-	if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
-		echo html_warning_top($GLOBALS['warning_msg']);
-	}
-	if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
-		echo html_feedback_top($GLOBALS['feedback']);
-	}
+	site_header($params);
+	
 //	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
 }
 
