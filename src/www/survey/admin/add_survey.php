@@ -84,7 +84,7 @@ function show_questions() {
 <br /><input type="radio" name="is_active" value="1" checked="checked" /> <?php echo _('Yes'); ?>
 <br /><input type="radio" name="is_active" value="0" /> <?php echo _('No'); ?></p>
 <p>
-<input type="submit" name="SUBMIT" value="<?php echo _('Add This Survey'); ?>" /></p>
+<input type="submit" name="SUBMIT" value="<?php echo _('Add this Survey'); ?>" /></p>
 </form></p>
 
 <?php

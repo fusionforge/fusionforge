@@ -103,7 +103,7 @@ class Theme extends Layout {
 		}
 		?>
 
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 	<!--
 
 	function admin_window(adminurl) {
@@ -921,7 +921,7 @@ function quickNav() {
 				//task mgr
 				if (db_result($res,$i,'use_pm')) {
 					$ret .= '
-				<option value="/pm/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Task Manager</option>';
+				<option value="/pm/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tasks</option>';
 					if (trim(db_result($res,$i,'admin_flags')) =='A' || db_result($res,$i,'project_flags')) {
 						$ret .= '
 				<option value="/pm/admin/?group_id='.db_result($res,$i,'group_id').'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin</option>';

@@ -42,12 +42,12 @@ class SurveyHTML extends Error {
 		
 		if ($project =& group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
-				exit_error(_('Error'), _('This Group Has Turned Off Surveys.'));
+			exit_error(_('Error'), _('This Project Has Turned Off Surveys.'));
 			}
 			
 			site_project_header($params);
 			
-			if ($is_admin_page) {
+			if ($is_admin_page && $group_id) {
 				echo ($HTML->subMenu(
 					array(
 						_('Surveys'),

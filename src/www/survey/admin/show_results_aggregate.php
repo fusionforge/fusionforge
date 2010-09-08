@@ -161,7 +161,6 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// Select the count and average of responses to this question
-
 		$result2 = db_query_params ('SELECT count(*) AS count FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3 AND response IN (1,5)',
 					    array ($survey_id,
 						   $quest_array[$i],
@@ -174,7 +173,6 @@ for ($i=0; $i<$count; $i++) {
 		}
 
 		// average
-
 		$result2 = db_query_params ('SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3  and response != $4',
 					    array ($survey_id,
 						   $quest_array[$i],

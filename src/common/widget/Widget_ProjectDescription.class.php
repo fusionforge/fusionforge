@@ -40,7 +40,7 @@ class Widget_ProjectDescription extends Widget {
         $hp = Codendi_HTMLPurifier::instance();
 
 	$pluginManager = plugin_manager_get_object();
-	if (! $pluginManager->PluginIsInstalled('blocks') || !plugin_hook ("blocks", "summary_description")) {
+		if (! $pluginManager->PluginIsInstalled('blocks') || !plugin_hook ("blocks", 'summary_description')) {
 		$project_description = $project->getDescription();
 		if ($project_description) {
 			// need to use a litteral version for content attribute since nl2br is for HTML
