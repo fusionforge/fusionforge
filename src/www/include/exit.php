@@ -17,7 +17,8 @@
 function exit_error($title,$text="", $toptab='') {
 	global $HTML,$group_id;
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
-	print '<span class="error">'.$title.'</span><p>'.htmlspecialchars($text) .'</p>';
+	echo '<h1>' . _('Exiting with error') . '</h1>';
+	echo $HTML->error_msg($title.'<br />'.htmlspecialchars($text));
 	$HTML->footer(array());
 	exit;
 }
@@ -51,28 +52,28 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	exit_error(_('ERROR - No group was chosen or you can\'t access it'),_('No group was chosen or you can\'t access it'));
+	exit_error(_('Error - No project was chosen, project does not exist or you can\'t access it.'));
 }
 
 /**
  * exit_missing_param() - Exit with missing required parameters error
  */
 function exit_missing_param() {
-	exit_error(_('Error - missing parameters'),_('Error - missing required parameters'));
+	exit_error(_('Error - Missing required parameters.'));
 }
 
 /**
  * exit_disabled() - Exit with disabled feature error.
  */
 function exit_disabled() {
-	exit_error(_('Error - disabled feature.'),_('The Site Administrator has turned off this feature.'));
+	exit_error(_('Error - The Site Administrator has turned off this feature.'));
 }
 
 /**
  * exit_form_double_submit() - Exit with double submit error.
  */
 function exit_form_double_submit() {
-	exit_error(_('Error - double submit'),_('You Attempted To Double-submit this item. Please avoid double-clicking.'));
+	exit_error(_('Error - You Attempted To Double-submit this item. Please avoid double-clicking.'));
 }
 
 // Local Variables:
