@@ -616,11 +616,8 @@ function projectTabs($toptab,$group) {
 function searchBox() {
 	global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
 
-	if(get_magic_quotes_gpc()) {
-		$defaultWords = stripslashes($words);
-	} else {
-		$defaultWords = $words;
-	}
+	//Fix CVE-2007-0176
+	$defaultWords = htmlspecialchars($words);
 
 	// if there is no search currently, set the default
 	if ( ! isset($type_of_search) ) {
