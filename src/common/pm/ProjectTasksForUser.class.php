@@ -88,10 +88,7 @@ class ProjectTasksForUser extends Error {
 							 array ($this->User->getID())) ;
 	}
 	
-	function &getTasksForToday() {
-		$now = getdate();
-		$today = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year']);
-		
+	function &getOpenTasksForDate($date) {
 		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name 
 			FROM project_task_vw ptv,
 				project_assigned_to pat,
@@ -104,8 +101,20 @@ class ProjectTasksForUser extends Error {
 				AND ptv.status_id=1
 				AND pat.assigned_to_id=$2
 			ORDER BY group_name,project_name',
-							 array ($today,
+							 array ($date,
 								$this->User->getID())) ;
+	}
+
+	function &getTasksForToday() {
+		$now = getdate();
+		$today = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year']);
+		return $this->getOpenTasksForDate($today);
+	}
+
+	function &getTasksForThisWeek() {
+		$now = getdate();
+		$thisweek = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year'])+7*24*3600;
+		return $this->getOpenTasksForDate($thisweek);
 	}
 }
 
