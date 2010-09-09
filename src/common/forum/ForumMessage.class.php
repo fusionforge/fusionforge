@@ -218,13 +218,13 @@ class ForumMessage extends Error {
 		} else {
 			$msg_id=db_insertid($result,'forum','msg_id');
 			if (!$this->fetchData($msg_id)) {
-				db_rollback();
 				$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
+				db_rollback();
 				return false;
 			}
 			if (!$msg_id) {
-				db_rollback();
 				$this->setError(_('ForumMessage::create() Unable to get new message id'));
+				db_rollback();
 				return false;
 			} else {
 				if (!$this->sendNotice()) {

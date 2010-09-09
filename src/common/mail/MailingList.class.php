@@ -172,8 +172,8 @@ class MailingList extends Error {
 		$user = &user_get_object($creator_id);
 		$userEmail = $user->getEmail();
 		if(empty($userEmail) || !validate_email($userEmail)) {
+			$this->setInvalidEmailError();
 			db_rollback();
-			$this->setInvalidEmailError($userEmail);
 			return false;
 		} else {
 			$mailBody = sprintf(_('A mailing list will be created on %1$s in 6-24 hours 
