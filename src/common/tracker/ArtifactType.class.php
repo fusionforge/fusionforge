@@ -673,7 +673,7 @@ class ArtifactType extends Error {
 			//
 			$resel = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
 						  array ($ef['extra_field_id'])) ;
-			while ($el =& db_fetch_array($resel)) {
+			while ($el = db_fetch_array($resel)) {
 				//new element
 				$nel = new ArtifactExtraFieldElement($nef);
 				if (!$nel->create( addslashes(util_unconvert_htmlspecialchars($el['element_name'])), $el['status_id'] )) {

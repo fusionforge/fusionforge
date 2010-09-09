@@ -717,9 +717,9 @@ class ProjectTask extends Error {
 		if (!$arr_ || empty($arr_)) {
 			$arr_=array('100'=>PM_LINK_DEFAULT);
 		}
-		$arr =& array_keys($arr_);
+		$arr = array_keys($arr_);
 		//get existing dependencies to diff against
-		$arr2 =& array_keys($this->getDependentOn());
+		$arr2 = array_keys($this->getDependentOn());
 
 		if (count($arr) || count($arr2)) {
 			$add_arr = array_values (array_diff ($arr, $arr2));
@@ -770,8 +770,7 @@ class ProjectTask extends Error {
 	 *  Here we are converting an array like array(1,5,9,77) to array(1=>SS,5=>SF,9=>FS,77=>SS)
 	 */
 	function &convertDependentOn($arr) {
-//echo "<p>Convert Dep0: ".print_r($arr);
-		$deps =& $this->getDependentOn();
+		$deps = $this->getDependentOn();
 		for ($i=0; $i<count($arr); $i++) {
 			if ($deps[$arr[$i]]) {
 				//use existing link_type if it exists
@@ -781,7 +780,6 @@ class ProjectTask extends Error {
 				$new[$arr[$i]]=PM_LINK_DEFAULT;
 			}	
 		}
-//echo "<p>Convert Dep1: ".print_r($new);
 		return $new;
 	}
 
@@ -791,7 +789,7 @@ class ProjectTask extends Error {
 	 *	@return	array	The array of project_task_id's in this format: 
 	 *  array($id=>$link_type,id2=>link_type2).
 	 */
-	function &getDependentOn() {
+	function getDependentOn() {
 		if (!$this->getID()) {
 			$this->dependon = array();
 			return $this->dependon;
@@ -819,11 +817,11 @@ class ProjectTask extends Error {
 	 * @returns	boolean	success.
 	 */
 	function setAssignedTo(&$arr) {
-		$arr2 =& $this->getAssignedTo();
+		$arr2 = $this->getAssignedTo();
 		$this->assignedto =& $arr;
 
 		//If no one is assigned, then assign it to "100" - NOBODY
-		if (count($arr) < 1 || ((count($arr)==1) && ($arr[0]==''))) {
+		if (!$arr || count($arr) < 1 || ((count($arr)==1) && ($arr[0]==''))) {
 			$arr=array('100');
 		}
 		if (count($arr) || count($arr2)) {
@@ -1108,7 +1106,7 @@ class ProjectTask extends Error {
 		if ($send_task_email===false) {
 			return true;
 		}
-		$ids =& $this->getAssignedTo();
+		$ids = $this->getAssignedTo();
 
 		//
 		//	See if there is anyone to send messages to

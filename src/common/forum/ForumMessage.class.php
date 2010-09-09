@@ -409,7 +409,7 @@ class ForumMessage extends Error {
 			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}
@@ -613,7 +613,7 @@ class ForumMessage extends Error {
 	 *	@return boolean success.
 	 */
 	function sendNotice($has_attach=false) {
-		$ids =& $this->Forum->getMonitoringIDs();
+		$ids = $this->Forum->getMonitoringIDs();
 
 		$recipients = array ();
 		foreach ($ids as $id) {
