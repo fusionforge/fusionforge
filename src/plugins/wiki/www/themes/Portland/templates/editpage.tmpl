@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: editpage.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// rcs_id('$Id: editpage.tmpl 7675 2010-09-03 13:08:03Z vargenau $');
 ?>
 <?php /*
  * FIXME: Hack!
@@ -20,7 +20,7 @@
     <?php echo $PAGE_LOCKED_MESSAGE ?>
     <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
     <?php if (!$IS_CURRENT) { ?>
-      <p><strong><?php echo _("Warning: You are editing an old revision.")?>
+      <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
             <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
     <?php } ?>
   </td>
