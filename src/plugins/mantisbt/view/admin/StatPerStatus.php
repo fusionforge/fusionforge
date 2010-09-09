@@ -61,9 +61,9 @@ foreach ($stats as $stat){
     }
 
     if ($stat->project_level > 1){
-        echo sprintf('<td class="InTextBrown">%s >> <a class="DataLink" href="http://%s/plugins/mantisbt/index.php?type=group&id=%s&pluginname=mantisbt">%s</a></td>',$indentation,$sys_default_domain,group_get_objectid_by_publicname($stat->project_name), $stat->project_name);
+        echo sprintf('<td class="InTextBrown">%s >> <a class="DataLink" href="?type=group&id=%s&pluginname=mantisbt">%s</a></td>',$indentation,group_get_objectid_by_publicname($stat->project_name), $stat->project_name);
     }else{
-        echo sprintf('<td class="InTextBrown"><a class="DataLink" href="http://%s/plugins/mantisbt/index.php?type=group&id=%s&pluginname=mantisbt">%s</a></td>',$sys_default_domain,group_get_objectid_by_publicname($stat->project_name), $stat->project_name);
+        echo sprintf('<td class="InTextBrown"><a class="DataLink" href="?type=group&id=%s&pluginname=mantisbt">%s</a></td>',group_get_objectid_by_publicname($stat->project_name), $stat->project_name);
     }
     echo                    '<td class="InTextBrown">'.$stat->open.'</td>';
     echo                    '<td class="InTextBrown">'.$stat->resolved.'</td>';

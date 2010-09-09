@@ -25,5 +25,4 @@
 global $HTML;
 
 echo "TO BE IMPLEMENTED";
-}
 ?>
