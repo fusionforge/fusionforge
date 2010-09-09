@@ -141,6 +141,11 @@ if ($sysdebug_enable) {
 // Get constants used for flags or status
 require $gfcommon.'include/constants.php';
 
+// Declare and init variables to store messages
+$feedback = '';
+$warning_msg = '';
+$error_msg = '';
+
 // Base error library for new objects
 require_once $gfcommon.'include/Error.class.php';
 
