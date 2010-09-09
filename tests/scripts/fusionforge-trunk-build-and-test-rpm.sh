@@ -12,6 +12,7 @@ export CONFIGURED=true
 rm -fr $WORKSPACE/build $WORKSPACE/reports
 mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage
 
+cd source
 make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
 cp gforge/rpm-specific/fusionforge.repo build/packages/fusionforge.repo
