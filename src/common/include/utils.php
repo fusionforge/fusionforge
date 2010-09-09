@@ -360,7 +360,6 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 
 /**
  * util_unconvert_htmlspecialchars() - Unconverts a string converted with htmlspecialchars()
- * This function requires PHP 4.0.3 or greater
  *
  * @param		string	The string to unconvert
  * @returns The unconverted string
@@ -1067,6 +1066,26 @@ function util_make_link ($path, $text, $extra_params=false, $absolute=false) {
  */
 function util_make_link_u ($username, $user_id,$text) {
 	return '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>' ;
+}
+
+/**
+ * Display username with link to a user's profile page
+ * and icon face if possible.
+ * 
+ * @param string $username
+ * @param int $user_id
+ * @param string $text
+ * @param string $size
+ * @return string
+ */
+function util_display_user($username, $user_id,$text, $size='xs') {
+	$params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
+	plugin_hook_by_reference('user_logo', $params);
+	$url = '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>';
+	if ($params['content']) {
+		return $params['content'].$url.'<div class="new_line"></div>';
+	}
+	return $url;
 }
 
 /**
