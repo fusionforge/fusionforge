@@ -79,7 +79,7 @@ if (getStringFromRequest('submit')) {
 		$filetype = getStringFromRequest('filetype');
 		$editor = getStringFromRequest('editor');
 
-		$d= new Document($g,$docid,false,$sys_engine_path);
+		$d= new Document($g,$docid,false,$gfcommon.'docman/engine');
 		if ($d->isError()) {
 			exit_error(_('Error'),$d->getErrorMessage());
 		}
