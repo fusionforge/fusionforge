@@ -330,8 +330,6 @@ $locale["Group/User"] =
    "Grupo/Usuario";
 $locale["H"] =
    "Al";
-$locale["HasHomePage"] =
-   "TienePáginaPrincipal";
 $locale["Headline text"] =
    "Texto del título";
 $locale["Height"] =
@@ -366,14 +364,6 @@ $locale["Info"] =
    "Informacion";
 $locale["Insert"] =
    "Relleno";
-$locale["Insert Categories (double-click)"] =
-   "Relleno Categorías (doble-tecleo)";
-$locale["Insert PageLink (double-click)"] =
-   "Inserte el AcoplamientoDeLaPágina (doble-tecleo)";
-$locale["Insert Plugin (double-click)"] =
-   "Relleno Plugin (doble-tecleo)";
-$locale["Insert Template (double-click)"] =
-   "Inserte la plantilla (doble-tecleo)";
 $locale["Insert non-formatted text here"] =
    "Inserte el texto sin formatear aquí";
 $locale["Insufficient permissions."] =
@@ -746,8 +736,6 @@ $locale["This is a minor change."] =
    "Esto es un cambio pequeño.";
 $locale["This page edit seems to contain spam and was therefore not saved."] =
    "Esta página corrige se parece contener el Spam y por lo tanto no fue ahorrada.";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "Esta página ha sido bloqueada por el administrador y no puede ser editada.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
    "Esta página ha sido bloqueada por el administrador y no puede ser editada.";
 $locale["Time Zone"] =

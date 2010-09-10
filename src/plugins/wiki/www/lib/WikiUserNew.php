@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-//rcs_id('$Id: WikiUserNew.php 7666 2010-08-31 16:02:45Z vargenau $');
+//rcs_id('$Id: WikiUserNew.php 7680 2010-09-10 11:27:57Z vargenau $');
 /* Copyright (C) 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
 * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
 * Copyright (C) 2009-2010 Roger Guignard, Alcatel-Lucent
@@ -222,8 +222,7 @@ function _determineBogoUserOrPassUser($UserName) {
 	    	    $class = $_PassUser->nextClass();
 	    	else
 		    $class = get_class($_PassUser);
-    		if ($user = new $class($UserName, $_PassUser->_prefs)
-    		    and $user->_userid) {
+    		if ($user = new $class($UserName, $_PassUser->_prefs)) {
 	            return $user;
             	} else {
             	    return $_PassUser;
@@ -1180,33 +1179,15 @@ extends _AnonUser
                 // FIXME: strange why this should be needed...
                 include_once("lib/WikiUser/Db.php");
                 include_once("lib/WikiUser/AdoDb.php");
-                if (check_php_version(5)) {
-                    $user = new _AdoDbPassUser($this->_userid, $this->_prefs);
-                    return $user->getPreferences();
-                } else {
-                    _AdoDbPassUser::_AdoDbPassUser($this->_userid, $this->_prefs);
-                    return _AdoDbPassUser::getPreferences();
-                }
+                return _AdoDbPassUser::getPreferences();
             } elseif ($this->_prefs->_method == 'SQL') {
                 include_once("lib/WikiUser/Db.php");
                 include_once("lib/WikiUser/PearDb.php");
-                if (check_php_version(5)) {
-                    $user = new _PearDbPassUser($this->_userid, $this->_prefs);
-                    return $user->getPreferences();
-                } else {
-                    _PearDbPassUser::_PearDbPassUser($this->_userid, $this->_prefs);
-                    return _PearDbPassUser::getPreferences();
-                }
+                return _PearDbPassUser::getPreferences();
             } elseif ($this->_prefs->_method == 'PDO') {
                 include_once("lib/WikiUser/Db.php");
                 include_once("lib/WikiUser/PdoDb.php");
-                if (check_php_version(5)) {
-                    $user = new _PdoDbPassUser($this->_userid, $this->_prefs);
-                    return $user->getPreferences();
-                } else {
-                    _PdoDbPassUser::_PdoDbPassUser($this->_userid, $this->_prefs);
-                    return _PdoDbPassUser::getPreferences();
-                }
+                return _PdoDbPassUser::getPreferences();
             }
         }
 
@@ -1233,35 +1214,17 @@ extends _AnonUser
                 // FIXME: strange why this should be needed...
                 include_once("lib/WikiUser/Db.php");
                 include_once("lib/WikiUser/AdoDb.php");
-                if (check_php_version(5)) {
-                    $user = new _AdoDbPassUser($this->_userid, $prefs);
-                    return $user->setPreferences($prefs, $id_only);
-                } else {
-                    _AdoDbPassUser::_AdoDbPassUser($this->_userid, $prefs);
-                    return _AdoDbPassUser::setPreferences($prefs, $id_only);
-                }
+                return _AdoDbPassUser::setPreferences($prefs, $id_only);
             }
             elseif ($this->_prefs->_method == 'SQL') {
                 include_once("lib/WikiUser/Db.php");
                 include_once("lib/WikiUser/PearDb.php");
-                if (check_php_version(5)) {
-                    $user = new _PearDbPassUser($this->_userid, $prefs);
-                    return $user->setPreferences($prefs, $id_only);
-                } else {
-                    _PearDbPassUser::_PearDbPassUser($this->_userid, $prefs);
-                    return _PearDbPassUser::setPreferences($prefs, $id_only);
-                }
+                return _PearDbPassUser::setPreferences($prefs, $id_only);
             }
             elseif ($this->_prefs->_method == 'PDO') {
                 include_once("lib/WikiUser/Db.php");
                 include_once("lib/WikiUser/PdoDb.php");
-                if (check_php_version(5)) {
-                    $user = new _PdoDbPassUser($this->_userid, $prefs);
-                    return $user->setPreferences($prefs, $id_only);
-                } else {
-                    _PdoDbPassUser::_PdoDbPassUser($this->_userid, $prefs);
-                    return _PdoDbPassUser::setPreferences($prefs, $id_only);
-                }
+                return _PdoDbPassUser::setPreferences($prefs, $id_only);
             }
         }
         if ($updated = _AnonUser::setPreferences($prefs, $id_only)) {
@@ -1294,19 +1257,19 @@ extends _AnonUser
         } else {
             $user = $this;
         }
-        $UserName = $this->_userid;
         /* new user => false does not return false, but the _userid is empty then */
-        if ($user and $user->_userid) {
+        while ($user and $user->_userid) {
             if (!check_php_version(5))
                 eval("\$this = \$user;");
             $user = UpgradeUser($this, $user);
-            if ($user->userExists())
+            if ($user->userExists()) {
+                $user = UpgradeUser($this, $user);
                 return true;
-        }
-        while (!$this->_tryNextUser($UserName)) {
+            }
             // prevent endless loop. does this work on all PHP's?
             // it just has to set the classname, what it correctly does.
-            if ($this->nextClass() == "_ForbiddenPassUser")
+            $class = $user->nextClass();
+            if ($class == "_ForbiddenPassUser")
                 return false;
         }
         return false;
@@ -1430,7 +1393,7 @@ extends _AnonUser
         }
         if (USER_AUTH_POLICY === 'strict') {
             $class = $this->nextClass();
-            if ($user = new $class($this->_userid, $this->_prefs)) {
+            if ($user = new $class($this->_userid,$this->_prefs)) {
                 if ($user->userExists()) {
                     return $user->checkPass($submitted_password);
                 }
@@ -1438,29 +1401,27 @@ extends _AnonUser
         }
         if (USER_AUTH_POLICY === 'stacked' or USER_AUTH_POLICY === 'old') {
             $class = $this->nextClass();
-            if ($user = new $class($this->_userid, $this->_prefs))
+            if ($user = new $class($this->_userid,$this->_prefs))
                 return $user->checkPass($submitted_password);
         }
         return $this->_level;
     }
 
-    function _tryNextUser($username = false) {
+    function _tryNextUser() {
         if (DEBUG & _DEBUG_LOGIN) {
             $class = strtolower(get_class($this));
             if (substr($class,-10) == "dbpassuser") $class = "_dbpassuser";
             $GLOBALS['USER_AUTH_ERROR'][$class] = 'nosuchuser';
         }
-        if (!$username) $username = $this->_userid;
         if (USER_AUTH_POLICY === 'strict'
-	    or USER_AUTH_POLICY === 'stacked') 
-	{
+	    or USER_AUTH_POLICY === 'stacked') {
             $class = $this->nextClass();
-            while ($user = new $class($username, $this->_prefs)) {
+            while ($user = new $class($this->_userid, $this->_prefs)) {
                 if (!check_php_version(5))
                     eval("\$this = \$user;");
 	        $user = UpgradeUser($this, $user);
                 if ($user->userExists()) {
-                    //$user = UpgradeUser($this, $user);
+                    $user = UpgradeUser($this, $user);
                     return true;
                 }
                 if ($class == "_ForbiddenPassUser") return false;

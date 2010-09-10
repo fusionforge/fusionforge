@@ -156,8 +156,6 @@ $locale["GoTo"] =
    "Vai";
 $locale["H"] =
    "A";
-$locale["HasHomePage"] =
-   "HaHomePage";
 $locale["Height"] =
    "Altezza";
 $locale["Home"] =
@@ -180,14 +178,6 @@ $locale["Included from %s:"] =
    "Inserire dalla %s:";
 $locale["Insert"] =
    "Inserto";
-$locale["Insert Categories (double-click)"] =
-   "Inserimento Categorie (doppio-click)";
-$locale["Insert PageLink (double-click)"] =
-   "Inserto Pagina (doppio-scatto)";
-$locale["Insert Plugin (double-click)"] =
-   "Inserto Plugin (doppio-scatto)";
-$locale["Insert Template (double-click)"] =
-   "Inserto Mascherina (doppio-scatto)";
 $locale["Insufficient permissions."] =
    "Permessi insufficienti.";
 $locale["Invalid password or userid."] =
@@ -374,8 +364,6 @@ $locale["Thanks for adding this translation!"] =
    "Grazie per la translatione!";
 $locale["The %d most popular pages of this wiki:"] =
    "Le %d pagine più popolari di questo wiki sono:";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "Questa pagina è stata bloccata dall'amministratore e non può essere modificata.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
    "Spiacente, ma questa pagina è stata bloccata dall'amministratore,quindi le tue modifiche non possono essere salvate.";
 $locale["Time Zone"] =

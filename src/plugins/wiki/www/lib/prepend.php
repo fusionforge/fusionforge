@@ -3,10 +3,10 @@
  *
  * Things which must be done and defined before anything else.
  */
-// rcs_id('$Id: prepend.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: prepend.php 7684 2010-09-10 12:13:48Z vargenau $');
 
 // see lib/stdlib.php: phpwiki_version()
-define('PHPWIKI_VERSION', '1.4.0RC-20100607');
+define('PHPWIKI_VERSION', '1.4.0RC1');
 
 /**
  * Returns true if current php version is at mimimum a.b.c

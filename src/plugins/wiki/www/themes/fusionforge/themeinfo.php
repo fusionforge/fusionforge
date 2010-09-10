@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7665 2010-08-31 15:54:37Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7671 2010-09-02 20:07:31Z vargenau $');
 
 require_once('lib/WikiTheme.php');
 require_once('themes/wikilens/themeinfo.php');

@@ -186,8 +186,6 @@ $locale["1 word"] =
    "1 Wort";
 $locale["<%s: no such section>"] =
    "<%s: unbekannte Sektion>";
-$locale["<?plugin ModeratedPage ... ?> not found in first line of %s"] =
-   "<?plugin ModeratedPage ... ?> nicht in erster Zeile von %s gefunden";
 $locale["<empty>"] =
    "<leer>";
 $locale["<no matches>"] =
@@ -822,8 +820,6 @@ $locale["Guests"] =
    "Gäste";
 $locale["H"] =
    "H.";
-$locale["HasHomePage"] =
-   "HasHomePage";
 $locale["Headline text"] =
    "Überschrift";
 $locale["Height"] =
@@ -910,14 +906,6 @@ $locale["Inline images"] =
    "Eingebundene Bilder";
 $locale["Insert"] =
    "Einfügen";
-$locale["Insert Categories (double-click)"] =
-   "Kategorien einfügen (Doppelklick)";
-$locale["Insert PageLink (double-click)"] =
-   "SeitenLink einfügen (Doppelklick)";
-$locale["Insert Plugin (double-click)"] =
-   "Plugin einfügen (Doppelklick)";
-$locale["Insert Template (double-click)"] =
-   "Vorlage einfügen (Doppelklick)";
 $locale["Insert non-formatted text here"] =
    "Füge unformatierten Text hier ein";
 $locale["Insufficient permissions."] =
@@ -1852,8 +1840,6 @@ $locale["This is a minor change."] =
    "Kleinere Änderung.";
 $locale["This page edit seems to contain spam and was therefore not saved."] =
    "Diese Bearbeitung scheint Spam beinzuhalten und wurde ignoriert.";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "Diese Seite wurde vom Systemadministrator gesperrt und kann nicht bearbeitet werden.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
    "Diese Seite wurde vom Administrator für die allgemeine Bearbeitung gesperrt. Ihre Änderungen können deshalb nicht gespeichert werden.";
 $locale["Those"] =
@@ -2216,20 +2202,6 @@ $locale["cached versiondata:"] =
    "Versionendaten in den Cachespeicher aufgenommen:";
 $locale["change page '%s' to markup type '%s'."] =
    "Formatierung der Seite '%s' auf '%s' geändert.";
-$locale["check for ACCESS_LOG_SQL passwords in POST requests"] =
-   "prüfe auf ACCESS_LOG_SQL Passwörter in POST Requests";
-$locale["check for mysql 4.1.x/5.0.0 binary search on windows problem"] =
-   "prüfe auf mysql 4.1.x/5.0.0 Binärsuch-Problem (nur Windows)";
-$locale["check for mysql LOCK TABLE privilege"] =
-   "prüfe mysql LOCK TABLE Rechte";
-$locale["check for mysql page.id auto_increment flag"] =
-   "prüfe auf mysql page.id auto_increment Flag";
-$locale["check for mysql session.sess_id sanity"] =
-   "prüfe auf mysql session.sess_id Korrektheit";
-$locale["check for new session.sess_ip column"] =
-   "prüfe auf neue Spalte session.sess_ip column";
-$locale["check for table %s"] =
-   "prüfe Tabelle %s";
 $locale["chmod page '%s' to '%s'."] =
    "Berechtigung der Seite '%s' auf '%s' geändert.";
 $locale["comments"] =

@@ -146,8 +146,6 @@ $locale["The %d most popular pages of this wiki:"] =
    "De %d mest populära sidorna för den här wikin:";
 $locale["The %d most recent %s are listed below."] =
    "De %d senaste %s sidorna listas nedan.";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "Den här sidan är låst av administratören och kan ej redigeras.";
 $locale["Time Zone"] =
    "Timme Zon";
 $locale["Title Search"] =

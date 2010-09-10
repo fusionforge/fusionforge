@@ -1,6 +1,6 @@
-Date: Thu, 15 Apr 2010 16:32:58 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC-20100415)
-X-Rcs-Id: $Id: RecentVisitors 7339 2010-04-15 15:26:08Z vargenau $
+Date: Fri, 10 Sep 2010 14:12:16 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: RecentVisitors 7684 2010-09-10 12:13:48Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=RecentVisitors;
   flags="";
@@ -11,7 +11,7 @@ Content-Transfer-Encoding: binary
 Sign and date your name below!
 
 Arno Hollosi, Aredridel Stauck, Jeff Dairiki, Steve Wainstead, Carsten Klapp, 
-Reini Urban, the [PhpWiki authors|PhpWiki:ThePhpWikiProgrammingTeam].
+Reini Urban, Marc-Etienne Vargenau, the [[PhpWiki:ThePhpWikiProgrammingTeam|PhpWiki authors]].
 
 ----
 [[PhpWikiDocumentation]]

@@ -150,8 +150,6 @@ $locale["The %d most popular pages of this wiki:"] =
    "De %d meestbezochte pagina's van deze Wiki:";
 $locale["The %d most recent %s are listed below."] =
    "De %d meest recent %s staan hieronder.";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "Deze pagina is afgesloten door de beheerder en kan niet veranderd worden.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
    "Deze pagina is afgesloten door de beheerder en je veranderingen kan niet bewaar worden.";
 $locale["Title Search"] =

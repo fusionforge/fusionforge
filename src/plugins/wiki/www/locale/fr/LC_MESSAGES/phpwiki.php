@@ -280,8 +280,6 @@ $locale["All modifications"] =
    "Toutes les modifications";
 $locale["All pages"] =
    "Toutes les pages";
-$locale["All pages in this wiki ({total} total):"] =
-   "Toutes les pages dans ce wiki ({total} au total) :";
 $locale["All pages with all links in this wiki (%d total):"] =
    "Tout pages avec tous les liens dans ce wiki (%d au total) :";
 $locale["All time"] =
@@ -832,8 +830,6 @@ $locale["H"] =
    "H";
 $locale["Handles threaded topics with comments/news and provide a input form"] =
    "Contrôler les sujets traités avec les commentaires/nouvelles et fournir une entrée de formulaire";
-$locale["HasHomePage"] =
-   "APageAccueil";
 $locale["Headline text"] =
    "Titre";
 $locale["Height"] =
@@ -1026,18 +1022,10 @@ $locale["List all recent edits in this wiki."] =
    "Afficher les dernières modifications de ce wiki.";
 $locale["List of pages created by [%s] (%d total):"] =
    "Liste des pages créé près [%s] (%d au total) :";
-$locale["List of pages created by [%s] ({total} total):"] =
-   "Liste des pages créées par [%s] ({total} au total) :";
 $locale["List of pages last edited by [%s] (%d total):"] =
    "Liste des pages modifiées en dernier par [%s] (%d au total) :";
-$locale["List of pages last edited by [%s] ({total} total):"] =
-   "Liste des pages modifiées par [%s] ({total} au total) :";
 $locale["List of pages owned by [%s] (%d total):"] =
    "Liste des pages possédées par [%s] (%d au total) :";
-$locale["List of pages owned by [%s] ({total} total):"] =
-   "Liste des pages possédées par [%s] ({total} au total) :";
-$locale["List of user-created pages ({total} total):"] =
-   "Liste des pages créées par les utilisateurs ({total} au total) :";
 $locale["List page names which share an initial or final title word with '%s'."] =
    "Affiche la liste des pages qui partagent un mot initial ou final dans leur titre avec %s.";
 $locale["List pages that are explicitly given as the pages argument."] =
@@ -1912,8 +1900,6 @@ $locale["This internal action page cannot viewed."] =
    "Cette page ne peut être vue.";
 $locale["This is a minor change."] =
    "Modification mineure.";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "Cette page a été verrouillée par l'administrateur et ne peut pas être modifiée.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
    "Cette page a été verrouillée par l'administrateur et vos changements n'ont pas pu être enregistrée.";
 $locale["This plugin is currently under development and does not work!"] =
@@ -2288,18 +2274,6 @@ $locale["cached pagedata:"] =
    "page bufferisée :";
 $locale["cached versiondata:"] =
    "version bufferisée :";
-$locale["check for extra page.cached_html column"] =
-   "recherche une extra colonne page.cached_html";
-$locale["check for mysql 4.1.x/5.0.0 binary search on windows problem"] =
-   "vérifier la recherche binaire de bug pour mysql 4.1.x (Windows)";
-$locale["check for mysql page.id auto_increment flag"] =
-   "vérifie le marqueur auto_increment pour page.id";
-$locale["check for mysql session.sess_id sanity"] =
-   "recherche une nouvelle colonne session.sess_ip";
-$locale["check for new session.sess_ip column"] =
-   "recherche une nouvelle colonne session.sess_ip";
-$locale["check for table %s"] =
-   "vérifie la table %s";
 $locale["chmod page '%s' to '%s'."] =
    "Changement de mode %s à %s.";
 $locale["comments"] =

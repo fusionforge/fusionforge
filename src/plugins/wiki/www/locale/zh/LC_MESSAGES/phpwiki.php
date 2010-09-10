@@ -558,8 +558,6 @@ $locale["Guests"] =
    "訪客";
 $locale["H"] =
    "高";
-$locale["HasHomePage"] =
-   "HasHomePage";
 $locale["Height"] =
    "高度";
 $locale["HelloWorld"] =
@@ -1278,8 +1276,6 @@ $locale["This internal action page cannot viewed."] =
    "內部動作頁面無法瀏覽.";
 $locale["This is a minor change."] =
    "這是次要變更.";
-$locale["This page has been locked by the administrator and cannot be edited."] =
-   "此頁面已經被管理者鎖定,並且無法編輯.";
 $locale["This page has been locked by the administrator so your changes can not be saved."] =
    "此頁面已被管理者鎖定,所以你的更動無法儲存.";
 $locale["This plugin is currently under development and does not work!"] =
