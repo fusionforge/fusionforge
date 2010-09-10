@@ -52,11 +52,7 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
         $urlparam = '&view=listfile&dirid='.$doc_group;
     }
 
-    $engine_path = '';
-    if (isset($sys_engine_path))
-        $engine_path = $sys_engine_path;
-
-	$d= new Document($g,$docid,false,$engine_path);
+	$d= new Document($g,$docid,false,$gfcommon.'docman/engine/');
 	if ($d->isError())
 	    session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
