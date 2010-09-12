@@ -192,7 +192,7 @@ class ArtifactCanned extends Error {
 		}   
 
 		$result = db_query_params ('UPDATE artifact_canned_responses
-			SET title=$1,body=$2,
+			SET title=$1,body=$2
 			WHERE group_artifact_id=$3 AND id=$4',
 					   array (htmlspecialchars($title),
 						  htmlspecialchars($body),
