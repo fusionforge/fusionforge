@@ -107,6 +107,8 @@ require_once 'install-common.inc' ;
 	system("mkdir -p uploads");
 	system("mkdir -p scmtarballs");
 	system("mkdir -p scmsnapshots");
+	system("mkdir -p scmrepos/svn");
+	system("mkdir -p scmrepos/cvs");
 
 	//#project vhost space
 	system("mkdir -p homedirs");
@@ -116,18 +118,21 @@ require_once 'install-common.inc' ;
 		symlink("/home/groups", "homedirs/groups");
 	}
 
-	// Create default location for SVN repositories
-	system("mkdir -p svnroot");
-	if (!is_dir("/svnroot"))
+	if (!is_dir("/scmrepos"))
 	{
-		symlink("$fusionforge_data_dir/svnroot", "/svnroot");
+		symlink("$fusionforge_data_dir/scmrepos", "/scmrepos");
 	}
 
-	// Create default location for CVS repositories
-	system("mkdir -p cvsroot");
+	// Create the old symlink /svnroot for compatibility.
+	if (!is_dir("/svnroot"))
+	{
+		symlink("$fusionforge_data_dir/scmrepos/svn", "/svnroot");
+	}
+
+	// Create the old symlink /cvsroot for compatibility.
 	if (!is_dir("/cvsroot"))
 	{
-		symlink("$fusionforge_data_dir/cvsroot", "/cvsroot");
+		symlink("$fusionforge_data_dir/scmrepos/cvs", "/cvsroot");
 	}
 
 	// Create default dumps dir
