@@ -1,16 +1,28 @@
 <?php
 /**
- * GForge Survey HTML Facility
+ * FusionForge Survey HTML Facility
  *
- * Copyright 2004 GForge, LLC
- * http://gforge.org/
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002-2004 (c) GForge Team - Sung Kim
+ * Copyright 2008-2010 (c) FusionForge Team
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-/*
-	Survey related HTML
-	By Sung Kim, GForge, 02/2004
-*/
 
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
@@ -101,9 +113,9 @@ class SurveyHTML extends Error {
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
 			$title = _('Edit A Question');
-			$warning = '<span class="warning">'. 
+			$warning = '<div class="warning">'. 
 				_('WARNING! It is a bad idea to change a question after responses to it have been submitted').
-				'</span>';
+				'</div>';
 			$question_id = $q->getID();
 			$question = $q->getQuestion();
 			$question_type = $q->getQuestionType();
@@ -163,8 +175,8 @@ class SurveyHTML extends Error {
 		/* If we have a survey object, it is a Modify */
 		if ($s && is_object($s) && !$s->isError() && $s->getID()) {
 			$title = _('Edit A Survey');
-			$warning = '<span class="warning">'. 
-				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</span>';
+			$warning = '<div class="warning">'. 
+				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</div>';
 			$survey_id = $s->getID();
 			$survey_title = $s->getTitle();
 			$survey_questions = $s->getQuestionString();
@@ -449,7 +461,7 @@ class SurveyHTML extends Error {
 		global $survey_id;
 		
 		if (!$s->isActive()) {
-			return '<span class="error">'. _('Error - you can\'t vote for inactive survey').'</span>';
+			return '<div class="error">'. _('Error - you can\'t vote for inactive survey').'</div>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
@@ -569,7 +581,7 @@ class SurveyHTML extends Error {
 			echo ($sr->getErrorMessage());
 		}
 		
-		$totalCount = $sr->getNumberOfSurveyResponsess();
+		$totalCount = $sr->getNumberOfSurveyResponses();
 		$votes = $Survey->getNumberOfVotes();
 		
 		/* No votes, no result to show */

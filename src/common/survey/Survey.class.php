@@ -124,7 +124,7 @@ class Survey extends Error {
 		} 
 
 		/* Load question to data array */
-		$survey_id=db_insertid($res,'surveys','survey_id');
+		$survey_id=db_insertid($result,'surveys','survey_id');
 		return $this->fetchData($survey_id);
 	}
 

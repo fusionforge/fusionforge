@@ -158,7 +158,7 @@ class SurveyResponseFactory extends Error {
          *                       
  	 *	@return	int      the number of survey responses
 	 */
-	function &getNumberOfSurveyResponsess() {
+	function getNumberOfSurveyResponses() {
 		$arr = &$this->getSurveyResponses();
 		if (!$arr || !is_array($arr)) {
 			return 0;
@@ -176,8 +176,8 @@ class SurveyResponseFactory extends Error {
          *              for comments, we return arr[1], ...arr[n] with comments
 	 */
 	function &getResults() {
-		if ($this->Results) {
-			return $this->Results;
+		if ($this->Result) {
+			return $this->Result;
 		}
 
 		$arr = &$this->getSurveyResponses();
