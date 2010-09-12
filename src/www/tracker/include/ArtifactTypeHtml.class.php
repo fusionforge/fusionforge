@@ -1,14 +1,27 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
-
+ * FusionForge Generic Tracker facility
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems - Sourceforge
+ * Copyright 2010 (c) Fusionforge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ */
 
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
@@ -538,7 +551,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *	@return		radio multiselectbox
 	 */	
 	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
-		$arr =& $this->getExtraFieldElements($extra_field_id);
+		$arr =$this->getExtraFieldElements($extra_field_id);
 		if (!$checked) {
 			$checked=array();
 		}
@@ -547,7 +560,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		}	
 		$keys=array();
 		$vals=array();
-		$arr =& $this->getExtraFieldElements($extra_field_id);
+		$arr = $this->getExtraFieldElements($extra_field_id);
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[]=$arr[$i]['element_id'];
 			$vals[]=$arr[$i]['element_name'];

@@ -79,6 +79,13 @@ class ArtifactQuery extends Error {
 	var $data_array;
 
 	/**
+	 * Array of query conditions
+	 *
+	 * @var		array	$element_array.
+	 */
+	var $element_array;
+
+	/**
 	 *	ArtifactQuery - Constructer
 	 *
 	 *	@param	object	ArtifactType object.

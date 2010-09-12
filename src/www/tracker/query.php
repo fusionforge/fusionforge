@@ -1,21 +1,23 @@
 <?php
 /**
  * Copyright 2005 (c) GForge Group, LLC; Anthony J. Pugliese,
+ * Copyright 2010 (c) Fusionforge Team
+ * http://fusionforge.org
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
@@ -64,8 +66,7 @@ if (getStringFromRequest('submit')) {
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
-		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
-		exit;
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	//	
 /*
 	// Make the displayed query the default
@@ -113,8 +114,7 @@ if (getStringFromRequest('submit')) {
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
-		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
-		exit;
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 	//
 	//	Just load the query
 	//
@@ -141,7 +141,7 @@ if (getStringFromRequest('submit')) {
 			$feedback .= 'Query Deleted';
 		}
 		$query_id=0;
-		header('Location: /tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
 		exit;
 	} else {
 		exit_error('Error', 'Missing Build Query Action');
@@ -161,7 +161,7 @@ if (getStringFromRequest('submit')) {
 //
 $_assigned_to=$aq->getAssignee();
 $_status=$aq->getStatus();
-$extra_fields =& $aq->getExtraFields();
+$extra_fields=$aq->getExtraFields();
 $_sort_col=$aq->getSortCol();
 $_sort_ord=$aq->getSortOrd();
 $_moddaterange=$aq->getModDateRange();
