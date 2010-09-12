@@ -1031,7 +1031,7 @@ class ProjectTask extends Error {
 				}
 				$has_changes = true;
 		}
-		$old_array =& array_keys($this->getDependentOn());			
+		$old_array = array_keys($this->getDependentOn());			
 		$diff_array=array_diff($old_array,array_keys($depend_arr));
 		if (count($diff_array)>0) { 
 			for ($tmp=0;$tmp<count($old_array);$tmp++) {
@@ -1116,12 +1116,20 @@ class ProjectTask extends Error {
 		}
 
 		$body = "Task #". $this->getID() ." has been updated. ".
-			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName() 
-			."\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName() 
-			."\n". $arrChangedAndInNotice['summary']. "Summary: ".util_unconvert_htmlspecialchars( $this->getSummary() )
-			."\n". $arrChangedAndInNotice['complete']. "Complete: ". $this->getPercentComplete() ."%"
-			."\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName() .
-			"\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
+			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName(); 
+			if (isset($arrChangedAndInNotice['subproject']))
+				$body .= "\n". $arrChangedAndInNotice['subproject']."Subproject: ". $this->ProjectGroup->getName();
+
+			if (isset($arrChangedAndInNotice['summary']))
+				$body .= "\n". $arrChangedAndInNotice['summary']. "Summary: ".util_unconvert_htmlspecialchars( $this->getSummary() );
+
+			if (isset($arrChangedAndInNotice['complete']))
+				$body .= "\n". $arrChangedAndInNotice['complete']. "Complete: ". $this->getPercentComplete() ."%";
+
+			if (isset($arrChangedAndInNotice['status']))
+				$body .= "\n". $arrChangedAndInNotice['status']. "Status: ". $this->getStatusName();
+
+			$body .= "\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
 
 		/*
 			Now get the followups to this task

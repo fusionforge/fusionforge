@@ -1,19 +1,27 @@
 <?php
 /**
- * GForge Project Management Facility
+ * FusionForge Project Management Facility
  *
+ * Copyright 1999/2000, Tim Perdue - Sourceforge
  * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-/*
-
-	Tasks
-	By Tim Perdue, Sourceforge, 11/99
-	Heavy rewrite by Tim Perdue April 2000
-
-	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
-*/
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
@@ -27,7 +35,7 @@ class ProjectTaskHTML extends ProjectTask {
 	function multipleDependBox ($name='dependent_on[]') {
 		$result=$this->getOtherTasks();
 		//get the data so we can mark items as SELECTED
-		$arr2 =& array_keys($this->getDependentOn());
+		$arr2 = array_keys($this->getDependentOn());
 		return html_build_multiple_select_box ($result,$name,$arr2);
 	}
 

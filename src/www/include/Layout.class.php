@@ -117,6 +117,12 @@ class Layout extends Error {
 
 
 	/**
+	 * The color bars in pm reporting
+	 */
+	var $COLOR_LTBACK1 = '#C0C0C0';
+
+
+	/**
 	 * Layout() - Constructor
 	 */
 	function Layout() {

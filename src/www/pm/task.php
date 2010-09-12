@@ -1,19 +1,29 @@
 <?php
 /**
- * GForge Project Management Facility
+ * FusionForge Project Management Facility : Tasks
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2000, Tim Perdue/Sourceforge
+ * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
-/*
-
-	Tasks
-	By Tim Perdue, Sourceforge, 11/99
-	Heavy rewrite by Tim Perdue April 2000
-
-	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
-*/
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -265,7 +275,7 @@ switch (getStringFromRequest('func')) {
 		if ($count == 0) {
 			$warning_msg = _('No task selected');
 		}
-		elseif (!$was_error) {
+		elseif (isset($was_error) && !$was_error) {
 			$feedback = _('Task Updated Successfully');
 		}
 		include $gfwww.'pm/browse_task.php';

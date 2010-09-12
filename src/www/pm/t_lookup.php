@@ -53,7 +53,7 @@ else
 	$asformat = "application/json; charset=\"UTF-8\"";
 
 $islogin = session_loggedin();
-$isadmin = session_checkperm(array('group'=>'1','admin_flags'=>'A'));
+$isadmin = forge_check_global_perm ('forge_admin');
 $ishttps = session_issecure();
 $ispublic = isProjectTaskInfoPublic($tid);
 
