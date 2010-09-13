@@ -269,7 +269,14 @@ foreach ($members as $user) {
 			  <input type="hidden" name="submit" value="y" />
 			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
 			  <input type="hidden" name="group_id" value="'. $group_id .'" />
-			  <a href="/users/'.$user->getUnixName().'">'.$user->getRealName().'</a>
+			  <a href="/users/'.$user->getUnixName().'">';
+	$display = $user->getRealName();
+	if (!empty($display)) {
+		echo $user->getRealName();
+	} else {
+		echo $user->getUnixName();
+	}
+	echo '</a>
 			</td>
 			<td style="white-space: nowrap; text-align: right;">';
 
