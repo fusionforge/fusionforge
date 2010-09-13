@@ -5,12 +5,18 @@ CREATE TABLE "plugin_globalsearch_assoc_status" (
   CONSTRAINT "plugin_globalsearch_assoc_status_pkey" PRIMARY KEY ("status_id")
 );
 
-COPY "plugin_globalsearch_assoc_status" FROM stdin;
-1	New
-2	Ok
-3	Fail
-4	Unparsable
-\.
+INSERT INTO plugin_globalsearch_assoc_status (status_name)
+VALUES ('New') ;
+
+INSERT INTO plugin_globalsearch_assoc_status (status_name)
+VALUES ('Ok') ;
+
+INSERT INTO plugin_globalsearch_assoc_status (status_name)
+VALUES ('Fail') ;
+
+INSERT INTO plugin_globalsearch_assoc_status (status_name)
+VALUES ('Unparsable') ;
+
 SELECT setval ('"plugin_globalsearch_assoc_status_pk_seq"', 4, false);
 
 CREATE SEQUENCE "plugin_globalsearch_assoc_site_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;

@@ -1400,7 +1400,7 @@ src/plugins/globalsearch/common/GlobalsearchPlugin.class.php -text
 src/plugins/globalsearch/common/globalsearch-init.php -text
 src/plugins/globalsearch/common/globalsearch_edit_utils.php -text
 src/plugins/globalsearch/common/globalsearch_stats_boxes.php -text
-src/plugins/globalsearch/lib/globalsearch-init.sql -text
+src/plugins/globalsearch/db/globalsearch-init.sql -text
 src/plugins/globalsearch/packaging/control/180plugin-globalsearch -text
 src/plugins/globalsearch/packaging/control/180plugin-globalsearch.shortdesc -text
 src/plugins/globalsearch/packaging/cron.d/plugin-globalsearch -text

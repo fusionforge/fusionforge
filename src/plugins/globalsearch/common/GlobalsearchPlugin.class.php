@@ -37,7 +37,7 @@ class globalSearchPlugin extends Plugin {
 		if ($hookname == "site_admin_option_hook") {
 			print '<li><a href="/plugins/globalsearch/edit_assoc_sites.php">'._("Admin Associated Forges").'</a></li>';
 		} elseif ($hookname == "features_boxes_top") {
-			$params['returned_text'] .= $HTML->boxTop(_('Associated Forges'), 'Associated_Forges');
+            (isset($params['returned_text'])) ? $params['returned_text'] .= $HTML->boxTop(_('Associated Forges'), 'Associated_Forges') : $params['returned_text'] = $HTML->boxTop(_('Associated Forges'), 'Associated_Forges');
 			$params['returned_text'] .= $this->show_top_n_assocsites (5) ;
 			$params['returned_text'] .= $this->search_box () ;
 		}
