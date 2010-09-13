@@ -1,27 +1,26 @@
 <?php
 /**
- * GForge Plugin Activate / Deactivate Page
+ * FusionForge Plugin Activate / Deactivate Page
  *
- * @version 
- * @author 
  * Copyright 2005 GForge, LLC
- * http://gforge.org/
+ * Copyright 2010 FusionForge Team
+ * http://fusionforge.org/
  *
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -139,8 +138,8 @@ if (getStringFromRequest('update')) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
 				$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname, forge_get_config('config_path'). '/plugins/'.$pluginname); 
 				if (!$code) {
-					$feedback .= '<br />['.forge_get_config('config_path'). '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
-					$feedback .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
+					$warning_msg .= '<br />['.forge_get_config('config_path'). '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
+					$warning_msg .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
 				}
 			}
 
@@ -163,7 +162,7 @@ if (getStringFromRequest('update')) {
 							$res = db_next_result();
 						}
 					} else {
-						$feedback .= _('Initialisation error<br />Database said: ').db_error();
+						$error_msg .= _('Initialisation error<br />Database said: ').db_error();
 					}
 				}	
 				//we check for a php script	
@@ -177,7 +176,9 @@ if (getStringFromRequest('update')) {
 	}
 }
 
-if (isset($feedback)) echo '<div class="feedback">' . $feedback . '</div>';
+if (!empty($feedback)) echo '<div class="feedback">' . $feedback . '</div>';
+if (!empty($warning_msg)) echo '<div class="warning">' . $warning_msg . '</div>';
+if (!empty($error_msg)) echo '<div class="error">' . $error_msg . '</div>';
 echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br /><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br />Be <strong>extra</strong> careful not to run the init-script again when the plugin is reactivated, because some scripts have DROP TABLE statements.</span><br /><br />');
 $title_arr = array( _('Plugin Name'),
 		    _('Status'),
