@@ -518,7 +518,7 @@ function util_make_links ($data='') {
 	if(empty($data)) { 
 		return $data; 
 	}
-	$lines = split("\n",$data);
+	$lines = explode("\n",$data);
 	$newText = "";
 	while ( list ($key,$line) = each ($lines)) {
 		// When we come here, we usually have form input

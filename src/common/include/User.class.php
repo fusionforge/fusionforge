@@ -1152,7 +1152,7 @@ Enjoy the site.
 	 *	@return	string	This user's SSH authorized (public) keys.
 	 */
 	function getAuthorizedKeys() {
-		return ereg_replace("###", "\n", $this->data_array['authorized_keys']);
+		return preg_replace("/###/", "\n", $this->data_array['authorized_keys']);
 	}
 
 	/**

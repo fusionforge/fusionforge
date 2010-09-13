@@ -255,7 +255,7 @@ class Group extends Error {
 			$this->setError(sprintf(_('fetchData():: %s'),db_error()));
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		return true;
 	}
 
