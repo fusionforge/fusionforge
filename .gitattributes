@@ -883,7 +883,7 @@ src/plugins/contribtracker/bin/db-delete.pl -text
 src/plugins/contribtracker/bin/db-upgrade.pl -text
 src/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
 src/plugins/contribtracker/common/contribtracker-init.php -text
-src/plugins/contribtracker/lib/contribtracker-init.sql -text
+src/plugins/contribtracker/db/contribtracker-init.sql -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker.shortdesc -text
 src/plugins/contribtracker/packaging/install/plugin-contribtracker -text
