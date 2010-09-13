@@ -101,7 +101,7 @@ class blocksPlugin extends Plugin {
 			$group = &group_get_object($GLOBALS['group_id']);
 			if ( $group && $group->usesPlugin ( $this->name ) ) {
 				
-				$c =& $this->renderBlock($params);
+				$c = $this->renderBlock($params);
 				if ($c !== false) {
 					echo $c;
 					return true;
