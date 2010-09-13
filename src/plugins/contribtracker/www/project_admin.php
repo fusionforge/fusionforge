@@ -59,7 +59,7 @@ function check_date () {
 	if (!$tmp) {
 		$date = time () ;
 	} else {
-		$date = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year']);
+		$date = mktime (0,0,0,$tmp['tm_mon']+1,$tmp['tm_mday'],$tmp['tm_year']+1900);
 	}
 	return $date ;
 }
@@ -133,10 +133,12 @@ switch ($action) {
 case 'post_add_contrib':
 	$contrib = new ContribTrackerContribution () ;
 	if (!$contrib->create ($name, $date, $desc, $group)) {
-		exit_error ($contrib->getErrorMessage()) ;
+		$error_msg = $contrib->getErrorMessage() ;
+		$action = 'display';
+	} else {
+		$contrib_id = $contrib->getId() ;
+		$action = 'edit_contrib' ;
 	}
-	$contrib_id = $contrib->getId() ;
-	$action = 'edit_contrib' ;
 	break ;
 case 'del_contrib':
 	$contrib = new ContribTrackerContribution ($contrib_id) ;
@@ -174,6 +176,9 @@ case 'add_part':
 
 // Display appropriate forms
 
+if(isset($error_msg) && !empty($error_msg)) {
+	echo "<div class='error'>".$error_msg."</div>";
+}
 switch ($action) {
 case 'add_contrib':
 	print '<h1>'._('Register a new contribution').'</h1>' ;
