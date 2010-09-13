@@ -1,5 +1,9 @@
 // Toolbar JavaScript support functions. Taken from mediawiki 
-// $Id: toolbar.js 6887 2009-06-04 12:58:15Z vargenau $
+// $Id: toolbar.js 7686 2010-09-13 12:41:32Z vargenau $
+
+// Some "constants"
+var doctype = '<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">';
+var cssfile = '<link rel="stylesheet" type="text/css" href="'+data_path+'/themes/default/toolbar.css" />'
 
 // Un-trap us from framesets
 if( window.top != window ) window.top.location = window.location;
@@ -36,17 +40,24 @@ function addTagButton(imageFile, speedTip, tagOpen, tagClose, sampleText) {
 //}
 // pages is either an array of strings or an array of array(name,value)
 function showPulldown(title, pages, okbutton, closebutton, fromid) {
-  height = new String(Math.min(315, 80 + (pages.length * 12))); // 270 or smaller
-  pullwin = window.open('','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,height='+height+',width=200');
-  pullwin.window.document.write('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><title>'+escapeQuotes(title)+'</title><style type=\"text/css\"><'+'!'+'-- body {font-family:Tahoma,Arial,Helvetica,sans-serif;font-size:10pt;background-color:#dddddd;} input { font-weight:bold;margin-left:2px;margin-right:2px;} option {font-size:9pt} #buttons { background-color:#dddddd;padding-right:10px;width:180px;} --'+'></style></head>');
-  pullwin.window.document.write('\n<body bgcolor=\"#dddddd\"><form action=\"\"><div id=\"buttons\"><input type=\"button\" value=\"'+okbutton+'\" onclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\"><input type=\"button\" value=\"'+closebutton+'\" onClick=\"self.close(); return false;\"></div>\n<select style=\"margin-top:10px;width:190px;\" name=\"select\" size=\"'+((pages.length>20)?'20':new String(pages.length))+'\" onDblClick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\">');
+  var height = new String(Math.min(315, 80 + (pages.length * 12))); // 270 or smaller
+  var width = 500;
+  var h = (screen.height-height)/2;
+  var w = (screen.width-width)/2;
+  pullwin = window.open('','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,top='+h+',left='+w+',height='+height+',width='+width);
+  pullwin.window.document.writeln(doctype);
+  pullwin.window.document.writeln('<html>\n<head>\n<title>'+escapeQuotes(title)+'</title>');
+  pullwin.window.document.writeln(cssfile);
+  pullwin.window.document.writeln('</head>\n<body>');
+  pullwin.window.document.writeln('<p>\nYou can double-click to insert.\n</p>');
+  pullwin.window.document.writeln('<form action=\"\"><div id=\"buttons\"><input type=\"button\" value=\"'+okbutton+'\" onclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\" /><input type=\"button\" value=\"'+closebutton+'\" onclick=\"self.close(); return false;\" /></div>\n<div>\n<select style=\"margin-top:10px;width:190px;\" name=\"select\" size=\"'+((pages.length>20)?'20':new String(pages.length))+'\" ondblclick=\"if(self.opener)self.opener.do_pulldown(document.forms[0].select.value,\''+fromid+'\'); return false;\">');
   for (i=0; i<pages.length; i++){
     if (typeof pages[i] == 'string')
       pullwin.window.document.write('<option value="'+pages[i]+'">'+escapeQuotes(pages[i])+'</option>\n');
     else  // array=object
       pullwin.window.document.write('<option value="'+pages[i][1]+'">'+escapeQuotes(pages[i][0])+'</option>\n');
   }
-  pullwin.window.document.write('</select></form></body></html>');
+  pullwin.window.document.writeln('</select>\n</div>\n</form>\n</body>\n</html>');
   pullwin.window.document.close();
   return false;
 }
@@ -183,8 +194,16 @@ function undo_enable(bool) {
    }
 }
 function replace() {
-   replacewin = window.open('','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,height=90,width=450');
-   replacewin.window.document.write('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><title>'+msg_repl_title+"</title><style type=\"text/css\"><'+'!'+'-- body, input {font-family:Tahoma,Arial,Helvetica,sans-serif;font-size:10pt;font-weight:bold;} td {font-size:9pt}  --'+'></style></head><body bgcolor=\"#dddddd\" onload=\"if(document.forms[0].searchinput.focus) document.forms[0].searchinput.focus(); return false;\"><form action=\"\"><center><table><tr><td align=\"right\">"+msg_repl_search+":</td><td align=\"left\"><input type=\"text\" name=\"searchinput\" size=\"45\" maxlength=\"500\"></td></tr><tr><td align=\"right\">"+msg_repl_replace_with+":</td><td align=\"left\"><input type=\"text\" name=\"replaceinput\" size=\"45\" maxlength=\"500\"></td></tr><tr><td colspan=\"2\" align=\"center\"><input type=\"button\" value=\" "+msg_repl_ok+" \" onclick=\"if(self.opener)self.opener.do_replace(); return false;\">&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\""+msg_repl_close+"\" onclick=\"self.close(); return false;\"></td></tr></table></center></form></body></html>");
+   var height = 120;
+   var width = 600;
+   var h = (screen.height-height)/2;
+   var w = (screen.width-width)/2;
+   replacewin = window.open('','','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,top='+h+',left='+w+',height='+height+',width='+width);
+   replacewin.window.document.writeln(doctype);
+   replacewin.window.document.writeln('<html>\n<head>\n<title>'+msg_repl_title+'</title>');
+   replacewin.window.document.writeln(cssfile);
+   replacewin.window.document.writeln('</head>');
+   replacewin.window.document.writeln("<body onload=\"if(document.forms[0].searchinput.focus) document.forms[0].searchinput.focus(); return false;\">\n<form action=\"\">\n<center>\n<table>\n<tr>\n<td align=\"right\">"+msg_repl_search+":\n</td>\n<td align=\"left\">\n<input type=\"text\" name=\"searchinput\" size=\"45\" maxlength=\"500\" />\n</td>\n</tr>\n<tr>\n<td align=\"right\">"+msg_repl_replace_with+":\n</td>\n<td align=\"left\">\n<input type=\"text\" name=\"replaceinput\" size=\"45\" maxlength=\"500\" />\n</td>\n</tr>\n<tr>\n<td colspan=\"2\" align=\"center\">\n<input type=\"button\" value=\" "+msg_repl_ok+" \" onclick=\"if(self.opener)self.opener.do_replace(); return false;\" />&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\""+msg_repl_close+"\" onclick=\"self.close(); return false;\" />\n</td>\n</tr>\n</table>\n</center>\n</form>\n</body>\n</html>");
    replacewin.window.document.close();
    return false;
 }

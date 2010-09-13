@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: WikiTheme.php 7666 2010-08-31 16:02:45Z vargenau $');
+<?php // rcs_id('$Id: WikiTheme.php 7685 2010-09-13 12:27:54Z vargenau $');
 /* Copyright (C) 2002,2004,2005,2006,2008,2009,2010 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
@@ -1469,7 +1469,7 @@ else window.onload = downloadJSAtOnload;');
     // define ENABLE_DOUBLECLICKEDIT
     function initDoubleClickEdit() {
         if (!$this->HTML_DUMP_SUFFIX)
-            $this->addMoreAttr('body', 'DoubleClickEdit', HTML::Raw(" OnDblClick=\"url = document.URL; url2 = url; if (url.indexOf('?') != -1) url2 = url.slice(0, url.indexOf('?')); if ((url.indexOf('action') == -1) || (url.indexOf('action=browse') != -1)) document.location = url2 + '?action=edit';\""));
+            $this->addMoreAttr('body', 'DoubleClickEdit', HTML::Raw(" ondblclick=\"url = document.URL; url2 = url; if (url.indexOf('?') != -1) url2 = url.slice(0, url.indexOf('?')); if ((url.indexOf('action') == -1) || (url.indexOf('action=browse') != -1)) document.location = url2 + '?action=edit';\""));
     }
 
     // Immediate title search results via XMLHTML(HttpRequest)

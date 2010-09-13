@@ -3538,6 +3538,7 @@ src/plugins/wiki/www/themes/default/Wikiwyg/images/unlink.gif -text svneol=unset
 src/plugins/wiki/www/themes/default/Wikiwyg/images/unordered.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/Wikiwyg/images/wikitext.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/Wikiwyg/images/www.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/themes/default/ajax-min.js -text
 src/plugins/wiki/www/themes/default/ajax.js -text
 src/plugins/wiki/www/themes/default/buttons/asc_order.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/atom.png -text svneol=unset#image/png
@@ -3646,6 +3647,7 @@ src/plugins/wiki/www/themes/default/images/signature.png -text svneol=unset#imag
 src/plugins/wiki/www/themes/default/images/url.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/images/whosonline.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/images/wikiuser.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/default/moacdropdown-min.js -text
 src/plugins/wiki/www/themes/default/moacdropdown.js -text
 src/plugins/wiki/www/themes/default/moacdropdown/css/dropdown-min.css -text
 src/plugins/wiki/www/themes/default/moacdropdown/css/dropdown.css -text
@@ -3676,6 +3678,7 @@ src/plugins/wiki/www/themes/default/phpwiki-printer.css -text
 src/plugins/wiki/www/themes/default/phpwiki-topbottombars-min.css -text
 src/plugins/wiki/www/themes/default/phpwiki-topbottombars.css -text
 src/plugins/wiki/www/themes/default/phpwiki.css -text
+src/plugins/wiki/www/themes/default/sortable-min.js -text
 src/plugins/wiki/www/themes/default/sortable.js -text
 src/plugins/wiki/www/themes/default/templates/MAP.pdf -text
 src/plugins/wiki/www/themes/default/templates/README -text
@@ -3714,6 +3717,9 @@ src/plugins/wiki/www/themes/default/templates/viewsource.tmpl -text
 src/plugins/wiki/www/themes/default/templates/wikiblog.tmpl -text
 src/plugins/wiki/www/themes/default/templates/wikiforum.tmpl -text
 src/plugins/wiki/www/themes/default/themeinfo.php -text
+src/plugins/wiki/www/themes/default/toolbar-min.css -text
+src/plugins/wiki/www/themes/default/toolbar-min.js -text
+src/plugins/wiki/www/themes/default/toolbar.css -text
 src/plugins/wiki/www/themes/default/toolbar.js -text
 src/plugins/wiki/www/themes/default/wikicommon-min.js -text
 src/plugins/wiki/www/themes/default/wikicommon.js -text

@@ -1,4 +1,4 @@
-# $Id: Makefile 7438 2010-05-21 09:31:51Z vargenau $
+# $Id: Makefile 7688 2010-09-13 15:05:24Z vargenau $
 #
 # themes/default/Makefile
 #
@@ -7,10 +7,11 @@
 
 CSS_SRC = IEFixes.css    phpwiki-printer.css       phpwiki.css \
 	  highlight.css  phpwiki-modern.css        phpwiki-topbottombars.css  \
+	  toolbar.css \
 	  moacdropdown/css/dropdown.css
 MAIN    = wikicommon
-JS_MAIN = wikicommon.js  sortable.js ajax.js moacdropdown.js toolbar.js
-JS_REST = ASCIIsvg.js
+JS_MAIN = wikicommon.js
+JS_REST = ASCIIsvg.js sortable.js ajax.js moacdropdown.js toolbar.js
 
 CSS_FILES = $(patsubst %.css,%-min.css,$(CSS_SRC))
 
