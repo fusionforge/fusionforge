@@ -1,4 +1,4 @@
 plugins/contribtracker/bin/*                   usr/share/gforge/plugins/contribtracker/bin/
 plugins/contribtracker/common/*                usr/share/gforge/plugins/contribtracker/common/
-plugins/contribtracker/lib/*                   usr/share/gforge/plugins/contribtracker/lib/
+plugins/contribtracker/db/*                   usr/share/gforge/plugins/contribtracker/db/
 plugins/contribtracker/www/*                usr/share/gforge/www/plugins/contribtracker/
