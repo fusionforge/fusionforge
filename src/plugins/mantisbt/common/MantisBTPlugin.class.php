@@ -296,7 +296,7 @@ function removeProjetMantis($idProjet){
 					array($idProjet));
 	
 	echo db_error();
-	$row =& db_fetch_array($resIdProjetMantis);
+	$row = db_fetch_array($resIdProjetMantis);
 
 	if ($row == null || count($row)>2) {
 		echo "Erreur : impossible de retrouver le projet au sein de mantisbt";
@@ -337,7 +337,7 @@ function updateProjetMantis($idProjet,$nomProjet,$isPublic, $description) {
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
 	echo db_error();
-	$row =& db_fetch_array($resIdProjetMantis);
+	$row = db_fetch_array($resIdProjetMantis);
 	if ($row == null || count($row)>2) {
 		echo "Erreur : impossible de retrouver le projet au sein de mantisbt";
 	}else{
@@ -360,7 +360,7 @@ function isProjetMantisCreated($idProjet){
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
 	echo db_error();
-	$row =& db_fetch_array($resIdProjetMantis);
+	$row = db_fetch_array($resIdProjetMantis);
 
 	if ($row == null) {
 		return false;
@@ -375,7 +375,7 @@ function getIdProjetMantis($idProjet){
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
 	echo db_error();
-	$row =& db_fetch_array($resIdProjetMantis);
+	$row = db_fetch_array($resIdProjetMantis);
 
 	if ($row == null) {
 		return 0;
@@ -390,7 +390,7 @@ function updateUserInMantis($user_id) {
     // recuperation du nouveau mail
 	$resUser = db_query_params ('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
 	echo db_error();
-	$row =& db_fetch_array($resUser);
+	$row = db_fetch_array($resUser);
 	$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
 	if(!$dbConnection){
 		$errMantis1 =  "Error : Could not open connection" . db_error($dbConnection);
@@ -428,7 +428,7 @@ function updateUsersProjetMantis($idProjet, $members){
 									AND user_group.role_id = role.role_id',
 					array($member,$idProjet));
 		echo db_error();
-		$row =& db_fetch_array($resUserRole);
+		$row = db_fetch_array($resUserRole);
 		$stateForge[$member]['name'] = $member;
 		$stateForge[$member]['role'] = $row['role_name']; 
 	}
@@ -450,7 +450,7 @@ function updateUsersProjetMantis($idProjet, $members){
 				$resultIdUser = db_query_params('SELECT mantis_user_table.id FROM mantis_user_table WHERE mantis_user_table.username = $1',
 							array($member),'-1',0,$dbConnection);
 				
-				$rowIdUser =& db_fetch_array($resultIdUser);
+				$rowIdUser = db_fetch_array($resultIdUser);
 				$idUser = $rowIdUser['id'];
 				// insertion de la relation
 				$resultInsert = pg_insert($dbConnection,
@@ -501,7 +501,7 @@ function getGroupIdByName($name){
 
     $child_query = db_query_params('select group_id from groups where group_name = $1',array($name));
     echo db_error();
-    $row =& db_fetch_array($child_query);
+    $row = db_fetch_array($child_query);
 
     if ($row == null) {
 	return 0;
