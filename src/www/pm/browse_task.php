@@ -23,6 +23,9 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 $pagename = "pm_browse_custom";
 
 $offset = getIntFromRequest('offset');
+if ($offset < 0) {
+	$offset = 0 ;
+}
 $max_rows = getIntFromRequest('max_rows');
 
 $ptf = new ProjectTaskFactory($pg);
@@ -40,7 +43,24 @@ $_status = getStringFromRequest('_status');
 $_category_id = getIntFromRequest('_category_id');
 $_view = getStringFromRequest('_view');
 
-$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view);
+$paging = 0;
+if (session_loggedin()) {
+	if (getStringFromRequest('setpaging')) {
+		/* store paging preferences */
+		$paging = getIntFromRequest('nres');
+		if (!$paging) {
+			$paging = 25;
+		}
+		$u->setPreference("paging", $paging);
+	} else
+		$paging = $u->getPreference("paging");
+}
+if (!$paging) {
+	$paging = 25;
+}
+
+
+$ptf->setup($offset,$_order,$paging,$set,$_assigned_to,$_status,$_category_id,$_view);
 if ($ptf->isError()) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
@@ -142,6 +162,22 @@ if ($rows < 1) {
 		<span class="important">'._('Add tasks using the link above').'</span>';
 	echo db_error();
 } else {
+	if (session_loggedin()) {
+		/* logged in users get configurable paging */
+		echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$pg->getID().'&amp;offset='.$offset.'" method="post">'."\n";
+
+	}
+	printf('<p>' . _('Displaying results %1$d‒%2$d.'), $offset + 1, $offset + $rows);
+
+	if (session_loggedin()) {
+		printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
+		       'type="submit" name="setpaging" value="%1$s" />' .
+		       "\n</p>\n</form>\n", _('Change'),
+		       html_build_select_box_from_array(array(
+								'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+	} else {
+		echo "</p>\n";
+	}	
 
 	//create a new $set string to be used for next/prev button
 	if ($set=='custom') {
@@ -297,14 +333,14 @@ if ($rows < 1) {
 	*/
 	echo '<tr><td colspan="2">';
 	if ($offset > 0) {
-		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50),'<strong>'._('previous 50').'<--</strong>');
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset-50),'<strong>← '._('previous').'</strong>');
 	} else {
 		echo '&nbsp;';
 	}
 	echo '</td><td>&nbsp;</td><td colspan="2">';
 
 	if ($rows==50) {
-		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50),'<strong>'._('next 50').' --></strong></a>');
+		echo util_make_link ('/pm/task.php?func=browse&amp;group_project_id='.$group_project_id.'&amp;group_id='.$group_id.'&amp;offset='.($offset+50),'<strong>'._('next').' →</strong></a>');
 	} else {
 		echo '&nbsp;';
 	}

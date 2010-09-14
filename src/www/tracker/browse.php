@@ -17,8 +17,6 @@ session_require_perm ('tracker', $ath->getID(), 'read') ;
 $query_id = getIntFromRequest('query_id');
 $start = getIntFromRequest('start');
 
-$pagelength = 25 ;
-
 //
 //	The browse page can be powered by a pre-saved query
 //	or by select boxes chosen by the user
@@ -29,9 +27,18 @@ $pagelength = 25 ;
 //	If the query_id = -1, unset the pref and use regular browse boxes
 //
 if (session_loggedin()) {
+	$u =& session_get_user();
+	if (getStringFromRequest('setpaging')) {
+		/* store paging preferences */
+		$paging = getIntFromRequest('nres');
+		if (!$paging) {
+			$paging = 25;
+		}
+		$u->setPreference("paging", $paging);
+	}
+	
 	if($query_id) {
 		if ($query_id == '-1') {
-			$u =& session_get_user();
 			$u->setPreference('art_query'.$ath->getID(),'');
 		} else {
 			$aq = new ArtifactQuery($ath,$query_id);
@@ -41,7 +48,6 @@ if (session_loggedin()) {
 			$aq->makeDefault();
 		}
 	} else {
-		$u =& session_get_user();
 		$query_id=$u->getPreference('art_query'.$ath->getID(),'');
 	}
 } elseif ($query_id) {
@@ -108,7 +114,7 @@ if (is_array($_extra_fields)){
 	}
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$pagelength,$set,$_assigned_to,$_status,$aux_extra_fields);
+$af->setup($offset,$_sort_col,$_sort_ord,$paging,$set,$_assigned_to,$_status,$aux_extra_fields);
 //
 //	These vals are sanitized and/or retrieved from ArtifactFactory stored settings
 //
@@ -206,6 +212,48 @@ $changed_arr[]= 3600 * 24;	 // 24 hour
 $changed_arr[]= 3600 * 24 * 7; // 1 week
 $changed_arr[]= 3600 * 24 * 14;// 2 week
 $changed_arr[]= 3600 * 24 * 30;// 1 month
+
+if ($art_arr && ($art_cnt = count($art_arr)) > 0) {
+	$focus = getIntFromRequest('focus');
+} else {
+	$art_cnt = 0;
+	$start = 0;
+	$focus = 0;
+}
+$paging = 0;
+if (session_loggedin()) {
+	/* logged in users get configurable paging */
+	$paging = $u->getPreference("paging");
+	echo '<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;start='.
+		$start.'" method="post">'."\n";
+}
+if (!$paging) {
+	$paging = 25;
+}
+if ($art_cnt) {
+	if ($focus) {
+		for ($i = 0; $i < $art_cnt; ++$i)
+			if ($art_arr[$i]->getID() == $focus) {
+				$start = $i;
+				break;
+			}
+	}
+	$max = ($art_cnt > ($start + $paging)) ? ($start + $paging) : $art_cnt;
+} else {
+	$max = 0;
+}
+
+printf('<p>' . _('Displaying results %1$d‒%2$d out of %3$d total.'),
+       $start + 1, $max, $art_cnt);
+if (session_loggedin()) {
+	printf(' ' . _('Displaying %2$s results.') . "\n\t<input " .
+	       'type="submit" name="setpaging" value="%1$s" />' .
+	       "\n</p>\n</form>\n", _('Change'),
+	       html_build_select_box_from_array(array(
+							'10', '25', '50', '100', '1000'), 'nres', $paging, 1));
+} else {
+	echo "</p>\n";
+}
 
 /**
  *
@@ -359,7 +407,7 @@ if ($af->query_type == 'default') {
 echo '
 </div>';
 
-if ($art_arr && count($art_arr) > 0) {
+if ($art_cnt > 0) {
 
 	if ($query_id) {
 		$aq = new ArtifactQuery($ath,$query_id);
@@ -470,8 +518,6 @@ if ($art_arr && count($art_arr) > 0) {
 
 	$then=(time()-$ath->getDuePeriod());
 
-	$max = ((count($art_arr) > ($start + $pagelength)) ? ($start+$pagelength) : count($art_arr) );
-//echo "max: $max";
 	for ($i=$start; $i<$max; $i++) {
  		$extra_data = $art_arr[$i]->getExtraFieldDataText();
 		echo '
@@ -544,35 +590,10 @@ if ($art_arr && count($art_arr) > 0) {
 		echo '</tr>';
 	}
 
-	/*
-		Show extra rows for <-- Prev / Next -->
-	* /
-	//only show this if we're not using a power query
-	if ($af->max_rows > 0) {
-		if (($offset > 0) || ($rows >= 50)) {
-			echo '
-				<tr><td colspan="2">';
-			if ($offset > 0) {
-				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;set='.
-				$set.'&offset='.($offset-50).'"><strong><-- '._('Previous 50').'</strong></a>';
-			} else {
-				echo '&nbsp;';
-			}
-			echo '</td><td>&nbsp;</td><td colspan="2">';
-			if ($rows >= 50) {
-				echo '<a href="'.getStringFromServer('PHP_SELF').'?func=browse&amp;group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;set='.
-				$set.'&offset='.($offset+50).'"><strong>'._('Next 50').' --></strong></a>';
-			} else {
-				echo '&nbsp;';
-			}
-			echo '</td></tr>';
-		}
-	}
-	*/
 	echo $GLOBALS['HTML']->listTableBottom();
-	$pages = count($art_arr) / $pagelength;
-	$currentpage = intval($start / $pagelength);
-//echo "Item Count: ".count($arr)."Pages: $pages";
+	$pages = $art_cnt / $paging;
+	$currentpage = intval($start / $paging);
+
 	if ($pages >= 1) {
 		$skipped_pages=false;
 		for ($j=0; $j<$pages; $j++) {
@@ -587,10 +608,10 @@ if ($art_arr && count($art_arr) > 0) {
 					$skipped_pages=false;
 				}
 			}
-			if ($j == $currentpage) {
+			if ($j * $paging == $start) {
 				echo '<strong>'.($j+1).'</strong>&nbsp;&nbsp;';
 			} else {
-				echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&amp;atid='.$ath->getID().'&amp;set='. $set.'&amp;start='.($j*$pagelength).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
+				echo '<a href="'.getStringFromServer('PHP_SELF')."?func=browse&amp;group_id=".$group_id.'&amp;atid='.$ath->getID().'&amp;set='. $set.'&amp;start='.($j*$paging).'"><strong>'.($j+1).'</strong></a>&nbsp;&nbsp;';
 			}
 		}
 	}
