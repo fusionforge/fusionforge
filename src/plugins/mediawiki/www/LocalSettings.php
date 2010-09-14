@@ -219,11 +219,45 @@ function NoLinkOnMainPage(&$personal_urls){
 }
 $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
+class SpecialForgeRedir extends SpecialPage {
+	function getTitle() {
+		return 'SpecialForgeRedir';
+	}
+
+	function getRedirect() {
+		return $this;
+	}
+
+	function getRedirectQuery() {
+		return $this;
+	}
+
+	function getFullUrl() {
+		return util_make_url($this->dst);
+	}
+}
+
+class SpecialForgeRedirLogin extends SpecialForgeRedir {
+	var $dst = '/account/login.php';
+}
+
+class SpecialForgeRedirCreateAccount extends SpecialForgeRedir {
+	var $dst = '/account/register.php';
+}
+
+class SpecialForgeRedirResetPass extends SpecialForgeRedir {
+	var $dst = '/account/lostpw.php';
+}
+
+class SpecialForgeRedirLogout extends SpecialForgeRedir {
+	var $dst = '/account/logout.php';
+}
+
 function DisableLogInOut(&$mList) {
-	unset($mList['Userlogin']);
-	unset($mList['CreateAccount']);
-	unset($mList['Resetpass']);
-	unset($mList['Userlogout']);
+	$mList['Userlogin'] = 'SpecialForgeRedirLogin';
+	$mList['CreateAccount'] = 'SpecialForgeRedirCreateAccount';
+	$mList['Resetpass'] = 'SpecialForgeRedirResetPass';
+	$mList['Userlogout'] = 'SpecialForgeRedirLogout';
 	return true;
 }
 $GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
