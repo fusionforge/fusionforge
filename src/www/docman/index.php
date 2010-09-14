@@ -68,10 +68,11 @@ $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
 	exit_error(_('Error'),$dgf->getErrorMessage());
 
-$nested_groups =& $dgf->getNested();
+$nested_groups = $dgf->getNested();
+if ($dgf->isError())
+    exit_error(_('Error'),$dgf->getErrorMessage());
 
 $dgh = new DocumentGroupHTML($g);
-
 if ($dgh->isError())
 	exit_error('Error',$dgh->getErrorMessage());
 

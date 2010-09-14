@@ -126,10 +126,11 @@ class DocumentGroup extends Error {
 			return false;
 		}
 
-		$result = db_query_params ('INSERT INTO doc_groups (group_id,groupname,parent_doc_group) VALUES ($1, $2, $3)',
+		$result = db_query_params ('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid) VALUES ($1, $2, $3, $4)',
 					   array ($this->Group->getID(),
 						  htmlspecialchars($name),
-						  $parent_doc_group)) ;
+                          $parent_doc_group,
+                          '1')) ;
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
@@ -200,7 +201,7 @@ class DocumentGroup extends Error {
 			$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
 			return false;
 		}
-		$this->data_array =& db_fetch_array($res);
+		$this->data_array = db_fetch_array($res);
 		db_free_result($res);
 		return true;
 	}

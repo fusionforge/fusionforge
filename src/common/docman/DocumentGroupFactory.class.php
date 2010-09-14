@@ -66,7 +66,6 @@ class DocumentGroupFactory extends Error {
 		}
 		$this->Group =& $Group;
 
-
 		return true;
 	}
 
@@ -82,7 +81,7 @@ class DocumentGroupFactory extends Error {
 		}
 		
 		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-					   array ($this->Group->getID(),$stateid)) ;
+					   array ($this->Group->getID(),$stateid));
 		$rows = db_numrows($result);
 		
 		if (!$result || $rows < 1) {
@@ -101,11 +100,10 @@ class DocumentGroupFactory extends Error {
 			
 		}
 
-		
 		return $this->nested_groups;
-
 	}
-		/**
+
+	/**
 	 *	getDocumentGroups - Return an array of DocumentGroup objects.
 	 *
 	 *	@param int		The stateid of DocumentGroups
@@ -129,10 +127,7 @@ class DocumentGroupFactory extends Error {
 			}
 		}
 		
-
-		
 		return $this->flat_groups;
-
 	}
 }
 
