@@ -181,7 +181,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			<strong><?php echo _('Release name') ?>:<?php echo utils_requiredField();?></strong>
 		</td>
 		<td>
-			<input type="text" name="release_name" value="<?php echo htmlspecialchars(stripslashes($release_name)) ?>" />
+			<input type="text" name="release_name" value="<?php echo htmlspecialchars($release_name) ?>" />
 		</td>
 	</tr>
 	<tr>
@@ -252,7 +252,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			<strong><?php echo _('Release Notes') ?>:</strong>
 		</td>
 		<td>
-			<textarea name="release_notes" rows="7" cols="50"><?php echo htmlspecialchars(stripslashes($release_notes)); ?></textarea>
+			<textarea name="release_notes" rows="7" cols="50"><?php echo htmlspecialchars($release_notes); ?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -260,7 +260,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			<strong><?php echo _('Change Log') ?>:</strong>
 		</td>
 		<td>
-			<textarea name="release_changes" rows="7" cols="50"><?php echo htmlspecialchars(stripslashes($release_changes)); ?></textarea>
+			<textarea name="release_changes" rows="7" cols="50"><?php echo htmlspecialchars($release_changes); ?></textarea>
 		</td>
 	</tr>
 	<tr>
