@@ -54,7 +54,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 /* is this group using docman ? */
 if (!$g->usesDocman())
-	exit_error(_('Error'),_('This project has turned off the Doc Manager.'));
+	exit_error(_('Error'),_('This project has turned off the Doc Manager.'),'home');
 
 $dirid = getIntFromRequest('dirid');
 if (empty($dirid))
@@ -62,19 +62,19 @@ if (empty($dirid))
 
 $df = new DocumentFactory($g);
 if ($df->isError())
-	exit_error(_('Error'),$df->getErrorMessage());
+	exit_error(_('Error'),$df->getErrorMessage(),'docman');
 
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
-	exit_error(_('Error'),$dgf->getErrorMessage());
+	exit_error(_('Error'),$dgf->getErrorMessage(),'docman');
 
 $nested_groups = $dgf->getNested();
 if ($dgf->isError())
-    exit_error(_('Error'),$dgf->getErrorMessage());
+    exit_error(_('Error'),$dgf->getErrorMessage(),'docman');
 
 $dgh = new DocumentGroupHTML($g);
 if ($dgh->isError())
-	exit_error(_('Error'),$dgh->getErrorMessage());
+	exit_error(_('Error'),$dgh->getErrorMessage(),'docman');
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1)
