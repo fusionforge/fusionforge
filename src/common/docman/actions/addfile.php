@@ -54,7 +54,7 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !
     if (!$description)
         $missing_params[] = 'description';
 
-	exit_missing_param($_SERVER['HTTP_REFERER'],$missing_params);
+	exit_missing_param($_SERVER['HTTP_REFERER'],$missing_params,'docman');
 }
 
 $d = new Document($g, false, false,$gfcommon.'docman/engine/');

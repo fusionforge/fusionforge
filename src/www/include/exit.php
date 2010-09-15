@@ -33,7 +33,7 @@ function exit_error($title,$text="", $toptab='') {
 	global $HTML,$group_id;
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo '<h1>' . _('Exiting with error') . '</h1>';
-	echo $HTML->error_msg($title.'<br />'.htmlspecialchars($text));
+	echo $HTML->error_msg($title.' : '.htmlspecialchars($text));
 	$HTML->footer(array());
 	exit;
 }
@@ -73,8 +73,9 @@ function exit_no_group() {
  * exit_missing_param() - Exit with missing required parameters error
  * @param   string  URL : usually $_SERVER['HTTP_REFERER']
  * @param   array   array of missing parameters
+ * @param   string  toptab needed for navigation
  */
-function exit_missing_param($url='',$missing_params=array()) {
+function exit_missing_param($url='',$missing_params=array(),$toptab='') {
     if (!empty($url)) {
         if (!empty($missing_params)) {
             $error = _('Missing required parameters : ');
@@ -87,7 +88,7 @@ function exit_missing_param($url='',$missing_params=array()) {
         header('Location: '.$url.'&error_msg='.urlencode($error));
         exit;
     } else {
-	    exit_error(_('Error - Missing required parameters.'));
+	    exit_error(_('Error'), _('Missing required parameters.'),$toptab);
     }
 }
 
