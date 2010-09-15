@@ -46,7 +46,7 @@ if (!$doc_group || $doc_group == 100) {
     session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 }
 	
-if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) ))
+if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) )) {
     $missing_params = array();
     if (!$title)
         $missing_params[] = 'title';
@@ -55,6 +55,7 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !
         $missing_params[] = 'description';
 
 	exit_missing_param($_SERVER['HTTP_REFERER'],$missing_params);
+}
 
 $d = new Document($g, false, false,$gfcommon.'docman/engine/');
 if (!$d || !is_object($d)) {		
