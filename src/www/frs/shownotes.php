@@ -53,10 +53,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	frs_header(array('title'=>_('File Release Notes and Changelog'),'group'=>$group_id));
 
-	echo $HTML->boxTop(_('Notes:'));
-
-	echo '<h3>'._('Release Name:').' '.
-		util_make_link ('/frs/?group_id='.db_result($result,0,'group_id').'&amp;release_id='.$release_id,db_result($result,0,'name')).'</h3>';
+	echo '<h3>'._('Release Name:').' <a href="/frs/?group_id='.db_result($result,0,'group_id').'&amp;release_id='.$release_id.'">'.db_result($result,0,'name').'</a></h3>';
 
 	/*
 	 Show preformatted or plain notes/changes
@@ -69,8 +66,19 @@ if (!$result || db_numrows($result) < 1) {
 		$closing = '</p>';
 	}
 
-	echo $HTML->boxMiddle(_('Notes:'));
-	echo $opening.db_result($result,0,'notes').$closing;
+	if (db_result($result,0,'notes')) {
+		echo $HTML->boxTop(_('Release Notes'));
+		echo "$opening".db_result($result,0,'notes')."$closing";
+		echo $HTML->boxBottom();
+	}
+
+	if (db_result($result,0,'changes')) {
+		echo $HTML->boxTop(_('Change Log'));
+		echo "$opening".db_result($result,0,'changes')."$closing";
+		echo $HTML->boxBottom();
+	}
+
+
 
 	echo $HTML->boxMiddle(_('Changes:'));
 	echo $opening.db_result($result,0,'changes').$closing;
