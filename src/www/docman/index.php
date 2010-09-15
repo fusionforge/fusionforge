@@ -74,7 +74,7 @@ if ($dgf->isError())
 
 $dgh = new DocumentGroupHTML($g);
 if ($dgh->isError())
-	exit_error('Error',$dgh->getErrorMessage());
+	exit_error(_('Error'),$dgh->getErrorMessage());
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1)
