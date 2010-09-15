@@ -97,7 +97,7 @@ title="<?php echo _('Assigned Artifacts'); ?>">
 		}
 	} else {
 		echo '
-			<tr><td colspan="3">'._('You have no open tracker items assigned to you.').'</td></tr>';
+			<tr><td colspan="3" class="tablecontent">'._('You have no open tracker items assigned to you.').'</td></tr>';
 	}
 	echo $HTML->listTableBottom();
 ?>
