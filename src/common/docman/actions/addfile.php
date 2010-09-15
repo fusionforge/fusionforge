@@ -47,7 +47,14 @@ if (!$doc_group || $doc_group == 100) {
 }
 	
 if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name ) ))
-	exit_missing_param();
+    $missing_params = array();
+    if (!$title)
+        $missing_params[] = 'title';
+
+    if (!$description)
+        $missing_params[] = 'description';
+
+	exit_missing_param($_SERVER['HTTP_REFERER'],$missing_params);
 
 $d = new Document($g, false, false,$gfcommon.'docman/engine/');
 if (!$d || !is_object($d)) {		

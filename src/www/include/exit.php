@@ -1,11 +1,25 @@
 <?php
 /**
- * Exit functions
+ * FusionForge : Exit functions
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * Copyright 2010, Franck Villaume
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -13,6 +27,7 @@
  *
  * @param		string	Error title
  * @param		string	Error text
+ * @param       string  toptab for navigation bar
  */
 function exit_error($title,$text="", $toptab='') {
 	global $HTML,$group_id;
@@ -44,8 +59,7 @@ function exit_permission_denied($reason_descr='') {
  */
 function exit_not_logged_in() {
 	//instead of a simple error page, now take them to the login page
-	header ("Location: ".util_make_url ("/account/login.php?triggered=1&return_to=".urlencode(getStringFromServer('REQUEST_URI'))));
-	exit;
+	session_redirect ("/account/login.php?triggered=1&return_to=".urlencode(getStringFromServer('REQUEST_URI')));
 }
 
 /**
@@ -57,9 +71,24 @@ function exit_no_group() {
 
 /**
  * exit_missing_param() - Exit with missing required parameters error
+ * @param   string  URL : usually $_SERVER['HTTP_REFERER']
+ * @param   array   array of missing parameters
  */
-function exit_missing_param() {
-	exit_error(_('Error - Missing required parameters.'));
+function exit_missing_param($url='',$missing_params=array()) {
+    if (!empty($url)) {
+        if (!empty($missing_params)) {
+            $error = _('Missing required parameters : ');
+            foreach ($missing_params as $missing_param) {
+                $error .= $missing_param.' ';
+            }
+        } else {
+            $error = sprintf(_('Missing required parameters.'));
+        }
+        header('Location: '.$url.'&error_msg='.urlencode($error));
+        exit;
+    } else {
+	    exit_error(_('Error - Missing required parameters.'));
+    }
 }
 
 /**
