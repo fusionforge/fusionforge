@@ -168,9 +168,9 @@ $rows=count($pt_arr);
 if ($rows < 1) {
 
 	echo '
-		<span class="feedback">'._('No Matching Tasks found').'</span>
+		<div class="feedback">'._('No Matching Tasks found').'</div>
 		<p />
-		<span class="important">'._('Add tasks using the link above').'</span>';
+		<div class="warning">'._('Add tasks using the link above').'</div>';
 	echo db_error();
 } else {
 	if (session_loggedin()) {
@@ -403,7 +403,7 @@ if ($rows < 1) {
    <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
 
 <p>
-<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'
+<div class="warning">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div></p>
 			</td></tr>
 
 			<tr>
