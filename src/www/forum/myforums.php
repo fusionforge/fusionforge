@@ -56,10 +56,12 @@ $result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitore
 			   array ($user_id));
 if (!$result) {
     echo '<div class="error">Database error :'.db_error().'</div>';
+    forum_footer(array());
     exit;
 }
 if ( db_numrows($result) < 1) {
     echo '<div class="feedback">'._('You have no monitored forums').'</div>';
+    forum_footer(array());
     exit;
 }
 
