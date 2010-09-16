@@ -1,22 +1,31 @@
 <?php
 /**
-  *
-  * Project Summary Page
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
-
+ * FusionForge Documentation Manager
+ *
+ * Copyright 1999-2001 (c), VA Linux Systems, dtype
+ * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-/*
-	Project Summary Page
-	Written by dtype Oct. 1999
-*/
 $group_id = getIntFromRequest("group_id");
 
 if ((!$group_id) && $form_grp) {
@@ -24,14 +33,14 @@ if ((!$group_id) && $form_grp) {
 }
 
 if (!$group_id) {
-	exit_error("Missing Group Argument","A group must be specified for this page.");
+	exit_error(_('Missing Group Argument'),_('A group must be specified for this page.'));
 }
 
 if (isset ($sys_noforcetype) && $sys_noforcetype) {
 	$project = &group_get_object($group_id);
 	include $gfwww.'include/project_home.php';
 } else {
-	header ('Location: '.util_make_url ('/projects/'. group_getunixname($group_id) .'/'));
+	session_redirect('/projects/'. group_getunixname($group_id) .'/'));
 }
 
 ?>
