@@ -41,16 +41,17 @@ function exit_error($title,$text="", $toptab='') {
 /**
  * exit_permission_denied() - Exit with permission denied error
  *
- * @param		string	$reason_descr
+ * @param	string	$reason_descr
+ * @param   string  toptab needed for navigation
  */
-function exit_permission_denied($reason_descr='') {
+function exit_permission_denied($reason_descr='',$toptab='') {
 	if(!session_loggedin()) {
 		exit_not_logged_in();
 	} else {
 		if (!$reason_descr) {
 			$reason_descr=_('This project\'s administrator will have to grant you permission to view this page.');
 		}
-		exit_error(_('Permission denied.'),$reason_descr);
+		exit_error(_('Permission denied.'),$reason_descr,$toptab);
 	}
 }
 
@@ -94,9 +95,10 @@ function exit_missing_param($url='',$missing_params=array(),$toptab='') {
 
 /**
  * exit_disabled() - Exit with disabled feature error.
+ * @param   string  toptab needed for navigation
  */
-function exit_disabled() {
-	exit_error(_('Error - The Site Administrator has turned off this feature.'));
+function exit_disabled($toptab='') {
+	exit_error(_('Error'), _('The Site Administrator has turned off this feature.'),$toptab);
 }
 
 /**
