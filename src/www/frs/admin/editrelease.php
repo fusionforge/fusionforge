@@ -95,12 +95,12 @@ if (getStringFromRequest('step1')) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
 		if ($uploaded_notes['type'] !== 'text/plain') {
-			$feedback .= _('Release Notes Are not in Text');
+			$error_msg .= _('Release Notes Are not in Text').'<br />';
 			$exec_changes = false;
 		} else {
 			$notes = addslashes(fread(fopen($uploaded_notes['tmp_name'],'r'),$uploaded_notes['size']));
 			if (strlen($notes) < 20) {
-				$feedback .= _('Release Notes Are Too Small');
+				$error_msg .= _('Release Notes Are Too Small').'<br />';
 				$exec_changes = false;
 			}
 		}
@@ -114,12 +114,12 @@ if (getStringFromRequest('step1')) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
 		if ($uploaded_changes['type'] !== 'text/plain') {
-			$feedback .= _('Change Log Is not in Text');
+			$error_msg .= _('Change Log Is not in Text').'<br />';
 			$exec_changes = false;
 		} else {
 			$changes = addslashes(fread(fopen($uploaded_changes['tmp_name'],'r'), $uploaded_changes['size']));
 			if (strlen($changes) < 20) {
-				$feedback .= _('Change Log Is Too Small');
+				$error_msg .= _('Change Log Is Too Small').'<br />';
 				$exec_changes = false;
 			}
 		}
@@ -193,7 +193,7 @@ if (getStringFromRequest('step3')) {
 				}
 			}
 		} else {
-			exit_error('Error',_('Missing Parameters'));
+			$error_msg .= _('File not deleted: you did not check "I\'m Sure"');
 		}
 	// Otherwise update the file information
 	} else {
