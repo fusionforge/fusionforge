@@ -7,7 +7,7 @@
 RPM_TMP=~/rpmbuild
 BUILDRESULT=~/fusionforge_repo
 
-HTMLPURIFIER_VERSION=4.1.1
+HTMLPURIFIER_VERSION=4.2.0
 
 VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
 in_svn_repo:= $(wildcard .svn/)
