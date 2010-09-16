@@ -201,7 +201,13 @@ header('X-Powered-By:');
 header('Last-Modified: ' . $last . ' GMT');
 header('ETag: "' . db_result($res,0,'attachmentid') . '"');
 
-header('Content-disposition: attachment; filename="' . db_result($res,0,'filename') . '"');
+if ($extension != 'txt') {
+	header("Content-disposition: inline; filename=\"" . db_result($res,0,'filename') . "\"");
+	header('Content-transfer-encoding: binary');
+}	else {
+	header("Content-disposition: attachment; filename=\"" . db_result($res,0,'filename') . "\"");
+}
+
 header('Content-Length: ' . db_result($res,0,'filesize') );
 
 
