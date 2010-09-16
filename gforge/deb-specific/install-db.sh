@@ -190,7 +190,7 @@ EOF
 		if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<EOF \
 	    	    && [ "$(tail -n +2 $tmp1 | head -1)" = 'CREATE DATABASE' ] ; 
 SET LC_MESSAGES = 'C' ;
-CREATE DATABASE $db_name WITH ENCODING 'UNICODE';
+CREATE DATABASE $db_name WITH TEMPLATE template0 ENCODING 'UNICODE';
 EOF
 		then
   	    	    # Creation OK 
