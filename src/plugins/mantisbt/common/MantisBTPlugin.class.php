@@ -68,13 +68,6 @@ class MantisBTPlugin extends Plugin {
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][]=$this->text;
 					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&id=' . $group_id . "&pluginname=" . $this->name;
-				} else {
-					$params['TITLES'][]='<font color="#444444">'.$this->text.'</font>';
-					if ($G_SESSION && $project->getPermission(user_get_object($G_SESSION->getId()))->isAdmin()) {
-							$params['DIRS'][]='/project/admin/editgroupinfo.php?group_id=' . $group_id;
-					} else {
-							$params['DIRS'][]='#';
-					}
 				}
 				if ($params['toptab'] == $this->name) {
                     $params['selected']=(count($params['TITLES'])-1);
@@ -91,7 +84,7 @@ class MantisBTPlugin extends Plugin {
 				echo ' <input type="CHECKBOX" name="use_mantisbtplugin" value="1" ';
 				// CHECKED OR UNCHECKED?
 				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
+					echo 'checked="checked"';
 				}
 				echo "><br/>";
 				echo "</td>";
@@ -105,7 +98,7 @@ class MantisBTPlugin extends Plugin {
 				// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 				$group_id=$params['group'];
 				$group = &group_get_object($group_id);
-				$use_mantisbtplugin = getStringFromRequest('use_mantisbtplugin');
+				$use_mantisbtplugin = getIntFromRequest('use_mantisbtplugin');
 				if ( $use_mantisbtplugin == "1" ) {
 					if (! $group->usesPlugin($this->name)) {
 						// activation plugin
@@ -120,7 +113,7 @@ class MantisBTPlugin extends Plugin {
 						foreach($group->getMembers() as $member){
 							$members[] = $member->data_array['user_name'];
 						}
-						updateUsersProjetMantis($group->data_array['group_id'],$members);
+						//updateUsersProjetMantis($group->data_array['group_id'],$members);
 					}
 				} else if ( $use_mantisbtplugin == "0" ) {
 					$group->setPluginUse ( $this->name, false );
@@ -136,7 +129,7 @@ class MantisBTPlugin extends Plugin {
 				echo ' <input type="CHECKBOX" name="use_mantisbtplugin" value="1" ';
 				// CHECKED OR UNCHECKED?
 				if ( $user->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
+					echo 'checked="CHECKED"';
 				}
 				echo ">    Use ".$this->text." Plugin";
 				echo "</td>";
@@ -146,23 +139,13 @@ class MantisBTPlugin extends Plugin {
 			case "userisactivecheckboxpost":
 				// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
 				$user = $params['user'];
-				$use_mantisbtplugin = getStringFromRequest('use_mantisbtplugin');
+				$use_mantisbtplugin = getIntFromRequest('use_mantisbtplugin');
 				if ( $use_mantisbtplugin == 1 ) {
 					$user->setPluginUse ( $this->name );
 				} else {
 					$user->setPluginUse ( $this->name, false );
 				}
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_mantisbtplugin" value="1" ';
-				// CHECKED OR UNCHECKED?
-				if ( $user->usesPlugin ( $this->name ) ) {
-					echo "CHECKED";
-				}
-				echo ">    Use ".$this->text." Plugin";
-				echo "</td>";
-				echo "</tr>";
-				break;
+                break;
 
 			case "user_personal_links":
 				// this displays the link in the user's profile page to it's personal MantisBT (if you want other sto access it, youll have to change the permissions in the index.php
@@ -197,14 +180,15 @@ class MantisBTPlugin extends Plugin {
 				if ($group->usesPlugin($this->name)) {
 					// ajout du projet mantis s'il n'existe pas
 					if (!isProjetMantisCreated($group->data_array['group_id'])){
-						addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['description']);
+						addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
 					}
+                    exit;
 					// mise a jour des utilisateurs avec les roles
 					$members = array ();
 					foreach($group->getMembers() as $member){
 						$members[] = $member->data_array['user_name'];
 					}
-					updateUsersProjetMantis($group->data_array['group_id'],$members);
+					//updateUsersProjetMantis($group->data_array['group_id'],$members);
 				}
 				break;
 
@@ -216,7 +200,7 @@ class MantisBTPlugin extends Plugin {
 				foreach($group->getMembers() as $member){
 					$members[] = $member->data_array['user_name'];
 				}
-				updateUsersProjetMantis($group->data_array['group_id'],$members);
+				//updateUsersProjetMantis($group->data_array['group_id'],$members);
 				break;
 
             // mise a jour de l'adresse mail utilisateur
@@ -257,8 +241,6 @@ class MantisBTPlugin extends Plugin {
 
 function addProjetMantis($idProjet, $nomProjet, $isPublic, $description){
 	
-	global $sys_mantisbt_host,$sys_mantisbt_user, $sys_mantisbt_password;
-	
 	$projet = array();
 	$project['name'] = $nomProjet;
 	$project['status'] = "development";
@@ -271,16 +253,16 @@ function addProjetMantis($idProjet, $nomProjet, $isPublic, $description){
 
 	$project['description'] = $description;
 	
-	$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	
 	try{
-		$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => $sys_mantisbt_user, "password" => $sys_mantisbt_password, "project" => $project));
+	    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project" => $project));
 	}catch (SoapFault $soapFault) {
 		echo $soapFault->faultstring;
-		echo "<br/>";
+        exit;
 	}	
 	if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
 		echo "Error : Impossible de créer le projet dans mantis";
+        exit;
 	}else{
 		db_query_params('INSERT INTO group_mantisbt (id_group, id_mantisbt) VALUES ($1,$2)',
 				array($idProjet, $idProjetMantis));
@@ -289,8 +271,6 @@ function addProjetMantis($idProjet, $nomProjet, $isPublic, $description){
 }
 	
 function removeProjetMantis($idProjet){
-	
-	global $sys_mantisbt_host,$sys_mantisbt_user, $sys_mantisbt_password;
 	
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
@@ -302,12 +282,11 @@ function removeProjetMantis($idProjet){
 		echo "Erreur : impossible de retrouver le projet au sein de mantisbt";
 	}else{
 		$idMantisbt = $row['id_mantisbt'];
-		$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		try{
-			$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => $sys_mantisbt_user, "password" => $sys_mantisbt_password, "project_id" => $idMantisbt));
+		    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt));
 		}catch (SoapFault $soapFault) {
 			echo $soapFault->faultstring;
-			echo "<br/>";
 		}
 		if (!$delete){
 			echo "Error : Impossible de supprimer le projet dans mantis : ".$idProjet;
@@ -322,8 +301,6 @@ function removeProjetMantis($idProjet){
 
 function updateProjetMantis($idProjet,$nomProjet,$isPublic, $description) {
 
-	global $sys_mantisbt_host,$sys_mantisbt_user, $sys_mantisbt_password;
-
 	$projet = array();
 	$project['name'] = $nomProjet;
 	$project['status'] = "development";
@@ -342,16 +319,14 @@ function updateProjetMantis($idProjet,$nomProjet,$isPublic, $description) {
 		echo "Erreur : impossible de retrouver le projet au sein de mantisbt";
 	}else{
 		$idMantisbt = $row['id_mantisbt'];
-		$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		try{
-			$update = $clientSOAP->__soapCall('mc_project_update', array("username" => $sys_mantisbt_user, "password" => $sys_mantisbt_password, "project_id" => $idMantisbt, "project" => $project));;
+		    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$update = $clientSOAP->__soapCall('mc_project_update', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt, "project" => $project));;
 		} catch (SoapFault $soapFault) {
 			echo $soapFault->faultstring;
-			echo "<br/>";
 		}
-		if (!$update) {
+		if (!isset($update)) {
 			echo "Error : update MantisBT projet";
-		}
 	}
 }
 

@@ -668,6 +668,7 @@ src/etc/config.ini-usrlocal -text
 src/etc/config.ini.d/blocks.ini -text
 src/etc/config.ini.d/externalsearch.ini -text
 src/etc/config.ini.d/mantis.ini -text
+src/etc/config.ini.d/mantisbt.ini -text
 src/etc/config.ini.d/mediawiki.ini -text
 src/etc/config.ini.d/scmarch.ini -text
 src/etc/config.ini.d/scmbzr.ini -text
