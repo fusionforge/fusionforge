@@ -118,7 +118,7 @@ class ProjectTaskHTML extends ProjectTask {
 					<td>'.util_make_link ('/tracker/?func=detail&aid='.db_result($res,$i,'artifact_id').'&group_id='.db_result($res,$i,'group_id').'&atid='.db_result($res,$i,'group_artifact_id'), db_result($res,$i,'summary')).'</td>
 					<td>'. db_result($res,$i,'name') .'</td>
 					<td>'. date(_('Y-m-d H:i'),db_result($res,$i,'open_date')) .'</td>'.
-					(($is_admin) ? '<td><input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'"></td>' : '').
+					(($is_admin) ? '<td><input type="checkbox" name="rem_artifact_id[]" value="'.db_result($res,$i,'artifact_id').'" /></td>' : '').
 					'</tr>';
 			}
 
