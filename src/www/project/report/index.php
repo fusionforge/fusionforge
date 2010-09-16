@@ -105,7 +105,7 @@ function GetTime ($timedifference) {
 }
 
 //
-//      get the Group object
+//      get the Project object
 //
 $group_id = getIntFromRequest('group_id');
 

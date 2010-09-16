@@ -33,7 +33,7 @@ if ((!$group_id) && $form_grp) {
 }
 
 if (!$group_id) {
-	exit_error(_('Missing Group Argument'),_('A group must be specified for this page.'));
+	exit_error("Missing Project Argument","A project must be specified for this page.");
 }
 
 if (isset ($sys_noforcetype) && $sys_noforcetype) {
