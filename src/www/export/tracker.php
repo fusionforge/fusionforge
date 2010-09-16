@@ -50,13 +50,13 @@ $offset = getIntFromRequest('offset');
 
 if ($group_id && $atid) {
 	//
-	//	get the Group object
+	//	get the Project object
 	//
 	$group =& group_get_object($group_id);
 	
 	beginDocument();
 	if (!$group || !is_object($group)) {
-		endOnError('Could not get the Group object');
+		endOnError('Could not get the Project object');
 	} elseif ($group->isError()) {
 		endOnError($group->getErrorMessage());
 	}
@@ -190,7 +190,7 @@ if ($group_id && $atid) {
 	}
 } else {
 	beginDocument();
-	displayError('Group ID or Artifact ID Not Set');
+	displayError('Project ID or Artifact ID Not Set');
 	endDocument();
 }
 ?>

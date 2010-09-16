@@ -49,7 +49,7 @@ class ForumAdmin extends Error {
 	 *  PrintAdminMessageOptions - prints the different administrator options for a message
 	 *
 	 *	@param   integer	The Message ID
-	 *	@param   integer	The Group ID
+	 *	@param   integer	The Project ID
 	 *	@param   integer	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
 	 *	@param   integer	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
 	 *	@return  The HTML output
