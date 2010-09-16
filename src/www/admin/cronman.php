@@ -62,12 +62,12 @@ if($offset > $totalCount) {
 }
 
 if ($which==100) {
-	$res = db_query_params ('SELECT * FROM cron_history ORDER BY rundate',
+	$res = db_query_params ('SELECT * FROM cron_history ORDER BY rundate DESC',
 				array (),
 				ADMIN_CRONMAN_ROWS,
 				$offset);
 } else {
-	$res = db_query_params ('SELECT * FROM cron_history WHERE job=$1 ORDER BY rundate',
+	$res = db_query_params ('SELECT * FROM cron_history WHERE job=$1 ORDER BY rundate DESC',
 				array ($which),
 				ADMIN_CRONMAN_ROWS,
 				$offset);
