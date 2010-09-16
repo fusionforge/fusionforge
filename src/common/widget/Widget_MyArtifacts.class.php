@@ -87,7 +87,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 	function getContent() {
 		$html_my_artifacts = '<table style="width:100%">';
-		$atf = new ArtifactsForUser(UserManager::instance()->getCurrentUser());
+		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
 		$assigned = $atf->getAssignedArtifactsByGroup();
 		$submitted = $atf->getSubmittedArtifactsByGroup();
 		$all = $atf->getArtifactsFromSQLWithParams('SELECT * FROM artifact_vw av where (av.submitted_by=$1 OR  av.assigned_to=$1) AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',array( UserManager::instance()->getCurrentUser()->getID()));
@@ -228,7 +228,7 @@ class Widget_MyArtifacts extends Widget {
 							$group_id.'&aid='.$aid.'&atid='.$atid.
 							'">'. stripslashes($summary).'</A></TD>'.
 							'<TD class="small">';
-						$html .= '&nbsp;'.$AS_flag.'</TD>'.$percent_complete.'</TR>';
+						$html .= '&nbsp;'.$AS_flag.'</TD></TR>';
 
 					}
 				}

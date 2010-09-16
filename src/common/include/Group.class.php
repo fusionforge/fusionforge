@@ -2496,18 +2496,18 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
 						array ($this->getID()));
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$role_ids[] = $arr['role_id'] ;
 			}
 			$res = db_query_params ('SELECT role_id FROM role_project_refs WHERE group_id=$1',
 						array ($this->getID()));
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$role_ids[] = $arr['role_id'] ;
 			}
 		} else {
 			$res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
 							    array ($this->getID()));
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$role_ids[] = $arr['role_id'] ;
 			}
 		}

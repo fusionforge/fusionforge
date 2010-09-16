@@ -42,8 +42,8 @@ class Widget_MyMonitoredForums extends Widget {
             "AND forum_group_list.is_public <> 9 ".
              "AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
              "AND forum_monitored_forums.user_id=$1 ";
-        $um =& UserManager::instance();
-        $current_user =& $um->getCurrentUser();
+        $um = UserManager::instance();
+        $current_user = $um->getCurrentUser();
         if ($current_user->getStatus()=='S') {
             $projects = $current_user->getProjects();
             $sql .= "AND groups.group_id IN (". implode(',', $projects) .") ";

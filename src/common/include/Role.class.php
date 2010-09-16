@@ -137,7 +137,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				       array ($this->getID()));
 		
 	
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$result[] = group_get_object ($arr['group_id']) ;
 		}
 		return $result ;
