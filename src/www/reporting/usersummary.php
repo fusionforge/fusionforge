@@ -94,7 +94,7 @@ GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group
 	summary, pt.hours, end_date, pt.project_task_id, pt.hours',
 				array ($start,
 				       $end,
-				       db_int_array_to_any_clause (array($tstat))));
+				       db_int_array_to_any_clause (explode(',',$tstat))));
 if (!$res || db_numrows($res) < 1) {
 	echo '<div class="feedback">' . _('No matches found').db_error() . '</div>';
 } else {
