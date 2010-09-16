@@ -54,7 +54,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 /* is this group using docman ? */
 if (!$g->usesDocman())
-	exit_error(_('Error'),_('This project has turned off the Doc Manager.'),'home');
+	exit_disabled('home');
 
 $dirid = getIntFromRequest('dirid');
 if (empty($dirid))

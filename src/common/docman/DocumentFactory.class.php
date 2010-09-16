@@ -178,7 +178,7 @@ class DocumentFactory extends Error {
 		$result = db_query_params ('SELECT * FROM docdata_vw ORDER BY title',
 					   array());
 		if (!$result) {
-			exit_error('Error', db_error());
+			exit_error('Error', db_error(),'docman');
 		}
 		
 		while ($arr = db_fetch_array($result)) {
@@ -201,7 +201,7 @@ class DocumentFactory extends Error {
 			ORDER BY doc_states.name ASC',
 					   array());
 		if (!$result) {
-			exit_error('error', db_error());
+			exit_error('error', db_error(),'docman');
 		}
 		
 		$return = array();
