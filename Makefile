@@ -47,15 +47,22 @@ check:
 	#cd tests ; phpunit --verbose unit; phpunit --verbose code; 
 	cd tests ; php AllTests.php
 
+checkfull:
+	cd tests ; phpunit --verbose build
+	#cd tests ; php AllFullTests.php
+
 checkdebtools:
 	sudo apt-get install php5-cli phpunit php-htmlpurifier pcregrep moreutils
 
-buildtar:
+buildtar: $(BUILDRESULT)
 	rm -fr /tmp/$(VERSION)
 	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./contrib' | grep -v '^./fusionforge.spec' | cpio -pdumB --quiet /tmp/$(VERSION)
 	cd /tmp/$(VERSION); utils/manage-translations.sh build
 	cd /tmp/; tar jcf $(BUILDRESULT)/$(VERSION).tar.bz2 $(VERSION)
 	rm -fr /tmp/$(VERSION)
+
+$(BUILDRESULT):
+	mkdir $(BUILDRESULT)
 
 build-unit-tests:
 	mkdir -p $(BUILDDIR)/reports/coverage
