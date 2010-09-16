@@ -104,14 +104,14 @@ if (session_loggedin()) {
 	   			if (!$result) {
 					db_rollback();
 					form_release_key(getStringFromRequest('form_key'));
-	   				$feedback = ' '._('ERROR doing insert').' ';
+	   				$error_msg = ' '._('ERROR doing insert').' ';
 	   			} else {
 					db_commit();
 	   				$feedback = ' '._('News Added.').' ';
 	   			}
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
-			$feedback = ' '._('ERROR - both subject and body are required').' ';
+			$error_msg = ' '._('ERROR - both subject and body are required').' ';
 		}
 	}
 
