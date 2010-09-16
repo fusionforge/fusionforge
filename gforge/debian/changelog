@@ -1,11 +1,15 @@
-fusionforge (5.0.2-1) UNRELEASED; urgency=low
+fusionforge (5.0.2-1) unstable; urgency=low
 
   * New upstream bugfix release.
   * Switch to Unix sockets for DB access by default.
   * Cope with postgresql-8.4 on both sides of 8.4.4-2, where the init
-    script can be called either "postgresql-8.4" or "postgresql".
+    script can be called either "postgresql-8.4" or "postgresql" (closes:
+    #596929).
+  * Also cope with PostgreSQL having been installed with a non-UTF-8
+    locale, which previously prevented our database from being created due
+    to charset incompatibility (closes: #596931).
 
- -- Roland Mas <lolando@debian.org>  Tue, 14 Sep 2010 17:33:44 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 16 Sep 2010 09:51:32 +0200
 
 fusionforge (5.0.1+svn10155-1) unstable; urgency=low
 
