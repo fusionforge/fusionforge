@@ -41,7 +41,7 @@ if (!$f || !is_object($f)) {
 
 session_require_perm ('forum_admin', $f->Group->getID()) ;
 
-forum_header(array('title'=>_('Add forum')));
+forum_header(array('title'=>_('Monitoring Users')));
 
 $res = db_query_params ('select users.user_id,users.user_name, users.email, users.realname from
 users,forum_monitored_forums fmf where fmf.user_id=users.user_id and
