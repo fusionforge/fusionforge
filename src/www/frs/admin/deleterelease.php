@@ -38,7 +38,9 @@ if (!$group_id) {
 }
 
 $project =& group_get_object($group_id);
-if (!$project || $project->isError()) {
+if (!$project || !is_object($project)) {
+    exit_no_group();
+} elseif ($project->isError()) {
 	exit_error('Error',$project->getErrorMessage());
 }
 

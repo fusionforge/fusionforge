@@ -42,17 +42,18 @@ if (!$package_id || !$release_id) {
 	exit;
 }
 
-$g =& group_get_object($group_id);
-if (!$g || $g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+$group=group_get_object($group_id);
+if (!$group || !is_object($group)) {
+    exit_no_group();
+} elseif ($group->isError()) {
+    exit_error('Error', $group->getErrorMessage());
 }
-
 session_require_perm ('frs', $group_id, 'write') ;
 
 //
 //  Get the package
 //
-$frsp = new FRSPackage($g,$package_id);
+$frsp = new FRSPackage($group,$package_id);
 if (!$frsp || !is_object($frsp)) {
 	exit_error('Error','Could Not Get FRSPackage');
 } elseif ($frsp->isError()) {

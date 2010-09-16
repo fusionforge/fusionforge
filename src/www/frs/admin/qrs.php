@@ -39,7 +39,9 @@ if (!$group_id) {
 }
 
 $g =& group_get_object($group_id);
-if (!$g || $g->isError()) {
+if (!$g || !is_object($g)) {
+    exit_no_group();
+} elseif ($g->isError()) {
 	exit_error('Error',$g->getErrorMessage());
 }
 
