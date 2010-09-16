@@ -38,15 +38,14 @@ if (!$group_id) {
 	exit_no_group();
 }
 if (!$package_id || !$release_id) {
-	header("Location: /frs/admin/?group_id=$group_id");
-	exit;
+	session_redirect('/frs/admin/?group_id='.$group_id);
 }
 
 $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-    exit_error('Error', $group->getErrorMessage());
+    exit_error(_('Error'), $group->getErrorMessage());
 }
 session_require_perm ('frs', $group_id, 'write') ;
 
@@ -55,9 +54,9 @@ session_require_perm ('frs', $group_id, 'write') ;
 //
 $frsp = new FRSPackage($group,$package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error('Error','Could Not Get FRSPackage');
+	exit_error(_('Error'),_('Could Not Get FRSPackage'),'frs');
 } elseif ($frsp->isError()) {
-	exit_error('Error',$frsp->getErrorMessage());
+	exit_error(_('Error'),$frsp->getErrorMessage(),'frs');
 }
 
 //
@@ -65,12 +64,12 @@ if (!$frsp || !is_object($frsp)) {
 //
 $frsr = new FRSRelease($frsp,$release_id);
 if (!$frsr || !is_object($frsr)) {
-	exit_error('Error','Could Not Get FRSRelease');
+	exit_error(_('Error'),_('Could Not Get FRSRelease'),'frs');
 } elseif ($frsr->isError()) {
-	exit_error('Error',$frsr->getErrorMessage());
+	exit_error('Error',$frsr->getErrorMessage(),'frs');
 }
 
-$upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
+$upload_dir = forge_get_config('ftp_upload_dir') . "/" . $group->getUnixName();
 
 
 /*
@@ -92,7 +91,7 @@ if (getStringFromRequest('step1')) {
 	// Check for uploaded release notes
 	if ($uploaded_notes["tmp_name"]) {
 		if (!is_uploaded_file($uploaded_notes['tmp_name'])) {
-			exit_error('Error','Attempted File Upload Attack');
+			exit_error(_('Error'),_('Attempted File Upload Attack'),'frs');
 		}
 		if ($uploaded_notes['type'] !== 'text/plain') {
 			$error_msg .= _('Release Notes Are not in Text').'<br />';
@@ -111,7 +110,7 @@ if (getStringFromRequest('step1')) {
 	// Check for uploaded change logs
 	if ($uploaded_changes['tmp_name']) {
 		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
-			exit_error('Error','Attempted File Upload Attack');
+			exit_error(_('Error'),_('Attempted File Upload Attack'),'frs');
 		}
 		if ($uploaded_changes['type'] !== 'text/plain') {
 			$error_msg .= _('Change Log Is not in Text').'<br />';
@@ -133,7 +132,7 @@ if (getStringFromRequest('step1')) {
 		//$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 		$release_date = strtotime($release_date);
 		if (!$frsr->update($status_id,$release_name,$notes,$changes,$preformatted,$release_date)) {
-			exit_error('Error',$frsr->getErrorMessage());
+			exit_error(_('Error'),$frsr->getErrorMessage(),'frs');
 		} else {
 			$feedback .= _('Data Saved');
 		}
@@ -158,9 +157,8 @@ if (getStringFromRequest('step2')) {
 	if ($ret == true) {
 		$feedback = _('File Released') ;
 	} else {
-		$feedback .= $ret ;
+		$error_msg .= $ret ;
 	}
-
 }
 
 // Edit/Delete files in a release
@@ -182,12 +180,12 @@ if (getStringFromRequest('step3')) {
 		if ($im_sure) {
 			$frsf = new FRSFile($frsr,$file_id);
 			if (!$frsf || !is_object($frsf)) {
-				exit_error('Error','Could Not Get FRSFile');
+				exit_error(_('Error'),_('Could Not Get FRSFile'),'frs');
 			} elseif ($frsf->isError()) {
-				exit_error('Error',$frsf->getErrorMessage());
+				exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
 			} else {
 				if (!$frsf->delete()) {
-					exit_error('Error',$frsf->getErrorMessage());
+					exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
 				} else {
 					$feedback .= _('File Deleted');
 				}
@@ -199,15 +197,15 @@ if (getStringFromRequest('step3')) {
 	} else {
 		$frsf = new FRSFile($frsr,$file_id);
 		if (!$frsf || !is_object($frsf)) {
-			exit_error('Error','Could Not Get FRSFile');
+			exit_error(_('Error'),_('Could Not Get FRSFile'),'frs');
 		} elseif ($frsf->isError()) {
-			exit_error('Error',$frsf->getErrorMessage());
+			exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
 		} else {
 			//$date_list = split('[- :]',$release_time,5);
 			//$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 			$release_time = strtotime($release_time);
 			if (!$frsf->update($type_id,$processor_id,$release_time,$new_release_id)) {
-				exit_error('Error',$frsf->getErrorMessage());
+				exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
 			} else {
 				$feedback .= _('File Updated');
 			}
@@ -299,7 +297,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <?php } ?>
 
 <?php if (forge_get_config('use_manual_uploads')) {
-	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
+	$incoming = forge_get_config('groupdir_prefix')."/".$group->getUnixName()."/incoming" ;
 
 	echo '<p>';
 	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
