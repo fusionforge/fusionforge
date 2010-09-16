@@ -8844,7 +8844,7 @@ class SimplePie_Misc
 		return $output . $input;
 	}
 
-	function get_element($realname, $string)
+	static function get_element($realname, $string)
 	{
 		$return = array();
 		$name = preg_quote($realname, '/');
@@ -10725,7 +10725,7 @@ class SimplePie_Misc
 		}
 	}
 
-	function atom_10_construct_type($attribs)
+	static function atom_10_construct_type($attribs)
 	{
 		if (isset($attribs['']['type']))
 		{
