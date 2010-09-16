@@ -138,17 +138,17 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1',
-						     html_image('ic/xmail16w.png','20','20',array()).' '._('Stop Monitoring')).' | ';
+						     html_image('ic/xmail16w.png','20','20').' '._('Stop Monitoring')).' | ';
 			} else {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1',
-						     html_image('ic/mail16w.png','20','20',array()).' '._('Monitor Forum')).' | ';
+						     html_image('ic/mail16w.png','20','20').' '._('Monitor Forum')).' | ';
 			}
 			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
-					     html_image('ic/save.png','24','24',array()) .' '._('Save Place')).' | ';
+					     html_image('ic/save.png','24','24') .' '._('Save Place')).' | ';
 		}
 	} elseif ($f) {
 		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-			html_image('ic/mail16w.png','20','20',array()).' '._('Monitor Forum').'</a> | ';		
+			html_image('ic/mail16w.png','20','20').' '._('Monitor Forum').'</a> | ';		
 	}
 
 	if ($f && $forum_id) {
@@ -215,7 +215,7 @@ class ForumHTML extends Error {
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
 					'.
-		html_image('ic/msg.png',"10","12",array("border"=>"0")) .
+		html_image('ic/msg.png',"10","12") .
 		$bold_begin. $msg->getSubject() . $bold_end .'&nbsp; '.
 		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>
@@ -434,7 +434,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $ah_begin .
-					html_image('ic/msg.png',"10","12",array("border"=>"0")).' ';
+					html_image('ic/msg.png',"10","12").' ';
 				/*
 					See if this message is new or not
 				*/
