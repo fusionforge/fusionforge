@@ -1,0 +1,22 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+#allow-hotplug eth0
+#iface eth0 inet dhcp
+auto vmbr0
+iface vmbr0 inet static
+	address 10.194.10.35
+	netmask 255.255.255.0
+	gateway 10.194.10.1
+	dns-nameservers 10.194.11.20 10.194.11.21
+	dns-search rd.francetelecom.fr
+	bridge_ports eth0
+	bridge_fd 9
+	bridge_hello 2
+	bridge_maxage 12
+	bridge_stp off
