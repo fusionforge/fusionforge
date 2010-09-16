@@ -143,8 +143,7 @@ if ($msg_id) {
 		Show entire thread
 
 	*/
-	echo '<br /><br />
-		<h3>'._('Thread View').'</h3>';
+	echo '<h2>'._('Thread View').'</h2>';
 
 	$msg_arr = $fmf->nestArray($fmf->getThreaded($fm->getThreadID()));
 	if ($fmf->isError()) {

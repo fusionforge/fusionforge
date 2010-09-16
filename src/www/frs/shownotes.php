@@ -53,7 +53,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	frs_header(array('title'=>_('File Release Notes and Changelog'),'group'=>$group_id));
 
-	echo '<h3>'._('Release Name:').' <a href="/frs/?group_id='.db_result($result,0,'group_id').'&amp;release_id='.$release_id.'">'.db_result($result,0,'name').'</a></h3>';
+	echo '<h2>'._('Release Name:').' <a href="/frs/?group_id='.db_result($result,0,'group_id').'&amp;release_id='.$release_id.'">'.db_result($result,0,'name').'</a></h2>';
 
 	/*
 	 Show preformatted or plain notes/changes
