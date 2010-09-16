@@ -143,7 +143,7 @@ if ($forum_id) {
 		exit_error(_('Error'),$fh->getErrorMessage());
 	}
 
-	forum_header(array('title'=>$f->getName(),'forum_id'=>$forum_id));
+	forum_header(array('title'=>_('Forum: ') . $f->getName(),'forum_id'=>$forum_id));
 
 /**
  *
@@ -268,7 +268,7 @@ if ($forum_id) {
 				show the subject and poster
 			*/
 			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</a></td>'.
-				'<td><a href="/users/'.$msg->getPosterName().'/">'.$msg->getPosterRealName().'</a></td>'.
+				'<td>'.util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName()).'</td>'.
 				'<td>'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'</td></tr>';
 
 			if ($msg->hasFollowups()) {
@@ -342,7 +342,7 @@ ORDER BY f.most_recent_date DESC',
 						show the subject and poster
 				*/
 				$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
-					'<td><a href="/users/'.$row['user_name'].'/">'.$row['realname'].'</a></td>'.
+				'<td>'.util_display_user($row['user_name'], $row['user_id'], $row['realname']).'</td>'.
 					'<td>'. $row['followups'] .'</td>'.
 					'<td>'.date(_('Y-m-d H:i'),$row['recent']).'</td></tr>';
 				$i++;

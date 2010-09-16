@@ -36,7 +36,7 @@ $search = getStringFromRequest('search');
 $usersearch = getStringFromRequest('usersearch');
 
 if (!$search) {
-	exit_error(_('Error'), _('Refusing to display whole DB,That would display whole DB.  Please use a CLI query if you wish to do this.'));
+	exit_error(_('Error - Refusing to display whole DB. Please use a CLI query if you wish to do this.'));
 }
 
 site_admin_header(array('title'=>_('Admin Search Results')));

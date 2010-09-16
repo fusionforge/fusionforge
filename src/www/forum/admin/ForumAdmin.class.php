@@ -288,7 +288,7 @@ class ForumAdmin extends Error {
 			}
 			
 			if (count($moderated_forums)==0) {
-				echo $HTML->feedback(_('No forum messages are pending moderation for this group'));
+				echo $HTML->feedback(_('No forums are moderated for this group'));
 				forum_footer(array());
 				exit();
 			}
@@ -299,7 +299,7 @@ class ForumAdmin extends Error {
 			}
 			
 			echo '
-			<script language="JavaScript" type="text/javascript">
+			<script type="text/javascript">
 		
 			function confirmDel() {
 				var agree=confirm("Proceed? Actions are permanent!");
