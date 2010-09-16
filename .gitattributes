@@ -4473,6 +4473,9 @@ tests/func/config.php.sample -text
 tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/openvz/Makefile -text
+tests/openvz/local.g-virtual05 -text
+tests/openvz/local.g-virtual05.rinse.bpi -text
+tests/openvz/local.g-virtual05.rinse.conf -text
 tests/scripts/fusionforge-github-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-trunk-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-trunk-build-rpm.sh -text
