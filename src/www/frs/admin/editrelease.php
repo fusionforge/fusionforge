@@ -221,7 +221,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
  */
 ?>
 
-<h3><?php echo _('Step 1:&nbsp;&nbsp; Edit Release') ?></h3>
+<h2><?php echo _('Step 1:&nbsp;&nbsp; Edit Release') ?></h2>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1" />
@@ -281,7 +281,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 </form>
 <hr />
 
-<h3><?php echo _('Step 2: Add Files To This Release') ?></h3>
+<h2><?php echo _('Step 2: Add Files To This Release') ?></h2>
 <p><?php echo _('Now, choose a file to upload into the system.') ?></p>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
@@ -331,7 +331,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="submit" name="submit" value="<?php echo _('Add This File') ?>" /></p>
 </form>
 <hr />
-<h3><?php echo _('Step 3: Edit Files In This Release') ?></h3>
+<h2><?php echo _('Step 3: Edit Files In This Release') ?></h2>
 
 <?php
 	// Get a list of files associated with this release

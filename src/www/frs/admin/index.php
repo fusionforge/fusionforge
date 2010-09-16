@@ -122,7 +122,7 @@ $res=db_query_params ('SELECT status_id,package_id,name AS package_name
 			array($group_id));
 $rows=db_numrows($res);
 if ($res && $rows > 0) {
-	echo '<h3>'._('QRS').'</h3>';
+	echo '<h2>'._('QRS').'</h2>';
 	printf(_('Click here to %1$s quick-release a file %2$s'), '<a href="qrs.php?group_id=' . $group_id . '">', '</a>').'<br />';
 }
 ?>
