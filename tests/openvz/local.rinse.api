@@ -1,0 +1,12 @@
+#! /bin/sh
+echo "========================================="
+echo $1
+case $dist in
+	centos-5)
+		chroot $1 /bin/mount proc /proc -t proc
+		pkglist="`echo $extrapackage|sed 's/,/ /g'`"
+		chroot $1 /usr/bin/yum -y install $pkglist
+		chroot $1 /bin/umount /proc
+	;;
+esac
+echo "========================================="
