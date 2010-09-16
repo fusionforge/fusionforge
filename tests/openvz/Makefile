@@ -19,15 +19,15 @@ CENTVERS=5.4
 
 default: 
 	@echo "Run make <target>"
-	@echo "Available target are"
-	@echo "make net : this will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge"
+	@echo "Available targets are:"
+	@echo " make net : this will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge"
 	@echo "  See interfaces.sample to know how to setup a bridge"
-	@echo "make builddebiantemplate : build an openvz debian template"
-	@echo "make buildcentostemplate : build an openvz centos template"
-	@echo "make createdeb : build a debian openvz vm with ID=$(VEIDDEBTMPL)"
-	@echo "make createcentos : build a centos openvz vm with ID=$(VEIDCENTOSTMPL)"
+	@echo " make builddebiantemplate : build an openvz debian template"
+	@echo " make buildcentostemplate : build an openvz centos template"
+	@echo " make createdeb : build a debian openvz vm with ID=$(VEIDDEBTMPL) from the debian template"
+	@echo " make createcentos : build a centos openvz vm with ID=$(VEIDCENTOSTMPL) from the centos template"
 	@echo ""
-	@echo "Read Makefile for other target"
+	@echo "Read Makefile for other targets"
 
 builddebiantemplate: builddebianvm
 	vzctl set $(VEID) --applyconfig basic --save
