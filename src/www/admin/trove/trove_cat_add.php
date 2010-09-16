@@ -42,7 +42,7 @@ if (getStringFromRequest('submit')) {
 
 	$newroot = trove_getrootcat($form_parent);
 
-	if ($form_shortname) {
+	if ($form_shortname && $form_fullname) {
 		$res = db_query_params ('
 			INSERT INTO trove_cat 
 				(shortname,fullname,description,parent,version,root_parent)
@@ -69,12 +69,14 @@ if (getStringFromRequest('submit')) {
 				db_error()
 			);
 		}
-	} 
 
-	// update full paths now
-	trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
+		// update full paths now
+		trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
 
-	session_redirect("/admin/trove/trove_cat_list.php");
+		session_redirect("/admin/trove/trove_cat_list.php");
+	} else {
+		$error_msg = 'Missing category short name or full name';
+	}
 } 
 
 site_admin_header(array('title'=>_('Site Admin: Trove - Add Node')));
