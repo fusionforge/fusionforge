@@ -67,7 +67,7 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	exit_error(_('Error - No project was chosen, project does not exist or you can\'t access it.'));
+	exit_error(_('Error'), _('No project was chosen, project does not exist or you can\'t access it.'));
 }
 
 /**
@@ -103,9 +103,10 @@ function exit_disabled($toptab='') {
 
 /**
  * exit_form_double_submit() - Exit with double submit error.
+ * @param   string  toptab needed for navigation
  */
-function exit_form_double_submit() {
-	exit_error(_('Error - You Attempted To Double-submit this item. Please avoid double-clicking.'));
+function exit_form_double_submit($toptab='') {
+	exit_error(_('Error'),_('You Attempted To Double-submit this item. Please avoid double-clicking.'),$toptab);
 }
 
 // Local Variables:

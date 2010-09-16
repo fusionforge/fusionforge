@@ -2,7 +2,7 @@
 /**
  * FusionForge File Release Facility
  *
- * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 1999-2001 (c) VA Linux Systems , Darrell Brogdon
  * Copyright 2002 (c) GForge, LLC
  * Copyright 2010 (c), FusionForge Team
  * http://fusionforge.org/
@@ -34,15 +34,15 @@ require_once $gfwww.'frs/include/frs_utils.php';
 $group_id = getIntFromRequest('group_id');
 $package_id = getIntFromRequest('package_id');
 
-if (!$group_id) {
+if (!$group_id)
 	exit_no_group();
-}
 
 $g =& group_get_object($group_id);
+
 if (!$g || !is_object($g)) {
     exit_no_group();
 } elseif ($g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+	exit_error('Error',$g->getErrorMessage(),'frs');
 }
 
 // check the permissions and see if this user is a release manager.
@@ -52,12 +52,6 @@ session_require_perm ('frs', $group_id, 'write') ;
 $packages = get_frs_packages($g);
 
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $g->getUnixName();
-
-/*
-	Quick file release system , Darrell Brogdon, SourceForge, Aug, 2000
-
-	With much code horked from editreleases.php
-*/
 
 if (getStringFromRequest('submit')) {
 	$release_name = trim(getStringFromRequest('release_name'));
@@ -91,31 +85,31 @@ if (getStringFromRequest('submit')) {
 		//
 		$frsp = new FRSPackage($g,$package_id);
 		if (!$frsp || !is_object($frsp)) {
-			exit_error('Error','Could Not Get FRSPackage');
+			exit_error(_('Error'),_('Could Not Get FRSPackage'),'frs');
 		} elseif ($frsp->isError()) {
-			exit_error('Error',$frsp->getErrorMessage());
+			exit_error(_('Error'),$frsp->getErrorMessage(),'frs');
 		} else {
 			//
 			//	Create a new FRSRelease in the db
 			//
 			$frsr = new FRSRelease($frsp);
 			if (!$frsr || !is_object($frsr)) {
-				exit_error('Error','Could Not Get FRSRelease');
+				exit_error(_('Error'),_('Could Not Get FRSRelease'),'frs');
 			} elseif ($frsr->isError()) {
-				exit_error('Error',$frsr->getErrorMessage());
+				exit_error(_('Error'),$frsr->getErrorMessage(),'frs');
 			} else {
 				db_begin();
 				if (!$frsr->create($release_name,$release_notes,$release_changes,
 						   $preformatted,$release_date)) {
 					db_rollback();
-					exit_error('Error',$frsr->getErrorMessage());
+					exit_error(_('Error'),$frsr->getErrorMessage(),'frs');
 				}
 
 				$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
 							       $userfile, $ftp_filename, $manual_filename) ;
 				if ($ret != true) {
 					db_rollback() ;
-					exit_error ($ret) ;
+					exit_error (_('Error'),$ret,'frs') ;
 				}
 				$frsr->sendNotice();
 				

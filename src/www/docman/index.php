@@ -44,17 +44,19 @@ $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
 /* validate group */
-if (!$group_id) {
+if (!$group_id)
 	exit_no_group();
-}
+
 $g =& group_get_object($group_id);
-if (!$g || !is_object($g) || $g->isError()) {
+if (!$g || !is_object($g))
 	exit_no_group();
-}
 
 /* is this group using docman ? */
 if (!$g->usesDocman())
 	exit_disabled('home');
+
+if ($g->isError())
+	exit_error(_('Error'),$g->getErrorMessage(),'docman');
 
 $dirid = getIntFromRequest('dirid');
 if (empty($dirid))
