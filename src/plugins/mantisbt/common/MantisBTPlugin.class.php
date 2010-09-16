@@ -239,7 +239,7 @@ class MantisBTPlugin extends Plugin {
 	}
 }
 
-function addProjetMantis($idProjet, $nomProjet, $isPublic, $description){
+function addProjetMantis($idProjet, $nomProjet, $isPublic, $description) {
 	
 	$projet = array();
 	$project['name'] = $nomProjet;
@@ -269,8 +269,8 @@ function addProjetMantis($idProjet, $nomProjet, $isPublic, $description){
 		echo db_error();
 	}
 }
-	
-function removeProjetMantis($idProjet){
+
+function removeProjetMantis($idProjet) {
 	
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
@@ -288,7 +288,7 @@ function removeProjetMantis($idProjet){
 		}catch (SoapFault $soapFault) {
 			echo $soapFault->faultstring;
 		}
-		if (!$delete){
+		if (!isset($delete)){
 			echo "Error : Impossible de supprimer le projet dans mantis : ".$idProjet;
 			echo "<br/>";
 		}else{
@@ -325,8 +325,9 @@ function updateProjetMantis($idProjet,$nomProjet,$isPublic, $description) {
 		} catch (SoapFault $soapFault) {
 			echo $soapFault->faultstring;
 		}
-		if (!isset($update)) {
+		if (!isset($update))
 			echo "Error : update MantisBT projet";
+
 	}
 }
 
@@ -342,7 +343,6 @@ function isProjetMantisCreated($idProjet){
 	}else{
 		return true;
 	}
-	
 }
 
 function getIdProjetMantis($idProjet){
@@ -377,7 +377,7 @@ function updateUserInMantis($user_id) {
     }
 }
 
-function updateUsersProjetMantis($idProjet, $members){
+function updateUsersProjetMantis($idProjet, $members) {
 	
 	global $role;
 	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
@@ -432,9 +432,9 @@ function updateUsersProjetMantis($idProjet, $members){
 								"mantis_project_user_list_table",
 								array ("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
 							);
-				if (!$resultInsert){
+				if (!isset($resultInsert))
 					echo "Error : Impossible de mettre à jour les roles dans mantisbt";
-				}
+
 			}
 		}
 	}
@@ -479,9 +479,9 @@ function getGroupIdByName($name){
     $row = db_fetch_array($child_query);
 
     if ($row == null) {
-	return 0;
+		return 0;
     }else{
-	return $row['group_id'];
+		return $row['group_id'];
     }
 }
 

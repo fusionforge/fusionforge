@@ -33,14 +33,13 @@ if ((!$group_id) && $form_grp) {
 }
 
 if (!$group_id) {
-	exit_error("Missing Project Argument","A project must be specified for this page.");
+	exit_error(_('Error'),_('Missing Project Argument : A project must be specified for this page.'));
 }
 
 if (isset ($sys_noforcetype) && $sys_noforcetype) {
 	$project = &group_get_object($group_id);
 	include $gfwww.'include/project_home.php';
 } else {
-	session_redirect('/projects/'. group_getunixname($group_id) .'/'));
+	session_redirect('/projects/'. group_getunixname($group_id) .'/');
 }
-
 ?>
