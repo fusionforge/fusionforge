@@ -123,15 +123,37 @@ class MediaWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == "role_get") {
 			$role =& $params['role'] ;
+
+			// Edit privileges
+			$right = new PluginSpecificRoleSetting ($role,
+								'plugin_mediawiki_edit') ;
+			$right->SetAllowedValues (array ('0', '1', '2', '3')) ;
+			$right->SetDefaultValues (array ('Admin' => '3',
+							 'Senior Developer' => '2',
+							 'Junior Developer' => '1',
+							 'Doc Writer' => '3',
+							 'Support Tech' => '0')) ;
 			
-			$edit = new PluginSpecificRoleSetting ($role,
-							       'plugin_mediawiki_edit') ;
-			$edit->SetAllowedValues (array ('0', '1', '2')) ;
-			$edit->SetDefaultValues (array ('Admin' => '2',
-							'Senior Developer' => '2',
-							'Junior Developer' => '1',
-							'Doc Writer' => '2',
-							'Support Tech' => '0')) ;
+			// File upload privileges
+			$right = new PluginSpecificRoleSetting ($role,
+								'plugin_mediawiki_upload') ;
+			$right->SetAllowedValues (array ('0', '1', '2')) ;
+			$right->SetDefaultValues (array ('Admin' => '2',
+							 'Senior Developer' => '2',
+							 'Junior Developer' => '1',
+							 'Doc Writer' => '2',
+							 'Support Tech' => '0')) ;
+			
+			// Administrative tasks
+			$right = new PluginSpecificRoleSetting ($role,
+								'plugin_mediawiki_admin') ;
+			$right->SetAllowedValues (array ('0', '1')) ;
+			$right->SetDefaultValues (array ('Admin' => '1',
+							 'Senior Developer' => '0',
+							 'Junior Developer' => '0',
+							 'Doc Writer' => '0',
+							 'Support Tech' => '0')) ;
+			
 		} elseif ($hookname == "role_normalize") {
 			$role =& $params['role'] ;
 			$new_sa =& $params['new_sa'] ;
@@ -146,12 +168,26 @@ class MediaWikiPlugin extends Plugin {
 				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_edit') ;
 			}
 		} elseif ($hookname == "role_translate_strings") {
-			$edit = new PluginSpecificRoleSetting ($role,
+			$right = new PluginSpecificRoleSetting ($role,
 							       'plugin_mediawiki_edit') ;
-			$edit->setDescription (_('Mediawiki write access')) ;
-			$edit->setValueDescriptions (array ('0' => _('No editing'),
-							    '1' => _('Edit existing pages only'), 
-							    '2' => _('Edit and create pages'))) ;
+			$right->setDescription (_('Mediawiki write access')) ;
+			$right->setValueDescriptions (array ('0' => _('No editing'),
+							     '1' => _('Edit existing pages only'), 
+							     '2' => _('Edit and create pages'), 
+							     '3' => _('Edit, create, move, delete pages'))) ;
+
+			$right = new PluginSpecificRoleSetting ($role,
+							       'plugin_mediawiki_upload') ;
+			$right->setDescription (_('Mediawiki file upload')) ;
+			$right->setValueDescriptions (array ('0' => _('No uploading'),
+							     '1' => _('Upload permitted'), 
+							     '2' => _('Upload and re-upload'))) ;
+
+			$right = new PluginSpecificRoleSetting ($role,
+							       'plugin_mediawiki_admin') ;
+			$right->setDescription (_('Mediawiki administrative tasks')) ;
+			$right->setValueDescriptions (array ('0' => _('No administrative access'),
+							     '1' => _('Edit interface, import XML dumps'))) ;
 		} else if ($hookname == "project_admin_plugins") {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);

@@ -115,8 +115,22 @@ $GLOBALS['sys_session_expire'] = $sys_session_expire;
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
+function FusionForgeRoleToMediawikiGroupName ($role, $project) {
+	if ($role->getHomeProject() == NULL) {
+		return sprintf ('ForgeRole:%s [global]',
+				$role->getName ()) ;
+	} elseif ($role->getHomeProject()->getID() != $project->getID()) {
+		return sprintf ('ForgeRole:%s [project %s]',
+				$role->getName (),
+				$role->getHomeProject()->getUnixName()) ;
+	} else {
+		return sprintf ('ForgeRole:%s',
+				$role->getName ()) ;
+	}
+}
+
 function FusionForgeMWAuth( $user, &$result ) {
-	global $fusionforgeproject ;
+	global $fusionforgeproject, $wgGroupPermissions ;
 
 	$cookie = getStringFromCookie ('session_ser') ;
         if ($cookie != '') {
@@ -127,8 +141,6 @@ function FusionForgeMWAuth( $user, &$result ) {
         if ($s) {
                 $u = user_get_object ($s);
 		$g = group_get_object_by_name ($fusionforgeproject) ;
-		$perm =& $g->getPermission ();
-		$r =& $u->getRole($g) ;
 
                 $mwname = ucfirst($u->getUnixName ()) ;
                 $mwu = User::newFromName ($mwname);
@@ -145,55 +157,128 @@ function FusionForgeMWAuth( $user, &$result ) {
 		$user->loadGroups() ;
 		$current_groups = $user->getGroups() ;
 
-                // Role-based access control
-		if (!isset ($r) || !$r || $r->isError()) {
-			$rname = '' ;
+		if (USE_PFO_RBAC) {
+			$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;
+			$rs = array () ;
+			foreach ($available_roles as $r) {
+				$linked_projects = $r->getLinkedProjects () ;
+
+				foreach ($linked_projects as $lp) {
+					if ($lp->getID() == $g->getID()) {
+						$rs[] = $r ;
+					}
+				}
+			}
 		} else {
-			$rname = "ForgeRole:".$r->getName () ;
-		}
-		$role_groups = preg_grep ("/^ForgeRole:/", $current_groups) ;
-		foreach ($role_groups as $cg) {
-			if ($cg != $rname) {
-                                $user->removeGroup ($cg) ;
+			$perm =& $g->getPermission ();
+			$r = $u->getRole($g) ;
+			if (isset ($r) && $r && !$r->isError()) {
+				$rs = array ($r) ;
 			}
 		}
-		if (!in_array ($rname, $current_groups)) {
-			$user->addGroup ($rname) ;
+		
+		// Sync MW groups for current user with FF roles
+		$rnames = array () ;
+		foreach ($rs as $r) {
+			$rnames[] = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
+		}
+		$role_groups = preg_grep ("/^ForgeRole:/", $current_groups) ;
+
+		foreach ($rnames as $rname) {
+			if (!in_array ($rname, $current_groups)) {
+				$user->addGroup ($rname) ;
+			}
+		}
+		foreach ($role_groups as $cg) {
+			if (!in_array ($cg, $rnames)) {
+				$user->removeGroup ($cg) ;
+			}
 		}
 
-		// Previous (group-based) access control
-               $current_groups = $user->getGroups() ;
-                if ($perm && is_object($perm) && $perm->isAdmin()) {
-                        if (!in_array ('sysop', $current_groups)) {
-                                $user->addGroup ('sysop') ;
-                        }
-                        if (!in_array ('Members', $current_groups)) {
-                                $user->addGroup ('Members') ;
-                        }
-                        if (!in_array ('ForgeUsers', $current_groups)) {
-                                $user->addGroup ('ForgeUsers') ;
-                        }
-                } elseif ($perm && is_object($perm) && $perm->isMember()) {
-                        if (in_array ('sysop', $current_groups)) {
-                                $user->removeGroup ('sysop') ;
-                        }
-                        if (!in_array ('Members', $current_groups)) {
-                                $user->addGroup ('Members') ;
-                        }
-                        if (!in_array ('ForgeUsers', $current_groups)) {
-                                $user->addGroup ('ForgeUsers') ;
-                        }
-                } else {
-                        if (in_array ('sysop', $current_groups)) {
-                                $user->removeGroup ('sysop') ;
-                        }
-                        if (in_array ('Members', $current_groups)) {
-                                $user->removeGroup ('Members') ;
-                        }
-                        if (!in_array ('ForgeUsers', $current_groups)) {
-                                $user->addGroup ('ForgeUsers') ;
-                        }
-                }
+		// Setup rights for all roles referenced by project
+		$rs = $g->getRoles() ;
+		foreach ($rs as $r) {
+			$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
+
+			// Day-to-day edit privileges
+			switch ($r->getVal('plugin_mediawiki_edit', $g->getID())) {
+			case 0:
+				$wgGroupPermissions[$gr]['edit']          = false;
+				$wgGroupPermissions[$gr]['createpage']    = false;
+				$wgGroupPermissions[$gr]['createtalk']    = false;
+				$wgGroupPermissions[$gr]['minoredit']     = false;
+				$wgGroupPermissions[$gr]['move']          = false;
+				$wgGroupPermissions[$gr]['delete']        = false;
+				$wgGroupPermissions[$gr]['undelete']      = false;
+				break ;
+			case 1:
+				$wgGroupPermissions[$gr]['edit']          = true;
+				$wgGroupPermissions[$gr]['createpage']    = false;
+				$wgGroupPermissions[$gr]['createtalk']    = false;
+				$wgGroupPermissions[$gr]['minoredit']     = false;
+				$wgGroupPermissions[$gr]['move']          = false;
+				$wgGroupPermissions[$gr]['delete']        = false;
+				$wgGroupPermissions[$gr]['undelete']      = false;
+				break ;
+			case 2:
+				$wgGroupPermissions[$gr]['edit']          = true;
+				$wgGroupPermissions[$gr]['createpage']    = true;
+				$wgGroupPermissions[$gr]['createtalk']    = true;
+				$wgGroupPermissions[$gr]['minoredit']     = true;
+				$wgGroupPermissions[$gr]['move']          = false;
+				$wgGroupPermissions[$gr]['delete']        = false;
+				$wgGroupPermissions[$gr]['undelete']      = false;
+				break ;
+			case 3:
+				$wgGroupPermissions[$gr]['edit']          = true;
+				$wgGroupPermissions[$gr]['createpage']    = true;
+				$wgGroupPermissions[$gr]['createtalk']    = true;
+				$wgGroupPermissions[$gr]['minoredit']     = true;
+				$wgGroupPermissions[$gr]['move']          = true;
+				$wgGroupPermissions[$gr]['delete']        = true;
+				$wgGroupPermissions[$gr]['undelete']      = true;
+				break ;
+			}
+
+			// File upload privileges
+			switch ($r->getVal('plugin_mediawiki_upload', $g->getID())) {
+			case 0:
+				$wgGroupPermissions[$gr]['upload']        = false;
+				$wgGroupPermissions[$gr]['reupload-own']  = false;
+				$wgGroupPermissions[$gr]['reupload']      = false;
+				$wgGroupPermissions[$gr]['upload_by_url'] = false;
+				break ;
+			case 1:
+				$wgGroupPermissions[$gr]['upload']        = true;
+				$wgGroupPermissions[$gr]['reupload-own']  = true;
+				$wgGroupPermissions[$gr]['reupload']      = false;
+				$wgGroupPermissions[$gr]['upload_by_url'] = false;
+				break ;
+			case 2:
+				$wgGroupPermissions[$gr]['upload']        = true;
+				$wgGroupPermissions[$gr]['reupload-own']  = true;
+				$wgGroupPermissions[$gr]['reupload']      = true;
+				$wgGroupPermissions[$gr]['upload_by_url'] = true;
+				break ;
+			}
+
+			// Administrative tasks
+			switch ($r->getVal('plugin_mediawiki_admin', $g->getID())) {
+			case 0:
+				$wgGroupPermissions[$gr]['editinterface'] = false;
+				$wgGroupPermissions[$gr]['import']        = false;
+				$wgGroupPermissions[$gr]['importupload']  = false;
+				$wgGroupPermissions[$gr]['siteadmin']     = false;
+				break ;
+			case 1:
+				$wgGroupPermissions[$gr]['editinterface'] = true;
+				$wgGroupPermissions[$gr]['import']        = true;
+				$wgGroupPermissions[$gr]['importupload']  = true;
+				$wgGroupPermissions[$gr]['siteadmin']     = true;
+				break ;
+			}
+
+		}
 
                 $user->setCookies ();
                 $user->saveSettings ();
@@ -206,10 +291,6 @@ function FusionForgeMWAuth( $user, &$result ) {
 	return true ;
 }
 
-//function NoLogoutLinkOnMainPage(&$personal_urls){unset($personal_urls['logout']);return true;}
-//$wgHooks['PersonalUrls']['logout']='NoLogoutLinkOnMainPage';
-//function NoLoginLinkOnMainPage(&$personal_urls){unset($personal_urls['anonlogin']);return true;}
-//$wgHooks['PersonalUrls']['anonlogin']='NoLoginLinkOnMainPage';
 function NoLinkOnMainPage(&$personal_urls){
 	unset($personal_urls['anonlogin']);
 	unset($personal_urls['anontalk']);
@@ -264,43 +345,14 @@ $GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
 
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
-$g = group_get_object_by_name ($fusionforgeproject) ;
-$roles = $g->getRoles () ;
-foreach ($roles as $role) {
-	$gr = "ForgeRole:".$role->getName () ;
-	switch ($role->getVal('plugin_mediawiki_edit', 0)) {
-	case 0:
-		$wgGroupPermissions[$gr]['edit']          = false;
-		$wgGroupPermissions[$gr]['createpage']    = false;
-		$wgGroupPermissions[$gr]['createtalk']    = false;
-		break ;
-	case 1:
-		$wgGroupPermissions[$gr]['edit']          = true;
-		$wgGroupPermissions[$gr]['createpage']    = false;
-		$wgGroupPermissions[$gr]['createtalk']    = false;
-		break ;
-	case 2:
-		$wgGroupPermissions[$gr]['edit']          = true;
-		$wgGroupPermissions[$gr]['createpage']    = true;
-		$wgGroupPermissions[$gr]['createtalk']    = true;
-		break ;
-	}
-}
-
 $wgGroupPermissions['ForgeUsers']['createaccount'] = false;
 $wgGroupPermissions['ForgeUsers']['edit']          = false;
-$wgGroupPermissions['ForgeUsers']['createpage']    = false;
-$wgGroupPermissions['ForgeUsers']['createtalk']    = false;
 
 $wgGroupPermissions['user']['createaccount'] = false;
 $wgGroupPermissions['user']['edit']          = false;
-$wgGroupPermissions['user']['createpage']    = false;
-$wgGroupPermissions['user']['createtalk']    = false;
 
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit']          = false;
-$wgGroupPermissions['*']['createpage']    = false;
-$wgGroupPermissions['*']['createtalk']    = false;
 
 $res = db_query_params("SELECT is_public from groups where unix_group_name=$1", array($fusionforgeproject)) ;
 $row = db_fetch_array($res);
@@ -317,13 +369,13 @@ if ($public) {
 	$wgGroupPermissions['ForgeUsers']['read']     	= false;
 	$wgGroupPermissions['user']['read']     	= false;
 	$wgGroupPermissions['*']['read']          	= false;
-} 
+}
 
 $wgFavicon = '/images/icon.png' ;
 $wgBreakFrames = false ;
 ini_set ('memory_limit', '50M') ;
 
-// LOAD THE SITE-WIDE AND PROJECT-SPECIFIC EXTRA-SETTINGS 
+// LOAD THE SITE-WIDE AND PROJECT-SPECIFIC EXTRA-SETTINGS
 if (is_file(forge_get_config('config_path')."/plugins/mediawiki/LocalSettings.php")) {
 	include(forge_get_config('config_path')."/plugins/mediawiki/LocalSettings.php");
 }
@@ -344,7 +396,7 @@ if (is_file("$gconfig_dir/ForgeSettings.php")) {
 // project specific settings
 if (is_file("$project_dir/ProjectSettings.php")) {
         include ("$project_dir/ProjectSettings.php") ;
-} 
+}
 
 // Local Variables:
 // mode: php
