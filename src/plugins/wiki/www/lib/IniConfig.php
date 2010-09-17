@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: IniConfig.php 7666 2010-08-31 16:02:45Z vargenau $');
+// rcs_id('$Id: IniConfig.php 7693 2010-09-17 11:33:14Z rurban $');
 /**
  * A configurator intended to read its config from a PHP-style INI file,
  * instead of a PHP file.
@@ -125,6 +125,7 @@ function IniConfig($file) {
     if (!file_exists($file)) {
         // We need to DATA_PATH for configurator, or pass the posted values
         // somewhow to the script
+        $GLOBALS['charset'] = 'utf-8';
         include_once(dirname(__FILE__)."/install.php");
         run_install("_part1");
         if (!defined("_PHPWIKI_INSTALL_RUNNING"))

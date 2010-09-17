@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7690 2010-09-17 08:46:20Z vargenau $');
 /**
  * The new mediawiki (Wikipedia.org) default style.
  * Mediawiki 'monobook' style sheet for CSS2-capable browsers.
@@ -49,9 +49,7 @@ function ActionButton ($action, $label = false, $page_or_rev = false, $options =
                     $WikiTheme->makeActionButton($action, $label, $page_or_rev, $options));
 }
 
-class WikiTheme_MonoBook
-/* extends WikiTheme */
-extends WikiTheme_Wikilens
+class WikiTheme_MonoBook extends WikiTheme_Wikilens
 {
   
     /* this adds selected to the class */

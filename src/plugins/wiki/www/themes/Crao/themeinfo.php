@@ -6,10 +6,10 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7690 2010-09-17 08:46:20Z vargenau $');
 
 /*
- * This file defines the default appearance ("theme") of PhpWiki.
+ * This file defines the Crao theme of PhpWiki.
  */
 
 require_once('lib/WikiTheme.php');

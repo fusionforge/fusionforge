@@ -1,4 +1,4 @@
-! Brief Example of Creating Your Own WikiTheme
+== Brief Example of Creating Your Own WikiTheme ==
 
 To create or modify one of the existing themes:
 * Make a copy of one of the themes.
@@ -23,7 +23,7 @@ Review the themeinfo.php for any necessary changes, and add the name
 of your theme to index.php.
   define('THEME','NewName');
 
-! Template Structure
+== Template Structure ==
 
 Templates currently must use the .tmpl extension (simple PHP parsed files).
 Other file extensions are reserved for future use (i.e. .tpl for Smarty or 
@@ -58,4 +58,4 @@ the various HTML() methods within a plugin's php code it is guaranteed
 to produce validating XHTML, by using custom templates not.
 
 ----
-PhpWikiDocumentation
+[[PhpWikiDocumentation]]

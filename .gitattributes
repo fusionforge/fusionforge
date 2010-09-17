@@ -3408,7 +3408,6 @@ src/plugins/wiki/www/themes/Sidebar/sidebar-min.css -text
 src/plugins/wiki/www/themes/Sidebar/sidebar.css -text
 src/plugins/wiki/www/themes/Sidebar/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/body.tmpl -text
-src/plugins/wiki/www/themes/Sidebar/templates/browse.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/calendar.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/content.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/debug.tmpl -text

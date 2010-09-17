@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 14:12:16 +0000
+Date: Fri, 17 Sep 2010 14:12:16 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ReleaseNotes 7684 2010-09-10 12:13:48Z vargenau $
+X-Rcs-Id: $Id: ReleaseNotes 7695 2010-09-17 11:49:14Z rurban $
 Content-Type: application/x-phpwiki;
   pagename=ReleaseNotes;
   flags=PAGE_LOCKED;
@@ -10,10 +10,12 @@ Content-Transfer-Encoding: binary
 
 <<CreateToc with_toclink||=1 headers||=1,2,3>>
 
-== 1.4.0RC1 2010-09-10 Reini Urban, Marc-Etienne Vargenau, Sabri Labbenes, Sébastien Le Callonnec ==
+== 1.4.0RC1 2010-09-17 Reini Urban, Marc-Etienne Vargenau, Sabri Labbenes, Sébastien Le Callonnec ==
 
-An important modification in this release is the implementation of full Wikicreole 1.0
-syntax, including additions.
+This is a new major release, where everything changed from 1.2, and lots of changes since 13.4.
+
+An important modification in this release is the implementation 
+of full Wikicreole 1.0 syntax, including additions.
 
 The "classic" Phpwiki syntax is still supported.
 

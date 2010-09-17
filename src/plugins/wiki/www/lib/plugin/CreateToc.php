@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateToc.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: CreateToc.php 7689 2010-09-17 08:41:10Z vargenau $');
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -246,7 +246,6 @@ extends WikiPlugin
     function extractHeaders (&$content, &$markup, $backlink=0,
                              $counter=0, $levels=false, $firstlevelstyle='number', $basepage='')
     {
-
         if (!$levels) $levels = array(1,2);
         $tocCounter = $this->_initTocCounter();
         reset($levels);
@@ -374,8 +373,7 @@ extends WikiPlugin
         if (!$pagename) {
             return $this->error(_("no page specified"));
         }
-        if ($jshide and isBrowserIE() and browserDetect("Mac")) {
-            //trigger_error(_("jshide set to 0 on Mac IE"), E_USER_NOTICE);
+        if (isBrowserIE() and browserDetect("Mac")) {
             $jshide = 0;
         }
         if (($notoc) or ($liststyle == 'ol')) {
@@ -384,8 +382,8 @@ extends WikiPlugin
 
         // Check if user is allowed to get the Page.
         if (!mayAccessPage ('view', $pagename)) {
-                return $this->error(sprintf(_("Illegal access to page %s: no read access"),
-                $pagename));
+            return $this->error(sprintf(_("Illegal access to page %s: no read access"),
+            $pagename));
         }
 
         $page = $dbi->getPage($pagename);

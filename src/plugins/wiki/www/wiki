@@ -20,9 +20,9 @@ Note: This needs a webserver handler to PHP like this on Apache:
 define('VIRTUAL_PATH', $_SERVER['SCRIPT_NAME']);
 
 // Override the default configuration for CONSTANTS before index.php
-$LANG='de'; $LC_ALL='de_DE';
-define('THEME', 'default');
-define('WIKI_NAME', "WikiDemo:$LANG:" . THEME);
+//$LANG='de'; $LC_ALL='de_DE';
+//define('THEME', 'default');
+//define('WIKI_NAME', "WikiDemo:$LANG:" . THEME);
 
 // Load the default configuration.
 include "index.php";

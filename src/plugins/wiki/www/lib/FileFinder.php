@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: FileFinder.php 7543 2010-06-17 13:22:59Z vargenau $');
+<?php // rcs_id('$Id: FileFinder.php 7692 2010-09-17 11:32:55Z rurban $');
 
 require_once(dirname(__FILE__).'/stdlib.php');
 
@@ -154,7 +154,7 @@ class FileFinder
         if (substr($path,0,1) == '/') {
             return true;
         } elseif (isWindows() and preg_match("/^[a-z]:/i", $path)
-                  and (substr($path,3,1) == "/" or substr($path,3,1) == "\\")) 
+                  and (substr($path,2,1) == "/" or substr($path,2,1) == "\\")) 
         {
             return true;
         } else {
