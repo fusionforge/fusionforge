@@ -28,18 +28,15 @@ global $HTML;
 try {
     /* do not recreate $clientSOAP object if already created by other pages */
     if (!isset($clientSOAP))
-        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+        $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
     $listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 } catch (SoapFault $soapFault) {
-    echo $soapFault->faultstring;
-    echo "<br/>";
+    echo    '<div class="warning" >Un problème est survenu lors de la récupération des données : '.$soapFault->faultstring.'</div>';
     $errorPage = true;
 }
 
-if ($errorPage){
-    echo    '<div>Un problème est survenu lors de la récupération des données</div>';
-} else {
+if (!isset($errorPage)){
     echo $HTML->boxTop('Gestion des categories');
     echo    '<table class="innertabs">';
     echo            '<tr>';

@@ -33,18 +33,14 @@ global $prioritiesImg,$bugPerPage;
 try {
     /* do not recreate $clientSOAP object if already created by other pages */
     if (!isset($clientSOAP))
-        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+        $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
 } catch (SoapFault $soapFault) {
-	echo $soapFault->faultstring;
-	echo "<br/>";
+    echo    '<div class="warning" >Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$soapFault->faultstring.'</div>';
 	$errorPage = true;
 }
 
-if ($errorPage) {
-    echo    '<div>Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es</div>';
-} else {
-
+if (!isset($errorPage)) {
     echo "<h2 style='border-bottom: 1px solid black'>Filtres</h2>";
 ?>
 <style>
@@ -89,15 +85,22 @@ if ($errorPage) {
     ?>
 </div>
 <br/>
-    <?php
-    // recuperation des bugs
-    $listBug = array();
-	if ($type == "user"){
-		$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password, "filter" => $bugfilter ));
-	} else if ($type == "group"){
-		$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis,  "page_number" => -1, "per_page" => -1, "filter" => $bugfilter));
-	}
+<?php
+}
+// recuperation des bugs
+$listBug = array();
+try {
+    if ($type == "user"){
+        $idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password, "filter" => $bugfilter ));
+    } else if ($type == "group"){
+        $idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis,  "page_number" => -1, "per_page" => -1, "filter" => $bugfilter));
+    }
+} catch (SoapFault $soapFault) {
+	echo 	'<div class="warning">Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$soapFault->faultstring.'</div>';
+    $errorPage = true;
+}
 
+if (!isset($errorPage)) {
 	$pageActuelle = getIntFromRequest('page');
 	if (empty($pageActuelle)) {
 		$pageActuelle = 1;
@@ -106,7 +109,7 @@ if ($errorPage) {
 	$nombreBugs = count ($idsBugAll);
 	$nombreDePages=ceil($nombreBugs/$bugPerPage);
 	// Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
-	if($pageActuelle>$nombreDePages){
+	if($pageActuelle>$nombreDePages) {
 		$pageActuelle=$nombreDePages;
 	}
 	$indexMin = ($pageActuelle - 1) * $bugPerPage;
@@ -124,24 +127,19 @@ if ($errorPage) {
 				);
 	}
 
-	if(count($listBugAll) >0){
+	if(count($listBugAll) >0) {
 		foreach ($listBugAll as $key => $defect) {
 			if ( ($indexMin <= $key) && ($indexMax >= $key) ){
 				$listBug[] = $defect;
 			}
 		}
 	}
-}
 
-// affichage page
-$nbligne=0;
+    // affichage page
+    $nbligne=0;
+    $boxTitle = 'Tickets';
 
-$boxTitle = 'Tickets';
-
-echo "<h2 style='border-bottom: 1px solid black'>$boxTitle</h2>";
-if ($errorPage){
-	echo 	'<div>Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es</div>';
-}else {
+    echo "<h2 style='border-bottom: 1px solid black'>$boxTitle</h2>";
 	$picto_haut = util_make_url('themes/gforge/images/picto_fleche_haut_marron.png');
 	$picto_bas = util_make_url('themes/gforge/images/picto_fleche_bas_marron.png');
 	$nbligne++;
@@ -153,7 +151,7 @@ if ($errorPage){
 	echo			'<form name="filterprority" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
 	if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC") {
 		echo			'<input type=hidden name="dir" value="DESC"/>';
-	}else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
+	} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
 		echo			'<input type="hidden" name="dir" value="ASC"/>';
 	}
 	if ( isset($bugfilter['show_status'])) {
@@ -168,9 +166,9 @@ if ($errorPage){
 	}
 	echo				'<input type=hidden name="sort" value="priority" />';
 	echo				'<a class="DataLink" href="javascript:document.filterprority.submit();">P';
-	if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC" ){
+	if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC" ) {
 		echo				'<img src="'.$picto_haut.'">';
-	}else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC" ) {
+	} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC" ) {
 		echo				'<img src="'.$picto_bas.'">';
 	}
 	echo 				'</a>';
@@ -181,7 +179,7 @@ if ($errorPage){
 	echo			'<form name="filterid" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
 	if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC") {
 		echo			'<input type=hidden name="dir" value="DESC"/>';
-	}else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
+	} else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
 		echo			'<input type="hidden" name="dir" value="ASC"/>';
 	}
 	if ( isset($bugfilter['show_status'])) {
@@ -196,7 +194,7 @@ if ($errorPage){
 	}
 	echo				'<input type=hidden name="sort" value="id" />';
 	echo				'<a class="DataLink" href="javascript:document.filterid.submit();">ID';
-	if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC" ){
+	if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC" ) {
 		echo				'<img src="'.$picto_haut.'">';
 	}else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC" ) {
 		echo				'<img src="'.$picto_bas.'">';
@@ -538,3 +536,5 @@ if ($errorPage){
 	}
 	echo 	'</div>';
 }
+
+?>

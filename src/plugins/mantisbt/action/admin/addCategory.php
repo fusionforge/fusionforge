@@ -27,7 +27,7 @@ $nameCategory = $_POST['nameCategory'];
 
 if ($nameCategory != "") {
     try {
-	    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	    $clientSOAP->__soapCall('mc_project_add_category', array("username" => $username, "password" => $password, "p_project_id" => $idProjetMantis, "p_category_name" => $nameCategory));
     } catch (SoapFault $soapFault) {
         $feedback = 'Error : '.$soapFault->faultstring;

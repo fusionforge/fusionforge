@@ -24,7 +24,7 @@
 $idAttachment = getIntFromRequest('idAttachment');
 if ($idAttachment) {
     try {
-        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+        $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	    $clientSOAP->__soapCall('mc_issue_attachment_delete', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
     } catch (SoapFault $soapFault) {
         echo 'Error : '.$soapFault->faultstring;

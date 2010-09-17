@@ -25,7 +25,7 @@
 if (empty($msg)) {
     if (!isset($defect)){
 	    try{
-		    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 		    $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 	    }catch (SoapFault $soapFault) {
 		    $error_attachment = $soapFault->faultstring;

@@ -25,19 +25,17 @@
 try {
     /* do not recreate $clientSOAP object if already created by other pages */
     if (!isset($clientSOAP))
-        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+        $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+
+    $listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 
 } catch (SoapFault $soapFault) {
-    echo $soapFault->faultstring;
-    echo "<br/>";
+    echo    '<div class="warning" >Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$soapFault->faultstring.'</div>';
     $errorPage = true;
 }
 
-if ($errorPage) {
-    echo    '<div>Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es</div>';
-} else {
+if (!isset($errorPage)) {
     GLOBAL $HTML;
-    $listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 
 ?>
 <script type="text/javascript">

@@ -1,5 +1,7 @@
 <?php
 /*
+ * MantisBT plugin
+ *
  * Copyright 2010, Capgemini
  * Author: Franck Villaume - Capgemini
  * Author: Fabien Dubois - Capgemini
@@ -22,14 +24,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-/*
- * MantisBT plugin
- *
- */
-
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'ldap/ldapUtils.php';
 require_once $gfconfig.'plugins/mantisbt/config.php';
 
 // the header that displays for the user portion of the plugin
@@ -81,7 +77,8 @@ $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
-$password = getPasswordFromLDAP($user);
+//$password = getPassword($user);
+$password = '';
 $username = $user->getUnixName();
 
 if (!$type) {

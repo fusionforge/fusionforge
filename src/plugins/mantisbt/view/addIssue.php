@@ -41,7 +41,7 @@ print	('
 try {
     /* do not recreate $clientSOAP object if already created by other pages */
     if (!isset($clientSOAP))
-        $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+        $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
     $listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
     $listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
@@ -53,13 +53,11 @@ try {
     $listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
     $listVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 } catch (SoapFault $soapFault) {
-        $msg = $soapFault->faultstring;
-        $errorPage = true;
+    echo    '<div class="warning" >Un probl&egrave;me est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$soapFault->faultstring.'</div>';
+    $errorPage = true;
 }
 
-if ($errorPage){
-    echo    '<div class="warning" >Un probl&egrave;me est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$msg.'</div>';
-} else {
+if (!isset($errorPage)){
     echo 	'<form name="issue" method="POST" action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$defect->id.'&action=addIssue" >';
     echo	'<table class="innertabs">';
     echo		'<tr>';

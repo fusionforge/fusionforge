@@ -24,7 +24,7 @@
 $data = file_get_contents ($_FILES['attachment']['tmp_name'] );
 $content = base64_encode ($data);
 try {
-    $clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
     $clientSOAP->__soapCall('mc_issue_attachment_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "name" => $_FILES['attachment']['name'], "file_type" => $_FILES['attachment']['type'], "content" => $content ));
     $feedback = 'Op&eacute;ration r&eacute;ussie';
 } catch (SoapFault $soapFault) {
