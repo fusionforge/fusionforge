@@ -64,6 +64,7 @@ UBUNTULIST=1jaunty 1karmic 1lucid
 UBUNTULISTP=1gutsy
 UBULIST=$(UBUNTULIST) $(UBUNTULISTP)
 # I had to add keyring: see https://bugs.launchpad.net/ubuntu/+source/pbuilder/+bug/599695, requires to install ubuntu-keyring package
+# wget http://archive.ubuntu.com/ubuntu/pool/main/u/ubuntu-keyring/ubuntu-keyring_2010.11.09_all.deb ; dpkg  -i ubuntu-keyring_2010.11.09_all.deb
 UBUNTUOP=--mirror $(UBUMIRROR) --debootstrapopts --keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg --debootstrap debootstrap
 DEBIANOP=--mirror $(DEBMIRROR) --debootstrapopts --include=apt --debootstrap debootstrap
 ASKPASS=--ask-passphrase
