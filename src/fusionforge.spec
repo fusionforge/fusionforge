@@ -94,7 +94,7 @@ in FusionForge.
 %package cvstracker
 Summary: Links CVS log messages to trackers and tasks.
 Group: Development/Tools
-Requires: %{name} >= %[version}, %{name}-scmcvs, php, postgresql
+Requires: %{name} >= %{version}, %{name}-scmcvs, php, postgresql
 %description cvstracker
 This is a fusionforge plugin that allows linking CVS log messages to
 trackers and tasks. It will review all commits in a project and search for
