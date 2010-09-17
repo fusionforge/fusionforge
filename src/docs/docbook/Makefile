@@ -89,7 +89,7 @@ prepare:
 	##
 	# Preparing build environment
 	#
-	@test -d ${TARGET} || mkdir ${TARGET};
+	@test -d ${TARGET} || mkdir -p ${TARGET};
 	@for book in ${BOOKS}; do \
 		test -d ${TARGET}$$book || mkdir ${TARGET}$$book; \
 	done;
