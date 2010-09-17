@@ -48,8 +48,9 @@ check:
 	cd tests ; php AllTests.php
 
 checkfull:
-	cd tests ; phpunit --verbose build
-	#cd tests ; php AllFullTests.php
+	## To run test in verbose mode :
+	#cd tests ; phpunit --verbose unit; phpunit --verbose code; phpunit --verbose build
+	cd tests ; php AllFullTests.php
 
 checkdebtools:
 	sudo apt-get install php5-cli phpunit php-htmlpurifier pcregrep moreutils
