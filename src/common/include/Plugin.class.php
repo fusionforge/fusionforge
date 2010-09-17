@@ -195,7 +195,7 @@ class PluginSpecificRoleSetting {
 		$this->role->role_values = array_replace_recursive ($this->role->role_values,
 								    array ($this->name => $values)) ;
 		if ($this->global) {
-			$this->role->global_values[] = $this->name ;
+			$this->role->global_settings[] = $this->name ;
 		}
 	}
 

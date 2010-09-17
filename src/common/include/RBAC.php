@@ -262,7 +262,7 @@ abstract class BaseRole extends Error {
 			$ids[] = $hp->getID() ;
 		}
 
-		$res = db_query_params ('SELECT group_id FROM pfo_role_project_refs WHERE role_id=$1',
+		$res = db_query_params ('SELECT group_id FROM role_project_refs WHERE role_id=$1',
 					array ($this->getID())) ;
 		if ($res) {
 			while ($arr = db_fetch_array ($res)) {
@@ -481,9 +481,11 @@ abstract class BaseRole extends Error {
 		$group_id = $project->getID() ;
 
 		if (USE_PFO_RBAC) {
-			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
+			$sections = array_keys ($this->role_values) ;			
 			foreach ($sections as $section) {
-				$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
+				if (!in_array ($section, $this->global_settings)) {
+					$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
+				}
 			}
 		} else {
 			$sections = array ('projectadmin', 'frs', 'scm', 'docman', 'trackeradmin', 'newtracker', 'forumadmin', 'newforum', 'pmadmin', 'newpm', 'webcal') ;
@@ -514,7 +516,6 @@ abstract class BaseRole extends Error {
 	}
 
         function getSetting($section, $reference) {
-		$result = 0 ;
                 if (isset ($this->perms_array[$section][$reference])) {
 			$value = $this->perms_array[$section][$reference] ;
 		} else {
