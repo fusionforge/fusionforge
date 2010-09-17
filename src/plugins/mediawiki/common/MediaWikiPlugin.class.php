@@ -124,6 +124,14 @@ class MediaWikiPlugin extends Plugin {
 		} elseif ($hookname == "role_get") {
 			$role =& $params['role'] ;
 
+			// Read access
+			$right->SetAllowedValues (array ('0', '1')) ;
+			$right->SetDefaultValues (array ('Admin' => '1',
+							 'Senior Developer' => '1',
+							 'Junior Developer' => '1',
+							 'Doc Writer' => '1',
+							 'Support Tech' => '1')) ;
+			
 			// Edit privileges
 			$right = new PluginSpecificRoleSetting ($role,
 								'plugin_mediawiki_edit') ;
@@ -170,6 +178,10 @@ class MediaWikiPlugin extends Plugin {
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,
 							       'plugin_mediawiki_edit') ;
+			$right->setDescription (_('Mediawiki read access')) ;
+			$right->setValueDescriptions (array ('0' => _('No reading'),
+							     '1' => _('Read access'))) ;
+
 			$right->setDescription (_('Mediawiki write access')) ;
 			$right->setValueDescriptions (array ('0' => _('No editing'),
 							     '1' => _('Edit existing pages only'), 

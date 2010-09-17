@@ -200,6 +200,16 @@ function FusionForgeMWAuth( $user, &$result ) {
 		foreach ($rs as $r) {
 			$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
 
+			// Read access
+			switch ($r->getVal('plugin_mediawiki_read', $g->getID())) {
+			case 0:
+				$wgGroupPermissions[$gr]['read'] = false;
+				break ;
+			case 1:
+				$wgGroupPermissions[$gr]['read'] = true;
+				break ;
+			}
+
 			// Day-to-day edit privileges
 			switch ($r->getVal('plugin_mediawiki_edit', $g->getID())) {
 			case 0:
