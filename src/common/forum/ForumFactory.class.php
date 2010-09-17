@@ -73,6 +73,7 @@ class ForumFactory extends Error {
 	}
 
 	function &getAllForumIds() {
+		$result = array () ;
 		$res = db_query_params ('SELECT * FROM forum_group_list_vw
 WHERE group_id=$1
 ORDER BY group_forum_id',
