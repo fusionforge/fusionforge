@@ -180,8 +180,8 @@ echo $HTML->listTableTop($titles);
 //	Everything is built on the multi-dimensial arrays in the Role object
 //
 $j = 0;
-$keys = array_keys($role->role_values);
 if (USE_PFO_RBAC) {
+	$keys = array_keys($role->getSettingsForProject ($group)) ;
 	$keys2 = array () ;
 	foreach ($keys as $key) {
 		if (!in_array ($key, $role->global_settings)) {
@@ -189,6 +189,8 @@ if (USE_PFO_RBAC) {
 		}
 	}
 	$keys = $keys2 ;
+} else {
+	$keys = array_keys($role->role_values);
 }
 for ($i=0; $i<count($keys); $i++) {
         if ((!$group->usesForum() && preg_match("/forum/", $keys[$i])) ||
@@ -336,5 +338,10 @@ echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
 </form>';
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

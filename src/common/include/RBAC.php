@@ -481,12 +481,7 @@ abstract class BaseRole extends Error {
 		$group_id = $project->getID() ;
 
 		if (USE_PFO_RBAC) {
-			$sections = array_keys ($this->role_values) ;			
-			foreach ($sections as $section) {
-				if (!in_array ($section, $this->global_settings)) {
-					$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
-				}
-			}
+			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
 		} else {
 			$sections = array ('projectadmin', 'frs', 'scm', 'docman', 'trackeradmin', 'newtracker', 'forumadmin', 'newforum', 'pmadmin', 'newpm', 'webcal') ;
 			foreach ($sections as $section) {
@@ -510,6 +505,23 @@ abstract class BaseRole extends Error {
 		$pgids = $pgf->getAllProjectGroupIds () ;
 		foreach ($pgids as $pgid) {
 			$result['tracker'][$pgid] = $this->getVal ('pm', $pgid) ;
+		}
+
+		if (USE_PFO_RBAC) {
+			// Add settings not yet listed so far (probably plugins)
+			// Currently handled:
+			// - global settings (ignored here)
+			// - project-wide settings (core and plugins)
+			// - settings for multiple-instance tools coming from the core (trackers/pm/forums)
+			// TODO:
+			// - settings for multiple-instance tools from plugins
+			foreach (array_keys ($this->role_values) as $s) {
+				if (!in_array ($s, $sections)) {
+					if (!in_array ($section, $this->global_settings)) {
+						$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
+					}
+				}
+			}
 		}
 
 		return $result ;
