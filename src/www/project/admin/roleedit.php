@@ -134,9 +134,9 @@ if ($role_id=='observer') {
 		echo '<h1>'._('Edit Role').'</h1>';
 	}
 	if (USE_PFO_RBAC) {
-		echo _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
-	} else {
 		echo _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the the Anonymous role has read access to a forum, all other roles will have it too.');
+	} else {
+		echo _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
 	}
 }
 
