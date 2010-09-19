@@ -6,21 +6,22 @@
  * email.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -34,10 +35,7 @@ if (getStringFromRequest('submit')) {
 	$passwd = getStringFromRequest('passwd');
 
 	if (!$loginname) {
-		exit_error(
-			_('Missing paramater'),
-			_('You must enter a user name.')
-		);
+		exit_missing_param('',array(_('UserName')),'my');
 	}
 
 	$u = user_get_object_by_name($loginname);
@@ -45,39 +43,27 @@ if (getStringFromRequest('submit')) {
 		$u = user_get_object_by_email ($loginname);
 	}
 	if (!$u || !is_object($u)) {
-		exit_error('Error','Could Not Get User');
+		exit_error(_('Could Not Get User'),'home');
 	} elseif ($u->isError()) {
-		exit_error('Error',$u->getErrorMessage());
+		exit_error($u->getErrorMessage(),'my');
 	}
 
 	if ($u->getStatus()=='A'){
-		exit_error(
-			_('Invalid operation'),
-			_('Account already active.')
-		);
+		exit_error(_('Account already active.'),'my');
 	}
 
 	$confirm_hash = html_clean_hash_string($confirm_hash);
 
 	if ($confirm_hash != $u->getConfirmHash()) {
-		exit_error(
-			_('Invalid parameter'),
-			_('Cannot confirm account identity - invalid confirmation hash (or login name)')
-		);
+		exit_error(_('Cannot confirm account identity - invalid confirmation hash (or login name)'),'my');
 	}
 
 	if (!session_login_valid($loginname, $passwd, 1)) {
-		exit_error(
-			_('Access denied'),
-			_('Credentials you entered do not correspond to valid account.')
-		);
+		exit_permission_denied(_('Credentials you entered do not correspond to valid account.'),'my');
 	}
 
 	if (!$u->setStatus('A')) {
-		exit_error(
-			_('Could not activate account'),
-			_('Error while activiting account').': '.$u->getErrorMessage()
-		);
+		exit_error( _('Error while activiting account').': '.$u->getErrorMessage(),'my');
 	}
 
 	session_redirect("/account/first.php");

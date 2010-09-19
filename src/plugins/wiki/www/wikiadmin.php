@@ -60,7 +60,7 @@ function wiki_Project_Header($params) {
 
 $user = session_get_user(); // get the session user
 
-if (!$user || !is_object($user)) { || $user->isError() || !$user->isActive()) {
+if (!$user || !is_object($user)) {
     exit_error(_('Invalid User'),'home');
 } else if ( $user->isError()) {
 	exit_error($user->getErrorMessage(),'home');

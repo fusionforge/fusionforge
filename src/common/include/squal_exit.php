@@ -63,7 +63,7 @@ function exit_no_group() {
  * @param   array   array of missing parameters
  * @param   string  toptab needed for navigation
  */
-function exit_missing_param(($url='',$missing_params=array(),$toptab='') {
+function exit_missing_param($url='',$missing_params=array(),$toptab='') {
 	exit_error('MISSING REQUIRED PARAMETERS');
 }
 

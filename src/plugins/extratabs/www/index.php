@@ -42,7 +42,7 @@ $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
-	exit_error($group->getErrorMessage(),'home')
+	exit_error($group->getErrorMessage(),'home');
 }
 
 db_begin();

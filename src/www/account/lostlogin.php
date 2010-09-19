@@ -5,21 +5,22 @@
  * This page is accessed via confirmation URL in email
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -36,7 +37,7 @@ if (!$confirm_hash) {
 	$confirm_hash = getStringFromRequest('ch');
 }
 if (!$confirm_hash) {
-	exit_missing_param();
+	exit_missing_param('',array(_('Confirm Has')),'my');
 }
 // Remove noise from hash produced by buggy mail clients
 $confirm_hash = html_clean_hash_string($confirm_hash);
@@ -45,38 +46,27 @@ $res_user = db_query_params ('SELECT * FROM users WHERE confirm_hash=$1',
 			array($confirm_hash)) ;
 
 if (db_numrows($res_user) > 1) {
-	exit_error(
-		_('ERROR'),
-		_('This confirm hash exists more than once.')
-	);
+	exit_error(_('This confirm hash exists more than once.'),'my');
 }
 if (db_numrows($res_user) < 1) {
-	exit_error(
-		_('ERROR'),
-		_('Invalid confirmation hash')
+	exit_error(_('Invalid confirmation hash'),'my');
 	);
 }
 $u =& user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
 if (!$u || !is_object($u)) {
-	exit_error('Error','Could Not Get User');
+	exit_error(_('Could Not Get User'),'home');
 } elseif ($u->isError()) {
-	exit_error('Error',$u->getErrorMessage());
+	exit_error($u->getErrorMessage(),'my');
 }
 
 if (getStringFromRequest("submit")) {
 
 	if (strlen($passwd)<6) {
-		exit_error(
-			_('ERROR'),
-			_('You must supply valid password (at least 6 chars).')
-		);
+		exit_error(_('You must supply valid password (at least 6 chars).'),'my');
 	}
 
 	if ($passwd != $passwd2) {
-		exit_error(
-			_('ERROR'),
-			_('New passwords do not match.')
-		);
+		exit_error(_('New passwords do not match.'),'my');
 	}
 
 	if ($u->setPasswd($passwd)) {
@@ -91,7 +81,7 @@ if (getStringFromRequest("submit")) {
 		exit();
 	}
 
-	$feedback = _('ERROR').': '.$u->getErrorMessage();
+	$error_msg = _('ERROR').': '.$u->getErrorMessage();
 }
 
 $title = _("Lost Password Login") ;

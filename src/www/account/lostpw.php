@@ -6,23 +6,24 @@
  * for account.
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -32,7 +33,7 @@ require_once $gfcommon.'include/pre.php';
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('my');
 	}
 
 	$loginname = getStringFromRequest('loginname');
@@ -41,7 +42,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u || !is_object($u)){
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('Invalid user'),_('That user does not exist.'));
+		exit_error(_('That user does not exist.'),'my');
 	}
 
 	// First, we need to create new confirm hash
@@ -51,7 +52,7 @@ if (getStringFromRequest('submit')) {
 	$u->setNewEmailAndHash($u->getEmail(), $confirm_hash);
 	if ($u->isError()) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error('Error',$u->getErrorMessage());
+		exit_error($u->getErrorMessage(),'my');
 	} else {
 
 		$message = sprintf(_('Someone (presumably you) on the %1$s site requested a
