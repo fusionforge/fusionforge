@@ -1,11 +1,26 @@
 <?php
 /**
- * trove.php
+ * Trove
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 // ################################## Trove Globals
@@ -389,7 +404,7 @@ function trove_del_cat_id($node) {
         $res=db_query_params ('SELECT * FROM trove_cat WHERE parent=$1',
 			array($node));
         if (!$res) {
-                exit_error( _('Error In Trove Operation'), db_error());
+                exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
         }
         if (db_numrows($res)>0) {
                 for ($i=0; $i<db_numrows($res); $i++) {
@@ -399,22 +414,22 @@ function trove_del_cat_id($node) {
         $res=db_query_params ('DELETE FROM trove_treesums WHERE trove_cat_id=$1',
 			array($node));
         if (!$res) {
-                exit_error( _('Error In Trove Operation'), db_error());
+                exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
         }
         $res=db_query_params ('DELETE FROM trove_group_link WHERE trove_cat_id=$1',
 			array($node));
         if (!$res) {
-                exit_error( _('Error In Trove Operation'), db_error());
+                exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
         }
         $res=db_query_params ('DELETE FROM trove_agg WHERE trove_cat_id=$1',
 			array($node));
         if (!$res) {
-                exit_error( _('Error In Trove Operation'), db_error());
+                exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
         }
         $res=db_query_params ('DELETE FROM trove_cat WHERE trove_cat_id=$1',
 			array($node));
         if (!$res || db_affected_rows($res)<1) {
-                exit_error( _('Error In Trove Operation'), db_error());
+                exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
         }
 }
 

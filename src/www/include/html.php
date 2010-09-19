@@ -3,6 +3,7 @@
  * FusionForge Misc HTML functions
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) FusionForge Team
  *
  * This file is part of FusionForge.
  *
@@ -662,27 +663,26 @@ function site_project_header($params) {
 	} else if ($project->isError()) {
 		if ($project->isPermissionDeniedError()) {
 			if (!session_get_user()) {
- 			$next = '/account/login.php?feedback='.urlencode($project->getErrorMessage());
+ 			$next = '/account/login.php?error_msg='.urlencode($project->getErrorMessage());
  			if (getStringFromServer('REQUEST_METHOD') != 'POST') {
 				$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
  			}
- 			header("Location: $next");
- 			exit;
+			session_redirect($next);
 		}
 			else
-				exit_error("Project access problem: ",$project->getErrorMessage());
+				exit_error(sprintf(_('Project access problem: %s'),$project->getErrorMessage()),'home');
 		}
-		exit_error("Project Problem: ",$project->getErrorMessage());
+		exit_error(sprintf(_('Project Problem: %s'),$project->getErrorMessage()),'home');
 	}
 
 	//group is private
 	if (!$project->isPublic()) {
-		session_require_perm ('project_read', $group_id) ;
+		session_require_perm ('project_read', $group_id);
 	}
 
 	//for dead projects must be member of admin project
 	if (!$project->isActive()) {
-		session_require_global_perm ('forge_admin') ;
+		session_require_global_perm ('forge_admin');
 	}
 
 	if (isset($params['title'])){
@@ -722,7 +722,15 @@ function site_user_header($params) {
 	*/
 	echo $HTML->header($params);
 	echo "<h1>" . _('My Personal Page') . "</h1>\n";
-	echo html_feedback_top((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
+	if (isset($GLOBALS['error_msg'])) {
+		echo html_feedback_top($GLOBALS['error_msg']);
+	}
+	if (isset($GLOBALS['warning_msg'])) {
+		echo html_feedback_top($GLOBALS['warning_msg']);
+	}
+	if (isset($GLOBALS['feedback'])) {
+		echo html_feedback_top($GLOBALS['feedback']);
+	}
 	echo ($HTML->beginSubMenu());
 	if ($GLOBALS['sys_use_diary']) {
 		echo ($HTML->printSubMenu(

@@ -2,19 +2,31 @@
 /**
  * Project Activity Page
  *
+ * Copyright 1999 dtype
  * Copyright 2006 (c) GForge, LLC
- * http://gforge.org
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-/*
- Project Summary Page
- Written by dtype Oct. 1999
- */
 $group_id = getIntFromRequest("group_id");
 $received_begin = getStringFromRequest("start_date");
 $received_end = getStringFromRequest("end_date");
@@ -66,7 +78,7 @@ if (!$group_id) {
 }
 $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_permission_denied();
+	exit_permission_denied('home');
 }
 
 site_project_header(array('title'=>_('Activity'),'group'=>$group_id,'toptab'=>'activity'));
@@ -114,7 +126,10 @@ $res=db_query_params ('SELECT * FROM activity_vw WHERE activity_date BETWEEN $1 
 			    $end,
 			    $group_id,
 			    db_string_array_to_any_clause ($section)));
-echo db_error();
+
+if (db_error()) {
+	exit_error(db_error(),'home');
+}
 
 $results = array();
 while ($arr = db_fetch_array($res)) {
@@ -136,7 +151,7 @@ if (count($show) < 1) {
 }
 foreach ($show as $showthis) {
 	if (array_search($showthis,$ids) === false) {
-		exit_error('Error','Invalid Data Passed to query');
+		exit_error(_('Invalid Data Passed to query'),'home');
 	}
 }
 $multiselect=html_build_multiple_select_box_from_arrays($ids,$texts,'show[]',$show,5,false);
@@ -189,7 +204,9 @@ if (count($results)<1) {
 				    $end,
 				    $group_id,
 				    db_string_array_to_any_clause ($show)));
-	echo db_error();
+	if (db_error()) {
+		exit_error(db_error(),'home');
+	}
 
 	$rows=db_numrows($res);
 	if ($rows<1) {

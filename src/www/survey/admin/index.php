@@ -47,7 +47,7 @@ if (!$group || !is_object($group)) {
 echo '<h1>'._('Survey Administration').'</h1>';
 
 if (!session_loggedin()) {
-	exit_not_logged_in()
+	exit_not_logged_in();
 }
 
 if ( !user_ismember($group_id,'A')) {

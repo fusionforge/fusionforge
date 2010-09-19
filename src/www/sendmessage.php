@@ -48,7 +48,7 @@ if ($touser) {
 }
 
 if ($toaddress && !eregi(forge_get_config('web_host'),$toaddress)) {
-	exit_error(,sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')),'home');
+	exit_error(sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')),'home');
 }
 
 
