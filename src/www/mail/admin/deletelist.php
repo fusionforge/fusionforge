@@ -1,11 +1,27 @@
 <?php
-
 /**
- * GForge Mailing Lists Facility
+ * FusionForge Mailing Lists Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright 2010 (c) Franck Villaume
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
  */
 
 require_once('../../env.inc.php');
@@ -23,8 +39,10 @@ if (!$group_id) {
 }
 
 $group =& group_get_object($group_id);
-if (!$group || !is_object($group) || $group->isError()) {
+if (!$group || !is_object($group)) {
 	exit_no_group();
+} else if ($group->isError()) {
+	exit_error($group->getErrorMessage(),'home');
 }
 
 session_require_perm ('project_admin', $group->getID()) ;
@@ -35,9 +53,10 @@ if (getStringFromPost('submit')) {
 	$sure = getStringFromPost('sure');
 	$really_sure = getStringFromPost('really_sure');
 	if (!$ml->delete($sure,$really_sure)) {
-		exit_error('Error',$ml->getErrorMessage());
+		exit_error($ml->getErrorMessage(),'home');
 	} else {
-		header("Location: index.php?group_id=$group_id&feedback=Mailing+List+successfully+deleted");
+		$feedback= _('Mailing List Successfully deleted');
+		session_redirect('?group_id='.$group_id.'&feedback='.urlencode($feedback));
 	}
 }
 

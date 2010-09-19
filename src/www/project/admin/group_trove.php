@@ -37,7 +37,7 @@ session_require_perm ('project_admin', $group_id) ;
 
 if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	 if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('home');
 	 }
 	group_add_history ('Changed Trove', '', $group_id);
 
@@ -66,7 +66,8 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 			}
 		}
 	}
-	session_redirect('/project/admin/?group_id='.$group_id);
+	$feedback = _('Trove Update Success');
+	session_redirect('/project/admin/?group_id='.$group_id.'&feedback='.urlencode($feedback));
 }
 
 project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$group_id));

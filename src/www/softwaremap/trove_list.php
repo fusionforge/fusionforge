@@ -33,7 +33,7 @@ plugin_hook('tree');
 require_once $gfwww.'include/trove.php';
 
 if (!forge_get_config('use_trove')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $form_cat = getIntFromRequest('form_cat');
@@ -53,10 +53,7 @@ $res_trove_cat = db_query_params ('
 			array($form_cat));
 
 if (db_numrows($res_trove_cat) < 1) {
-	exit_error(
-		_('Invalid Trove Category'),
-		_('That Trove category does not exist').': '.db_error()
-	);
+	exit_error(_('That Trove category does not exist').': '.db_error(),'trove');
 }
 
 $HTML->header(array('title'=>_('Software Map')));
