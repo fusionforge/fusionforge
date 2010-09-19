@@ -80,7 +80,7 @@ if (getStringFromRequest('submit')) {
 		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)) {
 		form_release_key(getStringFromRequest('form_key'));
 		$error_msg = $u->getErrorMessage();
-		$refresh_url = '/account/?error_msg='.urlencode($error_msg)
+		$refresh_url = '/account/?error_msg='.urlencode($error_msg);
 	} else {
 		$feedback = _('Updated');
 		$refresh_url = '/account/?feedback='.urlencode($feedback);

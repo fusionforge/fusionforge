@@ -1,25 +1,26 @@
 <?php
 /**
- * GForge Survey Facility
+ * FusionForge Survey Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -40,15 +41,17 @@ $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-    exit_error('Error', $group->getErrorMessage());
+    exit_error($group->getErrorMessage(),'home');
 }
 
 echo '<h1>'._('Survey Administration').'</h1>';
 
-if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo '<div class="error">'._('Permission denied').'</div>';
-	$sh->footer(array());
-	exit;
+if (!session_loggedin()) {
+	exit_not_logged_in()
+}
+
+if ( !user_ismember($group_id,'A')) {
+	exit_permission_denied(_('You are not a Project admin'),'home');
 }
 
 ?>
