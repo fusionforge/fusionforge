@@ -1,23 +1,24 @@
 <?php
 /**
- * Implement CVS ACLs based on GForge roles
+ * Implement CVS ACLs based on FusionForge roles
  *
  * Copyright 2004 GForge, LLC
+ * Copyright 2010, Franck Villaume
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
@@ -26,7 +27,7 @@ require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/pre.php';
 
 if (!forge_get_config('use_scm')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $env_group = getStringFromPost('group');
@@ -39,16 +40,16 @@ preg_match("/^([[:alnum:]-]{3,15})$/", $env_group, $matches);
 preg_match("/[[:alnum:]_-]{3,15}/", $env_user, $matches2);
 
 if (count($matches) == 0) {
-	exit_error('','Invalid CVS repository : '.$env_group);
+	exit_error(_('Invalid CVS repository : ').$env_group,'home');
 } else {
 	if (count($matches2) == 0) {
-		exit_error('','Invalid username : '.$env_user);
+		exit_error(_('Invalid username : ').$env_user,'home');
 	}
 
 	$userName = $matches2[count($matches2)-1];
 	$User =& user_get_object_by_name($userName);
 	if (!$User || !is_object($User)) {
-		exit_error('','User "'.$userName.'"not found');
+		exit_error(sprintf(_('User not found %s'),$userName),'home');
 	}
 	session_set_new($User->getID());
 
@@ -59,7 +60,7 @@ if (count($matches) == 0) {
 	}
 
 	if (! forge_check_perm_for_user ($User, 'scm', $Group->getID(), 'write')) {
-		exit_permission_denied();
+		exit_permission_denied('','home');
 	}
 }
 

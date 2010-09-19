@@ -45,7 +45,7 @@ $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-    exit_error(_('Error'), $group->getErrorMessage());
+    exit_error($group->getErrorMessage(),'frs');
 }
 session_require_perm ('frs', $group_id, 'write') ;
 
@@ -54,9 +54,9 @@ session_require_perm ('frs', $group_id, 'write') ;
 //
 $frsp = new FRSPackage($group,$package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error(_('Error'),_('Could Not Get FRSPackage'),'frs');
+	exit_error(_('Could Not Get FRSPackage'),'frs');
 } elseif ($frsp->isError()) {
-	exit_error(_('Error'),$frsp->getErrorMessage(),'frs');
+	exit_error($frsp->getErrorMessage(),'frs');
 }
 
 //
@@ -64,9 +64,9 @@ if (!$frsp || !is_object($frsp)) {
 //
 $frsr = new FRSRelease($frsp,$release_id);
 if (!$frsr || !is_object($frsr)) {
-	exit_error(_('Error'),_('Could Not Get FRSRelease'),'frs');
+	exit_error(_('Could Not Get FRSRelease'),'frs');
 } elseif ($frsr->isError()) {
-	exit_error('Error',$frsr->getErrorMessage(),'frs');
+	exit_error($frsr->getErrorMessage(),'frs');
 }
 
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $group->getUnixName();
@@ -91,7 +91,7 @@ if (getStringFromRequest('step1')) {
 	// Check for uploaded release notes
 	if ($uploaded_notes["tmp_name"]) {
 		if (!is_uploaded_file($uploaded_notes['tmp_name'])) {
-			exit_error(_('Error'),_('Attempted File Upload Attack'),'frs');
+			exit_error(_('Attempted File Upload Attack'),'frs');
 		}
 		if ($uploaded_notes['type'] !== 'text/plain') {
 			$error_msg .= _('Release Notes Are not in Text').'<br />';
@@ -110,7 +110,7 @@ if (getStringFromRequest('step1')) {
 	// Check for uploaded change logs
 	if ($uploaded_changes['tmp_name']) {
 		if (!is_uploaded_file($uploaded_changes['tmp_name'])) {
-			exit_error(_('Error'),_('Attempted File Upload Attack'),'frs');
+			exit_error(_('Attempted File Upload Attack'),'frs');
 		}
 		if ($uploaded_changes['type'] !== 'text/plain') {
 			$error_msg .= _('Change Log Is not in Text').'<br />';
@@ -132,7 +132,7 @@ if (getStringFromRequest('step1')) {
 		//$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 		$release_date = strtotime($release_date);
 		if (!$frsr->update($status_id,$release_name,$notes,$changes,$preformatted,$release_date)) {
-			exit_error(_('Error'),$frsr->getErrorMessage(),'frs');
+			exit_error($frsr->getErrorMessage(),'frs');
 		} else {
 			$feedback .= _('Data Saved');
 		}
@@ -180,12 +180,12 @@ if (getStringFromRequest('step3')) {
 		if ($im_sure) {
 			$frsf = new FRSFile($frsr,$file_id);
 			if (!$frsf || !is_object($frsf)) {
-				exit_error(_('Error'),_('Could Not Get FRSFile'),'frs');
+				exit_error(_('Could Not Get FRSFile'),'frs');
 			} elseif ($frsf->isError()) {
-				exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
+				exit_error($frsf->getErrorMessage(),'frs');
 			} else {
 				if (!$frsf->delete()) {
-					exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
+					exit_error($frsf->getErrorMessage(),'frs');
 				} else {
 					$feedback .= _('File Deleted');
 				}
@@ -197,15 +197,15 @@ if (getStringFromRequest('step3')) {
 	} else {
 		$frsf = new FRSFile($frsr,$file_id);
 		if (!$frsf || !is_object($frsf)) {
-			exit_error(_('Error'),_('Could Not Get FRSFile'),'frs');
+			exit_error(_('Could Not Get FRSFile'),'frs');
 		} elseif ($frsf->isError()) {
-			exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
+			exit_error($frsf->getErrorMessage(),'frs');
 		} else {
 			//$date_list = split('[- :]',$release_time,5);
 			//$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
 			$release_time = strtotime($release_time);
 			if (!$frsf->update($type_id,$processor_id,$release_time,$new_release_id)) {
-				exit_error(_('Error'),$frsf->getErrorMessage(),'frs');
+				exit_error($frsf->getErrorMessage(),'frs');
 			} else {
 				$feedback .= _('File Updated');
 			}
@@ -267,7 +267,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	</td>
 </tr>
 <tr>
-	<td>
+	<td colspan="2">
 		<br />
 		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo _('Preserve my pre-formatted text.') ?>
 		<p>
@@ -327,6 +327,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 </table>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Add This File') ?>" /></p>
+</fieldset>
 </form>
 <hr />
 <h2><?php echo _('Step 3: Edit Files In This Release') ?></h2>

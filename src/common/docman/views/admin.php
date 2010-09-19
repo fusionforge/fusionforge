@@ -67,8 +67,13 @@ function doIt(formid) {
 	include ('docman/views/listtrashfile.php');
 	echo '</div>';
 
-	echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminsearchengine\')" ><h4>'. _('Admin Engine Options') .'</h4></a>';
-	echo '<div id="adminsearchengine" style="display:none;" >';
+	echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminoptions\')" ><h4>'. _('Admin Options') .'</h4></a>';
+	echo '<div id="adminoptions" style="display:none;" >';
+	echo '<form id="backup" name="backup" method="post" action="'. util_make_url ('/docman/view.php/'.$group_id.'/backup') .'" >';
+	echo '<ul>';
+	echo '<li>'. _('Extract documents and directories as an archive') .' <input id="submitbackup" type="button" value="Yes" onclick="javascript:doIt(\'backup\')"></li>';
+	echo '</ul>';
+	echo '</form>';
 	echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updateenginesearch" >';
 	echo '<ul>';
 

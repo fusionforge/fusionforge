@@ -1,10 +1,27 @@
 <?php
 
-/*
+/**
  * ContribTracker plugin
  *
  * Copyright 2009, Roland Mas
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('../../env.inc.php');
@@ -39,19 +56,19 @@ $action = util_ensure_value_in_set ($action, array ('display',
 function check_role_id ($r_id) {
 	$role = new ContribTrackerRole ($r_id) ;
 	if (!$role || !is_object ($role)) {
-		exit_permission_denied () ;
+		exit_permission_denied ('','home') ;
 	}
 }
 function check_actor_id ($a_id) {
 	$actor = new ContribTrackerActor ($a_id) ;
 	if (!$actor || !is_object ($actor)) {
-		exit_permission_denied () ;
+		exit_permission_denied ('','home') ;
 	}
 }
 function check_structure_id ($s_id) {
 	$structure = new ContribTrackerLegalStructure ($s_id) ;
 	if (!$structure || !is_object ($structure)) {
-		exit_permission_denied () ;
+		exit_permission_denied ('','home') ;
 	}
 }
 function check_logo ($arr, $a_id=false) {
@@ -155,7 +172,7 @@ switch ($action) {
 case 'post_add_role':
 	$role = new ContribTrackerRole () ;
 	if (!$role->create ($name, $desc)) {
-		exit_error ($role->getErrorMessage()) ;
+		exit_error ($role->getErrorMessage(),'contribtracker') ;
 	}
 	$role_id = $role->getId() ;
 	$action = 'display' ;
@@ -174,7 +191,7 @@ case 'post_edit_role':
 case 'post_add_structure':
 	$structure = new ContribTrackerLegalStructure () ;
 	if (!$structure->create ($name, $desc)) {
-		exit_error ($structure->getErrorMessage()) ;
+		exit_error ($structure->getErrorMessage(),'contribtracker') ;
 	}
 	$structure_id = $structure->getId() ;
 	$action = 'display' ;
@@ -194,7 +211,7 @@ case 'post_add_actor':
 	$actor = new ContribTrackerActor () ;
 	$structure = new ContribTrackerLegalStructure ($structure_id) ;
 	if (!$actor->create ($name, $url, $email, $desc, $logo, $structure)) {
-		exit_error ($actor->getErrorMessage()) ;
+		exit_error ($actor->getErrorMessage(),'contribtracker') ;
 	}
 	$actor_id = $actor->getId() ;
 	$action = 'display' ;
@@ -259,7 +276,7 @@ case 'display':
 					 </td>
 					 <?php
 					 print '</tr>';
-		}	
+		}
 		print '</tbody></table>' ;
 	} else {
 		print _('No legal structures currently defined.') ;

@@ -39,9 +39,9 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 	$at = new ArtifactType($group, $atid);
 	if ($at->isError()) {
 		if ($at->isPermissionDeniedError()) {
-			exit_permission_denied();
+			exit_permission_denied('','tracker');
 		} else {
-			exit_error('Error',$at->getErrorMessage());
+			exit_error($at->getErrorMessage(),'tracker');
 		}
 	}
 
@@ -114,7 +114,7 @@ function getAverageTime($atid,$start,$end) {
 				array ($atid,
 				       $start,
 				       $end));
-	echo db_error();
+	exit_error(db_error(),'tracker');
 	return db_result($res,0,0);
 }
 
@@ -127,7 +127,7 @@ function getOpenCount($atid,$start,$end) {
 				array ($atid,
 				       $start,
 				       $end));
-	echo db_error();
+	exit_error(db_error(),'tracker');
 	return db_result($res,0,0);
 }
 
@@ -141,7 +141,7 @@ function getStillOpenCount($atid,$start,$end) {
 				array ($atid,
 				       $end, // Yes, really.
 				       $end)) ;
-	echo db_error();
+	exit_error(db_error(),'tracker');
 	return db_result($res,0,0);
 }
 

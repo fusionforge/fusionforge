@@ -56,7 +56,7 @@ if (!$g->usesDocman())
 	exit_disabled('home');
 
 if ($g->isError())
-	exit_error(_('Error'),$g->getErrorMessage(),'docman');
+	exit_error($g->getErrorMessage(),'docman');
 
 $dirid = getIntFromRequest('dirid');
 if (empty($dirid))
@@ -64,19 +64,19 @@ if (empty($dirid))
 
 $df = new DocumentFactory($g);
 if ($df->isError())
-	exit_error(_('Error'),$df->getErrorMessage(),'docman');
+	exit_error($df->getErrorMessage(),'docman');
 
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
-	exit_error(_('Error'),$dgf->getErrorMessage(),'docman');
+	exit_error($dgf->getErrorMessage(),'docman');
 
 $nested_groups = $dgf->getNested();
 if ($dgf->isError())
-    exit_error(_('Error'),$dgf->getErrorMessage(),'docman');
+    exit_error($dgf->getErrorMessage(),'docman');
 
 $dgh = new DocumentGroupHTML($g);
 if ($dgh->isError())
-	exit_error(_('Error'),$dgh->getErrorMessage(),'docman');
+	exit_error($dgh->getErrorMessage(),'docman');
 
 $d_arr =& $df->getDocuments();
 if (!$d_arr || count($d_arr) <1)

@@ -60,8 +60,12 @@ function wiki_Project_Header($params) {
 
 $user = session_get_user(); // get the session user
 
-if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
-    exit_error("Invalid User", "Cannot Process your request for this user.");
+if (!$user || !is_object($user)) { || $user->isError() || !$user->isActive()) {
+    exit_error(_('Invalid User'),'home');
+} else if ( $user->isError()) {
+	exit_error($user->getErrorMessage(),'home');
+} else if ( !$user->isActive()) {
+	exit_error(_('User not active'),'home');
 }
 
 $type = getStringFromRequest('type');
@@ -70,21 +74,21 @@ $pluginname = 'wiki';
 $config = getArrayFromRequest('config');
 
 if (!$type) {
-    exit_error("Cannot Process your request","No TYPE specified");
+    exit_missing_params($_SERVER['HTTP_REFERER'],array(_'No TYPE specified'),'home');
 } elseif (!$id) {
-    exit_error("Cannot Process your request","No ID specified");
+    exit_missing_params($_SERVER['HTTP_REFERER'],array(_'No ID specified'),'home');
 } else {
     if ($type == 'admin_post') {
         $group = group_get_object($id);
         if ( !$group) {
-            exit_error(_('Invalid Project'), _('Inexistent Project'));
+			exit_no_group();
         }
         if (!($group->usesPlugin($pluginname))) { //check if the group has the wiki plugin active
-            exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
         }
         $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
         if ( !$userperm->IsMember()) {
-            exit_error(_('Access Denied'), _('You are not a member of this project'));
+			exit_permission_denied(_('You are not a member of this project'),'home');
         }
         //only project admin can access here
         if ( $userperm->isAdmin() ) {
@@ -105,20 +109,20 @@ if (!$type) {
             $type = 'admin';
             $feedback = _('Configuration saved.');
         } else {
-            exit_error(_('Access Denied'), _('You are not a project Admin'));
+            exit_permission_denied(_('You are not a project Admin'),'home');
         }
     }
     if ($type == 'admin') {
         $group = group_get_object($id);
         if ( !$group) {
-            exit_error(_('Invalid Project'), _('Inexistent Project'));
+			exit_no_group();
         }
         if ( ! ($group->usesPlugin ($pluginname)) ) {//check if the group has the plugin active
-            exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
         }
         $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
         if ( !$userperm->IsMember()) {
-            exit_error(_('Access Denied'), _('You are not a member of this project'));
+            exit_permission_denied(_('You are not a member of this project'),'home');
         }
         //only project admin can access here
         if ( $userperm->isAdmin() ) {
@@ -166,7 +170,7 @@ if (!$type) {
             print "</tr>\n";
             print "</table>\n";
         } else {
-            exit_error(_('Access Denied'), _('You are not a project Admin'));
+            exit_permission_denied(_('You are not a project Admin'),'home');
         }
     }
 }

@@ -196,7 +196,7 @@ ini_set('date.timezone', forge_get_config ('default_timezone'));
 
 if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 	// exit_error() and variants (for the web)
-	require_once $gfwww.'include/exit.php';
+	require_once $gfcommon.'include/exit.php';
 
 	// Library to determine browser settings
 	require_once $gfwww.'include/browser.php';

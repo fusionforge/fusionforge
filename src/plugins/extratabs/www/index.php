@@ -1,10 +1,28 @@
 <?php
-/*
+
+/**
  * Extra tabs plugin
- *
  * Copyright 2005, Raphaël Hertzog
  * Copyright 2006-2009, Roland Mas
  * Copyright 2009-2010, Alain Peyrat
+ * Copyright 2010, Franck Villaume
+ * http://fusionforge.org/
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once ('../../../www/env.inc.php');
@@ -22,9 +40,9 @@ session_require_perm ('project_admin', $group_id) ;
 // get current information
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-        exit_error('Error','Could Not Get Group');
+	exit_no_group();
 } elseif ($group->isError()) {
-        exit_error('Error',$group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'home')
 }
 
 db_begin();
@@ -55,7 +73,7 @@ if (getStringFromRequest ('addtab') != '') {
 						       $tab_name,
 						       $tab_url)) ;
 			if (!$res || db_affected_rows($res) < 1) {
-				$feedback = sprintf (_('Cannot insert new tab entry: %s'),
+				$error_msg = sprintf (_('Cannot insert new tab entry: %s'),
 						      db_error());
 			} else {
 				$tab_name = '';

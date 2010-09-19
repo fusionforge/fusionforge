@@ -89,7 +89,7 @@ class TimeEntry extends Error {
 				       $timeCode,
 				       $hours)) ;
         if (!$res) {
-            exit_error('Error',db_error());
+            exit_error(db_error(),'tracker');
         } else {
             $feedback.=_('Successfully Added');
         }

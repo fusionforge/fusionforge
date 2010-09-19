@@ -29,26 +29,27 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'docman/Document.class.php';
 
+session_require_perm ('project_read', $group_id) ;
+
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
-$docname=urldecode($arr[5]);
 
 if ($docid) {
+	$docname=urldecode($arr[5]);
 
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		exit_no_group();
 	} elseif ($g->isError()) {
-		exit_error('Error',$g->getErrorMessage());
+		exit_error($g->getErrorMessage(),'docman');
 	}
-	session_require_perm ('project_read', $group_id) ;
 
 	$d = new Document($g,$docid);
 	if (!$d || !is_object($d)) {
-		exit_error('Document unavailable','Document is not available.');
+		exit_error(_('Document is not available.'),'docman');
 	} elseif ($d->isError()) {
-		exit_error('Error',$d->getErrorMessage());
+		exit_error($d->getErrorMessage(),'docman');
 	}
 
 	/** 
@@ -61,8 +62,7 @@ if ($docid) {
 	 * name is correct.
 	 */
 	if ($d->getFileName() != $docname) {
-		exit_error(_('No document data'),
-			   _('No document to display - invalid or inactive document number'));
+		exit_error(_('No document to display - invalid or inactive document number'),'docman');
 	}
 
 	Header ('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()).'"');
@@ -76,7 +76,7 @@ if ($docid) {
 	echo $d->getFileData();
 
 } else {
-	exit_error(_('No document data'),_('No document to display - invalid or inactive document number.'));
+	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
 }
 
 // Local Variables:

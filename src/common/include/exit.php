@@ -25,15 +25,14 @@
 /**
  * exit_error() - Exit PHP with error
  *
- * @param		string	Error title
- * @param		string	Error text
- * @param       string  toptab for navigation bar
+ * @param	string	Error text
+ * @param	string  toptab for navigation bar
  */
-function exit_error($title,$text="", $toptab='') {
+function exit_error($text="", $toptab='') {
 	global $HTML,$group_id;
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo '<h1>' . _('Exiting with error') . '</h1>';
-	echo $HTML->error_msg($title.' : '.htmlspecialchars($text));
+	echo $HTML->error_msg(htmlspecialchars($text));
 	$HTML->footer(array());
 	exit;
 }
@@ -51,7 +50,7 @@ function exit_permission_denied($reason_descr='',$toptab='') {
 		if (!$reason_descr) {
 			$reason_descr=_('This project\'s administrator will have to grant you permission to view this page.');
 		}
-		exit_error(_('Permission denied.'),$reason_descr,$toptab);
+		exit_error($reason_descr,$toptab);
 	}
 }
 
@@ -67,11 +66,12 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	exit_error(_('Error'), _('No project was chosen, project does not exist or you can\'t access it.'));
+	exit_error(_('No project was chosen, project does not exist or you can\'t access it.'));
 }
 
 /**
  * exit_missing_param() - Exit with missing required parameters error
+ *
  * @param   string  URL : usually $_SERVER['HTTP_REFERER']
  * @param   array   array of missing parameters
  * @param   string  toptab needed for navigation
@@ -86,27 +86,28 @@ function exit_missing_param($url='',$missing_params=array(),$toptab='') {
         } else {
             $error = sprintf(_('Missing required parameters.'));
         }
-        header('Location: '.$url.'&error_msg='.urlencode($error));
-        exit;
+        session_redirect($url.'&error_msg='.urlencode($error));
     } else {
-	    exit_error(_('Error'), _('Missing required parameters.'),$toptab);
+	    exit_error(_('Missing required parameters.'),$toptab);
     }
 }
 
 /**
  * exit_disabled() - Exit with disabled feature error.
+ *
  * @param   string  toptab needed for navigation
  */
 function exit_disabled($toptab='') {
-	exit_error(_('Error'), _('The Site Administrator has turned off this feature.'),$toptab);
+	exit_error(_('The Site Administrator has turned off this feature.'),$toptab);
 }
 
 /**
  * exit_form_double_submit() - Exit with double submit error.
+ *
  * @param   string  toptab needed for navigation
  */
 function exit_form_double_submit($toptab='') {
-	exit_error(_('Error'),_('You Attempted To Double-submit this item. Please avoid double-clicking.'),$toptab);
+	exit_error(_('You Attempted To Double-submit this item. Please avoid double-clicking.'),$toptab);
 }
 
 // Local Variables:

@@ -3,23 +3,24 @@
  * Project Admin page to manage quotas project
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) FusionForge Team 
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -28,7 +29,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
 if (!forge_get_config('use_project_vhost')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 session_require_perm ('project_admin', $group_id) ;
@@ -36,9 +37,9 @@ session_require_perm ('project_admin', $group_id) ;
 $group = &group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
-        exit_error('Error','Error creating group object');
+        exit_no_group();
 } else if ($group->isError()) {
-        exit_error('ERROR',$group->getErrorMessage());
+        exit_error($group->getErrorMessage(),'home');
 }
 
 

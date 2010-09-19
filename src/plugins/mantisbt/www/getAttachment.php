@@ -34,22 +34,30 @@ $idAttachment=$arr[4];
 
 $user = session_get_user(); // get the session user
 
-if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
-        exit_error("Invalid User", "Cannot Process your request for this user.");
+if (!$user || !is_object($user)) {
+        exit_error(_('Invalid User'),'mantisbt');
+} else if ( $user->isError() ) {
+        exit_error($user->isError(),'mantisbt');
+} else if ( !$user->isActive()) {
+        exit_error(_('Invalid User not active'),'mantisbt');
 }
 
 $password = getPasswordFromLDAP($user);
 $username = $user->getUnixName();
 
 if ($idAttachment) {
-	$clientSOAP = new SoapClient("http://$sys_mantisbt_host/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	$content = $clientSOAP->__soapCall('mc_issue_attachment_get', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
+	try {
+		$clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$content = $clientSOAP->__soapCall('mc_issue_attachment_get', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
+	} catch (SoapFault $soapFault) {
+		session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($soapFault->faultstring));
+	}
+
 	$data = unserialize($content);
 	header( 'Content-Type: ' . $data['file_type'] );
 	header( 'Content-Disposition: filename="'.urlencode($data['filename']).'"' );
 	echo base64_decode($data['payload']);
 } else {
-	exit_error("No idAttachment", "Cannot process your request");
+	exit_missing_params($_SERVER['HTTP_REFERER'],array(_('No idAttachment')),'mantisbt');
 }
-
 ?>

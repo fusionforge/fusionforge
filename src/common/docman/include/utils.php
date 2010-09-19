@@ -170,11 +170,11 @@ function document_editdata(&$document) {
 	global $g,$dirid,$group_id;
 	$dgh = new DocumentGroupHTML($g);
         if ($dgh->isError())
-                exit_error('Error',$dgh->getErrorMessage());
+                exit_error($dgh->getErrorMessage(),'docman');
 
 	$dgf = new DocumentGroupFactory($g);
         if ($dgf->isError())
-                exit_error('Error',$dgf->getErrorMessage());
+                exit_error($dgf->getErrorMessage(),'docman');
 
 ?>
 <div class="docmanDivIncluded">
