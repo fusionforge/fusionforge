@@ -67,7 +67,7 @@ if (getStringFromRequest('send_mail')) {
 			force them to enter all vars
 		*/
 		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param('',array(_('Subject'),_('Body'),_('Name'),_('Email'),'home');
+		exit_missing_param('',array(_('Subject'),_('Body'),_('Name'),_('Email')),'home');
 	}
 	
 	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection	
