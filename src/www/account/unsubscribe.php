@@ -5,21 +5,22 @@
  * This page is accessed via URL present in site mailings
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -34,7 +35,7 @@ if (!$confirm_hash) {
 	$confirm_hash = getStringFromRequest('ch');
 }
 if (!$confirm_hash) {
-	exit_missing_param();
+	exit_missing_param('',array(_('Confirm Hash')),'my');
 }
 
 $confirm_hash = html_clean_hash_string($confirm_hash);
@@ -43,18 +44,18 @@ $res_user = db_query_params ('SELECT * FROM users WHERE confirm_hash=$1',
 			array($confirm_hash)) ;
 
 if (db_numrows($res_user) > 1) {
-	exit_error("Error","This confirm hash exists more than once.");
+	exit_error(_('This confirm hash exists more than once.'),'my');
 }
 if (db_numrows($res_user) < 1) {
-	exit_error("Error","Invalid confirmation hash.");
+	exit_error(_('Invalid confirmation hash.'),'my');
 }
 
 $row_user = db_fetch_array($res_user);
 $user =& user_get_object($row_user['user_id'], $res_user);
 if (!$user || !is_object($user)) {
-    exit_error('Error','Could Not Get User');
+    exit_error(_('Could Not Get User'),'home');
 } elseif ($user->isError()) {
-    exit_error('Error',$user->getErrorMessage());
+    exit_error($user->getErrorMessage(),'my');
 }
 
 $all=getStringFromRequest('all');

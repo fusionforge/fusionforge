@@ -3,21 +3,22 @@
  * Change user's SSH authorized keys
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -29,7 +30,7 @@ require_once $gfcommon.'include/account.php';
  * Simple function that tries to check the validity of public ssh keys with a regexp.
  * Exits with an error message if an invalid key is found.
  *
- * \param keys A string with a set of keys to check. Each key is delimited by a carriage return.
+ * @param keys A string with a set of keys to check. Each key is delimited by a carriage return.
  */
 function checkKeys($keys) {
 	$key = strtok($keys,"\n");
@@ -43,7 +44,7 @@ function checkKeys($keys) {
 			if ( preg_match("@^ssh-(rsa|dss)\s+[A-Za-z0-9+/]{157,}={0,2}(\s+.*)?$@", $key) === 0 ) { // Warning: we must use === for the test
 				$msg = sprintf (_('The following key has a wrong format: |%s|.  Please, correct it by going back to the previous page.'),
 						htmlspecialchars($key));
-				exit_error('Error',  $msg);
+				exit_error($msg,'my');
 			}
 		}
 		$key = strtok("\n");
@@ -54,9 +55,9 @@ session_require_login () ;
 
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {
-	exit_error('Error','Could Not Get User');
+	exit_error(_('Could Not Get User'),'home');
 } elseif ($u->isError()) {
-	exit_error('Error',$u->getErrorMessage());
+	exit_error($u->getErrorMessage(),'my');
 }
 
 if (getStringFromRequest('submit')) {
@@ -64,10 +65,7 @@ if (getStringFromRequest('submit')) {
 	checkKeys ($authorized_keys);
 
 	if (!$u->setAuthorizedKeys($authorized_keys)) {
-		exit_error(
-			'Error',
-			'Could not update SSH authorized keys: '.db_error()
-		);
+		exit_error(sprintf(_('Could not update SSH authorized keys: %s'),db_error()),'my');
 	}
 	session_redirect("/account/");
 
