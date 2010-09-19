@@ -1,44 +1,43 @@
 <?php
 /**
- * GForge SCM Library
+ * FusionForge SCM Library
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2004-2005 (c) GForge LLC, Tim Perdue
+ * Copyright 2010 (c), Franck Villaume
+ * http://fusionforge.org
  *
- * @author Tim Perdue tim@gforge.org
- * @date 2005-04-16
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 function scm_header($params) {
 	global $HTML;
 	if (!forge_get_config('use_scm')) {
-		exit_disabled();
+		exit_disabled('home');
 	}
 
 	$project =& group_get_object($params['group']);
 	if (!$project || !is_object($project)) {
-		exit_error('Error','Could Not Get Project');
+		exit_no_group();
 	} elseif ($project->isError()) {
-		exit_error('Error',$project->getErrorMessage());
+		exit_error($project->getErrorMessage(),'home');
 	}
 
 	if (!$project->usesSCM()) {
-		exit_error('Error',_('Error - This project has turned off SCM.'));
+		exit_disabled('home');
 	}
 	site_project_header(array('title'=>_('SCM Repository'),'group'=>$params['group'],'toptab'=>'scm',));
 	/*

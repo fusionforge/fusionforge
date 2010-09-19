@@ -3,23 +3,24 @@
  * Send an Email Message Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -30,7 +31,7 @@ $toaddress = getStringFromRequest('toaddress');
 $touser = getStringFromRequest('touser');
 
 if (!$toaddress && !$touser) {
-	exit_error(_('Error'),_('Error - some variables were not provided'));
+	exit_missing_param('',array(_('toaddress'),_('touser')),'home');
 }
 
 if ($touser) {
@@ -42,18 +43,18 @@ if ($touser) {
 			array($touser)) ;
 
 	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('Error'),_('Error - That user does not exist'));
+		exit_error(_('That user does not exist'),'home');
 	}
 }
 
 if ($toaddress && !eregi(forge_get_config('web_host'),$toaddress)) {
-	exit_error(_('Error'),sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')));
+	exit_error(,sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')),'home');
 }
 
 
 if (getStringFromRequest('send_mail')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('home');
 	}
 
 	$subject = getStringFromRequest('subject');
@@ -66,7 +67,7 @@ if (getStringFromRequest('send_mail')) {
 			force them to enter all vars
 		*/
 		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param();
+		exit_missing_param('',array(_('Subject'),_('Body'),_('Name'),_('Email'),'home');
 	}
 	
 	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection	

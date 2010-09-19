@@ -64,9 +64,10 @@ function exit_not_logged_in() {
 
 /**
  * exit_no_group() - Exit with no group chosen error
+ * @param	string toptab
  */
 function exit_no_group() {
-	exit_error(_('No project was chosen, project does not exist or you can\'t access it.'));
+	exit_error(_('No project was chosen, project does not exist or you can\'t access it.'),$toptab='');
 }
 
 /**

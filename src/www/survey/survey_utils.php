@@ -1,39 +1,35 @@
 <?php
 /**
- * GForge Survey Facility
+ * FusionForge Survey Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Portions Copyright 1999-2001 (c) VA Linux Systems, Tim Perdue
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-/*
-	Survey System
-	By Tim Perdue, Sourceforge, 11/99
-*/
 
 function survey_header($params) {
 	global $group_id,$is_admin_page,$HTML;
 
 	if (!forge_get_config('use_survey')) {
-		exit_disabled();
+		exit_disabled('home');
 	}
 
 	$params['toptab']='surveys';
@@ -41,7 +37,7 @@ function survey_header($params) {
 
 	if ($project =& group_get_object($group_id)){
 		if (!$project->usesSurvey()) {
-			exit_error(_('Error'), _('This Project Has Turned Off Surveys.'));
+			exit_disabled('home');
 		}
 		
 		site_project_header($params);

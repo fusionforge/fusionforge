@@ -1,26 +1,24 @@
 <?php
 /**
- * Reporting System
+ * FusionForge Reporting System
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2003-2004 (c) GForge LLC, Tim Perdue
+ * Copyright 2010 (c) Franck Villaume
  *
- * @author Tim Perdue tim@gforge.org
- * @date 2003-03-16
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -41,15 +39,13 @@ $report=new Report();
 //	Check for error, such as license key problem
 //
 if ($report->isError()) {
-	echo $report->getErrorMessage();
-	exit;
+	exit_error($report->getErrorMessage(),'home');
 }
 
 $group_id = getIntFromRequest('group_id');
 $g =& group_get_object($group_id);
 if (!$g || !is_object($g)) {
-	echo 'Permission Denied';
-	exit;
+	exit_no_group();
 }
 
 $days = getIntFromRequest('days');
@@ -80,7 +76,7 @@ $res = db_query_params ('SELECT u.realname,sum(commits) AS count
 			       $group_id));
 
 if (db_error()) {
-	exit_error('Error',db_error());
+	exit_error(db_error(),'home');
 }
 
 // Create the graph. These two calls are always required

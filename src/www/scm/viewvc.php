@@ -1,13 +1,31 @@
 <?php
 
 /**
- * GForge ViewCVS PHP wrapper.
+ * FusionForge ViewCVS PHP wrapper.
  *
  * Portion of this file is inspired from the ViewCVS wrapper
  * contained in CodeX.
  * Copyright (c) Xerox Corporation, CodeX / CodeX Team, 2001,2002. All Rights Reserved.
  * http://codex.xerox.com
  *
+ * Copyright 2010 (c), Franck Villaume
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 // make sure we're not compressing output if we are making a tarball
@@ -21,7 +39,7 @@ require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfwww.'scm/include/viewvc_utils.php';
 
 if (!forge_get_config('use_scm')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 // Get the project name from query
@@ -44,11 +62,13 @@ if (!$projectName) {
 
 // Check permissions
 $Group =& group_get_object_by_name($projectName);
-if (!$Group || !is_object($Group) || $Group->isError()) {
+if (!$Group || !is_object($Group)) {
 	exit_no_group();
+} else if ( $Group->isError()) {
+	exit_error($Group->getErrorMessage(),'home');
 }
 if (!$Group->usesSCM()) {
-	exit_error(_('Error'), _('Error - This project has turned off SCM.'));
+	exit_disabled('home');
 }
 
 // check if the scm_box is located in another server
@@ -57,7 +77,7 @@ $scm_box = $Group->getSCMBox();
 $external_scm = !$sys_scm_single_host;
 
 if (!forge_check_perm ('scm', $group->getID(), 'read')) {
-	exit_permission_denied();
+	exit_permission_denied('home');
 }
 
 if ($external_scm) {
@@ -70,7 +90,7 @@ if ($external_scm) {
 	$script_url = "http://".$scm_box."/".$server_script.$_SERVER["PATH_INFO"]."?".$_SERVER["QUERY_STRING"];
 	$fh = @fopen($script_url, "r");
 	if (!$fh) {
-		exit_error('Error', 'Could not open script <b>'.$script_url.'</b>.');
+		exit_error(sprintf(_('Could not open script %s.'),$script_url),'home');
 	}
 	
 	// start reading the output of the script (in 8k chunks)
