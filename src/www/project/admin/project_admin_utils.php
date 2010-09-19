@@ -163,7 +163,7 @@ function show_grouphistory ($group_id) {
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.$field.'</td><td>';
 			
 			if (is_numeric(db_result($result, $i, 'old_value'))) {
-				if (ereg("user|User", $field)) {
+				if (preg_match("/[Uu]ser/i", $field)) {
 					echo user_getname(db_result($result, $i, 'old_value'));
 				} else {
 					echo db_result($result, $i, 'old_value');
@@ -210,7 +210,7 @@ function prdb_namespace_seek($namecheck) {
 
 		// if we reached 20, then the namespace is depleted - eject eject
 		if ($curr_num == 20) {
-			exit_error("Namespace Failure","Failed to find namespace for database");
+			exit_error(_('Failed to find namespace for database'),'home');
 		}
 
 	}

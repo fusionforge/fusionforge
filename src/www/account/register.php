@@ -68,7 +68,7 @@ if (getStringFromRequest('submit')) {
 		logic that used to be coded in this page
 	*/
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('my');
 	}
 	
 	if ($GLOBALS['sys_require_accept_conditions'] && ! $accept_conditions) {

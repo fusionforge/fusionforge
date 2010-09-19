@@ -1,11 +1,28 @@
 <?php
 
 /**
- * GForge SCM Tarballs download page
+ * SCM Tarballs download page
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2003-2004 (c) GForge
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2003-2004 (c) GForge
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 $no_gz_buffer=true;
@@ -20,16 +37,14 @@ if (!$group_id) {
 }
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error(_('Error'),
-		_('Error creating group'));
+	exit_error(_('Error creating group'),'home');
 } else if ($group->isError()) {
-	exit_error(_('Error'),
-		$group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'home');
 }
 
 // Tarball downloads require the same permissions as SCM read access
 if (!forge_check_perm ('scm', $group->getID(), 'read')) {
- 	exit_permission_denied();
+ 	exit_permission_denied('home');
 }
 
 $group_name=$group->getUnixName();

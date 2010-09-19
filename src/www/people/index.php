@@ -29,7 +29,7 @@ require_once $gfwww.'people/people_utils.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
 if (!forge_get_config('use_people')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $group_id = getIntFromRequest('group_id');

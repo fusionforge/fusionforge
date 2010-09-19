@@ -1,47 +1,51 @@
 <?php
 /**
- * GForge Help Wanted 
+ * Help Wanted 
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 function people_header($params) {
 	global $group_id,$job_id,$HTML;
 
+	var_dump($_SERVER);
 	if ($group_id) {
 		$params['toptab']='people';
 		$params['group']=$group_id;
 		echo site_project_header($params);
+	} else if (strstr($_SERVER['HTTP_REFERER'],'account')){
+		$params['toptab']='my';
+		echo site_user_header($params);
 	} else {
 		echo $HTML->header($params);
 	}
 
 	if ($group_id && $job_id) {
-		echo ' | '.util_make_link ('/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id,_('Edit Job'));
+		echo util_make_link ('/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id,_('Edit Job'));
 	}
 }
 
 function people_footer($params) {
-	global $feedback, $HTML;
-	html_feedback_bottom($feedback);
+	global $HTML;
 	$HTML->footer($params);
 }
 
@@ -96,13 +100,12 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id) 
 VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= _('ERROR inserting into skill inventory');
-				echo db_error();
+				$error_msg .= sprintf(_('ERROR inserting into skill inventory: %s'),db_error());
 			} else {
 				$feedback .= _('Added to skill inventory');
 			}
 		} else {
-			$feedback .= _('ERROR - skill already in your inventory');
+			$error_msg .= _('ERROR - skill already in your inventory');
 		}
 		}
 	} else {
@@ -299,9 +302,12 @@ function people_edit_job_inventory($job_id,$group_id) {
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
+		if (db_error()) {
+			exit_error(db_error(),'admin');
+		} else {
+			echo '
 			<tr><td colspan="4"><h2>'._('No Skill Inventory Set Up').'</h2></td></tr>';
-		echo db_error();
+		}
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
@@ -320,7 +326,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 
 	}
 	//add a new skill
-	$i++; //for row coloring
+	(isset($i)) ? $i++ : $i = 0; //for row coloring
 
 	echo '
 	<tr><td colspan="4"><h3>'._('Add a new skill').'</h3></td></tr>
@@ -407,7 +413,7 @@ function people_show_job_list($result) {
 	$rows=db_numrows($result);
 	if (!isset($i)){$i=1;}
 	if ($rows < 1) {
-		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="error" colspan="4">'._('None Found'). db_error() .'</td></tr>';
+		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td class="warning" colspan="4">'._('None Found'). db_error() .'</td></tr>';
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			$return .= '

@@ -1,23 +1,24 @@
 <?php
 /**
- * GForge Developer's Diary Page
+ * Developer's Diary Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
@@ -30,8 +31,10 @@ if ($diary_user) {
 	$diary_id = getStringFromRequest('diary_id');
   
 	$user_obj=user_get_object($diary_user);
-	if (!$user_obj || $user_obj->isError()) {
-		exit_error('ERROR','User could not be found: '.$user_obj->getErrorMessage());
+	if (!$user_obj) {
+		exit_error(_('User could not be found.'),'home');
+	} else if ($user_obj->isError()) {
+		exit_error($user_obj->getErrorMessage(),'home');
 	}
 
 	echo $HTML->header(array('title'=>_('My Diary And Notes')));
@@ -57,20 +60,20 @@ if ($diary_user) {
 	}
 
 	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
-	echo '<table cellspacing="2" cellpadding="0" width="100%" border="0">
-';
+	echo '<table cellspacing="2" cellpadding="0" width="100%" border="0">';
 	/*
-
 		List all diary entries
-
 	*/
 	$result = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND is_public=1 ORDER BY id DESC',
 				   array ($diary_user));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
-			<tr><td><strong>'._('This User Has No Diary Entries').'</strong></td></tr>';
-		echo db_error();
+		if (db_error()) {
+			exit_error(db_error(),'home');
+		} else {
+			echo '
+				<tr><td><strong>'._('This User Has No Diary Entries').'</strong></td></tr>';
+		}
 	} else {
 		echo '
 			<tr>
@@ -86,16 +89,13 @@ if ($diary_user) {
 		echo '
 		<tr><td colspan="2" class="tablecontent">&nbsp;</td></tr>';
 	}
+
 	echo "</table>\n";
-
 	echo $HTML->boxBottom();
-
 	echo $HTML->footer(array());
 
 } else {
-
-	exit_error(_('Error'),_('No User Selected'));
-
+	exit_error(_('No User Selected'),'home');
 }
 
 ?>

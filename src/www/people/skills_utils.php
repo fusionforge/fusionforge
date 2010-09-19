@@ -94,7 +94,7 @@ function displayUserSkills($user_id, $allowEdit) {
 	}
 }
 
-function handle_multi_edit($skill_ids) {
+function handle_multi_edit($skill_ids = array()) {
 	global $HTML;
 	$result = db_query_params ('SELECT * FROM skills_data WHERE skills_data_id = ANY ($1)',
 				   array (db_int_array_to_any_clause ($skill_ids)));

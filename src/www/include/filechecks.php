@@ -2,10 +2,25 @@
 /**
  * File checking functions
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
@@ -45,7 +60,7 @@ function filechecks_targz($filename) {
 		for ($i=0;$i<count($output);$i++) {
 			$exitout .= "<br />" . $output[$i] . "\n";
 		}
-		exit_error("Failed tar/gz integrity check.","Output follows: <p>$exitout</p>");
+		exit_error(sprintf(_('Failed tar/gz integrity check. Output follows: <p>$s</p>'),$exitout),'');
 	}
 }
 
@@ -60,7 +75,7 @@ function filechecks_gz($filename) {
 		for ($i=0;$i<count($output);$i++) {
 			$exitout .= "<br />" . $output[$i] . "\n";
 		}
-		exit_error("Failed gzip integrity check.","Output follows: <p>$exitout</p>");
+		exit_error(sprintf(_('Failed gzip integrity check. Output follows: <p>$s</p>'),$exitout),'');
 	}
 }
 
@@ -153,15 +168,15 @@ function filechecks_getfiletype($filename) {
 	} 
 
 	if (!$filetype) {
-		exit_error ("Unknown file type","This file does not have a system-recognized filename type.");
+		exit_error (_('This file does not have a system-recognized filename type.'),'');
 	}
 
 	if (!$filename) {
-		exit_error ("File does not exist","You must supply a filename.");
+		exit_error (_('File does not exist. You must supply a filename.'),'');
 	}
 
 	if (!file_exists("$GLOBALS[FTPINCOMING_DIR]/$filename")) {
-		exit_error ("File does not exist","File $filename is not in incoming FTP directory.");
+		exit_error (sprintf(_('File does not exist. File %s is not in incoming FTP directory.'),$filename),'');
 	}
 	return $filetype;
 }

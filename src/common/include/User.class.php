@@ -368,7 +368,7 @@ class GFUser extends Error {
 						  $ccode,
 						  $theme_id)) ;
 		if (!$result) {
-			$this->setError(_('Insert Failed') . db_error());
+			$this->setError(_('Insert Failed: ') . db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -616,7 +616,7 @@ Enjoy the site.
 		$res = db_query_params ('SELECT * FROM users WHERE user_id=$1',
 					array ($user_id)) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('GFUser::fetchData()::'.db_error());
+			$this->setError('GFUser::fetchData():: '.db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

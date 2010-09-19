@@ -1,11 +1,27 @@
 <?php
 /**
- *
  * Skills input/update page.
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002 (c) Silicon and Software Systems (S3)
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002 (c) Silicon and Software Systems (S3)
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('../env.inc.php');
@@ -14,12 +30,14 @@ require_once $gfwww.'people/people_utils.php';
 require_once $gfwww.'people/skills_utils.php';
 
 if (!forge_get_config('use_people')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $group_id = getIntFromRequest('group_id');
 $job_id = getStringFromRequest('job_id');
 $feedback = '';
+$warning = '';
+$error_msg = '';
 
 if (session_loggedin()) {
 
@@ -30,22 +48,21 @@ if (session_loggedin()) {
 			update the job's description, status, etc
 		*/
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('my');
 		}
 		
 		$result=db_query_params('UPDATE users SET people_view_skills=$1
-WHERE user_id=$2', array($people_view_skills, $user_getid()));
+WHERE user_id=$2', array($people_view_skills, user_getid()));
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
-			$feedback .= _('User update FAILED');
-			echo db_error();
+			$error_msg .= sprintf(_('User update FAILED: %s'),db_error());
 		} else {
 			$feedback .= _('User updated successfully');
 		}
 
 	} else if (getStringFromRequest('AddSkill')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('my');
 		}
 
 		$type = getStringFromRequest('type');
@@ -73,7 +90,7 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 				   AND start=$4
 				   AND finish=$5
 				   AND keywords=$6",
-					 array($user_getid(), $type, $title, $start, $finish, $keywords));
+					 array(user_getid(), $type, $title, $start, $finish, $keywords));
 				   
 			if (db_numrows($result) >= 1) {
 				$feedback .= '';	/* don't tell them anything! */
@@ -83,16 +100,15 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 			   
 				if (!$result || db_affected_rows($result) < 1) {
 					form_release_key(getStringFromRequest("form_key"));
-					echo db_error();
-					$feedback .= _('Failed to add the skill');
-					echo '<h2>'._('Failed to add the skill').'<h2>';
+					$error_msg .= sprintf(_('Failed to add the skill %s'),db_error());
+					echo '<h2>'._('Failed to add the skill').'</h2>';
 				} else {		  
 					$feedback = _('Skill added successfully');
 				}
 			}
 		} else {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('error - missing info'),_('Fill in all required fields'));
+			exit_missing_param('',array(_('Type'),_('Title'),_('Start Month'),_('Start Year'),_('End Month'),_('End Year'),_('Keywords')),'my');
 		}
 	}
 	if (getStringFromRequest('MultiEdit')) {
@@ -105,9 +121,12 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 		$keywords = getStringFromRequest('keywords');
 		$skill_edit = getStringFromRequest('skill_edit');
 
-		$numItems = count($skill_edit);
+		$numItems = 0;
+		if (is_array($skill_edit)) {
+			$numItems = count($skill_edit);
+		}
 		if($numItems == 0) {
-			$feedback .= _('No skills selected to edit.');
+			$warning .= _('No skills selected to edit.');
 		} else {
 			if (getStringFromRequest('confirmMultiEdit')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -124,8 +143,7 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 																		array($type[$i], $title[$i], $startY[$i].$startM[$i], $endY[$i].$endM[$i], $keywords[$i], $skill_edit[$i]));
 
 					if (!$result || db_affected_rows($result) < 1) {
-						echo db_error();
-						$feedback = _('Failed to update skills');
+						$error_msg = sprintf(_('Failed to update skills: %s'),db_error());
 						break;
 					} else {
 						$feedback = ngettext ('Skill updated', 'Skills updated', db_affected_rows($result));
@@ -134,7 +152,7 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 
 			} else	/* not confirmed multiedit */ {
 				people_header(array('title'=>_('Skills edit')));
-				echo '<span class="important">'._('Edit Skills').'</span>';
+				echo '<h2>'._('Edit Skills').'</h2>';
 				echo _('Change the required fields, and press "Done" at the bottom of the page');
 				echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 				echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
@@ -148,20 +166,20 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 			}
 		}
 	} else if (getStringFromRequest('cancelMultiEdit')) {
-		$feedback = _('Cancelled skills update');
+		$warning = _('Cancelled skills update');
 	}
 	
 	if (getStringFromRequest('MultiDelete')) {
 		$unfiltered_skill_delete_array = getArrayFromRequest('skill_delete');
 		$skill_delete = array() ;
-		foreach ($unfiltered_skill_delete AS $usd) {
+		foreach ($unfiltered_skill_delete_array AS $usd) {
 			if (is_numeric ($usd)) {
 				$skill_delete[] = $usd;
 			}
-		}		
+		}
 		$numItems = count($skill_delete);
 		if($numItems == 0) {
-			$feedback .= _('No skills selected to delete.');
+			$warning .= _('No skills selected to delete.');
 		} else {
 			if(getStringFromRequest('confirmMultiDelete')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -170,9 +188,8 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 				$result = db_query_params ('DELETE FROM skills_data where skills_data_id = ANY ($1)',
 							   array (db_int_array_to_any_clause ($skill_delete)));
 				if (!$result || db_affected_rows($result) < 1) {
-					echo db_error();
-					$feedback .= _('Failed to delete any skills');
-					echo '<h2>'._('Failed to delete any skills').'<h2>';
+					$error_msg .= sprintf(_('Failed to delete any skills: %s'),db_error());
+					echo '<h2>'._('Failed to delete any skills').'</h2>';
 				} else {		  
 					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
 				}
@@ -181,7 +198,7 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 							   array (db_int_array_to_any_clause ($skill_delete)));
 				$rows = db_numrows($result);
 				if (!$result || $rows < 1) {
-					echo db_error();
+					exit_error(db_error(),'my');
 				} else {		  
 					people_header(array('title'=>_('Confirm skill delete')));
 
@@ -210,24 +227,31 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 			
 		}
 	} elseif (getStringFromRequest('MultiDeleteCancel')) {
-		$feedback .= _('Skill deletion cancelled');
+		$warning .= _('Skill deletion cancelled');
 	}
 
 	people_header(array('title'=>_('Edit Your Profile')));
 
-	html_feedback_top($feedback);
+	if (!empty($error_msg)) {
+		html_error_top($error_msg);
+	}
+	if (!empty($warning)) {
+		html_warning_top($warning);
+	}
+	if (!empty($feedback)) {
+		html_feedback_top($feedback);
+	}
 		
 	//for security, include group_id
 	$result = db_query_params("SELECT * FROM users WHERE user_id=$1", array(user_getid()));
 
 	if (!$result || db_numrows($result) < 1) {
-		echo db_error();
-		$feedback .= _('User fetch FAILED');
-		echo '<h2>'._('No Such User').'<h2>';
+		$error_msg .= sprintf(_('User fetch FAILED: %s'),db_error());
+		echo '<h2>'._('No Such User').'</h2>';
 	} else {
 
 		echo '
-		<h2>'._('Edit Public Permissions').'<h2>
+		<h2>'._('Edit Public Permissions').'</h2>
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		'._('The following option determines if others can see your skills. If they can\'t, you can still enter your skills.').'
 		<p>
@@ -246,7 +270,7 @@ WHERE user_id=$2', array($people_view_skills, $user_getid()));
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= _('No skill types in database (skills_data_types table)');
-			echo '<h2>'._('No skill types in database - inform system administrator').'<h2>';
+			echo '<h2>'._('No skill types in database - inform system administrator').'</h2>';
 		}
 		
 		$yearArray = array();

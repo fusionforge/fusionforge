@@ -39,7 +39,7 @@ class SurveyHTML extends Error {
 		return true;
 	}
 
-        /**
+	/**
 	 * Show survey header 
 	 */
 	function header($params) {
@@ -468,7 +468,7 @@ class SurveyHTML extends Error {
 		
 		$ret="";
 		if ($s->isUserVote(user_getid())) {
-			$ret.= '<div class="error">'. _('Warning - you are about to vote a second time on this survey.').'</div>';
+			$ret.= '<div class="warning">'. _('Warning - you are about to vote a second time on this survey.').'</div>';
 		} 
 		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
