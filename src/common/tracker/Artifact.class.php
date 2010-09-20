@@ -1061,7 +1061,7 @@ class Artifact extends Error {
 			} elseif ($acr->isError()) {
 				$this->setError('Artifact: '.$acr->getErrorMessage());
 			} else {
-				$body = addslashes($acr->getBody());
+				$body = $acr->getBody();
 				if ($body) {
 					if (!$this->addMessage(util_unconvert_htmlspecialchars($body),'',0)) {
 						db_rollback();
@@ -1457,10 +1457,10 @@ class Artifact extends Error {
 
 		if ($type > 1) {
 			// get all the email addresses that are monitoring this request or the ArtifactType
-			$monitor_ids =& $this->getMonitorIds();
+			$monitor_ids = $this->getMonitorIds();
 		} else {
 			// initial creation, we just get the users monitoring the ArtifactType
-			$monitor_ids =& $this->ArtifactType->getMonitorIds();
+			$monitor_ids = $this->ArtifactType->getMonitorIds();
 		}
 
 		$emails = array();
