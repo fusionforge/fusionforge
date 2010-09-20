@@ -222,8 +222,10 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
+			$this->data_array['role_id'] = $role_id ;
+			$this->data_array['role_name'] = $role_name ;
 
-			$this->update ($data) ;
+			$this->update ($role_name, $data) ;
 			
 			$this->normalizeData () ;
 		} else {
@@ -287,17 +289,13 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	function createDefault($name) {
-//echo '<html><body><pre>';
-//echo $name;
-//print_r($this->defaults);
-		$arr =& $this->defaults[$name];
+		if (array_key_exists ($name, $this->defaults)) {
+			$arr =& $this->defaults[$name];
+		} else {
+			$arr = array () ;
+		}
 		$keys = array_keys($arr);
 		$data = array();
-
-//print_r($keys);
-//print_r($arr);
-//db_rollback();
-//exit;
 		for ($i=0; $i<count($keys); $i++) {
 
 			if ($keys[$i] == 'forum') {
