@@ -236,8 +236,10 @@ if (!USE_PFO_RBAC) {
 		echo role_box($group_id,'role_id','',false);
 		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
 
-		echo '<p><a href="roleedit.php?group_id='.$group_id.'">'._("Add Role").'</a>';
-		echo '</p>';
+
+		echo '<form action="roleedit.php?group_id='. $group_id .'" method="post"><p>';
+		echo '<input type="text" name="role_name" size="10" value="" />';
+		echo '&nbsp;<input type="submit" name="add" value="'._("Add Role").'" /></p></form>';
 
 		echo $HTML->boxBottom();
 
