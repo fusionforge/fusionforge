@@ -27,7 +27,7 @@ class PluginHudsonJobDao extends DataAccessObject {
 	 * Constructs the PluginHudsonJobDao
 	 * @param $da instance of the DataAccess class
 	 */
-	function PluginHudsonJobDao( & $da ) {
+	function PluginHudsonJobDao( $da ) {
 		DataAccessObject::DataAccessObject($da);
 	}
 
