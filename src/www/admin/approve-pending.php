@@ -3,21 +3,22 @@
  * Site Admin page for approving/rejecting new projects
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -39,23 +40,24 @@ session_require_global_perm ('approve_projects');
 
 function activate_group($group_id) {
 	global $feedback;
+	global $error_msg;
 
 	$group =& group_get_object($group_id);
 
 	if (!$group || !is_object($group)) {
-		$feedback .= _('Error creating group object').'<br />';
+		$error_msg .= _('Error creating group object');
 		return false;
 	} else if ($group->isError()) {
-		$feedback .= $group->getErrorMessage().'<br />';
+		$error_msg .= $group->getErrorMessage();
 		return false;
 	}
 
 
 	if ($group->approve(session_get_user())) {
-		$feedback .= sprintf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
+		$feedback .= sprintf(_('Approving Project: %1$s'), $group->getUnixName());
 	} else {
-		$feedback .= sprintf(_('Error when approving Project: %1$s'), $group->getUnixName()).'<br />';
-		$feedback .= $group->getErrorMessage().'<br />';
+		$error_msg .= sprintf(_('Error when approving Project: %1$s'), $group->getUnixName()).'<br />';
+		$error_msg .= $group->getErrorMessage();
 		return false;
 	}
 
@@ -95,14 +97,11 @@ if ($action=='activate') {
 	if (!$group || !is_object($group)) {
 		exit_no_group();
 	} elseif ($group->isError()) {
-		exit_error('Error',$group->getErrorMessage());
+		exit_error($group->getErrorMessage(),'admin');
 	}
 
 	if (!$group->setStatus(session_get_user(), 'D')) {
-		exit_error(
-			_('Error during group rejection'),
-			$this->getErrorMessage()
-		);
+		exit_error(_('Error during group rejection: ').$this->getErrorMessage(),'admin');
 	}
 
 	$group->addHistory('rejected', 'x');

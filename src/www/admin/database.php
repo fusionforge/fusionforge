@@ -10,21 +10,22 @@
  *   - register existing database in system
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -34,7 +35,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 if (!forge_get_config('use_project_database')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 session_require_global_perm ('forge_admin');
@@ -50,16 +51,16 @@ if (getStringFromRequest('submit')) {
 		if (!$group || !is_object($group)) {
             exit_no_group();
 		} elseif ($group->isError()) {
-			exit_error('Error',$group->getErrorMessage());
+			exit_error($group->getErrorMessage(),'home');
 		}
 		
 		$group_id = $group->getID();
 
 		$user =& session_get_user();
 		if (!$user || !is_object($user)) {
-			exit_error('Error','Could Not Get User');
+			exit_error(_('Could Not Get User'),'home');
 		} elseif ($user->isError()) {
-			exit_error('Error',$u->getErrorMessage());
+			exit_error($u->getErrorMessage(),'home');
 		}
 
 
@@ -74,17 +75,13 @@ if (getStringFromRequest('submit')) {
 				$user->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= _('Error Adding Database') .db_error();
+			$error_msg .= _('Error Adding Database: ') .db_error();
 		} else {
 			$feedback .= _('Project'). " <em>".$group->getUnixName()."</em>" ._('added already active database');
 		}
-
 	} else {
-
-		$feedback .=	"<strong>" ._('Unable to insert already active database.'). "</strong>";
-
+		$error_msg .= _('Unable to insert already active database.');
 	}
-
 }
 
 site_admin_header(array('title'=>_('Site Admin: Groups\' DB Maintenance')));

@@ -7,21 +7,22 @@
  * delivery is performed via cronjob.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -33,7 +34,7 @@ session_require_global_perm ('forge_admin');
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('admin');
 	}
 	$mail_type = getStringFromRequest('mail_type');
 	$mail_message = getStringFromRequest('mail_message');
@@ -41,23 +42,17 @@ if (getStringFromRequest('submit')) {
 
 	if (!$mail_type) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Missing parameter, You must select target audience for mailing')
-		);
+		exit_missing_param('',array(_('Target Audience')),'admin');
 	}
 
 	if (!trim($mail_message)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Missing parameter, You are trying to send empty message')
-		);
+		exit_missing_param('',array(_('No Message')),'admin');
 	}
 
 	if (trim($mail_subject) == '['.forge_get_config ('forge_name').']') {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Missing parameter, You must give proper subject to the mailing')
-		);
+		exit_missing_param('',array(_('No Subject')),'admin');
 	}
 
 	$res = db_query_params ('
@@ -71,9 +66,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$res || db_affected_rows($res)<1) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Error Scheduling Mailing, Could not schedule mailing, database error:') .db_error()
-		);
+		exit_error(_('Scheduling Mailing, Could not schedule mailing, database error: ').db_error(),'admin');
 	}
 
 	site_admin_header(array('title'=>_('Massmail admin')));
