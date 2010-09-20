@@ -653,7 +653,7 @@ class ArtifactType extends Error {
 			$this->setError('Clone Tracker Error '.$at->getErrorMessage());
 			return false;
 		}
-		$efs =& $at->getExtraFields();
+		$efs = $at->getExtraFields();
 
 
 		//
