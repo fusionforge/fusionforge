@@ -77,21 +77,40 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function setName ($role_name) { // From the PFO spec
 		if ($this->getName() != stripslashes($role_name)) {
-			// Check if role_name is not already used.
-			$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
-				array ($this->Group->getID(), htmlspecialchars($role_name)));
-			if (db_numrows($res)) {
-				$this->setError('Cannot create a role with this name (already used)');
-				return false;
-			}
-
-			$res = db_query_params ('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
-						array (htmlspecialchars($role_name),
-						       $this->Group->getID(),
-						       $this->getID())) ;
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('update::name::'.db_error());
-				return false;
+			if (USE_PFO_RBAC) {
+				db_begin();
+				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
+						       array ($this->Group->getID(), htmlspecialchars($role_name)));
+				if (db_numrows($res)) {
+					$this->setError('Cannot create a role with this name (already used)');
+					db_rollback () ;
+					return false;
+				}
+				$res = db_query_params ('UPDATE pfo_role SET role_name=$1 WHERE role_id=$2',
+							array (htmlspecialchars($role_name),
+							       $this->getID())) ;
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setError('update::name::'.db_error());
+					return false;
+				}
+				db_commit();
+			} else {
+				// Check if role_name is not already used.
+				$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
+						       array ($this->Group->getID(), htmlspecialchars($role_name)));
+				if (db_numrows($res)) {
+					$this->setError('Cannot create a role with this name (already used)');
+					return false;
+				}
+				
+				$res = db_query_params ('UPDATE role SET role_name=$1 WHERE group_id=$2 AND role_id=$3',
+							array (htmlspecialchars($role_name),
+							       $this->Group->getID(),
+							       $this->getID())) ;
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setError('update::name::'.db_error());
+					return false;
+				}
 			}
 		}
 		return true ;

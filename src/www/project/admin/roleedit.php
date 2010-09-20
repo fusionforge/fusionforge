@@ -93,7 +93,7 @@ if ($role_id=='observer') {
 
 	if (getStringFromRequest('submit')) {
 		if (($role->getHomeProject() != NULL)
-		    && ($role->getHomeProject()->getID() != $group_id)) {
+		    && ($role->getHomeProject()->getID() == $group_id)) {
 			$role_name = trim(getStringFromRequest('role_name'));
 		} else {
 			$role_name = $role->getName() ;
