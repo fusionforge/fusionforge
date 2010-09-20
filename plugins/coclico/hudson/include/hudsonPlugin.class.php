@@ -134,11 +134,6 @@ class hudsonPlugin extends Plugin {
 	}
 
 	function jsFile($params) {
-		use_javascript('/scripts/prototype/prototype.js');
-		use_javascript('/scripts/scriptaculous/scriptaculous.js');
-		use_javascript('/scripts/codendi/Tooltip.js');
-		use_javascript('/scripts/codendi/LayoutManager.js');
-		use_javascript('/scripts/codendi/ReorderColumns.js');
 		use_javascript('/plugins/hudson/hudson_tab.js');
 	}
 
@@ -212,6 +207,11 @@ class hudsonPlugin extends Plugin {
 		}
 	}
 	function widgets($params) {
+		$group = &group_get_object($GLOBALS['group_id']);
+		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
+			return false;
+		}
+
 		require_once('common/widget/WidgetLayoutManager.class.php');
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
 			$params['codendi_widgets'][] = 'plugin_hudson_my_jobs';
