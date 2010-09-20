@@ -89,9 +89,20 @@ if (getStringFromRequest ('addtab') != '') {
 	if (!$res || db_affected_rows($res) < 1) {
 		$error_msg = sprintf (_('Cannot delete tab entry: %s'), db_error());
 	} else {
-		$res = db_query_params ('UPDATE plugin_extratabs_main SET index=index-1 WHERE group_id=$1 AND index > $2',
+		$res = db_query_params ('SELECT index FROM plugin_extratabs_main WHERE group_id=$1 AND index > $2 ORDER BY index ASC',
 					array ($group_id,
 					       $index)) ;
+		if (db_numrows($res) > 0) {
+			$todo = array () ;
+			while ($row = db_fetch_array($res)) {
+				$todo[] = $row['index'] ;
+			}
+			foreach ($todo as $i) {
+				$res = db_query_params ('UPDATE plugin_extratabs_main SET index = index - 1 WHERE group_id = $1 AND index = $2',
+							array ($group_id,
+							       $i)) ;
+			}
+		}
 		if ($res) {
 			$feedback = _('Tab successfully deleted');
 		} else {
