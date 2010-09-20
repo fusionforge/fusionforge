@@ -37,6 +37,9 @@ class hudsonViews extends Views {
 	}
 
 	function header() {
+		use_javascript('/scripts/prototype/prototype.js');
+		use_javascript('/scripts/scriptaculous/scriptaculous.js');
+
 		parent::header();
 //		echo $this->_getHelp();
 		echo '<h1>'.$this->_getTitle().'</h1>';
@@ -54,8 +57,7 @@ class hudsonViews extends Views {
 		} else {
 			$help_label = _("Help");
 		}
-		//        return '<b><a href="javascript:help_window(\''.get_server_url().'/documentation/user_guide/html/'.UserManager::instance()->getCurrentUser()->getLocale().'/ContinuousIntegrationWithHudson.html'.$section.'\');">'.$help_label.'</a></b>';
-		return '<b><a href="javascript:help_window(\''.get_server_url().'/documentation/user_guide/html/en_US/ContinuousIntegrationWithHudson.html'.$section.'\');">'.$help_label.'</a></b>';
+		return '<b><a href="javascript:help_window(\''.get_server_url().'help/guide/ContinuousIntegrationIntroduction.html'.$section.'\');">'.$help_label.'</a></b>';
 	}
 	function footer() {
 		parent::footer();
@@ -147,12 +149,12 @@ class hudsonViews extends Views {
 
 		if ($dar && $dar->valid()) {
 			$row = $dar->current();
-			$crossref_fact= new CrossReferenceFactory($row['name'].'/'.$build_id, 'hudson_build', $group_id);
-			$crossref_fact->fetchDatas();
-			if ($crossref_fact->getNbReferences() > 0) {
-				echo '<b> '._('References').'</b>';
-				$crossref_fact->DisplayCrossRefs();
-			}
+//			$crossref_fact= new CrossReferenceFactory($row['name'].'/'.$build_id, 'hudson_build', $group_id);
+//			$crossref_fact->fetchDatas();
+//			if ($crossref_fact->getNbReferences() > 0) {
+//				echo '<b> '._('References').'</b>';
+//				$crossref_fact->DisplayCrossRefs();
+//			}
 			$this->_display_iframe($row['job_url'].'/'.$build_id.'/');
 		} else {
 			echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
@@ -325,18 +327,18 @@ class hudsonViews extends Views {
 					} else {
 						echo '  <td>&nbsp;</td>';
 					}
-					echo '  <td align="center"><a href="'.$job->getUrl().'/rssAll" onclick="toggle_iframe(this); return false;"><img src="'.$this->getControler()->getIconsPath().'rss_feed.png" alt="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" title="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'"></a></td>';
+					echo '  <td align="center"><a href="'.$job->getUrl().'/rssAll" onclick="toggle_iframe(this); return false;"><img src="'.$this->getControler()->getIconsPath().'rss_feed.png" alt="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" title="'.vsprintf(_("RSS feed of all builds for %s job"),  array($row['name'])).'" /></a></td>'."\n";
 
 					if ($project->usesService('svn')) {
 						if ($row['use_svn_trigger'] == 1) {
-							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("SVN commit will trigger a build").'" title="'._("SVN commit will trigger a build").'"></td>';
+							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("SVN commit will trigger a build").'" title="'._("SVN commit will trigger a build").'" /></td>';
 						} else {
 							echo '  <td>&nbsp;</td>';
 						}
 					}
 					if ($project->usesService('cvs')) {
 						if ($row['use_cvs_trigger'] == 1) {
-							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("CVS commit will trigger a build").'" title="'._("CVS commit will trigger a build").'"></td>';
+							echo '  <td align="center"><img src="'.$this->getControler()->getIconsPath().'server_lightning.png" alt="'._("CVS commit will trigger a build").'" title="'._("CVS commit will trigger a build").'" /></td>';
 						} else {
 							echo '  <td>&nbsp;</td>';
 						}
@@ -354,14 +356,14 @@ class hudsonViews extends Views {
 					echo '  <td>';
 					// edit job
 					echo '   <span class="job_action">';
-					echo '    <a href="?action=edit_job&group_id='.$group_id.'&job_id='.$row['job_id'].'"><img src="'.$this->getControler()->getIconsPath().'edit.png" alt="'._("Edit this job").' title="'._("Edit this job").'">';
+					echo '    <a href="?action=edit_job&amp;group_id='.$group_id.'&amp;job_id='.$row['job_id'].'"><img src="'.$this->getControler()->getIconsPath().'edit.png" alt="'._("Edit this job").'" title="'._("Edit this job").'" />';
 					echo '</a>';
 					echo '   </span>';
 					// delete job
 					echo '   <span class="job_action">';
-					echo '    <a href="?action=delete_job&group_id='.$group_id.'&job_id='.$row['job_id'].'" onclick="return confirm(';
+					echo '    <a href="?action=delete_job&amp;group_id='.$group_id.'&amp;job_id='.$row['job_id'].'" onclick="return confirm(';
 					echo "'" . vsprintf(_("Are you sure you want to delete Job %s from project %s?"),  array($row['name'], $project->getUnixName())) . "'";
-					echo ');"><img src="'.$this->getControler()->getIconsPath().'cross.png" alt="'._("Delete this job").' title="'._("Delete this job").'">';
+					echo ');"><img src="'.$this->getControler()->getIconsPath().'cross.png" alt="'._("Delete this job").'" title="'._("Delete this job").'" />';
 					echo '</a>';
 					echo '   </span>';
 					echo '  </td>';
