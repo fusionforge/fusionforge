@@ -299,7 +299,7 @@ class ArtifactExtraField extends Error {
 	 *	@return	string	type.
 	 */
 	function getTypeName() {
-		$arr=&$this->getAvailableTypes();
+		$arr = $this->getAvailableTypes();
 		return $arr[$this->data_array['field_type']];
 	}
 
@@ -481,11 +481,14 @@ class ArtifactExtraField extends Error {
 		// these are reserved alias names
 		static $reserved_alias = array(
 			"project",
-			"type",
 			"priority",
 			"assigned_to",
+			"submitted_by",
+			"open_date",
+			"close_date",
 			"summary",
-			"details"
+			"details",
+			"last_modified_date"
 		);
 
 		if (strlen($alias) == 0) return true;		// empty alias
