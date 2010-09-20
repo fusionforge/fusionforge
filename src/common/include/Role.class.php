@@ -370,7 +370,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	function normalizePermsForSection (&$new_pa, $section, $refid) {
-		if (array_key_exists ($section, $this->perms_array)) {
+		if (array_key_exists ($section, $this->perms_array)
+		    && array_key_exists ($refid, $this->perms_array[$section])) {
 			$new_pa[$section][$refid] = $this->perms_array[$section][$refid] ;
 		} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
 			  && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
