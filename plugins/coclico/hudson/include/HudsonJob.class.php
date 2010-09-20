@@ -26,7 +26,9 @@ class HudsonJob {
 
     protected $hudson_job_url;
     protected $hudson_dobuild_url;
+    protected $hudson_config_job_url;
     protected $dom_job;
+    protected $config_job;
     private $icons_path;
     
     private $context;
@@ -43,6 +45,7 @@ class HudsonJob {
                 
         $this->hudson_job_url = $hudson_job_url . "/api/xml";
         $this->hudson_dobuild_url = $hudson_job_url . "/build";
+        $this->hudson_config_job_url = $hudson_job_url . "/config.xml";
         
         $controler = $this->getHudsonControler(); 
         $this->icons_path = $controler->getIconsPath();
@@ -50,6 +53,7 @@ class HudsonJob {
         $this->_setStreamContext();
         
         $this->buildJobObject();
+        $this->configJobObject();
         
     }
     function getHudsonControler() {
@@ -60,8 +64,23 @@ class HudsonJob {
         $this->dom_job = $this->_getXMLObject($this->hudson_job_url);
     }
     
+	public function configJobObject() {
+        $this->config_job = $this->_getXMLObject($this->hudson_config_job_url);
+    }
+    
     protected function _getXMLObject($hudson_job_url) {
-        $xmlstr = @file_get_contents($hudson_job_url, false, $this->context);
+
+        // If enabled, use APC cache (1sec) to reduce RSS fetching that may cause big delays.
+        if (function_exists('apc_fetch')) {
+            $xmlstr = apc_fetch($hudson_job_url);
+            if ($xmlstr === false) {
+        		$xmlstr = @file_get_contents($hudson_job_url, false, $this->context);
+                apc_store($hudson_job_url, $xmlstr, 1);
+            }
+        } else {
+            $xmlstr = @file_get_contents($hudson_job_url, false, $this->context);
+        }
+
         if ($xmlstr !== false) {
             $xmlobj = simplexml_load_string($xmlstr);
             if ($xmlobj !== false) {
@@ -268,6 +287,10 @@ class HudsonJob {
         } else {
             return $this->getIconsPath()."health_00_to_19.gif";
         }
+    }
+    
+	function getSvnLocation() {
+        return $this->config_job->scm->locations->{'hudson.scm.SubversionSCM_-ModuleLocation'}->remote;
     }
     
     /**
