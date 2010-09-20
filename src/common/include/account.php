@@ -217,7 +217,7 @@ function account_shellselects($current) {
 		if ($current == $this_shell) {
 			echo "<option selected value=$this_shell>$this_shell</option>\n";
 		} else {
-			if (! ereg("^#",$this_shell)){
+			if (! preg_match("/^#/",$this_shell)){
 				echo "<option value=$this_shell>$this_shell</option>\n";
 			}
 		}

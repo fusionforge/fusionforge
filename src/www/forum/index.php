@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -36,27 +37,26 @@ if ($group_id) {
 
 	$ff=new ForumFactory($g);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
-		exit_error(_('Error'),$ff->getErrorMessage());
+		exit_error($ff->getErrorMessage(),'forums');
 	}
 
 	$farr =& $ff->getForums();
 
 	if ( $farr !== false && count($farr) == 1 ) {
-  		Header("Location: ".util_make_url ("/forum/forum.php?forum_id=".$farr[0]->getID()));
-		exit();
+        session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());
 	}
 
 	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));
 
-	if ($ff->isError() || count($farr) < 1) {
+	if ($ff->isError()) {
+        echo '<div class="error">'. $ff->getErrorMessage().'</div>';
+		forum_footer(array());
+		exit;
+    } else if ( count($farr) < 1) {
 		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %1$s'), $g->getPublicName()) .'</div>';
-		if($ff->isError()) {
-			echo $ff->getErrorMessage();
-		}
 		forum_footer(array());
 		exit;
 	}
-
 
 //	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 

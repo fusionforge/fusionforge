@@ -1,10 +1,27 @@
 <?php
 /**
- * GForge Mailing Lists Facility
+ * Mailing Lists Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('../env.inc.php');
@@ -19,16 +36,16 @@ $group_id = getIntFromGet('group_id');
 if ($group_id) {
 	$Group =& group_get_object($group_id);
 	if (!$Group || !is_object($Group)) {
-		exit_error(_('Error'), 'Could Not Get Group');
+		exit_error(_('Could Not Get Group'),'home');
 	} elseif ($Group->isError()) {
 		exit_no_group();
 	}
 	
 	$mlFactory = new MailingListFactory($Group);
 	if (!$mlFactory || !is_object($mlFactory)) {
-		exit_error(_('Error'), 'Could Not Get MailingListFactory');
+		exit_error(_('Could Not Get MailingListFactory'),'mail');
 	} elseif ($mlFactory->isError()) {
-		exit_error(_('Error'), $mlFactory->getErrorMessage());
+		exit_error($mlFactory->getErrorMessage(),'mail');
 	}
 
 	mail_header(array(
@@ -40,8 +57,7 @@ if ($group_id) {
 	$mlArray =& $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<h1>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</h1>';
-		echo $mlFactory->getErrorMessage();
+		echo '<div class="error">'.sprintf(_('Unable to get the list %s : %s'), $Group->getPublicName(), $mlFactory->getErrorMessage()) .'</div>';
 		mail_footer(array());
 		exit;
 	}

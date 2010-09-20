@@ -2,25 +2,24 @@
 /**
  * Finish Mass-adding users.
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2004 (c) Tim Perdue - GForge LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
- * @author Tim Perdue tim@gforge.org
- * @date 2004-03-16
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -38,7 +37,7 @@ $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-	exit_error('Error',$group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'admin');
 }
 
 if (getStringFromRequest('finished')) {
@@ -52,11 +51,12 @@ if (getStringFromRequest('finished')) {
 			$params[1] = $group_id;
 			plugin_hook('change_cal_permission',$params);
 	}
-	Header("Location: index.php?group_id=$group_id&feedback=Successful");
+    $feedback = _('Successful');
+	session_redirect('/project/admin/index.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
 }
 
 if (!$accumulated_ids) {
-	exit_error('Error','No IDs Were Passed');
+	exit_error(_('No IDs Were Passed'),'admin');
 } else {
 	$arr=explode(',',$accumulated_ids);
 	$res=db_query_params("SELECT user_id,user_name,realname FROM users

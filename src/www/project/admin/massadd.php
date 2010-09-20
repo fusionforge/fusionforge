@@ -2,25 +2,24 @@
 /**
  * Role Editing Page
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2004 (c) Tim Perdue - GForge LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
- * @author Tim Perdue tim@gforge.org
- * @date 2004-03-16
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -36,7 +35,7 @@ $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-	exit_error('Error',$group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'admin');
 }
 
 $sw = getStringFromRequest('sw', 'A');
@@ -63,7 +62,7 @@ if (count($newids) > 0) {
 $accumulated_ids = array_unique($accumulated_ids);
 
 if (getStringFromRequest('finished')) {
-	header("Location: massfinish.php?group_id=$group_id&accumulated_ids=".implode(',',$accumulated_ids));
+    session_redirect('/project/admin/massfinish.php?group_id='.$group_id.'&accumulated_ids='.implode(',',$accumulated_ids));
 }
 
 project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
@@ -107,7 +106,7 @@ if (!$res || db_numrows($res) < 1) {
 			<td>'.db_result($res,$i,'user_name').'</td>
 			<td><input type="checkbox" name="newids[]" value="'. $uid .'"';
 		if (in_array($uid, $accumulated_ids)) {
-			echo ' checked="checked"';
+			echo ' checked="checked" ';
 		}
 		echo ' /></td></tr>';
 

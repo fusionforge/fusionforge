@@ -1,22 +1,26 @@
 <?php
 /**
- * GForge Forums Facility
+ * Forums Facility
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2001, Tim Perdue - Sourceforge
+ * Copyright 2002, Tim Perdue - GForge, LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-
-/*
-	Message Forums
-	By Tim Perdue, Sourceforge, 11/99
-
-	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
-
-	Complete OO rewrite by Tim Perdue 12/2002
-*/
-
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -41,21 +45,21 @@ if ($forum_id && $group_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error('Error','Error Getting Forum');
+		exit_error(_('Error Getting Forum'),'forums');
 	} elseif ($f->isError()) {
-		exit_error('Error',$f->getErrorMessage());
+		exit_error($f->getErrorMessage(),'forums');
 	}
 
 	$fh=new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error('Error','Error Getting ForumHTML');
+		exit_error(_('Error Getting ForumHTML'),'forums');
 	} elseif ($fh->isError()) {
-		exit_error('Error',$fh->getErrorMessage());
+		exit_error($fh->getErrorMessage(),'forums');
 	}
 
 	if (session_loggedin() || $f->allowAnonymous()) {
 		if (!$f->allowAnonymous() && !$f->savePlace()) {
-			exit_error('Error',$f->getErrorMessage());
+			exit_error($f->getErrorMessage(),'forums');
 		} else {
 			forum_header(array('title'=>$f->getName(),'forum_id'=>$forum_id));
 			echo '<div align="center"><h3>'._('Start New Thread').'</h3></div>';
@@ -66,8 +70,7 @@ if ($forum_id && $group_id) {
 		exit_not_logged_in();
 	}
 } else {
-	exit_missing_param();
+	exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
 }
-
 
 ?>

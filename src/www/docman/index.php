@@ -35,7 +35,7 @@ require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML in
 
 /* are we using docman ? */
 if (!forge_get_config('use_docman'))
-	exit_disabled();
+	exit_disabled('home');
 
 /* get informations from request or $_POST */
 $group_id = getIntFromRequest('group_id');

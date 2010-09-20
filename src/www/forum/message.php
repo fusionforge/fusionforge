@@ -1,21 +1,27 @@
 <?php
 /**
- * GForge Forums Facility
+ * Forums Facility
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2001, Tim Perdue - Sourceforge
+ * Copyright 2002, Tim Perdue - GForge, LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-
-/*
-	Message Forums
-	By Tim Perdue, Sourceforge, 11/99
-
-	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
-
-	Complete OO rewrite by Tim Perdue 12/2002
-*/
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -46,8 +52,7 @@ if ($msg_id) {
 		/*
 			Message not found
 		*/
-		exit_error(_('Message Not Found'),
-				_('This message does not (any longer) exist'));
+		exit_error(_('This message does not (any longer) exist'),'forums');
 	}
 
 	$group_id=db_result($result,0,'group_id');
@@ -63,26 +68,26 @@ if ($msg_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error(_('Error'),_('Error getting new Forum'));
+		exit_error(_('Error getting new Forum'),'forums');
 	} elseif ($f->isError()) {
 		if ($f->isPermissionDeniedError()) {
 			exit_permission_denied();
 		}
-		exit_error(_('Error'),$f->getErrorMessage());
+		exit_error($f->getErrorMessage(),'forums');
 	}
 
 	$fm=new ForumMessage($f,$msg_id);
 	if (!$fm || !is_object($fm)) {
-		exit_error(_('Error'),_('Error getting new ForumMessage'));
+		exit_error(_('Error getting new ForumMessage'),'forums');
 	} elseif ($fm->isError()) {
-		exit_error(_('Error'),$fm->getErrorMessage());
+		exit_error($fm->getErrorMessage(),'forums');
 	}
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error(_('Error'),_('Error getting new ForumMessageFactory'));
+		exit_error(_('Error getting new ForumMessageFactory'),'forums');
 	} elseif ($fmf->isError()) {
-		exit_error(_('Error'),$fmf->getErrorMessage());
+		exit_error($fmf->getErrorMessage(),'forums');
 	}
 
 	$fmf->setUp(0,'threaded',200,'');
@@ -92,9 +97,9 @@ if ($msg_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error(_('Error'),_('Error getting new ForumHTML'));
+		exit_error(_('Error getting new ForumHTML'),'forums');
 	} elseif ($fh->isError()) {
-		exit_error(_('Error'),$fh->getErrorMessage());
+		exit_error($fh->getErrorMessage(),'forums');
 	}
 
 	if ($reply) {
@@ -168,8 +173,7 @@ if ($msg_id) {
 	while (($i < $rows) && ($total_rows < $max_rows)) {
 		$msg =& $msg_arr["0"][$i];
 		$total_rows++;
-		
-		
+
 		if ($fm->getID() != $msg->getID()) {
 			$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
 							     '&amp;group_id='.$group_id).'">';
@@ -218,8 +222,7 @@ if ($msg_id) {
 
 } else {
 	forum_header(array('title'=>_('You Must Choose a Message First')));
-	echo '<div class="error">'._('You Must Choose a Message First').'</div>';
-
+	echo '<div class="warning">'._('You Must Choose a Message First').'</div>';
 }
 
 forum_footer(array());

@@ -17,22 +17,22 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * Portions Copyright 2002-2004 (c) GForge Team
  * Portions Copyright 2002-2009 (c) Roland Mas
- * http://gforge.org/
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -53,7 +53,7 @@ if (forge_get_config('project_registration_restricted')) {
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('my');
 	}
 
 	$full_name = trim(getStringFromRequest('full_name'));
@@ -63,6 +63,7 @@ if (getStringFromRequest('submit')) {
 	$scm = getStringFromRequest('scm');
 	$is_public = getIntFromRequest('is_public');
 	$feedback = "";
+	$error_msg = "";
 
 	if (!$scm) {
 		$scm = 'noscm' ;
@@ -103,19 +104,19 @@ if (getStringFromRequest('submit')) {
 
 		if (!$res) {
 			form_release_key(getStringFromRequest("form_key"));
-			$feedback .= $group->getErrorMessage();
+			$error_msg .= $group->getErrorMessage();
 		} else {
 			$HTML->header(array('title'=>_('Registration complete')));
 
 			if ( $sys_project_reg_autoapprove != true ) {
 				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 			} else if ($group->isError()) {
-				printf(_('<p>ERROR: %1$s</p>'), $group->getErrorMessage() );
+				printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
 			} else {
 				printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
 
 				if (!$group->approve( user_get_object_by_name ( $sys_project_reg_autoapprove_user ) ) ) {
-					printf(_('<p>Approval ERROR: %1$s</p>'), $group->getErrorMessage() );
+					printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 				} else {
 					$hook_params = array () ;
 					$hook_params['group_id'] = $group_id ;

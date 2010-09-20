@@ -3,21 +3,22 @@
  * Change user's password
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -29,14 +30,14 @@ session_require_login () ;
 
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {
-	exit_error('Error','Could Not Get User');
+	exit_error(_('Could Not Get User'),'my');
 } elseif ($u->isError()) {
-	exit_error('Error',$u->getErrorMessage());
+	exit_error($u->getErrorMessage(),'my');
 }
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('my');
 	}
 
 	$old_passwd = getStringFromRequest('old_passwd');
@@ -45,34 +46,22 @@ if (getStringFromRequest('submit')) {
 
 	if ($u->getMD5Passwd() != md5($old_passwd)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Error'),
-			_('Old password is incorrect')
-		);
+		exit_error(_('Old password is incorrect'),'my');
 	}
 	
 	if (strlen($passwd)<6) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Error'),
-			_('You must supply valid password (at least 6 chars)')
-		);
+		exit_error(_('You must supply valid password (at least 6 chars)'),'my');
 	}
 	
 	if ($passwd != $passwd2) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Error'),
-			_('New passwords do not match.')
-		);
+		exit_error(_('New passwords do not match.'),'my');
 	}
 
 	if (!$u->setPasswd($passwd)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(
-			_('Error'),
-			'Could not change password: '.$u->getErrorMessage()
-		);
+		exit_error(_('Could not change password: ').$u->getErrorMessage(),'my');
 	}
 	//plugin webcal change user password
 	else {
@@ -82,7 +71,7 @@ if (getStringFromRequest('submit')) {
 	site_user_header(array('title'=>_('Successfully Changed Password')));
 	?>
 
-	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><p>Congratulations. You have changed your password.</p>'), forge_get_config ('forge_name')); ?>
+	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><div class="feedback">Congratulations. You have changed your password.</div>'), forge_get_config ('forge_name')); ?>
 
 	<p>
 		 <?php printf(_('You should now <a href="%1$s">Return to User Prefs</a>.'),

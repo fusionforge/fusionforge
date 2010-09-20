@@ -33,7 +33,6 @@ $max_logo_size = 50 ;		// In kibibytes
 
 session_require_global_perm ('forge_admin') ;
 
-site_admin_header (array ('title' => _('Contribution tracker administration'))) ;
 
 $action = getStringFromRequest ('action') ;
 $action = util_ensure_value_in_set ($action, array ('display',
@@ -230,6 +229,7 @@ case 'post_edit_actor':
 }
 
 // Display appropriate forms
+site_admin_header (array ('title' => _('Contribution tracker administration'))) ;
 
 switch ($action) {
 case 'display':

@@ -3,23 +3,24 @@
  * User information page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -30,7 +31,7 @@ require_once $gfcommon.'include/User.class.php';
 $expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 
 if (!$expl_pathinfo[2]) {
-	exit_error(_('Error'),_('No User Name Provided'));
+	exit_error(_('No User Name Provided'),'home');
 }
 
 //get the user object based on the user_name in the URL
@@ -38,7 +39,7 @@ $user =& user_get_object_by_name( urldecode($expl_pathinfo[2]) );
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
-	exit_error(_('That user does not exist.'),_('Invalid User'));
+	exit_error(_('That user does not exist.'),'home');
 
 } else {
 

@@ -1,20 +1,26 @@
 <?php
 /**
- * GForge Forums Facility
+ * Forums Facility
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2001, Tim Perdue - Sourceforge
+ * Copyright 2002, Tim Perdue - GForge, LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
- */
-
-
-/*
- Message Forums
- By Tim Perdue, Sourceforge, 11/99
-
- Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
-
- Complete OO rewrite by Tim Perdue 12/2002
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 require_once $gfcommon.'include/pre.php';
@@ -548,7 +554,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 	if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
 		if ($subject) {
 			//if this is a followup, put a RE: before it if needed
-			if (!eregi('RE:',$subject,$test)) {
+			if (!preg_match('/RE:/i',$subject,$test)) {
 				$subject ='RE: '.$subject;
 			}
 		}

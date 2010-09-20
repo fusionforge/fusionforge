@@ -5,6 +5,6 @@
 
 require_once('env.inc.php');
 require_once $gfcommon.'include/pre.php';
-Header("Location: /frs" . getStringFromServer('REQUEST_URI'));
+session_redirect('/frs'. getStringFromServer('REQUEST_URI'));
 
 ?>
