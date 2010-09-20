@@ -86,7 +86,7 @@ function admin_table_postadd($table, $unit, $primary_key) {
 		$values[] = getStringFromPost($field);
 	}
 
-	$qpa = db_construct_qpa ($qpa, implode (',', $v), $values) ;
+	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
 
 	if (db_query_qpa($qpa)) {
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
