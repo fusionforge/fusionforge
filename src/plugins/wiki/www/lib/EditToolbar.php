@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: EditToolbar.php 7659 2010-08-31 14:55:29Z vargenau $');
+// rcs_id('$Id: EditToolbar.php 7696 2010-09-20 10:20:25Z rurban $');
 /* Copyright 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -216,7 +216,6 @@ msg_repl_close     = '"._("Close")."'
 	    }
     
             foreach ($toolarray as $tool) {
-            	global $WikiTheme;
                 $image = $WikiTheme->getImageURL($tool["image"]);
                 $open  = $tool["open"];
                 $close = $tool["close"];

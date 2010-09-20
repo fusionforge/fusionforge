@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Template.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: Template.php 7700 2010-09-20 16:03:26Z vargenau $');
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -70,6 +70,7 @@ extends WikiPlugin
                      'page'    => false, // the page to include
                      'vars'    => false, // TODO: get rid of this, all remaining args should be vars
                      'rev'     => false, // the revision (defaults to most recent)
+                     'version' => false, // same as "rev"
                      'section' => false, // just include a named section
                      'sectionhead' => false // when including a named section show the heading
                      );
@@ -94,17 +95,24 @@ extends WikiPlugin
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-            $this->vars = array();
+        $this->vars = array();
         $args = $this->getArgs($argstr, $request);
         $vars = $args['vars'] ? $args['vars'] : $this->vars;
         $page = $args['page'];
+
+        if ($args['version'] && $args['rev']) {
+            return $this->error(_("Choose only one of 'version' or 'rev' parameters."));
+        } elseif ($args['version']) {
+            $args['rev'] = $args['version'];
+        }
+
         if ($page) {
             // Expand relative page names.
             $page = new WikiPageName($page, $basepage);
             $page = $page->name;
         }
         if (!$page) {
-            return $this->error(_("no page specified"));
+            return $this->error(_("No page specified."));
         }
 
         // If "Template:$page" exists, use it
@@ -125,20 +133,20 @@ extends WikiPlugin
 
         // Check if page exists
         if (!($dbi->isWikiPage($page))) {
-            return $this->error(sprintf(_("Page '%s' does not exist"), $page));
+            return $this->error(sprintf(_("Page '%s' does not exist."), $page));
         }
 
         // Check if user is allowed to get the Page.
         if (!mayAccessPage ('view', $page)) {
-                return $this->error(sprintf(_("Illegal inclusion of page %s: no read access"),
+                return $this->error(sprintf(_("Illegal inclusion of page %s: no read access."),
                                         $page));
         }
 
         $p = $dbi->getPage($page);
         if ($args['rev']) {
             $r = $p->getRevision($args['rev']);
-            if (!$r) {
-                return $this->error(sprintf(_("%s(%d): no such revision"),
+            if ((!$r) || ($r->hasDefaultContents())) {
+                return $this->error(sprintf(_("%s: no such revision %d."),
                                             $page, $args['rev']));
             }
         } else {

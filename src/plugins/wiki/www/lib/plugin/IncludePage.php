@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: IncludePage.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: IncludePage.php 7700 2010-09-20 16:03:26Z vargenau $');
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -41,6 +41,7 @@ extends WikiPlugin
     function getDefaultArguments() {
         return array( 'page'    => false, // the page to include
                       'rev'     => false, // the revision (defaults to most recent)
+                      'version' => false, // same as "rev"
                       'quiet'   => false, // if set, inclusion appears as normal content
                       'bytes'   => false, // maximum number of bytes to include
                       'words'   => false, // maximum number of words to include
@@ -68,6 +69,13 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
         extract($args);
+
+        if ($version && $rev) {
+            return $this->error(_("Choose only one of 'version' or 'rev' parameters."));
+        } elseif ($version) {
+            $rev = $version;
+        }
+
         if ($page) {
             // Expand relative page names.
             $page = new WikiPageName($page, $basepage);
@@ -99,8 +107,8 @@ extends WikiPlugin
         $p = $dbi->getPage($page);
         if ($rev) {
             $r = $p->getRevision($rev);
-            if (!$r) {
-                return $this->error(sprintf(_("%s(%d): no such revision"),
+            if ((!$r) || ($r->hasDefaultContents())) {
+                return $this->error(sprintf(_("%s: no such revision %d."),
                                             $page, $rev));
             }
         } else {

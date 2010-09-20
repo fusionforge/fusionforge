@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateToc.php 7689 2010-09-17 08:41:10Z vargenau $');
+// rcs_id('$Id: CreateToc.php 7701 2010-09-20 16:09:07Z vargenau $');
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -67,6 +67,7 @@ extends WikiPlugin
                      'width'     => '200px',
                      'with_counter' => 0,
                      'with_toclink' => 0,             // link back to TOC
+                     'version'   => false,
                     );
     }
     // Initialisation of toc counter
@@ -168,13 +169,13 @@ extends WikiPlugin
                            $level, &$hstart, &$hend, $basepage=false) {
         $hstart = 0;
         $hend = 0;
-            $h = $this->_getHeader($level);
+        $h = $this->_getHeader($level);
         $qheading = $this->_quote($heading);
-            for ($j=$start_index; $j < count($content); $j++) {
+        for ($j=$start_index; $j < count($content); $j++) {
             if (is_string($content[$j])) {
-                    if (preg_match("/<$h>$qheading<\/$h>/",
+                if (preg_match("/<$h>$qheading<\/$h>/",
                                    $content[$j]))
-                        return $j;
+                    return $j;
             }
             elseif (isa($content[$j], 'cached_link'))
             {
@@ -213,10 +214,10 @@ extends WikiPlugin
                         }
                     }
                 }
-                }
             }
-            trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
-            return 0;
+        }
+        trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
+        return 0;
     }
 
     /** prevent from duplicate anchors,
@@ -371,7 +372,7 @@ extends WikiPlugin
             $pagename = $page->name;
         }
         if (!$pagename) {
-            return $this->error(_("no page specified"));
+            return $this->error(_("No page specified."));
         }
         if (isBrowserIE() and browserDetect("Mac")) {
             $jshide = 0;
@@ -380,22 +381,39 @@ extends WikiPlugin
             $with_counter = 1;
         }
 
-        // Check if user is allowed to get the Page.
+        // Check if page exists.
+        if (!($dbi->isWikiPage($pagename))) {
+            return $this->error(sprintf(_("Page '%s' does not exist."), $pagename));
+        }
+
+        // Check if user is allowed to get the page.
         if (!mayAccessPage ('view', $pagename)) {
             return $this->error(sprintf(_("Illegal access to page %s: no read access"),
             $pagename));
         }
 
         $page = $dbi->getPage($pagename);
+
+        if ($version) {
+            $r = $page->getRevision($version);
+            if ((!$r) || ($r->hasDefaultContents())) {
+                return $this->error(sprintf(_("%s: no such revision %d."),
+                                            $pagename, $version));
+            }
+        } else {
+            $r = $page->getCurrentRevision();
+        }
+
         $current = $page->getCurrentRevision();
         //FIXME: I suspect this only to crash with Apache2
         if (!$current->get('markup') or $current->get('markup') < 2) {
             if (in_array(php_sapi_name(),array('apache2handler','apache2filter'))) {
-                trigger_error(_("CreateToc disabled for old markup"), E_USER_WARNING);
-                return '';
+                return $this->error(_("CreateToc disabled for old markup."));
             }
         }
-        $content = $current->getContent();
+
+        $content = $r->getContent();
+
         $html = HTML::div(array('class' => 'toc', 'id'=> GenerateId("toc")));
         if ($notoc) {
             $html->setAttr('style','display:none;');

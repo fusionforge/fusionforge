@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: BlockParser.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // rcs_id('$Id: BlockParser.php 7697 2010-09-20 13:04:55Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004,2005 Reini Urban
  * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -1182,7 +1182,7 @@ class Block_template_plugin extends Block_pre
         // {{foo?version=5}}
         // in that case, output is "page=foo rev=5"
         if (strstr($pi, "?")) {
-            $pi = str_replace("?version=", "\" rev=\"", $page);
+            $pi = str_replace("?version=", "\" rev=\"", $pi);
         }
 
         if ($vars)

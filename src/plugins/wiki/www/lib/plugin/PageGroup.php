@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PageGroup.php 7447 2010-05-31 11:29:39Z vargenau $');
+// rcs_id('$Id: PageGroup.php 7700 2010-09-20 16:03:26Z vargenau $');
 /**
  * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -120,10 +120,9 @@ extends WikiPlugin
         $p = $dbi->getPage($parent);
         if ($rev) {
             $r = $p->getRevision($rev);
-            if (!$r) {
-                $this->error(sprintf(_("%s(%d): no such revision"), $parent,
-                                     $rev));
-                return '';
+            if ((!$r) || ($r->hasDefaultContents())) {
+                return $this->error(sprintf(_("%s: no such revision %d."),
+                                            $parent, $rev));
             }
         } else {
             $r = $p->getCurrentRevision();
