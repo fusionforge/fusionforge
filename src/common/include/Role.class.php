@@ -198,6 +198,35 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			return false;
 		}
 
+		if (USE_PFO_RBAC) {
+			db_begin();
+			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
+					       array ($this->Group->getID(), htmlspecialchars($role_name)));
+			if (db_numrows($res)) {
+				$this->setError('Cannot create a role with this name (already used)');
+				db_rollback () ;
+				return false;
+			}
+			
+			$res = db_query_params ('INSERT INTO pfo_role (home_group_id, role_name) VALUES ($1, $2)',
+						array ($this->Group->getID(),
+						       htmlspecialchars($role_name))) ;
+			if (!$res) {
+				$this->setError('create::'.db_error());
+				db_rollback();
+				return false;
+			}
+			$role_id=db_insertid($res,'role','role_id');
+			if (!$role_id) {
+				$this->setError('create::db_insertid::'.db_error());
+				db_rollback();
+				return false;
+			}
+
+			$this->update ($data) ;
+			
+			$this->normalizeData () ;
+		} else {
 		// Check if role_name is not already used.
 		$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
 			array ($this->Group->getID(), htmlspecialchars($role_name)));
@@ -247,6 +276,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					return false;
 				}
 			}
+		}
 		}
 		if (!$this->fetchData($role_id)) {
 			db_rollback();
