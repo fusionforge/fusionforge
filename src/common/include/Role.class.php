@@ -216,7 +216,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-			$role_id=db_insertid($res,'role','role_id');
+			$role_id=db_insertid($res,'pfo_role','role_id');
 			if (!$role_id) {
 				$this->setError('create::db_insertid::'.db_error());
 				db_rollback();
