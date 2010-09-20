@@ -96,39 +96,6 @@ class hudsonPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		} elseif ($hookname == "userisactivecheckbox") {
-			//check if user is active
-			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo '<input type="checkbox" name="use_hudsonplugin" value="1" ';
-			// checked or unchecked?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo 'checked="checked"';
-			}
-			echo " />Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account maintenance page
-			$user = $params['user'];
-			$use_hudsonplugin = getStringFromRequest('use_hudsonplugin');
-			if ( $use_hudsonplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
-			} else {
-				$user->setPluginUse ( $this->name, false );
-			}
-			echo "<tr>";
-			echo "<td>";
-			echo '<input type="checkbox" name="use_hudsonplugin" value="1" ';
-			// checked or unchecked?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo 'checked="checked"';
-			}
-			echo " />Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "cssfile") {
 			$this->cssFile($params);
 		} elseif ($hookname == "javascript_file") {

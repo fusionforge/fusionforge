@@ -125,39 +125,6 @@ class mailmanPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		} elseif ($hookname == "userisactivecheckbox") {
-			//check if user is active
-			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_mailmanplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
-			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
-			$user = $params['user'];
-			$use_mailmanplugin = getStringFromRequest('use_mailmanplugin');
-			if ( $use_mailmanplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
-			} else {
-				$user->setPluginUse ( $this->name, false );
-			}
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="CHECKBOX" name="use_mailmanplugin" value="1" ';
-			// CHECKED OR UNCHECKED?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "CHECKED";
-			}
-			echo ">    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
 			// this displays the link in the user�s profile page to it�s personal mailman (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
