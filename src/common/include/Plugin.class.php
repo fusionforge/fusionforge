@@ -148,7 +148,7 @@ class Plugin extends Error {
 		echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
 		// checked or unchecked?
 		if ( $user->usesPlugin ( $this->name ) ) {
-			echo "checked";
+			echo 'checked="checked"';
 		}
 		echo " />    Use ".$this->text." Plugin";
 		echo "</td>";
@@ -169,7 +169,7 @@ class Plugin extends Error {
 		echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
 		// checked or unchecked?
 		if ( $user->usesPlugin ( $this->name ) ) {
-			echo "checked";
+			echo 'checked="checked"';
 		}
 		echo " />    Use ".$this->text." Plugin";
 		echo "</td>";
