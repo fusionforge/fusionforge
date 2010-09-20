@@ -3,21 +3,22 @@
  * Module to render generic HTML tables for Site Admin
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -71,11 +72,11 @@ function admin_table_add($table, $unit, $primary_key) {
  */
 function admin_table_postadd($table, $unit, $primary_key) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('home');
 	}
 	
 	$field_list = getStringFromRequest('__fields__');
-	$fields = split(",", $field_list);
+	$fields = explode(",", $field_list);
 	$values = array(); $v = array ();
 	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
 	
@@ -86,10 +87,13 @@ function admin_table_postadd($table, $unit, $primary_key) {
 		$values[] = getStringFromPost($field);
 	}
 
-	$qpa = db_construct_qpa ($qpa, implode (',', $v), $values) ;
+	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
 
+    var_dump($qpa);
 	if (db_query_qpa($qpa)) {
+        print('<div class="feedback">');
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
+        print('</div>');
 	} else {
 		form_release_key(getStringFromRequest('form_key'));
 		echo db_error();
@@ -109,8 +113,8 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		$result = db_numrows(db_query_params ('SELECT processor_id FROM frs_file WHERE processor_id = $1',
 			array($id)));
 		if ($result > 0) {
-			echo '<p>'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
-			array($id)), 0, 0)).'</p>';
+			echo '<div class="warning">'.sprintf(_('You can\'t delete the processor %1$s since it\'s currently referenced in a file release.'), db_result(db_query_params ('select name from frs_processor where processor_id = $1',
+			array($id)), 0, 0)).'</div>';
 			return;
 		}
 	}
@@ -118,16 +122,16 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 		$result = db_numrows(db_query_params ('SELECT license FROM groups WHERE license = $1',
 			array($id)));
 		if ($result > 0) {
-			echo '<p>'.sprintf(_('You can\'t delete the license %1$s since it\'s currently referenced in a project.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
-			array($id)), 0, 0)).'</p>';
+			echo '<div class="warning">'.sprintf(_('You can\'t delete the license %1$s since it\'s currently referenced in a project.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
+			array($id)), 0, 0)).'</div>';
 			return;
 		}
 	}
 	if ($unit == "supported_language") {
 		$result = db_numrows(db_query_params("SELECT language FROM users WHERE language=$1", array($id)));
 		if ($result > 0) {
-			echo '<p>'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
-			array($id)), 0, 0)).'</p>';
+			echo '<div class="warning">'.sprintf(_('You can\'t delete the language %1$s since it\'s currently referenced in a user profile.'), db_result(db_query_params ('select license_name from licenses where license_id = $1',
+			array($id)), 0, 0)).'</div>';
 			return;
 		}
 	}
@@ -165,9 +169,9 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
 	if (db_query_params("DELETE FROM $table WHERE $primary_key=$1", array($id))) {
-                print('<p class="feedback">');
+                print('<div class="feedback">');
 		printf(_('%1$s successfully deleted.'), ucfirst(getUnitLabel($unit)));
-                print('</p>');
+                print('</div>');
 	} else {
 		echo db_error();
 	}
@@ -241,7 +245,9 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 				 array ($id)) ;
 
 	if (db_query_qpa($qpa)) {
+        print('<div class="feedback">');
 		printf(_('%1$s successfully modified.'), ucfirst(getUnitLabel($unit)));
+        print('</div>');
 	} else {
 		echo db_error();
 	}
@@ -251,7 +257,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 
 
 	$field_list = getStringFromRequest('__fields__');
-	$fields = split(",", $field_list);
+	$fields = explode(",", $field_list);
 	$values = array(); $v = array ();
 	$qpa = db_construct_qpa (false, 'INSERT INTO ' . $table . ' (' . $field_list . ') VALUES (') ;
 	
@@ -265,7 +271,9 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 	$qpa = db_construct_qpa ($qpa, implode (',', $v), $values) ;
 
 	if (db_query_qpa($qpa)) {
+        print('<div class="feedback">');
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
+        print('</div>');
 	} else {
 		form_release_key(getStringFromRequest('form_key'));
 		echo db_error();

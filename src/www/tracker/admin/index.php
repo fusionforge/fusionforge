@@ -1,8 +1,27 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
+/**
+ * FusionForge Tracker Listing
+ *
+ * Copyright 1999-2000 (c) The SourceForge Crew
+ * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -29,9 +48,9 @@ if (!$group || !is_object($group)) {
 }
 if ($group->isError()) {
 	if($group->isPermissionDeniedError()) {
-		exit_permission_denied($group->getErrorMessage());
+		exit_permission_denied($group->getErrorMessage(),'tracker');
 	} else {
-		exit_error(_('Error'), $group->getErrorMessage());
+		exit_error($group->getErrorMessage(),'home');
 	}
 }
 
@@ -47,10 +66,10 @@ if ($group_id && $atid) {
 	//
 	$ath = new ArtifactTypeHtml($group,$atid);
 	if (!$ath || !is_object($ath)) {
-		exit_error('Error','ArtifactType could not be created');
+		exit_error(_('ArtifactType could not be created'),'tracker');
 	}
 	if ($ath->isError()) {
-		exit_error(_('Error').'',$ath->getErrorMessage());
+		exit_error($ath->getErrorMessage(),'tracker');
 	}
 
 	$next = '';

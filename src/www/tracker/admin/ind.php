@@ -1,109 +1,126 @@
 <?php
+/**
+ * FusionForge Tracker Listing
+ *
+ * Copyright 2000, Quentin Cregan/Sourceforge
+ * Copyright 2002-2003, Tim Perdue/GForge, LLC
+ * Copyright 2010, FusionForge Team
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
-	//
-	//
-	//	This page lists the available trackers as well as a 
-	//	form to create a new tracker
-	//
-	//
 
-	if (getStringFromRequest('post_changes')) {
-		$name = getStringFromRequest('name');
-		$description = getStringFromRequest('description');
-		$is_public = getStringFromRequest('is_public');
-		$allow_anon = getStringFromRequest('allow_anon');
-		$email_all = getStringFromRequest('email_all');
-		$email_address = getStringFromRequest('email_address');
-		$due_period = getStringFromRequest('due_period');
-		$use_resolution = getStringFromRequest('use_resolution');
-		$submit_instructions = getStringFromRequest('submit_instructions');
-		$browse_instructions = getStringFromRequest('browse_instructions');
+if (getStringFromRequest('post_changes')) {
+	$name = getStringFromRequest('name');
+	$description = getStringFromRequest('description');
+	$is_public = getStringFromRequest('is_public');
+	$allow_anon = getStringFromRequest('allow_anon');
+	$email_all = getStringFromRequest('email_all');
+	$email_address = getStringFromRequest('email_address');
+	$due_period = getStringFromRequest('due_period');
+	$use_resolution = getStringFromRequest('use_resolution');
+	$submit_instructions = getStringFromRequest('submit_instructions');
+	$browse_instructions = getStringFromRequest('browse_instructions');
 
-		if (!forge_check_perm ('tracker_admin', $group->getID())) {
-			exit_permission_denied();
+	if (!forge_check_perm ('tracker_admin', $group->getID())) {
+		exit_permission_denied('','tracker');
+	}
+
+	if (getStringFromRequest('add_at')) {
+		$res=new ArtifactTypeHtml($group);
+		if (!$res->create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
+			$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
+			exit_error($res->getErrorMessage(),'tracker');
+		} else {
+			$feedback = _('Tracker created successfully');
+            $feedback .= '<br/>';
+			$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
 		}
 
-		if (getStringFromRequest('add_at')) {
-			$res=new ArtifactTypeHtml($group);
-			if (!$res->create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
-				$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
-				exit_error('Error',$res->getErrorMessage());
-			} else {
-				$feedback .= _('Tracker created successfully');
-				$feedback .= '<br />';
-				$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
-			}
-
-		}
 	}
+}
 
 
-	//
-	//	Display existing artifact types
-	//
-	$atf = new ArtifactTypeFactory($group);
-	if (!$atf || !is_object($atf) || $atf->isError()) {
-		exit_error('Error','Could Not Get ArtifactTypeFactory');
+//
+//	Display existing artifact types
+//
+$atf = new ArtifactTypeFactory($group);
+if (!$atf || !is_object($atf) || $atf->isError()) {
+	exit_error(_('Could Not Get ArtifactTypeFactory'),'tracker');
+}
+
+// Only keep the Artifacts where the user has admin rights.
+$arr =& $atf->getArtifactTypes();
+$i=0;
+for ($j = 0; $j < count($arr); $j++) {
+	if (forge_check_perm ('tracker', $arr[$j]->getID(), 'manager')) {
+		$at_arr[$i++] =& $arr[$j];
 	}
+}
+// If no more tracker now,
+if ($i==0 && $j>0) {
+	exit_permission_denied();
+}
 
-	// Only keep the Artifacts where the user has admin rights.
-	$arr =& $atf->getArtifactTypes();
-	$i=0;
-	for ($j = 0; $j < count($arr); $j++) {
-		if (forge_check_perm ('tracker', $arr[$j]->getID(), 'manager')) {
-			$at_arr[$i++] =& $arr[$j];
-		}
-	}
-	// If no more tracker now,
-	if ($i==0 && $j>0) {
-		exit_permission_denied();
-	}
+//required params for site_project_header();
+$params['group']=$group_id;
+$params['toptab']='tracker';
+if(isset($page_title)){ 
+	$params['title'] = $page_title;
+} else {
+	$params['title'] = '';
+}
 
-	//required params for site_project_header();
-	$params['group']=$group_id;
-	$params['toptab']='tracker';
-	if(isset($page_title)){ 
-		$params['title'] = $page_title;
-	} else {
-		$params['title'] = '';
-	}
+echo site_project_header($params);
+echo $HTML->subMenu(
+	array(
+		_('Report'),
+		_('Admin')
+	),
+	array(
+		'/tracker/reporting/?group_id='.$group_id,
+		'/tracker/admin/?group_id='.$group_id
+	)
+);
 
-	echo site_project_header($params);
-	echo $HTML->subMenu(
-		array(
-			_('Report'),
-			_('Admin')
-		),
-		array(
-			'/tracker/reporting/?group_id='.$group_id,
-			'/tracker/admin/?group_id='.$group_id
-		)
-	);
+if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
+	echo '<div class="warning">'._('No trackers found').'</div>';
+} else {
 
-	if (!$at_arr || count($at_arr) < 1) {
-		echo '<div class="error">'._('No trackers found').'</div>';
-	} else {
+	echo '
+	<p>'._('Choose a data type and you can set up prefs, categories, groups, users, and permissions').'.</p>';
 
+	/*
+		Put the result set (list of forums for this group) into a column with folders
+	*/
+	$tablearr=array(_('Tracker'),_('Description'));
+	echo $HTML->listTableTop($tablearr);
+
+	for ($j = 0; $j < count($at_arr); $j++) {
 		echo '
-		<p>'._('Choose a data type and you can set up prefs, categories, groups, users, and permissions').'.</p>';
-
-		/*
-			Put the result set (list of forums for this group) into a column with folders
-		*/
-		$tablearr=array(_('Tracker'),_('Description'));
-		echo $HTML->listTableTop($tablearr);
-
-		for ($j = 0; $j < count($at_arr); $j++) {
-			echo '
-			<tr '. $HTML->boxGetAltRowStyle($j) . '>
-				<td><a href="'.util_make_url ('/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id).'">' .
-					html_image("ic/tracker20w.png","20","20") . ' &nbsp;'.
-					$at_arr[$j]->getName() .'</a>
-				</td>
-				<td>'.$at_arr[$j]->getDescription() .'
-				</td>
-			</tr>';
-		}
+		<tr '. $HTML->boxGetAltRowStyle($j) . '>
+			<td><a href="'.util_make_url ('/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id).'">' .
+				html_image("ic/tracker20w.png","20","20") . ' &nbsp;'.
+				$at_arr[$j]->getName() .'</a>
+			</td>
+			<td>'.$at_arr[$j]->getDescription() .'
+			</td>
+		</tr>';
+	}
 		echo $HTML->listTableBottom();
 	}
 
