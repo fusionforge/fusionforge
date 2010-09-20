@@ -68,7 +68,7 @@ class Widget_ProjectMembers extends Widget {
 				echo '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
 					'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
-				echo util_make_link_u ($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname']) ."<br />\n";
+				echo util_display_user($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname'])."\n";
 				echo "</div>\n"; // /sioc:UserAccount
 				echo "</div>\n"; // /foaf:holdsAccount
 				echo "</div>\n"; // /foaf:Person
@@ -81,11 +81,11 @@ class Widget_ProjectMembers extends Widget {
 
 		$members = $project->getUsers();
 		echo '<p><span rel="sioc:has_usergroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';
-		echo '<div about="members/" typeof="sioc:UserGroup">';
+		echo '<span about="members/" typeof="sioc:UserGroup">';
 		echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
 		echo util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %1$d Member(s)'),count($members)));
 		echo '</span>';
-		echo '</div>';
+		echo '</span>';
 		echo '</span></p>';
 		// end of project usergroup description
 
