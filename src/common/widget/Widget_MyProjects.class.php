@@ -97,7 +97,7 @@ class Widget_MyProjects extends Widget {
     }
     function displayRss() {
 	    $rss = new RSS(array(
-				    'title'       => 'Codendi - MyProjects',
+            		'title'       => forge_get_config('forge_name').' - MyProjects',
 				    'description' => 'My projects',
 				    'link'        => get_server_url(),
 				    'language'    => 'en-us',
