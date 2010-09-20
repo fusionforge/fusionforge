@@ -35,7 +35,7 @@ class hudsonActions extends Actions {
 	
 	// {{{ Actions
     function addJob() {
-   global $feedback; 
+        global $feedback, $error_msg;
         $request =& HTTPRequest::instance();
         $group_id = $request->get('group_id');
         $job_url = $request->get('hudson_job_url');
@@ -50,15 +50,17 @@ class hudsonActions extends Actions {
             }
             $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
             if ( ! $job_dao->createHudsonJob($group_id, $job_url, $job->getName(), $use_svn_trigger, $use_cvs_trigger, $token)) {
-                $feedback .= _("Unable to add Hudson job.");
+                $error_msg .= _("Unable to add Hudson job.");
             } else {
                 $feedback .= _("Hudson job added.");
+                $feedback .= ' '._('Please wait 1 hour for triggers to be updated.');
             }
         } catch (Exception $e) {
-            $feedback .= $e->getMessage();
+            $error_msg .= $e->getMessage();
         }
     }
     function updateJob() {
+        global $feedback, $error_msg;
         $request =& HTTPRequest::instance();
         $group_id = $request->get('group_id');
         $job_id = $request->get('job_id');
@@ -66,7 +68,7 @@ class hudsonActions extends Actions {
         $new_job_name = $request->get('new_hudson_job_name');
         if (strpos($new_job_name, " ") !== false) {
             $new_job_name = str_replace(" ", "_", $new_job_name);
-            $feedback .= _('Spaces are not allowed in job name. They were replaced by "_".');
+            $error_msg .= _('Spaces are not allowed in job name. They were replaced by "_".');
         }
         $new_use_svn_trigger = ($request->get('new_hudson_use_svn_trigger') === 'on');
         $new_use_cvs_trigger = ($request->get('new_hudson_use_cvs_trigger') === 'on');
@@ -77,18 +79,20 @@ class hudsonActions extends Actions {
         }
         $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
         if ( ! $job_dao->updateHudsonJob($job_id, $new_job_url, $new_job_name, $new_use_svn_trigger, $new_use_cvs_trigger, $new_token)) {
-            $feedback .= _("Unable to update Hudson job");
+            $error_msg .= _("Unable to update Hudson job");
         } else {
             $feedback .= _("Hudson job updated.");
+            $feedback .= ' '._('Please wait 1 hour for triggers to be updated.');
         }
     }
     function deleteJob() {
+        global $feedback, $error_msg;
         $request =& HTTPRequest::instance();
         $group_id = $request->get('group_id');
         $job_id = $request->get('job_id');
         $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
         if ( ! $job_dao->deleteHudsonJob($job_id)) {
-            $feedback .= _("Unable to delete Hudson job");
+            $error_msg .= _("Unable to delete Hudson job");
         } else {
             $feedback .= _("Hudson job deleted.");
         }

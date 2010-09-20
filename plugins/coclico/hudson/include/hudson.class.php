@@ -40,7 +40,7 @@ class hudson extends Controler {
     }
     
     function request() {
-global $feedback;
+		global $feedback, $error_msg;
         $request =& HTTPRequest::instance();
         $vgi = new Valid_GroupId();
         $vgi->required();
@@ -57,11 +57,11 @@ global $feedback;
                                 if ( $request->exist('hudson_job_url') && trim($request->get('hudson_job_url') != '') ) {
                                     $this->action = 'addJob';
                                 } else {
-                                    $feedback .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
+                                    $error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
                                 }
                                 $this->view = 'projectOverview';
                             } else {
-                                $feedback .= _("Permission Denied");
+                                $error_msg .= _("Permission Denied");
                                 $this->view = 'projectOverview';
                             }
                             break;
@@ -70,10 +70,10 @@ global $feedback;
                                 if ($request->exist('job_id')) {
                                     $this->view = 'editJob';
                                 } else {
-                                    $feedback .= _("Missing Hudson job ID");
+                                    $error_msg .= _("Missing Hudson job ID");
                                 }
                             } else {
-                                $feedback .= _("Permission Denied");
+                                $error_msg .= _("Permission Denied");
                                 $this->view = 'projectOverview';
                             }
                             break;
@@ -83,14 +83,14 @@ global $feedback;
                                     if ($request->exist('new_hudson_job_url') && $request->get('new_hudson_job_url') != '') {
                                         $this->action = 'updateJob';
                                     } else {
-                                        $feedback .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
+                                        $error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
                                     }
                                 } else {
-                                    $feedback .= _("Missing Hudson job ID");
+                                    $error_msg .= _("Missing Hudson job ID");
                                 }
                                 $this->view = 'projectOverview';
                             } else {
-                                $feedback .= _("Permission Denied");
+                                $error_msg .= _("Permission Denied");
                                 $this->view = 'projectOverview';
                             }
                             break;
@@ -99,11 +99,11 @@ global $feedback;
                                 if ($request->exist('job_id')) {
                                     $this->action = 'deleteJob';
                                 } else {
-                                    $feedback .= _("Missing Hudson job ID");
+                                    $error_msg .= _("Missing Hudson job ID");
                                 }
                                 $this->view = 'projectOverview';
                             } else {
-                                $feedback .= _("Permission Denied");
+                                $error_msg .= _("Permission Denied");
                                 $this->view = 'projectOverview';
                             }
                             break;
@@ -127,14 +127,14 @@ global $feedback;
                             break;
                     }
                 } else {
-                    $feedback .= _("Permission Denied");
+                    $error_msg .= _("Permission Denied");
                 }
                 
             } else {
-                $feedback .= _("Hudson service is not enabled");
+                $error_msg .= _("Hudson service is not enabled");
             }
         } else {
-            $feedback .= _("Missing group_id parameter.");
+            $error_msg .= _("Missing group_id parameter.");
         }
     }
 }
