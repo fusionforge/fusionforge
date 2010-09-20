@@ -89,7 +89,6 @@ function admin_table_postadd($table, $unit, $primary_key) {
 
 	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
 
-    var_dump($qpa);
 	if (db_query_qpa($qpa)) {
         print('<div class="feedback">');
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));

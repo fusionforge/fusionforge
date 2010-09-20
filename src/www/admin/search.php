@@ -9,21 +9,22 @@
  * not any other (new) page.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * http://fusionforge.org
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -36,7 +37,7 @@ $search = getStringFromRequest('search');
 $usersearch = getStringFromRequest('usersearch');
 
 if (!$search) {
-	exit_error(_('Error - Refusing to display whole DB. Please use a CLI query if you wish to do this.'));
+	exit_error(_('Refusing to display whole DB. Please use a CLI query if you wish to do this.'),'admin');
 }
 
 site_admin_header(array('title'=>_('Admin Search Results')));
@@ -82,7 +83,7 @@ OR lower(realname) LIKE $1',
 
 	if (db_numrows($result) < 1) {
 
-		echo db_error();
+		exit_error(db_error(),'admin');
 
 	} else {
 

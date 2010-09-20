@@ -64,7 +64,7 @@ if (getStringFromRequest('update')) {
 			$res = db_query_params ('DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
 			array($pluginname));
 			if (!$res) {
-				exit_error("SQL ERROR",db_error());
+				exit_error(db_error(),'admin');
 			} else {
 				$feedback .= sprintf(ngettext('%d user detached from plugin.', '%d users detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 			}
@@ -74,14 +74,14 @@ if (getStringFromRequest('update')) {
 			$res = db_query_params ('DELETE FROM group_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
 			array($pluginname));
 			if (!$res) {
-				exit_error("SQL ERROR",db_error());
+				exit_error(db_error(),'admin');
 			} else {
 				$feedback .= sprintf(ngettext('%d project detached from plugin.', '%d projects detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 			}
 		}
 		$res = $pm->deactivate($pluginname);
 		if (!$res) {
-			exit_error("SQL ERROR",db_error());
+			exit_error(db_error(),'admin');
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
 			
@@ -111,7 +111,7 @@ if (getStringFromRequest('update')) {
 
 		$res = $pm->activate($pluginname);
 		if (!$res) {
-			exit_error("SQL ERROR",db_error());
+			exit_error(db_error(),'admin');
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
 

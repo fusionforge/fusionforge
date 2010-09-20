@@ -2,21 +2,23 @@
 /**
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -39,24 +41,24 @@ echo '<h1>' . _('User List') . '</h1>';
 function performAction($newStatus, $statusString, $user_id) {
 	$u =& user_get_object($user_id);
 	if (!$u || !is_object($u)) {
-		exit_error('Error','Could Not Get User');
+		exit_error(_('Could Not Get User'),'home');
 	} elseif ($u->isError()) {
-		exit_error('Error',$u->getErrorMessage());
+		exit_error($u->getErrorMessage(),'home');
 	}
 	if($newStatus=="D") {
 		if(!$u->delete(true)) {
-			exit_error('Error',$u->getErrorMessage());
+			exit_error($u->getErrorMessage(),'home');
 		}
 	} else {
 		if(!$u->setStatus($newStatus)) {
-			exit_error('Error',$u->getErrorMessage());
+			exit_error($u->getErrorMessage(),'home');
 		}
 		if(!$u->setUnixStatus($newStatus)) {
-			exit_error('Error',$u->getErrorMessage());
+			exit_error($u->getErrorMessage(),'home');
 		}
 
 	}
-	echo "<h2>" .sprintf(_('User updated to %1$s status'), $statusString)."</h2>";
+	echo "<div class='feedback'>" .sprintf(_('User updated to %1$s status'), $statusString)."</div>";
 }
 
 function show_users_list ($result) {

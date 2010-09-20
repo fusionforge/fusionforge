@@ -10,20 +10,20 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -33,7 +33,7 @@ require_once $gfcommon.'include/account.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 if (!forge_get_config('use_project_vhost')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 session_require_global_perm ('forge_admin');
@@ -49,7 +49,7 @@ if (getStringFromRequest('add')) {
 		if (!$group || !is_object($group)) {
             exit_no_group();
 		} elseif ($group->isError()) {
-			exit_error('Error',$group->getErrorMessage());
+			exit_error($group->getErrorMessage(),'home');
 		}
 		
 		$group_id = $group->getID();
@@ -72,17 +72,16 @@ if (getStringFromRequest('add')) {
 
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$feedback .= _('Error adding VHOST:') .db_error();
+				$error_msg .= _('Error adding VHOST: ') .db_error();
 			} else {
-				$feedback .= _('Virtual Host:'). "<strong>".$vhost_name."</strong>" ._('scheduled for creation on group'). "<em>".$group->getUnixName()."</em>";
+				$feedback .= _('Virtual Host: ').$vhost_name._(' scheduled for creation on group ').$group->getUnixName();
 			}
 		} else {
-
-			$feedback .=	"<strong>" ._('The provided group name does not exist'). "</strong>";
-
+			$error_msg .= _('Vhost not valid');
 		}
-			
-	}			
+    } else {
+		$warning_msg .=	_('Missing group name');
+    }
 }
 
 if (getStringFromRequest('tweakcommit')) {
@@ -102,7 +101,7 @@ if (getStringFromRequest('tweakcommit')) {
 
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= _('Error updating VHOST entry:') .db_error();
+		$error_msg .= _('Error updating VHOST entry: ') .db_error();
 	} else {
 		$feedback .= _('Virtual Host entry updated.');
 	}		
@@ -170,7 +169,7 @@ if (getStringFromRequest('tweak')) {
 
 		$row_vh = db_fetch_array($res_vh);
 	
-		print '<p><strong>'._('Update Record:').'</strong></p><hr />';
+		print '<div class="feedback">'._('Update Record:').'</div>';
 
 		$title=array();
 		$title[]=_('VHOST ID');
@@ -196,7 +195,7 @@ if (getStringFromRequest('tweak')) {
 			</form>
 		';
 	} else {
-		echo _('No such VHOST:') . $vhost_name;
+		echo '<div class="warning">'._('No such VHOST: ') . $vhost_name.'</div>';
 	}
 
 }
