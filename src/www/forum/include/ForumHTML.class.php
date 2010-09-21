@@ -69,7 +69,7 @@ function forum_header($params) {
 				if (!$group || !is_object($group) || $group->isError()) {
 					exit_no_group();
 				}
-				echo '
+				echo '<p>
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong>'.
@@ -77,19 +77,16 @@ function forum_header($params) {
 							db_result($result,0,'summary')).'<br/>
 				<strong>'._('Project').':</strong>'.
 					util_make_link_g ($group->getUnixName(),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
-				<p>
+				</p>
 				';
 				$body = db_result($result,0,'details');
-				$sanitizer = new TextSanitizer();
-				$body = $sanitizer->purify($body);
+				$body = TextSanitizer::purify($body);
 				if (!strstr($body,'<')) {
 					//backwards compatibility for non html messages
 					echo util_make_links(nl2br($body)); 
 				} else {
 					echo util_make_links($body);
 				}
-
-				echo '</p>';
 
 				// display classification
 				if ($params['group'] == forge_get_config('news_group')) { 
