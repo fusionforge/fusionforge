@@ -78,6 +78,10 @@ if ($role_id=='observer') {
 
 	$old_data = $role->getSettingsForProject ($group) ;
 	$new_data = array () ;
+
+	if (!is_array ($data)) {
+		$data = array () ;
+	}
 	foreach ($old_data as $section => $values) {
 		if (!array_key_exists ($section, $data)) {
 			continue ;
@@ -90,7 +94,6 @@ if ($role_id=='observer') {
 		}
 	}
 	$data = $new_data ;
-
 	if (getStringFromRequest('submit')) {
 		if (($role->getHomeProject() != NULL)
 		    && ($role->getHomeProject()->getID() == $group_id)) {

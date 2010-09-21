@@ -2224,6 +2224,14 @@ class Group extends Error {
 			}
 		}
 
+		if (USE_PFO_RBAC) {
+			$roles = $this->getRoles() ;
+			foreach ($roles as $r) {
+				if ($r->getSetting ('project_admin', $this->getID())) {
+					$r->addUser (user_get_object ($idadmin_group)) ;
+				}
+			}
+		}
 
 		//
 		//

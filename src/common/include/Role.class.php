@@ -376,6 +376,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
 			  && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
 			$new_pa[$section][$refid] = $this->defaults[$this->data_array['role_name']][$section] ;
+		} else {
+			$new_pa[$section][$refid] = 0 ;
 		}
 		return $new_pa ;
 	}
@@ -492,8 +494,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		}
 		
 		// Save
-		$this->update ($this->data_array['role_name'], $new_sa) ;
-
+		if (USE_PFO_RBAC) {
+			$this->update ($this->data_array['role_name'], $new_pa) ;
+		} else {
+			$this->update ($this->data_array['role_name'], $new_sa) ;
+		}
 		return true;
 	}
 
