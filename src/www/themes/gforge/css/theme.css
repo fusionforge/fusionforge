@@ -323,3 +323,13 @@ ul.tabbernav li.tabberactive a:hover {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
 }
+
+/* artifact
+----------- */
+.artifactmessage {
+    width: 100%;
+    background: white;
+    border: 0px;
+    height: 100px;
+
+}

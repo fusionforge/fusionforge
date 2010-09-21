@@ -1,4 +1,27 @@
 <?php
+/**
+ * Tracker Front Page
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
 //
@@ -10,9 +33,9 @@ if (!$group || !is_object($group)) {
 }
 if ($group->isError()) {
 	if($group->isPermissionDeniedError()) {
-		exit_permission_denied($group->getErrorMessage());
+		exit_permission_denied($group->getErrorMessage(),'tracker');
 	} else {
-		exit_error(_('Error'), $group->getErrorMessage());
+		exit_error($group->getErrorMessage(),'tracker');
 	}
 }
 //
@@ -21,20 +44,20 @@ if ($group->isError()) {
 $ath = new ArtifactTypeHtml($group,$atid);
 
 if (!$ath || !is_object($ath)) {
-	exit_error('Error','ArtifactType could not be created');
+	exit_error(_('ArtifactType could not be created'),'tracker');
 }
 if ($ath->isError()) {
 	if($ath->isPermissionDeniedError()) {
-		exit_permission_denied($group->getErrorMessage());
+		exit_permission_denied($group->getErrorMessage(),'tracker');
 	} else {
-		exit_error(_('Error'), $ath->getErrorMessage());
+		exit_error($ath->getErrorMessage(),'tracker');
 	}
 }
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
 		if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_permission_denied();
+			exit_permission_denied('tracker');
 		} else {
 			include $gfwww.'tracker/add.php';
 		}
@@ -42,7 +65,7 @@ switch (getStringFromRequest('func')) {
 	}
 	case 'postadd' : {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('tracker');
 		}
 
 		$user_email = getStringFromRequest('user_email');
@@ -62,16 +85,16 @@ switch (getStringFromRequest('func')) {
 		$feedback = '';
 		if (!$ah || !is_object($ah)) {
 			form_release_key(getStringFromRequest('form_key'));
-			exit_error('ERROR','Artifact Could Not Be Created');
+			exit_error(_('Artifact Could Not Be Created'),'tracker');
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error('ERROR',_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
+			exit_error(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'),'tracker');
 		} else {
 			if (empty($user_email)) {
 				$user_email=false;
 			} else {
 				if (!validate_email($user_email)) {
 					form_release_key(getStringFromRequest('form_key'));
-					exit_error('ERROR', _('Invalid Email Address') . htmlspecialchars($user_email));
+					exit_error(_('Invalid Email Address') . htmlspecialchars($user_email),'tracker');
 				}
 			}
 			if ($user_email) {
@@ -80,7 +103,7 @@ switch (getStringFromRequest('func')) {
 			}
 			if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
 				form_release_key(getStringFromRequest('form_key'));
-				exit_error('ERROR',$ah->getErrorMessage());
+				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
 				//
 				//	  Attach files to this Artifact.
@@ -110,21 +133,21 @@ switch (getStringFromRequest('func')) {
 
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
-						$feedback .= 'Could Not Create File Object';
+						$error_msg .= _('Could Not Create File Object');
 					} elseif ($afh->isError()) {
-						$feedback .= $afh->getErrorMessage();
+						$error_msg .= $afh->getErrorMessage();
 					} else {
 						if (!util_check_fileupload($tmp_name)) {
 							form_release_key(getStringFromRequest('form_key'));
 							//delete the artifact
 							$ah->delete(true);
-							exit_error("Error","Invalid filename");
+							exit_error(_('Invalid filename'),'tracker');
 						}
 						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 							form_release_key(getStringFromRequest('form_key'));
 							//delete the artifact
 							$ah->delete(true);
-							exit_error(' Could Not Attach File to Item: '.$afh->getErrorMessage());
+							exit_error(_('Could Not Attach File to Item: '.$afh->getErrorMessage()),'tracker');
 						}
 					}
 				}
@@ -137,7 +160,7 @@ switch (getStringFromRequest('func')) {
 	}
 	case 'massupdate' : {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('tracker');
 		}
 
 		$artifact_id_list = getArrayFromRequest('artifact_id_list');
@@ -209,7 +232,7 @@ switch (getStringFromRequest('func')) {
 				}
 
 				if ($was_error) {
-					$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
+					$error_msg .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
 				}else {
 					$was_error=false;
 				}
@@ -246,16 +269,16 @@ switch (getStringFromRequest('func')) {
 			permission to change.
 		*/
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('tracker');
 		}
 
 		$ah=new ArtifactHtml($ath,$artifact_id);
 		if (!$ah || !is_object($ah)) {
-			exit_error('ERROR', _('Artifact Could Not Be Created'));
+			exit_error(_('Artifact Could Not Be Created'),'tracker');
 		} else if ($ah->isError()) {
-			exit_error('ERROR',$ah->getErrorMessage());
+			exit_error($ah->getErrorMessage(),'tracker');
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
-			exit_error('ERROR',_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
+			exit_error(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'),'tracker');
 		} else {
 
 			/*
@@ -285,7 +308,7 @@ switch (getStringFromRequest('func')) {
 					} else {
 						if ( (strlen($details)>0) ) { //if there was no message, then it's not an error but addMessage returns false and sets missing params error
 							//some kind of error in creation
-							exit_error($ah->getErrorMessage(),$feedback);
+							exit_error($ah->getErrorMessage(),'tracker');
 						} else {
 							// we have to unset the error if the user added a file ( add a file and no comment)
 							if ( (getStringFromRequest('add_file')) ) {
@@ -303,7 +326,7 @@ switch (getStringFromRequest('func')) {
 						$feedback=_('Comment added');
 					} else {
 						//some kind of error in creation
-						exit_error('ERROR',$ah->getErrorMessage());
+						exit_error($ah->getErrorMessage(),'tracker');
 					}
 				}
 			}
@@ -343,16 +366,16 @@ switch (getStringFromRequest('func')) {
 
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
-						$feedback .= 'Could Not Create File Object';
+						$error_msg .= _('Could Not Create File Object');
 					} elseif ($afh->isError()) {
-						$feedback .= $afh->getErrorMessage();
+						$error_msg .= $afh->getErrorMessage();
 					} else {
 						if (!util_check_fileupload($tmp_name)) {
 							form_release_key(getStringFromRequest('form_key'));
-							exit_error("Error","Invalid filename");
+							exit_error(_('Invalid filename'),'tracker');
 						}
 						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
-							$feedback .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
+							$error_msg .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
 							$was_error=true;
 						} else {
 							$feedback .= ' <br />'._('File Upload: Successful');
@@ -372,12 +395,12 @@ switch (getStringFromRequest('func')) {
 						for ($i=0; $i<$count; $i++) {
 							$afh=new ArtifactFileHtml($ah,$delete_file[$i]);
 							if (!$afh || !is_object($afh)) {
-								$feedback .= 'Could Not Create File Object::'.$delete_file[$i];
+								$error_msg .= _('Could Not Create File Object::').$delete_file[$i];
 							} elseif ($afh->isError()) {
-								$feedback .= $afh->getErrorMessage().'::'.$delete_file[$i];
+								$error_msg .= $afh->getErrorMessage().'::'.$delete_file[$i];
 							} else {
 								if (!$afh->delete()) {
-									$feedback .= ' <br />'._('File Delete:').': '.$afh->getErrorMessage();
+									$error_msg .= ' <br />'._('File Delete:').': '.$afh->getErrorMessage();
 									$was_error=true;
 								} else {
 									$feedback .= ' <br />'._('File Delete: Successful');
@@ -413,9 +436,9 @@ switch (getStringFromRequest('func')) {
 			if ($artifact_id) {
 				$ah=new ArtifactHtml($ath,$artifact_id);
 				if (!$ah || !is_object($ah)) {
-					exit_error('ERROR','Artifact Could Not Be Created');
+					exit_error(_('Artifact Could Not Be Created'),'tracker');
 				} else if ($ah->isError()) {
-					exit_error('ERROR',$ah->getErrorMessage());
+					exit_error($ah->getErrorMessage(),'tracker');
 				} else {
 					if ($start && $ah->isMonitoring())
 						$feedback = _('Monitoring Started');
@@ -423,16 +446,16 @@ switch (getStringFromRequest('func')) {
 						$feedback = _('Monitoring Deactivated');
 					else {
 						$ah->setMonitor();
-						$feedback=$ah->getErrorMessage();
+						$error_msg = $ah->getErrorMessage();
 					}
 					include $gfwww.'tracker/browse.php';
 				}
 			} else {
 				$at=new ArtifactType($group,$atid);
 				if (!$at || !is_object($at)) {
-					exit_error('ERROR','Artifact Could Not Be Created');
+					exit_error(_('Artifact Could Not Be Created'),'tracker');
 				} else if ($at->isError()) {
-					exit_error('ERROR',$at->getErrorMessage());
+					exit_error($at->getErrorMessage(),'tracker');
 				} else {
 					if ($start && $at->isMonitoring())
 						$feedback = _('Monitoring Started');
@@ -459,9 +482,9 @@ switch (getStringFromRequest('func')) {
 			$aid = getIntFromRequest('aid');
 			$ah= new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
-				exit_error('ERROR','Artifact Could Not Be Created');
+				exit_error(_('Artifact Could Not Be Created'),'tracker');
 			} elseif ($ah->isError()) {
-				exit_error('ERROR',$ah->getErrorMessage());
+				exit_error($ah->getErrorMessage(),'tracker');
 			}
 			include $gfwww.'tracker/deleteartifact.php';
 			break;
@@ -473,23 +496,23 @@ switch (getStringFromRequest('func')) {
 
 		case 'postdeleteartifact' : {
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-				exit_form_double_submit();
+				exit_form_double_submit('tracker');
 			}
 			session_require_perm ('tracker', $ath->getID(), 'manager') ;
 
 			$aid = getStringFromRequest('aid');
 			$ah= new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
-				exit_error('ERROR','Artifact Could Not Be Created');
+				exit_error(_('Artifact Could Not Be Created'),'tracker');
 			} elseif ($ah->isError()) {
-				exit_error('ERROR',$ah->getErrorMessage());
+				exit_error($ah->getErrorMessage(),'tracker');
 			}
 			if (!getStringFromRequest('confirm_delete')) {
-				$feedback .= _('Confirmation failed. Artifact not deleted');
+				$warning_msg .= _('Confirmation failed. Artifact not deleted');
 			}
 			else {
 				if (!$ah->delete(true)) {
-					$feedback .= _('Artifact Delete Failed') . ': '.$ah->getErrorMessage();
+					$error_msg .= _('Artifact Delete Failed') . ': '.$ah->getErrorMessage();
 				} else {
 					$feedback .= _('Artifact Deleted Successfully');
 				}
@@ -517,7 +540,7 @@ switch (getStringFromRequest('func')) {
 		}
 		case 'download' : {
 			$aid = getIntFromRequest('aid');
-			Header("Redirect: ".util_make_url ("/tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id"));
+			session_redirect('/tracker/download.php?group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'&file_id='.$file_id);
 			break;
 		}
 		case 'detail' : {
@@ -529,9 +552,9 @@ switch (getStringFromRequest('func')) {
 			//
 			$ah=new ArtifactHtml($ath,$aid);
 			if (!$ah || !is_object($ah)) {
-				exit_error('ERROR','Artifact Could Not Be Created');
+				exit_error(_('Artifact Could Not Be Created'),'tracker');
 			} else if ($ah->isError()) {
-				exit_error('ERROR',$ah->getErrorMessage());
+				exit_error($ah->getErrorMessage(),'tracker');
 			} else {
 				if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 					include $gfwww.'tracker/mod.php';
@@ -549,9 +572,9 @@ switch (getStringFromRequest('func')) {
 		}
 	}
 
-	// Local Variables:
-	// mode: php
-	// c-file-style: "bsd"
-	// End:
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
-	?>
+?>

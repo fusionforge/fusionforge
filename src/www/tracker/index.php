@@ -1,25 +1,25 @@
 <?php
 /**
- * GForge Front Page
+ * Tracker Front Page
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -37,7 +37,7 @@ require_once $gfcommon.'tracker/ArtifactCanned.class.php';
 require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 
 if (!forge_get_config('use_tracker')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $aid = getIntFromRequest('aid');
@@ -49,7 +49,7 @@ $atid = getIntFromRequest('atid');
 if ($aid && (!$group_id && !$atid)) {
 	$a =& artifact_get_object($aid);
 	if (!$a || !is_object($a) || $a->isError()) {
-		exit_error('Error','Could Not Get Artifact Object');
+		exit_error(_('Could Not Get Artifact Object'),'tracker');
 	} else {
 		$group_id=$a->ArtifactType->Group->getID();
 		$atid=$a->ArtifactType->getID();
@@ -63,9 +63,9 @@ if (!$group || !is_object($group)) {
 }
 if ($group->isError()) {
         if($group->isPermissionDeniedError()) {
-                exit_permission_denied($group->getErrorMessage());
+                exit_permission_denied($group->getErrorMessage(),'tracker');
         } else {
-                exit_error(_('Error'), $group->getErrorMessage());
+                exit_error($group->getErrorMessage(),'tracker');
         }
 }
 

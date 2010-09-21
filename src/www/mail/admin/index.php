@@ -1,12 +1,29 @@
 <?php
-
 /**
- * GForge Mailing Lists Facility
+ * Mailing Lists Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -17,7 +34,7 @@ require_once $gfcommon.'mail/MailingListFactory.class.php';
 
 $group_id = getIntFromRequest('group_id');
 
-$feedback = '';
+$feedback = getStringFromRequest('feedback');
 
 if ($group_id) {
 	$Group =& group_get_object($group_id);
@@ -40,14 +57,14 @@ if ($group_id) {
 				$mailingList = new MailingList($Group);
 			
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-					exit_form_double_submit();
+					exit_form_double_submit('mail');
 				}
 				if(!$mailingList || !is_object($mailingList)) {
 					form_release_key(getStringFromRequest("form_key"));
-					exit_error(_('Error'), _('Error getting the list'));
+					exit_error(_('Error getting the list'),'mail');
 				} elseif($mailingList->isError()) {
 					form_release_key(getStringFromRequest("form_key"));
-					exit_error(_('Error'), $mailingList->getErrorMessage());
+					exit_error($mailingList->getErrorMessage(),'mail');
 				}
 			
 				if(!$mailingList->create(
@@ -56,7 +73,7 @@ if ($group_id) {
 					getIntFromPost('is_public', 1)
 				)) {
 					form_release_key(getStringFromRequest("form_key"));
-					exit_error(_('Error'), $mailingList->getErrorMessage());
+					exit_error($mailingList->getErrorMessage(),'mail');
 				} else {
 					$feedback .= _('List Added');
 				}
@@ -71,16 +88,16 @@ if ($group_id) {
 			$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 			
 			if(!$mailingList || !is_object($mailingList)) {
-				exit_error(_('Error'), _('Error getting the list'));
+				exit_error(_('Error getting the list'),'mail');
 			} elseif($mailingList->isError()) {
-				exit_error(_('Error'), $mailingList->getErrorMessage());
+				exit_error($mailingList->getErrorMessage(),'mail');
 			}
 			
 			if(!$mailingList->update(
 				unInputSpecialChars(getStringFromPost('description')),
 				getIntFromPost('is_public', MAIL__MAILING_LIST_IS_PUBLIC)
 			)) {
-				exit_error(_('Error'), $mailingList->getErrorMessage());
+				exit_error($mailingList->getErrorMessage(),'mail');
 			} else {
 				$feedback .= _('List updated');
 			}
@@ -94,9 +111,9 @@ if ($group_id) {
 		$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 		
 		if(!$mailingList || !is_object($mailingList)) {
-			exit_error(_('Error'), _('Error getting the list'));
+			exit_error(_('Error getting the list'),'mail');
 		} elseif($mailingList->isError()) {
-			exit_error(_('Error'), $mailingList->getErrorMessage());
+			exit_error($mailingList->getErrorMessage(),'mail');
 		}
 		
 		if($mailingList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
@@ -105,7 +122,7 @@ if ($group_id) {
 				   $mailingList->isPublic(),
 				   MAIL__MAILING_LIST_PW_RESET_REQUESTED
 				   )) {
-				exit_error(_('Error'), $mailingList->getErrorMessage());
+				exit_error($mailingList->getErrorMessage(),'mail');
 			} else {
 				$feedback .= _('Password reset requested');
 			}
@@ -123,14 +140,14 @@ if ($group_id) {
 		
 		$mlFactory = new MailingListFactory($Group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
-			exit_error(_('Error'), $mlFactory->getErrorMessage());
+			exit_error($mlFactory->getErrorMessage(),'mail');
 		}
 		
 		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
 			echo '<h1>'._('Error').' '._('Unable to get the lists') .'</h1>';
-			echo $mlFactory->getErrorMessage();
+			echo '<div class="error">'.$mlFactory->getErrorMessage().'</div>';
 			mail_footer(array());
 			exit;
 		}
@@ -185,9 +202,9 @@ if ($group_id) {
 		$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 			
 		if(!$mailingList || !is_object($mailingList)) {
-			exit_error(_('Error'), _('Error getting the list'));
+			exit_error(_('Error getting the list'),'mail');
 		} elseif($mailingList->isError()) {
-			exit_error(_('Error'), $mailingList->getErrorMessage());
+			exit_error($mailingList->getErrorMessage(),'mail');
 		}
    	
 		mail_header(array(
@@ -216,7 +233,7 @@ if ($group_id) {
 //
 		$mlFactory = new MailingListFactory($Group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
-			exit_error(_('Error'), $mlFactory->getErrorMessage());
+			exit_error($mlFactory->getErrorMessage(),'mail');
 		}
 
 		mail_header(array(
@@ -226,8 +243,8 @@ if ($group_id) {
 		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
-			echo '<p>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</p>';
-			echo $mlFactory->getErrorMessage();
+			echo '<h1>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</h1>';
+			echo '<div class="error">'.$mlFactory->getErrorMessage().'</div>';
 			mail_footer(array());
 			exit;
 		}

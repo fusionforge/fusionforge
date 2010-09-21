@@ -36,7 +36,7 @@ require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 if (!session_loggedin()) {
 	exit_not_logged_in();
 } else {
-	echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
+	site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
 	?>
 
 	<table width="100%" border="0">
@@ -112,7 +112,7 @@ ORDER BY group_name',
 
                         $atf = new ArtifactTypeFactory($group);
                         if (!$group || !is_object($group) || $group->isError()) {
-                                exit_error('Error','Could Not Get ArtifactTypeFactory');
+                                exit_error(_('Could Not Get ArtifactTypeFactory'),'my');
                         }
 
                         $at_arr =& $atf->getArtifactTypes();

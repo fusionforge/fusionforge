@@ -667,7 +667,7 @@ if ($art_cnt > 0) {
 		//
 		//	build custom fields
 		//
-	$ef =& $ath->getExtraFields(ARTIFACT_EXTRAFIELD_FILTER_INT);
+	$ef = $ath->getExtraFields(ARTIFACT_EXTRAFIELD_FILTER_INT);
 	$keys=array_keys($ef);
 
 	$sel=array();

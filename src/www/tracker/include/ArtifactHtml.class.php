@@ -83,7 +83,7 @@ class ArtifactHtml extends Artifact {
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
 				//$text = util_line_wrap( $text, 120,"\n");
-				$text = preg_replace('/\r?\n/', '<br />', $text);
+				$text = preg_replace('/\n?\r/', '<br />', $text);
 				echo "<br /><br />".$text.'</td></tr>';
 			}
 

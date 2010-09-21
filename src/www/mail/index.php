@@ -36,9 +36,9 @@ $group_id = getIntFromGet('group_id');
 if ($group_id) {
 	$Group =& group_get_object($group_id);
 	if (!$Group || !is_object($Group)) {
-		exit_error(_('Could Not Get Group'),'home');
-	} elseif ($Group->isError()) {
 		exit_no_group();
+	} elseif ($Group->isError()) {
+		exit_error($Group->getErrorMessage(),'mail');
 	}
 	
 	$mlFactory = new MailingListFactory($Group);
