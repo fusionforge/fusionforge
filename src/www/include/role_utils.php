@@ -59,6 +59,25 @@ function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 	return html_build_select_box_from_arrays($ids,$names,$name,$selected,false,'',false);
 }
 
+function global_role_box ($name,$selected='xzxzxz') {
+	$roles = RBACEngine::getInstance()->getGlobalRoles () ;
+
+	$ids = array () ;
+	$names = array () ;
+	
+	foreach ($roles as $role) {
+		$ids[] = $role->getID ();
+		
+		$names[] = $role->getName () ;
+	}
+
+	if ($selected == 'xzxzxz') {
+		$selected = $ids[0] ;
+	}
+
+	return html_build_select_box_from_arrays($ids,$names,$name,$selected,false,'',false);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

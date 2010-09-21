@@ -172,15 +172,16 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function create($role_name,$data) {
 		if (USE_PFO_RBAC) {
-			if ($this->Group == NULL
-			    && !forge_check_global_perm ('forge_admin')) {
-				$this->setPermissionDeniedError();
-				return false;
+			if ($this->Group == NULL) {
+				if (!forge_check_global_perm ('forge_admin')) {
+					$this->setPermissionDeniedError();
+					return false;
+				}
 			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
 			}			
-
+			
 			db_begin();
 			if ($this->Group == NULL) {
 				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND role_name=$1',
@@ -295,7 +296,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if ($this->Group == NULL) {
 			return $this->create($name,array());
 		}
-
+		
 		if (array_key_exists ($name, $this->defaults)) {
 			$arr =& $this->defaults[$name];
 		} else {
@@ -342,7 +343,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		return $this->create($name,$data);
 	}
-
+	
 	function normalizeDataForSection (&$new_sa, $section) {
 		if (array_key_exists ($section, $this->setting_array)) {
 			$new_sa[$section][0] = $this->setting_array[$section][0] ;

@@ -30,6 +30,7 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
+require_once $gfwww.'include/role_utils.php';
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
@@ -72,6 +73,25 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
     ?></a>
     </li>
 </ul>
+<?php if (USE_PFO_RBAC) { ?>
+<h2><?php echo _('Global roles and permissions'); ?></h2>
+	<ul>
+	<li><?php
+
+		echo '<form action="globalroleedit.php" method="post"><p>';
+		echo global_role_box('role_id');
+		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
+?>
+</li>
+<li>
+<?
+
+		echo '<form action="globalroleedit.php" method="post"><p>';
+		echo '<input type="text" name="role_name" size="10" value="" />';
+		echo '&nbsp;<input type="submit" name="add" value="'._("Add Role").'" /></p></form>';
+	?></li>
+</ul>
+<?php } ?>
 <h2><?php echo _('Project Maintenance'); ?></h2>
 <ul>
 	<li><?php
