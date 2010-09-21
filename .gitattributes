@@ -102,6 +102,7 @@ packaging/tag_packaging_delete -text
 plugins/README -text
 plugins/coclico/Makefile -text
 plugins/coclico/Makefile.debian -text
+plugins/coclico/README -text
 plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php -text
 plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php.orig -text
 plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php -text
