@@ -531,6 +531,25 @@ abstract class BaseRole extends Error {
 		return $result ;
 	}
 
+	function getGlobalSettings () {
+		$result = array () ;
+
+		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news') ;
+		foreach ($sections as $section) {
+			$result[$section][-1] = $this->getVal ($section, -1) ;
+		}
+		// Add settings not yet listed so far (probably plugins)
+		foreach (array_keys ($this->perms_array) as $section) {
+			if (!in_array ($section, $sections)) {
+				if (in_array ($section, $this->global_settings)) {
+					$result[$section][-1] = $this->getVal ($section, -1) ;
+				}
+			}
+		}
+
+		return $result ;
+	}
+
         function getSetting($section, $reference) {
                 if (isset ($this->perms_array[$section][$reference])) {
 			$value = $this->perms_array[$section][$reference] ;
