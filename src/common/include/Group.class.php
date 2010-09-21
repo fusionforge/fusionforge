@@ -2097,23 +2097,25 @@ class Group extends Error {
 		//	Tracker Integration
 		//
 		//
-		$ats = new ArtifactTypes($this);
-		if (!$ats || !is_object($ats)) {
-			$this->setError(_('Error creating ArtifactTypes object'));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
-		} else if ($ats->isError()) {
-			$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
-		}
-		if (!$ats->createTrackers()) {
-			$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
+		if (forge_get_config ('use_tracker')) {
+			$ats = new ArtifactTypes($this);
+			if (!$ats || !is_object($ats)) {
+				$this->setError(_('Error creating ArtifactTypes object'));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			} else if ($ats->isError()) {
+				$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
+			if (!$ats->createTrackers()) {
+				$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
 		}
 
 		//
@@ -2121,39 +2123,43 @@ class Group extends Error {
 		//	Forum Integration
 		//
 		//
-		$f = new Forum($this);
-		if (!$f->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
-			$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
+		if (forge_get_config ('use_forum')) {
+			$f = new Forum($this);
+			if (!$f->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
+				$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
+			$f = new Forum($this);
+			if (!$f->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
+				$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
+			$f = new Forum($this);
+			if (!$f->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
+				$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
 		}
-		$f = new Forum($this);
-		if (!$f->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
-			$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
-		}
-		$f = new Forum($this);
-		if (!$f->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
-			$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
-		}
-
+		
 		//
 		//
 		//	Doc Mgr Integration
 		//
 		//
-		$dg = new DocumentGroup($this);
-		if (!$dg->create(_('Uncategorized Submissions'))) {
-			$this->setError(sprintf(_('DG: %s'),$dg->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
+		if (forge_get_config('use_docman')) {
+			$dg = new DocumentGroup($this);
+			if (!$dg->create(_('Uncategorized Submissions'))) {
+				$this->setError(sprintf(_('DG: %s'),$dg->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
 		}
 
 		//
@@ -2161,12 +2167,14 @@ class Group extends Error {
 		//	FRS integration
 		//
 		//
-		$frs = new FRSPackage($this);
-		if (!$frs->create($this->getUnixName())) {
-			$this->setError(sprintf(_('FRSP: %s'),$frs->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
+		if (forge_get_config ('use_frs')) {
+			$frs = new FRSPackage($this);
+			if (!$frs->create($this->getUnixName())) {
+				$this->setError(sprintf(_('FRSP: %s'),$frs->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
 		}
 
 		//
@@ -2174,19 +2182,21 @@ class Group extends Error {
 		//	PM Integration
 		//
 		//
-		$pg = new ProjectGroup($this);
-		if (!$pg->create(_('To Do'),_('Things We Have To Do'),1)) {
-			$this->setError(sprintf(_('PG%d: %s'),1,$pg->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
-		}
-		$pg = new ProjectGroup($this);
-		if (!$pg->create(_('Next Release'),_('Items For Our Next Release'),1)) {
-			$this->setError(sprintf(_('PG%d: %s'),2,$pg->getErrorMessage()));
-			db_rollback();
-			setup_gettext_from_context();
-			return false;
+		if (forge_get_config ('use_pm')) {
+			$pg = new ProjectGroup($this);
+			if (!$pg->create(_('To Do'),_('Things We Have To Do'),1)) {
+				$this->setError(sprintf(_('PG%d: %s'),1,$pg->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
+			$pg = new ProjectGroup($this);
+			if (!$pg->create(_('Next Release'),_('Items For Our Next Release'),1)) {
+				$this->setError(sprintf(_('PG%d: %s'),2,$pg->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
 		}
 
 		//
