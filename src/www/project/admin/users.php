@@ -73,7 +73,7 @@ if (getStringFromRequest('submit')) {
 				if (!$group->addUser($form_unix_name,$role_id)) {
 					$error_msg = $group->getErrorMessage();
 				} else {
-					$feedback = _("User Added Successfully");
+					$feedback = _("Member Added Successfully");
 					//if the user have requested to join this group
 					//we should remove him from the request list
 					//since it has already been added
@@ -85,19 +85,15 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 	} else if (getStringFromRequest('rmuser')) {
-		/*
-			remove a user from this group
-			*/
+		/* remove a member from this project */
 		$user_id = getIntFromRequest('user_id');
 		if (!$group->removeUser($user_id)) {
 			$error_msg = $group->getErrorMessage();
 		} else {
-			$feedback = _("User Removed Successfully");
+			$feedback = _("Member Removed Successfully");
 		}
 	} else if (getStringFromRequest('updateuser')) {
-		/*
-			Adjust User Role
-			*/
+		/* Adjust Member Role */
 		$user_id = getIntFromRequest('user_id');
 		$role_id = getIntFromRequest('role_id');
 		if (! $role_id) {
@@ -129,7 +125,7 @@ if (getStringFromRequest('submit')) {
 				} else {
 					$gjr->delete(true);
 				}
-				$feedback = _("User Added Successfully");
+				$feedback = _("Member Added Successfully");
 			}
 		}
 	} elseif (getStringFromRequest('rejectpending')) {
@@ -152,7 +148,7 @@ if (getStringFromRequest('submit')) {
 
 $group->clearError();
 
-project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getPublicName()),'group'=>$group->getID()));
+project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPublicName()),'group'=>$group->getID()));
 
 ?>
 
@@ -196,7 +192,7 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 			echo $HTML->boxBottom();
 		}
 
-		echo $HTML->boxTop(_("Add User"));
+		echo $HTML->boxTop(_("Add Member"));
 
 		if (isset($html_code['add_user'])) {
 			echo $html_code['add_user'];
@@ -212,7 +208,7 @@ project_admin_header(array('title'=>sprintf(_('Project Admin: %s'), $group->getP
 		<p><input type="hidden" name="submit" value="y" /> <input type="text"
 			name="form_unix_name" size="10" value="" /> <?php echo role_box($group_id,'role_id'); ?>
 		<input type="submit" name="adduser"
-			value="<?php echo _("Add User") ?>" />
+			value="<?php echo _("Add Member") ?>" />
 		</p>
 		</form>
 		<p><a
