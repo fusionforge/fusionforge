@@ -82,7 +82,7 @@
 		<?php } ?>
 		&nbsp;&nbsp;<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		<br />
-		<span class="warning"><?php echo _('Once you add a new element, it cannot be deleted') ?></span>
+		<div class="warning"><?php echo _('Once you add a new element, it cannot be deleted') ?></div>
 		</form>
 		<br />
 		<?php

@@ -1,10 +1,27 @@
 <?php
 /**
- * GForge FRS Facility
+ * FRS Facility
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('../env.inc.php');
@@ -30,32 +47,31 @@ if (session_loggedin()) {
 
 		$f=new FRSPackage($g,$filemodule_id);
 		if (!$f || !is_object($f)) {
-			exit_error('Error','Error Getting FRSPackage');
+			exit_error(_('Error Getting FRSPackage'),'frs');
 		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
+			exit_error($f->getErrorMessage(),'frs');
 		}
 
 		if ($stop) {
 			if (!$f->stopMonitor()) {
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'frs');
 			} else {
+                $feedback = _('Monitoring Has Been Stopped');
 				frs_header(array('title'=>_('Monitoring stopped'),'group'=>$group_id));
-				echo $HTML->feedback(_('Monitoring Has Been Stopped'));
 				frs_footer();
 			}
 		} elseif($start) {
 			if (!$f->setMonitor()) {
-				exit_error('Error',$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'frs');
 			} else {
+                $feedback = _('Monitoring Has Been Started');
 				frs_header(array('title'=>_('Monitoring started'),'group'=>$group_id));
-				echo $HTML->feedback(_('Monitoring Has Been Started'));
 				frs_footer();
 			}
 		}
 	} else {
-		exit_missing_param();
+		exit_missing_param('',array(_('Project ID'),_('File Module ID')),'frs');
 	}
-
 } else {
 	exit_not_logged_in();
 }

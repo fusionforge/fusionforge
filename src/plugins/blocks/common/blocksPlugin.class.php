@@ -135,17 +135,17 @@ class blocksPlugin extends Plugin {
 	function parseContent($t) {
 		global $HTML;
 
-		$t =& preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop("$1")', $t);
-		$t =& preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop("$1")', $t);
-		$t =& preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle("$1")', $t);
-		$t =& preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle("$1")', $t);
-		$t =& preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $t);
-		$t =& preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $t);
+		$t = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop("$1")', $t);
+		$t = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop("$1")', $t);
+		$t = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle("$1")', $t);
+		$t = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle("$1")', $t);
+		$t = preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $t);
+		$t = preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $t);
 
-		$t =& preg_replace('/<p>{boxHeader}/i', '<hr />', $t);
-		$t =& preg_replace('/{boxHeader}/i', '<hr />', $t);
-		$t =& preg_replace('/{boxFooter}<\/p>/i', '<hr />', $t);
-		$t =& preg_replace('/{boxFooter}/i', '<hr />', $t);
+		$t = preg_replace('/<p>{boxHeader}/i', '<hr />', $t);
+		$t = preg_replace('/{boxHeader}/i', '<hr />', $t);
+		$t = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $t);
+		$t = preg_replace('/{boxFooter}/i', '<hr />', $t);
 		
 		return $t;
 	}

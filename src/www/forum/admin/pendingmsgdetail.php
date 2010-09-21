@@ -1,34 +1,28 @@
 <?php
-
 /**
- * GForge Forum Pending Messages Detail
+ * Forum Pending Messages Detail
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2005 (c) Daniel Perez
+ * http://fusionforge.org/
  *
- * @version   
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-/* message moderation
-	by Daniel Perez - 2005
-*/
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -46,13 +40,12 @@ global $HTML;
 $fa = new ForumAdmin($group_id);
 
 if ( (!$forum_id) || (!$group_id) || (!$msg_id) ) {
-	exit_missing_param();
+	exit_missing_param('',array(_('Forum ID'),_('Project ID'),_('Message ID')),'forums');
 }
 
 session_require_perm ('forum', $group_id, 'moderate') ;
 
 //print the message
-forum_header(array());
 $g =& $fa->GetGroupObject();
 $f=new Forum($g,$forum_id);
 if (!$f || !is_object($f)) {
@@ -62,16 +55,17 @@ if (!$f || !is_object($f)) {
 }
 $fm = new ForumMessage($f,$msg_id,false,true); //create the pending message
 if (!$fm || !is_object($fm)) {
-	exit_error(_('Error'), "Error getting new ForumMessage");
+	exit_error(_('Error getting new ForumMessage'),'forums');
 } elseif ($fm->isError()) {
-	exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
+	exit_error(_('Error getting new ForumMessage: ').$fm->getErrorMessage(),'forums');
 }
 $fhtml = new ForumHTML($f);
 if (!$fhtml || !is_object($fhtml)) {
-	exit_error(_('Error'), "Error getting new ForumHTML");
+	exit_error(_('Error getting new ForumHTML'),'forums');
 } elseif ($fhtml->isError()) {
-	exit_error(_('Error'),$fhtml->getErrorMessage());
+	exit_error($fhtml->getErrorMessage(),'forums');
 }
+forum_header(array());
 echo $fhtml->showPendingMessage($fm);
 $HTML->footer(array());
 

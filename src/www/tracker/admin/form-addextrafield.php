@@ -11,7 +11,7 @@ echo "<h1>".$title."</h1>";
 		/*
 			List of possible user built Selection Boxes for an ArtifactType
 		*/
-		$efarr =& $ath->getExtraFields();
+		$efarr = $ath->getExtraFields();
 		$eftypes=ArtifactExtraField::getAvailableTypes();
 		$keys=array_keys($efarr);
 		echo "<br />";
@@ -120,7 +120,7 @@ echo "<h1>".$title."</h1>";
 			<input type="text" name="attribute2" value="80" size="2" maxlength="2" />
 		</p>
 		<p>
-		<span class="warning"><?php echo _('Warning: this add new custom field') ?></span>
+		<div class="warning"><?php echo _('Warning: this add new custom field') ?></div>
 		</p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />

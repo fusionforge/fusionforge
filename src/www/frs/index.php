@@ -3,23 +3,24 @@
  * Project File Information/Download Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -34,7 +35,7 @@ $release_id = getIntFromRequest('release_id');
 $cur_group =& group_get_object($group_id);
 
 if (!$cur_group) {
-	exit_error(_('No group title'), _('No group'));
+	exit_no_group();
 }
 
 //
@@ -67,7 +68,7 @@ plugin_hook("blocks", "files index");
 
 if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";
-	echo "<p><strong>"._('There are no file packages defined for this project.')."</strong>";
+	echo "<div class='warning'>"._('There are no file packages defined for this project.')."</div>";
 } else {
 	echo '<div id="forge-frs" class="underline-link">'."\n";
 
@@ -125,7 +126,7 @@ if ( $num_packages < 1) {
 		$proj_stats['releases'] += $num_releases;
 
 		if ( !$res_release || $num_releases < 1 ) {
-			echo '<strong>' . _('No releases') . '</strong>
+			echo '<div class="warning">' . _('No releases') . '</div>
 			';
 		} else {
 			// iterate and show the releases of the package

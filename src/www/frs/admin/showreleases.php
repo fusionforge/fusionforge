@@ -49,16 +49,16 @@ $project =& group_get_object($group_id);
 if (!$project || !is_object($project)) {
     exit_no_group();
 } elseif ($project->isError()) {
-	exit_error('Error',$project->getErrorMessage());
+	exit_error($project->getErrorMessage(),'frs');
 }
 
 session_require_perm ('frs', $group_id, 'write') ;
 
 $frsp = new FRSPackage($project,$package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error('Error','Could Not Get FRS Package');
+	exit_error(_('Could Not Get FRS Package'),'frs');
 } elseif ($frsp->isError()) {
-	exit_error('Error',$frsp->getErrorMessage());
+	exit_error($frsp->getErrorMessage(),'frs');
 }
 
 //
@@ -72,12 +72,12 @@ if ($func=='delete_release' && $release_id) {
 
 	$frsr = new FRSRelease($frsp,$release_id);
 	if (!$frsr || !is_object($frsr)) {
-		exit_error('Error','Could Not Get FRS Release');
+		exit_error(_('Could Not Get FRS Release'),'frs');
 	} elseif ($frsr->isError()) {
-		exit_error('Error',$frsr->getErrorMessage());
+		exit_error($frsr->getErrorMessage(),'frs');
 	}
 	if (!$frsr->delete($sure,$really_sure)) {
-		exit_error('Error',$frsr->getErrorMessage());
+		exit_error($frsr->getErrorMessage(),'frs');
 	} else {
 		$feedback .= _('Deleted');
 	}
@@ -88,7 +88,7 @@ if ($func=='delete_release' && $release_id) {
 */
 $rs =& $frsp->getReleases();
 if (count($rs) < 1) {
-	exit_error(_('Error'),_('No Releases Of This Package Are Available'));
+	exit_error(_('No Releases Of This Package Are Available'),'frs');
 }
 
 /*

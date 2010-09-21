@@ -42,9 +42,8 @@
 			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false); ?>
 			<?php } ?>
 
-			<p>
-			<span class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
-				</span></p>
+			<div class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
+			</div>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form>

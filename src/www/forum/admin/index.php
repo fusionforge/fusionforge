@@ -1,23 +1,28 @@
 <?php
 /**
- * GForge Forums Facility
+ * Forum Facility
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org/
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-
-/*
-	Message Forums
-	By Tim Perdue, Sourceforge, 11/99
-
-	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
-
-	Complete OO rewrite by Tim Perdue 12/2002
-
-	Heavy RBAC changes 3/17/2004
-*/
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -65,7 +70,7 @@ if (getStringFromRequest('post_changes')) {
 		$deleteforum=0;
 	} else if (getStringFromRequest('add_forum')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('forums');
 		}
 
 		if (check_email_available($g, $g->getUnixName() . '-' . getStringFromRequest('forum_name'), $error_msg)) {
@@ -203,9 +208,9 @@ if (getStringFromRequest('add_forum')) {
 		// the user cancelled the request, go back to forum
 		//if thread_id is 0, then we came from message.php. else, we came from forum.php
 		if (!$thread_id) {
-			header("Location: /forum/message.php?msg_id=$msg_id");
+            session_redirect('/forum/message.php?msg_id='.$msg_id);
 		} else {
-			header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
+            session_redirect('/forum/forum.php?thread_id='.$thread_id.'&forum_id='.$forum_id);
 		}
 		exit;
 	} else {
@@ -239,15 +244,15 @@ if (getStringFromRequest('add_forum')) {
 		//actually finish editing the message and save the contents
 		$f = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error('Error','Error Getting Forum');
+			exit_error(_('Error Getting Forum'),'forums');
 		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
+			exit_error($f->getErrorMessage(),'forums');
 		}
 		$fm=new ForumMessage($f,$msg_id,false,false);
 		if (!$fm || !is_object($fm)) {
-			exit_error(_('Error'),_('Error getting new forum message'));
+			exit_error(_('Error getting new forum message'),'forums');
 		} elseif ($fm->isError()) {
-			exit_error(_('Error'),$fm->getErrorMessage());
+			exit_error($fm->getErrorMessage(),'forums');
 		}
 		$subject = getStringFromRequest('subject');
 		$body = getStringFromRequest('body');
@@ -265,37 +270,36 @@ if (getStringFromRequest('add_forum')) {
 		if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
 			$feedback .= _('Message Edited Successfully');
 		} else {
-			$feedback .= $fm->getErrorMessage();
+			$error_msg .= $fm->getErrorMessage();
 		}
 		forum_header(array('title'=>_('Edit a Message')));
 		echo '<p>'.util_make_link ('/forum/forum.php?forum_id=' . $forum_id, _("Return to the forum")) ;
 		forum_footer(array());
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
-		header("Location: /forum/message.php?msg_id=$msg_id");
-		exit;
+		session_redirect('/forum/message.php?msg_id='.$msg_id);
 	} else { 
 		//print the edit message confirmation
 			
 		$f = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error('Error','Error Getting Forum');
+			exit_error(_('Error Getting Forum'),'forums');
 		} elseif ($f->isError()) {
-			exit_error('Error',$f->getErrorMessage());
+			exit_error($f->getErrorMessage(),'forums');
 		}
 			
 		$fm=new ForumMessage($f,$msg_id,false,false);
 		if (!$fm || !is_object($fm)) {
-			exit_error(_('Error'),_('Error Getting ForumMessage'));
+			exit_error(_('Error Getting ForumMessage'),'forums');
 		} elseif ($fm->isError()) {
-			exit_error(_('Error'),$fm->getErrorMessage());
+			exit_error($fm->getErrorMessage(),'forums');
 		}
 			
 		$fh = new ForumHTML($f);
 		if (!$fh || !is_object($fh)) {
-			exit_error(_('Error'),_('Error Getting ForumHTML'));
+			exit_error(_('Error Getting ForumHTML'),'forums');
 		} elseif ($fh->isError()) {
-			exit_error(_('Error'),$fh->getErrorMessage());
+			exit_error($fh->getErrorMessage(),'forums');
 		}
 			
 		forum_header(array('title'=>_('Edit a Message')));
@@ -319,29 +323,29 @@ if (getStringFromRequest('add_forum')) {
 			// Move message in another forum
 			$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
 			if (!$f_from || !is_object($f_from)) {
-				exit_error('Error','Could Not Get Forum Object');
+				exit_error(_('Could Not Get Forum Object'),'forums');
 			} elseif ($f_from->isError()) {
-				exit_error('Error',$f_from->getErrorMessage());
+				exit_error($f_from->getErrorMessage(),'forums');
 			}
 			$f_to = new Forum ($fa->GetGroupObject(),$new_forum_id);
 			if (!$f_to || !is_object($f_to)) {
-				exit_error('Error','Could Not Get Forum Object');
+				exit_error(_('Could Not Get Forum Object'),'forums');
 			} elseif ($f_to->isError()) {
-				exit_error('Error',$f_to->getErrorMessage());
+				exit_error($f_to->getErrorMessage(),'forums');
 			}
 
 			$ff = new ForumFactory($g);
 			if (!$ff || !is_object($ff) || $ff->isError()) {
-				exit_error(_('Error'),$ff->getErrorMessage());
+				exit_error($ff->getErrorMessage(),'forums');
 			}
 
 			if ($ff->moveThread($new_forum_id,$thread_id,$forum_id)) {
 				$feedback .= sprintf(_('Thread successfully moved from %1$s forum to %2$s forum'), $f_from->getName(),$f_to->getName());
 			} else {
-				$feedback .= $ff->getErrorMessage();
+				$error_msg .= $ff->getErrorMessage();
 			}
 		}
-					
+
 		forum_header(array('title'=>_('Edit a Message')));
 		echo '<p><a href="/forum/forum.php?forum_id=' . $new_forum_id . '">Return to the forum</a></p>';
 		echo '<p><a href="/forum/forum.php?thread_id='.$thread_id.'&amp;forum_id=' . $new_forum_id . '">Return to the thread</a></p>';
@@ -349,26 +353,26 @@ if (getStringFromRequest('add_forum')) {
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
 		if ($return_to_message) {
-			header("Location: /forum/message.php?msg_id=$msg_id");
+			session_redirect('/forum/message.php?msg_id='.$msg_id);
 		} else {
-			header("Location: /forum/forum.php?thread_id=$thread_id&forum_id=$forum_id");
+			session_redirect('/forum/forum.php?thread_id='.$thread_id.'&forum_id='.$forum_id);
 		}
 		exit;
 	} else { 
 		// Display select box to select new forum
-					
+
 		forum_header(array('title'=>_('Forums: Administration')));
 					
 		$ff = new ForumFactory($g);
 		if (!$ff || !is_object($ff) || $ff->isError()) {
-			exit_error(_("Error"),$ff->getErrorMessage());
+			exit_error($ff->getErrorMessage(),'forums');
 		}
 
 		$farr =& $ff->getForums();
 
 		if ($ff->isError()) {
 			echo '<h1>'.sprintf(_('No Forums Found For %s'), $g->getPublicName()) .'</h1>';
-			echo $ff->getErrorMessage();
+			echo '<div class="error">'.$ff->getErrorMessage().'</div>';
 			forum_footer(array());
 			exit;
 		}
@@ -390,9 +394,9 @@ if (getStringFromRequest('add_forum')) {
 					
 		$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f_from || !is_object($f_from)) {
-			exit_error('Error','Could Not Get Forum Object');
+			exit_error(_('Could Not Get Forum Object'),'forums');
 		} elseif ($f_from->isError()) {
-			exit_error('Error',$f_from->getErrorMessage());
+			exit_error($f_from->getErrorMessage(),'forums');
 		}
 					
 		echo '<center>
@@ -437,14 +441,14 @@ if (getStringFromRequest('add_forum')) {
 	//
 	$ff=new ForumFactory($g);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
-		exit_error(_('Error'),$ff->getErrorMessage());
+		exit_error($ff->getErrorMessage(),'forums');
 	}
 
 	$farr =& $ff->getForumsAdmin();
 
 	if ($ff->isError()) {
 		echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
-		echo $ff->getErrorMessage();
+		echo '<div class="error">'.$ff->getErrorMessage().'</div>';
 		forum_footer(array());
 		exit;
 	}

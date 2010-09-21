@@ -1,34 +1,29 @@
 <?php
-
 /**
- * GForge Forum Admin Class
+ * Forum Admin Class
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2005 (c) Daniel Perez
+ * Copyright 2010 (c) Franck Villaume - Capgemini
+ * http://fusionforge.org/
  *
- * @version   
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
-/* forum admin class
-	by Daniel Perez - 2005
-*/
 
 require_once $gfcommon.'include/pre.php';
 
@@ -56,7 +51,6 @@ class ForumAdmin extends Error {
 	 */
 	
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
-		global $HTML;
 		
 		$return = '<a href="admin/index.php?movethread=' . $thread_id  . '&amp;msg_id=' . $msg_id . '&amp;group_id=' . $group_id . '&amp;forum_id=' . $forum_id .
 				  '&amp;return_to_message=' . $return_to_message . '">' . html_image('ic/forum_move.gif','37','15',array('alt'=>_('Move thread'))). "</a>";
@@ -161,7 +155,7 @@ class ForumAdmin extends Error {
 	 *  @param  string	 action to execute.
 	 */
 	function ExecuteAction ($action) {
-		global $HTML;
+        global $HTML;
 		
 		if ($action == "change_status") { //change a forum
 			$forum_name = getStringFromRequest('forum_name');
@@ -176,15 +170,15 @@ class ForumAdmin extends Error {
 			*/
 			$f=new Forum($this->g,$group_forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error'),_('Error getting Forum'));
+				exit_error(_('Error getting Forum'),'forums');
 			} elseif ($f->isError()) {
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			}
 
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 			if (!$f->update($forum_name,$description,$allow_anonymous,$is_public,$send_all_posts_to,$moderation_level)) {
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			} else {
 				$feedback = _('Forum Info Updated Successfully');
 			}
@@ -202,19 +196,19 @@ class ForumAdmin extends Error {
 			*/
 			if (!forge_check_perm ('forum_admin', $this->g->getID())) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_permission_denied();
+				exit_permission_denied('forums');
 			}
 			$f=new Forum($this->g);
 			if (!$f || !is_object($f)) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'),_('Error getting Forum'));
+				exit_error(_('Error getting Forum'),'forums');
 			} elseif ($f->isError()) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			}
 			if (!$f->create($forum_name,$description,$is_public,$send_all_posts_to,1,$allow_anonymous,$moderation_level)) {
 				form_release_key(getStringFromRequest("form_key"));
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			} else {
 				$feedback = _('Forum created successfully');
 			}
@@ -225,22 +219,22 @@ class ForumAdmin extends Error {
 			$forum_id = getIntFromRequest('forum_id');
 			$f=new Forum($this->g,$forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error'),_('Error getting Forum'));
+				exit_error(_('Error getting Forum'),'forums');
 			} elseif ($f->isError()) {
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			}
 
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 			$fm=new ForumMessage($f,$msg_id);
 			if (!$fm || !is_object($fm)) {
-				exit_error(_('Error'),_('Error Getting ForumMessage'));
+				exit_error(_('Error Getting ForumMessage'),'forums');
 			} elseif ($fm->isError()) {
-				exit_error(_('Error'),$fm->getErrorMessage());
+				exit_error($fm->getErrorMessage(),'forums');
 			}
 			$count=$fm->delete();
 			if (!$count || $fm->isError()) {
-				exit_error(_('Error'),$fm->getErrorMessage());
+				exit_error($fm->getErrorMessage(),'forums');
 			} else {
 				$feedback = sprintf(ngettext('%1$s message deleted', '%1$s messages deleted', $count), $count);
 			}
@@ -253,15 +247,15 @@ class ForumAdmin extends Error {
 			$group_forum_id = getIntFromRequest('group_forum_id');
 			$f=new Forum($this->g,$group_forum_id);
 			if (!$f || !is_object($f)) {
-				exit_error(_('Error'),_('Error getting Forum'));
+				exit_error(_('Error getting Forum'),'forums');
 			} elseif ($f->isError()) {
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			}
 
 			session_require_perm ('forum_admin', $f->Group->getID()) ;
 
 			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
-				exit_error(_('Error'),$f->getErrorMessage());
+				exit_error($f->getErrorMessage(),'forums');
 			} else {
 				$feedback = _('Successfully Deleted');
 			}
@@ -388,15 +382,13 @@ class ForumAdmin extends Error {
 						db_begin();
 						if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]))) {
-							$feedback .= "DB Error ";
-							$feedback .= db_error() . "<br />";
+							$error_msg .= "DB Error: ". db_error();
 							db_rollback();
 							break;
 						}
 						if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]))) {
-							$feedback .= "DB Error ";
-							$feedback .= db_error() . "<br />";
+							$error_msg .= "DB Error: ". db_error();
 							db_rollback();
 							break;
 						}
@@ -409,26 +401,26 @@ class ForumAdmin extends Error {
 						$res1 = db_query_params ('SELECT * FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]));
 						if (!$res1) {
-							$feedback .= "DB Error " . db_error() . "<br />";
+							$error_msg .= "DB Error: " . db_error();
 							break;
 						}
 						$res2 = db_query_params ('SELECT * FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]));
 						if (!$res2) {
-							$feedback .= "DB Error " . db_error() . "<br />";
+							$error_msg .= "DB Error " . db_error();
 							break;
 						}
 						$f = new Forum($this->g,$forum_id);
 						if (!$f || !is_object($f)) {
-							exit_error(_('Error'),_('Error getting new Forum'));
+							exit_error(_('Error getting new Forum'),'forums');
 						} elseif ($f->isError()) {
-							exit_error(_('Error'),$f->getErrorMessage());
+							exit_error($f->getErrorMessage(),'forums');
 						}
 						$fm = new ForumMessage($f); // pending = false
 						if (!$fm || !is_object($fm)) {
-							exit_error(_('Error'), "Error getting new ForumMessage");
+							exit_error(_('Error getting new ForumMessage'),'forums');
 						} elseif ($fm->isError()) {
-							exit_error(_('Error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
+							exit_error(_('Error getting new ForumMessage: ').$fm->getErrorMessage(),'forums');
 						}
 						$group_forum_id = db_result($res1,0,"group_forum_id");
 						$subject = db_result($res1,0,"subject");
@@ -464,9 +456,9 @@ class ForumAdmin extends Error {
 							if ($fm->isError()) {
 							    if ( $fm->getErrorMessage() == (_('Couldn\'t Update Master Thread parent with current time')) ) {
 							    	//the thread which the message was replying to doesn't exist any more
-							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.') . "<br />";
+							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.');
 							    } else {
-									$feedback .= "$msg_id - " . $fm->getErrorMessage() . "<br />";
+									$error_msg .= "$msg_id - " . $fm->getErrorMessage();
 							    }
 								$deleteok = false;
 							}
@@ -481,8 +473,7 @@ class ForumAdmin extends Error {
 								db_begin();
 								if (!db_query_params ('DELETE FROM forum WHERE msg_id=$1',
 										      array ($fm->getID()))) {
-									$feedback .= "DB Error ";
-									$feedback .= db_error() . "<br />";
+									$error_msg .= "DB Error ". db_error();
 									db_rollback();
 									break;
 								}
@@ -496,15 +487,13 @@ class ForumAdmin extends Error {
 							db_begin();
 							if (!db_query_params ('DELETE FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]))) {
-								$feedback .= "DB Error ";
-								$feedback .= db_error() . "<br />";
+								$error_msg .= "DB Error: ". db_error();
 								db_rollback();
 								break;
 							}
 							if (!db_query_params ('DELETE FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]))) {
-								$feedback .= "DB Error ";
-								$feedback .= db_error() . "<br />";
+								$error_msg .= "DB Error: ". db_error();
 								db_rollback();
 								break;
 							}
@@ -518,7 +507,6 @@ class ForumAdmin extends Error {
 			$this->ExecuteAction("view_pending");
 		}
 	}
-	
 }
 
 // Local Variables:

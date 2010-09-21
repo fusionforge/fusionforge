@@ -38,8 +38,8 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
+$feedback = getStringFromRequest('feedback');
 
-$feedback = '';
 $add_extrafield = '';
 
 $group =& group_get_object($group_id);

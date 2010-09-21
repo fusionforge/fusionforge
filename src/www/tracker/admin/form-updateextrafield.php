@@ -1,4 +1,26 @@
 <?php
+/**
+ * Tracker Facility
+ *
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 //
 //  FORM TO UPDATE POP-UP BOXES
 //
@@ -50,9 +72,8 @@ echo '<h1>'.$title.'</h1>';
 			<input type="text" name="alias" value="<?php echo $ac->getAlias(); ?>" />
 			</p>
 			<p><input type="checkbox" name="is_required" <?php if ($ac->isRequired()) echo "checked=\"checked\""; ?> /><?php echo _('Field is mandatory')?></p>
-			<p>
-			<span class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
-				</span></p>
+			<div class="warning"><?php echo _('It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name') ?>
+			</div>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form>
