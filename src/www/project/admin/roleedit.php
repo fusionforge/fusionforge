@@ -168,7 +168,7 @@ if (USE_PFO_RBAC) {
 } else {
 	if ($role_id != 'observer') {
 		echo '<p><strong>'._('Role Name').'</strong><br />
-	<input type="text" name="role_name" value="'.$role->getName().'">
+	<input type="text" name="role_name" value="'.$role->getName().'" />
 	</p>';
 	}
 }
@@ -235,7 +235,7 @@ for ($i=0; $i<count($keys); $i++) {
 				} else {
 					$txt='';
 				}
-				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
+				echo '<tr ' . $HTML->boxGetAltRowStyle($j++) . '>
 				<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'forum_name').'</td>
 				<td>'.html_build_select_box_from_assoc(
