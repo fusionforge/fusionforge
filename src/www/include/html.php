@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge Misc HTML functions
+ * Misc HTML functions
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team

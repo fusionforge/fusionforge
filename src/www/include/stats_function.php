@@ -1,11 +1,25 @@
 <?php
 /**
- * stats_function.php
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
- * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * Copyright 1999-2001 (c) VA Linux Systems 
+ * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once $gfwww.'include/HTML_Graphs.php';
@@ -23,7 +37,7 @@ function stats_sf_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		$j=0;
 		for ($i=0; $i<$rows; $i++) {
@@ -56,7 +70,7 @@ function stats_sf_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		$count=array();
 		$dates=array();
@@ -79,7 +93,7 @@ function stats_sf_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		$count=array();
 		$dates=array();
@@ -110,7 +124,7 @@ function stats_project_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		GraphResult($result,'Logo Showings By Day');
 	}
@@ -127,7 +141,7 @@ function stats_project_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		GraphResult($result,'Logo Showings By Project');
 	}
@@ -151,7 +165,7 @@ function stats_browser_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		GraphResult($result,'Page Views By Browser');
 	}
@@ -167,7 +181,7 @@ function stats_browser_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		GraphResult($result,'Page Views By Platform');
 	}
@@ -183,7 +197,7 @@ function stats_browser_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo db_error();
+		echo '<div class="error">'.db_error().'</div>';
 	} else {
 		ShowResultSet($result,'Page Views By Platform/Browser Version');
 	}
