@@ -4085,6 +4085,7 @@ src/www/pm/csv.php -text
 src/www/pm/format_csv.php -text
 src/www/pm/t_follow.php -text
 src/www/pm/t_lookup.php -text
+src/www/project/admin/roledelete.php -text
 src/www/project/admin/tools.php -text
 src/www/project/admin/users.php -text
 src/www/scm/browser.php -text

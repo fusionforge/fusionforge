@@ -37,6 +37,10 @@ $data = getStringFromRequest('data');
 
 $group = group_get_object($group_id);
 
+if (getStringFromRequest('delete')) {
+	session_redirect('/project/admin/roledelete.php?group_id='.$group_id.'&role_id='.$role_id);
+}
+
 //
 //	The observer is a special role, which is actually
 //	just controlling the is_public/allow anon flags

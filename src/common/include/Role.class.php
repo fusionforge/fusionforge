@@ -489,6 +489,52 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return true;
 	}
 
+	/**
+	 *	delete - delete a role in the database.
+	 *
+	 *	@return	boolean	True on success or false on failure.
+	 */
+	function delete() {
+
+		if (!is_numeric($this->getID())) {
+			$this->setError('Role::delete() role_id is not an integer');
+			return false;
+		}
+
+		//	Cannot delete role_id=1
+		if ($this->getID() == 1) {
+			$this->setError('Cannot Delete Default Role.');
+			return false;
+		}
+		$perm =& $this->Group->getPermission();
+		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+
+		$res=db_query_params('SELECT user_id FROM user_group WHERE role_id=$1',
+			array($this->getID()));
+		assert($res);
+		if (db_numrows($res) > 0) {
+			$this->setError('Cannot remove a non empty role.');
+			return false;
+		}
+
+		db_begin();
+
+		$res=db_query_params('DELETE FROM role WHERE group_id=$1 AND role_id=$2',
+			array($this->Group->getID(), $this->getID())) ;
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('delete::name::'.db_error());
+			db_rollback();
+			return false;
+		}
+
+		db_commit();
+
+		return true;
+	}
+
 	function setUser($user_id) {
 		global $SYS;
 		if (USE_PFO_RBAC) {
