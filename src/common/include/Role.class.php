@@ -41,11 +41,17 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function Role ($Group,$role_id=false) {
 		$this->BaseRole();
-		if (!$Group || !is_object($Group) || $Group->isError()) {
-			$this->setError('Role::'.$Group->getErrorMessage());
-			return false;
+		if (USE_PFO_RBAC) {
+			if (!$Group || !is_object($Group) || $Group->isError()) {
+				$Group = NULL ;
+			}
+		} else {
+			if (!$Group || !is_object($Group) || $Group->isError()) {
+				$this->setError('Role::'.$Group->getErrorMessage());
+				return false;
+			}
+			$this->Group =& $Group;
 		}
-		$this->Group =& $Group;
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
@@ -79,12 +85,22 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		if ($this->getName() != stripslashes($role_name)) {
 			if (USE_PFO_RBAC) {
 				db_begin();
-				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
-						       array ($this->Group->getID(), htmlspecialchars($role_name)));
-				if (db_numrows($res)) {
-					$this->setError('Cannot create a role with this name (already used)');
-					db_rollback () ;
-					return false;
+				if ($this->Group == NULL) {
+					$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND role_name=$1',
+							       array (htmlspecialchars($role_name)));
+					if (db_numrows($res)) {
+						$this->setError('Cannot create a role with this name (already used)');
+						db_rollback () ;
+						return false;
+					}
+				} else {
+					$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
+							       array ($this->Group->getID(), htmlspecialchars($role_name)));
+					if (db_numrows($res)) {
+						$this->setError('Cannot create a role with this name (already used)');
+						db_rollback () ;
+						return false;
+					}
 				}
 				$res = db_query_params ('UPDATE pfo_role SET role_name=$1 WHERE role_id=$2',
 							array (htmlspecialchars($role_name),
@@ -155,25 +171,43 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@return integer	The id on success or false on failure.
 	 */
 	function create($role_name,$data) {
-		$perm =& $this->Group->getPermission ();
-		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-
 		if (USE_PFO_RBAC) {
-			db_begin();
-			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
-					       array ($this->Group->getID(), htmlspecialchars($role_name)));
-			if (db_numrows($res)) {
-				$this->setError('Cannot create a role with this name (already used)');
-				db_rollback () ;
+			if ($this->Group == NULL
+			    && !forge_check_global_perm ('forge_admin')) {
+				$this->setPermissionDeniedError();
 				return false;
+			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
+				$this->setPermissionDeniedError();
+				return false;
+			}			
+
+			db_begin();
+			if ($this->Group == NULL) {
+				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND role_name=$1',
+						       array (htmlspecialchars($role_name)));
+				if (db_numrows($res)) {
+					$this->setError('Cannot create a role with this name (already used)');
+					db_rollback () ;
+					return false;
+				}
+			} else {
+				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
+						       array ($this->Group->getID(), htmlspecialchars($role_name)));
+				if (db_numrows($res)) {
+					$this->setError('Cannot create a role with this name (already used)');
+					db_rollback () ;
+					return false;
+				}
 			}
 			
-			$res = db_query_params ('INSERT INTO pfo_role (home_group_id, role_name) VALUES ($1, $2)',
-						array ($this->Group->getID(),
-						       htmlspecialchars($role_name))) ;
+			if ($this->Group == NULL) {
+				$res = db_query_params ('INSERT INTO pfo_role (role_name) VALUES ($1)',
+							array (htmlspecialchars($role_name))) ;
+			} else {
+				$res = db_query_params ('INSERT INTO pfo_role (home_group_id, role_name) VALUES ($1, $2)',
+							array ($this->Group->getID(),
+							       htmlspecialchars($role_name))) ;
+			}
 			if (!$res) {
 				$this->setError('create::'.db_error());
 				db_rollback();
@@ -192,6 +226,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			
 			$this->normalizeData () ;
 		} else {
+		$perm =& $this->Group->getPermission ();
+		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+
 		// Check if role_name is not already used.
 		$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
 			array ($this->Group->getID(), htmlspecialchars($role_name)));
@@ -252,6 +292,10 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	function createDefault($name) {
+		if ($this->Group == NULL) {
+			return $this->create($name,array());
+		}
+
 		if (array_key_exists ($name, $this->defaults)) {
 			$arr =& $this->defaults[$name];
 		} else {
@@ -295,9 +339,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$data[$keys[$i]][0]= $arr[$keys[$i]];
 			}
 		}
-//print_r($data);
-//db_rollback();
-//exit;
+
 		return $this->create($name,$data);
 	}
 
@@ -448,10 +490,21 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	function setUser($user_id) {
 		global $SYS;
-		$perm =& $this->Group->getPermission ();
-		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
+		if (USE_PFO_RBAC) {
+			if ($this->Group == NULL
+			    && !forge_check_global_perm ('forge_admin')) {
+				$this->setPermissionDeniedError();
+				return false;
+			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		} else {
+			$perm =& $this->Group->getPermission ();
+			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
 		}
 
 		db_begin();
