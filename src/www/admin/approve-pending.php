@@ -131,7 +131,7 @@ $res_grp = db_query_params("SELECT * FROM groups WHERE status='P'", array(), $LI
 $rows = db_numrows($res_grp);
 
 if ($rows < 1) {
-	print '<div class="warning_msg">'._('No Pending Projects to Approve').'</div>';
+	print '<p class="warning_msg">'._('No Pending Projects to Approve').'</p>';
 	site_admin_footer(array());
 	exit;
 }

@@ -289,10 +289,10 @@ if (($u->getUnixStatus() == 'A') && (forge_get_config('use_shell'))) {
 
 </table>
 
-<div align="center">
+<p style="text-align: center;">
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 <input type="reset" name="reset" value="<?php echo _('Reset Changes'); ?>" />
-</div>
+</p>
 </form>
 
 <?php
