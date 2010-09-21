@@ -873,6 +873,7 @@ src/packaging/install/web-apache2 -text
 src/packaging/install/web-apache2-vhosts -text
 src/packaging/links/common -text
 src/packaging/links/web-apache2 -text
+src/plugins/README -text
 src/plugins/blocks/common/blocks-init.php -text
 src/plugins/blocks/common/blocksPlugin.class.php -text
 src/plugins/blocks/db/blocks-init.sql -text
