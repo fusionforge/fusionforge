@@ -152,7 +152,7 @@ debianhtml:
 
 debianpdf:
 	@echo "=====> Intalling necessary packages"
-	@sudo apt-get install db2latex-xsl tetex-extra latex-ucs
+	@sudo apt-get install db2latex-xsl texlive-latex-recommended # Was tetex-extra latex-ucs
 	@echo "Making db2latex dir"
 	@[ ! -d xsl/db2latex ] && mkdir xsl/db2latex || echo "db2latex dir already done"
 	@echo "=====> Link to docbook"
