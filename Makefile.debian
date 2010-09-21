@@ -44,6 +44,9 @@ endif
 #
 TARBALLS=$(CURDIR)/tarballs
 #
+# Local customization
+-include $(CURDIR)/local.$(shell hostname)
+#
 BUILDPLACE=$(BUILDERDIR)/buildplace
 BUILDFILES=$(BUILDERDIR)/buildfiles
 COWBUILDERBASE=$(BUILDERDIR)/cow
@@ -344,7 +347,7 @@ $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp.update: $(COWBUILDERBASE)/base-$
 $(PBUILDERTGZ)/base-$(DISTRIB)-$(ARCH).tgz: $(PBUILDERTGZ)/doconfig-$(ARCH)
 	[ -f $@ ] || sudo /usr/sbin/pbuilder --create --distribution $(DISTRIB) --basetgz $(PBUILDERTGZ)/base-$(DISTRIB).tgz --configfile $(PBUILDERTGZ)/configfile-$(ARCH) $(DISTROOP)
 
-$(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp:
+$(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).stamp: /usr/sbin/cowbuilder
 	[ -d $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow ] || sudo /usr/sbin/cowbuilder --create $(HOOK) --distribution $(DISTRIB) --basepath $(COWBUILDERBASE)/base-$(DISTRIB)-$(ARCH).cow --configfile $(COWBUILDERBASE)/configfile-$(ARCH) $(DISTROOP)
 	touch $@.update
 	touch $@
