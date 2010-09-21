@@ -1,0 +1,12 @@
+FusionForge plugins
+-------------------
+
+Some plugins are supposed to be tested and working and live in ../src/plugins/
+
+These aren't (yet).
+
+Feel free to check
+https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Plugins
+for more details about FusionForge plugins.
+
+-- Olivier Berger

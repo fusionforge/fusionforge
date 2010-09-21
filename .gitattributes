@@ -99,6 +99,7 @@ packaging/tag_delivery_create -text
 packaging/tag_delivery_delete -text
 packaging/tag_packaging_create -text
 packaging/tag_packaging_delete -text
+plugins/README -text
 plugins/coclico/Makefile -text
 plugins/coclico/Makefile.debian -text
 plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php -text
