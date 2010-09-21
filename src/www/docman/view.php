@@ -35,7 +35,7 @@ $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
 
-if ($docid) {
+if ($docid != 'backup' ) {
 	$docname=urldecode($arr[5]);
 
 	$g =& group_get_object($group_id);
@@ -75,6 +75,8 @@ if ($docid) {
 
 	echo $d->getFileData();
 
+} else if ( $docid == 'backup' ) {
+    exit_error(_('Not implemented yet'),'docman');
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
 }

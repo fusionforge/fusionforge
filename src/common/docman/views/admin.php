@@ -71,7 +71,7 @@ function doIt(formid) {
 	echo '<div id="adminoptions" style="display:none;" >';
 	echo '<form id="backup" name="backup" method="post" action="'. util_make_url ('/docman/view.php/'.$group_id.'/backup') .'" >';
 	echo '<ul>';
-	echo '<li>'. _('Extract documents and directories as an archive') .' <input id="submitbackup" type="button" value="Yes" onclick="javascript:doIt(\'backup\')"></li>';
+	echo '<li>'. _('Extract documents and directories as an archive') .' <input id="submitbackup" type="button" disabled="yes" value="Yes" onclick="javascript:doIt(\'backup\')"></li>';
 	echo '</ul>';
 	echo '</form>';
 	echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updateenginesearch" >';
