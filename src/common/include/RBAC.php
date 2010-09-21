@@ -237,12 +237,6 @@ abstract class BaseRole extends Error {
 	public function setSettings($data) {
 		throw new Exception ("Not implemented") ;
 	}
-	public function linkProject ($project) {
-		throw new Exception ("Not implemented") ;
-	}
-	public function unlinkProject ($project) {
-		throw new Exception ("Not implemented") ;
-	}
 	public function normalizeData () {
 		throw new Exception ("Not implemented") ;
 	}
@@ -271,6 +265,49 @@ abstract class BaseRole extends Error {
 		}
 
 		return group_get_objects (array_unique ($ids)) ;
+	}
+
+	function linkProject ($project) { // From the PFO spec
+		$hp = $this->getHomeProject () ;
+		if ($hp != NULL && $hp->getID() == $project->getID()) {
+			$this->setError ("Can't link to home project") ;
+			return false ;
+		}
+
+		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
+				       array ($this->getID(),
+					      $project->getID()));
+
+		if (db_numrows($res)) {
+			return true ;
+		}
+		$res = db_query_params('INSERT INTO role_project_refs (role_id, group_id) VALUES ($1, $2)',
+				       array ($this->getID(),
+					      $project->getID()));
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('linkProject('.$project->getID().') '.db_error());
+			return false;
+		}
+
+		return true ;
+	}
+
+	function unlinkProject ($project) { // From the PFO spec
+		$hp = $this->getHomeProject () ;
+		if ($hp != NULL && $hp->getID() == $project->getID()) {
+			$this->setError ("Can't unlink from home project") ;
+			return false ;
+		}
+
+		$res = db_query_params('DELETE FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
+				       array ($this->getID(),
+					      $project->getID()));
+		if (!$res) {
+			$this->setError('unlinkProject('.$project->getID().') '.db_error());
+			return false;
+		}
+
+		return true ;
 	}
 
 	/**

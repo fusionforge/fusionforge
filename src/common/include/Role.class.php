@@ -133,7 +133,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *      @return boolean True if updated OK
 	 */
 	function setPublic ($flag) { // From the PFO spec
-		$res = db_query_params ('UPDATE role SET is_public=$1 WHERE role_id=$1',
+		$res = db_query_params ('UPDATE pfo_role SET is_public=$1 WHERE role_id=$1',
 					array ($flag,
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
@@ -145,62 +145,6 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	function getHomeProject () { // From the PFO spec
 		return $this->Group ;
-	}
-
-	function getLinkedProjects () { // From the PFO spec
-		$result = array () ;
-
-		$result[] = $this->Group ;
-
-		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1',
-				       array ($this->getID()));
-		
-	
-		while ($arr = db_fetch_array($res)) {
-			$result[] = group_get_object ($arr['group_id']) ;
-		}
-		return $result ;
-	}
-
-	function linkProject ($project) { // From the PFO spec
-		if ($project->getID() == $this->getHomeProject()->getID()) {
-			$this->setError ("Can't link to home project") ;
-			return false ;
-		}
-
-		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
-				       array ($this->getID(),
-					      $project->getID()));
-
-		if (db_numrows($res)) {
-			return true ;
-		}
-		$res = db_query_params('INSERT INTO role_project_refs (role_id, group_id) VALUES ($1, $2)',
-				       array ($this->getID(),
-					      $project->getID()));
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('linkProject('.$project->getID().') '.db_error());
-			return false;
-		}
-
-		return true ;
-	}
-
-	function unlinkProject ($project) { // From the PFO spec
-		if ($project->getID() == $this->getHomeProject()->getID()) {
-			$this->setError ("Can't unlink from home project") ;
-			return false ;
-		}
-
-		$res = db_query_params('DELETE FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
-				       array ($this->getID(),
-					      $project->getID()));
-		if (!$res) {
-			$this->setError('unlinkProject('.$project->getID().') '.db_error());
-			return false;
-		}
-
-		return true ;
 	}
 
 	/**
