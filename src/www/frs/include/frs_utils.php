@@ -3,30 +3,28 @@
  * FRS HTML Utilities
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /*
-
 	Standard header to be used on all /project/admin/* pages
-
 */
 
 function frs_admin_header($params) {
@@ -60,7 +58,7 @@ function frs_header($params) {
 		Does this site use FRS?
 	*/
 	if (!forge_get_config('use_frs')) {
-		exit_disabled();
+		exit_disabled('home');
 	}
 
 	$project =& group_get_object($group_id);
@@ -94,18 +92,12 @@ function frs_footer() {
 
 
 /*
-
-
 	The following functions are for the FRS (File Release System)
-
-
 */
 
 
 /*
-
 	pop-up box of supported frs statuses
-
 */
 
 function frs_show_status_popup ($name='status_id', $checked_val="xzxz") {
@@ -121,9 +113,7 @@ function frs_show_status_popup ($name='status_id', $checked_val="xzxz") {
 }
 
 /*
-
 	pop-up box of supported frs filetypes
-
 */
 
 function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
@@ -139,9 +129,7 @@ function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 }
 
 /*
-
 	pop-up box of supported frs processor options
-
 */
 
 function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
@@ -157,9 +145,7 @@ function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
 }
 
 /*
-
 	pop-up box of packages:releases for this group
-
 */
 
 
@@ -184,9 +170,7 @@ AND frs_release.package_id=frs_package.package_id",
 }
 
 /*
-
 	pop-up box of packages for this group
-
 */
 
 function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xzxz") {
@@ -256,13 +240,13 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 		}
 		$frsf = new FRSFile($release);
 		if (!$frsf || !is_object($frsf)) {
-			exit_error('Error','Could Not Get FRSFile');
+			exit_error(_('Could Not Get FRSFile'),'frs');
 		} elseif ($frsf->isError()) {
-			exit_error('Error',$frsf->getErrorMessage());
+			exit_error($frsf->getErrorMessage(),'frs');
 		} else {
 			if (!$frsf->create($fname,$infile,$type_id,$processor_id,$release_date)) {
 				db_rollback();
-				exit_error('Error',$frsf->getErrorMessage());
+				exit_error($frsf->getErrorMessage(),'frs');
 			}
 			return true ;
 		}
@@ -270,7 +254,6 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 		return _('Unknown file upload error.') ;
 	}
 }
-
 
 // Local Variables:
 // mode: php

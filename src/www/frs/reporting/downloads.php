@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -59,13 +60,13 @@ if (!$group_id) {
 
 $g =& group_get_object($group_id);
 if (!$g || $g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+	exit_error($g->getErrorMessage(),'frs');
 }
 session_require_perm ('frs', $group_id, 'write') ;
 
 $report=new Report();
 if ($report->isError()) {
-	exit_error($report->getErrorMessage());
+	exit_error($report->getErrorMessage(),'frs');
 }
 
 // Fix: Add current month to the reports.
