@@ -232,7 +232,7 @@ Class TextSanitizer extends Error {
 		return $text;
 	}
 
-	function purify ($text) {
+	static function purify ($text) {
 		// Remove string like "<![if !supportLists]>" or "<![endif]>"
 		$text = preg_replace('/<!\[.+?\]>/', '', $text);
 		$config = HTMLPurifier_Config::createDefault();
