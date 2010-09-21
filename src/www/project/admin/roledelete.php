@@ -32,7 +32,7 @@ require_once $gfcommon.'include/Role.class.php';
 $group_id = getIntFromRequest('group_id');
 $role_id = getIntFromRequest('role_id');
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+session_require_perm ('project_admin', $group_id) ;
 
 if (!$role_id) {
 	session_redirect('/project/admin/users.php?group_id='.$group_id);
