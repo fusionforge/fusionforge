@@ -95,13 +95,13 @@ if (getStringFromRequest('submit')) {
 	plugin_hook("groupisactivecheckboxpost",$hookParams);
 }
 
-project_admin_header(array('title'=>_('Edit Project Info'),'group'=>$group->getID()));
+project_admin_header(array('title'=>_('Tools'),'group'=>$group->getID()));
 
 echo '<table width="100%">';
 echo '<tr valign="top">';
 echo '<td width="50%">';
 
-echo $HTML->boxTop(_('Active Features').'');
+echo $HTML->boxTop(_('Active Tools').'');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
