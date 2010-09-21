@@ -137,7 +137,7 @@ class AttachManager extends Error {
 		}
 		if ($attachid) {
 			$attach = "<br/>
-			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
+			<a href=\"javascript:manageattachments('".util_make_url("/forum/attachment.php?attachid=$attachid&amp;group_id=$group_id&amp;forum_id=$forum_id$pend")."','no');\">" . html_image('ic/cfolder15.png',"15","13") . db_result($res,0,'filename') . "</a>  (" . db_result($res,0,'counter') . ") downloads";
 			$attach_userid = db_result($res,0,'userid');
 			
 			$f = $msg->getForum();
@@ -157,7 +157,7 @@ class AttachManager extends Error {
 			if (!$f || !is_object($f)) {
 			exit_error('Error','Could Not Get Forum Object');
 			} else {
-//				$attach = html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . _('No attachment found');
+//				$attach = html_image('ic/cfolder15.png',"15","13") . _('No attachment found');
 				$attach = '';
 				if ( ((user_getid() == $msg->getPosterID())
 				      || (forge_check_perm ('forum_admin', $f->Group->getID())))

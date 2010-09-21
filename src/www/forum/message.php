@@ -222,7 +222,8 @@ if ($msg_id) {
 
 } else {
 	forum_header(array('title'=>_('You Must Choose a Message First')));
-	echo '<div class="warning">'._('You Must Choose a Message First').'</div>';
+	echo '<p class="error">'._('You Must Choose a Message First').'</p>';
+
 }
 
 forum_footer(array());
