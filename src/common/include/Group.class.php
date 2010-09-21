@@ -2241,6 +2241,9 @@ class Group extends Error {
 					$r->addUser (user_get_object ($idadmin_group)) ;
 				}
 			}
+
+			RoleAnonymous::getInstance()->linkProject($this) ;
+			RoleLoggedIn::getInstance()->linkProject($this) ;
 		}
 
 		//
