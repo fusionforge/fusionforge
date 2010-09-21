@@ -133,7 +133,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 	if ($row_grp && $viewthisrow) {
 		print '<table border="0" cellpadding="0" width="100%">';
 		print '<tr valign="top"><td colspan="2">';
-		print "<a href=\"/projects/". strtolower($row_grp['unix_group_name']) ."/\"><strong>"
+		print '<a href="'. util_make_uri('/projects/'. strtolower($row_grp['unix_group_name']) .'/') .'"><strong>'
 			.$row_grp['group_name']."</strong></a> ";
 
 		if ($row_grp['short_description']) {
