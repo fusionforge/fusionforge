@@ -50,8 +50,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setError('Role::'.$Group->getErrorMessage());
 				return false;
 			}
-			$this->Group =& $Group;
 		}
+		$this->Group =& $Group;
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;

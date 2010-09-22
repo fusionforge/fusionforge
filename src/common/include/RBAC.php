@@ -886,14 +886,23 @@ abstract class BaseRole extends Error {
 		//
 		//	Cannot update role_id=1
 		//
-		if ($this->getID() == 1 && !USE_PFO_RBAC) {
-			$this->setError('Cannot Update Default Role');
-			return false;
-		}
-		if (!USE_PFO_RBAC) {
+		if (USE_PFO_RBAC) {
+			if ($this->Group == NULL
+			    && !forge_check_global_perm ('forge_admin')) {
+				$this->setPermissionDeniedError();
+				return false;
+			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
+		} else {
 			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 				$this->setPermissionDeniedError();
+				return false;
+			}
+			if ($this->getID() == 1) {
+				$this->setError('Cannot Update Default Role');
 				return false;
 			}
 		}
