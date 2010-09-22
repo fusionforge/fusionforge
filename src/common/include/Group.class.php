@@ -2131,14 +2131,7 @@ class Group extends Error {
 	 *	@return array of User objects for this group.
 	 */
 	function &getMembers() {
-		if (!isset($this->membersArr)) {
-			$res = db_query_params ('SELECT users.* FROM users INNER JOIN user_group ON users.user_id=user_group.user_id WHERE user_group.group_id=$1',
-						array ($this->getID())) ;
-			while ($arr = db_fetch_array($res)) {
-				$this->membersArr[] = new GFUser($arr['user_id'],$arr);
-			}
-		}
-		return $this->membersArr;
+		return $this->getUsers (true) ;
 	}
 
 	/**
@@ -2696,43 +2689,44 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	 *	@return array of user's objects.
 	 */
 	function getUsers($onlylocal = true) {
-		$users = array () ;
-
-		if (USE_PFO_RBAC) {
-			$ids = array () ;
-			foreach ($this->getRoles() as $role) {
-				if ($onlylocal 
-				    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
-					continue ;
-				}
-				foreach ($role->getUsers() as $user) {
-					$ids[] = $user->getID() ;
-				}
-			}
-			$ids = array_unique ($ids) ;
-			foreach ($ids as $id) {
-				$u = user_get_object ($id) ;
-				if ($u->isActive()) {
-					$users[] = $u ;
-				}
-			}
-		} else {
-		
-			$users_group_res = db_query_params ('SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND ug.user_id=u.user_id AND u.status=$2',
-							    array ($this->getID(),
-								   'A'));
-			if (!$users_group_res) {
-				$this->setError('Error: Enable to get users from group '. $this->getID() . ' ' .db_error());
-				return false;
-			}
+		if (!isset($this->membersArr)) {
+			$this->membersArr = array () ;
 			
-			for ($i=0; $i<db_numrows($users_group_res); $i++) {
-				$users[$i] = new GFUser(db_result($users_group_res,$i,'user_id'),false);
+			if (USE_PFO_RBAC) {
+				$ids = array () ;
+				foreach ($this->getRoles() as $role) {
+					if ($onlylocal 
+					    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
+						continue ;
+					}
+					foreach ($role->getUsers() as $user) {
+						$ids[] = $user->getID() ;
+					}
+				}
+				$ids = array_unique ($ids) ;
+				foreach ($ids as $id) {
+					$u = user_get_object ($id) ;
+					if ($u->isActive()) {
+						$this->membersArr[] = $u ;
+					}
+				}
+			} else {
+				
+				$users_group_res = db_query_params ('SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND ug.user_id=u.user_id AND u.status=$2',
+								    array ($this->getID(),
+									   'A'));
+				if (!$users_group_res) {
+					$this->setError('Error: Enable to get users from group '. $this->getID() . ' ' .db_error());
+					return false;
+				}
+				
+				for ($i=0; $i<db_numrows($users_group_res); $i++) {
+					$this->membersArr[$i] = new GFUser(db_result($users_group_res,$i,'user_id'),false);
+				}
+				
 			}
-			
 		}
-
-		return $users;
+		return $this->membersArr;
 	}
 
 	function setDocmanSearchStatus($status) {
