@@ -26,7 +26,7 @@ class Documentation_Tests extends PHPUnit_Framework_TestCase
     /**
      * Build PDF documentation from docbook
      */
-    public function skiptestBuildPDFDocumentation()
+    public function testBuildPDFDocumentation()
     {
 	    $tests = dirname( dirname( dirname( dirname (__FILE__)))); 
 	    $base = dirname( $tests );
