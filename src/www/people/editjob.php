@@ -40,6 +40,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	$category_id = getStringFromRequest('category_id');
 	$status_id = getStringFromRequest('status_id');
 	$job_id = getStringFromRequest('job_id');
+	$job_inventory_id = getStringFromRequest('job_inventory_id');
 	$skill_id = getStringFromRequest('skill_id');
 	$skill_level_id = getStringFromRequest('skill_level_id');
 	$skill_year_id = getStringFromRequest('skill_year_id');
@@ -62,7 +63,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			form_release_key(getStringFromRequest("form_key"));
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
-			$feedback .= _('JOB inserted successfully');
+			$feedback = _('JOB inserted successfully');
 		}
 
 	} else if (getStringFromRequest('update_job')) {
@@ -93,12 +94,13 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 
 		if (people_verify_job_group($job_id,$group_id)) {
 			people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id);
-			$feedback .= _('JOB updated successfully');
+			$feedback = _('JOB updated successfully');
 		} else {
 			$error_msg .= _('JOB update failed - wrong project_id');
 		}
 
 	} else if (getStringFromRequest('update_job_inventory')) {
+
 		/*
 			Change Skill level, experience etc.
 		*/
@@ -111,9 +113,9 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$result=db_query_params("UPDATE people_job_inventory SET skill_level_id=$1,skill_year_id=$2 WHERE job_id=$3 AND job_inventory_id=$4",
 				array($skill_level_id, $skill_year_id, $job_id, $job_inventory_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('JOB skill update FAILED : %s'), db_error());
+				$error_msg .= sprintf(_('JOB skill update FAILED: %s'), db_error());
 			} else {
-				$feedback .= _('JOB skill updated successfully');
+				$feedback = _('JOB skill updated successfully');
 			}
 		} else {
 			$error_msg .= _('JOB skill update failed - wrong project_id');
@@ -133,7 +135,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('JOB skill delete FAILED : %s'),db_error());
 			} else {
-				$feedback .= _('JOB skill deleted successfully');
+				$feedback = _('JOB skill deleted successfully');
 			}
 		} else {
 			$error_msg .= _('JOB skill delete failed - wrong project_id');
