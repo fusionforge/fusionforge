@@ -27,7 +27,6 @@
 function people_header($params) {
 	global $group_id,$job_id,$HTML;
 
-	var_dump($_SERVER);
 	if ($group_id) {
 		$params['toptab']='people';
 		$params['group']=$group_id;
@@ -88,6 +87,7 @@ function people_job_category_box($name='category_id',$checked='xyxy') {
 
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
+	global $error_msg;
 	if (session_loggedin()) {
 		// check required fields
 		if (!$skill_id || $skill_id == "xyxy") {
@@ -102,10 +102,10 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('ERROR inserting into skill inventory: %s'),db_error());
 			} else {
-				$feedback .= _('Added to skill inventory');
+				$feedback .= _('Added to skill inventory ');
 			}
 		} else {
-			$error_msg .= _('ERROR - skill already in your inventory');
+			$error_msg .= _('ERROR - skill already in your inventory ');
 		}
 		}
 	} else {

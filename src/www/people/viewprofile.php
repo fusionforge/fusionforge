@@ -42,16 +42,14 @@ if ($user_id && is_numeric($user_id)) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>_('View a User Profile')));
-
 	//for security, include group_id
 	$result=db_query_params('SELECT * FROM users WHERE user_id=$1', array($user_id));
 	if (!$result || db_numrows($result) < 1) {
-		echo db_error();
-		$feedback .= _('User fetch FAILED');
-		echo '<h2>'._('No Such User').'</h2>';
+		$error_msg .= _('User fetch FAILED : No Such User: ').db_error();
+	    people_header(array('title'=>_('View a User Profile')));
 	} else {
 
+	    people_header(array('title'=>_('View a User Profile')));
 		/*
 			profile set private
 		*/

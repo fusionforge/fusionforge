@@ -130,7 +130,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		} else {
 			if (getStringFromRequest('confirmMultiEdit')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-					exit_form_double_submit();
+					exit_form_double_submit('my');
 				}
 
 				for($i = 0; $i < $numItems; $i++) {
@@ -232,16 +232,6 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 
 	people_header(array('title'=>_('Edit Your Profile')));
 
-	if (!empty($error_msg)) {
-		html_error_top($error_msg);
-	}
-	if (!empty($warning)) {
-		html_warning_top($warning);
-	}
-	if (!empty($feedback)) {
-		html_feedback_top($feedback);
-	}
-		
 	//for security, include group_id
 	$result = db_query_params("SELECT * FROM users WHERE user_id=$1", array(user_getid()));
 

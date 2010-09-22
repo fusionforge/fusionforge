@@ -1,25 +1,25 @@
 <?php
 /**
- * GForge Help Wanted 
+ * Help Wanted 
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright 2002-2004 (c) GForge Team
  * http://gforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -28,7 +28,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'people/people_utils.php';
 
 if (!forge_get_config('use_people')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $group_id = getIntFromRequest('group_id');
@@ -44,30 +44,28 @@ if (user_ismember(1,'A')) {
 		if (getStringFromRequest('people_cat')) {
 			$cat_name = getStringFromRequest('cat_name');
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-				exit_form_double_submit();
+				exit_form_double_submit('admin');
 			}
 			$result=db_query_params('INSERT INTO people_job_category (name) VALUES ($1)', array($cat_name));
 			if (!$result) {
-				echo db_error();
 				form_release_key(getStringFromRequest("form_key"));
-				$feedback .= ' Error inserting value ';
+				$error_msg .= _(' Error inserting value: ').db_error();
 			}
 
-			$feedback .= ' Category Inserted ';
+			$feedback .= _('Category Inserted');
 
 		} else if (getStringFromRequest('people_skills')) {
 			$skill_name = getStringFromRequest('skill_name');
 			if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-				exit_form_double_submit();
+				exit_form_double_submit('admin');
 			}
 			$result=db_query_params('INSERT INTO people_skill (name) VALUES ($1)', array($skill_name));
 			if (!$result) {
-				echo db_error();
 				form_release_key(getStringFromRequest("form_key"));
-				$feedback .= ' Error inserting value ';
+				$error_msg .= _('Error inserting value: ').db_error();
 			}
 
-			$feedback .= ' Skill Inserted ';
+			$feedback .= _('Skill Inserted');
 		}
 
 	} 
@@ -101,8 +99,7 @@ if (user_ismember(1,'A')) {
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 		<h4>New Category Name:</h4>
 		<input type="text" name="cat_name" value="" size="15" maxlength="30" /><br />
-		<p>
-		<span class="imporant">Once you add a category, it cannot be deleted</span></p>
+		<div class="warning">Once you add a category, it cannot be deleted</div>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
 		</form></p>
@@ -135,8 +132,7 @@ if (user_ismember(1,'A')) {
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
 		<h4>New Skill Name:</h4>
 		<input type="text" name="skill_name" value="" size="15" maxlength="30" /><br />
-		<p>
-		<span class="important">Once you add a skill, it cannot be deleted</span></p>
+		<div class="warning">Once you add a skill, it cannot be deleted</div>
 		<p>
 		<input type="submit" name="submit" value="SUBMIT"></p>
 		</form></p>
@@ -162,6 +158,6 @@ if (user_ismember(1,'A')) {
 	}
 
 } else {
-	exit_permission_denied();
+	exit_permission_denied('home');
 }
 ?>

@@ -1,25 +1,25 @@
 <?php
 /**
- * GForge Help Wanted 
+ * Help Wanted 
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -28,7 +28,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'people/people_utils.php';
 
 if (!forge_get_config('use_people')) {
-	exit_disabled();
+	exit_disabled('home');
 }
 
 $group_id = getIntFromRequest('group_id');
@@ -52,10 +52,8 @@ AND groups.group_id=people_job.group_id
 AND people_job.job_id=$1 AND people_job.group_id=$2",
 array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
+		$error_msg .= _('POSTING fetch FAILED: No such posting for this project :').db_error();
 		people_header(array('title'=>_('View a Job')));
-		echo db_error();
-		$feedback .= _('POSTING fetch FAILED');
-		echo '<h2>'._('No such posting for this project').'</h2>';
 	} else {
 
 		people_header(array('title'=>_('View a Job')));
@@ -104,7 +102,7 @@ array($job_id, $group_id));
 	if (!$group_id) {
 		exit_no_group();
 	} else {
-		exit_error(_('Error'),_('Posting ID not found'));
+		exit_error(_('Posting ID not found'),'home');
 	}
 }
 

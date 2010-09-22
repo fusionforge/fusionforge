@@ -49,10 +49,10 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			create a new job
 		*/
 		if (!$title || !$description || $category_id==100) {
-			exit_missing_param('',array(_('Title'),_('Description'),_('Category')),'home');
+			exit_missing_param('',array(_('Title'),_('Description'),_('Category')),'admin');
 		}
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit('home');
+			exit_form_double_submit('admin');
 		}
 		$result=db_query_params("INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id) 
 VALUES ($1, $2, $3, $4, $5, $6, $7)", 
@@ -71,7 +71,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		*/
 		if (!$title || !$description || $category_id==100 || $status_id==100 || !$job_id) {
 			//required info
-			exit_missing_param('',array(_('Title'),_('Description'),_('Category'),_('Status'),_('Job')),'home');
+			exit_missing_param('',array(_('Title'),_('Description'),_('Category'),_('Status'),_('Job')),'admin');
 		}
 
 		$result=db_query_params("UPDATE people_job SET title=$1,description=$2,status_id=$3,category_id=$4 WHERE job_id=$5 AND group_id=$6",
@@ -88,7 +88,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		*/
 		if ($skill_id == "xyxy" || $skill_level_id==100 || $skill_year_id==100  || !$job_id) {
 			//required info
-			exit_missing_param('',array(_('Skill'),_('Skill Level'),_('Skill Year'),_('Job')),'home');
+			exit_missing_param('',array(_('Skill'),_('Skill Level'),_('Skill Year'),_('Job')),'admin');
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
@@ -104,7 +104,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		*/
 		if ($skill_level_id==100 || $skill_year_id==100  || !$job_id || !$job_inventory_id) {
 			//required info
-			exit_missing_param('',array(_('Skill Level'),_('Skill Year'),_('Job'),_('Job Inventory')),'home');
+			exit_missing_param('',array(_('Skill Level'),_('Skill Year'),_('Job'),_('Job Inventory')),'admin');
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {
@@ -125,7 +125,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		*/
 		if (!$job_id) {
 			//required info
-			exit_missing_param('',array(_('Job')),'home');
+			exit_missing_param('',array(_('Job ID')),'admin');
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {

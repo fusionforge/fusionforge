@@ -78,18 +78,18 @@ function exit_no_group() {
  * @param   string  toptab needed for navigation
  */
 function exit_missing_param($url='',$missing_params=array(),$toptab='') {
-    if (!empty($url)) {
-        if (!empty($missing_params)) {
-            $error = _('Missing required parameters : ');
-            foreach ($missing_params as $missing_param) {
-                $error .= $missing_param.' ';
-            }
-        } else {
-            $error = sprintf(_('Missing required parameters.'));
+    if (!empty($missing_params)) {
+        $error = _('Missing required parameters : ');
+        foreach ($missing_params as $missing_param) {
+            $error .= $missing_param.' ';
         }
+    } else {
+        $error = sprintf(_('Missing required parameters.'));
+    }
+    if (!empty($url)) {
         session_redirect($url.'&error_msg='.urlencode($error));
     } else {
-	    exit_error(_('Missing required parameters.'),$toptab);
+	    exit_error($error,$toptab);
     }
 }
 
