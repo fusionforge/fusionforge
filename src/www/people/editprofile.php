@@ -36,7 +36,7 @@ if (!forge_get_config('use_people')) {
 $group_id = getIntFromRequest('group_id');
 $job_id = getStringFromRequest('job_id');
 $feedback = '';
-$warning = '';
+$warning_msg = '';
 $error_msg = '';
 
 if (session_loggedin()) {
@@ -126,7 +126,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 			$numItems = count($skill_edit);
 		}
 		if($numItems == 0) {
-			$warning .= _('No skills selected to edit.');
+			$warning_msg .= _('No skills selected to edit.');
 		} else {
 			if (getStringFromRequest('confirmMultiEdit')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -166,7 +166,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 			}
 		}
 	} else if (getStringFromRequest('cancelMultiEdit')) {
-		$warning = _('Cancelled skills update');
+		$warning_msg = _('Cancelled skills update');
 	}
 	
 	if (getStringFromRequest('MultiDelete')) {
@@ -179,7 +179,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		}
 		$numItems = count($skill_delete);
 		if($numItems == 0) {
-			$warning .= _('No skills selected to delete.');
+			$warning_msg .= _('No skills selected to delete.');
 		} else {
 			if(getStringFromRequest('confirmMultiDelete')) {
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -227,7 +227,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 			
 		}
 	} elseif (getStringFromRequest('MultiDeleteCancel')) {
-		$warning .= _('Skill deletion cancelled');
+		$warning_msg .= _('Skill deletion cancelled');
 	}
 
 	people_header(array('title'=>_('Edit Your Profile')));

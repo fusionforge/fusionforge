@@ -113,7 +113,7 @@ class SurveyHTML extends Error {
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
 			$title = _('Edit A Question');
-			$warning = '<div class="warning">'. 
+			$warning_msg = '<div class="warning">'. 
 				_('WARNING! It is a bad idea to change a question after responses to it have been submitted').
 				'</div>';
 			$question_id = $q->getID();
@@ -121,14 +121,14 @@ class SurveyHTML extends Error {
 			$question_type = $q->getQuestionType();
 			$question_button = _('Submit Changes');
 		} else {
-			$warning = '';
+			$warning_msg = '';
 			$question = '';
 			$question_id = '';
 			$question_type = '';
 		}
 
 		$ret = '<h1>'. $title. '</h1>';
-		$ret.= $warning;
+		$ret.= $warning_msg;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
@@ -175,7 +175,7 @@ class SurveyHTML extends Error {
 		/* If we have a survey object, it is a Modify */
 		if ($s && is_object($s) && !$s->isError() && $s->getID()) {
 			$title = _('Edit A Survey');
-			$warning = '<div class="warning">'. 
+			$warning_msg = '<div class="warning">'. 
 				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</div>';
 			$survey_id = $s->getID();
 			$survey_title = $s->getTitle();
@@ -186,13 +186,13 @@ class SurveyHTML extends Error {
 				$active ='';
 			}
 		} else {
-			$warning = '';
+			$warning_msg = '';
 			$survey_questions = ''; 
 			$survey_title = ''; 
 		}
 
 		$ret = '<h1>'. $title. '</h1>';
-		$ret.= $warning;
+		$ret.= $warning_msg;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';

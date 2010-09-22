@@ -64,11 +64,11 @@ if (getStringFromRequest('submit')) {
 		$form_unix_name = getStringFromRequest('form_unix_name');
 		$user_object = &user_get_object_by_name($form_unix_name);
 		if ($user_object === false) {
-			$warning .= _('No Matching Users Found');
+			$warning_msg .= _('No Matching Users Found');
 		} else {
 			$role_id = getIntFromRequest('role_id');
 			if (!$role_id) {
-				$warning .= _('Role not selected');
+				$warning_msg .= _('Role not selected');
 			} else {
 				$user_id = $user_object->getID();
 				if (!$group->addUser($form_unix_name,$role_id)) {

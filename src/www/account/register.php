@@ -72,7 +72,7 @@ if (getStringFromRequest('submit')) {
 	}
 	
 	if ($GLOBALS['sys_require_accept_conditions'] && ! $accept_conditions) {
-		$warning = _("You can't register an account unless you accept the terms of use.") ;
+		$warning_msg = _("You can't register an account unless you accept the terms of use.") ;
 	} else {
 		$new_user = new GFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
@@ -85,18 +85,18 @@ if (getStringFromRequest('submit')) {
 			echo $HTML->footer(array());
 			exit;
 		} else {
-			$error = $new_user->getErrorMessage();
+			$error_msg = $new_user->getErrorMessage();
 		}
 	}
 }
 
 $HTML->header(array('title'=>'User Account Registration'));
 
-if (!empty($error))
-	print "<div class='error'>$error</div>";
+if (!empty($error_msg))
+	print "<div class='error'>$error_msg</div>";
 
 if (!empty($warning))
-	print "<div class='warning'>$warning</div>";
+	print "<div class='warning_msg'>$warning_msg</div>";
 
 if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_\/\.+]+$/', $timezone)) {
 	$timezone = forge_get_config('default_timezone') ? forge_get_config('default_timezone') : 'GMT' ;
