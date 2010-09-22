@@ -91,10 +91,94 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
+if (getStringFromRequest('adduser')) {
+	if ($role instanceof RoleExplicit) {
+		$user_name = getStringFromRequest ('form_unix_name') ;
+		$u = user_get_object_by_name ($user_name) ;
+		if ($u && $u instanceof GFUser && !$u->isError()) {
+			if ($role->addUser ($u)) {
+				$feedback .= _('User added successfully') ;
+			} else {
+				$error_msg .= _("Error while adding user to role") ;
+			}
+		}
+	} else {
+		$error_msg .= _("Can't add user to this type of role") ;
+	}
+}
+
+if (getStringFromRequest('rmuser')) {
+	if ($role instanceof RoleExplicit) {
+		$user_id = getIntFromRequest ('user_id') ;
+		$u = user_get_object ($user_id) ;
+		if ($u && $u instanceof GFUser && !$u->isError()) {
+			if ($role->removeUser ($u)) {
+				$feedback .= _('User removed successfully') ;
+			} else {
+				$error_msg .= _("Error while removing user from role") ;
+			}
+		}
+	} else {
+		$error_msg .= _("Can't remove user from this type of role") ;
+	}
+}
+
+
+if ($role instanceof RoleExplicit) {
+	$users = $role->getUsers () ;
+	if (count ($users) > 0) {
+		echo '<p><strong>'._('Current users with this role').'</strong></p>' ;
+
+		echo '<table><thead><tr>';
+		echo '<th>'._('User name').'</th>';
+		echo '<th>'._('Remove').'</th>';
+		echo '</tr></thead><tbody>';
+		
+		foreach ($users as $user) {
+			echo '
+		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+		<input type="hidden" name="role_id" value="'.$role_id.'">
+                        <tr>
+                        <td style="white-space: nowrap;">
+			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
+			  <a href="/users/'.$user->getUnixName().'">';
+			$display = $user->getRealName();
+			if (!empty($display)) {
+				echo $user->getRealName();
+			} else {
+				echo $user->getUnixName();
+			}
+			echo '</a>
+			</td>';
+			echo '<td><input type="submit" name="rmuser" value="'._("Remove").'" />
+                        </td>
+			</tr>
+                </form>';
+			echo '</tbody></table>';
+		}
+	} else {
+		echo '<p><strong>'._('No users currently have this role').'</strong></p>' ;
+	}
+
+			?>
+		<form
+			action="<?php echo getStringFromServer('PHP_SELF'); ?>"
+			method="post">
+		<p><input type="text"
+			name="form_unix_name" size="10" value="" />
+		<input type="submit" name="adduser"
+			value="<?php echo _("Add User") ?>" />
+		<input type="hidden" name="role_id" value="<?php echo $role_id; ?>">
+		</p>
+		</form>
+<?php
+}
+		
 echo '
 <p>
-<form action="'.getStringFromServer('PHP_SELF').'?role_id='. $role_id .'" method="post">';
-
+<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+echo '<input type="hidden" name="role_id" value="'.$role_id.'">' ;
+		
 if ($role instanceof RoleExplicit) {
 	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"></p>';
 } else {
