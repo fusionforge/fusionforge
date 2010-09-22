@@ -946,11 +946,25 @@ class Group extends Error {
 	 *	@return	array	Array of User objects.
 	 */
 	function &getAdmins() {
-		// this function gets all group admins in order to send Jabber and mail messages
-		$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=$2',
-				       array ('A', $this->getID()));
-		$user_ids=util_result_column_to_array($res);
-		return user_get_objects($user_ids);
+		$roles = RBACEngine::getInstance()->getRolesByAllowedAction ('project_admin', $this->getID()) ;
+		
+		$user_ids = array () ;
+
+		foreach ($roles as $role) {
+			if (! ($role instanceof RoleExplicit)) {
+				continue ;
+			}
+			if ($role->getHomeProject() == NULL
+			    || $role->getHomeProject()->getID() != $this->getID()) {
+				continue ;
+			}
+			
+			foreach ($role->getUsers() as $u) {
+				$user_ids[] = $u->getID() ;
+			}
+		}
+			
+		return user_get_objects(array_unique($user_ids));
 	}
 		
 	/*

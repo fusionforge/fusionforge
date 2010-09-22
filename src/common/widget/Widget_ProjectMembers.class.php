@@ -35,51 +35,71 @@ class Widget_ProjectMembers extends Widget {
 		$group_id = $request->get('group_id');
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
-		$res_admin = db_query_params ('SELECT users.user_id,users.user_name,users.realname,user_group.admin_flags
-				FROM users,user_group
-				WHERE user_group.user_id=users.user_id
-				AND user_group.group_id=$1
-				AND users.status=$2
-				ORDER BY admin_flags DESC,realname',
-				array($group_id,
-					'A'));
+
+		$admins = $project->getAdmins() ;
+		$members = $project->getUsers() ;
+		$seen = array () ;
 
 		$iam_member = false ;
-		if (db_numrows($res_admin) > 0) {
+		if (count($admins) > 0) {
 			echo "<p>\n";
 			echo '<span class="develtitle">'._('Project Admins').'</span><br />';
-			$started_developers = false;
-
-			while ($row_admin = db_fetch_array($res_admin)) {
-				if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
-					$started_developers=true;
-					echo '<span class="develtitle">'. _('Members').':</span><br />';
-				}
-				if (!$started_developers) {
-					echo '<div rel="doap:maintainer">'."\n";
-				} else {
-					echo '<div rel="doap:developer">'."\n";
-				}
+			foreach ($admins as $u) {
+				echo '<div rel="doap:maintainer">'."\n";
 				// A foaf:Person that holds an account on the forge
-				$developer_url = util_make_url_u ($row_admin['user_name'],$row_admin['user_id']);
+				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
 				echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
 					$developer_url.'#me' .'" >'."\n";
 				echo '<div rel="foaf:account">'."\n";
 				echo '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
 					'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
-				echo util_display_user($row_admin['user_name'],$row_admin['user_id'],$row_admin['realname'])."\n";
+				echo util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
 				echo "</div>\n"; // /sioc:UserAccount
 				echo "</div>\n"; // /foaf:holdsAccount
 				echo "</div>\n"; // /foaf:Person
 				echo "</div>\n"; // /doap:maintainer|developer
-				if ($row_admin['user_id'] == user_getid())
+				if ($u->getID() == user_getid()) {
 					$iam_member = true ;
+				}
+				$seen[] = $u->getID() ;
+			}
+			echo "</p>\n";
+		}
+		$seen_member = false ;
+		if (count($members) > 0) {
+			echo "<p>\n";
+			foreach ($members as $u) {
+				if (in_array ($u->getID(), $seen)) {
+					continue ;
+				}
+				if (!$seen_member) {
+					echo '<span class="develtitle">'. _('Members').':</span><br />';
+					$seen_member = true ;
+				}
+				echo '<div rel="doap:developer">'."\n";
+				// A foaf:Person that holds an account on the forge
+				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
+				echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
+					$developer_url.'#me' .'" >'."\n";
+				echo '<div rel="foaf:account">'."\n";
+				echo '<div typeof="sioc:UserAccount" about="'.
+					$developer_url.
+					'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
+				echo util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
+				echo "</div>\n"; // /sioc:UserAccount
+				echo "</div>\n"; // /foaf:holdsAccount
+				echo "</div>\n"; // /foaf:Person
+				echo "</div>\n"; // /doap:maintainer|developer
+				if ($u->getID() == user_getid()) {
+					$iam_member = true ;
+				}
 			}
 			echo "</p>\n";
 		}
 
-		$members = $project->getUsers();
+			
+
 		echo '<p><span rel="sioc:has_usergroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';
 		echo '<span about="members/" typeof="sioc:UserGroup">';
 		echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
@@ -121,5 +141,10 @@ function getDescription() {
 	return _('List the project members.');
 }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
