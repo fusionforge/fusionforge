@@ -35,60 +35,66 @@ class Widget_MyProjects extends Widget {
     }
     function getContent() {
         $html_my_projects = '';
-        $result = db_query_params("SELECT groups.group_name,"
-            . "groups.group_id,"
-            . "groups.unix_group_name,"
-            . "groups.status,"
-            . "groups.is_public,"
-            . "user_group.admin_flags "
-            . "FROM groups,user_group "
-            . "WHERE groups.group_id=user_group.group_id "
-            . "AND user_group.user_id=$1" 
-            . "AND groups.status='A' ORDER BY group_name",array(UserManager::instance()->getCurrentUser()->getID() ));
-        $rows=db_numrows($result);
-        if (!$result || $rows < 1) {
-            $html_my_projects .= _("You're not a member of any project");
-            $html_my_projects .= db_error();
+
+	$user = session_get_user () ;
+	$groups = $user->getGroups() ;
+            		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+
+	if (count ($groups) < 1) {
+		$html_my_projects .= _("You're not a member of any project");
         } else {
-            
-            $html_my_projects .= '<table style="width:100%">';
-            for ($i=0; $i<$rows; $i++) {
-		    if ($i % 2 == 0) {
-			    $class="bgcolor-white";
-		    }
-		    else {
-			    $class="bgcolor-grey";
-		    }
-                $html_my_projects .= '
+		$html_my_projects .= '<table style="width:100%">';
+		$i = 0 ;
+		foreach ($groups as $g) {
+			$i++ ;
+			if ($i % 2 == 0) {
+				$class="bgcolor-white";
+			}
+			else {
+				$class="bgcolor-grey";
+			}
+			
+			$html_my_projects .= '
 			<TR class="'. $class .'"><TD WIDTH="99%">'.
-			'<A href="/projects/'. db_result($result,$i,'unix_group_name') .'/">'.
-			db_result($result,$i,'group_name') .'</A>';
-		if (strpos(db_result($result,$i,'admin_flags') , 'A')===false ) {
+				'<A href="/projects/'. $g->getUnixName() .'/">'.
+				$g->getPublicName().'</A>';
+			
+			$bestrole = NULL ;
+			$isadmin = false ;
+			foreach ($roles as $r) {
+				if ($r instanceof RoleExplicit
+				    && $r->getHomeProject() != NULL
+				    && $r->getHomeProject()->getID() == $g->getID()) {
+					$bestrole = $r ;
+					if ($r->hasPermission ('project_admin', $g->getID())) {
+						$isadmin = true ;
+						break ;
+					}
+				}
+			}
+			if ($isadmin) {
+				$html_my_projects .= ' <small><A HREF="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</A></small>';
+			}
+			if (!$g->isPublic()) {
+				$html_my_projects .= ' (*)';
+				$private_shown = true;
+			}
+			if (!$isadmin) {
+				$html_my_projects .= '</TD>'.
+					'<td><A href="rmproject.php?group_id='. $g->getID().
+					'" onClick="return confirm(\''._("Quit this project?").'\')">'.
+					'<IMG SRC="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD></TR>';
+			} else {
+				$html_my_projects .= '</td><td>&nbsp;</td></TR>';
+			}
 		}
-		else {
-
-			$html_my_projects .= ' <small><A HREF="/project/admin/?group_id='.db_result($result,$i,'group_id').'">['._("Admin").']</A></small>';
-		}
-		if ( db_result($result,$i,'is_public') == 0 ) {
-			$html_my_projects .= ' (*)';
-			$private_shown = true;
-		}
-		if (strpos(db_result($result,$i,'admin_flags') , 'A')===false ) {
-			$html_my_projects .= '</TD>'.
-				'<td><A href="rmproject.php?group_id='. db_result($result,$i,'group_id').
-				'" onClick="return confirm(\''._("Quit this project?").'\')">'.
-				'<IMG SRC="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD></TR>';
-		} else {
-			$html_my_projects .= '</td><td>&nbsp;</td></TR>';
-		}
-	    }
-
-	    if (isset($private_shown) && $private_shown) {
-		    $html_my_projects .= '
+		
+		if (isset($private_shown) && $private_shown) {
+			$html_my_projects .= '
 			    <TR class="'.$class .'"><TD colspan="2" class="small">'.
-			    '(*)&nbsp;'._("<em>Private project</em>").'</td></tr>';
-	    }
-	    $html_my_projects .= '</table>';
+				'(*)&nbsp;'._("<em>Private project</em>").'</td></tr>';
+		}
+		$html_my_projects .= '</table>';
 	}
 	return $html_my_projects;
     }
@@ -146,4 +152,10 @@ class Widget_MyProjects extends Widget {
 	    return _("List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page.");
     }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
