@@ -318,12 +318,19 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_DIR}/lib
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/{httpd.d,httpd.conf.d,config.ini.d,plugins}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.d
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/httpd.conf.d
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_LANG_DIR}
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{upload,scmtarballs,scmsnapshots}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/{homedirs,dumps}
-%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/chroot/scmrepos/{svn,cvs}
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/upload
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/scmtarballs
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/scmsnapshots
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/homedirs
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/dumps
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/chroot/scmrepos/svn
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{GFORGE_VAR_LIB}/chroot/scmrepos/cvs
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
 # mock mediawiki directory because we symlink GForge skin to Monobook
 %{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
@@ -394,6 +401,7 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 ### Plugin setup ###
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d/
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
+%{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/README
 
 # plugin: aselectextauth
 
