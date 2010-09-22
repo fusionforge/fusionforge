@@ -39,7 +39,7 @@ require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfwww.'scm/include/viewvc_utils.php';
 
 if (!forge_get_config('use_scm')) {
-	exit_disabled('home');
+	exit_disabled();
 }
 
 // Get the project name from query
@@ -65,10 +65,10 @@ $Group =& group_get_object_by_name($projectName);
 if (!$Group || !is_object($Group)) {
 	exit_no_group();
 } else if ( $Group->isError()) {
-	exit_error($Group->getErrorMessage(),'home');
+	exit_error($Group->getErrorMessage(),'summary');
 }
 if (!$Group->usesSCM()) {
-	exit_disabled('home');
+	exit_disabled();
 }
 
 // check if the scm_box is located in another server
@@ -77,7 +77,7 @@ $scm_box = $Group->getSCMBox();
 $external_scm = !$sys_scm_single_host;
 
 if (!forge_check_perm ('scm', $group->getID(), 'read')) {
-	exit_permission_denied('home');
+	exit_permission_denied('scm');
 }
 
 if ($external_scm) {

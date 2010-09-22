@@ -39,7 +39,7 @@ $report=new Report();
 //	Check for error, such as license key problem
 //
 if ($report->isError()) {
-	exit_error($report->getErrorMessage(),'home');
+	exit_error($report->getErrorMessage(),'scm');
 }
 
 $group_id = getIntFromRequest('group_id');
@@ -76,7 +76,7 @@ $res = db_query_params ('SELECT u.realname,sum(commits) AS count
 			       $group_id));
 
 if (db_error()) {
-	exit_error(db_error(),'home');
+	exit_error(db_error(),'scm');
 }
 
 // Create the graph. These two calls are always required

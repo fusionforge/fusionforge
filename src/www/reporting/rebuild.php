@@ -2,25 +2,24 @@
 /**
  * Reporting System
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2010 (c) Franck Villaume
+ * http://fusionforge.org
  *
- * @author Tim Perdue tim@gforge.org
- * @date 2003-03-16
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -32,34 +31,32 @@ require_once $gfcommon.'reporting/ReportSetup.class.php';
 
 session_require_global_perm ('forge_stats', 'admin') ;
 
-echo report_header(_('Main Page'));
 if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
-		
-
 
 	$r = new ReportSetup();
 
 	if (!$r->initialSetup()) {
-		echo $r->getErrorMessage();
+		$error_msg = $r->getErrorMessage();
 		form_release_key(getStringFromRequest("form_key"));
 	} else {
-		Header("Location: index.php?feedback=Successfully+Rebuilt");
+        $feedback = _('Successfully Rebuilt');
 	}
 
 }
 
-	echo '<h2>';
-	echo _('Reporting System Initialization');
-	echo '</h2>';
-	echo '<p>';
-	echo _('Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.');
-	echo '</p>';
-	echo '<p>';
-	echo _('If you are sure you want to rebuild all the reporting tables, check the "I am sure" box and click the button below.');
-	echo '</p>';
-	echo '<p>';
-	echo _('This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.');
-	echo '</p>';
+report_header(_('Main Page'));
+echo '<h2>';
+echo _('Reporting System Initialization');
+echo '</h2>';
+echo '<p>';
+echo _('Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.');
+echo '</p>';
+echo '<p>';
+echo _('If you are sure you want to rebuild all the reporting tables, check the "I am sure" box and click the button below.');
+echo '</p>';
+echo '<p>';
+echo _('This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.');
+echo '</p>';
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -73,7 +70,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 
 <?php
 
-echo report_footer();
+report_footer();
 
 // Local Variables:
 // mode: php

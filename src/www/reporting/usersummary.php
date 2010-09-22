@@ -57,7 +57,7 @@ $l[]='1,2';
 $l[]='1';
 $l[]='2';
 
-echo report_header(_('User Summary Report'));
+report_header(_('User Summary Report'));
 
 	?>
 	<h2><?php echo _('User Summary Report'); ?></h2>
@@ -167,7 +167,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo report_footer();
+report_footer();
 
 // Local Variables:
 // mode: php

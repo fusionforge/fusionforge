@@ -26,18 +26,18 @@
 function scm_header($params) {
 	global $HTML;
 	if (!forge_get_config('use_scm')) {
-		exit_disabled('home');
+		exit_disabled();
 	}
 
 	$project =& group_get_object($params['group']);
 	if (!$project || !is_object($project)) {
 		exit_no_group();
 	} elseif ($project->isError()) {
-		exit_error($project->getErrorMessage(),'home');
+		exit_error($project->getErrorMessage(),'scm');
 	}
 
 	if (!$project->usesSCM()) {
-		exit_disabled('home');
+		exit_disabled();
 	}
 	site_project_header(array('title'=>_('SCM Repository'),'group'=>$params['group'],'toptab'=>'scm',));
 	/*
@@ -59,7 +59,7 @@ function scm_header($params) {
 				);
 		}
 	}
-	echo '<div class="scm" style="width:99%">';
+	echo '<div class="scm">';
 }
 
 function scm_footer() {

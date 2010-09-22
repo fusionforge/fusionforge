@@ -324,12 +324,8 @@ ul.tabbernav li.tabberactive a:hover {
     -moz-border-radius: 3px;
 }
 
-/* artifact
------------ */
-.artifactmessage {
-    width: 100%;
-    background: white;
-    border: 0px;
-    height: 100px;
-
+/* scm
+----------------------------------------------- */
+.scm {
+    width: 99%;
 }
