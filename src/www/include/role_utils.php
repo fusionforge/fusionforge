@@ -40,16 +40,7 @@ function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 	foreach ($roles as $role) {
 		$ids[] = $role->getID ();
 
-		if ($role->getHomeProject() == NULL) {
-			$names[] = sprintf (_('%s (global role)'),
-					    $role->getName ()) ;
-		} elseif ($role->getHomeProject()->getID() != $group_id) {
-			$names[] = sprintf (_('%s (in project %s)'),
-					    $role->getName (),
-					    $role->getHomeProject()->getPublicName()) ;
-		} else {
-			$names[] = $role->getName () ;
-		}
+		$names[] = $role->getDisplayableName($group) ;
 	}
 
 	if ($selected == 'xzxzxz') {

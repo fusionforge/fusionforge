@@ -238,6 +238,31 @@ if (!USE_PFO_RBAC) {
 		echo '<input type="text" name="role_name" size="10" value="" />';
 		echo '&nbsp;<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
 
+
+
+if (USE_PFO_RBAC) {
+	echo $HTML->boxMiddle(_("External Roles"));
+
+		$public_roles = RBACEngine::getInstance()->getPublicRoles() ;
+		$pr2 = array () ;
+		foreach ($public_roles as $r) {
+			$grs = $r->getLinkedProjects () ;
+			$seen = false ;
+			foreach ($grs as $g) {
+				if ($g->getID() == $group_id) {
+					$seen = true ;
+					break ;
+				}
+			}
+			if (!$seen) {
+				$pr2[] = $r ;
+			}
+		}
+		foreach ($pr2 as $r) {
+			echo $r->getDisplayableName($group)."<br />" ;
+		}
+}
+
 		echo $HTML->boxBottom();
 
 		?></td>
@@ -303,5 +328,10 @@ echo $HTML->boxBottom();
 <?php
 
 project_admin_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

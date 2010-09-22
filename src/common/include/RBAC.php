@@ -1113,6 +1113,21 @@ abstract class BaseRole extends Error {
 		return true;
 	}
 
+	function getDisplayableName($group = NULL) {
+		if ($this->getHomeProject() == NULL) {
+			return sprintf (_('%s (global role)'),
+					$this->getName ()) ;
+		} elseif ($group == NULL
+			  || $this->getHomeProject()->getID() != $group->getID()) {
+			return sprintf (_('%s (in project %s)'),
+					$this->getName (),
+					$this->getHomeProject()->getPublicName()) ;
+		} else {
+			return $this->getName () ;
+		}
+	}
+
+
 }
 
 // Actual classes

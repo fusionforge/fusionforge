@@ -29,6 +29,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	private $_cached_roles = array () ;
 	private $_cached_available_roles = NULL ;
 	private $_cached_global_roles = NULL ;
+	private $_cached_public_roles = NULL ;
 
 	public static function getInstance() {
 		if (!isset(self::$_instance)) {
@@ -87,8 +88,28 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $this->_cached_global_roles ;
 	}
 
+	public function getPublicRoles() {
+		if ($this->_cached_public_roles != NULL) {
+			return $this->_cached_public_roles ;
+		}
+
+		$this->_cached_public_roles = array () ;
+
+		if (USE_PFO_RBAC) {
+			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE is_public=$1',
+						array ('true'));
+			while ($arr =& db_fetch_array($res)) {
+				$this->_cached_public_roles[] = $this->getRoleById ($arr['role_id']) ;
+			}
+		}
+		
+		return $this->_cached_public_roles ;
+	}
+
 	public function invalidateRoleCaches () {
 		$this->_cached_available_roles = NULL ;
+		$this->_cached_global_roles = NULL ;
+		$this->_cached_public_roles = NULL ;
 	}
 
 	public function getAvailableRolesForUser($user) {

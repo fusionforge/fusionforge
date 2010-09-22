@@ -159,15 +159,10 @@ echo '
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
 
 if (USE_PFO_RBAC) {
-	if ($role->getHomeProject() == NULL) {
+	if ($role->getHomeProject() == NULL
+	    || $role->getHomeProject()->getID() != $group_id) {
 		echo '<p><strong>'._('Role Name').'</strong></p>' ;
-		printf (_('%s (global role)'),
-			$role->getName ()) ;
-	} elseif ($role->getHomeProject()->getID() != $group_id) {
-		echo '<p><strong>'._('Role Name').'</strong></p>' ;
-		printf (_('%s (in project %s)'),
-			$role->getName (),
-			$role->getHomeProject()->getPublicName()) ;
+		echo $role->getDisplayableName ($group) ;
 	} else {
 		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"><br />' ;
 		echo '<input type="checkbox" name="public" value="1"' ;
