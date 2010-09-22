@@ -333,7 +333,11 @@ abstract class BaseRole extends Error {
 				return false;
 			}
 			$this->data_array = db_fetch_array($res);
-			
+			if ($this->data_array['is_public'] == 't') {
+				$this->data_array['is_public'] = true ;
+			} else {
+				$this->data_array['is_public'] = false ;
+			}
 			$res = db_query_params ('SELECT section_name, ref_id, perm_val FROM pfo_role_setting WHERE role_id=$1',
 						array ($role_id)) ;
 			if (!$res) {

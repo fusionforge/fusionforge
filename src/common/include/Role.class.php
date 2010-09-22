@@ -149,8 +149,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *      @return boolean True if updated OK
 	 */
 	function setPublic ($flag) { // From the PFO spec
-		$res = db_query_params ('UPDATE pfo_role SET is_public=$1 WHERE role_id=$1',
-					array ($flag,
+		$res = db_query_params ('UPDATE pfo_role SET is_public=$1 WHERE role_id=$2',
+					array ($flag?'true':'false',
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('update::is_public::'.db_error());

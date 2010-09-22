@@ -102,8 +102,10 @@ if ($role_id=='observer') {
 		if (($role->getHomeProject() != NULL)
 		    && ($role->getHomeProject()->getID() == $group_id)) {
 			$role_name = trim(getStringFromRequest('role_name'));
+			$public = getIntFromRequest('public') ? true : false ;
 		} else {
 			$role_name = $role->getName() ;
+			$public = $role->isPublic() ;
 		}
 		if (!$role_name) {
 			$error_msg .= ' Missing Role Name ';
@@ -116,6 +118,7 @@ if ($role_id=='observer') {
 					$feedback = _('Successfully Created New Role');
 				}
 			} else {
+				$role->setPublic($public) ;
 				if (!$role->update($role_name,$data)) {
 					$error_msg .= $role->getErrorMessage();
 				} else {
@@ -157,18 +160,22 @@ echo '
 
 if (USE_PFO_RBAC) {
 	if ($role->getHomeProject() == NULL) {
-		echo '<p><strong>'._('Role Name').'</strong><br />' ;
+		echo '<p><strong>'._('Role Name').'</strong></p>' ;
 		printf (_('%s (global role)'),
 			$role->getName ()) ;
 	} elseif ($role->getHomeProject()->getID() != $group_id) {
-		echo '<p><strong>'._('Role Name').'</strong><br />' ;
+		echo '<p><strong>'._('Role Name').'</strong></p>' ;
 		printf (_('%s (in project %s)'),
 			$role->getName (),
 			$role->getHomeProject()->getPublicName()) ;
 	} else {
-		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'">' ;
+		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"><br />' ;
+		echo '<input type="checkbox" name="public" value="1"' ;
+		if ($role->isPublic()) {
+			echo ' checked' ;
+		}
+		echo '> '._('Shared role').'</p>' ;
 	}
-	echo '</p>';
 } else {
 	if ($role_id != 'observer') {
 		echo '<p><strong>'._('Role Name').'</strong><br />
