@@ -396,39 +396,38 @@ user_id=$1 ORDER BY bookmark_title',
 	$order_name_arr[]=_('Remove');
 	$order_name_arr[]=_('My Projects');
 	$order_name_arr[]=_('My Roles');
-    echo $HTML->listTableTop($order_name_arr);
+	echo $HTML->listTableTop($order_name_arr);
+	
+	$groups = $user->getGroups() ;
 
-	// Include both groups and foundries; developers should be similarly
-	// aware of membership in either.
-	$result = db_query_params ('SELECT groups.group_name,groups.group_id,groups.unix_group_name,groups.status,groups.type_id,user_group.admin_flags,role.role_name
-		FROM groups,user_group,role 
-		WHERE groups.group_id=user_group.group_id 
-		AND user_group.user_id=$1
-		AND groups.status=$2 
-		AND user_group.role_id=role.role_id 
-		ORDER BY group_name',
-				   array (user_getid(),
-					  'A')) ;
-	$rows=db_numrows($result);
-	if (!$result || $rows < 1) {
+	if (count ($groups) < 1) {
 		echo '<tr><td colspan="3"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
-		echo db_error();
 	} else {
-		for ($i=0; $i<$rows; $i++) {
-			$admin_flags = db_result($result, $i, 'admin_flags');
-			if (stristr($admin_flags, 'A')) {
-				$img="trash-x.png";
-			} else {
-				$img="trash.png";
+		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+		foreach ($groups as $g) {
+			$bestrole = NULL ;
+			$img="trash.png";
+			foreach ($roles as $r) {
+				if ($r instanceof RoleExplicit
+				    && $r->getHomeProject() != NULL
+				    && $r->getHomeProject()->getID() == $g->getID()) {
+					$bestrole = $r ;
+					if ($r->hasPermission ('project_admin', $g->getID())) {
+						$img="trash-x.png";
+						break ;
+					}
+				}
 			}
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-center">' ;
-			echo util_make_link ("/my/rmproject.php?group_id=" . db_result($result,$i,'group_id'),
+			echo util_make_link ("/my/rmproject.php?group_id=" . $g->getID(),
 					     '<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="'._('Delete').'" height="16" width="16" border="0" />') ;
 
 			echo '</td>
-			<td>'.util_make_link_g (db_result($result,$i,'unix_group_name'),db_result($result,$i,'group_id'),db_result($result,$i,'group_name')).'</td>
-			<td>'. htmlspecialchars(db_result($result,$i,'role_name')) .'</td></tr>';
+			<td>'.util_make_link_g ($g->getUnixName(),$g->getID(),$g->getPublicName()).'</td>
+			<td>'. htmlspecialchars($r->getName()) .'</td></tr>';
+
+
 		}
 	}
 	echo $HTML->listTableBottom();

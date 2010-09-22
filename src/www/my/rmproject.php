@@ -40,6 +40,30 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(),'my');
 }
 
+/*
+	Main code
+*/
+
+$roles = RBACEngine::getInstance()->getAvailableRolesForUser (session_get_user()) ;
+
+$isadmin = false ;
+foreach ($roles as $r) {
+	if ($r instanceof RoleExplicit
+	    && $r->getHomeProject() != NULL
+	    && $r->getHomeProject()->getID() == $group_id
+	    && $r->hasPermission ('project_admin', $group_id)) {
+		$isadmin = true ;
+	}
+}
+
+
+if ($isadmin) {
+	exit_error(
+		sprintf (_('You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="%s">Help Wanted Board</a> and be ready to pass admin privilege to interested party.'),
+			 util_make_url ("/people/")
+			) ,'my');
+}
+
 if (getStringFromRequest('confirm')) {
 
 	$user_id = user_getid();
@@ -50,17 +74,6 @@ if (getStringFromRequest('confirm')) {
 		session_redirect("/my/");
 	}
 
-}
-
-/*
-	Main code
-*/
-
-if (forge_check_perm ('project_admin', $group_id)) {
-	exit_error(
-		sprintf (_('You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="%s">Help Wanted Board</a> and be ready to pass admin privilege to interested party.'),
-			 util_make_url ("/people/")
-			) ,'my');
 }
 
 site_user_header(array('title'=>_('Quitting Project')));
@@ -91,5 +104,10 @@ echo '
 ';
 
 site_user_footer(array());
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -1140,10 +1140,23 @@ Enjoy the site.
 	 *	@return array	Array of groups.
 	 */
 	function &getGroups() {
-		$res = db_query_params ('SELECT group_id FROM user_group WHERE user_id=$1',
-					array ($this->getID())) ;
-		$arr =& util_result_column_to_array($res,0);	
-		return group_get_objects($arr);
+
+		if (USE_PFO_RBAC) {
+			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($this) ;
+			$ids = array () ;
+			foreach ($roles as $r) {
+				if ($r instanceof RoleExplicit
+				    && $r->getHomeProject() != NULL) {
+					$ids[] = $r->getHomeProject()->getID() ;
+				}
+			}
+			return group_get_objects(array_unique($ids)) ;
+		} else {
+			$res = db_query_params ('SELECT group_id FROM user_group WHERE user_id=$1',
+						array ($this->getID())) ;
+			$arr =& util_result_column_to_array($res,0);	
+			return group_get_objects($arr);
+		}
 	}
 
 	/**
