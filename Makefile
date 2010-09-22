@@ -53,7 +53,7 @@ checkfull:
 	cd tests ; php AllFullTests.php
 
 checkdebtools:
-	sudo apt-get install php5-cli phpunit php-htmlpurifier pcregrep moreutils #ubuntu-keyring
+	sudo apt-get install php5-cli phpunit php-htmlpurifier pcregrep moreutils createrepo #ubuntu-keyring
 
 buildtar: $(BUILDRESULT)
 	rm -fr /tmp/$(VERSION)
