@@ -205,18 +205,18 @@ if (!$pm->PluginIsInstalled('scmcvs')) {
 
 //get the directories from the plugins dir
 
-$handle = opendir($sys_plugins_path);
 $filelist = array();
-while (($filename = readdir($handle)) !== false) {
-	if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
-		is_dir($sys_plugins_path.'/'.$filename) &&
-		!in_array($filename, $plugins_disabled)) {
+if($handle = opendir($sys_plugins_path)) {
+	while (($filename = readdir($handle)) !== false) {
+		if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
+		    is_dir($sys_plugins_path.'/'.$filename) &&
+		    !in_array($filename, $plugins_disabled)) {
 
-		$filelist[] = $filename;
+			$filelist[] = $filename;
+		}
 	}
+	closedir($handle);
 }
-closedir($handle);
-
 sort($filelist);
 
 $j = 0;
