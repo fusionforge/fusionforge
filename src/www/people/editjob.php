@@ -144,15 +144,15 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>_('Edit Job')));
 
 	//for security, include group_id
 	$result=db_query_params("SELECT * FROM people_job WHERE job_id=$1 AND group_id=$2", array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
 		$error_msg .= sprintf(_('POSTING fetch FAILED: %s'),db_error());
-		echo '<h2>'._('No such posting for this project').'</h2>';
+	    people_header(array('title'=>_('Edit Job')));
 	} else {
 
+	    people_header(array('title'=>_('Edit Job')));
 		echo _('<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>').'
 
 		<p /><form action="'.getStringFromServer('PHP_SELF').'" method="post">
@@ -174,7 +174,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		</form>';
 
 		//now show the list of desired skills
-		echo '<p>'.people_edit_job_inventory($job_id,$group_id) . '</p>';
+		echo '<p>'.people_edit_job_inventory($job_id,$group_id).'</p>';
 		echo '<p /><form action="/people/" method="post"><input type="submit" name="submit" value="'._('Finished').'" /></form>';
 
 	}

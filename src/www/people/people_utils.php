@@ -28,12 +28,12 @@ function people_header($params) {
 	global $group_id,$job_id,$HTML;
 
 	if ($group_id) {
-		$params['toptab']='people';
+		$params['toptab']='admin';
 		$params['group']=$group_id;
-		echo site_project_header($params);
+		site_project_header($params);
 	} else if (strstr($_SERVER['HTTP_REFERER'],'account')){
 		$params['toptab']='my';
-		echo site_user_header($params);
+		site_user_header($params);
 	} else {
 		echo $HTML->header($params);
 	}
@@ -54,7 +54,7 @@ function people_skill_box($name='skill_id',$checked='xyxy') {
 		//will be used many times potentially on a single page
 		$PEOPLE_SKILL=db_query_params("SELECT * FROM people_skill ORDER BY name ASC", array());
 	}
-	return html_build_select_box($PEOPLE_SKILL,$name,$checked);
+	return html_build_select_box($PEOPLE_SKILL,$name,'xzxz',false);
 }
 
 function people_skill_level_box($name='skill_level_id',$checked='xyxy') {
@@ -305,8 +305,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 		if (db_error()) {
 			exit_error(db_error(),'admin');
 		} else {
-			echo '
-			<tr><td colspan="4"><h2>'._('No Skill Inventory Set Up').'</h2></td></tr>';
+			echo '<tr><td colspan="4"><h2>'._('No Skill Inventory Set Up').'</h2></td></tr>';
 		}
 	} else {
 		for ($i=0; $i < $rows; $i++) {
