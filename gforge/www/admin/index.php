@@ -176,6 +176,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	}
 	if($GLOBALS['sys_use_project_database']) { ?>
 		<li><a href="database.php"><?php echo _('Project Database Administration'); ?></a></li>
+	<?php }
+	if($GLOBALS['sys_use_people']) { ?>
+        <li><a href="<?php echo util_make_url ('/people/admin/'); ?>"><?php echo _('Job / Categories Administration'); ?></a></li>
 	<?php } ?>
 </ul>
 <?php }
