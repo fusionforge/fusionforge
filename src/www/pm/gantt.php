@@ -1,7 +1,30 @@
 <?php
+/**
+ * Project Management Facility
+ *
+ * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
 
 if (!file_exists(forge_get_config('jpgraph_path').'/jpgraph.php')) {
-	exit_error('Error', 'Package JPGraph not installed');
+	exit_error(_('Package JPGraph not installed'),'pm');
 }
 
 require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
@@ -11,9 +34,9 @@ require_once $gfwww.'include/unicode.php';
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
-	exit_error('Error','Could Not Get ProjectTaskFactory');
+	exit_error(_('Could Not Get ProjectTaskFactory'),'pm');
 } elseif ($ptf->isError()) {
-	exit_error('Error getting PTF',$ptf->getErrorMessage());
+	exit_error(_('Error getting PTF: ').$ptf->getErrorMessage(),'pm');
 }
 
 $offset = getIntFromRequest('offset');
@@ -27,12 +50,12 @@ $max_rows = getIntFromRequest('max_rows',50);
 
 $ptf->setup($offset,$_order,$max_rows,'custom',$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
-	exit_error('Error in PTF',$ptf->getErrorMessage());
+	exit_error(_('Error in PTF: ').$ptf->getErrorMessage(),'pm');
 }
 
 $pt_arr =& $ptf->getTasks();
 if ($ptf->isError()) {
-	exit_error('Error',$ptf->getErrorMessage());
+	exit_error($ptf->getErrorMessage(),'pm');
 }
 
 if ($_size==640) {

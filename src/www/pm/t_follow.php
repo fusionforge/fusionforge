@@ -33,23 +33,13 @@ $tid = getIntFromRequest('tid');
 if (!$tid)
 	$tid = util_path_info_last_numeric_component();
 if (!$tid) {
-	header("HTTP/1.0 404 Not Found");
-	echo "You forgot to pass the tid.\n";
-	exit;
+    exit_missing_param('',array(_('TID')),'pm');
 }
 
 $tinfo = getGroupProjectIdGroupId($tid);
 
 if (!$tinfo) {
-	header("HTTP/1.0 404 Not Found");
-	echo "There is no task with id ".$tid."!\n";
-	exit;
+    exit_error(_('no task with id :').$tid,'pm');
 }
 
-$dsturl = util_make_url("/pm/task.php?func=detailtask&project_task_id=" .
-    $tinfo['project_task_id'] . "&group_id=" . $tinfo['group_id'] .
-    "&group_project_id=" . $tinfo['group_project_id']);
-header("HTTP/1.0 302 Found");
-header("Location: " . $dsturl);
-echo "The result is at:\n" . $dsturl . "\n";
-exit;
+session_redirect('/pm/task.php?func=detailtask&project_task_id='.$tinfo['project_task_id'].'&group_id='.$tinfo['group_id'].'&group_project_id='.$tinfo['group_project_id']);

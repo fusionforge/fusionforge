@@ -1,10 +1,31 @@
 <?php
 /**
+ * Project Management Facility : Display Calendar
+ *
+ * Copyright 2002 GForge, LLC
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+/**
  *
  * Display a calendar.
  * This file displays various sorts of calendars.
- *
- * Copyright 2002 (c) GForge Development Team
  *
  * @todo some locales start the week with "Monday", and not "Sunday".
  * @todo display holidays.
@@ -12,6 +33,7 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfwww.'pm/include/ProjectGroupHTML.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $group_project_id = getIntFromRequest('group_project_id');
@@ -22,30 +44,25 @@ $type = getStringFromRequest('type');
 
 // Some sanity checks first.
 if ($year && ($year < 1990 || $year > 2020)) {
-	exit_error(_('Invalid year'),
-		   _('Not between 1990 and 2000'));
+	exit_error(_('Invalid year: Not between 1990 and 2000'),'pm');
 }
 
 if ($month && ($month < 1 || $month > 12)) {
-	exit_error(_('Invalid month'),
-		   _('Not between 1 and 12'));
+	exit_error(_('Invalid month: Not between 1 and 12'),'pm');
 }
 
 if ($day && ($day < 1 || $day > 31)) {
-	exit_error(_('Invalid day'),
-		   _('Not between 1 and 31'));
+	exit_error(_('Invalid day: Not between 1 and 31'),'pm');
 }
 
 if ($year && isset($month) && isset($day)) {
 	if (!checkdate($month, $day, $year)) {
-		exit_error(_('Invalid date'),
-			   sprintf(_('Date not valid'), "$year-$month-$day"));
+		exit_error(_('Invalid date').sprintf(_('Date not valid'), "$year-$month-$day"),'pm');
 	}
 }
 
 if ($type && $type != 'onemonth' && $type != 'threemonth' && $type != 'currentyear' && $type != 'comingyear') {
-	exit_error(_('Invalid type'),
-		   _('Type not in onemonth, threemonth, currentyear, comingyear'));
+	exit_error(_('Invalid type: Type not in onemonth, threemonth, currentyear, comingyear'),'pm');
 }
 
 // Fill in defaults
@@ -80,20 +97,20 @@ if ($group_id && $group_project_id) {
 	if (!$g || !is_object($g)) {
 		exit_no_group();
 	} elseif ($g->isError()) {
-		exit_error(_('ERROR'), $g->getErrorMessage());
+		exit_error($g->getErrorMessage(),'pm');
 	}
 	$pg = new ProjectGroup($g, $group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error(_('ERROR'), 'BUG: Could Not Get Factory');
+		exit_error(_('Error: Could Not Get Factory'),'pm');
 	} elseif ($pg->isError()) {
-		exit_error(_('ERROR'), $pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'pm');
 	}
 
 	$ptf = new ProjectTaskFactory($pg);
 	if (!$ptf || !is_object($ptf)) {
-		exit_error(_('ERROR'), 'BUG: Could Not Get ProjectTaskFactory');
+		exit_error(_('Error: Could Not Get ProjectTaskFactory'),'pm');
 	} elseif ($ptf->isError()) {
-		exit_error(_('ERROR'), $ptf->getErrorMessage());
+		exit_error($ptf->getErrorMessage(),'pm');
 	}
 	// Violate all known laws about OOP here
 	$ptf->offset=0;
@@ -104,11 +121,11 @@ if ($group_id && $group_project_id) {
 	$ptf->category=0;
 	$pt_arr =& $ptf->getTasks();
 	if ($ptf->isError()) {
-		exit_error(_('ERROR'), $ptf->getErrorMessage());
+		exit_error($ptf->getErrorMessage(),'pm');
 	}
 }
 
-$HTML->header(array('title'=>_('Calendar'),'group'=>$group_id));
+pm_header(array('title'=>_('Calendar'),'group'=>$group_id));
 
 /**
  * Create link to a task.
@@ -319,7 +336,7 @@ if ($type == 'onemonth') {
 	}
 }
 
-$HTML->footer(array());
+pm_footer(array());
 
 // Local Variables:
 // mode: php

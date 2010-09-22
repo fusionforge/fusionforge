@@ -80,14 +80,14 @@ $g =& group_get_object($group_id);
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {
-	exit_error(_('Error'),$g->getErrorMessage());
+	exit_error($g->getErrorMessage(),'pm');
 }
 
 $pg = new ProjectGroupHTML($g,$group_project_id);
 if (!$pg || !is_object($pg)) {
-	exit_error(_('Error'),_('Could Not Get Factory'),'pm');
+	exit_error(_('Could Not Get Factory'),'pm');
 } elseif ($pg->isError()) {
-	exit_error(_('Error'),$pg->getErrorMessage(),'pm');
+	exit_error($pg->getErrorMessage(),'pm');
 }
 
 /*
@@ -103,9 +103,9 @@ switch (getStringFromRequest('func')) {
 
 		$pt=new ProjectTaskHTML($pg);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get ProjectTask'),'pm');
+			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		include $gfwww.'pm/add_task.php';
 		break;
@@ -121,15 +121,15 @@ switch (getStringFromRequest('func')) {
 		
 		$pt = new ProjectTask($pg);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get Empty ProjectTask'),'pm');
+			exit_error(_('Could Not Get Empty ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		
 		$saved_hours = $hours;
 		$hours = (float) $hours;
 		if ( $saved_hours !== (string)$hours ) {
-			exit_error(_('Error'), _('Illegal format for hours: must be an integer or a float number.'),'pm');
+			exit_error(_('Illegal format for hours: must be an integer or a float number.'),'pm');
 		}
 		
 		if (!$dependent_on)
@@ -141,11 +141,11 @@ switch (getStringFromRequest('func')) {
 		
 		
 		if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		} else {
 			if (count($add_artifact_id) > 0) {
 				if (!$pt->addRelatedArtifacts($add_artifact_id)) {
-					exit_error(_('Error'),'addRelatedArtifacts():: '.$pt->getErrorMessage());
+					exit_error('addRelatedArtifacts():: '.$pt->getErrorMessage());
 				}
 			}
 			$feedback=_('Task Created Successfully');
@@ -168,15 +168,15 @@ switch (getStringFromRequest('func')) {
 		
 		$pt = new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get ProjectTask'),'pm');
+			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		
 		$saved_hours = $hours;
 		$hours = (float) $hours;
 		if ( $saved_hours !== (string)$hours ) {
-			exit_error(_('Error'), _('Illegal format for hours: must be an integer or a float number.'),'pm');
+			exit_error(_('Illegal format for hours: must be an integer or a float number.'),'pm');
 		}
 		
 		if (!$dependent_on)	{
@@ -186,11 +186,11 @@ switch (getStringFromRequest('func')) {
 		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 		if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
 				 $status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
-			exit_error(_('Error'),'update():: '.$pt->getErrorMessage());
+			exit_error('update():: '.$pt->getErrorMessage());
 		} else {
 			if (count($rem_artifact_id) > 0) {
 				if (!$pt->removeRelatedArtifacts($rem_artifact_id)) {
-					exit_error(_('Error'),'removeRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
+					exit_error('removeRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
 				}
 			}
 			$feedback=_('Task Updated Successfully');
@@ -240,9 +240,9 @@ switch (getStringFromRequest('func')) {
 		for ($i=0; $i < $count; $i++) {
 			$pt=new ProjectTask($pg,$project_task_id_list[$i]);
 			if (!$pt || !is_object($pt)) {
-				$feedback .= ' ID: '.$project_task_id_list[$i].'::ProjectTask Could Not Be Created';
+				$error_msg .= ' ID: '.$project_task_id_list[$i].'::ProjectTask Could Not Be Created';
 			} else if ($pt->isError()) {
-				$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
+				$error_msg .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 			} else {
 
 				$mass_summary=addslashes(util_unconvert_htmlspecialchars($pt->getSummary()));
@@ -303,12 +303,12 @@ switch (getStringFromRequest('func')) {
 		
 		$pt = new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get ProjectTask'),'pm');
+			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		if (!$pt->addRelatedArtifacts($add_artifact_id)) {
-			exit_error(_('Error'),'addRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
+			exit_error('addRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
 		} else {
 			$feedback=_('Successfully Added Tracker Relationship');
 			include $gfwww.'pm/browse_task.php';
@@ -325,9 +325,9 @@ switch (getStringFromRequest('func')) {
 
 		$pt= new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get ProjectTask'),'pm');
+			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		include $gfwww.'pm/deletetask.php';
 		break;
@@ -342,9 +342,9 @@ switch (getStringFromRequest('func')) {
 
 		$pt= new ProjectTask($pg, $project_task_id);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get ProjectTask'),'pm');
+			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'), $pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		if (!getStringFromRequest('confirm_delete')) {
 			$warning_msg.= _('Confirmation failed. Task not deleted');
@@ -382,9 +382,9 @@ switch (getStringFromRequest('func')) {
 	case 'detailtask' : {
 		$pt=new ProjectTaskHTML($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {
-			exit_error(_('Error'),_('Could Not Get ProjectTask'),'pm');
+			exit_error(_('Could Not Get ProjectTask'),'pm');
 		} elseif ($pt->isError()) {
-			exit_error(_('Error'),$pt->getErrorMessage(),'pm');
+			exit_error($pt->getErrorMessage(),'pm');
 		}
 		if (forge_check_perm ('pm', $pg->getID(), 'manager')) {
 			include $gfwww.'pm/mod_task.php';

@@ -378,22 +378,22 @@ function session_require($req, $reason='') {
 
 		$perm =& $group->getPermission ();
 		if (!$perm || !is_object($perm) || $perm->isError()) {
-			exit_permission_denied($reason);
+			exit_permission_denied($reason,'');
 		}
 
 		if (isset($req['admin_flags']) && $req['admin_flags']) {
 			if (!$perm->isAdmin()) {
-				exit_permission_denied($reason);
+				exit_permission_denied($reason,'');
 			}
 		} else {
 			if (!$perm->isMember()) {
-				exit_permission_denied($reason);
+				exit_permission_denied($reason,'');
 			}
 		}
 	} else if ($req['isloggedin']) {
 		//no need to check as long as the check is present at top of function
 	} else {
-		exit_permission_denied($reason);
+		exit_permission_denied($reason,'');
 	}
 }
 
@@ -406,7 +406,7 @@ function session_require($req, $reason='') {
  */
 function session_require_perm ($section, $reference, $action = NULL, $reason='') {
 	if (!forge_check_perm ($section, $reference, $action)) {
-		exit_permission_denied ($reason);
+		exit_permission_denied ($reason,'');
 	}		
 }
 
@@ -419,7 +419,7 @@ function session_require_perm ($section, $reference, $action = NULL, $reason='')
  */
 function session_require_global_perm ($section, $action = NULL, $reason='') {
 	if (!forge_check_global_perm ($section, $action)) {
-		exit_permission_denied ($reason);
+		exit_permission_denied ($reason,'');
 	}		
 }
 

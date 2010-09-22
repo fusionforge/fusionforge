@@ -1,19 +1,28 @@
 <?php
 /**
- * GForge Project Management Facility
+ * Project Management Facility : Admin
  *
- * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * Copyright 1999/2000, Sourceforge.net Tim Perdue
+ * Copyright 2002 GForge, LLC, Tim Perdue
+ * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-/*
-
-	Tasks
-	By Tim Perdue, Sourceforge, 11/99
-	Heavy rewrite by Tim Perdue April 2000
-
-	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
-*/
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -36,7 +45,7 @@ $g =& group_get_object($group_id);
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+	exit_error($g->getErrorMessage(),'pm');
 }
 
 $update_cat = getStringFromRequest('update_cat');
@@ -50,9 +59,9 @@ if (getStringFromRequest('post_changes')) {
 	*/
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error','Unable to create ProjectCategory Object');
+		exit_error(_('Unable to create ProjectCategory Object'),'pm');
 	} elseif ($pg->isError()) {
-		exit_error('Error',$pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'pm');
 	}
 
 	if (getStringFromRequest('addproject')) {
@@ -66,11 +75,10 @@ if (getStringFromRequest('post_changes')) {
 		*/
 		session_require_perm ('pm_admin', $group_id) ;
 		if (!$pg->create($project_name,$description,$is_public,$send_all_posts_to)) {
-			exit_error('Error',$pg->getErrorMessage());
+			exit_error($pg->getErrorMessage(),'pm');
 		} else {
 			$feedback .= _('Subproject Inserted');
-			$feedback .= '<br />';
-			$feedback .= _("Please configure also the roles (by default, it's 'No Access')");
+			$warning_msg .= _("Please configure also the roles (by default, it's 'No Access')");
 		}
 
 	} else if ($add_cat) {
@@ -83,10 +91,10 @@ if (getStringFromRequest('post_changes')) {
 
 		$pc = new ProjectCategory($pg);
 		if (!$pc || !is_object($pc)) {
-			exit_error('Error','Unable to create ProjectCategory Object');
+			exit_error(_('Unable to create ProjectCategory Object'),'pm');
 		} else {
 			if (!$pc->create($name)) {
-				exit_error('Error','Error inserting: '.$pc->getErrorMessage());
+				exit_error(_('Error inserting: ').$pc->getErrorMessage(),'pm');
 			} else {
 				$feedback .= _('Category Inserted');
 			}
@@ -103,12 +111,12 @@ if (getStringFromRequest('post_changes')) {
 
 		$pc = new ProjectCategory($pg,$id);
 		if (!$pc || !is_object($pc)) {
-			exit_error('Error','Unable to create ProjectCategory Object');
+			exit_error(_('Unable to create ProjectCategory Object'),'pm');
 		} elseif ($pc->isError()) {
-			exit_error('Error',$pc->getErrorMessage());
+			exit_error($pc->getErrorMessage(),'pm');
 		} else {
 			if (!$pc->update($name)) {
-				exit_error('Error','Error updating: '.$pc->getErrorMessage());
+				exit_error(_('Error updating: '.$pc->getErrorMessage()),'pm');
 			} else {
 				$feedback .= _('Category Updated');
 				$update_cat=false;
@@ -127,7 +135,7 @@ if (getStringFromRequest('post_changes')) {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
-			exit_error('Error',$pg->getErrorMessage());
+			exit_error($pg->getErrorMessage(),'pm');
 		} else {
 			$feedback .= _('Updated successfully');
 		}
@@ -143,7 +151,7 @@ if (getStringFromRequest('post_changes')) {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
-			exit_error('Error',$pg->getErrorMessage());
+			exit_error($pg->getErrorMessage(),'pm');
 		} else {
 			$feedback .= _('Successfully Deleted');
 			$group_project_id=0;
@@ -161,9 +169,9 @@ if ($add_cat && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error','Unable to create ProjectCategory Object');
+		exit_error(_('Unable to create ProjectCategory Object'),'pm');
 	} elseif ($pg->isError()) {
-		exit_error('Error',$pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'pm');
 	}
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
@@ -225,22 +233,22 @@ if ($add_cat && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error','Unable to create ProjectCategory Object');
+		exit_error(_('Unable to create ProjectCategory Object'),'pm');
 	} elseif ($pg->isError()) {
-		exit_error('Error',$pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'pm');
 	}
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Modify a Category in: %s'), $pg->getName());
-	pm_header(array ('title'=>$title));
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
-		$feedback .= 'Unable to create ProjectCategory Object';
+		exit_error(_('Unable to create ProjectCategory Object'),'pm');
 	} elseif ($ac->isError()) {
-		$feedback .= $ac->getErrorMessage();
+		exit_error($ac->getErrorMessage(),'pm');
 	} else {
+	    pm_header(array ('title'=>$title));
 		?>
 		<p />
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post" />
@@ -251,7 +259,7 @@ if ($add_cat && $group_project_id) {
 		<strong><?php echo _('Category Name')?>:</strong><br />
 		<input type="text" name="name" value="<?php echo $ac->getName(); ?>" />
 		<p />
-		<span class="important"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></span>
+		<div class="warning"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></div>
 		<p />
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
 		</form>
@@ -299,14 +307,14 @@ if ($add_cat && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error','Could Not Get ProjectGroup');
+		exit_error(_('Could Not Get ProjectGroup'),'pm');
 	} elseif ($pg->isError()) {
-		exit_error('Error',$pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'pm');
 	}
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-	pm_header(array('title'=>_('Change Tasks Status')));
+	pm_header(array('title'=>_('Update Subproject Tasks: ').$pg->getName()));
 
 	?>
 	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>
@@ -364,9 +372,9 @@ if ($add_cat && $group_project_id) {
 
 	$pg = new ProjectGroup($g,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error','Could Not Get ProjectGroup');
+		exit_error(_('Could Not Get ProjectGroup'),'pm');
 	} elseif ($pg->isError()) {
-		exit_error('Error',$pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'pm');
 	}
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
@@ -391,6 +399,13 @@ if ($add_cat && $group_project_id) {
 
 } else {
 
+	$pgf = new ProjectGroupFactory($g);
+	if (!$pgf || !is_object($pgf)) {
+		exit_error(_('Could Not Get Factory'),'pm');
+	} elseif ($pgf->isError()) {
+		exit_error($pgf->getErrorMessage(),'pm');
+	}
+
 	/*
 		Show main page
 	*/
@@ -406,13 +421,6 @@ if ($add_cat && $group_project_id) {
 		<?php echo _('Add a subproject, which can contain a set of tasks. This is different than creating a new task.') ?>
 		<p />
 		<?php
-	}
-
-	$pgf = new ProjectGroupFactory($g);
-	if (!$pgf || !is_object($pgf)) {
-		exit_error('Error','Could Not Get Factory');
-	} elseif ($pgf->isError()) {
-		exit_error('Error',$pgf->getErrorMessage());
 	}
 
 	$pg_arr =& $pgf->getProjectGroups();

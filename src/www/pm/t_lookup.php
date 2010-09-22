@@ -32,17 +32,13 @@ $tid = getIntFromRequest('tid');
 if (!$tid)
 	$tid = util_path_info_last_numeric_component();
 if (!$tid) {
-	header("HTTP/1.0 404 Not Found");
-	echo "You forgot to pass the tid.\n";
-	exit;
+    exit_missing_param('',array(_('Task ID')),'pm');
 }
 
 $tinfo = getGroupProjectIdGroupId($tid);
 
 if (!$tinfo) {
-	header("HTTP/1.0 404 Not Found");
-	echo "There is no task with id ".$tid."!\n";
-	exit;
+    exit_error(_('No Task with ID: ').$tid,'pm');
 }
 
 $asuser = getStringFromRequest('asuser');

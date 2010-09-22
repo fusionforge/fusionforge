@@ -332,7 +332,7 @@ abstract class BaseRole extends Error {
 				$this->setError('BaseRole::fetchData()::'.db_error());
 				return false;
 			}
-			$this->data_array =& db_fetch_array($res);
+			$this->data_array = db_fetch_array($res);
 			
 			$res = db_query_params ('SELECT section_name, ref_id, perm_val FROM pfo_role_setting WHERE role_id=$1',
 						array ($role_id)) ;
@@ -341,7 +341,7 @@ abstract class BaseRole extends Error {
 				return false;
 			}
 			$this->perms_array=array();
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$this->perms_array[$arr['section_name']][$arr['ref_id']] = $arr['perm_val'];
 			}
 		} else {

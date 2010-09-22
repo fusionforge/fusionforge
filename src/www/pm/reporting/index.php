@@ -46,7 +46,7 @@ $g =& group_get_object($group_id);
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+	exit_error($g->getErrorMessage(),'pm');
 }
 
 session_require_perm ('pm_admin', $group_id) ;
@@ -244,7 +244,7 @@ GROUP BY Technician',
 		  _('<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>'));
 
 	} else {
-		exit_missing_param();
+		exit_missing_param('','','pm');
 	}
 
 } else {

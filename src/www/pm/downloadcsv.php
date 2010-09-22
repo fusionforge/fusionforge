@@ -95,14 +95,14 @@ header('Content-disposition: filename="tasks-'.$date.'.csv"');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
-    exit_error('Error','Could Not Get ProjectTaskFactory');
+    exit_error(_('Could Not Get ProjectTaskFactory'),'pm');
 } elseif ($ptf->isError()) {
-    exit_error('Error',$ptf->getErrorMessage());
+    exit_error($ptf->getErrorMessage(),'pm');
 }
 $ptf->order='external_id';
 $pt_arr =& $ptf->getTasks();
 if ($ptf->isError()) {
-    exit_error('Error',$ptf->getErrorMessage());
+    exit_error($ptf->getErrorMessage(),'pm');
 }
 
 //
