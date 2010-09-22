@@ -6,7 +6,6 @@
  * Copyright 2010 FusionForge Team
  * http://fusionforge.org/
  *
- *
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -30,9 +29,6 @@ require_once $gfwww.'admin/admin_utils.php';
 
 // Skip non compatible plugins.
 $plugins_disabled = array('webcalendar', 'scmccase');
-
-site_admin_header(array('title'=>_('Plugin Manager')));
-echo '<h1>' . _('Plugin Manager') . '</h1>';
 
 ?>
 
@@ -176,9 +172,8 @@ if (getStringFromRequest('update')) {
 	}
 }
 
-if (!empty($feedback)) echo '<div class="feedback">' . $feedback . '</div>';
-if (!empty($warning_msg)) echo '<div class="warning">' . $warning_msg . '</div>';
-if (!empty($error_msg)) echo '<div class="error">' . $error_msg . '</div>';
+site_admin_header(array('title'=>_('Plugin Manager')));
+echo '<h1>' . _('Plugin Manager') . '</h1>';
 echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br /><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br />Be <strong>extra</strong> careful not to run the init-script again when the plugin is reactivated, because some scripts have DROP TABLE statements.</span><br /><br />');
 $title_arr = array( _('Plugin Name'),
 		    _('Status'),

@@ -33,11 +33,9 @@ session_require_perm ('project_admin', $group_id) ;
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error(_('Error'),
-		_('Error creating group'));
+    exit_no_group();
 } else if ($group->isError()) {
-	exit_error(_('Error'),
-		$group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'admin');
 }
 
 // If this was a submission, make updates
@@ -89,7 +87,7 @@ if (getStringFromRequest('submit')) {
 	//100 $logo_image_id
 
 	if (!$res) {
-		$feedback = $group->getErrorMessage();
+		$error_msg = $group->getErrorMessage();
 	} else {
 		$feedback = _('Group information updated');
 	}

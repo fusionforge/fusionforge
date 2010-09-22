@@ -33,8 +33,10 @@ require_once $gfcommon.'reporting/ReportSetup.class.php';
 session_require_global_perm ('forge_stats', 'read') ;
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
+$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 
-echo report_header('Main Page');
+report_header('Main Page');
 
 ?>
 <h2><?php echo _('Users'); ?></h2>
@@ -75,6 +77,6 @@ echo report_header('Main Page');
 }
 
 plugin_hook ("reporting_reference", array());
-echo report_footer();
+report_footer();
 
 ?>

@@ -9,22 +9,22 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -42,9 +42,9 @@ session_require_perm ('project_admin', $group_id) ;
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error(_('Error'), _('Error creating group'));
+	exit_no_group();
 } else if ($group->isError()) {
-	exit_error(_('Error'), $group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'admin');
 }
 
 if (getStringFromRequest('createdb')) {
@@ -64,14 +64,13 @@ if (getStringFromRequest('createdb')) {
 			VALUES($1, $2, $2, $3, $4, $5, $6 ,2)", array($group_id, $dbname, $randompw, time(), $newdbtypeid, $LUSER->getID()));
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= _('Cannot add database entry').': '.db_error();
+		$error_msg .= _('Cannot add database entry').': '.db_error();
 	} else {
 	
 		$feedback .= _('Database scheduled for creation');
 		group_add_history('Created database '.$dbname.' type '.$row_db['dbsoftware'].' ','',$group_id);
 	
 	}
-
 }
 
 if (getStringFromRequest('updatedbrec')) {
@@ -97,7 +96,7 @@ if (getStringFromRequest('updatedbrec')) {
 				$group_id)); 
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= "Update failure - ".db_error()."";
+			$error_msg .= "Update failure - ".db_error()."";
 		} else {
 			$res = db_query_params ('
 				SELECT * 
@@ -110,7 +109,7 @@ if (getStringFromRequest('updatedbrec')) {
 		}
 	} else {
 
-		$feedback .= "Operation failed.  Password and Password Confirm are not the same";
+		$error_msg .= "Operation failed.  Password and Password Confirm are not the same";
 
 	}
 
@@ -131,7 +130,7 @@ if (getStringFromRequest('deletedbconfirm')) {
 				$group_id));
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$feedback .= 'Cannot delete database: '.db_error();
+		$error_msg .= 'Cannot delete database: '.db_error();
 	} else {
 		$feedback .= "Database scheduled for deletion";
 	}

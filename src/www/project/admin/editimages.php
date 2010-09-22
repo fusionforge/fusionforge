@@ -2,24 +2,24 @@
 /**
  * Project Admin: Edit Multimedia Data
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -39,13 +39,13 @@ $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_admin', $group_id) ;
 
 function check_file_size($size) {
-	global $feedback;
+	global $error_msg;
 
 	if (($size > 20) && ($size < 256000)) {
 		return true;
 	} else {
 		//too big or small
-		$feedback .= _('ERROR - file must be > 20 bytes and < 256000 bytes in length').' <br />';
+		$error_msg .= _('ERROR - file must be > 20 bytes and < 256000 bytes in length').' <br />';
 		return false;
 	}
 }
@@ -54,9 +54,10 @@ function store_file($id, $input_file) {
 	global $group_id;
 	global $description;
 	global $feedback;
+	global $error_msg;
 
 	if (!util_check_fileupload($input_file)) {
-		exit_error("Error","Invalid filename");
+		exit_error(_('Invalid filename'),'admin');
 	}
 
 	$filename = $input_file['tmp_name'];
@@ -98,8 +99,7 @@ function store_file($id, $input_file) {
 
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'ERROR: DB: Cannot store multimedia file<br />';
-			echo db_error();
+			$error_msg .= _('ERROR: DB: Cannot store multimedia file : ').db_error();
 		} else {
 			$feedback .= _('Multimedia File Uploaded');
 		}
@@ -118,7 +118,7 @@ if (getStringFromRequest('submit')) {
 
 	if (getStringFromRequest('add')) {
 		if (!$input_file['tmp_name'] || $description == "") {
-			$feedback .= _('Both file name and description are required');
+			$error_msg .= _('Both file name and description are required');
 		} else {
 			//see if they have too many data in the system
 			$res=db_query_params ('SELECT sum(filesize) WHERE group_id=$1',
@@ -126,7 +126,7 @@ if (getStringFromRequest('submit')) {
 			if (db_result($res,0,'sum') < $QUOTA) {
 				store_file(0, $input_file);
 			} else {
-				$feedback .= ' Sorry - you are over your '.$QUOTA.' quota ';
+				$error_msg .= ' Sorry - you are over your '.$QUOTA.' quota ';
 			}
 		}
 
@@ -137,15 +137,14 @@ if (getStringFromRequest('submit')) {
 				$group_id));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'ERROR: DB: Cannot delete multimedia file<br />';
-			echo db_error();
+			$error_msg .= _('ERROR: DB: Cannot delete multimedia file: ').db_error();
 		} else {
 			$feedback .= _('Multimedia File Deleted');
 		}
 
 	} else if (getStringFromRequest("edit")) {
 		if ($description == "") {
-			$feedback .= _('File description is required').'<b />';
+			$error_msg .= _('File description is required');
 		} else {
 			if (!$input_file['tmp_name']) {
 
@@ -162,10 +161,9 @@ if (getStringFromRequest('submit')) {
 				$id));
 
 				if (!$res || db_affected_rows($res) < 1) {
-					$feedback .= 'ERROR: DB: Cannot update multimedia file<br />';
-					echo db_error();
+					$error_msg .= _('ERROR: DB: Cannot update multimedia file').db_error();
 				} else {
-					$feedback .= _('Multimedia File Properties Updated').'<br />';
+					$feedback .= _('Multimedia File Properties Updated');
 				}
 
 			} else {
@@ -192,7 +190,6 @@ if (getStringFromRequest('submit')) {
 
 				}
 			}
-
 		}
 	}
 }

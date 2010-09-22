@@ -33,6 +33,8 @@ require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
+$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
 site_admin_header(array('title'=>_('Site Admin')));
 echo '<h1>' . _('Site Admin') . '</h1>';

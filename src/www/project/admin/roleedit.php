@@ -50,14 +50,14 @@ if (getStringFromRequest('delete')) {
 if ($role_id=='observer') {
 	$role = new RoleObserver($group);
 	if (!$role || !is_object($role)) {
-		exit_error('Error','Could Not Get RoleObserver');
+		exit_error(_('Could Not Get RoleObserver'),'admin');
 	} elseif ($role->isError()) {
-		exit_error('Error',$role->getErrorMessage());
+		exit_error($role->getErrorMessage(),'admin');
 	}
 
 	if (getStringFromRequest('submit')) {
 		if (!$role->update($data)) {
-			$feedback = $role->getErrorMessage();
+			$error_msg = $role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Updated Role');
 		}
@@ -75,9 +75,9 @@ if ($role_id=='observer') {
 		$role = new Role($group,$role_id);
 	}
 	if (!$role || !is_object($role)) {
-		exit_error('Error',_('Could Not Get Role'));
+		exit_error(_('Could Not Get Role'),'admin');
 	} elseif ($role->isError()) {
-		exit_error('Error',$role->getErrorMessage());
+		exit_error($role->getErrorMessage(),'admin');
 	}
 
 	$old_data = $role->getSettingsForProject ($group) ;
@@ -106,18 +106,18 @@ if ($role_id=='observer') {
 			$role_name = $role->getName() ;
 		}
 		if (!$role_name) {
-			$feedback .= ' Missing Role Name ';
+			$error_msg .= ' Missing Role Name ';
 		} else {
 			if (!$role_id) {
 				$role_id=$role->create($role_name,$data);
 				if (!$role_id) {
-					$feedback .= $role->getErrorMessage();
+					$error_msg .= $role->getErrorMessage();
 				} else {
 					$feedback = _('Successfully Created New Role');
 				}
 			} else {
 				if (!$role->update($role_name,$data)) {
-					$feedback .= $role->getErrorMessage();
+					$error_msg .= $role->getErrorMessage();
 				} else {
 					$feedback = _('Successfully Updated Role');
 				}

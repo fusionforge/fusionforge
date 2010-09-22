@@ -2,25 +2,23 @@
 /**
  * Reporting System
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2004 (c) GForge LLC - Tim Perdue
+ * http://fusionforge.org
  *
- * @author Tim Perdue tim@gforge.org
- * @date 2003-03-16
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -35,7 +33,7 @@ if (!session_loggedin()) {
 
 $report=new Report();
 if ($report->isError()) {
-	exit_error('Error',$report->getErrorMessage());
+	exit_error($report->getErrorMessage());
 }
 
 $week = getIntFromRequest('week');
@@ -59,12 +57,12 @@ if (getStringFromRequest('submit')) {
 						     $project_task_id,
 						     $old_time_code));
 			if (!$res || db_affected_rows($res) < 1) {
-				exit_error('Error',db_error());
+				exit_error(db_error());
 			} else {
 				$feedback=_('Successfully Deleted');
 			}
 		} else {
-			echo "INTERNAL ERROR: delete: $project_task_id && $report_date && $old_time_code";
+			$error_msg = _('INTERNAL ERROR: delete: ').$project_task_id.' && '.$report_date.' && '.$old_time_code;
 		}
 
 	} elseif (getStringFromRequest('add')) {
@@ -85,14 +83,13 @@ if (getStringFromRequest('submit')) {
 						       $time_code,
 						       $hours));
 			if (!$res || db_affected_rows($res) < 1) {
-				exit_error('Error',db_error());
+				exit_error(db_error());
 			} else {
 				$feedback.=_('Successfully Added');
 			}
 		} else {
-			exit_error('Error',_('All Fields Are Required.'));
+			exit_error(_('All Fields Are Required.'));
 		}
-
 	}
 }
 
@@ -140,7 +137,8 @@ if ($group_project_id || $rows) {
 
 	echo $HTML->listTableTop ($title_arr);
 
-	while ($r=&db_fetch_array($res)) {
+    $xi = 0;
+	while ($r=db_fetch_array($res)) {
 		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&amp;project_task_id='.$r['project_task_id'].'" method="post">
 			<input type="hidden" name="submit" value="1" />
 			<input type="hidden" name="report_date" value="'.$r['report_date'] .'" />
@@ -172,7 +170,9 @@ if ($group_project_id || $rows) {
 			</tr></form>';
 
 	}
+    if (!isset($total_hours)) $total_hours = '';
 	echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours').':</strong></td><td><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
+
 	echo $HTML->listTableBottom();
 
 }

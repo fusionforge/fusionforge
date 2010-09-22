@@ -42,13 +42,10 @@ $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-	exit_error($group->getErrorMessage(),'home');
+	exit_error($group->getErrorMessage(),'admin');
 }
 
 $group->clearError();
-
-$adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
-project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
 
 // If this was a submission, make updates
 if (getStringFromRequest('submit')) {
@@ -99,18 +96,15 @@ if (getStringFromRequest('submit')) {
 	//100 $logo_image_id
 
 	if (!$res) {
-		$submit_error = $group->getErrorMessage();
+		$error_msg = $group->getErrorMessage();
 	} else {
-		$submit_feedback = _('Project information updated');
+		$feedback = _('Project information updated');
 	}
 }
 
-if (isset($submit_error)) {
-	echo '<div class="error">'.$submit_error.'</div>';
-}
-if (isset($submit_feedback)) {
-	echo '<div class="feedback">'.$submit_feedback.'</div>';
-}
+$adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
+project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
+
 ?>
 
 <table class="my-layout-table">

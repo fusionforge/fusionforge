@@ -7,24 +7,23 @@
  * members, but only admins may perform most functions.
  *
  * Copyright 2004 GForge, LLC
+ * Copyright 2006 federicot
+ * http://fusionforge.org
  *
- * @version   $Id: index.php 5829 2006-10-19 20:02:18Z federicot $
- * @author Tim Perdue tim@gforge.org
+ * This file is part of FusionForge.
  *
- * This file is part of GForge.
- *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -37,6 +36,8 @@ require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
+$warnig_msg = htmlspecialchars(getStringFromRequest('warnig_msg'));
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 session_require_perm ('project_admin', $group_id) ;
 
 // get current information
@@ -44,7 +45,7 @@ $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-	exit_error('Error',$group->getErrorMessage());
+	exit_error($group->getErrorMessage(),'admin');
 }
 
 // Add hook to replace users managements by a plugin.
@@ -63,11 +64,11 @@ if (getStringFromRequest('submit')) {
 		$form_unix_name = getStringFromRequest('form_unix_name');
 		$user_object = &user_get_object_by_name($form_unix_name);
 		if ($user_object === false) {
-			$feedback .= _("<p>No Matching Users Found</p>");
+			$warning .= _('No Matching Users Found');
 		} else {
 			$role_id = getIntFromRequest('role_id');
 			if (!$role_id) {
-				$feedback .= _("Role not selected");
+				$warning .= _('Role not selected');
 			} else {
 				$user_id = $user_object->getID();
 				if (!$group->addUser($form_unix_name,$role_id)) {
@@ -112,7 +113,7 @@ if (getStringFromRequest('submit')) {
 			*/
 		$role_id = getIntFromRequest('role_id');
 		if (!$role_id) {
-			$feedback .= _("Role not selected");
+			$warning_msg .= _("Role not selected");
 		} else {
 			$form_userid = getIntFromRequest('form_userid');
 			$form_unix_name = getStringFromRequest('form_unix_name');
@@ -121,7 +122,7 @@ if (getStringFromRequest('submit')) {
 			} else {
 				$gjr=new GroupJoinRequest($group,$form_userid);
 				if (!$gjr || !is_object($gjr) || $gjr->isError()) {
-					$error_msg = 'Error Getting GroupJoinRequest';
+					$error_msg = _('Error Getting GroupJoinRequest');
 				} else {
 					$gjr->delete(true);
 				}
@@ -135,10 +136,10 @@ if (getStringFromRequest('submit')) {
 		$form_userid = getIntFromRequest('form_userid');
 		$gjr=new GroupJoinRequest($group,$form_userid);
 		if (!$gjr || !is_object($gjr) || $gjr->isError()) {
-			$feedback .= 'Error Getting GroupJoinRequest';
+			$error_msg .= _('Error Getting GroupJoinRequest');
 		} else {
 			if (!$gjr->reject()) {
-				exit_error('Error',$gjr->getErrorMessage());
+				$error_msg = $gjr->getErrorMessage();
 			} else {
 				$feedback .= 'Rejected';
 			}

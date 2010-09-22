@@ -55,7 +55,7 @@ if (getStringFromRequest('submit')) {
 			$feedback = _('Successfully Deleted Role');
 		}
 	} else {
-		$error_msg = 'Error: Please check "I\'m Sure" to confirm or return to previous page to cancel.';
+		$error_msg = _('Error: Please check "I\'m Sure" to confirm or return to previous page to cancel.');
 	}
 
 	//plugin webcal
@@ -64,7 +64,7 @@ if (getStringFromRequest('submit')) {
 	plugin_hook('change_cal_permission_auto',$params);
 	
 	if (!isset($error_msg)) {
-		session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
+		session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
 	}
 }
 
