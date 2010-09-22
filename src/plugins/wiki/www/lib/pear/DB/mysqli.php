@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: mysqli.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: mysqli.php 7703 2010-09-21 06:28:07Z rurban $
 
 
 // NOTE:  The tableInfo() method must be redone because the functions it
@@ -38,7 +38,7 @@ require_once 'DB/common.php';
  * Note that persistent connections no longer exist.
  *
  * @package  DB
- * @version  $Id: mysqli.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: mysqli.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Chaillan Nicolas <nicos@php.net>
  */
@@ -883,7 +883,7 @@ class DB_mysqli extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

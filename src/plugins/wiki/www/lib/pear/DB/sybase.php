@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: sybase.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: sybase.php 7703 2010-09-21 06:28:07Z rurban $
 
 
 // TODO
@@ -33,7 +33,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: sybase.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: sybase.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Sterling Hughes <sterling@php.net>
  * @author   Antônio Carlos Venâncio Júnior <floripa@php.net>
@@ -829,7 +829,7 @@ class DB_sybase extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

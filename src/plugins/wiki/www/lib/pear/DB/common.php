@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: common.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: common.php 7703 2010-09-21 06:28:07Z rurban $
 
 require_once 'PEAR.php';
 
@@ -27,7 +27,7 @@ require_once 'PEAR.php';
  * inherited by all such
  *
  * @package  DB
- * @version  $Id: common.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: common.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  * @author   Tomas V.V.Cox <cox@idecnet.com>
@@ -2019,7 +2019,7 @@ class DB_common extends PEAR
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

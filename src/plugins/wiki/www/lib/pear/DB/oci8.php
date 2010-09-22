@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: oci8.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: oci8.php 7703 2010-09-21 06:28:07Z rurban $
 
 
 // be aware...  OCIError() only appears to return anything when given a
@@ -34,7 +34,7 @@ require_once 'DB/common.php';
  * Definitely works with versions 8 and 9 of Oracle.
  *
  * @package  DB
- * @version  $Id: oci8.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: oci8.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   James L. Pine <jlp@valinux.com>
  */
@@ -881,7 +881,7 @@ class DB_oci8 extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

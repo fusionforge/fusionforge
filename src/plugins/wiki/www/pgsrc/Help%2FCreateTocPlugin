@@ -1,6 +1,6 @@
-Date: Mon, 20 Sep 2010 18:07:40 +0000
+Date: Tue, 21 Sep 2010 09:44:16 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FCreateTocPlugin 7701 2010-09-20 16:09:07Z vargenau $
+X-Rcs-Id: $Id: Help%2FCreateTocPlugin 7705 2010-09-21 07:45:12Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCreateTocPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -144,7 +144,6 @@ Syntax: a comma-separated list of levels. !!!,!!,! also allowed
 ** an image,
 ** or a ~~.
 * If you preview the page, the Table of Contents will not be correct if you modified headers. The Table of Contents will be taken from the last saved revision.
-* If you display an old revision of a page, the Table of Contents will not be correct. The Table of Contents will be taken from the last saved revision.
 
 <noinclude>
 ----

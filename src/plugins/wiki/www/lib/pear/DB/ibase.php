@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: ibase.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: ibase.php 7703 2010-09-21 06:28:07Z rurban $
 
 
 // Bugs:
@@ -31,7 +31,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: ibase.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: ibase.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Sterling Hughes <sterling@php.net>
  */
@@ -776,7 +776,7 @@ class DB_ibase extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

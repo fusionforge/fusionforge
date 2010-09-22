@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: sqlite.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: sqlite.php 7703 2010-09-21 06:28:07Z rurban $
 
 require_once 'DB/common.php';
 
@@ -27,7 +27,7 @@ require_once 'DB/common.php';
  * PECL extension.
  *
  * @package  DB
- * @version  $Id: sqlite.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: sqlite.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Urs Gehrig <urs@circle.ch>
  * @author   Mika Tuupola <tuupola@appelsiini.net>
@@ -687,7 +687,7 @@ class DB_sqlite extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

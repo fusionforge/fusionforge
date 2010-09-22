@@ -18,7 +18,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: pgsql.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: pgsql.php 7703 2010-09-21 06:28:07Z rurban $
 
 require_once 'DB/common.php';
 
@@ -27,7 +27,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: pgsql.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: pgsql.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Rui Hirokawa <hirokawa@php.net>
  * @author   Stig Bakken <ssb@php.net>
@@ -843,7 +843,7 @@ class DB_pgsql extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: dbase.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: dbase.php 7703 2010-09-21 06:28:07Z rurban $
 
 
 // XXX legend:
@@ -31,7 +31,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: dbase.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: dbase.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Stig Bakken <ssb@php.net>
  */
@@ -212,7 +212,7 @@ class DB_dbase extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */

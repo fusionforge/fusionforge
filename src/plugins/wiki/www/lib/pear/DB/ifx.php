@@ -17,7 +17,7 @@
 // | Maintainer: Daniel Convissor <danielc@php.net>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: ifx.php 7639 2010-08-11 12:15:16Z vargenau $
+// $Id: ifx.php 7703 2010-09-21 06:28:07Z rurban $
 
 
 // Legend:
@@ -36,7 +36,7 @@ require_once 'DB/common.php';
  * extension.
  *
  * @package  DB
- * @version  $Id: ifx.php 7639 2010-08-11 12:15:16Z vargenau $
+ * @version  $Id: ifx.php 7703 2010-09-21 06:28:07Z rurban $
  * @category Database
  * @author   Tomas V.V.Cox <cox@idecnet.com>
  */
@@ -571,7 +571,7 @@ class DB_ifx extends DB_common
 
 /*
  * Local variables:
- * tab-width: 8
+ * tab-width: 4
  * c-basic-offset: 4
  * End:
  */
