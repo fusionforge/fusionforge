@@ -29,7 +29,7 @@ require_once $gfwww.'include/role_utils.php';
 site_admin_header(array('title'=>_('Site Admin')));
 echo '<h1>' . _('Site Admin') . '</h1>';
 
-$role_id = getStringFromRequest('role_id');
+$role_id = getIntFromRequest('role_id');
 $data = getStringFromRequest('data');
 
 if (getStringFromRequest('add')) {

@@ -496,10 +496,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function delete() {
 		if (USE_PFO_RBAC) {
-			if ($this->Group == NULL
-			    && !forge_check_global_perm ('forge_admin')) {
-				$this->setPermissionDeniedError();
-				return false;
+			if ($this->Group == NULL) {
+				if (!forge_check_global_perm ('forge_admin')) {
+					$this->setPermissionDeniedError();
+					return false;
+				}
 			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
@@ -588,10 +589,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	function setUser($user_id) {
 		global $SYS;
 		if (USE_PFO_RBAC) {
-			if ($this->Group == NULL
-			    && !forge_check_global_perm ('forge_admin')) {
-				$this->setPermissionDeniedError();
-				return false;
+			if ($this->Group == NULL) {
+				if (!forge_check_global_perm ('forge_admin')) {
+					$this->setPermissionDeniedError();
+					return false;
+				}
 			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
