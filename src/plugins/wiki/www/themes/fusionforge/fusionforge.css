@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 7661 2010-08-31 15:08:32Z vargenau $
+ * $Id: fusionforge.css 7707 2010-09-22 14:57:42Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2009 Alcatel-Lucent
@@ -229,6 +229,8 @@ input.wikiaction, input.button, input.wikiadmin {
   text-decoration: underline;
 }
 h1 .backlinks { text-decoration: none; color: inherit; }
+
+h1 { font-weight: bold; }
 
 /* Interwiki links */
 .wikipage  { font-weight: normal; }

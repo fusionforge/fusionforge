@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: actionbar.tmpl 7674 2010-09-03 13:01:27Z vargenau $');
+// rcs_id('$Id: actionbar.tmpl 7706 2010-09-22 14:39:24Z vargenau $');
 ?>
 
 <?php 
@@ -50,8 +50,16 @@ $isBrowse = $request->getArg('action') == 'browse';
     <td class="spacer">&nbsp;</td>
     <td class="spacer">&nbsp;</td>
 
-    <?php if (!($page->get('locked')) and (mayAccessPage('edit', $page->getName())) and $revision) { ?>
-      <td class="bold"><?php echo Button("edit", $dbh->isWikiPage($page->getName()) ? ($revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) : _("Create Page")) ?></td>
+    <?php if (!($page->get('locked')) and (mayAccessPage('edit', $page->getName()))) { ?>
+      <td class="bold">
+      <?php if (! $dbh->isWikiPage($page->getName())) { ?>
+      <?php echo Button("edit", _("Create Page")) ?>
+      <?php } else if ($revision && (($revision->isCurrent()) || ($revision->hasDefaultContents()))) { ?>
+      <?php echo Button("edit", _("Edit")) ?>
+      <?php } else { ?>
+      <?php echo Button("edit", _("Edit Old Revision")) ?>
+      <?php } ?>
+      </td>
     <?php } else if ($dbh->isWikiPage($page->getName())) { ?>
       <td><?php echo Button("viewsource", _("View Source")) ?></td>
     <?php } ?>
