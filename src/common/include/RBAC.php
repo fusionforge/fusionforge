@@ -240,6 +240,9 @@ abstract class BaseRole extends Error {
 	public function normalizeData () {
 		throw new Exception ("Not implemented") ;
 	}
+	public function delete () {
+		throw new Exception ("Not implemented") ;
+	}
 
 	/**
 	 *   getLinkedProjects - List of projects referencing that role
