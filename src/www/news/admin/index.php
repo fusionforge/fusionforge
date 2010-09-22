@@ -1,25 +1,25 @@
 <?php
 /**
- * GForge News Facility
+ * News Facility
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -40,7 +40,7 @@ $summary = getStringFromRequest('summary');
 $details = getStringFromRequest('details');
 $id = getIntFromRequest('id');
 
-$feedback = '';
+$feedback = getStringFromRequest('feedback'); 
 
 if ($group_id && $group_id != forge_get_config('news_group') && user_ismember($group_id,'A')) {
 	$status = getIntFromRequest('status');
@@ -84,7 +84,8 @@ if ($group_id && $group_id != forge_get_config('news_group') && user_ismember($g
 details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= _('Error On Update:');
+				$error_msg .= _('Error On Update:');
+				$error_msg .= db_error();
 			} else {
 				$feedback .= _('NewsByte Updated.');
 				// No notification if news is deleted.
@@ -108,7 +109,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		$result=db_query_params("SELECT * FROM news_bytes WHERE id=$1 AND group_id=$2", array($id, $group_id));
 		if (db_numrows($result) < 1) {
-			exit_error(_('Error'), _('NewsByte not found'));
+			exit_error(_('NewsByte not found'),'news');
 		}
 		
 		$group =& group_get_object($group_id);
@@ -202,7 +203,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				$result=db_query_params("UPDATE news_bytes SET is_approved='1', post_date=$1, 
 summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $details, $id));
 				if (!$result || db_affected_rows($result) < 1) {
-					$feedback .= _('Error On Update:');
+					$error_msg .= _('Error On Update:');
 				} else {
 					$feedback .= _('NewsByte Updated.');
 				}
@@ -212,8 +213,8 @@ summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $
 				*/
 				$result=db_query_params("UPDATE news_bytes SET is_approved='2' WHERE id=$1", array($id));
 				if (!$result || db_affected_rows($result) < 1) {
-					$feedback .= _('Error On Update:');
-					$feedback .= db_error();
+					$error_msg .= _('Error On Update:');
+					$error_msg .= db_error();
 				} else {
 					$feedback .= _('NewsByte Deleted.');
 				}
@@ -233,8 +234,8 @@ summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $
 SET is_approved='2' 
 WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= _('Error On Update:');
-				$feedback .= db_error();
+				$error_msg .= _('Error On Update:');
+				$error_msg .= db_error();
 			} else {
 				$feedback .= _('NewsBytes Rejected.');
 			}
@@ -252,10 +253,10 @@ WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 FROM news_bytes,groups WHERE id=$1 
 AND news_bytes.group_id=groups.group_id ", array($id));
 		if (db_numrows($result) < 1) {
-			exit_error(_('Error'), _('NewsByte not found'));
+			exit_error(_('NewsByte not found'),'news');
 		}
 		if (db_result($result,0,'is_approved') == 4) {
-			exit_error(_('Error'), _('NewsByte deleted'));
+			exit_error(_('NewsByte deleted'),'news');
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
@@ -342,7 +343,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 
 } else {
 
-	exit_error(_('Permission denied.'),sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), forge_get_config ('forge_name')));
+	exit_error(sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), forge_get_config ('forge_name')),'news');
 
 }
 

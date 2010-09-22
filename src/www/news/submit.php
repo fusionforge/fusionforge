@@ -8,20 +8,20 @@
  *
  * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -59,18 +59,18 @@ $group_id = getIntFromRequest('group_id');
 if (session_loggedin()) {
 
 	if (!user_ismember($group_id,'A')) {
-		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project'));
+		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project'),'home');
 	}
 
 	$group_id = getIntFromRequest('group_id');
 
 	if ($group_id == forge_get_config('news_group')) {
-		exit_permission_denied(_('Submitting news from the news group is not allowed.'));
+		exit_permission_denied(_('Submitting news from the news group is not allowed.'),'home');
 	}
 
 	if (getStringFromRequest('post_changes')) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('news');
 		}
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
@@ -94,7 +94,7 @@ if (session_loggedin()) {
 				$f=new Forum(group_get_object(forge_get_config('news_group')));
 				if (!$f->create(ereg_replace('[^_\.0-9a-z-]','-', strtolower($summary)),$details,1,'',0,0)) {
 					db_rollback();
-					exit_error('Error',$f->getErrorMessage());
+					exit_error($f->getErrorMessage(),'news');
 				}
 	   			$new_id=$f->getID();
 				$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
@@ -104,14 +104,14 @@ if (session_loggedin()) {
 	   			if (!$result) {
 					db_rollback();
 					form_release_key(getStringFromRequest('form_key'));
-	   				$error_msg = ' '._('ERROR doing insert').' ';
+	   				$error_msg = _('ERROR doing insert');
 	   			} else {
 					db_commit();
-	   				$feedback = ' '._('News Added.').' ';
+	   				$feedback = _('News Added.');
 	   			}
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
-			$error_msg = ' '._('ERROR - both subject and body are required').' ';
+			$error_msg = _('ERROR - both subject and body are required');
 		}
 	}
 
@@ -156,8 +156,8 @@ if (session_loggedin()) {
 		echo '<textarea name="details" rows="5" cols="50"></textarea><br />';
 	}
 	unset($GLOBALS['editor_was_set_up']);
-	echo '<input type="submit" name="submit" value="'._('Submit').'" />
-		</p></form>';
+	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
+		</div></form>';
 
 	news_footer(array());
 

@@ -41,9 +41,9 @@ if (getStringFromRequest('add')) {
 }
 
 if (!$role || !is_object($role)) {
-	exit_error('Error',_('Could Not Get Role'));
+	exit_error(_('Could Not Get Role'),'admin');
 } elseif ($role->isError()) {
-	exit_error('Error',$role->getErrorMessage());
+	exit_error($role->getErrorMessage(),'admin');
 }
 
 $old_data = $role->getGlobalSettings () ;
@@ -72,18 +72,18 @@ if (getStringFromRequest('submit')) {
 		$role_name = $role->getName() ;
 	}
 	if (!$role_name) {
-		$feedback .= ' Missing Role Name ';
+		$warning_msg .= ' Missing Role Name ';
 	} else {
 		if (!$role_id) {
 			$role_id=$role->create($role_name,$data);
 			if (!$role_id) {
-				$feedback .= $role->getErrorMessage();
+				$error_msg .= $role->getErrorMessage();
 			} else {
 				$feedback = _('Successfully Created New Role');
 			}
 		} else {
 			if (!$role->update($role_name,$data)) {
-				$feedback .= $role->getErrorMessage();
+				$error_msg .= $role->getErrorMessage();
 			} else {
 				$feedback = _('Successfully Updated Role');
 			}

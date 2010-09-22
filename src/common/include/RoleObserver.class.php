@@ -89,7 +89,7 @@ class RoleObserver extends Error {
 		//
 		$res = db_query_params ('SELECT group_forum_id,is_public,allow_anonymous FROM forum_group_list WHERE group_id=$1',
 					array ($this->Group->getID())) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$this->setting_array['forumpublic'][$arr['group_forum_id']] = $arr['is_public'];
 			$this->setting_array['forumanon'][$arr['group_forum_id']] = $arr['allow_anonymous'];
 		}
@@ -99,7 +99,7 @@ class RoleObserver extends Error {
 		//
 		$res = db_query_params ('SELECT group_project_id,is_public FROM project_group_list WHERE group_id=$1',
 					array ($this->Group->getID())) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$this->setting_array['pmpublic'][$arr['group_project_id']] = $arr['is_public'];
 		}
 
@@ -108,7 +108,7 @@ class RoleObserver extends Error {
 		//
 		$res = db_query_params ('SELECT group_artifact_id,is_public,allow_anon FROM artifact_group_list WHERE group_id=$1',
 					array ($this->Group->getID())) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$this->setting_array['trackerpublic'][$arr['group_artifact_id']] = $arr['is_public'];
 			$this->setting_array['trackeranon'][$arr['group_artifact_id']] = $arr['allow_anon'];
 		}
@@ -118,7 +118,7 @@ class RoleObserver extends Error {
 		//
 		$res = db_query_params ('SELECT package_id,is_public FROM frs_package WHERE group_id=$1',
 					array ($this->Group->getID())) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$this->setting_array['frspackage'][$arr['package_id']] = $arr['is_public'];
 		}
 
