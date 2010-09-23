@@ -1507,7 +1507,6 @@ Enjoy the site.
 		if (is_file(forge_get_config('themes_root').'/'.$this->theme.'/Theme.class.php')) {
 			$GLOBALS['sys_theme']=$this->theme;
 		} else {
-			echo "icicici";
 			$this->theme=forge_get_config('default_theme');
 		}
 		return $this->theme;
