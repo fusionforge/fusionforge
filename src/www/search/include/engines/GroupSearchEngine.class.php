@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge document manager
+ * Search Engine 
  *
  * Copyright 2004, Guillaume Smet
  *
@@ -23,7 +23,7 @@
  */
 
 
-require_once $GLOBALS['gfwww'].'search/include/engines/SearchEngine.class.php';
+require_once $gfwww.'search/include/engines/SearchEngine.class.php';
 
 class GroupSearchEngine extends GFSearchEngine {
 	var $Group;

@@ -1,13 +1,26 @@
 <?php
-
 /**
- * GForge Search Engine
+ * Search Engine
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2004 (c) Guillaume Smet / Open Wide
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2004 (c) Guillaume Smet / Open Wide
+ * http://fusionforge.org
  *
- * http://gforge.org
+ * This file is part of FusionForge.
  *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once $gfwww.'search/include/renderers/SearchRenderer.class.php';
@@ -46,7 +59,7 @@ class RssSearchRenderer extends SearchRenderer {
 			echo '<channel></channel>';
 		} else {		
 			$searchQuery->executeQuery();
-			include_once $GLOBALS['gfwww'].'export/rss_utils.inc';
+			include_once $gfwww.'export/rss_utils.inc';
 	
 			rss_dump_project_result_set(
 				$searchQuery->getResult(),
