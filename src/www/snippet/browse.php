@@ -1,13 +1,26 @@
 <?php
 /**
-  *
-  * SourceForge Code Snippets Repository
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
+ * Code Snippets Repository
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -41,24 +54,23 @@ $qpa2 = db_construct_qpa (false, 'SELECT users.realname,users.user_name,users.us
 if ($by=='lang') {
 	$lang = getStringFromRequest('lang');
 
-	$qpa = db_construct_qpa ($qpa, 'AND language=$1', array ($lang)) ;
-	$qpa2 = db_construct_qpa ($qpa2, 'AND snippet_package.language=$1', array ($lang)) ;
+	$qpa = db_construct_qpa ($qpa, ' AND snippet.language=$1', array ($lang)) ;
+	$qpa2 = db_construct_qpa ($qpa2, ' AND snippet_package.language=$1', array ($lang)) ;
 
 	echo '<h2>' .sprintf(_('Snippets by language: %1$s'), $SCRIPT_LANGUAGE[$lang]).'</h2>';
 } else if ($by=='cat') {
 	$cat = getStringFromRequest('cat');
 
-	$qpa = db_construct_qpa ($qpa, 'AND snippet.category=$1', array ($cat)) ;
-	$qpa2 = db_construct_qpa ($qpa2, 'AND snippet_package.category=$1', array ($cat)) ;
+	$qpa = db_construct_qpa ($qpa, ' AND snippet.category=$1', array ($cat)) ;
+	$qpa2 = db_construct_qpa ($qpa2, ' AND snippet_package.category=$1', array ($cat)) ;
 
 	echo '<h2>' .sprintf(_('Snippets by category: %1$s'), $SCRIPT_CATEGORY[$cat]).'</h2>';
 } else {
-	exit_error(_('Error'),_('Error - bad url?'));
+	exit_error(_('Error - bad url?'));
 }
 
 $result = db_query_qpa ($qpa) ;
 $rows=db_numrows($result);
-
 $result2 = db_query_qpa ($qpa2) ;
 $rows2=db_numrows($result2);
 

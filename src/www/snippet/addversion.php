@@ -1,14 +1,26 @@
 <?php
 /**
-  *
-  * SourceForge Code Snippets Repository
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
-
+ * Code Snippets Repository
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -57,14 +69,13 @@ if (session_loggedin()) {
 								  time(),
 								  htmlspecialchars($code)));
 				if (!$result) {
-					$feedback .= _('ERROR DOING SNIPPET VERSION INSERT!');
-					echo db_error();
+					$error_msg .= _('ERROR DOING SNIPPET VERSION INSERT! ').db_error();
 				} else {
 					form_release_key(getStringFromRequest("form_key"));
 					$feedback .= _('Snippet Version Added Successfully.');
 				}
 			} else {
-				exit_error(_('Error'),_('Error - Go back and fill in all the information'));
+				exit_error(_('Error - Go back and fill in all the information'));
 			}
 
 		}
@@ -141,9 +152,8 @@ if (session_loggedin()) {
 								  time()));
 				if (!$result) {
 					//error in database
-					$feedback .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT!');
+					$error_msg .= _('ERROR DOING SNIPPET PACKAGE VERSION INSERT! ').db_error();
 					snippet_header(array('title'=>_('New snippet package')));
-					echo db_error();
 					snippet_footer(array());
 					exit;
 				} else {

@@ -1,19 +1,26 @@
 <?php
 /**
-  *
-  * SourceForge Code Snippets Repository
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
-
-
-/*
-	Code Snippet System
-	By Tim Perdue, Sourceforge, Jan 2000
-*/
+ * Code Snippets Repository
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 $SCRIPT_CATEGORY[0]= _('Choose One');
 $SCRIPT_CATEGORY[1]= _('UNIX Admin');
@@ -94,13 +101,24 @@ $SCRIPT_EXTENSION[15] = '.sql';
 $SCRIPT_EXTENSION[16] = '.cs';
 
 function snippet_header($params) {
-	global $HTML;
-
 	if (!forge_get_config('use_snippet')) {
 		exit_disabled();
 	}
-
+	global $HTML;
+	global $feedback;
+	global $warning_msg;
+	global $error_msg;
 	$HTML->header($params);
+	if (!empty($error_msg)) {
+		html_feedback_top($error_msg);
+	}
+	if (!empty($warning_msg)) {
+		html_feedback_top($warning_msg);
+	}
+	if (!empty($feedback)) {
+		html_feedback_top($feedback);
+	}
+
 	/*
 		Show horizontal links
 	*/
@@ -114,8 +132,6 @@ function snippet_header($params) {
 
 function snippet_footer($params) {
 	GLOBAL $HTML;
-	global $feedback;
-	html_feedback_bottom($feedback);
 	$HTML->footer($params);
 }
 
