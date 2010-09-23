@@ -2,8 +2,9 @@ fusionforge (5.0.2-1+) UNRELEASED; urgency=low
 
   * Ship a /usr/share/gforge/plugins/ directory in gforge-web-apache2
     (closes: #597714).
+  * Update roadmap URL (closes: #597847).
 
- -- Roland Mas <lolando@debian.org>  Thu, 23 Sep 2010 10:11:42 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 23 Sep 2010 17:23:46 +0200
 
 fusionforge (5.0.2-1) unstable; urgency=low
 
