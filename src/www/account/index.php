@@ -34,14 +34,14 @@ session_require_login () ;
 // get global users vars
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {
-    exit_error('Error','Could Not Get User');
+    exit_error(_('Could Not Get User'));
 } elseif ($u->isError()) {
-    exit_error('Error',$u->getErrorMessage());
+    exit_error($u->getErrorMessage(),'my');
 }
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+		exit_form_double_submit('my');
 	}
 
 
