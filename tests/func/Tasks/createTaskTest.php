@@ -85,7 +85,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->click("link=ProjectA");
         $this->waitForPageToLoad("30000");
 
-        $this->click("link=Task Manager");
+        $this->click("link=Tasks");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("To Do"));
         $this->assertTrue($this->isTextPresent("Next Release"));
@@ -403,7 +403,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->click("submit");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("Subproject Inserted"));
-        $this->click("link=Task Manager");
+        $this->click("link=Tasks");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("This is a public subproject"));
     }
@@ -425,7 +425,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->click("submit");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("Subproject Inserted"));
-        $this->click("link=Task Manager");
+        $this->click("link=Tasks");
         $this->waitForPageToLoad("30000");
         $this->assertTrue($this->isTextPresent("This is a private subproject"));
     }
