@@ -185,7 +185,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
-<?php if(forge_get_config('use_project_database') || forge_get_config('use_project_vhost')) { ?>
+<?php if(forge_get_config('use_project_database') || forge_get_config('use_project_vhost') || forge_get_config('use_people')) { ?>
 <ul>
 	<?php if(forge_get_config('use_project_vhost')) { ?>
 		<li><a href="vhost.php"><?php echo _('Virtual Host Admin Tool'); ?></a></li>
