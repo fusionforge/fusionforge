@@ -81,6 +81,10 @@ function cache_external_roles () {
 				$used_external_roles[] = $r ;
 			}
 		}
+
+		sortRoleList ($used_external_roles, $group, 'composite') ;
+		sortRoleList ($unused_external_roles, $group, 'composite') ;
+
 	}
 }
 

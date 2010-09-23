@@ -399,6 +399,7 @@ user_id=$1 ORDER BY bookmark_title',
 	echo $HTML->listTableTop($order_name_arr);
 	
 	$groups = $user->getGroups() ;
+	sortProjectList ($groups) ;
 
 	if (count ($groups) < 1) {
 		echo '<tr><td colspan="3"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';

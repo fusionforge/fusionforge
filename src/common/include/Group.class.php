@@ -2814,6 +2814,38 @@ function &group_get_result($group_id=0) {
 	}
 }
 
+class ProjectComparator {
+	var $criterion = 'name' ;
+
+	function Compare ($a, $b) {
+		switch ($this->criterion) {
+		case 'name':
+		default:
+			$namecmp = strcoll ($a->getPublicName(), $b->getPublicName()) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			/* If several projects share a same public name */
+			return strcoll ($a->getUnixName(), $b->getUnixName()) ;
+			break ;
+		case 'id':
+			$aid = $a->getID() ;
+			$bid = $b->getID() ;
+			if ($a == $b) {
+				return 0;
+			}
+			return ($a < $b) ? -1 : 1;
+			break ;
+		}
+	}
+}
+
+function sortProjectList (&$list, $criterion='name') {
+	$cmp = new ProjectComparator () ;
+	$cmp->criterion = $criterion ;
+
+	return usort ($list, array ($cmp, 'Compare')) ;
+}
 
 // Local Variables:
 // mode: php

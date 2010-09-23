@@ -1324,6 +1324,73 @@ abstract class RoleUnion extends BaseRole implements PFO_RoleUnion {
 	}
 }
 
+class RoleComparator {
+	var $criterion = 'composite' ;
+	var $reference_project = NULL ;
+
+	function Compare ($a, $b) {
+		switch ($this->criterion) {
+		case 'name':
+			return strcoll ($a->getName(), $b->getName()) ;
+			break ;
+		case 'id':
+			$aid = $a->getID() ;
+			$bid = $b->getID() ;
+			if ($a == $b) {
+				return 0;
+			}
+			return ($a < $b) ? -1 : 1;
+			break ;
+		case 'composite':
+		default:
+			if ($this->reference_project == NULL) {
+				return $this->CompareNoRef ($a, $b) ;
+			}
+			$rpid = $this->reference_project->getID () ;
+			$ap = $a->getHomeProject() ;
+			$bp = $b->getHomeProject() ;
+			$a_is_local = ($ap != NULL && $ap->getID() == $rpid) ; // Local
+			$b_is_local = ($bp != NULL && $bp->getID() == $rpid) ;
+
+			if ($a_is_local && !$b_is_local) {
+				return -1 ;
+			} elseif (!$a_is_local && $b_is_local) {
+				return 1 ;
+			}
+			return $this->CompareNoRef ($a, $b) ;
+		}
+	}
+
+	function CompareNoRef ($a, $b) {
+		$ap = $a->getHomeProject() ;
+		$bp = $b->getHomeProject() ;
+		if ($ap == NULL && $bp != NULL) {
+			return 1 ;
+		} elseif ($ap != NULL && $bp == NULL) {
+			return -1 ;
+		} elseif ($ap == NULL && $bp == NULL) {
+			$tmp = strcoll ($a->getName(), $b->getName()) ;
+			return $tmp ;
+		} else {
+			$projcmp = new ProjectComparator () ;
+			$projcmp->criterion = 'name' ;
+			$tmp = $projcmp->Compare ($ap, $bp) ;
+			if ($tmp) { /* Different projects, sort accordingly */
+				return $tmp ;
+			} 
+			return strcoll ($a->getName(), $b->getName()) ;
+		}
+	}
+}
+
+function sortRoleList (&$list, $relative_to = NULL, $criterion='composite') {
+	$cmp = new RoleComparator () ;
+	$cmp->criterion = $criterion ;
+	$cmp->reference_project = $relative_to ;
+
+	return usort ($list, array ($cmp, 'Compare')) ;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

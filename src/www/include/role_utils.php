@@ -34,6 +34,8 @@ function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 		$roles = $roles2 ;
 	}
 
+	sortRoleList ($roles, $group, 'composite') ;
+
 	$ids = array () ;
 	$names = array () ;
 	
@@ -67,6 +69,8 @@ function external_role_box ($group_id,$name) {
 		}
 	}
 
+	sortRoleList ($roles, $group, 'composite') ;
+
 	$ids = array () ;
 	$names = array () ;
 	foreach ($roles as $role) {
@@ -86,6 +90,8 @@ function global_role_box ($name,$selected='xzxzxz') {
 	$ids = array () ;
 	$names = array () ;
 	
+	sortRoleList ($roles, NULL, 'composite') ;
+
 	foreach ($roles as $role) {
 		$ids[] = $role->getID ();
 		

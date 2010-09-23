@@ -38,7 +38,8 @@ class Widget_MyProjects extends Widget {
 
 	$user = session_get_user () ;
 	$groups = $user->getGroups() ;
-            		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+	sortProjectList ($groups) ;
+	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
 
 	if (count ($groups) < 1) {
 		$html_my_projects .= _("You're not a member of any project");
