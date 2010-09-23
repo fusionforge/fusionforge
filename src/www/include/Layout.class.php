@@ -649,20 +649,20 @@ class Layout extends Error {
 			return;
 		} else {
 			// get all projects that the user belongs to
-			$res = db_query_params ('SELECT group_id FROM groups JOIN user_group USING (group_id) WHERE user_group.user_id=$1 AND groups.status=$2 ORDER BY group_name',
-					array (user_getid(),
-						'A'));
-			echo db_error();
-			if (!$res || db_numrows($res) < 1) {
+			$groups = session_get_user()->getGroups () ;
+
+			if (count ($groups) < 1) {
 				return;
 			} else {
+				sortProjectList ($groups) ;
+
 				echo '
 					<form id="quicknavform" name="quicknavform" action=""><div>
 					<select name="quicknav" id="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
 					<option value="">'._('Quick Jump To...').'</option>';
 
-				for ($i = 0; $i < db_numrows($res); $i++) {
-					$group_id = db_result($res, $i, 'group_id');
+				foreach ($groups as $g) {
+					$group_id = $g->getID() ;
 					$menu =& $this->navigation->getProjectMenu($group_id);
 
 					echo '
