@@ -4114,6 +4114,7 @@ src/www/scm/viewvc/viewvc.org/images/title.jpg -text svneol=native#image/jpeg
 src/www/scm/viewvc/viewvc.org/images/title.xcf svneol=native#unset
 src/www/scm/viewvc/windows/aspfool/aspfool.dll svneol=native#unset
 src/www/scripts/codendi/LayoutManager.js -text
+src/www/scripts/codendi/README -text
 src/www/scripts/codendi/ReorderColumns.js -text
 src/www/scripts/codendi/Tooltip.js -text
 src/www/scripts/codendi/codendi-1236793993.js -text
