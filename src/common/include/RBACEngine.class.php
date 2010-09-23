@@ -337,10 +337,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 1') ;
 				break ;
 			case 'tech':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 2') ;
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 2) = 2') ;
 				break ;
 			case 'manager':
-				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 1) = 4') ;
+				$qpa = db_construct_qpa ($qpa, 'AND (perm_val & 4) = 4') ;
 				break ;
 			}
 			break ;
