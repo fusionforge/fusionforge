@@ -1,0 +1,8 @@
+common/*                  usr/share/gforge/plugins/oslc/common/
+include/*                 usr/share/gforge/plugins/oslc/include/
+db/*                      usr/share/gforge/plugins/oslc/db/
+bin/*                     usr/share/gforge/plugins/oslc/bin/
+www/*                     usr/share/gforge/plugins/oslc/www/
+cronjobs/*                usr/share/gforge/cronjobs
+etc/plugins/oslc/*     etc/gforge/plugins/oslc/
+etc/httpd.d/*             usr/share/gforge/etc/httpd.d/

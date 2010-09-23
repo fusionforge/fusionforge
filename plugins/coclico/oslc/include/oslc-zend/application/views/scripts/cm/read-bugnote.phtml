@@ -1,0 +1,31 @@
+<html>
+<body>
+<?php
+
+require_once('_resource_xml.php');
+
+$tracker = 'unknown';
+
+switch (TRACKER_TYPE) {
+	case 'mantis':
+		$tracker = 'Mantis';
+		break;
+	case 'fusionforge':
+		$tracker = 'FusionForge';
+		break;
+	case 'demo':
+		$tracker = 'Demo Server';
+		break;
+	default:
+		$tracker = 'Unknown';
+		break;
+}
+
+print '<h1>'.$tracker.' Change Request:</h1>';
+$xml = createResourceView($this);
+$xml = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
+print '<pre>'.$xml.'</pre>';
+?>
+
+</body>
+</html>
