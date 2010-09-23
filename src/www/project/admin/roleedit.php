@@ -118,7 +118,9 @@ if ($role_id=='observer') {
 					$feedback = _('Successfully Created New Role');
 				}
 			} else {
-				$role->setPublic($public) ;
+				if ($role instanceof RoleExplicit) {
+					$role->setPublic($public) ;
+				}
 				if (!$role->update($role_name,$data)) {
 					$error_msg .= $role->getErrorMessage();
 				} else {

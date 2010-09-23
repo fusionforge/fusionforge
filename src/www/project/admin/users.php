@@ -56,6 +56,36 @@ if (plugin_hook_listeners("project_admin_users") > 0) {
 	plugin_hook ("project_admin_users", $hook_params);
 }
 
+function cache_external_roles () {
+	global $used_external_roles, $unused_external_roles, $group, $group_id;
+
+	if (USE_PFO_RBAC) {
+		$unused_external_roles = array () ;
+		foreach (RBACEngine::getInstance()->getPublicRoles() as $r) {
+			$grs = $r->getLinkedProjects () ;
+			$seen = false ;
+			foreach ($grs as $g) {
+				if ($g->getID() == $group_id) {
+					$seen = true ;
+					break ;
+				}
+			}
+			if (!$seen) {
+				$unused_external_roles[] = $r ;
+			}
+		}
+		$used_external_roles = array () ;
+		foreach ($group->getRoles() as $r) {
+			if ($r->getHomeProject() == NULL
+			    || $r->getHomeProject()->getID() != $group_id) {
+				$used_external_roles[] = $r ;
+			}
+		}
+	}
+}
+
+cache_external_roles () ;
+
 if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('adduser')) {
 		/*
@@ -142,6 +172,36 @@ if (getStringFromRequest('submit')) {
 				$error_msg = $gjr->getErrorMessage();
 			} else {
 				$feedback .= 'Rejected';
+			}
+		}
+	} else if (getStringFromRequest('linkrole')) {
+		/* link a role to this project */
+		if (USE_PFO_RBAC) {
+			$role_id = getIntFromRequest('role_id');
+			foreach ($unused_external_roles as $r) {
+				if ($r->getID() == $role_id) {
+					if (!$r->linkProject($group)) {
+						$error_msg = $r->getErrorMessage();
+					} else {
+						$feedback = _("Role linked successfully");
+						cache_external_roles () ;
+					}
+				}
+			}
+		}
+	} else if (getStringFromRequest('unlinkrole')) {
+		/* unlink a role from this project */
+		if (USE_PFO_RBAC) {
+			$role_id = getIntFromRequest('role_id');
+			foreach ($used_external_roles as $r) {
+				if ($r->getID() == $role_id) {
+					if (!$r->unLinkProject($group)) {
+						$error_msg = $r->getErrorMessage();
+					} else {
+						$feedback = _("Role unlinked successfully");
+						cache_external_roles () ;
+					}
+				}
 			}
 		}
 	}
@@ -241,33 +301,44 @@ if (!USE_PFO_RBAC) {
 
 
 if (USE_PFO_RBAC) {
-	echo $HTML->boxMiddle(_("External Roles"));
+	if (count ($used_external_roles)) {
+		echo $HTML->boxMiddle(_("Currently used external roles"));
+		$ids = array () ;
+		$names = array () ;
+		foreach ($used_external_roles as $r) {
+			$ids[] = $r->getID() ;
+			$names[] = $r->getDisplayableName($group) ;
+		}		
+		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
+		echo '<input type="hidden" name="submit" value="y" />' ;
+		echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
+		
+		echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
+		echo '<input type="submit" name="unlinkrole" value="'._("Unlink external role").'" /></form><br />' ;
+	}
 
-		$public_roles = RBACEngine::getInstance()->getPublicRoles() ;
-		$pr2 = array () ;
-		foreach ($public_roles as $r) {
-			$grs = $r->getLinkedProjects () ;
-			$seen = false ;
-			foreach ($grs as $g) {
-				if ($g->getID() == $group_id) {
-					$seen = true ;
-					break ;
-				}
-			}
-			if (!$seen) {
-				$pr2[] = $r ;
-			}
-		}
-		foreach ($pr2 as $r) {
-			echo $r->getDisplayableName($group)."<br />" ;
-		}
+	if (count ($unused_external_roles)) {
+		echo $HTML->boxMiddle(_("Available external roles"));
+		$ids = array () ;
+		$names = array () ;
+		foreach ($unused_external_roles as $r) {
+			$ids[] = $r->getID() ;
+			$names[] = $r->getDisplayableName($group) ;
+		}		
+		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
+		echo '<input type="hidden" name="submit" value="y" />' ;
+		echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
+		
+		echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
+		echo '<input type="submit" name="linkrole" value="'._("Link external role").'" /></form><br />' ;
+	}
 }
 
 		echo $HTML->boxBottom();
-
+	
 		?></td>
 		<td><?php
-
+			 
 		echo $HTML->boxTop(_("Project Members"));
 
 		/*

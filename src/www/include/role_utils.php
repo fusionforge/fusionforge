@@ -50,6 +50,36 @@ function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
 	return html_build_select_box_from_arrays($ids,$names,$name,$selected,false,'',false);
 }
 
+function external_role_box ($group_id,$name) {
+	$group = group_get_object ($group_id) ;
+	$roles = array () ;
+	foreach (RBACEngine::getInstance()->getPublicRoles() as $r) {
+		$grs = $r->getLinkedProjects () ;
+		$seen = false ;
+		foreach ($grs as $g) {
+			if ($g->getID() == $group_id) {
+				$seen = true ;
+				break ;
+			}
+		}
+		if (!$seen) {
+			$roles[] = $r ;
+		}
+	}
+
+	$ids = array () ;
+	$names = array () ;
+	foreach ($roles as $role) {
+		$ids[] = $role->getID ();
+
+		$names[] = $role->getDisplayableName($group) ;
+	}
+
+	$selected = $ids[0] ;
+
+	return html_build_select_box_from_arrays($ids,$names,$name);
+}
+
 function global_role_box ($name,$selected='xzxzxz') {
 	$roles = RBACEngine::getInstance()->getGlobalRoles () ;
 

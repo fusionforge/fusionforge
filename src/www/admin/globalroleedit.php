@@ -68,8 +68,10 @@ $data = $new_data ;
 if (getStringFromRequest('submit')) {
 	if ($role instanceof RoleExplicit) {
 		$role_name = trim(getStringFromRequest('role_name'));
+		$public = getIntFromRequest('public') ? true : false ;
 	} else {
 		$role_name = $role->getName() ;
+		$public = $role->isPublic () ;
 	}
 	if (!$role_name) {
 		$warning_msg .= ' Missing Role Name ';
@@ -82,6 +84,9 @@ if (getStringFromRequest('submit')) {
 				$feedback = _('Successfully Created New Role');
 			}
 		} else {
+			if ($role instanceof RoleExplicit) {
+				$role->setPublic($public) ;
+			}
 			if (!$role->update($role_name,$data)) {
 				$error_msg .= $role->getErrorMessage();
 			} else {
@@ -181,6 +186,11 @@ echo '<input type="hidden" name="role_id" value="'.$role_id.'">' ;
 		
 if ($role instanceof RoleExplicit) {
 	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"></p>';
+	echo '<input type="checkbox" name="public" value="1"' ;
+	if ($role->isPublic()) {
+		echo ' checked' ;
+	}
+	echo '> '._('Shared role').'</p>' ;
 } else {
 	echo '<p><strong>'._('Role Name').'</strong><br />'.$role->getName().'</p>';
 }
