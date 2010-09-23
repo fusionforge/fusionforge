@@ -370,6 +370,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	function normalizeData () { // From the PFO spec
+		$this->removeObsoleteSettings () ;
+
 		$this->fetchData ($this->getID()) ;
 
 		$projects = $this->getLinkedProjects() ;		
