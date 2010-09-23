@@ -104,7 +104,16 @@ echo notepad_func();
 	<tr>
 		<td colspan="3">
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
-		<?php echo nl2br( $pt->getDetails() ); ?>
+		<?php 
+			$sanitizer = new TextSanitizer();
+        	$body = $sanitizer->SanitizeHtml($pt->getDetails());
+
+			if (strpos($body,'<') === false) {
+				echo nl2br($pt->getDetails());
+			} else {
+				echo $body;
+			}
+		?>
 		<p />
 		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
 		<textarea name="details" rows="5" cols="80"></textarea>

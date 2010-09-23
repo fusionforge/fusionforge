@@ -94,7 +94,15 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
-		<?php echo nl2br($pt->getDetails()); ?>
+		<?php 
+             $sanitizer = new TextSanitizer();
+             $body = $sanitizer->SanitizeHtml($pt->getDetails());
+             if (strpos($body,'<') === false) {
+                 echo nl2br($pt->getDetails());
+             } else {
+                 echo $body;
+             }
+        ?>
 		</td>
 	</tr>
 

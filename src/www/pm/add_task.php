@@ -76,7 +76,20 @@ echo notepad_func();
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms.addtaskform.details') ?> <?php echo utils_requiredField(); ?><br />
-		<textarea name="details" rows="5" cols="80"></textarea></td>
+<?php
+$GLOBALS['editor_was_set_up']=false;
+$params = array() ;
+$params['name'] = 'details';
+$params['width'] = "800";
+$params['height'] = "500";
+$params['body'] = "";
+$params['group'] = $group_id;
+plugin_hook("text_editor",$params);
+if (!$GLOBALS['editor_was_set_up']) {
+	echo '<textarea name="details" rows="5" cols="80"></textarea>';
+}
+unset($GLOBALS['editor_was_set_up']);
+?></td>
 	</tr>
 
 	<tr>

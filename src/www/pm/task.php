@@ -140,6 +140,9 @@ switch (getStringFromRequest('func')) {
 		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 		
 		
+		$sanitizer = new TextSanitizer();
+		$details = $sanitizer->purify($details);
+
 		if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
 			exit_error($pt->getErrorMessage(),'pm');
 		} else {
