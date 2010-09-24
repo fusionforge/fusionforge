@@ -190,7 +190,7 @@ if ($role instanceof RoleExplicit) {
 	if ($role->isPublic()) {
 		echo ' checked' ;
 	}
-	echo '> '._('Shared role').'</p>' ;
+	echo '> '._('Public role (can be referenced by projects)').'</p>' ;
 } else {
 	echo '<p><strong>'._('Role Name').'</strong><br />'.$role->getName().'</p>';
 }

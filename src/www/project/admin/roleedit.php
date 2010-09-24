@@ -171,7 +171,7 @@ if (USE_PFO_RBAC) {
 		if ($role->isPublic()) {
 			echo ' checked' ;
 		}
-		echo '> '._('Shared role').'</p>' ;
+		echo '> '._('Shared role (can be referenced by other projects)').'</p>' ;
 	}
 } else {
 	if ($role_id != 'observer') {
