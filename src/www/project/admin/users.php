@@ -363,7 +363,7 @@ $members = $group->getUsers() ;
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('User name').'</th>';
 echo '<th>'._('Role').'</th>';
-echo '<th>'._('Remove').'</th>';
+echo '<th>'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
 foreach ($members as $user) {
@@ -380,7 +380,7 @@ foreach ($members as $user) {
 	foreach ($roles as $role) {
 		echo '<tr>' ;
 		if (!$seen) {
-			echo '<td style="white-space: nowrap;" rowspan="'.count($roles).'"><a href="/users/'.$user->getUnixName().'">';
+			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'"><a href="/users/'.$user->getUnixName().'">';
 			$display = $user->getRealName();
 			if (!empty($display)) {
 				echo $user->getRealName();
@@ -404,6 +404,18 @@ foreach ($members as $user) {
                         </td>
                 </form></tr>';
 	}
+
+	echo '
+		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+			  <input type="hidden" name="submit" value="y" />
+			  <input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
+			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
+			
+	echo '<tr><td style="white-space: nowrap;">';
+	echo role_box($group_id,'role_id',$role_id);
+	echo '</td><td><input type="submit" name="adduser" value="'._("Grant extra role").'" />
+                        </td>
+                </form></tr>';
 }
 echo '</tbody></table>';
 echo $HTML->boxBottom(); 
