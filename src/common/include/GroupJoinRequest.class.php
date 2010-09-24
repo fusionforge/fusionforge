@@ -106,12 +106,12 @@ class GroupJoinRequest extends Error {
 		}
 
 		// Check if user is already a member of the project
-		$result = db_query_params ('SELECT * FROM user_group WHERE group_id=$1 AND user_id=$2',
-					   array ($this->Group->getID(),
-						  $user_id)) ;
-		if (db_numrows($result)) {
-			$this->setError(_('You are already a member of this project.'));
-			return false;
+		$user = user_get_object ($user_id) ;
+		foreach ($user->getGroups() as $p) {
+			if ($p->getID() == $this->Group->getID()) {
+				$this->setError(_('You are already a member of this project.'));
+				return false;
+			}
 		}
 
 		// Check if user has already submitted a request
