@@ -43,20 +43,16 @@ function getGroupProjectIdGroupId($project_task_id) {
  * out:	true, if it is; false otherwise
  */
 function isProjectTaskInfoPublic($project_task_id) {
-	$res = db_query_params('SELECT * FROM project_task ' .
-	    'INNER JOIN project_group_list ON ' .
-	    'project_task.group_project_id = project_group_list.group_project_id ' .
-	    'INNER JOIN groups ON ' .
-	    'project_group_list.group_id = groups.group_id ' .
-	    'WHERE project_task.project_task_id = $1 ' .
-	    'AND project_group_list.is_public = $2 AND groups.is_public = $3',
-	    array($project_task_id, 1, 1));
-
+	$res = db_query_params('SELECT group_project_id FROM project_task WHERE project_task_id=$1',
+			       array ($project_task_id)) ;
+	
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-
-	return true;
+	
+	return RoleAnonymous::getInstance()->hasPermission('pm', 
+							   db_result ($res, 0, 'group_project_id'),
+							   'read') ;
 }
 
 
@@ -69,21 +65,15 @@ function isProjectTaskInfoPublic($project_task_id) {
  * out:	true, if he has; false otherwise
  */
 function isUserAndTaskinSameGroup($project_task_id, $user_name) {
-	$res = db_query_params('SELECT * FROM user_group ' .
-	    'INNER JOIN users ON ' .
-	    'users.user_id = user_group.user_id ' .
-	    'INNER JOIN project_group_list ON ' .
-	    'project_group_list.group_id = user_group.group_id ' .
-	    'INNER JOIN project_task ON ' .
-	    'project_group_list.group_project_id = project_task.group_project_id ' .
-	    'WHERE project_task.project_task_id = $1 AND users.user_name = $2',
-	    array($project_task_id, $user_name));
-
+	$res = db_query_params('SELECT group_project_id FROM project_task WHERE project_task_id=$1',
+			       array ($project_task_id)) ;
+	
 	if (!$res || db_numrows($res) < 1) {
 		return false;
 	}
-
-	return true;
+	$arr = db_fetch_array($res) ;
+	
+	return forge_check_perm_for_user(user_get_object_by_name ($user_name), 'pm', $arr['group_project_id'], 'read') ;
 }
 
 /*-
