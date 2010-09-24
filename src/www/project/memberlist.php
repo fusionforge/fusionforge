@@ -50,7 +50,7 @@ print '</div>';
 $title_arr=array();
 $title_arr[]=_('Member');
 $title_arr[]=_('Username');
-$title_arr[]=_('Role/Position');
+$title_arr[]=_('Role(s)/Position(s)');
 if(forge_get_config('use_people')) {
 	$title_arr[]=_('Skills');
 }
@@ -88,6 +88,7 @@ foreach ($members as $user) {
 
 	if (USE_PFO_RBAC) {
 		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+		sortRoleList ($roles) ;
 		$role_names = array () ;
 		foreach ($roles as $role) {
 			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $project->getID()) {

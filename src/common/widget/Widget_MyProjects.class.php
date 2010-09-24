@@ -40,6 +40,7 @@ class Widget_MyProjects extends Widget {
 	$groups = $user->getGroups() ;
 	sortProjectList ($groups) ;
 	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+	sortRoleList ($roles) ;
 
 	if (count ($groups) < 1) {
 		$html_my_projects .= _("You're not a member of any project");
@@ -60,22 +61,22 @@ class Widget_MyProjects extends Widget {
 				'<A href="/projects/'. $g->getUnixName() .'/">'.
 				$g->getPublicName().'</A>';
 			
-			$bestrole = NULL ;
 			$isadmin = false ;
+			$role_names = array () ;
 			foreach ($roles as $r) {
 				if ($r instanceof RoleExplicit
 				    && $r->getHomeProject() != NULL
 				    && $r->getHomeProject()->getID() == $g->getID()) {
-					$bestrole = $r ;
+					$role_names[] = $r->getName() ;
 					if ($r->hasPermission ('project_admin', $g->getID())) {
 						$isadmin = true ;
-						break ;
 					}
 				}
 			}
 			if ($isadmin) {
 				$html_my_projects .= ' <small><A HREF="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</A></small>';
 			}
+			$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
 			if (!$g->isPublic()) {
 				$html_my_projects .= ' (*)';
 				$private_shown = true;

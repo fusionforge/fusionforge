@@ -122,8 +122,15 @@ if (getStringFromRequest('submit')) {
 	} else if (getStringFromRequest('rmuser')) {
 		/* remove a member from this project */
 		$user_id = getIntFromRequest('user_id');
-		if (!$group->removeUser($user_id)) {
-			$error_msg = $group->getErrorMessage();
+		$role_id = getIntFromRequest('role_id');
+		$role = RBACEngine::getInstance()->getRoleById($role_id) ;
+		if ($role->getHomeProject() == NULL) {
+			session_require_global_perm ('forge_admin') ;
+		} else {
+			session_require_perm ('project_admin', $role->getHomeProject()->getID()) ;
+		}
+		if (!$role->removeUser (user_get_object ($user_id))) {
+			$error_msg = $role->getErrorMessage() ;
 		} else {
 			$feedback = _("Member Removed Successfully");
 		}
@@ -356,42 +363,47 @@ $members = $group->getUsers() ;
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('User name').'</th>';
 echo '<th>'._('Role').'</th>';
-echo '<th>'._('Update').'</th>';
 echo '<th>'._('Remove').'</th>';
 echo '</tr></thead><tbody>';
 
 foreach ($members as $user) {
-	echo '
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-                        <tr>
-                        <td style="white-space: nowrap;">
-			  <input type="hidden" name="submit" value="y" />
-			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
-			  <input type="hidden" name="group_id" value="'. $group_id .'" />
-			  <a href="/users/'.$user->getUnixName().'">';
-	$display = $user->getRealName();
-	if (!empty($display)) {
-		echo $user->getRealName();
-	} else {
-		echo $user->getUnixName();
-	}
-	echo '</a>
-			</td>
-			<td style="white-space: nowrap; text-align: right;">';
-
-	$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
-	foreach ($roles as $role) {
+	$roles = array () ;
+	foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($user) as $role) {
 		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
-			$role_id = $role->getID() ;
-			break ;
+			$roles[] = $role ;
 		}
 	}
-	echo role_box($group_id,'role_id',$role_id);
-	echo '</td><td><input type="submit" name="updateuser" value="'._("Update").'" />';
-	echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
+
+	sortRoleList ($roles) ;
+
+	$seen = false ;
+	foreach ($roles as $role) {
+		echo '<tr>' ;
+		if (!$seen) {
+			echo '<td style="white-space: nowrap;" rowspan="'.count($roles).'"><a href="/users/'.$user->getUnixName().'">';
+			$display = $user->getRealName();
+			if (!empty($display)) {
+				echo $user->getRealName();
+			} else {
+				echo $user->getUnixName();
+			}
+			echo '</a></td>';
+			$seen = true ;
+		} 
+			
+		echo '
+		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+			  <input type="hidden" name="submit" value="y" />
+			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
+			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
+			
+		echo '<td style="white-space: nowrap;">';
+		echo $role->getName() ;
+		echo '<input type="hidden" name="role_id" value="'.$role->getID().'" />' ;
+		echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
                         </td>
-			</tr>
-                </form>';
+                </form></tr>';
+	}
 }
 echo '</tbody></table>';
 echo $HTML->boxBottom(); 

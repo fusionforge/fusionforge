@@ -185,32 +185,23 @@ echo $user->getPhone();
 
     echo $HTML->boxMiddle(_('Project Info'), _('Project Info'));
 
-	// now get listing of groups for that user
-	$res_cat = db_query_params ('SELECT groups.group_name, 
-	 groups.unix_group_name, 
-	 groups.group_id, 
-	 user_group.admin_flags,
-         role.role_name
-	 FROM 
-	 groups,user_group,role WHERE user_group.user_id=$1 AND  user_group.role_id=role.role_id AND
-	 groups.group_id=user_group.group_id AND groups.is_public=$2 AND groups.status=$3',
-			array($user_id,
-				'1',
-				'A'));
+$projects = $user->getGroups () ;
+sortProjectList ($projects) ;
+$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+sortRoleList ($roles) ;
 
 // see if there were any groups
 echo '<div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#">'."\n";
-if (db_numrows($res_cat) < 1) {
+if (count ($projects) < 1) {
 	?>
 	<p><?php echo _('This developer is not a member of any projects.') ?></p>
 	<?php
 } else { // endif no groups
 	print "<p>"._('This developer is a member of the following projects:')."<br />&nbsp;";
 	
-	while ($row_cat = db_fetch_array($res_cat)) {
-
-		$project_link = util_make_link_g ($row_cat['unix_group_name'],$row_cat['group_id'],$row_cat['group_name']);
-		$project_uri = util_make_url_g ($row_cat['unix_group_name'],$row_cat['group_id']);
+	foreach ($projects as $p) {
+		$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
+		$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
 		// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/ 
 		$usergroup_uri = $project_uri .'members/';
 		
@@ -219,12 +210,20 @@ if (db_numrows($res_cat) < 1) {
 			.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
 			.'<span rel="sioc:usergroup_of">'."\n"
 			.'<div about="'. $project_uri .'" typeof="sioc:Space">';
-		//print '<div property="sioc:has_function" content= "'.$row_cat['role_name'].'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+		$role_names = array () ;
+		foreach ($roles as $r) {
+			if ($r instanceof RoleExplicit
+			    && $r->getHomeProject() != NULL
+			    && $r->getHomeProject()->getID() == $p->getID()) {
+				$role_names[] = $r->getName() ;
+				print '<div property="sioc:has_function" content= "'.$r->getName().'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+			}
+		}
 		
-		print ('<br />' . $project_link .' ('.$row_cat['role_name'].')');
+		print ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
 		print "\n";
 		
-		if (trim($row_cat['admin_flags']) == 'A') {
+		if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
 			print '<span rev="doap:maintainer" resource="#me"></span>';
 		}
 		else {

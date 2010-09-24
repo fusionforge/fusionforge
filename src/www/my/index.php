@@ -405,17 +405,17 @@ user_id=$1 ORDER BY bookmark_title',
 		echo '<tr><td colspan="3"><strong>'._('You\'re not a member of any active projects').'</strong></td></tr>';
 	} else {
 		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
+		sortRoleList ($roles) ;
 		foreach ($groups as $g) {
-			$bestrole = NULL ;
 			$img="trash.png";
+			$role_names = array () ;
 			foreach ($roles as $r) {
 				if ($r instanceof RoleExplicit
 				    && $r->getHomeProject() != NULL
 				    && $r->getHomeProject()->getID() == $g->getID()) {
-					$bestrole = $r ;
+					$role_names[] = $r->getName() ;
 					if ($r->hasPermission ('project_admin', $g->getID())) {
 						$img="trash-x.png";
-						break ;
 					}
 				}
 			}
@@ -426,7 +426,7 @@ user_id=$1 ORDER BY bookmark_title',
 
 			echo '</td>
 			<td>'.util_make_link_g ($g->getUnixName(),$g->getID(),$g->getPublicName()).'</td>
-			<td>'. htmlspecialchars($r->getName()) .'</td></tr>';
+			<td>'. htmlspecialchars (implode (', ', $role_names)) .'</td></tr>';
 
 
 		}
