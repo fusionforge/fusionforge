@@ -232,7 +232,7 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 		//
 		$reqs =& get_group_join_requests($group);
 		if (count($reqs) > 0) {
-			echo $HTML->boxTop(_("Pending Requests"));
+			echo $HTML->boxTop(_("Pending Membership Requests"));
 			for ($i=0; $i<count($reqs); $i++) {
 				$user =& user_get_object($reqs[$i]->getUserId());
 				if (!$user || !is_object($user)) {
@@ -261,10 +261,11 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 
 		<?php
 			}
-			echo $HTML->boxBottom();
-		}
 
-		echo $HTML->boxTop(_("Add Member"));
+			echo $HTML->boxMiddle(_("Add Member"));
+		} else {
+			echo $HTML->boxTop(_("Add Member"));
+		}
 
 		if (isset($html_code['add_user'])) {
 			echo $html_code['add_user'];
