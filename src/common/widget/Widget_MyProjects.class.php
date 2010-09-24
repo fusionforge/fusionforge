@@ -112,43 +112,39 @@ class Widget_MyProjects extends Widget {
 				    'copyright'   => 'Copyright Xerox',
 				    'pubDate'     => gmdate('D, d M Y G:i:s',time()).' GMT',
 				));
-	    $result = db_query_params("SELECT groups.group_name,"
-			    . "groups.group_id,"
-			    . "groups.unix_group_name,"
-			    . "groups.status,"
-			    . "groups.is_public,"
-			    . "user_group.admin_flags "
-			    . "FROM groups,user_group "
-			    . "WHERE groups.group_id=user_group.group_id "
-			    . "AND user_group.user_id=$1"
-			    . "AND groups.status='A' ORDER BY group_name",array(UserManager::instance()->getCurrentUser()->getID() ));
-	    $rows=db_numrows($result);
+	    $projects = UserManager::instance()->getCurrentUser()->getGroups() ;
+	    sortProjectList ($projects) ;
+
 	    if (!$result || $rows < 1) {
 		    $rss->addItem(array(
-					    'title'       => 'Error',
-					    'description' => _("You're not a member of any project") . db_error(),
-					    'link'        => util_make_url()
-				       ));
-	    } else {
-		    for ($i=0; $i<$rows; $i++) {
-			    $title = db_result($result,$i,'group_name');
-			    if ( db_result($result,$i,'is_public') == 0 ) {
-				    $title .= ' (*)';
-			    }
+					  'title'       => 'Error',
+					  'description' => _("You're not a member of any project") . db_error(),
+					  'link'        => util_make_url()
+					  ));
+		    $rss->display();
+		    return ;
+	    } 
 
-			    $desc = 'Project: '. util_make_url('/project/admin/?group_id='.db_result($result,$i,'group_id')) ."<br />\n";
-			    if ( strpos(db_result($result,$i,'admin_flags') , 'A')==0 ) {
-				    $desc .= 'Admin: '. util_make_url('/project/admin/?group_id='.db_result($result,$i,'group_id'));
-			    }
+	    foreach ($projects as $project) {
+		    $pid = $project->getID() ;
+		    $title = $project->getPublicName() ;
+		    $url = util_make_url('/projects/' . $project->getUnixName()) ;
 
-			    $rss->addItem(array(
-						    'title'       => $title,
-						    'description' => $desc,
-						    'link'        => util_make_url('/projects/'. db_result($result,$i,'unix_group_name'))
-					       ));
+		    if ( !RoleAnonymous::getInstance()->hasPermission('project_read',$pid)) {
+			    $title .= ' (*)';
 		    }
+		    
+		    $desc = "Project: $url\n";
+		    if (forge_check_perm ('project_admin', $pid)) {
+			    $desc .= '<br />Admin: '. util_make_url('/project/admin/?group_id='.$pid);
+		    }
+		    
+		    $rss->addItem(array(
+					  'title'       => $title,
+					  'description' => $desc,
+					  'link'        => $url)
+			    );
 	    }
-	    $rss->display();
     }
     function getDescription() {
 	    return _("List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page.");

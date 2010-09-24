@@ -112,27 +112,6 @@ class Widget_ProjectMembers extends Widget {
 		if (!$iam_member) {
 			echo '<p>'.util_make_link ('/project/request.php?group_id='.$group_id,_('Request to join')).'</p>';
 		}
-		/*echo '<span class="develtitle">' . _('Project admins').':</span><br />';
-		  while ($row_admin = db_fetch_array($res_admin)) {
-		  $display_name = '';
-		  $em->processEvent('get_user_display_name', array(
-		  'user_id'           => $row_admin['user_id'],
-		  'user_name'         => $row_admin['user_name'],
-		  'realname'          => $row_admin['realname'],
-		  'user_display_name' => &$display_name
-		  ));
-		  if (!$display_name) {
-		  $display_name = $user_helper->getDisplayNameFromUserId($row_admin['user_id']);
-		  }
-		  echo '<a href="/users/'.$row_admin['user_name'].'/">'. $display_name .'</a><br />';
-		  }
-		  echo '<hr width="100%" size="1" NoShade>';
-		  }
-		  echo '<span class="develtitle">' . _('Developers') . ':</span><br />';
-		// count of developers on this project
-		$res_count = db_query_params("SELECT user_id FROM user_group WHERE group_id=$1",array($group_id));
-		echo db_numrows($res_count);
-		echo ' <a href="/project/memberlist.php?group_id=' . $group_id . '">[' . _('View members') . ']</a>';*/
 }
 public function canBeUsedByProject(&$project) {
 	return true;

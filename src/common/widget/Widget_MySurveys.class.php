@@ -36,24 +36,29 @@ class Widget_MySurveys extends Widget {
 	function Widget_MySurveys() {
 		$this->Widget('mysurveys');
 		$no_survey = true;
-		$html_my_surveys = '';
-		$sql="SELECT groups.group_id, groups.group_name ".
-			"FROM groups,surveys,user_group ".
-			"WHERE groups.group_id=surveys.group_id ".
-			"AND user_group.group_id=groups.group_id ".
-			"AND groups.status = 'A' ".
-			"AND user_group.user_id=$1 ";
 
-		$result=db_query_params($sql,array(user_getid()));
-		$rows=db_numrows($result);
-		if (!$result || $rows < 1) {
+		$user = session_get_user () ;
+		$projects = $user->getGroups() ;
+		sortProjectList ($projects) ;
+		$tmp = array () ;
+		foreach ($projects as $p) {
+			$sf = new SurveyFactory($p);
+			foreach ($sf->getSurveys() as $s) {
+				$tmp[] = $p ;
+				break ;
+			}
+		}
+		$projects = $tmp ;
+		
+		$html_my_surveys = '';
+		if (count ($projects) < 1) {
 			$html_my_surveys .= _("<P>There are no surveys in your groups.<P><BR>&nbsp;");
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';
-			for ($j=0; $j<$rows; $j++) {
-				$group_id = db_result($result,$j,'group_id');
-				$surveyfacto = new SurveyFactory(group_get_object($group_id));
+			foreach ($projects as $project) {
+				$group_id = $project->getID() ;
+				$surveyfacto = new SurveyFactory($project);
 				$surveys = $surveyfacto->getSurveys();
 				$vItemId = new Valid_UInt('hide_item_id');
 				$vItemId->required();
@@ -79,8 +84,9 @@ class Widget_MySurveys extends Widget {
 
 				$html = '';
 				$count_new = max(0, $count_diff);
-				for ($i=0; $i<count($surveys); $i++) {
-					$survey=$surveys[$i];
+				$i = 0 ;
+				foreach ($surveys as $survey) {
+					$i++ ;
 					if (!$hide_now) {
 						if ($i % 2 == 0) {
 							$class="bgcolor-white";
@@ -110,24 +116,6 @@ class Widget_MySurveys extends Widget {
 	$this->content = $html_my_surveys;
 	}
 
-	/*	$sql          = "SELECT * from surveys WHERE survey_id=$1";
-		$result       = db_query_params($sql,array($developer_survey_id));
-		$group_id     = db_result($result, 0, 'group_id');
-		$survey_title = $survey->getSurveyTitle(db_result($result, 0, 'survey_title'));
-
-	// Check that the survey is active
-	$devsurvey_is_active = db_result($result, 0, 'is_active');
-
-	if ($devsurvey_is_active==1) {
-
-	$sql="SELECT * FROM survey_responses ".
-	"WHERE survey_id=$1 AND user_id=$2";
-	$result = db_query_params($sql,array($developer_survey_id,user_getid()));
-
-	if (db_numrows($result) < 1) {
-	$no_survey = false;
-	$this->content .= '<a href="/survey/survey.php?group_id='. $group_id .'&survey_id='. $developer_survey_id .'">'. $survey_title .'</a>';
-	}          */   
 	function getTitle() {
 		return _("Quick Survey");
 	}

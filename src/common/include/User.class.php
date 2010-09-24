@@ -1136,15 +1136,21 @@ Enjoy the site.
 	 *
 	 *	@return array	Array of groups.
 	 */
-	function &getGroups() {
+	function &getGroups($onlylocal = true) {
 
 		if (USE_PFO_RBAC) {
 			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($this) ;
 			$ids = array () ;
 			foreach ($roles as $r) {
-				if ($r instanceof RoleExplicit
-				    && $r->getHomeProject() != NULL) {
-					$ids[] = $r->getHomeProject()->getID() ;
+				if ($onlylocal) {
+					if ($r instanceof RoleExplicit
+					    && $r->getHomeProject() != NULL) {
+						$ids[] = $r->getHomeProject()->getID() ;
+					}
+				} else {
+					foreach ($r->getLinkedProjects() as $p) {
+						$ids[] = $p->getID() ;
+					}
 				}
 			}
 			return group_get_objects(array_unique($ids)) ;

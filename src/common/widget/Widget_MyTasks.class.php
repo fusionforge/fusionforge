@@ -125,15 +125,16 @@ class Widget_MyTasks extends Widget {
         return $this->content;
     }
     function isAvailable() {
-        $sql = "SELECT * 
-        FROM groups g, user_group ug 
-        WHERE g.group_id = ug.group_id
-        AND ug.user_id = $1
-        AND g.status = 'A'
-        AND g.use_pm = '1'
-        LIMIT 1";
-        $result=db_query_params($sql,array($this->owner_id));
-        return $result && db_numrows($result) > 0 && forge_get_config('use_pm');
+	    if (!forge_get_config('use_pm')) {
+		    return false ;
+	    }
+
+	    foreach (UserManager::instance()->getCurrentUser()->getGroups(false) as $p) {
+		    if ($p->usesPM()) {
+			    return true ;
+		    }
+	    }
+	    return false ;
     }
     
     function getDescription() {
