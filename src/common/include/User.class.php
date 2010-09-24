@@ -3,7 +3,7 @@
  * FusionForge user management
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2009, Roland Mas
+ * Copyright 2009-2010, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -1534,9 +1534,47 @@ Enjoy the site.
 		return $role;
 	}
 
+	function getRoles () {
+		return RBACEngine::getInstance()->getAvailableRolesForUser($this) ;
+	}
+
 	/* Codendi Glue */
-	function isMember($group_id,$type=0){
-		return user_ismember($group_id,$type);
+	function isMember($g,$type=0){
+		if (is_int ($g)) {
+			$group = group_get_object ($g) ;
+			$group_id = $g ;
+		} else {
+			$group = $g ;
+			$group_id = $group->getID() ;
+		}
+
+		switch ($type) {
+		case 'P2':
+			//pm admin
+			return forge_check_perm_for_user($this,'pm_admin',$group_id) ;
+			break; 
+		case 'F2':
+			//forum admin
+			return forge_check_perm_for_user($this,'forum_admin',$group_id) ;
+			break; 
+		case 'A':
+			//admin for this group
+			return forge_check_perm_for_user($this,'project_admin',$group_id) ;
+			break;
+		case 'D1':
+			//document editor
+			return forge_check_perm_for_user($this,'docman',$group_id,'admin') ;
+			break;
+		case '0':
+		default:
+			foreach ($this->getGroups() as $p) {
+				if ($p->getID() == $group_id) {
+					return true ;
+				}
+			}
+			return false ;
+			break;
+		}
 	}
 }
 
@@ -1569,51 +1607,7 @@ function user_ismember($group_id,$type=0) {
 		return false;
 	}
 
-	$project =& group_get_object($group_id);
-
-	if (!$project || !is_object($project)) {
-			return false;
-	}
-
-	$perm =& $project->getPermission ();
-	if (!$perm || !is_object($perm) || !$perm->isMember()) {
-		return false;
-	}
-
-	$type=strtoupper($type);
-	
-	switch ($type) {
-		case 'P2' : {
-			//pm admin
-			return $perm->isPMAdmin();
-			break; 
-		}
-		case 'F2' : {
-			//forum admin
-			return $perm->isForumAdmin();
-			break; 
-		}
-		case '0' : {
-			//just in this group
-			return $perm->isMember();
-			break;
-		}
-		case 'A' : {
-			//admin for this group
-			return $perm->isAdmin();
-			break;
-		}
-		case 'D1' : {
-			//document editor
-			return $perm->isDocEditor();
-			break;
-		}
-		default : {
-			//fubar request
-			return false;
-		}
-	}
-	return false;
+	return session_get_user()->isMember($group_id, $type) ;
 }
 
 /**

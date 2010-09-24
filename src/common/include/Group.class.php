@@ -1915,7 +1915,7 @@ class Group extends Error {
 				return false;
 			}
 			$found_role->removeUser ($user) ;
-			if (!$SYS->sysGroupRemoveUser($this->getID(),$user_id)) {
+			if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
@@ -1985,7 +1985,6 @@ class Group extends Error {
 			//
 			//	Remove user from system
 			//
-//echo "<h2>Group::addUser SYS->sysGroupRemoveUser(".$this->getID().",$user_id)</h2>";
 			if (!$SYS->sysGroupRemoveUser($this->getID(),$user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();

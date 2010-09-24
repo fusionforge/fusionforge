@@ -3,6 +3,7 @@
  * FusionForge system users integration
  *
  * Copyright 2004, Christian Bayle
+ * Copyright 2010, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -120,89 +121,47 @@ class pgsql extends System {
 	                if (!$res) {
 	                        $this->setError('ERROR - Could Not Update User UID/GID: '.db_error());
 	                        return false;
-			} else {
-				$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1',
-							 array ($user_id)) ;
-	                	if (!$res1) {
-					$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
-	                        	return false;
-				}
-				// This is group used for user, not a real project
-				$res2 = db_query_params ('DELETE FROM nss_groups WHERE name IN
+			}
+			$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1',
+						 array ($user_id)) ;
+			if (!$res1) {
+				$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+				return false;
+			}
+			// This is group used for user, not a real project
+			$res2 = db_query_params ('DELETE FROM nss_groups WHERE name IN
 					(SELECT user_name FROM users WHERE user_id=$1)',
-							 array ($user_id));
-	                	if (!$res2) {
-	                        	$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
-	                        	return false;
-				}
-				$res3 = db_query_params ('INSERT INTO nss_groups
+						 array ($user_id));
+			if (!$res2) {
+				$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
+				return false;
+			}
+			$res3 = db_query_params ('INSERT INTO nss_groups
 					(user_id, group_id,name, gid)
 					SELECT user_id, 0, user_name, unix_gid
 					FROM users WHERE user_id=$1',
-							 array ($user_id));
-	                	if (!$res3) {
-	                        	$this->setError('ERROR - Could Not Update Group GID: '.db_error());
-	                        	return false;
-				}
-				$res4 = db_query_params ('INSERT INTO nss_usergroups (
-					SELECT
-						users.unix_uid AS uid,
-						groups.group_id + $1 AS gid,
-						users.user_id AS user_id,
-						groups.group_id AS group_id,
-						users.user_name AS user_name,
-						groups.unix_group_name AS unix_group_name
-					FROM users,groups,user_group
-					WHERE 
-						users.user_id=user_group.user_id
-					AND
-						groups.group_id=user_group.group_id
-					AND
-						users.user_id=$2
-					AND
-						groups.status=$3
-					AND
-						users.unix_status=$4
-					AND
-						users.status=$5
-					UNION
-					SELECT
-						users.unix_uid AS uid,
-						groups.group_id + $6 AS gid,
-						users.user_id AS user_id,
-						groups.group_id AS group_id,
-						users.user_name AS user_name,
-						$7 || groups.unix_group_name AS unix_group_name
-					FROM users,groups,user_group
-					WHERE 
-						users.user_id=user_group.user_id
-					AND
-						groups.group_id=user_group.group_id
-					AND
-						users.user_id=$8
-					AND
-						groups.status=$9
-					AND
-						users.unix_status=$10
-					AND
-						users.status=$11
-					AND
-						user_group.cvs_flags > 0)
-				',
-							 array ($this->GID_ADD,
-								$user_id,
-								'A', 'A', 'A',
-								$this->SCM_UID_ADD,
-								'scm_',
-								$user_id,
-								'A', 'A', 'A')) ;
-	                	if (!$res4) {
-	                        	$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
-	                        	return false;
+						 array ($user_id));
+			if (!$res3) {
+				$this->setError('ERROR - Could Not Update Group GID: '.db_error());
+				return false;
+			}
+			
+			$pids = array () ;
+			foreach ($user->getGroups() as $p) {
+				$pids[] = $p->getID() ;
+			}
+			foreach ($user->getRoles() as $r) {
+				foreach ($r->getLinkedProjects() as $p) {
+					if (forge_check_perm_for_user ($user, 'scm', $p->getID(), 'write')) {
+						$pids[] = $p->getID() ;
+					}
 				}
 			}
-			return true;
+			foreach (array_unique($pids) as $pid) {
+				$this->sysGroupAddUser($p->getID(), $user_id) ;
+			}
 		}
+		return true;
 	}
 
 	/**
@@ -310,101 +269,49 @@ class pgsql extends System {
 		$group = &group_get_object($group_id);
 		if (!$group) {
 			return false;
-		} else {
-				$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE group_id=$1',
-							 array ($group_id));
-	                	if (!$res1) {
-					$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
-	                        	return false;
-				}
-				$res3 = db_query_params ('DELETE FROM nss_groups WHERE group_id=$1',
-							 array ($group_id)) ;
-	                	if (!$res3) {
-	                        	$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
-	                        	return false;
-				}
-				$res4 = db_query_params ('INSERT INTO nss_groups
+		}
+
+		$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE group_id=$1',
+					 array ($group_id));
+		if (!$res1) {
+			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+			return false;
+		}
+		$res3 = db_query_params ('DELETE FROM nss_groups WHERE group_id=$1',
+					 array ($group_id)) ;
+		if (!$res3) {
+			$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
+			return false;
+		}
+		$res4 = db_query_params ('INSERT INTO nss_groups
 					(user_id, group_id, name, gid)
         				SELECT 0, group_id, unix_group_name, group_id + $1
 					FROM groups
 					WHERE group_id=$2',
-							 array ($this->GID_ADD,
-								$group_id)) ;
-	                	if (!$res4) {
-	                        	$this->setError('ERROR - Could Not Insert Group GID: '.db_error());
-	                        	return false;
-				}
-				$res5 = db_query_params ('INSERT INTO nss_groups
+					 array ($this->GID_ADD,
+						$group_id)) ;
+		if (!$res4) {
+			$this->setError('ERROR - Could Not Insert Group GID: '.db_error());
+			return false;
+		}
+		$res5 = db_query_params ('INSERT INTO nss_groups
 					(user_id, group_id, name, gid)
         				SELECT 0, group_id, $1 || unix_group_name, group_id + $2
 					FROM groups
 					WHERE group_id=$3',
-							 array ('scm_',
-								$this->SCM_UID_ADD,
-								$group_id)) ;
-								
-	                	if (!$res5) {
-	                        	$this->setError('ERROR - Could Not Insert SCM Group GID: '.db_error());
-	                        	return false;
-				}
-				$res6 = db_query_params ('INSERT INTO nss_usergroups (
-					SELECT
-						users.unix_uid AS uid,
-						groups.group_id + $1 AS gid,
-						users.user_id AS user_id,
-						groups.group_id AS group_id,
-						users.user_name AS user_name,
-						groups.unix_group_name AS unix_group_name
-					FROM users,groups,user_group
-					WHERE 
-						users.user_id=user_group.user_id
-					AND
-						groups.group_id=user_group.group_id
-					AND
-						groups.group_id=$2
-					AND
-						groups.status=$3
-					AND
-						users.unix_status=$4
-					AND
-						users.status=$5
-					UNION
-					SELECT
-						users.unix_uid AS uid,
-						groups.group_id + $6 AS gid,
-						users.user_id AS user_id,
-						groups.group_id AS group_id,
-						users.user_name AS user_name,
-						$7 || groups.unix_group_name AS unix_group_name
-					FROM users,groups,user_group
-					WHERE 
-						groups.group_id=user_group.group_id
-					AND
-						users.user_id=user_group.user_id
-					AND
-						groups.group_id=$8
-					AND
-						groups.status=$9
-					AND
-						users.unix_status=$10
-					AND
-						users.status=$11
-					AND
-						user_group.cvs_flags > 0)',
-							 array ($this->GID_ADD,
-								$group_id,
-								'A', 'A', 'A',
-								$this->SCM_UID_ADD,
-								'scm_',
-								$group_id,
-								'A', 'A', 'A',
-								
-)) ;;
-	                	if (!$res6) {
-	                        	$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
-	                        	return false;
-				}
+					 array ('scm_',
+						$this->SCM_UID_ADD,
+						$group_id)) ;
+		
+		if (!$res5) {
+			$this->setError('ERROR - Could Not Insert SCM Group GID: '.db_error());
+			return false;
 		}
+		
+		foreach ($group->getUsers() as $u) {
+			$this->sysGroupAddUser ($group_id, $u->getID()) ;
+		}
+
 		return true;
 	}
 
@@ -431,89 +338,88 @@ class pgsql extends System {
 		return true;
 	}
 
+ 	/**
+	 * sysGroupAddUser() - Add a user to a group
+	 *
+	 * @param		int		The ID of the group two which the user will be added
+	 * @param		int		The ID of the user to add
+	 * @param		bool	ignored
+	 * @returns true on success/false on error
+	 *
+	 */
+	function sysGroupAddUser($group_id,$user_id,$foo=NULL) {
+		return $this->sysGroupCheckUser($group_id,$user_id) ;
+	}
+
 	/**
- 	* sysGroupAddUser() - Add a user to a group
+ 	* sysGroupCheckUser() - Sync user's Unix permissions with their FF permissions within a group
  	*
- 	* @param		int		The ID of the group two which the user will be added
- 	* @param		int		The ID of the user to add
- 	* @param		bool	Only add this user to CVS
+ 	* @param		int		The ID of the group
+ 	* @param		int		The ID of the user
  	* @returns true on success/false on error
  	*
  	*/
-	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
-		if (! $this->sysGroupRemoveUser($group_id,$user_id,$cvs_only))
-			return false;
-		$res1 = db_query_params ('INSERT INTO nss_usergroups (
-			SELECT
-				users.unix_uid AS uid,
-				groups.group_id + $1 AS gid,
-				users.user_id AS user_id,
-				groups.group_id AS group_id,
-				users.user_name AS user_name,
-				$2 || groups.unix_group_name AS unix_group_name
-			FROM users,groups,user_group
-			WHERE 
-				users.user_id=user_group.user_id
-			AND
-				groups.group_id=user_group.group_id
-			AND
-				users.user_id=$3
-			AND
-				groups.group_id=$4
-			AND
-				groups.status =$5
-			AND
-				users.unix_status=$6
-			AND
-				users.status=$7
-			AND
-				user_group.cvs_flags > 0)',
-					 array ($this->SCM_UID_ADD,
-						'scm_',
-						$user_id,
-						$group_id,
-						'A', 'A', 'A')) ;
-		if (!$res1) {
-			$this->setError('ERROR - Could Not Add SCM Member(s): '.db_error());
+	function sysGroupCheckUser($group_id,$user_id) {
+		db_begin () ;
+		if (! $this->sysGroupRemoveUser($group_id,$user_id)) {
+			db_rollback () ;
 			return false;
 		}
-
-		if ($cvs_only) {
-			return true;
+		
+		$u = user_get_object($user_id) ;
+		$p = group_get_object($group_id) ;
+		if (forge_check_perm_for_user($u,'scm',$group_id,'write')) {
+			$res = db_query_params ('INSERT INTO nss_usergroups (
+SELECT users.unix_uid AS uid,
+       groups.group_id + $1 AS gid,
+       users.user_id AS user_id,
+       groups.group_id AS group_id,
+       users.user_name AS user_name,
+       $2 || groups.unix_group_name AS unix_group_name
+FROM users,groups
+WHERE users.user_id=$3
+  AND users.status=$4
+  AND users.unix_status=$5
+  AND group.status=$6
+  AND groups.group_id=$7)',
+						array ($this->SCM_UID_ADD,
+						       'scm_',
+						       $user_id,
+						       'A', 'A', 'A',
+						       $group_id)) ;
+			if (!$res) {
+				db_rollback () ;
+				$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
+				return false;
+			}
 		}
-
-		$res2 = db_query_params ('INSERT INTO nss_usergroups (
-			SELECT
-				users.unix_uid AS uid,
-				groups.group_id + $1 AS gid,
-				users.user_id AS user_id,
-				groups.group_id AS group_id,
-				users.user_name AS user_name,
-				groups.unix_group_name AS unix_group_name
-			FROM users,groups,user_group
-			WHERE 
-				users.user_id=user_group.user_id
-			AND
-				groups.group_id=user_group.group_id
-			AND
-				users.user_id=$2
-			AND
-				groups.group_id=$3
-			AND
-				groups.status=$4
-			AND
-				users.unix_status=$5
-			AND
-				users.status=$6)',
-					 array ($this->GID_ADD,
-						$user_id,
-						$group_id,
-						'A', 'A', 'A'));
-		if (!$res2) {
-			$this->setError('ERROR - Could Not Add Shell Group Member(s): '.db_error());
-			return false;
+		
+		if ($u->isMember($p)) {
+			$res = db_query_params ('INSERT INTO nss_usergroups (
+SELECT users.unix_uid AS uid,
+       groups.group_id + $1 AS gid,
+       users.user_id AS user_id,
+       groups.group_id AS group_id,
+       users.user_name AS user_name,
+       groups.unix_group_name AS unix_group_name
+FROM users,groups
+WHERE users.user_id=$2
+  AND users.status=$3
+  AND users.unix_status=$4
+  AND group.status=$5
+  AND groups.group_id=$6)',
+						array ($this->GID_ADD,
+						       $user_id,
+						       'A', 'A', 'A',
+						       $group_id)) ;
+			if (!$res) {
+				$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
+				db_rollback () ;
+				return false;
+			}
 		}
-
+		
+		db_commit () ;
 		return true;
 	}
 
@@ -522,22 +428,14 @@ class pgsql extends System {
  	*
  	* @param		int		The ID of the group from which to remove the user
  	* @param		int		The ID of the user to remove
- 	* @param		bool	Only remove user from CVS group
  	* @returns true on success/false on error
  	*
  	*/
-	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
-		if ($cvs_only) {
-			$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2 AND unix_group_name LIKE $3',
-						 array ($user_id,
-							$group_id,
-							'scm_%')) ;
-		} else {
-			$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2',
-						 array ($user_id,
-							$group_id)) ;
-		}
-		if (!$res1) {
+	function sysGroupRemoveUser($group_id,$user_id) {
+		$res = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2',
+					 array ($user_id,
+						$group_id)) ;
+		if (!$res) {
 			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
 			return false;
 		}

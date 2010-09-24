@@ -165,6 +165,18 @@ class System extends Error {
 	}
 
 	/**
+ 	* sysGroupCheckUser() - Sync forge permissions with system permissions for that user/group
+ 	*
+ 	* @param		int		The ID of the group two which the user will be added
+ 	* @param		int		The ID of the user to add
+ 	* @returns true on success/false on error
+ 	*
+ 	*/
+	function sysGroupCheckUser($group_id,$user_id) {
+		return true;
+	}
+
+	/**
  	* sysGroupAddUser() - Add a user to a group
  	*
  	* @param		int		The ID of the group two which the user will be added

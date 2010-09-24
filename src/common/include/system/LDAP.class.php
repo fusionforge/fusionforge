@@ -3,6 +3,7 @@
  * FusionForge system users integration
  *
  * Copyright 2004, Christian Bayle
+ * Copyright 2010, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -586,6 +587,32 @@ class LDAP extends UNIX {
 		return $ret_val;
 	}
 	
+	function sysGroupCheckUser($group_id,$user_id) {
+		db_begin () ;
+		if (! $this->sysGroupRemoveUser($group_id,$user_id)) {
+			db_rollback () ;
+			return false;
+		}
+		
+		$u = user_get_object($user_id) ;
+		$p = group_get_object($group_id) ;
+		if (forge_check_perm_for_user($u,'scm',$group_id,'write')) {
+			if ($u->isMember($p)) {
+				$this->sysGroupAddUser($group_id,$user_id,false) ;
+			} else {
+				$this->sysGroupRemoveUser($group_id,$user_id,false) ;
+				$this->sysGroupAddUser($group_id,$user_id,true) ;
+			}
+		} else {
+			if ($u->isMember($p)) {
+				$this->sysGroupAddUser($group_id,$user_id,false) ;
+				$this->sysGroupRemoveUser($group_id,$user_id,true) ;
+			} else {
+				$this->sysGroupRemoveUser($group_id,$user_id,false) ;
+			}
+		}
+	}
+
 	/**
 	 * sysGroupAddUser() - Add a user to an LDAP group
 	 *

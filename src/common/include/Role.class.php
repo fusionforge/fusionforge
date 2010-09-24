@@ -694,14 +694,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 						//  When we remove we only check for SCM (cvs_only=1)
 						//
 						if ($uvalue>0) {
-//echo "<h3>Role::setUser SYS->sysGroupAddUser(".$this->Group->getID().",$user_id,1)</h3>";
 							if (!$SYS->sysGroupAddUser($this->Group->getID(),$user_id,0)) {
 								$this->setError($SYS->getErrorMessage());
 								db_rollback();
 								return false;
 							}
 						} else {
-//echo "<h3>Role::setUser SYS->sysGroupRemoveUser(".$this->Group->getID().",$user_id,1)</h3>";
 							if (!$SYS->sysGroupRemoveUser($this->Group->getID(),$user_id,1)) {
 								$this->setError($SYS->getErrorMessage());
 								db_rollback();
