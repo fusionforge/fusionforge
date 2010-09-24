@@ -495,16 +495,11 @@ function session_set_new($user_id) {
  *	@return none
  */
 function session_set_admin() {
-	$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=1',
-				array ('A'));
-	if (!$res) {
-		exit_error(db_error(),'');
-	}
-	if (db_numrows($res) == 0) {
+	$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('forge_admin', -1) ;
+	if (count ($admins) == 0) {
 		exit_error(_('No admin users ?'),'');
 	}
-	$id = db_result ($res, 0, 0);
-	session_set_new ($id);
+	session_set_new ($admins[0]->getID());
 }
 
 /**
