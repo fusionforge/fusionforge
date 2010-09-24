@@ -374,6 +374,10 @@ echo '</tbody></table>';
 		//      RBAC Editing Functions
 		//
 		echo $HTML->boxTop(_("Edit Roles"));
+echo '<table width="100%"><thead><tr>';
+echo '<th>'._('Role name').'</th>';
+echo '<th>'._('Action').'</th>';
+echo '</tr></thead><tbody>';
 
 if (!USE_PFO_RBAC) {
 		echo '
@@ -382,48 +386,69 @@ if (!USE_PFO_RBAC) {
         </form>';
 }
 
-		echo '<form action="roleedit.php?group_id='. $group_id .'" method="post"><p>';
-		echo role_box($group_id,'role_id','',false);
-		echo '&nbsp;<input type="submit" name="edit" value="'._("Edit Role").'" /></p></form>';
+$roles = $group->getRoles() ;
+sortRoleList ($roles, $group, 'composite') ;
 
+foreach ($roles as $r) {
+	echo '<tr><form action="roleedit.php?group_id='. $group_id .'" method="post">' ;
+	echo '<input type="hidden" name="role_id" value="'.$r->getID().'" />' ;
+	echo '<td>'.$r->getDisplayableName($group).'</td>' ;
+	echo '<td><input type="submit" name="edit" value="'._("Edit Permissions").'" /></td>' ;
+	echo '</form></tr>' ;
+}
 
-		echo '<form action="roleedit.php?group_id='. $group_id .'" method="post"><p>';
-		echo '<input type="text" name="role_name" size="10" value="" />';
-		echo '&nbsp;<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
+echo '<tr>' ;
+echo '<form action="roleedit.php?group_id='. $group_id .'" method="post">';
+echo '<td><input type="text" name="role_name" size="10" value="" /></td>';
+echo '<td><input type="submit" name="add" value="'._("Create Role").'" /></td>' ;
+echo '</form></tr>';
 
+echo '</table>' ;
 
 
 if (USE_PFO_RBAC) {
 	if (count ($used_external_roles)) {
 		echo $HTML->boxMiddle(_("Currently used external roles"));
-		$ids = array () ;
-		$names = array () ;
-		foreach ($used_external_roles as $r) {
-			$ids[] = $r->getID() ;
-			$names[] = $r->getDisplayableName($group) ;
-		}		
-		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
-		echo '<input type="hidden" name="submit" value="y" />' ;
-		echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
-		
-		echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
-		echo '<input type="submit" name="unlinkrole" value="'._("Unlink external role").'" /></form><br />' ;
+echo '<table width="100%"><thead><tr>';
+echo '<th>'._('Role name').'</th>';
+echo '<th>'._('Action').'</th>';
+echo '</tr></thead><tbody>';
+
+foreach ($used_external_roles as $r) {
+	echo '<tr><form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
+	echo '<input type="hidden" name="submit" value="y" />' ;
+	echo '<input type="hidden" name="role_id" value="'.$r->getID().'" />' ;
+	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
+	echo '<td>'.$r->getDisplayableName($group).'</td>' ;
+	echo '<td><input type="submit" name="unlinkrole" value="'._("Unlink Role").'" /></td>' ;
+	echo '</form></tr>' ;
+}
+echo '</table>' ;
 	}
 
 	if (count ($unused_external_roles)) {
 		echo $HTML->boxMiddle(_("Available external roles"));
-		$ids = array () ;
-		$names = array () ;
-		foreach ($unused_external_roles as $r) {
-			$ids[] = $r->getID() ;
-			$names[] = $r->getDisplayableName($group) ;
-		}		
-		echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
-		echo '<input type="hidden" name="submit" value="y" />' ;
-		echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
-		
-		echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
-		echo '<input type="submit" name="linkrole" value="'._("Link external role").'" /></form><br />' ;
+echo '<table width="100%"><thead><tr>';
+echo '<th>'._('Role name').'</th>';
+echo '<th>'._('Action').'</th>';
+echo '</tr></thead><tbody>';
+
+$ids = array () ;
+$names = array () ;
+foreach ($unused_external_roles as $r) {
+	$ids[] = $r->getID() ;
+	$names[] = $r->getDisplayableName($group) ;
+}		
+echo '<tr><form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
+echo '<input type="hidden" name="submit" value="y" />' ;
+echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
+echo '<td>' ;
+echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
+echo '</td><td>' ;
+echo '<input type="submit" name="linkrole" value="'._("Link external role").'" /></form><br />' ;
+echo '</td>' ;
+echo '</form></tr>';
+echo '</table>' ;
 	}
 }
 
