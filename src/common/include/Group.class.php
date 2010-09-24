@@ -2090,39 +2090,26 @@ class Group extends Error {
 	 *	@access private
 	 */
 	function activateUsers() {
-
 		/*
 			Activate member(s) of the project
 		*/
 		
-		$member_res = db_query_params ('SELECT user_id, role_id FROM user_group	WHERE group_id=$1',
-					       array ($this->getID())) ;
-		
-		$rows = db_numrows($member_res);
+		$members = $this->getUsers (true) ;
 
-		if ($rows > 0) {
-
-			for ($i=0; $i<$rows; $i++) {
-
-				$member = user_get_object(db_result($member_res,$i,'user_id'));
-				$roleId = db_result($member_res,$i,'role_id');
-
-				if (!$member || !is_object($member)) {
-					$this->setError(_('Error getting member object'));
-					return false;
-				} else if ($member->isError()) {
-					$this->setError(sprintf(_('Error getting member object: %s'),$member->getErrorMessage()));
-					return false;
+		foreach ($members as $member) {
+			$roles = array () ;
+			foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($member) as $role) {
+				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
+					$roles[] = $role ;
 				}
-
-				if (!$this->addUser($member->getUnixName(),$roleId)) {
-					return false;
+				if (!$this->addUser($member->getUnixName(),$role->getID())) {
+					return false ;
 				}
 			}
-
-		 }
-
-		 return true;
+			
+		}
+		
+		return true ;
 	}
 
 	/**
@@ -2356,23 +2343,15 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function sendApprovalEmail() {
-		$res_admins = db_query_params ('
-			SELECT users.user_name,users.email,users.language,users.user_id
-			FROM users,user_group
-			WHERE users.user_id=user_group.user_id
-			AND user_group.group_id=$1
-			AND user_group.admin_flags=$2',
-					       array ($this->getID(),
-						      'A')) ;
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID()) ;
 
-		if (db_numrows($res_admins) < 1) {
+		if (count($admins) < 1) {
 			$this->setError(_("Group does not have any administrators."));
 			return false;
 		}
 
 		// send one email per admin
-		while ($row_admins = db_fetch_array($res_admins)) {
-			$admin =& user_get_object($row_admins['user_id']);
+		foreach ($admins as $admin) {
 			setup_gettext_for_user ($admin) ;
 
 			$message=sprintf(_('Your project registration for %4$s has been approved.
@@ -2411,7 +2390,7 @@ if there is anything we can do to help you.
 						       util_make_url ('/project/admin/?group_id='.$this->getID()),
 						       forge_get_config ('forge_name'));
 	
-			util_send_message($row_admins['email'], sprintf(_('%1$s Project Approved'), forge_get_config ('forge_name')), $message);
+			util_send_message($admin->getEmail(), sprintf(_('%1$s Project Approved'), forge_get_config ('forge_name')), $message);
 
 			setup_gettext_from_context();
 		}
@@ -2496,21 +2475,15 @@ Reasons for negative decision:
 		$submitter =& user_get_object(db_result($res,0,'user_id'));
 
 
-		$res = db_query_params ('SELECT users.email, users.language, users.user_id
-	 			FROM users, user_group
-				WHERE group_id=1 
-				AND user_group.admin_flags=$1
-				AND users.user_id=user_group.user_id',
-					array ('A'));
-		
-		if (db_numrows($res) < 1) {
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_approve', -1) ;
+
+		if (count($admins) < 1) {
 			$this->setError(_("There is no administrator to send the mail to."));
 			return false;
 		}
 
-		for ($i=0; $i<db_numrows($res) ; $i++) {
-			$admin_email = db_result($res,$i,'email') ;
-			$admin =& user_get_object(db_result($res,$i,'user_id'));
+		foreach ($admins as $admin) {
+			$admin_email = $admin->getEmail () ;
 			setup_gettext_for_user ($admin) ;
 			
 			$message=sprintf(_('New %1$s Project Submitted
