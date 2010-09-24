@@ -669,15 +669,12 @@ Enjoy the site.
 		} else {
 			$this->data_array['status']=$status;
 			if ($status == 'D') {
-				// Remove this user from all groups
-				$res = db_query_params ('DELETE FROM user_group WHERE user_id=$1',
-							array ($this->getID())) ;
-				if (!$res) {
-					$this->setError('ERROR - Could Not Propogate Deleted Status: '.db_error());
-					db_rollback();
-					return false;
+				$projects = $this->getGroups() ;
+				foreach ($projects as $p) {
+					$p->removeUser ($this->getID()) ;
 				}
 			}
+
 			$hook_params = array ();
 			$hook_params['user'] = $this;
 			$hook_params['user_id'] = $this->getID();
@@ -1197,19 +1194,11 @@ Enjoy the site.
 	 *
 	 * 	@param	boolean	The session value.
 	 */
-	function setLoggedIn($val=true) {
-		$this->is_logged_in=$val;
+	function setLoggedIn ($val=true) {
+		$this->is_logged_in = $val;
+
 		if ($val) {
-			//if this is the logged in user, see if they are a super user
-			$result = db_query_params ('SELECT count(*) AS count FROM user_group WHERE user_id=$1 AND group_id=1 AND admin_flags=$2',
-						   array ($this->getID(),
-							  'A')) ;
-			if (!$result) {
-				$this->is_super_user=false;
-				return;
-			}
-			$row_count = db_fetch_array($result);
-			$this->is_super_user = ($row_count['count'] > 0);
+			$this->is_super_user = forge_check_global_perm_for_user ($this, 'forge_admin') ;
 		}
 	}
 

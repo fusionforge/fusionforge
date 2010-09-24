@@ -1915,6 +1915,12 @@ class Group extends Error {
 				return false;
 			}
 			$found_role->removeUser ($user) ;
+			if (!$SYS->sysGroupRemoveUser($this->getID(),$user_id)) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+
 		} else {
 			$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
 						array ($this->getID(),
