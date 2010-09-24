@@ -1,0 +1,59 @@
+This is a file to explain how to setup your own openvz virtual hosts
+
+At the moment the setup is using dhcp,
+this should not be too difficult to make it work with static network config
+but this requires you set IP adresses according with your network config.
+The dhcp setup should work on any dhcp capable network.
+
+So, first you need to have a working dhcp server, which I'll suppose you already have.
+second you need to setup a bridge, for this you should edit /etc/network/interfaces file
+see the exemple in interfaces.sample
+The exemple is using static ip, but you can also make this work if you server is using dclient
+to get adresses.
+
+This would look like:
+---------------------------------
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+#allow-hotplug eth0
+#iface eth0 inet dhcp
+auto vmbr0
+iface vmbr0 inet dhcp
+	bridge_ports eth0
+	bridge_fd 9
+	bridge_hello 2
+	bridge_maxage 12
+	bridge_stp off
+---------------------------------
+
+Your server must also be openvz capable, you can do so with
+
+> apt-get install vzctl
+
+and an openvz kernel you can get for exemple on an amd64 server with
+
+> apt-get install linux-image-2.6-openvz-amd64
+
+A list of available kernel can be found with
+
+> apt-cache search linux-image openvz
+
+Then you have to reboot and you should be ready to build you Virtual servers
+
+> make net 
+
+will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge
+
+then you can build template
+ make builddebiantemplate : build an openvz debian template
+ make buildcentostemplate : build an openvz centos template
+
+and create vm
+ make createdeb : build a debian openvz vm with ID=105 from the debian template
+ make createcentos : build a centos openvz vm with ID=110 from the centos template
