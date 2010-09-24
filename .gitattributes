@@ -683,6 +683,7 @@ src/db/20100524-pfo-rbac.sql -text
 src/db/20100606-clean-perm-views.sql -text
 src/db/20100610-pfo-rbac.sql -text
 src/db/20100730-docman.sql -text
+src/db/20100924-theme.sql -text
 src/db/FTI-20061025.sql -text
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
@@ -4341,102 +4342,6 @@ src/www/themes/funky/viewvc/images/text.png -text
 src/www/themes/funky/viewvc/images/up.png -text
 src/www/themes/funky/viewvc/images/view.png -text
 src/www/themes/funky/viewvc/styles.css -text
-src/www/themes/gforge-classic/images/box-grad.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/box-topleft.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/box-topright.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/clear.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/adddoc12.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/caret.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/cfolder15.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/check.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/cvs16b.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/docman16b.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/forum20g.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/forum20w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/forum_add.gif -text svneol=unset#image/gif
-src/www/themes/gforge-classic/images/ic/forum_delete.gif -text svneol=unset#image/gif
-src/www/themes/gforge-classic/images/ic/forum_edit.gif -text svneol=unset#image/gif
-src/www/themes/gforge-classic/images/ic/ftp16b.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/halfcheck.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/home16b.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/index.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/mail16b.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/mail16d.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/mail16w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/manual16c.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/msg.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/new.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/ofolder15.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/pencil.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/rss.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/save.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/survey16b.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/taskman20g.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/taskman20w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/tracker20g.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/tracker20w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/trash-x.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/trash.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/write16w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/ic/xmail16w.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/logo.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/t.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/t2.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/bottomleft-inner.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/bottomleft.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/bottomright-inner.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/bottomright.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topleft-dark.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topleft-inner-dark.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topleft-inner.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topleft.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topright-dark.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topright-inner-dark.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topright-inner.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/tabs/topright.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-end-notselected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-end-selected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-notselected-bg.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-notselected-end.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-notselected-notselected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-notselected-selected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-selected-bg.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-selected-end.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-bottomtab-selected-notselected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-top-blue.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-end-notselected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-end-selected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-notselected-bg.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-notselected-end.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-notselected-notselected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-notselected-selected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-selected-bg.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-selected-end.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/theme-toptab-selected-notselected.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/images/vert-grad.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/annotate.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/back.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/back_small.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/broken.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/chalk.jpg -text svneol=native#image/jpeg
-src/www/themes/gforge-classic/viewvc/images/cvsgraph_16x16.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/cvsgraph_32x32.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/diff.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/dir.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/down.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/download.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/feed-icon-16x16.jpg -text svneol=native#image/jpeg
-src/www/themes/gforge-classic/viewvc/images/forward.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/list.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/log.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/logo.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/text.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/up.png -text svneol=unset#image/png
-src/www/themes/gforge-classic/viewvc/images/view.png -text svneol=unset#image/png
-src/www/themes/gforge-simple-theme/images/box-grad.png -text svneol=unset#image/png
-src/www/themes/gforge-simple-theme/images/box-topleft.png -text svneol=unset#image/png
-src/www/themes/gforge-simple-theme/images/box-topright.png -text svneol=unset#image/png
-src/www/themes/gforge-simple-theme/images/logo.png -text svneol=unset#image/png
 src/www/themes/gforge/COPYING -text
 src/www/themes/gforge/README.txt -text
 src/www/themes/gforge/Theme.class.php -text
@@ -4558,73 +4463,6 @@ src/www/themes/gforge/viewvc/images/text.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/up.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/images/view.png -text svneol=unset#image/png
 src/www/themes/gforge/viewvc/styles.css -text
-src/www/themes/lite/images/gforge_logo.png -text svneol=unset#image/png
-src/www/themes/osx/images/background.png -text svneol=unset#image/png
-src/www/themes/osx/images/clear.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/adddoc12.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/caret.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/cfolder15.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/check.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/cvs16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/docman16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/forum20g.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/forum20w.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/forum_add.gif -text svneol=unset#image/gif
-src/www/themes/osx/images/ic/forum_delete.gif -text svneol=unset#image/gif
-src/www/themes/osx/images/ic/forum_edit.gif -text svneol=unset#image/gif
-src/www/themes/osx/images/ic/ftp16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/halfcheck.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/home16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/index.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/mail16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/mail16d.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/mail16w.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/manual16c.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/msg.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/new.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/ofolder15.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/pencil.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/rss.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/save.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/survey16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/taskman20g.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/taskman20w.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/tracker20g.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/tracker20w.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/trash-x.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/trash.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/write16w.png -text svneol=unset#image/png
-src/www/themes/osx/images/ic/xmail16w.png -text svneol=unset#image/png
-src/www/themes/osx/images/logo.png -text svneol=unset#image/png
-src/www/themes/osx/images/logohover.png -text svneol=unset#image/png
-src/www/themes/osx/images/point1.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/cvs16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/docman16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/ftp16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/home16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/mail16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/mail16d.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/manual16c.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/notes16.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/survey16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/proj/taskman16b.png -text svneol=unset#image/png
-src/www/themes/osx/images/rateit.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/deselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/leftblenddeselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/leftblendselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/leftdeselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/leftselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/rightblenddeselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/rightblendselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/rightdeselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/rightselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/ruledeselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/ruleselect.png -text svneol=unset#image/png
-src/www/themes/osx/images/tabs/select.png -text svneol=unset#image/png
-src/www/themes/ultralite/images/forum_add.gif -text svneol=unset#image/gif
-src/www/themes/ultralite/images/forum_delete.gif -text svneol=unset#image/gif
-src/www/themes/ultralite/images/forum_edit.gif -text svneol=unset#image/gif
-src/www/themes/ultralite/images/new.png -text svneol=unset#image/png
 src/www/tracker/admin/form-customizelist.php -text
 src/www/tracker/admin/form-deleteextrafieldelement.php -text
 src/www/tracker/admin/form-workflow.php -text
