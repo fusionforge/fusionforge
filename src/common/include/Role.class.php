@@ -600,16 +600,16 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setPermissionDeniedError();
 				return false;
 			}
+			
+			return $this->addUser (user_get_object($user_id)) ;
 		} else {
 			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
-		}
 
 		db_begin();
-
 		//
 		//	See if role is actually changing
 		//
@@ -761,6 +761,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 		db_commit();
 		return true;
+		}
 
 	}
 
