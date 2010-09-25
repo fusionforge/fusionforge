@@ -38,7 +38,7 @@ $res_logins = db_query_params ('SELECT us.user_id AS user_id,
 			       50);
 
 if (!$res_logins || db_numrows($res_logins) < 1) {
-	exit_error(_('No records found","Database error: "').db_error(),'home');
+	exit_error(_('No records found","Database error: "').db_error());
 }
 
 $HTML->header(array('title'=>_('Last Logins')));
