@@ -380,7 +380,7 @@ FROM users,groups
 WHERE users.user_id=$3
   AND users.status=$4
   AND users.unix_status=$5
-  AND group.status=$6
+  AND groups.status=$6
   AND groups.group_id=$7)',
 						array ($this->SCM_UID_ADD,
 						       'scm_',
@@ -406,7 +406,7 @@ FROM users,groups
 WHERE users.user_id=$2
   AND users.status=$3
   AND users.unix_status=$4
-  AND group.status=$5
+  AND groups.status=$5
   AND groups.group_id=$6)',
 						array ($this->GID_ADD,
 						       $user_id,
