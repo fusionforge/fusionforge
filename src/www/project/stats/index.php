@@ -3,8 +3,8 @@
  * Project Statistics Page
  *
  * Copyright 2003 GForge, LLC
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  * http://fusionforge.org/
- *
  *
  * This file is part of FusionForge.
  *
@@ -27,6 +27,7 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+require_once $gfwww.'project/admin/project_admin_utils.php';
 
 $group_id = getIntFromRequest('group_id');
 if ( !$group_id ) {
@@ -67,7 +68,7 @@ if (!$SPAN) {
 	if ($delta > 365) $SPAN=3;
 }
 
-site_project_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'home'));
+project_admin_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'admin'));
 
 $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
@@ -97,6 +98,6 @@ if ($end && !is_numeric($end)) { $end = false; }
 </div>
 <?php
 
-site_project_footer( array() );
+project_admin_footer( array() );
 
 ?>
