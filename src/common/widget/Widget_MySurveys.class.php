@@ -56,7 +56,9 @@ class Widget_MySurveys extends Widget {
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';
+			$j = 0;
 			foreach ($projects as $project) {
+				$j++;
 				$group_id = $project->getID() ;
 				$surveyfacto = new SurveyFactory($project);
 				$surveys = $surveyfacto->getSurveys();
@@ -80,7 +82,7 @@ class Widget_MySurveys extends Widget {
 
 				$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
 					$hide_url.'<A HREF="/survey/?group_id='.$group_id.'">'.
-					db_result($result,$j,'group_name').'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+					$project->getPublicName().'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
 
 				$html = '';
 				$count_new = max(0, $count_diff);
