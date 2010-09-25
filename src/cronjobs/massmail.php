@@ -10,21 +10,22 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003 (c) GForge, LLC
+ * Copyright 2010, Roland Mas
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
@@ -37,7 +38,7 @@ $err='';
 if (!cron_create_lock(__FILE__)) {
 	$err = "Massmail already running...exiting";
 		if (!cron_entry(6,$err)) {
-			# rely on crond to report the error
+			// rely on crond to report the error
 			echo "cron_entry error: ".db_error()."\n";
 		}
 	exit();
@@ -46,26 +47,8 @@ if (!cron_create_lock(__FILE__)) {
 // Pause between messages, sec
 $SLEEP = 1;
 
-// This tables maps mailing types to tables which required to perform it
-$table_mapping = array(
-	'ALL'		=> "users",
-	'SITE'	=> "users",
-	'COMMNTY' => "users",
-	'DVLPR'   => "users,user_group",
-	'ADMIN'   => "users,user_group,groups",
-	'SFDVLPR' => "users,user_group",
-);
-
-// This tables maps mailing types to WHERE subclauses which select 
-// appropriate users
-$cond_mapping = array(
-	'ALL'		=> "",
-	'SITE'	=> "AND mail_siteupdates=1",
-	'COMMNTY' => "AND mail_va=1",
-	'DVLPR'   => "AND users.user_id=user_group.user_id",
-	'ADMIN'   => "AND users.user_id=user_group.user_id AND user_group.admin_flags='A' AND groups.status='A' AND groups.group_id=user_group.group_id",
-	'SFDVLPR' => "AND users.user_id=user_group.user_id AND user_group.group_id=1"
-);
+$all_users = user_get_active_users () ;
+sortUserList ($all_users, 'id') ;
 
 $mail_res = db_query_params ('SELECT *
 	FROM massmail_queue
@@ -111,66 +94,44 @@ $mail_id = db_result($mail_res, 0, 'id');
 $body =  db_result($mail_res, 0, 'message');
 //$err .= "Got mail to send: ".$subj."\n";
 
-$qpa = db_construct_qpa (false, 'SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash') ;
-switch ($type) {
-case 'ALL':
-case 'SITE':
-case 'COMMNTY':
-	$qpa = db_construct_qpa ($qpa, ' FROM users') ;
-	break ;
-case 'DVLPR':
-case 'SFDVLPR':
-	$qpa = db_construct_qpa ($qpa, ' FROM users, user_group') ;
-	break ;
-case 'ADMIN':
-	$qpa = db_construct_qpa ($qpa, ' FROM users, user_group, groups') ;
-	break ;
+$filtered_users = array () ;
+
+foreach ($all_users as $user) {
+	$process = false ;
+	switch ($type) {
+	case 'ALL':
+		$process = true ;
+		break;
+	case 'SITE':
+		$process = $user->getMailingPrefs('site') ;
+		break;
+	case 'COMMNTY':
+		$process = $user->getMailingPrefs('va') ;
+		break;
+	case 'DVLPR':
+		$process = count ($user->getGroups()) ;
+		break;
+	case 'ADMIN':
+		foreach ($user->getGroups(false) as $g) {
+			if (forge_check_perm_for_user ($user,'project_admin',$g->getID())) {
+				$process = true ;
+				break ;
+			}
+		}
+		break;
+	case 'SFDLVPR':
+		$process = forge_check_global_perm_for_user ($user,'forge_admin') ;
+		break;
+	}
+	if ($process) {
+		$filtered_users[] = $user ;
+	}
 }
 
-$qpa = db_construct_qpa ($qpa, ' WHERE users.user_id > $1 AND users.status=$2',
-			 array (db_result($mail_res, 0, 'last_userid'),
-				'A')) ;
-
-$cond_mapping = array(
-	'ALL'		=> "",
-	'SITE'	=> "",
-	'COMMNTY' => "",
-	'DVLPR'   => "",
-	'ADMIN'   => "",
-	'SFDVLPR' => ""
-);
-
-
-switch ($type) {
-case 'ALL':
-	break ;
-case 'SITE':
-	$qpa = db_construct_qpa ($qpa, ' AND mail_siteupdates=1') ;
-	break ;
-case 'COMMNTY':
-	$qpa = db_construct_qpa ($qpa, ' AND mail_va=1') ;
-	break ;
-case 'DVLPR':
-	$qpa = db_construct_qpa ($qpa, ' AND users.user_id=user_group.user_id') ;
-	break ;
-case 'SFDVLPR':
-	$qpa = db_construct_qpa ($qpa, ' AND users.user_id=user_group.user_id AND user_group.group_id=1') ;
-	break ;
-case 'ADMIN':
-	$qpa = db_construct_qpa ($qpa, ' AND users.user_id=user_group.user_id AND user_group.admin_flags=$1 AND groups.status=$2 AND groups.group_id=user_group.group_id',
-				 array ('A', 'A')) ;
-	break ;
-}
-
-$qpa = db_construct_qpa ($qpa, ' ORDER BY users.user_id') ;
-
-// Get next chunk of users to mail
-$users_res = db_query_qpa ($qpa);
-
-$err .= "Mailing ".db_numrows($users_res)." users.\n";
+$err .= "Mailing ".count($filtered_users)." users.\n";
 
 // If no more users left, we've finished with this mailing
-if ($users_res && db_numrows($users_res)==0) {
+if (count ($filtered_users)==0) {
 	db_query_params ('UPDATE massmail_queue SET failed_date=0,finished_date=$1 WHERE id=$2',
 			 array(time(),
 			       $mail_id));
@@ -179,7 +140,7 @@ if ($users_res && db_numrows($users_res)==0) {
 
 // Actual mailing loop
 $compt = 0;
-while ($row =& db_fetch_array($users_res)) {
+foreach ($filtered_users as $user) {
 	$compt++;
 	if ($type=='SITE' || $type=='COMMNTY') {
 		$tail = "\r\n==================================================================\r\n" ;
@@ -192,12 +153,12 @@ by visiting following link:
 '), 
 				  forge_get_config ('forge_name'), 
 				  util_make_url('/account/'),
-				  util_make_url('/account/unsubscribe.php?ch=_'.$row['confirm_hash'])) ;
+				  util_make_url('/account/unsubscribe.php?ch=_'.$user->getConfirmHash())) ;
 	} else {
 		$tail = "" ;
 	}
-	util_send_message($row['email'],$subj, $body."\r\n".$tail,'noreply@'.forge_get_config('web_host'));
-	$last_userid = $row['user_id'];
+	util_send_message($user->getEmail(),$subj, $body."\r\n".$tail,'noreply@'.forge_get_config('web_host'));
+	$last_userid = $user->getID();
 
 	sleep($SLEEP);
 }
@@ -220,7 +181,7 @@ function m_exit($mess = '') {
 		$err .= "Could not remove lock\n";
 	}
 	if (!cron_entry(6,$mess.$err)) {
-		# rely on crond to report the error
+		// rely on crond to report the error
 		echo "cron_entry error: ".db_error()."\n";
 	}
 	exit;

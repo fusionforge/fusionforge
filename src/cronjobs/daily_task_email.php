@@ -29,23 +29,7 @@ require_once $gfcommon.'include/cron_utils.php';
 
 $err = '';
 
-//
-//  Set up this script to run as the site admin
-//
-$res = db_query_params ('SELECT user_id FROM user_group WHERE admin_flags=$1 AND group_id=$2',
-			array('A',
-			'1')) ;
-
-
-if (!$res) {
-    echo db_error();
-    exit(1);
-}
-if (db_numrows($res) == 0) {
-    exit(0);
-}
-$id=db_result($res,0,0);
-session_set_new($id);
+session_set_admin() ;
 
 // Get user id's from users who have open tasks
 $res = db_query_params ('SELECT DISTINCT u.user_id, u.realname, u.email FROM users u, project_assigned_to pat, project_task_vw ptv 

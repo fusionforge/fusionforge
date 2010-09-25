@@ -135,6 +135,12 @@ function &user_get_objects_by_name($username_arr) {
 	return user_get_objects($arr);
 }
 
+function &user_get_active_users() {
+	$res=db_query_params ('SELECT user_id FROM users WHERE status=$1',
+			      array ('A')) ;
+	return user_get_objects (util_result_column_to_array($res,0)) ;
+}
+
 class GFUser extends Error {
 	/** 
 	 * Associative array of data from db.
@@ -1644,6 +1650,42 @@ function user_getname($user_id = false) {
 			return 'Invalid User';
 		}
 	}
+}
+
+class UserComparator {
+	var $criterion = 'name' ;
+
+	function Compare ($a, $b) {
+		switch ($this->criterion) {
+		case 'name':
+		default:
+			$namecmp = strcoll ($a->getRealName(), $b->getRealName()) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			/* If several projects share a same real name */
+			return strcoll ($a->getUnixName(), $b->getUnixName()) ;
+			break ;
+		case 'unixname':
+			return strcmp ($a->getUnixName(), $b->getUnixName()) ;
+			break ;
+		case 'id':
+			$aid = $a->getID() ;
+			$bid = $b->getID() ;
+			if ($a == $b) {
+				return 0;
+			}
+			return ($a < $b) ? -1 : 1;
+			break ;
+		}
+	}
+}
+
+function sortUserList (&$list, $criterion='name') {
+	$cmp = new UserComparator () ;
+	$cmp->criterion = $criterion ;
+
+	return usort ($list, array ($cmp, 'Compare')) ;
 }
 
 // Local Variables:

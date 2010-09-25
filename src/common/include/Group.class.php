@@ -140,6 +140,12 @@ function &group_get_objects($id_arr) {
 	return $return;
 }
 
+function &group_get_active_projects() {
+	$res=db_query_params ('SELECT group_id FROM groups WHERE status=$1',
+			      array ('A')) ;
+	return group_get_objects (util_result_column_to_array($res,0)) ;
+}
+
 function &group_get_object_by_name($groupname) {
 	$res=db_query_params('SELECT * FROM groups WHERE unix_group_name=$1', array ($groupname)) ;
 	return group_get_object(db_result($res,0,'group_id'),$res);
@@ -2805,6 +2811,9 @@ class ProjectComparator {
 			}
 			/* If several projects share a same public name */
 			return strcoll ($a->getUnixName(), $b->getUnixName()) ;
+			break ;
+		case 'unixname':
+			return strcmp ($a->getUnixName(), $b->getUnixName()) ;
 			break ;
 		case 'id':
 			$aid = $a->getID() ;

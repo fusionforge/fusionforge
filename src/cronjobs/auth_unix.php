@@ -189,15 +189,9 @@ if ($err == "")
 		else
 		{
 			$line = $group_names [$i] . ":x:" . ($group_ids [$i] + $gid_add) . ":";
-			$resusers = db_query_params ('SELECT user_name FROM user_group,users,groups WHERE users.user_id=user_group.user_id AND groups.group_id=user_group.group_id AND groups.status=$1::bpchar AND groups.use_scm=1 AND groups.unix_group_name=$2 AND users.status=$3 AND users.unix_status=$4',
-						     array('A',
-							   $group_names [$i],
-							   'A',
-							   'A'));
-			$members = &util_result_column_to_array ($resusers, "user_name");
-			if (count ($members) > 0)
-			{
-				$line .= implode (",", $gmembers) . ",";
+			$users = RBACEngine::getInstance()->getUsersByAllowedAction ('scm',$group_ids[$i],'write') ;
+			foreach ($users as $u) {
+				$line .= $u->getUnixName()."," ;
 			}
 			$line .= forge_get_config('apache_user') . "\n";
 			fwrite ($h6, $line);

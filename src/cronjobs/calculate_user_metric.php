@@ -58,7 +58,7 @@ ON user_metric_history(month,day,user_id);
 		what we want - a list of the top users on the site.
 
 */
-require dirname(__FILE__).'/../www/env.inc.php';
+require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -75,18 +75,11 @@ db_query_params ('select setval($1,1)',
 		 array('user_metric0_pk_seq')) ;
 $err .= db_error();
 
-db_query_params ('INSERT INTO user_metric0 
-(user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
-SELECT user_id,5,1.25,3,0,0,1.25
-FROM user_group
-WHERE
-user_group.group_id=$1
-AND user_group.admin_flags=$2',
-			array (forge_get_config('peer_rating_group'),
-			       'A')) ;
-
-
-$err .= db_error();
+foreach(RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin',forge_get_config('peer_rating_group')) as $u) {
+	db_query_params ('INSERT INTO user_metric0 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor) VALUES ($1,5,1.25,3,0,0,1.25)',
+			array (forge_get_config('peer_rating_group'))) ;
+	$err .= db_error();
+}
 
 db_query_params ('UPDATE user_metric0 SET ranking=ranking-1',
 			array()) ;
