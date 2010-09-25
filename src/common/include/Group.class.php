@@ -1441,6 +1441,9 @@ class Group extends Error {
 		for ($i=0; $i<count($members); $i++) {
 			$this->removeUser($members[$i]->getID());
 		}
+		// Failsafe until user_group table is gone
+		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1', 
+					array ($this->getID())) ;
 		//
 		//	Delete Trackers
 		//
