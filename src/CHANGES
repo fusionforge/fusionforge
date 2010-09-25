@@ -5,6 +5,8 @@ FusionForge-5.0.1:
 * Maintenance release, bugfixes and translations only.
 
 FusionForge-5.1:
+* Theme: new Funky Theme (Capgemini)
+* Docman: new UI (Capgemini)
 * Trackers: New progressbar to view completion state (when custom status field is used) (Alain Peyrat)
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
 * [#127] Patch to auto approve projects.
