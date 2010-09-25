@@ -220,12 +220,13 @@ function &MSPGetProjects($session_hash) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Continue Session';
 	}
-	$group_res = db_query_params ('SELECT groups.group_id FROM groups NATURAL JOIN user_group WHERE user_id=$1 AND project_flags=$2',
-			array(user_getid(),
-				2));
-	$group_ids=&util_result_column_to_array($group_res,'group_id');
-	$groups=&group_get_objects($group_ids);
-	return $groups;
+	$projects = array () ;
+	foreach (user_get_session()->getGroups() as $p) {
+		if (forge_check_perm ('pm_admin', $p->getID())) {
+			$projects[] = $p ;
+		}
+	}
+	return $projects;
 }
 
 /**
