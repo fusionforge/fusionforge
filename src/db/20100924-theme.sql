@@ -1,4 +1,11 @@
-update users set theme_id = 1 where theme_id = 2 or theme_id = 4;
-delete from themes where theme_id = 2;
-delete from themes where theme_id = 4;
+update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'osx');
+update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'gforge_classic');
+update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'gforge-simple-theme');
+update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'lite');
+update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'ultralite');
+delete from themes where dirname = 'osx';
+delete from themes where dirname = 'gforge-classic';
+delete from themes where dirname = 'gforge-simple-theme';
+delete from themes where dirname = 'lite';
+delete from themes where dirname = 'ultralite';
 insert into themes (dirname,fullname,enabled) values ('funky','Funky','t');
