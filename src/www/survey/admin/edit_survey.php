@@ -1,25 +1,26 @@
 <?php
 /**
- * GForge Survey Facility
+ * Survey Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -31,9 +32,9 @@ require_once $gfwww.'survey/admin/survey_utils.php';
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>_('Edit A Survey')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
+	survey_header(array('title'=>_('Edit A Survey')));
 	echo '<div class="error">'._('Permission denied').'</div>';
 	survey_footer(array());
 	exit;
@@ -46,15 +47,15 @@ if (getStringFromRequest('post_changes')) {
 
 	if (!isset($survey_title) || $survey_title == "")
 	{
-		$feedback .= _('Update Failed: Survey Title Required');
+		$error_msg .= _('Update Failed: Survey Title Required');
 	}
 	elseif (!isset($survey_questions) || $survey_questions == "")
 	{
-		$feedback .= _('Update Failed: Survey Questions Required');
+		$error_msg .= _('Update Failed: Survey Questions Required');
 	}
 	if (!isset($survey_id) || !isset($group_id) || $survey_id == "" || $group_id == "")
 	{
-		$feedback .= _('Update Failed: Missing Data');
+		$error_msg .= _('Update Failed: Missing Data');
 	}
 	else
 	{
@@ -71,13 +72,14 @@ WHERE survey_id=$4 AND group_id=$5',
 						  $survey_id,
 						  $group_id));
 		if (db_affected_rows($result) < 1) {
-			$feedback .= _('Update Failed');
-			echo db_error();
+			$error_msg .= _('Update Failed: ').db_error();
 		} else {
 			$feedback .= _('Update Successful');
 		}
 	}
 }
+
+survey_header(array('title'=>_('Edit A Survey')));
 
 /*
 	Get this survey out of the DB

@@ -1,8 +1,8 @@
 <?php
 /**
- * FusionForge Survey Facility
+ * Survey Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
  * http://fusionforge.org/
@@ -32,7 +32,6 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>_('Survey Administration')));
 
 if (!$group_id) {
     exit_no_group();
@@ -41,19 +40,20 @@ $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
 } elseif ($group->isError()) {
-    exit_error($group->getErrorMessage(),'home');
+    exit_error($group->getErrorMessage(),'surveys');
 }
 
-echo '<h1>'._('Survey Administration').'</h1>';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
 if ( !user_ismember($group_id,'A')) {
-	exit_permission_denied(_('You are not a Project admin'),'home');
+	exit_permission_denied(_('You are not a Project admin'),'surveys');
 }
 
+$sh->header(array('title'=>_('Survey Administration')));
+echo '<h1>'._('Survey Administration').'</h1>';
 ?>
 
 <p>

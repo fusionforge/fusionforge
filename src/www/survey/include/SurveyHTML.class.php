@@ -46,7 +46,7 @@ class SurveyHTML extends Error {
 		global $group_id,$is_admin_page,$HTML;
 
 		if (!forge_get_config('use_survey')) {
-			exit_disabled('home');
+			exit_disabled();
 		}
 		
 		$params['toptab']='surveys';
@@ -54,7 +54,7 @@ class SurveyHTML extends Error {
 		
 		if ($project =& group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
-			exit_disabled('home');
+			exit_disabled();
 			}
 			
 			site_project_header($params);

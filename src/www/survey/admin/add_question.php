@@ -2,9 +2,10 @@
 /**
  * FusionForge Survey Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *
@@ -29,9 +30,9 @@ require_once $gfwww.'survey/survey_utils.php';
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-survey_header(array('title'=>_('Add A Question')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
+	survey_header(array('title'=>_('Add A Question')));
 	echo '<div class="error">'._('Permission denied').'</div>';
 	survey_footer(array());
 	exit;
@@ -48,9 +49,11 @@ if (getStringFromRequest('post_changes')) {
 	if ($result) {
 		$feedback .= _('Question Added');
 	} else {
-		$feedback .= _('Error inserting question');
+		$error_msg .= _('Error inserting question');
 	}
 }
+
+survey_header(array('title'=>_('Add A Question')));
 
 ?>
 <script type="text/javascript">

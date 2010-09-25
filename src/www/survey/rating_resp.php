@@ -1,25 +1,25 @@
 <?php
 /**
- * GForge Survey Facility
+ * Survey Facility
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
- * http://gforge.org/
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
+ * http://fusionforge.org/
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
- * GForge is free software; you can redistribute it and/or modify
+ * FusionForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * GForge is distributed in the hope that it will be useful,
+ * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with GForge; if not, write to the Free Software
+ * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
@@ -27,10 +27,9 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-$HTML->header(array('title'=>_('Voting')));
 
 if (!session_loggedin()) {
-	echo '<div class="error">'._('You must be logged in to vote')."</div>";
+	exit_not_logged_in();
 } else {
 	$vote_on_id = getIntFromRequest('vote_on_id');
 	$response = getStringFromRequest('response');
@@ -42,6 +41,7 @@ if (!session_loggedin()) {
 			1=project
 			2=release
 		*/
+		$HTML->header(array('title'=>_('Voting')));
 		$toss = db_query_params ('DELETE FROM survey_rating_response WHERE user_id=$1 AND type=$2 AND id=$3',
 					 array(user_getid(),
 					       $flag,
@@ -54,17 +54,15 @@ if (!session_loggedin()) {
 						 $response,
 						 time()));
 		if (!$result) {
-			$feedback .= _('ERROR');
-			echo "<h1>"._('Error in insert')."</h1>";
-			echo db_error();
+			$error_msg .= _('Error in insert').db_error();
+			session_redirect('/&error_msg='.urlencode($error_msg));
 		} else {
 			$feedback .= _('Vote registered');
-			echo "<h2>"._('Vote registered')."</h2>";
-			echo "<a href=\"javascript:history.back()\"><strong>"._('Click to return to previous page')."</strong></a>
-<p>"._('If you vote again, your old vote will be erased.')."</p>";
+			$warning_msg .= _('If you vote again, your old vote will be erased.');
+			session_redirect('/&feedback='.urlencode($feedback).'&warning_msg='.urlencode($warning_msg));
 		}
 	} else {
-		echo "<h1>"._('ERROR!!! MISSING PARAMS')."</h1>";
+		exit_missing_param('',array(_('Vote ID'),_('Response'),_('Flag')),'survey');
 	}
 }
 $HTML->footer(array());

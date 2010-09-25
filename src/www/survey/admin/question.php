@@ -1,9 +1,9 @@
 <?php
 /**
- * FusionForge Survey Facility: Question handle program
+ * Survey Facility: Question handle program
  *
- * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2002-2004 (c) GForge Team
  * Copyright 2008-2010 (c) FusionForge Team
  * http://fusionforge.org/
  *
@@ -92,8 +92,8 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     
     /* Error */
     if ( $sq->isError()) {
-	$msg = $sq->getErrorMessage();
-	form_release_key(getStringFromRequest("form_key"));
+		$msg = $sq->getErrorMessage();
+		form_release_key(getStringFromRequest("form_key"));
         echo '<div class="error">' .$msg ."</div>";
     } else {
         echo '<div class="feedback">' .$msg ."</div>";

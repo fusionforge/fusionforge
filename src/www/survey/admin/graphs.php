@@ -1,7 +1,7 @@
 <?php
 /**
  * FusionForge Survey HTML Facility
-  * General Graph showing module for Survey
+ * General Graph showing module for Survey
  *
  * Copyright 2010 (c) FusionForge Team
  * http://fusionforge.org/
@@ -42,7 +42,7 @@ require_once $gfcommon.'include/pre.php';
 // Check if we have jpgraph
 if (!file_exists(forge_get_config('jpgraph_path').'/jpgraph.php')) {
     //# TODO: Need to show the message as a image file
-    exit_error(_('Package JPGraph not installed'),'home');
+    exit_error(_('Package JPGraph not installed'),'surveys');
 }
 
 // Read jPGraph libraries.
