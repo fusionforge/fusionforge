@@ -107,18 +107,10 @@ $adminEmail = 'nobody@nowhere.com';
 
 $session_hash = '000TESTSUITE000';
 
-// Temporary.
-$sys_default_theme_id = 5;
-
 //set_include_path(".:/opt/gforge/:/opt/gforge/www/include/:/etc/gforge/");
 
 require_once '../../gforge/www/env.inc.php';    
 require_once $gfwww.'include/pre.php';
-
-// Add alcatel theme to the database.
-db_query_params ('INSERT INTO themes (theme_id, dirname, fullname, enabled) VALUES (5, $1, $2, true)',
-		 array ('alcatel-lucent',
-			'Alcatel-Lucent Theme'));
 
 // Install tsearch2 for phpwiki & patch it for safe backups.
 //system("psql -q -Upostgres ".DB_NAME." < /usr/share/pgsql/contrib/tsearch2.sql >/dev/null 2>&1");
@@ -141,7 +133,7 @@ system("rm -f ".forge_get_config ('data_path')."/logs/email-*.log");
 //
 $user = new GFUser();
 $user_id = $user->create('admin', $sitename, 'Admin', $adminPassword, $adminPassword,
-	$adminEmail, 1, 1, 1,'GMT','',0,$GLOBALS['sys_default_theme_id'],'', '','','','','','US',false, 'admin');
+	$adminEmail, 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false, 'admin');
 
 if (!$user_id) {
 	print "ERROR: Creating user: ".$user->getErrorMessage()."\n";
