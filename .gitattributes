@@ -596,6 +596,7 @@ src/common/include/env.inc.php -text
 src/common/include/extras-debug.php -text
 src/common/include/group_section_texts.php -text
 src/common/include/minijson.php -text
+src/common/include/plugins_utils.php -text
 src/common/include/pre-compat.php -text
 src/common/include/preplugins.php -text
 src/common/include/rbac_texts.php -text
@@ -4137,7 +4138,6 @@ src/www/images/widget/widget-preview-project_svn-stats.png -text svneol=unset#im
 src/www/images/widget/widget-preview-rss.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview.png -text svneol=unset#image/png
-src/www/include/plugins_utils.php -text
 src/www/include/pre.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text

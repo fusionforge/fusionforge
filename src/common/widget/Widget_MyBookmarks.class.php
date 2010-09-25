@@ -19,7 +19,7 @@
  */
 
 require_once('Widget.class.php');
-require_once('plugins_utils.php');
+require_once $gfcommon.'include/plugins_utils.php';
 
 /**
 * Widget_MyBookmarks

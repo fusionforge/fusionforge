@@ -20,7 +20,7 @@
 
 require_once('common/widget/WidgetLayout.class.php');
 require_once('common/widget/Widget.class.php');
-require_once('preplugins.php');
+require_once $gfcommon.'include/preplugins.php';
 /**
  * WidgetLayoutManager
  * 
