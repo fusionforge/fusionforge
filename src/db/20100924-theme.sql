@@ -1,5 +1,5 @@
 update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'osx');
-update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'gforge_classic');
+update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'gforge-classic');
 update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'gforge-simple-theme');
 update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'lite');
 update users set theme_id = (select theme_id from themes where dirname = 'gforge') where theme_id = (select theme_id from themes where dirname = 'ultralite');
