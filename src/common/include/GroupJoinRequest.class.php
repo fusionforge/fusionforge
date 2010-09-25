@@ -93,10 +93,10 @@ class GroupJoinRequest extends Error {
 	 *
 	 *	@param	int4 user_id.
 	 *	@param	text comments.
-	 *	@param	int4 request_date.
+	 *	@param	bool whether to send an email to the admin(s)
 	 * @return boolean Success.
 	 */
-	function create($user_id,$comments) {
+	function create($user_id,$comments,$send_email=true) {
 		$v = new Validator();
 		$v->check($user_id, "user_id");
 		$v->check(trim($comments), "comments");
@@ -133,16 +133,17 @@ class GroupJoinRequest extends Error {
 			$this->setError('GroupJoinRequest::create() Posting Failed '.db_error());
 			db_rollback();
 			return false;
-		} else {
-			if (!$this->fetchData($this->Group->getID(),$user_id)) {
-				db_rollback();
-				return false;
-			} else {
-				$this->sendJoinNotice();
-				db_commit();
-				return true;
-			}
 		}
+		
+		if (!$this->fetchData($this->Group->getID(),$user_id)) {
+			db_rollback();
+			return false;
+		}
+		if ($send_email) {
+			$this->sendJoinNotice();
+		}
+		db_commit();
+		return true;
 	}
 
     /**

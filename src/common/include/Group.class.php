@@ -37,6 +37,7 @@ require_once $gfcommon.'mail/MailingListFactory.class.php';
 require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfcommon.'include/gettext.php';
+require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
 //the license_id of "Other/proprietary" license
 define('GROUP_LICENSE_OTHER',126);
@@ -357,7 +358,13 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
-	
+			
+			if (USE_PFO_RBAC) {
+				$gjr = new GroupJoinRequest ($this) ;
+				$gjr->create ($user->getID(),
+					      'Fake GroupJoinRequest to store the creator of a project',
+					      false) ;
+			} else {
 			//
 			// Now, make the user an admin
 			//
@@ -375,6 +382,7 @@ class Group extends Error {
 				$this->setError(sprintf(_('ERROR: Could not add admin to newly created group: %s'),db_error()));
 				db_rollback();
 				return false;
+			}
 			}
 	
 			if (!$this->fetchData($id)) {
@@ -2269,6 +2277,16 @@ class Group extends Error {
 		//	Set Default Roles
 		//
 		//
+		if (USE_PFO_RBAC) {
+			$idadmin_group = NULL ;
+			foreach (get_group_join_requests ($this) as $gjr) {
+				$idadmin_group = $gjr->getUserID() ;
+				break ;
+			}
+			if ($idadmin_group == NULL) {
+				$idadmin_group = $user->getID();
+			}
+		} else {
 
 		$admin_group = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
 						array ($this->getID(),
@@ -2281,6 +2299,7 @@ class Group extends Error {
 					 array ($idadmin_group,
 						$this->getID(),
 						'A')) ;
+		}
 		}
 
 		$role = new Role($this);
@@ -2306,9 +2325,13 @@ class Group extends Error {
 					$r->addUser (user_get_object ($idadmin_group)) ;
 				}
 			}
-
-			RoleAnonymous::getInstance()->linkProject($this) ;
-			RoleLoggedIn::getInstance()->linkProject($this) ;
+			if ($this->isPublic()) {
+				RoleAnonymous::getInstance()->linkProject($this) ;
+				RoleLoggedIn::getInstance()->linkProject($this) ;
+			}
+			foreach (get_group_join_requests ($this) as $gjr) {
+				$gjr->delete (true) ;
+			}
 		}
 
 		//
