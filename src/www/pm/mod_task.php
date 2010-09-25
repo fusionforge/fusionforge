@@ -116,7 +116,20 @@ echo notepad_func();
 		?>
 		<p />
 		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
-		<textarea name="details" rows="5" cols="80"></textarea>
+<?php
+$GLOBALS['editor_was_set_up']=false;
+$params = array() ;
+$params['name'] = 'details';
+$params['width'] = "800";
+$params['height'] = "300";
+$params['body'] = "";
+$params['group'] = $group_id;
+plugin_hook("text_editor",$params);
+if (!$GLOBALS['editor_was_set_up']) {
+    echo '<textarea name="details" rows="5" cols="80"></textarea>';
+}
+unset($GLOBALS['editor_was_set_up']);
+?>
 		</td>
 	</tr>
 

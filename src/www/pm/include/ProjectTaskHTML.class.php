@@ -96,7 +96,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		$rows=db_numrows($res);
 		if ($rows > 0) {
-			if (forge_check_perm ('pm_admin', $this->Group->getID())) {
+			if (forge_check_perm ('pm_admin', $this->ProjectGroup->Group->getID())) {
 				$is_admin=false;
 			} else {
 				$is_admin=true;
@@ -149,7 +149,16 @@ class ProjectTaskHTML extends ProjectTask {
 			for ($i=0; $i < $rows; $i++) {
 				echo '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td>'. nl2br(db_result($result, $i, 'body')).'</td>
+				<td>';
+				$sanitizer = new TextSanitizer();
+				$body = $sanitizer->SanitizeHtml(db_result($result, $i, 'body'));
+				if (strpos($body,'<') === false) {
+					echo nl2br(db_result($result, $i, 'body'));
+				} else {
+					echo $body;
+				}
+
+				echo '</td>
 					<td valign="top">'.date(_('Y-m-d H:i'),db_result($result, $i, 'postdate')).'</td>
 					<td valign="top">'.db_result($result, $i, 'user_name').'</td></tr>';
 			}
