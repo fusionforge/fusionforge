@@ -213,6 +213,15 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		print "<p>" ._('Pending reason:'). "</p><span class=\"important\">".$row_grp['status_comment']."</span>";
 	}
 
+	if (USE_PFO_RBAC) {
+		$submitter = NULL ;
+		foreach (get_group_join_requests ($this) as $gjr) {
+			$submitter = user_get_object($gjr->getUserID()) ;
+			echo '<p>'
+				.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
+				.'</p>' ;
+		}
+	} else {
 	$res = db_query_params("SELECT u.user_id
 			 FROM users u, user_group ug
 			 WHERE ug.group_id=$1 AND u.user_id=ug.user_id;", array($row_grp['group_id']));
@@ -223,6 +232,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		echo '<p>'
 			.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
 			.'</p>' ;
+	}
 	}
 	
 	echo "<hr />";
