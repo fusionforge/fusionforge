@@ -30,25 +30,6 @@ require_once $gfwww.'admin/admin_utils.php';
 // Skip non compatible plugins.
 $plugins_disabled = array('webcalendar', 'scmccase');
 
-?>
-
-<script type="text/javascript">
-
-	function change(url,plugin)
-	{
-		field = document.theform.elements[plugin];
-		if (field.checked) {
-			window.location=(url + "&init=yes");
-		} else {
-			window.location=(url);
-		}
-	}
-
-</script>
-
-<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<?php
-
 $pm = plugin_manager_get_object();
 
 if (getStringFromRequest('update')) {
@@ -173,8 +154,27 @@ if (getStringFromRequest('update')) {
 }
 
 site_admin_header(array('title'=>_('Plugin Manager')));
+?>
+<script type="text/javascript">
+
+	function change(url,plugin)
+	{
+		field = document.theform.elements[plugin];
+		if (field.checked) {
+			window.location=(url + "&init=yes");
+		} else {
+			window.location=(url);
+		}
+	}
+
+</script>
+<?php
 echo '<h1>' . _('Plugin Manager') . '</h1>';
-echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.<br /><span class="important">Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups.<br />Be <strong>extra</strong> careful not to run the init-script again when the plugin is reactivated, because some scripts have DROP TABLE statements.</span><br /><br />');
+echo '<p>';
+echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.');
+echo '</p>';
+echo '<div class="warning">'._('Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups. Be <strong>extra</strong> careful not to run the init-script again when the plugin is reactivated, because some scripts have DROP TABLE statements.').'</div>';
+echo '<form name="theform" action="'.getStringFromServer('PHP_SELF').'" method="post">';
 $title_arr = array( _('Plugin Name'),
 		    _('Status'),
 		    _('Action'),
@@ -265,10 +265,10 @@ foreach ($filelist as $filename) {
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		'<td>'. $filename.'</td>'.
 		'<td class="'.$status.'" style="text-align:center">'. $msg .'</td>'.
-		'<td><div align="center">'. $link .'</div></td>'.
-		'<td><div align="center">'. $init .'</div></td>'.
-		'<td><div align="left">'. $users .'</div></td>'.
-		'<td><div align="left">'. $groups .'</div></td></tr>'."\n";
+		'<td style="text-align:center;">'. $link .'</td>'.
+		'<td style="text-align:center;">'. $init .'</td>'.
+		'<td style="text-align:left;">'. $users .'</td>'.
+		'<td style="text-align:left;">'. $groups .'</td></tr>'."\n";
 
 	$j++;
 }
