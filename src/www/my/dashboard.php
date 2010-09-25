@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge Team
  * Copyright 2009, Jean-Pierre Fortune/Spirtech
- * Copyright 2009, Roland Mas
+ * Copyright 2009-2010, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -46,23 +46,9 @@ if (!session_loggedin()) {
 		 echo $HTML->boxTop(_('All trackers for my projects'),false,false);
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
-	$result = db_query_params ('SELECT groups.group_name,
-groups.group_id,
-groups.unix_group_name,
-groups.status,
-groups.type_id,
-user_group.admin_flags 
-FROM groups,user_group 
-WHERE groups.group_id=user_group.group_id 
-AND user_group.user_id=$1 
-AND groups.status=$2 
-ORDER BY group_name',
-			array(user_getid() ,
-				'A'));
-	$rows=db_numrows($result);
-	if (!$result || $rows < 1) {
+	$projects = session_get_user()->getGroups() ;
+	if (count ($projects) < 1) {
 		echo '<strong>'._('You\'re not a member of any active projects').'</strong>';
-		echo db_error();
 	} else {
 		$display_col=array('summary'=>1,
 				'changed'=>1,
@@ -92,29 +78,12 @@ ORDER BY group_name',
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-                for ($i=0; $i<$rows; $i++) {
-                        $admin_flags = db_result($result, $i, 'admin_flags');
-
-                        if (db_result($result, $i, 'type_id')==2) {
-                                $type = 'foundry';
-                        } else {
-                                $type = 'projects';
-                        }
-
-                        $group_id = db_result($result,$i,'group_id');
+		foreach ($projects as $p) {
+                        $admin_flags = forge_check_perm ('project_admin',$p->getID()) ;
 
                         //  get the Project object
                         //
-                        $group =& group_get_object($group_id);
-                        if (!$group || !is_object($group) || $group->isError()) {
-                                exit_no_group();
-                        }
-
-                        $atf = new ArtifactTypeFactory($group);
-                        if (!$group || !is_object($group) || $group->isError()) {
-                                exit_error(_('Could Not Get ArtifactTypeFactory'),'my');
-                        }
-
+                        $atf = new ArtifactTypeFactory($p);
                         $at_arr =& $atf->getArtifactTypes();
 
 			$art_found = 0;
