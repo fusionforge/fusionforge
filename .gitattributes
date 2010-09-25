@@ -597,6 +597,7 @@ src/common/include/extras-debug.php -text
 src/common/include/group_section_texts.php -text
 src/common/include/minijson.php -text
 src/common/include/pre-compat.php -text
+src/common/include/preplugins.php -text
 src/common/include/rbac_texts.php -text
 src/common/include/tag_cloud.php -text
 src/common/include/utils_crossref.php -text
@@ -4138,7 +4139,6 @@ src/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#image/
 src/www/images/widget/widget-preview.png -text svneol=unset#image/png
 src/www/include/plugins_utils.php -text
 src/www/include/pre.php -text
-src/www/include/preplugins.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text
 src/www/js/sortable.js -text
