@@ -352,7 +352,7 @@ foreach ($members as $user) {
 			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
 			
 	echo '<tr><td style="white-space: nowrap;">';
-	echo role_box($group_id,'role_id',$role_id);
+	echo role_box($group_id,'role_id',$role->getID());
 	echo '</td><td><input type="submit" name="adduser" value="'._("Grant extra role").'" />
                         </td>
                 </form></tr>';
