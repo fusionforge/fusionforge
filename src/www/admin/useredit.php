@@ -225,16 +225,7 @@ if ($u->getStatus() == 'D') {
 /*
 	Iterate and show projects this user is in
 */
-$res_cat = db_query_params ('
-	SELECT groups.unix_group_name, groups.group_name AS group_name, 
-		groups.group_id AS group_id, 
-		user_group.admin_flags AS admin_flags
-	FROM groups,user_group
-	WHERE user_group.user_id=$1
-	AND groups.group_id=user_group.group_id
-',
-			array($user_id)) ;
-
+$projects = $u->getGroups() ;
 
 $title=array();
 $title[]=_('Name');
@@ -243,14 +234,12 @@ $title[]=_('Operations');
 echo $GLOBALS['HTML']->listTableTop($title);
 
 $i = 0 ;
-while ($row_cat = db_fetch_array($res_cat)) {
-
-	$row_cat['group_name'] = htmlspecialchars($row_cat['group_name']);
+foreach ($projects as $p) {
 	print '
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
-		<td>'.util_unconvert_htmlspecialchars($row_cat['group_name']).'</td>
-		<td>'.$row_cat['unix_group_name'].'</td>
-		<td width="40%">'.util_make_link ('/project/admin/?group_id='.$row_cat['group_id'],_('[Project Admin]')).'</td>
+		<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName())).'</td>
+		<td>'.$p->getUnixName().'</td>
+		<td width="40%">'.util_make_link ('/project/admin/?group_id='.$p->getID(),_('[Project Admin]')).'</td>
 		</tr>
 	';
 

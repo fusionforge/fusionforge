@@ -61,7 +61,7 @@ function performAction($newStatus, $statusString, $user_id) {
 	echo "<div class='feedback'>" .sprintf(_('User updated to %1$s status'), $statusString)."</div>";
 }
 
-function show_users_list ($result) {
+function show_users_list ($users) {
 	echo '<p>' ._('Key') .':
 		<span class="active">'._('Active'). '</span>
 		<span class="deleted">' ._('Deleted') .'</span>
@@ -89,23 +89,23 @@ function show_users_list ($result) {
 	echo $GLOBALS['HTML']->listTableTop($headers, $headerLinks);
 
 	$count = 0;
-	while ($usr = db_fetch_array($result)) {
+	foreach ($users as $u) {
 		print '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($count) . '><td class="';
-		if ($usr['status'] == 'A') print "active";
-		if ($usr['status'] == 'D') print "deleted";
-		if ($usr['status'] == 'S') print "suspended";
-		if ($usr['status'] == 'P') print "pending";
-		print '"><a href="useredit.php?user_id='.$usr['user_id'].'">';
-		if ($usr['status'] == 'P') print "*";
-		echo $usr['firstname'].' '.$usr['lastname'].' ('.$usr['user_name'].')</a>';
+		if ($u->getStatus() == 'A') print "active";
+		if ($u->getStatus() == 'D') print "deleted";
+		if ($u->getStatus() == 'S') print "suspended";
+		if ($u->getStatus() == 'P') print "pending";
+		print '"><a href="useredit.php?user_id='.$u->getID().'">';
+		if ($u->getStatus() == 'P') print "*";
+		echo $u->getRealName().' ('.$u->getUnixName().')</a>';
 		echo '</td>';
 		echo '<td width="15%" style="text-align:center">';
-		echo ($usr['add_date'] ? date(_('Y-m-d H:i'), $usr['add_date']) : '-');
+		echo ($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-');
 		echo '</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/developer/?form_dev='.$usr['user_id'],_('[DevProfile]')).'</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=activate&amp;user_id='.$usr['user_id'],_('[Activate]')).'</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=delete&amp;user_id='.$usr['user_id'],_('[Delete]')).'</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=suspend&amp;user_id='.$usr['user_id'],_('[Suspend]')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/developer/?form_dev='.$u->getID(),_('[DevProfile]')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=activate&amp;user_id='.$u->getID(),_('[Activate]')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=delete&amp;user_id='.$u->getID(),_('[Delete]')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=suspend&amp;user_id='.$u->getID(),_('[Suspend]')).'</td>';
 		echo '</tr>';
 		$count ++;
 	}
@@ -143,26 +143,24 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$result = db_query_params ('SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 ORDER BY realname',
+		$res = db_query_params ('SELECT user_id FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 ORDER BY realname',
 					   array (strtolower("$user_name_search%")));
 	} else {
 		$sortorder = getStringFromRequest('sortorder', 'realname');
-		$result = db_query_params('SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY $1', array($sortorder));
+		util_ensure_value_in_set ($sortorder,
+					  array('realname','user_name','lastname','firstname','user_id','status','add_date')) ;
+		$res = db_query_params('SELECT user_id FROM users ORDER BY '.$sortorder,
+					  array ());
 	}
-	show_users_list ($result);
+	show_users_list (user_get_objects(util_result_column_to_array($res,0)));
 } else {
 	/*
 		Show list for one group
 	*/
-	print "<strong>" . group_getname($group_id) . "</strong></p>";
+	$project = group_get_object($group_id) ;
+	print "<strong>" . $project->getPublicName() . "</strong></p>";
 
-
-	$result = db_query_params ('SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status, users.add_date AS add_date 
-FROM users,user_group 
-WHERE users.user_id=user_group.user_id AND 
-user_group.group_id=$1 ORDER BY users.user_name',
-			array($group_id));
-	show_users_list ($result);
+	show_users_list ($project->getUsers());
 }
 
 $HTML->footer(array());
