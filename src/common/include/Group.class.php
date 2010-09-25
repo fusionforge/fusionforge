@@ -2113,6 +2113,7 @@ class Group extends Error {
 			Activate member(s) of the project
 		*/
 		
+		if (USE_PFO_RBAC) {
 		$members = $this->getUsers (true) ;
 
 		foreach ($members as $member) {
@@ -2126,6 +2127,16 @@ class Group extends Error {
 				}
 			}
 			
+		}
+		} else {
+			$res_member = db_query_params ('SELECT user_id,role_id FROM user_group WHERE group_id=$1',
+						       array ($this->getID())) ;
+			while ($row_member = db_fetch_array($res_member)) {
+				$u = user_get_object($row_member['user_id']) ;
+				if (!$this->addUser($u->getUnixName(),$row_member['role_id'])) {
+					return false ;
+				}
+			}
 		}
 		
 		return true ;
