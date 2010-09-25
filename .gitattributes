@@ -4293,6 +4293,7 @@ src/www/themes/funky/images/ic/ofolder15.png -text
 src/www/themes/funky/images/ic/pencil.png -text
 src/www/themes/funky/images/ic/rss.png -text
 src/www/themes/funky/images/ic/save.png -text
+src/www/themes/funky/images/ic/spinner.gif -text svneol=unset#unset
 src/www/themes/funky/images/ic/survey16b.png -text
 src/www/themes/funky/images/ic/taskman20g.png -text
 src/www/themes/funky/images/ic/taskman20w.png -text
@@ -4407,6 +4408,7 @@ src/www/themes/gforge/images/ic/ofolder15.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/pencil.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/rss.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/save.png -text svneol=unset#image/png
+src/www/themes/gforge/images/ic/spinner.gif -text svneol=unset#unset
 src/www/themes/gforge/images/ic/survey16b.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/taskman20g.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/taskman20w.png -text svneol=unset#image/png
