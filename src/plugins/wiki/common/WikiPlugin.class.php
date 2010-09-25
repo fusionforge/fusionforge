@@ -40,7 +40,7 @@ class GforgeWikiPlugin extends Plugin {
 		$this->hooks[] = 'activity';
 	}
 
-	function CallHook ($hookname, & $params) {
+	function CallHook ($hookname, $params) {
 		global $G_SESSION,$HTML;
 		if (is_array($params) && isset($params['group']))
 			$group_id=$params['group'];

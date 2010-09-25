@@ -22,9 +22,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-require_once $GLOBALS['gfwww'].'search/include/engines/GroupSearchEngine.class.php';
+require_once $GLOBALS['gfwww'].'search/include/engines/SearchEngine.class.php';
 
-class WikiSearchEngine extends SearchEngine {
+class WikiSearchEngine extends GFSearchEngine {
 	
 	/**
 	* name of the external site
