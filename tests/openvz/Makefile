@@ -3,15 +3,21 @@ DEBMIRROR=http://ftp.fr.debian.org/debian
 RINSECONF=/etc/rinse/rinse.conf
 RINSEBPI=
 RINSEPOSTINST=--after-post-install $(CURDIR)/local.rinse.api
-VEID=100
+VEIDDEB=100
+VEIDCEN=101
 VEIDDEBTMPL=105
 VEIDCENTOSTMPL=110
 ARCH=amd64
 DIST=squeeze
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh
 EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils
-DEBVERS=5.0
+DEBVERS=6.0
 CENTVERS=5.4
+VZPRIVATEDIR=/var/lib/vz/private
+VZTEMPLATEDIR=/var/lib/vz/template
+VZCTL=sudo /usr/sbin/vzctl
+DEBOOTSTRAP=/usr/sbin/debootstrap
+RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
 
 # Local customization can be done using a local.<hostname> file
 # This is convenient if you use local mirror
@@ -30,66 +36,66 @@ default:
 	@echo "Read Makefile for other targets"
 
 builddebiantemplate: builddebianvm
-	vzctl set $(VEID) --applyconfig basic --save
-	grep -q "^OSTEMPLATE=" /etc/vz/conf/$(VEID).conf || \
-		echo "OSTEMPLATE=debian-$(DEBVERS)" >> /etc/vz/conf/$(VEID).conf
-	rm /var/lib/vz/private/$(VEID)/etc/ssh/ssh_host_*
+	$(VZCTL) set $(VEIDDEB) --ostemplate debian-$(DEBVERS) --applyconfig basic --save
+	# remove host keys
+	#rm $(VZPRIVATEDIR)/$(VEIDDEB)/etc/ssh/ssh_host_*
 	# Disable getty in /etc/inittab as openvz do not have that.
-	sed -i -e '/getty/d' /var/lib/vz/private/$(VEID)/etc/inittab
+	[ ! -f $(VZPRIVATEDIR)/$(VEIDDEB)/etc/inittab ] || (grep -q getty $(VZPRIVATEDIR)/$(VEIDDEB)/etc/inittab || \
+		sed -i -e '/getty/d' $(VZPRIVATEDIR)/$(VEIDDEB)/etc/inittab)
 	# Link /etc/mtab to /proc/mtab to make mount work as expected.
-	rm -f /var/lib/vz/private/$(VEID)/etc/mtab
-	ln -s /proc/mounts /var/lib/vz/private/$(VEID)/etc/mtab
+	rm -f $(VZPRIVATEDIR)/$(VEIDDEB)/etc/mtab
+	ln -s /proc/mounts $(VZPRIVATEDIR)/$(VEIDDEB)/etc/mtab
 	# LocalTime
-	#ln -sf /usr/share/zoneinfo/Europe/Paris /var/lib/vz/private/$(VEID)/etc/localtime
+	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDDEB)/etc/localtime
 	# Remove hostname
-	rm -f /var/lib/vz/private/$(VEID)/etc/hostname
-	cd /var/lib/vz/private/$(VEID)/ ; tar --numeric-owner -zcf /var/lib/vz/template/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
+	[ ! -f $(VZPRIVATEDIR)/$(VEIDDEB)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDDEB)/etc/hostname
+	#
+	[ -c $(VZPRIVATEDIR)/$(VEIDDEB)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEB) /bin/mknod /dev/ptmx c 5 2
+	cd $(VZPRIVATEDIR)/$(VEIDDEB)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
 
 buildcentostemplate: buildcentosvm
-	vzctl set $(VEID) --applyconfig basic --save
-	grep -q "^OSTEMPLATE=" /etc/vz/conf/$(VEID).conf || \
-		echo "OSTEMPLATE=centos-$(CENTVERS)" >> /etc/vz/conf/$(VEID).conf
-	#rm /var/lib/vz/private/$(VEID)/etc/ssh/ssh_host_*
+	$(VZCTL) set $(VEIDCEN) --ostemplate centos-$(CENTVERS) --applyconfig basic --save
+	#rm $(VZPRIVATEDIR)/$(VEIDCEN)/etc/ssh/ssh_host_*
 	# Disable getty in /etc/inittab as openvz do not have that.
-	sed -i -e '/getty/d' /var/lib/vz/private/$(VEID)/etc/inittab
+	[ ! -f $(VZPRIVATEDIR)/$(VEIDCEN)/etc/inittab ] || (grep -q getty $(VZPRIVATEDIR)/$(VEIDCEN)/etc/inittab || \
+		sed -i -e '/getty/d' $(VZPRIVATEDIR)/$(VEIDCEN)/etc/inittab)
 	# Don't start_udev
-	sed -i -e '/start_udev/d' /var/lib/vz/private/$(VEID)/etc/rc.d/rc.sysinit
+	sed -i -e '/start_udev/d' $(VZPRIVATEDIR)/$(VEIDCEN)/etc/rc.d/rc.sysinit
 	# Link /etc/mtab to /proc/mtab to make mount work as expected.
-	rm -f /var/lib/vz/private/$(VEID)/etc/mtab
-	ln -s /proc/mounts /var/lib/vz/private/$(VEID)/etc/mtab
+	rm -f $(VZPRIVATEDIR)/$(VEIDCEN)/etc/mtab
+	ln -s /proc/mounts $(VZPRIVATEDIR)/$(VEIDCEN)/etc/mtab
 	# LocalTime
-	#ln -sf /usr/share/zoneinfo/Europe/Paris /var/lib/vz/private/$(VEID)/etc/localtime
+	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDCEN)/etc/localtime
 	# Remove hostname
-	rm -f /var/lib/vz/private/$(VEID)/etc/hostname
+	[ ! -f $(VZPRIVATEDIR)/$(VEIDCEN)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDCEN)/etc/hostname
 	#
-	[ -c /var/lib/vz/private/$(VEID)/dev/ptmx ]     || chroot /var/lib/vz/private/$(VEID) /bin/mknod /dev/ptmx c 5 2
-	[ -d /var/lib/vz/private/$(VEID)/dev/pts ]      || chroot /var/lib/vz/private/$(VEID) /bin/mkdir /dev/pts
-	[ -c /var/lib/vz/private/$(VEID)/vz/private/50/dev/ttyp ] || chroot /var/lib/vz/private/$(VEID) /sbin/MAKEDEV -d /vz/private/50/dev ttyp ptyp
-	-rm -f /var/lib/vz/private/$(VEID)/dev/null
-	[ -c /var/lib/vz/private/$(VEID)/dev/null ]     || chroot /var/lib/vz/private/$(VEID) /bin/mknod /dev/null c 1 3
-	[ -c /var/lib/vz/private/$(VEID)/dev/random ]   || chroot /var/lib/vz/private/$(VEID) /bin/mknod -m 644 /dev/random c 1 8
-	-rm -f /var/lib/vz/private/$(VEID)/dev/urandom 
-	[ -c /var/lib/vz/private/$(VEID)/dev/urandom ]  || chroot /var/lib/vz/private/$(VEID) /bin/mknod /dev/urandom c 1 9 
-	[ -d /var/lib/vz/private/$(VEID)/var/lock/rpm ] || chroot /var/lib/vz/private/$(VEID) /bin/mkdir /var/lock/rpm	
-	touch /var/lib/vz/private/$(VEID)/etc/fstab
-	grep -q devpts /var/lib/vz/private/$(VEID)/etc/fstab || \
-		echo "none /dev/pts devpts mode=0620 0 0" >> /var/lib/vz/private/$(VEID)/etc/fstab
-	cd /var/lib/vz/private/$(VEID)/ ; tar --numeric-owner -zcf /var/lib/vz/template/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
+	[ -c $(VZPRIVATEDIR)/$(VEIDCEN)/dev/ptmx ]     || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /bin/mknod /dev/ptmx c 5 2
+	[ -d $(VZPRIVATEDIR)/$(VEIDCEN)/dev/pts ]      || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /bin/mkdir /dev/pts
+	[ -c $(VZPRIVATEDIR)/$(VEIDCEN)/vz/private/50/dev/ttyp ] || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /sbin/MAKEDEV -d /vz/private/50/dev ttyp ptyp
+	-rm -f $(VZPRIVATEDIR)/$(VEIDCEN)/dev/null
+	[ -c $(VZPRIVATEDIR)/$(VEIDCEN)/dev/null ]     || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /bin/mknod /dev/null c 1 3
+	[ -c $(VZPRIVATEDIR)/$(VEIDCEN)/dev/random ]   || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /bin/mknod -m 644 /dev/random c 1 8
+	-rm -f $(VZPRIVATEDIR)/$(VEIDCEN)/dev/urandom 
+	[ -c $(VZPRIVATEDIR)/$(VEIDCEN)/dev/urandom ]  || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /bin/mknod /dev/urandom c 1 9 
+	[ -d $(VZPRIVATEDIR)/$(VEIDCEN)/var/lock/rpm ] || chroot $(VZPRIVATEDIR)/$(VEIDCEN) /bin/mkdir /var/lock/rpm	
+	touch $(VZPRIVATEDIR)/$(VEIDCEN)/etc/fstab
+	grep -q devpts $(VZPRIVATEDIR)/$(VEIDCEN)/etc/fstab || \
+		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCEN)/etc/fstab
+	cd $(VZPRIVATEDIR)/$(VEIDCEN)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
 
-builddebianvm: /var/lib/vz/private/$(VEID)/etc /etc/vz/conf/$(VEID).conf 
+builddebianvm: $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm
 
-/var/lib/vz/private/$(VEID)/etc: cleanvz /var/lib/vz/private/$(VEID)
-	[ -d /var/lib/vz/private/$(VEID)/etc ] || sudo debootstrap --arch $(ARCH) $(EXTRADEBPACKAGE) $(DIST) /var/lib/vz/private/$(VEID) $(DEBMIRROR)
+$(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm:
+	[ -d $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm ] || ($(DEBOOTSTRAP) --arch $(ARCH) $(EXTRADEBPACKAGE) $(DIST) $(VZPRIVATEDIR)/$(VEIDDEB) $(DEBMIRROR) && touch $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm)
 
-buildcentosvm: /var/lib/vz/private/$(VEID)/etc/redhat-release 
+buildcentosvm: $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm
 
-/var/lib/vz/private/$(VEID)/etc/redhat-release: cleanvz
-	[ -d /var/lib/vz/private/$(VEID)/etc/redhat-release ] || sudo extrapackage="$(EXTRACENTOSPACKAGE)" rinse $(RINSEBPI) $(RINSEPOSTINST) --config $(RINSECONF) --arch $(ARCH) --distribution centos-5 --directory /var/lib/vz/private/$(VEID)
+$(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm:
+	[ -d $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm ] || ($(RINSE) $(RINSEBPI) $(RINSEPOSTINST) --config $(RINSECONF) --arch $(ARCH) --distribution centos-5 --directory $(VZPRIVATEDIR)/$(VEIDCEN) && touch $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm)
 
 cleanvz:
-	-rmdir /var/lib/vz/private/$(VEID)
-	[ ! -d /var/lib/vz/private/$(VEID) ] || vzctl stop $(VEID)
-	[ ! -d /var/lib/vz/private/$(VEID) ] || vzctl destroy $(VEID)
+	[ ! -d $(VZPRIVATEDIR)/$(VEID) ] || $(VZCTL) stop $(VEID)
+	[ ! -d $(VZPRIVATEDIR)/$(VEID) ] || $(VZCTL) destroy $(VEID)
 	-rm -f /etc/vz/conf/$(VEID).conf.destroyed
 
 cleancentos:
@@ -98,53 +104,47 @@ cleancentos:
 cleandeb:
 	make cleanvz VEID=$(VEIDDEBTMPL)
 
-/var/lib/vz/private/$(VEID):
-	sudo mkdir /var/lib/vz/private/$(VEID)
-
-/etc/vz/conf/$(VEID).conf:
-	vzctl set $(VEID) --applyconfig basic --save
-	echo "OSTEMPLATE=debian-$(DEBVERS)" >> /etc/vz/conf/$(VEID).conf
-
 finalizedeb:
 	# Give it a hostname.
-	echo `hostname`-$(VEIDDEBTMPL) > /var/lib/vz/private/$(VEIDDEBTMPL)/etc/hostname
+	echo `hostname`-$(VEIDDEBTMPL) > $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/hostname
 	# Disable getty in /etc/inittab as openvz do not have that.
-	sed -i -e '/getty/d' /var/lib/vz/private/$(VEIDDEBTMPL)/etc/inittab
+	sed -i -e '/getty/d' $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/inittab
 	# Link /etc/mtab to /proc/mtab to make mount work as expected.
-	rm -f /var/lib/vz/private/$(VEIDDEBTMPL)/etc/mtab
-	ln -s /proc/mounts /var/lib/vz/private/$(VEIDDEBTMPL)/etc/mtab
+	rm -f $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/mtab
+	ln -s /proc/mounts $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/mtab
 	# If an IP address is needed for the virtual server
-	#vzctl set $(VEIDDEBTMPL) --ipadd x.x.x.x --save
+	#$(VZCTL) set $(VEIDDEBTMPL) --ipadd x.x.x.x --save
 	# In that case you also need to enable IP forwarding
 	#sysctl -w net.ipv4.ip_forward=1
 	# Add eth0 interface
-	vzctl set $(VEIDDEBTMPL) --netif_add eth0 --save
+	$(VZCTL) set $(VEIDDEBTMPL) --netif_add eth0 --save
 	# Setup dhcp
-	grep -q "auto lo" /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces || \
-		echo "auto lo" >> /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces
-	grep -q "iface lo inet loopback" /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces || \
-		echo "iface lo inet loopback" >> /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces
-	grep -q "auto eth0" /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces || \
-		echo "auto eth0" >> /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces
-	grep -q "iface eth0 inet dhcp" /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces || \
-		echo "iface eth0 inet dhcp" >> /var/lib/vz/private/$(VEIDDEBTMPL)/etc/network/interfaces
+	grep -q "auto lo" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces || \
+		echo "auto lo" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces
+	grep -q "iface lo inet loopback" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces || \
+		echo "iface lo inet loopback" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces
+	grep -q "auto eth0" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces || \
+		echo "auto eth0" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces
+	grep -q "iface eth0 inet dhcp" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces || \
+		echo "iface eth0 inet dhcp" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/network/interfaces
 	# Setup dhclient extra
-	grep -q "^send host-name" /var/lib/vz/private/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf || \
-		echo "send host-name \"`hostname`-$(VEIDDEBTMPL)\";" >> /var/lib/vz/private/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf
+	grep -q "^send host-name" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf || \
+		echo "send host-name \"`hostname`-$(VEIDDEBTMPL)\";" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf
 
 finalizecentos:
 	# Give it a hostname.
-	echo `hostname`-$(VEIDCENTOSTMPL) > /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/hostname
-	grep -q "^HOSTNAME=" /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/sysconfig/network || \
-		echo "HOSTNAME=`hostname`-$(VEIDCENTOSTMPL)" >> /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/sysconfig/network
+	echo `hostname`-$(VEIDCENTOSTMPL) > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/hostname
+	grep -q "^HOSTNAME=" $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network || \
+		echo "HOSTNAME=`hostname`-$(VEIDCENTOSTMPL)" >> $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network
 	# Add eth0 interface
-	vzctl set $(VEIDCENTOSTMPL) --netif_add eth0 --save
+	$(VZCTL) set $(VEIDCENTOSTMPL) --netif_add eth0 --save
 	# Setup dhcp
-	echo "DEVICE=eth0" > /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/sysconfig/network-scripts/ifcfg-eth0
-	echo "BOOTPROTO=dhcp" >> /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/sysconfig/network-scripts/ifcfg-eth0
-	echo "ONBOOT=yes" >> /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "DEVICE=eth0" > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "BOOTPROTO=dhcp" >> $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "ONBOOT=yes" >> $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network-scripts/ifcfg-eth0
 	# Setup dhclient extra
-	[ -f /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/dhclient.conf ] || echo "send host-name \"`hostname`-$(VEIDCENTOSTMPL)\";" > /var/lib/vz/private/$(VEIDCENTOSTMPL)/etc/dhclient.conf
+	[ -f $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/dhclient.conf ] || \
+		echo "send host-name \"`hostname`-$(VEIDCENTOSTMPL)\";" > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/dhclient.conf
 	
 
 net: /etc/vz/vznet.conf
@@ -160,12 +160,12 @@ addbridge:
 	#sudo brctl addif vmbr0 eth0
 
 createdeb: cleandeb
-	vzctl create $(VEIDDEBTMPL) --ostemplate debian-$(DEBVERS)-$(ARCH)-minimal
+	$(VZCTL) create $(VEIDDEBTMPL) --private $(VZPRIVATEDIR)/$(VEIDDEBTMPL) --ostemplate debian-$(DEBVERS)-$(ARCH)-minimal
 	make finalizedeb
 	
 createcentos: cleancentos
-	vzctl create $(VEIDCENTOSTMPL) --ostemplate centos-$(CENTVERS)-$(ARCH)-minimal
+	$(VZCTL) create $(VEIDCENTOSTMPL) --private $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL) --ostemplate centos-$(CENTVERS)-$(ARCH)-minimal
 	make finalizecentos
 	
 start:
-	sudo vzctl start $(VEID)
+	sudo $(VZCTL) start $(VEID)
