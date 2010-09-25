@@ -45,7 +45,7 @@ switch:
 check:
 	## To run test in verbose mode :
 	#cd tests ; phpunit --verbose unit; phpunit --verbose code; 
-	cd tests ; php AllTests.php
+	cd tests ; php AllTests.php | perl -p -e '$$e=1 if /FAILURE/ ; END { exit 1 if $$e }'
 
 checkfull:
 	## To run test in verbose mode :
