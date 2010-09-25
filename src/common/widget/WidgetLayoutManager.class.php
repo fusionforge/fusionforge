@@ -146,12 +146,17 @@ class WidgetLayoutManager {
 		if (db_query_params($sql,array($owner_id,$owner_type))) {
 
 			$sql = "INSERT INTO layouts_contents(owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
-			$sql .= "($1, $2, 1, 1, 'myprojects', 0)";
-			$sql .= ",($1, $2, 1, 1, 'mybookmarks', 1)";
-			$sql .= ",($1, $2, 1, 1, 'mymonitoredforums', 2)";
-			$sql .= ",($1, $2, 1, 1, 'mysurveys', 4)";
-			$sql .= ",($1, $2, 1, 2, 'myartifacts', 0)";
-			$sql .= ",($1, $2, 1, 2, 'mymonitoredfp', 1)";
+
+			$args[] = "($1, $2, 1, 1, 'myprojects', 0)";
+			$args[] = "($1, $2, 1, 1, 'mybookmarks', 1)";
+			$args[] = "($1, $2, 1, 1, 'mymonitoredforums', 2)";
+			$args[] = "($1, $2, 1, 1, 'mysurveys', 4)";
+			$args[] = "($1, $2, 1, 2, 'myartifacts', 0)";
+			$args[] = "($1, $2, 1, 2, 'mymonitoredfp', 1)";
+
+			foreach($args as $a) {
+				db_query_params($sql.$a,array($owner_id,$owner_type));
+			}
 
 			/*  $em =& EventManager::instance();
 			    $widgets = array();
@@ -159,7 +164,6 @@ class WidgetLayoutManager {
 			    foreach($widgets as $widget) {
 			    $sql .= ",($13, $14, 1, $15, $16, $17)";
 			    }*/
-			db_query_params($sql,array($owner_id,$owner_type));
 		}
 		echo db_error();
 	}
