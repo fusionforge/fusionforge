@@ -85,7 +85,6 @@ echo notepad_func();
 		<?php
 			$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'DISPLAY');
 			$ath->renderRelatedTasks($group, $ah);
-			$ath->renderFiles($group_id, $ah);
 		?>
 
 		<tr><td colspan="2"><strong><?php echo _('Summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
@@ -138,28 +137,8 @@ echo notepad_func();
 	//
 	//  print a list of files attached to this Artifact
 	//
-	$file_list =& $ah->getFiles();
-
-	$count=count($file_list);
-
-	if ($count > 0) {
-
-		$title_arr=array();
-		$title_arr[]=_('Name');
-		$title_arr[]=_('Download');
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-		for ($i=0; $i<$count; $i++) {
-			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-			<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-			<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'.$ath->getID().'/'.$ah->getID().'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
-			</tr>';
-		}
-		echo $GLOBALS['HTML']->listTableBottom();
-
-	} else {
-		echo _('No Files Currently Attached');
-	}
-?>
+		$ath->renderFiles($group_id, $ah);
+	?>
 	</td></tr>
 </table>
 </div>

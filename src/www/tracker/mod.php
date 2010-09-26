@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -160,10 +161,6 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<td>
 		</td>
 	</tr>
-	<?php
-		$ath->renderRelatedTasks($group, $ah);
-		$ath->renderFiles($group_id, $ah);
-	?>
 	<tr>
 		<td><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
 		<input type="text" name="summary" size="70" value="<?php
@@ -212,36 +209,9 @@ if ($group->usesPM()) {
 <div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
 		<h3><?php echo _('Related Tasks'); ?>:</h3>
 <table border="0" width="80%">
-		<?php
-		$result = $ah->getRelatedTasks();
-		$taskcount = db_numrows($ah->relatedtasks);
-		if ($taskcount > 0) {
-			echo '<tr><td colspan="2">';
-			$titles[] = _('Task Id');
-			$titles[] = _('Task Summary');
-			$titles[] = _('Start Date');
-			$titles[] = _('End Date');
-			echo $GLOBALS['HTML']->listTableTop($titles);
-			for ($i = 0; $i < $taskcount; $i++) {
-				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
-				$taskid    = $taskinfo['project_task_id'];
-				$projectid = $taskinfo['group_project_id'];
-				$groupid   = $taskinfo['group_id'];
-				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
-				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td>'.$taskid.'</td>
-						<td>'.util_make_link ('/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid,$summary).'</td>
-						<td>'.$startdate.'</td>
-						<td>'.$enddate.'</td>
-				</tr>';
-			}
-			echo $GLOBALS['HTML']->listTableBottom();
-		} else {
-			echo '<tr><td colspan="3">'._('No Related Tasks').'</td></tr>';
-		}
-      ?>
+	<?php
+		$ath->renderRelatedTasks($group, $ah);
+	?>
 </table>
 </div>
 <?php } ?>
@@ -259,31 +229,7 @@ if ($group->usesPM()) {
 		//
 		//	print a list of files attached to this Artifact
 		//
-		$file_list =& $ah->getFiles();
-		
-		$count=count($file_list);
-		$title_arr=array();
-		$title_arr[]=_('Delete');
-		$title_arr[]=_('Name');
-		$title_arr[]=_('Download');
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-
-		if ($count > 0) {
-
-			for ($i=0; $i<$count; $i++) {
-				echo '
-				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'" />'._('Delete').' </td>'.
-				'<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
-				<td>'.util_make_link ('/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName(),_('Download')).'</td>
-				</tr>';
-			}
-
-		} else {
-			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan="4">'._('No Files Currently Attached').'</td></tr>';
-		}
-
-		echo $GLOBALS['HTML']->listTableBottom();
+		$ath->renderFiles($group_id, $ah);
 		?>
 	</td></tr>
 </table>
