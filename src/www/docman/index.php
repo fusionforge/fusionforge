@@ -53,7 +53,7 @@ if (!$g || !is_object($g))
 
 /* is this group using docman ? */
 if (!$g->usesDocman())
-	exit_disabled('home');
+	exit_disabled();
 
 if ($g->isError())
 	exit_error($g->getErrorMessage(),'docman');

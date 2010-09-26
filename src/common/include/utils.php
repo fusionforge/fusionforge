@@ -3,7 +3,7 @@
  * FusionForge miscellaneous utils
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2009-2010, Roland Mas, Franck Villaume
+ * Copyright 2009-2010, Roland Mas, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *

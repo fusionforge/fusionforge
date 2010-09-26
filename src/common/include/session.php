@@ -25,6 +25,7 @@
  */
 
 require_once $gfcommon.'include/account.php';
+require_once $gfcommon.'include/utils.php';
 require_once $gfcommon.'include/escapingUtils.php';
 
 /**

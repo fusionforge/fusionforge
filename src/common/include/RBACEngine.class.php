@@ -80,7 +80,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id IS NULL',
 						array ());
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$this->_cached_global_roles[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
@@ -98,7 +98,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE is_public=$1',
 						array ('true'));
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$this->_cached_public_roles[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
