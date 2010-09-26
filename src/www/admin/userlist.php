@@ -118,7 +118,8 @@ function show_users_list ($users) {
 
 $group_id = getIntFromRequest('group_id');
 $action = getStringFromRequest('action');
-$user_id = getStringFromRequest('user_id');
+$user_id = getIntFromRequest('user_id');
+$status = getStringFromRequest('status');
 
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
@@ -145,6 +146,9 @@ if (!$group_id) {
 	if ($user_name_search) {
 		$res = db_query_params ('SELECT user_id FROM users WHERE lower(user_name) LIKE $1 OR lower(lastname) LIKE $1 ORDER BY realname',
 					   array (strtolower("$user_name_search%")));
+	} elseif ($status) {
+		$res = db_query_params ('SELECT user_id FROM users WHERE status = $1 ORDER BY realname',
+					   array ($status));
 	} else {
 		$sortorder = getStringFromRequest('sortorder', 'realname');
 		util_ensure_value_in_set ($sortorder,

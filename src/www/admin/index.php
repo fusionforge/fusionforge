@@ -76,6 +76,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
     echo _('Register a New User');
     ?></a>
     </li>
+	<li><a href="userlist.php?status=P"><?php echo _('Pending users'); ?></a></li>
 </ul>
 <?php if (USE_PFO_RBAC) { ?>
 <h2><?php echo _('Global roles and permissions'); ?></h2>
@@ -140,7 +141,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </ul>
 <ul>
 	<li><?php echo util_make_link ('/register/',_('Register New Project')); ?></li>
-	<li><?php echo _('Projects with status'); ?> <a href="approve-pending.php"><?php echo _('Pending (P)'); ?> <em><?php echo _('(New Project Approval)'); ?></em></a></li>
+	<li><a href="approve-pending.php"><?php echo _('Pending projects (new project approval)'); ?></a></li>
 	<li><form name="projectsearch" action="search.php">
 	<?php echo _('Projects with status'); ?>
 	<select name="status">
