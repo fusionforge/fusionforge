@@ -1,0 +1,24 @@
+This plugin is compatible with FusionForge 5.X.
+
+Manual install :
+----------------
+
+Required libraries :
+ * Zend framework  (tested on v. 1.10)
+ * PEAR's File_CSV library (tested on File v. 1.3.0)
+ * PEAR's HTTP library (tested on HTTP v. 1.4.1)
+You can have those libraries by installing their respectives Debian packages:
+zendframework, php-pear, php-http
+
+Plugin installation and activation :
+ * Copy the plugin root directory into your /usr/share/gforge/plugins directory.
+ * Login as forge admin and activate the plugin from the Plugin Manager page in forge's admin section. 
+ * Activate the plugin for your project (from your project's Admin -> Tools page)
+ * Don't forget to update your php include_path in your /etc/gforge/httpd.conf file
+ 
+
+How to test that installation is correct :
+---------------------------------------------
+ * If previous steps were done correctly, you will have an "oslc" tab
+ in your project's services bar. Once in it shows the followings:
+ "Thanks for using this FusionForge OSLC-CM V1 compatible REST server..."
