@@ -2459,19 +2459,25 @@ if there is anything we can do to help you.
 	 *	@access public
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
-		$res_admins = db_query_params ('
-			SELECT u.email, u.language, u.user_id
-			FROM users u, user_group ug
-			WHERE ug.group_id=$1
-			AND u.user_id=ug.user_id',
-					       array ($this->getID())) ;
-		if (db_numrows($res_admins) < 1) {
+		$submitters = array () ;
+		if (USE_PFO_RBAC) {
+			foreach (get_group_join_requests ($this) as $gjr) {
+				$submitters[] =  user_get_object($gjr->getUserID()) ;
+			}
+		} else {
+			$res = db_query_params("SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND u.user_id=ug.user_id",
+					       $this->getID());
+			while ($arr = db_fetch_array ($res)) {
+				$submitter[] =& user_get_object($arr['user_id']);
+			}
+		}
+
+		if (count ($submitters) < 1) {
 			$this->setError(_("Group does not have any administrators."));
 			return false;
 		}
-		
-		while ($row_admins = db_fetch_array($res_admins)) {
-			$admin =& user_get_object($row_admins['user_id']);
+
+		foreach ($submitters as $admin) {
 			setup_gettext_for_user ($admin) ;
 
 			$response=sprintf(_('Your project registration for %3$s has been denied.
@@ -2493,7 +2499,7 @@ Reasons for negative decision:
 					"response_text");
 			}
 
-			util_send_message($row_admins['email'], sprintf(_('%1$s Project Denied'), forge_get_config ('forge_name')), $response);
+			util_send_message($admin->getEmail(), sprintf(_('%1$s Project Denied'), forge_get_config ('forge_name')), $response);
 			setup_gettext_from_context();
 		}
 
@@ -2512,17 +2518,23 @@ Reasons for negative decision:
 	 */
 	function sendNewProjectNotificationEmail() {
 		// Get the user who wants to register the project
-		$res = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1',
-					array ($this->getID())) ;
-
-		if (db_numrows($res) < 1) {
+		$submitters = array () ;
+		if (USE_PFO_RBAC) {
+			foreach (get_group_join_requests ($this) as $gjr) {
+				$submitters[] =  user_get_object($gjr->getUserID()) ;
+			}
+		} else {
+			$res = db_query_params("SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND u.user_id=ug.user_id",
+					       $this->getID());
+			while ($arr = db_fetch_array ($res)) {
+				$submitter[] =& user_get_object($arr['user_id']);
+			}
+		}
+		if (count ($submitters) < 1) {
 			$this->setError(_("Could not find user who has submitted the project."));
 			return false;
 		}
 		
-		$submitter =& user_get_object(db_result($res,0,'user_id'));
-
-
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_approve', -1) ;
 
 		if (count($admins) < 1) {
@@ -2533,21 +2545,31 @@ Reasons for negative decision:
 		foreach ($admins as $admin) {
 			$admin_email = $admin->getEmail () ;
 			setup_gettext_for_user ($admin) ;
+
+			foreach ($submitters as $u) {
+				$submitter_names[] = $u->getRealName() ;
+			}
 			
-			$message=sprintf(_('New %1$s Project Submitted
+			$message = sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
-Submitter: %5$s (%6$s)
+'),
+					   forge_get_config ('forge_name'),
+					   htmlspecialchars_decode($this->getPublicName()),
+					   htmlspecialchars_decode($this->getRegistrationPurpose()));
+			
+			foreach ($submitters as $submitter) {
+				$message .= sprintf(_('Submitter: %1$s (%2$s)
+'),
+						    $submitter->getRealName(), 
+						    $submitter->getUnixName());
+			}
 
+			$message .= sprintf (_('
 Please visit the following URL to approve or reject this project:
-%4$s'),
-						       forge_get_config ('forge_name'),
-						       htmlspecialchars_decode($this->getPublicName()),
-						       htmlspecialchars_decode($this->getRegistrationPurpose()),
-						       util_make_url ('/admin/approve-pending.php'),
-						       $submitter->getRealName(), 
-						       $submitter->getUnixName());
+%1$s'),
+					    util_make_url ('/admin/approve-pending.php')) ;
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}

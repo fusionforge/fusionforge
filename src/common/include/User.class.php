@@ -1143,29 +1143,20 @@ Enjoy the site.
 	 *	@return array	Array of groups.
 	 */
 	function &getGroups($onlylocal = true) {
-
-		if (USE_PFO_RBAC) {
-			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($this) ;
-			$ids = array () ;
-			foreach ($roles as $r) {
-				if ($onlylocal) {
-					if ($r instanceof RoleExplicit
-					    && $r->getHomeProject() != NULL) {
-						$ids[] = $r->getHomeProject()->getID() ;
-					}
-				} else {
-					foreach ($r->getLinkedProjects() as $p) {
-						$ids[] = $p->getID() ;
-					}
+		$ids = array () ;
+		foreach ($this->getRoles() as $r) {
+			if ($onlylocal) {
+				if ($r instanceof RoleExplicit
+				    && $r->getHomeProject() != NULL) {
+					$ids[] = $r->getHomeProject()->getID() ;
+				}
+			} else {
+				foreach ($r->getLinkedProjects() as $p) {
+					$ids[] = $p->getID() ;
 				}
 			}
-			return group_get_objects(array_unique($ids)) ;
-		} else {
-			$res = db_query_params ('SELECT group_id FROM user_group WHERE user_id=$1',
-						array ($this->getID())) ;
-			$arr =& util_result_column_to_array($res,0);	
-			return group_get_objects($arr);
 		}
+		return group_get_objects(array_unique($ids)) ;
 	}
 
 	/**
@@ -1520,30 +1511,14 @@ Enjoy the site.
 	 *  @return object  Role object
 	 */
 	function getRole(&$group) {
-		if (!$group || !is_object($group)) {
-			$this->setError('User::getRole : Unable to get group object');
-			return false;
+		foreach ($this->getRoles () as $r) {
+			if ($r instanceof RoleExplicit
+			    && $r->getHomeProject() != NULL
+			    && $r->getHomeProject()->getID() == $group->getID()) {
+				return $r ;
+			}
 		}
-		$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1 AND group_id=$2',
-					array ($this->getID(),
-					       $group->getID())) ;
-		if (!$res || db_numrows($res) < 1) {
-			$this->setError('User::getRole::DB - Could Not get role_id '.db_error());
-			return false;
-		}
-		$role_id = db_result($res,0,'role_id');
-		//
-		//  Role setup
-		//
-		$role = new Role($group,$role_id);
-		if (!$role || !is_object($role)) {
-			$this->setError('Error Getting Role Object');
-			return false;
-		} elseif ($role->isError()) {
-			$this->setError('User::getRole::roleget::'.$role->getErrorMessage());
-			return false;
-		}
-		return $role;
+		return false ;
 	}
 
 	function getRoles () {
