@@ -92,8 +92,8 @@ if (!session_loggedin()) {
  	                       	echo '
         	                <tr>
                 	        <td colspan="' . (array_sum($display_col)+1) . '" align="left" style="background-color: #CADACA; padding-top: 4px; border-top: 1px dotted darkgreen; border-bottom: 1px solid darkgreen; font-size: larger; color: darkgreen;"><strong>&nbsp;&bull;&nbsp;' .
-					util_make_link ('/tracker/?group_id='.$group->getID(),
-							$group->getPublicName())
+					util_make_link ('/tracker/?group_id='.$p->getID(),
+							$p->getPublicName())
 					. '</strong></td></tr>';
                         	foreach($at_arr as $at) {
 					$art_found = 1;
