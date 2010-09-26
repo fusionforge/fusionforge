@@ -121,13 +121,13 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		if (USE_PFO_RBAC) {
 			$res = db_query_params ('SELECT role_id FROM pfo_user_role WHERE user_id=$1',
 						array ($user->getID()));
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$result[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		} else {
 			$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1',
 						array ($user->getID()));
-			while ($arr =& db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$result[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
