@@ -1168,6 +1168,8 @@ abstract class BaseRole extends Error {
 
 abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	public function addUsers ($users) {
+		global $SYS;
+
 		$ids = array () ;
 		foreach ($users as $user) {
 			$ids[] = $user->getID() ;
@@ -1200,6 +1202,8 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	}
 
 	public function removeUsers($users) {
+		global $SYS;
+
 		$ids = array () ;
 		foreach ($users as $user) {
 			$ids[] = $user->getID() ;
