@@ -100,7 +100,7 @@ if (!session_loggedin()) {
 	                                //
         	                        //      Create the ArtifactType object
                 	                //
-                        	        $ath = new ArtifactTypeHtml($group,$at->getID());
+                        	        $ath = new ArtifactTypeHtml($p,$at->getID());
 	                                // create artifact object, setup object
         	                        $af = new ArtifactFactory($ath);
                 	                $af->setup(0,"priority","DESC",0,"",0,1,null);
