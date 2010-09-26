@@ -181,7 +181,9 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				break;
 
 			case 'myadmin':
-				if (UserManager::instance()->getCurrentUser()->is_super_user) { //This widget is only for super admin
+				if (forge_check_global_perm ('forge_admin')
+					|| forge_check_global_perm ('approve_projects')
+					|| forge_check_global_perm ('approve_news')) {
 					$o = new Widget_MyAdmin();
 				}
 				break;/*
