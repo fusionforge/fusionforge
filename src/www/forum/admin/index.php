@@ -190,9 +190,9 @@ if (getStringFromRequest('add_forum')) {
 } elseif ( getStringFromRequest("deletemsg") ) {
 	// delete message handling
 		
-	$forum_id = getStringFromRequest("forum_id");
-	$thread_id = getStringFromRequest("thread_id");
-	$msg_id = getStringFromRequest("deletemsg");
+	$forum_id = getIntFromRequest("forum_id");
+	$thread_id = getIntFromRequest("thread_id");
+	$msg_id = getIntFromRequest("deletemsg");
 
 	$f = forum_get_object ($forum_id) ;
 
@@ -233,9 +233,9 @@ if (getStringFromRequest('add_forum')) {
 	}
 } elseif (getStringFromRequest("editmsg")) {
 	// edit message handling
-	$forum_id = getStringFromRequest("forum_id");
-	$thread_id = getStringFromRequest("thread_id");
-	$msg_id = getStringFromRequest("editmsg");
+	$forum_id = getIntFromRequest("forum_id");
+	$thread_id = getIntFromRequest("thread_id");
+	$msg_id = getIntFromRequest("editmsg");
 
 	$f = forum_get_object ($forum_id) ;
 	$fa = new ForumAdmin($f->Group->getID());

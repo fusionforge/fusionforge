@@ -560,7 +560,7 @@ class ForumMessage extends Error {
 		$msg_id=$this->getID();
 		if (!$msg_id) {
 			$this->setError(_('Invalid Message ID'));
-			return 0;
+			return false;
 		}
 		
 		if (!forge_check_perm ('forum_admin', $this->Forum->Group->getID())) {
@@ -568,8 +568,6 @@ class ForumMessage extends Error {
 			return false;
 		}
 		
-		return forge_check_perm ('forum', $this->Forum->getID(), 'moderate') ;
-
 		$result = db_query_params ('SELECT msg_id FROM forum 
 			WHERE is_followup_to=$1
 			AND group_forum_id=$2',
@@ -587,11 +585,11 @@ class ForumMessage extends Error {
 			AND group_forum_id=$2',
 					 array ($msg_id,
 						$this->Forum->getID())) ;
+
 		$res = db_query_params ('DELETE FROM forum_attachment where msg_id=$1',
 					array ($msg_id));
 
 		return $count;
-
 	}
 
 	/**

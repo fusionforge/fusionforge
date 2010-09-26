@@ -215,7 +215,7 @@ class ForumAdmin extends Error {
 			return $feedback;
 		}
 		if ($action == "delete") { //Deleting messages or threads
-			$msg_id = getStringFromRequest('deletemsg');
+			$msg_id = getIntFromRequest('deletemsg');
 			$forum_id = getIntFromRequest('forum_id');
 			$f=new Forum($this->g,$forum_id);
 			if (!$f || !is_object($f)) {
