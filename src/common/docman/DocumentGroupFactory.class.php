@@ -84,7 +84,7 @@ class DocumentGroupFactory extends Error {
 					   array ($this->Group->getID(),$stateid));
 		$rows = db_numrows($result);
 		
-		if (!$result || $rows < 1) {
+		if (!$result) {
 			$this->setError('No Groups Found '.db_error());
 			return false;
 		} else {

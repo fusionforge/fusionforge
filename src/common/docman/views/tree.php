@@ -28,6 +28,7 @@
 /* global variables used */
 global $d_arr; // documents array
 
+echo '<h3>Document Tree</h3>';
 if (!$d_arr || count($d_arr) < 1) {
 	print '<div class="feedback">'._('This project has no visible documents').'</div>';
 } else {
@@ -40,7 +41,6 @@ if (!$d_arr || count($d_arr) < 1) {
 		$nested_docs[$doc->getDocGroupID()][] = $doc;
 	}
 	echo '<div id="documenttree" style="height:100%">';
-	echo '<h3>Document Tree</h3>';
 ?>
 <script language="JavaScript"><!--
 	var myThemeXPBase = "<?php echo util_make_uri ('/jscook/ThemeXP/'); ?>";
