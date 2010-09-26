@@ -11,10 +11,11 @@ Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
 
 Package: fusionforge-plugin-oslc
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework, php-pear, php-http, ${misc:Depends}
 Description: collaborative development tool - oslc plugin
  .
  This plugin contains the oslc subsystem of FusionForge. It allows each
  FusionForge project to have its own oslc, and gives some
  control over it to the project's administrator.
-
+ The plugin gives a REST interface to FusionForge Trackers. The REST interface is OSLC-CM comptaible.
+ 
