@@ -145,7 +145,7 @@ if (!session_loggedin()) {
 								                	$projectid = $taskinfo['group_project_id'];
 									        	$groupid   = $taskinfo['group_id'];
 											$g =& group_get_object($groupid);
-											$pg = new ProjectGroup($g, $projectid, $arrtasks);
+											$pg = new ProjectGroup($g, $projectid);
 											echo $pg->getName().'<br/>';
      										        $summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
 											echo '<a href="../pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid.'">';

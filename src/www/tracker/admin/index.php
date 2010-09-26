@@ -50,7 +50,7 @@ if ($group->isError()) {
 	if($group->isPermissionDeniedError()) {
 		exit_permission_denied($group->getErrorMessage(),'tracker');
 	} else {
-		exit_error($group->getErrorMessage(),'home');
+		exit_error($group->getErrorMessage(),'tracker');
 	}
 }
 
@@ -84,7 +84,7 @@ if ($group_id && $atid) {
 				 array ('',
 					$ath->getID()));
 		echo db_error();
-		$feedback .= 'Renderer Deleted';
+		$feedback .= _('Renderer Deleted');
 		$next = 'add_extrafield';
 	}
 

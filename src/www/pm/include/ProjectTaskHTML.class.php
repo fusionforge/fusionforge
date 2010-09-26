@@ -105,7 +105,7 @@ class ProjectTaskHTML extends ProjectTask {
 			echo '<h3>'._('Related Tracker Items').'</h3>';
 
 			$title_arr=array();
-			$title_arr[]=_('Task Summary');
+			$title_arr[]=_('Artifact Summary');
 			$title_arr[]=_('Tracker');
 			$title_arr[]=_('Open Date');
 			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');

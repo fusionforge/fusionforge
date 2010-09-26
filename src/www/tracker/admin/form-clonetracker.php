@@ -3,6 +3,7 @@
  * FusionForge Tracker Cloning Form
  *
  * Copyright 2010, FusionForge Team
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -24,15 +25,15 @@
 
 $g =& group_get_object(forge_get_config('template_group'));
 if (!$g || !is_object($g)) {
-	exit_error('Error','Unable to Create Template Group Object');
+	exit_no_group();
 } elseif ($g->isError()) {
-	exit_error('Error',$g->getErrorMessage());
+	exit_error($g->getErrorMessage(),'tracker');
 } else {
 	$atf = new ArtifactTypeFactory($g);
 	if (!$atf || !is_object($atf)) {
-		exit_error('Error','Unable to Create Template Group Object');
+		exit_error(_('Unable to Create Template Group Object'),'tracker');
 	} elseif ($atf->isError()) {
-		exit_error('Error',$atf->atfetErrorMessaatfe());
+		exit_error($atf->getErrorMessage(),'tracker');
 	} else {
 		$ata = & $atf->getArtifactTypes();
 		$ids = array();
