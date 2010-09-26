@@ -2914,6 +2914,9 @@ eval {
     &update_with_sql("20100524-pfo-rbac","5.0.1-5");
     &update_with_sql("20100606-clean-perm-views","5.0.1-6");
     &update_with_sql("20100610-pfo-rbac","5.0.1-7");
+    &update_with_sql("20100730-docman","5.0.1-8");
+    &update_with_sql("20100924-theme","5.0.1-9");
+    &update_with_sql("20100926-pfo-rbac","5.0.1-10");
 
     ########################### INSERT HERE #################################
 

@@ -691,6 +691,7 @@ src/db/20100606-clean-perm-views.sql -text
 src/db/20100610-pfo-rbac.sql -text
 src/db/20100730-docman.sql -text
 src/db/20100924-theme.sql -text
+src/db/20100926-pfo-rbac.sql -text
 src/db/FTI-20061025.sql -text
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
