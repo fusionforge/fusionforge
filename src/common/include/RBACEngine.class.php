@@ -125,9 +125,10 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 				$result[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		} else {
-			$groups = $user->getGroups() ;
-			foreach ($groups as $g) {
-				$result[] = $user->getRole($g) ;
+			$res = db_query_params ('SELECT role_id FROM user_group WHERE user_id=$1',
+						array ($user->getID()));
+			while ($arr =& db_fetch_array($res)) {
+				$result[] = $this->getRoleById ($arr['role_id']) ;
 			}
 		}
 		
