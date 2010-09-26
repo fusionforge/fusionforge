@@ -243,9 +243,9 @@ BEGIN
 
 	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (1, 'Anonymous', 2, true) ;
 	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (2, 'LoggedIn', 3, true) ;
-	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (3, 'Forge administrators', 1, true) ;
-	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (4, 'News moderators', 1, true) ;
-	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (5, 'Stats administrators', 1, true) ;
+	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (3, 'Forge administrators', 1, false) ;
+	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (4, 'News moderators', 1, false) ;
+	INSERT INTO pfo_role (role_id, role_name, role_class, is_public) VALUES (5, 'Stats administrators', 1, false) ;
 
 	PERFORM setval ('pfo_role_seq', 5) ;
 
