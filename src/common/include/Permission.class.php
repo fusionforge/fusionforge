@@ -213,7 +213,7 @@ class Permission extends Error {
 				$hp = $role->getHomeProject () ;
 				if ($hp != NULL
 				    && $hp->getID() == $this->group_id) {
-					return $true ;
+					return true ;
 				}
 			}
 		}
