@@ -128,7 +128,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$html .= '<td>';
 		if ($searchQuery->getOffset() != 0) {
 			$html .= '<a href="'.$this->getPreviousResultsUrl().'" class="prev">'
-				. html_image('t2.png', '15', '15')
+				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
 				. ' '._('Previous Results').'</a>';
 		} else {
 			$html .= '&nbsp;';
@@ -137,7 +137,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		if ($searchQuery->getRowsTotalCount() > $searchQuery->getRowsCount()) {
 			$html .= '<a href="'.$this->getNextResultsUrl().'" class="next">'
 				._('Next Results').' '
-				. html_image('t.png', '15', '15') . '</a>';
+				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
 		} else {
 			$html .= '&nbsp;';
 		}
