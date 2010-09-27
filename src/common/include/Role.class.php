@@ -82,6 +82,10 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *      @return boolean True if updated OK
 	 */
 	function setName ($role_name) { // From the PFO spec
+		if ($role_name == '') {
+			$this->setError('Cannot set a role name to empty');
+			return false;
+		}
 		if ($this->getName() != stripslashes($role_name)) {
 			if (USE_PFO_RBAC) {
 				db_begin();
@@ -181,6 +185,10 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setPermissionDeniedError();
 				return false;
 			}			
+			if ($role_name == '') {
+				$this->setError('Cannot create a role with an empty name');
+				return false;
+			}
 			
 			db_begin();
 			if ($this->Group == NULL) {
