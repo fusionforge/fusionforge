@@ -928,7 +928,7 @@ abstract class BaseRole extends Error {
 				}
 				if ($sect == 'scm') {
 					foreach ($this->getUsers() as $u) {
-						if (!$SYS->sysGroupCheckUser($refid,$u)) {
+						if (!$SYS->sysGroupCheckUser($refid,$u->getID())) {
 							$this->setError($SYS->getErrorMessage());
 							db_rollback();
 							return false;
