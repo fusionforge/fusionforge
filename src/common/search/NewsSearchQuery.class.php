@@ -3,6 +3,7 @@
  * FusionForge search engine
  *
  * Copyright 2004, Dominik Haas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -22,7 +23,7 @@
  * USA
  */
 
-require_once $gfcommon.'search/SearchQuery.class.php';
+require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
 
 class NewsSearchQuery extends SearchQuery {
 	

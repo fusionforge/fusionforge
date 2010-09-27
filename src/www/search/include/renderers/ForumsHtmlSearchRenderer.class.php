@@ -23,7 +23,7 @@
  */
 
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
-require_once $gfcommon.'search/ForumsSearchQuery.class.php';
+require_once $GLOBALS['gfcommon'].'search/ForumsSearchQuery.class.php';
 	
 class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 

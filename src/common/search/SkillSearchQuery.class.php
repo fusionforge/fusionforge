@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +24,7 @@
  * USA
  */
 
-require_once $gfcommon.'search/SearchQuery.class.php';
+require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
 
 class SkillSearchQuery extends SearchQuery {
 

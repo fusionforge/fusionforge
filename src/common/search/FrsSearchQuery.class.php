@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +24,7 @@
  * USA
  */
 
-require_once $gfcommon.'search/SearchQuery.class.php';
+require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
 
 class FrsSearchQuery extends SearchQuery {
 	
@@ -151,7 +152,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * @param $groupId int group id
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
-	function getSections($groupId, $showNonPublic) {
+	static function getSections($groupId, $showNonPublic) {
 		$sql = 'SELECT package_id, name FROM frs_package WHERE group_id=$1';
 		if(!$showNonPublic) {
 			$sql .= ' AND is_public=1';

@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +24,7 @@
  * USA
  */
  
-require_once $gfcommon.'search/SearchQuery.class.php';
+require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
 
 class ForumsSearchQuery extends SearchQuery {
 	
@@ -147,7 +148,7 @@ class ForumsSearchQuery extends SearchQuery {
 	 * @param $groupId int group id
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
-	function getSections($groupId, $showNonPublic=false) {
+	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_forum_id, forum_name FROM forum_group_list WHERE group_id = $1 AND is_public <> 9';
 		if (!$showNonPublic) {
 			$sql .= ' AND is_public = 1';

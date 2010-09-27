@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Dominik Haas
  * Copyright 2009, Roland Mas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +24,7 @@
  * USA
  */
 
-require_once $gfcommon.'search/SearchQuery.class.php';
+require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
 
 class TrackersSearchQuery extends SearchQuery {
 	
@@ -153,7 +154,7 @@ class TrackersSearchQuery extends SearchQuery {
 	 * @param $groupId int group id
 	 * @param $showNonPublic boolean if we should consider non public sections
 	 */
-	function getSections($groupId, $showNonPublic=false) {
+	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_artifact_id, name FROM artifact_group_list WHERE group_id = $1';
 		if (!$showNonPublic) {
 			$sql .= ' AND artifact_group_list.is_public = 1';
