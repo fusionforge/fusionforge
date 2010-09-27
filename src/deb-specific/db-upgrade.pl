@@ -2917,6 +2917,7 @@ eval {
     &update_with_sql("20100730-docman","5.0.1-8");
     &update_with_sql("20100924-theme","5.0.1-9");
     &update_with_sql("20100926-pfo-rbac","5.0.1-10");
+    &update_with_sql("20100927-pfo-rbac","5.0.1-11");
 
     ########################### INSERT HERE #################################
 
