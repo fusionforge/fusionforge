@@ -224,3 +224,16 @@
     border-collapse: collapse;
     padding: 3px;
 }
+
+/*
+    tracker
+*/
+#trackermodform  table
+{
+    width: 100%;
+}
+
+#trackermodform  input[type=submit]
+{
+    float: right;
+}

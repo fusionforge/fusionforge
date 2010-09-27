@@ -161,18 +161,16 @@ hr {
     
 }
 
-#header p, #header a {
-  color: black;
-}
-
 #header-col1 {
   padding:10px;
 } 
 
 #header-col1 img{
   padding:0;
-  width: 280px;
-}
+  height: 30px;
+/*  height: 50%;
+  width: 50%;
+*/}
 
 #header-col1 h1 {
     padding: 0;
@@ -208,6 +206,46 @@ hr {
     text-align: right;
     padding-top: 10px;
 }
+
+#header-news {
+    background-color: #41495C;
+    display: table-cell;
+}
+
+#header-news div {
+    background-color: #41495C;
+    height: 200px;
+}
+
+.quicknews-toggle{
+    display: inline;
+    font-size: 12px;
+/*    text-shadow: 1px 1px gray;*/
+    color: white;
+}
+
+.quicknews .title {
+    font-size: 12px;
+    color: red;
+    
+}
+.quicknews ul {
+    background-color: white;
+    width: 100%;
+    margin: 10px;
+    display: block;
+}
+
+.quicknews ul li {
+    display: inline;
+    list-style: none;
+    margin: 0;
+}
+
+.quicknews ul li:hover{
+    background-color:blue;
+}
+
 
 
 
@@ -287,7 +325,7 @@ hr {
 .tabGenerator {
     font-weight:bold;
     border-collapse: collapse;
-    height: 40px;
+    height: 36px;
 }
 
 .tabGenerator tbody {
@@ -307,7 +345,7 @@ hr {
 
 .tabGenerator .tg-middle div {
     background-color: #41495C;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .tabGenerator .tg-middle div div {
@@ -478,58 +516,38 @@ a.topTabSelected:hover {
   --------------------------------------------------*/
 .tabber {
 }
+
 .tabberlive {
-  margin-top:1em;
 }
 
-/*--------------------------------------------------
-  ul.tabbernav = the tab navigation list
-  li.tabberactive = the active tab
-  --------------------------------------------------*/
-ul.tabbernav {
-  margin:0;
-  padding: 3px 0;
-  border-bottom: 1px solid #778;
+.tabberlive ul {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    /*border-collapse: collapse;*/
+    border-bottom: 1px solid #E2E3E4;
+    border-spacing: 6px 0px;
+    padding-left: 0;
 }
 
-ul.tabbernav li {
-  list-style: none;
-  margin: 0;
-  display: inline;
+.tabberlive li {
+    display: table-cell;
+    border: 1px solid #E2E3E4;
+    height: 16px;
+    padding: 5px;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    -webkit-top-right-border-radius: 6px;
+    -webkit-top-left-border-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-topleft: 6px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#f7f7f7));
 }
 
-ul.tabbernav li a {
-  padding: 3px 0.5em;
-  margin-left: 3px;
-  border: 1px solid #778;
-  border-bottom: none;
-  background: #D0D0D0;
-  text-decoration: none;
-}
-
-ul.tabbernav li a:link {
-    color: #333333;
-}
-
-ul.tabbernav li a:visited {
-    color: #667;
-}
-
-ul.tabbernav li a:hover {
-  color: #000;
-  background: #FED620;
-  border-color: #227;
-}
-
-ul.tabbernav li.tabberactive a {
-  background-color: #fff;
-  border-bottom: 1px solid #fff;
-}
-
-ul.tabbernav li.tabberactive a:hover {
-  color: #000;
-  background: white;
-  border-bottom: 1px solid white;
+.tabberlive li:hover  {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(white));
 }
 
 /*--------------------------------------------------
@@ -537,20 +555,12 @@ ul.tabbernav li.tabberactive a:hover {
   Add style only after the tabber interface is set up (.tabberlive)
   --------------------------------------------------*/
 .tabberlive .tabbertab {
-  padding:5px;
-  border:1px solid #aaa;
-  border-top:0;
+    padding: 5px;
+    border:1px solid #E2E3E4;
+    border-top:0;
+    margin-bottom: 10px;
 }
 
-/* If desired, hide the heading since a heading is provided by the tab */
-.tabberlive .tabbertab h2 {
-  display:none;
-}
-.tabberlive .tabbertab h3 {
-  display:none;
-}
-
-/* Example of using an ID to set different styles for the tabs on the page */
 .tabberlive#tab1 {
 }
 
@@ -692,6 +702,7 @@ ul.tabbernav li.tabberactive a:hover {
     /*border-collapse: collapse;*/
     border-bottom: 1px solid #E2E3E4;
     border-spacing: 6px 0px;
+    padding-left: 0;
 }
 
 .submenu li {

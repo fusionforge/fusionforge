@@ -44,6 +44,25 @@ class Theme extends Layout {
             $this->cssbaseurl .'theme.css',
             $this->cssbaseurl .'theme-pages.css');
     }
+    
+    
+    function quicknewsbutton()
+    {
+        return "<div class='quicknews-toggle'><a href=# onclick='jQuery(\".quicknews\").slideToggle()'>news</a></div>";
+    }
+    
+    function quicknews()
+    {
+        $ret = "<div class='quicknews'>";
+        $ret .= "<ul>";
+        $ret .= "<li><h1>news de ouf</h1>hello world</li>";
+        $ret .= "<li><h1>news de ouf</h1>hello world</li>";
+        $ret .= "<li><h1>news de ouf</h1>hello world</li>";
+        $ret .= "<li><h1>news de ouf</h1>hello world</li>";
+        $ret .= "</ul>";
+        $ret .= "</div>";
+        return $ret;
+    }
 
     function bodyHeader($params)
     {
@@ -51,7 +70,7 @@ class Theme extends Layout {
         echo '<table id="header" class="width-100p100">';
         echo '<tr>';
         echo '<td id="header-col1">';
-        echo '<h1>'.  util_make_link ('/', html_image('/header/top-logo.png',192,54,array('alt'=>'FusionForge Home'))) .'</h1>';
+        echo '<h1>'.  util_make_link ('/', html_image('/header/top-logo.png',null,null,array('alt'=>'FusionForge Home'))) .'</h1>';
         echo '</td>';
         echo '<td id="header-col2">';
         
@@ -64,10 +83,14 @@ class Theme extends Layout {
         plugin_hook ('headermenu', $params);
         
         echo '</td><tr><td colspan=2 id="header-line2">';
+        echo $this->quicknewsbutton();
         $this->quickNav();
         $this->searchBox();
         
-        echo '</td></tr></table><!-- outer tabs -->';
+        echo '</td></tr>';
+        echo '</td><tr><td colspan=2 id="header-news">';
+        echo $this->quicknews();
+        echo'</td></tr></table><!-- outer tabs -->';
         echo $this->outerTabs($params);
         echo '<!-- inner tabs -->';
         echo '<div class="innertabs">';
@@ -377,28 +400,22 @@ class Theme extends Layout {
         echo '<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
+        
+        echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
+        ?>
+        <script>
+            $(window).load(function(){
+                    jQuery(".quicknews").hide();
+            });
+        </script>
+        <?php
+    
         echo '<script type="text/javascript">';
         plugin_hook ("javascript",false);
         echo '</script>';
         
         plugin_hook ("javascript_file",false);
     }
-    
-    //  function headerJS() {
-    //      echo '
-    // <script type="text/javascript" src="/scripts/prototype/prototype.js"></script>
-    //                         <script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>
-    //                         
-    // 
-    //          <script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
-    //          <script type="text/javascript">';
-    //      plugin_hook ("javascript",false);
-    //      echo '
-    //          </script>';
-    //      plugin_hook ("javascript_file",false);
-    //  }
-    
-
 }
 
 // Local Variables:
