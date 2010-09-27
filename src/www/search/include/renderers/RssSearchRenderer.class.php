@@ -59,7 +59,7 @@ class RssSearchRenderer extends SearchRenderer {
 			echo '<channel></channel>';
 		} else {		
 			$searchQuery->executeQuery();
-			include_once $gfwww.'export/rss_utils.inc';
+			include_once $GLOBALS['gfwww'].'export/rss_utils.inc';
 	
 			rss_dump_project_result_set(
 				$searchQuery->getResult(),
