@@ -46,7 +46,7 @@ class GFSearchEngine {
 	}
 	
 	function includeSearchRenderer() {
-		global $gfwww;
+		global $gfwww, $gfcommon;
 		require_once $gfwww.'search/include/renderers/'.$this->rendererClassName.'.class.php';
 	}
 	
