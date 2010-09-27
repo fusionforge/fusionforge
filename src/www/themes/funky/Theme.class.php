@@ -83,13 +83,13 @@ class Theme extends Layout {
         plugin_hook ('headermenu', $params);
         
         echo '</td><tr><td colspan=2 id="header-line2">';
-        echo $this->quicknewsbutton();
+        // echo $this->quicknewsbutton();
         $this->quickNav();
         $this->searchBox();
         
         echo '</td></tr>';
         echo '</td><tr><td colspan=2 id="header-news">';
-        echo $this->quicknews();
+        //echo $this->quicknews();
         echo'</td></tr></table><!-- outer tabs -->';
         echo $this->outerTabs($params);
         echo '<!-- inner tabs -->';
@@ -401,7 +401,7 @@ class Theme extends Layout {
         echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
         
-        echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
+        // echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
         ?>
         <script>
             $(window).load(function(){
