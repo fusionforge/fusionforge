@@ -486,7 +486,11 @@ class ArtifactQuery extends Error {
 	 *	@return	array	array of all activated options
 	 */
 	function getQueryOptions() {
-		return explode('|', $this->data_array['query_options']);
+        if (isset($this->data_array['query_options'])) {
+		    return explode('|', $this->data_array['query_options']);
+        } else {
+            return array();
+        }
 	}
 
 	/**
@@ -697,21 +701,33 @@ class ArtifactQuery extends Error {
 		return $usr->setPreference('art_query'.$this->ArtifactType->getID(),$this->getID());
 	}
 
+	/**
+	 *  delete - delete query
+	 *
+	 *  @return	boolean	success.
+	 */
 	function delete() {
 		if (forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
 			$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND (user_id=$2 OR query_type>0)',
 					array ($this->getID(),
 					       user_getid())) ;
+            if (!$res) {
+                return false;
+            }
 		} else {
 			$res = db_query_params ('DELETE FROM artifact_query WHERE artifact_query_id=$1 AND user_id=$2',
 					array ($this->getID(),
 					       user_getid())) ;
+            if (!$res) {
+                return false;
+            }
 		}
 		$res = db_query_params ('DELETE FROM user_preferences WHERE preference_value=$1 AND preference_name =$2',
 					array ($this->getID(),
 					       'art_query'.$this->ArtifactType->getID())) ;
 		unset($this->data_array);
 		unset($this->element_array);
+        return true;
 	}
 
 	/**

@@ -36,12 +36,12 @@ if (getStringFromRequest('submit')) {
 		
 	if ($query_action == 1) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('tracker');
 		}
 		
 		$aq = new ArtifactQuery($ath);
 		if (!$aq || !is_object($aq)) {
-			exit_error('Error',$aq->getErrorMessage());
+			exit_error($aq->getErrorMessage(),'tracker');
 		}
 		$query_name = trim(getStringFromRequest('query_name'));
 		$query_type = getStringFromRequest('query_type',0);
@@ -60,13 +60,13 @@ if (getStringFromRequest('submit')) {
 		if (!$aq->create($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
 			$_summary,$_description,$_followups,$query_type, $query_options)) {
 			form_release_key(getStringFromRequest('form_key'));
-			exit_error('Error',$aq->getErrorMessage());
+			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
-			$feedback .= 'Successfully Created';
+			$feedback .= _('Query Successfully Created');
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
-		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse&feedback='.urlencode($feedback));
 	//	
 /*
 	// Make the displayed query the default
@@ -86,11 +86,11 @@ if (getStringFromRequest('submit')) {
 	//
 	} elseif ($query_action == 3) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('tracker');
 		}
 		$aq = new ArtifactQuery($ath,$query_id);
 		if (!$aq || !is_object($aq)) {
-			exit_error('Error',$aq->getErrorMessage());
+			exit_error($aq->getErrorMessage(),'tracker');
 		}
 		$query_name = getStringFromRequest('query_name');
 		$query_type = getStringFromRequest('query_type',0);
@@ -108,20 +108,20 @@ if (getStringFromRequest('submit')) {
 		$query_options = array_keys(getArrayFromRequest('query_options'));
 		if (!$aq->update($query_name,$_status,$_assigned_to,$_moddaterange,$_sort_col,$_sort_ord,$extra_fields,$_opendaterange,$_closedaterange,
 			$_summary,$_description,$_followups,$query_type, $query_options)) {
-			exit_error('Error',$aq->getErrorMessage());
+			exit_error($aq->getErrorMessage(),'tracker');
 		} else {
-			$feedback .= 'Query Updated';
+			$feedback .= _('Query Updated');
 		}
 		$aq->makeDefault();
 		$query_id=$aq->getID();
-		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse&feedback='.urlencode($feedback));
 	//
 	//	Just load the query
 	//
 	} elseif ($query_action == 4) {
 		$aq = new ArtifactQuery($ath,$query_id);
 		if (!$aq || !is_object($aq)) {
-			exit_error('Error',$aq->getErrorMessage());
+			exit_error($aq->getErrorMessage(),'tracker');
 		}
 		$aq->makeDefault();
 	//
@@ -129,29 +129,31 @@ if (getStringFromRequest('submit')) {
 	//
 	} elseif ($query_action == 5) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-			exit_form_double_submit();
+			exit_form_double_submit('tracker');
 		}
 		$aq = new ArtifactQuery($ath,$query_id);
 		if (!$aq || !is_object($aq)) {
-			exit_error('Error',$aq->getErrorMessage());
+			exit_error($aq->getErrorMessage(),'tracker');
 		}
 		if (!$aq->delete()) {
-			$feedback .= $aq->getErrorMessage();
+			$error_msg .= $aq->getErrorMessage();
+            $ret_msg = '&error_msg='.urlencode($error_msg);
 		} else {
-			$feedback .= 'Query Deleted';
+			$feedback .= _('Query Deleted');;
+            $ret_msg = '&feedback='.urlencode($feedback);
 		}
 		$query_id=0;
-		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse');
+		session_redirect('/tracker/?atid='.$atid.'&group_id='.$group_id.'&func=browse'.$ret_msg);
 		exit;
 	} else {
-		exit_error('Error', 'Missing Build Query Action');
+		exit_error(_('Missing Build Query Action'),'tracker');
 	}
 } else {
 	$user=session_get_user();
 	$query_id=$user->getPreference('art_query'.$ath->getID());
 	$aq = new ArtifactQuery($ath,$query_id);
 	if (!$aq || !is_object($aq)) {
-		exit_error('Error',$aq->getErrorMessage());
+		exit_error($aq->getErrorMessage(),'tracker');
 	}
 	$aq->makeDefault();
 }

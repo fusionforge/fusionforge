@@ -1,25 +1,26 @@
 <?php
 /**
- * GForge Task Mgr And Tracker Integration
+ * Task Mgr And Tracker Integration
  *
  * Copyright 2003 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org
  *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-
-/*existing
-
-http://dev.gforge.org/pm/task.php?func=addartifact
-	&add_artifact_id=$add_artifact_id
-	&project_task_id=27
-	&group_id=1
-	&group_project_id=3
-
-//add
-//http://dev.gforge.org/pm/task.php?group_id=1&group_project_id=3&func=addtask
-//$related_artifact_summary
-//$related_artifact_id
-*/
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -32,7 +33,7 @@ $aid = getIntFromRequest('aid');
 
 $a=new Artifact($ath,$aid);
 if (!$a || !is_object($a)) {
-	exit_error('ERROR',_('Artifact Could Not Be Created'));
+	exit_error(_('Artifact Could Not Be Created'),'tracker');
 }
 
 //
@@ -51,30 +52,30 @@ if (getStringFromRequest('add_to_task')) {
 
 	$pg=new ProjectGroup($group,$group_project_id);
 	if (!$pg || !is_object($pg)) {
-		exit_error('Error',_('Could Not Get ProjectGroup'));
+		exit_error(_('Could Not Get ProjectGroup'),'tracker');
 	} elseif ($pg->isError()) {
-		exit_error('Error',$pg->getErrorMessage());
+		exit_error($pg->getErrorMessage(),'tracker');
 	}
 
 
 	$ptf = new ProjectTaskFactory($pg);
 	if (!$ptf || !is_object($ptf)) {
-		exit_error('Error',_('Could Not Get ProjectTaskFactory'));
+		exit_error(_('Could Not Get ProjectTaskFactory'),'tracker');
 	} elseif ($ptf->isError()) {
-		exit_error('Error',$ptf->getErrorMessage());
+		exit_error($ptf->getErrorMessage(),'tracker');
 	}
 
 	$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
 	if ($ptf->isError()) {
-		exit_error('Error',$ptf->getErrorMessage());
+		exit_error($ptf->getErrorMessage(),'tracker');
 	}
 
 	$pt_arr =& $ptf->getTasks();
 	if (!$pt_arr) {
 		if ($ptf->isError()) {
-			exit_error('Error',$ptf->getErrorMessage());
+			exit_error($ptf->getErrorMessage(),'tracker');
 		} else {
-			exit_error('Error', _('No Existing Tasks Found'));
+			exit_error(_('No Existing Tasks Found'),'tracker');
 		}
 	}
 
@@ -103,14 +104,14 @@ if (getStringFromRequest('add_to_task')) {
 //
 } elseif (getStringFromRequest('done_adding')) {
 
-	Header ('Location: '.util_make_url ('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id[]='. $a->getID()) );
+	session_redirect('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id[]='. $a->getID());
 
 //
 //	Create a new task and relate it to this artifact
 //
 } elseif (getStringFromRequest('new_task')) {
 
-	Header ('Location: '.util_make_url ('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID()) );
+	session_redirect ('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=addtask&related_artifact_summary='. urlencode($a->getSummary()) .'&related_artifact_id='. $a->getID());
 
 //
 //	Show the list of ProjectGroups available
@@ -119,17 +120,17 @@ if (getStringFromRequest('add_to_task')) {
 
 	$pgf=new ProjectGroupFactory($group);
 	if (!$pgf || !is_object($pgf)) {
-		exit_error('Error',_('Could Not Get Factory'));
+		exit_error(_('Could Not Get Factory'),'tracker');
 	} elseif ($pgf->isError()) {
-		exit_error('Error',$pgf->getErrorMessage());
+		exit_error($pgf->getErrorMessage(),'tracker');
 	}
 
 	$pg_arr =& $pgf->getProjectGroups();
 	if (!$pg_arr) {
 		if ($pgf->isError()) {
-			exit_error('Error',$pgf->getErrorMessage());
+			exit_error($pgf->getErrorMessage(),'tracker');
 		} else {
-			exit_error('Error',_('No Existing Project Groups Found'));
+			exit_error(_('No Existing Project Groups Found'),'tracker');
 		}
 	}
 

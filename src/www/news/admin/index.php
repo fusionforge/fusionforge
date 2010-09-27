@@ -40,7 +40,7 @@ $summary = getStringFromRequest('summary');
 $details = getStringFromRequest('details');
 $id = getIntFromRequest('id');
 
-$feedback = getStringFromRequest('feedback'); 
+$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 if ($group_id && $group_id != forge_get_config('news_group') && user_ismember($group_id,'A')) {
 	$status = getIntFromRequest('status');

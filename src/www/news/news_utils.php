@@ -27,7 +27,7 @@ function news_header($params) {
 	global $HTML,$group_id,$news_name,$news_id;
 
 	if (!forge_get_config('use_news')) {
-		exit_disabled('home');
+		exit_disabled();
 	}
 
 	$params['toptab']='news';
