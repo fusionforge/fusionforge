@@ -24,7 +24,7 @@
  */
 
 require_once $gfwww.'search/include/renderers/HtmlSearchRenderer.class.php';
-require_once $GLOBALS['gfcommon'].'search/PeopleSearchQuery.class.php';
+require_once $gfcommon.'search/PeopleSearchQuery.class.php';
 
 class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 

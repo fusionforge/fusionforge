@@ -23,7 +23,7 @@
  */
 
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
-require_once $GLOBALS['gfcommon'].'search/TrackersSearchQuery.class.php';
+require_once $gfcommon.'search/TrackersSearchQuery.class.php';
 	
 class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
