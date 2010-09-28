@@ -79,7 +79,7 @@ if (!$has_error) {
 		$name = 'wk[100]['. $s['element_id'].']';
 		$value = in_array($s['element_id'], $next)? ' checked="checked"' : '';
 		$str = '<input type="checkbox" name="'.$name.'"'.$value.' />';
-		$str .= ' '.html_image('spacer.gif', 20, 20, array());
+				$str .= ' '.html_image('spacer.gif', 20, 20);
 		echo '<td align="center">'.$str.'</td>'."\n";
 	}
 	echo '</tr>'."\n";
@@ -106,11 +106,11 @@ if (!$has_error) {
 					$url = getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;workflow_roles=1&amp;from='.$status['element_id'].'&amp;next='.$s['element_id'];
 					$str .= ' <a href="'.$url.'" title="Edit roles">'.html_image('ic/acl_roles20.png', 20, 20, array('alt'=>'Edit Roles')).'</a>';
 				} else {
-					$str .= ' '.html_image('spacer.gif', 20, 20, array());
+							$str .= ' '.html_image('spacer.gif', 20, 20);
 				}
 			} else {
 				$str = '<input type="checkbox" checked="checked" disabled="disabled" />';
-				$str .= ' '.html_image('spacer.gif', 20, 20, array());
+						$str .= ' '.html_image('spacer.gif', 20, 20);
 			}
 			echo '<td align="center">'.$str.'</td>'."\n";
 		}
