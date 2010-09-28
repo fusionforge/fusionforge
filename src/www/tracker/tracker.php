@@ -172,6 +172,7 @@ switch (getStringFromRequest('func')) {
 		$assigned_to = getStringFromRequest('assigned_to');
 		$canned_response = getIntFromRequest("canned_response");
 		$extra_fields = getArrayFromRequest('extra_fields');
+		$was_error=false;
 
 		$count=count($artifact_id_list);
 

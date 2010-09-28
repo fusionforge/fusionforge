@@ -64,7 +64,7 @@ if (!$atf || !is_object($atf) || $atf->isError()) {
 }
 
 // Only keep the Artifacts where the user has admin rights.
-$arr =& $atf->getArtifactTypes();
+$arr = $atf->getArtifactTypes();
 $i=0;
 for ($j = 0; $j < count($arr); $j++) {
 	if (forge_check_perm ('tracker', $arr[$j]->getID(), 'manager')) {
