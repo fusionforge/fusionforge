@@ -111,7 +111,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Pending (P) (New Project Approval)");
+		$this->click("link=Pending projects (new project approval)");
 		$this->waitForPageToLoad("30000");
 		$this->click("document.forms['approve.projectb'].submit");
 		$this->waitForPageToLoad("30000");
