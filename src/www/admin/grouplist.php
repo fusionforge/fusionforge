@@ -28,7 +28,6 @@ require_once $gfwww.'admin/admin_utils.php';
 site_admin_header(array('title'=>_('Project List')));
 echo '<h1>' . _('Project List') . '</h1>';
 
-$form_pending = getStringFromRequest('form_pending');
 $sortorder = getStringFromRequest('sortorder');
 $group_name_search = getStringFromRequest('group_name_search');
 $status = getStringFromRequest('status');
@@ -51,24 +50,18 @@ WHERE pfo_user_role.role_id=pfo_role.role_id
 AND pfo_role.home_group_id=groups.group_id
 AND license_id=license
 AND lower(group_name) LIKE $1
-AND (status=$2 OR 1!=$3)
 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,status,license_name
 ORDER BY '.$sortorder,
-					array (strtolower ("$group_name_search%"),
-					       'P',
-					       $form_pending ? 1 : 0)) ;
+					array (strtolower ("$group_name_search%"))) ;
 	} else {
 	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members
 FROM groups
 LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
 WHERE license_id=license
 AND lower(group_name) LIKE $1
-AND (status=$2 OR 1!=$3)
 GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name
 ORDER BY '.$sortorder,
-				array (strtolower ("$group_name_search%"),
-				       'P',
-				       $form_pending ? 1 : 0)) ;
+				array (strtolower ("$group_name_search%"))) ;
 	}
 } else {
 	if (PFO_USE_RBAC) {
@@ -86,10 +79,8 @@ AND license_id=license') ;
 		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(user_group.group_id) AS members
 FROM groups
 LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
-WHERE license_id=license
-AND (status=$1 OR 1!=$2)',
-				     array ('P',
-					    $form_pending ? 1 : 0)) ;
+WHERE license_id=license',
+					 array ()) ;
 		if ($status) {
 			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 		}
