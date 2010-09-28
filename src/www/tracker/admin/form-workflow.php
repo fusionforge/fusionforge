@@ -26,7 +26,6 @@
 require_once('common/tracker/ArtifactWorkflow.class.php');
 
 $has_error = false;
-$error_msg = '';
 $efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
 if (count($efarr) === 0) {
 	$has_error = true;
