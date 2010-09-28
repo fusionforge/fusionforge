@@ -56,6 +56,27 @@
 	position:absolute;
 }
 
+.active {
+	background-color: #99ff99; 
+	text-decoration: none; 
+	font-weight: normal
+	}
+
+.inactive {
+	background-color: #d3d3d3
+	}
+
+.deleted {
+	background-color: #99ffff
+	}
+
+.suspended {
+	background-color: #ffaa00
+	}
+
+.pending {
+	background-color: white
+	}
 
 /* Tag cloud
 ----------------------------------------------- */
