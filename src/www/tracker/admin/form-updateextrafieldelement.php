@@ -1,31 +1,53 @@
 <?php
+/**
+ * Tracker Facility
+ *
+ * Copyright 2010 (c) FusionForge Team
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 //
 //  FORM TO UPDATE POP-UP CHOICES FOR A BOX
 //
-	/*
-		Allow modification of a Choice for a Pop-up Box
-	*/
-	$boxid = getIntFromRequest('boxid');
-	$ac = new ArtifactExtraField($ath,$boxid);
-	if (!$ac || !is_object($ac)) {
-		exit_error('Error','Unable to create ArtifactExtraField Object');
-	} elseif ($ac->isError()) {
-		exit_error('Error',$ac->getErrorMessage());
+/*
+	Allow modification of a Choice for a Pop-up Box
+*/
+$boxid = getIntFromRequest('boxid');
+$ac = new ArtifactExtraField($ath,$boxid);
+if (!$ac || !is_object($ac)) {
+	exit_error(_('Unable to create ArtifactExtraField Object'),'tracker');
+} elseif ($ac->isError()) {
+	exit_error($ac->getErrorMessage(),'tracker');
+} else {
+	$id = getStringFromRequest('id');
+	$ao = new ArtifactExtraFieldElement($ac,$id);
+	if (!$ao || !is_object($ao)) {
+		exit_error(_('Unable to create ArtifactExtraFieldElement Object'),'tracker');
+	} elseif ($ao->isError()) {
+		exit_error($ao->getErrorMessage(),'tracker');
 	} else {
-		$id = getStringFromRequest('id');
-		$ao = new ArtifactExtraFieldElement($ac,$id);
-		if (!$ao || !is_object($ao)) {
-			exit_error('Error','Unable to create ArtifactExtraFieldElement Object');
-		} elseif ($ao->isError()) {
-			exit_error('Error',$ao->getErrorMessage());
-		} else {
-			$title = sprintf(_('Modify a custom field element in %s'), $ath->getName()) ;
-			$ath->adminHeader(array('title'=>$title));
+		$title = sprintf(_('Modify a custom field element in %s'), $ath->getName()) ;
+		$ath->adminHeader(array('title'=>$title));
 
-			echo '
-				<h2>'.$title.'</h2>';
+		echo '
+			<h2>'.$title.'</h2>';
 
-			?>
+?>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
@@ -49,8 +71,8 @@
 			</form>
 			<?php
 			$ath->footer(array());
-		}
 	}
+}
 
 // Local Variables:
 // mode: php

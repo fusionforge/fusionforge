@@ -754,7 +754,7 @@ a.topTabSelected:hover {
     margin-left: 3px;
 }
 
-.warning_msg, .warning {
+.warning_msg, .warning, .tips {
     border-width: 1px;
     border-style: solid;
     background-color: #ffd297; /* orange */

@@ -73,7 +73,7 @@ for ($j = 0; $j < count($arr); $j++) {
 }
 // If no more tracker now,
 if ($i==0 && $j>0) {
-	exit_permission_denied();
+	exit_permission_denied('','tracker');
 }
 
 //required params for site_project_header();
@@ -85,7 +85,7 @@ if(isset($page_title)){
 	$params['title'] = '';
 }
 
-echo site_project_header($params);
+site_project_header($params);
 echo $HTML->subMenu(
 	array(
 		_('Report'),
@@ -164,7 +164,7 @@ if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
 	<?php
 	}
 
-	echo site_project_footer(array());
+site_project_footer(array());
 
 // Local Variables:
 // mode: php

@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2010 (c) Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,7 +41,7 @@
 //				$feedback .= $ab->getErrorMessage();			
 			} else {
 				if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required,$alias)) {
-					$feedback .= _('Error inserting a custom field').': '.$ab->getErrorMessage();
+					$error_msg .= _('Error inserting a custom field').': '.$ab->getErrorMessage();
 					$ab->clearError();
 				} else {
 					$feedback .= _('Extra field inserted');
@@ -54,14 +55,14 @@
 			$ab = new ArtifactExtraField($ath,$id);
 		
 			if (!$ab || !is_object($ab)) {
-				$feedback .= _('Unable to create ArtifactExtraField Object');
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ab->isError()) {
-				$feedback .= $ab->getErrorMessage();			
+				$error_msg .= $ab->getErrorMessage();			
 			} else {
 				$sure = getStringFromRequest('sure');
 				$really_sure = getStringFromRequest('really_sure');
 				if (!$ab->delete($sure,$really_sure)) {
-					$feedback .= $ab->getErrorMessage();
+					$error_msg .= $ab->getErrorMessage();
 				} else {
 					$browse_list = $ath->getBrowseList();
 					$arr = explode(',', $browse_list);
@@ -72,8 +73,7 @@
 					$ath->setBrowseList(join(',', $arr));
 					$feedback .= _('Custom Field Deleted');
 					$deleteextrafield=false;
-					header ("Location: /tracker/admin/?group_id=${group_id}&atid=$atid&add_extrafield=1&feedback=".urlencode($feedback));
-					exit;
+					session_redirect('/tracker/admin/?group_id='.$group_id.'&atid='.$atid.'&add_extrafield=1&feedback='.urlencode($feedback));
 				}
 			}
 
@@ -84,20 +84,20 @@
 			$boxid = getStringFromRequest('boxid');
 			$ab = new ArtifactExtraField($ath,$boxid);
 			if (!$ab || !is_object($ab)) {
-				$feedback .= _('Unable to create ArtifactExtraField Object');
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ab->isError()) {
-				$feedback .= $ab->getErrorMessage();			
+				$error_msg .= $ab->getErrorMessage();			
 			} else {
 				$ao = new ArtifactExtraFieldElement($ab);
 				if (!$ao || !is_object($ao)) {
-					$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+					$error_msg .= 'Unable to create ArtifactExtraFieldElement Object';
 //				} elseif ($ao->isError())
 //					$feedback .= $ao->getErrorMessage();			
 				} else {
 					$name = getStringFromRequest('name');
 					$status_id = getIntFromRequest('status_id');
 					if (!$ao->create($name,$status_id)) {
-						$feedback .= _('Error inserting an element').': '.$ao->getErrorMessage();
+						$error_msg .= _('Error inserting an element').': '.$ao->getErrorMessage();
 						$ao->clearError();
 					} else {
 						$feedback .= _('Element inserted');
@@ -114,12 +114,12 @@
 
 			$acr = new ArtifactCanned($ath);
 			if (!$acr || !is_object($acr)) {
-				$feedback .= _('Unable to create ArtifactCanned Object');
+				$error_msg .= _('Unable to create ArtifactCanned Object');
 //			} elseif ($acr->isError()) {
 //				$feedback .= $acr->getErrorMessage();			
 			} else { 
 				if (!$acr->create($title,$body)) {
-					$feedback .= _('Error inserting').' : '.$acr->getErrorMessage();
+					$error_msg .= _('Error inserting').' : '.$acr->getErrorMessage();
 					$acr->clearError();
 				} else {
 					$feedback .= _('Canned Response Inserted');
@@ -136,12 +136,12 @@
 
 			$acr = new ArtifactCanned($ath,$id);
 			if (!$acr || !is_object($acr)) {
-				$feedback .= _('Unable to create ArtifactCanned Object');
+				$error_msg .= _('Unable to create ArtifactCanned Object');
 			} elseif ($acr->isError()) {
-				$feedback .= $acr->getErrorMessage();
+				$error_msg .= $acr->getErrorMessage();
 			} else {
 				if (!$acr->update($title,$body)) {
-					$feedback .= _('Error updating').' : '.$acr->getErrorMessage();
+					$error_msg .= _('Error updating').' : '.$acr->getErrorMessage();
 					$acr->clearError();
 				} else {
 					$feedback .= _('Canned Response Updated');
@@ -167,9 +167,9 @@
 				$typeid = db_result($result,0,'group_artifact_id');
 				$dest_tracker =& artifactType_get_object($typeid);
 				if (!$dest_tracker || !is_object($dest_tracker)) {
-					exit_error('Error', _('ArtifactType could not be created'));
+					exit_error(_('ArtifactType could not be created'),'tracker');
 				} elseif ($dest_tracker->isError()) {
-					exit_error(_('Error'),$dest_tracker->getErrorMessage());
+					exit_error($dest_tracker->getErrorMessage(),'tracker');
 				}
 				//
 				//  Copy elements into a field (box) for each tracker selected 
@@ -178,9 +178,9 @@
 				$feedback .= $dest_tracker->getName();
 				$aef =new ArtifactExtraField($dest_tracker,$selectid);
 				if (!$aef || !is_object($aef)) {
-					$feedback .= _('Unable to create ArtifactExtraField Object');
+					$error_msg .= _('Unable to create ArtifactExtraField Object');
 				} elseif ($aef->isError()) {
-					$feedback .= $aefe->getErrorMessage();
+					$error_msg .= $aefe->getErrorMessage();
 				} else {
 					$feedback .= ', Box: ';
 					$feedback .= $aef->getName();
@@ -189,14 +189,14 @@
 					for ($k=0; $k < $copy_rows; $k++) {
 					$aefe = new ArtifactExtraFieldElement($aef);
 						if (!$aefe || !is_object($aefe)) {
-							$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+							$error_msg .= 'Unable to create ArtifactExtraFieldElement Object';
 						} elseif ($aefe->isError()) {
-							$feedback .= $aefe->getErrorMessage();			
+							$error_msg .= $aefe->getErrorMessage();			
 						} else {
 							$name=$ath->getElementName($copyid[$k]);
 							$status=$ath->getElementStatusID($copyid[$k]);
 							if (!$aefe->create($name,$status)) {
-								$feedback .= _('Error inserting an element').': '.$aefe->getErrorMessage();
+								$error_msg .= _('Error inserting an element').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
 								$feedback .= '- Copied choice:'. $name;
@@ -220,12 +220,12 @@
 
 			$ac = new ArtifactExtraField($ath,$id);
 			if (!$ac || !is_object($ac)) {
-				$feedback .= _('Unable to create ArtifactExtraField Object');
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ac->isError()) {
-				$feedback .= $ac->getErrorMessage();
+				$error_msg .= $ac->getErrorMessage();
 			} else {
 				if (!$ac->update($name,$attribute1,$attribute2,$is_required,$alias)) {
-					$feedback .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+					$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
 					$feedback .= _('Custom Field updated');
@@ -243,20 +243,20 @@
 
 			$ac = new ArtifactExtraField($ath,$boxid);
 			if (!$ac || !is_object($ac)) {
-				$feedback .= _('Unable to create ArtifactExtraField Object');
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ac->isError()) {
-				$feedback .= $ac->getErrorMessage();
+				$error_msg .= $ac->getErrorMessage();
 			} else {
 				$ao = new ArtifactExtraFieldElement($ac,$id);
 				if (!$ao || !is_object($ao)) {
-					$feedback .= _('Unable to create ArtifactExtraFieldElement Object');
+					$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
 				} elseif ($ao->isError()) {
-					$feedback .= $ao->getErrorMessage();
+					$error_msg .= $ao->getErrorMessage();
 				} else {
 					$name = getStringFromRequest('name');
 					$status_id = getIntFromRequest('status_id');
 					if (!$ao->update($name,$status_id)) {
-						$feedback .= _('Error updating a custom field').' : '.$ao->getErrorMessage();
+						$error_msg .= _('Error updating a custom field').' : '.$ao->getErrorMessage();
 						$ao->clearError();
 					} else {
 						$feedback .= _('Element updated');
@@ -272,10 +272,10 @@
 			$clone_id = getStringFromRequest('clone_id');
 
 			if (!$clone_id) {
-				exit_missing_param();
+				exit_missing_param('',array(_('Clone ID')),'tracker');
 			}
 			if (!$ath->cloneFieldsFrom($clone_id)) {
-				exit_error('Error','Error cloning fields: '.$ath->getErrorMessage());
+				exit_error(_('Error cloning fields: ').$ath->getErrorMessage(),'tracker');
 			} else {
 				$feedback .= _('Successfully Cloned Tracker Fields ');
 				$next = '*main*';
@@ -297,7 +297,7 @@
 
 			if (!$ath->update($name,$description,$email_all,$email_address,
 				$due_period,$status_timeout,$use_resolution,$submit_instructions,$browse_instructions)) {
-				$feedback .= _('Error updating').' : '.$ath->getErrorMessage();
+				$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
 				$ath->clearError();
 			} else {
 				$feedback .= _('Tracker Updated');
@@ -321,7 +321,7 @@
 			}
 			$browse_fields = join(',', $browse_fields);
 			if (!$ath->setBrowseList($browse_fields)) {
-				$feedback .= _('Error updating').' : '.$ath->getErrorMessage();
+				$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
 				$ath->clearError();
 			} else {
 				$feedback .= _('Tracker Updated');
@@ -335,10 +335,9 @@
 			$really_sure = getStringFromRequest('really_sure');
 
 			if (!$ath->delete($sure,$really_sure)) {
-				$feedback .= _('Error updating').' : '.$ath->getErrorMessage();
+				$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
 			} else {
-				header ("Location: /tracker/admin/?group_id=${group_id}&tracker_deleted=1");
-				exit;
+				session_redirect('/tracker/admin/?group_id='.$group_id.'&tracker_deleted=1');
 			}
 
 		//
@@ -368,12 +367,12 @@
 			$new_pos = getStringFromRequest('new_pos');
 			$ac = new ArtifactExtraField($ath,$boxid);
 			if (!$ac || !is_object($ac)) {
-				$feedback .= _('Unable to create ArtifactExtraField Object');
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ac->isError()) {
-				$feedback .= $ac->getErrorMessage();
+				$error_msg .= $ac->getErrorMessage();
 			} else {
 				if (!$ac->reorderValues($id, $new_pos)) {
-					$feedback .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+					$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
 					$feedback .= _('Tracker Updated');
@@ -388,15 +387,15 @@
 			$order = getArrayFromRequest('order');
 			$ac = new ArtifactExtraField($ath,$boxid);
 			if (!$ac || !is_object($ac)) {
-				$feedback .= 'Unable to create ArtifactExtraField Object';
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ac->isError()) {
-				$feedback .= $ac->getErrorMessage();
+				$error_msg .= $ac->getErrorMessage();
 			} else {
 				$updated_flag = 0;
 				foreach ($order as $id => $new_pos) {
 					if ($new_pos == '') continue;
 					if (!$ac->reorderValues($id, $new_pos)) {
-						$feedback .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+						$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
 						$ac->clearError();
 						continue;
 					}
@@ -411,12 +410,12 @@
 			$boxid = getStringFromRequest('boxid');
 			$ac = new ArtifactExtraField($ath,$boxid);
 			if (!$ac || !is_object($ac)) {
-				$feedback .= 'Unable to create ArtifactExtraField Object';
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ac->isError()) {
-				$feedback .= $ac->getErrorMessage();
+				$error_msg .= $ac->getErrorMessage();
 			} else {
 				if (!$ac->alphaorderValues($id)) {
-					$feedback .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+					$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
 					$feedback .= _('Tracker Updated');
@@ -432,7 +431,7 @@
     		$atw = new ArtifactWorkflow($ath, $field_id);
 
     		if (!isset($wk[100])) {
-    			$feedback .= _('ERROR: Initial values not saved, no initial state given.').'<br />';
+    			$error_msg .= _('ERROR: Initial values not saved, no initial state given.').'<br />';
     		} else {
 	    		// Save values for the submit form (from=100).
 	    		$atw->saveNextNodes('100', array_keys($wk[100]));
@@ -463,16 +462,16 @@
 			$boxid = getStringFromRequest('boxid');
 			$ab = new ArtifactExtraField($ath,$boxid);
 			if (!$ab || !is_object($ab)) {
-				$feedback .= 'Unable to create ArtifactExtraField Object';
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 			} elseif ($ab->isError()) {
-				$feedback .= $ab->getErrorMessage();			
+				$error_msg .= $ab->getErrorMessage();
 			} else {
 				$ao = new ArtifactExtraFieldElement($ab,$id);
 				if (!$ao || !is_object($ao)) {
-					$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+					$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
 				} else {
 					if (!$sure || !$really_sure || !$ao->delete()) {
-						$feedback .= _('Error deleting an element').': '.$ao->getErrorMessage();
+						$error_msg .= _('Error deleting an element').': '.$ao->getErrorMessage();
 						$ao->clearError();
 					} else {
 						$feedback .= _('Element deleted');

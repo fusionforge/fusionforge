@@ -60,7 +60,7 @@ if (session_loggedin()) {
 		} else {
 			$aq = new ArtifactQuery($ath,$query_id);
 			if (!$aq || !is_object($aq)) {
-				exit_error('Error',$aq->getErrorMessage());
+				exit_error($aq->getErrorMessage(),'tracker');
 			}
 			$aq->makeDefault();
 		}
@@ -86,9 +86,9 @@ if (session_loggedin()) {
 $af = new ArtifactFactory($ath);
 
 if (!$af || !is_object($af)) {
-	exit_error('Error','Could Not Get Factory');
+	exit_error(_('Could Not Get Factory'),'tracker');
 } elseif ($af->isError()) {
-	exit_error('Error',$af->getErrorMessage());
+	exit_error($af->getErrorMessage(),'tracker');
 }
 
 if (!isset($_sort_col)) {
@@ -144,7 +144,7 @@ $_extra_fields=$af->extra_fields;
 $art_arr =& $af->getArtifacts();
 
 if (!$art_arr && $af->isError()) {
-	exit_error('Error',$af->getErrorMessage());
+	exit_error($af->getErrorMessage(),'tracker');
 }
 
 //build page title to make bookmarking easier
