@@ -43,7 +43,7 @@ $sortorder = util_ensure_value_in_set ($sortorder,
 
 if (isset($group_name_search)) {
 	echo "<p>"._('Projects that begin with'). " <strong>".$group_name_search."</strong></p>\n";
-	if (PFO_USE_RBAC) {
+	if (USE_PFO_RBAC) {
 		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members
 FROM groups, pfo_user_role, pfo_role, licenses
 WHERE pfo_user_role.role_id=pfo_role.role_id
@@ -64,7 +64,7 @@ ORDER BY '.$sortorder,
 				array (strtolower ("$group_name_search%"))) ;
 	}
 } else {
-	if (PFO_USE_RBAC) {
+	if (USE_PFO_RBAC) {
 		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members
 FROM groups, pfo_user_role, pfo_role, licenses
 WHERE pfo_user_role.role_id=pfo_role.role_id

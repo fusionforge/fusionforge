@@ -109,7 +109,7 @@ $rel = db_query_params ('DELETE FROM stats_project_developers WHERE month=$1 AND
 			array ("$year$month",
 				$day));
 $err .= db_error();
-if (PFO_USE_RBAC) {
+if (USE_PFO_RBAC) {
 $rel = db_query_params ('INSERT INTO stats_project_developers (month,day,group_id,developers)
 SELECT  $1::int AS month, $2::int, pfo_role.home_group_id AS group_id, COUNT(DISTINCT(pfo_user_role.user_id)) AS developers FROM pfo_user_role, pfo_role WHERE pfo_user_role.role_id = pfo_role.role_id AND pfo_role.home_group_id IS NOT NULL GROUP BY pfo_role.home_group_id',
 			array ("$year$month",
