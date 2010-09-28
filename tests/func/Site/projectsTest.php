@@ -131,7 +131,6 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Project ' & B - This is & été the public description for project B."));
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=glob:Project*public description for project B.");
 		$this->assertFalse($this->isTextPresent("Project ' &amp; B"));
 	}
 
