@@ -24,7 +24,7 @@
  * USA
  */
  
-require_once $GLOBALS['gfcommon'].'search/SearchQuery.class.php';
+require_once $gfcommon.'search/SearchQuery.class.php';
 
 class ForumsSearchQuery extends SearchQuery {
 	
