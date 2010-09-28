@@ -157,11 +157,10 @@ class ArtifactWorkflow extends Error {
 				
 		// If no values, then no roles defined, all roles are allowed.
 		if (empty($values)) {
-			$res=db_query_params ('SELECT role_id 
-			FROM role WHERE group_id=$1 ORDER BY role_name',
-			array($this->ath->Group->getID()));
-			while($arr = db_fetch_array($res)) {
-				$values[] = $arr['role_id'];
+			$roles = $this->ath->Group->getRoles() ;
+			sortRoleList($roles, $this->ath->Group) ;
+			foreach ($roles as $r) {
+				$values[] = $r->getID() ;
 			}			
 		}
 		return $values;
@@ -228,11 +227,8 @@ class ArtifactWorkflow extends Error {
 		$event_id = $this->_getEventId($from, $to);
 		if ($event_id) {
 			// By default, all roles are allowed on a new event.
-			$res=db_query_params ('SELECT role_id 
-				FROM role WHERE group_id=$1 ORDER BY role_name',
-			array($this->ath->Group->getID()));
-			while($arr = db_fetch_array($res)) {
-				$this->_addRole($event_id, $arr['role_id']);
+			foreach ($this->ath->Group->getRoles() as $r) {
+				$this->_addRole($event_id, $r->getID());
 			}
 		}
 
