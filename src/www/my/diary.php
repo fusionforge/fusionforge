@@ -46,11 +46,14 @@ if (!session_loggedin()) {
 
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
-		// set $is_public
-		if (getStringFromRequest('is_public')) {
-			$is_public = '1';
+		$is_public = getIntFromRequest('is_public', 0);
+
+		// Secure code sent by user.
+		$summary = htmlspecialchars($summary);
+		if (getStringFromRequest('_details_content_type') == 'html') {
+			$details = TextSanitizer::purify($details);
 		} else {
-			$is_public = '0';
+			$details = htmlspecialchars($details);
 		}
 
 		//make changes to the database
@@ -58,8 +61,8 @@ if (!session_loggedin()) {
 			//updating an existing diary entry
 			$res=db_query_params ('UPDATE user_diary SET summary=$1,details=$2,is_public=$3 
 WHERE user_id=$4 AND id=$5',
-			array(htmlspecialchars($summary) ,
-				htmlspecialchars($details) ,
+			array($summary,
+				$details,
 				$is_public,
 				user_getid() ,
 				$diary_id));
@@ -78,16 +81,14 @@ WHERE user_id=$4 AND id=$5',
 ($1,$2,$3,$4,$5)',
 			array(user_getid() ,
 				time() ,
-				htmlspecialchars($summary) ,
-				htmlspecialchars($details) ,
+				$summary,
+				$details,
 				$is_public));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Item Added');
 				if ($is_public) {
 
 					//send an email if users are monitoring
-
-
 					$result=db_query_params ('SELECT users.email from user_diary_monitor,users 
 WHERE user_diary_monitor.user_id=users.user_id 
 AND user_diary_monitor.monitored_user=$1',
@@ -102,8 +103,8 @@ AND user_diary_monitor.monitored_user=$1',
 							$subject = sprintf (_("[%s User Notes: %s] %s"),
 									    forge_get_config ('forge_name'),
 									    $u->getRealName(),
-									    stripslashes($summary)) ;
-							$body = util_line_wrap(stripslashes($details)) ;
+									    $summary) ;
+							$body = util_line_wrap($details) ;
 							$body .= _("
 
 ______________________________________________________________________
@@ -179,7 +180,7 @@ To stop monitoring this user, login to %s and visit the following link:
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table>
 	<tr><td colspan="2"><strong>'._('Summary').':</strong><br />
-		<input type="text" name="summary" size="45" maxlength="60" value="'. $_summary .'" />
+		<input type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
 
 	<tr><td colspan="2"><strong>'._('Details').':</strong><br />
@@ -199,8 +200,6 @@ To stop monitoring this user, login to %s and visit the following link:
 	<p />';
 
 	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
-
-
 
 	$result=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
 			array(user_getid() ));
