@@ -281,6 +281,7 @@ EOF
 	chmod 644 ${pg_hba_dir}/pg_hba.conf
 
 	# Trying "postgresql" init script...
+	v=0
 	invoke-rc.d postgresql restart || v=$?
 	if test x"$v" = x"100"; then
 		# No "postgresql" init script (for packages << 8.4.4-2)
