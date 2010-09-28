@@ -31,7 +31,7 @@ require_once $gfcommon.'include/User.class.php';
 $expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
 
 if (!$expl_pathinfo[2]) {
-	exit_error(_('No User Name Provided'),'home');
+	exit_error(_('No User Name Provided'));
 }
 
 //get the user object based on the user_name in the URL
@@ -39,7 +39,7 @@ $user =& user_get_object_by_name( urldecode($expl_pathinfo[2]) );
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
-	exit_error(_('That user does not exist.'),'home');
+	exit_error(_('That user does not exist.'));
 
 } else {
 

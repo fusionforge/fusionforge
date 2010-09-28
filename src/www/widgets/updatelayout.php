@@ -1,5 +1,7 @@
 <?php
 /*
+ * http://fusionforge.org
+ *
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
