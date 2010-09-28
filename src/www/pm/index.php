@@ -48,7 +48,7 @@ if (!$pgf || !is_object($pgf)) {
 	exit_error($pgf->getErrorMessage(),'pm');
 }
 
-$pg_arr =& $pgf->getProjectGroups();
+$pg_arr = $pgf->getProjectGroups();
 if ($pg_arr && $pgf->isError()) {
 	exit_error($pgf->getErrorMessage(),'pm');
 }
