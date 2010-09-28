@@ -203,7 +203,7 @@ if ($add_cat && $group_project_id) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo "\n<h3>"._('No categories defined')."</h3>";
+		echo "\n<p class=\"warning_msg\">"._('No categories defined')."</p>";
 	}
 
 	?>

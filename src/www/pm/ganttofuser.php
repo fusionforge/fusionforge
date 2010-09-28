@@ -59,14 +59,11 @@ if (count($userTasks) > 0) {
 		if($projectGroup->getID() != $last_group) {
 			$last_group = $projectGroup->getID();
 
-			//???Ω???瑚????Ω?雀???Bar??
-			//?????ヴ鞍械?蹄???????衛??飢?
 			if ($g_index >= 0) {
 				$data[$g_index][3]=date("Y-m-d",$group_begin);
 				$data[$g_index][4]=date("Y-m-d",$group_end-86400);
 			}
 
-			//?雀Project?棲??ヌ?肱??
 			$g_index = $pos;
 
 			$group_begin = $task->getStartDate();
