@@ -34,11 +34,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 *  ArtifactType() - constructor
 	 *
-	 *  @param $Group object
+	 *  @param $group object
 	 *  @param $artifact_type_id - the id # assigned to this artifact type in the db
 	 */
-	function ArtifactTypeHtml(&$Group,$artifact_type_id=false, $arr=false) {
-		return $this->ArtifactType($Group,$artifact_type_id,$arr);
+	function ArtifactTypeHtml(&$group,$artifact_type_id=false, $arr=false) {
+		return $this->ArtifactType($group,$artifact_type_id,$arr);
 	}
 
 	function header($params) {
@@ -364,7 +364,6 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$return = '
 			<!-- Start Extra Fields Rendering -->
-			<!-- COLUMN NAMES MUST BE PRESERVED EXACTLY, INCLUDING CASE! -->
 			<tr>';
 		$col_count=0;
 
