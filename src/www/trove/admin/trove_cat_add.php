@@ -48,7 +48,6 @@ if ($GLOBALS['submit']) {
 
 		if (!$res || db_affected_rows($res)<1) {
 			exit_error( _('Error in Trove operation: ').db_error(),'');
-			);
 		}
 	} 
 
