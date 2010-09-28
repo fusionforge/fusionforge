@@ -66,13 +66,12 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 		<input type="hidden" name="next" value="<?php echo $next ?>" />
     	
 <?php 
-		$res=db_query_params ('SELECT role_id,role_name 
-			FROM role WHERE group_id=$1 ORDER BY role_name',
-			array($group_id));
-		while($arr = db_fetch_array($res)) {
-			$value = in_array($arr['role_id'], $roles)? ' checked="checked"' : '';
-			$str = '<input type="checkbox" name="role['.$arr['role_id'].']"'.$value.' />';
-			$str .= ' '.$arr['role_name'];
+		$group_roles = $group->getRoles() ;
+		sortRoleList ($group_roles) ;
+		foreach ($group_roles as $role) {
+			$value = in_array($role->getID(), $roles)? ' checked="checked"' : '';
+			$str = '<input type="checkbox" name="role['.$role->getID().']"'.$value.' />';
+			$str .= ' '.$role->getDisplayableName($group);
 			echo $str."<br />\n";
 		}
 ?>		
