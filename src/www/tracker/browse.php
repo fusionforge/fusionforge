@@ -452,7 +452,7 @@ if ($art_cnt > 0) {
 		}
 		
 		$i=0;
-		$efarr =& $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
+		$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
 		$keys=array_keys($efarr);
 		$field_id = $keys[0];
 		$states = $ath->getExtraFieldElements($field_id);

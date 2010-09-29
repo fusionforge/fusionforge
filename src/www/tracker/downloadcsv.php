@@ -52,7 +52,7 @@ echo 'artifact_id;status_id;status_name;priority;submitter_id;submitter_name;ass
 //
 //	Show the extra fields
 //
-$ef =& $ath->getExtraFields();
+$ef = $ath->getExtraFields();
 $keys=array_keys($ef);
 for ($i=0; $i<count($keys); $i++) {
 	echo ';"'.$ef[$keys[$i]]['field_name'].'"';
@@ -77,7 +77,7 @@ for ($i=0; $i<count($at_arr); $i++) {
 	//
 	//	Show the extra fields
 	//
- 	$efd =& $at_arr[$i]->getExtraFieldDataText();
+ 	$efd = $at_arr[$i]->getExtraFieldDataText();
  	foreach ( $efd as $efd_pair ) {
  		$value = $efd_pair["value"];
  		echo ';"'. fix4csv($value) .'"';
@@ -85,9 +85,9 @@ for ($i=0; $i<count($at_arr); $i++) {
 }
 
 function fix4csv ($value) {
-	$value =& util_unconvert_htmlspecialchars( $value );
-	$value =& str_replace("\r\n", "\n", $value);
-	$value =& str_replace('"', '""', $value);
+	$value = util_unconvert_htmlspecialchars( $value );
+	$value = str_replace("\r\n", "\n", $value);
+	$value = str_replace('"', '""', $value);
 	return $value;
 }
 

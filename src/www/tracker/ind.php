@@ -31,7 +31,7 @@ if (!$group || !is_object($group) || $group->isError()) {
 	exit_error(_('Could Not Get ArtifactTypeFactory'),'tracker');
 }
 
-$at_arr =& $atf->getArtifactTypes();
+$at_arr = $atf->getArtifactTypes();
 if ($at_arr === false) {
 	exit_permission_denied('tracker');
 }
