@@ -66,6 +66,7 @@ case "$1" in
 	# Make sure the database accepts connections from these new users
 	pg_name=postgresql-$pg_version
 	# Trying "postgresql" init script...
+	v=0
 	invoke-rc.d postgresql reload || v=$?
 	if test x"$v" = x"100"; then
 		# No "postgresql" init script (for packages << 8.4.4-2)
