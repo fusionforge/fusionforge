@@ -714,7 +714,7 @@ if ($art_cnt > 0) {
 		show_priority_colors_key();
 	}
 } else {
-	echo '<div class="warning_msg">'._('No items found').'</div>';
+	echo '<p class="warning_msg">'._('No items found').'</p>';
 	echo db_error();
 }
 

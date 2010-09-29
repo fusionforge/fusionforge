@@ -113,7 +113,7 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<div class="warning_msg">' . _('No Survey Question is found') . '</div>';
+    echo '<p class="warning_msg">' . _('No Survey Question is found') . '</p>';
 } else {
     echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }

@@ -71,10 +71,10 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     /* Error */
     if ( $sq->isError()) {
 	$msg = _('Delete failed').' '.$sq->getErrorMessage();
-        echo '<div class="error">' .$msg ."</div>";
+        echo '<p class="error">' .$msg ."</p>";
     } else {
 	$msg = _('Delete successful');
-        echo '<div class="feedback">' .$msg ."</div>";
+        echo '<p class="feedback">' .$msg ."</p>";
     }
 } else if (getStringFromRequest('post')=="Y") {
     /* Modification */
@@ -94,9 +94,9 @@ if (getStringFromRequest('delete')=="Y" && $question_id) {
     if ( $sq->isError()) {
 		$msg = $sq->getErrorMessage();
 		form_release_key(getStringFromRequest("form_key"));
-        echo '<div class="error">' .$msg ."</div>";
+        echo '<p class="error">' .$msg ."</p>";
     } else {
-        echo '<div class="feedback">' .$msg ."</div>";
+        echo '<p class="feedback">' .$msg ."</p>";
     }
 
     /* Add now Question */

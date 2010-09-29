@@ -54,7 +54,7 @@ plugin_hook ("blocks", "survey index");
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<div class="warning_msg">' . (_('No Survey is found')) . '</div>';
+    echo '<p class="warning_msg">' . (_('No Survey is found')) . '</p>';
 } else {
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }

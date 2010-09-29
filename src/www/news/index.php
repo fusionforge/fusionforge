@@ -72,12 +72,10 @@ if ($rows>$limit) {
 
 if ($rows < 1) {
 	if ($group_id) {
-		echo '<h2>'.sprintf(_('No News Found For %s'),group_getname($group_id)).'</h2>';
+		echo '<p class="warning_msg">'.sprintf(_('No News Found for %s'),group_getname($group_id)).'</p>';
 	} else {
-		echo '<h2>'._('No News Found').'</h2>';
+		echo '<p class="warning_msg">'._('No News Found').'</p>';
 	}
-	echo '
-		<p>' . _('No items were found') . '</p>';
 	echo db_error();
 } else {
 	echo news_show_latest($group_id,10,true,false,false,-1, true);
