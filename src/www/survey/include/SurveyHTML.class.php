@@ -228,7 +228,7 @@ class SurveyHTML extends Error {
 				$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n";
 			}
 			
-			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'">'.
+			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'" />'.
 				$arr_to_add[$i]->getQuestion().' ('.
 				$arr_to_add[$i]->getQuestionStringType().')</td>';
 			
@@ -270,7 +270,7 @@ class SurveyHTML extends Error {
 			$ret.= '<td><center>['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $survey_id.'&amp;is_up=1&amp;updown=Y'.'&amp;question_id='.$arr_to_del[$i]->getID(),_('Up')).'] ';
 			$ret.= '['.util_make_link ('/survey/admin/survey.php?group_id='.$group_id.'&amp;survey_id='. $survey_id.'&amp;is_up=0&amp;updown=Y'.'&amp;question_id='.$arr_to_del[$i]->getID(),_('Down')).']</center></td>';
 			
-			$ret.= '<td><center><input type="checkbox" name="to_del[]" value="'.$arr_to_del[$i]->getID().'"></center></td>';
+			$ret.= '<td><center><input type="checkbox" name="to_del[]" value="'.$arr_to_del[$i]->getID().'" /></center></td>';
 			$ret.= '</tr>';
 			
 		}
