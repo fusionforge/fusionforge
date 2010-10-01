@@ -226,7 +226,7 @@ class FRSRelease extends Error {
 	 *  @return string  The filename of this release.
 	 */
 	function getFileName() {
-		return eregi_replace("[^-A-Z0-9_\.]",'',$this->data_array['name']);
+		return preg_replace("/[^-A-Z0-9_\.]/i",'',$this->data_array['name']);
 	}
 
 	/**

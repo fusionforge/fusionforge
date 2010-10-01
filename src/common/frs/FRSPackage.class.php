@@ -240,7 +240,7 @@ class FRSPackage extends Error {
 	 *  @return string  The name of this package.
 	 */
 	function getFileName() {
-		return eregi_replace("[^-A-Z0-9_\.]",'',$this->data_array['name']);
+		return preg_replace("/[^-A-Z0-9_\.]/i",'',$this->data_array['name']);
 	}
 
 	/**

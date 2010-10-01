@@ -847,7 +847,7 @@ function validate_emails ($addresses, $separator=',') {
  */
 function util_is_valid_filename ($file) {
 	//bad char test
-	$invalidchars = eregi_replace("[-A-Z0-9+_\. ~]","",$file);
+	$invalidchars = preg_replace("/[-A-Z0-9+_\. ~]/i","",$file);
 
 	if (!empty($invalidchars)) {
 		return false;
