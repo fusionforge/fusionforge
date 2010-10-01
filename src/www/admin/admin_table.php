@@ -90,12 +90,14 @@ function admin_table_postadd($table, $unit, $primary_key) {
 	$qpa = db_construct_qpa ($qpa, implode (',', $v).')', $values) ;
 
 	if (db_query_qpa($qpa)) {
-        print('<div class="feedback">');
+        print('<p class="feedback">');
 		printf(_('%1$s successfully added.'), ucfirst(getUnitLabel($unit)));
-        print('</div>');
+        print('</p>');
 	} else {
-		form_release_key(getStringFromRequest('form_key'));
+		print('<p class="error">');
 		echo db_error();
+		print('</p>');
+		form_release_key(getStringFromRequest('form_key'));
 	}
 }
 
@@ -168,9 +170,9 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
 	if (db_query_params("DELETE FROM $table WHERE $primary_key=$1", array($id))) {
-                print('<div class="feedback">');
+                print('<p class="feedback">');
 		printf(_('%1$s successfully deleted.'), ucfirst(getUnitLabel($unit)));
-                print('</div>');
+                print('</p>');
 	} else {
 		echo db_error();
 	}
@@ -244,9 +246,9 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 				 array ($id)) ;
 
 	if (db_query_qpa($qpa)) {
-        print('<div class="feedback">');
+        print('<p class="feedback">');
 		printf(_('%1$s successfully modified.'), ucfirst(getUnitLabel($unit)));
-        print('</div>');
+        print('</p>');
 	} else {
 		echo db_error();
 	}

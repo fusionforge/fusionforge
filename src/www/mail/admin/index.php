@@ -243,7 +243,7 @@ if ($group_id) {
 		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
-			echo '<h1>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</h1>';
+			echo '<p>'._('Error').' '.sprintf(_('Unable to get the list %s'), $Group->getPublicName()) .'</p>';
 			echo '<div class="error">'.$mlFactory->getErrorMessage().'</div>';
 			mail_footer(array());
 			exit;

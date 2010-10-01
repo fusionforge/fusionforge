@@ -49,7 +49,7 @@ if ($diary_user) {
 
 		echo $HTML->boxTop(_('Date').": ".date(_('Y-m-d H:i'), db_result($res,$i,'date_posted')));
 		if (!$res || db_numrows($res) < 1) {
-			echo _('Entry Not Found For This User');
+			echo '<p>' . _('Entry Not Found For This User') . '</p>';
 		} else {
 			echo'<strong>'._('Subject').':</strong> '. db_result($res,$i,'summary') .'<p>
 			<strong>'._('Body').':</strong><br />

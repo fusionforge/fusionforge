@@ -156,7 +156,7 @@ if (getStringFromRequest('update')) {
 site_admin_header(array('title'=>_('Plugin Manager')));
 ?>
 <script type="text/javascript">
-
+<!--
 	function change(url,plugin)
 	{
 		field = document.theform.elements[plugin];
@@ -167,6 +167,7 @@ site_admin_header(array('title'=>_('Plugin Manager')));
 		}
 	}
 
+// -->
 </script>
 <?php
 echo '<h1>' . _('Plugin Manager') . '</h1>';

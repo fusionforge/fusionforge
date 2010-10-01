@@ -81,10 +81,12 @@ echo _('<p>Changing your email address will require confirmation from your new e
 ?>
 
 <form action="<?php echo util_make_url('/account/change_email.php'); ?>" method="post">
+<p>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <?php echo _('New Email Address:') ?>
 <input type="text" name="newemail" maxlength="255" />
 <input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address') ?>" />
+</p>
 </form>
 
 	<p><?php echo util_make_link('/', _('Return')); ?></p>

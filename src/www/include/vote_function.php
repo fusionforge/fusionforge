@@ -113,7 +113,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 	<input type="radio" name="vote_on_id" value="<?php echo $vote_on_id; ?>" />
 	<input type="radio" name="redirect_to" value="<?php echo urlencode(getStringFromServer('REQUEST_URI')); ?>" />
 	<input type="radio" name="flag" value="<?php echo $flag; ?>" />
-	<div align="center">
+	<div style="margin-left: auto; margin-right: auto;">
 	<?php echo html_image("rateit.png","100","9"); ?>
 	<br />
 	<?php

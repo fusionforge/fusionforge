@@ -58,7 +58,7 @@ function performAction($newStatus, $statusString, $user_id) {
 		}
 
 	}
-	echo "<div class='feedback'>" .sprintf(_('User updated to %1$s status'), $statusString)."</div>";
+	echo '<p class="feedback">' .sprintf(_('User updated to %1$s status'), $statusString)."</p>";
 }
 
 function show_users_list ($users) {

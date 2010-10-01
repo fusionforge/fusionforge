@@ -45,7 +45,6 @@ if (!$ptf || !is_object($ptf)) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
 
-$offset = getIntFromRequest('offset');
 $_order = getStringFromRequest('_order');
 $set = getStringFromRequest('set');
 $_assigned_to = getIntFromRequest('_assigned_to');
@@ -425,8 +424,8 @@ if ($rows < 1) {
 
 			<tr><td><strong>'._('Subproject').'</strong><br />
 			'.$pg->groupProjectBox('new_group_project_id',$group_project_id,false).'</td>
-			<td align="middle"><input type="submit" name="submit" value="'.
-			_('Mass update').'"></td></tr>
+			<td><input type="submit" name="submit" value="'.
+			_('Mass update').'" /></td></tr>
 
 			</table>
 		</form>';

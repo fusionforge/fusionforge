@@ -121,29 +121,43 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 
 ?>
 
-<p />
-<?php echo _('In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><span class="important"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</span>'); ?>
-<p />
+<p>
+<?php echo _('In an attempt to reduce spam, we are using this form to send email.'); ?>
+</p>
+
+<p>
+<?php echo _('Fill it out accurately and completely or the receiver may not be able to respond.'); ?>
+</p>
+
+<p class="important">
+<?php echo _('<b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.'); ?>
+</p>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+
+<p>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
 <strong><?php echo _('Your Name').utils_requiredField() ?> :</strong><br />
 <input type="text" name="name" size="40" maxlength="40" value="<?php echo $name ?>" />
-<p />
+</p>
+<p>
 <strong><?php echo _('Your Email Address').utils_requiredField() ?> :</strong><br />
 <input type="text" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
-<p />
+</p>
+<p>
 <strong><?php echo _('Subject').utils_requiredField() ?> :</strong><br />
 <input type="text" name="subject" size="60" maxlength="255" value="<?php echo $subject; ?>" />
-<p />
+</p>
+<p>
 <strong><?php echo _('Message').utils_requiredField() ?> :</strong><br />
 <textarea name="body" rows="15" cols="60"></textarea>
-<p />
-<div align="center">
+</p>
+<p align="center">
 <input type="submit" name="send_mail" value="<?php echo _('Send Message') ?>" />
-</div>
+</p>
 </form>
 <?php
 $HTML->footer(array());

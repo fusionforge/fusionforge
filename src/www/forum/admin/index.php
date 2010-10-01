@@ -90,30 +90,38 @@ if (getStringFromRequest('add_forum')) {
 	forum_header(array('title'=>_('Add forum')));
 
 	echo '
-			<br />
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
+			<p>
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
 			<strong>'._('Forum Name').':</strong><br />
-			<input type="text" name="forum_name" value="" size="20" maxlength="30" /><br />
+			<input type="text" name="forum_name" value="" size="20" maxlength="30" />
+			</p>
+			<p>
 			<strong>'._('Description').':</strong><br />
-			<input type="text" name="description" value="" size="40" maxlength="80" /><br />
+			<input type="text" name="description" value="" size="40" maxlength="80" />
+			</p>
+			<p>
 			<strong>'._('Is Public?').'</strong><br />
 			<input type="radio" name="is_public" value="1" checked="checked" />'._('Yes').' <br />
 			<input type="radio" name="is_public" value="0" />'._('No').'
-			<br  /><br />
+			</p>
+			<p>
 			<strong>'._('Allow Anonymous Posts?').'</strong><br />
 			<input type="radio" name="allow_anonymous" value="1" />'._('Yes').'<br />
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
-			<br /><br />' .
+			</p>
+			<p>
+
 		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
 				
 			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="60" />
-			<br />
+			</p>
+			<p>
 			<input type="submit" name="submit" value="'._('Add This Forum').'" />
 			</p>
 			</form>';
@@ -134,6 +142,7 @@ if (getStringFromRequest('add_forum')) {
 		
 	echo '
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+				<p>
 				<input type="hidden" name="post_changes" value="y" />
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
@@ -141,9 +150,9 @@ if (getStringFromRequest('add_forum')) {
 				
 				<strong>'._('Allow Anonymous Posts?').'</strong><br />
 				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
-				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'<br />
-				
-				<p />
+				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'
+				</p>
+				<p>
 				<strong>'._('Is Public?').'</strong><br />
 				<input type="radio" name="is_public" value="1"'.(($f->isPublic() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
 				<input type="radio" name="is_public" value="0"'.(($f->isPublic() == 0)?' checked="checked"':'').' /> '._('No').'<br />
@@ -155,17 +164,21 @@ if (getStringFromRequest('add_forum')) {
 
 				<strong>'._('Forum Name').':</strong><br />
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
+				</p>
 				<p>
 				<strong>'._('Email All Posts To:').'</strong><br />
 				<input type="text" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
+				</p>
 				<p>
 				<strong>'._('Description').':</strong><br />
 				<input type="text" name="description" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
+				</p>
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
+				</p>
 			</form><p>';
 	//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
-	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a><br />';
+	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a></p>';
 	forum_footer(array());
 
 } elseif ($deleteforum && $group_forum_id) {
@@ -401,7 +414,7 @@ if (getStringFromRequest('add_forum')) {
 					
 		echo '<center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-							<h3>' . sprintf(_('Move thread from %s forum to the following forum:'), $f_from->getName()) . '</h3>
+							<p><strong>' . sprintf(_('Move thread from %s forum to the following forum:'), $f_from->getName()) . '</strong></p>
 							<p>
 							<input type="hidden" name="movethread" value="'.$thread_id.'" />
 							<input type="hidden" name="group_id" value="'.$group_id.'" />

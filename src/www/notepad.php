@@ -59,7 +59,7 @@ if ($form) {
 <html>
   <head>
     <title>GForge Notepad</title>
-   <script language="JavaScript" type="text/javascript">
+   <script type="text/javascript">
    <!-- 
     function load_initial_value() {
         try {
