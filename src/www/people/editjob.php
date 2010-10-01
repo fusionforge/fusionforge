@@ -63,7 +63,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			form_release_key(getStringFromRequest("form_key"));
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
-			$feedback = _('JOB inserted successfully');
+			$feedback .= _('JOB inserted successfully');
 		}
 
 	} else if (getStringFromRequest('update_job')) {
@@ -94,13 +94,12 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 
 		if (people_verify_job_group($job_id,$group_id)) {
 			people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id);
-			$feedback = _('JOB updated successfully');
+			$feedback .= _('JOB updated successfully');
 		} else {
 			$error_msg .= _('JOB update failed - wrong project_id');
 		}
 
 	} else if (getStringFromRequest('update_job_inventory')) {
-
 		/*
 			Change Skill level, experience etc.
 		*/
@@ -115,7 +114,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('JOB skill update FAILED: %s'), db_error());
 			} else {
-				$feedback = _('JOB skill updated successfully');
+				$feedback .= _('JOB skill updated successfully');
 			}
 		} else {
 			$error_msg .= _('JOB skill update failed - wrong project_id');
@@ -135,7 +134,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= sprintf(_('JOB skill delete FAILED : %s'),db_error());
 			} else {
-				$feedback = _('JOB skill deleted successfully');
+				$feedback .= _('JOB skill deleted successfully');
 			}
 		} else {
 			$error_msg .= _('JOB skill delete failed - wrong project_id');

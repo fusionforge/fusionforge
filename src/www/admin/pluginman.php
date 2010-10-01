@@ -104,8 +104,8 @@ if (getStringFromRequest('update')) {
 				if (!is_link('../'.$installdir)) {
 					$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/www', '../'.$installdir); 
 					if (!$code) {
-						$feedback .= '<br />['.'../'.$installdir.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/www]';
-						$feedback .= _('<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
+						$error_msg .= '<br />['.'../'.$installdir.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/www]';
+						$error_msg .= _('<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
 					}
 				}
 			}
@@ -115,8 +115,8 @@ if (getStringFromRequest('update')) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
 				$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname, forge_get_config('config_path'). '/plugins/'.$pluginname); 
 				if (!$code) {
-					$warning_msg .= '<br />['.forge_get_config('config_path'). '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
-					$warning_msg .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
+					$error_msg .= '<br />['.forge_get_config('config_path'). '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
+					$error_msg .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
 				}
 			}
 
@@ -181,7 +181,7 @@ $title_arr = array( _('Plugin Name'),
 		    _('Action'),
 		    _('Run Init Script?'),
 		    _('Users Using it'),
-		    _('Groups Using it'),);
+				_('Projects Using it'),);
 echo $HTML->listTableTop($title_arr);
 
 // Get the activated plugins.

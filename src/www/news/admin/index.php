@@ -87,7 +87,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				$error_msg .= _('Error On Update:');
 				$error_msg .= db_error();
 			} else {
-				$feedback .= _('NewsByte Updated.');
+				$feedback .= _('Newsbyte Updated.');
 				// No notification if news is deleted.
 //				if ($status != 4)
 //					send_news_notification_email($id);
@@ -109,7 +109,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		$result=db_query_params("SELECT * FROM news_bytes WHERE id=$1 AND group_id=$2", array($id, $group_id));
 		if (db_numrows($result) < 1) {
-			exit_error(_('NewsByte not found'),'news');
+			exit_error(_('Newsbyte not found'),'news');
 		}
 		
 		$group =& group_get_object($group_id);
@@ -134,7 +134,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		<input type="radio" name="status" value="4" /> '._('Delete').'<br />
 
 		<strong>'._('Subject').'</strong><br />
-		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
+		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
 		<strong>'._('Details').'</strong>'.notepad_button('document.forms.newsadminform.details').'<br />';
 		
 		$GLOBALS['editor_was_set_up']=false;
@@ -168,7 +168,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		echo '<h1>'._('List of News Submitted for Project').': '.$group->getPublicName().'</h1>';
 		if ($rows < 1) {
 			echo '
-				<div class="warning_msg">'._('No Queued Items Found').'</div>';
+				<p class="warning_msg">'._('No Queued Items Found').'</p>';
 		} else {
 			echo '
 				<ul>';
@@ -205,7 +205,7 @@ summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= _('Error On Update:');
 				} else {
-					$feedback .= _('NewsByte Updated.');
+					$feedback .= _('Newsbyte Updated.');
 				}
 			} else if ($status==2) {
 				/*
@@ -216,7 +216,7 @@ summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $
 					$error_msg .= _('Error On Update:');
 					$error_msg .= db_error();
 				} else {
-					$feedback .= _('NewsByte Deleted.');
+					$feedback .= _('Newsbyte Deleted.');
 				}
 			}
 
@@ -237,7 +237,7 @@ WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 				$error_msg .= _('Error On Update:');
 				$error_msg .= db_error();
 			} else {
-				$feedback .= _('NewsBytes Rejected.');
+				$feedback .= _('Newsbytes Rejected.');
 			}
 		}
 	}
@@ -253,10 +253,10 @@ WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 FROM news_bytes,groups WHERE id=$1 
 AND news_bytes.group_id=groups.group_id ", array($id));
 		if (db_numrows($result) < 1) {
-			exit_error(_('NewsByte not found'),'news');
+			exit_error(_('Newsbyte not found'),'news');
 		}
 		if (db_result($result,0,'is_approved') == 4) {
-			exit_error(_('NewsByte deleted'),'news');
+			exit_error(_('Newsbyte deleted'),'news');
 		}
 		
 		$group =& group_get_object(db_result($result,0,'group_id'));
@@ -277,7 +277,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		<input type="radio" name="status" value="0" /> '._('Do Nothing').'<br />
 		<input type="radio" name="status" value="2" checked="checked" /> '._('Reject').'<br />
 		<strong>'._('Subject').':</strong><br />
-		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
+		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
 		<strong>'._('Details').':</strong><br />';
 		
 		$GLOBALS['editor_was_set_up']=false;
