@@ -85,31 +85,31 @@ if (getStringFromRequest('submit')) {
 		//
 		$frsp = new FRSPackage($g,$package_id);
 		if (!$frsp || !is_object($frsp)) {
-			exit_error(_('Error'),_('Could Not Get FRSPackage'),'frs');
+			exit_error(_('Could Not Get FRSPackage'),'frs');
 		} elseif ($frsp->isError()) {
-			exit_error(_('Error'),$frsp->getErrorMessage(),'frs');
+			exit_error($frsp->getErrorMessage(),'frs');
 		} else {
 			//
 			//	Create a new FRSRelease in the db
 			//
 			$frsr = new FRSRelease($frsp);
 			if (!$frsr || !is_object($frsr)) {
-				exit_error(_('Error'),_('Could Not Get FRSRelease'),'frs');
+				exit_error(_('Could Not Get FRSRelease'),'frs');
 			} elseif ($frsr->isError()) {
-				exit_error(_('Error'),$frsr->getErrorMessage(),'frs');
+				exit_error($frsr->getErrorMessage(),'frs');
 			} else {
 				db_begin();
 				if (!$frsr->create($release_name,$release_notes,$release_changes,
 						   $preformatted,$release_date)) {
 					db_rollback();
-					exit_error(_('Error'),$frsr->getErrorMessage(),'frs');
+					exit_error($frsr->getErrorMessage(),'frs');
 				}
 
 				$ret = frs_add_file_from_form ($frsr, $type_id, $processor_id, $release_date,
 							       $userfile, $ftp_filename, $manual_filename) ;
 				if ($ret != true) {
 					db_rollback() ;
-					exit_error (_('Error'),$ret,'frs') ;
+					exit_error ($ret,'frs') ;
 				}
 				$frsr->sendNotice();
 				
