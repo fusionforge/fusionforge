@@ -95,7 +95,7 @@ class RoleObserver extends Error {
 		}
 
 		//
-		//	Task Manager is_public/allow_anon
+		//	Tasks is_public/allow_anon
 		//
 		$res = db_query_params ('SELECT group_project_id,is_public FROM project_group_list WHERE group_id=$1',
 					array ($this->Group->getID())) ;

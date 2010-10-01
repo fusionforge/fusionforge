@@ -34,14 +34,14 @@ require_once $gfcommon.'mail/MailingListFactory.class.php';
 $group_id = getIntFromGet('group_id');
 
 if ($group_id) {
-	$Group =& group_get_object($group_id);
-	if (!$Group || !is_object($Group)) {
+	$group =& group_get_object($group_id);
+	if (!$group || !is_object($group)) {
 		exit_no_group();
-	} elseif ($Group->isError()) {
-		exit_error($Group->getErrorMessage(),'mail');
+	} elseif ($group->isError()) {
+		exit_error($group->getErrorMessage(),'mail');
 	}
 	
-	$mlFactory = new MailingListFactory($Group);
+	$mlFactory = new MailingListFactory($group);
 	if (!$mlFactory || !is_object($mlFactory)) {
 		exit_error(_('Could Not Get MailingListFactory'),'mail');
 	} elseif ($mlFactory->isError()) {
@@ -49,7 +49,7 @@ if ($group_id) {
 	}
 
 	mail_header(array(
-		'title' => sprintf(_('Mailing Lists for %1$s'), $Group->getPublicName())
+		'title' => sprintf(_('Mailing Lists for %1$s'), $group->getPublicName())
 	));
 
 	plugin_hook ("blocks", "mail index");
@@ -57,14 +57,14 @@ if ($group_id) {
 	$mlArray =& $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<div class="error">'.sprintf(_('Unable to get the list %s : %s'), $Group->getPublicName(), $mlFactory->getErrorMessage()) .'</div>';
+		echo '<div class="error">'.sprintf(_('Unable to get the list %s : %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</div>';
 		mail_footer(array());
 		exit;
 	}
 	
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
-		echo '<p>'.sprintf(_('No Lists found for %1$s'), $Group->getPublicName()) .'</p>';
+		echo '<p>'.sprintf(_('No Lists found for %1$s'), $group->getPublicName()) .'</p>';
 		echo '<p>'._('Project administrators use the admin link to request mailing lists.').'</p>';
 		mail_footer(array());
 		exit;

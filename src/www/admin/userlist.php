@@ -136,7 +136,7 @@ if ($action=='delete') {
 }
 
 //	Show list of users
-print "<p>" ._('User list for group:');
+print "<p>" ._('User list for project: ');
 if (!$group_id) {
 	$user_name_search = getStringFromRequest('user_name_search');
 

@@ -837,7 +837,7 @@ Or reply to this e-mail entering your response between the following markers:
 			"\n\n______________________________________________________________________".
 			"\nYou are receiving this email because you elected to monitor this forum.".
 			"\nTo stop monitoring this forum, login to ".forge_get_config ('forge_name')." and visit: ".
-				"\n".util_make_url ('/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1');
+			"\n".util_make_url ('/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1');
 	
 			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
 			$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
