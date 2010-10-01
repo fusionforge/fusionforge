@@ -629,16 +629,31 @@ class Forum extends Error {
 			return false;
 		}
 		db_begin();
-		db_query_params ('DELETE FROM forum_agg_msg_count WHERE group_forum_id=$1',
+		$result = db_query_params ('DELETE FROM forum_agg_msg_count WHERE group_forum_id=$1',
 				 array ($this->getID())) ;
-//echo '1'.db_error();
-		db_query_params ('DELETE FROM forum_monitored_forums WHERE forum_id=$1',
+		if (!$result) {
+			$this->setError(_('Error Deleting Forum').db_error());
+			db_rollback();
+			return false;
+		}
+
+		$result = db_query_params ('DELETE FROM forum_monitored_forums WHERE forum_id=$1',
 				 array ($this->getID())) ;
-//echo '2'.db_error();
-		db_query_params ('DELETE FROM forum_saved_place WHERE forum_id=$1',
+		if (!$result) {
+			$this->setError(_('Error Deleting Forum').db_error());
+			db_rollback();
+			return false;
+		}
+
+		$result = db_query_params ('DELETE FROM forum_saved_place WHERE forum_id=$1',
 				 array ($this->getID())) ;
-//echo '3'.db_error();
-		db_query_params ('DELETE FROM forum_attachment WHERE msg_id IN (SELECT msg_id from forum where group_forum_id=$1)',
+		if (!$result) {
+			$this->setError(_('Error Deleting Forum').db_error());
+			db_rollback();
+			return false;
+		}
+
+		$result = db_query_params ('DELETE FROM forum_attachment WHERE msg_id IN (SELECT msg_id from forum where group_forum_id=$1)',
 					array ($this->getID())) ;
 		db_query_params ('DELETE FROM forum WHERE group_forum_id=$1',
 				 array ($this->getID())) ;
