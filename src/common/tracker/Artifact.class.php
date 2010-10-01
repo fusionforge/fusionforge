@@ -759,6 +759,9 @@ class Artifact extends Error {
 					       $by,
 					       time(),
 					       htmlspecialchars($body))) ;
+
+		$this->updateLastModifiedDate();
+
 		if ($send_followup) {
 			$this->mailFollowup(2,false);
 		}
@@ -1093,6 +1096,40 @@ class Artifact extends Error {
 	}
 
 	/**
+	 * 	updateLastModifiedDate - update the last_modified_date attribute of this artifact.
+	 *
+	 *	@return true on success / false on failure
+	 */
+	function updateLastModifiedDate() {
+		$res = db_query_params ('UPDATE artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer WHERE artifact_id=$1',
+			array ($this->getID()));
+		return (!$res);
+	}
+
+	/**
+	 * 	assignToMe - assigns this artifact to current user
+	 *
+	 *	@return true on success / false on failure
+	 */
+	function assignToMe() {
+		if (!session_loggedin() || !($this->ArtifactType->userIsAdmin() || $this->ArtifactType->userIsTechnician())) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		
+		$user_id = user_getid();
+		$res = db_query_params ('UPDATE artifact SET assigned_to=$1 WHERE artifact_id=$2',
+								array ($user_id, $this->getID())) ;
+		if (!$res) {
+			$this->setError('Error updating assigned_to in artifact: '.db_error());
+			return false;
+		}
+		$this->fetchData($this->getID());
+		
+		return true;
+	}
+
+	/**
 	 * 	updateExtraFields - updates the extra data elements for this artifact
 	 *	e.g. the extra fields created and defined by the admin.
 	 *
@@ -1119,6 +1156,8 @@ class Artifact extends Error {
 		if (empty($extra_fields)) {
 			return true;
 		}
+		$update = false;
+
 		//get a list of extra fields for this artifact_type
 		$ef = $this->ArtifactType->getExtraFields();
 		$efk=array_keys($ef);
@@ -1232,6 +1271,7 @@ class Artifact extends Error {
 						}
 
 						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)));
+						$update = true;
 
 						$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
 									   array ($this->getID(),
@@ -1258,6 +1298,7 @@ class Artifact extends Error {
 					} else {
 						$this->addHistory($field_name, db_result($resd,0,'field_data'));
 					}
+					$update = true;
 				}
 			} else {
 
@@ -1343,10 +1384,15 @@ class Artifact extends Error {
 						$this->setError(db_error());
 						return false;
 					}
+					$update = true;
 				}
 			}
 		}
 		unset($this->extra_field_data);
+
+		if ($update)
+			$this->updateLastModifiedDate();
+
 		return true;
 	}
 

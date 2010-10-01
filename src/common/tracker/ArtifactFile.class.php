@@ -180,6 +180,7 @@ class ArtifactFile extends Error {
 */
 			db_commit();
 			$this->Artifact->addHistory('File Added',$id.': '.$filename);
+			$this->Artifact->UpdateLastModifiedDate();
 			$this->clearError();
 			return $id;
 		}
