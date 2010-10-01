@@ -124,39 +124,39 @@ function report_group_box($name='g_id', $selected='1') {
 }
 
 function report_area_box($name='area', $selected='1', $Group=false) {
-  if ($Group) {
-    $sys_use_tracker = $Group->usesTracker();
-    $sys_use_forum = $Group->usesForum();
-    $sys_use_docman = $Group->usesDocman();
-    $sys_use_pm = $Group->usesPM();
-    $sys_use_frs = $Group->usesFRS();
-  } else {
-    $sys_use_tracker = forge_get_config('use_tracker');
-    $sys_use_forum = forge_get_config('use_forum');
-    $sys_use_docman = forge_get_config('use_docman');
-    $sys_use_pm = forge_get_config('use_pm');
-    $sys_use_frs = forge_get_config('use_frs');
-  }
-	if ($sys_use_tracker) {
-    $arr[]='tracker';
-    $arr2[]=_('Tracker');
-  }
-	if ($sys_use_forum) {
-    $arr[]='forum';
-    $arr2[]=_('Forums');
-  }
-	if ($sys_use_docman) {
-    $arr[]='docman';
-    $arr2[]=_('Docs');
-  }
-	if ($sys_use_pm) {
-    $arr[]='taskman';
-    $arr2[]=_('Tasks');
-  }
-	if ($sys_use_frs) {
-    $arr[]='downloads';
-    $arr2[]=_('Downloads');
-  }
+	if ($Group) {
+		$use_tracker = $Group->usesTracker();
+		$use_forum = $Group->usesForum();
+		$use_docman = $Group->usesDocman();
+		$use_pm = $Group->usesPM();
+		$use_frs = $Group->usesFRS();
+	} else {
+		$use_tracker = forge_get_config('use_tracker');
+		$use_forum = forge_get_config('use_forum');
+		$use_docman = forge_get_config('use_docman');
+		$use_pm = forge_get_config('use_pm');
+		$use_frs = forge_get_config('use_frs');
+	}
+	if ($use_tracker) {
+		$arr[]='tracker';
+		$arr2[]=_('Tracker');
+	}
+	if ($use_forum) {
+		$arr[]='forum';
+		$arr2[]=_('Forums');
+	}
+	if ($use_docman) {
+		$arr[]='docman';
+		$arr2[]=_('Docs');
+	}
+	if ($use_pm) {
+		$arr[]='taskman';
+		$arr2[]=_('Tasks');
+	}
+	if ($use_frs) {
+		$arr[]='downloads';
+		$arr2[]=_('Downloads');
+	}
 	$arr[]='pageviews';
 	$arr2[]=_('Page views');
 
@@ -172,30 +172,30 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
-  if (forge_get_config('use_tracker')) {
-    $arr[]=_('Bugs');
-    $arr[]=_('Support');
-    $arr[]=_('Patches');
-    $arr[]=_('Feature Requests');
-    $arr[]=_('Other Trackers');
-    $arr2[]='1';
-    $arr2[]='2';
-    $arr2[]='3';
-    $arr2[]='4';
-    $arr2[]='0';
-  }
-  if (forge_get_config('use_forum')) {
-    $arr[]=_('Forum Messages');
-    $arr2[]='5';
-  }
-  if (forge_get_config('use_pm')) {
-    $arr[]=_('Tasks');
-    $arr2[]='6';
-  }
-  if (forge_get_config('use_frs')) {
-    $arr[]=_('Downloads');
-    $arr2[]='7';
-  }
+	if (forge_get_config('use_tracker')) {
+		$arr[]=_('Bugs');
+		$arr[]=_('Support');
+		$arr[]=_('Patches');
+		$arr[]=_('Feature Requests');
+		$arr[]=_('Other Trackers');
+		$arr2[]='1';
+		$arr2[]='2';
+		$arr2[]='3';
+		$arr2[]='4';
+		$arr2[]='0';
+	}
+	if (forge_get_config('use_forum')) {
+		$arr[]=_('Forum Messages');
+		$arr2[]='5';
+	}
+	if (forge_get_config('use_pm')) {
+		$arr[]=_('Tasks');
+		$arr2[]='6';
+	}
+	if (forge_get_config('use_frs')) {
+		$arr[]=_('Downloads');
+		$arr2[]='7';
+	}
 	return html_build_select_box_from_arrays ($arr2,$arr,$name,$selected,false);
 }
 
