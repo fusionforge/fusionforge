@@ -24,17 +24,8 @@
  */
 
 function report_header($title) {
-	global $HTML ;
-	echo $HTML->header(array('title'=>" "._('Reporting').": " . $title));
-	if (isset($GLOBALS['error_msg'])) {
-		echo html_error_top($GLOBALS['error_msg']);
-	}
-	if (isset($GLOBALS['warning_msg'])) {
-		echo html_warning_top($GLOBALS['warning_msg']);
-	}
-	if (isset($GLOBALS['feedback'])) {
-		echo html_feedback_top($GLOBALS['feedback']);
-	}
+	site_header(array('title'=>" "._('Reporting').": " . $title));
+
 	echo "<h1>".sprintf(_('%1$s Reporting'), forge_get_config ('forge_name'))."</h1>\n";
 }
 
