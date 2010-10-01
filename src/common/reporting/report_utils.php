@@ -137,26 +137,36 @@ function report_area_box($name='area', $selected='1', $Group=false) {
     $sys_use_pm = forge_get_config('use_pm');
     $sys_use_frs = forge_get_config('use_frs');
   }
-  if (forge_get_config('use_tracker')) {
+	if ($sys_use_tracker) {
     $arr[]='tracker';
     $arr2[]=_('Tracker');
   }
-  if (forge_get_config('use_forum')) {
+	if ($sys_use_forum) {
     $arr[]='forum';
     $arr2[]=_('Forums');
   }
-  if (forge_get_config('use_docman')) {
+	if ($sys_use_docman) {
     $arr[]='docman';
     $arr2[]=_('Docs');
   }
-  if (forge_get_config('use_pm')) {
+	if ($sys_use_pm) {
     $arr[]='taskman';
     $arr2[]=_('Tasks');
   }
-  if (forge_get_config('use_frs')) {
+	if ($sys_use_frs) {
     $arr[]='downloads';
     $arr2[]=_('Downloads');
   }
+	$arr[]='pageviews';
+	$arr2[]=_('Page views');
+
+	if (is_object($Group) && $Group->getID()) {
+		$hookParams['group'] = $Group->getID();
+		$hookParams['show'] = array('none'); // No display => No compute this time.
+		$hookParams['ids'] = &$arr;
+		$hookParams['texts'] = &$arr2;
+		plugin_hook ("activity", $hookParams) ;
+	}
 
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
 }
