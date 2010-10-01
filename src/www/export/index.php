@@ -39,34 +39,34 @@ RSS/XML Exports
 <h4>News Data</h4>
 <ul>
 <li><a href="rss_sfnews.php"><?php echo forge_get_config ('forge_name'); ?> Front Page/Project News</a>
- <link href="rss_sfnews.php" title="<?php echo forge_get_config ('forge_name'); ?> Front Page/Project News, RSS 1.0" rel="alternate" type="application/rss+xml" />
+
 (<a href="http://web.resource.org/rss/1.0/spec">RSS 1.0</a>)</li>
 <li><a href="rss_sfnewreleases.php"><?php echo forge_get_config ('forge_name'); ?> New Releases</a>
- <link href="rss_sfnewreleases.php" title="<?php echo forge_get_config ('forge_name'); ?> New Releases, RSS 0.91" rel="alternate" type="application/rss+xml" />
+
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
 <a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
 </ul>
 
 <ul>
 <li><a href="rss20_news.php"><?php print forge_get_config ('forge_name') ?> Front Page News/Project News</a>
- <link href="rss20_news.php" title="<?php print forge_get_config ('forge_name') ?> Front Page News/Project News, RSS 2.0" rel="alternate" type="application/rss+xml" />
+
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)
 <li><a href="rss20_newreleases.php"><?php print forge_get_config ('forge_name') ?> New Releases/New Project Releases</a>
- <link href="rss20_newreleases.php" title="<?php print forge_get_config ('forge_name') ?> New Releases/New Project Releases, RSS 2.0" rel="alternate" type="application/rss+xml" />
+
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
 </ul>
 
 <h4>Site Information</h4>
 <ul>
 <li><a href="rss_sfprojects.php"><?php echo forge_get_config ('forge_name'); ?> Full Project Listing</a>
- <link href="rss_sfprojects.php" title="<?php echo forge_get_config ('forge_name'); ?> Full Project Listing, RSS 0.91" rel="alternate" type="application/rss+xml" />
+
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
 <a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
 <li><a href="rss20_projects.php"><?php print forge_get_config ('forge_name') ?> Full Project Listing</a>
- <link href="rss20_projects.php" title="<?php print forge_get_config ('forge_name') ?> Full Project Listing, RSS 2.0" rel="alternate" type="application/rss+xml" />
+
 (<a href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</a>)</li>
 <li><a href="trove_tree.php"><?php echo forge_get_config ('forge_name'); ?> Trove Categories Tree</a>
- <link href="trove_tree.php" title="<?php echo forge_get_config ('forge_name'); ?> Trove Categories Tree, XML" rel="alternate" type="application/x-trove+xml" />
+
 (<a href="http://www.w3.org/XML">XML</a>,<a href="trove_tree_0.1.dtd">&lt;trove_tree_0.1.dtd&gt;</a>)</li>
 </ul>
 

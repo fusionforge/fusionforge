@@ -31,6 +31,7 @@ $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
 $url = util_make_url ('/');
+$url = rtrim($url, '/');
 
 if ($group_id) {
 	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 and is_public=1',
