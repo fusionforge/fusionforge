@@ -180,7 +180,7 @@ $multiselect=html_build_multiple_select_box_from_arrays($ids,$texts,'show[]',$sh
 </form>
 <?php
 if (count($results)<1) {
-	echo _('No Activity Found');
+	echo '<p class="warning_msg">' . _('No Activity Found') . '</p>';
 } else {
 
 	function date_compare($a, $b)
@@ -270,7 +270,7 @@ if (count($results)<1) {
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;'.date('H:i:s',$arr['activity_date']).'</td>
 			<td>'.$icon .' '.$url.'</td><td>';
 			if (isset($arr['user_name']) && $arr['user_name']) {
-				echo util_make_link_u($arr['user_name'],$arr['user_id'],$arr['realname']);
+			echo util_display_user($arr['user_name'], $arr['user_id'],$arr['realname']);
 			} else {
 				echo $arr['realname'];
 			}
