@@ -391,7 +391,6 @@ ORDER BY f.most_recent_date DESC',
 	} else {
 		$ret_val .= '&nbsp;';
 	}
-
 	$ret_val .= '</td></tr></table>';
 
 	echo $ret_val;

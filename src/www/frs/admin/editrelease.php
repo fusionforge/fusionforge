@@ -43,9 +43,9 @@ if (!$package_id || !$release_id) {
 
 $group=group_get_object($group_id);
 if (!$group || !is_object($group)) {
-    exit_no_group();
+	exit_no_group();
 } elseif ($group->isError()) {
-    exit_error($group->getErrorMessage(),'frs');
+	exit_error($group->getErrorMessage(),'frs');
 }
 session_require_perm ('frs', $group_id, 'write') ;
 

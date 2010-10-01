@@ -35,8 +35,6 @@ $title = _('Project Info');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 
-
-// ########################################### end top area
 $request =& HTTPRequest::instance();
 $request->set('group_id',$group_id);
 

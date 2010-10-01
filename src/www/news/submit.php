@@ -4,7 +4,7 @@
  *
  * Copyright (C) 1999-2001 VA Linux Systems
  * Copyright (C) 2002-2004 GForge Team
- * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright (C) 2008-2010 Alcatel-Lucent
  *
  * http://fusionforge.org/
  *
@@ -28,7 +28,7 @@
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
  *
- * "The Style Sheet ("Contribution") has not been tested and/or
+ * "The Submit News Form ("Contribution") has not been tested and/or
  * validated for release as or in products, combinations with products or
  * other commercial use. Any use of the Contribution is entirely made at
  * the user's own responsibility and the user can not rely on any features,

@@ -99,7 +99,6 @@ echo $HTML->boxTop(_('Account Maintenance'));
 
 ?>
 
-
 <p> <?php echo _('Welcome'); ?> <strong><?php print $u->getRealName(); ?></strong>. </p>
 <p>
 

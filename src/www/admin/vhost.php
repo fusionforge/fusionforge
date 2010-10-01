@@ -47,11 +47,11 @@ if (getStringFromRequest('add')) {
 
 		$group = &group_get_object_by_name($groupname);
 		if (!$group || !is_object($group)) {
-            exit_no_group();
+			exit_no_group();
 		} elseif ($group->isError()) {
 			exit_error($group->getErrorMessage(),'home');
 		}
-		
+
 		$group_id = $group->getID();
 
 		if (valid_hostname($vhost_name)) {

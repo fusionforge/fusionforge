@@ -89,9 +89,9 @@ if ($diary_user) {
 		echo '
 		<tr><td colspan="2" class="tablecontent">&nbsp;</td></tr>';
 	}
-
 	echo "</table>\n";
 	echo $HTML->boxBottom();
+
 	echo $HTML->footer(array());
 
 } else {

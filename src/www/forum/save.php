@@ -53,7 +53,7 @@ if (session_loggedin()) {
 		if (!$f->savePlace()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-            session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Position Saved. New messages will be highlighted when you return')));
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Position Saved. New messages will be highlighted when you return')));
 		}
 	} else {
 		exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');

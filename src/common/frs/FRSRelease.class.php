@@ -279,7 +279,7 @@ class FRSRelease extends Error {
 	 *
 	 *  @return	boolean	success.
 	 */
-	function sendNotice() { //send E-Mail
+	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
 
 		$date = date('Y-m-d H:i',time());

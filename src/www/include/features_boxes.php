@@ -81,8 +81,6 @@ function show_top_downloads() {
 	',
 					array ('A'),
 					10);
-//	echo db_error();
-
 	if (db_numrows($res_topdown) == 0) {
 		return _('No Stats Available');
 	}
@@ -106,7 +104,6 @@ function show_top_downloads() {
 	$return .= '<div class="align-center">' . util_make_link ('/top/', _('All the ranking'), array('class' => 'dot-link')) . '</div>';
 	
 	return $return;
-
 }
 
 

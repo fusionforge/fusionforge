@@ -94,7 +94,6 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
-
 <table>
 <tr>
 <td>

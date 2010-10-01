@@ -112,7 +112,6 @@ class MailParser extends Error {
 		return $this->getHeader('Subject');
 	}
 
-//tperdue@collab.adpcorp.com (Tim Perdue)
 	function getFromEmail() {
 		$mail = $this->getHeader('From');
 		if (strpos($mail,'(') !== false) {
@@ -205,7 +204,7 @@ class MailParser extends Error {
 		/* Default charset */
 		$charset = "ASCII";
 
-		/* We ecpecting : encoded-word = "=?" charset "?" encoding "?" encoded-text "?="
+		/* We expecting : encoded-word = "=?" charset "?" encoding "?" encoded-text "?="
 		 * See more detail in RFC 2407
 		 */
 

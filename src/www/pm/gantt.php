@@ -22,7 +22,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 if (!file_exists(forge_get_config('jpgraph_path').'/jpgraph.php')) {
 	exit_error(_('Package JPGraph not installed'),'pm');
 }

@@ -44,7 +44,7 @@ if (!$group || !is_object($group)) {
 
 // Snapshot downloads require the same permissions as SCM read access
 if (!forge_check_perm ('scm', $group->getID(), 'read')) {
- 	exit_permission_denied('home');
+	exit_permission_denied('home');
 }
 
 // Download file
