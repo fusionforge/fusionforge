@@ -994,8 +994,8 @@ class ProjectTask extends Error {
 			$has_changes = true;
 		}
 
-		if ($this->getSummary() != htmlspecialchars(stripslashes($summary))) {
-			$this->addHistory ('summary',addslashes($this->getSummary()));
+		if ($this->getSummary() != htmlspecialchars($summary)) {
+			$this->addHistory ('summary',$this->getSummary());
 			$has_changes = true;
 			$arrChangedAndInNotice['summary'] = ">";
 		}
