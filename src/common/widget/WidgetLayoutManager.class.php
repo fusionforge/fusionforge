@@ -260,7 +260,7 @@ class WidgetLayoutManager {
 				echo '<input type="radio" name="layout_id" value="'. $data['id'] .'" id="layout_'. $data['id'] .'" '. $checked .'/>';
 				echo '</td><td>';
 				echo '<label for="layout_'. $data['id'] .'">';
-				echo html_image('layout/'. strtolower(preg_replace('/(\W+)/', '-', $data['name'])) .'.png', 50, 50, array('alt'=>'layout'));
+				echo html_image('layout/'. strtolower(preg_replace('/(\W+)/', '-', $data['name'])) .'.png');
 				echo '</label>';
 				echo '</td><td>';
 				echo '<label for="layout_'. $data['id'] .'"><strong>'. $data['name'] .'</strong><br />';
@@ -274,7 +274,7 @@ class WidgetLayoutManager {
 			echo '<input type="radio" name="layout_id" value="-1" id="layout_custom" '. $checked .'/>';
 			echo '</td><td>';
 			echo '<label for="layout_custom">';
-			echo html_image('layout/custom.png', 50, 50, array('style' => 'vertical-align:top;float:left;'));
+			echo html_image('layout/custom.png', array('style' => 'vertical-align:top;float:left;'));
 			echo '</label>';
 			echo '</td><td>';
 			echo '<label for="layout_custom"><strong>'. 'Custom' .'</strong><br />';

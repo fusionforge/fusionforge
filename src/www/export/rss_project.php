@@ -61,7 +61,7 @@ if (!$project|| !is_object($project) || $project->isError()) {
 $name = $project->getPublicName();
 
 function get_rss_20_doc () {
-	return '&nbsp;' . html_image('ic/rss.png',16,16,array('border'=>'0'));
+	return '&nbsp;' . html_image('ic/rss.png',16,16);
 }
 
 function get_rss_feed_20 ($page,$rss_title) {

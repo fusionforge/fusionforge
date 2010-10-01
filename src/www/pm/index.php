@@ -178,7 +178,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		echo '
 		<tr '. $HTML->boxGetAltRowStyle($j) . '>
 			<td><a href="'.util_make_url ('/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">' .
-			html_image("ic/taskman20w.png","20","20",array("border"=>"0", "align"=>"middle")) . ' &nbsp;'.$pg_arr[$j]->getID() .'</a></td>
+			html_image("ic/taskman20w.png","20","20")) . ' &nbsp;'.$pg_arr[$j]->getID() .'</a></td>
 			<td><a href="'.util_make_url ('/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">' .
 		$pg_arr[$j]->getName() .'</a></td>
 			<td>'.$pg_arr[$j]->getDescription() .'</td>

@@ -229,9 +229,9 @@ if (count($results)<1) {
 				//	echo $HTML->listTableTop($theader);
 				$last_day=strftime($date_format,$arr['activity_date']);
 			}
-			switch ($arr['section']) {
+		switch (@$arr['section']) {
 				case 'commit': {
-					$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
+					$icon=html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
 					$url=util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
 					break;
 				}
@@ -246,17 +246,17 @@ if (count($results)<1) {
 					break;
 				}
 				case 'frsrelease': {
-					$icon=html_image("ic/cvs16b.png","20","20",array("border"=>"0","alt"=>"SCM"));
+					$icon=html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
 					$url=util_make_link ('/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 					break;
 				}
 				case 'forumpost': {
-					$icon=html_image("ic/forum20g.png","20","20",array("border"=>"0","alt"=>"Forum"));
+					$icon=html_image("ic/forum20g.png","20","20",array("alt"=>"Forum"));
 					$url=util_make_link ('/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
 					break;
 				}
 				case 'news': {
-					$icon=html_image("ic/write16w.png","20","20",array("border"=>"0","alt"=>"News"));
+					$icon=html_image("ic/write16w.png","20","20",array("alt"=>"News"));
 					$url=util_make_link ('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 					break;
 				}
