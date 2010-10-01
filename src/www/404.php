@@ -25,16 +25,7 @@ require_once('env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
 $HTML->header(array('title'=>_('Requested Page not Found (Error 404)')));
-
-echo "<div align=\"center\">";
-
-echo "<h1>".util_make_link('/',_('PAGE NOT FOUND'))."</h1>";
-
-echo "<p />";
-
-echo $HTML->searchBox();
-
-echo "<p /></div>";
+echo "<h1>".util_make_link('/',_('Requested Page not Found (Error 404)'))."</h1>";
 
 $HTML->footer(array());
 
