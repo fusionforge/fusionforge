@@ -78,7 +78,7 @@ class ForumsForUser extends Error {
 			if ($forum->isError()) {
 				$this->setError($forum->getErrorMessage());
 			} else {
-				$forums[] =& $forum;
+				$forums[] = $forum;
 			}
 		}
 		return $forums;

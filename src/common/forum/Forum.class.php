@@ -44,7 +44,7 @@ function &forum_get_object($forum_id) {
 	}
 
 	$data = db_fetch_array($res);
-	$Group =& group_get_object($data["group_id"]);
+	$Group = group_get_object($data["group_id"]);
 	$f =  new Forum ($Group, $forum_id);
 
 	$f->fetchData ($forum_id) ;

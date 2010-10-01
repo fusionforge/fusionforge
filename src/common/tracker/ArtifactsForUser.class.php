@@ -123,7 +123,7 @@ ORDER BY group_name DESC',
 			if ($artifact->isError()) {
 				$this->setError($artifact->getErrorMessage());
 			} else {
-				$artifacts[] =& $artifact;
+				$artifacts[] = $artifact;
 			}
 		}
 		return $artifacts;

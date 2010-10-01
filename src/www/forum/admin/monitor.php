@@ -58,11 +58,13 @@ $head[]='User';
 $head[]='Email';
 $head[]='Realname';
 
+$j=0;
+
 echo $HTML->listTableTop($head);
 
 while ($arr=db_fetch_array($res)) {
 
-echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>'.$arr['user_name'].'</td>
+	echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '><td>'.$arr['user_name'].'</td>
 	<td>'.$arr['email'].'</td>
 	<td>'.$arr['realname'].'</td></tr>';
 

@@ -791,8 +791,7 @@ class ProjectTask extends Error {
 	 */
 	function getDependentOn() {
 		if (!$this->getID()) {
-			$this->dependon = array();
-			return $this->dependon;
+			return array();
 		}
 		if (!$this->dependon) {
 			$res = db_query_params ('SELECT is_dependent_on_task_id,link_type
@@ -858,10 +857,9 @@ class ProjectTask extends Error {
 	 *
 	 *	@return	array	The array of user_id's.
 	 */
-	function &getAssignedTo() {
+	function getAssignedTo() {
 		if (!$this->getID()) {
-			$this->assignedto = array();
-			return $this->assignedto;
+			return array();
 		}
 		if (!$this->assignedto) {
 			$this->assignedto =& util_result_column_to_array(db_query_params('SELECT assigned_to_id FROM project_assigned_to WHERE project_task_id=$1',
@@ -1023,7 +1021,7 @@ class ProjectTask extends Error {
 			$has_changes = true;
 		}
 
-		$old_assigned = &$this->getAssignedTo();
+		$old_assigned = $this->getAssignedTo();
 		$diff_assigned_array=array_diff($old_assigned, $assigned_arr);
 		if (count($diff_assigned_array)>0) { 
 				for ($tmp=0;$tmp<count($old_assigned);$tmp++) {
