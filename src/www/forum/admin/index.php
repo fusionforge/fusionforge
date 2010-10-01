@@ -113,7 +113,7 @@ if (getStringFromRequest('add_forum')) {
 			<input type="radio" name="allow_anonymous" value="1" />'._('Yes').'<br />
 			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'._('No').'
 			</p>
-			<p>
+			<p>'.
 
 		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
