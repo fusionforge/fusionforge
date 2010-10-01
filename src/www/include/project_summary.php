@@ -28,7 +28,7 @@ $project_agg_arr=array();
 /**
  * project_setup_agg() - Set up a project aggregate array.
  *
- * @param		int		Group ID
+ * @param		int		Project ID
  * @access		private
  */
 function project_setup_agg($group_id) {
@@ -109,7 +109,7 @@ function project_get_public_forum_message_count($group_id) {
  */
 function project_summary($group_id,$mode,$no_table) {
 	if (!$group_id) {
-		return 'Error - No Group ID';
+		return 'Error - No Project ID';
 	}
 	if (!$mode) {
 		$mode='full';
