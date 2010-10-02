@@ -111,10 +111,10 @@ cleanvz:
 	[ ! -d $(VZPRIVATEDIR)/$(VEID) ] || $(VZCTL) destroy $(VEID)
 	-rm -f /etc/vz/conf/$(VEID).conf.destroyed
 
-cleancentos:
+cleancentos: beroot
 	make cleanvz VEID=$(VEIDCENTOSTMPL)
 	
-cleandeb:
+cleandeb: beroot
 	make cleanvz VEID=$(VEIDDEBTMPL)
 
 finalizedeb: beroot
