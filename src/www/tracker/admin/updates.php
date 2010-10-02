@@ -269,7 +269,7 @@
 		//	Clone a tracker's elements to this tracker
 		//
 		} elseif (getStringFromRequest('clone_tracker')) {
-			$clone_id = getStringFromRequest('clone_id');
+			$clone_id = getIntFromRequest('clone_id');
 
 			if (!$clone_id) {
 				exit_missing_param('',array(_('Clone ID')),'tracker');

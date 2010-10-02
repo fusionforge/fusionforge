@@ -59,7 +59,7 @@ function check_select_value($value, $type) {
 $action = getStringFromRequest('action');
 
 if( $action == "Edit" ) {
-	$response_id = getStringFromRequest('response_id');
+	$response_id = getIntFromRequest('response_id');
 	$action2 = getStringFromRequest('action2');
 	$response_title = getStringFromRequest('response_title');
 	$response_text = getStringFromRequest('response_text');
@@ -97,7 +97,7 @@ if( $action == "Edit" ) {
 	}
 
 } else if ( $action == "Delete" ) {
-	$response_id = getStringFromRequest('response_id');
+	$response_id = getIntFromRequest('response_id');
 	$sure = getStringFromRequest('sure');
 
 	// Delete Response

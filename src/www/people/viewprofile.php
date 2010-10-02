@@ -34,9 +34,9 @@ if (!forge_get_config('use_people')) {
 }
 
 $group_id = getIntFromRequest('group_id');
-$job_id = getStringFromRequest('job_id');
+$job_id = getIntFromRequest('job_id');
 
-$user_id = getStringFromRequest('user_id');
+$user_id = getIntFromRequest('user_id');
 if ($user_id && is_numeric($user_id)) {
 
 	/*

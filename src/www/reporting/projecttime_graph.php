@@ -31,7 +31,7 @@ require_once $gfcommon.'reporting/report_utils.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-$g_id = getStringFromRequest('g_id');
+$g_id = getIntFromRequest('g_id');
 $type = getStringFromRequest('type');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');

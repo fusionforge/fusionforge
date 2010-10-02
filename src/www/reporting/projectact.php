@@ -34,7 +34,7 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
-$g_id = getStringFromRequest('g_id');
+$g_id = getIntFromRequest('g_id');
 $area = getStringFromRequest('area');
 $SPAN = getIntFromRequest('SPAN', 1);
 $start = getIntFromRequest('start');

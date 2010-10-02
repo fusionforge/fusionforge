@@ -94,7 +94,7 @@ if (getStringFromRequest('submit')) {
 }
 
 if ($week) {
-	$group_project_id = getStringFromRequest('group_project_id');
+	$group_project_id = getIntFromRequest('group_project_id');
 	
 	report_header(_('Time tracking'));
 	

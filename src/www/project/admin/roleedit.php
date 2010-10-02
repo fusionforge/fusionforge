@@ -32,7 +32,7 @@ require_once $gfcommon.'include/rbac_texts.php';
 $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_admin', $group_id) ;
 
-$role_id = getStringFromRequest('role_id');
+$role_id = getIntFromRequest('role_id');
 $data = getStringFromRequest('data');
 
 $group = group_get_object($group_id);

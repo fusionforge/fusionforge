@@ -35,7 +35,7 @@ if ($report->isError()) {
 }
 
 $sw = getStringFromRequest('sw');
-$dev_id = getStringFromRequest('dev_id');
+$dev_id = getIntFromRequest('dev_id');
 $area = getStringFromRequest('area');
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');

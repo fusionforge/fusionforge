@@ -147,7 +147,7 @@ if (getStringFromRequest('step2')) {
 	$release_date = getStringFromRequest('release_date');
 	// Build a Unix time value from the supplied Y-m-d value
 	$release_date = strtotime($release_date);
-	$processor_id = getStringFromRequest('processor_id');
+	$processor_id = getIntFromRequest('processor_id');
 	$group_unix_name=group_getunixname($group_id);
 	$ftp_filename = getStringFromRequest('ftp_filename');
 	$manual_filename = getStringFromRequest('manual_filename');

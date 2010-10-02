@@ -32,7 +32,7 @@ if (!forge_get_config('use_people')) {
 }
 
 $group_id = getIntFromRequest('group_id');
-$job_id = getStringFromRequest('job_id');
+$job_id = getIntFromRequest('job_id');
 
 if ($group_id && $job_id) {
 

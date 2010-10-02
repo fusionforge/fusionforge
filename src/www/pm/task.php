@@ -51,8 +51,8 @@ $priority = getStringFromRequest('priority');
 $hours = getStringFromRequest('hours');
 $start_date = getStringFromRequest('start_date');
 $end_date = getStringFromRequest('end_date');
-$status_id = getStringFromRequest('status_id');
-$category_id = getStringFromRequest('category_id');
+$status_id = getIntFromRequest('status_id');
+$category_id = getIntFromRequest('category_id');
 $percent_complete = getStringFromRequest('percent_complete');
 $assigned_to = getStringFromRequest('assigned_to');
 $new_group_project_id = getIntFromRequest('new_group_project_id');
@@ -117,7 +117,7 @@ switch (getStringFromRequest('func')) {
 	case 'postaddtask' : {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$add_artifact_id = getStringFromRequest('add_artifact_id');
+		$add_artifact_id = getIntFromRequest('add_artifact_id');
 		
 		$pt = new ProjectTask($pg);
 		if (!$pt || !is_object($pt)) {
@@ -163,7 +163,7 @@ switch (getStringFromRequest('func')) {
 	case 'postmodtask' : {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$rem_artifact_id = getStringFromRequest('rem_artifact_id');
+		$rem_artifact_id = getIntFromRequest('rem_artifact_id');
 		
 		if(!$rem_artifact_id){
 			$rem_artifact_id=array();
@@ -302,7 +302,7 @@ switch (getStringFromRequest('func')) {
 	case 'addartifact' : {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$add_artifact_id = getStringFromRequest('add_artifact_id');
+		$add_artifact_id = getIntFromRequest('add_artifact_id');
 		
 		$pt = new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {

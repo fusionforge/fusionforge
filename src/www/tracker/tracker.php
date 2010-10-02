@@ -165,10 +165,10 @@ switch (getStringFromRequest('func')) {
 
 		$artifact_id_list = getArrayFromRequest('artifact_id_list');
 		$priority = getStringFromRequest('priority');
-		$status_id = getStringFromRequest('status_id');
-		$category_id = getStringFromRequest('category_id');
-		$artifact_group_id = getStringFromRequest('artifact_group_id');
-		$resolution_id = getStringFromRequest('resolution_id');
+		$status_id = getIntFromRequest('status_id');
+		$category_id = getIntFromRequest('category_id');
+		$artifact_group_id = getIntFromRequest('artifact_group_id');
+		$resolution_id = getIntFromRequest('resolution_id');
 		$assigned_to = getStringFromRequest('assigned_to');
 		$canned_response = getIntFromRequest("canned_response");
 		$extra_fields = getArrayFromRequest('extra_fields');

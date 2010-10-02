@@ -11,7 +11,7 @@
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-$group_id = getStringFromRequest('group_id');
+$group_id = getIntFromRequest('group_id');
 $pluginname = 'mediawiki' ;
 
 $group = group_get_object($group_id);

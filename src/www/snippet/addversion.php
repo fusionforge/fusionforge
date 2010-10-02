@@ -48,7 +48,7 @@ if (session_loggedin()) {
 				exit_form_double_submit();
 			}
 
-			$snippet_id = getStringFromRequest('snippet_id');
+			$snippet_id = getIntFromRequest('snippet_id');
 			$changes = getStringFromRequest('changes');
 			$version = getStringFromRequest('version');
 			$code = getStringFromRequest('code');

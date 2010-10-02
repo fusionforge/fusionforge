@@ -30,7 +30,7 @@ require_once $gfwww.'include/unicode.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-$dev_id = getStringFromRequest('dev_id');
+$dev_id = getIntFromRequest('dev_id');
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');

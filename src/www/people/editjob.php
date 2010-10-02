@@ -37,13 +37,13 @@ $group_id = getIntFromRequest('group_id');
 if ($group_id && (user_ismember($group_id, 'A'))) {
 	$title = getStringFromRequest('title');
 	$description = getStringFromRequest('description');
-	$category_id = getStringFromRequest('category_id');
-	$status_id = getStringFromRequest('status_id');
-	$job_id = getStringFromRequest('job_id');
-	$job_inventory_id = getStringFromRequest('job_inventory_id');
-	$skill_id = getStringFromRequest('skill_id');
-	$skill_level_id = getStringFromRequest('skill_level_id');
-	$skill_year_id = getStringFromRequest('skill_year_id');
+	$category_id = getIntFromRequest('category_id');
+	$status_id = getIntFromRequest('status_id');
+	$job_id = getIntFromRequest('job_id');
+	$job_inventory_id = getIntFromRequest('job_inventory_id');
+	$skill_id = getIntFromRequest('skill_id');
+	$skill_level_id = getIntFromRequest('skill_level_id');
+	$skill_year_id = getIntFromRequest('skill_year_id');
 
 	if (getStringFromRequest('add_job')) {
 		/*

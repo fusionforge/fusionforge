@@ -26,7 +26,7 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/bookmarks.php';
 
-$bookmark_id = getStringFromRequest('bookmark_id');
+$bookmark_id = getIntFromRequest('bookmark_id');
 
 if ($bookmark_id) {
 	bookmark_delete ($bookmark_id);

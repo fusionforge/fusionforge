@@ -35,7 +35,7 @@ if ($report->isError()) {
 
 $sw = getStringFromRequest('sw');
 $typ = getStringFromRequest('typ');
-$g_id = getStringFromRequest('g_id');
+$g_id = getIntFromRequest('g_id');
 $typ = getStringFromRequest('typ');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');

@@ -26,9 +26,9 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/vote_function.php';
 
-$diary_user = getStringFromRequest('diary_user');
+$diary_user = getIntFromRequest('diary_user');
 if ($diary_user) {
-	$diary_id = getStringFromRequest('diary_id');
+	$diary_id = getIntFromRequest('diary_id');
   
 	$user_obj=user_get_object($diary_user);
 	if (!$user_obj) {

@@ -38,7 +38,7 @@ $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 $sw = getStringFromRequest('sw');
 $typ = getStringFromRequest('typ');
-$dev_id = getStringFromRequest('dev_id');
+$dev_id = getIntFromRequest('dev_id');
 $type = getStringFromRequest('type');
 
 if (!$start) {
