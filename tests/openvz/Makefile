@@ -38,17 +38,17 @@ default:
 	@echo " make builddebiantemplate : build an openvz debian template"
 	@echo " make buildcentostemplate : build an openvz centos template"
 	@echo ""
-	@echo " make createdeb : build a debian openvz vm with ID=$(VEIDDEBTMPL) from the debian template"
-	@echo " make netdhcpdeb: : set dhcp network for debian openvz vm with ID=$(VEIDDEBTMPL)"
-	@echo " make netstaticdeb: : set static network for debian openvz vm with ID=$(VEIDDEBTMPL)"
+	@echo " make createdeb   : build a debian openvz vm with ID=$(VEIDDEBTMPL) from the debian template"
+	@echo " make netdhcpdeb  : set dhcp network for debian openvz vm with ID=$(VEIDDEBTMPL)"
+	@echo " make netstaticdeb: set static network for debian openvz vm with ID=$(VEIDDEBTMPL)"
 	@echo ""
-	@echo " make createcentos : build a centos openvz vm with ID=$(VEIDCENTOSTMPL) from the centos template"
-	@echo " make netdhcpcentos: : set dhcp network for centos openvz vm with ID=$(VEIDCENTOSTMPL)"
-	@echo " make netstaticcentos: : set static network for centos openvz vm with ID=$(VEIDCENTOSTMPL)"
+	@echo " make createcentos   : build a centos openvz vm with ID=$(VEIDCENTOSTMPL) from the centos template"
+	@echo " make netdhcpcentos  : set dhcp network for centos openvz vm with ID=$(VEIDCENTOSTMPL)"
+	@echo " make netstaticcentos: set static network for centos openvz vm with ID=$(VEIDCENTOSTMPL)"
 	@echo ""
 	@echo "Read Makefile for other targets"
 
-builddebiantemplate: builddebianvm
+builddebiantemplate: beroot builddebianvm
 	$(VZCTL) set $(VEIDDEB) --ostemplate debian-$(DEBVERS) --applyconfig basic --save
 	# remove host keys
 	#rm $(VZPRIVATEDIR)/$(VEIDDEB)/etc/ssh/ssh_host_*
@@ -66,7 +66,7 @@ builddebiantemplate: builddebianvm
 	[ -c $(VZPRIVATEDIR)/$(VEIDDEB)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEB) /bin/mknod /dev/ptmx c 5 2
 	cd $(VZPRIVATEDIR)/$(VEIDDEB)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
 
-buildcentostemplate: buildcentosvm
+buildcentostemplate: beroot buildcentosvm
 	$(VZCTL) set $(VEIDCEN) --ostemplate centos-$(CENTVERS) --applyconfig basic --save
 	#rm $(VZPRIVATEDIR)/$(VEIDCEN)/etc/ssh/ssh_host_*
 	# Disable getty in /etc/inittab as openvz do not have that.
@@ -96,12 +96,12 @@ buildcentostemplate: buildcentosvm
 		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCEN)/etc/fstab
 	cd $(VZPRIVATEDIR)/$(VEIDCEN)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
 
-builddebianvm: $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm
+builddebianvm: beroot $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm
 
 $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm:
 	[ -d $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm ] || ($(DEBOOTSTRAP) --arch $(ARCH) $(EXTRADEBPACKAGE) $(DIST) $(VZPRIVATEDIR)/$(VEIDDEB) $(DEBMIRROR) && touch $(VZPRIVATEDIR)/$(VEIDDEB)/tmp/vzdebvm)
 
-buildcentosvm: $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm
+buildcentosvm: beroot $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm
 
 $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm:
 	[ -d $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm ] || ($(RINSE) $(RINSEBPI) $(RINSEPOSTINST) --config $(RINSECONF) --arch $(ARCH) --distribution centos-5 --directory $(VZPRIVATEDIR)/$(VEIDCEN) && touch $(VZPRIVATEDIR)/$(VEIDCEN)/tmp/vzcentvm)
@@ -117,7 +117,7 @@ cleancentos:
 cleandeb:
 	make cleanvz VEID=$(VEIDDEBTMPL)
 
-finalizedeb:
+finalizedeb: beroot
 	# Give it a hostname.
 	echo `hostname`-$(VEIDDEBTMPL) > $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/hostname
 	# Disable getty in /etc/inittab as openvz do not have that.
@@ -130,7 +130,7 @@ finalizedeb:
 	# In that case you also need to enable IP forwarding
 	#sysctl -w net.ipv4.ip_forward=1
 
-netdhcpdeb:
+netdhcpdeb: beroot
 	# Add eth0 interface
 	$(VZCTL) set $(VEIDDEBTMPL) --netif_add eth0 --save
 	# Setup dhcp
@@ -146,7 +146,7 @@ netdhcpdeb:
 	grep -q "^send host-name" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf || \
 		echo "send host-name \"`hostname`-$(VEIDDEBTMPL)\";" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf
 
-netstaticdeb:
+netstaticdeb: beroot
 	$(VZCTL) set $(VEIDDEBTMPL) --ipadd $(IPDEBBASE).$(VEIDDEBTMPL) --save
 	$(VZCTL) set $(VEIDDEBTMPL) --nameserver $(IPDEBDNS) --save
 	sysctl -w net.ipv4.ip_forward=1
@@ -155,13 +155,14 @@ netstaticdeb:
 	sysctl -w net.ipv4.conf.all.rp_filter=1
 	sysctl -w kernel.sysrq=1
 
-finalizecentos:
+finalizecentos: beroot
 	# Give it a hostname.
 	echo `hostname`-$(VEIDCENTOSTMPL) > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/hostname
+	touch $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network
 	grep -q "^HOSTNAME=" $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network || \
 		echo "HOSTNAME=`hostname`-$(VEIDCENTOSTMPL)" >> $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network
 
-netdhcpcentos:
+netdhcpcentos: beroot
 	# Add eth0 interface
 	$(VZCTL) set $(VEIDCENTOSTMPL) --netif_add eth0 --save
 	# Setup dhcp
@@ -172,7 +173,7 @@ netdhcpcentos:
 	[ -f $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/dhclient.conf ] || \
 		echo "send host-name \"`hostname`-$(VEIDCENTOSTMPL)\";" > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/dhclient.conf
 	
-netstaticcentos:
+netstaticcentos: beroot
 	$(VZCTL) set $(VEIDCENTOSTMPL) --ipadd $(IPCENTOSBASE).$(VEIDCENTOSTMPL) --save
 	$(VZCTL) set $(VEIDCENTOSTMPL) --nameserver $(IPCENTOSDNS) --save
 	sysctl -w net.ipv4.ip_forward=1
@@ -193,13 +194,16 @@ addbridge:
 	#sudo ifconfig vmbr0 0
 	#sudo brctl addif vmbr0 eth0
 
-createdeb: cleandeb
+createdeb: beroot cleandeb
 	$(VZCTL) create $(VEIDDEBTMPL) --private $(VZPRIVATEDIR)/$(VEIDDEBTMPL) --ostemplate debian-$(DEBVERS)-$(ARCH)-minimal
 	make finalizedeb
 	
-createcentos: cleancentos
+createcentos: beroot cleancentos
 	$(VZCTL) create $(VEIDCENTOSTMPL) --private $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL) --ostemplate centos-$(CENTVERS)-$(ARCH)-minimal
 	make finalizecentos
 	
+beroot:
+	@[ $(shell id -u) = "0" ] || (echo "you should be root to run this" ; exit 1)
+
 start:
 	sudo $(VZCTL) start $(VEID)
