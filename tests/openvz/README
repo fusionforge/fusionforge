@@ -47,8 +47,7 @@ A list of available kernel can be found with
 Then you have to reboot and you should be ready to build you Virtual servers
 
 > make net 
-
-will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge
+will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge (for dhcp setup)
 
 then you can build template
  make builddebiantemplate : build an openvz debian template
@@ -57,3 +56,10 @@ then you can build template
 and create vm
  make createdeb : build a debian openvz vm with ID=105 from the debian template
  make createcentos : build a centos openvz vm with ID=110 from the centos template
+
+choose kind of network
+ make netdhcpdeb
+ make netstaticdeb
+ make netdhcpcentos
+ make netstaticcentos
+

@@ -7,17 +7,24 @@ VEIDDEB=100
 VEIDCEN=101
 VEIDDEBTMPL=105
 VEIDCENTOSTMPL=110
-ARCH=amd64
+ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DIST=squeeze
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh
 EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils
 DEBVERS=6.0
 CENTVERS=5.4
 VZPRIVATEDIR=/var/lib/vz/private
+# You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
 VZCTL=sudo /usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
 RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
+
+IPDEBBASE=192.168.222
+IPDEBDNS=192.168.222.1
+
+IPCENTOSBASE=192.168.222
+IPCENTOSDNS=192.168.222.1
 
 # Local customization can be done using a local.<hostname> file
 # This is convenient if you use local mirror
@@ -30,8 +37,14 @@ default:
 	@echo "  See interfaces.sample to know how to setup a bridge"
 	@echo " make builddebiantemplate : build an openvz debian template"
 	@echo " make buildcentostemplate : build an openvz centos template"
+	@echo ""
 	@echo " make createdeb : build a debian openvz vm with ID=$(VEIDDEBTMPL) from the debian template"
+	@echo " make netdhcpdeb: : set dhcp network for debian openvz vm with ID=$(VEIDDEBTMPL)"
+	@echo " make netstaticdeb: : set static network for debian openvz vm with ID=$(VEIDDEBTMPL)"
+	@echo ""
 	@echo " make createcentos : build a centos openvz vm with ID=$(VEIDCENTOSTMPL) from the centos template"
+	@echo " make netdhcpcentos: : set dhcp network for centos openvz vm with ID=$(VEIDCENTOSTMPL)"
+	@echo " make netstaticcentos: : set static network for centos openvz vm with ID=$(VEIDCENTOSTMPL)"
 	@echo ""
 	@echo "Read Makefile for other targets"
 
@@ -116,6 +129,8 @@ finalizedeb:
 	#$(VZCTL) set $(VEIDDEBTMPL) --ipadd x.x.x.x --save
 	# In that case you also need to enable IP forwarding
 	#sysctl -w net.ipv4.ip_forward=1
+
+netdhcpdeb:
 	# Add eth0 interface
 	$(VZCTL) set $(VEIDDEBTMPL) --netif_add eth0 --save
 	# Setup dhcp
@@ -131,11 +146,22 @@ finalizedeb:
 	grep -q "^send host-name" $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf || \
 		echo "send host-name \"`hostname`-$(VEIDDEBTMPL)\";" >> $(VZPRIVATEDIR)/$(VEIDDEBTMPL)/etc/dhcp/dhclient.conf
 
+netstaticdeb:
+	$(VZCTL) set $(VEIDDEBTMPL) --ipadd $(IPDEBBASE).$(VEIDDEBTMPL) --save
+	$(VZCTL) set $(VEIDDEBTMPL) --nameserver $(IPDEBDNS) --save
+	sysctl -w net.ipv4.ip_forward=1
+	sysctl -w net.ipv4.conf.default.forwarding=1
+	sysctl -w net.ipv4.conf.default.proxy_arp=0
+	sysctl -w net.ipv4.conf.all.rp_filter=1
+	sysctl -w kernel.sysrq=1
+
 finalizecentos:
 	# Give it a hostname.
 	echo `hostname`-$(VEIDCENTOSTMPL) > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/hostname
 	grep -q "^HOSTNAME=" $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network || \
 		echo "HOSTNAME=`hostname`-$(VEIDCENTOSTMPL)" >> $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/sysconfig/network
+
+netdhcpcentos:
 	# Add eth0 interface
 	$(VZCTL) set $(VEIDCENTOSTMPL) --netif_add eth0 --save
 	# Setup dhcp
@@ -146,6 +172,14 @@ finalizecentos:
 	[ -f $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/dhclient.conf ] || \
 		echo "send host-name \"`hostname`-$(VEIDCENTOSTMPL)\";" > $(VZPRIVATEDIR)/$(VEIDCENTOSTMPL)/etc/dhclient.conf
 	
+netstaticcentos:
+	$(VZCTL) set $(VEIDCENTOSTMPL) --ipadd $(IPCENTOSBASE).$(VEIDCENTOSTMPL) --save
+	$(VZCTL) set $(VEIDCENTOSTMPL) --nameserver $(IPCENTOSDNS) --save
+	sysctl -w net.ipv4.ip_forward=1
+	sysctl -w net.ipv4.conf.default.forwarding=1
+	sysctl -w net.ipv4.conf.default.proxy_arp=0
+	sysctl -w net.ipv4.conf.all.rp_filter=1
+	sysctl -w kernel.sysrq=1
 
 net: /etc/vz/vznet.conf
 
