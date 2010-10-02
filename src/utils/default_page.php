@@ -13,9 +13,10 @@
 <!-- top strip -->
 <table width="100%" border=0 cellspacing=0 cellpadding=2>
   <tr>
-    <td><SPAN class=maintitlebar>&nbsp;&nbsp;
+    <td><span class=maintitlebar>&nbsp;&nbsp;
       <a class=maintitlebar href="http://fusionforge.fusionforge.org/"><small>FusionForge Project</small></a> |
       <a class=maintitlebar href="http://fusionforge.org/"><small>FusionForge</small></a>
+      </span>
     </td>
   </tr>
 </table>

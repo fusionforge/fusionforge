@@ -148,7 +148,7 @@ switch (getStringFromRequest('func')) {
 		} else {
 			if (count($add_artifact_id) > 0) {
 				if (!$pt->addRelatedArtifacts($add_artifact_id)) {
-					exit_error('addRelatedArtifacts():: '.$pt->getErrorMessage());
+					exit_error('addRelatedArtifacts():: '.$pt->getErrorMessage(),'pm');
 				}
 			}
 			$feedback=_('Task Created Successfully');
@@ -189,7 +189,7 @@ switch (getStringFromRequest('func')) {
 		$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 		if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
 				 $status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
-			exit_error('update():: '.$pt->getErrorMessage());
+			exit_error('update():: '.$pt->getErrorMessage(),'pm');
 		} else {
 			if (count($rem_artifact_id) > 0) {
 				if (!$pt->removeRelatedArtifacts($rem_artifact_id)) {

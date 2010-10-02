@@ -45,9 +45,7 @@ if (getStringFromRequest('submit')) {
 
 	if ($form_shortname) {
 		if ($form_trove_cat_id == $form_parent) {
-			exit_error(_("Error: a category can't be the same as its own parent."),
-				   db_error()
-			);
+			exit_error(_("Error: a category can't be the same as its own parent: ").db_error(),'trove');
 		} else {
 			$res = db_query_params ('
 				UPDATE trove_cat
@@ -69,10 +67,7 @@ if (getStringFromRequest('submit')) {
 		}
 
 		if (!$res || db_affected_rows($res)<1) {
-			exit_error(
-				_('Error In Trove Operation'),
-				db_error()
-			);
+			exit_error(_('Error In Trove Operation :').db_error(),'trove');
 		}
 	}
 	// update full paths now
@@ -94,7 +89,7 @@ if (getStringFromRequest('submit')) {
 if (getStringFromRequest("delete")) {
 	$form_trove_cat_id = getIntFromRequest('form_trove_cat_id');
 	if ($form_trove_cat_id==forge_get_config('default_trove_cat')){
-		exit_error( _('Error in trove operation, can\'t delete trove category defined as default in configuration.'));
+		exit_error( _('Error in trove operation, can\'t delete trove category defined as default in configuration.'),'trove');
 	}
 	trove_del_cat_id($form_trove_cat_id);
 	session_redirect("/admin/trove/trove_cat_list.php");
@@ -110,7 +105,7 @@ $res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1',
 			array($trove_cat_id)) ;
 
 if (db_numrows($res_cat)<1) {
-	exit_error( _('No Such Category, That trove cat does not exist'));
+	exit_error( _('No Such Category, That trove cat does not exist'),'trove');
 }
 $row_cat = db_fetch_array($res_cat);
 

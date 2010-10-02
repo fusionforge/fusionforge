@@ -40,9 +40,9 @@ $max_rows = getIntFromRequest('max_rows');
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
-	exit_error('Error','Could Not Get ProjectTaskFactory');
+	exit_error(_('Could Not Get ProjectTaskFactory'),'pm');
 } elseif ($ptf->isError()) {
-	exit_error('Error',$ptf->getErrorMessage());
+	exit_error($ptf->getErrorMessage(),'pm');
 }
 
 $_order = getStringFromRequest('_order');
@@ -72,11 +72,11 @@ if (!$paging) {
 
 $ptf->setup($offset,$_order,$paging,$set,$_assigned_to,$_status,$_category_id,$_view);
 if ($ptf->isError()) {
-	exit_error('Error',$ptf->getErrorMessage());
+	exit_error($ptf->getErrorMessage(),'pm');
 }
 $pt_arr =& $ptf->getTasks(true);
 if ($ptf->isError()) {
-	exit_error('Error',$ptf->getErrorMessage());
+	exit_error($ptf->getErrorMessage(),'pm');
 }
 
 $_assigned_to=$ptf->assigned_to;

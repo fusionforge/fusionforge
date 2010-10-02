@@ -151,7 +151,7 @@ if (!$user || !is_object($user) ) {
 } else if ( $user->isError() ) {
 	exit_error($user->getErrorMessage(),'home');
 } else if ( !$user->isActive()) {
-	exit_error(_('Invalid User : Not active'), 'home');
+	exit_error(_('Invalid User : Not active'),'home');
 }
 
 

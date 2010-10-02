@@ -43,7 +43,6 @@ require_once $gfwww.'forum/include/ForumHTML.class.php';
 
 function goodbye($msg) {
 	site_header(array('title'=>_('Attachments')));
-	html_feedback_top($msg);
 	echo '<p><p><center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>';
 	site_footer(array());
 	exit();
@@ -73,9 +72,9 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $f=new Forum($g,$forum_id);
 if (!$f || !is_object($f)) {
-	exit_error(_('Error'),_('Error getting Forum'));
+	exit_error(_('Error getting Forum'),'forums');
 } elseif ($f->isError()) {
-	exit_error(_('Error'),$f->getErrorMessage());
+	exit_error($f->getErrorMessage(),'forums');
 }
 
 if ($delete == "yes") {
@@ -89,7 +88,7 @@ if ($delete == "yes") {
 		$res = false ;
 	}
 	if ( (!$res) ) {
-		exit_error("Attachment Download error","DB Error");
+		exit_error("Attachment Download error: ".db_error(),'forums');
 	}
 	if (! ((db_result($res,0,'userid') == user_getid()) || (forge_check_perm ('forum_admin', $f->Group->getID()))) ) {
 		goodbye(_('You cannot delete this attachment'));
@@ -99,7 +98,7 @@ if ($delete == "yes") {
 			array($attachid))) {
 				goodbye(_('Attachment deleted'));
 			} else {
-				exit_error(db_error());
+				exit_error(db_error(),'forums');
 			}
 		}
 	}
@@ -119,7 +118,7 @@ if ($edit=="yes") {
 		$res2 = false ;
 	}
 	if ( (!$res) || (!$res2) ) {
-		exit_error("Attachment error","DB Error");
+		exit_error("Attachment error:".db_error(),'forums');
 	}
 	if (! ((db_result($res2,0,'posted_by') == user_getid()) || (forge_check_perm ('forum_admin', $f->Group->getID()))) ) {
 		goodbye(_('You cannot edit this attachment'));
@@ -157,9 +156,9 @@ if ($edit=="yes") {
 			forum_header(array('title'=>_('Attachments')));
 			$fh = new ForumHTML($f);
 			if (!$fh || !is_object($fh)) {
-				exit_error(_('Error'),_('Error getting new ForumHTML'));
+				exit_error(_('Error getting new ForumHTML'),'forums');
 			} elseif ($fh->isError()) {
-				exit_error(_('Error'),$fh->getErrorMessage());
+				exit_error($fh->getErrorMessage(),'forums');
 			}
 			if (!db_result($res,0,'filename')) {
 				$filename = _("No attach found");
@@ -188,7 +187,7 @@ if ($pending=="yes") {
 			array ($attachid));
 }
 if ( (!$res) ) {
-	exit_error("Attachment Download error","DB Error");
+	exit_error("Attachment Download error: ".db_error(),'forums');
 }
 $extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 
