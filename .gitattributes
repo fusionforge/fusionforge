@@ -905,6 +905,15 @@ src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 src/image-sources/top-logo.xcf -text svneol=unset#unset
 src/install.sh -text
 src/lib/vendor/prototype/prototype.js -text
+src/lib/vendor/scriptaculous/builder.js -text
+src/lib/vendor/scriptaculous/controls.js -text
+src/lib/vendor/scriptaculous/dragdrop.js -text
+src/lib/vendor/scriptaculous/effects.js -text
+src/lib/vendor/scriptaculous/extensions.js -text
+src/lib/vendor/scriptaculous/scriptaculous.js -text
+src/lib/vendor/scriptaculous/slider.js -text
+src/lib/vendor/scriptaculous/sound.js -text
+src/lib/vendor/scriptaculous/unittest.js -text
 src/packaging/control/000source -text
 src/packaging/control/010meta-standard -text
 src/packaging/control/010meta-standard.shortdesc -text
