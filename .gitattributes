@@ -904,6 +904,7 @@ src/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 src/image-sources/top-logo.xcf -text svneol=unset#unset
 src/install.sh -text
+src/lib/vendor/prototype/prototype.js -text
 src/packaging/control/000source -text
 src/packaging/control/010meta-standard -text
 src/packaging/control/010meta-standard.shortdesc -text
