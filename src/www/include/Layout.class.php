@@ -119,14 +119,6 @@ class Layout extends Error {
 	 * @todo: remove in 5.0
 	 * @deprecated deprecated since 4.9
 	 */
-	var $themeroot;
-
-	/**
-	 * The base directory of the theme
-	 * @var string $themeroot
-	 * @todo: remove in 5.0
-	 * @deprecated deprecated since 4.9
-	 */
 	var $imgroot;
 
 	/**
@@ -213,7 +205,6 @@ class Layout extends Error {
 		}
 
 		// for backward compatibility 
-		$this->themeroot = $this->themedir;
 		$this->imgroot = $this->imgbaseurl;
 	}
 
