@@ -29,7 +29,7 @@
  */
 
 /* HTML elements */
-body {font-size:85%;font-family:"verdana",sans-serif;color:rgb(68,68,68);background-color:rgb(247,247,247);text-align:left; }
+body {font-size:85%;font-family:"verdana",sans-serif;color:rgb(68,68,68);background-color:rgb(247,247,247);text-align:left;margin:0; }
 form {margin:0; }
 img {border:0; }
 h1 {margin:0; }
