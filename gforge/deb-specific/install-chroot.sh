@@ -26,6 +26,8 @@ case "$1" in
 	    etc/security \
 	    lib \
 	    lib/security \
+	    lib64 \
+	    lib64/security \
 	    dev \
 	    var \
 	    var/run \
@@ -57,10 +59,13 @@ case "$1" in
 	    /bin/ls \
 	    /bin/sh \
 	    /bin/bash \
-	    /bin/chgrp ; do
-	  if [ -x "$binary" ] ; then
+	    /bin/chgrp \
+	    /lib/security/pam_pgsql.so \
+	    /lib64/security/pam_pgsql.so ; do
+	  if [ -e "$binary" ] ; then
 	      echo "$binary"
-	      ldd $binary | cut -d" " -f3
+	      ldd $binary | awk '/=>/ { print $3 }' | grep ^/
+	      ldd $binary | awk '{ print $1 }' | grep ^/
 	  fi
 	done \
 	    | sort -u \
