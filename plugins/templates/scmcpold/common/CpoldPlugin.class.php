@@ -30,7 +30,7 @@ class CpoldPlugin extends SCMPlugin {
 		$this->hooks[] = 'scm_generate_snapshots' ;
 		$this->hooks[] = 'scm_cpold_do_nothing' ;
 		
-		require_once $gfconfig.'plugins/scmcpold/config.php' ;
+		require $gfconfig.'plugins/scmcpold/config.php' ;
 		
 		$this->default_cpold_server = $default_cpold_server ;
 		if (isset ($cpold_root)) {

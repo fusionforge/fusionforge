@@ -65,7 +65,7 @@ if (getStringFromRequest('submit')) {
 		exit_missing_param();
 	}
 
-	$d = new Document($g, false, false,$sys_engine_path);
+	$d = new Document($g, false, false,$gfcommon.'docman/engine');
 	if (!$d || !is_object($d)) {		
 		exit_error(_('Error'),_('Error getting blank document.'));
 	} elseif ($d->isError()) {	

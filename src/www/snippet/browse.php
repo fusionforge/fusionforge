@@ -48,8 +48,8 @@ snippet_header(array('title'=>_('Snippet Library'), 'header'=>''));
 
 $by = getStringFromRequest('by');
 
-$qpa = db_construct_qpa (false, 'SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name FROM snippet,users WHERE users.user_id=snippet.created_by') ;
-$qpa2 = db_construct_qpa (false, 'SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by') ;
+$qpa = db_construct_qpa (false, 'SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name FROM snippet,users WHERE users.user_id=snippet.created_by ') ;
+$qpa2 = db_construct_qpa (false, 'SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by ') ;
 
 if ($by=='lang') {
 	$lang = getStringFromRequest('lang');

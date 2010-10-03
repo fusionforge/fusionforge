@@ -64,7 +64,7 @@
       configuration files found in /etc/@PACKAGE@ with appropriate
       files derived from standard fill-in-the-blank templates (found
       in /usr/share/@PACKAGE@/templates).  The values used to fill in
-      the blanks are taken from /etc/@PACKAGE@.conf.
+      the blanks are taken from /etc/@PACKAGE@/@PACKAGE@.conf.
     </para>
 
   </refsect1>

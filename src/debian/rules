@@ -101,10 +101,10 @@ build: patch remove-binary-files debian/po/templates.pot conffiles
 	dh $@
 
 # Build man pages from Docbook sources
-	cat debian/dsf-in/config.sgml | $(SED_REPLACE) > debian/$(OLDPACKAGE)-config.sgml
+	cat debian/dsf-in/config.sgml | $(SED_REPLACE) > debian/$(PACKAGE)-config.sgml
 	cat debian/dsf-in/common.manpages | $(SED_REPLACE) > debian/$(OLDPACKAGE)-common.manpages
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
-	/usr/bin/docbook-to-man debian/$(OLDPACKAGE)-config.sgml > $(OLDPACKAGE)-config.1
+	/usr/bin/docbook-to-man debian/$(PACKAGE)-config.sgml > $(PACKAGE)-config.1
 
 # Build README.Debian from template
 	cat debian/README.Debian.tmpl | $(SED_REPLACE) > debian/README.Debian
@@ -129,9 +129,9 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.links
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
-	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-config.sgml
+	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
-	rm -f cvssh.1 $(OLDPACKAGE)-config.1
+	rm -f cvssh.1 $(PACKAGE)-config.1
 	rm -f $(CURDIR)/debian/README.Debian
 	rm -rf locales
 

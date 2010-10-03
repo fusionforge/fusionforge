@@ -204,21 +204,20 @@
 
 	foreach ($apacheconffiles as $apacheconffile) {
 		echo('Setting FusionForge Include For Apache...');
-		system("grep \"^Include /etc/gforge/httpd.conf\" $apacheconffile > /dev/null", $ret);
+		system("grep \"^Include $fusionforge_etc_dir/httpd.conf\" $apacheconffile > /dev/null", $ret);
 		if ($ret == 1) {
-			system("echo \"Include /etc/gforge/httpd.conf\" >> $apacheconffile");
+			system("echo \"Include $fusionforge_etc_dir/httpd.conf\" >> $apacheconffile");
 		}
 	}
 
 	// Create symlink for the wiki plugin.
-	if (!is_dir("/opt/gforge/www/wiki"))
+	if (!is_dir("$fusionforge_src_dir/www/wiki"))
 	{
-		symlink ("../plugins/wiki/www/", "/opt/gforge/www/wiki");
+		symlink ("../plugins/wiki/www/", "$fusionforge_src_dir/www/wiki");
 	}
 
 	//#symlink plugin www's
-	//cd /opt/gforge/www
-	chdir("/opt/gforge/www");
+	chdir("$fusionforge_src_dir/www");
 	if (!is_dir("plugins"))
 	{
 		system("mkdir -p plugins");

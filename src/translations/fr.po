@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2010-03-01 22:35+0100\n"
+"POT-Creation-Date: 2010-10-03 17:54+0200\n"
+"PO-Revision-Date: 2010-10-03 17:57+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 1.2.1\n"
 
-#: common/docman/Document.class.php:112 common/docman/Document.class.php:447
-#: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:346
+#: common/docman/Document.class.php:113 common/docman/Document.class.php:447
+#: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:364
 msgid "Title Must Be At Least 5 Characters"
 msgstr "Le titre doit avoir au moins 5 caractères"
 
-#: common/docman/Document.class.php:116 common/docman/Document.class.php:451
-#: common/pm/ProjectGroup.class.php:136 common/pm/ProjectGroup.class.php:350
+#: common/docman/Document.class.php:117 common/docman/Document.class.php:451
+#: common/pm/ProjectGroup.class.php:136 common/pm/ProjectGroup.class.php:368
 msgid "Document Description Must Be At Least 10 Characters"
 msgstr "La description du document doit avoir au moins 10 caractères"
 
@@ -99,7 +99,7 @@ msgid "Invalid forum group identifier"
 msgstr "Identifiant invalide pour le groupe de forums"
 
 #: common/forum/Forum.class.php:474 common/forum/Forum.class.php:511
-#: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
+#: common/frs/FRSPackage.class.php:273 common/frs/FRSPackage.class.php:305
 #: common/tracker/ArtifactType.class.php:552
 msgid "You can only monitor if you are logged in"
 msgstr "Vous ne pouvez pas établir de surveillance sans être identifié"
@@ -126,8 +126,8 @@ msgstr "Erreur lors de la mise à jour :"
 msgid "Forum:: No Valid Group Object"
 msgstr "Forum:: Pas d'objet groupe valide"
 
-#: common/forum/ForumFactory.class.php:58 common/include/rbac_texts.php:82
-#: common/include/rbac_texts.php:83 www/forum/index.php:60
+#: common/forum/ForumFactory.class.php:58 common/include/rbac_texts.php:84
+#: common/include/rbac_texts.php:85 www/forum/index.php:60
 #: www/forum/myforums.php:73
 msgid "Forum"
 msgstr "Forum"
@@ -283,7 +283,7 @@ msgstr "Un fichier portant ce nom existe déjà dans ce projet"
 msgid "File cannot be moved to the permanent location"
 msgstr "Le fichier ne peut pas être déplacé vers sa destination"
 
-#: common/frs/FRSPackage.class.php:136 common/frs/FRSPackage.class.php:366
+#: common/frs/FRSPackage.class.php:136 common/frs/FRSPackage.class.php:369
 #: common/frs/FRSRelease.class.php:122 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "Le nom de révision doit compter au moins 3 caractères"
@@ -532,145 +532,145 @@ msgstr "Erreur lors de l'ajout d'un utilisateur au groupe : %s"
 msgid "Error Getting Role Object"
 msgstr "Erreur lors de la création d'un objet Role"
 
-#: common/include/Group.class.php:1755
+#: common/include/Group.class.php:1753
 msgid "ERROR: User does not exist"
 msgstr "Erreur : cet utilisateur n'existe pas"
 
-#: common/include/Group.class.php:1802
+#: common/include/Group.class.php:1800
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "Erreur : utilisateur non supprimé : %s"
 
-#: common/include/Group.class.php:1817
+#: common/include/Group.class.php:1815
 #, php-format
 msgid "ERROR: DB: artifact: %s"
 msgstr "Erreur de base de données : artifact : %s"
 
-#: common/include/Group.class.php:1852 common/include/Group.class.php:1865
+#: common/include/Group.class.php:1850 common/include/Group.class.php:1863
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr "Erreur de base de données : project_assigned_to : %d / %s"
 
-#: common/include/Group.class.php:1911 www/project/admin/roleedit.php:64
+#: common/include/Group.class.php:1909 www/project/admin/roleedit.php:66
 msgid "Could Not Get Role"
 msgstr "Erreur lors de la création de l'objet Role"
 
-#: common/include/Group.class.php:1914 common/include/Group.class.php:1919
+#: common/include/Group.class.php:1912 common/include/Group.class.php:1917
 #, php-format
 msgid "Role: %s"
 msgstr "Rôle : %s"
 
-#: common/include/Group.class.php:1973
+#: common/include/Group.class.php:1971
 msgid "Error getting member object"
 msgstr "Erreur lors de la création d'un objet membre"
 
-#: common/include/Group.class.php:1976
+#: common/include/Group.class.php:1974
 #, php-format
 msgid "Error getting member object: %s"
 msgstr "Erreur lors de la création d'un objet membre : %s"
 
-#: common/include/Group.class.php:2015
+#: common/include/Group.class.php:2013
 msgid "Group already active"
 msgstr "Le groupe est déjà activé."
 
-#: common/include/Group.class.php:2038
+#: common/include/Group.class.php:2036
 msgid "Error creating ArtifactTypes object"
 msgstr "Erreur lors de la création d'un objet ArtifactTypes"
 
-#: common/include/Group.class.php:2043 common/include/Group.class.php:2049
+#: common/include/Group.class.php:2041 common/include/Group.class.php:2047
 #, php-format
 msgid "ATS%d: %s"
 msgstr "ATS%d: %s"
 
-#: common/include/Group.class.php:2061
+#: common/include/Group.class.php:2059
 msgid "Open-Discussion"
 msgstr "Discussion-Ouverte"
 
-#: common/include/Group.class.php:2061
+#: common/include/Group.class.php:2059
 msgid "General Discussion"
 msgstr "Discussions générales"
 
-#: common/include/Group.class.php:2062 common/include/Group.class.php:2069
-#: common/include/Group.class.php:2076
+#: common/include/Group.class.php:2060 common/include/Group.class.php:2067
+#: common/include/Group.class.php:2074
 #, php-format
 msgid "F%d: %s"
 msgstr "F%d: %s"
 
-#: common/include/Group.class.php:2068
+#: common/include/Group.class.php:2066
 msgid "Help"
 msgstr "Aide"
 
-#: common/include/Group.class.php:2068
+#: common/include/Group.class.php:2066
 msgid "Get Public Help"
 msgstr "Obtenir de l'aide"
 
-#: common/include/Group.class.php:2075
+#: common/include/Group.class.php:2073
 msgid "Developers-Discussion"
 msgstr "discussion-developpeurs"
 
-#: common/include/Group.class.php:2075
+#: common/include/Group.class.php:2073
 msgid "Project Developer Discussion"
 msgstr "Discussion entre développeurs du projet"
 
-#: common/include/Group.class.php:2088
+#: common/include/Group.class.php:2086
 msgid "Uncategorized Submissions"
 msgstr "Soumissions non catégorisées"
 
-#: common/include/Group.class.php:2089
+#: common/include/Group.class.php:2087
 #, php-format
 msgid "DG: %s"
 msgstr "DG: %s"
 
-#: common/include/Group.class.php:2102
+#: common/include/Group.class.php:2100
 #, php-format
 msgid "FRSP: %s"
 msgstr "FRSP: %s"
 
-#: common/include/Group.class.php:2114
+#: common/include/Group.class.php:2112
 msgid "To Do"
 msgstr "À faire"
 
-#: common/include/Group.class.php:2114
+#: common/include/Group.class.php:2112
 msgid "Things We Have To Do"
 msgstr "Tâches en attente"
 
-#: common/include/Group.class.php:2115 common/include/Group.class.php:2122
+#: common/include/Group.class.php:2113 common/include/Group.class.php:2120
 #, php-format
 msgid "PG%d: %s"
 msgstr "PG%d: %s"
 
-#: common/include/Group.class.php:2121
+#: common/include/Group.class.php:2119
 msgid "Next Release"
 msgstr "Prochaine version"
 
-#: common/include/Group.class.php:2121
+#: common/include/Group.class.php:2119
 msgid "Items For Our Next Release"
 msgstr "Tâches à faire avant la prochaine version"
 
-#: common/include/Group.class.php:2148
+#: common/include/Group.class.php:2150
 #, php-format
 msgid "R%d: %s"
 msgstr "R%d: %s"
 
-#: common/include/Group.class.php:2167
+#: common/include/Group.class.php:2169
 #: plugins/scmcvs/common/CVSPlugin.class.php:149
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:129
 #: plugins/scmsvn/common/SVNPlugin.class.php:149 www/activity/index.php:94
 #: www/stats/site_stats_utils.php:284 www/tracker/detail.php:187
-#: www/tracker/mod-limited.php:185 www/tracker/mod.php:282
+#: www/tracker/mod-limited.php:185 www/tracker/mod.php:281
 msgid "Commits"
 msgstr "Envois"
 
-#: common/include/Group.class.php:2168
+#: common/include/Group.class.php:2170
 #, php-format
 msgid "ML: %s"
 msgstr "ML: %s"
 
-#: common/include/Group.class.php:2213 common/include/Group.class.php:2286
+#: common/include/Group.class.php:2215 common/include/Group.class.php:2288
 msgid "Group does not have any administrators."
 msgstr "Le groupe n'a pas d'administrateurs."
 
-#: common/include/Group.class.php:2222
+#: common/include/Group.class.php:2224
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -740,12 +740,12 @@ msgstr ""
 "\n"
 "-- L'équipe de %4$s"
 
-#: common/include/Group.class.php:2258
+#: common/include/Group.class.php:2260
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s - Projet approuvé"
 
-#: common/include/Group.class.php:2294
+#: common/include/Group.class.php:2296
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -764,20 +764,20 @@ msgstr ""
 "Raison de notre refus :\n"
 "\n"
 
-#: common/include/Group.class.php:2313
+#: common/include/Group.class.php:2315
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s - Projet refusé"
 
-#: common/include/Group.class.php:2336
+#: common/include/Group.class.php:2338
 msgid "Could not find user who has submitted the project."
 msgstr "L'utilisateur qui a soumis le projet est introuvable."
 
-#: common/include/Group.class.php:2351
+#: common/include/Group.class.php:2353
 msgid "There is no administrator to send the mail."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courrier"
 
-#: common/include/Group.class.php:2360
+#: common/include/Group.class.php:2362
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -798,12 +798,12 @@ msgstr ""
 "Visitez l'URL suivante pour approuver ou refuser ce projet:\n"
 "%4$s"
 
-#: common/include/Group.class.php:2374 common/include/Group.class.php:2389
+#: common/include/Group.class.php:2376 common/include/Group.class.php:2391
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s - Nouveau projet soumis"
 
-#: common/include/Group.class.php:2382
+#: common/include/Group.class.php:2384
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -822,24 +822,24 @@ msgstr ""
 "L'équipe d'administration de %1$s va maintenant examiner votre\n"
 "candidature. Vous serez tenu informé de sa décision."
 
-#: common/include/Group.class.php:2407
+#: common/include/Group.class.php:2409
 msgid "Group name is too short"
 msgstr "Le nom du groupe est trop court"
 
-#: common/include/Group.class.php:2410
+#: common/include/Group.class.php:2412
 msgid "Group name is too long"
 msgstr "Le nom du group est trop long"
 
-#: common/include/Group.class.php:2413
+#: common/include/Group.class.php:2415
 msgid "Group name already taken"
 msgstr "Le nom du groupe est déjà pris"
 
-#: common/include/Group.class.php:2471
+#: common/include/Group.class.php:2473
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
 
-#: common/include/Group.class.php:2550
+#: common/include/Group.class.php:2552
 #: www/forum/include/ForumHTML.class.php:69 www/my/dashboard.php:79
 #: www/my/diary.php:182 www/my/index.php:55 www/my/index.php:97
 #: www/my/index.php:148 www/pm/browse_task.php:106
@@ -848,117 +848,118 @@ msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:35
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:36
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:36
-#: www/themes/gforge-simple-theme/Theme.class.php:481 www/tracker/add.php:74
-#: www/tracker/admin/form-customizelist.php:24 www/tracker/browse.php:160
-#: www/tracker/browse.php:362 www/tracker/detail.php:72
-#: www/tracker/mod-limited.php:115 www/tracker/mod.php:159
+#: www/themes/gforge-simple-theme/Theme.class.php:480 www/tracker/add.php:74
+#: www/tracker/admin/form-customizelist.php:24 www/tracker/browse.php:162
+#: www/tracker/browse.php:364 www/tracker/detail.php:72
+#: www/tracker/mod-limited.php:115 www/tracker/mod.php:158
 #: www/tracker/query.php:178 www/tracker/query.php:345
 msgid "Summary"
 msgstr "Résumé"
 
-#: common/include/Group.class.php:2568 common/include/rbac_texts.php:55
-#: common/include/rbac_texts.php:67 common/include/rbac_texts.php:69
-#: common/include/rbac_texts.php:71 common/include/rbac_texts.php:73
-#: common/include/rbac_texts.php:75 www/docman/include/doc_utils.php:82
+#: common/include/Group.class.php:2570 common/include/rbac_texts.php:57
+#: common/include/rbac_texts.php:69 common/include/rbac_texts.php:71
+#: common/include/rbac_texts.php:73 common/include/rbac_texts.php:75
+#: common/include/rbac_texts.php:77 www/docman/include/doc_utils.php:82
 #: www/forum/include/ForumHTML.class.php:116
 #: www/forum/include/ForumHTML.class.php:123 www/frs/include/frs_utils.php:91
-#: www/include/Layout.class.php:457 www/include/Layout.class.php:561
+#: www/include/Layout.class.php:449 www/include/Layout.class.php:553
 #: www/mail/mail_utils.php:34 www/news/news_utils.php:59
 #: www/pm/include/ProjectGroupHTML.class.php:77 www/pm/index.php:53
 #: www/scm/include/scm_utils.php:53 www/survey/include/SurveyHTML.class.php:54
 #: www/survey/include/SurveyHTML.class.php:74 www/survey/survey_utils.php:53
 #: www/survey/survey_utils.php:77
-#: www/themes/gforge-simple-theme/Theme.class.php:390
-#: www/themes/gforge-simple-theme/Theme.class.php:488
+#: www/themes/gforge-simple-theme/Theme.class.php:389
+#: www/themes/gforge-simple-theme/Theme.class.php:487
 #: www/themes/lite/Theme.class.php:288 www/tracker/add.php:65
 #: www/tracker/admin/ind.php:78
 #: www/tracker/include/ArtifactTypeHtml.class.php:69 www/tracker/ind.php:27
-#: www/tracker/mod.php:131 www/tracker/mod.php:188
+#: www/tracker/mod.php:130 www/tracker/mod.php:187
 msgid "Admin"
 msgstr "Administration"
 
-#: common/include/Group.class.php:2583 www/activity/index.php:70
+#: common/include/Group.class.php:2585 www/activity/index.php:70
 #: www/activity/index.php:148 www/activity/index.php:199
 #: www/export/rss_project.php:100
-#: www/themes/gforge-simple-theme/Theme.class.php:498
+#: www/themes/gforge-simple-theme/Theme.class.php:497
 msgid "Activity"
 msgstr "Activité"
 
-#: common/include/Group.class.php:2592
+#: common/include/Group.class.php:2594
 #: common/include/group_section_texts.php:30
 #: common/reporting/report_utils.php:161
 #: plugins/quota_management/www/quota_project.php:88
-#: www/themes/gforge-simple-theme/Theme.class.php:505
+#: www/themes/gforge-simple-theme/Theme.class.php:504
 msgid "Forums"
 msgstr "Forums"
 
-#: common/include/Group.class.php:2606 common/include/rbac_texts.php:90
-#: common/include/rbac_texts.php:91 common/reporting/report_utils.php:157
+#: common/include/Group.class.php:2608 common/include/rbac_texts.php:93
+#: common/include/rbac_texts.php:95 common/reporting/report_utils.php:157
 #: www/include/project_home.php:312
 #: www/pm/include/ProjectTaskHTML.class.php:93
-#: www/themes/gforge-simple-theme/Theme.class.php:513
+#: www/themes/gforge-simple-theme/Theme.class.php:512
 #: www/tracker/admin/ind.php:97 www/tracker/ind.php:45
 msgid "Tracker"
 msgstr "Outil de suivi"
 
-#: common/include/Group.class.php:2624
-#: www/themes/gforge-simple-theme/Theme.class.php:522
+#: common/include/Group.class.php:2626
+#: www/themes/gforge-simple-theme/Theme.class.php:521
 msgid "Lists"
 msgstr "Listes"
 
-#: common/include/Group.class.php:2639
-#: common/include/group_section_texts.php:32 common/include/rbac_texts.php:86
-#: common/include/rbac_texts.php:87 common/reporting/report_utils.php:169
+#: common/include/Group.class.php:2641
+#: common/include/group_section_texts.php:32 common/include/rbac_texts.php:88
+#: common/include/rbac_texts.php:90 common/reporting/report_utils.php:169
 #: common/reporting/report_utils.php:197 www/my/dashboard.php:91
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
 #: www/stats/site_stats_utils.php:240 www/stats/site_stats_utils.php:366
 #: www/stats/site_stats_utils.php:421
-#: www/themes/gforge-simple-theme/Theme.class.php:530
+#: www/themes/gforge-simple-theme/Theme.class.php:529
 #: www/themes/ultralite/Theme.class.php:104
 msgid "Tasks"
 msgstr "Tâches"
 
-#: common/include/Group.class.php:2654 common/reporting/report_utils.php:165
-#: www/themes/gforge-simple-theme/Theme.class.php:538
+#: common/include/Group.class.php:2656 common/reporting/report_utils.php:165
+#: www/themes/gforge-simple-theme/Theme.class.php:537
 msgid "Docs"
 msgstr "Documents"
 
-#: common/include/Group.class.php:2669 www/include/project_home.php:405
+#: common/include/Group.class.php:2671 www/include/project_home.php:405
 #: www/survey/include/SurveyHTML.class.php:53 www/survey/survey_utils.php:52
-#: www/themes/gforge-simple-theme/Theme.class.php:546
+#: www/themes/gforge-simple-theme/Theme.class.php:545
 msgid "Surveys"
 msgstr "Sondages"
 
-#: common/include/Group.class.php:2683
+#: common/include/Group.class.php:2685
 #: common/include/group_section_texts.php:35
 #: plugins/quota_management/www/quota_project.php:74 www/activity/index.php:89
-#: www/activity/index.php:241 www/admin/index.php:134 www/news/index.php:35
-#: www/news/submit.php:127 www/themes/gforge-simple-theme/Theme.class.php:554
+#: www/activity/index.php:241 www/admin/index.php:134 www/news/index.php:36
+#: www/news/index.php:37 www/news/submit.php:127
+#: www/themes/gforge-simple-theme/Theme.class.php:553
 msgid "News"
 msgstr "Annonces"
 
-#: common/include/Group.class.php:2697 common/include/rbac_texts.php:98
-#: common/include/rbac_texts.php:99 www/scm/include/scm_utils.php:52
+#: common/include/Group.class.php:2699 common/include/rbac_texts.php:102
+#: common/include/rbac_texts.php:103 www/scm/include/scm_utils.php:52
 #: www/stats/site_stats_utils.php:243 www/stats/site_stats_utils.php:367
 #: www/stats/site_stats_utils.php:422
-#: www/themes/gforge-simple-theme/Theme.class.php:562
+#: www/themes/gforge-simple-theme/Theme.class.php:561
 msgid "SCM"
 msgstr "Sources"
 
-#: common/include/Group.class.php:2729
-#: common/include/group_section_texts.php:34 common/include/rbac_texts.php:95
+#: common/include/Group.class.php:2731
+#: common/include/group_section_texts.php:34 common/include/rbac_texts.php:99
 #: www/frs/include/frs_utils.php:90
-#: www/themes/gforge-simple-theme/Theme.class.php:579
+#: www/themes/gforge-simple-theme/Theme.class.php:578
 msgid "Files"
 msgstr "Fichiers"
 
-#: common/include/GroupJoinRequest.class.php:111
+#: common/include/GroupJoinRequest.class.php:113
 msgid "You are already a member of this project."
 msgstr "Vous êtes déjà membre de ce projet."
 
-#: common/include/GroupJoinRequest.class.php:120
+#: common/include/GroupJoinRequest.class.php:122
 msgid ""
 "You have already sent a request to the project administrators. Please wait "
 "for their reply."
@@ -966,14 +967,14 @@ msgstr ""
 "Vous avez déjà envoyé une demande aux administrateurs de ce projet. Merci "
 "d'attendre leur réponse."
 
-#: common/include/GroupJoinRequest.class.php:225
-#: common/include/GroupJoinRequest.class.php:251
-#: common/include/GroupJoinRequest.class.php:265
+#: common/include/GroupJoinRequest.class.php:227
+#: common/include/GroupJoinRequest.class.php:253
+#: common/include/GroupJoinRequest.class.php:267
 #, php-format
 msgid "Request to Join Project %1$s"
 msgstr "Demande pour rejoindre le projet %1$s"
 
-#: common/include/GroupJoinRequest.class.php:227
+#: common/include/GroupJoinRequest.class.php:229
 #, php-format
 msgid ""
 "%1$s has requested to join your project. \n"
@@ -988,14 +989,14 @@ msgstr ""
 "Commentaires de l'utilisateur :\n"
 "%3$s"
 
-#: common/include/GroupJoinRequest.class.php:252
+#: common/include/GroupJoinRequest.class.php:254
 #, php-format
 msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr ""
 "Votre demande pour rejoindre le projet %1$s a été refusée par un "
 "administrateur."
 
-#: common/include/GroupJoinRequest.class.php:266
+#: common/include/GroupJoinRequest.class.php:268
 #, php-format
 msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr ""
@@ -1093,7 +1094,7 @@ msgstr "Mot de passe non valide :"
 msgid "Invalid Unix Name."
 msgstr "Nom unix non valide"
 
-#: common/include/User.class.php:284 common/include/User.class.php:528
+#: common/include/User.class.php:284 common/include/User.class.php:530
 msgid "Invalid Jabber Address"
 msgstr "Adresse Jabber non valide"
 
@@ -1123,6 +1124,9 @@ msgid ""
 "\n"
 "<%2$s>\n"
 "\n"
+"You have 1 week to confirm your account. After this time, your account will "
+"be deleted.\n"
+"\n"
 "(If you don't see any URL above, it is likely due to a bug in your mail "
 "client.\n"
 "Use one below, but make sure it is entered as the single line.)\n"
@@ -1139,10 +1143,12 @@ msgstr ""
 "\n"
 "<%2$s>\n"
 "\n"
-" (Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue "
-"de votre client de messagerie.\n"
-"Utilisez le lien ci-dessous en prenant garde qu'il soit entré sur une seule "
-"ligne)\n"
+"Vous avez une semaine pour confirmer votre compte.  Au-delà, il sera\n"
+"supprimé.\n"
+"\n"
+"(Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un\n"
+"bogue de votre client de messagerie.  Utilisez le lien ci-dessous en\n"
+"prenant garde qu'il soit entré sur une seule ligne.)\n"
 "\n"
 "%2$s\n"
 "\n"
@@ -1150,12 +1156,12 @@ msgstr ""
 "\n"
 "-- L'équipe de %3$s\n"
 
-#: common/include/User.class.php:434
+#: common/include/User.class.php:436
 #, php-format
 msgid "%1$s Account Registration"
 msgstr "%1$s - Inscription"
 
-#: common/include/User.class.php:850 common/include/User.class.php:903
+#: common/include/User.class.php:852 common/include/User.class.php:905
 msgid "User with this email already exists."
 msgstr "Il existe déjà un utilisateur avec cette adresse email."
 
@@ -1197,7 +1203,7 @@ msgstr ""
 "Le nom de groupe ne peut comporter de caractère souligné à cause des règles "
 "imposées par le DNS."
 
-#: common/include/group_section_texts.php:31 www/reporting/toolspie.php:58
+#: common/include/group_section_texts.php:31 www/reporting/toolspie.php:63
 msgid "Trackers"
 msgstr "Outil de suivi"
 
@@ -1205,135 +1211,143 @@ msgstr "Outil de suivi"
 msgid "Documentations"
 msgstr "Documentations"
 
-#: common/include/rbac_texts.php:30 common/include/rbac_texts.php:33
-#: common/include/rbac_texts.php:35 common/include/rbac_texts.php:37
-#: common/include/rbac_texts.php:41 common/include/rbac_texts.php:43
+#: common/include/rbac_texts.php:32 common/include/rbac_texts.php:35
+#: common/include/rbac_texts.php:37 common/include/rbac_texts.php:39
+#: common/include/rbac_texts.php:43 common/include/rbac_texts.php:45
 #: www/frs/admin/index.php:216 www/project/admin/editgroupinfo.php:153
-#: www/project/admin/index.php:174 www/register/projectinfo.php:183
+#: www/project/admin/index.php:176 www/register/projectinfo.php:184
 msgid "Private"
 msgstr "Privé"
 
-#: common/include/rbac_texts.php:31 common/include/rbac_texts.php:34
-#: common/include/rbac_texts.php:38 common/include/rbac_texts.php:42
-#: common/include/rbac_texts.php:44 www/frs/admin/index.php:215
-#: www/project/admin/editgroupinfo.php:153 www/project/admin/index.php:174
-#: www/register/projectinfo.php:177
+#: common/include/rbac_texts.php:33 common/include/rbac_texts.php:36
+#: common/include/rbac_texts.php:40 common/include/rbac_texts.php:44
+#: common/include/rbac_texts.php:46 www/frs/admin/index.php:215
+#: www/project/admin/editgroupinfo.php:153 www/project/admin/index.php:176
+#: www/register/projectinfo.php:178
 msgid "Public"
 msgstr "Public"
 
-#: common/include/rbac_texts.php:32 common/include/rbac_texts.php:94
+#: common/include/rbac_texts.php:34 common/include/rbac_texts.php:98
 msgid "File Release System"
 msgstr "Système de publication de fichiers"
 
-#: common/include/rbac_texts.php:36
+#: common/include/rbac_texts.php:38
 msgid "Public (PServer)"
 msgstr "Accès public (PServer)"
 
-#: common/include/rbac_texts.php:39 common/include/rbac_texts.php:45
+#: common/include/rbac_texts.php:41 common/include/rbac_texts.php:47
 msgid "No Anonymous Posts"
 msgstr "Messages anonymes interdits"
 
-#: common/include/rbac_texts.php:40 common/include/rbac_texts.php:46
+#: common/include/rbac_texts.php:42 common/include/rbac_texts.php:48
 msgid "Allow Anonymous Posts"
 msgstr "Messages anonymes autorisés"
 
-#: common/include/rbac_texts.php:47 common/include/rbac_texts.php:50
-#: common/include/rbac_texts.php:53 common/include/rbac_texts.php:57
-#: common/include/rbac_texts.php:62
+#: common/include/rbac_texts.php:49 common/include/rbac_texts.php:52
+#: common/include/rbac_texts.php:55 common/include/rbac_texts.php:59
+#: common/include/rbac_texts.php:64
 msgid "Read"
 msgstr "Lecture"
 
-#: common/include/rbac_texts.php:48 common/include/rbac_texts.php:51
+#: common/include/rbac_texts.php:50 common/include/rbac_texts.php:53
 msgid "Write"
 msgstr "Écriture"
 
-#: common/include/rbac_texts.php:49 common/include/rbac_texts.php:52
-#: common/include/rbac_texts.php:56 common/include/rbac_texts.php:61
+#: common/include/rbac_texts.php:51 common/include/rbac_texts.php:54
+#: common/include/rbac_texts.php:58 common/include/rbac_texts.php:63
 msgid "No Access"
 msgstr "Aucun accès"
 
-#: common/include/rbac_texts.php:54
+#: common/include/rbac_texts.php:56
 msgid "Post"
 msgstr "Écriture"
 
-#: common/include/rbac_texts.php:58 common/include/rbac_texts.php:63
+#: common/include/rbac_texts.php:60 common/include/rbac_texts.php:65
 msgid "Tech"
 msgstr "Tech"
 
-#: common/include/rbac_texts.php:59 common/include/rbac_texts.php:64
+#: common/include/rbac_texts.php:61 common/include/rbac_texts.php:66
 msgid "Tech & Admin"
 msgstr "Tech et Admin"
 
-#: common/include/rbac_texts.php:60 common/include/rbac_texts.php:65
+#: common/include/rbac_texts.php:62 common/include/rbac_texts.php:67
 msgid "Admin Only"
 msgstr "Admin seule"
 
-#: common/include/rbac_texts.php:66
+#: common/include/rbac_texts.php:68
 msgid "Read/Post"
 msgstr "Lecture/écriture"
 
-#: common/include/rbac_texts.php:68 common/include/rbac_texts.php:70
-#: common/include/rbac_texts.php:72 common/include/rbac_texts.php:74
+#: common/include/rbac_texts.php:70 common/include/rbac_texts.php:72
+#: common/include/rbac_texts.php:74 common/include/rbac_texts.php:76
 #: www/include/html.php:278 www/include/html.php:345 www/include/html.php:412
 #: www/include/html.php:429 www/include/html.php:463 www/include/html.php:504
-#: www/pm/ganttpage.php:72 www/tracker/include/ArtifactTypeHtml.class.php:413
-#: www/tracker/include/ArtifactTypeHtml.class.php:452
-#: www/tracker/include/ArtifactTypeHtml.class.php:581
+#: www/pm/ganttpage.php:47 www/tracker/include/ArtifactTypeHtml.class.php:418
+#: www/tracker/include/ArtifactTypeHtml.class.php:457
+#: www/tracker/include/ArtifactTypeHtml.class.php:586
 msgid "None"
 msgstr "Aucun(e)"
 
-#: common/include/rbac_texts.php:76
+#: common/include/rbac_texts.php:78
 msgid "See"
 msgstr "Voir"
 
-#: common/include/rbac_texts.php:77
+#: common/include/rbac_texts.php:79
 #: plugins/quota_management/www/quota_admin.php:140
 #: www/tracker/mod-limited.php:12
 msgid "Modify"
 msgstr "Modifier"
 
-#: common/include/rbac_texts.php:78
+#: common/include/rbac_texts.php:80
 msgid "No access"
 msgstr "Aucun accès"
 
-#: common/include/rbac_texts.php:84
+#: common/include/rbac_texts.php:86
 msgid "Anonymous Forum"
 msgstr "Forum anonyme"
 
-#: common/include/rbac_texts.php:85
+#: common/include/rbac_texts.php:87
 msgid "Forum Admin"
 msgstr "Administration des forums"
 
-#: common/include/rbac_texts.php:88
+#: common/include/rbac_texts.php:89
+msgid "New Tasks"
+msgstr "Nouveaux gestionnaires de tâches"
+
+#: common/include/rbac_texts.php:91
 msgid "Tasks Admin"
 msgstr "Administration de l'outil des tâches"
 
-#: common/include/rbac_texts.php:89 www/forum/include/ForumHTML.class.php:72
+#: common/include/rbac_texts.php:92 www/forum/include/ForumHTML.class.php:72
 #: www/forum/myforums.php:73 www/news/admin/news_admin_utils.php:58
-#: www/reporting/projectact.php:58 www/reporting/projecttime.php:70
+#: www/reporting/projectact.php:62 www/reporting/projecttime.php:75
 #: www/search/include/SearchManager.class.php:131
 #: www/search/include/SearchManager.class.php:147
 #: www/themes/ultralite/Theme.class.php:108
 msgid "Project"
 msgstr "Projet"
 
-#: common/include/rbac_texts.php:92
+#: common/include/rbac_texts.php:94
+msgid "New Trackers"
+msgstr "Nouveaux outils de suivi"
+
+#: common/include/rbac_texts.php:96
 msgid "Anonymous Tracker"
 msgstr "Outil de suivi anonyme"
 
-#: common/include/rbac_texts.php:93
+#: common/include/rbac_texts.php:97
 msgid "Tracker Admin"
 msgstr "Administration de l'outil de suivi"
 
-#: common/include/rbac_texts.php:96
+#: common/include/rbac_texts.php:100
 msgid "Webcal"
 msgstr "Calendrier"
 
-#: common/include/rbac_texts.php:97 www/admin/approve-pending.php:156
+#: common/include/rbac_texts.php:101 www/admin/approve-pending.php:156
 msgid "Project Admin"
 msgstr "Administration du projet"
 
-#: common/include/rbac_texts.php:100
+#: common/include/rbac_texts.php:104
 msgid "Documentation Manager"
 msgstr "Gestionnaire de documentation"
 
@@ -1369,14 +1383,14 @@ msgstr "Compte non actif"
 msgid "Could Not Get Group"
 msgstr "Erreur lors de l'obtention de l'objet Group"
 
-#: common/include/session.php:418 www/account/lostlogin.php:49
-#: www/account/lostlogin.php:55 www/account/lostlogin.php:70
-#: www/account/lostlogin.php:77 www/account/lostlogin.php:94
-#: www/pm/calendar.php:83 www/pm/calendar.php:87 www/pm/calendar.php:89
-#: www/pm/calendar.php:94 www/pm/calendar.php:96 www/pm/calendar.php:107
-#: www/survey/rating_resp.php:57 www/trove/TroveCategory.class.php:73
-#: www/trove/TroveCategory.class.php:99 www/trove/TroveCategory.class.php:111
-#: www/trove/admin/trove_cat_edit.php:42
+#: common/include/session.php:418 common/include/session.php:421
+#: www/account/lostlogin.php:49 www/account/lostlogin.php:55
+#: www/account/lostlogin.php:70 www/account/lostlogin.php:77
+#: www/account/lostlogin.php:94 www/pm/calendar.php:83 www/pm/calendar.php:87
+#: www/pm/calendar.php:89 www/pm/calendar.php:94 www/pm/calendar.php:96
+#: www/pm/calendar.php:107 www/survey/rating_resp.php:57
+#: www/trove/TroveCategory.class.php:73 www/trove/TroveCategory.class.php:99
+#: www/trove/TroveCategory.class.php:111 www/trove/admin/trove_cat_edit.php:42
 msgid "ERROR"
 msgstr "ERREUR"
 
@@ -1480,16 +1494,16 @@ msgstr "Aucun groupe de projet trouvé"
 msgid "Circular Dependency Detected'"
 msgstr "Référence circulaire détéctée"
 
-#: common/pm/ProjectTask.class.php:1162 common/tracker/Artifact.class.php:1439
-#: common/tracker/Artifact.class.php:1441
-#: common/tracker/Artifact.class.php:1445
-#: common/tracker/Artifact.class.php:1447
-#: common/tracker/Artifact.class.php:1547
+#: common/pm/ProjectTask.class.php:1162 common/tracker/Artifact.class.php:1426
+#: common/tracker/Artifact.class.php:1428
+#: common/tracker/Artifact.class.php:1432
+#: common/tracker/Artifact.class.php:1434
+#: common/tracker/Artifact.class.php:1534
 #: cronjobs/send_pending_items_mail.php:99
 #: plugins/projects_hierarchy/www/softwaremap.php:318
 #: www/account/index.php:118 www/admin/cronman.php:79
-#: www/admin/grouplist.php:118 www/admin/massmail.php:165
-#: www/admin/search.php:110 www/admin/search.php:186 www/admin/userlist.php:99
+#: www/admin/grouplist.php:116 www/admin/massmail.php:165
+#: www/admin/search.php:105 www/admin/search.php:175 www/admin/userlist.php:99
 #: www/developer/diary.php:47 www/developer/diary.php:84
 #: www/docman/include/doc_utils.php:213 www/docman/include/doc_utils.php:214
 #: www/export/tracker.php:112 www/forum/forum.php:271 www/forum/forum.php:345
@@ -1497,11 +1511,11 @@ msgstr "Référence circulaire détéctée"
 #: www/forum/include/ForumHTML.class.php:217
 #: www/forum/include/ForumHTML.class.php:448 www/forum/index.php:86
 #: www/forum/message.php:121 www/forum/message.php:200
-#: www/forum/myforums.php:162 www/frs/index.php:196
+#: www/forum/myforums.php:162 www/frs/index.php:195
 #: www/include/project_home.php:85 www/include/stats_function.php:67
 #: www/include/stats_function.php:90 www/include/user_home.php:90
 #: www/my/diary.php:219 www/news/news_utils.php:150
-#: www/news/news_utils.php:162 www/news/news_utils.php:273
+#: www/news/news_utils.php:162 www/news/news_utils.php:270
 #: www/people/people_utils.php:417 www/people/viewjob.php:81
 #: www/pm/browse_task.php:198 www/pm/browse_task.php:201
 #: www/pm/include/ProjectTaskHTML.class.php:104
@@ -1518,10 +1532,10 @@ msgstr "Référence circulaire détéctée"
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 #: www/snippet/detail.php:69 www/snippet/detail.php:158
-#: www/soap/tracker/tracker.php:1132 www/softwaremap/full_list.php:148
+#: www/soap/tracker/tracker.php:1128 www/softwaremap/full_list.php:148
 #: www/softwaremap/tag_cloud.php:185 www/softwaremap/trove_list.php:319
-#: www/stats/lastlogins.php:51 www/tracker/browse.php:415
-#: www/tracker/browse.php:426 www/tracker/detail.php:45
+#: www/stats/lastlogins.php:51 www/tracker/browse.php:412
+#: www/tracker/browse.php:423 www/tracker/detail.php:45
 #: www/tracker/detail.php:127 www/tracker/detail.php:128
 #: www/tracker/downloadcsv.php:73 www/tracker/downloadcsv.php:74
 #: www/tracker/downloadcsv.php:75
@@ -1529,8 +1543,8 @@ msgstr "Référence circulaire détéctée"
 #: www/tracker/include/ArtifactHtml.class.php:130
 #: www/tracker/include/ArtifactHtml.class.php:139
 #: www/tracker/mod-limited.php:71 www/tracker/mod-limited.php:76
-#: www/tracker/mod.php:76 www/tracker/mod.php:81 www/tracker/mod.php:222
-#: www/tracker/mod.php:223
+#: www/tracker/mod.php:76 www/tracker/mod.php:81 www/tracker/mod.php:221
+#: www/tracker/mod.php:222
 msgid "Y-m-d H:i"
 msgstr "d/m/Y H:i"
 
@@ -1544,10 +1558,10 @@ msgid "Successfully Added"
 msgstr "Ajouté avec succès"
 
 #: common/reporting/report_utils.php:28 www/frs/include/frs_utils.php:92
-#: www/include/Layout.class.php:461
+#: www/include/Layout.class.php:453
 #: www/pm/include/ProjectGroupHTML.class.php:75
 #: www/scm/include/scm_utils.php:54
-#: www/themes/gforge-simple-theme/Theme.class.php:399
+#: www/themes/gforge-simple-theme/Theme.class.php:398
 #: www/themes/lite/Theme.class.php:292
 #: www/tracker/include/ArtifactTypeHtml.class.php:58
 msgid "Reporting"
@@ -1745,9 +1759,9 @@ msgstr "Aucune question trouvée"
 #: www/account/change_pw.php:49 www/account/change_pw.php:57
 #: www/account/change_pw.php:65 www/account/change_pw.php:73
 #: www/admin/search.php:39 www/developer/diary.php:97
-#: www/developer/rate.php:90 www/docman/admin/index.php:75
-#: www/docman/admin/index.php:87 www/docman/admin/index.php:508
-#: www/docman/admin/index.php:513 www/docman/include/doc_utils.php:63
+#: www/developer/rate.php:90 www/docman/admin/index.php:84
+#: www/docman/admin/index.php:96 www/docman/admin/index.php:517
+#: www/docman/admin/index.php:522 www/docman/include/doc_utils.php:63
 #: www/docman/index.php:64 www/docman/index.php:69 www/docman/new.php:55
 #: www/docman/new.php:64 www/docman/new.php:66 www/docman/new.php:76
 #: www/docman/new.php:89 www/docman/new.php:106 www/docman/search.php:36
@@ -1821,7 +1835,7 @@ msgstr "Aucune question trouvée"
 #: www/tarballs.php:24 www/tarballs.php:27 www/tarballs.php:33
 #: www/tarballs.php:36 www/tracker/admin/index.php:34
 #: www/tracker/admin/index.php:57 www/tracker/admin/updates.php:150
-#: www/tracker/index.php:68 www/tracker/reporting/index.php:70
+#: www/tracker/index.php:68 www/tracker/reporting/index.php:69
 #: www/tracker/reporting/trackeract_graph.php:50
 #: www/tracker/reporting/trackerpie_graph.php:64 www/tracker/tracker.php:15
 #: www/tracker/tracker.php:30 www/users:33
@@ -1846,7 +1860,7 @@ msgstr ""
 "Traces : seul un groupe de membres peut voir les traces d'un type privé."
 
 #: common/tracker/Artifact.class.php:220 common/tracker/Artifact.class.php:746
-#: www/tracker/tracker.php:67 www/tracker/tracker.php:258
+#: www/tracker/tracker.php:67 www/tracker/tracker.php:260
 msgid ""
 "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
 "Login."
@@ -1878,7 +1892,7 @@ msgstr "Surveillance activée"
 msgid "Artifact Monitoring Deactivated"
 msgstr "Surveillance arrêtée"
 
-#: common/tracker/Artifact.class.php:1112
+#: common/tracker/Artifact.class.php:1099
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Aucun changement - Mise à jour annulée"
 
@@ -1939,13 +1953,13 @@ msgstr "Zone de texte"
 
 #: common/tracker/ArtifactExtraField.class.php:328
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:219
-#: www/admin/groupedit.php:101 www/admin/grouplist.php:85
-#: www/admin/pluginman.php:186 www/admin/search.php:99
-#: www/admin/search.php:169 www/frs/admin/editrelease.php:261
+#: www/admin/groupedit.php:101 www/admin/grouplist.php:83
+#: www/admin/pluginman.php:186 www/admin/search.php:94
+#: www/admin/search.php:158 www/frs/admin/editrelease.php:261
 #: www/frs/admin/index.php:162 www/my/dashboard.php:83
 #: www/news/admin/index.php:131 www/people/editjob.php:168
 #: www/people/viewjob.php:75 www/pm/browse_task.php:121
-#: www/pm/detail_task.php:108 www/pm/ganttpage.php:167 www/pm/mod_task.php:142
+#: www/pm/detail_task.php:108 www/pm/ganttpage.php:143 www/pm/mod_task.php:142
 #: www/pm/mod_task.php:159 www/reporting/usersummary.php:106
 #: www/tracker/admin/form-addextrafield.php:111
 #: www/tracker/admin/form-addextrafieldoption.php:80
@@ -2155,7 +2169,7 @@ msgstr "Dernières contributions majeures"
 #: www/developer/diary.php:47 www/developer/diary.php:78
 #: www/forum/forum.php:237 www/forum/include/ForumHTML.class.php:68
 #: www/forum/message.php:157 www/frs/admin/showreleases.php:102
-#: www/frs/index.php:168 www/include/project_home.php:188
+#: www/frs/index.php:167 www/include/project_home.php:188
 #: www/news/admin/news_admin_utils.php:56 www/pm/calendar.php:252
 #: www/pm/include/ProjectTaskHTML.class.php:128
 #: www/pm/include/ProjectTaskHTML.class.php:165
@@ -2322,14 +2336,14 @@ msgstr "Nom court"
 msgid "URL"
 msgstr "URL"
 
-#: plugins/contribtracker/www/global_admin.php:226 www/admin/search.php:97
+#: plugins/contribtracker/www/global_admin.php:226 www/admin/search.php:92
 #: www/admin/unsubscribe.php:121
 msgid "Email"
 msgstr "E-mail"
 
 #: plugins/contribtracker/www/global_admin.php:227
 #: plugins/contribtracker/www/global_admin.php:322
-#: plugins/globalsearch/www/index.php:171 www/docman/admin/index.php:212
+#: plugins/globalsearch/www/index.php:171 www/docman/admin/index.php:221
 #: www/docman/new.php:141 www/forum/admin/index.php:96
 #: www/forum/admin/index.php:168 www/forum/index.php:60
 #: www/forum/myforums.php:74 www/help/trove_cat.php:50 www/mail/index.php:60
@@ -2340,7 +2354,7 @@ msgstr "E-mail"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:33
 #: www/snippet/submit.php:95 www/tracker/admin/form-updatetracker.php:22
 #: www/tracker/admin/ind.php:97 www/tracker/admin/ind.php:129
-#: www/tracker/browse.php:364 www/tracker/ind.php:45
+#: www/tracker/browse.php:366 www/tracker/ind.php:45
 #: www/tracker/mod-limited.php:162
 msgid "Description"
 msgstr "Description"
@@ -2361,11 +2375,11 @@ msgstr "Actions"
 #: plugins/contribtracker/www/project_admin.php:313
 #: www/admin/admin_table.php:306 www/admin/responses_admin.php:46
 #: www/admin/responses_admin.php:93 www/admin/trove/trove_cat_list.php:43
-#: www/docman/admin/index.php:448 www/forum/admin/ForumAdmin.class.php:70
+#: www/docman/admin/index.php:457 www/forum/admin/ForumAdmin.class.php:70
 #: www/forum/include/AttachManager.class.php:148
 #: www/frs/admin/showreleases.php:112 www/people/skills_utils.php:31
 #: www/people/skills_utils.php:89 www/project/admin/editimages.php:268
-#: www/project/admin/editimages.php:299 www/project/admin/index.php:161
+#: www/project/admin/editimages.php:299 www/project/admin/index.php:163
 #: www/survey/include/SurveyHTML.class.php:304
 #: www/survey/include/SurveyHTML.class.php:352
 #: www/survey/include/SurveyHTML.class.php:412
@@ -2387,13 +2401,13 @@ msgstr "Modifier"
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:386
 #: www/admin/admin_table.php:146 www/admin/admin_table.php:307
 #: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:159
-#: www/admin/useredit.php:201 www/docman/admin/index.php:473
-#: www/docman/admin/index.php:494 www/forum/admin/ForumAdmin.class.php:71
+#: www/admin/useredit.php:201 www/docman/admin/index.php:482
+#: www/docman/admin/index.php:503 www/forum/admin/ForumAdmin.class.php:71
 #: www/forum/admin/index.php:187 www/forum/admin/index.php:198
 #: www/forum/include/AttachManager.class.php:149
 #: www/frs/admin/deletepackage.php:76 www/frs/admin/deleterelease.php:81
 #: www/frs/admin/index.php:188 www/frs/admin/showreleases.php:115
-#: www/my/index.php:407 www/news/admin/index.php:133
+#: www/my/index.php:403 www/news/admin/index.php:133
 #: www/people/people_utils.php:174 www/people/people_utils.php:317
 #: www/people/skills_utils.php:32 www/people/skills_utils.php:90
 #: www/pm/admin/index.php:389 www/pm/admin/index.php:400
@@ -2406,7 +2420,7 @@ msgstr "Modifier"
 #: www/tracker/admin/tracker.php:44 www/tracker/deleteartifact.php:37
 #: www/tracker/include/ArtifactTypeHtml.class.php:115
 #: www/tracker/mod-limited.php:160 www/tracker/mod-limited.php:170
-#: www/tracker/mod.php:53 www/tracker/mod.php:257 www/tracker/mod.php:267
+#: www/tracker/mod.php:53 www/tracker/mod.php:256 www/tracker/mod.php:266
 msgid "Delete"
 msgstr "Effacer"
 
@@ -2473,8 +2487,8 @@ msgstr "Description du rôle :"
 #: www/pm/add_task.php:138 www/pm/admin/index.php:221
 #: www/pm/admin/index.php:267 www/pm/admin/index.php:306
 #: www/pm/deletetask.php:36 www/pm/mod_task.php:37 www/pm/mod_task.php:195
-#: www/project/admin/editimages.php:241 www/project/admin/roleedit.php:275
-#: www/project/request.php:67 www/register/projectinfo.php:190
+#: www/project/admin/editimages.php:241 www/project/admin/roleedit.php:277
+#: www/project/request.php:67 www/register/projectinfo.php:191
 #: www/survey/include/SurveyHTML.class.php:537 www/tracker/add.php:26
 #: www/tracker/add.php:56 www/tracker/add.php:118
 #: www/tracker/admin/form-addcanned.php:51
@@ -2503,7 +2517,7 @@ msgstr "Modifier un rôle"
 #: plugins/contribtracker/www/global_admin.php:409
 #: plugins/contribtracker/www/global_admin.php:473
 #: plugins/contribtracker/www/project_admin.php:209
-#: www/admin/configman.php:248
+#: www/admin/configman.php:250
 msgid "Save"
 msgstr "Enregistrer"
 
@@ -2728,7 +2742,7 @@ msgstr "Aucun envoi n'a été fait dans CVS."
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:101
 #: plugins/svntracker/common/svntrackerPlugin.class.php:93
-#: www/frs/index.php:167
+#: www/frs/index.php:166
 msgid "Filename"
 msgstr "Nom du fichier"
 
@@ -2981,7 +2995,7 @@ msgstr "Non"
 #: www/admin/admin_table.php:206 www/forum/admin/index.php:446
 #: www/forum/include/ForumHTML.class.php:530 www/my/rmproject.php:90
 #: www/people/editprofile.php:144 www/people/editprofile.php:204
-#: www/pm/mod_task.php:228 www/register/projectinfo.php:190
+#: www/pm/mod_task.php:228 www/register/projectinfo.php:191
 #: www/reporting/timeadd.php:198
 msgid "Cancel"
 msgstr "Annuler"
@@ -3045,15 +3059,15 @@ msgid "Unknown status ID"
 msgstr "Identifiant de statut inconnu"
 
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:49
-#: www/docman/search.php:90 www/include/Layout.class.php:752
-#: www/include/Layout.class.php:773
+#: www/docman/search.php:90 www/include/Layout.class.php:744
+#: www/include/Layout.class.php:765
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:53
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:41
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:41
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
-#: www/search/index.php:69 www/themes/gforge-simple-theme/Theme.class.php:659
-#: www/themes/gforge-simple-theme/Theme.class.php:677
-#: www/themes/gforge/Theme.class.php:404 www/themes/gforge/Theme.class.php:425
+#: www/search/index.php:69 www/themes/gforge-simple-theme/Theme.class.php:658
+#: www/themes/gforge-simple-theme/Theme.class.php:676
+#: www/themes/gforge/Theme.class.php:410 www/themes/gforge/Theme.class.php:431
 #: www/themes/ultralite/Theme.class.php:134
 msgid "Search"
 msgstr "Rechercher"
@@ -3120,7 +3134,7 @@ msgstr "Voir Mantis"
 msgid "Mantis admin"
 msgstr "Administration de Mantis"
 
-#: plugins/mediawiki/www/LocalSettings.php:207
+#: plugins/mediawiki/www/LocalSettings.php:222
 #: plugins/mediawiki/www/frame.php:38
 msgid "Wiki not created yet, please wait for a few minutes."
 msgstr ""
@@ -3157,110 +3171,114 @@ msgstr "Échec lors de la suppression d'un label : %s"
 msgid "Project label deleted."
 msgstr "Label de projet supprimé."
 
-#: plugins/projectlabels/www/index.php:67
+#: plugins/projectlabels/www/index.php:69
 #, php-format
 msgid "Cannot add label onto project: %s"
 msgstr "Impossible d'ajouter un label au projet : %s"
 
-#: plugins/projectlabels/www/index.php:70
+#: plugins/projectlabels/www/index.php:72
 msgid "The label has been added to the project."
 msgstr "Le label a été ajouté au projet."
 
-#: plugins/projectlabels/www/index.php:81
+#: plugins/projectlabels/www/index.php:75
+msgid "No such project."
+msgstr "Il n'y a pas de projet de ce nom."
+
+#: plugins/projectlabels/www/index.php:86
 #, php-format
 msgid "Cannot remove label: %s"
 msgstr "Impossible de supprimer le label : %s"
 
-#: plugins/projectlabels/www/index.php:84
+#: plugins/projectlabels/www/index.php:89
 msgid "The label has been removed from the project."
 msgstr "Le label a été enlevé du projet."
 
-#: plugins/projectlabels/www/index.php:98
+#: plugins/projectlabels/www/index.php:103
 #, php-format
 msgid "Cannot modify label: %s"
 msgstr "Impossible de modifier le label : %s"
 
-#: plugins/projectlabels/www/index.php:101
+#: plugins/projectlabels/www/index.php:106
 msgid "Label has been saved."
 msgstr "Le label a été sauvegardé."
 
-#: plugins/projectlabels/www/index.php:115
+#: plugins/projectlabels/www/index.php:120
 msgid "Label name:"
 msgstr "Nom du label :"
 
-#: plugins/projectlabels/www/index.php:117
-#: plugins/projectlabels/www/index.php:194
+#: plugins/projectlabels/www/index.php:122
+#: plugins/projectlabels/www/index.php:199
 msgid "Displayed text (or HTML) for the label:"
 msgstr "Texte (ou HTML) à afficher pour le label :"
 
-#: plugins/projectlabels/www/index.php:120
-#: plugins/projectlabels/www/index.php:140
+#: plugins/projectlabels/www/index.php:125
+#: plugins/projectlabels/www/index.php:145
 msgid "This label currently looks like this:"
 msgstr "Ce label a actuellement l'apparence suivante :"
 
-#: plugins/projectlabels/www/index.php:121
+#: plugins/projectlabels/www/index.php:126
 msgid "Save this label"
 msgstr "Sauvegarder ce label"
 
-#: plugins/projectlabels/www/index.php:135
+#: plugins/projectlabels/www/index.php:140
 msgid "Manage labels"
 msgstr "Gestion des labels"
 
-#: plugins/projectlabels/www/index.php:136
+#: plugins/projectlabels/www/index.php:141
 msgid "You can edit the labels that you have already created."
 msgstr "Vous pouvez modifier les labels déjà créés."
 
-#: plugins/projectlabels/www/index.php:149
+#: plugins/projectlabels/www/index.php:154
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
 msgstr[0] "Ce label est utilisé sur le groupe suivant :"
 msgstr[1] "Ce label est utilisé sur les groupes suivants :"
 
-#: plugins/projectlabels/www/index.php:160
+#: plugins/projectlabels/www/index.php:165
 msgid "[Remove this label]"
 msgstr "[Supprimer ce label]"
 
-#: plugins/projectlabels/www/index.php:163
+#: plugins/projectlabels/www/index.php:168
 msgid "This label is not used on any group."
 msgstr "Ce label n'est utilisé sur aucun projet."
 
-#: plugins/projectlabels/www/index.php:167
+#: plugins/projectlabels/www/index.php:172
 msgid "Unix name of the project:"
 msgstr "Nom Unix du projet :"
 
-#: plugins/projectlabels/www/index.php:170
+#: plugins/projectlabels/www/index.php:175
 msgid "Add label to project"
 msgstr "Ajouter un label au projet"
 
-#: plugins/projectlabels/www/index.php:175
+#: plugins/projectlabels/www/index.php:180
 msgid "[Edit this label]"
 msgstr "[Modifier ce label]"
 
-#: plugins/projectlabels/www/index.php:177
+#: plugins/projectlabels/www/index.php:182
 msgid "[Delete this label]"
 msgstr "[Supprimer ce label]"
 
-#: plugins/projectlabels/www/index.php:185
+#: plugins/projectlabels/www/index.php:190
 msgid "Add new labels"
 msgstr "Ajouter de nouveaux labels"
 
-#: plugins/projectlabels/www/index.php:186
+#: plugins/projectlabels/www/index.php:191
 msgid "You can create new labels with the form below."
 msgstr "Vous pouvez créer de nouveaux labels avec le formulaire ci-dessous."
 
-#: plugins/projectlabels/www/index.php:192
+#: plugins/projectlabels/www/index.php:197
 msgid "Name of the label:"
 msgstr "Nom du label :"
 
-#: plugins/projectlabels/www/index.php:193
+#: plugins/projectlabels/www/index.php:198
 msgid "potm"
 msgstr "pdm"
 
-#: plugins/projectlabels/www/index.php:196
+#: plugins/projectlabels/www/index.php:201
 msgid "<p><b>Project of the month!</b></p>"
 msgstr "<p><b>Projet du mois !</b></p>"
 
-#: plugins/projectlabels/www/index.php:198
+#: plugins/projectlabels/www/index.php:203
 msgid "Add label"
 msgstr "Ajouter un label"
 
@@ -3395,7 +3413,7 @@ msgid "Software Map"
 msgstr "Arbre des projets"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:57
-#: www/reporting/projecttime.php:54 www/reporting/sitetime.php:52
+#: www/reporting/projecttime.php:59 www/reporting/sitetime.php:57
 #: www/reporting/usertime.php:70
 msgid "By Category"
 msgstr "Par catégorie"
@@ -3730,7 +3748,11 @@ msgid ""
 "<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can "
 "access the Bazaar branches via this method. SSH must be installed on your "
 "client machine. Enter your site password when prompted.</p>"
-msgstr "<p><b>Accès Bazaar via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr ""
+"<p><b>Accès Bazaar via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:97
 #: plugins/scmbzr/common/BzrPlugin.class.php:100
@@ -3784,11 +3806,11 @@ msgstr "Accès à ClearCase"
 #: plugins/scmccase/common/CCasePlugin.class.php:97
 #, php-format
 msgid ""
-"Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>%1"
-"$s</tt> VOB in your ClearCase Explorer."
+"Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>"
+"%1$s</tt> VOB in your ClearCase Explorer."
 msgstr ""
-"Montez le VOB avec <tt>cleartool mount %1$s</tt> ou choisissez le VOB <tt>%1"
-"$s</tt> dans votre explorateur ClearCase."
+"Montez le VOB avec <tt>cleartool mount %1$s</tt> ou choisissez le VOB <tt>"
+"%1$s</tt> dans votre explorateur ClearCase."
 
 #: plugins/scmccase/common/CCasePlugin.class.php:114
 msgid "History"
@@ -3850,7 +3872,11 @@ msgid ""
 "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can "
 "access the CPOLD tree via this method. SSH must be installed on your client "
 "machine. Enter your site password when prompted.</p>"
-msgstr "<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr ""
+"<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:79
 msgid ""
@@ -3949,7 +3975,7 @@ msgstr "Parcourir le dépôt CVS"
 #: www/project/admin/editimages.php:271 www/reporting/usersummary.php:104
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:32
 #: www/tracker/detail.php:169 www/tracker/mod-limited.php:161
-#: www/tracker/mod.php:258
+#: www/tracker/mod.php:257
 msgid "Name"
 msgstr "Nom"
 
@@ -4028,7 +4054,11 @@ msgid ""
 "<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can "
 "access the GIT tree via this method. SSH must be installed on your client "
 "machine. Enter your site password when prompted.</p>"
-msgstr "<p><b>Accès Git via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr ""
+"<p><b>Accès Git via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:92
 msgid ""
@@ -4079,9 +4109,13 @@ msgid ""
 "<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers "
 "can access the Mercurial tree via this method. SSH must be installed on your "
 "client machine. Enter your site password when prompted.</p>"
-msgstr "<p><b>Accès Mercurial via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr ""
+"<p><b>Accès Mercurial via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
-#: plugins/scmhg/common/HgPlugin.class.php:67
+#: plugins/scmhg/common/HgPlugin.class.php:68
 msgid ""
 "<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers "
 "can access the Mercurial tree via this method. SSH must be installed on your "
@@ -4120,14 +4154,21 @@ msgid ""
 "<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers "
 "can access the SVN tree via this method. SSH must be installed on your "
 "client machine. Enter your site password when prompted.</p>"
-msgstr "<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr ""
+"<p><b>Accès Subversion via SSH pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+"mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:104
 msgid ""
 "<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers "
 "can access the SVN tree via this method. Enter your site password when "
 "prompted.</p>"
-msgstr "<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez avoir besoin de taper votre mot de passe.</p>"
+msgstr ""
+"<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode "
+"d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez avoir "
+"besoin de taper votre mot de passe.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:109
 msgid ""
@@ -4239,8 +4280,8 @@ msgid ""
 "\n"
 " -- the %1$s staff"
 msgstr ""
-"Vous avez demandé une modification d'adresse e-mail pour votre compte sur %1"
-"$s.\n"
+"Vous avez demandé une modification d'adresse e-mail pour votre compte sur "
+"%1$s.\n"
 "Veuillez visiter la page suivante pour que ce changement prenne effet :\n"
 "\n"
 "%2$s\n"
@@ -4403,7 +4444,7 @@ msgstr ""
 #: www/people/people_utils.php:173 www/people/people_utils.php:316
 #: www/pm/admin/index.php:367 www/pm/calendar.php:277
 #: www/project/admin/database.php:236 www/project/admin/editgroupinfo.php:353
-#: www/project/admin/index.php:263 www/project/admin/tools.php:281
+#: www/project/admin/index.php:265 www/project/admin/tools.php:281
 #: www/project/admin/users.php:274 www/project/admin/users.php:290
 #: www/reporting/timecategory.php:99 www/scm/admin/index.php:113
 msgid "Update"
@@ -4602,8 +4643,8 @@ msgid ""
 "<p>Your account is currently pending your email confirmation.\t\tVisiting "
 "the link sent to you in this email will activate your account.\t\t<p>If you "
 "need this email resent, please click below and a confirmation\t\temail will "
-"be sent to the email address you provided in registration.\t\t<p><a href=\"%1"
-"$s\">[Resend Confirmation Email]</a>\t\t<br><hr>\t\t<p>"
+"be sent to the email address you provided in registration.\t\t<p><a href="
+"\"%1$s\">[Resend Confirmation Email]</a>\t\t<br><hr>\t\t<p>"
 msgstr ""
 "<p>Votre compte est actuellement en attente d'une confirmation par\n"
 "email, et sera activé lorsque vous visiterez le lien qui vous a été\n"
@@ -4735,9 +4776,9 @@ msgstr ""
 "compte.  Veuillez suivre les instructions qu'il contient pour changer le mot "
 "de passe de votre compte."
 
-#: www/account/lostpw.php:73 www/include/Layout.class.php:428
-#: www/themes/gforge-simple-theme/Theme.class.php:135
-#: www/themes/gforge-simple-theme/Theme.class.php:347
+#: www/account/lostpw.php:73 www/include/Layout.class.php:420
+#: www/themes/gforge-simple-theme/Theme.class.php:134
+#: www/themes/gforge-simple-theme/Theme.class.php:346
 #: www/themes/lite/Theme.class.php:267 www/themes/ultralite/Theme.class.php:40
 #, php-format
 msgid "Home"
@@ -4962,23 +5003,23 @@ msgid "FRS Release"
 msgstr "Publication de fichiers"
 
 #: www/activity/index.php:149 www/frs/reporting/downloads.php:100
-#: www/project/stats/index.php:61 www/reporting/groupadded.php:56
-#: www/reporting/groupcum.php:56 www/reporting/projectact.php:61
-#: www/reporting/projecttime.php:72 www/reporting/siteact.php:60
-#: www/reporting/sitetime.php:68 www/reporting/sitetimebar.php:55
-#: www/reporting/toolspie.php:59 www/reporting/useract.php:73
-#: www/reporting/useradded.php:55 www/reporting/usercum.php:56
+#: www/project/stats/index.php:64 www/reporting/groupadded.php:60
+#: www/reporting/groupcum.php:60 www/reporting/projectact.php:65
+#: www/reporting/projecttime.php:77 www/reporting/siteact.php:64
+#: www/reporting/sitetime.php:73 www/reporting/sitetimebar.php:60
+#: www/reporting/toolspie.php:64 www/reporting/useract.php:77
+#: www/reporting/useradded.php:59 www/reporting/usercum.php:60
 #: www/reporting/usersummary.php:72 www/reporting/usertime.php:86
 msgid "Start"
 msgstr "Début"
 
 #: www/activity/index.php:150 www/frs/reporting/downloads.php:102
-#: www/project/stats/index.php:62 www/reporting/groupadded.php:57
-#: www/reporting/groupcum.php:57 www/reporting/projectact.php:62
-#: www/reporting/projecttime.php:73 www/reporting/siteact.php:61
-#: www/reporting/sitetime.php:69 www/reporting/sitetimebar.php:56
-#: www/reporting/toolspie.php:60 www/reporting/useract.php:74
-#: www/reporting/useradded.php:56 www/reporting/usercum.php:57
+#: www/project/stats/index.php:65 www/reporting/groupadded.php:61
+#: www/reporting/groupcum.php:61 www/reporting/projectact.php:66
+#: www/reporting/projecttime.php:78 www/reporting/siteact.php:65
+#: www/reporting/sitetime.php:74 www/reporting/sitetimebar.php:61
+#: www/reporting/toolspie.php:65 www/reporting/useract.php:78
+#: www/reporting/useradded.php:60 www/reporting/usercum.php:61
 #: www/reporting/usersummary.php:73 www/reporting/usertime.php:87
 msgid "End"
 msgstr "Fin"
@@ -4987,8 +5028,8 @@ msgstr "Fin"
 msgid "No Activity Found"
 msgstr "Aucune activité trouvée"
 
-#: www/activity/index.php:198 www/reporting/projecttime.php:85
-#: www/reporting/sitetime.php:81 www/reporting/sitetimebar.php:85
+#: www/activity/index.php:198 www/reporting/projecttime.php:90
+#: www/reporting/sitetime.php:86 www/reporting/sitetimebar.php:90
 msgid "Time"
 msgstr "Temps"
 
@@ -5005,7 +5046,7 @@ msgstr "Validation pour l'élément de suivi"
 
 #: www/activity/index.php:221 www/activity/index.php:226
 #: www/tracker/taskmgr.php:87 www/tracker/taskmgr.php:140
-#: www/tracker/tracker.php:274
+#: www/tracker/tracker.php:276
 msgid "Tracker Item"
 msgstr "Élément de suivi"
 
@@ -5032,7 +5073,7 @@ msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
 
 #: www/admin/admin_table.php:54 www/admin/database.php:174
 #: www/admin/trove/trove_cat_add.php:126 www/admin/trove/trove_cat_list.php:41
-#: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:396
+#: www/admin/trove/trove_cat_list.php:44 www/docman/admin/index.php:405
 #: www/forum/include/AttachManager.class.php:161 www/pm/mod_task.php:228
 #: www/reporting/timeadd.php:198 www/reporting/timecategory.php:101
 #: www/trove/admin/trove_cat_add.php:92 www/trove/admin/trove_cat_list.php:32
@@ -5212,7 +5253,7 @@ msgstr "Proposé par %1$s (%2$s)"
 msgid "Approve All On This Page"
 msgstr "Tout approuver sur cette page"
 
-#: www/admin/configman.php:59 www/admin/configman.php:184
+#: www/admin/configman.php:61 www/admin/configman.php:186
 #, php-format
 msgid ""
 "Could not open %s file for read/write. Check the permissions for apache."
@@ -5220,47 +5261,47 @@ msgstr ""
 "Le fichier %s n'a pas pu être ouvert en lecture/écriture.  Veuillez vérifier "
 "les permissions pour Apache."
 
-#: www/admin/configman.php:66 www/admin/configman.php:252
+#: www/admin/configman.php:68 www/admin/configman.php:254
 #, php-format
 msgid "Could not open %s for read. Check the permissions for apache."
 msgstr ""
 "Le fichier %s n'a pas pu être ouvert en lecture.  Veuillez vérifier les "
 "permissions pour Apache."
 
-#: www/admin/configman.php:95
+#: www/admin/configman.php:97
 msgid "Choose"
 msgstr "Choisir"
 
-#: www/admin/configman.php:149
+#: www/admin/configman.php:151
 #, php-format
 msgid "File %s wrote successfully."
 msgstr "Le fichier %s a été écrit correctement."
 
-#: www/admin/configman.php:152
+#: www/admin/configman.php:154
 #, php-format
 msgid "File %s wasn't written or is empty."
 msgstr "Le fichier %s est vide ou n'a pas été écrit."
 
-#: www/admin/configman.php:156
+#: www/admin/configman.php:158
 #, php-format
 msgid "Could not open %s for write. Check the permissions for apache."
 msgstr ""
 "Le fichier %s n'a pas pu être ouvert en écriture.  Veuillez vérifier les "
 "permissions pour Apache."
 
-#: www/admin/configman.php:193 www/admin/configman.php:209
+#: www/admin/configman.php:195 www/admin/configman.php:211
 msgid "Attribute"
 msgstr "Attribut"
 
-#: www/admin/configman.php:193
+#: www/admin/configman.php:195
 msgid "On"
 msgstr "Marche"
 
-#: www/admin/configman.php:193
+#: www/admin/configman.php:195
 msgid "Off"
 msgstr "Arrêt"
 
-#: www/admin/configman.php:209
+#: www/admin/configman.php:211
 msgid "Value"
 msgstr "Valeur"
 
@@ -5306,15 +5347,15 @@ msgstr "Administration du site : gestion des bases de données des groupes"
 msgid "Statistics for Project Databases"
 msgstr "Statistiques pour les bases de données des projets"
 
-#: www/admin/database.php:106 www/admin/massmail.php:149 www/frs/index.php:172
+#: www/admin/database.php:106 www/admin/massmail.php:149 www/frs/index.php:171
 #: www/people/editprofile.php:272 www/people/skills_utils.php:34
-#: www/people/skills_utils.php:142 www/project/stats/index.php:60
-#: www/reporting/groupadded.php:55 www/reporting/groupcum.php:55
-#: www/reporting/projectact.php:60 www/reporting/projecttime.php:71
-#: www/reporting/projecttime.php:84 www/reporting/siteact.php:59
-#: www/reporting/sitetime.php:67 www/reporting/sitetime.php:81
-#: www/reporting/useract.php:72 www/reporting/useradded.php:54
-#: www/reporting/usercum.php:55 www/reporting/usertime.php:85
+#: www/people/skills_utils.php:142 www/project/stats/index.php:63
+#: www/reporting/groupadded.php:59 www/reporting/groupcum.php:59
+#: www/reporting/projectact.php:64 www/reporting/projecttime.php:76
+#: www/reporting/projecttime.php:89 www/reporting/siteact.php:63
+#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:86
+#: www/reporting/useract.php:76 www/reporting/useradded.php:58
+#: www/reporting/usercum.php:59 www/reporting/usertime.php:85
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:33
 #: www/tracker/admin/form-addextrafield.php:23
 msgid "Type"
@@ -5390,7 +5431,7 @@ msgstr "Actif (A)"
 msgid "Holding (H)"
 msgstr "Suspendu (H)"
 
-#: www/admin/groupedit.php:131 www/admin/grouplist.php:86
+#: www/admin/groupedit.php:131 www/admin/grouplist.php:84
 msgid "Public?"
 msgstr "Public ?"
 
@@ -5411,33 +5452,33 @@ msgstr ""
 msgid "Group List"
 msgstr "Liste des groupes"
 
-#: www/admin/grouplist.php:46
+#: www/admin/grouplist.php:52
 msgid "Groups that begin with"
 msgstr "Groupes commençant par :"
 
-#: www/admin/grouplist.php:66
+#: www/admin/grouplist.php:73
 msgid "Group List for Category:"
 msgstr "Liste des groupes de la catégorie :"
 
-#: www/admin/grouplist.php:82
+#: www/admin/grouplist.php:80
 msgid "Group Name (click to edit)"
 msgstr "Nom du groupe (cliquez pour modifier)"
 
-#: www/admin/grouplist.php:83
+#: www/admin/grouplist.php:81
 msgid "Register Time"
 msgstr "Date d'enregistrement"
 
-#: www/admin/grouplist.php:84 www/admin/search.php:166
+#: www/admin/grouplist.php:82 www/admin/search.php:155
 #: www/admin/useredit.php:246 www/project/admin/massadd.php:95
 #: www/project/admin/massfinish.php:81
 msgid "Unix name"
 msgstr "Nom Unix"
 
-#: www/admin/grouplist.php:87 www/snippet/submit.php:104
+#: www/admin/grouplist.php:85 www/snippet/submit.php:104
 msgid "License"
 msgstr "Licence&nbsp;"
 
-#: www/admin/grouplist.php:88
+#: www/admin/grouplist.php:86
 msgid "Members"
 msgstr "Membres"
 
@@ -5604,6 +5645,10 @@ msgstr "Outil d'administration des hôtes virtuels"
 msgid "Project Database Administration"
 msgstr "Administration de la base de données du projet"
 
+#: www/admin/index.php:181
+msgid "Job / Categories Administration"
+msgstr "Administration des catégories de postes"
+
 #: www/admin/massmail.php:45
 msgid "Missing parameter, You must select target audience for mailing"
 msgstr ""
@@ -5692,12 +5737,12 @@ msgstr "(une information sur la désinscription sera ajoutée le cas échéant)"
 msgid "Schedule for Mailing"
 msgstr "Programmation de l'envoi de messages"
 
-#: www/admin/massmail.php:148 www/admin/search.php:94 www/admin/search.php:165
-#: www/docman/admin/index.php:367 www/my/dashboard.php:77 www/my/index.php:53
+#: www/admin/massmail.php:148 www/admin/search.php:89 www/admin/search.php:154
+#: www/docman/admin/index.php:376 www/my/dashboard.php:77 www/my/index.php:53
 #: www/my/index.php:95 www/my/index.php:146
 #: www/project/admin/editimages.php:269
-#: www/tracker/admin/form-addcanned.php:23 www/tracker/browse.php:158
-#: www/tracker/browse.php:360 www/tracker/query.php:176
+#: www/tracker/admin/form-addcanned.php:23 www/tracker/browse.php:160
+#: www/tracker/browse.php:362 www/tracker/query.php:176
 msgid "ID"
 msgstr "Identifiant"
 
@@ -5893,7 +5938,7 @@ msgstr ""
 msgid "Admin Search Results"
 msgstr "Résultats de recherche"
 
-#: www/admin/search.php:85
+#: www/admin/search.php:80
 #, php-format
 msgid "User search with criteria <em>%1$s</em>: %2$s match"
 msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
@@ -5902,14 +5947,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultats"
 
-#: www/admin/search.php:95 www/admin/unsubscribe.php:119
+#: www/admin/search.php:90 www/admin/unsubscribe.php:119
 #: www/project/admin/users.php:272
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:32
 #: www/top/topusers.php:68
 msgid "User name"
 msgstr "Nom d'utilisateur"
 
-#: www/admin/search.php:96 www/admin/unsubscribe.php:120
+#: www/admin/search.php:91 www/admin/unsubscribe.php:120
 #: www/admin/useredit.php:121 www/include/user_home.php:44
 #: www/project/admin/massadd.php:94 www/project/admin/massfinish.php:80
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:33
@@ -5917,11 +5962,11 @@ msgstr "Nom d'utilisateur"
 msgid "Real name"
 msgstr "Nom complet"
 
-#: www/admin/search.php:98
+#: www/admin/search.php:93
 msgid "Member since"
 msgstr "Membre depuis le"
 
-#: www/admin/search.php:158
+#: www/admin/search.php:147
 #, php-format
 msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
@@ -5930,17 +5975,18 @@ msgstr[0] ""
 msgstr[1] ""
 "Recherche de groupes selon les critères <em>%1$s</em> : %2$s résultats"
 
-#: www/admin/search.php:167
+#: www/admin/search.php:156
 msgid "Full Name"
 msgstr "Nom complet"
 
-#: www/admin/search.php:168
+#: www/admin/search.php:157
 msgid "Registered"
 msgstr "Inscrit"
 
 #: www/admin/trove/trove_cat_add.php:68 www/admin/trove/trove_cat_edit.php:73
 #: www/include/trove.php:392 www/include/trove.php:402
 #: www/include/trove.php:407 www/include/trove.php:412
+#: www/include/trove.php:417
 msgid "Error In Trove Operation"
 msgstr "Erreur lors d'une opération sur l'arbre"
 
@@ -6061,16 +6107,17 @@ msgstr "Utilisateur désabonné"
 #, php-format
 msgid ""
 "Use field below to find users which match given pattern with the %1$s "
-"username, real name, or email address (substring match is preformed, use '%"
-"%' in the middle of pattern to specify 0 or more arbitrary characters). "
+"username, real name, or email address (substring match is preformed, use "
+"'%%' in the middle of pattern to specify 0 or more arbitrary characters). "
 "Click on the username to unsubscribe user from site mailings (new form will "
 "appear)."
 msgstr ""
 "Utilisez le champ ci-dessous pour trouver des utilisateurs correspondant à "
 "un critère donné portant sur le nom d'utilisateur %1$s, le nom complet, ou "
 "l'adresse email.  La recherche porte sur des sous-chaînes, et il est "
-"possible d'utiliser « %% » pour chercher une sous-chaîne quelconque.  Cliquez "
-"sur un nom d'utilisateur pour le désabonner des envois de messages en masse."
+"possible d'utiliser « %% » pour chercher une sous-chaîne quelconque.  "
+"Cliquez sur un nom d'utilisateur pour le désabonner des envois de messages "
+"en masse."
 
 #: www/admin/unsubscribe.php:103
 msgid "Show users matching pattern"
@@ -6179,7 +6226,7 @@ msgstr "Utilisateur mis à jour au statut %1$s"
 msgid "Key"
 msgstr "Légende&nbsp;"
 
-#: www/admin/userlist.php:63 www/docman/admin/index.php:162
+#: www/admin/userlist.php:63 www/docman/admin/index.php:171
 #: www/frs/admin/index.php:97 www/frs/admin/showreleases.php:82
 #: www/pm/admin/index.php:339
 msgid "Deleted"
@@ -6402,35 +6449,35 @@ msgstr ""
 "Vous pouvez réévaluer cette personne en retournant sur la page d'évaluation "
 "et en y modifiant les informations."
 
-#: www/docman/admin/index.php:87
+#: www/docman/admin/index.php:96
 #, php-format
 msgid "Invalid file attack attempt %1$s"
 msgstr "Tentative d'attaque par fichier invalide (%1$s)"
 
-#: www/docman/admin/index.php:109 www/docman/admin/index.php:123
-#: www/pm/admin/index.php:140 www/tracker/tracker.php:393
+#: www/docman/admin/index.php:118 www/docman/admin/index.php:132
+#: www/pm/admin/index.php:140 www/tracker/tracker.php:392
 msgid "Updated successfully"
 msgstr "Mis à jour avec succès"
 
-#: www/docman/admin/index.php:135
+#: www/docman/admin/index.php:144
 msgid "Deleted successfully"
 msgstr "Suppression effectuée"
 
-#: www/docman/admin/index.php:150
+#: www/docman/admin/index.php:159
 msgid "Created successfully"
 msgstr "Créé avec succès"
 
-#: www/docman/admin/index.php:192 www/docman/admin/index.php:349
-#: www/docman/admin/index.php:430 www/docman/admin/index.php:466
-#: www/docman/admin/index.php:484
+#: www/docman/admin/index.php:201 www/docman/admin/index.php:358
+#: www/docman/admin/index.php:439 www/docman/admin/index.php:475
+#: www/docman/admin/index.php:493
 msgid "Document Manager Administration"
 msgstr "Gestionnaire de documents : Administration"
 
-#: www/docman/admin/index.php:192
+#: www/docman/admin/index.php:201
 msgid "Edit Docs"
 msgstr "Éditer les documents"
 
-#: www/docman/admin/index.php:196 www/docman/new.php:129
+#: www/docman/admin/index.php:205 www/docman/new.php:129
 msgid ""
 "<strong>Document Title</strong>:  Refers to the relatively brief title of "
 "the document (e.g. How to use the download server)<br /><strong>Description:"
@@ -6441,21 +6488,21 @@ msgstr ""
 "téléchargement)<br /><strong>Description</strong> : une brève description "
 "placée juste en dessous du titre."
 
-#: www/docman/admin/index.php:205 www/docman/new.php:134
+#: www/docman/admin/index.php:214 www/docman/new.php:134
 msgid "Document Title"
 msgstr "Titre du document"
 
-#: www/docman/admin/index.php:205 www/docman/admin/index.php:212
+#: www/docman/admin/index.php:214 www/docman/admin/index.php:221
 #: www/docman/new.php:134 www/docman/new.php:141
 #, php-format
 msgid "(at least %1$s characters)"
 msgstr "(%1$s caractères minimum)."
 
-#: www/docman/admin/index.php:219
+#: www/docman/admin/index.php:228
 msgid "File"
 msgstr "Fichier"
 
-#: www/docman/admin/index.php:235
+#: www/docman/admin/index.php:244
 msgid ""
 "Edit the contents to your desire or leave them as they are to remain "
 "unmodified."
@@ -6463,72 +6510,72 @@ msgstr ""
 "Éditez à votre guise le contenu, ou laissez-le tel quel si vous ne souhaitez "
 "pas le modifier."
 
-#: www/docman/admin/index.php:267 www/docman/include/doc_utils.php:114
+#: www/docman/admin/index.php:276 www/docman/include/doc_utils.php:114
 #: www/docman/new.php:217 www/snippet/package.php:140
 #: www/snippet/submit.php:110 www/stats/i18n.php:20
 msgid "Language"
 msgstr "Langage"
 
-#: www/docman/admin/index.php:277 www/docman/new.php:223
+#: www/docman/admin/index.php:286 www/docman/new.php:223
 msgid "Group that document belongs in"
 msgstr "Groupe auquel le document appartient"
 
-#: www/docman/admin/index.php:288 www/pm/browse_task.php:358
+#: www/docman/admin/index.php:297 www/pm/browse_task.php:358
 #: www/project/admin/database.php:210
-#: www/tracker/admin/form-customizelist.php:26 www/tracker/browse.php:308
-#: www/tracker/browse.php:370 www/tracker/browse.php:555
+#: www/tracker/admin/form-customizelist.php:26 www/tracker/browse.php:310
+#: www/tracker/browse.php:372 www/tracker/browse.php:552
 #: www/tracker/detail.php:50 www/tracker/mod-limited.php:103
-#: www/tracker/mod.php:147 www/tracker/query.php:324
+#: www/tracker/mod.php:146 www/tracker/query.php:324
 msgid "State"
 msgstr "Etat"
 
-#: www/docman/admin/index.php:315
+#: www/docman/admin/index.php:324
 msgid "Specify an outside URL where the file will be referenced"
 msgstr "OU spécifier une URL externe pour le fichier"
 
-#: www/docman/admin/index.php:318
+#: www/docman/admin/index.php:327
 msgid "OPTIONAL: Upload new file"
 msgstr "Optionnel : Uploader un nouveau fichier"
 
-#: www/docman/admin/index.php:334
+#: www/docman/admin/index.php:343
 msgid "Submit Edit"
 msgstr "Valider"
 
-#: www/docman/admin/index.php:335
+#: www/docman/admin/index.php:344
 msgid "Permanently delete this document"
 msgstr "Permanently delete this document"
 
-#: www/docman/admin/index.php:349 www/docman/admin/index.php:351
+#: www/docman/admin/index.php:358 www/docman/admin/index.php:360
 msgid "Admin Document Groups"
 msgstr "Gestion des groupes de documents"
 
-#: www/docman/admin/index.php:368 www/docman/admin/index.php:437
+#: www/docman/admin/index.php:377 www/docman/admin/index.php:446
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:32
 #: www/stats/site_stats_utils.php:228
 msgid "Group Name"
 msgstr "Nom du groupe"
 
-#: www/docman/admin/index.php:369
+#: www/docman/admin/index.php:378
 msgid "Delete Group"
 msgstr "Effacer le groupe"
 
-#: www/docman/admin/index.php:379
+#: www/docman/admin/index.php:388
 msgid "No Document Groups defined"
 msgstr "Aucun groupe de document défini"
 
-#: www/docman/admin/index.php:382
+#: www/docman/admin/index.php:391
 msgid "Add a group"
 msgstr "Ajouter un groupe&nbsp;"
 
-#: www/docman/admin/index.php:386
+#: www/docman/admin/index.php:395
 msgid "New Group Name"
 msgstr "Nouveau nom du groupe&nbsp;"
 
-#: www/docman/admin/index.php:391 www/docman/admin/index.php:442
+#: www/docman/admin/index.php:400 www/docman/admin/index.php:451
 msgid "Belongs to"
 msgstr "Appartient à"
 
-#: www/docman/admin/index.php:400 www/docman/admin/index.php:452
+#: www/docman/admin/index.php:409 www/docman/admin/index.php:461
 msgid ""
 "Group name will be used as a title, so it should be formatted "
 "correspondingly."
@@ -6536,19 +6583,19 @@ msgstr ""
 "Le nom du groupe sera utilisé comme titre. Il doit donc être formaté en "
 "conséquence."
 
-#: www/docman/admin/index.php:430 www/docman/admin/index.php:484
+#: www/docman/admin/index.php:439 www/docman/admin/index.php:493
 msgid "Edit Groups"
 msgstr "Modifier les groupes"
 
-#: www/docman/admin/index.php:432
+#: www/docman/admin/index.php:441
 msgid "Edit a group"
 msgstr "Modifier un groupe"
 
-#: www/docman/admin/index.php:466
+#: www/docman/admin/index.php:475
 msgid "Delete Groups"
 msgstr "Supprimer des groupes de documents"
 
-#: www/docman/admin/index.php:472
+#: www/docman/admin/index.php:481
 msgid ""
 "You are about to permanently delete this document group and its content "
 "(documents and subgroups)."
@@ -6556,38 +6603,38 @@ msgstr ""
 "Vous êtes sur le point de supprimer définitivement ce groupe de documents et "
 "son contenu (documents et sous-groupes)."
 
-#: www/docman/admin/index.php:489
+#: www/docman/admin/index.php:498
 msgid "You are about to permanently delete this document."
 msgstr "Vous êtes sur le point de supprimer définitivement ce document."
 
-#: www/docman/admin/index.php:491
+#: www/docman/admin/index.php:500
 #: www/tracker/admin/form-deleteextrafield.php:15
 #: www/tracker/admin/form-deleteextrafieldelement.php:38
 #: www/tracker/admin/form-deletetracker.php:10
 msgid "I'm Sure."
 msgstr "Je confirme"
 
-#: www/docman/admin/index.php:492
+#: www/docman/admin/index.php:501
 #: www/tracker/admin/form-deleteextrafield.php:16
 #: www/tracker/admin/form-deleteextrafieldelement.php:39
 #: www/tracker/admin/form-deletetracker.php:11
 msgid "I'm Really Sure."
 msgstr "Je confirme vraiment"
 
-#: www/docman/admin/index.php:521
+#: www/docman/admin/index.php:530
 #, php-format
 msgid "Project %s"
 msgstr "Projet %s"
 
-#: www/docman/admin/index.php:521 www/docman/admin/index.php:524
+#: www/docman/admin/index.php:530 www/docman/admin/index.php:533
 msgid "Document Manager: Administration"
 msgstr "Gestionnaire de documents : Administration"
 
-#: www/docman/admin/index.php:526
+#: www/docman/admin/index.php:535
 msgid "Add/Edit/Delete Document Groups"
 msgstr "Ajouter/éditer/supprimer des groupes de documents"
 
-#: www/docman/admin/index.php:532 www/docman/index.php:120
+#: www/docman/admin/index.php:541 www/docman/index.php:120
 msgid "This project has no visible documents"
 msgstr "Ce projet n'a pas de document visible"
 
@@ -6715,7 +6762,7 @@ msgid "Exports Available"
 msgstr "Exports disponibles"
 
 #: www/export/projnews.php:81 www/forum/include/ForumHTML.class.php:96
-#: www/include/project_home.php:454 www/index_std.php:59
+#: www/include/project_home.php:455 www/index_std.php:59
 msgid "Latest News"
 msgstr "Dernières annonces"
 
@@ -6983,7 +7030,7 @@ msgstr "Utilisateurs surveillant ce forum"
 
 #: www/forum/attachment.php:45 www/forum/attachment.php:134
 #: www/forum/attachment.php:162 www/tracker/detail.php:145
-#: www/tracker/mod-limited.php:140 www/tracker/mod.php:239
+#: www/tracker/mod-limited.php:140 www/tracker/mod.php:238
 msgid "Attachments"
 msgstr "Pièces jointes"
 
@@ -7707,7 +7754,7 @@ msgid "Release Notes"
 msgstr "Notes"
 
 #: www/frs/admin/qrs.php:288 www/tracker/mod-limited.php:196
-#: www/tracker/mod.php:293
+#: www/tracker/mod.php:292
 msgid "Change Log"
 msgstr "Journaux"
 
@@ -7770,32 +7817,32 @@ msgstr ""
 "Avant de télécharger, vous pouvez lire les commentaires et changements en "
 "cliquant sur le numéro de version."
 
-#: www/frs/index.php:87
+#: www/frs/index.php:86
 msgid "To create a new release click here."
 msgstr "Pour créer une nouvelle version, cliquez ici."
 
-#: www/frs/index.php:106
+#: www/frs/index.php:105
 msgid "Stop monitoring this package"
 msgstr "Ne plus suivre ce paquet"
 
-#: www/frs/index.php:110 www/include/project_home.php:263
+#: www/frs/index.php:109 www/include/project_home.php:263
 msgid "Monitor this package"
 msgstr "Suivre ce paquet"
 
-#: www/frs/index.php:128 www/frs/index.php:188
+#: www/frs/index.php:127 www/frs/index.php:187
 msgid "No releases"
 msgstr "Pas de version"
 
-#: www/frs/index.php:169 www/pm/ganttpage.php:171
+#: www/frs/index.php:168 www/pm/ganttpage.php:147
 #: www/project/admin/editimages.php:273
 msgid "Size"
 msgstr "Taille"
 
-#: www/frs/index.php:170
+#: www/frs/index.php:169
 msgid "D/L"
 msgstr "D/L"
 
-#: www/frs/index.php:171
+#: www/frs/index.php:170
 msgid "Arch"
 msgstr "Archive"
 
@@ -7823,13 +7870,13 @@ msgstr "Rapports sur le système de publication de fichiers"
 msgid "Package"
 msgstr "Paquet"
 
-#: www/frs/reporting/downloads.php:104 www/project/stats/index.php:63
-#: www/reporting/groupadded.php:58 www/reporting/groupcum.php:58
-#: www/reporting/projectact.php:63 www/reporting/projecttime.php:74
-#: www/reporting/siteact.php:62 www/reporting/sitetime.php:70
-#: www/reporting/sitetimebar.php:57 www/reporting/toolspie.php:61
-#: www/reporting/useract.php:75 www/reporting/useradded.php:57
-#: www/reporting/usercum.php:58 www/reporting/usersummary.php:75
+#: www/frs/reporting/downloads.php:104 www/project/stats/index.php:66
+#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:62
+#: www/reporting/projectact.php:67 www/reporting/projecttime.php:79
+#: www/reporting/siteact.php:66 www/reporting/sitetime.php:75
+#: www/reporting/sitetimebar.php:62 www/reporting/toolspie.php:66
+#: www/reporting/useract.php:79 www/reporting/useradded.php:61
+#: www/reporting/usercum.php:62 www/reporting/usersummary.php:75
 #: www/reporting/usertime.php:88
 msgid "Refresh"
 msgstr "Rafraîchir"
@@ -7931,7 +7978,7 @@ msgstr ""
 "pour des bugs ou des demandes de support pour lesquels un utilisateur peut "
 "avoir découvert un problème critique pour le projet."
 
-#: www/help/tracker.php:60 www/pm/ganttpage.php:170
+#: www/help/tracker.php:60 www/pm/ganttpage.php:146
 msgid "Resolution"
 msgstr "Précision"
 
@@ -7999,117 +8046,117 @@ msgid "Short Name"
 msgstr "Nom court"
 
 #: www/include/Layout.class.php:89 www/include/help.php:35
+#: www/themes/gforge-simple-theme/Theme.class.php:78
 #: www/themes/gforge-simple-theme/Theme.class.php:79
-#: www/themes/gforge-simple-theme/Theme.class.php:80
 #: www/themes/gforge/Theme.class.php:48 www/themes/lite/Theme.class.php:77
 #: www/themes/ultralite/Theme.class.php:31
 msgid "en"
 msgstr "fr"
 
-#: www/include/Layout.class.php:164
-#: www/themes/gforge-simple-theme/Theme.class.php:141
+#: www/include/Layout.class.php:156
+#: www/themes/gforge-simple-theme/Theme.class.php:140
 #: www/themes/gforge/Theme.class.php:90 www/themes/lite/Theme.class.php:127
 #: www/themes/osx/Theme.class.php:81 www/themes/ultralite/Theme.class.php:46
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: www/include/Layout.class.php:165
-#: www/themes/gforge-simple-theme/Theme.class.php:143
+#: www/include/Layout.class.php:157
+#: www/themes/gforge-simple-theme/Theme.class.php:142
 #: www/themes/gforge/Theme.class.php:92 www/themes/lite/Theme.class.php:129
 #: www/themes/osx/Theme.class.php:83 www/themes/ultralite/Theme.class.php:47
 msgid "My Account"
 msgstr "Mon compte"
 
-#: www/include/Layout.class.php:167
-#: www/themes/gforge-simple-theme/Theme.class.php:146
+#: www/include/Layout.class.php:159
+#: www/themes/gforge-simple-theme/Theme.class.php:145
 #: www/themes/gforge/Theme.class.php:100 www/themes/osx/Theme.class.php:86
 #: www/themes/ultralite/Theme.class.php:51
 msgid "Log In"
 msgstr "S'identifier"
 
-#: www/include/Layout.class.php:169
-#: www/themes/gforge-simple-theme/Theme.class.php:149
+#: www/include/Layout.class.php:161
+#: www/themes/gforge-simple-theme/Theme.class.php:148
 #: www/themes/gforge/Theme.class.php:103 www/themes/lite/Theme.class.php:132
 #: www/themes/osx/Theme.class.php:87 www/themes/ultralite/Theme.class.php:52
 msgid "New Account"
 msgstr "Nouveau compte"
 
-#: www/include/Layout.class.php:290
-#: www/themes/gforge-simple-theme/Theme.class.php:208
-#: www/themes/gforge/Theme.class.php:143
+#: www/include/Layout.class.php:282
+#: www/themes/gforge-simple-theme/Theme.class.php:207
+#: www/themes/gforge/Theme.class.php:144
 msgid "Show source"
 msgstr "Montrer le source"
 
-#: www/include/Layout.class.php:429
-#: www/themes/gforge-simple-theme/Theme.class.php:351
+#: www/include/Layout.class.php:421
+#: www/themes/gforge-simple-theme/Theme.class.php:350
 #: www/themes/lite/Theme.class.php:268
 msgid "My&nbsp;Page"
 msgstr "Ma page"
 
-#: www/include/Layout.class.php:431 www/my/index.php:369
+#: www/include/Layout.class.php:423 www/my/index.php:365
 #: www/reporting/index.php:44 www/stats/site_stats_utils.php:477
 #: www/themes/lite/Theme.class.php:270
 msgid "Projects"
 msgstr "Projets"
 
-#: www/include/Layout.class.php:434
-#: www/themes/gforge-simple-theme/Theme.class.php:367
+#: www/include/Layout.class.php:426
+#: www/themes/gforge-simple-theme/Theme.class.php:366
 #: www/themes/lite/Theme.class.php:273
 msgid "Code&nbsp;Snippets"
 msgstr "Boite à outils"
 
-#: www/include/Layout.class.php:437
-#: www/themes/gforge-simple-theme/Theme.class.php:375
+#: www/include/Layout.class.php:429
+#: www/themes/gforge-simple-theme/Theme.class.php:374
 #: www/themes/lite/Theme.class.php:276
 msgid "Project&nbsp;Openings"
 msgstr "Demande d'aide"
 
-#: www/include/Layout.class.php:532
+#: www/include/Layout.class.php:524
 msgid "Quick Jump To..."
 msgstr "Saut rapide vers..."
 
-#: www/include/Layout.class.php:755
+#: www/include/Layout.class.php:747
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:76
-#: www/themes/gforge-simple-theme/Theme.class.php:663
-#: www/themes/gforge/Theme.class.php:407
+#: www/themes/gforge-simple-theme/Theme.class.php:662
+#: www/themes/gforge/Theme.class.php:413
 msgid "Advanced search"
 msgstr "Recherche avancée"
 
-#: www/include/Layout.class.php:778
-#: www/themes/gforge-simple-theme/Theme.class.php:678
-#: www/themes/gforge/Theme.class.php:430
+#: www/include/Layout.class.php:770
+#: www/themes/gforge-simple-theme/Theme.class.php:677
+#: www/themes/gforge/Theme.class.php:436
 msgid "with all words"
 msgstr "tous les mots"
 
-#: www/include/Layout.class.php:781
-#: www/themes/gforge-simple-theme/Theme.class.php:679
-#: www/themes/gforge/Theme.class.php:433
+#: www/include/Layout.class.php:773
+#: www/themes/gforge-simple-theme/Theme.class.php:678
+#: www/themes/gforge/Theme.class.php:439
 msgid "with one word"
 msgstr "au moins un mot"
 
-#: www/include/Layout.class.php:832 www/themes/gforge/Theme.class.php:479
+#: www/include/Layout.class.php:824 www/themes/gforge/Theme.class.php:485
 msgid "Search in"
 msgstr "Chercher dans"
 
-#: www/include/Layout.class.php:833 www/include/Layout.class.php:865
-#: www/themes/gforge-simple-theme/Theme.class.php:681
-#: www/themes/gforge-simple-theme/Theme.class.php:737
-#: www/themes/gforge/Theme.class.php:480 www/themes/gforge/Theme.class.php:513
+#: www/include/Layout.class.php:825 www/include/Layout.class.php:857
+#: www/themes/gforge-simple-theme/Theme.class.php:680
+#: www/themes/gforge-simple-theme/Theme.class.php:736
+#: www/themes/gforge/Theme.class.php:486 www/themes/gforge/Theme.class.php:519
 msgid "Select"
 msgstr "Selectionner"
 
-#: www/include/Layout.class.php:833 www/include/Layout.class.php:865
+#: www/include/Layout.class.php:825 www/include/Layout.class.php:857
 #: www/stats/site_stats_utils.php:145
-#: www/themes/gforge-simple-theme/Theme.class.php:681
-#: www/themes/gforge-simple-theme/Theme.class.php:737
-#: www/themes/gforge/Theme.class.php:480 www/themes/gforge/Theme.class.php:513
+#: www/themes/gforge-simple-theme/Theme.class.php:680
+#: www/themes/gforge-simple-theme/Theme.class.php:736
+#: www/themes/gforge/Theme.class.php:486 www/themes/gforge/Theme.class.php:519
 msgid "all"
 msgstr "Tout"
 
-#: www/include/Layout.class.php:833 www/include/Layout.class.php:865
-#: www/themes/gforge-simple-theme/Theme.class.php:681
-#: www/themes/gforge-simple-theme/Theme.class.php:737
-#: www/themes/gforge/Theme.class.php:480 www/themes/gforge/Theme.class.php:513
+#: www/include/Layout.class.php:825 www/include/Layout.class.php:857
+#: www/themes/gforge-simple-theme/Theme.class.php:680
+#: www/themes/gforge-simple-theme/Theme.class.php:736
+#: www/themes/gforge/Theme.class.php:486 www/themes/gforge/Theme.class.php:519
 msgid "none"
 msgstr "Aucun"
 
@@ -8224,8 +8271,8 @@ msgstr "Toutes les activités de projet"
 
 #: www/include/html.php:319 www/include/html.php:392 www/include/html.php:577
 #: www/pm/browse_task.php:317 www/pm/browse_task.php:348
-#: www/pm/browse_task.php:359 www/tracker/browse.php:540
-#: www/tracker/browse.php:552 www/tracker/browse.php:556
+#: www/pm/browse_task.php:359 www/tracker/browse.php:537
+#: www/tracker/browse.php:549 www/tracker/browse.php:553
 msgid "No Change"
 msgstr "Aucun changement"
 
@@ -8320,8 +8367,8 @@ msgid_plural ""
 "HELP WANTED: This project is looking for people to fill <a href=\"%1$s"
 "\">several different positions</a>."
 msgstr[0] ""
-"NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche un <a href=\"%1$s\">\"%2"
-"$s\"</a>"
+"NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche un <a href=\"%1$s\">"
+"\"%2$s\"</a>"
 msgstr[1] ""
 "NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche des contributeurs pour "
 "<a href=\"%1$s\">différentes positions</a>."
@@ -8369,7 +8416,7 @@ msgstr "Surveiller"
 #: www/include/project_home.php:197 www/include/project_home.php:271
 #: www/new/index.php:104 www/tracker/detail.php:170 www/tracker/detail.php:175
 #: www/tracker/mod-limited.php:163 www/tracker/mod-limited.php:173
-#: www/tracker/mod.php:259 www/tracker/mod.php:269
+#: www/tracker/mod.php:258 www/tracker/mod.php:268
 msgid "Download"
 msgstr "Télécharger"
 
@@ -8432,33 +8479,33 @@ msgstr "Gestion de documents : Documentation du projet"
 msgid "Mailing Lists"
 msgstr "Listes de diffusion"
 
-#: www/include/project_home.php:372
+#: www/include/project_home.php:373
 #, php-format
 msgid "(<strong>%1$s</strong> public mailing list)"
 msgid_plural "(<strong>%1$s</strong> public mailing lists)"
 msgstr[0] "(<strong>%1$s</strong> liste de diffusion publique)"
 msgstr[1] "(<strong>%1$s</strong> listes de diffusion publiques)"
 
-#: www/include/project_home.php:380
+#: www/include/project_home.php:381
 msgid "Task Manager"
 msgstr "Gestion des tâches"
 
-#: www/include/project_home.php:387
+#: www/include/project_home.php:388
 msgid "There are no public subprojects available"
 msgstr "Il n'y a pas de sous-projet public"
 
-#: www/include/project_home.php:406
+#: www/include/project_home.php:407
 msgid "surveys"
 msgstr "Sondages"
 
-#: www/include/project_home.php:415 www/register/projectinfo.php:161
+#: www/include/project_home.php:416 www/register/projectinfo.php:162
 #: www/scm/admin/index.php:39 www/scm/admin/index.php:92
 #: www/scm/browser.php:33 www/scm/include/scm_utils.php:43
 #: www/scm/index.php:32 www/scm/reporting/index.php:32
 msgid "SCM Repository"
 msgstr "Dépôt de sources"
 
-#: www/include/project_home.php:437
+#: www/include/project_home.php:438
 msgid "Anonymous FTP Space"
 msgstr "Espace FTP anonyme"
 
@@ -8600,7 +8647,22 @@ msgid ""
 "a>. If you choose not to participate, your ratings of other users will be "
 "permanently deleted and the 'Peer Rating' box will disappear from your user "
 "page.</p>"
-msgstr "<p>La boîte d'évaluations croisées renvoie les notes moyennes (et les niveaux de réponse) de chaque critère individuel.  Pour des raisons de calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance et des autres.</p><ul><li>Le champ « rang global » indique le rang de l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le « score agrégé » indique un score global moyen pondéré, basé uniquement sur les réponses de confiance.</li><li>Le champ « importance personnelle » indique le poids que cet utilisateur aura lors de ses évaluations des autres développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas participer à ces évaluations (ni en tant qu'évaluateur, ni en tant que sujet des évaluations), vous pouvez désactiver cette fonction depuis la <a href=\"%2$s\">page de gestion de votre compte</a>.  Si vous choisissez de ne plus participer, vos évaluations des autres utilisateurs seront effacées, et la boîte d'évaluations croisées n'apparaîtra plus sur votre page d'utilisateur.</i></p>"
+msgstr ""
+"<p>La boîte d'évaluations croisées renvoie les notes moyennes (et les "
+"niveaux de réponse) de chaque critère individuel.  Pour des raisons de "
+"calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance "
+"et des autres.</p><ul><li>Le champ « rang global » indique le rang de "
+"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le "
+"« score agrégé » indique un score global moyen pondéré, basé uniquement sur "
+"les réponses de confiance.</li><li>Le champ « importance personnelle » "
+"indique le poids que cet utilisateur aura lors de ses évaluations des autres "
+"développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas "
+"participer à ces évaluations (ni en tant qu'évaluateur, ni en tant que sujet "
+"des évaluations), vous pouvez désactiver cette fonction depuis la <a href="
+"\"%2$s\">page de gestion de votre compte</a>.  Si vous choisissez de ne plus "
+"participer, vos évaluations des autres utilisateurs seront effacées, et la "
+"boîte d'évaluations croisées n'apparaîtra plus sur votre page d'utilisateur."
+"</i></p>"
 
 #: www/include/user_home.php:184
 #, php-format
@@ -8988,7 +9050,7 @@ msgstr "Page personnelle de %s"
 msgid "All trackers for my projects"
 msgstr "Tous les outils de suivi de mes projets"
 
-#: www/my/dashboard.php:64 www/my/index.php:394
+#: www/my/dashboard.php:64
 msgid "You're not a member of any active projects"
 msgstr "Vous ne faites partie d'aucun projet."
 
@@ -9000,18 +9062,18 @@ msgstr "Modifié."
 #: www/my/index.php:147 www/pm/add_task.php:52 www/pm/browse_task.php:91
 #: www/pm/browse_task.php:180 www/pm/browse_task.php:349
 #: www/pm/detail_task.php:42 www/pm/mod_task.php:59 www/tracker/add.php:67
-#: www/tracker/admin/form-customizelist.php:27 www/tracker/browse.php:159
-#: www/tracker/browse.php:372 www/tracker/browse.php:542
+#: www/tracker/admin/form-customizelist.php:27 www/tracker/browse.php:161
+#: www/tracker/browse.php:374 www/tracker/browse.php:539
 #: www/tracker/detail.php:46 www/tracker/mod-limited.php:90
-#: www/tracker/mod.php:134 www/tracker/query.php:177
+#: www/tracker/mod.php:133 www/tracker/query.php:177
 msgid "Priority"
 msgstr "Priorité"
 
 #: www/my/dashboard.php:87 www/pm/add_task.php:108 www/pm/browse_task.php:178
 #: www/pm/browse_task.php:356 www/pm/detail_task.php:83
-#: www/pm/mod_task.php:113 www/tracker/add.php:63 www/tracker/browse.php:374
-#: www/tracker/browse.php:551 www/tracker/detail.php:64
-#: www/tracker/mod-limited.php:87 www/tracker/mod.php:128
+#: www/pm/mod_task.php:113 www/tracker/add.php:63 www/tracker/browse.php:376
+#: www/tracker/browse.php:548 www/tracker/detail.php:64
+#: www/tracker/mod-limited.php:87 www/tracker/mod.php:127
 msgid "Assigned to"
 msgstr "Confié à"
 
@@ -9020,7 +9082,7 @@ msgstr "Confié à"
 #: www/pm/mod_task.php:35
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:45
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:37
-#: www/tracker/browse.php:376 www/tracker/detail.php:55
+#: www/tracker/browse.php:378 www/tracker/detail.php:55
 #: www/tracker/mod-limited.php:59 www/tracker/mod.php:65
 msgid "Submitted by"
 msgstr "Proposée par"
@@ -9145,7 +9207,7 @@ msgid "Monitored Items"
 msgstr "Éléments surveillés"
 
 #: www/my/index.php:195 www/my/index.php:272 www/my/index.php:303
-#: www/my/index.php:376 www/my/rmproject.php:84
+#: www/my/index.php:372 www/my/rmproject.php:84
 #: www/project/admin/users.php:275 www/project/admin/users.php:291
 msgid "Remove"
 msgstr "Enlever"
@@ -9174,29 +9236,33 @@ msgstr "Fichiers que vous surveillez"
 msgid "You are not monitoring any files."
 msgstr "Vous ne surveillez pas de fichier."
 
-#: www/my/index.php:338 www/my/index.php:343
+#: www/my/index.php:338
 msgid "My Bookmarks"
 msgstr "Mes favoris"
 
-#: www/my/index.php:345
+#: www/my/index.php:343
 msgid "Add bookmark"
 msgstr "Ajouter un favori"
 
-#: www/my/index.php:352
+#: www/my/index.php:349
 msgid "You currently do not have any bookmarks saved."
 msgstr "Vous n'avez pas de favoris enregistrés."
 
-#: www/my/index.php:362
+#: www/my/index.php:359
 msgid "[Edit]"
 msgstr "[Modifier]"
 
-#: www/my/index.php:377
+#: www/my/index.php:373
 msgid "My Projects"
 msgstr "Mes projets"
 
-#: www/my/index.php:378
+#: www/my/index.php:374
 msgid "My Roles"
 msgstr "Mes rôles"
+
+#: www/my/index.php:390
+msgid "You're not a member of any active projects."
+msgstr "Vous ne faites partie d'aucun projet actif."
 
 #: www/my/rmproject.php:63
 msgid "Operation Not Permitted"
@@ -9346,8 +9412,8 @@ msgstr ""
 #, php-format
 msgid "These items need to be approved (total: %1$s)"
 msgstr ""
-"Ces annonces ont besoin d'être approuvées pour la page d'accueil (total : %1"
-"$s)"
+"Ces annonces ont besoin d'être approuvées pour la page d'accueil (total : "
+"%1$s)"
 
 #: www/news/admin/news_admin_utils.php:78
 msgid "Reject Selected"
@@ -9371,27 +9437,27 @@ msgstr "Aucune annonce approuvée cette semaine"
 msgid "These items were approved this past week (total: %1$s)"
 msgstr "Ces annonces ont été approuvées la semaine passée (total : %1$s)"
 
-#: www/news/index.php:37
+#: www/news/index.php:39
 msgid ""
 "<p>Choose a News item and you can browse, search, and post messages.</p>"
 msgstr ""
 "<p>Choisissez une annonce pour visualiser, chercher ou soumettre des "
 "messages.</p>"
 
-#: www/news/index.php:71
+#: www/news/index.php:73
 #, php-format
 msgid "No News Found For %s"
 msgstr "Aucune annonce pour %s"
 
-#: www/news/index.php:73
+#: www/news/index.php:75
 msgid "No News Found"
 msgstr "Aucune annonce"
 
-#: www/news/index.php:76
+#: www/news/index.php:78
 msgid "No items were found"
 msgstr "Aucune annonce trouvée"
 
-#: www/news/news_utils.php:118 www/news/news_utils.php:252
+#: www/news/news_utils.php:118 www/news/news_utils.php:249
 msgid "No News Items Found"
 msgstr "Pas d'annonce"
 
@@ -9403,15 +9469,15 @@ msgstr "Commentaires"
 msgid "Read&nbsp;More/Comment"
 msgstr "Lire la suite/Commenter"
 
-#: www/news/news_utils.php:216
+#: www/news/news_utils.php:213
 msgid "News archive"
 msgstr "Archive des annonces"
 
-#: www/news/news_utils.php:228
+#: www/news/news_utils.php:225
 msgid "Submit News"
 msgstr "Proposer une annonce"
 
-#: www/news/news_utils.php:286
+#: www/news/news_utils.php:283
 msgid "Not Found"
 msgstr "Aucune nouvelle trouvée"
 
@@ -9475,7 +9541,7 @@ msgstr ""
 #: www/people/people_utils.php:345 www/people/people_utils.php:401
 #: www/pm/add_task.php:35 www/pm/browse_task.php:122
 #: www/pm/browse_task.php:176 www/pm/browse_task.php:346
-#: www/pm/detail_task.php:30 www/pm/ganttpage.php:168 www/pm/mod_task.php:42
+#: www/pm/detail_task.php:30 www/pm/ganttpage.php:144 www/pm/mod_task.php:42
 #: www/pm/mod_task.php:209 www/reporting/timeadd.php:165
 #: www/snippet/package.php:146 www/snippet/submit.php:116
 msgid "Category"
@@ -9748,19 +9814,19 @@ msgstr "Tous les champs doivent être remplis&nbsp;!"
 #: www/people/editprofile.php:273 www/people/skills_utils.php:36
 #: www/people/skills_utils.php:143 www/pm/add_task.php:79
 #: www/pm/browse_task.php:88 www/pm/browse_task.php:170
-#: www/pm/detail_task.php:49 www/pm/ganttpage.php:80 www/pm/mod_task.php:86
+#: www/pm/detail_task.php:49 www/pm/ganttpage.php:55 www/pm/mod_task.php:86
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:37
-#: www/tracker/detail.php:118 www/tracker/mod.php:213
+#: www/tracker/detail.php:118 www/tracker/mod.php:212
 msgid "Start Date"
 msgstr "Date de début"
 
 #: www/people/editprofile.php:274 www/people/skills_utils.php:37
 #: www/people/skills_utils.php:144 www/pm/add_task.php:94
 #: www/pm/browse_task.php:89 www/pm/browse_task.php:172
-#: www/pm/detail_task.php:53 www/pm/ganttpage.php:81 www/pm/mod_task.php:100
+#: www/pm/detail_task.php:53 www/pm/ganttpage.php:56 www/pm/mod_task.php:100
 #: www/reporting/usersummary.php:109
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:38
-#: www/tracker/detail.php:119 www/tracker/mod.php:214
+#: www/tracker/detail.php:119 www/tracker/mod.php:213
 msgid "End Date"
 msgstr "Date de fin"
 
@@ -9910,8 +9976,8 @@ msgstr "Contact pour informations&nbsp;"
 
 #: www/people/viewjob.php:80 www/pm/include/ProjectTaskHTML.class.php:94
 #: www/project/report/index.php:137
-#: www/tracker/admin/form-customizelist.php:25 www/tracker/browse.php:161
-#: www/tracker/browse.php:366 www/tracker/query.php:179
+#: www/tracker/admin/form-customizelist.php:25 www/tracker/browse.php:163
+#: www/tracker/browse.php:368 www/tracker/query.php:179
 msgid "Open Date"
 msgstr "Date d'ouverture"
 
@@ -9944,15 +10010,15 @@ msgid "admin"
 msgstr "Gérer les catégories"
 
 #: www/pm/add_task.php:48 www/pm/browse_task.php:90 www/pm/browse_task.php:174
-#: www/pm/detail_task.php:37 www/pm/ganttpage.php:82 www/pm/mod_task.php:54
+#: www/pm/detail_task.php:37 www/pm/ganttpage.php:57 www/pm/mod_task.php:54
 msgid "Percent Complete"
 msgstr "Pourcentage réalisé"
 
 #: www/pm/add_task.php:59 www/pm/browse_task.php:87 www/pm/browse_task.php:168
-#: www/pm/detail_task.php:60 www/pm/ganttpage.php:79
+#: www/pm/detail_task.php:60 www/pm/ganttpage.php:54
 #: www/pm/include/ProjectTaskHTML.class.php:56
 #: www/pm/include/ProjectTaskHTML.class.php:92 www/pm/mod_task.php:66
-#: www/tracker/detail.php:117 www/tracker/mod.php:212
+#: www/tracker/detail.php:117 www/tracker/mod.php:211
 msgid "Task Summary"
 msgstr "Résumé des tâches"
 
@@ -10122,20 +10188,21 @@ msgid "Browse tasks"
 msgstr "Afficher les tâches"
 
 #: www/pm/browse_task.php:67 www/pm/browse_task.php:78
-#: www/pm/browse_task.php:121 www/pm/ganttpage.php:46 www/pm/ganttpage.php:63
-#: www/reporting/usersummary.php:54 www/tracker/browse.php:146
-#: www/tracker/browse.php:225 www/tracker/browse.php:230
+#: www/pm/browse_task.php:121 www/pm/ganttpage.php:43 www/pm/ganttpage.php:45
+#: www/pm/ganttpage.php:47 www/reporting/usersummary.php:54
+#: www/tracker/browse.php:148 www/tracker/browse.php:227
+#: www/tracker/browse.php:232 www/tracker/query.php:324
 msgid "Any"
 msgstr "Tous"
 
 #: www/pm/browse_task.php:69 www/pm/browse_task.php:314
-#: www/pm/ganttpage.php:51 www/tracker/browse.php:151
+#: www/pm/ganttpage.php:43 www/tracker/browse.php:153
 msgid "Unassigned"
 msgstr "Personne"
 
 #: www/pm/browse_task.php:86 www/pm/browse_task.php:166
-#: www/pm/ganttpage.php:78 www/pm/include/ProjectTaskHTML.class.php:55
-#: www/tracker/detail.php:116 www/tracker/mod.php:211
+#: www/pm/ganttpage.php:53 www/pm/include/ProjectTaskHTML.class.php:55
+#: www/tracker/detail.php:116 www/tracker/mod.php:210
 msgid "Task Id"
 msgstr "Numéro de tâche"
 
@@ -10143,13 +10210,13 @@ msgstr "Numéro de tâche"
 msgid "Detailed"
 msgstr "Détail"
 
-#: www/pm/browse_task.php:120 www/pm/ganttpage.php:166
-#: www/tracker/browse.php:164 www/tracker/browse.php:305
+#: www/pm/browse_task.php:120 www/pm/ganttpage.php:142
+#: www/tracker/browse.php:166 www/tracker/browse.php:307
 #: www/tracker/query.php:182 www/tracker/query.php:321
 msgid "Assignee"
 msgstr "Responsable"
 
-#: www/pm/browse_task.php:123 www/pm/ganttpage.php:169
+#: www/pm/browse_task.php:123 www/pm/ganttpage.php:145
 msgid "Sort On"
 msgstr "Trier par"
 
@@ -10157,7 +10224,7 @@ msgstr "Trier par"
 msgid "Detail View"
 msgstr "Vue détaillée"
 
-#: www/pm/browse_task.php:125 www/pm/ganttpage.php:172
+#: www/pm/browse_task.php:125 www/pm/ganttpage.php:148
 #: www/snippet/snippet_utils.php:109
 #: www/tracker/include/ArtifactTypeHtml.class.php:48
 msgid "Browse"
@@ -10179,15 +10246,15 @@ msgstr "50 précédentes"
 msgid "next 50"
 msgstr "50 suivantes"
 
-#: www/pm/browse_task.php:337 www/tracker/browse.php:517
+#: www/pm/browse_task.php:337 www/tracker/browse.php:514
 msgid "Check &nbsp;all"
 msgstr "Cocher tous"
 
-#: www/pm/browse_task.php:339 www/tracker/browse.php:519
+#: www/pm/browse_task.php:339 www/tracker/browse.php:516
 msgid "Clear &nbsp;all"
 msgstr "Décocher tous"
 
-#: www/pm/browse_task.php:342 www/tracker/browse.php:522
+#: www/pm/browse_task.php:342 www/tracker/browse.php:519
 msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
@@ -10202,7 +10269,7 @@ msgstr ""
 msgid "Subproject"
 msgstr "Sous-projet"
 
-#: www/pm/browse_task.php:365 www/tracker/browse.php:565
+#: www/pm/browse_task.php:365 www/tracker/browse.php:562
 msgid "Mass update"
 msgstr "Mise à jour massive"
 
@@ -10410,20 +10477,24 @@ msgstr "Commentaire initial"
 msgid "Hours"
 msgstr "Heures"
 
-#: www/pm/ganttpage.php:32 www/pm/ganttpage.php:184
+#: www/pm/ganttpage.php:30 www/pm/ganttpage.php:160
 #: www/pm/include/ProjectGroupHTML.class.php:58
 msgid "Gantt Chart"
 msgstr "Diagramme de Gantt"
 
-#: www/pm/ganttpage.php:93 www/pm/ganttpage.php:97
+#: www/pm/ganttpage.php:74
+msgid "Years"
+msgstr "Années"
+
+#: www/pm/ganttpage.php:75 www/pm/ganttpage.php:79
 msgid "Months"
 msgstr "Mois"
 
-#: www/pm/ganttpage.php:94
+#: www/pm/ganttpage.php:76
 msgid "Weeks"
 msgstr "Semaines"
 
-#: www/pm/ganttpage.php:95 www/project/stats/project_stats_utils.php:203
+#: www/pm/ganttpage.php:77 www/project/stats/project_stats_utils.php:203
 msgid "Days"
 msgstr "Jours"
 
@@ -10464,7 +10535,7 @@ msgid "No Related Tracker Items Have Been Added"
 msgstr "Aucun élément à suivre lié n'a été ajouté"
 
 #: www/pm/include/ProjectTaskHTML.class.php:124 www/tracker/detail.php:82
-#: www/tracker/mod-limited.php:127 www/tracker/mod.php:182
+#: www/tracker/mod-limited.php:127 www/tracker/mod.php:181
 #: www/tracker/query.php:349
 msgid "Followups"
 msgstr "Suites"
@@ -10542,7 +10613,7 @@ msgstr ""
 msgid "Time tracking"
 msgstr "Suivi du temps"
 
-#: www/pm/mod_task.php:206 www/reporting/sitetimebar.php:84
+#: www/pm/mod_task.php:206 www/reporting/sitetimebar.php:89
 msgid "Week"
 msgstr "Semaine"
 
@@ -10550,7 +10621,7 @@ msgstr "Semaine"
 msgid "Day"
 msgstr "Jour"
 
-#: www/pm/mod_task.php:210 www/reporting/useract.php:70
+#: www/pm/mod_task.php:210 www/reporting/useract.php:74
 #: www/reporting/usertime.php:84
 msgid "User"
 msgstr "Utilisateur"
@@ -10723,11 +10794,11 @@ msgid ""
 "description)"
 msgstr "Courte description (255 caractères maximum)"
 
-#: www/project/admin/editgroupinfo.php:143 www/project/admin/index.php:164
+#: www/project/admin/editgroupinfo.php:143 www/project/admin/index.php:166
 msgid "Homepage Link"
 msgstr "Lien vers la page d'accueil"
 
-#: www/project/admin/editgroupinfo.php:150 www/project/admin/index.php:171
+#: www/project/admin/editgroupinfo.php:150 www/project/admin/index.php:173
 msgid "Visibility: "
 msgstr "Visibilité :"
 
@@ -10779,7 +10850,7 @@ msgstr "Publication de fichiers (avec version)"
 msgid "Use Statistics"
 msgstr "Statistiques"
 
-#: www/project/admin/editgroupinfo.php:341 www/project/admin/index.php:255
+#: www/project/admin/editgroupinfo.php:341 www/project/admin/index.php:257
 msgid ""
 "If you wish, you can provide default email addresses to which new "
 "submissions will be sent"
@@ -10787,11 +10858,11 @@ msgstr ""
 "Si vous le désirez, vous pouvez fournir une adresse email par défaut à "
 "laquelle les nouvelles soumissions seront envoyées"
 
-#: www/project/admin/editgroupinfo.php:342 www/project/admin/index.php:256
+#: www/project/admin/editgroupinfo.php:342 www/project/admin/index.php:258
 msgid "New Document Submissions"
 msgstr "Soumission de nouveaux documents&nbsp;"
 
-#: www/project/admin/editgroupinfo.php:344 www/project/admin/index.php:258
+#: www/project/admin/editgroupinfo.php:344 www/project/admin/index.php:260
 msgid "(send on all updates)"
 msgstr "(envoi pour toutes les mises à jour)"
 
@@ -10928,16 +10999,16 @@ msgstr "Informations du projet mises à jour"
 msgid "Descriptive Project Name"
 msgstr "Nom précis du projet"
 
-#: www/project/admin/index.php:157
+#: www/project/admin/index.php:158
 msgid "Tags (use comma as separator)"
 msgstr "Étiquettes (séparées par des virgules)"
 
-#: www/project/admin/index.php:161
+#: www/project/admin/index.php:163
 msgid "Trove Categorization:&nbsp;"
 msgstr "Classement du projet dans l'arbre&nbsp;:&nbsp;"
 
 #: www/project/admin/massadd.php:69 www/project/admin/massfinish.php:67
-#: www/project/admin/roleedit.php:96 www/project/admin/roleedit.php:110
+#: www/project/admin/roleedit.php:98 www/project/admin/roleedit.php:110
 #: www/project/admin/users.php:246
 msgid "Edit Role"
 msgstr "Modifier le rôle"
@@ -11052,11 +11123,11 @@ msgstr ""
 "(Gestionnaire de documentation)</dt><dd>mettent à jour/éditent/effacent les  "
 "documentations du projet.</dd></dl>"
 
-#: www/project/admin/roleedit.php:58 www/project/admin/roleedit.php:85
+#: www/project/admin/roleedit.php:60 www/project/admin/roleedit.php:87
 msgid "Successfully Updated Role"
 msgstr "Rôle mis à jour"
 
-#: www/project/admin/roleedit.php:79
+#: www/project/admin/roleedit.php:81
 msgid "Successfully Created New Role"
 msgstr "Nouveau rôle créé avec succès"
 
@@ -11335,13 +11406,13 @@ msgid_plural "You must send a comment to the administrators:"
 msgstr[0] "Vous devez envoyer un commentaire à l'administrateur :"
 msgstr[1] "Vous devez envoyer un commentaire aux administrateurs :"
 
-#: www/project/stats/index.php:42 www/project/stats/index.php:54
-#: www/reporting/projectact.php:50 www/reporting/projectact.php:53
+#: www/project/stats/index.php:45 www/project/stats/index.php:57
+#: www/reporting/projectact.php:54 www/reporting/projectact.php:57
 msgid "Project Activity"
 msgstr "Activité du projet"
 
-#: www/project/stats/index.php:59 www/reporting/projectact.php:59
-#: www/reporting/siteact.php:58 www/reporting/useract.php:71
+#: www/project/stats/index.php:62 www/reporting/projectact.php:63
+#: www/reporting/siteact.php:62 www/reporting/useract.php:75
 msgid "Areas"
 msgstr "Outil"
 
@@ -11405,11 +11476,11 @@ msgstr ""
 "L'enregistrement de nouveaux projets est restreint sur %s, seuls les "
 "administrateurs peuvent créer de nouveaux projets."
 
-#: www/register/projectinfo.php:103
+#: www/register/projectinfo.php:104
 msgid "Registration complete"
 msgstr "Enregistrement complet"
 
-#: www/register/projectinfo.php:107
+#: www/register/projectinfo.php:108
 #, php-format
 msgid ""
 "Your project has been submitted to the %1$s administrators. Within 72 hours, "
@@ -11420,11 +11491,11 @@ msgstr ""
 "vous recevrez la notification de leur décision, et des instructions "
 "supplémentaires.</p><p>Merci d'avoir choisi %1$s."
 
-#: www/register/projectinfo.php:127
+#: www/register/projectinfo.php:128
 msgid "Project Information"
 msgstr "Information du projet"
 
-#: www/register/projectinfo.php:130
+#: www/register/projectinfo.php:131
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -11435,7 +11506,7 @@ msgstr ""
 "descriptions ci-dessous et fournir des données précises et complètes. Tous "
 "les champs sont obligatoires."
 
-#: www/register/projectinfo.php:135
+#: www/register/projectinfo.php:136
 msgid ""
 "<h3>1. Project full name</h3>You should start with specifying the name of "
 "your project. The \"Full Name\" is descriptive, and has no arbitrary "
@@ -11446,7 +11517,7 @@ msgstr ""
 "restrictions arbitraires à l'exception d'une limitation de taille (à 40 "
 "caractères).</p><p>Nom complet :<br/>"
 
-#: www/register/projectinfo.php:139
+#: www/register/projectinfo.php:140
 #, php-format
 msgid ""
 "<h3>2. Project Purpose And Summarization</h3><strong> Please provide "
@@ -11466,7 +11537,7 @@ msgstr ""
 "description publique de votre projet. Elle doit être rédigée en anglais.</"
 "strong></p>"
 
-#: www/register/projectinfo.php:145
+#: www/register/projectinfo.php:146
 msgid ""
 "<h3>3. Project Public Description</h3><p>This is the description of your "
 "project which will be shown on the Project Summary page, in search results, "
@@ -11480,7 +11551,7 @@ msgstr ""
 "description du projet (étape 2), donc permettez-vous des formulation "
 "concises et des abréviations. La longueur maximale est de 255 caractères."
 
-#: www/register/projectinfo.php:152
+#: www/register/projectinfo.php:153
 #, php-format
 msgid ""
 "<h3>4. Project Unix Name</h3>In addition to full project name, you will need "
@@ -11498,11 +11569,11 @@ msgid ""
 "li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
 "<h3>4. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
-"</p><p>Du fait de son utilisation à de nombreux endroits sur le site, le "
-"« nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit être "
-"unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il ne "
-"peut contenir que des lettres (minuscules), des chiffres et des tirets</"
+"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » "
+"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, "
+"le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit "
+"être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il "
+"ne peut contenir que des lettres (minuscules), des chiffres et des tirets</"
 "li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
 "changera pas tout au long de la vie du projet</li></ul>\n"
 "<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</"
@@ -11513,7 +11584,7 @@ msgstr ""
 "</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour "
 "les recherches partout dans le site</li></ul><p>Nom Unix :<br/>"
 
-#: www/register/projectinfo.php:160
+#: www/register/projectinfo.php:161
 msgid ""
 "<h3>5. SCM</h3><p>You can choose among different SCM for your project, but "
 "just one (or none at all). Please select the SCM system you want to use.</p>"
@@ -11524,15 +11595,15 @@ msgstr ""
 "p> <p><strong>Vous ne pourrez plus le changer une fois le projet enregistré !"
 "</strong></p>"
 
-#: www/register/projectinfo.php:162
+#: www/register/projectinfo.php:163
 msgid "No SCM"
 msgstr "Pas de gestion de sources"
 
-#: www/reporting/groupadded.php:48 www/reporting/groupadded.php:51
+#: www/reporting/groupadded.php:52 www/reporting/groupadded.php:55
 msgid "Projects Added"
 msgstr "Projets ajoutés"
 
-#: www/reporting/groupcum.php:48 www/reporting/groupcum.php:51
+#: www/reporting/groupcum.php:52 www/reporting/groupcum.php:55
 msgid "Cumulative Projects"
 msgstr "Projets cumulés"
 
@@ -11630,21 +11701,21 @@ msgstr "Eléments ouverts"
 msgid "Tracker Items Closed"
 msgstr "Eléments fermés"
 
-#: www/reporting/projecttime.php:51 www/reporting/projecttime.php:64
+#: www/reporting/projecttime.php:56 www/reporting/projecttime.php:69
 msgid "Time Tracking By Project"
 msgstr "Suivi du temps par projet"
 
-#: www/reporting/projecttime.php:53 www/reporting/sitetime.php:51
+#: www/reporting/projecttime.php:58 www/reporting/sitetime.php:56
 #: www/reporting/usertime.php:69
 msgid "By Task"
 msgstr "Par tâche"
 
-#: www/reporting/projecttime.php:55 www/reporting/sitetime.php:53
+#: www/reporting/projecttime.php:60 www/reporting/sitetime.php:58
 #: www/reporting/usertime.php:71
 msgid "By Subproject"
 msgstr "Par sous-projet"
 
-#: www/reporting/projecttime.php:56 www/reporting/sitetime.php:54
+#: www/reporting/projecttime.php:61 www/reporting/sitetime.php:59
 msgid "By User"
 msgstr "Par utilisateur"
 
@@ -11688,12 +11759,12 @@ msgstr "J'en suis sûr"
 msgid "Press ONLY ONCE"
 msgstr "Cliquer UNE SEULE FOIS"
 
-#: www/reporting/siteact.php:51 www/reporting/siteact.php:54
+#: www/reporting/siteact.php:55 www/reporting/siteact.php:58
 msgid "Site-Wide Activity"
 msgstr "Activité globale"
 
-#: www/reporting/sitetime.php:49 www/reporting/sitetime.php:62
-#: www/reporting/sitetimebar.php:48 www/reporting/sitetimebar.php:51
+#: www/reporting/sitetime.php:54 www/reporting/sitetime.php:67
+#: www/reporting/sitetimebar.php:53 www/reporting/sitetimebar.php:56
 msgid "Site-Wide Time Tracking"
 msgstr "Suivi temporel global"
 
@@ -11769,15 +11840,15 @@ msgstr ""
 "pendant le travail d'une tâche particulière.  Par exemple, « réunion », ou "
 "« programmation », ou « tests »."
 
-#: www/reporting/toolspie.php:48 www/reporting/toolspie.php:55
+#: www/reporting/toolspie.php:53 www/reporting/toolspie.php:60
 msgid "Tool Pie Graphs"
 msgstr "Outil de génération de camemberts"
 
-#: www/reporting/useract.php:51 www/reporting/useract.php:65
+#: www/reporting/useract.php:55 www/reporting/useract.php:69
 msgid "User Activity"
 msgstr "Activité d'un utilisateur"
 
-#: www/reporting/useract.php:54
+#: www/reporting/useract.php:58
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on.<p>"
@@ -11785,11 +11856,11 @@ msgstr ""
 "Choisissez la <strong>première lettre</strong> du nom de la personne sur "
 "laquelle vous souhaitez obtenir des statistiques.</p>"
 
-#: www/reporting/useradded.php:48 www/reporting/useradded.php:51
+#: www/reporting/useradded.php:52 www/reporting/useradded.php:55
 msgid "Users Added"
 msgstr "Utilisateurs ajoutés"
 
-#: www/reporting/usercum.php:48 www/reporting/usercum.php:51
+#: www/reporting/usercum.php:52 www/reporting/usercum.php:55
 msgid "Cumulative Users"
 msgstr "Utilisateurs cumulés"
 
@@ -11859,7 +11930,7 @@ msgstr ""
 msgid "Error - This project has turned off SCM."
 msgstr "Erreur : ce projet a désactivé son CVS."
 
-#: www/scm/include/viewvc_utils.php:81
+#: www/scm/include/viewvc_utils.php:83
 msgid ""
 "The repository for this project isn't created yet. It will be created in the "
 "next few minutes."
@@ -12518,7 +12589,7 @@ msgstr "Type de script&nbsp;"
 msgid "Paste the Code Here"
 msgstr "Coller le code ici"
 
-#: www/soap/index.php:162
+#: www/soap/index.php:163
 msgid "en_US"
 msgstr "fr_FR"
 
@@ -13010,8 +13081,8 @@ msgstr ""
 #: www/survey/admin/index.php:46
 #, php-format
 msgid ""
-"You can now activate/deactivate surveys on the %1$s Edit Existing Surveys %2"
-"$s page"
+"You can now activate/deactivate surveys on the %1$s Edit Existing Surveys "
+"%2$s page"
 msgstr ""
 "Vous pouvez activer et désactiver les sondages sur la page %1$sÉditer les "
 "sondages existants%2$s"
@@ -13303,8 +13374,8 @@ msgstr "Conditions d'utilisation pour %1$s"
 #: www/terms.php:41
 #, php-format
 msgid ""
-"These are the terms and conditions under which you are allowed to use the %1"
-"$s service.  They are empty by default, but the administrator(s) of the "
+"These are the terms and conditions under which you are allowed to use the "
+"%1$s service.  They are empty by default, but the administrator(s) of the "
 "service can use this page to publish their local requirements if needed."
 msgstr ""
 "Ceci constitue les conditions selon lesquelles vous êtes autorisé à utiliser "
@@ -13312,7 +13383,7 @@ msgstr ""
 "du service peut utiliser cette page pour publier des conditions "
 "d'utilisation particulières le cas échéant."
 
-#: www/themes/gforge-simple-theme/Theme.class.php:359
+#: www/themes/gforge-simple-theme/Theme.class.php:358
 msgid "Project&nbsp;Tree"
 msgstr "Arbre des projets"
 
@@ -13453,7 +13524,7 @@ msgstr "Si vous ne parvenez pas à vous connecter, saisissez votre e-mail&nbsp;"
 
 #: www/tracker/add.php:81 www/tracker/admin/form-customizelist.php:31
 #: www/tracker/include/ArtifactHtml.class.php:43
-#: www/tracker/include/ArtifactHtml.class.php:52 www/tracker/mod.php:169
+#: www/tracker/include/ArtifactHtml.class.php:52 www/tracker/mod.php:168
 #: www/tracker/query.php:347
 msgid "Detailed description"
 msgstr "Description détaillée"
@@ -13465,7 +13536,7 @@ msgstr ""
 "vos messages !"
 
 #: www/tracker/add.php:107 www/tracker/detail.php:149
-#: www/tracker/mod-limited.php:143 www/tracker/mod.php:243
+#: www/tracker/mod-limited.php:143 www/tracker/mod.php:242
 msgid "Attach Files"
 msgstr "Joindre des fichiers"
 
@@ -13675,8 +13746,8 @@ msgstr "Confié à"
 msgid "Submitted By"
 msgstr "Soumis par"
 
-#: www/tracker/admin/form-customizelist.php:30 www/tracker/browse.php:162
-#: www/tracker/browse.php:368 www/tracker/query.php:180
+#: www/tracker/admin/form-customizelist.php:30 www/tracker/browse.php:164
+#: www/tracker/browse.php:370 www/tracker/query.php:180
 msgid "Close Date"
 msgstr "Date de fermeture"
 
@@ -14105,68 +14176,68 @@ msgstr "Erreur lors de la suppression d'un élément"
 msgid "Element deleted"
 msgstr "Elément supprimé"
 
-#: www/tracker/browse.php:163 www/tracker/query.php:181
+#: www/tracker/browse.php:165 www/tracker/query.php:181
 msgid "Submitter"
 msgstr "Soumis par"
 
-#: www/tracker/browse.php:180 www/tracker/query.php:198
+#: www/tracker/browse.php:182 www/tracker/query.php:198
 msgid "Ascending"
 msgstr "Croissant"
 
-#: www/tracker/browse.php:181 www/tracker/query.php:199
+#: www/tracker/browse.php:183 www/tracker/query.php:199
 msgid "Descending"
 msgstr "Décroissant"
 
-#: www/tracker/browse.php:191 www/tracker/query.php:210
+#: www/tracker/browse.php:193 www/tracker/query.php:210
 msgid "Any changes"
 msgstr "Tous les changements"
 
-#: www/tracker/browse.php:192 www/tracker/query.php:211
+#: www/tracker/browse.php:194 www/tracker/query.php:211
 msgid "Last 24H"
 msgstr "Les dernières 24h"
 
-#: www/tracker/browse.php:193 www/tracker/query.php:212
+#: www/tracker/browse.php:195 www/tracker/query.php:212
 msgid "Last 7days"
 msgstr "La dernière semaine"
 
-#: www/tracker/browse.php:194 www/tracker/query.php:213
+#: www/tracker/browse.php:196 www/tracker/query.php:213
 msgid "Last 2weeks"
 msgstr "La dernière quinzaine"
 
-#: www/tracker/browse.php:195 www/tracker/query.php:214
+#: www/tracker/browse.php:197 www/tracker/query.php:214
 msgid "Last 1month"
 msgstr "Le mois dernier"
 
-#: www/tracker/browse.php:235
+#: www/tracker/browse.php:237
 msgid "Advanced queries"
 msgstr "Requêtes avancées"
 
-#: www/tracker/browse.php:287
+#: www/tracker/browse.php:289
 msgid "Power Query"
 msgstr "Exécuter"
 
-#: www/tracker/browse.php:289 www/tracker/browse.php:294
+#: www/tracker/browse.php:291 www/tracker/browse.php:296
 #: www/tracker/query.php:237
 msgid "Build Query"
 msgstr "Construire une requête"
 
-#: www/tracker/browse.php:298
+#: www/tracker/browse.php:300
 msgid "Simple Filtering and Sorting"
 msgstr "Filtrage et tri simples"
 
-#: www/tracker/browse.php:312 www/tracker/query.php:354
+#: www/tracker/browse.php:314 www/tracker/query.php:354
 msgid "Order by"
 msgstr "Trier par"
 
-#: www/tracker/browse.php:317
+#: www/tracker/browse.php:319
 msgid "Quick Browse"
 msgstr "Navigation rapide"
 
-#: www/tracker/browse.php:326
+#: www/tracker/browse.php:328
 msgid "Default"
 msgstr "Par défaut"
 
-#: www/tracker/browse.php:327
+#: www/tracker/browse.php:329
 msgid ""
 "Viewing only opened records by default, use 'Advanced queries' or 'Simple "
 "Filtering and Sorting' to change."
@@ -14175,21 +14246,21 @@ msgstr ""
 "autres, utilisez les fonctions de « filtrage et tri simples » ou les "
 "« requêtes avancées »."
 
-#: www/tracker/browse.php:552
-#: www/tracker/include/ArtifactTypeHtml.class.php:547
+#: www/tracker/browse.php:549
+#: www/tracker/include/ArtifactTypeHtml.class.php:552
 msgid "Nobody"
 msgstr "Personne"
 
-#: www/tracker/browse.php:561
+#: www/tracker/browse.php:558
 msgid "Canned Response"
 msgstr "Réponses types"
 
-#: www/tracker/browse.php:570
+#: www/tracker/browse.php:567
 #, php-format
 msgid "* Denotes requests > %1$s Days Old"
 msgstr "* indique les requêtes datant de plus de %1$s jours"
 
-#: www/tracker/browse.php:579
+#: www/tracker/browse.php:576
 msgid "No items found"
 msgstr "Aucun élément trouvé"
 
@@ -14218,16 +14289,16 @@ msgid "Save Changes"
 msgstr "Sauver les modifications"
 
 #: www/tracker/detail.php:98 www/tracker/mod-limited.php:133
-#: www/tracker/mod.php:193
+#: www/tracker/mod.php:192
 msgid "Followup"
 msgstr "Commentaires"
 
 #: www/tracker/detail.php:108 www/tracker/detail.php:111
-#: www/tracker/mod.php:203 www/tracker/mod.php:204
+#: www/tracker/mod.php:202 www/tracker/mod.php:203
 msgid "Related Tasks"
 msgstr "Tâches liées"
 
-#: www/tracker/detail.php:138 www/tracker/mod.php:233
+#: www/tracker/detail.php:138 www/tracker/mod.php:232
 msgid "No Related Tasks"
 msgstr "Pas de tâche liée"
 
@@ -14236,13 +14307,13 @@ msgid "Attached Files"
 msgstr "Fichiers joints"
 
 #: www/tracker/detail.php:181 www/tracker/mod-limited.php:178
-#: www/tracker/mod.php:274
+#: www/tracker/mod.php:273
 msgid "No Files Currently Attached"
 msgstr "Pas de fichier joint"
 
 #: www/tracker/detail.php:195 www/tracker/detail.php:199
 #: www/tracker/include/ArtifactHtml.class.php:176
-#: www/tracker/mod-limited.php:193 www/tracker/mod.php:290
+#: www/tracker/mod-limited.php:193 www/tracker/mod.php:289
 msgid "Changes"
 msgstr "Changements"
 
@@ -14274,14 +14345,14 @@ msgstr "Nouveau"
 msgid "Stop Monitor"
 msgstr "Arrêter la surveillance"
 
-#: www/tracker/include/ArtifactTypeHtml.class.php:221
-#: www/tracker/include/ArtifactTypeHtml.class.php:228
+#: www/tracker/include/ArtifactTypeHtml.class.php:226
+#: www/tracker/include/ArtifactTypeHtml.class.php:233
 #: www/tracker/query.php:330
 #, php-format
 msgid "(% for wildcards)"
 msgstr "(% pour les jokers)"
 
-#: www/tracker/include/ArtifactTypeHtml.class.php:527
+#: www/tracker/include/ArtifactTypeHtml.class.php:532
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -14322,7 +14393,7 @@ msgstr "Date de soumission"
 msgid "Date Closed"
 msgstr "Date de fermeture"
 
-#: www/tracker/mod-limited.php:130 www/tracker/mod.php:191
+#: www/tracker/mod-limited.php:130 www/tracker/mod.php:190
 msgid "OR Attach A Comment"
 msgstr "Ou rédiger un commentaire"
 
@@ -14334,11 +14405,11 @@ msgstr "Arrêter la surveillance"
 msgid "Data Type"
 msgstr "Type de données"
 
-#: www/tracker/mod.php:185
+#: www/tracker/mod.php:184
 msgid "Use Canned Response"
 msgstr "Utiliser une réponse type"
 
-#: www/tracker/mod.php:240
+#: www/tracker/mod.php:239
 msgid "Existing Files"
 msgstr "Fichiers existants"
 
@@ -14437,51 +14508,51 @@ msgstr "Ajouter une relation avec une tâche existante"
 msgid "Create New Task"
 msgstr "Créer une nouvelle tâche"
 
-#: www/tracker/tracker.php:130
+#: www/tracker/tracker.php:131
 msgid "Item Successfully Created"
 msgstr "Élément créé avec succès"
 
-#: www/tracker/tracker.php:221
+#: www/tracker/tracker.php:222
 msgid "Updated Successfully"
 msgstr "Mis à jour avec succès"
 
-#: www/tracker/tracker.php:284 www/tracker/tracker.php:303
+#: www/tracker/tracker.php:286 www/tracker/tracker.php:305
 msgid "Comment added"
 msgstr "Commentaire ajouté"
 
-#: www/tracker/tracker.php:337 www/tracker/tracker.php:356
+#: www/tracker/tracker.php:354
 msgid "File Upload: Error"
 msgstr "Erreur lors de la publication du fichier"
 
-#: www/tracker/tracker.php:340 www/tracker/tracker.php:359
+#: www/tracker/tracker.php:357
 msgid "File Upload: Successful"
 msgstr "Fichier envoyé avec succès"
 
-#: www/tracker/tracker.php:381
+#: www/tracker/tracker.php:378
 msgid "File Delete:"
 msgstr "Fichier détruit :"
 
-#: www/tracker/tracker.php:384
+#: www/tracker/tracker.php:381
 msgid "File Delete: Successful"
 msgstr "Fichier détruit avec succès"
 
-#: www/tracker/tracker.php:421 www/tracker/tracker.php:438
+#: www/tracker/tracker.php:419 www/tracker/tracker.php:436
 msgid "Monitoring Started"
 msgstr "Surveillance démarrée"
 
-#: www/tracker/tracker.php:423 www/tracker/tracker.php:440
+#: www/tracker/tracker.php:421 www/tracker/tracker.php:438
 msgid "Monitoring Deactivated"
 msgstr "Surveillance arrêtée"
 
-#: www/tracker/tracker.php:489
+#: www/tracker/tracker.php:487
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "Vous n'avez pas confirmé : l'élément n'a pas été supprimé."
 
-#: www/tracker/tracker.php:493
+#: www/tracker/tracker.php:491
 msgid "Artifact Delete Failed"
 msgstr "Erreur lors de la suppression de l'élément"
 
-#: www/tracker/tracker.php:495
+#: www/tracker/tracker.php:493
 msgid "Artifact Deleted Successfully"
 msgstr "Element supprimé avec succès"
 

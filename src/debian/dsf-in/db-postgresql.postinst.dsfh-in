@@ -56,7 +56,7 @@ case "$1" in
     configure)
 	add_onevar_mainconfile default_trove_cat 18
 
-	@OLDPACKAGE@-config
+	@PACKAGE@-config
 
         # Patch DB configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure-files

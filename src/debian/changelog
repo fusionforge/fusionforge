@@ -4,6 +4,58 @@ fusionforge (5.0.51-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Tue, 29 Jun 2010 22:53:15 +0200
 
+fusionforge (5.0.2-2) unstable; urgency=low
+
+  * Ship a /usr/share/gforge/plugins/ directory in gforge-web-apache2
+    (closes: #597714).
+  * Update roadmap URL (closes: #597847).
+  * Fix detection of PostgreSQL's init script (closes: #596929).
+  * Updated Portuguese Debconf translations (closes: #597354).
+  * Support rsyslog as well as syslogd (closes: 535580).
+  * Handle amd64 architectures and add missing files in chroot creation
+    (closes: #396128, #536055).
+  * Make up our mind about which config file to use (fusionforge.conf, not
+    gforge.conf) and migrate from gforge.conf if needed (closes: #597916).
+  * Ditto for fusionforge-config instead of gforge-config (closes: #597931).
+  * Updated Spanish, Italian and French translations from upstream.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 18:26:20 +0200
+
+fusionforge (5.0.2-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * Switch to Unix sockets for DB access by default.
+  * Cope with postgresql-8.4 on both sides of 8.4.4-2, where the init
+    script can be called either "postgresql-8.4" or "postgresql" (closes:
+    #596929).
+  * Also cope with PostgreSQL having been installed with a non-UTF-8
+    locale, which previously prevented our database from being created due
+    to charset incompatibility (closes: #596931).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 16 Sep 2010 09:51:32 +0200
+
+fusionforge (5.0.1+svn10155-1) unstable; urgency=low
+
+  * Fixed embedded copy of viewvc for Python 2.6 (closes: #582012).
+  * Also removed dependency on external viewvc until propely fixed.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 29 Jun 2010 14:23:08 +0200
+
+fusionforge (5.0.1+svn10137-1) unstable; urgency=low
+
+  * Adapted URLs to logos and CSS for gitweb >= 1.7.  Added versioned
+    dependency accordingly.
+  * Use local YUI library (over HTTPS if needed) rather than possibly
+    leaking informations to Yahoo's servers (closes: #579459).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 28 Jun 2010 13:34:14 +0200
+
+fusionforge (5.0.1+svn10088-1) unstable; urgency=low
+
+  * New snapshot from upstream SVN (Branch_5_0).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 18 Jun 2010 13:14:11 +0200
+
 fusionforge (5.0.1+svn10006-1) unstable; urgency=low
 
   * New snapshot from upstream SVN (Branch_5_0).

@@ -27,7 +27,7 @@ set -e
 
 case "$1" in
     configure)
-        @OLDPACKAGE@-config
+        @PACKAGE@-config
 
 	db_stop
         # Setup our Apache

@@ -26,6 +26,8 @@ case "$1" in
 	    etc/security \
 	    lib \
 	    lib/security \
+	    lib64 \
+	    lib64/security \
 	    dev \
 	    var \
 	    var/run \
@@ -57,10 +59,13 @@ case "$1" in
 	    /bin/ls \
 	    /bin/sh \
 	    /bin/bash \
-	    /bin/chgrp ; do
-	  if [ -x "$binary" ] ; then
+	    /bin/chgrp \
+	    /lib/security/pam_pgsql.so \
+	    /lib64/security/pam_pgsql.so ; do
+	  if [ -e "$binary" ] ; then
 	      echo "$binary"
-	      ldd $binary | cut -d" " -f3
+	      ldd $binary | awk '/=>/ { print $3 }' | grep ^/
+	      ldd $binary | awk '{ print $1 }' | grep ^/
 	  fi
 	done \
 	    | sort -u \
@@ -85,7 +90,9 @@ case "$1" in
 	[ -c $CHROOTDIR/dev/urandom ] || mknod $CHROOTDIR/dev/urandom c 1 9 || true
 	[ -c $CHROOTDIR/dev/console ] || mknod $CHROOTDIR/dev/console c 5 1 || true
 	# For /dev/log
-	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslogd ; then 
+	if [ -e /etc/default/syslogd ] \
+	    && [ ! -e /etc/rsyslog.conf ] \
+	    && ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/default/syslogd ; then 
 		echo '######################################################################################################'
 		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/default/syslogd'
 		echo 'To have cvs pserver running correctly'

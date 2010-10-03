@@ -104,9 +104,7 @@ plugins/coclico/Makefile -text
 plugins/coclico/Makefile.debian -text
 plugins/coclico/README -text
 plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php -text
-plugins/coclico/codendi-specific/common/dao/include/DataAccess.class.php.orig -text
 plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php -text
-plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php.orig -text
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccess -text
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccessObject -text
 plugins/coclico/codendi-specific/env.inc.php -text
@@ -698,6 +696,7 @@ src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
 src/db/timetracking-init.sql -text
 src/deb-specific/fckeditor/config.js -text
+src/deb-specific/fusionforge.rsyslog -text
 src/deb-specific/gforge.logrotate -text
 src/deb-specific/install-cvs.sh -text
 src/deb-specific/update-ldap.sh -text
@@ -734,6 +733,7 @@ src/debian/dsf-in/plugin-scmsvn.prerm -text
 src/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
 src/debian/dsf-in/web-apache2.config.dsfh-in -text
+src/debian/dsf-in/web-apache2.links -text
 src/debian/dsf-in/web-apache2.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2.prerm -text
 src/debian/dsf-in/web-apache2.templates.dsfh-in -text
@@ -744,10 +744,12 @@ src/debian/dsf-po/fi.po -text
 src/debian/dsf-po/gl.po -text
 src/debian/dsf-po/pt.po -text
 src/debian/dsf-po/ru.po -text
+src/debian/patches/db-on-localhost.dpatch -text
 src/debian/patches/disable-dav.dpatch -text
 src/debian/patches/production-environment.dpatch -text
 src/debian/patches/use-nusoap-from-distro.dpatch -text
 src/debian/patches/use-snoopy-from-distro.dpatch -text
+src/debian/patches/use-yui-from-distro.dpatch -text
 src/debian/po/README -text
 src/debian/watch -text
 src/docs/README.gettext -text
@@ -904,6 +906,7 @@ src/image-sources/README -text
 src/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 src/image-sources/top-logo.xcf -text svneol=unset#unset
+src/install-common.inc -text
 src/install.sh -text
 src/lib/vendor/prototype/prototype.js -text
 src/lib/vendor/scriptaculous/builder.js -text

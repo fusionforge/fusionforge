@@ -10,15 +10,6 @@ require ("/usr/share/gforge/lib/include.pl") ;
 
 %hash = () ;
 
-#open CONF, "/etc/gforge/gforge.conf" ;
-#while ($line = <CONF>) {
-#    chomp $line ;
-#    next if $line =~ m/^\s*#/ ;
-#    ($key, $val) = split ('=', $line, 2) ;
-#    $hash{$key} = $val ;
-#}
-#close CONF ;
-
 &db_connect ;
 
 $ifile = '/usr/share/gforge/etc/templates/httpd.vhosts' ;

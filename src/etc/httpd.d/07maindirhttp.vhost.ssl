@@ -122,6 +122,7 @@ AliasMatch ^{sys_urlprefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /u
 		SSLEngine on
 		SSLCertificateFile {sys_sslcrt}
 		SSLCertificateKeyFile {sys_sslkey}
+		{sys_ssl_apache_extra_cmd}
 		<Files ~ "\.(cgi|shtml)$">
 			SSLOptions +StdEnvVars
 		</Files>

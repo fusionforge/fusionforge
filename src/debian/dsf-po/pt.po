@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@ 4.6.99+svn6387-1\n"
 "Report-Msgid-Bugs-To: gforge@packages.debian.org\n"
 "POT-Creation-Date: 2009-06-12 23:23+0200\n"
-"PO-Revision-Date: 2008-04-12 21:30+0100\n"
+"PO-Revision-Date: 2010-10-03 21:23+0200\n"
 "Last-Translator: Ricardo Silva <ardoric@gmail.com>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +182,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../dsf-in/db-postgresql.templates.dsfh-in:12001
+#: ../gforge-db-postgresql.templates.dsfh-in:12001
 msgid "Please enter a semicolon-separated list of skill names."
 msgstr ""
 "Por favor introduza uma lista de nomes de capacidades, separadas pelo "
@@ -192,9 +192,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
-#, fuzzy
-#| msgid "Do you want a simple DNS setup for @FORGENAME@?"
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid "Do you want a simple DNS setup for @FORGENAME@?"
 msgstr "Deseja uma configuração simples de DNS no @FORGENAME@?"
 
@@ -202,7 +200,7 @@ msgstr "Deseja uma configuração simples de DNS no @FORGENAME@?"
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "You can use a simple DNS setup with wildcards to map all project web-hosts "
 "to a single IP address, and direct all the scm-hosts to a single SCM server, "
@@ -219,7 +217,7 @@ msgstr ""
 #. Description
 #. Translators: SCM here means "Source Control Management"
 #. (cvs, svn, etc.)
-#: ../dsf-in/dns-bind9.templates.dsfh-in:3001
+#: ../gforge-dns-bind9.templates.dsfh-in:3001
 msgid ""
 "Even if you use a simple DNS setup, you can still use separate machines as "
 "project servers; it just assumes that all the project web directories are on "
@@ -263,19 +261,12 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-#, fuzzy
-#| msgid "@FORGENAME@ domain or subdomain name:"
 msgid "@FORGENAME@ domain or subdomain name:"
 msgstr "O nome do domínio ou subdomínio do @FORGENAME@:"
 
 #. Type: string
 #. Description
 #: ../dsf-helper/common-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the domain that will host the @FORGENAME@ installation. Some "
-#| "services (scm, lists, etc.) will be given their own subdomain in that "
-#| "domain."
 msgid ""
 "Please enter the domain that will host the @FORGENAME@ installation. Some "
 "services (scm, lists, etc.) will be given their own subdomain in that domain."
@@ -337,10 +328,6 @@ msgstr "Servidor de bases de dados:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the IP address (or hostname) of the server that will host "
-#| "the @FORGENAME@ database."
 msgid ""
 "Please enter the IP address (or hostname) of the server that will host the "
 "@FORGENAME@ database."
@@ -377,10 +364,6 @@ msgstr "Nome do administrador da sua base de dados:"
 #. Type: string
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:4001
-#, fuzzy
-#| msgid ""
-#| "Please enter the username of the database administrator for the server "
-#| "that will host the @FORGENAME@ database."
 msgid ""
 "Please enter the username of the database administrator for the server that "
 "will host the @FORGENAME@ database."
@@ -409,13 +392,8 @@ msgstr "Por favor escolha a palavra-passe da ligação."
 #. Type: string
 #. Description
 #: ../dsf-helper/downloadhost-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "packages."
 msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"packages."
+"Please enter the host name of the server that will host the @FORGENAME@ packages."
 msgstr ""
 "Por favor introduza o nome do servidor que irá guardar os pacotes do "
 "@FORGENAME@."
@@ -465,13 +443,9 @@ msgstr "Servidor de listas de email:"
 #. Type: string
 #. Description
 #: ../dsf-helper/lists-variables.templates:2001
-#, fuzzy
-#| msgid ""
-#| "Please enter the host name of the server that will host the @FORGENAME@ "
-#| "mailing lists."
 msgid ""
-"Please enter the host name of the server that will host the @FORGENAME@ "
-"mailing lists."
+"Please enter the host name of the server that will host the @FORGENAME@ mailing "
+"lists."
 msgstr ""
 "Por favor introduza o nome do servidor que irá guardar as listas de email do "
 "@FORGENAME@."
@@ -494,7 +468,7 @@ msgstr ""
 #. Description
 #: ../dsf-helper/users-variables.templates:2001
 msgid "User mail redirector server:"
-msgstr "Servidor de redirecção de mail dos utilizadores:"
+msgstr "Servidor de redireccionamento de mail dos utilizadores:"
 
 #. Type: string
 #. Description
@@ -604,7 +578,7 @@ msgstr "Latim"
 #. Choices
 #: ../dsf-helper/web-variables.templates:2001
 msgid "Norwegian"
-msgstr "Noruegês"
+msgstr "Norueguês"
 
 #. Type: select
 #. Choices

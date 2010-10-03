@@ -1,0 +1,21 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' gforge~/www/themes/gforge/Theme.class.php gforge/www/themes/gforge/Theme.class.php
+--- gforge~/www/themes/gforge/Theme.class.php	2010-06-28 11:26:22.000000000 +0200
++++ gforge/www/themes/gforge/Theme.class.php	2010-06-28 11:32:43.000000000 +0200
+@@ -152,8 +152,8 @@
+ 
+     function headerCSS() {
+         echo '
+-		<link href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css" rel="stylesheet" />
+-		<link href="http://yui.yahooapis.com/2.6.0/build/base/base-min.css"	type="text/css" rel="stylesheet" />
++		<link rel="stylesheet" type="text/css" href="'. util_make_uri ('scripts/yui/reset-fonts-grids/reset-fonts-grids.css') .'" />
++		<link rel="stylesheet" type="text/css" href="'. util_make_uri ('scripts/yui/base/base-min.css') .'" />
+ 		<link rel="stylesheet" type="text/css" href="'. util_make_uri ('/themes/css/fusionforge.css') .'" />
+ 		<link rel="stylesheet" type="text/css" href="'. THEME_DIR .'/css/theme.css" />
+ 		<link rel="stylesheet" type="text/css" href="'. THEME_DIR .'/css/theme-pages.css" />

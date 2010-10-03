@@ -113,7 +113,7 @@ if [ "$1" = "1" ] ; then
 		s/sys_use_scm=false/sys_use_scm=true/g" %{GFORGE_CONF_DIR}/gforge.conf
 		
 	# initializing configuration
-	%{SBIN_DIR}/gforge-config
+	%{SBIN_DIR}/fusionforge-config
 	
 	CHROOT=`grep '^gforge_chroot=' %{GFORGE_CONF_DIR}/gforge.conf | sed 's/.*=\s*\(.*\)/\1/'`
 	if [ ! -d $CHROOT/cvsroot ] ; then

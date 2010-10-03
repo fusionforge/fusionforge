@@ -3,5 +3,7 @@ disable-tracker-reply-by-email
 use-snoopy-from-distro
 disable-dav
 use-nusoap-from-distro
+use-yui-from-distro
+db-on-localhost
 
 production-environment

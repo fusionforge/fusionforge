@@ -25,16 +25,16 @@ fi
 PATH=$PATH:/usr/sbin
 
 setup_vars() {
-    ldap_host=$(grep ^ldap_host= /etc/gforge/gforge.conf | cut -d= -f2-)
+    ldap_host=$(grep ^ldap_host= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
 
-    gforge_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
+    gforge_base_dn=$(grep ^ldap_base_dn= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
     gforge_admin_dn="cn=admin,$gforge_base_dn"
     slapd_base_dn=$(grep ^suffix /etc/ldap/slapd.conf | cut -d\" -f2)
     slapd_admin_dn="cn=admin,$slapd_base_dn"
     robot_dn="cn=SF_robot,$gforge_base_dn"
 
-    robot_passwd=$(grep ^ldap_web_add_password= /etc/gforge/gforge.conf | cut -d= -f2-)
-    admin_passwd=$(grep ^admin_password= /etc/gforge/gforge.conf | cut -d= -f2-)
+    robot_passwd=$(grep ^ldap_web_add_password= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+    admin_passwd=$(grep ^admin_password= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
     robot_cryptedpasswd=`slappasswd -s "$robot_passwd" -h {CRYPT}`
     # TODO: ask the user for the main (slapd) password
     # Probably only do that when needed (when inserting the robot account)

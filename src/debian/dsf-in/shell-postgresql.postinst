@@ -27,7 +27,7 @@ set -e
 
 case "$1" in
     configure)
-	@OLDPACKAGE@-config
+	@PACKAGE@-config
 
         # Patch NSS configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-nsspgsql.sh configure-files
