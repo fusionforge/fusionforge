@@ -346,18 +346,22 @@
 		} elseif (getStringFromRequest('uploadtemplate')) {
 
 			$input_file = getUploadedFile('input_file');
-			if (!util_check_fileupload($input_file['tmp_name'])) {
-				echo ('Invalid filename :'.$input_file['tmp_name']);
-				exit;
-			}
 			$size = $input_file['size'];
-			$input_data = addslashes(fread(fopen($input_file['tmp_name'], 'r'), $size));
+			if ($size != 0 ) {
+				if (!util_check_fileupload($input_file['tmp_name'])) {
+					echo ('Invalid filename :'.$input_file['tmp_name']);
+					exit;
+				}
+				$input_data = addslashes(fread(fopen($input_file['tmp_name'], 'r'), $size));
 
-			db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
-					 array ($input_data,
+				db_query_params ('UPDATE artifact_group_list SET custom_renderer=$1 WHERE group_artifact_id=$2',
+					 	array ($input_data,
 						$ath->getID()));
-			echo db_error();
-			$feedback .= _('Renderer Uploaded');
+				echo db_error();
+				$feedback .= _('Renderer Uploaded');
+			} else {
+				$error_msg .= _('Renderer File empty');
+			}
 		//
 		//	Up or down elements
 		//
