@@ -3,9 +3,10 @@ fusionforge (5.0.2-1+) UNRELEASED; urgency=low
   * Ship a /usr/share/gforge/plugins/ directory in gforge-web-apache2
     (closes: #597714).
   * Update roadmap URL (closes: #597847).
-  * Fix detection of PostgreSQL's init script (closes: #596931).
+  * Fix detection of PostgreSQL's init script (closes: #596929).
+  * Updated Portuguese Debconf translations (closes: #597354).
 
- -- Roland Mas <lolando@debian.org>  Tue, 28 Sep 2010 20:42:06 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 15:09:49 +0200
 
 fusionforge (5.0.2-1) unstable; urgency=low
 
