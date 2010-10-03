@@ -191,7 +191,7 @@ install -m 644 rpm-specific/httpd.d/gforge.conf $RPM_BUILD_ROOT/%{HTTPD_CONF_DIR
 
 # configuring GForge
 install -m 600 rpm-specific/conf/gforge.conf $RPM_BUILD_ROOT/%{GFORGE_CONF_DIR}/
-install -m 750 rpm-specific/scripts/gforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
+install -m 750 rpm-specific/scripts/fusionforge-config $RPM_BUILD_ROOT/%{SBIN_DIR}/
 
 #install *.mo
 cp -rp locales/* $RPM_BUILD_ROOT/%{GFORGE_LANG_DIR}/
@@ -282,13 +282,13 @@ if [ "$1" -eq "1" ]; then
  	rm -f %{GFORGE_CONF_DIR}/httpd.d/20list
  	
  	perl -pi -e "
- 		s#^GFORGE_CONF_DIR=.*#GFORGE_CONF_DIR="%{GFORGE_CONF_DIR}"#g" %{SBIN_DIR}/gforge-config
+ 		s#^GFORGE_CONF_DIR=.*#GFORGE_CONF_DIR="%{GFORGE_CONF_DIR}"#g" %{SBIN_DIR}/fusionforge-config
  
  	## plugins installs apache templates in GFORGE_CONF_DIR
  	ln -s %{GFORGE_DIR}/etc/httpd.d %{GFORGE_CONF_DIR}/httpd.d
 	
 	# initializing configuration
-	%{SBIN_DIR}/gforge-config
+	%{SBIN_DIR}/fusionforge-config
 	
 	# creating the database
 	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
@@ -322,7 +322,7 @@ else
 	su -l %{gfuser} -c "%{GFORGE_BIN_DIR}/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 
 	# updating configuration
-	%{SBIN_DIR}/gforge-config || :
+	%{SBIN_DIR}/fusionforge-config || :
 	
 fi
 
@@ -363,7 +363,7 @@ fi
 %doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL* README*
 %doc docs/*
 %attr(0660, %{httpduser}, gforge) %config(noreplace) %{GFORGE_CONF_DIR}/gforge.conf
-%attr(0750, root, root) %{SBIN_DIR}/gforge-config
+%attr(0750, root, root) %{SBIN_DIR}/fusionforge-config
 %attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{HTTPD_CONF_DIR}/conf.d/gforge.conf
 %attr(0644, root, root) %{CROND_DIR}/fusionforge
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{UPLOAD_DIR}

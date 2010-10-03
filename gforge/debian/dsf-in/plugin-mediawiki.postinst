@@ -26,7 +26,7 @@ set -e
 case "$1" in
     configure)
 	/usr/share/@OLDPACKAGE@/bin/register-plugin mediawiki "Mediawiki"
-	@OLDPACKAGE@-config
+	@PACKAGE@-config
 	for flavour in apache apache-perl apache-ssl apache2 ; do
 	    if [ -x /usr/sbin/$flavour ]; then
 		invoke-rc.d $flavour reload || true

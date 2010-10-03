@@ -69,7 +69,7 @@ case "$1" in
 	    fi
 	fi
 	
-        @OLDPACKAGE@-config
+        @PACKAGE@-config
 
 	db_stop
 

@@ -28,7 +28,7 @@ set -e
 case "$1" in
     configure)
 
-	@OLDPACKAGE@-config
+	@PACKAGE@-config
         # Patch Exim configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-exim4.sh configure-files
 	if [ -f /etc/aliases.@OLDPACKAGE@-new ]

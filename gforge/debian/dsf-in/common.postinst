@@ -32,7 +32,7 @@ case "$1" in
 	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot scm-@OLDPACKAGE@ > /dev/null 2>&1
 	adduser --system --group --home /var/lib/@OLDPACKAGE@/chroot/cvsroot www-@OLDPACKAGE@ > /dev/null 2>&1
 
-	@OLDPACKAGE@-config
+	@PACKAGE@-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

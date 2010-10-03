@@ -8,7 +8,7 @@ deb-specific/cvssh                     bin/
 deb-specific/install-chroot.sh         usr/share/gforge/bin/
 deb-specific/install-ssh.sh            usr/share/gforge/bin/
 utils/fill-in-the-blanks.pl            usr/share/gforge/bin/
-deb-specific/gforge-config             usr/sbin/
+deb-specific/fusionforge-config        usr/sbin/
 utils/include.pl                       usr/share/gforge/lib/
 #
 deb-specific/user_dump_update.pl       usr/share/gforge/bin/

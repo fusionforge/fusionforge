@@ -3376,7 +3376,7 @@ gforge/plugins/wiki/www/www -text
 gforge/plugins/wiki/www/z -text
 gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/httpd.d/gforge.conf -text
-gforge/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
+gforge/rpm-specific/scripts/fusionforge-config -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/install-svn.sh -text
 gforge/translations/bg.po -text
 gforge/translations/ca.po -text

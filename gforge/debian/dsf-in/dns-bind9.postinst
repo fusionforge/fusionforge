@@ -27,7 +27,7 @@ set -e
 
 case "$1" in
     configure)
-	@OLDPACKAGE@-config
+	@PACKAGE@-config
 
 	# Patch Bind configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-dns.sh configure-files
