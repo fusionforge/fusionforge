@@ -82,9 +82,9 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.dirs
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
-	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-config.sgml
+	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
-	rm -f cvssh.1 $(OLDPACKAGE)-config.1
+	rm -f cvssh.1 $(PACKAGE)-config.1
 	rm -f $(CURDIR)/debian/README.Debian
 	rm -rf locales
 
