@@ -86,10 +86,3 @@ MAILTO=""
 
 # Send email to users with pending tasks
 #30 5 * * 1,2,3,4,5 root $PHP $FFCRON/daily_task_email.php
-
-# Create the /etc/* files needed for CVS
-10 * * * * root $PHP $FFCRON/plugins/scmcvs/cronjobs/usergroup.php
-
-# Upload the SSH key files needed for CVS
-15 * * * * root $PHP $FFCRON/plugins/scmcvs/cronjobs/ssh_create.php
-

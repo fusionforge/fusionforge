@@ -137,7 +137,8 @@ if (forge_get_config('use_tracker')) {
 	}
 }
 
-if (forge_get_config('use_mail') && file_exists(forge_get_config('data_path').'/dumps/mailman-aliases')) {
+if (forge_get_config('use_mail') && file_exists(forge_get_config('data_path').'/dumps/mailman-aliases')
+	&& filesize(forge_get_config('data_path').'/dumps/mailman-aliases') > 0) {
 	//
 	//	Read in the mailman aliases
 	//

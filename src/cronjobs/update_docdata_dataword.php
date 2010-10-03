@@ -25,14 +25,12 @@
  * USA
  */
 
-require (dirname(__FILE__).'/../www/env.inc.php');
-
-require_once ('include/pre.php');
-require_once ('docman/include/doc_utils.php');
-require_once ('docman/Parsedata.class.php');
-require_once ('docman/Document.class.php');
-require_once ('docman/DocumentFactory.class.php');
-require_once ('docman/DocumentGroupFactory.class.php');
+require dirname(__FILE__).'/../www/env.inc.php';
+require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'docman/Parsedata.class.php';
+require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
 $engine_path = dirname(__FILE__).'/../common/docman/engine/';
 $p = new Parsedata ($engine_path);

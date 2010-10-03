@@ -836,11 +836,11 @@ fi
 
 %changelog
 * Fri May 28 2010 - Alain Peyrat <aljeux@free.fr> - 5.0.50-1
-- ported to 5.1 tree.
-- reworked logic with rights on configuration files.
-- adapted to changes like scm refactoring.
-- adapted to changes to .ini configuration file.
-- lots of new plugins added.
+- Ported to 5.1 tree.
+- Reworked logic with rights on configuration files.
+- Adapted to changes like scm refactoring.
+- Adapted to changes to .ini configuration file.
+- Lots of new plugins added.
 
 * Tue May 13 2010 - Bond Masuda <bond.masuda@JLBond.com> - 4.8.3-2
 - fixed plugin symlinks and plugin directory permissions
