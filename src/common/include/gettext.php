@@ -186,7 +186,8 @@ function setup_gettext_from_lang_id ($lang_id) {
 }
 
 function setup_gettext_from_langname ($lang) {
-	$locale = language_name_to_locale_code($lang).'.utf8';
+	$locale[] = language_name_to_locale_code($lang).'.utf8';
+	$locale[] = language_name_to_locale_code($lang).'.UTF-8';
 	setup_gettext_from_locale ($locale) ;
 }
 
@@ -197,10 +198,16 @@ function setup_gettext_from_sys_lang () {
 		$lang = forge_get_config('default_language') ;
 	}
 
-	$locale = language_name_to_locale_code($lang).'.utf8';
+	$locale[] = language_name_to_locale_code($lang).'.utf8';
+	$locale[] = language_name_to_locale_code($lang).'.UTF-8';
 	setup_gettext_from_locale ($locale) ;
 }
 
+/*
+ * setup_gettext_from_locale() - call setlocales to set up language used by gettext
+ *
+ * @param	array	locales (.utf8 + .UTF-8)
+ */
 function setup_gettext_from_locale ($locale) {
 	setlocale(LC_ALL, $locale);
 	
