@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2010-04-07 01:27+0200\n"
+"PO-Revision-Date: 2010-07-29 18:42+0200\n"
 "Last-Translator: Luis Cañas Díaz <lcanas@libresoft.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: common/docman/Document.class.php:112 common/docman/Document.class.php:447
 #: common/pm/ProjectGroup.class.php:132 common/pm/ProjectGroup.class.php:346
 msgid "Title Must Be At Least 5 Characters"
-msgstr "El Título dete tener al menos 5 caracteres"
+msgstr "El título debe tener al menos 5 caracteres"
 
 #: common/docman/Document.class.php:116 common/docman/Document.class.php:451
 #: common/pm/ProjectGroup.class.php:136 common/pm/ProjectGroup.class.php:350
@@ -30,7 +30,7 @@ msgstr "La descripción del documento debe tener al menos diez caracteres"
 
 #: common/docman/Document.class.php:196
 msgid "Document:: Invalid docid"
-msgstr "Document:: docid inválida"
+msgstr "Documento: docid inválido"
 
 #: common/docman/DocumentFactory.class.php:180
 msgid "No Documents Found"
@@ -43,7 +43,7 @@ msgstr "Grupo de documento: se require un nombre"
 #: common/docman/DocumentGroup.class.php:107
 #: common/docman/DocumentGroup.class.php:267
 msgid "DocumentGroup: Invalid DocumentGroup parent ID"
-msgstr "Grupo de documento: identificador del padre de DocumentGroup invalido"
+msgstr "DocumentGroup: identificador padre de DocumentGroup inválido"
 
 #: common/docman/DocumentGroup.class.php:125
 #: common/docman/DocumentGroup.class.php:279
@@ -336,16 +336,14 @@ msgstr "Dirección de correo electrónico inválida"
 
 #: common/include/Error.class.php:163
 #, php-format
-#, fuzzy
 msgid "Error On Update: %s"
-msgstr "Error en la Actualización: %s"
+msgstr "Error en la actualización: %s"
 
 #: common/include/Error.class.php:204 www/frs/admin/editrelease.php:219
 msgid "Missing Parameters"
 msgstr "Faltan parámetros"
 
 #: common/include/Group.class.php:233
-#, fuzzy
 msgid "Group Not Found"
 msgstr "Grupo no encontrado"
 
@@ -358,12 +356,12 @@ msgstr "Grupo no encontrado"
 #: www/survey/admin/show_results_individual.php:38
 #: www/survey/admin/survey.php:40
 msgid "Permission denied"
-msgstr "Permiso Denegado"
+msgstr "Permiso denegado"
 
 #: common/include/Group.class.php:265
 #, php-format
 msgid "fetchData():: %s"
-msgstr ""
+msgstr "fetchData():: %s"
 
 #: common/include/Group.class.php:289
 msgid "Group::create: Group object already exists"
@@ -381,7 +379,8 @@ msgstr "Este nombre Unix está ocupado"
 #: common/include/Group.class.php:304
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
-msgstr "Por favor, describa su Propuesta de Registro de modo más comprensible"
+msgstr ""
+"Por favor, describa su propuesta de registro de un modo más comprensible"
 
 #: common/include/Group.class.php:307
 msgid ""
@@ -423,26 +422,27 @@ msgstr "No se pudo obtener permiso"
 #: common/include/Group.class.php:445
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr ""
+msgstr "ERROR: DB: No se pudo cambiar las propiedades del proyecto: %s"
 
 #: common/include/Group.class.php:513
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La nueva dirección del documento parece inválida: %s"
+msgstr[1] "Las nuevas direcciones de documentos parecen inválidas: %s"
 
 #: common/include/Group.class.php:566
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
+"Error actualizando la información del proyecto: La longitud máxima de la "
+"descripción del proyecto es de 255 caracteres."
 
 #: common/include/Group.class.php:614
 #, php-format
-#, fuzzy
 msgid "Error updating project information: %s"
-msgstr "Error actualizando información de proyecto: %s"
+msgstr "Error actualizando información del proyecto: %s"
 
 #: common/include/Group.class.php:706
 msgid "Invalid Status Change"
@@ -468,86 +468,86 @@ msgid ""
 msgstr ""
 
 #: common/include/Group.class.php:1328
-#, fuzzy
 msgid "Setting tags: "
-msgstr "Preferencias"
+msgstr "Asignar etiquetas:"
 
 #: common/include/Group.class.php:1373
+#, fuzzy
 msgid "Cannot Delete System Group"
-msgstr ""
+msgstr "No se puede borrar el grupo System"
 
 #: common/include/Group.class.php:1403
 #, php-format
 msgid "Not Object: ArtifactType: %d"
-msgstr ""
+msgstr "No existe el objeto: ArtifactType: %d"
 
 #: common/include/Group.class.php:1415
 #, php-format
 msgid "Not Object: Forum: %d"
-msgstr ""
+msgstr "No existe el objeto Forum: %d"
 
 #: common/include/Group.class.php:1428
-#, fuzzy, php-format
+#, php-format
 msgid "Not Object: ProjectGroup: %d"
-msgstr "No Puedo Actualizar el Mensaje Padre"
+msgstr "No existe el objeto: ProjectGroup: %d"
 
 #: common/include/Group.class.php:1459
-#, fuzzy, php-format
+#, php-format
 msgid "Could Not Delete News Forum: %d"
-msgstr "No se pudo completar la operación"
+msgstr "No se pudo borrar el foro de noticias: %d"
 
 #: common/include/Group.class.php:1505
 #, php-format
 msgid "Not Object: Survey: %d"
-msgstr ""
+msgstr "No existe el objeto: Survey: %d"
 
 #: common/include/Group.class.php:1518
-#, fuzzy, php-format
+#, php-format
 msgid "Not Object: SurveyQuestion: %d"
-msgstr "No se encontró preguntas"
+msgstr "No existe el objeto: SurveyQuestion: %d"
 
 #: common/include/Group.class.php:1531
 #, php-format
 msgid "Not Object: MailingList: %d"
-msgstr ""
+msgstr "No existe el objeto: MailingList: %d"
 
 #: common/include/Group.class.php:1535
 msgid "Could not properly delete the mailing list"
-msgstr ""
+msgstr "No se pudo borrar correctamente la lista de correo"
 
 #: common/include/Group.class.php:1636
 msgid "User is not active. Only active users can be added."
 msgstr ""
+"El usuario no esta activado. Sólo los usuarios activados pueden ser "
+"añadidos."
 
 #: common/include/Group.class.php:1675
 #, php-format
 msgid "ERROR: Could Not Add User To Group: %s"
-msgstr ""
+msgstr "ERROR: No se pudo añadir el usuario al grupo: %s"
 
 #: common/include/Group.class.php:1702 common/include/Group.class.php:1725
-#, fuzzy
 msgid "Error Getting Role Object"
-msgstr "Error creando el objeto grupo"
+msgstr "Error obteniendo el objeto rol"
 
 #: common/include/Group.class.php:1755
-#, fuzzy
 msgid "ERROR: User does not exist"
-msgstr "Esta categoría no existe"
+msgstr "ERROR: El usuario no existe"
 
 #: common/include/Group.class.php:1802
 #, php-format
 msgid "ERROR: User not removed: %s"
-msgstr ""
+msgstr "ERROR: Usuario no eliminado: %s"
 
 #: common/include/Group.class.php:1817
 #, php-format
 msgid "ERROR: DB: artifact: %s"
-msgstr ""
+msgstr "ERROR: BD: artefacto: %s"
 
 #: common/include/Group.class.php:1852 common/include/Group.class.php:1865
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
-msgstr ""
+msgstr "ERROR: BD: project_assigned_to %d: %s"
 
 #: common/include/Group.class.php:1911 www/project/admin/roleedit.php:64
 msgid "Could Not Get Role"
@@ -572,14 +572,13 @@ msgid "Group already active"
 msgstr "La cuenta está activa todavía."
 
 #: common/include/Group.class.php:2038
-#, fuzzy
 msgid "Error creating ArtifactTypes object"
-msgstr "Error creando el objeto grupo"
+msgstr "Error creando el objeto ArtifactTypes"
 
 #: common/include/Group.class.php:2043 common/include/Group.class.php:2049
 #, php-format
 msgid "ATS%d: %s"
-msgstr ""
+msgstr "ATS%d: %s"
 
 #: common/include/Group.class.php:2061
 #, fuzzy
@@ -588,74 +587,69 @@ msgstr "Foros de discusión:"
 
 #: common/include/Group.class.php:2061
 msgid "General Discussion"
-msgstr ""
+msgstr "Foro general"
 
 #: common/include/Group.class.php:2062 common/include/Group.class.php:2069
 #: common/include/Group.class.php:2076
 #, php-format
 msgid "F%d: %s"
-msgstr ""
+msgstr "F%d: %s"
 
 #: common/include/Group.class.php:2068
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: common/include/Group.class.php:2068
 msgid "Get Public Help"
-msgstr ""
+msgstr "Obtén ayuda"
 
 #: common/include/Group.class.php:2075
-#, fuzzy
 msgid "Developers-Discussion"
-msgstr "Desarrolladores"
+msgstr "Foro de desarrolladores"
 
 #: common/include/Group.class.php:2075
-#, fuzzy
 msgid "Project Developer Discussion"
-msgstr "Todos los colaboradores de Proyectos"
+msgstr "Foro de desarrolladores de proyecto"
 
 #: common/include/Group.class.php:2088
-#, fuzzy
 msgid "Uncategorized Submissions"
-msgstr "Publicación de Documentos Nuevos"
+msgstr "Elementos añadidos sin categorizar"
 
 #: common/include/Group.class.php:2089
 #, php-format
 msgid "DG: %s"
-msgstr ""
+msgstr "DG: %s"
 
 #: common/include/Group.class.php:2102
 #, php-format
 msgid "FRSP: %s"
-msgstr ""
+msgstr "FRSP: %s"
 
 #: common/include/Group.class.php:2114
 msgid "To Do"
-msgstr ""
+msgstr "Por hacer"
 
 #: common/include/Group.class.php:2114
 msgid "Things We Have To Do"
-msgstr ""
+msgstr "Cosas que tenemos que hacer"
 
 #: common/include/Group.class.php:2115 common/include/Group.class.php:2122
 #, php-format
 msgid "PG%d: %s"
-msgstr ""
+msgstr "PG%d: %s"
 
 #: common/include/Group.class.php:2121
-#, fuzzy
 msgid "Next Release"
-msgstr "Nuevas Publicaciones"
+msgstr "Siguiente publicación"
 
 #: common/include/Group.class.php:2121
-#, fuzzy
 msgid "Items For Our Next Release"
-msgstr "Últimas Publicaciones de Ficheros"
+msgstr "Elementos para nuestra siguiente publicación"
 
 #: common/include/Group.class.php:2148
 #, php-format
 msgid "R%d: %s"
-msgstr ""
+msgstr "R%d: %s"
 
 #: common/include/Group.class.php:2167
 #: plugins/scmcvs/common/CVSPlugin.class.php:149
@@ -664,19 +658,19 @@ msgstr ""
 #: www/stats/site_stats_utils.php:284 www/tracker/detail.php:187
 #: www/tracker/mod-limited.php:185 www/tracker/mod.php:282
 msgid "Commits"
-msgstr ""
+msgstr "Commits"
 
 #: common/include/Group.class.php:2168
 #, php-format
 msgid "ML: %s"
-msgstr ""
+msgstr "ML: %s"
 
 #: common/include/Group.class.php:2213 common/include/Group.class.php:2286
 msgid "Group does not have any administrators."
-msgstr ""
+msgstr "El grupo no tiene administradores"
 
 #: common/include/Group.class.php:2222
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
 "\n"
@@ -712,16 +706,17 @@ msgid ""
 msgstr ""
 "El registro de su proyecto en %4$s ha sido aprobado.\n"
 "\n"
-"Nombre Completo del Proyecto:  %1$s\n"
-"Nombre Unix del Proyecto:  %2$s\n"
+"Nombre completo del proyecto:  %1$s\n"
+"Nombre Unix del proyecto:  %2$s\n"
 "\n"
-"Su dominio DNS tardará más de un día en estar activo en nuestro sitio.\n"
+"Su dominio (DNS) tardará más de un día en estar activo en nuestro sitio.\n"
 "Su espacio web es accesible a través de esta cuenta de 'shell'. Por favor, "
 "lea la\n"
 "documentación (ver el enlace de abajo) acerca del uso propuesto, servicios\n"
 "disponibles, y la distribución de directorios de la cuenta.\n"
 "\n"
-"propia página de proyectos en %4$s mientras está autenticado, encontrará\n"
+"Si usted visita tu\n"
+"propia página en %4$s mientras está autenticado, encontrará\n"
 "funciones adicionales de menú con un título llamado 'Administración de "
 "Proyectos'.\n"
 "\n"
@@ -743,8 +738,8 @@ msgstr ""
 "en el\n"
 "menú.\n"
 "\n"
-"Disfrute del sistema, y por favor, dígales a otras personas de %4$s. "
-"Coméntenos también\n"
+"Disfrute del sistema, y por favor, cuente a sus contactos sobre la "
+"existencia de %4$s. Coméntenos también\n"
 "si podemos hacer algo para ayudarle.\n"
 "\n"
 "-- El equipo de %4$s"
@@ -752,7 +747,7 @@ msgstr ""
 #: common/include/Group.class.php:2258
 #, php-format
 msgid "%1$s Project Approved"
-msgstr "Proyecto Aprobado por %1$s"
+msgstr "Proyecto aprobado %1$s"
 
 #: common/include/Group.class.php:2294
 #, php-format
@@ -765,26 +760,26 @@ msgid ""
 "Reasons for negative decision:\n"
 "\n"
 msgstr ""
-"Su registración de su proyecto en %3$s ha sido negada.\n"
+"El registro de su proyecto en %3$s ha sido denegado.\n"
 "\n"
-"Nombre Completo del Proyecto:  %1$s\n"
-"Nombre Unix del Proyecto:  %2$s\n"
+"Nombre completo del proyecto:  %1$s\n"
+"Nombre Unix del proyecto:  %2$s\n"
 "\n"
-"Las razones para negarla:\n"
+"Las razones para la denegación son:\n"
 "\n"
 
 #: common/include/Group.class.php:2313
 #, php-format
 msgid "%1$s Project Denied"
-msgstr "Proyecto Denegado por %1$s"
+msgstr "Proyecto denegado %1$s"
 
 #: common/include/Group.class.php:2336
 msgid "Could not find user who has submitted the project."
-msgstr ""
+msgstr "No se pudo encontrar al usuario que creó el proyecto"
 
 #: common/include/Group.class.php:2351
 msgid "There is no administrator to send the mail."
-msgstr ""
+msgstr "No hay administrador a quien mandar el correo electrónico."
 
 #: common/include/Group.class.php:2360
 #, fuzzy, php-format
@@ -834,24 +829,21 @@ msgstr ""
 "notificará su decisión."
 
 #: common/include/Group.class.php:2407
-#, fuzzy
 msgid "Group name is too short"
-msgstr "Pregunta demasiado corta"
+msgstr "El nombre del proyecto es demasiado corto"
 
 #: common/include/Group.class.php:2410
-#, fuzzy
 msgid "Group name is too long"
-msgstr "Nombre de Grupo (pulsa para editar)"
+msgstr "Nombre de proyecto demasiado largo"
 
 #: common/include/Group.class.php:2413
-#, fuzzy
 msgid "Group name already taken"
-msgstr "Este nombre Unix está ocupado"
+msgstr "Nombre de proyecto no disponible"
 
 #: common/include/Group.class.php:2471
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
-msgstr ""
+msgstr "ERROR - No se pudo actualizar el estado del grupo Unix: %s"
 
 #: common/include/Group.class.php:2550
 #: www/forum/include/ForumHTML.class.php:69 www/my/dashboard.php:79
@@ -977,6 +969,8 @@ msgid ""
 "You have already sent a request to the project administrators. Please wait "
 "for their reply."
 msgstr ""
+"Ya ha sido mandada una petición a los administradores de proyecto. Por "
+"favor, espera su respuesta."
 
 #: common/include/GroupJoinRequest.class.php:225
 #: common/include/GroupJoinRequest.class.php:251
@@ -994,20 +988,24 @@ msgid ""
 "Comments by the user:\n"
 "%3$s"
 msgstr ""
+"%1$s ha pedido unirse a su proyecto. Usted puede aprobar su petición aquí: %"
+"2$s Comentarios del usuario:%3$s"
 
 #: common/include/GroupJoinRequest.class.php:252
 #, php-format
 msgid "Your request to join the %1$s project was denied by an administrator."
 msgstr ""
+"Su petición de unión al proyecto %1$s fue denegada por un administrador."
 
 #: common/include/GroupJoinRequest.class.php:266
 #, php-format
 msgid "Your request to join the %1$s project was granted by an administrator."
 msgstr ""
+"Su petición de unión al proyecto %1$s fue aprobada por un administrador."
 
 #: common/include/SCMPlugin.class.php:121
 msgid "<p>Unimplemented SCM plugin.</p>"
-msgstr ""
+msgstr "<p>Plugin de SCM no implementado.</p>"
 
 #: common/include/SCMPlugin.class.php:125
 msgid "<p>Instructions for anonymous access for unimplemented SCM plugin.</p>"
@@ -1023,9 +1021,8 @@ msgstr ""
 
 #: common/include/SCMPlugin.class.php:138
 #: common/include/SCMPlugin.class.php:150
-#, fuzzy
 msgid "Repository Browser"
-msgstr "Repositorio SCM"
+msgstr "Navegador del repositorio"
 
 #: common/include/SCMPlugin.class.php:139
 #: common/include/SCMPlugin.class.php:151
@@ -1052,20 +1049,19 @@ msgstr ""
 
 #: common/include/SCMPlugin.class.php:191
 msgid "Repository History"
-msgstr ""
+msgstr "Histórico del repositorio"
 
 #: common/include/SCMPlugin.class.php:192
 msgid "Data about current and past states of the repository"
-msgstr ""
+msgstr "Datos sobre el estado presente y pasado del repositorio"
 
 #: common/include/SCMPlugin.class.php:221
 msgid "Enable Anonymous Access"
-msgstr ""
+msgstr "Activa acceso anónimo"
 
 #: common/include/User.class.php:241
-#, fuzzy
 msgid "You must supply a theme"
-msgstr "Debe proporcionar un nombre de usuario"
+msgstr "Debe proporcionar un tema"
 
 #: common/include/User.class.php:246
 msgid "You must supply a username"
@@ -1158,9 +1154,8 @@ msgid "%1$s Account Registration"
 msgstr "Registro de una cuenta en %1$s"
 
 #: common/include/User.class.php:850 common/include/User.class.php:903
-#, fuzzy
 msgid "User with this email already exists."
-msgstr "El usuario ya existe."
+msgstr "Ya existe un usuario con esa dirección de correcto electrónico"
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
@@ -14408,7 +14403,7 @@ msgstr "Vistas del Sitio"
 
 #: www/trove/index.php:64
 msgid "Remove Filter"
-msgstr "Eliminar este Filtro"
+msgstr "Eliminar filtro"
 
 #: www/trove/index.php:166
 #, php-format
@@ -14416,12 +14411,15 @@ msgid "Displaying %d project per page. Projects sorted by activity ranking."
 msgid_plural ""
 "Displaying %d projects per page. Projects sorted by activity ranking."
 msgstr[0] ""
+"Mostrar %d del proyecto por página.Los proyectos están ordenados por el "
+"ranking de actividad."
 msgstr[1] ""
+"Mostrar %d de los proyectos por página.Los proyectos están ordenados por el "
+"ranking de actividad."
 
 #: www/users:33
-#, fuzzy
 msgid "No User Name Provided"
-msgstr "Nombre de Usuario"
+msgstr "No ha proporcionado el nombre de usuario"
 
 #, fuzzy
 #~ msgid "Group name is already exists"

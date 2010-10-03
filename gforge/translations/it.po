@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-03-01 22:22+0100\n"
-"PO-Revision-Date: 2010-04-19 22:47+0200\n"
+"PO-Revision-Date: 2010-05-06 14:22+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -322,9 +322,8 @@ msgstr ""
 #: common/include/Error.class.php:126 common/include/Group.class.php:427
 #: common/include/Group.class.php:499 www/include/exit.php:37
 #: www/news/admin/index.php:345
-#, fuzzy
 msgid "Permission denied."
-msgstr "Utente non autorizzato"
+msgstr "Autorizzazione negata"
 
 #: common/include/Error.class.php:143 common/include/User.class.php:280
 #: www/tracker/tracker.php:74
@@ -332,18 +331,17 @@ msgid "Invalid Email Address"
 msgstr "Indirizzo email non valido"
 
 #: common/include/Error.class.php:163
-#, fuzzy, php-format
+#, php-format
 msgid "Error On Update: %s"
-msgstr "Errore nell'aggiornamento:"
+msgstr "Errore nell'aggiornamento: %s"
 
 #: common/include/Error.class.php:204 www/frs/admin/editrelease.php:219
 msgid "Missing Parameters"
 msgstr "Parametri mancanti"
 
 #: common/include/Group.class.php:233
-#, fuzzy
 msgid "Group Not Found"
-msgstr "File non trovato"
+msgstr "Gruppo non trovato"
 
 #: common/include/Group.class.php:249 www/survey/admin/add_question.php:35
 #: www/survey/admin/add_survey.php:36 www/survey/admin/edit_question.php:37
@@ -353,28 +351,26 @@ msgstr "File non trovato"
 #: www/survey/admin/show_results_csv.php:35
 #: www/survey/admin/show_results_individual.php:38
 #: www/survey/admin/survey.php:40
-#, fuzzy
 msgid "Permission denied"
-msgstr "Utente non autorizzato"
+msgstr "Autorizzazione negata"
 
 #: common/include/Group.class.php:265
 #, php-format
 msgid "fetchData():: %s"
-msgstr ""
+msgstr "fetchData():: %s"
 
 #: common/include/Group.class.php:289
 msgid "Group::create: Group object already exists"
-msgstr ""
+msgstr "Group::create: il gruppo esiste gia'"
 
 #: common/include/Group.class.php:294
-#, fuzzy
 msgid "Invalid Unix name"
-msgstr "Nome unix non valido"
+msgstr "Nome unix non valido "
 
 #: common/include/Group.class.php:297 common/include/Group.class.php:301
 #: common/include/User.class.php:276
 msgid "Unix name already taken"
-msgstr "Nome unix già utilizzato."
+msgstr "Nome unix già utilizzato"
 
 #: common/include/Group.class.php:304
 msgid ""
@@ -385,7 +381,7 @@ msgstr "Descrivi il sommario del progetto in modo più dettagliato."
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
-msgstr ""
+msgstr "Il sommario e' troppo lungo. Deve essere minore di 1500 caratteri."
 
 #: common/include/Group.class.php:310
 msgid "Describe in a more comprehensive manner your project."
@@ -394,64 +390,64 @@ msgstr "Descrivi il progetto in modo più dettagliato."
 #: common/include/Group.class.php:313
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
-msgstr ""
+msgstr "La descrizione e' troppo lunga. Deve essere minore di 256 caratteri."
 
 #: common/include/Group.class.php:353
 #, php-format
 msgid "ERROR: Could not create group: %s"
-msgstr ""
+msgstr "ERRORE: Impossibile creare il gruppo: %s"
 
 #: common/include/Group.class.php:360
 #, php-format
 msgid "ERROR: Could not get group id: %s"
-msgstr ""
+msgstr "ERRORE: Impossibile ottenere l'id gruppo: %s"
 
 #: common/include/Group.class.php:379
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
-msgstr ""
+msgstr "ERRORE: Impossibile aggiungere l'amministratore al nuovo gruppo: %s"
 
 #: common/include/Group.class.php:422 common/include/Group.class.php:494
-#, fuzzy
 msgid "Could not get permission."
-msgstr "Impossibile ottenere il permesso"
+msgstr "Impossibile ottenere il permesso."
 
 #: common/include/Group.class.php:445
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
-msgstr ""
+msgstr "ERRORE: DB: Impossibile cambiare proprieta' gruppo: %s"
 
 #: common/include/Group.class.php:513
-#, fuzzy, php-format
+#, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
-msgstr[0] "Indirizzi e-mail non validi"
-msgstr[1] "Indirizzi e-mail non validi"
+msgstr[0] "L'indirizzo del nuovo documento non è valido"
+msgstr[1] "Gli indirizzi del nuovo documento non sono validi"
 
 #: common/include/Group.class.php:566
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
+"Errore nell'aggiornamento del progetto: la lunghezza massima della "
+"descrizione è di 256 caratteri."
 
 #: common/include/Group.class.php:614
-#, fuzzy, php-format
+#, php-format
 msgid "Error updating project information: %s"
-msgstr "Informazioni Trove del progetto"
+msgstr "Errore nell'aggiornamento delle informazioni del progetto: %s"
 
 #: common/include/Group.class.php:706
-#, fuzzy
 msgid "Invalid Status Change"
-msgstr "Utente non valido"
+msgstr "Cambio stato non valido"
 
 #: common/include/Group.class.php:717
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
-msgstr ""
+msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
 #: common/include/Group.class.php:885
 msgid "Couldn't insert SCM_BOX to database"
-msgstr ""
+msgstr "Impossibile inserire SCM_BOX nel database"
 
 #: common/include/Group.class.php:889
 msgid "SCM Box can't be empty"
@@ -462,30 +458,31 @@ msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
+"Nome tag non valido, sono validi questi caratteri:[A-Z][a-z][0-9]-_&'#+. e "
+"spazio"
 
 #: common/include/Group.class.php:1328
-#, fuzzy
 msgid "Setting tags: "
-msgstr "Impostazione"
+msgstr "Impostazione tag:"
 
 #: common/include/Group.class.php:1373
 msgid "Cannot Delete System Group"
-msgstr ""
+msgstr "Impossibile cancellare un gruppo di sistema"
 
 #: common/include/Group.class.php:1403
 #, php-format
 msgid "Not Object: ArtifactType: %d"
-msgstr ""
+msgstr "Non è un oggetto: ArtifactType: %d"
 
 #: common/include/Group.class.php:1415
 #, php-format
 msgid "Not Object: Forum: %d"
-msgstr ""
+msgstr "Non è un oggetto: Forum: %d"
 
 #: common/include/Group.class.php:1428
-#, fuzzy, php-format
+#, php-format
 msgid "Not Object: ProjectGroup: %d"
-msgstr "Non ho potuto aggiornare il messaggio superiore"
+msgstr "Non è un oggetto: ProjectGroup: %d"
 
 #: common/include/Group.class.php:1459
 #, fuzzy, php-format
