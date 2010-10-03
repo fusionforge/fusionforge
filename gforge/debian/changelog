@@ -5,8 +5,9 @@ fusionforge (5.0.2-1+) UNRELEASED; urgency=low
   * Update roadmap URL (closes: #597847).
   * Fix detection of PostgreSQL's init script (closes: #596929).
   * Updated Portuguese Debconf translations (closes: #597354).
+  * Support rsyslog as well as syslogd (closes: 535580).
 
- -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 15:09:49 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 15:19:44 +0200
 
 fusionforge (5.0.2-1) unstable; urgency=low
 
