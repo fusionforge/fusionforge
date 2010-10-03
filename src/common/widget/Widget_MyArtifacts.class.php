@@ -224,7 +224,7 @@ class Widget_MyArtifacts extends Widget {
 						$html .= '
 							<TR class="'.$class.'">'.
 							'<TD class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</TD>'.
-							'<TD colspan="1"><A HREF="/tracker/?func=detail&group_id='.
+							'<TD><A HREF="/tracker/?func=detail&group_id='.
 							$group_id.'&aid='.$aid.'&atid='.$atid.
 							'">'. stripslashes($summary).'</A></TD>'.
 							'<TD class="small">';
