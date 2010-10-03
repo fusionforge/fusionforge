@@ -1,4 +1,4 @@
-fusionforge (5.0.2-1+) UNRELEASED; urgency=low
+fusionforge (5.0.2-2) unstable; urgency=low
 
   * Ship a /usr/share/gforge/plugins/ directory in gforge-web-apache2
     (closes: #597714).
@@ -13,7 +13,7 @@ fusionforge (5.0.2-1+) UNRELEASED; urgency=low
   * Ditto for fusionforge-config instead of gforge-config (closes: #597931).
   * Updated Spanish, Italian and French translations from upstream.
 
- -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 18:07:55 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 18:26:20 +0200
 
 fusionforge (5.0.2-1) unstable; urgency=low
 
