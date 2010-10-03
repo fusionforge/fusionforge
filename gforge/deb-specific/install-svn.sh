@@ -12,7 +12,7 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-gforge_chroot=$(grep ^gforge_chroot= /etc/gforge/gforge.conf | cut -d= -f2-)
+gforge_chroot=$(grep ^gforge_chroot= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
 
 case "$1" in
     configure)

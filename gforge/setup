@@ -482,8 +482,8 @@ do
 			SHAREDIR=/usr/share/gforge
 			LIBDIR=/usr/share/gforge
 			CONFFILEOUTDIR=/etc/gforge
-			CONFFILEIN=/etc/gforge/gforge.conf
-			CONFFILEOUT=/etc/gforge/gforge.conf
+			CONFFILEIN=/etc/fusionforge/fusionforge.conf
+			CONFFILEOUT=/etc/fusionforge/fusionforge.conf
 			LOCALINC=/etc/gforge/local.inc
 			HTTPDCONF=/etc/gforge/httpd.conf
 			HTTPDSECRETS=/etc/gforge/httpd.secrets

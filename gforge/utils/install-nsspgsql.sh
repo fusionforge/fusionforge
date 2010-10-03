@@ -22,9 +22,9 @@ fi
 PATH=$PATH:/usr/sbin
 
 setup_vars() {
-    db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
-    db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
-    db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
+    db_host=$(grep ^db_host= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+    db_name=$(grep ^db_name= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+    db_user=$(grep ^db_user= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
     
     db_user_nss=$db_user"_nss"
 

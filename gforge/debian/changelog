@@ -8,8 +8,10 @@ fusionforge (5.0.2-1+) UNRELEASED; urgency=low
   * Support rsyslog as well as syslogd (closes: 535580).
   * Handle amd64 architectures and add missing files in chroot creation
     (closes: #396128, #536055).
+  * Make up our mind about which config file to use (fusionforge.conf, not
+    gforge.conf) and migrate from gforge.conf if needed (closes: 597916).
 
- -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 15:35:43 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 03 Oct 2010 15:53:52 +0200
 
 fusionforge (5.0.2-1) unstable; urgency=low
 

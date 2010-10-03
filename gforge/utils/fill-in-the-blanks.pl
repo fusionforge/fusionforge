@@ -19,7 +19,7 @@ if ($#ARGV >= 2) {
 } else {
 	$ifile = shift @ARGV ;
 	$ofile = shift @ARGV ;
-	$cfile = "/etc/gforge/gforge.conf" ;
+	$cfile = "/etc/fusionforge/fusionforge.conf" ;
 }
 %hash = () ;
 
