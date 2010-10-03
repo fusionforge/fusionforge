@@ -4550,6 +4550,7 @@ tests/scripts/fusionforge-github-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-trunk-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-trunk-build-rpm.sh -text
 tests/scripts/fusionforge-trunk-test-rpm.sh -text
+tests/scripts/scan_deprecated.pl -text
 tests/scripts/start_vm.sh -text
 tests/scripts/start_vz.sh -text
 tests/scripts/stop_vm.sh -text
