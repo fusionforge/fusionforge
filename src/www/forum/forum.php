@@ -256,7 +256,7 @@ if ($forum_id) {
 			$rows=$max_rows;
 		}
 		$i=0;
-        $total_rows = 0;
+		$total_rows = 0;
 		while (($i < $rows) && ($total_rows < $max_rows)) {
 			$msg =& $msg_arr["0"][$i];
 			$total_rows++;

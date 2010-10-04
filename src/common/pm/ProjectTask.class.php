@@ -188,7 +188,7 @@ class ProjectTask extends Error {
 						  $parent_id)) ;
 		
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError('ProjectTask::create() Posting Failed '.db_error().$sql);
+			$this->setError('ProjectTask::create() Posting Failed '.db_error());
 			db_rollback();
 			return false;
 		}

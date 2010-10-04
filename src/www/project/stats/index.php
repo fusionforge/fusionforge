@@ -93,7 +93,7 @@ if ($end && !is_numeric($end)) { $end = false; }
 </tr></table>
 </form>
 <p>
-<img src="/reporting/projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;g_id=$group_id&amp;area=$area"; ?>" width="640" height="480" alt="" />
+<img src="/reporting/projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;g_id=$group_id&amp;area=$area"; ?>" width="640" height="480" alt="stats graph" />
 </p>
 </div>
 <?php

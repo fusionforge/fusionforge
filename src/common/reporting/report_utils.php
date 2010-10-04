@@ -124,6 +124,8 @@ function report_group_box($name='g_id', $selected='1') {
 }
 
 function report_area_box($name='area', $selected='1', $Group=false) {
+	$arr = array () ;
+	$arr2 = array () ;
 	if ($Group) {
 		$use_tracker = $Group->usesTracker();
 		$use_forum = $Group->usesForum();
