@@ -59,6 +59,7 @@ if (!$end || $end <= $start) {
 	$z =& $report->getMonthStartArr();
 	$end = $z[count($z)-1];
 }
+if ($end < $start) list($start, $end) = array($end, $start);
 
 // Find a default SPAN value depending on the number of days.
 $delta=($end - $start)/24/60/60;

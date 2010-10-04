@@ -82,6 +82,7 @@ if (!$end) {
 	$z =& $report->getMonthStartArr();
 	$end = $z[ count($z)-1];
 }
+if ($end < $start) list($start, $end) = array($end, $start);
 
 frs_header(array('title'=>_('File Release Reporting'),
 		 'group'=>$group_id,
