@@ -108,7 +108,7 @@ function &user_get_objects($id_arr) {
 		//
 		//  See if this ID already has been fetched in the cache
 		//
-		if (!$id_arr[$i]) {
+		if (!isset($id_arr[$i]) || !$id_arr[$i]) {
 			continue;
 		}
 		if (!isset($USER_OBJ["_".$id_arr[$i]."_"])) {

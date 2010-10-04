@@ -43,6 +43,7 @@ if (!forge_get_config('use_scm')) {
 }
 
 // Get the project name from query
+$projectName = "";
 if(getStringFromGet('root') && strpos(getStringFromGet('root'), ';') === false) {
 	$projectName = getStringFromGet('root');
 } else {

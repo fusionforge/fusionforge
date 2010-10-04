@@ -71,6 +71,7 @@ if(isset($groups[0])) //die projekte der gruppen werden in $projects gespeichert
 }
 $p=handle_getvar('group_project_ids');
 $projects = array_unique(array_merge($projects,$p)); //die projekte der getvars kommen dazu
+$project_sq = '' ;
 if(isset($projects[0]))
 {
 	foreach($projects AS $project)

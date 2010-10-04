@@ -26,6 +26,7 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
+$feedback = '' ;
 
 $query_id = getIntFromRequest('query_id');
 $query_action = getIntFromRequest('query_action');

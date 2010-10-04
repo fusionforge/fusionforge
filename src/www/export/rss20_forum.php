@@ -167,8 +167,8 @@ $error_no_messages = false;
 //there were filter parameters but they were invalid or
 //there were valid group_ids, but they contained no forums
 
-if (($n_groups == 0 && count($_GET['group_ids'])>0) || 
-    ($n_forums == 0 && count($_GET['forum_ids'])>0) ||
+if (($n_groups == 0 && isset($_GET['group_ids']) && count($_GET['group_ids'])>0) || 
+    ($n_forums == 0 && isset($_GET['forum_ids']) && count($_GET['forum_ids'])>0) ||
     ($n_groups > 0 && $n_forums == 0)){
     $error_no_messages = "No forum messages found. Please check for invalid parameters and if the project(s) contain public forums.";
 }

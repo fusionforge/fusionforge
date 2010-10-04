@@ -440,7 +440,7 @@ function stats_site_projects_monthly() {
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . 'align="right">'
+			print	'<tr ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . ' align="right">'
 				. '<td>' . $row['month'] . '</td>'
 				. '<td>' . number_format( $row["site_page_views"],0 ) . '</td>'
 				. '<td>' . number_format( $row["subdomain_views"],0 ) . '</td>'

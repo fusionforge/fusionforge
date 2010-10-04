@@ -406,6 +406,9 @@ class ForumHTML extends Error {
 		*/
 		global $total_rows,$forum_id,$current_message,$group_id;
 
+		if (!isset($msg_arr["$msg_id"]))
+			return "";
+
 		$rows=count($msg_arr["$msg_id"]);
 		$ret_val = "";
 		//echo "<p>ShowSubmessages() $msg_id | $rows";

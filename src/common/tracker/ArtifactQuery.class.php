@@ -499,6 +499,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	The column name.
 	 */
 	function getSortCol() {
+		if (!isset($this->element_array))
+			return false;
 		return $this->element_array[ARTIFACT_QUERY_SORTCOL][0];
 	}
 
@@ -508,6 +510,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	ASC or DESC
 	 */
 	function getSortOrd() {
+		if (!isset($this->element_array))
+			return false;
 		return $this->element_array[ARTIFACT_QUERY_SORTORD][0];
 	}
 
@@ -517,6 +521,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	mod date range.
 	 */
 	function getModDateRange() {
+		if (!isset($this->element_array))
+			return false;
 		if ($this->element_array[ARTIFACT_QUERY_MODDATE][0]) {
 			return $this->element_array[ARTIFACT_QUERY_MODDATE][0];
 		} else {
@@ -530,6 +536,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Open date range.
 	 */
 	function getOpenDateRange() {
+		if (!isset($this->element_array))
+			return false;
 		if ($this->element_array[ARTIFACT_QUERY_OPENDATE][0]) {
 			return $this->element_array[ARTIFACT_QUERY_OPENDATE][0];
 		} else {
@@ -543,6 +551,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Close date range.
 	 */
 	function getCloseDateRange() {
+		if (!isset($this->element_array))
+			return false;
 		if ($this->element_array[ARTIFACT_QUERY_CLOSEDATE][0]) {
 			return $this->element_array[ARTIFACT_QUERY_CLOSEDATE][0];
 		} else {
@@ -595,6 +605,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Assignee ID
 	 */
 	function getAssignee() {
+		if (!isset($this->element_array))
+			return false;
 		return $this->element_array[ARTIFACT_QUERY_ASSIGNEE][0];
 	}
 
@@ -604,6 +616,8 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Status ID
 	 */
 	function getStatus() {
+		if (!isset($this->element_array))
+			return false;
 		return $this->element_array[ARTIFACT_QUERY_STATE][0];
 	}
 
