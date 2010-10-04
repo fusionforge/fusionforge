@@ -57,7 +57,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 		$ath->adminHeader(array ('title'=>$title));
 		echo "<h3>".$title."</h3>";
 		
-		$efearr =& $ath->getExtraFieldElements($id);
+		$efearr = $ath->getExtraFieldElements($id);
 		for ($i=0; $i<count($efearr); $i++) {
 			$field_id_arr[] = $efearr[$i]['element_id'];
 			$field_arr[] = $efearr[$i]['element_name'];

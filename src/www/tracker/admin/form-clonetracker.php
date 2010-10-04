@@ -35,7 +35,7 @@ if (!$g || !is_object($g)) {
 	} elseif ($atf->isError()) {
 		exit_error($atf->getErrorMessage(),'tracker');
 	} else {
-		$ata = & $atf->getArtifactTypes();
+		$ata = $atf->getArtifactTypes();
 		$ids = array();
 		$titles = array();
 		for ($i=0; $i<count($ata); $i++) {
