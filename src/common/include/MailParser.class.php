@@ -64,7 +64,7 @@ class MailParser extends Error {
 					//
 					//	See if line starts with tab, if so ignore it for now
 					//
-					if (!ereg('^[A-z]',$lines[$i])) {
+					if (!preg_match('/^[A-z]/',$lines[$i])) {
 						$header[$lastheader] = $header[$lastheader]."\n".$lines[$i];
 					} else {
 						$pos = (strpos($lines[$i],':'));

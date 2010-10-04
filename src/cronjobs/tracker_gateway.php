@@ -129,7 +129,7 @@ class TrackerGateway extends Error {
 		//we parse that ID to get the artifact that this should post to
 		//
 		$subj = $mp->getSubject();
-		if (ereg('(\[)([0-9]*)(\])',$subj,$arr)) {
+		if (preg_match('/(\[)([0-9]*)(\])/',$subj,$arr)) {
 		        $this->ArtifactId=$arr[2];
 			$artifactid_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
 			$this->Subject = addslashes(substr($subj,$artifactid_end));

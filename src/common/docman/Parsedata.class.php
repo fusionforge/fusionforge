@@ -63,8 +63,7 @@ class Parsedata {
 		}
 		// always parse titre and description
 		$data2 = utf8_decode("$title $description");
-		// $data2 = ereg_replace ("\n", " ", $data2);
-		// temporary file for traitement
+		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
 		$fp = fopen ($filename, "w");
 		fwrite ($fp, $data2);
@@ -73,7 +72,7 @@ class Parsedata {
 		$cmd = "php -f $cmd $filename";
 		$rep1 = shell_exec ($cmd);
 		// dont need to unlink the filename because parser_text already remove it
-		return ereg_replace ("\n", " ", "$rep $rep1");
+		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
 	
 	

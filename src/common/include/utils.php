@@ -526,9 +526,14 @@ function util_make_links ($data='') {
 		// angle brackets in the URL
 		// (RFC2396; http://www.w3.org/Addressing/URL/5.1_Wrappers.html)
 		$line = str_replace('&gt;', "\1", $line);
-		$line = eregi_replace("([ \t]|^)www\."," http://www.",$line);
-		$text = eregi_replace("([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]#?/&=])", "<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $line);
-		$text = eregi_replace("([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $text);
+		$line = preg_replace( "/([ \t]|^)www\./i", " http://www.", $line);
+		$text = preg_replace( "/([[:alnum:]]+):\/\/([^[:space:]<\1]*)([[:alnum:]#?\/&=])/i",
+			"<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $line);
+		$text = preg_replace(
+			"/([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))/i",
+			"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
+			$text
+			);
 		$text = str_replace("\1", '&gt;', $text);
 		$newText .= $text;
 	}
@@ -811,7 +816,9 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
  *
  */
 function validate_email ($address) {
-	return (ereg('^[-!#$%&\'*+\\./0-9=?A-Z^_`a-z{|}~]+'. '@'. '[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.' . '[-!#$%&\'*+\\./0-9=?A-Z^_`a-z{|}~]+$', $address) !== false);
+	return ( preg_match(
+		"/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/",
+		$address) );
 }
 
 /**
@@ -870,14 +877,14 @@ function util_is_valid_filename ($file) {
 function valid_hostname ($hostname = "xyz") {
 
 	//bad char test
-	$invalidchars = eregi_replace("[-A-Z0-9\.]","",$hostname);
+	$invalidchars = preg_replace("/[-A-Z0-9\.]/i","",$hostname);
 
 	if (!empty($invalidchars)) {
 		return false;
 	}
 
 	//double dot, starts with a . or -
-	if (ereg("\.\.",$hostname) || ereg("^\.",$hostname) || ereg("^\-",$hostname)) {
+	if ( preg_match("/\.\./",$hostname) || preg_match("/^\./",$hostname)  || preg_match("/^\-/",$hostname) ) {
 		return false;
 	}
 

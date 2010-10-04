@@ -56,7 +56,7 @@ class LDAP extends UNIX {
 			return '?';
 		}
 	
-		return ereg_replace("[\x80-\xff]","?",$str);
+		return preg_replace("/[\x80-\xff]/","?",$str);
 	}
 
 	/*

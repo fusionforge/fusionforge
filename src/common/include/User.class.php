@@ -1176,9 +1176,9 @@ Enjoy the site.
 	 */
 	function setAuthorizedKeys($keys) {
 		$keys = trim($keys);
-		$keys = ereg_replace("\r\n", "\n", $keys); // Convert to Unix EOL
-		$keys = ereg_replace("\n+", "\n", $keys); // Remove empty lines
-		$keys = ereg_replace("\n", "###", $keys); // Convert EOL to marker
+		$keys = preg_replace("/\r\n/", "\n", $keys); // Convert to Unix EOL
+		$keys = preg_replace("/\n+/", "\n", $keys); // Remove empty lines
+		$keys = preg_replace("/\n/", "###", $keys); // Convert EOL to marker
 
 		$res = db_query_params ('UPDATE users SET authorized_keys=$1 WHERE user_id=$2',
 					array ($keys,

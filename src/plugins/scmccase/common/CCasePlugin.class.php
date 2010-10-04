@@ -76,7 +76,7 @@ class CCasePlugin extends SCMPlugin {
 		$project =& group_get_object($group_id);
 		
 		if ($project->usesPlugin ("scmccase")) {
-			$vob_tag = ereg_replace ("GROUPNAME", $project->getUnixName (), forge_get_config('tag_pattern', 'scmccase')) ;
+			$vob_tag = preg_replace("/GROUPNAME/", $project->getUnixName (), forge_get_config('tag_pattern', 'scmccase')) ;
 	
 			print '<h2>ClearCase</h2>
 		                <p>Documentation for ClearCase is probably available somewhere.

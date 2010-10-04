@@ -39,14 +39,14 @@ else if ( isset( $_GET['ServerPath'] ) )
 else
 	$GLOBALS["UserFilesPath"] = '/UserFiles/' ;
 
-if ( ! ereg( '/$', $GLOBALS["UserFilesPath"] ) )
+if ( ! preg_match( '/\/$/', $GLOBALS["UserFilesPath"] ) )
 	$GLOBALS["UserFilesPath"] .= '/' ;
 
 if ( strlen( $Config['UserFilesAbsolutePath'] ) > 0 ) 
 {
 	$GLOBALS["UserFilesDirectory"] = $Config['UserFilesAbsolutePath'] ;
 
-	if ( ! ereg( '/$', $GLOBALS["UserFilesDirectory"] ) )
+	if ( ! preg_match( '/\/$/', $GLOBALS["UserFilesDirectory"] ) )
 		$GLOBALS["UserFilesDirectory"] .= '/' ;
 }
 else
@@ -72,7 +72,7 @@ function DoResponse()
 		return ;
 
 	// Check the current folder syntax (must begin and start with a slash).
-	if ( ! ereg( '/$', $sCurrentFolder ) ) $sCurrentFolder .= '/' ;
+	if ( ! preg_match( '/\/$/', $sCurrentFolder ) ) $sCurrentFolder .= '/' ;
 	if ( strpos( $sCurrentFolder, '/' ) !== 0 ) $sCurrentFolder = '/' . $sCurrentFolder ;
 	
 	// Check for invalid folder paths (..)

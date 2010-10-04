@@ -3,6 +3,7 @@
  * FusionForge account functions
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -63,15 +64,16 @@ function account_namevalid($name) {
 		return 0;
 	}
 
-	if (!ereg('^[a-z][-a-z0-9_]+$', $name)) {
+	if (!preg_match('/^[a-z][-a-z0-9_]+$/', $name)) {
 		$GLOBALS['register_error'] = _('Illegal character in name.');
 		return 0;
 	}
 
 	// illegal names
-	if (eregi("^((root)|(bin)|(daemon)|(adm)|(lp)|(sync)|(shutdown)|(halt)|(mail)|(news)"
-		. "|(uucp)|(operator)|(games)|(mysql)|(httpd)|(nobody)|(dummy)"
-		. "|(www)|(cvs)|(shell)|(ftp)|(irc)|(debian)|(ns)|(download))$",$name)) {
+	$regExpReservedNames = "^(root|bin|daemon|adm|lp|sync|shutdown|halt|mail|news|"
+		. "uucp|operator|games|mysql|httpd|nobody|dummy|www|cvs|shell|ftp|irc|"
+		. "debian|ns|download)$";
+	if( preg_match("/$regExpReservedNames/i", $name) ) {
 		$GLOBALS['register_error'] = _('Name is reserved.');
 		return 0;
 	}
@@ -85,7 +87,7 @@ function account_namevalid($name) {
 			return 0;
 		}
 	}
-	if (eregi("^(anoncvs_)",$name)) {
+	if (preg_match("/^(anoncvs_)/i",$name)) {
 		$GLOBALS['register_error'] = _('Name is reserved for CVS.');
 		return 0;
 	}
@@ -104,14 +106,16 @@ function account_groupnamevalid($name) {
 	if (!account_namevalid($name)) return 0;
 	
 	// illegal names
-	if (eregi("^((www[0-9]?)|(cvs[0-9]?)|(shell[0-9]?)|(ftp[0-9]?)|(irc[0-9]?)|(news[0-9]?)"
-		. "|(mail[0-9]?)|(ns[0-9]?)|(download[0-9]?)|(pub)|(users)|(compile)|(lists)"
-		. "|(slayer)|(orbital)|(tokyojoe)|(webdev)|(projects)|(cvs)|(slayer)|(monitor)|(mirrors?))$",$name)) {
+	$regExpReservedGroupNames = "^(www[0-9]?|cvs[0-9]?|shell[0-9]?|ftp[0-9]?|"
+		. "irc[0-9]?|news[0-9]?|mail[0-9]?|ns[0-9]?|download[0-9]?|pub|users|"
+		. "compile|lists|slayer|orbital|tokyojoe|webdev|projects|cvs|monitor|"
+		. "mirrors?)$";
+	if(preg_match("/$regExpReservedGroupNames/i",$name)) {
 		$GLOBALS['register_error'] = _('Name is reserved for DNS purposes.');
 		return 0;
 	}
 
-	if (eregi("_",$name)) {
+	if(preg_match("/_/",$name)) {
 		$GLOBALS['register_error'] = _('Group name cannot contain underscore for DNS reasons.');
 		return 0;
 	}

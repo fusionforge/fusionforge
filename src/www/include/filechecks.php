@@ -42,7 +42,7 @@ function filechecks_islegalname($filename) {
 		return 0;
 	}
 
-	if (ereg('^\.',$filename)) {
+	if (preg_match('/^\./',$filename)) {
 		return 0;
 	}
 
@@ -88,82 +88,82 @@ function filechecks_getfiletype($filename) {
 
 	$filename = chop($filename);
 
-	if (ereg(".diff$",$filename)) {
+	if (preg_match("/\.diff$/",$filename)) {
 		$filetype = "diff";
 	}
-	elseif (ereg(".diff.gz$",$filename)) {
+	elseif (preg_match("/\.diff.gz$/",$filename)) {
 		$filetype = "diff/gz";
 		filechecks_gz($filename);
 	}
-	elseif (ereg(".asc$",$filename)) {
+	elseif (preg_match("/\.asc$/",$filename)) {
 		$filetype = "asc";
 	}
-	elseif (ereg(".bin$",$filename)) {
+	elseif (preg_match("/\.bin$/",$filename)) {
 		$filetype = "bin";
 	}
-	elseif (ereg(".exe$",$filename)) {
+	elseif (preg_match("/\.exe$/",$filename)) {
 		$filetype = "exe";
 	}
-	elseif (ereg(".jar$",$filename)) {
+	elseif (preg_match("/\.jar$/",$filename)) {
 		$filetype = "jar";
 	}
-	elseif (ereg(".lsm$",$filename)) {
+	elseif (preg_match("/\.lsm$/",$filename)) {
 		$filetype = "lsm";
 	}
-	elseif (ereg(".pdb$",$filename)) {
+	elseif (preg_match("/\.pdb$/",$filename)) {
 		$filetype = "pilot";
 	}
-	elseif (ereg(".pl$",$filename)) {
+	elseif (preg_match("/\.pl$/",$filename)) {
 		$filetype = "perl";
 	}
-	elseif (ereg(".py$",$filename)) {
+	elseif (preg_match("/\.py$/",$filename)) {
 		$filetype = "python";
 	}
-	elseif (ereg(".prc$",$filename)) {
+	elseif (preg_match("/\.prc$/",$filename)) {
 		$filetype = "pilot";
 	}
-	elseif (ereg(".sig$",$filename)) {
+	elseif (preg_match("/\.sig$/",$filename)) {
 		$filetype = "sig";
 	}
-	elseif (ereg(".tar.bz2$",$filename)) {
+	elseif (preg_match("/\.tar.bz2$/",$filename)) {
 		$filetype = "tar/bz2";
 	}
-	elseif (ereg(".tar.gz$",$filename)) {
+	elseif (preg_match("/\.tar.gz$/",$filename)) {
 		$filetype = "tar/gz";
 		filechecks_targz($filename);
 	}
-	elseif (ereg(".tgz$",$filename)) {
+	elseif (preg_match("/\.tgz$/",$filename)) {
 		$filetype = "tgz";
 	}
-	elseif (ereg(".zip$",$filename)) {
+	elseif (preg_match("/\.zip$/",$filename)) {
 		$filetype = "zip";
 	}
-	elseif (ereg(".shar.gz$",$filename)) {
+	elseif (preg_match("/\.shar.gz$/",$filename)) {
 		$filetype = "shar/gz";
 	}
-	elseif (ereg(".bz2$",$filename)) {
+	elseif (preg_match("/\.bz2$/",$filename)) {
 		$filetype = "bz2";
 	}
-	elseif (ereg(".gz$",$filename)) {
+	elseif (preg_match("/\.gz$/",$filename)) {
 		$filetype = "gz";
 		filechecks_gz($filename);
 	}
-	elseif (ereg(".i386.rpm$",$filename)) {
+	elseif (preg_match("/\.i386.rpm$/",$filename)) {
 		$filetype = "i386 rpm";
 	}
-	elseif (ereg(".alpha.rpm$",$filename)) {
+	elseif (preg_match("/\.alpha.rpm$/",$filename)) {
 		$filetype = "alpha rpm";
 	}
-	elseif (ereg(".src.rpm$",$filename)) {
+	elseif (preg_match("/\.src.rpm$/",$filename)) {
 		$filetype = "src rpm";
 	}
-	elseif (ereg(".rpm$",$filename)) {
+	elseif (preg_match("/\.rpm$/",$filename)) {
 		$filetype = "rpm";
 	}
-	elseif (ereg(".deb$",$filename)) {
+	elseif (preg_match("/\.deb$/",$filename)) {
 		$filetype = "deb";
 	}
-	elseif (ereg("\.([a-zA-Z]+)$",$filename,$regs)) {
+	elseif (preg_match("/\.([a-zA-Z]+)$/",$filename,$regs)) {
 		$filetype = $regs[1];		
 	} 
 

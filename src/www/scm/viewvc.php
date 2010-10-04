@@ -56,7 +56,7 @@ if(getStringFromGet('root') && strpos(getStringFromGet('root'), ';') === false) 
 	}
 }
 // Remove eventual leading /root/ or root/
-$projectName = ereg_replace('^..[^/]*/','', $projectName);
+$projectName = preg_replace('%^..[^/]*/%','', $projectName);
 if (!$projectName) {
 	exit_no_group();
 }

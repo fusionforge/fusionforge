@@ -47,7 +47,7 @@ if ($touser) {
 	}
 }
 
-if ($toaddress && !eregi(forge_get_config('web_host'),$toaddress)) {
+if ($toaddress && !preg_match('/'.forge_get_config('web_host').'/i',$toaddress)) {
 	exit_error(sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')),'home');
 }
 
@@ -80,7 +80,7 @@ if (getStringFromRequest('send_mail')) {
 		/*
 			send it to the toaddress
 		*/
-		$to=eregi_replace('_maillink_','@',$toaddress);
+		$to=preg_replace('/_maillink_/i','@',$toaddress);
 		$to = util_remove_CRLF($to);
 		util_send_message($to,$subject,$body,$email,'',$name);
 		$HTML->header(array('title'=>forge_get_config ('forge_name').' ' ._('Contact')   ));

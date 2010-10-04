@@ -155,7 +155,7 @@ class ForumGateway extends Error {
 			$this->Subject = addslashes(substr($subj,$parent_end+3));
 		}
 */
-		if (ereg('(\[)([0-9]*)(\])',$subj,$arr)) {
+		if (preg_match('/(\[)([0-9]*)(\])/',$subj,$arr)) {
 			$this->Parent=$arr[2];
 			$parent_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
 			$this->Subject = addslashes(substr($subj,$parent_end));

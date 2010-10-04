@@ -95,7 +95,7 @@ $HTML->header(array('title'=>'User Account Registration'));
 if (!empty($error_msg))
 	print "<div class='error'>$error_msg</div>";
 
-if (!empty($warning))
+if (!empty($warning_msg))
 	print "<div class='warning_msg'>$warning_msg</div>";
 
 if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_\/\.+]+$/', $timezone)) {
