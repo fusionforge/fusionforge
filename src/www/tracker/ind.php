@@ -57,6 +57,8 @@ if (!$at_arr || count($at_arr) < 1) {
 	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>')."</strong>";
 } else {
 
+	echo '<h1>'.$params['title'].'</h1>';
+
 	plugin_hook ("blocks", "tracker index");
 
 	echo '<p>'._('Choose a tracker and you can browse/edit/add items to it.').'</p>';

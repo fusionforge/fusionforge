@@ -22,8 +22,7 @@
  */
 
 
-$ath->adminHeader(array ('title'=>sprintf(_('Delete tracker %s'), $ath->getName())));
-
+$ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'), $ath->getName())));
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="delete" value="y" /><br />

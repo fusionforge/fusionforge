@@ -34,7 +34,6 @@ $offset = getIntFromRequest('offset');
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 news_header(array('title'=>_('News')));
-echo '<h1>' . _('News') . '</h1>';
 
 plugin_hook ("blocks", "news index");
 

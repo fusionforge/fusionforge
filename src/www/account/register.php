@@ -79,13 +79,14 @@ if (getStringFromRequest('submit')) {
 					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
 					      $address,$address2,$phone,$fax,$title,$ccode);
 		if ($register) {
-			echo $HTML->header(array('title'=>'Register Confirmation'));
-			
+			site_header(array('title'=>'Register Confirmation'));
 			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), forge_get_config ('forge_name'));
-			echo $HTML->footer(array());
+			site_footer(array());
 			exit;
 		} else {
 			$error_msg = $new_user->getErrorMessage();
+		if (isset($register_error)) {
+			$error_msg .= ' '.$register_error;
 		}
 	}
 }

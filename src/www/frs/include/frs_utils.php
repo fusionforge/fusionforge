@@ -69,11 +69,12 @@ function frs_header($params) {
 	$params['toptab']='frs';
 	$params['group']=$group_id;
 	site_project_header($params);
+	echo '<h1>' . $params['title'] . '</h1>';
 
 	if (forge_check_perm ('frs', $group_id, 'write')) {
 		echo $HTML->subMenu(
 			array(
-				_('Files'),
+					_('File Release System'),
 				_('Admin'),
 				_('Reporting')
 				),

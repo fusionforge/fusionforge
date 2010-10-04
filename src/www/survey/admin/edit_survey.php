@@ -32,9 +32,9 @@ require_once $gfwww.'survey/admin/survey_utils.php';
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
+survey_header(array('title'=>_('Edit A Survey')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	survey_header(array('title'=>_('Edit A Survey')));
 	echo '<div class="error">'._('Permission denied').'</div>';
 	survey_footer(array());
 	exit;
@@ -78,8 +78,6 @@ WHERE survey_id=$4 AND group_id=$5',
 		}
 	}
 }
-
-survey_header(array('title'=>_('Edit A Survey')));
 
 /*
 	Get this survey out of the DB

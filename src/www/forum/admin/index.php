@@ -374,7 +374,7 @@ if (getStringFromRequest('add_forum')) {
 	} else { 
 		// Display select box to select new forum
 
-		forum_header(array('title'=>_('Forums: Administration')));
+					forum_header(array('title'=>_('Move Thread')));
 					
 		$ff = new ForumFactory($g);
 		if (!$ff || !is_object($ff) || $ff->isError()) {
@@ -437,7 +437,7 @@ if (getStringFromRequest('add_forum')) {
 	  Show main page for choosing
 	  either moderator or delete
 	*/
-	forum_header(array('title'=>_('Forums: Administration')));
+		forum_header(array('title'=>_('Forums Administration')));
 
 	//
 	//	Add new forum

@@ -68,7 +68,8 @@ Please visit the following URL to complete the email change:
 
 	site_user_header(array('title'=>_('Email Change Confirmation')));
 
-	printf (_('<p>An email has been sent to the new address. Follow the instructions in the email to complete the email change. </p><a href="%1$s">[ Home ]</a>'), util_make_url ('/'));
+	print '<p>' . _('An email has been sent to the new address. Follow the instructions in the email to complete the email change.') . '</p>';
+    printf ('<a href="%1$s">[ Home ]</a>', util_make_url ('/'));
 
 	site_user_footer(array());
 	exit();
@@ -77,7 +78,9 @@ Please visit the following URL to complete the email change:
 
 site_user_header(array('title'=>_('Email change')));
 
-echo _('<p>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.</p><p>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.</p>  <p>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.</p>');
+echo '<p>' . _('Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.') . '</p>';
+echo '<p>' . _('We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.') . '</p>';
+echo '<p>' . _('Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.') . '</p>';
 ?>
 
 <form action="<?php echo util_make_url('/account/change_email.php'); ?>" method="post">

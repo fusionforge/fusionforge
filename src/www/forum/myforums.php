@@ -48,9 +48,8 @@ if ($group_id) {
     forum_header(array('title'=>_('My Monitored Forums')));
 } else {
     site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
+    echo "<h1>" . _('My Monitored Forums') . "</h1>";
 }
-
-echo "<h1>" . _('My Monitored Forums') . "</h1>";
 
 //get the user monitored forums
 $result = db_query_params ('SELECT mon.forum_id, fg.group_id FROM forum_monitored_forums mon,forum_group_list fg where mon.user_id=$1 and fg.group_forum_id=mon.forum_id',

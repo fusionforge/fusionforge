@@ -37,10 +37,10 @@ if ($diary_user) {
 		exit_error($user_obj->getErrorMessage(),'home');
 	}
 
-	echo $HTML->header(array('title'=>_('My Diary And Notes')));
-
+	$title = _('Diary And Notes For').': '. $user_obj->getRealName();
+	echo $HTML->header(array('title'=>$title));
 	echo '
-	<h2>'._('Diary And Notes For').': '. $user_obj->getRealName() .'</h2>';
+	<h1>'. $title .'</h1>';
 
 	if ($diary_id) {
 		$res = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2 AND is_public=1',

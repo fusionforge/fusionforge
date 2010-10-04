@@ -61,8 +61,7 @@ if ($forum_id && $group_id) {
 		if (!$f->allowAnonymous() && !$f->savePlace()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-			forum_header(array('title'=>$f->getName(),'forum_id'=>$forum_id));
-			echo '<div align="center"><h3>'._('Start New Thread').'</h3></div>';
+			forum_header(array('title'=> _('Start New Thread for: ') . $f->getName(),'forum_id'=>$forum_id));
 			$fh->showPostForm();
 			forum_footer(array());
 		}

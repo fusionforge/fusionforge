@@ -39,8 +39,9 @@ function mail_header($params) {
 			}
 		}
 
-
 		site_project_header($params);
+		echo '<h1>' . $params['title']. '</h1>';
+
 		if (session_loggedin()) {
 			if (forge_check_perm ('project_admin', $project->getID())) {
 				echo $HTML->subMenu(

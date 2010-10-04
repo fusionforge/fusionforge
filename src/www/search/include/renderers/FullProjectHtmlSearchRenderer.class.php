@@ -84,7 +84,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		$title = _('Entire project search');
-		site_project_header(array('title' => $title, 'group' => $this->groupId));
+		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => ''));
 		echo '<h1>' . $title . '</h1>';
 		echo $this->getResult();
 	}

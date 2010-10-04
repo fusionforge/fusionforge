@@ -42,6 +42,7 @@ function project_admin_header($params) {
 	}
 
 	site_project_header($params);
+	echo '<h1>' . $params['title'] . '</h1>';
 	
 	$labels = array();
 	$links = array();

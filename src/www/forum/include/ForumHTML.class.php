@@ -58,6 +58,7 @@ function forum_header($params) {
 			$params['group']=db_result($result,0,'group_id');
 			$params['toptab']='news';
 			$HTML->header($params);
+			echo '<h1>' . $params['title'] . '</h1>';
 
 
 			echo '<table><tr><td valign="top">';
@@ -102,9 +103,11 @@ function forum_header($params) {
 			echo '</td></tr></table>';
 		} else {
 			site_project_header($params);
+			echo '<h1>' . $params['title'] . '</h1>';
 		}
 	} else {
 		site_project_header($params);
+		echo '<h1>' . $params['title'] . '</h1>';
 	}
 
 	$menu_text=array();

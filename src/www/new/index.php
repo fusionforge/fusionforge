@@ -131,7 +131,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
         if ($offset != 0) {
         	print '<a href="'.util_make_url ('/new/?offset='.($offset-20)).'">'.
 				html_image("t2.png","15","15").
-		' <strong>'._('Newer Releases').'</strong></a>';
+			' <strong>'._('Newer Releases').'</strong></a>';
         } else {
         	print '&nbsp;';
         }

@@ -82,11 +82,12 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 
 }
 
-
-site_admin_header(array('title'=>_('Site Admin: User Info')));
+$title = _('Site Admin: User Info');
+site_admin_header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>'
 
 ?>
-<h3><?php echo _('Account Information'); ?><sup>1</sup></h3>
+<h2><?php echo _('Account Information'); ?><sup>1</sup></h2>
 
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <input type="hidden" name="action" value="update_user" />
@@ -219,7 +220,7 @@ if ($u->getStatus() == 'D') {
 
 <hr />
 
-<h3><?php echo _('Projects Membership'); ?></h3>
+<h2><?php echo _('Projects Membership'); ?></h2>
 
 <?php
 /*

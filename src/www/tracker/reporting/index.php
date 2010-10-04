@@ -49,14 +49,15 @@ $res=db_query_params ('SELECT register_time FROM groups WHERE group_id=$1',
 			array($group_id));
 $report->site_start_date=db_result($res,0,'register_time');
 
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[count($z)-1];
 }
 if (!$end || $end <= $start) {
-	$z =& $report->getMonthStartArr();
 	$end = $z[0];
 }
+if ($end < $start) list($start, $end) = array($end, $start);
 
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
@@ -100,13 +101,14 @@ $labels=array();
 $vals[]='activity'; $labels[]='Response Time';
 $vals[]='assignee'; $labels[]='By Assignee';
 
-
 //required params for site_project_header();
 $params=array();
 $params['group']=$group_id;
 $params['toptab']='tracker';
+$params['title'] = _('Project Activity');
 
 echo site_project_header($params);
+echo '<h1>' . _('Project Activity') . '</h1>';
 
 ?>
 <div align="center">

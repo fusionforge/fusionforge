@@ -32,9 +32,9 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
+survey_header(array('title'=>_('Edit A Question')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	survey_header(array('title'=>_('Edit A Question')));
 	echo '<div class="error">' ._('Permission denied'). '</div>';
 	survey_footer(array());
 	exit;
@@ -67,8 +67,6 @@ if ($result) {
 } else {
 	$error_msg .= _('Error finding question');
 }
-
-survey_header(array('title'=>_('Edit A Question')));
 
 ?>
 <script type="text/javascript">

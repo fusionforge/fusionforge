@@ -30,9 +30,9 @@ require_once $gfwww.'survey/survey_utils.php';
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
+survey_header(array('title'=>_('Add A Question')));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	survey_header(array('title'=>_('Add A Question')));
 	echo '<div class="error">'._('Permission denied').'</div>';
 	survey_footer(array());
 	exit;
@@ -52,8 +52,6 @@ if (getStringFromRequest('post_changes')) {
 		$error_msg .= _('Error inserting question');
 	}
 }
-
-survey_header(array('title'=>_('Add A Question')));
 
 ?>
 <script type="text/javascript">

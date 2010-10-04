@@ -69,8 +69,10 @@ if (getStringFromRequest('submit')) {
 		exit_error(_('Scheduling Mailing, Could not schedule mailing, database error: ').db_error(),'admin');
 	}
 
-	site_admin_header(array('title'=>_('Massmail admin')));
-	print "<p>" ._('Mailing successfully scheduled for delivery'). "</p>";
+	$title = _('Massmail admin');
+	site_admin_header(array('title'=>$title));
+	echo '<h1>' . $title . '</h1>';
+	print "<p class=\"feedback\">" ._('Mailing successfully scheduled for delivery'). "</p>";
 	site_admin_footer(array());
 	exit();
 }
@@ -134,7 +136,6 @@ $res = db_query_params ('
 	WHERE finished_date=0
 ',
 			array()) ;
-
 
 $title=array();
 $title[]='&nbsp;';

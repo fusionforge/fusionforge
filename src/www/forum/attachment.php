@@ -43,6 +43,7 @@ require_once $gfwww.'forum/include/ForumHTML.class.php';
 
 function goodbye($msg) {
 	site_header(array('title'=>_('Attachments')));
+	html_feedback_top($msg);
 	echo '<p><p><center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>';
 	site_footer(array());
 	exit();

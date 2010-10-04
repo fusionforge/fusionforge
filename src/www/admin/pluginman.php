@@ -154,6 +154,8 @@ if (getStringFromRequest('update')) {
 }
 
 site_admin_header(array('title'=>_('Plugin Manager')));
+echo '<h1>' . _('Plugin Manager') . '</h1>';
+
 ?>
 <script type="text/javascript">
 <!--
@@ -170,7 +172,6 @@ site_admin_header(array('title'=>_('Plugin Manager')));
 // -->
 </script>
 <?php
-echo '<h1>' . _('Plugin Manager') . '</h1>';
 echo '<p>';
 echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.');
 echo '</p>';
@@ -233,7 +234,7 @@ foreach ($filelist as $filename) {
 				}
 				$users = substr($users,0,strlen($users) - 3); //remove the last |
 			} else {
-				$users = "none";
+				$users = _("none");
 			}
 		}
 
@@ -249,7 +250,7 @@ foreach ($filelist as $filename) {
 				}
 				$groups = substr($groups,0,strlen($groups) - 3); //remove the last |
 			} else {
-				$groups = "none";
+				$groups = _("none");
 			}
 		}
 		$link .= "','$filename');" . '">' . _('Deactivate') . "</a>";
@@ -259,8 +260,8 @@ foreach ($filelist as $filename) {
 		$status = "inactive";
 		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','$filename');" . '">' . _('Activate') . "</a>";
 		$init = '<input id="'.$filename.'" type="checkbox" name="script[]" value="'.$filename.'" />';
-		$users = "none";
-		$groups = "none";
+		$users = _("none");
+		$groups = _("none");
 	}
 
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
