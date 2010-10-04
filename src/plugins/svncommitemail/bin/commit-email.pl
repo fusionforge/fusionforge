@@ -45,7 +45,7 @@ my ($sendmail, $smtp_server);
 # You should define exactly one of these two configuration variables,
 # leaving the other commented out, to select which method of sending
 # email should be used.
-$sendmail = "/usr/sbin/sendmail";
+$sendmail = $ENV{SENDMAIL} || "/usr/sbin/sendmail";
 #$smtp_server = "127.0.0.1";
 
 # Svnlook path.
