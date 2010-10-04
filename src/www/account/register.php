@@ -85,8 +85,9 @@ if (getStringFromRequest('submit')) {
 			exit;
 		} else {
 			$error_msg = $new_user->getErrorMessage();
-		if (isset($register_error)) {
-			$error_msg .= ' '.$register_error;
+			if (isset($register_error)) {
+				$error_msg .= ' '.$register_error;
+			}
 		}
 	}
 }
