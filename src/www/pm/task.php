@@ -302,7 +302,7 @@ switch (getStringFromRequest('func')) {
 	case 'addartifact' : {
 		session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-		$add_artifact_id = getIntFromRequest('add_artifact_id');
+		$add_artifact_id[] = getIntFromRequest('add_artifact_id');
 		
 		$pt = new ProjectTask($pg,$project_task_id);
 		if (!$pt || !is_object($pt)) {

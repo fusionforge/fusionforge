@@ -52,7 +52,7 @@ class ProjectTaskHTML extends ProjectTask {
 		}
 		
 		//get the data so we can mark items as SELECTED
-		$arr2 =& $this->getAssignedTo();
+		$arr2 = $this->getAssignedTo();
 		return html_build_multiple_select_box_from_arrays ($tech_id_arr,$tech_name_arr,$name,$arr2);
 	}
 

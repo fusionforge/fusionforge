@@ -117,7 +117,7 @@ if (getStringFromRequest('add_to_task')) {
 //
 } elseif (getStringFromRequest('done_adding')) {
 
-	session_redirect('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id[]='. $a->getID());
+	session_redirect('/pm/task.php?group_id='.$group_id.'&group_project_id='.$group_project_id.'&project_task_id='.$project_task_id.'&func=addartifact&add_artifact_id='. $a->getID());
 
 //
 //	Create a new task and relate it to this artifact
