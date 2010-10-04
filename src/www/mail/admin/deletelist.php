@@ -51,8 +51,7 @@ $ml = new MailingList($group,getIntFromGet('group_list_id'));
 
 if (getStringFromPost('submit')) {
 	$sure = getStringFromPost('sure');
-	$really_sure = getStringFromPost('really_sure');
-	if (!$ml->delete($sure,$really_sure)) {
+	if (!$ml->delete($sure,$sure)) {
 		exit_error($ml->getErrorMessage(),'home');
 	} else {
 		$feedback= _('Mailing List Successfully deleted');
@@ -60,17 +59,17 @@ if (getStringFromPost('submit')) {
 	}
 }
 
-mail_header(array(
-	'title' => _('Permanently Delete List')
-));
+mail_header(array('title' => _('Permanently Delete List')));
 
 ?>
-<h3><?php echo $ml->getName(); ?></h3>
+<h2><?php echo $ml->getName(); ?></h2>
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $ml->getID(); ?>">
+<p>
 <input type="checkbox" name="sure" value="1" /><?php echo _('Confirm Delete'); ?><br />
-<input type="checkbox" name="really_sure" value="1" /><?php echo _('Confirm Delete'); ?><br />
-<p />
+</p>
+<p>
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
+</p>
 </form>
 <?php
 
