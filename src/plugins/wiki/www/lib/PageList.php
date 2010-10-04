@@ -1,5 +1,5 @@
 <?php
-//rcs_id('$Id: PageList.php 7659 2010-08-31 14:55:29Z vargenau $');
+//rcs_id('$Id: PageList.php 7710 2010-10-01 11:45:58Z vargenau $');
 /* Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -1582,7 +1582,7 @@ class PageList {
                                           $this->_options['limit']);
             if ($tokens) {
                 $paging = Template("pagelink", $tokens);
-                $out->pushContent(HTML::table(array('width'=>'50%'), $paging));
+                $out->pushContent(HTML::table(array('width'=>'100%'), $paging));
             }
         }
 
@@ -1693,7 +1693,7 @@ class PageList {
         }
         $out->pushContent($list);
         if ( $do_paging and $tokens ) {
-            $out->pushContent(HTML::table($paging));
+            $out->pushContent(HTML::table(array('width'=>'100%'), $paging));
         }
         return $out;
     }

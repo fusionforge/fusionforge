@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateToc.php 7701 2010-09-20 16:09:07Z vargenau $');
+// rcs_id('$Id: CreateToc.php 7689 2010-09-17 08:41:10Z vargenau $');
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -34,8 +34,6 @@
  * - Certain corner-edges will not work with TOC_FULL_SYNTAX.
  *   I believe I fixed all of them now, but who knows?
  * - bug #969495 "existing labels not honored" seems to be fixed.
- * - some constructs might incorrectly be recognized as a header
- *   (e.g. lines starting with "!!!" or "==" inside <verbatim>)
  */
 
 if (!defined('TOC_FULL_SYNTAX'))
@@ -241,8 +239,6 @@ extends WikiPlugin
     // - Wikicreole syntax (lines starting with "==", "===", etc.)
     // We must omit lines starting with "!" if inside a Mediawiki table
     // (they represent a table header)
-    // Some constructs might incorrectly be recognized as a header
-    // (e.g. lines starting with "!!!" or "==" inside <verbatim>)
     // Feature request: proper nesting; multiple levels (e.g. 1,3)
     function extractHeaders (&$content, &$markup, $backlink=0,
                              $counter=0, $levels=false, $firstlevelstyle='number', $basepage='')
@@ -254,16 +250,26 @@ extends WikiPlugin
         $headers = array();
         $j = 0;
         $insidetable = false;
+        $insideverbatim = false;
         for ($i=0; $i<count($content); $i++) {
             if (preg_match('/^\s*{\|/', $content[$i])) {
                $insidetable = true;
                continue;
-            }
-            if (preg_match('/^\s*\|}/', $content[$i])) {
+            } else if (preg_match('/^\s*{{{/', $content[$i]) 
+                    || preg_match('/^\s*<pre>/', $content[$i]) 
+                    || preg_match('/^\s*<verbatim>/', $content[$i])) {
+               $insideverbatim = true;
+               continue;
+            } else if (preg_match('/^\s*\|}/', $content[$i])) {
                $insidetable = false;
                continue;
+            } else if (preg_match('/^\s*}}}/', $content[$i]) 
+                    || preg_match('/^\s*<\/pre>/', $content[$i]) 
+                    || preg_match('/^\s*<\/verbatim>/', $content[$i])) {
+               $insideverbatim = false;
+               continue;
             }
-            if ($insidetable) {
+            if (($insidetable) || ($insideverbatim)) {
                continue;
             }
             foreach ($levels as $level) {
