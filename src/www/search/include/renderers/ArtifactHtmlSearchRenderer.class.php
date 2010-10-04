@@ -23,7 +23,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 require_once $gfwww.'search/include/renderers/HtmlGroupSearchRenderer.class.php';
 require_once $gfcommon.'search/ArtifactSearchQuery.class.php';
 

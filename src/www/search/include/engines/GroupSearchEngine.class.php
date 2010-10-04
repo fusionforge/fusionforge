@@ -22,7 +22,6 @@
  * USA
  */
 
-
 require_once $gfwww.'search/include/engines/SearchEngine.class.php';
 
 class GroupSearchEngine extends GFSearchEngine {

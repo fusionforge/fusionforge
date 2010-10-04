@@ -38,6 +38,7 @@ $group_id = getIntFromRequest('group_id');
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $warnig_msg = htmlspecialchars(getStringFromRequest('warnig_msg'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
+
 session_require_perm ('project_admin', $group_id) ;
 
 // get current information
@@ -113,7 +114,7 @@ if (getStringFromRequest('submit')) {
 					//we should remove him from the request list
 					//since it has already been added
 					$gjr=new GroupJoinRequest($group,$user_id);
-					if (($gjr || is_object($gjr)) && (!$gjr->isError())) {
+					if ($gjr || is_object($gjr) || !$gjr->isError()) {
 						$gjr->delete(true);
 					}
 				}

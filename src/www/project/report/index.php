@@ -140,7 +140,6 @@ echo '</p>';
         $title_arr[]=_('Last Modified');
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-
 // list members
 $res_memb = db_query_params("SELECT users.*,user_group.admin_flags,people_job_category.name AS role
 	FROM users,user_group 

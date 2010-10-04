@@ -14,6 +14,6 @@ if ($group_id) {
 	} else {
 		session_redirect('/frs/?group_id='.$group_id); }
 } else {
-    session_redirect('/');
+	session_redirect('/');
 }
 ?>
