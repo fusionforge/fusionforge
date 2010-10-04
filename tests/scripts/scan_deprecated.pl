@@ -32,6 +32,20 @@ sub scan_getStringFromRequest ($) {
 	print $k.join("\n$k", @matches)."\n" if (@matches);	
 }
 
+# Scan for deprecated func in code.
+sub scan_deprecated_func ($) {
+	local $content = shift;
+
+	@matches = ();
+	while ($content =~ /(eregi?\s*\(.*?\))(.*)/) {
+		$content = $2;
+		push(@matches, $1);
+	}
+
+	$k = "ereg(i)>".$File::Find::name.": ";
+	print $k.join("\n$k", @matches)."\n" if (@matches);
+}
+
 sub wanted {
 	next unless /\.php$/;
 	open(F, $_);
@@ -40,6 +54,7 @@ sub wanted {
 
 	scan_exit_error($content);
 	scan_getStringFromRequest($content);
+	scan_deprecated_func($content);
 }
 
 find(\&wanted, @ARGV);
