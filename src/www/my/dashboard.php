@@ -116,7 +116,7 @@ if (!session_loggedin()) {
                                         	        if ($display_col['summary'])
                                                 	echo '<td align="left"><a href="/tracker/?func=detail&aid='.
 	                                                        $art->getID() .
-        	                                                '&group_id='. $group_id .'&atid='.
+        	                                                '&group_id='. $p->getID() .'&atid='.
                 	                                        $ath->getID().'">'.
                         	                                $art->getSummary().
                                 	                        '</a></td>';
