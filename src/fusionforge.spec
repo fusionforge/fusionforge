@@ -614,6 +614,7 @@ fi
 %{GFORGE_DIR}/fusionforge-install*
 %{GFORGE_DIR}/gforge-restricted.sh
 %{GFORGE_DIR}/install.sh
+%{GFORGE_DIR}/install-common.inc
 %{GFORGE_DIR}/jpgraph
 # Directories under %{GFORGE_DIR}
 %{GFORGE_DIR}/backend
