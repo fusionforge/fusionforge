@@ -816,9 +816,11 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
  *
  */
 function validate_email ($address) {
-	return ( preg_match(
-		"/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/",
-		$address) );
+	if ( preg_match( "/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/", $address) ) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 /**
