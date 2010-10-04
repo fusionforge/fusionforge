@@ -55,6 +55,15 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
+if (!$group_id) {
+	exit_no_group();
+}
+$group=group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_no_group();
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(),'news');
+}
 
 if (session_loggedin()) {
 
