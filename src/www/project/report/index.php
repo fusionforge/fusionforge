@@ -154,10 +154,10 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		<tr>';
 	if ( trim($row_memb['admin_flags'])=='A' ) {
 		echo '
-			<td><strong>'.$row_memb['realname'].'</strong></td>';
+			<td><strong>'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['realname']).'</strong></td>';
 	} else {
 		echo '
-			<td>'.$row_memb['realname'].'</td>';
+			<td>'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['realname']).'</td>';
 	}
 	echo '
 			<td>'.
