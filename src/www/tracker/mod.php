@@ -207,12 +207,9 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 if ($group->usesPM()) {
 ?>
 <div class="tabbertab" title="<?php echo _('Related Tasks'); ?>">
-		<h3><?php echo _('Related Tasks'); ?>:</h3>
-<table border="0" width="80%">
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 	?>
-</table>
 </div>
 <?php } ?>
 <div class="tabbertab" title="<?php echo _('Attachments'); ?>">

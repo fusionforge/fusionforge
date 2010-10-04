@@ -291,8 +291,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			return '';
 		}
 
-		$result = $ah->getRelatedTasks();
-		$taskcount = db_numrows($ah->relatedtasks);
+		$taskcount = db_numrows($ah->getRelatedTasks());
 
 		if ($taskcount > 0) {
 			echo '<tr><td colspan="2">';
