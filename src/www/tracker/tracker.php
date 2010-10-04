@@ -38,6 +38,7 @@ if ($group->isError()) {
 		exit_error($group->getErrorMessage(),'tracker');
 	}
 }
+
 //
 //	Create the ArtifactType object
 //
@@ -152,7 +153,7 @@ switch (getStringFromRequest('func')) {
 						}
 					}
 				}
-				$feedback .= _('Item Successfully Created');
+				$feedback .= sprintf(_('Item %s successfully created'),'[#'.$ah->getID().']');
 				$feedback .= $ext_feedback;
 				include $gfwww.'tracker/browse.php';
 			}
@@ -416,7 +417,7 @@ switch (getStringFromRequest('func')) {
 				//	Show just one feedback entry if no errors
 				//
 				if (!$was_error) {
-					$feedback = _('Updated successfully');
+					$feedback = sprintf(_('Item %s successfully updated'),'[#'.$ah->getID().']');
 				}
 				$feedback .= $ext_feedback;
 				include $gfwww.'tracker/browse.php';
