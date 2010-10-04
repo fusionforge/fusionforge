@@ -36,14 +36,18 @@ $datatype = getStringFromRequest('datatype');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-
 if (!$end) {
-	$z =& $report->getMonthStartArr();
 	$end = $z[count($z)-1];
+}
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($start == $end) {
+	$error_msg .= _('Start and end dates must be different');
 }
 
 session_require_global_perm ('forge_stats', 'read') ;
@@ -64,10 +68,11 @@ if (!$datatype) {
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
+<?php if ($start != $end) { ?>
 <p>
 <img src="toolspie_graph.php?<?php echo "datatype=$datatype&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
 </p>
-<?php
+<?php }
 
 report_footer();
 

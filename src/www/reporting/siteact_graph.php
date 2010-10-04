@@ -49,7 +49,7 @@ if ($report->isError()) {
 
 // Create the graph. These two calls are always required
 $graph  = new Graph(640, 480,"auto");
-$graph->SetMargin(50,10,35,50);
+$graph->SetMargin(50,10,35,80);
 $graph->SetScale( "textlin");
 //$graph->SetScale( "linlog");
 //$graph ->SetYScale("log");

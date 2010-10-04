@@ -39,14 +39,18 @@ $type = getStringFromRequest('type');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-
 if (!$end) {
-	$z =& $report->getMonthStartArr();
 	$end = $z[count($z)-1];
+}
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($typ != 'r' && $start == $end) {
+	$error_msg .= _('Start and end dates must be different');
 }
 
 report_header(_('Site-Wide Time Tracking'));
@@ -76,7 +80,6 @@ $a2[]='user';
 
 <?php 
 if ($typ =='r') {
-
 	$report=new ReportSiteTime($type,$start,$end);
 	$labels = $report->labels;
 	$data = $report->getData();
@@ -84,16 +87,12 @@ if ($typ =='r') {
 	echo $HTML->listTableTop (array(_('Type'), _('Time')));
 
 	for ($i=0; $i<count($labels); $i++) {
-
 		echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>'.
 		'<td>'. $labels[$i] .'</td><td>'. $data[$i] .'</td></tr>';
-
 	}
 
 	echo $HTML->listTableBottom ();
-
-} else {
-?>
+} elseif ($start != $end) { ?>
 <p>
 <img src="sitetime_graph.php?<?php echo "start=$start&amp;end=$end&amp;type=$type"; ?>" width="640" height="480" alt="" />
 </p>

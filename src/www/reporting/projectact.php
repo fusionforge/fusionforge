@@ -40,13 +40,18 @@ $SPAN = getIntFromRequest('SPAN', 1);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-if (!$end || $end <= $start) {
-	$z =& $report->getMonthStartArr();
+if (!$end) {
 	$end = $z[count($z)-1];
+}
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($start == $end) {
+	$error_msg .= _('Start and end dates must be different');
 }
 
 report_header(_('Project Activity'));
@@ -65,7 +70,7 @@ report_header(_('Project Activity'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<?php if ($g_id) { ?>
+<?php if ($g_id && $start != $end) { ?>
 	<p>
 	<img src="projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&g_id=$g_id&amp;area=$area"; ?>" width="640" height="480" alt="" />
 	</p>

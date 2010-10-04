@@ -41,13 +41,18 @@ $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-if (!$end || $end <= $start) {
-	$z =& $report->getMonthStartArr();
+if (!$end) {
 	$end = $z[count($z)-1];
+}
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($start == $end) {
+	$error_msg .= _('Start and end dates must be different');
 }
 
 report_header(_('User Activity'));
@@ -79,7 +84,7 @@ if ($sw) {
 	<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 	</tr></table>
 	</form>
-	<?php if ($dev_id) { ?>
+	<?php if ($dev_id && $start != $end) { ?>
 		<p>
 		<img src="useract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&dev_id=$dev_id&amp;area=$area"; ?>" width="640" height="480">
 		</p>

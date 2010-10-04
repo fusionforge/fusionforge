@@ -41,11 +41,19 @@ $typ = getStringFromRequest('typ');
 $dev_id = getIntFromRequest('dev_id');
 $type = getStringFromRequest('type');
 
-if (!$start) {
-	$z =& $report->getMonthStartArr();
-	$start = $z[count($z)-1];
-}
+if (!$start || !$end) $z =& $report->getMonthStartArr();
 
+if (!$start) {
+	$start = $z[0];
+}
+if (!$end) {
+	$end = $z[count($z)-1];
+}
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($typ != 'r' && $start == $end) {
+	$error_msg .= _('Start and end dates must be different');
+}
 
 report_header(_('User Time Reporting'));
 
@@ -103,7 +111,7 @@ if ($sw) {
 
 			echo $HTML->listTableBottom ();
 
-		} elseif ($dev_id) { ?>
+		} elseif ($dev_id && $start != $end) { ?>
 		<p>
 		<img src="usertime_graph.php?<?php echo "start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;type=$type"; ?>" width="640" height="480" alt="" />
 		</p>

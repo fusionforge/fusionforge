@@ -44,6 +44,11 @@ if (!$end || $end <= $start) {
 	$z =& $report->getMonthStartArr();
 	$end = $z[count($z)-1];
 }
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($start == $end) {
+	$error_msg .= _('Start and end dates must be different');
+}
 
 session_require_global_perm ('forge_stats', 'read') ;
 
@@ -60,10 +65,9 @@ report_header(_('Projects Added'));
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
-<p>
-<img src="groupadded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" />
-</p>
-<?php
+<?php if ($start != $end) { ?>
+	<p><img src="groupadded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" width="640" height="480" alt="" /></p>
+<?php }
 
 report_footer();
 

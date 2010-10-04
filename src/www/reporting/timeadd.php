@@ -187,16 +187,16 @@ if (!$group_project_id) {
 	value="<?php echo $week; ?>" />
 <table>
 	<tr>
-		<td><strong><?php echo _('Task Manager Project'); ?>:</strong></td>
+		<td><strong><?php echo _("Tasks Project"); ?>:</strong></td>
 		<td><?php echo html_build_select_box ($respm,'group_project_id',false,false); ?></td>
 		<td><input type="submit" name="submit"
 			value="<?php echo _('Next'); ?>" /></td>
 	</tr>
 </table>
 </form>
-<p>
-<h3><? echo _('Change week') ?></h3>
-<p>
+
+<h2>Change Week</h2>
+
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get" /><?php echo report_weeks_box($report,'week'); ?><input
 	type="submit" name="submit" value="<?php echo _('Change Week'); ?>" />

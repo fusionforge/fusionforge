@@ -36,18 +36,22 @@ if ($report->isError()) {
 $sw = getStringFromRequest('sw');
 $typ = getStringFromRequest('typ');
 $g_id = getIntFromRequest('g_id');
-$typ = getStringFromRequest('typ');
+$type = getStringFromRequest('type');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-
 if (!$end) {
-	$z =& $report->getMonthStartArr();
 	$end = $z[count($z)-1];
+}
+if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($typ != 'r' && $start == $end) {
+	$error_msg .= _('Start and end dates must be different');
 }
 
 report_header(_('Time Tracking By Project'));
@@ -94,7 +98,7 @@ $a2[]='user';
 
 	    echo $HTML->listTableBottom ();
 
-	} elseif ($g_id) { ?>
+	} elseif ($g_id && $start != $end) { ?>
 	<p>
 	<img src="projecttime_graph.php?<?php echo "start=$start&amp;end=$end&amp;g_id=$g_id&amp;type=$type"; ?>" width="640" height="480" alt="" />
 	</p>

@@ -38,13 +38,15 @@ $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 $tstat = getStringFromRequest('tstat');
 
-$z =& $report->getWeekStartArr();
+if (!$start || !$end) $z =& $report->getWeekStartArr();
 if (!$start) {
 	$start = $z[0];
 }
 if (!$end) {
 	$end=$z[count($z)-1];
 }
+if ($end < $start) list($start, $end) = array($end, $start);
+
 if (!$tstat) {
 	$tstat='1';
 }
@@ -96,7 +98,7 @@ GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group
 				       $end,
 				       db_int_array_to_any_clause (explode(',',$tstat))));
 if (!$res || db_numrows($res) < 1) {
-	echo '<div class="feedback">' . _('No matches found').db_error() . '</div>';
+	echo '<p class="feedback">' . _('No matches found').db_error() . '</p>';
 } else {
 	$tableHeaders = array(
 		_('Name'),

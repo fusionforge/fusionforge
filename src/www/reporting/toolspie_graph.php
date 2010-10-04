@@ -120,7 +120,7 @@ if (db_error()) {
 
 // Create the graph. These two calls are always required
 $graph  = new PieGraph(640, 480,"auto");
-//$graph->SetMargin(50,10,35,50);
+$graph->SetMargin(50,10,35,80);
 
 $arr[1]='Bugs';
 $arr[2]='Support Requests';

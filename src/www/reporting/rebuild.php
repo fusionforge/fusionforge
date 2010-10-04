@@ -39,7 +39,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 		$error_msg = $r->getErrorMessage();
 		form_release_key(getStringFromRequest("form_key"));
 	} else {
-        $feedback = _('Successfully Rebuilt');
+		$feedback = _('Successfully Rebuilt');
 	}
 
 }
