@@ -100,7 +100,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	function adminHeader($params) {
 		global $HTML;
-		site_header($params);
+		$this->header($params);
 		$group_id= $this->Group->getID();
 
 		$links_arr[]='/tracker/admin/?group_id='.$group_id;
