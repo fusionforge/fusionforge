@@ -32,7 +32,6 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>_('Survey Administration')));
 
 if (!$group_id) {
     exit_no_group();
@@ -43,8 +42,6 @@ if (!$group || !is_object($group)) {
 } elseif ($group->isError()) {
     exit_error($group->getErrorMessage(),'surveys');
 }
-
-echo '<h1>'._('Survey Administration').'</h1>';
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
