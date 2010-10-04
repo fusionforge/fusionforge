@@ -98,8 +98,8 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * 
   	 * @return array sections
 	 */		
-	function getSections($groupId) {
-		$userIsGroupMember = $this->isGroupMember($groupId);
+	static function getSections($groupId) {
+		$userIsGroupMember = TasksHtmlSearchRenderer::isGroupMember($groupId);
 		
 		return TasksSearchQuery::getSections($groupId, $userIsGroupMember);		
 	}

@@ -94,8 +94,8 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * 
   	 * @return array sections
 	 */		
-	function getSections($groupId) {
-		$userIsGroupMember = $this->isGroupMember($groupId);
+	static function getSections($groupId) {
+		$userIsGroupMember = TrackersHtmlSearchRenderer::isGroupMember($groupId);
 		
 		return TrackersSearchQuery::getSections($groupId, $userIsGroupMember);
 	}

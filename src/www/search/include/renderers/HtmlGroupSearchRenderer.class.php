@@ -90,7 +90,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	 *
 	 * @param int $groupId group id
 	 */
-	function isGroupMember($groupId) {
+	static function isGroupMember($groupId) {
 		$Group =& group_get_object($groupId);
 		if($Group && is_object($Group) && !$Group->isError() && session_loggedin()) {
 			$perm =& $Group->getPermission ();
