@@ -63,7 +63,7 @@ if (getStringFromRequest('post')=="Y") {
     $to_add = getStringFromRequest('to_add');
     $to_del = getStringFromRequest('to_del');
     $is_active = getStringFromRequest('is_active');
-  
+
     if ($survey_id) { /* Modify */
 		$s->update($survey_title, $to_add, $to_del, $is_active);
 		$feedback = _('Update Successful');

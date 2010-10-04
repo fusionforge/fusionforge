@@ -30,10 +30,10 @@ require_once $gfwww.'stats/site_stats_utils.php';
 session_require_global_perm ('forge_stats', 'read') ;
 
 $HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), forge_get_config ('forge_name'))));
-
-print '<h1>'._('Sitewide Statistics Graphs').'</h1>';
-print '<div align="center">' . "\n";
+echo "\n\n";
+print '<h1>'._('Sitewide Statistics Graphs').'</h1>' . "\n";
 ?>
+
 <hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -46,12 +46,12 @@ print '<div align="center">' . "\n";
 
 <hr />
 
-<br /><br />
+<p style="text-align: center;">
 <img src="views_graph.php?monthly=1" alt="" />
-<br /><br />
+</p>
+<p style="text-align: center;">
 <img src="users_graph.php" alt="" />
-<br /><br />
-</div>
+</p>
 
 <?php
 $HTML->footer( array() );

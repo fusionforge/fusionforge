@@ -239,7 +239,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 
 		<tr valign="top" align="right" class="tableheading">
-			<td><strong><?php echo _('Group Name'); ?></strong></td>
+			<td><strong><?php echo _('Project Name'); ?></strong></td>
 			<td colspan="2"><strong><?php echo _('Page Views'); ?></strong></td>
 			<?php if (forge_get_config('use_frs')) { ?>
 			<td><strong><?php echo _('Downloads'); ?></strong></td>

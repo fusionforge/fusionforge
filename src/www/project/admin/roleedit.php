@@ -244,7 +244,7 @@ for ($i=0; $i<count($keys); $i++) {
 					$txt='';
 				}
 				echo '<tr ' . $HTML->boxGetAltRowStyle($j++) . '>
-				<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
+				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'forum_name').'</td>
 				<td>'.html_build_select_box_from_assoc(
 					$role->getRoleVals($keys[$i]), 
@@ -263,7 +263,7 @@ for ($i=0; $i<count($keys); $i++) {
 			array($group_id));
 		for ($q=0; $q<db_numrows($res); $q++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-			<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
+			<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 			<td>'.db_result($res,$q,'project_name').'</td>
 			<td>'.html_build_select_box_from_assoc(
 				$role->getRoleVals($keys[$i]), 
@@ -298,7 +298,7 @@ for ($i=0; $i<count($keys); $i++) {
 					$txt='';
 				}
 				echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
-				<td>'.$rbac_edit_section_names[$keys[$i]].'</td>
+				<td style="padding-left: 4em;">'.$rbac_edit_section_names[$keys[$i]].'</td>
 				<td>'.db_result($res,$q,'name').'</td>
 				<td>'.html_build_select_box_from_assoc(
 					$role->getRoleVals($keys[$i]), 

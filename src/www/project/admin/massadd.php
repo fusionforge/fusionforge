@@ -77,7 +77,7 @@ echo '
 <input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'" />';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-echo _('<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>');
+echo '<p>' . _('Choose the <strong>First Letter</strong> of the name of the person you wish to add.') . '</p>';
 for ($i=0; $i<count($abc_array); $i++) {
     if ($sw == $abc_array[$i]) {
         echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
@@ -87,7 +87,7 @@ for ($i=0; $i<count($abc_array); $i++) {
 }
 
 if (!$res || db_numrows($res) < 1) {
-	echo _('<p>No Matching Users Found</p>');
+	echo '<p>' . _('No Matching Users Found') . '</p>';
 } else {
 
 	$titles[]=_('Real name');

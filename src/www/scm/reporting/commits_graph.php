@@ -83,7 +83,6 @@ if (db_error()) {
 $graph  = new PieGraph(640, 480,"auto");
 //$graph->SetMargin(50,10,35,50);
 
-//$graph->title->Set("Commits By User (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
 $graph->title->Set(utf8_decode(_("Commits By User")." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")"));
 $graph->subtitle->Set(forge_get_config ('forge_name'));
 
