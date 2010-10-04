@@ -613,6 +613,9 @@ class ArtifactQuery extends Error {
 	 *	@return	array	Complex Array
 	 */
 	function getExtraFields() {
+		if (! isset ($this->element_array[ARTIFACT_QUERY_EXTRAFIELD])) {
+			$this->element_array[ARTIFACT_QUERY_EXTRAFIELD] = array () ;
+		}
 		return $this->element_array[ARTIFACT_QUERY_EXTRAFIELD];
 	}
 
