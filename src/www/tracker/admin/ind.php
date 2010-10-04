@@ -46,7 +46,7 @@ if (getStringFromRequest('post_changes')) {
 			$due_period,$use_resolution,$submit_instructions,$browse_instructions)) {
 			exit_error($res->getErrorMessage(),'tracker');
 		} else {
-			$feedback = _('Tracker created successfully');
+			$feedback .= _('Tracker created successfully');
             $feedback .= '<br/>';
 			$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
 		}

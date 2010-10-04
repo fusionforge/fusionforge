@@ -33,9 +33,9 @@ if (count($efarr) === 0) {
 } elseif (count($efarr) !== 1) {
 	// Internal error.
 	$has_error = true;
-   	$error_msg .= _('Internal error: Illegal number of status fields (WKFL01).');
+	$error_msg .= _('Internal error: Illegal number of status fields (WKFL01).');
 }
-    	
+
 $ath->adminHeader(array ('title'=> _('Configure workflow'),'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
 
 /*

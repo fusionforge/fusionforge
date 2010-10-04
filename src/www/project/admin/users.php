@@ -146,7 +146,7 @@ if (getStringFromRequest('submit')) {
 			if (!$group->updateUser($user_id,$role_id)) {
 				$error_msg = $group->getErrorMessage();
 			} else {
-				$feedback = _("User Updated Successfully");
+				$feedback = _("Member Updated Successfully");
 			}
 		}
 	} elseif (getStringFromRequest('acceptpending')) {

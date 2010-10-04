@@ -96,9 +96,9 @@ if (getStringFromRequest('submit')) {
 	//100 $logo_image_id
 
 	if (!$res) {
-		$error_msg = $group->getErrorMessage();
+		$error_msg .= $group->getErrorMessage();
 	} else {
-		$feedback = _('Project information updated');
+		$feedback .= _('Project information updated');
 	}
 }
 

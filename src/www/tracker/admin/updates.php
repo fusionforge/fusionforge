@@ -36,9 +36,9 @@
 			$ab = new ArtifactExtraField($ath);
 		
 			if (!$ab || !is_object($ab)) {
-				$feedback .= _('Unable to create ArtifactExtraField Object');
+				$error_msg .= _('Unable to create ArtifactExtraField Object');
 //			} elseif ($ab->isError())
-//				$feedback .= $ab->getErrorMessage();			
+//				$error_msg .= $ab->getErrorMessage();			
 			} else {
 				if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required,$alias)) {
 					$error_msg .= _('Error inserting a custom field').': '.$ab->getErrorMessage();
@@ -92,7 +92,7 @@
 				if (!$ao || !is_object($ao)) {
 					$error_msg .= 'Unable to create ArtifactExtraFieldElement Object';
 //				} elseif ($ao->isError())
-//					$feedback .= $ao->getErrorMessage();			
+//					$error_msg .= $ao->getErrorMessage();			
 				} else {
 					$name = getStringFromRequest('name');
 					$status_id = getIntFromRequest('status_id');
@@ -116,7 +116,7 @@
 			if (!$acr || !is_object($acr)) {
 				$error_msg .= _('Unable to create ArtifactCanned Object');
 //			} elseif ($acr->isError()) {
-//				$feedback .= $acr->getErrorMessage();			
+//				$error_msg .= $acr->getErrorMessage();			
 			} else { 
 				if (!$acr->create($title,$body)) {
 					$error_msg .= _('Error inserting').' : '.$acr->getErrorMessage();
