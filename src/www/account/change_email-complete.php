@@ -31,13 +31,12 @@ require_once $gfcommon.'include/account.php';
 $confirm_hash = getStringFromRequest('confirm_hash');
 
 if (!$confirm_hash) {
-	// XXX ogi: What's $ch?
-	//$confirm_hash = $ch;
 	$confirm_hash = getStringFromRequest('ch');
 }
 if (!$confirm_hash) {
 	exit_missing_param('',array(_('Confirm Hash')),'my');
 }
+
 $confirm_hash = html_clean_hash_string($confirm_hash);
 
 $res_user = db_query_params ('SELECT * FROM users WHERE confirm_hash=$1',

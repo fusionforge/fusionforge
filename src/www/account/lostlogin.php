@@ -33,11 +33,10 @@ $passwd2 = getStringFromRequest('passwd2');
 $confirm_hash = getStringFromRequest('confirm_hash');
 
 if (!$confirm_hash) {
-	// XXX ogi: What's $ch?
 	$confirm_hash = getStringFromRequest('ch');
 }
 if (!$confirm_hash) {
-	exit_missing_param('',array(_('Confirm Has')),'my');
+	exit_missing_param('',array(_('Confirm Hash')),'my');
 }
 // Remove noise from hash produced by buggy mail clients
 $confirm_hash = html_clean_hash_string($confirm_hash);

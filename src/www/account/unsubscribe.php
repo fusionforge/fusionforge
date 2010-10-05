@@ -31,7 +31,6 @@ require_once $gfcommon.'include/account.php';
 $confirm_hash = getStringFromRequest('confirm_hash');
 
 if (!$confirm_hash) {
-	// XXX ogi: What's $ch?
 	$confirm_hash = getStringFromRequest('ch');
 }
 if (!$confirm_hash) {

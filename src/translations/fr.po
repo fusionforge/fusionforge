@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-04 19:41+0200\n"
-"PO-Revision-Date: 2010-10-04 21:04+0200\n"
+"PO-Revision-Date: 2010-10-05 21:52+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -270,7 +270,7 @@ msgstr "Groupe auquel le document appartient"
 #: www/tracker/detail.php:67 www/tracker/mod-limited.php:121
 #: www/tracker/mod.php:154 www/tracker/query.php:332
 msgid "State"
-msgstr "Etat"
+msgstr "État"
 
 #: common/docman/include/utils.php:259 common/docman/views/editfile.php:118
 msgid "Specify an outside URL where the file will be referenced"
@@ -598,7 +598,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:113
 #: common/forum/ForumMessage.class.php:259
 msgid "Getting next thread_id failed"
-msgstr "Echec lors de la récupération du thread_id suivant"
+msgstr "Échec lors de la récupération du thread_id suivant"
 
 #: common/forum/ForumMessage.class.php:130
 #: common/forum/ForumMessage.class.php:215
@@ -618,9 +618,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:271
 #: www/forum/admin/ForumAdmin.class.php:457
 msgid "Couldn't Update Master Thread parent with current time"
-msgstr ""
-"Echec lors de la mise à jour du fil de discussion principal avec la date "
-"courante"
+msgstr "Échec lors de la mise à jour du fil de discussion principal avec la date courante"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:282
@@ -741,7 +739,7 @@ msgid "[%1$s Release] %2$s"
 msgstr "Nouvelle version de %1$s : %2$s"
 
 #: common/frs/FRSRelease.class.php:290
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
 "\n"
@@ -770,15 +768,25 @@ msgid ""
 "\n"
 msgstr ""
 "Le projet %1$s (%2$s) a publié une nouvelle version de\n"
-"son paquet « %3$s ».  Vous pouvez le télécharger en suivant ce lien :\n"
+"son paquet « %3$s ».  \n"
+"\n"
+"Notes de publication :\n"
 "\n"
 "%4$s\n"
 "\n"
+"Journal des modifications :\n"
+"\n"
+"%5$s\n"
+"\n"
+"Vous pouvez le télécharger en suivant ce lien :\n"
+"\n"
+"%6$s\n"
+"\n"
 "Vous avez reçu ce message suite à votre demande d'être notifié lorsque\n"
 "de nouvelles versions de ce paquet sont publiées.  Si vous souhaitez\n"
-"interrompre ces notifications, connectez-vous à %5$s et suivez ce lien :\n"
+"interrompre ces notifications, connectez-vous à %7$s et suivez ce lien :\n"
 "\n"
-"%6$s"
+"%8$s"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:431
 #: common/include/Group.class.php:503
@@ -2160,7 +2168,7 @@ msgstr "UTF-8"
 
 #: common/include/utils.php:548
 msgid "Priority Colors"
-msgstr "Echelle de priorité&nbsp;"
+msgstr "Échelle des priorités"
 
 #: common/include/utils.php:1164
 msgid "Error: a mailing list with the same email address already exists."
@@ -2981,9 +2989,8 @@ msgid "My Tasks"
 msgstr "Mes tâches"
 
 #: common/widget/Widget_MyTasks.class.php:141
-#, fuzzy
 msgid "List the tasks assigned to you."
-msgstr "Aucune tâche ne vous est confiée."
+msgstr "Liste des tâches qui vous sont confiées."
 
 #: common/widget/Widget_ProjectDescription.class.php:33
 msgid "Project description"
@@ -3054,9 +3061,8 @@ msgstr[1] ""
 "<a href=\"%1$s\">différentes positions</a>."
 
 #: common/widget/Widget_ProjectInfo.class.php:126
-#, fuzzy
 msgid "Some infos about the project."
-msgstr "Il n'y a pas de projet de ce nom."
+msgstr "Quelques informations au sujet de ce projet."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:35
 msgid "Latest File Releases"
@@ -3174,9 +3180,8 @@ msgid "Request to join"
 msgstr "Demander à rejoindre le projet"
 
 #: common/widget/Widget_ProjectMembers.class.php:120
-#, fuzzy
 msgid "List the project members."
-msgstr "Membres du projet"
+msgstr "Liste des membres du projet."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:31
 msgid "Public Areas"
@@ -4419,14 +4424,12 @@ msgid "Mantis admin"
 msgstr "Administration de Mantis"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:159
-#, fuzzy
 msgid "View Personal MantisBT"
-msgstr "Voir le calendrier personnel"
+msgstr "Voir le MantisBT personnel"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:171
-#, fuzzy
 msgid "View Admin MantisBT"
-msgstr "Voir Mantis"
+msgstr "Voir l'administration du MantisBT"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:464
 msgid "Insert Failed"
@@ -4453,22 +4456,19 @@ msgid "Invalid User not active"
 msgstr "Utilisateur non valide car inactif"
 
 #: plugins/mantisbt/www/getAttachment.php:61
-#, fuzzy
 msgid "No idAttachment"
-msgstr "Pièces jointes"
+msgstr "Pas d'idAttachment"
 
 #: plugins/mantisbt/www/index.php:64 plugins/quota_management/www/index.php:55
 #: www/developer/index.php:46
-#, fuzzy
 msgid "User not active"
-msgstr "Nom d'utilisateur"
+msgstr "Utilisateur inactif"
 
 #: plugins/mantisbt/www/index.php:95 plugins/mantisbt/www/index.php:178
 #: plugins/quota_management/www/index.php:77
 #: plugins/quota_management/www/index.php:106
-#, fuzzy
 msgid "You are not a member of this project"
-msgstr "Vous êtes déjà membre de ce projet."
+msgstr "Vous n'êtes pas membre de ce projet."
 
 #: plugins/mantisbt/www/index.php:122
 msgid ""
@@ -4494,9 +4494,8 @@ msgstr ""
 
 #: plugins/mantisbt/www/index.php:186
 #: plugins/quota_management/www/index.php:115
-#, fuzzy
 msgid "You are not Admin of this project"
-msgstr "Vous êtes déjà membre de ce projet."
+msgstr "Vous n'êtes pas administrateur de ce projet."
 
 #: plugins/mediawiki/common/MediaWikiPlugin.class.php:181
 msgid "Mediawiki read access"
@@ -4589,28 +4588,24 @@ msgid "Cannot copy file to target directory"
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:47
-#, fuzzy
 msgid "Cannot overwrite existing file"
-msgstr "Impossible de supprimer un objet qui n'existe pas."
+msgstr "Impossible de remplacer un fichier préexistant."
 
 #: plugins/mediawiki/www/plugin_admin.php:53
 msgid "Cannot move file to target location"
 msgstr "Le fichier ne peut pas être déplacé vers sa destination."
 
 #: plugins/mediawiki/www/plugin_admin.php:55
-#, fuzzy
 msgid "New file installed successfully"
-msgstr "Suppression effectuée"
+msgstr "Nouveau fichier correctement installé."
 
 #: plugins/mediawiki/www/plugin_admin.php:94
-#, fuzzy
 msgid "File successfully removed"
-msgstr "Élément créé avec succès"
+msgstr "Fichier correctement supprimé."
 
 #: plugins/mediawiki/www/plugin_admin.php:96
-#, fuzzy
 msgid "File removal error"
-msgstr "Erreur lors de la publication du fichier"
+msgstr "Erreur lors de la suppression du fichier."
 
 #: plugins/mediawiki/www/plugin_admin.php:107
 #: www/frs/include/frs_utils.php:213
@@ -4637,9 +4632,8 @@ msgid "Current logo:"
 msgstr "Logo actuel :"
 
 #: plugins/mediawiki/www/plugin_admin.php:155
-#, fuzzy
 msgid "No per-project logo currently installed."
-msgstr "Aucun rôle n'est actuellement défini."
+msgstr "Aucun logo de projet n'est actuellement défini."
 
 #: plugins/mediawiki/www/plugin_admin.php:163
 msgid "Upload a new logo"
@@ -4946,9 +4940,9 @@ msgid "There is no administrator to send the mail."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courrier"
 
 #: plugins/projects_hierarchy/www/add_son.php:78
-#, fuzzy, php-format
+#, php-format
 msgid "New Parent %1$s Relation Submitted"
-msgstr "%1$s - Nouveau projet soumis"
+msgstr "Nouvelle relation de parenté soumise pour %1$s."
 
 #: plugins/projects_hierarchy/www/hierarchy_utils.php:74
 msgid "Link Type"
@@ -5519,9 +5513,8 @@ msgid "Adds"
 msgstr "Ajouts"
 
 #: plugins/scmcvs/www/acl.php:43
-#, fuzzy
 msgid "Invalid CVS repository : "
-msgstr "Parcourir le dépôt CVS"
+msgstr "Dépôt CVS invalide : "
 
 #: plugins/scmcvs/www/acl.php:46
 msgid "Invalid username : "
@@ -5630,15 +5623,15 @@ msgstr ""
 "de taper votre mot de passe.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:117
-#, fuzzy
 msgid ""
 "<p><b>Access to your personal repository</b></p><p>You have a personal "
 "repository for this project, accessible through SSH with the following "
 "method. Enter your site password when prompted.</p>"
 msgstr ""
-"<p><b>Accès Subversion via DAV pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. Vous pourrez avoir "
-"besoin de taper votre mot de passe.</p>"
+"<p><b>Accès Subversion à votre dépôt personnel</b></p><p>Vous disposez\n"
+"d'un dépôt personnel au sein de ce projet, accessible à travers SSH de\n"
+"la manière suivante. Vous pourrez avoir besoin de taper votre mot de\n"
+"passe.</p>"
 
 #: plugins/scmgit/common/GitPlugin.class.php:123
 #, php-format
@@ -5737,9 +5730,8 @@ msgstr ""
 "projet est accessible de manière anonyme grâce aux commandes suivantes.</p>"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:90
-#, fuzzy
 msgid "The password is "
-msgstr "Le mot de passe à fournir est « anonsvn »."
+msgstr "Le mot de passe à fournir est : "
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:102
 msgid ""
@@ -5833,9 +5825,8 @@ msgid "Requested Page not Found (Error 404)"
 msgstr "La page demandée  n'a pas été trouvée (Erreur 404)"
 
 #: www/account/change_email-complete.php:39 www/account/unsubscribe.php:38
-#, fuzzy
 msgid "Confirm Hash"
-msgstr "Confirmer"
+msgstr "Hash de confirmation"
 
 #: www/account/change_email-complete.php:47 www/account/lostlogin.php:49
 #: www/account/unsubscribe.php:47
@@ -5853,9 +5844,8 @@ msgstr "Hash de confirmation invalide."
 #: www/account/verify.php:46 www/admin/database.php:61
 #: www/admin/unsubscribe.php:74 www/admin/useredit.php:41
 #: www/admin/userlist.php:44 www/reporting/useract_graph.php:56
-#, fuzzy
 msgid "Could Not Get User"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de la récupération de l'objet User."
 
 #: www/account/change_email-complete.php:67
 msgid "Email Change Complete"
@@ -5961,9 +5951,8 @@ msgid "New passwords do not match."
 msgstr "Les nouveaux mots de passe ne concordent pas."
 
 #: www/account/change_pw.php:64
-#, fuzzy
 msgid "Could not change password: "
-msgstr "Modifier mon mot de passe"
+msgstr "Erreur lors de la modification du mot de passe : "
 
 #: www/account/change_pw.php:71
 msgid "Successfully Changed Password"
@@ -6319,9 +6308,8 @@ msgid "[Resend confirmation email to a pending account]"
 msgstr "[Renvoyer l'email de confirmation à un compte en attente]"
 
 #: www/account/lostlogin.php:40
-#, fuzzy
 msgid "Confirm Has"
-msgstr "Confirmer"
+msgstr "Hash de confirmation : "
 
 #: www/account/lostlogin.php:52
 msgid "Invalid confirmation hash"
@@ -6605,9 +6593,8 @@ msgid "FRS Release"
 msgstr "Publication de fichiers"
 
 #: www/activity/index.php:154
-#, fuzzy
 msgid "Invalid Data Passed to query"
-msgstr "Mot de passe non valide :"
+msgstr "Données invalides pour la recherche."
 
 #: www/activity/index.php:166 www/frs/reporting/downloads.php:101
 #: www/project/stats/index.php:91 www/reporting/groupadded.php:63
@@ -7934,24 +7921,20 @@ msgid "Virtual Host: "
 msgstr "Hôte virtuel :  "
 
 #: www/admin/vhost.php:77
-#, fuzzy
 msgid " scheduled for creation on group "
-msgstr "création programmée pour le groupe"
+msgstr " création programmée pour le projet "
 
 #: www/admin/vhost.php:80
-#, fuzzy
 msgid "Vhost not valid"
-msgstr "Date non valide"
+msgstr "Vhost invalide."
 
 #: www/admin/vhost.php:83
-#, fuzzy
 msgid "Missing group name"
-msgstr "Paramètre manquant"
+msgstr "Le nom du projet est manquant."
 
 #: www/admin/vhost.php:104
-#, fuzzy
 msgid "Error updating VHOST entry: "
-msgstr "Erreur lors de la mise à jour de l'hôte virtuel :"
+msgstr "Erreur lors de la mise à jour de l'hôte virtuel : "
 
 #: www/admin/vhost.php:106
 msgid "Virtual Host entry updated."
@@ -7966,9 +7949,8 @@ msgid "Add Virtual Host"
 msgstr "Ajouter un hôte virtuel"
 
 #: www/admin/vhost.php:124 www/register/index.php:190
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Nom du projet"
+msgstr "Nom Unix du projet"
 
 #: www/admin/vhost.php:129
 msgid "Virtual Host Name"
@@ -8011,14 +7993,12 @@ msgid "CGI Dir"
 msgstr "Répertoire CGI"
 
 #: www/admin/vhost.php:198
-#, fuzzy
 msgid "No such VHOST: "
-msgstr "Aucun hôte virtuel correspondant :"
+msgstr "Aucun hôte virtuel correspondant : "
 
 #: www/developer/diary.php:35
-#, fuzzy
 msgid "User could not be found."
-msgstr "Forum non trouvé"
+msgstr "Utilisateur non trouvé."
 
 #: www/developer/diary.php:40
 msgid "Diary And Notes For"
@@ -8086,10 +8066,9 @@ msgid "Error - Choose a User To Monitor First"
 msgstr "Erreur - Choisissez d'abord un utilisateur à suivre"
 
 #: www/developer/rate.php:35
-#, fuzzy
 msgid ""
 "Ratings turned off. You chose not to participate in the peer rating system"
-msgstr "Vious avez choisi de ne pas participer aux classements"
+msgstr "Vous avez choisi de ne pas participer aux classements."
 
 #: www/developer/rate.php:53
 msgid "Invalid rate value"
@@ -8153,9 +8132,8 @@ msgid "Project: %1$s"
 msgstr "Projet %1$s"
 
 #: www/docman/view.php:50
-#, fuzzy
 msgid "Document is not available."
-msgstr "Pas d'information disponible"
+msgstr "Document indisponible."
 
 #: www/docman/view.php:65
 msgid "No document to display - invalid or inactive document number"
@@ -8168,41 +8146,32 @@ msgid "Exports Available"
 msgstr "Exports disponibles"
 
 #: www/export/rss20_activity.php:132
-#, fuzzy
 msgid "Error: No group selected"
-msgstr "Erreur lors du refus d'un projet"
+msgstr "Erreur : aucun projet sélectionné."
 
 #: www/export/rss20_docman.php:129
-#, fuzzy
 msgid "No documents found in Document Manager"
-msgstr ""
-"Aucun document à afficher : le numéro de document est invalide, ou "
-"correspond à un document inactif."
+msgstr "Aucun document dans le gestionnaire de documentation."
 
 #: www/export/rss20_forum.php:103
-#, fuzzy
 msgid "Forum RSS: No forums found"
-msgstr "Forum non trouvé"
+msgstr "Flux RSS : aucun forum."
 
 #: www/export/rss20_forum.php:271
-#, fuzzy
 msgid "Forum RSS: Forum not found: "
-msgstr "Erreur : aucun forum trouvé"
+msgstr "Flux RSS : forum non trouvé : "
 
 #: www/export/rss20_tracker.php:112
-#, fuzzy
 msgid "Tracker RSS: No trackers found"
-msgstr "Aucun outil de suivi trouvé"
+msgstr "Flux RSS : aucun outil de suivi."
 
 #: www/export/rssAboTask.php:70
-#, fuzzy
 msgid "No project group was found for this task."
-msgstr "Aucune annonce rejetée cette semaine"
+msgstr "Aucune projet n'a été trouvé pour cette tâche."
 
 #: www/export/rssAboTask.php:75
-#, fuzzy
 msgid "No project task was found."
-msgstr "Pas de nouvelles sorties trouvées."
+msgstr "Aucune tâche trouvée."
 
 #: www/export/rssAboTask.php:139
 #, php-format
@@ -8214,29 +8183,24 @@ msgid "Current values of the taskâsâ¦"
 msgstr ""
 
 #: www/export/rssAboTask.php:142
-#, fuzzy
 msgid "Subproject:"
-msgstr "Sous-projet"
+msgstr "Sous-projet :"
 
 #: www/export/rssAboTask.php:143
-#, fuzzy
 msgid "Summary:"
-msgstr "Résumé"
+msgstr "Résumé :"
 
 #: www/export/rssAboTask.php:144
-#, fuzzy
 msgid "Complete:"
-msgstr "Complété"
+msgstr "Taux d'achèvement :"
 
 #: www/export/rssAboTask.php:145
-#, fuzzy
 msgid "Status:"
-msgstr "État"
+msgstr "État :"
 
 #: www/export/rssAboTask.php:146
-#, fuzzy
 msgid "Details:"
-msgstr "Détails"
+msgstr "Détails :"
 
 #: www/export/rssAboTask.php:161 www/help/tracker.php:69
 #: www/news/news_utils.php:174 www/pm/include/ProjectTaskHTML.class.php:143
@@ -8244,9 +8208,8 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #: www/export/rssAboTask.php:169
-#, fuzzy
 msgid "Updated value"
-msgstr "Mis à jour quotidiennement"
+msgstr "Nouvelle valeur"
 
 #: www/export/rssAboTask.php:171 www/forum/include/ForumHTML.class.php:74
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
@@ -8255,9 +8218,8 @@ msgid "Posted by"
 msgstr "Posté par"
 
 #: www/export/rssAboTask.php:173
-#, fuzzy
 msgid "Update time"
-msgstr "Mettre à jour"
+msgstr "Date de mise à jour"
 
 #: www/export/rss_project.php:75 www/export/rss_project.php:77
 msgid "RSS Exports"
@@ -8372,9 +8334,8 @@ msgid "Error getting new ForumMessage: "
 msgstr "Erreur lors de l'accès à un message de forum"
 
 #: www/forum/admin/ForumAdmin.class.php:435
-#, fuzzy
 msgid "Pending message released"
-msgstr "Forum en attente publié"
+msgstr "Message en attente validé"
 
 #: www/forum/admin/ForumAdmin.class.php:459
 msgid ""
@@ -8488,7 +8449,6 @@ msgstr ""
 
 #: www/forum/admin/index.php:260 www/forum/admin/index.php:299
 #: www/forum/monitor.php:45 www/forum/new.php:48 www/forum/save.php:48
-#, fuzzy
 msgid "Error Getting Forum"
 msgstr "Erreur lors de l'accès à un forum"
 
@@ -8525,7 +8485,6 @@ msgid "Thread successfully moved from %1$s forum to %2$s forum"
 msgstr "La discussion a été déplacée du forum %1$s au forum %2$s."
 
 #: www/forum/admin/index.php:377
-#, fuzzy
 msgid "Move Thread"
 msgstr "Déplacer la discussion"
 
@@ -8540,9 +8499,8 @@ msgid "Move thread from %s forum to the following forum:"
 msgstr "Déplacer la discussion depuis le forum %s vers le forum suivant :"
 
 #: www/forum/admin/index.php:440
-#, fuzzy
 msgid "Forums Administration"
-msgstr "Forums : Administration"
+msgstr "Administration des forums"
 
 #: www/forum/admin/index.php:463
 #, php-format
@@ -8555,20 +8513,17 @@ msgstr "Utilisateurs surveillant ce forum"
 
 #: www/forum/admin/pendingmsgdetail.php:43 www/forum/monitor.php:78
 #: www/forum/new.php:72 www/forum/save.php:59
-#, fuzzy
 msgid "Forum ID"
-msgstr "Forum"
+msgstr "Identifiant de forum"
 
 #: www/forum/admin/pendingmsgdetail.php:43 www/forum/monitor.php:78
 #: www/forum/new.php:72 www/forum/save.php:59 www/frs/monitor.php:73
-#, fuzzy
 msgid "Project ID"
-msgstr "Projet"
+msgstr "Identifiant de projet"
 
 #: www/forum/admin/pendingmsgdetail.php:43
-#, fuzzy
 msgid "Message ID"
-msgstr "Message"
+msgstr "Identifiant de message"
 
 #: www/forum/admin/pendingmsgdetail.php:64 www/forum/attachment.php:160
 #: www/forum/forum.php:147 www/forum/message.php:100
@@ -8608,9 +8563,8 @@ msgid "The Attachment does not exist"
 msgstr "La pièce jointe n'existe pas."
 
 #: www/forum/forum.php:54
-#, fuzzy
 msgid "Error forum not found: "
-msgstr "Erreur : aucun forum trouvé"
+msgstr "Erreur : forum non trouvé : "
 
 #: www/forum/forum.php:105
 msgid "Error creating ForumMessage: "
@@ -8633,9 +8587,8 @@ msgid "Error getting new ForumMessageFactory"
 msgstr "Erreur lors de la création de l'objet ForumMessageFactory"
 
 #: www/forum/forum.php:152
-#, fuzzy
 msgid "Forum: "
-msgstr "Forum"
+msgstr "Forum : "
 
 #: www/forum/forum.php:176
 msgid "Nested"
@@ -8684,14 +8637,12 @@ msgid "Last Post"
 msgstr "Dernier message"
 
 #: www/forum/forum.php:378
-#, fuzzy
 msgid "Newer Messages"
-msgstr "Messages suivants"
+msgstr "Messages plus récents"
 
 #: www/forum/forum.php:389
-#, fuzzy
 msgid "Older Messages"
-msgstr "Messages suivants"
+msgstr "Messages plus anciens"
 
 #: www/forum/forum.php:412
 msgid "No forum chosen"
@@ -8839,9 +8790,9 @@ msgid "Forums for %1$s"
 msgstr "Forums de %1$s"
 
 #: www/forum/index.php:56
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found for %1$s"
-msgstr "Pas de forum trouvé pour %1$s"
+msgstr "Pas de forum trouvé pour %1$s."
 
 #: www/forum/index.php:63 www/forum/myforums.php:48 www/forum/myforums.php:50
 #: www/forum/myforums.php:51
@@ -8861,7 +8812,6 @@ msgid "Moderation Level"
 msgstr "Niveau de modération"
 
 #: www/forum/index.php:82
-#, fuzzy
 msgid "Anonymous & Non Project Users"
 msgstr "Anonymes et utilisateurs extérieurs au groupe"
 
@@ -8882,9 +8832,8 @@ msgid "Post a followup to this message"
 msgstr "Poster une réponse dans cette discussion"
 
 #: www/forum/message.php:224 www/forum/message.php:225
-#, fuzzy
 msgid "You Must Choose a Message First"
-msgstr "Vous devez d'abord choisir un message"
+msgstr "Vous devez d'abord choisir un message."
 
 #: www/forum/monitor.php:68
 msgid "Forum monitoring deactivated"
@@ -8903,9 +8852,8 @@ msgid "New Content?"
 msgstr "Contenu récent"
 
 #: www/forum/new.php:64
-#, fuzzy
 msgid "Start New Thread for: "
-msgstr "Commencer une nouvelle discussion"
+msgstr "Commencer une nouvelle discussion sur "
 
 #: www/forum/save.php:56
 msgid "Forum Position Saved. New messages will be highlighted when you return"
@@ -8916,14 +8864,13 @@ msgstr ""
 #: www/frs/admin/deletepackage.php:49 www/frs/admin/deleterelease.php:51
 #: www/frs/admin/index.php:69 www/frs/admin/index.php:84
 #: www/frs/admin/index.php:100 www/frs/admin/showreleases.php:59
-#, fuzzy
 msgid "Could Not Get FRS Package"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de l'accès au paquet."
 
 #: www/frs/admin/deletepackage.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "Delete Package: %1$s"
-msgstr "Suppression de l'outil de suivi %s"
+msgstr "Suppression du paquet %s"
 
 #: www/frs/admin/deletepackage.php:65
 msgid ""
@@ -8934,9 +8881,8 @@ msgstr ""
 "versions et tous ses fichiers !"
 
 #: www/frs/admin/deleterelease.php:58 www/frs/admin/showreleases.php:75
-#, fuzzy
 msgid "Could Not Get FRS Release"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de l'accès à la publication."
 
 #: www/frs/admin/deleterelease.php:68 www/frs/admin/index.php:113
 msgid "Release Edit/File Releases"
@@ -8951,19 +8897,16 @@ msgstr ""
 "ses fichiers !"
 
 #: www/frs/admin/editrelease.php:57 www/frs/admin/qrs.php:88
-#, fuzzy
 msgid "Could Not Get FRSPackage"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de l'accès au paquet."
 
 #: www/frs/admin/editrelease.php:67 www/frs/admin/qrs.php:97
-#, fuzzy
 msgid "Could Not Get FRSRelease"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de l'accès à la publication."
 
 #: www/frs/admin/editrelease.php:95 www/frs/admin/editrelease.php:114
-#, fuzzy
 msgid "Attempted File Upload Attack"
-msgstr "Fichier multimédia téléchargé"
+msgstr "Tentative d'attaque détectée."
 
 #: www/frs/admin/editrelease.php:98
 msgid "Release Notes Are not in Text"
@@ -8991,9 +8934,8 @@ msgstr "Fichier mis à jour"
 
 #: www/frs/admin/editrelease.php:184 www/frs/admin/editrelease.php:201
 #: www/frs/include/frs_utils.php:244
-#, fuzzy
 msgid "Could Not Get FRSFile"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de l'accès au fichier."
 
 #: www/frs/admin/editrelease.php:191
 msgid "File Deleted"
@@ -9063,9 +9005,8 @@ msgid "Submit/Refresh"
 msgstr "Soumettre/rafraîchir"
 
 #: www/frs/admin/editrelease.php:283
-#, fuzzy
 msgid "Step 2: Add Files To This Release"
-msgstr "Etape 3&nbsp;:&nbsp;Éditer les fichiers dans cette version"
+msgstr "Étape 2 : Ajouter des fichiers dans cette version"
 
 #: www/frs/admin/editrelease.php:284
 msgid "Now, choose a file to upload into the system."
@@ -9076,9 +9017,9 @@ msgid "File Name"
 msgstr "Nom du fichier&nbsp;"
 
 #: www/frs/admin/editrelease.php:292 www/frs/admin/qrs.php:203
-#, fuzzy, php-format
+#, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %1$s."
-msgstr "Vous pouvez également utiliser FTP pour uploader un fichier sur %1$s"
+msgstr "Vous pouvez également utiliser FTP pour uploader un fichier sur %1$s."
 
 #: www/frs/admin/editrelease.php:316 www/frs/admin/qrs.php:228
 msgid "File Type"
@@ -9309,9 +9250,8 @@ msgid "Release File"
 msgstr "Publier le paquet"
 
 #: www/frs/admin/showreleases.php:44
-#, fuzzy
 msgid "Choose package"
-msgstr "Choisissez"
+msgstr "Choisissez un paquet."
 
 #: www/frs/admin/showreleases.php:91
 msgid "No Releases Of This Package Are Available"
@@ -9322,19 +9262,16 @@ msgid "Release New File Version"
 msgstr "Mise à jour d'une nouvelle version de fichier."
 
 #: www/frs/download.php:63
-#, fuzzy
 msgid "Error Getting Package"
-msgstr "Erreur lors de l'accès à un message de forum"
+msgstr "Erreur lors de l'accès à un paquet."
 
 #: www/frs/download.php:71
-#, fuzzy
 msgid "Error Getting Release"
-msgstr "Erreur lors de la création d'un objet Role"
+msgstr "Erreur lors de l'accès à une publication."
 
 #: www/frs/download.php:76
-#, fuzzy
 msgid "Error Getting File"
-msgstr "Erreur en accédant à %1$s"
+msgstr "Erreur lors de l'accès à un fichier."
 
 #: www/frs/include/frs_utils.php:129 www/frs/include/frs_utils.php:145
 msgid "Must Choose One"
@@ -9401,9 +9338,8 @@ msgid "Arch"
 msgstr "Archive"
 
 #: www/frs/monitor.php:50
-#, fuzzy
 msgid "Error Getting FRSPackage"
-msgstr "Erreur lors de l'accès à un message de forum"
+msgstr "Erreur lors de l'accès à un paquet."
 
 #: www/frs/monitor.php:59
 msgid "Monitoring Has Been Stopped"
@@ -9559,9 +9495,8 @@ msgstr ""
 "types."
 
 #: www/help/tracker.php:72
-#, fuzzy
 msgid "Enter the complete description."
-msgstr "Description détaillée"
+msgstr "Saisissez une description détaillée."
 
 #: www/help/tracker.php:73
 msgid ""
@@ -9700,9 +9635,8 @@ msgid "This file does not have a system-recognized filename type."
 msgstr ""
 
 #: www/include/filechecks.php:175
-#, fuzzy
 msgid "File does not exist. You must supply a filename."
-msgstr "Vous devez saisir votre prénom"
+msgstr "Ce fichier n'existe pas. Vous devez fournir un nom de fichier."
 
 #: www/include/filechecks.php:179
 #, php-format
@@ -9725,14 +9659,14 @@ msgid "Highest"
 msgstr "Maximum"
 
 #: www/include/html.php:673
-#, fuzzy, php-format
+#, php-format
 msgid "Project access problem: %s"
-msgstr "Utilisation de ressources"
+msgstr "Problème d'accès au projet : %s"
 
 #: www/include/html.php:675
-#, fuzzy, php-format
+#, php-format
 msgid "Project Problem: %s"
-msgstr "Administration du projet %1$s"
+msgstr "Problème dans le projet : %s"
 
 #: www/include/html.php:724 www/include/html.php:737 www/include/html.php:749
 #: www/my/bookmark_add.php:29
@@ -9812,14 +9746,13 @@ msgstr "[Filtrer]"
 #: www/include/trove.php:407 www/include/trove.php:417
 #: www/include/trove.php:422 www/include/trove.php:427
 #: www/include/trove.php:432
-#, fuzzy, php-format
+#, php-format
 msgid "Error In Trove Operation : %s"
-msgstr "Erreur lors d'une opération sur l'arbre"
+msgstr "Erreur lors d'une opération sur l'arbre : %s"
 
 #: www/include/user_home.php:32
-#, fuzzy
 msgid "User Profile"
-msgstr "Affichage d'un profil de développeur"
+msgstr "Profil de développeur"
 
 #: www/include/user_home.php:36
 msgid "Personal Information"
@@ -10136,9 +10069,8 @@ msgid "This site is running %1$s version %2$s"
 msgstr "Ce site fonctionne avec %1$s en version %2$s."
 
 #: www/mail/admin/deletelist.php:57
-#, fuzzy
 msgid "Mailing List Successfully deleted"
-msgstr "Tâche supprimée avec succès"
+msgstr "Liste de diffusion supprimée avec succès."
 
 #: www/mail/admin/deletelist.php:62 www/mail/admin/index.php:227
 msgid "Permanently Delete List"
@@ -10236,9 +10168,8 @@ msgid "Reset admin password"
 msgstr "Régénérer un mot de passe d'administration"
 
 #: www/mail/index.php:46
-#, fuzzy
 msgid "Could Not Get MailingListFactory"
-msgstr "Erreur lors de la création de l'objet Factory"
+msgstr "Erreur lors de l'accès à une MailingListFactory."
 
 #: www/mail/index.php:52
 #, php-format
@@ -10246,9 +10177,9 @@ msgid "Mailing Lists for %1$s"
 msgstr "Listes de diffusion pour %1$s"
 
 #: www/mail/index.php:60
-#, fuzzy, php-format
+#, php-format
 msgid "Unable to get the list %s : %s"
-msgstr "Erreur lors de la récupération de la liste %s"
+msgstr "Erreur lors de la récupération de la liste %s : %s"
 
 #: www/mail/index.php:67
 #, php-format
@@ -10303,9 +10234,8 @@ msgid "Bookmark Title"
 msgstr "Titre du favori"
 
 #: www/my/bookmark_edit.php:31
-#, fuzzy
 msgid "Bookmark ID"
-msgstr "Adresse du favori"
+msgstr "Identifiant du favori"
 
 #: www/my/bookmark_edit.php:39
 msgid "Bookmark Updated"
@@ -10413,9 +10343,8 @@ msgid "email not sent - no one monitoring"
 msgstr "aucun message de notification envoyé (personne ne surveille)."
 
 #: www/my/diary.php:138
-#, fuzzy
 msgid "Error Adding Item: "
-msgstr "Erreur lors de l'ajout"
+msgstr "Erreur lors de l'ajout d'une entrée : "
 
 #: www/my/diary.php:154
 msgid "Entry not found or does not belong to you"
@@ -10457,14 +10386,12 @@ msgid "You Have No Diary Entries"
 msgstr "Vous n'avez pas de données"
 
 #: www/my/my_utils.php:71
-#, fuzzy
 msgid "Expand"
-msgstr "tout déplier"
+msgstr "Déplier"
 
 #: www/my/my_utils.php:74
-#, fuzzy
 msgid "Collapse"
-msgstr "tout réduire"
+msgstr "Réduire"
 
 #: www/my/my_utils.php:133
 #, php-format
@@ -10541,7 +10468,6 @@ msgid "Older Releases"
 msgstr "Anciennes versions"
 
 #: www/news/admin/index.php:90 www/news/admin/index.php:208
-#, fuzzy
 msgid "Newsbyte Updated."
 msgstr "Annonce mise à jour."
 
@@ -10550,9 +10476,8 @@ msgid "News admin"
 msgstr "Administration des annonces"
 
 #: www/news/admin/index.php:112 www/news/admin/index.php:256
-#, fuzzy
 msgid "Newsbyte not found"
-msgstr "Annonce non trouvée"
+msgstr "Annonce non trouvée."
 
 #: www/news/admin/index.php:119 www/news/admin/index.php:266
 #, php-format
@@ -10581,19 +10506,16 @@ msgid "No Queued Items Found"
 msgstr "Pas d'annonce en attente"
 
 #: www/news/admin/index.php:219
-#, fuzzy
 msgid "Newsbyte Deleted."
 msgstr "Annonce supprimée."
 
 #: www/news/admin/index.php:240
-#, fuzzy
 msgid "Newsbytes Rejected."
-msgstr "Annonce rejetée."
+msgstr "Annonce(s) rejetée(s)."
 
 #: www/news/admin/index.php:259
-#, fuzzy
 msgid "Newsbyte deleted"
-msgstr "Annonce supprimée"
+msgstr "Annonce supprimée."
 
 #: www/news/admin/index.php:271
 msgid "Submitted for group"
@@ -10632,11 +10554,11 @@ msgid "No rejected items found for this week"
 msgstr "Aucune annonce rejetée cette semaine"
 
 #: www/news/admin/news_admin_utils.php:92
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "These items were rejected this past week or were not intended for front page "
 "(total: %1$s)"
-msgstr "Ces annonces ont été rejetées la semaine passée (total : %1$s)"
+msgstr "Ces annonces ont été rejetées la semaine passée (total : %1$s)."
 
 #: www/news/admin/news_admin_utils.php:108
 msgid "No approved items found for this week"
@@ -10655,7 +10577,7 @@ msgstr ""
 "messages.</p>"
 
 #: www/news/index.php:74
-#, fuzzy, php-format
+#, php-format
 msgid "No News Found for %s"
 msgstr "Aucune annonce pour %s"
 
@@ -10735,23 +10657,20 @@ msgid "For project"
 msgstr "Pour le projet"
 
 #: www/people/admin/index.php:52
-#, fuzzy
 msgid " Error inserting value: "
-msgstr "Erreur d'insertion"
+msgstr "Erreur d'insertion : "
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:101
 msgid "Category Inserted"
 msgstr "Catégorie ajoutée"
 
 #: www/people/admin/index.php:65
-#, fuzzy
 msgid "Error inserting value: "
-msgstr "Erreur d'insertion"
+msgstr "Erreur d'insertion : "
 
 #: www/people/admin/index.php:68
-#, fuzzy
 msgid "Skill Inserted"
-msgstr "Sondage créé"
+msgstr "Compétence ajoutée."
 
 #: www/people/createjob.php:45
 msgid ""
@@ -10780,29 +10699,29 @@ msgstr "Description courte&nbsp;"
 #: www/people/createjob.php:56 www/people/editjob.php:171
 #: www/people/viewjob.php:86
 msgid "Long Description"
-msgstr "Description longue&nbsp;"
+msgstr "Description longue"
 
 #: www/people/createjob.php:59
 msgid "Continue >>"
 msgstr "Continuer >>"
 
 #: www/people/editjob.php:62
-#, fuzzy, php-format
+#, php-format
 msgid "JOB insert FAILED: %s"
-msgstr "L'insertion du poste a échoué"
+msgstr "L'insertion du poste a échoué : %s."
 
 #: www/people/editjob.php:66
 msgid "JOB inserted successfully"
-msgstr "Poste correctement inséré"
+msgstr "Poste correctement inséré."
 
 #: www/people/editjob.php:81
-#, fuzzy, php-format
+#, php-format
 msgid "JOB update FAILED : %s"
-msgstr "La mise à jour de ce travail a échoué"
+msgstr "La mise à jour de ce poste a échoué : %s."
 
 #: www/people/editjob.php:83 www/people/editjob.php:97
 msgid "JOB updated successfully"
-msgstr "Le travail a été mis à jour correctement"
+msgstr "Le poste a été mis à jour correctement."
 
 #: www/people/editjob.php:92 www/people/people_utils.php:125
 #: www/people/people_utils.php:155 www/people/people_utils.php:234
@@ -10812,29 +10731,27 @@ msgid "Skill"
 msgstr "Savoir-faire"
 
 #: www/people/editjob.php:92 www/people/editjob.php:108
-#, fuzzy
 msgid "Skill Level"
-msgstr "Édition des compétences"
+msgstr "Niveau de compétence"
 
 #: www/people/editjob.php:92 www/people/editjob.php:108
-#, fuzzy
 msgid "Skill Year"
-msgstr "Édition des compétences"
+msgstr "Ancienneté de la compétence"
 
 #: www/people/editjob.php:99
 msgid "JOB update failed - wrong project_id"
 msgstr ""
-"La mise à jour de ce travail a échoué - mauvais numéro d'identification de "
-"projet"
+"La mise à jour de ce poste a échoué : mauvais numéro d'identification\n"
+"de projet."
 
 #: www/people/editjob.php:108
 msgid "Job Inventory"
 msgstr ""
 
 #: www/people/editjob.php:115
-#, fuzzy, php-format
+#, php-format
 msgid "JOB skill update FAILED: %s"
-msgstr "La mise à jour de la compétence pour ce poste a échoué"
+msgstr "La mise à jour de la compétence pour ce poste a échoué : %s."
 
 #: www/people/editjob.php:117
 msgid "JOB skill updated successfully"
@@ -10851,9 +10768,11 @@ msgid "Job ID"
 msgstr ""
 
 #: www/people/editjob.php:135
-#, fuzzy, php-format
+#, php-format
 msgid "JOB skill delete FAILED : %s"
-msgstr "La compétence demandée pour ce poste n'a pas été correctement effacée"
+msgstr ""
+"La compétence demandée pour ce poste n'a pas été correctement\n"
+"effacée : %s."
 
 #: www/people/editjob.php:137
 msgid "JOB skill deleted successfully"
@@ -10866,9 +10785,9 @@ msgstr ""
 "d'identification de projet"
 
 #: www/people/editjob.php:152
-#, fuzzy, php-format
+#, php-format
 msgid "POSTING fetch FAILED: %s"
-msgstr "La récupération de l'affectation a échoué."
+msgstr "La récupération de l'affectation a échoué : %s."
 
 #: www/people/editjob.php:153 www/people/editjob.php:156
 #: www/people/people_utils.php:42
@@ -10895,46 +10814,42 @@ msgid "Finished"
 msgstr "Terminé"
 
 #: www/people/editprofile.php:55
-#, fuzzy, php-format
+#, php-format
 msgid "User update FAILED: %s"
-msgstr "ECHEC lors de la mise à jour de l'utilisateur"
+msgstr "Échec lors de la mise à jour de l'utilisateur : %s."
 
 #: www/people/editprofile.php:57
 msgid "User updated successfully"
-msgstr "Mise à jour de l'utilisateur réussie"
+msgstr "Mise à jour de l'utilisateur réussie."
 
 #: www/people/editprofile.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to add the skill %s"
-msgstr "Echec lors de l'ajout de la compétence"
+msgstr "Échec lors de l'ajout de la compétence : %s."
 
 #: www/people/editprofile.php:101
 msgid "Failed to add the skill"
-msgstr "Echec lors de l'ajout de la compétence"
+msgstr "Échec lors de l'ajout de la compétence"
 
 #: www/people/editprofile.php:103
 msgid "Skill added successfully"
 msgstr "Compétences ajoutée avec succès"
 
 #: www/people/editprofile.php:108
-#, fuzzy
 msgid "Start Month"
-msgstr "Date de début"
+msgstr "Mois de début"
 
 #: www/people/editprofile.php:108
-#, fuzzy
 msgid "Start Year"
-msgstr "Date de début"
+msgstr "Année de début"
 
 #: www/people/editprofile.php:108
-#, fuzzy
 msgid "End Month"
-msgstr "Mois"
+msgstr "Mois de fin"
 
 #: www/people/editprofile.php:108
-#, fuzzy
 msgid "End Year"
-msgstr "Date de fin"
+msgstr "Année de fin"
 
 #: www/people/editprofile.php:108 www/people/skills_utils.php:53
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48
@@ -10946,9 +10861,9 @@ msgid "No skills selected to edit."
 msgstr "Auncune compétence n'est sélectionnée pour l'édition."
 
 #: www/people/editprofile.php:143
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to update skills: %s"
-msgstr "Echec lors de la mise à jour de la compétence"
+msgstr "Échec lors de la mise à jour de la compétence : %s."
 
 #: www/people/editprofile.php:146
 msgid "Skill updated"
@@ -10984,13 +10899,13 @@ msgid "No skills selected to delete."
 msgstr "Aucune compétence n'est sélectionnée pour l'effacement"
 
 #: www/people/editprofile.php:188
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "Echec de l'effacement de n'importe quelle compétence"
+msgstr "Échec de l'effacement de compétences : %s."
 
 #: www/people/editprofile.php:189
 msgid "Failed to delete any skills"
-msgstr "Echec de l'effacement de n'importe quelle compétence"
+msgstr "Échec de l'effacement de n'importe quelle compétence"
 
 #: www/people/editprofile.php:191
 msgid "Skill deleted successfully"
@@ -11034,9 +10949,9 @@ msgid "Edit Your Profile"
 msgstr "Édition de votre profil"
 
 #: www/people/editprofile.php:236
-#, fuzzy, php-format
+#, php-format
 msgid "User fetch FAILED: %s"
-msgstr "La récupération de l'utilisateur a échoué."
+msgstr "La récupération de l'utilisateur a échoué : %s."
 
 #: www/people/editprofile.php:237 www/people/skills_utils.php:124
 msgid "No Such User"
@@ -11174,19 +11089,17 @@ msgid "Must select a skill ID"
 msgstr "Vous devez choisir un numéro de compétence."
 
 #: www/people/people_utils.php:103
-#, fuzzy, php-format
+#, php-format
 msgid "ERROR inserting into skill inventory: %s"
-msgstr "ERREUR en insérant dans la liste des compétences."
+msgstr "Erreur lors de l'insertion dans la liste des compétences : %s."
 
 #: www/people/people_utils.php:105
-#, fuzzy
 msgid "Added to skill inventory "
 msgstr "Ajouté à l'inventaire de compétences."
 
 #: www/people/people_utils.php:108
-#, fuzzy
 msgid "ERROR - skill already in your inventory "
-msgstr "Erreur - la compétence demandée est toujours dans votre référentiel."
+msgstr "Erreur - la compétence demandée est déjà dans votre référentiel."
 
 #: www/people/people_utils.php:112 www/people/people_utils.php:220
 msgid "You must be logged in first"
@@ -11253,13 +11166,12 @@ msgid "User fetch FAILED"
 msgstr "La récupération de l'utilisateur a échoué."
 
 #: www/people/viewjob.php:55
-#, fuzzy
 msgid "POSTING fetch FAILED: No such posting for this project :"
 msgstr "Ce projet n'a pas d'offres en cours."
 
 #: www/people/viewjob.php:56 www/people/viewjob.php:59
 msgid "View a Job"
-msgstr "Voir un travail"
+msgstr "Voir un poste"
 
 #: www/people/viewjob.php:70
 msgid "Contact Info"
@@ -11281,9 +11193,8 @@ msgid "Posting ID not found"
 msgstr "Offre non trouvée"
 
 #: www/people/viewprofile.php:48
-#, fuzzy
 msgid "User fetch FAILED : No Such User: "
-msgstr "La récupération de l'utilisateur a échoué."
+msgstr "La récupération de l'utilisateur a échoué : "
 
 #: www/people/viewprofile.php:49 www/people/viewprofile.php:52
 msgid "View a User Profile"
@@ -11298,9 +11209,8 @@ msgid "Skills profile for"
 msgstr "Profil de compétence pour"
 
 #: www/people/viewprofile.php:79
-#, fuzzy
 msgid "User_id not found."
-msgstr "Sondage non trouvé"
+msgstr "Identifiant d'utilisateur non trouvé."
 
 #: www/pm/add_task.php:35
 msgid "Add a new Task"
@@ -11356,28 +11266,24 @@ msgstr "Détails sur la dépendance"
 #: www/pm/admin/index.php:64 www/pm/admin/index.php:96
 #: www/pm/admin/index.php:116 www/pm/admin/index.php:174
 #: www/pm/admin/index.php:238 www/pm/admin/index.php:249
-#, fuzzy
 msgid "Unable to create ProjectCategory Object"
-msgstr "Erreur lors de la création d'un objet ArtifactCanned"
+msgstr "Erreur lors de la création d'un objet ProjectCategory."
 
 #: www/pm/admin/index.php:82
-#, fuzzy
 msgid "Subproject Inserted"
-msgstr "Projet ajouté"
+msgstr "Sous-projet ajouté."
 
 #: www/pm/admin/index.php:83 www/tracker/admin/ind.php:51
 msgid "Please configure also the roles (by default, it's 'No Access')"
 msgstr "Veuillez aussi configurer les rôles (aucun accès par défaut)"
 
 #: www/pm/admin/index.php:99
-#, fuzzy
 msgid "Error inserting: "
-msgstr "Erreur d'insertion"
+msgstr "Erreur d'insertion : "
 
 #: www/pm/admin/index.php:121
-#, fuzzy
 msgid "Error updating: "
-msgstr "Erreur de mise à jour"
+msgstr "Erreur de mise à jour : "
 
 #: www/pm/admin/index.php:123
 msgid "Category Updated"
@@ -11388,9 +11294,9 @@ msgid "Updated successfully"
 msgstr "Mis à jour avec succès"
 
 #: www/pm/admin/index.php:181
-#, fuzzy, php-format
+#, php-format
 msgid "Add Categories to: %s"
-msgstr "Ajouter des catégories à"
+msgstr "Ajout de catégories : %s"
 
 #: www/pm/admin/index.php:192
 msgid "Id"
@@ -11411,9 +11317,9 @@ msgstr ""
 "Dès lors que vous aurez ajouté une catégorie, vous ne pourrez la supprimer."
 
 #: www/pm/admin/index.php:245
-#, fuzzy, php-format
+#, php-format
 msgid "Modify a Category in: %s"
-msgstr "Modifier une catégorie en"
+msgstr "Modification de catégorie : %s"
 
 #: www/pm/admin/index.php:264
 msgid ""
@@ -11426,21 +11332,19 @@ msgstr ""
 "tous les items prendront le nouveau nom."
 
 #: www/pm/admin/index.php:279
-#, fuzzy
 msgid "Add a new subproject"
-msgstr "Ajouter un projet"
+msgstr "Ajouter un sous-projet"
 
 #: www/pm/admin/index.php:282
-#, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
 "task to a subproject.</strong>"
 msgstr ""
-"Ajouter un nouveau projet au Projet/gestionnaire de tâches. <strong>Ce n'est "
-"pas la même chose que l'ajout d'une tâche à un projet.</strong>"
+"Ajouter un nouveau sous-projet au gestionnaire de tâches. <strong>Ce\n"
+"n'est pas la même chose que l'ajout d'une tâche à un\n"
+"sous-projet.</strong>"
 
 #: www/pm/admin/index.php:293
-#, fuzzy
 msgid "New Subproject Name"
 msgstr "Nom du sous-projet"
 
@@ -11454,20 +11358,18 @@ msgid "Could Not Get ProjectGroup"
 msgstr "Erreur lors de la création de l'objet ProjectGroup"
 
 #: www/pm/admin/index.php:319
-#, fuzzy
 msgid "Update Subproject Tasks: "
-msgstr "Nom du sous-projet"
+msgstr "Mise à jour de tâches : "
 
 #: www/pm/admin/index.php:322
-#, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
 "the general public."
 msgstr ""
-"Vous pouvez modifier un projet existant en utilisant ce formulaire. Notez "
-"que les projets privés ne peuvent être vus que par les membres, et pas par "
-"les visiteurs."
+"Vous pouvez modifier un projet existant en utilisant ce\n"
+"formulaire. Notez que les sous-projets privés ne peuvent être vus que\n"
+"par les membres, et pas par les visiteurs."
 
 #: www/pm/admin/index.php:339 www/pm/index.php:107
 msgid "Subproject Name"
@@ -11495,41 +11397,34 @@ msgid "Could Not Get Factory"
 msgstr "Erreur lors de la création de l'objet Factory"
 
 #: www/pm/admin/index.php:414
-#, fuzzy
 msgid "Tasks Administration"
-msgstr "Administration"
+msgstr "Administration des gestionnaires de tâches"
 
 #: www/pm/admin/index.php:422
-#, fuzzy
 msgid "Add a Subproject"
-msgstr "Ajouter un projet"
+msgstr "Ajouter un sous-projet"
 
 #: www/pm/admin/index.php:423
-#, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
 msgstr ""
-"Il s'agit ici d'ajouter un projet, qui peut contenir un ensemble de tâches. "
-"Ce n'est pas la même chose que la création d'une tâche."
+"Il s'agit ici d'ajouter un sous-projet, qui peut contenir un ensemble\n"
+"de tâches. Ce n'est pas la même chose que la création d'une tâche."
 
 #: www/pm/admin/index.php:431
-#, fuzzy
 msgid "No Subprojects Found in this Project"
-msgstr "Ce projet n'a pas d'offres en cours."
+msgstr "Ce projet n'a pas actuellement de sous-projets."
 
 #: www/pm/admin/index.php:432
-#, fuzzy
 msgid "You may add new Subprojects using the \"Add a Subproject\" link above."
 msgstr ""
-"<h2>Aucun sous-projet</h2><p>Aucun sous-projet n'a été trouvé pour ce "
-"groupe.  Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter "
-"un projet » ci-dessus."
+"Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter un\n"
+"sous-projet » ci-dessus."
 
 #: www/pm/admin/index.php:436
-#, fuzzy
 msgid "Edit/Update Subproject"
-msgstr "Éditer/Mettre à jour le projet"
+msgstr "Éditer/Mettre à jour le sous-projet"
 
 #: www/pm/browse_task.php:43 www/pm/downloadcsv.php:98 www/pm/gantt.php:36
 #: www/tracker/taskmgr.php:60
@@ -11607,14 +11502,12 @@ msgid "Change"
 msgstr "Changement"
 
 #: www/pm/browse_task.php:346
-#, fuzzy
 msgid "previous"
-msgstr "Précédents"
+msgstr "Précédentes"
 
 #: www/pm/browse_task.php:353
-#, fuzzy
 msgid "next"
-msgstr "50 suivantes"
+msgstr "Suivantes"
 
 #: www/pm/browse_task.php:400 www/tracker/browse.php:658
 msgid "Check &nbsp;all"
@@ -11648,19 +11541,16 @@ msgid "* Denotes overdue tasks"
 msgstr "* indique les tâches en retard"
 
 #: www/pm/calendar.php:47
-#, fuzzy
 msgid "Invalid year: Not between 1990 and 2000"
-msgstr "Pas entre 1990 et 2020"
+msgstr "Année invalide : pas entre 1990 et 2020."
 
 #: www/pm/calendar.php:51
-#, fuzzy
 msgid "Invalid month: Not between 1 and 12"
-msgstr "Pas entre 1 et 12"
+msgstr "Mois invalide : pas entre 1 et 12."
 
 #: www/pm/calendar.php:55
-#, fuzzy
 msgid "Invalid day: Not between 1 and 31"
-msgstr "Pas entre 1 et 31"
+msgstr "Jour invalide : pas entre 1 et 31."
 
 #: www/pm/calendar.php:60
 msgid "Invalid date"
@@ -11672,7 +11562,6 @@ msgid "Date not valid"
 msgstr "Date non valide"
 
 #: www/pm/calendar.php:65
-#, fuzzy
 msgid "Invalid type: Type not in onemonth, threemonth, currentyear, comingyear"
 msgstr ""
 "Le type n'est pas dans la liste autorisée (onemonth, threemonth, "
@@ -11727,12 +11616,10 @@ msgid "December"
 msgstr "Décembre"
 
 #: www/pm/calendar.php:104
-#, fuzzy
 msgid "Error: Could Not Get Factory"
 msgstr "Erreur lors de la création de l'objet Factory"
 
 #: www/pm/calendar.php:111
-#, fuzzy
 msgid "Error: Could Not Get ProjectTaskFactory"
 msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
 
@@ -11788,9 +11675,8 @@ msgid "selected date"
 msgstr "date sélectionnée"
 
 #: www/pm/csv.php:51 www/pm/format_csv.php:51 www/pm/uploadcsv.php:32
-#, fuzzy
 msgid "Upload data into the tasks."
-msgstr "Charger des données dans le gestionnaire de tâches"
+msgstr "Chargement de données dans le gestionnaire de tâches"
 
 #: www/pm/csv.php:65
 msgid ""
@@ -11839,9 +11725,8 @@ msgid "Task Detail"
 msgstr "Détails d'une tâche"
 
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:99
-#, fuzzy
 msgid "Subscribe to task"
-msgstr "Abonnés aux « mises à jour du site »"
+msgstr "S'abonner à cette tâche"
 
 #: www/pm/detail_task.php:96 www/pm/mod_task.php:106
 msgid "Original Comment"
@@ -11857,14 +11742,12 @@ msgid "Package JPGraph not installed"
 msgstr ""
 
 #: www/pm/gantt.php:38
-#, fuzzy
 msgid "Error getting PTF: "
-msgstr "Erreur lors de l'accès à un forum"
+msgstr "Erreur lors de l'accès à l'objet ProjectTaskFactory : "
 
 #: www/pm/gantt.php:52
-#, fuzzy
 msgid "Error in PTF: "
-msgstr "Erreur lors de l'ajout de l'hôte virtuel :"
+msgstr "Erreur dans la ProjectTaskFactory : "
 
 #: www/pm/ganttpage.php:37 www/pm/ganttpage.php:180
 #: www/pm/include/ProjectGroupHTML.class.php:68
@@ -11912,9 +11795,8 @@ msgid "Related Tracker Items"
 msgstr "éléments à suivre liés"
 
 #: www/pm/include/ProjectTaskHTML.class.php:108
-#, fuzzy
 msgid "Artifact Summary"
-msgstr "Résumé du projet"
+msgstr "Résumé de l'artifact"
 
 #: www/pm/include/ProjectTaskHTML.class.php:111
 msgid "Remove Relation"
@@ -11955,14 +11837,12 @@ msgid "No Changes Have Been Made"
 msgstr "Aucun changement n'a été effectué"
 
 #: www/pm/index.php:56
-#, fuzzy
 msgid "Subprojects and Tasks"
-msgstr "Nom du sous-projet"
+msgstr "Sous-projets et tâches"
 
 #: www/pm/index.php:69
-#, fuzzy
 msgid "No Subprojects Found"
-msgstr "Aucun groupe de projet trouvé"
+msgstr "Aucun sous-projet trouvé."
 
 #: www/pm/index.php:70
 msgid "No subprojects have been set up, or you cannot view them."
@@ -12077,43 +11957,37 @@ msgstr ""
 "tâches leur seront attribuées à chacun.</p>"
 
 #: www/pm/t_follow.php:36
-#, fuzzy
 msgid "TID"
-msgstr "Identifiant"
+msgstr "Identifiant de tâche"
 
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
 msgstr ""
 
 #: www/pm/t_lookup.php:35
-#, fuzzy
 msgid "Task ID"
-msgstr "Numéro de tâche"
+msgstr "Identifiant de tâche"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
 msgstr ""
 
 #: www/pm/task.php:71
-#, fuzzy
 msgid "Group ID"
-msgstr "Groupe"
+msgstr "Identifiant de projet"
 
 #: www/pm/task.php:74
-#, fuzzy
 msgid "Group Project ID"
-msgstr "Les meilleurs projets"
+msgstr "Identifiant de sous-projet"
 
 #: www/pm/task.php:106 www/pm/task.php:174 www/pm/task.php:309
 #: www/pm/task.php:331 www/pm/task.php:348 www/pm/task.php:388
-#, fuzzy
 msgid "Could Not Get ProjectTask"
-msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
+msgstr "Erreur lors de la création de l'objet ProjectTask."
 
 #: www/pm/task.php:124
-#, fuzzy
 msgid "Could Not Get Empty ProjectTask"
-msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
+msgstr "Erreur lors de la création de l'objet ProjectTask."
 
 #: www/pm/task.php:132 www/pm/task.php:182
 msgid "Illegal format for hours: must be an integer or a float number."
@@ -12128,9 +12002,8 @@ msgid "Task Updated Successfully"
 msgstr "Tâche mise à jour avec succès"
 
 #: www/pm/task.php:290
-#, fuzzy
 msgid "No task selected"
-msgstr "Aucun utilisateur sélectionné"
+msgstr "Aucune tâche sélectionnée."
 
 #: www/pm/task.php:316
 msgid "Successfully Added Tracker Relationship"
@@ -12305,7 +12178,6 @@ msgstr ""
 
 #: www/project/admin/editimages.php:60 www/tracker/tracker.php:146
 #: www/tracker/tracker.php:378
-#, fuzzy
 msgid "Invalid filename"
 msgstr "Nom de fichier invalide."
 
@@ -12394,14 +12266,12 @@ msgid "Del"
 msgstr "Suppr"
 
 #: www/project/admin/group_trove.php:69
-#, fuzzy
 msgid "Trove Update Success"
-msgstr "Fichier publié avec succès"
+msgstr "Mise à jour dans l'arbre des catégories réussie."
 
 #: www/project/admin/group_trove.php:73 www/project/admin/group_trove.php:76
-#, fuzzy
 msgid "Edit Trove Categorization"
-msgstr "Éditer une branche"
+msgstr "Éditer la catégorisation"
 
 #: www/project/admin/group_trove.php:77
 msgid ""
@@ -12411,20 +12281,16 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/group_trove.php:78
-#, fuzzy
 msgid ""
 "IMPORTANT: Projects should be categorized in the most specific locations "
 "available in the map. Simultaneous categorization in a specific category AND "
 "a parent category will result in only the more specific categorization being "
 "accepted."
 msgstr ""
-"<h1>Éditer la catégorisation</h1><p>Choisissez jusqu'à trois catégories pour "
-"ce projet dans chacune des arborescences de classement.  Vous pouvez bien "
-"entendu choisir « aucune » lorsque les catégories ne s'appliquent pas.</"
-"p><p>Important : les projets doivent être classés dans la catégorie la plus "
-"spécifique qui s'applique à eux.  S'ils sont simultanément classés dans une "
-"catégorie spécifique et une plus générique, seule la catégorie la plus "
-"spécifique sera conservée.</p>"
+"Important : les projets doivent être classés dans la catégorie la plus\n"
+"spécifique qui s'applique à eux.  S'ils sont simultanément classés\n"
+"dans une catégorie spécifique et une plus générique, seule la\n"
+"catégorie la plus spécifique sera conservée."
 
 #: www/project/admin/group_trove.php:112
 msgid "Update All Category Changes"
@@ -12484,7 +12350,6 @@ msgstr ""
 "des utilisateurs que vous ajoutez."
 
 #: www/project/admin/massadd.php:80
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to add."
@@ -12493,9 +12358,8 @@ msgstr ""
 "vous souhaitez ajouter.</p>"
 
 #: www/project/admin/massadd.php:90 www/project/admin/users.php:102
-#, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>Aucun utilisateur correspondant</p>"
+msgstr "Aucun utilisateur correspondant."
 
 #: www/project/admin/massadd.php:95
 msgid "Add user"
@@ -12524,9 +12388,8 @@ msgid "Add All"
 msgstr "Ajouter tout"
 
 #: www/project/admin/project_admin_utils.php:51
-#, fuzzy
 msgid "Users and permissions"
-msgstr "Mise à jour des permissions"
+msgstr "Utilisateurs et permissions"
 
 #: www/project/admin/project_admin_utils.php:52 www/project/admin/tools.php:98
 msgid "Tools"
@@ -12595,14 +12458,12 @@ msgstr ""
 "documentations du projet.</dd></dl>"
 
 #: www/project/admin/roledelete.php:53
-#, fuzzy
 msgid "ERROR: "
-msgstr "ERREUR"
+msgstr "Erreur : "
 
 #: www/project/admin/roledelete.php:55
-#, fuzzy
 msgid "Successfully Deleted Role"
-msgstr "Supprimé avec succès"
+msgstr "Rôle correctement supprimé."
 
 #: www/project/admin/roledelete.php:58
 msgid ""
@@ -12611,14 +12472,14 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/roledelete.php:71
-#, fuzzy, php-format
+#, php-format
 msgid "Permanently Delete Role %s"
-msgstr "Supprimer définitivement"
+msgstr "Suppression définitive du rôle %s"
 
 #: www/project/admin/roledelete.php:74
-#, fuzzy, php-format
+#, php-format
 msgid "You are about to permanently delete role %s"
-msgstr "Vous êtes sur le point de supprimer définitivement ce document."
+msgstr "Vous êtes sur le point de supprimer définitivement le rôle %s."
 
 #: www/project/admin/roledelete.php:78
 #: www/tracker/admin/form-deleteextrafield.php:37
@@ -12628,9 +12489,8 @@ msgid "I'm Sure."
 msgstr "Je confirme"
 
 #: www/project/admin/roleedit.php:53
-#, fuzzy
 msgid "Could Not Get RoleObserver"
-msgstr "Erreur lors de la création de l'objet Role"
+msgstr "Erreur lors de la création de l'objet RoleObserver."
 
 #: www/project/admin/roleedit.php:144 www/project/admin/users.php:386
 msgid "Edit Observer"
@@ -12650,16 +12510,17 @@ msgid "New Role"
 msgstr "Nouveau rôle"
 
 #: www/project/admin/roleedit.php:153
-#, fuzzy
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
 "role has at least as much access as the Anonymous and LoggedIn roles.  For "
 "example, if the the Anonymous role has read access to a forum, all other "
 "roles will have it too."
 msgstr ""
-"Utilisez cette page pour modifier les rôles de votre projet. Notez que "
-"chaque membre a au moins l'accès Observateur. Par exemple, si l'Observateur "
-"peut lire le CVS, tous les autres rôles du projet le peuvent également."
+"Utilisez cette page pour modifier les permissions associées aux rôles\n"
+"dans le projet. Notez que chaque rôle dispose au moins des permissions\n"
+"associées aux rôles « Anonyme » et « Connecté ».  Ainsi, si le rôle\n"
+"« Anonyme » a accès en lecture à un forum, tous les utilisateurs\n"
+"auront cet accès, quel que soit leur rôle."
 
 #: www/project/admin/roleedit.php:155
 msgid ""
@@ -12672,23 +12533,20 @@ msgstr ""
 "peut lire le CVS, tous les autres rôles du projet le peuvent également."
 
 #: www/project/admin/roleedit.php:174
-#, fuzzy
 msgid "Shared role (can be referenced by other projects)"
-msgstr "Le label a été ajouté au projet."
+msgstr "Rôle partagé (peut être référencé par d'autres projets)"
 
 #: www/project/admin/tools.php:104
-#, fuzzy
 msgid "Active Tools"
-msgstr "Actif"
+msgstr "Outils actifs"
 
 #: www/project/admin/tools.php:154
 msgid "Use Trackers"
 msgstr "Utiliser les outils de suivi"
 
 #: www/project/admin/tools.php:180
-#, fuzzy
 msgid "Use Tasks"
-msgstr "Nouveaux gestionnaires de tâches"
+msgstr "Utiliser les gestionnaires de tâches"
 
 #: www/project/admin/tools.php:193
 msgid "Use Documents"
@@ -12737,47 +12595,40 @@ msgstr "Administration du système de publication de fichiers"
 #: www/project/admin/users.php:106 www/project/admin/users.php:143
 #: www/project/admin/users.php:158
 msgid "Role not selected"
-msgstr "Aucun rôle choisi"
+msgstr "Aucun rôle choisi."
 
 #: www/project/admin/users.php:112 www/project/admin/users.php:171
-#, fuzzy
 msgid "Member Added Successfully"
-msgstr "Utilisateur ajouté avec succès"
+msgstr "Membre ajouté avec succès."
 
 #: www/project/admin/users.php:136
-#, fuzzy
 msgid "Member Removed Successfully"
-msgstr "Utilisateur supprimé avec succès"
+msgstr "Membre supprimé avec succès."
 
 #: www/project/admin/users.php:149
-#, fuzzy
 msgid "Member Updated Successfully"
-msgstr "Mise à jour de l'utilisateur réussie"
+msgstr "Mise à jour de l'utilisateur réussie."
 
 #: www/project/admin/users.php:167 www/project/admin/users.php:181
-#, fuzzy
 msgid "Error Getting GroupJoinRequest"
-msgstr "Erreur lors de la création d'un objet groupe"
+msgstr "Erreur lors de la création d'un objet GroupJoinRequest."
 
 #: www/project/admin/users.php:198
-#, fuzzy
 msgid "Role linked successfully"
-msgstr "Suppression effectuée"
+msgstr "Le rôle a été référencé."
 
 #: www/project/admin/users.php:213
-#, fuzzy
 msgid "Role unlinked successfully"
-msgstr "Suppression effectuée"
+msgstr "Le rôle a été déréférencé."
 
 #: www/project/admin/users.php:224
-#, fuzzy, php-format
+#, php-format
 msgid "Members of %s"
-msgstr "Membres"
+msgstr "Membres de %s"
 
 #: www/project/admin/users.php:236
-#, fuzzy
 msgid "Pending Membership Requests"
-msgstr "Demandes en attentes"
+msgstr "Candidatures en attente"
 
 #: www/project/admin/users.php:255
 msgid "Accept"
@@ -12785,14 +12636,12 @@ msgstr "Accepter"
 
 #: www/project/admin/users.php:266 www/project/admin/users.php:268
 #: www/project/admin/users.php:285
-#, fuzzy
 msgid "Add Member"
-msgstr "Membre"
+msgstr "Ajouter un membre"
 
 #: www/project/admin/users.php:294
-#, fuzzy
 msgid "Current Project Members"
-msgstr "Membres du projet"
+msgstr "Membres actuels du projet"
 
 #: www/project/admin/users.php:357
 msgid "Grant extra role"
@@ -12804,31 +12653,28 @@ msgstr "Modifier les rôles"
 
 #: www/project/admin/users.php:379 www/project/admin/users.php:414
 #: www/project/admin/users.php:433
-#, fuzzy
 msgid "Role name"
-msgstr "Nom du rôle :"
+msgstr "Nom du rôle"
 
 #: www/project/admin/users.php:397
-#, fuzzy
 msgid "Edit Permissions"
-msgstr "Mise à jour des permissions"
+msgstr "Modifier les permissions"
 
 #: www/project/admin/users.php:412
 msgid "Currently used external roles"
 msgstr ""
 
 #: www/project/admin/users.php:424
-#, fuzzy
 msgid "Unlink Role"
-msgstr "Modifier le rôle"
+msgstr "Déréférencer le rôle"
 
 #: www/project/admin/users.php:431
 msgid "Available external roles"
-msgstr ""
+msgstr "Rôles externes disponibles"
 
 #: www/project/admin/users.php:449
 msgid "Link external role"
-msgstr ""
+msgstr "Référencer"
 
 #: www/project/admin/vhost.php:61
 msgid "Virtual Host scheduled for creation."
@@ -12880,9 +12726,8 @@ msgid "No VHOSTs defined"
 msgstr "aucun hôte virtuel défini"
 
 #: www/project/index.php:36
-#, fuzzy
 msgid "A project must be specified for this page."
-msgstr "Cette page requiert qu'un utilisateur soit spécifié."
+msgstr "Cette page requiert qu'un projet soit spécifié."
 
 #: www/project/memberlist.php:36 www/project/memberlist.php:38
 #: www/project/report/index.php:130
@@ -12890,14 +12735,13 @@ msgid "Project Member List"
 msgstr "Liste des membres du projet"
 
 #: www/project/memberlist.php:40 www/project/report/index.php:133
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a developer, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>Si vous désirez contribuer à ce projet en devenant développeur, contactez "
-"l'un des administrateurs du projet signalés en gras dans la liste ci-dessous."
-"</p>"
+"Si vous désirez contribuer à ce projet en devenant développeur,\n"
+"contactez l'un des administrateurs du projet (signalés en gras dans la\n"
+"liste ci-dessous)."
 
 #: www/project/memberlist.php:51
 msgid "Member"
@@ -12908,9 +12752,8 @@ msgid "Username"
 msgstr "utilisateur"
 
 #: www/project/memberlist.php:53
-#, fuzzy
 msgid "Role(s)/Position(s)"
-msgstr "Rôle / Fonction"
+msgstr "Rôle(s) / Fonction(s)"
 
 #: www/project/memberlist.php:55
 msgid "Skills"
@@ -13044,15 +12887,15 @@ msgid "Registration complete"
 msgstr "Enregistrement complet"
 
 #: www/register/index.php:112
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<p>Your project has been submitted to the %1$s administrators. Within 72 "
 "hours, you will receive notification of their decision and further "
 "instructions.<p/>Thank you for choosing %1$s</p>"
 msgstr ""
-"Votre projet a été soumis aux administrateurs de %1$s. Dans les 72 heures, "
-"vous recevrez la notification de leur décision, et des instructions "
-"supplémentaires.</p><p>Merci d'avoir choisi %1$s."
+"<p>Votre projet a été soumis aux administrateurs de %1$s. Dans les 72\n"
+"heures, vous recevrez la notification de leur décision, et des\n"
+"instructions supplémentaires.</p><p>Merci d'avoir choisi %1$s.</p>"
 
 #: www/register/index.php:114
 #, php-format
@@ -13065,15 +12908,15 @@ msgid "<div class=\"error\">Approval ERROR: %1$s</div>"
 msgstr ""
 
 #: www/register/index.php:127
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "<p>Your project has been automatically approved.  You should receive an "
 "email containing further information shortly.<p/>Thank you for choosing "
 "%1$s</p>"
 msgstr ""
-"Votre projet a été soumis aux administrateurs de %1$s. Dans les 72 heures, "
-"vous recevrez la notification de leur décision, et des instructions "
-"supplémentaires.</p><p>Merci d'avoir choisi %1$s."
+"<p>Votre projet a automatiquement approuvé.  Vous devriez recevoir\n"
+"prochainement un e-mail contenant des informations\n"
+"supplémentaires.</p><p>Merci d'avoir choisi %1$s.</p>"
 
 #: www/register/index.php:151
 msgid ""
@@ -13087,29 +12930,26 @@ msgstr ""
 "les champs sont obligatoires."
 
 #: www/register/index.php:158
-#, fuzzy
 msgid "Project full name"
-msgstr "Nom du projet"
+msgstr "Nom complet du projet"
 
 #: www/register/index.php:159
-#, fuzzy
 msgid ""
 "You should start with specifying the name of your project. The \"Full Name\" "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit).<p/>Full Name:<br/>"
 msgstr ""
-"<h3>1. Nom complet du projet</h3<p>Vous devez commencer par donner un nom à "
-"votre projet.  Ce nom complet doit être descriptif, et n'a pas de "
-"restrictions arbitraires à l'exception d'une limitation de taille (à 40 "
-"caractères).</p><p>Nom complet :<br/>"
+"Vous devez commencer par donner un nom à votre projet.  Ce nom complet\n"
+"doit être descriptif, et n'a pas de restrictions arbitraires à\n"
+"l'exception d'une limitation de taille (à 40 caractères).</p><p>Nom\n"
+"complet :<br />"
 
 #: www/register/index.php:167
-#, fuzzy
 msgid "Project Purpose And Summarization"
-msgstr "Administration de la base de données du projet"
+msgstr "Résumé des buts du projet"
 
 #: www/register/index.php:169
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -13118,34 +12958,29 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English."
 msgstr ""
-"<h3>2. Objectifs et description du projet</h3><p><p><strong> Veuillez "
-"fournir une description précise et détaillée de votre projet, quelles "
-"resources de %1$s vous prévoyez d'utiliser, et de quelle manière . "
-"L'approbation ou le rejet de l'hébergement de votre projet sur %1$s reposera "
-"sur cette description, comme plus tard son maintien, conditionné par l'usage "
-"approprié des services. Cette description ne sera pas utilisée comme "
-"description publique de votre projet. Elle doit être rédigée en anglais.</"
-"strong></p>"
+"Veuillez fournir une description précise et détaillée de votre projet,\n"
+"quelles resources de %1$s vous prévoyez d'utiliser, et de quelle\n"
+"manière. L'approbation ou le rejet de l'hébergement de votre projet\n"
+"sur %1$s reposera sur cette description, comme plus tard son maintien,\n"
+"conditionné par l'usage approprié des services. Cette description ne\n"
+"sera pas utilisée comme description publique de votre projet. Elle\n"
+"doit être rédigée en anglais."
 
 #: www/register/index.php:179
-#, fuzzy
 msgid "Project Public Description"
-msgstr "Durée de vie du projet"
+msgstr "Description publique du projet"
 
 #: www/register/index.php:181
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. Maximum length is 255 chars."
 msgstr ""
-"<h3>3. Description publique du projet</h3><p>C'est la description de votre "
-"projet qui apparaîtra sur la page 'résumé du projet', dans les résultats des "
-"recherches, etc. Elle ne doit pas être aussi précise et étendue que la "
-"description du projet (étape 2), donc permettez-vous des formulation "
-"concises et des abréviations. La longueur maximale est de 255 caractères."
+"C'est la description de votre projet qui apparaîtra sur la page de\n"
+"résumé du projet, dans les résultats des recherches, etc. La longueur\n"
+"maximale est de 255 caractères."
 
 #: www/register/index.php:191
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "In addition to full project name, you will need to choose short,\"Unix\" "
 "name for your project.<p/> The \"Unix Name\" has several restrictions "
@@ -13161,47 +12996,42 @@ msgid ""
 "li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines "
 "throughout the site</li></ul><p/>Unix Name:<br/>"
 msgstr ""
-"<h3>4. Nom Unix du projet</h3>\n"
-"<p>En plus du nom complet du projet, vous devez choisir un nom « Unix » "
-"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le site, "
-"le « nom Unix » est soumis à plusieurs restrictions :</p><ul><li>Il doit "
-"être unique</li><li>Il doit comprendre entre 3 et 15 caractères</li><li>Il "
-"ne peut contenir que des lettres (minuscules), des chiffres et des tirets</"
-"li><li>Il ne peut être choisi parmi certains noms réservés</li><li>Il ne "
-"changera pas tout au long de la vie du projet</li></ul>\n"
-"<p>Ce nom Unix est important, car il est utilisé des manières suivantes :</"
-"p>\n"
-"<ul><li>Pour construire l'adresse du site web du projet, <tt>nom-unix.%1$s</"
-"tt></li><li>Pour utiliser CVS, dans <tt>/cvsroot/nom-unix</tt> sur <tt>cvs."
-"nom-unix.%1$s</tt> (ou équivalent pour un autre système de suivi de version)"
-"</li><li>Pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour "
-"les recherches partout dans le site</li></ul><p>Nom Unix :<br/>"
+"En plus du nom complet du projet, vous devez choisir un nom « Unix »\n"
+"court.</p><p>Du fait de son utilisation à de nombreux endroits sur le\n"
+"site, le « nom Unix » est soumis à plusieurs\n"
+"restrictions :</p><ul><li>Il doit être unique</li><li>Il doit\n"
+"comprendre entre 3 et 15 caractères</li><li>Il ne peut contenir que\n"
+"des lettres (minuscules), des chiffres et des tirets</li><li>Il ne\n"
+"peut être choisi parmi certains noms réservés</li><li>Il ne changera\n"
+"pas tout au long de la vie du projet</li></ul></p><p>Ce nom Unix est\n"
+"important, car il est utilisé des manières suivantes :\n"
+"<ul><li>Pour construire l'adresse du site web du projet,\n"
+"<tt>nom-unix.%1$s</tt></li><li>Pour utiliser CVS, dans\n"
+"<tt>/cvsroot/nom-unix</tt> sur <tt>cvs.nom-unix.%1$s</tt> (ou\n"
+"équivalent pour un autre système de suivi de version)</li><li>Pour\n"
+"obtenir un accès shell sur <tt>nom-unix.%1$s</tt></li><li>Pour les\n"
+"recherches partout dans le site</li></ul></p><p>Nom Unix :<br />"
 
 #: www/register/index.php:200
-#, fuzzy
 msgid "Source Code"
-msgstr "Utiliser le gestionnaire de code source"
+msgstr "Gestionnaire de code source"
 
 #: www/register/index.php:201
-#, fuzzy
 msgid ""
 "<p>You can choose among different SCM for your project, but just one (or "
 "none at all). Please select the SCM system you want to use.</p>"
 msgstr ""
-"<h3>5. Gestion de sources</h3><p>Vous pouvez choisir parmi différents "
-"gestionnaires de sources pour votre projet mais seulement un seul. Merci de "
-"choisir avec soin le gestionnaire de sources que vous souhaitez utiliser.</"
-"p> <p><strong>Vous ne pourrez plus le changer une fois le projet enregistré !"
-"</strong></p>"
+"<p>Vous pouvez choisir parmi différents gestionnaires de sources pour\n"
+"votre projet mais seulement un seul (ou aucun). Veuillez choisir le\n"
+"gestionnaire de sources que vous souhaitez utiliser.</p>\n"
 
 #: www/register/index.php:203
 msgid "No SCM"
 msgstr "Pas de gestion de sources"
 
 #: www/register/index.php:213
-#, fuzzy
 msgid "Visibility"
-msgstr "Visibilité :"
+msgstr "Visibilité"
 
 #: www/reporting/groupadded.php:50 www/reporting/groupcum.php:49
 #: www/reporting/projectact.php:54 www/reporting/projecttime.php:54
@@ -13981,12 +13811,12 @@ msgstr "Bibliothèque d'échantillons"
 #: www/snippet/browse.php:60
 #, php-format
 msgid "Snippets by language: %1$s"
-msgstr "Echantillons par langage : %1$s"
+msgstr "Échantillons par langage : %1$s"
 
 #: www/snippet/browse.php:67
 #, php-format
 msgid "Snippets by category: %1$s"
-msgstr "Echantillons par catégories : %1$s"
+msgstr "Échantillons par catégories : %1$s"
 
 #: www/snippet/browse.php:69
 msgid "Error - bad url?"
@@ -14011,7 +13841,7 @@ msgstr "Paquets d'échantillons"
 
 #: www/snippet/browse.php:106
 msgid "Snippets"
-msgstr "Echantillons"
+msgstr "Échantillons"
 
 #: www/snippet/delete.php:142
 #, fuzzy
@@ -14259,7 +14089,7 @@ msgstr "Créer un paquet"
 
 #: www/snippet/snippet_utils.php:150
 msgid "Snippets In This Package:"
-msgstr "Echantillons dans le paquet :"
+msgstr "Échantillons dans le paquet :"
 
 #: www/snippet/submit.php:60
 msgid "ERROR DOING SNIPPET INSERT!"
@@ -14267,7 +14097,7 @@ msgstr "ERREUR - en insertion d'échantillon."
 
 #: www/snippet/submit.php:63 www/snippet/submit.php:79
 msgid "Snippet Added Successfully."
-msgstr "Echantillon correctement ajouté"
+msgstr "Échantillon correctement ajouté."
 
 #: www/snippet/submit.php:88
 msgid "Snippet submit"
