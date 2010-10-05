@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: BlockParser.php 7697 2010-09-20 13:04:55Z vargenau $');
+<?php // rcs_id('$Id: BlockParser.php 7711 2010-10-05 16:08:35Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004,2005 Reini Urban
  * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -1131,6 +1131,10 @@ class Block_template_plugin extends Block_pre
     var $_re = '{{';
 
     function _match (&$input, $m) {
+        // If we find "}}", this is an inline template.
+        if (strpos($m->postmatch, "}}") !== false) {
+            return false;
+        }
         $pos = $input->getPos();
         $pi = $m->postmatch;
         if ($pi[0] == '{') {

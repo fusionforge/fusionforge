@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: wikiadmin.php 7669 2010-09-02 19:40:52Z vargenau $
+<?php // -*-php-*- $Id: wikiadmin.php 7708 2010-09-22 18:19:06Z vargenau $
 /*
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
