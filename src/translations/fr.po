@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-06 15:05+0200\n"
-"PO-Revision-Date: 2010-10-06 15:48+0200\n"
+"PO-Revision-Date: 2010-10-06 16:17+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -2864,6 +2864,12 @@ msgid ""
 "which means that both the title of the bookmark and its destination URL can "
 "be modified."
 msgstr ""
+"Liste de vos favoris (dans %1$s ou en-dehors).<br />Notez que dans de\n"
+"nombreux cas, les URL de %1$s contiennent suffisamment d'informations\n"
+"pour permettre d'ajouter en favoris des pages complexes comme la\n"
+"navigation dans l'arbre des catégories, les recherches dans des outils\n"
+"de suivi ou des gestionnaires de tâches, etc.<br />Les favoris peuvent\n"
+"être modifiés (à la fois le titre et l'URL de destination)."
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:31
 msgid "My Latest SVN Commits"
@@ -2923,6 +2929,9 @@ msgid ""
 "any of the monitored items just click on the trash icon next to the item "
 "label."
 msgstr ""
+"Liste des forums que vous surveillez actuellement, par projet.<br\n"
+"/>Pour interrompre cette surveillance, cliquez simplement sur l'icône\n"
+"de la corbeille placée à proximité du nom du forum."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:33
 msgid "Monitored File Packages"
@@ -2936,6 +2945,13 @@ msgid ""
 "Summary Page&quot; and clicking on the appropriate icon in the files section."
 "<BR>&nbsp;"
 msgstr ""
+"<b>Vous ne surveillez actuellement aucun fichier</b><p>Si vous\n"
+"surveillez des fichiers, vous serez prévenu des nouvelles publications\n"
+"par un e-mail contenant un lien vers les nouveaux fichiers.</p><p>Vous\n"
+"pouvez surveiller des fichiers en visitant la page de résumé d'un\n"
+"projet, et en cliquant sur l'icône adéquate dans la section des fichiers.</p>\n"
+"\n"
+"If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the appropriate icon in the files section.<BR>&nbsp;"
 
 #: common/widget/Widget_MyMonitoredFp.class.php:104
 msgid "Stop Monitoring this Package?"
@@ -2947,6 +2963,9 @@ msgid ""
 "any of the monitored items just click on the trash icon next to the item "
 "label."
 msgstr ""
+"Liste des paquets que vous surveillez actuellement, par projet.<br\n"
+"/>Pour interrompre la surveillance, cliquez sur l'icône de la\n"
+"corbeille à proximité de l'intitulé du paquet."
 
 #: common/widget/Widget_MyProjects.class.php:34
 msgid "My Projects"
@@ -2970,16 +2989,19 @@ msgid ""
 "List the projects you belong to. Selecting any of these projects brings you "
 "to the corresponding Project Summary page."
 msgstr ""
+"Liste des projets desquels vous êtes membre. Cette liste est\n"
+"constituée de liens pointant vers la page de résumé de chacun de ces\n"
+"projets."
 
 #: common/widget/Widget_MyRss.class.php:35
 #: common/widget/Widget_ProjectRss.class.php:41
 msgid ""
 "Allow you to include public rss (or atom) feeds into your personal page."
-msgstr ""
+msgstr "Vous permet d'inclure des flux RSS ou Atom sur votre page personnelle."
 
 #: common/widget/Widget_MySurveys.class.php:55
 msgid "<P>There are no surveys in your groups.<P><BR>&nbsp;"
-msgstr ""
+msgstr "<p>Il n'y a pas de sondage dans vos projets.<p>"
 
 #: common/widget/Widget_MySurveys.class.php:122
 msgid "Quick Survey"
@@ -2987,7 +3009,7 @@ msgstr "Sondage rapide"
 
 #: common/widget/Widget_MySurveys.class.php:128
 msgid "List the surveys you have not answered."
-msgstr ""
+msgstr "Liste des sondages auxquels vous n'avez pas encore répondu."
 
 #: common/widget/Widget_MyTasks.class.php:118
 msgid "No task yet"
@@ -3011,7 +3033,7 @@ msgstr "Ce projet n'a pas encore soumis de description."
 
 #: common/widget/Widget_ProjectDescription.class.php:64
 msgid "Allow you to view the project description"
-msgstr ""
+msgstr "Vous permet de visualiser la description du projet."
 
 #: common/widget/Widget_ProjectInfo.class.php:31
 #: www/include/project_home.php:34 www/include/user_home.php:188
@@ -3166,7 +3188,7 @@ msgstr "Dernières annonces"
 
 #: common/widget/Widget_ProjectLatestNews.class.php:65
 msgid "List the last 10 pieces of news posted by the project members."
-msgstr ""
+msgstr "Liste des 10 dernières annonces publiées par les membres du projet."
 
 #: common/widget/Widget_ProjectMembers.class.php:31
 msgid "Project Members"
@@ -3284,38 +3306,38 @@ msgstr ""
 
 #: common/widget/Widget_Rss.class.php:99
 msgid "http://search.twitter.com/search.atom?q=codendi&amp;show_user=1"
-msgstr ""
+msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 
 #: common/widget/Widget_Rss.class.php:188
 msgid "less than 1 minute"
-msgstr ""
+msgstr "Il y a moins d'une minute"
 
 #: common/widget/Widget_Rss.class.php:188
 msgid "1 minute"
-msgstr ""
+msgstr "Environ une minute"
 
 #: common/widget/Widget_Rss.class.php:190
 #, php-format
 msgid "%s minutes ago"
-msgstr ""
+msgstr "Il y a environ %s minutes"
 
 #: common/widget/Widget_Rss.class.php:192
 msgid "About one hour"
-msgstr ""
+msgstr "Environ une heure"
 
 #: common/widget/Widget_Rss.class.php:194
 #, php-format
 msgid "about %s hours"
-msgstr ""
+msgstr "Environ %s heures"
 
 #: common/widget/Widget_Rss.class.php:196
 msgid "About one day"
-msgstr ""
+msgstr "Environ un jour"
 
 #: common/widget/Widget_Rss.class.php:198
 #, php-format
 msgid "%s days ago"
-msgstr ""
+msgstr "Il y a %s jours"
 
 #: common/widget/Widget_Rss.class.php:200
 msgid "About one month"
@@ -3542,7 +3564,7 @@ msgstr "Enregistrer"
 
 #: plugins/blocks/www/index.php:365
 msgid "Tips"
-msgstr ""
+msgstr "Astuces"
 
 #: plugins/blocks/www/index.php:367
 msgid ""
@@ -4082,15 +4104,17 @@ msgstr "Gestion des onglets supplémentaires"
 
 #: plugins/extratabs/www/index.php:61
 msgid "ERROR: Missing Name or URL for the new tab"
-msgstr ""
+msgstr "Erreur : il manque le nom ou l'adresse du nouvel onglet."
 
 #: plugins/extratabs/www/index.php:63
 msgid "ERROR: Malformed URL (only http, https and ftp allowed)"
 msgstr ""
+"Erreur : mauvaise adresse (seules les adresses en http://, https:// et\n"
+"ftp:// sont autorisées)."
 
 #: plugins/extratabs/www/index.php:68
 msgid "ERROR: Name for tab is already used."
-msgstr ""
+msgstr "Erreur : un onglet de ce nom existe déjà."
 
 #: plugins/extratabs/www/index.php:76
 #, php-format
@@ -4116,11 +4140,11 @@ msgstr "Onglet déplacé avec succès."
 
 #: plugins/extratabs/www/index.php:128
 msgid "Tab not moved, already at first position"
-msgstr ""
+msgstr "L'onglet est déjà à la première position."
 
 #: plugins/extratabs/www/index.php:147
 msgid "Tab not moved, already at last position"
-msgstr ""
+msgstr "L'onglet est déjà à la dernière position."
 
 #: plugins/extratabs/www/index.php:157 www/project/admin/index.php:105
 #, php-format
@@ -4451,12 +4475,12 @@ msgstr "L'insertion a échouée."
 #: plugins/mantisbt/www/admin/index.php:40
 #: plugins/mantisbt/www/group/index.php:45
 msgid "Roadmap"
-msgstr ""
+msgstr "Feuille de route"
 
 #: plugins/mantisbt/www/admin/index.php:41
 #: plugins/mantisbt/www/group/index.php:46
 msgid "Tickets"
-msgstr ""
+msgstr "Tickets"
 
 #: plugins/mantisbt/www/admin/index.php:49
 #: plugins/mantisbt/www/group/index.php:54 www/admin/index.php:164
@@ -4594,11 +4618,11 @@ msgstr "Ce n'est pas une image PNG valide."
 #: plugins/mediawiki/www/plugin_admin.php:40
 #, php-format
 msgid "Image size is %dx%d pixels, expected %dx%d instead"
-msgstr ""
+msgstr "La taille de l'image est de %dx%d pixels, au lieu des %dx%d attendus."
 
 #: plugins/mediawiki/www/plugin_admin.php:44
 msgid "Cannot copy file to target directory"
-msgstr ""
+msgstr "Erreur lors de la copie du fichier vers sa destination."
 
 #: plugins/mediawiki/www/plugin_admin.php:47
 msgid "Cannot overwrite existing file"
@@ -4673,6 +4697,9 @@ msgid ""
 "Alternatively, you can use a file you already uploaded (by SFTP or SCP) to "
 "the <a href=\"%2$s\">project's incoming directory</a> (%1$s)."
 msgstr ""
+"Vous pouvez également utiliser un fichier que vous avez préalablement\n"
+"copié (en SFTP ou SCP) dans <a href=\"%2$s\">le répertoire d'entrée du\n"
+"projet</a> (%1$s)."
 
 #: plugins/mediawiki/www/plugin_admin.php:175
 #: www/frs/admin/editrelease.php:306 www/frs/admin/qrs.php:217
@@ -4680,6 +4707,8 @@ msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
 msgstr ""
+"Ce lien direct <tt>sftp://</tt> ne fonctionne qu'avec certains\n"
+"navigateurs comme Konqueror."
 
 #: plugins/mediawiki/www/plugin_admin.php:176
 #: www/frs/admin/editrelease.php:294 www/frs/admin/editrelease.php:307
@@ -4689,7 +4718,7 @@ msgstr "Choisissez un fichier déjà uploadé :"
 
 #: plugins/mediawiki/www/plugin_admin.php:182
 msgid "â¦ or delete the currently uploaded logo and revert to the site default"
-msgstr ""
+msgstr "…ou supprimez le logo actuel pour revenir à la valeur par défaut."
 
 #: plugins/mediawiki/www/plugin_admin.php:183
 msgid "Upload new logo"
@@ -5931,6 +5960,9 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"Le changement d'adresse e-mail requiert une confirmation de votre\n"
+"nouvelle adresse, de manière à assurer que l'adresse enregistrée est\n"
+"correcte."
 
 #: www/account/change_email.php:82
 msgid ""
@@ -5949,6 +5981,9 @@ msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"La validation du formulaire ci-dessous enverra un e-mail à la nouvelle\n"
+"adresse, avec un lien de confirmation. Il faudra visiter ce lien pour\n"
+"mener à bien le changement d'adresse."
 
 #: www/account/change_email.php:89
 msgid "New Email Address:"
@@ -6302,6 +6337,9 @@ msgid ""
 "You've been redirected to this login page because you have tried accessing a "
 "page that was not available to you as an anonymous user."
 msgstr ""
+"Vous avez été redirigé sur cette page de connexion suite à une\n"
+"tentative d'accès à une page qui n'est pas disponible pour les\n"
+"utilisateurs non enregistrés."
 
 #: www/account/login.php:131
 msgid "Cookies must be enabled past this point."
@@ -6982,7 +7020,7 @@ msgstr "Utilisateur supprimé avec succès"
 
 #: www/admin/globalroleedit.php:123
 msgid "Error while removing user from role"
-msgstr ""
+msgstr "Erreur lors de la révocation d'un rôle d'un utilisateur."
 
 #: www/admin/globalroleedit.php:127
 msgid "Can't remove user from this type of role"
@@ -7020,7 +7058,7 @@ msgstr "Nom du rôle"
 
 #: www/admin/globalroleedit.php:193
 msgid "Public role (can be referenced by projects)"
-msgstr ""
+msgstr "Rôle public (peut être référencé par des projets)"
 
 #: www/admin/globalroleedit.php:198 www/project/admin/roleedit.php:184
 msgid "Section"
@@ -7313,7 +7351,7 @@ msgstr "Administration des catégories de postes"
 
 #: www/admin/massmail.php:45
 msgid "Target Audience"
-msgstr ""
+msgstr "Public cible"
 
 #: www/admin/massmail.php:50
 msgid "No Message"
@@ -8959,7 +8997,7 @@ msgstr "Fichier effacé"
 
 #: www/frs/admin/editrelease.php:195
 msgid "File not deleted: you did not check \"I'm Sure\""
-msgstr ""
+msgstr "Fichier non supprimé : veuillez cocher la case « Je suis sûr »."
 
 #: www/frs/admin/editrelease.php:211
 msgid "File Updated"
@@ -9026,7 +9064,7 @@ msgstr "Étape 2 : Ajouter des fichiers dans cette version"
 
 #: www/frs/admin/editrelease.php:284
 msgid "Now, choose a file to upload into the system."
-msgstr ""
+msgstr "Choisissez maintenant un fichier à publier."
 
 #: www/frs/admin/editrelease.php:288 www/frs/admin/qrs.php:193
 msgid "File Name"
@@ -9375,7 +9413,7 @@ msgstr "Suivi démarré"
 
 #: www/frs/monitor.php:73
 msgid "File Module ID"
-msgstr ""
+msgstr "Identifiant du module de fichier"
 
 #: www/frs/reporting/downloads.php:87 www/frs/reporting/downloads.php:94
 msgid "File Release Reporting"
@@ -9563,7 +9601,7 @@ msgstr "Nom court"
 
 #: www/include/Layout.class.php:156
 msgid "Can't find theme directory!"
-msgstr ""
+msgstr "Répertoire du thème introuvable !"
 
 #: www/include/Layout.class.php:304 www/include/help.php:49
 msgid "en"
@@ -11755,7 +11793,7 @@ msgstr "Heures"
 #: www/pm/gantt.php:26 www/pm/ganttofuser.php:34
 #: www/survey/admin/graphs.php:45
 msgid "Package JPGraph not installed"
-msgstr ""
+msgstr "Le paquet JPGraph n'est pas installé."
 
 #: www/pm/gantt.php:38
 msgid "Error getting PTF: "
@@ -11863,12 +11901,16 @@ msgstr "Aucun sous-projet trouvé."
 #: www/pm/index.php:70
 msgid "No subprojects have been set up, or you cannot view them."
 msgstr ""
+"Il n'y a pas de sous-projets, ou vous n'avez pas les droits\n"
+"nécessaires pour les voir."
 
 #: www/pm/index.php:71
 msgid ""
 "The Admin for this project will have to set up subprojects using the admin "
 "page."
 msgstr ""
+"L'administrateur de ce projet devra créer des sous-projets avec\n"
+"l'interface d'administration."
 
 #: www/pm/index.php:74
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
@@ -12660,7 +12702,7 @@ msgstr "Membres actuels du projet"
 
 #: www/project/admin/users.php:357
 msgid "Grant extra role"
-msgstr ""
+msgstr "Donner un rôle supplémentaire"
 
 #: www/project/admin/users.php:377 www/tracker/admin/form-workflow.php:122
 msgid "Edit Roles"
@@ -12677,7 +12719,7 @@ msgstr "Modifier les permissions"
 
 #: www/project/admin/users.php:412
 msgid "Currently used external roles"
-msgstr ""
+msgstr "Rôles externes actuellement référencés"
 
 #: www/project/admin/users.php:424
 msgid "Unlink Role"
@@ -12915,12 +12957,12 @@ msgstr ""
 #: www/register/index.php:114
 #, php-format
 msgid "<div class=\"error\">ERROR: %1$s</div>"
-msgstr ""
+msgstr "<div class=\"error\">Erreur : %1$s</div>"
 
 #: www/register/index.php:119
 #, php-format
 msgid "<div class=\"error\">Approval ERROR: %1$s</div>"
-msgstr ""
+msgstr "<div class=\"error\">Erreur d'enregistrement : %1$s</div>"
 
 #: www/register/index.php:127
 #, php-format
@@ -13055,7 +13097,7 @@ msgstr "Visibilité"
 #: www/reporting/useract.php:55 www/reporting/useradded.php:49
 #: www/reporting/usercum.php:50 www/reporting/usertime.php:55
 msgid "Start and end dates must be different"
-msgstr ""
+msgstr "Les dates de début et de fin doivent être différentes."
 
 #: www/reporting/groupadded.php:55 www/reporting/groupadded.php:58
 msgid "Projects Added"
@@ -15271,7 +15313,7 @@ msgstr ""
 
 #: www/tracker/admin/form-clonetracker.php:58
 msgid "Choose the template tracker to clone."
-msgstr ""
+msgstr "Choisissez l'outil de suivi à cloner."
 
 #: www/tracker/admin/form-clonetracker.php:61
 msgid ""
