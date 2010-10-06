@@ -1,5 +1,3 @@
-cd source
-
 #!/bin/sh -x
 
 export CONFIG_PHP=func/config.php.buildbot
