@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-06 15:05+0200\n"
-"PO-Revision-Date: 2010-10-06 15:24+0200\n"
+"PO-Revision-Date: 2010-10-06 15:48+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -12439,9 +12439,8 @@ msgid "No changes"
 msgstr "Aucun changement"
 
 #: www/project/admin/project_admin_utils.php:212
-#, fuzzy
 msgid "Failed to find namespace for database"
-msgstr "Impossible d'insérer une base de donnée déjà active"
+msgstr "Impossible de trouver un espace de noms pour la base de données."
 
 #: www/project/admin/project_admin_utils.php:240
 msgid ""
@@ -13165,14 +13164,12 @@ msgid "Tracker Items Closed"
 msgstr "Eléments fermés"
 
 #: www/reporting/projectact_graph.php:132
-#, fuzzy
 msgid "Task Open"
-msgstr "Élément de suivi ouvert"
+msgstr "Tâche ouverte"
 
 #: www/reporting/projectact_graph.php:133
-#, fuzzy
 msgid "Task Close"
-msgstr "Élément de suivi fermé"
+msgstr "Tâche fermée"
 
 #: www/reporting/projecttime.php:57 www/reporting/projecttime.php:70
 msgid "Time Tracking By Project"
@@ -13193,9 +13190,8 @@ msgid "By User"
 msgstr "Par utilisateur"
 
 #: www/reporting/rebuild.php:42
-#, fuzzy
 msgid "Successfully Rebuilt"
-msgstr "Supprimé avec succès"
+msgstr "Statistiques reconstruites."
 
 #: www/reporting/rebuild.php:47 www/reporting/timecategory.php:61
 msgid "Main Page"
@@ -13281,9 +13277,8 @@ msgstr ""
 
 #: www/reporting/timeadd.php:190 www/tracker/taskmgr.php:102
 #: www/tracker/taskmgr.php:155
-#, fuzzy
 msgid "Tasks Project"
-msgstr "Gestionnaire de tâche"
+msgstr "Sous-projet"
 
 #: www/reporting/timeadd.php:202
 msgid "Change Week"
@@ -13406,9 +13401,9 @@ msgid "SCM Repository Reporting"
 msgstr "Statistiques sur le dépôt de sources"
 
 #: www/scm/viewvc.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "Could not open script %s."
-msgstr "Accès non permis"
+msgstr "Impossible d'ouvrir le script %s."
 
 #: www/search/include/SearchManager.class.php:112
 msgid "Search the entire project"
@@ -13539,9 +13534,8 @@ msgid "Post date"
 msgstr "Date de publication"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:86
-#, fuzzy
 msgid "Entire project search"
-msgstr "Recherche des projets avancée"
+msgstr "Recherche dans le projet entier"
 
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, php-format
@@ -13550,15 +13544,13 @@ msgstr "Résultats de la recherche de <em>%1$s</em>"
 
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:56
-#, fuzzy
 msgid "People Search"
-msgstr "Recherche globale"
+msgstr "Recherche parmi les utilisateurs"
 
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:56
-#, fuzzy
 msgid "Project Search"
-msgstr "Nom du projet"
+msgstr "Recherche de projet"
 
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:49
 #: www/tracker/admin/form-workflow.php:63
@@ -13583,17 +13575,14 @@ msgid "Error - Invalid search"
 msgstr "Erreur - Recherche non valide"
 
 #: www/sendmessage.php:34
-#, fuzzy
 msgid "toaddress"
-msgstr "Adresse :"
+msgstr "Adresse de destination"
 
 #: www/sendmessage.php:34
-#, fuzzy
 msgid "touser"
-msgstr "Utilisateurs les mieux classés"
+msgstr "Utilisateur destinataire"
 
 #: www/sendmessage.php:46
-#, fuzzy
 msgid "That user does not exist"
 msgstr "Cet utilisateur n'existe pas"
 
@@ -13618,21 +13607,17 @@ msgid ""
 msgstr ""
 
 #: www/sendmessage.php:133
-#, fuzzy
 msgid ""
 "<b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did "
 "you include your <b>user_id</b> and <b>user_name?</b> If you are writing "
 "about a project, include your <b>project id</b> (<b>group_id</b>) and "
 "<b>Project Name</b>."
 msgstr ""
-"Nous utilisons ce formulaire afin d'essayer de limiter le spam.</"
-"p><p>Veuillez le remplir complètement et précisément, sans quoi le "
-"destinataire risquerait de ne pouvoir vous répondre.</p><p><span class="
-"\"important\"><b>SI VOUS ÉCRIVEZ POUR DEMANDER DE L'AIDE :</b> Avez-vous lu "
-"les documentations du site ?  Avez-vous inclus votre identifiant "
-"d'utilisateur (<b>user_id</b> et <b>user_name</b>) ?  Si vous écrivez à "
-"propos d'un projet, pensez à inclure également le nom du projet et son "
-"identifiant du projet (<b>group_id</b>).</span>"
+"<b>SI VOUS ÉCRIVEZ POUR DEMANDER DE L'AIDE :</b> Avez-vous lu les\n"
+"documentations du site ?  Avez-vous inclus votre identifiant\n"
+"d'utilisateur (<b>user_id</b> et <b>user_name</b>) ?  Si vous écrivez\n"
+"à propos d'un projet, pensez à inclure également le nom du projet et\n"
+"son identifiant (<b>group_id</b>)."
 
 #: www/sendmessage.php:143
 msgid "Your Name"
@@ -13733,9 +13718,8 @@ msgid "Error - snippet doesn't exist"
 msgstr "Erreur - cet échantillon n'existe pas"
 
 #: www/snippet/addversion.php:72
-#, fuzzy
 msgid "ERROR DOING SNIPPET VERSION INSERT! "
-msgstr "ERREUR pendant l'insertion de version d'échantillon"
+msgstr "Erreur pendant l'insertion de version d'échantillon : "
 
 #: www/snippet/addversion.php:82 www/snippet/addversion.php:205
 msgid "New snippet version"
@@ -13758,9 +13742,8 @@ msgid "Error - snippet_package doesn't exist"
 msgstr "Erreur - ce paquet d'échantillons n'existe pas"
 
 #: www/snippet/addversion.php:155
-#, fuzzy
 msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT! "
-msgstr "Erreur : pendant l'insertion d'une version de paquet d'échantillons"
+msgstr "Erreur pendant l'insertion d'une version de paquet d'échantillons : "
 
 #: www/snippet/addversion.php:156
 msgid "New snippet package"
@@ -13852,13 +13835,12 @@ msgid "Snippets"
 msgstr "Échantillons"
 
 #: www/snippet/delete.php:142
-#, fuzzy
 msgid "Error - mangled URL?"
 msgstr "Erreur - URL invalide ?"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
 msgid "Error - no versions found"
-msgstr "Erreur - aucune version trouvée"
+msgstr "Erreur - aucune version trouvée."
 
 #: www/snippet/detail.php:60
 msgid "Versions Of This Snippet:"
@@ -14284,9 +14266,8 @@ msgid "Sitewide aggregate statistics"
 msgstr "Statistiques pour le site entier"
 
 #: www/stats/index.php:61
-#, fuzzy
 msgid "Other statistics"
-msgstr "Statistiques"
+msgstr "Autres statistiques"
 
 #: www/stats/lastlogins.php:41
 msgid "No records found\",\"Database error: \""
@@ -14452,13 +14433,12 @@ msgstr "Voir les questions existantes"
 
 #: www/survey/admin/add_survey.php:34 www/survey/admin/survey.php:91
 #: www/survey/include/SurveyHTML.class.php:170
-#, fuzzy
 msgid "Add a Survey"
 msgstr "Ajouter un sondage"
 
 #: www/survey/admin/add_survey.php:47
 msgid "Title required"
-msgstr "Titre requis"
+msgstr "Titre requis."
 
 #: www/survey/admin/add_survey.php:54
 msgid "Question inserted"
@@ -14492,7 +14472,6 @@ msgstr "Actif ?"
 
 #: www/survey/admin/add_survey.php:88
 #: www/survey/include/SurveyHTML.class.php:171
-#, fuzzy
 msgid "Add this Survey"
 msgstr "Ajouter ce sondage"
 
@@ -14514,16 +14493,14 @@ msgid "Edit A Question"
 msgstr "Éditer une question"
 
 #: www/survey/admin/edit_question.php:54
-#, fuzzy
 msgid "Update Failed"
-msgstr "Mis à jour quotidiennement"
+msgstr "Échec lors de la mise à jour."
 
 #: www/survey/admin/edit_question.php:56 www/survey/admin/edit_survey.php:77
 #: www/survey/admin/question.php:83 www/survey/admin/survey.php:69
 #: www/survey/admin/survey.php:82
-#, fuzzy
 msgid "Update Successful"
-msgstr "Mis à jour avec succès"
+msgstr "Mis à jour avec succès."
 
 #: www/survey/admin/edit_question.php:84
 msgid "Editing Question"
@@ -14556,14 +14533,12 @@ msgid "Edit A Survey"
 msgstr "Éditer un sondage"
 
 #: www/survey/admin/edit_survey.php:58
-#, fuzzy
 msgid "Update Failed: Missing Data"
-msgstr "La mise à jour a échoué : il manque des données"
+msgstr "La mise à jour a échoué : il manque des données."
 
 #: www/survey/admin/edit_survey.php:75
-#, fuzzy
 msgid "Update Failed: "
-msgstr "Mis à jour quotidiennement"
+msgstr "Échec de la mise à jour : "
 
 #: www/survey/admin/edit_survey.php:106
 #: www/survey/include/SurveyHTML.class.php:179
@@ -14609,9 +14584,8 @@ msgid "Is Active"
 msgstr "Est actif"
 
 #: www/survey/admin/index.php:51
-#, fuzzy
 msgid "You are not a Project admin"
-msgstr "Administration du projet"
+msgstr "Vous n'avez pas les droits d'administration sur ce projet."
 
 #: www/survey/admin/index.php:54 www/survey/admin/index.php:55
 msgid "Survey Administration"
@@ -14647,9 +14621,8 @@ msgstr ""
 "sondages existants%2$s"
 
 #: www/survey/admin/question.php:62 www/survey/admin/show_results.php:85
-#, fuzzy
 msgid "Cannot get Survey Question"
-msgstr "Questions du sondage"
+msgstr "Erreur lors de l'accès à une question de sondage."
 
 #: www/survey/admin/question.php:76
 msgid "Delete successful"
@@ -14685,14 +14658,12 @@ msgid "Survey Results"
 msgstr "Resultat du sondage"
 
 #: www/survey/admin/show_results.php:70
-#, fuzzy
 msgid "Cannot get Survey"
-msgstr "Pas un objet Survey (%d)"
+msgstr "Erreur lors de l'accès au sondage."
 
 #: www/survey/admin/show_results.php:134
-#, fuzzy
 msgid "Cannot get Survey Response Factory"
-msgstr "Aucune réponse trouvé"
+msgstr "Erreur lors de l'accès à la SurveyResponseFactory."
 
 #: www/survey/admin/show_results_aggregate.php:34
 msgid "Survey Aggregate Results"
@@ -14754,17 +14725,14 @@ msgid "Show Results"
 msgstr "Voir les résultats"
 
 #: www/survey/include/SurveyHTML.class.php:110
-#, fuzzy
 msgid "Add a Question"
 msgstr "Ajouter une question"
 
 #: www/survey/include/SurveyHTML.class.php:111
-#, fuzzy
 msgid "Add this Question"
 msgstr "Ajouter cette question"
 
 #: www/survey/include/SurveyHTML.class.php:139
-#, fuzzy
 msgid "Question Type"
 msgstr "Type de la question"
 
@@ -14853,9 +14821,9 @@ msgstr[0] "Voir tout le %s commentaire"
 msgstr[1] "Voir tous les %s commentaires"
 
 #: www/survey/index.php:46
-#, fuzzy, php-format
+#, php-format
 msgid "Surveys for %1$s"
-msgstr "Source de %1$s"
+msgstr "Sondages pour %1$s"
 
 #: www/survey/privacy.php:37
 msgid ""
@@ -14901,29 +14869,28 @@ msgid "If you vote again, your old vote will be erased."
 msgstr "Si vous votez à nouveau"
 
 #: www/survey/rating_resp.php:65
-#, fuzzy
 msgid "Vote ID"
-msgstr "Voter"
+msgstr "Identifiant du vote"
 
 #: www/survey/rating_resp.php:65
-#, fuzzy
 msgid "Response"
-msgstr "Réponses"
+msgstr "Réponse"
 
 #: www/survey/rating_resp.php:65
 msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:53
-#, fuzzy, php-format
+#, php-format
 msgid "Vote for Survey: %1$s"
-msgstr "Nom du sondage"
+msgstr "Vote pour le sondage %1$s"
 
 #: www/survey/survey.php:58 www/survey/survey_resp.php:51
-#, fuzzy
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
-msgstr "le groupe ou le sondage conrrespond pas àcette page"
+msgstr ""
+"Il semble que l'identifiant du projet et/ou celui du le sondage se\n"
+"soit perdu en chemin."
 
 #: www/survey/survey_resp.php:43
 msgid "Survey Complete"
@@ -14976,7 +14943,7 @@ msgid "Top Projects"
 msgstr "Les meilleurs projets"
 
 #: www/top/index.php:32
-#, fuzzy, php-format
+#, php-format
 msgid "Top %1$s Projects"
 msgstr "Les meilleurs projets de %1$s"
 
@@ -15283,9 +15250,8 @@ msgstr ""
 "Une fois que vous avez ajouté un nouvel élément, il ne peut être supprimé"
 
 #: www/tracker/admin/form-clonetracker.php:34
-#, fuzzy
 msgid "Unable to Create Template Group Object"
-msgstr "Erreur lors de la création d'un objet ArtifactCanned"
+msgstr "Erreur lors de la création du projet modèle."
 
 #: www/tracker/admin/form-clonetracker.php:50
 #: www/tracker/admin/form-clonetracker.php:52 www/tracker/admin/tracker.php:63
@@ -15294,16 +15260,14 @@ msgid "Clone Tracker"
 msgstr "Cloner l'outil de suivi"
 
 #: www/tracker/admin/form-clonetracker.php:55
-#, fuzzy
 msgid ""
 "The site administrator must first set up template trackers in the template "
 "projet with default values and set permissions propertly so you can access "
 "them."
 msgstr ""
-"Veuillez choisir le modèle d'outil de suivi à cloner.  L'administrateur du "
-"site devra au préalable avoir mis en place des outils de suivi avec des "
-"valeurs par défaut, et réglé les permissions de manière à ce que vous y ayez "
-"accès."
+"L'administrateur du site devra au préalable avoir mis en place des\n"
+"outils de suivi avec des valeurs par défaut, et réglé les permissions\n"
+"de manière à ce que vous y ayez accès."
 
 #: www/tracker/admin/form-clonetracker.php:58
 msgid "Choose the template tracker to clone."
@@ -15346,7 +15310,6 @@ msgid "Close Date"
 msgstr "Date de fermeture"
 
 #: www/tracker/admin/form-customizelist.php:52 www/tracker/browse.php:529
-#, fuzzy
 msgid "Related tasks"
 msgstr "Tâches liées"
 
@@ -15386,9 +15349,9 @@ msgid "Element"
 msgstr "Elément"
 
 #: www/tracker/admin/form-deletetracker.php:25
-#, fuzzy, php-format
+#, php-format
 msgid "Permanently Delete Tracker %s"
-msgstr "Supprimer irrémédiablement cet outil de suivi"
+msgstr "Supprimer irrémédiablement l'outil de suivi %s"
 
 #: www/tracker/admin/form-deletetracker.php:29
 msgid ""
@@ -15399,9 +15362,10 @@ msgstr ""
 "tout son contenu !"
 
 #: www/tracker/admin/form-extrafieldcopy.php:53
-#, fuzzy
 msgid "Cannot find a destination tracker where you have administration rights."
-msgstr "Outil de suivi des contributions : administration"
+msgstr ""
+"Aucun outil de suivi n'est susceptible d'être utilisé comme\n"
+"destination, car vous ne disposez pas des droits d'administration."
 
 #: www/tracker/admin/form-extrafieldcopy.php:56
 #, php-format
@@ -15557,13 +15521,12 @@ msgid "Tracker created successfully"
 msgstr "Outil de suivi créé avec succès"
 
 #: www/tracker/admin/ind.php:63 www/tracker/ind.php:31
-#, fuzzy
 msgid "Could Not Get ArtifactTypeFactory"
-msgstr "Erreur lors de la création de l'objet Factory"
+msgstr "Erreur lors de la création de l'objet ArtifactTypeFactory."
 
 #: www/tracker/admin/ind.php:91
 msgid "Report"
-msgstr "Affichage"
+msgstr "Rapport"
 
 #: www/tracker/admin/ind.php:101
 msgid "No trackers found"
@@ -15621,13 +15584,12 @@ msgid "ArtifactType could not be created"
 msgstr "Erreur lors de la création de l'objet ArtifactType"
 
 #: www/tracker/admin/index.php:87
-#, fuzzy
 msgid "Renderer Deleted"
-msgstr "Moteur de rendu téléchargé"
+msgstr "Moteur de rendu supprimé."
 
 #: www/tracker/admin/index.php:193
 msgid "Successfully Deleted."
-msgstr "Supprimé avec succès"
+msgstr "Supprimé avec succès."
 
 #: www/tracker/admin/tracker.php:30
 msgid "Administration"
@@ -15758,14 +15720,12 @@ msgid "Element updated"
 msgstr "Elément mis à jour"
 
 #: www/tracker/admin/updates.php:275
-#, fuzzy
 msgid "Clone ID"
-msgstr "Identifiant de la forge"
+msgstr "Identifiant de l'outil à cloner"
 
 #: www/tracker/admin/updates.php:278
-#, fuzzy
 msgid "Error cloning fields: "
-msgstr "Erreur lors de l'ajout d'un champ"
+msgstr "Erreur lors du clonage de champs : "
 
 #: www/tracker/admin/updates.php:280
 msgid "Successfully Cloned Tracker Fields "
@@ -15782,9 +15742,8 @@ msgid "Renderer Uploaded"
 msgstr "Moteur de rendu téléchargé"
 
 #: www/tracker/admin/updates.php:363
-#, fuzzy
 msgid "Renderer File empty"
-msgstr "Moteur de rendu téléchargé"
+msgstr "Moteur de rendu vide."
 
 #: www/tracker/admin/updates.php:438
 msgid "ERROR: Initial values not saved, no initial state given."
@@ -15982,9 +15941,9 @@ msgstr ""
 "espaces (la syntaxe [#NNN] est aussi acceptée)."
 
 #: www/tracker/ind.php:41
-#, fuzzy, php-format
+#, php-format
 msgid "Trackers for %1$s"
-msgstr "Forums de %1$s"
+msgstr "Outils de suivi de %1$s"
 
 #: www/tracker/ind.php:56
 msgid "No Accessible Trackers Found"
@@ -16009,9 +15968,8 @@ msgstr ""
 "ajouter des éléments."
 
 #: www/tracker/index.php:56
-#, fuzzy
 msgid "Could Not Get Artifact Object"
-msgstr "Erreur lors de la création de l'objet Forum"
+msgstr "Erreur lors de la création de l'objet Artifact."
 
 #: www/tracker/mod-limited.php:63 www/tracker/mod.php:66
 msgid "Build Task Relation"
@@ -16046,19 +16004,16 @@ msgid "Existing Files"
 msgstr "Fichiers existants"
 
 #: www/tracker/query.php:66
-#, fuzzy
 msgid "Query Successfully Created"
-msgstr "Élément créé avec succès"
+msgstr "Requête créée avec succès."
 
 #: www/tracker/query.php:114
-#, fuzzy
 msgid "Query Updated"
-msgstr "Journal mis à jour"
+msgstr "Requête mise à jour."
 
 #: www/tracker/query.php:143
-#, fuzzy
 msgid "Query Deleted"
-msgstr "Fichier effacé"
+msgstr "Requête effacée."
 
 #: www/tracker/query.php:150
 msgid "Missing Build Query Action"
@@ -16131,16 +16086,14 @@ msgid "No Existing Tasks Found"
 msgstr "Aucune tâche trouvée"
 
 #: www/tracker/taskmgr.php:92
-#, fuzzy
 msgid "No Available Tasks Found"
-msgstr "Aucun outil de suivi trouvé"
+msgstr "Aucune tâche trouvée."
 
 #: www/tracker/taskmgr.php:98 www/tracker/taskmgr.php:152
 msgid "Build Relationship Between Tracker Items and Task Manager"
 msgstr "Établir une relation entre le suivi et le gestionnaire de tâches."
 
 #: www/tracker/taskmgr.php:112
-#, fuzzy
 msgid "Add Relationship to Selected Task"
 msgstr "Ajouter une relation à la tâche sélectionnée"
 
@@ -16157,18 +16110,17 @@ msgid "Create New Task"
 msgstr "Créer une nouvelle tâche"
 
 #: www/tracker/tracker.php:138 www/tracker/tracker.php:372
-#, fuzzy
 msgid "Could Not Create File Object"
-msgstr "Erreur lors de la création de l'objet Forum"
+msgstr "Erreur lors de la création de l'objet ArtifactFileHtml."
 
 #: www/tracker/tracker.php:152
 msgid "Could Not Attach File to Item: "
 msgstr ""
 
 #: www/tracker/tracker.php:156
-#, fuzzy, php-format
+#, php-format
 msgid "Item %s successfully created"
-msgstr "Élément créé avec succès"
+msgstr "Élément %s créé avec succès."
 
 #: www/tracker/tracker.php:246
 msgid "Updated Successfully"
@@ -16197,9 +16149,8 @@ msgid "File Upload: Successful"
 msgstr "Fichier envoyé avec succès"
 
 #: www/tracker/tracker.php:401
-#, fuzzy
 msgid "Could Not Create File Object::"
-msgstr "Erreur lors de la création de l'objet Forum"
+msgstr "Erreur lors de la création de l'objet ArtifactFileHtml : "
 
 #: www/tracker/tracker.php:406
 msgid "File Delete:"
@@ -16210,9 +16161,9 @@ msgid "File Delete: Successful"
 msgstr "Fichier détruit avec succès"
 
 #: www/tracker/tracker.php:420
-#, fuzzy, php-format
+#, php-format
 msgid "Item %s successfully updated"
-msgstr "Élément créé avec succès"
+msgstr "Élément %s correctement mis à jour."
 
 #: www/tracker/tracker.php:447 www/tracker/tracker.php:464
 msgid "Monitoring Started"
@@ -16247,9 +16198,8 @@ msgid "Cannot update"
 msgstr "Erreur de mise à jour"
 
 #: www/trove/admin/trove_cat_add.php:50
-#, fuzzy
 msgid "Error in Trove operation: "
-msgstr "Erreur lors d'une opération sur l'arbre des catégories"
+msgstr "Erreur lors d'une opération sur l'arbre des catégories : "
 
 #: www/trove/admin/trove_cat_add.php:66 www/trove/admin/trove_cat_edit.php:138
 msgid "Parent Category: "
@@ -16311,7 +16261,6 @@ msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #: www/widgets/widgets.php:66
-#, fuzzy
 msgid "Project info"
 msgstr "Information sur un projet"
 
@@ -16319,10 +16268,6 @@ msgstr "Information sur un projet"
 #~ msgstr "(% pour les jokers)"
 
 #~ msgid "No matches found for <em>%1$s</em>"
-#~ msgstr "Aucun résultat trouvé pour <em>%1$s</em>"
-
-#, fuzzy
-#~ msgid "No matches found for <em>%s</em> "
 #~ msgstr "Aucun résultat trouvé pour <em>%1$s</em>"
 
 #~ msgid "Confirm Has"
