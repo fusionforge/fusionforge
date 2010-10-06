@@ -4,6 +4,8 @@
 # Developed for 4.8 by JL Bond Consulting
 # Reworked for 5.1 by Alain Peyrat <aljeux@free.fr>
 #
+# TODO: Generate a random password to avoid sites with default pass.
+
 
 # Global Definitions
 %define dbname          gforge
@@ -36,7 +38,6 @@ Group: Development/Tools
 Source0: %{name}-%{version}.tar.bz2
 Source1: README.mediawiki.jlbond
 Source2: LocalSettings.php
-Patch0: fusionforge-4.8.3-ereg_preg.patch
 Patch1: fusionforge-4.8.3-webcalendar.patch
 Patch2: fusionforge-4.8.3-mediawiki.patch
 Patch3: fusionforge-4.8.3-register_globals.patch
@@ -300,7 +301,6 @@ mantisbt plugin for FusionForge.
 
 %prep
 %setup -q
-#%patch0 -p1
 #%patch1 -p1
 #%patch2 -p1
 #%patch3 -p1
@@ -401,6 +401,7 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 ### Plugin setup ###
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d/
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
+%{__cp} -rp $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/
 %{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/README
 
 # plugin: aselectextauth
@@ -412,8 +413,6 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 %{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/cvstracker/httpd.conf
 %{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/cvstracker/Makefile
 %{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/cvstracker/rpm-specific
-# this is pre-activated, so create the config symlink
-%{__ln_s} %{GFORGE_DIR}/plugins/cvstracker/etc/plugins/cvstracker $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/cvstracker
 
 # plugin: externalsearch
 
@@ -708,6 +707,7 @@ fi
 %attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/cvstracker
 
 %files externalsearch
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/externalsearch/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/externalsearch.ini
 %{GFORGE_DIR}/plugins/externalsearch
 
@@ -716,12 +716,11 @@ fi
 %{GFORGE_DIR}/www/plugins/fckeditor
 
 %files ldapextauth
-#%{GFORGE_CONF_DIR}/plugins/ldapextauth
-%config(noreplace) %{GFORGE_DIR}/plugins/ldapextauth/etc/plugins/ldapextauth/config.php
-%config(noreplace) %{GFORGE_DIR}/plugins/ldapextauth/etc/plugins/ldapextauth/mapping.php
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/ldapextauth/
 %{GFORGE_DIR}/plugins/ldapextauth
 
 %files mantis
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/mantis/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mantis.ini
 %{GFORGE_DIR}/plugins/mantis
 %{GFORGE_DIR}/www/plugins/mantis
@@ -755,31 +754,38 @@ fi
 %{GFORGE_DIR}/www/plugins/quota_management
 
 %files scmarch
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmarch/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmarch.ini
 %{GFORGE_DIR}/plugins/scmarch
 
 %files scmbzr
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmbzr/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmbzr.ini
 %{GFORGE_DIR}/plugins/scmbzr
 
 %files scmdarcs
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmdarcs/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmdarcs.ini
 %{GFORGE_DIR}/plugins/scmdarcs
 
 %files scmgit
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmgit/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmgit.ini
 %{GFORGE_DIR}/plugins/scmgit
 %{GFORGE_DIR}/www/plugins/scmgit
 
 %files scmhg
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmhg/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmhg.ini
 %{GFORGE_DIR}/plugins/scmhg
 
 %files scmccase
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmccase/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmccase.ini
 %{GFORGE_DIR}/plugins/scmccase
 
 %files scmcvs
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmcvs/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmcvs.ini
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
 %{GFORGE_DIR}/plugins/scmcvs
@@ -787,6 +793,7 @@ fi
 %{GFORGE_VAR_LIB}/chroot/scmrepos/cvs
 
 %files scmsvn
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmsvn/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmsvn.ini
 %{GFORGE_DIR}/plugins/scmsvn
 %{GFORGE_DIR}/www/plugins/scmsvn
@@ -796,8 +803,8 @@ fi
 %{GFORGE_DIR}/plugins/svncommitemail
 
 %files svntracker
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/svntracker/
 %{_sysconfdir}/cron.d/gforge-plugin-svntracker
-%config(noreplace) %{GFORGE_DIR}/plugins/svntracker/etc/plugins/svntracker/config.php
 %{GFORGE_DIR}/plugins/svntracker
 %{GFORGE_DIR}/www/plugins/svntracker
 
@@ -806,6 +813,7 @@ fi
 %{GFORGE_DIR}/www/plugins/webcalendar
 
 %files blocks
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/blocks/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/blocks.ini
 %{GFORGE_DIR}/plugins/blocks
 %{GFORGE_DIR}/www/plugins/blocks
@@ -815,6 +823,7 @@ fi
 %{GFORGE_DIR}/www/plugins/extratabs
 
 %files wiki
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/wiki/
 %{_sysconfdir}/cron.d/cron.wiki
 %{GFORGE_DIR}/plugins/wiki
 %{GFORGE_DIR}/www/wiki
@@ -832,6 +841,7 @@ fi
 %{GFORGE_DIR}/www/plugins/globalsearch
 
 %files mantisbt
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/mantisbt/
 %{GFORGE_DIR}/plugins/mantisbt
 %{GFORGE_DIR}/www/plugins/mantisbt
 
