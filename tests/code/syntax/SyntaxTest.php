@@ -85,6 +85,15 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
 	    $output = `cd .. ; find src tests -name '*.php' -type f | while read i ; do [ -s \$i ] && [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
 	    $this->assertEquals('', $output);
     }
+
+    /**
+     * Validate syntax of gettextfiles
+     */
+    public function testGettextSyntax()
+    {
+	    $output = `cd ../src ; ./utils/manage-translations.sh check 2>&1`;
+	    $this->assertEquals('', $output);
+    }
 }
 	
 // Local Variables:

@@ -238,14 +238,14 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				$str = $this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
 				if ($mode == 'QUERY') {
-					$post_name =  ' <i>'._('(% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
+					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 				}
 				
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
 				$str = $this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
 				if ($mode == 'QUERY') {
-					$post_name =  ' <i>'._('(% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
+					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 				}
 				
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {

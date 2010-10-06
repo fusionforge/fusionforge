@@ -197,7 +197,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
 			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $query['words']).'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> '), $query['words']).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em>'), $query['words']).'</p>';
 		}
 		return $result;
 	}

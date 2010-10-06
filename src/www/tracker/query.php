@@ -351,7 +351,7 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	}
 	array_multisort($order_name_arr, $order_arr);
 
-	$tips = '<i>'._('(% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
+	$tips = '<i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
 	
 echo '
 	<tr>

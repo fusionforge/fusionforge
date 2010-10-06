@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-04 19:41+0200\n"
+"POT-Creation-Date: 2010-10-06 15:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3097,7 +3097,8 @@ msgstr "以下是這個專案能夠提供的工作列表"
 #: common/widget/Widget_ProjectInfo.class.php:102
 #, fuzzy, php-format
 msgid ""
-"HELP WANTED: This project is looking for a <a href=\"%1$s\">\"%2$s\"</a>."
+"HELP WANTED: This project is looking for someone to fill <a href=\"%1$s\">a "
+"position</a>."
 msgid_plural ""
 "HELP WANTED: This project is looking for people to fill <a href=\"%1$s"
 "\">several different positions</a>."
@@ -5880,25 +5881,26 @@ msgstr ""
 msgid "Requested Page not Found (Error 404)"
 msgstr "頁面不存在（錯誤 404）"
 
-#: www/account/change_email-complete.php:39 www/account/unsubscribe.php:38
+#: www/account/change_email-complete.php:37 www/account/lostlogin.php:39
+#: www/account/unsubscribe.php:37
 #, fuzzy
 msgid "Confirm Hash"
 msgstr "確認"
 
-#: www/account/change_email-complete.php:47 www/account/lostlogin.php:49
-#: www/account/unsubscribe.php:47
+#: www/account/change_email-complete.php:46 www/account/lostlogin.php:48
+#: www/account/unsubscribe.php:46
 msgid "This confirm hash exists more than once."
 msgstr "這個確認編碼不只存在了一次"
 
-#: www/account/change_email-complete.php:50 www/account/unsubscribe.php:50
+#: www/account/change_email-complete.php:49 www/account/unsubscribe.php:49
 #, fuzzy
 msgid "Invalid confirmation hash."
 msgstr "不正確的確認編碼"
 
-#: www/account/change_email-complete.php:54 www/account/change_email.php:47
+#: www/account/change_email-complete.php:53 www/account/change_email.php:47
 #: www/account/change_pw.php:33 www/account/editsshkeys.php:58
-#: www/account/index.php:37 www/account/lostlogin.php:56
-#: www/account/pending-resend.php:36 www/account/unsubscribe.php:56
+#: www/account/index.php:37 www/account/lostlogin.php:55
+#: www/account/pending-resend.php:36 www/account/unsubscribe.php:55
 #: www/account/verify.php:46 www/admin/database.php:61
 #: www/admin/unsubscribe.php:74 www/admin/useredit.php:41
 #: www/admin/userlist.php:44 www/reporting/useract_graph.php:56
@@ -5906,11 +5908,11 @@ msgstr "不正確的確認編碼"
 msgid "Could Not Get User"
 msgstr "無法完成執行"
 
-#: www/account/change_email-complete.php:67
+#: www/account/change_email-complete.php:66
 msgid "Email Change Complete"
 msgstr "Email改變成功"
 
-#: www/account/change_email-complete.php:72
+#: www/account/change_email-complete.php:71
 #, php-format
 msgid ""
 "Welcome, %1$s. Your email change is complete. Your new email address on file "
@@ -5918,8 +5920,8 @@ msgid ""
 "this account."
 msgstr ""
 
-#: www/account/change_email-complete.php:75 www/account/change_email.php:95
-#: www/account/lostpw.php:98 www/account/unsubscribe.php:79
+#: www/account/change_email-complete.php:74 www/account/change_email.php:95
+#: www/account/lostpw.php:98 www/account/unsubscribe.php:78
 #: www/my/bookmark_edit.php:68
 msgid "Return"
 msgstr "返回"
@@ -6008,7 +6010,7 @@ msgstr "舊的密碼不正確"
 msgid "You must supply valid password (at least 6 chars)"
 msgstr "您必須提供有效的密碼（至少6個字元）"
 
-#: www/account/change_pw.php:59 www/account/lostlogin.php:68
+#: www/account/change_pw.php:59 www/account/lostlogin.php:67
 msgid "New passwords do not match."
 msgstr "新密碼不一致。"
 
@@ -6045,7 +6047,7 @@ msgstr "舊密碼"
 msgid "New Password (at least 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
-#: www/account/change_pw.php:93 www/account/lostlogin.php:96
+#: www/account/change_pw.php:93 www/account/lostlogin.php:95
 msgid "New Password (repeat)"
 msgstr "新密碼（重複）"
 
@@ -6096,7 +6098,7 @@ msgstr ""
 "字元，在提交之後，檢驗您檔案中Keys的數值是您所期望的。</span>"
 
 #: www/account/editsshkeys.php:85 www/account/index.php:292
-#: www/account/lostlogin.php:99 www/admin/groupedit.php:203
+#: www/account/lostlogin.php:98 www/admin/groupedit.php:203
 #: www/admin/trove/trove_cat_edit.php:154 www/admin/useredit.php:202
 #: www/admin/vhost.php:190 www/forum/admin/ForumAdmin.class.php:356
 #: www/forum/admin/index.php:177 www/forum/include/ForumHTML.class.php:328
@@ -6169,11 +6171,11 @@ msgstr "使用者編號："
 msgid "Login name:"
 msgstr "使用者名稱："
 
-#: www/account/index.php:135 www/account/register.php:134
+#: www/account/index.php:135 www/account/register.php:135
 msgid "First Name:"
 msgstr "名字："
 
-#: www/account/index.php:142 www/account/register.php:138
+#: www/account/index.php:142 www/account/register.php:139
 msgid "Last Name:"
 msgstr "姓氏："
 
@@ -6181,7 +6183,7 @@ msgstr "姓氏："
 msgid "Language:"
 msgstr "語言："
 
-#: www/account/index.php:155 www/account/register.php:146
+#: www/account/index.php:155 www/account/register.php:147
 msgid "Timezone:"
 msgstr "時區選擇："
 
@@ -6189,7 +6191,7 @@ msgstr "時區選擇："
 msgid "Theme:"
 msgstr "佈景："
 
-#: www/account/index.php:167 www/account/register.php:154
+#: www/account/index.php:167 www/account/register.php:155
 msgid "Country:"
 msgstr "國家："
 
@@ -6202,42 +6204,42 @@ msgid "Change Email Addr"
 msgstr "改變Email"
 
 #: www/account/index.php:180 www/account/index.php:187
-#: www/account/register.php:175 www/account/register.php:179
+#: www/account/register.php:176 www/account/register.php:180
 #: www/include/user_home.php:111
 msgid "Address:"
 msgstr "住址："
 
-#: www/account/index.php:194 www/account/register.php:183
+#: www/account/index.php:194 www/account/register.php:184
 #: www/include/user_home.php:118
 msgid "Phone:"
 msgstr "電話："
 
-#: www/account/index.php:201 www/account/register.php:187
+#: www/account/index.php:201 www/account/register.php:188
 #: www/include/user_home.php:129
 msgid "FAX:"
 msgstr "傳真："
 
-#: www/account/index.php:208 www/account/register.php:130
+#: www/account/index.php:208 www/account/register.php:131
 #: www/snippet/package.php:143
 msgid "Title:"
 msgstr "標題"
 
-#: www/account/index.php:217 www/account/register.php:166
+#: www/account/index.php:217 www/account/register.php:167
 msgid "Jabber Address:"
 msgstr "Jabber 信箱："
 
-#: www/account/index.php:221 www/account/register.php:170
+#: www/account/index.php:221 www/account/register.php:171
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr "自動產生的通知只發送到我的Jabber信箱"
 
-#: www/account/index.php:236 www/account/register.php:192
+#: www/account/index.php:236 www/account/register.php:193
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
 msgstr ""
 "接受關於本網站更新的Email<i>（量非常小，並且包括安全通告，強烈推薦。）</i>"
 
-#: www/account/index.php:240 www/account/register.php:196
+#: www/account/index.php:240 www/account/register.php:197
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "接收附加的公共通信論壇。 <i>(量很小)</i>"
 
@@ -6333,46 +6335,41 @@ msgstr "[忘了密碼？]"
 msgid "[New Account]"
 msgstr "[新帳號]"
 
-#: www/account/login.php:161 www/account/register.php:212
+#: www/account/login.php:161 www/account/register.php:213
 msgid "[Resend confirmation email to a pending account]"
 msgstr "[重新發送確認信函給未通過的帳號]"
 
-#: www/account/lostlogin.php:40
-#, fuzzy
-msgid "Confirm Has"
-msgstr "確認"
-
-#: www/account/lostlogin.php:52
+#: www/account/lostlogin.php:51
 msgid "Invalid confirmation hash"
 msgstr "不正確的確認編碼"
 
-#: www/account/lostlogin.php:64
+#: www/account/lostlogin.php:63
 msgid "You must supply valid password (at least 6 chars)."
 msgstr "您必須提供一個有效的密碼（至少6個字元）。"
 
-#: www/account/lostlogin.php:77
+#: www/account/lostlogin.php:76
 #, php-format
 msgid ""
 "<h2>Password changed</h2><p>Congratulations, you have re-set your account "
 "password. You may <a href=\"%1$s\">login</a> to the site now.</p>"
 msgstr ""
 
-#: www/account/lostlogin.php:83 www/trove/TroveCategory.class.php:72
+#: www/account/lostlogin.php:82 www/trove/TroveCategory.class.php:72
 #: www/trove/TroveCategory.class.php:98 www/trove/TroveCategory.class.php:110
 msgid "ERROR"
 msgstr "錯誤"
 
-#: www/account/lostlogin.php:86
+#: www/account/lostlogin.php:85
 #, fuzzy
 msgid "Lost Password Login"
 msgstr "[忘了密碼？]"
 
-#: www/account/lostlogin.php:89
+#: www/account/lostlogin.php:88
 #, php-format
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostlogin.php:94
+#: www/account/lostlogin.php:93
 msgid "New Password (min. 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
@@ -6472,38 +6469,38 @@ msgstr ""
 "<p>恭喜。您已經在 %1$s 上成功註冊。 <p> 一封確認email已經發送到您的email信"
 "箱，以確保您email信箱的正確性。點擊email中的連結就可以啟動您的帳號。"
 
-#: www/account/register.php:115
+#: www/account/register.php:116
 msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
 
-#: www/account/register.php:117
+#: www/account/register.php:118
 msgid "Login Name (do not use uppercase letters):"
 msgstr "使用者名稱（請使用小寫英文字母，名稱開頭不得使用數字）："
 
-#: www/account/register.php:122
+#: www/account/register.php:123
 msgid "Password (min. 6 chars):"
 msgstr "密碼（至少6個字元）："
 
-#: www/account/register.php:126
+#: www/account/register.php:127
 msgid "Password (repeat):"
 msgstr "密碼（重複）："
 
-#: www/account/register.php:142
+#: www/account/register.php:143
 msgid "Language Choice:"
 msgstr "語言選擇："
 
-#: www/account/register.php:150
+#: www/account/register.php:151
 msgid "Theme"
 msgstr "佈景："
 
-#: www/account/register.php:159
+#: www/account/register.php:160
 #, fuzzy
 msgid "Email Address:"
 msgstr "Email："
 
-#: www/account/register.php:160
+#: www/account/register.php:161
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -6511,26 +6508,26 @@ msgid ""
 "to this address."
 msgstr ""
 
-#: www/account/register.php:201
+#: www/account/register.php:202
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:206
+#: www/account/register.php:207
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/account/register.php:209
+#: www/account/register.php:210
 msgid "Register"
 msgstr "註冊"
 
-#: www/account/unsubscribe.php:64
+#: www/account/unsubscribe.php:63
 #, fuzzy
 msgid "Unsubscription Complete"
 msgstr "註冊完成"
 
-#: www/account/unsubscribe.php:68
+#: www/account/unsubscribe.php:67
 #, php-format
 msgid ""
 "You have been unsubscribed from all %1$s mailings and notifications. In case "
@@ -6538,7 +6535,7 @@ msgid ""
 "visit your Account Maintenance page."
 msgstr ""
 
-#: www/account/unsubscribe.php:70
+#: www/account/unsubscribe.php:69
 #, php-format
 msgid ""
 "You have been unsubscribed from %1$s site mailings. In case you will want to "
@@ -13449,6 +13446,8 @@ msgid ""
 msgstr "未發現符合項目 - 沒有部份提供(檢查您的權限)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:200
+#: www/search/include/renderers/HtmlSearchRenderer.class.php:102
 #, fuzzy, php-format
 msgid "No matches found for <em>%s</em>"
 msgstr "找不到關於 <em>%1$s</em> 的資料"
@@ -13494,20 +13493,10 @@ msgstr "張貼日期"
 msgid "Entire project search"
 msgstr "進階搜尋"
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:200
-#, fuzzy, php-format
-msgid "No matches found for <em>%s</em> "
-msgstr "找不到關於 <em>%1$s</em> 的資料"
-
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, php-format
 msgid "Search results for <em>%1$s</em>"
 msgstr "<em>%1$s</em> 的搜尋結果"
-
-#: www/search/include/renderers/HtmlSearchRenderer.class.php:102
-#, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "找不到關於 <em>%1$s</em> 的資料"
 
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:56
@@ -14538,37 +14527,36 @@ msgstr ""
 msgid "Is Active"
 msgstr "啟用中"
 
-#: www/survey/admin/index.php:35 www/survey/admin/index.php:47
-#: www/survey/admin/index.php:57 www/survey/admin/index.php:58
-msgid "Survey Administration"
-msgstr "問卷管理"
-
-#: www/survey/admin/index.php:54
+#: www/survey/admin/index.php:51
 #, fuzzy
 msgid "You are not a Project admin"
 msgstr "您尚未選擇授權方式"
 
-#: www/survey/admin/index.php:62
+#: www/survey/admin/index.php:54 www/survey/admin/index.php:55
+msgid "Survey Administration"
+msgstr "問卷管理"
+
+#: www/survey/admin/index.php:59
 msgid "It's simple to create a survey."
 msgstr ""
 
-#: www/survey/admin/index.php:66
+#: www/survey/admin/index.php:63
 msgid "Create questions and comments using the forms above."
 msgstr ""
 
-#: www/survey/admin/index.php:69
+#: www/survey/admin/index.php:66
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
 
-#: www/survey/admin/index.php:72
+#: www/survey/admin/index.php:69
 #, php-format
 msgid ""
 "Link to the survey using this format: %1$s where XX is the survey number"
 msgstr ""
 
-#: www/survey/admin/index.php:77
+#: www/survey/admin/index.php:74
 #, php-format
 msgid ""
 "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys "
@@ -15867,7 +15855,7 @@ msgstr "停止監視"
 #: www/tracker/include/ArtifactTypeHtml.class.php:248
 #: www/tracker/query.php:354
 #, php-format
-msgid "(% for wildcards)"
+msgid "(%% for wildcards)"
 msgstr ""
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:299 www/tracker/mod.php:209
@@ -16223,6 +16211,17 @@ msgstr "帳號"
 #, fuzzy
 msgid "Project info"
 msgstr "專案資訊"
+
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "找不到關於 <em>%1$s</em> 的資料"
+
+#, fuzzy
+#~ msgid "No matches found for <em>%s</em> "
+#~ msgstr "找不到關於 <em>%1$s</em> 的資料"
+
+#, fuzzy
+#~ msgid "Confirm Has"
+#~ msgstr "確認"
 
 #, fuzzy
 #~ msgid "Error getting member object"

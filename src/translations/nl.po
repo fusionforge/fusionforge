@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gforge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-04 19:41+0200\n"
+"POT-Creation-Date: 2010-10-06 15:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3128,7 +3128,8 @@ msgstr "Hier is een lijst met openstaande functies voor dit project."
 #: common/widget/Widget_ProjectInfo.class.php:102
 #, fuzzy, php-format
 msgid ""
-"HELP WANTED: This project is looking for a <a href=\"%1$s\">\"%2$s\"</a>."
+"HELP WANTED: This project is looking for someone to fill <a href=\"%1$s\">a "
+"position</a>."
 msgid_plural ""
 "HELP WANTED: This project is looking for people to fill <a href=\"%1$s"
 "\">several different positions</a>."
@@ -5914,25 +5915,26 @@ msgstr ""
 msgid "Requested Page not Found (Error 404)"
 msgstr "Pagina niet gevonden (Fout 404)"
 
-#: www/account/change_email-complete.php:39 www/account/unsubscribe.php:38
+#: www/account/change_email-complete.php:37 www/account/lostlogin.php:39
+#: www/account/unsubscribe.php:37
 #, fuzzy
 msgid "Confirm Hash"
 msgstr "Bevestigen"
 
-#: www/account/change_email-complete.php:47 www/account/lostlogin.php:49
-#: www/account/unsubscribe.php:47
+#: www/account/change_email-complete.php:46 www/account/lostlogin.php:48
+#: www/account/unsubscribe.php:46
 msgid "This confirm hash exists more than once."
 msgstr "Deze bevestigingshash bestaat meer dan &eacute;&eacute;n keer."
 
-#: www/account/change_email-complete.php:50 www/account/unsubscribe.php:50
+#: www/account/change_email-complete.php:49 www/account/unsubscribe.php:49
 #, fuzzy
 msgid "Invalid confirmation hash."
 msgstr "Ongeldige bevestigings hash"
 
-#: www/account/change_email-complete.php:54 www/account/change_email.php:47
+#: www/account/change_email-complete.php:53 www/account/change_email.php:47
 #: www/account/change_pw.php:33 www/account/editsshkeys.php:58
-#: www/account/index.php:37 www/account/lostlogin.php:56
-#: www/account/pending-resend.php:36 www/account/unsubscribe.php:56
+#: www/account/index.php:37 www/account/lostlogin.php:55
+#: www/account/pending-resend.php:36 www/account/unsubscribe.php:55
 #: www/account/verify.php:46 www/admin/database.php:61
 #: www/admin/unsubscribe.php:74 www/admin/useredit.php:41
 #: www/admin/userlist.php:44 www/reporting/useract_graph.php:56
@@ -5940,11 +5942,11 @@ msgstr "Ongeldige bevestigings hash"
 msgid "Could Not Get User"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: www/account/change_email-complete.php:67
+#: www/account/change_email-complete.php:66
 msgid "Email Change Complete"
 msgstr "E-mail adreswijziging voltooid"
 
-#: www/account/change_email-complete.php:72
+#: www/account/change_email-complete.php:71
 #, php-format
 msgid ""
 "Welcome, %1$s. Your email change is complete. Your new email address on file "
@@ -5952,8 +5954,8 @@ msgid ""
 "this account."
 msgstr ""
 
-#: www/account/change_email-complete.php:75 www/account/change_email.php:95
-#: www/account/lostpw.php:98 www/account/unsubscribe.php:79
+#: www/account/change_email-complete.php:74 www/account/change_email.php:95
+#: www/account/lostpw.php:98 www/account/unsubscribe.php:78
 #: www/my/bookmark_edit.php:68
 msgid "Return"
 msgstr "Terug"
@@ -6047,7 +6049,7 @@ msgstr "Het oude wachtwoord is niet juist"
 msgid "You must supply valid password (at least 6 chars)"
 msgstr "Je moet een geldig wachtwoord ingeven (minimaal 6 karakters)"
 
-#: www/account/change_pw.php:59 www/account/lostlogin.php:68
+#: www/account/change_pw.php:59 www/account/lostlogin.php:67
 msgid "New passwords do not match."
 msgstr "De nieuwe wachtwoorden zijn niet gelijk."
 
@@ -6087,7 +6089,7 @@ msgstr "Oude wachtwoord"
 msgid "New Password (at least 6 chars)"
 msgstr "Nieuw wachtwoord (minimaal 6 karakters)"
 
-#: www/account/change_pw.php:93 www/account/lostlogin.php:96
+#: www/account/change_pw.php:93 www/account/lostlogin.php:95
 msgid "New Password (repeat)"
 msgstr "Nieuw wachtwoord (opnieuw)"
 
@@ -6141,7 +6143,7 @@ msgstr ""
 "sleutels in je bestand correct is.</em>"
 
 #: www/account/editsshkeys.php:85 www/account/index.php:292
-#: www/account/lostlogin.php:99 www/admin/groupedit.php:203
+#: www/account/lostlogin.php:98 www/admin/groupedit.php:203
 #: www/admin/trove/trove_cat_edit.php:154 www/admin/useredit.php:202
 #: www/admin/vhost.php:190 www/forum/admin/ForumAdmin.class.php:356
 #: www/forum/admin/index.php:177 www/forum/include/ForumHTML.class.php:328
@@ -6219,11 +6221,11 @@ msgstr "Gebruikers ID:"
 msgid "Login name:"
 msgstr "Loginnaam:"
 
-#: www/account/index.php:135 www/account/register.php:134
+#: www/account/index.php:135 www/account/register.php:135
 msgid "First Name:"
 msgstr "Voornaam:"
 
-#: www/account/index.php:142 www/account/register.php:138
+#: www/account/index.php:142 www/account/register.php:139
 msgid "Last Name:"
 msgstr "Achternaam:"
 
@@ -6231,7 +6233,7 @@ msgstr "Achternaam:"
 msgid "Language:"
 msgstr "Taal"
 
-#: www/account/index.php:155 www/account/register.php:146
+#: www/account/index.php:155 www/account/register.php:147
 msgid "Timezone:"
 msgstr "Tijdzone:"
 
@@ -6239,7 +6241,7 @@ msgstr "Tijdzone:"
 msgid "Theme:"
 msgstr "Thema:"
 
-#: www/account/index.php:167 www/account/register.php:154
+#: www/account/index.php:167 www/account/register.php:155
 msgid "Country:"
 msgstr "Land:"
 
@@ -6252,36 +6254,36 @@ msgid "Change Email Addr"
 msgstr "Wijzig e-mail adres"
 
 #: www/account/index.php:180 www/account/index.php:187
-#: www/account/register.php:175 www/account/register.php:179
+#: www/account/register.php:176 www/account/register.php:180
 #: www/include/user_home.php:111
 msgid "Address:"
 msgstr "Adres:"
 
-#: www/account/index.php:194 www/account/register.php:183
+#: www/account/index.php:194 www/account/register.php:184
 #: www/include/user_home.php:118
 msgid "Phone:"
 msgstr "Telefoon:"
 
-#: www/account/index.php:201 www/account/register.php:187
+#: www/account/index.php:201 www/account/register.php:188
 #: www/include/user_home.php:129
 msgid "FAX:"
 msgstr "FAX:"
 
-#: www/account/index.php:208 www/account/register.php:130
+#: www/account/index.php:208 www/account/register.php:131
 #: www/snippet/package.php:143
 msgid "Title:"
 msgstr "Titel:"
 
-#: www/account/index.php:217 www/account/register.php:166
+#: www/account/index.php:217 www/account/register.php:167
 msgid "Jabber Address:"
 msgstr "Jabber adres:"
 
-#: www/account/index.php:221 www/account/register.php:170
+#: www/account/index.php:221 www/account/register.php:171
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr ""
 "Stuur automatisch gegenereerde mededelingen alleen naar mijn Jabber adres"
 
-#: www/account/index.php:236 www/account/register.php:192
+#: www/account/index.php:236 www/account/register.php:193
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -6289,7 +6291,7 @@ msgstr ""
 "E-mail over site updates ontvangen <i>(Weinig mail, en inclusief "
 "beveiligings aankondigingen. Sterk aanbevolen.)</i>"
 
-#: www/account/index.php:240 www/account/register.php:196
+#: www/account/index.php:240 www/account/register.php:197
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>"
 
@@ -6385,47 +6387,42 @@ msgstr "[Wachtwoord kwijt?]"
 msgid "[New Account]"
 msgstr "[Nieuw account]"
 
-#: www/account/login.php:161 www/account/register.php:212
+#: www/account/login.php:161 www/account/register.php:213
 msgid "[Resend confirmation email to a pending account]"
 msgstr "[Bevestigings e-mail opnieuw toesturen]"
 
-#: www/account/lostlogin.php:40
-#, fuzzy
-msgid "Confirm Has"
-msgstr "Bevestigen"
-
-#: www/account/lostlogin.php:52
+#: www/account/lostlogin.php:51
 msgid "Invalid confirmation hash"
 msgstr "Ongeldige bevestigings hash"
 
-#: www/account/lostlogin.php:64
+#: www/account/lostlogin.php:63
 msgid "You must supply valid password (at least 6 chars)."
 msgstr ""
 "Je kunt alleen inloggen met een geldig wachtwoord (minimaal 6 karakters)."
 
-#: www/account/lostlogin.php:77
+#: www/account/lostlogin.php:76
 #, php-format
 msgid ""
 "<h2>Password changed</h2><p>Congratulations, you have re-set your account "
 "password. You may <a href=\"%1$s\">login</a> to the site now.</p>"
 msgstr ""
 
-#: www/account/lostlogin.php:83 www/trove/TroveCategory.class.php:72
+#: www/account/lostlogin.php:82 www/trove/TroveCategory.class.php:72
 #: www/trove/TroveCategory.class.php:98 www/trove/TroveCategory.class.php:110
 msgid "ERROR"
 msgstr "Fout"
 
-#: www/account/lostlogin.php:86
+#: www/account/lostlogin.php:85
 #, fuzzy
 msgid "Lost Password Login"
 msgstr "[Wachtwoord kwijt?]"
 
-#: www/account/lostlogin.php:89
+#: www/account/lostlogin.php:88
 #, php-format
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostlogin.php:94
+#: www/account/lostlogin.php:93
 msgid "New Password (min. 6 chars)"
 msgstr "Nieuw wachtwoord (minimum 6 karakters)"
 
@@ -6533,38 +6530,38 @@ msgstr ""
 "verificatie van het e-mail adres wordt er nu een bevestiging per e-mail "
 "opgestuurd. Klik op de link in de e-mail om je account te activeren."
 
-#: www/account/register.php:115
+#: www/account/register.php:116
 msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
 
-#: www/account/register.php:117
+#: www/account/register.php:118
 msgid "Login Name (do not use uppercase letters):"
 msgstr "Loginnaam (gebruik geen hoofdletters):"
 
-#: www/account/register.php:122
+#: www/account/register.php:123
 msgid "Password (min. 6 chars):"
 msgstr "Wachtwoord (min. 6 tekens):"
 
-#: www/account/register.php:126
+#: www/account/register.php:127
 msgid "Password (repeat):"
 msgstr "Wachtwoord (herhaal):"
 
-#: www/account/register.php:142
+#: www/account/register.php:143
 msgid "Language Choice:"
 msgstr "Taal keuze:"
 
-#: www/account/register.php:150
+#: www/account/register.php:151
 msgid "Theme"
 msgstr "Thema"
 
-#: www/account/register.php:159
+#: www/account/register.php:160
 #, fuzzy
 msgid "Email Address:"
 msgstr "E-mail adres:"
 
-#: www/account/register.php:160
+#: www/account/register.php:161
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -6572,26 +6569,26 @@ msgid ""
 "to this address."
 msgstr ""
 
-#: www/account/register.php:201
+#: www/account/register.php:202
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:206
+#: www/account/register.php:207
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/account/register.php:209
+#: www/account/register.php:210
 msgid "Register"
 msgstr "Registreer"
 
-#: www/account/unsubscribe.php:64
+#: www/account/unsubscribe.php:63
 #, fuzzy
 msgid "Unsubscription Complete"
 msgstr "Registratie compleet"
 
-#: www/account/unsubscribe.php:68
+#: www/account/unsubscribe.php:67
 #, php-format
 msgid ""
 "You have been unsubscribed from all %1$s mailings and notifications. In case "
@@ -6599,7 +6596,7 @@ msgid ""
 "visit your Account Maintenance page."
 msgstr ""
 
-#: www/account/unsubscribe.php:70
+#: www/account/unsubscribe.php:69
 #, php-format
 msgid ""
 "You have been unsubscribed from %1$s site mailings. In case you will want to "
@@ -13638,6 +13635,8 @@ msgid ""
 msgstr "Niets gevonden - geen secties beschikbaar (controleer je rechten)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:200
+#: www/search/include/renderers/HtmlSearchRenderer.class.php:102
 #, fuzzy, php-format
 msgid "No matches found for <em>%s</em>"
 msgstr "Niets passends gevonden voor <em>%1$s</em>"
@@ -13683,20 +13682,10 @@ msgstr "Post datum"
 msgid "Entire project search"
 msgstr "Uitgebreid zoeken"
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:200
-#, fuzzy, php-format
-msgid "No matches found for <em>%s</em> "
-msgstr "Niets passends gevonden voor <em>%1$s</em>"
-
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, php-format
 msgid "Search results for <em>%1$s</em>"
 msgstr "Zoekresulten voor <em>%1$s</em>"
-
-#: www/search/include/renderers/HtmlSearchRenderer.class.php:102
-#, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "Niets passends gevonden voor <em>%1$s</em>"
 
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:56
@@ -14744,37 +14733,36 @@ msgstr ""
 msgid "Is Active"
 msgstr "actief"
 
-#: www/survey/admin/index.php:35 www/survey/admin/index.php:47
-#: www/survey/admin/index.php:57 www/survey/admin/index.php:58
-msgid "Survey Administration"
-msgstr "Enqu&ecirc;te beheer"
-
-#: www/survey/admin/index.php:54
+#: www/survey/admin/index.php:51
 #, fuzzy
 msgid "You are not a Project admin"
 msgstr "Je hebt geen licentievorm gekozen"
 
-#: www/survey/admin/index.php:62
+#: www/survey/admin/index.php:54 www/survey/admin/index.php:55
+msgid "Survey Administration"
+msgstr "Enqu&ecirc;te beheer"
+
+#: www/survey/admin/index.php:59
 msgid "It's simple to create a survey."
 msgstr ""
 
-#: www/survey/admin/index.php:66
+#: www/survey/admin/index.php:63
 msgid "Create questions and comments using the forms above."
 msgstr ""
 
-#: www/survey/admin/index.php:69
+#: www/survey/admin/index.php:66
 msgid ""
 "Create a survey, listing the questions in order (choose from <strong>your</"
 "strong> list of questions)."
 msgstr ""
 
-#: www/survey/admin/index.php:72
+#: www/survey/admin/index.php:69
 #, php-format
 msgid ""
 "Link to the survey using this format: %1$s where XX is the survey number"
 msgstr ""
 
-#: www/survey/admin/index.php:77
+#: www/survey/admin/index.php:74
 #, php-format
 msgid ""
 "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys "
@@ -16112,7 +16100,7 @@ msgstr ""
 #: www/tracker/include/ArtifactTypeHtml.class.php:248
 #: www/tracker/query.php:354
 #, php-format
-msgid "(% for wildcards)"
+msgid "(%% for wildcards)"
 msgstr ""
 
 #: www/tracker/include/ArtifactTypeHtml.class.php:299 www/tracker/mod.php:209
@@ -16468,6 +16456,17 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 msgid "Project info"
 msgstr "Project info"
+
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "Niets passends gevonden voor <em>%1$s</em>"
+
+#, fuzzy
+#~ msgid "No matches found for <em>%s</em> "
+#~ msgstr "Niets passends gevonden voor <em>%1$s</em>"
+
+#, fuzzy
+#~ msgid "Confirm Has"
+#~ msgstr "Bevestigen"
 
 #, fuzzy
 #~ msgid "Error getting member object"

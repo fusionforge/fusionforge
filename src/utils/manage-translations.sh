@@ -25,9 +25,18 @@ print_stats () {
     done
 }
 
+check_syntax () {
+    for l in $(echo $locales | xargs -n 1 | sort) ; do
+	msgfmt -c -o /dev/null translations/$l.po
+    done
+}
+
 case $1 in
     stats)
 	print_stats
+	;;
+    check)
+	check_syntax
 	;;
     refresh)
 	rm translations/gforge.pot

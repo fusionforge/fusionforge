@@ -99,7 +99,7 @@ class Widget_ProjectInfo extends Widget {
 				if ($num>0) {
 					print '<br /><br />';
 					printf(
-							ngettext('HELP WANTED: This project is looking for a <a href="%1$s">"%2$s"</a>.',
+							ngettext('HELP WANTED: This project is looking for someone to fill <a href="%1$s">a position</a>.',
 								'HELP WANTED: This project is looking for people to fill <a href="%1$s">several different positions</a>.',
 								$num),
 							util_make_url ('/people/?group_id='.$group_id),
