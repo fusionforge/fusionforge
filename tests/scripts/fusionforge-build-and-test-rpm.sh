@@ -14,9 +14,9 @@ mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage
 
 make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
-cp gforge/rpm-specific/fusionforge.repo build/packages/fusionforge.repo
-sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" build/packages/fusionforge.repo
-sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" build/packages/fusionforge.repo
+cp gforge/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
+sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
+sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/fusionforge.repo
 
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php
