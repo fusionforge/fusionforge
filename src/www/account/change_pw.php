@@ -71,7 +71,15 @@ if (getStringFromRequest('submit')) {
 	site_user_header(array('title'=>_('Successfully Changed Password')));
 	?>
 
-	<?php printf(_('<h2>%1$s Password Change Confirmation</h2><div class="feedback">Congratulations. You have changed your password.</div>'), forge_get_config ('forge_name')); ?>
+	<?php
+	print '<h2>';
+	printf(_('%1$s Password Change Confirmation'), forge_get_config ('forge_name'));
+	print '</h2>';
+
+	print '<div class="feedback">';
+	print _('Congratulations. You have changed your password.');
+	print '</div>';
+	?>
 
 	<p>
 		 <?php printf(_('You should now <a href="%1$s">Return to User Prefs</a>.'),
