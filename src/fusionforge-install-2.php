@@ -109,6 +109,8 @@
 
 	system("cp -r * /opt/gforge");
 
+	require_once 'install-common.inc' ;
+
 	chdir("/var/lib/gforge");
 	system("mkdir -p uploads");
 	system("mkdir -p scmtarballs");
