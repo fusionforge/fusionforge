@@ -37,7 +37,7 @@ news_header(array('title'=>_('News')));
 
 plugin_hook ("blocks", "news index");
 
-echo _('<p>Choose a News item and you can browse, search, and post messages.</p>');
+echo '<p>' . _('Choose a News item and you can browse, search, and post messages.') . '</p>';
 
 /*
 	Put the result set (list of forums for this group) into a column with folders
