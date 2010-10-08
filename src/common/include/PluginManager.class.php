@@ -147,18 +147,25 @@ class PluginManager extends Error {
 		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php" ;
 		if (file_exists ($filename)) {
 			require_once ($filename) ;
-		} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
-			$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php" ;
-			if (file_exists ($filename)) {
-				require_once ($filename) ;
-			} else {
-				// we can't find the plugin so we remove it from the array
-				foreach ($plugins_data as $i => $n) {
-					if ($n == $p_name) {
-						$p_id = $i;
+		} else {
+			$filename = $include_path . '/'. $p_name . "/common/".$p_name."Plugin.class.php" ;
+			if (file_exists($filename)) {
+				require_once($filename);
+				$p_class = $p_name.'Plugin';
+				register_plugin (new $p_class) ;
+			} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/
+				$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php" ;
+				if (file_exists ($filename)) {
+					require_once ($filename) ;
+				} else {
+					// we can't find the plugin so we remove it from the array
+					foreach ($plugins_data as $i => $n) {
+						if ($n == $p_name) {
+							$p_id = $i;
+						}
 					}
+					unset($this->plugins_data[$p_id]);
 				}
-				unset($this->plugins_data[$p_id]);
 			}
 		}
 		return true ;
