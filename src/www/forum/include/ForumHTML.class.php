@@ -263,6 +263,13 @@ class ForumHTML extends Error {
 		'<table border="0" width="100%" cellspacing="0">
 			<tr>
 				<td class="tablecontent" style="white-space: nowrap;" valign="top">'; 
+
+		$params = array('user_id' => $msg->getPosterID(), 'size' => 's', 'content' => '');
+		plugin_hook_by_reference("user_logo", $params);
+		if ($params['content']) {
+			$ret_val .= $params['content'];
+		}
+
 		$ret_val .= $bold_begin. $msg->getSubject(). ' <a href="'.$url.'">[ '._("reply").' ]</a>'. $bold_end;
 		$ret_val .= '<br/>'._('By:').' '.util_make_link_u ($msg->getPosterName(),$msg->getPosterID(),$msg->getPosterRealName());
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());

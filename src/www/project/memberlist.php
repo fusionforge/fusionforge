@@ -100,8 +100,10 @@ foreach ($members as $user) {
 		$role_string = $user->getRole ($project)->getName() ;
 	}
 
-	echo '<td align="center">'.util_make_link_u ($user->getUnixName(),$user->getID(),$user->getUnixName()).'</td>
-	<td align="center">'.$role_string.'</td>';
+	echo '<td>';
+	echo util_display_user($user->getUnixName(),$user->getID(),$user->getUnixName(), 's');
+	echo '</td>';
+	echo '<td align="center">'.$role_string.'</td>';
 	if(forge_get_config('use_people')) {
 		echo '<td align="center">'.util_make_link ('/people/viewprofile.php?user_id='.$user->getID(),_('View')).'</td>';
 	}

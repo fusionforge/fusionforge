@@ -37,6 +37,11 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 
 <div about="" typeof="sioc:UserAccount" xmlns:sioc="http://rdfs.org/sioc/ns#">
 
+<table width="100%" cellpadding="2" cellspacing="2" border="0">
+<tr>
+	<td width="150"><?php plugin_hook("user_logo", array('user_id' => $user_id, 'size' => 'l')); ?></td>
+	<td>
+
 <table class="my-layout-table" id="user-profile-personal-info">
 <tr> 
 	<td>
@@ -138,6 +143,9 @@ echo $user->getPhone();
 	</td>
 	<td><strong><?php print date(_('Y-m-d H:i'), $user->getAddDate()); ?></strong>
     </td>
+</tr>
+</table>
+</td>
 </tr>
 </table>
 

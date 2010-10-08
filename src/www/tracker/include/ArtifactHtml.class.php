@@ -66,8 +66,12 @@ class ArtifactHtml extends Artifact {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.
-					_('Date').': '.
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
+
+				$params = array('user_id' => db_result($result,$i,'user_id'), 'size' => 's');
+				plugin_hook("user_logo", $params);
+
+				echo _('Date').': '.
 					date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'<br />'.
 					_('Sender').': ';
 				if(db_result($result,$i,'user_id') == 100) {
