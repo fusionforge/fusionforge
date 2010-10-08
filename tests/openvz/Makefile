@@ -16,7 +16,7 @@ CENTVERS=5.5
 VZPRIVATEDIR=/var/lib/vz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
-VZCTL=sudo /usr/sbin/vzctl
+VZCTL=/usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
 RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
 
