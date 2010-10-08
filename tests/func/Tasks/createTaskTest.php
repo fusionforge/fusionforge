@@ -41,7 +41,8 @@
  * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
-require_once 'func/Testing/SeleniumGforge.php';
+
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class CreateTask extends FForge_SeleniumTestCase
 {

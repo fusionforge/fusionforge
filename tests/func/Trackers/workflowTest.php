@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
- * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-require_once 'func/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 {

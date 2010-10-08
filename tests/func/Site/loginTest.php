@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-require_once 'func/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class LoginProcess extends FForge_SeleniumTestCase
 {
