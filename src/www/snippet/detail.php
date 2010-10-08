@@ -54,7 +54,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<h3>' ._('Error - no versions found').'</h3>';
+		echo '<div class="error">' ._('Error - no versions found').'</div>';
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Snippet:').'</h3>
@@ -94,7 +94,6 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 		echo '
 		</p><p>'._('Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;').'
 		</p>';
-	}
 	/*
 		show the latest version of this snippet's code
 	*/
@@ -116,6 +115,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=snippet&amp;id='.htmlspecialchars($id)).'"><span class="important">'._('Submit a new version').'</span></a></h3>
 	<p>' ._('You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
+	}
 	snippet_footer(array());
 
 } else if ($type=='package') {
@@ -144,7 +144,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<h3>' ._('Error - no versions found').'</h3>';
+		echo '<div class="error">' ._('Error - no versions found').'</div>';
 	} else {
 		echo '
 		<h3>' ._('Versions Of This Package:').'</h3>
@@ -181,7 +181,6 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 		echo '
 		</p><p>' ._('Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;').'
 		</p>';
-	}
 
 	/*
 		show the latest version of the package
@@ -203,6 +202,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 	<h3><a href="'.util_make_url ('/snippet/addversion.php?type=package&amp;id='.$id).'"><span class="important">' ._('Submit a new version').'</span></a></h3>
 	<p>' ._('You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.').'.</p>';
 
+	}
 	snippet_footer(array());
 
 } else if ($type=='packagever') {
