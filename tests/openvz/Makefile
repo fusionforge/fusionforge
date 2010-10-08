@@ -12,7 +12,7 @@ DIST=squeeze
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh
 EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils
 DEBVERS=6.0
-CENTVERS=5.4
+CENTVERS=5.5
 VZPRIVATEDIR=/var/lib/vz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
