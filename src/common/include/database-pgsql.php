@@ -189,8 +189,11 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY
  *	@param int ability to spread load to multiple db servers.
  *	@return int result set handle.
  */
-function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
+	if ($dbserver == NULL) {
+		$dbserver = SYS_DB_PRIMARY ;
+	}
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
