@@ -28,7 +28,6 @@ $err='';
 
 db_begin();
 
-
 #one hour ago for projects
 $then=(time()-3600);
 db_query_params ('DELETE FROM groups WHERE status=$1 and register_time < $2',

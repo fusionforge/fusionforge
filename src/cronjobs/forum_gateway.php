@@ -25,6 +25,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'include/MailParser.class.php';
@@ -134,6 +135,10 @@ class ForumGateway extends Error {
 		//we parse that ID to get the forum and thread that this should post to
 		//
 		$subj = $mp->getSubject();
+		if ($mp->isError())
+			$this->setError($mp->getErrorMessage());
+		if ($subj === false)
+			return false;
 
 //DBG("mp headers: ".implode("**\n",$mp->headers));
 //DBG("mp body: ".$mp->body);
@@ -254,10 +259,12 @@ class ForumGateway extends Error {
 	/* Find user_id from email */
 	function getUserId() {
 		// Find User id using email
+		$from = strtolower($this->FromEmail);
 		// If no user id, user id is 0;
+		if (! $from) return 0;
 		$res = db_query_params ('SELECT user_id FROM users 
 			WHERE lower(email) = $1 AND status = $2',
-					array (strtolower($this->FromEmail),
+					array (strtolower($from),
 					       'A'));
 		if (!$res || db_numrows($res) < 1) {
 			return false;
