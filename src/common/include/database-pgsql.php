@@ -109,6 +109,7 @@ function db_connect_if_needed () {
 function db_switcher(&$dbserver=NULL) {
 	switch ($dbserver) {
 	case NULL:
+	case 'SYS_DB_PRIMARY':
 		$dbserver = SYS_DB_PRIMARY ;
 		break ;
 	case 'SYS_DB_STATS':
@@ -120,6 +121,8 @@ function db_switcher(&$dbserver=NULL) {
 	case 'SYS_DB_SEARCH':
 		$dbserver = SYS_DB_SEARCH ;
 		break ;
+	default:
+		$dbserver = SYS_DB_PRIMARY ;
 	}
 }	
 
