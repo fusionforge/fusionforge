@@ -11,7 +11,7 @@ $commit_email_pl = dirname(__FILE__).'/commit-email.pl';
 # End configuration
 
 # Set sendmail path to next script from our configuration.
-putenv("SENDMAIL=$sys_sendmail_path");
+putenv("SENDMAIL=".forge_get_config('sendmail_path'));
 
 if(!file_exists($svnlook) || !file_exists($commit_email_pl)) { die("Missing required executables."); }
 
