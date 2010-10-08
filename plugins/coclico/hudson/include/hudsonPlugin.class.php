@@ -67,35 +67,6 @@ class hudsonPlugin extends Plugin {
 			}
 		} elseif ($hookname =='cssfile') {
 			use_stylesheet('/plugins/hudson/themes/default/css/style.css');
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo '<input type="checkbox" name="use_hudsonplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo 'checked="checked"';
-			}
-			echo " /><br />";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
-			$use_hudsonplugin = getStringFromRequest('use_hudsonplugin');
-			if ( $use_hudsonplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
 		} elseif ($hookname == "cssfile") {
 			$this->cssFile($params);
 		} elseif ($hookname == "javascript_file") {
