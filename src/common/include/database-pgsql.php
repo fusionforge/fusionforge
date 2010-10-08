@@ -154,7 +154,6 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	//$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<p>\n";
 	$res = @pg_query($dbserver,$qstring);
 	if (!$res) {
 		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
@@ -220,9 +219,6 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) 
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
-	if (get_magic_quotes_gpc() == true) {
-		$params = array_map('stripslashes',$params);
-	}
 	if (!$limit || !is_numeric($limit) || $limit < 0) {
 		$limit=0;
 	}

@@ -99,39 +99,6 @@ class MantisPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		} elseif ($hookname == "userisactivecheckbox") {
-			//check if user is active
-			// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
-			$user = $params['user'];
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_mantisplugin" value="1" ';
-			// checked or unchecked?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "checked";
- 			}
-			echo " />    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
-			$user = $params['user'];
-			$use_mantisplugin = getStringFromRequest('use_mantisplugin');
-			if ( $use_mantisplugin == 1 ) {
-				$user->setPluginUse ( $this->name );
-			} else {
-				$user->setPluginUse ( $this->name, false );
-			}
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_mantisplugin" value="1" ';
-			// checked or unchecked?
-			if ( $user->usesPlugin ( $this->name ) ) {
-				echo "checked";
-			}
-			echo " />    Use ".$this->text." Plugin";
-			echo "</td>";
-			echo "</tr>";
 		} elseif ($hookname == "user_personal_links") {
 			// this displays the link in the user's profile page to it's personal Mantis (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];

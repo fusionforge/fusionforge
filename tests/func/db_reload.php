@@ -125,9 +125,6 @@ foreach ($files as $filename) {
 
 system("echo \"VACUUM FULL ANALYZE;\" | psql -q -Upostgres ".DB_NAME);
 
-// Remove email log files before running a test.
-system("rm -f ".forge_get_config ('data_path')."/logs/email-*.log");
-
 //
 // Create the initial admin account and activate it directly.
 //
