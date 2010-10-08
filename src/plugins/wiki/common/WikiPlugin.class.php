@@ -59,7 +59,7 @@ class GforgeWikiPlugin extends Plugin {
 			} else {
 				$this->hooks["groupmenu"] = "";
 				//$params['TITLES'][]=$this->text." [Off]";
-				//$params['DIRS'][]='/plugins/wiki/index.php?off=true';
+				//$params['DIRS'][]='/wiki/index.php?off=true';
 			}
 
 			if (isset($params['toptab'])) {
@@ -70,7 +70,7 @@ class GforgeWikiPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p><a href="/plugins/wiki/wikiadmin.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
+				echo '<p><a href="/wiki/wikiadmin.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
 			}
 		} elseif ($hookname == 'search_engines') {
 			// FIXME: when the hook is called, the group_id is not set.

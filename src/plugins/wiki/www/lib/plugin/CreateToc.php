@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateToc.php 7689 2010-09-17 08:41:10Z vargenau $');
+// rcs_id('$Id: CreateToc.php 7709 2010-09-30 15:48:54Z vargenau $');
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
