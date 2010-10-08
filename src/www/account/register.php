@@ -80,7 +80,10 @@ if (getStringFromRequest('submit')) {
 					      $address,$address2,$phone,$fax,$title,$ccode);
 		if ($register) {
 			site_header(array('title'=>'Register Confirmation'));
-			printf(_('<p>Congratulations. You have registered on %1$s.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.'), forge_get_config ('forge_name'));
+		echo '<p>';
+		printf(_('Congratulations. You have registered on %1$s.'), forge_get_config ('forge_name'));
+		echo '</p>';
+		print '<p>' . _('You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.') . '</p>';
 			site_footer(array());
 			exit;
 		} else {
@@ -212,7 +215,7 @@ if (forge_get_config('use_jabber')) {
 </form>
 <p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
 
-<?php $HTML->footer(array());
+<?php site_footer(array());
 
 // Local Variables:
 // mode: php

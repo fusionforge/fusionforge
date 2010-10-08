@@ -71,10 +71,10 @@ if (getStringFromRequest('submit')) {
 
 $HTML->header(array('title'=>'Verify'));
 
-echo _('<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>');
+echo '<p>' . _('In order to complete your registration, login now. Your account will then be activated for normal logins.') . '</p>';
 
 if (isset($GLOBALS['error_msg'])) {
-	print '<p><span class="error">'.$GLOBALS['error_msg'].'</span>';
+	print '<p class="error">'.$GLOBALS['error_msg'].'</p>';
 }
 ?>
 

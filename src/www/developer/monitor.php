@@ -64,7 +64,8 @@ if (!session_loggedin()) {
 				echo "<div class=\"error\">"._('Error inserting into user_diary_monitor')."</div>";
 			} else {
 				echo "<div class=\"feedback\">"._('User is now being monitored')."</div>";
-				echo _('<p>You will now be emailed this user\'s diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>');
+				echo '<p>' . _('You will now be emailed this user\'s diary entries.') . '</p>';
+				echo '<p>' . _('To turn off monitoring, simply click the <strong>Monitor user</strong> link again.') . '</p>';
 			}
 
 		} else {

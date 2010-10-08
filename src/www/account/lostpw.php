@@ -78,10 +78,10 @@ to change your password:
 	}
 }
 
-
 $HTML->header(array('title'=>"Lost Account Password"));
 
-echo _('<p>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.</p><p>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.</p>');
+echo '<p>' . _('Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.') . '</p>';
+echo '<p>' . _('Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.') . '</p>';
 ?>
 
 <form action="<?php echo util_make_url('/account/lostpw.php'); ?>" method="post">

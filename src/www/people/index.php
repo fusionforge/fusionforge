@@ -58,11 +58,29 @@ if ($group_id) {
 
 	people_header(array('title'=>_('Help Wanted System')));
 
-	printf(_('<p>The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.</p><p>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)</p><p>Browse through the category menu to find projects looking for your help.</p><p>If you\'re a project admin, log in and submit help wanted requests through your project administration page.</p><p>To suggest new job categories, submit a request via the support manager.</p>'), forge_get_config ('forge_name'));
+	print '<p>';
+	printf(_('The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.'), forge_get_config ('forge_name'));
+	print '</p>';
+
+	print '<p>';
+	print _('Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)');
+	print '</p>';
+
+	print '<p>';
+	print _('Browse through the category menu to find projects looking for your help.');
+	print '</p>';
+
+	print '<p>';
+	print _('If you\'re a project admin, log in and submit help wanted requests through your project administration page.');
+	print '</p>';
+
+	print '<p>';
+	print _('To suggest new job categories, submit a request via the support manager.');
+	print '</p>';
 
 	echo people_show_category_table();
 
-        echo '<h4>'._('Last posts').'</h4>';
+	echo '<h2>'._('Last posts').'</h2>';
 
 	$result=db_query_params('SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name 
 FROM people_job,people_job_category,groups 

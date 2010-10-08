@@ -76,11 +76,15 @@ class SVNPlugin extends SCMPlugin {
 	}
 	
 	function getBlurb () {
-		return _('<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>') ;
+		return '<p>' . _('Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.') . '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Subversion Access</b></p><p>This project\'s SVN repository can be checked out through anonymous access with the following command(s).</p>');
+		$b = '<h2>' . _("Anonymous Subversion Access") . '</h2>';
+		$b .= '<p>';
+		$b .= _("This project's SVN repository can be checked out through anonymous access with the following command(s).");
+		$b .= '</p>';
+
 		$b .= '<p>' ;
 		if (forge_get_config('use_ssh', 'scmsvn')) {
 			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().'/trunk</tt><br />';
@@ -99,20 +103,40 @@ class SVNPlugin extends SCMPlugin {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$b .= _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
+				$b .= '<h2>';
+				$b .= _('Developer Subversion Access via SSH');
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= _('Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+				$b .= '</p>';
 				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().'/trunk</tt></p>' ;
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Enter your site password when prompted.</p>');
+				$b .= '<h2>';
+				$b .= _('Developer Subversion Access via DAV');
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= _('Only project developers can access the SVN tree via this method. Enter your site password when prompted.');
+				$b .= '</p>';
 				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk</tt></p>' ;
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
-				$b .= _('<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+				$b .= '<h2>';
+				$b .= _('Developer Subversion Access via SSH');
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= _('Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.');
+				$b .= '</p>';
 				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().'/trunk</tt></p>' ;
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+				$b .= '<h2>';
+				$b .= _('Developer Subversion Access via DAV');
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= _('Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.');
+				$b .= '</p>';
 				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk</tt></p>' ;
 			}
 		}
@@ -126,7 +150,9 @@ class SVNPlugin extends SCMPlugin {
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Subversion Repository Browser'));
-		$b .= _('<p>Browsing the Subversion tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>';
+		$b .= _('Browsing the Subversion tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 				      _('Browse Subversion Repository')

@@ -73,8 +73,11 @@ if (getStringFromRequest("submit")) {
 		$u->setNewEmailAndHash('', 0);
 
 		$HTML->header(array('title'=>"Password changed"));
-		printf (_('<h2>Password changed</h2><p>Congratulations, you have re-set your account password. You may <a href="%1$s">login</a> to the site now.</p>'),
+		print '<h2>' . _('Password changed') . '</h2>';
+		print '<p>';
+		printf (_('Congratulations, you have re-set your account password. You may <a href="%1$s">login</a> to the site now.'),
 			  util_make_url ("/account/login.php"));
+		print '</p>';
 		$HTML->footer(array());
 		exit();
 	}
@@ -84,7 +87,8 @@ if (getStringFromRequest("submit")) {
 
 $title = _("Lost Password Login") ;
 $HTML->header(array('title'=>$title));
-echo '<h2>'.$title.'</h2><p>' ;
+echo '<h1>'.$title.'</h1>' ;
+echo '<p>' ;
 printf (_('Welcome, %s. You may now change your password.'),$u->getUnixName());
 echo '</p>';
 ?>
