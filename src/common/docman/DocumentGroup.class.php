@@ -56,7 +56,7 @@ class DocumentGroup extends Error {
 
 		//was Group legit?
 		if (!$Group || !is_object($Group)) {
-			$this->setError('DocumentGroup: No Valid Group');
+			$this->setError(_('DocumentGroup: No Valid Group'));
 			return false;
 		}
 		//did Group have an error?
@@ -134,7 +134,7 @@ class DocumentGroup extends Error {
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
-			$this->setError('DocumentGroup::create() Error Adding Group: '.db_error());
+			$this->setError(_('DocumentGroup::create() Error Adding Group: ').db_error());
 			return false;
 		}
 
@@ -298,7 +298,7 @@ class DocumentGroup extends Error {
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {
-			$this->setError(db_error());
+			$this->setOnUpdateError(_('DocumentGroup: ').db_error());
 			return false;
 		}
 	}
@@ -389,7 +389,7 @@ class DocumentGroup extends Error {
 								array ($stateid,$this->getID(),$this->Group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setOnUpdateError(db_error());
+			$this->setOnUpdateError(_('DocumentGroup :').db_error());
 			return false;
 		}
 		return true;

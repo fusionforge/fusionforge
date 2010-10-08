@@ -77,7 +77,7 @@ class Document extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('Group_id in db result does not match Group Object');
+					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return false;
 				}
@@ -164,7 +164,7 @@ class Document extends Error {
 						$kwords,
 						$user_id));
 		if (!$result) {
-			$this->setError('Error Adding Document: '.db_error());
+			$this->setError(_('Error Adding Document: ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -545,7 +545,7 @@ class Document extends Error {
 		$result = db_query_params ('DELETE FROM doc_data WHERE docid=$1',
 					   array ($this->getID())) ;
 		if (!$result) {
-			$this->setError('Error Deleting Document: '.db_error());
+			$this->setError(_('Error Deleting Document: ').db_error());
 			db_rollback();
 			return false;
 		}

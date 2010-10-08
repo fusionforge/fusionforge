@@ -57,7 +57,7 @@ class DocumentGroupFactory extends Error {
 		$this->Error();
 		
 		if (!$Group || !is_object($Group)) {
-			$this->setError("DocumentGroupFactory:: Invalid Group");
+			$this->setError(_("DocumentGroupFactory:: Invalid Group"));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -85,7 +85,7 @@ class DocumentGroupFactory extends Error {
 		$rows = db_numrows($result);
 		
 		if (!$result) {
-			$this->setError('No Groups Found '.db_error());
+			$this->setError(_('No DocumentGroup Found ').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
@@ -119,7 +119,7 @@ class DocumentGroupFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError('No Groups Found '.db_error());
+			$this->setError(_('No DocumentGroup Found ').db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
