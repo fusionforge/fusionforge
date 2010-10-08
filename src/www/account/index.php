@@ -91,7 +91,9 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-site_user_header(array('title'=>_('Account Maintenance')));
+$title = _('Account Maintenance');
+site_user_header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>';
 
 echo '<form action="'.util_make_url('/account/').'" method="post">';
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'"/>';
