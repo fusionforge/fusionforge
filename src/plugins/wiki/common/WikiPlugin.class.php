@@ -37,14 +37,14 @@ class GforgeWikiPlugin extends Plugin {
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
 		$this->hooks[] = 'cssfile';
+		$this->hooks[] = 'project_public_area';
 		$this->hooks[] = 'activity';
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, & $params) {
 		global $G_SESSION,$HTML;
 		if (is_array($params) && isset($params['group']))
 			$group_id=$params['group'];
-		$use_wikiplugin = getIntFromRequest('use_wikiplugin');
 		if ($hookname == "groupmenu") {
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project))
@@ -64,29 +64,6 @@ class GforgeWikiPlugin extends Plugin {
 
 			if (isset($params['toptab'])) {
 				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-			}
-		} elseif ($hookname == "groupisactivecheckbox") {
-                        //Check if the group is active
-			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_wikiplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked=\"checked\"";
-                            }
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-		        $group = &group_get_object($group_id);
-			if ( $use_wikiplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to its administration page.
@@ -130,15 +107,31 @@ class GforgeWikiPlugin extends Plugin {
 				}
 			}
 		} elseif ($hookname == 'cssfile') {
-			if (strncmp(preg_replace('/^\/+/', '/', $_SERVER['REQUEST_URI']), '/wiki/', 6) == 0) {
+			if (defined('PHPWIKI_BASE_URL')) {
 				echo '<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
-				echo '<link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge.css" />';
+				echo "\n".'    <link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge.css" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-rereading.css" title="Rereading Mode" />';
 				echo "\n".'<link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-print.css" media="print" />';
 				echo "\n".'<base href="'.PHPWIKI_BASE_URL.'" />';
 				echo "\n";
+			}
+		} elseif ($hookname == "project_public_area") {
+			$project = group_get_object($params['group_id']);
+			if (!$project || !is_object($project)) {
+				return;
+			}
+			if ($project->isError()) {
+				return;
+			}
+			if ( $project->usesPlugin ( $this->name ) ) {
+				echo '<div class="public-area-box">';
+				print '<a href="'. util_make_url ('/wiki/g/'.$project->getUnixName().'/HomePage').'">';
+				print html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
+				print ' Wiki';
+				print '</a>';
+				echo '</div>';
 			}
 		} elseif ($hookname == 'activity') {
 			$group = &group_get_object($group_id);
@@ -173,16 +166,19 @@ class GforgeWikiPlugin extends Plugin {
 						$group_name = $group->getUnixName();
 						$data = unserialize($arr['versiondata']);
 						if (!isset($cache[$data['author']])) {
-							$r = db_query_params ('SELECT user_name FROM users WHERE realname = $1',
+							$r = db_query_params ('SELECT user_name, user_id FROM users WHERE realname = $1',
 										array ($data['author']));
 
 							if ($a = db_fetch_array($r)) {
 								$cache[$data['author']] = $a['user_name'];
+								$cache[$data['author_id']] = $a['user_id'];
 							} else {
 								$cache[$data['author']] = '';
+								$cache[$data['author_id']] = '';
 							}
 						}
 						$arr['user_name'] = $cache[$data['author']];
+						$arr['user_id'] = $cache[$data['author_id']];
 						$arr['realname'] = $data['author'];
 						$arr['icon']=html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
 						$arr['title'] = 'Wiki Page '.$arr['pagename'];

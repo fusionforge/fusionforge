@@ -38,7 +38,7 @@ class WikiSearchEngine extends GFSearchEngine {
 		$this->groupId = $groupId;
 		$this->rendererClassName = $rendererClassName;
 		
-		$this->SearchEngine($type, $rendererClassName, $label);
+		$this->GFSearchEngine($type, $rendererClassName, $label);
 	}
 	
 	function isAvailable($parameters) {
