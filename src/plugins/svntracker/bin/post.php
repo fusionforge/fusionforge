@@ -30,6 +30,7 @@
  *
  */
 
+require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
 require $gfplugins.'svntracker/common/Snoopy.class.php';
 
