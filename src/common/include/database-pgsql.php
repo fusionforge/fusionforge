@@ -106,6 +106,23 @@ function db_connect_if_needed () {
         }
 }
 
+function db_switcher(&$dbserver=NULL) {
+	switch ($dbserver) {
+	case NULL:
+		$dbserver = SYS_DB_PRIMARY ;
+		break ;
+	case 'SYS_DB_STATS':
+		$dbserver = SYS_DB_STATS ;
+		break ;
+	case 'SYS_DB_TROVE':
+		$dbserver = SYS_DB_TROVE ;
+		break ;
+	case 'SYS_DB_SEARCH':
+		$dbserver = SYS_DB_SEARCH ;
+		break ;
+	}
+}	
+
 /**
  *  db_query() - Query the database.
  *
@@ -119,9 +136,8 @@ function db_connect_if_needed () {
  */
 function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
-	if ($dbserver == NULL) {
-		$dbserver = SYS_DB_PRIMARY ;
-	}
+	db_switcher ($dbserver) ;
+
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
@@ -156,9 +172,8 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
  */
 function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
-	if ($dbserver == NULL) {
-		$dbserver = SYS_DB_PRIMARY ;
-	}
+	db_switcher ($dbserver) ;
+
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
@@ -197,9 +212,8 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
  */
 function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
-	if ($dbserver == NULL) {
-		$dbserver = SYS_DB_PRIMARY ;
-	}
+	db_switcher ($dbserver) ;
+
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
