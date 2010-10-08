@@ -201,6 +201,7 @@ if (!$pm->PluginIsInstalled('scmcvs')) {
 //get the directories from the plugins dir
 
 $filelist = array();
+$has_init = array();
 if($handle = opendir(forge_get_config('plugins_path'))) {
 	while (($filename = readdir($handle)) !== false) {
 		if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
@@ -208,6 +209,7 @@ if($handle = opendir(forge_get_config('plugins_path'))) {
 		    !in_array($filename, $plugins_disabled)) {
 
 			$filelist[] = $filename;
+			$has_init[$filename] = is_dir(forge_get_config('plugins_path').'/'.$filename.'/db');
 		}
 	}
 	closedir($handle);
@@ -217,6 +219,7 @@ sort($filelist);
 $j = 0;
 
 foreach ($filelist as $filename) {
+	$init = '<input type="hidden" id="'.$filename.'" name="script[]" value="'.$filename.'" />';
 	if ($pm->PluginIsInstalled($filename)) {
 		$msg = _('Active');
 		$status="active";
@@ -254,12 +257,16 @@ foreach ($filelist as $filename) {
 			}
 		}
 		$link .= "','$filename');" . '">' . _('Deactivate') . "</a>";
-		$init = '<input id="'.$filename.'" type="checkbox" disabled="disabled" name="script[]" value="'.$filename.'" />';
+		if ($has_init[$filename]) {
+			$init = '<input id="'.$filename.'" type="checkbox" disabled="disabled" name="script[]" value="'.$filename.'" />';
+		}
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
 		$link = "<a href=\"javascript:change('" . getStringFromServer('PHP_SELF') . "?update=$filename&amp;action=activate','$filename');" . '">' . _('Activate') . "</a>";
-		$init = '<input id="'.$filename.'" type="checkbox" name="script[]" value="'.$filename.'" />';
+		if ($has_init[$filename]) {
+			$init = '<input id="'.$filename.'" type="checkbox" name="script[]" value="'.$filename.'" />';
+		}
 		$users = _("none");
 		$groups = _("none");
 	}
