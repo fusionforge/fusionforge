@@ -5,14 +5,10 @@ RINSEBPI=
 RINSEPOSTINST=--after-post-install $(CURDIR)/local.rinse.api
 VEIDDEBTEMP=100
 VEIDCENTEMP=101
-VEIDDEB=105
-VEIDCEN=110
 ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DIST=squeeze
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh
 EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils
-DEBVERS=6.0
-CENTVERS=5.5
 VZPRIVATEDIR=/var/lib/vz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
@@ -20,12 +16,11 @@ VZCTL=/usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
 RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
 
-IPDEBBASE=192.168.222
-IPDEBDNS=192.168.222.1
-
-IPCENTOSBASE=192.168.222
-IPCENTOSDNS=192.168.222.1
 # Default config
+include config.default
+
+# Optional local change
+-include config.$(shell hostname)
 
 # Local customization can be done using a local.<hostname> file
 # This is convenient if you use local mirror

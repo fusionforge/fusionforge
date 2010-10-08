@@ -4542,6 +4542,7 @@ tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
+tests/openvz/config.default -text
 tests/openvz/interfaces.sample -text
 tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text
