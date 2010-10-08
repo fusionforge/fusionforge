@@ -117,8 +117,11 @@ function db_connect_if_needed () {
  *	@param int ability to spread load to multiple db servers.
  *	@return int result set handle.
  */
-function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
+	if ($dbserver == NULL) {
+		$dbserver = SYS_DB_PRIMARY ;
+	}
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
@@ -151,8 +154,11 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
  *  @param int ability to spread load to multiple db servers.
  *  @return int result set handle.
  */
-function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
+	if ($dbserver == NULL) {
+		$dbserver = SYS_DB_PRIMARY ;
+	}
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
 
@@ -227,7 +233,7 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) 
  *  @param int ability to spread load to multiple db servers.
  *  @return int result set handle.
  */
-function db_query_qpa ($qpa,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+function db_query_qpa ($qpa,$limit='-1',$offset=0,$dbserver=NULL) {
 	$sql = $qpa[0] ;
 	$params = $qpa[1] ;
 	return db_query_params ($sql, $params, $limit, $offset, $dbserver) ;
@@ -244,7 +250,7 @@ function db_query_qpa ($qpa,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
  *	@param int ability to spread load to multiple db servers.
  *	@return int result set handle.
  */
-function db_mquery($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
+function db_mquery($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 	return db_query($qstring, $limit, $offset, $dbserver);
 }
 
@@ -281,7 +287,7 @@ $_sys_db_transaction_level = 0;
  *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  *	@return true.
  */
-function db_begin($dbserver=SYS_DB_PRIMARY) {
+function db_begin($dbserver=NULL) {
 	global $_sys_db_transaction_level;
 
 	// start database transaction only for the top-level
@@ -300,7 +306,7 @@ function db_begin($dbserver=SYS_DB_PRIMARY) {
  *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  *	@return true on success/false on failure.
  */
-function db_commit($dbserver=SYS_DB_PRIMARY) {
+function db_commit($dbserver=NULL) {
 	global $_sys_db_transaction_level;
 
 	// check for transaction stack underflow
@@ -325,7 +331,7 @@ function db_commit($dbserver=SYS_DB_PRIMARY) {
  *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  *	@return true on success/false on failure.
  */
-function db_rollback($dbserver=SYS_DB_PRIMARY) {
+function db_rollback($dbserver=NULL) {
 	global $_sys_db_transaction_level;
 
 	// check for transaction stack underflow
@@ -438,7 +444,7 @@ function db_fetch_array_by_row($qhandle, $row) {
  *  @param		string	Server to which original query was made
  *	@return int id of the primary key or 0 on failure.
  */
-function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=SYS_DB_PRIMARY) {
+function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=NULL) {
 	$sql="SELECT max($pkey_field_name) AS id FROM $table_name";
 	//echo $sql;
 	$res = db_query_params ($sql, array(), -1, 0, $dbserver);
@@ -457,7 +463,7 @@ function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=SYS_DB_PRIM
  *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  *	@return text error message.
  */
-function db_error($dbserver=SYS_DB_PRIMARY) {
+function db_error($dbserver=NULL) {
 	return @pg_errormessage($dbserver);
 }
 
