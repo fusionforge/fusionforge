@@ -69,7 +69,7 @@ case "$1" in
 	    fi
 	fi
 	
-        @PACKAGE@-config
+        fusionforge-config
 
 	db_stop
 
