@@ -1,16 +1,24 @@
 #!/bin/sh -x
 
+export CURDIR=`pwd`
+export WORKSPACE=${WORKSPACE:-$CURDIR}
+
 export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=192.168.0.204
 export SELENIUM_RC_DIR=$WORKSPACE/reports
-export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
-export HOST=centos52.local
+if [ "x${HUDSON_URL}" = "x" ]
+then
+	export SELENIUM_RC_URL=http://`hostname -f`/ws/reports
+	export FFORGE_RPM_REPO=http://`hostname -f`/ws/build/packages
+	export HOST=centos5.local
+	export SELENIUM_RC_HOST=localhost
+else
+	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
+	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
+	export HOST=centos52.local
+fi
 export DB_NAME=gforge
 export CONFIGURED=true
-
-export CURDIR=`pwd`
-export WORKSPACE=${WORKSPACE:-$CURDIR}
 
 [ ! -d $WORKSPACE/build ] || rm -fr $WORKSPACE/build
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
