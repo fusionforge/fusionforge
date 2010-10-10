@@ -1,10 +1,17 @@
 This is a file to explain how to setup your own openvz virtual hosts
 
-At the moment the setup is using dhcp,
-this should not be too difficult to make it work with static network config
-but this requires you set IP adresses according with your network config.
-The dhcp setup should work on any dhcp capable network.
+At the moment the setup is tested using static internet adresses,
+this should not be too difficult to make it work with dhcp network config
+but I experienced some instable behaviour trying to do like this.
 
+For static (simpler):
+============
+you have to setup your network configuration, for this there is a config.default file
+you can overload by
+ cp config.default config.<your hostname>
+
+For dhcp:
+=========
 So, first you need to have a working dhcp server, which I'll suppose you already have.
 second you need to setup a bridge, for this you should edit /etc/network/interfaces file
 see the exemple in interfaces.sample
@@ -32,7 +39,8 @@ iface vmbr0 inet dhcp
 	bridge_stp off
 ---------------------------------
 
-Your server must also be openvz capable, you can do so with
+=========== COMMON SETUP ====================
+Your server must be openvz capable, you can do so with
 
 > apt-get install vzctl
 
@@ -46,7 +54,7 @@ A list of available kernel can be found with
 
 Then you have to reboot and you should be ready to build you Virtual servers
 
-> make net 
+> make net (only usefull for dhcp) 
 will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge (for dhcp setup)
 
 then you can build template
@@ -63,3 +71,5 @@ choose kind of network
  make netdhcpcentos
  make netstaticcentos
 
+You may also need to make some special config because you are behind a firewall
+for this I porvide some exemple of local.`hostname` files
