@@ -17,3 +17,10 @@ binary/selenium-remote-control-1.0.3.zip: binary
 
 binary:
 	mkdir binary
+
+svnexport:
+	svn export http://selenium.googlecode.com/svn/trunk/remote/server selenium-server
+	#svn export http://selenium.googlecode.com/svn/trunk selenium
+
+getpackage:
+	sudo apt-get install maven-debian-helper
