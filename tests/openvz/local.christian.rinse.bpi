@@ -1,0 +1,19 @@
+#! /bin/sh
+# This file change the default mirror in centos
+# It comments mirrorlist in etc/yum.repos.d/CentOS-Base.repo
+# It adds baseurl=http://$server so $server is used as a mirror
+echo "========================================="
+echo $1
+case $dist in
+	centos-5)
+		echo $mirror
+		server=`echo $mirror | cut -d/ -f3`
+		echo "Disable mirrorlists"
+		sed -i -e "s/^mirrorlist=/#mirrorlist=/" $1/etc/yum.repos.d/CentOS-Base.repo
+		echo "Setup baseurl on server $server"
+		sed -i -e "s!#baseurl=http://mirror.centos.org!baseurl=http://$server!" $1/etc/yum.repos.d/CentOS-Base.repo
+		rm -f $1/etc/mtab
+		ln -s /proc/mounts $1/etc/mtab
+	;;
+esac
+echo "========================================="
