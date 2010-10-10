@@ -8,10 +8,7 @@ VEIDCENTEMP=101
 ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DIST=squeeze
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh
-EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils
-VZPRIVATEDIR=/var/lib/vz/private
-# You shouldn't change the next line, don't really work
-VZTEMPLATEDIR=/var/lib/vz/template
+EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
 VZCTL=/usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
 RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
@@ -77,19 +74,28 @@ buildcentostemplate: beroot buildcentosvm
 	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/localtime
 	# Remove hostname
 	[ ! -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
+	# Didn't find a better way to make so hostname -f replies something proper
+	echo "127.0.0.1 centos5.local localhost.localdomain localhost" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hosts
+	echo "centos5.local" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
+	echo "HOSTNAME=centos5.local" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/sysconfig/network
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/ptmx ]     || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/ptmx c 5 2
 	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/pts ]      || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mkdir /dev/pts
 	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/vz/private/50/dev/ttyp ] || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /sbin/MAKEDEV -d /vz/private/50/dev ttyp ptyp
 	-rm -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/null
 	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/null ]     || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/null c 1 3
+	chmod ugo+w $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/null
 	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/random ]   || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod -m 644 /dev/random c 1 8
 	-rm -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/urandom 
 	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/urandom ]  || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/urandom c 1 9 
+	chmod ugo+w $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/urandom
 	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/var/lock/rpm ] || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mkdir /var/lock/rpm	
 	touch $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
 	grep -q devpts $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab || \
 		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
+	mkdir $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh
+	cp ~$(USERCLIENT)/.ssh/id_rsa.pub $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh/authorized_keys
+	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/ssh/
 	cd $(VZPRIVATEDIR)/$(VEIDCENTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
 
 builddebianvm: beroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/tmp/vzdebvm
