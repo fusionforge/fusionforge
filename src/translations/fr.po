@@ -1,6 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French translations for FusionForge package.
+# Copyright (C) 2008-2010 FusionForge Team
+# This file is distributed under the same license as the FusionForge package.
+# Automatically generated
 #
 msgid ""
 msgstr ""

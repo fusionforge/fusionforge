@@ -1,4 +1,8 @@
 # German translations for FusionForge.
+# Copyright (C) 2008-2010 FusionForge Team
+# This file is distributed under the same license as the FusionForge package.
+# Automatically generated
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
