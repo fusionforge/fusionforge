@@ -15,3 +15,9 @@ IPDEBDNS=192.168.222.1
 
 IPCENTOSBASE=192.168.222
 IPCENTOSDNS=192.168.222.1
+
+VZPRIVATEDIR=/var/lib/vz/private
+# You shouldn't change the next line, don't really work
+VZTEMPLATEDIR=/var/lib/vz/template
+
+USERCLIENT=root
