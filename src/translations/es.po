@@ -1,7 +1,7 @@
-# Spanish translations for PACKAGE package.
-# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2007.
+# Spanish translations for FusionForge package.
+# Copyright (C) 2008-2010 FusionForge Team
+# This file is distributed under the same license as the FusionForge package.
+# Automatically generated
 #
 msgid ""
 msgstr ""
