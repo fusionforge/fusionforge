@@ -14523,9 +14523,8 @@ msgid "Users (RED) / Projects (BLUE)"
 msgstr "gebruikers (ROOD) / projecten (BLAUW)"
 
 #: www/stats/views_graph.php:99
-#, fuzzy
 msgid "Forge Page Views"
-msgstr "Gforge pagina bezoeken"
+msgstr "Forge pagina bezoeken"
 
 #: www/stats/views_graph.php:100
 #, php-format
