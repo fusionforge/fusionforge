@@ -57,6 +57,9 @@ builddebiantemplate: beroot builddebianvm
 	[ ! -f $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP) /bin/mknod /dev/ptmx c 5 2
+	mkdir $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
+	cp ~$(USERCLIENT)/.ssh/id_rsa.pub $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh/authorized_keys
+	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/ssh/
 	cd $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
 
 buildcentostemplate: beroot buildcentosvm
