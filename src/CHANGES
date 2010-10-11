@@ -1,9 +1,3 @@
-FusionForge-5.0.2:
-* Maintenance release, bugfixes mostly.
-
-FusionForge-5.0.1:
-* Maintenance release, bugfixes and translations only.
-
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
 * Docman: new UI (Capgemini)
@@ -14,6 +8,13 @@ FusionForge-5.1:
   repository as a clone of the current project's one
 * New blocks plugin, to add free HTML blocks on top of each tools of the project allowing
   admins to add free descriptions (Alcate-Lucent), (better with fckeditor plugin).
+* New unobstructive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)
+
+FusionForge-5.0.2:
+* Maintenance release, bugfixes mostly.
+
+FusionForge-5.0.1:
+* Maintenance release, bugfixes and translations only.
 
 FusionForge-5.0:
 * New projectlabels plugin, to tag projects with snippets of

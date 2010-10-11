@@ -38,14 +38,20 @@ function printnode ($nodeid,$text) {
 		print "&nbsp; &nbsp; ";
 	}
 
+	$res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1', array($nodeid));
+	if (db_numrows($res_cat)>=1) {
+		$title = db_result($res_cat, 0, 'description');
+	} else {
+		$title = '';
+	}
+
 	print html_image('ic/cfolder15.png','15','13');
-	print ('&nbsp; '.$text." ");
+	print ('&nbsp; <span class="trove-nodes" title="'.$title.'">'.$text.'</span> ');
 	if ($nodeid == 0) {
 		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
 	} else {
 		print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['._('Edit').']</a> ');
 		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
-		print (help_button('trove_cat',$nodeid)."\n");
 	}
 
 	$GLOBALS['depth']++;
@@ -63,6 +69,8 @@ function printnode ($nodeid,$text) {
 }
 
 // ########################################################
+
+html_use_tooltips();
 
 site_admin_header(array('title'=>_('Site Admin: Trove - Category List')));
 

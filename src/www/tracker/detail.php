@@ -47,9 +47,9 @@ echo notepad_func();
 						$key="monitor";
 					}
 					echo '
-					<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
+					<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.html_get_tooltip_description('monitor').'"><strong>'.
 						html_image('ic/'.$img.'','20','20').' '.$key.'</strong></a>';
-					?>&nbsp;<a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=monitor'); ?>')"><strong>(?)</strong></a>
+					?>
 			</td>
 			<td>
 				<input type="submit" name="submit" value="<?php echo _('Save Changes') ?>" />

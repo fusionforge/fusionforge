@@ -224,8 +224,8 @@ function trove_getallroots() {
  * @param		string	The category to pre-select
  * @param		string	THe select-box name
  */
-function trove_catselectfull($node,$selected,$name) {
-	print "<br /><select name=\"$name\">";
+function trove_catselectfull($node,$selected,$name, $title='') {
+	print "<br /><select class=\"trove-nodes\" name=\"$name\" title=\"$title\">";
 	print '  <option value="0">'._('None Selected')."</option>\n";
 	$res_cat = db_query_params ('
 		SELECT trove_cat_id,fullpath

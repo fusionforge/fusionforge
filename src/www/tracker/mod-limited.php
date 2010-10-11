@@ -52,9 +52,9 @@ if (session_loggedin()) {
 					$key="monitor";
 				}
 				echo '
-				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
+				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.html_get_tooltip_description('monitor').'"><strong>'.
 					html_image('ic/'.$img.'','20','20').' '.$key.'</strong></a>';
-				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
+				?>
 			</td>
 			<td><?php
 				if ($group->usesPM()) {
@@ -102,28 +102,25 @@ if (session_loggedin()) {
 		?>
 
 	<tr>
-		<td><strong><?php echo _('Assigned to')?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=assignee'); ?>')"><strong>(?)</strong></a></strong><br />
-            <?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
+		<td><strong><?php echo _('Assigned to')?>:</strong><br />
+		<span id="tracker-assigned_to" title="<?php echo html_get_tooltip_description('assigned_to') ?>">
+		<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)
+		</span></td>
 		<td>
-		<strong><?php echo _('Priority') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=priority'); ?>')"><strong>(?)</strong></a></strong><br />
-		<?php
-		/*
-			Priority of this request
-		*/
-		echo $ah->getPriority();
-		?>
-		</td>
+		<strong><?php echo _('Priority') ?>:</strong><br />
+		<span id="tracker-priority" title="<?php echo html_get_tooltip_description('priority') ?>">
+		<?php echo $ah->getPriority(); ?>
+		</span></td>
 	</tr>
 
 	<tr>
 		<td>
 		<?php if (!$ath->usesCustomStatuses()) { ?>
-		<strong><?php echo _('State') ?>: <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=status'); ?>')"><strong>(?)</strong></a></strong><br />
-		<?php
-
-		echo $ath->statusBox ('status_id', $ah->getStatusID() );
-		}
-		?>
+			<strong><?php echo _('State') ?>:</strong><br />
+			<span id="tracker-status_id" title="<?php echo html_get_tooltip_description('status_id') ?>">
+			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
+			<span>
+		<?php } ?>
 		</td>
 		<td>
 		</td>
@@ -132,8 +129,10 @@ if (session_loggedin()) {
 		$ath->renderRelatedTasks($group, $ah);
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
+			<span id="tracker-summary" title="<?php echo html_get_tooltip_description('summary') ?>">
 			<?php echo $ah->getSummary(); ?>
+			<span>
 		</td>
 	</tr>
 
@@ -147,12 +146,12 @@ if (session_loggedin()) {
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?> <a href="javascript:help_window('<?php echo util_make_url ('/help/tracker.php?helpname=comment'); ?>')"><strong>(?)</strong></a></strong><br />
-		<textarea name="details" rows="7" cols="60"></textarea>
+		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
+		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo html_get_tooltip_description('comment') ?>"></textarea>
 		<p>
 		<h2><?php echo _('Followup') ?>:</h2>
 		<?php
-			echo $ah->showMessages(); 
+			echo $ah->showMessages();
 		?>
 	</td></tr>
 </table>

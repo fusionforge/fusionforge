@@ -70,6 +70,8 @@ if (getStringFromRequest('submit') && getStringFromRequest('root1')) {
 	session_redirect('/project/admin/?group_id='.$group_id.'&feedback='.urlencode($feedback));
 }
 
+html_use_tooltips();
+
 project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$group_id));
 
 ?>
@@ -83,7 +85,14 @@ project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$gro
 
 $CATROOTS = trove_getallroots();
 while (list($catroot,$fullname) = each($CATROOTS)) {
-	print "\n<hr />\n<p><strong>$fullname</strong> ".help_button('trove_cat',$catroot)."</p>\n";
+	$res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1', array($catroot));
+	if (db_numrows($res_cat)>=1) {
+		$title = db_result($res_cat, 0, 'description');
+	} else {
+		$title = '';
+	}
+
+	print "\n<hr />\n<p><strong>$fullname</strong></p>\n";
 
 	$res_grpcat = db_query_params ('
 		SELECT trove_cat_id
@@ -92,7 +101,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 		AND trove_cat_root=$2',
 			array($group_id,
 				$catroot));
-
+		
 	for ($i=1;$i<=$TROVE_MAXPERROOT;$i++) {
 		// each drop down, consisting of all cats in each root
 		$name= "root$i"."[$catroot]";
@@ -102,7 +111,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 		} else {
 			$selected = 0;
 		}
-		trove_catselectfull($catroot,$selected,$name);
+		trove_catselectfull($catroot,$selected,$name, $title);
 	}
 }
 

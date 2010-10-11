@@ -24,6 +24,8 @@
  */
 
 
+html_use_tooltips();
+
 //
 //	get the Group object
 //

@@ -315,6 +315,50 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 
 	return $return;
 }
+
+function html_get_tooltip_description($element_name) {
+	switch( $element_name ) {
+		case 'assigned_to':
+			return( _('This drop-down box represents the person to which a tracker item is assigned.'));
+		case 'status_id':
+			return( _('This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to \'Pending\' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of \'Open\'. Otherwise, if the author doesn\'t respond with an admin-defined amount of time (default is 14 days) then the item is given a status of \'Deleted\'.'));
+		case 'category':
+			return( _('Tracker category'));
+		case 'group':
+			return(  _('Tracker group'));
+		case 'sort_by':
+			return( _('The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.'));
+		case 'new_artifact_type_id':
+			return( _('The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.'));
+		case 'priority':
+			return( _('The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.'));
+		case 'resolution':
+			return( _('Resolution'));
+		case 'summary':
+			return( _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.'));
+		case 'canned_response':
+			return( _('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the \'(admin)\' link to define your own canned responses'));
+		case 'comment':
+			return( _('Comment'));
+		case 'description':
+			return( htmlentities(_('Enter the complete description.').'<br/><br/>'.
+			_("<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post.</div>")));
+		case 'attach_file':
+			return( _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.'));
+		case 'monitor':
+			return( htmlentities(_('You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!')));
+		default:
+			return('');
+	}
+}
+
+function html_use_tooltips() {
+	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
+	use_javascript('/js/tooltips.js');
+	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
@@ -345,8 +389,9 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		$return .= 'ERROR - uneven row counts';
 	}
 
+	$title = html_get_tooltip_description($select_name);
 	$return .= '
-		<select name="'.$select_name.'">';
+		<select id="tracker-'.$select_name.'" name="'.$select_name.'" title="'.$title.'">';
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
@@ -566,7 +611,7 @@ function build_priority_select_box ($name='priority', $checked_val='3', $nochang
  */
 function html_build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
 ?>
-	<select name="<?php echo $name; ?>">
+	<select id="tracker-<?php echo $name ?>" name="<?php echo $name; ?>" title="<?php echo html_get_tooltip_description($name) ?>">
 <?php if($nochange) { ?>
 	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo _('No Change') ?></option>
 <?php }  ?>

@@ -907,6 +907,19 @@ src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 src/image-sources/top-logo.xcf -text svneol=unset#unset
 src/install-common.inc -text
 src/install.sh -text
+src/lib/vendor/jquery-tipsy/LICENSE -text
+src/lib/vendor/jquery-tipsy/README -text
+src/lib/vendor/jquery-tipsy/Rakefile -text
+src/lib/vendor/jquery-tipsy/docs/src/images -text
+src/lib/vendor/jquery-tipsy/docs/src/index.html.erb -text
+src/lib/vendor/jquery-tipsy/docs/src/javascripts -text
+src/lib/vendor/jquery-tipsy/docs/src/project.yml -text
+src/lib/vendor/jquery-tipsy/docs/src/stylesheets -text
+src/lib/vendor/jquery-tipsy/docs/src/tipsy-docs.css -text
+src/lib/vendor/jquery-tipsy/src/images/tipsy.gif -text svneol=unset#unset
+src/lib/vendor/jquery-tipsy/src/javascripts/jquery.tipsy.js -text
+src/lib/vendor/jquery-tipsy/src/stylesheets/tipsy.css -text
+src/lib/vendor/jquery/jquery-1.4.2.min.js -text
 src/lib/vendor/prototype/prototype.js -text
 src/lib/vendor/scriptaculous/builder.js -text
 src/lib/vendor/scriptaculous/controls.js -text
@@ -4165,6 +4178,7 @@ src/www/include/pre.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text
 src/www/js/sortable.js -text
+src/www/js/tooltips.js -text
 src/www/jscook/ThemePanel/arrow.gif -text svneol=native#image/gif
 src/www/jscook/ThemePanel/arrowdown.gif -text svneol=native#image/gif
 src/www/jscook/ThemePanel/blank.gif -text svneol=native#image/gif

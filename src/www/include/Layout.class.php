@@ -134,6 +134,13 @@ class Layout extends Error {
 	var $COLOR_LTBACK1 = '#C0C0C0';
 
 
+	var $js = array();
+	var $js_min = array();
+	var $javascripts = array();
+	var $css = array();
+	var $css_min = array();
+	var $stylesheets = array();
+
 	/**
 	 * Layout() - Constructor
 	 */
@@ -218,11 +225,11 @@ class Layout extends Error {
 			if (file_exists($filename)) {
 				$js .= '?'.date ("U", filemtime($filename));
 			}
-			echo '<script type="text/javascript" src="'.$js.'"></script>'."\n";
+			$this->javascripts[] = $js;
 		}
 	}
 
-	function addStylesheet($css, $media) {
+	function addStylesheet($css, $media='') {
 		if (isset($this->css_min[$css])) {
 			$css = $this->css_min[$css];
 		}
@@ -232,11 +239,28 @@ class Layout extends Error {
 			if (file_exists($filename)) {
 				$css .= '?'.date ("U", filemtime($filename));
 			}
-			if ($media) {
-				$media = ' media="'.$media.'"';
-			}
-			echo '    <link rel="stylesheet" type="text/css" href="'.$css.'"'.$media.' />'."\n";
+			$this->stylesheets[] = array('css' => $css, 'media' => $media);
 		}
+	}
+
+	function getJavascripts() {
+		$code = '';
+		foreach ($this->javascripts as $js) {
+			$code .= '    <script type="text/javascript" src="'.$js.'"></script>'."\n";
+		}
+		return $code;
+	}
+
+	function getStylesheets() {
+		$code = '';
+		foreach ($this->stylesheets as $c) {
+			if ($c['media']) {
+				$code .= '    <link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
+			} else {
+				$code .= '    <link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
+			}
+		}
+		return $code;
 	}
 
 	/** 
@@ -352,6 +376,7 @@ class Layout extends Error {
 		}
 
 		plugin_hook ('cssfile',$this);
+		echo $this->getStylesheets();
 	}
 
 	/**
@@ -373,6 +398,7 @@ class Layout extends Error {
 		echo '
 			</script>';
 		plugin_hook ("javascript_file",false);
+		echo $this->getJavascripts();
 	}
 
 	function bodyHeader($params){

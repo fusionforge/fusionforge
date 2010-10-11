@@ -404,8 +404,6 @@ for ($k=0; $k<count($keys); $k++) {
 }
 
 echo _('Order by').
-	':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')">' .
-	'<strong>(?)</strong></a>'.
 	html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .
 	html_build_select_box_from_arrays($sort_arr,$sort_name_arr,'_sort_ord',$_sort_ord,false) .
 	'<input type="submit" name="submit" value="'._('Quick Browse').'" />';
@@ -679,8 +677,7 @@ if ($art_cnt > 0) {
 	}
 	$ath->renderExtraFields($sel,true,_('No Change'),false,'',ARTIFACT_EXTRAFIELD_FILTER_INT,true);
 		echo   '<tr>
-			<td><strong>'._('Priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a>
-				</strong><br />';
+			<td><strong>'._('Priority').':</strong><br />';
 		echo build_priority_select_box ('priority', '100', true);
 		echo '</td><td>';
 
@@ -688,19 +685,18 @@ if ($art_cnt > 0) {
 			</tr>
 
 			<tr>
-			<td><strong>'._('Assigned to').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a>
-				</strong><br />'. $ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
+			<td><strong>'._('Assigned to').':</strong><br />'. 
+				$ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
 			<td>';
 		if (!$ath->usesCustomStatuses()) {
-		echo '<strong>'._('State').': <a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a></strong>
+		echo '<strong>'._('State').':</strong>
 				<br />'. $ath->statusBox ('status_id','xzxz',true,_('No Change'));
 		}
 		echo '</td>
 			</tr>
 
-			<tr><td colspan="2"><strong>'._('Canned Response').':
-				<a href="javascript:help_window(\'/help/tracker.php?helpname=canned_response\')"><strong>(?)</strong></a>
-				</strong><br />'. $ath->cannedResponseBox ('canned_response') .'</td></tr>
+			<tr><td colspan="2"><strong>'._('Canned Response').':</strong><br />'.
+				$ath->cannedResponseBox ('canned_response') .'</td></tr>
 
 			<tr><td colspan="3" align="center"><input type="submit" name="submit" value="'._('Mass update').'" /></td></tr>
 			</table>

@@ -207,9 +207,6 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 	// Various HTML utilities
 	require_once $gfcommon.'include/utils.php';
 
-	// Library to set up context help
-	require_once $gfwww.'include/help.php';
-
 	// Various HTML libs like button bar, themable
 	require_once $gfwww.'include/html.php';
 
