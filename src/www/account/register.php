@@ -74,16 +74,46 @@ if (getStringFromRequest('submit')) {
 	if ($GLOBALS['sys_require_accept_conditions'] && ! $accept_conditions) {
 		$warning_msg = _("You can't register an account unless you accept the terms of use.") ;
 	} else {
+		$activate_immediately = getIntFromRequest('activate_immediately');
+		if (($activate_immediately == 1) &&
+		    forge_check_global_perm ('forge_admin')) {
+			$send_mail = false;
+			$activate_immediately = true;
+		} else {
+			$send_mail = true;
+			$activate_immediately = false;
+		}
+		
 		$new_user = new GFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
-					      $address,$address2,$phone,$fax,$title,$ccode);
+					      $address,$address2,$phone,$fax,$title,$ccode,$send_mail);
 		if ($register) {
 			site_header(array('title'=>'Register Confirmation'));
-		echo '<p>';
-		printf(_('Congratulations. You have registered on %1$s.'), forge_get_config ('forge_name'));
-		echo '</p>';
-		print '<p>' . _('You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.') . '</p>';
+
+
+
+			if ($activate_immediately) {
+				if (!$new_user->setStatus('A')) {
+					print '<span class="error">' .
+						_('Error during user activation but after user registration (user is now in pending state and will not get a notification eMail!)') .
+						'</span>' ;
+					print '<p>' . sprintf(_("Could not activate newly registered user's forge account: %s"), htmlspecialchars($new_user->getErrorMessage())) . '</p>';
+					$HTML->footer(array());
+					exit;
+				}
+				plugin_hook('add_cal_user', $unix_name);
+			}
+			if ($send_mail) {
+				echo '<p>';
+				printf(_('Congratulations. You have registered on %1$s.'), forge_get_config ('forge_name'));
+				echo '</p>';
+				print '<p>' . _('You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.') . '</p>';
+			} else {
+				print '<p>' ; 
+				printf (_('You have registered and activated user %1$s on %2$s. They will not receive an eMail about this fact.'), $unix_name, forge_get_config('forge_name'));
+				print '</p>' ;
+			}
 			site_footer(array());
 			exit;
 		} else {
@@ -204,6 +234,11 @@ if (forge_get_config('use_jabber')) {
 	<input type="checkbox" name="accept_conditions" value="1" />
 	<?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
 		      util_make_url ('/terms.php')); ?>
+	</p>
+<?php } ?>
+<?php if (forge_check_global_perm ('forge_admin')) { ?>
+	<p><input type="checkbox" name="activate_immediately" value="0" />
+<?php print _('Activate this user immediately') ; ?>
 	</p>
 <?php } ?>
 <p>
