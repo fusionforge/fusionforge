@@ -311,6 +311,8 @@ function NoLinkOnMainPage(&$personal_urls){
 $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
 class SpecialForgeRedir extends SpecialPage {
+	var $dstappendself = false;
+
 	function getTitle() {
 		return 'SpecialForgeRedir';
 	}
@@ -324,12 +326,17 @@ class SpecialForgeRedir extends SpecialPage {
 	}
 
 	function getFullUrl() {
-		return util_make_url($this->dst);
+		$u = $this->dst;
+		if ($this->dstappendself) {
+			$u .= urlencode(getStringFromServer('REQUEST_URI'));
+		}
+		return util_make_url($u);
 	}
 }
 
 class SpecialForgeRedirLogin extends SpecialForgeRedir {
-	var $dst = '/account/login.php';
+	var $dstappendself = true;
+	var $dst = '/account/login.php?return_to=';
 }
 
 class SpecialForgeRedirCreateAccount extends SpecialForgeRedir {
@@ -341,7 +348,8 @@ class SpecialForgeRedirResetPass extends SpecialForgeRedir {
 }
 
 class SpecialForgeRedirLogout extends SpecialForgeRedir {
-	var $dst = '/account/logout.php';
+	var $dstappendself = true;
+	var $dst = '/account/logout.php?return_to=';
 }
 
 function DisableLogInOut(&$mList) {
