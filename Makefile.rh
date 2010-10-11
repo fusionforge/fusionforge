@@ -9,7 +9,7 @@ BUILDRESULT=~/fusionforge_repo
 
 HTMLPURIFIER_VERSION=4.2.0
 
-VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
+VER=$(shell LANG=C grep '>software_version' src/common/include/FusionForge.class.php | cut -d\' -f2)
 in_svn_repo:= $(wildcard .svn/)
 ifeq ($(strip $(in_svn_repo)),)
 	ID=unknown
@@ -56,12 +56,12 @@ clean:		# Clean files of fusionforge build                         #
 	cd $(RPM_TMP)/SOURCES/; rm -rf fusionforge-$(version).tar.bz2 fusionforge-$(version)
 
 fusionforge: rpmprep		# Build rpm fusionforge packages                               #
-	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-$(version)
+	cd src; find . -type f -or -type l | grep -v '/.svn/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-$(version)
 	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/; utils/manage-translations.sh build
 	rm -f $(RPM_TMP)/SOURCES/fusionforge-$(version)/utils/fusionforge-shell-postgresql.spec
 	cd $(RPM_TMP)/SOURCES/; cp fusionforge-$(version)/rpm-specific/patches/* .
 	cd $(RPM_TMP)/SOURCES/; tar cjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
-	sed -e 's/@@VERSION@@/$(version)/g' < gforge/fusionforge.spec > $(RPM_TMP)/TMP/fusionforge.spec
+	sed -e 's/@@VERSION@@/$(version)/g' < src/fusionforge.spec > $(RPM_TMP)/TMP/fusionforge.spec
 	rpmbuild -bb $(RPM_TMP)/TMP/fusionforge.spec
 
 #
