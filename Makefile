@@ -15,7 +15,7 @@ BUILDRESULT=$(CURDIR)/result
 
 DOXYGEN=doxygen
 
-VER=$(shell LANG=C grep '>software_version' gforge/common/include/FusionForge.class.php | cut -d\' -f2)
+VER=$(shell LANG=C grep '>software_version' src/common/include/FusionForge.class.php | cut -d\' -f2)
 in_svn_repo:= $(wildcard .svn/)
 ifeq ($(strip $(in_svn_repo)),)
 	ID=unknown
@@ -57,7 +57,7 @@ checkdebtools:
 
 buildtar: $(BUILDRESULT)
 	rm -fr /tmp/$(VERSION)
-	cd gforge; find . -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./contrib' | grep -v '^./fusionforge.spec' | cpio -pdumB --quiet /tmp/$(VERSION)
+	cd src; find . -type f -or -type l | grep -v '/.svn/' | grep -v '^./debian' | grep -v '^./deb-specific' | grep -v '^./rpm-specific' | grep -v '^./contrib' | grep -v '^./fusionforge.spec' | cpio -pdumB --quiet /tmp/$(VERSION)
 	cd /tmp/$(VERSION); utils/manage-translations.sh build
 	cd /tmp/; tar jcf $(BUILDRESULT)/$(VERSION).tar.bz2 $(VERSION)
 	rm -fr /tmp/$(VERSION)
@@ -71,21 +71,21 @@ build-unit-tests:
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
 
 build-doc:
-	$(DOXYGEN) gforge/docs/fusionforge.doxygen
-	$(DOXYGEN) gforge/plugins/wiki/www/doc/phpwiki.doxygen
+	$(DOXYGEN) src/docs/fusionforge.doxygen
+	$(DOXYGEN) src/plugins/wiki/www/doc/phpwiki.doxygen
 
 build-full-tests:
 	mkdir -p $(BUILDDIR)/build/packages $(BUILDDIR)/reports/coverage
 	find $(BUILDDIR)/build/packages -type f -exec rm -f  {} \;
-	-phpcs --tab-width=4 --standard=PEAR --report=checkstyle gforge/common > $(BUILDDIR)/reports/checkstyle.xml
+	-phpcs --tab-width=4 --standard=PEAR --report=checkstyle src/common > $(BUILDDIR)/reports/checkstyle.xml
 	cd tests; phpunit --log-junit $(BUILDDIR)/reports/phpunit.xml --coverage-clover $(BUILDDIR)/reports/coverage/clover.xml --coverage-html $(BUILDDIR)/reports/coverage/ AllFullTests.php
 	cp $(BUILDDIR)/reports/phpunit.xml $(BUILDDIR)/reports/phpunit.xml.org; xalan -in $(BUILDDIR)/reports/phpunit.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit.xml
 	cd tests; phpunit --log-junit $(BUILDDIR)/reports/phpunit-selenium.xml TarCentos52Tests.php
 	cp $(BUILDDIR)/reports/phpunit-selenium.xml $(BUILDDIR)/reports/phpunit-selenium.xml.org; xalan -in $(BUILDDIR)/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $(BUILDDIR)/reports/phpunit-selenium.xml
 
 
-gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php:
-	$(MAKE) -C gforge/plugins/mediawiki/mediawiki-skin
+src/plugins/mediawiki/mediawiki-skin/FusionForge.php:
+	$(MAKE) -C src/plugins/mediawiki/mediawiki-skin
 
-%: gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php
+%: src/plugins/mediawiki/mediawiki-skin/FusionForge.php
 	$(MAKE) -f Makefile.$(DIST) $@
