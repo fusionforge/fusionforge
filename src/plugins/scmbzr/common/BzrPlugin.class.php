@@ -71,11 +71,16 @@ class BzrPlugin extends SCMPlugin {
 	}
 	
 	function getBlurb () {
-		return _('<p>Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://bazaar-vcs.org/Documentation">here</a>.</p>') ;
+		return '<p>' . _('Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://bazaar-vcs.org/Documentation">here</a>.') . '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Bazaar Access</b></p><p>This project\'s Bazaar repository can be checked out through anonymous access with the following command.</p>');
+		$b = '<h2>';
+		$b .=  _('Anonymous Bazaar Access');
+		$b = '</h2>';
+		$b .= '<p>';
+		$b .= _('This project\'s Bazaar repository can be checked out through anonymous access with the following command.');
+		$b .= '</p>';
 		$b .= '<p>' ;
 		$b .= '<tt>bzr checkout '.util_make_url ('/anonscm/bzr/'.$project->getUnixName().'/').'</tt><br />';
 		$b .= '</p>';
@@ -87,10 +92,20 @@ class BzrPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-			$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
+			$b .= '<h2>';
+			$b .= _('Developer Bazaar Access via SSH');
+			$b .= '</h2>';
+			$b .= '<p>';
+			$b .= _('Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+			$b .= '</p>';
 			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		} else {
-			$b .= _('<p><b>Developer Bazaar Access via SSH</b></p><p>Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
+			$b .= '<h2>';
+			$b .= _('Developer Bazaar Access via SSH');
+			$b .= '</h2>';
+			$b .= '<p>';
+			$b .= _('Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
+			$b .= '</p>';
 			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		}
 		return $b ;
@@ -103,7 +118,9 @@ class BzrPlugin extends SCMPlugin {
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Bazaar Repository Browser'));
-		$b .= _('<p>Browsing the Bazaar tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>';
+		$b .= _('Browsing the Bazaar tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 				      _('Browse Bazaar Repository')
@@ -116,20 +133,20 @@ class BzrPlugin extends SCMPlugin {
 		return ;
 	}
 
-        function printBrowserPage ($params) {
-                global $HTML;
+	function printBrowserPage ($params) {
+		global $HTML;
 
-                $project = $this->checkParams ($params) ;
-                if (!$project) {
-                        return false ;
-                }
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
                 
-                if ($project->usesPlugin ($this->name)) {
-                        if ($this->browserDisplayable ($project)) {
-                                print '<iframe src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
-                        }
-                }
-        }
+		if ($project->usesPlugin ($this->name)) {
+			if ($this->browserDisplayable ($project)) {
+				print '<iframe src="'.util_make_url ("/scm/loggerhead/".$project->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+			}
+		}
+	}
 
 	function createOrUpdateRepo ($params) {
 		$project = $this->checkParams ($params) ;
