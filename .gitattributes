@@ -4523,6 +4523,7 @@ src/www/widgets/widget.php -text
 src/www/widgets/widgets.php -text
 tests/AllFullTests.php -text
 tests/AllTests.php -text
+tests/DEBDebian60Tests.php -text
 tests/RPMCentos52Tests.php -text
 tests/SeleniumTests.php -text
 tests/TarCentos52Tests.php -text
@@ -4544,6 +4545,7 @@ tests/func/Soap/checks.php -text
 tests/func/Soap/login.php -text
 tests/func/Soap/usergroup.php -text
 tests/func/Tasks/createTaskTest.php -text
+tests/func/Testing/DEBSeleniumRemoteSuite.php -text
 tests/func/Testing/RPMSeleniumRemoteSuite.php -text
 tests/func/Testing/SeleniumGforge.php -text
 tests/func/Testing/SeleniumRemoteSuite.php -text
@@ -4567,6 +4569,7 @@ tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text
 tests/openvz/local.g-virtual05.rinse.conf -text
 tests/openvz/local.rinse.api -text
+tests/scripts/fusionforge-build-and-test-deb.sh -text
 tests/scripts/fusionforge-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-build-and-test-source.sh -text
 tests/scripts/fusionforge-trunk-build-rpm.sh -text
