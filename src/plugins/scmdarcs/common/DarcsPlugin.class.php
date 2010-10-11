@@ -64,19 +64,29 @@ class DarcsPlugin extends SCMPlugin {
 	}
 	
 	function getBlurb () {
-		return _('<p>Documentation for Darcs is available <a href="http://darcs.net/">here</a>.</p>') ;
+		return '<p>' . _('Documentation for Darcs is available <a href="http://darcs.net/">here</a>.') . '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Darcs Access</b></p><p>This project\'s Darcs repository can be checked out through anonymous access with the following command.</p>');
+		$b = '<h2>';
+		$b .=  _('Anonymous Darcs Access');
+		$b .= '</h2>';
+		$b .= '<p>';
+		$b .=  _('This project\'s Darcs repository can be checked out through anonymous access with the following command.');
+		$b .= '</p>';
 		$b .= '<p>' ;
-		$b .= '<tt>darcs get '.util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/').'</tt><br />';
+		$b .= '<tt>darcs get '.util_make_url ('/anonscm/darcs/'.$project->getUnixName().'/').'</tt>';
 		$b .= '</p>';
 		return $b ;
 	}
 
 	function getInstructionsForRW ($project) {
-		$b = _('<p><b>Developer Darcs Access via SSH</b></p><p>Only project developers can access the Darcs tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
+		$b = '<h2>';
+		$b .= _('Developer Darcs Access via SSH');
+		$b .= '</h2>';
+		$b .= '<p>';
+		$b .= ('Only project developers can access the Darcs tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.');
+		$b .= '</p>';
 		$b .= '<p><tt>darcs get '.$project->getSCMBox() . ':'. forge_get_config('repos_path', 'scmdarcs') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		return $b ;
 	}
@@ -98,7 +108,9 @@ class DarcsPlugin extends SCMPlugin {
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Darcs Repository Browser'));
-		$b .= _('<p>Browsing the Darcs tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>';
+		$b .= _('Browsing the Darcs tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 				      _('Browse Darcs Repository')

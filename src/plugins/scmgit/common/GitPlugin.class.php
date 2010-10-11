@@ -65,11 +65,16 @@ class GitPlugin extends SCMPlugin {
         }
 
 	function getBlurb () {
-		return _('<p>Documentation for Git is available <a href="http://git-scm.com/">here</a>.</p>') ;
+		return '<p>' . _('Documentation for Git is available at <a href="http://git-scm.com/">http://git-scm.com/</a>.') . '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Git Access</b></p><p>This project\'s Git repository can be checked out through anonymous access with the following command.</p>');
+		$b = '<h2>';
+		$b .= _('Anonymous Git Access');
+		$b .= '</h2>';
+		$b .= '<p>';
+		$b .= _('This project\'s Git repository can be checked out through anonymous access with the following command.');
+		$b .= '</p>';
 		$b .= '<p>' ;
 		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$project->getUnixName().'.git').'</tt><br />';
 		$b .= '</p>';
@@ -80,9 +85,14 @@ class GitPlugin extends SCMPlugin {
 		$rows = db_numrows ($result) ;
 
 		if ($rows > 0) {
-			$b .= ngettext ('<p><b>Developer\'s repository</b></p><p>One of this project\'s members also has a personal Git repository that can be checked out anonymously.</p>',
-					'<p><b>Developers\' repositories</b></p><p>Some of this project\'s members also have personal Git repositories that can be checked out anonymously.</p>',
+			$b .= '<h2>';
+			$b .= _('Developer\'s repository');
+			$b .= '</h2>';
+			$b .= '<p>';
+			$b .= ngettext ('One of this project\'s members also has a personal Git repository that can be checked out anonymously.',
+					'Some of this project\'s members also have personal Git repositories that can be checked out anonymously.',
 				$rows);
+			$b .= '</p>';
 			$b .= '<p>' ;
 			for ($i=0; $i<$rows; $i++) {
 				$user_id = db_result($result,$i,'user_id');
@@ -100,11 +110,32 @@ class GitPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
-			$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			if (forge_get_config('use_ssh', 'scmgit')) {
+				$b = '<h2>';
+				$b .= _('Developer GIT Access via SSH');
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= _('Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+				$b .= '</p>';
+				$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			} elseif (forge_get_config('use_dav', 'scmgit')) {
+				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
+				$b = '<h2>';
+				$b .= _('Developer GIT Access via HTTP');
+				$b .= '</h2>';
+				$b .= '<p>';
+				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
+				$b .= '</p>';
+				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			}
 		} else {
-			$b = _('<p><b>Developer GIT Access via SSH</b></p><p>Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
-		$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			$b = '<h2>';
+			$b .= _('Developer GIT Access via SSH');
+			$b .= '</h2>';
+			$b .= '<p>';
+			$b .= _('Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
+			$b .= '</p>';
+			$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 		}
 
 		if (session_loggedin()) {
@@ -114,14 +145,27 @@ class GitPlugin extends SCMPlugin {
 							   array ($project->getID(),
 								  $u->getID())) ;
 				if ($result && db_numrows ($result) > 0) {
-					$b .= _('<p><b>Access to your personal repository</b></p><p>You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.</p>');
-					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
+					$b .= '<h2>';
+					$b .= _('Access to your personal repository');
+					$b .= '</h2>';
+					$b .= '<p>';
+					$b .= _('You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.');
+					$b .= '</p>';
+					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . forge_get_config('scm_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
 				} else {
 					$glist = $u->getGroups();
 					foreach ($glist as $g) {
 						if ($g->getID() == $project->getID()) {
-							$b .= sprintf (_('<p><b>Request a personal repository</b></p><p>You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project\'s main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations).</p><p><a href="%s">Request a personal repository</a>.</p>'),
+							$b .= '<h2>';
+							$b .= _('Request a personal repository');
+							$b .= '</h2>';
+							$b .= '<p>';
+							$b .= _('You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project\'s main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations).');
+							$b .= '</p>';
+							$b .= '<p>';
+							$b .= sprintf (_('<a href="%s">Request a personal repository</a>.'),
 								       util_make_url ('/plugins/scmgit/index.php?func=request-personal-repo&group_id='.$project->getID()));
+							$b .= '</p>';
 						}
 					}
 				}
@@ -163,7 +207,9 @@ class GitPlugin extends SCMPlugin {
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Git Repository Browser'));
-		$b .= _('<p>Browsing the Git tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.</p>');
+		$b .= '<p>';
+		$b .= _('Browsing the Git tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
 				      _('Browse Git Repository')

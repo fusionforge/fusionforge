@@ -23,7 +23,7 @@ var msg_thanks = "Thanks!";
 var msg_rating_deleted = "Rating deleted!";
 
 //var rateit_imgsrc = '/phpwiki-cvs/themes/MonoBook/images/RateIt';
-var rateit_imgsrc = '/plugins/wiki/themes/fusionforge/images/RateIt';
+var rateit_imgsrc = '/wiki/themes/fusionforge/images/RateIt';
 var rateit_action = 'RateIt';
 var idTop = '';
 //

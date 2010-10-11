@@ -9,7 +9,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -31,20 +31,25 @@ class HgPlugin extends SCMPlugin {
 		$this->name = 'scmhg';
 		$this->text = 'Mercurial';
 		$this->hooks[] = 'scm_generate_snapshots' ;
-		
+
 		$this->register () ;
 	}
-	
+
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmhg') ;
 	}
 
 	function getBlurb () {
-		return _('<p>This Mercurial plugin is not completed yet.</p>') ;
+		return '<p>' . _('This Mercurial plugin is not completed yet.') . '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  _('<p><b>Anonymous Mercurial Access</b></p><p>This project\'s Mercurial repository can be checked out through anonymous access with the following command.</p>');
+		$b = '<h2>' ;
+		$b .=  _('Anonymous Mercurial Access');
+		$b .= '</h2>' ;
+		$b .= '<p>' ;
+		$b .= 'This project\'s Mercurial repository can be checked out through anonymous access with the following command.');
+		$b .= '</p>' ;
 		$b .= '<p>' ;
 		$b .= '<tt>hg clone '.util_make_url ('/anonscm/hg/'.$project->getUnixName().'/').'</tt><br />';
 		$b .= '</p>';
@@ -55,11 +60,21 @@ class HgPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-			$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
+			$b = '<h2>' ;
+			$b .= _('Developer Mercurial Access via SSH');
+			$b .= '</h2>' ;
+			$b .= '<p>' ;
+			$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+			$b .= '</p>' ;
 			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		} else {
 			$d = '<i>developername</i>';
-			$b = _('<p><b>Developer Mercurial Access via SSH</b></p><p>Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
+			$b = '</h2>' ;
+			$b .= _('Developer Mercurial Access via SSH');
+			$b .= '</h2>' ;
+			$b .= '<p>' ;
+			$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
+			$b .= '</p>' ;
 			$b .= '<p><tt>hg clone ssh://'.$d.'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmhg') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		}
 		return $b ;
@@ -82,7 +97,7 @@ class HgPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-				
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -106,12 +121,11 @@ class HgPlugin extends SCMPlugin {
 
 	function generateSnapshots ($params) {
 
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
 		}
-		
+
 		$group_name = $project->getUnixName() ;
 
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';

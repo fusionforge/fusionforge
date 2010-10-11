@@ -118,25 +118,27 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function getBlurb () {
-		return _('<p>Unimplemented SCM plugin.</p>');
+		return '<p>' . _('Unimplemented SCM plugin.') . '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		return _('<p>Instructions for anonymous access for unimplemented SCM plugin.</p>');
+		return '<p>' . _('Instructions for anonymous access for unimplemented SCM plugin.') . '</p>';
 	}
 
 	function getInstructionsForRW ($project) {
-		return _('<p>Instructions for read-write access for unimplemented SCM plugin.</p>');
+		return '<p>' . _('Instructions for read-write access for unimplemented SCM plugin.') . '</p>';
 	}
 
 	function getSnapshotPara ($project) {
-		return _('<p>Instructions for snapshot access for unimplemented SCM plugin.</p>');
+		return '<p>' . _('Instructions for snapshot access for unimplemented SCM plugin.') . '</p>';
 	}
 
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
-		$b .= _('<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>');
+		$b .= '<p>';
+		$b .= _('Browsing the SCM tree is not yet implemented for this SCM plugin.');
+		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/?group_id=".$project->getID(),
 				      _('Not implemented yet')
@@ -148,14 +150,18 @@ abstract class SCMPlugin extends Plugin {
 	function getBrowserBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Browser'));
-		$b .= _('<p>Browsing the SCM tree is not yet implemented for this SCM plugin.</p>');
+		$b .= '<p>';
+		$b .= _('Browsing the SCM tree is not yet implemented for this SCM plugin.');
+		$b .= '</p>';
 		return $b ;
 	}
 
 	function getStatsBlock ($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Repository Statistics'));
-		$b .= _('<p>Not implemented for this SCM plugin yet.</p>') ;
+		$b .= '<p>';
+		$b .= _('Not implemented for this SCM plugin yet.') ;
+		$b .= '</p>';
 		return $b ;
 	}
 
