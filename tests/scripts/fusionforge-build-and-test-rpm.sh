@@ -8,6 +8,14 @@ export SELENIUM_RC_HOST=192.168.0.204
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 if [ "x${HUDSON_URL}" = "x" ]
 then
+	. tests/openvz/config.default
+	if [ -f tests/openvz/config.`hostname` ] ; then . tests/openvz/config.`hostname`; fi
+	export VEID=$VEIDCEN
+	export IPBASE=$IPCENTOSBASE
+	export IPDNS=$IPCENTOSDNS
+	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
+	export VZTEMPLATE=centos-$CENTVERS-$ARCH-minimal
+	export VZPRIVATEDIR
 	export SELENIUM_RC_URL=http://`hostname -f`/ws/reports
 	export FFORGE_RPM_REPO=http://`hostname -f`/ws/build/packages
 	export HOST=centos5.local
