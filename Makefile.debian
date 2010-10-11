@@ -260,8 +260,8 @@ cowbuildtest:
 
 cowbuilddeb: # ***** This is the one to cowbuild debian packages ***** #
 	@for dist in $(DEBIANLIST); do \
-	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)' HOOK='$(DEBHOOK)'" ; \
-	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" HOOK='$(DEBHOOK)' ; \
+	echo "$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP='$(DEBIANOP)' HOOK='$(DEBHOOK)' LOCALREPO=$(LOCALREPODEB)" ; \
+	$(MAKE) -f Makefile.debian cowbuilddist XDISTRIB=$$dist DISTROOP="$(DEBIANOP)" HOOK='$(DEBHOOK)' LOCALREPO=$(LOCALREPODEB) ; \
 	done
 
 cowbuildubu: # ***** This is the one to cowbuild ubuntu packages ***** #
@@ -287,7 +287,9 @@ cowbuilddist: cowbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(CHANGEFILE)
 pbuilddist: pbuilderenv $(BUILDFILES) $(BUILDRESULT)/$(PCHANGEFILE)
 
 $(BUILDRESULT)/$(CHANGEFILE): $(BUILDFILES)/$(DSCFILE)
-	$(COWBUILDERCMD)
+	@if [ -f $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE) ]; \
+	then echo "$@ already installed" ; \
+	else $(COWBUILDERCMD); fi
 
 $(BUILDRESULT)/$(PCHANGEFILE): $(BUILDFILES)/$(PDSCFILE)
 	$(PBUILDERCMD)
@@ -379,8 +381,12 @@ localrepo: $(LOCALREPO) $(LOCALREPO)/conf $(LOCALREPO)/conf/distributions
 reprepro: $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE) # Install in repository
 
 $(LOCALREPO)/pool/main/$(PKGLETTER)/$(PKGNAME)/$(DSCFILE): $(BUILDRESULT)/$(CHANGEFILE)
-	@echo "Installing $(BUILDRESULT)/$(CHANGEFILE) in $@"
-	cd $(BUILDRESULT); reprepro $(ASKPASS) -Vb $(LOCALREPO) include $(DISTRIB) $(CHANGEFILE)
+	@if [ ! -f $@ ] ; then \
+	echo "Installing $(BUILDRESULT)/$(CHANGEFILE) in $@"; \
+	cd $(BUILDRESULT); reprepro $(ASKPASS) -Vb $(LOCALREPO) include $(DISTRIB) $(CHANGEFILE); \
+	else \
+	echo "$@ already installed" ; \
+	fi
 
 $(LOCALREPO)/conf/distributions:
 	for xdist in $(DISTRIBLIST) ; do \
