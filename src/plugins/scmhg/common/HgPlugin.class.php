@@ -48,7 +48,7 @@ class HgPlugin extends SCMPlugin {
 		$b .=  _('Anonymous Mercurial Access');
 		$b .= '</h2>' ;
 		$b .= '<p>' ;
-		$b .= 'This project\'s Mercurial repository can be checked out through anonymous access with the following command.');
+		$b .= 'This project\'s Mercurial repository can be checked out through anonymous access with the following command.';
 		$b .= '</p>' ;
 		$b .= '<p>' ;
 		$b .= '<tt>hg clone '.util_make_url ('/anonscm/hg/'.$project->getUnixName().'/').'</tt><br />';
