@@ -5,7 +5,6 @@ if sudo /root/start_vz.sh centos-5-x86 "$1"
 then
 	echo "VM Started"
 else
-#	sudo /usr/sbin/vzctl create $VEIDCEN --private $VZPRIVATEDIR/$VEIDCEN --ostemplate centos-$CENTVERS-$ARCH-minimal
 	sudo /usr/sbin/vzctl create $VEID --private $VZPRIVATEDIR/$VEID --ostemplate $VZTEMPLATE
 	sudo /usr/sbin/vzctl start $VEID
 	VZHOST=$IPBASE.$VEID
