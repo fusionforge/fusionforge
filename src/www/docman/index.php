@@ -71,8 +71,6 @@ if ($dgf->isError())
 	exit_error($dgf->getErrorMessage(),'docman');
 
 $nested_groups = $dgf->getNested();
-if ($dgf->isError())
-    exit_error($dgf->getErrorMessage(),'docman');
 
 $dgh = new DocumentGroupHTML($g);
 if ($dgh->isError())

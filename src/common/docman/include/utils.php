@@ -57,6 +57,9 @@ function doc_get_state_box($checkedval='xzxz') {
 
 }
 
+/*
+ * docman_recursive_display - Recursive function to show the documents inside the groups tree : javascript enabled function
+ */
 function docman_recursive_display($docgroup) {
 	global $nested_groups,$group_id;
 	global $idExposeTreeIndex,$dirid,$idhtml;
@@ -77,6 +80,32 @@ function docman_recursive_display($docgroup) {
     }
 }
 
+/*
+ * docman_fill_zip - Recursive function to add docgroup and documents inside zip for backup
+ *
+ * @param	$object		zip
+ * @param	$array		nested groups
+ * @param	$object		documentfactory
+ * @param	$integer	documentgroup id : default value = 0
+ * @param	$string		documentgroup parent name : default value = empty
+ */
+function docman_fill_zip($zip,$nested_groups,$document_factory,$docgroup = 0,$parent_docname = '') {
+	if (is_array(@$nested_groups[$docgroup])) {
+		foreach ($nested_groups[$docgroup] as $dg) {
+			$zip->addEmptyDir($parent_docname.'/'.$dg->getName());
+			$document_factory->setDocGroupID($dg->getID());
+			$docs = $document_factory->getDocuments();
+			if (is_array($docs) && count($docs) > 0) {      // this group has documents
+				foreach ($docs as $doc) {
+					$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData());
+				}
+			}
+			docman_fill_zip($zip,$nested_groups,$document_factory,$dg->getID(),$parent_docname.'/'.$dg->getName());
+		}
+	}
+	return true;
+}
+
 function docman_recursive_stateid($docgroup,$nested_groups,$nested_docs,$stateid=2) {
     if (is_array(@$nested_groups[$docgroup])) {
         foreach ($nested_groups[$docgroup] as $dg) {
@@ -91,7 +120,7 @@ function docman_recursive_stateid($docgroup,$nested_groups,$nested_docs,$stateid
 }
 
 /**
- * docman_display_documents - Recursive function to show the documents inside the groups tree
+ * docman_display_trash - function to show the documents inside the groups tree with specific status : 2 = deleted
  */
 function docman_display_trash(&$document_factory,$parent_group=0) {
 	$nested_groups =& $document_factory->getNested(2);
@@ -104,6 +133,9 @@ function docman_display_trash(&$document_factory,$parent_group=0) {
 	echo "</ul>";
 }
 
+/*
+ * docman_display_documents - Recursive function to show the documents inside the groups tree
+ */
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $parent_group=0) {
 	if (!array_key_exists("$parent_group",$nested_groups) || !is_array($nested_groups["$parent_group"])) {
 		return;
@@ -131,7 +163,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		}
 
 		// Display this group's documents
-		// Retrieve all the docs from this category			
+		// Retrieve all the docs from this category
 		if ($stateid) {
 			$document_factory->setStateID($stateid);
 		}

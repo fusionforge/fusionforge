@@ -28,6 +28,9 @@ $no_gz_buffer=true;
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'docman/Document.class.php';
+require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
+require_once $gfcommon.'docman/include/utils.php';
 
 session_require_perm ('project_read', $group_id) ;
 
@@ -76,7 +79,49 @@ if ($docid != 'backup' ) {
 	echo $d->getFileData();
 
 } else if ( $docid == 'backup' ) {
-    exit_error(_('Not implemented yet'),'docman');
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g)) {
+		exit_no_group();
+	} elseif ($g->isError()) {
+		exit_error($g->getErrorMessage(),'docman');
+	}
+
+	$df = new DocumentFactory($g);
+	if ($df->isError())
+		    exit_error($df->getErrorMessage(),'docman');
+
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError())
+		    exit_error($dgf->getErrorMessage(),'docman');
+	$nested_groups = $dgf->getNested();
+
+	$d_arr =& $df->getDocuments();
+	if (!$d_arr || count($d_arr) <1)
+		    $d_arr = &$df->getDocuments();
+
+	if ( $nested_groups != NULL ) {
+		$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
+		$file = forge_get_config('data_path').'/'.$filename;
+		$zip = new ZipArchive;
+		if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE)) {
+			exit_error(_('Unable to open zip archive for backup'),'docman');
+		}
+
+		docman_fill_zip($zip,$nested_groups,$df);
+
+		if ( !$zip->close()) {
+			exit_error(_('Unable to close zip archive for backup'),'docman');
+		}
+
+		Header ('Content-disposition: filename="'.$filename.'"');
+		Header ('Content-type: application/binary');
+
+		readfile($file);
+		unlink($file);
+	} else {
+		$warning_msg = _('No documents to backup.');
+		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
+	}
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
 }

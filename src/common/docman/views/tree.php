@@ -29,19 +29,21 @@
 global $d_arr; // documents array
 
 echo '<h3>Document Tree</h3>';
-if (!$d_arr || count($d_arr) < 1) {
-	print '<div class="feedback">'._('This project has no visible documents').'</div>';
-} else {
-	// Get the document groups info
-	$nested_docs=array();
-	$idExposeTreeIndex = 0;
-	$idhtml = 0;
-	//put the doc objects into an array keyed off the docgroup
-	foreach ($d_arr as $doc) {
-		$nested_docs[$doc->getDocGroupID()][] = $doc;
+$nested_docs=array();
+$idExposeTreeIndex = 0;
+$idhtml = 0;
+if ($d_arr != NULL ) {
+	if (!$d_arr || count($d_arr) > 0) {
+		// Get the document groups info
+		//put the doc objects into an array keyed off the docgroup
+		foreach ($d_arr as $doc) {
+			$nested_docs[$doc->getDocGroupID()][] = $doc;
+		}
 	}
-	echo '<div id="documenttree" style="height:100%">';
+}
+echo '<div id="documenttree" style="height:100%">';
 ?>
+
 <script language="JavaScript"><!--
 	var myThemeXPBase = "<?php echo util_make_uri ('/jscook/ThemeXP/'); ?>";
 --></script>
@@ -69,7 +71,7 @@ if (!$d_arr || count($d_arr) < 1) {
 	var openItem = ctGetSelectedItem (treeIndex)
 	ctOpenFolder (openItem)
 --></script>
+
 <?php
-	echo '</div>';
-}
+echo '</div>';
 ?>

@@ -30,6 +30,7 @@
 global $group_id; // id of the group
 global $dirid; // id of doc_group
 global $nested_docs; // flat docs array
+global $nested_groups; // flat document directories array
 global $HTML; // Layout object
 
 $DocGroupName = getNameDocGroup($dirid,$group_id);

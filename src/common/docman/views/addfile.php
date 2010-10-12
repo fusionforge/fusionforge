@@ -31,58 +31,64 @@ global $group_id; // id of the group
 global $dirid; //id of the doc_group
 global $dgh; // document group html object
 
-/* display the add new documentation form */
-echo '<div class="docmanDivIncluded">';
-echo '<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title<br />') .'</p>';
-
-if ($g->useDocmanSearch()) 
-	echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
-
-echo '<form name="adddata" action="?group_id='.$group_id.'&action=addfile" method="post" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td style="text-align:right;">
-					<strong>'. _('Document Title').'</strong>'.utils_requiredField()
-                .'</td><td>'
-                    .'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
-                    .sprintf(_('(at least %1$s characters)'), 5)
-				.'</td>
-			</tr>
-			<tr>
-				<td style="text-align:right;">
-					<strong>'. _('Description') .'</strong>'.utils_requiredField()
-                .'</td><td>'
-                    .'&nbsp;<input type="text" name="description" size="50" maxlength="255" />&nbsp;'
-                    .sprintf(_('(at least %1$s characters)'), 10)
-				.'</td>
-			</tr>';
-echo '
-			<tr>
-				<td style="text-align:right;">
-					<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
-                .'</td><td>'
-					.'&nbsp;<input type="file" name="uploaded_data" size="30" />
-					<input type="hidden" name="type" value="httpupload">
-				</td>
-			</tr>';
-if ($dirid) {
-	echo '<input type="hidden" name="doc_group" value="'.$dirid.'">';
+if ( $dgf->getNested() == NULL ) {
+	echo '<div class="docmanDivIncluded">';
+	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</p></div>';
 } else {
+	/* display the add new documentation form */
+	echo '<div class="docmanDivIncluded">';
+	echo '<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title<br />') .'</p>';
+
+	if ($g->useDocmanSearch()) 
+		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
+
+	echo '<form name="adddata" action="?group_id='.$group_id.'&action=addfile" method="post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td style="text-align:right;">
+						<strong>'. _('Document Title').'</strong>'.utils_requiredField()
+                	.'</td><td>'
+                    	.'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
+                    	.sprintf(_('(at least %1$s characters)'), 5)
+					.'</td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">
+						<strong>'. _('Description') .'</strong>'.utils_requiredField()
+                	.'</td><td>'
+                    	.'&nbsp;<input type="text" name="description" size="50" maxlength="255" />&nbsp;'
+                    	.sprintf(_('(at least %1$s characters)'), 10)
+					.'</td>
+				</tr>';
 	echo '
-			<tr>
-				<td>
-					<strong>'. _('Directory that document belongs in').'</strong>
-                </td><td>';
-	$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
-	echo '
-				</td>
-			</tr>';
+				<tr>
+					<td style="text-align:right;">
+						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
+                	.'</td><td>'
+						.'&nbsp;<input type="file" name="uploaded_data" size="30" />
+						<input type="hidden" name="type" value="httpupload">
+					</td>
+				</tr>';
+	if ($dirid) {
+		echo '<input type="hidden" name="doc_group" value="'.$dirid.'">';
+	} else {
+		echo '
+				<tr>
+					<td>
+						<strong>'. _('Directory that document belongs in').'</strong>
+                	</td><td>';
+		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
+		echo '
+					</td>
+				</tr>';
+	}
+	echo '  </table>';
+	echo utils_requiredField() . ' '. _('Mandatory field');
+	echo '  <div class="docmanSubmitDiv">
+		    	<input type="submit" name="submit" value="'. _('Submit Information').' " />
+        	</div>
+		</form>';
 }
-echo '  </table>';
-echo utils_requiredField() . ' '. _('Mandatory field');
-echo '  <div class="docmanSubmitDiv">
-		    <input type="submit" name="submit" value="'. _('Submit Information').' " />
-        </div>
-	</form>';
+
 echo '</div>';
 ?>
