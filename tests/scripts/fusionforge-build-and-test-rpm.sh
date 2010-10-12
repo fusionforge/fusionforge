@@ -24,6 +24,7 @@ else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
 	export HOST=centos52.local
+	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=gforge
 export CONFIGURED=true

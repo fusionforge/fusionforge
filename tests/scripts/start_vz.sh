@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VZHOST=$1
-if sudo /root/start_vz.sh centos-5-x86 "$1"
+if sudo /root/start_vz.sh $VZTEMPLATE "$1"
 then
 	echo "VM Started"
 else
