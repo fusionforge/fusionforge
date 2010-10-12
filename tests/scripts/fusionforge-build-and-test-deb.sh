@@ -16,8 +16,9 @@ then
 	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 	export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
 	export VZPRIVATEDIR
+	export DIST
 	export SELENIUM_RC_URL=http://`hostname -f`/ws/reports
-	export FFORGE_RPM_REPO=http://`hostname -f`/ws/build/packages
+	export FFORGE_DEB_REPO=http://`hostname -f`/ws/build/debian
 	export HOST=debian6.local
 	export SELENIUM_RC_HOST=localhost
 else
