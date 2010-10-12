@@ -645,7 +645,6 @@ fi
 %{GFORGE_DIR}/www/export
 %{GFORGE_DIR}/www/forum
 %{GFORGE_DIR}/www/frs
-%{GFORGE_DIR}/www/help
 %{GFORGE_DIR}/www/images
 %{GFORGE_DIR}/www/include
 %{GFORGE_DIR}/www/jscook
