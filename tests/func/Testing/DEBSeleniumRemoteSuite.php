@@ -22,7 +22,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		sleep(5);
 		
 		system("ssh root@".HOST." 'apt-get update'");
-		system("ssh root@".HOST." 'UCF_FORCE_CONFFNEW=yes apt-get install fusionforge-full'");
+		system("ssh root@".HOST." 'UCF_FORCE_CONFFNEW=yes LANG=C apt-get -y --force-yes install fusionforge-minimal'");
 	}
 }
 ?>
