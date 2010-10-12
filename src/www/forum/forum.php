@@ -87,7 +87,7 @@ if ($forum_id) {
 			exit_error(_('Error getting new ForumMessage'),'forums');
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error getting new ForumMessage: '.$fm->getErrorMessage()),'forums');
+			exit_error(_('Error getting new ForumMessage:'.' '.$fm->getErrorMessage()),'forums');
 		}
 
 		$sanitizer = new TextSanitizer();
@@ -102,7 +102,7 @@ if ($forum_id) {
 
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error creating ForumMessage: ').$fm->getErrorMessage(),'forums');
+			exit_error(_('Error creating ForumMessage:').' '.$fm->getErrorMessage(),'forums');
 		} else {
 			if ($fm->isPending() ) {
 				$feedback=_('Message Queued for moderation -> Please wait until the admin approves/rejects it');
