@@ -15,13 +15,14 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 ///		system("scp -rp ".dirname(__FILE__)."/../../../src/rpm-specific/dag-rpmforge.repo root@".HOST.":/etc/yum.repos.d/");
 
 //		system("scp -rp ".dirname(__FILE__)."/../../../src/rpm-specific/fusionforge-ci.repo root@".HOST.":/etc/yum.repos.d/");
-///		if (getenv('FFORGE_RPM_REPO')) {
-///			system("ssh root@".HOST." 'cd /etc/yum.repos.d/; wget ".getenv('FFORGE_RPM_REPO')."/fusionforge.repo'");
-///		}
+		if (getenv('FFORGE_DEB_REPO')) {
+			system("ssh root@".HOST." 'echo \"deb ".getenv('FFORGE_DEB_REPO')." ".getenv('DIST')." main\" > /etc/apt/sources.list.d/fusionforge.list'");
+		}
 
 		sleep(5);
 		
-///		system("ssh root@".HOST." 'yum install -y fusionforge fusionforge-scmsvn fusionforge-online_help fusionforge-extratabs fusionforge-ldapextauth fusionforge-scmgit fusionforge-blocks'");
+		system("ssh root@".HOST." 'apt-get update'");
+		system("ssh root@".HOST." 'UCF_FORCE_CONFFNEW=yes apt-get install fusionforge-full'");
 	}
 }
 ?>
