@@ -33,7 +33,7 @@ mkdir -p $WORKSPACE/build/packages
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 mkdir -p $WORKSPACE/reports/coverage
 
-make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages rsqueeze
+make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze
 
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
