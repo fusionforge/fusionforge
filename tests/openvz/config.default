@@ -21,3 +21,5 @@ VZPRIVATEDIR=/var/lib/vz/private
 VZTEMPLATEDIR=/var/lib/vz/template
 
 USERCLIENT=root
+
+DIST=squeeze

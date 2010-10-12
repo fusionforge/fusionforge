@@ -6,7 +6,6 @@ RINSEPOSTINST=--after-post-install $(CURDIR)/local.rinse.api
 VEIDDEBTEMP=100
 VEIDCENTEMP=101
 ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
-DIST=squeeze
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh
 EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
 VZCTL=/usr/sbin/vzctl

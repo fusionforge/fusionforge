@@ -21,3 +21,5 @@ VZPRIVATEDIR=/data/openvz/private
 VZTEMPLATEDIR=/var/lib/vz/template
 
 USERCLIENT=chris
+
+DIST=squeeze
