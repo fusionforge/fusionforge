@@ -5,6 +5,7 @@ export SELENIUM_RC_HOST=192.168.0.204
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 export HOST=centos52.local
+export VZTEMPLATE=centos-5-x86
 export DB_NAME=fforge
 export CONFIGURED=true
 
