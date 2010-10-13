@@ -458,3 +458,6 @@ gnupgkey:
 	echo '%commit' >> $(BOTKEY)
 	echo '%echo done' >> $(BOTKEY)
 	[ -d ~/.gnupg ] || gpg --batch --gen-key $(BOTKEY)
+
+wslink:
+	rm -f /var/www/ws; ln -s `pwd` /var/www/ws
