@@ -761,7 +761,6 @@ src/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/oc
 src/docs/docbook/docbook/user_guide/project_functions/activity.xml -text
 src/docs/docbook/docbook/user_guide/project_functions/blocks.xml -text
 src/docs/fusionforge.doxygen -text
-src/docs/images/sflogo2-105a.png -text svneol=unset#image/png
 src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
 src/etc/config.ini-usrlocal -text
