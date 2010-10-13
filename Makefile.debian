@@ -460,4 +460,4 @@ gnupgkey:
 	[ -d ~/.gnupg ] || gpg --batch --gen-key $(BOTKEY)
 
 wslink:
-	rm -f /var/www/ws; ln -s `pwd` /var/www/ws
+	rm -f /var/www/ws; ln -s $(CURDIR) /var/www/ws
