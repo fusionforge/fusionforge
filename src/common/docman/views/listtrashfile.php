@@ -49,7 +49,7 @@ function displayTrashDiv() {
 <?php
 	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
 	echo '<ul>';
-	echo '<li>'. _('Delete permanently all documents and document groups with deleted status ') .' <input id="submitemptytrash" type="button" value="Yes" onclick="javascript:doIt(\'emptytrash\')" ></li>';
+	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents and document groups with deleted status ') .'" onclick="javascript:doIt(\'emptytrash\')" ></li>';
 	echo '</ul>';
 	echo '</form>';
 	echo '<ul>';
