@@ -41,6 +41,11 @@ DEBMIRROR=http://ftp.fr.debian.org/debian
 else
 DEBMIRROR=$(shell echo $$DEBMIRROR)
 endif
+ifeq (,$(shell echo "$$DEBEMAIL"))
+DEBEMAIL=buildbot@$(shell hostname -f)
+else
+DEBEMAIL=$(shell echo $$DEBEMAIL)
+endif
 #
 TARBALLS=$(CURDIR)/tarballs
 #
@@ -59,6 +64,7 @@ LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 XDISTRIB:=3sid
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
 SIGNKEY=yes
+BOTKEY=botkey
 DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
 DEBLIST=$(DEBIANLIST) $(DEBIANLISTP)
@@ -435,3 +441,21 @@ cleanorig: # Clean $(TARBALLS)/$(ORIGFILE) #
 
 control:
 	cd src/packaging/control; $(MAKE)
+
+gnupgkey:
+	echo '%echo Generating a standard key' > $(BOTKEY)
+	echo 'Key-Type: DSA' >> $(BOTKEY)
+	echo 'Key-Length: 1024' >> $(BOTKEY)
+	echo 'Subkey-Type: ELG-E' >> $(BOTKEY)
+	echo 'Subkey-Length: 1024' >> $(BOTKEY)
+	echo 'Name-Real: FusionForge Bot' >> $(BOTKEY)
+	echo 'Name-Comment: with stupid passphrase' >> $(BOTKEY)
+	echo 'Name-Email: $(DEBEMAIL)' >> $(BOTKEY)
+	echo 'Expire-Date: 0' >> $(BOTKEY)
+	echo "Passphrase: ''" >> $(BOTKEY)
+	echo '%pubring $(BOTKEY).pub' >> $(BOTKEY)
+	echo '%secring $(BOTKEY).sec' >> $(BOTKEY)
+	echo '# Do a commit here, so that we can later print "done" :-)' >> $(BOTKEY)
+	echo '%commit' >> $(BOTKEY)
+	echo '%echo done' >> $(BOTKEY)
+	[ -d ~/.gnupg ] || gpg --batch --gen-key $(BOTKEY)
