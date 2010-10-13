@@ -57,7 +57,12 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !
 	exit_missing_param($_SERVER['HTTP_REFERER'],$missing_params,'docman');
 }
 
-$d = new Document($g, false, false,$gfcommon.'docman/engine/');
+if (empty($gfcommon)) {
+    $engine_dir = '../../common';
+} else {
+    $engine_dir = $gfcommon;
+}
+$d = new Document($g, false, false,$engine_dir.'/docman/engine/');
 if (!$d || !is_object($d)) {		
     $return_msg= _('Error getting blank document.');
     session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
