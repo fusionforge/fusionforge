@@ -21,6 +21,7 @@ then
 	export FFORGE_DEB_REPO=http://`hostname -f`/ws/build/debian
 	export HOST=debian6.local
 	export SELENIUM_RC_HOST=localhost
+	export USEVZCTL=true
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
