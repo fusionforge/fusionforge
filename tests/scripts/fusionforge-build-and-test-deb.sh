@@ -32,7 +32,7 @@ export CONFIGURED=true
 
 [ ! -d $WORKSPACE/build/packages ] || rm -fr $WORKSPACE/build/packages
 mkdir -p $WORKSPACE/build/packages
-[ ! -d $WORKSPACE/build/debian ] || mkdir $WORKSPACE/build/debian
+[ -d $WORKSPACE/build/debian ] || mkdir $WORKSPACE/build/debian
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 mkdir -p $WORKSPACE/reports/coverage
 
