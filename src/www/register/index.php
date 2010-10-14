@@ -211,19 +211,19 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 if ($sys_use_private_project) {
 	$index++;
 	echo '<h3>'.$index.'. '._('Visibility'). '</h3>';
-	echo "<p><input type=\"radio\" name=\"is_public\" value=\"1\" ";
+	echo '<p><input type="radio" name="is_public" value="1" ';
 	if (!isset($is_public) || $is_public) {
-		echo 'checked ';
+		echo 'checked="checked" ';
 	}
-	echo "/>". _('Public')."</p>";
+	echo '/>'. _('Public').'</p>';
 
-	echo "<p><input type=\"radio\" name=\"is_public\" value=\"0\" ";
+	echo '<p><input type="radio" name="is_public" value="0" ';
 	if (isset ($is_public) && !$is_public) {
-		echo 'checked ';
+		echo 'checked="checked"';
 	}
-	echo "/>". _('Private')."</p>";
+	echo '/>'. _('Private').'</p> ';
 } else {
-	echo "<input type=\"hidden\" name=\"is_public\" value=\"1\" />";
+	echo '<input type="hidden" name="is_public" value="1" />';
 }
 ?>
 
