@@ -63,7 +63,7 @@ LOCALREPOUBU=/var/www/ubuntu-fusionforge-$(BRANCH)
 #
 XDISTRIB:=3sid
 DISTRIB=$(shell echo $(XDISTRIB) | cut -c2-)
-SIGNKEY=yes
+SIGNKEY=$(DEBEMAIL)
 BOTKEY=botkey
 DEBIANLIST=1lenny 2squeeze 3sid
 DEBIANLISTP=1etch
