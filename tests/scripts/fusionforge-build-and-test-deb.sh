@@ -25,7 +25,7 @@ then
 else
 	. tests/openvz/config.default
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
-	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
+	export FFORGE_DEB_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/debian
 	export HOST=debian6.local
 	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 	export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
