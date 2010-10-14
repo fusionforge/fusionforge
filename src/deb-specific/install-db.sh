@@ -87,9 +87,9 @@ case "$target" in
 	;;
     configure-files)
 	# Tell PostgreSQL to let us use the database
-	db_passwd=$(grep ^db_password= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
-	db_name=$(grep ^db_name= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
-	db_user=$(grep ^db_user= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+	db_passwd=$(/usr/share/gforge/bin/forge_get_config database_password)
+	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
+	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
 	pattern=$(basename $0).XXXXXX
 
         # PostgreSQL configuration for versions from 7.3 on
@@ -122,9 +122,9 @@ case "$target" in
 	;;
     configure)
 	# Create the appropriate database user
-	db_passwd=$(grep ^db_password= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
-	db_name=$(grep ^db_name= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
-	db_user=$(grep ^db_user= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+	db_passwd=$(/usr/share/gforge/bin/forge_get_config database_password)
+	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
+	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
@@ -260,8 +260,8 @@ EOF
 	perl -pi -e "BEGIN { undef \$/; } s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\n//ms;" ${pg_hba_dir}/pg_hba.conf.gforge-new
 	;;
     purge)
-	db_name=$(grep ^db_name= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
-	db_user=$(grep ^db_user= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
+	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser $db_user" > /dev/null 2>&1 || true
 	;;
@@ -269,13 +269,7 @@ EOF
     # only only for migrating users of the sourceforge package
     #
     dump)
-	if [ -e /etc/sourceforge/local.pl ] ; then
-	    db_name=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbname\n";')
-	elif [ -e /etc/fusionforge/fusionforge.conf ] ; then
-	    db_name=$(grep ^db_name= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
-	else
-	    db_name=sourceforge
-	fi
+	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	if [ "x$2" != "x" ] ;then
 		DUMPFILE=$2
 	else
@@ -294,7 +288,7 @@ EOF
     #
     restore)
 	pg_name=postgresql-$pg_version
-	db_name=$(grep ^db_name= /etc/fusionforge/fusionforge.conf | cut -d= -f2-)
+	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
 	localtrust="local all all trust"
