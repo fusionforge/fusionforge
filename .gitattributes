@@ -4560,6 +4560,7 @@ tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/config.christian -text
 tests/openvz/config.default -text
+tests/openvz/config.g-virtual05 -text
 tests/openvz/interfaces.sample -text
 tests/openvz/local.christian -text
 tests/openvz/local.christian.rinse.bpi -text
