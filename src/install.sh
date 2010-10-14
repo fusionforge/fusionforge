@@ -8,7 +8,6 @@
 # Configuration is stored in /etc/gforge
 #
 # Currently supported:
-# * Red Hat 4 / CentOS 4
 # * Red Hat 5 / CentOS 5
 # * OpenSuSE 11 (contributed by Martin Bernreuther)
 #
