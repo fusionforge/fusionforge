@@ -152,11 +152,6 @@ require_once $gfcommon.'include/Error.class.php';
 // Database abstraction
 require_once $gfcommon.'include/database-pgsql.php';
 
-if (!$GLOBALS['gfconn']) {
-	print forge_get_config ('forge_name')." Could Not Connect to Database: ".db_error();
-	exit;
-}
-
 // Authentication and access control
 require_once $gfcommon.'include/session.php';
 require_once $gfcommon.'include/RBACEngine.class.php';
