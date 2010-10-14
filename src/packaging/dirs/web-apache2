@@ -10,3 +10,4 @@ var/lib/@OLDPACKAGE@/scmsnapshots
 var/lib/@OLDPACKAGE@/download
 var/lib/@OLDPACKAGE@/etc
 var/cache/@OLDPACKAGE@
+var/log/@OLDPACKAGE@
