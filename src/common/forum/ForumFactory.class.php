@@ -148,6 +148,94 @@ ORDER BY group_forum_id',
 		}
 		return $this->forums;
 	}
+
+	/**
+	 *	moveThread - move thread in another forum
+	 *	
+	 *	@param	string	The forum ID
+	 *	@param	int		The thread_id of the tread to change.
+	 *	@param	string	The old forum ID
+	 * 
+	 * 	Note:
+	 *   old forum ID is useless if forum_agg_msg_count table is no longer used
+	 *
+	 *	@return boolean success.
+	 */
+	function moveThread($group_forum_id,$thread_id,$old_forum_id = false) {
+		$sql = "UPDATE forum
+				SET group_forum_id='$group_forum_id'
+				WHERE thread_id='$thread_id'";
+		$res = db_query($sql);
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		} else {
+			$msg_count = db_affected_rows($res);
+			if ($msg_count < 1) {
+				$this->setError("Thread not found");
+				return false;
+			}
+		}
+
+		if ($old_forum_id !== false)
+		{
+			// Update forum_agg_msg_count table
+			// Note: if error(s) are raised it's certainly because forum_agg_msg_count
+			//		is no longer used and updated. So, error(s) are not catched
+			// Update row of old forum id
+			$sql = "SELECT count
+				FROM forum_agg_msg_count
+				WHERE group_forum_id='$old_forum_id'";
+			$res = db_query($sql);
+			if ($res && db_numrows($res)) {
+				// Update row
+				$count = db_result($res, 0, 'count');
+				$count -= $msg_count;
+				if ($count < 0) $count = 0;
+				$sql = "UPDATE forum_agg_msg_count
+					SET count='$count'
+					WHERE group_forum_id='$old_forum_id'";
+				$res = db_query($sql);
+			}
+			else {
+				// Error because row doesn't exist... insert it
+				$sql = "SELECT COUNT(*) AS count
+					FROM forum
+					WHERE group_forum_id='$old_forum_id'";
+				$res = db_query($sql);
+				if ($res && db_numrows($res)) {
+					$count = db_result($res, 0, 'count');
+					$sql = "INSERT INTO forum_agg_msg_count (group_forum_id, count)
+						VALUES ('$old_forum_id', '$count')";
+					$res = db_query($sql);
+				}
+			}
+
+			// Update row of new forum id
+			$sql = "SELECT count
+				FROM forum_agg_msg_count
+				WHERE group_forum_id='$group_forum_id'";
+			$res = db_query($sql);
+			if ($res && db_numrows($res)) {
+				// Update row
+				$count = db_result($res, 0, 'count');
+				$count += $msg_count;
+				$sql = "UPDATE forum_agg_msg_count
+					SET count='$count'
+					WHERE group_forum_id='$group_forum_id'";
+				$res = db_query($sql);
+			}
+			else {
+				// Insert row
+				$sql = "INSERT INTO forum_agg_msg_count (group_forum_id, count)
+					VALUES ('$group_forum_id', '$msg_count')";
+				$res = db_query($sql);
+			}
+		}
+
+		return true;
+	}
+
 }
 
 // Local Variables:
