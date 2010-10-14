@@ -54,6 +54,9 @@ builddebiantemplate: beroot builddebianvm
 	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/localtime
 	# Remove hostname
 	[ ! -f $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
+	grep -q debian6.local $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hosts || \
+		sed -i -e 's/localhost/debian6.local localhost/' $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hosts
+	echo "debian6.local" > $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP) /bin/mknod /dev/ptmx c 5 2
 	mkdir $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
@@ -200,7 +203,7 @@ addbridge:
 
 createdeb: beroot cleandeb
 	$(VZCTL) create $(VEIDDEB) --private $(VZPRIVATEDIR)/$(VEIDDEB) --ostemplate debian-$(DEBVERS)-$(ARCH)-minimal
-	make finalizedeb
+	#make finalizedeb
 	
 createcentos: beroot cleancentos
 	$(VZCTL) create $(VEIDCEN) --private $(VZPRIVATEDIR)/$(VEIDCEN) --ostemplate centos-$(CENTVERS)-$(ARCH)-minimal
