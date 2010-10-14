@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh -ex
 
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
@@ -35,6 +35,8 @@ export CONFIGURED=true
 
 [ ! -d $WORKSPACE/build/packages ] || rm -fr $WORKSPACE/build/packages
 mkdir -p $WORKSPACE/build/packages
+# Comment out the next line when you don't want to rebuild all the time
+[ ! -d $WORKSPACE/build/debian ] || rm -fr $WORKSPACE/build/debian
 [ -d $WORKSPACE/build/debian ] || mkdir $WORKSPACE/build/debian
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 mkdir -p $WORKSPACE/reports/coverage
