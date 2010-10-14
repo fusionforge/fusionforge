@@ -87,6 +87,7 @@ case "$target" in
 	;;
     configure-files)
 	# Tell PostgreSQL to let us use the database
+	export FUSIONFORGE_NO_PLUGINS=true
 	db_passwd=$(/usr/share/gforge/bin/forge_get_config database_password)
 	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
@@ -122,6 +123,7 @@ case "$target" in
 	;;
     configure)
 	# Create the appropriate database user
+	export FUSIONFORGE_NO_PLUGINS=true
 	db_passwd=$(/usr/share/gforge/bin/forge_get_config database_password)
 	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
@@ -260,6 +262,7 @@ EOF
 	perl -pi -e "BEGIN { undef \$/; } s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\n//ms;" ${pg_hba_dir}/pg_hba.conf.gforge-new
 	;;
     purge)
+	export FUSIONFORGE_NO_PLUGINS=true
 	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
 	su -s /bin/sh postgres -c "dropdb $db_name" > /dev/null 2>&1 || true
@@ -269,6 +272,7 @@ EOF
     # only only for migrating users of the sourceforge package
     #
     dump)
+	export FUSIONFORGE_NO_PLUGINS=true
 	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	if [ "x$2" != "x" ] ;then
 		DUMPFILE=$2
@@ -288,6 +292,7 @@ EOF
     #
     restore)
 	pg_name=postgresql-$pg_version
+	export FUSIONFORGE_NO_PLUGINS=true
 	db_name=$(/usr/share/gforge/bin/forge_get_config database_name)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)

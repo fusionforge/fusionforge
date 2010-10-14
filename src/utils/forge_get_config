@@ -24,7 +24,6 @@
  */
         
 require (dirname(__FILE__).'/../common/include/env.inc.php');
-$fusionforge_no_plugins = true ;
 require_once $gfcommon.'include/pre.php';
 
 if (count ($argv) == 3) {

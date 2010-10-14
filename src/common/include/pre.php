@@ -180,8 +180,7 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
-if (!isset ($fusionforge_no_plugins)
-    || $fusionforge_no_plugins) {
+if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true') {
 	setup_plugin_manager () ;
 }
 
