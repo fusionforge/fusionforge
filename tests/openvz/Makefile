@@ -11,6 +11,7 @@ EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
 VZCTL=/usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
 RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
+SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
 
 # Default config
 include config.default
@@ -60,8 +61,8 @@ builddebiantemplate: beroot builddebianvm
 	##echo "debian6.local" > $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP) /bin/mknod /dev/ptmx c 5 2
-	mkdir $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
-	cp ~$(USERCLIENT)/.ssh/id_rsa.pub $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh/authorized_keys
+	mkdir -p $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
+	cp $(SSHPUBKEY) $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh/authorized_keys
 	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/ssh/
 	cd $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
 
@@ -100,7 +101,7 @@ buildcentostemplate: beroot buildcentosvm
 	grep -q devpts $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab || \
 		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
 	mkdir $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh
-	cp ~$(USERCLIENT)/.ssh/id_rsa.pub $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh/authorized_keys
+	cp $(SSHPUBKEY) $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh/authorized_keys
 	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/ssh/
 	cd $(VZPRIVATEDIR)/$(VEIDCENTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
 
