@@ -54,9 +54,10 @@ builddebiantemplate: beroot builddebianvm
 	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/localtime
 	# Remove hostname
 	[ ! -f $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
-	grep -q debian6.local $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hosts || \
-		sed -i -e 's/localhost/debian6.local localhost/' $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hosts
-	echo "debian6.local" > $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
+	## NOW uses vzctl set $(VEIDDEBTEMP) --hostname command
+	##grep -q debian6.local $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hosts || \
+	##	sed -i -e 's/localhost/debian6.local localhost/' $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hosts
+	##echo "debian6.local" > $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP) /bin/mknod /dev/ptmx c 5 2
 	mkdir $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
@@ -79,10 +80,10 @@ buildcentostemplate: beroot buildcentosvm
 	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/localtime
 	# Remove hostname
 	[ ! -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
-	# Didn't find a better way to make so hostname -f replies something proper
-	echo "127.0.0.1 centos5.local localhost.localdomain localhost" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hosts
-	echo "centos5.local" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
-	echo "HOSTNAME=centos5.local" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/sysconfig/network
+	## NOW uses vzctl set $(VEIDCENTEMP) --hostname command
+	##echo "127.0.0.1 centos5.local localhost.localdomain localhost" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hosts
+	##echo "centos5.local" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
+	##echo "HOSTNAME=centos5.local" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/sysconfig/network
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/ptmx ]     || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/ptmx c 5 2
 	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/pts ]      || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mkdir /dev/pts
