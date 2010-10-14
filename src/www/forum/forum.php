@@ -90,8 +90,11 @@ if ($forum_id) {
 			exit_error(_('Error getting new ForumMessage:'.' '.$fm->getErrorMessage()),'forums');
 		}
 
-		$sanitizer = new TextSanitizer();
-		$body = $sanitizer->SanitizeHtml($body);
+		if (getStringFromRequest('_body_content_type') == 'html') {
+			$body = TextSanitizer::purify($body);
+		} else {
+			$body = htmlspecialchars($body);
+		}
 
 		$attach = getUploadedFile("attachment1");
 		if ($attach['size']) {
