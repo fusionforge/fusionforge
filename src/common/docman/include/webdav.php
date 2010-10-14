@@ -3,9 +3,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2000, Quentin Cregan/Sourceforge
- * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -24,10 +22,19 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-echo '<div class="docmanDivIncluded">';
-if ($g->useWebdav()) {
-	echo '<p>'. _('Documents parsing is also available thru webdav').'</p>';
-	echo '<p>' . util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')) . '</p>';
+/* webdav extended class based on pear package */
+/* http://pear.php.net/package/HTTP_WebDAV_Server/ */
+
+require_once "HTTP/WebDAV/Server.php";
+
+class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
+
+	function GET(&$options) {
+		echo "<html><head><title>Index of ".htmlspecialchars($options['path'])."</title></head>\n";
+		echo "<h1>Index of ".htmlspecialchars($options['path'])."</h1>\n";
+		echo "</html>\n";
+		exit;
+	}
+
 }
-echo '</div>';
 ?>

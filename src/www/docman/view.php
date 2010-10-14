@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -31,6 +31,7 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
+require_once $gfcommon.'docman/include/webdav.php';
 
 session_require_perm ('project_read', $group_id) ;
 
@@ -38,7 +39,7 @@ $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
 
-if ($docid != 'backup' ) {
+if ($docid != 'backup' && $docid != 'webdav' ) {
 	$docname=urldecode($arr[5]);
 
 	$g =& group_get_object($group_id);
@@ -122,6 +123,12 @@ if ($docid != 'backup' ) {
 		$warning_msg = _('No documents to backup.');
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
+} else if ( $docid == 'webdav' ) {
+	$_SERVER['REQUEST_URI'] = '';
+	$_SERVER['SCRIPT_NAME'] = '';
+	$server = new HTTP_WebDAV_Server_Docman;
+	$server->ServeRequest();
+	exit;
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
 }

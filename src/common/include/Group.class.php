@@ -1173,7 +1173,7 @@ class Group extends Error {
 		}
 	}
 	/**
-	 *  usesDocmanSearch - whether or not this group has opted to use docman search engine.
+	 *  useDocmanSearch - whether or not this group has opted to use docman search engine.
 	 *
 	 *  @return	boolean	use_docman_search.
 	 */
@@ -1181,6 +1181,20 @@ class Group extends Error {
 
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman_search'];
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 *  useWebdav - whether or not this group has opted to use webdav interface.
+	 *
+	 *  @return	boolean	use_docman_search.
+	 */
+	function useWebdav() {
+
+		if (forge_get_config('use_webdav')) {
+			return $this->data_array['use_webdav'];
 		} else {
 			return false;
 		}
@@ -2770,6 +2784,24 @@ The %1$s admin team will now examine your project submission.  You will be notif
 			}
 		}
 		return $this->membersArr;
+	}
+
+	function setDocmanWebdav($status) {
+		db_begin();
+		/* if we activate search engine, we probably want to reindex */
+		$res = db_query_params ('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
+					array ($status,
+					       $this->getID())) ;
+	
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR - Could Not Update Group UseWebdab Status: %s'),db_error()));
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['use_webdav']=$status;
+			db_commit();
+			return true;
+		}
 	}
 
 	function setDocmanSearchStatus($status) {

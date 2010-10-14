@@ -1,11 +1,8 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2000, Quentin Cregan/Sourceforge
- * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -24,10 +21,22 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-echo '<div class="docmanDivIncluded">';
-if ($g->useWebdav()) {
-	echo '<p>'. _('Documents parsing is also available thru webdav').'</p>';
-	echo '<p>' . util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')) . '</p>';
+if ( !forge_check_perm ('docman', $group_id, 'approve')) {
+	$return_msg= _('Docman Action Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+} else {
+
+	if ($_POST['status']) {
+		$status = 1;
+		$return_msg= _('Webdav Interface updated successfully : Active');
+	} else {
+		$status = 0;
+		$return_msg= _('Webdav Interface updated successfully : Off');
+	}
+
+	if (!$g->setDocmanWebdav($status))
+	    session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($g->getErrorMessage()));
+
+	session_redirect('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg));
 }
-echo '</div>';
 ?>
