@@ -43,6 +43,14 @@ function choose_language_from_context () {
 		else just use default language as configured for the installation
 	*/
 
+	if (!isset($_SERVER['SERVER_SOFTWARE'])) {
+		// In command-line scripts
+		if (forge_get_config('default_language')) {
+			return forge_get_config('default_language') ;
+		}
+		return "English";
+	}
+
 	// Logged in -> use preferences
 	if (session_loggedin()) {
 		$user = session_get_user () ;

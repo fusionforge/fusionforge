@@ -180,7 +180,10 @@ require_once $gfcommon.'include/PluginManager.class.php' ;
 // SCM-specific plugins subsystem
 require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
-setup_plugin_manager () ;
+if (!isset ($fusionforge_no_plugins)
+    || $fusionforge_no_plugins) {
+	setup_plugin_manager () ;
+}
 
 // Jabber subsystem
 if (forge_get_config('use_jabber')) {
