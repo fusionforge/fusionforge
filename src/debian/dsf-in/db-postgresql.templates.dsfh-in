@@ -29,15 +29,6 @@ _Description: Download server:
 
 #DSFHELPER:dbpasswd-variables#
 
-Template: @PACKAGE@/shared/admin_login
-Type: string
-Default: admin
-_Description: @FORGENAME@ administrator login:
- The @FORGENAME@ administrator account will have full privileges on the
- system. It will be used to approve the creation of new projects.
- .
- Please choose the username for this account.
-
 Template: @PACKAGE@/shared/ip_address
 Type: string
 _Description: IP address:
@@ -58,16 +49,6 @@ Template: @PACKAGE@/shared/admin_password_confirm
 Type: password
 _Description: Password confirmation:
  Please re-type the password for confirmation.
-
-Template: @PACKAGE@/shared/skill_list
-Type: string
-Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-_Description: Initial list of skills:
- @FORGENAME@ allows users to define a list of their skills, to be chosen from
- those present in the database. This list is the initial list of
- skills that will enter the database.
- .
- Please enter a semicolon-separated list of skill names.
 
 #DSFHELPER:dbhost-variables#
 

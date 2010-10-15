@@ -19,9 +19,9 @@ use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
     $sys_dns1_host $sys_dns2_host $FTPINCOMING_DIR $FTPFILES_DIR
     $sys_urlroot $sf_cache_dir $sys_name $sys_themeroot
     $sys_news_group $sys_dbhost $sys_dbname $sys_dbuser $sys_dbpasswd
-    $sys_ldap_base_dn $sys_ldap_host $admin_login $admin_password
+    $sys_ldap_base_dn $sys_ldap_host $admin_password
     $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
-    $skill_list $libdir $sqldir/ ;
+    $libdir $sqldir/ ;
 
 require ("/etc/gforge/local.pl") ; 
 $libdir="/usr/share/gforge/lib";
@@ -149,7 +149,7 @@ eval {
 
 	      my ($login, $md5pwd, $email, $noreplymail, $date) ;
 
-	      $login = $admin_login ;
+	      $login = 'admin' ;
 	      $md5pwd = 'INVALID' ;
 	      $email = $server_admin ;
 	      $noreplymail="noreply\@$domain_name" ;
@@ -188,7 +188,7 @@ eval {
 	  if (&is_lesser ($version, $target)) {
 	      &debug ("Inserting skills.") ;
 
-	      foreach my $skill (split m/;/, $skill_list) {
+	      foreach my $skill (split m/;/, "Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL") {
 		  push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
 	      }
 

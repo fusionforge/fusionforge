@@ -28,8 +28,6 @@ $sys_ldap_base_dn = qx!$fgcpath/forge_get_config ldab_base_dn!;
 chomp $sys_ldap_base_dn ;
 $sys_ldap_host = qx!$fgcpath/forge_get_config ldap_host!;
 chomp $sys_ldap_host ;
-$skill_list = '{skill_list}' ;
-$admin_login = '{admin_login}' ;
 $server_admin = qx!$fgcpath/forge_get_config admin_email!;
 $peerrating_groupid = qx!$fgcpath/forge_get_config peer_rating_group!;
 chomp $peerrating_groupid ;

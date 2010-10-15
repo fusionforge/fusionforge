@@ -14,7 +14,6 @@ init_debconf_from_mainconffile
 #DSFHELPER:dbhost-variables#
 #DSFHELPER:dbpasswd-variables#
 
-db_input low @OLDPACKAGE@/shared/admin_login || true
 db_fget @OLDPACKAGE@/shared/admin_password seen || true
 if [ "$RET" = "false" ]; then
     if [ "$(get_pw @OLDPACKAGE@/shared/admin_password high)" = "not-asked" ] ; then
@@ -33,11 +32,9 @@ fi
 #DSFHELPER:downloadhost-variables#
 #DSFHELPER:groupid-variables#
 
-db_input low @OLDPACKAGE@/shared/skill_list || true
-
 db_go || true
 
-vars="admin_login admin_password skill_list"
+vars="admin_password"
 update_mainconffile $vars
 
 db_stop
