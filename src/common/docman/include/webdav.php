@@ -82,6 +82,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				exit_error(_('webdav db error:').' '.db_error(),'docman');
 			}
 			while ($arr = db_fetch_array($res)) {
+				if ( '/' != substr($subpath,-1)) {
+					$subpath .= '/';
+				}
 				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
 			}
 		}
