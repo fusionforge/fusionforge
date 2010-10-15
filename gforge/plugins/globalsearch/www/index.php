@@ -68,6 +68,9 @@ $HTML->header(array('title'=>'Search','pagename'=>'search'));
 
 echo "<p>";
 
+$gwords = htmlspecialchars(trim($gwords));
+$gwords = ereg_replace("[ \t]+", ' ', $gwords);
+
 // show search box which will return results on
 // this very page (default is to open new window)
 $gsplugin = plugin_get_object ('globalsearch') ;
@@ -76,9 +79,6 @@ echo $gsplugin->search_box ();
 /*
         Force them to enter at least three characters
 */
-
-$gwords = htmlspecialchars(trim($gwords));
-$gwords = ereg_replace("[ \t]+", ' ', $gwords);
 
 if ($gwords && (strlen($gwords) < 3)) {
         echo "<h2>"._("Search must be at least three characters")."</h2>";
