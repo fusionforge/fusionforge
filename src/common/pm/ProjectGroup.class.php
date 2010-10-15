@@ -47,7 +47,7 @@ require_once $gfcommon.'include/Error.class.php';
 				}
 				$data = db_fetch_array($res);
 			}
-			$Group =& group_get_object($data["group_id"]);
+			$Group = group_get_object($data["group_id"]);
 			$PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
 		}
 		return $PROJECTGROUP_OBJ["_".$group_project_id."_"];

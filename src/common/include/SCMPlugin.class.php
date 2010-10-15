@@ -222,7 +222,7 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function printAdminPage ($params) {
-		$group =& group_get_object($params['group_id']);
+		$group = group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
 			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
 		}
@@ -245,7 +245,7 @@ abstract class SCMPlugin extends Plugin {
 	
 	function checkParams ($params) {
 		$group_id = $params['group_id'] ;
-		$project =& group_get_object($group_id);
+		$project = group_get_object($group_id);
 		if (!$project || !is_object($project)) {
 			return false;
 		} elseif ($project->isError()) {

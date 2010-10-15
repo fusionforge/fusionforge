@@ -96,11 +96,11 @@ class Forum extends Error {
 	function Forum(&$Group, $group_forum_id=false, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Forum"));
+			$this->setError(_('Forums: No Valid Group Object'));
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError('Forum:: '.$Group->getErrorMessage());
+			$this->setError('Forums: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;

@@ -35,7 +35,7 @@ var $stillopencount;
 function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 	$this->Report();
 
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	$at = new ArtifactType($group, $atid);
 	if ($at->isError()) {
 		if ($at->isPermissionDeniedError()) {

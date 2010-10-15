@@ -308,8 +308,8 @@ class ForumMessage extends Error {
 		}
 
 		if (!$msg_id) {
-			db_rollback();
 			$this->setError(_('ForumMessage::create() Unable to get new message id'));
+			db_rollback();
 			return false;
 		}
 
@@ -817,7 +817,7 @@ Or reply to this e-mail entering your response between the following markers:
 	 */
 	function sendAttachNotice($attach_id) {
 		if ($attach_id) {
-			$ids =& $this->Forum->getMonitoringIDs();
+			$ids = $this->Forum->getMonitoringIDs();
 
 			//
 			//	See if there is anyone to send messages to
