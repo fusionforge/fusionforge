@@ -67,6 +67,7 @@ for ($i=0; $i<$rows; $i++) {
 	$listpassword = db_result($res,$i,'password');
 	$grouplistid = db_result($res,$i,'group_list_id');
 	$public = db_result($res,$i,'is_public');
+	$status = db_result($res,$i,'status');
 
 	$listname = trim($listname);
 	if (!$listname) {
@@ -78,6 +79,11 @@ for ($i=0; $i<$rows; $i++) {
 		break;
 	}
 	
+	$is_commits_list = preg_match('/-commits$/', $listname);
+
+	// Hack to Disable auto-public of listname.
+	$is_commits_list = false;
+
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
 	$privatize_cmd = escapeshellcmd(forge_get_config('mailman_path').'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
@@ -94,11 +100,30 @@ for ($i=0; $i<$rows; $i++) {
 echo $err;
 			continue;
 		} else {
-			// Privatize the new list
+			if ($is_commits_list || $public) {
+				// Make the *-commits list public
+				$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
+				passthru($publicize_cmd,$publicizeFailed);
+			} else {
+				// Privatize the new list
+				$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+				passthru($privatize_cmd,$privatizeFailed);
+			}
+		}
+		$mailingListIds[] = $grouplistid;
+	} elseif ($status == MAIL__MAILING_LIST_IS_UPDATED) {
+		// For already created list, update only if status was changed on the forge to
+		// avoid anwanted reset of parameters.
+
+		// Get the mailman info on public/private to change
+		if ($is_commits_list || $public) {
+			$err .= "Making ".$listname." public: ".$publicize_cmd."\n";
+			passthru($publicize_cmd,$publicizeFailed);
+		} elseif (!$public) {
+			// Privatize only if it is marked as private
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
 			passthru($privatize_cmd,$privatizeFailed);
 		}
-		$mailingListIds[] = $grouplistid;
 	} elseif ($status == MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
 		$change_pw_cmd = escapeshellcmd(forge_get_config ('mailman_path').'/bin/change_pw -l '.$listname);
 		$err .= "Resetting password of ".$listname."\n";
@@ -140,13 +165,10 @@ $listname.':		"|'.forge_get_config('mailman_path').'/mail/wrapper post '.$listna
 	fwrite($h1,$list_str);
 }
 
-// Update status
-//if(!empty($mailingListIds)) {
 db_query_params ('UPDATE mail_group_list set status=$1 WHERE status=$2',
 		 array (MAIL__MAILING_LIST_IS_CREATED,
 			MAIL__MAILING_LIST_IS_REQUESTED));
 echo db_error();
-//}
 
 fclose($h1);
 
