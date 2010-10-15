@@ -138,6 +138,37 @@ class Plugin extends Error {
 		$role =& $params['role'] ;
 	}
 		
+	function groupisactivecheckbox (&$params) {
+		//Check if the group is active
+		// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
+		$group = group_get_object($params['group']);
+		$flag = strtolower('use_'.$this->name);
+		echo "<tr>";
+		echo "<td>";
+		echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
+		// checked or unchecked?
+		if ( $group->usesPlugin ( $this->name ) ) {
+			echo "checked=\"checked\"";
+		}
+		echo " /><br/>";
+		echo "</td>";
+		echo "<td>";
+		echo "<strong>Use ".$this->text." Plugin</strong>";
+		echo "</td>";
+		echo "</tr>";
+	}
+
+	function groupisactivecheckboxpost (&$params) {
+		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+		$group = group_get_object($params['group']);
+		$flag = strtolower('use_'.$this->name);
+		if ( getStringFromRequest($flag) == 1 ) {
+			$group->setPluginUse ( $this->name );
+		} else {
+			$group->setPluginUse ( $this->name, false );
+		}
+	}
+
 	function userisactivecheckbox (&$params) {
 		//check if user is active
 		// this code creates the checkbox in the user account manteinance page to activate/deactivate the plugin
