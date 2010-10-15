@@ -81,6 +81,31 @@ configuration phase, and get your own custom certificate.
 needed.  Do not alter them either unless you *know* what you're doing.
 
 
+Custom local configuration
+--------------------------
+With default Debian settings, a set of conf files have been generated,
+and will contain the desired settings for runtime :
+ - /etc/gforge/local.inc
+ - ... (TO BE DOCUMENTED PROPERLY !)
+
+Should these settings not suit you, it is possible to change
+configuration options by :
+
+ 1. modifying /etc/@FORGENAME@/@FORGENAME@.conf which contains the
+    basic settings
+ ( 2. Optional : copy some template files from
+     /usr/share/gforge/etc/local.d/ to /etc/gforge/local.d/ (TO BE
+     DOCUMENTED PROPERLY !) )
+ 3. regenerate the runtime config files by issueing :
+      # fusionforge-config
+
+Customizations in /etc/@FORGENAME@/@FORGENAME@.conf may include :
+ - switching to HTTPS with 'sys_use_ssl=true',
+ - setting a custom URL prefix with 'sys_urlprefix=/@FORGENAME@/' for
+   instance, 
+ etc.
+
+
 Adminning notes
 ---------------
   Once @FORGENAME@ is setup, it pretty much runs by itself.  There

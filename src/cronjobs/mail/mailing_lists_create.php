@@ -67,6 +67,16 @@ for ($i=0; $i<$rows; $i++) {
 	$listpassword = db_result($res,$i,'password');
 	$grouplistid = db_result($res,$i,'group_list_id');
 	$public = db_result($res,$i,'is_public');
+
+	$listname = trim($listname);
+	if (!$listname) {
+		$err .= "Empty name for a mailing list in 'mail_group_list' table\n";
+		break;
+	}
+	if (!preg_match('/^[a-z0-9\-_\.]*$/', $listname) || $listname == '.' || $listname == '..') {
+		$err .= 'Invalid List Name: ' . $listname;
+		break;
+	}
 	
 	$listname = trim($listname);
 	if (!$listname) {
@@ -160,6 +170,17 @@ $rows	 = db_numrows($res);
 
 for($k = 0; $k < $rows; $k++) {
 	$deleted_mail_list = db_result($res,$k,'mailing_list_name');
+
+	$deleted_mail_list = trim($deleted_mail_list);
+	if (!$deleted_mail_list) {
+		$err .= "Empty name for a mailing list in 'deleted_mailing_lists' table\n";
+		break;
+	}
+	if (!preg_match('/^[a-z0-9\-_\.]*$/', $deleted_mail_list) || $deleted_mail_list == '.' || $deleted_mail_list == '..') {
+		$err .= 'Invalid List Name: ' . $deleted_mail_list;
+		break;
+	}
+
 	
 	$deleted_mail_list = trim($deleted_mail_list);
 	if (!$deleted_mail_list) {
