@@ -70,7 +70,7 @@ if ($group_id) {
 		exit;
 	}
 	
-	echo _('<p>Choose a list to browse, search, and post messages.</p>');
+	echo '<p>' . _('Choose a list to browse, search, and post messages.') . '</p>';
 	
 	$tableHeaders = array(
 		_('Mailing list'),
