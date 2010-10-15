@@ -30,21 +30,17 @@ require ("$libdir/sqlparser.pm") ; # Our magic SQL parser
 require ("$libdir/sqlhelper.pm") ; # Our SQL functions
 require ("$libdir/include.pl");  # Some other functions
 
-&debug ("You'll see some debugging info during this installation.") ;
-&debug ("Do not worry unless told otherwise.") ;
-
 &db_connect ;
 
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($sth, @array, $version, $action, $path, $target) ;
+    my ($sth, @array, $version, $path, $target) ;
 
     # Do we have at least the basic schema?
     # Create Sourceforge database
     if (! &table_exists ($dbh, 'groups')) {	# No 'groups' table
 	# Installing SF 2.6 from scratch
-	$action = "installation" ;
 	&debug ("Creating initial Sourceforge database from files.") ;
 
 	&create_metadata_table ("2.5.9999") ;
@@ -67,8 +63,6 @@ eval {
 	$dbh->commit () ;
 
     } else {			# A 'groups' table exists
-	$action = "upgrade" ;
-
 	if (! &table_exists ($dbh, 'debian_meta_data')) {	# No 'debian_meta_data' table
 	    # If we're here, we're upgrading from 2.5-7 or earlier
 	    # We therefore need to create the table
@@ -2918,9 +2912,6 @@ eval {
 
     ########################### INSERT HERE #################################
 
-    &debug ("It seems your database $action went well and smoothly. That's cool.") ;
-    &debug ("Please enjoy using FusionForge.") ;
-
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
     # For safety, we roll back.
@@ -3023,7 +3014,7 @@ sub update_with_sql ( $ ) {
     my $target = shift or die "Not enough arguments" ;
     my $version = &get_db_version ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with $sqldate.sql") ;
+        &debug ("Upgrading database with $sqldate.sql") ;
 
         @reqlist = @{ &parse_sql_file ("$sqldir/$sqldate.sql") } ;
         foreach my $s (@reqlist) {
