@@ -70,8 +70,7 @@ Description: Dummy upgrade package for FusionForge
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, python, w3c-dtd-xhtml, ${misc:Depends}
-Recommends: xmlstarlet
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, cpio, lockfile-progs, adduser, php5-cli, python, ${misc:Depends}
 Conflicts: sourceforge, gforge-plugin-scmcvs (<< 4.1), gforge-plugin-scmsvn (<< 4.1), gforge-plugin-scmccase (<< 4.1), gforge-theme-starterpack (<< 4.0)
 Description: collaborative development tool - shared files
  FusionForge provides many tools to aid collaboration in a
@@ -127,7 +126,7 @@ Description: transition package to gforge-web-apache2
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: gforge-common, postgresql (>= 8.1) | postgresql-8.4 | postgresql-8.3 | postgresql-8.2 | postgresql-8.1, perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, ${misc:Depends}
+Depends: gforge-common, postgresql (>= 8.1) | postgresql-9.0 | postgresql-8.4 | postgresql-8.3 | postgresql-8.2 | postgresql-8.1 | postgresql (>= 8.1), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, php5-pgsql, ${misc:Depends}
 Provides: gforge-db
 Conflicts: gforge-db
 Description: collaborative development tool - database (using PostgreSQL)
@@ -142,7 +141,7 @@ Description: collaborative development tool - database (using PostgreSQL)
 
 Package: gforge-mta-exim4
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4, exim4-daemon-heavy, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4, ${misc:Depends}
 Provides: gforge-mta
 Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Exim 4)
@@ -370,7 +369,7 @@ Description: collaborative development tool - Darcs plugin
 
 Package: gforge-plugin-scmgit
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb, php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
 Provides: gforge-plugin-scm
 Description: collaborative development tool - Git plugin
  FusionForge provides many tools to aid collaboration in a
