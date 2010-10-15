@@ -48,6 +48,9 @@ if (!$group || !is_object($group)) {
 session_require_perm ('project_admin', $group->getID()) ;
 
 $ml = new MailingList($group,getIntFromGet('group_list_id'));
+if ($ml->isError()) {
+	exit_error($ml->getErrorMessage(),'home');
+}
 
 if (getStringFromPost('submit')) {
 	$sure = getStringFromPost('sure');
