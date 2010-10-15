@@ -50,7 +50,7 @@ endif
 TARBALLS=$(CURDIR)/tarballs
 #
 # Local customization
--include $(CURDIR)/local.$(shell hostname)
+-include $(CURDIR)/config/local.$(shell hostname)
 #
 BUILDPLACE=$(BUILDERDIR)/buildplace
 BUILDFILES=$(BUILDERDIR)/buildfiles
