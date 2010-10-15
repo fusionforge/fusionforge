@@ -33,6 +33,9 @@ if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 }
 
 $ml = new MailingList($Group,getIntFromGet('group_list_id'));
+if ($ml->isError()) {
+	exit_error('Error',$ml->getErrorMessage());
+}
 
 if (getStringFromPost('submit')) {
 	$sure = getStringFromPost('sure');
