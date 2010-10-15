@@ -27,7 +27,7 @@ if (is_dir(forge_get_config('mailman_path'))) {
 //
 $mailing_lists=array();
 $mlists_cmd = escapeshellcmd(forge_get_config('mailman_path')."/bin/list_lists");
-$err .= "Command to be executed is $mlists_cmd\n";
+//$err .= "Command to be executed is $mlists_cmd\n";
 $fp = popen ($mlists_cmd,"r");
 while (!feof($fp)) {
 	$mlist = fgets($fp, 4096);
@@ -41,7 +41,7 @@ while (!feof($fp)) {
 	}
 }
 
-$err .= 'Existing mailing lists : '.implode(', ', $mailing_lists)."\n";
+// $err .= 'Existing mailing lists : '.implode(', ', $mailing_lists)."\n";
 
 pclose($fp);
 
@@ -54,7 +54,7 @@ $res = db_query_params ('SELECT users.user_name,email,mail_group_list.list_name,
 $err .= db_error();
 
 $rows=db_numrows($res);
-$err .= "$rows rows returned from query\n";
+//$err .= "$rows rows returned from query\n";
 
 $h1 = fopen(forge_get_config('data_path').'/dumps/mailman-aliases',"w");
 
