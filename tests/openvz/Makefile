@@ -126,19 +126,6 @@ cleancentos: beroot
 cleandeb: beroot
 	make cleanvz VEID=$(VEIDDEB)
 
-finalizedeb: beroot
-	# Give it a hostname.
-	echo `hostname`-$(VEIDDEB) > $(VZPRIVATEDIR)/$(VEIDDEB)/etc/hostname
-	# Disable getty in /etc/inittab as openvz do not have that.
-	sed -i -e '/getty/d' $(VZPRIVATEDIR)/$(VEIDDEB)/etc/inittab
-	# Link /etc/mtab to /proc/mtab to make mount work as expected.
-	rm -f $(VZPRIVATEDIR)/$(VEIDDEB)/etc/mtab
-	ln -s /proc/mounts $(VZPRIVATEDIR)/$(VEIDDEB)/etc/mtab
-	# If an IP address is needed for the virtual server
-	#$(VZCTL) set $(VEIDDEB) --ipadd x.x.x.x --save
-	# In that case you also need to enable IP forwarding
-	#sysctl -w net.ipv4.ip_forward=1
-
 netdhcpdeb: beroot
 	# Add eth0 interface
 	$(VZCTL) set $(VEIDDEB) --netif_add eth0 --save
@@ -156,20 +143,9 @@ netdhcpdeb: beroot
 		echo "send host-name \"`hostname`-$(VEIDDEB)\";" >> $(VZPRIVATEDIR)/$(VEIDDEB)/etc/dhcp/dhclient.conf
 
 netstaticdeb: beroot
+	$(VZCTL) set $(VEIDDEB) --hostname `hostname`-$(VEIDDEB) --save
 	$(VZCTL) set $(VEIDDEB) --ipadd $(IPDEBBASE).$(VEIDDEB) --save
 	$(VZCTL) set $(VEIDDEB) --nameserver $(IPDEBDNS) --save
-	sysctl -w net.ipv4.ip_forward=1
-	sysctl -w net.ipv4.conf.default.forwarding=1
-	sysctl -w net.ipv4.conf.default.proxy_arp=0
-	sysctl -w net.ipv4.conf.all.rp_filter=1
-	sysctl -w kernel.sysrq=1
-
-finalizecentos: beroot
-	# Give it a hostname.
-	echo `hostname`-$(VEIDCEN) > $(VZPRIVATEDIR)/$(VEIDCEN)/etc/hostname
-	touch $(VZPRIVATEDIR)/$(VEIDCEN)/etc/sysconfig/network
-	grep -q "^HOSTNAME=" $(VZPRIVATEDIR)/$(VEIDCEN)/etc/sysconfig/network || \
-		echo "HOSTNAME=`hostname`-$(VEIDCEN)" >> $(VZPRIVATEDIR)/$(VEIDCEN)/etc/sysconfig/network
 
 netdhcpcentos: beroot
 	# Add eth0 interface
@@ -183,8 +159,11 @@ netdhcpcentos: beroot
 		echo "send host-name \"`hostname`-$(VEIDCEN)\";" > $(VZPRIVATEDIR)/$(VEIDCEN)/etc/dhclient.conf
 	
 netstaticcentos: beroot
+	$(VZCTL) set $(VEIDCEN) --hostname `hostname`-$(VEIDCEN)  --save
 	$(VZCTL) set $(VEIDCEN) --ipadd $(IPCENTOSBASE).$(VEIDCEN) --save
 	$(VZCTL) set $(VEIDCEN) --nameserver $(IPCENTOSDNS) --save
+
+netctl:
 	sysctl -w net.ipv4.ip_forward=1
 	sysctl -w net.ipv4.conf.default.forwarding=1
 	sysctl -w net.ipv4.conf.default.proxy_arp=0
@@ -205,11 +184,11 @@ addbridge:
 
 createdeb: beroot cleandeb
 	$(VZCTL) create $(VEIDDEB) --private $(VZPRIVATEDIR)/$(VEIDDEB) --ostemplate debian-$(DEBVERS)-$(ARCH)-minimal
-	#make finalizedeb
+	make netstaticdeb
 	
 createcentos: beroot cleancentos
 	$(VZCTL) create $(VEIDCEN) --private $(VZPRIVATEDIR)/$(VEIDCEN) --ostemplate centos-$(CENTVERS)-$(ARCH)-minimal
-	make finalizecentos
+	make netstaticcentos
 	
 beroot:
 	@[ $(shell id -u) = "0" ] || (echo "you should be root to run this" ; exit 1)
