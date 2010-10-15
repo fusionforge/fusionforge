@@ -124,7 +124,6 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
 } else if ( $docid == 'webdav' ) {
-	$_SERVER['REQUEST_URI'] = '';
 	$_SERVER['SCRIPT_NAME'] = '';
 	$server = new HTTP_WebDAV_Server_Docman;
 	$server->ServeRequest();
