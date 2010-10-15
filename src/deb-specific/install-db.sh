@@ -198,6 +198,7 @@ EOF
   	    	    # Creation OK 
 	    	    echo -n ""
 	    	    rm -f $tmp1 $tmp2
+		    need_admin_pw=true
 		else
 	    	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
 	    	    echo "Maybe a problem in your PostgreSQL configuration?"
@@ -255,6 +256,10 @@ EOF
 	p=${PIPESTATUS[0]}
 	if [ $p != 0 ] ; then
 	    exit $p
+	fi
+
+	if [ "$need_admin_pw" = "true" ] ; then
+	    exit 100
 	fi
 	;;
     purge-files)

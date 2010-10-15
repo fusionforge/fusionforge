@@ -153,13 +153,10 @@ eval {
 
 	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 
-	      my ($login, $pwd, $md5pwd, $email, $noreplymail, $date) ;
+	      my ($login, $md5pwd, $email, $noreplymail, $date) ;
 
 	      $login = $admin_login ;
-	      $pwd = $admin_password ;
-	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
-	      chomp $md5pwd ;
-	      $md5pwd =~ s/(.{32}) .*/$1/ ;
+	      $md5pwd = 'INVALID' ;
 	      $email = $server_admin ;
 	      $noreplymail="noreply\@$domain_name" ;
 	      $date = time () ;
