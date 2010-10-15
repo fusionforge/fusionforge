@@ -78,16 +78,6 @@ for ($i=0; $i<$rows; $i++) {
 		break;
 	}
 	
-	$listname = trim($listname);
-	if (!$listname) {
-		$err .= "Empty name for a mailing list in 'mail_group_list' table\n";
-		break;
-	}
-	if (!preg_match('/^[a-z0-9\-_\.]*$/', $listname) || $listname == '.' || $listname == '..') {
-		$err .= 'Invalid List Name: ' . $listname;
-		break;
-	}
-
 	// Here we assume that the privatize_list.py script is located in the same dir as this script
 	$script_dir = dirname(__FILE__);
 	$privatize_cmd = escapeshellcmd(forge_get_config('mailman_path').'/bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
@@ -181,16 +171,6 @@ for($k = 0; $k < $rows; $k++) {
 		break;
 	}
 
-	
-	$deleted_mail_list = trim($deleted_mail_list);
-	if (!$deleted_mail_list) {
-		$err .= "Empty name for a mailing list in 'deleted_mailing_lists' table\n";
-		break;
-	}
-	if (!preg_match('/^[a-z0-9\-_\.]*$/', $deleted_mail_list) || $deleted_mail_list == '.' || $deleted_mail_list == '..') {
-		$err .= 'Invalid List Name: ' . $deleted_mail_list;
-		break;
-	}
 	exec(forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list", $output);
 	$success = false;
 	foreach ($output as $line) {
