@@ -66,3 +66,4 @@ utils/inject-groups.php usr/share/@OLDPACKAGE@/bin/
 utils/inject-files.php usr/share/@OLDPACKAGE@/bin/
 #
 utils/fixscripts/normalize_roles.php	usr/share/@OLDPACKAGE@/bin/
+utils/forge_get_config                  usr/share/@OLDPACKAGE@/bin/
