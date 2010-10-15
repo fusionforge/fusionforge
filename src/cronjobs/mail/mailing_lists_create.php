@@ -109,18 +109,18 @@ echo $err;
 			passthru($privatize_cmd,$privatizeFailed);
 		}
 		$mailingListIds[] = $grouplistid;
+	} elseif ($status == MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
+		$change_pw_cmd = escapeshellcmd(forge_get_config ('mailman_path').'/bin/change_pw -l '.$listname);
+		$err .= "Resetting password of ".$listname."\n";
+		passthru($change_pw_cmd,$failed);
+		if ($failed) {
+			$err .= 'Failed to reset password of '.$listname."\n";
+		}
 	} else {	// Old list
 		if (!$public) {
 			// Privatize only if it is marked as private
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
 			passthru($privatize_cmd,$privatizeFailed);
-		}
-	} elseif ($status == MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
-		$change_pw_cmd = escapeshellcmd($sys_path_to_mailman.'/bin/change_pw -l '.$listname);
-		$err .= "Resetting password of ".$listname."\n";
-		passthru($change_pw_cmd,$failed);
-		if ($failed) {
-			$err .= 'Failed to reset password of '.$listname."\n";
 		}
 	}
 	
