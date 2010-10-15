@@ -52,14 +52,13 @@ eval {
 	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
 	if ($array[0] == 0) {
-	    &debug ("Updating debian_meta_data table.") ;
 	    $query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', 'scratch-to-2.6')" ;
 	    # debug $query ;
 	    $sth = $dbh->prepare ($query) ;
 	    $sth->execute () ;
 	    $sth->finish () ;
 	}
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
 
     } else {			# A 'groups' table exists
@@ -81,20 +80,16 @@ eval {
 	    $sth->finish () ;
 
 	    if ($array[0] == 0) {
-		# &debug ("Updating debian_meta_data table.") ;
 		$query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', '2.5-to-2.6')" ;
-		# debug $query ;
 		$sth = $dbh->prepare ($query) ;
 		$sth->execute () ;
 		$sth->finish () ;
-		&debug ("Committing.") ;
 		$dbh->commit () ;
 	    }
 	}
     }
 
     $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
-    # debug $query ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     @array = $sth->fetchrow_array () ;
@@ -104,7 +99,6 @@ eval {
 	$path = "" ;
     } else {
 	$query = "SELECT value from debian_meta_data where key = 'current-path'";
-	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	@array = $sth->fetchrow_array () ;
@@ -115,30 +109,7 @@ eval {
 
   PATH_SWITCH: {
       ($path eq 'scratch-to-2.6') && do {
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.1+global+data+done" ;
-	  if (&is_lesser ($version, $target)) {
-	      my @filelist = qw{ sf-2.6-complete.sql } ;
-	      # TODO: user_rating.sql
-
-	      foreach my $file (@filelist) {
-		  &debug ("Processing $file") ;
-		  @reqlist = @{ &parse_sql_file ($sqldir."/".$file) } ;
-
-		  foreach my $s (@reqlist) {
-		      $query = $s ;
-		      # &debug ($query) ;
-		      $sth = $dbh->prepare ($query) ;
-		      $sth->execute () ;
-		      $sth->finish () ;
-		  }
-	      }
-	      @reqlist = () ;
-
-	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
-	      $dbh->commit () ;
-	  }
+	  &update_with_sql ("sf-2.6-complete", "2.5.9999.1+global+data+done") ;
 
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.2+local+data+done" ;
@@ -179,7 +150,7 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -202,14 +173,13 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.6-0+checkpoint+1" ;
 	  if (&is_lesser ($version, $target)) {
-	      &debug ("Updating debian_meta_data table.") ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
 	      # debug $query ;
 	      $sth = $dbh->prepare ($query) ;
@@ -217,7 +187,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -236,7 +206,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -250,7 +220,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -275,7 +245,7 @@ eval {
 	      &bump_sequence_to ($dbh, "project_task_pk_seq", 100) ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -303,7 +273,7 @@ eval {
 	      @reqlist = () ;
 
  	      &update_db_version ($target) ;
- 	      &debug ("Committing.") ;
+ 	      &debug ("...OK.") ;
  	      $dbh->commit () ;
  	  }
 
@@ -318,7 +288,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -363,7 +333,7 @@ eval {
 	      }
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -395,7 +365,7 @@ eval {
 	      @reqlist = () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -423,7 +393,7 @@ eval {
 
 	      @reqlist = () ;
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -470,14 +440,13 @@ eval {
 	      }
 	      @reqlist = () ;
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
 	  $target = "2.6-0+checkpoint+1" ;
 	  if (&is_lesser ($version, $target)) {
-	      &debug ("Database has successfully been converted.") ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
 	      # debug $query ;
 	      $sth = $dbh->prepare ($query) ;
@@ -485,7 +454,7 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ($target) ;
-	      &debug ("Committing.") ;
+	      &debug ("...OK.") ;
 	      $dbh->commit () ;
 	  }
 
@@ -509,7 +478,7 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -532,7 +501,7 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -573,7 +542,7 @@ eval {
 	@reqlist = () ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -589,7 +558,7 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -631,7 +600,7 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -664,7 +633,7 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -690,7 +659,7 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -728,7 +697,7 @@ eval {
 	}
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -753,7 +722,7 @@ eval {
  	}
  	@reqlist = () ;
  	&update_db_version ($target) ;
- 	&debug ("Committing.") ;
+ 	&debug ("...OK.") ;
  	$dbh->commit () ;
     }
 
@@ -779,69 +748,13 @@ eval {
  	}
  	@reqlist = () ;
  	&update_db_version ($target) ;
- 	&debug ("Committing.") ;
+ 	&debug ("...OK.") ;
  	$dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+12" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021125.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021125.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+13" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021212.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021212.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+14" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021213-1.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021213-1.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
+    &update_with_sql("20021125", "2.6-0+checkpoint+12") ;
+    &update_with_sql("20021212", "2.6-0+checkpoint+13") ;
+    &update_with_sql("20021213-1", "2.6-0+checkpoint+14") ;
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+15" ;
@@ -868,169 +781,18 @@ eval {
 
       @reqlist = () ;
       &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
+      &debug ("...OK.") ;
       $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+16" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021214.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021214.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+17" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021215.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021215.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+18" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021216.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021216.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+19" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20021223-2.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20021223-2.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+20" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030102-2.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030102-2.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+21" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030105.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030105.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+22" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030107.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030107.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+23" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030109.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030109.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
+    &update_with_sql("20021214", "2.6-0+checkpoint+16") ;
+    &update_with_sql("20021215", "2.6-0+checkpoint+17") ;
+    &update_with_sql("20021216", "2.6-0+checkpoint+18") ;
+    &update_with_sql("20021223-2", "2.6-0+checkpoint+19") ;
+    &update_with_sql("20030102-2", "2.6-0+checkpoint+20") ;
+    &update_with_sql("20030105", "2.6-0+checkpoint+21") ;
+    &update_with_sql("20030107", "2.6-0+checkpoint+22") ;
+    &update_with_sql("20030109", "2.6-0+checkpoint+23") ;
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+24" ;
@@ -1059,89 +821,14 @@ eval {
       @reqlist = () ;
 
       &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
+      &debug ("...OK.") ;
       $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+25" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030113-2.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030113-2.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+26" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030131.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030131.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+27" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030209.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030209.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+28" ;
-    if (&is_lesser ($version, $target)) {
-      &debug ("Upgrading with 20030312.sql") ;
-
-      @reqlist = @{ &parse_sql_file ("$sqldir/20030312.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      &debug ("Committing $target.") ;
-      $dbh->commit () ;
-    }
+    &update_with_sql("20030113-2", "2.6-0+checkpoint+25") ;
+    &update_with_sql("20030131", "2.6-0+checkpoint+26") ;
+    &update_with_sql("20030209", "2.6-0+checkpoint+27") ;
+    &update_with_sql("20030312", "2.6-0+checkpoint+28") ;
 
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+29" ;
@@ -1155,7 +842,7 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -1172,31 +859,12 @@ eval {
 	$sth->finish () ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
 
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+31" ;
-    if (&is_lesser ($version, $target)) {
-	&debug ("Upgrading with 20030513.sql") ;
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20030513.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-
+    &update_with_sql("20030513", "2.6-0+checkpoint+31") ;
 
     $version = &get_db_version ;
     $target = "3.0-1" ;
@@ -1204,304 +872,25 @@ eval {
 	&debug ("Database schema is now version 3.0-1.") ;
 
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
-
-    $version = &get_db_version ;
-    $target = "3.0-7" ;
-    if (&is_lesser ($version, $target)) {
-	&debug ("Upgrading with 20030822.sql") ;
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20030822.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.1-0+1" ;
-    if (&is_lesser ($version, $target)) {
-	&debug ("Upgrading with 20031105.sql") ;
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20031105.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-
-	&debug ("Upgrading with 20031124.sql") ;
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20031124.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.1-0+2" ;
-    if (&is_lesser ($version, $target)) {
-	&debug ("Upgrading with 20031129.sql") ;
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20031129.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.1-0+3" ;
-    if (&is_lesser ($version, $target)) {
-	# Yes, I know.  20031126 < 20031129, yet we apply that change later.
-	# Blame tperdue for late committing.
-	# They are independent anyway.
-	&debug ("Upgrading with 20031126.sql") ; 
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20031126.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.2.1-0+2" ;
-    if (&is_lesser ($version, $target)) {
-	&debug ("Upgrading with 20031205.sql") ; 
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20031205.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-    
-    $version = &get_db_version ;
-    $target = "3.2.1-0+3" ;
-    if (&is_lesser ($version, $target)) {
-	&debug ("Upgrading with 20040130.sql") ; 
-
-	@reqlist = @{ &parse_sql_file ("$sqldir/20040130.sql") } ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	&debug ("Committing.") ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.2.1-0+4" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040204.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040204.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.2.1-0+5" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040315.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040315.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-0+0" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 200403251.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/200403251.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-0+1" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 200403252.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/200403252.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-0+3" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040507.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040507.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-0+4" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040722.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040722.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-0+6" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040804.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040804.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-0+7" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040826.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040826.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+    &update_with_sql("20030822", "3.0-7") ;
+    &update_with_sql("20031105", "3.1-0+1") ;
+    &update_with_sql("20031124", "3.1-0+1.1") ;
+    &update_with_sql("20031129", "3.1-0+2") ;
+    &update_with_sql("20031126", "3.1-0+3") ;
+    &update_with_sql("20031205", "3.2.1-0+2") ;
+    &update_with_sql("20040130", "3.2.1-0+3") ;
+    &update_with_sql("20040204", "3.2.1-0+4") ;
+    &update_with_sql("20040315", "3.2.1-0+5") ;
+    &update_with_sql("200403251", "3.3.0-0+0") ;
+    &update_with_sql("200403252", "3.3.0-0+1") ;
+    &update_with_sql("20040507", "3.3.0-0+3") ;
+    &update_with_sql("20040722", "3.3.0-0+4") ;
+    &update_with_sql("20040804", "3.3.0-0+6") ;
+    &update_with_sql("20040826", "3.3.0-0+7") ;
 
     $version = &get_db_version ;
     $target = "3.3.0-2+1" ;
@@ -1528,7 +917,7 @@ eval {
 	$sth->finish () ;
 	
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -1688,151 +1077,17 @@ eval {
 	$sth->finish () ;
 	
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "3.3.0-2+4" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040914.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040914.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-2+4+1" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041001.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041001.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-2+5" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041005.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041005.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-2+6" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041006.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041006.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-3" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041014.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041014.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "3.3.0-4" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041020.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041020.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.0.0-0" ;
-    # This is an exception, I reapply a modified version of 20040729.sql since it was doing nothing
-    # the other call was deleted from this file
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040729.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20040729.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+    &update_with_sql("20040914", "3.3.0-2+4") ;
+    &update_with_sql("20041001", "3.3.0-2+4+1") ;
+    &update_with_sql("20041005", "3.3.0-2+5") ;
+    &update_with_sql("20041006", "3.3.0-2+6") ;
+    &update_with_sql("20041014", "3.3.0-3") ;
+    &update_with_sql("20041020", "3.3.0-4") ;
+    &update_with_sql("20040729", "4.0.0-0") ;
 
     $version = &get_db_version ;
     $target = "4.0.0-0+1" ;
@@ -1853,7 +1108,7 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -1887,71 +1142,13 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "4.0.0-0+3" ;
-    # This is an exception, I reapply a modified version of 20040729.sql since it was doing nothing
-    # the other call was deleted from this file
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041104.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041104.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.0.0-0+4" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041108.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041108.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.0.2-0+0" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041124.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20041124.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+    &update_with_sql("20041104", "4.0.0-0+3") ;
+    &update_with_sql("20041108", "4.0.0-0+4") ;
+    &update_with_sql("20041124", "4.0.2-0+0") ;
 
     $version = &get_db_version ;
     $target = "4.0.2-0+1" ;
@@ -2003,50 +1200,11 @@ eval {
 	$sth->finish () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
-#    $version = &get_db_version ;
-#    $target = "4.0.2-0+2" ;
-#    if (&is_lesser ($version, $target)) {
-#        &debug ("Upgrading with 20041222-debian.sql") ;
-#
-#        @reqlist = @{ &parse_sql_file ("$sqldir/20041222-debian.sql") } ;
-#        foreach my $s (@reqlist) {
-#            $query = $s ;
-#            # debug $query ;
-#            $sth = $dbh->prepare ($query) ;
-#            $sth->execute () ;
-#            $sth->finish () ;
-#        }
-#        @reqlist = () ;
-#
-#        &update_db_version ($target) ;
-#        &debug ("Committing.") ;
-#        $dbh->commit () ;
-#    }
-
-    $version = &get_db_version ;
-    $target = "4.0.2-0+3" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050115.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050115.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
+    &update_with_sql("20050115", "4.0.2-0+3") ;
 #
 # We got this at upgrade
 #
@@ -2067,165 +1225,14 @@ eval {
     $dbh->{AutoCommit} = 0;
     $dbh->{RaiseError} = 1;
 
-    $version = &get_db_version ;
-    $target = "4.0.2-0+5" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050130.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050130.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.0.2-0+6" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050212.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050212.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.0.2-0+7" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050214-nss.sql valantine") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050214-nss.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.1-0" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050224-2.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050224-2.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.1-1" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050225-nsssetup.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050225-nsssetup.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-    
-    $version = &get_db_version ;
-    $target = "4.1-2" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050311.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050311.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-    
-    $version = &get_db_version ;
-    $target = "4.1-3" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050315.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050315.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.1-4" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050325-2.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-2.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+    &update_with_sql("20050130", "4.0.2-0+5") ;
+    &update_with_sql("20050212", "4.0.2-0+6") ;
+    &update_with_sql("20050214-nss", "4.0.2-0+7") ;
+    &update_with_sql("20050224-2", "4.1-0") ;
+    &update_with_sql("20050225-nsssetup", "4.1-1") ;
+    &update_with_sql("20050311", "4.1-2") ;
+    &update_with_sql("20050315", "4.1-3") ;
+    &update_with_sql("20050325-2", "4.1-4") ;
 
     $version = &get_db_version ;
     $target = "4.1-5" ;
@@ -2419,49 +1426,12 @@ eval {
 	}
 	
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "4.1-6" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050325-5.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050325-5.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.1-7" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050605.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050605.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+    &update_with_sql("20050325-5", "4.1-6") ;
+    &update_with_sql("20050605", "4.1-7") ;
 
     $version = &get_db_version ;
     $target = "4.1-8" ;
@@ -2535,53 +1505,13 @@ eval {
 	$sth->finish () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "4.1-9" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050628.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050628.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "4.5-1" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050711.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("$sqldir/20050711.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
-
+    &update_with_sql("20050628", "4.1-9") ;
+    &update_with_sql("20050711", "4.5-1") ;
     &update_with_sql("20050906","4.5-2"); 
-    # 20051027-1 was renamed 20050804-1
-    #&update_with_sql("20051027-1","4.5-3"); 
     &update_with_sql("20050804-1","4.5-3"); 
 
     $version = &get_db_version ;
@@ -2608,7 +1538,7 @@ eval {
 	$sth->finish () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -2662,7 +1592,7 @@ eval {
 	}
 	
 	&update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -2721,7 +1651,7 @@ eval {
 	@reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -2739,7 +1669,7 @@ eval {
 	&drop_table_if_exists ($dbh, "tmp_lang") ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -2788,7 +1718,7 @@ eval {
 	@reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -2806,7 +1736,7 @@ eval {
       &drop_index_if_exists ($dbh, "statssite_oid") ;
       &drop_index_if_exists ($dbh, "statssitepgsbyday_oid") ;
       &update_db_version ($target) ;
-      &debug ("Committing.") ;
+      &debug ("...OK.") ;
       $dbh->commit () ;
     }
     
@@ -2890,7 +1820,7 @@ eval {
 
 	@reqlist = () ;
 	&update_db_version ($target) ;
-	&debug ("Committing.") ;
+	&debug ("...OK.") ;
 	$dbh->commit () ;
     }
 
@@ -2988,9 +1918,7 @@ sub create_metadata_table ( $ ) {
 sub update_db_version ( $ ) {
     my $v = shift or die "Not enough arguments" ;
 
-    &debug ("Updating debian_meta_data table.") ;
     $query = "UPDATE debian_meta_data SET value = '$v' WHERE key = 'db-version'" ;
-    # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     $sth->finish () ;
@@ -3009,14 +1937,14 @@ sub get_db_version () {
     return $version ;
 }
 
-sub update_with_sql ( $ ) {
-    my $sqldate = shift or die "Not enough arguments" ;
+sub update_with_sql ( $$ ) {
+    my $sqlfile = shift or die "Not enough arguments" ;
     my $target = shift or die "Not enough arguments" ;
     my $version = &get_db_version ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading database with $sqldate.sql") ;
+        &debug ("Upgrading database with $sqlfile.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("$sqldir/$sqldate.sql") } ;
+        @reqlist = @{ &parse_sql_file ("$sqldir/$sqlfile.sql") } ;
         foreach my $s (@reqlist) {
             my $query = $s ;
             # debug $query ;
@@ -3027,7 +1955,7 @@ sub update_with_sql ( $ ) {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 }
