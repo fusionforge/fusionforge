@@ -58,7 +58,7 @@ class UserBlocks extends FForge_SeleniumTestCase
     $this->waitForPageToLoad("30000");
     $this->click("link=Tools");
     $this->waitForPageToLoad("30000");
-    $this->click("use_blocksplugin");
+    $this->click("use_blocks");
     $this->click("submit");
     $this->waitForPageToLoad("30000");
     $this->assertTrue($this->isTextPresent("Project information updated"));

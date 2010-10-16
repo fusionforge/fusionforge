@@ -58,59 +58,32 @@ class blocksPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $use_blocksplugin,$G_SESSION,$HTML;
-		if ($hookname == "groupisactivecheckbox") {
-		    $group_id=$params['group'];
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_blocksplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked=\"checked\"";
-			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-		    $group_id=$params['group'];
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = &group_get_object($group_id);
-			$use_blocksplugin = getStringFromRequest('use_blocksplugin');
-			if ( $use_blocksplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "project_admin_plugins") {
+		if ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  blocks administration
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p><a href="/plugins/blocks/index.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _("Blocks Admin") . '</a></p>';
 			}
-		}												    
-		elseif ($hookname == "blocks") {
-			// Check if block is active and if yes, display the block.
-			// Return true if plugin is active, false otherwise.
-			$group = &group_get_object($GLOBALS['group_id']);
-			if ( $group && $group->usesPlugin ( $this->name ) ) {
-				
-				$c = $this->renderBlock($params);
-				if ($c !== false) {
-					echo $c;
-					return true;
-				}
-			}
-			return false;
+		} elseif ($hookname == "blocks") {
+			return $this->blocks($params);
 		} 
 	}
-	
+	function blocks($params) {
+		// Check if block is active and if yes, display the block.
+		// Return true if plugin is active, false otherwise.
+		$group = group_get_object($GLOBALS['group_id']);
+		if ( $group && $group->usesPlugin ( $this->name ) ) {
+
+			$c = $this->renderBlock($params);
+			if ($c !== false) {
+				echo $c;
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function renderBlock($name) {
 		$group_id = $GLOBALS['group_id'];
 		$res = db_query_params('SELECT content
@@ -135,10 +108,10 @@ class blocksPlugin extends Plugin {
 	function parseContent($t) {
 		global $HTML;
 
-		$t = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop("$1")', $t);
-		$t = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop("$1")', $t);
-		$t = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle("$1")', $t);
-		$t = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle("$1")', $t);
+		$t = preg_replace('/<p>{boxTop (.*?)}<\/p>/ie', '$HTML->boxTop(\'$1\')', $t);
+		$t = preg_replace('/{boxTop (.*?)}/ie', '$HTML->boxTop(\'$1\')', $t);
+		$t = preg_replace('/<p>{boxMiddle (.*?)}<\/p>/ie', '$HTML->boxMiddle(\'$1\')', $t);
+		$t = preg_replace('/{boxMiddle (.*?)}/ie', '$HTML->boxMiddle(\'$1\')', $t);
 		$t = preg_replace('/<p>{boxBottom}<\/p>/i', $HTML->boxBottom(), $t);
 		$t = preg_replace('/{boxBottom}/i', $HTML->boxBottom(), $t);
 
