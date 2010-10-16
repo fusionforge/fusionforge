@@ -99,7 +99,7 @@ class UNIX extends System {
  	*
  	*/
 	function sysCheckGroup($group_id) {
-		$group =& group_get_object($group_id);
+		$group = group_get_object($group_id);
 		if (!$group){
 			return false;
 		}
@@ -114,7 +114,7 @@ class UNIX extends System {
  	*
  	*/
 	function sysCreateGroup($group_id) {
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		if (!$group) {
 			return false;
 		}

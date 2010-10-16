@@ -18,7 +18,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with FusionForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
  */
 
@@ -322,7 +322,7 @@ function plugin_hook ($hookname, $params = false) {
  * @param hookname - name of the hook
  * @param params - parameters for the hook
  */
-function plugin_hook_by_reference ($hookname, & $params) {
+function plugin_hook_by_reference ($hookname, &$params) {
 	$pm =& plugin_manager_get_object () ;
 	return $pm->RunHooks ($hookname, $params) ;
 }
