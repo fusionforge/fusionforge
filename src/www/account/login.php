@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge login page
+ * FusionForge login page
  *
  * This is main login page. It takes care of different account states
  * (by disallowing logging in with non-active account, with appropriate

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * GForge Attachment manager class
+ * FusionForge Attachment manager class
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2005 (c) GForge Team

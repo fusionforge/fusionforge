@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge logout page
+ * FusionForge logout page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *

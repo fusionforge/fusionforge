@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Config File edit page
+ * FusionForge Config File edit page
  *
  * @version 
  * @author 

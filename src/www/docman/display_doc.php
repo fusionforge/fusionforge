@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Doc Mgr Facility (compatibility wich older versions)
+ * FusionForge Doc Mgr Facility (compatibility wich older versions)
  *
  * Copyright 2002 GForge, LLC
  * http://fusionforge.org/

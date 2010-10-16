@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Cron Viewing Page
+ * FusionForge Cron Viewing Page
  *
  * Copyright 2002 GForge, LLC
  * http://fusionforge.org/
