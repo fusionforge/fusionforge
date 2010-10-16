@@ -27,7 +27,7 @@
 
 require_once "HTTP/WebDAV/Server.php";
 
-class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
+class HTTP_WebDAV_Server_Docman_DB extends HTTP_WebDAV_Server {
 
 	function GET(&$options) {
 		$arr_path = explode('/',$options['path']);

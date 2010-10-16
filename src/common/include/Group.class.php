@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -2838,6 +2839,14 @@ The %1$s admin team will now examine your project submission.  You will be notif
 			db_commit();
 			return true;
 		}
+	}
+
+	function setStorageAPI($type) {
+		return true;
+	}
+
+	function getStorageAPI() {
+		return 1;
 	}
 }
 

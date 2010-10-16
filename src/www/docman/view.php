@@ -39,15 +39,15 @@ $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
 
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g)) {
+	exit_no_group();
+} elseif ($g->isError()) {
+	exit_error($g->getErrorMessage(),'docman');
+}
+
 if ($docid != 'backup' && $docid != 'webdav' ) {
 	$docname=urldecode($arr[5]);
-
-	$g =& group_get_object($group_id);
-	if (!$g || !is_object($g)) {
-		exit_no_group();
-	} elseif ($g->isError()) {
-		exit_error($g->getErrorMessage(),'docman');
-	}
 
 	$d = new Document($g,$docid);
 	if (!$d || !is_object($d)) {
@@ -80,12 +80,6 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	echo $d->getFileData();
 
 } else if ( $docid == 'backup' ) {
-	$g =& group_get_object($group_id);
-	if (!$g || !is_object($g)) {
-		exit_no_group();
-	} elseif ($g->isError()) {
-		exit_error($g->getErrorMessage(),'docman');
-	}
 
 	$df = new DocumentFactory($g);
 	if ($df->isError())
@@ -125,7 +119,13 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	}
 } else if ( $docid == 'webdav' ) {
 	$_SERVER['SCRIPT_NAME'] = '';
-	$server = new HTTP_WebDAV_Server_Docman;
+	switch ($g->getStorageAPI()) {
+	case '1':
+		$server = new HTTP_WebDAV_Server_Docman_DB;
+		break;
+	default:
+		exit_error(_('Webdav Storage API not implemented'),'docman');
+	}
 	$server->ServeRequest();
 	exit;
 } else {
