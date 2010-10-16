@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Survey Facility
+ * FusionForge Survey Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
@@ -22,7 +22,6 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';

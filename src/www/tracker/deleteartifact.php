@@ -1,6 +1,6 @@
 <?php
 /**
- * GForge Project Management Facility
+ * FusionForge Project Management Facility
  *
  * Copyright 2002 GForge, LLC
  * http://fusionforge.org/
