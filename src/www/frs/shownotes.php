@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *

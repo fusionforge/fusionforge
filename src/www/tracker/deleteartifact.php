@@ -3,7 +3,7 @@
  * GForge Project Management Facility
  *
  * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  */
 

@@ -3,7 +3,7 @@
  * GForge Doc Mgr Facility (compatibility wich older versions)
  *
  * Copyright 2002 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  */
 
