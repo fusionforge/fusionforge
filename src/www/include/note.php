@@ -58,7 +58,7 @@ function notepad_func() {
 '   notepad_php = "'.util_make_url("/notepad.php").'";'.
 '   notepad_url = notepad_php + "?form="+form + "&wrap=" + wrap +'.
 '                "&rows=" + rows + "&cols=" + cols;'.
-'     notepad_title = \'GForgeNotepad\';'.
+'     notepad_title = \'FusionForgeNotepad\';'.
 '     notepad_height = 700;'.
 '     notepad_width = 580;'.
 '     notepad_winopt = "scrollbars=yes,resizable=yes,toolbar=no,height="+'.
