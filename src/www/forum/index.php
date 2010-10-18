@@ -30,7 +30,7 @@ require_once $gfcommon.'forum/Forum.class.php';
 
 $group_id = getIntFromRequest('group_id');
 if ($group_id) {
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g) || $g->isError()) {
 		exit_no_group();
 	}
@@ -40,7 +40,7 @@ if ($group_id) {
 		exit_error($ff->getErrorMessage(),'forums');
 	}
 
-	$farr =& $ff->getForums();
+	$farr = $ff->getForums();
 
 	if ( $farr !== false && count($farr) == 1 ) {
         session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());

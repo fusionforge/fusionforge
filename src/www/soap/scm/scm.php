@@ -51,7 +51,7 @@ $server->register(
 );
 
 function getSCMData($session_ser, $group_id) {
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getSCMData','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {

@@ -16,7 +16,7 @@ $docid = getIntFromRequest('docid');
 if ($docid) {
 	$group_id = getIntFromRequest('group_id');
 
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		exit_no_group();
 	} elseif ($g->isError()) {

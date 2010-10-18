@@ -35,7 +35,7 @@ function survey_header($params) {
 	$params['toptab']='surveys';
 	$params['group']=$group_id;
 
-	if ($project =& group_get_object($group_id)){
+	if ($project = group_get_object($group_id)){
 		if (!$project->usesSurvey()) {
 			exit_disabled();
 		}

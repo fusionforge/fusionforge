@@ -37,7 +37,7 @@ function frs_admin_header($params) {
 		exit_not_logged_in();
 	}
 
-	$project =& group_get_object($group_id);
+	$project = group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		return;
 	}
@@ -61,7 +61,7 @@ function frs_header($params) {
 		exit_disabled('home');
 	}
 
-	$project =& group_get_object($group_id);
+	$project = group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		exit_no_group();
 	}

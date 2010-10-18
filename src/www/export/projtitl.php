@@ -40,9 +40,9 @@ $group_id = getIntFromRequest('group_id');
 //  Get group object
 //
 if ( $group_name ) {
-    $group =& group_get_object_by_name($group_name);
+    $group = group_get_object_by_name($group_name);
 } else {
-    $group =& group_get_object($group_id);
+    $group = group_get_object($group_id);
 }
 
 if (!$group || !is_object($group)) {

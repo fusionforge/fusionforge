@@ -45,7 +45,7 @@ if (!$package_id) {
 	session_redirect('/frs/admin/?group_id='.$group_id.'?feedback='.urlencode($msg));
 }
 
-$project =& group_get_object($group_id);
+$project = group_get_object($group_id);
 if (!$project || !is_object($project)) {
     exit_no_group();
 } elseif ($project->isError()) {

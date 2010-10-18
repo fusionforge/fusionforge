@@ -115,7 +115,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$mode='full';
 	}
 
-	$project =& group_get_object($group_id);
+	$project = group_get_object($group_id);
 
 	if (!$project || !is_object($project)) {
 		return 'Could Not Create Project Object';

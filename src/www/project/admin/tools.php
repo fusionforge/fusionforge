@@ -30,7 +30,7 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_admin', $group_id) ;
 
-$group =& group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_error(_('Error creating group object'),'admin');
 } else if ($group->isError()) {

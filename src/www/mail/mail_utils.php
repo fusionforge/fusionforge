@@ -31,7 +31,7 @@ function mail_header($params) {
 		$params['group'] = $group_id;
 		$params['toptab'] = 'mail';
 
-		$project =& group_get_object($group_id);
+		$project = group_get_object($group_id);
 
 		if ($project && is_object($project)) {
 			if (!$project->usesMail()) {

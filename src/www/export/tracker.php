@@ -52,7 +52,7 @@ if ($group_id && $atid) {
 	//
 	//	get the Project object
 	//
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	
 	beginDocument();
 	if (!$group || !is_object($group)) {

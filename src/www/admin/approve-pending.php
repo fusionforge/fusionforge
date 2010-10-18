@@ -42,7 +42,7 @@ function activate_group($group_id) {
 	global $feedback;
 	global $error_msg;
 
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 
 	if (!$group || !is_object($group)) {
 		$error_msg .= _('Error creating group object');
@@ -93,7 +93,7 @@ if ($action=='activate') {
 	//create webcal group
 	plugin_hook('del_cal_group',$group_id);
 	
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_no_group();
 	} elseif ($group->isError()) {

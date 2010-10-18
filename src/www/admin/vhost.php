@@ -45,7 +45,7 @@ if (getStringFromRequest('add')) {
 
 	if ($groupname) {
 
-		$group = &group_get_object_by_name($groupname);
+		$group = group_get_object_by_name($groupname);
 		if (!$group || !is_object($group)) {
 			exit_no_group();
 		} elseif ($group->isError()) {

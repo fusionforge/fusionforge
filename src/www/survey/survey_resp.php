@@ -34,7 +34,7 @@ require_once $gfwww.'survey/include/SurveyHTML.class.php';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
     exit_no_group();
 }

@@ -62,7 +62,7 @@ if (!$projectName) {
 }
 
 // Check permissions
-$Group =& group_get_object_by_name($projectName);
+$Group = group_get_object_by_name($projectName);
 if (!$Group || !is_object($Group)) {
 	exit_no_group();
 } else if ( $Group->isError()) {

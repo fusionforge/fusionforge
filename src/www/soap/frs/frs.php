@@ -254,7 +254,7 @@ $server->register(
 
 function getPackages($session_ser,$group_id) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getPackages','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -299,7 +299,7 @@ function getFileProcessorTypes($session_ser) {
 
 function addPackage($session_ser,$group_id,$package_name,$is_public) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','addPackage','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -316,7 +316,7 @@ function addPackage($session_ser,$group_id,$package_name,$is_public) {
 
 function getReleases($session_ser,$group_id,$package_id) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getReleases','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -361,7 +361,7 @@ function releases_to_soap(&$release_arr) {
 function addRelease($session_ser,$group_id,$package_id,$name,$notes,$changes,$release_date) {
 	continue_session($session_ser);
 
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getPackages','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -386,7 +386,7 @@ function addRelease($session_ser,$group_id,$package_id,$name,$notes,$changes,$re
 function getFiles($session_ser,$group_id,$package_id,$release_id) {
 	continue_session($session_ser);
 	
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getFiles','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -476,7 +476,7 @@ function fileprocessortypes_to_soap($files_arr) {
 function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
 	continue_session($session_ser);
 	
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getFile','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -522,7 +522,7 @@ function getFile($session_ser,$group_id,$package_id,$release_id,$file_id) {
 function addFile($session_ser,$group_id,$package_id,$release_id,$name,$base64_contents,$type_id,$processor_id,$release_time) {
 	continue_session($session_ser);
 
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','addFile','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {

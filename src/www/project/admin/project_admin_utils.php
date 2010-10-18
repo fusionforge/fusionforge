@@ -36,7 +36,7 @@ function project_admin_header($params) {
 
 	session_require_perm ('project_admin', $group_id) ;
 
-	$project =& group_get_object($group_id);
+	$project = group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		return;
 	}

@@ -37,7 +37,7 @@ $package_id = getIntFromRequest('package_id');
 if (!$group_id)
 	exit_no_group();
 
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 
 if (!$g || !is_object($g)) {
     exit_no_group();

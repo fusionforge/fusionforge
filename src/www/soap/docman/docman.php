@@ -301,7 +301,7 @@ $server->register(
 function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$language_id, $base64_contents,$filename,$file_url) {
 	continue_session($session_ser);
 
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','addDocument','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -365,7 +365,7 @@ $server->register(
 function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$description,$language_id, $base64_contents,$filename,$file_url,$state_id) {
 	continue_session($session_ser);
 			
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','updateDocument','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -461,7 +461,7 @@ $server->register(
 function &addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) {
 	continue_session($session_ser);
 
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','addDocumentGroup','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -504,7 +504,7 @@ $server->register(
 function &updateDocumentGroup($session_ser, $group_id, $doc_group, $new_groupname, $new_parent_doc_group) {
 	continue_session($session_ser);
 
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','updateDocumentGroup','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -547,7 +547,7 @@ $server->register(
 
 function &getDocuments($session_ser,$group_id,$doc_group_id) {
 	continue_session($session_ser);
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','getDocuments','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -616,7 +616,7 @@ $server->register(
 //
 function &getDocumentGroups($session_ser,$group_id) {
 	continue_session($session_ser);
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','getDocumentGroups','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -679,7 +679,7 @@ $server->register(
 //
 function &getDocumentGroup($session_ser,$group_id,$doc_group) {
 	continue_session($session_ser);
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','getDocumentGroup','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -725,7 +725,7 @@ $server->register(
 ///
 function &getDocumentFiles($session_ser,$group_id,$doc_id) {
 	continue_session($session_ser);
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','GetDocumentFiles','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {
@@ -773,7 +773,7 @@ $server->register(
 function documentDelete($session_ser,$group_id,$doc_id) {
 	continue_session($session_ser);
 	
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		return new soap_fault ('','documentDelete','Could Not Get Project','Could Not Get Project');
 	} elseif ($g->isError()) {

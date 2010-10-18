@@ -35,7 +35,7 @@ if (!$group_id) {
 	exit_no_group();
 }
 
-$project =& group_get_object($group_id);
+$project = group_get_object($group_id);
 if (!$project || !is_object($project)) {
     exit_no_group();
 } elseif ($project->isError()) {

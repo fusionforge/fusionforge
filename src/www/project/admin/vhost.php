@@ -23,7 +23,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
@@ -35,7 +34,7 @@ if (!forge_get_config('use_project_vhost')) {
 $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_admin', $group_id) ;
 
-$group = &group_get_object($group_id);
+$group = group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
         exit_error('Error','Error creating group object');

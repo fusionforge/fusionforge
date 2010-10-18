@@ -117,7 +117,7 @@ $server->register(
 
 function artifactGetViews($session_ser, $group_id, $group_artifact_id) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','artifactGetViews','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {
@@ -207,7 +207,7 @@ $server->register(
 
 function artifactDeleteView($session_ser, $group_id, $group_artifact_id, $artifact_query_id) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','artifactDeleteView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
@@ -250,7 +250,7 @@ $server->register(
 
 function artifactSetView($session_ser, $group_id, $group_artifact_id, $artifact_query_id) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','artifactSetView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
@@ -315,7 +315,7 @@ function artifactCreateView($session_ser, $group_id, $group_artifact_id, $name, 
 	$sort_col, $sort_ord, $extra_fields, $opendaterange, $closedaterange) {
 		
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','artifactCreateView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {
@@ -372,7 +372,7 @@ function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_
 	$sort_col, $sort_ord, $extra_fields, $opendaterange, $closedaterange) {
 		
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','artifactUpdateView','Could Not Get Group','Could Not Get Group');
 	} elseif ($grp->isError()) {

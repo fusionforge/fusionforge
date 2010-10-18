@@ -32,7 +32,7 @@ require_once $gfcommon.'frs/FRSPackage.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $release_id = getIntFromRequest('release_id');
-$cur_group =& group_get_object($group_id);
+$cur_group = group_get_object($group_id);
 
 if (!$cur_group) {
 	exit_no_group();

@@ -93,7 +93,7 @@ if ($group_id && $group_project_id) {
 	require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 	require_once $gfcommon.'pm/ProjectGroup.class.php';
 
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g)) {
 		exit_no_group();
 	} elseif ($g->isError()) {

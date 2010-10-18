@@ -29,7 +29,7 @@ function scm_header($params) {
 		exit_disabled();
 	}
 
-	$project =& group_get_object($params['group']);
+	$project = group_get_object($params['group']);
 	if (!$project || !is_object($project)) {
 		exit_no_group();
 	} elseif ($project->isError()) {
