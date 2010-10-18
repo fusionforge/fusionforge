@@ -40,7 +40,7 @@ case $1 in
     refresh)
 	rm translations/gforge.pot
 	
-	find -type f -\( -name \*.php -or -name users -or -name projects -\) \
+	find . -type f \( -name \*.php -or -name users -or -name projects \) \
 	    | grep -v -e {arch} -e svn-base \
 	    | grep -v ^./plugins/wiki \
 	    | LANG=C sort \
