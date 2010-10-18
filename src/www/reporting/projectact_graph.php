@@ -51,9 +51,11 @@ if ($report->isError()) {
 //
 // Get Project Object
 //
-$g =& group_get_object($g_id);
-if (!$g || $g->isError()) {
-	exit_error("Could Not Get Group");
+$g = group_get_object($g_id);
+if (!$g || !is_object($g)) {
+	exit_no_group();
+} elseif ($g->isError()) {
+	exit_error($g->getErrorMessage(),'');
 }
 
 // Create the graph. These two calls are always required
