@@ -30,7 +30,7 @@ require_once $gfwww.'include/unicode.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-$area = getStringFromRequest('area');
+$area = getFilteredStringFromRequest('area', '/^[a-z]+$/');
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');

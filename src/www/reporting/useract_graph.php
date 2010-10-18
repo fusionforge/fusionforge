@@ -34,7 +34,7 @@ $dev_id = getIntFromRequest('dev_id');
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
-$area = getStringFromRequest('area');
+$area = getFilteredStringFromRequest('area', '/^[a-z]+$/');
 
 //
 //	Create Report

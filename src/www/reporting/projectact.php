@@ -35,7 +35,7 @@ if ($report->isError()) {
 }
 
 $g_id = getIntFromRequest('g_id');
-$area = getStringFromRequest('area');
+$area = getFilteredStringFromRequest('area', '/^[a-z]+$/');
 $SPAN = getIntFromRequest('SPAN', 1);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');

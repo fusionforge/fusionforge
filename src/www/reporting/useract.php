@@ -36,7 +36,7 @@ if ($report->isError()) {
 
 $sw = getStringFromRequest('sw');
 $dev_id = getIntFromRequest('dev_id');
-$area = getStringFromRequest('area');
+$area = getFilteredStringFromRequest('area', '/^[a-z]+$/');
 $SPAN = getIntFromRequest('SPAN');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
