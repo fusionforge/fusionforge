@@ -26,6 +26,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 
+session_require_global_perm ('forge_stats', 'read') ;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage());
