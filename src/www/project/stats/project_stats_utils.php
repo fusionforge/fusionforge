@@ -58,9 +58,9 @@ function stats_project_daily( $group_id, $span = 7 ) {
 		WHERE group_id=$1 ORDER BY month DESC, day DESC";
 
 	if ($span == 30) {
-		$res = db_query_params($sql, $group_id, 30, 0, SYS_DB_STATS);
+		$res = db_query_params($sql, array($group_id), 30, 0, SYS_DB_STATS);
 	} else {
-		$res = db_query_params($sql, $group_id,  7, 0, SYS_DB_STATS);
+		$res = db_query_params($sql, array($group_id),  7, 0, SYS_DB_STATS);
 	}
 
 	echo db_error();
