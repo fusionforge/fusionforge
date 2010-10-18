@@ -227,10 +227,10 @@ if ($sys_use_private_project) {
 }
 ?>
 
-<div align="center">
+<p style="text-align: center">
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>"/>
 <input type="submit" name="i_disagree" value="<?php echo _('Cancel') ?>"/>
-</div>
+</p>
 
 </form>
 
