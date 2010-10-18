@@ -128,7 +128,8 @@ AND snippet_package_version.snippet_package_version_id=$1',
 	<p>
 	<strong><?php echo _('Package:'); ?></strong><br />
 	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?></p>
-	<p><?php echo _('You can use this form repeatedly to keep adding snippets to your package.</p><p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.'); ?></p>
+	<p><?php echo _('You can use this form repeatedly to keep adding snippets to your package.'); ?></p>
+	<p><?php echo _('The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.'); ?></p>
 	<p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />

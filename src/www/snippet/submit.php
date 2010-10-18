@@ -88,7 +88,11 @@ if (session_loggedin()) {
 	snippet_header(array('title'=>_('Snippet submit')));
 
 	?>
-	<p><?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
+	<p>
+    <?php echo _('You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.'); ?>
+	</p>
+	<p>
+    <?php echo _('<span class="important">Note:</span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.'); ?>
 	</p>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post" id="snippet_submit">
 	<?php

@@ -171,12 +171,14 @@ echo '<h1>' . _('Plugin Manager') . '</h1>';
 
 // -->
 </script>
+
+<form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <?php
 echo '<p>';
 echo _('Here you can activate / deactivate site-wide plugins which are in the plugins/ folder. Then, you should activate them also per project, per user or whatever the plugin specifically applies to.');
 echo '</p>';
-echo '<div class="warning">'._('Be careful because some groups/users can be using the plugin. Deactivating it will remove the plugin from all users/groups. Be <strong>extra</strong> careful not to run the init-script again when the plugin is reactivated, because some scripts have DROP TABLE statements.').'</div>';
-echo '<form name="theform" action="'.getStringFromServer('PHP_SELF').'" method="post">';
+echo '<p class="important">' . _('Be careful because some projects/users can be using the plugin. Deactivating it will remove the plugin from all users/projects.') . '</p>';
+echo '<p class="important">' . _('Be EXTRA careful running the SQL init script when a plugin has been deactivated prior use (and you want to re-activate) because some scripts have DROP TABLE statements.') . '</p>';
 $title_arr = array( _('Plugin Name'),
 		    _('Status'),
 		    _('Action'),
