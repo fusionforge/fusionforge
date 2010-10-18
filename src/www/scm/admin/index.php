@@ -27,8 +27,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';
 require_once $gfcommon.'scm/SCMFactory.class.php';
 
-
-
 $group_id = getIntFromRequest('group_id');
 
 // Check permissions

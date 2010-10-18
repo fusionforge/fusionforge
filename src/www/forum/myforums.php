@@ -34,11 +34,7 @@ require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 
-
-
-if (!session_loggedin()) {
-    exit_permission_denied();
-}
+session_require_login();
 
 $user_id = user_getid();
 $group_id = getIntFromRequest("group_id");

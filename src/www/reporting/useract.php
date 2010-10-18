@@ -86,7 +86,7 @@ if ($sw) {
 	</form>
 	<?php if ($dev_id && $start != $end) { ?>
 		<p>
-		<img src="useract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&dev_id=$dev_id&amp;area=$area"; ?>" width="640" height="480">
+		<img src="useract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;area=$area"; ?>" width="640" height="480" alt="" />
 		</p>
 		<?php
 
