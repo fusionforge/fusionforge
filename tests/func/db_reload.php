@@ -118,7 +118,7 @@ require_once $gfwww.'include/pre.php';
 //system("echo \"GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO gforge;\" | psql -q -Upostgres ".DB_NAME);
 //system("echo \"UPDATE pg_ts_cfg set locale = 'en_US.UTF-8' WHERE ts_name = 'default';\" | psql -q -Upostgres ".DB_NAME);
 
-$files = glob("sql/*.sql");
+$files = glob(dirname(__FILE__)."/sql/*.sql");
 foreach ($files as $filename) {
 	system("psql -q -U".DB_USER." ".DB_NAME." -f $filename 2>&1 | grep -v ': NOTICE: ' | egrep -v '^(NOTICE|DETAIL:)' | egrep -v '^(Creating|Applying|Initializing) '");
 }
