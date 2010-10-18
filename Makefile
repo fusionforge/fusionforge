@@ -89,3 +89,7 @@ src/plugins/mediawiki/mediawiki-skin/FusionForge.php:
 
 %: src/plugins/mediawiki/mediawiki-skin/FusionForge.php
 	$(MAKE) -f Makefile.$(DIST) $@
+
+wslink:
+	@[ -d ~/public_html ] || mkdir ~/public_html
+	@[ -L ~/public_html/ws ] || ln -s $(CURDIR) ~/public_html/ws

@@ -459,5 +459,3 @@ gnupgkey:
 	echo '%echo done' >> $(BOTKEY)
 	[ -d ~/.gnupg ] || gpg --batch --gen-key $(BOTKEY)
 
-wslink:
-	rm -f /var/www/ws; ln -s $(CURDIR) /var/www/ws
