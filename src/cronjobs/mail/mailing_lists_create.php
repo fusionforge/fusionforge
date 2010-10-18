@@ -193,7 +193,7 @@ for($k = 0; $k < $rows; $k++) {
 		break;
 	}
 
-	exec(forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list", $output);
+	exec(forge_get_config('mailman_path')."/bin/rmlist -a '$deleted_mail_list'", $output);
 	$success = false;
 	foreach ($output as $line) {
 		// Mailman 2.1.x
