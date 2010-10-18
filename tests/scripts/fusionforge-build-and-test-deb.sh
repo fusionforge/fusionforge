@@ -17,7 +17,7 @@ then
 	export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
 	export VZPRIVATEDIR
 	export DIST
-	export BASEDIR=${BASEDIR:-/`id -un`/ws}
+	export BASEDIR=${BASEDIR:-/~`id -un`/ws}
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
 	export FFORGE_DEB_REPO=http://`hostname -f`$BASEDIR/build/debian
 	export HOST=debian6.local
