@@ -48,7 +48,7 @@ function exit_permission_denied($reason_descr='',$toptab='') {
 		exit_not_logged_in();
 	} else {
 		if (!$reason_descr) {
-			$reason_descr=_('This project\'s administrator will have to grant you permission to view this page.');
+			$reason_descr=_('Permission denied. This project\'s administrator will have to grant you permission to view this page.');
 		}
 		exit_error($reason_descr,$toptab);
 	}
@@ -67,7 +67,7 @@ function exit_not_logged_in() {
  * @param	string toptab
  */
 function exit_no_group() {
-	exit_error(_('No project was chosen, project does not exist or you can\'t access it.'),$toptab='');
+	exit_error(_('Permission denied. No project was chosen, project does not exist or you can\'t access it.'),$toptab='');
 }
 
 /**
