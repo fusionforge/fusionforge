@@ -29,8 +29,6 @@
 	by Daniel Perez - 2005
 */
 
-require_once $gfcommon.'include/pre.php';
-
 class AttachManager extends Error {
 	
 	var $attachs = array(); //the attached files
@@ -132,7 +130,8 @@ class AttachManager extends Error {
 			$pend = "";
 		}
 		
-		if ($res) {
+		$attachid = '';
+		if ($res && db_numrows($res)) {
 			$attachid = db_result($res,0,'attachmentid');
 		}
 		if ($attachid) {

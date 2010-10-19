@@ -27,11 +27,11 @@
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'forum/include/ForumHTML.class.php';
-require_once $gfwww.'forum/admin/ForumAdmin.class.php';
+require_once $gfcommon.'forum/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
-require_once $gfwww.'forum/include/AttachManager.class.php'; //attachent manager
+require_once $gfcommon.'forum/AttachManager.class.php'; //attachent manager
 
 $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');

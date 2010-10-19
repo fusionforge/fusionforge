@@ -585,6 +585,8 @@ src/common/docman/views/search.php -text
 src/common/docman/views/tree.php -text
 src/common/docman/views/views.php -text
 src/common/event/Event.class.php -text
+src/common/forum/AttachManager.class.php -text
+src/common/forum/ForumAdmin.class.php -text
 src/common/include/Codendi_HTMLPurifier.class.php -text
 src/common/include/Codendi_Request.class.php -text
 src/common/include/HTTPRequest.class.php -text
@@ -4062,8 +4064,6 @@ src/www/export/rss20_version.php -text
 src/www/export/rssAboTask.php -text
 src/www/export/search_plugin.php -text
 src/www/favicon.ico svneol=native#unset
-src/www/forum/admin/ForumAdmin.class.php -text
-src/www/forum/include/AttachManager.class.php -text
 src/www/frs/reporting/downloads.php -text
 src/www/images/blank.png -text svneol=unset#image/png
 src/www/images/clear.png -text svneol=unset#image/png

@@ -32,7 +32,7 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'forum/include/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumHTML.class.php';
 
 
 /**
@@ -66,7 +66,7 @@ if ( !($forum_id) || !($group_id) ) {
 	exit_missing_param();
 }
 
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
@@ -95,7 +95,7 @@ if ($delete == "yes") {
 		goodbye(_('You cannot delete this attachment'));
 	}	else {
 		if (!$pending) {
-			if (db_query_params ('DELETE FROM forum_attachment where attachmentid=$1',
+			if (db_query_params ('DELETE FROM forum_attachment WHERE attachmentid=$1',
 			array($attachid))) {
 				goodbye(_('Attachment deleted'));
 			} else {
@@ -181,10 +181,10 @@ if (!$attachid) {
 }
 
 if ($pending=="yes") {
-	$res = db_query_params ('SELECT * FROM forum_pending_attachment where attachmentid=$1',
+	$res = db_query_params ('SELECT * FROM forum_pending_attachment WHERE attachmentid=$1',
 			array ($attachid));
 } else {
-	$res = db_query_params ('SELECT * FROM forum_attachment where attachmentid=$1',
+	$res = db_query_params ('SELECT * FROM forum_attachment WHERE attachmentid=$1',
 			array ($attachid));
 }
 if ( (!$res) ) {
@@ -228,7 +228,7 @@ for ($i = 0; $i < strlen($filedata); $i = $i+100) {
 flush();
 //increase the attach count
 if (!$pending) { //we don't care for the pending attach counter, it's just for administrative purposes
-	db_query_params ('UPDATE forum_attachment set counter=counter+1 where attachmentid=$1',
+	db_query_params ('UPDATE forum_attachment SET counter=counter+1 WHERE attachmentid=$1',
 			array($attachid));
 }
 

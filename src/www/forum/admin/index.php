@@ -26,9 +26,9 @@
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'forum/include/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
-require_once $gfwww.'forum/admin/ForumAdmin.class.php';
+require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
@@ -48,7 +48,7 @@ if (!$group_id) {
 //
 //  Set up local objects
 //
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }

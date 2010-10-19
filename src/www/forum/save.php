@@ -24,16 +24,15 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'forum/include/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 
-if (session_loggedin()) {
-	/*
-		User obviously has to be logged in to save place
-	*/
+// User obviously has to be logged in to save place
+session_require_login();
 
 	$forum_id = getIntFromRequest('forum_id');
 	$group_id = getIntFromRequest('group_id');
+
 	if ($forum_id && $group_id) {
 		//
 		//  Set up local objects
@@ -57,10 +56,6 @@ if (session_loggedin()) {
 		}
 	} else {
 		exit_missing_param('',array(_('Forum ID'),_('Project ID')),'forums');
-	}
-
-} else {
-	exit_not_logged_in();
 }
 
 ?>

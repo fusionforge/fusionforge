@@ -25,12 +25,12 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'forum/include/ForumHTML.class.php';
+require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
-require_once $gfwww.'forum/include/AttachManager.class.php'; //attachent manager
+require_once $gfcommon.'forum/AttachManager.class.php'; //attachent manager
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
 $forum_id = getIntFromRequest('forum_id');
@@ -58,7 +58,7 @@ if ($forum_id) {
 	//
 	//	Set up local objects
 	//
-	$g =& group_get_object($group_id);
+	$g = group_get_object($group_id);
 	if (!$g || !is_object($g) || $g->isError()) {
 		exit_no_group();
 	}
@@ -373,28 +373,30 @@ ORDER BY f.most_recent_date DESC',
 	/*
 		This code puts the nice next/prev.
 	*/
-	$ret_val .= '<table width="100%" border="0">
-		<tr class="tablecontent"><td width="50%">';
-	if ($offset != 0) {
-		$ret_val .= '<span class="prev">
-		<a href="javascript:history.back()"><strong>' .
-			html_image('t2.png',"15","15") ._('Newer Messages').'</strong></a></span>';
-	} else {
-		$ret_val .= '&nbsp;';
-	}
+	if (($offset != 0) or ($avail_rows > $max_rows)) {
+		$ret_val .= '<table width="100%" border="0">
+			<tr class="tablecontent"><td width="50%">';
+		if ($offset != 0) {
+			$ret_val .= '<span class="prev">
+			<a href="javascript:history.back()"><strong>' .
+				html_image('t2.png',"15","15") ._('Newer Messages').'</strong></a></span>';
+		} else {
+			$ret_val .= '&nbsp;';
+		}
 
-	$ret_val .= '</td><td>&nbsp;</td><td align="right" width="50%">';
+		$ret_val .= '</td><td>&nbsp;</td><td align="right" width="50%">';
 
-	if ($avail_rows > $max_rows) {
-		$ret_val .= '<span class="next">
-		<a href="'.util_make_url ('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
-					  '&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">
-		<strong> '._('Older Messages') .
-			html_image('t.png',"15","15") . '</strong></a></span>';
-	} else {
-		$ret_val .= '&nbsp;';
+		if ($avail_rows > $max_rows) {
+			$ret_val .= '<span class="next">
+			<a href="'.util_make_url ('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
+						  '&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">
+			<strong> '._('Older Messages') .
+				html_image('t.png',"15","15") . '</strong></a></span>';
+		} else {
+			$ret_val .= '&nbsp;';
+		}
+		$ret_val .= '</td></tr></table>';
 	}
-	$ret_val .= '</td></tr></table>';
 
 	echo $ret_val;
 /*

@@ -25,8 +25,8 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'forum/include/ForumHTML.class.php';
-require_once $gfwww.'forum/include/AttachManager.class.php';
+require_once $gfcommon.'forum/ForumHTML.class.php';
+require_once $gfcommon.'forum/AttachManager.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';

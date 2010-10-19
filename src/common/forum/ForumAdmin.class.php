@@ -25,8 +25,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once $gfcommon.'include/pre.php';
-
 class ForumAdmin extends Error {
 	var $group_id;
 	var $p,$g;
@@ -35,7 +33,7 @@ class ForumAdmin extends Error {
 		$this->group_id = $group_id; 
 		if ($group_id) {
 			$this->group_id = $group_id;
-			$this->g =& group_get_object($group_id);
+			$this->g = group_get_object($group_id);
 			$this->p =& $this->g->getPermission ();
 		}
 	}
@@ -136,7 +134,7 @@ class ForumAdmin extends Error {
 			return false;
 		}
 		$this->group_id = $group_id;
-		$this->g =& group_get_object($group_id);
+		$this->g = group_get_object($group_id);
 		if (!$this->g || !is_object($this->g) || $this->g->isError()) {
 			$this->setGroupIdError();
 			return false;

@@ -23,12 +23,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/note.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfwww.'news/news_utils.php';
-require_once $gfwww.'forum/admin/ForumAdmin.class.php';
-require_once $gfwww.'forum/include/AttachManager.class.php';
+require_once $gfcommon.'forum/ForumAdmin.class.php';
+require_once $gfcommon.'forum/AttachManager.class.php';
 
 function forum_header($params) {
 	global $HTML,$group_id,$forum_name,$forum_id,$f,$group_forum_id;
@@ -60,13 +59,12 @@ function forum_header($params) {
 			$HTML->header($params);
 			echo '<h1>' . $params['title'] . '</h1>';
 
-
 			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
 				echo '<p class="error">'._('Error - this news item was not found').'</p>';
 			} else {
 				$user = user_get_object(db_result($result,0,'submitted_by'));
-				$group =& group_get_object($params['group']);
+				$group = group_get_object($params['group']);
 				if (!$group || !is_object($group) || $group->isError()) {
 					exit_no_group();
 				}
