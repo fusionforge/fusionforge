@@ -12,10 +12,7 @@ else
     exit 1
 fi
 
-locales=$(ls translations/*.po \
-    | xargs -n1 -iFILE basename FILE .po \
-    | egrep '^[a-z][a-z](_[A-Z][A-Z]$)?' \
-    | sort)
+locales=$(cd translations; ls *.po | sed 's/.po$//' | sort)
 
 print_stats () {
     for l in $(echo $locales | xargs -n 1 | sort) ; do
