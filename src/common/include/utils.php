@@ -1012,11 +1012,7 @@ function util_is_root_dir($dir) {
  * @return 	string
  */
 function util_strip_accents($text) {
-	$find = utf8_decode($text);
-	$find = strtr($find,
-		utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
-		'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
-	return utf8_encode($find);
+	return iconv ('UTF-8', 'US-ASCII//TRANSLIT', $text) ;
 }
 
 /**
