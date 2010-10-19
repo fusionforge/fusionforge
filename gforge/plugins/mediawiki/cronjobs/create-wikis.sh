@@ -2,9 +2,11 @@
 
 tmp3=$(mktemp)
 perl -e'require "/etc/gforge/local.pl"; print "*:*:$sys_dbname:$sys_dbuser:$sys_dbpasswd\n"' > $tmp3
+dbuser=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbuser\n"')
+dbname=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n"')
 
 projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
-    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
+    | PGPASSFILE=$tmp3 /usr/bin/psql -U $dbuser $dbname \
     | tail -n +3 \
     | grep '^ ')
 
@@ -53,11 +55,11 @@ for project in $projects ; do
     tmp1=$(mktemp)
     tmp2=$(mktemp)
 
-    if su -s /bin/sh postgres -c "/usr/bin/psql gforge" 1> $tmp1 2> $tmp2 <<-EOF \
+    if su -s /bin/sh postgres -c "/usr/bin/psql $dbname" 1> $tmp1 2> $tmp2 <<-EOF \
         && [ "$(tail -n +2 $tmp1 | head -1)" = 'CREATE SCHEMA' ] ;
 SET LC_MESSAGES = 'C' ;
 CREATE SCHEMA $schema ;
-ALTER SCHEMA $schema OWNER TO gforge;
+ALTER SCHEMA $schema OWNER TO $dbuser;
 EOF
     then
         rm -f $tmp1 $tmp2
@@ -73,7 +75,7 @@ EOF
     tmp1=$(mktemp)
     tmp2=$(mktemp)
 
-    if PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge 1> $tmp1 2> $tmp2 <<-EOF \
+    if PGPASSFILE=$tmp3 /usr/bin/psql -U $dbuser $dbname 1> $tmp1 2> $tmp2 <<-EOF \
         && true || [ "$(tail -1 $tmp1)" = 'COMMIT' ] ;
 SET search_path = "$schema" ;
 \i /usr/share/mediawiki/maintenance/postgres/tables.sql
@@ -94,7 +96,7 @@ EOF
 done
 
 projects=$(echo "SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = 'mediawiki' ;" \
-    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
+    | PGPASSFILE=$tmp3 /usr/bin/psql -U $dbuser $dbname \
     | tail -n +3 \
     | grep '^ ')
 
@@ -102,7 +104,7 @@ tmp4=$(mktemp)
 # Disable read anonymous if project is private
 for project in $projects ; do
 	ispublic=$(echo "SELECT is_public from groups where unix_group_name = '${project}' ;" \
-	    | PGPASSFILE=$tmp3 /usr/bin/psql -U gforge gforge \
+	    | PGPASSFILE=$tmp3 /usr/bin/psql -U $dbuser $dbname \
 			| tail -n +3 \
 			| grep '^ ')
 

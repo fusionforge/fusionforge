@@ -1,3 +1,10 @@
+fusionforge (5.0.2-2+) unstable; urgency=low
+
+  * Fixed Mediawiki creation script so it uses the appropriate database
+    and user (closes: #600605).
+
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Oct 2010 20:13:36 +0200
+
 fusionforge (5.0.2-2) unstable; urgency=low
 
   * Ship a /usr/share/gforge/plugins/ directory in gforge-web-apache2

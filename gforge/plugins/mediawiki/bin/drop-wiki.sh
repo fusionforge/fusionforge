@@ -13,6 +13,7 @@ if [ -d $wdprefix/$project ] ; then
 fi
 
 schema=$(echo plugin_mediawiki_$project | sed s/-/_/g)
-su -s /bin/sh postgres -c "/usr/bin/psql gforge" <<-EOF
+dbname=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbname\n"')
+su -s /bin/sh postgres -c "/usr/bin/psql $dbname" <<-EOF
 DROP SCHEMA $schema CASCADE;
 EOF
