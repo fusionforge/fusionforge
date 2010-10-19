@@ -47,16 +47,14 @@ if ($diary_user) {
 					array ($diary_user,
 					       $diary_id));
 
-		echo $HTML->boxTop(_('Date').": ".date(_('Y-m-d H:i'), db_result($res,$i,'date_posted')));
 		if (!$res || db_numrows($res) < 1) {
 			echo '<p>' . _('Entry Not Found For This User') . '</p>';
 		} else {
-			echo'<strong>'._('Subject').':</strong> '. db_result($res,$i,'summary') .'<p>
-			<strong>'._('Body').':</strong><br />
-			'. nl2br(db_result($res,$i,'details')) .'
-			</p>';
+			echo $HTML->boxTop(db_result($res,0,'summary'));
+			echo '<p>' . _('Posted on ') . date(_('Y-m-d H:i'), db_result($res,0,'date_posted')).'</p>';
+			echo db_result($res,0,'details');
+			echo $HTML->boxBottom();
 		}
-		echo $HTML->boxBottom();
 	}
 
 	echo $HTML->boxTop(_('Existing Diary And Note Entries'));
