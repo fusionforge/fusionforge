@@ -42,7 +42,7 @@ class Widget_ProjectInfo extends Widget {
 				print '<p>' . _('Tags').':&nbsp;'. $list_tag . '</p>';
 			}
 			else {
-				$project =& group_get_object($group_id);
+				$project = group_get_object($group_id);
 				if (forge_check_perm ('project_admin', $project->getID())) {
 					print '<p><a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.</p>';
 				}

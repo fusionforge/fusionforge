@@ -112,7 +112,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 			exit_error(_('Newsbyte not found'),'news');
 		}
 		
-		$group =& group_get_object($group_id);
+		$group = group_get_object($group_id);
 		
 		echo notepad_func();
 		echo '
@@ -163,7 +163,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		$result=db_query_params("SELECT * FROM news_bytes WHERE is_approved <> 4 AND group_id=$1", array($group_id));
 		$rows=db_numrows($result);
-		$group =& group_get_object($group_id);
+		$group = group_get_object($group_id);
 		
 		echo '<h1>'._('List of News Submitted for Project').': '.$group->getPublicName().'</h1>';
 		if ($rows < 1) {
@@ -259,7 +259,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 			exit_error(_('Newsbyte deleted'),'news');
 		}
 		
-		$group =& group_get_object(db_result($result,0,'group_id'));
+		$group = group_get_object(db_result($result,0,'group_id'));
 		$user =& user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '

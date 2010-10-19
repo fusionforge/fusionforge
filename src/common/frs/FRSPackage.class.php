@@ -60,7 +60,7 @@ function &frspackage_get_object($package_id, $data=false) {
 			}
 			$data = db_fetch_array($res);			
 		}
-		$Group =& group_get_object($data['group_id']);
+		$Group = group_get_object($data['group_id']);
 		$FRSPACKAGE_OBJ['_'.$package_id.'_']= new FRSPackage($Group,$data['package_id'],$data);
 	}
 	return $FRSPACKAGE_OBJ['_'.$package_id.'_'];

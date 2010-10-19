@@ -117,7 +117,7 @@ ORDER BY group_name DESC',
 		for ($i=0; $i<$rows; $i++) {
 			$group_id = db_result($result,$i,'group_id');
 			$group_artifact_id = db_result($result,$i,'group_artifact_id');
-			$group =& group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$artifact = new ArtifactType($group,$group_artifact_id);
 			$ag = $artifact->getGroup();
 			if ($artifact->isError()) {

@@ -370,7 +370,7 @@ function session_require($req, $reason='') {
 	}
 
 	if (array_key_exists('group', $req)) {
-		$group =& group_get_object($req['group']);
+		$group = group_get_object($req['group']);
 		if (!$group || !is_object($group)) {
 			exit_no_group();
 		} elseif ($group->isError()) {

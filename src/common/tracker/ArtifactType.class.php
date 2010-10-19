@@ -47,7 +47,7 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 				$ARTIFACTTYPE_OBJ["_".$artType_id."_"]=false;
 			} else {
 				$data = db_fetch_array($res);
-				$Group =& group_get_object($data["group_id"]);
+				$Group = group_get_object($data["group_id"]);
 				$ARTIFACTTYPE_OBJ["_".$artType_id."_"]= new ArtifactType($Group,$data["group_artifact_id"],$data);
 			}
 		}
