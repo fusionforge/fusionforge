@@ -74,8 +74,8 @@ class Widget_ProjectPublicAreas extends Widget {
 					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
 					echo "</span>\n"; // /owl:sameAs
 					printf(ngettext('(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', '(<strong>%1$s</strong> open / <strong>%2$s</strong> total)', (int) db_result($result, $j, 'open_count')), (int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count'));
-					echo '<br />'.db_result($result, $j, 'description');
-					print '<span rel="sioc:has_space" resource="" />'."\n";
+					echo '<br />'; //.db_result($result, $j, 'description');
+					print '<span rel="sioc:has_space" resource="" ></span>'."\n";
 					echo "</li>\n";
 				}
 				echo '</ul>';
