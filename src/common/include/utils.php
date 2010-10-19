@@ -1007,6 +1007,19 @@ function util_is_root_dir($dir) {
 }
 
 /**
+ * util_strip_accents() - Remove accents from given text.
+ * @param	string	Text
+ * @return 	string
+ */
+function util_strip_accents($text) {
+	$find = utf8_decode($text);
+	$find = strtr($find,
+		utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'),
+		'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+	return utf8_encode($find);
+}
+
+/**
  * Constructs the forge's URL prefix out of forge_get_config('url_prefix')
  * 
  * @return string
