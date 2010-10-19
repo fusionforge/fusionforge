@@ -41,7 +41,7 @@ case $1 in
 	    | grep -v -e {arch} -e svn-base \
 	    | grep -v ^./plugins/wiki \
 	    | LANG=C sort \
-	    | xargs xgettext -d gforge -o translations/gforge.pot -L PHP --from-code=iso-8859-1
+	    | xargs xgettext -d gforge -o translations/gforge.pot -L PHP --from-code=utf-8
 	    
 	for l in $locales ; do
 	    echo "Processing $l..."
