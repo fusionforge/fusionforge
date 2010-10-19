@@ -39,7 +39,7 @@ if (!$g || !is_object($g) || $g->isError()) {
     exit_no_group();
 }
 
-$sh = new  SurveyHtml();
+$sh = new SurveyHtml();
 $title = _('Survey Complete');
 $sh->header(array('title'=>$title));
 echo '<h1>' . $title . '</h1>';
@@ -57,15 +57,12 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-?>
+echo '<p>' . _('Thank you for taking time to complete this survey.') . '</p>';
+echo '<p>' . _('Regards,') . '</p>';
+echo '<p><strong>';
+printf(_('The %1$s Crew'), forge_get_config ('forge_name'));
+echo '</strong></p>';
 
-<p><?php echo _('Thank you for taking time to complete this survey.'); ?></p>
-<p>&nbsp;</p>
-<?php echo _('Regards'); ?>,
-<p>&nbsp;</p>
-<strong><?php printf(_('The %1$s Crew'), forge_get_config ('forge_name')); ?></strong>
-<p>&nbsp;</p>
-<?php
 /*
 	Delete this customer's responses in case they had back-arrowed
 */
