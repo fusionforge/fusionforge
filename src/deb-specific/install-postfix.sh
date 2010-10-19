@@ -178,7 +178,7 @@ $l = $head . $dests ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
-	perl -i -e '
+	grep -q '^[[:space:]]*relay_domains' $tmp1 && perl -i -e '
 require ("/etc/gforge/local.pl") ;
 while (($l = <>) !~ /^\s*relay_domains/) {
   print $l;
