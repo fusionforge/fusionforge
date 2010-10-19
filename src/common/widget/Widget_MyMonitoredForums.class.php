@@ -54,7 +54,7 @@ class Widget_MyMonitoredForums extends Widget {
         $result=db_query_params($sql,array(user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
-            $html_my_monitored_forums .= _("<b>You are not monitoring any forums</b><P>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.<P>You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.<BR>&nbsp;");
+            $html_my_monitored_forums .= '<p><b>' . _("You are not monitoring any forums.") . '</b></p><p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
         } else {
             $request =& HTTPRequest::instance();
             $html_my_monitored_forums .= '<table style="width:100%">';

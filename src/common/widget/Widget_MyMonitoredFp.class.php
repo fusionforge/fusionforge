@@ -52,7 +52,7 @@ class Widget_MyMonitoredFp extends Widget {
         $result=db_query_params($sql,array($frsrf->STATUS_DELETED,user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
-            $html_my_monitored_fp .= _("<b>You are not monitoring any files</b><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the appropriate icon in the files section.<BR>&nbsp;");
+            $html_my_monitored_fp .= '<p><b>' . _("You are not monitoring any files") . '</b></p><p>' . _("If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.") . '</p><p>' . _("You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the appropriate icon in the files section.") . '</p>';
         } else {
             $html_my_monitored_fp .= '<table style="width:100%">';
             $request =& HTTPRequest::instance();
