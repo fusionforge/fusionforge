@@ -25,15 +25,32 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'include/vote_function.php';
+require_once $gfcommon.'survey/SurveyFactory.class.php';
+require_once $gfwww.'survey/include/SurveyHTML.class.php';
 
-echo $HTML->header(array('title'=>_('Survey Privacy')));
+/* Show header */
+$title = _('Survey Privacy');
+$sh = new SurveyHtml();
+$sh->header(array('title'=>$title));
+echo '<h1>' . $title . '</h1>';
+
+echo '<p>';
+echo _("The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.");
+echo '</p>';
+echo '<p>';
+echo _("This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.");
+echo '</p>';
+echo '<p>';
+echo _("The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.");
+echo '</p>';
+echo '<p>';
+echo _("The information gathered is used only in aggregate form, not to single out specific users or developers.");
+echo '</p>';
+echo '<p>';
+echo _("If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'."); 
+echo '</p>';
 
 ?>
-
-<h1><?php echo _('Survey Privacy'); ?></h1>
-<?php echo _('<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID\'s of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to \'opt-out\'.'); ?>
-</p>
 
 <p><strong><?php printf(_('The %1$s Team'), forge_get_config ('forge_name')); ?></strong></p>
 
