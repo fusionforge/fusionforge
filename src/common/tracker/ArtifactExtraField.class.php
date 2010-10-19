@@ -604,7 +604,7 @@ class ArtifactExtraField extends Error {
 		return true;
 	}
 
-	function alphaorderValues($element_id) {
+	function alphaorderValues() {
 
 		$res = db_query_params ('SELECT element_id FROM artifact_extra_field_elements WHERE extra_field_id=$1 ORDER BY element_name ASC',
 			array($this->getID()));
