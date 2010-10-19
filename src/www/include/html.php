@@ -701,7 +701,7 @@ function site_project_header($params) {
 	$group_id=$params['group'];
 
 	//get the project object
-	$project =& group_get_object($group_id);
+	$project = group_get_object($group_id);
 
 	if (!$project || !is_object($project)) {
 		exit_no_group();
