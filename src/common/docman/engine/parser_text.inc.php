@@ -58,7 +58,7 @@ function print_list ($list)
 function suppression_diacritics($text)
 {
 	$b = $text;
-	$b = strtr($b, "éêèëàâäîïùûüôöç", "eeeeaaaiiuuuooc");
+	$b = iconv ('UTF-8', 'US-ASCII//TRANSLIT', $b) ;
 	$b = strtr($b, "\t\r\n?.*'\":;,#![]()", "                 ");
 	return $b;
 }
