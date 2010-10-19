@@ -296,7 +296,7 @@ class WidgetLayoutManager {
 					echo '<td class="layout-manager-column">
 						<div class="layout-manager-column-remove">x</div>
 						<div class="layout-manager-column-width">
-						<input type="text" value="'. $data['width'] .'" autocomplete="off" size="1" maxlength="3" />%
+						<input type="text" value="'. $data['width'] .'" size="1" maxlength="3" />%
 						</div>
 						</td>
 						<td class="layout-manager-column-add">+</td>';
