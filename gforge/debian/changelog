@@ -1,11 +1,15 @@
-fusionforge (5.0.2-2+) unstable; urgency=low
+fusionforge (5.0.2-3) unstable; urgency=medium
 
   * Fixed Mediawiki creation script so it uses the appropriate database
     and user (closes: #600605).
   * Fixed hang during removal of -mta-postfix in some conditions (closes:
     #600583).
+  * Plugged XSS vulnerability discovered by "Bluetouff" in
+    -plugin-globalsearch.
+  * Backport from trunk: stricter checking of mailing-list name during
+    deletion, to avoid potential deleting of unintended lists.
 
- -- Roland Mas <lolando@debian.org>  Tue, 19 Oct 2010 20:31:12 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Oct 2010 20:44:49 +0200
 
 fusionforge (5.0.2-2) unstable; urgency=low
 
