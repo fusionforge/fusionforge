@@ -2,8 +2,10 @@ fusionforge (5.0.2-2+) unstable; urgency=low
 
   * Fixed Mediawiki creation script so it uses the appropriate database
     and user (closes: #600605).
+  * Fixed hang during removal of -mta-postfix in some conditions (closes:
+    #600583).
 
- -- Roland Mas <lolando@debian.org>  Tue, 19 Oct 2010 20:13:36 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 19 Oct 2010 20:31:12 +0200
 
 fusionforge (5.0.2-2) unstable; urgency=low
 
