@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: stdlib.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // rcs_id('$Id: stdlib.php 7716 2010-10-20 16:19:40Z vargenau $');
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -649,9 +649,9 @@ function ImgObject($img, $url) {
     }
     $type = $img->getAttr('type');
     if (!$type) {
-        // TODO: map extension to mime-types if type is not given and php < 4.3
-        if (function_exists('mime_content_type'))
+        if (function_exists('mime_content_type') && file_exists($url)) {
             $type = mime_content_type($url);
+        }
     }
     $object = HTML::object(array_merge($img->_attr,
                                        array('type' => $type)), //'src' => $url
