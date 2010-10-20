@@ -58,10 +58,14 @@ EOF
 	    fi
 	    if [ ! -e /etc/gforge/config.ini.d/debian-install-secrets.ini ] ; then
 		t=$(mktemp /etc/gforge/config.ini.d/debian-install-secrets.ini.XXXXXX)
-		if [ -c /dev/urandom ]; then  # ...using /dev/urandom when possible
-		    pw=$(dd if=/dev/urandom count=1 bs=16 2> /dev/null | md5sum | cut -c-32)
-		else		# ...or something else if need be.
-		    pw=$(date +"%s:%N" | md5sum | cut -c-32)
+		db_get @PACKAGE@/shared/db_password || true
+		pw=$RET
+		if [ "$pw" = "" ] ; then
+		    if [ -c /dev/urandom ]; then  # ...using /dev/urandom when possible
+			pw=$(dd if=/dev/urandom count=1 bs=16 2> /dev/null | md5sum | cut -c-32)
+		    else		# ...or something else if need be.
+			pw=$(date +"%s:%N" | md5sum | cut -c-32)
+		    fi
 		fi
 
 		cat > $t <<EOF
