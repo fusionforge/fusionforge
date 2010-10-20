@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: FusionForge.php 7663 2010-08-31 15:23:17Z vargenau $');
+// rcs_id('$Id: FusionForge.php 7715 2010-10-14 15:49:22Z vargenau $');
 /*
  * Copyright (C) 2006 Alain Peyrat
  *
@@ -52,7 +52,7 @@ class _FusionForgePassUser extends _PassUser {
         if (session_loggedin()){
 
             // Get project object (if error => ANON)
-            $project =& group_get_object($group_id);
+            $project = group_get_object($group_id);
 
             if (!$project || !is_object($project)) {
                 $this->_level = WIKIAUTH_ANON;
