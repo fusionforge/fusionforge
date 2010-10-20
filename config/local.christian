@@ -1,0 +1,2 @@
+DEBMIRROR=http://christian.bayle.eu/debian
+BUILDERDIR=/work/builder
