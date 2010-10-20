@@ -14,14 +14,14 @@ init_debconf_from_mainconffile
 #DSFHELPER:dbhost-variables#
 #DSFHELPER:dbpasswd-variables#
 
-db_fget @OLDPACKAGE@/shared/admin_password seen || true
+db_fget @PACKAGE@/shared/admin_password seen || true
 if [ "$RET" = "false" ]; then
-    if [ "$(get_pw @OLDPACKAGE@/shared/admin_password high)" = "not-asked" ] ; then
-	db_set @OLDPACKAGE@/shared/admin_password $(gen_random_pw)
-	db_get @OLDPACKAGE@/shared/admin_password || true
+    if [ "$(get_pw @PACKAGE@/shared/admin_password high)" = "not-asked" ] ; then
+	db_set @PACKAGE@/shared/admin_password $(gen_random_pw)
+	db_get @PACKAGE@/shared/admin_password || true
 	echo "Since you asked not to see all the debconf questions, I generated a random"
 	echo "password for the admin user.  It is '${RET}'." ;
-	db_fset @OLDPACKAGE@/shared/admin_password seen true
+	db_fset @PACKAGE@/shared/admin_password seen true
     fi
 fi
 
