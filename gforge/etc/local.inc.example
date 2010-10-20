@@ -182,7 +182,7 @@ $sys_use_project_multimedia=false;
 //	Restricted project registration
 //	If set to true, only a site admin can register projects
 //
-$sys_project_reg_restricted=true;
+$sys_project_reg_restricted=false;
 //
 //	Restricted user registration
 //	If set to true, only a site admin can register users
