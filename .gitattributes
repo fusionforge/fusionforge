@@ -4576,6 +4576,7 @@ tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text
 tests/openvz/local.g-virtual05.rinse.conf -text
 tests/openvz/local.rinse.api -text
+tests/preseed/mailman -text
 tests/scripts/fusionforge-build-and-test-deb.sh -text
 tests/scripts/fusionforge-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-build-and-test-source.sh -text

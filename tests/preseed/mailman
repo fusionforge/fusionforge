@@ -1,0 +1,7 @@
+# Mailman
+mailman	mailman/queue_files_present	note	
+mailman	mailman/default_server_language	select	fr
+mailman	mailman/gate_news boolean	false
+mailman	mailman/site_languages	multiselect	en,ru,fr
+mailman	mailman/used_languages	string	
+mailman	mailman/create_site_list	note
