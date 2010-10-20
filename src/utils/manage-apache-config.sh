@@ -1,4 +1,4 @@
-#! /bin/sh -e
+#! /bin/bash -e
 
 case $1 in
     build)
@@ -64,12 +64,15 @@ case $1 in
 	cd $dir
 	files=$(ls *.inc *.conf | xargs grep -l {[a-z_]*/[a-z_]*})
 	vars=$(forge_get_config list-all-variables)
+	declare -A var_cache
 	for f in $files ; do
 	    ftmp=$(mktemp $f.generated.XXXXXX)
 	    cp -a $f $ftmp
 	    for v in $vars ; do
-		curvar=$(forge_get_config ${v##*/} ${v%%/*})
-		grep -q {$v} $ftmp && sed -i -e s,{$v},$curvar,g $ftmp
+		if grep -q {$v} $ftmp ; then
+		    var_cache[$v]=${var_cache[$v]:-$(forge_get_config ${v##*/} ${v%%/*})}
+		    sed -i -e s,{$v},${var_cache[$v]},g $ftmp
+		fi
 	    done
 	    mv $ftmp $f.generated
 	done
