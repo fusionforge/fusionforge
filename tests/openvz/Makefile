@@ -3,8 +3,8 @@ DEBMIRROR=http://ftp.fr.debian.org/debian
 RINSECONF=/etc/rinse/rinse.conf
 RINSEBPI=
 RINSEPOSTINST=--after-post-install $(CURDIR)/local.rinse.api
-VEIDDEBTEMP=100
-VEIDCENTEMP=101
+VEIDDEBTEMP=242
+VEIDCENTEMP=243
 ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh,vim,debconf-utils
 EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
