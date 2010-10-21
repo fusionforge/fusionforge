@@ -22,7 +22,7 @@
    *  Mediawiki plugin of FusionForge.
    */
 
-require_once dirname(__FILE__) . '/../../env.inc.php';
+require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 $IP = forge_get_config('master_path', 'mediawiki');
