@@ -149,8 +149,8 @@ class Document extends Error {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
-			stateid,filename,filetype,filesize,data,data_words,created_by)
-                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)',
+			stateid,filename,filetype,filesize,data_words,created_by)
+                        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
 					  array($this->Group->getId(),
 						htmlspecialchars($title),
 						htmlspecialchars($description),
@@ -160,15 +160,33 @@ class Document extends Error {
 						$filename,
 						$filetype,
 						$filesize,
-						base64_encode($data),
 						$kwords,
-						$user_id));
+                        $user_id));
 		if (!$result) {
-			$this->setError(_('Error Adding Document: ').db_error());
+			$this->setError(_('Error Adding Document: ').db_error().$result);
 			db_rollback();
 			return false;
 		}
+
 		$docid=db_insertid($result,'doc_data','docid');
+
+        switch ($this->Group->getStorageAPI()) {
+        case 'DB':
+            $result = db_query_params('UPDATE doc_data set data = $1 where docid = $2',
+                array(base64_encode($data),
+                    $docid));
+		    if (!$result) {
+			    $this->setError(_('Error Adding Document: ').db_error().$result);
+			    db_rollback();
+			    return false;
+		    }
+            break;
+        default:
+			$this->setError(_('Error Adding Document: No Storage API'));
+            db_rollback();
+            return false;
+        }
+
 		if (!$this->fetchData($docid)) {
 			db_rollback();
 			return false;
@@ -496,9 +514,8 @@ class Document extends Error {
 				$kwords = '';
 			}
 
-			$res = db_query_params ('UPDATE doc_data SET data=$1, filesize=$2, data_words=$3 WHERE group_id=$4 AND docid=$5',
-						array (base64_encode($data),
-						       strlen($data),
+			$res = db_query_params ('UPDATE doc_data SET filesize=$1, data_words=$2 WHERE group_id=$3 AND docid=$4',
+						array (strlen($data),
 						       $kwords,
 						       $this->Group->getID(),
 						       $this->getID())) ;
@@ -507,6 +524,23 @@ class Document extends Error {
 				$this->setOnUpdateError(db_error());
 				return false;
 			}
+
+            switch ($this->Group->getStorageAPI()) {
+            case 'DB':
+                $res = db_query_params ('UPDATE doc_data SET data = $1 where group_id = $2 and docid = $3',
+                        array(base64_encode($data),
+                            $this->Group->getID(),
+                            $this->getID()));
+
+			    if (!$res || db_affected_rows($res) < 1) {
+				    $this->setOnUpdateError(db_error());
+				    return false;
+			    }
+                break;
+            default:
+                $this->setOnUpdateError(_('No Storage API'));
+                return false;
+            }
 		}
 		
 		$this->sendNotice(false);
@@ -550,6 +584,14 @@ class Document extends Error {
 			return false;
 		}
 		
+        switch ($this->Group->getStorageAPI()) {
+        case 'DB':
+            break;
+        default:
+			$this->setError(_('Error Deleting Document: No Storage API'));
+			db_rollback();
+			return false;
+        }
 		return true;
 	}
 }

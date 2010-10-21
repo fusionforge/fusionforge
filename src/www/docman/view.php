@@ -119,15 +119,8 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	}
 } else if ( $docid == 'webdav' ) {
 	$_SERVER['SCRIPT_NAME'] = '';
-	switch ($g->getStorageAPI()) {
-	case '1':
-		$server = new HTTP_WebDAV_Server_Docman_DB;
-		break;
-	default:
-		exit_error(_('Webdav Storage API not implemented'),'docman');
-	}
+	$server = new HTTP_WebDAV_Server_Docman;
 	$server->ServeRequest();
-	exit;
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
 }

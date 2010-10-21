@@ -27,7 +27,7 @@
 
 require_once "HTTP/WebDAV/Server.php";
 
-class HTTP_WebDAV_Server_Docman_DB extends HTTP_WebDAV_Server {
+class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 	function GET(&$options) {
 		$arr_path = explode('/',$options['path']);
@@ -51,66 +51,104 @@ class HTTP_WebDAV_Server_Docman_DB extends HTTP_WebDAV_Server {
 			exit_error($g->getErrorMessage(),'docman');
 
 		if ( 4 < count($arr_path)) {
+            $subpath = '';
 		    for ($i=5;$i<count($arr_path);$i++){
 		       $subpath .= '/'.$arr_path[$i];
 		    }
 		}
 
-		if (!isset($subpath)) {
+		if (empty($subpath)) {
 			$subpath = '/';
 		}
 
-		if ( $subpath == '/' ) {
-			$doc_group_id = 0;
-			$last_path = '/';
-		} else {
-			$last_path = strrchr($options['path'],'/');
-			$doc_group_id = '70';
-		}
+		$analysed_path = $this->analyse($subpath,$group_id);
 
-		echo "<html><head><title>Index of ".htmlspecialchars($subpath)."</title></head>\n";
-		echo "<h1>Index of ".htmlspecialchars($subpath)."</h1>\n";
-		echo "<ul>";
-		if ($this->isDir($last_path,$group_id,$doc_group_id)) {
+		if ($analysed_path['isdir']) {
+		    echo "<html><head><title>Index of ".htmlspecialchars($subpath)."</title></head>\n";
+            echo "<body>\n";
+		    echo "<h1>Index of ".htmlspecialchars($subpath)."</h1>\n";
+		    echo "<ul>";
 			if ( '/' != $subpath ) {
-				$back_url = substr($options['path'],0,strrpos($options['path'],strrchr($options['path'],'/')));
+                if ('/' == strrchr($options['path'],'/')) {
+                    $lastpath = substr($options['path'],0,-1);
+                } else {
+                    $lastpath = $options['path'];
+                }
+				$back_url = substr($options['path'],0,strrpos($options['path'],strrchr($lastpath,'/')));
 				echo '<a href="'.util_make_url($back_url).'">..</a>';
 			}
 			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2',
-								array($group_id,$doc_group_id));
+								array($group_id,$analysed_path['doc_group']));
 			if (!$res) {
 				exit_error(_('webdav db error:').' '.db_error(),'docman');
 			}
+			if ( '/' != substr($subpath,-1)) {
+				$subpath .= '/';
+			}
 			while ($arr = db_fetch_array($res)) {
-				if ( '/' != substr($subpath,-1)) {
-					$subpath .= '/';
-				}
 				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
 			}
-		}
+            $res = db_query_params('select filename from doc_data where group_id = $1 and doc_group = $2',
+                array($group_id,$analysed_path['doc_group']));
+            if (!$res) {
+				exit_error(_('webdav db error:').' '.db_error(),'docman');
+            }
+			while ($arr = db_fetch_array($res)) {
+				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename']).'">'.$arr['filename'].'</a></li>';
+			}
+
+		    echo "</ul>";
+		    echo "</body></html>\n";
+        } else {
+            session_redirect('/docman/view.php/'.$group_id.'/'.$analysed_path['docid'].'/'.$analysed_path['filename']);
+        }
 		
-		echo "</ul>";
-		echo "</html>\n";
 		exit;
 	}
 
-	function isDir($string,$group_id,$doc_group_id = 0) {
-		if ( $string == '/') {
-			return true;
+    function analyse($path,$group_id) {
+		$analysed_path['isdir'] = true;
+        $analysed_path['doc_group'] = 0;
+        $analysed_path['docid'] = NULL;
+		if ( $path == '/') {
+			return $analysed_path;
 		}
-		$string = substr($string,1);
-		$res = db_query_params('select * from doc_groups where group_id = $1 and groupname = $2 and doc_group = $3',
-							array($group_id,$string,$doc_group_id));
+
+        $path_arr = explode('/',$path);
+        for ($i = 1; $i < count($path_arr); $i++) {
+            if ($path_arr[$i] == '') {
+                continue;
+            }
+            $analysed_path = $this->whatIsIt($path_arr[$i],$group_id,$analysed_path);
+        }
+        return $analysed_path;
+    }
+
+	function whatIsIt($string,$group_id,$path_array) {
+		$return_path_array['isdir'] = false;
+		$res = db_query_params('select doc_group from doc_groups where group_id = $1 and groupname = $2 and parent_doc_group = $3',
+							array($group_id,$string,$path_array['doc_group']));
 		if (!$res) {
 			exit_error(_('webdav db error:').' '.db_error(),'docman');
 		}
 
 		while ($arr = db_fetch_array($res)) {
-			return true;
+			$return_path_array['isdir'] = true;
+            $return_path_array['doc_group'] = $arr['doc_group'];
 		}
 
-		return false;
-	}
+        if ($return_path_array['isdir']) {
+            return $return_path_array;
+        }
 
+        $res = db_query_params('select docid from doc_data where group_id = $1 and doc_group = $2 and filename = $3',
+                        array($group_id,$path_array['doc_group'],$string));
+        while ($arr = db_fetch_array($res)) {
+            $return_path_array['docid'] = $arr['docid'];
+            $return_path_array['filename'] = $string;
+        }
+
+        return $return_path_array;
+	}
 }
 ?>

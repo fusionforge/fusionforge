@@ -2846,7 +2846,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	}
 
 	function getStorageAPI() {
-		return 1;
+		return 'DB';
 	}
 }
 
