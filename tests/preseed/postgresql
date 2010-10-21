@@ -1,0 +1,2 @@
+gforge-db-postgresql	fusionforge/shared/admin_password	password	myadmin
+gforge-db-postgresql	fusionforge/shared/admin_password_confirm	myadmin	
