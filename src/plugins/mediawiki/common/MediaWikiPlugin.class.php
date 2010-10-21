@@ -175,15 +175,20 @@ class MediaWikiPlugin extends Plugin {
 					$role->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
 				}
 			} else {
+				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_read') ;
 				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_edit') ;
+				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_upload') ;
+				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_admin') ;
 			}
 		} elseif ($hookname == "role_translate_strings") {
 			$right = new PluginSpecificRoleSetting ($role,
-							       'plugin_mediawiki_edit') ;
+							       'plugin_mediawiki_read') ;
 			$right->setDescription (_('Mediawiki read access')) ;
 			$right->setValueDescriptions (array ('0' => _('No reading'),
 							     '1' => _('Read access'))) ;
 
+			$right = new PluginSpecificRoleSetting ($role,
+							       'plugin_mediawiki_edit') ;
 			$right->setDescription (_('Mediawiki write access')) ;
 			$right->setValueDescriptions (array ('0' => _('No editing'),
 							     '1' => _('Edit existing pages only'), 
