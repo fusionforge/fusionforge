@@ -878,7 +878,7 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 *	update - update a new in the database.
+	 *	update - update a role in the database.
 	 *
 	 *	@param	string	The name of the role.
 	 *	@param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
@@ -886,16 +886,13 @@ abstract class BaseRole extends Error {
 	 */
 	function update($role_name,$data) {
 		global $SYS;
-		//
-		//	Cannot update role_id=1
-		//
 		if (USE_PFO_RBAC) {
-			if ($this->Group == NULL) {
+			if ($this->getHomeProject() == NULL) {
 				if (!forge_check_global_perm ('forge_admin')) {
 					$this->setPermissionDeniedError();
 					return false;
 				}
-			} elseif (!forge_check_perm ('project_admin', $this->Group->getID())) {
+			} elseif (!forge_check_perm ('project_admin', $this->getHomeProject()->getID())) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
@@ -905,6 +902,9 @@ abstract class BaseRole extends Error {
 				$this->setPermissionDeniedError();
 				return false;
 			}
+			//
+			//	Cannot update role_id=1
+			//
 			if ($this->getID() == 1) {
 				$this->setError('Cannot Update Default Role');
 				return false;
