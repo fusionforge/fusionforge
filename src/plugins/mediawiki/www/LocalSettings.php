@@ -201,93 +201,28 @@ function FusionForgeMWAuth( $user, &$result ) {
 			$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
 
 			// Read access
-			switch ($r->getVal('plugin_mediawiki_read', $g->getID())) {
-			case 0:
-				$wgGroupPermissions[$gr]['read'] = false;
-				break ;
-			case 1:
-				$wgGroupPermissions[$gr]['read'] = true;
-				break ;
-			}
+			$wgGroupPermissions[$gr]['read'] = $r->hasPermission ('plugin_mediawiki_read', $g->getID()) ;
 
 			// Day-to-day edit privileges
-			switch ($r->getVal('plugin_mediawiki_edit', $g->getID())) {
-			case 0:
-				$wgGroupPermissions[$gr]['edit']          = false;
-				$wgGroupPermissions[$gr]['createpage']    = false;
-				$wgGroupPermissions[$gr]['createtalk']    = false;
-				$wgGroupPermissions[$gr]['minoredit']     = false;
-				$wgGroupPermissions[$gr]['move']          = false;
-				$wgGroupPermissions[$gr]['delete']        = false;
-				$wgGroupPermissions[$gr]['undelete']      = false;
-				break ;
-			case 1:
-				$wgGroupPermissions[$gr]['edit']          = true;
-				$wgGroupPermissions[$gr]['createpage']    = false;
-				$wgGroupPermissions[$gr]['createtalk']    = false;
-				$wgGroupPermissions[$gr]['minoredit']     = false;
-				$wgGroupPermissions[$gr]['move']          = false;
-				$wgGroupPermissions[$gr]['delete']        = false;
-				$wgGroupPermissions[$gr]['undelete']      = false;
-				break ;
-			case 2:
-				$wgGroupPermissions[$gr]['edit']          = true;
-				$wgGroupPermissions[$gr]['createpage']    = true;
-				$wgGroupPermissions[$gr]['createtalk']    = true;
-				$wgGroupPermissions[$gr]['minoredit']     = true;
-				$wgGroupPermissions[$gr]['move']          = false;
-				$wgGroupPermissions[$gr]['delete']        = false;
-				$wgGroupPermissions[$gr]['undelete']      = false;
-				break ;
-			case 3:
-				$wgGroupPermissions[$gr]['edit']          = true;
-				$wgGroupPermissions[$gr]['createpage']    = true;
-				$wgGroupPermissions[$gr]['createtalk']    = true;
-				$wgGroupPermissions[$gr]['minoredit']     = true;
-				$wgGroupPermissions[$gr]['move']          = true;
-				$wgGroupPermissions[$gr]['delete']        = true;
-				$wgGroupPermissions[$gr]['undelete']      = true;
-				break ;
-			}
+			$wgGroupPermissions[$gr]['edit']          = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editexisting') ;
+			$wgGroupPermissions[$gr]['createpage']    = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editnew') ;
+			$wgGroupPermissions[$gr]['createtalk']    = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editnew') ;
+			$wgGroupPermissions[$gr]['minoredit']     = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editnew') ;
+			$wgGroupPermissions[$gr]['move']          = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editmove') ;
+			$wgGroupPermissions[$gr]['delete']        = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editmove') ;
+			$wgGroupPermissions[$gr]['undelete']      = $r->hasPermission ('plugin_mediawiki_edit', $g->getID(), 'editmove') ;
 
 			// File upload privileges
-			switch ($r->getVal('plugin_mediawiki_upload', $g->getID())) {
-			case 0:
-				$wgGroupPermissions[$gr]['upload']        = false;
-				$wgGroupPermissions[$gr]['reupload-own']  = false;
-				$wgGroupPermissions[$gr]['reupload']      = false;
-				$wgGroupPermissions[$gr]['upload_by_url'] = false;
-				break ;
-			case 1:
-				$wgGroupPermissions[$gr]['upload']        = true;
-				$wgGroupPermissions[$gr]['reupload-own']  = true;
-				$wgGroupPermissions[$gr]['reupload']      = false;
-				$wgGroupPermissions[$gr]['upload_by_url'] = false;
-				break ;
-			case 2:
-				$wgGroupPermissions[$gr]['upload']        = true;
-				$wgGroupPermissions[$gr]['reupload-own']  = true;
-				$wgGroupPermissions[$gr]['reupload']      = true;
-				$wgGroupPermissions[$gr]['upload_by_url'] = true;
-				break ;
-			}
+			$wgGroupPermissions[$gr]['upload']        = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'upload') ;
+			$wgGroupPermissions[$gr]['reupload-own']  = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'upload') ;
+			$wgGroupPermissions[$gr]['reupload']      = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'reupload') ;
+			$wgGroupPermissions[$gr]['upload_by_url'] = $r->hasPermission ('plugin_mediawiki_upload', $g->getID(), 'reupload') ;
 
 			// Administrative tasks
-			switch ($r->getVal('plugin_mediawiki_admin', $g->getID())) {
-			case 0:
-				$wgGroupPermissions[$gr]['editinterface'] = false;
-				$wgGroupPermissions[$gr]['import']        = false;
-				$wgGroupPermissions[$gr]['importupload']  = false;
-				$wgGroupPermissions[$gr]['siteadmin']     = false;
-				break ;
-			case 1:
-				$wgGroupPermissions[$gr]['editinterface'] = true;
-				$wgGroupPermissions[$gr]['import']        = true;
-				$wgGroupPermissions[$gr]['importupload']  = true;
-				$wgGroupPermissions[$gr]['siteadmin']     = true;
-				break ;
-			}
-
+			$wgGroupPermissions[$gr]['editinterface'] = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
+			$wgGroupPermissions[$gr]['import']        = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
+			$wgGroupPermissions[$gr]['importupload']  = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
+			$wgGroupPermissions[$gr]['siteadmin']     = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		}
 
                 $user->setCookies ();

@@ -699,6 +699,16 @@ abstract class BaseRole extends Error {
 			}
 			return $value ;
 			break ;
+		default:
+			$hook_params = array ();
+			$hook_params['role'] = $this ;
+			$hook_params['section'] = $section ;
+			$hook_params['reference'] = $reference ;
+			$hook_params['value'] = $value ;
+			$hook_params['result'] = 0 ;
+			plugin_hook_by_reference ("role_get_setting", $hook_params);
+			return $hook_params['result'] ;
+			break ;
 		}
 	}
 

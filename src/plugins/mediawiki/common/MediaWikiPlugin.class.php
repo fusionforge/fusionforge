@@ -46,6 +46,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "role_normalize";
 		$this->hooks[] = "role_translate_strings";
 		$this->hooks[] = "role_has_permission";
+		$this->hooks[] = "role_get_setting";
 		$this->hooks[] = "list_roles_by_permission";
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 	}
@@ -212,6 +213,41 @@ class MediaWikiPlugin extends Plugin {
 			$right->setDescription (_('Mediawiki administrative tasks')) ;
 			$right->setValueDescriptions (array ('0' => _('No administrative access'),
 							     '1' => _('Edit interface, import XML dumps'))) ;
+		} elseif ($hookname == "role_get_setting") {
+			$role = $params['role'] ;
+			$reference = $params['reference'] ;
+			$value = $params['value'] ;
+
+			switch ($params['section']) {
+			case 'plugin_mediawiki_read':
+				if ($role->hasPermission('project_admin', $reference)) {
+					$params['result'] = 1 ;
+				} else {
+					$params['result'] =  $value ;
+				}
+				break ;
+			case 'plugin_mediawiki_edit':
+				if ($role->hasPermission('project_admin', $reference)) {
+					$params['result'] = 3 ;
+				} else {
+					$params['result'] =  $value ;
+				}
+				break ;
+			case 'plugin_mediawiki_upload':
+				if ($role->hasPermission('project_admin', $reference)) {
+					$params['result'] = 2 ;
+				} else {
+					$params['result'] =  $value ;
+				}
+				break ;
+			case 'plugin_mediawiki_admin':
+				if ($role->hasPermission('project_admin', $reference)) {
+					$params['result'] = 1 ;
+				} else {
+					$params['result'] =  $value ;
+				}
+				break ;
+			}
 		} elseif ($hookname == "role_has_permission") {
 			switch ($params['section']) {
 			case 'plugin_mediawiki_read':
