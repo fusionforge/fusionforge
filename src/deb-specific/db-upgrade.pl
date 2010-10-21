@@ -1839,6 +1839,8 @@ eval {
     &update_with_sql("20100924-theme","5.0.1-9");
     &update_with_sql("20100926-pfo-rbac","5.0.1-10");
     &update_with_sql("20100927-pfo-rbac","5.0.1-11");
+    &update_with_sql("20101012-docman-webdav","5.0.51-1");
+    &update_with_sql("20101021-pfo-rbac","5.0.51-2");
 
     ########################### INSERT HERE #################################
 
