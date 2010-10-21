@@ -4543,7 +4543,6 @@ tests/func/News/newsTest.php -text
 tests/func/PluginsBlocks/blocksTest.php -text
 tests/func/README.TXT -text
 tests/func/Site/loginTest.php -text
-tests/func/Site/loginTestDEB.php -text
 tests/func/Site/projectsTest.php -text
 tests/func/Site/top.php -text
 tests/func/Site/troveTest.php -text

@@ -19,7 +19,7 @@ class DEBDebian60Tests
 		$suite = new DEBSeleniumRemoteSuite('PHPUnit');
 
 		// Selenium tests
-		$suite->addTestFiles(glob("func/Site/*TestDEB.php"));
+		$suite->addTestFiles(glob("func/Site/*Test.php"));
 //		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
 //		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
 //		$suite->addTestFiles(glob("func/Forums/*Test.php"));
