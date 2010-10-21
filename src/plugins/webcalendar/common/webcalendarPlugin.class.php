@@ -218,98 +218,94 @@ db_query_params ('DELETE FROM webcal_entry_user WHERE cal_login = $1 ',
 			array ($row['unix_group_name'] ));
 		}
 		elseif ($hookname == "change_cal_permission") {
-			//argument user_id -> $params[0]et project_id -> $params[1]
-			//project/admin/index.php line 72,87,103
-			//project/admin/massfinish.php line 50
-
-			$user_id = $params[0] ;
-			$project_id = $params[1] ;
-
-			$project = group_get_object ($project_id) ;
-			$user = user_get_object ($user_id) ;
-			
-			if (USE_PFO_RBAC) {
-				if (forge_check_perm_for_user ($user, 'webcal', $project_id, 'write')) {
-					$user_perm = 1 ;
-				} elseif (forge_check_perm_for_user ($user, 'webcal', $project_id, 'write')) {
-					$user_perm = 2 ;
-				} else {
-					$user_perm = 0 ;
-				}
-			} else {
-				$res = db_query_params ('SELECT value,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = $1 AND user_group.group_id = $2 AND role_setting.section_name = $3',
-							array ($user_id,
-							       $project_id,
-							       'webcal'));
+				//argument user_id -> $params[0]et group_id -> $params[1]
+				//project/admin/index.php line 72,87,103
+				//project/admin/massfinish.php line 50
+				
+				
+				
+								
+			$res = db_query_params ('SELECT value,admin_flags FROM user_group,role_setting WHERE role_setting.role_id = user_group.role_id AND user_group.user_id = $1 AND user_group.group_id = $2 AND role_setting.section_name = $3',
+			array ($params[0],
+				$params[1],
+				'webcal'));
 				$row_flags = db_fetch_array($res);
-				$user_perm = $row_flags['value'] ;
-			}
 				
-			//flag verification
-			$res = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
-						array ($project->getUnixName(),
-						       $user->getUnixName()));
-			$row_num = db_fetch_array($res);
+				//get user name :
+				$res_nom_boss = db_query_params ('SELECT unix_group_name FROM groups WHERE group_id = $1 ',
+			array ($params[1]));
+				$row_nom_boss = db_fetch_array($res_nom_boss);
 				
-			//select email
-			$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE cal_login = $1',
-						     array ($project->getUnixName()));
-			$row_mail = db_fetch_array($res_mail);
-			$mail = $row_mail['cal_email'] ;
 				
-			//if group admin
-			if($project_id == 1){
-				$res_flags_admin = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
-								    array ($user_id,
-									   $project_id));
-				$row_flags_admin = db_fetch_array($res_flags_admin);
-				if(trim($row_flags_admin['admin_flags']) == 'A'  ) {
-					$cia = 'Y' ;
-				} else {
-					$cia = 'N' ;
+				$res_nom_user = db_query_params ('SELECT user_name,email FROM users WHERE user_id = $1 ',
+			array ($params[0]));
+				$row_nom_user = db_fetch_array($res_nom_user);
+				
+				//flag verification
+				$res = db_query_params ('SELECT COUNT(*) FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
+				$row_num = db_fetch_array($res);
+				
+				//select email
+				$res_mail = db_query_params ('SELECT cal_email FROM webcal_user WHERE  cal_login = $1',
+			array ($row_nom_boss['unix_group_name']));
+				$row_mail = db_fetch_array($res_mail);
+				$mail = $row_mail['cal_email'] ;
+				
+				//if group admin
+				if($params[1] == 1){
+					$res_flags_admin = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
+									    array ($params[0],
+										   $params[1]));
+					$row_flags_admin = db_fetch_array($res_flags_admin);
+					if(trim($row_flags_admin['admin_flags']) == 'A'  ) {
+						$cia = 'Y' ;
+					} else {
+						$cia = 'N' ;
+					}
+					db_query_params ('UPDATE webcal_user SET cal_is_admin = $1 WHERE cal_login = $2',
+							 array ($cia,
+								$row_nom_user['user_name']));
 				}
-				db_query_params ('UPDATE webcal_user SET cal_is_admin = $1 WHERE cal_login = $2',
-						 array ($cia,
-							$user->getUnixName()));
-			}
 
-			if(($row_num[0] != 1 ) && ($user_perm == 1)){
+				if(($row_num[0] != 1 ) && ($row_flags['value'] == 1)){
 					
-				$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
-							       array ($project->getUnixName(),
-								      $user->getUnixName()));
+					$res_insert = db_query_params ('INSERT INTO webcal_asst (cal_boss, cal_assistant) VALUES ($1,$2)',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));
 				
 				//we add email of the new admin
-				$mail = str_replace($user->getEmail(),"",$mail);
-				$mail = str_replace(",".$user->getEmail(),"",$mail);
+				$mail = str_replace($row_nom_user['email'],"",$mail);
+				$mail = str_replace(",".$row_nom_user['email'],"",$mail);
 								
 				if($mail == ""){
 					$virgule = "";	
-				}
+					}
 				else {
 					$virgule = ",";	
-				}
+					}
 									
-				$mail = $mail.$virgule.$user->getEmail() ;
+				$mail = $mail.$virgule.$row_nom_user['email'] ;
 				
 				
 				
 				//$mail = $row_mail['cal_email'].",".$row_nom_user['email'] ;
 				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
 						 array (trim($mail,','),
-							$project->getUnixName()));
-			}
-			elseif($row_num[0] == 1 && ($user_perm != 1)){
-				$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
-							    array ($project->getUnixName(),
-								   $user->getUnixName()));	
+							$row_nom_boss['unix_group_name']));
+				}
+				elseif($row_num[0] == 1 && ($row_flags['value'] != 1)){
+					$res_del = db_query_params ('DELETE FROM webcal_asst WHERE cal_boss = $1 AND cal_assistant = $2',
+			array ($row_nom_boss['unix_group_name'],
+				$row_nom_user['user_name']));	
 				
 				//we del email of the old admin
 				$mail = str_replace(",".$row_nom_user['email'],"",$row_mail['cal_email']) ;
-				db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
-						 array ($mail,
-							$project->getUnixName()));
-			}
+db_query_params ('UPDATE webcal_user SET cal_email = $1 WHERE cal_login = $2',
+			array ($mail,
+				$row_nom_boss['unix_group_name']));
+				}
 		}
 		elseif ($hookname == "group_approve") {
 			$res = db_query_params ('SELECT admin_flags FROM user_group WHERE user_id = $1 AND group_id = $2',
