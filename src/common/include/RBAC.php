@@ -725,11 +725,6 @@ abstract class BaseRole extends Error {
 		}
 	}
 
-	function setVal($section, $ref_id, $value) {
-		$this->setting_array[$section][$ref_id] = $value;
-		return $this->update( $this->getName(), $this->setting_array);
-	}
-
 	/**
 	 *  &getRoleVals - get all the values and language text strings for this section.
 	 *
