@@ -46,6 +46,9 @@ function performAction($newStatus, $statusString, $user_id) {
 		exit_error($u->getErrorMessage(),'home');
 	}
 	if($newStatus=="D") {
+		if(!$u->setStatus($newStatus)) {
+			exit_error($u->getErrorMessage(),'home');
+		}
 		if(!$u->delete(true)) {
 			exit_error($u->getErrorMessage(),'home');
 		}
@@ -123,14 +126,8 @@ $status = getStringFromRequest('status');
 
 if ($action=='delete') {
 	performAction('D', "DELETED", $user_id);
-	//plugin webcal
-	//del webcal user
-	plugin_hook('del_cal_user',$user_id);
 } else if ($action=='activate') {
 	performAction('A', "ACTIVE", $user_id);
-	//plugin webcal
-	//create webcal user
-	plugin_hook('add_cal_user',$user_id);
 } else if ($action=='suspend') {
 	performAction('S', "SUSPENDED", $user_id);
 }

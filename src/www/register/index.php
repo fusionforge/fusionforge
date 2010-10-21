@@ -118,12 +118,6 @@ if (getStringFromRequest('submit')) {
 				if (!$group->approve( user_get_object_by_name ( $sys_project_reg_autoapprove_user ) ) ) {
 					printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 				} else {
-					$hook_params = array () ;
-					$hook_params['group_id'] = $group_id ;
-					plugin_hook ("group_approved", $hook_params) ;
-
-					plugin_hook('add_cal_group',$group_id);
-
 					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 				}
 			}

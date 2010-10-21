@@ -689,9 +689,6 @@ Enjoy the site.
 			
 			db_commit();
 			
-			//plugin webcalendar, create cal_user
-			plugin_hook('add_cal_user',$this->getID());
-			
 			return true;
 		}
 	}

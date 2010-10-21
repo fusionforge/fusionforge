@@ -2392,7 +2392,7 @@ class Group extends Error {
 		//	
 		$params[0] = $idadmin_group ;
 		$params[1] = $this->getID();
-		plugin_hook('group_approve',$params);	
+		plugin_hook('group_approved',$params);	
 
 		return true;
 	}

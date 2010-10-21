@@ -102,7 +102,6 @@ if (getStringFromRequest('submit')) {
 					$HTML->footer(array());
 					exit;
 				}
-				plugin_hook('add_cal_user', $unix_name);
 			}
 			if ($send_mail) {
 				echo '<p>';
