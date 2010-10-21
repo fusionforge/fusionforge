@@ -1,0 +1,2 @@
+gforge-web-apache2	fusionforge/shared/db_password	password	myadmin
+gforge-web-apache2	fusionforge/shared/db_password_confirm	password	myadmin

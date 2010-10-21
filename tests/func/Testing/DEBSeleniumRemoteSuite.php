@@ -9,7 +9,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		parent::setUp();
 
 		system("scp -r ../tests/preseed root@".HOST.":/root/");
-		system("ssh root@".HOST." 'LANG=C debconf-set-selections < /root/preseed/*'");
+		system("ssh root@".HOST." 'cat /root/preseed/* | LANG=C debconf-set-selections'");
 
 		if (getenv('FFORGE_DEB_REPO')) {
 			system("ssh root@".HOST." 'echo \"deb ".getenv('FFORGE_DEB_REPO')." ".getenv('DIST')." main\" > /etc/apt/sources.list.d/fusionforge.list'");
