@@ -35,7 +35,7 @@ $wrapperscript = array_shift ($argv) ;
 $fusionforgeproject = array_shift ($argv) ;
 $mwscript = array_shift ($argv) ;
 
-include (dirname(__FILE__).'/../../env.inc.php');
+require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 

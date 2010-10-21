@@ -26,9 +26,9 @@
    It is intended to be started in a cronjob with root permissions.
    */
 
-include dirname(__FILE__) . '/../../env.inc.php';
+require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-include $gfcommon.'include/cron_utils.php';
+require_once $gfcommon.'include/cron_utils.php';
 
 if (forge_get_config('enable_uploads', 'mediawiki')) {
 	$upload_dir_basename = "images";
