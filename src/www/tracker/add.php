@@ -42,7 +42,7 @@ $ath->header(array ('title'=>_('Submit New')));
 	            <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />';
 	if (!session_loggedin()) {
 		echo '
-		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode($REQUEST_URI)).'">', '</a>').'</span><br /><br />
+		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br /><br />
 		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
 		<input type="text" name="user_email" size="50" maxlength="255" /></p>
 		';
