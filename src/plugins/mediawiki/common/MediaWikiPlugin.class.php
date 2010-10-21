@@ -125,6 +125,8 @@ class MediaWikiPlugin extends Plugin {
 			$role =& $params['role'] ;
 
 			// Read access
+			$right = new PluginSpecificRoleSetting ($role,
+								'plugin_mediawiki_read') ;
 			$right->SetAllowedValues (array ('0', '1')) ;
 			$right->SetDefaultValues (array ('Admin' => '1',
 							 'Senior Developer' => '1',
