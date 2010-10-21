@@ -172,7 +172,10 @@ class MediaWikiPlugin extends Plugin {
 			if (USE_PFO_RBAC) {
 				$projects = $role->getLinkedProjects() ;		
 				foreach ($projects as $p) {
-					$role->normalizePermsForSection ($new_pa, $section, $p->getID()) ;
+					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_read', $p->getID()) ;
+					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_edit', $p->getID()) ;
+					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_upload', $p->getID()) ;
+					$role->normalizePermsForSection ($new_pa, 'plugin_mediawiki_admin', $p->getID()) ;
 				}
 			} else {
 				$role->normalizeDataForSection ($new_sa, 'plugin_mediawiki_read') ;
