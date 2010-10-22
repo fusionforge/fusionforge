@@ -117,7 +117,7 @@ function set_version($version, $date) {
 		db_rollback();
 		return false;
 	}
-	echo "GForge Database Version: $version ($date)\n";
+	echo "FusionForge Database Version: $version ($date)\n";
 	db_commit();	
 }
 ?>
