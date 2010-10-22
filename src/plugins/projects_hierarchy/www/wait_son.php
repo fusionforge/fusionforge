@@ -35,6 +35,9 @@ db_query_params ('UPDATE plugin_projects_hierarchy SET activated = true WHERE pr
 	) or die(db_error());
 db_commit();
 
+$project = group_get_object ($group_id) ;
+$subproject = group_get_object ($sub_project_id) ;
+
 //plugin webcal
 $params[0] =  $sub_group_id;
 $params[1] =  $group_id;
@@ -42,41 +45,24 @@ $params[1] =  $group_id;
 plugin_hook('add_cal_link_father',$params);
 
 // send mail to admin of the parent project for share knowledge
-$project_name_res = db_query_params ('SELECT group_name from groups where group_id=$1',
-                                     array ( $group_id ) );
-echo db_error();
-$row =& db_fetch_array($project_name_res);
-
-$project_name = $row['group_name'];
-
-$child_project_name_res = db_query_params ('SELECT group_name from groups where group_id=$1',
-                                     array ( $sub_group_id ) );
-echo db_error();
-$row =& db_fetch_array($child_project_name_res);
-
-$child_project_name = $row['group_name'];
-
 $message = sprintf(_('New Parent Relation Validated 
 
 Parent Project Full Name: %1$s
-Child Project Full Name: %2$s'), $project_name,$child_project_name);
+Child Project Full Name: %2$s'),
+		   $project->getPublicName(),
+		   $subproject->getPublicName());
 
-$res = db_query_params ('SELECT users.email, users.language, users.user_id
-                         FROM users, user_group
-                         WHERE group_id=$1 
-                         AND user_group.admin_flags=$2
-                         AND users.user_id=user_group.user_id',
-                         array ($group_id,'A'));
-
-if (db_numrows($res) < 1) {
+$admins = $project->getAdmins() ;
+if (count ($admins) < 1) {
     $this->setError(_("There is no administrator to send the mail."));
     return false;
 }
 
-for ($i=0; $i<db_numrows($res) ; $i++) {
-    $admin_email = db_result($res,$i,'email') ;
-
-    util_send_message($admin_email,sprintf('New Parent %1$s Relation Validated', $project_name), $message);
+foreach ($admins as $u) {
+	util_send_message($u->getEmail(),
+			  sprintf(_('New Parent %1$s Relation Validated'),
+				  $project->getPublicName()),
+			  $message);
 }
 
 header("Location: ".util_make_url ('/project/admin/index.php?group_id='.$sub_group_id));
