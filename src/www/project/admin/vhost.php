@@ -103,12 +103,17 @@ if (getStringFromRequest('deletevhost')) {
 
 project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group->getID()));
 
+print '<h2>' . _('Add New Virtual Host') . '</h2>';
+
+print '<p>';
+printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.'), $group->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_name']);
+print '</p>';
+
+print '<p>';
+printf(_('Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</em>.'), $group->getUnixName(), $GLOBALS['sys_default_domain']);
+print '</p>';
+
 ?>
-
-<p>&nbsp;</p>
-
-<?php printf(_('<strong><span style="text-decoration:underline">Add New Virtual Host</span></strong><p>To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.  <p>Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</em>.'), $group->getUnixName(), forge_get_config('web_host'), forge_get_config ('forge_name'), $group->getUnixName(), forge_get_config('web_host')) ?>
-<p>
 
 <form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&createvhost=1'; ?>" method="post"> 
 <table border="0">
@@ -147,7 +152,7 @@ if (db_numrows($res_db) > 0) {
 	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
-	echo '<p>'._('No VHOSTs defined').'No VHOSTs defined</p>';
+	echo '<p>'._('No VHOSTs defined').'</p>';
 }
 
 project_admin_footer(array());
