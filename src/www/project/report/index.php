@@ -142,14 +142,6 @@ echo '</p>';
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 // list members
-$res_memb = db_query_params("SELECT users.*,user_group.admin_flags,people_job_category.name AS role
-	FROM users,user_group 
-	LEFT JOIN people_job_category ON user_group.member_role=people_job_category.category_id
-	WHERE users.user_id=user_group.user_id 
-	AND user_group.group_id=$1
-	AND users.status='A'
-	ORDER BY users.user_name ", array($group_id));
-
 foreach ($group->getUsers() as $member) {
 	echo '
 		<tr><td>';
