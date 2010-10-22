@@ -33,7 +33,6 @@ require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
 require_once $gfcommon.'docman/include/webdav.php';
 
-session_require_perm ('project_read', $group_id) ;
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
@@ -47,6 +46,7 @@ if (!$g || !is_object($g)) {
 }
 
 if ($docid != 'backup' && $docid != 'webdav' ) {
+    session_require_perm ('docman', $group_id, 'read') ;
 	$docname=urldecode($arr[5]);
 
 	$d = new Document($g,$docid);
@@ -80,6 +80,7 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	echo $d->getFileData();
 
 } else if ( $docid == 'backup' ) {
+    session_require_perm ('docman', $group_id, 'admin') ;
 
 	$df = new DocumentFactory($g);
 	if ($df->isError())

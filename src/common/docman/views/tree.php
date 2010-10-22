@@ -27,6 +27,9 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $d_arr; // documents array
+global $group_id; // id of the group
+
+session_require_perm ('docman',$group_id,'read');
 
 echo '<h3>Document Tree</h3>';
 $nested_docs=array();
