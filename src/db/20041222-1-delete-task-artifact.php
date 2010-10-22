@@ -17,7 +17,7 @@ if (!$res) {
 	$tasks = array();
 	
 	for ($i=0;$i<db_numrows($res);$i++) {
-		$data = &db_fetch_array($res);
+		$data = db_fetch_array($res);
 		$tasks[] = $data['project_task_id'];
 	}
 	
@@ -85,7 +85,7 @@ if (!$res) {
 	$artifacts = array();
 	
 	for ($i=0;$i<db_numrows($res);$i++) {
-		$data = &db_fetch_array($res);
+		$data = db_fetch_array($res);
 		$artifacts[] = $data['artifact_id'];
 	}
 	

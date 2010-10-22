@@ -83,7 +83,7 @@ $res=db_query_params ('SELECT group_id FROM groups WHERE status != $1',
 $arr = util_result_column_to_array($res);
 
 for ($i=0; $i<count($arr); $i++) {
-	$g =& group_get_object($arr[$i]);
+	$g = group_get_object($arr[$i]);
 	//
 	//
 	//  Set Default Roles

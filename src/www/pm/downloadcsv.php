@@ -214,7 +214,7 @@ for ($i=0; $i<count($pt_arr); $i++) {
 			echo $sep;
 		}
 
-		$dependentOn =& $pt_arr[$i]->getDependentOn();
+		$dependentOn = $pt_arr[$i]->getDependentOn();
 		$keys=array_keys($dependentOn);
 		for ($j=0; $j<5; $j++) {
 			if ($j < count($keys)) {

@@ -45,7 +45,7 @@ $_changed_from = getStringFromRequest('_changed_from');
 
 $af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
 
-$at_arr =& $af->getArtifacts();
+$at_arr = $af->getArtifacts();
 
 echo 'artifact_id;status_id;status_name;priority;submitter_id;submitter_name;assigned_to_id;assigned_to_name;open_date;close_date;last_modified_date;summary;details';
 

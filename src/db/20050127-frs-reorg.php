@@ -53,7 +53,7 @@ session_set_new($id);
 $res=db_query_params ('SELECT group_id FROM groups WHERE status != $1',
 			array('P')) ;
 
-$groups =& group_get_objects(util_result_column_to_array($res));
+$groups = group_get_objects(util_result_column_to_array($res));
 
 for ($g=0; $g<count($groups); $g++) {
 
