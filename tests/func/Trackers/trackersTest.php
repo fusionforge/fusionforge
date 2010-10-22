@@ -145,8 +145,8 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("field_type");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
+$this->click("//tr[@id='field-number']/td[4]/a[1]");
 		//$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/index.php?add_opt=1&boxid=22&group_id=6&atid=101')]");
-		$this->click("link=[add choices]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "1");
 		$this->click("post_changes");
