@@ -21,6 +21,6 @@ VZPRIVATEDIR=/var/lib/vz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
 
-USERCLIENT=admrsc
+SSHPUBKEY=~admrsc/.ssh/id_rsa.pub
 
 DIST=squeeze

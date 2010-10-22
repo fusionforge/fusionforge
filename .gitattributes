@@ -4573,6 +4573,7 @@ tests/openvz/interfaces.sample -text
 tests/openvz/local.christian -text
 tests/openvz/local.christian.rinse.bpi -text
 tests/openvz/local.christian.rinse.conf -text
+tests/openvz/local.g-t3500-cb -text
 tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text
 tests/openvz/local.g-virtual05.rinse.conf -text
