@@ -44,14 +44,13 @@ if ($group_id) {
 	$title = ": ".$row['group_name']." - ";
 	$link = "/project/showfiles.php?group_id=$group_id";
 	$description = " of ".$row['group_name'];
-	$reswm = db_query_params ('SELECT users.user_name,users.realname FROM user_group,users WHERE group_id=$1 AND admin_flags=$2 AND users.user_id=user_group.user_id ORDER BY users.add_date',
-				  array($group_id,
-					'A'));
-	if ($rowwm = db_fetch_array($reswm)) {
-	  $webmaster = $rowwm['user_name']."@".forge_get_config('users_host')." (".$rowwm['realname'].")";
+	$admins = RBACEngine::getUsersByAllowedAction ('project_admin', $group_id) ;
+	if (count ($admins)) {
+		$webmaster = $admins[0]->getUnixName()."@".forge_get_config('users_host')." (".$admins[0]->getRealName().")";
 	} else {
-	  $webmaster = forge_get_config('admin_email');
+		$webmaster = forge_get_config('admin_email');
 	}
+
 } else {
 	$title = "";
 	$link = "/new/";
