@@ -66,11 +66,11 @@ if (!$group || !is_object($group)) {
         exit_no_group();
 }
 if ($group->isError()) {
-        if($group->isPermissionDeniedError()) {
-                exit_permission_denied($group->getErrorMessage(),'tracker');
-        } else {
-                exit_error($group->getErrorMessage(),'tracker');
-        }
+	if($group->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage(),'tracker');
+	} else {
+		exit_error($group->getErrorMessage(),'tracker');
+	}
 }
 
 if ($group_id && $atid) {
