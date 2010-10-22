@@ -61,7 +61,7 @@ builddebiantemplate: beroot builddebianvm
 	##echo "debian6.local" > $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/hostname
 	#
 	[ -c $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/dev/ptmx ] || chroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP) /bin/mknod /dev/ptmx c 5 2
-	mkdir -p $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
+	[ -d $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh ] || mkdir -p $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh
 	cp $(SSHPUBKEY) $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/root/.ssh/authorized_keys
 	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/etc/ssh/
 	cd $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
@@ -100,7 +100,7 @@ buildcentostemplate: beroot buildcentosvm
 	touch $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
 	grep -q devpts $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab || \
 		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
-	mkdir $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh
+	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh ] || mkdir $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh
 	cp $(SSHPUBKEY) $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh/authorized_keys
 	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/ssh/
 	cd $(VZPRIVATEDIR)/$(VEIDCENTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
