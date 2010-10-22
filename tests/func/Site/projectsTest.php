@@ -64,8 +64,8 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Register Project");
 		$this->waitForPageToLoad("30000");
 		$this->type("full_name", "ProjectA");
-		$this->type("purpose", "This is a simple description for project A");
-		$this->type("description", "This is the public description for project A.");
+		$this->type("purpose", "This is a simple description for ProjectA");
+		$this->type("description", "This is the public description for ProjectA.");
 		$this->type("unix_name", "projecta");
 		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
@@ -83,7 +83,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("ProjectA"));
 		$this->click("link=ProjectA");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("This is the public description for project A."));
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 	}
 

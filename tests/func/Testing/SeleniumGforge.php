@@ -128,6 +128,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
+		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
 		$this->click("link=Register Project");
 		$this->waitForPageToLoad("30000");
 		$this->type("full_name", $name);
@@ -145,6 +146,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("document.forms['approve.$unix_name'].submit");
 		$this->waitForPageToLoad("30000");
+		}
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent($name));

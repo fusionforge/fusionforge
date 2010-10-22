@@ -20,10 +20,11 @@ class DEBDebian60Tests
 
 		// Selenium tests
 		$suite->addTestFiles(glob("func/Site/*Test.php"));
-//		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
-//		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
-//		$suite->addTestFiles(glob("func/Forums/*Test.php"));
-//		$suite->addTestFiles(glob("func/News/*Test.php"));
+		if (!defined('DB_INIT_CMD')) { define('PROJECTA','true'); }
+		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
+		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
+		$suite->addTestFiles(glob("func/Forums/*Test.php"));
+		$suite->addTestFiles(glob("func/News/*Test.php"));
 //		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
 		
 		return $suite;
