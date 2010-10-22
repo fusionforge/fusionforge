@@ -47,28 +47,15 @@ if (util_is_root_dir(forge_get_config('groupdir_prefix'))) {
 	exit;
 }
 
-//
-//	Get the users' unix_name and password out of the database
-//   ONLY USERS WITH CVS READ AND COMMIT PRIVS ARE ADDED
-//
-$res = db_query_params ('SELECT distinct users.user_name,users.unix_pw,users.unix_uid,users.unix_gid,users.user_id
-	FROM users,user_group,groups
-	WHERE users.user_id=user_group.user_id 
-	AND user_group.group_id=groups.group_id
-	AND groups.status=$1
-	AND user_group.cvs_flags IN ($2,$3)
-	AND users.status=$4
-	ORDER BY users.user_id ASC',
-			array('A',
-				'0',
-				'1',
-				'A'));
+$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
+			array('A')) ;
 $err .= db_error();
+$groups = group_get_objects (util_result_column_to_array($res,'group_id'));
 
-$gforge_users    =& util_result_column_to_array($res,'user_name');
-$user_unix_uids =& util_result_column_to_array($res,'unix_uid');
-$user_unix_gids =& util_result_column_to_array($res,'unix_gid');
-$user_pws =& util_result_column_to_array($res,'unix_pw');
+$res = db_query_params ('SELECT user_id FROM users WHERE unix_status=$1',
+			array('A')) ;
+$err .= db_error();
+$users = user_get_objects (util_result_column_to_array($res,'group_id'));
 
 // Create the entries for the GForge users
 $gforge_lines_passwd = array();
@@ -83,21 +70,6 @@ $unmanaged_lines_group = array();
 // user description is something like "MyGForge user"
 $user_description = preg_replace('/[^[:alnum:] _-]/', '', forge_get_config ('forge_name'));
 $user_description .= " user";
-
-/*
-for ($i=0; $i < count($gforge_users); $i++) {
-	$username = $gforge_users[$i];
-	$user_unix_uid = $user_unix_uids[$i];
-	$user_unix_gid = $user_unix_gids[$i];
-	$shell = DEFAULT_SHELL;
-	$unix_passwd = $user_pws[$i];
-	
-	$line_passwd =	$username.":x:".$user_unix_uid.":".$user_unix_gid.":".
-					$user_description.":/home/".$username.":".$shell;
-	$line_shadow = $username.":".$unix_passwd.":12090:0:99999:7:::";
-	
-}
-*/
 
 /*************************************************************************
  * Step 1: Process /etc/passwd
@@ -137,15 +109,15 @@ for ($i=0; $i < count($passwd_orig); $i++) {
 // Now, check which of the GForge users were found outside the #GFORGE markers. In that
 // case, the user must not be written inside the markers (means the user is managed by
 // the sysadmin)
-for ($i=0; $i < count($gforge_users); $i++) {
-	$username = $gforge_users[$i];
+foreach ($users as $u) {
+	$username = $u->getUnixName() ;
 	$managed_by_gforge = !in_array($username, $unmanaged_usernames);
 
 	if ($managed_by_gforge) {
-		$user_unix_uid = $user_unix_uids[$i];
-		$user_unix_gid = $user_unix_gids[$i];
+		$user_unix_uid = $u->getUnixUID() ;
+		$user_unix_gid = $u->getUnixGID() ;
 		$shell = DEFAULT_SHELL;
-		$unix_passwd = $user_pws[$i];
+		$unix_passwd = $u->getUnixPasswd() ;
 		
 		$line_passwd =	$username.":x:".$user_unix_uid.":".$user_unix_gid.":".
 						$user_description.":/home/".$username.":".$shell;
@@ -194,8 +166,8 @@ for ($i=0; $i < count($shadow_orig); $i++) {
 	
 	$unmanaged_lines_shadow[] = $line;
 }
-for ($i=0; $i < count($gforge_users); $i++) {
-	$username = $gforge_users[$i];
+foreach ($users as $u) {
+	$username = $u->getUnixName() ;
 	$managed_by_gforge = !in_array($username, $unmanaged_usernames);
 
 	if ($managed_by_gforge) {
@@ -219,18 +191,6 @@ $shadow_contents .= "\n#GFORGEEND\n";
 $group_orig = file("/etc/group");
 
 //	Add the groups from the gforge database
-$group_res = db_query_params ('SELECT group_id, unix_group_name, (is_public=1 AND enable_anonscm=1 AND type_id=1) AS enable_pserver FROM groups WHERE status=$1 AND type_id=$2',
-			array('A',
-				'1'));
-$err .= db_error();
-
-$gforge_groups = array();
-for($i = 0; $i < db_numrows($group_res); $i++) {
-	$group_name = db_result($group_res,$i,'unix_group_name');
-    $gforge_groups[] = $group_name;
-    $gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;	// 50000: hardcoded value (for now).
-}
-
 for ($i=0; $i < count($group_orig); $i++) {
 	$line = trim($group_orig[$i]);
 	// Skip the GForge groups (will be written later)
@@ -267,10 +227,10 @@ for ($i=0; $i < count($group_orig); $i++) {
 // manage the user. This is done because we must add the users to the group, and for this we
 // must manage them.
 
-for ($i = 0; $i < count($gforge_groups); $i++) {
-	$group_name = $gforge_groups[$i];
-	$unix_gid = $gids[$group_name];
-	
+foreach ($groups as $g) {
+	$group_name = $g->getUnixName() ;
+	$unix_gid = $g->getID() + 50000;	// 50000: hardcoded value (for now).
+
 	$line = $group_name.":x:".$unix_gid.":";
 	
 	/* we need to get the project object to check if a project
@@ -278,24 +238,15 @@ for ($i = 0; $i < count($gforge_groups); $i++) {
 	 * the apache user to the group so that ViewCVS can be used
 	 */
 	 
-	$group_id = db_result($group_res, $i, 'group_id');
-	$project = &group_get_object($group_id);
-	$enable_pserver = (db_result($group_res, $i, 'enable_pserver') == 't');	
+	$group_id = $g->getID() ;
 
-	$resusers = db_query_params ('SELECT user_name 
-		FROM users,user_group,groups 
-		WHERE groups.group_id=user_group.group_id 
-		AND users.user_id=user_group.user_id
-		AND user_group.cvs_flags IN ($1,$2)
-		AND users.status=$3
-                AND groups.unix_group_name=$4',
-				     array('0',
-					   '1',
-					   'A',
-					   $group_name));
-	$gmembers = util_result_column_to_array($resusers,'user_name');
-	if ($enable_pserver) $gmembers[] = 'anonymous';
-	if (!$project->enableAnonSCM()) {
+	$gmembers =  array () ;
+	foreach (RBACEngine::getInstance()->getUsersByAllowedAction ('scm', $group_id, 'write') as $committer) {
+		$gmembers[] = $committer->getUnixName() ;
+	}
+	if ($g->enableAnonSCM()) {
+		$gmembers[] = 'anonymous';
+	} else {
 		$gmembers[] = forge_get_config('apache_user');
 	}
 	
