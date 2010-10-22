@@ -73,7 +73,7 @@ if (!$has_error) {
 	echo "\n";
 
 	// Special treatement for the initial value (in the Submit form).
-	echo '<tr><th style="text-align:left">'.$init.'</th>'."\n";
+	echo '<tr id="initval"><th style="text-align:left">'.$init.'</th>'."\n";
 	$next = $atw->getNextNodes('100');
 	foreach ($states as $s) {
 		$name = 'wk[100]['. $s['element_id'].']';
@@ -95,7 +95,7 @@ if (!$has_error) {
 	echo $GLOBALS['HTML']->listTableTop($totitle_arr, false, ' ');
 	
 	foreach ($elearray as $status) {
-		echo '<tr><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
+		echo '<tr id="configuring"><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
 		$next = $atw->getNextNodes($status['element_id']);
 		foreach ($states as $s) {
 			if ($status['element_id'] !== $s['element_id']) {
