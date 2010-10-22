@@ -59,16 +59,23 @@ class ArtifactWorkflow extends Error {
 				return true;
 
 			// There is a transition, now check if current role is allowed.
-
+			$rids = array () ;
+			$available_roles = RBACEngine::getInstance()->getAvailableRoles() ;
+			$project_role_ids = $this->ath->Group->getRolesId () ;
+			foreach ($available_roles as $role) {
+				if (in_array($role->getID(),$project_role_ids)) {
+					$rids[] = $role->getID() ;
+				}
+			}
+			
 			$res = db_query_params ('SELECT event_id 
-					FROM user_group, artifact_workflow_roles 
-					WHERE user_id=$1
-					AND group_id=$2
-					AND event_id=$3 
-					AND user_group.role_id=artifact_workflow_roles.role_id',
-			array(user_getid(),
-				$this->ath->Group->getID(),
-				$event_id));
+					FROM artifact_workflow_roles 
+					WHERE group_id=$1
+					AND event_id=$2
+					AND role_id=ANY($3)',
+						array ($this->ath->Group->getID(),
+						       $event_id,
+						       db_int_array_to_any_clause($rids)));
 			return db_result($res, 0, 'event_id') ? true : false;
 		}
 		return false;
