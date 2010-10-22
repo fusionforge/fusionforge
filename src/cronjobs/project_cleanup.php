@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require dirname(__FILE__).'/../www/env.inc.php';
+require (dirname(__FILE__).'/../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
@@ -28,21 +28,33 @@ $err='';
 
 db_begin();
 
-#one hour ago for projects
+// one hour ago for projects
 $then=(time()-3600);
 db_query_params ('DELETE FROM groups WHERE status=$1 and register_time < $2',
 		 array ('I',
 			$then));
 $err .= db_error();
 
-#one week ago for users
+// one week ago for users
 $then=(time()-604800);
-db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users 
+if (USE_PFO_RBAC) {
+	db_query_params ('DELETE FROM pfo_user_role WHERE EXISTS (SELECT user_id FROM users 
+WHERE status=$1 and add_date < $2 AND users.user_id=pfo_user_role.user_id)',
+			 array ('P',
+				$then));
+	$err .= db_error();
+	db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users 
 WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
-		 array ('P',
-			$then));
-$err .= db_error();
-
+			 array ('P',
+				$then));
+	$err .= db_error();
+} else {
+	db_query_params ('DELETE FROM user_group WHERE EXISTS (SELECT user_id FROM users 
+WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
+			 array ('P',
+				$then));
+	$err .= db_error();
+}	
 $result = db_query_params ('SELECT user_id, email FROM users WHERE status=$1 and add_date < $2',
 			   array ('P',
 				  $then));
