@@ -14,6 +14,7 @@ else
 	sudo /usr/sbin/vzctl set $VEID --hostname $HOST --save
 	sudo /usr/sbin/vzctl set $VEID --ipadd $IPBASE.$VEID --save
         sudo /usr/sbin/vzctl set $VEID --nameserver $IPDNS --save
+	sudo /usr/sbin/vzctl set $VEID --privvmpages $((65536*2)):$((69632*2)) --save
 fi
 
 ssh -o 'StrictHostKeyChecking=no' "root@$VZHOST" uname -a
