@@ -154,7 +154,7 @@ foreach ($group->getUsers() as $member) {
 	echo '
 			</td><td>'.
 		util_make_link ('/sendmessage.php?touser='.$member->getId(),
-				sprintf (_('Contact %s'),$member->getRealName()).'
+				sprintf (_('Contact %s'),$member->getRealName())).'
 			</td>';
 	if (USE_PFO_RBAC) {
 		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($member) ;
