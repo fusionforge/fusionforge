@@ -1,7 +1,6 @@
 <?php // -*-php-*-
-// rcs_id('$Id: pagelink.tmpl 7660 2010-08-31 15:03:30Z vargenau $');
-?>
-<?php
+// $Id: pagelink.tmpl 7720 2010-10-22 18:38:33Z vargenau $
+
 /**
  * Themable paging "|<< <<   - i/sum - >> >>|" links
  *
@@ -25,7 +24,7 @@ if ($WikiTheme->DUMP_MODE) {
       <?php echo fmt(" - %d / %d - ", $ACTPAGE, $NUMPAGES) ?>
   </td>
   <td class="wikipaging<?php echo $NEXT ? "-enabled" : "-disabled" ?>" align="right">
-      <?php echo $NEXT ?  HTML::a(array('href'=>$NEXT_LINK),_("Next >>"))  : _(">>") ?> 
+      <?php echo $NEXT ?  HTML::a(array('href'=>$NEXT_LINK),_("Next >>"))  : _(">>") ?>
       &nbsp;
       <?php echo $NEXT ?  HTML::a(array('href'=>$LAST_LINK),_(">>|")) : _(">>|") ?>
   </td>

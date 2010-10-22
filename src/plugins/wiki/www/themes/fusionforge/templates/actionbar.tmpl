@@ -1,8 +1,6 @@
 <?php // -*-php-*-
-// rcs_id('$Id: actionbar.tmpl 7706 2010-09-22 14:39:24Z vargenau $');
-?>
+// $Id: actionbar.tmpl 7720 2010-10-22 18:38:33Z vargenau $
 
-<?php 
 $curuserprefs = $user->getPreferences();
 $dbh = $request->getDbh();
 $isAdmin = $user->isAdmin();
@@ -19,7 +17,7 @@ $isBrowse = $request->getArg('action') == 'browse';
     <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
       <td class="bold">
       <?php echo Button(array(),
-                       $isActionPage ? _("Action Page") : _("Page"), 
+                       $isActionPage ? _("Action Page") : _("Page"),
                        $talk->getParent(), array('title' => "Page")) ?>
       </td>
       <td class="spacer">&nbsp;</td>
@@ -85,7 +83,7 @@ $isBrowse = $request->getArg('action') == 'browse';
       <td class="spacer">&nbsp;</td>
       <td><?php echo Button(array('action'=>'BackLinks'), _("Back Links"),$page->getName()) ?></td>
 
-    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?> 
+    <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
       <?php if ($curuserprefs->get('pdfMenuItem')) { ?>
         <td class="spacer">&nbsp;</td>
         <td><?php echo Button("pdf") ?></td>
