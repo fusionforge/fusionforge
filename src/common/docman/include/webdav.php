@@ -29,6 +29,32 @@ require_once "HTTP/WebDAV/Server.php";
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
+    function check_auth($type,$user,$pass) {
+        return true;
+    }
+
+    function HEAD(&$options) {
+        return true;
+    }
+
+    function PROPFIND(&$options,&$files) {
+        $i = 0;
+        $files["files"] = array();
+        $path = $options['path'];
+        $name = basename($path);
+        $files["files"][$i] = array();
+        $files["files"][$i]["path"]  = $path;
+        $files["files"][$i]["props"] = array();
+        $files["files"][$i]["props"][] = $this->mkprop("displayname",$name);
+        $files["files"][$i]["props"][] = $this->mkprop("creationdate",'');
+        $files["files"][$i]["props"][] = $this->mkprop("getlastmodified",'');
+        $files["files"][$i]["props"][] = $this->mkprop("lastaccessed",'');
+        $files["files"][$i]["props"][] = $this->mkprop("ishidden",false);
+        $files["files"][$i]["props"][] = $this->mkprop("resourcetype","collection");
+        $files["files"][$i]["props"][] = $this->mkprop("getcontenttype","httpd/unix-directory");
+        return true;
+    }
+
 	function GET(&$options) {
 		$arr_path = explode('/',$options['path']);
 		$group_id = $arr_path[3];
