@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: g 7708 2010-09-22 18:19:06Z vargenau $
+<?php // -*-php-*- $Id: g 7719 2010-10-22 09:30:47Z vargenau $
 
 /*
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -121,8 +121,8 @@ if (!$group_id || !$project) {
     // Dummy value
     define('ADMIN_PASSWD', 'xxx');
 
-    // Allow ".svg" as extension
-    define('INLINE_IMAGES', 'png|jpg|jpeg|gif|svg');
+    // Allow ".svg" and ".swf" as extensions
+    define('INLINE_IMAGES', 'png|jpg|jpeg|gif|svg|swf');
 
     // Allow <div> and <span> in wiki code
     define('ENABLE_MARKUP_DIVSPAN', true);

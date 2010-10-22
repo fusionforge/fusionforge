@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: UpLoad.php 7659 2010-08-31 14:55:29Z vargenau $');
+// rcs_id('$Id: UpLoad.php 7719 2010-10-22 09:30:47Z vargenau $');
 /*
  * Copyright 2003,2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -132,7 +132,6 @@ py
 reg
 sc[frt]
 sh[bsm]?
-swf
 url
 vb[esx]?
 vxd

@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge-print.css 7662 2010-08-31 15:12:14Z vargenau $
+ * $Id: fusionforge-print.css 7718 2010-10-22 08:26:31Z vargenau $
  *
  * Copyright (C) 2008 Alcatel-Lucent
  *
@@ -50,6 +50,9 @@
 
 /* Do not print main wiki browse banner */
 .browsebanner { display: none; }
+
+/* Do not print rateit widget */
+#rateit-widget-top { display: none; }
 
 /* Do not print date of last edition */
 .editdate { display: none; }

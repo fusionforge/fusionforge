@@ -195,7 +195,7 @@ class _PageList_Column extends _PageList_Column_base {
             return $page_handle->get($this->_field);
         }
     }
-  
+
     function _getSortableValue ($page_handle, &$revision_handle) {
         $val = $this->_getValue($page_handle, $revision_handle);
         if ($this->_field == 'hits')
@@ -226,7 +226,7 @@ class _PageList_Column_size extends _PageList_Column {
                         $this->_getValue($pagelist, $page_handle, $revision_handle),
                         HTML::raw('&nbsp;'));
     }
-  
+
     function _getValue (&$pagelist, $page_handle, &$revision_handle) {
         if (!$revision_handle or (!$revision_handle->_data['%content']
                                   or $revision_handle->_data['%content'] === true)) {
@@ -239,7 +239,7 @@ class _PageList_Column_size extends _PageList_Column {
             unset($revision_handle->_data['%content']);
         return $size;
     }
-  
+
     function _getSortableValue ($page_handle, &$revision_handle) {
         if (!$revision_handle)
             $revision_handle = $page_handle->getCurrentRevision(true);
@@ -358,7 +358,7 @@ class _PageList_Column_content extends _PageList_Column {
                                       '»'.$this->search.'«');
         }
     }
-  
+
     function _getValue ($page_handle, &$revision_handle) {
         if (!$revision_handle or (!$revision_handle->_data['%content']
                                   or $revision_handle->_data['%content'] === true)) {
@@ -452,7 +452,7 @@ class _PageList_Column_author extends _PageList_Column {
         else
             return $author;
     }
-  
+
     function _getSortableValue ($page_handle, &$revision_handle) {
         return _PageList_Column::_getValue($page_handle, $revision_handle);
     }
@@ -714,11 +714,11 @@ class PageList {
                      'external' => null,
                      );
     }
-  
+
     function pagingArgs() {
         return array('sortby','limit','paging','count','dosort');
     }
-  
+
     function clearArg($arg_name) {
         if (isset($this->_options[$arg_name]))
             unset($this->_options[$arg_name]);
@@ -804,7 +804,7 @@ class PageList {
             or (!empty($this->_excluded_pages)
                 and in_array($page_handle->getName(), $this->_excluded_pages)))
             return; // exclude page.
-          
+
         // enforce view permission
         if (!mayAccessPage('view', $page_handle->getName()))
             return;
@@ -927,7 +927,7 @@ class PageList {
     function asXML() {
         return AsXML($this->getContent());
     }
-  
+
     /**
      * Handle sortby requests for the DB iterator and table header links.
      * Prefix the column with + or - like "+pagename","-mtime", ...
@@ -936,7 +936,7 @@ class PageList {
      *   'init'       :   unify with predefined order. "pagename" => "+pagename"
      *   'flip_order' :   "mtime" => "+mtime" => "-mtime" ...
      *   'db'         :   "-pagename" => "pagename DESC"
-     *   'check'      : 
+     *   'check'      :
      *
      * Now all columns are sortable. (patch by DanFr)
      * Some columns have native DB backend methods, some not.
@@ -1454,11 +1454,11 @@ class PageList {
         }
         return $tokens;
     }
-  
+
     // make a table given the caption
     function _generateTable($caption) {
         if (count($this->_sortby) > 0) $this->_sortPages();
-      
+
         // wikiadminutils hack. that's a way to pagelist non-pages
         $rows = isset($this->_rows) ? $this->_rows : array();
         $i = 0;
@@ -1614,7 +1614,7 @@ class PageList {
                 $cols));
             return $out;
         }
-      
+
         // Ignore azhead if not sorted by pagename
         if (!empty($this->_options['azhead'])
             and strstr($this->sortby($this->_options['sortby'], 'init'), "pagename")
@@ -1734,7 +1734,7 @@ class PageList {
         }
         return $html;
     }
-  
+
     function _emptyList($caption) {
         $html = HTML();
         if ($caption) {
