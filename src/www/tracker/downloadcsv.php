@@ -60,6 +60,10 @@ for ($i=0; $i<count($keys); $i++) {
 
 for ($i=0; $i<count($at_arr); $i++) {
 
+	$open_date   = $at_arr[$i]->getOpenDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getOpenDate()) : '';
+	$update_date = $at_arr[$i]->getLastModifiedDate() ? date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()) : '';
+	$close_date  = $at_arr[$i]->getCloseDate()? date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()): '';
+
 	echo "\n".$at_arr[$i]->getID().';'.
 		$at_arr[$i]->getStatusID().';"'.
 		$at_arr[$i]->getStatusName().'";'.
@@ -68,9 +72,9 @@ for ($i=0; $i<count($at_arr); $i++) {
 		$at_arr[$i]->getSubmittedRealName().'";'.
 		$at_arr[$i]->getAssignedTo().';"'.
 		$at_arr[$i]->getAssignedRealName().'";"'.
-		date(_('Y-m-d H:i'),$at_arr[$i]->getOpenDate()).'";"'.
-		date(_('Y-m-d H:i'),$at_arr[$i]->getCloseDate()).'";"'.
-		date(_('Y-m-d H:i'),$at_arr[$i]->getLastModifiedDate()).'";"'.
+		$open_date.'";"'.
+		$close_date.'";"'.
+		$update_date.'";"'.
 		fix4csv($at_arr[$i]->getSummary()).'";"'.
 		fix4csv($at_arr[$i]->getDetails()).'"';
 
