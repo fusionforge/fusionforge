@@ -64,14 +64,24 @@ case $1 in
 	cd $dir
 	files=$(ls *.inc *.conf | xargs grep -l {[a-z_]*/[a-z_]*})
 	vars=$(forge_get_config list-all-variables)
-	declare -A var_cache
+	if [ $BASH_VERSINFO -ge 4 ] ; then
+	    # Use associative array if available
+	    declare -A var_cache
+	fi
 	for f in $files ; do
 	    ftmp=$(mktemp $f.generated.XXXXXX)
 	    cp -a $f $ftmp
 	    for v in $vars ; do
-		if grep -q {$v} $ftmp ; then
-		    var_cache[$v]=${var_cache[$v]:-$(forge_get_config ${v##*/} ${v%%/*})}
-		    sed -i -e s,{$v},${var_cache[$v]},g $ftmp
+		if [ $BASH_VERSINFO -ge 4 ] ; then
+		    # Fast version, with cache, for Bash >= 4
+		    if grep -q {$v} $ftmp ; then
+			var_cache[$v]=${var_cache[$v]:-$(forge_get_config ${v##*/} ${v%%/*})}
+			sed -i -e s,{$v},${var_cache[$v]},g $ftmp
+		    fi
+		else
+		    # Bash 3... no cache, slower
+		    curvar=$(forge_get_config ${v##*/} ${v%%/*})
+		    grep -q {$v} $ftmp && sed -i -e s,{$v},$curvar,g $ftmp
 		fi
 	    done
 	    mv $ftmp $f.generated
