@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc
  * Copyright 2004, Guillaume Smet/Open Wide
+ * Copyright 2010, Roland Mas
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -47,6 +48,13 @@ class ProjectSearchQuery extends SearchQuery {
 	function getQuery() {
 		global  $LUSER;
 
+		$pids = array () ;
+		if (isset ($LUSER)) {
+			foreach ($LUSER->getGroups() as $p) {
+				$pids[] = $p->getID() ;
+			}
+		}
+
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {
@@ -60,8 +68,8 @@ class ProjectSearchQuery extends SearchQuery {
 				
 				if (isset ($LUSER)) {
 					$qpa = db_construct_qpa ($qpa,
-								 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
-								 array ($LUSER->getID())) ;
+								 'OR g.group_id = ANY($1) ',
+								 array ($pids)) ;
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 ') AND (vectors @@ q AND ') ;
@@ -72,8 +80,8 @@ class ProjectSearchQuery extends SearchQuery {
 								'H')) ;
 				if (isset ($LUSER)) {
 					$qpa = db_construct_qpa ($qpa,
-								 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
-								 array ($LUSER->getID())) ;
+								 'OR g.group_id = ANY($1) ',
+								 array ($pids)) ;
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 ') AND (') ;
@@ -107,8 +115,8 @@ class ProjectSearchQuery extends SearchQuery {
 						 array ('A', 'H')) ;
 			if (isset ($LUSER)) {
 				$qpa = db_construct_qpa ($qpa,
-							 'OR g.group_id in (SELECT ug.group_id FROM user_group ug WHERE ug.user_id = $1 AND ug.group_id = g.group_id) ',
-							 array($LUSER->getID())) ;
+							 'OR g.group_id = ANY($1) ',
+							 array ($pids)) ;
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 ') AND ((') ;
