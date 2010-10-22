@@ -121,7 +121,7 @@ $this->click("//tr[@id='field-mystatus']/td[4]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Workflow");
 		$this->waitForPageToLoad("30000");
-/* have to find a less data dependant way to do this
+/* TODO have to find a less data dependant way to do this
 		$this->click("wk[157][159]");
 		$this->click("wk[157][160]");
 		$this->click("wk[157][161]");
@@ -234,7 +234,7 @@ $this->click("//tr[@id='field-mystatus']/td[4]/a[1]");
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
 		
 		// Ensure that it is not possible to configure the workflow without initial state.
-/* have to find a less data dependant way to do this
+/* TODO have to find a less data dependant way to do this
 		$this->click("wk[100][157]");
 		$this->click("wk[100][158]");
 		$this->click("wk[100][159]");
