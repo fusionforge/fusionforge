@@ -38,20 +38,91 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
     }
 
     function PROPFIND(&$options,&$files) {
-        $i = 0;
-        $files["files"] = array();
-        $path = $options['path'];
-        $name = basename($path);
-        $files["files"][$i] = array();
-        $files["files"][$i]["path"]  = $path;
-        $files["files"][$i]["props"] = array();
-        $files["files"][$i]["props"][] = $this->mkprop("displayname",$name);
-        $files["files"][$i]["props"][] = $this->mkprop("creationdate",'');
-        $files["files"][$i]["props"][] = $this->mkprop("getlastmodified",'');
-        $files["files"][$i]["props"][] = $this->mkprop("lastaccessed",'');
-        $files["files"][$i]["props"][] = $this->mkprop("ishidden",false);
-        $files["files"][$i]["props"][] = $this->mkprop("resourcetype","collection");
-        $files["files"][$i]["props"][] = $this->mkprop("getcontenttype","httpd/unix-directory");
+		$arr_path = explode('/',$options['path']);
+		$group_id = $arr_path[3];
+
+		if (!$group_id)
+		    return false;
+
+		$g =& group_get_object($group_id);
+		if (!$g || !is_object($g))
+			return false;
+
+		/* is this group using docman ? */
+		if (!$g->usesDocman())
+            return false;
+
+        if (!$g->useWebdav())
+            return false;
+
+		if ($g->isError())
+            return false;
+
+		if ( 4 < count($arr_path)) {
+            $subpath = '';
+		    for ($i=5;$i<count($arr_path);$i++){
+		       $subpath .= '/'.$arr_path[$i];
+		    }
+		}
+
+		if (empty($subpath)) {
+			$subpath = '/';
+		}
+
+		$analysed_path = $this->analyse($subpath,$group_id);
+
+		if ($analysed_path['isdir']) {
+            $i = 0;
+            $files["files"] = array();
+            $path = $options['path'];
+            $name = basename($path);
+            $files["files"][$i] = array();
+            $files["files"][$i]["path"]  = $path;
+            $files["files"][$i]["props"] = array();
+            $files["files"][$i]["props"][] = $this->mkprop("displayname",$name);
+            $files["files"][$i]["props"][] = $this->mkprop("creationdate",'');
+            $files["files"][$i]["props"][] = $this->mkprop("getlastmodified",'');
+            $files["files"][$i]["props"][] = $this->mkprop("lastaccessed",'');
+            $files["files"][$i]["props"][] = $this->mkprop("ishidden",false);
+            $files["files"][$i]["props"][] = $this->mkprop("resourcetype","collection");
+            $files["files"][$i]["props"][] = $this->mkprop("getcontenttype","httpd/unix-directory");
+			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2',
+								array($group_id,$analysed_path['doc_group']));
+			if (!$res) {
+				return false;
+			}
+			while ($arr = db_fetch_array($res)) {
+                $i++;
+                $files["files"][$i] = array();
+                $files["files"][$i]["path"]  = $path.'/'.$arr['groupname'];
+                $files["files"][$i]["props"] = array();
+                $files["files"][$i]["props"][] = $this->mkprop("displayname",$arr['groupname']);
+                $files["files"][$i]["props"][] = $this->mkprop("creationdate",'');
+                $files["files"][$i]["props"][] = $this->mkprop("getlastmodified",'');
+                $files["files"][$i]["props"][] = $this->mkprop("lastaccessed",'');
+                $files["files"][$i]["props"][] = $this->mkprop("ishidden",false);
+                $files["files"][$i]["props"][] = $this->mkprop("resourcetype","collection");
+                $files["files"][$i]["props"][] = $this->mkprop("getcontenttype","httpd/unix-directory");
+            }
+            $res = db_query_params('select filename,filetype,filesize,createdate,updatedate from doc_data where group_id = $1 and doc_group = $2',
+                array($group_id,$analysed_path['doc_group']));
+            if (!$res) {
+				return false;
+            }
+			while ($arr = db_fetch_array($res)) {
+                $i++;
+                $files["files"][$i] = array();
+                $files["files"][$i]["path"]  = $path.'/'.$arr['filename'];
+                $files["files"][$i]["props"] = array();
+                $files["files"][$i]["props"][] = $this->mkprop("displayname",$arr['filename']);
+                $files["files"][$i]["props"][] = $this->mkprop("creationdate",$arr['createdate']);
+                $files["files"][$i]["props"][] = $this->mkprop("getlastmodified",$arr['updatedate']);
+                $files["files"][$i]["props"][] = $this->mkprop("lastaccessed",'');
+                $files["files"][$i]["props"][] = $this->mkprop("ishidden",false);
+                $files["files"][$i]["props"][] = $this->mkprop("getcontentlength",$arr['filesize']);
+                $files["files"][$i]["props"][] = $this->mkprop("getcontenttype",$arr['filetype']);
+            }
+        }
         return true;
     }
 
