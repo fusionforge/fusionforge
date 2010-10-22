@@ -16,8 +16,10 @@ then
 	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 	export VZTEMPLATE=centos-$CENTVERS-$ARCH-minimal
 	export VZPRIVATEDIR
-	export SELENIUM_RC_URL=http://`hostname -f`/ws/reports
-	export FFORGE_RPM_REPO=http://`hostname -f`/ws/build/packages
+	export DIST
+	export BASEDIR=${BASEDIR:-/~`id -un`/ws}
+	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
+	export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
 	export HOST=centos5.local
 	export SELENIUM_RC_HOST=localhost
 	export USEVZCTL=true
