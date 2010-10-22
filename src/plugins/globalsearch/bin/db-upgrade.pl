@@ -11,6 +11,7 @@ use diagnostics ;
 use DBI ;
 use MIME::Base64 ;
 use HTML::Entities ;
+use Socket;
 
 use vars qw/$dbh @reqlist $query/ ;
 use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
@@ -77,27 +78,31 @@ eval {
     debug "Adding local data." ;
         
     do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-        
-    my $ip_address = qx/host $domain_name | awk '{print \$3}'/ ;
-        
-        @reqlist = (
-  #        "INSERT INTO plugin_".$pluginname."_sample_data (domain, ip_address) VALUES ('$domain_name', '$ip_address')",
-                    ) ;
-        
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-        
-        &update_db_version ($target) ;
-        debug "Committing." ;
-        $dbh->commit () ;
-    }
 
+    my $packed_ip = gethostbyname("$domain_name");
+    my $ip_address ;
+    if (defined $packed_ip) {
+	$ip_address = inet_ntoa($packed_ip);
+    }
+    
+    @reqlist = (
+	#        "INSERT INTO plugin_".$pluginname."_sample_data (domain, ip_address) VALUES ('$domain_name', '$ip_address')",
+	) ;
+    
+    foreach my $s (@reqlist) {
+	$query = $s ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+    }
+    @reqlist = () ;
+    
+    &update_db_version ($target) ;
+    debug "Committing." ;
+    $dbh->commit () ;
+    }
+    
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian GForge." ;
 
