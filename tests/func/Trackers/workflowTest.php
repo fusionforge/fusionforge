@@ -121,7 +121,8 @@ $this->click("//tr[@id='field-mystatus']/td[4]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Workflow");
 		$this->waitForPageToLoad("30000");
-/* TODO have to find a less data dependant way to do this
+// TODO have to find a less data dependant way to do this
+	if (defined('DB_INIT_CMD')) {
 		$this->click("wk[157][159]");
 		$this->click("wk[157][160]");
 		$this->click("wk[157][161]");
@@ -228,13 +229,14 @@ $this->click("//tr[@id='field-mystatus']/td[4]/a[1]");
 		$this->click("wk[166][163]");
 		$this->click("wk[166][164]");
 		$this->click("wk[166][165]");
-*/
+	}
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
 		
 		// Ensure that it is not possible to configure the workflow without initial state.
-/* TODO have to find a less data dependant way to do this
+// TODO have to find a less data dependant way to do this
+	if (defined('DB_INIT_CMD')) {
 		$this->click("wk[100][157]");
 		$this->click("wk[100][158]");
 		$this->click("wk[100][159]");
@@ -249,7 +251,7 @@ $this->click("//tr[@id='field-mystatus']/td[4]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("ERROR: Initial values not saved"));
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
-*/
+	}
 	}
 }
 ?>
