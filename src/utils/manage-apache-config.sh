@@ -80,8 +80,10 @@ case $1 in
 		    fi
 		else
 		    # Bash 3... no cache, slower
-		    curvar=$(forge_get_config ${v##*/} ${v%%/*})
-		    grep -q {$v} $ftmp && sed -i -e s,{$v},$curvar,g $ftmp
+		    if grep -q {$v} $ftmp ; then
+			curvar=$(forge_get_config ${v##*/} ${v%%/*})
+			sed -i -e s,{$v},$curvar,g $ftmp
+		    fi
 		fi
 	    done
 	    mv $ftmp $f.generated
