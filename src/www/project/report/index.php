@@ -150,26 +150,40 @@ $res_memb = db_query_params("SELECT users.*,user_group.admin_flags,people_job_ca
 	AND users.status='A'
 	ORDER BY users.user_name ", array($group_id));
 
-while ( $row_memb=db_fetch_array($res_memb) ) {
+foreach ($group->getUsers() as $member) {
 	echo '
-		<tr>';
-	if ( trim($row_memb['admin_flags'])=='A' ) {
-		echo '
-			<td><strong>'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['realname']).'</strong></td>';
+		<tr><td>';
+	$link = util_make_link_u ($member->getUnixName(), $member->getID(), $member->getRealName()) ;
+	if ( RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$project->getID())) {
+		echo '<strong>'.$link.'</strong>' ;
 	} else {
-		echo '
-			<td>'.util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['realname']).'</td>';
+		echo $link ;
 	}
 	echo '
-			<td>'.
-			util_make_link ('/sendmessage.php?touser='.$row_memb['user_id'],_('Contact')).' '.
-			util_make_link_u ($row_memb['user_name'],$row_memb['user_id'],$row_memb['user_name']).'
-			</td>
-			<td align="center">'.$row_memb['role'].'
+			</td><td>'.
+		util_make_link ('/sendmessage.php?touser='.$member->getId(),
+				sprintf (_('Contact %s'),$member->getRealName()).'
+			</td>';
+	if (USE_PFO_RBAC) {
+		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($member) ;
+		sortRoleList ($roles) ;
+		$role_names = array () ;
+		foreach ($roles as $role) {
+			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
+				$role_names[] = $role->getName() ;
+			}
+		}
+		$role_string = implode (', ', $role_names) ;
+	} else {
+		$role_string = $user->getRole ($project)->getName() ;
+	}
+
+				echo '
+			<td align="center">'.$role_string.'
 			</td>';
 	if(forge_get_config('use_people')) {
 		echo '
-			<td align="center">'.util_make_link('/people/viewprofile.php?user_id='.$row_memb['user_id'],_('View')).'
+			<td align="center">'.util_make_link('/people/viewprofile.php?user_id='.$member->getID(),_('View')).'
 			</td>';
 	}
 	echo '
@@ -186,7 +200,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
                                      WHERE assigned_to=$1
                                        AND status_id='1'
                                        AND group_artifact_id=$2
-                                     ORDER BY priority DESC", array($row_memb['user_id'], $artifact_type['group_artifact_id']));
+                                     ORDER BY priority DESC", array($member->getID(), $artifact_type['group_artifact_id']));
 
                 $num_artifacts=db_numrows($artifacts);
                 for ($m=0; $m < $num_artifacts; $m++) {
@@ -225,7 +239,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
                                 AND ptv.status_id=1
                                 AND pat.assigned_to_id=$2
                         ORDER BY group_name,project_name",
-                        array($group_id, $row_memb['user_id']));
+                        array($group_id, $member->getID()));
 
 	while ( $task_type = db_fetch_array($task_group) ) {
 		if ( $task_type['percent_complete'] != 100 ) {
