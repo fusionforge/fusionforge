@@ -106,11 +106,11 @@ project_admin_header(array('title'=>_('Virtual Host Management'),'group'=>$group
 print '<h2>' . _('Add New Virtual Host') . '</h2>';
 
 print '<p>';
-printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.'), $group->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_name']);
+printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>%1$s.%2$s</strong>.  %3$s does not currently host mail (i.e. cannot be an MX) or DNS</strong>.'), $group->getUnixName(), forge_get_config ('web_host'), forge_get_config ('forge_name'));
 print '</p>';
 
 print '<p>';
-printf(_('Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%4$s.%5$s</em>.'), $group->getUnixName(), $GLOBALS['sys_default_domain']);
+printf(_('Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%1$s.%2$s</em>.'), $group->getUnixName(), forge_get_config ('web_host'));
 print '</p>';
 
 ?>
