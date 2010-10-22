@@ -32,43 +32,27 @@ $chroot_dir = forge_get_config('chroot');
 $ftp_dir = forge_get_config('ftp_upload_dir')."/pub/";
 $home_dir = $chroot_dir.forge_get_config('homedir_prefix')."/";
 
-
-$res_db = db_query_params ('SELECT groups.group_id, group_name, unix_group_name,
-user_group.user_id,
-users.user_name
-FROM groups
-JOIN user_group ON user_group.group_id = groups.group_id
-JOIN users ON users.user_id = user_group.user_id
-ORDER BY group_id',
-			array ());
-if ($res_db)
-{
-        while($e = db_fetch_array($res_db))
-        {
-                $users["$e[user_id]"]["user_name"] = "$e[user_name]";
-                $users["$e[user_id]"]["user_groups"][] = "$e[unix_group_name]";
+$res_db = db_query_params ('SELECT user_id FROM users WHERE unix_status=$1',
+			   array ('A'));
+if ($res_db) {
+        while($e = db_fetch_array($res_db)) {
+                $users[] = user_get_object ($e['user_id']) ;
         }
 }
-foreach ($users as $u)
-{
-        $dir = "$home_dir"."$u[user_name]"."/pub";
-        //$cmd = "cd $dir";
-        //$res = execute($cmd);
-        if (is_dir("$home_dir"."$u[user_name]"))
-        {
-                foreach ($u["user_groups"] as $g)
-                {
-                        if (is_dir("$ftp_dir"."$g"))
-                        {
-                                if (is_dir("$dir/$g"))
-                                {
+
+foreach ($users as $u) {
+        $dir = "$home_dir".$u->getUnixName()."/pub";
+        if (is_dir("$home_dir".$u->getUnixName())) {
+                foreach ($u->getGroups() as $project) {
+			$g = $project->getUnixName() ;
+                        if (is_dir("$ftp_dir"."$g")) {
+                                if (is_dir("$dir/$g")) {
                                         $cmd = "/bin/umount $dir/$g";
                                         $res = execute($cmd);
                                         $cmd = "/bin/rmdir $dir/$g";
                                         $res = execute($cmd);
                                 }
-                                if (!is_dir($dir))
-                                {
+                                if (!is_dir($dir)) {
                                         $cmd = "/bin/mkdir $dir";
                                         $res = execute($cmd);
                                 }
@@ -76,7 +60,7 @@ foreach ($users as $u)
                                 $res = execute($cmd);
                                 $cmd = "/bin/mount --bind $ftp_dir"."$g $dir/$g";
                                 $res = execute($cmd);
-                                echo "allow $u[user_name] to access at $dir/$g\n";
+                                echo "allow ".$u->getUnixName()." to access at $dir/$g\n";
                         }
                 }
         }
