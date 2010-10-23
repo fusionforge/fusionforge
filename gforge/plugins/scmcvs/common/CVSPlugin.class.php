@@ -201,7 +201,6 @@ class CVSPlugin extends SCMPlugin {
 
 		$repo = $this->cvs_root . '/' . $project->getUnixName() ;
 		$locks_dir = $this->cvs_root . '/cvs-locks/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
@@ -213,12 +212,20 @@ class CVSPlugin extends SCMPlugin {
 			system ("mkdir -p $locks_dir") ;
 		}
 
-		system ("chgrp -R $unix_group $repo $locks_dir") ;
-		system ("chmod 3777 $locks_dir") ;
-		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		if ($GLOBALS['sys_use_shell']) {
+			$unix_group = 'scm_' . $project->getUnixName() ;
+			system ("chgrp -R $unix_group $repo $locks_dir") ;
+			system ("chmod 3777 $locks_dir") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod -R g+wXs,o+rX-w $repo") ;
+			} else {
+				system ("chmod -R g+wXs,o-rwx $repo") ;
+			}
 		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+			$unix_user = $GLOBALS['sys_apache_user'];
+			$unix_group = $GLOBALS['sys_apache_group'];
+			system ("chown -R $unix_user:$unix_group $repo") ;
+			system ("chmod -R g-rwx,o-rwx $repo") ;
 		}
 	}
 
