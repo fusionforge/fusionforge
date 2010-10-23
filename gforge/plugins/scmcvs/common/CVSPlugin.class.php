@@ -383,8 +383,8 @@ class CVSPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (file_exists($snapshot)) unlink ($snapshot) ;
+			if (file_exists($tarball))  unlink ($tarball) ;
 			return false;
 		}
 
@@ -397,8 +397,8 @@ class CVSPlugin extends SCMPlugin {
 		}
 		
 		if (!$repo_exists) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (file_exists($snapshot)) unlink ($snapshot) ;
+			if (file_exists($tarball))  unlink ($tarball) ;
 			return false ;
 		}
 
