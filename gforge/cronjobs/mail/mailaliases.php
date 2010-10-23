@@ -137,7 +137,8 @@ if ($sys_use_tracker) {
 	}
 }
 
-if ($sys_use_mail && file_exists($sys_var_path.'/dumps/mailman-aliases')) {
+if ($sys_use_mail && file_exists($sys_var_path.'/dumps/mailman-aliases')
+	&& filesize($sys_var_path.'/dumps/mailman-aliases') > 0) {
 	//
 	//	Read in the mailman aliases
 	//
