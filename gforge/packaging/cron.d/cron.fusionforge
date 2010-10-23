@@ -76,7 +76,7 @@ MAILTO=""
 
 # this cronjob send a mail to the admin with all news that have been posted less than 30 days and that have not be validated.
 # Daily mail for not approved news
-30 17 * * * root $FFCRON/get_news_notapproved.pl
+#30 17 * * * root $FFCRON/get_news_notapproved.pl
 
 # Daily site backup
 0 2 * * *  root $PHP $FFCRON/backup_site.php
@@ -99,9 +99,6 @@ MAILTO=""
 
 # Upload the SSH key files needed for CVS
 15 * * * * root $PHP $GFORGE/plugins/scmcvs/cronjobs/ssh_create.php
-
-# Create SVN tarballs
-5 3 * * * root $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php
 
 # Docman parse word engine
 56 * * * * $FFUSER $PHP $FFCRON/update_docdata_dataword.php
