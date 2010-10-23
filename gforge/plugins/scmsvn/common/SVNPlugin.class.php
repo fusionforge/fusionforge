@@ -84,8 +84,8 @@ class SVNPlugin extends SCMPlugin {
 			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().'/trunk</tt><br />';
 		}
 		if ($this->use_dav) {
-			$b .= '<tt>svn checkout --username anonsvn http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'/trunk</tt><br/><br/>';
-			$b .= _('The password is \'anonsvn\'').'<br/>';
+			$url = 'http://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .'/trunk';
+			$b .= '<tt>svn checkout <a href="'.$url.'">'.$url.'</a> '.$project->getUnixName().'-trunk</tt>';
 		}
 		$b .= '</p>';
 		return $b ;
@@ -102,7 +102,8 @@ class SVNPlugin extends SCMPlugin {
 			}
 			if ($this->use_dav) {
 				$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Enter your site password when prompted.</p>');
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk</tt></p>' ;
+				$url = 'http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk' ;
+				$b .= '<p><tt>svn checkout --username '.$d.' <a href="'.$url.'">'.$url.'</a> '.$project->getUnixName().'-trunk</tt></p>' ;
 			}
 		} else {
 			if ($this->use_ssh) {
@@ -111,7 +112,8 @@ class SVNPlugin extends SCMPlugin {
 			}
 			if ($this->use_dav) {
 				$b .= _('<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>');
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk</tt></p>' ;
+				$url = 'http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().'/trunk' ;
+				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> <a href="'.$url.'">'.$url.'</a> '.$project->getUnixName().'-trunk</tt></p>' ;
 			}
 		}
 		return $b ;
