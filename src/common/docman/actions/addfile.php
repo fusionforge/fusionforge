@@ -88,7 +88,7 @@ switch ($type) {
 	case 'pasteurl' : {
 		$data = '';
 		$uploaded_data_name=$file_url;
-		$uploaded_data_type='URL';		
+		$uploaded_data_type='URL';
 		break;
 	}
 	case 'httpupload' : {

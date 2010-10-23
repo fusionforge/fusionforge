@@ -114,7 +114,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
     $rowid = 0;
 	foreach ($nested_docs[$dirid] as $d) {
 		echo '<tr ' . $HTML->boxGetAltRowStyle($rowid).'>';
-		$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+		switch ($d->getFileType()) {
+		case "URL":
+			$docurl=$d->getFileName();
+			break;
+		default:
+			$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+		}
 		echo '<td><a href="'.$docurl.'">';
 		switch ($d->getFileType()) {
 			case "image/png":
@@ -127,6 +133,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				echo html_image('docman/file_type_pdf.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "text/html":
+			case "URL":
 				echo html_image('docman/file_type_html.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "text/plain":
@@ -171,18 +178,24 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '</td>';
 		echo '<td>'.$d->getStateName().'</td>';
 		echo '<td>';
-		$metric = 'B';
-		$size = $d->getFileSize();
-		if ($size > 1024 ) {
-			$metric = 'KB';
-			$size = floor ($size/1024);
+		switch ($d->getFileType()) {
+		case "URL":
+			echo "--";
+			break;
+		default:
+			$metric = 'B';
+			$size = $d->getFileSize();
 			if ($size > 1024 ) {
-				$metric = 'MB';
+				$metric = 'KB';
 				$size = floor ($size/1024);
+				if ($size > 1024 ) {
+					$metric = 'MB';
+					$size = floor ($size/1024);
+				}
 			}
+			echo $size . $metric;
+			echo '</td>';
 		}
-		echo $size . $metric;
-		echo '</td>';
 
 		if (forge_check_perm ('docman', $group_id, 'approve')) {
 			echo '<td>';

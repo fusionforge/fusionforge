@@ -5,7 +5,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -30,12 +30,25 @@ global $g; // group object
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
 global $dgh; // document group html object
+global $gdf; // document grou factory object
 
 if ( $dgf->getNested() == NULL ) {
 	echo '<div class="docmanDivIncluded">';
 	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</p></div>';
 } else {
 	/* display the add new documentation form */
+?>
+	<script>
+	function displayRowFile() {
+	    document.getElementById('filerow').style.display = '';
+        document.getElementById('urlrow').style.display = 'none';
+	}
+	function displayRowUrl() {
+	    document.getElementById('filerow').style.display = 'none';
+        document.getElementById('urlrow').style.display = '';
+	}
+	</script>
+<?php
 	echo '<div class="docmanDivIncluded">';
 	echo '<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title<br />') .'</p>';
 
@@ -59,14 +72,26 @@ if ( $dgf->getNested() == NULL ) {
                     	.'&nbsp;<input type="text" name="description" size="50" maxlength="255" />&nbsp;'
                     	.sprintf(_('(at least %1$s characters)'), 10)
 					.'</td>
-				</tr>';
-	echo '
+				</tr>
 				<tr>
+					<td style="text-align:right;">
+						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
+                	.'</td><td>
+						<input type="radio" name="type" value="httpupload" onClick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onClick="javascript:displayRowUrl()" />'. _('URL') .'
+					</td>
+				</tr>
+				<tr id="filerow" style="display:none">
 					<td style="text-align:right;">
 						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
                 	.'</td><td>'
 						.'&nbsp;<input type="file" name="uploaded_data" size="30" />
-						<input type="hidden" name="type" value="httpupload">
+					</td>
+				</tr>
+				<tr id="urlrow" style="display:none">
+					<td style="text-align:right;">
+						<strong>'. _('URL') .'</strong>'. utils_requiredField()
+                	.'</td><td>'
+						.'&nbsp;<input type="text" name="file_url" size="30" />
 					</td>
 				</tr>';
 	if ($dirid) {

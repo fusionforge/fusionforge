@@ -185,13 +185,19 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			while ($arr = db_fetch_array($res)) {
 				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
 			}
-            $res = db_query_params('select filename from doc_data where group_id = $1 and doc_group = $2',
+            $res = db_query_params('select filename,filetype from doc_data where group_id = $1 and doc_group = $2',
                 array($group_id,$analysed_path['doc_group']));
             if (!$res) {
 				exit_error(_('webdav db error:').' '.db_error(),'docman');
             }
 			while ($arr = db_fetch_array($res)) {
-				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename']).'">'.$arr['filename'].'</a></li>';
+				switch ($arr['filetype']) {
+				case "URL":
+					echo '<li><a href="'.$arr['filename'].'">'.$arr['filename'].'</a></li>';
+					break;
+				default:
+					echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename']).'">'.$arr['filename'].'</a></li>';
+				}
 			}
 
 		    echo "</ul>";
