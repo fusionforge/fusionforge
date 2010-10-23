@@ -94,8 +94,9 @@ if (!$has_error) {
 	}
 	echo $GLOBALS['HTML']->listTableTop($totitle_arr, false, ' ');
 	
+	$i=1;
 	foreach ($elearray as $status) {
-		echo '<tr id="configuring"><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
+		echo '<tr id="configuring-'.$i++.'"><th style="text-align:left">'.$from.$status['element_name'].'</th>'."\n";
 		$next = $atw->getNextNodes($status['element_id']);
 		foreach ($states as $s) {
 			if ($status['element_id'] !== $s['element_id']) {
