@@ -1,9 +1,5 @@
-LoadModule dav_module         modules/mod_dav.so
-LoadModule dav_svn_module     modules/mod_dav_svn.so
-LoadModule authz_svn_module   modules/mod_authz_svn.so
-
 <VirtualHost _default_:80>
-	ServerName	gforge.company.com
+	ServerName	forge.company.com
 	DocumentRoot	/opt/gforge/www
 	ErrorDocument 404 /404.php
 	
@@ -42,17 +38,19 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
 	#
 	#	SVN Repository
 	#
-	<Location /svn>
+	<Location /scmrepos/svn>
 		DAV svn
-		SVNParentPath /var/lib/gforge/svnroot
+		SVNParentPath /var/lib/gforge/scmrepos/svn
 
 		# how to authenticate a user
 		AuthzSVNAccessFile /var/lib/gforge/svnroot-access
 		AuthType Basic
-		AuthName "Document repository"
+		AuthName "Subversion repository"
 		AuthUserFile /var/lib/gforge/svnroot-authfile
-	
-		# only authenticated users may access the repository
+
+		# Try anonymous access first, resort to real
+		# authentication if necessary.
+		Satisfy Any
 		Require valid-user
 	</Location>
 

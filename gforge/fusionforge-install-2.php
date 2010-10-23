@@ -31,17 +31,18 @@
 	define ('RED', "\033[01;31m" );
 
 	$args = $_SERVER['argv'];
+	$hostname = $args[1];
 
 	echo "Validating arguments  ";
 	if (count($args) != 4) {
-		echo "FAIL\n  Usage: $args[0]  gforge.company.com  apacheuser  apachegroup\n";
+		echo "FAIL\n  Usage: $args[0] forge.company.com apacheuser apachegroup\n";
 		exit(127);
 	}
 	echo "OK\n";
 
 	//validate hostname
 	echo "Validating hostname  ";
-	if (!preg_match("/^([[:alnum:]._-])*$/" , $args[1])) {
+	if (!preg_match("/^([[:alnum:]._-])*$/" , $hostname)) {
 		echo "FAIL\n  invalid hostname\n";
 		exit(2);
 	}
@@ -138,8 +139,30 @@ require_once 'install-common.inc' ;
 	// Create default dumps dir
 	system("mkdir -p $fusionforge_data_dir/dumps");
 
-	chdir("$fusionforge_src_dir");
+	chdir($fusionforge_src_dir);
 
+	// Install apache configuration files.
+	if (is_dir('/etc/httpd/conf.d')) {
+		$apache_conf_dir = '/etc/httpd/conf.d/';
+	} elseif (is_dir('/opt/csw/apache2/etc/httpd/conf.d')) {
+		$apache_conf_dir = '/opt/csw/apache2/etc/httpd/conf.d';
+	} elseif (is_dir('/etc/apache2/conf.d')) {
+		$apache_conf_dir = '/etc/apache2/conf.';
+	} else {
+		echo "WARNING: Unable to find apache config directory, apache files not installed";
+	}
+
+	if (isset($apache_conf_dir)) {
+		if (!is_file("$apache_conf_dir/fusionforge-httpd.conf")) {
+			system("cp etc/fusionforge-httpd.conf.example $apache_conf_dir/fusionforge-httpd.conf");
+			system("perl -pi -e \"s/forge\.company\.com/$hostname/\" $apache_conf_dir/fusionforge-httpd.conf");
+		}
+		if (!is_file("$apache_conf_dir/fusionforge-httpd-ssl.conf")) {
+			system("cp etc/fusionforge-httpd-ssl.conf.example $apache_conf_dir/fusionforge-httpd-ssl.conf");
+			system("perl -pi -e \"s/forge\.company\.com/$hostname/\" $apache_conf_dir/fusionforge-httpd-ssl.conf");
+		}
+	}
+	
 	//#restricted shell for cvs accounts
 	//echo "linea 1\n";
 	system("cp plugins/scmcvs/bin/cvssh.pl /bin/");
@@ -150,9 +173,6 @@ require_once 'install-common.inc' ;
 	system("mkdir -p $fusionforge_etc_dir");
 	if (!is_file("$fusionforge_etc_dir/local.inc")) {
 		system("cp etc/local.inc.example $fusionforge_etc_dir/local.inc");
-	}
-	if (!is_file("$fusionforge_etc_dir/httpd.conf")) {
-		system("cp etc/gforge-httpd.conf.example $fusionforge_etc_dir/httpd.conf");
 	}
 
 	system("mkdir -p $fusionforge_etc_dir/httpd.d");
@@ -165,25 +185,6 @@ require_once 'install-common.inc' ;
 		$source = "$fusionforge_src_dir/plugins/$plugin/etc/plugins/$plugin";
 		if (is_dir($source)) {
 			system("cp -r $source $fusionforge_etc_dir/plugins/");
-		}
-	}
-
-	$apacheconffiles=array();
-	if (is_file('/etc/httpd/conf/httpd.conf')) {
-		$apacheconffiles[]='/etc/httpd/conf/httpd.conf';
-	} elseif (is_file('/opt/csw/apache2/etc/httpd.conf')) {
-		$apacheconffiles[]='/opt/csw/apache2/etc/httpd.conf';
-	} elseif (is_file('/etc/apache2/httpd.conf')) {
-		$apacheconffiles[]='/etc/apache2/httpd.conf';
-	} else {
-		$apacheconffiles[]='/etc/apache2/sites-enabled/000-default';
-	}
-
-	foreach ($apacheconffiles as $apacheconffile) {
-		echo('Setting FusionForge Include For Apache...');
-		system("grep \"^Include $fusionforge_etc_dir/httpd.conf\" $apacheconffile > /dev/null", $ret);
-		if ($ret == 1) {
-			system("echo \"Include $fusionforge_etc_dir/httpd.conf\" >> $apacheconffile");
 		}
 	}
 
@@ -236,7 +237,7 @@ require_once 'install-common.inc' ;
 	system("cd $fusionforge_etc_dir && find . -type d | xargs chmod 755");
 	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
 	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
-	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
+	system("cd $fusionforge_etc_dir && find . -type f -exec perl -pi -e \"s/gforge\.company\.com/$hostname/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
 // Generate a random hash for the session_key

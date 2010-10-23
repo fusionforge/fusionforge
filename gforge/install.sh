@@ -78,10 +78,6 @@ then
 		php fusionforge-install-3-db.php
 		php db/upgrade-db.php
 
-		# Post installation fixes.
-		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
-		perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
-
 		chkconfig httpd on
 		chkconfig postgresql on
 		chkconfig iptables off
@@ -106,10 +102,6 @@ then
 	then
 		php fusionforge-install-3-db.php
 		php db/upgrade-db.php
-
-		# Post installation fixes.
-		#perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/apache2/httpd.conf
-		perl -spi -e 's/^LoadModule/#LoadModule/g' /etc/gforge/httpd.conf
 
 		chkconfig -s apache2 on
 		chkconfig -s postgresql on
