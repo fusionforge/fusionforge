@@ -707,7 +707,6 @@ fi
 %{GFORGE_DIR}/plugins/cvssyncmail
 
 %files cvstracker
-%config(noreplace) %{GFORGE_DIR}/plugins/cvstracker/etc/plugins/cvstracker/config.php
 %{GFORGE_DIR}/plugins/cvstracker
 %{GFORGE_DIR}/www/plugins/cvstracker
 %attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/cvstracker
