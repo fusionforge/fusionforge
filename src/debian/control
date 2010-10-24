@@ -284,7 +284,7 @@ Description: Globalsearch plugin for FusionForge
 
 Package: gforge-plugin-mediawiki
 Architecture: all
-Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, mediawiki (>= 1:1.15~), php5-cli, php5-gd, ${misc:Depends}
+Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib | mysql-server, mediawiki (>= 1:1.15~), php5-cli, php5-gd, ${misc:Depends}
 Description: Mediawiki plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
