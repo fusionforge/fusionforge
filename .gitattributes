@@ -4217,7 +4217,6 @@ src/www/plugins/online_help -text
 src/www/plugins/projects_hierarchy -text
 src/www/plugins/quota_management -text
 src/www/plugins/svntracker -text
-src/www/plugins/webcalendar -text
 src/www/pm/csv.php -text
 src/www/pm/format_csv.php -text
 src/www/pm/t_follow.php -text

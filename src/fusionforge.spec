@@ -38,9 +38,8 @@ Group: Development/Tools
 Source0: %{name}-%{version}.tar.bz2
 Source1: README.mediawiki.jlbond
 Source2: LocalSettings.php
-Patch1: fusionforge-4.8.3-webcalendar.patch
-Patch2: fusionforge-4.8.3-mediawiki.patch
-Patch3: fusionforge-4.8.3-register_globals.patch
+Patch1: fusionforge-4.8.3-mediawiki.patch
+Patch2: fusionforge-4.8.3-register_globals.patch
 URL: http://www.fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
@@ -248,13 +247,6 @@ Requires: %{name} >= %{version}, php, subversion, perl, postgresql, %{name}-scms
 SVNTracker plugin allows linking SVN log messages to Trackers and tasks.
 It will review all commits in a project and search for a specific string
 to know which task or tracker is related.
-
-%package webcalendar
-Summary: webcalendar plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php, postgresql
-%description webcalendar
-WebCalendar plugin for FusionForge.
 
 %package blocks
 Summary: Blocks plugin for FusionForge
@@ -477,8 +469,6 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 # plugin: svntracker
 # install crontab
 %{__install} -m 644 plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
-
-# plugin: webcalendar
 
 # plugin: blocks
 %{__ln_s} ../../plugins/blocks/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/blocks
@@ -810,10 +800,6 @@ fi
 %{_sysconfdir}/cron.d/gforge-plugin-svntracker
 %{GFORGE_DIR}/plugins/svntracker
 %{GFORGE_DIR}/www/plugins/svntracker
-
-%files webcalendar
-%{GFORGE_DIR}/plugins/webcalendar
-%{GFORGE_DIR}/www/plugins/webcalendar
 
 %files blocks
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/blocks/
