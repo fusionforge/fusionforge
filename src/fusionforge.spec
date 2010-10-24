@@ -346,12 +346,7 @@ mantisbt plugin for FusionForge.
 # to fix several parts of the installation
 search_and_replace()
 {
-    for i in `/usr/bin/find . -type f`
-    do
-	if $(grep -q ${1} $i) ; then
-	    %{__sed} -i -e "s+${1}+${2}+g" $i
-	fi
-    done
+    /usr/bin/find . -type f | xargs grep -l ${1} | xargs %{__sed} -i -e "s+${1}+${2}+g"
 }
 
 # we need to fix up the fusionforge-install-3-db.php script to ref %{GFORGE_DIR}
