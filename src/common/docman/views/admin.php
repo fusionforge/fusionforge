@@ -76,6 +76,20 @@ function doIt(formid) {
 	echo '</ul>';
 	echo '</form>';
 
+	echo '<form id="createonline" name="createonline" method="post" action="?group_id='.$group_id.'&action=updatecreateonline" >';
+	echo '<ul>';
+
+	$createOnlineStatus = '1';
+	$labelCreateOnline = _('Enable Create Online Documents');
+	if ($g->useCreateOnline()) {
+		$createOnlineStatus='0';
+		$labelCreateOnline = _('Disable Create Online Documents');
+	}
+
+	echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
+	echo '</ul>';
+	echo '</form>';
+
 	echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updateenginesearch" >';
 	echo '<ul>';
 

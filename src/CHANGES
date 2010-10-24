@@ -2,6 +2,7 @@ FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
 * Docman: new UI (Capgemini)
 * Docman: extract documents and directories as zip archive (Capgemini)
+* Docman: rebirth of URL and online creation documents (Capgemini)
 * Trackers: New progressbar to view completion state (when custom status field is used) (Alain Peyrat)
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
 * [#127] Patch to auto approve projects.

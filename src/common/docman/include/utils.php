@@ -255,15 +255,36 @@ function document_editdata(&$document) {
 <?php
 
     if ((!$document->isURL()) && ($document->isText())) {
-        echo '<tr>
-	                <td colspan="2">
-		                ';
+		if ($g->useCreateOnline()) {
+        	echo '<tr>
+	                <td colspan="2">';
 	
-		echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
-		echo '<textarea name="data" rows="15" cols="100" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
-		echo '<input type="hidden" name="filetype" value="text/plain">';
-		echo '</td>
-		            </tr>';
+			echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
+			switch ($document->getFileType()) {
+			case "text/html":
+				$GLOBALS['editor_was_set_up']=false;
+				$params = array() ;
+				/* warning name must be unique */
+				$params['name'] = 'details'.$document->getID();
+				$params['width'] = "800";
+				$params['height'] = "300";
+				$params['body'] = $d->getFileData();
+				$params['group'] = $group_id;
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+				}
+				echo '<input type="hidden" name="filetype" value="text/html">';
+				unset($GLOBALS['editor_was_set_up']);
+				break;
+			default:
+				echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+				echo '<input type="hidden" name="filetype" value="text/plain">';
+			}
+
+			echo '	</td>
+		    	</tr>';
+		}
 	}
 
 ?>

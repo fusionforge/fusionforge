@@ -74,7 +74,7 @@ if (!$d || !is_object($d)) {
 
 switch ($type) {
 	case 'editor' : {
-		$data = getStringFromRequest('data');
+		$data = getStringFromRequest('details');
 		$uploaded_data_name = $name;
 		$sanitizer = new TextSanitizer();
 		$data = $sanitizer->SanitizeHtml($data);

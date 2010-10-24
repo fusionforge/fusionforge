@@ -1161,9 +1161,23 @@ class Group extends Error {
 	}
 
 	/**
+	 *  useCreateOnline - whether or not this group has opted to use create online documents option.
+	 *
+	 *  @return	boolean	use_docman_create_online.
+	 */
+	function useCreateOnline() {
+
+		if (forge_get_config('use_docman')) {
+			return $this->data_array['use_docman_create_online'];
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 *  usesDocman - whether or not this group has opted to use docman.
 	 *
-	 *  @return	boolean	uses_docman.
+	 *  @return	boolean	use_docman.
 	 */
 	function usesDocman() {
 
@@ -1173,6 +1187,7 @@ class Group extends Error {
 			return false;
 		}
 	}
+
 	/**
 	 *  useDocmanSearch - whether or not this group has opted to use docman search engine.
 	 *
@@ -2785,6 +2800,24 @@ The %1$s admin team will now examine your project submission.  You will be notif
 			}
 		}
 		return $this->membersArr;
+	}
+
+	function setDocmanCreateOnlineStatus($status) {
+		db_begin();
+		/* if we activate search engine, we probably want to reindex */
+		$res = db_query_params ('UPDATE groups SET use_docman_create_online=$1 WHERE group_id=$2',
+					array ($status,
+					       $this->getID())) ;
+	
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR - Could Not Update Group DocmanCreateOnline Status: %s'),db_error()));
+			db_rollback();
+			return false;
+		} else {
+			$this->data_array['use_docman_create_online']=$status;
+			db_commit();
+			return true;
+		}
 	}
 
 	function setDocmanWebdav($status) {

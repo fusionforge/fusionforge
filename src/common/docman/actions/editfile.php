@@ -38,7 +38,7 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$docid = getIntFromRequest('docid');
 	$title = getStringFromRequest('title');
 	$description = getStringFromRequest('description');
-	$data = getStringFromRequest('data');
+	$data = getStringFromRequest('details'.$docid);
 	$file_url = getStringFromRequest('file_url');
 	//$ftp_filename = getStringFromRequest('ftp_filename');
 	$uploaded_data = getUploadedFile('uploaded_data');
@@ -52,6 +52,8 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
         $urlparam = '&view=listfile&dirid='.$doc_group;
     }
 
+	var_dump($data);
+	exit;
 	$d= new Document($g,$docid,false,$gfcommon.'docman/engine/');
 	if ($d->isError())
 	    session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));

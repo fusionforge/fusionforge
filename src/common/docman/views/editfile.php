@@ -5,7 +5,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -83,17 +83,35 @@ foreach ($nested_docs[$dirid] as $d) {
 <?php
 
     if ((!$d->isURL()) && ($d->isText())) {
-        echo '<tr>
-	                <td>
-		                ';
-	
-		echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
-		echo '<textarea name="data" rows="15" cols="100" wrap="soft">'. $d->getFileData()  .'</textarea><br />';
-		echo '<input type="hidden" name="filetype" value="text/plain">';
-		echo '</td>
-		            </tr>';
+		if ($g->useCreateOnline()) {
+        	echo '<tr>
+	                <td>';
+			echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
+			switch ($d->getFileType()) {
+			case "text/html":
+				$GLOBALS['editor_was_set_up']=false;
+				$params = array() ;
+				/* name must be != data then nothing is displayed */
+				$params['name'] = 'details'.$d->getID();
+				$params['width'] = "800";
+				$params['height'] = "300";
+				$params['group'] = $group_id;
+				$params['body'] = $d->getFileData();
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+				}
+				unset($GLOBALS['editor_was_set_up']);
+				echo '<input type="hidden" name="filetype" value="text/html">';
+				break;
+			default:
+				echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+				echo '<input type="hidden" name="filetype" value="text/plain">';
+			}
+			echo '	</td>
+		    	</tr>';
+		}
 	}
-
 ?>
 
     <tr>

@@ -42,10 +42,20 @@ if ( $dgf->getNested() == NULL ) {
 	function displayRowFile() {
 	    document.getElementById('filerow').style.display = '';
         document.getElementById('urlrow').style.display = 'none';
+        document.getElementById('editrow').style.display = 'none';
+        document.getElementById('editnamerow').style.display = 'none';
 	}
 	function displayRowUrl() {
 	    document.getElementById('filerow').style.display = 'none';
         document.getElementById('urlrow').style.display = '';
+	    document.getElementById('editrow').style.display = 'none';
+	    document.getElementById('editnamerow').style.display = 'none';
+	}
+	function displayRowEditor() {
+	    document.getElementById('filerow').style.display = 'none';
+        document.getElementById('urlrow').style.display = 'none';
+	    document.getElementById('editrow').style.display = '';
+	    document.getElementById('editnamerow').style.display = '';
 	}
 	</script>
 <?php
@@ -77,8 +87,11 @@ if ( $dgf->getNested() == NULL ) {
 					<td style="text-align:right;">
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
                 	.'</td><td>
-						<input type="radio" name="type" value="httpupload" onClick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onClick="javascript:displayRowUrl()" />'. _('URL') .'
-					</td>
+					<input type="radio" name="type" value="httpupload" onClick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onClick="javascript:displayRowUrl()" />'. _('URL');
+	if ($g->useCreateOnline()) {
+   		echo '<input type="radio" name="type" value="editor" onClick="javascript:displayRowEditor()" />'. _('Create online');
+	}
+	echo '			</td>
 				</tr>
 				<tr id="filerow" style="display:none">
 					<td style="text-align:right;">
@@ -92,6 +105,31 @@ if ( $dgf->getNested() == NULL ) {
 						<strong>'. _('URL') .'</strong>'. utils_requiredField()
                 	.'</td><td>'
 						.'&nbsp;<input type="text" name="file_url" size="30" />
+					</td>
+				</tr>
+				<tr id="editnamerow" style="display:none">
+					<td style="text-align:right;">
+						<strong>'. _('File Name') .'</strong>'. utils_requiredField()
+                	.'</td><td>'
+						.'&nbsp;<input type="text" name="name" size="30" />
+					</td>
+				</tr>
+				<tr id="editrow" style="display:none">
+					<td colspan="2">';
+	$GLOBALS['editor_was_set_up']=false;
+	$params = array() ;
+	/* name must be details !!! if name = data then nothing is displayed */
+	$params['name'] = 'details';
+	$params['width'] = "800";
+	$params['height'] = "300";
+	$params['body'] = "";
+	$params['group'] = $group_id;
+	plugin_hook("text_editor",$params);
+	if (!$GLOBALS['editor_was_set_up']) {
+		    echo '<textarea name="details" rows="5" cols="80"></textarea>';
+}
+	unset($GLOBALS['editor_was_set_up']);
+	echo '
 					</td>
 				</tr>';
 	if ($dirid) {

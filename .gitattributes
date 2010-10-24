@@ -560,6 +560,7 @@ src/common/docman/actions/emptytrash.php -text
 src/common/docman/actions/forcereindexenginesearch.php -text
 src/common/docman/actions/trashdir.php -text
 src/common/docman/actions/trashfile.php -text
+src/common/docman/actions/updatecreateonline.php -text
 src/common/docman/actions/updateenginesearch.php -text
 src/common/docman/actions/updatewebdavinterface.php -text
 src/common/docman/engine/parser_doc.php -text
@@ -700,6 +701,7 @@ src/db/20100926-pfo-rbac.sql -text
 src/db/20100927-pfo-rbac.sql -text
 src/db/20101012-docman-webdav.sql -text
 src/db/20101021-pfo-rbac.sql -text
+src/db/20101024-docman-createonline.sql -text
 src/db/FTI-20061025.sql -text
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text

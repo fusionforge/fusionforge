@@ -94,8 +94,9 @@ switch ($action) {
 	case "trashfile":
 	case "updateenginesearch":
 	case "updatewebdavinterface":
+	case "updatecreateonline":
 		include ("docman/actions/$action.php");
-		;;
+		break;
 }
 
 $title = _('Document Manager: Display Document');
