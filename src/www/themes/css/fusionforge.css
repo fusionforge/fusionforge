@@ -399,3 +399,66 @@ table.progress td :hover { background: none }
     padding: 0px;
 	color: red;
 }
+
+.img-shadow-l {
+  float:left;
+  background: url(../../images/img-shadowAlpha.png) no-repeat bottom right !important;
+  background: url(../../images/img-shadow.gif) no-repeat bottom right;
+  margin: 10px 0 0 10px !important;
+  margin: 10px 0 0 5px;
+}
+
+.img-shadow-l img {
+  display: block;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #a9a9a9;
+  margin: -6px 6px 6px -6px;
+  padding: 4px;
+}
+
+.img-shadow-s {
+  float:left;
+  background: url(../../images/img-shadowAlpha.png) no-repeat bottom right !important;
+  background: url(../../images/img-shadow.gif) no-repeat bottom right;
+  margin: 4px 0 0 4px !important;
+  margin: 4px 0 0 2px;
+  }
+
+.img-shadow-s img {
+  display: block;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #a9a9a9;
+  margin: -2px 2px 2px -2px;
+  padding: 2px;
+  }
+
+.img-shadow-xs {
+	float:left;
+	margin-right: 2px;
+}
+
+.img-shadow-xs img {
+	display: block;
+	position: relative;
+	border: 1px solid #a9a9a9;
+	width: auto;
+	height : 16px;
+}
+
+.img-shadow-xs img:hover {
+	height : auto;
+}
+
+.no-img-xs {
+	float: left;
+	margin-right: 2px;
+	width: 15px;
+	height : 18px;
+}
+
+.new_line {
+	clear: left;
+	margin-bottom: 1px;
+}

@@ -1,7 +1,7 @@
 #
 # RPM spec file for FusionForge
 #
-# Developed for 4.8 by JL Bond Consulting
+# Initial work for 4.8 by JL Bond Consulting
 # Reworked for 5.1 by Alain Peyrat <aljeux@free.fr>
 #
 # TODO: Generate a random password to avoid sites with default pass.
@@ -117,6 +117,13 @@ Group: Development/Tools
 Requires: %{name} >= %{version}, php
 %description fckeditor
 FCKEditor is a WYSIWYG text editor that displays within a web browser.
+
+%package gravatar
+Summary: Gravatar plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description gravatar
+This plugin adds faces images to FusionForge users using the gravatar service.
 
 %package ldapextauth
 Summary: external LDAP authentication for FusionForge plugin
@@ -713,6 +720,9 @@ fi
 %files fckeditor
 %{GFORGE_DIR}/plugins/fckeditor
 %{GFORGE_DIR}/www/plugins/fckeditor
+
+%files gravatar
+%{GFORGE_DIR}/plugins/gravatar
 
 %files ldapextauth
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/ldapextauth/

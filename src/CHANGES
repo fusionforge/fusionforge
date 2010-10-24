@@ -11,6 +11,7 @@ FusionForge-5.1:
 * New blocks plugin, to add free HTML blocks on top of each tools of the project allowing
   admins to add free descriptions (Alcate-Lucent), (better with fckeditor plugin).
 * New unobstructive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)
+* New gravatar plugin to display faces of users using the Gravatar service (Alain Peyrat)
 
 FusionForge-5.0.2:
 * Maintenance release, bugfixes mostly.

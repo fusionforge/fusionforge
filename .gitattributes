@@ -1548,6 +1548,7 @@ src/plugins/globalsearch/packaging/docs/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
+src/plugins/gravatar/common/gravatarPlugin.class.php -text
 src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
 src/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 src/plugins/mantis/etc/mantis.ini -text
@@ -4109,6 +4110,8 @@ src/www/images/ic/trash.png -text svneol=unset#image/png
 src/www/images/ic/write16w.png -text svneol=unset#image/png
 src/www/images/ic/xmail16w.png -text svneol=unset#image/png
 src/www/images/icon.png -text svneol=unset#image/png
+src/www/images/img-shadow.gif -text svneol=unset#unset
+src/www/images/img-shadowAlpha.png -text svneol=unset#unset
 src/www/images/magnifier.png -text svneol=unset#image/png
 src/www/images/msg.png -text svneol=unset#image/png
 src/www/images/opensearchdescription.png -text svneol=unset#image/png
