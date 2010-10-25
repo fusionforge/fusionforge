@@ -6,7 +6,7 @@
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -89,18 +89,21 @@ function docman_recursive_display($docgroup) {
  * @param	$integer	documentgroup id : default value = 0
  * @param	$string		documentgroup parent name : default value = empty
  */
-function docman_fill_zip($zip,$nested_groups,$document_factory,$docgroup = 0,$parent_docname = '') {
+function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
-			$zip->addEmptyDir($parent_docname.'/'.$dg->getName());
+            if (!$zip->addEmptyDir($parent_docname.'/'.$dg->getName()))
+                return false;
+
 			$document_factory->setDocGroupID($dg->getID());
 			$docs = $document_factory->getDocuments();
 			if (is_array($docs) && count($docs) > 0) {      // this group has documents
 				foreach ($docs as $doc) {
-					$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData());
+                    if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))
+                        return false;
 				}
 			}
-			docman_fill_zip($zip,$nested_groups,$document_factory,$dg->getID(),$parent_docname.'/'.$dg->getName());
+			docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), $parent_docname.'/'.$dg->getName());
 		}
 	}
 	return true;

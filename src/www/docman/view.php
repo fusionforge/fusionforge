@@ -103,11 +103,11 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 			exit_error(_('Unable to open zip archive for backup'),'docman');
 		}
 
-		docman_fill_zip($zip,$nested_groups,$df);
+        if ( !docman_fill_zip($zip,$nested_groups,$df))
+            exit_error(_('Unable to fill zip archive for backup'),'docman');
 
-		if ( !$zip->close()) {
+		if ( !$zip->close())
 			exit_error(_('Unable to close zip archive for backup'),'docman');
-		}
 
 		Header ('Content-disposition: filename="'.$filename.'"');
 		Header ('Content-type: application/binary');

@@ -6,7 +6,7 @@
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -30,6 +30,7 @@
 global $HTML; // html object
 global $d_arr; // document array
 global $group_id; // id of group
+global $g; // project group object
 
 /* create the submenu following role, rules and content */
 $menu_text=array();
