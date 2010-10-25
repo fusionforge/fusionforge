@@ -118,10 +118,11 @@ eval {
 
 	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 
-	      my ($login, $md5pwd, $email, $noreplymail, $date) ;
+	      my ($login, $md5pwd, $unixpwd, $email, $noreplymail, $date) ;
 
 	      $login = 'admin' ;
 	      $md5pwd = 'INVALID' ;
+	      $unixpwd = 'INVALID' ;
 	      $email = $server_admin ;
 	      $noreplymail="noreply\@$domain_name" ;
 	      $date = time () ;
@@ -132,7 +133,7 @@ eval {
 			  "UPDATE groups SET homepage = '$domain_name/stats/' where group_id = 3",
 			  "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = 4",
 			  "UPDATE users SET email = '$noreplymail' where user_id = 100",
-			  "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'shell',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+			  "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','$unixpwd','N',2000,'shell',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
 			  "SELECT setval ('\"users_pk_seq\"', 102, 'f')",
 			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
 			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
