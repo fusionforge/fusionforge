@@ -948,7 +948,6 @@ src/debian/dsf-in/plugin-scmsvn.prerm -text
 src/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
 src/debian/dsf-in/web-apache2.config.dsfh-in -text
-src/debian/dsf-in/web-apache2.links -text
 src/debian/dsf-in/web-apache2.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2.prerm -text
 src/debian/dsf-in/web-apache2.templates.dsfh-in -text
