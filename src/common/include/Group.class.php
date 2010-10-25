@@ -360,6 +360,11 @@ class Group extends Error {
 				return false;
 			}
 			
+			if (!$this->fetchData($id)) {
+				db_rollback();
+				return false;
+			}
+
 			if (USE_PFO_RBAC) {
 				$gjr = new GroupJoinRequest ($this) ;
 				$gjr->create ($user->getID(),
@@ -386,11 +391,6 @@ class Group extends Error {
 			}
 			}
 	
-			if (!$this->fetchData($id)) {
-				db_rollback();
-				return false;
-			}
-
 			$hook_params = array ();
 			$hook_params['group'] = $this;
 			$hook_params['group_id'] = $this->getID();
