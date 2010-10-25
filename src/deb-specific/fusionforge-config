@@ -21,7 +21,7 @@ fi
 [ -f /etc/gforge/database.inc ] && chown gforge:gforge /etc/gforge/database.inc
 [ -f /etc/gforge/database.inc ] && chmod 640 /etc/gforge/database.inc
 
-if getent group list
+if getent group list > /dev/null
 then
 	[ -f /etc/gforge/database.py ] && chgrp list /etc/gforge/database.py
 fi
