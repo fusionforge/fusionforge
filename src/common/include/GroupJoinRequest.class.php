@@ -3,7 +3,7 @@
  * FusionForge
  *
  * Copyright 2005, GForge, LLC
- * Copyright 2009, Roland Mas
+ * Copyright 2009-2010, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -27,16 +27,17 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'include/Validator.class.php';
 
 function &get_group_join_requests($Group) {
-	if (!$Group || !is_object($Group) || $Group->isError()) {
-		return false;
-	} else {
+	$reqs = array () ;
+	if ($Group && is_object($Group) && !$Group->isError()) {
 		$res = db_query_params ('SELECT * FROM group_join_request WHERE group_id=$1',
 					array ($Group->getID())) ;
-		while ($arr = db_fetch_array($res)) {
-			$reqs[] = new GroupJoinRequest($Group,$arr['user_id'],$arr);
+		if (db_numrows ($res)) {
+			while ($arr = db_fetch_array($res)) {
+				$reqs[] = new GroupJoinRequest($Group,$arr['user_id'],$arr);
+			}
 		}
-		return $reqs;
 	}
+	return $reqs ;
 }
 
 class GroupJoinRequest extends Error {

@@ -200,7 +200,8 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	if (USE_PFO_RBAC) {
 		$submitter = NULL ;
-		foreach (get_group_join_requests ($this) as $gjr) {
+		$project = group_get_object ($row_grp['group_id']) ;
+		foreach (get_group_join_requests ($project) as $gjr) {
 			$submitter = user_get_object($gjr->getUserID()) ;
 			echo '<p>'
 				.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
