@@ -2370,8 +2370,31 @@ class Group extends Error {
 				}
 			}
 			if ($this->isPublic()) {
-				RoleAnonymous::getInstance()->linkProject($this) ;
-				RoleLoggedIn::getInstance()->linkProject($this) ;
+				$ra = RoleAnonymous::getInstance() ;
+				$rl = RoleLoggedIn::getInstance() ;
+				$ra->linkProject ($this) ;
+				$ra->setSetting ('project_read', $this->getID(), 1) ;
+				$ff = new ForumFactory ($this) ;
+				foreach ($ff->getForums() as $f) {
+					if ($f->isPublic()) {
+						$l = $f->getModerationLevel() ;
+						if ($f->allowAnonymous()) {
+							if ($l == 0) {
+								$ra->setSetting ('forum', $f->getID(), 3) ;
+							} else {
+								$ra->setSetting ('forum', $f->getID(), 2) ;
+							}
+						} else {
+							$ra->setSetting ('forum', $f->getID(), 1) ;
+							$rl->linkProject ($this) ;
+							if ($l == 0) {
+								$rl->setSetting ('forum', $f->getID(), 3) ;
+							} else {
+								$rl->setSetting ('forum', $f->getID(), 2) ;
+							}
+						}
+					}
+				}
 			}
 			foreach (get_group_join_requests ($this) as $gjr) {
 				$gjr->delete (true) ;
