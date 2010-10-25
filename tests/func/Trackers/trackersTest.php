@@ -101,19 +101,16 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("This & été"));
 
 		// Test: Updating the URL extra field and checking that it is recorded.
-// TODO Too difficult at the moment 
-	if (defined('DB_INIT_CMD')) {
-		$this->type("extra_fields[8]", "http://google.com/");
+		$this->type("//form[@id='trackermodform']//input[@type='text']", "http://google.com/");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Summary1");
 		$this->waitForPageToLoad("30000");
 		try {
-			$this->assertEquals("http://google.com/", $this->getValue("extra_fields[8]"));
+			$this->assertEquals("http://google.com/", $this->getValue("//form[@id='trackermodform']//input[@type='text']"));
 		} catch (PHPUnit_Framework_AssertionFailedError $e) {
 			array_push($this->verificationErrors, $e->toString());
 		}
-	}
 
 		// Test: Updating the priority and checking that it is recorded.
 		$this->select("priority", "label=5 - Highest");
