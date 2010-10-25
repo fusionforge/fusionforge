@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 99-unnamed.dpatch by Christian Bayle <bayle@debian.org> and/or Roland Mas <lolando@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/include/html.php src/www/include/html.php
+--- src~/www/include/html.php	2010-10-19 21:04:18.000000000 +0200
++++ src/www/include/html.php	2010-10-25 14:12:15.176857403 +0200
+@@ -353,7 +353,7 @@
+ }
+ 
+ function html_use_tooltips() {
+-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
++	use_javascript('/scripts/jquery/jquery.min.js');
+ 	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
+ 	use_javascript('/js/tooltips.js');
+ 	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/themes/funky/Theme.class.php src/www/themes/funky/Theme.class.php
+--- src~/www/themes/funky/Theme.class.php	2010-09-27 18:22:31.000000000 +0200
++++ src/www/themes/funky/Theme.class.php	2010-10-25 14:11:48.440861858 +0200
+@@ -401,7 +401,7 @@
+         echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
+         echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
+         
+-        // echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
++        // echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery.min.js"></script>' ."\n";
+         ?>
+         <script>
+             $(window).load(function(){
