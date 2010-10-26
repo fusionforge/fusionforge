@@ -54,7 +54,7 @@ remove-binary-files:
 .PHONY: conffiles
 conffiles: $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
 
-debian/$(OLDPACKAGE)-plugin-%.cron.d:
+debian/$(PACKAGE)-plugin-%.cron.d:
 	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.cron.d:
