@@ -50,22 +50,24 @@ require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
-    protected function setUp()
-    {
+	protected $logged_in = false ;
+
+	protected function setUp()
+	{
 		if (getenv('SELENIUM_RC_DIR') && getenv('SELENIUM_RC_URL')) {
 			$this->captureScreenshotOnFailure = true;
 			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
-	if (defined('DB_INIT_CMD')) {
-		// Reload a fresh database before running this test suite.
-		system(DB_INIT_CMD);
+		if (defined('DB_INIT_CMD')) {
+			// Reload a fresh database before running this test suite.
+			system(DB_INIT_CMD);
+		}
+		
+		$this->setBrowser('*firefox');
+		$this->setBrowserUrl(URL);
+		$this->setHost(SELENIUM_RC_HOST);
 	}
-
-    	$this->setBrowser('*firefox');
-        $this->setBrowserUrl(URL);
-        $this->setHost(SELENIUM_RC_HOST);
-    }
 
 //	protected function waitForPageToLoad($timeout)
 //	{
@@ -75,15 +77,23 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 //		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
 //	}
 
-    protected function init() {
+	protected function init() {
 		$this->createProject('ProjectA');
 
 		$this->open( ROOT );
 		$this->click("link=ProjectA");
 		$this->waitForPageToLoad("30000");
-    }
+	}
 
-    protected function login($username)
+	protected function login($username)
+	{
+		$this->open( ROOT );
+		$this->click("link=Log In");
+		$this->waitForPageToLoad("30000");
+		$this->triggeredLogin($username);
+	}
+
+	protected function triggeredLogin($username)
 	{
 		if ($username == 'admin') {
 			$password = 'myadmin';
@@ -91,26 +101,37 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$password = 'password';
 		}
 		
-		$this->click("link=Log In");
-		$this->waitForPageToLoad("30000");
 		$this->type("form_loginname", $username);
 		$this->type("form_pw", $password);
 		$this->click("login");
 		$this->waitForPageToLoad("30000");
-		
+
+		$this->logged_in = $username ;
 	}
-	
+
 	protected function logout()
 	{
 //		$this->click("link=Log Out");
 		$this->open( ROOT ."/account/logout.php" );
 		$this->waitForPageToLoad("30000");
+
+		$this->logged_in = false ;
 	}
 	
 	protected function switchUser($username)
 	{
 		$this->logout();
 		$this->login($username);
+	}
+
+	protected function loginRequired()
+	{
+		return $this->isTextPresent("You've been redirected to this login page") ;
+	}
+
+	protected function permissionDenied()
+	{
+		return $this->isTextPresent("Permission denied") ;
 	}
 
 	protected function createProject ($name) {
@@ -156,7 +177,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
 	}
 	
-	protected function createUser ($login, $id)
+	protected function createUser ($login)
 	{
 		$this->open("/");
 		$this->click("link=Admin");
@@ -176,7 +197,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Display Full User List/Edit Users");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, 'userlist.php?action=activate&user_id=$id')]");
+		$this->click("//*[@id='maindiv']/table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
 		$this->waitForPageToLoad("30000");
 	}
 

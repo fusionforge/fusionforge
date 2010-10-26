@@ -82,14 +82,16 @@ class CreateForum extends FForge_SeleniumTestCase
 	function testSimpleAccessWhenPrivate()
 	{
 		$this->init();
-		$this->logout();
 
 		$this->open( ROOT.'/forum/message.php?msg_id=3' );
 		$this->waitForPageToLoad("30000");
-		$this->type("form_loginname", 'admin');
-		$this->type("form_pw", 'myadmin');
-		$this->click("login");
+		$this->assertTrue($this->isTextPresent("Welcome to Developers"));
+
+		$this->logout();
+		$this->open( ROOT.'/forum/message.php?msg_id=3' );
 		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->loginRequired());
+		$this->triggeredLogin('admin');
 		$this->assertTrue($this->isTextPresent("Welcome to Developers"));
 	}
 
@@ -113,12 +115,8 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=[ reply ]");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Cookies must be enabled past this point."));
-//		$this->assertEquals("ACOS Forge - Login", $this->getTitle());
-		$this->type("form_loginname", "admin");
-		$this->type("form_pw", 'myadmin');
-		$this->click("login");
-		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->loginRequired());
+		$this->triggeredLogin('admin');
 		$this->type("body", "Here is my 19823 reply");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
