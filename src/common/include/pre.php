@@ -232,7 +232,6 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) { // We're on the web
 	// and setup theme
 	if (session_loggedin()) {
 		$LUSER =& session_get_user();
-		$LUSER->setUpTheme();
 		putenv ('TZ='. $LUSER->getTimeZone());
 		header ('Cache-Control: private');
 		require_once forge_get_config('themes_root').'/'.$LUSER->setUpTheme().'/Theme.class.php';

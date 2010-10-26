@@ -34,6 +34,10 @@ class Theme extends Layout {
                 // Parent constructor
                 $this->Layout();
                 $this->doctype = 'strict';
+                $this->themeurl = util_make_url('themes/gforge/');
+                $this->imgbaseurl = $this->themeurl . 'images/';
+                $this->imgroot = $this->imgbaseurl;
+                $this->cssbaseurl = $this->themeurl . 'css/';
 		$this->cssurls = array(
 			util_make_url ('/scripts/yui/reset-fonts-grids/reset-fonts-grids.css'),
 			util_make_url ('/scripts/yui/base/base-min.css'),
