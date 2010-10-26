@@ -30,7 +30,12 @@ require_once $gfwww.'docman/include/vtemplate.class.php';
 $is_editor = forge_check_perm ('docman', $g->getID(), 'admin') ;
 
 $vtp = new VTemplate;
-$handle = $vtp->Open("search.tpl.html");
+if (empty($gfcommon)) {
+        $templates_dir = '../../common';
+} else {
+        $templates_dir = $gfcommon;
+}
+$handle = $vtp->Open($templates_dir."/docman/templates/search.tpl.html");
 $vtp->NewSession($handle,"MAIN");
 
 $allchecked = ""; $onechecked = ""; 

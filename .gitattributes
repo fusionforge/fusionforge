@@ -777,6 +777,7 @@ src/common/docman/engine/parser_text.php -text
 src/common/docman/include/utils.php -text
 src/common/docman/include/vtemplate.class.php -text
 src/common/docman/include/webdav.php -text
+src/common/docman/templates/search.tpl.html -text
 src/common/docman/views/addfile.php -text
 src/common/docman/views/addsubdocgroup.php -text
 src/common/docman/views/admin.php -text
@@ -4064,7 +4065,6 @@ src/utils/manage-translations.sh -text
 src/utils/migrate-to-ini-files.sh -text
 src/www/admin/globalroleedit.php -text
 src/www/admin/pi.php -text
-src/www/docman/search.tpl.html -text
 src/www/env.inc.php -text
 src/www/export/rss20_docman.php -text
 src/www/export/rss20_forum.php -text
