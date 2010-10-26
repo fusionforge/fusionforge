@@ -242,6 +242,20 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  .
  This package controls the interaction between FusionForge and Mailman.
 
+Package: fusionforge-plugin-blocks
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
+Description: collaborative development tool - Blocks plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the Blocks subsystem of FusionForge. It allows each
+ FusionForge project to have its own Blocks, and gives some
+ control over it to the project's administrator.
+
 Package: gforge-plugin-contribtracker
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
