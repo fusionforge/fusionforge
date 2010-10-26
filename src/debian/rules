@@ -155,8 +155,8 @@ install: build
 	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.php -not -name \*.inc.php -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/*/common/docman/engine/ -type f -name \*.sh -exec chmod 0755 {} \;
 
-	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
-	chmod 755 $(CURDIR)/debian/$(OLDPACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
+	rm -f $(CURDIR)/debian/$(PACKAGE)-plugin-scm*/usr/share/*/plugins/scm*/*/README
+	chmod 755 $(CURDIR)/debian/$(PACKAGE)-plugin-scmcvs/usr/share/*/plugins/scmcvs/sbin/*
 
 # Rename config files
 	mv $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini-fhs $(CURDIR)/debian/$(OLDPACKAGE)-common/etc/$(PACKAGE)/config.ini
