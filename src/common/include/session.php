@@ -132,10 +132,10 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending=0)  {
-	global $feedback;
+	global $feedback,$error_msg,$warning_msg;
 
 	if (!$loginname || !$passwd) {
-		$feedback = _('Missing Password Or Users Name');
+		$warning_msg = _('Missing Password Or Users Name');
 		return false;
 	}
 
@@ -147,7 +147,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	// Refuse login if not all the plugins are ok.
 	if (!$result) {
 		if (!$feedback) {
-			$feedback=_('Invalid Password Or User Name');
+			$warning_msg = _('Invalid Password Or User Name');
 		}
 		return false;
 	}
