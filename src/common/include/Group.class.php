@@ -2373,27 +2373,54 @@ class Group extends Error {
 				$ra = RoleAnonymous::getInstance() ;
 				$rl = RoleLoggedIn::getInstance() ;
 				$ra->linkProject ($this) ;
+				$rl->linkProject ($this) ;
+
 				$ra->setSetting ('project_read', $this->getID(), 1) ;
 				$rl->setSetting ('project_read', $this->getID(), 1) ;
+
+				$ra->setSetting ('frs', $this->getID(), 1) ;
+				$rl->setSetting ('frs', $this->getID(), 1) ;
+
+				$ra->setSetting ('docman', $this->getID(), 1) ;
+				$rl->setSetting ('docman', $this->getID(), 1) ;
+
 				$ff = new ForumFactory ($this) ;
-				foreach ($ff->getForums() as $f) {
+				foreach ($ff->getAllForumIds() as $fid) {
+					$f = forum_get_object ($fid) ;
 					if ($f->isPublic()) {
 						$l = $f->getModerationLevel() ;
+						if ($l == 0) {
+							$rl->setSetting ('forum', $fid, 3) ;
+						} else {
+							$rl->setSetting ('forum', $fid, 2) ;
+						}
 						if ($f->allowAnonymous()) {
 							if ($l == 0) {
-								$ra->setSetting ('forum', $f->getID(), 3) ;
+								$ra->setSetting ('forum', $fid, 3) ;
 							} else {
-								$ra->setSetting ('forum', $f->getID(), 2) ;
+								$ra->setSetting ('forum', $fid, 2) ;
 							}
 						} else {
-							$ra->setSetting ('forum', $f->getID(), 1) ;
-							$rl->linkProject ($this) ;
-							if ($l == 0) {
-								$rl->setSetting ('forum', $f->getID(), 3) ;
-							} else {
-								$rl->setSetting ('forum', $f->getID(), 2) ;
-							}
+							$ra->setSetting ('forum', $fid, 1) ;
 						}
+					}
+				}
+
+				$pgf = new ProjectGroupFactory ($this) ;
+				foreach ($pgf->getAllProjectGroupIds() as $pgid) {
+					$pg = projectgroup_get_object ($pgid) ;
+					if ($pg->isPublic()) {
+						$ra->setSetting ('pm', $pgid, 1) ;
+						$rl->setSetting ('pm', $pgid, 1) ;
+					}
+				}
+
+				$atf = new ArtifactTypeFactory ($this) ;
+				foreach ($atf->getAllArtifactTypeIds() as $atid) {
+					$at = artifactType_get_object ($atid) ;
+					if ($at->isPublic()) {
+						$ra->setSetting ('tracker', $atid, 1) ;
+						$rl->setSetting ('tracker', $atid, 1) ;
 					}
 				}
 			}
