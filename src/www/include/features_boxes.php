@@ -76,16 +76,17 @@ function show_top_downloads() {
 		frs_dlstats_grouptotal_vw.downloads
 		FROM frs_dlstats_grouptotal_vw,groups
 		WHERE
-		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.is_public=1 and groups.status=$1
+		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.status=$1
 		ORDER BY downloads DESC
 	',
-					array ('A'),
-					10);
-	if (db_numrows($res_topdown) == 0) {
-		return _('No Stats Available');
-	}
+					array ('A'));
+
 	// print each one
-	while ($row_topdown = db_fetch_array($res_topdown)) {
+	$count = 0 ;
+	while (($row_topdown=db_fetch_array($res_topdown)) && ($count < 10)) {
+		if (!forge_check_perm ('project_read', $row_topdown['group_id'])) {
+			continue ;
+		}
 		if ($row_topdown['downloads'] > 0) {
 			$t_downloads = number_format($row_topdown['downloads']);
 			$t_prj_link = util_make_link_g ($row_topdown['unix_group_name'], $row_topdown['group_id'], $row_topdown['group_name']);
@@ -94,10 +95,12 @@ function show_top_downloads() {
 			$return .= '<td class="width-stat-col1">' . $t_downloads . '</td>';
 			$return .= '<td>' . $t_prj_link . '</td>';
 			$return .= '</tr>';
+			$count++ ;
 		}
 	}
-	if ( $return != "" ) {
-		/* MFaure: test required to deal with a special case encountered on zforge by 20091204 */
+	if ( $return == "" ) {
+		return _('No Stats Available');
+	} else {
 		$t_return = $return;
 		$return = '<table summary="">' . $t_return . "</table>\n"; 
 	}
@@ -171,28 +174,33 @@ function show_sitestats() {
 }
 
 function show_newest_projects() {
-	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE is_public=1 AND status=$1 AND type_id=1 AND register_time > 0 ORDER BY register_time DESC', array ('A'), 10);
+	$res_newproj = db_query_params ('SELECT group_id,unix_group_name,group_name,register_time FROM groups WHERE status=$1 AND type_id=1 AND register_time > 0 ORDER BY register_time DESC', array ('A'));
 
 	$return = '';
 
-	if (!$res_newproj || db_numrows($res_newproj) < 1) {
-		return _('No Stats Available')." ".db_error();
-	} else {
-		
-		$return .= '<table summary="">' . "\n";
-		while ( $row_newproj = db_fetch_array($res_newproj) ) {
-			
-			$t_prj_date = date(_('m/d'),$row_newproj['register_time']);
-			$t_prj_link = util_make_link_g ($row_newproj['unix_group_name'],$row_newproj['group_id'],$row_newproj['group_name']);
-			
-			$return .= "<tr>";
-			$return .= '<td class="width-stat-col1">' . $t_prj_date . "</td>";
-			$return .= '<td>' . $t_prj_link . '</td>';
-			$return .= "</tr>\n";
+	$count = 0 ;
+	while (($row_newproj=db_fetch_array($res_newproj)) && ($count < 10)) {
+		if (!forge_check_perm ('project_read', $row_newproj['group_id'])) {
+			continue ;
 		}
-		$return .= '</table>';
+		
+		$count++ ;
+		$t_prj_date = date(_('m/d'),$row_newproj['register_time']);
+		$t_prj_link = util_make_link_g ($row_newproj['unix_group_name'],$row_newproj['group_id'],$row_newproj['group_name']);
+		
+		$return .= "<tr>";
+		$return .= '<td class="width-stat-col1">' . $t_prj_date . "</td>";
+		$return .= '<td>' . $t_prj_link . '</td>';
+		$return .= "</tr>\n";
 	}
-
+	
+	if ( $return == "" ) {
+		return _('No Stats Available');
+	} else {
+		$t_return = $return;
+		$return = '<table summary="">' . $t_return . "</table>\n"; 
+	}
+	
 	$return .= '<div class="align-center">'.util_make_link ('/softwaremap/full_list.php', _('All newest projects'), array('class' => 'dot-link')).'</div>';
 	return $return;
 }
@@ -219,26 +227,32 @@ function show_highest_ranked_users() {
 function show_highest_ranked_projects() {
 	$statsobj = new Stats () ;
 	$result = $statsobj->getMostActiveStats ('week', 0) ;
-	if (!$result || db_numrows($result) < 1) {
-		return _('No Stats Available')." ".db_error();
-	} else {
-		$return = '<table summary="">';
-		$count = 0 ;
-		while (($row=db_fetch_array($result)) && ($count < 20)) {
-			$t_prj_activity = number_format(substr($row['ranking'],0,5),0);
-			$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
-			
-			$return .= "<tr>";
-			$return .= '<td class="width-stat-col1">'. $t_prj_activity . "</td>";
-			$return .= '<td>' . $t_prj_link . '</td>';
-			$return .= "</tr>\n";
-			
-			$count++ ;
+	$return = '' ;
+
+	$count = 0 ;
+	while (($row=db_fetch_array($result)) && ($count < 20)) {
+		if (!forge_check_perm ('project_read', $row['group_id'])) {
+			continue ;
 		}
-		$return .= "</table>";
-		$return .= '<div class="align-center">' . util_make_link ('/top/mostactive.php?type=week', _('All project activities'), array('class' => 'dot-link')) . '</div>';
+		$t_prj_activity = number_format(substr($row['ranking'],0,5),0);
+		$t_prj_link = util_make_link_g ($row['unix_group_name'],$row['group_id'],$row['group_name']);
 		
+		$return .= "<tr>";
+		$return .= '<td class="width-stat-col1">'. $t_prj_activity . "</td>";
+		$return .= '<td>' . $t_prj_link . '</td>';
+		$return .= "</tr>\n";
+		
+		$count++ ;
 	}
+	if ( $return == "" ) {
+		return _('No Stats Available');
+	} else {
+		$t_return = $return;
+		$return = '<table summary="">' . $t_return . "</table>\n"; 
+	}
+	
+	$return .= '<div class="align-center">' . util_make_link ('/top/mostactive.php?type=week', _('All project activities'), array('class' => 'dot-link')) . '</div>';
+		
 	return $return;
 }
 
