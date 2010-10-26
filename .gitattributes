@@ -1222,7 +1222,12 @@ src/plugins/blocks/db/blocks-init.sql -text
 src/plugins/blocks/etc/blocks.ini -text
 src/plugins/blocks/etc/plugins/blocks/config.php -text
 src/plugins/blocks/etc/templates.json -text
+src/plugins/blocks/packaging/control/222plugin-blocks -text
+src/plugins/blocks/packaging/control/222plugin-blocks.shortdesc -text
+src/plugins/blocks/packaging/dirs/plugin-blocks -text
+src/plugins/blocks/packaging/docs/plugin-blocks -text
 src/plugins/blocks/packaging/install/plugin-blocks -text
+src/plugins/blocks/packaging/links/plugin-blocks -text
 src/plugins/blocks/www/index.php -text
 src/plugins/contribtracker/INSTALL -text
 src/plugins/contribtracker/bin/db-delete.pl -text
