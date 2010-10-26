@@ -1,4 +1,4 @@
-Package: @OLDPACKAGE@-plugin-scmdarcs
+Package: @PACKAGE@-plugin-scmdarcs
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, darcs, darcsweb, php5-cli, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm

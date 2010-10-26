@@ -1,4 +1,4 @@
-Package: @OLDPACKAGE@-plugin-contribtracker
+Package: @PACKAGE@-plugin-contribtracker
 Architecture: all
 Depends: @OLDPACKAGE@-common (>= 4.6.99), @OLDPACKAGE@-db-postgresql (>= 4.6.99) | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 (>= 4.6.99) | @OLDPACKAGE@-web, ${misc:Depends}
 Description: Contribution tracker plugin for FusionForge

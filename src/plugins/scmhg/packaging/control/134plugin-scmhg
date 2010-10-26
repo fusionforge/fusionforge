@@ -1,4 +1,4 @@
-Package: @OLDPACKAGE@-plugin-scmhg
+Package: @PACKAGE@-plugin-scmhg
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, mercurial, php5-cli, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm

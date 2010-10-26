@@ -1,4 +1,4 @@
-Package: @OLDPACKAGE@-plugin-scmarch
+Package: @PACKAGE@-plugin-scmarch
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, php5-cli, tla, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm

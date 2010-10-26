@@ -1,4 +1,4 @@
-Package: @OLDPACKAGE@-plugin-globalsearch
+Package: @PACKAGE@-plugin-globalsearch
 Architecture: all
 Depends: @OLDPACKAGE@-common (>= 4.6.99), @OLDPACKAGE@-db-postgresql (>= 4.6.99) | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 (>= 4.6.99) | @OLDPACKAGE@-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
 Description: Globalsearch plugin for FusionForge

@@ -1,4 +1,4 @@
-Package: @OLDPACKAGE@-plugin-scmgit
+Package: @PACKAGE@-plugin-scmgit
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm
