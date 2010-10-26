@@ -920,6 +920,8 @@ src/deb-specific/update-ldap.sh -text
 src/debian/NEWS.Debian -text
 src/debian/README.source -text
 src/debian/compat -text
+src/debian/dsf-in/plugin-blocks.postinst -text
+src/debian/dsf-in/plugin-blocks.prerm -text
 src/debian/dsf-in/plugin-contribtracker.postinst -text
 src/debian/dsf-in/plugin-contribtracker.prerm -text
 src/debian/dsf-in/plugin-extratabs.postinst -text
