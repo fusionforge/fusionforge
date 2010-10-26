@@ -3,7 +3,7 @@
  * FusionForge document manager
  *
  * Copyright 2005, Fabio Bertagnin
- * Copyright 2009-2010, Franck Villaume
+ * Copyright 2009-2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *

@@ -3,7 +3,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2010, Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
