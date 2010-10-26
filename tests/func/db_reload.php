@@ -146,6 +146,11 @@ if (!$user_id) {
 	$res = db_query_params ('INSERT INTO user_group (user_id,group_id,admin_flags, role_id) VALUES ($1,1,$2,17)',
 				array ($user_id,
 				       'A'));
+
+	if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
+		$res = db_query_params ('INSERT INTO pfo_user_role ($1, 3)',
+					array ($user_id)) ;
+	}
 }
 
 ?>
