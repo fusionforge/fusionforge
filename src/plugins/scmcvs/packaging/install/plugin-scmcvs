@@ -5,4 +5,4 @@ plugins/scmcvs/sbin/*                  usr/share/gforge/plugins/scmcvs/sbin/
 plugins/scmcvs/common/*                usr/share/gforge/plugins/scmcvs/common/
 plugins/scmcvs/cronjobs/*              usr/share/gforge/plugins/scmcvs/cronjobs/
 plugins/scmcvs/etc/plugins/scmcvs/*    etc/gforge/plugins/scmcvs/
-
+plugins/scmcvs/etc/*.ini 	       etc/@PACKAGE@/config.ini.d/

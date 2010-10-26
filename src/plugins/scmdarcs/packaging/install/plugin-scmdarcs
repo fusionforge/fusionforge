@@ -1,2 +1,3 @@
 plugins/scmdarcs/common/*               usr/share/gforge/plugins/scmdarcs/common/
 plugins/scmdarcs/etc/plugins/scmdarcs/* etc/gforge/plugins/scmdarcs/
+plugins/scmdarcs/etc/*.ini 		etc/@PACKAGE@/config.ini.d/

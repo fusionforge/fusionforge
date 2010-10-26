@@ -1221,6 +1221,7 @@ src/plugins/blocks/db/blocks-init.sql -text
 src/plugins/blocks/etc/blocks.ini -text
 src/plugins/blocks/etc/plugins/blocks/config.php -text
 src/plugins/blocks/etc/templates.json -text
+src/plugins/blocks/packaging/install/plugin-blocks -text
 src/plugins/blocks/www/index.php -text
 src/plugins/contribtracker/INSTALL -text
 src/plugins/contribtracker/bin/db-delete.pl -text
@@ -1243,6 +1244,7 @@ src/plugins/env.inc.php -text
 src/plugins/externalsearch/etc/engines.json -text
 src/plugins/externalsearch/etc/externalsearch.ini -text
 src/plugins/externalsearch/packaging/docs/plugin-externalsearch -text
+src/plugins/externalsearch/packaging/install/plugin-externalsearch -text
 src/plugins/extratabs/README -text
 src/plugins/extratabs/bin/db-delete.pl -text
 src/plugins/extratabs/bin/db-upgrade.pl -text
@@ -1757,6 +1759,7 @@ src/plugins/gravatar/common/gravatarPlugin.class.php -text
 src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
 src/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 src/plugins/mantis/etc/mantis.ini -text
+src/plugins/mantis/packaging/install/plugin-mantis -text
 src/plugins/mantisbt/action/addAttachment.php -text
 src/plugins/mantisbt/action/addIssue.php -text
 src/plugins/mantisbt/action/addNote.php -text
@@ -1958,6 +1961,7 @@ src/plugins/scmbzr/packaging/dirs/plugin-scmbzr -text
 src/plugins/scmbzr/packaging/install/plugin-scmbzr -text
 src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
+src/plugins/scmccase/packaging/install/plugin-scmccase -text
 src/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 src/plugins/scmcvs/etc/scmcvs.ini -text
 src/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
