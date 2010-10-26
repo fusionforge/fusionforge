@@ -124,12 +124,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->login($username);
 	}
 
-	protected function loginRequired()
+	protected function isLoginRequired()
 	{
 		return $this->isTextPresent("You've been redirected to this login page") ;
 	}
 
-	protected function permissionDenied()
+	protected function isPermissionDenied()
 	{
 		return $this->isTextPresent("Permission denied") ;
 	}
@@ -179,13 +179,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	
 	protected function createUser ($login)
 	{
-		$this->open("/");
-		$this->click("link=Admin");
+		$this->open( ROOT );
+		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Register a New User");
 		$this->waitForPageToLoad("30000");
 		$this->type("unix_name", $login);
-		$this->type("alt_user_name", $login);
 		$this->type("password1", "password");
 		$this->type("password2", "password");
 		$this->type("firstname", $login);

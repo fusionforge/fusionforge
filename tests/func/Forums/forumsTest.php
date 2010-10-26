@@ -90,7 +90,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->logout();
 		$this->open( ROOT.'/forum/message.php?msg_id=3' );
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->loginRequired());
+		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('admin');
 		$this->assertTrue($this->isTextPresent("Welcome to Developers"));
 	}
@@ -115,7 +115,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=[ reply ]");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->loginRequired());
+		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('admin');
 		$this->type("body", "Here is my 19823 reply");
 		$this->click("submit");

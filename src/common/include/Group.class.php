@@ -2374,6 +2374,7 @@ class Group extends Error {
 				$rl = RoleLoggedIn::getInstance() ;
 				$ra->linkProject ($this) ;
 				$ra->setSetting ('project_read', $this->getID(), 1) ;
+				$rl->setSetting ('project_read', $this->getID(), 1) ;
 				$ff = new ForumFactory ($this) ;
 				foreach ($ff->getForums() as $f) {
 					if ($f->isPublic()) {
