@@ -148,7 +148,7 @@ if (!$user_id) {
 				       'A'));
 
 	if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
-		$res = db_query_params ('INSERT INTO pfo_user_role ($1, 3)',
+		$res = db_query_params ('INSERT INTO pfo_user_role VALUES ($1, 3)',
 					array ($user_id)) ;
 	}
 }
