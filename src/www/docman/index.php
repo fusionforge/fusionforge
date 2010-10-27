@@ -77,8 +77,6 @@ if ($dgh->isError())
 	exit_error($dgh->getErrorMessage(),'docman');
 
 $d_arr =& $df->getDocuments();
-if (!$d_arr || count($d_arr) <1)
-	$d_arr = &$df->getDocuments();
 
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');
