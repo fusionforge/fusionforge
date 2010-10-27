@@ -1,8 +1,10 @@
 fusionforge (5.0.51-1) UNRELEASED; urgency=low
 
   * Snapshot from upstream SVN.
+  * Renamed the remaining gforge-* packages to fusionforge-*, with
+    standard Conflicts-Provides-Replace upgrade path (closes: #551761).
 
- -- Roland Mas <lolando@debian.org>  Tue, 29 Jun 2010 22:53:15 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 27 Oct 2010 11:06:49 +0200
 
 fusionforge (5.0.2-3) unstable; urgency=medium
 
