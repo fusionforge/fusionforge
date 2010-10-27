@@ -426,6 +426,33 @@ class Document extends Error {
 	}
 
 	/**
+	 *	getLocked - get the lock status of this document.
+	 *
+	 *	@return int	The lock status of this document.
+	 */
+	function getLocked() {
+		return $this->data_array['locked'];
+	}
+
+	/**
+	 *	getReservedBy - get the owner of the reversed status of this document.
+	 *
+	 *	@return int	The owner of the reversed status of this document.
+	 */
+	function getReservedBy() {
+		return $this->data_array['reserved_by'];
+	}
+
+	/**
+	 *	getReserved - get the reversed status of this document.
+	 *
+	 *	@return int	The reversed status of this document.
+	 */
+	function getReserved() {
+		return $this->data_array['reserved'];
+	}
+
+	/**
 	 *  setState - set the stateid of the document.
 	 *
 	 *	@param	int	The state id of the doc_states table.
@@ -442,6 +469,55 @@ class Document extends Error {
 								);
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(db_error());
+			return false;
+		}
+		$this->sendNotice(false);
+		return true;
+	}
+
+    /**
+     *  setLock - set the locking status of the document
+     *
+     *  @param  int The status of the lock
+     *  @return boolean success
+     */
+    function setLock($stateLock) {
+		$res = db_query_params ('UPDATE doc_data SET
+								locked=$1
+								WHERE group_id=$2
+								AND docid=$3',
+								array ($stateLock,
+					       			$this->Group->getID(),
+									$this->getID())
+								);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setOnUpdateError(_('Document lock failed').' '.db_error());
+			return false;
+		}
+		$this->sendNotice(false);
+		return true;
+	}
+
+    /**
+     *  setReservedBy - set the reserved status of the document and the owner
+     *
+     *  @param  int The status of the reserved
+     *  @param  int The ID of the owner : by default : noone
+     *  @return boolean success
+     */
+    function setReservedBy($statusReserved,$idReserver=NULL) {
+		$res = db_query_params ('UPDATE doc_data SET
+                                reserved=$1,
+                                reserved_by=$2
+								WHERE group_id=$3
+								AND docid=$4',
+                                array ($statusReserved,
+                                    $idReserver,
+					       			$this->Group->getID(),
+									$this->getID())
+								);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setOnUpdateError(_('Document reservation failed').' '.db_error());
 			return false;
 		}
 		$this->sendNotice(false);

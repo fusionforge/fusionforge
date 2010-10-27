@@ -32,6 +32,7 @@ global $dirid; // id of doc_group
 global $nested_docs; // flat docs array
 global $nested_groups; // flat document directories array
 global $HTML; // Layout object
+global $LUSER; // User object
 
 $DocGroupName = getNameDocGroup($dirid,$group_id);
 if (!$DocGroupName) {
@@ -176,7 +177,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo date(_('Y-m-d H:i'),$d->getCreated());
 		}
 		echo '</td>';
-		echo '<td>'.$d->getStateName().'</td>';
+        echo '<td>';
+        if ($d->getReserved()) {
+            echo html_image('docman/document-reserved.png',22,22,array('alt'=>_('Reserved Document')));
+        } else {
+            echo $d->getStateName().'</td>';
+        }
 		echo '<td>';
 		switch ($d->getFileType()) {
 		case "URL":
@@ -199,8 +205,25 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 		if (forge_check_perm ('docman', $group_id, 'approve')) {
 			echo '<td>';
-			echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/trash-empty.png',22,22,array('alt'=>'trashfile')). '</a>';
-			echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" >'.html_image('docman/edit-file.png',22,22,array('alt'=>'editfile')). '</a>';
+            if (!$d->getLocked() && !$d->getReserved()) {
+			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
+			    echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
+            } else {
+                if ($d->getReservedBy() != $LUSER->getID()) {
+                    echo html_image('docman/trash-forbidden.png',22,22,array('alt'=>_('Trash forbidden')));
+                    echo html_image('docman/edit-forbidden.png',22,22,array('alt'=>_('Edition forbidden')));
+                    if (forge_check_perm ('docman', $group_id, 'admin')) {
+                        echo '<a href="?group_id='.$group_id.'&action=enforcereserve&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/enforce-document.png',22,22,array('alt'=>'Enforce reservation'));
+                    } else {
+                        echo html_image('docman/document-reserved.png',22,22,array('alt',_('Document reserved by')));
+                    }
+                } else {
+			        echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
+			        echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release this document'))). '</a>';
+                }
+            }
 			echo '</td>';
 		}
 		echo '</tr>';

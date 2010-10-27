@@ -761,7 +761,10 @@ src/common/docman/actions/deldir.php -text
 src/common/docman/actions/editdocgroup.php -text
 src/common/docman/actions/editfile.php -text
 src/common/docman/actions/emptytrash.php -text
+src/common/docman/actions/enforcereserve.php -text
 src/common/docman/actions/forcereindexenginesearch.php -text
+src/common/docman/actions/releasefile.php -text
+src/common/docman/actions/reservefile.php -text
 src/common/docman/actions/trashdir.php -text
 src/common/docman/actions/trashfile.php -text
 src/common/docman/actions/updatecreateonline.php -text
@@ -908,6 +911,7 @@ src/db/20101012-docman-webdav.sql -text
 src/db/20101021-pfo-rbac.sql -text
 src/db/20101024-docman-createonline.sql -text
 src/db/20101025-ipv6.sql -text
+src/db/20101027-docman-lock.sql -text
 src/db/FTI-20061025.sql -text
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
@@ -4299,7 +4303,10 @@ src/www/themes/funky/images/clear.png -text
 src/www/themes/funky/images/docman/configure-directory.png -text
 src/www/themes/funky/images/docman/delete-directory.png -text
 src/www/themes/funky/images/docman/directory.png -text
+src/www/themes/funky/images/docman/document-reserved.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/edit-file.png -text
+src/www/themes/funky/images/docman/edit-forbidden.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/enforce-document.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/file_type_archive.png -text
 src/www/themes/funky/images/docman/file_type_html.png -text
 src/www/themes/funky/images/docman/file_type_image.png -text
@@ -4313,7 +4320,10 @@ src/www/themes/funky/images/docman/image-x-generic.png -text
 src/www/themes/funky/images/docman/insert-directory.png -text
 src/www/themes/funky/images/docman/insert-file.png -text
 src/www/themes/funky/images/docman/new.png -text
+src/www/themes/funky/images/docman/release-document.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/reserve-document.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/trash-empty.png -text
+src/www/themes/funky/images/docman/trash-forbidden.png -text svneol=unset#image/png
 src/www/themes/funky/images/header/header-bg.old.2.png -text
 src/www/themes/funky/images/header/header-bg.old.png -text
 src/www/themes/funky/images/header/header-bg.png -text
@@ -4420,7 +4430,10 @@ src/www/themes/gforge/images/clear.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/configure-directory.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/delete-directory.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/directory.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/document-reserved.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/edit-file.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/edit-forbidden.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/enforce-document.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/file_type_archive.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/file_type_html.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/file_type_image.png -text svneol=unset#image/png
@@ -4434,7 +4447,10 @@ src/www/themes/gforge/images/docman/image-x-generic.png -text svneol=unset#image
 src/www/themes/gforge/images/docman/insert-directory.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/insert-file.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/new.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/release-document.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/reserve-document.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/trash-empty.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/trash-forbidden.png -text svneol=unset#image/png
 src/www/themes/gforge/images/header/top-logo.blank.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/header/top-logo.png -text svneol=unset#image/png
 src/www/themes/gforge/images/header/top-middle.gif -text svneol=unset#image/gif

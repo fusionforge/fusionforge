@@ -95,6 +95,9 @@ switch ($action) {
 	case "updateenginesearch":
 	case "updatewebdavinterface":
 	case "updatecreateonline":
+	case "reservefile":
+	case "releasefile":
+	case "enforcereserve":
 		include ("docman/actions/$action.php");
 		break;
 }
