@@ -658,7 +658,7 @@ if ($art_cnt > 0) {
   <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
 
 <p>
-<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</span></p>
+<div class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div></p>
 			</td></tr>';
 
 		//
