@@ -201,6 +201,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function activatePlugin($pluginName) {
+		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=deactivate');
+		$this->waitForPageToLoad("30000");
 		$this->open( ROOT );
 		$this->waitForPageToLoad("30000");
 		$this->login('admin');
