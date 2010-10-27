@@ -259,9 +259,9 @@ Description: collaborative development tool - Blocks plugin
 Package: fusionforge-plugin-contribtracker
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Conflicts: @OLDPACKAGE-plugin-contribtracker
-Replaces: @OLDPACKAGE-plugin-contribtracker
-Provides: @OLDPACKAGE-plugin-contribtracker
+Conflicts: gforge-plugin-contribtracker
+Replaces: gforge-plugin-contribtracker
+Provides: gforge-plugin-contribtracker
 Description: Contribution tracker plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -275,9 +275,9 @@ Description: Contribution tracker plugin for FusionForge
 Package: fusionforge-plugin-extratabs
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Conflicts: @OLDPACKAGE-plugin-extratabs
-Replaces: @OLDPACKAGE-plugin-extratabs
-Provides: @OLDPACKAGE-plugin-extratabs
+Conflicts: gforge-plugin-extratabs
+Replaces: gforge-plugin-extratabs
+Provides: gforge-plugin-extratabs
 Description: Extratabs plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -291,9 +291,9 @@ Description: Extratabs plugin for FusionForge
 Package: fusionforge-plugin-globalsearch
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
-Conflicts: @OLDPACKAGE-plugin-globalsearch
-Replaces: @OLDPACKAGE-plugin-globalsearch
-Provides: @OLDPACKAGE-plugin-globalsearch
+Conflicts: gforge-plugin-globalsearch
+Replaces: gforge-plugin-globalsearch
+Provides: gforge-plugin-globalsearch
 Description: Globalsearch plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -308,9 +308,9 @@ Description: Globalsearch plugin for FusionForge
 Package: fusionforge-plugin-mediawiki
 Architecture: all
 Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib | mysql-server, mediawiki (>= 1:1.15~), php5-cli, php5-gd, ${misc:Depends}
-Conflicts: @OLDPACKAGE-plugin-mediawiki
-Replaces: @OLDPACKAGE-plugin-mediawiki
-Provides: @OLDPACKAGE-plugin-mediawiki
+Conflicts: gforge-plugin-mediawiki
+Replaces: gforge-plugin-mediawiki
+Provides: gforge-plugin-mediawiki
 Description: Mediawiki plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -323,9 +323,9 @@ Description: Mediawiki plugin for FusionForge
 Package: fusionforge-plugin-projectlabels
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Conflicts: @OLDPACKAGE-plugin-projectlabels
-Replaces: @OLDPACKAGE-plugin-projectlabels
-Provides: @OLDPACKAGE-plugin-projectlabels
+Conflicts: gforge-plugin-projectlabels
+Replaces: gforge-plugin-projectlabels
+Provides: gforge-plugin-projectlabels
 Description: Projectlabels plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -339,9 +339,9 @@ Description: Projectlabels plugin for FusionForge
 Package: fusionforge-plugin-scmarch
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, tla, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmarch
-Conflicts: @OLDPACKAGE-plugin-scmarch
-Replaces: @OLDPACKAGE-plugin-scmarch
+Provides: fusionforge-plugin-scm, gforge-plugin-scmarch
+Conflicts: gforge-plugin-scmarch
+Replaces: gforge-plugin-scmarch
 Description: collaborative development tool - GNU Arch plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -356,9 +356,9 @@ Description: collaborative development tool - GNU Arch plugin
 Package: fusionforge-plugin-scmbzr
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, bzr, php5-cli, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmbzr
-Conflicts: @OLDPACKAGE-plugin-scmbzr
-Replaces: @OLDPACKAGE-plugin-scmbzr
+Provides: fusionforge-plugin-scm, gforge-plugin-scmbzr
+Conflicts: gforge-plugin-scmbzr
+Replaces: gforge-plugin-scmbzr
 Description: collaborative development tool - Bazaar plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -373,9 +373,9 @@ Description: collaborative development tool - Bazaar plugin
 Package: fusionforge-plugin-scmcvs
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, libipc-run-perl, rcs, liburi-perl, cvs, php5-cli, python, libphp-snoopy, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmcvs
-Conflicts: @OLDPACKAGE-plugin-scmcvs
-Replaces: @OLDPACKAGE-plugin-scmcvs
+Provides: fusionforge-plugin-scm, gforge-plugin-scmcvs
+Conflicts: gforge-plugin-scmcvs
+Replaces: gforge-plugin-scmcvs
 Description: collaborative development tool - CVS plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -390,9 +390,9 @@ Description: collaborative development tool - CVS plugin
 Package: fusionforge-plugin-scmdarcs
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, darcs, darcsweb, php5-cli, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmdarcs
-Conflicts: @OLDPACKAGE-plugin-scmdarcs
-Replaces: @OLDPACKAGE-plugin-scmdarcs
+Provides: fusionforge-plugin-scm, gforge-plugin-scmdarcs
+Conflicts: gforge-plugin-scmdarcs
+Replaces: gforge-plugin-scmdarcs
 Description: collaborative development tool - Darcs plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -407,9 +407,9 @@ Description: collaborative development tool - Darcs plugin
 Package: fusionforge-plugin-scmgit
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmgit
-Conflicts: @OLDPACKAGE-plugin-scmgit
-Replaces: @OLDPACKAGE-plugin-scmgit
+Provides: fusionforge-plugin-scm, gforge-plugin-scmgit
+Conflicts: gforge-plugin-scmgit
+Replaces: gforge-plugin-scmgit
 Description: collaborative development tool - Git plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -424,9 +424,9 @@ Description: collaborative development tool - Git plugin
 Package: fusionforge-plugin-scmhg
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, mercurial, php5-cli, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmhg
-Conflicts: @OLDPACKAGE-plugin-scmhg
-Replaces: @OLDPACKAGE-plugin-scmhg
+Provides: fusionforge-plugin-scm, gforge-plugin-scmhg
+Conflicts: gforge-plugin-scmhg
+Replaces: gforge-plugin-scmhg
 Description: collaborative development tool - Mercurial (Hg) plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -441,9 +441,9 @@ Description: collaborative development tool - Mercurial (Hg) plugin
 Package: fusionforge-plugin-scmsvn
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, libapache2-svn, gforge-shell-postgresql | gforge-shell, subversion, subversion-tools, python-subversion, python (>= 2.3), php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
-Provides: fusionforge-plugin-scm, @OLDPACKAGE-plugin-scmsvn
-Conflicts: @OLDPACKAGE-plugin-scmsvn
-Replaces: @OLDPACKAGE-plugin-scmsvn
+Provides: fusionforge-plugin-scm, gforge-plugin-scmsvn
+Conflicts: gforge-plugin-scmsvn
+Replaces: gforge-plugin-scmsvn
 Description: collaborative development tool - Subversion plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
