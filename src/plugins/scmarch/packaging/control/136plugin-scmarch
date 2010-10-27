@@ -3,3 +3,6 @@ Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, php5-cli, tla, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm
 Description: collaborative development tool - GNU Arch plugin
+Conflicts: gforge-plugin-scmarch
+Replaces: gforge-plugin-scmarch
+Provides: gforge-plugin-scmarch

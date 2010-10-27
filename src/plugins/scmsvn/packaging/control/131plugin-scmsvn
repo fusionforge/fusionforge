@@ -3,3 +3,6 @@ Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, libapache2-svn, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, subversion, subversion-tools, python-subversion, python (>= 2.3), php5-cli, openbsd-inetd | inet-superserver, update-inetd, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm
 Description: collaborative development tool - Subversion plugin
+Conflicts: gforge-plugin-scmsvn
+Replaces: gforge-plugin-scmsvn
+Provides: gforge-plugin-scmsvn

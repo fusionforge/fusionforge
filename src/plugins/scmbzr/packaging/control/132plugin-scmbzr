@@ -3,3 +3,6 @@ Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, bzr, php5-cli, ${misc:Depends}
 Provides: @OLDPACKAGE@-plugin-scm
 Description: collaborative development tool - Bazaar plugin
+Conflicts: gforge-plugin-scmbzr
+Replaces: gforge-plugin-scmbzr
+Provides: gforge-plugin-scmbzr
