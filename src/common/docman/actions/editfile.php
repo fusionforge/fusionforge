@@ -52,8 +52,6 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
         $urlparam = '&view=listfile&dirid='.$doc_group;
     }
 
-	var_dump($data);
-	exit;
 	$d= new Document($g,$docid,false,$gfcommon.'docman/engine/');
 	if ($d->isError())
 	    session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
