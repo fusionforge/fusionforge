@@ -120,8 +120,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	
 	protected function switchUser($username)
 	{
-		$this->logout();
-		$this->login($username);
+		if ($this->logged_in != $username) {
+			$this->logout();
+			$this->login($username);
+		}
 	}
 
 	protected function isLoginRequired()
@@ -134,40 +136,40 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		return $this->isTextPresent("Permission denied") ;
 	}
 
-	protected function createProject ($name) {
+	protected function registerProject ($name, $user) {
 		$unix_name = strtolower($name);
-		
-		// Create a simple project.
-		$this->open( ROOT );
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent('Log In'));
-		$this->click("link=Log In");
-		$this->waitForPageToLoad("30000");
-		$this->type("form_loginname", "admin");
-		$this->type("form_pw", "myadmin");
-		$this->click("login");
-		$this->waitForPageToLoad("30000");
+
+		$this->switchUser ($user) ;
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
-		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
 		$this->click("link=Register Project");
 		$this->waitForPageToLoad("30000");
 		$this->type("full_name", $name);
 		$this->type("purpose", "This is a simple description for $name");
 		$this->type("description", "This is the public description for $name.");
 		$this->type("unix_name", $unix_name);
-    	$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("//input[@name='scm' and @value='scmsvn']");
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
 		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Pending projects (new project approval)");
-		$this->waitForPageToLoad("30000");
+	}	
+
+	protected function approveProject ($name, $user) {
+		$unix_name = strtolower($name);
+		$this->switchUser ($user) ;
+
+		if ($user == 'admin') {
+			$this->click("link=Site Admin");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Pending projects (new project approval)");
+			$this->waitForPageToLoad("30000");
+		} else {
+			$this->open( ROOT . '/admin/approve-pending.php') ;
+			$this->waitForPageToLoad("30000");
+		}
 		$this->click("document.forms['approve.$unix_name'].submit");
 		$this->waitForPageToLoad("30000");
-		}
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent($name));
@@ -175,6 +177,16 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+	}
+
+	protected function createProject ($name) {
+		$unix_name = strtolower($name);
+		
+		// Create a simple project.
+		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
+			$this->registerProject ($name, 'admin') ;
+			$this->approveProject ($name, 'admin') ;
+		}
 	}
 	
 	protected function createUser ($login)
@@ -214,6 +226,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->click("//a[contains(@href, \"javascript:change('".ROOT."/admin/pluginman.php?update=$pluginName&action=activate','$pluginName');\")]");
 		$this->waitForPageToLoad("30000");
 		$this->logout();
+	}
+
+	protected function gotoProject($project) {
+		$this->open( ROOT . '/projects/' . $project) ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
 	}
 }
 
