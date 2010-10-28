@@ -226,7 +226,7 @@ class FRSRelease extends Error {
 	 *  @return string  The filename of this release.
 	 */
 	function getFileName() {
-		return preg_replace("/[^-A-Z0-9_\.]/i",'',$this->data_array['name']);
+		return util_secure_filename($this->data_array['name']);
 	}
 
 	/**
@@ -379,7 +379,7 @@ notified in the future, please login to %7$s and click this link:
 			$this->setError('Release::delete error: trying to delete root dir');
 			return false;
 		}
-		exec('rm -rf '.$dir);
+		rmdir($dir);
 		
 		db_query_params ('DELETE FROM frs_release WHERE release_id=$1 AND package_id=$2',
 				 array ($this->getID(),

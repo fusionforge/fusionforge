@@ -240,7 +240,7 @@ class FRSPackage extends Error {
 	 *  @return string  The name of this package.
 	 */
 	function getFileName() {
-		return preg_replace("/[^-A-Z0-9_\.]/i",'',$this->data_array['name']);
+		return util_secure_filename($this->data_array['name']);
 	}
 
 	/**
@@ -469,7 +469,7 @@ class FRSPackage extends Error {
 			$this->setError('Package::delete error: trying to delete root dir');
 			return false;
 		}
-		exec('rm -rf '.$dir);
+		rmdir($dir);
 
 		db_query_params ('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
 				 array ($this->getID(),

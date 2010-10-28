@@ -1007,6 +1007,43 @@ function util_is_root_dir($dir) {
 }
 
 /**
+ * util_is_dot_or_dotdot() - Checks if a directory points to . or ..
+ * @param	string	Directory
+ * @return bool
+ */
+function util_is_dot_or_dotdot($dir) {
+	return preg_match('/^\.\.?$/',trim($dir, '/'));
+}
+
+/**
+ * util_containts_dot_or_dotdot() - Checks if a directory containts . or ..
+ * @param	string	Directory
+ * @return bool
+ */
+function util_containts_dot_or_dotdot($dir) {
+  foreach (explode('/', $dir) as $sub_dir) {
+    if (util_is_dot_or_dotdot($sub_dir))
+      return true;
+  }
+  
+  return false;
+}
+
+/**
+ * util_secure_filename() - Returns a secured file name
+ * @param	string	Filename
+ * @return	string  Filename
+ */
+function util_secure_filename($file) {
+	$f = preg_replace("/[^-A-Z0-9_\.]/i", '', $file);
+	if (util_containts_dot_or_dotdot($f))
+		$f = preg_replace("/\./", '_', $f);
+	if (! $f)
+		$f = md5($file);
+	return $f;
+}
+
+/**
  * util_strip_accents() - Remove accents from given text.
  * @param	string	Text
  * @return 	string
