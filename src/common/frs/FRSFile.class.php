@@ -187,6 +187,7 @@ class FRSFile extends Error {
 		}
 		$this->file_id=db_insertid($result,'frs_file','file_id');
 		if (!$this->fetchData($this->file_id)) {
+			db_rollback();
 			return false;
 		} else {
 			db_commit();
@@ -388,6 +389,7 @@ class FRSFile extends Error {
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('FRSFile::update() Error On Update: '.db_error());
+			db_rollback();
 			return false;
 		}
 
