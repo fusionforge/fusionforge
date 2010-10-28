@@ -897,19 +897,22 @@ abstract class BaseRole extends Error {
 	 *
 	 *	@param	string	The name of the role.
 	 *	@param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
+	 *      @param  boolean Perform permission checking
 	 *	@return	boolean	True on success or false on failure.
 	 */
-	function update($role_name,$data) {
+	function update($role_name,$data,$check_perms=true) {
 		global $SYS;
 		if (USE_PFO_RBAC) {
-			if ($this->getHomeProject() == NULL) {
-				if (!forge_check_global_perm ('forge_admin')) {
+			if ($check_perms) {
+				if ($this->getHomeProject() == NULL) {
+					if (!forge_check_global_perm ('forge_admin')) {
+						$this->setPermissionDeniedError();
+						return false;
+					}
+				} elseif (!forge_check_perm ('project_admin', $this->getHomeProject()->getID())) {
 					$this->setPermissionDeniedError();
 					return false;
 				}
-			} elseif (!forge_check_perm ('project_admin', $this->getHomeProject()->getID())) {
-				$this->setPermissionDeniedError();
-				return false;
 			}
 		} else {
 			$perm =& $this->Group->getPermission ();
@@ -1315,7 +1318,7 @@ abstract class BaseRole extends Error {
 		
 		// Save
 		if (USE_PFO_RBAC) {
-			$this->update ($this->getName(), $new_pa) ;
+			$this->update ($this->getName(), $new_pa, false) ;
 		} else {
 			$this->update ($this->getName(), $new_sa) ;
 		}

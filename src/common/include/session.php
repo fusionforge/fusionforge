@@ -391,8 +391,6 @@ function session_require($req, $reason='') {
 				exit_permission_denied($reason,'');
 			}
 		}
-	} else if ($req['isloggedin']) {
-		//no need to check as long as the check is present at top of function
 	} else {
 		exit_permission_denied($reason,'');
 	}
@@ -420,6 +418,10 @@ function session_require_perm ($section, $reference, $action = NULL, $reason='')
  */
 function session_require_global_perm ($section, $action = NULL, $reason='') {
 	if (!forge_check_global_perm ($section, $action)) {
+		if (!$reason) {
+			$reason = sprintf (_('Permission denied. The %s administrators will have to grant you permission to view this page.'),
+					   forge_get_config ('forge_name')) ;
+		}
 		exit_permission_denied ($reason,'');
 	}		
 }
@@ -447,10 +449,10 @@ function session_require_login () {
  *	@return none
  */
 function session_set_new($user_id) {
-	global $G_SESSION,$session_ser;
+	global $session_ser;
 
 	// set session cookie
-  //
+	//
 	$cookie = session_build_session_cookie($user_id);
 	session_cookie("session_ser", $cookie, "", $GLOBALS['sys_session_expire']);
 	$session_ser=$cookie;
@@ -475,13 +477,17 @@ function session_set_new($user_id) {
 	else if (db_numrows($res) < 1) {
 		exit_error(_('Could not fetch user session data'),'');
 	} else {
+		session_set_internal ($user_id, $res) ;
+	}
 
-		//set up the new user object
-		//
-		$G_SESSION = user_get_object($user_id,$res);
-		if ($G_SESSION) {
-			$G_SESSION->setLoggedIn(true);
-		}
+}
+
+function session_set_internal ($user_id, $res=false) {
+	global $G_SESSION ;
+	
+	$G_SESSION = user_get_object($user_id,$res);
+	if ($G_SESSION) {
+		$G_SESSION->setLoggedIn(true);
 	}
 
 	RBACEngine::getInstance()->invalidateRoleCaches() ;

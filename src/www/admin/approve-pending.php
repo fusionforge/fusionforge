@@ -107,7 +107,7 @@ if ($action=='activate') {
 	}
 }
 
-site_admin_header(array('title'=>_('Approving Pending Projects')));
+site_admin_header(array('title'=>_('Approving Pending Projects')), 'approve_projects');
 echo '<h1>' . _('Approving Pending Projects') . '</h1>';
 
 // get current information

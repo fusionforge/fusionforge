@@ -42,7 +42,9 @@ $id = getIntFromRequest('id');
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
-if ($group_id && $group_id != forge_get_config('news_group') && user_ismember($group_id,'A')) {
+if ($group_id && $group_id != forge_get_config('news_group')) {
+	session_require_perm ('project_admin', $group_id) ;
+
 	$status = getIntFromRequest('status');
 	$summary = getStringFromRequest('summary');
 	$details = getStringFromRequest('details');
@@ -182,7 +184,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 	}
 	news_footer(array());
 
-} else if (forge_check_global_perm ('approve_news')) {
+} else {
 	/*
 
 		News uber-user admin pages
@@ -192,6 +194,8 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		Admin members of forge_get_config('news_group') (news project) can edit/change/approve news items
 
 	*/
+	session_require_global_perm ('approve_news') ;
+
 	if ($post_changes) {
 		if ($approve) {
 			if ($status==1) {
@@ -340,11 +344,6 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 
 	}
 	news_footer(array());
-
-} else {
-
-	exit_error(sprintf(_('You have to be an admin on the project you are editing or a member of the %s News team.'), forge_get_config ('forge_name')),'news');
-
 }
 
 // Local Variables:

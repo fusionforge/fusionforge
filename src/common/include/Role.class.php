@@ -174,10 +174,16 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *	@param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
 	 *	@return integer	The id on success or false on failure.
 	 */
-	function create($role_name,$data) {
+	function create($role_name,$data,$newproject=false) {
 		if (USE_PFO_RBAC) {
 			if ($this->Group == NULL) {
 				if (!forge_check_global_perm ('forge_admin')) {
+					$this->setPermissionDeniedError();
+					return false;
+				}
+			}
+			if ($newproject) {
+				if (!forge_check_global_perm ('approve_projects')) {
 					$this->setPermissionDeniedError();
 					return false;
 				}
@@ -302,7 +308,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	function createDefault($name) {
 		if ($this->Group == NULL) {
-			return $this->create($name,array());
+			return $this->create($name,array(),true);
 		}
 		
 		if (array_key_exists ($name, $this->defaults)) {
@@ -349,7 +355,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			}
 		}
 
-		return $this->create($name,$data);
+		return $this->create($name,$data,true);
 	}
 	
 	/**

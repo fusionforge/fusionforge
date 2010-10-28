@@ -686,11 +686,7 @@ class Group extends Error {
 	function setStatus(&$user, $status) {
 		global $SYS;
 
-		$perm =& $this->getPermission ();
-		if (!$perm || !is_object($perm)) {
-			$this->setPermissionDeniedError();
-			return false;
-		} elseif (!$perm->isSuperUser()) {
+                if (!forge_check_global_perm ('approve_projects')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -2196,7 +2192,7 @@ class Group extends Error {
 			$this->setError(_("Group already active"));
 			return false;
 		}
-
+		
 		db_begin();
 
 		// Step 1: Activate group and create LDAP entries
@@ -2208,6 +2204,59 @@ class Group extends Error {
 		// Switch to system language for item creation
 		setup_gettext_from_sys_lang ();
 
+		// Create default roles
+		if (USE_PFO_RBAC) {
+			$idadmin_group = NULL ;
+			foreach (get_group_join_requests ($this) as $gjr) {
+				$idadmin_group = $gjr->getUserID() ;
+				break ;
+			}
+			if ($idadmin_group == NULL) {
+				$idadmin_group = $user->getID();
+			}
+		} else {
+			$admin_group = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
+							array ($this->getID(),
+							       'A')) ;
+			if (db_numrows($admin_group) > 0) {
+				$idadmin_group = db_result($admin_group,0,'user_id');
+			} else {
+				$idadmin_group = $user->getID();
+				db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags) VALUES ($1, $2, $3)',
+						 array ($idadmin_group,
+							$this->getID(),
+							'A')) ;
+			}
+		}
+
+		$role = new Role($this);
+		$todo = array_keys($role->defaults);
+		for ($c=0; $c<count($todo); $c++) {
+			$role = new Role($this);
+			if (! ($role_id = $role->createDefault($todo[$c]))) {
+				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
+				db_rollback();
+				setup_gettext_from_context();
+				return false;
+			}
+			$role = new Role($this, $role_id);
+			if ($role->getVal('projectadmin',0)=='A') {
+				$role->setUser($idadmin_group);
+			}
+		}
+		
+		if (USE_PFO_RBAC) {
+			$roles = $this->getRoles() ;
+			foreach ($roles as $r) {
+				if ($r->getSetting ('project_admin', $this->getID())) {
+					$r->addUser (user_get_object ($idadmin_group)) ;
+				}
+			}
+		}
+		
+		// Temporarily switch to the submitter's identity
+		$saved_session = session_get_user () ;
+		session_set_internal ($idadmin_group) ;
 
 		//
 		//
@@ -2316,59 +2365,8 @@ class Group extends Error {
 			}
 		}
 
-		//
-		//
-		//	Set Default Roles
-		//
-		//
+		// Set permissions for roles
 		if (USE_PFO_RBAC) {
-			$idadmin_group = NULL ;
-			foreach (get_group_join_requests ($this) as $gjr) {
-				$idadmin_group = $gjr->getUserID() ;
-				break ;
-			}
-			if ($idadmin_group == NULL) {
-				$idadmin_group = $user->getID();
-			}
-		} else {
-
-		$admin_group = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
-						array ($this->getID(),
-						       'A')) ;
-		if (db_numrows($admin_group) > 0) {
-			$idadmin_group = db_result($admin_group,0,'user_id');
-		} else {
-			$idadmin_group = $user->getID();
-			db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags) VALUES ($1, $2, $3)',
-					 array ($idadmin_group,
-						$this->getID(),
-						'A')) ;
-		}
-		}
-
-		$role = new Role($this);
-		$todo = array_keys($role->defaults);
-		for ($c=0; $c<count($todo); $c++) {
-			$role = new Role($this);
-			if (! ($role_id = $role->createDefault($todo[$c]))) {
-				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			}
-			$role = new Role($this, $role_id);
-			if ($role->getVal('projectadmin',0)=='A') {
-				$role->setUser($idadmin_group);
-			}
-		}
-
-		if (USE_PFO_RBAC) {
-			$roles = $this->getRoles() ;
-			foreach ($roles as $r) {
-				if ($r->getSetting ('project_admin', $this->getID())) {
-					$r->addUser (user_get_object ($idadmin_group)) ;
-				}
-			}
 			if ($this->isPublic()) {
 				$ra = RoleAnonymous::getInstance() ;
 				$rl = RoleLoggedIn::getInstance() ;
@@ -2445,6 +2443,7 @@ class Group extends Error {
 		}
 
 		// Switch back to user preference
+		session_set_internal ($saved_session->getID()) ;
 		setup_gettext_from_context();
 
 		db_commit();

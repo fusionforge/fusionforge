@@ -125,7 +125,62 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("projapp Lastname"));
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
-		
+
+		// Register project as unprivileged user
+		$this->createUser ("toto") ;
+		$this->switchUser ("toto") ;
+		$this->registerProject ("TotoProject", "toto") ;
+
+		// Try approving it as two users without the right to do so
+		$this->open( ROOT . '/admin/approve-pending.php') ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isPermissionDenied()) ;
+		$this->switchUser ("newsmod") ;
+		$this->open( ROOT . '/admin/approve-pending.php') ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isPermissionDenied()) ;
+
+		// Approve it with a user that only has approve_projects
+		$this->approveProject ("TotoProject", "projapp") ;
+
+		// Submit a news in the project
+		$this->switchUser ("toto") ;
+		$this->gotoProject ("TotoProject") ;
+		$this->click("link=News") ;
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit") ;
+		$this->waitForPageToLoad("30000");
+		$this->type("summary", "First TotoNews");
+		$this->type("details", "This is a simple news for Toto's project.");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+
+		// Try to push it to front page with user toto
+		$this->open( ROOT . '/news/admin/') ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isPermissionDenied()) ;
+
+		// Try to push it to front page with user projapp
+		$this->switchUser ("projapp") ;
+		$this->open( ROOT . '/news/admin/') ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isPermissionDenied()) ;
+
+		// Push it to front page with user newsmod
+		$this->switchUser ("newsmod") ;
+		$this->open( ROOT . '/news/admin/') ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isTextPresent("These items need to be approved")) ;
+		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
+		$this->click ("//a[contains(.,'First TotoNews')]") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//input[@type='radio' and @value='1']") ;
+		$this->click ("submit") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isTextPresent("These items were approved this past week")) ;
+		$this->open( ROOT ) ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
 	}
 }
 ?>

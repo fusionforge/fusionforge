@@ -139,7 +139,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function registerProject ($name, $user) {
 		$unix_name = strtolower($name);
 
+		$saved_user = $this->logged_in ;
 		$this->switchUser ($user) ;
+
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Register Project");
@@ -153,10 +155,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
 		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
+
+		$this->switchUser ($saved_user) ;
 	}	
 
 	protected function approveProject ($name, $user) {
 		$unix_name = strtolower($name);
+
+		$saved_user = $this->logged_in ;
 		$this->switchUser ($user) ;
 
 		if ($user == 'admin') {
@@ -169,7 +175,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 		}
 		$this->click("document.forms['approve.$unix_name'].submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad("60000");
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent($name));
@@ -177,10 +183,14 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+
+		$this->switchUser ($saved_user) ;
 	}
 
 	protected function createProject ($name) {
 		$unix_name = strtolower($name);
+
+		$this->switchUser ('admin') ;
 		
 		// Create a simple project.
 		if ((!defined('PROJECTA')) || ($unix_name != "projecta")) {
@@ -229,9 +239,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function gotoProject($project) {
-		$this->open( ROOT . '/projects/' . $project) ;
+		$unix_name = strtolower($project);
+		
+		$this->open( ROOT . '/projects/' . $unix_name) ;
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
+		$this->assertTrue($this->isTextPresent("This is the public description for $project."));
 	}
 }
 

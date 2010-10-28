@@ -21,8 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-function site_admin_header($params) {
-	session_require_global_perm ('forge_admin');
+function site_admin_header($params, $required_perm = 'forge_admin') {
+	session_require_global_perm ($required_perm);
 
 	if (version_compare(PHP_VERSION, '5.1.0', '<')) {
 		$GLOBALS['warning_msg'] = 'WARNING: Your php version must not be lower than 5.1.0, please upgrade';
