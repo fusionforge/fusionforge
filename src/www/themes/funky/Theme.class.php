@@ -401,9 +401,10 @@ class Theme extends Layout {
         echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
         
-        // echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
+        echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
         ?>
         <script>
+            var JQuery = jQuery.noConflict();
             $(window).load(function(){
                     jQuery(".quicknews").hide();
             });

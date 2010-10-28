@@ -763,6 +763,7 @@ src/common/docman/actions/editfile.php -text
 src/common/docman/actions/emptytrash.php -text
 src/common/docman/actions/enforcereserve.php -text
 src/common/docman/actions/forcereindexenginesearch.php -text
+src/common/docman/actions/lockfile.php -text
 src/common/docman/actions/releasefile.php -text
 src/common/docman/actions/reservefile.php -text
 src/common/docman/actions/trashdir.php -text

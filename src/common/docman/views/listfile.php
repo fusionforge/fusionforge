@@ -72,8 +72,12 @@ function displayEditFile(id) {
 	var divid = 'editfile'+id;
 	if ( 'none' == document.getElementById(divid).style.display ) {
 		document.getElementById(divid).style.display = 'block';
+        jQuery.get('http://forge/docman/',
+                    {group_id:6,action:'lockfile',lock:1,fileid:id});
 	} else {
 		document.getElementById(divid).style.display = 'none';
+        jQuery.get('http://forge/docman/',
+                    {group_id:6,action:'lockfile',lock:0,fileid:id});
 	}
 }
 </script>

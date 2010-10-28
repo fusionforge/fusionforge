@@ -96,6 +96,7 @@ switch ($action) {
 	case "reservefile":
 	case "releasefile":
 	case "enforcereserve":
+	case "lockfile":
 		include ("docman/actions/$action.php");
 		break;
 }
