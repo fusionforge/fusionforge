@@ -45,7 +45,8 @@ $res=db_query_params ('SELECT frs_file.filename,frs_package.is_public,frs_packag
 			array($file_id));
 
 if (db_numrows($res) < 1) {
-	Header("Status: 404");
+	header("HTTP/1.0 404 Not Found");
+	require_once $gfwww.'404.php';
 	exit;
 }
 
@@ -111,7 +112,8 @@ if (file_exists($filepath)) {
 	$res=db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) 
 		VALUES ($1, $2, $3, $4, $5)", array($ip,$file_id,date('Ym'),date('d'),$us));
 } else {
-	Header("Status: 404");
+	header("HTTP/1.0 404 Not Found");
+	require_once $gfwww.'404.php';
 }
 
 ?>
