@@ -7,7 +7,7 @@
 @DPATCH@
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/include/html.php src/www/include/html.php
 --- src~/www/include/html.php	2010-10-19 21:04:18.000000000 +0200
-+++ src/www/include/html.php	2010-10-25 14:12:15.176857403 +0200
++++ src/www/include/html.php	2010-10-28 16:35:55.400965535 +0200
 @@ -353,7 +353,7 @@
  }
  
@@ -18,14 +18,14 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
  	use_javascript('/js/tooltips.js');
  	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/themes/funky/Theme.class.php src/www/themes/funky/Theme.class.php
---- src~/www/themes/funky/Theme.class.php	2010-09-27 18:22:31.000000000 +0200
-+++ src/www/themes/funky/Theme.class.php	2010-10-25 14:11:48.440861858 +0200
+--- src~/www/themes/funky/Theme.class.php	2010-10-28 14:33:42.000000000 +0200
++++ src/www/themes/funky/Theme.class.php	2010-10-28 16:35:55.404959874 +0200
 @@ -401,7 +401,7 @@
          echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
          echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
          
--        // echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
-+        // echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery.min.js"></script>' ."\n";
+-        echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
++        echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery.min.js"></script>' ."\n";
          ?>
          <script>
-             $(window).load(function(){
+             var JQuery = jQuery.noConflict();
