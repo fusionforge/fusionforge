@@ -141,7 +141,7 @@ if ($role instanceof RoleExplicit) {
 		
 		foreach ($users as $user) {
 			echo '
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+		<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">
 		<input type="hidden" name="role_id" value="'.$role_id.'">
                         <tr>
                         <td style="white-space: nowrap;">
@@ -167,7 +167,7 @@ if ($role instanceof RoleExplicit) {
 
 			?>
 		<form
-			action="<?php echo getStringFromServer('PHP_SELF'); ?>"
+			action="<?php echo util_make_url('/admin/globalroleedit.php'); ?>"
 			method="post">
 		<p><input type="text"
 			name="form_unix_name" size="10" value="" />
@@ -181,7 +181,7 @@ if ($role instanceof RoleExplicit) {
 		
 echo '
 <p>
-<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">';
 echo '<input type="hidden" name="role_id" value="'.$role_id.'">' ;
 		
 if ($role instanceof RoleExplicit) {

@@ -24,7 +24,7 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class RBAC extends FForge_SeleniumTestCase
 {
-	function testRBAC()
+	function testAnonymousProjectReadAccess()
 	{
 		$this->init();
 
@@ -52,5 +52,80 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 	}
 
+	function testGlobalRoles()
+	{
+		$this->login("admin");
+
+		$this->open( ROOT );
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+
+		// Create "Project approvers" role
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Grant it permissions
+		$this->select("//select[@id='tracker-data[approve_projects][-1]']", "label=Approve projects");
+		$this->select("//select[@id='tracker-data[approve_news][-1]']", "label=Approve news");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Check permissions were saved
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->assertSelected("//select[@id='tracker-data[approve_projects][-1]']", "Approve projects");
+		$this->assertNotSelected("//select[@id='tracker-data[approve_projects][-1]']", "No access");
+		$this->assertSelected("//select[@id='tracker-data[approve_news][-1]']", "Approve news");
+		
+		// Whoops, we don't actually want the news moderation bit, unset it
+		$this->select("//select[@id='tracker-data[approve_news][-1]']", "label=No access");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertSelected("//select[@id='tracker-data[approve_projects][-1]']", "Approve projects");
+		$this->assertSelected("//select[@id='tracker-data[approve_news][-1]']", "No access");
+
+		// Create users for "Project approvers" and "News moderators" roles
+		$this->createUser ("projapp") ;
+		$this->createUser ("newsmod") ;
+
+		// Add them to their respective roles, check they're here
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "projapp") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("projapp Lastname"));
+		
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=News moderators") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "newsmod") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
+
+		// Add a wrong user to the role, then remove it
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "projapp") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("projapp Lastname"));
+		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
+		$this->click ("//a[contains(@href,'/users/projapp')]/../input[@name='rmuser']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("projapp Lastname"));
+		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
+		
+	}
 }
 ?>
