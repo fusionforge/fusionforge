@@ -394,6 +394,8 @@ class Theme extends Layout {
      */
     function headerJS()
     {
+		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+
         echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>';
@@ -401,7 +403,6 @@ class Theme extends Layout {
         echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
         
-        echo '<script type="text/javascript" src="'.$this->themeurl.'js/jquery-1.4.2.min.js"></script>' ."\n";
         ?>
         <script>
             var JQuery = jQuery.noConflict();
@@ -413,9 +414,10 @@ class Theme extends Layout {
     
         echo '<script type="text/javascript">';
         plugin_hook ("javascript",false);
-        echo '</script>';
+        echo '</script>'."\n";
         
         plugin_hook ("javascript_file",false);
+		echo $this->getJavascripts();
     }
 }
 
