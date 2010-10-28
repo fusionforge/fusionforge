@@ -25,6 +25,7 @@ class RPMCentos52Tests
 		$suite->addTestFiles(glob("func/Forums/*Test.php"));
 		$suite->addTestFiles(glob("func/News/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
+		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		
 		return $suite;
 	}
