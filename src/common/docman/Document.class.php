@@ -479,14 +479,17 @@ class Document extends Error {
      *  setLock - set the locking status of the document
      *
      *  @param  int The status of the lock
+     *  @param  int The userid who set the lock
      *  @return boolean success
      */
-    function setLock($stateLock) {
+    function setLock($stateLock,$userid=NULL) {
 		$res = db_query_params ('UPDATE doc_data SET
-								locked=$1
-								WHERE group_id=$2
-								AND docid=$3',
+                                locked=$1,
+                                locked_by=$2
+								WHERE group_id=$3
+								AND docid=$4',
 								array ($stateLock,
+                                    $userid,
 					       			$this->Group->getID(),
 									$this->getID())
 								);
@@ -561,9 +564,10 @@ class Document extends Error {
 			doc_group=$4,
 			filetype=$5,
 			filename=$6,
-			updatedate=$7
-			WHERE group_id=$8
-			AND docid=$9',
+			updatedate=$7,
+            locked=$8
+			WHERE group_id=$9
+			AND docid=$10',
 					array (htmlspecialchars($title),
 					       htmlspecialchars($description),
 					       $stateid,
@@ -571,6 +575,7 @@ class Document extends Error {
 					       $filetype,
 					       $filename,
 					       time(),
+                           0,
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		

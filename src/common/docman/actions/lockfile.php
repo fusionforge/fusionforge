@@ -41,7 +41,11 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	if ($d->isError())
 	    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
-	echo $d->setLock($lock);
+    if ($lock == 0) {
+	    echo $d->setLock($lock);
+    } else {
+        echo $d->setLock($lock,$LUSER->getID());
+    }
     exit;
 }
 ?>

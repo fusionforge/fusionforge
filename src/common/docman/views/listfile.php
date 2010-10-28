@@ -41,6 +41,13 @@ if (!$DocGroupName) {
 ?>
 
 <script language="javascript">
+var lockfileid = new Array();
+JQuery(window).unload(function(){
+    for (var localid in localfileid) {
+        JQuery.ajax({async: false, url:"<?php util_make_url('docman') ?>", data: {group_id:<?php echo $group_id ?>,action:'lockfile',lock:0,fileid:localid}});
+    }
+});
+
 function displaySubGroup() {
 	if ( 'none' == document.getElementById('addsubdocgroup').style.display ) {
 		document.getElementById('addsubdocgroup').style.display = 'block';
@@ -71,13 +78,15 @@ function displayEditDocGroup() {
 function displayEditFile(id) {
 	var divid = 'editfile'+id;
 	if ( 'none' == document.getElementById(divid).style.display ) {
+        lockfileid.push(id);
 		document.getElementById(divid).style.display = 'block';
-        jQuery.get('http://forge/docman/',
-                    {group_id:6,action:'lockfile',lock:1,fileid:id});
+        jQuery.get('<?php util_make_url('docman') ?>',
+                    {group_id:<?php echo $group_id ?>,action:'lockfile',lock:1,fileid:id});
 	} else {
 		document.getElementById(divid).style.display = 'none';
-        jQuery.get('http://forge/docman/',
-                    {group_id:6,action:'lockfile',lock:0,fileid:id});
+        lockfileid.splice(lockfileid.indexOf(id),1);
+        jQuery.get('<?php util_make_url('docman') ?>',
+                    {group_id:<?php echo $group_id ?>,action:'lockfile',lock:0,fileid:id});
 	}
 }
 </script>

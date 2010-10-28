@@ -405,7 +405,7 @@ class Theme extends Layout {
         ?>
         <script>
             var JQuery = jQuery.noConflict();
-            $(window).load(function(){
+            JQuery(window).load(function(){
                     jQuery(".quicknews").hide();
             });
         </script>
