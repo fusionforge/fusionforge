@@ -79,12 +79,6 @@ if (!$result || db_numrows($result) < 1) {
 		echo $HTML->boxBottom();
 	}
 
-
-
-	echo $HTML->boxMiddle(_('Changes:'));
-	echo $opening.db_result($result,0,'changes').$closing;
-	echo $HTML->boxBottom();
-
 	frs_footer();
 }
 
