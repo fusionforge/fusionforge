@@ -21,7 +21,7 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 
 		sleep(5);
 		
-		system("ssh root@".HOST." 'yum install -y fusionforge fusionforge-scmsvn fusionforge-online_help fusionforge-extratabs fusionforge-ldapextauth fusionforge-scmgit fusionforge-blocks'");
+		system("ssh root@".HOST." 'yum install -y fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks'");
 	}
 }
 ?>

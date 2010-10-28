@@ -83,137 +83,137 @@ A system for authenticating users in fusionforge. A-Select is a framework
 where users can be authenticated by several means with Authentication
 Service Providers.
 
-%package cvssyncmail
+%package plugin-cvssyncmail
 Summary: Provides email notifications of changes to CVS repositories
 Group: Development/Tools
 Requires: %{name} >= %{version}, %{name}-scmcvs, python, php
-%description cvssyncmail
+%description plugin-cvssyncmail
 This plugin adds the capability to notify users of changes to CVS repositories
 in FusionForge.
 
-%package cvstracker
+%package plugin-cvstracker
 Summary: Links CVS log messages to trackers and tasks.
 Group: Development/Tools
 Requires: %{name} >= %{version}, %{name}-scmcvs, php, postgresql
-%description cvstracker
+%description plugin-cvstracker
 This is a fusionforge plugin that allows linking CVS log messages to
 trackers and tasks. It will review all commits in a project and search for
 specific string to know which task or tracker is related.
 
-%package externalsearch
+%package plugin-externalsearch
 Summary: external search plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description externalsearch
+%description plugin-externalsearch
 This plugin adds a new search engine to your FusionForge site. It allows
 your users to search your FusionForge site through external search engines
 which have indexed it. You can define search engines you want to use in
 the configuration file.
 
-%package fckeditor
+%package plugin-fckeditor
 Summary: FCKEditor plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description fckeditor
+%description plugin-fckeditor
 FCKEditor is a WYSIWYG text editor that displays within a web browser.
 
-%package gravatar
+%package plugin-gravatar
 Summary: Gravatar plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description gravatar
+%description plugin-gravatar
 This plugin adds faces images to FusionForge users using the gravatar service.
 
-%package ldapextauth
+%package plugin-ldapextauth
 Summary: external LDAP authentication for FusionForge plugin
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description ldapextauth
+%description plugin-ldapextauth
 This plugin provides LDAP authentication capability for FusionForge.
 
-%package mantis
+%package plugin-mantis
 Summary: MantisBT plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description mantis
+%description plugin-mantis
 A plugin to use the MantisBT web-based bug tracking system with FusionForge.
 
-%package mediawiki
+%package plugin-mediawiki
 Summary: Mediawiki plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, mediawiki
-%description mediawiki
+%description plugin-mediawiki
 This is a plugin to integrate MediaWiki within FusionForge.
 
-%package online_help
+%package plugin-online_help
 Summary: online_help plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description online_help
+%description plugin-online_help
 This is a online_help plugin within FusionForge.
 
-%package projects_hierarchy
+%package plugin-projects_hierarchy
 Summary: projects_hierarchy plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description projects_hierarchy
+%description plugin-projects_hierarchy
 This is a projects_hierarchy plugin within FusionForge.
 
-%package quota_management
+%package plugin-quota_management
 Summary: quota_management plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description quota_management
+%description plugin-quota_management
 This is a quota_management plugin within FusionForge.
 
-%package scmarch
+%package plugin-scmarch
 Summary: Arch version control plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, arch
-%description scmarch
+%description plugin-scmarch
 This is a plugin to integrate Arch version control system with FusionForge
 
-%package scmbzr
+%package plugin-scmbzr
 Summary: Bazaar version control plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, bazaar
-%description scmbzr
+%description plugin-scmbzr
 This is a plugin to integrate Bazaar version control system with FusionForge
 
-%package scmdarcs
+%package plugin-scmdarcs
 Summary: DARCS version control plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, darcs
-%description scmdarcs
+%description plugin-scmdarcs
 This is a plugin to integrate DARCS version control system with FusionForge
 
-%package scmgit
+%package plugin-scmgit
 Summary: Bazaar version control plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, git
-%description scmgit
+%description plugin-scmgit
 This is a plugin to integrate Bazaar version control system with FusionForge
 
-%package scmhg
+%package plugin-scmhg
 Summary: Mercurial (hg) version control plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, hg
-%description scmhg
+%description plugin-scmhg
 This is a plugin to integrate Mercurial (hg) version control system with FusionForge
 
-%package scmccase
+%package plugin-scmccase
 Summary: Clear Case plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php
-%description scmccase
+%description plugin-scmccase
 This is the Clear Case plugin for FusionForge. It creats Clear Case repositories
 for projects within FusionForge.
 
-%package scmcvs
+%package plugin-scmcvs
 Summary: CVS plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, cvs
-%description scmcvs
+%description plugin-scmcvs
 FusionForge is a web-based Collaborative Development Environment offering
 easy access to CVS, mailing lists, bug tracking, message
 boards/forums, task management, permanent file archival, and total
@@ -224,78 +224,78 @@ to FusionForge.
 
 It also provides a specific version of CVSWeb wrapped in FusionForge.
 
-%package scmsvn
+%package plugin-scmsvn
 Summary: Subversion plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, subversion
-%description scmsvn
+%description plugin-scmsvn
 This RPM installs SCM SVN plugin for FusionForge and provides svn support
 to FusionForge.
 
-%package svncommitemail
+%package plugin-svncommitemail
 Summary: subversion commit email plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, subversion, perl, %{name}-scmsvn >= %{version}
-%description svncommitemail
+%description plugin-svncommitemail
 This RPM installs subversion commit email notification plugin for FusionForge.
 
-%package svntracker
+%package plugin-svntracker
 Summary: SVNTracker plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, subversion, perl, postgresql, %{name}-scmsvn >= %{version}
-%description svntracker
+%description plugin-svntracker
 SVNTracker plugin allows linking SVN log messages to Trackers and tasks.
 It will review all commits in a project and search for a specific string
 to know which task or tracker is related.
 
-%package blocks
+%package plugin-blocks
 Summary: Blocks plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}
-%description blocks
+%description plugin-blocks
 HTML blocks plugin for FusionForge. 
 
-%package extratabs
+%package plugin-extratabs
 Summary: extratabs plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}
-%description extratabs
+%description plugin-extratabs
 HTML extratabs plugin for FusionForge. 
 
-%package wiki
+%package plugin-wiki
 Summary: Wiki plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql
-%description wiki
+%description plugin-wiki
 Wiki plugin for FusionForge. Allows for one wiki per project, integrated search,
 page edits displayed on activity tab, and multi-project wiki preferences.
 
-%package projectlabels
+%package plugin-projectlabels
 Summary: Labels plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql
-%description projectlabels
+%description plugin-projectlabels
 Project Labels plugin for FusionForge. 
 
-%package contribtracker
+%package plugin-contribtracker
 Summary: contribtracker plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql
-%description contribtracker
+%description plugin-contribtracker
 contribtracker plugin for FusionForge. 
 
-%package globalsearch
+%package plugin-globalsearch
 Summary: globalsearch plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql
-%description globalsearch
+%description plugin-globalsearch
 globalsearch plugin for FusionForge. 
 
-%package mantisbt
+%package plugin-mantisbt
 Summary: mantisbt plugin for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql
-%description mantisbt
+%description plugin-mantisbt
 mantisbt plugin for FusionForge. 
 
 %prep
@@ -688,37 +688,37 @@ fi
 %files aselectextauth
 %{GFORGE_DIR}/plugins/aselectextauth
 
-%files cvssyncmail
+%files plugin-cvssyncmail
 %{GFORGE_DIR}/plugins/cvssyncmail
 
-%files cvstracker
+%files plugin-cvstracker
 %{GFORGE_DIR}/plugins/cvstracker
 %{GFORGE_DIR}/www/plugins/cvstracker
 %attr(-,%{httpduser},%{httpdgroup}) %{GFORGE_CONF_DIR}/plugins/cvstracker
 
-%files externalsearch
+%files plugin-externalsearch
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/externalsearch/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/externalsearch.ini
 %{GFORGE_DIR}/plugins/externalsearch
 
-%files fckeditor
+%files plugin-fckeditor
 %{GFORGE_DIR}/plugins/fckeditor
 %{GFORGE_DIR}/www/plugins/fckeditor
 
-%files gravatar
+%files plugin-gravatar
 %{GFORGE_DIR}/plugins/gravatar
 
-%files ldapextauth
+%files plugin-ldapextauth
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/ldapextauth/
 %{GFORGE_DIR}/plugins/ldapextauth
 
-%files mantis
+%files plugin-mantis
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/mantis/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mantis.ini
 %{GFORGE_DIR}/plugins/mantis
 %{GFORGE_DIR}/www/plugins/mantis
 
-%files mediawiki
+%files plugin-mediawiki
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mediawiki.ini
 %{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
 %{GFORGE_DIR}/plugins/mediawiki/README
@@ -734,50 +734,50 @@ fi
 /usr/share/mediawiki/skins/GForge.php
 %{GFORGE_DIR}/www/plugins/mediawiki
 
-%files online_help
+%files plugin-online_help
 %{GFORGE_DIR}/plugins/online_help
 %{GFORGE_DIR}/www/plugins/online_help
 
-%files projects_hierarchy
+%files plugin-projects_hierarchy
 %{GFORGE_DIR}/plugins/projects_hierarchy
 %{GFORGE_DIR}/www/plugins/projects_hierarchy
 
-%files quota_management
+%files plugin-quota_management
 %{GFORGE_DIR}/plugins/quota_management
 %{GFORGE_DIR}/www/plugins/quota_management
 
-%files scmarch
+%files plugin-scmarch
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmarch/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmarch.ini
 %{GFORGE_DIR}/plugins/scmarch
 
-%files scmbzr
+%files plugin-scmbzr
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmbzr/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmbzr.ini
 %{GFORGE_DIR}/plugins/scmbzr
 
-%files scmdarcs
+%files plugin-scmdarcs
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmdarcs/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmdarcs.ini
 %{GFORGE_DIR}/plugins/scmdarcs
 
-%files scmgit
+%files plugin-scmgit
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmgit/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmgit.ini
 %{GFORGE_DIR}/plugins/scmgit
 %{GFORGE_DIR}/www/plugins/scmgit
 
-%files scmhg
+%files plugin-scmhg
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmhg/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmhg.ini
 %{GFORGE_DIR}/plugins/scmhg
 
-%files scmccase
+%files plugin-scmccase
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmccase/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmccase.ini
 %{GFORGE_DIR}/plugins/scmccase
 
-%files scmcvs
+%files plugin-scmcvs
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmcvs/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmcvs.ini
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
@@ -785,51 +785,51 @@ fi
 %{GFORGE_DIR}/www/plugins/scmcvs
 %{GFORGE_VAR_LIB}/chroot/scmrepos/cvs
 
-%files scmsvn
+%files plugin-scmsvn
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmsvn/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmsvn.ini
 %{GFORGE_DIR}/plugins/scmsvn
 %{GFORGE_DIR}/www/plugins/scmsvn
 %{GFORGE_VAR_LIB}/chroot/scmrepos/svn
 
-%files svncommitemail
+%files plugin-svncommitemail
 %{GFORGE_DIR}/plugins/svncommitemail
 
-%files svntracker
+%files plugin-svntracker
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/svntracker/
 %{_sysconfdir}/cron.d/gforge-plugin-svntracker
 %{GFORGE_DIR}/plugins/svntracker
 %{GFORGE_DIR}/www/plugins/svntracker
 
-%files blocks
+%files plugin-blocks
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/blocks/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/blocks.ini
 %{GFORGE_DIR}/plugins/blocks
 %{GFORGE_DIR}/www/plugins/blocks
 
-%files extratabs
+%files plugin-extratabs
 %{GFORGE_DIR}/plugins/extratabs
 %{GFORGE_DIR}/www/plugins/extratabs
 
-%files wiki
+%files plugin-wiki
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/wiki/
 %{_sysconfdir}/cron.d/cron.wiki
 %{GFORGE_DIR}/plugins/wiki
 %{GFORGE_DIR}/www/wiki
 
-%files projectlabels
+%files plugin-projectlabels
 %{GFORGE_DIR}/plugins/projectlabels
 %{GFORGE_DIR}/www/plugins/projectlabels
 
-%files contribtracker
+%files plugin-contribtracker
 %{GFORGE_DIR}/plugins/contribtracker
 %{GFORGE_DIR}/www/plugins/contribtracker
 
-%files globalsearch
+%files plugin-globalsearch
 %{GFORGE_DIR}/plugins/globalsearch
 %{GFORGE_DIR}/www/plugins/globalsearch
 
-%files mantisbt
+%files plugin-mantisbt
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/mantisbt/
 %{GFORGE_DIR}/plugins/mantisbt
 %{GFORGE_DIR}/www/plugins/mantisbt
