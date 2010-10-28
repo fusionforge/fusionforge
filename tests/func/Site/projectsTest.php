@@ -71,7 +71,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Pending projects (new project approval)");
 		$this->waitForPageToLoad("30000");
 		$this->click("document.forms['approve.projecta'].submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad("60000");
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("ProjectA"));
@@ -102,7 +102,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Pending projects (new project approval)");
 		$this->waitForPageToLoad("30000");
 		$this->click("document.forms['approve.projectb'].submit");
-		$this->waitForPageToLoad("30000");
+		$this->waitForPageToLoad("60000");
 		$this->click("link=Home");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Project ' & B"));
