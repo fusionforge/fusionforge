@@ -565,9 +565,10 @@ class Document extends Error {
 			filetype=$5,
 			filename=$6,
 			updatedate=$7,
-            locked=$8
-			WHERE group_id=$9
-			AND docid=$10',
+            locked=$8,
+            locked_by=$9
+			WHERE group_id=$10
+			AND docid=$11',
 					array (htmlspecialchars($title),
 					       htmlspecialchars($description),
 					       $stateid,
@@ -576,6 +577,7 @@ class Document extends Error {
 					       $filename,
 					       time(),
                            0,
+                           NULL,
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		
