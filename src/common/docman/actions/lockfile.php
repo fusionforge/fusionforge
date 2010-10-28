@@ -1,9 +1,9 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -44,7 +44,7 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
     if ($lock == 0) {
 	    echo $d->setLock($lock);
     } else {
-        echo $d->setLock($lock,$LUSER->getID());
+        echo $d->setLock($lock,$LUSER->getID(),time());
     }
     exit;
 }

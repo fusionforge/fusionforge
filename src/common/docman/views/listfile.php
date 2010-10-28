@@ -7,6 +7,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -41,12 +42,7 @@ if (!$DocGroupName) {
 ?>
 
 <script language="javascript">
-var lockfileid = new Array();
-JQuery(window).unload(function(){
-    for (var localid in localfileid) {
-        JQuery.ajax({async: false, url:"<?php util_make_url('docman') ?>", data: {group_id:<?php echo $group_id ?>,action:'lockfile',lock:0,fileid:localid}});
-    }
-});
+var lockInterval = new Array();
 
 function displaySubGroup() {
 	if ( 'none' == document.getElementById('addsubdocgroup').style.display ) {
@@ -78,15 +74,15 @@ function displayEditDocGroup() {
 function displayEditFile(id) {
 	var divid = 'editfile'+id;
 	if ( 'none' == document.getElementById(divid).style.display ) {
-        lockfileid.push(id);
 		document.getElementById(divid).style.display = 'block';
         jQuery.get('<?php util_make_url('docman') ?>',
                     {group_id:<?php echo $group_id ?>,action:'lockfile',lock:1,fileid:id});
+        lockInterval[id] = setInterval("jQuery.get('<?php util_make_url('docman') ?>',{group_id:<?php echo $group_id ?>,action:'lockfile',lock:1,fileid:"+id+"})",60000);
 	} else {
 		document.getElementById(divid).style.display = 'none';
-        lockfileid.splice(lockfileid.indexOf(id),1);
         jQuery.get('<?php util_make_url('docman') ?>',
                     {group_id:<?php echo $group_id ?>,action:'lockfile',lock:0,fileid:id});
+        clearInterval(lockInterval[id]);
 	}
 }
 </script>
@@ -218,6 +214,14 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 		if (forge_check_perm ('docman', $group_id, 'approve')) {
 			echo '<td>';
+            /* should we steal the lock on file ? */
+            if ($d->getLocked()) {
+                if ($d->getLockedBy() == $LUSER->getID()) {
+                    $d->setLock(0);
+                } elseif ((time() - $d->getLockdate()) > 600) {
+                    $d->setLock(0);
+                }
+            }
             if (!$d->getLocked() && !$d->getReserved()) {
 			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
 			    echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';

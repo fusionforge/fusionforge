@@ -6,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -42,7 +43,7 @@ foreach ($nested_docs[$dirid] as $d) {
 		document.getElementById('submiteditdata<?php echo $d->getID(); ?>').disabled = true;
 	}
 </script>
-<div id="editfile<?php echo $d->getID(); ?>" style="display:none">
+<div id="editfile<?php echo $d->getID(); ?>" style="display:none" class="docman_div_include">
 <p>
 <?php echo _("<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.") ?>
 </p>

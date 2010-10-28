@@ -435,6 +435,24 @@ class Document extends Error {
 	}
 
 	/**
+	 *	getLockdate - get the lock time of this document.
+	 *
+	 *	@return int	The lock time of this document.
+	 */
+	function getLockdate() {
+		return $this->data_array['lockdate'];
+	}
+
+	/**
+	 *	getLockedBy - get the user id who set lock on this document.
+	 *
+	 *	@return int	The user id who set lock on this document.
+	 */
+	function getLockedBy() {
+		return $this->data_array['locked_by'];
+	}
+
+	/**
 	 *	getReservedBy - get the owner of the reversed status of this document.
 	 *
 	 *	@return int	The owner of the reversed status of this document.
@@ -482,14 +500,16 @@ class Document extends Error {
      *  @param  int The userid who set the lock
      *  @return boolean success
      */
-    function setLock($stateLock,$userid=NULL) {
+    function setLock($stateLock,$userid=NULL,$thistime=0) {
 		$res = db_query_params ('UPDATE doc_data SET
                                 locked=$1,
-                                locked_by=$2
-								WHERE group_id=$3
-								AND docid=$4',
+                                locked_by=$2,
+                                lockdate=$3
+								WHERE group_id=$4
+								AND docid=$5',
 								array ($stateLock,
                                     $userid,
+                                    $thistime,
 					       			$this->Group->getID(),
 									$this->getID())
 								);
@@ -498,6 +518,9 @@ class Document extends Error {
 			return false;
 		}
 		$this->sendNotice(false);
+        $this->data_array['locked'] = $stateLock;
+        $this->data_array['locked_by'] = $userid;
+        $this->data_array['lockdate'] = $thistime;
 		return true;
 	}
 
@@ -541,6 +564,7 @@ class Document extends Error {
 	 *	@return	boolean	success.
 	 */
 	function update($filename,$filetype,$data,$doc_group,$title,$description,$stateid) {
+        global $LUSER;
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -553,6 +577,10 @@ class Document extends Error {
 		$perm =& $this->Group->getPermission ();
 
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+        if ($this->getLockedBy() != $LUSER->getID()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
