@@ -58,10 +58,13 @@ if (!$group_id) {
 	exit_no_group();
 }
 
-$g =& group_get_object($group_id);
-if (!$g || $g->isError()) {
-	exit_error($g->getErrorMessage(),'frs');
+$group=group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_no_group();
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(),'frs');
 }
+
 session_require_perm ('frs', $group_id, 'write') ;
 
 $report=new Report();
@@ -69,17 +72,13 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage(),'frs');
 }
 
-// Fix: Add current month to the reports.
-$z =& $report->getMonthStartArr();
-$z[] = mktime(0,0,0,date('m')+1,1,date('Y'));
+if (!$start || !$end) $z =& $report->getMonthStartArr();
 
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
 
 if (!$end) {
-	$z =& $report->getMonthStartArr();
 	$end = $z[ count($z)-1];
 }
 if ($end < $start) list($start, $end) = array($end, $start);
@@ -90,8 +89,6 @@ frs_header(array('title'=>_('File Release Reporting'),
 		 'sectionvals'=>group_getname($group_id)));
 
 ?>
-
-<h1><?php echo _('File Release Reporting') ?></h1>
 
 <form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
