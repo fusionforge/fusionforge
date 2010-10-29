@@ -34,7 +34,7 @@ require_once $gfcommon.'mail/MailingListFactory.class.php';
 $group_id = getIntFromGet('group_id');
 
 if ($group_id) {
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_no_group();
 	} elseif ($group->isError()) {

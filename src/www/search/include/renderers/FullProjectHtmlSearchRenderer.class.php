@@ -97,7 +97,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getResult() {
 		$html = '';
 
-		$group =& group_get_object($this->groupId);
+		$group = group_get_object($this->groupId);
 
 		if ($group->usesForum()) {
 			$forumsRenderer		= new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);

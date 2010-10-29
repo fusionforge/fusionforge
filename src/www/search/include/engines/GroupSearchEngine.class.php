@@ -33,7 +33,7 @@ class GroupSearchEngine extends GFSearchEngine {
 	
 	function isAvailable($parameters) {
 		if(isset($parameters[SEARCH__PARAMETER_GROUP_ID]) && $parameters[SEARCH__PARAMETER_GROUP_ID]) {
-			$Group =& group_get_object($parameters[SEARCH__PARAMETER_GROUP_ID]);
+			$Group = group_get_object($parameters[SEARCH__PARAMETER_GROUP_ID]);
 			if($Group && is_object($Group) && !$Group->isError()) {
 				$this->Group =& $Group;
 				return true;

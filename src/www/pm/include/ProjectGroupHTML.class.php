@@ -39,7 +39,7 @@ function pm_header($params) {
 	$params['toptab']='pm';
 
 	//only projects can use the bug tracker, and only if they have it turned on
-	$project =& group_get_object($group_id);
+	$project = group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		exit_no_group();
 	}

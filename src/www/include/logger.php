@@ -30,7 +30,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 } else if (isset($form_grp) && is_numeric($form_grp) && $form_grp) {
 	$log_group=$form_grp;
 } else if (isset($group_name) && $group_name) {
-	$group =& group_get_object_by_name($group_name);
+	$group = group_get_object_by_name($group_name);
 	if ($group) {
 		$log_group=$group->getID();
 	} else {
@@ -68,7 +68,7 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 	   	$group_id=db_result($res_grp,0,'group_id');
 		//set up a foundry object for reference all over the place
 		if ($group_id) {
-			$grp =& group_get_object($group_id,$res_grp);
+			$grp = group_get_object($group_id,$res_grp);
 			if ($grp) {
 				//this is a project - so set up the project var properly
 				$project =& $grp;

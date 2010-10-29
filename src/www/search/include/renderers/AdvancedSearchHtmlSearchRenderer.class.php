@@ -208,7 +208,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		global $gfwww, $gfcommon;
 		
 		$sections = array();
-		$group =& group_get_object($this->groupId);
+		$group = group_get_object($this->groupId);
 		
 		if ($group->usesForum()) {
 			require_once $gfwww.'search/include/renderers/ForumsHtmlSearchRenderer.class.php';

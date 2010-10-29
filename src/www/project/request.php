@@ -38,7 +38,7 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-$group =& group_get_object($group_id);
+$group = group_get_object($group_id);
 
 if ($submit) {
 

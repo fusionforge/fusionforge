@@ -37,7 +37,7 @@ $group_id = getIntFromRequest('group_id');
 $feedback = getStringFromRequest('feedback');
 
 if ($group_id) {
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	if (!$group || !is_object($group) || $group->isError()) {
 		exit_no_group();
 	}
