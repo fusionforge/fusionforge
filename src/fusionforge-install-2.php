@@ -31,6 +31,7 @@
 	define ('RED', "\033[01;31m" );
 
 	$args = $_SERVER['argv'];
+	$hostname = $args[1];
 
 	echo "Validating arguments  ";
 	if (count($args) != 4) {
@@ -41,7 +42,7 @@
 
 	//validate hostname
 	echo "Validating hostname  ";
-	if (!preg_match("/^([[:alnum:]._-])*$/" , $args[1])) {
+	if (!preg_match("/^([[:alnum:]._-])*$/" , $hostname)) {
 		echo "FAIL\n  invalid hostname\n";
 		exit(2);
 	}
@@ -270,7 +271,7 @@
 	system("cd /etc/gforge && find -type d | xargs chmod 755");
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apacheuser/$args[2]/\" {} \;");
 	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/apachegroup/$args[3]/\" {} \;");
-	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$args[1]/\" {} \;");
+	system("cd /etc/gforge && find -type f -exec perl -pi -e \"s/gforge\.company\.com/$hostname/\" {} \;");
 	system("echo \"noreply:	/dev/null\" >> /etc/aliases");
 
 	# Generate a random hash for the session_key

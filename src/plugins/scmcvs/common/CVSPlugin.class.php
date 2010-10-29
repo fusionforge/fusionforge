@@ -206,7 +206,6 @@ class CVSPlugin extends SCMPlugin {
 
 		$repo = forge_get_config('repos_path', 'scmcvs') . '/' . $project->getUnixName() ;
 		$locks_dir = forge_get_config('repos_path', 'scmcvs') . '/cvs-locks/' . $project->getUnixName() ;
-		$unix_group = 'scm_' . $project->getUnixName() ;
 
 		$repo_exists = false ;
 		if (is_dir ($repo) && is_dir ("$repo/CVSROOT")) {
@@ -218,12 +217,21 @@ class CVSPlugin extends SCMPlugin {
 			system ("mkdir -p $locks_dir") ;
 		}
 
-		system ("chgrp -R $unix_group $repo $locks_dir") ;
-		system ("chmod 3777 $locks_dir") ;
-		if ($project->enableAnonSCM()) {
-			system ("chmod -R g+wXs,o+rX-w $repo") ;
+		if (forge_get_config('use_shell')) {
+			$unix_group = 'scm_' . $project->getUnixName() ;
+			
+			system ("chgrp -R $unix_group $repo $locks_dir") ;
+			system ("chmod 3777 $locks_dir") ;
+			if ($project->enableAnonSCM()) {
+				system ("chmod -R g+wXs,o+rX-w $repo") ;
+			} else {
+				system ("chmod -R g+wXs,o-rwx $repo") ;
+			}
 		} else {
-			system ("chmod -R g+wXs,o-rwx $repo") ;
+			$unix_user = forge_get_config ('apache_user') ;
+			$unix_group = forge_get_config ('apache_user') ;
+			system ("chown -R $unix_user:$unix_group $repo") ;
+			system ("chmod -R g-rwx,o-rwx $repo") ;
 		}
 	}
 
@@ -388,8 +396,8 @@ class CVSPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (file_exists($snapshot)) unlink ($snapshot) ;
+			if (file_exists($tarball)) unlink ($tarball) ;
 			return false;
 		}
 
@@ -402,8 +410,8 @@ class CVSPlugin extends SCMPlugin {
 		}
 		
 		if (!$repo_exists) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (file_exists($snapshot)) unlink ($snapshot) ;
+			if (file_exists($tarball)) unlink ($tarball) ;
 			return false ;
 		}
 
