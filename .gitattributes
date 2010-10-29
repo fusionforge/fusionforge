@@ -908,7 +908,6 @@ src/db/timetracking-init.sql -text
 src/deb-specific/fckeditor/config.js -text
 src/deb-specific/fusionforge.rsyslog -text
 src/deb-specific/gforge.logrotate -text
-src/deb-specific/install-cvs.sh -text
 src/deb-specific/update-ldap.sh -text
 src/debian/NEWS.Debian -text
 src/debian/README.source -text
@@ -1972,6 +1971,7 @@ src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
 src/plugins/scmcvs/NAME -text
+src/plugins/scmcvs/bin/install.sh -text
 src/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 src/plugins/scmcvs/etc/scmcvs.ini -text
 src/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
