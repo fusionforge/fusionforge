@@ -47,12 +47,12 @@ eval {
 	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
 	my ($tmp) ;
 
+	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
 	next if $listname eq '' ;
 	next if $listname eq '.' ;
 	next if $listname eq '..' ;
 	next if $listname !~ /^[a-z0-9\-_\.]*$/ ;
 
-	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
 	my $cmd = "/usr/sbin/newlist -q $listname $user_name\@$sys_users_host $password >/dev/null 2>&1" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
@@ -125,12 +125,12 @@ eval {
 	my ($group_list_id, $listname, $user_name, $password, $description, $is_public) ;
 	my ($tmp) ;
 
+	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
 	next if $listname eq '' ;
 	next if $listname eq '.' ;
 	next if $listname eq '..' ;
 	next if $listname !~ /^[a-z0-9\-_\.]*$/ ;
 
-	($group_list_id, $listname, $user_name, $password, $description, $is_public)= @array ;
 	my $cmd = "/usr/lib/mailman/bin/change_pw -l $listname >/dev/null 2>&1" ;
 	system ($cmd) ;
 
