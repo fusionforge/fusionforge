@@ -55,7 +55,7 @@ if (session_loggedin()) {
 					$text=_('Monitor');
 				}
 				echo '
-				<a href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor"><strong>'.
+				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.html_get_tooltip_description('monitor').'"><strong>'.
 					html_image('ic/'.$img.'','20','20').' '.$text.'</strong></a>';
 				?>
 			</td>
@@ -181,8 +181,6 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</div>
 	</td></tr>
 </table>
-<br />
-<br />
 <script type="text/javascript" src="<?php echo util_make_uri('/tabber/tabber.js') ?>"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups'); ?>">
@@ -241,18 +239,19 @@ if ($group->usesPM()) {
 </div>
 <div class="tabbertab" title="<?php echo _('Changes'); ?>">
 <table border="0" width="80%">
-	<tr><td colspan="2">
-		<h2><?php echo _('Change Log') ?>:</h2>
+	<tr>
+	<td colspan="2">
+		<h2><?php echo _('Changes') ?>:</h2>
 		<?php 
 			echo $ah->showHistory(); 
 		?>
-	</td></tr>
+	</td>
+	</tr>
 </table>
 </div>
 <?php $ah->showRelations(); ?>
 </div>
 		</form>
-
 <?php
 
 $ath->footer(array());

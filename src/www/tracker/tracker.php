@@ -51,20 +51,18 @@ if (!$ath || !is_object($ath)) {
 }
 if ($ath->isError()) {
 	if($ath->isPermissionDeniedError()) {
-		exit_permission_denied($group->getErrorMessage(),'tracker');
+		exit_permission_denied($ath->getErrorMessage(),'tracker');
 	} else {
 		exit_error($ath->getErrorMessage(),'tracker');
 	}
 }
-$feedback = '' ;
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
 		if (!$ath->allowsAnon() && !session_loggedin()) {
 			exit_permission_denied('tracker');
-		} else {
-			include $gfwww.'tracker/add.php';
 		}
+		include $gfwww.'tracker/add.php';
 		break;
 	}
 	case 'postadd' : {

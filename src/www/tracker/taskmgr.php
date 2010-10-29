@@ -72,7 +72,7 @@ if (getStringFromRequest('add_to_task')) {
 		if ($ptf->isError()) {
 			exit_error($ptf->getErrorMessage(),'tracker');
 		} else {
-			exit_error(_('No Existing Tasks Found'),'tracker');
+			exit_error(_('No Available Tasks Found'),'tracker');
 		}
 	}
 
