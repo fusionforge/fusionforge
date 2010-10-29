@@ -536,7 +536,7 @@ function session_getdata($user_id) {
 function session_set() {
 	plugin_hook('session_set_entry');
 	global $G_SESSION;
-	global $session_ser, $session_key;
+	global $session_ser;
 
 	// assume bad session_hash and session. If all checks work, then allow
 	// otherwise make new session
