@@ -71,8 +71,6 @@ if (session_loggedin()) {
 		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project'),'home');
 	}
 
-	$group_id = getIntFromRequest('group_id');
-
 	if ($group_id == forge_get_config('news_group')) {
 		exit_permission_denied(_('Submitting news from the news group is not allowed.'),'home');
 	}
@@ -86,8 +84,11 @@ if (session_loggedin()) {
 
 		//check to make sure both fields are there
 		if ($summary && $details) {
-			$sanitizer = new TextSanitizer();
-			$details = $sanitizer->purify($details);
+			if (getStringFromRequest('_details_content_type') == 'html') {
+				$details = TextSanitizer::purify($details);
+			} else {
+				$details = htmlspecialchars($details);
+			}
 
 			/*
 				Insert the row into the db if it's a generic message
