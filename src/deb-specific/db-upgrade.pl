@@ -1095,9 +1095,9 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Granting read access permissions to NSS") ;
 
-        @reqlist = ( "GRANT SELECT ON nss_passwd TO gforge_nss",
-		     "GRANT SELECT ON nss_groups TO gforge_nss",
-		     "GRANT SELECT ON nss_usergroups TO gforge_nss",
+        @reqlist = ( "GRANT SELECT ON nss_passwd TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON nss_groups TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON nss_usergroups TO ${sys_dbuser}_nss",
 		    ) ;
         foreach my $s (@reqlist) {
             $query = $s ;
@@ -1130,8 +1130,8 @@ eval {
 
         &debug ("Granting read access permissions to NSS") ;
 
-        @reqlist = ( "GRANT SELECT ON mta_users TO gforge_mta",
-		     "GRANT SELECT ON mta_lists TO gforge_mta",
+        @reqlist = ( "GRANT SELECT ON mta_users TO ${sys_dbuser}_mta",
+		     "GRANT SELECT ON mta_lists TO ${sys_dbuser}_mta",
 		    ) ;
         foreach my $s (@reqlist) {
             $query = $s ;
@@ -1228,9 +1228,51 @@ eval {
 
     &update_with_sql("20050130", "4.0.2-0+5") ;
     &update_with_sql("20050212", "4.0.2-0+6") ;
-    &update_with_sql("20050214-nss", "4.0.2-0+7") ;
+
+    $version = &get_db_version ;
+    $target = "4.0.2-0+7" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050214-nss.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050214-nss.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            $query =~ s/TO gforge_nss;/TO ${sys_dbuser}_nss;/ ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     &update_with_sql("20050224-2", "4.1-0") ;
-    &update_with_sql("20050225-nsssetup", "4.1-1") ;
+
+    $version = &get_db_version ;
+    $target = "4.1-1" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050225-nsssetup.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("$sqldir/20050225-nsssetup.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            $query =~ s/TO gforge_nss;/TO ${sys_dbuser}_nss;/ ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     &update_with_sql("20050311", "4.1-2") ;
     &update_with_sql("20050315", "4.1-3") ;
     &update_with_sql("20050325-2", "4.1-4") ;
@@ -1827,6 +1869,31 @@ eval {
 
     &update_with_sql("20100308-forum-attachment-types","4.8.99-6");
 
+    $version = &get_db_version ;
+    $target = "4.8.99-7" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Granting read access permissions to NSS and MTA") ;
+
+        @reqlist = ( "GRANT SELECT ON nss_passwd TO ${sys_dbuser}_nss",
+                    "GRANT SELECT ON nss_groups TO ${sys_dbuser}_nss",
+                    "GRANT SELECT ON nss_usergroups TO ${sys_dbuser}_nss",
+                    "GRANT SELECT ON mta_users TO ${sys_dbuser}_mta",
+                    "GRANT SELECT ON mta_lists TO ${sys_dbuser}_mta",
+                   ) ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     &update_with_sql("20100330-add-system-event","5.0.0-1");
     &update_with_sql("20100331-alter-system-event","5.0.0-2");
     &update_with_sql("20100505-alter-user-preference","5.0.1-1");
@@ -1843,6 +1910,31 @@ eval {
     &update_with_sql("20101012-docman-webdav","5.0.51-1");
     &update_with_sql("20101021-pfo-rbac","5.0.51-2");
     &update_with_sql("20101025-ipv6","5.0.51-3");
+
+    $version = &get_db_version ;
+    $target = "5.0.51-4" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Granting read access permissions to NSS and MTA") ;
+
+        @reqlist = ( "GRANT SELECT ON nss_passwd TO ${sys_dbuser}_nss",
+                    "GRANT SELECT ON nss_groups TO ${sys_dbuser}_nss",
+                    "GRANT SELECT ON nss_usergroups TO ${sys_dbuser}_nss",
+                    "GRANT SELECT ON mta_users TO ${sys_dbuser}_mta",
+                    "GRANT SELECT ON mta_lists TO ${sys_dbuser}_mta",
+                   ) ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
 
     ########################### INSERT HERE #################################
 

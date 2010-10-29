@@ -26,7 +26,7 @@ setup_vars() {
     db_user=$(/usr/share/gforge/bin/forge_get_config database_user)
     db_host=$(/usr/share/gforge/bin/forge_get_config database_host)
     
-    db_user_nss=$db_user"_nss"
+    db_user_nss=${db_user}_nss
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
@@ -59,7 +59,7 @@ EOF
 ### NSS Configuration for Gforge
 
 #----------------- DB connection
-shadowconnectionstring = user=gforge_nss dbname=$db_name
+shadowconnectionstring = user=$sys_dbuser_nss dbname=$db_name
 
 #----------------- NSS queries
 shadowbyname    = SELECT login AS shadow_name, passwd AS shadow_passwd, 14087 AS shadow_lstchg, 0 AS shadow_min, 99999 AS shadow_max, 7 AS shadow_warn, '' AS shadow_inact, '' AS shadow_expire, '' AS shadow_flag FROM nss_passwd WHERE login = \$1

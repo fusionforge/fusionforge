@@ -116,7 +116,7 @@ case "$target" in
 	rm -f $cur
 	
 	cur=$(mktemp /tmp/$pattern)
-	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nlocal $db_name $db_user md5\nlocal $db_name gforge_nss trust\nlocal $db_name gforge_mta md5\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	perl -e "open F, \"${pg_hba_dir}/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nlocal $db_name $db_user md5\nlocal $db_name ${db_user}_nss trust\nlocal $db_name ${db_user}_mta md5\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
 	cat $cur > ${pg_hba_dir}/pg_hba.conf.gforge-new
 	rm -f $cur
 	
@@ -150,7 +150,7 @@ EOF
 	fi
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
 SET LC_MESSAGES = 'C' ;
-CREATE USER gforge_nss WITH PASSWORD 'gforge_nss' ;
+CREATE USER ${db_user}_nss WITH PASSWORD '${db_user}_nss' ;
 EOF
 	then
 	    rm -f $tmp1 $tmp2
@@ -168,7 +168,7 @@ EOF
 	fi
 	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
 SET LC_MESSAGES = 'C' ;
-CREATE USER gforge_mta WITH PASSWORD 'gforge_mta' ;
+CREATE USER ${db_user}_mta WITH PASSWORD '${db_user}_mta' ;
 EOF
 	then
 	    rm -f $tmp1 $tmp2

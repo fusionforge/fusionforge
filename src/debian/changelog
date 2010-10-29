@@ -4,6 +4,15 @@ fusionforge (5.0.51-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 27 Oct 2010 11:06:49 +0200
 
+fusionforge (5.0.2-4) unstable; urgency=low
+
+  * Fixed logic in create-mailing-lists.pl script, allowing it to actually
+    run (closes: #601573).
+  * Also fixed the database credentials used for NSS and email forwarding
+    in new installations (gforge_nss/mta -> fusionforge_nss/mta).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 29 Oct 2010 11:55:13 +0200
+
 fusionforge (5.0.2-3) unstable; urgency=medium
 
   * Fixed Mediawiki creation script so it uses the appropriate database
