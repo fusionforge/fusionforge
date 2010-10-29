@@ -74,9 +74,9 @@ foreach ($nested_docs[$dirid] as $d) {
         <td>
         <strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?><br />
         <?php if ($d->isURL()) {
-            echo '<a href="'.inputSpecialchars($d->getFileName()).'">[View File URL]</a>';
+            echo '<a href="'.inputSpecialchars($d->getFileName()).'">['. _('View File URL') .']</a>';
         } else { ?>
-        <a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()) ?>"><?php echo $d->getName(); ?></a>
+        <a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()) ?>"><?php echo $d->getFileName(); ?></a>
         <?php } ?>
         </td>
     </tr>
