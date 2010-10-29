@@ -27,6 +27,12 @@ require_once $gfcommon.'include/plugins_utils.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Valid_Widget.class.php';
 
+use_javascript('/scripts/prototype/prototype.js');
+use_javascript('/scripts/scriptaculous/scriptaculous.js');
+use_javascript('/scripts/codendi/Tooltip.js');
+use_javascript('/scripts/codendi/LayoutManager.js');
+use_javascript('/scripts/codendi/ReorderColumns.js');
+
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {
     
@@ -50,8 +56,7 @@ if (isLogged()) {
 		    		$userm=UserManager::instance();
 		    		$current=$userm->getCurrentUser();
 		    		echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
- 					use_javascript('/scripts/codendi/LayoutManager.js');
-                   //my_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
+                  //my_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
                     $lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
                     site_footer(array());
                     
