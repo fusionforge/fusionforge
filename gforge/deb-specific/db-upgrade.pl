@@ -1848,9 +1848,9 @@ eval {
     if (&is_lesser ($version, $target)) {
         &debug ("Granting read access permissions to NSS") ;
 
-        @reqlist = ( "GRANT SELECT ON nss_passwd TO gforge_nss",
-		     "GRANT SELECT ON nss_groups TO gforge_nss",
-		     "GRANT SELECT ON nss_usergroups TO gforge_nss",
+        @reqlist = ( "GRANT SELECT ON nss_passwd TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON nss_groups TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON nss_usergroups TO ${sys_dbuser}_nss",
 		    ) ;
         foreach my $s (@reqlist) {
             $query = $s ;
@@ -1883,8 +1883,8 @@ eval {
 
         &debug ("Granting read access permissions to NSS") ;
 
-        @reqlist = ( "GRANT SELECT ON mta_users TO gforge_mta",
-		     "GRANT SELECT ON mta_lists TO gforge_mta",
+        @reqlist = ( "GRANT SELECT ON mta_users TO ${sys_dbuser}_mta",
+		     "GRANT SELECT ON mta_lists TO ${sys_dbuser}_mta",
 		    ) ;
         foreach my $s (@reqlist) {
             $query = $s ;
@@ -2902,8 +2902,36 @@ eval {
 	&debug ("Committing.") ;
 	$dbh->commit () ;
     }
+    
+    &update_with_sql("20100308-forum-attachment-types","4.8.99-6");
 
-		&update_with_sql("20100308-forum-attachment-types","4.8.99-6");
+    $version = &get_db_version ;
+    $target = "4.8.99-7" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Granting read access permissions to NSS and MTA") ;
+
+        @reqlist = ( "GRANT SELECT ON nss_passwd TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON nss_groups TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON nss_usergroups TO ${sys_dbuser}_nss",
+		     "GRANT SELECT ON mta_users TO ${sys_dbuser}_mta",
+		     "GRANT SELECT ON mta_lists TO ${sys_dbuser}_mta",
+		    ) ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+
+
 
     ########################### INSERT HERE #################################
 

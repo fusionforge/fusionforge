@@ -75,8 +75,8 @@ $gf_block = qq{### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 # keep it in an appropriate position, where \"appropriate\" is defined by you.
 
 pgsql_gforge_users_hosts = unix:/var/run/postgresql
-pgsql_gforge_users_user = gforge_mta
-pgsql_gforge_users_password = gforge_mta
+pgsql_gforge_users_user = ${sys_dbuser}_mta
+pgsql_gforge_users_password = ${sys_dbuser}_mta
 pgsql_gforge_users_dbname = $sys_dbname
 pgsql_gforge_users_domain = users.$domain_name
 pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '\''%u'\''
