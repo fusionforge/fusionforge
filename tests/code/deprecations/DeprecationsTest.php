@@ -17,7 +17,8 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	 */
 	public function testdb_query()
 	{
-		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `cd $root; find src tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
 					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
 					   | grep -v ^src/db/upgrade-db.php \
 					   | grep -v ^src/www/include/database-oci8.php \
@@ -125,11 +126,12 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 
 		$pattern = implode ('|', $vars) ;
 		
-		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b(?! *=[^=])' \
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `cd $root ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\$($pattern)\b(?! *=[^=])' \
 					   | grep -v ^src/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$var for var in ($pattern):");
 
-		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\](?! *=[^=])' \
+		$output = `cd $root ; find src tests -name '*.php' -type f | xargs pcregrep -n '\\\$GLOBALS\\[.?($pattern).?\\](?! *=[^=])' \
 					   | grep -v ^src/common/include/config-vars.php`;
 		$this->assertEquals('', $output, "Found deprecated \$GLOBALS['\$var'] for var in ($pattern):");
 	}
@@ -139,7 +141,8 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	 */
 	public function testsession_require()
 	{
-		$output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -l '\bsession_require[^_]' \
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `cd $root ; find src tests -name '*.php' -type f | xargs pcregrep -l '\bsession_require[^_]' \
 					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
 					   | grep -v ^src/common/include/session.php`;
 		$this->assertEquals('', $output);

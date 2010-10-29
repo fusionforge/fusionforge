@@ -25,24 +25,13 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     }
   }
 
-  /**
-   * First, make sure it is run from inside the tests/ subdir
-   */
-  public function testPath()
-  {
-    $output = `ls ../src >/dev/null; echo $?`;
-    $rc = trim($output);
-    if ($rc != '0') {
-      $output = `ls ../src`;
-      $this->fail('Must be run from inside the "tests/" subdir : `ls ../src` reports "'.$output);
-    }
-  }
     /**
      * Validate all php code with php -l.
      */
     public function testPhpSyntax()
     {
-	    $output = `cd .. ; find src tests -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `find $root/src $root/tests -name '*.php' -type f  -exec php -l {} \; | grep -v '^No syntax errors detected'`;
 	    $this->assertEquals('', $output);
     }
 
@@ -51,14 +40,14 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testUTF8Chars()
     {
-	    // Skip the wiki part which is not UTF-8 encoded.
-	    $output = `cd .. ; find src tests -name '*.php' -not -path 'src/plugins/wiki/www/*' -type f | xargs isutf8`;
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `find $root/src $root/tests -name '*.php' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find src tests -name '*.sql' -type f | xargs isutf8`;
+	    $output = `find $root/src $root/tests -name '*.sql' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find src tests -name '*.sh' -type f | xargs isutf8`;
+	    $output = `find $root/src $root/tests -name '*.sh' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find src tests -name '*.pl' -type f | xargs isutf8`;
+	    $output = `find $root/src $root/tests -name '*.pl' -type f | xargs isutf8`;
 	    $this->assertEquals('', $output);
     }
 
@@ -67,13 +56,14 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testUnixLineEndings()
     {
-	    $output = `cd .. ; find src tests -name '*.php' -type f | xargs pcregrep -l '\r$'`;
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `find $root/src $root/tests -name '*.php' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find src tests -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
+		$output = `find $root/src $root/tests -name '*.sql' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find src tests -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
+		$output = `find $root/src $root/tests -name '*.sh' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
-	    $output = `cd .. ; find src tests -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
+		$output = `find $root/src $root/tests -name '*.pl' -type f | xargs pcregrep -l '\r$'`;
 	    $this->assertEquals('', $output);
     }
 
@@ -82,7 +72,8 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testEmptyLastLine()
     {
-	    $output = `cd .. ; find src tests -name '*.php' -type f | while read i ; do [ -s \$i ] && [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+    	$output = `find $root/src $root/tests -name '*.php' -type f | while read i ; do [ -s \$i ] && [ -z "\$(tail -n 1 \$i)" ] && echo \$i ; done`;
 	    $this->assertEquals('', $output);
     }
 
@@ -91,7 +82,8 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
      */
     public function testGettextSyntax()
     {
-	    $output = `cd ../src ; ./utils/manage-translations.sh check 2>&1`;
+		$root = dirname(dirname(dirname(dirname(__FILE__))));
+		$output = `cd $root/src ; ./utils/manage-translations.sh check 2>&1`;
 	    $this->assertEquals('', $output);
     }
 }
