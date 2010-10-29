@@ -723,6 +723,7 @@ plugins/templates/helloworld/translations/en.po -text
 plugins/templates/helloworld/translations/gforge.pot -text
 plugins/templates/helloworld/utils/manage-translations.sh -text
 plugins/templates/helloworld/www/admin/index.php -text
+plugins/templates/scmcpold/NAME -text
 plugins/templates/scmcpold/common/CpoldPlugin.class.php -text
 plugins/templates/scmcpold/common/scmcpold-init.php -text
 plugins/templates/scmcpold/etc/plugins/scmcpold/config.php -text
@@ -1210,6 +1211,7 @@ src/packaging/install/web-apache2-vhosts -text
 src/packaging/links/common -text
 src/packaging/links/web-apache2 -text
 src/plugins/README -text
+src/plugins/blocks/NAME -text
 src/plugins/blocks/common/blocks-init.php -text
 src/plugins/blocks/common/blocksPlugin.class.php -text
 src/plugins/blocks/db/blocks-init.sql -text
@@ -1224,6 +1226,7 @@ src/plugins/blocks/packaging/install/plugin-blocks -text
 src/plugins/blocks/packaging/links/plugin-blocks -text
 src/plugins/blocks/www/index.php -text
 src/plugins/contribtracker/INSTALL -text
+src/plugins/contribtracker/NAME -text
 src/plugins/contribtracker/bin/db-delete.pl -text
 src/plugins/contribtracker/bin/db-upgrade.pl -text
 src/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
@@ -1245,6 +1248,7 @@ src/plugins/externalsearch/etc/engines.json -text
 src/plugins/externalsearch/etc/externalsearch.ini -text
 src/plugins/externalsearch/packaging/docs/plugin-externalsearch -text
 src/plugins/externalsearch/packaging/install/plugin-externalsearch -text
+src/plugins/extratabs/NAME -text
 src/plugins/extratabs/README -text
 src/plugins/extratabs/bin/db-delete.pl -text
 src/plugins/extratabs/bin/db-upgrade.pl -text
@@ -1737,6 +1741,7 @@ src/plugins/fckeditor/www/fckeditor_php4.php -text
 src/plugins/fckeditor/www/fckeditor_php5.php -text
 src/plugins/fckeditor/www/fckpackager.xml -text
 src/plugins/fckeditor/www/fckutils.cfm -text
+src/plugins/globalsearch/NAME -text
 src/plugins/globalsearch/README -text
 src/plugins/globalsearch/TODO -text
 src/plugins/globalsearch/bin/db-delete.pl -text
@@ -1814,6 +1819,7 @@ src/plugins/mantisbt/www/img/up.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/update.png -text svneol=unset#image/png
 src/plugins/mantisbt/www/index.php -text
 src/plugins/mantisbt/www/user/index.php -text
+src/plugins/mediawiki/NAME -text
 src/plugins/mediawiki/README -text
 src/plugins/mediawiki/bin/mw-drop-wikis.php -text
 src/plugins/mediawiki/bin/mw-plugin-init.php -text
@@ -1885,6 +1891,7 @@ src/plugins/online_help/www/ug_user_homepage.html -text
 src/plugins/online_help/www/ug_user_modifying_settings.html -text
 src/plugins/online_help/www/ug_user_ratings.html -text
 src/plugins/online_help/www/ug_user_skills.html -text
+src/plugins/projectlabels/NAME -text
 src/plugins/projectlabels/README -text
 src/plugins/projectlabels/bin/db-delete.pl -text
 src/plugins/projectlabels/bin/db-upgrade.pl -text
@@ -1942,6 +1949,7 @@ src/plugins/quota_management/www/index.php -text
 src/plugins/quota_management/www/quota.php -text
 src/plugins/quota_management/www/quota_admin.php -text
 src/plugins/quota_management/www/quota_project.php -text
+src/plugins/scmarch/NAME -text
 src/plugins/scmarch/common/ArchPlugin.class.php -text
 src/plugins/scmarch/common/scmarch-init.php -text
 src/plugins/scmarch/etc/plugins/scmarch/config.php -text
@@ -1950,6 +1958,7 @@ src/plugins/scmarch/packaging/control/136plugin-scmarch -text
 src/plugins/scmarch/packaging/control/136plugin-scmarch.shortdesc -text
 src/plugins/scmarch/packaging/dirs/plugin-scmarch -text
 src/plugins/scmarch/packaging/install/plugin-scmarch -text
+src/plugins/scmbzr/NAME -text
 src/plugins/scmbzr/common/BzrPlugin.class.php -text
 src/plugins/scmbzr/common/scmbzr-init.php -text
 src/plugins/scmbzr/etc/plugins/scmbzr/config.php -text
@@ -1962,6 +1971,7 @@ src/plugins/scmbzr/packaging/install/plugin-scmbzr -text
 src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
+src/plugins/scmcvs/NAME -text
 src/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 src/plugins/scmcvs/etc/scmcvs.ini -text
 src/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
@@ -1970,6 +1980,7 @@ src/plugins/scmcvs/packaging/control/130plugin-scmcvs.shortdesc -text
 src/plugins/scmcvs/packaging/dirs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/docs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/install/plugin-scmcvs -text
+src/plugins/scmdarcs/NAME -text
 src/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 src/plugins/scmdarcs/common/scmdarcs-init.php -text
 src/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
@@ -1979,6 +1990,7 @@ src/plugins/scmdarcs/packaging/control/135plugin-scmdarcs.shortdesc -text
 src/plugins/scmdarcs/packaging/dirs/plugin-scmdarcs -text
 src/plugins/scmdarcs/packaging/install/plugin-scmdarcs -text
 src/plugins/scmdarcs/packaging/links/plugin-scmdarcs -text
+src/plugins/scmgit/NAME -text
 src/plugins/scmgit/bin/db-delete.pl -text
 src/plugins/scmgit/bin/db-upgrade.pl -text
 src/plugins/scmgit/common/GitPlugin.class.php -text
@@ -1992,6 +2004,7 @@ src/plugins/scmgit/packaging/dirs/plugin-scmgit -text
 src/plugins/scmgit/packaging/install/plugin-scmgit -text
 src/plugins/scmgit/packaging/links/plugin-scmgit -text
 src/plugins/scmgit/www/index.php -text
+src/plugins/scmhg/NAME -text
 src/plugins/scmhg/common/HgPlugin.class.php -text
 src/plugins/scmhg/common/scmhg-init.php -text
 src/plugins/scmhg/etc/plugins/scmhg/config.php -text
@@ -2000,6 +2013,7 @@ src/plugins/scmhg/packaging/control/134plugin-scmhg -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 src/plugins/scmhg/packaging/dirs/plugin-scmhg -text
 src/plugins/scmhg/packaging/install/plugin-scmhg -text
+src/plugins/scmsvn/NAME -text
 src/plugins/scmsvn/etc/scmsvn.ini -text
 src/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 src/plugins/scmsvn/packaging/control/131plugin-scmsvn -text
