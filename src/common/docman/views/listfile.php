@@ -90,14 +90,16 @@ function displayEditFile(id) {
 <?php
 echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
-	echo '<a href="#" onclick="javascript:displayEditDocGroup()" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-	echo '<a href="#" onclick="javascript:displaySubGroup()" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
+	echo '<a href="#" title="'._('Edit this directory').'" onclick="javascript:displayEditDocGroup()" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+	echo '<a href="#" title="'._('Add a new subdirectory').'" onclick="javascript:displaySubGroup()" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
 	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
-		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'">'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" title="'._('Permanently delete this directory').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 }
 
-echo '<a href="#" onclick="javascript:displayAddFile()" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
+if (forge_check_perm ('docman', $group_id, 'submit')) {
+	echo '<a href="#" onclick="javascript:displayAddFile()" title="'._('Add a new file').'" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
+}
 
 echo '</h3>';
 
@@ -131,7 +133,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		default:
 			$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 		}
-		echo '<td><a href="'.$docurl.'">';
+		echo '<td><a href="'.$docurl.'" title="'._('View this file').'" >';
 		switch ($d->getFileType()) {
 			case "image/png":
 			case "image/jpeg":
@@ -188,7 +190,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '</td>';
         echo '<td>';
         if ($d->getReserved()) {
-            echo html_image('docman/document-reserved.png',22,22,array('alt'=>_('Reserved Document')));
+            echo html_image('docman/document-reserved.png',22,22,array('alt'=>_('Reserved Document'),'title'=>_('Reserved Document')));
         } else {
             echo $d->getStateName().'</td>';
         }
@@ -223,22 +225,18 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
                 }
             }
             if (!$d->getLocked() && !$d->getReserved()) {
-			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
-			    echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
-			        echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
+			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Move this file to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
+			    echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Reserve this file for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
             } else {
                 if ($d->getReservedBy() != $LUSER->getID()) {
-                    echo html_image('docman/trash-forbidden.png',22,22,array('alt'=>_('Trash forbidden')));
-                    echo html_image('docman/edit-forbidden.png',22,22,array('alt'=>_('Edition forbidden')));
                     if (forge_check_perm ('docman', $group_id, 'admin')) {
-                        echo '<a href="?group_id='.$group_id.'&action=enforcereserve&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/enforce-document.png',22,22,array('alt'=>'Enforce reservation'));
-                    } else {
-                        echo html_image('docman/document-reserved.png',22,22,array('alt',_('Document reserved by')));
+                        echo '<a href="?group_id='.$group_id.'&action=enforcereserve&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
                     }
                 } else {
-			        echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
-			        echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
-			        echo '<a href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'">'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release this document'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Move this file to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Trash this file'))). '</a>';
+			        echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
                 }
             }
 			echo '</td>';
