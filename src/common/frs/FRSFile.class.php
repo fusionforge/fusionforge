@@ -150,7 +150,6 @@ class FRSFile extends Error {
 			}
 		}
 
-		$file_location=escapeshellcmd($file_location);
 		$newfilelocation = forge_get_config('upload_dir').'/'.
 			$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
 			$this->FRSRelease->FRSPackage->getFileName().'/'.
