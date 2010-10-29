@@ -2124,6 +2124,7 @@ eval {
         @reqlist = @{ &parse_sql_file ("$sqldir/20050214-nss.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
+	    $query =~ s/TO gforge_nss;/TO ${sys_dbuser}_nss;/ ;
             # debug $query ;
             $sth = $dbh->prepare ($query) ;
             $sth->execute () ;
@@ -2164,6 +2165,7 @@ eval {
         @reqlist = @{ &parse_sql_file ("$sqldir/20050225-nsssetup.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
+	    $query =~ s/TO gforge_nss;/TO ${sys_dbuser}_nss;/ ;
             # debug $query ;
             $sth = $dbh->prepare ($query) ;
             $sth->execute () ;
