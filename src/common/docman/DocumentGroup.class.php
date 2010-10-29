@@ -122,7 +122,7 @@ class DocumentGroup extends Error {
 					$parent_doc_group,
 					$this->Group->getID()));
 		if ($res && db_numrows($res) > 0) {
-			$this->setError(_('Group name already exists'));
+			$this->setError(_('Directory name already exists'));
 			return false;
 		}
 

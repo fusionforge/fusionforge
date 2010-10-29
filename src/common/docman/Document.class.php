@@ -118,6 +118,14 @@ class Document extends Error {
 			return false;
 		}
 
+        $result = db_query_params('SELECT filename,doc_group from docdata_vw',
+                                array($filename,$doc_group));
+
+        if (!$result || db_numrows($res) > 0) {
+			$this->setError(_('Document already published in this directory'));
+            return false;
+        }
+
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
 		$doc_initstatus = '3';
@@ -573,6 +581,14 @@ class Document extends Error {
 			$this->setError(_('Document Description Must Be At Least 10 Characters'));
 			return false;
 		}
+
+        $result = db_query_params('SELECT filename,doc_group from docdata_vw',
+                                array($filename,$doc_group));
+
+        if (!$result || db_numrows($res) > 0) {
+			$this->setError(_('Document already published in this directory'));
+            return false;
+        }
 
 		$perm =& $this->Group->getPermission ();
 
