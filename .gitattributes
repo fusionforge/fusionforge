@@ -451,7 +451,6 @@ plugins/coclico/oslc/include/oslc-zend/application/views/scripts/error/res-not-f
 plugins/coclico/oslc/include/oslc-zend/application/views/scripts/fusionforgecm -text
 plugins/coclico/oslc/include/oslc-zend/application/views/scripts/mantiscm -text
 plugins/coclico/oslc/include/oslcPlugin.class.php -text
-plugins/coclico/oslc/packaging/control/000source -text
 plugins/coclico/oslc/packaging/control/222plugin-oslc -text
 plugins/coclico/oslc/packaging/control/222plugin-oslc.shortdesc -text
 plugins/coclico/oslc/packaging/dirs/plugin-oslc -text
