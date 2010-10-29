@@ -28,7 +28,7 @@ function people_header($params) {
 	global $group_id,$job_id,$HTML;
 
 	if ($group_id) {
-		$params['toptab']='admin';
+		$params['toptab']='people';
 		$params['group']=$group_id;
 		site_project_header($params);
 	} else if (strstr($_SERVER['HTTP_REFERER'],'account')){
@@ -39,7 +39,7 @@ function people_header($params) {
 	}
 
 	if ($group_id && $job_id) {
-		echo util_make_link ('/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id,_('Edit Job'));
+		echo ' | '.util_make_link ('/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id,_('Edit Job'));
 	}
 }
 
