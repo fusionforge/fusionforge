@@ -36,7 +36,7 @@ require_once($controller_dir . 'OSLCConnector.php');
 $model_dir = APPLICATION_PATH.'/models/';
 require_once($model_dir . 'fusionforge.inc.php');
 
-require(APPLICATION_PATH.'/../../../../../www/env.inc.php');
+require(APPLICATION_PATH.'/../../../../../common/include/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
