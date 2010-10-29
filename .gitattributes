@@ -4560,7 +4560,7 @@ tests/func/AllTests.php -text
 tests/func/Forums/forumsTest.php -text
 tests/func/News/newsTest.php -text
 tests/func/PluginsBlocks/blocksTest.php -text
-tests/func/RBAC/rbacTests.php -text
+tests/func/RBAC/rbacTest.php -text
 tests/func/README.TXT -text
 tests/func/Site/loginTest.php -text
 tests/func/Site/projectsTest.php -text
