@@ -224,6 +224,11 @@ class Layout extends Error {
 			$filename = $GLOBALS['fusionforge_basedir'].'/www'.$js;
 			if (file_exists($filename)) {
 				$js .= '?'.date ("U", filemtime($filename));
+			} else {
+				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/lib/vendor/', $js);
+				if (file_exists($filename)) {
+					$js .= '?'.date ("U", filemtime($filename));
+				}
 			}
 			$this->javascripts[] = $js;
 		}
@@ -238,6 +243,11 @@ class Layout extends Error {
 			$filename = $GLOBALS['fusionforge_basedir'].'/www'.$css;
 			if (file_exists($filename)) {
 				$css .= '?'.date ("U", filemtime($filename));
+			} else {
+				$filename = str_replace('/scripts/', $GLOBALS['fusionforge_basedir'].'/lib/vendor/', $css);
+				if (file_exists($filename)) {
+					$css .= '?'.date ("U", filemtime($filename));
+				}
 			}
 			$this->stylesheets[] = array('css' => $css, 'media' => $media);
 		}
