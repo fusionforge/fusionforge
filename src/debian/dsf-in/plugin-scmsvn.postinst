@@ -40,7 +40,7 @@ case "$1" in
 		fi
 	fi
 	# Setup inetd
-	/usr/share/@OLDPACKAGE@/plugins/scmsvn/bin/install-svn.sh configure
+	/usr/share/@OLDPACKAGE@/plugins/scmsvn/bin/install.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

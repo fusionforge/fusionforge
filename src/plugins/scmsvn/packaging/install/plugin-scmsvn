@@ -1,4 +1,4 @@
-deb-specific/install-svn.sh         usr/share/gforge/plugins/scmsvn/bin/
-plugins/scmsvn/common/*             usr/share/gforge/plugins/scmsvn/common/
-plugins/scmsvn/etc/plugins/scmsvn/* etc/gforge/plugins/scmsvn/
+plugins/scmsvn/bin/*                usr/share/@OLDPACKAGE@/plugins/scmsvn/bin/
+plugins/scmsvn/common/*             usr/share/@OLDPACKAGE@/plugins/scmsvn/common/
+plugins/scmsvn/etc/plugins/scmsvn/* etc/@OLDPACKAGE@/plugins/scmsvn/
 plugins/scmsvn/etc/*.ini 	    etc/@PACKAGE@/config.ini.d/
