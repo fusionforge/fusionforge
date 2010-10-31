@@ -913,6 +913,8 @@ src/debian/NEWS.Debian -text
 src/debian/README.source -text
 src/debian/compat -text
 src/debian/dsf-in/plugin-scmbzr.init.d -text
+src/debian/dsf-in/plugin.postinst -text
+src/debian/dsf-in/plugin.prerm -text
 src/debian/dsf-in/web-apache2-vhosts.postinst.dsfh-in -text
 src/debian/dsf-in/web-apache2-vhosts.postrm.dsfh-in -text
 src/debian/dsf-in/web-apache2.config.dsfh-in -text
