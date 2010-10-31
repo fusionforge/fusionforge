@@ -61,10 +61,10 @@ remove-binary-files:
 conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
 
 debian/$(PACKAGE)-plugin-%.postinst:
-	$(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e 's/@PLUGLONGNAME@/`cat plugins/$*/NAME`/g' $(CURDIR)/debian/dsf-in/plugin.postinst > $@
+	PLUGLONGNAME="`cat plugins/$*/NAME`" $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.postinst > $@
 
 debian/$(PACKAGE)-plugin-%.prerm:
-	$(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e 's/@PLUGLONGNAME@/`cat plugins/$*/NAME`/g' $(CURDIR)/debian/dsf-in/plugin.prerm > $@
+	PLUGLONGNAME="`cat plugins/$*/NAME`" $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.prerm > $@
 
 debian/$(PACKAGE)-plugin-%.cron.d:
 	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
