@@ -2839,7 +2839,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 								    array ($this->getID(),
 									   'A'));
 				if (!$users_group_res) {
-					$this->setError('Error: Enable to get users from group '. $this->getID() . ' ' .db_error());
+					$this->setError(_('Error: Enable to get users from group'). ' ' . $this->getID() . ' ' .db_error());
 					return false;
 				}
 				

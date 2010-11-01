@@ -584,7 +584,7 @@ Enjoy the site.
 						$this->getID())) ;
 
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Object: '.db_error());
+			$this->setError(_('ERROR - Could Not Update User Object:'). ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -659,7 +659,7 @@ Enjoy the site.
 
 		if ($status != 'P' && $status != 'A'
 			&& $status != 'S' && $status != 'D') {
-			$this->setError('ERROR: Invalid status value');
+			$this->setError(_('ERROR: Invalid status value'));
 			return false;
 		}
 
@@ -669,7 +669,7 @@ Enjoy the site.
 					       $this->getID())) ;
 
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Status: '.db_error());
+			$this->setError(_('ERROR - Could Not Update User Status:') . ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1015,7 +1015,7 @@ Enjoy the site.
 			$out_shells[] = chop($s);
 		}
 		if (!in_array($shell, $out_shells)) {
-			$this->setError('ERROR: Invalid Shell');
+			$this->setError(_('ERROR: Invalid Shell'));
 			return false;
 		}
 
@@ -1024,7 +1024,7 @@ Enjoy the site.
 					array ($shell,
 					       $this->getID())) ;
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Unix Shell: '.db_error());
+			$this->setError(_('ERROR - Could Not Update User Unix Shell:') . ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1181,7 +1181,7 @@ Enjoy the site.
 					array ($keys,
 					       $this->getID())) ;
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User SSH Keys');
+			$this->setError(_('ERROR - Could Not Update User SSH Keys'));
 			return false;
 		} else {
 			$this->data_array['authorized_keys'] = $keys;
@@ -1328,7 +1328,7 @@ Enjoy the site.
 					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR - Could Not Change User Password: '.db_error());
+			$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
