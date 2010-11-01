@@ -162,7 +162,7 @@ class SearchManager {
 			SEARCH__OUTPUT_RSS
 		);
 		
-		plugin_hook_by_reference('search_engines', $this);
+		plugin_hook('search_engines', array('object' => $this));
 	}
 	
 	function loadParameters() {

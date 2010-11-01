@@ -89,7 +89,6 @@ class ForumMLPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == 'search_engines') {
-			$myfile=fopen('/tmp/hook','a');
 			require_once('ForumMLSearchEngine.class.php');
 			// FIXME: when the hook is called, the group_id is not set.
 			// So I use the global variable instead.
@@ -98,7 +97,12 @@ class ForumMLPlugin extends Plugin {
 			if ($group_id) {
 				$group =& group_get_object($group_id);
 				if ($group->usesPlugin('forumml')) {
-					$params->addSearchEngine(
+					if (isset($params['object'])) {
+						$searchManager = $params['object'];
+					} else {
+						$searchManager = $params;
+					}
+					$searchManager->addSearchEngine(
 							SEARCH__TYPE_IS_LIST,
 							new ForumMLSearchEngine(SEARCH__TYPE_IS_LIST, 
 								'ForumMLHtmlSearchRenderer', 
