@@ -720,19 +720,12 @@ fi
 
 %files plugin-mediawiki
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mediawiki.ini
-%{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
-%{GFORGE_DIR}/plugins/mediawiki/README
-%{GFORGE_DIR}/plugins/mediawiki/README.jlbond
-%{GFORGE_DIR}/plugins/mediawiki/bin
-%{GFORGE_DIR}/plugins/mediawiki/common
-%{GFORGE_DIR}/plugins/mediawiki/cronjobs
-%{GFORGE_DIR}/plugins/mediawiki/etc
-#%{GFORGE_DIR}/plugins/mediawiki/mediawiki-skin
-%{GFORGE_DIR}/plugins/mediawiki/www
+%config(noreplace) %{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
+%{GFORGE_DIR}/plugins/mediawiki/
+%{GFORGE_DIR}/www/plugins/mediawiki
 /usr/share/mediawiki/skins/gforge
 /usr/share/mediawiki/skins/GForge.deps.php
 /usr/share/mediawiki/skins/GForge.php
-%{GFORGE_DIR}/www/plugins/mediawiki
 
 %files plugin-online_help
 %{GFORGE_DIR}/plugins/online_help
