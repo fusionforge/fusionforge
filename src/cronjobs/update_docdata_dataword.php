@@ -68,7 +68,7 @@ foreach ($resarr as $item)
 $timeendtrait = microtime_float();
 $timetot = $timeendtrait - $timestarttrait;
 db_query_params('UPDATE groups set force_docman_reindex = $1', array('0'));
-print_debug ("End analyze : $compt files, $timetot secs.");
+//print_debug ("End analyze : $compt files, $timetot secs.");
 
 
 function print_debug ($text)
