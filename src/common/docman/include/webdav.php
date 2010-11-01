@@ -49,8 +49,15 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				return true;
 			}
 			return false;
+		} else {
+			$u = &user_get_object_by_name($user);
+			foreach ($u->getGroups() as $key => $memberOfThisGroup) {
+				if ($memberOfThisGroup->getID() == $group_id) {
+					return true;
+				}
+			}
 		}
-		return true;
+		return false;
 	}
 
     function HEAD(&$options) {
