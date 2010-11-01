@@ -113,10 +113,12 @@ if (getStringFromRequest('update')) {
 			// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
 			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname)) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
-				$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname, forge_get_config('config_path'). '/plugins/'.$pluginname); 
-				if (!$code) {
-					$error_msg .= '<br />['.forge_get_config('config_path'). '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
-					$error_msg .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
+				if (!is_link(forge_get_config('config_path'). '/plugins/'.$pluginname) && !is_dir(forge_get_config('config_path'). '/plugins/'.$pluginname)) {
+					$code = symlink(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname, forge_get_config('config_path'). '/plugins/'.$pluginname); 
+					if (!$code) {
+						$error_msg .= '<br />['.forge_get_config('config_path'). '/plugins/'.$pluginname.'->'.forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname . ']';
+						$error_msg .= sprintf(_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $pluginname);
+					}
 				}
 			}
 
