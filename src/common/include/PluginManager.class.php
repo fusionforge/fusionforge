@@ -140,7 +140,7 @@ class PluginManager extends Error {
 	 *
 	 */
 	function LoadPlugin ($p_name) {
-		global $gfplugins;
+		global $gfplugins, $gfcommon, $gfwww;
 
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = forge_get_config('plugins_path') ;
