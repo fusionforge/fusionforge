@@ -120,6 +120,14 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	}
 } else if ( $docid == 'webdav' ) {
 	$_SERVER['SCRIPT_NAME'] = '';
+	/* we need the group id for check authentification. */
+	$_SERVER["AUTH_TYPE"] = $group_id;
+	if (!isset($_SERVER['PHP_AUTH_USER'])) {
+		header('WWW-Authenticate: Basic realm="Webdav Access" (For anonymous access : click enter)');
+		header('HTTP/1.0 401 Unauthorized');
+		echo _('Webdav Access Canceled by user');
+		die();
+	}
 	$server = new HTTP_WebDAV_Server_Docman;
 	$server->ServeRequest();
 } else {

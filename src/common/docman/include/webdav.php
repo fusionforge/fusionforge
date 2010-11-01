@@ -29,9 +29,29 @@ require_once "HTTP/WebDAV/Server.php";
 
 class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
-    function check_auth($type,$user,$pass) {
-        return true;
-    }
+    function checkAuth($group_id,$user,$pass) {
+		$g =& group_get_object($group_id);
+		if (!$g || !is_object($g))
+			return false;
+
+		/* is this group using docman ? */
+		if (!$g->usesDocman())
+            return false;
+
+        if (!$g->useWebdav())
+            return false;
+
+		if ($g->isError())
+            return false;
+
+		if (!session_login_valid($user,$pass)) {
+			if (forge_check_perm ('docman',$group_id,'read')) {
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
 
     function HEAD(&$options) {
         return true;
