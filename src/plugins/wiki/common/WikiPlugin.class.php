@@ -46,7 +46,7 @@ class GforgeWikiPlugin extends Plugin {
 		if (is_array($params) && isset($params['group']))
 			$group_id=$params['group'];
 		if ($hookname == "groupmenu") {
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project))
 				return;
 			if ($project->isError())
@@ -68,7 +68,7 @@ class GforgeWikiPlugin extends Plugin {
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to its administration page.
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p><a href="/wiki/wikiadmin.php?id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
 			}
@@ -95,7 +95,7 @@ class GforgeWikiPlugin extends Plugin {
 			// FIXME: when the hook is called, the group_id is not set.
 			// So I use the global variable instead.
 			$group_id = $GLOBALS['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ($group->usesPlugin ( $this->name)) {
 				global $gfwww, $gfcommon, $gfplugins;
 				require_once('plugins/wiki/common/WikiHtmlSearchRenderer.class.php');
@@ -134,7 +134,7 @@ class GforgeWikiPlugin extends Plugin {
 				echo '</div>';
 			}
 		} elseif ($hookname == 'activity') {
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ($group->usesPlugin ( $this->name)) {
 				// Add activities from the wiki plugin if active.
 				// Only major edits are included.
