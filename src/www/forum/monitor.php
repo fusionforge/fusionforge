@@ -57,10 +57,12 @@ session_require_login();
 			}
 			if (!$confirm) {
 				forum_header(array('title'=>_('Stop Monitoring')));
-				echo $HTML->confirmBox('You are about to stop monitoring the '.$f->getName().
-					' forum.<br/><br/>Do you really want to unsubscribe ?', 
+			echo $HTML->confirmBox(
+				sprintf(_('You are about to stop monitoring the %1$s forum.'),$f->getName()).
+					'<br/><br/>'.
+					_('Do you really want to unsubscribe ?'),
 					array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),
-					array('confirm' => 'Unsubscribe', 'cancel' => 'Cancel') );
+			array('confirm' => _('Unsubscribe'), 'cancel' => _('Cancel')) );
 				forum_footer(array());
 				exit;
 			}
