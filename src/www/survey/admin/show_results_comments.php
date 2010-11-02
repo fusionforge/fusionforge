@@ -39,7 +39,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	exit;
 }
 
-Function  ShowResultComments($result) {
+Function  showResultComments($result) {
 	global $survey_id;
 
 	$rows  =  db_numrows($result);
@@ -76,7 +76,7 @@ $result=db_query_params ('SELECT DISTINCT response FROM survey_responses WHERE s
 			 array($survey_id,
 			       $question_id,
 			       $group_id));
-ShowResultComments($result);
+showResultComments($result);
 
 survey_footer(array());
 

@@ -46,7 +46,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 <p>&nbsp;</p>
 <?php
 
-Function  ShowResultsEditQuestion($result) {
+function showResultsEditQuestion($result) {
 	global $group_id;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
@@ -84,7 +84,7 @@ FROM survey_questions,survey_question_types
 WHERE survey_question_types.id=survey_questions.question_type AND survey_questions.group_id=$1 ORDER BY survey_questions.question_id DESC',
 			   array ($group_id));
 
-ShowResultsEditQuestion($result);
+showResultsEditQuestion($result);
 
 survey_footer(array());
 

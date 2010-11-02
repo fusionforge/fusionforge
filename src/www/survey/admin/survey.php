@@ -98,7 +98,7 @@ $ss = & $sf->getSurveys();
 if (!$ss) {
     echo '<p class="warning_msg">' . _('No Survey Question is found') . '</p>';
 } else {
-    echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1));
+    echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1));
 }
 
 $sh->footer(array());

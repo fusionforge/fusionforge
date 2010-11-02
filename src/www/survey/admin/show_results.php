@@ -44,7 +44,7 @@ if (!$group_id) {
     exit_no_group();
 }
 
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
     exit_no_group();
 }
@@ -115,19 +115,19 @@ $ss = & $sf->getSurveys();
 if (!$ss) {
     echo '<p class="warning_msg">' . _('No Survey Question is found') . '</p>';
 } else {
-    echo($sh->ShowSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
+    echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
 
 $sh->footer(array());
 
 /**
- * ShowResult - Get Result from Survey and Question. Pass the reuslt to Show Result HTML class
+ * showResult - Get Result from Survey and Question. Pass the reuslt to Show Result HTML class
  *
  *  @param object a survey object
  *  @param object a qustsion object
  *  @param int    wheather print out export(csv) format
  */
-function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
+function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
     /* Get results */
     $srf = new SurveyResponseFactory($Survey, $Question);
     if (!$srf || !is_object($srf)) {
@@ -136,7 +136,7 @@ function ShowResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num=
 	echo '<div class="error">'._('Error'). $srf->getErrorMessage() ."</div>";
     } else {
         /* Show result in HTML*/ 
-	echo ($SurveyHTML->ShowResult($srf, $show_comment, $q_num, $graph));
+	echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));
     }
 }
 
