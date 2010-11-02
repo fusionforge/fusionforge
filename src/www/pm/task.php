@@ -76,7 +76,7 @@ if (!$group_id || !$group_project_id) {
 	exit_missing_param($redirect_url,$missing_params,'pm');
 }
 
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {

@@ -494,7 +494,7 @@ function artifactTypeIsMonitoring($session_ser,$group_id,$group_artifact_id) {
 //
 function &getArtifactTypes($session_ser,$group_id) {
 	continue_session($session_ser);
-	$grp =& group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
 		return new soap_fault ('','getArtifactTypes','Could Not Get Project','Could Not Get Project');
 	} elseif ($grp->isError()) {

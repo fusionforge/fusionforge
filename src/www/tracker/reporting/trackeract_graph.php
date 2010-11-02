@@ -39,7 +39,7 @@ $end = getIntFromRequest('end');
 //
 // Get Project Object
 //
-$group =& group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
         exit_no_group();
 }

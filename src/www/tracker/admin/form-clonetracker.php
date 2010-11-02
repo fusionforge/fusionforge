@@ -23,7 +23,7 @@
  * USA
  */
 
-$g =& group_get_object(forge_get_config('template_group'));
+$g = group_get_object(forge_get_config('template_group'));
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {
