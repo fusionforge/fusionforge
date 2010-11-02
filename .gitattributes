@@ -114,14 +114,14 @@ plugins/coclico/codendi-specific/env.inc.php -text
 plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
 plugins/coclico/forumml/README.txt -text
 plugins/coclico/forumml/TODO -text
-plugins/coclico/forumml/bin/db-upgrade.pl -text
+plugins/coclico/forumml/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/coclico/forumml/bin/installFF.sh -text
 plugins/coclico/forumml/bin/mail_2_DB.php -text
-plugins/coclico/forumml/bin/mail_2_DB.pl -text
+plugins/coclico/forumml/bin/mail_2_DB.pl -text svneol=unset#text/x-perl
 plugins/coclico/forumml/bin/mail_2_DBFF.php -text
-plugins/coclico/forumml/bin/mail_2_DBFF.pl -text
-plugins/coclico/forumml/bin/ml_arch_2_DB.pl -text
-plugins/coclico/forumml/bin/ml_arch_2_DBFF.pl -text
+plugins/coclico/forumml/bin/mail_2_DBFF.pl -text svneol=unset#text/x-perl
+plugins/coclico/forumml/bin/ml_arch_2_DB.pl -text svneol=unset#text/x-perl
+plugins/coclico/forumml/bin/ml_arch_2_DBFF.pl -text svneol=unset#text/x-perl
 plugins/coclico/forumml/common/forumml-init.php -text
 plugins/coclico/forumml/db/forumml-init.sql -text
 plugins/coclico/forumml/db/install.sql -text
@@ -216,8 +216,8 @@ plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous_disabled
 plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#image/gif
 plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#image/png
 plugins/coclico/forumml/www/upload.php -text
-plugins/coclico/hudson/bin/db-delete.pl -text
-plugins/coclico/hudson/bin/db-upgrade.pl -text
+plugins/coclico/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
+plugins/coclico/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/coclico/hudson/common/hudson-init.php -text
 plugins/coclico/hudson/cronjobs/manage_hudson.php -text
 plugins/coclico/hudson/db/hudson-init.sql -text
@@ -314,8 +314,8 @@ plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_wid
 plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#image/png
 plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#image/png
 plugins/coclico/mailman/README.txt -text
-plugins/coclico/mailman/bin/db-delete.pl -text
-plugins/coclico/mailman/bin/db-upgrade.pl -text
+plugins/coclico/mailman/bin/db-delete.pl -text svneol=unset#text/x-perl
+plugins/coclico/mailman/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/coclico/mailman/bin/import_members_DB.php -text
 plugins/coclico/mailman/common/mailman-init.php -text
 plugins/coclico/mailman/cronjobs/manage_mailmanlists.php -text
@@ -377,8 +377,8 @@ plugins/coclico/oslc/AUTHORS -text
 plugins/coclico/oslc/COPYING -text
 plugins/coclico/oslc/INSTALL -text
 plugins/coclico/oslc/README -text
-plugins/coclico/oslc/bin/db-delete.pl -text
-plugins/coclico/oslc/bin/db-upgrade.pl -text
+plugins/coclico/oslc/bin/db-delete.pl -text svneol=unset#text/x-perl
+plugins/coclico/oslc/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/coclico/oslc/bin/sayhello -text
 plugins/coclico/oslc/common/oslc-init.php -text
 plugins/coclico/oslc/cronjobs/manage_oslc.php -text
@@ -453,8 +453,8 @@ plugins/coclico/oslc/www/.htaccess -text
 plugins/coclico/oslc/www/admin/index.php -text
 plugins/coclico/oslc/www/index.php -text
 plugins/coclico/soapadmin/README.txt -text
-plugins/coclico/soapadmin/bin/db-delete.pl -text
-plugins/coclico/soapadmin/bin/db-upgrade.pl -text
+plugins/coclico/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
+plugins/coclico/soapadmin/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/coclico/soapadmin/bin/sayhello -text
 plugins/coclico/soapadmin/common/soapadmin-init.php -text
 plugins/coclico/soapadmin/cronjobs/manage_soapadmin.php -text
@@ -634,15 +634,15 @@ plugins/old/webcalendar/www/tables-ibase.sql -text
 plugins/old/webcalendar/www/tables-mysql.sql -text
 plugins/old/webcalendar/www/tables-oracle.sql -text
 plugins/old/webcalendar/www/tables-postgres.sql -text
-plugins/old/webcalendar/www/tools/check_translation.pl -text
+plugins/old/webcalendar/www/tools/check_translation.pl -text svneol=unset#text/x-perl
 plugins/old/webcalendar/www/tools/convert_passwords.php -text
-plugins/old/webcalendar/www/tools/palm_datebook.pl -text
+plugins/old/webcalendar/www/tools/palm_datebook.pl -text svneol=unset#text/x-perl
 plugins/old/webcalendar/www/tools/send_reminders.php -text
 plugins/old/webcalendar/www/tools/summary.txt -text
-plugins/old/webcalendar/www/tools/translation_summary.pl -text
-plugins/old/webcalendar/www/tools/update_all.pl -text
-plugins/old/webcalendar/www/tools/update_translation.pl -text
-plugins/old/webcalendar/www/tools/upgrade_to_0.9.7.pl -text
+plugins/old/webcalendar/www/tools/translation_summary.pl -text svneol=unset#text/x-perl
+plugins/old/webcalendar/www/tools/update_all.pl -text svneol=unset#text/x-perl
+plugins/old/webcalendar/www/tools/update_translation.pl -text svneol=unset#text/x-perl
+plugins/old/webcalendar/www/tools/upgrade_to_0.9.7.pl -text svneol=unset#text/x-perl
 plugins/old/webcalendar/www/translations/Basque.txt -text
 plugins/old/webcalendar/www/translations/Bulgarian.txt -text
 plugins/old/webcalendar/www/translations/Catalan.txt -text
@@ -696,8 +696,8 @@ plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
 plugins/templates/createplugin.sh -text
-plugins/templates/helloworld/bin/db-delete.pl -text
-plugins/templates/helloworld/bin/db-upgrade.pl -text
+plugins/templates/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
+plugins/templates/helloworld/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/templates/helloworld/cronjobs/manage_helloworld.php -text
 plugins/templates/helloworld/debian/README.Debian -text
 plugins/templates/helloworld/debian/README.source -text
@@ -736,6 +736,8 @@ src/CHANGES -text
 src/COPYING.php -text
 src/INSTALL.restricted -text
 src/NEWS -text
+src/backend/DatabaseDump.pl svneol=native#text/x-perl
+src/backend/include.pl svneol=native#text/x-perl
 src/backend/shell/apache.sh svneol=native#unset
 src/common/dao/CodendiDataAccess.class.php -text
 src/common/dao/include/DataAccess.class.php -text
@@ -850,12 +852,13 @@ src/common/widget/Widget_ProjectPublicAreas.class.php -text
 src/common/widget/Widget_ProjectRss.class.php -text
 src/common/widget/Widget_Rss.class.php -text
 src/contrib/fusionforge.dia -text
-src/contrib/migrate-from-gforge-as.pl -text
+src/contrib/migrate-from-gforge-as.pl -text svneol=unset#text/x-perl
 src/cronjobs/auth_unix.php -text
 src/cronjobs/create_scm_repos.php -text
 src/cronjobs/ftp_create_group_access.php -text
 src/cronjobs/gather_scm_stats.php -text
 src/cronjobs/generate_scm_snapshots.php -text
+src/cronjobs/get_news_notapproved.pl svneol=native#text/x-perl
 src/cronjobs/gforge-db-backup.sh -text
 src/cronjobs/homedirs.php -text
 src/cronjobs/mail/publicize_list.py -text
@@ -905,10 +908,24 @@ src/db/FTI-20061025.sql -text
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
 src/db/timetracking-init.sql -text
+src/deb-specific/create-mailing-lists.pl svneol=native#text/x-perl
+src/deb-specific/db-convert-to-unicode.pl svneol=native#text/x-perl
+src/deb-specific/db-upgrade.pl svneol=native#text/x-perl
+src/deb-specific/dns_conf.pl svneol=native#text/x-perl
+src/deb-specific/dsf-helper.pl svneol=native#text/x-perl
 src/deb-specific/fckeditor/config.js -text
+src/deb-specific/fileforge.pl svneol=native#text/x-perl
+src/deb-specific/fix-mailing-lists.pl svneol=native#text/x-perl
 src/deb-specific/fusionforge.rsyslog -text
+src/deb-specific/gforge-inject.pl svneol=native#text/x-perl
 src/deb-specific/gforge.logrotate -text
+src/deb-specific/group_dump_update.pl svneol=native#text/x-perl
+src/deb-specific/prepare-vhosts-file.pl svneol=native#text/x-perl
+src/deb-specific/ssh_dump_update.pl svneol=native#text/x-perl
+src/deb-specific/stats_cvs.pl svneol=native#text/x-perl
+src/deb-specific/stats_projects_logparse.pl svneol=native#text/x-perl
 src/deb-specific/update-ldap.sh -text
+src/deb-specific/user_dump_update.pl svneol=native#text/x-perl
 src/debian/NEWS.Debian -text
 src/debian/README.source -text
 src/debian/compat -text
@@ -1081,6 +1098,7 @@ src/etc/httpd.d/61plugin-scmgit -text
 src/etc/httpd.d/99maindirhttp -text
 src/etc/local.d/24debug -text
 src/etc/templates/database.py -text
+src/etc/templates/local.pl svneol=native#text/x-perl
 src/fusionforge-install-2.php -text
 src/fusionforge-install-3-db.php -text
 src/fusionforge-install-4-config.php -text
@@ -1116,6 +1134,7 @@ src/lib/vendor/scriptaculous/unittest.js -text
 src/lib/vendor/yui/build/base/base-min.css -text
 src/lib/vendor/yui/build/base/base.css -text
 src/lib/vendor/yui/build/reset-fonts-grids/reset-fonts-grids.css -text
+src/monitor/check-system.pl svneol=native#text/x-perl
 src/packaging/control/000source -text
 src/packaging/control/010meta-standard -text
 src/packaging/control/010meta-standard.shortdesc -text
@@ -1200,8 +1219,8 @@ src/plugins/blocks/packaging/links/plugin-blocks -text
 src/plugins/blocks/www/index.php -text
 src/plugins/contribtracker/INSTALL -text
 src/plugins/contribtracker/NAME -text
-src/plugins/contribtracker/bin/db-delete.pl -text
-src/plugins/contribtracker/bin/db-upgrade.pl -text
+src/plugins/contribtracker/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/contribtracker/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/contribtracker/common/ContribTrackerPlugin.class.php -text
 src/plugins/contribtracker/common/contribtracker-init.php -text
 src/plugins/contribtracker/db/contribtracker-init.sql -text
@@ -1217,14 +1236,16 @@ src/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#applicat
 src/plugins/cvstracker/packaging/docs/plugin-cvstracker -text
 src/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 src/plugins/env.inc.php -text
+src/plugins/externalsearch/bin/db-delete.pl svneol=native#text/x-perl
+src/plugins/externalsearch/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/externalsearch/etc/engines.json -text
 src/plugins/externalsearch/etc/externalsearch.ini -text
 src/plugins/externalsearch/packaging/docs/plugin-externalsearch -text
 src/plugins/externalsearch/packaging/install/plugin-externalsearch -text
 src/plugins/extratabs/NAME -text
 src/plugins/extratabs/README -text
-src/plugins/extratabs/bin/db-delete.pl -text
-src/plugins/extratabs/bin/db-upgrade.pl -text
+src/plugins/extratabs/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/extratabs/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/extratabs/common/ExtraTabsPlugin.class.php -text
 src/plugins/extratabs/common/extratabs-init.php -text
 src/plugins/extratabs/db/extratabs-init.sql -text
@@ -1470,6 +1491,7 @@ src/plugins/fckeditor/www/editor/dialog/fck_about/sponsors/spellchecker_net.gif 
 src/plugins/fckeditor/www/editor/dialog/fck_div.html -text
 src/plugins/fckeditor/www/editor/dialog/fck_flash/fck_flash_preview.html -text
 src/plugins/fckeditor/www/editor/dialog/fck_image/fck_image_preview.html -text
+src/plugins/fckeditor/www/editor/dialog/fck_spellerpages/spellerpages/server-scripts/spellchecker.pl svneol=native#text/x-perl
 src/plugins/fckeditor/www/editor/dialog/fck_template/images/template1.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/fck_template/images/template2.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/fck_template/images/template3.gif -text svneol=unset#image/gif
@@ -1490,12 +1512,12 @@ src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/cfm/conf
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/cfm/connector.cfm -text
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/lasso/config.lasso -text
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/lasso/connector.lasso -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/basexml.pl -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/commands.pl -text
+src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/basexml.pl -text svneol=unset#text/x-perl
+src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/commands.pl -text svneol=unset#text/x-perl
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/connector.cgi -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/io.pl -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/upload_fck.pl -text
-src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/util.pl -text
+src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/io.pl -text svneol=unset#text/x-perl
+src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/upload_fck.pl -text svneol=unset#text/x-perl
+src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/perl/util.pl -text svneol=unset#text/x-perl
 src/plugins/fckeditor/www/editor/filemanager/browser/default/connectors/py/connector.py -text
 src/plugins/fckeditor/www/editor/filemanager/browser/default/images/ButtonArrow.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/filemanager/browser/default/images/Folder.gif -text svneol=unset#image/gif
@@ -1585,13 +1607,13 @@ src/plugins/fckeditor/www/editor/filemanager/connectors/cfm/upload.cfm -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/lasso/config.lasso -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/lasso/connector.lasso -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/lasso/upload.lasso -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/perl/basexml.pl -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/perl/commands.pl -text
+src/plugins/fckeditor/www/editor/filemanager/connectors/perl/basexml.pl -text svneol=unset#text/x-perl
+src/plugins/fckeditor/www/editor/filemanager/connectors/perl/commands.pl -text svneol=unset#text/x-perl
 src/plugins/fckeditor/www/editor/filemanager/connectors/perl/connector.cgi -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/perl/io.pl -text
+src/plugins/fckeditor/www/editor/filemanager/connectors/perl/io.pl -text svneol=unset#text/x-perl
 src/plugins/fckeditor/www/editor/filemanager/connectors/perl/upload.cgi -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/perl/upload_fck.pl -text
-src/plugins/fckeditor/www/editor/filemanager/connectors/perl/util.pl -text
+src/plugins/fckeditor/www/editor/filemanager/connectors/perl/upload_fck.pl -text svneol=unset#text/x-perl
+src/plugins/fckeditor/www/editor/filemanager/connectors/perl/util.pl -text svneol=unset#text/x-perl
 src/plugins/fckeditor/www/editor/filemanager/connectors/php/basexml.php -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/php/config.php -text
 src/plugins/fckeditor/www/editor/filemanager/connectors/php/connector.php -text
@@ -1709,6 +1731,7 @@ src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.end.gif -text svneo
 src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.expand.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.separator.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/skins/silver/images/toolbar.start.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/fckeditor.pl svneol=native#text/x-perl
 src/plugins/fckeditor/www/fckeditor.py -text
 src/plugins/fckeditor/www/fckeditor_php4.php -text
 src/plugins/fckeditor/www/fckeditor_php5.php -text
@@ -1717,9 +1740,9 @@ src/plugins/fckeditor/www/fckutils.cfm -text
 src/plugins/globalsearch/NAME -text
 src/plugins/globalsearch/README -text
 src/plugins/globalsearch/TODO -text
-src/plugins/globalsearch/bin/db-delete.pl -text
-src/plugins/globalsearch/bin/db-upgrade.pl -text
-src/plugins/globalsearch/bin/get_assoc_sites_projects.pl -text
+src/plugins/globalsearch/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/globalsearch/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/globalsearch/bin/get_assoc_sites_projects.pl -text svneol=unset#text/x-perl
 src/plugins/globalsearch/common/GlobalsearchPlugin.class.php -text
 src/plugins/globalsearch/common/globalsearch-init.php -text
 src/plugins/globalsearch/common/globalsearch_edit_utils.php -text
@@ -1734,6 +1757,8 @@ src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
 src/plugins/gravatar/common/gravatarPlugin.class.php -text
+src/plugins/ldapextauth/bin/db-delete.pl svneol=native#text/x-perl
+src/plugins/ldapextauth/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
 src/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 src/plugins/mantis/etc/mantis.ini -text
@@ -1866,8 +1891,8 @@ src/plugins/online_help/www/ug_user_ratings.html -text
 src/plugins/online_help/www/ug_user_skills.html -text
 src/plugins/projectlabels/NAME -text
 src/plugins/projectlabels/README -text
-src/plugins/projectlabels/bin/db-delete.pl -text
-src/plugins/projectlabels/bin/db-upgrade.pl -text
+src/plugins/projectlabels/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/projectlabels/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/projectlabels/common/ProjectLabelsPlugin.class.php -text
 src/plugins/projectlabels/common/projectlabels-init.php -text
 src/plugins/projectlabels/db/projectlabels-init.sql -text
@@ -1916,7 +1941,7 @@ src/plugins/projects_hierarchy/www/wait_son.php -text
 src/plugins/quota_management/INSTALL -text
 src/plugins/quota_management/common/quota_management-init.php -text
 src/plugins/quota_management/common/quota_managementPlugin.class.php -text
-src/plugins/quota_management/cronjobs/quota_update.pl -text
+src/plugins/quota_management/cronjobs/quota_update.pl -text svneol=unset#text/x-perl
 src/plugins/quota_management/db/quota_management-init.sql -text
 src/plugins/quota_management/www/index.php -text
 src/plugins/quota_management/www/quota.php -text
@@ -1941,10 +1966,12 @@ src/plugins/scmbzr/packaging/control/132plugin-scmbzr -text
 src/plugins/scmbzr/packaging/control/132plugin-scmbzr.shortdesc -text
 src/plugins/scmbzr/packaging/dirs/plugin-scmbzr -text
 src/plugins/scmbzr/packaging/install/plugin-scmbzr -text
+src/plugins/scmccase/etc/plugins/scmccase/config.pl svneol=native#text/x-perl
 src/plugins/scmccase/etc/scmccase.ini -text
 src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
 src/plugins/scmcvs/NAME -text
+src/plugins/scmcvs/bin/cvssh.pl svneol=native#text/x-perl
 src/plugins/scmcvs/bin/install.sh -text
 src/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 src/plugins/scmcvs/etc/scmcvs.ini -text
@@ -1965,8 +1992,8 @@ src/plugins/scmdarcs/packaging/dirs/plugin-scmdarcs -text
 src/plugins/scmdarcs/packaging/install/plugin-scmdarcs -text
 src/plugins/scmdarcs/packaging/links/plugin-scmdarcs -text
 src/plugins/scmgit/NAME -text
-src/plugins/scmgit/bin/db-delete.pl -text
-src/plugins/scmgit/bin/db-upgrade.pl -text
+src/plugins/scmgit/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/scmgit/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/scmgit/common/GitPlugin.class.php -text
 src/plugins/scmgit/common/scmgit-init.php -text
 src/plugins/scmgit/db/scmgit-init.sql -text
@@ -1996,6 +2023,7 @@ src/plugins/scmsvn/packaging/dirs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/docs/plugin-scmsvn -text
 src/plugins/scmsvn/packaging/install/plugin-scmsvn -text
 src/plugins/svncommitemail/bin/commit-email.php -text
+src/plugins/svncommitemail/bin/commit-email.pl svneol=native#text/x-perl
 src/plugins/svntracker/AUTHORS -text
 src/plugins/svntracker/COPYING -text
 src/plugins/svntracker/README -text
@@ -2042,7 +2070,7 @@ src/plugins/wiki/www/TODO -text
 src/plugins/wiki/www/UPGRADING -text
 src/plugins/wiki/www/admin/.htaccess -text
 src/plugins/wiki/www/admin/README -text
-src/plugins/wiki/www/admin/dump-version.pl -text
+src/plugins/wiki/www/admin/dump-version.pl -text svneol=unset#text/x-perl
 src/plugins/wiki/www/admin/dump-wikidb -text
 src/plugins/wiki/www/admin/mkfuncs -text
 src/plugins/wiki/www/admin/odt2phpwiki.xsl -text
@@ -2056,7 +2084,7 @@ src/plugins/wiki/www/config/.htaccess -text
 src/plugins/wiki/www/config/SqlResult.ini -text
 src/plugins/wiki/www/config/config-default.ini -text
 src/plugins/wiki/www/config/config-dist.ini -text
-src/plugins/wiki/www/config/make-dbhelper.pl -text
+src/plugins/wiki/www/config/make-dbhelper.pl -text svneol=unset#text/x-perl
 src/plugins/wiki/www/config/migrate-phpwiki-config -text
 src/plugins/wiki/www/config/phpwiki.spec -text
 src/plugins/wiki/www/config/two-level-tlds -text
@@ -3125,10 +3153,10 @@ src/plugins/wiki/www/tests/AAC_MakeAutoTestPage.inputs -text
 src/plugins/wiki/www/tests/AAD_FindText.inputs -text
 src/plugins/wiki/www/tests/CompatInfo.php -text
 src/plugins/wiki/www/tests/README -text
-src/plugins/wiki/www/tests/makemakebuild.pl -text
-src/plugins/wiki/www/tests/maketest.pl -text
+src/plugins/wiki/www/tests/makemakebuild.pl -text svneol=unset#text/x-perl
+src/plugins/wiki/www/tests/maketest.pl -text svneol=unset#text/x-perl
 src/plugins/wiki/www/tests/unit/_mem_pl.ploticus -text
-src/plugins/wiki/www/tests/unit/combine_define.pl -text
+src/plugins/wiki/www/tests/unit/combine_define.pl -text svneol=unset#text/x-perl
 src/plugins/wiki/www/tests/unit/lib/AtomParserTest.php -text
 src/plugins/wiki/www/tests/unit/lib/DumpHtml.php -text
 src/plugins/wiki/www/tests/unit/lib/HtmlParserTest.php -text
@@ -4037,19 +4065,31 @@ src/translations/sv.po -text
 src/translations/th.po -text
 src/translations/zh_CN.po -text
 src/translations/zh_TW.po -text
+src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
+src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
+src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
 src/utils/fixscripts/normalize_roles.php -text
 src/utils/forge_get_config -text
 src/utils/forge_set_password -text
 src/utils/fusionforge-shell-postgresql.spec -text
+src/utils/include.pl svneol=native#text/x-perl
 src/utils/inject-files.php -text
 src/utils/inject-groups.php -text
 src/utils/inject-users.php -text
 src/utils/install-nsspgsql.sh -text
-src/utils/ldap/sql2ldifadd.pl -text
-src/utils/ldap/sql2ldifmod.pl -text
+src/utils/ldap/sql2ldif.pl svneol=native#text/x-perl
+src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
+src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
 src/utils/manage-apache-config.sh -text
 src/utils/manage-translations.sh -text
 src/utils/migrate-to-ini-files.sh -text
+src/utils/underworld-dummy/dns_conf.pl svneol=native#text/x-perl
+src/utils/underworld-dummy/dump_database.pl svneol=native#text/x-perl
+src/utils/underworld-dummy/ia64_dump.pl svneol=native#text/x-perl
+src/utils/underworld-dummy/mail_aliases.pl svneol=native#text/x-perl
+src/utils/underworld-dummy/mailing_lists_dump.pl svneol=native#text/x-perl
+src/utils/underworld-dummy/new_aliases.pl svneol=native#text/x-perl
+src/utils/underworld-dummy/ssh_dump.pl svneol=native#text/x-perl
 src/www/admin/globalroleedit.php -text
 src/www/admin/pi.php -text
 src/www/env.inc.php -text
@@ -4593,7 +4633,7 @@ tests/scripts/fusionforge-build-and-test-rpm.sh -text
 tests/scripts/fusionforge-build-and-test-source.sh -text
 tests/scripts/fusionforge-trunk-build-rpm.sh -text
 tests/scripts/fusionforge-trunk-test-rpm.sh -text
-tests/scripts/scan_deprecated.pl -text
+tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_vm.sh -text
 tests/scripts/start_vz.sh -text
 tests/scripts/stop_vm.sh -text
@@ -4603,7 +4643,9 @@ tests/unit/utils/DbUtilsTest.php -text
 tests/unit/utils/HtmlPurifierTest.php -text
 tests/unit/utils/TextSanitizerTest.php -text
 tests/unit/utils/UtilsTest.php -text
+tools/bugzilla2GForge.pl svneol=native#text/x-perl
 tools/check_and_update_forum_role_settings.php -text
+tools/cmp-schemas.pl svneol=native#text/x-perl
 tools/export-tracker.tcl -text
 tools/gource/gource.sh -text
 tools/jpgraph_pietest.php -text
@@ -4629,8 +4671,8 @@ tools/simple-cdd/profiles/x-basic.packages -text
 tools/simple-cdd/profiles/x-gnome.description -text
 tools/simple-cdd/profiles/x-gnome.packages -text
 tools/simple-cdd/profiles/x-gnome.preseed -text
-tools/simulate_cron.pl -text
-tools/tab2gettext.pl -text
+tools/simulate_cron.pl -text svneol=unset#text/x-perl
+tools/tab2gettext.pl -text svneol=unset#text/x-perl
 tools/tab2gettext.sh -text
 tools/tab2po/.classpath -text
 tools/tab2po/.project -text
