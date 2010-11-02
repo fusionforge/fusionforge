@@ -107,7 +107,7 @@ if ($owner) {
                     $lm->updateLayout($owner_id, $owner_type, $request->get('layout_id'), $request->get('new_layout'));
                     break;
                 default:
-                    $lm->reorderLayout($owner_id, $owner_type, $layout_id, &$request);
+                    $lm->reorderLayout($owner_id, $owner_type, $layout_id, $request);
                     break;
             }
         }
