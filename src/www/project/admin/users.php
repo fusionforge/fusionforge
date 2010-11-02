@@ -240,7 +240,7 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 					echo "Invalid User";
 				}
 				?>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>"
+		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
 			method="post">
 		<table width="100%">
 			<tr>
