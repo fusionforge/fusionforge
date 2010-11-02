@@ -3812,7 +3812,7 @@ src/plugins/wiki/www/themes/default/phpwiki-topbottombars.css -text
 src/plugins/wiki/www/themes/default/phpwiki.css -text
 src/plugins/wiki/www/themes/default/sortable-min.js -text
 src/plugins/wiki/www/themes/default/sortable.js -text
-src/plugins/wiki/www/themes/default/templates/MAP.pdf -text
+src/plugins/wiki/www/themes/default/templates/MAP.pdf -text svneol=unset#application/pdf
 src/plugins/wiki/www/themes/default/templates/README -text
 src/plugins/wiki/www/themes/default/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/default/templates/addcomment.tmpl -text
