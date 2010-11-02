@@ -74,12 +74,12 @@ mailing-lists, SCM repository, forums, support request helper,
 web/FTP hosting, release management, etc. All these services are
 integrated into one web site and managed through a web interface.
 
-%package aselectextauth
+%package plugin-aselectextauth
 Summary: A-select external authentication for FusionForge
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, postgresql
-%description aselectextauth
-A system for authenticating users in fusionforge. A-Select is a framework
+%description plugin-aselectextauth
+A system plugin for authenticating users in fusionforge. A-Select is a framework
 where users can be authenticated by several means with Authentication
 Service Providers.
 
@@ -579,10 +579,10 @@ if [ "$1" -eq "0" ]; then
 	fi
 fi
 
-%post aselectextauth
+%post plugin-aselectextauth
 /usr/bin/psql -U %{dbuser} %{dbname} -f %{GFORGE_DIR}/plugins/aselectextauth/db/install_aselectextauth.psql
 
-%preun aselectextauth
+%preun plugin-aselectextauth
 /usr/bin/psql -U %{dbuser} %{dbname} -f %{GFORGE_DIR}/plugins/aselectextauth/db/uninstall_aselectextauth.psql
 
 %clean
@@ -688,7 +688,7 @@ fi
 /home/groups
 /bin/cvssh.pl
 
-%files aselectextauth
+%files plugin-aselectextauth
 %{GFORGE_DIR}/plugins/aselectextauth
 
 %files plugin-cvssyncmail
