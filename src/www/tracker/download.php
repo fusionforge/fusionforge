@@ -30,7 +30,7 @@ if (!$group_id) {
 //
 //  get the Project object
 //
-$group =& group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group) || $group->isError()) {
 	exit_no_group();
 }
@@ -40,23 +40,23 @@ if (!$group || !is_object($group) || $group->isError()) {
 //
 $ath = new ArtifactType($group,$atid);
 if (!$ath || !is_object($ath)) {
-	exit_error('Error','ArtifactType could not be created');
+	exit_error(_('ArtifactType could not be created'),'tracker');
 }
 if ($ath->isError()) {
-	exit_error('Error',$ath->getErrorMessage());
+	exit_error($ath->getErrorMessage(),'tracker');
 }
 
 $ah=new Artifact($ath,$aid);
 if (!$ah || !is_object($ah)) {
-	exit_error('ERROR','Artifact Could Not Be Created');
+	exit_error(_('Artifact Could Not Be Created'),'tracker');
 } else if ($ah->isError()) {
-	exit_error('ERROR',$ah->getErrorMessage());
+	exit_error($ah->getErrorMessage(), 'tracker');
 } else {
 	$afh=new ArtifactFile($ah,$file_id);
 	if (!$afh || !is_object($afh)) {
-		exit_error('ERROR','ArtifactFile Could Not Be Created');
+		exit_error(_('ArtifactFile Could Not Be Created'),'tracker');
 	} else if ($afh->isError()) {
-		exit_error('ERROR',$afh->getErrorMessage());
+		exit_error($afh->getErrorMessage(),'tracker');
 	} else {
 		Header ('Content-disposition: filename="'.str_replace('"', '', $afh->getName()).'"');
 		Header ("Content-type: ".$afh->getType());
