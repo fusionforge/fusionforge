@@ -44,10 +44,12 @@ function news_header($params) {
 		$menu_texts=array();
 		$menu_links=array();
 
+		$menu_texts[]=_('View News');
+		$menu_links[]='/news/?group_id='.$group_id;
 		$menu_texts[]=_('Submit');
 		$menu_links[]='/news/submit.php?group_id='.$group_id;
 		if (session_loggedin()) {
-			$project =& group_get_object($params['group']);
+			$project = group_get_object($params['group']);
 			if ($project && is_object($project) && !$project->isError()) {
 				if (forge_check_perm ('project_admin', $group_id)) {
 					$menu_texts[]=_('Admin');

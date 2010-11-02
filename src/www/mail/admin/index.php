@@ -278,7 +278,7 @@ if ($group_id) {
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');
 					} else {
-						echo '<a href="'.$currentList->getExternalAdminUrl().'">'._('Administrate').'</a></td>';
+						echo '<a href="'.$currentList->getExternalAdminUrl().'">'._('Administration').'</a></td>';
 					}
 					echo '<td style="text-align:center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {

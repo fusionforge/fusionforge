@@ -80,7 +80,7 @@ class SurveyHTML extends Error {
 				if (forge_check_perm ('project_admin', $group_id)) {
 					echo ($HTML->subMenu(
 						      array(
-							      _('Admin')
+								_('Administration')
 							      ),
 						      array(
 							      '/survey/admin/?group_id='.$group_id

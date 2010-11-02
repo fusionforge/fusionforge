@@ -74,14 +74,14 @@ function frs_header($params) {
 	if (forge_check_perm ('frs', $group_id, 'write')) {
 		echo $HTML->subMenu(
 			array(
-					_('File Release System'),
-				_('Admin'),
-				_('Reporting')
+				_('View File Releases'),
+				_('Reporting'),
+				_('Administration')
 				),
 			array(
 				'/frs/?group_id='.$group_id,
-				'/frs/admin/?group_id='.$group_id,
-				'/frs/reporting/downloads.php?group_id='.$group_id
+				'/frs/reporting/downloads.php?group_id='.$group_id,
+				'/frs/admin/?group_id='.$group_id
 				)
 			);
 	}

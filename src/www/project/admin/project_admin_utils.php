@@ -47,7 +47,7 @@ function project_admin_header($params) {
 	$labels = array();
 	$links = array();
 	
-	$labels[] = _('Project Info');
+	$labels[] = _('Project Information');
 	$labels[] = _('Users and permissions');
 	$labels[] = _('Tools');
 	$labels[] = _('Project History');

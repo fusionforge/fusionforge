@@ -53,12 +53,14 @@ function pm_header($params) {
 
 	$labels = array();
 	$links = array();
+	$labels[] = _('View Subprojects');
+	$links[]  = '/pm/?group_id='.$group_id;
 
 	if ($group_project_id) {
 		$labels[] = (($pg) ? $pg->getName() .': ' : '') ._('Browse tasks');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
 		if (session_loggedin()) {
-			$labels[] = _('Add task');
+			$labels[] = _('Add Task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
 		}
 		if ($group_project_id) {
@@ -81,10 +83,11 @@ function pm_header($params) {
 		$labels[] = _('Import/Export CSV');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=csv';
 	}
+
 	if ($pg && is_object($pg) && forge_check_perm ('pm', $pg->getID(), 'manager')) {
 		$labels[] = _('Reporting');
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
-		$labels[] = _('Admin');
+		$labels[] = _('Administration');
 		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
 	}
 	if(!empty($labels)) {

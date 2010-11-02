@@ -53,7 +53,7 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error($pgf->getErrorMessage(),'pm');
 }
 
-pm_header(array('title'=>_('Subprojects and Tasks')));
+pm_header(array('title'=>sprintf(_('Subprojects for %1$s'), $g->getPublicName())));
 
 plugin_hook("blocks", "tasks index");
 
