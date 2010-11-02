@@ -477,7 +477,7 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 %{__ln_s} ../../plugins/extratabs/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/extratabs
 
 # plugin: wiki
-%{__ln_s} ../../plugins/wiki/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/wiki
+%{__ln_s} ../plugins/wiki/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/wiki
 
 # plugin: projectlabels
 %{__ln_s} ../../plugins/projectlabels/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/projectlabels
@@ -534,6 +534,8 @@ if [ "$1" -eq "1" ]; then
 	%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
 
 	/etc/init.d/httpd restart >/dev/null 2>&1
+
+	chkconfig postgresql on >/dev/null 2>&1
 
 	# generate random hash for session_key
 	HASH=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
