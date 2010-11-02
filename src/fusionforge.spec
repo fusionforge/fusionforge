@@ -395,6 +395,7 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 ### Plugin setup ###
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/config.ini.d/
 %{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
+%{__cp} $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/httpd.d/* $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/
 %{__cp} -rp $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{GFORGE_CONF_DIR}/plugins/
 %{__rm} -f $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/README
 
@@ -723,6 +724,7 @@ fi
 %files plugin-mediawiki
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/mediawiki.ini
 %config(noreplace) %{GFORGE_CONF_DIR}/httpd.d/03mediawiki.conf
+%{_sysconfdir}/httpd/conf.d/61plugin-mediawiki
 %{GFORGE_DIR}/plugins/mediawiki/
 %{GFORGE_DIR}/www/plugins/mediawiki
 /usr/share/mediawiki/skins/gforge
@@ -776,6 +778,8 @@ fi
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/scmcvs/
 %config(noreplace) %{GFORGE_CONF_DIR}/config.ini.d/scmcvs.ini
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
+%{_sysconfdir}/httpd/conf.d/30virtualcvs
+%{_sysconfdir}/httpd/conf.d/31virtualcvs.ssl
 %{GFORGE_DIR}/plugins/scmcvs
 %{GFORGE_DIR}/www/plugins/scmcvs
 %{GFORGE_VAR_LIB}/chroot/scmrepos/cvs
@@ -809,6 +813,7 @@ fi
 %files plugin-wiki
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/wiki/
 %{_sysconfdir}/cron.d/cron.wiki
+%{_sysconfdir}/httpd/conf.d/03wiki.conf
 %{GFORGE_DIR}/plugins/wiki
 %{GFORGE_DIR}/www/wiki
 
