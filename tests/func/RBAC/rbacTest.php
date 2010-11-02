@@ -67,8 +67,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		// Grant it permissions
-		$this->select("//select[@id='tracker-data[approve_projects][-1]']", "label=Approve projects");
-		$this->select("//select[@id='tracker-data[approve_news][-1]']", "label=Approve news");
+		$this->select("//select[@name='data[approve_projects][-1]']", "label=Approve projects");
+		$this->select("//select[@name='data[approve_news][-1]']", "label=Approve news");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -79,16 +79,16 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
 		$this->waitForPageToLoad("30000");
 
-		$this->assertSelected("//select[@id='tracker-data[approve_projects][-1]']", "Approve projects");
-		$this->assertNotSelected("//select[@id='tracker-data[approve_projects][-1]']", "No access");
-		$this->assertSelected("//select[@id='tracker-data[approve_news][-1]']", "Approve news");
+		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
+		$this->assertNotSelected("//select[@name='data[approve_projects][-1]']", "No access");
+		$this->assertSelected("//select[@name='data[approve_news][-1]']", "Approve news");
 		
 		// Whoops, we don't actually want the news moderation bit, unset it
-		$this->select("//select[@id='tracker-data[approve_news][-1]']", "label=No access");
+		$this->select("//select[@name='data[approve_news][-1]']", "label=No access");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
-		$this->assertSelected("//select[@id='tracker-data[approve_projects][-1]']", "Approve projects");
-		$this->assertSelected("//select[@id='tracker-data[approve_news][-1]']", "No access");
+		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
+		$this->assertSelected("//select[@name='data[approve_news][-1]']", "No access");
 
 		// Create users for "Project approvers" and "News moderators" roles
 		$this->createUser ("projapp") ;
