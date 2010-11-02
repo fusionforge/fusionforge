@@ -4103,7 +4103,7 @@ src/www/images/ic/write16w.png -text svneol=unset#image/png
 src/www/images/ic/xmail16w.png -text svneol=unset#image/png
 src/www/images/icon.png -text svneol=unset#image/png
 src/www/images/img-shadow.gif -text svneol=unset#image/gif
-src/www/images/img-shadowAlpha.png -text svneol=unset#unset
+src/www/images/img-shadowAlpha.png -text svneol=unset#image/png
 src/www/images/magnifier.png -text svneol=unset#image/png
 src/www/images/msg.png -text svneol=unset#image/png
 src/www/images/opensearchdescription.png -text svneol=unset#image/png
@@ -4274,119 +4274,119 @@ src/www/themes/funky/README.txt -text
 src/www/themes/funky/Theme.class.php -text
 src/www/themes/funky/css/theme-pages.css -text
 src/www/themes/funky/css/theme.css -text
-src/www/themes/funky/images/category.png -text
-src/www/themes/funky/images/clear.png -text
-src/www/themes/funky/images/docman/configure-directory.png -text
-src/www/themes/funky/images/docman/delete-directory.png -text
-src/www/themes/funky/images/docman/directory.png -text
+src/www/themes/funky/images/category.png -text svneol=unset#image/png
+src/www/themes/funky/images/clear.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/configure-directory.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/delete-directory.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/directory.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/document-reserved.png -text svneol=unset#image/png
-src/www/themes/funky/images/docman/edit-file.png -text
+src/www/themes/funky/images/docman/edit-file.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/edit-forbidden.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/enforce-document.png -text svneol=unset#image/png
-src/www/themes/funky/images/docman/file_type_archive.png -text
-src/www/themes/funky/images/docman/file_type_html.png -text
-src/www/themes/funky/images/docman/file_type_image.png -text
-src/www/themes/funky/images/docman/file_type_pdf.png -text
-src/www/themes/funky/images/docman/file_type_plain.png -text
-src/www/themes/funky/images/docman/file_type_presentation.png -text
-src/www/themes/funky/images/docman/file_type_spreadsheet.png -text
-src/www/themes/funky/images/docman/file_type_unknown.png -text
-src/www/themes/funky/images/docman/file_type_writer.png -text
-src/www/themes/funky/images/docman/image-x-generic.png -text
-src/www/themes/funky/images/docman/insert-directory.png -text
-src/www/themes/funky/images/docman/insert-file.png -text
-src/www/themes/funky/images/docman/new.png -text
+src/www/themes/funky/images/docman/file_type_archive.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_html.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_image.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_pdf.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_plain.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_presentation.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_spreadsheet.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_unknown.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/file_type_writer.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/image-x-generic.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/insert-directory.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/insert-file.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/new.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/release-document.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/reserve-document.png -text svneol=unset#image/png
-src/www/themes/funky/images/docman/trash-empty.png -text
+src/www/themes/funky/images/docman/trash-empty.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/trash-forbidden.png -text svneol=unset#image/png
-src/www/themes/funky/images/header/header-bg.old.2.png -text
-src/www/themes/funky/images/header/header-bg.old.png -text
-src/www/themes/funky/images/header/header-bg.png -text
-src/www/themes/funky/images/header/tabs-bg.png -text
+src/www/themes/funky/images/header/header-bg.old.2.png -text svneol=unset#image/png
+src/www/themes/funky/images/header/header-bg.old.png -text svneol=unset#image/png
+src/www/themes/funky/images/header/header-bg.png -text svneol=unset#image/png
+src/www/themes/funky/images/header/tabs-bg.png -text svneol=unset#image/png
 src/www/themes/funky/images/header/top-logo.blank.gif -text svneol=unset#image/gif
-src/www/themes/funky/images/header/top-logo.png -text
+src/www/themes/funky/images/header/top-logo.png -text svneol=unset#image/png
 src/www/themes/funky/images/header/top-middle.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/header/top-right.gif -text svneol=unset#image/gif
-src/www/themes/funky/images/ic/acl_roles20.png -text
-src/www/themes/funky/images/ic/adddoc12.png -text
-src/www/themes/funky/images/ic/btn_down.png -text
-src/www/themes/funky/images/ic/btn_up.png -text
-src/www/themes/funky/images/ic/caret.png -text
-src/www/themes/funky/images/ic/cfolder15.png -text
-src/www/themes/funky/images/ic/check.png -text
-src/www/themes/funky/images/ic/close.png -text
-src/www/themes/funky/images/ic/close_hover.png -text
-src/www/themes/funky/images/ic/cvs16b.png -text
-src/www/themes/funky/images/ic/docman16b.png -text
-src/www/themes/funky/images/ic/forum20g.png -text
-src/www/themes/funky/images/ic/forum20w.png -text
+src/www/themes/funky/images/ic/acl_roles20.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/adddoc12.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/btn_down.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/btn_up.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/caret.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/cfolder15.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/check.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/close.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/close_hover.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/cvs16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/docman16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/forum20g.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/forum20w.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/forum_add.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/forum_delete.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/forum_edit.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/forum_move.gif -text svneol=unset#image/gif
-src/www/themes/funky/images/ic/ftp16b.png -text
-src/www/themes/funky/images/ic/halfcheck.png -text
-src/www/themes/funky/images/ic/home16b.png -text
-src/www/themes/funky/images/ic/index.png -text
-src/www/themes/funky/images/ic/mail16b.png -text
-src/www/themes/funky/images/ic/mail16d.png -text
-src/www/themes/funky/images/ic/mail16w.png -text
-src/www/themes/funky/images/ic/manual16c.png -text
-src/www/themes/funky/images/ic/msg.png -text
-src/www/themes/funky/images/ic/ofolder15.png -text
-src/www/themes/funky/images/ic/pencil.png -text
-src/www/themes/funky/images/ic/rss.png -text
-src/www/themes/funky/images/ic/save.png -text
+src/www/themes/funky/images/ic/ftp16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/halfcheck.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/home16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/index.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/mail16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/mail16d.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/mail16w.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/manual16c.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/msg.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/ofolder15.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/pencil.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/rss.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/save.png -text svneol=unset#image/png
 src/www/themes/funky/images/ic/spinner.gif -text svneol=unset#image/gif
-src/www/themes/funky/images/ic/survey16b.png -text
-src/www/themes/funky/images/ic/taskman20g.png -text
-src/www/themes/funky/images/ic/taskman20w.png -text
-src/www/themes/funky/images/ic/toggle_minus.png -text
-src/www/themes/funky/images/ic/toggle_minus_hover.png -text
-src/www/themes/funky/images/ic/toggle_plus.png -text
-src/www/themes/funky/images/ic/tracker20g.png -text
-src/www/themes/funky/images/ic/tracker20w.png -text
-src/www/themes/funky/images/ic/trash-x.png -text
-src/www/themes/funky/images/ic/trash.png -text
-src/www/themes/funky/images/ic/wiki20g.png -text
-src/www/themes/funky/images/ic/write16w.png -text
-src/www/themes/funky/images/ic/xmail16w.png -text
-src/www/themes/funky/images/layout/2-columns.png -text
-src/www/themes/funky/images/layout/3-columns.png -text
-src/www/themes/funky/images/layout/custom.png -text
+src/www/themes/funky/images/ic/survey16b.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/taskman20g.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/taskman20w.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/toggle_minus.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/toggle_minus_hover.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/toggle_plus.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/tracker20g.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/tracker20w.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/trash-x.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/trash.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/wiki20g.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/write16w.png -text svneol=unset#image/png
+src/www/themes/funky/images/ic/xmail16w.png -text svneol=unset#image/png
+src/www/themes/funky/images/layout/2-columns.png -text svneol=unset#image/png
+src/www/themes/funky/images/layout/3-columns.png -text svneol=unset#image/png
+src/www/themes/funky/images/layout/custom.png -text svneol=unset#image/png
 src/www/themes/funky/images/layout/layouts.xcf -text
-src/www/themes/funky/images/layout/left.png -text
-src/www/themes/funky/images/layout/right.png -text
-src/www/themes/funky/images/notes.png -text
-src/www/themes/funky/images/search-logo.png -text
+src/www/themes/funky/images/layout/left.png -text svneol=unset#image/png
+src/www/themes/funky/images/layout/right.png -text svneol=unset#image/png
+src/www/themes/funky/images/notes.png -text svneol=unset#image/png
+src/www/themes/funky/images/search-logo.png -text svneol=unset#image/png
 src/www/themes/funky/images/spacer.gif -text svneol=unset#image/gif
-src/www/themes/funky/images/t.png -text
-src/www/themes/funky/images/t2.png -text
+src/www/themes/funky/images/t.png -text svneol=unset#image/png
+src/www/themes/funky/images/t2.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/help.css -text
 src/www/themes/funky/viewvc/help_dirview.html -text
 src/www/themes/funky/viewvc/help_log.html -text
 src/www/themes/funky/viewvc/help_query.html -text
 src/www/themes/funky/viewvc/help_rootview.html -text
-src/www/themes/funky/viewvc/images/annotate.png -text
-src/www/themes/funky/viewvc/images/back.png -text
-src/www/themes/funky/viewvc/images/back_small.png -text
-src/www/themes/funky/viewvc/images/broken.png -text
+src/www/themes/funky/viewvc/images/annotate.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/back.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/back_small.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/broken.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/chalk.jpg -text
-src/www/themes/funky/viewvc/images/cvsgraph_16x16.png -text
-src/www/themes/funky/viewvc/images/cvsgraph_32x32.png -text
-src/www/themes/funky/viewvc/images/diff.png -text
-src/www/themes/funky/viewvc/images/dir.png -text
-src/www/themes/funky/viewvc/images/down.png -text
-src/www/themes/funky/viewvc/images/download.png -text
+src/www/themes/funky/viewvc/images/cvsgraph_16x16.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/cvsgraph_32x32.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/diff.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/dir.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/down.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/download.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/feed-icon-16x16.jpg -text
-src/www/themes/funky/viewvc/images/forward.png -text
-src/www/themes/funky/viewvc/images/list.png -text
-src/www/themes/funky/viewvc/images/log.png -text
-src/www/themes/funky/viewvc/images/logo.png -text
-src/www/themes/funky/viewvc/images/text.png -text
-src/www/themes/funky/viewvc/images/up.png -text
-src/www/themes/funky/viewvc/images/view.png -text
+src/www/themes/funky/viewvc/images/forward.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/list.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/log.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/logo.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/text.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/up.png -text svneol=unset#image/png
+src/www/themes/funky/viewvc/images/view.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/styles.css -text
 src/www/themes/gforge/COPYING -text
 src/www/themes/gforge/README.txt -text
