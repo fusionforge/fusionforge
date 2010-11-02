@@ -128,7 +128,6 @@ class RBAC extends FForge_SeleniumTestCase
 
 		// Register unprivileged user
 		$this->createUser ("toto") ;
-		$this->switchUser ("toto") ;
 
 		// Temporarily grant project approval rights to user
 		$this->click("link=Site Admin");
@@ -156,6 +155,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("toto Lastname"));
 
 		// Try approving it as two users without the right to do so
+		$this->switchUser ("toto") ;
 		$this->open( ROOT . '/admin/approve-pending.php') ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isPermissionDenied()) ;
