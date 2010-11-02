@@ -101,13 +101,15 @@ $SCRIPT_EXTENSION[15] = '.sql';
 $SCRIPT_EXTENSION[16] = '.cs';
 
 function snippet_header($params) {
-	if (!forge_get_config('use_snippet')) {
-		exit_disabled();
-	}
 	global $HTML;
 	global $feedback;
 	global $warning_msg;
 	global $error_msg;
+
+	if (!forge_get_config('use_snippet')) {
+		exit_disabled();
+	}
+
 	$HTML->header($params);
 	if (!empty($error_msg)) {
 		html_feedback_top($error_msg);

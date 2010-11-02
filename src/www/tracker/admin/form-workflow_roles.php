@@ -29,9 +29,7 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 		$from = getIntFromRequest('from');
 		$next = getIntFromRequest('next');
 		
-		//
 //	FORM TO UPDATE ARTIFACT TYPES
-//
 		$ath->adminHeader(array ('title'=> _('Configure allowed roles'),'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
 
 		/*
