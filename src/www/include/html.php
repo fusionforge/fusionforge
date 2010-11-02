@@ -649,7 +649,7 @@ function html_buildcheckboxarray($options,$name,$checked_array) {
 }
 
 /**
- *	site_user_header() - everything required to handle security and
+ *	site_header() - everything required to handle security and
  *	add navigation for user pages like /my/ and /account/
  *
  *	@param		array	Must contain $user_id
