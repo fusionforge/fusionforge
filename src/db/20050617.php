@@ -4,7 +4,7 @@
  * Extra field alias - Create aliases for the extra fields
  *
  * Copyright 2004 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *

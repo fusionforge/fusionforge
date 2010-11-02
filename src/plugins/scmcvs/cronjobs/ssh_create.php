@@ -5,7 +5,7 @@
  *
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright (C) 2009  Sylvain Beucler
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *

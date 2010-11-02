@@ -2,7 +2,7 @@
 # GForge
 # Copyright 1999-2001 (c) VA Linux Systems
 # Copyright 2002-2004 (c) GForge, LLC, Ognyan Kulev
-# http://gforge.org/
+# http://fusionforge.org/
 #
 # YOUR php.ini FOR PHP CLI MUST HAVE APPROPRIATE include_path
 

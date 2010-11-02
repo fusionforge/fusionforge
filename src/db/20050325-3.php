@@ -4,7 +4,7 @@
  * GForge Extra Field Conversion Script
  *
  * Copyright 2004 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *

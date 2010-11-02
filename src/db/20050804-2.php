@@ -4,7 +4,7 @@
  * GForge Group Docman updater
  *
  * Copyright 2004 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *

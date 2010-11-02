@@ -4,7 +4,7 @@
  * FusionForge Installation Dependency Setup
  *
  * Copyright 2006 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * @version
  *

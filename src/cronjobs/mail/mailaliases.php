@@ -4,7 +4,7 @@
  * GForge Mail Aliases Facility
  *
  * Copyright 2002-2004 GForge, LLC
- * http://gforge.org/
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge.
  *
