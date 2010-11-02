@@ -1,4 +1,4 @@
-<?
+<?php
 
 /* Compatibility file installed after move of real env.inc.php to common/include */
 
