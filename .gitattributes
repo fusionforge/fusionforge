@@ -1242,6 +1242,7 @@ src/plugins/contribtracker/db/contribtracker-init.sql -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker.shortdesc -text
 src/plugins/contribtracker/packaging/install/plugin-contribtracker -text
+src/plugins/contribtracker/packaging/links/plugin-contribtracker -text
 src/plugins/contribtracker/www/actor_logo.php -text
 src/plugins/contribtracker/www/global_admin.php -text
 src/plugins/contribtracker/www/index.php -text
@@ -1269,6 +1270,7 @@ src/plugins/extratabs/packaging/control/170plugin-extratabs.shortdesc -text
 src/plugins/extratabs/packaging/dirs/plugin-extratabs -text
 src/plugins/extratabs/packaging/docs/plugin-extratabs -text
 src/plugins/extratabs/packaging/install/plugin-extratabs -text
+src/plugins/extratabs/packaging/links/plugin-extratabs -text
 src/plugins/extratabs/www/index.php -text
 src/plugins/fckeditor/common/fckeditorPlugin.class.php -text
 src/plugins/fckeditor/packaging/docs/plugin-fckeditor -text
@@ -1782,6 +1784,7 @@ src/plugins/globalsearch/packaging/cron.d/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/dirs/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/docs/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
+src/plugins/globalsearch/packaging/links/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
 src/plugins/gravatar/common/gravatarPlugin.class.php -text
@@ -1929,6 +1932,7 @@ src/plugins/projectlabels/packaging/control/190plugin-projectlabels.shortdesc -t
 src/plugins/projectlabels/packaging/dirs/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/docs/plugin-projectlabels -text
 src/plugins/projectlabels/packaging/install/plugin-projectlabels -text
+src/plugins/projectlabels/packaging/links/plugin-projectlabels -text
 src/plugins/projectlabels/www/index.php -text
 src/plugins/projects_hierarchy/AUTHORS -text
 src/plugins/projects_hierarchy/COPYING -text

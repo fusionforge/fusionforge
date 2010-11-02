@@ -1,4 +1,4 @@
-plugins/extratabs/bin/*		usr/share/gforge/plugins/extratabs/bin/
-plugins/extratabs/common/*	usr/share/gforge/plugins/extratabs/common/
-plugins/extratabs/db/*		usr/share/gforge/plugins/extratabs/lib/
-plugins/extratabs/www/*		usr/share/gforge/www/plugins/extratabs/
+plugins/extratabs/bin/*	usr/share/@OLDPACKAGE@/plugins/extratabs/bin/
+plugins/extratabs/common/* usr/share/@OLDPACKAGE@/plugins/extratabs/common/
+plugins/extratabs/db/* usr/share/@OLDPACKAGE@/plugins/extratabs/db/
+plugins/extratabs/www/* usr/share/@OLDPACKAGE@/plugins/extratabs/www/
