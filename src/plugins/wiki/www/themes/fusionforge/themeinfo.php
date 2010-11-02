@@ -41,7 +41,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens {
 
         // Display a warning banner for internal users when the wiki is opened
         // to external users.
-        if ($project->getIsExternal()) {
+        if (method_exists($project, 'getIsExternal') && $project->getIsExternal()) {
         	$external_user = false;
         	if (session_loggedin()) {
         		$user = session_get_user();

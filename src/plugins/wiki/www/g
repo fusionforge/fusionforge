@@ -59,7 +59,8 @@ if (!$group_id || !$project) {
 
     $group_name = $project->getUnixName();
     $group_public_name = $project->getPublicName();
-    $is_external = $project->getIsExternal();
+
+    $is_external = method_exists($project, 'getIsExternal') && $project->getIsExternal();
 
     $wc = new WikiConfig($group_id);
 
