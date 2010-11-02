@@ -347,7 +347,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		// Use template only for the browse (not for query or mass update)
 		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE') 
 			&& $this->data_array['custom_renderer']) {
-			return $this->data_array['custom_renderer'];
+			return preg_replace('/<!--(\S+.*?)-->/','{$\\1}',$this->data_array['custom_renderer']);
 		} else {
 			return $this->generateRenderHTML($filter, $mode);
 		}
@@ -382,17 +382,17 @@ class ArtifactTypeHtml extends ArtifactType {
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT ||
 				$efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
@@ -408,7 +408,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					$colspan=1;
 				}
 				$return .= '
-					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'<!--PostName:'.$efarr[$i]['field_name'].'--><br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
@@ -423,17 +423,17 @@ class ArtifactTypeHtml extends ArtifactType {
 					$colspan=1;
 				}
 				$return .= '
-					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'<!--PostName:'.$efarr[$i]['field_name'].'--><br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 
 				$return .= '
-					<td width="50%" valign="top">'.$name.'<br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="50%" valign="top">'.$name.'<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 
@@ -448,7 +448,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					$colspan=1;
 				}
 				$return .= '
-					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'<!--PostName:'.$efarr[$i]['field_name'].'--><br /><!--'.$efarr[$i]['field_name'].'--></td>';
+					<td width="'.(50*$colspan).'%" colspan="'.$colspan.'" valign="top">'.$name.'{$PostName:'.$efarr[$i]['field_name'].'}<br />{$'.$efarr[$i]['field_name'].'}</td>';
 
 			}
 			$col_count++;
