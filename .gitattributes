@@ -555,7 +555,7 @@ plugins/old/webcalendar/www/help_import.php -text
 plugins/old/webcalendar/www/help_index.php -text
 plugins/old/webcalendar/www/help_layers.php -text
 plugins/old/webcalendar/www/help_pref.php -text
-plugins/old/webcalendar/www/htmlarea-3.0rc1.zip -text
+plugins/old/webcalendar/www/htmlarea-3.0rc1.zip -text svneol=unset#application/zip
 plugins/old/webcalendar/www/import.php -text
 plugins/old/webcalendar/www/import_handler.php -text
 plugins/old/webcalendar/www/import_ical.php -text
