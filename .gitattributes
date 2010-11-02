@@ -4372,14 +4372,14 @@ src/www/themes/funky/viewvc/images/annotate.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/back.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/back_small.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/broken.png -text svneol=unset#image/png
-src/www/themes/funky/viewvc/images/chalk.jpg -text
+src/www/themes/funky/viewvc/images/chalk.jpg -text svneol=unset#image/jpeg
 src/www/themes/funky/viewvc/images/cvsgraph_16x16.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/cvsgraph_32x32.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/diff.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/dir.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/down.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/download.png -text svneol=unset#image/png
-src/www/themes/funky/viewvc/images/feed-icon-16x16.jpg -text
+src/www/themes/funky/viewvc/images/feed-icon-16x16.jpg -text svneol=unset#image/jpeg
 src/www/themes/funky/viewvc/images/forward.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/list.png -text svneol=unset#image/png
 src/www/themes/funky/viewvc/images/log.png -text svneol=unset#image/png
