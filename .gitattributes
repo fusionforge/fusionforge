@@ -1280,7 +1280,7 @@ src/plugins/fckeditor/www/_samples/html/assets/sample14.styles.css -text
 src/plugins/fckeditor/www/_samples/html/assets/sample15.config.js -text
 src/plugins/fckeditor/www/_samples/html/assets/sample16.config.js -text
 src/plugins/fckeditor/www/_samples/html/assets/sample16.fla -text svneol=unset#unset
-src/plugins/fckeditor/www/_samples/html/assets/sample16.swf -text svneol=unset#unset
+src/plugins/fckeditor/www/_samples/html/assets/sample16.swf -text svneol=unset#application/x-shockwave-flash
 src/plugins/fckeditor/www/_samples/html/assets/swfobject.js -text
 src/plugins/fckeditor/www/_samples/html/sample01.html -text
 src/plugins/fckeditor/www/_samples/html/sample02.html -text
@@ -3535,7 +3535,7 @@ src/plugins/wiki/www/themes/Sidebar/jscalendar/lang/calendar-sv.js -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/lang/calendar-tr.js -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/lang/calendar-zh.js -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/menuarrow.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Sidebar/ora.swf -text
+src/plugins/wiki/www/themes/Sidebar/ora.swf -text svneol=unset#application/x-shockwave-flash
 src/plugins/wiki/www/themes/Sidebar/sidebar-min.css -text
 src/plugins/wiki/www/themes/Sidebar/sidebar.css -text
 src/plugins/wiki/www/themes/Sidebar/templates/actionbar.tmpl -text
@@ -3695,8 +3695,8 @@ src/plugins/wiki/www/themes/default/buttons/valid-rss.png -text svneol=unset#ima
 src/plugins/wiki/www/themes/default/buttons/valid-xhtml10.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/vcss.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/xml.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/flowplayer-3.2.4.swf -text
-src/plugins/wiki/www/themes/default/flowplayer.controls-3.2.2.swf -text
+src/plugins/wiki/www/themes/default/flowplayer-3.2.4.swf -text svneol=unset#application/x-shockwave-flash
+src/plugins/wiki/www/themes/default/flowplayer.controls-3.2.2.swf -text svneol=unset#application/x-shockwave-flash
 src/plugins/wiki/www/themes/default/highlight-min.css -text
 src/plugins/wiki/www/themes/default/highlight.css -text
 src/plugins/wiki/www/themes/default/images/Edit-chalk-10g.png -text svneol=unset#image/png
