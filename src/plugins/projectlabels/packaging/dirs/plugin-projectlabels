@@ -1,4 +1,4 @@
-usr/share/gforge/plugins/projectlabels/bin
-usr/share/gforge/plugins/projectlabels/lib
-usr/share/gforge/www/plugins/projectlabels
-usr/share/gforge/plugins/projectlabels/common
+usr/share/@OLDPACKAGE@/plugins/projectlabels/bin
+usr/share/@OLDPACKAGE@/plugins/projectlabels/lib
+usr/share/@OLDPACKAGE@/plugins/projectlabels/www
+usr/share/@OLDPACKAGE@/plugins/projectlabels/common

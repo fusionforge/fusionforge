@@ -1,4 +1,4 @@
-usr/share/gforge/plugins/globalsearch/bin
-usr/share/gforge/plugins/globalsearch/lib
-usr/share/gforge/www/plugins/globalsearch
-usr/share/gforge/plugins/globalsearch/common
+usr/share/@OLDPACKAGE@/plugins/globalsearch/bin
+usr/share/@OLDPACKAGE@/plugins/globalsearch/lib
+usr/share/@OLDPACKAGE@/plugins/globalsearch/www
+usr/share/@OLDPACKAGE@/plugins/globalsearch/common

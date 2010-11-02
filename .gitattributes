@@ -1241,6 +1241,7 @@ src/plugins/contribtracker/common/contribtracker-init.php -text
 src/plugins/contribtracker/db/contribtracker-init.sql -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker -text
 src/plugins/contribtracker/packaging/control/200plugin-contribtracker.shortdesc -text
+src/plugins/contribtracker/packaging/dirs/plugin-contribtracker -text
 src/plugins/contribtracker/packaging/install/plugin-contribtracker -text
 src/plugins/contribtracker/packaging/links/plugin-contribtracker -text
 src/plugins/contribtracker/www/actor_logo.php -text
