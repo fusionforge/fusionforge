@@ -275,7 +275,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				$str = $this->renderRelationField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
 				if ($mode == 'UPDATE') {
-					$post_name = html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')", 'border'=>"0"));
+					$post_name = html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			}
 			$template = str_replace('<!--PostName:'.$efarr[$i]['field_name'].'-->',$post_name,$template);

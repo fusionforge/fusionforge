@@ -161,6 +161,10 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<td>
 		</td>
 	</tr>
+	<?php
+		$ath->renderRelatedTasks($group, $ah);
+		$ath->renderFiles($group_id, $ah);
+	?>
 	<tr>
 		<td><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
 		<input id="tracker-summary" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php

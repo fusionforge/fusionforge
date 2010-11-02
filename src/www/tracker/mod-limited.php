@@ -82,7 +82,7 @@ if (session_loggedin()) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				$submittedBy = $ah->getSubmittedBy();
 				?>
-				(<tt><?php echo util_make_link ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
+				(<tt><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
 			<?php } ?>
 		</td>
 		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
@@ -128,6 +128,7 @@ if (session_loggedin()) {
 	</tr>
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
+		$ath->renderFiles($group_id, $ah);
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
