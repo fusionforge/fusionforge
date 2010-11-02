@@ -26,6 +26,10 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'scm/include/scm_utils.php';    
 
 $group_id = getIntFromRequest("group_id");
+$group = group_get_object($group_id);
+if (!$group || !is_object($group)) {
+	exit_no_group();
+}
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 
 plugin_hook ("blocks", "scm index");
