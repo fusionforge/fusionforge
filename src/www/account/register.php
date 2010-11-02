@@ -149,7 +149,7 @@ if (forge_get_config('require_unique_email')) {
 } else {
 	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();
 } ?><br />
-<input type="text" name="unix_name" value="<?php print(htmlspecialchars(stripslashes($unix_name))); ?>" />
+<input type="text" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>" />
 </p>
 <p>
 <?php echo _('Password (min. 6 chars):'); echo utils_requiredField(); ?><br />
