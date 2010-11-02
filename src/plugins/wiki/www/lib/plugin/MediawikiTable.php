@@ -1,9 +1,9 @@
 <?php // -*-php-*-
-// rcs_id('$Id: MediawikiTable.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: MediawikiTable.php 7721 2010-11-02 17:04:15Z vargenau $');
 /*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -245,10 +245,20 @@ extends WikiPlugin
                 }
                 $row->pushContent($cell);
             }
-            $tbody->pushContent($row);
-            $table->pushContent($tbody);
+            // If user put and extra "|-" without cells just before "|}"
+            // we ignore it to get valid XHTML code
+            if (!empty($row->_content)) {
+                $tbody->pushContent($row);
+            }
+            if (isset($tbody) && !empty($tbody->_content)) {
+                $table->pushContent($tbody);
+            }
         }
-        return $table;
+        if (isset($table) && !empty($table->_content)) {
+            return $table;
+        } else {
+            return HTML::raw('');
+        }
     }
 }
 
