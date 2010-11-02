@@ -68,7 +68,7 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->words = $words;
 		$this->isExact = $isExact;
 		
-		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, '', $groupId);
 	}
 	
 	/**
