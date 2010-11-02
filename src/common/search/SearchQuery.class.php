@@ -238,9 +238,9 @@ class SearchQuery extends Error {
 	 */
 	function getOperator() {
 		if($this->isExact) {
-			return 'AND';
+			return ' AND ';
 		} else {
-			return 'OR';
+			return ' OR ';
 		}
 	}
 	
