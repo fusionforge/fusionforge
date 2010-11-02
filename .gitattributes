@@ -1099,7 +1099,7 @@ src/lib/vendor/jquery-tipsy/docs/src/javascripts -text
 src/lib/vendor/jquery-tipsy/docs/src/project.yml -text
 src/lib/vendor/jquery-tipsy/docs/src/stylesheets -text
 src/lib/vendor/jquery-tipsy/docs/src/tipsy-docs.css -text
-src/lib/vendor/jquery-tipsy/src/images/tipsy.gif -text svneol=unset#unset
+src/lib/vendor/jquery-tipsy/src/images/tipsy.gif -text svneol=unset#image/gif
 src/lib/vendor/jquery-tipsy/src/javascripts/jquery.tipsy.js -text
 src/lib/vendor/jquery-tipsy/src/stylesheets/tipsy.css -text
 src/lib/vendor/jquery/jquery-1.4.2.min.js -text
@@ -4102,7 +4102,7 @@ src/www/images/ic/trash.png -text svneol=unset#image/png
 src/www/images/ic/write16w.png -text svneol=unset#image/png
 src/www/images/ic/xmail16w.png -text svneol=unset#image/png
 src/www/images/icon.png -text svneol=unset#image/png
-src/www/images/img-shadow.gif -text svneol=unset#unset
+src/www/images/img-shadow.gif -text svneol=unset#image/gif
 src/www/images/img-shadowAlpha.png -text svneol=unset#unset
 src/www/images/magnifier.png -text svneol=unset#image/png
 src/www/images/msg.png -text svneol=unset#image/png
@@ -4304,10 +4304,10 @@ src/www/themes/funky/images/header/header-bg.old.2.png -text
 src/www/themes/funky/images/header/header-bg.old.png -text
 src/www/themes/funky/images/header/header-bg.png -text
 src/www/themes/funky/images/header/tabs-bg.png -text
-src/www/themes/funky/images/header/top-logo.blank.gif -text
+src/www/themes/funky/images/header/top-logo.blank.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/header/top-logo.png -text
-src/www/themes/funky/images/header/top-middle.gif -text
-src/www/themes/funky/images/header/top-right.gif -text
+src/www/themes/funky/images/header/top-middle.gif -text svneol=unset#image/gif
+src/www/themes/funky/images/header/top-right.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/acl_roles20.png -text
 src/www/themes/funky/images/ic/adddoc12.png -text
 src/www/themes/funky/images/ic/btn_down.png -text
@@ -4321,10 +4321,10 @@ src/www/themes/funky/images/ic/cvs16b.png -text
 src/www/themes/funky/images/ic/docman16b.png -text
 src/www/themes/funky/images/ic/forum20g.png -text
 src/www/themes/funky/images/ic/forum20w.png -text
-src/www/themes/funky/images/ic/forum_add.gif -text
-src/www/themes/funky/images/ic/forum_delete.gif -text
-src/www/themes/funky/images/ic/forum_edit.gif -text
-src/www/themes/funky/images/ic/forum_move.gif -text
+src/www/themes/funky/images/ic/forum_add.gif -text svneol=unset#image/gif
+src/www/themes/funky/images/ic/forum_delete.gif -text svneol=unset#image/gif
+src/www/themes/funky/images/ic/forum_edit.gif -text svneol=unset#image/gif
+src/www/themes/funky/images/ic/forum_move.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/ftp16b.png -text
 src/www/themes/funky/images/ic/halfcheck.png -text
 src/www/themes/funky/images/ic/home16b.png -text
@@ -4338,7 +4338,7 @@ src/www/themes/funky/images/ic/ofolder15.png -text
 src/www/themes/funky/images/ic/pencil.png -text
 src/www/themes/funky/images/ic/rss.png -text
 src/www/themes/funky/images/ic/save.png -text
-src/www/themes/funky/images/ic/spinner.gif -text svneol=unset#unset
+src/www/themes/funky/images/ic/spinner.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/ic/survey16b.png -text
 src/www/themes/funky/images/ic/taskman20g.png -text
 src/www/themes/funky/images/ic/taskman20w.png -text
@@ -4360,7 +4360,7 @@ src/www/themes/funky/images/layout/left.png -text
 src/www/themes/funky/images/layout/right.png -text
 src/www/themes/funky/images/notes.png -text
 src/www/themes/funky/images/search-logo.png -text
-src/www/themes/funky/images/spacer.gif -text
+src/www/themes/funky/images/spacer.gif -text svneol=unset#image/gif
 src/www/themes/funky/images/t.png -text
 src/www/themes/funky/images/t2.png -text
 src/www/themes/funky/viewvc/help.css -text
@@ -4459,7 +4459,7 @@ src/www/themes/gforge/images/ic/ofolder15.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/pencil.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/rss.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/save.png -text svneol=unset#image/png
-src/www/themes/gforge/images/ic/spinner.gif -text svneol=unset#unset
+src/www/themes/gforge/images/ic/spinner.gif -text svneol=unset#image/gif
 src/www/themes/gforge/images/ic/survey16b.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/taskman20g.png -text svneol=unset#image/png
 src/www/themes/gforge/images/ic/taskman20w.png -text svneol=unset#image/png
