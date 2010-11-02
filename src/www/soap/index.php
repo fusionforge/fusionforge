@@ -1,6 +1,8 @@
 <?php
 
 $no_gz_buffer=true;
+$no_debug     = true;
+
 // 0. Include GForge files for access to GForge system
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
