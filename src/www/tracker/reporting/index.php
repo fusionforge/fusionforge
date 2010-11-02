@@ -52,14 +52,14 @@ $report->site_start_date=db_result($res,0,'register_time');
 if (!$start || !$end) $z =& $report->getMonthStartArr();
 
 if (!$start) {
-	$start = $z[count($z)-1];
+	$start = $z[0];
 }
-if (!$end || $end <= $start) {
-	$end = $z[0];
+if (!$end) {
+	$end = $z[count($z)-1];
 }
 if ($end < $start) list($start, $end) = array($end, $start);
 
-$group =& group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
         exit_no_group();
 }
@@ -67,7 +67,7 @@ if ($group->isError()) {
         if($group->isPermissionDeniedError()) {
                 exit_permission_denied($group->getErrorMessage());
         } else {
-                exit_error(_('Error'), $group->getErrorMessage());
+                exit_error($group->getErrorMessage(), 'tracker');
         }
 }
 

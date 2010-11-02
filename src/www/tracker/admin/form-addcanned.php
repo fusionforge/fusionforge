@@ -24,10 +24,8 @@
 //
 //  FORM TO ADD CANNED RESPONSES
 //
-$title = sprintf(_('Add/Change Canned Responses to %s'), $ath->getName()) ;
+$title = sprintf(_('Add/Update Canned Responses to %s'), $ath->getName()) ;
 $ath->adminHeader(array ('title'=>$title));
-
-echo "<h1>".$title."</h1>";
 
 		/*
 			List of existing canned responses
@@ -38,9 +36,7 @@ echo "<h1>".$title."</h1>";
 
 		if ($result && $rows > 0) {
 			//code to show existing responses and link to update page
-			echo '
-			<h2>'._('Existing Responses').':</h2>
-			<p>&nbsp;</p>';
+			echo '<h2>'._('Existing Responses').'</h2>';
 			$title_arr=array();
 			$title_arr[]=_('ID');
 			$title_arr[]=_('Title');
@@ -58,7 +54,7 @@ echo "<h1>".$title."</h1>";
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo "\n<h1>"._('No responses set up in this group')."</h1>";
+			echo '<p class="warning_msg">'._('No responses set up in this group').'</p>';
 		}
 		?>
 		<p><?php echo _('Creating useful generic messages can save you a lot of time when handling common artifact requests.') ?></p>

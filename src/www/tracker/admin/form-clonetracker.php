@@ -49,8 +49,6 @@ if (!$g || !is_object($g)) {
 
 		$ath->adminHeader(array ('title'=>_('Clone Tracker')));
 
-		echo "<h1>"._('Clone Tracker')."</h1>";
-
 		if (empty($ata)) {
 			echo '<div class="warning_msg">'._('The site administrator must first set up template trackers in the template projet with default values and set permissions propertly so you can access them.').'</div>';
 		} else {

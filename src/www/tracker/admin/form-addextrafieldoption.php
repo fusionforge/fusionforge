@@ -36,7 +36,6 @@
 		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
 		$ath->adminHeader(array ('title'=>$title));
 
-		echo "<h1>".$title."</h1>";
 		$rows=count($efearr);
 		if ($rows > 0) {
 			
@@ -103,10 +102,7 @@
 		<?php echo $ath->statusBox('status_id',1,false,false); ?>
 		<?php } ?>
 		&nbsp;&nbsp;<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
-		<br />
-		<div class="warning"><?php echo _('Once you add a new element, it cannot be deleted') ?></div>
 		</form>
-		<br />
 		<?php
 		$ath->footer(array());
 	}

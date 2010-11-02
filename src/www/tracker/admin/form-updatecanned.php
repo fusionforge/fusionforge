@@ -28,8 +28,6 @@
 $title = sprintf(_('Modify Canned Responses In %s'),$ath->getName());
 $ath->adminHeader(array ('title'=>$title));
 
-echo "<h1>".$title."</h1>";
-
 		$id = getStringFromRequest('id');
 		$acr = new ArtifactCanned($ath,$id);
 		if (!$acr || !is_object($acr)) {

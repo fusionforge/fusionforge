@@ -26,7 +26,6 @@ $title = sprintf(_('Add/Update template for %s'), $ath->getName()) ;
 
 $ath->adminHeader(array('title'=>$title));
 
-echo '<h1>'.$title.'</h1>';
 ?>
 <table>
 <tr>

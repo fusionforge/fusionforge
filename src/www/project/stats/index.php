@@ -51,12 +51,18 @@ $SPAN = getIntFromRequest('SPAN', REPORT_TYPE_MONTHLY);
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
+/*
+ * Set the start date to birth of the project.
+ */
+$res=db_query("SELECT register_time FROM groups WHERE group_id=$group_id");
+$report->site_start_date=db_result($res,0,'register_time');
+
+if (!$start || !$end) $z =& $report->getMonthStartArr();
+
 if (!$start) {
-	$z =& $report->getMonthStartArr();
 	$start = $z[0];
 }
-if (!$end || $end <= $start) {
-	$z =& $report->getMonthStartArr();
+if (!$end) {
 	$end = $z[count($z)-1];
 }
 if ($end < $start) list($start, $end) = array($end, $start);

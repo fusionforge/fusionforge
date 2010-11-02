@@ -21,11 +21,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-$group =& group_get_object($group_id);
-if (!$group || !is_object($group) || $group->isError()) {
-	exit_no_group();
-}
-
 $atf = new ArtifactTypeFactory($group);
 if (!$group || !is_object($group) || $group->isError()) {
 	exit_error(_('Could Not Get ArtifactTypeFactory'),'tracker');

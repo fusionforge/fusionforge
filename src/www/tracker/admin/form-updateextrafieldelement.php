@@ -44,9 +44,6 @@ if (!$ac || !is_object($ac)) {
 		$title = sprintf(_('Modify a custom field element in %s'), $ath->getName()) ;
 		$ath->adminHeader(array('title'=>$title));
 
-		echo '
-			<h2>'.$title.'</h2>';
-
 ?>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_opt" value="y" />
