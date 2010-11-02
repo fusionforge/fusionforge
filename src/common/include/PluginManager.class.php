@@ -126,12 +126,16 @@ class PluginManager extends Error {
 	function deactivate($pluginname) {
 		$res = db_query_params('DELETE FROM plugins WHERE plugin_name = $1', array($pluginname));
 
+		$p_id = NULL ;
+
 		foreach ($this->plugins_data as $i => $n) {
 			if ($n == $pluginname) {
 				$p_id = $i;
 			}
 		}
-		unset($this->plugins_data[$p_id]);
+		if ($p_id != NULL) {
+			unset($this->plugins_data[$p_id]) ;
+		}
 		return $res;
 	}
 
