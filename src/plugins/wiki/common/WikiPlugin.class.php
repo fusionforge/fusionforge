@@ -30,6 +30,7 @@ class GforgeWikiPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "wiki" ;
 		$this->text = "Wiki" ; // To show in the tabs, use...
+		$this->installdir = 'wiki';
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; // 
