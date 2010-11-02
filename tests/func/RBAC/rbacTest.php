@@ -126,10 +126,34 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("projapp Lastname"));
 		$this->assertTrue($this->isTextPresent("newsmod Lastname"));
 
-		// Register project as unprivileged user
+		// Register unprivileged user
 		$this->createUser ("toto") ;
 		$this->switchUser ("toto") ;
+
+		// Temporarily grant project approval rights to user
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "toto") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("toto Lastname"));
+		
+		// Register project
 		$this->registerProject ("TotoProject", "toto") ;
+
+		// Revoke project approval rights
+		// (For cases where project_registration_restricted=true)
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Edit Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//a[contains(@href,'/users/toto')]/../input[@name='rmuser']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("toto Lastname"));
 
 		// Try approving it as two users without the right to do so
 		$this->open( ROOT . '/admin/approve-pending.php') ;
