@@ -53,8 +53,6 @@ $add_cat = getStringFromRequest('add_cat');
 $delete = getStringFromRequest('delete');
 $id = getIntFromRequest('id');
 
-$feedback = '' ;
-
 if (getStringFromRequest('post_changes')) {
 	/*
 		Update the database

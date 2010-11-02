@@ -95,7 +95,6 @@ echo notepad_func();
 		</td></tr>
 </table>
 <script type="text/javascript" src="<?php echo util_make_uri('/tabber/tabber.js') ?>"></script>
-
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups'); ?>">
 	<table border="0" width="80%">
@@ -156,9 +155,7 @@ echo notepad_func();
 	<td colspan="2">
 	<h2><?php echo _('Changes') ?>:</h2>
 	<?php
-
 	echo $ah->showHistory();
-
 	?>
 	</td>
 	</tr>
