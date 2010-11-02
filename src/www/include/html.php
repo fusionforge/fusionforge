@@ -805,8 +805,8 @@ function site_user_header($params) {
 	$arr_t[] = _('Account Maintenance') ;
 	$arr_l[] = '/account/' ;
 
-	if (forge_get_config ('project_registration_restricted')
-			&& forge_check_global_perm ('approve_projects', '')) {
+	if (!forge_get_config ('project_registration_restricted')
+			|| forge_check_global_perm ('approve_projects', '')) {
 		$arr_t[] = _('Register Project') ;
 		$arr_l[] = '/register/' ;
 	}
