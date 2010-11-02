@@ -5,7 +5,7 @@
  *
  * Copyright 2008 Alain Peyrat <aljeux@free.fr>
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
  * GForge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

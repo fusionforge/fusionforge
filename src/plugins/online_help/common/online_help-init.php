@@ -2,7 +2,7 @@
 
 /**
  *
- * This file is part of GForge.
+ * This file is part of FusionForge.
  *
  * Copyright 2008 Alain Peyrat <aljeux@free.fr>
  *
