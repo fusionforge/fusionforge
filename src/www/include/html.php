@@ -108,9 +108,9 @@ function html_abs_image($url, $width, $height, $args) {
 		$return .= ' alt=""';
 	}
 
-	// ## add image dimensions
-	$return .= " width=\"" . $width . "\"";
-	$return .= " height=\"" . $height . "\"";
+	// Add image dimensions (if given)
+	$return .= $width ?" width=\"" . $width . "\"": '';
+	$return .= $height? " height=\"" . $height . "\"": '';
 
 	$return .= (' />');
 	return $return;
