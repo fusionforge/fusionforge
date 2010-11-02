@@ -64,6 +64,9 @@ if (getStringFromRequest('update')) {
 			
 			// Load the plugin and now get information from it.
 			$plugin = $pm->GetPluginObject($pluginname);
+			if (!$plugin || $plugin->isError()) {
+				exit_error(_("Couldn't get plugin object"),'admin');
+			}
 			$installdir = $plugin->getInstallDir();
 			
 			// Remove the symbolic links made if plugin has a www.
