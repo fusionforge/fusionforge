@@ -342,11 +342,13 @@ function html_get_tooltip_description($element_name) {
 			return( _('Comment'));
 		case 'description':
 			return( htmlentities(_('Enter the complete description.').'<br/><br/>'.
-			_("<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post.</div>")));
+			_("<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post.</div>"),
+				ENT_COMPAT, 'UTF-8'));
 		case 'attach_file':
 			return( _('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.'));
 		case 'monitor':
-			return( htmlentities(_('You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!')));
+			return( htmlentities(_('You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!'),
+				ENT_COMPAT, 'UTF-8'));
 		default:
 			return('');
 	}
@@ -390,8 +392,17 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	}
 
 	$title = html_get_tooltip_description($select_name);
+	$id = '';
+	if ($title) {
+		$id = ' id="tracker-'.$select_name.'"';
+		if (preg_match('/\[\]/', $id)) {
+			$id = '';
+		}
+	}
+
+	$title = html_get_tooltip_description($select_name);
 	$return .= '
-		<select id="tracker-'.$select_name.'" name="'.$select_name.'" title="'.$title.'">';
+		<select'.$id.' name="'.$select_name.'" title="'.$title.'">';
 
 	//we don't always want the default Any row shown
 	if ($show_any) {

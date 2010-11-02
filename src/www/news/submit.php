@@ -111,13 +111,13 @@ if (session_loggedin()) {
  VALUES ($1, $2, $3, $4, $5, $6, $7)';
 				$result=db_query_params($sql,
 					array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
-	   			if (!$result) {
+				if (!$result) {
 					db_rollback();
 					form_release_key(getStringFromRequest('form_key'));
-	   				$error_msg = _('ERROR doing insert');
-	   			} else {
+					$error_msg = _('ERROR doing insert');
+				} else {
 					db_commit();
-	   				$feedback = _('News Added.');
+					$feedback = _('News Added.');
 	   			}
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
@@ -130,14 +130,17 @@ if (session_loggedin()) {
 	if (!$group_id) {
 		exit_no_group();
 	}
+
+	html_use_tooltips();
+
 	/*
 		Show the submit form
 	*/
-	news_header(array('title'=>_('Submit News')));
-	echo '<h1>' . _('Submit News') . '</h1>';
+	$group = group_get_object($group_id);
+	news_header(array('title'=>_('Submit News for Project: ').' '.$group->getPublicName()));
 
 	$jsfunc = notepad_func();
-	$group = group_get_object($group_id);
+
 	echo '
 		<p>
 		'. sprintf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), forge_get_config ('forge_name')) .'</p>' . $jsfunc . 
