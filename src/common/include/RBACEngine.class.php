@@ -351,6 +351,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$hook_params['reference'] = $reference ;
 			$hook_params['action'] = $action ;
 			$hook_params['qpa'] = $qpa ;
+			$hook_params['result'] = $result ;
 			plugin_hook_by_reference ("list_roles_by_permission", $hook_params);
 			return $hook_params['result'] ;
 			break ;
