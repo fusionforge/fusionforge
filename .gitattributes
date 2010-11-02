@@ -115,7 +115,7 @@ plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
 plugins/coclico/forumml/README.txt -text
 plugins/coclico/forumml/TODO -text
 plugins/coclico/forumml/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-plugins/coclico/forumml/bin/installFF.sh -text
+plugins/coclico/forumml/bin/installFF.sh -text svneol=unset#text/x-sh
 plugins/coclico/forumml/bin/mail_2_DB.php -text
 plugins/coclico/forumml/bin/mail_2_DB.pl -text svneol=unset#text/x-perl
 plugins/coclico/forumml/bin/mail_2_DBFF.php -text
@@ -193,7 +193,7 @@ plugins/coclico/forumml/tests/_fixtures/samples/pure_text.mbox -text
 plugins/coclico/forumml/tests/_fixtures/samples/text_plus_attachment.mbox -text
 plugins/coclico/forumml/translations/en.po -text
 plugins/coclico/forumml/translations/gforge.pot -text
-plugins/coclico/forumml/utils/manage-translations.sh -text
+plugins/coclico/forumml/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/coclico/forumml/www/forumml_utils.php -text
 plugins/coclico/forumml/www/index.php -text
 plugins/coclico/forumml/www/message.php -text
@@ -278,7 +278,7 @@ plugins/coclico/hudson/tests/resources/jobbuild.xml -text
 plugins/coclico/hudson/tests/resources/testReport.xml -text
 plugins/coclico/hudson/translations/en.po -text
 plugins/coclico/hudson/translations/gforge.pot -text
-plugins/coclico/hudson/utils/manage-translations.sh -text
+plugins/coclico/hudson/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/coclico/hudson/www/admin/index.php -text
 plugins/coclico/hudson/www/hudson_tab.js -text
 plugins/coclico/hudson/www/index.php -text
@@ -363,7 +363,7 @@ plugins/coclico/mailman/usr/lib/mailman/Mailman/ExternalConnector.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/ForgeSecurityManager.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/MySQLConnector.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/PsycopgConnector.py -text
-plugins/coclico/mailman/utils/manage-translations.sh -text
+plugins/coclico/mailman/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/coclico/mailman/var/lib/mailman/lists/extend.py -text
 plugins/coclico/mailman/www/admin/deletelist.php -text
 plugins/coclico/mailman/www/admin/index.php -text
@@ -448,7 +448,7 @@ plugins/coclico/oslc/packaging/links/plugin-oslc -text
 plugins/coclico/oslc/post-testdata.xml -text
 plugins/coclico/oslc/translations/en.po -text
 plugins/coclico/oslc/translations/gforge.pot -text
-plugins/coclico/oslc/utils/manage-translations.sh -text
+plugins/coclico/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/coclico/oslc/www/.htaccess -text
 plugins/coclico/oslc/www/admin/index.php -text
 plugins/coclico/oslc/www/index.php -text
@@ -483,7 +483,7 @@ plugins/coclico/soapadmin/packaging/install/plugin-soapadmin -text
 plugins/coclico/soapadmin/packaging/links/plugin-soapadmin -text
 plugins/coclico/soapadmin/translations/en.po -text
 plugins/coclico/soapadmin/translations/gforge.pot -text
-plugins/coclico/soapadmin/utils/manage-translations.sh -text
+plugins/coclico/soapadmin/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/coclico/soapadmin/www/admin/index.php -text
 plugins/coclico/soapadmin/www/coreapi/FusionforgeCoreApi.wsdl -text
 plugins/coclico/soapadmin/www/coreapi/coreapi.php -text
@@ -695,7 +695,7 @@ plugins/old/webcalendar/www/ws/get_events.php -text
 plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
-plugins/templates/createplugin.sh -text
+plugins/templates/createplugin.sh -text svneol=unset#text/x-sh
 plugins/templates/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
 plugins/templates/helloworld/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/templates/helloworld/cronjobs/manage_helloworld.php -text
@@ -721,7 +721,7 @@ plugins/templates/helloworld/packaging/install/plugin-helloworld -text
 plugins/templates/helloworld/packaging/links/plugin-helloworld -text
 plugins/templates/helloworld/translations/en.po -text
 plugins/templates/helloworld/translations/gforge.pot -text
-plugins/templates/helloworld/utils/manage-translations.sh -text
+plugins/templates/helloworld/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/templates/helloworld/www/admin/index.php -text
 plugins/templates/scmcpold/NAME -text
 plugins/templates/scmcpold/common/CpoldPlugin.class.php -text
@@ -738,7 +738,7 @@ src/INSTALL.restricted -text
 src/NEWS -text
 src/backend/DatabaseDump.pl svneol=native#text/x-perl
 src/backend/include.pl svneol=native#text/x-perl
-src/backend/shell/apache.sh svneol=native#unset
+src/backend/shell/apache.sh svneol=native#text/x-sh
 src/common/dao/CodendiDataAccess.class.php -text
 src/common/dao/include/DataAccess.class.php -text
 src/common/dao/include/DataAccessException.class.php -text
@@ -859,7 +859,7 @@ src/cronjobs/ftp_create_group_access.php -text
 src/cronjobs/gather_scm_stats.php -text
 src/cronjobs/generate_scm_snapshots.php -text
 src/cronjobs/get_news_notapproved.pl svneol=native#text/x-perl
-src/cronjobs/gforge-db-backup.sh -text
+src/cronjobs/gforge-db-backup.sh -text svneol=unset#text/x-sh
 src/cronjobs/homedirs.php -text
 src/cronjobs/mail/publicize_list.py -text
 src/cronjobs/update_docdata_dataword.php -text
@@ -905,10 +905,12 @@ src/db/20101024-docman-createonline.sql -text
 src/db/20101025-ipv6.sql -text
 src/db/20101027-docman-lock.sql -text
 src/db/FTI-20061025.sql -text
+src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text
 src/db/gforge-struct-mysql.sql -text
 src/db/timetracking-init.sql -text
 src/deb-specific/create-mailing-lists.pl svneol=native#text/x-perl
+src/deb-specific/create-vhosts.sh svneol=native#text/x-sh
 src/deb-specific/db-convert-to-unicode.pl svneol=native#text/x-perl
 src/deb-specific/db-upgrade.pl svneol=native#text/x-perl
 src/deb-specific/dns_conf.pl svneol=native#text/x-perl
@@ -920,11 +922,23 @@ src/deb-specific/fusionforge.rsyslog -text
 src/deb-specific/gforge-inject.pl svneol=native#text/x-perl
 src/deb-specific/gforge.logrotate -text
 src/deb-specific/group_dump_update.pl svneol=native#text/x-perl
+src/deb-specific/install-chroot.sh svneol=native#text/x-sh
+src/deb-specific/install-db.sh svneol=native#text/x-sh
+src/deb-specific/install-dns.sh svneol=native#text/x-sh
+src/deb-specific/install-exim.sh svneol=native#text/x-sh
+src/deb-specific/install-exim4.sh svneol=native#text/x-sh
+src/deb-specific/install-ftp.sh svneol=native#text/x-sh
+src/deb-specific/install-ldap.sh svneol=native#text/x-sh
+src/deb-specific/install-postfix.sh svneol=native#text/x-sh
+src/deb-specific/install-skel.sh svneol=native#text/x-sh
+src/deb-specific/install-ssh.sh svneol=native#text/x-sh
+src/deb-specific/manage-uufiles.sh svneol=native#text/x-sh
 src/deb-specific/prepare-vhosts-file.pl svneol=native#text/x-perl
 src/deb-specific/ssh_dump_update.pl svneol=native#text/x-perl
 src/deb-specific/stats_cvs.pl svneol=native#text/x-perl
 src/deb-specific/stats_projects_logparse.pl svneol=native#text/x-perl
-src/deb-specific/update-ldap.sh -text
+src/deb-specific/update-ldap.sh -text svneol=unset#text/x-sh
+src/deb-specific/update-user-group-ssh.sh svneol=native#text/x-sh
 src/deb-specific/user_dump_update.pl svneol=native#text/x-perl
 src/debian/NEWS.Debian -text
 src/debian/README.source -text
@@ -1102,12 +1116,13 @@ src/etc/templates/local.pl svneol=native#text/x-perl
 src/fusionforge-install-2.php -text
 src/fusionforge-install-3-db.php -text
 src/fusionforge-install-4-config.php -text
+src/gforge-restricted.sh svneol=native#text/x-sh
 src/image-sources/README -text
 src/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
 src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
 src/image-sources/top-logo.xcf -text svneol=unset#unset
 src/install-common.inc -text
-src/install.sh -text
+src/install.sh -text svneol=unset#text/x-sh
 src/lib/vendor/jquery-tipsy/LICENSE -text
 src/lib/vendor/jquery-tipsy/README -text
 src/lib/vendor/jquery-tipsy/Rakefile -text
@@ -1972,7 +1987,7 @@ src/plugins/scmccase/packaging/docs/plugin-scmccase -text
 src/plugins/scmccase/packaging/install/plugin-scmccase -text
 src/plugins/scmcvs/NAME -text
 src/plugins/scmcvs/bin/cvssh.pl svneol=native#text/x-perl
-src/plugins/scmcvs/bin/install.sh -text
+src/plugins/scmcvs/bin/install.sh -text svneol=unset#text/x-sh
 src/plugins/scmcvs/cron.d/fusionforge-plugin-scmcvs -text
 src/plugins/scmcvs/etc/scmcvs.ini -text
 src/plugins/scmcvs/fusionforge-plugin-scmcvs.spec -text
@@ -2015,6 +2030,7 @@ src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 src/plugins/scmhg/packaging/dirs/plugin-scmhg -text
 src/plugins/scmhg/packaging/install/plugin-scmhg -text
 src/plugins/scmsvn/NAME -text
+src/plugins/scmsvn/bin/install.sh svneol=native#text/x-sh
 src/plugins/scmsvn/etc/scmsvn.ini -text
 src/plugins/scmsvn/fusionforge-plugin-scmsvn.spec -text
 src/plugins/scmsvn/packaging/control/131plugin-scmsvn -text
@@ -2514,7 +2530,7 @@ src/plugins/wiki/www/locale/.htaccess -text
 src/plugins/wiki/www/locale/Makefile -text
 src/plugins/wiki/www/locale/README -text
 src/plugins/wiki/www/locale/README.de.txt -text
-src/plugins/wiki/www/locale/cvt-utf8.sh -text
+src/plugins/wiki/www/locale/cvt-utf8.sh -text svneol=unset#text/x-sh
 src/plugins/wiki/www/locale/de/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/de/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/de/pgsrc/%C3%84hnlicheSeiten -text
@@ -2809,7 +2825,7 @@ src/plugins/wiki/www/locale/sv/pgsrc/Senaste%C3%84ndringar -text
 src/plugins/wiki/www/locale/sv/pgsrc/Textformateringsregler -text
 src/plugins/wiki/www/locale/sv/pgsrc/WabiSabi -text
 src/plugins/wiki/www/locale/sv/pgsrc/WikiWikiWeb -text
-src/plugins/wiki/www/locale/update-makefile.sh -text
+src/plugins/wiki/www/locale/update-makefile.sh -text svneol=unset#text/x-sh
 src/plugins/wiki/www/locale/zh/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/zh/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/zh/pgsrc/%E9%A6%96%E9%A0%81 -text
@@ -4037,7 +4053,7 @@ src/rpm-specific/patches/fusionforge-4.8.3-mediawiki.patch -text
 src/rpm-specific/patches/fusionforge-4.8.3-register_globals.patch -text
 src/rpm-specific/patches/fusionforge-4.8.3-webcalendar.patch -text
 src/rpm-specific/scripts/gforge-config -text svneol=unset#application/octet-stream
-src/rpm-specific/scripts/install-svn.sh -text
+src/rpm-specific/scripts/install-svn.sh -text svneol=unset#text/x-sh
 src/translations/bg.po -text
 src/translations/ca.po -text
 src/translations/de.po -text
@@ -4065,8 +4081,10 @@ src/translations/sv.po -text
 src/translations/th.po -text
 src/translations/zh_CN.po -text
 src/translations/zh_TW.po -text
+src/utils/cvs1/cvscreate.sh svneol=native#text/x-sh
 src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
+src/utils/decode_images.sh svneol=native#text/x-sh
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
 src/utils/fixscripts/normalize_roles.php -text
 src/utils/forge_get_config -text
@@ -4076,13 +4094,14 @@ src/utils/include.pl svneol=native#text/x-perl
 src/utils/inject-files.php -text
 src/utils/inject-groups.php -text
 src/utils/inject-users.php -text
-src/utils/install-nsspgsql.sh -text
+src/utils/install-apache.sh svneol=native#text/x-sh
+src/utils/install-nsspgsql.sh -text svneol=unset#text/x-sh
 src/utils/ldap/sql2ldif.pl svneol=native#text/x-perl
 src/utils/ldap/sql2ldifadd.pl -text svneol=unset#text/x-perl
 src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
-src/utils/manage-apache-config.sh -text
-src/utils/manage-translations.sh -text
-src/utils/migrate-to-ini-files.sh -text
+src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
+src/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh
 src/utils/underworld-dummy/dns_conf.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/dump_database.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ia64_dump.pl svneol=native#text/x-perl
@@ -4257,6 +4276,7 @@ src/www/project/admin/roledelete.php -text
 src/www/project/admin/tools.php -text
 src/www/project/admin/users.php -text
 src/www/scm/browser.php -text
+src/www/scm/viewvc/bin/cgi/viewvc-strace.sh svneol=native#text/x-sh
 src/www/scm/viewvc/templates/docroot/images/annotate.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/back.png -text svneol=unset#image/png
 src/www/scm/viewvc/templates/docroot/images/back_small.png -text svneol=unset#image/png
@@ -4628,16 +4648,16 @@ tests/openvz/local.g-virtual05.rinse.conf -text
 tests/openvz/local.rinse.api -text
 tests/preseed/mailman -text
 tests/preseed/postgresql -text
-tests/scripts/fusionforge-build-and-test-deb.sh -text
-tests/scripts/fusionforge-build-and-test-rpm.sh -text
-tests/scripts/fusionforge-build-and-test-source.sh -text
-tests/scripts/fusionforge-trunk-build-rpm.sh -text
-tests/scripts/fusionforge-trunk-test-rpm.sh -text
+tests/scripts/fusionforge-build-and-test-deb.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-trunk-build-rpm.sh -text svneol=unset#text/x-sh
+tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
-tests/scripts/start_vm.sh -text
-tests/scripts/start_vz.sh -text
-tests/scripts/stop_vm.sh -text
-tests/scripts/stop_vz.sh -text
+tests/scripts/start_vm.sh -text svneol=unset#text/x-sh
+tests/scripts/start_vz.sh -text svneol=unset#text/x-sh
+tests/scripts/stop_vm.sh -text svneol=unset#text/x-sh
+tests/scripts/stop_vz.sh -text svneol=unset#text/x-sh
 tests/unit/config/ConfigTest.php -text
 tests/unit/utils/DbUtilsTest.php -text
 tests/unit/utils/HtmlPurifierTest.php -text
@@ -4646,11 +4666,25 @@ tests/unit/utils/UtilsTest.php -text
 tools/bugzilla2GForge.pl svneol=native#text/x-perl
 tools/check_and_update_forum_role_settings.php -text
 tools/cmp-schemas.pl svneol=native#text/x-perl
+tools/createmissing.sh svneol=native#text/x-sh
+tools/createplugin.sh svneol=native#text/x-sh
+tools/createtheme.sh svneol=native#text/x-sh
+tools/dbconnect.sh svneol=native#text/x-sh
+tools/desc.sh svneol=native#text/x-sh
+tools/dump.sh svneol=native#text/x-sh
 tools/export-tracker.tcl -text
-tools/gource/gource.sh -text
+tools/gource/gource.sh -text svneol=unset#text/x-sh
 tools/jpgraph_pietest.php -text
-tools/make-mo.sh -text
+tools/make-mo.sh -text svneol=unset#text/x-sh
+tools/make-theme-orig.sh svneol=native#text/x-sh
+tools/mcrypt-test.sh svneol=native#text/x-sh
+tools/mcrypt-test2.sh svneol=native#text/x-sh
+tools/mcrypt-test3.sh svneol=native#text/x-sh
+tools/mirror-gforge.sh svneol=native#text/x-sh
+tools/replicate_gforge.sh svneol=native#text/x-sh
+tools/reset_projectfiles.sh svneol=native#text/x-sh
 tools/rpmdev-setuptree -text
+tools/savannah_convert.sh svneol=native#text/x-sh
 tools/simple-cdd/Makefile -text
 tools/simple-cdd/profiles/autopart.description -text
 tools/simple-cdd/profiles/autopart.preseed -text
@@ -4673,7 +4707,7 @@ tools/simple-cdd/profiles/x-gnome.packages -text
 tools/simple-cdd/profiles/x-gnome.preseed -text
 tools/simulate_cron.pl -text svneol=unset#text/x-perl
 tools/tab2gettext.pl -text svneol=unset#text/x-perl
-tools/tab2gettext.sh -text
+tools/tab2gettext.sh -text svneol=unset#text/x-sh
 tools/tab2po/.classpath -text
 tools/tab2po/.project -text
 tools/tab2po/.settings/org.eclipse.jdt.core.prefs -text
@@ -4693,5 +4727,5 @@ tools/tab2po/src/test/resources/translations/en.po.new -text
 tools/tab2po/src/test/resources/translations/fr.po -text
 tools/tab2po/src/test/resources/translations/fr.po.new -text
 tools/tab2po/src/test/resources/translations/gforge.pot -text
-tools/unify_config.sh -text
-tools/update-gettext-files.sh -text
+tools/unify_config.sh -text svneol=unset#text/x-sh
+tools/update-gettext-files.sh -text svneol=unset#text/x-sh
