@@ -65,7 +65,7 @@ config/local.g-virtual05 -text
 delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
-/fix_phpunit.xslt -text
+/fix_phpunit.xslt -text svneol=unset#text/xml
 /gforge -text
 hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text svneol=unset#image/png
@@ -274,8 +274,8 @@ plugins/coclico/hudson/tests/AllTests.php -text
 plugins/coclico/hudson/tests/HudsonBuildTest.php -text
 plugins/coclico/hudson/tests/HudsonJobTest.php -text
 plugins/coclico/hudson/tests/HudsonTestResultTest.php -text
-plugins/coclico/hudson/tests/resources/jobbuild.xml -text
-plugins/coclico/hudson/tests/resources/testReport.xml -text
+plugins/coclico/hudson/tests/resources/jobbuild.xml -text svneol=unset#text/xml
+plugins/coclico/hudson/tests/resources/testReport.xml -text svneol=unset#text/xml
 plugins/coclico/hudson/translations/en.po -text
 plugins/coclico/hudson/translations/gforge.pot -text
 plugins/coclico/hudson/utils/manage-translations.sh -text svneol=unset#text/x-sh
@@ -445,7 +445,7 @@ plugins/coclico/oslc/packaging/dirs/plugin-oslc -text
 plugins/coclico/oslc/packaging/docs/plugin-oslc -text
 plugins/coclico/oslc/packaging/install/plugin-oslc -text
 plugins/coclico/oslc/packaging/links/plugin-oslc -text
-plugins/coclico/oslc/post-testdata.xml -text
+plugins/coclico/oslc/post-testdata.xml -text svneol=unset#text/xml
 plugins/coclico/oslc/translations/en.po -text
 plugins/coclico/oslc/translations/gforge.pot -text
 plugins/coclico/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
@@ -970,11 +970,51 @@ src/docs/README.gettext -text
 src/docs/architecture/stats/stats-process.sda svneol=native#unset
 src/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 src/docs/docbook/css/docbook.css -text svneol=unset#text/css
+src/docs/docbook/docbook/administration_guide/administration_guide.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/contribution_guide.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/coding_standards.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/howto_contribute.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/howto_documentation.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/howto_localization.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/howto_xhtml.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/repository.xml svneol=native#text/xml
+src/docs/docbook/docbook/contribution_guide/include/templating.xml svneol=native#text/xml
 src/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
-src/docs/docbook/docbook/entities/authors/alain_peyrat.xml -text
+src/docs/docbook/docbook/entities/authors/alain_peyrat.xml -text svneol=unset#text/xml
+src/docs/docbook/docbook/entities/authors/guillaume_smet.xml svneol=native#text/xml
+src/docs/docbook/docbook/entities/authors/ken_mccullagh.xml svneol=native#text/xml
+src/docs/docbook/docbook/entities/authors/ognyan_kulev.xml svneol=native#text/xml
+src/docs/docbook/docbook/entities/authors/reinhard_spisser.xml svneol=native#text/xml
+src/docs/docbook/docbook/entities/authors/roland_mas.xml svneol=native#text/xml
+src/docs/docbook/docbook/entities/authors/tim_perdue.xml svneol=native#text/xml
+src/docs/docbook/docbook/entities/authors/tom_copeland.xml svneol=native#text/xml
 src/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
-src/docs/docbook/docbook/user_guide/project_functions/activity.xml -text
-src/docs/docbook/docbook/user_guide/project_functions/blocks.xml -text
+src/docs/docbook/docbook/gforge_manual.xml svneol=native#text/xml
+src/docs/docbook/docbook/installation_guide/installation_guide.xml svneol=native#text/xml
+src/docs/docbook/docbook/introduction/introduction.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/getting_started/getting_started.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/introduction/introduction.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/activity.xml -text svneol=unset#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/blocks.xml -text svneol=unset#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/cvs.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/docman.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/file_releases.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/forums.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/index.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/mailing_lists.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/news.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/project_admin.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/project_summary.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/surveys.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/task_manager.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/project_functions/tracker.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/sitewide_functions/index.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/sitewide_functions/project_help.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/sitewide_functions/search.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/sitewide_functions/snippet.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/sitewide_functions/trove.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/user_functions/index.xml svneol=native#text/xml
+src/docs/docbook/docbook/user_guide/user_guide.xml svneol=native#text/xml
 src/docs/fusionforge.doxygen -text
 src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
@@ -1282,7 +1322,7 @@ src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/fr.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/lang/it.js -text
 src/plugins/fckeditor/www/_samples/_plugins/findreplace/replace.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/_samples/_plugins/samples/fckplugin.js -text
-src/plugins/fckeditor/www/_samples/adobeair/application.xml -text
+src/plugins/fckeditor/www/_samples/adobeair/application.xml -text svneol=unset#text/xml
 src/plugins/fckeditor/www/_samples/adobeair/icons/128.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/_samples/adobeair/icons/16.png -text svneol=unset#image/png
 src/plugins/fckeditor/www/_samples/adobeair/icons/32.png -text svneol=unset#image/png
@@ -1507,6 +1547,7 @@ src/plugins/fckeditor/www/editor/dialog/common/fck_dialog_common.css svneol=nati
 src/plugins/fckeditor/www/editor/dialog/common/images/locked.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/common/images/reset.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/common/images/unlocked.gif -text svneol=unset#image/gif
+src/plugins/fckeditor/www/editor/dialog/common/moz-bindings.xml svneol=native#text/xml
 src/plugins/fckeditor/www/editor/dialog/fck_about/logo_fckeditor.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/fck_about/logo_fredck.gif -text svneol=unset#image/gif
 src/plugins/fckeditor/www/editor/dialog/fck_about/sponsors/spellchecker_net.gif -text svneol=unset#image/gif
@@ -1766,7 +1807,9 @@ src/plugins/fckeditor/www/fckeditor.pl svneol=native#text/x-perl
 src/plugins/fckeditor/www/fckeditor.py -text
 src/plugins/fckeditor/www/fckeditor_php4.php -text
 src/plugins/fckeditor/www/fckeditor_php5.php -text
-src/plugins/fckeditor/www/fckpackager.xml -text
+src/plugins/fckeditor/www/fckpackager.xml -text svneol=unset#text/xml
+src/plugins/fckeditor/www/fckstyles.xml svneol=native#text/xml
+src/plugins/fckeditor/www/fcktemplates.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fckutils.cfm -text
 src/plugins/globalsearch/NAME -text
 src/plugins/globalsearch/README -text
@@ -3206,7 +3249,7 @@ src/plugins/wiki/www/tests/unit/lib/plugin/IncludePageTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/ListPagesTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/OrphanedPagesTest.php -text
 src/plugins/wiki/www/tests/unit/lib/plugin/WantedPagesTest.php -text
-src/plugins/wiki/www/tests/unit/lib/plugin/atom-example.xml -text
+src/plugins/wiki/www/tests/unit/lib/plugin/atom-example.xml -text svneol=unset#text/xml
 src/plugins/wiki/www/tests/unit/mysql-test-destroy.sql -text
 src/plugins/wiki/www/tests/unit/mysql-test-initialize.sql -text
 src/plugins/wiki/www/tests/unit/pcre-crash.php -text
@@ -4737,7 +4780,7 @@ tools/tab2po/.classpath -text
 tools/tab2po/.project -text
 tools/tab2po/.settings/org.eclipse.jdt.core.prefs -text
 tools/tab2po/.settings/org.maven.ide.eclipse.prefs -text
-tools/tab2po/pom.xml -text
+tools/tab2po/pom.xml -text svneol=unset#text/xml
 tools/tab2po/src/main/java/org/bull/novaforge/tools/tab2poConverter/FileConverter.java -text
 tools/tab2po/src/main/java/org/bull/novaforge/tools/tab2poConverter/I18nMessage.java -text
 tools/tab2po/src/main/java/org/bull/novaforge/tools/tab2poConverter/Main.java -text
