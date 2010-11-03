@@ -74,7 +74,7 @@ class _FusionForgePassUser extends _PassUser {
 
             if ($member) {
                 $this->_userid = $user->getRealName();
-                $this->_is_external = $user->getIsExternal();
+                $this->_is_external = method_exists($user, 'getIsExternal') && $user->getIsExternal();
                 if ($perm->isAdmin()) {
                     $this->_level = WIKIAUTH_ADMIN;
                 } else {
