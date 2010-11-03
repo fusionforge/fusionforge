@@ -52,7 +52,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 	}
 
-	function testGlobalRoles()
+	function testGlobalRolesAndPermissions()
 	{
 		$this->login("admin");
 
@@ -205,6 +205,127 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->open( ROOT ) ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
+	}
+
+	function testProjectRolesAndPermissions()
+	{
+		$this->login("admin");
+
+		$this->createUser ("bigboss") ;
+		$this->createUser ("guru") ;
+		$this->createUser ("docmaster") ;
+		$this->createUser ("trainee") ;
+
+		// Create "Project approvers" role
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Project approvers") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Grant it permissions
+		$this->select("//select[@name='data[approve_projects][-1]']", "label=Approve projects");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Add bigboss
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "bigboss") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
+
+		// Register projects
+		$this->switchUser ("bigboss") ;
+		$this->registerProject ("MetaProject", "bigboss") ;
+		$this->approveProject ("MetaProject", "bigboss") ;
+		$this->registerProject ("SubProject", "bigboss") ;
+		$this->approveProject ("SubProject", "bigboss") ;
+
+		// Add users
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "guru") ;
+		$this->select("//select[@name='role_id']", "label=Senior Developer");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("guru Lastname"));
+		$this->assertTrue($this->isElementPresent("
+//input[@value=
+   //tr/td/a[.='guru Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Senior Developer']")) ;
+
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "trainee") ;
+		$this->select("//select[@name='role_id']", "label=Junior Developer");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("trainee Lastname"));
+		$this->assertTrue($this->isElementPresent("
+//input[@value=
+   //tr/td/a[.='trainee Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Junior Developer']")) ;
+
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "docmaster") ;
+		$this->select("//select[@name='role_id']", "label=Doc Writer");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
+		$this->assertTrue($this->isElementPresent("
+//input[@value=
+   //tr/td/a[.='docmaster Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Doc Writer']")) ;
+
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "bigboss") ;
+		$this->select("//select[@name='role_id']", "label=Senior Developer");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
+		$this->assertTrue($this->isElementPresent("
+//input[@value=
+   //tr/td/a[.='bigboss Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Senior Developer']")) ;
+
+		// Oops, bigboss doesn't need the extra role after all
+		$this->click ("
+//input[@value=
+   //tr/td/a[.='bigboss Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Senior Developer']/../td/input[@value='Remove']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isElementPresent("
+//input[@value=
+   //tr/td/a[.='bigboss Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Senior Developer']")) ;
+
+		// Remove/re-add a user
+		$this->click ("
+//input[@value=
+   //tr/td/a[.='trainee Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Junior Developer']/../td/input[@value='Remove']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isTextPresent("trainee Lastname"));
+
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "trainee") ;
+		$this->select("//select[@name='role_id']", "label=Junior Developer");
+		$this->click ("//input[@value='Add Member']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("trainee Lastname"));
+		$this->assertTrue($this->isElementPresent("
+//input[@value=
+   //tr/td/a[.='trainee Lastname']/../..//input[@name='user_id']/@value
+]
+/../td[.='Junior Developer']")) ;
+
+
 	}
 }
 ?>
