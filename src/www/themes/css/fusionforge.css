@@ -34,6 +34,227 @@
  * 
 */
 
+/* From old gforge-compat */
+.altrowstyleeven {
+	background-color: #EAEAEA;
+	font-weight: normal
+}
+
+.altrowstyleodd {
+	background-color: #E0E0E0;
+	font-weight: normal
+}
+
+.error {
+	color: red;
+	font-size: medium;
+	font-weight: bold;
+	text-align: center
+}
+
+.feedback {
+	color: red;
+	font-size: medium;
+	text-align: center;
+	text-decoration: none
+}
+
+.important {
+	color: red;
+	font-weight: bold
+}
+
+.multitablerowtitle {
+	background-color: #DAD5D7
+}
+
+.next {
+	font-family: arial,helvetica, sans-serif;
+	font-size: small;
+	font-weight: bold
+}
+
+.prev {
+	font-family: arial,helvetica, sans-serif;
+	font-size: small;
+	font-weight: bold
+}
+
+.priority1 {
+	background-color: #dadada
+}
+
+.priority2 {
+	background-color: #dacaca
+}
+
+.priority3 {
+	background-color: #dababa
+}
+
+.priority4 {
+	background-color: #daaaaa
+}
+
+.priority5 {
+	background-color: #da8a8a
+}
+
+.requiredfield {
+	color: red;
+	font-weight: bold
+}
+
+.tabberlive {
+	margin-top: 1em
+}
+
+.tabberlive .tabbertab {
+	border: 1px solid #aaa;
+	border-top: 0;
+	padding: 5px
+}
+
+.tabberlive .tabbertab h2 {
+	display: none
+}
+
+.tabberlive .tabbertab h3 {
+	display: none
+}
+
+.tabberlive .tabbertabhide {
+	display: none
+}
+
+.tabberlive#tab2 .tabbertab {
+	height: 200px;
+	overflow: auto
+}
+
+.tablecontent {
+	background-color: #eeeeee;
+	font-size: 13px
+}
+
+.tablegetmore {
+	background-color: #EAEAEA
+}
+
+.tableheading {
+	background-color: #D0D0D0;
+	font-weight: bold;
+	text-align: center
+}
+
+.titlebar {
+	color: #FFFFFF;
+	font-size: 13px;
+	text-decoration: none
+}
+
+.up {
+	font-size: small;
+	font-weight: bold;
+	color: #009900
+}
+
+.down {
+	font-size: small;
+	font-weight: bold
+}
+
+.veryimportant {
+	color: red;
+	font-size: large;
+	font-weight: bold;
+	text-align: center
+}
+
+.warning {
+	color: red;
+	text-decoration: none
+}
+
+td.footer1 {
+	background-color: #E0E0E0
+}
+
+td.footer2 {
+	background-color: #E0E0E0
+}
+
+td.footer3 {
+	background-color: #ffffff
+}
+
+td.notseltab {
+	background-color: #909090
+}
+
+td.projecttab {
+	background-color: #ffffff
+}
+
+td.seltab {
+	background-color: white
+}
+
+td.toptab {
+	background-color: #E0E0E0
+}
+
+ul.tabbernav {
+	border-bottom: 1px solid #778;
+	margin: 0;
+	padding: 3px 0
+}
+
+ul.tabbernav li {
+	display: inline;
+	list-style: none;
+	margin: 0
+}
+
+ul.tabbernav li a {
+	background: #D0D0D0;
+	border: 1px solid #778;
+	border-bottom: none;
+	margin-left: 3px;
+	padding: 3px 0.5em;
+	text-decoration: none
+}
+
+ul.tabbernav li a:hover {
+	background: #AAE;
+	border-color: #227;
+	color: #000
+}
+
+ul.tabbernav li a:link {
+	color: #333333
+}
+
+ul.tabbernav li a:visited {
+	color: #667
+}
+
+ul.tabbernav li.tabberactive a {
+	background-color: #fff;
+	border-bottom: 1px solid #fff
+}
+
+ul.tabbernav li.tabberactive a:hover {
+	background: white;
+	border-bottom: 1px solid white;
+	color: #000
+}
+
+up {
+	font-family: arial,helvetica, sans-serif;
+	font-size: small;
+	font-weight: bold
+}
 
 /* generic classes
 ----------------------------------------------- */

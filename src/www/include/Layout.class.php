@@ -205,7 +205,6 @@ class Layout extends Error {
 			   custom stylesheet exists. 
 			   Used for compatibility with existing stylesheets
 			 */
-			$this->cssurls[] = util_make_url('/themes/css/gforge-compat.css');
 			if (file_exists($this->cssdir . 'theme.css')) {
 				$this->cssurls[] = $this->cssbaseurl . 'theme.css';
 			}
