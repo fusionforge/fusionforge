@@ -181,7 +181,7 @@ hr {
     display: table-cell;
 }
 
-#header-news div {
+#header-news span {
     background-color: #41495C;
     height: 200px;
 }
@@ -246,13 +246,12 @@ hr {
 }
 
 
-#searchBox div{
+#searchBox span {
   display: inline;
   margin-left: 20px;
 }
 
-
-#searchBox div input[type=text] {
+#searchBox span input[type=text] {
     padding-left: 20px;
     border-radius: 20px;
     height: 15px;
@@ -266,11 +265,9 @@ hr {
     height: 10px;
 }
 
-#searchBox div input[type=submit] {
+#searchBox span input[type=submit] {
     display:none;
 }
-
-
 
 /* =quicknavform */
 #quicknavform {
@@ -279,7 +276,7 @@ hr {
     float: left;
 }
 
-#quicknavform div{
+#quicknavform span {
     display: inline;
     color: white;
 }
@@ -312,12 +309,13 @@ hr {
   vertical-align: bottom;
 }
 
-.tabGenerator .tg-middle div {
+.tabGenerator .tg-middle span {
     background-color: #41495C;
     margin-top: 0px;
 }
 
-.tabGenerator .tg-middle div div {
+.tabGenerator .tg-middle span span {
+    display: block;
     text-align:center;
     vertical-align: middle;
     height: 20px;
@@ -341,26 +339,27 @@ hr {
     transition-duration: 0.3s;
 }
 
-.tabGenerator .tg-middle div div:hover {
+.tabGenerator .tg-middle span span:hover {
+    display: block;
     background-color: white;
     text-shadow: 1px 1px white;
     height: 30px;
 }
 
-.tabGenerator .tg-middle div div a {
+.tabGenerator .tg-middle span span a {
+    display: block;
     color: black;
 }
 
-.tabGenerator .tg-middle div.selected div {
+.tabGenerator .tg-middle span.selected span {
     background-color: white;
     text-shadow: 1px 1px white;
     height: 30px;
 }
 
-.tabGenerator .tg-right div.selected div {
+.tabGenerator .tg-right span.selected span {
     display:none;
 }
-
 
 /*
     innertabs
@@ -386,12 +385,13 @@ hr {
   vertical-align: middle; 
 }
 
-.innertabs .tabGenerator .tg-middle div {
+.innertabs .tabGenerator .tg-middle span {
     background-color: #F7F7F7;
     margin-top: 0px;
 }
 
-.innertabs .tabGenerator .tg-middle div div {
+.innertabs .tabGenerator .tg-middle span span {
+    display: block;
     text-align:center;
     vertical-align: middle;
     height: 20px;
@@ -410,24 +410,24 @@ hr {
     
 }
 
-.innertabs .tabGenerator .tg-middle div div:hover {
+.innertabs .tabGenerator .tg-middle span span:hover {
+    display: block;
     background-color: white;
 }
 
-.innertabs  .tabGenerator .tg-middle div div a {
+.innertabs  .tabGenerator .tg-middle span span a {
+    display: block;
     color: black;
 }
 
-.innertabs  .tabGenerator .tg-middle div.selected div {
+.innertabs  .tabGenerator .tg-middle span.selected span {
     background-color: white;
     text-shadow: 1px 1px white;
 }
 
-.innertabs  .tabGenerator .tg-right div.selected div {
+.innertabs  .tabGenerator .tg-right span.selected span {
     display:none;
 }
-
-
 
 /* =tabber */
 .topTab, a.topTab, a.topTab:visited, a.topTab:hover,

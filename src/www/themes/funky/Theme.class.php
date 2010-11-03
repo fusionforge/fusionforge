@@ -3,6 +3,7 @@
  * FusionForge Funky Theme
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -37,14 +38,12 @@ class Theme extends Layout {
         $this->themeurl = util_make_url('themes/funky/');
         $this->imgbaseurl = $this->themeurl . 'images/';
         $this->imgroot = $this->imgbaseurl;
-        $this->doctype = 'strict';
+//        $this->doctype = 'strict';
         $this->cssbaseurl = $this->themeurl . 'css/';
-        $this->cssurls = array(
-            util_make_url ('/themes/css/fusionforge.css'),
-            $this->cssbaseurl .'theme.css',
-            $this->cssbaseurl .'theme-pages.css');
+
+        $this->addStylesheet('/themes/funky/css/theme.css');
+        $this->addStylesheet('/themes/funky/css/theme-pages.css');
     }
-    
     
     function quicknewsbutton()
     {
@@ -67,12 +66,12 @@ class Theme extends Layout {
     function bodyHeader($params)
     {
         global $user_guide, $HTML;
-        echo '<table id="header" class="width-100p100">';
-        echo '<tr>';
-        echo '<td id="header-col1">';
-        echo '<h1>'.  util_make_link ('/', html_image('/header/top-logo.png',null,null,array('alt'=>'FusionForge Home'))) .'</h1>';
-        echo '</td>';
-        echo '<td id="header-col2">';
+        echo '<table id="header" class="width-100p100">' . "\n";
+        echo '<tr>' . "\n";
+        echo '<td id="header-col1">' . "\n";
+        echo '<h1>'.  util_make_link ('/', html_image('/header/top-logo.png',null,null,array('alt'=>'FusionForge Home'))) .'</h1>' . "\n";
+        echo '</td>' . "\n";
+        echo '<td id="header-col2">' . "\n";
         
         $items = $this->navigation->getUserLinks();
         for ($j = 0; $j < count($items['titles']); $j++) 
@@ -82,37 +81,40 @@ class Theme extends Layout {
         echo implode(' | ', $links);
         plugin_hook ('headermenu', $params);
         
-        echo '</td><tr><td colspan=2 id="header-line2">';
+        echo '</td>' . "\n";
+        echo '</tr>' . "\n";
+        echo '<tr>' . "\n";
+        echo '<td colspan="2" id="header-line2">' . "\n";
         // echo $this->quicknewsbutton();
         $this->quickNav();
         $this->searchBox();
         
-        echo '</td></tr>';
-        echo '</td><tr><td colspan=2 id="header-news">';
+        echo '</td></tr>' . "\n";
+        echo '<tr><td colspan="2" id="header-news">' . "\n";
         //echo $this->quicknews();
-        echo'</td></tr></table><!-- outer tabs -->';
+        echo'</td></tr></table><!-- outer tabs -->' . "\n";
         echo $this->outerTabs($params);
-        echo '<!-- inner tabs -->';
-        echo '<div class="innertabs">';
+        echo '<!-- inner tabs -->' . "\n";
+        echo '<div class="innertabs">' . "\n";
         if (isset($params['group']) && $params['group'])
             echo $this->projectTabs($params['toptab'],$params['group']);
             
-        echo '</div>';
-        echo '<div id="maindiv">';
+        echo '</div>' . "\n";
+        echo '<div id="maindiv">' . "\n";
     }
         
     function bodyFooter($params) {
-        echo '</div><!-- id="maindiv" -->';
+        echo '</div><!-- id="maindiv" -->' . "\n";
     }
         
     function footer($params)
     {
         $this->bodyFooter($params);
-        echo '<div class="footer">';
+        echo '<div class="footer">' . "\n";
         // echo '<div>Theme designed by Antoine Mercadal. Copyright &copy; 2010 Capgemini';
         echo $this->navigation->getPoweredBy();
         echo $this->navigation->getShowSource();
-        echo '<div style="clear:both"></div></body></html>';
+        echo '<div style="clear:both"></div></div></body></html>' . "\n";
     }
 
     /**
@@ -181,36 +183,6 @@ class Theme extends Layout {
             return 'class="bgcolor-grey"';
     }
 
-    /**
-     * listTableTop() - Takes an array of titles and builds the first row of a new table.
-     *
-     * @param       array   The array of titles
-     * @param       array   The array of title links
-     * @param       boolean Whether to highlight or not the entry
-     */
-    function listTableTop ($title_arr, $links_arr=false, $selected=false)
-    {
-        $return = '<table class="width-100p100 listTable';
-        if ($selected == true)
-            $return .= ' selected';
-        $return .= '"><tr>';
-        
-        $count=count($title_arr);
-        
-        if ($links_arr)
-            for ($i=0; $i<$count; $i++)
-            {
-                $return .= '<th scope="col"><a class="sortbutton" href="';
-                $return .=util_make_url ($links_arr[$i]);
-                $return .= '"><strong>'.$title_arr[$i].'</strong></a></th>';
-            }
-        else
-            for ($i=0; $i<$count; $i++)
-                $return .= '<th scope="col"><strong>'.$title_arr[$i].'</strong></th>';
-        
-        return $return.'</tr>';
-    }
-
     function listTableBottom()
     {
         return '</table>';
@@ -244,21 +216,21 @@ class Theme extends Layout {
 
             // middle part
             $return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;"><a href="'.$TABS_DIRS[$i].'">' . "\n";
-            $return .= '<div';
+            $return .= '<span';
             
             if ($selected == $i)
                 $return .= ' class="selected"';
             
             $return .= '>';
-            $return .= '<div';
+            $return .= '<span';
             
             if ($nested)
                 $return .= ' class="nested"';
             
             $return .= '>' . "\n";
             $return .= ''.$TABS_TITLES[$i].'' . "\n";
-            $return .= '</div>';
-            $return .= '</div>' . "\n";
+            $return .= '</span>';
+            $return .= '</span>' . "\n";
             $return .= '</a></td>' . "\n";
             
         }
@@ -410,10 +382,10 @@ class Theme extends Layout {
         plugin_hook ("javascript_file",false);
 		echo $this->getJavascripts();
         ?>
-        <script>
+        <script type="text/javascript">
             jQuery.noConflict();
             jQuery(window).load(function(){
-                    jQuery(".quicknews").hide();
+                    Query(".quicknews").hide();
             });
         </script>
         <?php
