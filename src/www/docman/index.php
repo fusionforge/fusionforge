@@ -101,6 +101,8 @@ switch ($action) {
 		break;
 }
 
+html_use_tooltips();
+
 $title = _('Document Manager: Display Document');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));

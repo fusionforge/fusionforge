@@ -411,8 +411,8 @@ class Theme extends Layout {
 		echo $this->getJavascripts();
         ?>
         <script>
-            var JQuery = jQuery.noConflict();
-            JQuery(window).load(function(){
+            jQuery.noConflict();
+            jQuery(window).load(function(){
                     jQuery(".quicknews").hide();
             });
         </script>
