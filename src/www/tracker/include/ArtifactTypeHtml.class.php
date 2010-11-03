@@ -208,6 +208,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					// Convert artifact id to links.
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
 				}
+				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
 				$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$value,$template);		
 			}
 			echo $template;
