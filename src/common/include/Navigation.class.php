@@ -136,7 +136,7 @@ class Navigation extends Error {
 			$exact = 1;
 		}
                 
-		$res .= '<form id="searchBox" action="'.util_make_url ('/search/').'" method="get">
+		$res .= '<form id="searchBox" action="'.util_make_uri('/search/').'" method="get">
                          <div>';
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
@@ -188,10 +188,10 @@ class Navigation extends Error {
                 if (session_loggedin()) {
                         $u =& user_get_object(user_getid());
                         $res['titles'][] = sprintf("%s (%s)", _('Log Out'), $u->getRealName());
-                        $res['urls'][] = util_make_url ('/account/logout.php');
+                        $res['urls'][] = util_make_uri('/account/logout.php');
 
                         $res['titles'][] = _('My Account');
-                        $res['urls'][] = util_make_url ('/account/');
+                        $res['urls'][] = util_make_uri('/account/');
                 } else {
                         $url = '/account/login.php';
                         if(getStringFromServer('REQUEST_METHOD') != 'POST') {
@@ -226,11 +226,11 @@ class Navigation extends Error {
                 
                 // Home
                 $menu['titles'][] = _('Home');
-                $menu['urls'][] = util_make_url ('/'); 
+                $menu['urls'][] = util_make_uri('/'); 
                 
                 // My Page
                 $menu['titles'][] = _('My&nbsp;Page');
-                $menu['urls'][] = util_make_url ('/my/'); 
+                $menu['urls'][] = util_make_uri('/my/'); 
                 if (strstr($request_uri, util_make_uri('/my/'))
                     || strstr($request_uri, util_make_uri('/account/'))
                     || strstr($request_uri, util_make_uri('/register/'))
@@ -242,7 +242,7 @@ class Navigation extends Error {
                 
 		if (forge_get_config('use_trove') || $sys_use_project_tags || $sys_use_project_full_list) {
 			$menu['titles'][] = _('Projects');
-			$menu['urls'][] = util_make_url ('/softwaremap/') ;
+			$menu['urls'][] = util_make_uri('/softwaremap/') ;
 			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -250,7 +250,7 @@ class Navigation extends Error {
                  
 		if (forge_get_config('use_snippet')) {
 			$menu['titles'][] = _('Code&nbsp;Snippets');
-			$menu['urls'][] = util_make_url ('/snippet/') ;
+			$menu['urls'][] = util_make_uri('/snippet/') ;
 			if (strstr($request_uri, util_make_uri('/snippet/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -258,7 +258,7 @@ class Navigation extends Error {
                  
 		if (forge_get_config('use_people')) {
 			$menu['titles'][] = _('Project&nbsp;Openings');
-			$menu['urls'][] = util_make_url ('/people/') ;
+			$menu['urls'][] = util_make_uri('/people/') ;
 			if (strstr($request_uri, util_make_uri('/people/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -291,7 +291,7 @@ class Navigation extends Error {
 		}
 		if (forge_check_global_perm ('forge_stats', 'read')) {
 			$menu['titles'][] = _('Reporting');
-			$menu['urls'][] = util_make_url ('/reporting/') ;
+			$menu['urls'][] = util_make_uri('/reporting/') ;
 			if (strstr($request_uri, util_make_uri('/reporting/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -307,9 +307,9 @@ class Navigation extends Error {
 				} else {
 					$menu['titles'][] = $project->getPublicName();
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-						$menu['urls'][]=util_make_url ('/project/?group_id') .$project->getId();
+						$menu['urls'][]=util_make_uri('/project/?group_id') .$project->getId();
 					} else {
-						$menu['urls'][]=util_make_url ('/projects/') .$project->getUnixName().'/';
+						$menu['urls'][]=util_make_uri('/projects/') .$project->getUnixName().'/';
 					}
 					$selected=count($menu['urls'])-1;
 				}
@@ -367,9 +367,9 @@ class Navigation extends Error {
                         // Summary
                         $menu['titles'][] = _('Summary');
                         if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-                                $url = util_make_url ('/project/?group_id=' . $group_id);
+                                $url = util_make_uri('/project/?group_id=' . $group_id);
                         } else {
-                                $url = util_make_url ('/projects/' . $group->getUnixName() .'/');
+                                $url = util_make_uri('/projects/' . $group->getUnixName() .'/');
                         }
                         $menu['urls'][] = $url;
                         $menu['adminurls'][] = false;
@@ -383,7 +383,7 @@ class Navigation extends Error {
                         // Project Admin
                         if (forge_check_perm ('project_admin', $group_id)) {
                                 $menu['titles'][] = _('Admin');
-                                $menu['urls'][] = util_make_url ('/project/admin/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/project/admin/?group_id=' . $group_id);
                                 $menu['adminurls'][] = false;
                                 if ($toptab == "admin") {
                                         $selected = (count($menu['urls'])-1);
@@ -398,7 +398,7 @@ class Navigation extends Error {
                         
                         // Project Activity tab 
                         $menu['titles'][] = _('Activity');
-                        $menu['urls'][] = util_make_url ('/activity/?group_id=' . $group_id);
+                        $menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
                         $menu['adminurls'][] = false;
                         if ($toptab == "activity") {
                                 $selected = (count($menu['urls'])-1);
@@ -407,7 +407,7 @@ class Navigation extends Error {
                         // Forums
                         if ($group->usesForum()) {
                                 $menu['titles'][] = _('Forums');
-                                $menu['urls'][] = util_make_url ('/forum/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/forum/?group_id=' . $group_id);
                                 if (forge_check_perm ('forum_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url('/forum/admin/?group_id='.$group_id);
                                 } else {
@@ -421,7 +421,7 @@ class Navigation extends Error {
                         // Artifact Tracking
                         if ($group->usesTracker()) {
                                 $menu['titles'][] = _('Tracker');
-                                $menu['urls'][] = util_make_url ('/tracker/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/tracker/?group_id=' . $group_id);
                                 if (forge_check_perm ('tracker_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
                                 } else {
@@ -439,7 +439,7 @@ class Navigation extends Error {
                         // Mailing Lists
                         if ($group->usesMail()) {
                                 $menu['titles'][] = _('Lists');
-                                $menu['urls'][] = util_make_url ('/mail/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/mail/?group_id=' . $group_id);
                                 if (forge_check_perm ('project_admin', $group_id)) {
                                         $menu['adminurls'][] = util_make_url('/mail/admin/?group_id='.$group_id);
                                 } else {
@@ -454,9 +454,9 @@ class Navigation extends Error {
                         // Project/Task Manager
                         if ($group->usesPm()) {
                                 $menu['titles'][] = _('Tasks');
-                                $menu['urls'][] = util_make_url ('/pm/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);
                                 if (forge_check_perm ('pm_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url ('/pm/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/pm/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -469,9 +469,9 @@ class Navigation extends Error {
                         // Doc Manager
                         if ($group->usesDocman()) {
                                 $menu['titles'][] = _('Docs');
-                                $menu['urls'][] = util_make_url ('/docman/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/docman/?group_id=' . $group_id);
                                 if (forge_check_perm ('docman', $group_id, 'approve')) {
-                                        $menu['adminurls'][] = util_make_url ('/docman/?group_id='.$group_id.'&view=admin');
+                                        $menu['adminurls'][] = util_make_uri('/docman/?group_id='.$group_id.'&amp;view=admin');
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -484,9 +484,9 @@ class Navigation extends Error {
                         // Surveys
                         if ($group->usesSurvey()) {
                                 $menu['titles'][] = _('Surveys');
-                                $menu['urls'][] = util_make_url ('/survey/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/survey/?group_id=' . $group_id);
                                 if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url ('/survey/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/survey/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -498,9 +498,9 @@ class Navigation extends Error {
                         // News
                         if ($group->usesNews()) {
                                 $menu['titles'][] = _('News');
-                                $menu['urls'][] = util_make_url ('/news/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/news/?group_id=' . $group_id);
                                 if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url ('/news/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/news/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -512,10 +512,10 @@ class Navigation extends Error {
                         // SCM systems
                         if ($group->usesSCM()) {
                                 $menu['titles'][] = _('SCM');
-                                $menu['urls'][] = util_make_url ('/scm/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/scm/?group_id=' . $group_id);
                                 // eval cvs_flags?
                                 if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url ('/scm/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/scm/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -542,9 +542,9 @@ class Navigation extends Error {
                         // Downloads
                         if ($group->usesFRS()) {
                                 $menu['titles'][] = _('Files');
-                                $menu['urls'][] = util_make_url ('/frs/?group_id=' . $group_id);
+                                $menu['urls'][] = util_make_uri('/frs/?group_id=' . $group_id);
                                 if (forge_check_perm ('frs', $group_id, 'write')) {
-                                        $menu['adminurls'][] = util_make_url ('/frs/admin/?group_id='.$group_id);
+                                        $menu['adminurls'][] = util_make_uri('/frs/admin/?group_id='.$group_id);
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
@@ -590,7 +590,7 @@ class Navigation extends Error {
 	 */
         function getPoweredBy($asHTML=true) {
                 $res['url'] = 'http://fusionforge.org/';
-                $res['image'] = util_make_url ('/images/pow-fusionforge.png');
+                $res['image'] = util_make_uri('/images/pow-fusionforge.png');
                 $res['title'] = '<img src="' 
 			. $res['image'] 
 			. '" alt="Powered By FusionForge" border="0" />';
