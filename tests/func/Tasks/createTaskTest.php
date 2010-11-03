@@ -98,7 +98,7 @@ class CreateTask extends FForge_SeleniumTestCase
     function createSomeTasks()
     {
         // Create a first task
-        $this->click("link=Add task");
+        $this->click("link=Add Task");
         $this->waitForPageToLoad("30000");
         $this->type("summary", "Task1: Hello Paris");
         $this->type("details", "Details: Hello Paris");
@@ -108,7 +108,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->assertTrue($this->isTextPresent("Task Created Successfully"));
 
         // Create a second task
-        $this->click("link=Add task");
+        $this->click("link=Add Task");
         $this->waitForPageToLoad("30000");
         $this->type("summary", "Task2: Hello France");
         $this->type("details", "Details: Hello France");
@@ -118,7 +118,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->assertTrue($this->isTextPresent("Task Created Successfully"));
 
         // Create a third task
-        $this->click("link=Add task");
+        $this->click("link=Add Task");
         $this->waitForPageToLoad("30000");
         $this->type("summary", "Task3: Hello World");
         $this->type("details", "Details: Hello World");
