@@ -30,7 +30,7 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
-if (!forge_check_perm ('docman', $group_id, 'approve')) {
+if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Action Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 } else {
