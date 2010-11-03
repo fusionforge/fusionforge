@@ -208,7 +208,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					// Convert artifact id to links.
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
 				}
-				$template = str_replace('<!--'.$efarr[$i]['field_name'].'-->',$value,$template);		
+				$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$value,$template);		
 			}
 			echo $template;
 			return ;
@@ -278,8 +278,8 @@ class ArtifactTypeHtml extends ArtifactType {
 					$post_name = html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			}
-			$template = str_replace('<!--PostName:'.$efarr[$i]['field_name'].'-->',$post_name,$template);
-			$template = str_replace('<!--'.$efarr[$i]['field_name'].'-->',$str,$template);
+			$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
+			$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$str,$template);
 		}
 		if($template != NULL){
 			echo $template;
