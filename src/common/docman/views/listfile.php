@@ -42,76 +42,49 @@ if (!$DocGroupName) {
 ?>
 
 <script language="javascript">
+var controller;
+
 jQuery(function() {
-    jQuery('#docman-addnewfile').tipsy({delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('#docman-addsubdirectory').tipsy({delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('#docman-editdirectory').tipsy({delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('#docman-deletedirectory').tipsy({delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('.docman-viewfile').tipsy({gravity: 'nw', delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('.docman-reserveddocument').tipsy({delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('.docman-movetotrash').tipsy({gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('.docman-editfile').tipsy({gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('.docman-releasereservation').tipsy({gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true});
-    jQuery('.docman-reservefile').tipsy({gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true});
+    controller = new DocManListFileController({
+        groupId:            <?php echo $group_id ?>, 
+        tipsyElements:      [
+                                {selector: '#docman-addnewfile', options:{delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '#docman-addsubdirectory', options:{delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '#docman-editdirectory', options:{delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '#docman-deletedirectory', options:{delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '.docman-reserveddocument', options:{delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 1000, delayOut: 500, fade: true}},
+                                {selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true}}
+                            ],
+        
+        divAddDirectory:        jQuery('#addsubdocgroup'),
+        divAddFile:             jQuery('#addfile'),
+        divEditDirectory:       jQuery('#editdocgroup'),
+        buttonAddDirectory:     jQuery('#docman-addsubdirectory'),
+        buttonAddNewFile:       jQuery('#docman-addnewfile'),
+        buttonEditDirectory:    jQuery('#docman-editdirectory'),
+        docManURL:              '<?php util_make_url("docman") ?>',
+        lockIntervalDelay:      60000 //ms
+    });
 });
 
-var lockInterval = new Array();
-
-function displaySubGroup() {
-	if ( 'none' == document.getElementById('addsubdocgroup').style.display ) {
-		document.getElementById('addsubdocgroup').style.display = 'block';
-		document.getElementById('addfile').style.display = 'none';
-		document.getElementById('editdocgroup').style.display = 'none';
-	} else {
-		document.getElementById('addsubdocgroup').style.display = 'none';
-	}
-}
-function displayAddFile() {
-	if ( 'none' == document.getElementById('addfile').style.display ) {
-		document.getElementById('addfile').style.display = 'block';
-		document.getElementById('addsubdocgroup').style.display = 'none';
-		document.getElementById('editdocgroup').style.display = 'none';
-	} else {
-		document.getElementById('addfile').style.display = 'none';
-	}
-}
-function displayEditDocGroup() {
-	if ( 'none' == document.getElementById('editdocgroup').style.display ) {
-		document.getElementById('editdocgroup').style.display = 'block';
-		document.getElementById('addsubdocgroup').style.display = 'none';
-		document.getElementById('addfile').style.display = 'none';
-	} else {
-		document.getElementById('editdocgroup').style.display = 'none';
-	}
-}
-function displayEditFile(id) {
-	var divid = 'editfile'+id;
-	if ( 'none' == document.getElementById(divid).style.display ) {
-		document.getElementById(divid).style.display = 'block';
-        jQuery.get('<?php util_make_url('docman') ?>',
-                    {group_id:<?php echo $group_id ?>,action:'lockfile',lock:1,fileid:id});
-        lockInterval[id] = setInterval("jQuery.get('<?php util_make_url('docman') ?>',{group_id:<?php echo $group_id ?>,action:'lockfile',lock:1,fileid:"+id+"})",60000);
-	} else {
-		document.getElementById(divid).style.display = 'none';
-        jQuery.get('<?php util_make_url('docman') ?>',
-                    {group_id:<?php echo $group_id ?>,action:'lockfile',lock:0,fileid:id});
-        clearInterval(lockInterval[id]);
-	}
-}
 </script>
 
 <?php
 echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
-	echo '<a href="#" id="docman-editdirectory" title="'._('Edit this directory').'" onclick="javascript:displayEditDocGroup()" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-	echo '<a href="#" id="docman-addsubdirectory" title="'._('Add a new subdirectory').'" onclick="javascript:displaySubGroup()" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
+	echo '<a href="#" id="docman-editdirectory" title="'._('Edit this directory').'">'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+	echo '<a href="#" id="docman-addsubdirectory" title="'._('Add a new subdirectory').'">'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
 	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
 		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Permanently delete this directory').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 }
 
 if (forge_check_perm ('docman', $group_id, 'submit')) {
-	echo '<a href="#" onclick="javascript:displayAddFile()" id="docman-addnewfile" title="'. _('Add a new file') . '" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
+	echo '<a href="#" id="docman-addnewfile" title="'. _('Add a new file') . '" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
 }
 
 echo '</h3>';
@@ -239,7 +212,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
             }
             if (!$d->getLocked() && !$d->getReserved()) {
 			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this file to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this file'))). '</a>';
-			    echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			    echo '<a href="#" onclick="javascript:controller.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
 			        echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-reservefile" title="'. _('Reserve this file for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
             } else {
                 if ($d->getReservedBy() != $LUSER->getID()) {
@@ -248,7 +221,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
                     }
                 } else {
 			        echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this file to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this file'))). '</a>';
-			        echo '<a href="#" onclick="javascript:displayEditFile(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			        echo '<a href="#" onclick="javascript:controller.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
 			        echo '<a href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
                 }
             }
