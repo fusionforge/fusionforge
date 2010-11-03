@@ -39,7 +39,6 @@ class Theme extends Layout {
         $this->imgbaseurl = $this->themeurl . 'images/';
         $this->imgroot = $this->imgbaseurl;
 //        $this->doctype = 'strict';
-        $this->cssbaseurl = $this->themeurl . 'css/';
 
         $this->addStylesheet('/themes/funky/css/theme.css');
         $this->addStylesheet('/themes/funky/css/theme-pages.css');

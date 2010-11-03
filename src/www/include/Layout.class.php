@@ -48,15 +48,6 @@ class Layout extends Error {
 	var $doctype = 'transitional';
 
 	/**
-	 * Which cssfiles to use. Can be configured in the
-	 * constructor. 
-	 *
-	 * @var array $cssurls is a list of urls that should point to
-	 * the used stylesheets.
-	 */
-	var $cssurls;
-
-	/**
 	 * The default main page content 
 	 * @var      string $rootindex
 	 */
@@ -73,18 +64,6 @@ class Layout extends Error {
 	 * @var      string $themeurl
 	 */ 
 	var $themeurl;
-
-	/**
-	 * The base directory of the css files in the servers file system
-	 * @var      string $cssdir
-	 */ 
-	var $cssdir;
-
-	/**
-	 * The base url of the css files
-	 * @var      string $cssbaseurl
-	 */ 
-	var $cssbaseurl;
 
 	/**
 	 * The base directory of the image files in the servers file system
@@ -166,14 +145,6 @@ class Layout extends Error {
 		$this->themeurl = util_make_url('themes/' . forge_get_config('default_theme') . '/');
 
 		// determine {css,img,js}{url,dir}
-		if (file_exists ($this->themedir . 'css/')) {
-			$this->cssdir = $this->themedir . 'css/';
-			$this->cssbaseurl = $this->themeurl . 'css/';
-		} else {
-			$this->cssdir = $this->themedir;
-			$this->cssbaseurl = $this->themeurl;
-		}
-
 		if (file_exists ($this->themedir . 'images/')) {
 			$this->imgdir = $this->themedir . 'images/';
 			$this->imgbaseurl = $this->themeurl . 'images/';
@@ -190,25 +161,7 @@ class Layout extends Error {
 			$this->jsbaseurl = $this->themeurl;
 		}
 
-		// determine CSS stylesheets
-		$this->cssurls[] = util_make_url ('/themes/css/fusionforge.css');
-
-		/* check if a personalized css stylesheet exist, if yes include only
-		   this stylesheet. New stylesheets should use the <themename>.css file.
-		 */
-		$theme_cssfile = forge_get_config('default_theme') . '.css';
-		if (file_exists($this->cssdir . $theme_cssfile)) {
-			$this->cssurls[] = $this->cssbaseurl . $theme_cssfile;
-		} else {
-			/* if this is not the case, then include the compatibility stylesheet
-			   that contains all removed styles from the code and check if a
-			   custom stylesheet exists. 
-			   Used for compatibility with existing stylesheets
-			 */
-			if (file_exists($this->cssdir . 'theme.css')) {
-				$this->cssurls[] = $this->cssbaseurl . 'theme.css';
-			}
-		}
+		$this->addStylesheet('/themes/css/fusionforge.css');
 
 		// for backward compatibility 
 		$this->imgroot = $this->imgbaseurl;
@@ -371,7 +324,7 @@ class Layout extends Error {
 		echo '<link rel="search" title="' 
 			. forge_get_config ('forge_name').'" href="' 
 			. util_make_url ('/export/search_plugin.php') 
-			. '" type="application/opensearchdescription+xml"/>';
+			. '" type="application/opensearchdescription+xml"/>'."\n";
 	}
 
 	/** 
@@ -379,11 +332,6 @@ class Layout extends Error {
 	 * calls the plugin cssfile hook.
 	 */
 	function headerCSS() {
-		// include the common css
-		foreach ($this->cssurls as $cssurl) {
-			echo '<link rel="stylesheet" type="text/css" href="' . $cssurl . '" />';
-		}
-
 		plugin_hook ('cssfile',$this);
 		echo $this->getStylesheets();
 	}

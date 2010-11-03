@@ -109,8 +109,9 @@ class GforgeWikiPlugin extends Plugin {
 			}
 		} elseif ($hookname == 'cssfile') {
 			if (defined('PHPWIKI_BASE_URL')) {
+				use_stylesheet('/wiki/themes/fusionforge/fusionforge.css');
+				
 				echo '<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
-				echo "\n".'    <link rel="stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge.css" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
 				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-rereading.css" title="Rereading Mode" />';

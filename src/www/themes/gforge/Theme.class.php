@@ -30,24 +30,24 @@ define('BOTTOM_TAB_HEIGHT', 22);
 
 class Theme extends Layout {
 
-        function Theme() {
-                // Parent constructor
-                $this->Layout();
-                $this->doctype = 'strict';
-                $this->themeurl = util_make_url('themes/gforge/');
-                $this->imgbaseurl = $this->themeurl . 'images/';
-                $this->imgroot = $this->imgbaseurl;
-                $this->cssbaseurl = $this->themeurl . 'css/';
-		$this->cssurls = array(
-			util_make_url ('/scripts/yui/reset-fonts-grids/reset-fonts-grids.css'),
-			util_make_url ('/scripts/yui/base/base-min.css'),
-			util_make_url ('/themes/css/fusionforge.css'),
-			$this->cssbaseurl .'theme.css',
-			$this->cssbaseurl .'theme-pages.css',
-			);
-        }
+	function Theme() {
+		// Ensure our stylesheets are loaded before the default one (reset first).
+		$this->addStylesheet('/scripts/yui/reset-fonts-grids/reset-fonts-grids.css');
+		$this->addStylesheet('/scripts/yui/base/base-min.css');
+		$this->addStylesheet('/themes/css/fusionforge.css');
+		$this->addStylesheet('/themes/gforge/css/theme.css');
+		$this->addStylesheet('/themes/gforge/css/theme-pages.css');
 
-        function bodyHeader($params) {
+		// Parent constructor
+		$this->Layout();
+		$this->doctype = 'strict';
+		$this->themeurl = util_make_url('themes/gforge/');
+		$this->imgbaseurl = $this->themeurl . 'images/';
+		$this->imgroot = $this->imgbaseurl;
+
+	}
+
+	function bodyHeader($params) {
                 global $user_guide;
 
                 echo '
