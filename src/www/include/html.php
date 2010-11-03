@@ -742,8 +742,10 @@ function site_project_header($params) {
 	}
 
 	if (isset($params['title'])){
+		$params['h1']=$params['title'];
 		$params['title']=$project->getPublicName().': '.$params['title'];
 	} else {
+		$params['h1']=$project->getPublicName();
 		$params['title']=$project->getPublicName();
 	}
 	
