@@ -102,6 +102,7 @@ switch ($action) {
 }
 
 html_use_tooltips();
+use_javascript('scripts/DocManController.js');
 
 $title = _('Document Manager: Display Document');
 
