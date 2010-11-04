@@ -105,9 +105,11 @@ if (getStringFromRequest('submit')) {
 			}
 			if ($send_mail) {
 				echo '<p>';
-				printf(_('Congratulations. You have registered on %1$s.'), forge_get_config ('forge_name'));
+				printf(_('You have registered the %1$s account on %2$s.'), 
+				       $new_user->getUnixName(),
+				       forge_get_config ('forge_name'));
 				echo '</p>';
-				print '<p>' . _('You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.') . '</p>';
+				print '<p>' . _('A confirmation email is being sent to verify the submitted email address. Visiting the link sent in this email will activate the account.') . '</p>';
 			} else {
 				print '<p>' ; 
 				printf (_('You have registered and activated user %1$s on %2$s. They will not receive an eMail about this fact.'), $unix_name, forge_get_config('forge_name'));
