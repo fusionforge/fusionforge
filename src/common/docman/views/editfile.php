@@ -37,7 +37,7 @@ global $nested_docs; // flat docs array
 foreach ($nested_docs[$dirid] as $d) {
 
 ?>
-<script language="javascript">
+<script type="text/javascript">
 	function doItEditData<?php echo $d->getID(); ?>() {
 		document.getElementById('editdata<?php echo $d->getID(); ?>').submit();
 		document.getElementById('submiteditdata<?php echo $d->getID(); ?>').disabled = true;

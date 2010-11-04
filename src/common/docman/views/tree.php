@@ -47,22 +47,22 @@ if ($d_arr != NULL ) {
 echo '<div id="documenttree" style="height:100%">';
 ?>
 
-<script language="JavaScript"><!--
+<script type="text/javascript"><!--
 	var myThemeXPBase = "<?php echo util_make_uri ('/jscook/ThemeXP/'); ?>";
 --></script>
-<script language="JavaScript" src="<?php echo util_make_uri ('/jscook/JSCookTree.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo util_make_uri ('/jscook/JSCookTree.js'); ?>"></script>
 <link rel="stylesheet" href="<?php echo util_make_uri ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
 <script src="<?php echo util_make_uri ('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
 <div id="myMenuID" style="overflow:auto; height:300px"></div>
 <!-- if someone wants to make it dynamic.... please do it -->
-	<!--<script language="Javascript">
+	<!--<script type="text/javascript">
 		var mymenuidDiv = document.getElementById("myMenuID");
 		var documenttreeDiv = document.getElementById("documenttree");
 		mymenuidDiv.style.height = documenttreeDiv.offsetHeight+"px";
 	</script>-->
 
-<script language="JavaScript"><!--
+<script type="text/javascript"><!--
 	var myMenu =
 		[
 			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + ctThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + ctThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '#', '', '', <?php docman_recursive_display(0); ?>

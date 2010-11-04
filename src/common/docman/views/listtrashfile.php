@@ -37,7 +37,7 @@ if (!$d_trash_arr || count($d_trash_arr) < 1) {
     echo '<div class="feedback">'._('Trash is empty').'</div>';
 } else {
 ?>
-<script language="javascript">
+<script type="text/javascript">
 function displayTrashDiv() {
     if ( 'none' == document.getElementById('listtrash').style.display ) {
         document.getElementById('listtrash').style.display = 'block';

@@ -144,7 +144,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		return;
 	}
 	
-	echo '<script language="javascript">';
+	echo '<script type="text/javascript">';
 	echo 'function EditData(iddiv) {';
 	echo '	if ( "none" == document.getElementById(iddiv).style.display ) {';
 	echo '		document.getElementById(iddiv).style.display = "block";';

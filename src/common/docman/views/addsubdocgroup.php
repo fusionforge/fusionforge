@@ -30,7 +30,7 @@ global $group_id; // id of the group
 global $dirid; //id of the doc_group
 
 ?>
-<script language="javascript">
+<script type="text/javascript">
 function doItAddSubGroup() {
 	document.getElementById('addsubgroup').submit();
 	document.getElementById('submitaddsubgroup').disabled = true;

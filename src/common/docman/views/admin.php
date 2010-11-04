@@ -37,7 +37,7 @@ if ( !forge_check_perm ('docman', $group_id, 'approve')) {
 ?>
 
 <div id="principalAdminDiv" class="docmanDivIncluded">
-<script language="javascript">
+<script type="text/javascript">
 function displayAdminDiv(id) {
     var mainDiv = document.getElementById('principalAdminDiv');
     for (var i = 0; i < mainDiv.childNodes.length; i++) {
