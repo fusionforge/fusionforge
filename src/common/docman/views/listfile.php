@@ -41,10 +41,11 @@ if (!$DocGroupName) {
 }
 ?>
 
-<script language="text/javascript">
+<!-- do not use : text/javascript : it's broken -->
+<script language="javascript">
 var controller;
 
-jQuery(function() {
+jQuery(document).ready(function() {
     controller = new DocManListFileController({
         groupId:            <?php echo $group_id ?>, 
         tipsyElements:      [
