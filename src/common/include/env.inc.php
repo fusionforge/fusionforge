@@ -14,6 +14,7 @@ $include_path = join(PATH_SEPARATOR,
 		"$fusionforge_basedir/common", "$fusionforge_basedir/www",
 		"$fusionforge_basedir/plugins", "$fusionforge_basedir",
 		"$fusionforge_basedir/www/include",
+		"$fusionforge_basedir/common/include",
 		"/usr/share/php","/usr/share/pear"));
 
 // By default, the include_path is changed to include path needed by Gforge.

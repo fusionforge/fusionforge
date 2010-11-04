@@ -22,6 +22,8 @@ set -e
 #     so that unnecessary prompting doesn't happen if a package's
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
+PATH=/usr/share/gforge/bin:/usr/share/fusionforge/bin:$PATH
+export PATH
 
 case "$1" in
     configure)
@@ -30,7 +32,7 @@ case "$1" in
 	chgrp list /var/lib/mailman/lists/extend.py 
 	/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl
 	getent group www-data | grep -q list || adduser list www-data
-	[ -d /var/lib/mailman/lists/mailman/ ] || /usr/sbin/newlist -q mailman postmaster@`hostname -f` `grep admin_password /etc/gforge/gforge.conf | cut -d= -f2`
+	[ -d /var/lib/mailman/lists/mailman/ ] || /usr/sbin/newlist -q mailman postmaster@`hostname -f` `forge_get_config database_password`
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
