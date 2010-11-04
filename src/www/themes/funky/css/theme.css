@@ -323,6 +323,10 @@ hr {
     border-bottom: 0;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    -webkit-top-right-border-radius: 6px;
+    -webkit-top-left-border-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    -moz-border-radius-topleft: 6px;
     background-color: #909DB7;
     line-height: 17px;
     color: black;
@@ -733,6 +737,8 @@ a.topTabSelected:hover {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     text-shadow: 1px 1px #fff5CA;
+    text-align: left;
+    font-size: small;
     margin-bottom: 3px;
     margin-top: 2px;
     margin-right: 3px;
@@ -749,6 +755,8 @@ a.topTabSelected:hover {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     text-shadow: 1px 1px #DFF59f;
+    text-align: left;
+    font-size: small;
     margin-bottom: 3px;
     margin-top: 2px;
     margin-right: 3px;
