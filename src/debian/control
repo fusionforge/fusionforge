@@ -256,6 +256,12 @@ Description: collaborative development tool - Blocks plugin
  FusionForge project to have its own Blocks, and gives some
  control over it to the project's administrator.
 
+Package: fusionforge-plugin-blocks
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
+Replaces: gforge-plugin-blocks
+Description: collaborative development tool - Blocks plugin
+
 Package: fusionforge-plugin-contribtracker
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
@@ -272,6 +278,12 @@ Description: Contribution tracker plugin for FusionForge
  This plugin allows each project to display a list of significant
  contributions, along with their authors.
 
+Package: fusionforge-plugin-contribtracker
+Architecture: all
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Description: Contribution tracker plugin for FusionForge
+Replaces: gforge-plugin-contribtracker
+
 Package: fusionforge-plugin-extratabs
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
@@ -287,6 +299,12 @@ Description: Extratabs plugin for FusionForge
  .
  This plugin allows each project to define extra tabs with arbitrary
  titles and links.
+
+Package: fusionforge-plugin-extratabs
+Architecture: all
+Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
+Description: Extratabs plugin for FusionForge
+Replaces: gforge-plugin-extratabs
 
 Package: fusionforge-plugin-globalsearch
 Architecture: all
@@ -319,6 +337,23 @@ Description: Mediawiki plugin for FusionForge
  integrated into one web site and managed through a web interface.
  .
  This plugin allows each project to embed Mediawiki under a tab.
+
+Package: fusionforge-plugin-oslc
+Homepage: http://picoforge.int-evry.fr/cgi-bin/twiki/view/Oslc/Web/FusionForgeOslcServer
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php-pear, php-http, ${misc:Depends}
+Description: OSLC-CM compatible plugin for FusionForge tracker system.
+ OSLC-CM is a standard specification for APIs in Change Management
+ applications. It is based on Web technologies such as REST, RDF, or AJAX.
+ This package provides an OSLC-CM V2 compatible plugin for FusionForge 
+ tracker system. 
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ OSLC-CM compatible plugin for FusionForge tracker system.
 
 Package: fusionforge-plugin-projectlabels
 Architecture: all
