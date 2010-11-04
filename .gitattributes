@@ -1025,6 +1025,7 @@ src/docs/docbook/docbook/user_guide/sitewide_functions/trove.xml svneol=native#t
 src/docs/docbook/docbook/user_guide/user_functions/index.xml svneol=native#text/xml
 src/docs/docbook/docbook/user_guide/user_guide.xml svneol=native#text/xml
 src/docs/fusionforge.doxygen -text
+src/docs/list_of_public_fusionforge -text
 src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
 src/etc/config.ini-usrlocal -text
