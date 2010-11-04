@@ -182,12 +182,6 @@ class Theme extends Layout {
             return 'class="bgcolor-grey"';
     }
 
-    function listTableBottom()
-    {
-        return '</table>';
-    }
-
-
     function tabGenerator($TABS_DIRS, $TABS_TITLES, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%')
     {
         $count=count($TABS_DIRS);
