@@ -130,6 +130,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->createUser ("toto") ;
 
 		// Temporarily grant project approval rights to user
+		// (For cases where project_registration_restricted=true)
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
@@ -144,7 +145,6 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->registerProject ("TotoProject", "toto") ;
 
 		// Revoke project approval rights
-		// (For cases where project_registration_restricted=true)
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 		$this->select ("//form[contains(@action,'globalroleedit.php')]//select[@name='role_id']", "label=Project approvers") ;
@@ -233,6 +233,24 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->click ("//input[@value='Add User']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
+
+		// Create "Documentation masters" role
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Documentation masters") ;
+		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Make it shared
+		$this->click ("//input[@type='checkbox' and @name='public']") ;
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Add docmaster
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='form_unix_name']", "docmaster") ;
+		$this->click ("//input[@value='Add User']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
 
 		// Register projects
 		$this->switchUser ("bigboss") ;
@@ -325,6 +343,128 @@ class RBAC extends FForge_SeleniumTestCase
 ]
 /../td[.='Junior Developer']")) ;
 
+		// Edit permissions of the JD role
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+
+		$this->click ("//td[.='Junior Developer']/../td/input[@value='Edit Permissions']") ;
+		$this->waitForPageToLoad("30000");
+
+		$this->select("//select[contains(@name,'data[frs]')]", "label=View public packages only");
+		$this->select("//select[contains(@name,'data[docman]')]", "label=Read only");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertSelected("//select[contains(@name,'data[docman]')]", "Read only");
+		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View public packages only");
+		$this->select("//select[contains(@name,'data[frs]')]", "label=View all packages");
+		$this->click ("//input[@value='Submit']") ;
+		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View all packages");
+		$this->waitForPageToLoad("30000");
+
+		// Check that SD is technician on trackers but DM isn't
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Bugs");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit New");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//select[@name='assigned_to']")) ;
+		$this->assertTrue($this->isElementPresent("//select[@name='assigned_to']/option[.='guru Lastname']")) ;
+		$this->assertFalse($this->isElementPresent("//select[@name='assigned_to']/option[.='docmaster Lastname']")) ;
+
+		// Check that SD is a manager on trackers but JD isn't
+		$this->switchUser('guru');
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Bugs");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit New");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//select[@name='assigned_to']")) ;
+
+		$this->switchUser('trainee');
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Bugs");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit New");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isElementPresent("//select[@name='assigned_to']")) ;
+
+		// Also check that guru isn't a manager on SubProject yet
+		$this->switchUser('guru');
+		$this->gotoProject ("SubProject") ;
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Bugs");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit New");
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse($this->isElementPresent("//select[@name='assigned_to']")) ;
+
+		// Mark SD role as shared
+		$this->switchUser('bigboss');
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->click ("//td[.='Senior Developer']/../td/input[@value='Edit Permissions']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click ("//input[@type='checkbox' and @name='public']") ;
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Link MetaProject/SD role into SubProject
+		$this->gotoProject ("SubProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Senior Developer (in project MetaProject)']")) ;
+		$this->select("//input[@value='Link external role']/../../td/select", "label=Senior Developer (in project MetaProject)") ;
+		$this->click("//input[@value='Link external role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//tr/td[.='Senior Developer (in project MetaProject)']/../td/input[contains(@value,'Unlink Role')]"));
+
+		// Grant it tracker manager permissions
+		$this->click ("//td[.='Senior Developer (in project MetaProject)']/../td/input[@value='Edit Permissions']") ;
+		$this->waitForPageToLoad("30000");
+		$this->select("//select[contains(@name,'data[tracker]')]", "label=Manager");
+		$this->click ("//input[@value='Submit']") ;
+		$this->waitForPageToLoad("30000");
+
+		// Check that guru now has manager permissions on SubProject
+		$this->switchUser('guru');
+		$this->gotoProject ("SubProject") ;
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Bugs");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Submit New");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//select[@name='assigned_to']")) ;
+
+		// Link global "Documentation masters" role into SubProject
+		$this->switchUser ("bigboss") ;
+		$this->gotoProject ("SubProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+
+		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Documentation masters (global role)']")) ;
+		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Project approvers (global role)']")) ;
+		$this->select("//input[@value='Link external role']/../../td/select", "label=Documentation masters (global role)") ;
+		$this->click("//input[@value='Link external role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//tr/td[.='Documentation masters (global role)']/../td/input[contains(@value,'Unlink Role')]"));
 
 	}
 }
