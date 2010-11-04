@@ -25,12 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	@OLDPACKAGE@-config
-
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin forumml "ForumML"'
+	/usr/share/@OLDPACKAGE@/bin/register-plugin forumml "ForumML"
 	/usr/share/gforge/plugins/forumml/bin/installFF.sh
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/forumml/bin/db-upgrade.pl'
+	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/db-upgrade.pl
 	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/ml_arch_2_DBFF.pl
 
     ;;
