@@ -25,12 +25,10 @@ set -e
 
 case "$1" in
     configure)
-	@OLDPACKAGE@-config
-
 	# Prepare database
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/bin/register-plugin mailman "mailman"'
+	/usr/share/@OLDPACKAGE@/bin/register-plugin mailman "Mailman"
 	chgrp list /var/lib/mailman/lists/extend.py 
-	su -s /bin/sh @OLDPACKAGE@ -c '/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl'
+	/usr/share/@OLDPACKAGE@/plugins/mailman/bin/db-upgrade.pl
 	getent group www-data | grep -q list || adduser list www-data
 	[ -d /var/lib/mailman/lists/mailman/ ] || /usr/sbin/newlist -q mailman postmaster@`hostname -f` `grep admin_password /etc/gforge/gforge.conf | cut -d= -f2`
     ;;

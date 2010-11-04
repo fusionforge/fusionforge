@@ -11,7 +11,7 @@ Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
 
 Package: fusionforge-plugin-mailman
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1-3), ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, ${misc:Depends}
 Provides: gforge-lists
 Conflicts: gforge-lists
 Description: collaborative development tool - mailing-lists plugin (using Mailman)

@@ -313,6 +313,9 @@ plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_wid
 plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_my_jobs.png -text svneol=unset#image/png
 plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#image/png
 plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#image/png
+plugins/coclico/mailman/Mailman.ori/Archiver/Archiver.py -text
+plugins/coclico/mailman/Mailman.ori/MailList.py -text
+plugins/coclico/mailman/Mailman.ori/SecurityManager.py -text
 plugins/coclico/mailman/README.txt -text
 plugins/coclico/mailman/bin/db-delete.pl -text svneol=unset#text/x-perl
 plugins/coclico/mailman/bin/db-upgrade.pl -text svneol=unset#text/x-perl
@@ -328,6 +331,8 @@ plugins/coclico/mailman/debian/control -text
 plugins/coclico/mailman/debian/copyright -text
 plugins/coclico/mailman/debian/docs -text
 plugins/coclico/mailman/debian/dsf-in/plugin-mailman.postinst -text
+plugins/coclico/mailman/debian/dsf-in/plugin-mailman.postrm -text
+plugins/coclico/mailman/debian/dsf-in/plugin-mailman.preinst -text
 plugins/coclico/mailman/debian/dsf-in/plugin-mailman.prerm -text
 plugins/coclico/mailman/debian/po/templates.pot -text
 plugins/coclico/mailman/debian/rules -text
@@ -359,10 +364,14 @@ plugins/coclico/mailman/packaging/install/plugin-mailman -text
 plugins/coclico/mailman/packaging/links/plugin-mailman -text
 plugins/coclico/mailman/translations/en.po -text
 plugins/coclico/mailman/translations/gforge.pot -text
+plugins/coclico/mailman/usr/lib/mailman/Mailman/Archiver/Archiver.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/ExternalConnector.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/ForgeSecurityManager.py -text
+plugins/coclico/mailman/usr/lib/mailman/Mailman/MailList.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/MySQLConnector.py -text
+plugins/coclico/mailman/usr/lib/mailman/Mailman/OldSecurityManager.py -text
 plugins/coclico/mailman/usr/lib/mailman/Mailman/PsycopgConnector.py -text
+plugins/coclico/mailman/usr/lib/mailman/Mailman/SecurityManager.py -text
 plugins/coclico/mailman/utils/manage-translations.sh -text svneol=unset#text/x-sh
 plugins/coclico/mailman/var/lib/mailman/lists/extend.py -text
 plugins/coclico/mailman/www/admin/deletelist.php -text
