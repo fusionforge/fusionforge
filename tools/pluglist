@@ -1,0 +1,9 @@
+#! /bin/sh
+echo "============== FusionForge Plugins ==============="
+find src/plugins  -mindepth 1 -maxdepth 1 -type d | sort
+
+echo "============== FusionForge Debian Supported Plugins ==============="
+grep Package src/debian/control | grep plugin | sort
+
+echo "============== FusionForge Redhat/Centos Supported Plugins ==============="
+grep package src/fusionforge.spec | grep plugin | sort

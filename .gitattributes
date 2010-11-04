@@ -4758,6 +4758,7 @@ tools/mcrypt-test.sh svneol=native#text/x-sh
 tools/mcrypt-test2.sh svneol=native#text/x-sh
 tools/mcrypt-test3.sh svneol=native#text/x-sh
 tools/mirror-gforge.sh svneol=native#text/x-sh
+tools/pluglist -text
 tools/replicate_gforge.sh svneol=native#text/x-sh
 tools/reset_projectfiles.sh svneol=native#text/x-sh
 tools/rpmdev-setuptree -text
