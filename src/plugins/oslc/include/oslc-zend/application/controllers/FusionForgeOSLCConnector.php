@@ -45,8 +45,6 @@ require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 
 
-//print_r($sys_dbname);//, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
-
 /**
  * FusionForge OSLC server controller
  *

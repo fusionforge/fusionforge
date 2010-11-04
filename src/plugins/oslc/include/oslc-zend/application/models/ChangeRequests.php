@@ -607,6 +607,3 @@ class ChangeRequestsCsv extends ChangeRequests
 	}
 	*/
 }
-
-
-
