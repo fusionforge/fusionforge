@@ -97,7 +97,7 @@ switch ($action) {
 	case "releasefile":
 	case "enforcereserve":
 	case "lockfile":
-		include ("docman/actions/$action.php");
+		include ($gfcommon."docman/actions/$action.php");
 		break;
 }
 
@@ -109,12 +109,12 @@ $title = _('Document Manager: Display Document');
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
 echo '<div style="float:left; width:17%;">';
-include('docman/views/tree.php');
+include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 
 echo '<div style="float:right; width:82%;">';
-include('docman/views/menu.php');
-include('docman/views/views.php');
+include ($gfcommon.'docman/views/menu.php');
+include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 
 echo '<div style="clear:both; margin-bottom:5px;" />';
