@@ -41,7 +41,7 @@ if (!$DocGroupName) {
 }
 ?>
 
-<script language="javascript">
+<script language="text/javascript">
 var controller;
 
 jQuery(function() {
