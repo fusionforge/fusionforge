@@ -1,8 +1,8 @@
-src/plugins/oslc/common/*                  usr/share/@OLDPACKAGE@/plugins/oslc/common/
-src/plugins/oslc/include/*                 usr/share/@OLDPACKAGE@/plugins/oslc/include/
-src/plugins/oslc/db/*                      usr/share/@OLDPACKAGE@/plugins/oslc/db/
-src/plugins/oslc/bin/*                     usr/share/@OLDPACKAGE@/plugins/oslc/bin/
-src/plugins/oslc/www/*                     usr/share/@OLDPACKAGE@/plugins/oslc/www/
-src/plugins/oslc/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
-src/plugins/oslc/etc/plugins/oslc/*        etc/@OLDPACKAGE@/plugins/oslc/
-src/plugins/oslc/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+plugins/oslc/common/*                  usr/share/@OLDPACKAGE@/plugins/oslc/common/
+plugins/oslc/include/*                 usr/share/@OLDPACKAGE@/plugins/oslc/include/
+plugins/oslc/db/*                      usr/share/@OLDPACKAGE@/plugins/oslc/db/
+plugins/oslc/bin/*                     usr/share/@OLDPACKAGE@/plugins/oslc/bin/
+plugins/oslc/www/*                     usr/share/@OLDPACKAGE@/plugins/oslc/www/
+plugins/oslc/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
+plugins/oslc/etc/plugins/oslc/*        etc/@OLDPACKAGE@/plugins/oslc/
+plugins/oslc/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
