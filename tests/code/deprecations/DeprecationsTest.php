@@ -20,6 +20,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
 		$output = `cd $root; find src tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
 					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
+					   | grep -v ^src/plugins/oslc/include/oslc-zend/application/controllers/MantisOSLCConnector.php \
 					   | grep -v ^src/db/upgrade-db.php \
 					   | grep -v ^src/www/include/database-oci8.php \
 					   | grep -v ^src/common/include/database-pgsql.php \
