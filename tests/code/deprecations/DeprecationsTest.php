@@ -18,13 +18,14 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	public function testdb_query()
 	{
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
-		$output = `cd $root; find src tests -name '*.php' -type f | xargs pcregrep -l '\bdb_m?query\b' \
-					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
-					   | grep -v ^src/plugins/oslc/include/oslc-zend/application/controllers/MantisOSLCConnector.php \
-					   | grep -v ^src/db/upgrade-db.php \
-					   | grep -v ^src/www/include/database-oci8.php \
-					   | grep -v ^src/common/include/database-pgsql.php \
-					   | grep -v ^src/common/include/database-mysql.php`;
+		$output = `cd $root; find src tests -name '*.php' -type f | \
+		    xargs pcregrep -l '\bdb_m?query\b' | grep -v \
+		    -e ^tests/code/deprecations/DeprecationsTest.php \
+		    -e ^src/plugins/oslc/include/oslc-zend/application/controllers/MantisOSLCConnector.php \
+		    -e ^src/db/upgrade-db.php \
+		    -e ^src/www/include/database-oci8.php \
+		    -e ^src/common/include/database-pgsql.php \
+		    -e ^src/common/include/database-mysql.php`;
 		$this->assertEquals('', $output);
 	}
 	
@@ -143,9 +144,10 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	public function testsession_require()
 	{
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
-		$output = `cd $root ; find src tests -name '*.php' -type f | xargs pcregrep -l '\bsession_require[^_]' \
-					   | grep -v ^tests/code/deprecations/DeprecationsTest.php \
-					   | grep -v ^src/common/include/session.php`;
+		$output = `cd $root ; find src tests -name '*.php' -type f | \
+		    xargs pcregrep -l '\bsession_require[^_]' | grep -v \
+		    -e ^tests/code/deprecations/DeprecationsTest.php \
+		    -e ^src/common/include/session.php`;
 		$this->assertEquals('', $output);
 	}
 	
