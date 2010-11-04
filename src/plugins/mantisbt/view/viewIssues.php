@@ -506,7 +506,7 @@ if (!isset($errorPage)) {
                 <?php include("addIssue.php") ?>
             </div>
             <br/>
-        <?
+        <?php
     }
     
 	// Creation de la pagination

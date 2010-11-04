@@ -89,7 +89,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 ?>
 </li>
 <li>
-<?
+<?php
 
 		echo '<form action="globalroleedit.php" method="post"><p>';
 		echo '<input type="text" name="role_name" size="10" value="" />';
