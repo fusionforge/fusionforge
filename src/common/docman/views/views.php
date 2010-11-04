@@ -32,9 +32,9 @@ switch ($view) {
 	case 'listfile':
 	case 'trashdir':
 	case 'search':
-		include ("docman/views/$view.php");
+		include ($gfcommon.'docman/views/'.$view.'.php');
 		break;
 	default:
-		include ("docman/views/help.php");
+		include ($gfcommon.'docman/views/help.php');
 }
 ?>

@@ -59,12 +59,12 @@ function doIt(formid) {
 <?php
 	echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminpending\')" ><h4>'. _('Admin Pending Files') .'</h4></a>';
 	echo '<div id="adminpending" style="display:none">';
-	include ('docman/views/listpendingfile.php');
+	include ($gfcommon.'docman/views/listpendingfile.php');
 	echo '</div>';
 
 	echo '<a href="#" onclick="javascript:displayAdminDiv(\'admintrash\')" ><h4>'. _('Admin Trash') .'</h4></a>';
 	echo '<div id="admintrash" style="display:none;" >';
-	include ('docman/views/listtrashfile.php');
+	include ($gfcommon.'docman/views/listtrashfile.php');
 	echo '</div>';
 
 	echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminoptions\')" ><h4>'. _('Admin Options') .'</h4></a>';

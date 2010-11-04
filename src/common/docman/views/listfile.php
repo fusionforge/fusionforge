@@ -91,15 +91,15 @@ echo '</h3>';
 
 echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
 echo '<h4 class="docman_h4">'. _('Edit this directory') .'</h4>';
-include ('docman/views/editdocgroup.php');
+include ($gfcommon.'docman/views/editdocgroup.php');
 echo '</div>';
 echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
 echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';
-include ('docman/views/addsubdocgroup.php');
+include ($gfcommon.'docman/views/addsubdocgroup.php');
 echo '</div>';
 echo '<div class="docman_div_include" id="addfile" style="display:none">';
 echo '<h4 class="docman_h4">'. _('Add a new document') .'</h4>';
-include ('docman/views/addfile.php');
+include ($gfcommon.'docman/views/addfile.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
@@ -233,7 +233,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
     echo $HTML->listTableBottom();
     echo '</div>';
 	echo '<div class="docmanDiv">'.html_image('docman/new.png',14,14,array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
-	include 'docman/views/editfile.php';
+    include ($gfcommon.'docman/views/editfile.php');
 }
 
 ?>
