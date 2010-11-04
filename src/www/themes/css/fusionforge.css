@@ -46,21 +46,18 @@
 }
 
 .error {
-	color: red;
 	font-size: medium;
 	font-weight: bold;
 	text-align: center
 }
 
 .feedback {
-	color: red;
 	font-size: medium;
 	text-align: center;
 	text-decoration: none
 }
 
 .important {
-	color: red;
 	font-weight: bold
 }
 
@@ -172,7 +169,6 @@
 }
 
 .warning {
-	color: red;
 	text-decoration: none
 }
 
