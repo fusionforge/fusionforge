@@ -44,7 +44,7 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
         if (!$desription) $desription=$title;
 	// one time output
 	print " <channel>\n";
-	print "  <copyright>Copyright ".date("Y")." ".fusionforge_get_config ('forge_name')."</copyright>\n";
+	print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";
 	print "  <pubDate>".rss_date(time())."</pubDate>\n";
 	print "  <description>$desription</description>\n";
 	print "  <link>http://".$GLOBALS['sys_default_domain']."/</link>\n";
