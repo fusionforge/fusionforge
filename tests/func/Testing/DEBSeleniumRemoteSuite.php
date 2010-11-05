@@ -22,6 +22,9 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("ssh root@".HOST." 'LANG=C a2dissite default'");
 		system("ssh root@".HOST." 'LANG=C invoke-rc.d apache2 reload'");
 		system("ssh root@".HOST." 'LANG=C touch /tmp/fusionforge-use-pfo-rbac'");
+		system("ssh root@".HOST." 'LANG=C touch /tmp/fusionforge-use-pfo-rbac'");
+		system("scp ../tests/func/db_reload.sh root@".HOST.":");
+		system("ssh root@".HOST.". 'su - postgres -c \"pg_dump -Fc gforge\" > /root/dump'") ;
 	}
 }
 ?>
