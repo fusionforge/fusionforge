@@ -1910,6 +1910,8 @@ eval {
     &update_with_sql("20101012-docman-webdav","5.0.51-1");
     &update_with_sql("20101021-pfo-rbac","5.0.51-2");
     &update_with_sql("20101025-ipv6","5.0.51-3");
+    &update_with_sql("20101027-docman-lock","5.0.51-4");
+    &update_with_sql("20101105-pfo-rbac","5.0.51-5");
 
     $version = &get_db_version ;
     $target = "5.0.51-4" ;
