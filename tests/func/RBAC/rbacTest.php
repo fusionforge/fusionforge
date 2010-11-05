@@ -49,7 +49,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('staffmember');
-		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
+		$this->assertTrue($this->isTextPresent("Project Members"));
 	}
 
 	function testGlobalRolesAndPermissions()
@@ -216,10 +216,10 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->createUser ("docmaster") ;
 		$this->createUser ("trainee") ;
 
-		// Create "Project approvers" role
+		// Create "Project moderators" role
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
-		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Project approvers") ;
+		$this->type ("//form[contains(@action,'globalroleedit.php')]//input[@name='role_name']", "Project moderators") ;
 		$this->click ("//form[contains(@action,'globalroleedit.php')]//input[@value='Create Role']") ;
 		$this->waitForPageToLoad("30000");
 
@@ -460,7 +460,7 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->assertTrue($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Documentation masters (global role)']")) ;
-		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Project approvers (global role)']")) ;
+		$this->assertFalse($this->isElementPresent("//input[@value='Link external role']/../../td/select/option[.='Project moderators (global role)']")) ;
 		$this->select("//input[@value='Link external role']/../../td/select", "label=Documentation masters (global role)") ;
 		$this->click("//input[@value='Link external role']") ;
 		$this->waitForPageToLoad("30000");
