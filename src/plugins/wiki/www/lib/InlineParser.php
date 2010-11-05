@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: InlineParser.php 7723 2010-11-04 18:20:41Z vargenau $');
+// rcs_id('$Id: InlineParser.php 7726 2010-11-05 15:02:12Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -354,11 +354,20 @@ function LinkBracketLink($bracketlink) {
 
     // Mediawiki compatibility: allow "Image:" and "File:"
     // as synonyms of "Upload:"
-    if (string_starts_with($rawlink, "Image:")) {
-        $rawlink = str_replace("Image:", "Upload:", $rawlink);
-    }
-    if (string_starts_with($rawlink, "File:")) {
-        $rawlink = str_replace("File:", "Upload:", $rawlink);
+    // Allow "upload:", "image:" and "file:" also
+    // Remove spaces before and after ":", if any
+    if (string_starts_with($rawlink, "Upload")) {
+        $rawlink = preg_replace("/^Upload\\s*:\\s*/", "Upload:", $rawlink);
+    } else if (string_starts_with($rawlink, "upload")) {
+        $rawlink = preg_replace("/^upload\\s*:\\s*/", "Upload:", $rawlink);
+    } else if (string_starts_with($rawlink, "Image")) {
+        $rawlink = preg_replace("/^Image\\s*:\\s*/", "Upload:", $rawlink);
+    } else if (string_starts_with($rawlink, "image")) {
+        $rawlink = preg_replace("/^image\\s*:\\s*/", "Upload:", $rawlink);
+    } else if (string_starts_with($rawlink, "File")) {
+        $rawlink = preg_replace("/^File\\s*:\\s*/", "Upload:", $rawlink);
+    } else if (string_starts_with($rawlink, "file")) {
+        $rawlink = preg_replace("/^file\\s*:\\s*/", "Upload:", $rawlink);
     }
 
     $label = UnWikiEscape($label);
@@ -470,7 +479,7 @@ function LinkBracketLink($bracketlink) {
         if (empty($label) and isImageLink($link)) {
             // if without label => inlined image [File:xx.gif]
             $imgurl = $intermap->link($link);
-            return LinkImage($imgurl->getAttr('href'), $link);
+            return LinkImage($imgurl->getAttr('href'));
         }
         return new Cached_InterwikiLink($link, $label);
     } else {
