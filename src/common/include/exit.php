@@ -73,7 +73,7 @@ function exit_no_group() {
 /**
  * exit_missing_param() - Exit with missing required parameters error
  *
- * @param   string  URL : usually $_SERVER['HTTP_REFERER']
+ * @param   string  URL : usually $_SERVER['HTTP_REFERER'] minus forge_get_config('web_host') + forge_get_config('use_ssl')
  * @param   array   array of missing parameters
  * @param   string  toptab needed for navigation
  */

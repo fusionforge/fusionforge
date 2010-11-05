@@ -56,7 +56,15 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !
     if (!$description)
         $missing_params[] = 'description';
 
-	exit_missing_param($_SERVER['HTTP_REFERER'],$missing_params,'docman');
+
+    if (forge_get_config('use_ssl'))
+        $url = "https://" ;
+    else
+        $url = "http://" ;
+
+    $url .= forge_get_config('web_host') ;
+
+	exit_missing_param(substr($_SERVER['HTTP_REFERER'],strlen($url)),$missing_params,'docman');
 }
 
 if (empty($gfcommon)) {

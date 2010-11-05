@@ -38,7 +38,7 @@ if ( $dgf->getNested() == NULL ) {
 } else {
 	/* display the add new documentation form */
 ?>
-	<script>
+	<script type="text/javascript" >
 	function displayRowFile() {
 	    document.getElementById('filerow').style.display = '';
         document.getElementById('urlrow').style.display = 'none';
