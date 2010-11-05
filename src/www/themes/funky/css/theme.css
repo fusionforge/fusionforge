@@ -2,6 +2,7 @@
  * Stylesheet for Funky Theme.
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -720,6 +721,9 @@ a.topTabSelected:hover {
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     text-shadow: 1px 1px #ff7c73;
+    text-align: left;
+    font-size: small;
+    font-weight: normal;
     color: black;
     margin-bottom: 3px;
     margin-top: 2px;
@@ -738,6 +742,7 @@ a.topTabSelected:hover {
     -moz-border-radius: 6px;
     text-shadow: 1px 1px #fff5CA;
     text-align: left;
+    font-weight: normal;
     font-size: small;
     margin-bottom: 3px;
     margin-top: 2px;
@@ -756,6 +761,7 @@ a.topTabSelected:hover {
     -moz-border-radius: 6px;
     text-shadow: 1px 1px #DFF59f;
     text-align: left;
+    font-weight: normal;
     font-size: small;
     margin-bottom: 3px;
     margin-top: 2px;
