@@ -585,9 +585,11 @@ class Document extends Error {
         $result = db_query_params('SELECT filename,doc_group from docdata_vw',
                                 array($filename,$doc_group));
 
-        if (!$result || db_numrows($res) > 0) {
-			$this->setError(_('Document already published in this directory'));
-            return false;
+        if ($data) {
+            if (!$result || db_numrows($res) > 0) {
+			    $this->setError(_('Document already published in this directory'));
+                return false;
+            }
         }
 
 		$perm =& $this->Group->getPermission ();
