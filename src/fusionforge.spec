@@ -152,6 +152,17 @@ Requires: %{name} >= %{version}, php
 %description plugin-online_help
 This is a online_help plugin within FusionForge.
 
+%package plugin-oslc
+Summary: OSLC plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, php-ZendFramework > 1.10
+%description plugin-oslc
+OSLC-CM compatible plugin for FusionForge tracker system.
+OSLC-CM is a standard specification for APIs in Change Management
+applications. It is based on Web technologies such as REST, RDF, or AJAX.
+This package provides an OSLC-CM V2 compatible plugin for FusionForge
+tracker system.
+
 %package plugin-projects_hierarchy
 Summary: projects_hierarchy plugin for FusionForge
 Group: Development/Tools
@@ -480,6 +491,9 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 # plugin: wiki
 %{__ln_s} ../plugins/wiki/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/wiki
 
+# plugin: oslc
+%{__ln_s} ../../plugins/oslc/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/oslc
+
 # plugin: projectlabels
 %{__ln_s} ../../plugins/projectlabels/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/projectlabels
 
@@ -734,6 +748,12 @@ fi
 %files plugin-online_help
 %{GFORGE_DIR}/plugins/online_help
 %{GFORGE_DIR}/www/plugins/online_help
+
+%files plugin-oslc
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/oslc/
+%{_sysconfdir}/httpd/conf.d/62plugin-oslc
+%{GFORGE_DIR}/plugins/oslc
+%{GFORGE_DIR}/www/plugins/oslc
 
 %files plugin-projects_hierarchy
 %{GFORGE_DIR}/plugins/projects_hierarchy
