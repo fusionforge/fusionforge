@@ -3,8 +3,8 @@ require_once('env.inc.php');
 require_once('pre.php');
 require_once('preplugins.php');
 
-require_once($sys_path_to_jpgraph.'/jpgraph.php');
-require_once($sys_path_to_jpgraph.'/jpgraph_pie.php');
+require_once(forge_get_config('jpgraph_path').'/jpgraph.php');
+require_once(forge_get_config('jpgraph_path').'/jpgraph_pie.php');
 
 $request =& HTTPRequest::instance();
 $pass_count = $request->get('p');

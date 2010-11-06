@@ -145,9 +145,9 @@ class MailmanList extends Error {
 
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 
-		if(!validate_email($realListName.'@'.$GLOBALS['sys_lists_host'])) {
+		if(!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
 			$this->setError(_('Invalid List Name') . ': ' .
-					$realListName.'@'.$GLOBALS['sys_lists_host']);
+					$realListName.'@'.forge_get_config('lists_host'));
 			return false;
 		}
 		$result=&$this->_mailingDAO->searchByName($realListName);

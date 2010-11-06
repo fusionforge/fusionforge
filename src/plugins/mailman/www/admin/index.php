@@ -116,7 +116,7 @@ if ($group_id) {
 					'title' => _('Add a Mailing List'),
 					'help'=>'CommunicationServices.html#MailingLists',
 					'admin' => '1'));
-		printf(_('<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">few minutes</span> for your list to be created.</p>'), $GLOBALS['sys_lists_host']);
+		printf(_('<p>Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">few minutes</span> for your list to be created.</p>'), forge_get_config('lists_host'));
 
 		$mlFactory = new MailmanListFactory($Group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
@@ -140,7 +140,7 @@ if ($group_id) {
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<p><strong><?php echo _('Mailing List Name:'); ?></strong><br />
-			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo $GLOBALS['sys_lists_host']; ?></strong><br /></p>
+			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php forge_get_config('lists_host'); ?></strong><br /></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
 			<input type="radio" name="is_public" value="1" checked="checked" /> <?php echo _('Yes'); ?><br />
@@ -208,7 +208,7 @@ if ($group_id) {
 			mail_footer(array());
 			exit;
 		}
-		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s.'), $GLOBALS['sys_name']).'</p>';
+		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s.'), forge_get_config ('forge_name')).'</p>';
 		echo '<ul>
 			<li>
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;add_list=1">'._('Add Mailing List').'</a>

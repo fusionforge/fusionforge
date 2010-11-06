@@ -174,7 +174,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 			if ($list->isPublic()==1) {
 				echo ' [<A HREF="'.util_make_url('/pipermail/'.$list->getName()).'/">'._('Original Archives').'</A>]';
 			} else {
-				echo ' ['._('Original list archives').': <A HREF="http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.$list->getName().'/">'._('Public archives').'</A>/<A HREF="http://'.$GLOBALS['sys_lists_host'].'/mailman/private/'.$list->getName().'/">'._('Private Archives').'</A>]';
+				echo ' ['._('Original list archives').': <A HREF="http://'.forge_get_config('lists_host').'/pipermail/'.$list->getName().'/">'._('Public archives').'</A>/<A HREF="http://'.forge_get_config('lists_host').'/mailman/private/'.$list->getName().'/">'._('Private Archives').'</A>]';
 			}
 		}
 		echo "</td>";

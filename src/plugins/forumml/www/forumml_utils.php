@@ -403,7 +403,7 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 		$bodyIsCached = true;
 	}
 
-	if (PEAR::isError($from_info = Mail_RFC822::parseAddressList($msg['sender'], $GLOBALS['sys_default_domain'])) || !isset($from_info[0]) || !$from_info[0]->personal) {
+	if (PEAR::isError($from_info = Mail_RFC822::parseAddressList($msg['sender'], forge_get_config('web_host'))) || !isset($from_info[0]) || !$from_info[0]->personal) {
 		$from_info = $hp->purify($msg['sender'], CODENDI_PURIFIER_CONVERT_HTML);
 	} else {
 		$from_info = '<abbr title="'.  $hp->purify($from_info[0]->mailbox .'@'. $from_info[0]->host, CODENDI_PURIFIER_CONVERT_HTML)  .'">'.  $hp->purify($from_info[0]->personal, CODENDI_PURIFIER_CONVERT_HTML)  .'</abbr>';
@@ -426,7 +426,7 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 	// get CC
 	$cc = trim($msg['cc']);
 	if ($cc) {
-		if (PEAR::isError($cc_info = Mail_RFC822::parseAddressList($cc, $GLOBALS['sys_default_domain']))) {
+		if (PEAR::isError($cc_info = Mail_RFC822::parseAddressList($cc, forge_get_config('web_host')))) {
 			$ccs = $hp->purify($cc, CODENDI_PURIFIER_CONVERT_HTML);
 		} else {
 			$ccs = array();
@@ -640,7 +640,7 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 
 	// Build mail headers
 	$list = new MailmanList($request->get('group_id') , $request->get('list'));
-	$to = $list->getName()."@".$GLOBALS['sys_lists_host'];
+	$to = $list->getName()."@".forge_get_config('lists_host');
 	$mail->setTo($to);
 
 	$mail->setFrom(UserManager::instance()->getCurrentUser()->getEmail());

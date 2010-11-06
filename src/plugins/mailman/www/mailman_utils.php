@@ -34,8 +34,8 @@ You are encouraged to change this password as soon as possible.
 Thank you for registering your project with %1$s.
 
 -- the %1$s staff
-'), $GLOBALS['sys_name'], $GLOBALS['sys_lists_host'], $list->getName(), $list->getExternalInfoUrl(), util_make_url('/mailman/admin/'.$list->getName()), $list->getPassword());
-       $mailSubject = sprintf(_('%1$s New Mailing List'), $GLOBALS['sys_name']);
+'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $list->getName(), $list->getExternalInfoUrl(), util_make_url('/mailman/admin/'.$list->getName()), $list->getPassword());
+       $mailSubject = sprintf(_('%1$s New Mailing List'), forge_get_config ('forge_name'));
 
 
 
