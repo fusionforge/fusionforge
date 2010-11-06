@@ -4,6 +4,7 @@
  * FusionForge Installation Dependency Setup
  *
  * Copyright 2006 GForge, LLC
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * @version
@@ -32,7 +33,7 @@ define ("NORMAL", "\033[00m" );
 define ("RED", "\033[01;31m" );
 
 function printUsage() {
-	echo "Usage: fusionforge-install-1-deps [RHEL4|RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE|OPENSUSE]\n";
+	echo "Usage: fusionforge-install-1-deps [RHEL5|DEBIAN|FEDORA|CENTOS|ARK|SUSE|OPENSUSE]\n";
 }
 
 function INFO($message)
@@ -49,12 +50,6 @@ function installRedhat() {
 	addDagRPMForgeYumRepo();
 	INFO("Installing packages: Executing YUM. Please wait...\n\n\n");
 	passthru("yum -y install httpd php mailman cvs postgresql postgresql-libs postgresql-server postgresql-contrib perl-URI php-pgsql subversion mod_dav_svn postfix rcs php-gd mod_ssl wget openssh which liberation-fonts htmlpurifier php-mbstring php-jpgraph-1.5.2 poppler-utils php-pecl-zip antiword");
-}
-
-function installRHEL4() {
-	INFO("Installing packages: Executing UP2DATE. Please wait...\n\n\n");
-	passthru("up2date --install php php-gd php-pgsql mailman postgresql-server postgresql-contrib rcs cvs httpd subversion perl-URI mod_dav_svn ssh postfix mod_ssl wget");
-	INFO(RED."You Must Install htmlpurifier manually.".NORMAL);
 }
 
 function installDebian() {
@@ -175,8 +170,6 @@ if (count($argv) < 2) {
 
 if ($platform == 'FEDORA' || $platform == 'CENTOS' || $platform == 'RHEL5') {
 	installRedhat();
-} elseif ($platform == 'RHEL4') {
-	installRHEL4();
 } elseif ($platform == 'DEBIAN') {
 	installDebian(); /* Debian and friends */
 } elseif ($platform == 'SUSE') {

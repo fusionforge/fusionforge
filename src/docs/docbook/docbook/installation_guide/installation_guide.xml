@@ -214,9 +214,6 @@ $sys_plugins_path="<replaceable>/var/www/gforge</replaceable>/plugins/";
           <listitem>
             <para>a Debian: postgresql, postgresql-contrib</para>
           </listitem>
-          <listitem>
-            <para>a Red Hat 4 : postgresql, postgresql-contrib</para>
-          </listitem>
         </orderedlist>
       </section>
       <section>
