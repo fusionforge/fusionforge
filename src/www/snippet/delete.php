@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems - Tim Perdue
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -45,7 +46,7 @@ if (session_loggedin()) {
 			"WHERE submitted_by=$1 AND ".
 			"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
-			echo '<h1>Error - Only the creator of a package version can delete snippets from it.</h1>';
+			echo '<p class="error">Error - Only the creator of a package version can delete snippets from it.</p>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -57,11 +58,11 @@ AND snippet_package_version_id=$2',
 			array($snippet_version_id,
 				$snippet_package_version_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				echo '<h1>Error - That snippet doesn\'t exist in this package.</h1>';
+				echo '<p class="error">Error - That snippet doesn\'t exist in this package.</p>';
 				snippet_footer(array());
 				exit;
 			} else {
-				echo '<h1>Item Removed From Package</h1>';
+				echo '<p class="feedback">Item Removed From Package</p>';
 				snippet_footer(array());
 				exit;
 			}
@@ -76,7 +77,7 @@ AND snippet_package_version_id=$2',
 		$result=db_query_params("SELECT * FROM snippet_version ".
 			"WHERE snippet_version_id=$1 AND submitted_by=$2", array($snippet_version_id, user_getid()));
 		if (!$result || db_numrows($result) < 1) {
-			echo '<h1>Error - That snippet doesn\'t exist.</h1>';
+			echo '<p class="error">Error - That snippet doesn\'t exist.</p>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -94,7 +95,7 @@ AND snippet_package_version_id=$2',
 				$result=db_query_params("DELETE FROM snippet WHERE snippet_id=$1",array($snippet_id));
 			}
 
-			echo '<h1>Snippet Removed</h1>';
+			echo '<class="feedback">Snippet Removed</p>';
 			snippet_footer(array());
 			exit;
 		}
@@ -111,7 +112,7 @@ AND snippet_package_version_id=$2',
 			"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 		if (!$result || db_numrows($result) < 1) {
 			//they don't own it or it's not found
-			echo '<h1>Error - Only the creator of a package version can delete it.</h1>';
+			echo '<p class="error">Error - Only the creator of a package version can delete it.</p>';
 			snippet_footer(array());
 			exit;
 		} else {
@@ -134,7 +135,7 @@ AND snippet_package_version_id=$2',
 				//delete the main package even if the user didn't create it
 				$result=db_query_params("DELETE FROM snippet_package WHERE snippet_package_id=$1", array($snippet_package_id));
 			}
-			echo '<h1>Package Removed</h1>';
+			echo '<p class="feedback">Package Removed</p>';
 			snippet_footer(array());
 			exit;
 		}

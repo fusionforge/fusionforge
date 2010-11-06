@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -53,7 +54,7 @@ if (session_loggedin()) {
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo '<h1>' ._('Error - snippet_package_version_id missing') .'</h1>';
+		echo '<p class="error">' ._('Error - snippet_package_version_id missing') .'</p>';
 		handle_add_exit();
 	}
 
@@ -69,7 +70,7 @@ if (session_loggedin()) {
 				"WHERE submitted_by=$1 AND ".
 				"snippet_package_version_id=$2", array(user_getid(), $snippet_package_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h1>' ._('Error - Only the creator of a package version can add snippets to it.').'</h1>';
+				echo '<p class="error">' ._('Error - Only the creator of a package version can add snippets to it.').'</p>';
 				handle_add_exit();
 			}
 
@@ -79,7 +80,7 @@ if (session_loggedin()) {
 			$result=db_query_params ('SELECT * FROM snippet_version WHERE snippet_version_id=$1',
 			array($snippet_version_id));
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h1>' ._('Error - That snippet doesn\'t exist.').'</h1>';
+				echo '<p class="error">' ._('Error - That snippet doesn\'t exist.').'</p>';
 				echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -93,7 +94,7 @@ AND snippet_version_id=$2',
 			array($snippet_package_version_id,
 				$snippet_version_id));
 			if ($result && db_numrows($result) > 0) {
-				echo '<h1>'._('Error - That snippet was already added to this package.').'</h1>';
+				echo '<p class="error">'._('Error - That snippet was already added to this package.').'</p>';
 				echo util_make_url ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 				handle_add_exit();
 			}
@@ -111,7 +112,7 @@ VALUES ($1, $2)", array($snippet_package_version_id, $snippet_version_id));
 				$feedback .= _('Snippet Version Added Successfully.');
 			}
 		} else {
-			echo '<h1>' ._('Error - Go back and fill in all the information').'</h1>';
+			echo '<p class="error">' ._('Error - Go back and fill in all the information').'</p>';
 			echo util_make_link ('/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id,_('Back To Add Page'));
 			handle_add_exit();
 		}

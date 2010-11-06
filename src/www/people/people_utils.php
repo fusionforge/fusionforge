@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -109,7 +110,7 @@ VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill
 		}
 		}
 	} else {
-		echo '<h1>'._('You must be logged in first').'</h1>';
+		echo '<p class="error">You must be logged in first</p>';
 	}
 }
 
@@ -217,7 +218,7 @@ VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year
 		}
 
 	} else {
-		echo '<h1>'._('You must be logged in first').'</h1>';
+		echo '<p class="error">You must be logged in first</p>';
 	}
 }
 
