@@ -3,6 +3,7 @@
  * Default Theme
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -170,42 +171,6 @@ class Theme extends Layout {
 			return 'class="bgcolor-grey"';
 		}
 	}
-
-	/**
-	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
-	 *
-	 * @param       array   The array of titles
-	 * @param       array   The array of title links
-	 * @param       boolean Whether to highlight or not the entry
-	 */
-	function listTableTop ($title_arr,$links_arr=false,$selected=false) {
-		$return = '<table class="width-100p100 listTable';
-		if ($selected == true) {
-			$return .= ' selected';
-		}
-		$return .= '">
-            <tr>';
-
-		$count=count($title_arr);
-		if ($links_arr) {
-			for ($i=0; $i<$count; $i++) {
-				$return .= '
-                <th scope="col"><a class="sortbutton" href="'.util_make_url ($links_arr[$i]).'"><strong>'.$title_arr[$i].'</strong></a></th>';
-			}
-		} else {
-			for ($i=0; $i<$count; $i++) {
-				$return .= '
-                <th scope="col"><strong>'.$title_arr[$i].'</strong></th>';
-			}
-		}
-		return $return.'</tr>';
-	}
-
-	function listTableBottom() {
-		return '
-            </table>';
-	}
-
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $nested=false, 
 			      $selected=false, $sel_tab_bgcolor='WHITE', 
