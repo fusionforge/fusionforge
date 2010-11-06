@@ -4,6 +4,8 @@
 # Initial work for 4.8 by JL Bond Consulting
 # Reworked for 5.1 by Alain Peyrat <aljeux@free.fr>
 #
+# Copyright (C) 2010 Alain Peyrat
+#
 # TODO: Generate a random password to avoid sites with default pass.
 
 
@@ -110,6 +112,13 @@ your users to search your FusionForge site through external search engines
 which have indexed it. You can define search engines you want to use in
 the configuration file.
 
+%package plugin-forumml
+Summary: Mailman to forums plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-forumml
+ForumML integes mailing lists as forums in FusionForge
+
 %package plugin-fckeditor
 Summary: FCKEditor plugin for FusionForge
 Group: Development/Tools
@@ -123,6 +132,13 @@ Group: Development/Tools
 Requires: %{name} >= %{version}, php
 %description plugin-gravatar
 This plugin adds faces images to FusionForge users using the gravatar service.
+
+%package plugin-hudson
+Summary: Hudson continous integration plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-hudson
+This plugin adds hudson integration to FusionForge.
 
 %package plugin-ldapextauth
 Summary: external LDAP authentication for FusionForge plugin
@@ -302,6 +318,13 @@ Requires: %{name} >= %{version}, php, postgresql
 %description plugin-globalsearch
 globalsearch plugin for FusionForge. 
 
+%package plugin-mailman
+Summary: Mailman plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-mailman
+Mailman plugin for FusionForge. 
+
 %package plugin-mantisbt
 Summary: mantisbt plugin for FusionForge
 Group: Development/Tools
@@ -424,6 +447,12 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 
 # plugin: fckeditor
 
+# plugin: forumml
+%{__ln_s} ../../plugins/forumml $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/forumml
+
+# plugin: hudson
+%{__ln_s} ../../plugins/hudson $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/hudson
+
 # plugin: ldapextauth
 %{__rm} -rf $RPM_BUILD_ROOT%{GFORGE_DIR}/plugins/ldapextauth/rpm-specific
 
@@ -502,6 +531,9 @@ search_and_replace "/opt/gforge" "%{GFORGE_DIR}"
 
 # plugin: globalsearch
 %{__ln_s} ../../plugins/globalsearch/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/globalsearch
+
+# plugin: mailman
+%{__ln_s} ../../plugins/mailman/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/mailman
 
 # plugin: mantisbt
 %{__ln_s} ../../plugins/mantisbt/www/ $RPM_BUILD_ROOT%{GFORGE_DIR}/www/plugins/mantisbt
@@ -722,8 +754,18 @@ fi
 %{GFORGE_DIR}/plugins/fckeditor
 %{GFORGE_DIR}/www/plugins/fckeditor
 
+%files plugin-forumml
+%{GFORGE_DIR}/plugins/forumml
+%{GFORGE_DIR}/www/plugins/forumml
+
 %files plugin-gravatar
 %{GFORGE_DIR}/plugins/gravatar
+
+%files plugin-hudson
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/hudson/
+%{_sysconfdir}/httpd/conf.d/62plugin-hudson
+%{GFORGE_DIR}/plugins/hudson
+%{GFORGE_DIR}/www/plugins/hudson
 
 %files plugin-ldapextauth
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/ldapextauth/
@@ -848,6 +890,16 @@ fi
 %files plugin-globalsearch
 %{GFORGE_DIR}/plugins/globalsearch
 %{GFORGE_DIR}/www/plugins/globalsearch
+
+%files plugin-mailman
+%config(noreplace) %{GFORGE_CONF_DIR}/plugins/mailman/
+%{_sysconfdir}/httpd/conf.d/62plugin-list-mailman
+%{_sysconfdir}/httpd/conf.d/200list.vhost
+%{_sysconfdir}/httpd/conf.d/20list
+%{_sysconfdir}/httpd/conf.d/20zlist.vhost
+%{_sysconfdir}/httpd/conf.d/21list.vhost.ssl
+%{GFORGE_DIR}/plugins/mailman
+%{GFORGE_DIR}/www/plugins/mailman
 
 %files plugin-mantisbt
 %config(noreplace) %{GFORGE_CONF_DIR}/plugins/mantisbt/
