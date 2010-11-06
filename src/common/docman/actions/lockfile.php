@@ -24,7 +24,6 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 global $LUSER; // User object
