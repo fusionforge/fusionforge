@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Raphaël Hertzog
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -38,10 +39,10 @@ class ExtraTabsPlugin extends Plugin {
 		if ($hookname == "project_admin_plugins") {
 			$group_id=$params['group_id'];
 			echo '<p>'.util_make_link ('/plugins/extratabs/index.php?group_id='.$group_id,
-					     _('Extra tabs')).'</p>';	       
+					     _('Extra Tabs Admin')) . '</p>';	       
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project))
 				return;
 			if ($project->isError())

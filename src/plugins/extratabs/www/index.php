@@ -6,6 +6,7 @@
  * Copyright 2006-2009, Roland Mas
  * Copyright 2009-2010, Alain Peyrat
  * Copyright 2010, Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -38,7 +39,7 @@ $tab_url = htmlspecialchars(trim(getStringFromRequest ('tab_url', 'http://')));
 session_require_perm ('project_admin', $group_id) ;
 
 // get current information
-$group =& group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
@@ -154,7 +155,7 @@ if (!$res) {
 	db_commit();
 }
 
-$adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
+$adminheadertitle=sprintf(_('Manage extra tabs for project %1$s'), $group->getPublicName() );
 project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
 
 ?>
