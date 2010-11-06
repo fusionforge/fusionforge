@@ -126,20 +126,14 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-$HTML->header(array('title'=>'User Account Registration'));
-
-if (!empty($error_msg))
-	print "<div class='error'>$error_msg</div>";
-
-if (!empty($warning_msg))
-	print "<div class='warning_msg'>$warning_msg</div>";
-
 if (!isset($timezone) || empty($timezone) || !preg_match('/^[-a-zA-Z0-9_\/\.+]+$/', $timezone)) {
 	$timezone = forge_get_config('default_timezone') ? forge_get_config('default_timezone') : 'GMT' ;
 }
 if (!isset($ccode) || empty($ccode) || !preg_match('/^[a-zA-Z]{2}$/', $ccode)) {
 	$ccode = forge_get_config('default_country_code');
 }
+
+site_header(array('title'=>_('User Account Registration')));
 ?>
 
 <form action="<?php echo util_make_url('/account/register.php'); ?>" method="post">
