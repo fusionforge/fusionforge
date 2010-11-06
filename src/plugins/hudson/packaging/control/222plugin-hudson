@@ -1,4 +1,4 @@
-Package: @SRCPACKAGE@
+Package: @PACKAGE@-plugin-hudson
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, php5-cli, ${misc:Depends}, libjs-scriptaculous
 Description: collaborative development tool - Hudson plugin
