@@ -778,17 +778,7 @@ function site_user_header($params) {
 		Check to see if active user
 		Check to see if logged in
 	*/
-	echo $HTML->header($params);
-	echo "<h1>" . _('My Personal Page') . "</h1>\n";
-	if (isset($GLOBALS['error_msg'])) {
-		echo html_feedback_top($GLOBALS['error_msg']);
-	}
-	if (isset($GLOBALS['warning_msg'])) {
-		echo html_feedback_top($GLOBALS['warning_msg']);
-	}
-	if (isset($GLOBALS['feedback'])) {
-		echo html_feedback_top($GLOBALS['feedback']);
-	}
+	site_header($params);
 	echo ($HTML->beginSubMenu());
 	$arr_t = array() ;
 	$all_l = array() ;
@@ -812,7 +802,7 @@ function site_user_header($params) {
 		$arr_t[] = _('Register Project') ;
 		$arr_l[] = '/register/' ;
 	}
-	
+
 	echo ($HTML->printSubMenu($arr_t, $arr_l)) ;
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->endSubMenu());
