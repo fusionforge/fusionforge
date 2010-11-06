@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2008-2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -48,7 +49,9 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $is_admin_page='y';
 $sh = new  SurveyHtml();
-$sh->header(array('title'=>_('Add A Question')));
+
+$title = $question_id ? _('Edit a Question') : _('Add a Question');
+$sh->header(array('title'=>$title));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
     echo '<div class="error">'._('Permission denied').'</div>';
