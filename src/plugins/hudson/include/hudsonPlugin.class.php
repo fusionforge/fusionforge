@@ -1,6 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) Xerox Corporation, Codendi 2007-2008.
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is licensed under the GNU General Public License version 2. See the file COPYING.
  * 
@@ -48,7 +49,7 @@ class hudsonPlugin extends Plugin {
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
@@ -178,7 +179,7 @@ class hudsonPlugin extends Plugin {
 		}
 	}
 	function widgets($params) {
-		$group = &group_get_object($GLOBALS['group_id']);
+		$group = group_get_object($GLOBALS['group_id']);
 		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
 			return false;
 		}
