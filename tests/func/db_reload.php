@@ -147,10 +147,11 @@ if (!$user_id) {
 				array ($user_id,
 				       'A'));
 
-	if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
+// Commented, PFO_RBAC is activated by default.
+//	if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
 		$res = db_query_params ('INSERT INTO pfo_user_role VALUES ($1, 3)',
 					array ($user_id)) ;
-	}
+//	}
 }
 
 ?>
