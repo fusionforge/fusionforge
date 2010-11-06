@@ -112,276 +112,6 @@ plugins/coclico/codendi-specific/common/dao/include/diffDataAccess -text
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccessObject -text
 plugins/coclico/codendi-specific/env.inc.php -text
 plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
-plugins/coclico/forumml/README.txt -text
-plugins/coclico/forumml/TODO -text
-plugins/coclico/forumml/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-plugins/coclico/forumml/bin/installFF.sh -text svneol=unset#text/x-sh
-plugins/coclico/forumml/bin/mail_2_DB.php -text
-plugins/coclico/forumml/bin/mail_2_DB.pl -text svneol=unset#text/x-perl
-plugins/coclico/forumml/bin/mail_2_DBFF.php -text
-plugins/coclico/forumml/bin/mail_2_DBFF.pl -text svneol=unset#text/x-perl
-plugins/coclico/forumml/bin/ml_arch_2_DB.pl -text svneol=unset#text/x-perl
-plugins/coclico/forumml/bin/ml_arch_2_DBFF.pl -text svneol=unset#text/x-perl
-plugins/coclico/forumml/common/forumml-init.php -text
-plugins/coclico/forumml/db/forumml-init.sql -text
-plugins/coclico/forumml/db/install.sql -text
-plugins/coclico/forumml/debian/README.Debian -text
-plugins/coclico/forumml/debian/README.source -text
-plugins/coclico/forumml/debian/changelog -text
-plugins/coclico/forumml/debian/compat -text
-plugins/coclico/forumml/debian/control -text
-plugins/coclico/forumml/debian/copyright -text
-plugins/coclico/forumml/debian/docs -text
-plugins/coclico/forumml/debian/dsf-in/plugin-forumml.postinst -text
-plugins/coclico/forumml/debian/dsf-in/plugin-forumml.prerm -text
-plugins/coclico/forumml/debian/po/templates.pot -text
-plugins/coclico/forumml/debian/rules -text
-plugins/coclico/forumml/debian/source/format -text
-plugins/coclico/forumml/etc/forumml.inc.dist -text
-plugins/coclico/forumml/include/ForumMLGroupSearchEngine.class.php -text
-plugins/coclico/forumml/include/ForumMLHtmlSearchRenderer.class.php -text
-plugins/coclico/forumml/include/ForumMLInsert.class.php -text
-plugins/coclico/forumml/include/ForumMLPluginDescriptor.class.php -text
-plugins/coclico/forumml/include/ForumMLPluginInfo.class.php -text
-plugins/coclico/forumml/include/ForumMLSearchEngine.class.php -text
-plugins/coclico/forumml/include/ForumMLSearchQuery.class.php -text
-plugins/coclico/forumml/include/ForumML_Attachment.class.php -text
-plugins/coclico/forumml/include/ForumML_AttachmentDao.class.php -text
-plugins/coclico/forumml/include/ForumML_FileStorage.class.php -text
-plugins/coclico/forumml/include/ForumML_HTMLPurifier.class.php -text
-plugins/coclico/forumml/include/ForumML_MessageDao.class.php -text
-plugins/coclico/forumml/include/ForumML_MessageManager.class.php -text
-plugins/coclico/forumml/include/ForumML_mimeDecode.class.php -text
-plugins/coclico/forumml/include/forummlPlugin.class.php -text
-plugins/coclico/forumml/packaging/control/000source -text
-plugins/coclico/forumml/packaging/control/222plugin-forumml -text
-plugins/coclico/forumml/packaging/control/222plugin-forumml.shortdesc -text
-plugins/coclico/forumml/packaging/dirs/plugin-forumml -text
-plugins/coclico/forumml/packaging/docs/plugin-forumml -text
-plugins/coclico/forumml/packaging/install/plugin-forumml -text
-plugins/coclico/forumml/packaging/links/plugin-forumml -text
-plugins/coclico/forumml/selinux/forumml0.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml0.te -text
-plugins/coclico/forumml/selinux/forumml1.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml1.te -text
-plugins/coclico/forumml/selinux/forumml2.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml2.te -text
-plugins/coclico/forumml/selinux/forumml3.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml3.te -text
-plugins/coclico/forumml/selinux/forumml4.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml4.te -text
-plugins/coclico/forumml/selinux/forumml5.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml5.te -text
-plugins/coclico/forumml/selinux/forumml6.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml6.te -text
-plugins/coclico/forumml/selinux/forumml7.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml7.te -text
-plugins/coclico/forumml/selinux/forumml8.pp -text svneol=unset#unset
-plugins/coclico/forumml/selinux/forumml8.te -text
-plugins/coclico/forumml/site-content/en_US/forumml.tab -text
-plugins/coclico/forumml/site-content/fr_FR/forumml.tab -text
-plugins/coclico/forumml/tests/ForumML_FileStorageTest.php -text
-plugins/coclico/forumml/tests/ForumML_InsertTest.php -text
-plugins/coclico/forumml/tests/_fixtures/samples/attachment_only.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_html_only.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_text_plus_html.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_in_html_only.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/html_with_inline_content_in_text_plus_html.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/pure_html_in_html_only.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/pure_html_text_plus_html.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/pure_text.mbox -text
-plugins/coclico/forumml/tests/_fixtures/samples/text_plus_attachment.mbox -text
-plugins/coclico/forumml/translations/en.po -text
-plugins/coclico/forumml/translations/gforge.pot -text
-plugins/coclico/forumml/utils/manage-translations.sh -text svneol=unset#text/x-sh
-plugins/coclico/forumml/www/forumml_utils.php -text
-plugins/coclico/forumml/www/index.php -text
-plugins/coclico/forumml/www/message.php -text
-plugins/coclico/forumml/www/scripts/cc_attach_js.php -text
-plugins/coclico/forumml/www/scripts/forumml.js -text
-plugins/coclico/forumml/www/themes/default/css/style.css -text svneol=unset#text/css
-plugins/coclico/forumml/www/themes/default/images/ic/attach.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/comment.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/comment_add.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/comments.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/msg.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_first.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_first_disabled.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_last.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_last_disabled.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_next.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_next_disabled.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/resultset_previous_disabled.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#image/gif
-plugins/coclico/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#image/png
-plugins/coclico/forumml/www/upload.php -text
-plugins/coclico/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
-plugins/coclico/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-plugins/coclico/hudson/common/hudson-init.php -text
-plugins/coclico/hudson/cronjobs/manage_hudson.php -text
-plugins/coclico/hudson/db/hudson-init.sql -text
-plugins/coclico/hudson/db/install.sql -text
-plugins/coclico/hudson/db/uninstall.sql -text
-plugins/coclico/hudson/debian/README.Debian -text
-plugins/coclico/hudson/debian/README.source -text
-plugins/coclico/hudson/debian/changelog -text
-plugins/coclico/hudson/debian/compat -text
-plugins/coclico/hudson/debian/control -text
-plugins/coclico/hudson/debian/copyright -text
-plugins/coclico/hudson/debian/docs -text
-plugins/coclico/hudson/debian/dsf-in/plugin-hudson.postinst -text
-plugins/coclico/hudson/debian/dsf-in/plugin-hudson.prerm -text
-plugins/coclico/hudson/debian/po/templates.pot -text
-plugins/coclico/hudson/debian/rules -text
-plugins/coclico/hudson/debian/source/format -text
-plugins/coclico/hudson/etc/httpd.d/62plugin-hudson -text
-plugins/coclico/hudson/etc/plugins/hudson/config.php -text
-plugins/coclico/hudson/include/HudsonBuild.class.php -text
-plugins/coclico/hudson/include/HudsonJob.class.php -text
-plugins/coclico/hudson/include/HudsonJobURLFileException.class.php -text
-plugins/coclico/hudson/include/HudsonJobURLFileNotFoundException.class.php -text
-plugins/coclico/hudson/include/HudsonJobURLMalformedException.class.php -text
-plugins/coclico/hudson/include/HudsonJobWidget.class.php -text
-plugins/coclico/hudson/include/HudsonOverviewWidget.class.php -text
-plugins/coclico/hudson/include/HudsonTestResult.class.php -text
-plugins/coclico/hudson/include/HudsonWidget.class.php -text
-plugins/coclico/hudson/include/PluginHudsonJobDao.class.php -text
-plugins/coclico/hudson/include/hudson.class.php -text
-plugins/coclico/hudson/include/hudsonActions.class.php -text
-plugins/coclico/hudson/include/hudsonPlugin.class.php -text
-plugins/coclico/hudson/include/hudsonPluginDescriptor.class.php -text
-plugins/coclico/hudson/include/hudsonPluginInfo.class.php -text
-plugins/coclico/hudson/include/hudsonViews.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_JobBuildHistory.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_JobLastArtifacts.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_JobLastBuilds.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_JobTestResults.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_JobTestTrend.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_MyMonitoredJobs.class.php -text
-plugins/coclico/hudson/include/hudson_Widget_ProjectJobsOverview.class.php -text
-plugins/coclico/hudson/packaging/control/000source -text
-plugins/coclico/hudson/packaging/control/222plugin-hudson -text
-plugins/coclico/hudson/packaging/control/222plugin-hudson.shortdesc -text
-plugins/coclico/hudson/packaging/dirs/plugin-hudson -text
-plugins/coclico/hudson/packaging/docs/plugin-hudson -text
-plugins/coclico/hudson/packaging/install/plugin-hudson -text
-plugins/coclico/hudson/packaging/links/plugin-hudson -text
-plugins/coclico/hudson/site-content/en_US/hudson.tab -text
-plugins/coclico/hudson/site-content/en_US/hudson.tab.back -text
-plugins/coclico/hudson/site-content/fr_FR/hudson.tab -text
-plugins/coclico/hudson/tests/AllTests.php -text
-plugins/coclico/hudson/tests/HudsonBuildTest.php -text
-plugins/coclico/hudson/tests/HudsonJobTest.php -text
-plugins/coclico/hudson/tests/HudsonTestResultTest.php -text
-plugins/coclico/hudson/tests/resources/jobbuild.xml -text svneol=unset#text/xml
-plugins/coclico/hudson/tests/resources/testReport.xml -text svneol=unset#text/xml
-plugins/coclico/hudson/translations/en.po -text
-plugins/coclico/hudson/translations/gforge.pot -text
-plugins/coclico/hudson/utils/manage-translations.sh -text svneol=unset#text/x-sh
-plugins/coclico/hudson/www/admin/index.php -text
-plugins/coclico/hudson/www/hudson_tab.js -text
-plugins/coclico/hudson/www/index.php -text
-plugins/coclico/hudson/www/test_result_pie_chart.php -text
-plugins/coclico/hudson/www/themes/default/css/style.css -text svneol=unset#text/css
-plugins/coclico/hudson/www/themes/default/images/ic/cross.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/edit.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/health_00_to_19.gif -text svneol=unset#image/gif
-plugins/coclico/hudson/www/themes/default/images/ic/health_20_to_39.gif -text svneol=unset#image/gif
-plugins/coclico/hudson/www/themes/default/images/ic/health_40_to_59.gif -text svneol=unset#image/gif
-plugins/coclico/hudson/www/themes/default/images/ic/health_60_to_79.gif -text svneol=unset#image/gif
-plugins/coclico/hudson/www/themes/default/images/ic/health_80_plus.gif -text svneol=unset#image/gif
-plugins/coclico/hudson/www/themes/default/images/ic/link_error.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/rss_feed.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/server_lightning.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/status_blue.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/status_grey.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/status_red.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/status_unknown.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/ic/status_yellow.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_builds_history.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_jobs_overview.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_last_artifacts.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_last_builds.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_my_jobs.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_test_results.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_test_trend.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_builds_history.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_jobs_overview.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_last_artifacts.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_last_builds.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_my_jobs.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#image/png
-plugins/coclico/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#image/png
-plugins/coclico/mailman/Mailman.ori/Archiver/Archiver.py -text
-plugins/coclico/mailman/Mailman.ori/MailList.py -text
-plugins/coclico/mailman/Mailman.ori/SecurityManager.py -text
-plugins/coclico/mailman/README.txt -text
-plugins/coclico/mailman/bin/db-delete.pl -text svneol=unset#text/x-perl
-plugins/coclico/mailman/bin/db-upgrade.pl -text svneol=unset#text/x-perl
-plugins/coclico/mailman/bin/import_members_DB.php -text
-plugins/coclico/mailman/common/mailman-init.php -text
-plugins/coclico/mailman/cronjobs/manage_mailmanlists.php -text
-plugins/coclico/mailman/db/mailman-init.sql -text
-plugins/coclico/mailman/debian/README.Debian -text
-plugins/coclico/mailman/debian/README.source -text
-plugins/coclico/mailman/debian/changelog -text
-plugins/coclico/mailman/debian/compat -text
-plugins/coclico/mailman/debian/control -text
-plugins/coclico/mailman/debian/copyright -text
-plugins/coclico/mailman/debian/docs -text
-plugins/coclico/mailman/debian/dsf-in/plugin-mailman.postinst -text
-plugins/coclico/mailman/debian/dsf-in/plugin-mailman.postrm -text
-plugins/coclico/mailman/debian/dsf-in/plugin-mailman.preinst -text
-plugins/coclico/mailman/debian/dsf-in/plugin-mailman.prerm -text
-plugins/coclico/mailman/debian/po/templates.pot -text
-plugins/coclico/mailman/debian/rules -text
-plugins/coclico/mailman/debian/source/format -text
-plugins/coclico/mailman/etc/httpd.d/200list.vhost -text
-plugins/coclico/mailman/etc/httpd.d/20list -text
-plugins/coclico/mailman/etc/httpd.d/20zlist.vhost -text
-plugins/coclico/mailman/etc/httpd.d/21list.vhost.ssl -text
-plugins/coclico/mailman/etc/httpd.d/62plugin-list-mailman -text
-plugins/coclico/mailman/etc/plugins/mailman/config.php -text
-plugins/coclico/mailman/include/BackendMailmanList.class.php -text
-plugins/coclico/mailman/include/MailmanList.class.php -text
-plugins/coclico/mailman/include/MailmanListDao.class.php -text
-plugins/coclico/mailman/include/MailmanListFactory.class.php -text
-plugins/coclico/mailman/include/MailmanPluginDescriptor.class.php -text
-plugins/coclico/mailman/include/MailmanPluginInfo.class.php -text
-plugins/coclico/mailman/include/MailsForUser.class.php -text
-plugins/coclico/mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php -text
-plugins/coclico/mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php -text
-plugins/coclico/mailman/include/mailman-init.php -text
-plugins/coclico/mailman/include/mailmanPlugin.class.php -text
-plugins/coclico/mailman/packaging/control/000source -text
-plugins/coclico/mailman/packaging/control/222plugin-mailman -text
-plugins/coclico/mailman/packaging/control/222plugin-mailman.shortdesc -text
-plugins/coclico/mailman/packaging/cron.d/plugin-mailman -text
-plugins/coclico/mailman/packaging/dirs/plugin-mailman -text
-plugins/coclico/mailman/packaging/docs/plugin-mailman -text
-plugins/coclico/mailman/packaging/install/plugin-mailman -text
-plugins/coclico/mailman/packaging/links/plugin-mailman -text
-plugins/coclico/mailman/translations/en.po -text
-plugins/coclico/mailman/translations/gforge.pot -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/Archiver/Archiver.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/ExternalConnector.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/ForgeSecurityManager.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/MailList.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/MySQLConnector.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/OldSecurityManager.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/PsycopgConnector.py -text
-plugins/coclico/mailman/usr/lib/mailman/Mailman/SecurityManager.py -text
-plugins/coclico/mailman/utils/manage-translations.sh -text svneol=unset#text/x-sh
-plugins/coclico/mailman/var/lib/mailman/lists/extend.py -text
-plugins/coclico/mailman/www/admin/deletelist.php -text
-plugins/coclico/mailman/www/admin/index.php -text
-plugins/coclico/mailman/www/index.html -text
-plugins/coclico/mailman/www/index.php -text
-plugins/coclico/mailman/www/mailman_utils.php -text
-plugins/coclico/mailman/www/themes/default/images/ic/add.png -text svneol=unset#image/png
-plugins/coclico/mailman/www/themes/default/images/ic/delete.png -text svneol=unset#image/png
-plugins/coclico/mailman/www/themes/default/images/ic/tick.png -text svneol=unset#image/png
 plugins/coclico/soapadmin/README.txt -text
 plugins/coclico/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
 plugins/coclico/soapadmin/bin/db-upgrade.pl -text svneol=unset#text/x-perl
@@ -1745,6 +1475,110 @@ src/plugins/fckeditor/www/fckpackager.xml -text svneol=unset#text/xml
 src/plugins/fckeditor/www/fckstyles.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fcktemplates.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fckutils.cfm -text
+src/plugins/forumml/README.txt -text
+src/plugins/forumml/TODO -text
+src/plugins/forumml/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/forumml/bin/installFF.sh -text svneol=unset#text/x-sh
+src/plugins/forumml/bin/mail_2_DB.php -text
+src/plugins/forumml/bin/mail_2_DB.pl -text svneol=unset#text/x-perl
+src/plugins/forumml/bin/mail_2_DBFF.php -text
+src/plugins/forumml/bin/mail_2_DBFF.pl -text svneol=unset#text/x-perl
+src/plugins/forumml/bin/ml_arch_2_DB.pl -text svneol=unset#text/x-perl
+src/plugins/forumml/bin/ml_arch_2_DBFF.pl -text svneol=unset#text/x-perl
+src/plugins/forumml/common/forumml-init.php -text
+src/plugins/forumml/db/forumml-init.sql -text
+src/plugins/forumml/db/install.sql -text
+src/plugins/forumml/debian/README.Debian -text
+src/plugins/forumml/debian/README.source -text
+src/plugins/forumml/debian/changelog -text
+src/plugins/forumml/debian/compat -text
+src/plugins/forumml/debian/control -text
+src/plugins/forumml/debian/copyright -text
+src/plugins/forumml/debian/docs -text
+src/plugins/forumml/debian/dsf-in/plugin-forumml.postinst -text
+src/plugins/forumml/debian/dsf-in/plugin-forumml.prerm -text
+src/plugins/forumml/debian/po/templates.pot -text
+src/plugins/forumml/debian/rules -text
+src/plugins/forumml/debian/source/format -text
+src/plugins/forumml/etc/forumml.inc.dist -text
+src/plugins/forumml/include/ForumMLGroupSearchEngine.class.php -text
+src/plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php -text
+src/plugins/forumml/include/ForumMLInsert.class.php -text
+src/plugins/forumml/include/ForumMLPluginDescriptor.class.php -text
+src/plugins/forumml/include/ForumMLPluginInfo.class.php -text
+src/plugins/forumml/include/ForumMLSearchEngine.class.php -text
+src/plugins/forumml/include/ForumMLSearchQuery.class.php -text
+src/plugins/forumml/include/ForumML_Attachment.class.php -text
+src/plugins/forumml/include/ForumML_AttachmentDao.class.php -text
+src/plugins/forumml/include/ForumML_FileStorage.class.php -text
+src/plugins/forumml/include/ForumML_HTMLPurifier.class.php -text
+src/plugins/forumml/include/ForumML_MessageDao.class.php -text
+src/plugins/forumml/include/ForumML_MessageManager.class.php -text
+src/plugins/forumml/include/ForumML_mimeDecode.class.php -text
+src/plugins/forumml/include/forummlPlugin.class.php -text
+src/plugins/forumml/packaging/control/000source -text
+src/plugins/forumml/packaging/control/222plugin-forumml -text
+src/plugins/forumml/packaging/control/222plugin-forumml.shortdesc -text
+src/plugins/forumml/packaging/dirs/plugin-forumml -text
+src/plugins/forumml/packaging/docs/plugin-forumml -text
+src/plugins/forumml/packaging/install/plugin-forumml -text
+src/plugins/forumml/packaging/links/plugin-forumml -text
+src/plugins/forumml/selinux/forumml0.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml0.te -text
+src/plugins/forumml/selinux/forumml1.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml1.te -text
+src/plugins/forumml/selinux/forumml2.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml2.te -text
+src/plugins/forumml/selinux/forumml3.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml3.te -text
+src/plugins/forumml/selinux/forumml4.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml4.te -text
+src/plugins/forumml/selinux/forumml5.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml5.te -text
+src/plugins/forumml/selinux/forumml6.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml6.te -text
+src/plugins/forumml/selinux/forumml7.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml7.te -text
+src/plugins/forumml/selinux/forumml8.pp -text svneol=unset#unset
+src/plugins/forumml/selinux/forumml8.te -text
+src/plugins/forumml/site-content/en_US/forumml.tab -text
+src/plugins/forumml/site-content/fr_FR/forumml.tab -text
+src/plugins/forumml/tests/ForumML_FileStorageTest.php -text
+src/plugins/forumml/tests/ForumML_InsertTest.php -text
+src/plugins/forumml/tests/_fixtures/samples/attachment_only.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_html_only.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/html_with_inline_content_and_attch_in_text_plus_html.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/html_with_inline_content_in_html_only.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/html_with_inline_content_in_text_plus_html.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/pure_html_in_html_only.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/pure_html_text_plus_html.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/pure_text.mbox -text
+src/plugins/forumml/tests/_fixtures/samples/text_plus_attachment.mbox -text
+src/plugins/forumml/translations/en.po -text
+src/plugins/forumml/translations/gforge.pot -text
+src/plugins/forumml/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/plugins/forumml/www/forumml_utils.php -text
+src/plugins/forumml/www/index.php -text
+src/plugins/forumml/www/message.php -text
+src/plugins/forumml/www/scripts/cc_attach_js.php -text
+src/plugins/forumml/www/scripts/forumml.js -text
+src/plugins/forumml/www/themes/default/css/style.css -text svneol=unset#text/css
+src/plugins/forumml/www/themes/default/images/ic/attach.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/comment.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/comment_add.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/comments.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/msg.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_first.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_first_disabled.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_last.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_last_disabled.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_next.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_next_disabled.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_previous.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/resultset_previous_disabled.png -text svneol=unset#image/png
+src/plugins/forumml/www/themes/default/images/ic/spinner-greenie.gif -text svneol=unset#image/gif
+src/plugins/forumml/www/themes/default/images/ic/trash.png -text svneol=unset#image/png
+src/plugins/forumml/www/upload.php -text
 src/plugins/globalsearch/NAME -text
 src/plugins/globalsearch/README -text
 src/plugins/globalsearch/TODO -text
@@ -1766,10 +1600,176 @@ src/plugins/globalsearch/packaging/links/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
 src/plugins/gravatar/common/gravatarPlugin.class.php -text
+src/plugins/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/hudson/common/hudson-init.php -text
+src/plugins/hudson/cronjobs/manage_hudson.php -text
+src/plugins/hudson/db/hudson-init.sql -text
+src/plugins/hudson/db/install.sql -text
+src/plugins/hudson/db/uninstall.sql -text
+src/plugins/hudson/debian/README.Debian -text
+src/plugins/hudson/debian/README.source -text
+src/plugins/hudson/debian/changelog -text
+src/plugins/hudson/debian/compat -text
+src/plugins/hudson/debian/control -text
+src/plugins/hudson/debian/copyright -text
+src/plugins/hudson/debian/docs -text
+src/plugins/hudson/debian/dsf-in/plugin-hudson.postinst -text
+src/plugins/hudson/debian/dsf-in/plugin-hudson.prerm -text
+src/plugins/hudson/debian/po/templates.pot -text
+src/plugins/hudson/debian/rules -text
+src/plugins/hudson/debian/source/format -text
+src/plugins/hudson/etc/httpd.d/62plugin-hudson -text
+src/plugins/hudson/etc/plugins/hudson/config.php -text
+src/plugins/hudson/include/HudsonBuild.class.php -text
+src/plugins/hudson/include/HudsonJob.class.php -text
+src/plugins/hudson/include/HudsonJobURLFileException.class.php -text
+src/plugins/hudson/include/HudsonJobURLFileNotFoundException.class.php -text
+src/plugins/hudson/include/HudsonJobURLMalformedException.class.php -text
+src/plugins/hudson/include/HudsonJobWidget.class.php -text
+src/plugins/hudson/include/HudsonOverviewWidget.class.php -text
+src/plugins/hudson/include/HudsonTestResult.class.php -text
+src/plugins/hudson/include/HudsonWidget.class.php -text
+src/plugins/hudson/include/PluginHudsonJobDao.class.php -text
+src/plugins/hudson/include/hudson.class.php -text
+src/plugins/hudson/include/hudsonActions.class.php -text
+src/plugins/hudson/include/hudsonPlugin.class.php -text
+src/plugins/hudson/include/hudsonPluginDescriptor.class.php -text
+src/plugins/hudson/include/hudsonPluginInfo.class.php -text
+src/plugins/hudson/include/hudsonViews.class.php -text
+src/plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php -text
+src/plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php -text
+src/plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php -text
+src/plugins/hudson/include/hudson_Widget_JobTestResults.class.php -text
+src/plugins/hudson/include/hudson_Widget_JobTestTrend.class.php -text
+src/plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php -text
+src/plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php -text
+src/plugins/hudson/packaging/control/000source -text
+src/plugins/hudson/packaging/control/222plugin-hudson -text
+src/plugins/hudson/packaging/control/222plugin-hudson.shortdesc -text
+src/plugins/hudson/packaging/dirs/plugin-hudson -text
+src/plugins/hudson/packaging/docs/plugin-hudson -text
+src/plugins/hudson/packaging/install/plugin-hudson -text
+src/plugins/hudson/packaging/links/plugin-hudson -text
+src/plugins/hudson/site-content/en_US/hudson.tab -text
+src/plugins/hudson/site-content/en_US/hudson.tab.back -text
+src/plugins/hudson/site-content/fr_FR/hudson.tab -text
+src/plugins/hudson/tests/AllTests.php -text
+src/plugins/hudson/tests/HudsonBuildTest.php -text
+src/plugins/hudson/tests/HudsonJobTest.php -text
+src/plugins/hudson/tests/HudsonTestResultTest.php -text
+src/plugins/hudson/tests/resources/jobbuild.xml -text svneol=unset#text/xml
+src/plugins/hudson/tests/resources/testReport.xml -text svneol=unset#text/xml
+src/plugins/hudson/translations/en.po -text
+src/plugins/hudson/translations/gforge.pot -text
+src/plugins/hudson/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/plugins/hudson/www/admin/index.php -text
+src/plugins/hudson/www/hudson_tab.js -text
+src/plugins/hudson/www/index.php -text
+src/plugins/hudson/www/test_result_pie_chart.php -text
+src/plugins/hudson/www/themes/default/css/style.css -text svneol=unset#text/css
+src/plugins/hudson/www/themes/default/images/ic/cross.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/edit.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/health_00_to_19.gif -text svneol=unset#image/gif
+src/plugins/hudson/www/themes/default/images/ic/health_20_to_39.gif -text svneol=unset#image/gif
+src/plugins/hudson/www/themes/default/images/ic/health_40_to_59.gif -text svneol=unset#image/gif
+src/plugins/hudson/www/themes/default/images/ic/health_60_to_79.gif -text svneol=unset#image/gif
+src/plugins/hudson/www/themes/default/images/ic/health_80_plus.gif -text svneol=unset#image/gif
+src/plugins/hudson/www/themes/default/images/ic/link_error.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/rss_feed.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/server_lightning.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/status_blue.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/status_grey.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/status_red.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/status_unknown.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/ic/status_yellow.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_builds_history.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_jobs_overview.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_last_artifacts.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_last_builds.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_my_jobs.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_test_results.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/en_US_hudson_widget_test_trend.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_builds_history.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_jobs_overview.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_last_artifacts.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_last_builds.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_my_jobs.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#image/png
+src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#image/png
 src/plugins/ldapextauth/bin/db-delete.pl svneol=native#text/x-perl
 src/plugins/ldapextauth/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
 src/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
+src/plugins/mailman/Mailman.ori/Archiver/Archiver.py -text
+src/plugins/mailman/Mailman.ori/MailList.py -text
+src/plugins/mailman/Mailman.ori/SecurityManager.py -text
+src/plugins/mailman/README.txt -text
+src/plugins/mailman/bin/db-delete.pl -text svneol=unset#text/x-perl
+src/plugins/mailman/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/mailman/bin/import_members_DB.php -text
+src/plugins/mailman/common/mailman-init.php -text
+src/plugins/mailman/cronjobs/manage_mailmanlists.php -text
+src/plugins/mailman/db/mailman-init.sql -text
+src/plugins/mailman/debian/README.Debian -text
+src/plugins/mailman/debian/README.source -text
+src/plugins/mailman/debian/changelog -text
+src/plugins/mailman/debian/compat -text
+src/plugins/mailman/debian/control -text
+src/plugins/mailman/debian/copyright -text
+src/plugins/mailman/debian/docs -text
+src/plugins/mailman/debian/dsf-in/plugin-mailman.postinst -text
+src/plugins/mailman/debian/dsf-in/plugin-mailman.postrm -text
+src/plugins/mailman/debian/dsf-in/plugin-mailman.preinst -text
+src/plugins/mailman/debian/dsf-in/plugin-mailman.prerm -text
+src/plugins/mailman/debian/po/templates.pot -text
+src/plugins/mailman/debian/rules -text
+src/plugins/mailman/debian/source/format -text
+src/plugins/mailman/etc/httpd.d/200list.vhost -text
+src/plugins/mailman/etc/httpd.d/20list -text
+src/plugins/mailman/etc/httpd.d/20zlist.vhost -text
+src/plugins/mailman/etc/httpd.d/21list.vhost.ssl -text
+src/plugins/mailman/etc/httpd.d/62plugin-list-mailman -text
+src/plugins/mailman/etc/plugins/mailman/config.php -text
+src/plugins/mailman/include/BackendMailmanList.class.php -text
+src/plugins/mailman/include/MailmanList.class.php -text
+src/plugins/mailman/include/MailmanListDao.class.php -text
+src/plugins/mailman/include/MailmanListFactory.class.php -text
+src/plugins/mailman/include/MailmanPluginDescriptor.class.php -text
+src/plugins/mailman/include/MailmanPluginInfo.class.php -text
+src/plugins/mailman/include/MailsForUser.class.php -text
+src/plugins/mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php -text
+src/plugins/mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php -text
+src/plugins/mailman/include/mailman-init.php -text
+src/plugins/mailman/include/mailmanPlugin.class.php -text
+src/plugins/mailman/packaging/control/000source -text
+src/plugins/mailman/packaging/control/222plugin-mailman -text
+src/plugins/mailman/packaging/control/222plugin-mailman.shortdesc -text
+src/plugins/mailman/packaging/cron.d/plugin-mailman -text
+src/plugins/mailman/packaging/dirs/plugin-mailman -text
+src/plugins/mailman/packaging/docs/plugin-mailman -text
+src/plugins/mailman/packaging/install/plugin-mailman -text
+src/plugins/mailman/packaging/links/plugin-mailman -text
+src/plugins/mailman/translations/en.po -text
+src/plugins/mailman/translations/gforge.pot -text
+src/plugins/mailman/usr/lib/mailman/Mailman/Archiver/Archiver.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/ExternalConnector.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/ForgeSecurityManager.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/MailList.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/MySQLConnector.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/OldSecurityManager.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/PsycopgConnector.py -text
+src/plugins/mailman/usr/lib/mailman/Mailman/SecurityManager.py -text
+src/plugins/mailman/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/plugins/mailman/var/lib/mailman/lists/extend.py -text
+src/plugins/mailman/www/admin/deletelist.php -text
+src/plugins/mailman/www/admin/index.php -text
+src/plugins/mailman/www/index.html -text
+src/plugins/mailman/www/index.php -text
+src/plugins/mailman/www/mailman_utils.php -text
+src/plugins/mailman/www/themes/default/images/ic/add.png -text svneol=unset#image/png
+src/plugins/mailman/www/themes/default/images/ic/delete.png -text svneol=unset#image/png
+src/plugins/mailman/www/themes/default/images/ic/tick.png -text svneol=unset#image/png
 src/plugins/mantis/etc/mantis.ini -text
 src/plugins/mantis/packaging/install/plugin-mantis -text
 src/plugins/mantisbt/action/addAttachment.php -text
