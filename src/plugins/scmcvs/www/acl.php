@@ -4,6 +4,7 @@
  *
  * Copyright 2004 GForge, LLC
  * Copyright 2010, Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -54,7 +55,7 @@ if (count($matches) == 0) {
 	session_set_new($User->getID());
 
 	$projectName = $matches[count($matches)-1];
-	$Group =& group_get_object_by_name($projectName);
+	$Group = group_get_object_by_name($projectName);
 	if (!$Group || !is_object($Group) || $Group->isError()) {
 		exit_no_group();
 	}

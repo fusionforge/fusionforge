@@ -3,6 +3,7 @@
  *
  * Copyright 2003-2009, Roland Mas
  * Copyright 2004, GForge, LLC
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -73,7 +74,7 @@ class CCasePlugin extends SCMPlugin {
 	function display_scm_page ($group_id) {
 		global $HTML ;
 
-		$project =& group_get_object($group_id);
+		$project = group_get_object($group_id);
 		
 		if ($project->usesPlugin ("scmccase")) {
 			$vob_tag = preg_replace("/GROUPNAME/", $project->getUnixName (), forge_get_config('tag_pattern', 'scmccase')) ;
@@ -127,7 +128,7 @@ class CCasePlugin extends SCMPlugin {
 	}
 	
 	function scm_admin_update ($params) {
-		$group =& group_get_object($params['group_id']);
+		$group = group_get_object($params['group_id']);
 		
 		if ($params['scmccase_ccase_server'] && $params['scmccase_ccase_server'] != "") {
 			$this->SetGroupServer ($params['group_id'], $params['scmccase_ccase_server']) ;
@@ -137,7 +138,7 @@ class CCasePlugin extends SCMPlugin {
 	}
 
 	function display_scm_admin_page ($params) {
-		$group =& group_get_object($params['group_id']);
+		$group = group_get_object($params['group_id']);
 		
 		if ( $group->usesPlugin ( $this->name ) ) {
 			print '<input type="text" name="scmccase_ccase_server" value="'.$this->GetGroupServer ($params['group_id']).'"> <strong>'._('ClearCase server').'</strong><br /><br />' ;
@@ -204,7 +205,7 @@ class CCasePlugin extends SCMPlugin {
 
 		$group_id = $params['group_id'] ;
 
-		$project =& group_get_object($group_id);
+		$project = group_get_object($group_id);
 		if (!$project || !is_object($project)) {
 			return false;
 		} elseif ($project->isError()) {
