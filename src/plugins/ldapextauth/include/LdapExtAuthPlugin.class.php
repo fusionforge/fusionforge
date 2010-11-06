@@ -4,7 +4,7 @@
  * Copyright 2004 Roland Mas <roland@gnurandal.com> 
  *                The Gforge Group, LLC <http://gforgegroup.com/>
  * Copyright 2004 Christian Bayle <bayle@debian.org>
- * Copyright 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright 2009-2010 Alain Peyrat, Alcatel-Lucent
  * Copyright 2009 Chris Dalzell, OpenGameForge.org
  *
  * This file is part of FusionForge
@@ -146,16 +146,13 @@ class LdapextauthPlugin extends Plugin {
 
 		debuglog("LDAP: dn=$dn");
 
-		// Prevent problem with php quoting.
-		$raw_passwd = get_magic_quotes_gpc() ? stripslashes($passwd) : $passwd;
-
 		$u = user_get_object_by_name ($loginname) ;
 
 		if ($u) {
 			debuglog("LDAP: User is present in database");
 
 			// User exists in DB
-			if (@ldap_bind($this->ldap_conn, $dn, $raw_passwd)) {
+			if (@ldap_bind($this->ldap_conn, $dn, $passwd)) {
 				debuglog("LDAP: ldap_bind() ok (user bind)");
 				// Password from form is valid in LDAP
 
@@ -172,7 +169,7 @@ class LdapextauthPlugin extends Plugin {
 					return true ;
 				} else {
 					// Passwords mismatch, update DB's
-					$u->setPasswd ($raw_passwd) ;
+					$u->setPasswd ($passwd) ;
 					$GLOBALS['ldap_auth_failed']=false;
 					return true ;
 				}
@@ -195,7 +192,7 @@ class LdapextauthPlugin extends Plugin {
 			debuglog("LDAP: User is not present in database\n");
 
 			// User doesn't exist in DB yet
-			if (@ldap_bind($this->ldap_conn, $dn, $raw_passwd))
+			if (@ldap_bind($this->ldap_conn, $dn, $passwd))
 			{
 
 				$ldapentry = $info[0] ;
