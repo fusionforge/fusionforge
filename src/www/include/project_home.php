@@ -31,9 +31,15 @@ require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 session_require_perm ('project_read', $group_id) ;
 
-$title = _('Project Info');
+$title = _('Project Home');
 
-site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
+use_javascript('/scripts/prototype/prototype.js');
+use_javascript('/scripts/scriptaculous/scriptaculous.js');
+use_javascript('/scripts/codendi/Tooltip.js');
+use_javascript('/scripts/codendi/LayoutManager.js');
+use_javascript('/scripts/codendi/ReorderColumns.js');
+
+site_project_header(array('title'=>$title,'h1' => '', 'group'=>$group_id,'toptab'=>'home'));
 
 $request =& HTTPRequest::instance();
 $request->set('group_id',$group_id);
