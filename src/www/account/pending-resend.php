@@ -48,8 +48,7 @@ if (getStringFromRequest('submit')) {
 
 	<h2><?php echo _('Pending Account')?></h2>
 	<p>
-	<?php echo _('Your email confirmation has been resent. Visit the link
-	in this email to complete the registration process.');?>
+	<?php echo _('Your email confirmation has been resent. Visit the link in this email to complete the registration process.');?>
 	</p>
 
 <?php
