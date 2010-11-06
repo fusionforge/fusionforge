@@ -3,6 +3,7 @@
  * New Releases Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -65,8 +66,7 @@ $res_new = db_query_params ('SELECT groups.group_name,
 			    $offset);
 
 if (!$res_new || db_numrows($res_new) < 1) {
-	print db_error();
-	print '<h1>'._('No new releases found.').'</h1>';
+	echo '<p class="error">' . _('No new releases found') . db_error().'</p>';
 } else {
 
 	if ( db_numrows($res_new) > 20 ) {

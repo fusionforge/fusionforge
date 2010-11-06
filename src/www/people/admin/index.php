@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -87,8 +88,7 @@ if (user_ismember(1,'A')) {
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,'Existing Categories','people_cat');
 		} else {
-			echo '
-				<h1>No job categories</h1>';
+			echo '<p class="error">No job categories</p>';
 			echo db_error();
 		}
 		?>
