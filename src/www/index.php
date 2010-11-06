@@ -5,6 +5,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
  * Copyright 2008-2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -30,7 +31,7 @@ require_once $gfwww.'news/news_utils.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfwww.'include/features_boxes.php';
 
-$HTML->header(array('title'=>_('Welcome')));
+$HTML->header(array('title'=>_('Welcome'), 'h1' => ''));
 
 // Main page content is now themeable;
 // Default is index_std.php;

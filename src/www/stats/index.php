@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,7 +30,7 @@ require_once $gfwww.'stats/site_stats_utils.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), forge_get_config ('forge_name'))));
+$HTML->header(array('title'=>sprintf(_('%1$s Sitewide Aggregate Statistics'), forge_get_config ('forge_name'))));
 
 //
 // BEGIN PAGE CONTENT CODE
