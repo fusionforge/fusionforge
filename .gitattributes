@@ -684,6 +684,7 @@ src/common/docman/actions/emptytrash.php -text
 src/common/docman/actions/enforcereserve.php -text
 src/common/docman/actions/forcereindexenginesearch.php -text
 src/common/docman/actions/lockfile.php -text
+src/common/docman/actions/monitorfile.php -text
 src/common/docman/actions/releasefile.php -text
 src/common/docman/actions/reservefile.php -text
 src/common/docman/actions/trashdir.php -text
@@ -834,6 +835,7 @@ src/db/20101021-pfo-rbac.sql -text
 src/db/20101024-docman-createonline.sql -text
 src/db/20101025-ipv6.sql -text
 src/db/20101027-docman-lock.sql -text
+src/db/20101029-docman-monitoring.sql -text
 src/db/20101105-pfo-rbac.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
@@ -4435,6 +4437,8 @@ src/www/themes/funky/images/docman/file_type_writer.png -text svneol=unset#image
 src/www/themes/funky/images/docman/image-x-generic.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/insert-directory.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/insert-file.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/monitor-adddocument.png -text svneol=unset#image/png
+src/www/themes/funky/images/docman/monitor-removedocument.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/new.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/release-document.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/reserve-document.png -text svneol=unset#image/png
@@ -4561,6 +4565,8 @@ src/www/themes/gforge/images/docman/file_type_writer.png -text svneol=unset#imag
 src/www/themes/gforge/images/docman/image-x-generic.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/insert-directory.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/insert-file.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/monitor-adddocument.png -text svneol=unset#image/png
+src/www/themes/gforge/images/docman/monitor-removedocument.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/new.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/release-document.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/reserve-document.png -text svneol=unset#image/png

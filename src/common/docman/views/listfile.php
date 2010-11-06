@@ -48,16 +48,17 @@ jQuery(document).ready(function() {
     controller = new DocManListFileController({
         groupId:            <?php echo $group_id ?>, 
         tipsyElements:      [
-                                {selector: '#docman-addnewfile', options:{delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '#docman-addsubdirectory', options:{delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '#docman-editdirectory', options:{delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '#docman-deletedirectory', options:{delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '.docman-reserveddocument', options:{delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 1000, delayOut: 500, fade: true}},
-                                {selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 1000, delayOut: 500, fade: true}}
+                                {selector: '#docman-addnewfile', options:{delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '#docman-addsubdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-reserveddocument', options:{delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+                                {selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
                             ],
         
         divAddDirectory:        jQuery('#addsubdocgroup'),
@@ -67,7 +68,7 @@ jQuery(document).ready(function() {
         buttonAddNewFile:       jQuery('#docman-addnewfile'),
         buttonEditDirectory:    jQuery('#docman-editdirectory'),
         docManURL:              '<?php util_make_url("docman") ?>',
-        lockIntervalDelay:      60000 //ms
+        lockIntervalDelay:      60000 //in microsecond and if you change this value, please update the check value 600
     });
 });
 
@@ -84,7 +85,7 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 }
 
 if (forge_check_perm ('docman', $group_id, 'submit')) {
-	echo '<a href="#" id="docman-addnewfile" title="'. _('Add a new file') . '" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
+	echo '<a href="#" id="docman-addnewfile" title="'. _('Add a new document') . '" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
 }
 
 echo '</h3>';
@@ -119,12 +120,14 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		default:
 			$docurl=util_make_url ('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 		}
-		echo '<td><a href="'.$docurl.'" class="docman-viewfile" title="'._('View this file').'" >';
+		echo '<td><a href="'.$docurl.'" class="docman-viewfile" title="'._('View this document').'" >';
 		switch ($d->getFileType()) {
 			case "image/png":
 			case "image/jpeg":
 			case "image/gif":
 			case "image/tiff":
+			case "image/vnd.microsoft.icon":
+			case "image/svg+xml":
 				echo html_image('docman/file_type_image.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "application/pdf":
@@ -138,11 +141,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				echo html_image('docman/file_type_plain.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "application/msword":
+			case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
             case "application/vnd.oasis.opendocument.text":
 				echo html_image('docman/file_type_writer.png',22,22,array('alt'=>$d->getFileType()));
 				break;
 			case "application/vnd.ms-excel":
 			case "application/vnd.oasis.opendocument.spreadsheet":
+			case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
 				echo html_image('docman/file_type_spreadsheet.png',22,22,array('alt'=>$d->getFileType()));
 				break;
             case "application/vnd.oasis.opendocument.presentation":
@@ -206,25 +211,34 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
             if ($d->getLocked()) {
                 if ($d->getLockedBy() == $LUSER->getID()) {
                     $d->setLock(0);
+				/* if you change the 60000 value above, please update here too */
                 } elseif ((time() - $d->getLockdate()) > 600) {
                     $d->setLock(0);
                 }
             }
             if (!$d->getLocked() && !$d->getReserved()) {
-			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this file to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this file'))). '</a>';
-			    echo '<a href="#" onclick="javascript:controller.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
-			        echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-reservefile" title="'. _('Reserve this file for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
+			    echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+			    echo '<a href="#" onclick="javascript:controller.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-reservefile" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
             } else {
                 if ($d->getReservedBy() != $LUSER->getID()) {
                     if (forge_check_perm ('docman', $group_id, 'admin')) {
                         echo '<a href="?group_id='.$group_id.'&action=enforcereserve&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-enforcereservation" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
                     }
                 } else {
-			        echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this file to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this file'))). '</a>';
-			        echo '<a href="#" onclick="javascript:controller.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this file') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this file'))). '</a>';
+			        echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+			        echo '<a href="#" onclick="javascript:controller.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
 			        echo '<a href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
                 }
             }
+			if ($d->isMonitoredBy($LUSER->getID())) {
+				$option='remove';
+				$titleMonitor= _('Stop monitoring this document');
+			} else {
+				$option='add';
+				$titleMonitor= _('Start monitoring this document');
+			}
+			echo '<a href="?group_id='.$group_id.'&action=monitorfile&option='.$option.'&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-monitorfile" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
 			echo '</td>';
 		}
 		echo '</tr>';

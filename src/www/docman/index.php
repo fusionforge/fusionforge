@@ -97,6 +97,7 @@ switch ($action) {
 	case "releasefile":
 	case "enforcereserve":
 	case "lockfile":
+	case "monitorfile":
 		include ($gfcommon."docman/actions/$action.php");
 		break;
 }

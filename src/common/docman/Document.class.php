@@ -479,6 +479,90 @@ class Document extends Error {
 	}
 
 	/**
+	 * 	getMonitoredUserEmailAddress - get the email addresses of users who monitor this file
+	 *
+	 * 	@return	string	The list of emails comma separated
+	 */
+	function getMonitoredUserEmailAddress() {
+		$result = db_query_params('select users.email from users,docdata_monitored_docman where users.user_id = docdata_monitored_docman.user_id and docdata_monitored_docman.doc_id = $1', array ($this->getID()));
+		if (!$result || db_numrows($result) < 1) {
+			return NULL;
+		} else {
+			$values = '';
+			$comma = '';
+			$i = 0;
+			while ($arr = db_fetch_array($result)) {
+				if ( $i > 0 )
+					$comma = ',';
+
+				$values .=$comma.$arr['email'];
+				$i++;
+			}
+		}
+		return $values;
+	}
+
+	/**
+	 *	isMonitoredBy - get the monitored status of this document for a specific user id.
+	 *
+	 *	@param	int		User ID
+	 *	@return bool	true if monitored by this user
+	 */
+	function isMonitoredBy($userid = 'ALL') {
+		if ( $userid == 'ALL' ) {
+			$condition = '';
+		} else {
+			$condition = 'user_id='.$userid.' AND';
+		}
+		$result = db_query_params('SELECT * FROM docdata_monitored_docman WHERE '.$condition.' doc_id=$1',
+								array ($this->getID()));
+
+		if (!$result || db_numrows($result) < 1)
+			return false;
+
+		return true;
+	}
+
+	/**
+	 *	removeMonitoredBy - remove this document for a specific user id for monitoring.
+	 *
+	 *	@param	int		User ID
+	 *	@return bool	true if success
+	 */
+	function removeMonitoredBy($userid) {
+		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id=$1 AND user_id=$2',
+								array ($this->getID(), $userid));
+
+		if (!$result) {
+			$this->setError(_('Unable To Remove Monitor').' : '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 *	addMonitoredBy - add this document for a specific user id for monitoring.
+	 *
+	 *	@param	int		User ID
+	 *	@return bool	true if success
+	 */
+	function addMonitoredBy($userid) {
+		$result = db_query_params('SELECT * FROM docdata_monitored_docman WHERE user_id=$1 AND doc_id=$2',
+								array ($userid, $this->getID()));
+
+		if (!$result || db_numrows($result) < 1) {
+			$result = db_query_params('INSERT INTO docdata_monitored_docman (doc_id,user_id) VALUES ($1,$2)',
+									array ($this->getID(), $userid));
+
+			if (!$result) {
+				$this->setError(_('Unable To Add Monitor').' : '.db_error());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 *  setState - set the stateid of the document.
 	 *
 	 *	@param	int	The state id of the doc_states table.
@@ -671,16 +755,19 @@ class Document extends Error {
                 return false;
             }
 		}
-		
+
 		$this->sendNotice(false);
 		return true;
 	}
 
 	/**
-	*   sendNotice - Notifies of document submissions
-	*/
+	 *	sendNotice - Notifies of document submissions
+	 */
 	function sendNotice ($new=true) {
 		$BCC = $this->Group->getDocEmailAddress();
+		if ($this->isMonitoredBy('ALL')) {
+			$BCC .= $this->getMonitoredUserEmailAddress();
+		}
 		if (strlen($BCC) > 0) {
 			$subject = '['.$this->Group->getPublicName().'] New document - '.$this->getName();
 			$body = "Project: ".$this->Group->getPublicName()."\n";
@@ -698,6 +785,9 @@ class Document extends Error {
 		return true;
 	}
 	
+	/**
+	 *	delete - Delete this file
+	 */
 	function delete() {
 		$perm =& $this->Group->getPermission ();
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
@@ -715,12 +805,15 @@ class Document extends Error {
 		
         switch ($this->Group->getStorageAPI()) {
         case 'DB':
-            break;
+			break;
         default:
 			$this->setError(_('Error Deleting Document: No Storage API'));
 			db_rollback();
 			return false;
-        }
+		}
+
+		// we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
+		//$this->sendNotice(false);
 		return true;
 	}
 }
