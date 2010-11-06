@@ -38,8 +38,9 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 }
 
+use_javascript('/tabber/tabber.js');
+
 site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
-echo '<script type="text/javascript" src="'. util_make_uri ('/tabber/tabber.js').'"></script>' ;
 
 $lm = new WidgetLayoutManager();
 $lm->displayLayout(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
