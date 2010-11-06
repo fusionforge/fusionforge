@@ -111,8 +111,8 @@ abstract class HudsonJobWidget extends HudsonWidget {
      * Returns the jobs selected for this widget
      */
     function getSelectedJobsId() {
-        $sql = "SELECT job_id FROM plugin_hudson_widget WHERE widget_name='" . $this->widget_id . "' AND owner_id = ". $this->owner_id ." AND owner_type = '". $this->owner_type ."'";
-        $res = db_query($sql);
+        $sql = "SELECT job_id FROM plugin_hudson_widget WHERE widget_name=$1 AND owner_id=$2 AND owner_type=$3";
+        $res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type));
 
         $selected_jobs_id = array();
         while ($data = db_fetch_array($res)) {

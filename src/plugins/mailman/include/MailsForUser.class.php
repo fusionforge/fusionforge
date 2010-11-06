@@ -60,9 +60,9 @@ class MailsForUser extends Error {
 		     "FROM groups,mail_group_list,mailman_sql ".
 		     "WHERE groups.group_id=mail_group_list.group_id AND groups.status ='A' ".
 		     "AND mail_group_list.list_name=mailman_sql.listname ".
-		     "AND mailman_sql.address='".$this->User->getEmail()."' ORDER BY group_name DESC";
+		     "AND mailman_sql.address=$1 ORDER BY group_name DESC";
 
-		$result=db_query($sql);
+		$result=db_query_params($sql,array($this->User->getEmail()));
 		$rows=db_numrows($result);
 		if ($rows < 1) {
 		        return $lists;

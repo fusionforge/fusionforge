@@ -46,11 +46,8 @@ require_once('utils.php');
 
 $list = $argv[1];
 // get list id and group id from list name
-$sql = sprintf('SELECT group_id, group_list_id'.
-				' FROM mail_group_list'.
-				' WHERE list_name = "%s"',
-				db_escape_string($list));
-$res = db_query($sql);
+$sql = "SELECT group_id, group_list_id FROM mail_group_list WHERE list_name=$1";
+$res = db_query_params($sql,array(db_escape_string($list)));
 if (db_numrows($res) > 0) {
 	$id_list = db_result($res,0,'group_list_id');
 	$gr_id = db_result($res,0,'group_id');
@@ -78,8 +75,8 @@ if ($p && $plugin_manager->isPluginAvailable($p) ) {
 		}
 
         // Do not import from archives if there are already messages for this list
-        $sql = 'SELECT NULL FROM plugin_forumml_message WHERE id_list = '.db_ei($id_list).' LIMIT 1';
-        $res = db_query($sql);
+        $sql = "SELECT NULL FROM plugin_forumml_message WHERE id_list=$1 LIMIT 1";
+        $res = db_query_params($sql,array(db_ei($id_list)));
         if ($res && db_numrows($res) > 0) {
             $stderr = fopen('php://stderr', 'w');
 			fwrite($stderr, "Cannot import messages from archive.\nThere are already messages in the database for $list ($mbox_file)\n");

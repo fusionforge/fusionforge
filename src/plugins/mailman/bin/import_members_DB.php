@@ -6,8 +6,8 @@
  */
 require_once 'pre.php';
 require_once 'mailman/include/MailmanListDao.class.php';
-$sql = 'SELECT * from mail_group_list WHERE status=3';
-$result = db_query($sql);
+$sql = "SELECT * from mail_group_list WHERE status=3";
+$result = db_query_params($sql,array());
 while($row = db_fetch_array($result)) {
 	$members= null;
 	$usernames = null;
