@@ -27,10 +27,8 @@ case "$1" in
     configure)
 	# Prepare database
 	/usr/share/@OLDPACKAGE@/bin/register-plugin forumml "ForumML"
-	/usr/share/gforge/plugins/forumml/bin/installFF.sh
 	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/db-upgrade.pl
-	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/ml_arch_2_DBFF.pl
-
+	/usr/share/@OLDPACKAGE@/plugins/forumml/bin/install.sh
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

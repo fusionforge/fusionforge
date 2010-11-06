@@ -1479,6 +1479,7 @@ src/plugins/forumml/NAME -text
 src/plugins/forumml/README.txt -text
 src/plugins/forumml/TODO -text
 src/plugins/forumml/bin/db-upgrade.pl -text svneol=unset#text/x-perl
+src/plugins/forumml/bin/install.sh -text
 src/plugins/forumml/bin/installFF.sh -text svneol=unset#text/x-sh
 src/plugins/forumml/bin/mail_2_DB.php -text
 src/plugins/forumml/bin/mail_2_DB.pl -text svneol=unset#text/x-perl
@@ -1711,6 +1712,7 @@ src/plugins/mailman/README.txt -text
 src/plugins/mailman/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/mailman/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 src/plugins/mailman/bin/import_members_DB.php -text
+src/plugins/mailman/bin/install.sh -text
 src/plugins/mailman/common/mailman-init.php -text
 src/plugins/mailman/cronjobs/manage_mailmanlists.php -text
 src/plugins/mailman/db/mailman-init.sql -text
