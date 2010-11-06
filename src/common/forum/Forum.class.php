@@ -456,9 +456,6 @@ class Forum extends Error {
 				User is not already monitoring thread, so
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO forum_monitored_forums (forum_id,user_id)
-				VALUES ('".$this->getID()."','$u')";
-
 			$result = db_query_params ('INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ($1,$2)',
 						   array ($this->getID(),
 							  user_getid())) ;
