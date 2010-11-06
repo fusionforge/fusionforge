@@ -98,7 +98,7 @@ debian/$(OLDPACKAGE)-%.docs:
 debian/$(PACKAGE)-%.docs:
 	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
 
-debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[0-9][0-9][0-9]*) 
+debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) 
 	ls $(CURDIR)/packaging/control/[0-9][0-9][0-9]* $(CURDIR)/plugins/*/packaging/control/[0-9][0-9][0-9]* | grep -v shortdesc | grep -v scmcpold | while read file ; do cat $${file}; if [ -f $${file}.shortdesc ] ; then cat $(CURDIR)/packaging/control/AAAdesc; echo ' .'; cat $${file}.shortdesc; fi; echo '';  done | $(SED_REPLACE) > $@
 
 debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcard debian/dsf-helper/*.templates)
