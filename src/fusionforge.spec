@@ -214,11 +214,11 @@ Requires: %{name} >= %{version}, php, darcs
 This is a plugin to integrate DARCS version control system with FusionForge
 
 %package plugin-scmgit
-Summary: Bazaar version control plugin for FusionForge
+Summary: Git version control plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, git
+Requires: %{name} >= %{version}, php, git, gitweb
 %description plugin-scmgit
-This is a plugin to integrate Bazaar version control system with FusionForge
+This is a plugin to integrate Git version control system with FusionForge
 
 %package plugin-scmhg
 Summary: Mercurial (hg) version control plugin for FusionForge
@@ -498,7 +498,10 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__ln_s} ../../plugins/scmsvn $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmsvn
 
 # plugin: scmgit
-%{__ln_s} ../../plugins/scmgit $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
+# XXX Commented for next lines but make index.php unreachable.
+#%{__ln_s} ../../plugins/scmgit $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
+%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/cgi-bin/gitweb.cgi
+%{__ln_s} /usr/share/gitweb/static $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
 
 # plugin: scmhg
 
