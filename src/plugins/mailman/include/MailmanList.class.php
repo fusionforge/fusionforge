@@ -34,6 +34,8 @@
  */
 
 require_once 'MailmanListDao.class.php';
+require_once 'ProjectManager.class.php';
+require_once 'UserManager.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'common/system_event/SystemEventManager.class.php';
 require_once 'common/system_event/SystemEvent.class.php';
