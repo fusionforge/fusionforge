@@ -140,7 +140,7 @@ if ($group_id) {
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<p><strong><?php echo _('Mailing List Name:'); ?></strong><br />
-			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php forge_get_config('lists_host'); ?></strong><br /></p>
+			<strong><?php echo $Group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong><br /></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />
 			<input type="radio" name="is_public" value="1" checked="checked" /> <?php echo _('Yes'); ?><br />
