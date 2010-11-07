@@ -2,18 +2,28 @@ FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
 * Docman: new UI (Capgemini)
 * Docman: extract documents and directories as zip archive (Capgemini)
-* Docman: rebirth of URL and online creation documents (better with HTML editor) (Capgemini)
+* Docman: rebirth of URL and online creation documents (better with
+  HTML editor) (Capgemini) 
 * Docman: new reservation document feature (Capgemini)
 * HTML Editor: available in task PM (Capgemini)
-* Trackers: New progressbar to view completion state (when custom status field is used) (Alain Peyrat)
+* Trackers: New progress bar to view completion state (when custom
+  status field is used) (Alain Peyrat)
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
 * [#127] Patch to auto approve projects.
 * scmgit plugin now allows project members to request a personal git
   repository as a clone of the current project's one
-* New blocks plugin, to add free HTML blocks on top of each tools of the project allowing
-  admins to add free descriptions (Alcate-Lucent), (better with fckeditor plugin).
-* New unobstructive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)
-* New gravatar plugin to display faces of users using the Gravatar service (Alain Peyrat)
+* New blocks plugin, to add free HTML blocks on top of each tools of
+  the project allowing admins to add free descriptions
+  (Alcatel-Lucent), (better with fckeditor plugin).
+* New unobtrusive tooltip system based on jquery and tipsy to replace
+  old help window (Alcatel-Lucent)
+* New gravatar plugin to display faces of users using the Gravatar
+  service (Alain Peyrat)
+* More flexible and more powerful role-based access control system
+  (Roland Mas, Coclico)
+* Unified configuration system, now using standard *.ini files (Roland
+  Mas)
+* Reorganised, modular Apache configuration (Roland Mas)
 
 FusionForge-5.0.2:
 * Maintenance release, bugfixes mostly.
@@ -79,3 +89,7 @@ FusionForge-4.8:
 * New reporting page on frs to view the downloads per package
 * List of all projects added in 'Project List'
 * New version of wiki plugin, using lastest svn code
+
+# Local Variables:
+# mode: text
+# End:

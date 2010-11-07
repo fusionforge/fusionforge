@@ -24,6 +24,20 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('A powerful plugin system to add new features.'); ?></li>
 </ul>
 
+<h3><?php print _("What's new in FusionForge 5.1"); ?></h3>
+<ul>
+<li><?php print _('New Funky Theme.'); ?></li>
+<li><?php print _('New UI and features for the document manager (download as zip, locking, referencing documents by URL).'); ?></li>
+<li><?php print _('New progress bar displaying completion state of trackers using a custom status field.'); ?></li>
+<li><?php print _('Improved sorting in trackers.'); ?></li>
+<li><?php print _('More flexible and more powerful role-based access control system (Roland Mas, Coclico)'); ?></li>
+<li><?php print _('New unobtrusive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)'); ?></li>
+<li><?php print _('New plugins: Blocks, to add free HTML blocks on top of each tool of the project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API for tracker interoperability with external tools.'); ?></li>
+<li><?php print _('scmgit plugin: Personal Git repositories for project members.'); ?></li>
+<li><?php print _('Simplified configuration system, using standard *.ini files.'); ?></li>
+<li><?php print _('Reorganised, modular Apache configuration.'); ?></li>
+</ul>
+
 <h3><?php print _("What's new in FusionForge 5.0"); ?></h3>
 <ul>
 <li><?php print _('Many improvements to the trackers: configurable display, workflow management, links between artifacts, better searches, and more'); ?></li>
