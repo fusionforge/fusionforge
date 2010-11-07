@@ -25,6 +25,7 @@ require_once 'mailman/include/MailmanListDao.class.php';
 require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'mailman/include/MailmanList.class.php';
 require_once 'plugins_utils.php';
+require_once 'plugins/mailman/config.php';
 
 class BackendMailmanList {
 
