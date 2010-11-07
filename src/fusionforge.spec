@@ -55,8 +55,7 @@ Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail, perl-Sort-Versions
 Requires: cronolog
 Requires: php-jpgraph php-gd
-#update sys_path_to_jpgraph in gforge.conf if you remove this line
-#Requires: /var/www/jpgraph/jpgraph.php
+Requires: /var/www/jpgraph-1.19/jpgraph.php
 #Requires: libnss-pgsql >= 1.4
 Requires: mailman
 Requires: gettext
@@ -389,6 +388,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # Fix configuration files entries (various sys_* variables)
 %{__cp} -a etc/local.inc.example $RPM_BUILD_ROOT/%{FORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s!/path/to/gforge!%{FORGE_DIR}!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+%{__sed} -i -e "s!/path/to/jpgraph!/var/www/jpgraph-1.19!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s/\$sys_dbname=.*/\$sys_dbname='%{dbname}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s/\$sys_dbuser=.*/\$sys_dbuser='%{dbuser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
 %{__sed} -i -e "s/\$sys_apache_user=.*/\$sys_apache_user='%{httpduser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
@@ -413,9 +413,6 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # Install locale files in Redhat standard location
 %{__cp} -a locales/* $RPM_BUILD_ROOT/%{FORGE_LANG_DIR}/
-
-# create symlink for jpgraph
-%{__ln_s} /usr/share/jpgraph $RPM_BUILD_ROOT%{FORGE_DIR}/jpgraph
 
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/utils/fusionforge-shell-postgresql.spec
 
@@ -655,7 +652,6 @@ fi
 %{FORGE_DIR}/gforge-restricted.sh
 %{FORGE_DIR}/install.sh
 %{FORGE_DIR}/install-common.inc
-%{FORGE_DIR}/jpgraph
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
