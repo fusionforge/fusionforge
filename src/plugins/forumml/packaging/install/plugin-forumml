@@ -1,6 +1,6 @@
-common/*                  usr/share/gforge/plugins/forumml/common/
-include/*                 usr/share/gforge/plugins/forumml/include/
-db/*                      usr/share/gforge/plugins/forumml/db/
-bin/*                     usr/share/gforge/plugins/forumml/bin/
-www/*                     usr/share/gforge/plugins/forumml/www/
-etc/*                     usr/share/gforge/plugins/forumml/etc/
+plugins/forumml/common/*                  usr/share/gforge/plugins/forumml/common/
+plugins/forumml/include/*                 usr/share/gforge/plugins/forumml/include/
+plugins/forumml/db/*                      usr/share/gforge/plugins/forumml/db/
+plugins/forumml/bin/*                     usr/share/gforge/plugins/forumml/bin/
+plugins/forumml/www/*                     usr/share/gforge/plugins/forumml/www/
+plugins/forumml/etc/*                     usr/share/gforge/plugins/forumml/etc/
