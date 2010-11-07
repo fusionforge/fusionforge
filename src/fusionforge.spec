@@ -49,7 +49,7 @@ Packager: Alain Peyrat <aljeux@free.fr>
 # requirements as derived from fusionforge-install-1-deps.php script
 Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman
 Requires: postgresql, postgresql-libs, postgresql-server, postgresql-contrib
-Requires: postfix, openssh, inetd, which, liberation-fonts
+Requires: postfix, openssh, inetd, which
 
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail, perl-Sort-Versions
@@ -445,10 +445,10 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # plugin: fckeditor
 
 # plugin: forumml
-%{__ln_s} ../../plugins/forumml $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
+%{__ln_s} ../../plugins/forumml/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/forumml
 
 # plugin: hudson
-%{__ln_s} ../../plugins/hudson $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
+%{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
 
 # plugin: ldapextauth
 %{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/ldapextauth/rpm-specific
@@ -495,13 +495,14 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # plugin: scmsvn
 # this is pre-activated, so create the config symlink
-%{__ln_s} ../../plugins/scmsvn $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmsvn
+%{__ln_s} ../../plugins/scmsvn/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmsvn
 
 # plugin: scmgit
-# XXX Commented for next lines but make index.php unreachable.
-#%{__ln_s} ../../plugins/scmgit $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
-%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/cgi-bin/gitweb.cgi
-%{__ln_s} /usr/share/gitweb/static $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
+%{__ln_s} ../../plugins/scmgit/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/scmgit
+%{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/cgi-bin
+%{__ln_s} /usr/share/gitweb/gitweb.cgi $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/cgi-bin/gitweb.cgi
+%{__ln_s} /usr/share/gitweb/static/gitweb.css $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/gitweb.css
+%{__ln_s} /usr/share/gitweb/static/gitweb.js $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/scmgit/www/gitweb.js
 
 # plugin: scmhg
 
@@ -512,31 +513,31 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__install} -m 644 plugins/svntracker/rpm-specific/cron.d/gforge-plugin-svntracker $RPM_BUILD_ROOT%{_sysconfdir}/cron.d
 
 # plugin: blocks
-%{__ln_s} ../../plugins/blocks/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/blocks
+%{__ln_s} ../../plugins/blocks/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/blocks
 
 # plugin: extratabs
-%{__ln_s} ../../plugins/extratabs/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/extratabs
+%{__ln_s} ../../plugins/extratabs/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/extratabs
 
 # plugin: wiki
-%{__ln_s} ../plugins/wiki/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/wiki
+%{__ln_s} ../plugins/wiki/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/wiki
 
 # plugin: oslc
-%{__ln_s} ../../plugins/oslc/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
+%{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
 
 # plugin: projectlabels
-%{__ln_s} ../../plugins/projectlabels/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectlabels
+%{__ln_s} ../../plugins/projectlabels/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectlabels
 
 # plugin: contribtracker
-%{__ln_s} ../../plugins/contribtracker/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/contribtracker
+%{__ln_s} ../../plugins/contribtracker/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/contribtracker
 
 # plugin: globalsearch
-%{__ln_s} ../../plugins/globalsearch/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/globalsearch
+%{__ln_s} ../../plugins/globalsearch/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/globalsearch
 
 # plugin: mailman
-%{__ln_s} ../../plugins/mailman/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mailman
+%{__ln_s} ../../plugins/mailman/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mailman
 
 # plugin: mantisbt
-%{__ln_s} ../../plugins/mantisbt/www/ $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantisbt
+%{__ln_s} ../../plugins/mantisbt/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantisbt
 
 ### END OF PLUGIN SETUP ###
 
