@@ -817,7 +817,7 @@ Enjoy the site.
 	 *	@return	string	This user's email address.
 	 */
 	function getEmail() {
-		return $this->data_array['email'];
+		return str_replace("\n", "", $this->data_array['email']);
 	}
 	
 	/**
