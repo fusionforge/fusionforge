@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -69,12 +70,14 @@ $a2[]='user';
 <h2><?php echo _('Site-Wide Time Tracking'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
 <td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
+<td>
+	<input type="hidden" name="typ" value="<?php echo $typ; ?>" />
+	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
+</td>
 </tr></table>
 </form>
 

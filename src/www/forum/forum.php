@@ -5,6 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -189,16 +190,17 @@ if ($forum_id) {
 	//now show the popup boxes in a form
 	$ret_val = '
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="get">
+	<table border="0" width="33%">
+		<tr><td>
 	<input type="hidden" name="set" value="custom" />
 	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
-	<table border="0" width="33%">
-		<tr><td>'. $options_popup .
+			'. $options_popup .
 			'</td><td>'. $max_row_popup .
 			'</td><td><input type="submit" name="submit" value="'.
 			_('Change View').'" />
 		</td></tr>
-	</table></form>
-	<p>&nbsp;</p>';
+	</table></form>';
+
 	$am = new AttachManager();
 	$ret_val .= $am->PrintHelperFunctions();
 	if ($style=='nested') {
