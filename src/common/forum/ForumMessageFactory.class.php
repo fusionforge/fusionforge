@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -180,7 +181,8 @@ class ForumMessageFactory extends Error {
 
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
-		if (!$result || $rows < 1) {
+		$this->forum_messages = array();
+		if (!$result) {
 			$this->setError('No Messages Found '.db_error());
 			$this->forum_messages = false;
 		} else {
