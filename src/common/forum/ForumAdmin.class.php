@@ -362,7 +362,7 @@ class ForumAdmin extends Error {
 			$msgids = getStringFromRequest("msgids");//the message ids to update
 			$doaction = getArrayFromRequest("doaction"); //the actions for the messages
 			
-			$msgids = split(",",$msgids);
+			$msgids = explode(",",$msgids);
 			array_pop($msgids);//this last one is empty
 			
 			/*if ($this->isGroupAdmin()) {
