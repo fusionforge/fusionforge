@@ -2,7 +2,6 @@ I paste here the interesting post of Lars Ehrhardt & Waldemar Brodkorb
 about tuning LDAP
 
 ==============================================================
-http://gforge.org/forum/message.php?msg_id=4435
 By: lehrhardt
 
 Hi,
@@ -35,9 +34,6 @@ Hope this helps to improve performance - it certainly did on our system.
 Kind regards
 Lars Ehrhardt & Waldemar Brodkorb
 
-______________________________________________________________________
-Read and respond to this message at: 
-http://gforge.org/forum/message.php?msg_id=4435
 ==============================================================
 
 I would add some more instruction
