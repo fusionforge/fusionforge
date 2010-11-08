@@ -3,6 +3,7 @@
  * User's Diary Page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -178,7 +179,7 @@ To stop monitoring this user, login to %s and visit the following link:
 	<input type="hidden" name="form_key" value="'.form_generate_key().'"/>
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
-	<table>
+	<table width="100%">
 	<tr><td colspan="2"><strong>'._('Summary').':</strong><br />
 		<input type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
