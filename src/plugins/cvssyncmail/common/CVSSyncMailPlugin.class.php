@@ -35,7 +35,7 @@ class CVSSyncMailPlugin extends Plugin {
 		global $use_cvssyncmailplugin,$G_SESSION,$HTML;
 		$group_id=$params['group'];
 		if ($hookname == "groupisactivecheckbox") {
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ($group->usesPlugin('scmcvs')) {
 				//Check if the group is active
 				// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
@@ -55,7 +55,7 @@ class CVSSyncMailPlugin extends Plugin {
 			}
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$use_cvssyncmailplugin = getStringFromRequest('use_cvssyncmailplugin');
 			if ( $use_cvssyncmailplugin == 1 ) {
 				$group->setPluginUse ( $this->name );

@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright 1999-2000 (c) The SourceForge Crew
- * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2009-2010 Alain Peyrat, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -53,7 +53,7 @@ if (!$group_id) {
     exit_no_group();
 }
 
-$project =& group_get_object($group_id);
+$project = group_get_object($group_id);
 if (!$project|| !is_object($project) || $project->isError()) {
     exit_no_group();
 }

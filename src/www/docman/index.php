@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -47,7 +48,7 @@ $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 if (!$group_id)
 	exit_no_group();
 
-$g =& group_get_object($group_id);
+$g = group_get_object($group_id);
 if (!$g || !is_object($g))
 	exit_no_group();
 

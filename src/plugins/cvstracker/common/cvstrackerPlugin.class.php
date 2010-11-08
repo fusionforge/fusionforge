@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2005 (c) Guillaume Smet <guillaume-gforge@smet.org>
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of GForge-plugin-cvstracker
  *
@@ -49,7 +50,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getCommitEntries($DBResult,$group_id) {
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		
 		if (!$group->usesPlugin($this->name)) {
 			return;
@@ -262,7 +263,7 @@ class cvstrackerPlugin extends Plugin {
 		$use_cvstrackerplugin = getIntFromRequest('use_cvstrackerplugin');
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ($group->usesPlugin('scmcvs')) {
 				echo "<tr>";
 				echo "<td>";
@@ -279,7 +280,7 @@ class cvstrackerPlugin extends Plugin {
 				echo "</tr>";
 			}
 		} elseif ($hookname == "groupisactivecheckboxpost") {
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ( $use_cvstrackerplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
 			} else {
@@ -318,7 +319,7 @@ class cvstrackerPlugin extends Plugin {
 				}
 			}
 		} elseif ($hookname == "get_cvs_loginfo_lines") {
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$GLOBALS['loginfo_lines']=$this->getCvsTrackerLogInfoLines($group);		
 		}
 	}

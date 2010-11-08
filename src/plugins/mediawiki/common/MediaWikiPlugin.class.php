@@ -60,7 +60,7 @@ class MediaWikiPlugin extends Plugin {
 			$group_id=null;
 		}
 		if ($hookname == "groupmenu") {
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
@@ -82,7 +82,7 @@ class MediaWikiPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
 			echo ' <input type="checkbox" name="use_mediawikiplugin" value="1" ';
@@ -98,7 +98,7 @@ class MediaWikiPlugin extends Plugin {
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$use_mediawikiplugin = getStringFromRequest('use_mediawikiplugin');
 			if ( $use_mediawikiplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
@@ -106,7 +106,7 @@ class MediaWikiPlugin extends Plugin {
 				$group->setPluginUse ( $this->name, false );
 			}
 		} elseif ($hookname == "project_public_area") {
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
@@ -334,7 +334,7 @@ class MediaWikiPlugin extends Plugin {
 			}
 		} else if ($hookname == "project_admin_plugins") {
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ($group->usesPlugin($this->name))
 				echo util_make_link(
 				    "/plugins/mediawiki/plugin_admin.php?group_id=" .

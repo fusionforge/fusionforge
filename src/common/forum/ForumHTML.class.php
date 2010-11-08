@@ -5,6 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -121,7 +122,7 @@ function forum_header($params) {
 			$menu_links[]='/forum/admin/?group_id='.$group_id;
 		} 
 	} else {
-			$gg=&group_get_object($group_id);
+			$gg=group_get_object($group_id);
 			if (forge_check_perm ('forum_admin', $group_id)) {
 				$menu_text[]=_('Admin');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;

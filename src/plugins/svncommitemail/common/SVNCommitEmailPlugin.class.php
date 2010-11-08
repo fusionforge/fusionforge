@@ -37,7 +37,7 @@ class SVNCommitEmailPlugin extends Plugin {
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ($group->usesPlugin('scmsvn')) {
 				echo "<tr>";
 				echo "<td>";

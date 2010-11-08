@@ -755,7 +755,7 @@ Or reply to this e-mail entering your response between the following markers:
 							  db_int_array_to_any_clause ($ids))) ;
 		}
 		
-		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
+		$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 		$User = user_get_object($this->getPosterID());
 		//util_send_message('',$subject,$body,$User->getEmail(),$BCC,$this->getPosterRealName(),$extra_headers);
 		util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
