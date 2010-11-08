@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -105,6 +106,10 @@ function &getTaskOpened() {
 
 function &getTaskClosed() {
 	return util_result_column_to_array($this->res,9);
+}
+
+function &getPageViews() {
+	return util_result_column_to_array($this->res,10);
 }
 
 }
