@@ -19,6 +19,9 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 			system("ssh root@".HOST." 'cd /etc/yum.repos.d/; wget ".getenv('FFORGE_RPM_REPO')."/fusionforge.repo'");
 		}
 
+		// Install a fake sendmail to catch all outgoing emails.
+		system("ssh root@".HOST." 'perl -spi -e \'s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php#\' /etc/gforge/local.inc'");
+
 		sleep(5);
 		
 		system("ssh root@".HOST." 'yum install -y fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks'");
