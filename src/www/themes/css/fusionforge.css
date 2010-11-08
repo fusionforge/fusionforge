@@ -265,6 +265,8 @@ up {
 
 .selected {background-color:pink; }
 
+.hide {	display: none; }
+
 .skip {
 	height:0;
 	width:0;
