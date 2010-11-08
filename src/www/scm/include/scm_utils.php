@@ -4,6 +4,7 @@
  *
  * Copyright 2004-2005 (c) GForge LLC, Tim Perdue
  * Copyright 2010 (c), Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -47,8 +48,8 @@ function scm_header($params) {
 		if (forge_check_perm ('project_admin', $project->getID())) {
 			echo $HTML->subMenu(
 				array(
-					_('SCM'),
-					_('Admin'),
+					_('View Source Code'),
+					_('Administration'),
 					_('Reporting')
 					),
 				array(

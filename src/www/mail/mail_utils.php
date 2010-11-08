@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -46,7 +47,7 @@ function mail_header($params) {
 			if (forge_check_perm ('project_admin', $project->getID())) {
 				echo $HTML->subMenu(
 					array(
-						_('Admin')
+						_('Administration')
 					),
 					array(
 						'/mail/admin/?group_id='.$group_id

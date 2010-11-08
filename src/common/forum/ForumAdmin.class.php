@@ -6,6 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2005 (c) Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -208,7 +209,7 @@ class ForumAdmin extends Error {
 				form_release_key(getStringFromRequest("form_key"));
 				exit_error($f->getErrorMessage(),'forums');
 			} else {
-				$feedback = _('Forum created successfully');
+				$feedback = _('Forum added successfully');
 			}
 			return $feedback;
 		}
@@ -294,7 +295,7 @@ class ForumAdmin extends Error {
 			<script type="text/javascript">
 		
 			function confirmDel() {
-				var agree=confirm("Proceed? Actions are permanent!");
+				var agree=confirm("' . _('Proceed? Actions are permanent!') . '");
 				if (agree) {
 					return true;
 				} else {

@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -41,8 +42,7 @@ if (!$res_logins || db_numrows($res_logins) < 1) {
 	exit_error(_('No records found","Database error: "').db_error());
 }
 
-$HTML->header(array('title'=>_('Last Logins')));
-
+$HTML->header(array('title'=>_('Most Recent Opened Sessions')));
 print '<h1>'._('Most Recent Opened Sessions').'</h1>';
 
 ?>

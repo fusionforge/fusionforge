@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -26,7 +27,7 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-$HTML->header(array('title'=>_('Top Projects')));
+$HTML->header(array('title'=>sprintf(_('Top %1$s Projects'), forge_get_config ('forge_name'))));
 ?>
 
 <h1><?php printf(_('Top %1$s Projects'), forge_get_config ('forge_name')); ?></h1>

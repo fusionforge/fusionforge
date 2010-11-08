@@ -3,6 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems 
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -37,7 +38,7 @@ function stats_sf_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		$j=0;
 		for ($i=0; $i<$rows; $i++) {
@@ -59,8 +60,6 @@ function stats_sf_stats() {
 		GraphIt($name_string,$vals,'Page Views By Week');
 	}
 
-	echo '<p>&nbsp;</p>';
-
 /*
 	Projects added by week
 */
@@ -70,7 +69,7 @@ function stats_sf_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		$count=array();
 		$dates=array();
@@ -82,7 +81,6 @@ function stats_sf_stats() {
 		}
 		GraphIt($dates,$count,'New Projects Added Each Week');
 	}
-	echo '<p>&nbsp;</p>';
 
 /*
 	Users added by week
@@ -93,7 +91,7 @@ function stats_sf_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		$count=array();
 		$dates=array();
@@ -105,7 +103,6 @@ function stats_sf_stats() {
 		}
 		GraphIt($dates,$count,'New Users Added Each Week');
 	}
-	echo '<p>&nbsp;</p>';
 
 }
 
@@ -124,12 +121,10 @@ function stats_project_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Logo Showings By Day');
 	}
-
-	echo '<p>&nbsp;</p>';
 
 /*
 	logo impressions/group
@@ -141,13 +136,10 @@ function stats_project_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Logo Showings By Project');
 	}
-
-	echo '<p>&nbsp;</p>';
-
 }
 
 
@@ -165,11 +157,10 @@ function stats_browser_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Page Views By Browser');
 	}
-	echo '<p>&nbsp;</p>';
 
 /*
 	Platform
@@ -181,11 +172,10 @@ function stats_browser_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Page Views By Platform');
 	}
-	echo '<p>&nbsp;</p>';
 
 /*
 	Browser/ver
@@ -197,11 +187,10 @@ function stats_browser_stats() {
 
 	if (!$result || $rows < 1) {
 		echo '<h1>Stats Problem</h1>';
-		echo '<div class="error">'.db_error().'</div>';
+		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		ShowResultSet($result,'Page Views By Platform/Browser Version');
 	}
-	echo '<p>&nbsp;</p>';
 }
 
 ?>

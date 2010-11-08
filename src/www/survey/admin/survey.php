@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -88,7 +89,8 @@ if ($s->isError()) {
     form_release_key(getStringFromRequest("form_key"));
 } 
 
-$sh->header(array('title'=>_('Add a Survey')));
+$title = $survey_id ? _('Edit a Survey') : _('Add a Survey');
+$sh->header(array('title'=>$title));
 
 echo ($sh->ShowAddSurveyForm($s));
 

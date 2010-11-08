@@ -61,10 +61,10 @@ if (!session_loggedin()) {
 							  user_getid ()));
 
 			if (!$result) {
-				echo "<div class=\"error\">"._('Error inserting into user_diary_monitor')."</div>";
+				echo '<p class="error">' . _('Error inserting into user_diary_monitor') . '</p>';
 			} else {
-				echo "<div class=\"feedback\">"._('User is now being monitored')."</div>";
-				echo '<p>' . _('You will now be emailed this user\'s diary entries.') . '</p>';
+				echo '<p class="feedback">' . _('User is now being monitored') . '</p>';
+				echo '<p>' . _("You will now be emailed this user's diary entries.") . '</p>';
 				echo '<p>' . _('To turn off monitoring, simply click the <strong>Monitor user</strong> link again.') . '</p>';
 			}
 
@@ -72,15 +72,14 @@ if (!session_loggedin()) {
 			$result = db_query_params ('DELETE FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2',
 						   array (user_getid(),
 							  $diary_user));
-			echo "<div class=\"feedback\">"._('Monitoring has been turned off')."</div>";
+			echo '<p class="feedback">' . _('Monitoring has been turned off') . "</p>";
 			echo _('You will not receive any more emails from this user');
 	
 		}
 		$HTML->footer (array());
 	} else {
-		$HTML->header (array('title'=>_('Choose a User first')));
-		echo '
-			<h1>'._('Error - Choose a User To Monitor First').'</h1>';
+		$HTML->header(array('title'=>_('Error - Choose a User To Monitor First')));
+		echo '<h1>'._('Error - Choose a User To Monitor First').'</h1>';
 		$HTML->footer (array());
 	} 
 

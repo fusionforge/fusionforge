@@ -8,6 +8,7 @@
  *
  * Copyright 2004 GForge, LLC - Tim Perdue
  * Copyright 2010 (c), Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -126,13 +127,16 @@ if (forge_get_config('use_shell')) {
 
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
+<h2><?php echo _('Descriptive Project Name'); ?></h2>
 <p>
-<?php echo _('Descriptive Project Name') ?>:<br />
 <input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" size="40" maxlength="40" />
 </p>
 
+<h2><?php echo _('Short Description'); ?></h2>
 <p>
-<?php echo _('Short Description (255 Character Max, HTML will be stripped from this description)') ?>:<br />
+<?php echo _('Maximum 255 characters, HTML will be stripped from this description'); ?>
+</p>
+<p>
 <textarea cols="80" rows="3" name="form_shortdesc">
 <?php echo $group->getDescription(); ?>
 </textarea>
@@ -145,10 +149,13 @@ if (forge_get_config('use_shell')) {
 </p>
 <?php } ?>
 
-<p><?php echo _('Trove Categorization:&nbsp;') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Edit') ?>]</a></p>
-
+<h2><?php echo _('Trove Categorization'); ?></h2>
 <p>
-<?php echo _('Homepage Link') ?>:<br />
+<a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo _('Edit Trove'); ?>]</a>
+</p>
+
+<h2><?php echo _('Homepage Link') ?></h2>
+<p>
 <input type="text" name="form_homepage" size="100" value="<?php echo $group->getHomePage(); ?>" />
 </p>
 
@@ -259,7 +266,6 @@ echo $HTML->boxBottom();?>
 
 		</td>
 	</tr>
-
 </table>
 
 <?php

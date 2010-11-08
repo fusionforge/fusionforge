@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -34,7 +35,7 @@ $trovecatid=getIntFromRequest('trovecatid');
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-$HTML->header(array('title'=>sprintf(_('%1$s Site Statistics'), forge_get_config ('forge_name'))));
+$HTML->header(array('title'=>sprintf(_('%1$s Site Project Statistical Comparisons'), forge_get_config ('forge_name'))));
 
 ?>
 <h1><?php echo _('Project Statistical Comparisons'); ?></h1>
