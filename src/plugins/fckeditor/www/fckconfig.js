@@ -130,6 +130,15 @@ FCKConfig.ToolbarSets["FusionForge"] = [
 	['FitWindow','-','About']
 ] ;
 
+FCKConfig.ToolbarSets["FusionForge-Basic"] = [
+    ['Cut','Copy','Paste','PasteText','PasteWord'],
+    ['Bold','Italic','Underline','StrikeThrough'],
+    ['OrderedList','UnorderedList'],
+    ['JustifyLeft','JustifyCenter'],
+    ['Link','Unlink'],
+    ['Table','Rule']
+] ;
+
 FCKConfig.ToolbarSets["Basic"] = [
 	['Bold','Italic','-','OrderedList','UnorderedList','-','Link','Unlink','-','About']
 ] ;
