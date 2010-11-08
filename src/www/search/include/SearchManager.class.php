@@ -138,7 +138,7 @@ class SearchManager {
 
 		# Hook to be able to load new search engine
 		plugin_hook_by_reference('group_search_engines', $this);
-		
+
 		// Global search engine
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,

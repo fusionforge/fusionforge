@@ -53,7 +53,6 @@ if ($start == $end) {
 }
 
 report_header(_('Cumulative Users'));
-
 ?>
 <h2><?php echo _('Cumulative Users'); ?></h2>
 

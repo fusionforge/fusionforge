@@ -38,6 +38,7 @@ site_project_header(array('title'=>_('Project Member List'),'group'=>$group_id,'
 echo '<h1>' . _('Project Member List') . '</h1>';
 
 echo '<p>' . _('If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.') . '</p>';
+
 // beginning of the user descripion block
 $project =& group_get_object($group_id);
 $project_stdzd_uri = util_make_url_g ($project->getUnixName(), $group_id);

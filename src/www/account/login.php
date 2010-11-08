@@ -97,9 +97,6 @@ if (isset($session_hash)) {
 	session_logout();
 }
 
-//echo "\n\n$session_hash";
-//echo "\n\nlogged in: ".session_loggedin();
-
 $HTML->header(array('title'=>'Login'));
 
 if ($login && !$success) {

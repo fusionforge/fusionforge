@@ -60,7 +60,6 @@ $l[]='1';
 $l[]='2';
 
 report_header(_('User Summary Report'));
-
 	?>
 	<h2><?php echo _('User Summary Report'); ?></h2>
 	<p>

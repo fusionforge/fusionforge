@@ -1,4 +1,5 @@
 #!/bin/sh -e
+
 if [ -e src/translations/fusionforge.pot ] ; then        # We're in the parent dir
     cd src
 elif [ -e translations/fusionforge.pot ] ; then             # probably in src/ (or a renamed src/)
