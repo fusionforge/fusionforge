@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -27,6 +28,7 @@
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
+$HTML->header(array('title'=>_('Voting')));
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
@@ -41,7 +43,6 @@ if (!session_loggedin()) {
 			1=project
 			2=release
 		*/
-		$HTML->header(array('title'=>_('Voting')));
 		$toss = db_query_params ('DELETE FROM survey_rating_response WHERE user_id=$1 AND type=$2 AND id=$3',
 					 array(user_getid(),
 					       $flag,

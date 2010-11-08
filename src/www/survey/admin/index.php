@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -32,6 +33,7 @@ $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
 $sh = new  SurveyHtml();
+$sh->header(array('title'=>_('Survey Administration')));
 
 if (!$group_id) {
     exit_no_group();
@@ -51,7 +53,6 @@ if ( !user_ismember($group_id,'A')) {
 	exit_permission_denied(_('You are not a Project admin'),'surveys');
 }
 
-$sh->header(array('title'=>_('Survey Administration')));
 echo '<h1>'._('Survey Administration').'</h1>';
 ?>
 
