@@ -43,7 +43,7 @@
  * ALONE BASIS."
  */
 
-$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): 'func/config.php';
+$config = getenv('CONFIG_PHP') ? getenv('CONFIG_PHP'): dirname(dirname(__FILE__)).'/config.php';
 require_once $config;
 
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
@@ -88,8 +88,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function login($username)
 	{
 		$this->open( ROOT );
-		$this->click("link=Log In");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Log In");
 		$this->triggeredLogin($username);
 	}
 
@@ -103,8 +102,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		
 		$this->type("form_loginname", $username);
 		$this->type("form_pw", $password);
-		$this->click("login");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("login");
 
 		$this->logged_in = $username ;
 	}
@@ -142,10 +140,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$saved_user = $this->logged_in ;
 		$this->switchUser ($user) ;
 
-		$this->click("link=My Page");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Register Project");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=My Page");
+		$this->clickAndWait("link=Register Project");
 		$this->type("full_name", $name);
 		$this->type("purpose", "This is a simple description for $name");
 		$this->type("description", "This is the public description for $name.");
@@ -207,22 +203,17 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function createUser ($login)
 	{
 		$this->open( ROOT );
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Register a New User");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Site Admin");
+		$this->clickAndWait("link=Register a New User");
 		$this->type("unix_name", $login);
 		$this->type("password1", "password");
 		$this->type("password2", "password");
 		$this->type("firstname", $login);
 		$this->type("lastname", "Lastname");
 		$this->type("email", $login."@debug.log");
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Display Full User List/Edit Users");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Site Admin");
+		$this->clickAndWait("link=Display Full User List/Edit Users");
 		$this->click("//*[@id='maindiv']/table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
 		$this->waitForPageToLoad("30000");
 	}
@@ -233,10 +224,8 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->open( ROOT );
 		$this->waitForPageToLoad("30000");
 		$this->login('admin');
-		$this->click("link=Site Admin");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Plugin Manager");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Site Admin");
+		$this->clickAndWait("link=Plugin Manager");
 		$this->click($pluginName);
 		$this->click("//a[contains(@href, \"javascript:change('".ROOT."/admin/pluginman.php?update=$pluginName&action=activate','$pluginName');\")]");
 		$this->waitForPageToLoad("30000");
