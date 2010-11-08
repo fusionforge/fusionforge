@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004 (c) GForge LLC
  * Copyright 2010 (c) Franck Villaume
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -44,10 +45,8 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 
 }
 
-report_header(_('Main Page'));
-echo '<h2>';
-echo _('Reporting System Initialization');
-echo '</h2>';
+report_header(_('Reporting System Initialization'));
+echo '<h2>'._('Reporting System Initialization').'</h2>';
 echo '<p>';
 echo _('Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.');
 echo '</p>';

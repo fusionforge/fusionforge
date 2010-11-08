@@ -3,6 +3,7 @@
  * Site Admin: Trove Admin: add new leaf category
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -76,9 +77,8 @@ if (getStringFromRequest('submit')) {
 	}
 } 
 
-site_admin_header(array('title'=>_('Site Admin: Trove - Add Node')));
+site_admin_header(array('title'=>_('Add New Trove Category')));
 ?>
-
 <h1><?php echo _('Add New Trove Category'); ?></h1>
 
 <form action="trove_cat_add.php" method="post">

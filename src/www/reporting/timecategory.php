@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -58,7 +59,7 @@ if (getStringFromRequest('submit')) {
 
 }
 
-report_header(_('Main Page'));
+report_header(_('Manage Time Tracker Categories'));
 
 if ($time_code) {
 	$res1=db_query_params ('SELECT * FROM rep_time_category WHERE time_code=$1',
@@ -86,10 +87,12 @@ echo $HTML->listTableBottom();
 <?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include "Meeting", "Coding", "Testing".'); ?>
 </p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
+<p>
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
 <strong><?php echo _('Category Name'); ?>:</strong><br />
 <input type="text" name="category_name" value="<?php echo $category_name; ?>" />
+</p>
 <p>
 <?php
 

@@ -3,6 +3,7 @@
  * Site Admin: Trove Admin: browse entire Trove tree
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -72,10 +73,9 @@ function printnode ($nodeid,$text) {
 
 html_use_tooltips();
 
-site_admin_header(array('title'=>_('Site Admin: Trove - Category List')));
+site_admin_header(array('title'=>_('Browse Trove Tree')));
 
 ?>
-
 <h1><?php echo _('Browse Trove Tree'); ?></h1>
 
 <?php

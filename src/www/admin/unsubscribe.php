@@ -6,6 +6,7 @@
  * unsubscribe specific user).
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -46,7 +47,7 @@ if (getStringFromRequest('submit') && $user_name) {
 		site_admin_header(array('title'=>_('Site Mailings Subscription Maintenance')));
 		?>
 
-		<h1><?php echo _('Unsubscribe user:'); ?> <?php echo $user_name; ?></h1>
+		<h2><?php echo _('Unsubscribe user:'); ?> <?php echo $user_name; ?></h2>
 		<p>
 		<?php echo _('You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).'); ?>
 		</p>
@@ -87,10 +88,7 @@ if (getStringFromRequest('submit') && $user_name) {
 site_admin_header(array('title'=>_('Site Mailings Subscription Maintenance')));
 
 ?>
-
-<h1>
-<?php echo _('Site Mailings Subscription Maintenance'); ?>
-</h1>
+<h1><?php echo _('Site Mailings Subscription Maintenance'); ?></h1>
 
 <p>
 <?php printf(_('Use field below to find users which match given pattern with the %1$s username, real name, or email address (substring match is preformed, use \'%%\' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).'), forge_get_config ('forge_name')); ?>

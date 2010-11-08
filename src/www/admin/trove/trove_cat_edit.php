@@ -6,6 +6,7 @@
  * Trove tree.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -109,9 +110,8 @@ if (db_numrows($res_cat)<1) {
 }
 $row_cat = db_fetch_array($res_cat);
 
-site_admin_header(array('title'=>_('Site Admin: Trove - Edit Category')));
+site_admin_header(array('title'=>_('Edit Trove Category')));
 ?>
-
 <h1><?php echo _('Edit Trove Category'); ?></h1>
 
 <form action="trove_cat_edit.php" method="post">

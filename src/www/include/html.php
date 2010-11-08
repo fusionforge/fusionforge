@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -742,11 +743,14 @@ function site_project_header($params) {
 	}
 
 	if (isset($params['title'])){
-		$params['h1']=$params['title'];
+		$h1=$params['title'];
 		$params['title']=$project->getPublicName().': '.$params['title'];
 	} else {
-		$params['h1']=$project->getPublicName();
+		$h1=$project->getPublicName();
 		$params['title']=$project->getPublicName();
+	}
+	if (!isset($params['h1'])){
+		$params['h1'] = $h1;
 	}
 	
 	site_header($params);

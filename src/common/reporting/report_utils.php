@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -24,8 +25,8 @@
  */
 
 function report_header($title) {
-	site_header(array('title'=>" "._('Reporting').": " . $title));
-
+	$t = sprintf(_('%1$s Reporting'), forge_get_config ('forge_name')) . ": " . $title;
+	site_header(array('title'=>$t));
 	echo "<h1>".sprintf(_('%1$s Reporting'), forge_get_config ('forge_name'))."</h1>\n";
 }
 

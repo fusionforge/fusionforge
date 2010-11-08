@@ -8,6 +8,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -77,13 +78,9 @@ if (getStringFromRequest('submit')) {
 	exit();
 }
 
-site_admin_header(array('title'=>_('Massmail admin')));
-
-print '
-<h1>'
-.sprintf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name')) .
-'</h1>
-';
+$title = sprintf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name'));
+site_admin_header(array('title'=>$title));
+print '<h1>'.sprintf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name')) .'</h1>';
 
 print '
 <p>
