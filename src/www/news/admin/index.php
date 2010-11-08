@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -80,8 +81,11 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 				$details='(none)';
 			}
 			
-			$sanitizer = new TextSanitizer();
-			$details = $sanitizer->SanitizeHtml($details);
+				if (getStringFromRequest('_details_content_type') == 'html') {
+					$details = TextSanitizer::purify($details);
+				} else {
+					$details = htmlspecialchars($details);
+				}
 			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2, 
 details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
@@ -202,8 +206,11 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				/*
 					Update the db so the item shows on the home page
 				*/
-				$sanitizer = new TextSanitizer();
-				$details = $sanitizer->SanitizeHtml($details);
+				if (getStringFromRequest('_details_content_type') == 'html') {
+					$details = TextSanitizer::purify($details);
+				} else {
+					$details = htmlspecialchars($details);
+				}
 				$result=db_query_params("UPDATE news_bytes SET is_approved='1', post_date=$1, 
 summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $details, $id));
 				if (!$result || db_affected_rows($result) < 1) {
