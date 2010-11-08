@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: MediawikiTable.php 7721 2010-11-02 17:04:15Z vargenau $');
+// rcs_id('$Id: MediawikiTable.php 7729 2010-11-08 13:45:12Z vargenau $');
 /*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
@@ -75,7 +75,7 @@ extends WikiPlugin
         $argstr = str_replace("||", "\n| ", $argstr);
         $argstr = str_replace("!!", "\n! ", $argstr);
 
-        $lines = preg_split('/\n/', $argstr);
+        $lines = explode("\n", $argstr);
         $table = HTML::table();
 
         // We always generate an Id for the table.
@@ -123,13 +123,15 @@ extends WikiPlugin
                         $row->pushContent($cell);
                         unset($cell);
                     }
-                    if (isset($thead)) {
+                    if (!empty($row->_content)) {
+                        if (isset($thead)) {
                             $thead->pushContent($row);
                             $table->pushContent($thead);
                             unset($thead);
                             $tbody = HTML::tbody();
-                    } else {
+                        } else {
                             $tbody->pushContent($row);
+                        }
                     }
                 }
                 $row = HTML::tr();

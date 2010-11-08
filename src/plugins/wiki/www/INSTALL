@@ -2,10 +2,10 @@ REQUIREMENTS
 
 PhpWiki requires a web server with at least PHP version 4.3.10.
 PhpWiki was tested with 4.4.7 (centos4), 4.3.10, 4.4.9, 5.0.3,
-5.1.6 (centos5), 5.2.10, 5.3, 6.0.
+5.1.6 (centos5), 5.2.10, 5.3.2, 5.3.3.
 
-All users of PHP are strongly encouraged to upgrade to PHP 5.2.13
-or PHP 5.3.2 that are the supported versions.
+All users of PHP are strongly encouraged to upgrade to PHP 5.2.14
+or PHP 5.3.3 that are the supported versions.
 Visit <http://www.php.net> for downloads and information.
 
 You need the Perl regular expressions package compiled in; this is the
@@ -151,4 +151,4 @@ You can join this list at:
 
 FIN
 
-$Id: INSTALL 7539 2010-06-17 09:36:41Z vargenau $
+$Id: INSTALL 7730 2010-11-08 14:48:23Z vargenau $
