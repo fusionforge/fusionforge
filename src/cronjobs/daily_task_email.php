@@ -4,6 +4,7 @@
  * Send emails to users with open tasks
  *
  * Copyright 2004 GForge, LLC
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -26,8 +27,6 @@ require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 require_once $gfcommon.'include/cron_utils.php';
-
-$err = '';
 
 session_set_admin() ;
 
