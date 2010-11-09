@@ -214,7 +214,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Site Admin");
 		$this->clickAndWait("link=Display Full User List/Edit Users");
-		$this->click("//*[@id='maindiv']/table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
+		$this->click("//table/tbody/tr/td/a[contains(@href,'useredit.php') and contains(.,'($login)')]/../..//a[contains(@href, 'userlist.php?action=activate&user_id=')]");
 		$this->waitForPageToLoad("30000");
 	}
 
