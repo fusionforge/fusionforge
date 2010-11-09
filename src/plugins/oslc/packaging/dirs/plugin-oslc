@@ -1,4 +1,4 @@
-etc/gforge/httpd.d
+etc/gforge/httpd.conf.d
 etc/gforge/plugins/oslc
 usr/share/gforge/plugins/oslc/cgi-bin
 usr/share/gforge/plugins/oslc/common

@@ -24,8 +24,9 @@ SetEnv APPLICATION_ENV development
 # "Intercept" anything below the RewriteBase to redirect to index.php
 #  which will do the URL parsing and so on
 
-RewriteEngine On
+#RewriteEngine On
 
+<Location plugins/oslc>
 RewriteBase /plugins/oslc/
 
 RewriteCond %{REQUEST_FILENAME} -s [OR]
@@ -33,4 +34,5 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
+</Location>
 
