@@ -1,0 +1,106 @@
+Date: Tue,  9 Nov 2010 16:13:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FRichTablePlugin 7682 2010-09-10 12:03:36Z vargenau $ 
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FRichTablePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+You can easily **use images in the wiki**.
+
+== Uploaded images ==
+
+First, image files need to be uploaded in the wiki. For that purpose, you will use the 
+[[Help:UpLoadPlugin|UpLoad]] plugin.
+
+=== Toolbar ===
+
+Once the image is uploaded, the easiest way to insert it is to use the toolbar.
+
+Click on the {{/themes/default/images/ed_image.png}} icon and you will be shown a list
+of available images.
+
+Select an image and click //Insert//. The image will be inserted without options or alternative text.
+
+=== Syntax ===
+
+You give access to the uploaded image with the following syntax.
+
+{{{
+{{myimage.png}}
+}}}
+or
+{{{
+[[Upload:myimage.png]]
+}}}
+will inline the image.
+
+{{{
+{{myimage.png|this is the alt text for my image}}
+}}}
+inlines the image with an alternative text.
+
+{{{
+[[some link|{{myimage.png}}]] 
+}}}
+if you click on the image, will goto "some link"
+
+{{{
+[[some link|{{myimage.png|alt text}}]] 
+}}}
+same with alternative
+
+{{{
+[[http://example.com/|{{myimage.png}}]]
+}}}
+same as above: picture links to url
+
+{{{
+[[http://example.com/|{{myimage.png|alt text}}]]
+}}}
+same with alternative
+
+{{{
+Upload:myimage.png
+}}}
+shows a plain link
+
+{{{
+[[Upload:myimage.png | my image]]
+}}}
+shows the image under a link named "my image".
+
+For Mediawiki compatibility, the keyword {{{Upload:}}} can be replaced by {{{File:}}} or {{{Image:}}}.
+
+=== Options ===
+
+Using the {{{Upload:}}} syntax, options are allowed to change the appearance:
+{{{
+[[Upload:myimage.png size=40x25 align=center]]
+}}}
+
+Separate options by spaces. The allowed options are the following:
+* size: ''width "x" height'' or ''num + "%"''
+* align: ''string''
+* border: ''number''
+* hspace: ''number''
+* vspace: ''number''
+
+== URL images ==
+
+You can also use "external" images by providing a URL.
+
+In that case, you simply put the URL between double brackets:
+{{{
+[[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/poweredby_phpwiki_51x31.png]]
+}}}
+will give:
+
+[[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/poweredby_phpwiki_51x31.png]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

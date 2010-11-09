@@ -3032,6 +3032,7 @@ src/plugins/wiki/www/pgsrc/Help%2FGraphVizPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FHelloWorldPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FHowToUseWiki -text
 src/plugins/wiki/www/pgsrc/Help%2FHtmlConverterPlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FImages -text
 src/plugins/wiki/www/pgsrc/Help%2FIncludePagePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FIncludePagesPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FIncludeSiteMapPlugin -text

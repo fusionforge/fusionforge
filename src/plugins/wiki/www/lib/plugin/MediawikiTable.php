@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: MediawikiTable.php 7729 2010-11-08 13:45:12Z vargenau $');
+// rcs_id('$Id: MediawikiTable.php 7735 2010-11-09 13:45:32Z vargenau $');
 /*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
@@ -76,7 +76,18 @@ extends WikiPlugin
         $argstr = str_replace("!!", "\n! ", $argstr);
 
         $lines = explode("\n", $argstr);
+
         $table = HTML::table();
+        $caption = HTML::caption();
+        $thead = HTML::thead();
+        $tbody = HTML::tbody();
+
+        // Do we need a <thead>?
+        // 0 = unknown
+        // 1 = inside (parsing cells)
+        // 2 = false (no thead, only tbody)
+        // 3 = true (there is a thead)
+        $theadstatus = 0;
 
         // We always generate an Id for the table.
         // This is convenient for tables of class "sortable".
@@ -104,7 +115,7 @@ extends WikiPlugin
             return HTML::raw('');
         }
 
-        foreach ($lines as $line){
+        foreach ($lines as $line) {
             if (substr($line,0,2) == "|}") {
                 // End of table
                 continue;
@@ -124,11 +135,9 @@ extends WikiPlugin
                         unset($cell);
                     }
                     if (!empty($row->_content)) {
-                        if (isset($thead)) {
+                        if ($theadstatus == 1) { // inside
+                            $theadstatus = 3; // true
                             $thead->pushContent($row);
-                            $table->pushContent($thead);
-                            unset($thead);
-                            $tbody = HTML::tbody();
                         } else {
                             $tbody->pushContent($row);
                         }
@@ -154,7 +163,6 @@ extends WikiPlugin
             // Table caption
             if (substr($line,0,2) == "|+") {
 
-                $caption = HTML::caption();
                 $line = substr($line,2);
                 $pospipe = strpos($line, "|");
                 $posbracket = strpos($line, "[");
@@ -169,8 +177,7 @@ extends WikiPlugin
                     $line=substr($line, $pospipe+1);
                 }
 
-                $caption->pushContent(trim($line));
-                $table->pushContent($caption);
+                $caption->setContent(TransformInline(trim($line)));
             }
 
             if (((substr($line,0,1) == "|") or (substr($line,0,1) == "!")) and isset($row)) {
@@ -186,11 +193,15 @@ extends WikiPlugin
                     $row->pushContent($cell);
                 }
                 if (substr($line,0,1) == "!") {
+                    if ($theadstatus == 0) { // unknown
+                        $theadstatus = 1; // inside
+                    }
                     $cell = HTML::th();   // Header
-                    $thead = HTML::thead();
                 } else {
+                    if ($theadstatus == 1) { // inside
+                        $theadstatus = 2; // false
+                    }
                     $cell = HTML::td();
-                    if (!isset($tbody)) $tbody = HTML::tbody();
                 }
                 $line = substr($line, 1);
 
@@ -213,7 +224,7 @@ extends WikiPlugin
                 if (($pospipe !== false) && (($posbracket === false) || ($posbracket > $pospipe)) && (($poscurly === false) || ($poscurly > $pospipe))) {
                     $attrs = parse_attributes(substr($line, 0, $pospipe));
                     foreach ($attrs as $key => $value) {
-                        if (in_array ($key, array("id", "class", "title", "style",
+                        if (in_array ($key, array("id", "class", "title", "style", "scope",
                                                   "colspan", "rowspan", "width", "height",
                                                   "bgcolor", "align", "valign"))) {
                             $cell->setAttr($key, $value);
@@ -252,11 +263,17 @@ extends WikiPlugin
             if (!empty($row->_content)) {
                 $tbody->pushContent($row);
             }
-            if (isset($tbody) && !empty($tbody->_content)) {
-                $table->pushContent($tbody);
-            }
         }
-        if (isset($table) && !empty($table->_content)) {
+        if (!empty($caption->_content)) {
+            $table->pushContent($caption);
+        }
+        if (!empty($thead->_content)) {
+            $table->pushContent($thead);
+        }
+        if (!empty($tbody->_content)) {
+            $table->pushContent($tbody);
+        }
+        if (!empty($table->_content)) {
             return $table;
         } else {
             return HTML::raw('');

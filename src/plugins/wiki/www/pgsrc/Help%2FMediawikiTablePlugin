@@ -1,6 +1,6 @@
-Date: Mon,  8 Nov 2010 10:51:04 +0000
+Date: Tue,  9 Nov 2010 14:24:02 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FMediawikiTablePlugin 7727 2010-11-08 09:53:28Z vargenau $
+X-Rcs-Id: $Id: Help%2FMediawikiTablePlugin 7733 2010-11-09 13:25:11Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FMediawikiTablePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -24,6 +24,9 @@ The plugin is not meant to be called directly, just use the syntax below to inse
 The summary syntax is an extension to the Mediawiki syntax.
 You can also simply put the summary as an attribute to the table.
 The summary is necessary to be able to create accessible tables.
+
+If the first row of the table as made with header cells only, this row will be put in a //thead//.
+In that case, this row will be repeated on every page when printing the table.
 
 === HTML attributes ===
 
