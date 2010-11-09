@@ -36,6 +36,9 @@ class PsycopgConnector(ExternalConnector.ExternalConnector):
 	def __db_connect__(self):
 		if mm_cfg.connection == 0:
 			try:
+				# Dirty ack, I dunno exactly why I really need this for web
+				distdir = os.path.join(sys.prefix, 'lib', 'python'+sys.version[:3],'dist-packages')
+				sys.path.append(distdir)
 				import psycopg2
 			except ImportError:
 				return False
