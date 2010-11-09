@@ -5,4 +5,4 @@ plugins/oslc/bin/*                     usr/share/@OLDPACKAGE@/plugins/oslc/bin/
 plugins/oslc/www/*                     usr/share/@OLDPACKAGE@/plugins/oslc/www/
 plugins/oslc/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
 plugins/oslc/etc/plugins/oslc/*        etc/@OLDPACKAGE@/plugins/oslc/
-plugins/oslc/etc/httpd.conf.d/*        etc/@OLDPACKAGE@/httpd.conf.d/
+plugins/oslc/etc/httpd.d/*             etc/@OLDPACKAGE@/httpd.conf.d/

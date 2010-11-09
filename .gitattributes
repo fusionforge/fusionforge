@@ -1916,7 +1916,7 @@ src/plugins/oslc/bin/sayhello -text
 src/plugins/oslc/common/oslc-init.php -text
 src/plugins/oslc/cronjobs/manage_oslc.php -text
 src/plugins/oslc/db/oslc-init.sql -text
-src/plugins/oslc/etc/httpd.conf.d/plugin-oslc.inc -text
+src/plugins/oslc/etc/httpd.d/plugin-oslc.inc -text
 src/plugins/oslc/etc/plugins/oslc/config.php -text
 src/plugins/oslc/include/oslc-zend/application/Bootstrap.php -text
 src/plugins/oslc/include/oslc-zend/application/basic-pwd.txt -text
