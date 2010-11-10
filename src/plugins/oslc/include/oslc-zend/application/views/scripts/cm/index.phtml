@@ -26,7 +26,7 @@ switch (TRACKER_TYPE) {
 	<p><tt>curl -H "Accept: application/x-oslc-disc-service-provider-catalog+xml" -X GET <a 
 		href="<?php 
 				$req_array = _getRequestArray();
-				echo util_make_url($this->baseUrl().'/cm/oslc-services/?type='.$req_array['type'].'&id='.$req_array['id'].'&pluginname='.$req_array['pluginname']);
+				echo util_make_uri($this->baseUrl().'/cm/oslc-services/?type='.$req_array['type'].'&id='.$req_array['id'].'&pluginname='.$req_array['pluginname']);
 			?>
 		">
 		.../cm/oslc-services/</a></tt> : to retrieve an RDF/XML OSLC Service Provider Catalog document.</p>
