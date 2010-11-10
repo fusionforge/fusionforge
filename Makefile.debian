@@ -463,3 +463,5 @@ gnupgkey:
 	echo '%echo done' >> $(BOTKEY)
 	[ -d ~/.gnupg ] || gpg --batch --gen-key $(BOTKEY)
 
+exportgnupgkey:
+	gpg --export --armor $(DEBEMAIL)
