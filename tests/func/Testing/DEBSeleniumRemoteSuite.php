@@ -17,8 +17,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		}
 		*/
 		system("ssh root@".HOST." 'echo \"deb file:/debian ".getenv('DIST')." main\" > /etc/apt/sources.list.d/fusionforge.list'");
-		system("scp -r ../build/debian root@".HOST.":/");
-		system("scp -r ../build/debian root@".HOST.":/");
+		system("scp -r ".getenv('WORKSPACE')."/build/debian root@".HOST.":/");
 		system("gpg --export --armor | ssh root@".HOST." apt-key add -");
 
 		sleep(5);
