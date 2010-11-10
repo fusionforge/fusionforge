@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: main.php 7664 2010-08-31 15:42:34Z vargenau $');
+// rcs_id('$Id: main.php 7737 2010-11-10 08:47:34Z rurban $');
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -1327,8 +1327,9 @@ function validateSessionPath() {
 
 function main () {
 
-    if (version_compare(PHP_VERSION, '4.3.10', '<')) {
-        exit(_("Your PHP version is too old. You must have at least PHP 4.3.10"));
+    // latest supported: Red Hat Enterprise Linux ES release 4
+    if (version_compare(PHP_VERSION, '4.3.9', '<')) {
+        exit(_("Your PHP version is too old. You must have at least PHP 4.3.9"));
     }
 
     if ( !USE_DB_SESSION )

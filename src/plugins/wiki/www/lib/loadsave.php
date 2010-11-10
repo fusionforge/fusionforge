@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: loadsave.php 7664 2010-08-31 15:42:34Z vargenau $');
+// rcs_id('$Id: loadsave.php 7739 2010-11-10 16:51:32Z vargenau $');
 
 /*
  * Copyright 1999,2000,2001,2002,2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
@@ -117,6 +117,7 @@ function EndLoadDump(&$request)
         echo "</div>\n";
         echo "</td></tr>\n";
         echo "</table>\n";
+        echo "</div>\n";
         echo "</td></tr>\n";
         echo "</table>\n";
     } else if (isa($WikiTheme, 'WikiTheme_Sidebar')
@@ -1475,11 +1476,8 @@ function LoadFileOrDir (&$request)
     $source = $request->getArg('source');
     $finder = new FileFinder;
     $source = $finder->slashifyPath($source);
-    $page = rawurldecode(basename($source));
-    StartLoadDump($request, fmt("Loading '%s'",
-    	HTML(dirname($source),
-             dirname($source) ? "/" : "",
-             WikiLink($page,'auto'))));
+    StartLoadDump($request, 
+    	sprintf(_("Loading '%s'"), $source));
     LoadAny($request, $source);
     EndLoadDump($request);
 }
