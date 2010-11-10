@@ -1,5 +1,5 @@
 FFDIR=/usr/share/@OLDPACKAGE@
-FFCRON=$FFDIR/cronjobs
+FFCRON=/usr/share/@OLDPACKAGE@/cronjobs
 FFUSER=@OLDPACKAGE@
 
 # You may need to change the pathname to php CLI (command line interface)
