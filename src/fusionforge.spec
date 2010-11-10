@@ -793,7 +793,7 @@ fi
 
 %files plugin-oslc
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/oslc/
-%{_sysconfdir}/httpd/conf.d/62plugin-oslc
+%{_sysconfdir}/httpd/conf.d/plugin-oslc.inc
 %{FORGE_DIR}/plugins/oslc
 %{FORGE_DIR}/www/plugins/oslc
 
