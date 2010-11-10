@@ -5,7 +5,7 @@ USEVZCTL=${USEVZCTL:-false}
 if ! $USEVZCTL
 then
 	echo "Using /root/start_vz.sh"
-	sudo /root/start_vz.sh $VZTEMPLATE "$1"
+	(sudo /root/start_vz.sh $VZTEMPLATE "$1")
 else
 	sudo /usr/sbin/vzctl create $VEID --private $VZPRIVATEDIR/$VEID --ostemplate $VZTEMPLATE
 	sudo /usr/sbin/vzctl start $VEID
