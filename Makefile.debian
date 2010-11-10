@@ -50,7 +50,7 @@ endif
 TARBALLS=$(CURDIR)/tarballs
 #
 # Local customization
-ifeq (../../3rd-party,$(shell ls -d ../../3rd-party))
+ifeq (../../3rd-party,$(shell ls -d ../../3rd-party 2>/dev/null))
 -include ../../config/local.$(shell hostname)
 else
 -include $(CURDIR)/config/local.$(shell hostname)
