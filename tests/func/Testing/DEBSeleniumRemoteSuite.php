@@ -23,7 +23,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		sleep(5);
 		
 		system("ssh root@".HOST." 'apt-get update'");
-		system("ssh root@".HOST." 'UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y install postgresql-contrib fusionforge-full'");
+		system("ssh root@".HOST." 'UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-full'");
 		system("ssh root@".HOST." 'LANG=C a2dissite default'");
 		system("ssh root@".HOST." 'LANG=C invoke-rc.d apache2 reload'");
 		system("ssh root@".HOST." 'LANG=C touch /tmp/fusionforge-use-pfo-rbac'");
