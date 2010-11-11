@@ -1,6 +1,6 @@
 Package: @OLDPACKAGE@-mta-exim4
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4-daemon-heavy|exim4, ${misc:Depends}
 Provides: @OLDPACKAGE@-mta
 Conflicts: @OLDPACKAGE@-mta
 Description: collaborative development tool - mail tools (using Exim 4)
