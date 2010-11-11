@@ -23,7 +23,7 @@
 
 global $gfplugins;
 require_once $gfplugins.'hudson/include/hudsonPlugin.class.php' ;
-define('SEARCH__TYPE_IS_LIST', 'hudson');
+//define('SEARCH__TYPE_IS_LIST', 'hudson');
 $hudsonPluginObject = new hudsonPlugin() ;
 
 register_plugin ($hudsonPluginObject) ;
