@@ -5,11 +5,11 @@ echo "# ForumML Plugin install"
 echo "#"
 
 ## Chown ForumMl temp and data dir
-chown root.list /var/log/gforge/forumml
+chown gforge.list /var/log/gforge/forumml
 chmod 775 /var/log/gforge/forumml
-chown gforge.gforge /var/spool/forumml /var/lib/gforge/forumml
-chown gforge.gforge /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
-chmod 06755 /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
+#chown gforge.gforge /var/spool/forumml /var/lib/gforge/forumml
+#chown gforge.gforge /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
+#chmod 06755 /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
 
 ## Update Mailman config to enable the Hook
 if ! grep -q ^PUBLIC_EXTERNAL_ARCHIVER /usr/lib/mailman/Mailman/mm_cfg.py
