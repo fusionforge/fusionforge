@@ -23,6 +23,7 @@ case "$1" in
 	then
 		/usr/share/@OLDPACKAGE@/bin/unregister-plugin @PLUGSHORTNAME@
 		if [ -f /usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-delete.pl ]
+		then
 			/usr/share/@OLDPACKAGE@/plugins/@PLUGSHORTNAME@/bin/db-delete.pl
 		fi
 	fi
