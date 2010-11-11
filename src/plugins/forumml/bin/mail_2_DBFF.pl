@@ -43,7 +43,7 @@ $ENV{'PATH'} = '/usr/bin:/bin';
 my $debug;
 open ( $debug , '>> /tmp/debugperl' );
 # Hook log file
-my $logfile = "/var/log/gforge/forumml_hook.log";
+my $logfile = "/var/log/gforge/forumml/hook.log";
 
 # Redirect outputs
 open STDOUT, ">>", $logfile or die "cannot append to '$logfile': $!\n";

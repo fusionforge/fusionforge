@@ -6,3 +6,4 @@ usr/share/gforge/plugins/forumml/www
 var/spool/forumml
 var/lib/gforge/forumml
 var/log/gforge
+var/log/gforge/forumml

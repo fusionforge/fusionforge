@@ -5,9 +5,8 @@ echo "# ForumML Plugin install"
 echo "#"
 
 ## Chown ForumMl temp and data dir
-touch /var/log/gforge/forumml_hook.log
-chown root.list /var/log/gforge/forumml_hook.log
-chmod 664 /var/log/gforge/forumml_hook.log
+chown root.list /var/log/gforge/forumml
+chmod 775 /var/log/gforge/forumml
 chown gforge.gforge /var/spool/forumml /var/lib/gforge/forumml
 chown gforge.gforge /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
 chmod 06755 /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
