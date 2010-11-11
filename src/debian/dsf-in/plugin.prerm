@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for @OLDPACKAGE@-plugin-mediawiki
+# prerm script for @OLDPACKAGE@-plugin-@PLUGSHORTNAME@
 #
 # see: dh_installdeb(1)
 
