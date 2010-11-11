@@ -1,0 +1,3 @@
+gforge-db-postgresql	fusionforge/shared/lists_host	string	debian6.local
+gforge-mta-exim4	fusionforge/shared/lists_host	string	debian6.local
+gforge-web-apache2	fusionforge/shared/lists_host	string	debian6.local

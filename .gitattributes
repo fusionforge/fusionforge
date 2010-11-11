@@ -4741,6 +4741,7 @@ tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text
 tests/openvz/local.g-virtual05.rinse.conf -text
 tests/openvz/local.rinse.api -text
+tests/preseed/lists -text
 tests/preseed/mailman -text
 tests/preseed/postgresql -text
 tests/scripts/catch_mail.php -text
