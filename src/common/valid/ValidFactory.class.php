@@ -91,7 +91,7 @@ extends Valid_Text {
 }
 
 /**
- * Wrapprt for 'WhiteList' rule
+ * Wrapper for 'WhiteList' rule
  */
 class Valid_WhiteList
 extends Valid {

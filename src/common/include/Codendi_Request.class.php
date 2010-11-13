@@ -126,7 +126,6 @@
 	 */
 	function valid(&$validator) {
 		$this->_validated_input[$validator->getKey()] = true;
-		$attachmentId=5;
 		return $validator->validate($this->get($validator->getKey()));
 	} 
 
