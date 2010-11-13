@@ -104,7 +104,7 @@ forge_define_config_item ('ldap_version', 'core', $GLOBALS['sys_ldap_version']) 
 forge_define_config_item ('ldap_base_dn', 'core', $GLOBALS['sys_ldap_base_dn']) ;
 forge_define_config_item ('ldap_bind_dn', 'core', $GLOBALS['sys_ldap_bind_dn']) ;
 forge_define_config_item ('ldap_admin_dn', 'core', $GLOBALS['sys_ldap_admin_dn']) ;
-forge_define_config_item ('ldap_password', 'core', $GLOBALS['sys_ldap_passwd']) ;
+forge_define_config_item ('ldap_password', 'core', isset($GLOBALS['sys_ldap_passwd']) ? $GLOBALS['sys_ldap_passwd'] : '') ;
 forge_define_config_item ('news_group', 'core', $GLOBALS['sys_news_group']) ;
 forge_define_config_item ('stats_group', 'core', $GLOBALS['sys_stats_group']) ;
 forge_define_config_item ('peer_rating_group', 'core', $GLOBALS['sys_peer_rating_group']) ;
