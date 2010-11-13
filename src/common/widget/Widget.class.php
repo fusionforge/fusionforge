@@ -53,6 +53,8 @@ require_once('common/widget/Widget_ProjectRss.class.php');/*
 require_once('common/widget/Widget_ProjectSvnStats.class.php');
 							   */
 
+require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
+
 /**
  * Widget
  */
@@ -170,6 +172,9 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 			case 'mymonitoredforums':
 				$o = new Widget_MyMonitoredForums();
 				break;
+			case 'mymonitoreddocuments':
+				$o = new Widget_MyMonitoredDocuments();
+				break;
 			case 'myartifacts':
 				$o = new Widget_MyArtifacts();
 				break;
@@ -266,7 +271,7 @@ require_once('common/widget/Widget_ProjectSvnStats.class.php');
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks', 
 						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mybugs', //'mywikipage' //not yet
 						'mytasks', 'mysrs', 'mylatestsvncommits', 'mytwitterfollow',
-						'mysystemevent', 'myrss',
+						'mysystemevent', 'myrss', 'mymonitoreddocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:

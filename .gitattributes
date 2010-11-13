@@ -498,6 +498,7 @@ src/common/widget/Widget_MyAdmin.class.php -text
 src/common/widget/Widget_MyArtifacts.class.php -text
 src/common/widget/Widget_MyBookmarks.class.php -text
 src/common/widget/Widget_MyLatestSvnCommits.class.php -text
+src/common/widget/Widget_MyMonitoredDocuments.class.php -text
 src/common/widget/Widget_MyMonitoredForums.class.php -text
 src/common/widget/Widget_MyMonitoredFp.class.php -text
 src/common/widget/Widget_MyProjects.class.php -text
