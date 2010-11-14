@@ -184,6 +184,24 @@ EOF
 	    rm -f $tmp1 $tmp2
 	    exit 1
 	fi
+	if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
+SET LC_MESSAGES = 'C' ;
+CREATE USER list ;
+EOF
+	then
+	    rm -f $tmp1 $tmp2
+	else
+	    echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+	    echo "Maybe a problem in your PostgreSQL configuration?"
+	    echo "Please report a bug to the Debian bug tracking system"
+	    echo "Please include the following output:"
+	    echo "CREATE USER's STDOUT:"
+	    cat $tmp1
+	    echo "CREATE USER's STDERR:"
+	    cat $tmp2
+	    rm -f $tmp1 $tmp2
+	    exit 1
+	fi
 	
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)

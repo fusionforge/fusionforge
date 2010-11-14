@@ -1,4 +1,3 @@
-CREATE USER list;
 -- alter table plugin_forumml_message add column last_thread_update int unsigned not null default 0 after body;
 CREATE SEQUENCE plugin_forumml_pk_seq
     START WITH 1
