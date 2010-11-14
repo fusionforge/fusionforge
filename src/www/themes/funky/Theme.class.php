@@ -379,6 +379,7 @@ class Theme extends Layout {
             jQuery.noConflict();
             jQuery(window).load(function(){
                     jQuery(".quicknews").hide();
+					setTimeout("jQuery('.feedback').hide('slow')",5000);
             });
         </script>
         <?php
