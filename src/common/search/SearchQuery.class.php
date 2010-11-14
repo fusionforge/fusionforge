@@ -126,8 +126,6 @@ class SearchQuery extends Error {
 			}
 			$words = htmlspecialchars($words);
 			$words = strtr($words, array('%' => '\%', '_' => '\_'));
-			$this->words = array();
-			$this->phrases = array();
 			$phrase = '';
 			$inQuote = false;
 			foreach(explode(' ', quotemeta($words)) as $word) {
