@@ -6,6 +6,8 @@ CREATE SEQUENCE plugin_forumml_pk_seq
     NO MINVALUE
     CACHE 1;
 
+GRANT ALL ON plugin_forumml_pk_seq TO list;
+
 CREATE TABLE plugin_forumml_attachment (
   id_attachment INTEGER DEFAULT nextval('plugin_forumml_pk_seq'::text) NOT NULL,
   id_message INTEGER  NOT NULL,
@@ -26,6 +28,8 @@ CREATE SEQUENCE plugin_forumml_header_pk_seq
     NO MINVALUE
     CACHE 1;
 
+GRANT ALL ON plugin_forumml_header_pk_seq TO list;
+
 CREATE TABLE plugin_forumml_header (
   id_header INTEGER DEFAULT nextval('plugin_forumml_header_pk_seq'::text) NOT NULL,
   name character varying(255) NOT NULL,
@@ -40,6 +44,8 @@ CREATE SEQUENCE plugin_forumml_message_pk_seq
     MAXVALUE 2147483647
     NO MINVALUE
     CACHE 1;
+
+GRANT ALL ON plugin_forumml_message_pk_seq TO list;
 
 CREATE TABLE plugin_forumml_message (
   id_message INTEGER DEFAULT nextval('plugin_forumml_message_pk_seq'::text) NOT NULL,
@@ -64,6 +70,7 @@ CREATE TABLE plugin_forumml_messageheader (
 GRANT ALL ON plugin_forumml_messageheader TO list;
 
 GRANT SELECT ON mail_group_list TO list;
+GRANT SELECT ON plugins TO list;
 
 INSERT INTO plugin_forumml_header (id_header, name) VALUES ('1','message-id');
 INSERT INTO plugin_forumml_header (id_header, name) VALUES ('2','date');
