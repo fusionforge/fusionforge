@@ -119,7 +119,7 @@ class Document extends Error {
 			return false;
 		}
 
-        $result = db_query_params('SELECT filename,doc_group from docdata_vw',
+        $result = db_query_params('SELECT filename,doc_group from docdata_vw where filename = $1 and doc_group = $2',
                                 array($filename,$doc_group));
 
         if (!$result || db_numrows($res) > 0) {
