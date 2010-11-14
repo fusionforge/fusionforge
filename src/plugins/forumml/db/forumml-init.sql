@@ -1,3 +1,4 @@
+CREATE USER list;
 -- alter table plugin_forumml_message add column last_thread_update int unsigned not null default 0 after body;
 CREATE SEQUENCE plugin_forumml_pk_seq
     START WITH 1
@@ -17,7 +18,7 @@ CREATE TABLE plugin_forumml_attachment (
   PRIMARY KEY(id_attachment)
 );
 
-
+GRANT ALL ON plugin_forumml_attachment TO list;
 
 CREATE SEQUENCE plugin_forumml_header_pk_seq
     START WITH 1
@@ -31,6 +32,8 @@ CREATE TABLE plugin_forumml_header (
   name character varying(255) NOT NULL,
   PRIMARY KEY(id_header)
 );
+
+GRANT ALL ON plugin_forumml_header TO list;
 
 CREATE SEQUENCE plugin_forumml_message_pk_seq
     START WITH 1
@@ -50,12 +53,18 @@ CREATE TABLE plugin_forumml_message (
   PRIMARY KEY(id_message)
 );
 
+GRANT ALL ON plugin_forumml_message TO list;
+
 CREATE TABLE plugin_forumml_messageheader (
   id_message INTEGER  NOT NULL,
   id_header INTEGER  NOT NULL,
   value TEXT NOT NULL,
   PRIMARY KEY(id_message, id_header)
 );
+
+GRANT ALL ON plugin_forumml_messageheader TO list;
+
+GRANT SELECT ON mail_group_list TO list;
 
 INSERT INTO plugin_forumml_header (id_header, name) VALUES ('1','message-id');
 INSERT INTO plugin_forumml_header (id_header, name) VALUES ('2','date');
