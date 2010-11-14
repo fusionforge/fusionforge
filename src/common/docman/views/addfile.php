@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -60,7 +59,8 @@ if ( $dgf->getNested() == NULL ) {
 	</script>
 <?php
 	echo '<div class="docmanDivIncluded">';
-	echo '<p>'. _('<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title<br />') .'</p>';
+	echo '<p><strong>'. _('Document Title:') .'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
+	echo '<p><strong>'. _('Description:') .'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
 
 	if ($g->useDocmanSearch()) 
 		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';

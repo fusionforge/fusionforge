@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -7,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -213,8 +213,14 @@ function document_editdata(&$document) {
 
 ?>
 <div class="docmanDivIncluded">
-<p>
-<?php echo _("<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.") ?>
+<p><strong>
+<?php echo _('Document Title:') ?>
+</strong>
+<?php echo _(' Refers to the relatively brief title of the document (e.g. How to use the download server).') ?>
+</p><p><strong>
+<?php echo _('Description:') ?>
+</strong>
+<?php echo _(' A brief description to be placed just under the title.') ?>
 </p>
 <?php
 	if ($g->useDocmanSearch())
@@ -289,18 +295,15 @@ function document_editdata(&$document) {
 		    	</tr>';
 		}
 	}
-
 ?>
-
     <tr>
 		<td style="text-align:right;">
-            <strong><?php echo _('Group that document belongs in') ?></strong>
+            <strong><?php echo _('Directory that document belongs in') ?></strong>
         </td>
         <td>
             <?php $dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $document->getDocGroupID()); ?>
         </td>
     </tr>
-
     <tr>
 		<td style="text-align:right;">
             <strong><?php echo _('State') ?></strong>
@@ -339,7 +342,6 @@ function document_editdata(&$document) {
     <input type="submit" id="submiteditdata<?php echo $document->getID(); ?>" value="<?php echo _('Submit Edit') ?>" /><br /><br />
     </form>
 </div>
-
 <?php
 }
 ?>

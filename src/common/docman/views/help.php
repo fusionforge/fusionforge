@@ -1,11 +1,9 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2000, Quentin Cregan/Sourceforge
- * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -25,9 +23,10 @@
  */
 
 echo '<div class="docmanDivIncluded">';
+plugin_hook ("blocks", "doc help");
 if ($g->useWebdav()) {
-	echo '<p>'. _('Documents parsing is also available thru webdav').'</p>';
-	echo '<p>' . util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')) . '</p>';
+	echo '<p>'. _('Documents parsing is also available thru webdav') .'</p>';
+	echo '<p>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Direct Webdav URL')) .'</p>';
 }
 echo '</div>';
 ?>

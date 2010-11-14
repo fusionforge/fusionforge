@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -79,6 +78,7 @@ echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	echo '<a href="#" id="docman-editdirectory" title="'._('Edit this directory').'">'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 	echo '<a href="#" id="docman-addsubdirectory" title="'._('Add a new subdirectory').'">'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
+	// do not uncomment the line : trash directory is not correctly implemented
 	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
 		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Permanently delete this directory').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
@@ -249,5 +249,4 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo '<div class="docmanDiv">'.html_image('docman/new.png',14,14,array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
     include ($gfcommon.'docman/views/editfile.php');
 }
-
 ?>

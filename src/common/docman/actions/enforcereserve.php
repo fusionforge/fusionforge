@@ -1,9 +1,9 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -29,7 +29,7 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm ('docman', $group_id, 'admin')) {
-	$return_msg = _('Document Action Denied');
+	$return_msg = _('Docman Action Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 } else {
 

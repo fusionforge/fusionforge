@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -33,7 +34,6 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
 require_once $gfcommon.'docman/include/webdav.php';
-
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];

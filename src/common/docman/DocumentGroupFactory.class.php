@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -30,7 +31,6 @@
 */
 
 require_once $gfcommon.'include/Error.class.php';
-require_once $gfcommon.'forum/ForumMessage.class.php';
 
 class DocumentGroupFactory extends Error {
 	/**
@@ -57,11 +57,11 @@ class DocumentGroupFactory extends Error {
 		$this->Error();
 		
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_("DocumentGroupFactory:: Invalid Group"));
+			$this->setError(_("DocumentGroupFactory:: Invalid Project"));
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError('DocumentGroupFactory:: '.$Group->getErrorMessage());
+			$this->setError('DocumentGroupFactory::'.' '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -85,7 +85,7 @@ class DocumentGroupFactory extends Error {
 		$rows = db_numrows($result);
 		
 		if (!$result) {
-			$this->setError(_('No DocumentGroup Found ').db_error());
+			$this->setError(_('No Document Directory Found').' '.db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
@@ -119,7 +119,7 @@ class DocumentGroupFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError(_('No DocumentGroup Found ').db_error());
+			$this->setError(_('No Document Directory Found').' '.db_error());
 			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {

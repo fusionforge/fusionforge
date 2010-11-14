@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -30,8 +29,8 @@
 global $g; //group object
 global $group_id; // id of the group
 global $dirid; // id of doc_group
-global $dgf; // document group factory of this group
-global $dgh; // document group html
+global $dgf; // document directory factory of this group
+global $dgh; // document directory html
 global $nested_docs; // flat docs array
 
 foreach ($nested_docs[$dirid] as $d) {
@@ -45,7 +44,14 @@ foreach ($nested_docs[$dirid] as $d) {
 </script>
 <div id="editfile<?php echo $d->getID(); ?>" style="display:none" class="docman_div_include">
 <p>
-<?php echo _("<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.") ?>
+<strong>
+<?php echo _('Document Title:') ?>
+</strong>
+<?php echo _('Refers to the relatively brief title of the document (e.g. How to use the download server).') ?>
+<p><strong>
+<?php echo _('Description:') ?>
+</strong>
+<?php echo _('A brief description to be placed just under the title.') ?>
 </p>
 <?php
 	if ($g->useDocmanSearch())
@@ -57,7 +63,7 @@ foreach ($nested_docs[$dirid] as $d) {
 <table border="0">
 	<tr>
 		<td>
-			<strong><?php echo _('Document Title') ?>: </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 5) ?><br />
+			<strong><?php echo _('Document Title:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 5) ?><br />
 			<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>" />
 			<br />
 		</td>
@@ -65,7 +71,7 @@ foreach ($nested_docs[$dirid] as $d) {
 
     <tr>
         <td>
-        <strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
+        <strong><?php echo _('Description:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
         <input type="text" name="description" size="50" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
         <br /></td>
     </tr>
@@ -114,16 +120,14 @@ foreach ($nested_docs[$dirid] as $d) {
 		}
 	}
 ?>
-
     <tr>
         <td>
-        <strong><?php echo _('Group that document belongs in') ?></strong><br />
+        <strong><?php echo _('Directory that document belongs in') ?></strong><br />
         <?php
 				$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $d->getDocGroupID());
 
 	     ?></td>
     </tr>
-
     <tr>
         <td>
         <br /><strong><?php echo _('State') ?>:</strong><br />
@@ -153,12 +157,10 @@ foreach ($nested_docs[$dirid] as $d) {
         </td>
     </tr>
     </table>
-
     <input type="hidden" name="docid" value="<?php echo $d->getID(); ?>" />
     <input type="button" id="submiteditdata<?php echo $d->getID(); ?>" value="<?php echo _('Submit Edit') ?>" onclick="javascript:doItEditData<?php echo $d->getID(); ?>()" /><br /><br />
     </form>
 </div>
-
 <?php
 }
 ?>

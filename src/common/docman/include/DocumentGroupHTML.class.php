@@ -36,7 +36,7 @@ class DocumentGroupHTML extends Error {
 		$this->Error();
 		
 		if (!$Group || !is_object($Group)) {
-			$this->setError("DocumentGroupHTML:: Invalid Group");
+			$this->setError(_('DocumentGroupHTML:: Invalid Project'));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -45,51 +45,9 @@ class DocumentGroupHTML extends Error {
 		}
 		$this->Group =& $Group;
 
-
 		return true;
 	}
 
-	/**
-	 * showTableNestedGroups - Display the tree of document groups
-	 *
-	 * This is a recursive function that is used to display the tree
-	 *
-	 * @param array Array of groups. This array contains information about the groups and their childs.
-	 * @param int The number of row that is currently being showed. It is used for formatting purposes
-	 * @param int The ID of the parent whose childs are being showed (0 for root groups)
-	 * @param int The current level
-	 */
-	function showTableNestedGroups (&$group_arr, &$rowno, $parent=0, $level=0) {
-		// No childs to display
-		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) return;
-
-		$child_count = count($group_arr["$parent"]);
-		for ($i = 0; $i < $child_count; $i++) {
-			$rowno++;
-			$doc_group =& $group_arr["$parent"][$i];
-			
-			$margin = str_repeat("&nbsp;&nbsp;&nbsp;", $level);
-			
-			$img = "cfolder15.png";
-/*
-			// Display the folder icon opened or closed?
-			if (array_key_exists("".$doc_group->getID(),$group_arr)) $img = "ofolder15.png";
-			else $img = "cfolder15.png";
-*/
-
-			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($rowno) .'>'.
-				'<td>'.$doc_group->getID().'</td>'.
-				'<td>'.$margin.html_image('ic/'.$img,"15","13",array("border"=>"0")).' '.
-				'<a href="index.php?editgroup=1&amp;doc_group='.
-					$doc_group->getID().'&amp;group_id='.$doc_group->Group->getID().'">'.
-					$doc_group->getName().'</a></td>'.
-				'<td><a href="index.php?deletegroup=1&amp;doc_group='.$doc_group->getID().'&amp;group_id='.$doc_group->Group->getID().'">'.
-				'<img src="/images/ic/trash.png"/></a></td></tr>';
-			// Show childs (if any)
-			$this->showTableNestedGroups($group_arr, $rowno, $doc_group->getID(), $level+1);
-		}
-	}
-	
 	/**
 	 * showSelectNestedGroups - Display the tree of document groups inside a <select> tag
 	 *

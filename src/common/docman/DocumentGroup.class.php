@@ -5,6 +5,8 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -56,12 +58,12 @@ class DocumentGroup extends Error {
 
 		//was Group legit?
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('DocumentGroup: No Valid Group'));
+			$this->setError(_('Document Directory: No Valid Project'));
 			return false;
 		}
 		//did Group have an error?
 		if ($Group->isError()) {
-			$this->setError('DocumentGroup: '.$Group->getErrorMessage());
+			$this->setError(_('Document Directory:').' '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -104,7 +106,7 @@ class DocumentGroup extends Error {
 						array ($parent_doc_group,
 						       $this->Group->getID())) ;
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError(_('DocumentGroup: Invalid DocumentGroup parent ID'));
+				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
 				return false;
 			}
 		} else {
@@ -134,7 +136,7 @@ class DocumentGroup extends Error {
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
-			$this->setError(_('DocumentGroup::create() Error Adding Group: ').db_error());
+			$this->setError(_('DocumentGroup::create() Error Adding Directory:').' '.db_error());
 			return false;
 		}
 
@@ -198,7 +200,7 @@ class DocumentGroup extends Error {
 		$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
+			$this->setError(_('DocumentGroup: Invalid Document Directory ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -274,7 +276,7 @@ class DocumentGroup extends Error {
 						array ($parent_doc_group,
 						       $this->Group->getID())) ;
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError(_('DocumentGroup: Invalid DocumentGroup parent ID'));
+				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
 				return false;
 			}
 		} else {
@@ -286,7 +288,7 @@ class DocumentGroup extends Error {
 						$parent_doc_group,
 						$this->Group->getID()));
 		if ($res && db_numrows($res) > 0) {
-			$this->setError(_("Group name already exists"));
+			$this->setError(_('Directory name already exists'));
 			return false;
 		}
 
@@ -298,7 +300,7 @@ class DocumentGroup extends Error {
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {
-			$this->setOnUpdateError(_('DocumentGroup: ').db_error());
+			$this->setOnUpdateError(_('DocumentGroup:').' '.db_error());
 			return false;
 		}
 	}
@@ -389,7 +391,7 @@ class DocumentGroup extends Error {
 								array ($stateid,$this->getID(),$this->Group->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setOnUpdateError(_('DocumentGroup :').db_error());
+			$this->setOnUpdateError(_('DocumentGroup:').' '.db_error());
 			return false;
 		}
 		return true;

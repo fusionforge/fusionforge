@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -27,7 +26,6 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $df; // document factory
-global $dgf; // document factory
 global $nested_groups; // flat groups array
 
 $df->setStateID('2');
@@ -49,15 +47,14 @@ function displayTrashDiv() {
 <?php
 	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
 	echo '<ul>';
-	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents and document groups with deleted status ') .'" onclick="javascript:doIt(\'emptytrash\')" ></li>';
+	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents with deleted status.') .'" onclick="javascript:doIt(\'emptytrash\')" ></li>';
 	echo '</ul>';
 	echo '</form>';
 	echo '<ul>';
-	echo '<li><a href="#" onclick="javascript:displayTrashDiv()">'. _('Select dir or files to be resurrected from deleted status') .'</a></li>';
+	echo '<li><a href="#" onclick="javascript:displayTrashDiv()">'. _('Select documents to be resurrected from deleted status.') .'</a></li>';
 	echo '</ul>';
 	echo '<div id="listtrash" style="display:none;" >';
     docman_display_documents($nested_groups,$df,true,2,0);
 	echo '</div>';
 }
-
 ?>

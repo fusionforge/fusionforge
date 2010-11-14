@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -40,12 +39,12 @@ function doItAddSubGroup() {
 echo '<div class="docmanDivIncluded" >';
 echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid.'">';
 if ($dirid) {
-	echo _('Name of the document subgroup to create : ');
+	echo _('Name of the document subdirectory to create:'). ' ';
 } else {
-	echo _('Name of the document group to create : ');
+	echo _('Name of the document directory to create:'). ' ';
 }
 echo '<input type="text" name="groupname" size="40" maxlength="255" >';
-echo '<input id="submitaddsubgroup" type="button" value="create" onclick="javascript:doItAddSubGroup()" />';
+echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';
 echo '</form>';
 echo '</div>';
 ?>

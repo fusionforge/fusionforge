@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
@@ -37,5 +36,4 @@ if (!$d_pending_arr || count($d_pending_arr) < 1) {
 } else {
 	docman_display_documents($nested_groups,$df,true,3,0);
 }
-
 ?>

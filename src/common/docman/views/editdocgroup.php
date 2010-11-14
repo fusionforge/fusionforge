@@ -29,8 +29,8 @@
 global $g; //group object
 global $group_id; // id of the group
 global $dirid; // id of doc_group
-global $dgf; // document group factory of this group
-global $dgh; // document group html
+global $dgf; // document directory factory of this group
+global $dgh; // document directory html
 
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	$dg = new DocumentGroup($g,$dirid);

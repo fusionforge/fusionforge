@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -171,7 +172,7 @@ class Document extends Error {
 						$kwords,
                         $user_id));
 		if (!$result) {
-			$this->setError(_('Error Adding Document: ').db_error().$result);
+			$this->setError(_('Error Adding Document:').' '.db_error().$result);
 			db_rollback();
 			return false;
 		}
@@ -184,7 +185,7 @@ class Document extends Error {
                 array(base64_encode($data),
                     $docid));
 		    if (!$result) {
-			    $this->setError(_('Error Adding Document: ').db_error().$result);
+			    $this->setError(_('Error Adding Document:').' '.db_error().$result);
 			    db_rollback();
 			    return false;
 		    }
@@ -769,15 +770,20 @@ class Document extends Error {
 			$BCC .= $this->getMonitoredUserEmailAddress();
 		}
 		if (strlen($BCC) > 0) {
-			$subject = '['.$this->Group->getPublicName().'] New document - '.$this->getName();
-			$body = "Project: ".$this->Group->getPublicName()."\n";
-			$body .= "Group: ".$groupname."\n";
-			$body .= "Document title: ".$this->getName()."\n";
-			$body .= "Document description: ".util_unconvert_htmlspecialchars( $this->getDescription() )."\n";
-			$body .= "Submitter: ".$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
-			$body .= "\n\n-------------------------------------------------------".
-				"\nFor more info, visit:".
-				"\n\n" . util_make_url('/docman/index.php?group_id='.$this->Group->getID());
+			if ($new) {
+				$status = _('New document');
+			} else {
+				$status = _('Updated document');
+			}
+			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
+			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
+			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
+			$body .= _('Document title:').' '.$this->getName()."\n";
+			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars( $this->getDescription() )."\n";
+			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
+			$body .= "\n\n-------------------------------------------------------\n".
+				_('For more info, visit:').
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
 
 			util_send_message('',$subject,$body,'',$BCC);
 		}
@@ -798,7 +804,7 @@ class Document extends Error {
 		$result = db_query_params ('DELETE FROM doc_data WHERE docid=$1',
 					   array ($this->getID())) ;
 		if (!$result) {
-			$this->setError(_('Error Deleting Document: ').db_error());
+			$this->setError(_('Error Deleting Document:').' '.db_error());
 			db_rollback();
 			return false;
 		}

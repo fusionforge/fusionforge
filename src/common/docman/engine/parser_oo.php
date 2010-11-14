@@ -4,6 +4,7 @@
  * FusionForge document search engine
  *
  * Copyright 2010, Franck Villaume
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *

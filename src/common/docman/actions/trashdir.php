@@ -1,11 +1,11 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -41,7 +41,7 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	/* Get the document groups info */
 	$trashnested_groups =& $dgf->getNested();
 	$trashnested_docs=array();
-	/* put the doc objects into an array keyed off the docgroup */
+	/* put the doc objects into an array keyed of the docgroup */
 	foreach ($d_arr as $doc) {
 		$trashnested_docs[$doc->getDocGroupID()][] = $doc;
 	}
@@ -53,7 +53,7 @@ if (!forge_check_perm ('docman', $group_id, 'approve')) {
 	$dg = new DocumentGroup($g,$dirid);
 	$dg->setStateID('2');
 
-	$return_msg = _('Document Group moved to trash successfully');
+	$return_msg = _('Document Directory moved to trash successfully');
 	session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 }
 ?>

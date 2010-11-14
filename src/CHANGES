@@ -24,6 +24,7 @@ FusionForge-5.1:
 * Unified configuration system, now using standard *.ini files (Roland
   Mas)
 * Reorganised, modular Apache configuration (Roland Mas)
+* New User Widget : documents monitoring (Capgemini)
 
 FusionForge-5.0.2:
 * Maintenance release, bugfixes mostly.

@@ -104,6 +104,7 @@ function getAvailableBlocks($group) {
 	if ($group->usesDocman()) {
 		// Get the blocks in the doc.
 		$blocks['doc index'] = _("Display block at the top of the listing");
+		$blocks['doc help'] = _("Display block at the top of the main page");
 	}
 
 	if ($group->usesSurvey()) {

@@ -3,6 +3,7 @@
  * FusionForge document search engine
  *
  * Copyright 2005, Fabio Bertagnin
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *

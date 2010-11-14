@@ -1,11 +1,11 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -44,7 +44,7 @@ $name = getStringFromRequest('name');
 
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided		
-    $return_msg= _('No valid Document Group was selected.');
+    $return_msg= _('No valid Document Directory was selected.');
     session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 }
 	
