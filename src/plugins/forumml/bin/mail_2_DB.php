@@ -35,6 +35,7 @@ ini_set('max_execution_time', 0);
 ini_set('memory_limit', -1);
 
 require_once('pre.php');
+error_reporting(E_ALL);
 require 'Mail/Mbox.php';
 require_once(dirname(__FILE__).'/../include/ForumML_mimeDecode.class.php');
 require_once(dirname(__FILE__).'/../include/ForumMLInsert.class.php');

@@ -37,6 +37,7 @@ ini_set('memory_limit', -1);
 require_once('env.inc.php');
 require_once('pre.php');
 require_once('preplugins.php');
+error_reporting(E_ALL);
 require 'Mail/Mbox.php';
 require_once(dirname(__FILE__).'/../include/ForumML_mimeDecode.class.php');
 require_once(dirname(__FILE__).'/../include/ForumMLInsert.class.php');
