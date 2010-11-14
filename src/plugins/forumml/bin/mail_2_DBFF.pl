@@ -40,8 +40,6 @@ use strict;
 
 # Set default path (required by taint mode)
 $ENV{'PATH'} = '/usr/bin:/bin';
-my $debug;
-open ( $debug , '>> /tmp/debugperl' );
 # Hook log file
 my $logfile = "/var/log/gforge/forumml/hook.log";
 
