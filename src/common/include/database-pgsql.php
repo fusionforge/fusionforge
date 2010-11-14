@@ -41,7 +41,13 @@
  * @date	2003-02-12
  */
 function pg_connectstring($dbname, $user, $password = "", $host = "", $port = "") {
-	$string = "dbname=$dbname user=$user";
+	if ($dbname != ""){
+		$string = "dbname=$dbname";
+	} else {
+		$string = "dbname=gforge";
+	}
+	if ($user != "")
+		$string .= " user=$user";
 	if ($password != "")
 		$string .= " password=$password";
 	if ($host != "") {
