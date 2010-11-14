@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -25,7 +26,7 @@
  */
 
 /* NEED A REAL REWRITE */
-require_once $gfwww.'docman/include/vtemplate.class.php';
+require_once $gfcommon.'docman/include/vtemplate.class.php';
 
 $is_editor = forge_check_perm ('docman', $g->getID(), 'admin') ;
 
@@ -58,7 +59,7 @@ if (getStringFromPost('cmd') == "search")
 	$textsearch = getStringFromPost("textsearch");
 	$textsearch = prepare_search_text ($textsearch);
 	$mots = preg_split("/[\s,]+/",$textsearch);
-	$qpa = db_construct_qpa (false, 'SELECT filename, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
+	$qpa = db_construct_qpa (false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
 
 	if (getStringFromPost('search_type') == "one") {
 		if (count($mots) > 0) {
@@ -130,9 +131,11 @@ if (getStringFromPost('cmd') == "search")
 		$vtp->SetVar($handle,"RESULT.SEARCHCOMMENT",$item["description"]);
 		$s = get_path_document ($groupsarr, $item["doc_group"], "$_GET[group_id]");
 		$vtp->SetVar($handle,"RESULT.SEARCHPATH",$s);
-		$vtp->SetVar($handle,"RESULT.GROUP_ID",$_GET["group_id"]);
-		$vtp->SetVar($handle,"RESULT.DOC_ID",$item["docid"]);
-		$vtp->SetVar($handle,"RESULT.FILE_NAME",urlencode($item["filename"]));
+		if ($item['filetype'] == 'URL') {
+			$vtp->SetVar($handle,"RESULT.FILE_NAME",$item["filename"]);
+		} else {
+			$vtp->SetVar($handle,"RESULT.FILE_NAME",'/docman/view.php/'.$_GET["group_id"].'/'.$item["docid"].'/'.urlencode($item["filename"]));
+		}
 		if ($is_editor) $vtp->SetVar($handle,"RESULT.STATE",$item["statename"]);
 		$vtp->CloseSession($handle,"RESULT");
 	}
@@ -170,7 +173,6 @@ function get_path_document ($groupsarr, $doc_group, $group_id) {
 }
 
 function prepare_search_text ($text) {
-	
 	$rep = $text; 
 	$rep = utf8_decode($rep);
 	$rep = preg_replace ("/é/", "/e/", $rep);
