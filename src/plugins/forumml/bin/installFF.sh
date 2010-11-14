@@ -7,6 +7,9 @@ echo "#"
 ## Chown ForumMl temp and data dir
 chown gforge.list /var/log/gforge/forumml
 chmod 775 /var/log/gforge/forumml
+chmod g+s /var/log/gforge/forumml
+chown list.list /var/spool/forumml
+chown list.list /var/lib/gforge/forumml
 #chown gforge.gforge /var/spool/forumml /var/lib/gforge/forumml
 #chown gforge.gforge /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
 #chmod 06755 /usr/share/gforge/plugins/forumml/bin/mail_2_DBFF.pl
