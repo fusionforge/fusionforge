@@ -45,7 +45,7 @@ Architecture: all
 Conflicts: sourceforge, gforge-cvs, gforge-common (<< ${source:Version}), gforge
 Replaces: gforge
 Provides: gforge
-Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-web-apache2-vhosts, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, fusionforge-plugin-mailman | gforge-lists-mailman | gforge-lists, fusionforge-plugin-contribtracker, fusionforge-plugin-extratabs, fusionforge-plugin-globalsearch, fusionforge-plugin-mediawiki, fusionforge-plugin-projectlabels, fusionforge-plugin-scmarch, fusionforge-plugin-scmbzr, fusionforge-plugin-scmcvs, fusionforge-plugin-scmdarcs, fusionforge-plugin-scmgit, fusionforge-plugin-scmhg, fusionforge-plugin-scmsvn, fusionforge-plugin-blocks, ${misc:Depends}
+Depends: debconf (>= 1.0.32) | debconf-2.0, ucf, gforge-common (=${source:Version}), gforge-web-apache2 | gforge-web, gforge-web-apache2-vhosts, gforge-db-postgresql | gforge-db, gforge-mta-exim4 | gforge-mta, gforge-shell-postgresql | gforge-shell, fusionforge-plugin-mailman | gforge-lists-mailman | gforge-lists, fusionforge-plugin-contribtracker, fusionforge-plugin-extratabs, fusionforge-plugin-globalsearch, fusionforge-plugin-mediawiki, fusionforge-plugin-projectlabels, fusionforge-plugin-scmarch, fusionforge-plugin-scmbzr, fusionforge-plugin-scmcvs, fusionforge-plugin-scmdarcs, fusionforge-plugin-scmgit, fusionforge-plugin-scmhg, fusionforge-plugin-scmsvn, fusionforge-plugin-blocks, fusionforge-plugin-hudson, ${misc:Depends}
 Description: FusionForge collaborative development tool - full metapackage
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -141,7 +141,7 @@ Description: collaborative development tool - database (using PostgreSQL)
 
 Package: gforge-mta-exim4
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, exim4-daemon-heavy, ${misc:Depends}
 Provides: gforge-mta
 Conflicts: gforge-mta
 Description: collaborative development tool - mail tools (using Exim 4)
