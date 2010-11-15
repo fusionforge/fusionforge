@@ -53,12 +53,12 @@ class Document extends Error {
 	var $engine_path;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	The Group object to which this document is associated.
-	 *  @param  int	 The docid.
-	 *  @param  array	The associative array of data.
-	 *	@return	boolean	success.
+	 * @param	object	The Group object to which this document is associated.
+	 * @param	int	The docid.
+	 * @param	array	The associative array of data.
+	 * @return	boolean	success.
 	 */
 	function Document(&$Group, $docid=false, $arr=false, $engine = "") {
 		$this->Error();
@@ -105,7 +105,7 @@ class Document extends Error {
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
 	 *	@param	string	The contents of this document.
-	 *	@param	int		The doc_group id of the doc_groups table.
+	 *	@param	int	The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
 	 *	@param	string	The description of this document.
 	 *	@return	boolean	success.
@@ -120,13 +120,13 @@ class Document extends Error {
 			return false;
 		}
 
-        $result = db_query_params('SELECT filename,doc_group from docdata_vw where filename = $1 and doc_group = $2',
-                                array($filename,$doc_group));
+		$result = db_query_params('SELECT filename,doc_group from docdata_vw where filename = $1 and doc_group = $2',
+			array($filename,$doc_group));
 
-        if (!$result || db_numrows($res) > 0) {
+		if (!$result || db_numrows($res) > 0) {
 			$this->setError(_('Document already published in this directory'));
-            return false;
-        }
+			return false;
+		}
 
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
@@ -171,7 +171,7 @@ class Document extends Error {
 						$filetype,
 						$filesize,
 						$kwords,
-                        $user_id));
+						$user_id));
 		if (!$result) {
 			$this->setError(_('Error Adding Document:').' '.db_error().$result);
 			db_rollback();
@@ -180,22 +180,21 @@ class Document extends Error {
 
 		$docid=db_insertid($result,'doc_data','docid');
 
-        switch ($this->Group->getStorageAPI()) {
-        case 'DB':
-            $result = db_query_params('UPDATE doc_data set data = $1 where docid = $2',
-                array(base64_encode($data),
-                    $docid));
-		    if (!$result) {
-			    $this->setError(_('Error Adding Document:').' '.db_error().$result);
-			    db_rollback();
-			    return false;
-		    }
-            break;
-        default:
+		switch ($this->Group->getStorageAPI()) {
+		case 'DB':
+			$result = db_query_params('UPDATE doc_data set data = $1 where docid = $2',
+				array(base64_encode($data),$docid));
+			if (!$result) {
+				$this->setError(_('Error Adding Document:').' '.db_error().$result);
+				db_rollback();
+				return false;
+			}
+		break;
+		default:
 			$this->setError(_('Error Adding Document: No Storage API'));
-            db_rollback();
-            return false;
-        }
+		db_rollback();
+		return false;
+		}
 
 		if (!$this->fetchData($docid)) {
 			db_rollback();
@@ -207,10 +206,10 @@ class Document extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this document from the database.
+	 * fetchData() - re-fetch the data for this document from the database.
 	 *
-	 *  @param  int		The document id.
-	 *	@return	boolean	success
+	 * @param	int	The document id.
+	 * @return	boolean	success
 	 */
 	function fetchData($docid) {
 		$res = db_query_params ('SELECT * FROM docdata_vw WHERE docid=$1 AND group_id=$2',
@@ -226,54 +225,54 @@ class Document extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this Document is associated with.
+	 * getGroup - get the Group object this Document is associated with.
 	 *
-	 *	@return	Object	The Group object.
+	 * @return	Object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID - get this docid.
+	 * getID - get this docid.
 	 *
-	 *	@return	int	The docid.
+	 * @return	int	The docid.
 	 */
 	function getID() {
 		return $this->data_array['docid'];
 	}
 
 	/**
-	 *	getName - get the name of this document.
+	 * getName - get the name of this document.
 	 *
-	 *	@return string	The name of this document.
+	 * @return string	The name of this document.
 	 */
 	function getName() {
 		return $this->data_array['title'];
 	}
 
 	/**
-	 *	getDescription - the description of this document.
+	 * getDescription - the description of this document.
 	 *
-	 *	@return string	The description.
+	 * @return string	The description.
 	 */
 	function getDescription() {
 		return $this->data_array['description'];
 	}
 
 	/**
-	 *	isURL - whether this document is a URL and not a local file.
+	 * isURL - whether this document is a URL and not a local file.
 	 *
-	 *	@return	boolean	is_url.
+	 * @return	boolean	is_url.
 	 */
 	function isURL() {
 		return ($this->data_array['filetype'] == 'URL');
 	}
 	
 	/**
-	 *	isText - whether this document is a text document and not a binary one.
+	 * isText - whether this document is a text document and not a binary one.
 	 *
-	 *	@return	boolean	is_text.
+	 * @return	boolean	is_text.
 	 */
 	function isText() {
 		$doctype = $this->data_array['filetype'];
@@ -284,9 +283,9 @@ class Document extends Error {
 	}
 	
 	/**
-	 *	isHtml - whether this document is a html document.
+	 * isHtml - whether this document is a html document.
 	 *
-	 *	@return	boolean	is_html.
+	 * @return	boolean	is_html.
 	 */
 	function isHtml() {
 		$doctype = $this->data_array['filetype'];
@@ -297,108 +296,108 @@ class Document extends Error {
 	}	
 
 	/**
-	 *	isPublic - whether this document is available to the general public.
+	 * isPublic - whether this document is available to the general public.
 	 *
-	 *	@return	boolean	is_public.
+	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
 		return (($this->data_array['stateid'] == 1) ? true  : false);
 	}
 
 	/**
-	 *	getStateID - get this stateid.
+	 * getStateID - get this stateid.
 	 *
-	 *	@return	int	The stateid.
+	 * @return	int	The stateid.
 	 */
 	function getStateID() {
 		return $this->data_array['stateid'];
 	}
 
 	/**
-	 *	getStateName - the statename of this document.
+	 * getStateName - the statename of this document.
 	 *
-	 *	@return string	The statename.
+	 * @return string	The statename.
 	 */
 	function getStateName() {
 		return $this->data_array['state_name'];
 	}
 
 	/**
-	 *	getDocGroupID - get this doc_group_id.
+	 * getDocGroupID - get this doc_group_id.
 	 *
-	 *	@return	int	The doc_group_id.
+	 * @return	int	The doc_group_id.
 	 */
 	function getDocGroupID() {
 		return $this->data_array['doc_group'];
 	}
 
 	/**
-	 *	getDocGroupName - the doc_group_name of this document.
+	 * getDocGroupName - the doc_group_name of this document.
 	 *
-	 *	@return string	The docgroupname.
+	 * @return string	The docgroupname.
 	 */
 	function getDocGroupName() {
 		return $this->data_array['group_name'];
 	}
 
 	/**
-	 *	getCreatorID - get this creator's user_id.
+	 * getCreatorID - get this creator's user_id.
 	 *
-	 *	@return	int	The user_id.
+	 * @return	int	The user_id.
 	 */
 	function getCreatorID() {
 		return $this->data_array['created_by'];
 	}
 
 	/**
-	 *	getCreatorUserName - the unix name of the person who created this document.
+	 * getCreatorUserName - the unix name of the person who created this document.
 	 *
-	 *	@return string	The unix name of the creator.
+	 * @return string	The unix name of the creator.
 	 */
 	function getCreatorUserName() {
 		return $this->data_array['user_name'];
 	}
 
 	/**
-	 *	getCreatorRealName - the real name of the person who created this document.
+	 * getCreatorRealName - the real name of the person who created this document.
 	 *
-	 *	@return string	The real name of the creator.
+	 * @return string	The real name of the creator.
 	 */
 	function getCreatorRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getCreatorEmail - the email of the person who created this document.
+	 * getCreatorEmail - the email of the person who created this document.
 	 *
-	 *	@return string	The email of the creator.
+	 * @return string	The email of the creator.
 	 */
 	function getCreatorEmail() {
 		return $this->data_array['email'];
 	}
 
 	/**
-	 *	getFileName - the filename of this document.
+	 * getFileName - the filename of this document.
 	 *
-	 *	@return string	The filename.
+	 * @return string	The filename.
 	 */
 	function getFileName() {
 		return $this->data_array['filename'];
 	}
 
 	/**
-	 *	getFileType - the filetype of this document.
+	 * getFileType - the filetype of this document.
 	 *
-	 *	@return string	The filetype.
+	 * @return string	The filetype.
 	 */
 	function getFileType() {
 		return $this->data_array['filetype'];
 	}
 
 	/**
-	 *	getFileData - the filedata of this document.
+	 * getFileData - the filedata of this document.
 	 *
-	 *	@return string	The filedata.
+	 * @return string	The filedata.
 	 */
 	function getFileData() {
 		//
@@ -418,72 +417,72 @@ class Document extends Error {
 		return $this->data_array['filesize'];
 	}
 	/**
-	 *	getUpdated - get the time this document was updated.
+	 * getUpdated - get the time this document was updated.
 	 *
-	 *	@return int	The epoch date this document was updated.
+	 * @return int	The epoch date this document was updated.
 	 */
 	function getUpdated() {
 		return $this->data_array['updatedate'];
 	}
 
 	/**
-	 *	getCreated - get the time this document was created.
+	 * getCreated - get the time this document was created.
 	 *
-	 *	@return int	The epoch date this document was created.
+	 * @return int	The epoch date this document was created.
 	 */
 	function getCreated() {
 		return $this->data_array['createdate'];
 	}
 
 	/**
-	 *	getLocked - get the lock status of this document.
+	 * getLocked - get the lock status of this document.
 	 *
-	 *	@return int	The lock status of this document.
+	 * @return int	The lock status of this document.
 	 */
 	function getLocked() {
 		return $this->data_array['locked'];
 	}
 
 	/**
-	 *	getLockdate - get the lock time of this document.
+	 * getLockdate - get the lock time of this document.
 	 *
-	 *	@return int	The lock time of this document.
+	 * @return int	The lock time of this document.
 	 */
 	function getLockdate() {
 		return $this->data_array['lockdate'];
 	}
 
 	/**
-	 *	getLockedBy - get the user id who set lock on this document.
+	 * getLockedBy - get the user id who set lock on this document.
 	 *
-	 *	@return int	The user id who set lock on this document.
+	 * @return int	The user id who set lock on this document.
 	 */
 	function getLockedBy() {
 		return $this->data_array['locked_by'];
 	}
 
 	/**
-	 *	getReservedBy - get the owner of the reversed status of this document.
+	 * getReservedBy - get the owner of the reversed status of this document.
 	 *
-	 *	@return int	The owner of the reversed status of this document.
+	 * @return int	The owner of the reversed status of this document.
 	 */
 	function getReservedBy() {
 		return $this->data_array['reserved_by'];
 	}
 
 	/**
-	 *	getReserved - get the reversed status of this document.
+	 * getReserved - get the reversed status of this document.
 	 *
-	 *	@return int	The reversed status of this document.
+	 * @return int	The reversed status of this document.
 	 */
 	function getReserved() {
 		return $this->data_array['reserved'];
 	}
 
 	/**
-	 * 	getMonitoredUserEmailAddress - get the email addresses of users who monitor this file
+	 * getMonitoredUserEmailAddress - get the email addresses of users who monitor this file
 	 *
-	 * 	@return	string	The list of emails comma separated
+	 * @return	string	The list of emails comma separated
 	 */
 	function getMonitoredUserEmailAddress() {
 		$result = db_query_params('select users.email from users,docdata_monitored_docman where users.user_id = docdata_monitored_docman.user_id and docdata_monitored_docman.doc_id = $1', array ($this->getID()));
@@ -505,10 +504,10 @@ class Document extends Error {
 	}
 
 	/**
-	 *	isMonitoredBy - get the monitored status of this document for a specific user id.
+	 * isMonitoredBy - get the monitored status of this document for a specific user id.
 	 *
-	 *	@param	int		User ID
-	 *	@return bool	true if monitored by this user
+	 * @param	int	User ID
+	 * @return	boolean	true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
 		if ( $userid == 'ALL' ) {
@@ -526,10 +525,10 @@ class Document extends Error {
 	}
 
 	/**
-	 *	removeMonitoredBy - remove this document for a specific user id for monitoring.
+	 * removeMonitoredBy - remove this document for a specific user id for monitoring.
 	 *
-	 *	@param	int		User ID
-	 *	@return boolean	true if success
+	 * @param	int	User ID
+	 * @return	boolean	true if success
 	 */
 	function removeMonitoredBy($userid) {
 		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id=$1 AND user_id=$2',
@@ -543,10 +542,10 @@ class Document extends Error {
 	}
 
 	/**
-	 *	addMonitoredBy - add this document for a specific user id for monitoring.
+	 * addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
-	 *	@param	int		User ID
-	 *	@return boolean	true if success
+	 * @param	int	User ID
+	 * @return	boolean	true if success
 	 */
 	function addMonitoredBy($userid) {
 		$result = db_query_params('SELECT * FROM docdata_monitored_docman WHERE user_id=$1 AND doc_id=$2',
@@ -565,10 +564,10 @@ class Document extends Error {
 	}
 
 	/**
-	 *  setState - set the stateid of the document.
+	 * setState - set the stateid of the document.
 	 *
-	 *	@param	int	The state id of the doc_states table.
-	 *  @return boolean success.
+	 * @param	int	The state id of the doc_states table.
+	 * @return	boolean	success.
 	 */
 	function setState($stateid) {
 		$res = db_query_params ('UPDATE doc_data SET
@@ -587,55 +586,55 @@ class Document extends Error {
 		return true;
 	}
 
-    /**
-     *  setLock - set the locking status of the document
-     *
-     *  @param  int		The status of the lock
-     *  @param  int		The userid who set the lock
-	 *  @param	time	the epoch time
-     *  @return boolean success
-     */
+	/**
+	 * setLock - set the locking status of the document
+	 *
+	 * @param	int	The status of the lock
+	 * @param	int	The userid who set the lock
+	 * @param	time	the epoch time
+	 * @return	boolean	success
+	 */
     function setLock($stateLock,$userid=NULL,$thistime=0) {
 		$res = db_query_params ('UPDATE doc_data SET
-                                locked=$1,
-                                locked_by=$2,
-                                lockdate=$3
-								WHERE group_id=$4
-								AND docid=$5',
-								array ($stateLock,
-                                    $userid,
-                                    $thistime,
-					       			$this->Group->getID(),
+					locked=$1,
+					locked_by=$2,
+					lockdate=$3
+					WHERE group_id=$4
+					AND docid=$5',
+					array ($stateLock,
+						$userid,
+						$thistime,
+						$this->Group->getID(),
 									$this->getID())
 								);
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(_('Document lock failed').' '.db_error());
 			return false;
 		}
-        $this->data_array['locked'] = $stateLock;
-        $this->data_array['locked_by'] = $userid;
-        $this->data_array['lockdate'] = $thistime;
+		$this->data_array['locked'] = $stateLock;
+		$this->data_array['locked_by'] = $userid;
+		$this->data_array['lockdate'] = $thistime;
 		return true;
 	}
 
-    /**
-     *  setReservedBy - set the reserved status of the document and the owner
-     *
-     *  @param  int The status of the reserved
-     *  @param  int The ID of the owner : by default : noone
-     *  @return boolean success
-     */
-    function setReservedBy($statusReserved,$idReserver=NULL) {
+	/**
+	 * setReservedBy - set the reserved status of the document and the owner
+	 *
+	 * @param	int	The status of the reserved
+	 * @param	int	The ID of the owner : by default : noone
+	 * @return	boolean	success
+	 */
+	function setReservedBy($statusReserved,$idReserver=NULL) {
 		$res = db_query_params ('UPDATE doc_data SET
-                                reserved=$1,
-                                reserved_by=$2
-								WHERE group_id=$3
-								AND docid=$4',
-                                array ($statusReserved,
-                                    $idReserver,
-					       			$this->Group->getID(),
-									$this->getID())
-								);
+					reserved=$1,
+					reserved_by=$2
+					WHERE group_id=$3
+					AND docid=$4',
+					array ($statusReserved,
+						$idReserver,
+						$this->Group->getID(),
+						$this->getID())
+					);
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(_('Document reservation failed').' '.db_error());
 			return false;
@@ -645,49 +644,52 @@ class Document extends Error {
 	}
 
 	/**
-	 *	update - use this function to update an existing entry in the database.
+	 * update - use this function to update an existing entry in the database.
 	 *
-	 *	@param	string	The filename of this document. Can be a URL.
-	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 *	@param	string	The contents of this document.
-	 *	@param	int	The doc_group id of the doc_groups table.
-	 *	@param	string	The title of this document.
-	 *	@param	int	The language id of the supported_languages table.
-	 *	@param	string	The description of this document.
-	 *	@param	int	The state id of the doc_states table.
-	 *	@return	boolean	success.
+	 * @param	string	The filename of this document. Can be a URL.
+	 * @param	string	The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	The contents of this document.
+	 * @param	int	The doc_group id of the doc_groups table.
+	 * @param	string	The title of this document.
+	 * @param	string	The description of this document.
+	 * @param	int	The state id of the doc_states table.
+	 * @return	boolean	success.
 	 */
 	function update($filename,$filetype,$data,$doc_group,$title,$description,$stateid) {
-        global $LUSER;
+		global $LUSER;
+
+		$perm =& $this->Group->getPermission ();
+		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+
+
+		if ($this->getLockedBy() != $LUSER->getID()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
 		}
+
 		if (strlen($description) < 10) {
 			$this->setError(_('Document Description Must Be At Least 10 Characters'));
 			return false;
 		}
 
-        $result = db_query_params('SELECT filename,doc_group from docdata_vw',
-                                array($filename,$doc_group));
+		$result = db_query_params('SELECT filename,doc_group from docdata_vw',
+					array($filename,$doc_group));
 
-        if ($data) {
-            if (!$result || db_numrows($res) > 0) {
-			    $this->setError(_('Document already published in this directory'));
-                return false;
-            }
-        }
-
-		$perm =& $this->Group->getPermission ();
-
-		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
-			$this->setPermissionDeniedError();
-			return false;
+		if ($data) {
+			if (!$result || db_numrows($res) > 0) {
+				$this->setError(_('Document already published in this directory'));
+				return false;
+			}
 		}
-        if ($this->getLockedBy() != $LUSER->getID()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
+
 
 		$res = db_query_params ('UPDATE doc_data SET
 			title=$1,
@@ -697,22 +699,22 @@ class Document extends Error {
 			filetype=$5,
 			filename=$6,
 			updatedate=$7,
-            locked=$8,
-            locked_by=$9
+			locked=$8,
+			locked_by=$9
 			WHERE group_id=$10
 			AND docid=$11',
-					array (htmlspecialchars($title),
-					       htmlspecialchars($description),
-					       $stateid,
-					       $doc_group,
-					       $filetype,
-					       $filename,
-					       time(),
-                           0,
-                           NULL,
-					       $this->Group->getID(),
-					       $this->getID())) ;
-		
+			array (htmlspecialchars($title),
+				htmlspecialchars($description),
+				$stateid,
+				$doc_group,
+				$filetype,
+				$filename,
+				time(),
+				0,
+				NULL,
+				$this->Group->getID(),
+				$this->getID())) ;
+
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(db_error());
 			return false;
@@ -731,31 +733,31 @@ class Document extends Error {
 
 			$res = db_query_params ('UPDATE doc_data SET filesize=$1, data_words=$2 WHERE group_id=$3 AND docid=$4',
 						array (strlen($data),
-						       $kwords,
-						       $this->Group->getID(),
-						       $this->getID())) ;
+							$kwords,
+							$this->Group->getID(),
+							$this->getID())) ;
 
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setOnUpdateError(db_error());
 				return false;
 			}
 
-            switch ($this->Group->getStorageAPI()) {
-            case 'DB':
-                $res = db_query_params ('UPDATE doc_data SET data = $1 where group_id = $2 and docid = $3',
-                        array(base64_encode($data),
-                            $this->Group->getID(),
-                            $this->getID()));
+			switch ($this->Group->getStorageAPI()) {
+			case 'DB':
+				$res = db_query_params ('UPDATE doc_data SET data = $1 where group_id = $2 and docid = $3',
+					array(base64_encode($data),
+						$this->Group->getID(),
+						$this->getID()));
 
-			    if (!$res || db_affected_rows($res) < 1) {
-				    $this->setOnUpdateError(db_error());
-				    return false;
-			    }
-                break;
-            default:
-                $this->setOnUpdateError(_('No Storage API'));
-                return false;
-            }
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setOnUpdateError(db_error());
+					return false;
+				}
+				break;
+			default:
+				$this->setOnUpdateError(_('No Storage API'));
+				return false;
+			}
 		}
 
 		$this->sendNotice(false);
@@ -763,7 +765,9 @@ class Document extends Error {
 	}
 
 	/**
-	 *	sendNotice - Notifies of document submissions
+	 * sendNotice - Notifies of document submissions
+	 *
+	 * @param	boolean	true = new document (default value)
 	 */
 	function sendNotice ($new=true) {
 		$BCC = $this->Group->getDocEmailAddress();
@@ -793,7 +797,9 @@ class Document extends Error {
 	}
 	
 	/**
-	 *	delete - Delete this file
+	 * delete - Delete this file
+	 *
+	 * @return	boolean	success
 	 */
 	function delete() {
 		$perm =& $this->Group->getPermission ();
@@ -810,10 +816,10 @@ class Document extends Error {
 			return false;
 		}
 		
-        switch ($this->Group->getStorageAPI()) {
-        case 'DB':
+		switch ($this->Group->getStorageAPI()) {
+		case 'DB':
 			break;
-        default:
+		default:
 			$this->setError(_('Error Deleting Document: No Storage API'));
 			db_rollback();
 			return false;
