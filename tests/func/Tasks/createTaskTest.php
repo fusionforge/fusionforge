@@ -81,10 +81,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->waitForPageToLoad("30000");
 
 //        $this->switchUser('uadmin');
-        $this->open( ROOT );
-        $this->waitForPageToLoad("30000");
-        $this->click("link=ProjectA");
-        $this->waitForPageToLoad("30000");
+        $this->gotoProject('ProjectA');
 
         $this->click("link=Tasks");
         $this->waitForPageToLoad("30000");
@@ -469,4 +466,10 @@ class CreateTask extends FForge_SeleniumTestCase
     {
     }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

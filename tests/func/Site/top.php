@@ -74,4 +74,10 @@ class Top extends FForge_SeleniumTestCase
     	$this->assertTrue($this->isTextPresent("Rank"));
     }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

@@ -94,4 +94,10 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Log Out"));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

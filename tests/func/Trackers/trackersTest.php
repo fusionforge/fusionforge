@@ -49,12 +49,9 @@ class CreateTracker extends FForge_SeleniumTestCase
 {
 	function testSimpleCreate()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 
 		// Test: Create a simple bug report (Message1/Text1).
-		$this->open( ROOT );
-		$this->click("link=ProjectA");
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Bugs"));
@@ -123,12 +120,9 @@ class CreateTracker extends FForge_SeleniumTestCase
 
 	function testExtraFields()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 
 		// Testing extra-fields
-		$this->open( ROOT );
-		$this->click("link=ProjectA");
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Bugs");
@@ -177,12 +171,9 @@ $this->click("//tr[@id='field-number']/td[4]/a[1]");
 
 	function testCreateAndDeleteNewTracker()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 
 		// Create a new tracker and delete it after.
-		$this->open( ROOT );
-		$this->click("link=ProjectA");
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->click("//a[@href='".URL."tracker/admin/?group_id=6']");
@@ -207,4 +198,10 @@ $this->click("//tr[@id='field-number']/td[4]/a[1]");
 		$this->assertFalse($this->isTextPresent("This is a new tracker"));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

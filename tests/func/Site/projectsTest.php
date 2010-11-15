@@ -52,6 +52,7 @@ class CreateProject extends FForge_SeleniumTestCase
 	// After creation, project is visible on the main page.
 	function testSimpleCreate()
 	{
+		// "Manual" procedure
 		$this->login ('admin');
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
@@ -79,6 +80,20 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+		
+		// Also test our high-level functions (testing the test-suite)
+		$this->createProject ('ProjectB');
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("ProjectB"));
+		$this->click("link=ProjectB");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
+		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+		$this->gotoProject ('ProjectB');
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
+		$this->createAndGoto ('ProjectC');
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectC."));
 	}
 
 	function testCharsCreateTestCase()
@@ -142,4 +157,10 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("submit");
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

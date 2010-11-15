@@ -95,4 +95,10 @@ class UserBlocks extends FForge_SeleniumTestCase
   	}
   }
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

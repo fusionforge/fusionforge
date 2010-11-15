@@ -49,12 +49,9 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 {
 	function testCreateRelation()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 					
 		// Testing extra-fields
-		$this->open( ROOT );
-		$this->click("link=ProjectA");
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Bugs");
@@ -71,4 +68,10 @@ class CreateTrackerRelation extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Depends on"));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

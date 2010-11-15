@@ -28,10 +28,6 @@ class RBAC extends FForge_SeleniumTestCase
 	{
 		$this->init();
 
-		$this->createUser ('staffmember') ;
-
-		$this->open( ROOT ."/projects/projecta" );
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Project Admin: ProjectA"));
@@ -42,11 +38,11 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Role unlinked successfully"));
 
+		$this->createUser ('staffmember') ;
 		$this->logout();
 		$this->assertFalse($this->isTextPresent("ProjectA"));
 
-		$this->open( ROOT ."/projects/projecta" );
-		$this->waitForPageToLoad("30000");
+		$this->gotoProject('ProjectA');
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('staffmember');
 		$this->assertTrue($this->isTextPresent("Project Members"));
@@ -56,8 +52,6 @@ class RBAC extends FForge_SeleniumTestCase
 	{
 		$this->login("admin");
 
-		$this->open( ROOT );
-		$this->waitForPageToLoad("30000");
 		$this->click("link=Site Admin");
 		$this->waitForPageToLoad("30000");
 

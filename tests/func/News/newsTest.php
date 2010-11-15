@@ -49,7 +49,7 @@ class CreateNews extends FForge_SeleniumTestCase
 {
 	function testMyTestCase()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 
 		// Create a simple news.
 		$this->click("link=News");
@@ -138,7 +138,7 @@ class CreateNews extends FForge_SeleniumTestCase
 	 */
 	function testAcBug4100()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 
 		// Create a simple news.
 		$this->click("link=News");
@@ -173,7 +173,7 @@ class CreateNews extends FForge_SeleniumTestCase
 	 */
 	function skiptestPreventMultiplePost()
 	{
-		$this->createProject('ProjectA');
+		$this->init();
 
 		// Create a simple news.
 		$this->click("link=News");
@@ -194,4 +194,10 @@ class CreateNews extends FForge_SeleniumTestCase
 	}
 	
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

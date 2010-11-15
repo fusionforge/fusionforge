@@ -106,7 +106,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->init();
 		$this->logout();
 
-		$this->open("/projects/projecta/");
+		$this->gotoProject('ProjectA');
 		$this->click("link=Forums");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=open-discussion");
@@ -158,4 +158,10 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Error: a mailing list with the same email address already exists"));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

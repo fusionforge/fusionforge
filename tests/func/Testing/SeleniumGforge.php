@@ -78,11 +78,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 //	}
 
 	protected function init() {
-		$this->createProject('ProjectA');
-
-		$this->open( ROOT );
-		$this->click("link=ProjectA");
-		$this->waitForPageToLoad("30000");
+		$this->createAndGoto('ProjectA');
 	}
 
 	protected function login($username)
@@ -161,24 +157,12 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$saved_user = $this->logged_in ;
 		$this->switchUser ($user) ;
 
-		if ($user == 'admin') {
-			$this->click("link=Site Admin");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Pending projects (new project approval)");
-			$this->waitForPageToLoad("30000");
-		} else {
-			$this->open( ROOT . '/admin/approve-pending.php') ;
-			$this->waitForPageToLoad("30000");
-		}
+		$this->open( ROOT . '/admin/approve-pending.php') ;
+		$this->waitForPageToLoad("30000");
 		$this->click("document.forms['approve.$unix_name'].submit");
 		$this->waitForPageToLoad("60000");
-		$this->click("link=Home");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent($name));
-		$this->click("link=$name");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("This is the public description for $name."));
-		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+
+		$this->assertTrue($this->isTextPresent("Approving Project: $unix_name"));
 
 		$this->switchUser ($saved_user) ;
 	}
@@ -193,13 +177,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->registerProject ($name, 'admin') ;
 			$this->approveProject ($name, 'admin') ;
 		}
-		$this->click("link=Home");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent($name));
-		$this->click("link=$name");
-		$this->waitForPageToLoad("30000");
 	}
 	
+	protected function createAndGoto($project) {
+		$this->createProject($project);
+		$this->gotoProject($project);
+	}
+
 	protected function createUser ($login)
 	{
 		$this->open( ROOT );
@@ -240,5 +224,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("This is the public description for $project."));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

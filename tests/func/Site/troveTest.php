@@ -71,4 +71,10 @@ class Trove extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("Microsoft"));
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
