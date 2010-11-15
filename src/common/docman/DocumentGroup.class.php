@@ -153,8 +153,8 @@ class DocumentGroup extends Error {
 	/**
 	 * delete - delete a DocumentGroup.
 	 *          delete is recursive and permanent
-	 * @param integer Document Group Id, integer Project Group Id
-	 * @return boolean
+	 * @param	int		Document Group Id, integer Project Group Id
+	 * @return	boolean	success
 	 */
 	function delete($doc_groupid,$project_group_id) {
 		$perm =& $this->Group->getPermission ();
@@ -194,7 +194,7 @@ class DocumentGroup extends Error {
 	 *	fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
 	 *	@param	int		ID of the doc_group.
-	 *	@return boolean.
+	 *	@return boolean	success
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1',
@@ -311,9 +311,10 @@ class DocumentGroup extends Error {
 	* A group has associated documents if and only if there are documents associated to this
 	* group or to any of its childs
 	*
-	* @param array	Array of nested groups information, fetched from DocumentGroupFactory class
-	* @param object	The DocumentFactory object
-	* @param int	(optional) State of the documents
+	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
+	* @param	object	The DocumentFactory object
+	* @param	int		(optional) State of the documents
+	* @return	boolean	success
 	*/
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {
 		$doc_group_id = $this->getID();
@@ -355,8 +356,9 @@ class DocumentGroup extends Error {
 	/**
 	* hasSubgroup - Checks if this group has a specified subgroup associated to it
 	*
-	* @param array Array of nested groups information, fetched from DocumentGroupFactory class
-	* @param int	ID of the subgroup
+	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
+	* @param	int		ID of the subgroup
+	* @return	boolean	success
 	*/
 	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
 		$doc_group_id = $this->getID();
@@ -375,14 +377,14 @@ class DocumentGroup extends Error {
 				}
 			}
 		}
-		
 		return false;
 	}
 
 	/**
 	 * setStateID - set the state id of this document group
 	 *
-	 * @param int State ID
+	 * @param	int		State ID
+	 * @return	boolean success
 	 */
 	function setStateID($stateid) {
 		$res = db_query_params ('UPDATE doc_groups SET stateid=$1

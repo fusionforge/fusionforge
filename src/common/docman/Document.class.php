@@ -43,6 +43,8 @@ class Document extends Error {
 	 *
 	 * @var	 object  $Group.
 	 */
+	var	$Group;
+
 	/**
 	 * The Search engine path.
 	 *
@@ -103,9 +105,8 @@ class Document extends Error {
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
 	 *	@param	string	The contents of this document.
-	 *	@param	int	The doc_group id of the doc_groups table.
+	 *	@param	int		The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
-	 *	@param	int	The language id of the supported_languages table.
 	 *	@param	string	The description of this document.
 	 *	@return	boolean	success.
 	 */
@@ -208,7 +209,7 @@ class Document extends Error {
 	/**
 	 *  fetchData() - re-fetch the data for this document from the database.
 	 *
-	 *  @param  int	 The document id.
+	 *  @param  int		The document id.
 	 *	@return	boolean	success
 	 */
 	function fetchData($docid) {
@@ -528,7 +529,7 @@ class Document extends Error {
 	 *	removeMonitoredBy - remove this document for a specific user id for monitoring.
 	 *
 	 *	@param	int		User ID
-	 *	@return bool	true if success
+	 *	@return boolean	true if success
 	 */
 	function removeMonitoredBy($userid) {
 		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id=$1 AND user_id=$2',
@@ -545,7 +546,7 @@ class Document extends Error {
 	 *	addMonitoredBy - add this document for a specific user id for monitoring.
 	 *
 	 *	@param	int		User ID
-	 *	@return bool	true if success
+	 *	@return boolean	true if success
 	 */
 	function addMonitoredBy($userid) {
 		$result = db_query_params('SELECT * FROM docdata_monitored_docman WHERE user_id=$1 AND doc_id=$2',
@@ -589,8 +590,9 @@ class Document extends Error {
     /**
      *  setLock - set the locking status of the document
      *
-     *  @param  int The status of the lock
-     *  @param  int The userid who set the lock
+     *  @param  int		The status of the lock
+     *  @param  int		The userid who set the lock
+	 *  @param	time	the epoch time
      *  @return boolean success
      */
     function setLock($stateLock,$userid=NULL,$thistime=0) {
@@ -610,7 +612,6 @@ class Document extends Error {
 			$this->setOnUpdateError(_('Document lock failed').' '.db_error());
 			return false;
 		}
-		$this->sendNotice(false);
         $this->data_array['locked'] = $stateLock;
         $this->data_array['locked_by'] = $userid;
         $this->data_array['lockdate'] = $thistime;
