@@ -212,7 +212,7 @@ hr {
     margin: 0;
 }
 
-.quicknews ul li:hover{
+.quicknews ul li:hover {
     background-color:blue;
 }
 
@@ -240,7 +240,7 @@ hr {
   transition-duration: 0.3s;
 }
 
-#searchBox a:hover{
+#searchBox a:hover {
     text-decoration: none; 
     color: #7eaaee; 
     font-weight: bold;
@@ -282,7 +282,7 @@ hr {
     color: white;
 }
 
-#quicknav{
+#quicknav {
     margin-left: 7px;
     width: 180px;
 }
@@ -828,4 +828,3 @@ a.topTabSelected:hover {
 .footer img {
     float: right;
 }
-
