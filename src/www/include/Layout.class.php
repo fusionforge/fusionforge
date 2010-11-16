@@ -3,6 +3,8 @@
  * Base layout class.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2010 - Alain Peyrat
+ * Copyright 2010 - Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -248,11 +250,11 @@ class Layout extends Error {
 	 */
 	function headerStart($params) {
 		$this->headerHTMLDeclaration();
-		?>		
+		?>
 			<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<?php 
-			$this->headerTitle($params);
+		<?php
+		$this->headerTitle($params);
 		$this->headerFavIcon();
 		$this->headerRSS();
 		$this->headerSearch();
@@ -260,7 +262,7 @@ class Layout extends Error {
 		$this->headerJS(); 
 		?>
 			</head>
-			<?php 
+		<?php
 	} 
 
 	/**
@@ -286,7 +288,7 @@ class Layout extends Error {
 		} else {
 			echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n";
 		} 
-		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' 
+		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'
 			. _('en') . '" lang="' . _('en') . '">'."\n";
 	}
 
@@ -301,7 +303,7 @@ class Layout extends Error {
 
 
 	/**
-	 * headerFavIcon() - creates the favicon <link> headers 
+	 * headerFavIcon() - creates the favicon <link> headers.
 	 *
 	 */
 	function headerFavIcon() {
@@ -309,7 +311,7 @@ class Layout extends Error {
 	}
 
 	/**
-	 * headerRSS() - creates the RSS <link> headers 
+	 * headerRSS() - creates the RSS <link> headers.
 	 *
 	 */
 	function headerRSS() {
@@ -317,7 +319,7 @@ class Layout extends Error {
 	}
 
 	/**
-	 * headerSearch() - creates the search <link> header 
+	 * headerSearch() - creates the search <link> header.
 	 *
 	 */
 	function headerSearch() {
@@ -452,7 +454,6 @@ class Layout extends Error {
 
 			<!-- end main body row -->
 
-
 			</td>
 			<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
@@ -485,10 +486,9 @@ class Layout extends Error {
 			<?php echo $this->navigation->getPoweredBy(); ?>
 			</div>
 
-			<?php echo $this->navigation->getShowSource(); ?> 
+			<?php echo $this->navigation->getShowSource(); ?>
 
 			</body>
-			</div>
 			</html>
 			<?php
 
@@ -499,11 +499,10 @@ class Layout extends Error {
 	}
 
 	/**
-	 * boxTop() - Top HTML box
+	 * boxTop() - Top HTML box.
 	 *
-	 * @param   string  Box title
-	 * @param   bool	Whether to echo or return the results
-	 * @param   string  The box background color
+	 * @param	string	Box title
+	 * @return	string	the html code
 	 */
 	function boxTop($title) {
 		return '
@@ -525,10 +524,10 @@ class Layout extends Error {
 	}
 
 	/**
-	 * boxMiddle() - Middle HTML box
+	 * boxMiddle() - Middle HTML box.
 	 *
-	 * @param   string  Box title
-	 * @param   string  The box background color
+	 * @param	string	Box title
+	 * @return	string	The html code
 	 */
 	function boxMiddle($title) {
 		return '
@@ -544,9 +543,9 @@ class Layout extends Error {
 	}
 
 	/**
-	 * boxBottom() - Bottom HTML box
+	 * boxBottom() - Bottom HTML box.
 	 *
-	 * @param   bool	Whether to echo or return the results
+	 * @return	string	the html code
 	 */
 	function boxBottom() {
 		return '
@@ -561,9 +560,10 @@ class Layout extends Error {
 	}
 
 	/**
-	 * boxGetAltRowStyle() - Get an alternating row style for tables
+	 * boxGetAltRowStyle() - Get an alternating row style for tables.
 	 *
-	 * @param			   int			 Row number
+	 * @param	int	Row number
+	 * @return	string	the class code
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
@@ -576,42 +576,49 @@ class Layout extends Error {
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
-	 * @param	   array   The array of titles
-	 * @param	   array   The array of title links
+	 * @param	array	The array of titles
+	 * @param	array	The array of title links
+	 * @param	string	The css classes to add (optional)
+	 * @param	string	The id of the table (needed by sortable for example)
+	 * @param	array	specific class for th column
+	 * @return	string	the html code
 	 */
-	function listTableTop ($title_arr,$links_arr=false,$selected=false) {
-		$return = '
-			<table cellspacing="0" cellpadding="0" width="100%" border="0">
-			<tr class="align-center">
-			<!--		<td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-grad.png)"><img src="'.$this->imgbaseurl.'box-topleft.png" width="10" height="75" alt="" /></td> -->
-			<td style="background:url('.$this->imgbaseurl.'box-grad.png)">
-			<table width="100%" border="0" cellspacing="1" cellpadding="2" >
-			<tr class="tableheading">';
-		$count=count($title_arr);
-		if ($links_arr) {
-			for ($i=0; $i<$count; $i++) {
-				$return .= '<td>'.util_make_link ($links_arr[$i],$title_arr[$i],array('class'=>'sortbutton')).'</td>';
-			}
+	function listTableTop ($titleArray, $linksArray=false, $class='', $id='', $thClassArray=array()) {
+		$args = '';
+		if ($class) {
+			$args .= ' class="listing '.$class.'"';
 		} else {
-			for ($i=0; $i<$count; $i++) {
-				$return .= '
-					<td>'.$title_arr[$i].'</td>';
-			}
+			$args .= ' class="listing full"';
 		}
-		return $return.'</tr>';
+		if ($id) {
+			$args .= ' id="'.$id.'"';
+		}
+		$return = "\n".
+			'<table'.$args.'>'.
+			'<thead><tr>';
+
+		$count=count($titleArray);
+		for ($i=0; $i<$count; $i++) {
+			$th = '';
+			if ($thClassArray && $thClassArray[$i]) {
+				$th .= ' class="'.$thClassArray[$i].'"';
+			}
+			$cell = $titleArray[$i];
+			if ($linksArray) {
+				$cell = util_make_link($linksArray[$i],$titleArray[$i]);
+			}
+			$return .= "\n".' <th'.$th.'>'.$cell.'</th>';
+		}
+		return $return .= "\n".'</tr></thead>'."\n".'<tbody>';
 	}
 
 	function listTableBottom() {
-		return '</table></td>
-			<!-- <td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-grad.png)"><img src="'.$this->imgbaseurl.'box-topright.png" width="10" height="75" alt="" /></td> -->
-			</tr></table>';
+		return '</tbody>'."\n".'</table>';
 	}
 
 	function outerTabs($params) {
 		$menu = $this->navigation->getSiteMenu();
-
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], false, $menu['selected'], '');
-
 	}
 
 	/**
@@ -623,12 +630,12 @@ class Layout extends Error {
 			return;
 		} else {
 			// get all projects that the user belongs to
-			$groups = session_get_user()->getGroups () ;
+			$groups = session_get_user()->getGroups();
 
-			if (count ($groups) < 1) {
+			if (count($groups) < 1) {
 				return;
 			} else {
-				sortProjectList ($groups) ;
+				sortProjectList($groups);
 
 				echo '
 					<form id="quicknavform" name="quicknavform" action=""><div>
@@ -636,7 +643,7 @@ class Layout extends Error {
 					<option value="">'._('Quick Jump To...').'</option>';
 
 				foreach ($groups as $g) {
-					$group_id = $g->getID() ;
+					$group_id = $g->getID();
 					$menu =& $this->navigation->getProjectMenu($group_id);
 
 					echo '
@@ -663,16 +670,15 @@ class Layout extends Error {
 	}
 
 	/**
-	 *	projectTabs() - Prints out the project tabs, contained here in case
-	 *		we want to allow it to be overriden
+	 * projectTabs() - Prints out the project tabs, contained here in case
+	 * we want to allow it to be overriden.
 	 *
-	 *	@param	string	Is the tab currently selected
-	 *	@param	string	Is the group we should look up get title info
+	 * @param	string	Is the tab currently selected
+	 * @param	string	Is the group we should look up get title info
 	 */
 	function projectTabs($toptab, $group_id) {
 		// get group info using the common result set
 		$menu =& $this->navigation->getProjectMenu($group_id, $toptab);
-
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], true, $menu['selected'], 'white');
 	}
 
@@ -812,8 +818,8 @@ class Layout extends Error {
 	/**
 	 * printSubMenu() - Takes two array of titles and links and builds the contents of a menu.
 	 *
-	 * @param	   array   The array of titles.
-	 * @param	   array   The array of title links.
+	 * @param	array	The array of titles.
+	 * @param	array	The array of title links.
 	 * @return	string	Html to build a submenu.
 	 */
 	function printSubMenu ($title_arr,$links_arr) {
@@ -822,23 +828,23 @@ class Layout extends Error {
 
 		$return = '';
 		for ($i=0; $i<$count; $i++) {
-			$return .= util_make_link ($links_arr[$i],$title_arr[$i]).' | ';
+			$return .= util_make_link($links_arr[$i],$title_arr[$i]).' | ';
 		}
-		$return .= util_make_link ($links_arr[$i],$title_arr[$i]);
+		$return .= util_make_link($links_arr[$i],$title_arr[$i]);
 		return $return;
 	}
 
 	/**
 	 * subMenu() - Takes two array of titles and links and build a menu.
 	 *
-	 * @param	   array   The array of titles.
-	 * @param	   array   The array of title links.
+	 * @param	array	The array of titles.
+	 * @param	array	The array of title links.
 	 * @return	string	Html to build a submenu.
 	 */
 	function subMenu ($title_arr,$links_arr) {
-		$return  = $this->beginSubMenu () ;
-		$return .= $this->printSubMenu ($title_arr,$links_arr) ;
-		$return .= $this->endSubMenu () ;
+		$return  = $this->beginSubMenu() ;
+		$return .= $this->printSubMenu($title_arr,$links_arr) ;
+		$return .= $this->endSubMenu() ;
 		return $return;
 	}
 
@@ -847,12 +853,12 @@ class Layout extends Error {
 	 *
 	 * @param	string	the row attributes
 	 * @param	array	the array of cell data, each element is an array,
-	 *				  	the first item being the text,
-	 *					the subsequent items are attributes (dont include
-	 *					the bgcolor for the title here, that will be
-	 *					handled by $istitle
-	 * @param	boolean is this row part of the title ?
-	 *
+	 *				the first item being the text,
+	 *				the subsequent items are attributes (dont include
+	 *				the bgcolor for the title here, that will be
+	 *				handled by $istitle
+	 * @param	boolean	is this row part of the title ?
+	 * @return	string	the html code
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {
 		$return= '
@@ -953,7 +959,7 @@ class Layout extends Error {
 		foreach ($buttons as $b => $v) {
 			$btns[] = '<input type="submit" name="'.$b.'" value="'.$v.'" />'."\n";
 		}
-		$btn = join('	 	&nbsp;&nbsp;&nbsp;'."\n	 	", $btns);	 	
+		$btn = join('	 	&nbsp;&nbsp;&nbsp;'."\n	 	", $btns);
 
 		return '
 			<div id="infobox" style="margin-top: 15%; margin-left: 15%; margin-right: 15%; text-align: center;">
@@ -1130,6 +1136,9 @@ class Layout extends Error {
 		return $return;
 	}
 
+	/**
+	 * @todo use listTableTop and make this function deprecated ?
+	 */
 	function html_table_top($cols, $summary = '', $class = '', $extra_params = '') {
 		$return = '<table summary="' . $summary . '" ';
 		if ($class) {
@@ -1222,6 +1231,7 @@ class Layout extends Error {
 		$string = str_replace(" ", $space, $string);
 		return $string;
 	}
+
 	function widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type) {
 		$element_id = 'widget_'. $widget->id .'-'. $widget->getInstanceId();
 		echo '<div class="widget" id="'. $element_id .'">';
@@ -1270,14 +1280,15 @@ class Layout extends Error {
 		}
 		echo '</div>';
 	}
+
 	function _getTogglePlusForWidgets() {
 		return 'ic/toggle_plus.png';
 	}
+
 	function _getToggleMinusForWidgets() {
 		return 'ic/toggle_minus.png';
 	}
-}	
-
+}
 
 // Local Variables:
 // mode: php
