@@ -106,6 +106,7 @@ switch ($action) {
 
 html_use_tooltips();
 use_javascript('scripts/DocManController.js');
+use_javascript('/js/sortable.js');
 
 $title = _('Document Manager: Display Document');
 
