@@ -26,41 +26,37 @@
 
 class Parsedata {
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param  string
-	 *	@return true
+	 * @param	string
+	 * @return	boolean true
 	 */
 	 var $parsers;
 	 var $p_path = "";
-	 
-	function Parsedata($ppath="") 
-	{
+
+	function Parsedata($ppath="") {
 		$this->p_path = $ppath;
 		$p = get_parser_list ($ppath);
 		$this->parsers = $p;
 		return true;
 	}
-	function get_parse_data ($data, $title, $description, $filetype)
-	{
+
+	function get_parse_data ($data, $title, $description, $filetype) {
 		$parser = "";
 		$rep = "";
 		$data1 = $data;
-		if (array_key_exists($filetype, $this->parsers))
-		{ 
+		if (array_key_exists($filetype, $this->parsers)) {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
 			$filename = tempnam("/tmp/","tmp");
 			$fp = fopen ($filename, "w");
 			fwrite ($fp, $data1);
 			fclose ($fp);
-			
 			$cmd = "php -f $parser $filename";
 			$rep = shell_exec ($cmd);
 			if ( file_exists ($filename ) ) {
 				unlink($filename);
 			}
-			
 		}
 		// always parse titre and description
 		$data2 = utf8_decode("$title $description");
@@ -75,28 +71,22 @@ class Parsedata {
 		// dont need to unlink the filename because parser_text already remove it
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
-	
-	
-	function print_debug ($text)
-	{
+
+	function print_debug ($text) 
 		echo "$text \n";
 		ob_flush();
 	}
 }
 
-function get_parser_list ($parser_path)
-{
+function get_parser_list ($parser_path) {
 	$file = $parser_path."parser_list.txt";
 	$rep = array();
 	$fp = fopen ($file, "r");
-	if ($fp)
-	{
+	if ($fp) {
 		$buff = fread($fp, 2048);
 		$a1 = explode ("\n", $buff);
-		foreach ($a1 as $a)
-		{
-			if (trim($a) != "" && substr($a, 0,1) != "#")
-			{
+		foreach ($a1 as $a) {
+			if (trim($a) != "" && substr($a, 0,1) != "#") {
 				$a2 = explode ("|", $a);
 				$rep[$a2[0]] = $a2[1];
 			}

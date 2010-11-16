@@ -33,25 +33,25 @@ class DocumentGroup extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var		object	$Group.
+	 * @var	object	$Group.
 	 */
 	var $Group; //object
 
 	/**
 	 * Array of data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  DocumentGroup - constructor.
+	 * DocumentGroup - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing doc_group.
+	 * Use this constructor if you are modifying an existing doc_group.
 	 *
-	 *	@param	object	Group object.
-	 *  @param	array	(all fields from doc_groups) OR doc_group from database.
-	 *  @return boolean	success.
+	 * @param	object	Group object.
+	 * @param	array	(all fields from doc_groups) OR doc_group from database.
+	 * @return boolean	success.
 	 */
 	function DocumentGroup(&$Group, $data=false) {
 		$this->Error();
@@ -86,10 +86,10 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 * create - create a new item in the database.
 	 *
-	 *	@param	string	Item name.
-	 *  @return id on success / false on failure.
+	 * @param	string	Item name.
+	 * @return	boolean	on success / false on failure.
 	 */
 	function create($name,$parent_doc_group=0) {
 		//
@@ -153,7 +153,7 @@ class DocumentGroup extends Error {
 	/**
 	 * delete - delete a DocumentGroup.
 	 *          delete is recursive and permanent
-	 * @param	int		Document Group Id, integer Project Group Id
+	 * @param	int	Document Group Id, integer Project Group Id
 	 * @return	boolean	success
 	 */
 	function delete($doc_groupid,$project_group_id) {
@@ -191,10 +191,10 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this DocumentGroup from the database.
+	 * fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
-	 *	@param	int		ID of the doc_group.
-	 *	@return boolean	success
+	 * @param	int	ID of the doc_group.
+	 * @return	boolean	success
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1',
@@ -209,55 +209,55 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group Object this DocumentGroup is associated with.
+	 * getGroup - get the Group Object this DocumentGroup is associated with.
 	 *
-	 *	@return Object Group.
+	 * @return Object Group.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID - get this DocumentGroup's ID.
+	 * getID - get this DocumentGroup's ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['doc_group'];
 	}
 	
 	/**
-	 *	getID - get parent DocumentGroup's id.
+	 * getID - get parent DocumentGroup's id.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getParentID() {
 		return $this->data_array['parent_doc_group'];
 	}
 
 	/**
-	 *	getName - get the name.
+	 * getName - get the name.
 	 *
-	 *	@return	String	The name.
+	 * @return	String	The name.
 	 */
 	function getName() {
 		return $this->data_array['groupname'];
 	}
 
 	/**
-	 *	getState - get the state id.
+	 * getState - get the state id.
 	 *
-	 *	@return	Int	The state id.
+	 * @return	Int	The state id.
 	 */
 	function getState() {
 		return $this->data_array['stateid'];
 	}
 
 	/**
-	 *  update - update a DocumentGroup.
+	 * update - update a DocumentGroup.
 	 *
-	 *  @param	string	Name of the category.
-	 *  @return boolean.
+	 * @param	string	Name of the category.
+	 * @return boolean.
 	 */
 	function update($name,$parent_doc_group) {
 		$perm =& $this->Group->getPermission ();
@@ -313,7 +313,7 @@ class DocumentGroup extends Error {
 	*
 	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
 	* @param	object	The DocumentFactory object
-	* @param	int		(optional) State of the documents
+	* @param	int	(optional) State of the documents
 	* @return	boolean	success
 	*/
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {

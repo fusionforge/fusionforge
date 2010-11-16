@@ -27,31 +27,31 @@
  */
 
 /*
-	Document Groups
+ Document Groups
 */
 
 require_once $gfcommon.'include/Error.class.php';
 
 class DocumentGroupFactory extends Error {
 	/**
-	 * This variable holds the document groups
+	 * This variable holds the document groups.
 	 */
 	var $flat_groups;
 
 	/**
-	 * This variable holds the document groups for reading them in nested form
+	 * This variable holds the document groups for reading them in nested form.
 	 */
 	var $nested_groups;
 
 	/**
-	 * The Group object
+	 * The Group object.
 	 */
 	var $Group;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function DocumentGroupFactory(&$Group) {
 		$this->Error();
@@ -70,10 +70,10 @@ class DocumentGroupFactory extends Error {
 	}
 
 	/**
-	 *	getNested - Return an array of DocumentGroup objects arranged for nested views.
+	 * getNested - Return an array of DocumentGroup objects arranged for nested views.
 	 *
-	 *	@param int		The stateid of DocumentGroup
-	 *	@return	array	The array of DocumentGroup.
+	 * @param	int	The stateid of DocumentGroup.
+	 * @return	array	The array of DocumentGroup.
 	 */
 	function &getNested($stateid=1) {
 		if ($this->nested_groups) {
@@ -81,7 +81,7 @@ class DocumentGroupFactory extends Error {
 		}
 		
 		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-					   array ($this->Group->getID(),$stateid));
+						array ($this->Group->getID(),$stateid));
 		$rows = db_numrows($result);
 		
 		if (!$result) {
@@ -97,25 +97,24 @@ class DocumentGroupFactory extends Error {
 		$count = count($this->flat_groups);
 		for ($i=0; $i < $count; $i++) {
 			$this->nested_groups["".$this->flat_groups[$i]->getParentID()][] =& $this->flat_groups[$i];
-			
 		}
 
 		return $this->nested_groups;
 	}
 
 	/**
-	 *	getDocumentGroups - Return an array of DocumentGroup objects.
+	 * getDocumentGroups - Return an array of DocumentGroup objects.
 	 *
-	 *	@param int		The stateid of DocumentGroups
-	 *	@return	array	The array of DocumentGroup.
+	 * @param	int	The stateid of DocumentGroups
+	 * @return	array	The array of DocumentGroup.
 	 */
 	function &getDocumentGroups($stateid=1) {
 		if ($this->flat_groups) {
 			return $this->flat_groups;
 		}
-		
+
 		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-					   array ($this->Group->getID(),$stateid)) ;
+						array ($this->Group->getID(),$stateid)) ;
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
@@ -126,7 +125,7 @@ class DocumentGroupFactory extends Error {
 				$this->flat_groups[] = new DocumentGroup($this->Group, $arr);
 			}
 		}
-		
+
 		return $this->flat_groups;
 	}
 }

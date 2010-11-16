@@ -13,7 +13,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -33,25 +33,26 @@ class DocumentFactory extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group.
+	 * @var	object	$Group.
 	 */
 	var $Group;
 
 	/**
 	 * The Documents dictionary.
 	 *
-	 * @var	 array	Contains doc_group_id as key and the array of documents associated to that id. 
+	 * @var	array	Contains doc_group_id as key and the array of documents associated to that id. 
 	 */
 	var $Documents;
+
 	var $stateid;
 	var $docgroupid;
 	var $sort='group_name, title';
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	The Group object to which this DocumentFactory is associated.
-	 *	@return	boolean	success.
+	 * @param	object	The Group object to which this DocumentFactory is associated.
+	 * @return	boolean	success.
 	 */
 	function DocumentFactory(&$Group) {
 		$this->Error();
@@ -59,55 +60,56 @@ class DocumentFactory extends Error {
 			$this->setError(_('ProjectGroup:: No Valid Group Object'));
 			return false;
 		}
+
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
 			return false;
 		}
-		$this->Group =& $Group;
 
+		$this->Group =& $Group;
 		return true;
 	}
 
 	/**
-	 *	getGroup - get the Group object this DocumentFactory is associated with.
+	 * getGroup - get the Group object this DocumentFactory is associated with.
 	 *
-	 *	@return object	the Group object.
+	 * @return	object	the Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	setStateID - call this before getDocuments() if you want to limit to a specific state.
+	 * setStateID - call this before getDocuments() if you want to limit to a specific state.
 	 *
-	 *	@param	int	The stateid from the doc_states table.
+	 * @param	int	The stateid from the doc_states table.
 	 */
 	function setStateID($stateid) {
 		$this->stateid=$stateid;
 	}
 
 	/**
-	 *	setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
+	 * setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
 	 *
-	 *	@param	int	The doc_group from the doc_groups table.
+	 * @param	int	The doc_group from the doc_groups table.
 	 */
 	function setDocGroupID($docgroupid) {
 		$this->docgroupid=$docgroupid;
 	}
 
 	/**
-	 *	setSort - call this before getDocuments() if you want to control the sorting.
+	 * setSort - call this before getDocuments() if you want to control the sorting.
 	 *
-	 *	@param	string	The name of the field to sort on.
+	 * @param	string	The name of the field to sort on.
 	 */
 	function setSort($sort) {
 		$this->sort=$sort;
 	}
 
 	/**
-	 *	getDocuments - returns an array of Document objects.
+	 * getDocuments - returns an array of Document objects.
 	 *
-	 *	@return	array	Document objects.
+	 * @return	array	Document objects.
 	 */
 	function &getDocuments() {
 		if (!$this->Documents) {
@@ -155,13 +157,13 @@ class DocumentFactory extends Error {
 						$valid = false;
 					}
 				}
-				
+
 				if ($valid) {
 					$return[] =& $doc;
 				}
 			}
 		}
-		
+
 		if (count($return) == 0) {
 			$this->setError(_('No Documents Found'));
 			$return = NULL;
@@ -170,7 +172,7 @@ class DocumentFactory extends Error {
 
 		return $return;
 	}
-	
+
 	/**
 	 * getFromDB - Retrieve documents from database.
 	 */
@@ -191,7 +193,7 @@ class DocumentFactory extends Error {
 			$this->Documents[$doc_group_id][] = new Document($this->Group, $arr['docid'], $arr);
 		}
 	}
-	
+
 	/**
 	 * getStates - Return an array of states that have documents associated to them
 	 */
