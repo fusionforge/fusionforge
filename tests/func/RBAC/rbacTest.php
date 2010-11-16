@@ -42,7 +42,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->logout();
 		$this->assertFalse($this->isTextPresent("ProjectA"));
 
-		$this->gotoProject('ProjectA');
+		$this->open( ROOT . '/projects/projecta') ;
+		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('staffmember');
 		$this->assertTrue($this->isTextPresent("Project Members"));
