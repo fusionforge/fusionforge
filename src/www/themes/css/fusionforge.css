@@ -2,6 +2,7 @@
  * Common stylesheet for *all* FusionForge themes
  *
  * Copyright 2009 Matthieu Faure // Open-s.com
+ * Copyright 2010 Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -35,181 +36,180 @@
 */
 
 /* From old gforge-compat */
-.altrowstyleeven {
+.altrowstyleeven,
+.even {
 	background-color: #EAEAEA;
-	font-weight: normal
+	font-weight: normal;
 }
 
-.altrowstyleodd {
+.altrowstyleodd,
+.odd {
 	background-color: #E0E0E0;
-	font-weight: normal
+	font-weight: normal;
 }
 
 .error {
 	font-size: medium;
 	font-weight: bold;
-	text-align: center
+	text-align: center;
 }
 
 .feedback {
 	font-size: medium;
 	text-align: center;
-	text-decoration: none
+	text-decoration: none;
 }
 
 .important {
-	font-weight: bold
+	font-weight: bold;
 }
 
 .multitablerowtitle {
-	background-color: #DAD5D7
+	background-color: #DAD5D7;
 }
 
 .next {
 	font-family: arial,helvetica, sans-serif;
 	font-size: small;
-	font-weight: bold
+	font-weight: bold;
 }
 
 .prev {
 	font-family: arial,helvetica, sans-serif;
 	font-size: small;
-	font-weight: bold
+	font-weight: bold;
 }
 
 .priority1 {
-	background-color: #dadada
+	background-color: #dadada;
 }
 
 .priority2 {
-	background-color: #dacaca
+	background-color: #dacaca;
 }
 
 .priority3 {
-	background-color: #dababa
+	background-color: #dababa;
 }
 
 .priority4 {
-	background-color: #daaaaa
+	background-color: #daaaaa;
 }
 
 .priority5 {
-	background-color: #da8a8a
+	background-color: #da8a8a;
 }
 
 .requiredfield {
 	color: red;
-	font-weight: bold
+	font-weight: bold;
 }
 
 .tabberlive {
-	margin-top: 1em
+	margin-top: 1em;
 }
 
 .tabberlive .tabbertab {
 	border: 1px solid #aaa;
 	border-top: 0;
-	padding: 5px
+	padding: 5px;
 }
 
 .tabberlive .tabbertab h2 {
-	display: none
+	display: none;
 }
 
 .tabberlive .tabbertab h3 {
-	display: none
+	display: none;
 }
 
 .tabberlive .tabbertabhide {
-	display: none
+	display: none;
 }
 
 .tabberlive#tab2 .tabbertab {
 	height: 200px;
-	overflow: auto
+	overflow: auto;
 }
 
 .tablecontent {
 	background-color: #eeeeee;
-	font-size: 13px
+	font-size: 13px;
 }
 
 .tablegetmore {
-	background-color: #EAEAEA
+	background-color: #EAEAEA;
 }
 
 .tableheading {
 	background-color: #D0D0D0;
 	font-weight: bold;
-	text-align: center
+	text-align: center;
 }
 
 .titlebar {
 	color: #FFFFFF;
 	font-size: 13px;
-	text-decoration: none
+	text-decoration: none;
 }
 
 .up {
 	font-size: small;
 	font-weight: bold;
-	color: #009900
+	color: #009900;
 }
 
 .down {
 	font-size: small;
-	font-weight: bold
+	font-weight: bold;
 }
 
 .veryimportant {
 	color: red;
 	font-size: large;
 	font-weight: bold;
-	text-align: center
+	text-align: center;
 }
 
 .warning {
-	text-decoration: none
+	text-decoration: none;
 }
 
-td.footer1 {
-	background-color: #E0E0E0
-}
-
+td.footer1,
 td.footer2 {
-	background-color: #E0E0E0
+	background-color: #E0E0E0;
 }
 
 td.footer3 {
-	background-color: #ffffff
+	background-color: #ffffff;
 }
 
 td.notseltab {
-	background-color: #909090
+	background-color: #909090;
 }
 
 td.projecttab {
-	background-color: #ffffff
+	background-color: #ffffff;
 }
 
 td.seltab {
-	background-color: white
+	background-color: white;
 }
 
 td.toptab {
-	background-color: #E0E0E0
+	background-color: #E0E0E0;
 }
 
 ul.tabbernav {
 	border-bottom: 1px solid #778;
 	margin: 0;
-	padding: 3px 0
+	padding: 3px 0;
 }
 
 ul.tabbernav li {
 	display: inline;
 	list-style: none;
-	margin: 0
+	margin: 0;
 }
 
 ul.tabbernav li a {
@@ -218,38 +218,38 @@ ul.tabbernav li a {
 	border-bottom: none;
 	margin-left: 3px;
 	padding: 3px 0.5em;
-	text-decoration: none
+	text-decoration: none;
 }
 
 ul.tabbernav li a:hover {
 	background: #AAE;
 	border-color: #227;
-	color: #000
+	color: #000;
 }
 
 ul.tabbernav li a:link {
-	color: #333333
+	color: #333333;
 }
 
 ul.tabbernav li a:visited {
-	color: #667
+	color: #667;
 }
 
 ul.tabbernav li.tabberactive a {
 	background-color: #fff;
-	border-bottom: 1px solid #fff
+	border-bottom: 1px solid #fff;
 }
 
 ul.tabbernav li.tabberactive a:hover {
 	background: white;
 	border-bottom: 1px solid white;
-	color: #000
+	color: #000;
 }
 
 up {
 	font-family: arial,helvetica, sans-serif;
 	font-size: small;
-	font-weight: bold
+	font-weight: bold;
 }
 
 /* generic classes
@@ -265,7 +265,7 @@ up {
 
 .selected {background-color:pink; }
 
-.hide {	display: none; }
+.hide {display: none; }
 
 .skip {
 	height:0;
@@ -278,31 +278,31 @@ up {
 .active {
 	background-color: #99ff99; 
 	text-decoration: none; 
-	font-weight: normal
-	}
+	font-weight: normal;
+}
 
 .inactive {
-	background-color: #d3d3d3
-	}
+	background-color: #d3d3d3;
+}
 
 .deleted {
-	background-color: #99ffff
-	}
+	background-color: #99ffff;
+}
 
 .suspended {
-	background-color: #ffaa00
-	}
+	background-color: #ffaa00;
+}
 
 .pending {
-	background-color: white
-	}
+	background-color: white;
+}
 
 /* Tag cloud
 ----------------------------------------------- */
 .tag1, .tag2, .tag3, .tag4, .tag5 {
 	outline-style: none;
- 	margin-left: 0.3em;
- 	margin-right: 0.3em;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
 }
 
 .tag1 {font-size: 77%;}		/* 10px */
@@ -319,39 +319,39 @@ up {
 /* FRS
 ----------------------------------------------- */
 #forge-frs .frs-monitor-package {
-    padding-left:0.5em;
+	padding-left:0.5em;
 }
 
 .frs_release_name_version {
-    margin: 0 0 0 1em;
+	margin: 0 0 0 1em;
 }
 
 /* Progress bargraph (trackers) */
 table.progress {
- border: 1px solid #d7d7d7;
- border-collapse: collapse;
- border-spacing: 0;
- margin: 0;
- padding: 0;
- margin-top: 1em;
- empty-cells: show;
- width: 50%;
- margin-left: 25%; 
- margin-right: 25%;
+	border: 1px solid #d7d7d7;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0;
+	padding: 0;
+	margin-top: 1em;
+	empty-cells: show;
+	width: 50%;
+	margin-left: 25%; 
+	margin-right: 25%;
 }
 table.progress_legend {
- width: 50%;
- margin-left: 25%; 
- margin-right: 25%;
+	width: 50%;
+	margin-left: 25%; 
+	margin-right: 25%;
 }
 table.progress a, table.progress :link, table.progress :visited,
 table.progress :link:hover, table.progress :visited:hover {
- border: none;
- display: block;
- height: 1.2em;
- padding: 0;
- margin: 0;
- text-decoration: none
+	border: none;
+	display: block;
+	height: 1.2em;
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
 }
 table.progress td { background: #fff; padding: 0 }
 table.progress td :hover { background: none }
@@ -369,232 +369,277 @@ table.progress td :hover { background: none }
 
 /* {{{ Widgets */
 
-.emptyPlaceMarker
-{
-    border-right: #bcbcad 1px dashed;
-    border-top: #bcbcad 1px dashed;
-    border-left: #bcbcad 1px dashed;
-    border-bottom: #bcbcad 1px dashed;
-    background-color: Transparent;
+.emptyPlaceMarker {
+	border-right: #bcbcad 1px dashed;
+	border-top: #bcbcad 1px dashed;
+	border-left: #bcbcad 1px dashed;
+	border-bottom: #bcbcad 1px dashed;
+	background-color: transparent;
 }
 
 .widget {
-    margin-bottom:20px;
-    border:1px solid #bcbcad;
+	margin-bottom: 20px;
+	border: 1px solid #bcbcad;
 }
 .widget_content {
-    clear:both;
+	clear: both;
 }
 .widget_preferences {
-    background: #E0DDD2;
-    border-bottom:1px solid #bcbcad;
+	background: #E0DDD2;
+	border-bottom: 1px solid #bcbcad;
 }
 .widget_preferences form {
-    margin:0;
+	margin:0;
 }
 .widget_titlebar {
-    background: #E0DDD2 url(../../images/widget/widget-header.png) left top repeat-x;
-    font-weight: bold;
-    text-align: center;
+	background: #E0DDD2 url(../../images/widget/widget-header.png) left top repeat-x;
+	font-weight: bold;
+	text-align: center;
+	color: #555;
+	height: 1.2em;
+	padding-left: 40px;
+	padding-right: 4px;
+}
 
-    color: #555;
-    height:1.2em;
-    padding-left:40px;
-    padding-right:4px;
-}
 .widget_titlebar_handle {
-    cursor:move;
+	cursor: move;
 }
+
 .widget_titlebar_title {
-    float:left;
+	float: left;
 }
+
 .widget_titlebar_close,
 .widget_titlebar_rss,
 .widget_titlebar_prefs,
-
 .widget_titlebar_minimize,
 .widget_titlebar_maximize {
-    float:right;
+	float: right;
 }
+
 .widget_titlebar_rss,
 .widget_titlebar_prefs {
-    padding:2px 4px;
+	padding: 2px 4px;
 }
+
 .widget_titlebar_rss a, .widget_titlebar_rss a:link, .widget_titlebar_rss a:visited, .widget_titlebar_rss a:hover,
 .widget_titlebar_prefs a, .widget_titlebar_prefs a:link, .widget_titlebar_prefs a:visited, .widget_titlebar_prefs a:hover {
-    color:#555;
-    font-weight:normal;
-    font-size:0.8em;
-    text-decoration:none;
+	color: #555;
+	font-weight: normal;
+	font-size: 0.8em;
+	text-decoration: none;
 }
+
 .widget_toolbar {
-    list-style-type:none;
-    margin-left:0;
-    padding-bottom:6px;
-    padding-left:1em;
-    border-bottom:1px solid gray;
+	list-style-type: none;
+	margin-left: 0;
+	padding-bottom: 6px;
+	padding-left: 1em;
+	border-bottom: 1px solid gray;
 }
+
 .widget_toolbar li a:link,
 .widget_toolbar li a:visited,
 .widget_toolbar li a:active {
-    text-decoration:none;
+	text-decoration: none;
 }
+
 .widget_toolbar li {
-    display:inline;
-    padding-left:1em;
+	display: inline;
+	padding-left: 1em;
 }
+
 .widget_toolbar li a:hover {
-    padding-bottom:2px;
-    border-bottom:4px solid gray;
-    color:gray;
+	padding-bottom: 2px;
+	border-bottom: 4px solid gray;
+	color: gray;
 }
+
 .widget_toolbar li.current a {
-    padding-bottom:2px;
-    border-bottom:4px solid #333;
-    color:#333;
+	padding-bottom: 2px;
+	border-bottom: 4px solid #333;
+	color: #333;
 }
 
 #widget-content-categ {
-    padding:10px;
-}
-#widget-categories {
-    list-style-type: none;
-    margin-left:0;
-    padding-left:1em;
+	padding: 10px;
 }
 
+#widget-categories {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 1em;
+}
 
 #widget-categories li.selected {
-    font-weight:bold;
-    margin-top:0.2em;
-    margin-bottom:0.2em;
+	font-weight: bold;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
 }
+
 #widget-categories li.selected a:after {
-    content: ' »';
+	content: ' »';
 }
+
 #widget-categories li a span {
-    padding-right:1em;
+	padding-right: 1em;
 }
+
 .widget-preview {
-    background:transparent url('../../images/widget/widget-preview.png') top left no-repeat;
-    padding-left:138px;
-    width:550px;
-    min-height:128px;
+	background: transparent url('../../images/widget/widget-preview.png') top left no-repeat;
+	padding-left: 138px;
+	width: 550px;
+	min-height: 128px;
 }
+
 .widget-preview-bookmarks {
-    background-image:url('../../images/widget/widget-preview-favorites.png');
+	background-image: url('../../images/widget/widget-preview-favorites.png');
 }
+
 .widget-preview-mymonitoredfp-fr_FR {
-    background-image:url('../../images/widget/widget-preview-monitored_files-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-monitored_files-fr_FR.png');
 }
+
 .widget-preview-mymonitoredfp-en_US {
-    background-image:url('../../images/widget/widget-preview-monitored_files-en_US.png');
+	background-image: url('../../images/widget/widget-preview-monitored_files-en_US.png');
 }
+
 .widget-preview-mymonitoredforums-fr_FR {
-    background-image:url('../../images/widget/widget-preview-monitored_forums-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-monitored_forums-fr_FR.png');
 }
+
 .widget-preview-mymonitoredforums-en_US {
-    background-image:url('../../images/widget/widget-preview-monitored_forums-en_US.png');
+	background-image: url('../../images/widget/widget-preview-monitored_forums-en_US.png');
 }
+
 .widget-preview-myartifacts-fr_FR,
 .widget-preview-myartifacts-en_US {
-    background-image:url('../../images/widget/widget-preview-my_artifacts.png');
+	background-image: url('../../images/widget/widget-preview-my_artifacts.png');
 }
-.widget-preview-myprojects-fr_FR {
-    background-image:url('../../images/widget/widget-preview-my_projects-fr_FR.png');
-}
-.widget-preview-myprojects-en_US {
-    background-image:url('../../images/widget/widget-preview-my_projects-en_US.png');
-}
-.widget-preview-mybookmarks-fr_FR {
-    background-image:url('../../images/widget/widget-preview-my_bookmarks-fr_FR.png');
-}
-.widget-preview-mybookmarks-en_US {
-    background-image:url('../../images/widget/widget-preview-my_bookmarks-en_US.png');
 
+.widget-preview-myprojects-fr_FR {
+	background-image: url('../../images/widget/widget-preview-my_projects-fr_FR.png');
 }
+
+.widget-preview-myprojects-en_US {
+	background-image: url('../../images/widget/widget-preview-my_projects-en_US.png');
+}
+
+.widget-preview-mybookmarks-fr_FR {
+	background-image: url('../../images/widget/widget-preview-my_bookmarks-fr_FR.png');
+}
+
+.widget-preview-mybookmarks-en_US {
+	background-image: url('../../images/widget/widget-preview-my_bookmarks-en_US.png');
+}
+
 .widget-preview-mysurveys-fr_FR {
-    background-image:url('../../images/widget/widget-preview-my_surveys-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-my_surveys-fr_FR.png');
 }
+
 .widget-preview-mysurveys-en_US {
-    background-image:url('../../images/widget/widget-preview-my_surveys-en_US.png');
+	background-image: url('../../images/widget/widget-preview-my_surveys-en_US.png');
 }
+
 .widget-preview-myadmin-fr_FR {
-    background-image:url('../../images/widget/widget-preview-my_admin-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-my_admin-fr_FR.png');
 }
+
 .widget-preview-myadmin-en_US {
-    background-image:url('../../images/widget/widget-preview-my_admin-en_US.png');
+	background-image: url('../../images/widget/widget-preview-my_admin-en_US.png');
 }
+
 .widget-preview-mylatestsvncommits-fr_FR {
-    background-image:url('../../images/widget/widget-preview-my_latest_svn_commits-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-my_latest_svn_commits-fr_FR.png');
 }
+
 .widget-preview-mylatestsvncommits-en_US {
-    background-image:url('../../images/widget/widget-preview-my_latest_svn_commits-en_US.png');
+	background-image: url('../../images/widget/widget-preview-my_latest_svn_commits-en_US.png');
 }
+
 .widget-preview-projectlatestfilereleases-fr_FR {
-    background-image:url('../../images/widget/widget-preview-latest_file_releases-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-latest_file_releases-fr_FR.png');
 }
+
 .widget-preview-projectlatestfilereleases-en_US {
-    background-image:url('../../images/widget/widget-preview-latest_file_releases-en_US.png');
+	background-image: url('../../images/widget/widget-preview-latest_file_releases-en_US.png');
 }
+
 .widget-preview-projectlatestsvncommits-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_latest_svn_commits-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-project_latest_svn_commits-fr_FR.png');
 }
+
 .widget-preview-projectlatestsvncommits-en_US {
-    background-image:url('../../images/widget/widget-preview-project_latest_svn_commits-en_US.png');
+	background-image: url('../../images/widget/widget-preview-project_latest_svn_commits-en_US.png');
 }
+
 .widget-preview-projectlatestnews-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_latest_news-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-project_latest_news-fr_FR.png');
 }
+
 .widget-preview-projectlatestnews-en_US {
-    background-image:url('../../images/widget/widget-preview-project_latest_news-en_US.png');
+	background-image: url('../../images/widget/widget-preview-project_latest_news-en_US.png');
 }
+
 .widget-preview-projectpublicareas-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_public_areas-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-project_public_areas-fr_FR.png');
 }
+
 .widget-preview-projectpublicareas-en_US {
-    background-image:url('../../images/widget/widget-preview-project_public_areas-en_US.png');
+	background-image: url('../../images/widget/widget-preview-project_public_areas-en_US.png');
 }
+
 .widget-preview-projectdescription-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_description-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-project_description-fr_FR.png');
 }
+
 .widget-preview-projectdescription-en_US {
-    background-image:url('../../images/widget/widget-preview-project_description-en_US.png');
+	background-image: url('../../images/widget/widget-preview-project_description-en_US.png');
 }
+
 .widget-preview-projectclassification-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_classification-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-project_classification-fr_FR.png');
 }
+
 .widget-preview-projectclassification-en_US {
-    background-image:url('../../images/widget/widget-preview-project_classification-en_US.png');
+	background-image: url('../../images/widget/widget-preview-project_classification-en_US.png');
 }
+
 .widget-preview-projectmembers-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_members-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-project_members-fr_FR.png');
 }
+
 .widget-preview-projectmembers-en_US {
-    background-image:url('../../images/widget/widget-preview-project_members-en_US.png');
+	background-image: url('../../images/widget/widget-preview-project_members-en_US.png');
 }
+
 .widget-preview-mysystemevent-fr_FR {
-    background-image:url('../../images/widget/widget-preview-mysystemevent-fr_FR.png');
+	background-image: url('../../images/widget/widget-preview-mysystemevent-fr_FR.png');
 }
+
 .widget-preview-mysystemevent-en_US {
-    background-image:url('../../images/widget/widget-preview-mysystemevent-en_US.png');
+	background-image: url('../../images/widget/widget-preview-mysystemevent-en_US.png');
 }
+
 .widget-preview-mytwitterfollow-en_US,
 .widget-preview-projecttwitterfollow-en_US,
 .widget-preview-mytwitterfollow-fr_FR,
 .widget-preview-projecttwitterfollow-fr_FR {
-    background-image:url('../../images/widget/widget-preview-twitterfollow.png');
+	background-image: url('../../images/widget/widget-preview-twitterfollow.png');
 }
+
 .widget-preview-myrss-en_US,
 .widget-preview-projectrss-en_US,
 .widget-preview-myrss-fr_FR,
 .widget-preview-projectrss-fr_FR {
-    background-image:url('../../images/widget/widget-preview-rss.png');
+	background-image: url('../../images/widget/widget-preview-rss.png');
 }
+
 .widget-preview-projectsvnstats-en_US,
 .widget-preview-projectsvnstats-fr_FR {
-    background-image:url('../../images/widget/widget-preview-project_svn-stats.png');
+	background-image: url('../../images/widget/widget-preview-project_svn-stats.png');
 }
+
 /* }}} */
 
 #ffErrors {
@@ -605,53 +650,53 @@ table.progress td :hover { background: none }
 	right: 10px;
 	opacity: 0.9;
 	color: black;
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    background-color: #ffc0cb; /* pink */
-    border-color: red;
-    padding: 0.5em;
+	font-weight: bold;
+	border-width: 2px;
+	border-style: solid;
+	background-color: #ffc0cb; /* pink */
+	border-color: red;
+	padding: 0.5em;
 }
 
 #ffErrors .error {
-    border-width: 0px;
-    padding: 0px;
+	border-width: 0px;
+	padding: 0px;
 	color: red;
 }
 
 .img-shadow-l {
-  float:left;
-  background: url(../../images/img-shadowAlpha.png) no-repeat bottom right !important;
-  background: url(../../images/img-shadow.gif) no-repeat bottom right;
-  margin: 10px 0 0 10px !important;
-  margin: 10px 0 0 5px;
+	float:left;
+	background: url(../../images/img-shadowAlpha.png) no-repeat bottom right !important;
+	background: url(../../images/img-shadow.gif) no-repeat bottom right;
+	margin: 10px 0 0 10px !important;
+	margin: 10px 0 0 5px;
 }
 
 .img-shadow-l img {
-  display: block;
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #a9a9a9;
-  margin: -6px 6px 6px -6px;
-  padding: 4px;
+	display: block;
+	position: relative;
+	background-color: #fff;
+	border: 1px solid #a9a9a9;
+	margin: -6px 6px 6px -6px;
+	padding: 4px;
 }
 
 .img-shadow-s {
-  float:left;
-  background: url(../../images/img-shadowAlpha.png) no-repeat bottom right !important;
-  background: url(../../images/img-shadow.gif) no-repeat bottom right;
-  margin: 4px 0 0 4px !important;
-  margin: 4px 0 0 2px;
-  }
+	float:left;
+	background: url(../../images/img-shadowAlpha.png) no-repeat bottom right !important;
+	background: url(../../images/img-shadow.gif) no-repeat bottom right;
+	margin: 4px 0 0 4px !important;
+	margin: 4px 0 0 2px;
+}
 
 .img-shadow-s img {
-  display: block;
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #a9a9a9;
-  margin: -2px 2px 2px -2px;
-  padding: 2px;
-  }
+	display: block;
+	position: relative;
+	background-color: #fff;
+	border: 1px solid #a9a9a9;
+	margin: -2px 2px 2px -2px;
+	padding: 2px;
+}
 
 .img-shadow-xs {
 	float:left;
@@ -667,14 +712,14 @@ table.progress td :hover { background: none }
 }
 
 .img-shadow-xs img:hover {
-	height : auto;
+	height: auto;
 }
 
 .no-img-xs {
 	float: left;
 	margin-right: 2px;
 	width: 15px;
-	height : 18px;
+	height: 18px;
 }
 
 .new_line {
