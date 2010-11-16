@@ -4,7 +4,7 @@ export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
 
 export CONFIG_PHP=func/config.php.buildbotDEB
-export SELENIUM_RC_HOST=192.168.0.204
+export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 if [ "x${HUDSON_URL}" = "x" ]
 then

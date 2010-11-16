@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 export CONFIG_PHP=func/config.php.buildbot
-export SELENIUM_RC_HOST=192.168.0.204
+export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 export HOST=centos52.local
