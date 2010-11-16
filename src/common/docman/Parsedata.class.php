@@ -72,7 +72,7 @@ class Parsedata {
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
 
-	function print_debug ($text) 
+	function print_debug ($text) {
 		echo "$text \n";
 		ob_flush();
 	}
