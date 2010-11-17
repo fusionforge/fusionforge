@@ -27,34 +27,33 @@
 
 /* tooling library */
 
-function getNameDocGroup($id,$group) {
-	$group_object = & group_get_object($group);;
+function getNameDocGroup($id, $group) {
+	$group_object = group_get_object($group);
 	$res = db_query_params ('SELECT groupname FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-							array ($id,$group));
+				array ($id, $group));
 	if (!$res || db_numrows($res) < 1) {
-		$group_object->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
+		$group_object->setError('DocumentGroup::'. _('Invalid DocumentGroup ID'));
 		return false;
 	} else {
 		return (db_result($res,0,'groupname'));
 	}
 }
 
-function getStateDocGroup($id,$group) {
-	$group_object = & group_get_object($group);;
+function getStateDocGroup($id, $group) {
+	$group_object = group_get_object($group);
 	$res = db_query_params ('SELECT stateid FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-							array ($id,$group));
+				array ($id, $group));
 	if (!$res || db_numrows($res) < 1) {
-		$group_object->setError(_('DocumentGroup: Invalid DocumentGroup ID'));
+		$group_object->setError('DocumentGroup:: '. _('Invalid DocumentGroup ID'));
 		return false;
 	} else {
 		return (db_result($res,0,'stateid'));
 	}
 }
 
-function doc_get_state_box($checkedval='xzxz') {
-    $res_states=db_query_params ('select * from doc_states', array());
-    echo html_build_select_box ($res_states,'stateid',$checkedval,false);
-
+function doc_get_state_box($checkedval = 'xzxz') {
+	$res_states=db_query_params ('select * from doc_states', array());
+	echo html_build_select_box ($res_states,'stateid',$checkedval,false);
 }
 
 /*
@@ -64,43 +63,43 @@ function docman_recursive_display($docgroup) {
 	global $nested_groups,$group_id;
 	global $idExposeTreeIndex,$dirid,$idhtml;
 
-    if (is_array(@$nested_groups[$docgroup])) {
-        foreach ($nested_groups[$docgroup] as $dg) {
-            $idhtml++;
+	if (is_array(@$nested_groups[$docgroup])) {
+		foreach ($nested_groups[$docgroup] as $dg) {
+			$idhtml++;
 
-            if ($dirid == $dg->getID())
-                $idExposeTreeIndex = $idhtml;
+			if ($dirid == $dg->getID())
+				$idExposeTreeIndex = $idhtml;
 
-            echo "
-                ['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=listfile&dirid=".$dg->getID()."', '', '',";
-	            docman_recursive_display($dg->getID());
-            echo ",
-                    ],";
-        }
-    }
+			echo "
+				['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=listfile&dirid=".$dg->getID()."', '', '',";
+					docman_recursive_display($dg->getID());
+			echo ",
+				],";
+		}
+	}
 }
 
 /*
  * docman_fill_zip - Recursive function to add docgroup and documents inside zip for backup
  *
- * @param	$object		zip
- * @param	$array		nested groups
- * @param	$object		documentfactory
- * @param	$integer	documentgroup id : default value = 0
- * @param	$string		documentgroup parent name : default value = empty
+ * @param	$object	zip
+ * @param	$array	nested groups
+ * @param	$object	documentfactory
+ * @param	$int	documentgroup id : default value = 0
+ * @param	$string	documentgroup parent name : default value = empty
  */
 function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
-            if (!$zip->addEmptyDir($parent_docname.'/'.$dg->getName()))
-                return false;
+			if (!$zip->addEmptyDir($parent_docname.'/'.$dg->getName()))
+				return false;
 
 			$document_factory->setDocGroupID($dg->getID());
 			$docs = $document_factory->getDocuments();
 			if (is_array($docs) && count($docs) > 0) {      // this group has documents
 				foreach ($docs as $doc) {
-                    if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))
-                        return false;
+					if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))
+						return false;
 				}
 			}
 			docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), $parent_docname.'/'.$dg->getName());
@@ -109,12 +108,12 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 	return true;
 }
 
-function docman_recursive_stateid($docgroup,$nested_groups,$nested_docs,$stateid=2) {
-    if (is_array(@$nested_groups[$docgroup])) {
-        foreach ($nested_groups[$docgroup] as $dg) {
-		$dg->setStateID($stateid);
-        }
-    }
+function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stateid = 2) {
+	if (is_array(@$nested_groups[$docgroup])) {
+		foreach ($nested_groups[$docgroup] as $dg) {
+			$dg->setStateID($stateid);
+		}
+	}
 	if (isset($nested_docs[$docgroup]) && is_array($nested_docs[$docgroup])) {
 		foreach ($nested_docs[$docgroup] as $d) {
 			$d->setStateID($stateid);
@@ -124,8 +123,9 @@ function docman_recursive_stateid($docgroup,$nested_groups,$nested_docs,$stateid
 
 /**
  * docman_display_trash - function to show the documents inside the groups tree with specific status : 2 = deleted
+ *@todo: remove css code
  */
-function docman_display_trash(&$document_factory,$parent_group=0) {
+function docman_display_trash(&$document_factory, $parent_group = 0) {
 	$nested_groups =& $document_factory->getNested(2);
 	$child_count = count($nested_groups["$parent_group"]);
 	echo "<ul style='list-style-type: none'>\n";
@@ -139,7 +139,7 @@ function docman_display_trash(&$document_factory,$parent_group=0) {
 /*
  * docman_display_documents - Recursive function to show the documents inside the groups tree
  */
-function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $parent_group=0) {
+function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid = 0, $parent_group = 0) {
 	if (!array_key_exists("$parent_group",$nested_groups) || !is_array($nested_groups["$parent_group"])) {
 		return;
 	}
