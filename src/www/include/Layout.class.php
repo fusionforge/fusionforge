@@ -266,17 +266,6 @@ class Layout extends Error {
 	} 
 
 	/**
-	 * headerLink() - creates the link headers of the page (FavIcon, RSS and Search)
-	 * @deprecated deprecated since 4.9, use the individual header-functions
-	 * @todo remove in 5.0
-	 */
-	function headerLink() {
-		$this->headerFavIcon();
-		$this->headerRSS();
-		$this->headerSearch();
-	}
-
-	/**
 	 * headerHTMLDeclaration() - generates the HTML declaration, i.e. the
 	 * XML declaration, the doctype definition, and the opening <html>. 
 	 *
