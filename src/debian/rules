@@ -21,20 +21,20 @@ PPOSTINST=$(patsubst plugins/%/NAME,debian/$(PACKAGE)-plugin-%.postinst,$(wildca
 PPRERM=$(patsubst plugins/%/NAME,debian/$(PACKAGE)-plugin-%.prerm,$(wildcard plugins/*/NAME))
 
 CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
-PCRONDFILES=$(patsubst %,debian/$(PACKAGE)-%.cron.d,$(shell ls  plugins/*/packaging/cron.d/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
+PCRONDFILES=$(patsubst %,debian/$(PACKAGE)-%.cron.d,$(shell ls  plugins/*/packaging/cron.d/[a-z]* | sed 's,.*/,,'))
 
 DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
-PDIRSFILES=$(patsubst %,debian/$(PACKAGE)-%.dirs,$(shell ls  plugins/*/packaging/dirs/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
+PDIRSFILES=$(patsubst %,debian/$(PACKAGE)-%.dirs,$(shell ls  plugins/*/packaging/dirs/[a-z]* | sed 's,.*/,,'))
 
 LINKSFILES=$(patsubst packaging/links/%,debian/$(OLDPACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
-PLINKSFILES=$(patsubst %,debian/$(PACKAGE)-%.links,$(shell ls  plugins/*/packaging/links/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
+PLINKSFILES=$(patsubst %,debian/$(PACKAGE)-%.links,$(shell ls  plugins/*/packaging/links/[a-z]* | sed 's,.*/,,'))
 
 INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-PINSTALLFILES=$(patsubst %,debian/$(PACKAGE)-%.install,$(shell ls  plugins/*/packaging/install/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
+PINSTALLFILES=$(patsubst %,debian/$(PACKAGE)-%.install,$(shell ls  plugins/*/packaging/install/[a-z]* | sed 's,.*/,,'))
 
 DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
 		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
-PDOCSFILES=$(patsubst %,debian/$(PACKAGE)-%.docs,$(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's:.*/\(.[^/]*\):\1:'))
+PDOCSFILES=$(patsubst %,debian/$(PACKAGE)-%.docs,$(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's,.*/,,'))
 
 POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
@@ -67,10 +67,10 @@ debian/$(PACKAGE)-plugin-%.prerm:
 	export PLUGLONGNAME="`cat $(CURDIR)/plugins/$*/NAME`"; $(SED_REPLACE) -e 's/@PLUGSHORTNAME@/$*/g' -e "s/@PLUGLONGNAME@/$$PLUGLONGNAME/g" $(CURDIR)/debian/dsf-in/plugin.prerm > $@
 
 debian/$(PACKAGE)-plugin-%.cron.d:
-	sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
+	$(SED_REPLACE) -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/plugins/$*/packaging/cron.d/plugin-$* > $@
 
 debian/$(OLDPACKAGE)-%.cron.d:
-	(cat $(CURDIR)/packaging/cron.d/00phpcron ; sed -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) | $(SED_REPLACE) > $@
+	(cat $(CURDIR)/packaging/cron.d/00phpcron ; $(SED_REPLACE) -e 's/\$$FFUSER/$(OLDPACKAGE)/g' $(CURDIR)/packaging/cron.d/$*) | $(SED_REPLACE) > $@
 
 debian/$(PACKAGE)-plugin-%.dirs:
 	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/dirs/plugin-$* > $@
