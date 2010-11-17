@@ -25,7 +25,7 @@ class oslcPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "oslc";
-		$this->text = "oslc!"; // To show in the tabs, use...
+		$this->text = "oslc"; // To show in the tabs, use...
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu");
 		$this->_addHook("groupmenu");	// To put into the project tabs
@@ -59,7 +59,7 @@ class oslcPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/oslc/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
+				$params['DIRS'][]=util_make_uri('/plugins/oslc/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
