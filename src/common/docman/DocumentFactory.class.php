@@ -46,7 +46,6 @@ class DocumentFactory extends Error {
 
 	var $stateid;
 	var $docgroupid;
-	var $sort='group_name, title';
 
 	/**
 	 * Constructor.
@@ -85,7 +84,7 @@ class DocumentFactory extends Error {
 	 * @param	int	The stateid from the doc_states table.
 	 */
 	function setStateID($stateid) {
-		$this->stateid=$stateid;
+		$this->stateid = $stateid;
 	}
 
 	/**
@@ -94,16 +93,7 @@ class DocumentFactory extends Error {
 	 * @param	int	The doc_group from the doc_groups table.
 	 */
 	function setDocGroupID($docgroupid) {
-		$this->docgroupid=$docgroupid;
-	}
-
-	/**
-	 * setSort - call this before getDocuments() if you want to control the sorting.
-	 *
-	 * @param	string	The name of the field to sort on.
-	 */
-	function setSort($sort) {
-		$this->sort=$sort;
+		$this->docgroupid = $docgroupid;
 	}
 
 	/**
@@ -115,7 +105,7 @@ class DocumentFactory extends Error {
 		if (!$this->Documents) {
 			$this->getFromDB();
 		}
-		
+
 		$return = array();
 		// If the document group is specified, we should only check that group in
 		// the Documents array. If not, we should check ALL the groups.
@@ -124,31 +114,31 @@ class DocumentFactory extends Error {
 		} else {
 			$keys = array_keys($this->Documents);
 		}
-		
+
 		foreach ($keys as $key) {
-			if (!array_key_exists($key, $this->Documents)) continue;	// Should not happen
+			if (!array_key_exists($key, $this->Documents)) continue;		// Should not happen
 			$count = count($this->Documents[$key]);
-			
+
 			for ($i=0; $i < $count; $i++) {
-				$valid = true;		// do we need to return this document?
+				$valid = true;							// do we need to return this document?
 				$doc =& $this->Documents[$key][$i];
-				
+
 				if (!$this->stateid) {
 					if (session_loggedin()) {
-						$perm =& $this->Group->getPermission ();
+						$perm =& $this->Group->getPermission();
 						if (!$perm || !is_object($perm) || !$perm->isMember()) {
 							if ($doc->getStateID() != 1) {		// non-active document?
 								$valid = false;
 							}
 						} else {
 							if ($doc->getStateID() != 1 &&		/* not active */
-								$doc->getStateID() != 4 &&			/* not hidden */
-								$doc->getStateID() != 5) {			/* not private */
+								$doc->getStateID() != 4 &&	/* not hidden */
+								$doc->getStateID() != 5) {	/* not private */
 								$valid = false;
 							}
 						}
 					} else {
-						if ($doc->getStateID() != 1) {		// non-active document?
+						if ($doc->getStateID() != 1) {			// non-active document?
 							$valid = false;
 						}
 					}
@@ -178,18 +168,17 @@ class DocumentFactory extends Error {
 	 */
 	function getFromDB() {
 		$this->Documents = array();
-		$result = db_query_params ('SELECT * FROM docdata_vw ORDER BY title',
-					   array());
+		$result = db_query_params('SELECT * FROM docdata_vw WHERE group_id = $1 ORDER BY title',
+						array($this->Group->getID()));
 		if (!$result) {
-			exit_error(db_error(),'docman');
+			exit_error(db_error(), 'docman');
 		}
-		
+
 		while ($arr = db_fetch_array($result)) {
 			$doc_group_id = $arr['doc_group'];
 			if (!is_array(@$this->Documents[$doc_group_id])) {
 				$this->Documents[$doc_group_id] = array();
 			}
-			
 			$this->Documents[$doc_group_id][] = new Document($this->Group, $arr['docid'], $arr);
 		}
 	}
@@ -198,20 +187,20 @@ class DocumentFactory extends Error {
 	 * getStates - Return an array of states that have documents associated to them
 	 */
 	function getUsedStates() {
-		$result = db_query_params ('SELECT DISTINCT doc_states.stateid,doc_states.name 
-			FROM doc_states,doc_data
-			WHERE doc_data.stateid=doc_states.stateid
-			ORDER BY doc_states.name ASC',
-					   array());
+		$result = db_query_params('SELECT DISTINCT doc_states.stateid,doc_states.name 
+					FROM doc_states,doc_data
+					WHERE doc_data.stateid=doc_states.stateid
+					ORDER BY doc_states.name ASC',
+					array());
 		if (!$result) {
-			exit_error(db_error(),'docman');
+			exit_error(db_error(), 'docman');
 		}
-		
+
 		$return = array();
 		while ($arr = db_fetch_array($result)) {
 			$return[] = $arr;
 		}
-		
+
 		return $return;
 	}
 

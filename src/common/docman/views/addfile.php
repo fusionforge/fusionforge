@@ -39,22 +39,22 @@ if ( $dgf->getNested() == NULL ) {
 ?>
 	<script type="text/javascript" >
 	function displayRowFile() {
-	    document.getElementById('filerow').style.display = '';
-        document.getElementById('urlrow').style.display = 'none';
-        document.getElementById('editrow').style.display = 'none';
-        document.getElementById('editnamerow').style.display = 'none';
+		document.getElementById('filerow').style.display = '';
+		document.getElementById('urlrow').style.display = 'none';
+		document.getElementById('editrow').style.display = 'none';
+		document.getElementById('editnamerow').style.display = 'none';
 	}
 	function displayRowUrl() {
-	    document.getElementById('filerow').style.display = 'none';
-        document.getElementById('urlrow').style.display = '';
-	    document.getElementById('editrow').style.display = 'none';
-	    document.getElementById('editnamerow').style.display = 'none';
+		document.getElementById('filerow').style.display = 'none';
+		document.getElementById('urlrow').style.display = '';
+		document.getElementById('editrow').style.display = 'none';
+		document.getElementById('editnamerow').style.display = 'none';
 	}
 	function displayRowEditor() {
-	    document.getElementById('filerow').style.display = 'none';
-        document.getElementById('urlrow').style.display = 'none';
-	    document.getElementById('editrow').style.display = '';
-	    document.getElementById('editnamerow').style.display = '';
+		document.getElementById('filerow').style.display = 'none';
+	document.getElementById('urlrow').style.display = 'none';
+		document.getElementById('editrow').style.display = '';
+		document.getElementById('editnamerow').style.display = '';
 	}
 	</script>
 <?php
@@ -70,9 +70,9 @@ if ( $dgf->getNested() == NULL ) {
 				<tr>
 					<td style="text-align:right;">
 						<strong>'. _('Document Title').'</strong>'.utils_requiredField()
-                	.'</td><td>'
-                    	.'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
-                    	.sprintf(_('(at least %1$s characters)'), 5)
+					.'</td><td>'
+			.'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
+			.sprintf(_('(at least %1$s characters)'), 5)
 					.'</td>
 				</tr>
 				<tr>

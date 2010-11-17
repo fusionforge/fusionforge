@@ -55,9 +55,9 @@ class DocumentGroupFactory extends Error {
 	 */
 	function DocumentGroupFactory(&$Group) {
 		$this->Error();
-		
+
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_("DocumentGroupFactory:: Invalid Project"));
+			$this->setError(_('DocumentGroupFactory:: Invalid Project'));
 			return false;
 		}
 		if ($Group->isError()) {
@@ -75,15 +75,15 @@ class DocumentGroupFactory extends Error {
 	 * @param	int	The stateid of DocumentGroup.
 	 * @return	array	The array of DocumentGroup.
 	 */
-	function &getNested($stateid=1) {
+	function &getNested($stateid = 1) {
 		if ($this->nested_groups) {
 			return $this->nested_groups;
 		}
-		
-		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-						array ($this->Group->getID(),$stateid));
+
+		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
+						array($this->Group->getID(), $stateid));
 		$rows = db_numrows($result);
-		
+
 		if (!$result) {
 			$this->setError(_('No Document Directory Found').' '.db_error());
 			return false;
@@ -92,7 +92,7 @@ class DocumentGroupFactory extends Error {
 				$this->flat_groups[] = new DocumentGroup($this->Group, $arr);
 			}
 		}
-		
+
 		// Build the nested array
 		$count = count($this->flat_groups);
 		for ($i=0; $i < $count; $i++) {
@@ -108,13 +108,13 @@ class DocumentGroupFactory extends Error {
 	 * @param	int	The stateid of DocumentGroups
 	 * @return	array	The array of DocumentGroup.
 	 */
-	function &getDocumentGroups($stateid=1) {
+	function &getDocumentGroups($stateid = 1) {
 		if ($this->flat_groups) {
 			return $this->flat_groups;
 		}
 
-		$result = db_query_params ('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
-						array ($this->Group->getID(),$stateid)) ;
+		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
+						array($this->Group->getID(), $stateid));
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {

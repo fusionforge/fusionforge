@@ -29,31 +29,32 @@ require dirname(__FILE__).'/../../../www/env.inc.php';
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 
-if ($argc != 2)
-{
+if ($argc != 2) {
 	echo "Usage : parser_oo.php <filename>\n";
 	exit (1);
 }
 
 $fichin = $argv[1];
-if (!is_file($fichin)) exit (1);
+if (!is_file($fichin))
+	exit (1);
+
 $zip = new ZipArchive;
 if ($zip->open($fichin) === TRUE) {
 	$output_dir = $fichin.".dir";
 	mkdir($output_dir);
-	$zip->extractTo($output_dir,array('content.xml'));
+	$zip->extractTo($output_dir, array('content.xml'));
 	$zip->close();
 } else {
 	exit (2);
 }
+
 // transformer le context.xml en fichier txt
 $regexp_oo = "sed -e 's/<[^>]*>//g;s/&lt;/</g;s/&gt;/>/g;s/&apos;/'\"'\"'/g;s/&quot;/\"/g;s/&amp;/\&/g'";
 
 $cmd = $regexp_oo." ".$output_dir."/content.xml > ".$output_dir."/content.xml.txt";
 
 $res = shell_exec($cmd);
-$rep = parser_text($output_dir.'/content.xml.txt');
-echo "$rep";
+echo parser_text($output_dir.'/content.xml.txt');
 
 unlink($output_dir.'/content.xml');
 unlink($output_dir.'/content.xml.txt');

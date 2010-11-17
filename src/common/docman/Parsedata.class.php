@@ -41,7 +41,7 @@ class Parsedata {
 		return true;
 	}
 
-	function get_parse_data ($data, $title, $description, $filetype) {
+	function get_parse_data($data, $title, $description, $filetype) {
 		$parser = "";
 		$rep = "";
 		$data1 = $data;
@@ -72,13 +72,13 @@ class Parsedata {
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
 
-	function print_debug ($text) {
+	function print_debug($text) {
 		echo "$text \n";
 		ob_flush();
 	}
 }
 
-function get_parser_list ($parser_path) {
+function get_parser_list($parser_path) {
 	$file = $parser_path."parser_list.txt";
 	$rep = array();
 	$fp = fopen ($file, "r");

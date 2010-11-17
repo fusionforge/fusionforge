@@ -35,7 +35,7 @@ class DocumentGroup extends Error {
 	 *
 	 * @var	object	$Group.
 	 */
-	var $Group; //object
+	var $Group;
 
 	/**
 	 * Array of data.
@@ -51,9 +51,9 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	object	Group object.
 	 * @param	array	(all fields from doc_groups) OR doc_group from database.
-	 * @return boolean	success.
+	 * @return	boolean	success.
 	 */
-	function DocumentGroup(&$Group, $data=false) {
+	function DocumentGroup(&$Group, $data = false) {
 		$this->Error();
 
 		//was Group legit?
@@ -91,7 +91,7 @@ class DocumentGroup extends Error {
 	 * @param	string	Item name.
 	 * @return	boolean	on success / false on failure.
 	 */
-	function create($name,$parent_doc_group=0) {
+	function create($name, $parent_doc_group = 0) {
 		//
 		//	data validation
 		//
@@ -103,8 +103,7 @@ class DocumentGroup extends Error {
 		if ($parent_doc_group) {
 			// check if parent group exists
 			$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-						array ($parent_doc_group,
-						       $this->Group->getID())) ;
+						array($parent_doc_group, $this->Group->getID())) ;
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
 				return false;
@@ -113,26 +112,28 @@ class DocumentGroup extends Error {
 			$parent_doc_group = 0;
 		}
 
-		$perm =& $this->Group->getPermission ();
+		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		
 		$res=db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
-				array($name,
-					$parent_doc_group,
-					$this->Group->getID()));
+					array($name,
+						$parent_doc_group,
+						$this->Group->getID())
+					);
 		if ($res && db_numrows($res) > 0) {
 			$this->setError(_('Directory name already exists'));
 			return false;
 		}
 
 		$result = db_query_params ('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid) VALUES ($1, $2, $3, $4)',
-					   array ($this->Group->getID(),
-						  htmlspecialchars($name),
-                          $parent_doc_group,
-                          '1')) ;
+						array ($this->Group->getID(),
+							htmlspecialchars($name),
+							$parent_doc_group,
+							'1')
+						);
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
 		} else {
@@ -142,7 +143,7 @@ class DocumentGroup extends Error {
 
 		$doc_group = db_insertid($result, 'doc_groups', 'doc_group');
 
-		//	Now set up our internal data structures
+		// Now set up our internal data structures
 		if (!$this->fetchData($doc_group)) {
 			return false;
 		}
@@ -152,7 +153,7 @@ class DocumentGroup extends Error {
 
 	/**
 	 * delete - delete a DocumentGroup.
-	 *          delete is recursive and permanent
+	 * WARNING delete is recursive and permanent
 	 * @param	int	Document Group Id, integer Project Group Id
 	 * @return	boolean	success
 	 */
@@ -164,24 +165,21 @@ class DocumentGroup extends Error {
 		}
 		db_begin();
 		/* delete documents in directory */
-		$result = db_query_params ('DELETE FROM doc_data where doc_group = $1 and group_id = $2',
-					array($doc_groupid,
-						$project_group_id));
+		$result = db_query_params('DELETE FROM doc_data where doc_group = $1 and group_id = $2',
+					array($doc_groupid, $project_group_id));
 
 		/* delete directory */
-		$result = db_query_params ('DELETE FROM doc_groups where doc_group = $1 and group_id = $2',
-					array($doc_groupid,
-						$project_group_id));
+		$result = db_query_params('DELETE FROM doc_groups where doc_group = $1 and group_id = $2',
+					array($doc_groupid, $project_group_id));
 
 		db_commit();
 
 		/* is there any subdir ? */
-		$subdir = db_query_params ('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
-					array($doc_groupid,
-						$project_group_id));
+		$subdir = db_query_params('select doc_group from doc_groups where parent_doc_group = $1 and group_id = $2',
+					array($doc_groupid, $project_group_id));
 		/* make a recursive call */
 		while ($arr = db_fetch_array($subdir)) {
-			$this->delete($arr['doc_group'],$project_group_id);
+			$this->delete($arr['doc_group'], $project_group_id);
 		}
 
 		if (!$result) {
@@ -197,8 +195,8 @@ class DocumentGroup extends Error {
 	 * @return	boolean	success
 	 */
 	function fetchData($id) {
-		$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1',
-					array ($id)) ;
+		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1',
+					array($id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('DocumentGroup: Invalid Document Directory ID'));
 			return false;
@@ -225,7 +223,7 @@ class DocumentGroup extends Error {
 	function getID() {
 		return $this->data_array['doc_group'];
 	}
-	
+
 	/**
 	 * getID - get parent DocumentGroup's id.
 	 *
@@ -259,7 +257,7 @@ class DocumentGroup extends Error {
 	 * @param	string	Name of the category.
 	 * @return boolean.
 	 */
-	function update($name,$parent_doc_group) {
+	function update($name, $parent_doc_group) {
 		$perm =& $this->Group->getPermission ();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -269,34 +267,37 @@ class DocumentGroup extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		
+
 		if ($parent_doc_group) {
 			// check if parent group exists
-			$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-						array ($parent_doc_group,
-						       $this->Group->getID())) ;
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
+						array($parent_doc_group,
+							$this->Group->getID())
+						);
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
 				return false;
 			}
 		} else {
-			$parent_doc_group=0;
+			$parent_doc_group = 0;
 		}
 
-		$res=db_query_params ('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
-				array($name,
+		$res=db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
+					array($name,
 						$parent_doc_group,
-						$this->Group->getID()));
+						$this->Group->getID())
+					);
 		if ($res && db_numrows($res) > 0) {
 			$this->setError(_('Directory name already exists'));
 			return false;
 		}
 
-		$result = db_query_params ('UPDATE doc_groups SET groupname=$1, parent_doc_group=$2 WHERE doc_group=$3 AND group_id=$4',
-					   array(htmlspecialchars($name),
-						 $parent_doc_group,
-						 $this->getID(),
-						 $this->Group->getID())) ;
+		$result = db_query_params('UPDATE doc_groups SET groupname=$1, parent_doc_group=$2 WHERE doc_group=$3 AND group_id=$4',
+						array(htmlspecialchars($name),
+							$parent_doc_group,
+							$this->getID(),
+							$this->Group->getID())
+					);
 		if ($result && db_affected_rows($result) > 0) {
 			return true;
 		} else {
@@ -304,7 +305,7 @@ class DocumentGroup extends Error {
 			return false;
 		}
 	}
-		
+
 	/**
 	* hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
 	*
@@ -316,12 +317,14 @@ class DocumentGroup extends Error {
 	* @param	int	(optional) State of the documents
 	* @return	boolean	success
 	*/
-	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {
+	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
 		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
-		if (!array_key_exists($stateid, $result) || !is_array($result[$stateid])) $result[$stateid] = array();
+		if (!array_key_exists($stateid, $result) || !is_array($result[$stateid]))
+			$result[$stateid] = array();
 
-		if (array_key_exists($doc_group_id, $result[$stateid])) return $result[$stateid][$doc_group_id];
+		if (array_key_exists($doc_group_id, $result[$stateid]))
+			return $result[$stateid][$doc_group_id];
 
 		// check if it has documents
 		if ($stateid) {
@@ -333,9 +336,9 @@ class DocumentGroup extends Error {
 			$result[$stateid][$doc_group_id] = true;
 			return true;
 		}
-		
+
 		// this group doesn't have documents... check recursively on the childs
-		if (array_key_exists($doc_group_id,$nested_groups) && is_array($nested_groups[$doc_group_id])) {
+		if (array_key_exists($doc_group_id, $nested_groups) && is_array($nested_groups[$doc_group_id])) {
 			$count = count($nested_groups[$doc_group_id]);
 			for ($i=0; $i < $count; $i++) {
 				if ($nested_groups[$doc_group_id][$i]->hasDocuments($nested_groups, $document_factory, $stateid)) {
@@ -357,7 +360,7 @@ class DocumentGroup extends Error {
 	* hasSubgroup - Checks if this group has a specified subgroup associated to it
 	*
 	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
-	* @param	int		ID of the subgroup
+	* @param	int	ID of the subgroup
 	* @return	boolean	success
 	*/
 	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
@@ -383,14 +386,15 @@ class DocumentGroup extends Error {
 	/**
 	 * setStateID - set the state id of this document group
 	 *
-	 * @param	int		State ID
+	 * @param	int	State ID
 	 * @return	boolean success
 	 */
 	function setStateID($stateid) {
-		$res = db_query_params ('UPDATE doc_groups SET stateid=$1
-								WHERE doc_group=$2
-								AND group_id=$3',
-								array ($stateid,$this->getID(),$this->Group->getID()));
+		$res = db_query_params('UPDATE doc_groups SET stateid=$1
+							WHERE doc_group=$2
+							AND group_id=$3',
+							array ($stateid,$this->getID(),$this->Group->getID())
+					);
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(_('DocumentGroup:').' '.db_error());

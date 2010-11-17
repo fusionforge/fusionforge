@@ -29,18 +29,16 @@ require dirname(__FILE__).'/../../../www/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
-if ($argc != 2)
-{
+if ($argc != 2) {
 	echo "Usage : parser_text.php <filename>\n";
 	exit (1);
 }
-$fichin = $argv[1];
-if (!is_file($fichin)) exit (1);
 
-$rep = parser_text($fichin);
-// envoi du résultat sur stdout
-echo "$rep";
-// efface le fichier source
+$fichin = $argv[1];
+if (!is_file($fichin))
+	exit (1);
+
+echo parser_text($fichin);
 unlink ($fichin);
 
 // Local Variables:

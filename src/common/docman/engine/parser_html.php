@@ -29,28 +29,26 @@ require dirname(__FILE__).'/../../../www/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
-if ($argc != 2)
-{
+if ($argc != 2) {
 	echo "Usage : parser_html.php <filename>\n";
 	exit (1);
 }
+
 $fichin = $argv[1];
-if (!is_file($fichin)) exit (1);
+if (!is_file($fichin))
+	exit (1);
 
 $fd = fopen($fichin, "r");
 $contents = fread($fd, filesize($fichin));
 fclose($fd);
 
 $strip_content = strip_tags($contents);
-$filename = tempnam("/tmp","tmp");
+$filename = tempnam("/tmp", "tmp");
 $fd = fopen($filename, "w");
-fwrite ( $fd , $strip_content );
+fwrite($fd , $strip_content);
 fclose($fd);
 
-$rep = parser_text($filename);
-// envoi du résultat sur stdout
-echo "$rep";
-// efface le fichier source
+echo parser_text($filename);
 unlink ($fichin);
 
 // Local Variables:

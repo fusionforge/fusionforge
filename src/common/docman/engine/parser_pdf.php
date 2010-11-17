@@ -30,22 +30,20 @@ require dirname(__FILE__).'/../../../www/env.inc.php';
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 
-if ($argc != 2)
-{
+if ($argc != 2) {
 	echo "Usage : parser_pdf.php <filename>\n";
 	exit (1);
 }
 
 $fichin = $argv[1];
-if (!is_file($fichin)) exit (1);
+if (!is_file($fichin))
+	exit (1);
+
 $fichout = tempnam("/tmp","tmp");
 $cmd = "/usr/bin/pdftotext $fichin $fichout";
 $res = shell_exec($cmd);
 
-$rep = parser_text($fichout);
-// envoi du résultat sur stdout
-echo "$rep";
-// efface les fichiers témporaires
+echo parser_text($fichout);
 unlink ($fichout);
 
 // Local Variables:

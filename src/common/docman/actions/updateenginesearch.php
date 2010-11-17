@@ -22,21 +22,23 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-if ( !forge_check_perm ('docman', $group_id, 'approve')) {
-	$return_msg= _('Docman Action Denied');
+/* please do not add require here : use www/docman/index.php to add require */
+
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg= _('Docman Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 } else {
 
 	if ($_POST['status']) {
 		$status = 1;
-		$return_msg= _('Search Engine Status updated successfully : Active');
+		$return_msg = _('Search Engine Status updated successfully : Active.');
 	} else {
 		$status = 0;
-		$return_msg= _('Search Engine Status updated successfully : Off');
+		$return_msg = _('Search Engine Status updated successfully : Off.');
 	}
 
 	if (!$g->setDocmanSearchStatus($status))
-	    session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($g->getErrorMessage()));
+		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($g->getErrorMessage()));
 
 	session_redirect('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg));
 }

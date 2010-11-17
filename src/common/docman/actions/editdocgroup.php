@@ -32,13 +32,13 @@ global $group_id; // id of group
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
 
-$dg = new DocumentGroup($g,$dirid);
+$dg = new DocumentGroup($g, $dirid);
 if ($dg->isError())
-    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-if (!$dg->update($groupname,$parent_dirid))
-    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+if (!$dg->update($groupname, $parent_dirid))
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$return_msg = _('Document Directory Updated successfully');
+$return_msg = _('Document Directory Updated successfully.');
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>

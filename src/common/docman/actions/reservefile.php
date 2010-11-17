@@ -28,21 +28,21 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 global $LUSER; // User object
 
-if (!forge_check_perm ('docman', $group_id, 'approve')) {
-	$return_msg = _('Docman Action Denied');
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg = _('Docman Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 } else {
 
 	$fileid = getIntFromRequest('fileid');
-	$d= new Document($g,$fileid);
+	$d = new Document($g, $fileid);
 
 	if ($d->isError())
-	    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
-	if ( !$d->setReservedBy('1',$LUSER->getID()) )
-	    session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+	if (!$d->setReservedBy('1', $LUSER->getID()))
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
-	$return_msg = _('Document reserved successfully');
+	$return_msg = _('Document reserved successfully.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 }
 ?>
