@@ -1,7 +1,7 @@
 Package: @PACKAGE@-plugin-oslc
 Homepage: http://picoforge.int-evry.fr/cgi-bin/twiki/view/Oslc/Web/FusionForgeOslcServer
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, zendframework (>> 1.10), php-pear, php-http, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, zendframework (>> 1.10), php-pear, php-http (>= 1.4.1), ${misc:Depends}
 Description: OSLC-CM compatible plugin for FusionForge tracker system.
  OSLC-CM is a standard specification for APIs in Change Management
  applications. It is based on Web technologies such as REST, RDF, or AJAX.
