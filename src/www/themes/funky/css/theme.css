@@ -3,6 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -183,7 +184,7 @@ hr {
     height: 200px;
 }
 
-.quicknews-toggle{
+.quicknews-toggle {
     display: inline;
     font-size: 12px;
 /*    text-shadow: 1px 1px gray;*/
@@ -532,7 +533,7 @@ a.topTabSelected:hover {
 .tabberlive#tab2 {
 }
 
-.tabberlive#tab2, .tabbertab {
+.tabberlive#tab2 .tabbertab {
   height:200px;
   overflow:auto;
 }
