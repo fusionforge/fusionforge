@@ -51,63 +51,51 @@ class Layout extends Error {
 
 	/**
 	 * The default main page content 
-	 * @var      string $rootindex
+	 * @var	string	$rootindex
 	 */
 	var $rootindex = 'index_std.php';
 
 	/**
 	 * The base directory of the theme in the servers file system
-	 * @var      string $themedir
+	 * @var	string	$themedir
 	 */ 
 	var $themedir;
 
 	/**
 	 * The base url of the theme
-	 * @var      string $themeurl
+	 * @var	string	$themeurl
 	 */ 
 	var $themeurl;
 
 	/**
 	 * The base directory of the image files in the servers file system
-	 * @var      string $imgdir
+	 * @var	string	$imgdir
 	 */ 
 	var $imgdir;
 
 	/**
 	 * The base url of the image files
-	 * @var      string $imgbaseurl
+	 * @var	string	$imgbaseurl
 	 */ 
 	var $imgbaseurl;
 
 	/**
 	 * The base directory of the js files in the servers file system
-	 * @var      string $jsdir
+	 * @var	string	$jsdir
 	 */ 
 	var $jsdir;
 
 	/**
 	 * The base url of the js files
-	 * @var      string $jsbaseurl
+	 * @var	string	$jsbaseurl
 	 */ 
 	var $jsbaseurl;
-
-	/*
-	 * kept for backwards compatibility
-	 */
-	/**
-	 * The base directory of the theme
-	 * @var string $themeroot
-	 * @todo: remove in 5.0
-	 * @deprecated deprecated since 4.9
-	 */
-	var $imgroot;
 
 	/**
 	 * The navigation object that provides the basic links. Should
 	 * not be modified.
 	 */
 	var $navigation;
-
 
 	/**
 	 * The color bars in pm reporting
@@ -165,8 +153,6 @@ class Layout extends Error {
 
 		$this->addStylesheet('/themes/css/fusionforge.css');
 
-		// for backward compatibility 
-		$this->imgroot = $this->imgbaseurl;
 	}
 
 	function addJavascript($js) {
@@ -237,7 +223,6 @@ class Layout extends Error {
 			<?php
 			$this->bodyHeader($params);
 	}
-
 
 	/**
 	 * headerStart() - generates the header code for all themes up to the 
@@ -333,13 +318,13 @@ class Layout extends Error {
 	 */
 	function headerJS() {
 		echo '
-<script type="text/javascript" src="/scripts/prototype/prototype.js"></script>
-                        <script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>
-                        <script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>
-                        <script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>
-                        <script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>
-                        <script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>
-                        <script type="text/javascript" src="/scripts/codendi/validate.js"></script>
+			<script type="text/javascript" src="/scripts/prototype/prototype.js"></script>
+			<script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>
+			<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>
+			<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>
+			<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>
+			<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>
+			<script type="text/javascript" src="/scripts/codendi/validate.js"></script>
 			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
 			<script type="text/javascript">';
 		plugin_hook ("javascript",false);
@@ -572,7 +557,7 @@ class Layout extends Error {
 	 * @param	array	specific class for th column
 	 * @return	string	the html code
 	 */
-	function listTableTop ($titleArray, $linksArray=false, $class='', $id='', $thClassArray=array()) {
+	function listTableTop($titleArray, $linksArray=false, $class='', $id='', $thClassArray=array()) {
 		$args = '';
 		if ($class) {
 			$args .= ' class="listing '.$class.'"';
