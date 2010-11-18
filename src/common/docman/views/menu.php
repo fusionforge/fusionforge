@@ -36,30 +36,32 @@ $menu_text = array();
 $menu_links = array();
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
-	$menu_text[]=_('Submit new documentation');
-	$menu_links[]='/docman/?group_id='.$group_id.'&view=addfile';
+	$menu_text[] = _('Submit new documentation');
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=addfile';
 }
 
 if (session_loggedin()) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$menu_text[]=_('Add new documentation directory');
-		$menu_links[]='/docman/?group_id='.$group_id.'&view=addsubdocgroup';
+		$menu_text[] = _('Add new documentation directory');
+		$menu_links[] = '/docman/?group_id='.$group_id.'&view=addsubdocgroup';
 	}
 }
 
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {
-		$menu_text[]=_('Search in documents');
-		$menu_links[]='/docman/?group_id='.$group_id.'&view=search';
+		$menu_text[] = _('Search in documents');
+		$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
 	}
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {
-	$menu_text[]=_('Admin');
-	$menu_links[]='/docman/?group_id='.$group_id.'&view=admin';
+	$menu_text[] = _('Admin');
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
 }
 
-echo $HTML->subMenu( $menu_text, $menu_links);
+if (count($menu_text) {;
+	echo $HTML->subMenu($menu_text, $menu_links);
+}
 
-plugin_hook ("blocks", "doc index");
+plugin_hook("blocks", "doc index");
 ?>
