@@ -128,6 +128,10 @@ function html_abs_image($url, $width, $height, $args) {
  */
 function html_image($src,$width='',$height='',$args=array(),$display=1) {
 	global $HTML;
+
+	if (method_exists($HTML, 'html_image')) {
+		$HTML->html_image($src, $width, $height, $args);
+	}
 	$s = ((session_issecure()) ? forge_get_config('images_secure_url') : forge_get_config('images_url') );
 	return html_abs_image($s.$HTML->imgroot.$src, $width, $height, $args);
 }
