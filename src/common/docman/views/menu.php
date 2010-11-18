@@ -59,7 +59,7 @@ if (forge_check_perm('docman', $group_id, 'admin')) {
 	$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
 }
 
-if (count($menu_text) {;
+if (count($menu_text)) {
 	echo $HTML->subMenu($menu_text, $menu_links);
 }
 
