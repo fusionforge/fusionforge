@@ -38,18 +38,20 @@ class Widget_ProjectInfo extends Widget {
 		// Tag list
 		if ($GLOBALS['sys_use_project_tags']) {
 			$list_tag = list_project_tag($group_id);
+			echo '<p>'.html_image('ic/tag.png'). ' ';
 			if ($list_tag) {
-				print '<p>' . _('Tags').':&nbsp;'. $list_tag . '</p>';
+				print _('Tags').':&nbsp;'. $list_tag;
 			}
 			else {
 				$project = group_get_object($group_id);
 				if (forge_check_perm ('project_admin', $project->getID())) {
-					print '<p><a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.</p>';
+					print '<a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.';
 				}
 				else {
-					print '<p>' . _('No tag defined for this project') . '</p>';
+					print _('No tag defined for this project');
 				}
 			}
+			echo '</p>';
 		}
 
 		if(forge_get_config('use_trove')) {
