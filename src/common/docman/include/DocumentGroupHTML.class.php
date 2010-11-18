@@ -91,7 +91,7 @@ class DocumentGroupHTML extends Error {
 		$child_count = count($group_arr["$parent"]);
 		for ($i = 0; $i < $child_count; $i++) {
 			$doc_group =& $group_arr["$parent"][$i];
-			
+
 			// Should we display this element?
 			if (in_array($doc_group->getID(), $dont_display)) continue;
 

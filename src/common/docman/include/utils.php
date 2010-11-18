@@ -29,13 +29,13 @@
 
 function getNameDocGroup($id, $group) {
 	$group_object = group_get_object($group);
-	$res = db_query_params ('SELECT groupname FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-				array ($id, $group));
+	$res = db_query_params('SELECT groupname FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
+				array($id, $group));
 	if (!$res || db_numrows($res) < 1) {
 		$group_object->setError('DocumentGroup::'. _('Invalid DocumentGroup ID'));
 		return false;
 	} else {
-		return (db_result($res,0,'groupname'));
+		return (db_result($res, 0, 'groupname'));
 	}
 }
 
@@ -47,21 +47,21 @@ function getStateDocGroup($id, $group) {
 		$group_object->setError('DocumentGroup:: '. _('Invalid DocumentGroup ID'));
 		return false;
 	} else {
-		return (db_result($res,0,'stateid'));
+		return (db_result($res, 0, 'stateid'));
 	}
 }
 
 function doc_get_state_box($checkedval = 'xzxz') {
 	$res_states=db_query_params ('select * from doc_states', array());
-	echo html_build_select_box ($res_states,'stateid',$checkedval,false);
+	echo html_build_select_box ($res_states, 'stateid', $checkedval, false);
 }
 
 /*
  * docman_recursive_display - Recursive function to show the documents inside the groups tree : javascript enabled function
  */
 function docman_recursive_display($docgroup) {
-	global $nested_groups,$group_id;
-	global $idExposeTreeIndex,$dirid,$idhtml;
+	global $nested_groups, $group_id;
+	global $idExposeTreeIndex, $dirid,$idhtml;
 
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
@@ -96,7 +96,7 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 
 			$document_factory->setDocGroupID($dg->getID());
 			$docs = $document_factory->getDocuments();
-			if (is_array($docs) && count($docs) > 0) {      // this group has documents
+			if (is_array($docs) && count($docs) > 0) {	// this group has documents
 				foreach ($docs as $doc) {
 					if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))
 						return false;
@@ -138,9 +138,12 @@ function docman_display_trash(&$document_factory, $parent_group = 0) {
 
 /*
  * docman_display_documents - Recursive function to show the documents inside the groups tree
+ * @todo : remove the css code
+ * @todo : use the javascript controler
+ * @todo : use jquery
  */
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid = 0, $parent_group = 0) {
-	if (!array_key_exists("$parent_group",$nested_groups) || !is_array($nested_groups["$parent_group"])) {
+	if (!array_key_exists("$parent_group", $nested_groups) || !is_array($nested_groups["$parent_group"])) {
 		return;
 	}
 	
@@ -153,15 +156,15 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 	echo '	}';
 	echo '}';
 	echo '</script>';
-	echo "<ul style='list-style-type: none'>\n";
+	echo '<ul style="list-style-type: none">';
 	$child_count = count($nested_groups["$parent_group"]);
 	
-	for ($i=0; $i < $child_count; $i++) {		
+	for ($i=0; $i < $child_count; $i++) {
 		$doc_group =& $nested_groups["$parent_group"][$i];
 		
 		if ($doc_group->hasDocuments($nested_groups, $document_factory, $stateid)) {
 			$icon = 'ofolder15.png';
-			echo "<li>".html_image('docman/directory.png',"22","22",array("border"=>"0"))."&nbsp;".$doc_group->getName()."</li>";
+			echo '<li>'.html_image('docman/directory.png', '22', '22', array('border'=>'0'))."&nbsp;".$doc_group->getName()."</li>";
 			docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $doc_group->getID());
 		}
 
@@ -174,13 +177,13 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		$docs = $document_factory->getDocuments();
 		if (is_array($docs)) {
 			$docs_count = count($docs);
-			
+
 			echo "<ul style='list-style-type: none'>";
 			for ($j=0; $j < $docs_count; $j++) {
 				$tooltip = $docs[$j]->getFileName() . " (" .
 							($docs[$j]->getUpdated() ?
 							date(_('Y-m-d H:i'), $docs[$j]->getUpdated()) :
-							date(_('Y-m-d H:i'),$docs[$j]->getCreated()))  .
+							date(_('Y-m-d H:i'),$docs[$j]->getCreated())) .
 							") ";
 				if ($docs[$j]->getFileSize() > 1024) {
 					$tooltip .= floor($docs[$j]->getFileSize()/1024) . "KB";
@@ -188,8 +191,8 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 					$tooltip .= $docs[$j]->getFileSize() . "B";
 				}
 				$tooltip = htmlspecialchars($tooltip);
-				echo '<li>'.  html_image('docman/file_type_unknown.png',"22","22",array("border"=>"0")). 
-					$docs[$j]->getName().  ' - ' . $tooltip . '&nbsp;<a href="#" onclick="javascript:EditData(\'editdata'.$docs[$j]->getID().'\')" >'. html_image('docman/edit-file.png',22,22,array('alt'=>'editfile')) .'</a></li>';
+				echo '<li>'.  html_image('docman/file_type_unknown.png', '22', '22', array("border"=>"0")). 
+					$docs[$j]->getName(). ' - ' . $tooltip . '&nbsp;<a href="#" onclick="javascript:EditData(\'editdata'.$docs[$j]->getID().'\')" >'. html_image('docman/edit-file.png', '22', '22', array('alt'=>'editfile')) .'</a></li>';
 				echo "<i>".$docs[$j]->getDescription()."</i><br/>";
 				echo '<div class="docman_div_include" id="editdata'.$docs[$j]->getID().'" style="display:none">';
 				document_editdata($docs[$j]);
@@ -198,18 +201,21 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 			echo "</ul>";
 		}
 	}
-	echo "</ul>\n";
+	echo "</ul>";
 }
 
+/*
+ * @todo - remove the css code
+ */
 function document_editdata(&$document) {
-	global $g,$dirid,$group_id;
+	global $g, $dirid, $group_id;
 	$dgh = new DocumentGroupHTML($g);
-        if ($dgh->isError())
-                exit_error($dgh->getErrorMessage(),'docman');
+	if ($dgh->isError())
+		exit_error($dgh->getErrorMessage(), 'docman');
 
 	$dgf = new DocumentGroupFactory($g);
-        if ($dgf->isError())
-                exit_error($dgf->getErrorMessage(),'docman');
+	if ($dgf->isError())
+		exit_error($dgf->getErrorMessage(), 'docman');
 
 ?>
 <div class="docmanDivIncluded">
@@ -232,115 +238,109 @@ function document_editdata(&$document) {
 <table>
 	<tr>
 		<td style="text-align:right;"> <strong><?php echo _('Document Title') ?></strong><?php echo utils_requiredField(); ?>
-        </td>
-        <td>
+	</td>
+	<td>
 			<input type="text" name="title" size="40" maxlength="255" value="<?php echo $document->getName(); ?>" />
-            <?php printf(_('(at least %1$s characters)'), 5) ?>
+		<?php printf(_('(at least %1$s characters)'), 5) ?>
 		</td>
 	</tr>
-    <tr>
+	<tr>
 		<td style="text-align:right;">
-            <strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?>
-        </td>
-        <td>
-            <input type="text" name="description" size="50" maxlength="255" value="<?php echo $document->getDescription(); ?>" />
-            <?php printf(_('(at least %1$s characters)'), 10) ?>
-        </td>
-    </tr>
+		<strong><?php echo _('Description') ?></strong><?php echo utils_requiredField(); ?>
+		</td>
+		<td>
+			<input type="text" name="description" size="50" maxlength="255" value="<?php echo $document->getDescription(); ?>" />
+			<?php printf(_('(at least %1$s characters)'), 10) ?>
+		</td>
+	</tr>
 
-    <tr>
+	<tr>
 		<td style="text-align:right;">
-            <strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?>
-        </td>
-        <td>
-        <?php if ($document->isURL()) {
-            echo '<a href="'.inputSpecialchars($d->getFileName()).'">[View File URL]</a>';
-        } else { ?>
-            <a target="_blank" href="../view.php/<?php echo $group_id.'/'.$document->getID().'/'.urlencode($document->getFileName()) ?>"><?php echo $document->getName(); ?></a>
-        <?php } ?>
-        </td>
-    </tr>
+			<strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?>
+		</td>
+		<td>
+			<?php if ($document->isURL()) {
+					echo '<a href="'.inputSpecialchars($d->getFileName()).'">[View File URL]</a>';
+				} else { ?>
+					<a target="_blank" href="../view.php/<?php echo $group_id.'/'.$document->getID().'/'.urlencode($document->getFileName()) ?>"><?php echo $document->getName(); ?></a>
+			<?php } ?>
+		</td>
+	</tr>
 
 <?php
 
-    if ((!$document->isURL()) && ($document->isText())) {
+	if ((!$document->isURL()) && ($document->isText())) {
 		if ($g->useCreateOnline()) {
-        	echo '<tr>
-	                <td colspan="2">';
-	
+		echo '<tr>
+			<td colspan="2">';
 			echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
 			switch ($document->getFileType()) {
-			case "text/html":
-				$GLOBALS['editor_was_set_up']=false;
-				$params = array() ;
-				/* warning name must be unique */
-				$params['name'] = 'details'.$document->getID();
-				$params['width'] = "800";
-				$params['height'] = "300";
-				$params['body'] = $d->getFileData();
-				$params['group'] = $group_id;
-				plugin_hook("text_editor",$params);
-				if (!$GLOBALS['editor_was_set_up']) {
-					echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+				case "text/html": {
+					$GLOBALS['editor_was_set_up']=false;
+					$params = array() ;
+					/* warning name must be unique */
+					$params['name'] = 'details'.$document->getID();
+					$params['width'] = "800";
+					$params['height'] = "300";
+					$params['body'] = $d->getFileData();
+					$params['group'] = $group_id;
+					plugin_hook("text_editor",$params);
+					if (!$GLOBALS['editor_was_set_up']) {
+						echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+					}
+					echo '<input type="hidden" name="filetype" value="text/html">';
+					unset($GLOBALS['editor_was_set_up']);
+					break;
 				}
-				echo '<input type="hidden" name="filetype" value="text/html">';
-				unset($GLOBALS['editor_was_set_up']);
-				break;
-			default:
-				echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
-				echo '<input type="hidden" name="filetype" value="text/plain">';
+				default: {
+					echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+					echo '<input type="hidden" name="filetype" value="text/plain">';
+				}
 			}
 
 			echo '	</td>
-		    	</tr>';
+			</tr>';
 		}
 	}
 ?>
-    <tr>
+	<tr>
 		<td style="text-align:right;">
-            <strong><?php echo _('Directory that document belongs in') ?></strong>
-        </td>
-        <td>
-            <?php $dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $document->getDocGroupID()); ?>
-        </td>
-    </tr>
-    <tr>
+			<strong><?php echo _('Directory that document belongs in') ?></strong>
+		</td>
+		<td>
+			<?php $dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $document->getDocGroupID()); ?>
+		</td>
+	</tr>
+	<tr>
 		<td style="text-align:right;">
-            <strong><?php echo _('State') ?></strong>
-        </td>
-        <td>
-            <?php doc_get_state_box($document->getStateID()); ?>
-        </td>
-    </tr>
-    <tr>
-        <td style="text-align:right;">
-        <?php if ($document->isURL()) { ?>
-            <strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?>
-        </td>
-        <td>
-            <input type="text" name="file_url" size="50" value="<?php echo $document->getFileName() ?>" />
-        <?php } else { ?>
-            <strong><?php echo _('OPTIONAL: Upload new file') ?></strong>
-        </td>
-        <td>
-            <input type="file" name="uploaded_data" size="30" />
-            <?php
-            	if (forge_get_config('use_ftp_uploads')) {
-                	echo '<strong>' ;
-                	printf(_('OR choose one form FTP %1$s.'), forge_get_config('ftp_upload_host'));
-                	echo '</strong><br />' ;
-                	$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
-                	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
-            	}
+			<strong><?php echo _('State') ?></strong>
+		</td>
+		<td>
+			<?php doc_get_state_box($document->getStateID()); ?>
+		</td>
+	</tr>
+	<tr>
+		<td style="text-align:right;">
+			<?php if ($document->isURL()) { ?>
+			<strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?>
+		</td>
+		<td>
+			<input type="text" name="file_url" size="50" value="<?php echo $document->getFileName() ?>" />
+			<?php } else { ?>
+			<strong><?php echo _('OPTIONAL: Upload new file') ?></strong>
+		</td>
+		<td>
+			<input type="file" name="uploaded_data" size="30" />
+			<?php
 			}
-	        ?>
-        </td>
-    </tr>
-    </table>
+			?>
+		</td>
+	</tr>
+</table>
 
-    <input type="hidden" name="docid" value="<?php echo $document->getID(); ?>" />
-    <input type="submit" id="submiteditdata<?php echo $document->getID(); ?>" value="<?php echo _('Submit Edit') ?>" /><br /><br />
-    </form>
+<input type="hidden" name="docid" value="<?php echo $document->getID(); ?>" />
+<input type="submit" id="submiteditdata<?php echo $document->getID(); ?>" value="<?php echo _('Submit Edit') ?>" /><br /><br />
+</form>
 </div>
 <?php
 }
