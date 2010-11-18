@@ -4701,6 +4701,7 @@ tests/build/packages/BuildTest.php -text
 tests/code/deprecations/DeprecationsTest.php -text
 tests/code/syntax/SyntaxTest.php -text
 tests/func/AllTests.php -text
+tests/func/Docs/createDocURLTest.php -text
 tests/func/Forums/forumsTest.php -text
 tests/func/News/newsTest.php -text
 tests/func/PluginsBlocks/blocksTest.php -text

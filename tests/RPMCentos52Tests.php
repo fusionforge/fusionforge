@@ -22,6 +22,7 @@ class RPMCentos52Tests
 		$suite->addTestFiles(glob("func/Site/*Test.php"));
 		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
 		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
+		$suite->addTestFiles(glob("func/Docs/*Test.php"));
 		$suite->addTestFiles(glob("func/Forums/*Test.php"));
 		$suite->addTestFiles(glob("func/News/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
