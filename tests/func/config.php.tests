@@ -20,7 +20,6 @@ define ('URL', 'http://centos52.local/');
 define ('ROOT', '');
 
 // Database connection parameters.
-define('DB_TYPE', 'pgsql');         // Values: mysql, pgsql
 define('DB_NAME', 'fforge');
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
