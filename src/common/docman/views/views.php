@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -30,10 +31,12 @@ switch ($view) {
 	case 'editfile':
 	case 'listfile':
 	case 'trashdir':
-	case 'search':
+	case 'search': {
 		include ($gfcommon.'docman/views/'.$view.'.php');
 		break;
-	default:
+	}
+	default: {
 		include ($gfcommon.'docman/views/help.php');
+	}
 }
 ?>

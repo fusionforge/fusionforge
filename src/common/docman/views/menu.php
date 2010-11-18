@@ -6,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -29,19 +30,18 @@
 global $HTML; // html object
 global $d_arr; // document array
 global $group_id; // id of group
-global $g; // project group object
 
 /* create the submenu following role, rules and content */
-$menu_text=array();
-$menu_links=array();
+$menu_text = array();
+$menu_links = array();
 
-if (forge_check_perm ('docman', $group_id, 'submit')) {
+if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[]=_('Submit new documentation');
 	$menu_links[]='/docman/?group_id='.$group_id.'&view=addfile';
 }
 
 if (session_loggedin()) {
-	if (forge_check_perm ('docman', $group_id, 'approve')) {
+	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$menu_text[]=_('Add new documentation directory');
 		$menu_links[]='/docman/?group_id='.$group_id.'&view=addsubdocgroup';
 	}
@@ -54,7 +54,7 @@ if ($g->useDocmanSearch()) {
 	}
 }
 
-if (forge_check_perm ('docman', $group_id, 'admin')) {
+if (forge_check_perm('docman', $group_id, 'admin')) {
 	$menu_text[]=_('Admin');
 	$menu_links[]='/docman/?group_id='.$group_id.'&view=admin';
 }
@@ -62,5 +62,4 @@ if (forge_check_perm ('docman', $group_id, 'admin')) {
 echo $HTML->subMenu( $menu_text, $menu_links);
 
 plugin_hook ("blocks", "doc index");
-
 ?>

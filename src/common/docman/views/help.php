@@ -22,6 +22,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* please do not add require here : use www/docman/index.php to add require */
+/* global variables used */
+global $group_id; // id of the group
+global $g; //id of the doc_group
+
 echo '<div class="docmanDivIncluded">';
 plugin_hook ("blocks", "doc help");
 if ($g->useWebdav()) {

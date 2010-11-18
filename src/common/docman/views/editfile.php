@@ -65,101 +65,93 @@ foreach ($nested_docs[$dirid] as $d) {
 		<td>
 			<strong><?php echo _('Document Title:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 5) ?><br />
 			<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>" />
-			<br />
 		</td>
 	</tr>
 
-    <tr>
-        <td>
-        <strong><?php echo _('Description:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
-        <input type="text" name="description" size="50" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
-        <br /></td>
-    </tr>
+	<tr>
+		<td>
+			<strong><?php echo _('Description:') ?> </strong><?php echo utils_requiredField(); ?> <?php printf(_('(at least %1$s characters)'), 10) ?><br />
+			<input type="text" name="description" size="50" maxlength="255" value="<?php echo $d->getDescription(); ?>" />
+		</td>
+	</tr>
 
-    <tr>
-        <td>
-        <strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?><br />
-        <?php if ($d->isURL()) {
-            echo '<a href="'.inputSpecialchars($d->getFileName()).'">['. _('View File URL') .']</a>';
-        } else { ?>
-        <a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()) ?>"><?php echo $d->getFileName(); ?></a>
-        <?php } ?>
-        </td>
-    </tr>
+	<tr>
+		<td>
+			<strong><?php echo _('File')?></strong><?php echo utils_requiredField(); ?><br />
+			<?php if ($d->isURL()) {
+				echo '<a href="'.inputSpecialchars($d->getFileName()).'">['. _('View File URL') .']</a>';
+				} else { ?>
+			<a target="_blank" href="view.php/<?php echo $group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()) ?>"><?php echo $d->getFileName(); ?></a>
+			<?php } ?>
+		</td>
+	</tr>
 
 <?php
 
-    if ((!$d->isURL()) && ($d->isText())) {
+	if ((!$d->isURL()) && ($d->isText())) {
 		if ($g->useCreateOnline()) {
-        	echo '<tr>
-	                <td>';
+			echo '<tr>
+				<td>';
 			echo _('Edit the contents to your desire or leave them as they are to remain unmodified.');
 			switch ($d->getFileType()) {
-			case "text/html":
-				$GLOBALS['editor_was_set_up']=false;
-				$params = array() ;
-				/* name must be != data then nothing is displayed */
-				$params['name'] = 'details'.$d->getID();
-				$params['width'] = "800";
-				$params['height'] = "300";
-				$params['group'] = $group_id;
-				$params['body'] = $d->getFileData();
-				plugin_hook("text_editor",$params);
-				if (!$GLOBALS['editor_was_set_up']) {
-					echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+				case "text/html": {
+					$GLOBALS['editor_was_set_up']=false;
+					$params = array() ;
+					/* name must be != data then nothing is displayed */
+					$params['name'] = 'details'.$d->getID();
+					$params['width'] = "800";
+					$params['height'] = "300";
+					$params['group'] = $group_id;
+					$params['body'] = $d->getFileData();
+					plugin_hook("text_editor",$params);
+					if (!$GLOBALS['editor_was_set_up']) {
+						echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+					}
+					unset($GLOBALS['editor_was_set_up']);
+					echo '<input type="hidden" name="filetype" value="text/html">';
+					break;
 				}
-				unset($GLOBALS['editor_was_set_up']);
-				echo '<input type="hidden" name="filetype" value="text/html">';
-				break;
-			default:
-				echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
-				echo '<input type="hidden" name="filetype" value="text/plain">';
+				default: {
+					echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+					echo '<input type="hidden" name="filetype" value="text/plain">';
+				}
 			}
 			echo '	</td>
-		    	</tr>';
+			</tr>';
 		}
 	}
 ?>
-    <tr>
-        <td>
-        <strong><?php echo _('Directory that document belongs in') ?></strong><br />
-        <?php
+	<tr>
+		<td>
+			<strong><?php echo _('Directory that document belongs in') ?></strong><br />
+			<?php
 				$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $d->getDocGroupID());
 
-	     ?></td>
-    </tr>
-    <tr>
-        <td>
-        <br /><strong><?php echo _('State') ?>:</strong><br />
-        <?php
-		     doc_get_state_box($d->getStateID());
-        ?></td>
-    </tr>
-    <tr>
-        <td>
-        <?php if ($d->isURL()) { ?>
-        <strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?><br />
-        <input type="text" name="file_url" size="50" value="<?php echo $d->getFileName() ?>" />
-        <?php } else { ?>
-        <strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
-        <input type="file" name="uploaded_data" size="30" /><br/><br />
-            <?php
-            	if (forge_get_config('use_ftp_uploads')) {
-                	echo '<strong>' ;
-                	printf(_('OR choose one form FTP %1$s.'), forge_get_config('ftp_upload_host'));
-                	echo '</strong><br />' ;
-                	$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
-                	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
-                	echo '<br /><br />';
-            	}
-			}
-	        ?>
-        </td>
-    </tr>
-    </table>
-    <input type="hidden" name="docid" value="<?php echo $d->getID(); ?>" />
-    <input type="button" id="submiteditdata<?php echo $d->getID(); ?>" value="<?php echo _('Submit Edit') ?>" onclick="javascript:doItEditData<?php echo $d->getID(); ?>()" /><br /><br />
-    </form>
+		?></td>
+	</tr>
+	<tr>
+		<td>
+			<strong><?php echo _('State') ?>:</strong><br />
+			<?php doc_get_state_box($d->getStateID()); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php if ($d->isURL()) { ?>
+		<strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<input type="text" name="file_url" size="50" value="<?php echo $d->getFileName() ?>" />
+		<?php } else { ?>
+		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
+		<input type="file" name="uploaded_data" size="30" />
+		<?php
+		}
+		?>
+		</td>
+	</tr>
+</table>
+<input type="hidden" name="docid" value="<?php echo $d->getID(); ?>" />
+<input type="button" id="submiteditdata<?php echo $d->getID(); ?>" value="<?php echo _('Submit Edit') ?>" onclick="javascript:doItEditData<?php echo $d->getID(); ?>()" />
+</form>
 </div>
 <?php
 }

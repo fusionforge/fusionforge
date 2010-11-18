@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -31,11 +32,12 @@ global $dirid; //id of the doc_group
 global $dgh; // document group html object
 global $gdf; // document grou factory object
 
+echo '<div class="docmanDivIncluded">';
 if ( $dgf->getNested() == NULL ) {
-	echo '<div class="docmanDivIncluded">';
 	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</p></div>';
 } else {
 	/* display the add new documentation form */
+	/* @todo - use jquery and javascript controler */
 ?>
 	<script type="text/javascript" >
 	function displayRowFile() {
@@ -52,13 +54,12 @@ if ( $dgf->getNested() == NULL ) {
 	}
 	function displayRowEditor() {
 		document.getElementById('filerow').style.display = 'none';
-	document.getElementById('urlrow').style.display = 'none';
+		document.getElementById('urlrow').style.display = 'none';
 		document.getElementById('editrow').style.display = '';
 		document.getElementById('editnamerow').style.display = '';
 	}
 	</script>
 <?php
-	echo '<div class="docmanDivIncluded">';
 	echo '<p><strong>'. _('Document Title:') .'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
 	echo '<p><strong>'. _('Description:') .'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
 
@@ -78,39 +79,39 @@ if ( $dgf->getNested() == NULL ) {
 				<tr>
 					<td style="text-align:right;">
 						<strong>'. _('Description') .'</strong>'.utils_requiredField()
-                	.'</td><td>'
-                    	.'&nbsp;<input type="text" name="description" size="50" maxlength="255" />&nbsp;'
-                    	.sprintf(_('(at least %1$s characters)'), 10)
+				 	.'</td><td>'
+						.'&nbsp;<input type="text" name="description" size="50" maxlength="255" />&nbsp;'
+						.sprintf(_('(at least %1$s characters)'), 10)
 					.'</td>
 				</tr>
 				<tr>
 					<td style="text-align:right;">
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
-                	.'</td><td>
+					.'</td><td>
 					<input type="radio" name="type" value="httpupload" onClick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onClick="javascript:displayRowUrl()" />'. _('URL');
-	if ($g->useCreateOnline()) {
-   		echo '<input type="radio" name="type" value="editor" onClick="javascript:displayRowEditor()" />'. _('Create online');
-	}
-	echo '			</td>
+			if ($g->useCreateOnline()) {
+				echo '<input type="radio" name="type" value="editor" onClick="javascript:displayRowEditor()" />'. _('Create online');
+			}
+			echo '		</td>
 				</tr>
 				<tr id="filerow" style="display:none">
 					<td style="text-align:right;">
 						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
-                	.'</td><td>'
+					.'</td><td>'
 						.'&nbsp;<input type="file" name="uploaded_data" size="30" />
 					</td>
 				</tr>
 				<tr id="urlrow" style="display:none">
 					<td style="text-align:right;">
 						<strong>'. _('URL') .'</strong>'. utils_requiredField()
-                	.'</td><td>'
+					.'</td><td>'
 						.'&nbsp;<input type="text" name="file_url" size="30" />
 					</td>
 				</tr>
 				<tr id="editnamerow" style="display:none">
 					<td style="text-align:right;">
 						<strong>'. _('File Name') .'</strong>'. utils_requiredField()
-                	.'</td><td>'
+					.'</td><td>'
 						.'&nbsp;<input type="text" name="name" size="30" />
 					</td>
 				</tr>
@@ -126,8 +127,8 @@ if ( $dgf->getNested() == NULL ) {
 	$params['group'] = $group_id;
 	plugin_hook("text_editor",$params);
 	if (!$GLOBALS['editor_was_set_up']) {
-		    echo '<textarea name="details" rows="5" cols="80"></textarea>';
-}
+		echo '<textarea name="details" rows="5" cols="80"></textarea>';
+	}
 	unset($GLOBALS['editor_was_set_up']);
 	echo '
 					</td>
@@ -139,17 +140,17 @@ if ( $dgf->getNested() == NULL ) {
 				<tr>
 					<td>
 						<strong>'. _('Directory that document belongs in').'</strong>
-                	</td><td>';
+					</td><td>';
 		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
 		echo '
 					</td>
 				</tr>';
 	}
-	echo '  </table>';
-	echo utils_requiredField() . ' '. _('Mandatory field');
-	echo '  <div class="docmanSubmitDiv">
-		    	<input type="submit" name="submit" value="'. _('Submit Information').' " />
-        	</div>
+	echo '	</table>';
+	echo utils_requiredField() .' '. _('Mandatory field');
+	echo '	<div class="docmanSubmitDiv">
+			<input type="submit" name="submit" value="'. _('Submit Information'). '" />
+		</div>
 		</form>';
 }
 

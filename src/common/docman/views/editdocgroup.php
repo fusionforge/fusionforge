@@ -6,6 +6,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -33,32 +34,32 @@ global $dgf; // document directory factory of this group
 global $dgh; // document directory html
 
 if (forge_check_perm ('docman', $group_id, 'approve')) {
-	$dg = new DocumentGroup($g,$dirid);
+	$dg = new DocumentGroup($g, $dirid);
 	if ($dg->isError())
-        session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 ?>
 <div class="docmanDivIncluded">
-<form name="editgroup" action="?group_id=<?php echo $group_id; ?>&action=editdocgroup" method="post">
-<input type="hidden" name="dirid" value="<?php echo $dirid; ?>" />
-<table>
-<tr>
-<th><?php echo _('Directory Name') ?></th>
-<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
-<td>&nbsp;</td>
-<th><?php echo _('belongs to') ?></th>
-<td>
+	<form name="editgroup" action="?group_id=<?php echo $group_id; ?>&action=editdocgroup" method="post">
+		<input type="hidden" name="dirid" value="<?php echo $dirid; ?>" />
+		<table>
+			<tr>
+				<td><?php echo _('Directory Name') ?></td>
+				<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
+				<td>&nbsp;</td>
+				<td><?php echo _('belongs to') ?></td>
+				<td>
 <?php
-	$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
+			$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
 ?>
-</td>
-<td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
-</tr>
-</table>
-<p>
-<?php echo _('Directory name will be used as a title, so it should be formatted correspondingly.') ?>
-</p>
-</form>
+				</td>
+				<td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
+			</tr>
+		</table>
+		<p>
+		<?php echo _('Directory name will be used as a title, so it should be formatted correspondingly.') ?>
+		</p>
+	</form>
 </div>
 <?php
 }

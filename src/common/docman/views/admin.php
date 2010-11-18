@@ -1,11 +1,11 @@
 <?php
-
 /**
  * FusionForge Documentation Manager
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -39,12 +39,12 @@ if ( !forge_check_perm ('docman', $group_id, 'approve')) {
 <div id="principalAdminDiv" class="docmanDivIncluded">
 <script type="text/javascript">
 function displayAdminDiv(id) {
-    var mainDiv = document.getElementById('principalAdminDiv');
-    for (var i = 0; i < mainDiv.childNodes.length; i++) {
-        if ('DIV' == mainDiv.childNodes[i].nodeName.toUpperCase() && id != mainDiv.childNodes[i].id) {
-            mainDiv.childNodes[i].style.display = 'none';
-        }
-    }
+	var mainDiv = document.getElementById('principalAdminDiv');
+	for (var i = 0; i < mainDiv.childNodes.length; i++) {
+		if ('DIV' == mainDiv.childNodes[i].nodeName.toUpperCase() && id != mainDiv.childNodes[i].id) {
+			mainDiv.childNodes[i].style.display = 'none';
+		}
+	}
 	if ( 'none' == document.getElementById(id).style.display ) {
 		document.getElementById(id).style.display = 'block';
 	} else {

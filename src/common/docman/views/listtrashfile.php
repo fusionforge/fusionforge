@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -32,16 +33,16 @@ $df->setStateID('2');
 $d_trash_arr =& $df->getDocuments();
 
 if (!$d_trash_arr || count($d_trash_arr) < 1) {
-    echo '<div class="feedback">'._('Trash is empty').'</div>';
+	echo '<div class="feedback">'._('Trash is empty').'</div>';
 } else {
 ?>
 <script type="text/javascript">
 function displayTrashDiv() {
-    if ( 'none' == document.getElementById('listtrash').style.display ) {
-        document.getElementById('listtrash').style.display = 'block';
-    } else {
-        document.getElementById('listtrash').style.display = 'none';
-    }
+	if ( 'none' == document.getElementById('listtrash').style.display ) {
+		document.getElementById('listtrash').style.display = 'block';
+	} else {
+		document.getElementById('listtrash').style.display = 'none';
+	}
 }
 </script>
 <?php
@@ -54,7 +55,7 @@ function displayTrashDiv() {
 	echo '<li><a href="#" onclick="javascript:displayTrashDiv()">'. _('Select documents to be resurrected from deleted status.') .'</a></li>';
 	echo '</ul>';
 	echo '<div id="listtrash" style="display:none;" >';
-    docman_display_documents($nested_groups,$df,true,2,0);
+	docman_display_documents($nested_groups, $df, true, 2, 0);
 	echo '</div>';
 }
 ?>
