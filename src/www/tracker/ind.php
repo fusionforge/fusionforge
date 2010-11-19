@@ -2,6 +2,7 @@
 /**
  * Tracker Front Page
  *
+ * Copyright 2010, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -30,6 +31,8 @@ $at_arr = $atf->getArtifactTypes();
 if ($at_arr === false) {
 	exit_permission_denied('tracker');
 }
+
+use_javascript('/js/sortable.js');
 
 //required params for site_project_header();
 $params['group']=$group_id;
@@ -61,8 +64,9 @@ if (!$at_arr || count($at_arr) < 1) {
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
-	$tablearr=array(_('Tracker'),_('Description'),_('Open'),_('Total'));
-	echo $HTML->listTableTop($tablearr);
+	$tablearr = array(_('Tracker'),_('Description'),_('Open'),_('Total'));
+
+	echo $HTML->listTableTop($tablearr, false, 'sortable_table_tracker', 'sortable_table_tracker');
 
 	for ($j = 0; $j < count($at_arr); $j++) {
 		if (!is_object($at_arr[$j])) {
@@ -71,7 +75,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			echo $at_arr[$j]->getErrorMessage();
 		} else {
 			echo '
-		<tr '. $HTML->boxGetAltRowStyle($j) . '>
+		<tr>
 			<td><a href="'.util_make_url ('/tracker/?atid='.$at_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse').'">'.
  				html_image("ic/tracker20w.png","20","20").' &nbsp;'.
 				$at_arr[$j]->getName() .'</a>
