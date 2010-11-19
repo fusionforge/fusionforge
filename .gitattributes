@@ -825,9 +825,9 @@ src/fusionforge-install-3-db.php -text
 src/fusionforge-install-4-config.php -text
 src/gforge-restricted.sh svneol=native#text/x-sh
 src/image-sources/README -text
-src/image-sources/fusionforge-logo.xcf -text svneol=unset#unset
-src/image-sources/pow-fusionforge.xcf -text svneol=unset#unset
-src/image-sources/top-logo.xcf -text svneol=unset#unset
+src/image-sources/fusionforge-logo.xcf -text
+src/image-sources/pow-fusionforge.xcf -text
+src/image-sources/top-logo.xcf -text
 src/install-common.inc -text
 src/install.sh -text svneol=unset#text/x-sh
 src/lib/vendor/jquery-tipsy/LICENSE -text
