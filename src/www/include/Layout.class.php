@@ -102,7 +102,6 @@ class Layout extends Error {
 	 */
 	var $COLOR_LTBACK1 = '#C0C0C0';
 
-
 	var $js = array();
 	var $js_min = array();
 	var $javascripts = array();
