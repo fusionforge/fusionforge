@@ -97,8 +97,16 @@ class SearchQuery extends Error {
 		$this->cleanSearchWords($words);
 		//We manual escap because every Query in Search escap parameters
 		$words = addslashes($words);
-		$this->words = array_map('addslashes',$this->words);
-		$this->phrases = array_map('addslashes',$this->phrases);
+		if (is_array ($this->words)){
+			$this->words = array_map ('addslashes',$this->words);
+		} else {
+			$this->words = array();
+		}
+		if (is_array ($this->phrases)){
+			$this->phrases = array_map ('addslashes',$this->phrases);
+		} else{
+			$this->phrases = array();
+		}
 		$this->rowsPerPage = $rowsPerPage;
 		$this->offset = $offset;
 		$this->isExact = $isExact;
