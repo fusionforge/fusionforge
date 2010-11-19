@@ -58,7 +58,7 @@ class DocumentGroupHTML extends Error {
 	 * @param	array	Array of IDs of groups that should not be displayed
 	 * @return	string	html select box code
 	 */
-	function showSelectNestedGroups ($group_arr, $select_name, $allow_none = true, $selected_id = 0, $dont_display = array()) {
+	function showSelectNestedGroups($group_arr, $select_name, $allow_none = true, $selected_id = 0, $dont_display = array()) {
 		// Build arrays for calling html_build_select_box_from_arrays()
 		$id_array = array();
 		$text_array = array();
