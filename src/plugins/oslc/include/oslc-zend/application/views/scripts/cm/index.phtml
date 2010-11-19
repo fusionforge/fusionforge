@@ -25,11 +25,13 @@ switch (TRACKER_TYPE) {
 	<li>
 	<p><tt>curl -H "Accept: application/x-oslc-disc-service-provider-catalog+xml" -X GET <a 
 		href="<?php 
-				$req_array = _getRequestArray();
-				echo util_make_uri($this->baseUrl().'/cm/oslc-services/?type='.$req_array['type'].'&id='.$req_array['id'].'&pluginname='.$req_array['pluginname']);
+				$catalog_uri = $this->serverUrl() . util_make_uri($this->baseUrl().'/cm/oslc-services/');
+				echo $catalog_uri;
 			?>
-		">
-		.../cm/oslc-services/</a></tt> : to retrieve an RDF/XML OSLC Service Provider Catalog document.</p>
+		"><?php
+		echo $catalog_uri;
+		?>
+		</a></tt> : to retrieve an RDF/XML OSLC Service Provider Catalog document.</p>
 	</li>
 </ul>
 </body>
