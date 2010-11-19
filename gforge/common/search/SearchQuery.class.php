@@ -93,14 +93,28 @@ class SearchQuery extends Error {
 	 * @param int $rowsPerPage number of rows per page
 	 */
 	function SearchQuery($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
+		if(is_null($this->phrases)){
+			$this->phrases = array();
+		}
 		if (get_magic_quotes_gpc()) {
 			$words = stripslashes($words);
 		}
 		$this->cleanSearchWords($words);
 		//We manual escap because every Query in Search escap parameters
 		$words = addslashes($words);
-		$this->words = array_map('addslashes',$this->words);
-		$this->phrases = array_map('addslashes',$this->phrases);
+		
+		if(is_null($this->words)){
+			$this->words = array();
+		}else{
+			$this->words = array_map('addslashes',$this->words);
+		}
+
+		if(is_null($this->phrases)){
+			$this->phrases = array();
+		} else{
+			$this->phrases = array_map('addslashes',$this->phrases);
+		}
+
 		$this->rowsPerPage = $rowsPerPage;
 		$this->offset = $offset;
 		$this->isExact = $isExact;
