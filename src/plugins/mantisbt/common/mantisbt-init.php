@@ -1,9 +1,9 @@
 <?php
-
 /**
  *
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2009, Fabien Dubois - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,11 +23,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'mantisbt/common/MantisBTPlugin.class.php' ;
+require_once $gfplugins.'mantisbt/common/MantisBTPlugin.class.php';
 
-$MantisBTPluginObject = new MantisBTPlugin ;
+$MantisBTPluginObject = new MantisBTPlugin;
 
-register_plugin ($MantisBTPluginObject) ;
+register_plugin($MantisBTPluginObject);
 
 // Local Variables:
 // mode: php

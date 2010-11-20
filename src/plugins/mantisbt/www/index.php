@@ -2,10 +2,10 @@
 /*
  * MantisBT plugin
  *
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - Capgemini
- *          Fabien Dubois - Capgemini
- *          Antoine Mercadal - Capgemini
+ * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2009, Fabien Dubois - Capgemini
+ * Copyright 2010, Antoine Mercadal - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -34,8 +34,8 @@ function mantisbt_Project_Header($params) {
 	$params['toptab']='mantisbt';
 	$params['group']=$id;
 	/*
-		Show horizontal links
-		*/
+	 * Show horizontal links
+	*/
 	site_project_header($params);
 }
 
@@ -45,7 +45,7 @@ function mantisbt_User_Header($params) {
 	$params['toptab']='mantisbt';
 	$params['user']=$user_id;
 	/*
-	 Show horizontal links
+	 * Show horizontal links
 	 */
 	site_user_header($params);
 }
@@ -72,120 +72,120 @@ $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
-//$password = getPassword($user);
 $password = '';
 $username = $user->getUnixName();
 
 if (!$type) {
-	exit_missing_params($_SERVER['HTTP_REFERER'],array('No TYPE specified'),'mantisbt');
+	exit_missing_params($_SERVER['HTTP_REFERER'], array('No TYPE specified'),'mantisbt');
 } elseif (!$id) {
-	exit_missing_params($_SERVER['HTTP_REFERER'],array('No ID specified'),'mantisbt');
+	exit_missing_params($_SERVER['HTTP_REFERER'], array('No ID specified'),'mantisbt');
 } else {
-    switch ($type) {
-	    case 'group':
-		    $group = group_get_object($id);
-		    if ( !$group) {
-			    exit_no_group();
-		    }
-		    if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
-			    exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
-		    }
-		    $userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
-		    if ( !$userperm->IsMember()) {
-				exit_permission_denied(_('You are not a member of this project'),'home');
-		    }
-		    // other perms checks here...
-		    mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
-			
-		    // recuperer les info de URL
-		    $sort = getStringFromRequest('sort');
-		    $dir = getStringFromRequest('dir');
-		    $action = getStringFromRequest('action');
-		    $idBug = getStringFromRequest('idBug');
-			
-		    $idNote = getStringFromRequest('idNote');
-		    $idAttachment = getStringFromRequest('idAttachment');
-		    $actionAttachment = getStringFromRequest('actionAttachment');
-		    $page = getStringFromRequest('page');
-
-		    // Si la variable $_GET['page'] existe...
-		    if($page != null && $page != ''){
-			    $pageActuelle=intval($page);
-		    }
-		    else {
-			    $pageActuelle=1; // La page actuelle est la n°1 
-		    }
-
-		    $format = "%07d";
-
-		    if($idProjetMantis == 0){
-		 	    exit_error(_('Projet non initialisé. Pour forcer son activation, il faut désactiver/activer mantis pour ce projet'),'home');
-		    } else if (is_int($password)){
-		 	    exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
-		    } else {
-			    // do the job
-			    include ('mantisbt/www/group/index.php');
-		    }
-            break;
-        case 'user':
-		    $realuser = user_get_object($id);//
-		    if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
-			    exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'),$pluginname),'my');
-		    }
-		    if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private MantisBT part of this user
-			    exit_permission_denied(sprintf(_('You cannot access other user\'s personal %s'),$pluginname),'my');
-		    }
-		    mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
-
-		    //$password = getPasswordFromLDAP($realuser);
-			$password ='';
-		    $username = $realuser->getUnixName();
-
-		    // recuperer les info de URL
-		    $sort = getStringFromRequest('sort');
-		    $dir = getStringFromRequest('dir');
-		    $action = getStringFromRequest('action');
-		    $idBug = getStringFromRequest('idBug');
-
-		    $idNote = getStringFromRequest('idNote');
-		    $page = getStringFromRequest('page');
-		    // Si la variable $_GET['page'] existe...
-		    if($page != null && $page != ''){
-			    $pageActuelle=intval($page);
-		    } else {
-			    $pageActuelle=1; // La page actuelle est la n°1 
-		    }
-
-		    $format = "%07d";
-
-		    if (!is_int($password)){
-			    // do the job
-			    include ('mantisbt/www/user/index.php');
-		    } else {
-		 	    exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
-		    }
-            break;
-        case 'admin':
-		    $group = group_get_object($id);
-		    if ( !$group) {
+	switch ($type) {
+		case 'group': {
+			$group = group_get_object($id);
+			if ( !$group) {
 				exit_no_group();
-		    }
-		    if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
-			    exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
-		    }
-		    $userperm = $group->getPermission($user);//we'll check if the user belongs to the group
-		    if ( !$userperm->IsMember()) {
-			    exit_permission_denied(_('You are not a member of this project'));
-		    }
-		    //only project admin can access here
-		    if ( $userperm->isAdmin() ) {
-			    // DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-			    mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));	
-			    include ('mantisbt/www/admin/index.php');
-		    } else {
-			    exit_permission_denied(_('You are not Admin of this project'),'home');
-		    }
-            break;
+			}
+			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
+				exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+			}
+			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
+			if ( !$userperm->IsMember()) {
+				exit_permission_denied(_('You are not a member of this project'),'home');
+			}
+			// other perms checks here...
+			mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+
+			// URL analysis
+			$sort = getStringFromRequest('sort');
+			$dir = getStringFromRequest('dir');
+			$action = getStringFromRequest('action');
+			$idBug = getStringFromRequest('idBug');
+			$idNote = getStringFromRequest('idNote');
+			$idAttachment = getStringFromRequest('idAttachment');
+			$actionAttachment = getStringFromRequest('actionAttachment');
+			$page = getStringFromRequest('page');
+
+			// Si la variable $_GET['page'] existe...
+			if($page != null && $page != ''){
+				$pageActuelle=intval($page);
+			}
+			else {
+				$pageActuelle=1; // La page actuelle est la n°1 
+			}
+
+			$format = "%07d";
+
+			if($idProjetMantis == 0){
+				exit_error(_('Uninitialized Project. Force his activation by desactivate/activate mantisbt for this project'),'home');
+			} else if (is_int($password)){
+				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
+			} else {
+				// do the job
+				include ('mantisbt/www/group/index.php');
+			}
+			break;
+		}
+		case 'user': {
+			$realuser = user_get_object($id);//
+			if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
+				exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'),$pluginname),'my');
+			}
+			if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private MantisBT part of this user
+				exit_permission_denied(sprintf(_('You cannot access other user\'s personal %s'),$pluginname),'my');
+			}
+			mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
+
+			$password ='';
+			$username = $realuser->getUnixName();
+
+			// URL analysis
+			$sort = getStringFromRequest('sort');
+			$dir = getStringFromRequest('dir');
+			$action = getStringFromRequest('action');
+			$idBug = getStringFromRequest('idBug');
+
+			$idNote = getStringFromRequest('idNote');
+			$page = getStringFromRequest('page');
+			// Si la variable $_GET['page'] existe...
+			if($page != null && $page != ''){
+				$pageActuelle=intval($page);
+			} else {
+				$pageActuelle=1; // La page actuelle est la n°1 
+			}
+
+			$format = "%07d";
+
+			if (!is_int($password)){
+				// do the job
+				include ('mantisbt/www/user/index.php');
+			} else {
+				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
+			}
+			break;
+		}
+		case 'admin': {
+			$group = group_get_object($id);
+			if ( !$group) {
+				exit_no_group();
+			}
+			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
+				exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+			}
+			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
+			if ( !$userperm->IsMember()) {
+				exit_permission_denied(_('You are not a member of this project'));
+			}
+			//only project admin can access here
+			if ( $userperm->isAdmin() ) {
+				// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
+				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));	
+				include ('mantisbt/www/admin/index.php');
+			} else {
+				exit_permission_denied(_('You are not Admin of this project'),'home');
+			}
+			break;
+		}
 	}
 }
 
