@@ -210,18 +210,18 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			// mise a jour de l'adresse mail utilisateur
-			case "change_cal_mail":
+			case "change_cal_mail": {
 				$user_id=$params[1];
 				updateUserInMantis($user_id);
 				break;
 			}
 			case "add_cal_link_father":
-			case "del_cal_link_father":
+			case "del_cal_link_father": {
 				$sub_group_id = $params[0];
 				$group_id = $params[1];
 				refreshHierarchyMantisBt();
 				break;
-			
+			}
 			case "group_delete": {
 				$group_id=$params['group_id'];
 				$group = &group_get_object($group_id);
