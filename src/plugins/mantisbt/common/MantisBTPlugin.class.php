@@ -216,12 +216,12 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			case "add_cal_link_father":
-			case "del_cal_link_father": {
+			case "del_cal_link_father":
 				$sub_group_id = $params[0];
 				$group_id = $params[1];
 				refreshHierarchyMantisBt();
 				break;
-			}
+			
 			case "group_delete": {
 				$group_id=$params['group_id'];
 				$group = &group_get_object($group_id);
