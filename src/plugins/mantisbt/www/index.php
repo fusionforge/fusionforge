@@ -93,8 +93,6 @@ if (!$type) {
 			if ( !$userperm->IsMember()) {
 				exit_permission_denied(_('You are not a member of this project'),'home');
 			}
-			// other perms checks here...
-			mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 
 			// URL analysis
 			$sort = getStringFromRequest('sort');
@@ -122,6 +120,7 @@ if (!$type) {
 				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
 			} else {
 				// do the job
+				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 				include ('mantisbt/www/group/index.php');
 			}
 			break;
@@ -134,7 +133,6 @@ if (!$type) {
 			if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private MantisBT part of this user
 				exit_permission_denied(sprintf(_('You cannot access other user\'s personal %s'),$pluginname),'my');
 			}
-			mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
 
 			$password ='';
 			$username = $realuser->getUnixName();
@@ -158,6 +156,7 @@ if (!$type) {
 
 			if (!is_int($password)){
 				// do the job
+				mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
 				include ('mantisbt/www/user/index.php');
 			} else {
 				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
