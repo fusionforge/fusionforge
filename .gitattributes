@@ -1,6 +1,7 @@
 * text=auto !eol
 /.bzrignore -text
 3rd-party/Makefile -text
+3rd-party/Makefile.rh -text
 3rd-party/PEAR/Archive_Tar-1.3.3.tgz -text svneol=unset#application/gzip
 3rd-party/PEAR/Console_Getopt-1.2.3.tgz -text svneol=unset#application/gzip
 3rd-party/PEAR/Mail-1.1.14.tgz -text svneol=unset#application/gzip
@@ -54,6 +55,7 @@
 3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1coclico1.diff.gz -text svneol=unset#application/gzip
 3rd-party/php-mail-mbox/php-mail-mbox_0.6.3-1coclico1.dsc -text
 3rd-party/php-mail-mbox/php-mail-mbox_0.6.3.orig.tar.gz -text svneol=unset#application/gzip
+3rd-party/php-pear-HTTP_WebDAV_Server/php-pear-HTTP_WebDAV_Server.spec -text
 3rd-party/selenium/Makefile -text
 3rd-party/yui/Makefile -text
 3rd-party/yui/Makefile.debian -text

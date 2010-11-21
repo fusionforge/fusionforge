@@ -63,6 +63,7 @@ Requires: htmlpurifier >= 4.0.0
 Requires: sed
 Requires: coreutils
 Requires: /usr/bin/newaliases
+Requires: php-pear-HTTP_WebDAV_Server
  
 # BuildRequires: sed, perl
 

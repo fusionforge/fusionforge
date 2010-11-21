@@ -7,8 +7,6 @@
 RPM_TMP=~/rpmbuild
 BUILDRESULT=~/fusionforge_repo
 
-HTMLPURIFIER_VERSION=4.2.0
-
 VER=$(shell LANG=C grep '>software_version' src/common/include/FusionForge.class.php | cut -d\' -f2)
 in_svn_repo:= $(wildcard .svn/)
 ifeq ($(strip $(in_svn_repo)),)
@@ -33,9 +31,7 @@ list:
 	@echo ======================================================================================
 	@cat Makefile.rh | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
-all: fusionforge externals dist
-
-externals : htmlpurifier php-jpgraph
+all: 3rd-party fusionforge dist
 
 rpmprep:
 	-rm -Rf $(RPM_TMP)/*
@@ -48,8 +44,7 @@ rpmprep:
 
 dist:
 	-mkdir -p $(BUILDRESULT)
-	cp $(RPM_TMP)/SRPMS/*.rpm $(BUILDRESULT)
-	cp $(RPM_TMP)/RPMS/noarch/*.rpm  $(BUILDRESULT)
+	cp $(RPM_TMP)/RPMS/noarch/*.rpm $(BUILDRESULT)
 	createrepo $(BUILDRESULT)
 
 clean:		# Clean files of fusionforge build                         #
@@ -64,19 +59,7 @@ fusionforge: rpmprep		# Build rpm fusionforge packages                          
 	sed -e 's/@@VERSION@@/$(version)/g' < src/fusionforge.spec > $(RPM_TMP)/TMP/fusionforge.spec
 	rpmbuild -bb $(RPM_TMP)/TMP/fusionforge.spec
 
-#
-# Building RPM for external components
-#
-htmlpurifier: rpmprep depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
-	cp depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz $(RPM_TMP)/SOURCES/
-	rpmbuild --quiet --clean -ba 3rd-party/htmlpurifier/htmlpurifier.spec
+3rd-party:
+	cd 3rd-party; $(MAKE) -f Makefile.rh all
 
-php-jpgraph: rpmprep
-	cp 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz $(RPM_TMP)/SOURCES/jpgraph-1.5.2.tar.gz
-	zcat 3rd-party/php-jpgraph/libphp-jpgraph_1.5.2-12.diff.gz > $(RPM_TMP)/SOURCES/libphp-jpgraph_1.5.2-12.diff
-	cp 3rd-party/php-jpgraph/*.patch $(RPM_TMP)/SOURCES/
-	rpmbuild --quiet --clean -ba 3rd-party/php-jpgraph/php-jpgraph.spec
-
-depot/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz: rpmprep
-	mkdir -p depot
-	cd depot; wget -q -N http://htmlpurifier.org/releases/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+.PHONY : 3rd-party

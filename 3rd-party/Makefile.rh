@@ -1,0 +1,53 @@
+#! /usr/bin/make -f
+#
+# Build 3rd party rpms like htmlpurifier, jpgraph.
+#
+# Once built, packages are in $RPM_TMP
+
+RPM_TMP=~/rpmbuild
+DEPOT=~/depot
+BUILDRESULT=~/fusionforge_repo
+
+HTMLPURIFIER_VERSION=4.2.0
+WEBDAV_SERVER_VERSION=1.0.0RC5
+
+all: htmlpurifier php-jpgraph php-pear-HTTP_WebDAV_Server dist
+
+rpmprep:
+	-rm -Rf $(RPM_TMP)/*
+	-rm -Rf ~/.rpmmacros
+	sh ../tools/rpmdev-setuptree
+	echo '%_tmppath %{_topdir}/TMP' >> ~/.rpmmacros
+	echo '%_buildroot %{_tmppath}/%{name}-root' >> ~/.rpmmacros
+	echo '%_sysconfdir /etc' >> ~/.rpmmacros
+	mkdir $(RPM_TMP)/TMP
+
+dist:
+	-mkdir -p $(BUILDRESULT)
+	cp $(RPM_TMP)/RPMS/noarch/*.rpm $(BUILDRESULT)
+	createrepo $(BUILDRESULT)
+
+#
+# Building RPM for external components
+#
+htmlpurifier: rpmprep $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+	cp $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz $(RPM_TMP)/SOURCES/
+	rpmbuild --quiet --clean -ba htmlpurifier/htmlpurifier.spec
+
+php-jpgraph: rpmprep
+	cp php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz $(RPM_TMP)/SOURCES/jpgraph-1.5.2.tar.gz
+	zcat php-jpgraph/libphp-jpgraph_1.5.2-12.diff.gz > $(RPM_TMP)/SOURCES/libphp-jpgraph_1.5.2-12.diff
+	cp php-jpgraph/*.patch $(RPM_TMP)/SOURCES/
+	rpmbuild --quiet --clean -ba php-jpgraph/php-jpgraph.spec
+
+php-pear-HTTP_WebDAV_Server: rpmprep $(DEPOT)/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz
+	cp $(DEPOT)/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz $(RPM_TMP)/SOURCES/
+	rpmbuild --quiet --clean -ba php-pear-HTTP_WebDAV_Server/php-pear-HTTP_WebDAV_Server.spec
+
+$(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz: rpmprep
+	mkdir -p $(DEPOT)
+	cd $(DEPOT); wget -q -N http://htmlpurifier.org/releases/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+
+$(DEPOT)/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz: rpmprep
+	mkdir -p $(DEPOT)
+	cd $(DEPOT); wget -q -N http://download.pear.php.net/package/HTTP_WebDAV_Server-$(WEBDAV_SERVER_VERSION).tgz
