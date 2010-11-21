@@ -76,9 +76,9 @@ $password = '';
 $username = $user->getUnixName();
 
 if (!$type) {
-	exit_missing_params($_SERVER['HTTP_REFERER'], array('No TYPE specified'),'mantisbt');
+	exit_missing_params($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
 } elseif (!$id) {
-	exit_missing_params($_SERVER['HTTP_REFERER'], array('No ID specified'),'mantisbt');
+	exit_missing_params($_SERVER['HTTP_REFERER'], array('No ID specified'), 'mantisbt');
 } else {
 	switch ($type) {
 		case 'group': {
@@ -86,12 +86,12 @@ if (!$type) {
 			if ( !$group) {
 				exit_no_group();
 			}
-			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the MantisBT plugin active
-				exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+			if ( ! ($group->usesPlugin( $pluginname )) ) {//check if the group has the MantisBT plugin active
+				exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $pluginname), 'home');
 			}
 			$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
 			if ( !$userperm->IsMember()) {
-				exit_permission_denied(_('You are not a member of this project'),'home');
+				exit_permission_denied(_('You are not a member of this project'), 'home');
 			}
 
 			// URL analysis
@@ -120,7 +120,7 @@ if (!$type) {
 				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
 			} else {
 				// do the job
-				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!', 'pagename'=>"$pluginname", 'sectionvals'=>array(group_getname($id))));
 				include ('mantisbt/www/group/index.php');
 			}
 			break;
@@ -154,9 +154,9 @@ if (!$type) {
 
 			$format = "%07d";
 
-			if (!is_int($password)){
+			if (!is_int($password)) {
 				// do the job
-				mantisbt_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
+				mantisbt_User_Header(array('title'=>sprintf(_('My %s'),$pluginname),'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
 				include ('mantisbt/www/user/index.php');
 			} else {
 				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');

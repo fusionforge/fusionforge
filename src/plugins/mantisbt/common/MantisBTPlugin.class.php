@@ -23,7 +23,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-
 /*
  * @todo :	need a massive cleanup
  *		deal correctly with password (might need direct db access ?)
@@ -106,21 +105,22 @@ class MantisBTPlugin extends Plugin {
 				$group_id = $params['group'];
 				$group = group_get_object($group_id);
 				$use_mantisbtplugin = getIntFromRequest('use_mantisbtplugin');
+
 				if ( $use_mantisbtplugin == "1" ) {
 					if (! $group->usesPlugin($this->name)) {
 						// activation plugin
 						$group->setPluginUse($this->name, true);
 
 						// add project in mantis if does not exists
-						if (!isProjetMantisCreated($group->data_array['group_id'])){
-							addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
+						if (!$this->isProjectMantisCreated($group->data_array['group_id'])){
+							$this->addProjectMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
 						}
 						// update users and roles in mantis
 						$members = array ();
 						foreach($group->getMembers() as $member){
 							$members[] = $member->data_array['user_name'];
 						}
-						updateUsersProjetMantis($group->data_array['group_id'],$members);
+						$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
 					}
 				} else if ( $use_mantisbtplugin == "0" ) {
 					$group->setPluginUse ( $this->name, false );
@@ -172,7 +172,7 @@ class MantisBTPlugin extends Plugin {
 			case "project_admin_plugins": {
 				// this displays the link in the project admin options page to it's  MantisBT administration
 				$group_id = $params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ( $group->usesPlugin ( $this->name ) ) {
 					echo util_make_link ("/plugins/mantisbt/index.php?id=$group_id&type=admin&pluginname=".$this->name,
 					_('View Admin MantisBT')
@@ -183,160 +183,162 @@ class MantisBTPlugin extends Plugin {
 			}
 			case "group_approved": {
 				$group_id=$params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					// ajout du projet mantis s'il n'existe pas
-					if (!isProjetMantisCreated($group->data_array['group_id'])){
-						addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
+					if (!$this->isProjetMantisCreated($group->data_array['group_id'])){
+						$this->addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
 					}
 					// mise a jour des utilisateurs avec les roles
 					$members = array ();
 					foreach($group->getMembers() as $member){
 						$members[] = $member->data_array['user_name'];
 					}
-					updateUsersProjetMantis($group->data_array['group_id'],$members);
+					$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
 				}
 				break;
 			}
 			case "change_cal_permission": {
 				// mise a jour des utilisateurs avec les roles
 				$group_id=$params[1];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				$members = array ();
 				foreach($group->getMembers() as $member){
 					$members[] = $member->data_array['user_name'];
 				}
-				//updateUsersProjetMantis($group->data_array['group_id'],$members);
+				$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
 				break;
 			}
 			// mise a jour de l'adresse mail utilisateur
 			case "change_cal_mail": {
 				$user_id=$params[1];
-				updateUserInMantis($user_id);
+				$this->updateUserInMantis($user_id);
 				break;
 			}
 			case "add_cal_link_father":
 			case "del_cal_link_father": {
 				$sub_group_id = $params[0];
 				$group_id = $params[1];
-				refreshHierarchyMantisBt();
+				$this->refreshHierarchyMantisBt();
 				break;
 			}
 			case "group_delete": {
 				$group_id=$params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					if (isProjetMantisCreated($group->data_array['group_id'])) {
-						removeProjetMantis($group->data_array['group_id']);
+					if ($this->isProjectMantisCreated($group->data_array['group_id'])) {
+						$this->removeProjectMantis($group->data_array['group_id']);
 					}
 				}
 				break;
 			}
 			case "group_update": {
 				$group_id=$params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					if (isProjetMantisCreated($group_id)) {
-						updateProjetMantis($group_id, $params['group_name'], $group->data_array['is_public'], $group->data_array['short_description']);
+					if ($this->isProjectMantisCreated($group_id)) {
+						$this->updateProjectMantis($group_id, $params['group_name'], $group->data_array['is_public'], $group->data_array['short_description']);
 					}
 				}
 				break;
 			}
 		}
 	}
-}
 
-function addProjetMantis($idProjet, $nomProjet, $isPublic, $description) {
+	function addProjectMantis($idProjet, $nomProjet, $isPublic, $description) {
 
-	$projet = array();
-	$project['name'] = $nomProjet;
-	$project['status'] = "development";
+		$projet = array();
+		$project['name'] = $nomProjet;
+		$project['status'] = "development";
 	
-	if ($isPublic == "1"){
-		$project['view_state'] = 10;
-	}else{
-		$project['view_state'] = 50;
-	}
-
-	$project['description'] = $description;
-	
-	try {
-		$clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-		$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user', 'mantisbt'), "password" => forge_get_config('adminsoap_password', 'mantisbt'), "project" => $project));
-	} catch (SoapFault $soapFault) {
-		echo $soapFault->faultstring;
-		exit;
-	}
-	if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
-		echo "Error : Impossible de créer le projet dans mantis";
-		exit;
-	}else{
-		db_query_params('INSERT INTO group_mantisbt (id_group, id_mantisbt) VALUES ($1,$2)',
-				array($idProjet, $idProjetMantis));
-		echo db_error();
-	}
-}
-
-function removeProjetMantis($idProjet) {
-	
-	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-					array($idProjet));
-
-	echo db_error();
-	$row = db_fetch_array($resIdProjetMantis);
-
-	if ($row == null || count($row)>2) {
-		echo 'removeProjetMantis:: ' . _('No project found');
-	}else{
-		$idMantisbt = $row['id_mantisbt'];
-		try {
-			$clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt));
-		} catch (SoapFault $soapFault) {
-			echo $soapFault->faultstring;
-		}
-		if (!isset($delete)){
-			echo 'removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$idProjet;
+		if ($isPublic == "1"){
+			$project['view_state'] = 10;
 		}else{
-			db_query_params('DELETE FROM group_mantisbt WHERE group_mantisbt.id_mantisbt = $1',
-					array($idMantisbt));
-			echo db_error();
+			$project['view_state'] = 50;
 		}
-	}
-}
 
-function updateProjetMantis($idProjet,$nomProjet,$isPublic, $description) {
-
-	$projet = array();
-	$project['name'] = $nomProjet;
-	$project['status'] = "development";
-
-	if ($isPublic == "1"){
-		$project['view_state'] = 10;
-	}else{
-		$project['view_state'] = 50;
-	}
-
-	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-					array($idProjet));
-	echo db_error();
-	$row = db_fetch_array($resIdProjetMantis);
-	if ($row == null || count($row)>2) {
-		echo 'updateProjetMantis:: ' . _('No project found');
-	}else{
-		$idMantisbt = $row['id_mantisbt'];
+		$project['description'] = $description;
+	
 		try {
-			$clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$update = $clientSOAP->__soapCall('mc_project_update', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt, "project" => $project));;
+			$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user', 'mantisbt'), "password" => forge_get_config('adminsoap_passwd', 'mantisbt'), "project" => $project));
 		} catch (SoapFault $soapFault) {
 			echo $soapFault->faultstring;
+			return false;
 		}
-		if (!isset($update))
-			echo 'updateProjetMantis::Error ' . _('Update MantisBT project');
+		if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
+			echo 'addProjetMantis::Error: ' . _('Unable to create project in Mantisbt');
+			return false;
+		}else{
+			$res = db_query_params('INSERT INTO group_mantisbt (id_group, id_mantisbt) VALUES ($1,$2)',
+					array($idProjet, $idProjetMantis));
+			if (!$res) {
+				return false;
+			}
+		}
+		return true;
 	}
-}
 
-function isProjetMantisCreated($idProjet){
+	function removeProjectMantis($idProjet) {
+	
+		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
+						array($idProjet));
+
+		echo db_error();
+		$row = db_fetch_array($resIdProjetMantis);
+
+		if ($row == null || count($row)>2) {
+			echo 'removeProjetMantis:: ' . _('No project found');
+		}else{
+			$idMantisbt = $row['id_mantisbt'];
+			try {
+				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+				$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt));
+			} catch (SoapFault $soapFault) {
+				echo $soapFault->faultstring;
+			}
+			if (!isset($delete)){
+				echo 'removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$idProjet;
+			}else{
+				db_query_params('DELETE FROM group_mantisbt WHERE group_mantisbt.id_mantisbt = $1',
+						array($idMantisbt));
+				echo db_error();
+			}
+		}
+	}
+
+	function updateProjectMantis($idProjet, $nomProjet, $isPublic, $description) {
+
+		$projet = array();
+		$project['name'] = $nomProjet;
+		$project['status'] = "development";
+
+		if ($isPublic == "1"){
+			$project['view_state'] = 10;
+		}else{
+			$project['view_state'] = 50;
+		}
+
+		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
+						array($idProjet));
+		echo db_error();
+		$row = db_fetch_array($resIdProjetMantis);
+		if ($row == null || count($row)>2) {
+			echo 'updateProjetMantis:: ' . _('No project found');
+		}else{
+			$idMantisbt = $row['id_mantisbt'];
+			try {
+				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+				$update = $clientSOAP->__soapCall('mc_project_update', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt, "project" => $project));;
+			} catch (SoapFault $soapFault) {
+				echo $soapFault->faultstring;
+			}
+			if (!isset($update))
+				echo 'updateProjetMantis::Error ' . _('Update MantisBT project');
+		}
+	}
+
+	function isProjectMantisCreated($idProjet){
 
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
@@ -350,22 +352,7 @@ function isProjetMantisCreated($idProjet){
 	}
 }
 
-function getIdProjetMantis($idProjet){
-
-	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-					array($idProjet));
-	echo db_error();
-	$row = db_fetch_array($resIdProjetMantis);
-
-	if ($row == null) {
-		return 0;
-	}else{
-		return $row['id_mantisbt'];
-	}
-	
-}
-
-function updateUserInMantis($user_id) {
+	function updateUserInMantis($user_id) {
 	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 	// recuperation du nouveau mail
 	$resUser = db_query_params ('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
@@ -382,7 +369,7 @@ function updateUserInMantis($user_id) {
 	}
 }
 
-function updateUsersProjetMantis($idProjet, $members) {
+	function updateUsersProjectMantis($idProjet, $members) {
 
 	global $role;
 	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
@@ -445,7 +432,7 @@ function updateUsersProjetMantis($idProjet, $members) {
 	}
 }
 
-function refreshHierarchyMantisBt(){
+	function refreshHierarchyMantisBt(){
 	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 
 	$hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true',array());
@@ -477,19 +464,22 @@ function refreshHierarchyMantisBt(){
 	return true;
 }
 
-function getGroupIdByName($name){
+}
 
-	$child_query = db_query_params('select group_id from groups where group_name = $1', array($name));
+function getIdProjetMantis($idProjet){
+
+	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
+					array($idProjet));
 	echo db_error();
-	$row = db_fetch_array($child_query);
+	$row = db_fetch_array($resIdProjetMantis);
 
 	if ($row == null) {
 		return 0;
 	}else{
-		return $row['group_id'];
+		return $row['id_mantisbt'];
 	}
-}
 
+}
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
