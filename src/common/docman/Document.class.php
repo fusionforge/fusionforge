@@ -120,10 +120,10 @@ class Document extends Error {
 			return false;
 		}
 
-		$result = db_query_params('SELECT filename,doc_group from docdata_vw where filename = $1 and doc_group = $2',
+		$result = db_query_params('SELECT filename, doc_group from docdata_vw where filename = $1 and doc_group = $2',
 			array($filename, $doc_group));
 
-		if (!$result || db_numrows($res) > 0) {
+		if (!$result || db_numrows($result) > 0) {
 			$this->setError(_('Document already published in this directory'));
 			return false;
 		}
@@ -143,7 +143,7 @@ class Document extends Error {
 		if (strcasecmp($filetype,"text/plain") === 0 &&
 			function_exists('mb_convert_encoding') &&
 			function_exists('mb_detect_encoding')) {
-			$data = mb_convert_encoding($data,'UTF-8',mb_detect_encoding($data));
+			$data = mb_convert_encoding($data, 'UTF-8', mb_detect_encoding($data));
 		}
 		$data1 = $data;
 
