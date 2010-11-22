@@ -85,7 +85,7 @@ class MantisBTPlugin extends Plugin {
 				foreach($group->getMembers() as $member){
 					$members[] = $member->data_array['user_name'];
 				}
-				$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
+				$this->updateUsersProjectMantis($group->data_array['group_id'],$members);
 				break;
 			}
 			case "user_personal_links": {
@@ -215,7 +215,7 @@ class MantisBTPlugin extends Plugin {
 			return false;
 		}
 		if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
-			echo 'addProjetMantis::Error: ' . _('Unable to create project in Mantisbt');
+			echo 'addProjectMantis::Error: ' . _('Unable to create project in Mantisbt');
 			return false;
 		}else{
 			$res = db_query_params('INSERT INTO group_mantisbt (id_group, id_mantisbt) VALUES ($1,$2)',
@@ -272,7 +272,7 @@ class MantisBTPlugin extends Plugin {
 		echo db_error();
 		$row = db_fetch_array($resIdProjetMantis);
 		if ($row == null || count($row)>2) {
-			echo 'updateProjetMantis:: ' . _('No project found');
+			echo 'updateProjectMantis:: ' . _('No project found');
 		}else{
 			$idMantisbt = $row['id_mantisbt'];
 			try {
@@ -282,7 +282,7 @@ class MantisBTPlugin extends Plugin {
 				echo $soapFault->faultstring;
 			}
 			if (!isset($update))
-				echo 'updateProjetMantis::Error ' . _('Update MantisBT project');
+				echo 'updateProjectMantis::Error ' . _('Update MantisBT project');
 		}
 	}
 
@@ -294,9 +294,9 @@ class MantisBTPlugin extends Plugin {
 			return false;
 
 		if (db_numrows($resIdProjetMantis) > 0) {
-			return false;
-		}else{
 			return true;
+		}else{
+			return false;
 		}
 	}
 
@@ -357,7 +357,7 @@ class MantisBTPlugin extends Plugin {
 		}else{
 			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
 			if (!$result){
-				echo 'updateUsersProjetMantis::Error '. _('Unable to clean roles in Mantisbt');
+				echo 'updateUsersProjectMantis::Error '. _('Unable to clean roles in Mantisbt');
 			}else{
 				foreach($stateForge as $member => $array){
 
@@ -373,7 +373,7 @@ class MantisBTPlugin extends Plugin {
 									array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
 								);
 					if (!isset($resultInsert))
-						echo 'updateUsersProjetMantis::Error '. _('Unable to update roles in mantisbt');
+						echo 'updateUsersProjectMantis::Error '. _('Unable to update roles in mantisbt');
 
 				}
 			}
