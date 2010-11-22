@@ -60,8 +60,7 @@ class MantisBTPlugin extends Plugin {
 				$text = $this->text; // this is what shows in the tab
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
-					echo ' | ' . $HTML->PrintSubMenu (array ($text),
-					array ('/plugins/mantisbt/index.php' . $param ));
+					echo ' | ' . $HTML->PrintSubMenu (array ($text), array ('/plugins/mantisbt/index.php' . $param ));
 				}
 				break;
 			}
@@ -80,78 +79,13 @@ class MantisBTPlugin extends Plugin {
 				}
 				break;
 			}
-			case "groupisactivecheckbox": {
-				//Check if the group is active
-				// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-				$group_id = $params['group'];
-				$group = group_get_object($group_id);
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_mantisbtplugin" value="1" ';
-				// CHECKED OR UNCHECKED?
-				if ( $group->usesPlugin ( $this->name ) ) {
-					echo 'checked="checked"';
-				}
-				echo "><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<strong>Use ".$this->text." Plugin</strong>";
-				echo "</td>";
-				echo "</tr>";
-				break;
-			}
 			case "groupisactivecheckboxpost": {
-				// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-				$group_id = $params['group'];
-				$group = group_get_object($group_id);
-				$use_mantisbtplugin = getIntFromRequest('use_mantisbtplugin');
-
-				if ( $use_mantisbtplugin == "1" ) {
-					if (! $group->usesPlugin($this->name)) {
-						// activation plugin
-						$group->setPluginUse($this->name, true);
-
-						// add project in mantis if does not exists
-						if (!$this->isProjectMantisCreated($group->data_array['group_id'])){
-							$this->addProjectMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
-						}
-						// update users and roles in mantis
-						$members = array ();
-						foreach($group->getMembers() as $member){
-							$members[] = $member->data_array['user_name'];
-						}
-						$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
-					}
-				} else if ( $use_mantisbtplugin == "0" ) {
-					$group->setPluginUse ( $this->name, false );
+				// update users and roles in mantis
+				$members = array ();
+				foreach($group->getMembers() as $member){
+					$members[] = $member->data_array['user_name'];
 				}
-				break;
-			}
-			case "userisactivecheckbox": {
-				//check if user is active
-				// this code creates the checkbox in the user account maintenance page to activate/deactivate the plugin
-				$user = $params['user'];
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_mantisbtplugin" value="1" ';
-				// CHECKED OR UNCHECKED?
-				if ( $user->usesPlugin ( $this->name ) ) {
-					echo 'checked="CHECKED"';
-				}
-				echo ">    Use ".$this->text." Plugin";
-				echo "</td>";
-				echo "</tr>";
-				break;
-			}
-			case "userisactivecheckboxpost": {
-				// this code actually activates/deactivates the plugin after the form was submitted in the user account manteinance page
-				$user = $params['user'];
-				$use_mantisbtplugin = getIntFromRequest('use_mantisbtplugin');
-				if ( $use_mantisbtplugin == 1 ) {
-					$user->setPluginUse ( $this->name );
-				} else {
-					$user->setPluginUse ( $this->name, false );
-				}
+				$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
 				break;
 			}
 			case "user_personal_links": {
@@ -242,6 +176,20 @@ class MantisBTPlugin extends Plugin {
 				}
 				break;
 			}
+		}
+	}
+
+	function groupisactivecheckboxpost (&$params) {
+		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+		$group = group_get_object($params['group']);
+		$flag = strtolower('use_'.$this->name);
+		if ( getStringFromRequest($flag) == 1 ) {
+			if (!$this->isProjectMantisCreated($group->data_array['group_id'])){
+				$this->addProjectMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
+			}
+			$group->setPluginUse ( $this->name );
+		} else {
+			$group->setPluginUse ( $this->name, false );
 		}
 	}
 
@@ -340,139 +288,138 @@ class MantisBTPlugin extends Plugin {
 
 	function isProjectMantisCreated($idProjet){
 
-	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
+		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 					array($idProjet));
-	echo db_error();
-	$row = db_fetch_array($resIdProjetMantis);
+		if (!$resIdProjetMantis)
+			return false;
 
-	if ($row == null) {
-		return false;
-	}else{
-		return true;
+		if (db_numrows($resIdProjetMantis) > 0) {
+			return false;
+		}else{
+			return true;
+		}
 	}
-}
 
 	function updateUserInMantis($user_id) {
-	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
-	// recuperation du nouveau mail
-	$resUser = db_query_params ('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
-	echo db_error();
-	$row = db_fetch_array($resUser);
-	$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-	if(!$dbConnection){
-		$errMantis1 = "Error : Could not open connection" . db_error($dbConnection);
-		echo $errMantis1;
-		db_rollback($dbConnection);
-	} else {
-		db_query_params('UPDATE mantis_user_table set email = $1 where username = $2',array($row['email'],$row['user_name']),'-1','0',$dbConnection);
+		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
+		// recuperation du nouveau mail
+		$resUser = db_query_params ('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
 		echo db_error();
+		$row = db_fetch_array($resUser);
+		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
+		if(!$dbConnection){
+			$errMantis1 = "Error : Could not open connection" . db_error($dbConnection);
+			echo $errMantis1;
+			db_rollback($dbConnection);
+		} else {
+			db_query_params('UPDATE mantis_user_table set email = $1 where username = $2',array($row['email'],$row['user_name']),'-1','0',$dbConnection);
+			echo db_error();
+		}
 	}
-}
 
 	function updateUsersProjectMantis($idProjet, $members) {
 
-	global $role;
-	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
+		global $role;
+		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 
-	// recuperation de id mantis
-	$idMantis = getIdProjetMantis($idProjet);
+		// recuperation de id mantis
+		$idMantis = getIdProjetMantis($idProjet);
 
-	// TODO corriger inclusion bug
-	if ($role == null){
-		$role['Manager'] = 70;
-		$role['Concepteur'] = 55;
-		$role['Collaborateur'] = 55;
-		$role['Rapporteur'] = 55;
-	}
+		// TODO corriger inclusion bug
+		if ($role == null){
+			$role['Manager'] = 70;
+			$role['Concepteur'] = 55;
+			$role['Collaborateur'] = 55;
+			$role['Rapporteur'] = 55;
+		}
 
-	// etat forge
-	$stateForge = array ();
-	foreach ($members as $key => $member){
-		$resUserRole = db_query_params('SELECT role.role_name
-						FROM role, user_group, users
-						WHERE users.user_name = $1
-						AND ( user_group.user_id = users.user_id AND user_group.group_id = $2 )
-						AND user_group.role_id = role.role_id',
-						array($member, $idProjet));
-		echo db_error();
-		$row = db_fetch_array($resUserRole);
-		$stateForge[$member]['name'] = $member;
-		$stateForge[$member]['role'] = $row['role_name']; 
-	}
-	// on supprime les precedentes relations dans mantis
-	$stateMantis = array ();
-	$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-	if(!$dbConnection){
-		$errMantis1 = _('Error : Could not open connection') . db_error($dbConnection);
-		echo $errMantis1;
-		db_rollback($dbConnection);
-	}else{
-		$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
-		if (!$result){
-			echo 'updateUsersProjetMantis::Error '. _('Unable to clean roles in Mantisbt');
+		// etat forge
+		$stateForge = array ();
+		foreach ($members as $key => $member){
+			$resUserRole = db_query_params('SELECT role.role_name
+							FROM role, user_group, users
+							WHERE users.user_name = $1
+							AND ( user_group.user_id = users.user_id AND user_group.group_id = $2 )
+							AND user_group.role_id = role.role_id',
+							array($member, $idProjet));
+			echo db_error();
+			$row = db_fetch_array($resUserRole);
+			$stateForge[$member]['name'] = $member;
+			$stateForge[$member]['role'] = $row['role_name']; 
+		}
+		// on supprime les precedentes relations dans mantis
+		$stateMantis = array ();
+		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
+		if(!$dbConnection){
+			$errMantis1 = _('Error : Could not open connection') . db_error($dbConnection);
+			echo $errMantis1;
+			db_rollback($dbConnection);
 		}else{
-			foreach($stateForge as $member => $array){
-				
-				// recuperation de l'id user dans mantis
-				$resultIdUser = db_query_params('SELECT mantis_user_table.id FROM mantis_user_table WHERE mantis_user_table.username = $1',
-							array($member), '-1', 0, $dbConnection);
+			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
+			if (!$result){
+				echo 'updateUsersProjetMantis::Error '. _('Unable to clean roles in Mantisbt');
+			}else{
+				foreach($stateForge as $member => $array){
 
-				$rowIdUser = db_fetch_array($resultIdUser);
-				$idUser = $rowIdUser['id'];
-				// insertion de la relation
-				$resultInsert = pg_insert($dbConnection,
-								"mantis_project_user_list_table",
-								array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
-							);
-				if (!isset($resultInsert))
-					echo 'updateUsersProjetMantis::Error '. _('Unable to update roles in mantisbt');
+					// recuperation de l'id user dans mantis
+					$resultIdUser = db_query_params('SELECT mantis_user_table.id FROM mantis_user_table WHERE mantis_user_table.username = $1',
+								array($member), '-1', 0, $dbConnection);
 
+					$rowIdUser = db_fetch_array($resultIdUser);
+					$idUser = $rowIdUser['id'];
+					// insertion de la relation
+					$resultInsert = pg_insert($dbConnection,
+									"mantis_project_user_list_table",
+									array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
+								);
+					if (!isset($resultInsert))
+						echo 'updateUsersProjetMantis::Error '. _('Unable to update roles in mantisbt');
+
+				}
 			}
 		}
 	}
-}
 
 	function refreshHierarchyMantisBt(){
-	global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
+		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 
-	$hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true',array());
-	echo db_error();
-	$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-	if(!$dbConnection){
-		db_rollback($dbConnection);
-		return false;
-	}
+		$hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true',array());
+		echo db_error();
+		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
+		if(!$dbConnection){
+			db_rollback($dbConnection);
+			return false;
+		}
 
-	db_begin($dbConnection);
-	db_query_params('TRUNCATE TABLE mantis_project_hierarchy_table', array() , '-1', 0, $dbConnection);
-	while ($hierarchy = db_fetch_array($hierarchies)) {
-		$result = db_query_params ('INSERT INTO mantis_project_hierarchy_table (child_id, parent_id, inherit_parent) VALUES ($1, $2, $3)',
+		db_begin($dbConnection);
+		db_query_params('TRUNCATE TABLE mantis_project_hierarchy_table', array() , '-1', 0, $dbConnection);
+		while ($hierarchy = db_fetch_array($hierarchies)) {
+			$result = db_query_params ('INSERT INTO mantis_project_hierarchy_table (child_id, parent_id, inherit_parent) VALUES ($1, $2, $3)',
 						array (getIdProjetMantis($hierarchy['sub_project_id']), getIdProjetMantis($hierarchy['project_id']), 1),
 						'-1',
 						0,
 						$dbConnection);
 
-		if (!$result) {
-			$this->setError(_('Insert Failed') . db_error($dbConnection));
-			db_rollback();
-			return false;
+			if (!$result) {
+				$this->setError(_('Insert Failed') . db_error($dbConnection));
+				db_rollback();
+				return false;
+			}
 		}
-	}
 
-	db_commit($dbConnection);
-	pg_close($dbConnection);
-	return true;
-}
+		db_commit($dbConnection);
+		pg_close($dbConnection);
+		return true;
+	}
 
 }
 
 function getIdProjetMantis($idProjet){
 
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-					array($idProjet));
+				array($idProjet));
 	echo db_error();
 	$row = db_fetch_array($resIdProjetMantis);
-
 	if ($row == null) {
 		return 0;
 	}else{
