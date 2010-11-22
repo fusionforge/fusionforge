@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh -xe
 
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
