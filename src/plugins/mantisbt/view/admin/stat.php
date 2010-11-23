@@ -1,8 +1,7 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -28,5 +27,5 @@ echo "</div>";
 //echo "<div>";
 //include ("mantisbt/view/admin/StatPerMember.php");
 //echo "</div>";
-
+echo "<div style='clear:both'>";
 ?>

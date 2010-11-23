@@ -1,8 +1,10 @@
 <?php
 
 /*
- * Copyright 2010 (c) : Franck Villaume - Capgemini
  * Project MantisBT page
+ *
+ * Copyright 2009-2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -30,16 +32,18 @@ switch ($action) {
 	case "addIssue":
 	case "deleteNote":
 	case "addAttachment":
-	case "deleteAttachment":
+	case "deleteAttachment": {
 		include ("mantisbt/action/$action.php");
 		break;
+	}
 	case "updateNote":
 	case "privateNote":
-	case "publicNote":
+	case "publicNote": {
 		include ("mantisbt/action/updateNote.php");
 		break;
+	}
 }
-				
+
 // submenu
 $labelTitle = array ();
 $labelTitle[] = _('Roadmap');
@@ -49,9 +53,9 @@ $labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginnam
 $labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginname;
 $userperm = $group->getPermission($user);
 if ( $userperm->isAdmin() ) {
-	$labelTitle[] = _('Admin');
+	$labelTitle[] = _('Administration');
 	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
-	$labelTitle[] = _('Stats');
+	$labelTitle[] = _('Statistics');
 	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
 }
 
@@ -61,24 +65,28 @@ echo $HTML->subMenu( $labelTitle, $labelPage );
 switch ($view) {
 	case "editIssue":
 	case "viewNote":
-	case "addIssue":	
-	case "addAttachment":	
-	case "roadmap":
+	case "addIssue":
+	case "addAttachment":
+	case "roadmap": {
 		include("mantisbt/view/$view.php");
 		break;
-	case "viewIssue":
+	}
+	case "viewIssue": {
 		include("mantisbt/view/$view.php");
 		include('mantisbt/view/viewNote.php');
 		include('mantisbt/view/viewAttachment.php');
 		break;
+	}
 	case "editNote":
-	case "addNote":
+	case "addNote": {
 		include("mantisbt/view/addOrEditNote.php");
 		break;
+	}
 	/* viewAllIssues is the default page */
-	default:
+	default: {
 		include('mantisbt/view/viewIssues.php');
 		break;
+	}
 }
 
 ?>

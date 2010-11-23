@@ -1,9 +1,8 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
- *          Antoine Mercadal - capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010, Antoine Mercadal - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,61 +22,60 @@
  */
 
 try {
-    /* do not recreate $clientSOAP object if already created by other pages */
-    if (!isset($clientSOAP))
-        $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	/* do not recreate $clientSOAP object if already created by other pages */
+	if (!isset($clientSOAP))
+		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
-    $listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
+	$listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 
 } catch (SoapFault $soapFault) {
-    echo    '<div class="warning" >Un problème est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$soapFault->faultstring.'</div>';
-    $errorPage = true;
+	echo '<div class="warning" >'. _('Technical error occurs during data retrieving'). ' ' .$soapFault->faultstring.'</div>';
+	$errorPage = true;
 }
 
 if (!isset($errorPage)) {
-    GLOBAL $HTML;
-
+	GLOBAL $HTML;
 ?>
 <script type="text/javascript">
-    $(document).ready(function() {
+	$(document).ready(function() {
 <?php
-    $view = 0;
-    foreach ($listChild as $key => $child) {
-        if ( isset($_POST['project'.$child.'VersionId'])) {
-            $view = 1;
+	$view = 0;
+	foreach ($listChild as $key => $child) {
+		if ( isset($_POST['project'.$child.'VersionId'])) {
+			$view = 1;
+		}
 	}
-    }
-    if ( isset($_POST['projectVersionId']) ) {
-        $view = 1;
-    }
-    if ( $view == 0 ) {
+	if ( isset($_POST['projectVersionId']) ) {
+		$view = 1;
+	}
+	if ( $view == 0 ) {
 ?>
-        $("#expandable_filter").hide();
+	$("#expandable_filter").hide();
 <?php
-    }
+	}
 ?>
-    });
+	});
 </script>
 
 <style>
 .notice_title {
-    background-color: #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    margin-bottom:0px;
-    cursor: pointer;
-    color: #4F93C3;
+	background-color: #D7E0EB;
+	padding: 10px;
+	font-weight: bold;
+	margin-bottom:0px;
+	cursor: pointer;
+	color: #4F93C3;
 }
 
 .notice_content {
-    border: 1px solid #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    -moz-border-radius-bottomright: 8px;
-    -moz-border-radius-bottomleft: 8px;
-    -webkit-border-bottom-right-radius: 8px;
-    -webkit-border-bottom-left-radius: 8px;
-    margin-top:0px;
+	border: 1px solid #D7E0EB;
+	padding: 10px;
+	font-weight: bold;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	margin-top:0px;
 }
 </style>
 
@@ -86,110 +84,110 @@ if (!isset($errorPage)) {
 
 <div id='expandable_filter' class="notice_content" style='clear: both'>
 <?php
-    include('mantisbt/controler/filter_roadmap.php');
+	include('mantisbt/controler/filter_roadmap.php');
 ?>
 </div>
 
 <?php
-    echo '<h2 style="border-bottom: 1px solid black">Feuille de route</h2>';
-    if (!isset($_POST['projectVersionId'])) {
-	    if (isset($listVersions) && !empty($listVersions)) {
-            $listPrintVersions = $listVersions;
-        }
-    } else {
-        $flipped_projectVersionId = array_flip($_POST['projectVersionId']);
-        foreach ($listVersions as $key => $version) {
-            if (isset($flipped_projectVersionId[$version->id])) {
-                $listPrintVersions[] = $version;
-            }
-        }
-    }
-    if (isset($listPrintVersions) && !empty($listPrintVersions)) {
-    	foreach ($listPrintVersions as $key => $version) {
-	    $idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $idProjetMantis, "version" => $version->name ));
-	    echo	'<fieldset>';
-	    $typeVersion = "Milestone";
-	    if ( $version->released ) {
-	        $typeVersion = "Release";
-	    }
-	    echo	'Version : '.$version->name.' (<i>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).' ticket(s)</i>';
-	    echo	'<ul>';
-	    foreach ( $idsBug as $key => $idBug ) {
-	        $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-	        if ( !array_key_exists('handler', $defect) || !array_key_exists('name', $defect->handler) ) {
-	            $defect_handler_name = "non-affecte";
-	        } else {
-	            $defect_handler_name = $defect->handler->name;
-	        }
-	        echo	'<li>';
-	        if ( $defect->status->id >= 80 ) {
-	            echo '<strike>';
-	        }
-	        echo	'<a href="?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
-	        if ( $defect->status->id >= 80 ) {
-	            echo '</strike>';
-	        }
-	        echo	'</li>';
-	    }
-		echo	'</ul>';
-		echo	'</fieldset>';
-         }
+	echo '<h2 style="border-bottom: 1px solid black">Feuille de route</h2>';
+	if (!isset($_POST['projectVersionId'])) {
+		if (isset($listVersions) && !empty($listVersions)) {
+			$listPrintVersions = $listVersions;
+		}
+	} else {
+		$flipped_projectVersionId = array_flip($_POST['projectVersionId']);
+		foreach ($listVersions as $key => $version) {
+			if (isset($flipped_projectVersionId[$version->id])) {
+				$listPrintVersions[] = $version;
+			}
+		}
+	}
+	if (isset($listPrintVersions) && !empty($listPrintVersions)) {
+		foreach ($listPrintVersions as $key => $version) {
+			$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $idProjetMantis, "version" => $version->name ));
+			echo	'<fieldset>';
+			$typeVersion = "Milestone";
+			if ( $version->released ) {
+				$typeVersion = "Release";
+			}
+			echo	'Version : '.$version->name.' (<i>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).' ticket(s)</i>';
+			echo	'<ul>';
+			foreach ( $idsBug as $key => $idBug ) {
+				$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+				if ( !array_key_exists('handler', $defect) || !array_key_exists('name', $defect->handler) ) {
+					$defect_handler_name = "non-affecte";
+				} else {
+					$defect_handler_name = $defect->handler->name;
+				}
+				echo	'<li>';
+				if ( $defect->status->id >= 80 ) {
+					echo '<strike>';
+				}
+				echo	'<a href="?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
+				if ( $defect->status->id >= 80 ) {
+					echo '</strike>';
+				}
+				echo	'</li>';
+			}
+			echo	'</ul>';
+			echo	'</fieldset>';
+		}
 
-    if (sizeof($listChild)) {
-        foreach ($listChild as $key => $child) {
-            if (isset($_POST['project'.$child.'VersionId'])) {
-                $resultGroupNameFusionForge = db_query_params ('select groups.group_name, groups.group_id from groups,group_mantisbt
-                                                            where groups.group_id = group_mantisbt.id_group and group_mantisbt.id_mantisbt = $1',
-                                                            array($child));
-                $rowGroupNameFusionForge =& db_fetch_array($resultGroupNameFusionForge);
-		        echo $HTML->boxTop('<a style="color:white;" href="?type=group&id='.$rowGroupNameFusionForge['group_id'].'&pluginname=mantisbt">'.$rowGroupNameFusionForge['group_name'].'</a>');
-		        echo '<fieldset>';
-		        $listChildVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
-		        if (!empty($listChildVersions)){
-                    $flipped_projectChildVersionId = array_flip($_POST['project'.$child.'VersionId']);
-			        $listChildPrintVersions = array();
-                    foreach ($listChildVersions as $key => $childVersion) {
-                        if (isset($flipped_projectChildVersionId[$childVersion->id])) {
-                            $listChildPrintVersions[] = $childVersion;
-                        }
-                    }
-			        if (isset($listChildPrintVersions) && !empty($listChildPrintVersions)) {
-        		        foreach ($listChildPrintVersions as $key => $childprintversion){
-               		        echo    '<fieldset>';
-               		        $idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $child, "version" => $childprintversion->name ));
-               		        $typeVersion = "Milestone";
-               		        if ( $childprintversion->released == 1 ) {
-               			        $typeVersion = "Release";
-               		        }
-               		        echo    'Version : '.$childprintversion->name.' (<i>'.strftime("%d/%m/%Y",strtotime($childprintversion->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).'</i>';
-               		        echo    '<ul>';
-               		        foreach ( $idsBug as $key => $idBug ) {
-               			        $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-               			        if ( !array_key_exists('handler', $defect) || !array_key_exists('name', $defect->handler) ) {
-               				        $defect_handler_name = "non-affecte";
-               			        } else {
-               				        $defect_handler_name = $defect->handler->name;
-               			        }
-               			        echo    '<li>';
-               			        if ( $defect->status->id >= 80 ) {
-               				        echo '<strike>';
-               			        }
-               			        echo    '<a href="?type=group&id='.$rowGroupNameFusionForge['group_id'].'&pluginname=mantisbt&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
-               			        if ( $defect->status->id >= 80 ) {
-               				        echo '</strike>';
-               			        }
-               			        echo    '</li>';
-               		        }
-               		        echo    '</ul>';
-               		        echo    '</fieldset>';
-        		        }
-			        }
-		        }
-		        echo '</fieldset>';
-		        echo $HTML->boxBottom();
-	        }
-            }
-        }
-    }
+		if (sizeof($listChild)) {
+			foreach ($listChild as $key => $child) {
+				if (isset($_POST['project'.$child.'VersionId'])) {
+					$resultGroupNameFusionForge = db_query_params('select groups.group_name, groups.group_id from groups,group_mantisbt
+											where groups.group_id = group_mantisbt.id_group and group_mantisbt.id_mantisbt = $1',
+											array($child));
+					$rowGroupNameFusionForge = db_fetch_array($resultGroupNameFusionForge);
+					echo $HTML->boxTop('<a style="color:white;" href="?type=group&id='.$rowGroupNameFusionForge['group_id'].'&pluginname=mantisbt">'.$rowGroupNameFusionForge['group_name'].'</a>');
+					echo '<fieldset>';
+					$listChildVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
+					if (!empty($listChildVersions)){
+						$flipped_projectChildVersionId = array_flip($_POST['project'.$child.'VersionId']);
+						$listChildPrintVersions = array();
+						foreach ($listChildVersions as $key => $childVersion) {
+							if (isset($flipped_projectChildVersionId[$childVersion->id])) {
+								$listChildPrintVersions[] = $childVersion;
+							}
+						}
+						if (isset($listChildPrintVersions) && !empty($listChildPrintVersions)) {
+							foreach ($listChildPrintVersions as $key => $childprintversion){
+								echo	'<fieldset>';
+								$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $child, "version" => $childprintversion->name ));
+								$typeVersion = "Milestone";
+								if ( $childprintversion->released == 1 ) {
+									$typeVersion = "Release";
+								}
+								echo	'Version : '.$childprintversion->name.' (<i>'.strftime("%d/%m/%Y",strtotime($childprintversion->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).'</i>';
+								echo	'<ul>';
+								foreach ( $idsBug as $key => $idBug ) {
+									$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+									if ( !array_key_exists('handler', $defect) || !array_key_exists('name', $defect->handler) ) {
+										$defect_handler_name = "non-affecte";
+									} else {
+										$defect_handler_name = $defect->handler->name;
+									}
+									echo    '<li>';
+									if ( $defect->status->id >= 80 ) {
+										echo '<strike>';
+									}
+									echo    '<a href="?type=group&id='.$rowGroupNameFusionForge['group_id'].'&pluginname=mantisbt&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
+									if ( $defect->status->id >= 80 ) {
+										echo '</strike>';
+									}
+									echo    '</li>';
+								}
+								echo    '</ul>';
+								echo    '</fieldset>';
+							}
+						}
+					}
+					echo '</fieldset>';
+					echo $HTML->boxBottom();
+				}
+			}
+		}
+	}
 }
 ?>

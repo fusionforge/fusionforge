@@ -1,8 +1,7 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -31,10 +30,10 @@ echo '<input name="transverse" type="checkbox" value="1" >version transverse (fi
 echo '</td>';
 echo '<td>';
 print'<div style="float:left"><img src="'.util_make_url('themes/gforge/images/bouton_gauche.png').'"></img></div>
-      <div style="background: url('.util_make_url('themes/gforge/images/bouton_centre.png').');vertical-align:top;display:inline;font-size:15px">
-      <a href="javascript:document.addVersion.submit();" style="color:white;font-size:0.8em;font-weight:bold;">Ajouter</a>
-      </div>
-      <div style="display:inline"><img src="'.util_make_url('themes/gforge/images/bouton_droit.png').'"></img></div>';
+	<div style="background: url('.util_make_url('themes/gforge/images/bouton_centre.png').');vertical-align:top;display:inline;font-size:15px">
+	<a href="javascript:document.addVersion.submit();" style="color:white;font-size:0.8em;font-weight:bold;">Ajouter</a>
+	</div>
+	<div style="display:inline"><img src="'.util_make_url('themes/gforge/images/bouton_droit.png').'"></img></div>';
 echo '</td>';
 echo $HTML->boxBottom();
 echo '</form>';

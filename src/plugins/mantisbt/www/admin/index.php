@@ -1,8 +1,8 @@
 <?php
-
 /*
- * Copyright 2010 (c) : Franck Villaume - Capgemini
  * Admin MantisBT page
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -24,19 +24,20 @@
 $action = getStringFromRequest('action');
 $view = getStringFromRequest('view');
 
-switch($action) {
+switch ($action) {
 	case "addCategory":
 	case "addVersion":
 	case "renameCategory":
 	case "deleteCategory":
 	case "deleteVersion":
-	case "updateVersion":
+	case "updateVersion": {
 		include ("mantisbt/action/admin/$action.php");
 		break;
+	}
 }
 
 // submenu
-$labelTitle = array ();
+$labelTitle = array();
 $labelTitle[] = _('Roadmap');
 $labelTitle[] = _('Tickets');
 $labelPage = array();
@@ -44,31 +45,43 @@ $labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginnam
 $labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginname;
 $userperm = $group->getPermission($user);
 if ( $userperm->isAdmin() ) {
-        $labelTitle[] = _('Admin');
-        $labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
-        $labelTitle[] = _('Stats');
-        $labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
+	$labelTitle[] = _('Administration');
+	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
+	$labelTitle[] = _('Statistics');
+	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
 }
 
-echo $HTML->subMenu( $labelTitle, $labelPage );
+echo $HTML->subMenu($labelTitle, $labelPage);
 
-switch($view) {
+switch ($view) {
 	case "editVersion":
-	case "stat":
+	case "stat": {
 		include ("mantisbt/view/admin/$view.php");
-		exit;
-	default:
-		/* affichage principal */
-		echo '<table><tr><td valign="top">';
-		include ("mantisbt/view/admin/viewCategorie.php");
-		echo '</td><td valign="top">';
-		include ("mantisbt/view/admin/viewVersion.php");
-		echo '</td></tr><tr><td valign="top">';
-		include ("mantisbt/view/admin/addCategory.php");
-		echo '</td><td valign="top">';
-		include ("mantisbt/view/admin/addVersion.php");
-		echo '</td></tr></table>';
 		break;
+	}
+	default: {
+		/* affichage principal */
+		if (!isset($clientSOAP)) {
+			try {
+				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			} catch (SoapFault $soapFault) {
+				echo '<div class="warning" >'. _('Technical error occurs during data retrieving'). ' ' .$soapFault->faultstring.'</div>';
+				$errorPage = true;
+			}
+		}
+		if (!isset($errorPage)) {
+			echo '<table><tr><td valign="top">';
+			include ("mantisbt/view/admin/viewCategorie.php");
+			echo '</td><td valign="top">';
+			include ("mantisbt/view/admin/viewVersion.php");
+			echo '</td></tr><tr><td valign="top">';
+			include ("mantisbt/view/admin/addCategory.php");
+			echo '</td><td valign="top">';
+			include ("mantisbt/view/admin/addVersion.php");
+			echo '</td></tr></table>';
+		}
+		break;
+	}
 }
 
 ?>

@@ -121,6 +121,7 @@ if (!$type) {
 			} else {
 				// do the job
 				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!', 'pagename'=>"$pluginname", 'sectionvals'=>array(group_getname($id))));
+				html_use_tooltips();
 				include ('mantisbt/www/group/index.php');
 			}
 			break;
@@ -157,6 +158,7 @@ if (!$type) {
 			if (!is_int($password)) {
 				// do the job
 				mantisbt_User_Header(array('title'=>sprintf(_('My %s'),$pluginname),'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
+				html_use_tooltips();
 				include ('mantisbt/www/user/index.php');
 			} else {
 				exit_error(_('Impossible de récupérer les identifiants de connexions depuis le LDAP'),'home');
@@ -178,7 +180,8 @@ if (!$type) {
 			//only project admin can access here
 			if ( $userperm->isAdmin() ) {
 				// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));	
+				mantisbt_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+				html_use_tooltips();	
 				include ('mantisbt/www/admin/index.php');
 			} else {
 				exit_permission_denied(_('You are not Admin of this project'),'home');
