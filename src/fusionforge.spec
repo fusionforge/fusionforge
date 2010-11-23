@@ -43,7 +43,6 @@ URL: http://www.fusionforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Packager: Alain Peyrat <aljeux@free.fr>
 
-# requirements as derived from fusionforge-install-1-deps.php script
 Requires: httpd, mod_dav_svn, mod_ssl, php, php-pgsql, php-gd, php-mbstring, mailman
 Requires: postgresql, postgresql-libs, postgresql-server, postgresql-contrib
 Requires: postfix, openssh, inetd, which
@@ -51,16 +50,16 @@ Requires: postfix, openssh, inetd, which
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail, perl-Sort-Versions
 Requires: cronolog
-Requires: php-jpgraph php-gd
+Requires: php-jpgraph
 Requires: /var/www/jpgraph-1.19/jpgraph.php
 #Requires: libnss-pgsql >= 1.4
-Requires: mailman
 Requires: gettext
 Requires: php-htmlpurifier >= 4.0.0
 Requires: sed
 Requires: coreutils
 Requires: /usr/bin/newaliases
 Requires: php-pear-HTTP_WebDAV_Server
+Requires: php-pecl-zip
  
 # BuildRequires: sed, perl
 
