@@ -6,8 +6,6 @@
 #
 # Copyright (C) 2010 Alain Peyrat
 #
-# TODO: Generate a random password to avoid sites with default pass.
-
 
 # Global Definitions
 %define dbname          gforge
@@ -20,7 +18,6 @@
 %define httpdgroup      apache
 
 %define fforge_admin    fforgeadmin
-%define fforge_passwd   fforgeadmin
 
 %define FORGE_DIR       %{_datadir}/gforge
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge
@@ -566,7 +563,7 @@ if [ "$1" -eq "1" ]; then
 	    FFORGE_DB=%{dbname}
 	    FFORGE_USER=%{dbuser}
 	    FFORGE_ADMIN_USER=%{fforge_admin}
-	    FFORGE_ADMIN_PASSWORD=%{fforge_passwd}
+	    FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
 	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
 	    /usr/bin/php %{FORGE_DIR}/fusionforge-install-3-db.php >>/var/log/%{name}-install.log 2>&1
 	else
@@ -594,19 +591,21 @@ if [ "$1" -eq "1" ]; then
 	echo "noreply: /dev/null" >> /etc/aliases
 	/usr/bin/newaliases >/dev/null 2>&1
 
-	# display message about default admin account
-	echo ""
-	echo "You can now connect to your FusionForge installation using:"
-	echo ""
-	echo "   http://$HOSTNAME/"
-	echo ""
-	echo "The default fusionforge administrator account and password is:"
-	echo ""
-	echo "Account Name = %{fforge_admin}"
-	echo "Password = %{fforge_passwd}"
-	#echo "Please change it to something appropriate upon initial login."
-	# give user a few seconds to read the message
-	sleep 10
+	if [ $ret -ne 0 ] ; then
+		# display message about default admin account
+		echo ""
+		echo "You can now connect to your FusionForge installation using:"
+		echo ""
+		echo "   http://$HOSTNAME/"
+		echo ""
+		echo "The default fusionforge administrator account and password is:"
+		echo ""
+		echo "Account Name = %{fforge_admin}"
+		echo "Password = $FFORGE_ADMIN_PASSWORD"
+		#echo "Please change it to something appropriate upon initial login."
+		# give user a few seconds to read the message
+		sleep 10
+	fi
 else
 	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-upgrade.log 2>&1
 fi
