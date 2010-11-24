@@ -40,6 +40,7 @@ require(APPLICATION_PATH.'/../../../../../common/include/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'include/FusionForge.class.php';
@@ -55,6 +56,26 @@ class FusionForgeOSLCConnector extends OslcConnector {
 
 
 	private static $status_arr = array('open'=>1, 'closed'=>2, 'deleted' => 3);
+	private static $query_properties = array(
+		'dc:identifier',
+		'dc:title',
+		'dc:description',
+		'dc:creator',
+		'helios_bt:status',
+		'helios_bt:priority',
+		'helios_bt:assigned_to',
+		'dc:modified',
+		'dc:created'
+	);
+	private static $orderBy_properties = array(
+		'dc:identifier',
+		'dc:title',
+		'dc:created',
+		'dc:creator',
+		'dc:closed',
+		'helios_bt:assigned_to',
+		'helios_bt:priority'
+	);
 	
 	/**
 	 * Filter parameters provided in the REST GET request to check whether mandatory ones are set.
@@ -108,7 +129,6 @@ class FusionForgeOSLCConnector extends OslcConnector {
 	 *  Constructs the model from fusionforge db by fetching the change requests requested
 	 *  through an oslc query.
 	 *  @param array $filter array of the query settings.
-	 *  @param array $fields array of the requested fields
 	 *  @TODO: Implement oslc_searchTerms
 	 *  @TODO: Implement oslc_select
 	 */
@@ -147,7 +167,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 								throw new BadRequestException("Invalid helios_bt:assigned_to: " . $term[2]); 
 							}
 							break;
-						default:  throw new BadRequestException("Invalid attribute ".$term[1]." specified in oslc_where! only heliosbt:status|assignedto are accepted.");
+						default:  throw new BadRequestException("Invalid attribute ".$term[1]." specified in oslc_where! only heliosbt:status|assigned_to are accepted.");
 						break;
 					}
 				}
@@ -280,7 +300,86 @@ class FusionForgeOSLCConnector extends OslcConnector {
 			$this->changerequests = new ChangeRequestsFusionForgeDb($art_arr);
 		}
 	}
-	
+	/**
+	 * Retrieves needed data for the display of the creation UI.
+	 * 
+	 * @param int $project project id
+	 * @param int $tracker tracker id
+	 * 
+	 * @return array $data tracker fields and their respective possible values.
+	 */
+	public function getDataForCreationUi($project, $tracker) {
+		$data = array();
+		$group = group_get_object($project);
+		if (!$at = new ArtifactType($group, $tracker)){
+			throw new Exception('Error : Could not instanciate project Tracker');
+		} else {
+			// construct data for tracker extra fields and their values.
+			$extrafields = $at->getExtraFields();
+			$keys = array_keys($extrafields);
+			for ($k = 0; $k<count($keys); $k++){
+				$i = $keys[$k];
+				if ($extrafields[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT){
+					$efelements = $at->getExtraFieldElements($extrafields[$i]);
+					foreach ($efelements as $key => $value){
+						$data[$extrafields[$i]['field_name']][] = $efelements[$key]['element_name'];
+					}
+				} elseif ($extrafields[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
+					$data[$extrafields[$i]['field_name']] = '';
+				}
+			}
+
+			// Add assigned to data. We use default FusionForge UI for assigned_to selectBox. 
+			$ath = new ArtifactTypeHtml($group,$tracker);
+			$data['assigned_to'] = $ath->technicianBox('assigned_to'); 
+
+			// Add priority data. We use default FusionForge UI for priority selectBox.
+			$data['priority'] = build_priority_select_box('priority');
+						
+			// Add summary and detailed description.
+			$data['summary'] = '';
+			$data['description'] = '';
+			
+			//return data for creation UI.
+			return $data;
+		}
+	}
+
+	/**
+	 * Retrieves needed data for the display of the selection UI.
+	 * 
+	 * @param int $project project id
+	 * @param int $tracker tracker id
+	 * 
+	 * @return array $data tracker fields and their respective possible values.
+	 */
+	public function getDataForSelectionUi($project, $tracker) {
+		$data = array();
+		$group = group_get_object($project);
+		if (!$at = new ArtifactType($group, $tracker)){
+			throw new Exception('Error : Could not instanciate project Tracker');
+		} else {
+			// Construct array for oslc.where with all possible values for each attribute
+			// Currently only helios_bt:status and helios_bt:assigned_to are supported for
+			// oslc.where query.
+			$engine = RBACEngine::getInstance() ;
+			$techs = $engine->getUsersByAllowedAction ('tracker', $tracker, 'tech') ;
+			foreach ($techs as $tech) {
+				$data['where']['assigned_to'][] = $tech->getRealName();
+			}
+			$data['where']['status'] = self::$status_arr;
+			
+			//construct array for oslc.properties with all possible values for each attribute
+			$data['properties'] = self::$query_properties;
+			
+			// Construct array for oslc.orderBy 
+			$data['orderBy'] = self::$orderBy_properties;
+			
+			// Return data needed for selection UI.
+			return $data;
+		}
+	}
+
 	/*
 	 * Constructs the model from the FusionForge DB by fetching the requested changeRequests.
 	 *

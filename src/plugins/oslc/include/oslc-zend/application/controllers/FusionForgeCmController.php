@@ -124,6 +124,14 @@ class FusionForgeCmController extends CmController {
 			$this->_forward('oslcCmServiceDocument');
 			return;
 		}
+		// Handle creation UI access
+		elseif (isset($params['ui']) && $params['ui'] == 'creation' && isset($params['project']) && isset($params['tracker'])){
+			$this->_forward('showCreationUi');
+		}
+		// Handle selection UI access 
+		elseif (isset($params['ui']) && $params['ui'] == 'selection' && isset($params['project']) && isset($params['tracker'])){
+			$this->_forward('showSelectionUi');
+		}
 		
 		// Now, do the OSLC-CM resources access work
 		// if no bug was mentioned, then return a resource collection
@@ -187,12 +195,17 @@ class FusionForgeCmController extends CmController {
 			$contenttype = $contenttype ? $contenttype : 'none';
 
 			switch($contenttype) {
+				case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
+				case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
+				case 'application/xml; charset=UTF-8':
+				case 'application/json; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+xml':
 				case 'application/x-oslc-cm-change-request+json':
 				case 'application/xml':
+				case 'application/json':
 					break;
 				default:
-					throw new Exception('Unknown Content-Type for method put : '. $contenttype .' !');
+					throw new UnsupportedMediaTypeException('Unknown Content-Type for method put : '. $contenttype .' !');
 					break;
 			}
 
@@ -227,12 +240,17 @@ class FusionForgeCmController extends CmController {
 
 			// TODO: This should be done by $this->oslc
 			switch($contenttype) {
+				case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
+				case 'application/xml; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+xml':
 				case 'application/xml':
 					// extract values from XML
 					$newchangerequest = FusionForgeChangeRequest::CreateFusionForgeArrayFromXml($body);
 					break;
+				case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
+				case 'application/json; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+json':
+				case 'application/json':
 					// extract values from JSON.
 					$newchangerequest = FusionForgeChangeRequest::CreateFusionForgeArrayFromJson($body);
 					break;
@@ -280,7 +298,10 @@ class FusionForgeCmController extends CmController {
 			case 'application/x-oslc-cm-change-request+xml':
 			case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
 			case 'application/x-oslc-cm-change-request+json':
+			case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
 			case 'application/json':
+			case 'application/json; charset=UTF-8':
+			case 'application/xml; charset=UTF-8':
 			case 'application/xml':
 				break;
 			default:
@@ -300,12 +321,16 @@ class FusionForgeCmController extends CmController {
 			if (array_key_exists('tracker', $params)) {
 				// create a change request
 				switch($contenttype) {
-					case 'application/x-oslc-cm-change-request+xml':
-					case 'application/xml':
 					case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
+					case 'application/x-oslc-cm-change-request+xml':
+					case 'application/xml; charset=UTF-8':
+					case 'application/xml':
 						$newchangerequest = FusionForgeChangeRequest::CreateFusionForgeArrayFromXml($body);
 						break;
+					case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
 					case 'application/x-oslc-cm-change-request+json':
+					case 'application/json; charset=UTF-8':
+					case 'application/json':
 						$newchangerequest = FusionForgeChangeRequest::CreateFusionForgeArrayFromJson($body);
 						break;
 				}
@@ -487,6 +512,23 @@ class FusionForgeCmController extends CmController {
 
 	}
 
+	public function showselectionuiAction()	{
+		$req = $this->getRequest();
+		$params = $req->getParams();
+		$project = $params['project'];
+		$tracker = $params['tracker'];
+		$data = $this->oslc->getDataForSelectionUi($project, $tracker);
+		$this->view->data = $data;
+	}
+	
+	public function showcreationuiAction() {
+		$req = $this->getRequest();
+		$params = $req->getParams();
+		$project = $params['project'];
+		$tracker = $params['tracker'];
+		$data = $this->oslc->getDataForCreationUi($project, $tracker);
+		$this->view->data = $data;
+	}
 	
 		/**
 	 * Performs authentication according to the configured AUTH_TYPE configured
