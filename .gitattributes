@@ -4423,7 +4423,6 @@ src/www/tabber/tabber-minimized.js -text
 src/www/tabber/tabber.js -text
 src/www/terms.php -text
 src/www/themes/css/fusionforge.css -text svneol=unset#text/css
-src/www/themes/css/gforge.css svneol=native#text/css
 src/www/themes/funky/COPYING -text
 src/www/themes/funky/README.txt -text
 src/www/themes/funky/Theme.class.php -text
