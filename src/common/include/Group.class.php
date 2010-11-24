@@ -1525,7 +1525,7 @@ class Group extends Error {
 		//
 		//	Delete news
 		//
-		$news_group=&group_get_object(forge_get_config('news_group'));
+		$news_group=group_get_object(forge_get_config('news_group'));
 		$res = db_query_params ('SELECT forum_id FROM news_bytes WHERE group_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
@@ -2941,7 +2941,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
  *
  */
 function group_getname ($group_id = 0) {
-	$grp = &group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if ($grp) {
 		return $grp->getPublicName();
 	} else {
@@ -2957,7 +2957,7 @@ function group_getname ($group_id = 0) {
  *
  */
 function group_getunixname ($group_id) {
-	$grp = &group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if ($grp) {
 		return $grp->getUnixName();
 	} else {
@@ -2973,7 +2973,7 @@ function group_getunixname ($group_id) {
  *
  */
 function &group_get_result($group_id=0) {
-	$grp = &group_get_object($group_id);
+	$grp = group_get_object($group_id);
 	if ($grp) {
 		return $grp->getData();
 	} else {
