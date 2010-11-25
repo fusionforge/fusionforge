@@ -216,7 +216,7 @@ class MantisBTPlugin extends Plugin {
 			$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user', 'mantisbt'), "password" => forge_get_config('adminsoap_passwd', 'mantisbt'), "project" => $project));
 		} catch (SoapFault $soapFault) {
-			$groupObject->setError($soapFault->faultstring);
+			$groupObject->setError('addProjectMantis::Error: ' . $soapFault->faultstring);
 			return false;
 		}
 		if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
