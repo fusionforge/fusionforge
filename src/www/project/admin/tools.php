@@ -81,18 +81,27 @@ if (getStringFromRequest('submit')) {
 		$tags,
 		$group->isPublic()
 	);
-	
-	//100 $logo_image_id
-
 	if (!$res) {
 		$error_msg = $group->getErrorMessage();
 	} else {
+		// This is done so plugins can enable/disable themselves from the project
+		$hookParams['group']=$group_id;
+		if (!plugin_hook("groupisactivecheckboxpost",$hookParams)) {
+			if ($group->isError()) {
+				$error_msg = $group->getErrorMessage();
+				$group->clearError();
+			} else {
+				$error_msg = _('At least one plugin does not initialize correctly');
+			}
+		}
+
+
+	}
+
+	if (empty($error_msg)) {
 		$feedback = _('Project information updated');
 	}
 
-	// This is done so plugins can enable/disable themselves from the project
-	$hookParams['group']=$group_id;
-	plugin_hook("groupisactivecheckboxpost",$hookParams);
 }
 
 project_admin_header(array('title'=>_('Tools'),'group'=>$group->getID()));
