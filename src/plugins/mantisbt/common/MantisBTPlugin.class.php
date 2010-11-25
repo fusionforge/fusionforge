@@ -54,7 +54,7 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $use_mantisbtplugin,$G_SESSION,$HTML;
+		global $G_SESSION, $HTML;
 		switch ($hookname) {
 			case "usermenu": {
 				$text = $this->text; // this is what shows in the tab
@@ -179,48 +179,54 @@ class MantisBTPlugin extends Plugin {
 		}
 	}
 
-	function groupisactivecheckboxpost (&$params) {
+	function groupisactivecheckboxpost(&$params) {
 		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 		$group = group_get_object($params['group']);
 		$flag = strtolower('use_'.$this->name);
 		if ( getStringFromRequest($flag) == 1 ) {
 			if (!$this->isProjectMantisCreated($group->data_array['group_id'])){
-				$this->addProjectMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
+				if($this->addProjectMantis($group)) {
+					$group->setPluginUse($this->name);
+				}
 			}
-			$group->setPluginUse ( $this->name );
 		} else {
-			$group->setPluginUse ( $this->name, false );
+			$group->setPluginUse($this->name, false);
 		}
 	}
 
-	function addProjectMantis($idProjet, $nomProjet, $isPublic, $description) {
+	/*
+	 * @param	object	The Group
+	 * @return	bool	success or not
+	 */
+	function addProjectMantis(&$groupObject) {
 
-		$projet = array();
-		$project['name'] = $nomProjet;
+		$project = array();
+		$project['name'] = $groupObject->getPublicName();
 		$project['status'] = "development";
 	
-		if ($isPublic == "1"){
+		if ($groupObject->isPublic()) {
 			$project['view_state'] = 10;
 		}else{
 			$project['view_state'] = 50;
 		}
 
-		$project['description'] = $description;
+		$project['description'] = $groupObject->getDescription();
 	
 		try {
 			$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user', 'mantisbt'), "password" => forge_get_config('adminsoap_passwd', 'mantisbt'), "project" => $project));
 		} catch (SoapFault $soapFault) {
-			echo $soapFault->faultstring;
+			$groupObject->setError($soapFault->faultstring);
 			return false;
 		}
 		if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
-			echo 'addProjectMantis::Error: ' . _('Unable to create project in Mantisbt');
+			$groupObject->setError('addProjectMantis::Error: ' . _('Unable to create project in Mantisbt'));
 			return false;
 		}else{
 			$res = db_query_params('INSERT INTO group_mantisbt (id_group, id_mantisbt) VALUES ($1,$2)',
-					array($idProjet, $idProjetMantis));
+					array($groupObject->getID(), $idProjetMantis));
 			if (!$res) {
+				$groupObject->setError('addProjectMantis::Error: ' . _('db_error') . ' ' .db_error());
 				return false;
 			}
 		}
