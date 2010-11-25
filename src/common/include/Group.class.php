@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -79,7 +80,7 @@ $GROUP_OBJ=array();
  *  @param		int		Result set handle ("SELECT * FROM groups WHERE group_id=xx")
  *  @return a group object or false on failure
  */
-function &group_get_object($group_id,$res=false) {
+function &group_get_object($group_id, $res = false) {
 	//create a common set of group objects
 	//saves a little wear on the database
 
@@ -91,7 +92,7 @@ function &group_get_object($group_id,$res=false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1', array ($group_id)) ;
+			$res = db_query_params('SELECT * FROM groups WHERE group_id=$1', array($group_id)) ;
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$GROUP_OBJ["_".$group_id."_"]=false;
@@ -99,12 +100,12 @@ function &group_get_object($group_id,$res=false) {
 			/*
 				check group type and set up object
 			*/
-			if (db_result($res,0,'type_id')==1) {
+			if (db_result($res,0,'type_id') == 1) {
 				//project
-				$GROUP_OBJ["_".$group_id."_"]= new Group($group_id,$res);
+				$GROUP_OBJ["_".$group_id."_"] = new Group($group_id, $res);
 			} else {
 				//invalid
-				$GROUP_OBJ["_".$group_id."_"]=false;
+				$GROUP_OBJ["_".$group_id."_"] = false;
 			}
 		}
 	}
@@ -118,7 +119,7 @@ function &group_get_objects($id_arr) {
 	$fetch = array();
 	$return = array();
 	
-	for ($i=0; $i<count($id_arr); $i++) {
+	for ($i=0; $i < count($id_arr); $i++) {
 		//
 		//	See if this ID already has been fetched in the cache
 		//
@@ -126,14 +127,14 @@ function &group_get_objects($id_arr) {
 			continue;
 		}
 		if (!isset($GROUP_OBJ["_".$id_arr[$i]."_"])) {
-			$fetch[]=$id_arr[$i];
+			$fetch[] = $id_arr[$i];
 		} else {
 			$return[] =& $GROUP_OBJ["_".$id_arr[$i]."_"];
 		}
 	}
 	if (count($fetch) > 0) {
-		$res=db_query_params ('SELECT * FROM groups WHERE group_id = ANY ($1)',
-				      array (db_int_array_to_any_clause ($fetch))) ;
+		$res=db_query_params('SELECT * FROM groups WHERE group_id = ANY ($1)',
+				      array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {
 			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
 			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
@@ -143,64 +144,63 @@ function &group_get_objects($id_arr) {
 }
 
 function &group_get_active_projects() {
-	$res=db_query_params ('SELECT group_id FROM groups WHERE status=$1',
-			      array ('A')) ;
-	return group_get_objects (util_result_column_to_array($res,0)) ;
+	$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
+			      array('A'));
+	return group_get_objects(util_result_column_to_array($res,0)) ;
 }
 
 function &group_get_object_by_name($groupname) {
-	$res=db_query_params('SELECT * FROM groups WHERE unix_group_name=$1', array ($groupname)) ;
-	return group_get_object(db_result($res,0,'group_id'),$res);
+	$res = db_query_params('SELECT * FROM groups WHERE unix_group_name=$1', array($groupname));
+	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
 function &group_get_objects_by_name($groupname_arr) {
-	$res=db_query_params ('SELECT group_id FROM groups WHERE unix_group_name = ANY ($1)',
-			      array (db_string_array_to_any_clause ($groupname_arr))
-		);
+	$res = db_query_params('SELECT group_id FROM groups WHERE unix_group_name = ANY ($1)',
+			      array (db_string_array_to_any_clause($groupname_arr)));
 	$arr =& util_result_column_to_array($res,0);
 	return group_get_objects($arr);
 }
 
 function &group_get_object_by_publicname($groupname) {
-	$res=db_query_params ('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
-			      array (htmlspecialchars (strtolower ($groupname)))) ;
+	$res = db_query_params('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
+			      array(htmlspecialchars(strtolower($groupname))));
 
-       return group_get_object(db_result($res,0,'group_id'),$res);
+	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
 class Group extends Error {
 	/**
 	 * Associative array of data from db.
 	 * 
-	 * @var array $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * array of User objects.
 	 * 
-	 * @var array $membersArr.
+	 * @var	array	$membersArr.
 	 */
 	var $membersArr;
 
 	/**
 	 * Whether the use is an admin/super user of this project.
 	 *
-	 * @var bool $is_admin.
+	 * @var	bool	$is_admin.
 	 */
 	var $is_admin;
 
 	/**
 	 * Artifact types result handle.
 	 * 
-	 * @var int $types_res.
+	 * @var	int	$types_res.
 	 */
 	var $types_res;
 
 	/**
 	 * Associative array of data for plugins.
 	 * 
-	 * @var array $plugins_data.
+	 * @var	array	$plugins_data.
 	 */
 	var $plugins_data;
 
@@ -208,17 +208,18 @@ class Group extends Error {
 	/**
 	 * Associative array of data for the group menu.
 	 *
-	 * @var array $menu_data.
+	 * @var	array	$menu_data.
 	 */
 	var $menu_data;
 
 	/**
-	 *	Group - Group object constructor - use group_get_object() to instantiate.
+	 * Group - Group object constructor - use group_get_object() to instantiate.
 	 *
-	 *	@param	int		Required - group_id of the group you want to instantiate.
-	 *	@param	int		Database result from select query OR associative array of all columns.
+	 * @param	int	Required - group_id of the group you want to instantiate.
+	 * @param	int	Database result from select query OR associative array of all columns.
+	 * @return	boolean	success or not
 	 */
-	function Group($id=false, $res=false) {
+	function Group($id = false, $res = false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
@@ -252,9 +253,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	fetchData - May need to refresh database fields if an update occurred.
+	 * fetchData - May need to refresh database fields if an update occurred.
 	 *
-	 *	@param	int	The group_id.
+	 * @param	int	The group_id.
+	 * @return	boolean	success or not
 	 */
 	function fetchData($group_id) {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
@@ -268,16 +270,17 @@ class Group extends Error {
 	}
 
 	/**
-	 *	create - Create new group.
+	 * create - Create new group.
 	 *
-	 *	This method should be called on empty Group object.
-	 *  
-	 *  @param	object	The User object.
-	 *  @param	string	The full name of the user.
-	 *  @param	string	The Unix name of the user.
-	 *  @param	string	The new group description.
-	 *  @param	string	The purpose of the group.
-	 *  @param	bool	Whether to send an email or not
+	 * This method should be called on empty Group object.
+	 *
+	 * @param	object	The User object.
+	 * @param	string	The full name of the user.
+	 * @param	string	The Unix name of the user.
+	 * @param	string	The new group description.
+	 * @param	string	The purpose of the group.
+	 * @param	boolean	Whether to send an email or not
+	 * @return	boolean	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1, $send_mail=true) {
 		// $user is ignored - anyone can create pending group
@@ -330,7 +333,7 @@ class Group extends Error {
 					scm_box,
 					register_purpose,
 					register_time,
-                                        enable_anonscm,
+					enable_anonscm,
 					rand_hash
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
@@ -352,14 +355,14 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
-	
+
 			$id = db_insertid($res, 'groups', 'group_id');
 			if (!$id) {
 				$this->setError(sprintf(_('ERROR: Could not get group id: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
-			
+
 			if (!$this->fetchData($id)) {
 				db_rollback();
 				return false;
@@ -390,14 +393,14 @@ class Group extends Error {
 				return false;
 			}
 			}
-	
+
 			$hook_params = array ();
 			$hook_params['group'] = $this;
 			$hook_params['group_id'] = $this->getID();
 			$hook_params['group_name'] = $group_name;
 			$hook_params['unix_group_name'] = $unix_name;
 			plugin_hook ("group_create", $hook_params);
-			
+
 			db_commit();
 			if ($send_mail) {
 				$this->sendNewProjectNotificationEmail();
@@ -408,20 +411,20 @@ class Group extends Error {
 
 
 	/**
-	 *	updateAdmin - Update core properties of group object.
+	 * updateAdmin - Update core properties of group object.
 	 *
-	 *	This function require site admin privilege.
+	 * This function require site admin privilege.
 	 *
-	 *	@param	object	User requesting operation (for access control).
-	 *	@param	bool	Whether group is publicly accessible (0/1).
-	 *	@param	int		Group type (1-project, 2-foundry).
-	 *	@param	string	Machine on which group's home directory located.
-	 *	@param	string	Domain which serves group's WWW.
-	 *	@return status.
-	 *	@access public
+	 * @param	object	User requesting operation (for access control).
+	 * @param	boolean	Whether group is publicly accessible (0/1).
+	 * @param	int		Group type (1-project, 2-foundry).
+	 * @param	string	Machine on which group's home directory located.
+	 * @param	string	Domain which serves group's WWW.
+	 * @return	status.
+	 * @access	public
 	 */
 	function updateAdmin(&$user, $is_public, $type_id, $unix_box, $http_domain) {
-		$perm =& $this->getPermission ();
+		$perm =& $this->getPermission();
 
 		if (!$perm || !is_object($perm)) {
 			$this->setError(_('Could not get permission.'));
@@ -475,18 +478,18 @@ class Group extends Error {
 	}
 
 	/**
-	 *	update - Update number of common properties.
+	 * update - Update number of common properties.
 	 *
-	 *	Unlike updateAdmin(), this function accessible to project admin.
+	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 *	@param	object	User requesting operation (for access control).
-	 *	@param	bool	Whether group is publicly accessible (0/1).
-	 *	@param	string	Project's license (string ident).
-	 *	@param	int		Group type (1-project, 2-foundry).
-	 *	@param	string	Machine on which group's home directory located.
-	 *	@param	string	Domain which serves group's WWW.
-	 *	@return int	status.
-	 *	@access public
+	 * @param	object	User requesting operation (for access control).
+	 * @param	boolean	Whether group is publicly accessible (0/1).
+	 * @param	string	Project's license (string ident).
+	 * @param	int		Group type (1-project, 2-foundry).
+	 * @param	string	Machine on which group's home directory located.
+	 * @param	string	Domain which serves group's WWW.
+	 * @return	int	status.
+	 * @access	public
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
 		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
@@ -646,18 +649,18 @@ class Group extends Error {
 	}
 
 	/**
-	 *	getID - Simply return the group_id for this object.
+	 * getID - Simply return the group_id for this object.
 	 *
-	 *	@return int group_id.
+	 * @return int group_id.
 	 */
 	function getID() {
 		return $this->data_array['group_id'];
 	}
 
 	/**
-	 *	getType() - Foundry, project, etc.
+	 * getType() - Foundry, project, etc.
 	 *
-	 *	@return	int	The type flag from the database.
+	 * @return	int	The type flag from the database.
 	 */
 	function getType() {
 		return $this->data_array['type_id'];
@@ -665,28 +668,28 @@ class Group extends Error {
 
 
 	/**
-	 *	getStatus - the status code.
+	 * getStatus - the status code.
 	 *
-	 *	Statuses	char	include I,H,A,D.
+	 * Statuses	char	include I,H,A,D.
 	 */
 	function getStatus() {
 		return $this->data_array['status'];
 	}
 
 	/**
-	 *	setStatus - set the status code.
+	 * setStatus - set the status code.
 	 *
-	 *	Statuses include I,H,A,D.
+	 * Statuses include I,H,A,D.
 	 *
-	 *	@param	object	User requesting operation (for access control).
-	 *	@param	string	Status value.
-	 *	@return	boolean	success.
-	 *	@access public
+	 * @param	object	User requesting operation (for access control).
+	 * @param	string	Status value.
+	 * @return	boolean	success.
+	 * @access	public
 	 */
 	function setStatus(&$user, $status) {
 		global $SYS;
 
-                if (!forge_check_global_perm ('approve_projects')) {
+		if (!forge_check_global_perm ('approve_projects')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -710,9 +713,9 @@ class Group extends Error {
 
 		db_begin();
 
-		$res = db_query_params ('UPDATE groups
+		$res = db_query_params('UPDATE groups
 			SET status=$1
-			WHERE group_id=$2', array ($status, $this->getID())) ;
+			WHERE group_id=$2', array($status, $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(sprintf(_('ERROR: DB: Could not change group status: %s'),db_error()));
@@ -749,7 +752,7 @@ class Group extends Error {
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['status'] = $status;
 		plugin_hook ("group_setstatus", $hook_params);
-		
+
 		db_commit();
 
 		// Log the audit trail
@@ -762,9 +765,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	isProject - Simple boolean test to see if it's a project or not.
+	 * isProject - Simple boolean test to see if it's a project or not.
 	 *
-	 *	@return	boolean is_project.
+	 * @return	boolean	is_project.
 	 */
 	function isProject() {
 		if ($this->getType()==1) {
@@ -775,18 +778,18 @@ class Group extends Error {
 	}
 
 	/**
-	 *	isPublic - Simply returns the is_public flag from the database.
+	 * isPublic - Simply returns the is_public flag from the database.
 	 *
-	 *	@return	boolean	is_public.
+	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
 		return $this->data_array['is_public'];
 	}
 
 	/**
-	 *	isActive - Database field status of 'A' returns true.
+	 * isActive - Database field status of 'A' returns true.
 	 *
-	 *	@return	boolean	is_active.
+	 * @return	boolean	is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus()=='A') {
@@ -797,72 +800,72 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getUnixName - the unix_name
+	 * getUnixName - the unix_name
 	 *
-	 *  @return	string	unix_name.
+	 * @return	string	unix_name.
 	 */
 	function getUnixName() {
 		return strtolower($this->data_array['unix_group_name']);
 	}
 
 	/**
-	 *  getPublicName - the full-length public name.
+	 * getPublicName - the full-length public name.
 	 *
-	 *  @return	string	The group_name.
+	 * @return	string	The group_name.
 	 */
 	function getPublicName() {
 		return $this->data_array['group_name'];
 	}
 
 	/**
-	 *  getRegisterPurpose - the text description of the purpose of this project.
+	 * getRegisterPurpose - the text description of the purpose of this project.
 	 *
-	 *  @return	string	The description.
+	 * @return	string	The description.
 	 */
 	function getRegisterPurpose() {
 		return $this->data_array['register_purpose'];
 	}
 
 	/**
-	 *  getDescription	- the text description of this project.
+	 * getDescription	- the text description of this project.
 	 *
-	 *  @return	string	The description.
+	 * @return	string	The description.
 	 */
 	function getDescription() {
 		return $this->data_array['short_description'];
 	}
 
 	/**
-	 *  getStartDate - the unix time this project was registered.
+	 * getStartDate - the unix time this project was registered.
 	 *
-	 *  @return int (unix time) of registration.
+	 * @return int (unix time) of registration.
 	 */
 	function getStartDate() {
 		return $this->data_array['register_time'];
 	}
 
 	/**
-	 *  getLogoImageID - the id of the logo in the database for this project.
+	 * getLogoImageID - the id of the logo in the database for this project.
 	 *
-	 *  @return	int	The ID of logo image in db_images table (or 100 if none).
+	 * @return	int	The ID of logo image in db_images table (or 100 if none).
 	 */
 	function getLogoImageID() {
 		return $this->data_array['logo_image_id'];
 	}
 
 	/**
-	 *  getUnixBox - the hostname of the unix box where this project is located.
+	 * getUnixBox - the hostname of the unix box where this project is located.
 	 *
-	 *  @return	string	The name of the unix machine for the group.
+	 * @return	string	The name of the unix machine for the group.
 	 */
 	function getUnixBox() {
 		return $this->data_array['unix_box'];
 	}
 
 	/**
-	 *  getSCMBox - the hostname of the scm box where this project is located.
+	 * getSCMBox - the hostname of the scm box where this project is located.
 	 *
-	 *  @return	string	The name of the unix machine for the group.
+	 * @return	string	The name of the unix machine for the group.
 	 */
 	function getSCMBox() {
 		return $this->data_array['scm_box'];
@@ -870,7 +873,7 @@ class Group extends Error {
 	/**
 	 * setSCMBox - the hostname of the scm box where this project is located.
 	 *
-	 * @param	string The name of the new SCM_BOX
+	 * @param	string	The name of the new SCM_BOX
 	 */
 	function setSCMBox($scm_box) {
 
@@ -897,18 +900,18 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getDomain - the hostname.domain where their web page is located.
+	 * getDomain - the hostname.domain where their web page is located.
 	 *
-	 *  @return	string	The name of the group [web] domain.
+	 * @return	string	The name of the group [web] domain.
 	 */
 	function getDomain() {
 		return $this->data_array['http_domain'];
 	}
 
 	/**
-	 *  getLicense	- the license they chose.
+	 * getLicense	- the license they chose.
 	 *
-	 *  @return	int	ident of group license.
+	 * @return	int	ident of group license.
 	 */
 	function getLicense() {
 		return $this->data_array['license'];
@@ -917,7 +920,7 @@ class Group extends Error {
 	/**
 	 * getLicenseName - the name of the license
 	 *
-	 * @return string license name
+	 * @return	string	license name
 	 */
 	function getLicenseName() {
 		$licenses =& group_get_licenses();
@@ -929,9 +932,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getLicenseOther - optional string describing license.
+	 * getLicenseOther - optional string describing license.
 	 *
-	 *  @return	string	The custom license.
+	 * @return	string	The custom license.
 	 */
 	function getLicenseOther() {
 		if ($this->getLicense() == GROUP_LICENSE_OTHER) {
@@ -942,9 +945,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getRegistrationPurpose - the text description of the purpose of this project.
+	 * getRegistrationPurpose - the text description of the purpose of this project.
 	 *
-	 *  @return	string	The application for project hosting.
+	 * @return	string	The application for project hosting.
 	 */
 	function getRegistrationPurpose() {
 		return $this->data_array['register_purpose'];
@@ -954,12 +957,12 @@ class Group extends Error {
 	/**
 	 * getAdmins() - Get array of Admin user objects.
 	 *
-	 *	@return	array	Array of User objects.
+	 * @return	array	Array of User objects.
 	 */
 	function &getAdmins() {
-		$roles = RBACEngine::getInstance()->getRolesByAllowedAction ('project_admin', $this->getID()) ;
+		$roles = RBACEngine::getInstance()->getRolesByAllowedAction ('project_admin', $this->getID());
 		
-		$user_ids = array () ;
+		$user_ids = array() ;
 
 		foreach ($roles as $role) {
 			if (! ($role instanceof RoleExplicit)) {
@@ -971,61 +974,58 @@ class Group extends Error {
 			}
 			
 			foreach ($role->getUsers() as $u) {
-				$user_ids[] = $u->getID() ;
+				$user_ids[] = $u->getID();
 			}
 		}
-			
 		return user_get_objects(array_unique($user_ids));
 	}
-		
+
 	/*
-
 		Common Group preferences for tools
-
 	*/
 
 	/**
-	 *	enableAnonSCM - whether or not this group has opted to enable Anonymous SCM.
+	 * enableAnonSCM - whether or not this group has opted to enable Anonymous SCM.
 	 *
-	 *	@return boolean enable_scm.
+	 * @return	boolean	enable_scm.
 	 */
 	function enableAnonSCM() {
 		if (USE_PFO_RBAC) {
-			$r = RoleAnonymous::getInstance () ;
-			return $r->hasPermission ('scm', $this->getID(), 'read') ;
+			$r = RoleAnonymous::getInstance();
+			return $r->hasPermission('scm', $this->getID(), 'read');
 		} else {
-		if ($this->isPublic() && $this->usesSCM()) {
-			return $this->data_array['enable_anonscm'];
-		} else {
-			return false;
-		}
+			if ($this->isPublic() && $this->usesSCM()) {
+				return $this->data_array['enable_anonscm'];
+			} else {
+				return false;
+			}
 		}
 	}
 
-	function SetUsesAnonSCM ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
+	function SetUsesAnonSCM($booleanparam) {
+		db_begin() ;
+		$booleanparam = $booleanparam ? 1 : 0;
 		if (USE_PFO_RBAC) {
-			$r = RoleAnonymous::getInstance () ;
-			$r->setSetting ('scm', $this->getID(), $booleanparam) ;
-			db_commit () ;
+			$r = RoleAnonymous::getInstance();
+			$r->setSetting('scm', $this->getID(), $booleanparam);
+			db_commit();
 		} else {
-		$res = db_query_params ('UPDATE groups SET enable_anonscm=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
-		if ($res) {
-			$this->data_array['enable_anonscm']=$booleanparam;
-			db_commit () ;
-		} else {
-			db_rollback ();
-			return false;
-		}
+			$res = db_query_params('UPDATE groups SET enable_anonscm=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
+			if ($res) {
+				$this->data_array['enable_anonscm'] = $booleanparam;
+				db_commit();
+			} else {
+				db_rollback();
+				return false;
+			}
 		}
 	}
 
-	function setUsesSCM ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
+	function setUsesSCM($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
 					array ($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_scm']=$booleanparam;
@@ -1049,14 +1049,14 @@ class Group extends Error {
 		}
 	}
 
-	function SetUsesPserver ($booleanparam) {
-		db_begin () ;
+	function SetUsesPserver($booleanparam) {
+		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET enable_pserver=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+		$res = db_query_params('UPDATE groups SET enable_pserver=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['enable_pserver']=$booleanparam;
-			db_commit () ;
+			$this->data_array['enable_pserver'] = $booleanparam;
+			db_commit();
 		} else {
 			db_rollback();
 			return false;
@@ -1064,9 +1064,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	usesSCM - whether or not this group has opted to use SCM.
+	 * usesSCM - whether or not this group has opted to use SCM.
 	 *
-	 *	@return	boolean	uses_scm.
+	 * @return	boolean	uses_scm.
 	 */
 	function usesSCM() {
 
@@ -1078,9 +1078,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	usesMail - whether or not this group has opted to use mailing lists.
+	 * usesMail - whether or not this group has opted to use mailing lists.
 	 *
-	 *	@return	boolean uses_mail.
+	 * @return	boolean uses_mail.
 	 */
 	function usesMail() {
 
@@ -1092,9 +1092,9 @@ class Group extends Error {
 	}
 
 	/**
-	 * 	usesNews - whether or not this group has opted to use news.
+	 * usesNews - whether or not this group has opted to use news.
 	 *
-	 *	@return	boolean	uses_news.
+	 * @return	boolean	uses_news.
 	 */
 	function usesNews() {
 
@@ -1106,9 +1106,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	usesForum - whether or not this group has opted to use discussion forums.
+	 * usesForum - whether or not this group has opted to use discussion forums.
 	 *
-	 *  @return	boolean	uses_forum.
+	 * @return	boolean	uses_forum.
 	 */
 	function usesForum() {
 
@@ -1117,21 +1117,21 @@ class Group extends Error {
 		} else {
 			return false;
 		}
-	}	   
+	}
 
 	/**
-	 *  usesStats - whether or not this group has opted to use stats.
+	 * usesStats - whether or not this group has opted to use stats.
 	 *
-	 *  @return	boolean	uses_stats.
+	 * @return	boolean	uses_stats.
 	 */
 	function usesStats() {
 		return $this->data_array['use_stats'];
 	}
 
 	/**
-	 *  usesFRS - whether or not this group has opted to use file release system.
+	 * usesFRS - whether or not this group has opted to use file release system.
 	 *
-	 *  @return	boolean	uses_frs.
+	 * @return	boolean	uses_frs.
 	 */
 	function usesFRS() {
 
@@ -1143,9 +1143,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  usesTracker - whether or not this group has opted to use tracker.
+	 * usesTracker - whether or not this group has opted to use tracker.
 	 *
-	 *  @return	boolean	uses_tracker.
+	 * @return	boolean	uses_tracker.
 	 */
 	function usesTracker() {
 
@@ -1157,9 +1157,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  useCreateOnline - whether or not this group has opted to use create online documents option.
+	 * useCreateOnline - whether or not this group has opted to use create online documents option.
 	 *
-	 *  @return	boolean	use_docman_create_online.
+	 * @return	boolean	use_docman_create_online.
 	 */
 	function useCreateOnline() {
 
@@ -1171,9 +1171,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  usesDocman - whether or not this group has opted to use docman.
+	 * usesDocman - whether or not this group has opted to use docman.
 	 *
-	 *  @return	boolean	use_docman.
+	 * @return	boolean	use_docman.
 	 */
 	function usesDocman() {
 
@@ -1185,9 +1185,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  useDocmanSearch - whether or not this group has opted to use docman search engine.
+	 * useDocmanSearch - whether or not this group has opted to use docman search engine.
 	 *
-	 *  @return	boolean	use_docman_search.
+	 * @return	boolean	use_docman_search.
 	 */
 	function useDocmanSearch() {
 
@@ -1199,9 +1199,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  useWebdav - whether or not this group has opted to use webdav interface.
+	 * useWebdav - whether or not this group has opted to use webdav interface.
 	 *
-	 *  @return	boolean	use_docman_search.
+	 * @return	boolean	use_docman_search.
 	 */
 	function useWebdav() {
 
@@ -1213,9 +1213,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  usesFTP - whether or not this group has opted to use FTP.
+	 * usesFTP - whether or not this group has opted to use FTP.
 	 *
-	 *  @return	boolean	uses_ftp.
+	 * @return	boolean	uses_ftp.
 	 */
 	function usesFTP() {
 
@@ -1227,9 +1227,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  usesSurvey - whether or not this group has opted to use surveys.
+	 * usesSurvey - whether or not this group has opted to use surveys.
 	 *
-	 *  @return	boolean	uses_survey.
+	 * @return	boolean	uses_survey.
 	 */
 	function usesSurvey() {
 
@@ -1238,12 +1238,12 @@ class Group extends Error {
 		} else {
 			return false;
 		}
-	}	   
+	}
 
 	/**
-	 *  usesPM - whether or not this group has opted to Project Manager.
+	 * usesPM - whether or not this group has opted to Project Manager.
 	 *
-	 *  @return	boolean	uses_projman.
+	 * @return	boolean	uses_projman.
 	 */
 	function usesPM() {
 
@@ -1255,77 +1255,77 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getPlugins -  get a list of all available group plugins
+	 * getPlugins -  get a list of all available group plugins
 	 *
-	 *  @return	array	array containing plugin_id => plugin_name
+	 * @return	array	array containing plugin_id => plugin_name
 	 */
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
-			$this->plugins_data = array () ;
-			$res = db_query_params ('SELECT group_plugin.plugin_id, plugins.plugin_name
-						 FROM group_plugin, plugins
-                                                 WHERE group_plugin.group_id=$1
-						   AND group_plugin.plugin_id=plugins.plugin_id', array ($this->getID()));
+			$this->plugins_data = array();
+			$res = db_query_params('SELECT group_plugin.plugin_id, plugins.plugin_name
+						FROM group_plugin, plugins
+						WHERE group_plugin.group_id=$1
+						AND group_plugin.plugin_id=plugins.plugin_id', array($this->getID()));
 			$rows = db_numrows($res);
 
 			for ($i=0; $i<$rows; $i++) {
-				$plugin_id = db_result($res,$i,'plugin_id');
-				$this->plugins_data[$plugin_id] = db_result($res,$i,'plugin_name');
+				$plugin_id = db_result($res, $i, 'plugin_id');
+				$this->plugins_data[$plugin_id] = db_result($res, $i, 'plugin_name');
 			}
 		}
 		return $this->plugins_data ;
 	}
 
 	/**
-	 *  usesPlugin - returns true if the group uses a particular plugin 
+	 * usesPlugin - returns true if the group uses a particular plugin 
 	 *
-	 *  @param	string	name of the plugin
-	 *  @return	boolean	whether plugin is being used or not
+	 * @param	string	name of the plugin
+	 * @return	boolean	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
-		$plugins_data = $this->getPlugins() ;
+		$plugins_data = $this->getPlugins();
 		foreach ($plugins_data as $p_id => $p_name) {
 			if ($p_name == $pluginname) {
-				return true ;
+				return true;
 			}
 		}
-		return false ;
+		return false;
 	}
 	/**
-	 *  added for Codendi compatibility
-	 *  usesServices - returns true if the group uses a particular plugin or feature
+	 * added for Codendi compatibility
+	 * usesServices - returns true if the group uses a particular plugin or feature
 	 *
-	 *  @param	string	name of the plugin
-	 *  @return	boolean	whether plugin is being used or not
+	 * @param	string	name of the plugin
+	 * @return	boolean	whether plugin is being used or not
 	 */
 	function usesService($feature) {
-		$plugins_data = $this->getPlugins() ;
+		$plugins_data = $this->getPlugins();
 		$pm = plugin_manager_get_object();
 		foreach ($plugins_data as $p_id => $p_name) {
 			if ($p_name == $feature) {
-				return true ;
+				return true;
 			}
-			if ($pm->getPluginByName($p_name)->provide($feature) ) {
-				return true ;
+			if ($pm->getPluginByName($p_name)->provide($feature)) {
+				return true;
 			}
 		}
-		return false ;
+		return false;
 	}
 
 	/**
-	 *  setPluginUse - enables/disables plugins for the group
+	 * setPluginUse - enables/disables plugins for the group
 	 *
-	 *  @param	string	name of the plugin
-	 *  @param	boolean	the new state
-	 *  @return	string	database result 
+	 * @param	string	name of the plugin
+	 * @param	boolean	the new state
+	 * @return	string	database result 
 	 */
 	function setPluginUse($pluginname, $val=true) {
 		if ($val == $this->usesPlugin($pluginname)) {
 			// State is already good, returning
-			return true ;
+			return true;
 		}
-		$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
-					array ($pluginname));
+		$res = db_query_params('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
+					array($pluginname));
 		$rows = db_numrows($res);
 		if ($rows == 0) {
 			// Error: no plugin by that name
@@ -1333,33 +1333,33 @@ class Group extends Error {
 		}
 		$plugin_id = db_result($res,0,'plugin_id');
 		// Invalidate cache
-		unset ($this->plugins_data) ;
+		unset ($this->plugins_data);
 		if ($val) {
-			$res = db_query_params ('INSERT INTO group_plugin (group_id, plugin_id) VALUES ($1, $2)',
-						array ($this->getID(),
-						       $plugin_id));
+			$res = db_query_params('INSERT INTO group_plugin (group_id, plugin_id) VALUES ($1, $2)',
+						array($this->getID(),
+						      $plugin_id));
 			return $res ;
 		} else {
-			$res = db_query_params ('DELETE FROM group_plugin WHERE group_id=$1 AND plugin_id=$2',
-						array ($this->getID(),
-						       $plugin_id));
-			return $res ;
+			$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1 AND plugin_id=$2',
+						array($this->getID(),
+						      $plugin_id));
+			return $res;
 		}
 	}
 
 	/**
-	 *  getDocEmailAddress - get email address(es) to send doc notifications to.
+	 * getDocEmailAddress - get email address(es) to send doc notifications to.
 	 *
-	 *  @return	string	email address.
+	 * @return	string	email address.
 	 */
 	function getDocEmailAddress() {
 		return $this->data_array['new_doc_address'];
 	}
 
 	/**
-	 *  DocEmailAll - whether or not this group has opted to use receive notices on all doc updates.
+	 * DocEmailAll - whether or not this group has opted to use receive notices on all doc updates.
 	 *
-	 *  @return	boolean	email_on_all_doc_updates.
+	 * @return	boolean	email_on_all_doc_updates.
 	 */
 	function docEmailAll() {
 		return $this->data_array['send_all_docs'];
@@ -1367,18 +1367,18 @@ class Group extends Error {
 
 
 	/**
-	 *	getHomePage - The URL for this project's home page.
+	 * getHomePage - The URL for this project's home page.
 	 *
-	 *	@return	string	homepage URL.
+	 * @return	string	homepage URL.
 	 */
 	function getHomePage() {
 		return $this->data_array['homepage'];
 	}
 
 	/**
-	 *	getTags - Tags of this project.
+	 * getTags - Tags of this project.
 	 *
-	 *	@return	string	List of tags.
+	 * @return	string	List of tags.
 	 */
 	function getTags() {
 		$sql = 'SELECT name FROM project_tags WHERE group_id = $1';
@@ -1387,9 +1387,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	setTags - Set tags of this project.
+	 * setTags - Set tags of this project.
 	 *
-	 *	@return	string	database result.
+	 * @return	string	database result.
 	 */
 	function setTags($tags) {
 		db_begin();
@@ -1426,16 +1426,16 @@ class Group extends Error {
 	}
 
 	/**
-	 *	getPermission - Return a Permission for this Group
+	 * getPermission - Return a Permission for this Group
 	 *
-	 *	@return	object	The Permission.
+	 * @return	object	The Permission.
 	 */
 	function &getPermission() {
 		return permission_get_object($this);
 	}
 
 
-	function delete($sure,$really_sure,$really_really_sure) {
+	function delete($sure, $really_sure, $really_really_sure) {
 		if (!$sure || !$really_sure || !$really_really_sure) {
 			$this->setMissingParamsError();
 			return false;
@@ -1468,8 +1468,8 @@ class Group extends Error {
 			$this->removeUser($members[$i]->getID());
 		}
 		// Failsafe until user_group table is gone
-		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1', 
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM user_group WHERE group_id=$1',
+					array($this->getID()));
 		//
 		//	Delete Trackers
 		//
@@ -1477,7 +1477,7 @@ class Group extends Error {
 		$at_arr =& $atf->getArtifactTypes();
 		for ($i=0; $i<count($at_arr); $i++) {
 			if (!is_object($at_arr[$i])) {
-				printf (_("Not Object: ArtifactType: %d"),$i);
+				printf(_("Not Object: ArtifactType: %d"), $i);
 				continue;
 			}
 			$at_arr[$i]->delete(1,1);
@@ -1512,7 +1512,7 @@ class Group extends Error {
 		//$frspf = new FRSPackageFactory($this);
 		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
 					array ($this->getID())) ;
-//echo 'frs_package'.db_error();
+		//echo 'frs_package'.db_error();
 		//$frsp_arr =& $frspf->getPackages();
 		while ($arr = db_fetch_array($res)) {
 			//if (!is_object($pg_arr[$i])) {
@@ -1670,16 +1670,16 @@ class Group extends Error {
 		//
 		//	Delete counters
 		//
-		$res = db_query_params ('DELETE FROM project_sums_agg WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM project_sums_agg WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Counters: ').db_error());
 			db_rollback();
 			return false;
 		}
 
-		$res = db_query_params ('INSERT INTO deleted_groups (unix_group_name,delete_date,isdeleted) VALUES ($1, $2, $3)',
-					array ($this->getUnixName(),
+		$res = db_query_params('INSERT INTO deleted_groups (unix_group_name,delete_date,isdeleted) VALUES ($1, $2, $3)',
+					array($this->getUnixName(),
 					       time(),
 					       0)) ;
 		if (!$res) {
@@ -1700,7 +1700,7 @@ class Group extends Error {
 		if (!$res) {
 			return false;
 		}
-               
+
 		$hook_params = array ();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
@@ -1730,12 +1730,8 @@ class Group extends Error {
 	}
 
 	/*
-
-
 		Basic functions to add/remove users to/from a group
 		and update their permissions
-
-
 	*/
 
 	/**
@@ -1757,7 +1753,7 @@ class Group extends Error {
 			return false;
 		}
 		db_begin();
-		
+
 		/*
 			get user id for this user's unix_name
 		*/
@@ -1924,13 +1920,13 @@ class Group extends Error {
 	}
 
 	/**
-	 *  removeUser - controls removing a user from a group.
+	 * removeUser - controls removing a user from a group.
 	 * 
-	 *  Users can remove themselves.
+	 * Users can remove themselves.
 	 *
-	 *  @param	int		The ID of the user to remove.
-	 *	@return	boolean	success.
-	 */ 
+	 * @param	int	The ID of the user to remove.
+	 *@return	boolean	success.
+	 */
 	function removeUser($user_id) {
 		global $SYS;
 
@@ -1939,7 +1935,7 @@ class Group extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-	
+
 		db_begin();
 
 		if (USE_PFO_RBAC) {
@@ -2047,13 +2043,13 @@ class Group extends Error {
 		return true;
 	}
 
-	/**	 
-	 *  updateUser - controls updating a user's role in this group.
+	/**
+	 * updateUser - controls updating a user's role in this group.
 	 *
-	 *  @param	int		The ID of the user.
-	 *	@param	int		The role_id to set this user to.
-	 *	@return	boolean	success.
-	 */	 
+	 * @param	int	The ID of the user.
+	 * @param	int	The role_id to set this user to.
+	 * @return	boolean	success.
+	 */
 	function updateUser($user_id,$role_id) {
 		global $SYS;
 
@@ -2105,19 +2101,19 @@ class Group extends Error {
 			$this->setError(sprintf(_('Role: %s'),$role->getErrorMessage()));
 			return false;
 		}
-		}		
-		
+		}
+
 		$this->addHistory('Updated User',$user_id);
 		return true;
 	}
 
 	/**
-	 *	addHistory - Makes an audit trail entry for this project.
+	 * addHistory - Makes an audit trail entry for this project.
 	 *
-	 *  @param	string	The name of the field.
-	 *  @param	string	The Old Value for this $field_name.
-	 *	@return database result handle.
-	 *	@access public
+	 * @param	string	The name of the field.
+	 * @param	string	The Old Value for this $field_name.
+	 * @return database result handle.
+	 * @access public
 	 */
 	function addHistory($field_name, $old_value) {
 		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate) 
@@ -2127,15 +2123,15 @@ class Group extends Error {
 					       $old_value,
 					       user_getid(),
 					       time()));
-	}		  
+	}
 
 	/**
-	 *	activateUsers - Make sure that group members have unix accounts.
+	 * activateUsers - Make sure that group members have unix accounts.
 	 *
-	 *	Setup unix accounts for group members. Can be called even
-	 *	if members are already active. 
+	 * Setup unix accounts for group members. Can be called even
+	 * if members are already active. 
 	 *
-	 *	@access private
+	 * @access private
 	 */
 	function activateUsers() {
 		/*
@@ -2152,23 +2148,23 @@ class Group extends Error {
 					$roles[] = $role ;
 				}
 				if (!$this->addUser($member->getUnixName(),$role->getID())) {
-					return false ;
+					return false;
 				}
 			}
 			
 		}
 		} else {
-			$res_member = db_query_params ('SELECT user_id,role_id FROM user_group WHERE group_id=$1',
-						       array ($this->getID())) ;
+			$res_member = db_query_params('SELECT user_id,role_id FROM user_group WHERE group_id=$1',
+						       array ($this->getID()));
 			while ($row_member = db_fetch_array($res_member)) {
-				$u = user_get_object($row_member['user_id']) ;
+				$u = user_get_object($row_member['user_id']);
 				if (!$this->addUser($u->getUnixName(),$row_member['role_id'])) {
-					return false ;
+					return false;
 				}
 			}
 		}
-		
-		return true ;
+
+		return true;
 	}
 
 	/**
