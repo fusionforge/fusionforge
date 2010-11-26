@@ -3,7 +3,6 @@
 <?php
 
 require_once('_resource_xml.php');
-require('_add_hyperlinks.php');
 
 $tracker = 'unknown';
 
@@ -24,9 +23,8 @@ switch (TRACKER_TYPE) {
 
 print '<h1>'.$tracker.' Change Request:</h1>';
 $xml = createResourceView($this);
-$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
-$text = add_links($text, "http");
-print '<pre>'.$text.'</pre>';
+$xml = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
+print '<pre>'.$xml.'</pre>';
 ?>
 
 </body>

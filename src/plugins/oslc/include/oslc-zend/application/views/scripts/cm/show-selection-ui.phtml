@@ -6,19 +6,14 @@
 		$where[] = $key;
 	}
 	//print_r($this->data['where']);
-	/*
-	 * @import "http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojox/grid/resources/Grid.css";
-	@import url("http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/soria/soria.css");
-		
-	 */
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>OSLC Query UI</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<style type="text/css">
-		@import "/javascript/dojox/grid/resources/Grid.css";
-		@import url("/javascript/dijit/themes/soria/soria.css");
+		@import "http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojox/grid/resources/Grid.css";
+		@import url("http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/soria/soria.css");
 		
 		body { 	font: 13px Myriad,Arial,Helvetica,clean,sans-serif; 	
 				*font-size: small;	
@@ -56,7 +51,7 @@
 		}
 		
 		</style>
-        <script type="text/javascript" src="/javascript/dojo/dojo.js"
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dojo/dojo.xd.js"
 			djconfig="parseOnLoad:true">
 		</script>
         <script type="text/javascript">
@@ -66,8 +61,7 @@
         dojo.require("dojox.data.CsvStore");
         dojo.require("dojo.data.ItemFileReadStore");
         dojo.require("dojox.encoding.base64");
-        
-		var URL = "<?php echo $this->baseUrl(); ?>"+"/cm/bugs";
+
 		var props; 	//array of all properties, dc:title has not been included in the list
 					//and is always shown in the results
 		var where; //array of all where options
@@ -238,7 +232,7 @@
             
 
             var xhrArgs = {
-                    url: URL,
+                    url: "/~mdhar/mantisbt/oslc-zend/cm/bugs",
                     headers: {Accept: "application/json"},
                     preventCache: true,
                     handleAs: "json",
@@ -282,23 +276,9 @@
                         
                      
                     },
-                    error: function(err, ioargs) {
-                  	  var response = dojo.fromJson(ioargs.xhr.responseText);
-                  	  var errmsg, errcode;
-                  	  for (var key in response) {
-						   var obj = response[key];						   
-						   if(key=="oslc_cm:Error")   {
-							   for (var i in obj) {
-								  if(i=="oslc_cm:statusCode")	{
-									  errcode = obj[i];
-								  }else if(i=="oslc_cm:message")	{
-									  errmsg = obj[i];
-								  } 
-							   }
-							   var errtext = "Error " + errcode + ": " + errmsg;
-							   alert(errtext);
-						   }
-						}
+                    error: function(err) {
+                  	  err = err.message||err;
+                  	  alert('error: '+err);
                     }
                 }
 
@@ -458,19 +438,11 @@
 	              for(var i=0;i<len;i++)	{
 	                  var val = whereoptions[list.selectedIndex-1][i];
 	                  try	{
-		                if(i==0)	{
-							optionlist.add(new Option(val, val, true), null); //add new option to end
-		                }else	{
-		                	optionlist.add(new Option(val, val), null); //add new option to end
-		                }
+						optionlist.add(new Option(val, val), null) //add new option to end
 	            		
 	            	  }
 	            	  catch(e)	{ //for IE
-	            		  	if(i==0)	{
-								optionlist.add(new Option(val, val, true)); //add new option to end
-			                }else	{
-			                	optionlist.add(new Option(val, val)); //add new option to end
-			                }
+						optionlist.add(new Option(val, val)) //add new option to end
 	            	  }
 	              }
               }else if(list.selectedIndex==0)	{
@@ -553,7 +525,6 @@
 	        	<fieldset>
         		<legend><em>oslc.properties</em></legend>
 		        <table id="propstable">
-		        	<tr><small>[url, dc:title will be present by default]</small></tr>
 					<tr class="proprowclass" id="proprow">
 						<!--  td width="100">oslc.properties</td>-->
 						<td><select id="proplist">

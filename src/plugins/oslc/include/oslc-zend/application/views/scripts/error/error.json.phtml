@@ -19,5 +19,4 @@
 $json = array("oslc_cm:Error" => array(	"oslc_cm:statusCode"	=> (string)$this->code,
 										"oslc_cm:message"		=> (string)$this->exception->getMessage()));
 
-print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
-?>
+print Zend_Json::encode($json);

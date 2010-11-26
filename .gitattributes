@@ -1940,7 +1940,6 @@ src/plugins/oslc/include/oslc-zend/application/models/ChangeRequests.php -text
 src/plugins/oslc/include/oslc-zend/application/models/fusionforge.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/models/mantis.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/test.csv -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_add_hyperlinks.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_resource_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_service-catalog_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/_service-document_xml.php -text
@@ -1966,7 +1965,6 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/read-resource-co
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/read-resource.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/read-resource.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/read-resource.xml.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/show-creation-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/cm/show-selection-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/_error_resource.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/default.phtml -text

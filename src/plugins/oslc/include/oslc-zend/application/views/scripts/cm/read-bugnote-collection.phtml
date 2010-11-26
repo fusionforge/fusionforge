@@ -20,7 +20,6 @@
 /* $Id$ */
 
 require_once('_resource_xml.php');
-require('_add_hyperlinks.php');
 
 $tracker = 'unknown';
 
@@ -41,9 +40,8 @@ switch (TRACKER_TYPE) {
 
 print '<h1>'.$tracker.' Change Requests Comments:</h1>';
 $xml = createRessourceCollectionView($this);
-$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
-$text = add_links($text, "http");
-print '<pre>'.$text.'</pre>';?>
+print '<pre>'.(str_replace('>', '&gt;', str_replace('<', '&lt;', $xml))).'<pre>';
+?>
 
 </body>
 </html>

@@ -61,46 +61,11 @@ function project_to_service_description($base_url, $project) {
 	
 	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
 	$title = $sq->appendChild($child);
-	$child = $doc->createTextNode("Simple Project Query");
+	$child = $doc->createTextNode("Simple GET-based Bug Query");
 	$child = $title->appendChild($child);
 	
 	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
 	$url = $sq->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project);
-	$child = $url->appendChild($child);
-	
-	// OSLC URL-encoded query
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:simpleQuery");
-	$sq = $cr->appendChild($child);
-	
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $sq->appendChild($child);
-	$child = $doc->createTextNode("OSLC Change Request Queries");
-	$child = $title->appendChild($child);
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $sq->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/bugs');
-	$child = $url->appendChild($child);
-	
-	//creation factory
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:factory");
-	$crdl = $cr->appendChild($child);	
-	
-	$child = $doc->createAttribute("oslc_cm:default");
-	$option = $crdl->appendChild($child);
-	$child = $doc->createTextNode("true");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $crdl->appendChild($child);
-	$child = $doc->createTextNode("Location for creation of change requests");
-	$child = $title->appendChild($child);
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $crdl->appendChild($child);
 	$child = $doc->createTextNode($base_url.'/cm/project/'.$project);
 	$child = $url->appendChild($child);
 	

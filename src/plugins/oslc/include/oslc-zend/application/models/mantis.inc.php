@@ -142,7 +142,6 @@ class MantisChangeRequest extends ChangeRequest
 	
 	public static function CreateMantisArrayFromJson($jsonstr)
 	{
-		//print_r($jsonstr);
 		$resource = Zend_Json::decode($jsonstr);
 
 		$changerequest = new MantisChangeRequest();
@@ -268,10 +267,8 @@ class ChangeRequestsMantisDb extends ChangeRequests
 				$return[$identifier]=array();
 				$fields = explode(",", $fieldstring);
 				//print_r($fieldstring);
-				$custom_field_array = custom_field_get_linked_ids($row->project_id);
 				
 				if(empty($fieldstring))	{
-					//mandatory attributes
 					$return[$identifier]=array(
 						'identifier'=>$identifier,
 						'title'=>$row->summary,
@@ -281,25 +278,14 @@ class ChangeRequestsMantisDb extends ChangeRequests
 						'mantisbt:status'=>self::$status_arr[$row->status],
 						'mantisbt:priority'=>self::$priority_arr[$row->priority],
 						'mantisbt:severity'=>self::$severity_arr[$row->severity],
+						'mantisbt:version'=>$row->version,
+						'mantisbt:target_version'=>$row->target_version,
 						'modified'=>date(DATE_ATOM,$row->last_updated),
 						'created'=>date(DATE_ATOM,$row->date_submitted)
 						);
-						
-					$temp_arr = version_get_all_rows($row->project_id);
-					if(!empty($temp_arr))	{
-						if($row->version!="")	{
-							$return[$identifier]['mantisbt:version'] = $row->version;
-						}
-						if($row->target_version!="")	{
-							$return[$identifier]['mantisbt:target_version'] = $row->target_version;
-						}
-					}						
-						
 					if ($v_num_id) {
 						$v_num = custom_field_get_value( $v_num_id, $identifier );
-						if($v_num!="")	{
-							$return[$identifier]['mantisbt:version_number'] = $v_num;
-						}						
+						$return[$identifier]['mantisbt:version_number'] = $v_num;
 					}
 					 
 				}else {
