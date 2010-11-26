@@ -450,7 +450,7 @@ if ($art_cnt > 0) {
 		}
 		
 		$i=0;
-		$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
+		$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
 		$keys=array_keys($efarr);
 		$field_id = $keys[0];
 		$states = $ath->getExtraFieldElements($field_id);
@@ -664,7 +664,7 @@ if ($art_cnt > 0) {
 		//
 		//	build custom fields
 		//
-	$ef = $ath->getExtraFields(ARTIFACT_EXTRAFIELD_FILTER_INT);
+	$ef = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELD_FILTER_INT));
 	$keys=array_keys($ef);
 
 	$sel=array();
@@ -675,7 +675,7 @@ if ($art_cnt > 0) {
 			$sel[$keys[$i]]='100';
 		}
 	}
-	$ath->renderExtraFields($sel,true,_('No Change'),false,'',ARTIFACT_EXTRAFIELD_FILTER_INT,true);
+	$ath->renderExtraFields($sel,true,_('No Change'),false,'',array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
 		echo   '<tr>
 			<td><strong>'._('Priority').':</strong><br />';
 		echo build_priority_select_box ('priority', '100', true);

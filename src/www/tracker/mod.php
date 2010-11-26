@@ -128,7 +128,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	</tr>
 
 	<?php
-		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'UPDATE');
+		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
 	?>
 
 	<tr>

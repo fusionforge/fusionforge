@@ -32,7 +32,7 @@ while($row = db_fetch_array($res)) {
 	print "Upgrading group_id=".$row['group_id']." (group_artifact_id=".$row['group_artifact_id'].")\n";
 	$group =& group_get_object($row['group_id']);
 	$ath = new ArtifactTypeHtml($group, $row['group_artifact_id']);
-	$efarr =& $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
+	$efarr =& $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
 	$keys=array_keys($efarr);
 	$field_id = $keys[0];
 	    	

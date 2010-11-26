@@ -26,7 +26,7 @@
 require_once('common/tracker/ArtifactWorkflow.class.php');
 
 $has_error = false;
-$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
+$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
 if (count($efarr) === 0) {
 	$has_error = true;
    	$error_msg .= _('To create a workflow, you need first to create a custom field of type \'Status\'.');

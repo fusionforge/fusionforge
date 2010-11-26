@@ -604,17 +604,18 @@ class ArtifactType extends Error {
 	 *
 	 *	@return arrays of data;
 	 */
-	function getExtraFields($filter='') {
+	function getExtraFields($types=array()) {
+		$filter=implode (',',$types);
 		if (!isset($this->extra_fields["$filter"])) {
 			$this->extra_fields["$filter"] = array();
-			if ($filter) {
+			if (count($types)) {
 				$res = db_query_params ('SELECT *
 				FROM artifact_extra_field_list 
 				WHERE group_artifact_id=$1
                                 AND field_type = ANY ($2)
 				ORDER BY field_type ASC',
 							array ($this->getID(),
-							       db_int_array_to_any_clause (explode (',', $filter)))) ;
+							       db_int_array_to_any_clause ($types))) ;
 			} else {
 				$res = db_query_params ('SELECT *
 				FROM artifact_extra_field_list 
@@ -1007,7 +1008,7 @@ class ArtifactType extends Error {
 		$list = $this->data_array['browse_list'];
 		
 		// remove status_id in the browse list if a custom status exists
-    if (count($this->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS)) > 0) {
+		if (count($this->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS))) > 0) {
       $arr = explode(',', $list);
       $idx = array_search('status_id', $arr);
       if($idx !== False) {
