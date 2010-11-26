@@ -25,6 +25,7 @@ FusionForge-5.1:
   Mas)
 * Reorganised, modular Apache configuration (Roland Mas)
 * New User Widget : documents monitoring (Capgemini)
+* RPM packages for Red Hat (and derived) distributions
 
 FusionForge-5.0.2:
 * Maintenance release, bugfixes mostly.
