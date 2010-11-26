@@ -81,10 +81,7 @@ class MantisBTPlugin extends Plugin {
 			}
 			case "groupisactivecheckboxpost": {
 				// update users and roles in mantis
-				$members = array ();
-				foreach($group->getMembers() as $member){
-					$members[] = $member->data_array['user_name'];
-				}
+
 				$this->updateUsersProjectMantis($group->data_array['group_id'],$members);
 				break;
 			}
@@ -179,19 +176,33 @@ class MantisBTPlugin extends Plugin {
 		}
 	}
 
+	/*
+	 * @return	bool	success or not
+	 */
 	function groupisactivecheckboxpost(&$params) {
 		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 		$group = group_get_object($params['group']);
 		$flag = strtolower('use_'.$this->name);
+		$returned = false;
 		if ( getStringFromRequest($flag) == 1 ) {
 			if (!$this->isProjectMantisCreated($group->data_array['group_id'])){
 				if($this->addProjectMantis($group)) {
+					$members = array();
+					foreach($group->getMembers() as $member){
+						$members[] = $member->data_array['user_name'];
+					}
 					$group->setPluginUse($this->name);
+					$returned = true;
 				}
+			} else {
+				$group->setPluginUse($this->name);
+				$returned = true;
 			}
 		} else {
 			$group->setPluginUse($this->name, false);
+			$returned = true;
 		}
+		return $returned;
 	}
 
 	/*
