@@ -24,8 +24,8 @@
 
 /**
  * View All Issues
- *  - for a specific group id
- *  - for a specific user
+ * - for a specific group id
+ * - for a specific user
  */
 
 /*
@@ -41,7 +41,7 @@ try {
 		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving'). ' ' .$soapFault->faultstring.'</div>';
+	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 	$errorPage = true;
 }
 
@@ -83,7 +83,7 @@ if (!isset($errorPage)) {
 		jQuery("#expandable_ticket").hide();
 	});
 </script>
-<p class="notice_title" onclick='jQuery("#expandable_filter").slideToggle(300)'>Afficher les règles de filtrage</p>
+<p class="notice_title" onclick='jQuery("#expandable_filter").slideToggle(300)'><?php echo _('Display Filtering rules') ?></p>
 <div id='expandable_filter' class="notice_content" style='clear: both'>
 	<?php
 		include('mantisbt/controler/filter.php');
@@ -91,6 +91,9 @@ if (!isset($errorPage)) {
 </div>
 <br/>
 	<?php
+	
+	echo '<h2 style="border-bottom: 1px solid black">'. _('Tickets') .'</h2>';
+	
 	// recuperation des bugs
 	$listBug = array();
 	try {
@@ -100,7 +103,7 @@ if (!isset($errorPage)) {
 			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis,  "page_number" => -1, "per_page" => -1, "filter" => $bugfilter));
 		}
 	} catch (SoapFault $soapFault) {
-		echo '<div class="warning" >'. _('Technical error during data retriving :'). ' ' .$soapFault->faultstring.'</div>';
+		echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 		$errorPage = true;
 	}
 
@@ -141,9 +144,7 @@ if (!isset($errorPage)) {
 
 		// affichage page
 		$nbligne=0;
-		$boxTitle = 'Tickets';
 
-		echo "<h2 style='border-bottom: 1px solid black'>$boxTitle</h2>";
 		$picto_haut = util_make_url('themes/gforge/images/picto_fleche_haut_marron.png');
 		$picto_bas = util_make_url('themes/gforge/images/picto_fleche_bas_marron.png');
 		$nbligne++;
