@@ -11,11 +11,9 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("scp -r ../tests/preseed root@".HOST.":/root/");
 		system("ssh root@".HOST." 'cat /root/preseed/* | LANG=C debconf-set-selections'");
 
-		/*
-		if (getenv('FFORGE_DEB_REPO')) {
-			system("ssh root@".HOST." 'echo \"deb ".getenv('FFORGE_DEB_REPO')." ".getenv('DIST')." main\" > /etc/apt/sources.list.d/fusionforge.list'");
+		if (getenv('DEBMIRROR')) {
+			system("ssh root@".HOST." 'echo \"deb ".getenv('DEBMIRROR')." ".getenv('DIST')." main\" > /etc/apt/sources.list'");
 		}
-		*/
 		system("ssh root@".HOST." 'echo \"deb file:/debian ".getenv('DIST')." main\" > /etc/apt/sources.list.d/fusionforge.list'");
 		system("scp -r ".getenv('WORKSPACE')."/build/debian root@".HOST.":/");
 		system("gpg --export --armor | ssh root@".HOST." apt-key add -");
