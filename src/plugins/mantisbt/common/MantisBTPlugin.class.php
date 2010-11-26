@@ -82,7 +82,7 @@ class MantisBTPlugin extends Plugin {
 			case "groupisactivecheckboxpost": {
 				// update users and roles in mantis
 
-				$this->updateUsersProjectMantis($group->data_array['group_id'],$members);
+
 				break;
 			}
 			case "user_personal_links": {
@@ -176,7 +176,9 @@ class MantisBTPlugin extends Plugin {
 		}
 	}
 
-	/*
+	/**
+	 * groupisactivecheckboxpost - overwrite default function : initialize plugin
+	 *
 	 * @return	bool	success or not
 	 */
 	function groupisactivecheckboxpost(&$params) {
@@ -185,14 +187,16 @@ class MantisBTPlugin extends Plugin {
 		$flag = strtolower('use_'.$this->name);
 		$returned = false;
 		if ( getStringFromRequest($flag) == 1 ) {
-			if (!$this->isProjectMantisCreated($group->data_array['group_id'])){
+			if (!$this->isProjectMantisCreated($group->getID())){
 				if($this->addProjectMantis($group)) {
 					$members = array();
 					foreach($group->getMembers() as $member){
-						$members[] = $member->data_array['user_name'];
+						$members[] = $member->getUnixName();
+						if($this->updateUsersProjectMantis($group, $members)) {
+							$group->setPluginUse($this->name);
+							$returned = true;
+						};
 					}
-					$group->setPluginUse($this->name);
-					$returned = true;
 				}
 			} else {
 				$group->setPluginUse($this->name);
@@ -205,7 +209,9 @@ class MantisBTPlugin extends Plugin {
 		return $returned;
 	}
 
-	/*
+	/**
+	 * addProjectMantis - inject the Group into Mantisbt
+	 *
 	 * @param	object	The Group
 	 * @return	bool	success or not
 	 */
@@ -214,7 +220,7 @@ class MantisBTPlugin extends Plugin {
 		$project = array();
 		$project['name'] = $groupObject->getPublicName();
 		$project['status'] = "development";
-	
+
 		if ($groupObject->isPublic()) {
 			$project['view_state'] = 10;
 		}else{
@@ -222,7 +228,7 @@ class MantisBTPlugin extends Plugin {
 		}
 
 		$project['description'] = $groupObject->getDescription();
-	
+
 		try {
 			$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user', 'mantisbt'), "password" => forge_get_config('adminsoap_passwd', 'mantisbt'), "project" => $project));
@@ -245,7 +251,6 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function removeProjectMantis($idProjet) {
-	
 		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
 						array($idProjet));
 
@@ -303,6 +308,12 @@ class MantisBTPlugin extends Plugin {
 		}
 	}
 
+	/**
+	 * isProjectMantisCreated - check if the Project is already created
+	 *
+	 * @param	int	the Group Id
+	 * @return	boolean	created or not
+	 */
 	function isProjectMantisCreated($idProjet){
 
 		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
@@ -334,15 +345,21 @@ class MantisBTPlugin extends Plugin {
 		}
 	}
 
-	function updateUsersProjectMantis($idProjet, $members) {
-
+	/**
+	 * updateUsersProjectMantis - inject Username in mantisbt for specific project
+	 *
+	 * @param	object	Group object
+	 * @param	array	Unix username array
+	 * @return	boolean	success or not
+	 */
+	function updateUsersProjectMantis(&$groupObject, $members) {
+		$returned = false;
 		global $role;
-		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 
 		// recuperation de id mantis
-		$idMantis = getIdProjetMantis($idProjet);
+		$idMantis = getIdProjetMantis($groupObject->getID());
 
-		// TODO corriger inclusion bug
+		// @TODO corriger inclusion bug
 		if ($role == null){
 			$role['Manager'] = 70;
 			$role['Concepteur'] = 55;
@@ -351,25 +368,27 @@ class MantisBTPlugin extends Plugin {
 		}
 
 		// etat forge
-		$stateForge = array ();
+		$stateForge = array();
 		foreach ($members as $key => $member){
 			$resUserRole = db_query_params('SELECT role.role_name
 							FROM role, user_group, users
 							WHERE users.user_name = $1
 							AND ( user_group.user_id = users.user_id AND user_group.group_id = $2 )
 							AND user_group.role_id = role.role_id',
-							array($member, $idProjet));
-			echo db_error();
-			$row = db_fetch_array($resUserRole);
-			$stateForge[$member]['name'] = $member;
-			$stateForge[$member]['role'] = $row['role_name']; 
+							array($member, $groupObject->getID));
+			if (!$resUserRole) {
+				$groupObject->setError('updateUsersProjectMantis::'. _('Error : Cannot retrieve information about role') . ' ' .db_error());
+				return $returned;
+			} else {
+				$row = db_fetch_array($resUserRole);
+				$stateForge[$member]['name'] = $member;
+				$stateForge[$member]['role'] = $row['role_name'];
+			}
 		}
 		// on supprime les precedentes relations dans mantis
-		$stateMantis = array ();
-		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-		if(!$dbConnection){
-			$errMantis1 = _('Error : Could not open connection') . db_error($dbConnection);
-			echo $errMantis1;
+		$dbConnection = db_connect_host(forge_get_config('db_name','mantisbt'), forge_get_config('db_user','mantisbt'), forge_get_config('db_password','mantisbt'), forge_get_config('db_host','mantisbt'), forge_get_config('db_port','mantisbt'));
+		if(!$dbConnection) {
+			$groupObject->setError('updateUsersProjectMantis::'. _('Error : Could not open connection') . db_error($dbConnection));
 			db_rollback($dbConnection);
 		}else{
 			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
@@ -389,12 +408,15 @@ class MantisBTPlugin extends Plugin {
 									"mantis_project_user_list_table",
 									array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
 								);
-					if (!isset($resultInsert))
+					if (!isset($resultInsert)) {
 						echo 'updateUsersProjectMantis::Error '. _('Unable to update roles in mantisbt');
-
+					} else {
+						$returned = true;
+					}
 				}
 			}
 		}
+		return $returned;
 	}
 
 	function refreshHierarchyMantisBt(){
