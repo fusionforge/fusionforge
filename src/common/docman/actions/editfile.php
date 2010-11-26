@@ -50,7 +50,12 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 		$urlparam = '&view=listfile&dirid='.$doc_group;
 	}
 
-	$d= new Document($g,$docid,false,$gfcommon.'docman/engine/');
+	if (empty($gfcommon)) {
+		$engine_dir = '../../common';
+	} else {
+		$engine_dir = $gfcommon;
+	}
+	$d= new Document($g, $docid, false, $engine_dir.'/docman/engine/');
 	if ($d->isError())
 		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
@@ -68,7 +73,12 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 		}
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 		$filename = $uploaded_data['name'];
-		$filetype = $uploaded_data['type'];
+		if (function_exists(finfo_open)) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
+		} else {
+			$uploaded_data_type = $uploaded_data['type'];
+		}
 	} elseif ($file_url) {
 		$data = '';
 		$filename = $file_url;
@@ -77,6 +87,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 		$filename = $d->getFileName();
 		$filetype = $d->getFileType();
 	}
+
 	if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
 		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 

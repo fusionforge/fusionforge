@@ -104,10 +104,15 @@ switch ($type) {
 		$return_msg = _('Invalid file name.');
 			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 		}
+		if (function_exists(finfo_open)) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
+		} else {
+			$uploaded_data_type = $uploaded_data['type'];
+		}
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 		$file_url = '';
 		$uploaded_data_name = $uploaded_data['name'];
-		$uploaded_data_type = $uploaded_data['type'];
 		break;
 	}
 	default: {
