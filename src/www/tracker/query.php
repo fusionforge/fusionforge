@@ -295,7 +295,7 @@ echo '
 echo'
 <table width="100%" class="tablecontent">';
 if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
-	$default_query = db_result(db_query_params('"SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
+	$default_query = db_result(db_query_params('SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
 						   array ($ath->getID())),
 				   0,
 				   'query_name');
@@ -331,16 +331,16 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		}
 		echo '</td>
 	</tr>';
-	$ath->renderExtraFields($extra_fields,true,'None',true,'Any','',false,'QUERY');
+	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',array(),false,'QUERY');
 
 	// Compute the list of fields which can be sorted.
 	// Currently, only scalar artifacts are taken.
-	$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_TEXT.",".
-								  ARTIFACT_EXTRAFIELDTYPE_TEXTAREA.",".
-								  ARTIFACT_EXTRAFIELDTYPE_INTEGER.",".
-								  ARTIFACT_EXTRAFIELDTYPE_SELECT.",".
-								  ARTIFACT_EXTRAFIELDTYPE_RADIO.",".
-								  ARTIFACT_EXTRAFIELDTYPE_STATUS);
+	$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
+					    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+					    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+					    ARTIFACT_EXTRAFIELDTYPE_SELECT,
+					    ARTIFACT_EXTRAFIELDTYPE_RADIO,
+					    ARTIFACT_EXTRAFIELDTYPE_STATUS));
 	$keys=array_keys($efarr);
 	for ($k=0; $k<count($keys); $k++) {
 		$i=$keys[$k];

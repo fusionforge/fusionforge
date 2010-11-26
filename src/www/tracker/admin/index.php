@@ -152,7 +152,7 @@ if ($group_id && $atid) {
 
 	} elseif ($action == 'downloadcurrenttemplate') {
 
-		echo $ath->getRenderHTML('','DETAIL');
+		echo $ath->getRenderHTML(array(),'DETAIL');
 
 	} elseif ($action == 'update_canned') {
 

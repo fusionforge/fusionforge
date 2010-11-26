@@ -85,7 +85,7 @@ echo notepad_func();
 		</tr>
 
 		<?php
-			$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'DISPLAY');
+			$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'DISPLAY');
 			$ath->renderRelatedTasks($group, $ah);
 		?>
 

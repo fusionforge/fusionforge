@@ -99,7 +99,7 @@ if (session_loggedin()) {
 	</tr>
 
     <?php
-		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any','',false,'UPDATE');
+		$ath->renderExtraFields($ah->getExtraFieldData(),true,'none',false,'Any',array(),false,'UPDATE');
 		?>
 
 	<tr>

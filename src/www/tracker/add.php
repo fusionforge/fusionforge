@@ -55,7 +55,7 @@ $ath->header(array ('title'=>_('Submit New')));
 		<td valign="top"><input type="submit" name="submit" value="'. _('Submit').'" /></td>
 	</tr>';
 	
-	$ath->renderExtraFields(array(),true,'none',false,'Any','',false,'UPDATE');
+	$ath->renderExtraFields(array(),true,'none',false,'Any',array(),false,'UPDATE');
 
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		echo '<tr>

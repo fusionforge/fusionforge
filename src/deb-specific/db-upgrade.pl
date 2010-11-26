@@ -1939,6 +1939,7 @@ eval {
     &update_with_sql("20101027-docman-lock","5.0.51-5");
     &update_with_sql("20101105-pfo-rbac","5.0.51-6");
     &update_with_sql("20101029-docman-monitoring","5.0.51-7");
+    &update_with_sql("20100402_add_query_options","5.0.51-8");
 
     ########################### INSERT HERE #################################
 

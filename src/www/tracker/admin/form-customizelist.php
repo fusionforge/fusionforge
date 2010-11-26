@@ -52,7 +52,7 @@ $fields = array (
 		'related_tasks' => _('Related tasks')
 	);
 
-if(count($ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS)) > 0) {
+if(count($ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS))) > 0) {
 	unset($fields['status_id']);
 }
 

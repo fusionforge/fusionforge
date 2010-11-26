@@ -35,7 +35,7 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 		/*
 			List of possible user built Selection Boxes for an ArtifactType
 		*/
-		$efarr = $ath->getExtraFields(ARTIFACT_EXTRAFIELDTYPE_STATUS);
+	$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
     	if (count($efarr) === 0) {
     		// TODO: Normal status is not implemented right now.
       		return false;

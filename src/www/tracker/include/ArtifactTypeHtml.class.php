@@ -145,11 +145,11 @@ class ArtifactTypeHtml extends ArtifactType {
 		return str_replace("\n","<br />", $msg);
 	}
 
-	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$filter='',$status_show_100=false,$mode='') {
-		$efarr = $this->getExtraFields($filter);
+	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$types=array(),$status_show_100=false,$mode='') {
+		$efarr = $this->getExtraFields($types);
 		//each two columns, we'll reset this and start a new row
 
-		$template = $this->getRenderHTML($filter, $mode);
+		$template = $this->getRenderHTML($types, $mode);
 
 		if ($mode=='QUERY') {
 			$keys=array_keys($efarr);
@@ -344,13 +344,13 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *
 	 *	@return	string	HTML template.
 	 */
-	function getRenderHTML($filter='', $mode='') {
+	function getRenderHTML($types=array(), $mode='') {
 		// Use template only for the browse (not for query or mass update)
 		if (($mode === 'DISPLAY' || $mode === 'DETAIL' || $mode === 'UPDATE') 
 			&& $this->data_array['custom_renderer']) {
 			return preg_replace('/<!--(\S+.*?)-->/','{$\\1}',$this->data_array['custom_renderer']);
 		} else {
-			return $this->generateRenderHTML($filter, $mode);
+			return $this->generateRenderHTML($types, $mode);
 		}
 	}
 
@@ -359,8 +359,8 @@ class ArtifactTypeHtml extends ArtifactType {
 	 *
 	 *	@return	string	HTML template.
 	 */
-	function generateRenderHTML($filter='', $mode) {
-		$efarr = $this->getExtraFields($filter);
+	function generateRenderHTML($types=array(), $mode) {
+		$efarr = $this->getExtraFields($types);
 		//each two columns, we'll reset this and start a new row
 
 		$return = '

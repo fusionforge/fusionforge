@@ -1668,6 +1668,81 @@ class Artifact extends Error {
 
 }
 
+class ArtifactComparator {
+	var $criterion = 'artifact_id' ;
+	var $order = 'ASC' ;
+
+	function Compare ($a, $b) {
+		if ($this->order == 'DESC') {
+			$c = $a ; $a = $b ; $b = $c ;
+		}
+		switch ($this->criterion) {
+		case 'summary':
+			$namecmp = strcoll ($a->getSummary(),
+					    $b->getSummary()) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			break ;
+		case 'assigned_to':
+			$namecmp = strcoll (user_get_object($a->getAssignedTo())->getRealName(),
+					    user_get_object($b->getAssignedTo())->getRealName()) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			break ;
+		case 'submitted_by':
+			$namecmp = strcoll (user_get_object($a->getSubmittedBy())->getRealName(),
+					    user_get_object($b->getSubmittedBy())->getRealName()) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			break ;
+		case 'open_date':
+			$aid = $a->getOpenDate() ;
+			$bid = $b->getOpenDate() ;
+			return ($a < $b) ? -1 : 1;
+			break;
+		case 'close_date':
+			$aid = $a->getCloseDate() ;
+			$bid = $b->getCloseDate() ;
+			return ($a < $b) ? -1 : 1;
+			break;
+		case 'priority':
+			$aid = $a->getPriority() ;
+			$bid = $b->getPriority() ;
+			return ($a < $b) ? -1 : 1;
+			break;
+		default:
+			$aa=$a->getExtraFieldDataText();
+			$ba=$b->getExtraFieldDataText();
+			$af=$aa[$this->criterion]['value'];
+			$bf=$ba[$this->criterion]['value'];
+			$namecmp = strcoll ($af,$bf) ;
+			if ($namecmp != 0) {
+				return $namecmp ;
+			}
+			break ;
+		}
+
+		// When in doubt, sort on artifact ID
+		$aid = $a->getID() ;
+		$bid = $b->getID() ;
+		if ($a == $b) {
+			return 0;
+		}
+		return ($a < $b) ? -1 : 1;
+	}
+}
+
+function sortArtifactList (&$list, $criterion='name', $order='ASC') {
+	$cmp = new ArtifactComparator () ;
+	$cmp->criterion = $criterion ;
+	$cmp->order = $order ;
+
+	return usort ($list, array ($cmp, 'Compare')) ;
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
