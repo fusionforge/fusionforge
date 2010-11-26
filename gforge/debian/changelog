@@ -1,3 +1,11 @@
+fusionforge (5.0.2-5) unstable; urgency=low
+
+  * Stop trying to copy libcap into chroot, since it's not used by PAM
+    anymore and therefore not guaranteed to be present, thanks to Lucas
+    Nussbaum and Hideki Yamane (closes: #604218).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 26 Nov 2010 09:50:25 +0100
+
 fusionforge (5.0.2-4) unstable; urgency=low
 
   * Fixed logic in create-mailing-lists.pl script, allowing it to actually

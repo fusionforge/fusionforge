@@ -77,10 +77,6 @@ case "$1" in
 	# pthread cancel
 	cp /lib/libgcc_s* $CHROOTDIR/lib
 	
-	# pam extras 
-	# pam_limits.so
-	cp /lib/libcap* $CHROOTDIR/lib
-        
 	# nss extras
 	# /lib/libnss_pgsql ?
 	cp /lib/libcom_err* $CHROOTDIR/lib
