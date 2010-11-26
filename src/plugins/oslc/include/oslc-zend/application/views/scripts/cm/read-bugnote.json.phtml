@@ -22,7 +22,7 @@ $json = array('rdf:about' => $this->id);
 foreach ($this->resource as $field => $value) {
 	$json[$field] = $value;
 }
-print Zend_Json::prettyPrint(Zend_Json::encode($json));
+print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
 
 //require('_get_response.php');
 //print $doc->saveXML();

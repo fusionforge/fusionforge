@@ -26,7 +26,7 @@
   /* $Id$ */
 
 require('_service-catalog_xml.php');
-
+require('_add_hyperlinks.php');
 
 /*$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProvider");
 $sp = $entry->appendChild($child);
@@ -48,7 +48,11 @@ $child = $service->appendChild($child);*/
 <pre>
 <?php
 	$xml = projects_to_service_catalog($this->baseUrl(), $this->projects);
-	print str_replace('>', '&gt;', str_replace('<', '&lt;', $xml)); ?>
+	//print $xml;
+	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
+	$text = add_links($text, "http");
+	$text = add_links($text, $this->baseUrl());
+	echo $text;?>
 </pre>
 </body>
 

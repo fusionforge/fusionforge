@@ -129,6 +129,7 @@ class MantisCmController extends CmController{
 	private function retrieveAuthentication(&$login) {
 		switch (AUTH_TYPE) {
 			case 'basic':
+				//print_r("BASIC");
 				return $this->retrieveRequestAuthHttpBasic($login);
 				break;
 			case 'oauth':
@@ -311,12 +312,16 @@ class MantisCmController extends CmController{
 		{
 			$this->_forward('showSelectionUi');
 			//echo "here";exit;
+		}
+		elseif(($params['ui']=="creation")&&isset($params['project']))
+		{
+			$this->_forward('showCreationUi');
+			//echo "here";exit;
 		}		
 		elseif(preg_match("/^\/cm\/bug\/[1-9]+[0-9]*\/notes[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			$this->_forward('readBugnoteCollection');
-		}
-		
+		}		
 		elseif(preg_match("/^\/cm\/notes\/[1-9]+[0-9]*[\/]?$/", $this->getRequest()->getPathInfo()))
 		{
 			$this->_forward('readBugnote');
@@ -421,6 +426,10 @@ class MantisCmController extends CmController{
 			$contenttype = $contenttype ? $contenttype : 'none';
 
 			switch($contenttype) {
+				case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
+				case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
+				case 'application/xml; charset=UTF-8':
+				case 'application/json; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+xml':
 				case 'application/x-oslc-cm-change-request+json':
 				case 'application/xml':
@@ -481,10 +490,14 @@ class MantisCmController extends CmController{
 			*/
 			// TODO: This should be done by $this->oslc
 			switch($contenttype) {
+				case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
+				case 'application/xml; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+xml':
 				case 'application/xml':
 					$newchangerequest = MantisChangeRequest::CreateMantisArrayFromXml($body);
 					break;
+				case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
+				case 'application/json; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+json':
 				case 'application/json':
 					$newchangerequest = MantisChangeRequest::CreateMantisArrayFromJson($body);
@@ -548,11 +561,14 @@ class MantisCmController extends CmController{
 			case 'application/x-oslc-cm-change-request+xml':
 			case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
 			case 'application/x-oslc-cm-change-request+json':
+			case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
 			case 'application/json':
+			case 'application/json; charset=UTF-8':
+			case 'application/xml; charset=UTF-8':
 			case 'application/xml':
 				break;
 			default:
-				//print_r('exception');
+				//print_r('exception: '.$contenttype);
 				throw new UnsupportedMediaTypeException('Unknown Content-Type for method post : '. $contenttype .' !');
 				break;
 		}
@@ -574,11 +590,14 @@ class MantisCmController extends CmController{
 			// create a change request
 			switch($contenttype) {
 				case 'application/x-oslc-cm-change-request+xml':
+				case 'application/xml; charset=UTF-8':
 				case 'application/xml':
 				case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
 					$newchangerequest = MantisChangeRequest::CreateMantisArrayFromXml($body);
 					break;
+				case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+json':
+				case 'application/json; charset=UTF-8':
 				case 'application/json':
 					$newchangerequest = MantisChangeRequest::CreateMantisArrayFromJson($body);
 					break;
@@ -593,12 +612,15 @@ class MantisCmController extends CmController{
 		elseif(array_key_exists('bug',$params))
 		{
 			switch($contenttype) {
+				case 'application/xml; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+xml':
 				case 'application/xml':
 				case 'application/x-oslc-cm-change-request+xml; charset=UTF-8':
 					$notes_arr = MantisChangeRequest::CreateMantisNotesArrayFromXml($body);
 					break;
+				case 'application/x-oslc-cm-change-request+json; charset=UTF-8':
 				case 'application/x-oslc-cm-change-request+json':
+				case 'application/json; charset=UTF-8':
 				case 'application/json':
 					$notes_arr = MantisChangeRequest::CreateMantisNotesArrayFromJson($body);
 					break;
@@ -863,6 +885,15 @@ class MantisCmController extends CmController{
 		$params = $req->getParams();
 		$project = $params['project'];
 		$data = $this->oslc->getDataForSelectionUi($project);
+		$this->view->data = $data;
+	}
+	
+	public function showcreationuiAction()
+	{
+		$req = $this->getRequest();
+		$params = $req->getParams();
+		$project = $params['project'];
+		$data = $this->oslc->getDataForCreationUi($project);
 		$this->view->data = $data;
 	}
 	
