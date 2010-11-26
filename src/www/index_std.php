@@ -36,6 +36,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <li><?php print _('scmgit plugin: Personal Git repositories for project members.'); ?></li>
 <li><?php print _('Simplified configuration system, using standard *.ini files.'); ?></li>
 <li><?php print _('Reorganised, modular Apache configuration.'); ?></li>
+<li><?php print _('RPM packages for Red Hat (and derived) distributions.'); ?></li>
 </ul>
 
 <h3><?php print _("What's new in FusionForge 5.0"); ?></h3>
