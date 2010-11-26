@@ -84,7 +84,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), libphp-simplepie, libjs-yui, libjs-scriptaculous, libphp-jpgraph, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), libphp-simplepie, libjs-yui, libjs-scriptaculous, libjs-jquery, libphp-jpgraph, ${misc:Depends}
 Recommends: locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web
@@ -367,7 +367,7 @@ Description: Mediawiki plugin for FusionForge
 Package: fusionforge-plugin-oslc
 Homepage: http://picoforge.int-evry.fr/cgi-bin/twiki/view/Oslc/Web/FusionForgeOslcServer
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php-pear, php-http, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, zendframework (>> 1.10), php-pear, php-http (>= 1.4.1), ${misc:Depends}
 Description: OSLC-CM compatible plugin for FusionForge tracker system.
  OSLC-CM is a standard specification for APIs in Change Management
  applications. It is based on Web technologies such as REST, RDF, or AJAX.
