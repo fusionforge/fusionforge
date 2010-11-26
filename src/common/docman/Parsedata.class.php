@@ -29,10 +29,10 @@ class Parsedata {
 	 * Constructor.
 	 *
 	 * @param	string
-	 * @return	boolean true
+	 * @return	boolean	true
 	 */
-	 var $parsers;
-	 var $p_path = "";
+	var $parsers;
+	var $p_path = "";
 
 	function Parsedata($ppath="") {
 		$this->p_path = $ppath;
