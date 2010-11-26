@@ -198,14 +198,27 @@ class ArtifactFactory extends Error {
 		//  validate the column names and sort order passed in from user
 		//  before saving it to prefs
 		//
+		$allowed_order_col = array ('artifact_id',
+					   'summary',
+					   'open_date',
+					   'close_date',
+					   'assigned_to',
+					   'submitted_by',
+					   'priority') ;
+		$efarr = $this->ArtifactType->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
+						    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+						    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+						    ARTIFACT_EXTRAFIELDTYPE_SELECT,
+						    ARTIFACT_EXTRAFIELDTYPE_RADIO,
+						    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+		$keys=array_keys($efarr);
+		for ($k=0; $k<count($keys); $k++) {
+			$i=$keys[$k];
+			$allowed_order_col[] = $efarr[$i]['extra_field_id'];
+		}
+		
 		$_order_col = util_ensure_value_in_set ($order_col,
-							array ('artifact_id',
-							       'summary',
-							       'open_date',
-							       'close_date',
-							       'assigned_to',
-							       'submitted_by',
-							       'priority'));
+							$allowed_order_col);
 		$_sort_ord = util_ensure_value_in_set ($sort,
 						       array ('ASC', 'DESC')) ;
 		if ($set=='custom') {
@@ -408,15 +421,21 @@ class ArtifactFactory extends Error {
 						       array ('ASC', 'DESC')) ;
 		
 		$sortcol = util_ensure_value_in_set ($this->order_col,
-						     array ('artifact_id',
+						     array ('extra',
+							    'artifact_id',
 							    'summary',
 							    'open_date',
 							    'close_date',
 							    'assigned_to',
 							    'submitted_by',
 							    'priority'));
-		$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;
 
+		if ($sortcol != 'extra') {
+			$ordersql = " ORDER BY Artifacts.group_artifact_id $sortorder, Artifacts.$sortcol $sortorder" ;
+		} else {
+			$ordersql = ''  ;
+		}
+			
 		$result = db_query_params ('SELECT * FROM (' . $selectsql . $wheresql . ') AS Artifacts' . $ordersql,
 					   $params) ;
 		$rows = db_numrows($result);
@@ -428,6 +447,9 @@ class ArtifactFactory extends Error {
 			while ($arr = db_fetch_array($result)) {
 				$this->artifacts[] = new Artifact($this->ArtifactType, $arr);
 			}
+		}
+		if ($sortcol == 'extra') {
+			sortArtifactList ($this->artifacts, $this->order_col, $this->sort) ;
 		}
 		return $this->artifacts;
 	}
