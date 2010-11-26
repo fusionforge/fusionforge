@@ -5,6 +5,7 @@
  * Copyright 2005, Raphaël Hertzog
  * Copyright 2009, Roland Mas
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -29,6 +30,8 @@ class ExtraTabsPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "extratabs" ;
 		$this->text = "Extra tabs";
+		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
+		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins" ;
 		$this->hooks[] = "groupmenu" ;  // To put into the project tabs
 	}
