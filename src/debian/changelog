@@ -4,6 +4,20 @@ fusionforge (5.0.51-1) UNRELEASED; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Wed, 27 Oct 2010 11:06:49 +0200
 
+fusionforge (5.0.2+svn-1) unstable; urgency=low
+
+  * Bumped upstream version number to avoid upgrade problems.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 26 Nov 2010 10:31:33 +0100
+
+fusionforge (5.0.2-5) unstable; urgency=low
+
+  * Stop trying to copy libcap into chroot, since it's not used by PAM
+    anymore and therefore not guaranteed to be present, thanks to Lucas
+    Nussbaum and Hideki Yamane (closes: #604218).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 26 Nov 2010 09:50:25 +0100
+
 fusionforge (5.0.2-4) unstable; urgency=low
 
   * Fixed logic in create-mailing-lists.pl script, allowing it to actually

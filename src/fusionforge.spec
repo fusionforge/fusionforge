@@ -54,7 +54,7 @@ Requires: php-jpgraph
 Requires: /var/www/jpgraph-1.19/jpgraph.php
 #Requires: libnss-pgsql >= 1.4
 Requires: gettext
-Requires: htmlpurifier >= 4.0.0
+Requires: php-htmlpurifier >= 4.0.0
 Requires: sed
 Requires: coreutils
 Requires: /usr/bin/newaliases

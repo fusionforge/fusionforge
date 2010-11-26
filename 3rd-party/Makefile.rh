@@ -1,6 +1,6 @@
 #! /usr/bin/make -f
 #
-# Build 3rd party rpms like htmlpurifier, jpgraph.
+# Build 3rd party rpms like php-htmlpurifier, php-jpgraph.
 #
 # Once built, packages are in $RPM_TMP
 
@@ -11,7 +11,7 @@ BUILDRESULT=~/fusionforge_repo
 HTMLPURIFIER_VERSION=4.2.0
 WEBDAV_SERVER_VERSION=1.0.0RC5
 
-all: htmlpurifier php-jpgraph php-pear-HTTP_WebDAV_Server dist
+all: php-htmlpurifier php-jpgraph php-pear-HTTP_WebDAV_Server dist
 
 rpmprep:
 	-rm -Rf $(RPM_TMP)/*
@@ -30,9 +30,9 @@ dist:
 #
 # Building RPM for external components
 #
-htmlpurifier: rpmprep $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
+php-htmlpurifier: rpmprep $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
 	cp $(DEPOT)/htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz $(RPM_TMP)/SOURCES/
-	rpmbuild --quiet --clean -ba htmlpurifier/htmlpurifier.spec
+	rpmbuild --quiet --clean -ba php-htmlpurifier/php-htmlpurifier.spec
 
 php-jpgraph: rpmprep
 	cp php-jpgraph/libphp-jpgraph_1.5.2.orig.tar.gz $(RPM_TMP)/SOURCES/jpgraph-1.5.2.tar.gz
