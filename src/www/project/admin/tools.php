@@ -94,8 +94,6 @@ if (getStringFromRequest('submit')) {
 				$error_msg = _('At least one plugin does not initialize correctly');
 			}
 		}
-
-
 	}
 
 	if (empty($error_msg)) {
