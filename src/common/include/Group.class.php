@@ -2851,9 +2851,8 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function setDocmanCreateOnlineStatus($status) {
 		db_begin();
 		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params ('UPDATE groups SET use_docman_create_online=$1 WHERE group_id=$2',
-					array ($status,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE groups SET use_docman_create_online=$1 WHERE group_id=$2',
+					array($status, $this->getID()));
 	
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group DocmanCreateOnline Status: %s'),db_error()));
@@ -2869,9 +2868,9 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function setDocmanWebdav($status) {
 		db_begin();
 		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params ('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
-					array ($status,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
+					array($status,
+					       $this->getID()));
 	
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group UseWebdab Status: %s'),db_error()));
@@ -2887,9 +2886,9 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function setDocmanSearchStatus($status) {
 		db_begin();
 		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params ('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
-					array ($status,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
+					array($status,
+					       $this->getID()));
 	
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group UseDocmanSearch Status: %s'),db_error()));
@@ -2905,9 +2904,9 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	function setDocmanForceReindexSearch($status) {
 		db_begin();
 		/* if we activate search engine, we probably want to reindex */
-		$res = db_query_params ('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
-					array ($status,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
+					array($status,
+					       $this->getID()));
 	
 		if (!$res) {
 			$this->setError(sprintf(_('ERROR - Could Not Update Group force_docman_reindex %s'),db_error()));

@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -27,55 +28,53 @@ $USER_OBJ=array();
 
 /**
  * user_get_object_by_name() - Get User object by username.
- *  user_get_object is useful so you can pool user objects/save database queries
- *  You should always use this instead of instantiating the object directly 
+ * user_get_object is useful so you can pool user objects/save database queries
+ * You should always use this instead of instantiating the object directly 
  *
- *  @param		string	The unix username - required
- *  @param		int		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- *  @return a user object or false on failure
- *
+ * @param	string	The unix username - required
+ * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	a user object or false on failure
  */
-function &user_get_object_by_name($user_name,$res=false) {
+function &user_get_object_by_name($user_name, $res = false) {
 	$user_name = strtolower($user_name);
 	if (!$res) {
-		$res = db_query_params ('SELECT * FROM users WHERE user_name=$1',
-					array ($user_name)) ;
+		$res = db_query_params('SELECT * FROM users WHERE user_name=$1',
+					array($user_name));
 	}
-	return user_get_object(db_result($res,0,'user_id'),$res);
+	return user_get_object(db_result($res, 0, 'user_id'), $res);
 }
 
 /**
  * user_get_object_by_email() - Get User object by email address
- *  Only works if sys_require_unique_email is true
+ * Only works if sys_require_unique_email is true
  *
- *  @param		string	The unix username - required
- *  @param		int		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- *  @return a user object or false on failure
+ * @param	string	The unix username - required
+ * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return a user object or false on failure
  *
  */
-function user_get_object_by_email($email,$res=false) {
+function user_get_object_by_email($email ,$res = false) {
 	if (!validate_email($email)
 	    || !forge_get_config('require_unique_email')) {
-		return false ;
+		return false;
 	}
 	if (!$res) {
 		$res=db_query_params('SELECT * FROM users WHERE email=$1',
-				     array ($email));
+				     array($email));
 	}
-	return user_get_object(db_result($res,0,'user_id'),$res);
+	return user_get_object(db_result($res, 0, 'user_id'), $res);
 }
 
 /**
  * user_get_object() - Get User object by user ID.
- *  user_get_object is useful so you can pool user objects/save database queries
- *  You should always use this instead of instantiating the object directly 
+ * user_get_object is useful so you can pool user objects/save database queries
+ * You should always use this instead of instantiating the object directly 
  *
- *  @param		int		The ID of the user - required
- *  @param		int		The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- *  @return a user object or false on failure
- *
+ * @param	int	The ID of the user - required
+ * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	object	a user object or false on failure
  */
-function &user_get_object($user_id,$res=false) {
+function &user_get_object($user_id, $res = false) {
 	//create a common set of group objects
 	//saves a little wear on the database
 	
@@ -87,8 +86,8 @@ function &user_get_object($user_id,$res=false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params ('SELECT * FROM users WHERE user_id=$1',
-						array ($user_id)) ;
+			$res = db_query_params('SELECT * FROM users WHERE user_id=$1',
+						array($user_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$USER_OBJ["_".$user_id."_"]=false;
@@ -118,8 +117,8 @@ function &user_get_objects($id_arr) {
 		}
 	}
 	if (count($fetch) > 0) {
-		$res = db_query_params ('SELECT * FROM users WHERE user_id = ANY ($1)',
-					array (db_int_array_to_any_clause ($fetch))) ;
+		$res = db_query_params('SELECT * FROM users WHERE user_id = ANY ($1)',
+					array(db_int_array_to_any_clause ($fetch)));
 		while ($arr = db_fetch_array($res)) {
 			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'],$arr);
 			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
@@ -129,44 +128,44 @@ function &user_get_objects($id_arr) {
 }
 
 function &user_get_objects_by_name($username_arr) {
-	$res = db_query_params ('SELECT user_id FROM users WHERE lower(user_name) = ANY ($1)',
-				array (db_string_array_to_any_clause ($username_arr))) ;
-	$arr =& util_result_column_to_array($res,0);
+	$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) = ANY ($1)',
+				array(db_string_array_to_any_clause ($username_arr)));
+	$arr =& util_result_column_to_array($res, 0);
 	return user_get_objects($arr);
 }
 
 function &user_get_active_users() {
-	$res=db_query_params ('SELECT user_id FROM users WHERE status=$1',
-			      array ('A')) ;
-	return user_get_objects (util_result_column_to_array($res,0)) ;
+	$res=db_query_params('SELECT user_id FROM users WHERE status=$1',
+			      array('A'));
+	return user_get_objects(util_result_column_to_array($res, 0));
 }
 
 class GFUser extends Error {
 	/** 
 	 * Associative array of data from db.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 	
 	/**
 	 * Is this person a site super-admin?
 	 *
-	 * @var		bool	$is_super_user
+	 * @var	bool	$is_super_user
 	 */
 	var $is_super_user;
 
 	/**
 	 * Is this person the logged in user?
 	 *
-	 * @var		bool	$is_logged_in
+	 * @var	bool	$is_logged_in
 	 */
 	var $is_logged_in;
 
 	/**
 	 * Array of preferences
 	 *
-	 * @var		array	$user_pref
+	 * @var	array	$user_pref
 	 */
 	var $user_pref;
 
@@ -174,12 +173,12 @@ class GFUser extends Error {
 	var $theme_id;
 
 	/**
-	 *	GFUser($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
+	 * GFUser($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
 	 *
-	 *	instead use the user_get_object() function call
+	 * instead use the user_get_object() function call
 	 *
-	 *	@param	int		The user_id
-	 *	@param	int		The database result set OR array of data
+	 * @param	int	The user_id
+	 * @param	int	The database result set OR array of data
 	 */
 	function GFUser($id=false,$res=false) {
 		$this->Error();
@@ -195,7 +194,7 @@ class GFUser extends Error {
 				$this->data_array =& $res;
 			} elseif (db_numrows($res) < 1) {
 				//function in class we extended
-				$this->setError('User Not Found');
+				$this->setError(_('User Not Found'));
 				$this->data_array=array();
 				return false;
 			} else {
@@ -234,7 +233,7 @@ class GFUser extends Error {
 	 * @param	string	The users title.
 	 * @param	char(2)	The users ISO country_code.
 	 * @param	bool	Whether to send an email or not
-	 * @returns The newly created user ID
+	 * @returns		The newly created user ID
 	 *
 	 */
 	function create($unix_name,$firstname,$lastname,$password1,$password2,$email,
@@ -281,7 +280,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError(_('Invalid Email Address') . $email);
+			$this->setError(_('Invalid Email Address:') .' '. $email);
 			return false;
 		}
 		if ($jabber_address && !validate_email($jabber_address)) {
@@ -294,12 +293,12 @@ class GFUser extends Error {
 			$jabber_only=1;
 		}
 		if ($unix_name && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
-							     array ($unix_name))) > 0) {
+							     array($unix_name))) > 0) {
 			$this->setError(_('That username already exists.'));
 			return false;
 		}
 		if (forge_get_config('require_unique_email')) {
-			if (user_get_object_by_email ('$email')) {
+			if (user_get_object_by_email('$email')) {
 				$this->setError(_('User with this email already exists - use people search to recover your login.'));
 				return false;
 			}
@@ -308,13 +307,13 @@ class GFUser extends Error {
 			// Let's generate a loginname for the user
 			// ...based on the email address:
 			$email_array = explode ('@', $email, 2) ;
-			$email_u = $email_array [0] ;
-			$l = ereg_replace ('[^a-z0-9]', '', $email_u) ;
-			$l = substr ($l, 0, 15) ;
+			$email_u = $email_array [0];
+			$l = ereg_replace('[^a-z0-9]', '', $email_u);
+			$l = substr ($l, 0, 15);
 			// Is the user part of the email address okay?
 			if (account_namevalid($l)
 			    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
-							  array ($l))) == 0) {
+							  array($l))) == 0) {
 				$unix_name = $l ;
 			} else {
 				// No? What if we add a number at the end?
@@ -323,20 +322,20 @@ class GFUser extends Error {
 					$c = substr ($l, 0, 15-strlen ("$i")) . "$i" ;
 					if (account_namevalid($c)
 					    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
-									  array ($c))) == 0) {
-						$unix_name = $c ;
+									  array($c))) == 0) {
+						$unix_name = $c;
 						break;
 					}
-					$i++ ;
+					$i++;
 				}
 			}
 			// If we're really unlucky, then let's go brute-force
 			while (!$unix_name) {
-				$c = substr (md5($email . rand()), 0, 15) ;
+				$c = substr (md5($email . rand()), 0, 15);
 				if (account_namevalid($c)
 				    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
-								  array ($c))) == 0) {
-					$unix_name = $c ;
+								  array($c))) == 0) {
+					$unix_name = $c;
 				}
 			}
 		}
@@ -372,7 +371,7 @@ class GFUser extends Error {
 						  htmlspecialchars($fax),
 						  htmlspecialchars($title),
 						  $ccode,
-						  $theme_id)) ;
+						  $theme_id));
 		if (!$result) {
 			$this->setError(_('Insert Failed: ') . db_error());
 			db_rollback();
@@ -391,7 +390,7 @@ class GFUser extends Error {
 				return false;
 			}
 
-			$hook_params = array ();
+			$hook_params = array();
 			$hook_params['user'] = $this;
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_name'] = $unix_name;
@@ -410,9 +409,9 @@ class GFUser extends Error {
 	}
 
 	/**
-	 *	sendRegistrationEmail() - Send email for registration verification
+	 * sendRegistrationEmail() - Send email for registration verification
 	 *
-	 *	@return true or false
+	 * @return bool	success or not
 	 */
 	function sendRegistrationEmail() {
 		$message=stripcslashes(sprintf(_('Thank you for registering on the %3$s web site. You have
@@ -443,12 +442,12 @@ Enjoy the site.
 	}
 
 	/**
-	 *	delete() - remove the User from all his groups.
+	 * delete() - remove the User from all his groups.
 	 *
-	 *	Remove the User from all his groups and set his status to D.
+	 * Remove the User from all his groups and set his status to D.
 	 *
-	 *  @param	boolean	Confirmation of deletion.
-	 *	@return true or false
+	 * @param	boolean	Confirmation of deletion.
+	 * @return	boolean	success or not
 	 */
 	function delete($sure) {
 		if (!$sure) {
@@ -462,31 +461,31 @@ Enjoy the site.
 			}
 
 			db_begin();
-			$res = db_query_params ('DELETE FROM artifact_monitor WHERE user_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('DELETE FROM artifact_monitor WHERE user_id=$1',
+						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - Could Not Delete From artifact_monitor: '.db_error());
+				$this->setError('ERROR - ' . _('Could Not Delete From artifact_monitor:') . ' '.db_error());
 				db_rollback();
 				return false;
 			}
-			$res = db_query_params ('DELETE FROM artifact_type_monitor WHERE user_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('DELETE FROM artifact_type_monitor WHERE user_id=$1',
+						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - Could Not Delete From artifact_type_monitor: '.db_error());
+				$this->setError('ERROR - ' . _('Could Not Delete From artifact_type_monitor:') . ' ' .db_error());
 				db_rollback();
 				return false;
 			}
-			$res = db_query_params ('DELETE FROM forum_monitored_forums WHERE user_id=$1',
-						array ($this->getID())) ;
+			$res = db_query_params('DELETE FROM forum_monitored_forums WHERE user_id=$1',
+						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - Could Not Delete From forum_monitored_forums: '.db_error());
+				$this->setError('ERROR - ' . _('Could Not Delete From forum_monitored_forums:') . ' '.db_error());
 				db_rollback();
 				return false;
-			}				
+			}
 			$res = db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1',
-						array ($this->getID())) ;
+						array ($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - Could Not Delete From filemodule_monitor: '.db_error());
+				$this->setError('ERROR - ' . _('Could Not Delete From filemodule_monitor:') . ' '.db_error());
 				db_rollback();
 				return false;
 			}
@@ -494,8 +493,8 @@ Enjoy the site.
 			$hook_params = array ();
 			$hook_params['user'] = $this;
 			$hook_params['user_id'] = $this->getID();
-			plugin_hook ("user_delete", $hook_params);
-			
+			plugin_hook("user_delete", $hook_params);
+
 			$this->setStatus('D');
 			db_commit();
 		}
@@ -503,26 +502,26 @@ Enjoy the site.
 	}
 
 	/**
-	 *	update() - update *common* properties of GFUser object.
+	 * update() - update *common* properties of GFUser object.
 	 *
-	 *	Use specific setter to change other properties.
+	 * Use specific setter to change other properties.
 	 *
-	 *  @param	string	The users first name.
-	 *  @param	string	The users last name.
-	 *  @param	int		The ID of the users language preference.
-	 *  @param	string	The useres timezone preference.
-	 *  @param	string	The users preference for receiving site updates by email.
-	 *  @param	string	The users preference for receiving community updates by email.
-	 *	@param	string	The users preference for being participating in "peer ratings".
-	 *	@param	string	The users Jabber account address.
-	 *	@param	int	The users Jabber preference.
-	 *	@param	int	The users theme_id preference.
-	 *	@param	string	The users address.
-	 *	@param	string	The users address2.
-	 *	@param	string	The users phone.
-	 *	@param	string	The users fax.
-	 *	@param	string	The users title.
-	 *	@param	string	The users ccode.
+	 * @param	string	The users first name.
+	 * @param	string	The users last name.
+	 * @param	int	The ID of the users language preference.
+	 * @param	string	The useres timezone preference.
+	 * @param	string	The users preference for receiving site updates by email.
+	 * @param	string	The users preference for receiving community updates by email.
+	 * @param	string	The users preference for being participating in "peer ratings".
+	 * @param	string	The users Jabber account address.
+	 * @param	int	The users Jabber preference.
+	 * @param	int	The users theme_id preference.
+	 * @param	string	The users address.
+	 * @param	string	The users address2.
+	 * @param	string	The users phone.
+	 * @param	string	The users fax.
+	 * @param	string	The users title.
+	 * @param	string	The users ccode.
 	 */
 	function update($firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
 		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode) {
@@ -612,11 +611,12 @@ Enjoy the site.
 	}
 
 	/**
-	 *	fetchData - May need to refresh database fields.
+	 * fetchData - May need to refresh database fields.
 	 *
-	 *	If an update occurred and you need to access the updated info.
+	 * If an update occurred and you need to access the updated info.
 	 *
-	 *	@return boolean success;
+	 * @param	int	the User ID data to be fecthed
+	 * @return	boolean	success;
 	 */
 	function fetchData($user_id) {
 		$res = db_query_params ('SELECT * FROM users WHERE user_id=$1',
@@ -630,30 +630,30 @@ Enjoy the site.
 	}
 	
 	/**
-	 *	getID - Simply return the user_id for this object.
+	 * getID - Simply return the user_id for this object.
 	 *
-	 *	@return	int	This user's user_id number.
+	 * @return	int	This user's user_id number.
 	 */
 	function getID() {
 		return $this->data_array['user_id'];
 	}
 
 	/**
-	 *	getStatus - get the status of this user.
+	 * getStatus - get the status of this user.
 	 *
-	 *	Statuses include (A)ctive, (P)ending, (S)uspended ,(D)eleted.
+	 * Statuses include (A)ctive, (P)ending, (S)uspended ,(D)eleted.
 	 *
-	 *	@return	char	This user's status flag.
+	 * @return	char	This user's status flag.
 	 */
 	function getStatus() {
 		return $this->data_array['status'];
 	}
 
 	/**
-	 *	setStatus - set this user's status.
+	 * setStatus - set this user's status.
 	 *
-	 *	@param	string	Status - P, A, S, or D.
-	 *	@return	boolean	success.
+	 * @param	string	Status - P, A, S, or D.
+	 * @return	boolean	success.
 	 */
 	function setStatus($status) {
 
@@ -694,10 +694,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *	isActive - whether this user is confirmed and active.
+	 * isActive - whether this user is confirmed and active.
 	 *
-	 *	Database field status of 'A' returns true.
-	 *	@return	boolean is_active.
+	 * Database field status of 'A' returns true.
+	 * @return	boolean is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus()=='A') {
@@ -708,24 +708,24 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getUnixStatus - Status of activation of unix account.
+	 * getUnixStatus - Status of activation of unix account.
 	 *
-	 *	@return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
+	 * @return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
 	 */
 	function getUnixStatus() {
 		return $this->data_array['unix_status'];
 	}
 
 	/**
-	 *	setUnixStatus - Sets status of activation of unix account.
+	 * setUnixStatus - Sets status of activation of unix account.
 	 *
-	 *	@param	string	The unix status.
+	 * @param	string	The unix status.
 	 *	N	no_unix_account
 	 *	A	active
 	 *	S	suspended
 	 *	D	deleted
 	 *
-	 *	@return	boolean success.
+	 * @return	boolean success.
 	 */
 	function setUnixStatus($status) {
 		global $SYS;
@@ -762,36 +762,36 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getUnixName - the user's unix_name.
+	 * getUnixName - the user's unix_name.
 	 *
-	 *	@return	string	This user's unix/login name.
+	 * @return	string	This user's unix/login name.
 	 */
 	function getUnixName() {
 		return strtolower($this->data_array['user_name']);
 	}
 
 	/**
-	 *	getUnixPasswd - get the user's password.
+	 * getUnixPasswd - get the user's password.
 	 *
-	 * 	@return	string	This user's unix crypted passwd.
+	 * @return	string	This user's unix crypted passwd.
 	 */
 	function getUnixPasswd() {
 		return $this->data_array['unix_pw'];
 	}
 
 	/**
-	 *	getUnixBox - the hostname of the unix box this user has an account on.
+	 * getUnixBox - the hostname of the unix box this user has an account on.
 	 *
-	 * 	@return	string	This user's shell login machine.
+	 * @return	string	This user's shell login machine.
 	 */
 	function getUnixBox() {
 		return $this->data_array['unix_box'];
 	}
 
 	/**
-	 *	getMD5Passwd - the password.
+	 * getMD5Passwd - the password.
 	 *
-	 *	@return	string	This user's MD5-crypted passwd.
+	 * @return	string	This user's MD5-crypted passwd.
 	 */
 	function getMD5Passwd() {
 		return $this->data_array['user_pw'];
@@ -799,22 +799,22 @@ Enjoy the site.
 	
 	//Added to be compatible with codendi getUserPw function
 	function getUserPw() {
-		return  $this->data_array['user_pw'];
+		return $this->data_array['user_pw'];
 	}
 
 	/**
-	 *	getConfirmHash - the confirm hash in the db.
+	 * getConfirmHash - the confirm hash in the db.
 	 *
-	 *	@return	string	This user's confirmation hash.
+	 * @return	string	This user's confirmation hash.
 	 */
 	function getConfirmHash() {
 		return $this->data_array['confirm_hash'];
 	}
 
 	/**
-	 *	getEmail - the user's email address.
+	 * getEmail - the user's email address.
 	 *
-	 *	@return	string	This user's email address.
+	 * @return	string	This user's email address.
 	 */
 	function getEmail() {
 		return str_replace("\n", "", $this->data_array['email']);
@@ -830,22 +830,22 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getNewEmail - while changing an email address, it is stored here until confirmation.
+	 * getNewEmail - while changing an email address, it is stored here until confirmation.
 	 *
-	 *	getNewEmail is a private operation for email change.
+	 * getNewEmail is a private operation for email change.
 	 *
-	 *	@return	string	This user's new (not yet confirmed) email address.
-	 *	@private
+	 * @return	string	This user's new (not yet confirmed) email address.
+	 * @private
 	 */
 	function getNewEmail() {
 		return $this->data_array['email_new'];
 	}
 
 	/**
-	 *	setEmail - set a new email address, which must be confirmed.
+	 * setEmail - set a new email address, which must be confirmed.
 	 *
-	 *  @param	string	The email address.
-	 *	@return boolean success.
+	 * @param	string	The email address.
+	 * @return	boolean	success.
 	 */
 	function setEmail($email) {
 
@@ -870,7 +870,7 @@ Enjoy the site.
 		db_begin();
 		$res = db_query_params ('UPDATE users SET email=$1 WHERE user_id=$2',
 					array ($email,
-					       $this->getID())) ;
+					       $this->getID()));
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Email: '.db_error());
@@ -881,7 +881,7 @@ Enjoy the site.
 			$hook_params['user'] = $this;
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_email'] = $email;
-			plugin_hook ("user_setemail", $hook_params);
+			plugin_hook("user_setemail", $hook_params);
 			
 			if (!$this->fetchData($this->getId())) {
 				db_rollback();
@@ -894,11 +894,11 @@ Enjoy the site.
 	}
 
 	/**
-	 *	setNewEmailAndHash - setNewEmailAndHash is a private operation for email change.
+	 * setNewEmailAndHash - setNewEmailAndHash is a private operation for email change.
 	 *
-	 *  @param	string	The email address.
-	 *  @param	string	The email hash.
-	 *	@return boolean success.
+	 * @param	string	The email address.
+	 * @param	string	The email hash.
+	 * @return	boolean	success.
 	 */
 	function setNewEmailAndHash($email, $hash='') {
 
@@ -920,23 +920,23 @@ Enjoy the site.
 			}
 		}
 		$res = db_query_params ('UPDATE users SET confirm_hash=$1, email_new=$2 WHERE user_id=$3',
-					array ($hash,
+					array($hash,
 					       $email,
-					       $this->getID())) ;
+					       $this->getID()));
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Email And Hash: '.db_error());
 			return false;
 		} else {
-			$this->data_array['email_new']	= $email;
+			$this->data_array['email_new'] = $email;
 			$this->data_array['confirm_hash'] = $hash;
 			return true;
 		}
 	}
 
 	/**
-	 *	getRealName - get the user's real name.
+	 * getRealName - get the user's real name.
 	 *
-	 *	@return	string	This user's real name.
+	 * @return	string	This user's real name.
 	 */
 	function getRealName() {
 		$last_name = $this->getLastName();
@@ -944,64 +944,64 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getFirstName - get the user's first name.
+	 * getFirstName - get the user's first name.
 	 *
-	 *	@return	string	This user's first name.
+	 * @return	string	This user's first name.
 	 */
 	function getFirstName() {
 		return $this->data_array['firstname'];
 	}
 
 	/**
-	 *	getLastName - get the user's last name.
+	 * getLastName - get the user's last name.
 	 *
-	 *	@return	string	This user's last name.
+	 * @return	string	This user's last name.
 	 */
 	function getLastName() {
 		return $this->data_array['lastname'];
 	}
 
 	/**
-	 *	getAddDate - this user's unix time when account was opened.
+	 * getAddDate - this user's unix time when account was opened.
 	 *
-	 *	@return	int	This user's unix time when account was opened.
+	 * @return	int	This user's unix time when account was opened.
 	 */
 	function getAddDate() {
 		return $this->data_array['add_date'];
 	}
 
 	/**
-	 *	getTimeZone - this user's timezone setting.
+	 * getTimeZone - this user's timezone setting.
 	 *
-	 *	@return	string	This user's timezone setting.
+	 * @return	string	This user's timezone setting.
 	 */
 	function getTimeZone() {
 		return $this->data_array['timezone'];
 	}
 
 	/**
-	 *	getCountryCode - this user's ccode setting.
+	 * getCountryCode - this user's ccode setting.
 	 *
-	 *	@return	string	This user's ccode setting.
+	 * @return	string	This user's ccode setting.
 	 */
 	function getCountryCode() {
 		return $this->data_array['ccode'];
 	}
 
 	/**
-	 *	getShell - this user's preferred shell.
+	 * getShell - this user's preferred shell.
 	 *
-	 *	@return	string	This user's preferred shell.
+	 * @return	string	This user's preferred shell.
 	 */
 	function getShell() {
 		return $this->data_array['shell'];
 	}
 
 	/**
-	 *	setShell - sets user's preferred shell.
+	 * setShell - sets user's preferred shell.
 	 *
-	 *  @param	string	The users preferred shell.
-	 *	@return boolean success.
+	 * @param	string	The users preferred shell.
+	 * @return	boolean	success.
 	 */
 	function setShell($shell) {
 		global $SYS;
@@ -1045,99 +1045,99 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getUnixUID() - Get the unix UID of the user
+	 * getUnixUID() - Get the unix UID of the user
 	 *
-	 *	@return	int	This user's UID.
+	 * @return	int	This user's UID.
 	 */
 	function getUnixUID() {
 		return $this->data_array['unix_uid'];
 	}
 
 	/**
-	 *	getUnixGID() - Get the unix GID of the user
+	 * getUnixGID() - Get the unix GID of the user
 	 *
-	 *	@return	int	This user's GID.
+	 * @return	int	This user's GID.
 	 */
 	function getUnixGID() {
 		return $this->data_array['unix_gid'];
 	}
 
 	/**
-	 *	getLanguage - this user's language_id from supported_languages table.
+	 * getLanguage - this user's language_id from supported_languages table.
 	 *
-	 *	@return	int	This user's language_id.
+	 * @return	int	This user's language_id.
 	 */
 	function getLanguage() {
 		return $this->data_array['language'];
 	}
 
 	/**
-	 *	getJabberAddress - this user's optional jabber address.
+	 * getJabberAddress - this user's optional jabber address.
 	 *
-	 *	@return	string	This user's jabber address.
+	 * @return	string	This user's jabber address.
 	 */
 	function getJabberAddress() {
 		return $this->data_array['jabber_address'];
 	}
 
 	/**
-	 *	getJabberOnly - whether this person wants updates sent ONLY to jabber.
+	 * getJabberOnly - whether this person wants updates sent ONLY to jabber.
 	 *
-	 *	@return boolean	This user's jabber preference.
+	 * @return	boolean	This user's jabber preference.
 	 */
 	function getJabberOnly() {
 		return $this->data_array['jabber_only'];
 	}
 
 	/**
-	 *	getAddress - get this user's address.
+	 * getAddress - get this user's address.
 	 *
-	 *	@return text	This user's address.
+	 * @return	text	This user's address.
 	 */
 	function getAddress() {
 		return $this->data_array['address'];
 	}
 
 	/**
-	 *	getAddress2 - get this user's address2.
+	 * getAddress2 - get this user's address2.
 	 *
-	 *	@return text	This user's address2.
+	 * @return	text	This user's address2.
 	 */
 	function getAddress2() {
 		return $this->data_array['address2'];
 	}
 
 	/**
-	 *	getPhone - get this person's phone number.
+	 * getPhone - get this person's phone number.
 	 *
-	 *	@return text	This user's phone number.
+	 * @return	text	This user's phone number.
 	 */
 	function getPhone() {
 		return $this->data_array['phone'];
 	}
 
 	/**
-	 *	getFax - get this person's fax number.
+	 * getFax - get this person's fax number.
 	 *
-	 *	@return text	This user's fax.
+	 * @return text	This user's fax.
 	 */
 	function getFax() {
 		return $this->data_array['fax'];
 	}
 
 	/**
-	 *	getTitle - get this person's title.
+	 * getTitle - get this person's title.
 	 *
-	 *	@return text	This user's title.
+	 * @return text	This user's title.
 	 */
 	function getTitle() {
 		return $this->data_array['title'];
 	}
 
 	/**
-	 *	getGroups - get an array of groups this user is a member of.
+	 * getGroups - get an array of groups this user is a member of.
 	 *
-	 *	@return array	Array of groups.
+	 * @return array	Array of groups.
 	 */
 	function &getGroups($onlylocal = true) {
 		$ids = array () ;
@@ -1157,9 +1157,9 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getAuthorizedKeys - the SSH authorized keys set by the user.
+	 * getAuthorizedKeys - the SSH authorized keys set by the user.
 	 *
-	 *	@return	string	This user's SSH authorized (public) keys.
+	 * @return	string	This user's SSH authorized (public) keys.
 	 */
 	function getAuthorizedKeys() {
 		return preg_replace("/###/", "\n", $this->data_array['authorized_keys']);
@@ -1168,8 +1168,8 @@ Enjoy the site.
 	/**
 	 *	setAuthorizedKeys - set the SSH authorized keys for the user.
 	 *
-	 *  @param	string	The users public keys.
-	 *	@return boolean success.
+	 * @param	string	The users public keys.
+	 * @return	boolean	success.
 	 */
 	function setAuthorizedKeys($keys) {
 		$keys = trim($keys);
@@ -1177,9 +1177,9 @@ Enjoy the site.
 		$keys = preg_replace("/\n+/", "\n", $keys); // Remove empty lines
 		$keys = preg_replace("/\n/", "###", $keys); // Convert EOL to marker
 
-		$res = db_query_params ('UPDATE users SET authorized_keys=$1 WHERE user_id=$2',
-					array ($keys,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE users SET authorized_keys=$1 WHERE user_id=$2',
+					array($keys,
+					       $this->getID()));
 		if (!$res) {
 			$this->setError(_('ERROR - Could Not Update User SSH Keys'));
 			return false;
@@ -1190,48 +1190,48 @@ Enjoy the site.
 	}
 
 	/**
-	 *	setLoggedIn($val) - Really only used by session code.
+	 * setLoggedIn($val) - Really only used by session code.
 	 *
-	 * 	@param	boolean	The session value.
+	 * @param	boolean	The session value.
 	 */
-	function setLoggedIn ($val=true) {
+	function setLoggedIn($val=true) {
 		$this->is_logged_in = $val;
 
 		if ($val) {
-			$this->is_super_user = forge_check_global_perm_for_user ($this, 'forge_admin') ;
+			$this->is_super_user = forge_check_global_perm_for_user($this, 'forge_admin') ;
 		}
 	}
 
 	/**
-	 *	isLoggedIn - only used by session code.
+	 * isLoggedIn - only used by session code.
 	 *
-	 *	@return	boolean	is_logged_in.
+	 * @return	boolean	is_logged_in.
 	 */
 	function isLoggedIn() {
 		return $this->is_logged_in;
 	}
 
 	/**
-	 *	deletePreference - delete a preference for this user.
+	 * deletePreference - delete a preference for this user.
 	 *
-	 *	@param	string	The unique field name for this preference.
-	 *	@return	boolean	success.
+	 * @param	string	The unique field name for this preference.
+	 * @return	boolean	success.
 	 */
 	function deletePreference($preference_name) {
 		$preference_name=strtolower(trim($preference_name));
 		unset($this->user_pref["$preference_name"]);
-		$res = db_query_params ('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
+		$res = db_query_params('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
 					array ($this->getID(),
-					       $preference_name)) ;
+					       $preference_name));
 		return $res;
 	}
 
 	/**
-	 *	setPreference - set a new preference for this user.
+	 * setPreference - set a new preference for this user.
 	 *
-	 *	@param	string	The unique field name for this preference.
-	 *	@param	string	The value you are setting this preference to.
-	 *	@return	boolean	success.
+	 * @param	string	The unique field name for this preference.
+	 * @param	string	The value you are setting this preference to.
+	 * @return	boolean	success.
 	 */
 	function setPreference($preference_name,$value) {
 		$preference_name=strtolower(trim($preference_name));
@@ -1260,10 +1260,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getPreference - get a specific preference.
+	 * getPreference - get a specific preference.
 	 *
-	 *	@param	string	The unique field name for this preference.
-	 *	@return the preference string or false on failure.
+	 * @param	string		The unique field name for this preference.
+	 * @return	string|bool	the preference string or false on failure.
 	 */
 	function getPreference($preference_name) {
 		$preference_name=strtolower(trim($preference_name));
@@ -1306,10 +1306,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *	setPasswd - Changes user's password.
+	 * setPasswd - Changes user's password.
 	 *
-	 *	@param	string	The plaintext password.
-	 *	@return boolean success.
+	 * @param	string	The plaintext password.
+	 * @return	boolean	success.
 	 */
 	function setPasswd($passwd) {
 		global $SYS;
@@ -1352,26 +1352,26 @@ Enjoy the site.
 	}
 
 	/**
-	 *	usesRatings - whether user participates in rating system.
+	 * usesRatings - whether user participates in rating system.
 	 *
-	 *	@return boolean success.
+	 * @return	boolean	success.
 	 */
 	function usesRatings() {
 		return !$this->data_array['block_ratings'];
 	}
 
 	/**
-	 *  getPlugins -  get a list of all available user plugins
+	 * getPlugins -  get a list of all available user plugins
 	 *
-	 *  @return array array containing plugin_id => plugin_name
+	 * @return	array	array containing plugin_id => plugin_name
 	 */
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
 			$res = db_query_params ('SELECT user_plugin.plugin_id, plugins.plugin_name
-			                         FROM user_plugin, plugins
-                                                 WHERE user_plugin.user_id=$1
-                                                   AND user_plugin.plugin_id=plugins.plugin_id',
+						 FROM user_plugin, plugins
+						 WHERE user_plugin.user_id=$1
+						 AND user_plugin.plugin_id=plugins.plugin_id',
 						array ($this->getID())) ;
 			$rows = db_numrows($res);
 
@@ -1384,10 +1384,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *  usesPlugin - returns true if the user uses a particular plugin 
+	 * usesPlugin - returns true if the user uses a particular plugin 
 	 *
-	 *  @param	string	name of the plugin
-	 *  @return	boolean	whether plugin is being used or not
+	 * @param	string	name of the plugin
+	 * @return	boolean	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
 		$plugins_data = $this->getPlugins() ;
@@ -1400,19 +1400,19 @@ Enjoy the site.
 	}
 
 	/**
-	 *  setPluginUse - enables/disables plugins for the user
+	 * setPluginUse - enables/disables plugins for the user
 	 *
-	 *  @param	string	name of the plugin
-	 *  @param	boolean	the new state
-	 *  @return	string	database result
+	 * @param	string	name of the plugin
+	 * @param	boolean	the new state
+	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val=true) {
 		if ($val == $this->usesPlugin($pluginname)) {
 			// State is already good, returning
-			return true ;
+			return true;
 		}
-		$res = db_query_params ('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
-					array ($pluginname)) ;
+		$res = db_query_params('SELECT plugin_id FROM plugins WHERE plugin_name=$1',
+					array($pluginname));
 		$rows = db_numrows($res);
 		if ($rows == 0) {
 			// Error: no plugin by that name
@@ -1420,23 +1420,23 @@ Enjoy the site.
 		}
 		$plugin_id = db_result($res,0,'plugin_id');
 		// Invalidate cache
-		unset ($this->plugins_data) ;
+		unset ($this->plugins_data);
 		if ($val) {
-			return db_query_params ('INSERT INTO user_plugin (user_id,plugin_id) VALUES ($1,$2)',
-						array ($this->getID(),
-						       $plugin_id)) ;
+			return db_query_params('INSERT INTO user_plugin (user_id,plugin_id) VALUES ($1,$2)',
+						array($this->getID(),
+						       $plugin_id));
 		} else {
-			return db_query_params ('DELETE FROM user_plugin WHERE user_id=$1 AND plugin_id=$2',
-						array ($this->getID(),
-						       $plugin_id)) ;
+			return db_query_params('DELETE FROM user_plugin WHERE user_id=$1 AND plugin_id=$2',
+						array($this->getID(),
+						       $plugin_id));
 		}
 	}
 
 	/**
-	 *	getMailingsPrefs - Get activity status for one of the site mailings.
+	 * getMailingsPrefs - Get activity status for one of the site mailings.
 	 *
-	 *	@param	string	The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
-	 *	@return	boolean success.
+	 * @param	string	The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
+	 * @return	boolean	success.
 	 */
 	function getMailingsPrefs($mailing_id) {
 		if ($mailing_id=='va') {
@@ -1449,10 +1449,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *	unsubscribeFromMailings - Disable email notifications for user.
+	 * unsubscribeFromMailings - Disable email notifications for user.
 	 *
-	 *	@param	boolean	If false, disable general site mailings, else - all.
-	 *	@return	boolean	success.
+	 * @param	boolean	If false, disable general site mailings, else - all.
+	 * @return	boolean	success.
 	 */
 	function unsubscribeFromMailings($all=false) {
 		$res1 = $res2 = $res3 = true;
@@ -1469,18 +1469,18 @@ Enjoy the site.
 	}
 
 	/**
-	 *	getThemeID - get the theme_id for this user.
+	 * getThemeID - get the theme_id for this user.
 	 *
-	 *	@return	int	The theme_id.
+	 * @return	int	The theme_id.
 	 */
 	function getThemeID() {
 		return $this->data_array['theme_id'];
 	}
 
 	/**
-	 *	getThemeID - get the theme_id for this user from the theme_prefs table.
+	 * setUpTheme - get the theme path
 	 *
-	 *	@return	int	The theme_id.
+	 * @return	string	The theme path.
 	 */
 	function setUpTheme() {
 //
@@ -1502,20 +1502,20 @@ Enjoy the site.
 	}
 
 	/**
-	 *  getRole() - Get user Role object.
+	 * getRole() - Get user Role object.
 	 *
-	 *  @param  object  group object
-	 *  @return object  Role object
+	 * @param	object	group object
+	 * @return	object	Role object
 	 */
 	function getRole(&$group) {
 		foreach ($this->getRoles () as $r) {
 			if ($r instanceof RoleExplicit
 			    && $r->getHomeProject() != NULL
 			    && $r->getHomeProject()->getID() == $group->getID()) {
-				return $r ;
+				return $r;
 			}
 		}
-		return false ;
+		return false;
 	}
 
 	function getRoles () {
