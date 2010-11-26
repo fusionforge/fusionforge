@@ -13,9 +13,13 @@ function get_url() {
 	 return $url;
 }
 
+function add_href($match){
+	return '<a href="'.$match[0].'">'.$match[0].'</a>';
+}
+
 function add_links($text, $url)	{
 	$preg_url = "/".str_replace("/", "\/", $url)."[^&\"]*"."/";
-	$replacement = preg_replace_callback($preg_url, function($match){return '<a href="'.$match[0].'">'.$match[0].'</a>';}, $text);
+	$replacement = preg_replace_callback($preg_url, "add_href", $text);
 	return $replacement;
 }
 
