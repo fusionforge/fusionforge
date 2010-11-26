@@ -1,3 +1,9 @@
+fusionforge (5.0.2+svn-1) unstable; urgency=low
+
+  * Bumped upstream version number to avoid upgrade problems.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 26 Nov 2010 10:31:33 +0100
+
 fusionforge (5.0.2-5) unstable; urgency=low
 
   * Stop trying to copy libcap into chroot, since it's not used by PAM
