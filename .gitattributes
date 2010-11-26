@@ -4741,11 +4741,13 @@ tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/config.christian -text
 tests/openvz/config.default -text
+tests/openvz/config.g-dellm65-1 -text
 tests/openvz/config.g-virtual05 -text
 tests/openvz/interfaces.sample -text
 tests/openvz/local.christian -text
 tests/openvz/local.christian.rinse.bpi -text
 tests/openvz/local.christian.rinse.conf -text
+tests/openvz/local.g-dellm65-1 -text
 tests/openvz/local.g-t3500-cb -text
 tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text

@@ -21,7 +21,7 @@ VZPRIVATEDIR=/var/lib/vz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
 
-SSHPUBKEY=~admrsc/.ssh/id_rsa.pub
+SSHPUBKEY=~buildbot/.ssh/id_rsa.pub
 
 DIST=squeeze
 DEBMIRROR=http://10.194.10.128/debian
