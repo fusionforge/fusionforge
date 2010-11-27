@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh -xe
 
 export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
@@ -9,10 +9,12 @@ export VZTEMPLATE=centos-5-x86
 export DB_NAME=fforge
 export CONFIGURED=true
 
+export BUILDRESULT=$WORKSPACE/build/packages
+
 rm -fr $WORKSPACE/build/packages $WORKSPACE/reports $WORKSPACE/apidocs
 mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage $WORKSPACE/apidocs
 
-make build-doc DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
+make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
 make BUILDRESULT=$WORKSPACE/build/packages buildtar
 
 cp gforge/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo

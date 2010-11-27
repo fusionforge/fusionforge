@@ -10,7 +10,11 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 
 		system("scp -r ../tests root@".HOST.":/opt");
 
-		system("scp ../../build/packages/fusionforge-*.tar.bz2 root@centos52:");
+		if (getenv('BUILDRESULT')) {
+			system("scp ".getenv('BUILDRESULT')."/fusionforge-*.tar.bz2 root@".HOST.":");
+		} else {
+			system("scp ../../build/packages/fusionforge-*.tar.bz2 root@".HOST.":");
+		}
 		system("ssh root@centos52 'tar jxf fusionforge-*.tar.bz2'");
 
 		if (is_file("/tmp/timedhosts.txt")) {

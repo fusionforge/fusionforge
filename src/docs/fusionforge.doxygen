@@ -563,7 +563,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written
 # to stderr.
 
-WARN_LOGFILE           = ../apidocs/fusionforge/output.log
+WARN_LOGFILE           = $(DOCSDIR)/fusionforge/output.log
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -574,7 +574,7 @@ WARN_LOGFILE           = ../apidocs/fusionforge/output.log
 # directories like "/usr/src/myproject". Separate the files or directories
 # with spaces.
 
-INPUT                  = gforge/common
+INPUT                  = src/common
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is
@@ -773,7 +773,7 @@ GENERATE_HTML          = YES
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be
 # put in front of it. If left blank `html' will be used as the default path.
 
-HTML_OUTPUT            = ../apidocs/fusionforge
+HTML_OUTPUT            = $(DOCSDIR)/fusionforge
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for
 # each generated HTML page (for example: .htm,.php,.asp). If it is left blank
