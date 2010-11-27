@@ -563,7 +563,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written
 # to stderr.
 
-WARN_LOGFILE           = ../apidocs/phpwiki/output.log
+WARN_LOGFILE           = $(DOCSDIR)/phpwiki/output.log
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -773,7 +773,7 @@ GENERATE_HTML          = YES
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be
 # put in front of it. If left blank `html' will be used as the default path.
 
-HTML_OUTPUT            = ../apidocs/phpwiki
+HTML_OUTPUT            = $(DOCSDIR)/phpwiki
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for
 # each generated HTML page (for example: .htm,.php,.asp). If it is left blank
