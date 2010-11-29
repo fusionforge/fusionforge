@@ -79,9 +79,11 @@ if (getStringFromRequest('submit')) {
 			}
 		}
 
-		if ( !$purpose && ($sys_project_reg_autoapprove == true) ) {
+		if ( !$purpose && forge_get_config ('project_auto_approval') ) {
 			$purpose = 'No purpose given, autoapprove was on';
 		}
+
+		$send_mail = ! forge_get_config ('project_auto_approval') ;
 
 		$group = new Group();
 		$u =& session_get_user();
@@ -93,7 +95,8 @@ if (getStringFromRequest('submit')) {
 			$purpose,
 			'shell1',
 			$scm_host,
-			$is_public
+			$is_public,
+			$send_mail
 		);
 		if ($res && forge_get_config('use_scm') && $plugin) {
 			$group->setUsesSCM (true) ;
@@ -108,14 +111,14 @@ if (getStringFromRequest('submit')) {
 		} else {
 			$HTML->header(array('title'=>_('Registration complete')));
 
-			if ( $sys_project_reg_autoapprove != true ) {
+			if ( ! forge_get_config ('project_auto_approval') ) {
 				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 			} else if ($group->isError()) {
 				printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
 			} else {
 				printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
 
-				if (!$group->approve( user_get_object_by_name ( $sys_project_reg_autoapprove_user ) ) ) {
+				if (!$group->approve( user_get_object_by_name ( forge_get_config ('project_auto_approval_user') ) ) ) {
 					printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 				} else {
 					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
@@ -156,7 +159,7 @@ echo '<h1>' . _('Register Project') . '</h1>';
 
 <?php
 // Don't display Project purpose if auto approval is on, because it won't be used.
-if ( $sys_project_reg_autoapprove != true ) {
+if ( !forge_get_config ('project_auto_approval') ) {
 	$index++;
 	echo '<h3>'.$index.'. '._('Project Purpose And Summarization').'</h3>';
 	echo '<p>';
