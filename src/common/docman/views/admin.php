@@ -57,77 +57,82 @@ function doIt(formid) {
 }
 </script>
 <?php
-	echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminpending\')" ><h4>'. _('Admin Pending Files') .'</h4></a>';
-	echo '<div id="adminpending" style="display:none">';
-	include ($gfcommon.'docman/views/listpendingfile.php');
-	echo '</div>';
+	if (forge_check_perm('docman', $group_id, 'approve')) {
+		echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminpending\')" ><h4>'. _('Admin Pending Files') .'</h4></a>';
+		echo '<div id="adminpending" style="display:none">';
+		include ($gfcommon.'docman/views/listpendingfile.php');
+		echo '</div>';
 
-	echo '<a href="#" onclick="javascript:displayAdminDiv(\'admintrash\')" ><h4>'. _('Admin Trash') .'</h4></a>';
-	echo '<div id="admintrash" style="display:none;" >';
-	include ($gfcommon.'docman/views/listtrashfile.php');
-	echo '</div>';
-
-	echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminoptions\')" ><h4>'. _('Admin Options') .'</h4></a>';
-	echo '<div id="adminoptions" style="display:none;" >';
-
-	echo '<form id="backup" name="backup" method="post" action="'. util_make_url ('/docman/view.php/'.$group_id.'/backup') .'" >';
-	echo '<ul>';
-	echo '<li><input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')"></li>';
-	echo '</ul>';
-	echo '</form>';
-
-	echo '<form id="createonline" name="createonline" method="post" action="?group_id='.$group_id.'&action=updatecreateonline" >';
-	echo '<ul>';
-
-	$createOnlineStatus = '1';
-	$labelCreateOnline = _('Enable Create Online Documents');
-	if ($g->useCreateOnline()) {
-		$createOnlineStatus='0';
-		$labelCreateOnline = _('Disable Create Online Documents');
+		echo '<a href="#" onclick="javascript:displayAdminDiv(\'admintrash\')" ><h4>'. _('Admin Trash') .'</h4></a>';
+		echo '<div id="admintrash" style="display:none;" >';
+		include ($gfcommon.'docman/views/listtrashfile.php');
+		echo '</div>';
 	}
 
-	echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
-	echo '</ul>';
-	echo '</form>';
+	if (forge_check_perm('docman', $group_id, 'admin')) {
+		echo '<a href="#" onclick="javascript:displayAdminDiv(\'adminoptions\')" ><h4>'. _('Admin Options') .'</h4></a>';
+		echo '<div id="adminoptions" style="display:none;" >';
 
-	echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updateenginesearch" >';
-	echo '<ul>';
+		echo '<form id="backup" name="backup" method="post" action="'. util_make_url ('/docman/view.php/'.$group_id.'/backup') .'" >';
+		echo '<ul>';
+		echo '<li><input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')"></li>';
+		echo '</ul>';
+		echo '</form>';
 
-	$searchEngineStatus = '1';
-	$labelSearchEngine = _('Enable Search Engine');
-	if ($g->useDocmanSearch()) {
-		$searchEngineStatus='0';
-		$labelSearchEngine = _('Disable Search Engine');
-	}
+		echo '<form id="createonline" name="createonline" method="post" action="?group_id='.$group_id.'&action=updatecreateonline" >';
+		echo '<ul>';
 
-	echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="'.$labelSearchEngine.'" onclick="javascript:doIt(\'searchengine\')"></li>';
-	echo '</ul>';
-	echo '</form>';
+		$createOnlineStatus = '1';
+		$labelCreateOnline = _('Enable Create Online Documents');
+		if ($g->useCreateOnline()) {
+			$createOnlineStatus='0';
+			$labelCreateOnline = _('Disable Create Online Documents');
+		}
 
-	if ($g->useDocmanSearch()) {
-		if ($d_arr || count($d_arr) > 1) {
-			echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&action=forcereindexenginesearch">';
+		echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><input id="submitcreateonline" type="button" value="'.$labelCreateOnline.'" onclick="javascript:doIt(\'createonline\')"></li>';
+		echo '</ul>';
+		echo '</form>';
+
+		echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updateenginesearch" >';
+		echo '<ul>';
+
+		$searchEngineStatus = '1';
+		$labelSearchEngine = _('Enable Search Engine');
+		if ($g->useDocmanSearch()) {
+			$searchEngineStatus='0';
+			$labelSearchEngine = _('Disable Search Engine');
+		}
+
+		echo '<li><input name="status" type="hidden" value="'.$searchEngineStatus.'"><input id="submitsearchengine" type="button" value="'.$labelSearchEngine.'" onclick="javascript:doIt(\'searchengine\')"></li>';
+		echo '</ul>';
+		echo '</form>';
+
+		if ($g->useDocmanSearch()) {
+			if ($d_arr || count($d_arr) > 1) {
+				echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&action=forcereindexenginesearch">';
+				echo '<ul>';
+				echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
+				echo '</ul>';
+				echo '</form>';
+			}
+		}
+
+		if (forge_get_config('use_webdav')) {
+			echo '<form id="webdavinterface" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updatewebdavinterface" >';
 			echo '<ul>';
-			echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
+			$webdavStatus = '1';
+			$labelWebdavInterface = _('Enable Webdav Interface');
+			if ($g->useWebDav()) {
+				$webdavStatus = '0';
+				$labelWebdavInterface = _('Disable Webdav Interface');
+			}
+			echo '<li><input name="status" type="hidden" value="'.$webdavStatus.'"><input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')"></li>';
 			echo '</ul>';
 			echo '</form>';
 		}
-	}
 
-	if (forge_get_config('use_webdav')) {
-		echo '<form id="webdavinterface" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updatewebdavinterface" >';
-		echo '<ul>';
-		$webdavStatus = '1';
-		$labelWebdavInterface = _('Enable Webdav Interface');
-		if ($g->useWebDav()) {
-			$webdavStatus = '0';
-			$labelWebdavInterface = _('Disable Webdav Interface');
-		}
-		echo '<li><input name="status" type="hidden" value="'.$webdavStatus.'"><input id="submitweddavinterface" type="button" value="'.$labelWebdavInterface.'" onclick="javascript:doIt(\'webdavinterface\')"></li>';
-		echo '</ul>';
-		echo '</form>';
+		echo '</div>';
 	}
-
-	echo '</div></div>';
+	echo '</div>';
 }
 ?>

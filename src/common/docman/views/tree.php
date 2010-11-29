@@ -52,13 +52,7 @@ echo '<div id="documenttree" style="height:100%">';
 <link rel="stylesheet" href="<?php echo util_make_uri ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
 <script src="<?php echo util_make_uri ('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
-<div id="myMenuID" style="overflow:auto; height:300px"></div>
-<!-- if someone wants to make it dynamic.... please do it -->
-	<!--<script type="text/javascript">
-		var mymenuidDiv = document.getElementById("myMenuID");
-		var documenttreeDiv = document.getElementById("documenttree");
-		mymenuidDiv.style.height = documenttreeDiv.offsetHeight+"px";
-	</script>-->
+<div id="myMenuID" style="overflow:auto;"></div>
 
 <script type="text/javascript">
 	var myMenu =
