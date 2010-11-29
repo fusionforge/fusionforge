@@ -54,9 +54,11 @@ if ($g->useDocmanSearch()) {
 	}
 }
 
-if (forge_check_perm('docman', $group_id, 'admin')) {
-	$menu_text[] = _('Admin');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
+if (session_loggedin()) {
+	if (forge_check_perm('docman', $group_id, 'approve')) {
+		$menu_text[] = _('Admin');
+		$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
+	}
 }
 
 if (count($menu_text)) {
