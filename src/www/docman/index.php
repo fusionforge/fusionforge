@@ -88,18 +88,19 @@ switch ($action) {
 	case "deldir":
 	case "editdocgroup":
 	case "editfile":
-	case "forcereindexenginesearch":
 	case "emptytrash":
-	case "trashdir":
-	case "trashfile":
-	case "updateenginesearch":
-	case "updatewebdavinterface":
-	case "updatecreateonline":
-	case "reservefile":
-	case "releasefile":
 	case "enforcereserve":
+	case "forcereindexenginesearch":
+	case "injectzip":
 	case "lockfile":
 	case "monitorfile":
+	case "releasefile":
+	case "reservefile":
+	case "trashdir":
+	case "trashfile":
+	case "updatecreateonline":
+	case "updateenginesearch":
+	case "updatewebdavinterface":
 		include ($gfcommon."docman/actions/$action.php");
 		break;
 }
