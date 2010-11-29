@@ -2615,7 +2615,7 @@ Reasons for negative decision:
 			return false;
 		}
 		
-		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_approve', -1) ;
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('approve_projects', -1) ;
 
 		if (count($admins) < 1) {
 			$this->setError(_("There is no administrator to send the mail to."));
