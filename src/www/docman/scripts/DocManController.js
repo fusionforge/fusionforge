@@ -2,6 +2,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -34,6 +35,14 @@ DocManListFileController = function(params)
 	this.bindControls();
 };
 
+DocManAddItemController = function(params)
+{
+	this.params		= params;
+
+	this.initTipsy();
+	this.bindControls();
+};
+
 
 DocManListFileController.prototype =
 {
@@ -41,9 +50,8 @@ DocManListFileController.prototype =
 	 */
 	bindControls: function()
 	{
-		this.params.buttonAddDirectory.click(jQuery.proxy(this, "toggleAddDirectoryView"));
 		this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
-		this.params.buttonAddNewFile.click(jQuery.proxy(this, "toggleAddFileView"));
+		this.params.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
 	},
 
 	/*! initializes tipsy
@@ -62,22 +70,6 @@ DocManListFileController.prototype =
 		}
 	},
 
-	/*! toggle sub group view div visibility
-	 */
-	toggleAddDirectoryView: function()
-	{
-		if (!this.params.divAddDirectory.is(":visible"))
-		{
-			this.params.divAddDirectory.show();
-			this.params.divAddFile.hide();
-			this.params.divEditDirectory.hide();
-		}
-		else
-		{
-			this.params.divAddDirectory.hide();
-		}
-	},
-
 	/*! toggle edit group view div visibility
 	 */
 	toggleEditDirectoryView: function() 
@@ -85,8 +77,7 @@ DocManListFileController.prototype =
 		if (!this.params.divEditDirectory.is(":visible"))
 		{
 			this.params.divEditDirectory.show();
-			this.params.divAddDirectory.hide();
-			this.params.divAddFile.hide();
+			this.params.divAddItem.hide();
 		}
 		else
 		{
@@ -94,19 +85,18 @@ DocManListFileController.prototype =
 		}
 	},
 
-	/*! toggle add file view div visibility
+	/*! toggle add item view div visibility
 	 */
-	toggleAddFileView: function()
+	toggleAddItemView: function()
 	{
-		if (!this.params.divAddFile.is(":visible"))
+		if (!this.params.divAddItem.is(":visible"))
 		{
-			this.params.divAddFile.show();
-			this.params.divAddDirectory.hide();
+			this.params.divAddItem.show();
 			this.params.divEditDirectory.hide();
 		}
 		else
 		{
-			this.params.divAddFile.hide();
+			this.params.divAddItem.hide();
 		}
 	},
 
@@ -154,5 +144,78 @@ DocManListFileController.prototype =
 		etc. and compute this data with Javascript in order to build the table. 
 		This will avoids to reload the page when you simply want to lock / remove / add a file etc.
 		*/
+	}
+}
+
+DocManAddItemController.prototype =
+{
+	/*! Binds the controls to the actions
+	 */
+	bindControls: function()
+	{
+		this.params.buttonDoc.click(jQuery.proxy(this, "toggleAddFileView"));
+		this.params.buttonDir.click(jQuery.proxy(this, "toggleAddDirectoryView"));
+		this.params.buttonZip.click(jQuery.proxy(this, "toggleInjectZipView"));
+	},
+
+	toggleAddDirectoryView: function()
+	{
+		if (!this.params.divCreateDir.is(":visible"))
+		{
+			this.params.divCreateDir.show();
+			this.params.divCreateDoc.hide();
+			this.params.divZipInject.hide();
+		}
+		else
+		{
+			this.params.divCreateDoc.hide();
+			this.params.divZipinject.hide();
+		}
+	},
+
+	toggleInjectZipView: function()
+	{
+		if (!this.params.divZipInject.is(":visible"))
+		{
+			this.params.divZipInject.show();
+			this.params.divCreateDir.hide();
+			this.params.divCreateDoc.hide();
+		}
+		else
+		{
+			this.params.divCreateDir.hide();
+			this.params.divCreateDoc.hide();
+		}
+	},
+
+	toggleAddFileView: function()
+	{
+		if (!this.params.divCreateDoc.is(":visible"))
+		{
+			this.params.divCreateDoc.show();
+			this.params.divCreateDir.hide();
+			this.params.divZipInject.hide();
+		}
+		else
+		{
+			this.params.divCreateDir.hide();
+			this.params.divZipInject.hide();
+		}
+	},
+
+	/*! initializes tipsy
+	 */
+	initTipsy: function()
+	{
+		for(var i = 0; i < this.params.tipsyElements.length; i++)
+		{
+			var el = this.params.tipsyElements[i];
+
+			jQuery(el.selector).tipsy({
+				gravity: el.options.gravity,
+				delayIn: el.options.delayIn,
+				delayOut: el.options.delayOut,
+				fade: el.options.fade});
+		}
 	}
 }

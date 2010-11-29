@@ -24,8 +24,7 @@
 
 $view = getStringFromRequest('view');
 switch ($view) {
-	case 'addfile':
-	case 'addsubdocgroup':
+	case 'additem':
 	case 'admin':
 	case 'editdocgroup':
 	case 'editfile':

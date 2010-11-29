@@ -436,6 +436,7 @@ src/common/docman/include/vtemplate.class.php -text
 src/common/docman/include/webdav.php -text
 src/common/docman/templates/search.tpl.html -text
 src/common/docman/views/addfile.php -text
+src/common/docman/views/additem.php -text
 src/common/docman/views/addsubdocgroup.php -text
 src/common/docman/views/admin.php -text
 src/common/docman/views/editdocgroup.php -text
@@ -4450,7 +4451,6 @@ src/www/themes/funky/images/docman/file_type_unknown.png -text svneol=unset#imag
 src/www/themes/funky/images/docman/file_type_writer.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/image-x-generic.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/insert-directory.png -text svneol=unset#image/png
-src/www/themes/funky/images/docman/insert-file.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/monitor-adddocument.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/monitor-removedocument.png -text svneol=unset#image/png
 src/www/themes/funky/images/docman/new.png -text svneol=unset#image/png
@@ -4579,7 +4579,6 @@ src/www/themes/gforge/images/docman/file_type_unknown.png -text svneol=unset#ima
 src/www/themes/gforge/images/docman/file_type_writer.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/image-x-generic.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/insert-directory.png -text svneol=unset#image/png
-src/www/themes/gforge/images/docman/insert-file.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/monitor-adddocument.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/monitor-removedocument.png -text svneol=unset#image/png
 src/www/themes/gforge/images/docman/new.png -text svneol=unset#image/png

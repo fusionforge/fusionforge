@@ -36,15 +36,8 @@ $menu_text = array();
 $menu_links = array();
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
-	$menu_text[] = _('Submit new documentation');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=addfile';
-}
-
-if (session_loggedin()) {
-	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$menu_text[] = _('Add new documentation directory');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=addsubdocgroup';
-	}
+	$menu_text[] = _('Add new item');
+	$menu_links[] = '/docman/?group_id='.$group_id.'&view=additem';
 }
 
 if ($g->useDocmanSearch()) {

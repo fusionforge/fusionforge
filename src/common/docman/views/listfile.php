@@ -47,8 +47,7 @@ jQuery(document).ready(function() {
 	controller = new DocManListFileController({
 		groupId:		<?php echo $group_id ?>, 
 		tipsyElements:		[
-						{selector: '#docman-addnewfile', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#docman-addsubdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-additem', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
@@ -60,11 +59,9 @@ jQuery(document).ready(function() {
 						{selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
 					],
 
-		divAddDirectory:	jQuery('#addsubdocgroup'),
-		divAddFile:		jQuery('#addfile'),
+		divAddItem:		jQuery('#additem'),
 		divEditDirectory:	jQuery('#editdocgroup'),
-		buttonAddDirectory:	jQuery('#docman-addsubdirectory'),
-		buttonAddNewFile:	jQuery('#docman-addnewfile'),
+		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_url("docman") ?>',
 		lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
@@ -77,7 +74,6 @@ jQuery(document).ready(function() {
 echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm ('docman', $group_id, 'approve')) {
 	echo '<a href="#" id="docman-editdirectory" title="'._('Edit this directory').'">'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-	echo '<a href="#" id="docman-addsubdirectory" title="'._('Add a new subdirectory').'">'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
 	// do not uncomment the line : trash directory is not correctly implemented
 	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
 	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
@@ -85,7 +81,7 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 }
 
 if (forge_check_perm ('docman', $group_id, 'submit')) {
-	echo '<a href="#" id="docman-addnewfile" title="'. _('Add a new document') . '" >'. html_image('docman/insert-file.png',22,22,array('alt'=>'addfile')). '</a>';
+	echo '<a href="#" id="docman-additem" title="'. _('Add a new item in this directory') . '" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
 }
 
 echo '</h3>';
@@ -94,13 +90,9 @@ echo '<div class="docman_div_include" id="editdocgroup" style="display:none;">';
 echo '<h4 class="docman_h4">'. _('Edit this directory') .'</h4>';
 include ($gfcommon.'docman/views/editdocgroup.php');
 echo '</div>';
-echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
-echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';
-include ($gfcommon.'docman/views/addsubdocgroup.php');
-echo '</div>';
-echo '<div class="docman_div_include" id="addfile" style="display:none">';
-echo '<h4 class="docman_h4">'. _('Add a new document') .'</h4>';
-include ($gfcommon.'docman/views/addfile.php');
+echo '<div class="docman_div_include" id="additem" style="display:none">';
+echo '<h4 class="docman_h4">'. _('Add a new item') .'</h4>';
+include ($gfcommon.'docman/views/additem.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
