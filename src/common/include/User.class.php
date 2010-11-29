@@ -1153,7 +1153,7 @@ Enjoy the site.
 				}
 			}
 		}
-		return group_get_objects(array_unique($ids)) ;
+		return group_get_objects(array_values(array_unique($ids))) ;
 	}
 
 	/**
