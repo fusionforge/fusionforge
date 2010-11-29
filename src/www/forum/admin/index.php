@@ -76,6 +76,7 @@ if (getStringFromRequest('post_changes')) {
 		if (check_email_available($g, $g->getUnixName() . '-' . getStringFromRequest('forum_name'), $error_msg)) {
 			$fa = new ForumAdmin($group_id);
 			$feedback .= $fa->ExecuteAction("add_forum");
+			$g->normalizeAllRoles () ;
 		}
 	} else if (getStringFromRequest('change_status')) {
 		$fa = new ForumAdmin($group_id);

@@ -2442,6 +2442,8 @@ class Group extends Error {
 			}
 		}
 
+		$this->normalizeAllRoles () ;
+
 		// Switch back to user preference
 		session_set_internal ($saved_session->getID()) ;
 		setup_gettext_from_context();
