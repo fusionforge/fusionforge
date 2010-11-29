@@ -31,8 +31,6 @@ global $group_id; // id of group
 
 session_require_perm('docman', $group_id, 'submit');
 
-$upload_dir = forge_get_config('ftp_upload_dir') . '/' . $g->getUnixName();
-
 $doc_group = getIntFromRequest('doc_group');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
