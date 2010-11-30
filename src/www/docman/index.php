@@ -105,6 +105,7 @@ switch ($action) {
 		break;
 }
 
+use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
 html_use_tooltips();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
