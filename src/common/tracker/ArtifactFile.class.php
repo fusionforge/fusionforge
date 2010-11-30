@@ -113,9 +113,10 @@ class ArtifactFile extends Error {
 	 *	@param	string	Item filesize.
 	 *	@param	binary	Binary item data.
 	 *	@param	string	Item description.
-	 *  @return id on success / false on failure.
+	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
+	 *  	@return id on success / false on failure.
 	 */
-	function create($filename, $filetype, $filesize, $bin_data, $description='None') {
+	function create($filename, $filetype, $filesize, $bin_data, $description='None', $importData = array()) {
 		// Some browsers don't supply mime type if they don't know it
 		if (!$filetype) {
 			// Let's be on safe side?
@@ -131,11 +132,22 @@ class ArtifactFile extends Error {
 			return false;
 		}
 
-		if (session_loggedin()) {
-			$userid=user_getid();
+		if (array_key_exists('user', $importData)){
+			$userid = $importData['user'];
 		} else {
-			$userid=100;
+			if (session_loggedin()) {
+				$userid=user_getid();
+			} else {
+				$userid=100;
+			}
 		}
+
+		if (array_key_exists('time',$importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
+		
 
 		// If $filetype is "text/plain", $bin_data convert UTF-8 encoding.
 		if (strcasecmp($filetype,"text/plain") === 0 &&
@@ -156,7 +168,7 @@ class ArtifactFile extends Error {
 					       $filename,
 					       $filesize,
 					       $filetype,
-					       time(),
+					       $time,
 					       $userid)) ; 
 
 		$id=db_insertid($res,'artifact_file','id');
@@ -166,20 +178,11 @@ class ArtifactFile extends Error {
 			$this->setError('ArtifactFile: '.db_error());
 			return false;
 		} else {
-/*
-//
-//	skip this unless we need it later - save a db query
-//
-			//
-			//	Now set up our internal data structures
-			//
-			if (!$this->fetchData($id)) {
-				db_rollback();
-				return false;
-			}
-*/
 			db_commit();
-			$this->Artifact->addHistory('File Added',$id.': '.$filename);
+			// If time is set, no need to add to history, will be done in batch
+			if (!array_key_exists('time', $importData)){
+				$this->Artifact->addHistory('File Added',$id.': '.$filename);
+			}
 			$this->Artifact->UpdateLastModifiedDate();
 			$this->clearError();
 			return $id;
