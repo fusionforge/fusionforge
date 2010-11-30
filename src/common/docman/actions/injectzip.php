@@ -29,6 +29,13 @@ global $group_id; // id of group
 
 session_require_perm('docman', $group_id, 'approve');
 
-$return_msg = _('Zip injected submitted successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
+$doc_group = getIntFromRequest('dirid');
+$uploaded_data = getUploadedFile('uploaded_data');
+
+$return_msg = _('Zip injected successfully.');
+$return_url = '/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg);
+if ($doc_group)
+	$return_url .= '&dirir='.$doc_group;
+
+session_redirect($return_url);
 ?>
