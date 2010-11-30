@@ -1927,6 +1927,8 @@ src/plugins/oslc/include/oslc-zend/application/Bootstrap.php -text
 src/plugins/oslc/include/oslc-zend/application/basic-pwd.txt -text
 src/plugins/oslc/include/oslc-zend/application/configs/application.ini -text
 src/plugins/oslc/include/oslc-zend/application/controllers/CmController.php -text
+src/plugins/oslc/include/oslc-zend/application/controllers/CodendiCmController.php -text
+src/plugins/oslc/include/oslc-zend/application/controllers/CodendiOSLCConnector.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/ErrorController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeCmController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeOSLCConnector.php -text
@@ -1939,6 +1941,7 @@ src/plugins/oslc/include/oslc-zend/application/controllers/cql.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/lime-parse_engine.php -text
 src/plugins/oslc/include/oslc-zend/application/exceptions/oslcException.php -text
 src/plugins/oslc/include/oslc-zend/application/models/ChangeRequests.php -text
+src/plugins/oslc/include/oslc-zend/application/models/Codendi.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/models/fusionforge.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/models/mantis.inc.php -text
 src/plugins/oslc/include/oslc-zend/application/test.csv -text
