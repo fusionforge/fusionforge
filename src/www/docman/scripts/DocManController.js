@@ -30,7 +30,9 @@ DocManListFileController = function(params)
 	this.lockInterval	= [];
 	this.params		= params;
 
-	this.initTipsy();
+    if ( typeof(jQuery(window).tipsy) == 'function') {
+	    this.initTipsy();
+    }
 	this.bindControls();
 };
 
