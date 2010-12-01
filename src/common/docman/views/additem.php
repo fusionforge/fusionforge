@@ -33,7 +33,7 @@ global $dirid; //id of the doc_group
 var controller;
 
 jQuery(document).ready(function() {
-	controller = new DocManAddItemController({
+	controllerAddItem = new DocManAddItemController({
 
 		tipsyElements:	[
 					{selector: '#labelDoc', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},

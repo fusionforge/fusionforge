@@ -681,8 +681,8 @@ class Document extends Error {
 		}
 
 		if ($filename) {
-			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 and doc_group = $2',
-						array($filename, $doc_group));
+			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 and doc_group = $2 and stateid = $3',
+						array($filename, $doc_group, $stateid));
 			if (!$result || db_numrows($result) > 0) {
 				$this->setError(_('Document already published in this directory'));
 				return false;

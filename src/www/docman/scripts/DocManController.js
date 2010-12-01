@@ -173,7 +173,7 @@ DocManAddItemController.prototype =
 		else
 		{
 			this.params.divCreateDoc.hide();
-			this.params.divZipinject.hide();
+			this.params.divZipInject.hide();
 		}
 	},
 

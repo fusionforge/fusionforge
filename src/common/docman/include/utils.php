@@ -143,16 +143,22 @@ function docman_display_trash(&$document_factory, $parent_group = 0) {
  * @todo : use jquery
  */
 function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid = 0, $parent_group = 0) {
+	global $group_id;
 	if (!array_key_exists("$parent_group", $nested_groups) || !is_array($nested_groups["$parent_group"])) {
 		return;
 	}
 	
 	echo '<script type="text/javascript">';
+	echo 'var lockInterval = new Array();';
 	echo 'function EditData(iddiv) {';
-	echo '	if ( "none" == document.getElementById(iddiv).style.display ) {';
-	echo '		document.getElementById(iddiv).style.display = "block";';
+	echo '	if ( "none" == document.getElementById(\'editdata\'+iddiv).style.display ) {';
+	echo '		document.getElementById(\'editdata\'+iddiv).style.display = "block";';
+	echo '		jQuery.get(\''. util_make_url('docman') .'\',{group_id:'. $group_id.',action:\'lockfile\',lock:1,fileid:iddiv});';
+	echo '		lockInterval[iddiv] = setInterval("jQuery.get(\''. util_make_url('docman') .'\',{group_id:'. $group_id .',action:\'lockfile\',lock:1,fileid:"+iddiv+"})",60000);';
 	echo '	} else {';
-	echo '		document.getElementById(iddiv).style.display = "none";';
+	echo '		document.getElementById(\'editdata\'+iddiv).style.display = "none";';
+	echo '		jQuery.get(\''. util_make_url('docman') .'\',{group_id:'. $group_id .',action:\'lockfile\',lock:0,fileid:iddiv});';
+	echo '		clearInterval(lockInterval[iddiv]);';
 	echo '	}';
 	echo '}';
 	echo '</script>';
@@ -192,7 +198,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 				}
 				$tooltip = htmlspecialchars($tooltip);
 				echo '<li>'.  html_image('docman/file_type_unknown.png', '22', '22', array("border"=>"0")). 
-					$docs[$j]->getName(). ' - ' . $tooltip . '&nbsp;<a href="#" onclick="javascript:EditData(\'editdata'.$docs[$j]->getID().'\')" >'. html_image('docman/edit-file.png', '22', '22', array('alt'=>'editfile')) .'</a></li>';
+					$docs[$j]->getName(). ' - ' . $tooltip . '&nbsp;<a href="#" onclick="javascript:EditData(\''.$docs[$j]->getID().'\')" >'. html_image('docman/edit-file.png', '22', '22', array('alt'=>'editfile')) .'</a></li>';
 				echo "<i>".$docs[$j]->getDescription()."</i><br/>";
 				echo '<div class="docman_div_include" id="editdata'.$docs[$j]->getID().'" style="display:none">';
 				document_editdata($docs[$j]);
