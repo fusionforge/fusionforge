@@ -93,17 +93,10 @@ class CodendiCmController extends CmController {
     public function getAction(){
         $params = $this->getRequest()->getParams();
 
-        // check authentication although it's not yet really useful
-        /*$login = null;
-        $authenticated = $this->retrieveAuthentication($login);
-        if(isset($login)) {
-            // Basic auth requested
-            if (!$authenticated) {
-                // not succesfully authd as $login
-                // can't go on;
+        // check authentication
+        if(!$this->retrieveAuthentication($login)){
                 throw new Exception('Invalid authentication provided !');
-            }
-        }*/
+        }
 
         // handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
         if ( isset($params['id']) && ($params['id'] == "oslc-services")) {
@@ -477,7 +470,7 @@ class CodendiCmController extends CmController {
     private function retrieveAuthentication(&$login) {
         switch (AUTH_TYPE) {
             case 'basic':
-                return $this->retrieveRequestAuthHttpBasic($login);
+                return $this->retrieveRequestAuthHttpBasic();
                 break;
             case 'oauth':
                 return $this->checkOauthAuthorization($login);
@@ -491,16 +484,15 @@ class CodendiCmController extends CmController {
     /**
      * Helper function that performs HTTP Basic authentication from request parameters/headers
      *
-     * @param string $login
      * @return True if auth is valid, in which case $login is modified.
      * If there was actually no auth requested, then return False, but $login will be set to null.
      */
-    private function retrieveRequestAuthHttpBasic(&$login) {
+    private function retrieveRequestAuthHttpBasic() {
         // extract login and password from Basic auth
         $login = null;
         $password = null;
 
-        $returned = False;
+        $return = False;
 
         $request = $this->getRequest();
         $auth = $request->getHeader('Authorization');
@@ -517,54 +509,17 @@ class CodendiCmController extends CmController {
                 throw new BadRequestException('Unsupported auth method : '. $auth[0] .' !');
             }
         }
+        // Do authentication in Codendi 
         if(isset($password)) {
-            $config = array('accept_schemes' => 'basic',
-                            'realm'          => 'Oslc-Demo',
-                            'digest_domains' => '/cm',
-                            'nonce_timeout'  => 3600,
-                    );
-
-            // Http authentication adapter
-            $adapter = new Zend_Auth_Adapter_Http($config);
-
-            // setup the OslcControler's Auth HTTP Basic resolver
-            $basicResolver = $this->oslc->getHttpAuthBasicResolver($login, $password);
-
-            // The authentication check will be performed by Mantis
-            $adapter->setBasicResolver($basicResolver);
-
-            $request = $this->getRequest();
-            $adapter->setRequest($request);
-            $response = $this->getResponse();
-            $adapter->setResponse($response);
-
-            // perform authentication check
-            $result = $adapter->authenticate();
-            if (!$result->isValid()) {
-                print_r('Access denied for : '. $login .' !');
-            }
-
-            switch ($result->getCode()) {
-                case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-                    /** do stuff for nonexistent identity **/
-                    print_r('Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND');
-                    break;
-                case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                    /** do stuff for invalid credential **/
-                    print_r('Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID');
-                    break;
-                case Zend_Auth_Result::SUCCESS:
-                    /** do stuff for successful authentication **/
-               	    $returned = True;
-                    break;
-                default:
-                    /** do stuff for other failure **/
-                    print_r('other problem');
-                    break;
+            $user = UserManager::instance()->login($login, $password);
+            if($user->isLoggedIn()) {
+            	$return = true;
+            } else {
+            	$return =  false;
             }
         }
         
-        return $returned;
+        return $return;
     }
 }
 
