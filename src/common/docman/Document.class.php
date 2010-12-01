@@ -596,7 +596,7 @@ class Document extends Error {
 	 * @return	boolean	success
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
-		$res = db_query_params ('UPDATE doc_data SET
+		$res = db_query_params('UPDATE doc_data SET
 					locked=$1,
 					locked_by=$2,
 					lockdate=$3
@@ -681,15 +681,15 @@ class Document extends Error {
 		}
 
 		if ($filename) {
-			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 and doc_group = $2',
-						array($filename, $doc_group));
+			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 and doc_group = $2 and stateid = $3',
+						array($filename, $doc_group, $stateid));
 			if (!$result || db_numrows($result) > 0) {
 				$this->setError(_('Document already published in this directory'));
 				return false;
 			}
 		}
 
-		$res = db_query_params ('UPDATE doc_data SET
+		$res = db_query_params('UPDATE doc_data SET
 					title=$1,
 					description=$2,
 					stateid=$3,
@@ -730,7 +730,7 @@ class Document extends Error {
 				$kwords = '';
 			}
 
-			$res = db_query_params ('UPDATE doc_data SET filesize=$1, data_words=$2 WHERE group_id=$3 AND docid=$4',
+			$res = db_query_params('UPDATE doc_data SET filesize=$1, data_words=$2 WHERE group_id=$3 AND docid=$4',
 						array(strlen($data),
 							$kwords,
 							$this->Group->getID(),
@@ -744,7 +744,7 @@ class Document extends Error {
 
 			switch ($this->Group->getStorageAPI()) {
 				case 'DB': {
-					$res = db_query_params ('UPDATE doc_data SET data = $1 where group_id = $2 and docid = $3',
+					$res = db_query_params('UPDATE doc_data SET data = $1 where group_id = $2 and docid = $3',
 								array(base64_encode($data),
 									$this->Group->getID(),
 									$this->getID())
