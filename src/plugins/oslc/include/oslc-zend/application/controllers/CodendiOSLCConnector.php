@@ -264,7 +264,39 @@ class CodendiOSLCConnector extends OSLCConnector {
 			throw new Exception($art_obj->getErrorMessage());
 		}
 	}
+
+    /**
+     * Returns the list of projects of the user.
+     * @todo fix this method.
+     */
+    public function getProjectsList() {
+        $uM = UserManager::instance();
+        $pM = ProjectManager::instance();
+        $user = $uM->getCurrentUser();
+        $project_ids = $user->getProjects();
+        foreach($project_ids as $id) {
+            $projects[$id] = $pm->getProject($id);
+        } 
+        return $this->createProjectsArray($projects);
+	}
 	
+    /**
+     *  Converts projects objects into a single projects array.
+     *  We only set the id and the public name of each project 
+     *  into the array.
+     *  @param array $projects array of projects indexed by their relative ids
+     */
+    private function createProjectsArray($projects) {
+        $return = array();
+        foreach($projects as $prj_idx => $project){
+            $return[$prj_idx] = array(
+                'id'                => $prj_idx, 
+                'name'              => $project->getPublicName()
+            );
+        }
+        return $return;
+    }
+
 /**
  * updateArtifact - update the artifact $artifact_id in tracker $tracker_id of the project $group_id with given values
  *
@@ -367,5 +399,6 @@ function updateArtifact($sessionKey, $group_id, $tracker_id, $artifact_id, $valu
         return new SoapFault(invalid_session_fault,'Invalid Session ','updateArtifact');
     }
 }
+
 }
 ?>
