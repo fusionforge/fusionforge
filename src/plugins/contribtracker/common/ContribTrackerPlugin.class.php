@@ -35,7 +35,7 @@ class ContribTrackerPlugin extends Plugin {
                 $this->hooks[] = "site_admin_option_hook"; // to show in the site admin page
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
 			$project = &group_get_object($group_id);

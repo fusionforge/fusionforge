@@ -70,7 +70,7 @@ class LdapextauthPlugin extends Plugin {
 		}
 	}
 	
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $HTML ;
 		
 		$loginname = $params['loginname'] ;

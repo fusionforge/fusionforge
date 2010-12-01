@@ -39,7 +39,7 @@ class quota_managementPlugin extends Plugin {
 		$this->hooks[] = "quota_link_project_admin"; // to show in admin project
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_quota_managementplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab

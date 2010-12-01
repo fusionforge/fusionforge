@@ -31,7 +31,7 @@ class globalSearchPlugin extends Plugin {
 		$this->hooks[] = "features_boxes_top" ;
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $Language, $G_SESSION, $HTML, $group_id;
 
 		if ($hookname == "site_admin_option_hook") {

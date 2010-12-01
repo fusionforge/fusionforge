@@ -103,7 +103,7 @@ class Plugin extends Error {
 	 * @param hookname - the "handle" of the hook
 	 * @param params - array of parameters to pass the hook
 	 */
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		return true ; 
 	}
 

@@ -45,7 +45,7 @@ class fckeditorPlugin extends Plugin {
 	* @param    String  $params    The params of the Hook
 	*
 	*/
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $group_id;
 
 		if (file_exists ("/usr/share/fckeditor/fckeditor.php")) {

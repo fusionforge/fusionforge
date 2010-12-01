@@ -38,7 +38,7 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook('get_available_reference_natures', 'getAvailableReferenceNatures', false);
 		$this->_addHook('ajax_reference_tooltip', 'ajax_reference_tooltip', false);
 	}
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_hudsonplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab

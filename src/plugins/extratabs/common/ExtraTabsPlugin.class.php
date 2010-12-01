@@ -33,7 +33,7 @@ class ExtraTabsPlugin extends Plugin {
 		$this->hooks[] = "groupmenu" ;  // To put into the project tabs
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $HTML;
 		
 		if ($hookname == "project_admin_plugins") {

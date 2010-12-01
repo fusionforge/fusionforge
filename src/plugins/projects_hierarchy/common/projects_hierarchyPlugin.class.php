@@ -42,7 +42,7 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->hooks[] = "delete_link"; // to delete link
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_projects_hierarchyplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
