@@ -189,6 +189,16 @@ class DocumentGroup extends Error {
 	}
 
 	/**
+	 * injectZip - unzip the attachment and create the directory tree if needed
+	 *
+	 * @param	array	uploaded data
+	 * @return	boolean	success or not
+	 */
+	function injectZip($uploaded_data) {
+		return true;
+	}
+
+	/**
 	 * fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
 	 * @param	int	ID of the doc_group.

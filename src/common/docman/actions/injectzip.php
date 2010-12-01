@@ -24,7 +24,7 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $g; //group object
+global $g; // group object
 global $group_id; // id of group
 
 session_require_perm('docman', $group_id, 'approve');
@@ -32,10 +32,30 @@ session_require_perm('docman', $group_id, 'approve');
 $doc_group = getIntFromRequest('dirid');
 $uploaded_data = getUploadedFile('uploaded_data');
 
-$return_msg = _('Zip injected successfully.');
-$return_url = '/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg);
-if ($doc_group)
-	$return_url .= '&dirir='.$doc_group;
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg = _('Document Action Denied.');
+	if ($doc_group) {
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&warning_msg='.urlencode($return_msg));
+	} else {
+		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+	}
+} else {
+	$dg = new DocumentGroup($g,$doc_group);
 
-session_redirect($return_url);
+	if ($dg->isError())
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+	if (!$dg->injectZip($uploaded_data)) {
+		$return_msg = _('Error: Zip rejected');
+		$return_url = '/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg);
+	} else {
+		$return_msg = _('Zip injected successfully.');
+		$return_url = '/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg);
+	}
+
+	if ($doc_group)
+		$return_url .= '&dirir='.$doc_group;
+
+	session_redirect($return_url);
+}
 ?>
