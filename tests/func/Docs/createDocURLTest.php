@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2010 Alcatel-Lucent
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -50,7 +51,8 @@ class CreateDocURL extends FForge_SeleniumTestCase
 	{
 		$this->init();
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("link=Submit new documentation");
+		$this->clickAndWait("link=Add new item");
+		$this->click("//input[@name='type' and @value='document']");
 		$this->type("title", "My document");
 		$this->type("description", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");
