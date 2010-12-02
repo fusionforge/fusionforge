@@ -39,7 +39,7 @@ $fichin = $argv[1];
 if (!is_file($fichin))
 	exit (1);
 
-$fichout = tempnam("/tmp","tmp");
+$fichout = tempnam(forge_get_config('data_path'),"tmp");
 $cmd = "/usr/bin/pdftotext $fichin $fichout";
 $res = shell_exec($cmd);
 

@@ -38,7 +38,7 @@ $fichin = $argv[1];
 if (!is_file($fichin))
 	exit (1);
 
-$fichout = "/tmp/gfo".rand(10000, 99999).".tmp";
+$fichout = tempnam(forge_get_config('data_path'), "tmp");
 $cmd = "/usr/bin/antiword -i1 -t $fichin > $fichout";
 $res = shell_exec($cmd);
 

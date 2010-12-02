@@ -43,7 +43,7 @@ $contents = fread($fd, filesize($fichin));
 fclose($fd);
 
 $strip_content = strip_tags($contents);
-$filename = tempnam("/tmp", "tmp");
+$filename = tempnam(forge_get_config('data_path'), "tmp");
 $fd = fopen($filename, "w");
 fwrite($fd , $strip_content);
 fclose($fd);

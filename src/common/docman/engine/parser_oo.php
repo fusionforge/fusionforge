@@ -31,21 +31,21 @@ require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
 if ($argc != 2) {
 	echo "Usage : parser_oo.php <filename>\n";
-	exit (1);
+	exit(1);
 }
 
 $fichin = $argv[1];
 if (!is_file($fichin))
-	exit (1);
+	exit(1);
 
 $zip = new ZipArchive;
 if ($zip->open($fichin) === TRUE) {
-	$output_dir = $fichin.".dir";
+	$output_dir = tempnam(forge_get_config('data_path'), "tmp");
 	mkdir($output_dir);
 	$zip->extractTo($output_dir, array('content.xml'));
 	$zip->close();
 } else {
-	exit (2);
+	exit(2);
 }
 
 // transformer le context.xml en fichier txt
