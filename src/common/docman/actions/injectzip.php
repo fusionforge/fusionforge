@@ -30,7 +30,7 @@ global $group_id; // id of group
 session_require_perm('docman', $group_id, 'approve');
 
 $doc_group = getIntFromRequest('dirid');
-$uploaded_data = getUploadedFile('uploaded_data');
+$uploaded_zip = getUploadedFile('uploaded_zip');
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Action Denied.');
@@ -45,8 +45,8 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	if ($dg->isError())
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-	if (!$dg->injectZip($uploaded_data)) {
-		$return_msg = _('Error: Zip rejected');
+	if (!$dg->injectZip($uploaded_zip)) {
+		$return_msg = $dg->getErrorMessage();
 		$return_url = '/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg);
 	} else {
 		$return_msg = _('Zip injected successfully.');

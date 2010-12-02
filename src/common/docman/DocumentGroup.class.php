@@ -195,7 +195,28 @@ class DocumentGroup extends Error {
 	 * @return	boolean	success or not
 	 */
 	function injectZip($uploaded_data) {
-		return true;
+		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+			$this->setError( _('Invalid file name.'));
+			return false;
+		}
+		if (function_exists(finfo_open)) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
+		} else {
+			$uploaded_data_type = $uploaded_data['type'];
+		}
+		
+		switch ($uploaded_data_type) {
+			case "application/zip": {
+				$returned = $this->__injectZip($uploaded_data);
+				break;
+			}
+			default: {
+				$this->setError( _('Unsupported injected file:') . ' ' .$uploaded_data_type);
+				$returned = false;
+			}
+		}
+		return $returned;
 	}
 
 	/**
@@ -411,6 +432,29 @@ class DocumentGroup extends Error {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * __injectZip - private method to inject a zip archive tree and files
+	 *
+	 * @param	array	uploaded zip
+	 * @return	boolean	success or not
+	 * @private
+	 */
+	function __injectZip ($uploadedZip) {
+		$zip = new ZipArchive();
+		if ($zip->open($uploadedZip['tmp_name'])) {
+			if ($zip->extractTo(forge_get_config('data_path'))) {
+				if ($zip->close()) {
+					//rmdir(forge_get_config('data_path').'/'.'myname');
+					return true;
+				}
+			} else {
+				$zip->close();
+				return false;
+			}
+		}
+		return false;
 	}
 
 }
