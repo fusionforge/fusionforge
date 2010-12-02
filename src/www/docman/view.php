@@ -35,7 +35,7 @@ require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
 require_once $gfcommon.'docman/include/webdav.php';
 
-$arr=explode('/',getStringFromServer('REQUEST_URI'));
+$arr=explode('/', getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
 $docid=$arr[4];
 
@@ -43,18 +43,18 @@ $g = group_get_object($group_id);
 if (!$g || !is_object($g)) {
 	exit_no_group();
 } elseif ($g->isError()) {
-	exit_error($g->getErrorMessage(),'docman');
+	exit_error($g->getErrorMessage(), 'docman');
 }
 
 if ($docid != 'backup' && $docid != 'webdav' ) {
-    session_require_perm ('docman', $group_id, 'read') ;
+	session_require_perm('docman', $group_id, 'read');
 	$docname=urldecode($arr[5]);
 
 	$d = new Document($g,$docid);
 	if (!$d || !is_object($d)) {
-		exit_error(_('Document is not available.'),'docman');
+		exit_error(_('Document is not available.'), 'docman');
 	} elseif ($d->isError()) {
-		exit_error($d->getErrorMessage(),'docman');
+		exit_error($d->getErrorMessage(), 'docman');
 	}
 
 	/** 
@@ -67,34 +67,35 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	 * name is correct.
 	 */
 	if ($d->getFileName() != $docname) {
-		exit_error(_('No document to display - invalid or inactive document number'),'docman');
+		exit_error(_('No document to display - invalid or inactive document number'), 'docman');
 	}
 
-	Header ('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()).'"');
+	header('Content-disposition: filename="'.str_replace('"', '', $d->getFileName()) . '"');
 
-	if (strstr($d->getFileType(),'app')) {
-		Header ("Content-type: application/binary");
+	if (strstr($d->getFileType(), 'app')) {
+		header("Content-type: application/binary");
 	} else {
-		Header ("Content-type: ".$d->getFileType());
+		header("Content-type: ".$d->getFileType());
 	}
 
 	echo $d->getFileData();
 
-} else if ( $docid == 'backup' ) {
-    session_require_perm ('docman', $group_id, 'admin') ;
+} else if ($docid == 'backup') {
+	session_require_perm('docman', $group_id, 'admin');
 
 	$df = new DocumentFactory($g);
 	if ($df->isError())
-		    exit_error($df->getErrorMessage(),'docman');
+		exit_error($df->getErrorMessage(), 'docman');
 
 	$dgf = new DocumentGroupFactory($g);
 	if ($dgf->isError())
-		    exit_error($dgf->getErrorMessage(),'docman');
+		exit_error($dgf->getErrorMessage(), 'docman');
+
 	$nested_groups = $dgf->getNested();
 
 	$d_arr =& $df->getDocuments();
 	if (!$d_arr || count($d_arr) <1)
-		    $d_arr = &$df->getDocuments();
+		$d_arr = &$df->getDocuments();
 
 	if ( $nested_groups != NULL ) {
 		$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
@@ -104,14 +105,14 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 			exit_error(_('Unable to open zip archive for backup'),'docman');
 		}
 
-        if ( !docman_fill_zip($zip,$nested_groups,$df))
-            exit_error(_('Unable to fill zip archive for backup'),'docman');
+		if ( !docman_fill_zip($zip,$nested_groups,$df))
+			exit_error(_('Unable to fill zip archive for backup'), 'docman');
 
 		if ( !$zip->close())
-			exit_error(_('Unable to close zip archive for backup'),'docman');
+			exit_error(_('Unable to close zip archive for backup'), 'docman');
 
-		Header ('Content-disposition: filename="'.$filename.'"');
-		Header ('Content-type: application/binary');
+		header('Content-disposition: filename="'.$filename.'"');
+		header('Content-type: application/binary');
 
 		readfile($file);
 		unlink($file);
@@ -119,7 +120,7 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 		$warning_msg = _('No documents to backup.');
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
-} else if ( $docid == 'webdav' ) {
+} else if ($docid == 'webdav') {
 	$_SERVER['SCRIPT_NAME'] = '';
 	/* we need the group id for check authentification. */
 	$_SERVER["AUTH_TYPE"] = $group_id;
@@ -132,7 +133,7 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 	$server = new HTTP_WebDAV_Server_Docman;
 	$server->ServeRequest();
 } else {
-	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
+	exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
 }
 
 // Local Variables:
