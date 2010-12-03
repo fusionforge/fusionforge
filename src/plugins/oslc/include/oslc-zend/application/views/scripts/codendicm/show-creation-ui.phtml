@@ -1,0 +1,511 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<?php 
+
+	$project = $this->data['project'];
+		
+	//type
+	//reproducibility
+	//severity
+	//priority
+	//platform //os //os_build ????
+	//product version
+	//product build
+	//assigned to (handler)
+	//target version
+	//summary
+	//description
+	//steps to reproduce
+	//additional info
+	//custom field
+	//view status
+	
+	/*
+	 * @import "http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojox/grid/resources/Grid.css";
+		@import url("http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/soria/soria.css");
+		
+	 */
+	
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>OSLC Creation UI</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+		@import url("/javascript/dojox/grid/resources/Grid.css");
+		@import url("/javascript/dijit/themes/soria/soria.css");
+		
+		body { 	font: 13px Myriad,Arial,Helvetica,clean,sans-serif; 	
+				*font-size: small;	
+				*font: x-small;}
+				
+		h1 {	font-size: 1.5em; 	
+				font-weight: normal;	
+				line-height: 1em; 	
+				margin-top: 1em;	
+				margin-bottom:0;}
+				
+		h2 { 	font-size: 1.1667em;
+				font-weight: bold; 	
+				line-height: 1.286em; 	
+				margin-top: 1.929em; 	
+				margin-bottom:0.643em;}
+		
+		h3, h4, h5, h6 {	font-size: 1em; 	
+							font-weight: bold; 	
+							line-height: 1.5em; 	
+							margin-top: 1.5em; 	
+							margin-bottom: 0;}
+							
+		p { 	font-size: 1em;
+				margin-top: 1.5em;
+				margin-bottom: 1.5em;
+				line-height: 1.5em;}
+		
+		body {
+			margin: 2em;
+		}
+		
+		table td {
+			padding: 2px;
+		}
+		
+		</style>
+        <script type="text/javascript" src="/javascript/dojo/dojo.js"
+			djconfig="parseOnLoad:true">
+		</script>
+        <script type="text/javascript">
+        dojo.require("dojox.encoding.base64");
+
+        var project = "<?php echo $project;?>";
+        var URL = '<?php echo $this->baseUrl(); ?>'+"/cm/project/"+project;
+        var result;
+        var postdata;
+        var userpass;
+        var error = false;
+
+        var convertToByteArray = function(data){
+            var bin=[] ;
+            for (var i=0; i<data.length; i++){
+            	bin.push(data.charCodeAt(i));
+            }
+            return bin;
+        }
+
+        var createCR = function()	{
+            createBugData();
+            if(!error)	{
+                var xhrArgs = {
+	                    url: URL,
+	                    postData: dojo.toJson(postdata),
+	                    headers: {	'Content-Type': "application/x-oslc-cm-change-request+json",
+									'Authorization': "Basic " + dojox.encoding.base64.encode(convertToByteArray(userpass))
+								},
+	                    load: function(data, ioArgs) {
+	                  	  	alert("The url of the bug just created is: "+data);                  	 	                        
+	                     	result = data;
+	                     	refresh();
+	                    },
+	                    error: function(err, ioargs) {
+	                    	var response = dojo.fromJson(ioargs.xhr.responseText);
+	                    	var errmsg, errcode;
+	                    	for (var key in response) {
+	  							var obj = response[key];						   
+	  							if(key=="oslc_cm:Error")   {
+	  							   for (var i in obj) {
+	  								  if(i=="oslc_cm:statusCode")	{
+	  									  errcode = obj[i];
+	  								  }else if(i=="oslc_cm:message")	{
+	  									  errmsg = obj[i];
+	  								  } 
+	  							   }
+	  							   var errtext = "Error " + errcode + ": " + errmsg;
+	  							   alert(errtext);
+	  						   }
+	  						}
+	                	}
+	                }			
+				dojo.xhrPost(xhrArgs);
+            }
+        }
+
+        var createBugData = function()	{
+            error = false;
+        	var user = dojo.trim(dojo.byId("usertext").value);
+            var pass = dojo.trim(dojo.byId("passtext").value);
+
+            if(user=="")	{
+                alert("User field is empty!");
+                error = true;
+                return;
+            }else if((user!="")&&(pass==""))	{
+                alert("Password field is empty!");
+                error = true;
+                return;
+            }else if(!user.match(/^[a-zA-Z0-9\s-\.+_]+$/))	{
+                alert("Invalid user name!");
+                error = true;
+                return;
+            }
+            
+			postdata = {};
+			var temp = dojo.trim(dojo.byId("titletext").value);
+			if(temp=="")	{
+				alert("Bug Title cannot be empty!");
+				error = true;
+                return;
+			}else	{
+				postdata['dc:title'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("descriptiontext").value);
+			if(temp=="")	{
+				alert("Bug description cannot be empty!");
+				error = true;
+                return;
+			}else	{
+				postdata['dc:description'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("stepstext").value);
+			if(temp!="")	{
+				postdata['mantisbt:steps_to_reproduce'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("additionalinfotext").value);
+			if(temp!="")	{
+				postdata['mantisbt:additional_information'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("categorylist").value);
+			if(temp=="none selected")	{
+				alert("Bug Category cannot be empty!");
+				error = true;
+                return;
+			}else	{
+				postdata['dc:type'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("reproducibilitylist").value);
+			if(temp!="none selected")	{
+				postdata['mantisbt:reproducibility'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("prioritylist").value);
+			if(temp!="none selected")	{
+				postdata['mantisbt:priority'] = temp;
+			}
+
+			temp = dojo.trim(dojo.byId("severitylist").value);
+			if(temp!="none selected")	{
+				postdata['mantisbt:severity'] = temp;
+			}
+
+			postdata['dc:creator'] = user;
+
+			var version = "<?php if(array_key_exists('product_version', $this->data)) echo "true";?>";
+			if(version=="true")	{
+				temp = dojo.trim(dojo.byId("productversionlist").value);
+				if(temp!="none selected")	{
+					postdata['mantisbt:version'] = temp;
+				}
+				temp = dojo.trim(dojo.byId("targetversionlist").value);
+				if(temp!="none selected")	{
+					postdata['mantisbt:target_version'] = temp;
+				}
+			}
+
+			if(dojo.byId("vspublic").checked==true)	{
+				postdata['mantisbt:view_state'] = "public";
+			}else if(dojo.byId("vsprivate").checked==true)	{
+				postdata['mantisbt:view_state'] = "private";
+			}
+			
+			//alert(postdata.toSource());
+			userpass = user + ":" + pass;
+			
+        }
+        
+        var creatensendCR = function()	{
+			createBugData();
+			if(!error)	{
+				
+				var xhrArgs = {
+	                    url: URL,
+	                    postData: dojo.toJson(postdata),
+	                    headers: {	'Content-Type': "application/x-oslc-cm-change-request+json",
+									'Authorization': "Basic " + dojox.encoding.base64.encode(convertToByteArray(userpass))
+								},
+	                    load: function(data, ioArgs) {
+	                  	  	alert("The url of the bug just created is: "+data);                  	 	                        
+	                     	result = data;
+	                     	postdata['rdf:resource'] = result;
+	        				postdata['oslc_cm:label'] = postdata['dc:title'];
+	        				postdataArr = [];
+	        				postdataArr.push(postdata);
+	        				var datatosend = {'oslc_cm:results': postdataArr};
+	        				datatosend = datatosend.toSource();
+	        				refresh();
+	        				//alert(datatosend);
+	        				respondWithPostMessage(datatosend);
+	                    },
+	                    error: function(err, ioargs) {
+	                    	var response = dojo.fromJson(ioargs.xhr.responseText);
+	                    	var errmsg, errcode;
+	                    	for (var key in response) {
+	  							var obj = response[key];						   
+	  							if(key=="oslc_cm:Error")   {
+	  							   for (var i in obj) {
+	  								  if(i=="oslc_cm:statusCode")	{
+	  									  errcode = obj[i];
+	  								  }else if(i=="oslc_cm:message")	{
+	  									  errmsg = obj[i];
+	  								  } 
+	  							   }
+	  							   var errtext = "Error " + errcode + ": " + errmsg;
+	  							   alert(errtext);
+	  						   }
+	  						}
+	                  	}
+	                }
+				
+				dojo.xhrPost(xhrArgs);
+			}
+			
+        }
+
+		function respondWithPostMessage(/*string*/ response) {
+            window.parent.postMessage("oslc-response:" + response, "*");
+            //TODO if window is not parented window.postMessage to be used
+            //which shud be ignored
+         }
+
+		var init = function()	{			
+			createconnect = dojo.connect(dojo.byId("createbutton"), "onclick", createCR);
+			creatensendconnect = dojo.connect(dojo.byId("creatensendbutton"), "onclick", creatensendCR);			
+		}
+
+		var refresh = function()	{
+			dojo.query(".textclass").forEach(
+                    function(item, index, array)	{
+						item.value = "";
+					});
+		
+			dojo.query(".listclass").forEach(
+                    function(item, index, array)	{
+						item.selectedIndex = 0;
+					});
+			
+		}
+
+		dojo.addOnLoad(init);
+
+        
+        </script>
+    </head>
+    <body>
+        <h1><?php echo strtoupper($project); ?>: Creation UI for OSLC</h1><hr/>
+        <!-- <p>some details of the query and blah blah to be added here</p> -->
+        
+        <br>
+        <!-- <p><b>Project: <?php echo $project ?></b></p> -->
+        <table>
+        	     		
+        </table>
+        <table border=1>        
+        <tr><td>
+	        <table CELLSPACING=2 CELLPADDING=2 id="main">
+	        	<tr><td><fieldset>
+        		<legend><em>User</em></legend>
+        		<input id="usertext" type=text>
+        		</fieldset>
+        		</td><td><fieldset>
+        		<legend><em>Password</em></legend>
+        		<input id="passtext" type=password>
+        		</fieldset>
+        		</td>
+        		</tr>
+        		<tr><td width=50% valign="top">
+	        	<fieldset>
+        		<legend><em>Title *</em></legend>
+		        <table>
+					<tr>
+						<td><input class="textclass" id="titletext" size="40" type=text></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td>
+				<td width=50%>
+	        	<fieldset>
+        		<legend><em>Description *</em></legend>
+		        <table>
+					<tr>
+						<td><textarea class="textclass" id="descriptiontext" cols="40" rows="3"></textarea></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td width=50% valign="top">
+	        	<fieldset>
+        		<legend><em>Steps to reproduce</em></legend>
+		        <table>
+					<tr>
+						<td><textarea class="textclass" id="stepstext" cols="40" rows="3"></textarea></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td>
+				<td width=50%>
+	        	<fieldset>
+        		<legend><em>Additional information</em></legend>
+		        <table>
+					<tr>
+						<td><textarea class="textclass" id="additionalinfotext" cols="40" rows="3"></textarea></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td width=50%>
+	        	<fieldset>
+        		<legend><em>Category *</em></legend>
+		        <table>
+					<tr>
+						<td><select class="listclass" id="categorylist">
+							<option value="none selected" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['category_id'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+								
+							}
+							?>			  			
+							</select>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td>
+				<td width=50%>
+	        	<fieldset>
+        		<legend><em>Reproducibility</em></legend>
+		        <table>
+					<tr>
+						<td><select class="listclass" id="reproducibilitylist">
+							<option value="none selected" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['reproducibility'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+							}
+							?>			  			
+							</select>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td width=50%>
+	        	<fieldset>
+        		<legend><em>Priority</em></legend>
+		        <table>
+					<tr>
+						<td><select class="listclass" id="prioritylist">
+							<option value="none selected" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['priority'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+								
+							}
+							?>			  			
+							</select>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td>
+				<td width=50%>
+	        	<fieldset>
+        		<legend><em>Severity</em></legend>
+		        <table>
+					<tr>
+						<td><select class="listclass" id="severitylist">
+							<option value="none selected" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['severity'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+							}
+							?>			  			
+							</select>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<?php 
+				if(array_key_exists('product_version', $this->data))	{
+				?>
+				<tr><td width=50%>
+	        	<fieldset>
+        		<legend><em>Product Version</em></legend>
+		        <table>
+					<tr>
+						<td><select class="listclass" id="productversionlist">
+							<option value="none selected" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['product_version'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+								
+							}
+							?>			  			
+							</select>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td>
+				<td width=50%>
+	        	<fieldset>
+        		<legend><em>Target Version</em></legend>
+		        <table>
+					<tr>
+						<td><select class="listclass" id="targetversionlist">
+							<option value="none selected" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['target_version'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+							}
+							?>			  			
+							</select>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<?php 
+				}
+				?>
+				<tr><td >
+	        	<fieldset>
+        		<legend><em>View State</em></legend>
+		        <table>
+					<tr>
+						<td>
+						<?php 
+						foreach ($this->data['view_state'] as $value) {
+							echo '<input type="radio" id="vs'.$value.'" name="viewstate" value="'.$value.'"/>'.$value.'';
+						}
+						?>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td align="center">
+					<button id="createbutton">CREATE CHANGE REQUEST</button>
+				</td><td align="center">
+					<button id="creatensendbutton">CREATE CHANGE REQUEST AND ADD TO CLIENT</button>
+				</td></tr>
+			</table>
+		</td>
+		</tr>
+		</table>
+    </body>
+</html>
