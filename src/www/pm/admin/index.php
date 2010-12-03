@@ -79,6 +79,7 @@ if (getStringFromRequest('post_changes')) {
 		} else {
 			$feedback .= _('Subproject Inserted');
 			$warning_msg .= _("Please configure also the roles (by default, it's 'No Access')");
+			$g->normalizeAllRoles () ;
 		}
 
 	} else if ($add_cat) {

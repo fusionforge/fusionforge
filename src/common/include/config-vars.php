@@ -29,6 +29,9 @@ forge_define_config_item ('user_registration_restricted', 'core', $GLOBALS['sys_
 forge_set_config_item_bool ('user_registration_restricted', 'core') ;
 forge_define_config_item ('project_registration_restricted', 'core', $GLOBALS['sys_project_reg_restricted']) ;
 forge_set_config_item_bool ('project_registration_restricted', 'core') ;
+forge_define_config_item ('project_auto_approval', 'core', false) ;
+forge_set_config_item_bool ('project_auto_approval', 'core') ;
+forge_define_config_item ('project_auto_approval_user', 'core', 'admin') ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
 forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
 forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;

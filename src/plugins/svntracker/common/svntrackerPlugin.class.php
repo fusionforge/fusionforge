@@ -226,7 +226,7 @@ class svntrackerPlugin extends Plugin {
 	* @param    String  $params    The params of the Hook
 	*
 	*/
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $group_id, $G_SESSION, $HTML, $use_svntrackerplugin,$aid ;
 		if ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active

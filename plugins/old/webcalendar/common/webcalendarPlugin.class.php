@@ -57,7 +57,7 @@ class webcalendarPlugin extends Plugin {
 		$this->hooks[] = "list_roles_by_permission";
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_webcalendarplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab

@@ -32,19 +32,16 @@ require_once('common/include/PluginManager.class.php') ;
 setup_plugin_manager () ;
 session_set_admin () ;
 
-$res = db_query_params ('SELECT group_id, group_name FROM groups',
+$res = db_query_params ('SELECT role_id FROM pfo_role ORDER BY role_id',
 			array ());
 
 $rows=db_numrows($res);
 
 for ($i=0; $i<$rows; $i++) {
-	echo "Normalizing roles for group ".db_result($res,$i,'group_name')."\n" ;
-
-	$group = group_get_object(db_result($res,$i,'group_id')) ;
-
-	if ($group && !$group->isError()) {
-		$group->normalizeAllRoles () ;
-	}
+	$role = RBACEngine::getInstance()->getRoleById (db_result($res,$i,'role_id')) ;
+	echo "Normalizing role ".$role->getDisplayableName()."\n" ;
+	
+	$role->normalizeData() ;
 }
 
 ?>

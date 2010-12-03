@@ -37,7 +37,7 @@ class online_helpPlugin extends Plugin {
 		$this->hooks[] = "headermenu"; // to show up in the admin page fro group
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $G_SESSION,$HTML;
 		if ($hookname == "headermenu") {
 			$guide = util_make_url('/plugins/online_help/');

@@ -170,6 +170,7 @@ class PluginManager extends Error {
 						}
 					}
 					unset($this->plugins_data[$p_id]);
+					return false ;
 				}
 			}
 		}

@@ -44,7 +44,7 @@ abstract class SCMPlugin extends Plugin {
 		# scm_update_repolist
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $HTML ;
 		
 		switch ($hookname) {

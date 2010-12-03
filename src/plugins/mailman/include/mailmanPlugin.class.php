@@ -70,7 +70,7 @@ class mailmanPlugin extends Plugin {
 		return $this->pluginInfo;
 	}
 	
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_mailmanplugin,$G_SESSION,$HTML,$gfcommon,$gfwww,$gfplugins;
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab

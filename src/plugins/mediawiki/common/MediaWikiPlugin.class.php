@@ -51,7 +51,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		if (isset($params['group_id'])) {
 			$group_id=$params['group_id'];
 		} elseif (isset($params['group'])) {

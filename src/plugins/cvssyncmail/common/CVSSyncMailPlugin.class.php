@@ -31,7 +31,7 @@ class CVSSyncMailPlugin extends Plugin {
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_cvssyncmailplugin,$G_SESSION,$HTML;
 		$group_id=$params['group'];
 		if ($hookname == "groupisactivecheckbox") {

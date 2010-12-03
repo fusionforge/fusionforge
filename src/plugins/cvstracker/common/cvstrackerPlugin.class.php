@@ -258,7 +258,7 @@ class cvstrackerPlugin extends Plugin {
 	* @param    String  $params    The params of the Hook
 	*
 	*/
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $group_id, $G_SESSION, $HTML, $use_cvstrackerplugin,$aid ;
 		$use_cvstrackerplugin = getIntFromRequest('use_cvstrackerplugin');
 		if ($hookname == "groupisactivecheckbox") {

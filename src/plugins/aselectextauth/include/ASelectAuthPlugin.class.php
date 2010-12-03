@@ -29,7 +29,7 @@ class ASelectextauthPlugin extends Plugin {
 		$this->hooks[] = "session_set_entry";	
 	}
 	
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $HTML ;
 		
 		switch ($hookname) {

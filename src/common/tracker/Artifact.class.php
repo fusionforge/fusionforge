@@ -46,7 +46,6 @@
  * TOGETHER WITH THE SOFTWARE TO WHICH THE CONTRIBUTION RELATES OR ON A STAND
  * ALONE BASIS."
  */
-
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'tracker/ArtifactMessage.class.php';
 require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
@@ -179,8 +178,7 @@ class Artifact extends Error {
 			}
 		}
 	}
-
-
+	
 	/**
 	 *	create - construct a new Artifact in the database.
 	 *
@@ -189,12 +187,14 @@ class Artifact extends Error {
 	 *	@param	int		The ID of the user to which this artifact is to be assigned.
 	 *	@param	int		The artifacts priority.
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
+	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)	
 	 *  @return id on success / false on failure.
 	 */
-	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array()) {
+	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
 		//
 		//	make sure this person has permission to add artifacts
 		//
+		
 		if (!$this->ArtifactType->isPublic()) {
 			//
 			//	Only admins can post/modify private artifacts
@@ -211,16 +211,22 @@ class Artifact extends Error {
 		//
 		//	get the user_id
 		//
-		if (session_loggedin()) {
-			$user=user_getid();
+		
+		if(array_key_exists('user', $importData)){
+				$user = $importData['user'];
 		} else {
-			if ($this->ArtifactType->allowsAnon()) {
-				$user=100;
+			if (session_loggedin()) {
+				$user=user_getid();
 			} else {
-				$this->setError(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
-				return false;
+				if ($this->ArtifactType->allowsAnon()) {
+					$user=100;
+				} else {
+					$this->setError(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'));
+					return false;
+				}
 			}
-		}
+		}	
+			
 
 		//
 		//	data validation
@@ -254,7 +260,11 @@ class Artifact extends Error {
 		}
 
 		db_begin();
-
+		if (array_key_exists('time',$importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
+		}
 		$res = db_query_params ('INSERT INTO artifact 
 			(group_artifact_id,status_id,priority,
 			submitted_by,assigned_to,open_date,summary,details) 
@@ -264,7 +274,7 @@ class Artifact extends Error {
 					       $priority,
 					       $user,
 					       $assigned_to,
-					       time(),
+					       $time,
 					       htmlspecialchars($summary),
 					       htmlspecialchars($details))) ;
 		if (!$res) {
@@ -773,21 +783,68 @@ class Artifact extends Error {
 	 *
 	 *  @param	string	The name of the field in the database being modified.
 	 *  @param	string	The former value of this field.
+	 *  @param      array   Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
 	 *  @access private
 	 *  @return	boolean	success.
 	 */
-	function addHistory($field_name,$old_value) {
-		if (!session_loggedin()) {
-			$user=100;
+	function addHistory($field_name,$old_value, $importData = array()) {
+		if (array_key_exists('user', $importData)){
+			$user = $importData['user'];
 		} else {
-			$user=user_getid();
+			if (!session_loggedin()) {
+				$user=100;
+			} else {
+				$user=user_getid();
+			}
+		}
+		if (array_key_exists('time',$importData)){
+			$time = $importData['time'];
+		} else {
+			$time = time();
 		}
 		return db_query_params ('INSERT INTO artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $field_name,
 					       addslashes($old_value),
 					       $user,
-					       time())) ;
+					       $time)) ;
+	}
+
+	/**
+	 *      setStatus - set the status of this artifact.
+	 *
+	 *      @param  int             The artifact status ID.
+	 *      @param  int             Closing date if status = 1
+	 *
+	 *      @return boolean success.
+	 */
+	function setStatus($status_id, $closingTime=False) {
+		db_begin();
+		$qpa = db_construct_qpa (false, 'UPDATE artifact SET status_id=$1', array ($status_id)) ;
+		if ($closingTime && $status_id != 1) {
+			$time=$closingTime;
+			$qpa = db_construct_qpa ($qpa, ', close_date=$1 ', array ($time)) ;
+		}
+		$qpa = db_construct_qpa ($qpa,
+					 'WHERE artifact_id=$1 AND group_artifact_id=$2',
+					 array ($this->getID(), $artifact_type_id)) ;
+		$result=db_query_qpa($qpa);
+
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError('Error - update failed!'.db_error());
+			db_rollback();
+			return false;
+		} else {
+			if (!$this->fetchData($this->getID())) {
+				db_rollback();
+				return false;
+			}
+		}
+               
+               
+		//commiting changes
+		db_commit();
+		return true;
 	}
 
 	/**

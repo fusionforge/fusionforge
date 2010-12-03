@@ -57,7 +57,7 @@ class blocksPlugin extends Plugin {
 		$this->hooks[] = "blocks"; // to show up in the admin page fro group
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		if ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  blocks administration
 			$group_id = $params['group_id'];

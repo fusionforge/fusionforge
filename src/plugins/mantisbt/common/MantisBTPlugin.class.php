@@ -53,7 +53,7 @@ class MantisBTPlugin extends Plugin {
 		$this->hooks[] = "group_update";
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $G_SESSION, $HTML;
 		switch ($hookname) {
 			case "usermenu": {
