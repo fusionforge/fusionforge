@@ -394,13 +394,12 @@ echo '
 	<td align="right">';
 
 // Compute the list of fields which can be sorted.
-// Currently, only text & integer are taken (for simplicity only).
-	$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
-					    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
-					    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
-					    ARTIFACT_EXTRAFIELDTYPE_SELECT,
-					    ARTIFACT_EXTRAFIELDTYPE_RADIO,
-					    ARTIFACT_EXTRAFIELDTYPE_STATUS));
+$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
+				    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
+				    ARTIFACT_EXTRAFIELDTYPE_INTEGER,
+				    ARTIFACT_EXTRAFIELDTYPE_SELECT,
+				    ARTIFACT_EXTRAFIELDTYPE_RADIO,
+				    ARTIFACT_EXTRAFIELDTYPE_STATUS));
 $keys=array_keys($efarr);
 for ($k=0; $k<count($keys); $k++) {
 	$i=$keys[$k];
