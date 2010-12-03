@@ -93,9 +93,13 @@ class CodendiCmController extends CmController {
     public function getAction(){
         $params = $this->getRequest()->getParams();
 
-        // check authentication
-        if(!$this->retrieveAuthentication($login)){
+        // Check if Authorization header was set in the request.
+        $auth = $this->getRequest()->getHeader('Authorization');
+        if (strlen($auth) != 0) {
+            // check authentication
+            if(!$this->retrieveAuthentication($login)){
                 throw new Exception('Invalid authentication provided !');
+            }
         }
 
         // handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
