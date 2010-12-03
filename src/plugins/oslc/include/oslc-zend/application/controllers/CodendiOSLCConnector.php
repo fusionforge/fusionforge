@@ -273,10 +273,15 @@ class CodendiOSLCConnector extends OSLCConnector {
         $uM = UserManager::instance();
         $pM = ProjectManager::instance();
         $user = $uM->getCurrentUser();
-        $project_ids = $user->getProjects();
+        if($user->getId() != 0) {
+            $project_ids = $user->getProjects();
+        } else {
+            return $this->createProjectsArray($pM->getAllPublicProjects()); 
+        }
         foreach($project_ids as $id) {
-            $projects[$id] = $pm->getProject($id);
-        } 
+            $projects[$id] = $pM->getProject($id);
+        }
+        $uM->logout(); 
         return $this->createProjectsArray($projects);
 	}
 	
