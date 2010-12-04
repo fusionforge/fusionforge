@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7671 2010-09-02 20:07:31Z vargenau $');
+// $Id: themeinfo.php 7751 2010-12-04 11:49:18Z vargenau $;
 
 require_once('lib/WikiTheme.php');
 require_once('themes/wikilens/themeinfo.php');
@@ -42,19 +42,19 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens {
         // Display a warning banner for internal users when the wiki is opened
         // to external users.
         if (method_exists($project, 'getIsExternal') && $project->getIsExternal()) {
-        	$external_user = false;
-        	if (session_loggedin()) {
-        		$user = session_get_user();
-        		$external_user = $user->getIsExternal();
-        	}
-        	if (!$external_user) {
-	        	$page = $request->getPage();
-	        	if ($page->get('external')) {
-	    			$external_msg = _("This page is external.");
-	    		}
-	    		echo $HTML->warning_msg(_("This project is shared with third-party users (non Alcatel-Lucent users).") .
-	    								(isset($external_msg) ? ' ' . $external_msg : ''));
-			}
+            $external_user = false;
+            if (session_loggedin()) {
+               $user = session_get_user();
+               $external_user = $user->getIsExternal();
+            }
+            if (!$external_user) {
+                $page = $request->getPage();
+                if ($page->get('external')) {
+                    $external_msg = _("This page is external.");
+                }
+                echo $HTML->warning_msg(_("This project is shared with third-party users (non Alcatel-Lucent users).") .
+                                        (isset($external_msg) ? ' ' . $external_msg : ''));
+            }
         }
     }
 
@@ -67,7 +67,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens {
 
     function initGlobals() {
         global $request;
-		static $already = 0;
+        static $already = 0;
         if (!$already) {
             $script_url = deduce_script_name();
             $script_url .= '/'. $GLOBALS['group_name'] ;
@@ -78,13 +78,13 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens {
             $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("wikilens.js"))));
             $js = "var data_path = '". javascript_quote_string(DATA_PATH) ."';\n"
             // Temp remove pagename because of XSS warning
-            //	."var pagename  = '". javascript_quote_string($pagename) ."';\n"
+            //  ."var pagename  = '". javascript_quote_string($pagename) ."';\n"
                 ."var script_url= '". javascript_quote_string($script_url) ."';\n"
                 ."var stylepath = data_path+'/".javascript_quote_string($this->_theme)."/';\n"
                 ."var folderArrowPath = '".javascript_quote_string($folderArrowPath)."';\n"
                 ."var use_path_info = " . (USE_PATH_INFO ? "true" : "false") .";\n";
             $this->addMoreHeaders(JavaScript($js));
-	    $already = 1;
+            $already = 1;
         }
     }
     function load() {

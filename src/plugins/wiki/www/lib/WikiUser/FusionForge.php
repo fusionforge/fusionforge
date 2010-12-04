@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: FusionForge.php 7715 2010-10-14 15:49:22Z vargenau $');
+// rcs_id('$Id: FusionForge.php 7750 2010-12-04 11:40:09Z vargenau $');
 /*
  * Copyright (C) 2006 Alain Peyrat
  *
@@ -43,13 +43,13 @@ class _FusionForgePassUser extends _PassUser {
     }
 
     function userExists() {
-            global $group_id;
+        global $group_id;
 
         // Mapping (PhpWiki vs FusionForge) performed is:
         //     ANON  for non logged or non member
         //     USER  for member of the project.
         //     ADMIN for member having admin rights
-        if (session_loggedin()){
+        if (session_loggedin()) {
 
             // Get project object (if error => ANON)
             $project = group_get_object($group_id);
@@ -83,8 +83,8 @@ class _FusionForgePassUser extends _PassUser {
                 return $this;
             }
         }
-               $this->_level = WIKIAUTH_ANON;
-               return false;
+        $this->_level = WIKIAUTH_ANON;
+        return false;
     }
 
     function checkPass($submitted_password) {
