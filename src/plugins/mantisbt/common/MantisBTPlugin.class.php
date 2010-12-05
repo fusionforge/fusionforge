@@ -36,21 +36,21 @@ class MantisBTPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "mantisbt" ;
 		$this->text = "MantisBT" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links"; //to make a link to the user's personal part of the plugin
-		$this->hooks[] = "usermenu" ;
-		$this->hooks[] = "groupmenu" ; // To put into the project tabs
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
-		$this->hooks[] = "userisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
-		$this->hooks[] = "change_cal_permission";
-		$this->hooks[] = "change_cal_mail";
-		$this->hooks[] = "add_cal_link_father";
-		$this->hooks[] = "del_cal_link_father";
-		$this->hooks[] = "group_approved";
-		$this->hooks[] = "group_delete";
-		$this->hooks[] = "group_update";
+		$this->_addHook('user_personal_links'); //to make a link to the user's personal part of the plugin
+		$this->_addHook('usermenu');
+		$this->_addHook('groupmenu'); // To put into the project tabs
+		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook('groupisactivecheckboxpost'); //
+		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account
+		$this->_addHook('userisactivecheckboxpost'); //
+		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
+		$this->_addHook('change_cal_permission');
+		$this->_addHook('change_cal_mail');
+		$this->_addHook('add_cal_link_father');
+		$this->_addHook('del_cal_link_father');
+		$this->_addHook('group_approved');
+		$this->_addHook('group_delete');
+		$this->_addHook('group_update');
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -59,7 +59,7 @@ class MantisBTPlugin extends Plugin {
 			case "usermenu": {
 				$text = $this->text; // this is what shows in the tab
 				if ($G_SESSION->usesPlugin($this->name)) {
-					$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
+					$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 					echo $HTML->PrintSubMenu(array($text), array('/plugins/mantisbt/index.php' . $param ));
 				}
 				break;
@@ -72,7 +72,7 @@ class MantisBTPlugin extends Plugin {
 				}
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][]=$this->text;
-					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&id=' . $group_id . "&pluginname=" . $this->name;
+					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&id=' . $group_id . '&pluginname=' . $this->name;
 				}
 				if ($params['toptab'] == $this->name) {
 					$params['selected']=(count($params['TITLES'])-1);
