@@ -60,7 +60,7 @@ class MantisBTPlugin extends Plugin {
 				$text = $this->text; // this is what shows in the tab
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
-					echo ' | ' . $HTML->PrintSubMenu (array ($text), array ('/plugins/mantisbt/index.php' . $param ));
+					echo $HTML->PrintSubMenu(array($text), array('/plugins/mantisbt/index.php' . $param ));
 				}
 				break;
 			}
@@ -77,12 +77,6 @@ class MantisBTPlugin extends Plugin {
 				if ($params['toptab'] == $this->name) {
 					$params['selected']=(count($params['TITLES'])-1);
 				}
-				break;
-			}
-			case "groupisactivecheckboxpost": {
-				// update users and roles in mantis
-
-
 				break;
 			}
 			case "user_personal_links": {
@@ -121,7 +115,7 @@ class MantisBTPlugin extends Plugin {
 						$this->addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
 					}
 					// mise a jour des utilisateurs avec les roles
-					$members = array ();
+					$members = array();
 					foreach($group->getMembers() as $member){
 						$members[] = $member->data_array['user_name'];
 					}
@@ -356,10 +350,7 @@ class MantisBTPlugin extends Plugin {
 		$returned = false;
 		global $role;
 
-		// recuperation de id mantis
-		$idMantis = getIdProjetMantis($groupObject->getID());
-
-		// @TODO corriger inclusion bug
+		// @TODO put that in config file ?
 		if ($role == null){
 			$role['Manager'] = 70;
 			$role['Concepteur'] = 55;
@@ -367,7 +358,7 @@ class MantisBTPlugin extends Plugin {
 			$role['Rapporteur'] = 55;
 		}
 
-		// etat forge
+		// @TODO : make a robust function there based on RBAC ?
 		$stateForge = array();
 		foreach ($members as $key => $member){
 			$resUserRole = db_query_params('SELECT role.role_name
@@ -385,39 +376,16 @@ class MantisBTPlugin extends Plugin {
 				$stateForge[$member]['role'] = $row['role_name'];
 			}
 		}
-		// on supprime les precedentes relations dans mantis
-		$dbConnection = db_connect_host(forge_get_config('db_name','mantisbt'), forge_get_config('db_user','mantisbt'), forge_get_config('db_password','mantisbt'), forge_get_config('db_host','mantisbt'), forge_get_config('db_port','mantisbt'));
-		if(!$dbConnection) {
-			$groupObject->setError('updateUsersProjectMantis::'. _('Error : Could not open connection') . db_error($dbConnection));
-			db_rollback($dbConnection);
-		}else{
-			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
-			if (!$result){
-				echo 'updateUsersProjectMantis::Error '. _('Unable to clean roles in Mantisbt');
-			}else{
-				foreach($stateForge as $member => $array){
 
-					// recuperation de l'id user dans mantis
-					$resultIdUser = db_query_params('SELECT mantis_user_table.id FROM mantis_user_table WHERE mantis_user_table.username = $1',
-								array($member), '-1', 0, $dbConnection);
-
-					$rowIdUser = db_fetch_array($resultIdUser);
-					$idUser = $rowIdUser['id'];
-					// insertion de la relation
-					$resultInsert = pg_insert($dbConnection,
-									"mantis_project_user_list_table",
-									array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
-								);
-					if (!isset($resultInsert)) {
-						echo 'updateUsersProjectMantis::Error '. _('Unable to update roles in mantisbt');
-					} else {
-						$returned = true;
-					}
-				}
+		if ($this->__getDBType() === "pgsql") {
+			if ($this->__updateUsersProjectMantisPgsql($groupObject, $stateForge)) {
+				$returned = true;
 			}
 		}
 		return $returned;
 	}
+
+
 
 	function refreshHierarchyMantisBt(){
 		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
@@ -451,6 +419,67 @@ class MantisBTPlugin extends Plugin {
 		return true;
 	}
 
+	/**
+	 * __updateUsersProjectMantisPgsql - update Users for this project in PostgreSQL DB
+	 *
+	 * @param	object	this Group object
+	 * @param	array	the role of this forge
+	 * @return	boolean	success or not
+	 * @private
+	 */
+	function __updateUsersProjectMantisPgsql(&$groupObject, $stateForge) {
+		$returned = false;
+		$dbConnection = db_connect_host(forge_get_config('db_name','mantisbt'), forge_get_config('db_user','mantisbt'), forge_get_config('db_password','mantisbt'), forge_get_config('db_host','mantisbt'), forge_get_config('db_port','mantisbt'));
+		if(!$dbConnection) {
+			$groupObject->setError('updateUsersProjectMantis::'. _('Error : Could not open connection') . db_error($dbConnection));
+			db_rollback($dbConnection);
+		}else{
+			$idMantis = getIdProjetMantis($groupObject->getID());
+			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
+			if (!$result){
+				echo 'updateUsersProjectMantis::Error '. _('Unable to clean roles in Mantisbt');
+			}else{
+				foreach($stateForge as $member => $array){
+
+					$resultIdUser = db_query_params('SELECT mantis_user_table.id FROM mantis_user_table WHERE mantis_user_table.username = $1',
+								array($member), '-1', 0, $dbConnection);
+
+					$rowIdUser = db_fetch_array($resultIdUser);
+					$idUser = $rowIdUser['id'];
+
+					$resultInsert = pg_insert($dbConnection,
+									"mantis_project_user_list_table",
+									array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
+								);
+					if (!isset($resultInsert)) {
+						echo 'updateUsersProjectMantis::Error '. _('Unable to update roles in mantisbt');
+					} else {
+						$returned = true;
+					}
+				}
+			}
+		}
+		return $returned;
+	}
+
+	/*
+	 * __getDBType - return the type of DB used for mantisbt
+	 *
+	 * @return	string	type of the DB
+	 * @private
+	 */
+	function __getDBType() {
+		switch (forge_get_config('db_name','mantisbt')) {
+			case "pgsql": {
+				return "pgsql";
+				break;
+			}
+			default: {
+				return false;
+				break;
+			}
+		}
+	}
 }
 
 function getIdProjetMantis($idProjet){

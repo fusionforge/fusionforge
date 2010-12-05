@@ -1803,6 +1803,7 @@ src/plugins/mantisbt/common/mantisbt-init.php -text
 src/plugins/mantisbt/controler/filter.php -text
 src/plugins/mantisbt/controler/filter_roadmap.php -text
 src/plugins/mantisbt/db/mantisbt-init.sql -text
+src/plugins/mantisbt/etc/mantisbt.ini -text
 src/plugins/mantisbt/etc/plugins/mantisbt/config.php -text
 src/plugins/mantisbt/view/addAttachment.php -text
 src/plugins/mantisbt/view/addIssue.php -text
