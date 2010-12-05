@@ -27,7 +27,7 @@
 /**
  * html_feedback_top() - Show the feedback output at the top of the page.
  *
- * @param		string	The feedback.
+ * @param	string	The feedback.
  */
 function html_feedback_top($feedback) {
 	global $HTML;
@@ -37,7 +37,7 @@ function html_feedback_top($feedback) {
 /**
  * html_warning_top() - Show the warning output at the top of the page.
  *
- * @param		string	The warning message.
+ * @param	string	The warning message.
  */
 function html_warning_top($msg) {
 	global $HTML;
@@ -47,7 +47,7 @@ function html_warning_top($msg) {
 /**
  * html_error_top() - Show the error output at the top of the page.
  *
- * @param		string	The error message.
+ * @param	string	The error message.
  */
 function html_error_top($msg) {
 	global $HTML;
@@ -57,23 +57,23 @@ function html_error_top($msg) {
 /**
  * make_user_link() - Make a username reference into a link to that users User page on SF.
  *
- * @param		string	The username of the user to link.
+ * @param	string	The username of the user to link.
  */
 function make_user_link($username,$displayname='') {
-    if (empty($displayname))
-        $displayname = $username;
+	if (empty($displayname))
+		$displayname = $username;
 
 	if (!strcasecmp($username,'Nobody') || !strcasecmp($username,'None')) {
 		return $username;
 	} else {
-		return '<a href="/users/'.$username.'">'.$displayname.'</a>' ;
+		return '<a href="/users/'.$username.'">'.$displayname.'</a>';
 	}
 }
 
 /**
  * html_feedback_top() - Show the feedback output at the bottom of the page.
  *
- * @param		string	The feedback.
+ * @param	string	The feedback.
  */
 function html_feedback_bottom($feedback) {
 	global $HTML;
@@ -83,8 +83,8 @@ function html_feedback_bottom($feedback) {
 /**
  * html_blankimage() - Show the blank spacer image.
  *
- * @param		int		The height of the image
- * @param		int		The width of the image
+ * @param	int	The height of the image
+ * @param	int	The width of the image
  */
 function html_blankimage($height,$width) {
 	return '<img src="/images/blank.png" width="' . $width . '" height="' . $height . '" alt="" />';
@@ -93,10 +93,10 @@ function html_blankimage($height,$width) {
 /**
  * html_abs_image() - Show an image given an absolute URL.
  *
- * @param		string	URL
- * @param		int	width of the image
- * @param		int 	height of the image
- * @param		array	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
+ * @param	string	URL
+ * @param	int	width of the image
+ * @param	int 	height of the image
+ * @param	array	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
  */
 function html_abs_image($url, $width, $height, $args) {
 	$return = ('<img src="' . $url . '"');
@@ -120,13 +120,13 @@ function html_abs_image($url, $width, $height, $args) {
 /**
  * html_image() - Build an image tag of an image contained in $src
  *
- * @param		string	The source location of the image
- * @param		int		The width of the image
- * @param		int		The height of the image
- * @param		array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
- * @param		bool	DEPRECATED
+ * @param	string	The source location of the image
+ * @param	int	The width of the image
+ * @param	int	The height of the image
+ * @param	array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
+ * @param	bool	DEPRECATED
  */
-function html_image($src,$width='',$height='',$args=array(),$display=1) {
+function html_image($src, $width='', $height='', $args=array(), $display=1) {
 	global $HTML;
 
 	if (method_exists($HTML, 'html_image')) {
@@ -139,63 +139,63 @@ function html_image($src,$width='',$height='',$args=array(),$display=1) {
 /**
  * html_get_language_popup() - Pop up box of supported languages.
  *
- * @param		string	The title of the popup box.
- * @param		string	Which element of the box is to be selected.
+ * @param	string	The title of the popup box.
+ * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_language_popup ($title='language_id',$selected='xzxz') {
-	$res = db_query_params ('SELECT * FROM supported_languages ORDER BY name ASC',
-			array ());	
-	return html_build_select_box ($res,$title,$selected,false);
+function html_get_language_popup($title='language_id', $selected='xzxz') {
+	$res = db_query_params('SELECT * FROM supported_languages ORDER BY name ASC',
+			array());
+	return html_build_select_box($res, $title, $selected, false);
 }
 
 /**
  * html_get_theme_popup() - Pop up box of supported themes.
  *
- * @param		string	The title of the popup box.
- * @param		string	Which element of the box is to be selected.
+ * @param	string	The title of the popup box.
+ * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
-	$res=db_query_params ('SELECT theme_id, fullname FROM themes WHERE enabled=true',
+function html_get_theme_popup($title='theme_id', $selected='xzxz') {
+	$res=db_query_params('SELECT theme_id, fullname FROM themes WHERE enabled=true',
 			array());
 	$nbTheme = db_numrows($res);
 	if($nbTheme < 2) {
 		return("");
 	}
 	else {
-		return html_build_select_box($res,$title,$selected,false);
+		return html_build_select_box($res, $title, $selected, false);
 	}
 }
 
 /**
  * html_get_ccode_popup() - Pop up box of supported country_codes.
  *
- * @param		string	The title of the popup box.
- * @param		string	Which element of the box is to be selected.
+ * @param	string	The title of the popup box.
+ * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_ccode_popup ($title='ccode',$selected='xzxz') {
-	$res=db_query_params ('SELECT ccode,country_name FROM country_code ORDER BY country_name',
+function html_get_ccode_popup($title='ccode', $selected='xzxz') {
+	$res=db_query_params('SELECT ccode,country_name FROM country_code ORDER BY country_name',
 			array());
-	return html_build_select_box ($res,$title,$selected,false);
+	return html_build_select_box($res, $title, $selected, false);
 }
 
 /**
  * html_get_timezone_popup() - Pop up box of supported Timezones.
  * Assumes you have included Timezones array file.
  *
- * @param		string	The title of the popup box.
- * @param		string	Which element of the box is to be selected.
+ * @param	string	The title of the popup box.
+ * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
+function html_get_timezone_popup($title='timezone', $selected='xzxz') {
 	global $TZs;
 	if ($selected == 'xzxzxzx') {
-	  $r = file ('/etc/timezone');
-	  $selected = str_replace ("\n", '', $r[0]);
+	  $r = file('/etc/timezone');
+	  $selected = str_replace("\n", '', $r[0]);
 	}
-	return html_build_select_box_from_arrays ($TZs,$TZs,$title,$selected,false);
+	return html_build_select_box_from_arrays($TZs, $TZs, $title, $selected, false);
 }
 
 
