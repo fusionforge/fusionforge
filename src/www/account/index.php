@@ -3,7 +3,7 @@
  * User account main page - show settings with means to change them
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -29,14 +29,14 @@ require_once $gfcommon.'include/timezones.php';
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 
-session_require_login () ;
+session_require_login();
 
 // get global users vars
 $u =& user_get_object(user_getid());
 if (!$u || !is_object($u)) {
-    exit_error(_('Could Not Get User'));
+	exit_error(_('Could Not Get User'));
 } elseif ($u->isError()) {
-    exit_error($u->getErrorMessage(),'my');
+	exit_error($u->getErrorMessage(),'my');
 }
 
 if (getStringFromRequest('submit')) {
@@ -89,6 +89,11 @@ if (getStringFromRequest('submit')) {
 	if ($refresh) {
 		session_redirect($refresh_url);
 	}
+}
+
+$hookParams['user']= user_get_object(user_getid());
+if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
+	plugin_hook("userisactivecheckboxpost", $hookParams);
 }
 
 $title = _('Account Maintenance');
@@ -215,10 +220,10 @@ echo $HTML->boxTop(_('Account Maintenance'));
 
 <?php
 if (forge_get_config('use_jabber')) {
-    echo '<tr valign="top">
+	echo '<tr valign="top">
 <td>'. _('Jabber Address:') .'</td>
 <td>
-    <input size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'" /><p />
+	<input size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'" /><p />
 	<input type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'checked="CHECKED"' : '' ).' />
 	'._('Send auto-generated notices only to my Jabber address').'.
 </td></tr>';
@@ -250,16 +255,11 @@ echo $HTML->boxTop(_('Preferences')); ?>
 <?php if (forge_get_config('use_ratings')) { ?>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
-		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId())); 
-} ?>	
+		<?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId()));
+} ?>
 </td></tr>
 <?php 
-$hookParams['user']= user_get_object(user_getid());
-if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
-	plugin_hook("userisactivecheckboxpost", $hookParams);
-} else {
-	plugin_hook("userisactivecheckbox", $hookParams);
-}
+plugin_hook("userisactivecheckbox", $hookParams);
 ?>
 <tr><td>
 
