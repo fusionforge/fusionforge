@@ -83,9 +83,9 @@ if (getStringFromRequest('update')) {
 					$result = unlink(forge_get_config('config_path'). '/plugins/'.$pluginname); // the apache group or user should have write perms in forge_get_config('config_path')/plugins folder...
 					if (!$result) {
 						$feedback .= _('Success, config not deleted');
-					}			
+					}
 				}
-			}			
+			}
 		}
 	} else {
 
@@ -112,7 +112,7 @@ if (getStringFromRequest('update')) {
 					}
 				}
 			}
-				
+
 			// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
 			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/etc/plugins/' . $pluginname)) {
 				// The apache group or user should have write perms in /etc/gforge/plugins folder...
@@ -134,7 +134,7 @@ if (getStringFromRequest('update')) {
 						$db_init = 0;
 					}
 				}
-					
+
 				if ($db_init) {
 					$res = db_query_from_file($db_init);
 					
@@ -146,12 +146,10 @@ if (getStringFromRequest('update')) {
 					} else {
 						$error_msg .= _('Initialisation error<br />Database said: ').db_error();
 					}
-				}	
-				//we check for a php script	
+				}
+				//we check for a php script
 				if (is_file(forge_get_config('plugins_path') . '/' . $pluginname . '/script/' . $pluginname . '-init.php')) {
-					include(forge_get_config('plugins_path') . '/' . $pluginname . '/script/' . $pluginname . '-init.php');		
-				} else {
-					
+					include(forge_get_config('plugins_path') . '/' . $pluginname . '/script/' . $pluginname . '-init.php');
 				}
 			}
 		}
@@ -189,7 +187,7 @@ $title_arr = array( _('Plugin Name'),
 		    _('Action'),
 		    _('Run Init Script?'),
 		    _('Users Using it'),
-				_('Projects Using it'),);
+		    _('Projects Using it'),);
 echo $HTML->listTableTop($title_arr);
 
 // Get the activated plugins.
@@ -211,12 +209,20 @@ $filelist = array();
 $has_init = array();
 if($handle = opendir(forge_get_config('plugins_path'))) {
 	while (($filename = readdir($handle)) !== false) {
-		if ($filename!='..' && $filename!='.' && $filename!=".svn" && $filename!="CVS" &&
+		if ($filename != '..' && $filename != '.' && $filename != ".svn" && $filename != "CVS" &&
 		    is_dir(forge_get_config('plugins_path').'/'.$filename) &&
 		    !in_array($filename, $plugins_disabled)) {
-
-			$filelist[] = $filename;
-			$has_init[$filename] = is_dir(forge_get_config('plugins_path').'/'.$filename.'/db');
+			$addPlugin = 1;
+			if (forge_get_config('plugin_status', $filename) !== 'valid') {
+				$addPlugin = 0;
+			}
+			if (forge_get_config('installation_environment') === 'development') {
+				$addPlugin = 1;
+			}
+			if ($addPlugin) {
+				$filelist[] = $filename;
+				$has_init[$filename] = is_dir(forge_get_config('plugins_path').'/'.$filename.'/db');
+			}
 		}
 	}
 	closedir($handle);
@@ -278,8 +284,9 @@ foreach ($filelist as $filename) {
 		$groups = _("none");
 	}
 
+	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
-		'<td>'. $filename.'</td>'.
+		'<td title="'. $title .'" >'. $filename.'</td>'.
 		'<td class="'.$status.'" style="text-align:center">'. $msg .'</td>'.
 		'<td style="text-align:center;">'. $link .'</td>'.
 		'<td style="text-align:center;">'. $init .'</td>'.
