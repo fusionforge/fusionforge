@@ -1,5 +1,5 @@
 <?php
-//rcs_id('$Id: PageList.php 7710 2010-10-01 11:45:58Z vargenau $');
+//rcs_id('$Id: PageList.php 7740 2010-11-11 14:45:18Z rurban $');
 /* Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -1040,7 +1040,7 @@ class PageList {
         // expand wildcards from list of all pages
         if (preg_match('/[\?\*]/', $input) or substr($input,0,1) == "^") {
             include_once("lib/TextSearchQuery.php");
-            $search = new TextSearchQuery(str_replace(",", " ", $input), true,
+            $search = new TextSearchQuery(str_replace(",", " or ", $input), true,
                                          (substr($input,0,1) == "^") ? 'posix' : 'glob');
             $dbi = $GLOBALS['request']->getDbh();
             $iter = $dbi->titleSearch($search, $sortby, $limit, $exclude);
