@@ -33,6 +33,7 @@ class Plugin extends Error {
 	/**
 	 * Plugin() - constructor
 	 *
+	 * @param	int	id
 	 */
 	function Plugin($id=0) {
 		$this->Error();
@@ -51,7 +52,7 @@ class Plugin extends Error {
 	/**
 	 * _addHooks() - add a hook to the list of hooks.
 	 *
-	 * @return	string
+	 * @return	string	name of the added hook
 	 */
 	function _addHook($name) {
 		return $this->hooks[]=$name;
@@ -91,7 +92,7 @@ class Plugin extends Error {
 	 * Added for Codendi compatibility
 	 * getPluginPath() - get installation dir for the plugin.
 	 *
-	 * @return the directory where the plugin should be linked.
+	 * @return	string	the directory where the plugin should be linked.
 	 */
 	function getPluginPath() {
 		if (isset($this->installdir) && $this->installdir)
@@ -128,11 +129,16 @@ class Plugin extends Error {
 		
 		for ($i=0; $i<$rows; $i++) {
 			$group_id = db_result($res,$i,'group_id');
-			$result[] = group_get_object ($group_id);
+			$result[] = group_get_object($group_id);
 		}
 		return $result;
 	}
 
+	/*
+	 * getThemePath - returns the directory of the theme for this plugin
+	 *
+	 * @return	string	the directory
+	 */
 	function getThemePath(){
 		return util_make_url('plugins/'.$this->name.'/themes/default');
 	}
