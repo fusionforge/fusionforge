@@ -153,15 +153,18 @@ class Plugin extends Error {
 		$display = 1;
 		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
+
+		$group = group_get_object($params['group']);
+
 		if ( forge_get_config('plugin_status',$this->name) !== 'valid' ) {
 			$display = 0;
 			$imgStatus = 'plugin_status_broken.png';
 		}
-		if ( forge_get_config('installation_environment') === 'development' ) {
+		if ( forge_get_config('installation_environment') === 'development' || $group->usesPlugin($this->name)) {
 			$display = 1;
 		}
+
 		if ($display) {
-			$group = group_get_object($params['group']);
 			$flag = strtolower('use_'.$this->name);
 			echo '<tr>';
 			echo '<td>';
@@ -201,21 +204,23 @@ class Plugin extends Error {
 		$display = 1;
 		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
+
+		$user = $params['user'];
+
 		if ( forge_get_config('plugin_status', $this->name) !== 'valid' ) {
 			$display = 0;
 			$imgStatus = 'plugin_status_broken.png';
 		}
-		if ( forge_get_config('installation_environment') === 'development' ) {
+		if ( forge_get_config('installation_environment') === 'development' || $user->usesPlugin($this->name)) {
 			$display = 1;
 		}
 		if ($display) {
-			$user = $params['user'];
 			$flag = strtolower('use_'.$this->name);
 			echo '<tr>';
 			echo '<td>';
 			echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
 			// checked or unchecked?
-			if ( $user->usesPlugin($this->name)) {
+			if ($user->usesPlugin($this->name)) {
 				echo 'checked="checked"';
 			}
 			echo ' />    '. sprintf(_('Use %s Plugin'), $this->text);
