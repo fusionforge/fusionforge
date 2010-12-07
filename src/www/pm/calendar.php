@@ -44,7 +44,7 @@ $type = getStringFromRequest('type');
 
 // Some sanity checks first.
 if ($year && ($year < 1990 || $year > 2020)) {
-	exit_error(_('Invalid year: Not between 1990 and 2000'),'pm');
+	exit_error(_('Invalid year: Not between 1990 and 2020'),'pm');
 }
 
 if ($month && ($month < 1 || $month > 12)) {
