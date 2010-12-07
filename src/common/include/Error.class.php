@@ -76,6 +76,7 @@ class Error {
 		$this->error_state=true;
 		$this->error_message=$string;
 		$this->error_code=$code;
+		return false;
 	}
 
 	/**

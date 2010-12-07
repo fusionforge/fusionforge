@@ -203,15 +203,10 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	}
 
 	protected function activatePlugin($pluginName) {
+		$this->switchUser('admin');
 		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=deactivate');
 		$this->waitForPageToLoad("30000");
-		$this->open( ROOT );
-		$this->waitForPageToLoad("30000");
-		$this->login('admin');
-		$this->clickAndWait("link=Site Admin");
-		$this->clickAndWait("link=Plugin Manager");
-		$this->click($pluginName);
-		$this->click("//a[contains(@href, \"javascript:change('".ROOT."/admin/pluginman.php?update=$pluginName&action=activate','$pluginName');\")]");
+		$this->open( ROOT . '/admin/pluginman.php?update='.$pluginName.'&action=activate');
 		$this->waitForPageToLoad("30000");
 		$this->logout();
 	}

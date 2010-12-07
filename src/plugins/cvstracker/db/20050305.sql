@@ -1,3 +1,5 @@
+-- TRUE? SELECT data_type = 'date' FROM information_schema.columns WHERE table_name = 'plugin_cvstracker_data_master' AND column_name='cvs_date';
+
 DROP INDEX plugin_cvstracker_group_artifact_id;
 
 ALTER TABLE plugin_cvstracker_data_master ADD COLUMN cvs_date2 int4;

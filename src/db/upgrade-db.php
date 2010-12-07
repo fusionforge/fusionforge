@@ -1,6 +1,10 @@
 #! /usr/bin/php
 <?php
 
+// upgrade-db.php          => Upgrade the main database.
+// upgrade-db.php all      => Upgrade the main database and active plugins.
+// upgrade-db.php <plugin> => Upgrade only the database of the given active plugin.
+
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
@@ -72,35 +76,58 @@ if (!apply_fixes($version)) {
 	exit();
 }
 
-$scripts = get_scripts($db_path);
-
-foreach ($scripts as $script) {
-	if ((int) $script['date'] > $date) {
-		$res = db_query_params ('SELECT * FROM database_changes WHERE filename=$1',
-					array ("{$script['filename']}")) ;
-		if (!$res) {
-			// error
-			show("ERROR-2: ".db_error()."\n");
-			exit();
-		} else if (db_numrows($res) == 0) {
-			show("Running script: {$script['filename']}\n");
-			$result = run_script($script);
-			if ($result) {
-				$res = db_query_params ('INSERT INTO database_changes (filename) VALUES ($1)',
-							array ("{$script['filename']}")) ;
-				if (!$res)
-				{
-					show("ERROR-3: ".db_error()."\n");
+// Upgrade main database if no argument or if all)
+if ($argc == 1 || $argv[1] == 'all') {
+	$scripts = get_scripts($db_path);
+	foreach ($scripts as $script) {
+		if ((int) $script['date'] > $date) {
+			$res = db_query_params ('SELECT * FROM database_changes WHERE filename=$1',
+						array ("{$script['filename']}")) ;
+			if (!$res) {
+				// error
+				show("ERROR-2: ".db_error()."\n");
+				exit();
+			} else if (db_numrows($res) == 0) {
+				show("Running script: {$script['filename']}\n");
+				$result = run_script($script);
+				if ($result) {
+					$res = db_query_params ('INSERT INTO database_changes (filename) VALUES ($1)',
+								array ("{$script['filename']}")) ;
+					if (!$res)
+					{
+						show("ERROR-3: ".db_error()."\n");
+						exit();
+					}
+				} else {
+					// error
 					exit();
 				}
 			} else {
-				// error
-				exit();
+	//			show("Skipping script: {$script['filename']}\n");
 			}
-		} else {	
-			show("Skipping script: {$script['filename']}\n");
 		}
 	}
+}
+
+// Upgrade activated plugins.
+if ($argc == 2) {
+	require_once $gfcommon.'include/DatabaseInstaller.class.php';
+	$plugins = get_installed_plugins();
+	foreach ($plugins as $plugin) {
+		if ($argv[1] == 'all' || $argv[1] == $plugin) {
+			$di = new DatabaseInstaller($plugin, dirname($db_path) . '/plugins/' . $plugin . '/db');
+			echo $di->upgrade();
+		}
+	}
+}
+
+function get_installed_plugins() {
+	$plugins = array();
+	$res = db_query_params ('SELECT plugin_name FROM plugins', array ());
+	while ($row = db_fetch_array($res)) {
+		$plugins[] = $row['plugin_name'];
+	}
+	return $plugins;
 }
 
 function get_scripts($dir) {
