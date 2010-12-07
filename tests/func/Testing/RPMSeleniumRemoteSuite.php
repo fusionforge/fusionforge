@@ -31,6 +31,8 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 
 		// Install a fake sendmail to catch all outgoing emails.
 		system("ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php# /etc/gforge/local.inc'");
+
+		system("ssh root@".HOST." 'service crond stop'");
 	}
 }
 ?>
