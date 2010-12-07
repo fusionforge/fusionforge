@@ -144,7 +144,7 @@ if (!session_loggedin()) {
                										$taskid = $taskinfo['project_task_id']; 
 								                	$projectid = $taskinfo['group_project_id'];
 									        	$groupid   = $taskinfo['group_id'];
-											$g =& group_get_object($groupid);
+											$g = group_get_object($groupid);
 											$pg = new ProjectGroup($g, $projectid);
 											echo $pg->getName().'<br/>';
      										        $summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
