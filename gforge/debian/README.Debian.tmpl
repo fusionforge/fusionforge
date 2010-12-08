@@ -4,7 +4,7 @@
 @FORGENAME@ is packaged for Debian, and was formerly packaged under
 the 'gforge' source package name. Even though a transition is in
 progress towards renaming it widely, only high-level meta-packages are
-named with the '@FORGENAME@' prefix. The rest of the packages are
+named with the '@PACKAGE@' prefix. The rest of the packages are
 still named with the 'gforge-' prefix, so expect most paths and
 filenames to still be named in relation to 'gforge'.
 
@@ -91,7 +91,7 @@ and will contain the desired settings for runtime :
 Should these settings not suit you, it is possible to change
 configuration options by :
 
- 1. modifying /etc/@FORGENAME@/@FORGENAME@.conf which contains the
+ 1. modifying /etc/@PACKAGE@/@PACKAGE@.conf which contains the
     basic settings
  ( 2. Optional : copy some template files from
      /usr/share/gforge/etc/local.d/ to /etc/gforge/local.d/ (TO BE
@@ -99,9 +99,9 @@ configuration options by :
  3. regenerate the runtime config files by issueing :
       # fusionforge-config
 
-Customizations in /etc/@FORGENAME@/@FORGENAME@.conf may include :
+Customizations in /etc/@PACKAGE@/@PACKAGE@.conf may include :
  - switching to HTTPS with 'sys_use_ssl=true',
- - setting a custom URL prefix with 'sys_urlprefix=/@FORGENAME@/' for
+ - setting a custom URL prefix with 'sys_urlprefix=/@PACKAGE@/' for
    instance, 
  etc.
 
