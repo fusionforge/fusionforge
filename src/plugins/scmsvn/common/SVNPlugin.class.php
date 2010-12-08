@@ -49,7 +49,7 @@ class SVNPlugin extends SCMPlugin {
 
 		$this->register () ;
 	}
-	
+
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmsvn') ;
 	}
@@ -80,7 +80,7 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b = '<h2>' . _("Anonymous Subversion Access") . '</h2>';
+		$b = '<h2>' . _('Anonymous Subversion Access') . '</h2>';
 		$b .= '<p>';
 		$b .= _("This project's SVN repository can be checked out through anonymous access with the following command(s).");
 		$b .= '</p>';
@@ -338,9 +338,9 @@ class SVNPlugin extends SCMPlugin {
 			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
 			$end_time = $start_time + 86400;
 
+			$adds    = 0 ;
 			$updates = 0 ;
-			$adds = 0 ;
-			$usr_adds = array () ;
+			$usr_adds    = array () ;
 			$usr_updates = array () ;
 
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
@@ -423,7 +423,7 @@ class SVNPlugin extends SCMPlugin {
 				} else {
 					continue;
 				}
-		
+
 				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
 				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
 				if ($uu > 0 || $ua > 0) {
@@ -445,8 +445,6 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-
-
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

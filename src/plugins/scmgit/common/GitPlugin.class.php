@@ -27,14 +27,13 @@ forge_define_config_item ('repos_path', 'scmgit', forge_get_config('chroot').'/s
 
 class GitPlugin extends SCMPlugin {
 	function GitPlugin () {
-		global $gfconfig;
 		$this->SCMPlugin () ;
 		$this->name = 'scmgit';
 		$this->text = 'Git';
+		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_update_repolist' ;
-		$this->hooks[] = 'scm_browser_page' ;
-		$this->hooks[] = 'scm_gather_stats' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
+		$this->hooks[] = 'scm_gather_stats' ;
 
 		$this->register () ;
 	}
@@ -69,12 +68,11 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b = '<h2>';
-		$b .= _('Anonymous Git Access');
-		$b .= '</h2>';
+		$b = '<h2>' . _('Anonymous Git Access') . '</h2>';
 		$b .= '<p>';
 		$b .= _('This project\'s Git repository can be checked out through anonymous access with the following command.');
 		$b .= '</p>';
+
 		$b .= '<p>' ;
 		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$project->getUnixName().'.git').'</tt><br />';
 		$b .= '</p>';
@@ -258,6 +256,7 @@ class GitPlugin extends SCMPlugin {
 
 // 		return $b ;
 // 	}
+
 	function getStatsBlock ($project) {
 		return ;
 	}
@@ -267,7 +266,7 @@ class GitPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-				
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -403,55 +402,6 @@ class GitPlugin extends SCMPlugin {
                 return $list;
         }
 
-	function generateSnapshots ($params) {
-
-
-		$project = $this->checkParams ($params) ;
-		if (!$project) {
-			return false ;
-		}
-		
-		$group_name = $project->getUnixName() ;
-
-		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar.gz';
-		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
-
-		if (! $project->usesPlugin ($this->name)) {
-			return false;
-		}
-
-		if (! $project->enableAnonSCM()) {
-			unlink ($tarball) ;
-			return false;
-		}
-
-                // TODO: ideally we generate one snapshot per git repository
-		$toprepo = forge_get_config('repos_path', 'scmgit') ;
-		$repo = $toprepo . '/' . $project->getUnixName() . '/' .  $project->getUnixName() . '.git' ;
-
-		if (!is_dir ($repo)) {
-			unlink ($tarball) ;
-			return false ;
-		}
-
-		$today = date ('Y-m-d') ;
-		$tmp = trim (`mktemp -d`) ;
-		if ($tmp == '') {
-			return false ;
-		}
-
-		system ("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD | gzip > $tmp/snapshot.tar.gz");
-		chmod ("$tmp/snapshot.tar.gz", 0644) ;
-		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
-		unlink ("$tmp/snapshot.tar.gz") ;
-
-		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
-		chmod ("$tmp/tarball.tar.gz", 0644) ;
-		copy ("$tmp/tarball.tar.gz", $tarball) ;
-		unlink ("$tmp/tarball.tar.gz") ;
-		system ("rm -rf $tmp") ;
-	}
-
 	function gatherStats ($params) {
 		global $last_user, $usr_adds, $usr_deletes,
 		$usr_updates, $updates, $adds;
@@ -553,7 +503,7 @@ class GitPlugin extends SCMPlugin {
 				} else {
 					continue;
 				}
-					
+
 				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
 				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
 				if ($uu > 0 || $ua > 0) {
@@ -573,7 +523,64 @@ class GitPlugin extends SCMPlugin {
 		}
 		db_commit();
 	}
-  }
+
+	function generateSnapshots ($params) {
+
+		$project = $this->checkParams ($params) ;
+		if (!$project) {
+			return false ;
+		}
+
+		$group_name = $project->getUnixName() ;
+
+		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar.gz';
+		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
+
+		if (! $project->usesPlugin ($this->name)) {
+			return false;
+		}
+
+		if (! $project->enableAnonSCM()) {
+			if (is_file($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (is_file($tarball)) {
+				unlink ($tarball) ;
+			}
+			return false;
+		}
+
+		// TODO: ideally we generate one snapshot per git repository
+		$toprepo = forge_get_config('repos_path', 'scmgit') ;
+		$repo = $toprepo . '/' . $project->getUnixName() . '/' .  $project->getUnixName() . '.git' ;
+
+		if (!is_dir ($repo)) {
+			if (is_file($snapshot)) {
+				unlink ($snapshot) ;
+			}
+			if (is_file($tarball)) {
+				unlink ($tarball) ;
+			}
+			return false ;
+		}
+
+		$tmp = trim (`mktemp -d`) ;
+		if ($tmp == '') {
+			return false ;
+		}
+		$today = date ('Y-m-d') ;
+		system ("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD | gzip > $tmp/snapshot.tar.gz");
+		chmod ("$tmp/snapshot.tar.gz", 0644) ;
+		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
+		unlink ("$tmp/snapshot.tar.gz") ;
+
+		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
+		chmod ("$tmp/tarball.tar.gz", 0644) ;
+		copy ("$tmp/tarball.tar.gz", $tarball) ;
+		unlink ("$tmp/tarball.tar.gz") ;
+		system ("rm -rf $tmp") ;
+	}
+}
 
 // Local Variables:
 // mode: php

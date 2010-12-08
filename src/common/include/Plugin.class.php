@@ -147,7 +147,78 @@ class Plugin extends Error {
 		$role =& $params['role'];
 	}
 
-	function groupisactivecheckbox(&$params) {
+	function install() {
+		$this->installCode();
+		$this->installConfig();
+		$this->installDatabase();
+	}
+
+	function installCode() {
+		$name = $this->name;
+		$path = forge_get_config('plugins_path') . '/' . $name;
+		$installdir = $this->getInstallDir();
+
+		// Create a symbolic links to plugins/<plugin>/www (if directory exists).
+		if (is_dir($path . '/www')) { // if the plugin has a www dir make a link to it
+			// The apache group or user should have write perms the www/plugins folder...
+			if (!is_link('../'.$installdir)) {
+				$code = symlink($path . '/www', '../'.$installdir);
+				if (!$code) {
+					$this->setError('['.'../'.$installdir.'->'.$path . '/www]'.
+						'<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
+				}
+			}
+		}
+
+		// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
+		if (is_dir($path . '/etc/plugins/' . $name)) {
+			// The apache group or user should have write perms in /etc/gforge/plugins folder...
+			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
+				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
+				if (!$code) {
+					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.
+					_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+				}
+			}
+		}
+	}
+
+	function installConfig() {
+		$name = $this->name;
+		$path = forge_get_config('plugins_path') . '/' . $name;
+
+		// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
+		if (is_dir($path . '/etc/plugins/' . $name)) {
+			// The apache group or user should have write perms in /etc/gforge/plugins folder...
+			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
+				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
+				if (!$code) {
+					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.
+					_('<br />Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+				}
+			}
+		}
+	}
+
+	function installDatabase() {
+		$name = $this->name;
+		$path = forge_get_config('plugins_path') . '/' . $name . '/db';
+
+		require_once $GLOBALS['gfcommon'].'include/DatabaseInstaller.class.php';
+		$di = new DatabaseInstaller($name, $path);
+
+		// Search for database tables, if present then upgrade.
+		$res=db_query_params ('SELECT COUNT(*) FROM pg_class WHERE (relname=$1 OR relname like $2) AND relkind=$3',
+			array ('plugin_'.$name, 'plugin_'.$name.'_%', 'r'));
+		$count = db_result($res,0,0);
+		if ($count == 0) {
+			$di->install();
+		} else {
+			$di->upgrade();
+		}
+	}
+
+	function groupisactivecheckbox (&$params) {
 		//Check if the group is active
 		// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 		$display = 1;

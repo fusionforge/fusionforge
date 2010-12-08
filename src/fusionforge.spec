@@ -423,7 +423,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 ### Plugin setup ###
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/cron.d/* $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
-%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.d/* $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/
+%{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/httpd.d/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.d/
 %{__cp} -rp $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/plugins/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/plugins/
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/README
 
@@ -762,7 +762,7 @@ fi
 
 %files plugin-hudson
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/hudson/
-%{_sysconfdir}/httpd/conf.d/62plugin-hudson
+%{FORGE_CONF_DIR}/httpd.d/62plugin-hudson
 %{FORGE_DIR}/plugins/hudson
 %{FORGE_DIR}/www/plugins/hudson
 
@@ -779,7 +779,7 @@ fi
 %files plugin-mediawiki
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mediawiki.ini
 %config(noreplace) %{FORGE_CONF_DIR}/httpd.d/03mediawiki.conf
-%{_sysconfdir}/httpd/conf.d/61plugin-mediawiki
+%{FORGE_CONF_DIR}/httpd.d/61plugin-mediawiki
 %{FORGE_DIR}/plugins/mediawiki/
 %{FORGE_DIR}/www/plugins/mediawiki
 /usr/share/mediawiki/skins/gforge
@@ -792,7 +792,7 @@ fi
 
 %files plugin-oslc
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/oslc/
-%{_sysconfdir}/httpd/conf.d/plugin-oslc.inc
+%{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
 %{FORGE_DIR}/plugins/oslc
 %{FORGE_DIR}/www/plugins/oslc
 
@@ -822,6 +822,7 @@ fi
 %files plugin-scmgit
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/scmgit/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
+%{FORGE_CONF_DIR}/httpd.d/plugin-scmgit.conf
 %{FORGE_DIR}/plugins/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
@@ -839,8 +840,8 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/scmcvs/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmcvs.ini
 %{_sysconfdir}/cron.d/%{name}-plugin-scmcvs
-%{_sysconfdir}/httpd/conf.d/30virtualcvs
-%{_sysconfdir}/httpd/conf.d/31virtualcvs.ssl
+%{FORGE_CONF_DIR}/httpd.d/30virtualcvs
+%{FORGE_CONF_DIR}/httpd.d/31virtualcvs.ssl
 %{FORGE_DIR}/plugins/scmcvs
 %{FORGE_DIR}/www/plugins/scmcvs
 %{FORGE_VAR_LIB}/chroot/scmrepos/cvs
@@ -874,7 +875,7 @@ fi
 %files plugin-wiki
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/wiki/
 %{_sysconfdir}/cron.d/cron.wiki
-%{_sysconfdir}/httpd/conf.d/03wiki.conf
+%{FORGE_CONF_DIR}/httpd.d/03wiki.conf
 %{FORGE_DIR}/plugins/wiki
 %{FORGE_DIR}/www/wiki
 
@@ -892,11 +893,11 @@ fi
 
 %files plugin-mailman
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/mailman/
-%{_sysconfdir}/httpd/conf.d/62plugin-list-mailman
-%{_sysconfdir}/httpd/conf.d/200list.vhost
-%{_sysconfdir}/httpd/conf.d/20list
-%{_sysconfdir}/httpd/conf.d/20zlist.vhost
-%{_sysconfdir}/httpd/conf.d/21list.vhost.ssl
+%{FORGE_CONF_DIR}/httpd.d/62plugin-list-mailman
+%{FORGE_CONF_DIR}/httpd.d/200list.vhost
+%{FORGE_CONF_DIR}/httpd.d/20list
+%{FORGE_CONF_DIR}/httpd.d/20zlist.vhost
+%{FORGE_CONF_DIR}/httpd.d/21list.vhost.ssl
 %{FORGE_DIR}/plugins/mailman
 %{FORGE_DIR}/www/plugins/mailman
 

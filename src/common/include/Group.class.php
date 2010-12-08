@@ -2172,7 +2172,7 @@ class Group extends Error {
 	 *
 	 *	@return array of User objects for this group.
 	 */
-	function &getMembers() {
+	function getMembers() {
 		return $this->getUsers (true) ;
 	}
 
