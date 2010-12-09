@@ -734,12 +734,15 @@ fi
 /bin/cvssh.pl
 
 %files plugin-aselectextauth
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/aselectextauth.ini
 %{FORGE_DIR}/plugins/aselectextauth
 
 %files plugin-cvssyncmail
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
 %{FORGE_DIR}/plugins/cvssyncmail
 
 %files plugin-cvstracker
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvstracker.ini
 %{FORGE_DIR}/plugins/cvstracker
 %{FORGE_DIR}/www/plugins/cvstracker
 %attr(-,%{httpduser},%{httpdgroup}) %{FORGE_CONF_DIR}/plugins/cvstracker
@@ -750,24 +753,29 @@ fi
 %{FORGE_DIR}/plugins/externalsearch
 
 %files plugin-fckeditor
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/fckeditor.ini
 %{FORGE_DIR}/plugins/fckeditor
 %{FORGE_DIR}/www/plugins/fckeditor
 
 %files plugin-forumml
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/forumml.ini
 %{FORGE_DIR}/plugins/forumml
 %{FORGE_DIR}/www/plugins/forumml
 
 %files plugin-gravatar
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/gravatar.ini
 %{FORGE_DIR}/plugins/gravatar
 
 %files plugin-hudson
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/hudson/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/hudson.ini
 %{FORGE_CONF_DIR}/httpd.d/62plugin-hudson
 %{FORGE_DIR}/plugins/hudson
 %{FORGE_DIR}/www/plugins/hudson
 
 %files plugin-ldapextauth
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/ldapextauth/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/ldapextauth.ini
 %{FORGE_DIR}/plugins/ldapextauth
 
 %files plugin-mantis
@@ -787,20 +795,24 @@ fi
 /usr/share/mediawiki/skins/GForge.php
 
 %files plugin-online_help
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/online_help.ini
 %{FORGE_DIR}/plugins/online_help
 %{FORGE_DIR}/www/plugins/online_help
 
 %files plugin-oslc
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/oslc/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oslc.ini
 %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
 %{FORGE_DIR}/plugins/oslc
 %{FORGE_DIR}/www/plugins/oslc
 
 %files plugin-projects_hierarchy
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects_hierarchy.ini
 %{FORGE_DIR}/plugins/projects_hierarchy
 %{FORGE_DIR}/www/plugins/projects_hierarchy
 
 %files plugin-quota_management
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/quota_management.ini
 %{FORGE_DIR}/plugins/quota_management
 %{FORGE_DIR}/www/plugins/quota_management
 
@@ -854,10 +866,12 @@ fi
 %{FORGE_VAR_LIB}/chroot/scmrepos/svn
 
 %files plugin-svncommitemail
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/svncommitemail.ini
 %{FORGE_DIR}/plugins/svncommitemail
 
 %files plugin-svntracker
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/svntracker/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/svntracker.ini
 %{_sysconfdir}/cron.d/gforge-plugin-svntracker
 %{FORGE_DIR}/plugins/svntracker
 %{FORGE_DIR}/www/plugins/svntracker
@@ -869,6 +883,7 @@ fi
 %{FORGE_DIR}/www/plugins/blocks
 
 %files plugin-extratabs
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/extratabs.ini
 %{FORGE_DIR}/plugins/extratabs
 %{FORGE_DIR}/www/plugins/extratabs
 
@@ -880,19 +895,24 @@ fi
 %{FORGE_DIR}/www/wiki
 
 %files plugin-projectlabels
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectlabels.ini
 %{FORGE_DIR}/plugins/projectlabels
 %{FORGE_DIR}/www/plugins/projectlabels
 
 %files plugin-contribtracker
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/contribtracker.ini
 %{FORGE_DIR}/plugins/contribtracker
 %{FORGE_DIR}/www/plugins/contribtracker
 
 %files plugin-globalsearch
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/globalsearch.ini
 %{FORGE_DIR}/plugins/globalsearch
 %{FORGE_DIR}/www/plugins/globalsearch
 
 %files plugin-mailman
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/mailman/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mailman.ini
+%{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
 %{FORGE_CONF_DIR}/httpd.d/62plugin-list-mailman
 %{FORGE_CONF_DIR}/httpd.d/200list.vhost
 %{FORGE_CONF_DIR}/httpd.d/20list
@@ -903,6 +923,7 @@ fi
 
 %files plugin-mantisbt
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/mantisbt/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mantisbt.ini
 %{FORGE_DIR}/plugins/mantisbt
 %{FORGE_DIR}/www/plugins/mantisbt
 
