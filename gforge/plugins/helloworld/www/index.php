@@ -10,7 +10,9 @@
 
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
-require_once $gfconfig.'plugins/helloworld/config.php';
+
+# TODO : FIXME : no longer config.php ?
+#require_once $gfconfig.'plugins/helloworld/config.php';
 
 // the header that displays for the user portion of the plugin
 function helloworld_Project_Header($params) {                                                                                                                                         
