@@ -1,8 +1,6 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -25,14 +23,10 @@ global $HTML;
 /* add category to a dedicated project */
 
 echo '<form method="POST" name="addCategory" action="index.php?type=admin&id='.$id.'&pluginname=mantisbt&action=addCategory">';
-echo $HTML->boxTop('Ajouter une catégorie');
+echo $HTML->boxTop(_('Add a new category'));
 echo '<td><input name="nameCategory" type="text"></input></td>';
 echo '<td>';
-print'<div style="float:left"><img src="'.util_make_url('themes/gforge/images/bouton_gauche.png').'"></img></div>
-      <div style="background: url('.util_make_url('themes/gforge/images/bouton_centre.png').');vertical-align:top;display:inline;font-size:15px">
-      <a href="javascript:document.addCategory.submit();" style="color:white;font-size:0.8em;font-weight:bold;">Ajouter</a>
-      </div>
-      <div style="display:inline"><img src="'.util_make_url('themes/gforge/images/bouton_droit.png').'"></img></div>';
+echo '<input type="submit" value="'. _('Add') .'" />';
 echo '</td>';
 echo $HTML->boxBottom();
 echo '</form>';

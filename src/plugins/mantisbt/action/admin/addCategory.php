@@ -1,8 +1,6 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -25,16 +23,17 @@
 
 $nameCategory = $_POST['nameCategory'];
 
-if ($nameCategory != "") {
-    try {
-	    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	    $clientSOAP->__soapCall('mc_project_add_category', array("username" => $username, "password" => $password, "p_project_id" => $idProjetMantis, "p_category_name" => $nameCategory));
-    } catch (SoapFault $soapFault) {
-        $feedback = 'Error : '.$soapFault->faultstring;
-        session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($feedback));
-    }
-    $feedback = 'Op&eacute;ration r&eacute;ussie';
-    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+if (!empty($nameCategory)) {
+	try {
+		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP->__soapCall('mc_project_add_category', array("username" => $username, "password" => $password, "p_project_id" => $idProjetMantis, "p_category_name" => $nameCategory));
+	} catch (SoapFault $soapFault) {
+		$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+		session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($error_msg));
+	}
+	$feedback = _('Category added successfully');
+	session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
 }
-
+$warning_msg = _('Missing category name');
+session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&warning_msg='.urlencode($warning_msg));
 ?>
