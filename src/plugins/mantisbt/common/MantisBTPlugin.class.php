@@ -170,6 +170,7 @@ class MantisBTPlugin extends Plugin {
 						}
 					} else {
 						$returned = true;
+					}
 				} else {
 					$returned = true;
 				}
