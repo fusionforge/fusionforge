@@ -26,7 +26,7 @@ if ($idAttachment) {
 		$clientSOAP->__soapCall('mc_issue_attachment_delete', array("username" => $username, "password" => $password, "issue_attachment_id" => $idAttachment));
 		$feedback = _('Attachment deleted successfully');
 	} catch (SoapFault $soapFault) {
-		$error_msg _('Task failed:').' '.$soapFault->faultstring;
+		$error_msg = _('Task failed:').' '.$soapFault->faultstring;
 		session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($error_msg));
 	}
 	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
