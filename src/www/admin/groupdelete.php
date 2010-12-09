@@ -33,7 +33,7 @@ $group_id=getIntFromGet('group_id');
 
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-    exit_no_group();
+	exit_no_group();
 } elseif ($group->isError()) {
 	exit_error($group->getErrorMessage(),'admin');
 }
@@ -45,9 +45,9 @@ if (getStringFromPost('submit')) {
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error($group->getErrorMessage(),'admin');
 	} else {
-		plugin_hook('delete_link',$_GET['group_id']) ;
-        $feedback = _('Project successfully deleted');
-        session_redirect('/admin/?feedback='.urlencode($feedback));
+		plugin_hook('delete_link',$_GET['group_id']);
+		$feedback = _('Project successfully deleted');
+		session_redirect('/admin/?feedback='.urlencode($feedback));
 	}
 }
 
