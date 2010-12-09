@@ -55,6 +55,7 @@ class MantisBTPlugin extends Plugin {
 
 	function CallHook ($hookname, &$params) {
 		global $G_SESSION, $HTML;
+		$returned = false;
 		switch ($hookname) {
 			case "usermenu": {
 				$text = $this->text; // this is what shows in the tab
@@ -158,16 +159,24 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			case "group_update": {
-				$group_id=$params['group_id'];
+				$group_id = $params['group_id'];
+				$group_name =$params['group_name'];
+				$group_ispublic = $params['group_ispublic'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					if ($this->isProjectMantisCreated($group_id)) {
-						$this->updateProjectMantis($group);
-					}
+						if ($this->updateProjectMantis($group_id, $group_name, $group_ispublic)) {
+							$returned = true;
+						}
+					} else {
+						$returned = true;
+				} else {
+					$returned = true;
 				}
 				break;
 			}
 		}
+		return $returned;
 	}
 
 	/**
@@ -206,11 +215,12 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * addProjectMantis - inject the Group into Mantisbt
 	 *
-	 * @param	object	The Group
+	 * @param	int	The Group Id
 	 * @return	bool	success or not
 	 */
-	function addProjectMantis(&$groupObject) {
+	function addProjectMantis($groupId) {
 
+		$groupObject = group_get_object($groupId);
 		$project = array();
 		$project['name'] = $groupObject->getPublicName();
 		$project['status'] = "development";
@@ -273,24 +283,26 @@ class MantisBTPlugin extends Plugin {
 
 	/**
 	 * updateProjectMantis - update the Group informations into Mantisbt
-	 * @param	object	The Group
+	 * @param	int	id of the Group
+	 * @param	string	group name
+	 * @param	int	public or private
 	 * @return	bool	success or not
 	 */
-	function updateProjectMantis(&$groupObject) {
-
+	function updateProjectMantis($groupId,$groupName, $groupIspublic) {
+		$groupObject = group_get_object($groupId);
 		$projet = array();
-		$project['name'] = $groupObject->getPublicName();
+		$project['name'] = $groupName;
 		$project['status'] = "development";
 
 		// should check the config on mantisbt side and not used hard coded values
-		if ($groupObject->isPublic()) {
+		if ($groupIspublic) {
 			$project['view_state'] = 10;
 		} else {
 			$project['view_state'] = 50;
 		}
 
 		
-		$idMantisbt = getIdProjetMantis($groupObject->getID());
+		$idMantisbt = getIdProjetMantis($groupId);
 
 		if ($idMantisbt) {
 			try {
@@ -351,11 +363,12 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * updateUsersProjectMantis - inject Username in mantisbt for specific project
 	 *
-	 * @param	object	Group object
+	 * @param	int	Group Id
 	 * @param	array	Unix username array
 	 * @return	boolean	success or not
 	 */
-	function updateUsersProjectMantis(&$groupObject, $members) {
+	function updateUsersProjectMantis($groupId, $members) {
+		$groupObject = group_get_object($groupId);
 		$returned = false;
 		global $role;
 
@@ -431,12 +444,13 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * __updateUsersProjectMantisPgsql - update Users for this project in PostgreSQL DB
 	 *
-	 * @param	object	this Group object
+	 * @param	int	this Group Id
 	 * @param	array	the role of this forge
 	 * @return	boolean	success or not
 	 * @private
 	 */
-	function __updateUsersProjectMantisPgsql(&$groupObject, $stateForge) {
+	function __updateUsersProjectMantisPgsql($groupId, $stateForge) {
+		$groupObject = group_get_object($groupId);
 		$returned = false;
 		$dbConnection = db_connect_host(forge_get_config('db_name','mantisbt'), forge_get_config('db_user','mantisbt'), forge_get_config('db_password','mantisbt'), forge_get_config('db_host','mantisbt'), forge_get_config('db_port','mantisbt'));
 		if(!$dbConnection) {
@@ -491,11 +505,11 @@ class MantisBTPlugin extends Plugin {
 	}
 }
 
-function getIdProjetMantis($groupID) {
+function getIdProjetMantis($groupId) {
 
-	$group = group_get_object($groupID);
+	$group = group_get_object($groupId);
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-				array($groupID));
+				array($groupId));
 	if (!$resIdProjetMantis) {
 		$group->setError('getIdProjetMantis::error ' .db_error());
 		return 0;
