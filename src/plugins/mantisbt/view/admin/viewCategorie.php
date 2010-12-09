@@ -31,7 +31,7 @@ try {
 
 	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 } catch (SoapFault $soapFault) {
-	echo '<div class="warning" >'. _('Technical error occurs during data retrieving'). ' ' .$soapFault->faultstring.'</div>';
+	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 	$errorPage = true;
 }
 
