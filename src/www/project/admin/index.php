@@ -261,7 +261,7 @@ if(forge_get_config('use_frs')) {
 </form>
 
 <?php
-plugin_hook('admin_project_link',$group_id) ;
+plugin_hook('admin_project_link', $group_id);
 
 echo $HTML->boxBottom();?>
 
