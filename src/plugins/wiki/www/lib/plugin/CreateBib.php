@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateBib.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: CreateBib.php 7760 2010-12-09 15:07:23Z vargenau $');
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -45,12 +45,6 @@ extends WikiPlugin
         return array( 'pagename'  => '[pagename]', // The page from which the BibTex file is generated
                       );
     }
-
-    function preg_quote ($heading) {
-        return str_replace(array("/",".","?","*"),
-                               array('\/','\.','\?','\*'), $heading);
-    }
-
 
     // Have to include the $starttag and $endtag to the regexps...
     function extractBibTeX (&$content, $starttag, $endtag)
