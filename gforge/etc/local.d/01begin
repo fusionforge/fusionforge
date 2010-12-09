@@ -1,7 +1,7 @@
 <?php
 // PLEASE DO NOT REMOVE THIS LINE
 
-// GForge Universal Site Modifications
+// FusionForge Universal Site Modifications
 // by David HM Spector <spector@zeitgeist.com>
 //
 // Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
@@ -14,20 +14,26 @@
 // emitted as part of the HTML stream and processed by the browser,
 // so white space is meaningful!
 //
+// FusionForge global paths
 //
-// GForge hostnames
+//TODO : check if these should be enabled by default ?
+//$sys_etc_path='/etc/gforge';
+//$sys_var_path='/var/lib/gforge';
+
+//
+// FusionForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
-// would be prettier but would stop you from distributing your SourceForge
-// implementation across multiple domains.
+// would be prettier but would stop you from distributing your implementation
+// across multiple domains.
 //
 // Of course, if you have a lot of machines serving a particular purpose
 // such as FTP or for shell accounts, the "hostname" here might be in
 // reality an addr_list of machines that is serviced by a round-robin
 // mechanism or something fancy like a local-director.
 //
-// The default GForge domain
-// this is used where ever the "naked" form of the GForge domain
+// The default FusionForge domain
+// this is used where ever the "naked" form of the FusionForge domain
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = '{domain_name}';
 $sys_forum_return_domain = "{sys_forum_return_domain}";
