@@ -636,6 +636,9 @@ class Group extends Error {
 		$hook_params['group_name'] = htmlspecialchars($group_name);
 		$hook_params['group_description'] = htmlspecialchars($short_description);
 		if (!plugin_hook("group_update", $hook_params)) {
+			if (!$this->isError()) {
+				$this->setError(_('Error updating project information in plugin_hook group_update'));
+			}
 			db_rollback();
 			return false;
 		}
