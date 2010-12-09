@@ -6,6 +6,8 @@ modelplugdir=$modelminus
 
 usage() {
 	echo Usage: $0 PluginName
+	echo
+	echo " where 'PluginName' should be in CamelCase : mix of upper and lower-case characters"
 }
 
 echo "Plugin template creator"
@@ -47,6 +49,18 @@ else
 		sed "s/$modelminus/$minus/g" | \
 		sed "s/$modelfullname/$fullname/g" > \
 		$plugdir/www/index.php
+	fi
+	if [ ! -f $plugdir/INSTALL ]
+	then
+		echo Creating $plugdir/INSTALL
+		cat $modelplugdir/INSTALL | \
+		sed "s/$modelminus/$minus/g" > \
+		$plugdir/INSTALL
+	fi
+	if [ ! -f $plugdir/etc/plugins/$minus/config.php ]
+	then
+		echo Creating $plugdir/etc/plugins/$minus/config.php
+		cp $modelplugdir/etc/plugins/$modelminus/config.php $plugdir/etc/plugins/$minus/config.php
 	fi
 #	if [ ! -f $plugdir/common/languages/Base.tab ]
 #	then
