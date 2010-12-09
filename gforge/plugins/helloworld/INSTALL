@@ -1,7 +1,11 @@
 0. INSTALLATION of Helloworld Plugin
 
-i.e. : if the directory where the plugins are is  /srv/www/gforge/plugins you should end up 
-	with /srv/www/gforge/plugins/helloworld and all the files in it
+Let's say that you have installed FusionForge in $GFORGEDIR (for instance /srv/www/gforge/)
+
+The plugins should be installed in the directory $GFORGEDIR/plugins/
+($GFORGEPLUGINSDIR below).  So you should end up with the plugin
+installed in /srv/www/gforge/plugins/helloworld/ and all the files in
+there.
 
 1. CONFIGURATION
 
@@ -10,8 +14,8 @@ A) Make the symbolic links for each section
 (this is just an example, you should change the variables for what you have on your installation)
 
 /$GFORGEDIR/www/plugins/helloworld -> /$GFORGEPLUGINSDIR/helloworld/www
-/$ETC/gforge ->  /$GFORGEPLUGINSDIR/helloworld/etc/plugins/helloworld
+/$ETC/gforge/plugins/helloworld ->  /$GFORGEPLUGINSDIR/helloworld/etc/plugins/helloworld
 
 B) Run the db/helloworld-init.sql file
 
-psql -U gforge gforge < db/helloworld-init.sql
+psql -U gforge gforge < $GFORGEPLUGINSDIR/db/helloworld-init.sql
