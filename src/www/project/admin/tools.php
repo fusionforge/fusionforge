@@ -4,6 +4,7 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright 2010, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -28,13 +29,12 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
 $group_id = getIntFromRequest('group_id');
-session_require_perm ('project_admin', $group_id) ;
-
+session_require_perm('project_admin', $group_id);
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error(_('Error creating group object'),'admin');
+	exit_error(_('Error creating group object'), 'admin');
 } else if ($group->isError()) {
-	exit_error($group->getErrorMessage(),'admin');
+	exit_error($group->getErrorMessage(), 'admin');
 }
 
 // If this was a submission, make updates
@@ -83,6 +83,7 @@ if (getStringFromRequest('submit')) {
 	);
 	if (!$res) {
 		$error_msg = $group->getErrorMessage();
+		$group->clearError();
 	} else {
 		// This is done so plugins can enable/disable themselves from the project
 		$hookParams['group']=$group_id;
@@ -325,11 +326,11 @@ if($group->usesFRS()) { ?>
 	<p><a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('File Release System Admin') ?></a></p>
 <?php }
 
-$hook_params = array () ;
-$hook_params['group_id'] = $group_id ;
-plugin_hook ("project_admin_plugins", $hook_params) ;
+$hook_params = array();
+$hook_params['group_id'] = $group_id;
+plugin_hook("project_admin_plugins", $hook_params);
 
-echo $HTML->boxBottom(); 
+echo $HTML->boxBottom();
 
 echo '</td>';
 echo '</tr>';
