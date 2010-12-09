@@ -151,8 +151,8 @@ class MantisBTPlugin extends Plugin {
 				$group_id=$params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					if ($this->isProjectMantisCreated($group->data_array['group_id'])) {
-						$this->removeProjectMantis($group->data_array['group_id']);
+					if ($this->isProjectMantisCreated($group_id)) {
+						$this->removeProjectMantis($group_id);
 					}
 				}
 				break;
@@ -162,7 +162,7 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					if ($this->isProjectMantisCreated($group_id)) {
-						$this->updateProjectMantis($group_id, $params['group_name'], $group->data_array['is_public'], $group->data_array['short_description']);
+						$this->updateProjectMantis($group);
 					}
 				}
 				break;
@@ -271,35 +271,44 @@ class MantisBTPlugin extends Plugin {
 		}
 	}
 
-	function updateProjectMantis($idProjet, $nomProjet, $isPublic, $description) {
+	/**
+	 * updateProjectMantis - update the Group informations into Mantisbt
+	 * @param	object	The Group
+	 * @return	bool	success or not
+	 */
+	function updateProjectMantis(&$groupObject) {
 
 		$projet = array();
-		$project['name'] = $nomProjet;
+		$project['name'] = $groupObject->getPublicName();
 		$project['status'] = "development";
 
-		if ($isPublic == "1"){
+		// should check the config on mantisbt side and not used hard coded values
+		if ($groupObject->isPublic()) {
 			$project['view_state'] = 10;
-		}else{
+		} else {
 			$project['view_state'] = 50;
 		}
 
-		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-						array($idProjet));
-		echo db_error();
-		$row = db_fetch_array($resIdProjetMantis);
-		if ($row == null || count($row)>2) {
-			echo 'updateProjectMantis:: ' . _('No project found');
-		}else{
-			$idMantisbt = $row['id_mantisbt'];
+		
+		$idMantisbt = getIdProjetMantis($groupObject->getID());
+
+		if ($idMantisbt) {
 			try {
 				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 				$update = $clientSOAP->__soapCall('mc_project_update', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt, "project" => $project));;
 			} catch (SoapFault $soapFault) {
-				echo $soapFault->faultstring;
+				$groupObject->setError('updateProjectMantis::Error' . ' '. $soapFault->faultstring);
+				return false;
 			}
-			if (!isset($update))
-				echo 'updateProjectMantis::Error ' . _('Update MantisBT project');
+			if (!isset($update)) {
+				$groupObject->setError('updateProjectMantis::Error' . ' ' . _('Update MantisBT project'));
+				return false;
+			}
+		} else {
+			$groupObject->setError('updateProjectMantis::Error ' . _('ID MantisBT project not found'));
+			return false;
 		}
+		return true;
 	}
 
 	/**
@@ -482,13 +491,19 @@ class MantisBTPlugin extends Plugin {
 	}
 }
 
-function getIdProjetMantis($idProjet){
+function getIdProjetMantis($groupID) {
 
+	$group = group_get_object($groupID);
 	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-				array($idProjet));
-	echo db_error();
+				array($groupID));
+	if (!$resIdProjetMantis) {
+		$group->setError('getIdProjetMantis::error ' .db_error());
+		return 0;
+	}
+
 	$row = db_fetch_array($resIdProjetMantis);
-	if ($row == null) {
+	if ($row == null || count($row)>2) {
+		$group->setError('getIdProjetMantis::error ' . _('ID project not found'));
 		return 0;
 	}else{
 		return $row['id_mantisbt'];
