@@ -1,9 +1,7 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
- *          Antoine Mercadal - capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010, Antoine Mercadal - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -22,16 +20,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-if ($defect->category != $_POST['categorie']){
+if ($defect->category != $_POST['categorie']) {
 	$defect->category = $_POST['categorie'];
 }
 
-if ($defect->severity->name != $_POST['severite']){
+if ($defect->severity->name != $_POST['severite']) {
 	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
-	foreach($listSeverities as $key => $severity){
-		if ($_POST['severite'] == $severity->name){
+	foreach($listSeverities as $key => $severity) {
+		if ($_POST['severite'] == $severity->name) {
 			$defect->severity->id = $severity->id;
 			$defect->severity->name = $severity->name;
 			break;
@@ -39,10 +37,10 @@ if ($defect->severity->name != $_POST['severite']){
 	}
 }
 
-if ($defect->reproducibility->name != $_POST['reproductibilite']){
+if ($defect->reproducibility->name != $_POST['reproductibilite']) {
 	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
-	foreach($listReproducibilities as $key => $reproducibility){
-		if ($_POST['reproductibilite'] == $reproducibility->name){
+	foreach($listReproducibilities as $key => $reproducibility) {
+		if ($_POST['reproductibilite'] == $reproducibility->name) {
 			$defect->reproducibility->id = $reproducibility->id;
 			$defect->reproducibility->name = $reproducibility->name;
 			break;
@@ -50,10 +48,10 @@ if ($defect->reproducibility->name != $_POST['reproductibilite']){
 	}
 }
 
-if ($defect->reporter->name != $_POST['reporter']){
+if ($defect->reporter->name != $_POST['reporter']) {
 	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $defect->project->id, "acces" => 10));
-	foreach($listUsers as $key => $usermantis){
-		if ($_POST['reporter'] == $usermantis->name){
+	foreach($listUsers as $key => $usermantis) {
+		if ($_POST['reporter'] == $usermantis->name) {
 			$defect->reporter->id = $usermantis->id;
 			$defect->reporter->name = $usermantis->name;
 			$defect->reporter->real_name = $usermantis->real_name;
@@ -63,10 +61,10 @@ if ($defect->reporter->name != $_POST['reporter']){
 	}
 }
 
-if ($defect->view_state->name != $_POST['viewstate']){
+if ($defect->view_state->name != $_POST['viewstate']) {
 	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
-	foreach($listViewStates as $key => $viewState){
-		if ($_POST['viewstate'] == $viewState->name){
+	foreach($listViewStates as $key => $viewState) {
+		if ($_POST['viewstate'] == $viewState->name) {
 			$defect->view_state->id = $viewState->id;
 			$defect->view_state->name = $viewState->name;
 			break;
@@ -74,11 +72,11 @@ if ($defect->view_state->name != $_POST['viewstate']){
 	}
 }
 
-if ($defect->handler->name != $_POST['handler']){
+if ($defect->handler->name != $_POST['handler']) {
 	if ($_POST['handler'] != ""){
 		$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $defect->project->id, "acces" => 10));
-		foreach($listUsers as $key => $usermantis){
-			if ($_POST['handler'] == $usermantis->name){
+		foreach($listUsers as $key => $usermantis) {
+			if ($_POST['handler'] == $usermantis->name) {
 				$defect->handler->id = $usermantis->id;
 				$defect->handler->name = $usermantis->name;
 				$defect->handler->real_name = $usermantis->real_name;
@@ -91,10 +89,10 @@ if ($defect->handler->name != $_POST['handler']){
 	}
 }
 
-if ($defect->priority->name != $_POST['priorite']){
+if ($defect->priority->name != $_POST['priorite']) {
 	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
-	foreach($listPriorities as $key => $priority){
-		if ($_POST['priorite'] == $priority->name){
+	foreach($listPriorities as $key => $priority) {
+		if ($_POST['priorite'] == $priority->name) {
 			$defect->priority->id = $priority->id;
 			$defect->priority->name = $priority->name;
 			break;
@@ -102,10 +100,10 @@ if ($defect->priority->name != $_POST['priorite']){
 	}
 }
 
-if ($defect->resolution->name != $_POST['resolution']){
+if ($defect->resolution->name != $_POST['resolution']) {
 	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
-	foreach($listResolutions as $key => $resolution){
-		if ($_POST['resolution'] == $resolution->name){
+	foreach($listResolutions as $key => $resolution) {
+		if ($_POST['resolution'] == $resolution->name) {
 			$defect->resolution->id = $resolution->id;
 			$defect->resolution->name = $resolution->name;
 			break;
@@ -113,10 +111,10 @@ if ($defect->resolution->name != $_POST['resolution']){
 	}
 }
 
-if ($defect->status->name != $_POST['etat']){
+if ($defect->status->name != $_POST['etat']) {
 	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
-	foreach($listStatus as $key => $status){
-		if ($_POST['etat'] == $status->name){
+	foreach($listStatus as $key => $status) {
+		if ($_POST['etat'] == $status->name) {
 			$defect->status->id = $status->id;
 			$defect->status->name = $status->name;
 			break;
@@ -124,11 +122,11 @@ if ($defect->status->name != $_POST['etat']){
 	}
 }
 
-if ($defect->description != $_POST['description']){
+if ($defect->description != $_POST['description']) {
 	$defect->description = $_POST['description'];
 }
 
-if ($defect->additional_information != $_POST['informations']){
+if ($defect->additional_information != $_POST['informations']) {
 	$defect->additional_information = $_POST['informations'];
 }
 
@@ -149,10 +147,10 @@ if ($defect->target_version != $_POST['target_version']) {
 }
 
 try {
-    $clientSOAP->__soapCall('mc_issue_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue" => $defect));
+	$clientSOAP->__soapCall('mc_issue_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue" => $defect));
 } catch (SoapFault $soapFault) {
-    $feedback = 'Erreur : '.$soapFault->faultstring;
-    session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
+	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
 }
 
 //TODO : est-ce vraiment utilise ?
@@ -174,7 +172,7 @@ if ($_POST['note_ajout'] != null && $_POST['note_ajout'] != ''){
 	$clientSOAP->__soapCall('mc_issue_note_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "note" => $note));
 }
 
-$feedback = 'Op&eacute;ration r&eacute;ussie';
+$feedback = _('Task succeeded');
 session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 
 ?>

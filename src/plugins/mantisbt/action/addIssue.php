@@ -1,7 +1,6 @@
 <?php
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -26,17 +25,17 @@ $defect['category'] = $_POST['categorie'];
 $defect['project']['id'] = $idProjetMantis;
 
 try {
-    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-    $listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
-    $listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
-    $listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis, "acces" => 10));
-    $listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
-    $listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
-    $listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
-    $listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
+	$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
+	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
+	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis, "acces" => 10));
+	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
+	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
+	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
+	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
-    $feedback = 'Error : '.$soapFault->faultstring;
-    session_redirect('plugins/mantisbt/?type='.$type.'&id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
+	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	session_redirect('plugins/mantisbt/?type='.$type.'&id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
 }
 foreach($listSeverities as $key => $severity){
 	if ($_POST['severite'] == $severity->name){
@@ -122,12 +121,12 @@ if (isset($_POST['version'])) {
 }
 
 try {
-    $newIdBug = $clientSOAP->__soapCall('mc_issue_add', array("username" => $username, "password" => $password, "issue" => $defect));
-    $feedback = 'Ticket '.$newIdBug.' cr&eacute;e';
-    session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
+	$newIdBug = $clientSOAP->__soapCall('mc_issue_add', array("username" => $username, "password" => $password, "issue" => $defect));
+	$feedback = _('Ticket '.$newIdBug.' created successfully');
+	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
 } catch (SoapFault $soapFault) {
-    $feedback = 'Erreur : '.$soapFault->faultstring;
-    session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($feedback));
+	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
+	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($error_msg));
 }
 
 ?>
