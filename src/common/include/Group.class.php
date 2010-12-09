@@ -65,20 +65,20 @@ function & group_get_licenses() {
 $GROUP_OBJ=array();
 
 /**
- *  group_get_object() - Get the group object.
+ * group_get_object() - Get the group object.
  *
- *  group_get_object() is useful so you can pool group objects/save database queries
- *  You should always use this instead of instantiating the object directly.
+ * group_get_object() is useful so you can pool group objects/save database queries
+ * You should always use this instead of instantiating the object directly.
  *
- *  You can now optionally pass in a db result handle. If you do, it re-uses that query
- *  to instantiate the objects.
+ * You can now optionally pass in a db result handle. If you do, it re-uses that query
+ * to instantiate the objects.
  *
- *  IMPORTANT! That db result must contain all fields
- *  from groups table or you will have problems
+ * IMPORTANT! That db result must contain all fields
+ * from groups table or you will have problems
  *
- *  @param		int		Required
- *  @param		int		Result set handle ("SELECT * FROM groups WHERE group_id=xx")
- *  @return a group object or false on failure
+ * @param	int	Required
+ * @param	int	Result set handle ("SELECT * FROM groups WHERE group_id=xx")
+ * @return	object	a group object or false on failure
  */
 function &group_get_object($group_id, $res = false) {
 	//create a common set of group objects
@@ -438,7 +438,7 @@ class Group extends Error {
 
 		db_begin();
 
-		$res = db_query_params ('
+		$res = db_query_params('
 			UPDATE groups
 			SET is_public=$1, type_id=$2,
 				unix_box=$3, http_domain=$4
@@ -598,25 +598,25 @@ class Group extends Error {
 				use_frs=$17,
 				use_stats=$18
 			WHERE group_id=$19',
-					array (htmlspecialchars($group_name),
-					       $homepage,
-					       htmlspecialchars($short_description),
-					       $use_mail,
-					       $use_survey,
-					       $use_forum,
-					       $use_pm,
-					       $use_pm_depend_box,
-					       $use_scm,
-					       $use_news,
-					       $use_docman,
-					       $is_public,
-					       $new_doc_address,
-					       $send_all_docs,
-					       $use_ftp,
-					       $use_tracker,
-					       $use_frs,
-					       $use_stats,
-					       $this->getID() )) ;
+					array(htmlspecialchars($group_name),
+					      $homepage,
+					      htmlspecialchars($short_description),
+					      $use_mail,
+					      $use_survey,
+					      $use_forum,
+					      $use_pm,
+					      $use_pm_depend_box,
+					      $use_scm,
+					      $use_news,
+					      $use_docman,
+					      $is_public,
+					      $new_doc_address,
+					      $send_all_docs,
+					      $use_ftp,
+					      $use_tracker,
+					      $use_frs,
+					      $use_stats,
+					      $this->getID()));
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
@@ -629,13 +629,16 @@ class Group extends Error {
 			return false;
 		}
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['group_homepage'] = $homepage;
 		$hook_params['group_name'] = htmlspecialchars($group_name);
 		$hook_params['group_description'] = htmlspecialchars($short_description);
-		plugin_hook ("group_update", $hook_params);
+		if (!plugin_hook("group_update", $hook_params)) {
+			db_rollback();
+			return false;
+		}
 
 		// Log the audit trail
 		$this->addHistory('Changed Public Info', '');
@@ -751,7 +754,7 @@ class Group extends Error {
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['status'] = $status;
-		plugin_hook ("group_setstatus", $hook_params);
+		plugin_hook("group_setstatus", $hook_params);
 
 		db_commit();
 
@@ -1069,7 +1072,6 @@ class Group extends Error {
 	 * @return	boolean	uses_scm.
 	 */
 	function usesSCM() {
-
 		if (forge_get_config('use_scm')) {
 			return $this->data_array['use_scm'];
 		} else {
@@ -1083,7 +1085,6 @@ class Group extends Error {
 	 * @return	boolean uses_mail.
 	 */
 	function usesMail() {
-
 		if (forge_get_config('use_mail')) {
 			return $this->data_array['use_mail'];
 		} else {
@@ -1097,7 +1098,6 @@ class Group extends Error {
 	 * @return	boolean	uses_news.
 	 */
 	function usesNews() {
-
 		if (forge_get_config('use_news')) {
 			return $this->data_array['use_news'];
 		} else {
@@ -1111,7 +1111,6 @@ class Group extends Error {
 	 * @return	boolean	uses_forum.
 	 */
 	function usesForum() {
-
 		if (forge_get_config('use_forum')) {
 			return $this->data_array['use_forum'];
 		} else {
@@ -1134,7 +1133,6 @@ class Group extends Error {
 	 * @return	boolean	uses_frs.
 	 */
 	function usesFRS() {
-
 		if (forge_get_config('use_frs')) {
 			return $this->data_array['use_frs'];
 		} else {
@@ -1148,7 +1146,6 @@ class Group extends Error {
 	 * @return	boolean	uses_tracker.
 	 */
 	function usesTracker() {
-
 		if (forge_get_config('use_tracker')) {
 			return $this->data_array['use_tracker'];
 		} else {
@@ -1162,7 +1159,6 @@ class Group extends Error {
 	 * @return	boolean	use_docman_create_online.
 	 */
 	function useCreateOnline() {
-
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman_create_online'];
 		} else {
@@ -1176,7 +1172,6 @@ class Group extends Error {
 	 * @return	boolean	use_docman.
 	 */
 	function usesDocman() {
-
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman'];
 		} else {
@@ -1190,7 +1185,6 @@ class Group extends Error {
 	 * @return	boolean	use_docman_search.
 	 */
 	function useDocmanSearch() {
-
 		if (forge_get_config('use_docman')) {
 			return $this->data_array['use_docman_search'];
 		} else {
@@ -1204,7 +1198,6 @@ class Group extends Error {
 	 * @return	boolean	use_docman_search.
 	 */
 	function useWebdav() {
-
 		if (forge_get_config('use_webdav')) {
 			return $this->data_array['use_webdav'];
 		} else {
@@ -1218,7 +1211,6 @@ class Group extends Error {
 	 * @return	boolean	uses_ftp.
 	 */
 	function usesFTP() {
-
 		if (forge_get_config('use_ftp')) {
 			return $this->data_array['use_ftp'];
 		} else {
@@ -1232,7 +1224,6 @@ class Group extends Error {
 	 * @return	boolean	uses_survey.
 	 */
 	function usesSurvey() {
-
 		if (forge_get_config('use_survey')) {
 			return $this->data_array['use_survey'];
 		} else {
@@ -1246,7 +1237,6 @@ class Group extends Error {
 	 * @return	boolean	uses_projman.
 	 */
 	function usesPM() {
-
 		if (forge_get_config('use_pm')) {
 			return $this->data_array['use_pm'];
 		} else {
@@ -1291,6 +1281,7 @@ class Group extends Error {
 		}
 		return false;
 	}
+
 	/**
 	 * added for Codendi compatibility
 	 * usesServices - returns true if the group uses a particular plugin or feature
@@ -1688,7 +1679,7 @@ class Group extends Error {
 			return false;
 		}
 
-		$res = db_query_params ('DELETE FROM groups WHERE group_id=$1',
+		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
 					array ($this->getID())) ;
 		if (!$res) {
 			$this->setError(_('Error Deleting Project: ').db_error());
@@ -1704,7 +1695,7 @@ class Group extends Error {
 		$hook_params = array ();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
-		plugin_hook ("group_delete", $hook_params);
+		plugin_hook("group_delete", $hook_params);
 		
 		if (forge_get_config('upload_dir') != '' && $this->getUnixName()) {
 			exec('/bin/rm -rf '.forge_get_config('upload_dir').'/'.$this->getUnixName().'/');
@@ -1715,14 +1706,14 @@ class Group extends Error {
 		//
 		//	Delete reporting
 		//
-		$res = db_query_params ('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
+					array ($this->getID()));
 //echo 'rep_group_act_monthly'.db_error();
-		$res = db_query_params ('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
+					array ($this->getID()));
 //echo 'rep_group_act_weekly'.db_error();
-		$res = db_query_params ('DELETE FROM rep_group_act_daily WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1',
+					array ($this->getID()));
 //echo 'rep_group_act_daily'.db_error();
 		unset($this->data_array);
 		return true;
@@ -2438,10 +2429,10 @@ class Group extends Error {
 			}
 		}
 
-		$this->normalizeAllRoles () ;
+		$this->normalizeAllRoles();
 
 		// Switch back to user preference
-		session_set_internal ($saved_session->getID()) ;
+		session_set_internal($saved_session->getID());
 		setup_gettext_from_context();
 
 		db_commit();
@@ -2449,13 +2440,12 @@ class Group extends Error {
 		$this->sendApprovalEmail();
 		$this->addHistory('Approved', 'x');
 		
-		// 
+		//
 		//	Plugin can make approve operation there
 		//
-		//	
-		$params[0] = $idadmin_group ;
+		$params[0] = $idadmin_group;
 		$params[1] = $this->getID();
-		plugin_hook('group_approved',$params);	
+		plugin_hook('group_approved', $params);
 
 		return true;
 	}
@@ -2565,13 +2555,13 @@ Project Unix Name:  %2$s
 
 Reasons for negative decision:
 
-'), $this->getPublicName(), $this->getUnixName(), forge_get_config ('forge_name'));
+'), $this->getPublicName(), $this->getUnixName(), forge_get_config('forge_name'));
 
 			// Check to see if they want to send a custom rejection response
 			if ($response_id == 0) {
 				$response .= $message;
 			} else {
-				$response .= db_result (
+				$response .= db_result(
 					db_query_params('SELECT response_text FROM canned_responses WHERE response_id=$1', array ($response_id)),
 					0,
 					"response_text");
@@ -2695,58 +2685,63 @@ The %1$s admin team will now examine your project submission.  You will be notif
 
 
 	/**
-	 *	getRoles - Get the roles of the group.
+	 * getRoles - Get the roles of the group.
 	 *
-	 *	@return	array of Role id of this group.
+	 * @return	array	Role ids of this group.
 	 */
-	function getRolesId () {
-		$role_ids = array () ;
+	function getRolesId() {
+		$role_ids = array();
 		
 		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
-						array ($this->getID()));
+			$res = db_query_params('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
+						array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
-				$role_ids[] = $arr['role_id'] ;
+				$role_ids[] = $arr['role_id'];
 			}
-			$res = db_query_params ('SELECT role_id FROM role_project_refs WHERE group_id=$1',
-						array ($this->getID()));
+			$res = db_query_params('SELECT role_id FROM role_project_refs WHERE group_id=$1',
+						array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
-				$role_ids[] = $arr['role_id'] ;
+				$role_ids[] = $arr['role_id'];
 			}
 		} else {
-			$res = db_query_params ('SELECT role_id FROM role WHERE group_id=$1',
-							    array ($this->getID()));
+			$res = db_query_params('SELECT role_id FROM role WHERE group_id=$1',
+							    array($this->getID()));
 			while ($arr = db_fetch_array($res)) {
-				$role_ids[] = $arr['role_id'] ;
+				$role_ids[] = $arr['role_id'];
 			}
 		}
 		
-		return array_unique ($role_ids) ;
+		return array_unique($role_ids);
 	}
-	
-	function getRoles () {
-		$result = array () ;
 
-		$roles = $this->getRolesId () ;
-		if (USE_PFO_RBAC) {				
-			$engine = RBACEngine::getInstance() ;
+	/**
+	 * getRoles - Get the roles of the group.
+	 *
+	 * @return	array	Roles of this group.
+	 */
+	function getRoles() {
+		$result = array();
+
+		$roles = $this->getRolesId();
+		if (USE_PFO_RBAC) {
+			$engine = RBACEngine::getInstance();
 			foreach ($roles as $role_id) {
-				$result[] = $engine->getRoleById ($role_id) ;
+				$result[] = $engine->getRoleById ($role_id);
 			}
 		} else {
 			foreach ($roles as $role_id) {
-				$result[] = new Role ($this, $role_id) ;
+				$result[] = new Role ($this, $role_id);
 			}
 		}
 
-		return $result ;
+		return $result;
 	}
 
-	function normalizeAllRoles () {
-		$roles = $this->getRoles () ;
+	function normalizeAllRoles() {
+		$roles = $this->getRoles();
 		
 		foreach ($roles as $r) {
-			$r->normalizeData () ;
+			$r->normalizeData();
 		}
 	}
 
