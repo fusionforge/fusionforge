@@ -109,8 +109,8 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 
 <p>&nbsp;</p>
 
-<h3><?php echo _('Add new tabs'); ?></h3>
-<p><?php echo _('You can add your own tabs in the menu bar with the form below.') ?></p>
+<h3><?php echo _('Add new tab to project'); ?></h3>
+<p><?php echo _("You can add to this project's menu bar new custom tabs linking to Web pages, with the form below.") ?></p>
 <p />
 
 <form name="new_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
@@ -119,7 +119,7 @@ project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID())
 	<strong><?php echo _('Name of the tab:') ?></strong>
 <?php echo utils_requiredField(); ?><br/>
 <input type="text" size="15" maxlength="255" name="tab_name" /><br/>
-	<strong><?php echo _('URL of the tab:') ?></strong>
+	<strong><?php echo _('URL of the link:') ?></strong>
 <?php echo utils_requiredField(); ?><br/>
 <input type="text" size="15" name="tab_url" value="http://" /><br/>
 <input type="submit" value="<?php echo _('Add tab') ?>" />
