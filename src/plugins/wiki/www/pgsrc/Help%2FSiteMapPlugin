@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FSiteMapPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FSiteMapPlugin 7757 2010-12-09 13:53:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSiteMapPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -13,7 +13,7 @@ site is categorized correctly, and all the categories are listed in
 [[:CategoryCategory|CategoryCategory]], then a recursive ~BackLinks there will produce a contents
 page for the entire site.
 
-The list is as deep as the recursion level.
+The list is as deep as the recursion level (##reclimit##).
 
 == Usage ==
 
@@ -33,11 +33,11 @@ The list is as deep as the recursion level.
 | Get BackLinks or forward links (links listed on the page)
 |
 |-
-| **firstreversed** 
+| **firstreversed**
 | If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
 |
 |-
-| **excludeunknown** 
+| **excludeunknown**
 | If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
 |
 |-
@@ -67,7 +67,7 @@ The list is as deep as the recursion level.
 |-
 | **info**
 |
-| false 
+| false
 |}
 
 == Example ==
@@ -83,6 +83,7 @@ The list is as deep as the recursion level.
 
 == See Also ==
 * [[Help:BackLinksPlugin]]
+* [[Help:IncludeSiteMapPlugin]]
 
 <noinclude>
 ----

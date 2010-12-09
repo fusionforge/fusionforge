@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FCategories 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FCategories 7757 2010-12-09 13:53:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCategories;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -17,7 +17,7 @@ a call the the [[Help:BackLinksPlugin|BackLinks plugin]].
 
 == Creating a new category ==
 
-The simplest way to create a new category is to to go the 
+The simplest way to create a new category is to to go the
 [[:CategoryCategory|CategoryCategory]] page.
 
 Enter its name (starting with "Category") and hit "CreatePage" button.

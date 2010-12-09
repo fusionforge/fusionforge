@@ -1,5 +1,5 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
-X-Rcs-Id: $Id: Help%2FWikiPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Date: Thu,  9 Dec 2010 14:51:45 +0000
+X-Rcs-Id: $Id: Help%2FWikiPlugin 7757 2010-12-09 13:53:00Z vargenau $
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiPlugin;
@@ -39,14 +39,14 @@ entirely.)
 Currently, one invokes a plugin by putting something like:
 
 {{{
-<<AllPages limit=20 cols=3>> 
+<<AllPages limit=20 cols=3>>
 }}}
 
 into a regular wiki-page.  That particular example produces a list
 of the first 20 existing pages in 3 columns, via the [[Help:PageList|PageList]]
 library.
 
-<<AllPages limit=20 cols=3>> 
+<<AllPages limit=20 cols=3>>
 
 == Details ==
 
@@ -81,7 +81,7 @@ precedence:
   (The BackLinks plugin uses the current page as the default value for
   the *page* argument.)
 
-  Most plugins using the [[Help:PageList|PageList]] library inherit their 
+  Most plugins using the [[Help:PageList|PageList]] library inherit their
   default arguments from the ~PageList.
 
 === Standard Arguments ===
@@ -173,17 +173,17 @@ We decoupled actions from plugins via action pages for the following
 reasons:
 
 # Support translated action buttons and customizable action descriptions.
-# Customize standard actions by tuning the plugin invocation arguments. 
+# Customize standard actions by tuning the plugin invocation arguments.
   Override or add plugin defaults.
-# Split simple plugins into multiple actions, like RecentChanges/RecentEdits, 
+# Split simple plugins into multiple actions, like RecentChanges/RecentEdits,
   MostPopular/LeastPopular, AllPages/AllPagesCreatedByMe/AllPagesLastEditedByMe/
   AllPagesOwnedByMe which differ only in one argument.
 # Simplify the syntax for actions on another actions using a ~PageList
   as result of an actionpage as input parameter for another action or
   format.
 
-* Those actions which have buttons or links in the theme or are 
-  referenced in the standard pgsrc pageset require their 
+* Those actions which have buttons or links in the theme or are
+  referenced in the standard pgsrc pageset require their
   (possibly localized) actionpages, otherwise the actions will not work.
 * If the localized actionpage is not found the english version is
   used.

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FSemanticRelations 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FSemanticRelations 7757 2010-12-09 13:53:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticRelations;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -12,12 +12,12 @@ The PhpWiki:SemanticWeb implementation follows closely the
 implementation of the semantic mediawiki extension. It features:
 
 * Annotation of article-article-links by means of configurable relations (link-types).
-* Annotation of articles with simple data-values that are assigned to numeric 
+* Annotation of articles with simple data-values that are assigned to numeric
   attributes.
-* Support for using physical units of measurement in all numerical attributes, 
+* Support for using physical units of measurement in all numerical attributes,
   without need for prior configuration.
 
-Relations can be searched for with regular expressions, attributes can be 
+Relations can be searched for with regular expressions, attributes can be
 searched for with full mathematical expressions.
 
 The annotation data will be combined with annotations from the current
@@ -35,10 +35,10 @@ Relations (link-types) are defined as link with the following syntax:
 
 == Attributes ==
 
-Attributes are defined as link to numbers (understandable by 
-[GNU Units|http://www.gnu.org/software/units/units.html]) with 
+Attributes are defined as link to numbers (understandable by
+[GNU Units|http://www.gnu.org/software/units/units.html]) with
 the following markup syntax:
- 
+
 {{{
   attribute:=value
 }}}
@@ -63,7 +63,7 @@ is the second-largest in California and the seventh-largest in the
 United States and is noted for its temperate climate and many beaches.
 
 According to the United States Census Bureau, the city has a total
-area of [963.6 km²|area:=963.6 km^2] (372.0 mi²). 840.0 km² 
+area of [963.6 km²|area:=963.6 km^2] (372.0 mi²). 840.0 km²
 (324.3 mi²) of it is land and 123.5 km² (47.7 mi²) of it is water.
 The total area is 12.82% water.
 
