@@ -123,7 +123,7 @@ class PluginManager extends Error {
 		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php" ;
 		if (file_exists ($filename)) {
 			require_once ($filename) ;
-		} else { //if we didn't found it in common/ it may be an old plugin that has it's files in include/							
+		} else { //if we didn't find it in common/ it may be an old plugin that has its files in include/
 			$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
