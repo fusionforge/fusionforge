@@ -1073,15 +1073,15 @@ function normalized_urlprefix () {
  * @param string $path
  * @return string URL
  */
-function util_make_url ($path) {
+function util_make_url($path = '') {
 	if (forge_get_config('use_ssl')) 
-		$url = "https://" ;
+		$url = "https://";
 	else
-		$url = "http://" ;
+		$url = "http://";
 	
-	$url .= forge_get_config('web_host') ;
-	$url .= util_make_uri ($path) ;
-	return $url ;
+	$url .= forge_get_config('web_host');
+	$url .= util_make_uri($path);
+	return $url;
 }
 
 /**
