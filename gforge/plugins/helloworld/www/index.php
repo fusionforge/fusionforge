@@ -8,11 +8,10 @@
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */
 
-require_once('../../env.inc.php');
+require_once('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
-# TODO : FIXME : no longer config.php ?
-#require_once $gfconfig.'plugins/helloworld/config.php';
+require_once $gfconfig.'plugins/helloworld/config.php';
 
 // the header that displays for the user portion of the plugin
 function helloworld_Project_Header($params) {                                                                                                                                         
