@@ -27,12 +27,12 @@ class projects_hierarchyPlugin extends Plugin {
 	function projects_hierarchyPlugin() {
 		$this->Plugin();
 		$this->name = "projects_hierarchy";
-		$this->text = "projects_hierarchy!"; // To show in the tabs, use...
-		$this->_addHooks("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
-		$this->_addHooks("groupisactivecheckboxpost"); //
-		$this->_addHooks("project_home_link"); // to see father and sons in project home
-		$this->_addHooks("tree"); // to see the tree of projects
-		$this->_addHooks("delete_link"); // to delete link
+		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
+		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook("groupisactivecheckboxpost"); //
+		$this->_addHook("project_home_link"); // to see father and sons in project home
+		$this->_addHook("tree"); // to see the tree of projects
+		$this->_addHook("delete_link"); // to delete link
 	}
 
 	function CallHook ($hookname, &$params) {
