@@ -66,7 +66,7 @@ if (!isset($errorPage)){
 	echo '</table>';
 	if ($group->usesPlugin('projects_hierarchy')) {
 		echo '<input type="checkbox" name="transverse" value="1">mise à jour transverse (fils inclus)</input>';
-
+	}
 	echo '<input type="hidden" name="version_id" value="'.$detailVersion->id.'"></input>';
 	echo '<input type="hidden" name="version_old_name" value="'.$detailVersion->name.'"></input>';
 	echo '<br/>';
