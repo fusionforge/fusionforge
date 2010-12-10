@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateToc.php 7709 2010-09-30 15:48:54Z vargenau $');
+// rcs_id('$Id: CreateToc.php 7774 2010-12-10 09:58:41Z vargenau $');
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -120,11 +120,6 @@ extends WikiPlugin
                 $str .= '.'.$counter[$i];
         }
         return $str;
-    }
-
-    function preg_quote ($heading) {
-        return str_replace(array("/",".","?","*"),
-                               array('\/','\.','\?','\*'), $heading);
     }
 
     // Get HTML header corresponding to current level (level is set of ! or =)
