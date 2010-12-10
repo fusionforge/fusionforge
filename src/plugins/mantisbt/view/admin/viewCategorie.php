@@ -21,8 +21,8 @@
  */
 
 /* view categorie in MantisBt for the dedicated group */
-
 global $HTML;
+global $idProjetMantis;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */

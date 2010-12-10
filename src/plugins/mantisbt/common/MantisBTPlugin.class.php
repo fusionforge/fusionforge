@@ -61,8 +61,9 @@ class MantisBTPlugin extends Plugin {
 				$text = $this->text; // this is what shows in the tab
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($text), array('/plugins/mantisbt/index.php' . $param ));
+					echo $HTML->PrintSubMenu(array($text), array('/plugins/mantisbt/index.php' . $param));
 				}
+				$returned = true;
 				break;
 			}
 			case "groupmenu": {
@@ -78,6 +79,7 @@ class MantisBTPlugin extends Plugin {
 				if ($params['toptab'] == $this->name) {
 					$params['selected']=(count($params['TITLES'])-1);
 				}
+				$returned = true;
 				break;
 			}
 			case "user_personal_links": {
@@ -115,11 +117,11 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					if (!$this->isProjectMantisCreated($group->getID())) {
-						if($this->addProjectMantis($group)) {
+						if($this->addProjectMantis($group->getID())) {
 							$members = array();
 							foreach($group->getMembers() as $member) {
 								$members[] = $member->getUnixName();
-								if($this->updateUsersProjectMantis($group, $members)) {
+								if($this->updateUsersProjectMantis($group->getID(), $members)) {
 									$group->setPluginUse($this->name);
 									$returned = true;
 								};
@@ -201,11 +203,11 @@ class MantisBTPlugin extends Plugin {
 		$returned = false;
 		if ( getStringFromRequest($flag) == 1 ) {
 			if (!$this->isProjectMantisCreated($group->getID())) {
-				if($this->addProjectMantis($group)) {
+				if($this->addProjectMantis($group->getID())) {
 					$members = array();
 					foreach($group->getMembers() as $member) {
 						$members[] = $member->getUnixName();
-						if($this->updateUsersProjectMantis($group, $members)) {
+						if($this->updateUsersProjectMantis($group->getID(), $members)) {
 							$group->setPluginUse($this->name);
 							$returned = true;
 						};
@@ -398,7 +400,7 @@ class MantisBTPlugin extends Plugin {
 							WHERE users.user_name = $1
 							AND ( user_group.user_id = users.user_id AND user_group.group_id = $2 )
 							AND user_group.role_id = role.role_id',
-							array($member, $groupObject->getID));
+							array($member, $groupObject->getID()));
 			if (!$resUserRole) {
 				$groupObject->setError('updateUsersProjectMantis::'. _('Error : Cannot retrieve information about role') . ' ' .db_error());
 				return $returned;
@@ -410,7 +412,7 @@ class MantisBTPlugin extends Plugin {
 		}
 
 		if ($this->__getDBType() === "pgsql") {
-			if ($this->__updateUsersProjectMantisPgsql($groupObject, $stateForge)) {
+			if ($this->__updateUsersProjectMantisPgsql($groupObject->getID(), $stateForge)) {
 				$returned = true;
 			}
 		}

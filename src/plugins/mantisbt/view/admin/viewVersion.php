@@ -24,6 +24,7 @@
 
 /* main display */
 global $HTML;
+global $idProjetMantis;
 
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
