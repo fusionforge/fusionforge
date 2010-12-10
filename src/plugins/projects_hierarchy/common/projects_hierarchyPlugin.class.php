@@ -24,61 +24,20 @@
  */
 
 class projects_hierarchyPlugin extends Plugin {
-	function projects_hierarchyPlugin () {
-		$this->Plugin() ;
-		$this->name = "projects_hierarchy" ;
-		$this->text = "projects_hierarchy!" ; // To show in the tabs, use...
-		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
-		$this->hooks[] = "usermenu" ;
-		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
-		$this->hooks[] = "admin_project_link"; // to add son to a project
-		$this->hooks[] = "project_home_link"; // to see father and sons in project home
-		$this->hooks[] = "tree"; // to see the tree of projects
-		$this->hooks[] = "delete_link"; // to delete link
+	function projects_hierarchyPlugin() {
+		$this->Plugin();
+		$this->name = "projects_hierarchy";
+		$this->text = "projects_hierarchy!"; // To show in the tabs, use...
+		$this->_addHooks("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
+		$this->_addHooks("groupisactivecheckboxpost"); //
+		$this->_addHooks("project_home_link"); // to see father and sons in project home
+		$this->_addHooks("tree"); // to see the tree of projects
+		$this->_addHooks("delete_link"); // to delete link
 	}
 
 	function CallHook ($hookname, &$params) {
 		global $use_projects_hierarchyplugin,$G_SESSION,$HTML;
-		if ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("projects_hierarchy")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
-				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-								array ('/plugins/projects_hierarchy/index.php' . $param ));
-			}
-		} elseif ($hookname == "groupmenu") {
-			$group_id=$params['group'];
-			$project = &group_get_object($group_id);
-			if (!$project || !is_object($project)) {
-				return;
-			}
-			if ($project->isError()) {
-				return;
-			}
-			if (!$project->isProject()) {
-				return;
-			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]=util_make_url ('/plugins/projects_hierarchy/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
-			} else {
-				//$params['TITLES'][]=$this->text." is [Off]";
-			}	
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  projects_hierarchy administration
-			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
-			if ($group->usesPlugin($this->name)) {
-				echo util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
-							_('View the projects_hierarchy Administration')
-					);
-				echo '<br />';
-			}
-		} elseif ($hookname == "tree") {
+		if ($hookname == "tree") {
 			header('Location: ../plugins/projects_hierarchy/softwaremap.php');
 		} elseif ($hookname == "project_home_link") {
 			// ############################## Display link
@@ -86,7 +45,7 @@ class projects_hierarchyPlugin extends Plugin {
 			echo $HTML->boxTop(_('Linked projects'));
 			$cpt_project = 0 ;
 			// father request
-			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
+			$res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
 						array ('shar',
 							't',
 							$group_id));
@@ -101,7 +60,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			$cpt_temp = $cpt_project ;
 			// sons request
-			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
+			$res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
 						array ('shar',
 							't',
 							$group_id));
@@ -117,7 +76,7 @@ class projects_hierarchyPlugin extends Plugin {
 			$cpt_temp = $cpt_project ;
 
 			// links if project is father
-			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
+			$res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.sub_project_id AND plugin_projects_hierarchy.project_id=$3',
 						array ('navi',
 							't',
 							$group_id));
@@ -127,8 +86,8 @@ class projects_hierarchyPlugin extends Plugin {
 				$cpt_project ++;
 			}
 			// links if project is son
-			$res = db_query_params ('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
-						array ('navi',
+			$res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name,com FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
+						array('navi',
 							't',
 							$group_id));
 			echo db_error();
@@ -149,12 +108,12 @@ class projects_hierarchyPlugin extends Plugin {
 			echo $HTML->boxBottom();
 		} elseif ($hookname == "admin_project_link") {
 			global $gfplugins;
-			require_once $gfplugins.'projects_hierarchy/www/hierarchy_utils.php';
-			//include('../../plugins/projects_hierarchy/hierarchy_utils.php');
+			require_once $gfplugins.'/projects_hierarchy/www/hierarchy_utils.php';
+
 			$group_id = $params ;
 			echo $HTML->boxMiddle(_('Modify the hierarchy'));
 			echo '<form action="../../plugins/projects_hierarchy/add_son.php?group_id='.$group_id.'" method="POST" name="formson">';
-			//include('hierarchy_utils.php');
+
 			//select box of sons
 			echo '<table><tr>';
 			echo '<td>'._('Select a project:').'</td><td>'.son_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>' ;
@@ -164,7 +123,7 @@ class projects_hierarchyPlugin extends Plugin {
 			echo '<td><input type="submit" name="son" value="'._('Add son project').'"></td></tr></table></form>';
 			echo '<br/>';
 			echo '<form action="../../plugins/projects_hierarchy/add_link.php?group_id='.$group_id.'" method="POST" name="formlink">';
-			//include('hierarchy_utils.php');
+
 			//select box of sons
 			echo '<table><tr>';
 			echo '<td>'._('Select a project:').'</td><td>'.link_box($group_id,'sub_project_id','0').'</td><td>&nbsp;</td>';
@@ -182,7 +141,7 @@ class projects_hierarchyPlugin extends Plugin {
 				$cpt_son = 0;
 			} else {
 				//display of sons
-				$cpt_son = 1 ;
+				$cpt_son = 1;
 				echo _('Link list');
 				echo '<table>';
 				$i = 0;
@@ -217,10 +176,10 @@ class projects_hierarchyPlugin extends Plugin {
 					}
 			}
 			//select  navigation link by father
-			$res_son = db_query_params ('SELECT group_id,group_name,unix_group_name,project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_son = db_query_params('SELECT group_id,group_name,unix_group_name,project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
 							(groups.group_id = plugin_projects_hierarchy.project_id 
 							AND plugin_projects_hierarchy.sub_project_id = $1 AND plugin_projects_hierarchy.link_type = $2) ',
-							array ($group_id,'navi'))
+							array($group_id,'navi'))
 				or die (db_error ());
 			if (!$res_son || db_numrows($res_son) < 1) {
 				if($cpt_son == 1 ){
@@ -263,11 +222,11 @@ class projects_hierarchyPlugin extends Plugin {
 				echo '</table>';
 			}
 			//research allowing father
-			$res_father = db_query_params ('SELECT group_id,group_name,unix_group_name,project_id,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_father = db_query_params('SELECT group_id,group_name,unix_group_name,project_id,com FROM groups,plugin_projects_hierarchy WHERE 
 							groups.group_id = plugin_projects_hierarchy.project_id
 							AND plugin_projects_hierarchy.sub_project_id = $1
 							AND plugin_projects_hierarchy.activated = true AND plugin_projects_hierarchy.link_type = $2',
-							array ($group_id, 'shar'))
+							array($group_id, 'shar'))
 				or die (db_error ()) ;
 			if (!$res_father || db_numrows($res_father) < 1) {
 			} else {
@@ -286,7 +245,7 @@ class projects_hierarchyPlugin extends Plugin {
 				echo '</table>';
 			}
 			//research waiting fathers
-			$res_wait = db_query_params ('SELECT group_id,group_name,unix_group_name,project_id,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+			$res_wait = db_query_params('SELECT group_id,group_name,unix_group_name,project_id,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
 							groups.group_id = plugin_projects_hierarchy.project_id 
 							AND plugin_projects_hierarchy.sub_project_id = $1
 							AND plugin_projects_hierarchy.activated = false AND plugin_projects_hierarchy.link_type = $2',
@@ -314,7 +273,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 		} elseif ($hookname == "delete_link") {
 			$res_son = db_query_params('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $2 ',
-							array ($params, $params));
+							array($params, $params));
 		}
 	}
 }
