@@ -87,40 +87,49 @@ class MantisBTPlugin extends Plugin {
 				$text = $params['text'];
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
-					echo '	<p>' ;
+					echo '<p>';
 					echo util_make_link ("/plugins/mantisbt/index.php?id=$userid&type=user&pluginname=".$this->name,
 					_('View Personal MantisBT')
 					);
 					echo '</p>';
 				}
+				$returned = true;
 				break;
 			}
 			case "project_admin_plugins": {
 				// this displays the link in the project admin options page to it's  MantisBT administration
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
-				if ( $group->usesPlugin ( $this->name ) ) {
+				if ($group->usesPlugin ($this->name)) {
+					echo '<p>';
 					echo util_make_link ("/plugins/mantisbt/index.php?id=$group_id&type=admin&pluginname=".$this->name,
 					_('View Admin MantisBT')
 					);
-					echo '<br/>';
+					echo '</p>';
 				}
+				$returned = true;
 				break;
 			}
 			case "group_approved": {
 				$group_id=$params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
-					// ajout du projet mantis s'il n'existe pas
-					if (!$this->isProjetMantisCreated($group->data_array['group_id'])){
-						$this->addProjetMantis($group->data_array['group_id'],$group->data_array['group_name'],$group->data_array['is_public'], $group->data_array['short_description']);
+					if (!$this->isProjectMantisCreated($group->getID())) {
+						if($this->addProjectMantis($group)) {
+							$members = array();
+							foreach($group->getMembers() as $member) {
+								$members[] = $member->getUnixName();
+								if($this->updateUsersProjectMantis($group, $members)) {
+									$group->setPluginUse($this->name);
+									$returned = true;
+								};
+							}
+						}
+					} else {
+						$returned = true;
 					}
-					// mise a jour des utilisateurs avec les roles
-					$members = array();
-					foreach($group->getMembers() as $member){
-						$members[] = $member->data_array['user_name'];
-					}
-					$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
+				} else {
+					$returned = true;
 				}
 				break;
 			}
@@ -191,10 +200,10 @@ class MantisBTPlugin extends Plugin {
 		$flag = strtolower('use_'.$this->name);
 		$returned = false;
 		if ( getStringFromRequest($flag) == 1 ) {
-			if (!$this->isProjectMantisCreated($group->getID())){
+			if (!$this->isProjectMantisCreated($group->getID())) {
 				if($this->addProjectMantis($group)) {
 					$members = array();
-					foreach($group->getMembers() as $member){
+					foreach($group->getMembers() as $member) {
 						$members[] = $member->getUnixName();
 						if($this->updateUsersProjectMantis($group, $members)) {
 							$group->setPluginUse($this->name);
