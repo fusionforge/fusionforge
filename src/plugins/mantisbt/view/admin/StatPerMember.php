@@ -1,8 +1,7 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Author: Franck Villaume -- Capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *

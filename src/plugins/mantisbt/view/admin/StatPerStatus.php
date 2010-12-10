@@ -35,20 +35,20 @@ try {
 }
 
 if (!isset($errorPage)){
-	$total = array('open' => 0, 'resolved' => 0, 'resolved' => 0, 'closed' => 0 , 'total' => 0);
+	$total = array('open' => 0, 'resolved' => 0, 'resolved' => 0, 'closed' => 0, 'total' => 0);
 	echo $HTML->boxTop("Répartition par état");
 	echo	'<tr>';
-	echo                    '<th class="InTextBrown">Projet</th>';
-	echo                    '<th class="InTextBrown">Ouvert</th>';
-	echo                    '<th class="InTextBrown">Résolu</th>';
-	echo                    '<th class="InTextBrown">Fermé</th>';
-	echo                    '<th class="InTextBrown">Total</th>';
-	echo    '</tr>';
+	echo		'<th class="InTextBrown">Projet</th>';
+	echo		'<th class="InTextBrown">Ouvert</th>';
+	echo		'<th class="InTextBrown">Résolu</th>';
+	echo		'<th class="InTextBrown">Fermé</th>';
+	echo		'<th class="InTextBrown">Total</th>';
+	echo	'</tr>';
 	$nbligne = 0;
 	foreach ($stats as $stat) {
 		$indentation = "";
 		for($i = 1; $i < $stat->project_level; $i++){
-			$indentation =  $indentation .'&nbsp;&nbsp;';
+			$indentation = $indentation .'&nbsp;&nbsp;';
 		}
 		if ( $nbligne % 2 == 0 ) {
 			echo	'<tr class="LignePaire">';

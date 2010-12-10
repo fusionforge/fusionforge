@@ -1,8 +1,7 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,10 +22,10 @@
 
 echo '<form method="POST" Action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
 echo	'<table class="innertabs">';
-echo '<tr><td>';
-echo '     Fichier : <input type="file" name="attachment">';
-echo '</td></tr></table>';
-echo '<br/><input type="button" onclick="this.form.submit();this.disabled=true;" name="envoyer" value="Envoyer le fichier">';
+echo		'<tr><td>';
+echo		_('File:'). ' '.'<input type="file" name="attachment" />';
+echo	'</td></tr></table>';
+echo	'<br/><input type="button" onclick="this.form.submit();this.disabled=true;" value="'._('Upload File').'" name="send">';
 echo '</form>';
 
 ?>

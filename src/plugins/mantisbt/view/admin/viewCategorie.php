@@ -27,7 +27,7 @@ global $HTML;
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
 	$listCategories = $clientSOAP->__soapCall('mc_project_get_categories', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 } catch (SoapFault $soapFault) {
