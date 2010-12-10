@@ -834,7 +834,6 @@ fi
 %files plugin-scmgit
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/scmgit/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmgit.ini
-%{FORGE_CONF_DIR}/httpd.d/plugin-scmgit.conf
 %{FORGE_DIR}/plugins/scmgit
 %{FORGE_DIR}/www/plugins/scmgit
 
