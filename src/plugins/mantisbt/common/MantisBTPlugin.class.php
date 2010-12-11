@@ -113,7 +113,7 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			case "group_approved": {
-				$group_id=$params['group_id'];
+				$group_id = $params['1'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					if (!$this->isProjectMantisCreated($group->getID())) {
