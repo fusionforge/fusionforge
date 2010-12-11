@@ -1,26 +1,26 @@
-<?php   
-  /**
-   * FusionForge navigation
-   *
-   * Copyright 2009 - 2010, Olaf Lenz
-   *
-   * This file is part of FusionForge.
-   *
-   * FusionForge is free software; you can redistribute it and/or modify
-   * it under the terms of the GNU General Public License as published
-   * by the Free Software Foundation; either version 2 of the License,
-   * or (at your option) any later version.
-   * 
-   * FusionForge is distributed in the hope that it will be useful, but
-   * WITHOUT ANY WARRANTY; without even the implied warranty of
-   * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   * General Public License for more details.
-   *
-   * You should have received a copy of the GNU General Public License
-   * along with FusionForge; if not, write to the Free Software
-   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
-   * USA
-   */
+<?php
+/**
+ * FusionForge navigation
+ *
+ * Copyright 2009 - 2010, Olaf Lenz
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ * 
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with FusionForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
 
 require_once $gfwww.'search/include/SearchManager.class.php';
  
@@ -36,58 +36,58 @@ class Navigation extends Error {
 	/**
 	 * Associative array of data for the project menus.
 	 *
-	 * @var array $project_menu_data.
+	 * @var	array	$project_menu_data.
 	 */
 	var $project_menu_data;
-  
+
 	/** Constructor */
 	function Navigation() {
 		$this->Error();
 		return true;
 	}
-        
-        /** Get the HTML code of the title of the page. If the array
+
+	/** Get the HTML code of the title of the page. If the array
 	 *  $params contains a value for the key 'title', this title
 	 *  is appended to the title generated here. If $asHTML is
 	 *  set to false, it will return only the title in plain
 	 *  text. */
-        function getTitle($params, $asHTML=true) {
-                if (!$asHTML) {
-                        // get the title
-                        if (!$params['title']) {
-                                return forge_get_config ('forge_name') ;
-                        } else {
-                                return forge_get_config ('forge_name') . ': ' . $params['title'];
-                        }
-                } else {
-                        // return HTML code otherwise
-                        return '<title>' . $this->getTitle($params, false) . '</title>';
-                }
-        }
+	function getTitle($params, $asHTML = true) {
+		if (!$asHTML) {
+			// get the title
+			if (!$params['title']) {
+				return forge_get_config('forge_name');
+			} else {
+				return forge_get_config('forge_name') . ': ' . $params['title'];
+			}
+		} else {
+			// return HTML code otherwise
+			return '<title>' . $this->getTitle($params, false) . '</title>';
+		}
+	}
 
-        /** Get the HTML code for the favicon links of the site (to be
+	/** Get the HTML code for the favicon links of the site (to be
 	 *  put into the <head>. If $asHTML is false, it will return
 	 *  the URL of the favicon.
 	 * 
 	 * @todo: Make favicon configurable
 	 */
-        function getFavIcon($asHTML=true) {
-                if (!$asHTML) {
-                        return util_make_url('/images/icon.png');
-                } else {
-                        return '<link rel="icon" type="image/png" href="' 
+	function getFavIcon($asHTML=true) {
+		if (!$asHTML) {
+			return util_make_url('/images/icon.png');
+		} else {
+			return '<link rel="icon" type="image/png" href="' 
 				. $this->getFavIcon(false) .'" />' 
 				. '<link rel="shortcut icon" type="image/png" href="'
 				. $this->getFavIcon(false) .'" />';
-                }
-        }
-        
-        /** Get the HTML code for the RSS feeds of the site (to be put
+		}
+	}
+
+	/** Get the HTML code for the RSS feeds of the site (to be put
 	 *  into the <head>. If $asHTML is false, it will return an
 	 *  array with the following structure: $result['titles']:
 	 *  list of titles of the feeds; $result['urls'] list of urls
 	 *  of the feeds. */
-        function getRSS($asHTML=true) {
+	function getRSS($asHTML=true) {
                 if (!$asHTML) {
                         $res = array() ;
                         $res['titles'] = array();
@@ -117,27 +117,27 @@ class Navigation extends Error {
                         }
                 }
         }
-         
+
 	/** Get the searchBox HTML code. */
-        function getSearchBox() {
-                global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
-                
-                $res = "";
+	function getSearchBox() {
+		global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
+
+		$res = "";
 		if (get_magic_quotes_gpc()) {
 			$defaultWords = stripslashes($words);
 		} else {
 			$defaultWords = $words;
 		}
-                
+
 		$defaultWords = htmlspecialchars($defaultWords);
 		
 		// if there is no search currently, set the default
 		if (!isset($type_of_search) ) {
 			$exact = 1;
 		}
-                
+
 		$res .= '<form id="searchBox" action="'.util_make_uri('/search/').'" method="get">
-                         <div>';
+			<div>';
 		$parameters = array(
 			SEARCH__PARAMETER_GROUP_ID => $group_id,
 			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
@@ -150,7 +150,7 @@ class Navigation extends Error {
 		$searchEngines =& $searchManager->getAvailableSearchEngines();
 
 		$res .= '<label for="searchBox-words">
-                           <select name="type_of_search">';
+			<select name="type_of_search">';
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
 			$res .= '<option value="' . $searchEngine->getType() . '"' 
@@ -175,15 +175,14 @@ class Navigation extends Error {
 		$res .= '</form>';
 
 		return $res;
-        }
-        
+	}
 
-        /** Get an array of the user links (Login/Logout/My
+	/** Get an array of the user links (Login/Logout/My
 	 Account/Register) with the following structure:
 	 $result['titles']: list of the titles. $result['urls']: list
 	 of the urls.
 	 */
-        function getUserLinks() {
+	function getUserLinks() {
                 $res = array();
                 if (session_loggedin()) {
                         $u =& user_get_object(user_getid());
@@ -207,14 +206,14 @@ class Navigation extends Error {
                         }
                 }
                 return $res;
-        }
+	}
 
-        /** Get an array of the menu of the site with the following
+	/** Get an array of the menu of the site with the following
 	 *  structure: $result['titles']: list of titles of the
 	 *  links. $result['urls']: list of urls. $result['selected']:
 	 *  number of the selected menu entry.
 	 */
-        function getSiteMenu() {
+	function getSiteMenu() {
                 global $sys_use_project_tags, $sys_use_project_full_list;
 
                 $request_uri = getStringFromServer('REQUEST_URI');
@@ -236,10 +235,10 @@ class Navigation extends Error {
                     || strstr($request_uri, util_make_uri('/register/'))
                     || strstr($request_uri, util_make_uri('/themes/'))
 			) 
-                {
-                        $selected=count($menu['urls'])-1;
-                }
-                
+		{
+			$selected=count($menu['urls'])-1;
+		}
+
 		if (forge_get_config('use_trove') || $sys_use_project_tags || $sys_use_project_full_list) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/') ;
@@ -247,7 +246,7 @@ class Navigation extends Error {
 				$selected=count($menu['urls'])-1;
 			}
 		}
-                 
+
 		if (forge_get_config('use_snippet')) {
 			$menu['titles'][] = _('Code&nbsp;Snippets');
 			$menu['urls'][] = util_make_uri('/snippet/') ;
@@ -255,7 +254,7 @@ class Navigation extends Error {
 				$selected=count($menu['urls'])-1;
 			}
 		}
-                 
+
 		if (forge_get_config('use_people')) {
 			$menu['titles'][] = _('Project&nbsp;Openings');
 			$menu['urls'][] = util_make_uri('/people/') ;
@@ -269,8 +268,8 @@ class Navigation extends Error {
 		$plugin_urls = array();
 		$hookParams['DIRS'] = &$menu['urls'];
 		$hookParams['TITLES'] = &$menu['titles'];
-		plugin_hook ("outermenu", $hookParams) ;
-                 
+		plugin_hook ("outermenu", $hookParams);
+
 		// try to find selected entry
 		for ($j = $before; $j < count($plugin_urls); $j++) {
 			$url = $menu['urls'][$j];
@@ -279,7 +278,7 @@ class Navigation extends Error {
 				break;
 			}
 		}
-                 
+
 		// Admin and Reporting 
 		if (forge_check_global_perm ('forge_admin')) {
 			$user_is_super = true;
@@ -296,13 +295,13 @@ class Navigation extends Error {
 				$selected=count($menu['urls'])-1;
 			}
 		}
- 
+
 		// Project
 		if (isset($GLOBALS['group_id'])) { 
 			// get group info using the common result set
 			$project =& group_get_object($GLOBALS['group_id']);
 			if ($project && is_object($project)) {
-				if ($project->isError()) {                                         
+				if ($project->isError()) {
 				} elseif (!$project->isProject()) {
 				} else {
 					$menu['titles'][] = $project->getPublicName();
@@ -315,15 +314,13 @@ class Navigation extends Error {
 				}
 			}
 		}
-                 
 
-                $menu['selected'] = $selected;
-                          
-                return $menu;
-        }
-  
+		$menu['selected'] = $selected;
 
-        /** Get a reference to an array of the projects menu for the
+		return $menu;
+	}
+
+	/** Get a reference to an array of the projects menu for the
 	 * project with the id $group_id with the following
 	 * structure: $result['starturl']: URL of the
 	 * projects starting page; $result['name']: public name of
@@ -335,22 +332,21 @@ class Navigation extends Error {
 	 * false. $result['selected']: number of the menu entry that
 	 * is currently selected.
 	 */
-        function &getProjectMenu ($group_id, $toptab="") {
-                // rebuild menu if it has never been built before, or
-                // if the toptab was set differently
-                if (!isset($this->project_menu_data[$group_id])
-                    || ($toptab != "") 
-                    || ($toptab != $this->project_menu_data[$group_id]['last_toptab'])) 
-                {
-                        // get the group and permission objects
-                        $group =& group_get_object($group_id);
-                        if (!$group || !is_object($group)) {
-                                return;
-                        }
-                        if ($group->isError()) {
-                                //wasn't found or some other problem
-                                return;
-                        }
+	function getProjectMenu($group_id, $toptab="") {
+		// rebuild menu if it has never been built before, or
+		// if the toptab was set differently
+		if (!isset($this->project_menu_data[$group_id])
+			|| ($toptab != "") 
+			|| ($toptab != $this->project_menu_data[$group_id]['last_toptab'])) {
+			// get the group and permission objects
+			$group = group_get_object($group_id);
+			if (!$group || !is_object($group)) {
+				return null;
+			}
+			if ($group->isError()) {
+				//wasn't found or some other problem
+				return null;
+			}
                         if (!$group->isProject()) {
                                 return;
                         }
@@ -363,7 +359,7 @@ class Navigation extends Error {
                         $menu['adminurls'] = array();
 
 			$menu['name'] = $group->getPublicName();
-                        
+
                         // Summary
                         $menu['titles'][] = _('Summary');
                         if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
@@ -379,7 +375,7 @@ class Navigation extends Error {
 
                         // setting these allows to change the initial project page
                         $menu['starturl'] = $url;
-                        
+
                         // Project Admin
                         if (forge_check_perm ('project_admin', $group_id)) {
                                 $menu['titles'][] = _('Admin');
@@ -389,13 +385,13 @@ class Navigation extends Error {
                                         $selected = (count($menu['urls'])-1);
                                 }
                         }
-                        
+
                         /* Homepage
 			 // check for use_home_tab?
 			 $TABS_DIRS[]='http://'. $this->getHomePage();
 			 $TABS_TITLES[]=_('Home Page');
                         */
-                        
+
                         // Project Activity tab 
                         $menu['titles'][] = _('Activity');
                         $menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
@@ -403,7 +399,7 @@ class Navigation extends Error {
                         if ($toptab == "activity") {
                                 $selected = (count($menu['urls'])-1);
                         }
-                        
+
                         // Forums
                         if ($group->usesForum()) {
                                 $menu['titles'][] = _('Forums');
@@ -417,7 +413,7 @@ class Navigation extends Error {
                                         $selected = (count($menu['urls'])-1);
                                 }
                         }
-                        
+
                         // Artifact Tracking
                         if ($group->usesTracker()) {
                                 $menu['titles'][] = _('Tracker');
@@ -434,8 +430,7 @@ class Navigation extends Error {
 					$selected = (count($menu['urls'])-1);
 				}
                         }
-                        
-                        
+
                         // Mailing Lists
                         if ($group->usesMail()) {
                                 $menu['titles'][] = _('Lists');
@@ -448,9 +443,8 @@ class Navigation extends Error {
                                 if ($toptab == "mail") {
                                         $selected = (count($menu['urls'])-1);
                                 }
-                                
                         }
-                        
+
                         // Project/Task Manager
                         if ($group->usesPm()) {
                                 $menu['titles'][] = _('Tasks');
@@ -463,9 +457,8 @@ class Navigation extends Error {
                                 if ($toptab == "pm") {
                                         $selected = (count($menu['urls'])-1);
                                 }
-                                
                         }
-                        
+
                         // Doc Manager
                         if ($group->usesDocman()) {
                                 $menu['titles'][] = _('Docs');
@@ -478,9 +471,8 @@ class Navigation extends Error {
                                 if ($toptab == "docman") {
                                         $selected = (count($menu['urls'])-1);
                                 }
-                                
                         }
-                        
+
                         // Surveys
                         if ($group->usesSurvey()) {
                                 $menu['titles'][] = _('Surveys');
@@ -494,7 +486,7 @@ class Navigation extends Error {
                                         $selected = (count($menu['urls'])-1);
                                 }
                         }
-                        
+
                         // News
                         if ($group->usesNews()) {
                                 $menu['titles'][] = _('News');
@@ -508,7 +500,7 @@ class Navigation extends Error {
                                         $selected = (count($menu['urls'])-1);
                                 }
                         }
-                        
+
                         // SCM systems
                         if ($group->usesSCM()) {
                                 $menu['titles'][] = _('SCM');
@@ -523,7 +515,7 @@ class Navigation extends Error {
                                         $selected = (count($menu['urls'])-1);
                                 }
                         }
-                        
+
                         // groupmenu_after_scm hook
                         $hookParams = array();
                         $hookParams['group_id'] = $group_id ;
@@ -531,56 +523,51 @@ class Navigation extends Error {
                         $hookParams['TITLES'] =& $menu['titles'];
                         $hookParams['toptab'] =& $toptab;
                         $hookParams['selected'] =& $selected;
-                        
                         plugin_hook ("groupmenu_scm", $hookParams) ; 
-                        
+
                         // fill up adminurls
                         for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
                                 $menu['adminurls'][] = false;
                         }
-                        
-                        // Downloads
-                        if ($group->usesFRS()) {
-                                $menu['titles'][] = _('Files');
-                                $menu['urls'][] = util_make_uri('/frs/?group_id=' . $group_id);
-                                if (forge_check_perm ('frs', $group_id, 'write')) {
-                                        $menu['adminurls'][] = util_make_uri('/frs/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "frs") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
-                        
-                        // groupmenu hook
-                        $hookParams = array();
-                        $hookParams['group'] = $group_id ;
-                        $hookParams['DIRS'] =& $menu['urls'];
-                        $hookParams['TITLES'] =& $menu['titles'];
-                        $hookParams['toptab'] =& $toptab;
-                        $hookParams['selected'] =& $selected;
-                        
-                        plugin_hook ("groupmenu", $hookParams) ;
-                        
-                        // fill up adminurls
-                        for ($i = 0; 
-                             $i < count($menu['urls']) - count($menu['adminurls']); 
-                             $i++) 
-                        {
-                                $menu['adminurls'][] = false;
-                        }
-                        
-                        // store selected menu item (if any)
-                        $menu['selected'] = $selected;
-                        if ($toptab != "") {
-                                $menu['last_toptab'] = $toptab;
-                        }
-                }
-                return $this->project_menu_data[$group_id] ;
-        }
-        
-        /**
+
+			// Downloads
+			if ($group->usesFRS()) {
+				$menu['titles'][] = _('Files');
+				$menu['urls'][] = util_make_uri('/frs/?group_id=' . $group_id);
+				if (forge_check_perm ('frs', $group_id, 'write')) {
+					$menu['adminurls'][] = util_make_uri('/frs/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "frs") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
+
+			// groupmenu hook
+			$hookParams = array();
+			$hookParams['group'] = $group_id ;
+			$hookParams['DIRS'] =& $menu['urls'];
+			$hookParams['TITLES'] =& $menu['titles'];
+			$hookParams['toptab'] =& $toptab;
+			$hookParams['selected'] =& $selected;
+			plugin_hook ("groupmenu", $hookParams) ;
+
+			// fill up adminurls
+			for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
+				$menu['adminurls'][] = false;
+			}
+
+			// store selected menu item (if any)
+			$menu['selected'] = $selected;
+			if ($toptab != "") {
+				$menu['last_toptab'] = $toptab;
+			}
+		}
+		return $this->project_menu_data[$group_id] ;
+	}
+
+	/**
 	 * Create the HTML code for the banner "Powered By
 	 * FusionForge". If $asHTML is set to false, it will return an
 	 * array with the following structure: $result['url']: URL for
@@ -588,43 +575,42 @@ class Navigation extends Error {
 	 * image; $result['title']: HTML code that outputs the banner;
 	 * $result['html']: HTML code that creates the banner and the link.
 	 */
-        function getPoweredBy($asHTML=true) {
-                $res['url'] = 'http://fusionforge.org/';
-                $res['image'] = util_make_uri('/images/pow-fusionforge.png');
-                $res['title'] = '<img src="' 
+	function getPoweredBy($asHTML=true) {
+		$res['url'] = 'http://fusionforge.org/';
+		$res['image'] = util_make_uri('/images/pow-fusionforge.png');
+		$res['title'] = '<img src="' 
 			. $res['image'] 
 			. '" alt="Powered By FusionForge" border="0" />';
-                $res['html'] = util_make_link($res['url'], $res['title'], array(), true);
-                if ($asHTML) {
-                        return $res['html'];
-                } else {
-                        return $res;
-                }
-        }
-        
-        /** Create the HTML code for the "Show Source" link if
+		$res['html'] = util_make_link($res['url'], $res['title'], array(), true);
+		if ($asHTML) {
+			return $res['html'];
+		} else {
+			return $res;
+		}
+	}
+
+	/** Create the HTML code for the "Show Source" link if
 	 *  forge_get_config('show_source') is set, otherwise "". If $asHTML is set
 	 *  to false, it returns NULL when forge_get_config('show_source') is not
 	 *  set, otherwise an array with the following structure:
 	 *  $result['url']: URL of the link to the source code viewer;
 	 *  $result['title']: Title of the link.
 	 */
-        function getShowSource($asHTML=true) {
-
-                if (forge_get_config('show_source')) {
+	function getShowSource($asHTML=true) {
+		if (forge_get_config('show_source')) {
                         $res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
                         $res['title'] = _('Show source');
-                } else {
+		} else {
                         return ($asHTML ? "" : NULL); 
-                }
+		}
                 if (!$asHTML) {
                         return $res;
-                } else {
+		} else {
                         return util_make_link($res['url'], $res['title'], 
                                               array('class' => 'showsource'), 
                                               true);
-                }
-        }
+		}
+	}
 }
 
 // Local Variables:
