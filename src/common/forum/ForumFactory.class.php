@@ -32,21 +32,21 @@ class ForumFactory extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group.
+	 * @var	object	$Group.
 	 */
 	var $Group;
 
 	/**
 	 * The forums array.
 	 *
-	 * @var	 array	forums.
+	 * @var	array	forums.
 	 */
 	var $forums;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated.
+	 * @param	object	The Group object to which this forum is associated.
 	 */
 	function ForumFactory(&$Group) {
 		$this->Error();
@@ -64,9 +64,9 @@ class ForumFactory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this ForumFactory is associated with.
+	 * getGroup - get the Group object this ForumFactory is associated with.
 	 *
-	 *	@return object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
