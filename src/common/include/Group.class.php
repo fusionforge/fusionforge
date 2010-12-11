@@ -417,7 +417,7 @@ class Group extends Error {
 	 *
 	 * @param	object	User requesting operation (for access control).
 	 * @param	boolean	Whether group is publicly accessible (0/1).
-	 * @param	int		Group type (1-project, 2-foundry).
+	 * @param	int	Group type (1-project, 2-foundry).
 	 * @param	string	Machine on which group's home directory located.
 	 * @param	string	Domain which serves group's WWW.
 	 * @return	status.
@@ -834,7 +834,7 @@ class Group extends Error {
 	}
 
 	/**
-	 * getDescription	- the text description of this project.
+	 * getDescription - the text description of this project.
 	 *
 	 * @return	string	The description.
 	 */
@@ -889,10 +889,10 @@ class Group extends Error {
 		}
 		if ($scm_box) {
 			db_begin();
-			$res = db_query_params ('UPDATE groups SET scm_box=$1 WHERE group_id=$2', array ($scm_box, $this->getID ()));
+			$res = db_query_params('UPDATE groups SET scm_box=$1 WHERE group_id=$2', array($scm_box, $this->getID ()));
 			if ($res) {
 				$this->addHistory('scm_box', $this->data_array['scm_box']);
-				$this->data_array['scm_box']=$scm_box;
+				$this->data_array['scm_box'] = $scm_box;
 				db_commit();
 				return true;
 			} else {
@@ -916,7 +916,7 @@ class Group extends Error {
 	}
 
 	/**
-	 * getLicense	- the license they chose.
+	 * getLicense - the license they chose.
 	 *
 	 * @return	int	ident of group license.
 	 */
@@ -973,11 +973,11 @@ class Group extends Error {
 
 		foreach ($roles as $role) {
 			if (! ($role instanceof RoleExplicit)) {
-				continue ;
+				continue;
 			}
 			if ($role->getHomeProject() == NULL
 			    || $role->getHomeProject()->getID() != $this->getID()) {
-				continue ;
+				continue;
 			}
 			
 			foreach ($role->getUsers() as $u) {
@@ -1044,9 +1044,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	enablePserver - whether or not this group has opted to enable Pserver.
+	 * enablePserver - whether or not this group has opted to enable Pserver.
 	 *
-	 *	@return boolean	enable_pserver.
+	 * @return	boolean	enable_pserver.
 	 */
 	function enablePserver() {
 		if ($this->usesSCM()) {
@@ -1086,7 +1086,7 @@ class Group extends Error {
 	/**
 	 * usesMail - whether or not this group has opted to use mailing lists.
 	 *
-	 * @return	boolean uses_mail.
+	 * @return	boolean	uses_mail.
 	 */
 	function usesMail() {
 		if (forge_get_config('use_mail')) {
@@ -1249,7 +1249,7 @@ class Group extends Error {
 	}
 
 	/**
-	 * getPlugins -  get a list of all available group plugins
+	 * getPlugins - get a list of all available group plugins
 	 *
 	 * @return	array	array containing plugin_id => plugin_name
 	 */
@@ -1267,7 +1267,7 @@ class Group extends Error {
 				$this->plugins_data[$plugin_id] = db_result($res, $i, 'plugin_name');
 			}
 		}
-		return $this->plugins_data ;
+		return $this->plugins_data;
 	}
 
 	/**
@@ -1475,7 +1475,9 @@ class Group extends Error {
 				printf(_("Not Object: ArtifactType: %d"), $i);
 				continue;
 			}
-			$at_arr[$i]->delete(1,1);
+			if (!$at_arr[$i]->delete(1,1)) {
+				$this->setError(_('Could not properly delete the tracker:').' '.$at_arr[$i]->getErrorMessage());
+			}
 		}
 		//
 		//	Delete Forums
@@ -1488,7 +1490,7 @@ class Group extends Error {
 				continue;
 			}
 			if(!$f_arr[$i]->delete(1,1)) {
-				$this->setError(_('Could not properly delete the forum'));
+				$this->setError(_('Could not properly delete the forum:').' '.$f_arr[$i]->getErrorMessage());
 			}
 		}
 		//
@@ -1501,7 +1503,9 @@ class Group extends Error {
 				printf(_("Not Object: ProjectGroup: %d"), $i);
 				continue;
 			}
-			$pg_arr[$i]->delete(1,1);
+			if (!$pg_arr[$i]->delete(1,1)) {
+				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$pg_arr[$i]->getErrorMessage());
+			}
 		}
 		//
 		//	Delete FRS Packages
@@ -1517,14 +1521,16 @@ class Group extends Error {
 			//	continue;
 			//}
 			$frsp=new FRSPackage($this, $arr['package_id'], $arr);
-			$frsp->delete(1, 1);
+			if (!$frsp->delete(1, 1)) {
+				$this->setError(_('Could not properly delete the FRSPackage:').' '.$frsp->getErrorMessage());
+			}
 		}
 		//
 		//	Delete news
 		//
 		$news_group=group_get_object(forge_get_config('news_group'));
-		$res = db_query_params ('SELECT forum_id FROM news_bytes WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('SELECT forum_id FROM news_bytes WHERE group_id=$1',
+					array ($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting News: ').db_error());
 			db_rollback();
@@ -1534,11 +1540,11 @@ class Group extends Error {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				printf (_("Could Not Delete News Forum: %d"),$Forum->getID());
+				printf(_("Could Not Delete News Forum: %d"),$Forum->getID());
 			}
 		}
-		$res = db_query_params ('DELETE FROM news_bytes WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting News: ').db_error());
 			db_rollback();
@@ -1680,7 +1686,7 @@ class Group extends Error {
 					      time(),
 					      0));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project: ').db_error());
+			$this->setError(_('Error Deleting Project:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -1688,7 +1694,7 @@ class Group extends Error {
 		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
 					array($this->getID()));
 		if (!$res) {
-			$this->setError(_('Error Deleting Project: ').db_error());
+			$this->setError(_('Error Deleting Project:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -1698,7 +1704,7 @@ class Group extends Error {
 			return false;
 		}
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
 		plugin_hook("group_delete", $hook_params);
