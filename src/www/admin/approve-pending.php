@@ -64,14 +64,14 @@ function activate_group($group_id) {
 }
 
 $action = getStringFromRequest('action');
-if ($action=='activate') {
+if ($action == 'activate') {
 	$group_id = getIntFromRequest('group_id');
 	$list_of_groups = getStringFromRequest('list_of_groups');
 
-	$groups=explode(',', $list_of_groups);
+	$groups = explode(',', $list_of_groups);
 	array_walk($groups, 'activate_group');
 
-} else if ($action=='delete') {
+} else if ($action == 'delete') {
 	$group_id = getIntFromRequest('group_id');
 	$response_id = getIntFromRequest('response_id');
 	$add_to_can = getStringFromRequest('add_to_can');
@@ -82,17 +82,17 @@ if ($action=='activate') {
 	if (!$group || !is_object($group)) {
 		exit_no_group();
 	} elseif ($group->isError()) {
-		exit_error($group->getErrorMessage(),'admin');
+		exit_error($group->getErrorMessage(), 'admin');
 	}
 
 	if (!$group->setStatus(session_get_user(), 'D')) {
-		exit_error(_('Error during group rejection: ').$this->getErrorMessage(),'admin');
+		exit_error(_('Error during group rejection: ').$this->getErrorMessage(), 'admin');
 	}
 
 	$group->addHistory('rejected', 'x');
 
 	// Determine whether to send a canned or custom rejection letter and send it
-	if( $response_id == 100 ) {
+	if($response_id == 100) {
 
 		$group->sendRejectionEmail(0, $response_text);
 
@@ -205,28 +205,28 @@ while ($row_grp = db_fetch_array($res_grp)) {
 			$submitter = user_get_object($gjr->getUserID()) ;
 			echo '<p>'
 				.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
-				.'</p>' ;
+				.'</p>';
 		}
 	} else {
-	$res = db_query_params("SELECT u.user_id
+		$res = db_query_params("SELECT u.user_id
 			 FROM users u, user_group ug
 			 WHERE ug.group_id=$1 AND u.user_id=ug.user_id;", array($row_grp['group_id']));
-	
-	if (db_numrows($res) >= 1) {
-		$submitter =& user_get_object(db_result($res,0,'user_id'));
+
+		if (db_numrows($res) >= 1) {
+			$submitter =& user_get_object(db_result($res,0,'user_id'));
 		
-		echo '<p>'
+			echo '<p>'
 			.sprintf(_('Submitted by %1$s (%2$s)'), $submitter->getRealName(), $submitter->getUnixName())
 			.'</p>' ;
+		}
 	}
-	}
-	
+
 	echo "<hr />";
 }
 
 //list of group_id's of pending projects
-$arr=util_result_column_to_array($res_grp,0);
-$group_list=implode($arr,',');
+$arr = util_result_column_to_array($res_grp, 0);
+$group_list = implode($arr, ',');
 
 echo '
 	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
