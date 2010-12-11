@@ -139,7 +139,7 @@ class MantisBTPlugin extends Plugin {
 				// mise a jour des utilisateurs avec les roles
 				$group_id=$params[1];
 				$group = group_get_object($group_id);
-				$members = array ();
+				$members = array();
 				foreach($group->getMembers() as $member){
 					$members[] = $member->data_array['user_name'];
 				}
@@ -160,12 +160,18 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			case "group_delete": {
-				$group_id=$params['group_id'];
+				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					if ($this->isProjectMantisCreated($group_id)) {
-						$this->removeProjectMantis($group_id);
+						if ($this->removeProjectMantis($group_id)) {
+							$returned = true;
+						}
+					} else {
+						$returned = true;
 					}
+				} else {
+					$returned = true;
 				}
 				break;
 			}
@@ -201,7 +207,7 @@ class MantisBTPlugin extends Plugin {
 		$group = group_get_object($params['group']);
 		$flag = strtolower('use_'.$this->name);
 		$returned = false;
-		if ( getStringFromRequest($flag) == 1 ) {
+		if (getStringFromRequest($flag) == 1) {
 			if (!$this->isProjectMantisCreated($group->getID())) {
 				if($this->addProjectMantis($group->getID())) {
 					$members = array();
@@ -468,8 +474,8 @@ class MantisBTPlugin extends Plugin {
 		if(!$dbConnection) {
 			$groupObject->setError('updateUsersProjectMantis::'. _('Error : Could not open connection') . db_error($dbConnection));
 			db_rollback($dbConnection);
-		}else{
-			$idMantis = getIdProjetMantis($groupObject->getID());
+		} else {
+			$idMantis = getIdProjetMantis($groupId);
 			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
 			if (!$result){
 				echo 'updateUsersProjectMantis::Error '. _('Unable to clean roles in Mantisbt');
