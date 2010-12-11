@@ -1,4 +1,4 @@
-<?php   
+<?php
 /**
  * FusionForge groups
  *
@@ -1442,7 +1442,7 @@ class Group extends Error {
 			$this->setError(_('Cannot Delete System Group'));
 			return false;
 		}
-		$perm =& $this->getPermission ();
+		$perm =& $this->getPermission();
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -1458,7 +1458,7 @@ class Group extends Error {
 		//
 		//	Remove all the members
 		//
-		$members =& $this->getMembers();
+		$members = $this->getMembers();
 		for ($i=0; $i<count($members); $i++) {
 			$this->removeUser($members[$i]->getID());
 		}
@@ -1484,19 +1484,21 @@ class Group extends Error {
 		$f_arr =& $ff->getForums();
 		for ($i=0; $i<count($f_arr); $i++) {
 			if (!is_object($f_arr[$i])) {
-				printf (_("Not Object: Forum: %d"),$i);
+				printf(_("Not Object: Forum: %d"), $i);
 				continue;
 			}
-			$f_arr[$i]->delete(1,1);
+			if(!$f_arr[$i]->delete(1,1)) {
+				$this->setError(_('Could not properly delete the forum'));
+			}
 		}
 		//
 		//	Delete Subprojects
 		//
 		$pgf = new ProjectGroupFactory($this);
-		$pg_arr =& $pgf->getProjectGroups();
+		$pg_arr = $pgf->getProjectGroups();
 		for ($i=0; $i<count($pg_arr); $i++) {
 			if (!is_object($pg_arr[$i])) {
-				printf (_("Not Object: ProjectGroup: %d"),$i);
+				printf(_("Not Object: ProjectGroup: %d"), $i);
 				continue;
 			}
 			$pg_arr[$i]->delete(1,1);
@@ -1505,8 +1507,8 @@ class Group extends Error {
 		//	Delete FRS Packages
 		//
 		//$frspf = new FRSPackageFactory($this);
-		$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
+					array($this->getID()));
 		//echo 'frs_package'.db_error();
 		//$frsp_arr =& $frspf->getPackages();
 		while ($arr = db_fetch_array($res)) {
@@ -1514,8 +1516,8 @@ class Group extends Error {
 			//	echo "Not Object: ProjectGroup: ".$i;
 			//	continue;
 			//}
-			$frsp=new FRSPackage($this,$arr['package_id'],$arr);
-			$frsp->delete(1,1);
+			$frsp=new FRSPackage($this, $arr['package_id'], $arr);
+			$frsp->delete(1, 1);
 		}
 		//
 		//	Delete news
@@ -1673,10 +1675,10 @@ class Group extends Error {
 			return false;
 		}
 
-		$res = db_query_params('INSERT INTO deleted_groups (unix_group_name,delete_date,isdeleted) VALUES ($1, $2, $3)',
+		$res = db_query_params('INSERT INTO deleted_groups (unix_group_name, delete_date, isdeleted) VALUES ($1, $2, $3)',
 					array($this->getUnixName(),
-					       time(),
-					       0)) ;
+					      time(),
+					      0));
 		if (!$res) {
 			$this->setError(_('Error Deleting Project: ').db_error());
 			db_rollback();
@@ -1684,7 +1686,7 @@ class Group extends Error {
 		}
 
 		$res = db_query_params('DELETE FROM groups WHERE group_id=$1',
-					array ($this->getID())) ;
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Project: ').db_error());
 			db_rollback();
@@ -2379,42 +2381,42 @@ class Group extends Error {
 					if ($f->isPublic()) {
 						$l = $f->getModerationLevel() ;
 						if ($l == 0) {
-							$rl->setSetting ('forum', $fid, 3) ;
+							$rl->setSetting('forum', $fid, 3);
 						} else {
-							$rl->setSetting ('forum', $fid, 2) ;
+							$rl->setSetting('forum', $fid, 2);
 						}
 						if ($f->allowAnonymous()) {
 							if ($l == 0) {
-								$ra->setSetting ('forum', $fid, 3) ;
+								$ra->setSetting('forum', $fid, 3);
 							} else {
-								$ra->setSetting ('forum', $fid, 2) ;
+								$ra->setSetting('forum', $fid, 2);
 							}
 						} else {
-							$ra->setSetting ('forum', $fid, 1) ;
+							$ra->setSetting('forum', $fid, 1);
 						}
 					}
 				}
 
-				$pgf = new ProjectGroupFactory ($this) ;
+				$pgf = new ProjectGroupFactory($this);
 				foreach ($pgf->getAllProjectGroupIds() as $pgid) {
-					$pg = projectgroup_get_object ($pgid) ;
+					$pg = projectgroup_get_object($pgid);
 					if ($pg->isPublic()) {
-						$ra->setSetting ('pm', $pgid, 1) ;
-						$rl->setSetting ('pm', $pgid, 1) ;
+						$ra->setSetting('pm', $pgid, 1);
+						$rl->setSetting('pm', $pgid, 1);
 					}
 				}
 
-				$atf = new ArtifactTypeFactory ($this) ;
+				$atf = new ArtifactTypeFactory($this);
 				foreach ($atf->getAllArtifactTypeIds() as $atid) {
-					$at = artifactType_get_object ($atid) ;
+					$at = artifactType_get_object($atid);
 					if ($at->isPublic()) {
-						$ra->setSetting ('tracker', $atid, 1) ;
-						$rl->setSetting ('tracker', $atid, 1) ;
+						$ra->setSetting('tracker', $atid, 1);
+						$rl->setSetting('tracker', $atid, 1);
 					}
 				}
 			}
-			foreach (get_group_join_requests ($this) as $gjr) {
-				$gjr->delete (true) ;
+			foreach (get_group_join_requests($this) as $gjr) {
+				$gjr->delete(true);
 			}
 		}
 
@@ -2425,8 +2427,8 @@ class Group extends Error {
 		//
 		if (forge_get_config('use_mail')) {
 			$mlist = new MailingList($this);
-			if (!$mlist->create('commits',_('Commits'),1,$idadmin_group)) {
-				$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
+			if (!$mlist->create('commits', _('Commits'), 1, $idadmin_group)) {
+				$this->setError(sprintf(_('ML: %s'), $mlist->getErrorMessage()));
 				db_rollback();
 				setup_gettext_from_context();
 				return false;
