@@ -4,6 +4,7 @@
  *
  * Copyright 2004, GForge, LLC
  * Copyright 2009-2010, Roland Mas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,12 +24,12 @@
  * USA
  */
 
-require "PFO-RBAC.interface.php" ;
+require "PFO-RBAC.interface.php";
 
 if (true || file_exists ('/tmp/fusionforge-use-pfo-rbac')) {
-	define ('USE_PFO_RBAC', true) ;
+	define ('USE_PFO_RBAC', true);
 } else {
-	define ('USE_PFO_RBAC', false) ;
+	define ('USE_PFO_RBAC', false);
 }
 
 // Code shared between classes
@@ -40,35 +41,35 @@ abstract class BaseRole extends Error {
 
 	public function BaseRole() {
 		if (USE_PFO_RBAC) {
-			$this->role_values = array (
-				'forge_admin' => array (0,1),
-				'approve_projects' => array (0,1),
-				'approve_news' => array (0,1),
-				'forge_stats' => array (0,1,2),
+			$this->role_values = array(
+				'forge_admin' => array(0, 1),
+				'approve_projects' => array(0, 1),
+				'approve_news' => array(0, 1),
+				'forge_stats' => array(0, 1, 2),
 
-				'project_read' => array (0,1),
-				'project_admin' => array (0,1),
+				'project_read' => array(0, 1),
+				'project_admin' => array(0, 1),
 
-				'tracker_admin' => array (0,1),
-				'pm_admin' => array (0,1),
-				'forum_admin' => array (0,1),
+				'tracker_admin' => array(0, 1),
+				'pm_admin' => array(0, 1),
+				'forum_admin' => array(0, 1),
 				
-				'tracker' => array (0,1,3,5,7),
-				'pm' => array (0,1,3,5,7),
-				'forum' => array (0,1,2,3,4),
+				'tracker' => array(0, 1, 3, 5, 7),
+				'pm' => array(0, 1, 3, 5, 7),
+				'forum' => array(0, 1, 2, 3, 4),
 
-				'new_tracker' => array (0,1,3,5,7),
-				'new_pm' => array (0,1,3,5,7),
-				'new_forum' => array (0,1,2,3,4),
+				'new_tracker' => array(0, 1, 3, 5, 7),
+				'new_pm' => array(0, 1, 3, 5, 7),
+				'new_forum' => array(0, 1, 2, 3, 4),
 
-				'scm' => array (0,1,2),
-				'docman' => array (0,1,2,3,4),
-				'frs' => array (0,1,2,3),
+				'scm' => array (0, 1, 2),
+				'docman' => array (0, 1, 2, 3, 4),
+				'frs' => array (0, 1, 2, 3),
 
-				'webcal' => array (0,1,2),
+				'webcal' => array(0, 1, 2),
 				);
 
-			$this->global_settings = array (
+			$this->global_settings = array(
 				'forge_admin',
 				'approve_projects',
 				'approve_news',
@@ -131,20 +132,20 @@ abstract class BaseRole extends Error {
 				);
 		} else {
 			$this->role_values = array(
-				'projectadmin' => array ('0','A'),
-				'frs'	       => array ('0','1'),
-				'scm'	       => array ('-1','0','1'),
-				'docman'       => array ('0','1'),
-				'forumadmin'   => array ('0','2'),
-				'forum'	       => array ('-1','0','1','2'),
-				'newforum'     => array ('-1','0','1','2'),
-				'trackeradmin' => array ('0','2'),
-				'tracker'      => array ('-1','0','1','2','3'),
-				'newtracker'   => array ('-1','0','1','2','3'),
-				'pmadmin'      => array ('0','2'),
-				'pm'	       => array ('-1','0','1','2','3'),
-				'newpm'	       => array ('-1','0','1','2','3'),
-				'webcal'       => array ('0','1','2'));
+				'projectadmin'	=> array ('0','A'),
+				'frs'		=> array ('0','1'),
+				'scm'		=> array ('-1','0','1'),
+				'docman'	=> array ('0','1'),
+				'forumadmin'	=> array ('0','2'),
+				'forum'		=> array ('-1','0','1','2'),
+				'newforum'	=> array ('-1','0','1','2'),
+				'trackeradmin'	=> array ('0','2'),
+				'tracker'	=> array ('-1','0','1','2','3'),
+				'newtracker'	=> array ('-1','0','1','2','3'),
+				'pmadmin'	=> array ('0','2'),
+				'pm'		=> array ('-1','0','1','2','3'),
+				'newpm'		=> array ('-1','0','1','2','3'),
+				'webcal'	=> array ('0','1','2'));
 			
 			$this->defaults = array(
 				'Admin'		  => array( 'projectadmin'=>'A',
@@ -228,7 +229,7 @@ abstract class BaseRole extends Error {
 	public function hasUser($user) {
 		throw new Exception ("Not implemented") ;
 	}
-        function hasGlobalPermission($section, $action = NULL) {
+	function hasGlobalPermission($section, $action = NULL) {
 		return $this->hasPermission ($section, -1, $action) ;
 	}
 	public function getSettings() {
@@ -242,82 +243,82 @@ abstract class BaseRole extends Error {
 	}
 
 	/**
-	 *   getLinkedProjects - List of projects referencing that role
+	 * getLinkedProjects - List of projects referencing that role
 	 *
-	 *   Includes the home project (for roles that have one)
+	 * Includes the home project (for roles that have one)
 	 *
-	 *   @return array Array of Group objects
+	 * @return	array	Array of Group objects
 	 */
-	public function getLinkedProjects () {
-		$ids = array () ;
+	public function getLinkedProjects() {
+		$ids = array();
 
-		$hp = $this->getHomeProject () ;
+		$hp = $this->getHomeProject();
 		if ($hp != NULL) {
-			$ids[] = $hp->getID() ;
+			$ids[] = $hp->getID();
 		}
 
-		$res = db_query_params ('SELECT group_id FROM role_project_refs WHERE role_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1',
+					array($this->getID()));
 		if ($res) {
 			while ($arr = db_fetch_array ($res)) {
-				$ids[] = $arr['group_id'] ;
+				$ids[] = $arr['group_id'];
 			}
 		}
 
-		return group_get_objects (array_unique ($ids)) ;
+		return group_get_objects(array_unique($ids));
 	}
 
 	function linkProject ($project) { // From the PFO spec
-		$hp = $this->getHomeProject () ;
+		$hp = $this->getHomeProject();
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
-			$this->setError ("Can't link to home project") ;
-			return false ;
+			$this->setError(_("Can't link to home project"));
+			return false;
 		}
 
 		$res = db_query_params('SELECT group_id FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
-				       array ($this->getID(),
-					      $project->getID()));
+				       array($this->getID(),
+					     $project->getID()));
 
 		if (db_numrows($res)) {
 			return true ;
 		}
 		$res = db_query_params('INSERT INTO role_project_refs (role_id, group_id) VALUES ($1, $2)',
-				       array ($this->getID(),
-					      $project->getID()));
+				       array($this->getID(),
+					     $project->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('linkProject('.$project->getID().') '.db_error());
 			return false;
 		}
 
-		return true ;
+		return true;
 	}
 
-	function unlinkProject ($project) { // From the PFO spec
-		$hp = $this->getHomeProject () ;
+	function unlinkProject($project) { // From the PFO spec
+		$hp = $this->getHomeProject();
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
-			$this->setError ("Can't unlink from home project") ;
-			return false ;
+			$this->setError (_("Can't unlink from home project"));
+			return false;
 		}
 
 		$res = db_query_params('DELETE FROM role_project_refs WHERE role_id=$1 AND group_id=$2',
-				       array ($this->getID(),
-					      $project->getID()));
+				       array($this->getID(),
+					     $project->getID()));
 		if (!$res) {
 			$this->setError('unlinkProject('.$project->getID().') '.db_error());
 			return false;
 		}
 
-		$this->removeObsoleteSettings () ;
+		$this->removeObsoleteSettings ();
 
 		return true ;
 	}
 
 	/**
-	 *  fetchData - May need to refresh database fields.
+	 * fetchData - May need to refresh database fields.
 	 *
-	 *  If an update occurred and you need to access the updated info.
+	 * If an update occurred and you need to access the updated info.
 	 *
-	 *  @return boolean success;
+	 * @return	boolean	success;
 	 */
 	function fetchData($role_id) {
 		unset($this->data_array);
@@ -325,7 +326,7 @@ abstract class BaseRole extends Error {
 		unset($this->perms_array);
 
 		if (USE_PFO_RBAC) {
-			$res = db_query_params ('SELECT * FROM pfo_role WHERE role_id=$1',
+			$res = db_query_params('SELECT * FROM pfo_role WHERE role_id=$1',
 						array ($role_id)) ;
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError('BaseRole::fetchData()::'.db_error());
@@ -333,12 +334,12 @@ abstract class BaseRole extends Error {
 			}
 			$this->data_array = db_fetch_array($res);
 			if ($this->data_array['is_public'] == 't') {
-				$this->data_array['is_public'] = true ;
+				$this->data_array['is_public'] = true;
 			} else {
-				$this->data_array['is_public'] = false ;
+				$this->data_array['is_public'] = false;
 			}
-			$res = db_query_params ('SELECT section_name, ref_id, perm_val FROM pfo_role_setting WHERE role_id=$1',
-						array ($role_id)) ;
+			$res = db_query_params('SELECT section_name, ref_id, perm_val FROM pfo_role_setting WHERE role_id=$1',
+						array($role_id));
 			if (!$res) {
 				$this->setError('BaseRole::fetchData()::'.db_error());
 				return false;
@@ -1329,18 +1330,18 @@ abstract class BaseRole extends Error {
 // Actual classes
 
 abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
-	public function addUsers ($users) {
+	public function addUsers($users) {
 		global $SYS;
 
 		$ids = array () ;
 		foreach ($users as $user) {
-			$ids[] = $user->getID() ;
+			$ids[] = $user->getID();
 		}
 
-		$already_there = array () ;
-		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
-					array (db_int_array_to_any_clause($ids), $this->getID())) ;
-		while ($arr =& db_fetch_array($res)) {
+		$already_there = array();
+		$res = db_query_params('SELECT user_id FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
+					array(db_int_array_to_any_clause($ids), $this->getID()));
+		while ($arr = db_fetch_array($res)) {
 			$already_there[] = $arr['user_id'] ;
 		}
 
