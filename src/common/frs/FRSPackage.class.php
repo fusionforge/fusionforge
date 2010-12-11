@@ -42,9 +42,9 @@ function &get_frs_packages($Group) {
 /**
  * Gets a FRSPackage object from the given package id
  * 
- * @param package_id	the package id
- * @param data	the DB handle if passed in (optional)
- * @return	the FRSPackage object	
+ * @param	int	the package id
+ * @param	array	the DB handle if passed in (optional)
+ * @return	object	the FRSPackage object
  */
 function &frspackage_get_object($package_id, $data=false) {
 	global $FRSPACKAGE_OBJ;
@@ -58,7 +58,7 @@ function &frspackage_get_object($package_id, $data=false) {
 				$FRSPACKAGE_OBJ['_'.$package_id.'_']=false;
 				return false;
 			}
-			$data = db_fetch_array($res);			
+			$data = db_fetch_array($res);
 		}
 		$Group = group_get_object($data['group_id']);
 		$FRSPACKAGE_OBJ['_'.$package_id.'_']= new FRSPackage($Group,$data['package_id'],$data);
@@ -71,7 +71,7 @@ class FRSPackage extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var  array   $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 	var $package_releases;
@@ -79,17 +79,17 @@ class FRSPackage extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var  object  $Group.
+	 * @var	object	$Group.
 	 */
 	var $Group; //group object
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *  @param  object  The Group object to which this FRSPackage is associated.
-	 *  @param  int  The package_id.
-	 *  @param  array   The associative array of data.
-	 *	@return	boolean	success.
+	 * @param	object	The Group object to which this FRSPackage is associated.
+	 * @param	int	The package_id.
+	 * @param	array	The associative array of data.
+	 * @return	boolean	success.
 	 */
 	function FRSPackage(&$Group, $package_id=false, $arr=false) {
 		$this->Error();
@@ -469,7 +469,8 @@ class FRSPackage extends Error {
 			$this->setError('Package::delete error: trying to delete root dir');
 			return false;
 		}
-		rmdir($dir);
+		if (is_dir($dir))
+			rmdir($dir);
 
 		db_query_params ('DELETE FROM frs_package WHERE package_id=$1 AND group_id=$2',
 				 array ($this->getID(),
