@@ -367,17 +367,17 @@ class Group extends Error {
 			}
 
 			if (USE_PFO_RBAC) {
-				$gjr = new GroupJoinRequest ($this) ;
-				$gjr->create ($user->getID(),
-					      'Fake GroupJoinRequest to store the creator of a project',
-					      false) ;
+				$gjr = new GroupJoinRequest($this);
+				$gjr->create($user->getID(),
+					     'Fake GroupJoinRequest to store the creator of a project',
+					     false);
 			} else {
 			//
 			// Now, make the user an admin
 			//
-			$res=db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags,
+			$res=db_query_params('INSERT INTO user_group (user_id, group_id, admin_flags,
 				cvs_flags, artifact_flags, forum_flags, role_id)
-				VALUES ($1, $2, $3, $4, $5, $6, $7)', 
+				VALUES ($1, $2, $3, $4, $5, $6, $7)',
 					      array($user->getID(),
 						    $id,
 						    'A',
@@ -1452,7 +1452,7 @@ class Group extends Error {
 			return false;
 		}
 
-		db_begin();
+		//db_begin();
 		//
 		//	Remove all the members
 		//
@@ -1466,6 +1466,16 @@ class Group extends Error {
 		// Failsafe until user_group table is gone
 		$res = db_query_params('DELETE FROM user_group WHERE group_id=$1',
 					array($this->getID()));
+
+		// unlink roles to this project
+		if ($this->isPublic()) {
+			$ra = RoleAnonymous::getInstance();
+			$rl = RoleLoggedIn::getInstance();
+			$ra->unlinkProject($this);
+			$rl->unlinkProject($this);
+		}
+		// @todo : unlink all the other roles created in the project...
+
 		//
 		//	Delete Trackers
 		//
@@ -1706,9 +1716,6 @@ class Group extends Error {
 		}
 
 		db_commit();
-		if (!$res) {
-			return false;
-		}
 
 		$hook_params = array();
 		$hook_params['group'] = $this;
@@ -1744,12 +1751,12 @@ class Group extends Error {
 	*/
 
 	/**
-	 *	addUser - controls adding a user to a group.
-	 *  
-	 *  @param	string	Unix name of the user to add OR integer user_id.
-	 *	@param	int	The role_id this user should have.
-	 *	@return	boolean	success.
-	 *	@access public
+	 * addUser - controls adding a user to a group.
+	 *
+	 * @param	string	Unix name of the user to add OR integer user_id.
+	 * @param	int	The role_id this user should have.
+	 * @return	boolean	success.
+	 * @access	public
 	 */
 	function addUser($user_identifier,$role_id) {
 		global $SYS;
@@ -1798,7 +1805,7 @@ class Group extends Error {
 			}
 			
 			if (USE_PFO_RBAC) {
-				$role->addUser (user_get_object ($user_id)) ;
+				$role->addUser(user_get_object ($user_id)) ;
 				if (!$SYS->sysCheckCreateGroup($this->getID())){
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
@@ -1814,29 +1821,29 @@ class Group extends Error {
 			//
 			//	if not already a member, add them
 			//
-			$res_member = db_query_params ('SELECT user_id 
+			$res_member = db_query_params('SELECT user_id 
 				FROM user_group 
 				WHERE user_id=$1 AND group_id=$2',
-						       array ($user_id, $this->getID())) ;
+						       array($user_id, $this->getID()));
 
 			if (db_numrows($res_member) < 1) {
 				//
 				//	Create this user's row in the user_group table
 				//
-				$res = db_query_params ('INSERT INTO user_group 
+				$res = db_query_params('INSERT INTO user_group 
 					(user_id,group_id,admin_flags,forum_flags,project_flags,
 					doc_flags,cvs_flags,member_role,release_flags,artifact_flags)
 					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-							array ($user_id,
-							       $this->getID(),
-							       '',
-							       0,
-							       0,
-							       0,
-							       1,
-							       100,
-							       0,
-							       0)) ;
+							array($user_id,
+							      $this->getID(),
+							      '',
+							      0,
+							      0,
+							      0,
+							      1,
+							      100,
+							      0,
+							      0));
 
 				//verify the insert worked
 				if (!$res || db_affected_rows($res) < 1) {
@@ -1876,7 +1883,7 @@ class Group extends Error {
 				//  user was already a member
 				//  make sure they are set up 
 				//
-				$user=&user_get_object($user_id,$res_newuser);
+				$user= user_get_object($user_id,$res_newuser);
 				$user->fetchData($user->getID());
 				$role = new Role($this,$role_id);
 				if (!$role || !is_object($role)) {
@@ -1974,7 +1981,7 @@ class Group extends Error {
 						array($this->getID(),
 						      $user_id));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(sprintf(_('ERROR: User not removed: %s'), db_error()));
+				$this->setError(_('ERROR: User not removed:').' '.db_error());
 				db_rollback();
 				return false;
 			}
@@ -1991,7 +1998,7 @@ class Group extends Error {
 						array($this->getID(),
 						      $user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR: DB: artifact: %s'), db_error()));
+			$this->setError(_('ERROR: DB: artifact:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -2373,25 +2380,25 @@ class Group extends Error {
 		// Set permissions for roles
 		if (USE_PFO_RBAC) {
 			if ($this->isPublic()) {
-				$ra = RoleAnonymous::getInstance() ;
-				$rl = RoleLoggedIn::getInstance() ;
-				$ra->linkProject ($this) ;
-				$rl->linkProject ($this) ;
+				$ra = RoleAnonymous::getInstance();
+				$rl = RoleLoggedIn::getInstance();
+				$ra->linkProject($this);
+				$rl->linkProject($this);
 
-				$ra->setSetting ('project_read', $this->getID(), 1) ;
-				$rl->setSetting ('project_read', $this->getID(), 1) ;
+				$ra->setSetting('project_read', $this->getID(), 1);
+				$rl->setSetting('project_read', $this->getID(), 1);
 
-				$ra->setSetting ('frs', $this->getID(), 1) ;
-				$rl->setSetting ('frs', $this->getID(), 1) ;
+				$ra->setSetting('frs', $this->getID(), 1);
+				$rl->setSetting('frs', $this->getID(), 1);
 
-				$ra->setSetting ('docman', $this->getID(), 1) ;
-				$rl->setSetting ('docman', $this->getID(), 1) ;
+				$ra->setSetting('docman', $this->getID(), 1);
+				$rl->setSetting('docman', $this->getID(), 1);
 
-				$ff = new ForumFactory ($this) ;
+				$ff = new ForumFactory($this);
 				foreach ($ff->getAllForumIds() as $fid) {
-					$f = forum_get_object ($fid) ;
+					$f = forum_get_object($fid);
 					if ($f->isPublic()) {
-						$l = $f->getModerationLevel() ;
+						$l = $f->getModerationLevel();
 						if ($l == 0) {
 							$rl->setSetting('forum', $fid, 3);
 						} else {
@@ -2471,10 +2478,10 @@ class Group extends Error {
 
 
 	/**
-	 *	sendApprovalEmail - Send new project email.
+	 * sendApprovalEmail - Send new project email.
 	 *
-	 *	@return	boolean	success.
-	 *	@access public
+	 * @return	boolean	success.
+	 * @access	public
 	 */
 	function sendApprovalEmail() {
 		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID()) ;
@@ -2534,27 +2541,27 @@ if there is anything we can do to help you.
 
 
 	/**
-	 *	sendRejectionEmail - Send project rejection email.
+	 * sendRejectionEmail - Send project rejection email.
 	 *
-	 *	This function sends out a rejection message to a user who
-	 *	registered a project.
+	 * This function sends out a rejection message to a user who
+	 * registered a project.
 	 *
-	 *	@param	int	The id of the response to use.
-	 *	@param	string	The rejection message.
-	 *	@return completion status.
-	 *	@access public
+	 * @param	int	The id of the response to use.
+	 * @param	string	The rejection message.
+	 * @return	boolean	completion status.
+	 * @access	public
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
 		$submitters = array () ;
 		if (USE_PFO_RBAC) {
 			foreach (get_group_join_requests ($this) as $gjr) {
-				$submitters[] =  user_get_object($gjr->getUserID()) ;
+				$submitters[] = user_get_object($gjr->getUserID());
 			}
 		} else {
 			$res = db_query_params("SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND u.user_id=ug.user_id",
 					       $this->getID());
-			while ($arr = db_fetch_array ($res)) {
-				$submitter[] =& user_get_object($arr['user_id']);
+			while ($arr = db_fetch_array($res)) {
+				$submitter[] = user_get_object($arr['user_id']);
 			}
 		}
 
@@ -2564,7 +2571,7 @@ if there is anything we can do to help you.
 		}
 
 		foreach ($submitters as $admin) {
-			setup_gettext_for_user ($admin) ;
+			setup_gettext_for_user($admin);
 
 			$response=sprintf(_('Your project registration for %3$s has been denied.
 
@@ -2593,27 +2600,27 @@ Reasons for negative decision:
 	}
 
 	/**
-	 *	sendNewProjectNotificationEmail - Send new project notification email.
+	 * sendNewProjectNotificationEmail - Send new project notification email.
 	 *
-	 *	This function sends out a notification email to the
-	 *	SourceForge admin user when a new project is
-	 *	submitted.
+	 * This function sends out a notification email to the
+	 * SourceForge admin user when a new project is
+	 * submitted.
 	 *
-	 *	@return	boolean	success.
-	 *	@access public
+	 * @return	boolean	success.
+	 * @access	public
 	 */
 	function sendNewProjectNotificationEmail() {
 		// Get the user who wants to register the project
-		$submitters = array () ;
+		$submitters = array();
 		if (USE_PFO_RBAC) {
 			foreach (get_group_join_requests ($this) as $gjr) {
-				$submitters[] =  user_get_object($gjr->getUserID()) ;
+				$submitters[] = user_get_object($gjr->getUserID());
 			}
 		} else {
 			$res = db_query_params("SELECT u.user_id FROM users u, user_group ug WHERE ug.group_id=$1 AND u.user_id=ug.user_id",
 					       $this->getID());
 			while ($arr = db_fetch_array ($res)) {
-				$submitter[] =& user_get_object($arr['user_id']);
+				$submitter[] = user_get_object($arr['user_id']);
 			}
 		}
 		if (count ($submitters) < 1) {
@@ -2680,13 +2687,13 @@ The %1$s admin team will now examine your project submission.  You will be notif
 
 
 
-/**
- *	validateGroupName - Validate the group name
- *
- *	@param	string	Group name.
- *
- *	@return	an error false and set an error is the group name is invalide otherwise return true
- */
+	/**
+	 * validateGroupName - Validate the group name
+	 *
+	 * @param	string	Group name.
+	 *
+	 * @return	boolean	an error false and set an error is the group name is invalide otherwise return true
+	 */
 	function validateGroupName($group_name) {
 		if (strlen($group_name)<3) {
 			$this->setError(_('Group name is too short'));
@@ -2764,24 +2771,24 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	}
 
 	/**
-	 *	getUnixStatus - Status of activation of unix account.
+	 * getUnixStatus - Status of activation of unix account.
 	 *
-	 *	@return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
+	 * @return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
 	 */
 	function getUnixStatus() {
 		return $this->data_array['unix_status'];
 	}
 	
 	/**
-	 *	setUnixStatus - Sets status of activation of unix account.
+	 * setUnixStatus - Sets status of activation of unix account.
 	 *
-	 *	@param	string	The unix status.
-	 *	N	no_unix_account
+	 * @param	string	The unix status.
+	 * 	N	no_unix_account
 	 *	A	active
 	 *	S	suspended
 	 *	D	deleted
 	 *
-	 *	@return	boolean success.
+	 * @return	boolean success.
 	 */
 	function setUnixStatus($status) {
 		global $SYS;
@@ -2818,9 +2825,9 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	}
 	
 	/**
-	 *	getUsers - Get the users of a group
+	 * getUsers - Get the users of a group
 	 *
-	 *	@return array of user's objects.
+	 * @return array of user's objects.
 	 */
 	function getUsers($onlylocal = true) {
 		if (!isset($this->membersArr)) {

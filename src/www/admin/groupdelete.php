@@ -27,15 +27,15 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/license.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-session_require_global_perm ('forge_admin');
+session_require_global_perm('forge_admin');
 
-$group_id=getIntFromGet('group_id');
+$group_id = getIntFromGet('group_id');
 
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
-	exit_error($group->getErrorMessage(),'admin');
+	exit_error($group->getErrorMessage(), 'admin');
 }
 
 if (getStringFromPost('submit')) {
@@ -45,7 +45,7 @@ if (getStringFromPost('submit')) {
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error($group->getErrorMessage(), 'admin');
 	} else {
-		plugin_hook('delete_link',$_GET['group_id']);
+		plugin_hook('delete_link',$group_id);
 		$feedback = _('Project successfully deleted');
 		session_redirect('/admin/?feedback='.urlencode($feedback));
 	}
@@ -56,7 +56,7 @@ site_admin_header(array('title'=>$title));
 echo '<h1>'.$title.'</h1>';
 ?>
 
-<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+<form action="<?php echo '?group_id='.$group_id; ?>" method="post">
 <input type="checkbox" value="1" name="sure" /> <?php echo _('Confirm Delete'); ?><br />
 <input type="checkbox" value="1" name="reallysure" /> <?php echo _('Confirm Delete'); ?><br />
 <input type="checkbox" value="1" name="reallyreallysure" /> <?php echo _('Confirm Delete'); ?><br />
