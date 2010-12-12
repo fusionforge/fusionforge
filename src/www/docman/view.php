@@ -46,9 +46,9 @@ if (!$g || !is_object($g)) {
 	exit_error($g->getErrorMessage(), 'docman');
 }
 
-if ($docid != 'backup' && $docid != 'webdav' ) {
+if ($docid != 'backup' && $docid != 'webdav') {
 	session_require_perm('docman', $group_id, 'read');
-	$docname=urldecode($arr[5]);
+	$docname = urldecode($arr[5]);
 
 	$d = new Document($g,$docid);
 	if (!$d || !is_object($d)) {
