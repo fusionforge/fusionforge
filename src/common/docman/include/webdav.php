@@ -214,6 +214,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 		$analysed_path = $this->analyse($subpath, $group_id);
 
 		if ($analysed_path['isdir']) {
+			echo '<?xml version="1.0" encoding="utf-8"?>';
 			echo "<html><head><title>Index of ".htmlspecialchars($subpath)."</title></head>\n";
 			echo "<body>\n";
 			echo "<h1>Index of ".htmlspecialchars($subpath)."</h1>\n";
