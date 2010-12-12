@@ -4,6 +4,7 @@
  *
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -31,33 +32,33 @@ class Survey extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-         * Questions array in this survey
-         *
-         * @var array   $question_array.
-         */
+	 * Questions array in this survey
+	 *
+	 * @var	array	$question_array.
+	 */
 	var $all_question_array;
-          
+
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group.
+	 * @var	object	$Group.
 	 */
 	var $Group; 
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *  @param  object	The Group object to which this servey is associated.
-	 *  @param  int	        The servey_id.
-	 *  @param  array	The associative array of data.
-	 *  @return boolean	success.
+	 * @param	object	The Group object to which this servey is associated.
+	 * @param	int	The servey_id.
+	 * @param	array	The associative array of data.
+	 * @return	boolean	success.
 	 */
-	function Survey(&$Group, $survey_id=false, $arr=false) {
+	function Survey(&$Group, $survey_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), "Survey"));
@@ -87,41 +88,42 @@ class Survey extends Error {
 	}
 
 	/**
-	 *	create - use this function to create a survey 
+	 * create - use this function to create a survey 
 	 *
-	 *	@param	string	          The survey title
-	 *	@param	int array         The question numbers to be added
-	 *	@param  is_active         1: Active, 0: Inactive
-	 *	For future options
-	 *	@param  is_public         0: Admins Only, 1: Group Members, 2: Gforge user, 3:Every body
-	 *	@param  is_result_public  0: Admins Only, 1: Group Members, 2: Gforge user, 3:voted user 4:Every body
-	 *	@param  double_vote       Allow double vote if it is 1
-	 *	@return	boolean	success.
+	 * @param	string	          The survey title
+	 * @param	int array         The question numbers to be added
+	 * @param	is_active         1: Active, 0: Inactive
+	 * For future options
+	 * @param	is_public         0: Admins Only, 1: Group Members, 2: Gforge user, 3:Every body
+	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: Gforge user, 3:voted user 4:Every body
+	 * @param	double_vote       Allow double vote if it is 1
+	 * @return	boolean	success.
 	 */
-	function create($survey_title, $add_questions, $is_active=0, $is_public=1, $is_result_public=0, $double_vote=0) {
+	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
 			return false;
-			/* We need at least one survey question at this point */	
+			/* We need at least one survey question at this point */
 		} else if (!$add_questions || !is_array($add_questions) || count($add_questions)<1) {
 			$this->setError(_('Update Failed: Survey Questions Required'));
 			return false;
 		}
 
 		$group_id = $this->Group->GetID();
-		
+
 		/* Make old style survey string from array: 1, 2, 3, ..., n */
 		$survey_questions = $this->_makeQuestionString(array_reverse($add_questions));
 
-		$result = db_query_params ('INSERT INTO surveys (survey_title,group_id,survey_questions,is_active) VALUES ($1,$2,$3,$4)',
-					   array (htmlspecialchars($survey_title),
-						  $group_id,
-						  $survey_questions,
-						  $is_active)) ;
+		$result = db_query_params('INSERT INTO surveys (survey_title,group_id,survey_questions,is_active) VALUES ($1,$2,$3,$4)',
+						array(htmlspecialchars($survey_title),
+							$group_id,
+							$survey_questions,
+							$is_active)
+					);
 		if (!$result) {
 			$this->setError(_('Insert Error').db_error());
 			return false;
-		} 
+		}
 
 		/* Load question to data array */
 		$survey_id=db_insertid($result,'surveys','survey_id');
@@ -131,22 +133,22 @@ class Survey extends Error {
 
 
 	/**
-	 *	update - use this function to update a survey 
+	 * update - use this function to update a survey 
 	 *
-	 *	@param	string	          The survey title
-	 *	@param	int array         The question numbers to be added
-	 *	@param	int array         The question numbers to be deleted
-	 *	@param  is_active         1: Active, 0: Inactive
-	 *	@param  is_public         0: Admins Only, 1: Group Members, 2: Gforge user, 3:Every body
-	 *	@param  is_result_public  0: Admins Only, 1: Group Members, 2: Gforge user, 3:voted user 4:Every body
-	 *	@param  double_vote       Allow double vote if it is 1
-	 *	@return	boolean	success.
+	 * @param	string	          The survey title
+	 * @param	int array         The question numbers to be added
+	 * @param	int array         The question numbers to be deleted
+	 * @param	is_active         1: Active, 0: Inactive
+	 * @param	is_public         0: Admins Only, 1: Group Members, 2: Gforge user, 3:Every body
+	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: Gforge user, 3:voted user 4:Every body
+	 * @param	double_vote       Allow double vote if it is 1
+	 * @return	boolean	success.
 	 */
-	function update($survey_title, &$add_questions, &$del_questions, $is_active=0, $is_public=1, $is_result_public=0, $double_vote=0) {
+	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
 			return false;
-			/* We need at least one survey question at this point */	
+			/* We need at least one survey question at this point */
 		}
 
 		$group_id = $this->Group->GetID();
@@ -157,33 +159,34 @@ class Survey extends Error {
 			$this->setError(_('The Survey data is not filled'));
 			return false;
 		}
-		
+
 		if (is_array($add_questions))
 			$add_questions = array_reverse($add_questions);
 			
 		$survey_questions = $this->_updateQuestionString($add_questions, $del_questions);
-		$result = db_query_params ('UPDATE surveys SET survey_title=$1, survey_questions=$2, is_active=$3 WHERE survey_id=$4 AND group_id=$5',
-					   array (htmlspecialchars($survey_title),
-						  $survey_questions,
-						  $is_active,
-						  $survey_id,
-						  $group_id)) ;
+		$result = db_query_params('UPDATE surveys SET survey_title=$1, survey_questions=$2, is_active=$3 WHERE survey_id=$4 AND group_id=$5',
+						array (htmlspecialchars($survey_title),
+							$survey_questions,
+							$is_active,
+							$survey_id,
+							$group_id)
+					);
 		if (db_affected_rows($result) < 1) {
 			 $this->setError(_('UPDATE FAILED').db_error());
 			 return false;
-		} 
+		}
 		/* Update internal data */
 		return $this->fetchData($survey_id);
 	}
 
-        /**
-	 *	updateOrder - use this function to update question order
+	/**
+	 * updateOrder - use this function to update question order
 	 *
-	 *	@param	int 	          Question number
-	 *	@param	boolean           decide up or down. it is up if it is true
-	 *	@return	boolean	success.
+	 * @param	int 	Question number
+	 * @param	boolean	decide up or down. it is up if it is true
+	 * @return	boolean	success.
 	 */
-	function updateOrder($question_number, $is_up=true) {
+	function updateOrder($question_number, $is_up = true) {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 
@@ -201,22 +204,23 @@ class Survey extends Error {
 		}
 
 		$survey_questions = $this->_updateQuestionStringOrder($question_number, $delta);
-		$result = db_query_params ('UPDATE surveys SET survey_questions=$1 WHERE survey_id=$2 AND group_id=$3',
-					   array ($survey_questions,
-						  $survey_id,
-						  $group_id)) ;
+		$result = db_query_params('UPDATE surveys SET survey_questions=$1 WHERE survey_id=$2 AND group_id=$3',
+						array ($survey_questions,
+							$survey_id,
+							$group_id)
+					);
 		if (db_affected_rows($result) < 1) {
-			 $this->setError(_('UPDATE FAILED').db_error());
-			 return false;
-		} 
+			$this->setError(_('UPDATE FAILED').db_error());
+			return false;
+		}
 		
-                /* Update internal data */
+		/* Update internal data */
 		return $this->fetchData($survey_id);
 	}
 
 	/**
-	 *	delete - use this function to delete this survey
-	 *               (We don't support delete yet)
+	 * delete - use this function to delete this survey
+	 * (We don't support delete yet)
 	 *
 	 *	@return	boolean	success.
 	 */
@@ -224,32 +228,31 @@ class Survey extends Error {
 		$group_id = $this->Group->GetID();
 		$survey_id = $this->getID();
 
-		$res = db_query_params ('DELETE FROM surveys where survey_id=$1 AND group_id=$2',
-					array ($survey_id,
-					       $group_id)) ;
+		$res = db_query_params('DELETE FROM surveys where survey_id=$1 AND group_id=$2',
+					array($survey_id, $group_id)
+					);
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Delete failed').db_error());
 			return false;
 		}
-		
+
 		/* Delete internal data */
 		$this->data_array = null;
 		return true;
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this survey from the database.
+	 * fetchData - re-fetch the data for this survey from the database.
 	 *
-	 *  @param  int	 The survey_id.
-	 *  @return	boolean	success.
+	 * @param	int	The survey_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($survey_id) {
 		$group_id = $this->Group->GetID();
 		
-		$res = db_query_params ('SELECT * FROM surveys where survey_id=$1 AND group_id=$2',
-					array ($survey_id,
-					       $group_id)) ;
-	
+		$res = db_query_params('SELECT * FROM surveys where survey_id=$1 AND group_id=$2',
+					array($survey_id, $group_id)) ;
+
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('No Survey is found').db_error());
 			return false;
@@ -260,7 +263,7 @@ class Survey extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this Survey is associated with.
+	 * getGroup - get the Group object this Survey is associated with.
 	 *
 	 *	@return	object	The Group object.
 	 */
@@ -376,9 +379,9 @@ class Survey extends Error {
 	}
 
 	/**
-	 *	getQuestionInstances - Get the SurveyQuestion array belongs to this Survey by order
+	 * getQuestionInstances - Get the SurveyQuestion array belongs to this Survey by order
 	 *
-	 *	@return string the question
+	 * @return	string	the question
 	 */
 	function &getQuestionInstances() {
 		$ret = array();
@@ -388,7 +391,7 @@ class Survey extends Error {
 		}
 
 		$arr = & $this->getQuestionArray();
-		
+
 		for ($i=0; $i<count($arr); $i++) {
 			for ($j=0; $j<count($this->all_question_array); $j++) {
 				/* If it is, copy into new array in order */
@@ -398,14 +401,14 @@ class Survey extends Error {
 				}
 			}
 		}
-		
+
 		return $ret;
 	}
-	
+
 	/**
-	 *	getAddableQuestionInstances - Get the addable SurveyQuestion from all questions
+	 * getAddableQuestionInstances - Get the addable SurveyQuestion from all questions
 	 *
-	 *	@return string the question
+	 * @return	string	the question
 	 */
 	function &getAddableQuestionInstances() {
 		$ret = array();
@@ -415,32 +418,32 @@ class Survey extends Error {
 		}
 
 		$arr = & $this->getQuestionArray();
-		if ($arr) {		
+		if ($arr) {
 			/* Copy questions only if it is not in question string */
 			for ($i=0; $i<count($this->all_question_array); $i++) {
-				if (array_search($this->all_question_array[$i]->getID(), $arr)==false && 
-				    $this->all_question_array[$i]->getID()!=$arr[0]) {
+				if (array_search($this->all_question_array[$i]->getID(), $arr) == false && 
+					$this->all_question_array[$i]->getID()!=$arr[0]) {
 					$ret[] = $this->all_question_array[$i];
 				}
 			}
 		} else {
 			$ret = $this->all_question_array;
 		}
-		
+
 		return $ret;
 	}
 
 	/***************************************************************
-         * private question string deal methods
-         * TODO: Add a joint table for surveys and survey_questions. 
-         *       Deal with DBMS not comma separated string
+	 * private question string deal methods
+	 * TODO: Add a joint table for surveys and survey_questions. 
+	 *       Deal with DBMS not comma separated string
          ***************************************************************/
 
 	/**
-	 *      _fillSurveyQuestions - Get all Survey Questions using SurveyQuestionFactory
-         *
-         *      @return booelan suesssness
-         */
+	 * _fillSurveyQuestions - Get all Survey Questions using SurveyQuestionFactory
+	 *
+	 * @return	boolean	success
+	 */
 	function _fillSurveyQuestions() {
 		$sqf = new SurveyQuestionFactory($this->getGroup());
 		$this->all_question_array = & $sqf->getSurveyQuestions();
@@ -448,10 +451,10 @@ class Survey extends Error {
 
 	
 	/**
-	 *  _isValidQuestionID - Check it is correct question id
+	 * _isValidQuestionID - Check it is correct question id
 	 *
-	 *  @param int questioin id 
-	 *  @return boolean true if it is valid question id
+	 * @param	int	questioin id 
+	 * @return	boolean	true if it is valid question id
 	 */
 	function _isValidQuestionID($question_id) {
 		if (!$this->all_question_array || !is_array($this->all_question_array)) {
@@ -465,16 +468,16 @@ class Survey extends Error {
 		}
 		return false;
 	}
- 	
-	
+
+
 	/**
-	 *  _makeQuestionString - Make comma separated question number string
+	 * _makeQuestionString - Make comma separated question number string
 	 *
-	 *  @param    int array	 Array of question number
-	 *  @return   string     question_strong (example: 1, 2, 3, 7);
+	 * @param	int array	Array of question number
+	 * @return	string		question_strong (example: 1, 2, 3, 7);
 	 */
 	function _makeQuestionString($arr) {
-		
+
 		/* No questions to add */
 		if (!$arr || !is_array($arr) || count($arr)<1) {
 			return '';
@@ -483,11 +486,11 @@ class Survey extends Error {
 	}
 
 	/**
-	 *  _updateQuestionString - Update comma saparated question number string
+	 * _updateQuestionString - Update comma saparated question number string
 	 *
-	 *  @param    int array	 Array of questions to add
-	 *  @param    int array	 Array of questions to delete
-	 *  @return   string     question_strong (example: 1, 2, 3, 7);
+	 * @param	int array	Array of questions to add
+	 * @param	int array	Array of questions to delete
+	 * @return	string		question_strong (example: 1, 2, 3, 7);
 	 */
 	function _updateQuestionString(&$arr_to_add, &$arr_to_del) {
 		/* Get array of current question string */
@@ -500,10 +503,10 @@ class Survey extends Error {
 			if ($arr_to_add && is_array($arr_to_add) && count($arr_to_add)>0) {
 				for ($i = 0; $i < count($arr_to_add); $i++) {
 				/* Avoid double question */
-					if ($arr_to_add[$i] && array_search($arr_to_add[$i], $arr)==false && $arr_to_add[$i]!=$arr[0]) {
+					if ($arr_to_add[$i] && array_search($arr_to_add[$i], $arr) == false && $arr_to_add[$i]!=$arr[0]) {
 						$arr[] = $arr_to_add[$i];
 					}
-				}  
+				}
 			}
 		}
 		
@@ -515,7 +518,7 @@ class Survey extends Error {
 				if ($arr[$i] && array_search($arr[$i], $arr_to_del)==false && $arr_to_del[0]!=$arr[$i]) {
 					$new_arr[] = $arr[$i];
 				}
-			}  
+			}
 			/* copy new_arr to arr */
 			$arr = $new_arr;
 		}
@@ -524,12 +527,12 @@ class Survey extends Error {
 		return $this->_makeQuestionString($arr);
 	}
 
-        /**
-	 *  _updateArrayOrder - Update array order
+	/**
+	 * _updateArrayOrder - Update array order
 	 *
-	 *  @param    int 	 question number
-	 *  @param    int	 increment or decrement (must be 1 or -1)
-	 *  @return   string     question_strong (example: 1, 2, 3, 7);
+	 * @param	int	question number
+	 * @param	int	increment or decrement (must be 1 or -1)
+	 * @return	string	question_strong (example: 1, 2, 3, 7);
 	 */
 	function _updateQuestionStringOrder($question_number, $delta) {
 		/* Get array of current question string */
@@ -541,10 +544,10 @@ class Survey extends Error {
 		}
 
 		$index = array_search($question_number, $arr);
-		
+
 		/* The question number is not in the array 
 		 * We have nothing to change 
-		 */ 
+		 */
 		if ($index==false && $question_number!=$arr[0]) {
 			return $this->getQuestionString();
 		}

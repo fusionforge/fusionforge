@@ -198,15 +198,15 @@ class Forum extends Error {
 
 		db_begin();
 		$result = db_query_params('INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous,moderation_level) VALUES ($1,$2,$3,$4,$5,$6,$7)',
-					  array ($this->Group->getID(),
-						 strtolower($forum_name),
-						 $is_public,
-						 htmlspecialchars($description),
-						 $send_all_posts_to,
-						 $allow_anonymous,
-						 $moderation_level));
+					  array($this->Group->getID(),
+						strtolower($forum_name),
+						$is_public,
+						htmlspecialchars($description),
+						$send_all_posts_to,
+						$allow_anonymous,
+						$moderation_level));
 		if (!$result) {
-			$this->setError(_('Error Adding Forum').db_error());
+			$this->setError(_('Error Adding Forum:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -249,27 +249,27 @@ class Forum extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this ArtifactType is associated with.
+	 * getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID - The id of this forum.
+	 * getID - The id of this forum.
 	 *
-	 *	@return	int	The group_forum_id #.
+	 * @return	int	The group_forum_id #.
 	 */
 	function getID() {
 		return $this->data_array['group_forum_id'];
 	}
 
 	/**
-	 *	getNextThreadID - The next thread_id for a new top in this forum.
+	 * getNextThreadID - The next thread_id for a new top in this forum.
 	 *
-	 *	@return	int	The next thread_id #.
+	 * @return	int	The next thread_id #.
 	 */
 	function getNextThreadID() {
 		$result = db_query_params('SELECT nextval($1)',

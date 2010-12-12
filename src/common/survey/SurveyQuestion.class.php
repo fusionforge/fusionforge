@@ -30,26 +30,26 @@ class SurveyQuestion extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group.
+	 * @var	object	$Group.
 	 */
 	var $Group; //group object
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *  @param  object	The Group object to which this Survey Question is associated.
-	 *  @param  int	        The questtion_id.
-	 *  @param  array	The associative array of data.
-	 *  @return boolean	success.
+	 * @param	object	The Group object to which this Survey Question is associated.
+	 * @param	int	The questtion_id.
+	 * @param	array	The associative array of data.
+	 * @return	boolean	success.
 	 */
-	function SurveyQuestion(&$Group, $question_id=false, $arr=false) {
+	function SurveyQuestion(&$Group, $question_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'Survey Question'));
@@ -79,19 +79,19 @@ class SurveyQuestion extends Error {
 	}
 
 	/**
-	 *	create - use this function to create a survey question
+	 * create - use this function to create a survey question
 	 *
-	 *	@param	string	The question
-	 *	@param	int     The question type
-         *                      1: Radio Buttons 1-5
-         *                      2: Text Area
-         *                      3: Radio Buttons Yes/No
-         *                      4: Comment Only
-         *                      5: Text Field
-         *                      6: None
-	 *	@return	boolean	success.
+	 * @param	string	The question
+	 * @param	int	The question type
+	 *                      1: Radio Buttons 1-5
+	 *                      2: Text Area
+	 *                      3: Radio Buttons Yes/No
+	 *                      4: Comment Only
+	 *                      5: Text Field
+	 *                      6: None
+	 * @return	boolean	success.
 	 */
-	function create($question, $question_type=1) {
+	function create($question, $question_type = 1) {
 		if (strlen($question) < 3) {
 			$this->setError(_('Question is too short'));
 			return false;
@@ -102,36 +102,36 @@ class SurveyQuestion extends Error {
 
 		$group_id = $this->Group->GetID();
 
-		$res = db_query_params ('INSERT INTO survey_questions (group_id,question,question_type) VALUES ($1,$2,$3)',
-					array ($group_id,
-					       htmlspecialchars($question),
-					       $question_type)) ;
+		$res = db_query_params('INSERT INTO survey_questions (group_id,question,question_type) VALUES ($1,$2,$3)',
+					array($group_id,
+					      htmlspecialchars($question),
+					      $question_type));
 		if (!$res) {
 			$this->setError(_('Question Added').db_error());
 			return false;
 		} 
 
 		/* Load question to data array */
-		$question_id=db_insertid($res,'survey_questions','question_id');
+		$question_id = db_insertid($res,'survey_questions','question_id');
 		return $this->fetchData($question_id);
 	}
 
 
-	
+
 	/**
-	 *	update - use this function to update a survey question
+	 * update - use this function to update a survey question
 	 *
-	 *	@param	string	The question
-	 *	@param	int     The question type
-         *                      1: Radio Buttons 1-5
-         *                      2: Text Area
-         *                      3: Radio Buttons Yes/No
-         *                      4: Comment Only
-         *                      5: Text Field
-         *                      6: None
+	 * @param	string	The question
+	 * @param	int	The question type
+	 *                      1: Radio Buttons 1-5
+	 *                      2: Text Area
+	 *                      3: Radio Buttons Yes/No
+	 *                      4: Comment Only
+	 *                      5: Text Field
+	 *                      6: None
 	 *	@return	boolean	success.
 	 */
-	function update($question, $question_type=1) {
+	function update($question, $question_type = 1) {
 		if (strlen($question) < 3) {
 			$this->setError(_('Question is too short'));
 			return false;
@@ -143,11 +143,11 @@ class SurveyQuestion extends Error {
 		$group_id = $this->Group->GetID();
 		$question_id = $this->getID();
 
-		$res = db_query_params ('UPDATE survey_questions SET question=$1, question_type=$2 where question_id=$3 AND group_id=$4',
-					array (htmlspecialchars($question),
-					       $question_type,
-					       $question_id,
-					       $group_id));
+		$res = db_query_params('UPDATE survey_questions SET question=$1, question_type=$2 where question_id=$3 AND group_id=$4',
+					array(htmlspecialchars($question),
+					      $question_type,
+					      $question_id,
+					      $group_id));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('UPDATE FAILED').db_error());
 			return false;
@@ -156,17 +156,17 @@ class SurveyQuestion extends Error {
 	}
 
 	/**
-	 *	delete - use this function to delete a survey question
+	 * delete - use this function to delete a survey question
 	 *
-	 *	@return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		$group_id = $this->Group->GetID();
 		$question_id = $this->getID();
 
-		$res = db_query_params ('DELETE FROM survey_questions where question_id=$1 AND group_id=$2',
-					array ($question_id,
-					       $group_id)) ;
+		$res = db_query_params('DELETE FROM survey_questions where question_id=$1 AND group_id=$2',
+					array($question_id,
+					      $group_id));
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Delete failed').db_error());
 			return false;
@@ -177,22 +177,22 @@ class SurveyQuestion extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this survey question from the database.
+	 * fetchData - re-fetch the data for this survey question from the database.
 	 *
-	 *  @param  int	 The survey question_id.
-	 *  @return	boolean	success.
+	 * @param	int	The survey question_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($question_id) {
 		$group_id = $this->Group->GetID();
 		
-		$res = db_query_params ('SELECT survey_questions.*, survey_question_types.type 
-                      FROM survey_questions ,survey_question_types 
-                      WHERE  survey_question_types.id=survey_questions.question_type 
-                      AND    survey_questions.question_id=$1
-                      AND  survey_questions.group_id=$2',
-					array ($question_id,
-					       $group_id)) ;
-	
+		$res = db_query_params('SELECT survey_questions.*, survey_question_types.type 
+		      FROM survey_questions ,survey_question_types 
+		      WHERE survey_question_types.id=survey_questions.question_type 
+		      AND survey_questions.question_id=$1
+		      AND survey_questions.group_id=$2',
+					array($question_id,
+					      $group_id));
+
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Error finding question').db_error());
 			return false;
@@ -203,48 +203,47 @@ class SurveyQuestion extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this SurveyQuestion is associated with.
+	 * getGroup - get the Group object this SurveyQuestion is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID - Get the id of this Survey Question
+	 * getID - Get the id of this Survey Question
 	 *
-	 *	@return	int	The question_id
+	 * @return	int	The question_id
 	 */
 	function getID() {
 		return $this->data_array['question_id'];
 	}
 
-	
-        /**
-	 *	getQuestion - Get the question
+	/**
+	 * getQuestion - Get the question
 	 *
-	 *	@return string the question
+	 * @return	string	the question
 	 */
 	function getQuestion() {
 		return $this->data_array['question'];
 	}
 
 
-        /**
-	 *	getQuestionType - Get the question type
+	/**
+	 * getQuestionType - Get the question type
 	 *
-	 *	@return int the question type
+	 * @return	int	the question type
 	 */
 	function getQuestionType() {
 		return $this->data_array['question_type'];
 	}
 
 
-        /**
-	 *	getQuestionStringType - Get the type from survey_question_types
+	/**
+	 * getQuestionStringType - Get the type from survey_question_types
 	 *
-	 *	@return String the question type
+	 * @return	string	the question type
 	 */
 	function getQuestionStringType() {
 		return $this->data_array['type'];

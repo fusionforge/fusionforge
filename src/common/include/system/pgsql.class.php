@@ -33,26 +33,26 @@ class pgsql extends System {
 	/**
  	* Value to add to unix_uid to get unix uid
  	* 
- 	* @var	constant		$UID_ADD
+ 	* @var	constant	$UID_ADD
  	*/
 	var $UID_ADD = 20000;
 		
 	/**
  	* Value to add to group_id to get unix gid
  	*
- 	* @var	constant		$GID_ADD
+ 	* @var	constant	$GID_ADD
  	*/
 	var $GID_ADD = 10000;
 		
 	/**
  	* Value to add to unix gid to get unix uid of anoncvs special user
  	*
- 	* @var	constant		$SCM_UID_ADD
+ 	* @var	constant	$SCM_UID_ADD
  	*/
 	var $SCM_UID_ADD = 50000;
 
 	/**
-	*	pgsql() - CONSTRUCTOR
+	* pgsql() - CONSTRUCTOR
 	*
 	*/
 	function pgsql() {
@@ -63,15 +63,14 @@ class pgsql extends System {
 	/**
 	* sysUseUnixName() - Check if user/group used the unix_name
 	*
-	* @param		string   The unix_name to check
-	* @returns true if used/false is free
-	*
+	* @param	string	The unix_name to check
+	* @return	boolean	true if used/false is free
 	*/
 	function sysUseUnixName($unix_name) {
-		$res1 = db_query_params ('SELECT user_id FROM users
-		                          WHERE user_name=$1',array($unix_name));
-		$res2 = db_query_params ('SELECT group_id FROM groups
-		                          WHERE unix_group_name=$1',array($unix_name));
+		$res1 = db_query_params('SELECT user_id FROM users
+		                         WHERE user_name=$1',array($unix_name));
+		$res2 = db_query_params('SELECT group_id FROM groups
+		                         WHERE unix_group_name=$1',array($unix_name));
 		if ( db_numrows($res1) == 0 && db_numrows($res2) == 0 ){
 			return true;
 		}
@@ -85,8 +84,8 @@ class pgsql extends System {
 	/**
  	* sysCheckUser() - Check for the existence of a user
  	* 
- 	* @param		int		The user ID of the user to check
- 	* @returns true on success/false on error
+ 	* @param	int	The user ID of the user to check
+ 	* @return	boolean	true on success/false on error
  	*
  	*/
 	function sysCheckUser($user_id) {
@@ -100,8 +99,8 @@ class pgsql extends System {
 	/**
  	* sysCreateUser() - Create a user
  	*
- 	* @param		int	The user ID of the user to create
- 	* @returns The return status
+ 	* @param	int	The user ID of the user to create
+ 	* @return	boolean	success or not
  	*
  	*/
 	function sysCreateUser($user_id) {
@@ -167,8 +166,8 @@ class pgsql extends System {
 	/**
  	* sysCheckCreateUser() - Check that a user has been created
  	*
- 	* @param		int		The ID of the user to check
- 	* @returns true on success/false on error
+ 	* @param	int	The ID of the user to check
+ 	* @return	boolean	true on success/false on error
  	*
  	*/
 	function sysCheckCreateUser($user_id) {
@@ -178,8 +177,8 @@ class pgsql extends System {
 	/**
  	* sysCheckCreateGroup() - Check that a group has been created
  	*
- 	* @param		int		The ID of the user to check
- 	* @returns true on success/false on error
+ 	* @param	int	The ID of the user to check
+ 	* @return	boolean	true on success/false on error
  	*
  	*/
 	function sysCheckCreateGroup($user_id) {
@@ -189,14 +188,14 @@ class pgsql extends System {
 	/**
  	* sysRemoveUser() - Remove a user
  	*
- 	* @param		int		The user ID of the user to remove
- 	* @returns true on success/false on failure
+ 	* @param	int	The user ID of the user to remove
+ 	* @return	boolean	true on success/false on failure
  	*
  	*/
 	function sysRemoveUser($user_id) {
-		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
+		$res = db_query_params('UPDATE users SET unix_status=$1 WHERE user_id=$2',
 					array ('N',
-					       $user_id)) ;
+					       $user_id));
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
 			return false;
@@ -222,10 +221,10 @@ class pgsql extends System {
 	/**
  	* sysUserSetAttribute() - Set an attribute for a user
  	*
- 	* @param		int		The user ID 
- 	* @param		string	The attribute to set
- 	* @param		string	The new value of the attribute
- 	* @returns true on success/false on error
+ 	* @param	int	The user ID 
+ 	* @param	string	The attribute to set
+ 	* @param	string	The new value of the attribute
+ 	* @return	boolean	true on success/false on error
  	*
  	*/
 	function sysUserSetAttribute($user_id,$attr,$value) {
@@ -239,8 +238,8 @@ class pgsql extends System {
 	/**
  	* sysCheckGroup() - Check for the existence of a group
  	* 
- 	* @param		int		The ID of the group to check
- 	* @returns true on success/false on error
+ 	* @param	int	The ID of the group to check
+ 	* @return	boolean	true on success/false on error
  	*
  	*/
 	function sysCheckGroup($group_id) {
@@ -248,8 +247,8 @@ class pgsql extends System {
 		if (!$group){
 			return false;
 		} else {
-			$res = db_query_params ('SELECT group_id FROM nss_groups WHERE group_id=$1',
-						array ($group_id));
+			$res = db_query_params('SELECT group_id FROM nss_groups WHERE group_id=$1',
+						array($group_id));
 			if (db_numrows($res) == 0){
 				return false;
 			} else {
@@ -341,11 +340,10 @@ class pgsql extends System {
  	/**
 	 * sysGroupAddUser() - Add a user to a group
 	 *
-	 * @param		int		The ID of the group two which the user will be added
-	 * @param		int		The ID of the user to add
-	 * @param		bool	ignored
-	 * @returns true on success/false on error
-	 *
+	 * @param	int	The ID of the group two which the user will be added
+	 * @param	int	The ID of the user to add
+	 * @param	bool	ignored
+	 * @return	boolean	true on success/false on error
 	 */
 	function sysGroupAddUser($group_id,$user_id,$foo=NULL) {
 		return $this->sysGroupCheckUser($group_id,$user_id) ;
@@ -354,10 +352,9 @@ class pgsql extends System {
 	/**
  	* sysGroupCheckUser() - Sync user's Unix permissions with their FF permissions within a group
  	*
- 	* @param		int		The ID of the group
- 	* @param		int		The ID of the user
- 	* @returns true on success/false on error
- 	*
+ 	* @param	int	The ID of the group
+ 	* @param	int	The ID of the user
+ 	* @return	boolean	true on success/false on error
  	*/
 	function sysGroupCheckUser($group_id,$user_id) {
 		db_begin () ;
@@ -365,7 +362,7 @@ class pgsql extends System {
 			db_rollback () ;
 			return false;
 		}
-		
+
 		$u = user_get_object($user_id) ;
 		$p = group_get_object($group_id) ;
 		if (forge_check_perm_for_user($u,'scm',$group_id,'write')) {
@@ -382,18 +379,18 @@ WHERE users.user_id=$3
   AND users.unix_status=$5
   AND groups.status=$6
   AND groups.group_id=$7)',
-						array ($this->SCM_UID_ADD,
-						       'scm_',
-						       $user_id,
-						       'A', 'A', 'A',
-						       $group_id)) ;
+						array($this->SCM_UID_ADD,
+						      'scm_',
+						      $user_id,
+						      'A', 'A', 'A',
+						      $group_id));
 			if (!$res) {
-				db_rollback () ;
+				db_rollback();
 				$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
 				return false;
 			}
 		}
-		
+
 		if ($u->isMember($p)) {
 			$res = db_query_params ('INSERT INTO nss_usergroups (
 SELECT users.unix_uid AS uid,
@@ -426,10 +423,9 @@ WHERE users.user_id=$2
 	/**
  	* sysGroupRemoveUser() - Remove a user from a group
  	*
- 	* @param		int		The ID of the group from which to remove the user
- 	* @param		int		The ID of the user to remove
- 	* @returns true on success/false on error
- 	*
+ 	* @param	int	The ID of the group from which to remove the user
+ 	* @param	int	The ID of the user to remove
+ 	* @return	boolean	true on success/false on error
  	*/
 	function sysGroupRemoveUser($group_id,$user_id) {
 		$res = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2',

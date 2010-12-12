@@ -43,7 +43,7 @@ if (getStringFromPost('submit')) {
 	$reallysure = getIntFromPost('reallysure');
 	$reallyreallysure = getIntFromPost('reallyreallysure');
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
-		exit_error($group->getErrorMessage(),'admin');
+		exit_error($group->getErrorMessage(), 'admin');
 	} else {
 		plugin_hook('delete_link',$_GET['group_id']);
 		$feedback = _('Project successfully deleted');
