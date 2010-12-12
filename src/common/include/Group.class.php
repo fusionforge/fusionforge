@@ -146,7 +146,7 @@ function &group_get_objects($id_arr) {
 function &group_get_active_projects() {
 	$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
 			      array('A'));
-	return group_get_objects(util_result_column_to_array($res,0)) ;
+	return group_get_objects(util_result_column_to_array($res,0));
 }
 
 function &group_get_object_by_name($groupname) {
@@ -156,7 +156,7 @@ function &group_get_object_by_name($groupname) {
 
 function &group_get_objects_by_name($groupname_arr) {
 	$res = db_query_params('SELECT group_id FROM groups WHERE unix_group_name = ANY ($1)',
-			      array (db_string_array_to_any_clause($groupname_arr)));
+			      array(db_string_array_to_any_clause($groupname_arr)));
 	$arr =& util_result_column_to_array($res,0);
 	return group_get_objects($arr);
 }
@@ -164,7 +164,6 @@ function &group_get_objects_by_name($groupname_arr) {
 function &group_get_object_by_publicname($groupname) {
 	$res = db_query_params('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
 			      array(htmlspecialchars(strtolower($groupname))));
-
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
@@ -248,7 +247,6 @@ class Group extends Error {
 				}
 			}
 		}
-		
 		return true;
 	}
 
@@ -298,7 +296,7 @@ class Group extends Error {
 			$this->setError(_('Unix name already taken'));
 			return false;
 		} else if (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
-						      array ($unix_name))) > 0) {
+						      array($unix_name))) > 0) {
 			$this->setError(_('Unix name already taken'));
 			return false;
 		} else if (strlen($purpose)<10) {
@@ -317,10 +315,10 @@ class Group extends Error {
 
 			srand((double)microtime()*1000000);
 			$random_num = rand(0,1000000);
-	
+
 			db_begin();
-	
-			$res = db_query_params ('
+
+			$res = db_query_params('
 				INSERT INTO groups (
 					group_name,
 					is_public,
@@ -337,19 +335,19 @@ class Group extends Error {
 					rand_hash
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
-						array (htmlspecialchars ($group_name),
-						       $is_public,
-						       $unix_name,
-						       htmlspecialchars($description),
-						       $unix_name.".".forge_get_config('web_host'),
-						       $unix_name.".".forge_get_config('web_host'),
-						       'P',
-						       $unix_box,
-						       $scm_box,
-						       htmlspecialchars($purpose),
-						       time(),
-						       $is_public,
-						       md5($random_num)	)) ;
+						array(htmlspecialchars ($group_name),
+						      $is_public,
+						      $unix_name,
+						      htmlspecialchars($description),
+						      $unix_name.".".forge_get_config('web_host'),
+						      $unix_name.".".forge_get_config('web_host'),
+						      'P',
+						      $unix_box,
+						      $scm_box,
+						      htmlspecialchars($purpose),
+						      time(),
+						      $is_public,
+						      md5($random_num)));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
 				db_rollback();
@@ -380,13 +378,13 @@ class Group extends Error {
 			$res=db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags,
 				cvs_flags, artifact_flags, forum_flags, role_id)
 				VALUES ($1, $2, $3, $4, $5, $6, $7)', 
-					      array ($user->getID(),
-						     $id,
-						     'A',
-						     1,
-						     2,
-						     2,
-						     1));
+					      array($user->getID(),
+						    $id,
+						    'A',
+						    1,
+						    2,
+						    2,
+						    1));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not add admin to newly created group: %s'),db_error()));
 				db_rollback();
@@ -394,12 +392,12 @@ class Group extends Error {
 			}
 			}
 
-			$hook_params = array ();
+			$hook_params = array();
 			$hook_params['group'] = $this;
 			$hook_params['group_id'] = $this->getID();
 			$hook_params['group_name'] = $group_name;
 			$hook_params['unix_group_name'] = $unix_name;
-			plugin_hook ("group_create", $hook_params);
+			plugin_hook("group_create", $hook_params);
 
 			db_commit();
 			if ($send_mail) {
@@ -443,11 +441,11 @@ class Group extends Error {
 			SET is_public=$1, type_id=$2,
 				unix_box=$3, http_domain=$4
 			WHERE group_id=$5',
-					array ($is_public,
-					       $type_id,
-					       $unix_box,
-					       $http_domain,
-					       $this->getID())) ;
+					array($is_public,
+					      $type_id,
+					      $unix_box,
+					      $http_domain,
+					      $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('ERROR: DB: Could not change group properties: %s'),db_error());
@@ -491,12 +489,12 @@ class Group extends Error {
 	 * @return	int	status.
 	 * @access	public
 	 */
-	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
-		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
-		$new_doc_address,$send_all_docs,$logo_image_id,
-		$use_ftp,$use_tracker,$use_frs,$use_stats,$tags,$is_public) {
+	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
+		$use_pm, $use_pm_depend_box, $use_scm, $use_news, $use_docman,
+		$new_doc_address, $send_all_docs, $logo_image_id,
+		$use_ftp, $use_tracker, $use_frs, $use_stats, $tags, $is_public) {
 
-		$perm =& $this->getPermission ();
+		$perm =& $this->getPermission();
 
 		if (!$perm || !is_object($perm)) {
 			$this->setError(_('Could not get permission.'));
@@ -518,7 +516,7 @@ class Group extends Error {
 		if ($new_doc_address) {
 			$invalid_mails = validate_emails($new_doc_address);
 			if (count($invalid_mails) > 0) {
-				$this->setError(sprintf (ngettext('New Doc Address Appeared Invalid: %s', 'New Doc Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
+				$this->setError(sprintf(ngettext('New Doc Address Appeared Invalid: %s', 'New Doc Addresses Appeared Invalid: %s', count($invalid_mails)),implode(',',$invalid_mails)));
 				return false;
 			}
 		}
@@ -526,48 +524,48 @@ class Group extends Error {
 		// in the database, these all default to '1',
 		// so we have to explicity set 0
 		if (!$use_mail) {
-			$use_mail=0;
+			$use_mail = 0;
 		}
 		if (!$use_survey) {
-			$use_survey=0;
+			$use_survey = 0;
 		}
 		if (!$use_forum) {
-			$use_forum=0;
+			$use_forum = 0;
 		}
 		if (!$use_pm) {
-			$use_pm=0;
+			$use_pm = 0;
 		}
 		if (!$use_pm_depend_box) {
-			$use_pm_depend_box=0;
+			$use_pm_depend_box = 0;
 		}
 		if (!$use_scm) {
-			$use_scm=0;
+			$use_scm = 0;
 		}
 		if (!$use_news) {
-			$use_news=0;
+			$use_news = 0;
 		}
 		if (!$use_docman) {
-			$use_docman=0;
+			$use_docman = 0;
 		}
 		if (!$use_ftp) {
-			$use_ftp=0;
+			$use_ftp = 0;
 		}
 		if (!$use_tracker) {
-			$use_tracker=0;
+			$use_tracker = 0;
 		}
 		if (!$use_frs) {
-			$use_frs=0;
+			$use_frs = 0;
 		}
 		if (!$use_stats) {
-			$use_stats=0;
+			$use_stats = 0;
 		}
 		if (!$send_all_docs) {
-			$send_all_docs=0;
+			$send_all_docs = 0;
 		}
 
 		$homepage = ltrim($homepage);
 		if (!$homepage) {
-			$homepage=forge_get_config('web_host').'/projects/'.$this->getUnixName().'/';
+			$homepage = forge_get_config('web_host').'/projects/'.$this->getUnixName().'/';
 		}
 
 		if (strlen(htmlspecialchars($short_description))>255) {
@@ -578,7 +576,7 @@ class Group extends Error {
 		db_begin();
 
 		//XXX not yet actived logo_image_id='$logo_image_id', 
-		$res = db_query_params ('UPDATE groups
+		$res = db_query_params('UPDATE groups
 			SET group_name=$1,
 				homepage=$2,
 				short_description=$3,
@@ -696,7 +694,7 @@ class Group extends Error {
 	function setStatus(&$user, $status) {
 		global $SYS;
 
-		if (!forge_check_global_perm ('approve_projects')) {
+		if (!forge_check_global_perm('approve_projects')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -754,7 +752,7 @@ class Group extends Error {
 			}
 		}
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['status'] = $status;
@@ -845,7 +843,7 @@ class Group extends Error {
 	/**
 	 * getStartDate - the unix time this project was registered.
 	 *
-	 * @return int (unix time) of registration.
+	 * @return	int	(unix time) of registration.
 	 */
 	function getStartDate() {
 		return $this->data_array['register_time'];
@@ -969,7 +967,7 @@ class Group extends Error {
 	function &getAdmins() {
 		$roles = RBACEngine::getInstance()->getRolesByAllowedAction ('project_admin', $this->getID());
 		
-		$user_ids = array() ;
+		$user_ids = array();
 
 		foreach ($roles as $role) {
 			if (! ($role instanceof RoleExplicit)) {
@@ -1033,12 +1031,12 @@ class Group extends Error {
 		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_scm']=$booleanparam;
-			db_commit () ;
+			$this->data_array['use_scm'] = $booleanparam;
+			db_commit();
 		} else {
-			db_rollback ();
+			db_rollback();
 			return false;
 		}
 	}
@@ -1058,7 +1056,7 @@ class Group extends Error {
 
 	function SetUsesPserver($booleanparam) {
 		db_begin();
-		$booleanparam = $booleanparam ? 1 : 0 ;
+		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params('UPDATE groups SET enable_pserver=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
@@ -1324,16 +1322,16 @@ class Group extends Error {
 		$rows = db_numrows($res);
 		if ($rows == 0) {
 			// Error: no plugin by that name
-			return false ;
+			return false;
 		}
 		$plugin_id = db_result($res,0,'plugin_id');
 		// Invalidate cache
-		unset ($this->plugins_data);
+		unset($this->plugins_data);
 		if ($val) {
 			$res = db_query_params('INSERT INTO group_plugin (group_id, plugin_id) VALUES ($1, $2)',
 						array($this->getID(),
 						      $plugin_id));
-			return $res ;
+			return $res;
 		} else {
 			$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1 AND plugin_id=$2',
 						array($this->getID(),
@@ -1373,7 +1371,7 @@ class Group extends Error {
 	/**
 	 * getTags - Tags of this project.
 	 *
-	 * @return	string	List of tags.
+	 * @return	string	List of tags. Commat separated
 	 */
 	function getTags() {
 		$sql = 'SELECT name FROM project_tags WHERE group_id = $1';
@@ -1388,8 +1386,8 @@ class Group extends Error {
 	 */
 	function setTags($tags) {
 		db_begin();
-		$sql='DELETE FROM project_tags WHERE group_id=$1';
-		$res=db_query_params($sql, array($this->getID()));
+		$sql = 'DELETE FROM project_tags WHERE group_id=$1';
+		$res = db_query_params($sql, array($this->getID()));
 		if (!$res) {
 			$this->setError('Deleting old tags: '.db_error());
 			db_rollback();
@@ -1407,8 +1405,8 @@ class Group extends Error {
 			}
 			$tag = trim($tag);
 			if ($tag == '' || array_search($tag, $inserted) !== false) continue;
-			$sql='INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
-			$res=db_query_params($sql, array($this->getID(), $tag));
+			$sql = 'INSERT INTO project_tags (group_id,name) VALUES ($1, $2)';
+			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
 				$this->setError(_('Setting tags: ').db_error());
 				db_rollback();
@@ -1460,7 +1458,10 @@ class Group extends Error {
 		//
 		$members = $this->getMembers();
 		for ($i=0; $i<count($members); $i++) {
-			$this->removeUser($members[$i]->getID());
+			if(!$this->removeUser($members[$i]->getID())) {
+				$this->setError(_('Could not properly remove member:').' '.$members[$i]->getID());
+				return false;
+			}
 		}
 		// Failsafe until user_group table is gone
 		$res = db_query_params('DELETE FROM user_group WHERE group_id=$1',
@@ -1477,6 +1478,7 @@ class Group extends Error {
 			}
 			if (!$at_arr[$i]->delete(1,1)) {
 				$this->setError(_('Could not properly delete the tracker:').' '.$at_arr[$i]->getErrorMessage());
+				return false;
 			}
 		}
 		//
@@ -1491,6 +1493,7 @@ class Group extends Error {
 			}
 			if(!$f_arr[$i]->delete(1,1)) {
 				$this->setError(_('Could not properly delete the forum:').' '.$f_arr[$i]->getErrorMessage());
+				return false;
 			}
 		}
 		//
@@ -1505,24 +1508,19 @@ class Group extends Error {
 			}
 			if (!$pg_arr[$i]->delete(1,1)) {
 				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$pg_arr[$i]->getErrorMessage());
+				return false;
 			}
 		}
 		//
 		//	Delete FRS Packages
 		//
-		//$frspf = new FRSPackageFactory($this);
 		$res = db_query_params('SELECT * FROM frs_package WHERE group_id=$1',
 					array($this->getID()));
-		//echo 'frs_package'.db_error();
-		//$frsp_arr =& $frspf->getPackages();
 		while ($arr = db_fetch_array($res)) {
-			//if (!is_object($pg_arr[$i])) {
-			//	echo "Not Object: ProjectGroup: ".$i;
-			//	continue;
-			//}
 			$frsp=new FRSPackage($this, $arr['package_id'], $arr);
 			if (!$frsp->delete(1, 1)) {
 				$this->setError(_('Could not properly delete the FRSPackage:').' '.$frsp->getErrorMessage());
+				return false;
 			}
 		}
 		//
@@ -1530,7 +1528,7 @@ class Group extends Error {
 		//
 		$news_group=group_get_object(forge_get_config('news_group'));
 		$res = db_query_params('SELECT forum_id FROM news_bytes WHERE group_id=$1',
-					array ($this->getID()));
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting News: ').db_error());
 			db_rollback();
@@ -1540,7 +1538,8 @@ class Group extends Error {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
 			if (!$Forum->delete(1,1)) {
-				printf(_("Could Not Delete News Forum: %d"),$Forum->getID());
+				$this->setError(_("Could Not Delete News Forum: %d"),$Forum->getID());
+				return false;
 			}
 		}
 		$res = db_query_params('DELETE FROM news_bytes WHERE group_id=$1',
@@ -1554,16 +1553,16 @@ class Group extends Error {
 		//
 		//	Delete docs
 		//
-		$res = db_query_params ('DELETE FROM doc_data WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM doc_data WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Documents: ').db_error());
 			db_rollback();
 			return false;
 		}
 
-		$res = db_query_params ('DELETE FROM doc_groups WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM doc_groups WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Documents: ').db_error());
 			db_rollback();
@@ -1571,7 +1570,7 @@ class Group extends Error {
 		}
 
 		//
-		//  Delete Tags
+		//	Delete Tags
 		//
 		$res=db_query_params('DELETE FROM project_tags WHERE group_id=$1', array($this->getID()));
 		if (!$res) {
@@ -1583,8 +1582,8 @@ class Group extends Error {
 		//
 		//	Delete group history
 		//
-		$res = db_query_params ('DELETE FROM group_history WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM group_history WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Project History: ').db_error());
 			db_rollback();
@@ -1594,8 +1593,8 @@ class Group extends Error {
 		//
 		//	Delete group plugins
 		//
-		$res = db_query_params ('DELETE FROM group_plugin WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Project Plugins: ').db_error());
 			db_rollback();
@@ -1623,7 +1622,10 @@ class Group extends Error {
 				printf (_("Not Object: Survey: %d"),$i);
 				continue;
 			}
-			$s_arr[$i]->delete();
+			if (!$s_arr[$i]->delete()) {
+				$this->setError(_('Could not properly delete the survey'));
+				return false;
+			}
 		}
 		//
 		//	Delete SurveyQuestions
@@ -1632,10 +1634,13 @@ class Group extends Error {
 		$sq_arr =& $sqf->getSurveyQuestions();
 		for ($i=0; $i<count($sq_arr); $i++) {
 			if (!is_object($sq_arr[$i])) {
-				printf (_("Not Object: SurveyQuestion: %d"),$i);
+				printf(_("Not Object: SurveyQuestion: %d"),$i);
 				continue;
 			}
-			$sq_arr[$i]->delete();
+			if (!$sq_arr[$i]->delete()) {
+				$this->setError(_('Could not properly delete the survey questions'));
+				return false;
+			}
 		}
 		//
 		//	Delete Mailing List Factory
@@ -1644,26 +1649,27 @@ class Group extends Error {
 		$ml_arr =& $mlf->getMailingLists();
 		for ($i=0; $i<count($ml_arr); $i++) {
 			if (!is_object($ml_arr[$i])) {
-				printf (_("Not Object: MailingList: %d"),$i);
+				printf(_("Not Object: MailingList: %d"),$i);
 				continue;
 			}
 			if (!$ml_arr[$i]->delete(1,1)) {
 				$this->setError(_('Could not properly delete the mailing list'));
+				return false;
 			}
 		}
 		//
 		//	Delete trove
 		//
-		$res = db_query_params ('DELETE FROM trove_group_link WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM trove_group_link WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Trove: ').db_error());
 			db_rollback();
 			return false;
 		}
 
-		$res = db_query_params ('DELETE FROM trove_agg WHERE group_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('DELETE FROM trove_agg WHERE group_id=$1',
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting Trove: ').db_error());
 			db_rollback();
@@ -1928,13 +1934,13 @@ class Group extends Error {
 	 * Users can remove themselves.
 	 *
 	 * @param	int	The ID of the user to remove.
-	 *@return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function removeUser($user_id) {
 		global $SYS;
 
 		if ($user_id != user_getid()
-		    || !forge_check_perm ('project_admin', $this->getID())) {
+		    || !forge_check_perm('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -1942,13 +1948,13 @@ class Group extends Error {
 		db_begin();
 
 		if (USE_PFO_RBAC) {
-			$user = user_get_object ($user_id) ;
-			$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
-			$found_role = NULL ;
+			$user = user_get_object($user_id);
+			$roles = RBACEngine::getInstance()->getAvailableRolesForUser($user);
+			$found_role = NULL;
 			foreach ($roles as $role) {
 				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-					$found_role = $role ;
-					break ;
+					$found_role = $role;
+					break;
 				}
 			}
 			if ($found_role == NULL) {
@@ -1956,46 +1962,46 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
-			$found_role->removeUser ($user) ;
-			if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
+			$found_role->removeUser($user);
+			if (!$SYS->sysGroupCheckUser($this->getID(), $user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
 
 		} else {
-			$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
-						array ($this->getID(),
-						       $user_id)) ;
+			$res = db_query_params('DELETE FROM user_group WHERE group_id=$1 AND user_id=$2', 
+						array($this->getID(),
+						      $user_id));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(sprintf(_('ERROR: User not removed: %s'),db_error()));
+				$this->setError(sprintf(_('ERROR: User not removed: %s'), db_error()));
 				db_rollback();
 				return false;
 			}
 		}
 
-			//
-			//	reassign open artifacts to id=100
-			//
-			$res = db_query_params ('UPDATE artifact SET assigned_to=100
+		//
+		//	reassign open artifacts to id=100
+		//
+		$res = db_query_params('UPDATE artifact SET assigned_to=100
 				WHERE group_artifact_id 
 				IN (SELECT group_artifact_id 
 				FROM artifact_group_list 
 				WHERE group_id=$1 AND status_id=1 AND assigned_to=$2)',
-						array ($this->getID(),
-						       $user_id)) ;
-			if (!$res) {
-				$this->setError(sprintf(_('ERROR: DB: artifact: %s'),db_error()));
-				db_rollback();
-				return false;
-			}
+						array($this->getID(),
+						      $user_id));
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR: DB: artifact: %s'), db_error()));
+			db_rollback();
+			return false;
+		}
 
-			//
-			//	reassign open tasks to id=100
-			//	first have to purge any assignments that would cause 
-			//	conflict with existing assignment to 100
-			//
-			$res = db_query_params ('DELETE FROM project_assigned_to
+		//
+		//	reassign open tasks to id=100
+		//	first have to purge any assignments that would cause 
+		//	conflict with existing assignment to 100
+		//
+		$res = db_query_params('DELETE FROM project_assigned_to
 					WHERE project_task_id IN (SELECT pt.project_task_id 
 					FROM project_task pt, project_group_list pgl, project_assigned_to pat 
 					WHERE pt.group_project_id = pgl.group_project_id 
@@ -2003,44 +2009,44 @@ class Group extends Error {
 					AND pt.status_id=1 AND pgl.group_id=$1
 					AND pat.assigned_to_id=$2)
 					AND assigned_to_id=100',
-						array ($this->getID(),
-						       $user_id)) ;
-			if (!$res) {
-				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),1,db_error()));
-				db_rollback();
-				return false;
-			}
-			$res = db_query_params ('UPDATE project_assigned_to SET assigned_to_id=100
-				WHERE project_task_id IN (SELECT pt.project_task_id 
-				FROM project_task pt, project_group_list pgl 
-				WHERE pt.group_project_id = pgl.group_project_id 
-				AND pt.status_id=1 AND pgl.group_id=$1) 
-				AND assigned_to_id=$2',
-						array ($this->getID(),
-						       $user_id)) ;
-			if (!$res) {
-				$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'),2,db_error()));
-				db_rollback();
-				return false;
-			}
+						array($this->getID(),
+						      $user_id));
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'), 1, db_error()));
+			db_rollback();
+			return false;
+		}
+		$res = db_query_params('UPDATE project_assigned_to SET assigned_to_id=100
+					WHERE project_task_id IN (SELECT pt.project_task_id 
+					FROM project_task pt, project_group_list pgl 
+					WHERE pt.group_project_id = pgl.group_project_id 
+					AND pt.status_id=1 AND pgl.group_id=$1) 
+					AND assigned_to_id=$2',
+						array($this->getID(),
+						      $user_id));
+		if (!$res) {
+			$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'), 2, db_error()));
+			db_rollback();
+			return false;
+		}
 
-			//
-			//	Remove user from system
-			//
-			if (!$SYS->sysGroupRemoveUser($this->getID(),$user_id)) {
+		//
+		//	Remove user from system
+		//
+		if (!$SYS->sysGroupRemoveUser($this->getID(), $user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
-			}
+		}
 
-			$hook_params['group'] = $this;
-			$hook_params['group_id'] = $this->getID();
-			$hook_params['user'] = &user_get_object($user_id);
-			$hook_params['user_id'] = $user_id;
-			plugin_hook ("group_removeuser", $hook_params);
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		$hook_params['user'] = user_get_object($user_id);
+		$hook_params['user_id'] = $user_id;
+		plugin_hook ("group_removeuser", $hook_params);
 
-			//audit trail
-			$this->addHistory('Removed User',$user_id);
+		//audit trail
+		$this->addHistory('Removed User',$user_id);
 		
 		db_commit();
 		return true;
