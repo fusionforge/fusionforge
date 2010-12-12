@@ -165,7 +165,7 @@ function &group_get_object_by_publicname($groupname) {
 	$res=db_query_params ('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
 			      array (htmlspecialchars (strtolower ($groupname)))) ;
 
-       return group_get_object(db_result($res,0,'group_id'),$res);
+	return group_get_object(db_result($res,0,'group_id'),$res);
 }
 
 class Group extends Error {
@@ -1470,6 +1470,16 @@ class Group extends Error {
 		// Failsafe until user_group table is gone
 		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1', 
 					array ($this->getID())) ;
+
+		// unlink roles to this project
+		if ($this->isPublic()) {
+			$ra = RoleAnonymous::getInstance();
+			$rl = RoleLoggedIn::getInstance();
+			$ra->unlinkProject($this);
+			$rl->unlinkProject($this);
+		}
+		// @todo : unlink all the other roles created in the project...
+
 		//
 		//	Delete Trackers
 		//
