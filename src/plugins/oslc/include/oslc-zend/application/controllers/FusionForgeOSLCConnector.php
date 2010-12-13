@@ -310,6 +310,9 @@ class FusionForgeOSLCConnector extends OslcConnector {
 	 */
 	public function getDataForCreationUi($project, $tracker) {
 		$data = array();
+		$data['project'] = $project;
+		$data['tracker'] = $tracker;
+
 		$group = group_get_object($project);
 		if (!$at = new ArtifactType($group, $tracker)){
 			throw new Exception('Error : Could not instanciate project Tracker');
@@ -355,6 +358,9 @@ class FusionForgeOSLCConnector extends OslcConnector {
 	 */
 	public function getDataForSelectionUi($project, $tracker) {
 		$data = array();
+		$data['project'] = $project;
+		$data['tracker'] = $tracker;
+
 		$group = group_get_object($project);
 		if (!$at = new ArtifactType($group, $tracker)){
 			throw new Exception('Error : Could not instanciate project Tracker');

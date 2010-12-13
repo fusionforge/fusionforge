@@ -127,10 +127,12 @@ class FusionForgeCmController extends CmController {
 		// Handle creation UI access
 		elseif (isset($params['ui']) && $params['ui'] == 'creation' && isset($params['project']) && isset($params['tracker'])){
 			$this->_forward('showCreationUi');
+			return;
 		}
 		// Handle selection UI access 
 		elseif (isset($params['ui']) && $params['ui'] == 'selection' && isset($params['project']) && isset($params['tracker'])){
 			$this->_forward('showSelectionUi');
+			return;
 		}
 		
 		// Now, do the OSLC-CM resources access work
