@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * This file is (c) Copyright 2010 by Olivier Berger, Institut
+ * TELECOM
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * This program has been developed in the frame of the HELIOS
+ * project with financial support of its funders.
+ *
+ */
+
+  /* $Id$ */
+
+require('_service-document_xml.php');
+require('_add_hyperlinks.php');
+
+
+/*$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProvider");
+$sp = $entry->appendChild($child);
+
+$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
+$title = $sp->appendChild($child);
+$child = $doc->createTextNode("Demo OSLC CM service provider");
+$child = $title->appendChild($child);
+
+$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:services");
+$serv = $sp->appendChild($child);
+$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:resource");
+$service = $serv->appendChild($child);
+$child = $doc->createTextNode($this->baseUrl().'/cm/oslc-cm-service');
+$child = $service->appendChild($child);*/
+?>
+<body>
+<h1>OSLC-CM V1 Service Description document</h1>
+<pre>
+<?php
+	$xml = project_to_service_description($this->baseUrl(), $this->project);
+	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
+	$text = add_links($text, "http");
+	$text = add_links($text, $this->baseUrl());
+	echo $text;?>
+</pre>
+</body>
+

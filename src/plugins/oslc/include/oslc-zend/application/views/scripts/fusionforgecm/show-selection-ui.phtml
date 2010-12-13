@@ -1,0 +1,678 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<?php 
+	$project = $this->data['project'];
+	foreach ($this->data['where'] as $key => $value) {
+		$where[] = $key;
+	}
+	//print_r($this->data['where']);
+	/*
+	 * @import "http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojox/grid/resources/Grid.css";
+	@import url("http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/soria/soria.css");
+		
+	 */
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>OSLC Query UI</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+		@import "/javascript/dojox/grid/resources/Grid.css";
+		@import url("/javascript/dijit/themes/soria/soria.css");
+		
+		body { 	font: 13px Myriad,Arial,Helvetica,clean,sans-serif; 	
+				*font-size: small;	
+				*font: x-small;}
+				
+		h1 {	font-size: 1.5em; 	
+				font-weight: normal;	
+				line-height: 1em; 	
+				margin-top: 1em;	
+				margin-bottom:0;}
+				
+		h2 { 	font-size: 1.1667em;
+				font-weight: bold; 	
+				line-height: 1.286em; 	
+				margin-top: 1.929em; 	
+				margin-bottom:0.643em;}
+		
+		h3, h4, h5, h6 {	font-size: 1em; 	
+							font-weight: bold; 	
+							line-height: 1.5em; 	
+							margin-top: 1.5em; 	
+							margin-bottom: 0;}
+							
+		p { 	font-size: 1em;
+				margin-top: 1.5em;
+				margin-bottom: 1.5em;
+				line-height: 1.5em;}
+		
+		body {
+			margin: 2em;
+		}
+		
+		table td {
+			padding: 2px;
+		}
+		
+		</style>
+        <script type="text/javascript" src="/javascript/dojo/dojo.js"
+			djconfig="parseOnLoad:true">
+		</script>
+        <script type="text/javascript">
+        dojo.require("dojox.grid.DataGrid");
+        dojo.require("dijit.Menu");
+        dojo.require("dijit.MenuItem");
+        dojo.require("dojox.data.CsvStore");
+        dojo.require("dojo.data.ItemFileReadStore");
+        dojo.require("dojox.encoding.base64");
+        
+		var URL = "<?php echo $this->baseUrl(); ?>"+"/cm/bugs";
+		var props; 	//array of all properties, dc:title has not been included in the list
+					//and is always shown in the results
+		var where; //array of all where options
+		var whereoptions; //2d array of options of where options
+		var queryconnect;
+		var selectedrowindex; //row selected to sent to client
+		var tempresult;
+		var convertToByteArray = function(data){
+            var bin=[] ;
+            for (var i=0; i<data.length; i++){
+            	bin.push(data.charCodeAt(i));
+            }
+            return bin;
+        }
+        
+        var doQuery = function(event) {
+
+            var user = dojo.trim(dojo.byId("usertext").value);
+            var pass = dojo.trim(dojo.byId("passtext").value);
+
+            if((user=="")&&(pass!=""))	{
+                alert("User field is empty!");
+                return;
+            }else if((user!="")&&(pass==""))	{
+                alert("Password field is empty!");
+                return;
+            }else if((!user.match(/^[a-zA-Z0-9\s-\.+_]+$/))&&(user!=""))	{
+                alert("Invalid user name!");
+                return;
+            }
+
+            //processing oslc.limit
+            var limit = dojo.trim(dojo.byId("limittext").value);
+            if(/^[1-9][0-9]*$/.test(limit))	{
+                if(limit>30)	{
+                    alert("oslc.limit should be less than 30!");
+                    return;
+                }
+            }else if(limit=="")	{
+                alert("Default oslc.limit value taken to be 10");
+                limit = "10";
+                dojo.byId("limittext").value = limit;
+            }else	{
+                alert("oslc.limit should be an integer less than 30!");
+                return;
+            }
+
+            //processing oslc.offset
+            var offset = dojo.trim(dojo.byId("offsettext").value);
+            if(/^[1-9][0-9]*$/.test(offset))	{
+                if((offset%limit!=0)&&(offset!="0"))	{
+                    alert("oslc.offset should be a multiple of oslc.limit!");
+                    return;
+                }
+            }else if(offset!="")	{
+                alert("oslc.offset should be an integer which is a multiple of oslc.limit!");
+                return;
+            }
+
+            //processing oslc.searchTerms
+            var searchterms = dojo.trim(dojo.byId("searchtermstext").value.replace(/\"/g,""));
+            if(searchterms!="")	{
+	            var searchtermsArray = searchterms.split(" ");
+	            for(var i=0;i<searchtermsArray.length;i++)
+	            {
+	                if(i==0)	{
+	                	searchterms = "\"" + searchtermsArray[i] + "\"";
+	                }else	{
+	                	searchterms = searchterms + ",\"" + searchtermsArray[i] + "\"";
+	                }
+	            }
+            }
+
+            //processing oslc.properties
+        	var selectedprops = ["dc:title"];
+            dojo.query(".proprowclass").forEach(
+                    function(item, index, array)	{
+						var propselect = item.cells[0].childNodes[0];
+						if(propselect.value!="none")	{
+							selectedprops.push(propselect.value);
+						}
+                    });
+            var layoutjson = [{
+                field: "rdf:about",
+                name: "URL",
+                width: "auto"
+            }];
+            var propstring; //comma separated properties list to be used in the ajax call
+            if(selectedprops.length==1)	{
+                alert("As no properties are selected, only dc:title and URL will be displayed!");
+            }
+            for(var i=0;i<selectedprops.length;i++)
+            {
+                if(i==0)	{
+                    propstring = selectedprops[i];
+                }else	{
+                    propstring = propstring + "," + selectedprops[i];
+                }
+                layoutjson.push(
+                		{
+                            field: selectedprops[i],
+                            name: selectedprops[i],
+                            width: "auto"
+                        });
+            }            
+
+            //processing oslc.where
+            var selectedwhere = ["mantisbt:project=\"<?php echo $project ?>\""];
+            dojo.query(".whererowclass").forEach(
+                    function(item, index, array)	{
+						var where1 = item.cells[0].childNodes[0];
+						var where2 = item.cells[2].childNodes[0];
+						if((where1.value!="none")&&(where2.value!="none"))	{
+							var tempString = where1.value + "=\"" + where2.value + "\"";
+							console.log(tempString);
+							selectedwhere.push(tempString);
+						}
+                    });
+            var wherestring; //'and' separated where options list to be used in the ajax call
+            for(var i=0;i<selectedwhere.length;i++)
+            {
+                if(i==0)	{
+                	wherestring = selectedwhere[i];
+                }else	{
+                	wherestring = wherestring + " and " + selectedwhere[i];
+                }
+            }
+
+            //processing oslc.orderBy
+            var selectedorder = [];
+            dojo.query(".orderrowclass").forEach(
+                    function(item, index, array)	{
+						var attr = item.cells[0].childNodes[0];
+						var dir = item.cells[1].childNodes[0];
+						if((attr.value!="none")&&(dir.value!="none"))	{
+							var tempString = dir.value + attr.value;
+							console.log(tempString);
+							selectedorder.push(tempString);
+						}
+                    });
+            var orderstring; //comma separated where options list to be used in the ajax call
+            for(var i=0;i<selectedorder.length;i++)
+            {
+                if(i==0)	{
+                	orderstring = selectedorder[i];
+                }else	{
+                	orderstring = orderstring + "," + selectedorder[i];
+                }
+            }
+
+            //creating content object for xhrargs
+            var contentobj = {};
+            contentobj['oslc_limit'] = limit;
+            contentobj['oslc_where'] = wherestring;
+            if(offset!="")	{
+                contentobj['oslc_offset'] = offset;
+            }
+            if(searchterms!="")	{
+            	contentobj['oslc_searchTerms'] = searchterms;
+            }
+            if(selectedprops.length>1)	{
+                contentobj['oslc_properties'] = propstring;
+            }
+            if(selectedorder.length>0)	{
+                contentobj['oslc_orderBy'] = orderstring;
+            }
+            //alert(contentobj.toSource());
+            
+
+            var xhrArgs = {
+                    url: URL,
+                    headers: {Accept: "application/json"},
+                    preventCache: true,
+                    handleAs: "json",
+                    content: contentobj,
+                    load: function(dataa, ioArgs) {
+                  	  	//alert(dataa.toSource());
+                  	  	var jsonObj = {};
+                  	  	for (var key in dataa) {
+						   var obj = dataa[key];						   
+						   if(key=="oslc_cm:totalCount")	{
+							   jsonObj.identifier = "rdf:about";
+						   }
+						   else if(key=="oslc_cm:results")   {
+							   var tempArr = [];							      
+							   for (var num in obj) {
+								  var result = obj[num];
+							      var temp = {};
+							      for(var prop in result)	{
+								      temp[prop] = result[prop];
+							      }
+							      tempArr.push(temp);
+							   }
+							   jsonObj.items = tempArr;
+						   }
+						}
+						//alert(jsonObj.toSource());
+                        //alert(ioArgs.xhr.responseText);
+                        var jsonStore = new dojo.data.ItemFileReadStore({data:jsonObj});
+                        window["grid"] = dijit.byId("grid");
+                        window["menu"] = dijit.byId("gridMenu");
+                        grid.setStructure(layoutjson);
+                        grid.setStore(jsonStore, {});
+                        grid.onRowDblClick = function(e)	{
+                            console.log("row double clicked");
+                        }
+                        menu.bindDomNode(grid.domNode);
+                     	// prevent grid methods from killing the context menu event by implementing our own handler
+            			grid.onCellContextMenu = function(e) {
+            				selectedrowindex = e.rowIndex;            				          				
+            			};
+                        
+                     
+                    },
+                    error: function(err, ioargs) {
+                  	  var response = dojo.fromJson(ioargs.xhr.responseText);
+                  	  var errmsg, errcode;
+                  	  for (var key in response) {
+						   var obj = response[key];						   
+						   if(key=="oslc_cm:Error")   {
+							   for (var i in obj) {
+								  if(i=="oslc_cm:statusCode")	{
+									  errcode = obj[i];
+								  }else if(i=="oslc_cm:message")	{
+									  errmsg = obj[i];
+								  } 
+							   }
+							   var errtext = "Error " + errcode + ": " + errmsg;
+							   alert(errtext);
+						   }
+						}
+                    }
+                }
+
+            if((user!="")&&(pass!=""))	{
+                //tried but didnt work
+                //xhrArgs['user'] = user;
+                //xhrArgs['password'] = pass;
+                
+                var userpass = user + ":" + pass;                
+                xhrArgs['headers']['Authorization'] = "Basic " + dojox.encoding.base64.encode(convertToByteArray(userpass));
+            }            
+            //alert(xhrArgs.toSource());
+
+            //Call the asynchronous xhrGet
+		    var deferred = dojo.xhrGet(xhrArgs);
+		    dojo.query(".plusclass").forEach(
+				    function(item, index, array)	{
+					    item.disabled = true;
+				    });
+		    dojo.query(".minusclass").forEach(
+				    function(item, index, array)	{
+					    item.disabled = true;
+				    });
+			dojo.disconnect(queryconnect);
+          
+            
+        };
+
+        function respondWithPostMessage(/*string*/ response) {
+            window.parent.postMessage("oslc-response:" + response, "*");
+            //TODO if window is not parented window.postMessage to be used
+            //which shud be ignored
+         }
+
+        var addtoclient = function()	{
+            //alert("addedtoclient");
+            tempresult = {};
+            var grid = dijit.byId("grid");
+            var items = grid.selection.getSelected();
+            if (items.length) {
+            	var tempArray = [];
+                dojo.forEach(items, function(selectedItem) {
+                    var temp = {};
+                    if (selectedItem !== null) {
+                        dojo.forEach(grid.store.getAttributes(selectedItem), function(attribute) {
+                            var value = grid.store.getValues(selectedItem, attribute);
+                            if(attribute=="rdf:about")	{
+                                temp['rdf:resource'] = value;
+                            }else if(attribute=="dc:title")	{
+                                temp[attribute] = value;
+                                temp['oslc_cm:label'] = value;
+                            }
+                        });
+                        tempArray.push(temp);
+                    }
+                });
+                tempresult['oslc_cm:results'] = tempArray;
+            }
+            var resultstring = tempresult.toSource();
+            console.log(resultstring);
+            respondWithPostMessage(resultstring);
+        }
+
+        var refresh = function()
+        {
+        	queryconnect = dojo.connect(dojo.byId("querybutton"), "onclick", doQuery);
+        	dojo.query(".plusclass").forEach(
+				    function(item, index, array)	{
+					    item.disabled = false;
+				    });
+		    dojo.query(".minusclass").forEach(
+				    function(item, index, array)	{
+					    item.disabled = false;
+				    });
+		    dijit.byId("grid").setStructure(null);
+		    dijit.byId("grid").setStore(null);
+		    
+        }
+        
+          //var plusconnects; not needed anymore
+          
+          var NUMBER = {    PROPERTIES: 2,
+                  			ORDERBY: 3,
+					        WHERE: 4	};
+	        
+          var add = function(event)
+          {
+              var rowclass;
+        	  if(event.target.id=="propplus")	{
+            	  numcells = NUMBER.PROPERTIES;
+            	  rowclass = ".proprowclass";
+        	  }else if(event.target.id=="whereplus")	{
+            	  numcells = NUMBER.WHERE;
+            	  rowclass = ".whererowclass";
+        	  }else if(event.target.id=="orderplus")	{
+            	  numcells = NUMBER.ORDERBY;
+            	  rowclass = ".orderrowclass";
+        	  }
+              //alert(event.target.parentNode.parentNode);
+              if(dojo.query(rowclass).length<5)
+              {  
+	              var newrow = dojo.clone(event.target.parentNode.parentNode);
+	              var numcells;
+	              
+	              if(newrow.cells.length<=numcells)
+	              {
+	                  var tdm = document.createElement("td");
+	                  tdm.innerHTML = "<button id=\"minus\" class=\"minusclass\">-</button>";
+	                  newrow.appendChild(tdm);
+	              }
+	              if(event.target.id=="whereplus")	{
+		              showOptions(newrow.cells[0].childNodes[0]);
+	              }
+	              
+	              dojo.place(newrow, event.target.parentNode.parentNode.parentNode);
+	              var newplus = newrow.cells[numcells-1].childNodes[0];
+	              if(event.target.id=="orderplus")	{
+		              dojo.destroy(newplus.parentNode);
+		              dojo.destroy(event.target.parentNode);
+		              var newminus = newrow.cells[numcells-1].childNodes[0];
+	              }else	{
+		              dojo.connect(newplus, "onclick", add);
+		              var newminus = newrow.cells[numcells].childNodes[0];
+	              }
+	              dojo.connect(newminus, "onclick", remove);
+              }
+          }
+
+          var remove = function(event)
+          {
+              if(event.target.parentNode.parentNode.id=="orderrow")
+              {
+                  var row = document.getElementById('orderrow').parentNode.rows[0];
+            	  var tdm = document.createElement("td");
+                  tdm.innerHTML = "<button id=\"orderplus\" class=\"plusclass\">+</button>";
+                  row.appendChild(tdm);
+                  dojo.connect(row.cells[NUMBER.ORDERBY-1].childNodes[0], "onclick", add);
+              }
+              dojo.destroy(event.target.parentNode.parentNode);
+          }
+
+          var showOptions = function(list)
+          {
+              //alert(whereoptions[list.selectedIndex-1]);
+                            
+              var optionlist = list.parentNode.parentNode.cells[NUMBER.WHERE-2].childNodes[0];
+              var len = list.parentNode.parentNode.cells[NUMBER.WHERE-2].childNodes[0].length;
+              //alert(len);
+              for(var i=len-1;i>=0;i--)	{
+            	  //alert((i+1)+"/"+len+" "+optionlist.options[i].text);
+                  optionlist.remove(i);
+                  
+              }
+              
+	          if(list.selectedIndex>0)	{	              
+	              len = whereoptions[list.selectedIndex-1].length;
+	              for(var i=0;i<len;i++)	{
+	                  var val = whereoptions[list.selectedIndex-1][i];
+	                  try	{
+		                if(i==0)	{
+							optionlist.add(new Option(val, val, true), null); //add new option to end
+		                }else	{
+		                	optionlist.add(new Option(val, val), null); //add new option to end
+		                }
+	            		
+	            	  }
+	            	  catch(e)	{ //for IE
+	            		  	if(i==0)	{
+								optionlist.add(new Option(val, val, true)); //add new option to end
+			                }else	{
+			                	optionlist.add(new Option(val, val)); //add new option to end
+			                }
+	            	  }
+	              }
+              }else if(list.selectedIndex==0)	{
+            	  try	{
+					optionlist.add(new Option("Select", "none"), null) //add new option to end
+            		
+            	  }
+            	  catch(e)	{ //for IE
+					optionlist.add(new Option("Select", "none")) //add new option to end
+            	  }
+              }
+              
+          }
+
+          var init = function()
+          {
+        	  dojo.query(".plusclass").forEach(
+        	          function(item, index, array){
+        	               dojo.connect(item, "onclick", add);
+        	          });
+	          queryconnect = dojo.connect(dojo.byId("querybutton"), "onclick", doQuery);
+
+	          var properties = dojo.byId("proplist").options;
+	          props = [];
+	          for(var i=1;i<properties.length;i++) //starts from 1 to not incluse "select"
+	          {
+		          if(properties[i].text!="dc:title")	{
+			          props[i-1] = properties[i].text;
+			          //alert(props[i-1]);
+		          }
+	          }
+	          where = [];
+	          var i = 0;
+	          <?php 
+	          print "whereoptions = [];";
+	          foreach ($this->data['where'] as $key => $value) {
+	          	print "where.push(\"$key\" );";
+	          	$i = 0;
+	          	print "whereoptions[i] = [];";
+	          	foreach ($value as $option) {
+	          		print "whereoptions[i][$i] = \"$option\";";
+	          		$i++;
+	          	}
+	          	print "i++;";
+	          }
+	          ?>
+          }
+
+          dojo.addOnLoad(init);
+          
+        </script>
+    </head>
+    <body>
+        <h1><?php echo strtoupper($project); ?>: Query UI for OSLC</h1><hr/>
+        <!-- <p>some details of the query and blah blah to be added here</p> -->
+        
+        <br>
+        <!-- <p><b>Project: <?php echo $project ?></b></p> -->
+        <table>
+        	     		
+        </table>
+        <table border=1>        
+        <tr><td width=50%>
+	        <table CELLSPACING=2 CELLPADDING=2 id="main">
+	        	<tr><td>
+	        	<table><tr><td><fieldset>
+        		<legend><em>User</em></legend>
+        		<input id="usertext" type=text>
+        		</fieldset>
+        		</td>
+        		<td><fieldset>
+        		<legend><em>Password</em></legend>
+        		<input id="passtext" type=password>
+        		</fieldset>
+        		</td>
+        		</tr></table>
+        		</td>
+        		</tr>   
+	        	<tr><td>
+	        	<fieldset>
+        		<legend><em>oslc.properties</em></legend>
+		        <table id="propstable">
+		        	<tr><small>[url, dc:title will be present by default]</small></tr>
+					<tr class="proprowclass" id="proprow">
+						<!--  td width="100">oslc.properties</td>-->
+						<td><select id="proplist">
+							<option value="none" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['properties'] as $value) {
+								if(strcmp($value,"dc:title")!=0)	{
+									echo '<option value="'.$value.'">'.$value.'</option>';
+								}
+							}
+							?>			  			
+							</select>
+						</td>
+						<td><button id="propplus" class="plusclass">+</button>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td>
+				<fieldset>
+        		<legend><em>oslc.where</em></legend>
+		        <table id="wheretable">
+					<tr class="whererowclass" id="whererow">
+						<!-- <td width="100">oslc.where</td> -->
+						<td><select id="wherelist" onchange="showOptions(this)">
+							<option value="none" selected="selected">Select</option>
+							<?php 
+							foreach ($where as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+							}
+							?>
+							</select>
+						</td>
+						<td><label>=</label></td>
+						<td><select id="whereoptionslist">
+							<option value="none" selected="selected">Select</option>
+							</select>
+						</td>
+						<td><button id="whereplus" class="plusclass">+</button>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td>
+		        <fieldset>
+        		<legend><em>oslc.orderBy</em></legend>
+		        <table id="ordertable">
+					<tr class="orderrowclass" id="orderrow">
+						<!--  <td width="100">oslc.orderBy</td> -->
+						<td><select id="orderlist">
+							<option value="none" selected="selected">Select</option>
+							<?php 
+							foreach ($this->data['orderBy'] as $value) {
+								echo '<option value="'.$value.'">'.$value.'</option>';
+							}
+							?>			  			
+							</select>
+						</td>
+						<td><select id="orderdirlist">
+							<option value="none" selected="selected">Select</option>
+							<option value="+" >Ascending</option>
+							<option value="-" >Descending</option>
+							</select>
+						</td>
+						<td><button id="orderplus" class="plusclass">+</button>
+						</td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td>
+		        <fieldset>
+        		<legend><em>oslc.limit</em></legend>
+		        <table id="limittable">
+					<tr class="limitrowclass" id="limitrow">
+						<!-- <td width="100">oslc.limit</td> -->
+						<td><input id="limittext" type=text></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td>
+		        <fieldset>
+        		<legend><em>oslc.offset</em></legend>
+		        <table id="offsettable">
+					<tr class="offsetrowclass" id="offsetrow">
+						<!-- <td width="100">oslc.offset</td> -->
+						<td><input id="offsettext" type=text></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td>
+		        <fieldset>
+        		<legend><em>oslc.searchTerms</em></legend>
+		        <table id="searchtable">
+					<tr class="searchrowclass" id="searchrow">
+						<!-- <td width="100">oslc.searchTerms</td> -->
+						<td><input id="searchtermstext" type=text></td>
+					</tr>
+				</table>
+				</fieldset>
+				</td></tr>
+				<tr><td align="center">
+					<button id="querybutton">QUERY</button>
+					
+					<button id="refreshbutton" onclick="refresh()">REFRESH</button>
+				</td></tr>
+			</table>
+		</td>
+		<td>
+			<div id="grid" dojoType="dojox.grid.DataGrid">
+			</div>
+			<div dojoType="dijit.Menu" id="gridMenu"  style="display: none;">
+				<div dojoType="dijit.MenuItem" onClick="addtoclient()">Add to client</div>
+				</div>
+		</td></tr>
+		</table>
+    </body>
+</html>
