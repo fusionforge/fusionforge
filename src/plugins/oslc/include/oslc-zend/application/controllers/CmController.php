@@ -248,7 +248,19 @@ class CmController extends Zend_Rest_Controller {
 	}
 
 	public function indexAction(){
-
+		switch (TRACKER_TYPE) {
+			case 'mantis':
+				$this->_forward('index','mantiscm');
+				break;	
+			case 'fusionforge':
+				$this->_forward('index','fusionforgecm');
+				break;
+			case 'Codendi':
+				$this->_forward('index', 'codendicm');
+				break;
+			default:
+				break;				
+		}
 	}
 
 	public function putAction(){
