@@ -52,6 +52,7 @@ class DocumentGroup extends Error {
 	 * @param	object	Group object.
 	 * @param	array	(all fields from doc_groups) OR doc_group from database.
 	 * @return	boolean	success.
+	 * @access	public
 	 */
 	function DocumentGroup(&$Group, $data = false) {
 		$this->Error();
@@ -90,20 +91,21 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	string	Item name.
 	 * @return	boolean	on success / false on failure.
+	 * @access	public
 	 */
 	function create($name, $parent_doc_group = 0) {
 		//
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError(_('DocumentGroup: name is Required'));
+			$this->setError(_('DocumentGroup: Name is required'));
 			return false;
 		}
 		
 		if ($parent_doc_group) {
 			// check if parent group exists
-			$res = db_query_params ('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-						array($parent_doc_group, $this->Group->getID())) ;
+			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
+						array($parent_doc_group, $this->Group->getID()));
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
 				return false;
@@ -128,7 +130,7 @@ class DocumentGroup extends Error {
 			return false;
 		}
 
-		$result = db_query_params ('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid) VALUES ($1, $2, $3, $4)',
+		$result = db_query_params('INSERT INTO doc_groups (group_id,groupname,parent_doc_group,stateid) VALUES ($1, $2, $3, $4)',
 						array ($this->Group->getID(),
 							htmlspecialchars($name),
 							$parent_doc_group,
@@ -156,6 +158,7 @@ class DocumentGroup extends Error {
 	 * WARNING delete is recursive and permanent
 	 * @param	int	Document Group Id, integer Project Group Id
 	 * @return	boolean	success
+	 * @access	public
 	 */
 	function delete($doc_groupid,$project_group_id) {
 		$perm =& $this->Group->getPermission ();
@@ -191,10 +194,12 @@ class DocumentGroup extends Error {
 	/**
 	 * injectZip - unzip the attachment and create the directory tree if needed
 	 *
+	 * @param	int	doc_group id
 	 * @param	array	uploaded data
 	 * @return	boolean	success or not
+	 * @access	public
 	 */
-	function injectZip($uploaded_data) {
+	function injectZip($doc_group, $uploaded_data) {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 			$this->setError( _('Invalid file name.'));
 			return false;
@@ -208,7 +213,7 @@ class DocumentGroup extends Error {
 		
 		switch ($uploaded_data_type) {
 			case "application/zip": {
-				$returned = $this->__injectZip($uploaded_data);
+				$returned = $this->__injectZip($doc_group, $uploaded_data);
 				break;
 			}
 			default: {
@@ -224,6 +229,7 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	int	ID of the doc_group.
 	 * @return	boolean	success
+	 * @access	public
 	 */
 	function fetchData($id) {
 		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1',
@@ -241,6 +247,7 @@ class DocumentGroup extends Error {
 	 * getGroup - get the Group Object this DocumentGroup is associated with.
 	 *
 	 * @return Object Group.
+	 * @access	public
 	 */
 	function &getGroup() {
 		return $this->Group;
@@ -250,6 +257,7 @@ class DocumentGroup extends Error {
 	 * getID - get this DocumentGroup's ID.
 	 *
 	 * @return	int	The id #.
+	 * @access	public
 	 */
 	function getID() {
 		return $this->data_array['doc_group'];
@@ -259,6 +267,7 @@ class DocumentGroup extends Error {
 	 * getID - get parent DocumentGroup's id.
 	 *
 	 * @return	int	The id #.
+	 * @access	public
 	 */
 	function getParentID() {
 		return $this->data_array['parent_doc_group'];
@@ -267,7 +276,8 @@ class DocumentGroup extends Error {
 	/**
 	 * getName - get the name.
 	 *
-	 * @return	String	The name.
+	 * @return	string	The name.
+	 * @access	public
 	 */
 	function getName() {
 		return $this->data_array['groupname'];
@@ -276,7 +286,8 @@ class DocumentGroup extends Error {
 	/**
 	 * getState - get the state id.
 	 *
-	 * @return	Int	The state id.
+	 * @return	int	The state id.
+	 * @access	public
 	 */
 	function getState() {
 		return $this->data_array['stateid'];
@@ -286,10 +297,11 @@ class DocumentGroup extends Error {
 	 * update - update a DocumentGroup.
 	 *
 	 * @param	string	Name of the category.
-	 * @return boolean.
+	 * @return	boolean	success or not
+	 * @access	public
 	 */
 	function update($name, $parent_doc_group) {
-		$perm =& $this->Group->getPermission ();
+		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -347,6 +359,7 @@ class DocumentGroup extends Error {
 	* @param	object	The DocumentFactory object
 	* @param	int	(optional) State of the documents
 	* @return	boolean	success
+	* @access	public
 	*/
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
 		$doc_group_id = $this->getID();
@@ -393,6 +406,7 @@ class DocumentGroup extends Error {
 	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
 	* @param	int	ID of the subgroup
 	* @return	boolean	success
+	* @access	public
 	*/
 	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
 		$doc_group_id = $this->getID();
@@ -419,6 +433,7 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	int	State ID
 	 * @return	boolean success
+	 * @access	public
 	 */
 	function setStateID($stateid) {
 		$res = db_query_params('UPDATE doc_groups SET stateid=$1
@@ -437,23 +452,34 @@ class DocumentGroup extends Error {
 	/**
 	 * __injectZip - private method to inject a zip archive tree and files
 	 *
+	 * @param	int	doc_group id
 	 * @param	array	uploaded zip
 	 * @return	boolean	success or not
-	 * @private
+	 * @access	private
 	 */
-	function __injectZip ($uploadedZip) {
+	private function __injectZip($doc_group, $uploadedZip) {
 		$zip = new ZipArchive();
 		if ($zip->open($uploadedZip['tmp_name'])) {
-			if ($zip->extractTo(forge_get_config('data_path'))) {
-				if ($zip->close()) {
-					//rmdir(forge_get_config('data_path').'/'.'myname');
-					return true;
+			for($i = 0; $i < $zip->numFiles; $i++) {
+				$filename = $zip->getNameIndex($i);
+				$fileinfo = pathinfo($filename);
+				$dir_arr = explode('/', $fileinfo['dirname']);
+				// inject directories
+				$start_dirid = $doc_group;
+				for ($j = 0; $j < count($dir_arr); $j++) {
+					if ($dir_arr[$j] == '.') {
+						continue;
+					} else {
+						$dg = new DocumentGroup($this->getGroup());
+						$dg->create($dir_arr[$j], $start_dirid);
+						$start_dirid = $dg->getID();
+					}
 				}
-			} else {
-				$zip->close();
-				return false;
 			}
+			$zip->close();
+			return true;
 		}
+		$this->setError(_('Unable to open zipfile:'). ' ' .$uploadedZip['tmp_name']);
 		return false;
 	}
 
