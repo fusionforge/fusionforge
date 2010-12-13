@@ -79,6 +79,8 @@ forge_define_config_item ('use_ratings', 'core', $GLOBALS['sys_use_ratings']) ;
 forge_set_config_item_bool ('use_ratings', 'core') ;
 forge_define_config_item ('use_ftp_uploads', 'core', $GLOBALS['sys_use_ftpuploads']) ;
 forge_set_config_item_bool ('use_ftp_uploads', 'core') ;
+forge_define_config_item ('ftp_upload_dir', 'core', $GLOBALS['sys_ftp_upload_dir']) ;
+forge_define_config_item ('upload_dir', 'core', $GLOBALS['sys_upload_dir']) ;
 forge_define_config_item ('use_manual_uploads', 'core', isset ($GLOBALS['sys_use_manual_uploads']) ? $GLOBALS['sys_use_manual_uploads'] : false) ;
 forge_set_config_item_bool ('use_manual_uploads', 'core') ;
 forge_define_config_item ('use_gateways', 'core', $GLOBALS['sys_use_gateways']) ;
