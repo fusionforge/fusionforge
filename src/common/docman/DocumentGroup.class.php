@@ -160,8 +160,8 @@ class DocumentGroup extends Error {
 	 * @return	boolean	success
 	 * @access	public
 	 */
-	function delete($doc_groupid,$project_group_id) {
-		$perm =& $this->Group->getPermission ();
+	function delete($doc_groupid, $project_group_id) {
+		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -201,10 +201,10 @@ class DocumentGroup extends Error {
 	 */
 	function injectZip($doc_group, $uploaded_data) {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-			$this->setError( _('Invalid file name.'));
+			$this->setError(_('Invalid file name.'));
 			return false;
 		}
-		if (function_exists(finfo_open)) {
+		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
 		} else {
@@ -439,7 +439,7 @@ class DocumentGroup extends Error {
 		$res = db_query_params('UPDATE doc_groups SET stateid=$1
 							WHERE doc_group=$2
 							AND group_id=$3',
-							array ($stateid,$this->getID(),$this->Group->getID())
+							array($stateid,$this->getID(), $this->Group->getID())
 					);
 
 		if (!$res || db_affected_rows($res) < 1) {
