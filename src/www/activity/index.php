@@ -32,7 +32,7 @@ $received_begin = getStringFromRequest("start_date");
 $received_end = getStringFromRequest("end_date");
 $show=getArrayFromRequest("show");
 
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm ('project_read', $group_id) ;
 
 $date_format = _('%Y-%m-%d') ;
 
@@ -191,6 +191,39 @@ if (count($results)<1) {
 		return ($a['activity_date'] > $b['activity_date']) ? -1 : 1;
 	}
 
+	$cached_perms = array();
+	function check_perm_for_activity($arr) {
+		global $cached_perms;
+		
+		$s = $arr['section'];
+		$ref = $arr['ref_id'];
+		
+		if (!isset($cached_perms[$s][$ref])) {
+			switch ($s) {
+			case 'commit':
+			case 'trackeropen':
+			case 'trackerclose':
+				$cached_perms[$s][$ref] = forge_check_perm('tracker', $ref, 'read') ;
+				break;
+			case 'frsrelease':
+				$cached_perms[$s][$ref] = forge_check_perm('frs', $ref, 'read') ;
+				break;
+			case 'forumpost':
+				$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read') ;
+				break;
+			case 'news':
+				$cached_perms[$s][$ref] = forge_check_perm('forum', $ref, 'read') ;
+				break;
+			default:
+				// Must be a bug somewhere, we're supposed to handle all types
+				$cached_perms[$s][$ref] = false;
+			}
+		}
+
+		return $cached_perms[$s][$ref];
+	}
+
+
 	usort($results, 'date_compare');
 
 	?>
@@ -223,13 +256,16 @@ if (count($results)<1) {
 		$j=0;
 		$last_day = 0;
 		foreach ($results as $arr) {
+			if (!check_perm_for_activity($arr)) {
+				continue;
+			}
 			if ($last_day != strftime($date_format,$arr['activity_date'])) {
 				//	echo $HTML->listTableBottom($theader);
 				echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format,$arr['activity_date']).'</td></tr>';
 				//	echo $HTML->listTableTop($theader);
 				$last_day=strftime($date_format,$arr['activity_date']);
 			}
-		switch (@$arr['section']) {
+			switch (@$arr['section']) {
 				case 'commit': {
 					$icon=html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
 					$url=util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
