@@ -16,6 +16,7 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 		//system("ssh root@centos52 'perl -spi -e \'s!^auto_prepend_file.*!auto_prepend_file=/opt/tests/prepend.php!\' /etc/php.ini');
 		//system("ssh root@centos52 'perl -spi -e \'s!^auto_append_file.*!auto_append_file=/opt/tests/append.php!\' /etc/php.ini');
 
+		system("ssh root@centos52 'service crond stop'");
 	}
 
 	protected function tearDown()
