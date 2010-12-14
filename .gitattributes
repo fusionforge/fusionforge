@@ -4294,6 +4294,7 @@ src/translations/sv.po -text
 src/translations/th.po -text
 src/translations/zh_CN.po -text
 src/translations/zh_TW.po -text
+src/utils/apply-coding-style.sh -text
 src/utils/cvs1/cvscreate.sh svneol=native#text/x-sh
 src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
