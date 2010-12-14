@@ -68,6 +68,18 @@ class Syntax_Tests extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensure no scripts have SVN conflicts markers
+     */
+    public function testSVNConflicts()
+    {
+	    $root = dirname(dirname(dirname(dirname(__FILE__))));
+	    $output = `find $root/src $root/tests -type f | xargs grep -l '^<<<<<<'`;
+	    $this->assertEquals('', $output);
+	    $output = `find $root/src $root/tests -type f | xargs grep -l '^>>>>>>'`;
+	    $this->assertEquals('', $output);
+    }
+
+    /**
      * Ensure no script has an empty last line
      */
     public function testEmptyLastLine()
