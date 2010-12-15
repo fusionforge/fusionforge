@@ -386,23 +386,30 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('project_admin', $reference)) ;
 			break ;
 		case 'tracker':
-			$t = artifactType_get_object ($reference) ;
-			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID())) ;
+			if ($action != 'tech') {
+				$t = artifactType_get_object ($reference) ;
+				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $t->Group->getID())) ;
+			}
 			break ;			
 		case 'pm':
-			$t = projectgroup_get_object ($reference) ;
-			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $t->Group->getID())) ;
+			if ($action != 'tech') {
+				$t = projectgroup_get_object ($reference) ;
+				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $t->Group->getID())) ;
+			}
 			break ;			
 		case 'forum':
 			$t = forum_get_object ($reference) ;
 			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('forum_admin', $t->Group->getID())) ;
 			break ;			
 		case 'new_tracker':
-			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference)) ;
+			if ($action != 'tech') {
+				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('tracker_admin', $reference)) ;
+			}
 			break ;			
 		case 'new_pm':
-			$t = projectgroup_get_object ($reference) ;
-			$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $reference)) ;
+			if ($action != 'tech') {
+				$result = array_merge ($result, $this->_getRolesIdByAllowedAction ('pm_admin', $reference)) ;
+			}
 			break ;			
 		case 'new_forum':
 			$t = forum_get_object ($reference) ;

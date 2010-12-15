@@ -119,17 +119,17 @@ function &group_get_objects($id_arr) {
 	$fetch = array();
 	$return = array();
 	
-	for ($i=0; $i < count($id_arr); $i++) {
+	foreach ($id_arr as $id) {
+		if (!$id) {
+			continue;
+		}
 		//
 		//	See if this ID already has been fetched in the cache
 		//
-		if (!$id_arr[$i]) {
-			continue;
-		}
-		if (!isset($GROUP_OBJ["_".$id_arr[$i]."_"])) {
-			$fetch[] = $id_arr[$i];
+		if (!isset($GROUP_OBJ["_".$id."_"])) {
+			$fetch[] = $id;
 		} else {
-			$return[] =& $GROUP_OBJ["_".$id_arr[$i]."_"];
+			$return[] =& $GROUP_OBJ["_".$id."_"];
 		}
 	}
 	if (count($fetch) > 0) {
@@ -1456,10 +1456,10 @@ class Group extends Error {
 		//
 		//	Remove all the members
 		//
-		$members = $this->getMembers();
-		for ($i=0; $i<count($members); $i++) {
-			if(!$this->removeUser($members[$i]->getID())) {
-				$this->setError(_('Could not properly remove member:').' '.$members[$i]->getID());
+		$members =& $this->getMembers();
+		foreach ($members as $i) {
+			if(!$this->removeUser($i->getID())) {
+				$this->setError(_('Could not properly remove member:').' '.$i->getID());
 				return false;
 			}
 		}
@@ -1481,13 +1481,12 @@ class Group extends Error {
 		//
 		$atf = new ArtifactTypeFactory($this);
 		$at_arr =& $atf->getArtifactTypes();
-		for ($i=0; $i<count($at_arr); $i++) {
-			if (!is_object($at_arr[$i])) {
-				printf(_("Not Object: ArtifactType: %d"), $i);
+		foreach ($at_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if (!$at_arr[$i]->delete(1,1)) {
-				$this->setError(_('Could not properly delete the tracker:').' '.$at_arr[$i]->getErrorMessage());
+			if (!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the tracker:').' '.$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1496,13 +1495,12 @@ class Group extends Error {
 		//
 		$ff = new ForumFactory($this);
 		$f_arr =& $ff->getForums();
-		for ($i=0; $i<count($f_arr); $i++) {
-			if (!is_object($f_arr[$i])) {
-				printf(_("Not Object: Forum: %d"), $i);
+		foreach ($f_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if(!$f_arr[$i]->delete(1,1)) {
-				$this->setError(_('Could not properly delete the forum:').' '.$f_arr[$i]->getErrorMessage());
+			if(!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the forum:').' '.$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1510,14 +1508,13 @@ class Group extends Error {
 		//	Delete Subprojects
 		//
 		$pgf = new ProjectGroupFactory($this);
-		$pg_arr = $pgf->getProjectGroups();
-		for ($i=0; $i<count($pg_arr); $i++) {
-			if (!is_object($pg_arr[$i])) {
-				printf(_("Not Object: ProjectGroup: %d"), $i);
+		$pg_arr =& $pgf->getProjectGroups();
+		foreach ($pg_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if (!$pg_arr[$i]->delete(1,1)) {
-				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$pg_arr[$i]->getErrorMessage());
+			if (!$i->delete(1,1)) {
+				$this->setError(_('Could not properly delete the ProjectGroup:').' '.$i->getErrorMessage());
 				return false;
 			}
 		}
@@ -1627,12 +1624,11 @@ class Group extends Error {
 		//
 		$sf = new SurveyFactory($this);
 		$s_arr =& $sf->getSurveys();
-		for ($i=0; $i<count($s_arr); $i++) {
-			if (!is_object($s_arr[$i])) {
-				printf (_("Not Object: Survey: %d"),$i);
+		foreach ($s_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if (!$s_arr[$i]->delete()) {
+			if (!$i->delete()) {
 				$this->setError(_('Could not properly delete the survey'));
 				return false;
 			}
@@ -1642,12 +1638,11 @@ class Group extends Error {
 		//
 		$sqf = new SurveyQuestionFactory($this);
 		$sq_arr =& $sqf->getSurveyQuestions();
-		for ($i=0; $i<count($sq_arr); $i++) {
-			if (!is_object($sq_arr[$i])) {
-				printf(_("Not Object: SurveyQuestion: %d"),$i);
+		foreach ($sq_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if (!$sq_arr[$i]->delete()) {
+			if (!$i->delete()) {
 				$this->setError(_('Could not properly delete the survey questions'));
 				return false;
 			}
@@ -1657,12 +1652,11 @@ class Group extends Error {
 		//
 		$mlf = new MailingListFactory($this);
 		$ml_arr =& $mlf->getMailingLists();
-		for ($i=0; $i<count($ml_arr); $i++) {
-			if (!is_object($ml_arr[$i])) {
-				printf(_("Not Object: MailingList: %d"),$i);
+		foreach ($ml_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if (!$ml_arr[$i]->delete(1,1)) {
+			if (!$i->delete(1,1)) {
 				$this->setError(_('Could not properly delete the mailing list'));
 				return false;
 			}

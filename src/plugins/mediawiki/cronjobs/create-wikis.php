@@ -63,7 +63,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		// Create the DB
 		$schema = "plugin_mediawiki_$project";
 		// Sanitize schema name
-		strtr($schema, "-", "_");
+		$schema = strtr($schema, "-", "_");
 
 		db_begin();
 

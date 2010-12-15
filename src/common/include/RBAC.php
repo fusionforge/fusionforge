@@ -677,26 +677,26 @@ abstract class BaseRole extends Error {
 			
 		case 'tracker':
 			if ($this->hasPermission('tracker_admin', artifacttype_get_groupid($reference))) {
-				return 7 ;
+				return 5 | $value ;
 			}
 			return $value ;
 			break ;
 		case 'new_tracker':
 			if ($this->hasPermission('tracker_admin', $reference)) {
-				return 7 ;
+				return 5 | $value ;
 			}
 			return $value ;
 			break ;
 
 		case 'pm':
 			if ($this->hasPermission('pm_admin', projectgroup_get_groupid($reference))) {
-				return 7 ;
+				return 5 | $value ;
 			}
 			return $value ;
 			break ;
 		case 'new_pm':
 			if ($this->hasPermission('pm_admin', $reference)) {
-				return 7 ;
+				return 5 | $value ;
 			}
 			return $value ;
 			break ;
@@ -1437,6 +1437,11 @@ class RoleAnonymous extends BaseRole implements PFO_RoleAnonymous {
 			throw new Exception ("No PFO_RoleAnonymous role in the database") ;
 		}
 		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
+
+		$hook_params = array ();
+		$hook_params['role'] =& self::$_instance;
+		plugin_hook ("role_get", $hook_params);
+
 		self::$_instance->fetchData (self::$_instance->_role_id) ;
 
 		return self::$_instance ;
@@ -1480,6 +1485,11 @@ class RoleLoggedIn extends BaseRole implements PFO_RoleLoggedIn {
 			throw new Exception ("No PFO_RoleLoggedIn role in the database") ;
 		}
 		self::$_instance->_role_id = db_result ($res, 0, 'role_id') ;
+
+		$hook_params = array ();
+		$hook_params['role'] =& self::$_instance;
+		plugin_hook ("role_get", $hook_params);
+
 		self::$_instance->fetchData (self::$_instance->_role_id) ;
 
 		return self::$_instance ;

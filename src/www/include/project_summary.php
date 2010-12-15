@@ -124,7 +124,7 @@ function project_summary($group_id,$mode,$no_table) {
 	}
 
 	if (!$no_table) {
-		$return .= '
+		$return = '
 
 		<table border=0 width="100%"><tr><td class="tablecontent">';
 	}
