@@ -81,7 +81,7 @@ class ProjectSearchQuery extends SearchQuery {
 				if (isset ($LUSER)) {
 					$qpa = db_construct_qpa ($qpa,
 								 'OR g.group_id = ANY($1) ',
-								 array ($pids)) ;
+								 array (db_int_array_to_any_clause($pids))) ;
 				}
 				$qpa = db_construct_qpa ($qpa,
 							 ') AND (') ;
@@ -116,7 +116,7 @@ class ProjectSearchQuery extends SearchQuery {
 			if (isset ($LUSER)) {
 				$qpa = db_construct_qpa ($qpa,
 							 'OR g.group_id = ANY($1) ',
-							 array ($pids)) ;
+							 array (db_int_array_to_any_clause($pids))) ;
 			}
 			$qpa = db_construct_qpa ($qpa,
 						 ') AND ((') ;
