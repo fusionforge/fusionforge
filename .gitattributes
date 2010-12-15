@@ -2050,6 +2050,7 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/get.p
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/index.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-cm-service-document.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-cm-service-document.xml.phtml -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog-project.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog.xml.phtml -text

@@ -40,6 +40,7 @@ require(APPLICATION_PATH.'/../../../../../common/include/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfcommon.'tracker/ArtifactTypeFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'include/Group.class.php';
@@ -671,6 +672,31 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		}
 		return $return;
 	
+	}
+	
+	/**
+	 * 
+	 * Returns a formatted array of trackers of a project
+	 * Trackers Array is indexed by tracker ids and for each one we set
+	 * the id, name and description.
+	 * 
+	 * @param int $project project id.
+	 * 
+	 * @return Array of trackers
+	 */
+	public function getProjectTrackers($project) {
+		$group = group_get_object($project);
+		$trackers = array();
+		$atf = new ArtifactTypeFactory($group);
+		foreach($atf->getArtifactTypes() as $at) {
+			$trackers[$at->getID()] = array(
+				'id'          => $at->getID(),
+				'group_id'    => $project,
+				'name'        => $at->getName(),
+				'description' => $at->getDescription()
+			);
+		}
+		return $trackers;
 	}
 	
 	public function getHttpAuthBasicResolver($login, $password) {

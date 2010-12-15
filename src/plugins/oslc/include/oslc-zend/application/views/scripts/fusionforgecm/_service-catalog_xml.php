@@ -27,6 +27,58 @@
 
 // Generate a OSLC-CM V1 Service Catalog document (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
 
+function project_trackers_to_service_catalog($base_url, $trackers, $project) {
+	$doc = new DOMDocument();
+	$doc->formatOutput = true;
+	
+	$root = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProviderCatalog");
+	$root = $doc->appendChild($root);
+
+	$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
+	$about = $root->appendChild($child);
+	$child = $doc->createTextNode("");
+	$child = $about->appendChild($child);
+
+	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
+	$title = $root->appendChild($child);
+
+	$child = $doc->createTextNode(TRACKER_TYPE. " Change management service provider catalog for project " . $project);
+	$child = $title->appendChild($child);
+
+	foreach ($trackers as $tracker) {
+			// entry
+			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:entry");
+			$entry = $root->appendChild($child);
+
+			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProvider");
+			$sp = $entry->appendChild($child);
+			
+			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:identifier");
+			$title = $sp->appendChild($child);
+			$child = $doc->createTextNode($tracker['id']);
+			$child = $title->appendChild($child);
+
+			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
+			$title = $sp->appendChild($child);
+			$child = $doc->createTextNode($tracker['name']);
+			$child = $title->appendChild($child);
+			
+			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:description");
+			$title = $sp->appendChild($child);
+			$child = $doc->createTextNode($tracker['description']);
+			$child = $title->appendChild($child);
+
+			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:services");
+			$services = $sp->appendChild($child);
+			$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:resource");
+			$resource = $services->appendChild($child);
+			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
+			$child = $resource->appendChild($child);
+		
+	}
+	return $doc->saveXML();
+}
+
 function projects_to_service_catalog($base_url, $projects) {
 
 	$doc = new DOMDocument();
@@ -68,7 +120,7 @@ function projects_to_service_catalog($base_url, $projects) {
 			$services = $sp->appendChild($child);
 			$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:resource");
 			$resource = $services->appendChild($child);
-			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-service/'.$proj['id']);
+			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-services/'.$proj['id']);
 			$child = $resource->appendChild($child);
 
 

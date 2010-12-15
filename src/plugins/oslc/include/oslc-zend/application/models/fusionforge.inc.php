@@ -33,6 +33,8 @@ require_once($model_dir . 'ChangeRequests.php');
  * For FusionForge
  *  
  * @package FusionForgeModel 
+ * 
+ * @TODO: Replace helios_bt by OSLC ontology
  */
 
 /**
@@ -113,6 +115,7 @@ class FusionForgeChangeRequest extends ChangeRequest
 							$resource[$field] = $value;
 						}
 					}
+					//TODO: Replace helios_bt by OSLC ontology
 					foreach ($changerequest->children('http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl') as $child) {
 						$field = $child->getName();
 						if(!$field){
