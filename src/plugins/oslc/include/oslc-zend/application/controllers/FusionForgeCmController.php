@@ -135,7 +135,7 @@ class FusionForgeCmController extends CmController {
 		
 		// handle OSLC-CM service document access
 		// An OSLC-CM service document describes capabilities of a FusionForge tracker.
-		elseif (isset($params['oslc-cm-service'])) {
+		elseif (isset($params['oslc-cm-service']) && isset($params['tracker'])) {
 			$this->_forward('oslcCmServiceDocument');
 			return;
 		}
@@ -548,8 +548,9 @@ class FusionForgeCmController extends CmController {
 		
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		$project = $params['oslc-cm-service'];
-		$this->view->project = $project;
+
+		$this->view->project = $params['oslc-cm-service'];
+		$this->view->tracker = $params['tracker'];
 
 		$this->getResponse()->setHeader('Content-Type', $content_type);
 

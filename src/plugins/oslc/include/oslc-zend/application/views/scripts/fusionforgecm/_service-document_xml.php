@@ -27,7 +27,7 @@
 
 // Generate a OSLC-CM V1 Change Management Service Description document (http://open-services.net/bin/view/Main/CmServiceDescriptionV1)
 
-function project_to_service_description($base_url, $project) {
+function project_to_service_description($base_url, $project, $tracker) {
 
 	$doc = new DOMDocument();
 	$doc->formatOutput = true;
@@ -61,27 +61,12 @@ function project_to_service_description($base_url, $project) {
 	
 	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
 	$title = $sq->appendChild($child);
-	$child = $doc->createTextNode("Simple Project Query");
+	$child = $doc->createTextNode("Simple Tracker Query");
 	$child = $title->appendChild($child);
 	
 	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
 	$url = $sq->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project);
-	$child = $url->appendChild($child);
-	
-	// OSLC URL-encoded query
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:simpleQuery");
-	$sq = $cr->appendChild($child);
-	
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $sq->appendChild($child);
-	$child = $doc->createTextNode("OSLC Change Request Queries");
-	$child = $title->appendChild($child);
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $sq->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/bugs');
+	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
 	$child = $url->appendChild($child);
 	
 	//creation factory
@@ -96,12 +81,12 @@ function project_to_service_description($base_url, $project) {
 	
 	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
 	$title = $crdl->appendChild($child);
-	$child = $doc->createTextNode("Location for creation of change requests");
+	$child = $doc->createTextNode("Location for creation of change requests (with a POST HTTP request)");
 	$child = $title->appendChild($child);
 
 	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
 	$url = $crdl->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project);
+	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
 	$child = $url->appendChild($child);
 	
 	//creation dialog
@@ -131,7 +116,7 @@ function project_to_service_description($base_url, $project) {
 
 	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
 	$url = $crdl->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/ui/creation');
+	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/creation');
 	$child = $url->appendChild($child);
 	
 	//selection dialog
@@ -161,7 +146,7 @@ function project_to_service_description($base_url, $project) {
 
 	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
 	$url = $sldl->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/ui/selection');
+	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/selection');
 	$child = $url->appendChild($child);
 
 	return $doc->saveXML();
