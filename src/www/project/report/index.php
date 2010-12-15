@@ -146,7 +146,7 @@ foreach ($group->getUsers() as $member) {
 	echo '
 		<tr><td>';
 	$link = util_make_link_u ($member->getUnixName(), $member->getID(), $member->getRealName()) ;
-	if ( RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$project->getID())) {
+	if ( RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$group->getID())) {
 		echo '<strong>'.$link.'</strong>' ;
 	} else {
 		echo $link ;
@@ -167,7 +167,7 @@ foreach ($group->getUsers() as $member) {
 		}
 		$role_string = implode (', ', $role_names) ;
 	} else {
-		$role_string = $user->getRole ($project)->getName() ;
+		$role_string = $user->getRole ($group)->getName() ;
 	}
 
 				echo '
