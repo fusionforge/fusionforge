@@ -44,7 +44,7 @@ if ($group_id) {
 	$link = "?group_id=$group_id";
 	$description = " of ".$row['group_name'];
 
-	$admins = RBACEngine::getUsersByAllowedAction ('project_admin', $group_id) ;
+	$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $group_id) ;
 	if (count ($admins)) {
 		$webmaster = $admins[0]->getUnixName()."@".forge_get_config('users_host')." (".$admins[0]->getRealName().")";
 	} else {
