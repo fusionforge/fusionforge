@@ -77,7 +77,7 @@ $scm_box = $Group->getSCMBox();
 //$external_scm = (gethostbyname(forge_get_config('web_host')) != gethostbyname($scm_box)); 
 $external_scm = !$sys_scm_single_host;
 
-if (!forge_check_perm ('scm', $group->getID(), 'read')) {
+if (!forge_check_perm ('scm', $Group->getID(), 'read')) {
 	exit_permission_denied('scm');
 }
 
