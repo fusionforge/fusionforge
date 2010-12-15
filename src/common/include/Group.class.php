@@ -118,17 +118,17 @@ function &group_get_objects($id_arr) {
 	$fetch = array();
 	$return = array();
 	
-	for ($i=0; $i<count($id_arr); $i++) {
+	foreach ($id_arr as $id) {
+		if (!$id) {
+			continue;
+		}
 		//
 		//	See if this ID already has been fetched in the cache
 		//
-		if (!$id_arr[$i]) {
-			continue;
-		}
-		if (!isset($GROUP_OBJ["_".$id_arr[$i]."_"])) {
-			$fetch[]=$id_arr[$i];
+		if (!isset($GROUP_OBJ["_".$id."_"])) {
+			$fetch[]=$id;
 		} else {
-			$return[] =& $GROUP_OBJ["_".$id_arr[$i]."_"];
+			$return[] =& $GROUP_OBJ["_".$id."_"];
 		}
 	}
 	if (count($fetch) > 0) {
@@ -1464,8 +1464,8 @@ class Group extends Error {
 		//	Remove all the members
 		//
 		$members =& $this->getMembers();
-		for ($i=0; $i<count($members); $i++) {
-			$this->removeUser($members[$i]->getID());
+		foreach ($members as $i) {
+			$this->removeUser($i->getID());
 		}
 		// Failsafe until user_group table is gone
 		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1', 
@@ -1485,36 +1485,33 @@ class Group extends Error {
 		//
 		$atf = new ArtifactTypeFactory($this);
 		$at_arr =& $atf->getArtifactTypes();
-		for ($i=0; $i<count($at_arr); $i++) {
-			if (!is_object($at_arr[$i])) {
-				printf (_("Not Object: ArtifactType: %d"),$i);
+		foreach ($at_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			$at_arr[$i]->delete(1,1);
+			$i->delete(1,1);
 		}
 		//
 		//	Delete Forums
 		//
 		$ff = new ForumFactory($this);
 		$f_arr =& $ff->getForums();
-		for ($i=0; $i<count($f_arr); $i++) {
-			if (!is_object($f_arr[$i])) {
-				printf (_("Not Object: Forum: %d"),$i);
+		foreach ($f_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			$f_arr[$i]->delete(1,1);
+			$i->delete(1,1);
 		}
 		//
 		//	Delete Subprojects
 		//
 		$pgf = new ProjectGroupFactory($this);
 		$pg_arr =& $pgf->getProjectGroups();
-		for ($i=0; $i<count($pg_arr); $i++) {
-			if (!is_object($pg_arr[$i])) {
-				printf (_("Not Object: ProjectGroup: %d"),$i);
+		foreach ($pg_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			$pg_arr[$i]->delete(1,1);
+			$i->delete(1,1);
 		}
 		//
 		//	Delete FRS Packages
@@ -1625,36 +1622,33 @@ class Group extends Error {
 		//
 		$sf = new SurveyFactory($this);
 		$s_arr =& $sf->getSurveys();
-		for ($i=0; $i<count($s_arr); $i++) {
-			if (!is_object($s_arr[$i])) {
-				printf (_("Not Object: Survey: %d"),$i);
+		foreach ($s_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			$s_arr[$i]->delete();
+			$i->delete();
 		}
 		//
 		//	Delete SurveyQuestions
 		//
 		$sqf = new SurveyQuestionFactory($this);
 		$sq_arr =& $sqf->getSurveyQuestions();
-		for ($i=0; $i<count($sq_arr); $i++) {
-			if (!is_object($sq_arr[$i])) {
-				printf (_("Not Object: SurveyQuestion: %d"),$i);
+		foreach ($sq_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			$sq_arr[$i]->delete();
+			$i->delete();
 		}
 		//
 		//	Delete Mailing List Factory
 		//
 		$mlf = new MailingListFactory($this);
 		$ml_arr =& $mlf->getMailingLists();
-		for ($i=0; $i<count($ml_arr); $i++) {
-			if (!is_object($ml_arr[$i])) {
-				printf (_("Not Object: MailingList: %d"),$i);
+		foreach ($ml_arr as $i) {
+			if (!is_object($i)) {
 				continue;
 			}
-			if (!$ml_arr[$i]->delete(1,1)) {
+			if (!$i->delete(1,1)) {
 				$this->setError(_('Could not properly delete the mailing list'));
 			}
 		}

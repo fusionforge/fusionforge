@@ -104,17 +104,17 @@ function &user_get_objects($id_arr) {
 	$fetch = array();
 	$return = array();
 
-	for ($i=0; $i<count($id_arr); $i++) {
+	foreach ($id_arr as $id) {
+		if (!$id) {
+			continue ;
+		}
 		//
 		//  See if this ID already has been fetched in the cache
 		//
-		if (!isset($id_arr[$i]) || !$id_arr[$i]) {
-			continue;
-		}
-		if (!isset($USER_OBJ["_".$id_arr[$i]."_"])) {
-			$fetch[]=$id_arr[$i];
+		if (!isset($USER_OBJ["_".$id."_"])) {
+			$fetch[]=$id;
 		} else {
-			$return[] =& $USER_OBJ["_".$id_arr[$i]."_"];
+			$return[] =& $USER_OBJ["_".$id."_"];
 		}
 	}
 	if (count($fetch) > 0) {
