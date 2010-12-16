@@ -71,7 +71,7 @@ if (!isset($errorPage)) {
 	if ($type == "group"){
 		$bugfilter['project_id'][] = $idProjetMantis;
 		try {
-			$listChild = $clientSOAP->__soapCall('mc_project_get_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
+			$listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
 			$mantisbtMembers =  $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis, "access" => "ANYBODY"));
 		} catch (SoapFault $soapFault) {
 			echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
