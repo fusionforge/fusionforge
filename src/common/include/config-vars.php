@@ -33,6 +33,8 @@ forge_define_config_item ('project_auto_approval', 'core', false) ;
 forge_set_config_item_bool ('project_auto_approval', 'core') ;
 forge_define_config_item ('project_auto_approval_user', 'core', 'admin') ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
+forge_define_config_item ('http_port', 'core', 80) ;
+forge_define_config_item ('https_port', 'core', 443) ;
 forge_define_config_item ('apache_user', 'core', $GLOBALS['sys_apache_user']) ;
 forge_define_config_item ('apache_group', 'core', $GLOBALS['sys_apache_group']) ;
 forge_define_config_item ('scm_tarballs_path', 'core', '$core/data_path/scmtarballs') ;

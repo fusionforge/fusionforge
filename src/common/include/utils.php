@@ -1074,12 +1074,19 @@ function normalized_urlprefix () {
  * @return string URL
  */
 function util_make_url ($path) {
-	if (forge_get_config('use_ssl')) 
-		$url = "https://" ;
-	else
-		$url = "http://" ;
-	
-	$url .= forge_get_config('web_host') ;
+        if (forge_get_config('use_ssl')) {
+                $url = "https://" ;
+                $url .= forge_get_config('web_host') ;
+                if (forge_get_config('https_port') != 443) {
+                        $url .= ":".forge_get_config('https_port') ;
+                }
+        } else {
+                $url = "http://" ;
+                $url .= forge_get_config('web_host') ;
+                if (forge_get_config('http_port') != 80) {
+                        $url .= ":".forge_get_config('http_port') ;
+                }
+        }
 	$url .= util_make_uri ($path) ;
 	return $url ;
 }
