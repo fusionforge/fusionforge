@@ -36,6 +36,9 @@ function encodeResource($doc, $container, $resource) {
 			case 'dc' :
 				$prefix = 'http://purl.org/dc/terms/';
 				break;
+			case 'oslc_cm':
+				$prefix = 'http://open-services.net/ns/cm#';
+				break;
 			case 'helios_bt' :
 				$prefix = 'http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl';
 				break;
@@ -56,12 +59,9 @@ function encodeResource($doc, $container, $resource) {
 
 function createRessourceCollectionView($view){
 	$feedcharset = 'UTF-8';
-	$feedauthor = 'OSLC-CM-V1 Demo server ( '.TRACKER_TYPE.' version)';
-	if(isset($view->tracker)){
-		$feedtitle = TRACKER_TYPE.' OSLC-CM Change requests';
-	}else{
-		$feedtitle = 'All '.TRACKER_TYPE.' OSLC-CM Change requests';
-	}
+	$feedauthor = 'FusionForge OSLC-CM plugin';
+
+	$feedtitle = TRACKER_TYPE.' OSLC-CM ChangeRequests found in Tracker'. $view->tracker;
 
 	$doc = new DOMDocument('1.0',$feedcharset);
 	$doc->formatOutput = true;

@@ -127,6 +127,26 @@ class FusionForgeChangeRequest extends ChangeRequest
 							$resource[$field] = $value;
 						}
 					}
+					foreach ($changerequest->children('http://open-services.net/ns/core#') as $child) {
+						$field = $child->getName();
+						if(!$field){
+							print('No ontology attribute !!!');
+						}
+						if (in_array($field,$fusionforgebt_attr)) {
+							$value = (string)$child;
+							$resource[$field] = $value;
+						}
+					}
+					foreach ($changerequest->children('http://open-services.net/ns/cm#') as $child) {
+						$field = $child->getName();
+						if(!$field){
+							print('No ontology attribute !!!');
+						}
+						if (in_array($field,$fusionforgebt_attr)) {
+							$value = (string)$child;
+							$resource[$field] = $value;
+						}
+					}
 				}
 			}
 		}
@@ -154,6 +174,7 @@ class FusionForgeChangeRequest extends ChangeRequest
 		foreach ($resource as $field => $value) {
 			$field = str_replace('dc:', '', $field);
 			$field = str_replace('helios_bt:', '', $field);
+			$field = str_replace('oslc_cm:', '', $field);
 			
 			$changerequest->container[$field] = $value;
 		}
@@ -178,9 +199,9 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 		}
 	}
 
-	/* duplicated from code in the SOAP API
+	/* 
 	 * 
-	 * TODO Add code that maps fusionforge tracker fields to ontologies (dc, helios_bt, etc) 
+	 * Maps fusionforge tracker fields to ontologies (dc, oslc_cm, oslc, helios_bt, etc) 
 	 * 
 	 */
 	protected static function convert_artifacts_array($at_arr, $fields_string) {
@@ -248,8 +269,8 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 								case 'dc:creator': 
 									$return[$identifier]['creator'] = $at_arr[$i]->data_array['submitted_realname'];
 									break;
-								case 'helios_bt:status': 
-									$return[$identifier]['helios_bt:status'] = $at_arr[$i]->data_array['status_name'];
+								case 'oslc_cm:status': 
+									$return[$identifier]['oslc_cm:status'] = $at_arr[$i]->data_array['status_name'];
 									break;
 								case 'helios_bt:priority': 
 									$return[$identifier]['helios_bt:priority'] = $at_arr[$i]->data_array['priority'];
@@ -273,7 +294,7 @@ class ChangeRequestsFusionForgeDb extends ChangeRequests
 							'identifier'=>$identifier,
 							'title'=>$at_arr[$i]->data_array['summary'],
 							'description'=>$at_arr[$i]->data_array['details'],
-							'helios_bt:status'=>$at_arr[$i]->data_array['status_name'],
+							'oslc_cm:status'=>$at_arr[$i]->data_array['status_name'],
 							'helios_bt:priority'=>$at_arr[$i]->data_array['priority'],
 							'creator' => $at_arr[$i]->data_array['submitted_realname'],
 							'helios_bt:assigned_to' => $at_arr[$i]->data_array['assigned_realname'],

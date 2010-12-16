@@ -62,7 +62,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		'dc:title',
 		'dc:description',
 		'dc:creator',
-		'helios_bt:status',
+		'oslc_cm:status',
 		'helios_bt:priority',
 		'helios_bt:assigned_to',
 		'dc:modified',
@@ -154,7 +154,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 				if($term[0]=='=')	{	
 					$term[2] = str_replace("\"", "", $term[2]);
 					switch($term[1])	{
-						case 'helios_bt:status':
+						case 'oslc_cm:status':
 							if (array_key_exists($term[2],self::$status_arr))	{
 								$query['status'] = self::$status_arr[$term[2]];
 							}else	{
@@ -367,7 +367,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 			throw new Exception('Error : Could not instanciate project Tracker');
 		} else {
 			// Construct array for oslc.where with all possible values for each attribute
-			// Currently only helios_bt:status and helios_bt:assigned_to are supported for
+			// Currently only oslc_cm:status and helios_bt:assigned_to are supported for
 			// oslc.where query.
 			$engine = RBACEngine::getInstance() ;
 			$techs = $engine->getUsersByAllowedAction ('tracker', $tracker, 'tech') ;
@@ -546,7 +546,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 			}
 		}
 		
-		// helios_bt:status ===> status 
+		// oslc_cm:status ===> status 
 		if(in_array('status',$props))
 		{
 			if(isset($cm_request['status']))
@@ -555,7 +555,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 			}
 			else
 			{
-				throw new BadRequestException("helios_bt:status mentioned in the request query not found in request body!");
+				throw new BadRequestException("oslc_cm:status mentioned in the request query not found in request body!");
 			}
 		}
 		
