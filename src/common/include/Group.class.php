@@ -119,16 +119,11 @@ function &group_get_objects($id_arr) {
 	$return = array();
 	
 	foreach ($id_arr as $id) {
-		if (!$id) {
-			continue;
-		}
 		//
 		//	See if this ID already has been fetched in the cache
 		//
 		if (!isset($GROUP_OBJ["_".$id."_"])) {
 			$fetch[]=$id;
-		} else {
-			$return[] =& $GROUP_OBJ["_".$id."_"];
 		}
 	}
 	if (count($fetch) > 0) {
@@ -138,6 +133,9 @@ function &group_get_objects($id_arr) {
 			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
 			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
 		}
+	}
+	foreach ($id_arr as $id) {
+		$return[] =& $GROUP_OBJ["_".$id."_"];
 	}
 	return $return;
 }
