@@ -464,7 +464,6 @@ class DocumentGroup extends Error {
 			if ($zip->extractTo($extractDir)) {
 				$zip->close();
 				if ($this->__injectContent($doc_group, $extractDir)) {
-					
 					return true;
 				} else {
 					$this->setError(_('Unable inject zipfile.'));
