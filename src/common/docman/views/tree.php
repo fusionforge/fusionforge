@@ -46,25 +46,25 @@ echo '<div id="documenttree" style="height:100%">';
 ?>
 
 <script type="text/javascript">
-	var myThemeXPBase = "<?php echo util_make_uri ('/jscook/ThemeXP/'); ?>";
+	var myThemeXPBase = "<?php echo util_make_uri('/jscook/ThemeXP/'); ?>";
 </script>
-<script type="text/javascript" src="<?php echo util_make_uri ('/jscook/JSCookTree.js'); ?>"></script>
-<link rel="stylesheet" href="<?php echo util_make_uri ('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
-<script src="<?php echo util_make_uri ('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo util_make_uri('/jscook/JSCookTree.js'); ?>"></script>
+<link rel="stylesheet" href="<?php echo util_make_uri('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
+<script src="<?php echo util_make_uri('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
 <div id="myMenuID" style="overflow:auto;"></div>
 
 <script type="text/javascript">
 	var myMenu =
 		[
-			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + ctThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + ctThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '#', '', '', <?php docman_recursive_display(0); ?>
+			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + ctThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + ctThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '<?php echo '?group_id='.$group_id ?>', '', '', <?php docman_recursive_display(0); ?>
 			]
 		];
 
-	var treeIndex = ctDraw ('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
-	ctExposeTreeIndex (treeIndex, <?php echo $idExposeTreeIndex ?>);
-	var openItem = ctGetSelectedItem (treeIndex)
-	ctOpenFolder (openItem)
+	var treeIndex = ctDraw('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
+	ctExposeTreeIndex(treeIndex, <?php echo $idExposeTreeIndex ?>);
+	var openItem = ctGetSelectedItem(treeIndex)
+	ctOpenFolder(openItem)
 </script>
 
 <?php
