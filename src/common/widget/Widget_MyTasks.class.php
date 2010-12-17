@@ -19,7 +19,7 @@
  */
 
 require_once('Widget.class.php');
-require_once('WidgetLayoutManager.class.php');
+require_once('common/widget/WidgetLayoutManager.class.php');
 require_once('www/my/my_utils.php');
 
 /**
