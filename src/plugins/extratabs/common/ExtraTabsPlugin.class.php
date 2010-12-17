@@ -31,6 +31,7 @@ class ExtraTabsPlugin extends Plugin {
 		$this->text = "Extra tabs";
 		$this->hooks[] = "project_admin_plugins" ;
 		$this->hooks[] = "groupmenu" ;  // To put into the project tabs
+		$this->hooks[] = "clone_project_from_template" ;
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -54,6 +55,25 @@ class ExtraTabsPlugin extends Plugin {
 			while ($row_tab = db_fetch_array($res_tabs)) {
 				$params['DIRS'][] = $row_tab['tab_url'];
 				$params['TITLES'][] = $row_tab['tab_name'];
+			}
+		} elseif ($hookname == "clone_project_from_template") {
+			$tabs = array () ;
+			$res = db_query_params ('SELECT tab_name, tab_url, index FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index',
+						     array ($params['template']->getID())) ;
+			while ($row = db_fetch_array($res)) {
+				$data = array () ;
+				$data['tab_url'] = $params['project']->replaceTemplateStrings ($row['tab_url']) ;
+				$data['tab_name'] = $params['project']->replaceTemplateStrings ($row['tab_name']) ;
+				$data['index'] = $row['index'] ;
+				$tabs[] = $data ;
+			}			 
+
+			foreach ($tabs as $tab) {
+				db_query_params ('INSERT INTO plugin_extratabs_main (tab_url, tab_name, index, group_id) VALUES ($1,$2,$3,$4)',
+						 array ($data['tab_url'],
+							$data['tab_name'],
+							$data['index'],
+							$params['project']->getID())) ;
 			}
 		}
 	}

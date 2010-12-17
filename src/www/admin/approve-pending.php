@@ -221,6 +221,11 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	}
 	}
 	
+	if ($row_grp['built_from_template']) {
+		$templateproject = group_get_object ($row_grp['built_from_template']) ;
+		print "<p>" .sprintf(_('Based on template project: %s (%s)'),$templateproject->getPublicName(),$templateproject->getUnixName())."</p>";
+	}
+
 	echo "<hr />";
 }
 

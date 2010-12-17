@@ -524,7 +524,7 @@ abstract class BaseRole extends Error {
 		$group_id = $project->getID() ;
 
 		if (USE_PFO_RBAC) {
-			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm', 'webcal') ;
+			$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
 			foreach ($sections as $section) {
 				$result[$section][$group_id] = $this->getVal ($section, $group_id) ;
 			}
@@ -540,18 +540,21 @@ abstract class BaseRole extends Error {
 		foreach ($tids as $tid) {
 			$result['tracker'][$tid] = $this->getVal ('tracker', $tid) ;
 		}
+		$sections[] = 'tracker' ;
 
 		$ff = new ForumFactory ($project) ;
 		$fids = $ff->getAllForumIds () ;
 		foreach ($fids as $fid) {
 			$result['forum'][$fid] = $this->getVal ('forum', $fid) ;
 		}
+		$sections[] = 'forum' ;
 
 		$pgf = new ProjectGroupFactory ($project) ;
 		$pgids = $pgf->getAllProjectGroupIds () ;
 		foreach ($pgids as $pgid) {
 			$result['pm'][$pgid] = $this->getVal ('pm', $pgid) ;
 		}
+		$sections[] = 'pm' ;
 
 
 		if (USE_PFO_RBAC) {

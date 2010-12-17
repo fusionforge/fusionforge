@@ -11,7 +11,7 @@ FusionForge-5.1:
 * Trackers: Sorting improved to allow text & select fields (Alcatel-Lucent)
 * [#127] Patch to auto approve projects.
 * scmgit plugin now allows project members to request a personal git
-  repository as a clone of the current project's one
+  repository as a clone of the current project's one (AdaCore)
 * New blocks plugin, to add free HTML blocks on top of each tools of
   the project allowing admins to add free descriptions
   (Alcatel-Lucent), (better with fckeditor plugin).
@@ -23,6 +23,9 @@ FusionForge-5.1:
   (Roland Mas, Coclico)
 * Unified configuration system, now using standard *.ini files (Roland
   Mas)
+* Template projects: there can be several of them, and users
+  registering new projects can pick which template to clone from for
+  their new projects (Roland Mas, Coclico)
 * Reorganised, modular Apache configuration (Roland Mas)
 * New User Widget : documents monitoring (Capgemini)
 * RPM packages for Red Hat (and derived) distributions

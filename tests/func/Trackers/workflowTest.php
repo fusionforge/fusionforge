@@ -49,6 +49,7 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 {
 	function testWorkflow()
 	{
+		$this->populateStandardTemplate('trackers');
 		$this->init();
 			
 		// Testing extra-fields
@@ -56,7 +57,7 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/?group_id=6&atid=101')]");
+		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");

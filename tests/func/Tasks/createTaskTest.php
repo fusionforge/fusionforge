@@ -68,6 +68,7 @@ class CreateTask extends FForge_SeleniumTestCase
 
     function setUpTasks()
     {
+	$this->populateStandardTemplate(array('tasks'));
         $this->init();
 
         // Initialize "rep_time_tracking" table
@@ -353,7 +354,12 @@ class CreateTask extends FForge_SeleniumTestCase
 
     function assignTask()
     {
-        $this->open("/pm/task.php?group_id=6&group_project_id=2");
+	$this->gotoProject("ProjectA");
+	$this->waitForPageToLoad("30000");
+	$this->click("link=Tasks");
+	$this->waitForPageToLoad("30000");	    
+        $this->click("link=To Do: Browse tasks");
+        $this->waitForPageToLoad("30000");
         $this->click("link=exact:Task1: Hello Paris");
         $this->waitForPageToLoad("30000");
         $this->addSelection("assigned_to[]", "label=ucontrib Lastname");
@@ -387,7 +393,8 @@ class CreateTask extends FForge_SeleniumTestCase
 
     function createSubproject()
     {
-        $this->open("/pm/task.php?group_id=6");
+	$this->gotoProject("ProjectA");
+	$this->waitForPageToLoad("30000");
         $this->click("link=Project Admin");
         $this->waitForPageToLoad("30000");
         $this->click("link=Tools");
@@ -408,7 +415,8 @@ class CreateTask extends FForge_SeleniumTestCase
 
     function createPrivateSubproject()
     {
-        $this->open("/pm/task.php?group_id=6");
+	$this->gotoProject("ProjectA");
+	$this->waitForPageToLoad("30000");
         $this->click("link=Project Admin");
         $this->waitForPageToLoad("30000");
         $this->click("link=Tools");

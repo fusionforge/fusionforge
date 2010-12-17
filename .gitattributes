@@ -571,6 +571,7 @@ src/db/20101025-ipv6.sql -text
 src/db/20101027-docman-lock.sql -text
 src/db/20101029-docman-monitoring.sql -text
 src/db/20101105-pfo-rbac.sql -text
+src/db/20101213-project-template.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text
@@ -4173,6 +4174,7 @@ src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
 src/utils/decode_images.sh svneol=native#text/x-sh
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
 src/utils/fixscripts/normalize_roles.php -text
+src/utils/fixscripts/populate_template_project.php -text
 src/utils/forge_get_config -text
 src/utils/forge_set_password -text
 src/utils/fusionforge-shell-postgresql.spec -text

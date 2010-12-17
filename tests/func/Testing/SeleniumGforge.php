@@ -81,6 +81,148 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->createAndGoto('ProjectA');
 	}
 
+	protected function populateStandardTemplate($what='all')
+	{
+		if ($what == 'all') {
+			$what = array('trackers','tasks','forums','docs');
+		} elseif ($what == 'empty') {
+			$what = array();
+		} elseif (!is_array($what)) {
+			$what = array($what) ;
+		}
+		$this->switchUser ('admin') ;
+
+		$this->approveProject ('Template', 'admin');
+		$this->open( ROOT . '/projects/template') ;
+		$this->waitForPageToLoad("30000");
+
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Tools");
+		$this->waitForPageToLoad("30000");
+		$this->click("//input[@name='use_forum']") ;
+		$this->click("//input[@name='use_tracker']") ;
+		$this->click("//input[@name='use_mail']") ;
+		$this->click("//input[@name='use_pm']") ;
+		$this->click("//input[@name='use_docman']") ;
+		$this->click("//input[@name='use_news']") ;
+		$this->click("//input[@name='use_frs']") ;
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+
+		if (in_array ('trackers', $what)) {
+			$this->click("link=Trackers Admin");
+			$this->waitForPageToLoad("30000");
+			$this->type("name", "Bugs");
+			$this->type("description", "Tracker for bug reports");
+			$this->click("post_changes");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
+			$this->click("link=Bugs");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Manage Custom Fields");
+			$this->waitForPageToLoad("30000");
+			$this->type("name", "URL");
+			$this->type("alias", "url");
+			$this->click("document.forms[2].field_type[3]");
+			$this->click("post_changes");
+			$this->waitForPageToLoad("30000");
+			
+			$this->click("link=Admin");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Tools");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Trackers Admin");
+			$this->waitForPageToLoad("30000");
+			$this->type("name", "Support Requests");
+			$this->type("description", "Tracker for support requests");
+			$this->click("post_changes");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
+
+			$this->type("name", "Patches");
+			$this->type("description", "Proposed changes to code");
+			$this->click("post_changes");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
+
+			$this->type("name", "Feature Requests");
+			$this->type("description", "New features that people want");
+			$this->click("post_changes");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Tracker created successfully"));
+		}
+
+		if (in_array ('tasks', $what)) {
+			$this->click("link=Admin");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Tools");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Tasks Admin");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Add a Subproject");
+			$this->waitForPageToLoad("30000");
+			$this->type("project_name", "To Do");
+			$this->type("description", "Things we have to do");
+			$this->click("submit");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
+			
+			$this->type("project_name", "Next Release");
+			$this->type("description", "Items for our next release");
+			$this->click("submit");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Subproject Inserted"));
+		}
+
+		if (in_array ('forums', $what)) {
+			$this->click("link=Admin");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Tools");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Forums Admin");
+			$this->waitForPageToLoad("30000");
+			
+			$this->click("link=Add forum");
+			$this->waitForPageToLoad("30000");
+			$this->type("forum_name", "Open-Discussion");
+			$this->type("description", "General Discussion");
+			$this->click("submit");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Forum added successfully"));
+
+			$this->type("forum_name", "Help");
+			$this->type("description", "Get Public Help");
+			$this->click("submit");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Forum added successfully"));
+
+			$this->type("forum_name", "Developers-Discussion");
+			$this->type("description", "Project Developer Discussion");
+			$this->click("//input[@name='is_public' and @value='0']");
+			$this->click("submit");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Forum added successfully"));
+
+			$this->click("link=Forums");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("open-discussion"));
+			$this->assertTrue($this->isTextPresent("Get Public Help"));
+			$this->assertTrue($this->isTextPresent("Project Developer Discussion"));
+		}
+
+		if (in_array ('docs', $what)) {
+			$this->click("link=Docs");
+			$this->waitForPageToLoad("30000");
+			$this->click("link=Add new documentation directory");
+			$this->waitForPageToLoad("30000");
+			$this->type("groupname", "Uncategorized Submissions");
+			$this->click("//input[@id='submitaddsubgroup']");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Uncategorized Submissions"));
+		}
+	}
+
 	protected function login($username)
 	{
 		$this->open( ROOT );

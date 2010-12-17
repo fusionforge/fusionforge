@@ -48,6 +48,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 {
 	function testCreateDocURL()
 	{
+		$this->populateStandardTemplate('docs');
 		$this->init();
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("link=Submit new documentation");

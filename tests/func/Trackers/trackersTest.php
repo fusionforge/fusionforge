@@ -49,6 +49,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 {
 	function testSimpleCreate()
 	{
+		$this->populateStandardTemplate('trackers');
 		$this->init();
 
 		// Test: Create a simple bug report (Message1/Text1).
@@ -120,6 +121,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 
 	function testExtraFields()
 	{
+		$this->populateStandardTemplate('trackers');
 		$this->init();
 
 		// Testing extra-fields
@@ -127,7 +129,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Bugs");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/?group_id=6&atid=101')]");
+		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Manage Custom Fields");
 		$this->waitForPageToLoad("30000");
@@ -136,8 +138,7 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("field_type");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
-$this->click("//tr[@id='field-number']/td[4]/a[1]");
-		//$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/index.php?add_opt=1&boxid=22&group_id=6&atid=101')]");
+		$this->click("//tr[@id='field-number']/td[4]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "1");
 		$this->click("post_changes");
@@ -155,7 +156,8 @@ $this->click("//tr[@id='field-number']/td[4]/a[1]");
 		$this->assertTrue($this->isTextPresent("Element inserted"));
 
 		// Testing [#3649]: 0 not accepted when modifying a select list value
-		$this->open(ROOT."/tracker/admin/index.php?group_id=6&atid=101&add_extrafield=1");
+		$this->click("link=Manage Custom Fields");
+		$this->waitForPageToLoad("30000");
 		$this->click("//tr[@id='field-number']/td[3]/a[5]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "10");
@@ -171,12 +173,13 @@ $this->click("//tr[@id='field-number']/td[4]/a[1]");
 
 	function testCreateAndDeleteNewTracker()
 	{
+		$this->populateStandardTemplate('trackers');
 		$this->init();
 
 		// Create a new tracker and delete it after.
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
-		$this->click("//a[@href='".URL."tracker/admin/?group_id=6']");
+		$this->click("//a[contains(@href,'".ROOT."/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "newTracker");
 		$this->type("description", "This is a new tracker");

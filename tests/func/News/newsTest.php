@@ -49,6 +49,7 @@ class CreateNews extends FForge_SeleniumTestCase
 {
 	function testMyTestCase()
 	{
+		$this->populateStandardTemplate(array());
 		$this->init();
 
 		// Create a simple news.

@@ -32,6 +32,8 @@ forge_set_config_item_bool ('project_registration_restricted', 'core') ;
 forge_define_config_item ('project_auto_approval', 'core', false) ;
 forge_set_config_item_bool ('project_auto_approval', 'core') ;
 forge_define_config_item ('project_auto_approval_user', 'core', 'admin') ;
+forge_define_config_item ('allow_project_without_template', 'core', true) ;
+forge_set_config_item_bool ('allow_project_without_template', 'core') ;
 forge_define_config_item ('web_host', 'core', $GLOBALS['sys_default_domain']) ;
 forge_define_config_item ('http_port', 'core', 80) ;
 forge_define_config_item ('https_port', 'core', 443) ;
