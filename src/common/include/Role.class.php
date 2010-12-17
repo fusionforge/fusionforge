@@ -316,11 +316,12 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		} else {
 			$arr = array () ;
 		}
-		$keys = array_keys($arr);
-		$data = array();
-		for ($i=0; $i<count($keys); $i++) {
 
-			if ($keys[$i] == 'forum') {
+		$data = array();
+		foreach ($arr as $k => $v) {
+			$data[$k][$this->Group->getID()]= $v;
+
+			if ($k == 'new_forum') {
 				$res = db_query_params ('SELECT group_forum_id FROM forum_group_list WHERE group_id=$1',
 							array ($this->Group->getID())) ;
 				if (!$res) {
@@ -328,9 +329,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					return false;
 				}
 				for ($j=0; $j<db_numrows($res); $j++) {
-					$data[$keys[$i]][db_result($res,$j,'group_forum_id')]= $arr[$keys[$i]];
+					$data['forum'][db_result($res,$j,'group_forum_id')]= $v;
 				}
-			} elseif ($keys[$i] == 'pm') {
+			} elseif ($k == 'new_pm') {
 				$res = db_query_params ('SELECT group_project_id FROM project_group_list WHERE group_id=$1',
 							array ($this->Group->getID())) ;
 				if (!$res) {
@@ -338,9 +339,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					return false;
 				}
 				for ($j=0; $j<db_numrows($res); $j++) {
-					$data[$keys[$i]][db_result($res,$j,'group_project_id')]= $arr[$keys[$i]];
+					$data['pm'][db_result($res,$j,'group_project_id')]= $v;
 				}
-			} elseif ($keys[$i] == 'tracker') {
+			} elseif ($k == 'new_tracker') {
 				$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list WHERE group_id=$1',
 							array ($this->Group->getID())) ;
 				if (!$res) {
@@ -348,10 +349,8 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					return false;
 				}
 				for ($j=0; $j<db_numrows($res); $j++) {
-					$data[$keys[$i]][db_result($res,$j,'group_artifact_id')]= $arr[$keys[$i]];
+					$data['tracker'][db_result($res,$j,'group_artifact_id')]= $v;
 				}
-			} else {
-				$data[$keys[$i]][0]= $arr[$keys[$i]];
 			}
 		}
 
