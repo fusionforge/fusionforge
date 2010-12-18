@@ -58,10 +58,9 @@ class MantisBTPlugin extends Plugin {
 		$returned = false;
 		switch ($hookname) {
 			case "usermenu": {
-				$text = $this->text; // this is what shows in the tab
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($text), array('/plugins/mantisbt/index.php' . $param));
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param));
 				}
 				$returned = true;
 				break;
@@ -90,7 +89,7 @@ class MantisBTPlugin extends Plugin {
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link ("/plugins/mantisbt/index.php?id=$userid&type=user&pluginname=".$this->name,
+					echo util_make_link("/plugins/mantisbt/index.php?id=$userid&type=user&pluginname=".$this->name,
 					_('View Personal MantisBT')
 					);
 					echo '</p>';
@@ -102,9 +101,9 @@ class MantisBTPlugin extends Plugin {
 				// this displays the link in the project admin options page to it's  MantisBT administration
 				$group_id = $params['group_id'];
 				$group = group_get_object($group_id);
-				if ($group->usesPlugin ($this->name)) {
+				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link ("/plugins/mantisbt/index.php?id=$group_id&type=admin&pluginname=".$this->name,
+					echo util_make_link("/plugins/mantisbt/index.php?id=$group_id&type=admin&pluginname=".$this->name,
 					_('View Admin MantisBT')
 					);
 					echo '</p>';
@@ -149,14 +148,18 @@ class MantisBTPlugin extends Plugin {
 			// mise a jour de l'adresse mail utilisateur
 			case "change_cal_mail": {
 				$user_id=$params[1];
-				$this->updateUserInMantis($user_id);
+				// before activate this, please fix updateUserInMantis
+				//$this->updateUserInMantis($user_id);
+				$returned = true;
 				break;
 			}
 			case "add_cal_link_father":
 			case "del_cal_link_father": {
 				$sub_group_id = $params[0];
 				$group_id = $params[1];
-				$this->refreshHierarchyMantisBt();
+				// before activate this, please fix refreshHierarchyMantisBt
+				//$this->refreshHierarchyMantisBt();
+				$returned = true;
 				break;
 			}
 			case "group_delete": {
@@ -364,9 +367,11 @@ class MantisBTPlugin extends Plugin {
 	function updateUserInMantis($user_id) {
 		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
 		// recuperation du nouveau mail
-		$resUser = db_query_params ('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
+		$resUser = db_query_params('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
 		echo db_error();
 		$row = db_fetch_array($resUser);
+
+		// WONT WORK : db_connect_host is not in any fusionforge api
 		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
 		if(!$dbConnection){
 			$errMantis1 = "Error : Could not open connection" . db_error($dbConnection);
@@ -432,6 +437,7 @@ class MantisBTPlugin extends Plugin {
 
 		$hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true',array());
 		echo db_error();
+		// WONT WORK : db_connect_host is not in any fusionforge api
 		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
 		if(!$dbConnection){
 			db_rollback($dbConnection);
@@ -470,6 +476,7 @@ class MantisBTPlugin extends Plugin {
 	function __updateUsersProjectMantisPgsql($groupId, $stateForge) {
 		$groupObject = group_get_object($groupId);
 		$returned = false;
+		// WONT WORK : db_connect_host is not in any fusionforge api
 		$dbConnection = db_connect_host(forge_get_config('db_name','mantisbt'), forge_get_config('db_user','mantisbt'), forge_get_config('db_password','mantisbt'), forge_get_config('db_host','mantisbt'), forge_get_config('db_port','mantisbt'));
 		if(!$dbConnection) {
 			$groupObject->setError('updateUsersProjectMantis::'. _('Error : Could not open connection') . db_error($dbConnection));
