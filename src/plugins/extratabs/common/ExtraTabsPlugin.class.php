@@ -50,11 +50,25 @@ class ExtraTabsPlugin extends Plugin {
 				return;
 			if (!$project->isProject())
 				return;
-			$res_tabs = db_query_params ('SELECT tab_name, tab_url FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index',
+			$res_tabs = db_query_params ('SELECT tab_name, tab_url, type FROM plugin_extratabs_main WHERE group_id=$1 ORDER BY index',
 						     array ($group_id)) ;
 			while ($row_tab = db_fetch_array($res_tabs)) {
-				$params['DIRS'][] = $row_tab['tab_url'];
 				$params['TITLES'][] = $row_tab['tab_name'];
+				switch ($row_tab['type']) {
+					case 0: // Link
+						$params['DIRS'][] = $row_tab['tab_url'];
+						break;
+
+					case 1: // Iframe
+						$params['DIRS'][] = '/plugins/'.$this->name.'/iframe.php?group_id='.$group_id.'&amp;tab_name='.$row_tab['tab_name'];
+						if (isset($params['toptab'])) {
+							($params['toptab'] == $this->name ? $params['selected'] = count($params['TITLES']) - 1 : '' );
+						}
+						break;
+
+					default:
+						return;
+				}
 			}
 		} elseif ($hookname == "clone_project_from_template") {
 			$tabs = array () ;
