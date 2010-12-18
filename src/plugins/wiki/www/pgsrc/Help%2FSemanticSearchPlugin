@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 14:39:15 +0000
+Date: Thu, 16 Dec 2010 14:00:38 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FSemanticSearchPlugin 7755 2010-12-09 13:39:40Z vargenau $
+X-Rcs-Id: $Id: Help%2FSemanticSearchPlugin 7783 2010-12-16 13:01:01Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticSearchPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -50,7 +50,7 @@ All [[Help:PageList|PageList]] arguments, plus the following ones.
 |-
 | **page**
 | which pages (glob allowed)
-| * (all)
+| ~* (all)
 |-
 | **relation**
 | linkname. which relations.
@@ -62,7 +62,7 @@ All [[Help:PageList|PageList]] arguments, plus the following ones.
 |-
 | **attr_op**
 | a funny written way for equality for pure aesthetic pleasure "All attributes which have this value set"
-| :=
+| ~:=
 |-
 | **units**
 |

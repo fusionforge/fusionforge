@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
+Date: Thu, 16 Dec 2010 12:56:02 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FRichTablePlugin 7757 2010-12-09 13:53:00Z vargenau $
+X-Rcs-Id: $Id: Help%2FRichTablePlugin 7778 2010-12-16 11:56:28Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRichTablePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -9,6 +9,11 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~RichTable** [[Help:WikiPlugin|plugin]] is a plugin that takes off from the [[Help:OldStyleTablePlugin|OldStyleTable]] plugin. It allows a user to specify arbitrary properties of ##<table>##, ##<tr>## and ##<td>## with a very simple markup.
+
+This plugin is included for legacy only. We recommand to
+use [[Help:MediawikiTablePlugin|Mediawiki tables]] instead.
+
+== Syntax ==
 
 The contents of each cell are individually processed by the ~BlockParser. This means that you can do interesting things like put **invoke plugins**, use **enumerated lists** etc within each cell!
 

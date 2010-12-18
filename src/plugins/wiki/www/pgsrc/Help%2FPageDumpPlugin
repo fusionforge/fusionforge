@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 18:00:47 +0000
+Date: Thu, 16 Dec 2010 13:54:52 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FPageDumpPlugin 7766 2010-12-09 17:01:50Z vargenau $
+X-Rcs-Id: $Id: Help%2FPageDumpPlugin 7781 2010-12-16 12:55:28Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageDumpPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -28,13 +28,15 @@ The **~PageDump** [[Help:WikiPlugin|plugin]] allows to view a single page dump o
 | pagename
 |-
 | **format**
-| 'normal', 'forcvs', 'backup'
+| 'normal', 'forsvn', 'forcvs', 'backup'
 | none
 |-
 | **download**
 | 
 | false
 |}
+
+Note: 'forsvn' and 'forcvs' are the same.
 
 == Example ==
 
