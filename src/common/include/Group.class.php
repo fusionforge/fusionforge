@@ -40,7 +40,6 @@ require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
-require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 //the license_id of "Other/proprietary" license
 define('GROUP_LICENSE_OTHER',126);
@@ -2391,6 +2390,7 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function approve(&$user) {
+		require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 		if ($this->getStatus()=='A') {
 			$this->setError(_("Group already active"));
