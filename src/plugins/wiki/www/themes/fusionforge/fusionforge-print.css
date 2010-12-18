@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge-print.css 7718 2010-10-22 08:26:31Z vargenau $
+ * $Id: fusionforge-print.css 7784 2010-12-17 10:55:08Z vargenau $
  *
  * Copyright (C) 2008 Alcatel-Lucent
  *
@@ -81,6 +81,8 @@ div.toc {
 div.toc p.toctitle, h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid black;
 }
+
+h1 { font-weight: bold; }
 
 /*
 div.toclist a::after {
