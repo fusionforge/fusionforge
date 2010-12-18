@@ -104,16 +104,11 @@ function &user_get_objects($id_arr) {
 	$return = array();
 
 	foreach ($id_arr as $id) {
-		if (!$id) {
-			continue ;
-		}
 		//
 		//  See if this ID already has been fetched in the cache
 		//
 		if (!isset($USER_OBJ["_".$id."_"])) {
 			$fetch[]=$id;
-		} else {
-			$return[] =& $USER_OBJ["_".$id."_"];
 		}
 	}
 	if (count($fetch) > 0) {
@@ -121,8 +116,10 @@ function &user_get_objects($id_arr) {
 					array(db_int_array_to_any_clause ($fetch)));
 		while ($arr = db_fetch_array($res)) {
 			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'],$arr);
-			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
 		}
+	}
+	foreach ($id_arr as $id) {
+		$return[] =& $USER_OBJ["_".$id."_"];
 	}
 	return $return;
 }

@@ -49,6 +49,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->hooks[] = "role_get_setting";
 		$this->hooks[] = "list_roles_by_permission";
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
+		$this->hooks[] = "clone_project_from_template" ;
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -340,6 +341,23 @@ class MediaWikiPlugin extends Plugin {
 				    "/plugins/mediawiki/plugin_admin.php?group_id=" .
 				    $group->getID(), _("MediaWiki Plugin admin")) .
 				    "<br />";
+		} elseif ($hookname == "clone_project_from_template") {
+			$template = $params['template'] ;
+			$project = $params['project'] ;
+			$id_mappings = $params['id_mappings'] ;
+			
+			$sections = array ('plugin_mediawiki_read', 'plugin_mediawiki_edit', 'plugin_mediawiki_upload', 'plugin_mediawiki_admin') ;
+
+			foreach ($template->getRoles() as $oldrole) {
+				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]) ;
+				$oldsettings = $oldrole->getSettingsForProject ($template) ;
+				
+				foreach ($sections as $section) {
+					if (isset ($oldsettings[$section][$template->getID()])) {
+						$newrole->setSetting ($section, $project->getID(), $oldsettings[$section][$template->getID()]) ;
+					}
+				}
+			}
 		}
 	}
   }

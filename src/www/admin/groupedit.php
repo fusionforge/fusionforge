@@ -38,7 +38,7 @@ if (!$group || !is_object($group)) {
 }
 
 // This function performs very update
-function do_update(&$group, $is_public, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
+function do_update(&$group, $is_public, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
     global $error_msg;
 
@@ -51,6 +51,12 @@ function do_update(&$group, $is_public, $status, $group_type, $unix_box, $http_d
 	}
 
 	if (!$group->updateAdmin(session_get_user(), $is_public, $group_type, $unix_box, $http_domain)) {
+		$error_msg .= $group->getErrorMessage();
+		db_rollback();
+		return false;
+	}
+
+	if (!$group->setAsTemplate($is_template)) {
 		$error_msg .= $group->getErrorMessage();
 		db_rollback();
 		return false;
@@ -71,12 +77,13 @@ function do_update(&$group, $is_public, $status, $group_type, $unix_box, $http_d
 
 if (getStringFromRequest('submit')) {
 	$form_public = getStringFromRequest('form_public');
+	$form_template = getStringFromRequest('form_template');
 	$form_status = getStringFromRequest('form_status');
 	$form_box = getStringFromRequest('form_box');
 	$form_domain = getStringFromRequest('form_domain');
 	$form_scm_box = getStringFromRequest('form_scm_box');
 
-	do_update($group, $form_public, $form_status, 1, $form_box, $form_domain, $form_scm_box);
+	do_update($group, $form_public, $form_template, $form_status, 1, $form_box, $form_domain, $form_scm_box);
 
 } else if (getStringFromRequest('resend')) {
 
@@ -141,6 +148,26 @@ if($status == 'P') {
 		_('Yes')
 ),
 	'form_public', $group->isPublic(), false
+); ?>
+</td>
+</tr>
+
+<tr>
+<td>
+<?php echo _('Template?') ?>:
+</td>
+<td>
+<?php
+	echo html_build_select_box_from_arrays(
+	array(
+		'0',
+		'1'
+	),
+	array(
+		_('No'),
+		_('Yes')
+),
+	'form_template', $group->isTemplate(), false
 ); ?>
 </td>
 </tr>

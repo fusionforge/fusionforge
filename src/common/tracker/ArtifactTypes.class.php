@@ -137,6 +137,7 @@ class ArtifactTypes extends Error {
 			}
 
 		}
+
 		db_commit();
 		return true;
 	}

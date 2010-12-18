@@ -51,6 +51,9 @@ if (forge_get_config('project_registration_restricted')) {
 	exit_not_logged_in();
 }
 
+$template_projects = group_get_template_projects() ;
+sortProjectList ($template_projects) ;
+
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
@@ -62,11 +65,28 @@ if (getStringFromRequest('submit')) {
 	$unix_name = trim(strtolower(getStringFromRequest('unix_name')));
 	$scm = getStringFromRequest('scm');
 	$is_public = getIntFromRequest('is_public');
+	$built_from_template = getIntFromRequest('built_from_template');
 	$feedback = "";
 	$error_msg = "";
 
 	if (!$scm) {
 		$scm = 'noscm' ;
+	}
+
+	$template_project = group_get_object ($built_from_template) ;
+	if ($template_project
+	    && !$template_project->isError()
+	    && $template_project->isTemplate()) {
+		// Valid template selected, nothing to do
+	} elseif (forge_get_config('allow_project_without_template')) {
+		// Empty projects allowed
+		$built_from_template = 0 ;
+	} elseif (count($template_projects) == 0) {
+		// No empty projects allowed, but no template available
+		$built_from_template = 0 ;
+	} else {
+		// No empty projects allowed, picking the first available template
+		$built_from_template = $template_projects[0]->getID() ;
 	}
 
 	if (forge_get_config('use_scm')) {
@@ -96,7 +116,8 @@ if (getStringFromRequest('submit')) {
 			'shell1',
 			$scm_host,
 			$is_public,
-			$send_mail
+			$send_mail,
+			$built_from_template
 		);
 		if ($res && forge_get_config('use_scm') && $plugin) {
 			$group->setUsesSCM (true) ;
@@ -203,6 +224,54 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 		echo '<td><input type="radio" name="scm" value="'.$myPlugin->name.'">'.$myPlugin->text.'</td>';
 	}
 	echo '</tr></tbody></table>'."\n";
+}
+
+$index++;
+echo '<h3>'.$index.'. '._('Project template'). '</h3>';
+
+if (count ($template_projects) > 1) {
+	$tpv_arr = array () ;
+	$tpn_arr = array () ;
+	echo '<p>';
+	if (forge_get_config('allow_project_without_template')) {
+		printf(_('You can either start from an empty project, or pick a project that will act as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).')) ;
+		$tpv_arr[] = 0 ;
+		$tpn_arr[] = _('Start from empty project') ;
+	} else {
+		printf(_('Please pick a project that will act as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).')) ;
+	}
+	echo '</p>' ;
+	foreach ($template_projects as $tp) {
+		$tpv_arr[] = $tp->getID() ;
+		$tpn_arr[] = $tp->getPublicName() ;
+	}
+	echo html_build_select_box_from_arrays ($tpv_arr, $tpn_arr, 'built_from_template', $template_projects[0]->getID(),
+						false, '', false, '') ;
+} elseif (count ($template_projects) == 1) {
+	echo '<p>';
+	if (forge_get_config('allow_project_without_template')) {
+		printf(_('You can either start from an empty project, or use the %s project as a template for yours.  Your project will initially have the same configuration as the template (same roles and permissions, same trackers, same set of enabled plugins, and so on).'),
+		       $template_projects[0]->getPublicName()) ;
+		echo '</p>' ;
+		$tpv_arr = array () ;
+		$tpn_arr = array () ;
+		$tpv_arr[] = 0 ;
+		$tpn_arr[] = _('Start from empty project') ;
+		$tpv_arr[] = $template_projects[0]->getID() ;
+		$tpn_arr[] = $template_projects[0]->getPublicName() ;
+		echo html_build_select_box_from_arrays ($tpv_arr, $tpn_arr, 'built_from_template', $template_projects[0]->getID(),
+							false, '', false, '') ;
+	} else {
+		printf(_('Your project will initially have the same configuration as the %s project (same roles and permissions, same trackers, same set of enabled plugins, and so on).'),
+		       $template_projects[0]->getPublicName()) ;
+		echo '<input type="hidden" name="built_from_template" value="'.$template_projects[0]->getID().'" />' ;
+	echo '</p>' ;
+	}
+} else {
+	echo '<p>';
+	printf(_('Since no template project is available, your project will start empty.')) ;
+	echo '<input type="hidden" name="built_from_template" value="0" />' ;
+	echo '</p>';
 }
 
 if ($sys_use_private_project) {

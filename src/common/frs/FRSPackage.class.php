@@ -27,14 +27,13 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
 function &get_frs_packages($Group) {
+	$ps = array();
 	$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
 				array ($Group->getID())) ;
-	if (db_numrows($res) < 1) {
-		return false;
-	}
-	$ps = array();
-	while($arr = db_fetch_array($res)) {
-		$ps[]=new FRSPackage($Group,$arr['package_id'],$arr);
+	if (db_numrows($res) > 0) {
+		while($arr = db_fetch_array($res)) {
+			$ps[]=new FRSPackage($Group,$arr['package_id'],$arr);
+		}
 	}
 	return $ps;
 }

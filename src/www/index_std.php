@@ -26,14 +26,15 @@ require_once $gfcommon.'include/FusionForge.class.php';
 
 <h3><?php print _("What's new in FusionForge 5.1"); ?></h3>
 <ul>
-<li><?php print _('New Funky Theme.'); ?></li>
-<li><?php print _('New UI and features for the document manager (download as zip, locking, referencing documents by URL).'); ?></li>
+<li><?php print _('New Funky Theme (Capgemini).'); ?></li>
+<li><?php print _('New UI and features for the document manager (download as zip, locking, referencing documents by URL) (Capgemini).'); ?></li>
 <li><?php print _('New progress bar displaying completion state of trackers using a custom status field.'); ?></li>
-<li><?php print _('Improved sorting in trackers.'); ?></li>
-<li><?php print _('More flexible and more powerful role-based access control system (Roland Mas, Coclico)'); ?></li>
+<li><?php print _('Improved sorting in trackers (Alcatel-Lucent).'); ?></li>
+<li><?php print _('More flexible and more powerful role-based access control system (Coclico).'); ?></li>
 <li><?php print _('New unobtrusive tooltip system based on jquery and tipsy to replace old help window (Alcatel-Lucent)'); ?></li>
 <li><?php print _('New plugins: Blocks, to add free HTML blocks on top of each tool of the project; Gravatar, to display user faces; OSLC, implementing the OSLC-CM API for tracker interoperability with external tools.'); ?></li>
-<li><?php print _('scmgit plugin: Personal Git repositories for project members.'); ?></li>
+<li><?php print _('scmgit plugin: Personal Git repositories for project members (AdaCore).'); ?></li>
+<li><?php print _('Template projects: there can be several of them, and users registering new projects can pick which template to clone from for their new projects (Coclico).'); ?></li>
 <li><?php print _('Simplified configuration system, using standard *.ini files.'); ?></li>
 <li><?php print _('Reorganised, modular Apache configuration.'); ?></li>
 <li><?php print _('RPM packages for Red Hat (and derived) distributions.'); ?></li>

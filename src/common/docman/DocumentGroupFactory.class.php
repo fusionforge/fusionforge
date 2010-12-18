@@ -113,13 +113,14 @@ class DocumentGroupFactory extends Error {
 			return $this->flat_groups;
 		}
 
+		$this->flat_groups = array () ;
+
 		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
 						array($this->Group->getID(), $stateid));
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
 			$this->setError(_('No Document Directory Found').' '.db_error());
-			return false;
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->flat_groups[] = new DocumentGroup($this->Group, $arr);

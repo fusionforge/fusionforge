@@ -30,13 +30,17 @@ require_once ('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
-$group_id = getIntFromRequest('group_id');
-$index = getIntFromRequest('index');
+$group_id = getIntFromRequest ('group_id') ;
+$index = getIntFromRequest ('index') ;
 
 $tab_name = htmlspecialchars(trim(getStringFromRequest('tab_name')));
+$tab_rename = htmlspecialchars(trim(getStringFromRequest('tab_rename')));
 $tab_url = htmlspecialchars(trim(getStringFromRequest('tab_url', 'http://')));
+$tab_new_url = htmlspecialchars(trim(getStringFromRequest('tab_new_url')));
+$type = getIntFromRequest('type', 0);
+$new_type = getIntFromRequest('new_type', -1);
 
-session_require_perm('project_admin', $group_id);
+session_require_perm('project_admin', $group_id) ;
 
 // get current information
 $group = group_get_object($group_id);
@@ -68,11 +72,12 @@ if (getStringFromRequest('addtab') != '') {
 		if ($res && db_numrows($res) > 0) {
 			$error_msg = _('ERROR: Name for tab is already used.');
 		} else {
-			$res = db_query_params('INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url) VALUES ($1,$2,$3,$4)',
-						array($group_id,
+			$res = db_query_params('INSERT INTO plugin_extratabs_main (group_id, index, tab_name, tab_url, type) VALUES ($1,$2,$3,$4,$5)',
+					       array ($group_id,
 						      $newid,
 						      $tab_name,
-						      $tab_url));
+						      $tab_url,
+						      $type)) ;
 			if (!$res || db_affected_rows($res) < 1) {
 				$error_msg = sprintf(_('Cannot insert new tab entry: %s'),
 						     db_error());
@@ -144,6 +149,51 @@ if (getStringFromRequest('addtab') != '') {
 		$warning_msg = _('Tab not moved, already at last position');
 		$selected = $index;
 	}
+} elseif (getStringFromRequest ('modify') != '') {
+	$done = 0;
+	if ($tab_rename) {
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET tab_name=$1 WHERE group_id=$2 AND index=$3',
+					array ($tab_rename,
+						   $group_id,
+						   $index));
+		if (!$res || db_affected_rows($res) < 1) {
+			$error_msg = sprintf (_('Cannot rename the tab: %s'), db_error());
+		} else {
+			$feedback .= ($feedback ? '. ' : '') . _('Tab successfully renamed');
+			$done = 1;
+		}
+	}
+	if ($tab_new_url && $tab_new_url != 'http://') {
+		if (!util_check_url($tab_new_url)) {
+			$error_msg = _('ERROR: Malformed URL (only http, https and ftp allowed)');
+		} else {
+			$res = db_query_params ('UPDATE plugin_extratabs_main SET tab_url=$1 WHERE group_id=$2 AND index=$3',
+					array ($tab_new_url,
+						   $group_id,
+						   $index));
+			if (!$res || db_affected_rows($res) < 1) {
+				$error_msg .= ($error_msg ? '. ' : '') . sprintf (_('Cannot change URL: %s'), db_error());
+			} else {
+				$feedback .= ($feedback ? '. ' : '') . _('URL successfully changed');
+				$done = 1;
+			}
+		}
+	}
+	if ($new_type != -1) {
+		$res = db_query_params ('UPDATE plugin_extratabs_main SET type=$1 WHERE group_id=$2 AND index=$3',
+					array ($new_type,
+						   $group_id,
+						   $index));
+		if (!$res || db_affected_rows($res) < 1) {
+			$error_msg .= ($error_msg ? '. ' : '') . sprintf (_('Cannot set type: %s'), db_error());
+		} else {
+			$feedback .= ($feedback ? '. ' : '') . _('Type successfully changed');
+			$done = 1;
+		}
+	}
+	if (!$error_msg && !$done) {
+		$warning_msg .= ($warning_msg ? '. ' : '') . _('Nothing done');
+	}
 }
 if (!$res) {
 	db_rollback();
@@ -155,24 +205,28 @@ $adminheadertitle = sprintf(_('Manage extra tabs for project %1$s'), $group->get
 project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
 ?>
 
-<h1><?php echo _('Manage extra tabs') ;?></h1>
-
 <h2><?php echo _('Add new tab'); ?></h2>
 
 <p><?php echo _('You can add your own tabs in the menu bar with the form below.') ?></p>
 
-<form name="new_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
+<form name="new_tab" action="<?php echo util_make_uri ('/plugins/extratabs/'); ?>" method="post">
 <fieldset>
-<legend>Add new tab</legend>
+<legend><?php echo _('Add new tab'); ?></legend>
 <p>
 <input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <input type="hidden" name="addtab" value="1" />
-	<strong><?php echo _('Name of the tab:') ?></strong>
-<?php echo utils_requiredField(); ?><br/>
-<input type="text" size="20" maxlength="255" name="tab_name" value="<?php echo $tab_name ?>" /><br />
-	<strong><?php echo _('URL of the tab:') ?></strong>
-<?php echo utils_requiredField(); ?><br/>
-<input type="text" size="60" name="tab_url" value="<?php echo $tab_url ?>" />
+<strong><?php echo _('Name of the tab:') ?></strong><?php echo utils_requiredField(); ?>
+<br />
+<input type="text" size="20" maxlength="20" name="tab_name" value="<?php echo $tab_name ?>" /><br />
+</p>
+<p>
+<strong><?php echo _('URL of the tab:') ?></strong><?php echo utils_requiredField(); ?>
+<br />
+<input type="text" size="60" name="tab_url" value="<?php echo $tab_url ?>" /><br/>
+</p>
+<p>
+<input type="radio" name="type" value="0" checked="checked"/><?php echo _('Link') ?>
+<input type="radio" name="type" value="1" /><?php echo _('Iframe') ?>
 </p>
 <p>
 <input type="submit" value="<?php echo _('Add tab') ?>" />
@@ -187,16 +241,56 @@ if ($nbtabs > 0) {
 
 ?>
 
-<h2><?php echo _('Move or delete extra tabs') ;?></h2>
+<h2><?php echo _('Modify extra tabs'); ?></h2>
 <p>
-	<?php echo _('You can move and delete the tabs that you already added. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.') ;
-
+<?php echo _('You can modify the tabs that you already added.');
 ?>
 </p>
 
-<form name="change_tab" action="<?php echo util_make_url ('/plugins/extratabs/'); ?>" method="post">
+<form name="modify_tab" action="<?php echo util_make_uri('/plugins/extratabs/'); ?>" method="post">
 <fieldset>
-<legend>Move or delete tab</legend>
+<legend><?php echo _('Modify tab'); ?></legend>
+<p>
+<input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
+<?php echo _('Tab to modify:') ?> <select name="index">
+<?php
+$options = '';
+while ($row = db_fetch_array($res)) {
+    if ($row['index'] == $selected) {
+	$options .= "<option selected=\"selected\" value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
+    } else {
+	$options .= "<option value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
+    }
+}
+echo $options;
+?>
+</select>
+</p>
+<p>
+<?php echo _('Rename to:'); ?> <input type="text" size="20" maxlength="20" name="tab_rename" value="" />
+</p>
+<p>
+<?php echo _('New URL:'); ?> <input type="text" size="60" name="tab_new_url" value="http://" />
+</p>
+<p>
+<input type="radio" name="new_type" value="0" /><?php echo _('Link') ?>
+<input type="radio" name="new_type" value="1" /><?php echo _('Iframe') ?>
+</p>
+<p>
+<input type="submit" name="modify" value="<?php echo _('Modify tab') ?>" />
+</p>
+</fieldset>
+</form>
+
+<h2><?php echo _('Move or delete extra tabs') ;?></h2>
+<p>
+<?php echo _('You can move and delete the tabs that you already added. Please note that those extra tabs can only appear after the standard tabs. And you can only move them inside the set of extra tabs.');
+?>
+</p>
+
+<form name="change_tab" action="<?php echo util_make_uri('/plugins/extratabs/'); ?>" method="post">
+<fieldset>
+<legend><?php echo _('Move or delete tab'); ?></legend>
 <p>
 <input type="hidden" name="group_id" value="<?php echo $group->getID() ?>" />
 <?php
@@ -204,13 +298,8 @@ if ($nbtabs > 0) {
 ?>
 <select name="index">
 <?php
-while ($row = db_fetch_array($res)) {
-	if ($row['index'] == $selected) {
-		echo "<option selected=\"selected\" value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
-	} else {
-		echo "<option value='" . $row['index'] . "'>" . $row['tab_name'] .  "</option>";
-	}
-} ?>
+echo $options;
+?>
 </select>
 </p>
 <p>

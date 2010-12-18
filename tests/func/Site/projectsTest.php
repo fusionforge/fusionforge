@@ -80,20 +80,6 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
 		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
-		
-		// Also test our high-level functions (testing the test-suite)
-		$this->createProject ('ProjectB');
-		$this->click("link=Home");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("ProjectB"));
-		$this->click("link=ProjectB");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
-		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
-		$this->gotoProject ('ProjectB');
-		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
-		$this->createAndGoto ('ProjectC');
-		$this->assertTrue($this->isTextPresent("This is the public description for ProjectC."));
 	}
 
 	function testCharsCreateTestCase()
@@ -135,6 +121,90 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=My Page");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("Project ' &amp; B"));
+	}
+
+	function testHighLevelFunctions()
+	{
+		// Test our high-level functions (testing the test-suite)
+		$this->createProject ('ProjectB');
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("ProjectB"));
+		$this->click("link=ProjectB");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
+		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+		$this->gotoProject ('ProjectB');
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectB."));
+		$this->createAndGoto ('ProjectC');
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectC."));
+		$this->init ();
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
+	}
+
+	function testTemplateProject()
+	{
+		$this->populateStandardTemplate('trackers');
+
+		$this->open( ROOT . '/projects/template') ;
+		$this->waitForPageToLoad("30000");
+
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Tools");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Trackers Admin");
+		$this->waitForPageToLoad("30000");
+		$this->type("name", "Local tracker for UNIXNAME");
+		$this->type("description", "Tracker for PUBLICNAME (UNIXNAME)");
+		$this->click("post_changes");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Tracker created successfully"));
+
+		$this->init();
+		$this->assertTrue($this->isElementPresent("//a[.='Tracker']"));
+		$this->assertTrue($this->isElementPresent("//a[.='Forums']"));
+		$this->assertTrue($this->isElementPresent("//a[.='Tasks']"));
+		$this->click("link=Tracker");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Tracker for ProjectA (projecta)"));
+	}
+
+	function testEmptyProject()
+	{
+		// Create an empty project despite the template being full
+		$this->populateStandardTemplate('all');
+
+		$this->click("link=My Page");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Register Project");
+		$this->waitForPageToLoad("30000");
+		$this->type("full_name", "ProjectA");
+		$this->type("purpose", "This is a simple description for ProjectA");
+		$this->type("description", "This is the public description for ProjectA.");
+		$this->type("unix_name", "projecta");
+		$this->select("//select[@name='built_from_template']", "label=Start from empty project");
+		$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
+		$this->assertTrue($this->isTextPresent("you will receive notification of their decision and further instructions"));
+		$this->click("link=Site Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Pending projects (new project approval)");
+		$this->waitForPageToLoad("30000");
+		$this->click("document.forms['approve.projecta'].submit");
+		$this->waitForPageToLoad("60000");
+		$this->click("link=Home");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("ProjectA"));
+		$this->click("link=ProjectA");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isTextPresent("This is the public description for ProjectA."));
+		$this->assertTrue($this->isTextPresent("This project has not yet categorized itself"));
+		$this->assertFalse($this->isElementPresent("//a[.='Tracker']"));
+		$this->assertFalse($this->isElementPresent("//a[.='Forums']"));
+		$this->assertFalse($this->isElementPresent("//a[.='Tasks']"));
 	}
 
 	// Test removal of project.

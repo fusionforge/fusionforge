@@ -204,7 +204,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 	function testProjectRolesAndPermissions()
 	{
-		$this->login("admin");
+		$this->populateStandardTemplate('trackers');
 
 		$this->createUser ("bigboss") ;
 		$this->createUser ("guru") ;
@@ -254,15 +254,34 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->registerProject ("SubProject", "bigboss") ;
 		$this->approveProject ("SubProject", "bigboss") ;
 
+		// Create roles
+		$this->gotoProject ("MetaProject") ;
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Senior Developer") ;
+		$this->click ("//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Junior Developer") ;
+		$this->click ("//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Users and permissions");
+		$this->waitForPageToLoad("30000");
+		$this->type ("//form[contains(@action,'roleedit.php')]/..//input[@name='role_name']", "Doc Writer") ;
+		$this->click ("//input[@value='Create Role']") ;
+		$this->waitForPageToLoad("30000");
+
 		// Add users
 		$this->gotoProject ("MetaProject") ;
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
-
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "guru") ;
-		$this->select("//select[@name='role_id']", "label=Senior Developer");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "guru") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("guru Lastname"));
@@ -272,8 +291,8 @@ class RBAC extends FForge_SeleniumTestCase
 ]
 /../td[.='Senior Developer']")) ;
 
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "trainee") ;
-		$this->select("//select[@name='role_id']", "label=Junior Developer");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));
@@ -283,8 +302,8 @@ class RBAC extends FForge_SeleniumTestCase
 ]
 /../td[.='Junior Developer']")) ;
 
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "docmaster") ;
-		$this->select("//select[@name='role_id']", "label=Doc Writer");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "docmaster") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Doc Writer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("docmaster Lastname"));
@@ -294,8 +313,8 @@ class RBAC extends FForge_SeleniumTestCase
 ]
 /../td[.='Doc Writer']")) ;
 
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "bigboss") ;
-		$this->select("//select[@name='role_id']", "label=Senior Developer");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "bigboss") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Senior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("bigboss Lastname"));
@@ -327,8 +346,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isTextPresent("trainee Lastname"));
 
-		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name']", "trainee") ;
-		$this->select("//select[@name='role_id']", "label=Junior Developer");
+		$this->type ("//form[contains(@action,'users.php')]//input[@name='form_unix_name' and @type='text']", "trainee") ;
+		$this->select("//input[@value='Add Member']/../select[@name='role_id']", "label=Junior Developer");
 		$this->click ("//input[@value='Add Member']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("trainee Lastname"));

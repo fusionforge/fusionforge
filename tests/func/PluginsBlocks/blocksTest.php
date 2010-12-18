@@ -52,6 +52,7 @@ class UserBlocks extends FForge_SeleniumTestCase
   {
   	$this->_activateBlocksPlugin();
 	
+    $this->populateStandardTemplate('empty');
     $this->init();
 
     $this->click("link=Admin");

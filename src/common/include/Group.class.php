@@ -3,7 +3,7 @@
  * FusionForge groups
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2009, Roland Mas
+ * Copyright 2009-2010, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
@@ -34,6 +34,7 @@ require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
+require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'mail/MailingList.class.php';
 require_once $gfcommon.'mail/MailingListFactory.class.php';
 require_once $gfcommon.'survey/SurveyFactory.class.php';
@@ -120,16 +121,11 @@ function &group_get_objects($id_arr) {
 	$return = array();
 	
 	foreach ($id_arr as $id) {
-		if (!$id) {
-			continue;
-		}
 		//
 		//	See if this ID already has been fetched in the cache
 		//
 		if (!isset($GROUP_OBJ["_".$id."_"])) {
 			$fetch[] = $id;
-		} else {
-			$return[] =& $GROUP_OBJ["_".$id."_"];
 		}
 	}
 	if (count($fetch) > 0) {
@@ -140,6 +136,9 @@ function &group_get_objects($id_arr) {
 			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
 		}
 	}
+	foreach ($id_arr as $id) {
+		$return[] =& $GROUP_OBJ["_".$id."_"];
+	}
 	return $return;
 }
 
@@ -147,6 +146,12 @@ function &group_get_active_projects() {
 	$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
 			      array('A'));
 	return group_get_objects(util_result_column_to_array($res,0));
+}
+
+function &group_get_template_projects() {
+	$res=db_query_params ('SELECT group_id FROM groups WHERE is_template=1 AND status != $1',
+			      array ('D')) ;
+	return group_get_objects (util_result_column_to_array($res,0)) ;
 }
 
 function &group_get_object_by_name($groupname) {
@@ -278,9 +283,10 @@ class Group extends Error {
 	 * @param	string	The new group description.
 	 * @param	string	The purpose of the group.
 	 * @param	boolean	Whether to send an email or not
+	 * @param	int	The id of the project this new project is based on
 	 * @return	boolean	success or not
 	 */
-	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1, $send_mail=true) {
+	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1, $send_mail=true, $built_from_template=0) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -331,8 +337,9 @@ class Group extends Error {
 					scm_box,
 					register_purpose,
 					register_time,
-					enable_anonscm,
-					rand_hash
+                                        enable_anonscm,
+					rand_hash,
+                                        built_from_template
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
 						array(htmlspecialchars ($group_name),
@@ -347,7 +354,8 @@ class Group extends Error {
 						      htmlspecialchars($purpose),
 						      time(),
 						      $is_public,
-						      md5($random_num)));
+						      md5($random_num),
+						      $built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
 				db_rollback();
@@ -805,7 +813,45 @@ class Group extends Error {
 	}
 
 	/**
-	 * getUnixName - the unix_name
+	 *	isTemplate - Simply returns the is_template flag from the database.
+	 *
+	 *	@return	boolean	is_template.
+	 */
+	function isTemplate() {
+		return $this->data_array['is_template'];
+	}
+
+	/**
+	 *	setAsTemplate - Set the template status of a project
+	 *
+	 *	@param	boolean	is_template.
+	 */
+	function setAsTemplate ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET is_template=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['is_template']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *	getTemplateProject - Return the project template this project is built from
+	 *
+	 *	@return	object	The template project
+	 */
+	function getTemplateProject() {
+		return group_get_object($this->data_array['built_from_template']);
+	}
+
+	/**
+	 *  getUnixName - the unix_name
 	 *
 	 * @return	string	unix_name.
 	 */
@@ -1082,7 +1128,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * usesMail - whether or not this group has opted to use mailing lists.
+	 *	setUseSCM - Set the SCM usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUseSCM ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_scm']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *	usesMail - whether or not this group has opted to use mailing lists.
 	 *
 	 * @return	boolean	uses_mail.
 	 */
@@ -1095,7 +1161,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * usesNews - whether or not this group has opted to use news.
+	 *	setUseMail - Set the mailing-list usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUseMail ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_mail=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_mail']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 * 	usesNews - whether or not this group has opted to use news.
 	 *
 	 * @return	boolean	uses_news.
 	 */
@@ -1121,7 +1207,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * usesStats - whether or not this group has opted to use stats.
+	 *	setUseForum - Set the forum usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUseForum ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_forum=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_forum']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *  usesStats - whether or not this group has opted to use stats.
 	 *
 	 * @return	boolean	uses_stats.
 	 */
@@ -1143,7 +1249,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * usesTracker - whether or not this group has opted to use tracker.
+	 *	setUseFRS - Set the FRS usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUseFRS ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_frs=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_frs']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *  usesTracker - whether or not this group has opted to use tracker.
 	 *
 	 * @return	boolean	uses_tracker.
 	 */
@@ -1156,7 +1282,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * useCreateOnline - whether or not this group has opted to use create online documents option.
+	 *	setUseTracker - Set the tracker usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUseTracker ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_tracker=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_tracker']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *  useCreateOnline - whether or not this group has opted to use create online documents option.
 	 *
 	 * @return	boolean	use_docman_create_online.
 	 */
@@ -1182,7 +1328,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * useDocmanSearch - whether or not this group has opted to use docman search engine.
+	 *	setUseDocman - Set the docman usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUseDocman ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_docman=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_docman']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *  useDocmanSearch - whether or not this group has opted to use docman search engine.
 	 *
 	 * @return	boolean	use_docman_search.
 	 */
@@ -1247,7 +1413,27 @@ class Group extends Error {
 	}
 
 	/**
-	 * getPlugins - get a list of all available group plugins
+	 *	setUsePM - Set the PM usage
+	 *
+	 *	@param	boolean	enabled/disabled
+	 */
+	function setUsePM ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$res = db_query_params ('UPDATE groups SET use_pm=$1 WHERE group_id=$2',
+					array ($booleanparam, $this->getID()));
+		if ($res) {
+			$this->data_array['use_pm']=$booleanparam;
+			db_commit () ;
+			return true ;
+		} else {
+			db_rollback () ;
+			return false ;
+		}
+	}
+
+	/**
+	 *  getPlugins -  get a list of all available group plugins
 	 *
 	 * @return	array	array containing plugin_id => plugin_name
 	 */
@@ -2187,12 +2373,26 @@ class Group extends Error {
 	}
 
 	/**
+	 *	replaceTemplateStrings - fill-in some blanks with project name
+	 *
+	 *	@param	string	Template string
+	 *	@return	string	String after replacements
+	 */
+	function replaceTemplateStrings($string) {
+		$string = str_replace ('UNIXNAME', $this->getUnixName(), $string) ;
+		$string = str_replace ('PUBLICNAME', $this->getPublicName(), $string) ;
+		$string = str_replace ('DESCRIPTION', $this->getDescription(), $string) ;
+		return $string ;
+	}
+
+	/**
 	 *	approve - Approve pending project.
 	 *
 	 *	@param	object	The User object who is doing the updating.
 	 *	@access public
 	 */
 	function approve(&$user) {
+		require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 
 		if ($this->getStatus()=='A') {
 			$this->setError(_("Group already active"));
@@ -2235,20 +2435,33 @@ class Group extends Error {
 			}
 		}
 
-		$role = new Role($this);
-		$todo = array_keys($role->defaults);
-		for ($c=0; $c<count($todo); $c++) {
+		$template = $this->getTemplateProject() ;
+		$id_mappings = array ();
+		$seen_local_roles = false ;
+		if ($template) {
+			// Copy roles from template project
+			foreach ($template->getRoles() as $oldrole) {
+				if ($oldrole->getHomeProject() != NULL) {
+					$role = new Role ($this) ;
+					$data = array () ;
+					// Need to use a different role name so that the permissions aren't set from the hardcoded defaults
+					$role->create ('TEMPORARY ROLE NAME', $data, true) ;
+					$role->setName ($oldrole->getName()) ;
+					$seen_local_roles = true ;
+				} else {
+					$role = $oldrole ;
+					$role->linkProject ($this) ;
+				}
+				$id_mappings['role'][$oldrole->getID()] = $role->getID() ;
+				// Reuse the project_admin permission
+				$role->setSetting ('project_admin', $this->getID(), $oldrole->getSetting ('project_admin', $template->getID())) ;
+			}
+		}
+
+		if (!$seen_local_roles) {
 			$role = new Role($this);
-			if (! ($role_id = $role->createDefault($todo[$c]))) {
-				$this->setError(sprintf(_('R%d: %s'),$c,$role->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			}
-			$role = new Role($this, $role_id);
-			if ($role->getVal('projectadmin',0)=='A') {
-				$role->setUser($idadmin_group);
-			}
+			$adminperms = array ('project_admin' => array ($this->getID() => 1)) ;
+			$role_id = $role->create ('Admin', $adminperms, true) ;
 		}
 		
 		if (USE_PFO_RBAC) {
@@ -2264,188 +2477,133 @@ class Group extends Error {
 		$saved_session = session_get_user () ;
 		session_set_internal ($idadmin_group) ;
 
-		//
-		//
-		//	Tracker Integration
-		//
-		//
-		if (forge_get_config ('use_tracker')) {
-			$ats = new ArtifactTypes($this);
-			if (!$ats || !is_object($ats)) {
-				$this->setError(_('Error creating ArtifactTypes object'));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			} else if ($ats->isError()) {
-				$this->setError(sprintf (_('ATS%d: %s'), 1, $ats->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+		if ($template) {
+			if (forge_get_config ('use_tracker')) {
+				$this->setUseTracker ($template->usesTracker()) ;
+				if ($template->usesTracker()) {
+					$oldatf = new ArtifactTypeFactory ($template) ;
+					foreach ($oldatf->getArtifactTypes() as $o) {
+						$t = new ArtifactType ($this) ;
+						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->allowsAnon(),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions()) ;
+						$id_mappings['tracker'][$o->getID()] = $t->getID() ;
+						$t->cloneFieldsFrom ($o->getID()) ;
+					}
+				}
 			}
-			if (!$ats->createTrackers()) {
-				$this->setError(sprintf (_('ATS%d: %s'), 2, $ats->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			}
-		}
 
-		//
-		//
-		//	Forum Integration
-		//
-		//
-		if (forge_get_config ('use_forum')) {
-			$f = new Forum($this);
-			if (!$f->create(_('Open-Discussion'),_('General Discussion'),1,'',1,0)) {
-				$this->setError(sprintf (_('F%d: %s'), 1, $f->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+			if (forge_get_config ('use_pm')) {
+				$this->setUsePM ($template->usesPM()) ;
+				if ($template->usesPM()) {
+					$oldpgf = new ProjectGroupFactory ($template) ;
+					foreach ($oldpgf->getProjectGroups() as $o) {
+						$pg = new ProjectGroup ($this) ;
+						$pg->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo()) ;
+						$id_mappings['pm'][$o->getID()] = $pg->getID() ;
+					}
+				}
 			}
-			$f = new Forum($this);
-			if (!$f->create(_('Help'),_('Get Public Help'),1,'',1,0)) {
-				$this->setError(sprintf (_('F%d: %s'), 2, $f->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+
+			if (forge_get_config ('use_forum')) {
+				$this->setUseForum ($template->usesForum()) ;
+				if ($template->usesForum()) {
+					$oldff = new ForumFactory ($template) ;
+					foreach ($oldff->getForums() as $o) {
+						$f = new Forum ($this) ;
+						$f->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo(),1,$o->allowAnonymous(),$o->getModerationLevel()) ;
+						$id_mappings['forum'][$o->getID()] = $f->getID() ;
+					}
+				}
 			}
-			$f = new Forum($this);
-			if (!$f->create(_('Developers-Discussion'),_('Project Developer Discussion'),0,'',1,0)) {
-				$this->setError(sprintf (_('F%d: %s'), 3, $f->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+			
+			if (forge_get_config ('use_docman')) {
+				$this->setUseDocman ($template->usesDocman()) ;
+				if ($template->usesDocman()) {
+					$olddgf = new DocumentGroupFactory ($template) ;
+					// First pass: create all docgroups
+					$id_mappings['docman_docgroup'][0] = 0 ;
+					foreach ($olddgf->getDocumentGroups() as $o) {
+						$ndgf = new DocumentGroup ($this) ;
+						$ndgf->create($this->replaceTemplateStrings($o->getName())) ;
+						$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID() ;
+					}
+					// Second pass: restore hierarchy links
+					foreach ($olddgf->getDocumentGroups() as $o) {
+						$ndgf = new DocumentGroup ($this) ;
+						$ndgf->fetchData ($id_mappings['docman_docgroup'][$o->getID()]) ;
+						$ndgf->update ($ndgf->getName(),$id_mappings['docman_docgroup'][$o->getParentID()]) ;
+					}
+				}
 			}
-		}
-		
-		//
-		//
-		//	Doc Mgr Integration
-		//
-		//
-		if (forge_get_config('use_docman')) {
-			$dg = new DocumentGroup($this);
-			if (!$dg->create(_('Uncategorized Submissions'))) {
-				$this->setError(sprintf(_('DG: %s'),$dg->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+			
+			if (forge_get_config ('use_frs')) {
+				$this->setUseFRS ($template->usesFRS()) ;
+				if ($template->usesFRS()) {
+					foreach (get_frs_packages ($template) as $o) {
+						$newp = new FRSPackage ($this) ;
+						$nname = $this->replaceTemplateStrings($o->getName()) ;
+						$newp->create ($nname, $o->isPublic()) ;
+					}
+				}
 			}
-		}
 
-		//
-		//
-		//	FRS integration
-		//
-		//
-		if (forge_get_config ('use_frs')) {
-			$frs = new FRSPackage($this);
-			if (!$frs->create($this->getUnixName())) {
-				$this->setError(sprintf(_('FRSP: %s'),$frs->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+			if (forge_get_config ('use_mail')) {
+				$this->setUseMail ($template->usesMail()) ;
+				if ($template->usesMail()) {
+					$oldmlf = new MailingListFactory ($template) ;
+					foreach ($oldmlf->getMailingLists() as $o) {
+						$ml = new MailingList ($this) ;
+						$nname = preg_replace ('/^'.$template->getUnixName().'-/','',$o->getName()) ;
+
+						$ndescription = $this->replaceTemplateStrings($o->getDescription()) ;
+						$ml->create ($nname, $ndescription, $o->isPublic()) ;
+					}
+				}
 			}
-		}
 
-		//
-		//
-		//	PM Integration
-		//
-		//
-		if (forge_get_config ('use_pm')) {
-			$pg = new ProjectGroup($this);
-			if (!$pg->create(_('To Do'),_('Things We Have To Do'),1)) {
-				$this->setError(sprintf(_('PG%d: %s'),1,$pg->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
+			$this->setUseSCM ($template->usesSCM()) ;
+
+			foreach ($template->getPlugins() as $plugin_id => $plugin_name) {
+				$this->setPluginUse ($plugin_name) ;
 			}
-			$pg = new ProjectGroup($this);
-			if (!$pg->create(_('Next Release'),_('Items For Our Next Release'),1)) {
-				$this->setError(sprintf(_('PG%d: %s'),2,$pg->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			}
-		}
 
-		// Set permissions for roles
-		if (USE_PFO_RBAC) {
-			if ($this->isPublic()) {
-				$ra = RoleAnonymous::getInstance();
-				$rl = RoleLoggedIn::getInstance();
-				$ra->linkProject($this);
-				$rl->linkProject($this);
+			foreach ($template->getRoles() as $oldrole) {
+				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]) ;
+				if ($oldrole->getHomeProject() != NULL
+				    && $oldrole->getHomeProject()->getID() == $template->getID()) {
+					$newrole->setPublic ($oldrole->isPublic()) ;
+				}
+				$oldsettings = $oldrole->getSettingsForProject ($template) ;
+				
+				$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+				foreach ($sections as $section) {
+					$newrole->setSetting ($section, $this->getID(), $oldsettings[$section][$template->getID()]) ;
+				}
 
-				$ra->setSetting('project_read', $this->getID(), 1);
-				$rl->setSetting('project_read', $this->getID(), 1);
-
-				$ra->setSetting('frs', $this->getID(), 1);
-				$rl->setSetting('frs', $this->getID(), 1);
-
-				$ra->setSetting('docman', $this->getID(), 1);
-				$rl->setSetting('docman', $this->getID(), 1);
-
-				$ff = new ForumFactory($this);
-				foreach ($ff->getAllForumIds() as $fid) {
-					$f = forum_get_object($fid);
-					if ($f->isPublic()) {
-						$l = $f->getModerationLevel();
-						if ($l == 0) {
-							$rl->setSetting('forum', $fid, 3);
-						} else {
-							$rl->setSetting('forum', $fid, 2);
-						}
-						if ($f->allowAnonymous()) {
-							if ($l == 0) {
-								$ra->setSetting('forum', $fid, 3);
-							} else {
-								$ra->setSetting('forum', $fid, 2);
-							}
-						} else {
-							$ra->setSetting('forum', $fid, 1);
+				$sections = array ('tracker', 'pm', 'forum') ;
+				foreach ($sections as $section) {
+					if (isset ($oldsettings[$section])) {
+						foreach ($oldsettings[$section] as $k => $v) {
+							$newrole->setSetting ($section,
+									      $id_mappings[$section][$k],
+									      $v) ;
 						}
 					}
 				}
+			}	
 
-				$pgf = new ProjectGroupFactory($this);
-				foreach ($pgf->getAllProjectGroupIds() as $pgid) {
-					$pg = projectgroup_get_object($pgid);
-					if ($pg->isPublic()) {
-						$ra->setSetting('pm', $pgid, 1);
-						$rl->setSetting('pm', $pgid, 1);
-					}
-				}
+			$lm = new WidgetLayoutManager();
+			$lm->createDefaultLayoutForProject ($this->getID(), $template->getID()) ;
 
-				$atf = new ArtifactTypeFactory($this);
-				foreach ($atf->getAllArtifactTypeIds() as $atid) {
-					$at = artifactType_get_object($atid);
-					if ($at->isPublic()) {
-						$ra->setSetting('tracker', $atid, 1);
-						$rl->setSetting('tracker', $atid, 1);
-					}
-				}
-			}
-			foreach (get_group_join_requests($this) as $gjr) {
-				$gjr->delete(true);
-			}
-		}
+			$params = array () ;
+			$params['template'] = $template ;
+			$params['project'] = $this ;
+			$params['id_mappings'] = $id_mappings ;
+			plugin_hook_by_reference ('clone_project_from_template', $params) ;
+		} else {
+			// Disable everything
+			$res = db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, is_public=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
 
-		//
-		//
-		//	Create MailingList
-		//
-		//
-		if (forge_get_config('use_mail')) {
-			$mlist = new MailingList($this);
-			if (!$mlist->create('commits', _('Commits'), 1, $idadmin_group)) {
-				$this->setError(sprintf(_('ML: %s'), $mlist->getErrorMessage()));
-				db_rollback();
-				setup_gettext_from_context();
-				return false;
-			}
+						array ($this->getID())) ;
 		}
 
 		$this->normalizeAllRoles();

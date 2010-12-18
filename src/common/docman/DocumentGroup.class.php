@@ -342,6 +342,7 @@ class DocumentGroup extends Error {
 							$this->Group->getID())
 					);
 		if ($result && db_affected_rows($result) > 0) {
+			$this->fetchData($this->getID()) ;
 			return true;
 		} else {
 			$this->setOnUpdateError(_('DocumentGroup:').' '.db_error());
