@@ -44,7 +44,7 @@ echo '<td>'._('Commentary:').'</td><td><input type="text" size="25" value="" nam
 echo '<td><input type="submit" name="son" value="'._('Add a link').'"></td></tr></table></form>';
 echo '<br/>';
 //select all the sons of the current project
-$res_son = db_query_params ('SELECT group_id,group_name,unix_group_name,sub_project_id, activated,link_type,com FROM groups,plugin_projects_hierarchy WHERE 
+$res_son = db_query_params ('SELECT group_id,group_name,unix_group_name,sub_project_id, activated, link_type, com FROM groups,plugin_projects_hierarchy WHERE 
 			(groups.group_id = plugin_projects_hierarchy.sub_project_id 
 			AND plugin_projects_hierarchy.project_id = $1)',
 			array ($group_id))
@@ -109,14 +109,14 @@ if (!$res_son || db_numrows($res_son) < 1) {
 		echo "<a href=\"../../projects/".$row_son['unix_group_name']."/\">".$row_son['group_name']."</a>";
 		echo '</td>'; 
 		echo '<td>';
-		if($row_son[link_type] == 'navi'){
+		if($row_son['link_type'] == 'navi'){
 			echo _('Navigation link');
 		} else {
 			echo _('Share link');
 		}
 		echo '</td>';
 		echo '<td>';
-		if($row_son[activated] == 'f'){
+		if($row_son['activated'] == 'f'){
 			//echo _('Waiting');
 			echo "<td><a href='#' onclick='if(confirm(\""._('Do you really want to authorize this project?')."\")){window.location.href=\"../../plugins/projects_hierarchy/wait_son.php?sub_group_id=".$group_id."&group_id=".$row_son['project_id']."\"}'}>"._('Authorize')."</a></td>";
 		} else {
