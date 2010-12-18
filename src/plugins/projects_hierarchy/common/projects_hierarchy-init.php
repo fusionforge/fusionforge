@@ -1,6 +1,8 @@
 <?php
-
 /**
+ *
+ * Copyright 2006 (c) Fabien Regnier - Sogeti
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -20,11 +22,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'projects_hierarchy/common/projects_hierarchyPlugin.class.php' ;
+require_once $gfplugins.'projects_hierarchy/common/projects_hierarchyPlugin.class.php';
 
-$projects_hierarchyPluginObject = new projects_hierarchyPlugin ;
+$projects_hierarchyPluginObject = new projects_hierarchyPlugin;
 
-register_plugin ($projects_hierarchyPluginObject) ;
+register_plugin($projects_hierarchyPluginObject);
 
 // Local Variables:
 // mode: php

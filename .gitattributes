@@ -2133,6 +2133,8 @@ src/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
 src/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
 src/plugins/projects_hierarchy/etc/projects_hierarchy.ini -text
+src/plugins/projects_hierarchy/view/admin_project_link.php -text
+src/plugins/projects_hierarchy/view/project_home_link.php -text
 src/plugins/projects_hierarchy/www/add_link.php -text
 src/plugins/projects_hierarchy/www/add_son.php -text
 src/plugins/projects_hierarchy/www/del_father.php -text
