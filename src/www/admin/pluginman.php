@@ -148,17 +148,17 @@ if($handle = opendir(forge_get_config('plugins_path'))) {
 				$addPlugin = 0;
 			}
 			$used = false;
-			$res = db_query_params ('SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
+			$res = db_query_params('SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
 				array($filename));
 			if ($res) {
 				if (db_numrows($res)>0) {
 					$used = true;
 				}
 			}
-			$res1 = db_query_params ('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
+			$res1 = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
 				array($filename));
 			if ($res1) {
-				if (db_numrows($res1)>0) {
+				if (db_numrows($res1) > 0) {
 					$used = true;
 				}
 			}
