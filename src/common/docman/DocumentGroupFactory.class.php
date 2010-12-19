@@ -113,7 +113,7 @@ class DocumentGroupFactory extends Error {
 			return $this->flat_groups;
 		}
 
-		$this->flat_groups = array () ;
+		$this->flat_groups = array();
 
 		$result = db_query_params('SELECT * FROM doc_groups WHERE group_id=$1 AND stateid=$2 ORDER BY groupname ASC',
 						array($this->Group->getID(), $stateid));
