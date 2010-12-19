@@ -2166,7 +2166,6 @@ src/plugins/projects_hierarchy/www/img/plusbottom.gif -text svneol=unset#image/g
 src/plugins/projects_hierarchy/www/img/question.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/img/trash.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/index.php -text
-src/plugins/projects_hierarchy/www/softwaremap.php -text
 src/plugins/projects_hierarchy/www/wait_son.php -text
 src/plugins/quota_management/INSTALL -text
 src/plugins/quota_management/common/quota_management-init.php -text
