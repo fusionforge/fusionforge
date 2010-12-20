@@ -101,8 +101,8 @@ class Widget_ProjectLatestDocuments extends Widget {
 				}
 				echo	'</tr>';
 			}
+			echo $HTML->listTableBottom();
 		}
-		echo $HTML->listTableBottom();
 		echo '<div class="underline-link">' . util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
 	}
 
