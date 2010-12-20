@@ -42,32 +42,9 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 	function getContent() {
+		global $HTML;
 		$request =& HTTPRequest::instance();
-		$pm = ProjectManager::instance();
 		$group_id = $request->get('group_id');
-		$project = $pm->getProject($group_id);
-		$unix_group_name = $project->getUnixName();
-		echo '
-			<table summary="Latest publish documents" class="width-100p100">
-				<tr class="table-header">
-					<th class="align-left" scope="col">
-						'._('Date').'
-					</th>
-					<th scope="col">
-						'._('Filename').'
-					</th>
-					<th scope="col">
-						'._('Title').'
-					</th>
-					<th scope="col">
-						'._('Author').'
-					</th>';
-		if (session_loggedin() && (user_ismember($group_id) || user_ismember(1,'A'))) {
-			echo		'<th scope="col">
-						' ._('Status').'
-					</th>';
-		}
-		echo		'</tr>';
 
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, state_name
@@ -87,8 +64,13 @@ class Widget_ProjectLatestDocuments extends Widget {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No documents
-			echo '<tr><td colspan="6"><strong>'._('This Project Has Not Published Any Documents').'</strong></td></tr>';
+			echo '<div class="warning">'._('This Project Has Not Published Any Documents').'</div>';
 		} else {
+			$tabletop = array(_('Date'), _('Filename'), _('Title'), _('Author'));
+			if (session_loggedin() && (user_ismember($group_id) || user_ismember(1,'A'))) {
+				$tabletop[] = _('Status');
+			}
+			echo $HTML->listTableTop($tabletop, false, 'sortable_widget_docman_listfile', 'sortable');
 			for ($f=0; $f<$rows_files; $f++) {
 				$updatedate = db_result($res_files, $f, 'updatedate');
 				$createdate = db_result($res_files, $f, 'createdate');
@@ -120,7 +102,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				echo	'</tr>';
 			}
 		}
-		echo '</table>';
+		echo $HTML->listTableBottom();
 		echo '<div class="underline-link">' . util_make_link('/docman/?group_id='.$group_id, _('Browse Documents Manager')) . '</div>';
 	}
 
