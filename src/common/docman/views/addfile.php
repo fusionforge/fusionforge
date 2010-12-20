@@ -34,7 +34,7 @@ global $gdf; // document grou factory object
 
 echo '<div class="docmanDivIncluded">';
 if ( $dgf->getNested() == NULL ) {
-	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</p></div>';
+	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</div>';
 } else {
 	/* display the add new documentation form */
 	/* @todo - use jquery and javascript controler */
