@@ -341,7 +341,7 @@ class Group extends Error {
 					rand_hash,
                                         built_from_template
 				)
-				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
 						array(htmlspecialchars ($group_name),
 						      $is_public,
 						      $unix_name,
