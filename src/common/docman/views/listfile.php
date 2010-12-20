@@ -96,10 +96,10 @@ include ($gfcommon.'docman/views/additem.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('', 'Filename', 'Title', 'Description', 'Author', 'Last time', 'Status', 'Size');
+	$tabletop = array('', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
 	$classth = array('unsortable', '', '', '', '', '', '', '');
-	if (forge_check_perm ('docman', $group_id, 'approve'))
-		$tabletop[] = 'Actions';
+	if (forge_check_perm('docman', $group_id, 'approve'))
+		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
 	echo '<div class="docmanDiv">';
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
