@@ -512,6 +512,7 @@ src/common/widget/Widget_MySurveys.class.php -text
 src/common/widget/Widget_MyTasks.class.php -text
 src/common/widget/Widget_ProjectDescription.class.php -text
 src/common/widget/Widget_ProjectInfo.class.php -text
+src/common/widget/Widget_ProjectLatestDocuments.class.php -text
 src/common/widget/Widget_ProjectLatestFileReleases.class.php -text
 src/common/widget/Widget_ProjectLatestNews.class.php -text
 src/common/widget/Widget_ProjectMembers.class.php -text

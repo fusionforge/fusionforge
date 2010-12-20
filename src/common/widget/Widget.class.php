@@ -43,6 +43,7 @@ require_once('common/widget/Widget_MyAdmin.class.php');
 require_once('common/widget/Widget_ProjectMembers.class.php');
 require_once('common/widget/Widget_ProjectInfo.class.php');
 require_once('common/widget/Widget_ProjectLatestFileReleases.class.php');
+require_once('common/widget/Widget_ProjectLatestDocuments.class.php');
 require_once('common/widget/Widget_ProjectLatestNews.class.php');
 require_once('common/widget/Widget_ProjectPublicAreas.class.php');
 require_once('common/widget/Widget_ProjectRss.class.php');/*
@@ -230,6 +231,9 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				case 'projectlatestfilereleases':
 				$o = new Widget_ProjectLatestFileReleases();
 				break;
+				case 'projectlatestdocuments':
+				$o = new Widget_ProjectLatestDocuments();
+				break;
 				case 'projectlatestnews':
 				$o = new Widget_ProjectLatestNews();
 				break;
@@ -276,7 +280,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
 				$widgets = array('projectdescription', 'projectmembers', 'projectinfo', 
-						'projectlatestfilereleases', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
+						'projectlatestfilereleases', 'projectlatestdocuments', 'projectlatestnews', 'projectpublicareas', //'projectwikipage' //not yet
 						'projectlatestsvncommits', 'projectlatestcvscommits', 'projecttwitterfollow', 
 						'projectsvnstats', 'projectrss', 
 						);
