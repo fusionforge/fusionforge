@@ -192,14 +192,14 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * injectZip - unzip the attachment and create the directory tree if needed
+	 * injectArchive - extract the attachment and create the directory tree if needed
 	 *
 	 * @param	int	doc_group id
 	 * @param	array	uploaded data
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
-	function injectZip($doc_group, $uploaded_data) {
+	function injectArchive($doc_group, $uploaded_data) {
 		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
 			$this->setError(_('Invalid file name.'));
 			return false;

@@ -45,11 +45,11 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	if ($dg->isError())
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-	if (!$dg->injectZip($doc_group, $uploaded_zip)) {
+	if (!$dg->injectArchive($doc_group, $uploaded_zip)) {
 		$return_msg = $dg->getErrorMessage();
 		$return_url = '/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg);
 	} else {
-		$return_msg = _('Zip injected successfully.');
+		$return_msg = _('Archive injected successfully.');
 		$return_url = '/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg);
 	}
 
