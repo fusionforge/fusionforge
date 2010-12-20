@@ -2136,6 +2136,7 @@ src/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
 src/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text
 src/plugins/projects_hierarchy/etc/projects_hierarchy.ini -text
+src/plugins/projects_hierarchy/include/hierarchy_utils.php -text
 src/plugins/projects_hierarchy/view/admin_project_link.php -text
 src/plugins/projects_hierarchy/view/project_home_link.php -text
 src/plugins/projects_hierarchy/www/add_link.php -text
@@ -2144,7 +2145,6 @@ src/plugins/projects_hierarchy/www/del_father.php -text
 src/plugins/projects_hierarchy/www/del_son.php -text
 src/plugins/projects_hierarchy/www/dtree.css -text svneol=unset#text/css
 src/plugins/projects_hierarchy/www/dtree.js -text
-src/plugins/projects_hierarchy/www/hierarchy_utils.php -text
 src/plugins/projects_hierarchy/www/img/base.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/img/cd.gif -text svneol=unset#image/gif
 src/plugins/projects_hierarchy/www/img/empty.gif -text svneol=unset#image/gif

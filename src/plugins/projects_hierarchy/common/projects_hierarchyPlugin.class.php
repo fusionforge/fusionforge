@@ -57,7 +57,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			case "admin_project_link": {
 				global $gfplugins;
-				require_once $gfplugins.'projects_hierarchy/www/hierarchy_utils.php';
+				require_once $gfplugins.'projects_hierarchy/include/hierarchy_utils.php';
 				$group_id = $params;
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
