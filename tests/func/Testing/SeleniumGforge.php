@@ -214,8 +214,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		if (in_array ('docs', $what)) {
 			$this->click("link=Docs");
 			$this->waitForPageToLoad("30000");
-			$this->click("link=Add new documentation directory");
+			$this->click("link=Add new item");
 			$this->waitForPageToLoad("30000");
+			$this->click("//input[@name='type' and @value='directory']");
 			$this->type("groupname", "Uncategorized Submissions");
 			$this->click("//input[@id='submitaddsubgroup']");
 			$this->waitForPageToLoad("30000");
