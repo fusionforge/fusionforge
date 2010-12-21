@@ -47,7 +47,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$group_id = $request->get('group_id');
 
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, state_name
+		$qpa = db_construct_qpa($qpa, 'SELECT filename, title, updatedate, createdate, realname, user_name, state_name
 						FROM docdata_vw
 						WHERE group_id=$1
 						AND stateid=$2',
@@ -79,9 +79,10 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$filename = db_result($res_files,$f,'filename');
 				$title = db_result($res_files,$f,'title');
 				$realname = db_result($res_files,$f,'realname');
+				$user_name = db_result($res_files,$f,'user_name');
 				$statename = db_result($res_files,$f,'state_name');
 				echo '
-					<tr class="align-center">
+					<tr>
 						<td>'
 							. $displaydate["month"] . ' ' . $displaydate["mday"] . ', ' . $displaydate["year"] .
 						'</td>
@@ -92,7 +93,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 							.$title.'
 						</td>
 						<td >'
-							. $realname .
+							. make_user_link($user_name, $realname) .
 						'</td>';
 				if (session_loggedin() && (user_ismember($group_id) || user_ismember(1,'A'))) {
 					echo	'<td>'
