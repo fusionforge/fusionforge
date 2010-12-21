@@ -184,6 +184,9 @@ function install()
 
 	show(" * Creating '$gforge_user' User...");
 	run("/usr/sbin/useradd -g $gforge_user $gforge_user", true);
+	
+	// Let's give some time for PostgreSQL to start
+	sleep(5);
 
 	show(" * Creating Database User '$gforge_user'...");
 	run("su - postgres -c \"createuser -A -R -d -E $gforge_user\"", true);
