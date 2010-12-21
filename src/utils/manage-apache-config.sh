@@ -61,6 +61,7 @@ case $1 in
 	
     install)
 	dir=$(forge_get_config config_path)/httpd.conf.d
+	[ -e $dir ] || mkdir -p $dir
 	cd $dir
 	files=$(ls *.inc *.conf | xargs grep -l {[a-z_]*/[a-z_]*})
 	vars=$(forge_get_config list-all-variables)

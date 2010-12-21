@@ -9,6 +9,8 @@ else
     config_path=$config_dir
 fi
 
+[ -e $config_path ] || mkdir -p $config_path
+
 add_config () {
     section=$1
     var=$2
