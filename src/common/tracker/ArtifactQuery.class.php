@@ -269,12 +269,12 @@ class ArtifactQuery extends Error {
 			$assignee = intval($assignee);
 		}	
 		
-		if (preg_match("/[^[:alnum:]_]/", $string)) {
+		if (preg_match("/[^[:alnum:]_]/", $sort_col)) {
 			$this->setError('ArtifactQuery: not valid sort_col');
 			return false;
 		}
 		
-		if (preg_match("/[^[:alnum:]_]/", $string)) {
+		if (preg_match("/[^[:alnum:]_]/", $sort_ord)) {
 			$this->setError('ArtifactQuery: not valid sort_ord');
 			return false;
 		}
