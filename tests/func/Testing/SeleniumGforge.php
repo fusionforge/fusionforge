@@ -100,13 +100,13 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Tools");
 		$this->waitForPageToLoad("30000");
-		$this->click("//input[@name='use_forum']") ;
-		$this->click("//input[@name='use_tracker']") ;
-		$this->click("//input[@name='use_mail']") ;
-		$this->click("//input[@name='use_pm']") ;
-		$this->click("//input[@name='use_docman']") ;
-		$this->click("//input[@name='use_news']") ;
-		$this->click("//input[@name='use_frs']") ;
+		$this->check("//input[@name='use_forum']") ;
+		$this->check("//input[@name='use_tracker']") ;
+		$this->check("//input[@name='use_mail']") ;
+		$this->check("//input[@name='use_pm']") ;
+		$this->check("//input[@name='use_docman']") ;
+		$this->check("//input[@name='use_news']") ;
+		$this->check("//input[@name='use_frs']") ;
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 
