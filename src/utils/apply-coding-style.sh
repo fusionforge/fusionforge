@@ -4,6 +4,13 @@
 # There are still things to fix (including the removal of too many newlines)
 # DO NOT APPLY BLINDLY!
 
+# Things to fix:
+# * long lines (such as appear with long lists of parameters to functions) are unwrapped
+#   even when they were split across several lines previously
+# * "} else {" is turned into "}\nelse {"
+
+set -e
+
 arg=$1
 file=$(readlink -e $arg)
 
@@ -18,7 +25,7 @@ if [ ! -x /tmp/PHP_Beautifier/scripts/php_beautifier ] ; then
     cd /tmp
     git clone https://github.com/jespino/PHP_Beautifier.git
     cd PHP_Beautifier
-    git checkout remotes/origin/whitespaces
+    git checkout 15e6c66d2b2473cd3487c86ab9b2e3d5ed567ee7
     ln -s . PHP
     patch -p1 <<'EOF'
 --- a/Beautifier/Filter/Default.filter.php
