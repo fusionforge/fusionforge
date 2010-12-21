@@ -63,6 +63,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->type("description", "This is the public description for ProjectA.");
 		$this->type("unix_name", "projecta");
 		$this->click("//input[@name='scm' and @value='scmsvn']");
+		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->click("submit");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Your project has been submitted"));
@@ -179,6 +180,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Register Project");
 		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//select[@name='built_from_template']"));
 		$this->type("full_name", "ProjectA");
 		$this->type("purpose", "This is a simple description for ProjectA");
 		$this->type("description", "This is the public description for ProjectA.");
