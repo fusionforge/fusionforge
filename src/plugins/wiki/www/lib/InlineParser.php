@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: InlineParser.php 7726 2010-11-05 15:02:12Z vargenau $');
+// rcs_id('$Id: InlineParser.php 7797 2010-12-21 13:23:45Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -1084,6 +1084,11 @@ class Markup_template_plugin  extends SimpleMarkup
         }
 
         $page = str_replace("\n", "", $page);
+
+        // The argument value might contain a double quote (")
+        // We have to encode that.
+        $page = htmlspecialchars($page);
+
         $vars = '';
 
         if (preg_match('/^(\S+?)\|(.*)$/', $page, $_m)) {

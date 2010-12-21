@@ -1,5 +1,5 @@
 /**
- *  $Id: main.css 7331 2010-04-15 09:04:51Z vargenau $
+ *  $Id: main.css 7789 2010-12-20 13:18:08Z vargenau $
  */ 
 
 /*
@@ -1667,7 +1667,7 @@ div.errors {
 	border: medium solid red;
 	clear: both;
 }
-h4.errors {
+.errors {
 	color: red;
 	margin:  0;
 	padding: 0;

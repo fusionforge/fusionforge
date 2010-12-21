@@ -1,5 +1,5 @@
 /*
- $Id: MacOSX.css 7331 2010-04-15 09:04:51Z vargenau $
+ $Id: MacOSX.css 7789 2010-12-20 13:18:08Z vargenau $
 
  Classes:
 
@@ -137,7 +137,7 @@ div.errors {
   font-size: smaller;
 }
 
-.errors h4 {
+.errors {
   color: black;
   text-decoration: underline;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;

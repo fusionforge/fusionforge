@@ -1,8 +1,8 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Template.php 7700 2010-09-20 16:03:26Z vargenau $');
+// rcs_id('$Id: Template.php 7797 2010-12-21 13:23:45Z vargenau $');
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -253,8 +253,9 @@ extends WikiPlugin
                 $var['BASE_URL'] = PHPWIKI_BASE_URL;
 
             foreach ($var as $key => $val) {
-                //$content = preg_replace("/%%".preg_quote($key,"/")."%%/", $val, $content);
-                $content = str_replace("%%".$key."%%", $val, $content);
+                // We have to decode the double quotes that have been encoded
+                // in inline or block parser.
+                $content = str_replace("%%".$key."%%", htmlspecialchars_decode($val), $content);
             }
         }
         return $content;

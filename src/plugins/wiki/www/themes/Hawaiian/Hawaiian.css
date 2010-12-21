@@ -1,5 +1,5 @@
 /**
- * $Id: Hawaiian.css 7331 2010-04-15 09:04:51Z vargenau $
+ * $Id: Hawaiian.css 7789 2010-12-20 13:18:08Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up. It has not yet been tested against NS4.
@@ -396,7 +396,7 @@ div.errors {
   font-size: smaller;
   clear: both;
 }
-.errors h4 {
+.errors {
   color: #87785c;
   margin:  0;
   padding: 0;

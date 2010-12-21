@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: WikiPlugin.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: WikiPlugin.php 7785 2010-12-20 09:26:04Z vargenau $');
 
 class WikiPlugin
 {
@@ -353,7 +353,7 @@ class WikiPlugin
     }
   
     function error ($message) {
-        return HTML::div(array('class' => 'errors'),
+        return HTML::span(array('class' => 'errors'),
                         HTML::strong(fmt("Plugin %s failed.", $this->getName())), ' ',
                         $message);
     }

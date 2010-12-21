@@ -1,7 +1,7 @@
-<?php // rcs_id('$Id: BlockParser.php 7711 2010-10-05 16:08:35Z vargenau $');
+<?php // rcs_id('$Id: BlockParser.php 7797 2010-12-21 13:23:45Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004,2005 Reini Urban
- * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -1174,6 +1174,11 @@ class Block_template_plugin extends Block_pre
         }
 
         $pi = str_replace("\n", "", $pi);
+
+        // The argument value might contain a double quote (")
+        // We have to encode that.
+        $pi = htmlspecialchars($pi);
+
         $vars = '';
 
         if (preg_match('/^(\S+?)\|(.*)$/', $pi, $_m)) {

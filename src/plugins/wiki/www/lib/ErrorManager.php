@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: ErrorManager.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // rcs_id('$Id: ErrorManager.php 7788 2010-12-20 12:47:06Z vargenau $');
 
 if (isset($GLOBALS['ErrorManager'])) return;
 
@@ -130,8 +130,8 @@ class ErrorManager
         if ($worst_err->isNotice())
             return $flushed;
         $class = $worst_err->getHtmlClass();
-        $html = HTML::div(array('style' => 'border: none', 'class' => $class),
-                          HTML::h4(array('class' => 'errors'),
+        $html = HTML::div(array('class' => $class),
+                          HTML::div(array('class' => 'errors'),
                                    "PHP " . $worst_err->getDescription()));
         $html->pushContent($flushed);
         return $html;

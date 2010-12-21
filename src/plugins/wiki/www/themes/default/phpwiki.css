@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css 7331 2010-04-15 09:04:51Z vargenau $
+ * $Id: phpwiki.css 7789 2010-12-20 13:18:08Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -598,7 +598,7 @@ div.errors {
   border: medium solid red;
   clear: both;
 }
-h4.errors {
+.errors {
   color: red;
   margin:  0;
   padding: 0;

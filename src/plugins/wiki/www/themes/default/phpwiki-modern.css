@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki-modern.css 6474 2009-01-31 14:44:58Z vargenau $
+ * $Id: phpwiki-modern.css 7789 2010-12-20 13:18:08Z vargenau $
  *
  * Inspiration for this stylesheet:
  *
@@ -430,7 +430,7 @@ div.errors {
   font-size: smaller;
   border: thin dashed red;
 }
-.errors h4 {
+.errors {
   color: red;
   background: inherit;
   margin:  0;

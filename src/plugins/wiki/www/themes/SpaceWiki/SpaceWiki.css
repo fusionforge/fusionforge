@@ -1,5 +1,5 @@
 /**
- * $Id: SpaceWiki.css 7331 2010-04-15 09:04:51Z vargenau $
+ * $Id: SpaceWiki.css 7789 2010-12-20 13:18:08Z vargenau $
  *
  * This theme will probably be renamed something like "Space" to
  * avoid any potential copyright issues.
@@ -551,7 +551,7 @@ div.errors {
   border: medium solid red;
   clear: both;
 }
-.errors h4 {
+.errors {
   color: black;
   background: red;
   text-decoration: underline;
@@ -813,7 +813,7 @@ div.errors {
   margin-bottom: 2ex;
   padding: 0.5ex 0.25em;
 }
-.errors h4 {
+.errors {
   margin: 0;
   padding: 0.5ex 0.25em;
 }

@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki-printer.css 7002 2009-07-06 19:52:11Z vargenau $
+ * $Id: phpwiki-printer.css 7789 2010-12-20 13:18:08Z vargenau $
  *
  * PhpWiki style sheet for the printed page:
  * Black on white only, with no toolbar commands and no link icons.
@@ -268,7 +268,7 @@ div.errors {
   display: none;
 */
 }
-.errors h4 {
+.errors {
   margin:  0;
   padding: 0;
   text-decoration: underline;

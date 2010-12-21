@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Transclude.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: Transclude.php 7787 2010-12-20 12:37:25Z vargenau $');
 /**
  * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
  *
@@ -143,7 +143,7 @@ extends WikiPlugin
                 frame.height = content.height + 2 * frame.marginHeight;
             }
             catch (e) {
-              // Can not get content.height unless transcluded doc
+              // Cannot get content.height unless transcluded doc
               // is from the same server...
               return;
             }

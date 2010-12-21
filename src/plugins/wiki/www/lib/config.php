@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: config.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: config.php 7797 2010-12-21 13:23:45Z vargenau $');
 /*
  * NOTE: The settings here should probably not need to be changed.
  * The user-configurable settings have been moved to IniConfig.php
@@ -333,6 +333,15 @@ if (!function_exists('str_ireplace')) {
       }
       return($string);
   }
+}
+
+// htmlspecialchars_decode exists for PHP >= 5.1
+if (!function_exists('htmlspecialchars_decode')) {
+
+  function htmlspecialchars_decode($text) {
+      return strtr($text, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
+  }
+
 }
 
 /**

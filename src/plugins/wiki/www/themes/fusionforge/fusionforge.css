@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 7784 2010-12-17 10:55:08Z vargenau $
+ * $Id: fusionforge.css 7794 2010-12-20 15:40:00Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -619,26 +619,34 @@ td.pageinfo { font-weight: bold; }
   font-style: oblique;
 }
 
-div.errors {
+/* Banners ============================================================ */
+
+.errors {
     font-weight: bold;
+    font-size: 11px;
+    text-align: left;
     border-width: 2px;
     border-style: solid;
     background-color: #ffc0cb; /* pink */
     border-color: red;
     padding: 0.5em;
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
 }
 
-div.warning {
-  color: black;
-  background: #eee;
-  margin-top:    1em;
-  margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
-  padding-top:    0.8ex;
-  padding-bottom: 0;
-  border: thin solid blue;
-  clear: both;
+.warning {
+    font-weight: bold;
+    font-size: 11px;
+    text-align: left;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #ffd297; /* orange */
+    border-color: #FFA500; /* orange */
+    padding: 0.5em;
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
 }
 
 /* Debug */
@@ -654,14 +662,20 @@ div.warning {
 
 /* Hints */
 .hint {
-  color: black;
-  background: #eeeeee;
-  font-style: italic;
-  margin-left: 3em;
-  padding: 0.5ex 0.5em;
-  border: thin solid #aaaaaa;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: left;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #eeeeee; 
+    border-color: black;
+    padding: 0.5em;
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
 }
-span.hint {
+
+span.warning, span.errors, span.hint {
   padding: 0;
 }
 

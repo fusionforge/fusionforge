@@ -1734,7 +1734,7 @@ div.errors {
 	border: medium solid red;
 	clear: both;
 }
-h4.errors {
+.errors {
 	color: red;
 	margin:  0;
 	padding: 0;
