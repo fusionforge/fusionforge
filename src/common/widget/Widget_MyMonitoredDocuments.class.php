@@ -39,7 +39,7 @@ class Widget_MyMonitoredDocuments extends Widget {
         $result=db_query_params('select DISTINCT groups.group_name, docdata_vw.group_id from groups, docdata_vw, docdata_monitored_docman where docdata_monitored_docman.doc_id = docdata_vw.docid and groups.group_id = docdata_vw.group_id and docdata_monitored_docman.user_id = $1',array(user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
-            $html_my_monitored_documents .= '<p><b>' . _("You are not monitoring any documents.") . '</b></p><p>' . _("If you monitor documents, you will be sent new update in the form of an email.") . '</p><p>' . _("You can monitor documents by clicking on the appropriate icon action in the directory itself.") . '</p>';
+            $html_my_monitored_documents .= '<div class="warning">' . _("You are not monitoring any documents.") . '</div><p>' . _("If you monitor documents, you will be sent new update in the form of an email.") . '</p><p>' . _("You can monitor documents by clicking on the appropriate icon action in the directory itself.") . '</p>';
         } else {
             $request =& HTTPRequest::instance();
             $html_my_monitored_documents .= '<table style="width:100%">';
