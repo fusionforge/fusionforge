@@ -507,6 +507,7 @@ src/common/widget/Widget_MyMonitoredDocuments.class.php -text
 src/common/widget/Widget_MyMonitoredForums.class.php -text
 src/common/widget/Widget_MyMonitoredFp.class.php -text
 src/common/widget/Widget_MyProjects.class.php -text
+src/common/widget/Widget_MyProjectsLatestDocuments.class.php -text
 src/common/widget/Widget_MyRss.class.php -text
 src/common/widget/Widget_MySurveys.class.php -text
 src/common/widget/Widget_MyTasks.class.php -text

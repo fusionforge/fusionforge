@@ -26,6 +26,7 @@ require_once('common/widget/Widget_MyBookmarks.class.php');
 require_once('common/widget/Widget_MyMonitoredForums.class.php');
 //require_once('common/widget/Widget_MyMonitoredFp.class.php');
 require_once('common/widget/Widget_MyLatestSvnCommits.class.php');
+require_once('common/widget/Widget_MyProjectsLatestDocuments.class.php');
 require_once('common/widget/Widget_MyArtifacts.class.php');
 //require_once('common/widget/Widget_MyBugs.class.php');
 //require_once('common/widget/Widget_MySrs.class.php');
@@ -44,6 +45,7 @@ require_once('common/widget/Widget_ProjectMembers.class.php');
 require_once('common/widget/Widget_ProjectInfo.class.php');
 require_once('common/widget/Widget_ProjectLatestFileReleases.class.php');
 require_once('common/widget/Widget_ProjectLatestDocuments.class.php');
+
 require_once('common/widget/Widget_ProjectLatestNews.class.php');
 require_once('common/widget/Widget_ProjectPublicAreas.class.php');
 require_once('common/widget/Widget_ProjectRss.class.php');/*
@@ -176,6 +178,9 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 			case 'mymonitoreddocuments':
 				$o = new Widget_MyMonitoredDocuments();
 				break;
+			case 'myprojectslatestdocuments':
+				$o = new Widget_MyProjectsLatestDocuments();
+                break;
 			case 'myartifacts':
 				$o = new Widget_MyArtifacts();
 				break;
@@ -187,9 +192,9 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				break;
 
 			case 'myadmin':
-				if (forge_check_global_perm ('forge_admin')
-					|| forge_check_global_perm ('approve_projects')
-					|| forge_check_global_perm ('approve_news')) {
+				if (forge_check_global_perm('forge_admin')
+					|| forge_check_global_perm('approve_projects')
+					|| forge_check_global_perm('approve_news')) {
 					$o = new Widget_MyAdmin();
 				}
 				break;/*
@@ -219,28 +224,28 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				case 'projectclassification':
 				$o = new Widget_ProjectClassification();
 				break;*/
-				case 'projectdescription':
+			case 'projectdescription':
 				$o = new Widget_ProjectDescription();
 				break;
-				case 'projectmembers':
+			case 'projectmembers':
 				$o = new Widget_ProjectMembers();
 				break;
-				case 'projectinfo':
+			case 'projectinfo':
 				$o = new Widget_ProjectInfo();
 				break;
-				case 'projectlatestfilereleases':
+			case 'projectlatestfilereleases':
 				$o = new Widget_ProjectLatestFileReleases();
 				break;
-				case 'projectlatestdocuments':
+			case 'projectlatestdocuments':
 				$o = new Widget_ProjectLatestDocuments();
 				break;
-				case 'projectlatestnews':
+			case 'projectlatestnews':
 				$o = new Widget_ProjectLatestNews();
 				break;
-				case 'projectpublicareas':
+			case 'projectpublicareas':
 				$o = new Widget_ProjectPublicAreas();
 				break;
-				case 'projectrss':
+			case 'projectrss':
 				$o = new Widget_ProjectRss();
 				break;/*
 				case 'projecttwitterfollow':
@@ -275,7 +280,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks', 
 						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mybugs', //'mywikipage' //not yet
 						'mytasks', 'mysrs', 'mylatestsvncommits', 'mytwitterfollow',
-						'mysystemevent', 'myrss', 'mymonitoreddocuments',
+						'mysystemevent', 'myrss', 'mymonitoreddocuments', 'myprojectslatestdocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:
