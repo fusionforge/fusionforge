@@ -46,40 +46,31 @@ if ($sortorder == 'is_template') {
 	$sortorder = 'is_template DESC' ;
 }
 
-if (isset($group_name_search)) {
+if ($group_name_search != '') {
 	echo "<p>"._('Projects that begin with'). " <strong>".$group_name_search."</strong></p>\n";
 	if (USE_PFO_RBAC) {
-		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members
-FROM groups, pfo_user_role RIGHT OUTER JOIN pfo_role ON pfo_user_role.role_id=pfo_role.role_id, licenses
-WHERE pfo_role.home_group_id=groups.group_id
-AND license_id=license
-AND lower(group_name) LIKE $1
-GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name
-ORDER BY '.$sortorder,
+		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name ORDER BY '.$sortorder,
 					array (strtolower ("$group_name_search%"))) ;
 	} else {
-	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
+	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
 FROM groups
 LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
 WHERE license_id=license
 AND lower(group_name) LIKE $1
-GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,groups.is_template,status,license_name
+GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name
 ORDER BY '.$sortorder,
 				array (strtolower ("$group_name_search%"))) ;
 	}
 } else {
 	if (USE_PFO_RBAC) {
-		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members
-FROM groups, pfo_user_role RIGHT OUTER JOIN pfo_role ON pfo_user_role.role_id=pfo_role.role_id, licenses
-WHERE pfo_role.home_group_id=groups.group_id
-AND license_id=license') ;
+		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
 		if ($status) {
 			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 		}
-		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,groups.is_template,status,license_name ORDER BY '.$sortorder) ;
+		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name ORDER BY '.$sortorder) ;
 		$res = db_query_qpa ($qpa) ;
 	} else {
-		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
+		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
 FROM groups
 LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
 WHERE license_id=license',
@@ -87,7 +78,7 @@ WHERE license_id=license',
 		if ($status) {
 			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 		}
-		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,groups.is_template,status,license_name ORDER BY '.$sortorder) ;
+		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name ORDER BY '.$sortorder) ;
 		$res = db_query_qpa ($qpa) ;
 	}
 }
