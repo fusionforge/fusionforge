@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with FusionForge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once('Widget.class.php');
@@ -82,7 +82,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 				$user_name = db_result($res_files,$f,'user_name');
 				$statename = db_result($res_files,$f,'state_name');
 				echo '
-					<tr>
+					<tr '. $HTML->boxGetAltRowStyle($f+1) .'>
 						<td>'
 							. $displaydate["month"] . ' ' . $displaydate["mday"] . ', ' . $displaydate["year"] .
 						'</td>
