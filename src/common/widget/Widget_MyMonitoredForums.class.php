@@ -54,7 +54,7 @@ class Widget_MyMonitoredForums extends Widget {
         $result=db_query_params($sql,array(user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
-            $html_my_monitored_forums .= '<p><b>' . _("You are not monitoring any forums.") . '</b></p><p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
+            $html_my_monitored_forums .= '<div class="warning">' . _("You are not monitoring any forums.") . '</div><p>' . _("If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.") . '</p><p>' . _("You can monitor forums by clicking on the appropriate menu item in the discussion forum itself.") . '</p>';
         } else {
             $request =& HTTPRequest::instance();
             $html_my_monitored_forums .= '<table style="width:100%">';
@@ -99,19 +99,10 @@ class Widget_MyMonitoredForums extends Widget {
 		for ($i=0; $i<$rows2; $i++) {
 
 			if (!$hide_now) {
-				if ($i % 2 == 0) {
-					$class="bgcolor-white";
-				}
-				else {
-					$class="bgcolor-grey";
-				}
-
-
-
 				$group_forum_id = db_result($result2,$i,'group_forum_id');
 
 				$html .= '
-					<TR class="'. $class .'"><TD WIDTH="99%">'.
+					<TR '. $GLOBAL['HTML']->boxGetAltRowStyle($i) .'"><TD WIDTH="99%">'.
 					'&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/forum/forum.php?forum_id='.$group_forum_id.'">'.
 					stripslashes(db_result($result2,$i,'forum_name')).'</A></TD>'.
 					'<TD ALIGN="center"><A HREF="/my/stop_monitor.php?forum_id='.$group_forum_id.
