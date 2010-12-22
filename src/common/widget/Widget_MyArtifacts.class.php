@@ -41,9 +41,11 @@ class Widget_MyArtifacts extends Widget {
 			UserManager::instance()->getCurrentUser()->setPreference('my_artifacts_show', $this->_artifact_show);
 		}
 	}
+
 	function getTitle() {
 		return _("My Artifacts");
 	}
+
 	function updatePreferences(&$request) {
 		$request->valid(new Valid_String('cancel'));
 		$vShow = new Valid_WhiteList('show', array('A', 'S', 'N', 'AS'));
@@ -69,9 +71,11 @@ class Widget_MyArtifacts extends Widget {
 		}
 		return true;
 	}
+
 	function hasPreferences() {
 		return true;
 	}
+
 	function getPreferences() {
 		$prefs  = '';
 		$prefs .= _("Display artifacts:").' <select name="show">';
@@ -82,9 +86,11 @@ class Widget_MyArtifacts extends Widget {
 		return $prefs;
 
 	}
+
 	function isAjax() {
 		return true;
 	}
+
 	function getContent() {
 		$html_my_artifacts = '<table style="width:100%">';
 		$atf = new ArtifactsForUser(@UserManager::instance()->getCurrentUser());
@@ -110,6 +116,7 @@ class Widget_MyArtifacts extends Widget {
 		$html_my_artifacts .= '</table>';
 		return $html_my_artifacts;
 	}
+
 	function _display_artifacts($list_trackers, $print_box_begin) {
 		$request = HTTPRequest::instance();
 		$vItemId = new Valid_UInt('hide_item_id');
@@ -247,20 +254,24 @@ class Widget_MyArtifacts extends Widget {
 			$html_my_artifacts .= $html_hdr.$html;
 		}
 		return $html_my_artifacts;
+	}
+
+	function getCategory() {
+		return 'Trackers';
+	}
+
+	function getDescription() {
+		return _("List artifacts you have submitted or assigned to you, by project.");
+	}
+
+	function getAjaxUrl($owner_id, $owner_type) {
+		$request =& HTTPRequest::instance();
+		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
+		if ($request->exist('hide_item_id') || $request->exist('hide_artifact')) {
+			$ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_artifact=' . $request->get('hide_artifact');
 		}
-		function getCategory() {
-			return 'Trackers';
-		}
-		function getDescription() {
-			return _("List artifacts you have submitted or assigned to you, by project.");
-		}
-		function getAjaxUrl($owner_id, $owner_type) {
-			$request =& HTTPRequest::instance();
-			$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-			if ($request->exist('hide_item_id') || $request->exist('hide_artifact')) {
-				$ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_artifact=' . $request->get('hide_artifact');
-			}
-			return $ajax_url;
-		}
-		}
-		?>
+		return $ajax_url;
+	}
+}
+
+?>
