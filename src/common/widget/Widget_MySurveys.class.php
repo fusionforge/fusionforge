@@ -52,7 +52,7 @@ class Widget_MySurveys extends Widget {
 		
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
-			$html_my_surveys .= '<div class"warning">'. _("There are no surveys in your groups.") .'</div>';
+			$html_my_surveys .= '<div class"warning">'. _("There are no surveys in your projects.") .'</div>';
 		} else {
 			global $HTML;
 			$request =& HTTPRequest::instance();
