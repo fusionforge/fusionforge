@@ -52,8 +52,9 @@ class Widget_MySurveys extends Widget {
 		
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
-			$html_my_surveys .= _("<P>There are no surveys in your groups.<P><BR>&nbsp;");
+			$html_my_surveys .= '<div class"warning">'. _("There are no surveys in your groups.") .'</div>';
 		} else {
+			global $HTML;
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';
 			$j = 0;
@@ -90,20 +91,12 @@ class Widget_MySurveys extends Widget {
 				foreach ($surveys as $survey) {
 					$i++ ;
 					if (!$hide_now) {
-						if ($i % 2 == 0) {
-							$class="bgcolor-white";
-						}
-						else {
-							$class="bgcolor-grey";
-						}
-
-
 						$group_survey_id= $survey->getId();
 						$survey_title = $survey->getTitle();
 						$devsurvey_is_active = $survey->isActive();
 						if($devsurvey_is_active == 1 ) {
 							$html .= '
-								<TR class="'. $class .'"><TD WIDTH="99%">'.
+								<TR '. $HTML->boxGetAltRowStyle($i) .'><TD WIDTH="99%">'.
 								'&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/survey/survey.php?group_id='.$group_id.'&survey_id='.$group_survey_id.'">'.
 								$survey_title.'</A></TD></TR>';
 						}
