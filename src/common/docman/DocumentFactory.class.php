@@ -165,13 +165,39 @@ class DocumentFactory extends Error {
 
 	/**
 	 * getFromDB - Retrieve documents from database.
+	 *
+	 * @param	int	limit of documents return: default: 0 meaning : no limits
+	 * @param	array	list of columns to order the query: default: title
+	 * @param	boolean	sort : DESC(false) | ASC (true) : default ASC
+	 * @access	public
 	 */
-	function getFromDB() {
+	function getFromDB($limit = 0, $order = array('title'), $sort = true) {
 		$this->Documents = array();
-		$result = db_query_params('SELECT * FROM docdata_vw WHERE group_id = $1 ORDER BY title',
+		$qpa = db_construct_qpa();
+		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ORDER BY ',
 						array($this->Group->getID()));
+		for ($i=0; $i<count($order); $i++) {
+			$qpa = db_construct_qpa($qpa, $order[$i]);
+			if (count($order) != $i + 1) {
+				$qpa = db_construct_qpa($qpa, ',');
+			} else {
+				$qpa = db_construct_qpa($qpa, ' ');
+			}
+		}
+		if ($sort) {
+			$sort_sql = 'ASC';
+		} else {
+			$sort_sql = 'DESC';
+		}
+		$qpa = db_construct_qpa($qpa, $sort_sql);
+
+		if ( $limit != 0 ) {
+			$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($limit));
+		}
+
+		$result = db_query_qpa($qpa);
 		if (!$result) {
-			exit_error(db_error(), 'docman');
+			exit_error(print_r($qpa).':'.db_error(), 'docman');
 		}
 
 		while ($arr = db_fetch_array($result)) {
