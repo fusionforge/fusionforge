@@ -20,6 +20,7 @@
  */
 
 require_once('Widget.class.php');
+require_once('common/docman/DocumentFactory.class.php');
 
 /**
 * Widget_MyProjectsLatestDocuments
@@ -41,6 +42,7 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 		$user = session_get_user();
 		$groups = $user->getGroups();
 		sortProjectList($groups);
+		$request =& HTTPRequest::instance();
 
 		if (count ($groups) < 1) {
 			$html_my_projects .= '<div class="warning">'. _("You're not a member of any project") .'</div>';
@@ -49,10 +51,30 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 			$i = 0;
 			foreach ($groups as $g) {
 				$i++;
+				$vItemId = new Valid_UInt('hide_item_id');
+				$vItemId->required();
+				if($request->valid($vItemId)) {
+					$hide_item_id = $request->get('hide_item_id');
+				} else {
+					$hide_item_id = null;
+				}
+
+				$vWhiteList = new Valid_WhiteList('hide_docmanproject', array(0, 1));
+				$vWhiteList->required();
+				if($request->valid($vWhiteList)) {
+					$hide_docmanproject = $request->get('hide_docmanproject');
+				} else {
+					$hide_docmanproject = null;
+				}
+
+				$df = new DocumentFactory($g);
+				$docs_arr = $df->getFromDB(5,array('updatedate','createdate'),false);
+
+				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject',$g->getID(),$hide_item_id,count($docs_arr),$hide_docmanproject);
 				$html_my_projects .= '
-					<TR '. $HTML->boxGetAltRowStyle($i) .'"><TD WIDTH="99%">'.
+					<TR '. $HTML->boxGetAltRowStyle($i) .'"><TD>'.
 					'<A href="/docman/?group_id='. $g->getID() .'/">'.
-					$g->getPublicName().'</A></td></tr>';
+					$g->getPublicName().'</A></td><td>[]</td></tr>';
 			}
 			$html_my_projects .= '</table>';
 		}
@@ -60,15 +82,11 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _("List the documents publish in projects you belong to during the 5 last days. Selecting any of these projects brings you to the corresponding Project Document Manager page.");
+		return _("List the last 5 documents publish in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page.");
 	}
 
 	function getCategory() {
 		return 'Documents-Manager';
-	}
-
-	function isAjax() {
-		return true;
 	}
 }
 
