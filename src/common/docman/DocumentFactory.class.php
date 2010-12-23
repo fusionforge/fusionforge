@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright 2010, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -103,7 +104,7 @@ class DocumentFactory extends Error {
 	 */
 	function &getDocuments() {
 		if (!$this->Documents) {
-			$this->getFromDB();
+			$this->getFromStorage();
 		}
 
 		$return = array();
@@ -164,6 +165,23 @@ class DocumentFactory extends Error {
 	}
 
 	/**
+	 * getFromStorage - Retrieve documents from storage API
+	 *
+	 * @access	public
+	 */
+	function getFromStorage() {
+		switch ($this->Group->getStorageAPI()) {
+			case 'DB': {
+				$this->getFromDB();
+				break;
+			}
+			default: {
+				exit_error(_('StorageAPI unknown'), 'docman');
+			}
+		}
+	}
+
+	/**
 	 * getFromDB - Retrieve documents from database.
 	 *
 	 * @param	int	limit of documents return: default: 0 meaning : no limits
@@ -197,7 +215,7 @@ class DocumentFactory extends Error {
 
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			exit_error(print_r($qpa).':'.db_error(), 'docman');
+			exit_error(db_error(), 'docman');
 		}
 
 		while ($arr = db_fetch_array($result)) {
