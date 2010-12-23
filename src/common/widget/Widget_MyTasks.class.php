@@ -115,7 +115,7 @@ class Widget_MyTasks extends Widget {
             }
             $this->content .= '</table>';
         } else {
-            $this->content .= _("No task yet");
+            $this->content .= '<div class="warning">'. _("No task yet") .'</div>';
         }
     }
     function getTitle() {
