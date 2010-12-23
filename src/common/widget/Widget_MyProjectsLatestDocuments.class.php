@@ -68,13 +68,18 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 				}
 
 				$df = new DocumentFactory($g);
-				$docs_arr = $df->getFromDB(5,array('updatedate','createdate'),false);
+				$df->getFromDB(5,array('updatedate','createdate'),false);
 
-				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject',$g->getID(),$hide_item_id,count($docs_arr),$hide_docmanproject);
-				$html_my_projects .= '
-					<TR '. $HTML->boxGetAltRowStyle($i) .'"><TD>'.
-					'<A href="/docman/?group_id='. $g->getID() .'/">'.
-					$g->getPublicName().'</A></td><td>[]</td></tr>';
+				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject',$g->getID(),$hide_item_id,count($df->Documents),$hide_docmanproject);
+				$html_hdr = ($i ? '<tr class="boxitem"><td colspan="2">' : '').
+					$hide_url.'<a HREF="/docman/?group_id='.$g->getID().'">'.
+					$g->getPublicName().'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+
+				$html = '';
+
+				$html_hdr .= '['.count($df->Documents).']</td></tr>';
+
+				$html_my_projects .= $html_hdr.$html;
 			}
 			$html_my_projects .= '</table>';
 		}
