@@ -118,6 +118,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function _display_artifacts($list_trackers, $print_box_begin) {
+		global $HTML;
 		$request = HTTPRequest::instance();
 		$vItemId = new Valid_UInt('hide_item_id');
 		$vItemId->required();
@@ -221,15 +222,8 @@ class Widget_MyArtifacts extends Widget {
 					}
 
 					if($AS_flag !='N') {
-						if ($count_aids % 2 == 0) {
-							$class="bgcolor-white";
-						}
-						else {
-							$class="bgcolor-grey";
-						}
-
 						$html .= '
-							<TR class="'.$class.'">'.
+							<TR '. $HTML->boxGetAltRowStyle($count_aids) .'>'.
 							'<TD class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</TD>'.
 							'<TD><A HREF="/tracker/?func=detail&group_id='.
 							$group_id.'&aid='.$aid.'&atid='.$atid.
