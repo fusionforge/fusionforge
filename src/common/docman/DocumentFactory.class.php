@@ -45,14 +45,42 @@ class DocumentFactory extends Error {
 	 */
 	var $Documents;
 
+	/**
+	 * The stateid limit
+	 * @var	int	Contains the stateid to limit return documents in getDocuments.
+	 */
 	var $stateid;
+
+	/**
+	 * The doc_group_id limit
+	 * @var	int	Contains the doc_group id to limit return documents in getDocuments.
+	 */
 	var $docgroupid;
+
+	/**
+	 * The sort order
+	 * @var	string	Contains the order to return documents in getDocuments.
+	 */
+	var $sort;
+
+	/**
+	 * The columns order
+	 * @var	array	Contains the order of columns to sort before return documents in getDocuments.
+	 */
+	var $columns;
+
+	/**
+	 * The limit
+	 * @var	int	Contains the limit of documents retrieve by getDocuments
+	 */
+	var $limit;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param	object	The Group object to which this DocumentFactory is associated.
 	 * @return	boolean	success.
+	 * @access	public
 	 */
 	function DocumentFactory(&$Group) {
 		$this->Error();
@@ -83,6 +111,7 @@ class DocumentFactory extends Error {
 	 * setStateID - call this before getDocuments() if you want to limit to a specific state.
 	 *
 	 * @param	int	The stateid from the doc_states table.
+	 * @access	public
 	 */
 	function setStateID($stateid) {
 		$this->stateid = $stateid;
@@ -92,18 +121,149 @@ class DocumentFactory extends Error {
 	 * setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
 	 *
 	 * @param	int	The doc_group from the doc_groups table.
+	 * @access	public
 	 */
 	function setDocGroupID($docgroupid) {
 		$this->docgroupid = $docgroupid;
 	}
 
 	/**
+	 * setSort - call this before getDocuments() if you want to order the query.
+	 *
+	 * @param	string	ASC or DESC : default ASC
+	 * @access	public
+	 */
+	function setSort($sort) {
+		if ( $sort != 'ASC' && $sort != 'DESC') {
+			$this->sort = 'ASC';
+		} else {
+			$this->sort = $sort;
+		}
+	}
+
+	/**
+	 * setColumns - call this before getDocuments() if you want to sort the query.
+	 *
+	 * @param	array	Ordered Columns names: default title
+	 * @access	public
+	 */
+	function setColumns($columns = array('title')) {
+		// validate columns names
+		$localColumns = array();
+		foreach ($columns as $column) {
+			switch ($column) {
+				case "title": {
+					$localColumns[] = "title";
+					break;
+				}
+				case "createdate": {
+					$localColumns[] = "createdate";
+					break;
+				}
+				case "updatedate": {
+					$localColumns[] = "updatedate";
+					break;
+				}
+				case "user_name": {
+					$localColumns[] = "user_name";
+					break;
+				}
+				case "realname": {
+					$localColumns[] = "realname";
+					break;
+				}
+				case "email": {
+					$localColumns[] = "email";
+					break;
+				}
+				case "group_id": {
+					$localColumns[] = "group_id";
+					break;
+				}
+				case "docid": {
+					$localColumns[] = "docid";
+					break;
+				}
+				case "stateid": {
+					$localColumns[] = "stateid";
+					break;
+				}
+				case "create_by": {
+					$localColumns[] = "create_by";
+					break;
+				}
+				case "doc_group": {
+					$localColumns[] = "doc_group";
+					break;
+				}
+				case "description": {
+					$localColumns[] = "description";
+					break;
+				}
+				case "filename": {
+					$localColumns[] = "filename";
+					break;
+				}
+				case "filetype": {
+					$localColumns[] = "filetype";
+					break;
+				}
+				case "reserved": {
+					$localColumns[] = "reserved";
+					break;
+				}
+				case "reserved_by": {
+					$localColumns[] = "reserved_by";
+					break;
+				}
+				case "locked": {
+					$localColumns[] = "locked";
+					break;
+				}
+				case "locked_by": {
+					$localColumns[] = "locked_by";
+					break;
+				}
+				case "lockdate": {
+					$localColumns[] = "lockdate";
+					break;
+				}
+				case "state_name": {
+					$localColumns[] = "state_name";
+					break;
+				}
+				case "group_name": {
+					$localColumns[] = "group_name";
+					break;
+				}
+				default: {
+					//unknown column: skip it
+					break;
+				}
+			}
+		}
+		$this->columns = $localColumns;
+	}
+
+	/**
+	 * setLimit - call this before getDocuments() if you want to limit number of documents retrieve.
+	 *
+	 * @param	int	The limit of documents
+	 * @access	public
+	 */
+	function setLimit($limit) {
+		$this->limit = $limit;
+	}
+
+	/**
 	 * getDocuments - returns an array of Document objects.
 	 *
+	 * @param	int	no cache : force reinit $this->Documents : default: cache is used
 	 * @return	array	Document objects.
+	 * @access	public
 	 */
-	function &getDocuments() {
-		if (!$this->Documents) {
+	function &getDocuments($nocache = 0) {
+		if (!$this->Documents || $nocache) {
 			$this->getFromStorage();
 		}
 
@@ -183,6 +343,7 @@ class DocumentFactory extends Error {
 
 	/**
 	 * getFromDB - Retrieve documents from database.
+	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
 	 *
 	 * @param	int	limit of documents return: default: 0 meaning : no limits
 	 * @param	array	list of columns to order the query: default: title
