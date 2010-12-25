@@ -51,7 +51,7 @@ class Widget_MyAdmin extends Widget {
 			$this->_get_color($pending_users)
 			);
 		
-		if ($GLOBALS['sys_user_approval'] == 1) {
+		if (isset($GLOBALS['sys_user_approval']) && $GLOBALS['sys_user_approval'] == 1) {
 			$html_my_admin .= $this->_get_admin_row(
 				$i++, 
 				vsprintf(_('Validated users <a href="%s"><B>pending email activation</B></a>'), array("/admin/approve_pending_users.php?page=validated")),
