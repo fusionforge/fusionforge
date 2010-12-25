@@ -102,7 +102,7 @@ class Widget_MyMonitoredForums extends Widget {
 				$group_forum_id = db_result($result2,$i,'group_forum_id');
 
 				$html .= '
-					<TR '. $GLOBAL['HTML']->boxGetAltRowStyle($i) .'"><TD WIDTH="99%">'.
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><TD WIDTH="99%">'.
 					'&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/forum/forum.php?forum_id='.$group_forum_id.'">'.
 					stripslashes(db_result($result2,$i,'forum_name')).'</A></TD>'.
 					'<TD ALIGN="center"><A HREF="/my/stop_monitor.php?forum_id='.$group_forum_id.
