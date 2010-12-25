@@ -64,22 +64,6 @@ $dirid = getIntFromRequest('dirid');
 if (empty($dirid))
 	$dirid = 0;
 
-$df = new DocumentFactory($g);
-if ($df->isError())
-	exit_error($df->getErrorMessage(),'docman');
-
-$dgf = new DocumentGroupFactory($g);
-if ($dgf->isError())
-	exit_error($dgf->getErrorMessage(),'docman');
-
-$nested_groups = $dgf->getNested();
-
-$dgh = new DocumentGroupHTML($g);
-if ($dgh->isError())
-	exit_error($dgh->getErrorMessage(),'docman');
-
-$d_arr =& $df->getDocuments();
-
 /* everything sounds ok, now let do the job */
 $action = getStringFromRequest('action');
 switch ($action) {
@@ -104,6 +88,23 @@ switch ($action) {
 		include ($gfcommon."docman/actions/$action.php");
 		break;
 }
+
+$df = new DocumentFactory($g);
+if ($df->isError())
+	exit_error($df->getErrorMessage(),'docman');
+
+$dgf = new DocumentGroupFactory($g);
+if ($dgf->isError())
+	exit_error($dgf->getErrorMessage(),'docman');
+
+$nested_groups = $dgf->getNested();
+
+$dgh = new DocumentGroupHTML($g);
+if ($dgh->isError())
+	exit_error($dgh->getErrorMessage(),'docman');
+
+$df->setDocGroupID($dirid);
+$d_arr =& $df->getDocuments();
 
 html_use_tooltips();
 use_javascript('scripts/DocManController.js');

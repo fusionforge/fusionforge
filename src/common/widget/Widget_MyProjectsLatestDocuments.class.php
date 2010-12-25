@@ -68,7 +68,9 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 				}
 
 				$df = new DocumentFactory($g);
-				$df->getFromDB(5,array('updatedate','createdate'),false);
+				$df->setLimit(5);
+				$df->setOrder(array('createdate','updatedate'));
+				$df->getDocuments();
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject',$g->getID(),$hide_item_id,count($df->Documents),$hide_docmanproject);
 				$html_hdr = ($i ? '<tr class="boxitem"><td colspan="2">' : '').

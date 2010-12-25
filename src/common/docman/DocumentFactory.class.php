@@ -60,20 +60,23 @@ class DocumentFactory extends Error {
 	/**
 	 * The sort order
 	 * @var	string	Contains the order to return documents in getDocuments.
+	 *		Default value is ASC
 	 */
-	var $sort;
+	var $sort = 'ASC';
 
 	/**
 	 * The columns order
 	 * @var	array	Contains the order of columns to sort before return documents in getDocuments.
+	 *		Default value is title order
 	 */
-	var $columns;
+	var $order = array('title');
 
 	/**
 	 * The limit
-	 * @var	int	Contains the limit of documents retrieve by getDocuments
+	 * @var	int	Contains the limit of documents retrieve by getDocuments.
+	 *		Default value is 0 which means NO LIMIT
 	 */
-	var $limit;
+	var $limit = 0;
 
 	/**
 	 * Constructor.
@@ -142,12 +145,12 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 * setColumns - call this before getDocuments() if you want to sort the query.
+	 * setOrder - call this before getDocuments() if you want to sort the query.
 	 *
 	 * @param	array	Ordered Columns names: default title
 	 * @access	public
 	 */
-	function setColumns($columns = array('title')) {
+	function setOrder($columns = array('title')) {
 		// validate columns names
 		$localColumns = array();
 		foreach ($columns as $column) {
@@ -242,11 +245,12 @@ class DocumentFactory extends Error {
 				}
 			}
 		}
-		$this->columns = $localColumns;
+		$this->order = $localColumns;
 	}
 
 	/**
 	 * setLimit - call this before getDocuments() if you want to limit number of documents retrieve.
+	 * default value is 0 which means : no limit.
 	 *
 	 * @param	int	The limit of documents
 	 * @access	public
@@ -264,17 +268,11 @@ class DocumentFactory extends Error {
 	 */
 	function &getDocuments($nocache = 0) {
 		if (!$this->Documents || $nocache) {
-			$this->getFromStorage();
+			$this->__getFromStorage();
 		}
 
 		$return = array();
-		// If the document group is specified, we should only check that group in
-		// the Documents array. If not, we should check ALL the groups.
-		if ($this->docgroupid) {
-			$keys = array($this->docgroupid);
-		} else {
-			$keys = array_keys($this->Documents);
-		}
+		$keys = array_keys($this->Documents);
 
 		foreach ($keys as $key) {
 			if (!array_key_exists($key, $this->Documents)) continue;		// Should not happen
@@ -327,18 +325,23 @@ class DocumentFactory extends Error {
 	/**
 	 * getFromStorage - Retrieve documents from storage API
 	 *
-	 * @access	public
+	 * @return	boolean	success or not
+	 * @access	private
 	 */
-	function getFromStorage() {
+	private function __getFromStorage() {
+		$returned = false;
 		switch ($this->Group->getStorageAPI()) {
 			case 'DB': {
-				$this->getFromDB();
+				if ($this->__getFromDB())
+					$returned = true;
 				break;
 			}
 			default: {
-				exit_error(_('StorageAPI unknown'), 'docman');
+				$this->setError(_('No Storage API Found'));
+				break;
 			}
 		}
+		return $returned;
 	}
 
 	/**
@@ -348,35 +351,39 @@ class DocumentFactory extends Error {
 	 * @param	int	limit of documents return: default: 0 meaning : no limits
 	 * @param	array	list of columns to order the query: default: title
 	 * @param	boolean	sort : DESC(false) | ASC (true) : default ASC
-	 * @access	public
+	 * @return	boolean	success or not
+	 * @access	private
 	 */
-	function getFromDB($limit = 0, $order = array('title'), $sort = true) {
+	private function __getFromDB($limit = 0, $order = array('title'), $sort = true) {
 		$this->Documents = array();
 		$qpa = db_construct_qpa();
-		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ORDER BY ',
+		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
 						array($this->Group->getID()));
-		for ($i=0; $i<count($order); $i++) {
-			$qpa = db_construct_qpa($qpa, $order[$i]);
-			if (count($order) != $i + 1) {
+
+		if ($this->docgroupid) {
+			$qpa = db_construct_qpa($qpa, 'AND doc_group = $1 ', array($this->docgroupid));
+		}
+
+		$qpa = db_construct_qpa($qpa, 'ORDER BY ');
+		for ($i=0; $i<count($this->order); $i++) {
+			$qpa = db_construct_qpa($qpa, $this->order[$i]);
+			if (count($this->order) != $i + 1) {
 				$qpa = db_construct_qpa($qpa, ',');
 			} else {
 				$qpa = db_construct_qpa($qpa, ' ');
 			}
 		}
-		if ($sort) {
-			$sort_sql = 'ASC';
-		} else {
-			$sort_sql = 'DESC';
-		}
-		$qpa = db_construct_qpa($qpa, $sort_sql);
 
-		if ( $limit != 0 ) {
-			$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($limit));
+		$qpa = db_construct_qpa($qpa, $this->sort);
+
+		if ($this->limit !== 0 ) {
+			$qpa = db_construct_qpa($qpa, ' LIMIT $1', array($this->limit));
 		}
 
 		$result = db_query_qpa($qpa);
 		if (!$result) {
-			exit_error(db_error(), 'docman');
+			$this->setError('getFromDB::'.db_error());
+			return false;
 		}
 
 		while ($arr = db_fetch_array($result)) {
@@ -386,6 +393,7 @@ class DocumentFactory extends Error {
 			}
 			$this->Documents[$doc_group_id][] = new Document($this->Group, $arr['docid'], $arr);
 		}
+		return true;
 	}
 
 	/**
