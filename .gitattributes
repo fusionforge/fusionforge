@@ -4183,6 +4183,7 @@ src/plugins/wiki/www/themes/fusionforge/templates/login.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/pagelink.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/ratings.tmpl -text
+src/plugins/wiki/www/themes/fusionforge/templates/savepage.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/userprefs.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/themeinfo.php -text
 src/plugins/wiki/www/themes/fusionforge/wikilens-min.js -text
