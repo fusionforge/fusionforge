@@ -1,4 +1,4 @@
--- $Id: mysql-destroy.sql 6203 2008-08-26 13:23:56Z vargenau $
+-- $Id: mysql-destroy.sql 7798 2010-12-23 12:43:55Z rurban $
 
 drop table if exists page;
 drop table if exists version;
@@ -12,6 +12,7 @@ drop table if exists session;
 drop table if exists pref;
 --drop table if exists user;
 drop table if exists member;
+drop table if exists accesslog;
 
 -- if you plan to use the wikilens theme
 drop table if exists rating;
