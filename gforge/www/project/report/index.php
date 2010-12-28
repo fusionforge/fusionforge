@@ -246,7 +246,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		</tr>';
 }
 
-echo $HTML->boxBottom();
+echo $GLOBALS['HTML']->listTableBottom();
 
 site_project_footer(array());
 
