@@ -180,7 +180,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				break;
 			case 'myprojectslatestdocuments':
 				$o = new Widget_MyProjectsLatestDocuments();
-                break;
+				break;
 			case 'myartifacts':
 				$o = new Widget_MyArtifacts();
 				break;
@@ -190,7 +190,6 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 			case 'mytasks':
 				$o = new Widget_MyTasks();
 				break;
-
 			case 'myadmin':
 				if (forge_check_global_perm('forge_admin')
 					|| forge_check_global_perm('approve_projects')
