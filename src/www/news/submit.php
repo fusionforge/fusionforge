@@ -91,34 +91,31 @@ if (session_loggedin()) {
 			}
 
 			/*
-				Insert the row into the db if it's a generic message
-				OR this person is an admin for the group involved
+			  create a new discussion forum without a default msg
+			  if one isn't already there
 			*/
-
-	   			/*
-	   				create a new discussion forum without a default msg
-	   				if one isn't already there
-	   			*/
-
-				db_begin();
-				$f=new Forum(group_get_object(forge_get_config('news_group')));
-				if (!$f->create(preg_replace('/[^_\.0-9a-z-]/','-', strtolower($summary)),$details,1,'',0,0)) {
-					db_rollback();
-					exit_error($f->getErrorMessage(),'news');
-				}
-	   			$new_id=$f->getID();
-				$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
+			
+			db_begin();
+			$g=group_get_object(forge_get_config('news_group'));
+			$f=new Forum($g);
+			if (!$f->create(preg_replace('/[^_\.0-9a-z-]/','-', strtolower($summary)),$details,1,'',0,0)) {
+				db_rollback();
+				exit_error($f->getErrorMessage(),'news');
+			}
+			$g->normalizeAllRoles();
+			$new_id=$f->getID();
+			$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
  VALUES ($1, $2, $3, $4, $5, $6, $7)';
-				$result=db_query_params($sql,
-					array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
-				if (!$result) {
-					db_rollback();
-					form_release_key(getStringFromRequest('form_key'));
-					$error_msg = _('ERROR doing insert');
-				} else {
-					db_commit();
-					$feedback = _('News Added.');
-	   			}
+			$result=db_query_params($sql,
+						array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
+			if (!$result) {
+				db_rollback();
+				form_release_key(getStringFromRequest('form_key'));
+				$error_msg = _('ERROR doing insert');
+			} else {
+				db_commit();
+				$feedback = _('News Added.');
+			}
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = _('ERROR - both subject and body are required');
