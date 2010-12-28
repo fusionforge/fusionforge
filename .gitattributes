@@ -1610,7 +1610,12 @@ src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/links/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
+src/plugins/gravatar/NAME -text
 src/plugins/gravatar/common/gravatarPlugin.class.php -text
+src/plugins/gravatar/packaging/control/223plugin-gravatar -text
+src/plugins/gravatar/packaging/control/223plugin-gravatar.shortdesc -text
+src/plugins/gravatar/packaging/dirs/plugin-gravatar -text
+src/plugins/gravatar/packaging/install/plugin-gravatar -text
 src/plugins/hudson/NAME -text
 src/plugins/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl

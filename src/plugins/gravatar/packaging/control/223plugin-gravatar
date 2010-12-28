@@ -1,0 +1,4 @@
+Package: @PACKAGE@-plugin-gravatar
+Architecture: all
+Depends: @OLDPACKAGE@-common, , @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, php5-cli, ${misc:Depends}
+Description: collaborative development tool - Gravatar plugin

@@ -319,6 +319,19 @@ Description: Globalsearch plugin for FusionForge
  declare a list of other FusionForge sites, and search for projects
  hosted on these forges from your own.
 
+Package: fusionforge-plugin-gravatar
+Architecture: all
+Depends: gforge-common, , gforge-db-postgresql | gforge-db, php5-cli, ${misc:Depends}
+Description: collaborative development tool - Gravatar plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains the gravatar plugin of FusionForge. It allows each
+ FusionForge user to have its gravatar icon displayed.
+
 Package: fusionforge-plugin-hudson
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}, libjs-scriptaculous
