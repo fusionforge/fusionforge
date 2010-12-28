@@ -33,7 +33,7 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 	}
 
 	function getTitle() {
-		return _("Lastest Documents in My Projects");
+		return _("5 Lastest Documents in My Projects");
 	}
 
 	function getContent() {
@@ -69,17 +69,37 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 
 				$df = new DocumentFactory($g);
 				$df->setLimit(5);
-				$df->setOrder(array('createdate','updatedate'));
+				$df->setOrder(array('updatedate','createdate'));
+				$df->setSort('DESC');
 				$df->getDocuments();
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject',$g->getID(),$hide_item_id,count($df->Documents),$hide_docmanproject);
 				$html_hdr = ($i ? '<tr class="boxitem"><td colspan="2">' : '').
-					$hide_url.'<a HREF="/docman/?group_id='.$g->getID().'">'.
-					$g->getPublicName().'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+					$hide_url.'<a href="/docman/?group_id='.$g->getID().'">'.
+					$g->getPublicName().'</a>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>';
 
 				$html = '';
-
-				$html_hdr .= '['.count($df->Documents).']</td></tr>';
+				if (!$hide_now) {
+					$keys = array_keys($df->Documents);
+					$j = 0;
+					foreach ($keys as $key) {
+						$j++;
+						$count = count($df->Documents[$key]);
+						for ($i=0; $i < $count; $i++) {
+							$doc =& $df->Documents[$key][$i];
+							$html .= '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
+							$html .= '<td>'.$doc->getFilename().'</td>';
+							if ( $doc->getUpdated() ) {
+								$html .= '<td>'.date(_('Y-m-d H:i'), $doc->getUpdated()).'</td>';
+							} else {
+								$html .= '<td>'.date(_('Y-m-d H:i'), $doc->getCreated()).'</td>';
+							}
+							$html .= '</tr>';
+							$j++;
+						}
+						$j--;
+					}
+				}
 
 				$html_my_projects .= $html_hdr.$html;
 			}
@@ -89,7 +109,7 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _("List the last 5 documents publish in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page.");
+		return _("List the last 5 documents publish in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page. The documents will be per directory ordered.");
 	}
 
 	function getCategory() {
