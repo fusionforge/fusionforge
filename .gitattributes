@@ -2085,8 +2085,11 @@ src/plugins/scmcvs/packaging/dirs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/docs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/install/plugin-scmcvs -text
 src/plugins/scmdarcs/NAME -text
+src/plugins/scmdarcs/bin/db-delete.pl -text
+src/plugins/scmdarcs/bin/db-upgrade.pl -text
 src/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 src/plugins/scmdarcs/common/scmdarcs-init.php -text
+src/plugins/scmdarcs/db/scmdarcs-init.sql -text
 src/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
 src/plugins/scmdarcs/etc/scmdarcs.ini -text
 src/plugins/scmdarcs/packaging/control/135plugin-scmdarcs -text
