@@ -1641,8 +1641,13 @@ src/plugins/globalsearch/packaging/install/plugin-globalsearch -text
 src/plugins/globalsearch/packaging/links/plugin-globalsearch -text
 src/plugins/globalsearch/www/edit_assoc_sites.php -text
 src/plugins/globalsearch/www/index.php -text
+src/plugins/gravatar/NAME -text
 src/plugins/gravatar/common/gravatarPlugin.class.php -text
 src/plugins/gravatar/etc/gravatar.ini -text
+src/plugins/gravatar/packaging/control/223plugin-gravatar -text
+src/plugins/gravatar/packaging/control/223plugin-gravatar.shortdesc -text
+src/plugins/gravatar/packaging/dirs/plugin-gravatar -text
+src/plugins/gravatar/packaging/install/plugin-gravatar -text
 src/plugins/hudson/NAME -text
 src/plugins/hudson/bin/db-delete.pl -text svneol=unset#text/x-perl
 src/plugins/hudson/bin/db-upgrade.pl -text svneol=unset#text/x-perl
@@ -2214,8 +2219,11 @@ src/plugins/scmcvs/packaging/dirs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/docs/plugin-scmcvs -text
 src/plugins/scmcvs/packaging/install/plugin-scmcvs -text
 src/plugins/scmdarcs/NAME -text
+src/plugins/scmdarcs/bin/db-delete.pl -text
+src/plugins/scmdarcs/bin/db-upgrade.pl -text
 src/plugins/scmdarcs/common/DarcsPlugin.class.php -text
 src/plugins/scmdarcs/common/scmdarcs-init.php -text
+src/plugins/scmdarcs/db/scmdarcs-init.sql -text
 src/plugins/scmdarcs/etc/plugins/scmdarcs/config.php -text
 src/plugins/scmdarcs/etc/scmdarcs.ini -text
 src/plugins/scmdarcs/packaging/control/135plugin-scmdarcs -text

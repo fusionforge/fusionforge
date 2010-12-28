@@ -55,7 +55,7 @@ class gravatarPlugin extends Plugin {
 
 			$url = 'http://www.gravatar.com/avatar/';
 			if (isset($_SERVER['HTTPS']))
-				$url = 'https://secure.gravatar.com/avatar';
+				$url = 'https://secure.gravatar.com/avatar/';
 
 			if ($size == 'l') 
 				$usize = '130';
