@@ -26,7 +26,7 @@ require_once('common/widget/Widget_MyBookmarks.class.php');
 require_once('common/widget/Widget_MyMonitoredForums.class.php');
 //require_once('common/widget/Widget_MyMonitoredFp.class.php');
 require_once('common/widget/Widget_MyLatestSvnCommits.class.php');
-require_once('common/widget/Widget_MyProjectsLatestDocuments.class.php');
+require_once('common/widget/Widget_MyProjectsLastDocuments.class.php');
 require_once('common/widget/Widget_MyArtifacts.class.php');
 //require_once('common/widget/Widget_MyBugs.class.php');
 //require_once('common/widget/Widget_MySrs.class.php');
@@ -178,8 +178,8 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 			case 'mymonitoreddocuments':
 				$o = new Widget_MyMonitoredDocuments();
 				break;
-			case 'myprojectslatestdocuments':
-				$o = new Widget_MyProjectsLatestDocuments();
+			case 'myprojectslastdocuments':
+				$o = new Widget_MyProjectsLastDocuments();
 				break;
 			case 'myartifacts':
 				$o = new Widget_MyArtifacts();
@@ -279,7 +279,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks', 
 						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mybugs', //'mywikipage' //not yet
 						'mytasks', 'mysrs', 'mylatestsvncommits', 'mytwitterfollow',
-						'mysystemevent', 'myrss', 'mymonitoreddocuments', 'myprojectslatestdocuments',
+						'mysystemevent', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_GROUP:

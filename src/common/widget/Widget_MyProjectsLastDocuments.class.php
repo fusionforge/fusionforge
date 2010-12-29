@@ -24,17 +24,17 @@ require_once('common/docman/DocumentFactory.class.php');
 require_once('common/docman/DocumentGroup.class.php');
 
 /**
-* Widget_MyProjectsLatestDocuments
+* Widget_MyProjectsLastDocuments
 * 
 * PROJECT LIST
 */
-class Widget_MyProjectsLatestDocuments extends Widget {
-	function Widget_MyProjectsLatestDocuments() {
-		$this->Widget('myprojectslatestdocuments');
+class Widget_MyProjectsLastDocuments extends Widget {
+	function Widget_MyProjectsLastDocuments() {
+		$this->Widget('myprojectslastdocuments');
 	}
 
 	function getTitle() {
-		return _("5 Lastest Documents in My Projects");
+		return _("The 5 Last Documents in My Projects");
 	}
 
 	function getContent() {
@@ -83,9 +83,7 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 				if (!$hide_now) {
 					$keys = array_keys($df->Documents);
 					$j = 0;
-					if (count($keys)) {
-						$html .= '<tr><td>&nbsp;</td><td>'._('Filename').'</td><td>'._('Author'). '</td><td>'._('Last time'). '</td></tr>';
-					} else {
+					if (!count($keys)) {
 						$html .= '<tr><td colspan="4"><div class="warning">'._('No documents').'</div></td></tr>';
 					}
 					foreach ($keys as $key) {
