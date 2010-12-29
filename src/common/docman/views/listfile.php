@@ -116,7 +116,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 		}
 		echo '<td><a href="'.$docurl.'" class="docman-viewfile" title="'._('View this document').'" >';
-		getFileTypeImage($d->getFileType());
+		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 		echo '</a></td>';
 		echo '<td>';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {

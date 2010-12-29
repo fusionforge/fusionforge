@@ -29,64 +29,6 @@
  * tooling library
  */
 
-function getFileTypeImage($filetype) {
-	switch ($filetype) {
-		case "image/png":
-		case "image/jpeg":
-		case "image/gif":
-		case "image/tiff":
-		case "image/vnd.microsoft.icon":
-		case "image/svg+xml": {
-			$image = 'docman/file_type_image.png';
-			break;
-		}
-		case "application/pdf": {
-			$image = 'docman/file_type_pdf.png';
-			break;
-		}
-		case "text/html":
-		case "URL": {
-			$image = 'docman/file_type_html.png';
-			break;
-		}
-		case "text/plain":
-		case "text/x-php":
-		case "application/xml":
-		case "text/x-c": {
-			$image = 'docman/file_type_plain.png';
-			break;
-		}
-		case "application/msword":
-		case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-		case "application/vnd.oasis.opendocument.text": {
-			$image = 'docman/file_type_writer.png';
-			break;
-		}
-		case "application/vnd.ms-excel":
-		case "application/vnd.oasis.opendocument.spreadsheet":
-		case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
-			$image = 'docman/file_type_spreadsheet.png';
-			break;
-		}
-		case "application/vnd.oasis.opendocument.presentation":
-		case "application/vnd.ms-powerpoint":
-		case "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
-			$image = 'docman/file_type_presentation.png';
-			break;
-		}
-		case "application/zip":
-		case "application/x-tar":
-		case "application/x-rpm": {
-			$image = 'docman/file_type_archive.png';
-			break;
-		}
-		default: {
-			$image = 'docman/file_type_unknown.png';
-		}
-	}
-	echo html_image($image, '22', '22', array('alt'=>$filetype));
-}
-
 function getNameDocGroup($id, $group) {
 	$group_object = group_get_object($group);
 	$res = db_query_params('SELECT groupname FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
@@ -101,8 +43,8 @@ function getNameDocGroup($id, $group) {
 
 function getStateDocGroup($id, $group) {
 	$group_object = group_get_object($group);
-	$res = db_query_params ('SELECT stateid FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-				array ($id, $group));
+	$res = db_query_params('SELECT stateid FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
+				array($id, $group));
 	if (!$res || db_numrows($res) < 1) {
 		$group_object->setError('DocumentGroup:: '. _('Invalid DocumentGroup ID'));
 		return false;
@@ -112,8 +54,8 @@ function getStateDocGroup($id, $group) {
 }
 
 function doc_get_state_box($checkedval = 'xzxz') {
-	$res_states=db_query_params ('select * from doc_states', array());
-	echo html_build_select_box ($res_states, 'stateid', $checkedval, false);
+	$res_states = db_query_params('select * from doc_states', array());
+	echo html_build_select_box($res_states, 'stateid', $checkedval, false);
 }
 
 /**

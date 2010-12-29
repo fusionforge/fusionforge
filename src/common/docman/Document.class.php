@@ -645,6 +645,70 @@ class Document extends Error {
 	}
 
 	/**
+	 * getFileTypeImage - return the file image for icon
+	 *
+	 * @return	string	the file image name
+	 * @access	public
+	 */
+	function getFileTypeImage() {
+		switch ($this->getFileType()) {
+			case "image/png":
+			case "image/jpeg":
+			case "image/gif":
+			case "image/tiff":
+			case "image/vnd.microsoft.icon":
+			case "image/svg+xml": {
+				$image = 'docman/file_type_image.png';
+				break;
+			}
+			case "application/pdf": {
+				$image = 'docman/file_type_pdf.png';
+				break;
+			}
+			case "text/html":
+			case "URL": {
+				$image = 'docman/file_type_html.png';
+				break;
+			}
+			case "text/plain":
+			case "text/x-php":
+			case "application/xml":
+			case "text/x-c": {
+				$image = 'docman/file_type_plain.png';
+				break;
+			}
+			case "application/msword":
+			case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+			case "application/vnd.oasis.opendocument.text": {
+				$image = 'docman/file_type_writer.png';
+				break;
+			}
+			case "application/vnd.ms-excel":
+			case "application/vnd.oasis.opendocument.spreadsheet":
+			case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+				$image = 'docman/file_type_spreadsheet.png';
+				break;
+			}
+			case "application/vnd.oasis.opendocument.presentation":
+			case "application/vnd.ms-powerpoint":
+			case "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+				$image = 'docman/file_type_presentation.png';
+				break;
+			}
+			case "application/zip":
+			case "application/x-tar":
+			case "application/x-rpm": {
+				$image = 'docman/file_type_archive.png';
+				break;
+			}
+			default: {
+				$image = 'docman/file_type_unknown.png';
+			}
+		}
+		return $image;
+	}
+
+	/**
 	 * update - use this function to update an existing entry in the database.
 	 *
 	 * @param	string	The filename of this document. Can be a URL.
