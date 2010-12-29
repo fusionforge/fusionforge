@@ -21,6 +21,7 @@
 
 require_once('Widget.class.php');
 require_once('common/docman/DocumentFactory.class.php');
+require_once('common/docman/DocumentGroup.class.php');
 
 /**
 * Widget_MyProjectsLatestDocuments
@@ -74,7 +75,7 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 				$df->getDocuments();
 
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('docmanproject',$g->getID(),$hide_item_id,count($df->Documents),$hide_docmanproject);
-				$html_hdr = ($i ? '<tr class="boxitem"><td colspan="2">' : '').
+				$html_hdr = ($i ? '<tr class="boxitem"><td colspan="4">' : '').
 					$hide_url.'<a href="/docman/?group_id='.$g->getID().'">'.
 					$g->getPublicName().'</a>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>';
 
@@ -82,13 +83,31 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 				if (!$hide_now) {
 					$keys = array_keys($df->Documents);
 					$j = 0;
+					if (count($keys)) {
+						$html .= '<tr><td>&nbsp;</td><td>'._('Filename').'</td><td>'._('Author'). '</td><td>'._('Last time'). '</td></tr>';
+					} else {
+						$html .= '<tr><td colspan="4"><div class="warning">'._('No documents').'</div></td></tr>';
+					}
 					foreach ($keys as $key) {
+						$dg = new DocumentGroup($g,$key);
+						$html .= '<tr><td colspan="4"><a href="'.util_make_url('/docman/?group_id='.$g->getID().'&view=listfile&dirid='.$key).'">'.$dg->getPath().'</a></td></tr>';
 						$j++;
 						$count = count($df->Documents[$key]);
 						for ($i=0; $i < $count; $i++) {
 							$doc =& $df->Documents[$key][$i];
 							$html .= '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
-							$html .= '<td>'.$doc->getFilename().'</td>';
+							$html .= '<td>&nbsp;</td>';
+							switch ($doc->getFileType()) {
+								case "URL": {
+									$docurl = $doc->getFileName();
+									break;
+								}
+								default: {
+									$docurl = util_make_url('/docman/view.php/'.$g->getID().'/'.$doc->getID().'/'.urlencode($doc->getFileName()));
+								}
+							}
+							$html .= '<td><a href="'.$docurl.'">'.$doc->getFilename().'</a></td>';
+							$html .= '<td>'.make_user_link($doc->getCreatorUserName(), $doc->getCreatorRealName()).'</td>';
 							if ( $doc->getUpdated() ) {
 								$html .= '<td>'.date(_('Y-m-d H:i'), $doc->getUpdated()).'</td>';
 							} else {
@@ -109,7 +128,7 @@ class Widget_MyProjectsLatestDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _("List the last 5 documents publish in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page. The documents will be per directory ordered.");
+		return _("List the last 5 documents (with filename, author and last modification time) published in projects you belong to. Selecting any of these projects brings you to the corresponding Project Document Manager page. The documents will be per directory ordered. Selecting any of directory links will brings you to the corresponding Project Document Manager Listing Directory page");
 	}
 
 	function getCategory() {
