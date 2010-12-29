@@ -30,7 +30,7 @@ require_once('common/docman/DocumentGroup.class.php');
 */
 class Widget_MyProjectsLatestDocuments extends Widget {
 	function Widget_MyProjectsLatestDocuments() {
-		$this->Widget('myprojectslastestdocuments');
+		$this->Widget('myprojectslatestdocuments');
 	}
 
 	function getTitle() {
