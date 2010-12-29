@@ -37,53 +37,54 @@ function getFileTypeImage($filetype) {
 		case "image/tiff":
 		case "image/vnd.microsoft.icon":
 		case "image/svg+xml": {
-			echo html_image('docman/file_type_image.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_image.png';
 			break;
 		}
 		case "application/pdf": {
-			echo html_image('docman/file_type_pdf.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_pdf.png';
 			break;
 		}
 		case "text/html":
 		case "URL": {
-			echo html_image('docman/file_type_html.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_html.png';
 			break;
 		}
 		case "text/plain":
 		case "text/x-php":
 		case "application/xml":
 		case "text/x-c": {
-			echo html_image('docman/file_type_plain.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_plain.png';
 			break;
 		}
 		case "application/msword":
 		case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
 		case "application/vnd.oasis.opendocument.text": {
-			echo html_image('docman/file_type_writer.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_writer.png';
 			break;
 		}
 		case "application/vnd.ms-excel":
 		case "application/vnd.oasis.opendocument.spreadsheet":
 		case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
-			echo html_image('docman/file_type_spreadsheet.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_spreadsheet.png';
 			break;
 		}
 		case "application/vnd.oasis.opendocument.presentation":
 		case "application/vnd.ms-powerpoint":
 		case "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
-			echo html_image('docman/file_type_presentation.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_presentation.png';
 			break;
 		}
 		case "application/zip":
 		case "application/x-tar":
 		case "application/x-rpm": {
-			echo html_image('docman/file_type_archive.png', '22', '22', array('alt'=>$filetype));
+			$image = 'docman/file_type_archive.png';
 			break;
 		}
 		default: {
-			echo html_image('docman/file_type_unknown.png', '22', '22' , array('alt'=>$filetype));
+			$image = 'docman/file_type_unknown.png';
 		}
 	}
+	echo html_image($image, '22', '22', array('alt'=>$filetype));
 }
 
 function getNameDocGroup($id, $group) {
