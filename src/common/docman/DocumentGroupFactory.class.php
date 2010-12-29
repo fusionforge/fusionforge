@@ -72,7 +72,7 @@ class DocumentGroupFactory extends Error {
 	/**
 	 * getNested - Return an array of DocumentGroup objects arranged for nested views.
 	 *
-	 * @param	int	The stateid of DocumentGroup.
+	 * @param	int	The stateid of DocumentGroup : default is public (1).
 	 * @return	array	The array of DocumentGroup.
 	 */
 	function &getNested($stateid = 1) {
@@ -105,7 +105,7 @@ class DocumentGroupFactory extends Error {
 	/**
 	 * getDocumentGroups - Return an array of DocumentGroup objects.
 	 *
-	 * @param	int	The stateid of DocumentGroups
+	 * @param	int	The stateid of DocumentGroups : default is public (1).
 	 * @return	array	The array of DocumentGroup.
 	 */
 	function &getDocumentGroups($stateid = 1) {

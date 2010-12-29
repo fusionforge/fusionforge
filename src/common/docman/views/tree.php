@@ -63,8 +63,8 @@ echo '<div id="documenttree" style="height:100%">';
 
 	var treeIndex = ctDraw('myMenuID', myMenu, ctThemeXP1, 'ThemeXP', 0, 1);
 	ctExposeTreeIndex(treeIndex, <?php echo $idExposeTreeIndex ?>);
-	var openItem = ctGetSelectedItem(treeIndex)
-	ctOpenFolder(openItem)
+	var openItem = ctGetSelectedItem(treeIndex);
+	ctOpenFolder(openItem);
 </script>
 
 <?php

@@ -323,7 +323,7 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 * getFromStorage - Retrieve documents from storage API
+	 * __getFromStorage - Retrieve documents from storage API
 	 *
 	 * @return	boolean	success or not
 	 * @access	private
@@ -345,16 +345,13 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 * getFromDB - Retrieve documents from database.
+	 * __getFromDB - Retrieve documents from database.
 	 * you can limit query to speed up: warning, once $this->documents is retrieve, it's cached.
 	 *
-	 * @param	int	limit of documents return: default: 0 meaning : no limits
-	 * @param	array	list of columns to order the query: default: title
-	 * @param	boolean	sort : DESC(false) | ASC (true) : default ASC
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
-	private function __getFromDB($limit = 0, $order = array('title'), $sort = true) {
+	private function __getFromDB() {
 		$this->Documents = array();
 		$qpa = db_construct_qpa();
 		$qpa = db_construct_qpa($qpa, 'SELECT * FROM docdata_vw WHERE group_id = $1 ',
