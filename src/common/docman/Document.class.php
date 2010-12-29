@@ -404,8 +404,8 @@ class Document extends Error {
 		//
 		//	Because this could be a large string, we only fetch if we actually need it
 		//
-		$res = db_query_params('SELECT data FROM doc_data WHERE docid=$1',array($this->getID()));
-		return base64_decode(db_result($res,0,'data'));
+		$res = db_query_params('SELECT data FROM doc_data WHERE docid=$1', array($this->getID()));
+		return base64_decode(db_result($res, 0, 'data'));
 	}
 
 	/**
