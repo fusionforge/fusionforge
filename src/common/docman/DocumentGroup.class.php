@@ -50,7 +50,7 @@ class DocumentGroup extends Error {
 	 * Use this constructor if you are modifying an existing doc_group.
 	 *
 	 * @param	object	Group object.
-	 * @param	array	(all fields from doc_groups) OR doc_group from database.
+	 * @param	array	(all fields from doc_groups) OR doc_group id from database.
 	 * @return	boolean	success.
 	 * @access	public
 	 */
@@ -84,6 +84,7 @@ class DocumentGroup extends Error {
 				}
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -297,10 +298,11 @@ class DocumentGroup extends Error {
 	 * update - update a DocumentGroup.
 	 *
 	 * @param	string	Name of the category.
+	 * @param	int	the doc_group id of the parent. default = 0
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
-	function update($name, $parent_doc_group) {
+	function update($name, $parent_doc_group = 0) {
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -321,8 +323,6 @@ class DocumentGroup extends Error {
 				$this->setError(_('DocumentGroup: Invalid Document Directory parent ID'));
 				return false;
 			}
-		} else {
-			$parent_doc_group = 0;
 		}
 
 		$res=db_query_params('SELECT * FROM doc_groups WHERE groupname=$1 AND parent_doc_group=$2 AND group_id=$3',
@@ -427,6 +427,22 @@ class DocumentGroup extends Error {
 			}
 		}
 		return false;
+	}
+
+
+	/**
+	 * getPath - return the complete_path
+	 *
+	 * @return	string	the complete_path
+	 * @access	public
+	 */
+	function getPath() {
+		$returnPath = '';
+		if ($this->getParentID()) {
+			$parentDg = new DocumentGroup($this->Group,$this->getParentID());
+			$returnPath = $parentDg->getPath();
+		}
+		return $returnPath.'/'.$this->getName();
 	}
 
 	/**
