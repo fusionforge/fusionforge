@@ -25,7 +25,66 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* tooling library */
+/**
+ * tooling library
+ */
+
+function getFileTypeImage($filetype) {
+	switch ($filetype) {
+		case "image/png":
+		case "image/jpeg":
+		case "image/gif":
+		case "image/tiff":
+		case "image/vnd.microsoft.icon":
+		case "image/svg+xml": {
+			echo html_image('docman/file_type_image.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "application/pdf": {
+			echo html_image('docman/file_type_pdf.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "text/html":
+		case "URL": {
+			echo html_image('docman/file_type_html.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "text/plain":
+		case "text/x-php":
+		case "application/xml":
+		case "text/x-c": {
+			echo html_image('docman/file_type_plain.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "application/msword":
+		case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+		case "application/vnd.oasis.opendocument.text": {
+			echo html_image('docman/file_type_writer.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "application/vnd.ms-excel":
+		case "application/vnd.oasis.opendocument.spreadsheet":
+		case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+			echo html_image('docman/file_type_spreadsheet.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "application/vnd.oasis.opendocument.presentation":
+		case "application/vnd.ms-powerpoint":
+		case "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+			echo html_image('docman/file_type_presentation.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		case "application/zip":
+		case "application/x-tar":
+		case "application/x-rpm": {
+			echo html_image('docman/file_type_archive.png', '22', '22', array('alt'=>$filetype));
+			break;
+		}
+		default: {
+			echo html_image('docman/file_type_unknown.png', '22', '22' , array('alt'=>$filetype));
+		}
+	}
+}
 
 function getNameDocGroup($id, $group) {
 	$group_object = group_get_object($group);
@@ -56,8 +115,10 @@ function doc_get_state_box($checkedval = 'xzxz') {
 	echo html_build_select_box ($res_states, 'stateid', $checkedval, false);
 }
 
-/*
+/**
  * docman_recursive_display - Recursive function to show the documents inside the groups tree : javascript enabled function
+ *
+ * @param	int	doc_group_id
  */
 function docman_recursive_display($docgroup) {
 	global $nested_groups, $group_id;
@@ -79,7 +140,7 @@ function docman_recursive_display($docgroup) {
 	}
 }
 
-/*
+/**
  * docman_fill_zip - Recursive function to add docgroup and documents inside zip for backup
  *
  * @param	$object	zip
@@ -87,6 +148,8 @@ function docman_recursive_display($docgroup) {
  * @param	$object	documentfactory
  * @param	$int	documentgroup id : default value = 0
  * @param	$string	documentgroup parent name : default value = empty
+ * @return	boolean	success or not
+ * @access	public
  */
 function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0, $parent_docname = '') {
 	if (is_array(@$nested_groups[$docgroup])) {
@@ -102,7 +165,9 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 						return false;
 				}
 			}
-			docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), $parent_docname.'/'.$dg->getName());
+			if (!docman_fill_zip($zip, $nested_groups, $document_factory, $dg->getID(), $parent_docname.'/'.$dg->getName())) {
+				return false;
+			}
 		}
 	}
 	return true;
@@ -136,7 +201,7 @@ function docman_display_trash(&$document_factory, $parent_group = 0) {
 	echo "</ul>";
 }
 
-/*
+/**
  * docman_display_documents - Recursive function to show the documents inside the groups tree
  * @todo : remove the css code
  * @todo : use the javascript controler
@@ -210,7 +275,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 	echo "</ul>";
 }
 
-/*
+/**
  * @todo - remove the css code
  */
 function document_editdata(&$document) {
