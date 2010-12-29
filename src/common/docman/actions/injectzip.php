@@ -40,12 +40,12 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 	}
 } else {
-	$dg = new DocumentGroup($g);
+	$dg = new DocumentGroup($g,$doc_group);
 	
 	if ($dg->isError())
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-	if (!$dg->injectArchive($doc_group, $uploaded_zip)) {
+	if (!$dg->injectArchive($uploaded_zip)) {
 		$return_msg = $dg->getErrorMessage();
 		$return_url = '/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg);
 	} else {
