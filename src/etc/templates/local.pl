@@ -18,6 +18,8 @@ $sys_news_group = qx!$fgcpath/forge_get_config news_group!;
 chomp $sys_news_group ;
 $sys_dbhost = qx!$fgcpath/forge_get_config database_host!;
 chomp $sys_dbhost ;
+$sys_dbport = qx!$fgcpath/forge_get_config database_port!;
+chomp $sys_dbport ;
 $sys_dbname = qx!$fgcpath/forge_get_config database_name!;
 chomp $sys_dbname ;
 $sys_dbuser = qx!$fgcpath/forge_get_config database_user!;

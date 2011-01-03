@@ -15,7 +15,14 @@ require $config_file;
 # Database Connect Functions
 ##############################
 sub db_connect ( ) {
-    $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd") ;
+    my $str = "DBI:Pg:dbname=$sys_dbname" ;
+    if ($sys_dbhost ne '') {
+	$str .= ";host=$sys_dbhost" ;
+    }
+    if ($sys_dbport ne '') {
+	$str .= ";port=$sys_dbport" ;
+    }
+    $dbh ||= DBI->connect($str,"$sys_dbuser","$sys_dbpasswd") ;
     if (! $dbh) {
 	die "Error while connecting to database: $!" ;
     }
