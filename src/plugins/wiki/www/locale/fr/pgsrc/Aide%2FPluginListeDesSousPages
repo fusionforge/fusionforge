@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginListeDesSousPages 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginListeDesSousPages 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginListeDesSousPages;
   flags="";
@@ -35,38 +35,38 @@ un peu instable
 
 ===Arguments
 
-__pagename__:
+**pagename**:
   Un nom de page ou le page courante lorsque le nom est vide : Par défaut : ""
-__quiet__:
+**quiet**:
   N'affiche pas d'en-tête. Par défaut : false
-__sortby__:
+**sortby**:
   Trier par + (ASC) ou - (DESC) et sur une colonne. Multiples colonnes comme 
   sortby="-hits,-mtime" pas encore implémenté. colonnes acceptées : 
   ~[+|-]pagename, ~[+|-]mtime, ~[+|-]hits. Par défaut : "pagename"
-__maxpages__:
+**maxpages**:
   Nombre maximum de pages à inclure ou toutes lorsque ce n'est précisé. Par 
   défaut : false
-__sections__:
+**sections**:
   Nombre maximum de parties par pages à inclure toutes lorsque ce n'est précisé.
   Par défaut : false
-__section__:
+**section**:
   Inclure cette section par page seulement lorsque c'est défini. Par défaut : false
-__sectionhead__:
+**sectionhead**:
   Montre l'en-tête lorsqu'on inclus une partie nommée. Par défaut : false
-__smalltitle__:
+**smalltitle**:
   Si c'est validé, cache le titre d'importation, affiche seulement un petit lien
   au début de la page. Par défaut : false
-__words__:
+**words**:
   Nombre maximum de mots par pages à inclure. Par défaut : false
-__lines__:
+**lines**:
   Nombre maximum de lignes par pages à inclure. Par défaut : false
-__bytes__:
+**bytes**:
   Nombre maximum d'octets par pages à inclure. Par défaut : false
 
 ===Arguments obsolètes
-__pages__:
+**pages**:
   obsolète, renommé en maxpages
-__sort__:
+**sort**:
   'asc' ou 'desc'. Obsolète : utiliser "+" ou "-" avant le nom de la 
   colonne avec sortby.
 

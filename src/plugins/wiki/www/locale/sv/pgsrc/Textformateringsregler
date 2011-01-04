@@ -1,6 +1,6 @@
 Date: Fri, 10 Sep 2010 13:48:48 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Textformateringsregler 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Textformateringsregler 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Textformateringsregler;
   flags=PAGE_LOCKED;
@@ -9,12 +9,12 @@ Content-Transfer-Encoding: binary
 
 ! Översikt
 [Textformateringsregler]%%%
-__Markering:__ '____' för ''lutande'', _''''_ för __fet__, '____'_''''_ för ''__både och__''.%%%
-__Listor:__ * för punktlistor, # för numrerade listor, ''__;__ term __:__ definition'' för definitionslistor.%%%
-__Referenser:__ !BindIhopOrdMedStoraBokstäver eller använd hakar för en [[länk] eller URL [[!http://cool.wiki.int/].%%%
-__''Footnotes'':__ Använd [[1],[[2],[[3],...%%%
-__''och Redigera Länkar'':__ Undvik länkning med "!": !!SkapaEjHyperlänk, namnge länkar med [[[[text | URL].%%%
-__Blandat:__ "!", "!!", "!!!" skapar rubriker, "%''''%%" skapar radbrytning, "-''''---" skapar en horisontell linje.%%%
+**Markering:** '****' för ''lutande'', _''''_ för **fet**, '****'_''''_ för ''**både och**''.%%%
+**Listor:** * för punktlistor, # för numrerade listor, ''**;** term **:** definition'' för definitionslistor.%%%
+**Referenser:** !BindIhopOrdMedStoraBokstäver eller använd hakar för en [[länk] eller URL [[!http://cool.wiki.int/].%%%
+**''Footnotes'':** Använd [[1],[[2],[[3],...%%%
+**''och Redigera Länkar'':** Undvik länkning med "!": !!SkapaEjHyperlänk, namnge länkar med [[[[text | URL].%%%
+**Blandat:** "!", "!!", "!!!" skapar rubriker, "%''''%%" skapar radbrytning, "-''''---" skapar en horisontell linje.%%%
 
 ----
 ! Paragrafer
@@ -59,8 +59,8 @@ Detta är inte det
 ! Markering
 
 * Använd dubbla apostrofer ('') för vanlig betoning (vanligtvis ''lutande stil'')
-* Använd dubbla understreck (__) för stark betoning (vanligtvis __fet stil__)
-* Blanda dem om du vill: __''fet lutande stil''__
+* Använd dubbla understreck (**) för stark betoning (vanligtvis **fet stil**)
+* Blanda dem om du vill: **''fet lutande stil''**
 * ''Markering'' kan användas ''flera'' gånger på en rad, men ''kan inte'' användas över radgränser:
 
 ''detta
@@ -78,18 +78,18 @@ kommer inte att fungera''
 
 ! Tables
 
-* Simple tables are available.  A table row is introduced by a __|__ in the first column.  It is best described by example:
+* Simple tables are available.  A table row is introduced by a **|** in the first column.  It is best described by example:
       ||  _''''_Name_''''_               |v _''''_Cost_''''_   |v _''''_Notes_''''_
       | _''''_First_''''_   | _''''_Last_''''_
       |> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
       |> Marco      |< Polo      | Cheaper     |< Not available
 ;: will generate
-||  __Name__               |v __Cost__   |v __Notes__
-| __First__   | __Last__
+||  **Name**               |v **Cost**   |v **Notes**
+| **First**   | **Last**
 |> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
 |> Marco      |< Polo      | Cheaper     |< Not available
 
-;: Note that multiple __|__'s lead to spanned columns, and __v__'s can be used to span rows.  A __>__ generates a right justified column, __<__ a left justified column and __^__ a centered column (which is the default.)
+;: Note that multiple **|**'s lead to spanned columns, and **v**'s can be used to span rows.  A **>** generates a right justified column, **<** a left justified column and **^** a centered column (which is the default.)
 
 ! HTML
 

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AdministrationDePhpWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: AdministrationDePhpWiki 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AdministrationDePhpWiki;
   flags=PAGE_LOCKED;
@@ -65,7 +65,7 @@ dans un état virginal en chargeant sa version par défaut depuis pgsrc:
 
 Ces liens mènent à des fichiers compressés au format ZIP, générés à la volée et contenant toutes les pages de votre Wiki. Le fichier zip sera téléchargé sur votre ordinateur.
 
-Cette __[Sauvegarde ZIP | phpwiki:?action=zip]__ ne contient que la dernière version de chaque page, tandis que cet __[Archivage ZIP | phpwiki:?action=zip&include=all]__ contient toutes les versions archivées.
+Cette **[Sauvegarde ZIP | phpwiki:?action=zip]** ne contient que la dernière version de chaque page, tandis que cet **[Archivage ZIP | phpwiki:?action=zip&include=all]** contient toutes les versions archivées.
 
 Si le PhpWiki est configuré pour le permettre, n'importe qui peut télécharger un fichier zip.
 
@@ -111,11 +111,11 @@ Actuellement, les pages sont stockées, une par fichier, sous forme de messages 
 
 === Anciens formats
 
-__Fichiers sérialisés__
+**Fichiers sérialisés**
 
 La commande de sauvegarde dans un répertoire récupérait les pages en tant que chaînes php ''serialized()''. Cela rendait les fichiers très difficiles à lire pour les humains, et presque impossibles à éditer.
 
-__Fichiers simples__
+**Fichiers simples**
 
 Avant cela, le texte des pages était simplement enregistré dans un fichier -- ce qui signifie que toutes les métadonnées des pages étaient perdues. Notez que lorsqu'on charge des ''fichiers simples'', le nom de la page est déduit du nom du fichier.
 
@@ -129,7 +129,7 @@ Les fonctions de téléchargement et de chargement reconnaîtront automatiquemen
 
 Ceci génèrera un répertoire de pages statiques convenables pour une distribution sur disque où des serveurs web ne sont pas disponible. Les liens variés pour les fonctions d'édition et de navigation sont enlevés de ces pages.
 
-La collection de fichiers XHTML peut aussi être téléchargée comme une __[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]__.
+La collection de fichiers XHTML peut aussi être téléchargée comme une **[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]**.
 
 ----
 

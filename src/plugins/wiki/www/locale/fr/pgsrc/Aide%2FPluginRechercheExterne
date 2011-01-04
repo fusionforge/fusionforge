@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginRechercheExterne 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginRechercheExterne 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginRechercheExterne;
   flags=PAGE_LOCKED;
@@ -24,21 +24,21 @@ InterWiki~s ou autres sites Internet.
 
 
 === Arguments
-__url__:
+**url**:
   Spécifie un wiki depuis la CarteInterWiki ou une url. N'importe quel
   texte saisi par l'utilisateur sera ajouté à l'url de recherche. La 
-  chaîne '__=%s=__' peut être utilisée pour insérer une requête de 
+  chaîne '**=%s=**' peut être utilisée pour insérer une requête de 
   recherche dans l'url plutôt que de l'ajouter.
 
-__name__:
+**name**:
   Texte à afficher dans le bouton de validation. Pour les sites 
   InterWiki, c'est le nom wiki par défaut. Pour les autres url, 
   c'est le texte "External Search" par défaut.
 
-__formsize__:
+**formsize**:
   Spécifie la taille de la zone de saisie (30 caractères par défaut)
 
-__debug__:
+**debug**:
   Ne redirige pas réellement vers le site externe mais affiche juste 
   l'url vers lequel il devrait l'être.
 

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Tue,  4 Jan 2011 11:57:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: FindPage 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: FindPage 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=FindPage;
   flags=PAGE_LOCKED;
@@ -29,4 +29,4 @@ Content-Transfer-Encoding: binary
 ==== Tips
 使用空白分隔每個字. 所有的字都必須符合.
 %%%在標題搜索或全文檢索時,要排除某個字的話,在該字的前面加上 '-'.
-%%%Example: 'wiki text -php' 表示搜索所有頁面包含 'wiki' __和__ 'text', 但 __不__ 包含 'php'.
+%%%Example: 'wiki text -php' 表示搜索所有頁面包含 'wiki' **和** 'text', 但 **不** 包含 'php'.

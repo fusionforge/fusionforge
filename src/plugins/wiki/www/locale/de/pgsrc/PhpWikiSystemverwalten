@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Tue,  4 Jan 2011 11:59:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiSystemverwalten 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: PhpWikiSystemverwalten 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiSystemverwalten;
   flags=PAGE_LOCKED;
@@ -77,9 +77,9 @@ Diese Links erzeugen automatisch ZIP Archive, mit allen Seiten in
 deinem Wiki. Die ZIP Datei wird auf deinen lokalen Computer
 heruntergeladen, und muß dort gespeichert werden.
 
-Diese __[ kleine ZIP Datei | phpwiki:?action=zip]__ enthält nur die
-aktuellste Versionen aller Seiten, und diese __[ große ZIP Datei |
-phpwiki:?action=zip&include=all]__ enthält zusätzlich alle
+Diese **[ kleine ZIP Datei | phpwiki:?action=zip]** enthält nur die
+aktuellste Versionen aller Seiten, und diese **[ große ZIP Datei |
+phpwiki:?action=zip&include=all]** enthält zusätzlich alle
 archivierten, vorigen Versionen.%%%
 (Wenn dein PhpWiki insoweit konfiguriert ist, darf jeder die ZIP Datei herunterladen.)
 
@@ -150,13 +150,13 @@ Datenbank. (Datum, Autor, ...)
 
 ==== Alte Daten-Formate
 
-__Serialisierte Dateien__
+**Serialisierte Dateien**
 
   Der alte Dump-To-Directory Befehl schrieb alle Seiten als PHP
   _serialized()_ Zeichenketten hinaus, die erstens unleserlich sind,
   und zweitens schwer bis gar nicht zu editieren sind.
 
-__Textdateien__
+**Textdateien**
 
   Davor wurde der Seiteninhalt als einfache Textdatei gespeichert,
   d.h. alle zusätzlichen Daten (Meta-Daten) gingen verloren. (Datum,
@@ -177,7 +177,7 @@ Erzeugt ein Verzeichnis aller Wiki Dateien als statische XHTML Dateien, die
 auch ohne Webserver und Datenbank betrachtbar sind.
 
   Das XHTML-Verzeichnis kann auch heruntergeladen werden als eine
-  __[XHTML ZIP Datei | phpwiki:?action=ziphtml]__.
+  **[XHTML ZIP Datei | phpwiki:?action=ziphtml]**.
 
 ----
 

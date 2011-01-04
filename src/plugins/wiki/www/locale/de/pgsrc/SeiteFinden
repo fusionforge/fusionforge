@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Tue,  4 Jan 2011 11:59:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: SeiteFinden 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: SeiteFinden 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=SeiteFinden;
   flags=PAGE_LOCKED;
@@ -41,4 +41,4 @@ Wörter mit Leerzeichen trennen. Alle Wörter müssen enthalten sein.
 %%%Um Seiten zu finden, in denen ein Wort nicht vorkommt, ein '-'
 davor hängen.
 %%%Beispiel: 'wiki text -php' sucht nach Seiten mit dem Wörtern
-'wiki' __und__ 'text', die das Wort 'php' __nicht__ enthalten.
+'wiki' **und** 'text', die das Wort 'php' **nicht** enthalten.

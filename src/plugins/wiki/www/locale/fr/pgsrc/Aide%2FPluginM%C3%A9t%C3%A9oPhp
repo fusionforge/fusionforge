@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginM%C3%A9t%C3%A9oPhp 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginM%C3%A9t%C3%A9oPhp 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginM%C3%A9t%C3%A9oPhp;
   flags="";
@@ -18,13 +18,13 @@ dans le monde. Cela ressemble à ça :
 
 ===Arguments 
 
-__menu__:
+**menu**:
   Mettre ceci sur =true= pour que le plugin affiche un menu après le 
   rapport. L'utilisateur pourra sélectionner un pays à partir de ce menu
   et, après ça, un aéroport et une langue. La valeur par défaut est 
   <tt>false</tt>.  
 
-__icao__:
+**icao**:
   Utilisez ceci pour pré-sélectionner un aéroport spécifique à la place
   de l'aéroport par défaut qui est <tt>EKAH</tt>. Si vous voulez que
   l'utilisateur puisse changer la station en utilisant le menu alors
@@ -40,7 +40,7 @@ __icao__:
   alors rien ne se produira lorsque l'utilisateur sélectionnera une autre 
   station depuis la liste.
  
-__cc__:
+**cc**:
   Spécifie le code du pays (country code). Vous pouvez l'utiliser si vous 
   souhaitez pré-sélectionner un pays différent de celui spécifié dans le 
   ICAO. Ainsi :  
@@ -50,21 +50,21 @@ __cc__:
   affichera la météo courante à NASA Shuttle Facility, États-Unis
   (<tt>KTTS</tt>) et en même temps donnera à l'utilisateur une liste des 
   stations du Royaume Uni. Comme l'exemple le montre vous devriez utiliser
-  <tt>cc||=XX</tt> en le combinant avec __menu__ mis sur <tt>true</tt>.
+  <tt>cc||=XX</tt> en le combinant avec **menu** mis sur <tt>true</tt>.
 
-__language__:
-  La langue par défaut. Quand vous combinez __language__ avec __menu__
+**language**:
+  La langue par défaut. Quand vous combinez **language** avec **menu**
   mis sur <tt>true</tt> alors souvenez-vous d'utiliser la forme 
   <code>language||=xx</code>.
 
-__units__:
+**units**:
   Vous pouvez spécifer le manière dont les unités seront affichées. Le choix
   se fait sur la possibilité d'avoir les deux unités (métriques ou impériales)
-  ou juste l'un d'entres elles. Mettant __units__ sur =both_metric= affichera
+  ou juste l'un d'entres elles. Mettant **units** sur =both_metric= affichera
   la valeur métrique d'abord et ensuite l'impériale entre parenthèses.
-   __units__ sur =both_imperial= fait exactement l'inverse.
+   **units** sur =both_imperial= fait exactement l'inverse.
 
-  Si vous voulez l'une ou l'autre seulement alors mettez  __units__ sur 
+  Si vous voulez l'une ou l'autre seulement alors mettez  **units** sur 
   =only_metric= ou =only_imperial= et ça le fera.
 
 ===Exemple

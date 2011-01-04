@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Tue,  4 Jan 2011 11:59:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: TextFormatierungsRegeln 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: TextFormatierungsRegeln 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=TextFormatierungsRegeln;
   flags=PAGE_LOCKED;
@@ -120,9 +120,9 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 * Du kannst das Erstellen eines Links verhindern, indem du vor das Wort eine 
   Tilde '<tt>~~</tt>' setzt, zum Beispiel ~DasIstKeinLink.
   ~http://not.linked.to/
-* Wenn du im Text Adressen eingibst, die mit __http:__, __ftp:__ oder __mailto:__ beginnen, 
+* Wenn du im Text Adressen eingibst, die mit **http:**, **ftp:** oder **mailto:** beginnen, 
   werden diese auch automatisch in Links umgewandelt, zum Beispiel http://c2.com/
-* Adressen, die mit __.png__ oder __.jpg__ enden (d.h. Bilder) werden in die Seite 
+* Adressen, die mit **.png** oder **.jpg** enden (d.h. Bilder) werden in die Seite 
   eingefügt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
 
 !!! Tabellen

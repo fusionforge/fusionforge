@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Tue,  4 Jan 2011 11:57:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: LinkIcons 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: LinkIcons 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=LinkIcons;
   flags="";
@@ -24,7 +24,7 @@ LinkIcons 是一個 PhpWiki 可選的新特色. 當啟始以後, 圖示將被顯
 * [http://phpwiki.sourceforge.net/demo/themes/default/images/ftp.png]
   ftp link
 
-__注意__: 部份預設圖示使用了
+**注意**: 部份預設圖示使用了
 [PNG|http://www.libpng.org/pub/png/png-sitemap.htm]圖片格式的
 alpha channel 特色以便能夠平順的在任何有顏色或有背景頁面被畫出來.
 舊的瀏覽器可能無法顯示圖片.

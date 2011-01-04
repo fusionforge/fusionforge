@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Tue,  4 Jan 2011 11:57:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: OldStyleTablePlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: OldStyleTablePlugin 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=OldStyleTablePlugin;
   flags="";
@@ -28,8 +28,8 @@ OldStyleTablePlugin 用來在 wiki 頁面含括使用舊風格標記語法的表
 |> Marco      |< Polo      | Cheaper   |< Not available
 >>
 
-置首的多重 __|__ 用來展延欄, 而 __v__ 用來展延列.
-__>__ 產生靠右對齊的欄, __<__ 產生靠左對齊的欄, 而 __^__ 則產生置中的欄 (預設).
+置首的多重 **|** 用來展延欄, 而 **v** 用來展延列.
+**>** 產生靠右對齊的欄, **<** 產生靠左對齊的欄, 而 **^** 則產生置中的欄 (預設).
 
 ----
 

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Tue,  4 Jan 2011 11:57:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: MagicPhpWikiURLs 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: MagicPhpWikiURLs 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=MagicPhpWikiURLs;
   flags=PAGE_LOCKED;
@@ -16,7 +16,7 @@ Content-Transfer-Encoding: binary
 phpwiki 的基礎語法: URL 是
 
 <pre>
-__phpwiki:__''pagename''__?__''query-args''
+**phpwiki:**''pagename''**?**''query-args''
 </pre>
 
 如果 _pagename_ 被忽略,那麼預設為目前頁面.
@@ -24,40 +24,40 @@ __phpwiki:__''pagename''__?__''query-args''
 _Query-args_ 應該是以標準 HTTP GET 格式表示的一組參數.
 
 "action=''x''" 參數應該都要被給定. 他可以是這些值的其中一個:
-__browse__, __diff__, __edit__, __viewsource__,
-__zip__, __dumpserial__, __loadserial__,
-__remove__, __lock__, __unlock__,
-__login__, __logout__, __setprefs__ or __save__.
-預設的動作是 __browse__.
+**browse**, **diff**, **edit**, **viewsource**,
+**zip**, **dumpserial**, **loadserial**,
+**remove**, **lock**, **unlock**,
+**login**, **logout**, **setprefs** or **save**.
+預設的動作是 **browse**.
 
 部份動作接受其他參數.
 
-__FullTextSearch__, __TitleSearch__:
+**FullTextSearch**, **TitleSearch**:
 
-  接受 __s__ 表示欲搜尋的字串, 而 __size__ 表示輸入的長度.
+  接受 **s** 表示欲搜尋的字串, 而 **size** 表示輸入的長度.
 
-__edit__:
+**edit**:
 
-  接受 __version__.
+  接受 **version**.
 
-__remove__:
+**remove**:
 
-  接受 __verify__.
+  接受 **verify**.
 
-__save__:
+**save**:
 
-  接受 __editversion__, __minor_edit__, 和 __content__.
+  接受 **editversion**, **minor_edit**, 和 **content**.
 
-__setprefs__:
+**setprefs**:
 
-  接受 __edit_area_width__, __edit_area_height__.
+  接受 **edit_area_width**, **edit_area_height**.
 
 === Writing Magic Links in Wiki Pages
 
 一個 magic 連結看起來會是:
 
 <pre>
-__~[__ ''text'' __|__ ''phpwiki-url'' __]__
+**~[** ''text'' **|** ''phpwiki-url'' **]**
 </pre>
 
 "''text'' *|*" 是可選的,但通常建議使用. 如果給了,他會為此連結提供標籤.
@@ -80,7 +80,7 @@ _phpwiki-url_ 就如同上面描述的一樣,是一個 *phpwiki:* URL.
 
 === Writing Magic Forms in Wiki Pages
 
-''__Note__: 舊的 Magic forms 語法將不再支援.
+''**Note**: 舊的 Magic forms 語法將不再支援.
 他們需以 =<?plugin-form>= 代替.''
 
 If the plugin is called using *<?plugin-form* instead of *<?plugin*

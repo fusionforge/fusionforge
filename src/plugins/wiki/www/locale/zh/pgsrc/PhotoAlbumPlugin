@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Tue,  4 Jan 2011 11:57:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhotoAlbumPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: PhotoAlbumPlugin 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhotoAlbumPlugin;
   flags="";
@@ -27,23 +27,23 @@ Content-Transfer-Encoding: binary
 == Arguments
 ''只有 ='src'= 參數是必要的.''
 
-__src__:
+**src**:
   一個 CSV 文字檔案,裡面每行的格式為 filename, description.
   裡面列出的每張相片必須都與 CSV 文字檔在同個目錄下. Descriptions 可寫可不寫.
 
-__mode__:
+**mode**:
   指定相片排列的方法, ='column'= 表示直放, ='row'= 表示橫放. 預設為 ='row'=.
 
-__align__:
+**align**:
   每欄的對齊方式. 預設為 ='center'=.
 
-__desc__:
+**desc**:
   是否顯示文字檔中指定的 description. 預設為真.
 
-__sort__:
+**sort**:
   以檔案名稱排序圖片. 預設是以文字檔中的順序來排列.
 
-__height__, __width__:
+**height**, **width**:
   高度與寬度用來與用 [php-function:getimagesize] 取得的原始高度與寬度做比較,
   可以指定絕對值或百分比 (例如 "50%").
 

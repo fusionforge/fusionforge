@@ -1,12 +1,12 @@
 <?php // -*-php-*-
-// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// rcs_id('$Id: navbar.tmpl 7804 2011-01-04 14:21:32Z vargenau $');
   $NSEP = HTML::br();
 ?>
 <!-- The left navigation/search bar -->
 <div id="navbuttons">
 <?php if (ENABLE_DISCUSSION_LINK) { ?>
 <?php // This requires Talk: map to end in "/Discussion"
-  if (!string_ends_with($page->getName(), _("Discussion"))) { ?>
+  if (!string_ends_with($page->getName(), SUBPAGE_SEPARATOR._("Discussion"))) { ?>
     <?php echo $NSEP?><?php echo WikiLink(new WikiPagename('Talk:'.$page->getName(), $page->getName()), 
                'button', _("Discussion")) ?>
   <?php } else { ?>

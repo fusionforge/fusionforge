@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Tue,  4 Jan 2011 11:59:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: TextBearbeiten 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: TextBearbeiten 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=TextBearbeiten;
   flags="";
@@ -9,7 +9,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Alle Seiten (mit Ausnahme von Suchergebnissen) haben unten einen Link
-__Bearbeiten__. Man kann die aktuelle Seite edieren, indem man diesen
+**Bearbeiten**. Man kann die aktuelle Seite edieren, indem man diesen
 Link anklickt.
 
 ----

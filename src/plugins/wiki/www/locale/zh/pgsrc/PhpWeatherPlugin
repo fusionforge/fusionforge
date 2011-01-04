@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Tue,  4 Jan 2011 11:57:23 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWeatherPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: PhpWeatherPlugin 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWeatherPlugin;
   flags="";
@@ -17,11 +17,11 @@ Content-Transfer-Encoding: binary
 
 == Plugin Arguments
 
-__menu__:
+**menu**:
   設定為 =true= 是讓 plugin 在報告之後產生選單. 使用者將可以從這個選單
   去挑選國家,機場或語言. 預設值為 <tt>false</tt>.
 
-__icao__:
+**icao**:
   使用這個引數來先行挑選機場,以替代預設機場 <tt>EKAH</tt>. 如果你想讓使
   用者能用選單改變地方,那麼你得使用這樣的語法
   {{{
@@ -33,7 +33,7 @@ __icao__:
   }}}
   那麼,當使用者從清單挑選其他地方的時候,將不會有任何事情產生.
 
-__cc__:
+**cc**:
   Specify the country code. You can use this if you want pre-select a
   different country than the one specified in the ICAO. So using
   {{{
@@ -42,23 +42,23 @@ __cc__:
   will show the current weather at the NASA Shuttle Facility, United
   States (<tt>KTTS</tt>) and at the same time give the user a list of
   stations in the United Kingdom. As the example shows, then you
-  should use <tt>cc||=XX</tt> when combining it with __menu__ set to
+  should use <tt>cc||=XX</tt> when combining it with **menu** set to
   <tt>true</tt>.
 
-__language__:
-  The default language. When combining __language__ with __menu__ set
+**language**:
+  The default language. When combining **language** with **menu** set
   to <tt>true</tt> then remember to use the <code>language||=xx</code>
   form.
 
-__units__:
+**units**:
   You can specify the way the units are printed. The choice is between
   having both metric and imperial units printed, or just one of
-  them. Setting __units__ to =both_metric= will print the metric value
+  them. Setting **units** to =both_metric= will print the metric value
   first and then the imperial value in parenthesis. Using
   =both_imperial= instead will do the opposite.
 
   If you only need the metric or imperial units to be shown, then
-  setting __units__ to =only_metric= or =only_imperial= will do just
+  setting **units** to =only_metric= or =only_imperial= will do just
   that.
 ----
 WikiPlugin

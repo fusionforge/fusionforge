@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Tue,  4 Jan 2011 11:58:08 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PaginaDiProva 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: PaginaDiProva 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PaginaDiProva;
   flags=PAGE_LOCKED;
@@ -72,7 +72,7 @@ this is a plain paragraph
 this is a plain paragraph again
 	# number
 ----
-__Link tests__
+**Link tests**
 # normal: FrontPage
 # in brackets: [FrontPage] -- named: [the front page|FrontPage]
 # Link in brackets: [http://phpwiki.sourceforge.net/]
@@ -94,13 +94,13 @@ __Link tests__
 ----
 Markup tests:
 
-__underscores for bold__
+**underscores for bold**
 
 '''quotes for bold'''
 
 ''quotes for italic''
 
-__''underscores bold italic''__
+**''underscores bold italic''**
 
 '''''five quotes bold italic'''''
 
@@ -126,10 +126,10 @@ you cannot use &, < or >
 ----
 Usage in preformatted text:
  
- __underscores for bold__
+ **underscores for bold**
  '''quotes for bold'''
  ''quotes for italic''
- __''underscores bold italic''__
+ **''underscores bold italic''**
  '''''five quotes bold italic'''''
  ''''''six quotes''''''
  !!! h1

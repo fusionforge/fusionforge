@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FAnciennesR%C3%A8glesDeFormatage 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FAnciennesR%C3%A8glesDeFormatage 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FAnciennesR%C3%A8glesDeFormatage;
   flags=PAGE_LOCKED;
@@ -9,13 +9,13 @@ Content-Transfer-Encoding: binary
 
 ! Description
 
-__Emphases :__ '____' pour ''italiques'', _''''_ pour __gras__, '____'_''''_ pour ''__les deux__''.%%%
-__Listes :__ * pour les listes pointées, # pour les listes numérotées, ''__;__ terme __:__ définition'' pour les listes de définition.%%%
-__Références :__ !CollerLesMotsAvecMajuscules ou utiliser les crochets pour une [[page liée] ou une URL [[!http://cool.wiki.int/].%%%
-__Notes de bas de page :__ Utiliser [[1],[[2],[[3],...%%%
-__Empêcher les liens :__ Préfixez avec "!" : !!NePasLier, nom de lien tel que [[[[texte | URL] (doubler sur le "[").%%%
-__Divers :__ "!", "!!", "!!!" créer des en-têtes, "%%''''%" change de ligne, "-''''-''''-''''-" fait un trait horizontal.%%%
-__Tables:__ »|« comme premier caractère, »|« pour plus de colonnes, »|>« aligne à droite, »|<« aligne à gauche, »|^« centre (par défaut), »||« développe des colonnes, »|v« développe des lignes
+**Emphases :** '****' pour ''italiques'', _''''_ pour **gras**, '****'_''''_ pour ''**les deux**''.%%%
+**Listes :** * pour les listes pointées, # pour les listes numérotées, ''**;** terme **:** définition'' pour les listes de définition.%%%
+**Références :** !CollerLesMotsAvecMajuscules ou utiliser les crochets pour une [[page liée] ou une URL [[!http://cool.wiki.int/].%%%
+**Notes de bas de page :** Utiliser [[1],[[2],[[3],...%%%
+**Empêcher les liens :** Préfixez avec "!" : !!NePasLier, nom de lien tel que [[[[texte | URL] (doubler sur le "[").%%%
+**Divers :** "!", "!!", "!!!" créer des en-têtes, "%%''''%" change de ligne, "-''''-''''-''''-" fait un trait horizontal.%%%
+**Tables:** »|« comme premier caractère, »|« pour plus de colonnes, »|>« aligne à droite, »|<« aligne à gauche, »|^« centre (par défaut), »||« développe des colonnes, »|v« développe des lignes
 
 ! Paragraphes
 
@@ -57,9 +57,9 @@ Ceci ne l'est pas
 
 ! Emphases
 
-* utiliser des apostrohes simples doublés ('____') pour l'emphase (habituellement ''italique'')
-* utiliser des underscores doublés (_''''_) pour l'emphase forte (habituellement __gras__)
-* mélanger les deux donne : __''italique gras''__
+* utiliser des apostrohes simples doublés ('****') pour l'emphase (habituellement ''italique'')
+* utiliser des underscores doublés (_''''_) pour l'emphase forte (habituellement **gras**)
+* mélanger les deux donne : **''italique gras''**
 * les emphases peut être utilisé plusieurs fois dans une ligne mais ne fonctionnent pas sur plusieurs lignes :
 
 ''ceci
@@ -79,20 +79,20 @@ ne fonctionnera pas''
 
 ! Tableaux
 
-* Les tableaux simples sont disponibles. Un ligne est introduite par __|__ dans la première colonne. C'est mieux décrit par un exemple :
+* Les tableaux simples sont disponibles. Un ligne est introduite par **|** dans la première colonne. C'est mieux décrit par un exemple :
         ||^  *Identité*            |v *Prix*       |v *Notes*
         | *Prénom*     | *Nom*
         |> Jeff        |< Dairiki   |^ Bon marché   |< Sans valeur
         |> Marco       |< Polo      |  Moins cher   |< Pas disponible
 ;: donnera
 
-||^  __Identité__             |v __Prix__       |v __Notes__
-| __Prénom__     | __Nom__
+||^  **Identité**             |v **Prix**       |v **Notes**
+| **Prénom**     | **Nom**
 |> Jeff        |< Dairiki   |^ Bon marché   |< Sans valeur
 |> Marco       |< Polo      |  Moins cher   |< Pas disponible
 
 
-;: Remarquez que plusieurs __|__ conduisent à des colonnes étendues et que des __v__ peuvent être utilisés pour étendre des lignes. Un __>__ engendre une colonne justifiée à droite, __<__ une colonne justifiée à gauche et __^__ une colonne centrée (position par défaut).
+;: Remarquez que plusieurs **|** conduisent à des colonnes étendues et que des **v** peuvent être utilisés pour étendre des lignes. Un **>** engendre une colonne justifiée à droite, **<** une colonne justifiée à gauche et **^** une colonne centrée (position par défaut).
 ;: Avec les nouvelles RèglesDeFormatageDesTextes, vous devez utiliser PluginTableauAncienStyle pour insérer un tableau de l'ancien style.
 
 

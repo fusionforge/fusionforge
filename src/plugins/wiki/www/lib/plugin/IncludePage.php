@@ -1,8 +1,8 @@
 <?php // -*-php-*-
-// rcs_id('$Id: IncludePage.php 7700 2010-09-20 16:03:26Z vargenau $');
+// $Id: IncludePage.php 7806 2011-01-04 17:55:44Z vargenau $
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -89,7 +89,7 @@ extends WikiPlugin
         // TextFormattingRules).
         static $included_pages = array();
         if (in_array($page, $included_pages)) {
-            return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+            return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                                         $page));
         }
 
@@ -129,7 +129,7 @@ extends WikiPlugin
             }
             // trap recursive redirects
             if (in_array($m[1], $included_pages)) {
-                return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+                return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                                                 $page.' => '.$m[1]));
             }
             $page = $m[1];
@@ -151,8 +151,6 @@ extends WikiPlugin
 
         include_once('lib/BlockParser.php');
         $content = TransformText($ct, $r->get('markup'), $page);
-
-        array_pop($included_pages);
 
         if ($quiet)
             return $content;

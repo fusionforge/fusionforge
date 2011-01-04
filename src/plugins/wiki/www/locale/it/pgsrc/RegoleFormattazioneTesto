@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Tue,  4 Jan 2011 11:58:08 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: RegoleFormattazioneTesto 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: RegoleFormattazioneTesto 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=RegoleFormattazioneTesto;
   flags=PAGE_LOCKED;
@@ -9,12 +9,12 @@ Content-Transfer-Encoding: binary
 
 ! Sinossi
 RegoleFormattazioneTesto%%%
-__Enfasi:__ '____' per ''corsivo'', _''''_ per __grassetto__, '____'_''''_ per ''__entrambi__''.%%%
-__Liste:__ * per liste puntate, # per liste numerate, ''__;__ term __:__ definition'' per liste di definizioni.
-%%%__Collegamenti:__ !UnisciParoleConInizialiInMaiuscolo o usa le parentesi quadre per un [[collegamento ad una pagina] o un URL [[!http://cool.wiki.int/].
-%%%__Footnotes:__ Use [[1],[[2],[[3],...
-%%%__Preventing linking:__ Prefix with "!": !!DoNotHyperlink, name links like [[[[text | URL] (double up on the "[").
-%%%__Varie:__ "!", "!!", "!!!" definisce le intestazioni, "%''''%%" va a capo, "-''''---" crea una linea orizzontale.
+**Enfasi:** '****' per ''corsivo'', _''''_ per **grassetto**, '****'_''''_ per ''**entrambi**''.%%%
+**Liste:** * per liste puntate, # per liste numerate, ''**;** term **:** definition'' per liste di definizioni.
+%%%**Collegamenti:** !UnisciParoleConInizialiInMaiuscolo o usa le parentesi quadre per un [[collegamento ad una pagina] o un URL [[!http://cool.wiki.int/].
+%%%**Footnotes:** Use [[1],[[2],[[3],...
+%%%**Preventing linking:** Prefix with "!": !!DoNotHyperlink, name links like [[[[text | URL] (double up on the "[").
+%%%**Varie:** "!", "!!", "!!!" definisce le intestazioni, "%''''%%" va a capo, "-''''---" crea una linea orizzontale.
 
 ----
 ! Paragrafi
@@ -60,8 +60,8 @@ Questo no
 ! Enfasi
 
 * Usa doppi apici singoli ('') per dare enfasi (solitamente ''italico'')
-* Usa doppio underscores (__) per dare molta enfasi (solitamente __grassetto__)
-* Mescolali a piacere: __''grassetto corsivo''__
+* Usa doppio underscores (**) per dare molta enfasi (solitamente **grassetto**)
+* Mescolali a piacere: **''grassetto corsivo''**
 * ''Enfasi'' può essere usata ''più volte'' dentro una linea, ma ''non può'' superare i limiti della linea:
 
 ''questo

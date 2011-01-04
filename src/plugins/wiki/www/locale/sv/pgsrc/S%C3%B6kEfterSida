@@ -1,6 +1,6 @@
 Date: Fri, 10 Sep 2010 13:48:48 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: S%C3%B6kEfterSida 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: S%C3%B6kEfterSida 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=S%C3%B6kEfterSida;
   flags=PAGE_LOCKED;
@@ -27,4 +27,4 @@ en träff.
 Separera ord med mellanslag. Alla ord måste matcha.
 %%%För att exkludera ord sätt ett "-" framför.
 %%%Exempel: "wiki text -php" söker på alla sidor som innehåller orden "wiki"
-__och__ "text", men __inte__ innehåller ordet "php".
+**och** "text", men **inte** innehåller ordet "php".

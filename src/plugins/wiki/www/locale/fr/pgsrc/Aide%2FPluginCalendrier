@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginCalendrier 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginCalendrier 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCalendrier;
   flags=PAGE_LOCKED;
@@ -28,11 +28,11 @@ vous donnera :
 
 === Sélection du Mois
 
-__year__ |
+**year** |
   spécifie l'année du calendrier (l'année actuelle par défaut)
-__month__ |
+**month** |
   spécifie le mois du calendrier (le mois actuel par défaut)
-__month_offset__ |
+**month_offset** |
   ajouté au ''mois''. Peut être utilisé pour inclure l'équivalent de plusieurs mois sur une seule page du wiki.
 
 Le calendrier suivant affiche systématiquement le mois suivant le mois courant :
@@ -41,18 +41,18 @@ Le calendrier suivant affiche systématiquement le mois suivant le mois courant 
 
 === Nom de la "Page du Jour"
 
-__date_format__ |
+**date_format** |
   [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le nom des pages pour les "pages du jour". La valeur par défaut est =%Y-%m-%d=.
-__prefix__ | 
+**prefix** | 
   Préfixe pour la date (formatée par ''date_format'') pour générer les noms des "pages du jour". La valeur par défaut est =~[pagename]/=.
 
 === Apparence
 
-__month_format__ |
+**month_format** |
   [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le titre du calendrier. La valeur par défaut est =%B, %Y=.
-__wday_format__ |
+**wday_format** |
   [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le nom des jours de la semaine au-dessus du calendrier.
-__start_wday__ |
+**start_wday** |
   Le premier jour de la semaine. Il doit être spécifié par un entier de zéro (dimanche) à six (samedi) inclus.
 
 Par exemple, le calendrier suivant commence les semaines le lundi :

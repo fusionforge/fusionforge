@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: InlineParser.php 7797 2010-12-21 13:23:45Z vargenau $');
+// rcs_id('$Id: InlineParser.php 7803 2011-01-04 13:10:27Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -679,6 +679,20 @@ class Markup_wikicreole_monospace extends BalancedMarkup
     }
 }
 
+class Markup_wikicreole_underline extends BalancedMarkup
+{
+    var $_start_regexp = "\\_\\_";
+
+    function getEndRegexp ($match) {
+        return "\\_\\_";
+    }
+
+    function markup ($match, $body) {
+        $tag = 'u';
+        return new HtmlElement($tag, $body);
+    }
+}
+
 class Markup_wikicreole_superscript extends BalancedMarkup
 {
     var $_start_regexp = "\\^\\^";
@@ -709,14 +723,14 @@ class Markup_wikicreole_subscript extends BalancedMarkup
 
 class Markup_old_emphasis  extends BalancedMarkup
 {
-    var $_start_regexp = "''|__";
+    var $_start_regexp = "''";
 
     function getEndRegexp ($match) {
         return $match;
     }
 
     function markup ($match, $body) {
-        $tag = $match == "''" ? 'em' : 'strong';
+        $tag = 'em';
         return new HtmlElement($tag, $body);
     }
 }
@@ -1176,6 +1190,7 @@ class InlineTransformer
                  'wikicreole_subscript',
                  'wikicreole_italics', 'wikicreole_bold',
                  'wikicreole_monospace',
+                 'wikicreole_underline',
                  'old_emphasis', 'nestled_emphasis',
                  'html_emphasis', 'html_abbr', 'plugin', 'plugin_wikicreole',
                  'isonumchars', 'isohexchars', /*'html_entities'*/

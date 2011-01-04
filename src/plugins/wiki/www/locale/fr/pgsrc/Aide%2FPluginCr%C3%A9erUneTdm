@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue,  4 Jan 2011 11:58:32 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginCr%C3%A9erUneTdm 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginCr%C3%A9erUneTdm 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCr%C3%A9erUneTdm;
   flags="";
@@ -24,19 +24,19 @@ une *Table des matières* dynamique de tous les en-têtes (titres et sous-titres
 
 ===Arguments
 
-__jshide__: |
+**jshide**: |
   Booléen si la table doit être initialement cachée puis montrée par un clique. Par défaut : 0
-__with_toclink__:  |
+**with_toclink**:  |
   Booléen si les en-têtes doivent être liés à la table. Par défaut : 0
-__headers__:  |
+**headers**:  |
   Quels en-têtes inclure. Par défaut : ==,===,!    1,2,3 également permis
-__noheader__:  |
+**noheader**:  |
   Booléen si le titre h2 "Table des matières" doit être omis. Par défaut : 0
-__liststyle__:  |
+**liststyle**:  |
   dl ou ol ou ul. Par défaut : dl
-__indentstr__:  |
+**indentstr**:  |
   Par défaut : &nbsp;&nbsp;
-__pagename__:  |
+**pagename**:  |
   Table pour quelle page ? Par défaut : page courante.
 
 ===Problèmes connus

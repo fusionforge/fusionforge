@@ -1,8 +1,8 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Template.php 7797 2010-12-21 13:23:45Z vargenau $');
+// $Id: Template.php 7806 2011-01-04 17:55:44Z vargenau $
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -127,7 +127,7 @@ extends WikiPlugin
         // Protect from recursive inclusion. A page can include itself once
         static $included_pages = array();
         if (in_array($page, $included_pages)) {
-            return $this->error(sprintf(_("recursive inclusion of page %s"),
+            return $this->error(sprintf(_("Recursive inclusion of page %s"),
                                         $page));
         }
 
@@ -168,7 +168,7 @@ extends WikiPlugin
             }
             // trap recursive redirects
             if (in_array($m[1], $included_pages)) {
-                return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+                return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                                                 $page.' => '.$m[1]));
             }
             $page = $m[1];
@@ -203,8 +203,6 @@ extends WikiPlugin
             include_once('lib/InlineParser.php');
             $content = TransformInline($initial_content, $r->get('markup'), $page);
         }
-
-        array_pop($included_pages);
 
         return $content;
     }

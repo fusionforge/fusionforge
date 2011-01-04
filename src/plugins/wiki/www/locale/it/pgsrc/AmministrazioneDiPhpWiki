@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Tue,  4 Jan 2011 11:58:08 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AmministrazioneDiPhpWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: AmministrazioneDiPhpWiki 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AmministrazioneDiPhpWiki;
   flags=PAGE_LOCKED;
@@ -67,9 +67,9 @@ These links lead to zip files, generated on the fly, which contain all
 the pages in your Wiki. The zip file will be downloaded to your local
 computer.
 
-  This __[ZIP Snapshot | phpwiki:?action=zip]__ contains only the
-  latest versions of each page, while this __[ZIP Dump |
-  phpwiki:?action=zip&include=all]__ contains all archived versions.
+  This **[ZIP Snapshot | phpwiki:?action=zip]** contains only the
+  latest versions of each page, while this **[ZIP Dump |
+  phpwiki:?action=zip&include=all]** contains all archived versions.
 
   (If the PhpWiki is configured to allow it, anyone can download a zip
   file.)
@@ -136,13 +136,13 @@ page text.
 
 === Old Formats
 
-__Serialized Files__
+**Serialized Files**
 
   The dump to directory command used to dump the pages as PHP
   ''serialized()'' strings. For humans, this made the files very hard
   to read, and nearly impossible to edit.
 
-__Plain Files__
+**Plain Files**
 
   Before that the page text was just dumped to a file--this means that
   all page meta-data was lost. Note that when loading ''plain files'',
@@ -163,7 +163,7 @@ links for page editing functions and navigation are removed from the
 pages.
 
   The XHTML file collection can also be downloaded as an
-  __[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]__.
+  **[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]**.
 
 ----
 
