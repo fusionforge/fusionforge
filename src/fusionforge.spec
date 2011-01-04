@@ -139,7 +139,7 @@ This plugin adds hudson integration to FusionForge.
 %package plugin-ldapextauth
 Summary: external LDAP authentication for FusionForge plugin
 Group: Development/Tools
-Requires: %{name} >= %{version}, php
+Requires: %{name} >= %{version}, php, php-ldap
 %description plugin-ldapextauth
 This plugin provides LDAP authentication capability for FusionForge.
 
