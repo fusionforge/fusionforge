@@ -435,7 +435,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
 				$return .= ' disabled="disabled" class="option_disabled"';
 			}
-			$return .= '>'./*htmlspecialchars(*/$texts[$i]/*)*/.'</option>';
+			$return .= '>'.$texts[$vals[$i]].'</option>';
 		}
 	}
 	//

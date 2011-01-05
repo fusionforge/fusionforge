@@ -1,6 +1,6 @@
 Package: @OLDPACKAGE@-db-postgresql
 Architecture: all
-Depends: @OLDPACKAGE@-common, postgresql (>= 8.1) | postgresql-9.0 | postgresql-8.4 | postgresql-8.3 | postgresql-8.2 | postgresql-8.1 | postgresql (>= 8.1), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, php5-pgsql, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, postgresql (>= 8.1) | postgresql-9.0 | postgresql-8.4 | postgresql-8.3 | postgresql-8.2 | postgresql-8.1 | postgresql (>= 8.1), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, libtext-autoformat-perl, libmail-sendmail-perl, libsort-versions-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, php5-cli, php5-pgsql, php-htmlpurifier, ${misc:Depends}
 Provides: @OLDPACKAGE@-db
 Conflicts: @OLDPACKAGE@-db
 Description: collaborative development tool - database (using PostgreSQL)

@@ -169,6 +169,20 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->click("link=Tracker");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Tracker for ProjectA (projecta)"));
+
+		// Test for fusionforge.org bug #245
+		$this->open( ROOT . '/projects/template') ;
+		$this->waitForPageToLoad("30000");
+
+		$this->click("link=Admin");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=Tools");
+		$this->waitForPageToLoad("30000");
+		$this->uncheck("//input[@name='use_tracker']") ;
+		$this->click("submit");
+		$this->waitForPageToLoad("30000");
+
+		$this->createAndGoto('ProjectB');
 	}
 
 	function testEmptyProject()

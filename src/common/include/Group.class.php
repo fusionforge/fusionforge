@@ -133,7 +133,6 @@ function &group_get_objects($id_arr) {
 				      array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {
 			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
-			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
 		}
 	}
 	foreach ($id_arr as $id) {
@@ -2584,9 +2583,12 @@ class Group extends Error {
 				foreach ($sections as $section) {
 					if (isset ($oldsettings[$section])) {
 						foreach ($oldsettings[$section] as $k => $v) {
-							$newrole->setSetting ($section,
-									      $id_mappings[$section][$k],
-									      $v) ;
+							// Only copy perms for tools that have been copied
+							if (isset ($id_mappings[$section][$k])) {
+								$newrole->setSetting ($section,
+										      $id_mappings[$section][$k],
+										      $v) ;
+							}
 						}
 					}
 				}
