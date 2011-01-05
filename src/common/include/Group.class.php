@@ -2581,9 +2581,12 @@ class Group extends Error {
 				foreach ($sections as $section) {
 					if (isset ($oldsettings[$section])) {
 						foreach ($oldsettings[$section] as $k => $v) {
-							$newrole->setSetting ($section,
-									      $id_mappings[$section][$k],
-									      $v) ;
+							// Only copy perms for tools that have been copied
+							if (isset ($id_mappings[$section][$k])) {
+								$newrole->setSetting ($section,
+										      $id_mappings[$section][$k],
+										      $v) ;
+							}
 						}
 					}
 				}
