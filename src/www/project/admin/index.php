@@ -66,9 +66,15 @@ if (getStringFromRequest('submit')) {
 	$use_frs = getStringFromRequest('use_frs');
 	$use_stats = getStringFromRequest('use_stats');
 	$tags = getStringFromRequest('form_tags');
+	$addTags = getArrayFromRequest('addTags');
 	$is_public = getIntFromRequest('is_public');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
+	
+	if (trim($tags) != "") {
+		$tags .= ",";
+	}
+	$tags .= implode(",", $addTags);
 
 	$res = $group->update(
 		session_get_user(),
@@ -144,10 +150,47 @@ if (forge_get_config('use_shell')) {
 
 <?php if (forge_get_config('use_project_tags')) { ?>
 <p>
-<?php echo _('Tags (use comma as separator)') ?>:<br />
+<h2><?php echo _('Project tags'); ?></h2>
+<?php echo _('Add tags (use comma as separator): ') ?><br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
-</p>
-<?php } ?>
+</p><br />
+<?php echo _('Or pick a tag from those used by other projects: ') ?><br />
+<?php 
+	 
+	 echo '<table width="100%"><thead><tr>';
+echo '<th>'._('Tags').'</th>';
+echo '<th>'._('Projects').'</th>';
+echo '</tr></thead><tbody>';
+
+$infos = getAllProjectTags();
+
+$unix_name = $group->getUnixName();
+foreach ($infos as $tag => $plist) {
+	$disabled = '';
+	$links = array();
+	foreach($plist as $project) {
+		$links[] = util_make_link('/projects/'.$project['unix_group_name'].'/',$project['unix_group_name']);
+		if ($project['group_id'] == $group_id) {
+			$disabled = ' disabled="disabled"';
+		}
+	}
+	
+	echo '<tr>';
+	echo '<td><input type="checkbox" name="addTags[]" value="'.$tag.'"'.$disabled.' /> ';
+	if ($disabled) {
+		echo '<s>'.$tag.'</s>';
+	} else {
+		echo $tag;
+	}
+	echo '</td>';
+	echo '<td>'.implode(' ', $links).'</td>' ;
+	echo '</tr>' ;
+}
+echo '</table>' ;
+
+
+
+} ?>
 
 <h2><?php echo _('Trove Categorization'); ?></h2>
 <p>
