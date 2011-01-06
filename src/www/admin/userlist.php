@@ -77,12 +77,14 @@ function show_users_list ($users, $filter='') {
 		'&nbsp;',
 		'&nbsp;',
 		'&nbsp;',
+		'&nbsp;',
 		'&nbsp;'
 	);
 
 	$headerLinks = array(
 	  '/admin/userlist.php?sortorder=user_name',
 	  '/admin/userlist.php?sortorder=add_date',
+	  '/admin/userlist.php?sortorder=user_name',
 	  '/admin/userlist.php?sortorder=user_name',
 	  '/admin/userlist.php?sortorder=user_name',
 	  '/admin/userlist.php?sortorder=user_name',
@@ -105,10 +107,11 @@ function show_users_list ($users, $filter='') {
 		echo '<td width="15%" style="text-align:center">';
 		echo ($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-');
 		echo '</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/developer/?form_dev='.$u->getID(),_('[DevProfile]')).'</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=activate&amp;user_id='.$u->getID().$filter,_('[Activate]')).'</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=delete&amp;user_id='.$u->getID().$filter,_('[Delete]')).'</td>';
-		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=suspend&amp;user_id='.$u->getID().$filter,_('[Suspend]')).'</td>';
+		echo '<td width="12%" style="text-align:center">'.util_make_link ('/developer/?form_dev='.$u->getID(),_('[DevProfile]')).'</td>';
+		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=activate&amp;user_id='.$u->getID().$filter,_('[Activate]')).'</td>';
+		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=delete&amp;user_id='.$u->getID().$filter,_('[Delete]')).'</td>';
+		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=suspend&amp;user_id='.$u->getID().$filter,_('[Suspend]')).'</td>';
+		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/passedit.php?user_id='.$u->getID().$filter,_('[Change PW]')).'</td>';
 		echo '</tr>';
 		$count ++;
 	}
