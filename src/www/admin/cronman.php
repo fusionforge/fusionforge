@@ -3,6 +3,7 @@
  * FusionForge Cron Viewing Page
  *
  * Copyright 2002 GForge, LLC
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -28,13 +29,12 @@ require_once $gfwww.'admin/admin_utils.php';
 require_once $gfcommon.'include/cron_utils.php';
 
 site_admin_header(array('title'=>_('Cron Manager')));
-echo '<h1>' . _('Cron Manager') . '</h1>';
 
 $which = getIntFromRequest('which', 100);
 
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<?php echo html_build_select_box_from_arrays(array_keys($cron_arr), $cron_arr, 'which', $which,true,'Any'); ?>
+<?php echo html_build_select_box_from_arrays(array_keys($cron_arr), array_values($cron_arr), 'which', $which,true,'Any'); ?>
 <input type="submit" name="submit" value="<?php echo _('Submit');?>" />
 </form>
 <?php
