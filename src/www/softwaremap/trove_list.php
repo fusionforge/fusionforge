@@ -61,7 +61,7 @@ $HTML->header(array('title'=>_('Software Map')));
 $subMenuTitle = array();
 $subMenuUrl = array();
 
-if ($GLOBALS['sys_use_project_tags']) {
+if (forge_get_config('use_project_tags')) {
 	$subMenuTitle[] = _('Tag cloud');
 	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 }

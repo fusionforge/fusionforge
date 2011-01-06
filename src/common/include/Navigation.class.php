@@ -215,7 +215,7 @@ class Navigation extends Error {
 	 *  number of the selected menu entry.
 	 */
         function getSiteMenu() {
-                global $sys_use_project_tags, $sys_use_project_full_list;
+                global $sys_use_project_full_list;
 
                 $request_uri = getStringFromServer('REQUEST_URI');
                 
@@ -240,7 +240,7 @@ class Navigation extends Error {
                         $selected=count($menu['urls'])-1;
                 }
                 
-		if (forge_get_config('use_trove') || $sys_use_project_tags || $sys_use_project_full_list) {
+		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || $sys_use_project_full_list) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/') ;
 			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {

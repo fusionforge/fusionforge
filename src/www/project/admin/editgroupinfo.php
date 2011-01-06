@@ -130,7 +130,7 @@ $images_res = db_query_params ('
 </textarea>
 </p>
 
-<?php if ($GLOBALS['sys_use_project_tags']) { ?>
+<?php if (forge_get_config('use_project_tags')) { ?>
 <p>
 <?php echo _('Tags') ?>:<br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />

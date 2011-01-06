@@ -46,7 +46,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
 require_once $gfcommon.'include/tag_cloud.php';
 
-if (!$sys_use_project_tags) {
+if (!forge_get_config('use_project_tags')) {
 	exit_disabled();
 }
 
@@ -55,7 +55,7 @@ $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 $subMenuTitle = array();
 $subMenuUrl = array();
 
-if ($GLOBALS['sys_use_project_tags']) {
+if (forge_get_config('use_project_tags')) {
 	$subMenuTitle[] = _('Tag cloud');
 	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 }

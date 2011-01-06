@@ -36,7 +36,7 @@ class Widget_ProjectInfo extends Widget {
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
 		// Tag list
-		if ($GLOBALS['sys_use_project_tags']) {
+		if (forge_get_config('use_project_tags')) {
 			$list_tag = list_project_tag($group_id);
 			echo '<p>'.html_image('ic/tag.png'). ' ';
 			if ($list_tag) {

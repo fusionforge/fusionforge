@@ -142,7 +142,7 @@ if (forge_get_config('use_shell')) {
 </textarea>
 </p>
 
-<?php if ($GLOBALS['sys_use_project_tags']) { ?>
+<?php if (forge_get_config('use_project_tags')) { ?>
 <p>
 <?php echo _('Tags (use comma as separator)') ?>:<br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
