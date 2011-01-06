@@ -54,6 +54,12 @@ function show_features_boxes() {
 	$return .= show_highest_ranked_projects();
 	$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 	$return .= show_newest_projects();
+	$return .= $HTML->boxMiddle(_('System Information'), 'System_Information');
+	$ff = new FusionForge();
+	$return .= sprintf(_('%s is running %s version %s'), 
+			   forge_get_config ('forge_name'),
+			   $ff->software_name,
+			   $ff->software_version);
 	$return .= $HTML->boxBottom();
 	plugin_hook ("features_boxes_bottom", array());
 	return $return;
