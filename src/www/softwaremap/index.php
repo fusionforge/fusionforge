@@ -25,10 +25,13 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-if ($GLOBALS['sys_use_project_tags']) {
+if (forge_get_config('use_project_tags')) {
 	session_redirect('softwaremap/tag_cloud.php');
-}elseif (forge_get_config('use_trove')){
+} elseif (forge_get_config('use_trove')){
 	session_redirect('softwaremap/trove_list.php');
-}else{
+} elseif (forge_get_config('use_project_full_list')) {
 	session_redirect('softwaremap/full_list.php');
-}?>
+} else {
+	session_redirect('/');
+}
+?>

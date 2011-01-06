@@ -3,7 +3,9 @@
  * FusionForge miscellaneous utils
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2009-2010, Roland Mas, Franck Villaume - Capgemini
+ * Copyright 2009-2010, Roland Mas
+ * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge.
  *
@@ -1329,6 +1331,32 @@ function debug_string_backtrace() {
 	$trace = preg_replace('/^#(\d+)/me', '\'#\' . ($1 - 1)', $trace);
 
 	return $trace;
+}
+
+function util_ini_get_bytes($id) {
+	$val = trim(ini_get($id));
+	$last = strtolower($val[strlen($val)-1]);
+	switch ($last) {
+	case 'g':
+		$val *= 1024;
+	case 'm':
+		$val *= 1024;
+	case 'k':
+		$val *= 1024;
+	}
+	return $val;
+}
+
+function util_get_maxuploadfilesize() {
+	$postmax = util_ini_get_bytes('post_max_size');
+	$maxfile = util_ini_get_bytes('upload_max_filesize');
+
+	$postfile = (int)(($postmax * 3) / 4);
+
+	if ($postfile < $maxfile)
+		$postfile = $maxfile;
+
+	return $postfile;
 }
 
 // Local Variables:

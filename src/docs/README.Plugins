@@ -262,14 +262,14 @@ had been written.
 
   Hook Name  : groupisactivecheckboxpost
   Parameters : group_id - The numeric ID of the group
-  Locations  : www/project/admin/editgroupinfo.php
+  Locations  : www/project/admin/index.php
   Description: Called when a plugin is activated for a specific group from 
                the group's Edit Public Info page. Use this to perform
                actions to initialise the plugin for a specific group.
 
   Hook Name  : groupisactivecheckbox
   Parameters : group_id - The numeric ID of the group
-  Locations  : www/project/admin/editgroupinfo.php
+  Locations  : www/project/admin/index.php
   Description: Used to display a portion of a form on a group's Edit
                Public Info page. It should return a HTML <tr> line containing
                two cells. 

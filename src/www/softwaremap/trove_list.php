@@ -31,6 +31,9 @@ if (!forge_get_config('use_trove')) {
 	exit_disabled('home');
 }
 
+$HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
+$HTML->printSoftwareMapLinks();
+
 $form_cat = getIntFromRequest('form_cat');
 $page = getIntFromRequest('page',1);
 $cat = getStringFromRequest('cat');
@@ -53,26 +56,6 @@ $res_trove_cat = db_query_params('
 if (db_numrows($res_trove_cat) < 1) {
 	exit_error(_('That Trove category does not exist').': '.db_error(),'trove');
 }
-
-$HTML->header(array('title'=>_('Software Map')));
-
-$subMenuTitle = array();
-$subMenuUrl = array();
-
-if ($GLOBALS['sys_use_project_tags']) {
-	$subMenuTitle[] = _('Tag cloud');
-	$subMenuUrl[] = '/softwaremap/tag_cloud.php';
-}
-
-if (forge_get_config('use_trove')) {
-	$subMenuTitle[] = _('Project Tree');
-	$subMenuUrl[] = '/softwaremap/trove_list.php';
-}
-
-$subMenuTitle[] = _('Project List');
-$subMenuUrl[] = '/softwaremap/full_list.php';
-
-echo ($HTML->subMenu($subMenuTitle, $subMenuUrl));
 
 echo '<div id="project-tree" class="underline-link">' . "\n";
 echo '<h2>' . _('Project tree') . '</h2>' . "\n";

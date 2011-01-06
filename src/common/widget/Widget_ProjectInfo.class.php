@@ -36,7 +36,7 @@ class Widget_ProjectInfo extends Widget {
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
 		// Tag list
-		if ($GLOBALS['sys_use_project_tags']) {
+		if (forge_get_config('use_project_tags')) {
 			$list_tag = list_project_tag($group_id);
 			echo '<p>'.html_image('ic/tag.png'). ' ';
 			if ($list_tag) {
@@ -45,7 +45,7 @@ class Widget_ProjectInfo extends Widget {
 			else {
 				$project = group_get_object($group_id);
 				if (forge_check_perm ('project_admin', $project->getID())) {
-					print '<a href="/project/admin/editgroupinfo.php?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.';
+					print '<a href="/project/admin/?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.';
 				}
 				else {
 					print _('No tag defined for this project');

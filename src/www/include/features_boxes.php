@@ -29,12 +29,12 @@ require_once $gfcommon.'include/tag_cloud.php';
 require_once $gfcommon.'include/Stats.class.php';
 
 function show_features_boxes() {
-	GLOBAL $HTML, $sys_use_project_tags;
+	GLOBAL $HTML;
 	
 	plugin_hook ("features_boxes_top", array());
 	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';
 
-	if ($sys_use_project_tags) {
+	if (forge_get_config('use_project_tags')) {
 		$return .= $HTML->boxTop(_('Tag Cloud'), 'Tag_Cloud');
 		$return .= tag_cloud();
 		$return .= $HTML->boxMiddle(sprintf(_('%1$s Statistics'), forge_get_config ('forge_name')), 'Forge_Statistics');
@@ -54,6 +54,12 @@ function show_features_boxes() {
 	$return .= show_highest_ranked_projects();
 	$return .= $HTML->boxMiddle(_('Recently Registered Projects'), 'Recently_Registered_Projects');
 	$return .= show_newest_projects();
+	$return .= $HTML->boxMiddle(_('System Information'), 'System_Information');
+	$ff = new FusionForge();
+	$return .= sprintf(_('%s is running %s version %s'), 
+			   forge_get_config ('forge_name'),
+			   $ff->software_name,
+			   $ff->software_version);
 	$return .= $HTML->boxBottom();
 	plugin_hook ("features_boxes_bottom", array());
 	return $return;

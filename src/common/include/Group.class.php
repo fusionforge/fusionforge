@@ -3153,6 +3153,33 @@ function &group_get_result($group_id=0) {
 	}
 }
 
+function getAllProjectTags($onlyvisible = true) {
+	$res = db_query_params('SELECT project_tags.name, groups.group_id FROM groups, project_tags WHERE groups.group_id = project_tags.group_id AND groups.status = $1 ORDER BY project_tags.name, groups.group_id',
+			       array('A'));
+
+	if (!$res || db_numrows($res) == 0) {
+		return false;
+	}
+
+	$result = array();
+
+	while ($arr = db_fetch_array($res)) {
+		$tag = $arr[0];
+		$group_id = $arr[1];
+		if (!isset($result[$tag])) {
+			$result[$tag] = array();
+		}
+
+		if (!$only_visible || forge_check_perm('project_read', $group_id)) {
+			$p = group_get_object($group_id);
+			$result[$tag][] = array('unix_group_name' => $p->getUnixName(),
+						'group_id' => $group_id);
+		}
+	}
+
+	return $result;
+}
+
 class ProjectComparator {
 	var $criterion = 'name' ;
 

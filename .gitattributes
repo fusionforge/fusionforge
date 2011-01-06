@@ -4341,6 +4341,7 @@ src/utils/underworld-dummy/mailing_lists_dump.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/new_aliases.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ssh_dump.pl svneol=native#text/x-perl
 src/www/admin/globalroleedit.php -text
+src/www/admin/passedit.php -text
 src/www/admin/pi.php -text
 src/www/docman/scripts/DocManController.js -text
 src/www/env.inc.php -text

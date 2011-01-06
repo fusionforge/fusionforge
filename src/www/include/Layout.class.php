@@ -36,6 +36,7 @@
  */
 
 require_once $gfcommon.'include/constants.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
 
 class Layout extends Error {
@@ -244,6 +245,7 @@ class Layout extends Error {
 		$this->headerSearch();
 		$this->headerCSS();
 		$this->headerJS(); 
+		$this->headerForgepluckerMeta(); 
 		?>
 			</head>
 		<?php
@@ -331,6 +333,17 @@ class Layout extends Error {
 			</script>';
 		plugin_hook ("javascript_file",false);
 		echo $this->getJavascripts();
+	}
+
+	function headerForgepluckerMeta() {
+		/*-
+		 * Forge-Identification Meta Header, Version 1.0
+		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
+		 */
+		$ff = new FusionForge();
+		return sprintf('<meta name="Forge-Identification" content="%s:%s" />', 
+				$ff->software_name,
+				$ff->software_version) . "\n";
 	}
 
 	function bodyHeader($params){
@@ -1261,6 +1274,32 @@ class Layout extends Error {
 	function _getToggleMinusForWidgets() {
 		return 'ic/toggle_minus.png';
 	}
+
+	/* Get the navigation links for the software map pages (trove,
+	 * tag cloud, full project list) according to what's enabled
+	 */
+	function printSoftwareMapLinks() {
+		$subMenuTitle = array();
+		$subMenuUrl = array();
+		
+		if (forge_get_config('use_project_tags')) {
+			$subMenuTitle[] = _('Tag cloud');
+			$subMenuUrl[] = '/softwaremap/tag_cloud.php';
+		}
+		
+		if (forge_get_config('use_trove')) {
+			$subMenuTitle[] = _('Project Tree');
+			$subMenuUrl[] = '/softwaremap/trove_list.php';
+		}
+		
+		if (forge_get_config('use_project_full_list')) {
+			$subMenuTitle[] = _('Project List');
+			$subMenuUrl[] = '/softwaremap/full_list.php';
+		}
+		
+		echo $this->subMenu($subMenuTitle, $subMenuUrl);
+	}
+
 }
 
 // Local Variables:

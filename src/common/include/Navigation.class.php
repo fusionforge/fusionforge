@@ -213,9 +213,7 @@ class Navigation extends Error {
 	 *  links. $result['urls']: list of urls. $result['selected']:
 	 *  number of the selected menu entry.
 	 */
-	function getSiteMenu() {
-                global $sys_use_project_tags, $sys_use_project_full_list;
-
+        function getSiteMenu() {
                 $request_uri = getStringFromServer('REQUEST_URI');
                 
                 $menu = array();
@@ -235,11 +233,11 @@ class Navigation extends Error {
                     || strstr($request_uri, util_make_uri('/register/'))
                     || strstr($request_uri, util_make_uri('/themes/'))
 			) 
-		{
-			$selected=count($menu['urls'])-1;
-		}
-
-		if (forge_get_config('use_trove') || $sys_use_project_tags || $sys_use_project_full_list) {
+                {
+                        $selected=count($menu['urls'])-1;
+                }
+                
+		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || forge_get_config('use_project_full_list')) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/') ;
 			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
@@ -315,12 +313,12 @@ class Navigation extends Error {
 			}
 		}
 
-		$menu['selected'] = $selected;
+                $menu['selected'] = $selected;
+                          
+                return $menu;
+        }
 
-		return $menu;
-	}
-
-	/** Get a reference to an array of the projects menu for the
+        /** Get a reference to an array of the projects menu for the
 	 * project with the id $group_id with the following
 	 * structure: $result['starturl']: URL of the
 	 * projects starting page; $result['name']: public name of
