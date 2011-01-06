@@ -36,6 +36,7 @@
  */
 
 require_once $gfcommon.'include/constants.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 require_once $gfcommon.'include/Navigation.class.php';
 
 class Layout extends Error {
@@ -244,6 +245,7 @@ class Layout extends Error {
 		$this->headerSearch();
 		$this->headerCSS();
 		$this->headerJS(); 
+		$this->headerForgepluckerMeta(); 
 		?>
 			</head>
 		<?php
@@ -331,6 +333,17 @@ class Layout extends Error {
 			</script>';
 		plugin_hook ("javascript_file",false);
 		echo $this->getJavascripts();
+	}
+
+	function headerForgepluckerMeta() {
+		/*-
+		 * Forge-Identification Meta Header, Version 1.0
+		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
+		 */
+		$ff = new FusionForge();
+		return sprintf('<meta name="Forge-Identification" content="%s:%s" />', 
+				$ff->software_name,
+				$ff->software_version) . "\n";
 	}
 
 	function bodyHeader($params){
