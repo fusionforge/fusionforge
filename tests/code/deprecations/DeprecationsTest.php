@@ -54,6 +54,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_use_survey',
 			       'sys_use_frs',
 			       'sys_use_project_tags',
+			       'sys_use_project_full_list',
 			       'sys_use_fti',
 			       'sys_use_ftp',
 			       'sys_use_trove',

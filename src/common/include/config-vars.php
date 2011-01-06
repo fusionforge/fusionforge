@@ -67,6 +67,8 @@ forge_define_config_item ('use_frs', 'core', $GLOBALS['sys_use_frs']) ;
 forge_set_config_item_bool ('use_frs', 'core') ;
 forge_define_config_item ('use_project_tags', 'core', $GLOBALS['sys_use_project_tags']) ;
 forge_set_config_item_bool ('use_project_tags', 'core') ;
+forge_define_config_item ('use_project_full_list', 'core', $GLOBALS['sys_use_project_full_list']) ;
+forge_set_config_item_bool ('use_project_full_list', 'core') ;
 forge_define_config_item ('use_fti', 'core', $GLOBALS['sys_use_fti']) ;
 forge_set_config_item_bool ('use_fti', 'core') ;
 forge_define_config_item ('use_ftp', 'core', $GLOBALS['sys_use_ftp']) ;
