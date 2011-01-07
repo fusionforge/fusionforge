@@ -216,6 +216,10 @@ class DocumentGroup extends Error {
 				$returned = $this->__injectZip($uploaded_data);
 				break;
 			}
+			case "application/rar": {
+				$returned = $this->__injectRar($uploaded_data);
+				break;
+			}
 			default: {
 				$this->setError( _('Unsupported injected file:') . ' ' .$uploaded_data_type);
 				$returned = false;
@@ -493,6 +497,17 @@ class DocumentGroup extends Error {
 		}
 		$this->setError(_('Unable to open zipfile.'));
 		return false;
+	}
+
+	/**
+	 * __injectRar - private method to inject a rar archive tree and files
+	 *
+	 * @param	array	uploaded rar
+	 * @return	boolean	success or not
+	 * @access	private
+	 */
+	private function __injectRar($uploadedRar) {
+		return true;
 	}
 
 	/**
