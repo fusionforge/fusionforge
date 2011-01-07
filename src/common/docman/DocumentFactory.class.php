@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -272,10 +272,17 @@ class DocumentFactory extends Error {
 		}
 
 		$return = array();
-		$keys = array_keys($this->Documents);
+
+		// limit scope to the doc_group_id if any. Useful when you retrieve all documents
+		if ($this->docgroupid) {
+			$keys = array($this->docgroupid);
+		} else {
+			$keys = array_keys($this->Documents);
+		}
 
 		foreach ($keys as $key) {
-			if (!array_key_exists($key, $this->Documents)) continue;		// Should not happen
+			if (!array_key_exists($key, $this->Documents))	continue;		// Should not happen
+
 			$count = count($this->Documents[$key]);
 
 			for ($i=0; $i < $count; $i++) {
@@ -313,7 +320,7 @@ class DocumentFactory extends Error {
 			}
 		}
 
-		if (count($return) == 0) {
+		if (count($return) === 0) {
 			$this->setError(_('No Documents Found'));
 			$return = NULL;
 			return $return;

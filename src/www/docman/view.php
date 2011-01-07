@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -46,7 +46,7 @@ if (!$g || !is_object($g)) {
 	exit_error($g->getErrorMessage(), 'docman');
 }
 
-if ($docid != 'backup' && $docid != 'webdav') {
+if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 	session_require_perm('docman', $group_id, 'read');
 	$docname = urldecode($arr[5]);
 
@@ -80,7 +80,7 @@ if ($docid != 'backup' && $docid != 'webdav') {
 
 	echo $d->getFileData();
 
-} else if ($docid == 'backup') {
+} elseif ($docid === 'backup') {
 	session_require_perm('docman', $group_id, 'admin');
 
 	$df = new DocumentFactory($g);
@@ -92,10 +92,6 @@ if ($docid != 'backup' && $docid != 'webdav') {
 		exit_error($dgf->getErrorMessage(), 'docman');
 
 	$nested_groups = $dgf->getNested();
-
-	$d_arr =& $df->getDocuments();
-	if (!$d_arr || count($d_arr) <1)
-		$d_arr = &$df->getDocuments();
 
 	if ( $nested_groups != NULL ) {
 		$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
@@ -120,7 +116,7 @@ if ($docid != 'backup' && $docid != 'webdav') {
 		$warning_msg = _('No documents to backup.');
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
-} else if ($docid == 'webdav') {
+} elseif ($docid === 'webdav') {
 	$_SERVER['SCRIPT_NAME'] = '';
 	/* we need the group id for check authentification. */
 	$_SERVER["AUTH_TYPE"] = $group_id;
@@ -132,6 +128,55 @@ if ($docid != 'backup' && $docid != 'webdav') {
 	}
 	$server = new HTTP_WebDAV_Server_Docman;
 	$server->ServeRequest();
+} elseif ($docid === 'zip') {
+	session_require_perm('docman', $group_id, 'read');
+	$dirid = $arr[5];
+
+	$dg = new DocumentGroup($g,$dirid);
+	if ($dg->isError())
+		exit_error($dg->getErrorMessage(), 'docman');
+
+	$df = new DocumentFactory($g);
+	if ($df->isError())
+		exit_error($df->getErrorMessage(), 'docman');
+
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError())
+		exit_error($dgf->getErrorMessage(), 'docman');
+
+	$nested_groups = $dgf->getNested();
+
+	if ($dg->hasDocuments($nested_groups,$df)) {
+		$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
+		$file = forge_get_config('data_path').'/'.$filename;
+		$zip = new ZipArchive;
+		if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
+			exit_error(_('Unable to open zip archive for download as zip'),'docman');
+
+		// ugly workaround to get the files at doc_group_id level
+		$df->setDocGroupID($dg->getID());
+		$docs = $df->getDocuments(1);	// no caching
+		if (is_array($docs) && count($docs) > 0) {	// this group has documents
+			foreach ($docs as $doc) {
+				if ( !$zip->addFromString($doc->getFileName(),$doc->getFileData()))
+					return false;
+			}
+		}
+		if ( !docman_fill_zip($zip,$nested_groups,$df,$dg->getID()))
+			exit_error(_('Unable to fill zip archive for download as zip'), 'docman');
+
+		if ( !$zip->close())
+			exit_error(_('Unable to close zip archive for download as zip'), 'docman');
+
+		header('Content-disposition: filename="'.$filename.'"');
+		header('Content-type: application/binary');
+
+		readfile($file);
+		unlink($file);
+	} else {
+		$warning_msg = _('This directory is empty.');
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+	}
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
 }

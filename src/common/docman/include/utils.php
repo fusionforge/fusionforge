@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2000, Quentin Cregan/SourceForge
  * Copyright 2002-2004, GForge Team
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -101,7 +101,7 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 				return false;
 
 			$document_factory->setDocGroupID($dg->getID());
-			$docs = $document_factory->getDocuments();
+			$docs = $document_factory->getDocuments(1);	// no caching
 			if (is_array($docs) && count($docs) > 0) {	// this group has documents
 				foreach ($docs as $doc) {
 					if ( !$zip->addFromString($parent_docname.'/'.$dg->getName().'/'.$doc->getFileName(),$doc->getFileData()))

@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright (C) 2010 Alcatel-Lucent
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -50,6 +50,7 @@ jQuery(document).ready(function() {
 						{selector: '#docman-additem', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-reserveddocument', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
@@ -72,7 +73,7 @@ jQuery(document).ready(function() {
 
 <?php
 echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
-if (forge_check_perm ('docman', $group_id, 'approve')) {
+if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<a href="#" id="docman-editdirectory" title="'._('Edit this directory').'">'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 	// do not uncomment the line : trash directory is not correctly implemented
 	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
@@ -80,8 +81,12 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Permanently delete this directory').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 }
 
-if (forge_check_perm ('docman', $group_id, 'submit')) {
+if (forge_check_perm('docman', $group_id, 'submit')) {
 	echo '<a href="#" id="docman-additem" title="'. _('Add a new item in this directory') . '" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
+}
+
+if (forge_check_perm('docman', $group_id, 'read')) {
+	echo '<a href="/docman/view.php/'.$group_id.'/zip/'.$dirid.'" id="docman-downloadaszip" title="'. _('Download this directory as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 }
 
 echo '</h3>';
