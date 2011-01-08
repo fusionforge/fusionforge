@@ -716,7 +716,10 @@ class Document extends Error {
 			case "application/vnd.ms-cab-compressed":
 			case "application/x-alz-compressed":
 			case "application/x-astrotite-afa":
-			case "application/x-ace-compressed": {
+			case "application/x-ace-compressed":
+			case "application/x-cpio":
+			case "application/x-shar":
+			case "application/x-xz": {
 				$image = 'docman/file_type_archive.png';
 				break;
 			}
