@@ -216,7 +216,7 @@ class DocumentGroup extends Error {
 				$returned = $this->__injectZip($uploaded_data);
 				break;
 			}
-			case "application/rar": {
+			case "application/x-rar-compressed": {
 				$returned = $this->__injectRar($uploaded_data);
 				break;
 			}

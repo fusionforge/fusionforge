@@ -697,7 +697,26 @@ class Document extends Error {
 			}
 			case "application/zip":
 			case "application/x-tar":
-			case "application/x-rpm": {
+			case "application/x-rpm":
+			case "application/x-rar-compressed":
+			case "application/x-bzip2":
+			case "application/x-gzip":
+			case "application/x-lzip":
+			case "application/x-compress":
+			case "application/x-7z-compressed":
+			case "application/x-gtar":
+			case "application/x-stuffitx":
+			case "application/x-lzx":
+			case "application/x-lzh":
+			case "application/x-gca-compressed":
+			case "application/x-apple-diskimage":
+			case "application/x-dgc-compressed":
+			case "application/x-dar":
+			case "application/x-cfs-compressed":
+			case "application/vnd.ms-cab-compressed":
+			case "application/x-alz-compressed":
+			case "application/x-astrotite-afa":
+			case "application/x-ace-compressed": {
 				$image = 'docman/file_type_archive.png';
 				break;
 			}
