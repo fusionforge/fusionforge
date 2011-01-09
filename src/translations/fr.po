@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-09 11:57+0100\n"
-"PO-Revision-Date: 2010-10-06 16:17+0200\n"
+"PO-Revision-Date: 2011-01-09 12:08+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -39,26 +39,23 @@ msgstr "La description du document doit avoir au moins 10 caractères."
 
 #: common/docman/Document.class.php:127 common/docman/Document.class.php:687
 msgid "Document already published in this directory"
-msgstr ""
+msgstr "Ce document a déjà été publié dans ce dossier."
 
 #: common/docman/Document.class.php:176 common/docman/Document.class.php:188
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "Erreur lors de l'ajout d'un forum"
+msgstr "Erreur lors de l'ajout d'un document :"
 
 #: common/docman/Document.class.php:195
-#, fuzzy
 msgid "Error Adding Document: No Storage API"
-msgstr "Erreur lors de la suppression de documents : "
+msgstr "Erreur lors de l'ajoud d'un document : pas d'API de stockage."
 
 #: common/docman/Document.class.php:220
 msgid "Document:: Invalid docid"
 msgstr "Document : numéro de document invalide."
 
 #: common/docman/Document.class.php:539
-#, fuzzy
 msgid "Unable To Remove Monitor"
-msgstr "Impossible d'ajouter la surveillance"
+msgstr "Impossible de désactiver la surveillance."
 
 #: common/docman/Document.class.php:560 common/forum/Forum.class.php:462
 msgid "Unable To Add Monitor"
@@ -76,17 +73,15 @@ msgstr "Action non permise."
 
 #: common/docman/Document.class.php:760
 msgid "No Storage API"
-msgstr ""
+msgstr "Pas d'API de stockage."
 
 #: common/docman/Document.class.php:782
-#, fuzzy
 msgid "New document"
-msgstr "Ajouter un document"
+msgstr "Nouveau document"
 
 #: common/docman/Document.class.php:784
-#, fuzzy
 msgid "Updated document"
-msgstr "Ajouter un document"
+msgstr "Document mis à jour"
 
 #: common/docman/Document.class.php:787
 #: plugins/contribtracker/www/index.php:35
@@ -95,33 +90,28 @@ msgid "Project:"
 msgstr "Projet :"
 
 #: common/docman/Document.class.php:788
-#, fuzzy
 msgid "Directory:"
-msgstr "Nom du répertoire"
+msgstr "Répertoire :"
 
 #: common/docman/Document.class.php:789
-#, fuzzy
 msgid "Document title:"
-msgstr "Titre du document"
+msgstr "Titre du document :"
 
 #: common/docman/Document.class.php:790
-#, fuzzy
 msgid "Document description:"
-msgstr "Description du rôle :"
+msgstr "Description du document :"
 
 #: common/docman/Document.class.php:791
-#, fuzzy
 msgid "Submitter:"
-msgstr "Soumis par"
+msgstr "Soumis par :"
 
 #: common/docman/Document.class.php:793
 msgid "For more info, visit:"
-msgstr ""
+msgstr "Pour plus d'informations, visitez :"
 
 #: common/docman/Document.class.php:817
-#, fuzzy
 msgid "Error Deleting Document:"
-msgstr "Erreur lors de la suppression de documents : "
+msgstr "Erreur lors de la suppression d'un document :"
 
 #: common/docman/Document.class.php:827
 #, fuzzy
@@ -165,7 +155,7 @@ msgstr "Le nom du groupe est déjà pris."
 
 #: common/docman/DocumentGroup.class.php:140
 msgid "DocumentGroup::create() Error Adding Directory:"
-msgstr ""
+msgstr "Erreur lors de la création du dossier :"
 
 #: common/docman/DocumentGroup.class.php:201
 #, fuzzy
@@ -204,7 +194,7 @@ msgstr "Nom de fichier invalide."
 
 #: common/docman/actions/addfile.php:119
 msgid "Unknown type submission."
-msgstr ""
+msgstr "Type de soumission inconnu."
 
 #: common/docman/actions/addfile.php:137
 #, fuzzy
@@ -300,7 +290,7 @@ msgstr "Suivi arrétè"
 
 #: common/docman/actions/monitorfile.php:60
 msgid "Docman : monitoring action unknown."
-msgstr ""
+msgstr "Action de surveillance inconnue."
 
 #: common/docman/actions/releasefile.php:44
 #, fuzzy
@@ -423,20 +413,14 @@ msgstr "d/m/Y H:i"
 
 #: common/docman/include/utils.php:229 common/docman/views/addfile.php:63
 #: common/docman/views/editfile.php:48 common/docman/views/editfile.php:66
-#, fuzzy
 msgid "Document Title:"
-msgstr "Titre du document"
+msgstr "Titre du document :"
 
 #: common/docman/include/utils.php:231
-#, fuzzy
 msgid ""
 " Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
-msgstr ""
-"<strong>Titre du document</strong> : se rapporte au titre (relativement "
-"bref) du document  (par exemple : Comment utiliser le serveur de "
-"téléchargement)<br /><strong>Description</strong> : une brève description "
-"placée juste en dessous du titre."
+msgstr "Se rapporte au titre (relativement bref) du document  (par exemple : Comment utiliser le serveur de téléchargement)."
 
 #: common/docman/include/utils.php:233 common/docman/views/addfile.php:64
 #: common/docman/views/editfile.php:52 common/docman/views/editfile.php:73
@@ -548,9 +532,8 @@ msgid "A brief description to be placed just under the title."
 msgstr ""
 
 #: common/docman/views/addfile.php:89
-#, fuzzy
 msgid "Type of Document"
-msgstr "Utiliser le gestionnaire de documents"
+msgstr "Type de document"
 
 #: common/docman/views/addfile.php:91 common/docman/views/addfile.php:106
 #: plugins/contribtracker/www/global_admin.php:242
@@ -4017,7 +4000,6 @@ msgid ""
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:99
-#, fuzzy
 msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 
@@ -4745,7 +4727,6 @@ msgid "Diff To"
 msgstr "Afficher les différences avec"
 
 #: plugins/extratabs/common/ExtraTabsPlugin.class.php:43
-#, fuzzy
 msgid "Extra Tabs Admin"
 msgstr "Gestion des onglets supplémentaires"
 
@@ -4794,14 +4775,13 @@ msgid "Tab not moved, already at last position"
 msgstr "L'onglet est déjà à la dernière position."
 
 #: plugins/extratabs/www/index.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot rename the tab: %s"
-msgstr "Impossible de supprimer le label : %s"
+msgstr "Impossible de renommer l'onglet : %s"
 
 #: plugins/extratabs/www/index.php:166
-#, fuzzy
 msgid "Tab successfully renamed"
-msgstr "Onglet ajouté avec succès."
+msgstr "Onglet renommé avec succès."
 
 #: plugins/extratabs/www/index.php:179
 #, php-format
@@ -4819,19 +4799,17 @@ msgid "Cannot set type: %s"
 msgstr "Échec lors de la suppression d'un label : %s"
 
 #: plugins/extratabs/www/index.php:194
-#, fuzzy
 msgid "Type successfully changed"
-msgstr "Onglet ajouté avec succès."
+msgstr "Onglet modifié avec succès."
 
 #: plugins/extratabs/www/index.php:199
-#, fuzzy
 msgid "Nothing done"
 msgstr "Pas de modifications"
 
 #: plugins/extratabs/www/index.php:208
-#, fuzzy, php-format
+#, php-format
 msgid "Manage extra tabs for project %1$s"
-msgstr "Gestion des onglets supplémentaires"
+msgstr "Gestion des onglets supplémentaires pour le projet %1$s"
 
 #: plugins/extratabs/www/index.php:213 plugins/extratabs/www/index.php:219
 msgid "Add new tab"
@@ -4872,33 +4850,28 @@ msgid "Add tab"
 msgstr "Ajouter un onglet"
 
 #: plugins/extratabs/www/index.php:249
-#, fuzzy
 msgid "Modify extra tabs"
-msgstr "Gestion des onglets supplémentaires"
+msgstr "Modifier les onglets existants"
 
 #: plugins/extratabs/www/index.php:251
-#, fuzzy
 msgid "You can modify the tabs that you already added."
-msgstr "Vous pouvez modifier les labels déjà créés."
+msgstr "Vous pouvez modifier les onglets déjà créés."
 
 #: plugins/extratabs/www/index.php:257 plugins/extratabs/www/index.php:285
-#, fuzzy
 msgid "Modify tab"
-msgstr "Modification d'une tâche"
+msgstr "Modifier l'onglet"
 
 #: plugins/extratabs/www/index.php:260 plugins/extratabs/www/index.php:302
 msgid "Tab to modify:"
 msgstr "Onglet à modifier :"
 
 #: plugins/extratabs/www/index.php:275
-#, fuzzy
 msgid "Rename to:"
-msgstr "Nom du rôle :"
+msgstr "Renommer en :"
 
 #: plugins/extratabs/www/index.php:278
-#, fuzzy
 msgid "New URL:"
-msgstr "URL:"
+msgstr "Nouvelle URL :"
 
 #: plugins/extratabs/www/index.php:290
 msgid "Move or delete extra tabs"
@@ -4915,9 +4888,8 @@ msgstr ""
 "onglets standard, et ne peuvent être réordonnés qu'entre eux."
 
 #: plugins/extratabs/www/index.php:298
-#, fuzzy
 msgid "Move or delete tab"
-msgstr "Déplacer ou supprimer des onglets supplémentaires"
+msgstr "Déplacer ou supprimer l'onglet"
 
 #: plugins/extratabs/www/index.php:312
 msgid "Move tab before"
