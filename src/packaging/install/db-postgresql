@@ -60,6 +60,7 @@ db/20090507-add_element_pos.sql		usr/share/@OLDPACKAGE@/db/
 db/20090507-add_project_query.sql	usr/share/@OLDPACKAGE@/db/
 db/20090507-browse_list.sql		usr/share/@OLDPACKAGE@/db/
 db/2010*.sql				usr/share/@OLDPACKAGE@/db/
+db/2011*.sql				usr/share/@OLDPACKAGE@/db/
 #
 utils/inject-users.php usr/share/@OLDPACKAGE@/bin/
 utils/inject-groups.php usr/share/@OLDPACKAGE@/bin/
