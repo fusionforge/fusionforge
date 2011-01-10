@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:57+0100\n"
-"PO-Revision-Date: 2011-01-09 12:08+0100\n"
+"POT-Creation-Date: 2011-01-10 11:29+0100\n"
+"PO-Revision-Date: 2011-01-10 11:40+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -416,11 +416,14 @@ msgstr "d/m/Y H:i"
 msgid "Document Title:"
 msgstr "Titre du document :"
 
-#: common/docman/include/utils.php:231
+#: common/docman/include/utils.php:231 common/docman/views/addfile.php:63
+#: common/docman/views/editfile.php:50
 msgid ""
-" Refers to the relatively brief title of the document (e.g. How to use the "
+"Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
-msgstr "Se rapporte au titre (relativement bref) du document  (par exemple : Comment utiliser le serveur de téléchargement)."
+msgstr ""
+"Se rapporte au titre (relativement bref) du document (par exemple : Comment "
+"utiliser le serveur de téléchargement)."
 
 #: common/docman/include/utils.php:233 common/docman/views/addfile.php:64
 #: common/docman/views/editfile.php:52 common/docman/views/editfile.php:73
@@ -433,9 +436,10 @@ msgstr "Se rapporte au titre (relativement bref) du document  (par exemple : Co
 msgid "Description:"
 msgstr "Description :"
 
-#: common/docman/include/utils.php:235
-msgid " A brief description to be placed just under the title."
-msgstr ""
+#: common/docman/include/utils.php:235 common/docman/views/addfile.php:64
+#: common/docman/views/editfile.php:54
+msgid "A brief description to be placed just under the title."
+msgstr "Une brève description, affichée sous le titre."
 
 #: common/docman/include/utils.php:239 common/docman/views/addfile.php:67
 #: common/docman/views/editfile.php:58
@@ -515,21 +519,12 @@ msgstr "Valider"
 #: common/docman/include/webdav.php:234 common/docman/include/webdav.php:245
 #: common/docman/include/webdav.php:306
 msgid "webdav db error:"
-msgstr ""
+msgstr "Erreur WebDAV :"
 
 #: common/docman/views/addfile.php:37
 msgid "You MUST first create at least one directory to store your document."
 msgstr ""
-
-#: common/docman/views/addfile.php:63 common/docman/views/editfile.php:50
-msgid ""
-"Refers to the relatively brief title of the document (e.g. How to use the "
-"download server)."
-msgstr ""
-
-#: common/docman/views/addfile.php:64 common/docman/views/editfile.php:54
-msgid "A brief description to be placed just under the title."
-msgstr ""
+"Vous devez d'abord créer au moins un dossier pour stocker votre document."
 
 #: common/docman/views/addfile.php:89
 msgid "Type of Document"
@@ -599,11 +594,11 @@ msgstr "Extraire les documents et les répertoires sous forme d'une archive."
 
 #: common/docman/views/admin.php:86
 msgid "Enable Create Online Documents"
-msgstr ""
+msgstr "Activer la création de documents en ligne"
 
 #: common/docman/views/admin.php:89
 msgid "Disable Create Online Documents"
-msgstr ""
+msgstr "Désactiver la création de documents en ligne"
 
 #: common/docman/views/admin.php:100
 msgid "Enable Search Engine"
@@ -619,11 +614,11 @@ msgstr "Forcer une réindexation par le moteur de recherche"
 
 #: common/docman/views/admin.php:124
 msgid "Enable Webdav Interface"
-msgstr ""
+msgstr "Activer l'interface WebDAV"
 
 #: common/docman/views/admin.php:127
 msgid "Disable Webdav Interface"
-msgstr ""
+msgstr "Désactiver l'interface WebDAV"
 
 #: common/docman/views/editdocgroup.php:47
 msgid "Directory Name"
@@ -1095,7 +1090,7 @@ msgstr "Ce groupe n'a pas de forums modérés."
 
 #: common/forum/ForumAdmin.class.php:298
 msgid "Proceed? Actions are permanent!"
-msgstr ""
+msgstr "Continuer ?  Ces actions sont irréversibles !"
 
 #: common/forum/ForumAdmin.class.php:318 www/forum/admin/index.php:100
 #: www/forum/admin/index.php:166
@@ -1554,7 +1549,7 @@ msgstr ""
 
 #: common/include/DatabaseInstaller.class.php:22
 msgid "No database installation scripts found."
-msgstr ""
+msgstr "Pas de scripts trouvés pour l'installation de la base de données."
 
 #: common/include/DatabaseInstaller.class.php:94
 #, fuzzy
@@ -2419,7 +2414,7 @@ msgstr "Il existe déjà un utilisateur avec cette adresse email."
 
 #: common/include/User.class.php:1015
 msgid "ERROR: Invalid Shell"
-msgstr ""
+msgstr "Erreur : shell invalide"
 
 #: common/include/User.class.php:1024
 #, fuzzy
@@ -3594,6 +3589,8 @@ msgid ""
 "If you monitor documents, you will be sent new update in the form of an "
 "email."
 msgstr ""
+"Si vous surveillez des documents, vous recevrez une notification par\n"
+"courrier électronique lors de leur mise à jour."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:42
 msgid ""
@@ -3615,15 +3612,14 @@ msgid "%s new"
 msgstr "%s nouveaux"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:114
-#, fuzzy
 msgid ""
 "List documents that you are currently monitoring, by project.<br />To cancel "
 "any of the monitored items just click on the trash icon next to the item "
 "label."
 msgstr ""
-"Liste des forums que vous surveillez actuellement, par projet.<br\n"
+"Liste des documents que vous surveillez actuellement, par projet.<br\n"
 "/>Pour interrompre cette surveillance, cliquez simplement sur l'icône\n"
-"de la corbeille placée à proximité du nom du forum."
+"de la corbeille placée à proximité du nom du document."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:34
 msgid "Monitored Forums"
@@ -4159,6 +4155,8 @@ msgstr "Administration des blocs"
 #: plugins/blocks/www/index.php:60
 msgid "Block to replace the default project description with an enhanced one."
 msgstr ""
+"Bloc de HTML remplaçant la description standard du projet par une\n"
+"version améliorée."
 
 #: plugins/blocks/www/index.php:65
 msgid "Block to list informations requested to ask to join a project"
@@ -4245,7 +4243,7 @@ msgstr "Sauvegarder les blocs"
 
 #: plugins/blocks/www/index.php:308
 msgid "Block Saved"
-msgstr ""
+msgstr "Bloc sauvegardé"
 
 #: plugins/blocks/www/index.php:328
 msgid ""
@@ -4786,7 +4784,7 @@ msgstr "Onglet renommé avec succès."
 #: plugins/extratabs/www/index.php:179
 #, php-format
 msgid "Cannot change URL: %s"
-msgstr ""
+msgstr "Impossible de changer l'URL : %s"
 
 #: plugins/extratabs/www/index.php:181
 #, fuzzy
@@ -4843,7 +4841,7 @@ msgstr "Liens"
 
 #: plugins/extratabs/www/index.php:234 plugins/extratabs/www/index.php:282
 msgid "Iframe"
-msgstr ""
+msgstr "Iframe"
 
 #: plugins/extratabs/www/index.php:237
 msgid "Add tab"
@@ -5383,7 +5381,7 @@ msgstr "Résultats suivants"
 
 #: plugins/gravatar/common/gravatarPlugin.class.php:29
 msgid "Gravatar Plugin"
-msgstr ""
+msgstr "Greffon Gravatar"
 
 #: plugins/hudson/include/HudsonBuild.class.php:39
 #: plugins/hudson/include/HudsonJob.class.php:43
@@ -6139,9 +6137,8 @@ msgstr ""
 
 #: plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:72
-#, fuzzy
 msgid "Mailing List"
-msgstr "Listes de diffusion"
+msgstr "Liste de diffusion"
 
 #: plugins/mailman/www/mailman_utils.php:60 www/mail/index.php:78
 msgid "Subscription"
@@ -7127,7 +7124,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:96
 #: plugins/scmbzr/common/BzrPlugin.class.php:104
 msgid "Developer Bazaar Access via SSH"
-msgstr ""
+msgstr "Accès au dépôt Bazaar pour les développeurs via SSH"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:99
 #, fuzzy
@@ -7147,17 +7144,11 @@ msgid "branchname"
 msgstr "nomdebranche"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:107
-#, fuzzy
 msgid ""
 "Only project developers can access the Bazaar branches via this method. SSH "
 "must be installed on your client machine. Substitute <i>developername</i> "
 "with the proper value. Enter your site password when prompted."
-msgstr ""
-"<p><b>Accès Bazaar via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra "
-"être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin "
-"de taper votre mot de passe.</p>"
+msgstr "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH doit être installé sur votre poste client. La valeur <i>nom-du-développeur</i> devra être remplacée par votre identifiant de connexion. Vous pourrez avoir besoin de taper votre mot de passe."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:109
 #: plugins/scmcvs/common/CVSPlugin.class.php:107
@@ -7277,7 +7268,7 @@ msgstr "nom-du-module"
 #: plugins/scmcvs/common/CVSPlugin.class.php:92
 #: plugins/scmcvs/common/CVSPlugin.class.php:101
 msgid "Developer CVS Access via SSH"
-msgstr ""
+msgstr "Accès au dépôt CVS pour les développeurs via SSH"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:94
 #, fuzzy
@@ -7402,7 +7393,7 @@ msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:139
 msgid "Developer Darcs Access via SSH"
-msgstr ""
+msgstr "Accès au dépôt DARCS pour les développeurs via SSH"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:164
 msgid "Darcs Repository Browser"
@@ -7479,12 +7470,16 @@ msgid_plural ""
 "Some of this project's members also have personal Git repositories that can "
 "be checked out anonymously."
 msgstr[0] ""
+"Un des membres de ce projet a également un dépôt Git personnel, qui\n"
+"peut être récupéré de manière anonyme."
 msgstr[1] ""
+"Certains des membres de ce projet ont également un dépôt Git\n"
+"personnel, qui peut être récupéré de manière anonyme."
 
 #: plugins/scmgit/common/GitPlugin.class.php:113
 #: plugins/scmgit/common/GitPlugin.class.php:131
 msgid "Developer GIT Access via SSH"
-msgstr ""
+msgstr "Accès au dépôt Git pour les développeurs via SSH"
 
 #: plugins/scmgit/common/GitPlugin.class.php:116
 #, fuzzy
@@ -7526,7 +7521,7 @@ msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:147
 msgid "Access to your personal repository"
-msgstr ""
+msgstr "Accès à votre dépôt personnel"
 
 #: plugins/scmgit/common/GitPlugin.class.php:150
 #, fuzzy
@@ -7541,7 +7536,7 @@ msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:158
 msgid "Request a personal repository"
-msgstr ""
+msgstr "Créer un dépôt personnel"
 
 #: plugins/scmgit/common/GitPlugin.class.php:161
 msgid ""
@@ -18005,6 +18000,16 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #: www/widgets/widgets.php:71
 msgid "Project info"
 msgstr "Information sur un projet"
+
+#~ msgid ""
+#~ " Refers to the relatively brief title of the document (e.g. How to use "
+#~ "the download server)."
+#~ msgstr ""
+#~ "Se rapporte au titre (relativement bref) du document (par exemple : "
+#~ "Comment utiliser le serveur de téléchargement)."
+
+#~ msgid " A brief description to be placed just under the title."
+#~ msgstr "Une brève description, affichée sous le titre."
 
 #~ msgid "Group that document belongs in"
 #~ msgstr "Groupe auquel le document appartient"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:57+0100\n"
+"POT-Creation-Date: 2011-01-10 11:29+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -425,15 +425,12 @@ msgstr "A-m-d H:i"
 msgid "Document Title:"
 msgstr "Título do documento "
 
-#: common/docman/include/utils.php:231
-#, fuzzy
+#: common/docman/include/utils.php:231 common/docman/views/addfile.php:63
+#: common/docman/views/editfile.php:50
 msgid ""
-" Refers to the relatively brief title of the document (e.g. How to use the "
+"Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
-"<strong>Título do documento</strong>: refírese ao título breve do documento "
-"(por exemplo, como usar o servidor de descarga)<br /><strong>Descrición:</"
-"strong> unha descrición breve que se colocará debaixo do título. "
 
 #: common/docman/include/utils.php:233 common/docman/views/addfile.php:64
 #: common/docman/views/editfile.php:52 common/docman/views/editfile.php:73
@@ -446,8 +443,9 @@ msgstr ""
 msgid "Description:"
 msgstr "Descrición:"
 
-#: common/docman/include/utils.php:235
-msgid " A brief description to be placed just under the title."
+#: common/docman/include/utils.php:235 common/docman/views/addfile.php:64
+#: common/docman/views/editfile.php:54
+msgid "A brief description to be placed just under the title."
 msgstr ""
 
 #: common/docman/include/utils.php:239 common/docman/views/addfile.php:67
@@ -534,16 +532,6 @@ msgstr ""
 
 #: common/docman/views/addfile.php:37
 msgid "You MUST first create at least one directory to store your document."
-msgstr ""
-
-#: common/docman/views/addfile.php:63 common/docman/views/editfile.php:50
-msgid ""
-"Refers to the relatively brief title of the document (e.g. How to use the "
-"download server)."
-msgstr ""
-
-#: common/docman/views/addfile.php:64 common/docman/views/editfile.php:54
-msgid "A brief description to be placed just under the title."
 msgstr ""
 
 #: common/docman/views/addfile.php:89
@@ -18375,6 +18363,16 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 msgid "Project info"
 msgstr "Información do proxecto"
+
+#, fuzzy
+#~ msgid ""
+#~ " Refers to the relatively brief title of the document (e.g. How to use "
+#~ "the download server)."
+#~ msgstr ""
+#~ "<strong>Título do documento</strong>: refírese ao título breve do "
+#~ "documento (por exemplo, como usar o servidor de descarga)<br /"
+#~ "><strong>Descrición:</strong> unha descrición breve que se colocará "
+#~ "debaixo do título. "
 
 #~ msgid "Group that document belongs in"
 #~ msgstr "Grupo ao que pertence o documento"

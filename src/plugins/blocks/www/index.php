@@ -202,7 +202,7 @@ if (!$type) {
 			exit_no_group();
 		}
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interfacer'),$pluginname),'home');			
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');			
 		}
 		session_require_perm ('project_admin', $id) ;
 

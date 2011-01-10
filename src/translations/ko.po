@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 11:57+0100\n"
+"POT-Creation-Date: 2011-01-10 11:29+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -424,15 +424,12 @@ msgstr "Y-m-d H:i"
 msgid "Document Title:"
 msgstr "문서 제목"
 
-#: common/docman/include/utils.php:231
-#, fuzzy
+#: common/docman/include/utils.php:231 common/docman/views/addfile.php:63
+#: common/docman/views/editfile.php:50
 msgid ""
-" Refers to the relatively brief title of the document (e.g. How to use the "
+"Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
-"<strong>문서 제목</strong>: 이 문서에 대한 간단한 제목입니다. (예: 다운로드 "
-"서버를 사용하는 방법)<br /><strong>설명:</strong> 제목 아래에 들어갈 간단한 "
-"설명"
 
 #: common/docman/include/utils.php:233 common/docman/views/addfile.php:64
 #: common/docman/views/editfile.php:52 common/docman/views/editfile.php:73
@@ -445,8 +442,9 @@ msgstr ""
 msgid "Description:"
 msgstr "Description:"
 
-#: common/docman/include/utils.php:235
-msgid " A brief description to be placed just under the title."
+#: common/docman/include/utils.php:235 common/docman/views/addfile.php:64
+#: common/docman/views/editfile.php:54
+msgid "A brief description to be placed just under the title."
 msgstr ""
 
 #: common/docman/include/utils.php:239 common/docman/views/addfile.php:67
@@ -530,16 +528,6 @@ msgstr ""
 
 #: common/docman/views/addfile.php:37
 msgid "You MUST first create at least one directory to store your document."
-msgstr ""
-
-#: common/docman/views/addfile.php:63 common/docman/views/editfile.php:50
-msgid ""
-"Refers to the relatively brief title of the document (e.g. How to use the "
-"download server)."
-msgstr ""
-
-#: common/docman/views/addfile.php:64 common/docman/views/editfile.php:54
-msgid "A brief description to be placed just under the title."
 msgstr ""
 
 #: common/docman/views/addfile.php:89
@@ -17793,6 +17781,15 @@ msgstr "사용자ID"
 #, fuzzy
 msgid "Project info"
 msgstr "프로젝트 정보"
+
+#, fuzzy
+#~ msgid ""
+#~ " Refers to the relatively brief title of the document (e.g. How to use "
+#~ "the download server)."
+#~ msgstr ""
+#~ "<strong>문서 제목</strong>: 이 문서에 대한 간단한 제목입니다. (예: 다운로"
+#~ "드 서버를 사용하는 방법)<br /><strong>설명:</strong> 제목 아래에 들어갈 간"
+#~ "단한 설명"
 
 #~ msgid "Group that document belongs in"
 #~ msgstr "문서가 속하는 그룹:"
