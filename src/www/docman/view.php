@@ -33,7 +33,6 @@ require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 require_once $gfcommon.'docman/include/utils.php';
-require_once $gfcommon.'docman/include/webdav.php';
 
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=$arr[3];
@@ -120,17 +119,23 @@ if ($docid != 'backup' && $docid != 'webdav' ) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
 } else if ( $docid == 'webdav' ) {
-	$_SERVER['SCRIPT_NAME'] = '';
-	/* we need the group id for check authentification. */
-	$_SERVER["AUTH_TYPE"] = $group_id;
-	if (!isset($_SERVER['PHP_AUTH_USER'])) {
-		header('WWW-Authenticate: Basic realm="Webdav Access" (For anonymous access : click enter)');
-		header('HTTP/1.0 401 Unauthorized');
-		echo _('Webdav Access Canceled by user');
-		die();
+	if (forge_get_config('use_webdav') && $g->useWebDav()) {
+		require_once $gfcommon.'docman/include/webdav.php';
+		$_SERVER['SCRIPT_NAME'] = '';
+		/* we need the group id for check authentification. */
+		$_SERVER["AUTH_TYPE"] = $group_id;
+		if (!isset($_SERVER['PHP_AUTH_USER'])) {
+			header('WWW-Authenticate: Basic realm="Webdav Access" (For anonymous access : click enter)');
+			header('HTTP/1.0 401 Unauthorized');
+			echo _('Webdav Access Canceled by user');
+			die();
+		}
+		$server = new HTTP_WebDAV_Server_Docman;
+		$server->ServeRequest();
+	} else {
+		$warning_msg = _('No webdav interface enabled.');
+		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($warning_msg));
 	}
-	$server = new HTTP_WebDAV_Server_Docman;
-	$server->ServeRequest();
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'),'docman');
 }
