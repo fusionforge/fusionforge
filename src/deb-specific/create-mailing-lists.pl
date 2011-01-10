@@ -84,14 +84,19 @@ eval {
 	    print CONFIG "advertised = True\n" ;
 	    print CONFIG "subscribe_policy = 1\n" ;
 	}
-
 	close CONFIG ;
 	$cmd = "/usr/lib/mailman/bin/config_list -i $tmp $listname" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
 	unlink $tmp ;
 
-	$cmd= "/usr/lib/mailman/bin/withlist -l -r fix_url $listname -u $sys_lists_host" ;
+	my $urlpattern;
+	if (&forge_get_config ('use_ssl') eq 'yes') {
+	    $urlpattern = 'https://%s/cgi-bin/mailman/';
+	} else {
+	    $urlpattern = 'http://%s/cgi-bin/mailman/';
+	}
+	$cmd= "/usr/lib/mailman/bin/withlist -l -r fix_url $listname -u $sys_lists_host -p '$urlpattern'" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
 
