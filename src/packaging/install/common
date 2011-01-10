@@ -18,6 +18,7 @@ deb-specific/user_dump_update.pl       usr/share/@OLDPACKAGE@/bin/
 deb-specific/group_dump_update.pl      usr/share/@OLDPACKAGE@/bin/
 #cronjobs/cvs-cron/default_page.php    usr/share/@OLDPACKAGE@/cronjobs/
 deb-specific/ssh_dump_update.pl        usr/share/@OLDPACKAGE@/bin/
+deb-specific/mailfwd_update.pl         usr/share/@OLDPACKAGE@/bin/
 #
 deb-specific/update-user-group-ssh.sh  usr/share/@OLDPACKAGE@/bin/
 #

@@ -27,6 +27,7 @@ else
 	/usr/share/gforge/bin/user_dump_update.pl
 	/usr/share/gforge/bin/group_dump_update.pl
 	/usr/share/gforge/bin/ssh_dump_update.pl
+	/usr/share/gforge/bin/mailfwd_update.pl
 	#[ -f /usr/share/gforge/bin/cvs_dump.pl ] && su -s /bin/sh gforge -c /usr/share/gforge/bin/cvs_dump.pl || true
 	#[ -f /usr/share/gforge/bin/cvs_update.pl ] && /usr/share/gforge/bin/cvs_update.pl || true
 
