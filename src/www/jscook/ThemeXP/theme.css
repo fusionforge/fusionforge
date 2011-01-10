@@ -32,6 +32,8 @@
 
 	border:		0;
 	padding:	0;
+
+	margin-bottom:	0;
 }
 
 .ThemeXPRow,.ThemeXPRowHover,.ThemeXPRowActive,.ThemeXPRowSelected
