@@ -236,11 +236,11 @@ function document_editdata(&$document) {
 <p><strong>
 <?php echo _('Document Title:') ?>
 </strong>
-<?php echo _(' Refers to the relatively brief title of the document (e.g. How to use the download server).') ?>
+<?php echo _('Refers to the relatively brief title of the document (e.g. How to use the download server).') ?>
 </p><p><strong>
 <?php echo _('Description:') ?>
 </strong>
-<?php echo _(' A brief description to be placed just under the title.') ?>
+<?php echo _('A brief description to be placed just under the title.') ?>
 </p>
 <?php
 	if ($g->useDocmanSearch())

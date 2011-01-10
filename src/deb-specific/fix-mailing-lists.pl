@@ -60,6 +60,12 @@ eval {
 	system ($cmd) ;
 	unlink $tmp ;
 
+	my $urlpattern;
+	if (&forge_get_config ('use_ssl') eq 'yes') {
+	    $urlpattern = 'https://%s/cgi-bin/mailman/';
+	} else {
+	    $urlpattern = 'http://%s/cgi-bin/mailman/';
+	}
 	$cmd= "/usr/lib/mailman/bin/withlist -l -r fix_url $listname -u $sys_lists_host" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;

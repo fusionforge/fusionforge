@@ -576,6 +576,7 @@ src/db/20101027-docman-lock.sql -text
 src/db/20101029-docman-monitoring.sql -text
 src/db/20101105-pfo-rbac.sql -text
 src/db/20101213-project-template.sql -text
+src/db/20110110-pw-size.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text

@@ -347,7 +347,12 @@ Thank you for registering your project with %1$s.
 	 * @return string url of the info page
 	 */
 	function getExternalInfoUrl() {
-		return 'http://'.forge_get_config('lists_host').'/mailman/listinfo/'.$this->getName();
+		if (forge_get_config('use_ssl')) {
+			$proto = 'https';
+		} else {
+			$proto = 'http';
+		}
+		return "$proto://".forge_get_config('lists_host').'/mailman/listinfo/'.$this->getName();
 	}
 	
 	/**
@@ -356,7 +361,12 @@ Thank you for registering your project with %1$s.
 	 * @return string url of the admin
 	 */
 	function getExternalAdminUrl() {
-		return 'http://'.forge_get_config('lists_host').'/mailman/admin/'.$this->getName();
+		if (forge_get_config('use_ssl')) {
+			$proto = 'https';
+		} else {
+			$proto = 'http';
+		}
+		return "$proto://".forge_get_config('lists_host').'/mailman/admin/'.$this->getName();
 	}
 
 	/**
