@@ -3,8 +3,8 @@ Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
-Build-Depends-Indep: sharutils, docbook-to-man, devscripts
-Build-Depends: debhelper (>= 7), dpatch, perl, gettext
-Standards-Version: 3.8.4
+Build-Depends-Indep: sharutils, docbook-to-man, devscripts, gettext
+Build-Depends: debhelper (>= 7), dpatch, perl
+Standards-Version: 3.9.1
 Homepage: http://fusionforge.org/
 Vcs-Bzr: http://scm.fusionforge.org/bzr/fusionforge/svn-trunk-ro/
