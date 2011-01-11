@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Tue, 11 Jan 2011 13:48:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FVideoPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FVideoPlugin 7826 2011-01-11 12:52:54Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FVideoPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -65,6 +65,11 @@ This is equivalent to:
 
 * Roger Guignard, Alcatel-Lucent
 * Marc-Etienne Vargenau, Alcatel-Lucent
+
+== See Also ==
+* [[Help:Images]]
+* [[Help:Adobe Flash]]
+* [[Help:Wikicreole]]
 
 <noinclude>
 ----

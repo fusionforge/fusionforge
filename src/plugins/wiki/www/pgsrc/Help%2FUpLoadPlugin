@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
+Date: Fri,  7 Jan 2011 17:32:57 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FUpLoadPlugin 7757 2010-12-09 13:53:00Z vargenau $
+X-Rcs-Id: $Id: Help%2FUpLoadPlugin 7825 2011-01-07 16:35:43Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FUpLoadPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -9,12 +9,10 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~UpLoad** [[Help:WikiPlugin|plugin]] displays an editbox and two buttons.
-The first button let's you choose the file to be uploaded at your local filesystem.
-The textvalue of this button is localised from your browser.
-The second "Upload" button actually uploads the given filename to the upload directory.
+* The first button lets you choose the file to be uploaded at your local filesystem. The textvalue of this button is localised from your browser.
+* The second "Upload" button actually uploads the given filename to the upload directory.
 This directory is not browsable, any file there may be accessed by using the "Upload~:"
 [[InterWikiMap]] prefix to the given filename. This way you can easily inline uploaded images.
-See [[PhpWiki:InlineUploadedImages]].
 
 == Usage ==
 
@@ -41,6 +39,14 @@ See [[PhpWiki:InlineUploadedImages]].
 | **page**
 | The page where the uploaded files are publicly listed, if autolink is true.
 | Current page
+|-
+| **size**
+| Size of file input box.
+| 50
+|-
+| **mode**
+| 'actionpage' or 'edit'
+| actionpage
 |}
 
 == Notes ==
@@ -57,6 +63,10 @@ See [[PhpWiki:InlineUploadedImages]].
 }}}
 
 <<UpLoad>>
+
+== See Also ==
+
+* [[PhpWiki:InlineUploadedImages]]
 
 <noinclude>
 ----

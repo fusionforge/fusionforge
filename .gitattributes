@@ -3137,6 +3137,7 @@ src/plugins/wiki/www/pgsrc/Help -text
 src/plugins/wiki/www/pgsrc/Help%00252FActionPage -text
 src/plugins/wiki/www/pgsrc/Help%00252FAddCommentPlugin -text
 src/plugins/wiki/www/pgsrc/Help%00252FAddingPages -text
+src/plugins/wiki/www/pgsrc/Help%00252FAdobe%20Flash -text
 src/plugins/wiki/www/pgsrc/Help%00252FAdvice%20for%20Mediawiki%20users -text
 src/plugins/wiki/www/pgsrc/Help%2FAllPagesPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FAllUsersPlugin -text
