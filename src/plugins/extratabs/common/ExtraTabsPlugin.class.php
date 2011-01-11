@@ -72,8 +72,8 @@ class ExtraTabsPlugin extends Plugin {
 						
 					case 1: // Iframe
 						$params['DIRS'][] = '/plugins/'.$this->name.'/iframe.php?group_id='.$group_id.'&amp;tab_name='.$row_tab['tab_name'];
-						if (isset($params['toptab'])) {
-							($params['toptab'] == $this->name ? $params['selected'] = count($params['TITLES']) - 1 : '' );
+						if (isset($params['toptab']) && ($params['toptab'] == $row_tab['tab_name'])) {
+							$params['selected'] = count($params['TITLES']) - 1;
 						}
 						break;
 						
