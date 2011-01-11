@@ -138,6 +138,8 @@ forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
 forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
 forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 
+forge_define_config_item ('compression_method', 'core', 'gzip') ;
+
 // Arch plugin
 if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {
 	require_once $gfconfig.'plugins/scmarch/config.php' ;

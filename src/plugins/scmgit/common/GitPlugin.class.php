@@ -176,7 +176,7 @@ class GitPlugin extends SCMPlugin {
 	function getSnapshotPara ($project) {
 
 		$b = "" ;
-		$filename = $project->getUnixName().'-scm-latest.tar.gz';
+		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
 			$b .= '<p>[' ;
 			$b .= util_make_link ("/snapshots.php?group_id=".$project->getID(),
@@ -533,8 +533,8 @@ class GitPlugin extends SCMPlugin {
 
 		$group_name = $project->getUnixName() ;
 
-		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar.gz';
-		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
+		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
+		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
@@ -569,15 +569,15 @@ class GitPlugin extends SCMPlugin {
 			return false ;
 		}
 		$today = date ('Y-m-d') ;
-		system ("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD | gzip > $tmp/snapshot.tar.gz");
-		chmod ("$tmp/snapshot.tar.gz", 0644) ;
-		copy ("$tmp/snapshot.tar.gz", $snapshot) ;
-		unlink ("$tmp/snapshot.tar.gz") ;
+		system ("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD |".forge_get_config('compression_method')." > $tmp/snapshot");
+		chmod ("$tmp/snapshot", 0644) ;
+		copy ("$tmp/snapshot", $snapshot) ;
+		unlink ("$tmp/snapshot") ;
 
-		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
-		chmod ("$tmp/tarball.tar.gz", 0644) ;
-		copy ("$tmp/tarball.tar.gz", $tarball) ;
-		unlink ("$tmp/tarball.tar.gz") ;
+		system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+		chmod ("$tmp/tarball", 0644) ;
+		copy ("$tmp/tarball", $tarball) ;
+		unlink ("$tmp/tarball") ;
 		system ("rm -rf $tmp") ;
 	}
 }

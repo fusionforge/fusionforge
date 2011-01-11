@@ -1359,6 +1359,23 @@ function util_get_maxuploadfilesize() {
 	return $postfile;
 }
 
+function util_get_compressed_file_extension() {
+	$m = forge_get_config('compression_method');
+	if (preg_match ('/^gzip /', $m)) {
+		return '.gz';
+	} elseif (preg_match ('/^bzip2 /', $m)) {
+		return '.bzip2';
+	} elseif (preg_match ('/^lzma /', $m)) {
+		return '.lzma';
+	} elseif (preg_match ('/^xz /', $m)) {
+		return '.xz';
+	} elseif (preg_match ('/^cat /', $m)) {
+		return '';
+	} else {
+		return '.compressed';
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

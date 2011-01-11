@@ -128,7 +128,7 @@ class HgPlugin extends SCMPlugin {
 
 		$group_name = $project->getUnixName() ;
 
-		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
+		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
@@ -151,10 +151,10 @@ class HgPlugin extends SCMPlugin {
 		if ($tmp == '') {
 			return false ;
 		}
-		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
-		chmod ("$tmp/tarball.tar.gz", 0644) ;
-		copy ("$tmp/tarball.tar.gz", $tarball) ;
-		unlink ("$tmp/tarball.tar.gz") ;
+		system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+		chmod ("$tmp/tarball", 0644) ;
+		copy ("$tmp/tarball", $tarball) ;
+		unlink ("$tmp/tarball") ;
 		system ("rm -rf $tmp") ;
 	}
   }

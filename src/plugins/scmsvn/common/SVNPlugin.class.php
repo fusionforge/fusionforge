@@ -470,8 +470,8 @@ class SVNPlugin extends SCMPlugin {
 		
 		$group_name = $project->getUnixName() ;
 
-		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar.gz';
-		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar.gz';
+		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
+		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
@@ -511,10 +511,10 @@ class SVNPlugin extends SCMPlugin {
 		system ("svn ls file://$repo/trunk > /dev/null", $code) ;
 		if ($code == 0) {
 			system ("cd $tmp ; svn checkout file://$repo/trunk $dir > /dev/null 2>&1") ;
-			system ("tar czCf $tmp $tmp/snapshot.tar.gz $dir") ;
-			chmod ("$tmp/snapshot.tar.gz", 0644) ;
-			copy ("$tmp/snapshot.tar.gz", $snapshot) ;
-			unlink ("$tmp/snapshot.tar.gz") ;
+			system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> snapshot") ;
+			chmod ("$tmp/snapshot", 0644) ;
+			copy ("$tmp/snapshot", $snapshot) ;
+			unlink ("$tmp/snapshot") ;
 			system ("rm -rf $tmp/$dir") ;
 		} else {
 			if (is_file($snapshot)) {
@@ -522,10 +522,10 @@ class SVNPlugin extends SCMPlugin {
 			}
 		}
 
-		system ("tar czCf $toprepo $tmp/tarball.tar.gz " . $project->getUnixName()) ;
-		chmod ("$tmp/tarball.tar.gz", 0644) ;
-		copy ("$tmp/tarball.tar.gz", $tarball) ;
-		unlink ("$tmp/tarball.tar.gz") ;
+		system ("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball") ;
+		chmod ("$tmp/tarball", 0644) ;
+		copy ("$tmp/tarball", $tarball) ;
+		unlink ("$tmp/tarball") ;
 		system ("rm -rf $tmp") ;
 	}
   }
