@@ -86,6 +86,13 @@ class OSLCConnector {
 				$modelparams['filter']['where']=$filter;
 			}
 		}
+		// OSLC V1
+		else if(array_key_exists('oslc_cm_query', $params)) {
+		  $filter=parse_cql(urldecode($params['oslc_cm_query']));
+		  if($filter) {
+				$modelparams['filter']['where']=$filter;
+		  }
+		}
 		
 		if(array_key_exists('oslc_orderBy', $params))
 		{

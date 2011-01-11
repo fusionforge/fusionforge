@@ -25,7 +25,9 @@
 
 /* $Id$ */
 
-// Generate a OSLC-CM V1 Service Catalog document (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
+// Generate a OSLC-CM V1 Service Catalog document
+// (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
+// for a project, pointing to its trackers' Service Description documents
 
 function project_trackers_to_service_catalog($base_url, $trackers, $project) {
 	$doc = new DOMDocument();
@@ -79,6 +81,7 @@ function project_trackers_to_service_catalog($base_url, $trackers, $project) {
 	return $doc->saveXML();
 }
 
+// Generate a Service Catalog that points to each project's own Service catalog
 function projects_to_service_catalog($base_url, $projects) {
 
 	$doc = new DOMDocument();
@@ -108,21 +111,17 @@ function projects_to_service_catalog($base_url, $projects) {
 			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:entry");
 			$entry = $root->appendChild($child);
 
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProvider");
-			$sp = $entry->appendChild($child);
-
+			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProviderCatalog");
+			$spc = $entry->appendChild($child);
+			$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
+			$about = $spc->appendChild($child);
+			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-services/'.$proj['id']);
+			$child = $about->appendChild($child);
+			
 			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-			$title = $sp->appendChild($child);
+			$title = $spc->appendChild($child);
 			$child = $doc->createTextNode($proj['name']);
 			$child = $title->appendChild($child);
-
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:services");
-			$services = $sp->appendChild($child);
-			$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:resource");
-			$resource = $services->appendChild($child);
-			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-services/'.$proj['id']);
-			$child = $resource->appendChild($child);
-
 
 		}
 	}
