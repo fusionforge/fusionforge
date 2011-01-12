@@ -28,7 +28,9 @@ require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';    
 require_once $gfcommon.'include/User.class.php';    
 
-$expl_pathinfo = explode('/', getStringFromServer('REQUEST_URI'));
+$normalized_urlprefix = normalized_urlprefix();
+$pathinfo = substr_replace(getStringFromServer('REQUEST_URI'), '', 0, strlen($normalized_urlprefix)-1);
+$expl_pathinfo = explode('/', $pathinfo);
 
 if (!$expl_pathinfo[2]) {
 	exit_error(_('No User Name Provided'));
