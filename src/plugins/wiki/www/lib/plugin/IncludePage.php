@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: IncludePage.php 7806 2011-01-04 17:55:44Z vargenau $
+// $Id: IncludePage.php 7812 2011-01-05 16:51:41Z vargenau $
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -197,26 +197,6 @@ extends WikiPlugin
         return $ct;
     }
 };
-
-// This is an excerpt from the css file I use:
-//
-// .transclusion-title {
-//   font-style: oblique;
-//   font-size: 0.75em;
-//   text-decoration: underline;
-//   text-align: right;
-// }
-//
-// DIV.transclusion {
-//   background: lightgreen;
-//   border: thin;
-//   border-style: solid;
-//   padding-left: 0.8em;
-//   padding-right: 0.8em;
-//   padding-top: 0px;
-//   padding-bottom: 0px;
-//   margin: 0.5ex 0px;
-// }
 
 // Local Variables:
 // mode: php
