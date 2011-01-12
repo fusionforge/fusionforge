@@ -86,7 +86,7 @@ $server->wsdl->addComplexType(
 	array(
 		'artifact_query_id' => array('name' => 'artifact_query_id', 'type' => 'xsd:int'),
 		'name' => array('name' => 'query_name', 'type' => 'xsd:string'),
-		'fields' => array('fields' => 'query_name', 'type' => 'tns:ArtifactQueryFields')
+		'fields' => array('name' => 'fields', 'type' => 'tns:ArtifactQueryFields')
 	)
 );
 
