@@ -254,7 +254,7 @@ foreach ($group->getUsers() as $member) {
 		</tr>';
 }
 
-echo $HTML->boxBottom();
+echo $GLOBALS['HTML']->listTableBottom();
 
 site_project_footer(array());
 

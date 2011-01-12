@@ -68,11 +68,11 @@ class Plugin extends Error {
 	}
 
 	/**
-	 * GetInstallDir() - get installation dir for the plugin.
+	 * getInstallDir() - get installation dir for the plugin.
 	 *
 	 * @return	string	the directory where the plugin should be linked.
 	 */
-	function GetInstallDir() {
+	function getInstallDir() {
 		if (isset($this->installdir) && $this->installdir)
 			return $this->installdir;
 		else
