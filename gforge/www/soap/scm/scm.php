@@ -38,7 +38,7 @@ $server->wsdl->addComplexType(
 		'box' => array('name' => 'bpx', 'type' => 'xsd:string'),
 		'root' => array('name' => 'root', 'type' => 'xsd:string'),
 		'module' => array('name' => 'module', 'type' => 'xsd:string'),
-		'connection_string' => array('connection_string' => 'module', 'type' => 'xsd:string')
+		'connection_string' => array('name' => 'connection_string', 'type' => 'xsd:string')
 	)
 );
 
