@@ -250,6 +250,7 @@ class MediaWikiPlugin extends Plugin {
 				break ;
 			}
 		} elseif ($hookname == "role_has_permission") {
+			$value = $params['value'];
 			switch ($params['section']) {
 			case 'plugin_mediawiki_read':
 				switch ($params['action']) {
