@@ -1,5 +1,5 @@
 /**
- * $Id: Wordpress.css 7789 2010-12-20 13:18:08Z vargenau $
+ * $Id: Wordpress.css 7821 2011-01-07 12:42:51Z vargenau $
  *
  * PhpWiki's Wordpress style sheet contributed by Mike Pickering
  */
@@ -23,7 +23,7 @@ body {
 }
 
 img {
-  border : 0 none;
+  border : 0;
 }
 
 .wiki-edithelp {
@@ -342,7 +342,8 @@ li.LSRow {
   list-style-image: none;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;
@@ -863,7 +864,6 @@ table.sqlresult td {
  * TeX2png plugin
  */
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 

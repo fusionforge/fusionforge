@@ -1,5 +1,5 @@
 /**
- *  $Id: main.css 7789 2010-12-20 13:18:08Z vargenau $
+ *  $Id: main.css 7821 2011-01-07 12:42:51Z vargenau $
  */ 
 
 /*
@@ -91,7 +91,7 @@ a.stub {
 	color: #772233;
 }
 img {
-	border: none;
+	border: 0;
 	vertical-align: middle;
 }
 p {
@@ -405,10 +405,6 @@ div.floatright, table.floatright {
 	position: relative;
 	margin: 0 0 .5em .5em;
 	border: 0;
-/*
-	border: .5em solid white;
-	border-width: .5em 0 .8em 1.4em;
-*/
 }
 div.floatright p { font-style: italic; }
 div.floatleft, table.floatleft {
@@ -416,11 +412,6 @@ div.floatleft, table.floatleft {
 	position: relative;
 	margin: 0 .5em .5em 0;
 	border: 0;
-/*
-	margin: .3em .5em .5em 0;
-	border: .5em solid white;
-	border-width: .5em 1.4em .8em 0;
-*/
 }
 div.floatleft p { font-style: italic; }
 /* thumbnails */
@@ -597,10 +588,6 @@ span.diffchange {
 	margin-top:    1ex;
 	margin-bottom: 0.5ex;
 	background: white;
-	/* Netscape 4 requires this 1px border.
-	 Without it, the paper borders below cause
-	 the white background to disappear. */
-	border: 1px #ccc solid;
 	color: black;
 	border-top: 1px solid #494f5d;
 	border-left:  1px solid #494f5d;
@@ -611,31 +598,16 @@ span.diffchange {
 	padding-left:  .125em;
 	padding-right: .125em;
 	padding: 0;
-	/* "paper" borders */
-	/*border-top: 2px #d2d2d2 solid;
-	border-left:  2px #b2b2b2 solid;
-	border-bottom:  2px #e8e6df solid;
-	border-right: 2px #e8e6df solid;*/
-/*  border-style: inset;*/
-	/*This breaks Netscape 4: (display does not go full width).
-	 * width: auto;
-	 */
-	/* I'm not sure what the intent of this was, but it's
-	 *  not valid CSS: */
-	/* display: editarea; */
 	clear: both;
 }
 .diff .block {
 	background: #ddd;
 	padding-left: 1em;
-	/* for NS4 */
-	/*border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
 	background: white;
-	/* for NS4 */
 	border: none;
 }
 /* entire difftextblock */
@@ -643,11 +615,6 @@ span.diffchange {
 	margin-top:    0;
 	margin-bottom: 0;
 	background: white;
-	/* Netscape 4 requires this 1px border.
-	 Without it, the paper borders below cause
-	 the white background to disappear. */
-	border: 1px black solid;
-	/* "paper" borders */
 	border-top:  1px #e8e6df solid;
 	border-left: 1px #e8e6df solid;
 	border-bottom: 1px #d2d2d2 solid;
@@ -656,9 +623,6 @@ span.diffchange {
 	padding-right: 0em;
 	padding-top:    0ex;
 	padding-bottom: 0ex;
-	/*This breaks Netscape 4: (display does not go full width).
-	 * width: auto;
-	 */
 	clear: both;
 }
 /* + - line prefix */
@@ -666,7 +630,6 @@ span.diffchange {
 	font-weight: normal;
 	font-family: monospace;
 	color: black;
-	/* for NS4 */
 	margin-left: 0;
 	border: none;
 }
@@ -684,17 +647,14 @@ span.diffchange {
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
 	background: #fcc;
-	/* for NS4 */
 	border: none;
 }
 /* blocks containing added words */
 .diff .final, .diff .added {
 	background: #cfc;
-	/* for NS4 */
 	border: none;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del { background: #f99; }
 /* added words */
@@ -1943,7 +1903,8 @@ td.tdunselected {
      padding: 0.2em;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;

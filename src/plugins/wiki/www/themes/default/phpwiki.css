@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css 7789 2010-12-20 13:18:08Z vargenau $
+ * $Id: phpwiki.css 7821 2011-01-07 12:42:51Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -12,7 +12,7 @@
 /**
  * General
  */ 
-img { border: 0ex; }
+img { border: 0; }
 
 form { margin: 0ex; }
 
@@ -272,17 +272,9 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   padding: 0;
   padding-top: 0.25ex;
 }
-/*
-div#logo {
-  float: right;
-}
-*/
+
 #logo img {
   float: right;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
@@ -363,7 +355,8 @@ li.LSRow {
   list-style-image: none;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;
@@ -884,7 +877,6 @@ table.sqlresult td {
  * TeX2png plugin
  */
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 
@@ -1039,7 +1031,6 @@ div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
 
 /* Link icons */
 img.linkicon { vertical-align: middle; }
-
 
 /**
  * Edit Page & View Source

@@ -1,5 +1,5 @@
 /**
- * $Id: SpaceWiki.css 7789 2010-12-20 13:18:08Z vargenau $
+ * $Id: SpaceWiki.css 7810 2011-01-05 14:28:43Z vargenau $
  *
  * This theme will probably be renamed something like "Space" to
  * avoid any potential copyright issues.
@@ -367,12 +367,11 @@ textarea.wikiedit {
 }
 
 
-/**
- * IncludePage plugin
- */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   font-style: oblique;
-  font-size: smaller; /* 0.75em; */
+  font-size: smaller;
   text-decoration: none;
   text-align: right;
 } 

@@ -6,8 +6,6 @@
   This is a work in progress - some of the original CSS may need collapsing
 */
 
-/* @import url("../default/phpwiki.css"); */
-
 body {
   margin: 20px auto;
   padding: 0; 
@@ -534,9 +532,10 @@ h3.comments {
   }
 /* End Headers */
 
-
-
 /* Begin Images */
+
+img { border: 0; }
+
 p img {
   padding: 0;
   max-width: 100%;
@@ -573,8 +572,6 @@ img.alignleft {
   float: left
   }
 /* End Images */
-
-
 
 /* Begin Lists
 
@@ -682,10 +679,6 @@ blockquote cite {
 
 hr {
   display: none;
-  }
-
-a img {
-  border: none;
   }
 
 .navigation {
@@ -862,7 +855,6 @@ table.sqlresult td {
  * TeX2png plugin
  */
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 

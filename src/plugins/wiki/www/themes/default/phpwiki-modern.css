@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki-modern.css 7789 2010-12-20 13:18:08Z vargenau $
+ * $Id: phpwiki-modern.css 7810 2011-01-05 14:28:43Z vargenau $
  *
  * Inspiration for this stylesheet:
  *
@@ -264,7 +264,8 @@ textarea.wikiedit {
   font-size: smaller;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   margin-right:  0.25em;

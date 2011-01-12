@@ -80,8 +80,7 @@ a.new:visited, #p-personal a.new:visited {
 }
 
 img {
-	border: none;
-	/*vertical-align: middle;*/
+	border: 0;
 }
 p {
 	margin: .4em 0 .5em 0;
@@ -1941,9 +1940,9 @@ div.public, span.public {
   background-color: #ffce7b;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
-  /*font-style: oblique;*/
   font-weight: bold;
   text-decoration: underline;
   margin-bottom: 0.25ex;

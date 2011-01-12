@@ -1,5 +1,5 @@
 /**
- * $Id: shamino_com.css 6600 2009-02-27 16:24:31Z vargenau $
+ * $Id: shamino_com.css 7821 2011-01-07 12:42:51Z vargenau $
  *
  * shamino.com style sheet based on the original Wiki
  *
@@ -69,12 +69,11 @@ li {
 
 img {
     margin:0px;
-    border:0px;
+    border:0;
     padding:0px;
 }
 
 table {
-/*  position:relative;left:0px;top:0px; */
   border: 0px;;
   padding: 0px;
   border-spacing: 0px;
@@ -165,6 +164,26 @@ div.boxright {
 .search-term {
   background: yellow;
   font-weight: normal;
+}
+
+/* IncludePage plugin ================================================= */
+
+.transclusion-title {
+   font-style: oblique;
+   font-size: 0.75em;
+   text-decoration: underline;
+   text-align: right;
+}
+
+.transclusion {
+   background: lightgreen;
+   border: thin;
+   border-style: solid;
+   padding-left: 0.8em;
+   padding-right: 0.8em;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   margin: 0.5ex 0px;
 }
 
 /*

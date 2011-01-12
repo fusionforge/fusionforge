@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 7794 2010-12-20 15:40:00Z vargenau $
+ * $Id: fusionforge.css 7821 2011-01-07 12:42:51Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -71,7 +71,7 @@ legend {
     background-color: white;
 }
 
-img { border: 0ex; }
+img { border: 0; }
 
 form { margin: 0ex; }
 
@@ -347,7 +347,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 
 #logo img {
   float: right;
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
@@ -536,7 +535,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  border: 1px #ccc solid;
   color: black;
   border-top: 1px solid #494f5d;
   border-left:  1px solid #494f5d;
@@ -565,7 +563,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    0;
   margin-bottom: 0;
   background: white;
-  border: 1px black solid;
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
@@ -765,7 +762,6 @@ blockquote.mail-style-quote {
 .floatright { float: right; }
 
 div.wikiblog {
-  /* border: thin black solid; */
   margin: 1ex 2em;
   padding: 0 0;
 }
@@ -912,7 +908,6 @@ table.sqlresult td {
 /* TeX2png plugin ===================================================== */
 
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 
