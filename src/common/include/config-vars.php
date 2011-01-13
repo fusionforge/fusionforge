@@ -57,6 +57,8 @@ forge_define_config_item ('use_pm', 'core', $GLOBALS['sys_use_pm']) ;
 forge_set_config_item_bool ('use_pm', 'core') ;
 forge_define_config_item ('use_docman', 'core', $GLOBALS['sys_use_docman']) ;
 forge_set_config_item_bool ('use_docman', 'core') ;
+forge_define_config_item ('use_diary', 'core', $GLOBALS['sys_use_diary']) ;
+forge_set_config_item_bool ('use_diary', 'core') ;
 forge_define_config_item ('use_news', 'core', $GLOBALS['sys_use_news']) ;
 forge_set_config_item_bool ('use_news', 'core') ;
 forge_define_config_item ('use_mail', 'core', $GLOBALS['sys_use_mail']) ;

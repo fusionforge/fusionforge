@@ -797,7 +797,7 @@ function site_user_header($params) {
 	$arr_t[] = _('Trackers dashboard') ;
 	$arr_l[] = '/my/dashboard.php' ;
 
-	if ($GLOBALS['sys_use_diary']) {
+	if (forge_get_config('use_diary')) {
 		$arr_t[] = _('Diary &amp; Notes') ;
 		$arr_l[] = '/my/diary.php' ;
 	}
