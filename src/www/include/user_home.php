@@ -163,7 +163,7 @@ echo $user->getPhone();
         echo '</table><!-- id="user-profile-rating" -->';
 	}
 
-	if ($sys_use_diary) {
+if (forge_get_config('use_diary')) {
 		echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
 	 
 		/*

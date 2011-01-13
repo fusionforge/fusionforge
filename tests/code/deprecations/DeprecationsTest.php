@@ -49,6 +49,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_use_forum',
 			       'sys_use_pm',
 			       'sys_use_docman',
+			       'sys_use_diary',
 			       'sys_use_news',
 			       'sys_use_mail',
 			       'sys_use_survey',

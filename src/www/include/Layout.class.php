@@ -580,22 +580,27 @@ class Layout extends Error {
 			$args .= ' id="'.$id.'"';
 		}
 		$return = "\n".
-			'<table'.$args.'>'.
-			'<thead><tr>';
+			'<table'.$args.'>';
+		
+		if (count($titleArray)) {
+			$return .= '<thead><tr>';
 
-		$count=count($titleArray);
-		for ($i=0; $i<$count; $i++) {
-			$th = '';
-			if ($thClassArray && $thClassArray[$i]) {
-				$th .= ' class="'.$thClassArray[$i].'"';
+			$count=count($titleArray);
+			for ($i=0; $i<$count; $i++) {
+				$th = '';
+				if ($thClassArray && $thClassArray[$i]) {
+					$th .= ' class="'.$thClassArray[$i].'"';
+				}
+				$cell = $titleArray[$i];
+				if ($linksArray) {
+					$cell = util_make_link($linksArray[$i],$titleArray[$i]);
+				}
+				$return .= "\n".' <th'.$th.'>'.$cell.'</th>';
 			}
-			$cell = $titleArray[$i];
-			if ($linksArray) {
-				$cell = util_make_link($linksArray[$i],$titleArray[$i]);
-			}
-			$return .= "\n".' <th'.$th.'>'.$cell.'</th>';
+			$return .= "\n".'</tr></thead>'."\n";
 		}
-		return $return .= "\n".'</tr></thead>'."\n".'<tbody>';
+		$return .= '<tbody>';
+		return $return;
 	}
 
 	function listTableBottom() {
