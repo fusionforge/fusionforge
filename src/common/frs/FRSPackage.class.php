@@ -45,7 +45,7 @@ function &get_frs_packages($Group) {
  * @param	array	the DB handle if passed in (optional)
  * @return	object	the FRSPackage object
  */
-function &frspackage_get_object($package_id, $data=false) {
+function frspackage_get_object($package_id, $data=false) {
 	global $FRSPACKAGE_OBJ;
 	if (!isset($FRSPACKAGE_OBJ['_'.$package_id.'_'])) {
 		if ($data) {
@@ -54,7 +54,6 @@ function &frspackage_get_object($package_id, $data=false) {
 			$res = db_query_params ('SELECT * FROM frs_package WHERE package_id=$1',
 						array ($package_id)) ;
 			if (db_numrows($res)<1) {
-				$FRSPACKAGE_OBJ['_'.$package_id.'_']=false;
 				return false;
 			}
 			$data = db_fetch_array($res);
@@ -416,6 +415,7 @@ class FRSPackage extends Error {
 			}
 		}	
 		db_commit();
+		$this->createNewestReleaseFilesAsZip();
 		return true;
 	}
 
@@ -475,6 +475,55 @@ class FRSPackage extends Error {
 				 array ($this->getID(),
 					$this->Group->getID())) ;
 		return true;
+	}
+
+	/**
+	 *  Function that selects the newest release. 
+	 *  The newest release is the release with the highest ID
+	 * 
+	 *  @return object FRSRelease
+	 */
+	
+	function getNewestRelease() {
+		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id=$1',
+					  array ($this->getID())) ;
+		
+		if ($result && db_numrows($result) == 1) {
+			$row = db_fetch_array($result);
+			return frsrelease_get_object($row['release_id']);
+		} else {
+			$this->setError('FRSRelease:: No valid max release id');
+			return false;
+		} 
+	}
+
+	public function getNewestReleaseZipName () {
+		return $this->getFileName()."-latest.zip";
+	}
+
+	public function getNewestReleaseZipPath () {
+		return forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$this->getNewestReleaseZipName();
+	}
+
+	public function createNewestReleaseFilesAsZip(){
+		$zip = new ZipArchive();
+		$release = $this->getNewestRelease();
+
+		$zipPath = $this->getNewestReleaseZipPath();
+		$filesPath = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$this->getFileName().'/'.$release->getFileName();
+
+		if ($zip->open($zipPath, ZIPARCHIVE::OVERWRITE)!==true) {
+			exit_error(_('Cannot open the file archive.').' '.$zipPath.'.');
+		}
+
+		$files = $release->getFiles();
+	
+		foreach ($files as $f) {
+			$filePath = $filesPath.'/'.$f->getName();	
+			$zip->addFile($filePath,$f->getName());
+		} 
+
+		$zip->close();
 	}
 
 }

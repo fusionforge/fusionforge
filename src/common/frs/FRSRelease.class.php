@@ -468,6 +468,7 @@ notified in the future, please login to %7$s and click this link:
 			}
 		}	
 		db_commit();
+		$this->FRSPackage->createNewestReleaseFilesAsZip();
 		return true;
 	}
 

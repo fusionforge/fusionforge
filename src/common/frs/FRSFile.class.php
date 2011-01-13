@@ -25,6 +25,33 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
+/**
+ *	  Factory method which creates a FRSFile from an release id
+ *
+ *	  @param int	  The file id
+ *	  @param array	The result array, if it's passed in
+ *	  @return object  FRSFile object
+ */
+function &frsfile_get_object($file_id, $data=false) {
+	global $FRSFILE_OBJ;
+	if (!isset($FRSFILE_OBJ['_'.$file_id.'_'])) {
+		if ($data) {
+					//the db result handle was passed in
+		} else {
+			$res = db_query_params ('SELECT * FROM frs_file WHERE file_id=$1',
+						array ($file_id)) ;
+			if (db_numrows($res)<1 ) {
+				$FRSFILE_OBJ['_'.$file_id.'_']=false;
+				return false;
+			}
+			$data = db_fetch_array($res);
+		}
+		$FRSRelease =& frsrelease_get_object($data['release_id']);
+		$FRSFILE_OBJ['_'.$file_id.'_']= new FRSFile($FRSRelease,$data['file_id'],$data);
+	}
+	return $FRSFILE_OBJ['_'.$file_id.'_'];
+}
+
 class FRSFile extends Error {
 
 	/**
@@ -190,6 +217,7 @@ class FRSFile extends Error {
 			return false;
 		} else {
 			db_commit();
+			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 			return true;
 		}
 	}
@@ -340,6 +368,7 @@ class FRSFile extends Error {
 						array ($this->getID())) ;
 			$res = db_query_params ('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
 						array ($this->getID())) ;
+			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 			return true;
 		}
 	}
@@ -417,6 +446,7 @@ class FRSFile extends Error {
 			}
 		}
 		db_commit();
+		$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 		return true;
 	}
 }

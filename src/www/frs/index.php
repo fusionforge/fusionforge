@@ -109,12 +109,12 @@ if ( $num_packages < 1) {
 			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		} else {
 			$title = db_result($res_package, $p, 'name') . " - " . _('Monitor this package');
-            $url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;start=1';
+			$url = '/frs/monitor.php?filemodule_id='. db_result($res_package, $p, 'package_id') .'&amp;group_id='.db_result($res_package,$p,'group_id').'&amp;start=1';
 			$package_monitor = util_make_link ( $url, $GLOBALS['HTML']->getMonitorPic($title));
 		}
 
-        $package_name_protected = $HTML->toSlug($package_name);
-        echo "\n".'<h2 id="title_'. $package_name_protected .'">' . $package_name . ' <span class="frs-monitor-package">' . $package_monitor . '</span></h2>'."\n";
+		$package_name_protected = $HTML->toSlug($package_name);
+		echo "\n".'<h2 id="title_'. $package_name_protected .'">' . $package_name . ' <span class="frs-monitor-package">' . $package_monitor . '</span></h2>'."\n";
 		
 		// get the releases of the package
 		$res_release = db_query_params ('SELECT * FROM frs_release
@@ -129,6 +129,13 @@ if ( $num_packages < 1) {
 			echo '<div class="warning">' . _('No releases') . '</div>
 			';
 		} else {
+			// display link to latest-release-as-zip
+			print '<p><em>'._('Download latest release as zip:').' ';
+			print util_make_link ('/frs/download.php/latestzip/'.$frsPackage->getID().'/'.$frsPackage->getNewestReleaseZipName(),
+					      $frsPackage->getNewestReleaseZipName(),
+					      array('title' => _('This link always points to the newest release as a zip file.')));
+			print '</em></p>';
+
 			// iterate and show the releases of the package
 			for ( $r = 0; $r < $num_releases; $r++ ) {
                 $package_release = db_fetch_array( $res_release );
@@ -171,6 +178,7 @@ if ( $num_packages < 1) {
                 $cell_data[] = _('D/L');
                 $cell_data[] = _('Arch');
                 $cell_data[] = _('Type');
+                $cell_data[] = _('Latest');
 
                 // Switch whether release_id exists and/or release_id == package_release['release_id']
                 if ( ! $release_id ) {
@@ -186,19 +194,20 @@ if ( $num_packages < 1) {
                 if ( ! $release_id || $release_id==$package_release['release_id'] ) {
                     // no release_id OR no release_id OR release_id is current one
                     if ( !$res_file || $num_files < 1 ) {
-                        echo '<tr><td colspan="6">&nbsp;&nbsp;<em>'._('No releases').'</em></td></tr>
+                        echo '<tr><td colspan="7">&nbsp;&nbsp;<em>'._('No releases').'</em></td></tr>
                         ';
                     } else {
                         // now iterate and show the files in this release....
                         for ( $f = 0; $f < $num_files; $f++ ) {
                             $file_release = db_fetch_array( $res_file );
 
-                            $tmp_col1 = util_make_link ('/frs/download.php/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
+                            $tmp_col1 = util_make_link ('/frs/download.php/file/'.$file_release['file_id'].'/'.$file_release['filename'], $file_release['filename']);
                             $tmp_col2 = date(_('Y-m-d H:i'), $package_release['release_date'] );
                             $tmp_col3 = human_readable_bytes($file_release['file_size']);
                             $tmp_col4 = ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0');
                             $tmp_col5 = $file_release['processor'];
                             $tmp_col6 = $file_release['type'];
+                            $tmp_col7 = util_make_link ('/frs/download.php/latestfile/'.$frsPackage->getID().'/'.$file_release['filename'], _('Latest version'));
 
                             $proj_stats['size'] += $file_release['file_size'];
                             @$proj_stats['downloads'] += $file_release['downloads'];
@@ -210,6 +219,7 @@ if ( $num_packages < 1) {
                             echo ' <td>' . $tmp_col4 . '</td>'."\n";
                             echo ' <td>' . $tmp_col5 . '</td>'."\n";
                             echo ' <td>' . $tmp_col6 . '</td>'."\n";
+                            echo ' <td>' . $tmp_col7 . '</td>'."\n";
                             echo '</tr>'."\n";
                         }
                     }
@@ -225,22 +235,6 @@ if ( $num_packages < 1) {
 			} //for: release(s)
 		} //if: release(s) available
 	}
-// print statistics for this table datas
-/*
-	if ( $proj_stats['size'] ) {
-		print '<tr><td colspan="8">&nbsp;</tr>'."\n";
-		print '<tr><td><strong>'._('Project totals').'</strong></td>'
-		. '<td align="right"><strong><em>' . $proj_stats['releases'] . '</em></strong></td>'
-		. '<td align="right"><strong><em>' . $proj_stats['files'] . '</em></strong></td>'
-		. '<td align="right"><strong><em>' . human_readable_bytes($proj_stats['size']) . '</em></strong></td>'
-		. '<td align="right"><strong><em>' . $proj_stats['downloads'] . '</em></strong></td>'
-		. '<td colspan="3">&nbsp;</td></tr>'."\n";
-	}
-
-	print "</table>\n\n";
-}
-*/
-
 echo '</div><!-- id="forge-frs" -->';
 
 }
