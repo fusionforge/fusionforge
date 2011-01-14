@@ -138,6 +138,7 @@ forge_define_config_item ('images_secure_url', 'core', $GLOBALS['sys_images_secu
 forge_define_config_item ('admin_email', 'core', $GLOBALS['sys_admin_email']) ;
 forge_define_config_item ('session_key', 'core', $GLOBALS['sys_session_key']) ;
 forge_define_config_item ('show_source', 'core', $GLOBALS['sys_show_source']) ;
+forge_set_config_item_bool ('show_source', 'core') ;
 forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 
 forge_define_config_item ('compression_method', 'core', 'gzip') ;

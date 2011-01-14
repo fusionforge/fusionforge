@@ -701,6 +701,8 @@ src/etc/config.ini.d/blocks.ini -text
 src/etc/config.ini.d/contribtracker.ini -text
 src/etc/config.ini.d/cvssyncmail.ini -text
 src/etc/config.ini.d/cvstracker.ini -text
+src/etc/config.ini.d/debug.ini -text
+src/etc/config.ini.d/defaults.ini -text
 src/etc/config.ini.d/externalsearch.ini -text
 src/etc/config.ini.d/extratabs.ini -text
 src/etc/config.ini.d/fckeditor.ini -text

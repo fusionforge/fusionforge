@@ -1,4 +1,6 @@
-etc/config.ini-fhs                    etc/@PACKAGE@
+etc/config.ini-fhs                     etc/@PACKAGE@
+etc/config.ini.d/defaults.ini          etc/@PACKAGE@/config.ini.d/
+etc/config.ini.d/debug.ini             etc/@PACKAGE@/config.ini.d/
 etc/httpd.d/[0-1,6-9][0-9]*            usr/share/@OLDPACKAGE@/etc/httpd.d/
 etc/httpd.d/httpd*                     usr/share/@OLDPACKAGE@/etc/httpd.d/
 etc/local.d/[0-9][0-9]*                usr/share/@OLDPACKAGE@/etc/local.d/
