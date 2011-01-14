@@ -1622,7 +1622,7 @@ class Group extends Error {
 
 	function delete($sure,$really_sure,$really_really_sure) {
 		if (!$sure || !$really_sure || !$really_really_sure) {
-			$this->setMissingParamsError();
+			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
 		if ($this->getID() == forge_get_config('news_group') ||
