@@ -3165,7 +3165,7 @@ function getAllProjectTags($onlyvisible = true) {
 			$result[$tag] = array();
 		}
 
-		if (!$only_visible || forge_check_perm('project_read', $group_id)) {
+		if (!$onlyvisible || forge_check_perm('project_read', $group_id)) {
 			$p = group_get_object($group_id);
 			$result[$tag][] = array('unix_group_name' => $p->getUnixName(),
 						'group_id' => $group_id);
