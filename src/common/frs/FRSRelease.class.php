@@ -355,7 +355,7 @@ notified in the future, please login to %7$s and click this link:
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
-			$this->setMissingParamsError();
+			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
 		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {

@@ -502,7 +502,7 @@ class ProjectTask extends Error {
 	 */
 	function delete($sure) {
 		if (!$sure) {
-			$this->setMissingParamsError();
+			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
 		if (!forge_check_perm ('pm', $this->ProjectGroup->getID(), 'manager')) {

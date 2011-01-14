@@ -615,7 +615,7 @@ class Forum extends Error {
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
-			$this->setMissingParamsError();
+			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
 		if (!forge_check_perm ('forum_admin', $this->Group->getID())) {

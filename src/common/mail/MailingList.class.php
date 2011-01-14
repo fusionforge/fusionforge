@@ -379,7 +379,7 @@ Thank you for registering your project with %1$s.
 	function delete($sure,$really_sure) {
 
 		if (!$sure || !$really_sure) {
-			$this->setMissingParamsError();
+			$this->setMissingParamsError(_('Please tick all checkboxes.'));
 			return false;
 		}
 		if (!forge_check_perm ('project_admin', $this->Group->getID())) {
