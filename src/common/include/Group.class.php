@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -3170,7 +3170,7 @@ function getAllProjectTags($onlyvisible = true) {
 			$result[$tag] = array();
 		}
 
-		if (!$only_visible || forge_check_perm('project_read', $group_id)) {
+		if (!$onlyvisible || forge_check_perm('project_read', $group_id)) {
 			$p = group_get_object($group_id);
 			$result[$tag][] = array('unix_group_name' => $p->getUnixName(),
 						'group_id' => $group_id);
