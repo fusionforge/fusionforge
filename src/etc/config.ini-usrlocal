@@ -5,3 +5,5 @@ source_path = /usr/local/share/gforge
 data_path = /var/local/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
+
+extra_config_dirs = "$core/config_path/config.ini.d"
