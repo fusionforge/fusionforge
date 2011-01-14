@@ -1,41 +1,7 @@
 [core]
 forge_name = FusionForge
-user_registration_restricted = false
 
 source_path = /usr/share/gforge
 data_path = /var/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
-chroot = "$core/data_path/chroot"
-
-homedir_prefix = "$core/chroot/home/users"
-groupdir_prefix = "$core/chroot/home/groups"
-
-upload_dir = "$core/data_path/download"
-ftp_upload_dir = "$core/data_path/ftproot"
-
-custom_path = "$core/config_path/custom"
-
-extra_config_dirs = "$core/config_path/config.ini.d"
-
-; Switch to "production" to remove extra debugging
-installation_environment = development
-
-; fine-grained control over debugging
-
-; enable debugging at all (overlay the page with pink box)
-sysdebug_enable = true
-
-; enable the PHP Error Handler (default if sysdebug_enable)
-sysdebug_phphandler = true
-; show backtraces for those (can be VERY long, esp. in gf-p-mediawiki)
-sysdebug_backtraces = false
-; also report (display) ignored errors, e.g. from @call
-sysdebug_ignored = false
-
-; output validation (if sysdebug_enable)
-
-; XHTML/1.0 Transitional validation using xmlstarlet and the DTD
-sysdebug_xmlstarlet = false
-; Akelos validator; apparently XHTML/1.0 Strict or XHTML/1.1 (?)
-sysdebug_akelos = false
