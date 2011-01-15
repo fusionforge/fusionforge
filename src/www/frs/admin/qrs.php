@@ -193,10 +193,10 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			<h4><?php echo _('File Name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
-		<span class="important">
+		<div class="important">
 		<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK". Double-clicking doesn\'t register the file.')?>
 		<?php printf(_('You can probably not upload files larger than about %.2f MiB in size.'), util_get_maxuploadfilesize() / 1048576); ?><br />
-		</span><br />
+		</div>
 		<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
 		<?php if (forge_get_config('use_ftp_uploads')) {
 
