@@ -219,14 +219,15 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableBottom();
 	echo '</div>';
 	echo '<div class="docmanDiv">'.html_image('docman/new.png', '14', '14', array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
-	echo '<div class="docmanDiv"><h4>'. _('Mass Actions') . '</h4>';
-	echo _('for selected files:');
+	echo '<div class="docmanDiv"><p>';
+	echo _('Mass Actions for selected files:');
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-movetotrash" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-reservefile" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=add&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Start monitoring') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
-	echo '</div>';
+	echo '<a href="#" id="docman-downloadaszip" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+	echo '</p></div>';
 	include ($gfcommon.'docman/views/editfile.php');
 }
 ?>
