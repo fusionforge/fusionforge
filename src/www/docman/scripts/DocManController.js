@@ -139,6 +139,17 @@ DocManListFileController.prototype =
 			clearInterval(this.lockInterval[id]);
 		}
 	},
+	
+	/*! build list of id, comma separated
+	 */
+	buildUrlByCheckbox: function()
+	{
+		var CheckedBoxes = new Array();
+		for (var h = 0; h < jQuery("input:checked").length; h++) {
+			CheckedBoxes.push(jQuery("input:checked")[h].value);
+		}
+		return CheckedBoxes;
+	},
 
 	computeDocumentsData: function() {
 		/*

@@ -533,7 +533,7 @@ class Document extends Error {
 	 */
 	function removeMonitoredBy($userid) {
 		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id=$1 AND user_id=$2',
-						array ($this->getID(), $userid));
+						array($this->getID(), $userid));
 
 		if (!$result) {
 			$this->setError(_('Unable To Remove Monitor').' : '.db_error());

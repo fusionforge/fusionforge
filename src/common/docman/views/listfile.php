@@ -101,8 +101,8 @@ include ($gfcommon.'docman/views/additem.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
-	$classth = array('unsortable', '', '', '', '', '', '', '');
+	$tabletop = array('','', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
+	$classth = array('unsortable','unsortable', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
@@ -111,6 +111,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	$time_new = 604800;
 	foreach ($nested_docs[$dirid] as $d) {
 		echo '<tr>';
+		echo '<td>';
+		if (!$d->getLocked() && !$d->getReserved()) {
+			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" />';
+		} else {
+			echo '<input type="checkbox" name="disabled" disabled="disabled"';
+		}
+		echo '</td>';
 		switch ($d->getFileType()) {
 			case "URL": {
 				$docurl = $d->getFileName();
@@ -208,6 +215,14 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo $HTML->listTableBottom();
 	echo '</div>';
 	echo '<div class="docmanDiv">'.html_image('docman/new.png', '14', '14', array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
+	echo '<div class="docmanDiv"><h4>'. _('Mass Actions') . '</h4>';
+	echo _('for selected files:');
+	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-movetotrash" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
+	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-reservefile" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
+	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=add&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Start monitoring') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
+	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
+	echo '</div>';
 	include ($gfcommon.'docman/views/editfile.php');
 }
 ?>
