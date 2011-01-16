@@ -1,6 +1,7 @@
 FusionForge-5.x:
 * Docman: inject zip as a tree (Capgemini)
 * Widget: New User Widget: Last 5 documents published in my project (Capgemini)
+* Docman: mass action (Capgemini)
 
 FusionForge-5.1:
 * Theme: new Funky Theme (Capgemini)
