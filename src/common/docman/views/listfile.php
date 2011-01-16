@@ -115,7 +115,11 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (!$d->getLocked() && !$d->getReserved()) {
 			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" />';
 		} else {
-			echo '<input type="checkbox" name="disabled" disabled="disabled"';
+			if ($d->getReservedBy() != $LUSER->getID()) {
+				echo '<input type="checkbox" name="disabled" disabled="disabled"';
+			} else {
+				echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" />';
+			}
 		}
 		echo '</td>';
 		switch ($d->getFileType()) {
