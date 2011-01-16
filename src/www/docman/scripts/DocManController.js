@@ -2,7 +2,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
