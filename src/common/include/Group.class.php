@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -54,7 +55,7 @@ $LICENSE_NAMES=array();
 function & group_get_licenses() {
 	global $LICENSE_NAMES;
 	if(empty($LICENSE_NAMES)) {
-		$result = db_query_params ('select * from licenses', array());
+		$result = db_query_params ('SELECT * FROM licenses', array());
 		while($data = db_fetch_array($result)) {
 			$LICENSE_NAMES[$data['license_id']] = $data['license_name'];
 		}
