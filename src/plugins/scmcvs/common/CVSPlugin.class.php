@@ -422,7 +422,7 @@ class CVSPlugin extends SCMPlugin {
 		$today = date ('Y-m-d') ;
 		$dir = $project->getUnixName ()."-$today" ;
 		system ("mkdir -p $tmp/$dir") ;
-		system ("cd $tmp/$dir ; cvs -d $repo checkout . > /dev/null 2>&1") ;
+		system ("cd $tmp/$dir ; cvs -d $repo export -D now . > /dev/null 2>&1") ;
 		system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> snapshot") ;
 		chmod ("$tmp/snapshot", 0644) ;
 		copy ("$tmp/snapshot", $snapshot) ;

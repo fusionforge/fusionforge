@@ -441,8 +441,8 @@ class SVNPlugin extends SCMPlugin {
 					continue;
 				}
 
-				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
-				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
+				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0 ;
+				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0 ;
 				if ($uu > 0 || $ua > 0) {
 					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 							      array ($month_string,
@@ -510,7 +510,7 @@ class SVNPlugin extends SCMPlugin {
 		$code = 0 ;
 		system ("svn ls file://$repo/trunk > /dev/null", $code) ;
 		if ($code == 0) {
-			system ("cd $tmp ; svn checkout file://$repo/trunk $dir > /dev/null 2>&1") ;
+			system ("cd $tmp ; svn export file://$repo/trunk $dir > /dev/null 2>&1") ;
 			system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> snapshot") ;
 			chmod ("$tmp/snapshot", 0644) ;
 			copy ("$tmp/snapshot", $snapshot) ;
@@ -567,12 +567,12 @@ function SVNPluginStartElement($parser, $name, $attrs) {
 			if ($attrs['ACTION'] == "M") {
 				$updates++;
 				if ($last_user) {
-					$usr_updates[$last_user]++;
+					$usr_updates[$last_user] = isset($usr_updates[$last_user]) ? ($usr_updates[$last_user]+1) : 0 ;
 				}
 			} elseif ($attrs['ACTION'] == "A") {
 				$adds++;
 				if ($last_user) {
-					$usr_adds[$last_user]++;
+					$usr_adds[$last_user] = isset($usr_adds[$last_user]) ? ($usr_adds[$last_user]+1) : 0 ;
 				}
 			}
 		}
