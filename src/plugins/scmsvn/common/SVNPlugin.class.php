@@ -510,7 +510,7 @@ class SVNPlugin extends SCMPlugin {
 		$code = 0 ;
 		system ("svn ls file://$repo/trunk > /dev/null", $code) ;
 		if ($code == 0) {
-			system ("cd $tmp ; svn checkout file://$repo/trunk $dir > /dev/null 2>&1") ;
+			system ("cd $tmp ; svn export file://$repo/trunk $dir > /dev/null 2>&1") ;
 			system ("tar czCf $tmp $tmp/snapshot.tar.gz $dir") ;
 			chmod ("$tmp/snapshot.tar.gz", 0644) ;
 			copy ("$tmp/snapshot.tar.gz", $snapshot) ;
