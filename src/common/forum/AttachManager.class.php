@@ -5,6 +5,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2005 (c) GForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  *
@@ -279,12 +280,12 @@ class AttachManager extends Error {
 					$4, $5, 1, $6,  $7, $8)',
 			array ($user_id,
 				time() ,
-				addslashes($attachment_name) ,
+				$attachment_name,
 				base64_encode($filestuff) ,
 				$attachment_size,
 				$this->msg_id,
-				addslashes(md5($filestuff)) ,
-				addslashes($attachment_type) ));
+				md5($filestuff),
+				$attachment_type));
 				if ($res) {
 					$this->messages[] = _('File uploaded');
 					$id = db_insertid($res,'forum_pending_attachment','attachmentid');
@@ -303,9 +304,9 @@ class AttachManager extends Error {
 				 filesize = $6 where attachmentid=$7',
 			array (time() ,
 				base64_encode($filestuff) ,
-				addslashes($attachment_name) ,
-				addslashes(md5($filestuff)) ,
-				addslashes($attachment_type) ,
+				$attachment_name,
+				md5($filestuff),
+				$attachment_type,
 				$attachment_size ,
 				$update))) {
 					$this->messages[] = _('File uploaded');
@@ -335,12 +336,12 @@ class AttachManager extends Error {
 					$4, $5, 1, $6,  $7, $8)',
 			array ($user_id,
 				time() ,
-				addslashes($attachment_name) ,
+				$attachment_name,
 				base64_encode($filestuff) ,
 				$attachment_size,
 				$this->msg_id,
-				addslashes(md5($filestuff)) ,
-				addslashes($attachment_type) ));
+				md5($filestuff),
+				$attachment_type));
 				if ($res) {
 					$this->messages[] = _('File uploaded');
 					$id = db_insertid($res,'forum_attachment','attachmentid');
