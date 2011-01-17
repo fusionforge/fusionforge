@@ -86,7 +86,7 @@ if (forge_check_perm('docman', $group_id, 'submit')) {
 }
 
 if (forge_check_perm('docman', $group_id, 'read')) {
-	echo '<a href="/docman/view.php/'.$group_id.'/zip/'.$dirid.'" id="docman-downloadaszip" title="'. _('Download this directory as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+	echo '<a href="/docman/view.php/'.$group_id.'/zip/full/'.$dirid.'" id="docman-downloadaszip" title="'. _('Download this directory as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 }
 
 echo '</h3>';
@@ -101,7 +101,7 @@ include ($gfcommon.'docman/views/additem.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('','', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
+	$tabletop = array('<input id="checkall" type="checkbox" onchange="controllerListFile.checkAll()" />','', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
 	$classth = array('unsortable','unsortable', '', '', '', '', '', '', '');
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$tabletop[] = _('Actions');
@@ -113,12 +113,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '<tr>';
 		echo '<td>';
 		if (!$d->getLocked() && !$d->getReserved()) {
-			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" />';
+			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
 		} else {
 			if ($d->getReservedBy() != $LUSER->getID()) {
 				echo '<input type="checkbox" name="disabled" disabled="disabled"';
 			} else {
-				echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" />';
+				echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
 			}
 		}
 		echo '</td>';
@@ -167,10 +167,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$size = $d->getFileSize();
 				if ($size > 1024 ) {
 					$metric = 'KB';
-					$size = floor ($size/1024);
+					$size = floor($size/1024);
 					if ($size > 1024 ) {
 						$metric = 'MB';
-						$size = floor ($size/1024);
+						$size = floor($size/1024);
 					}
 				}
 				echo $size . $metric;
@@ -226,7 +226,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=add&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Start monitoring') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
 	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
-	echo '<a href="#" id="docman-downloadaszip" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+	echo '<a href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListFile.buildUrlByCheckbox()" id="docman-downloadaszip" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 	echo '</p></div>';
 	include ($gfcommon.'docman/views/editfile.php');
 }

@@ -139,16 +139,38 @@ DocManListFileController.prototype =
 			clearInterval(this.lockInterval[id]);
 		}
 	},
-	
+
 	/*! build list of id, comma separated
 	 */
 	buildUrlByCheckbox: function()
 	{
 		var CheckedBoxes = new Array();
 		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			CheckedBoxes.push(jQuery("input:checked")[h].value);
+			if (jQuery("input:checked")[h].id == 'checkeddocid' ) {
+				CheckedBoxes.push(jQuery("input:checked")[h].value);
+			}
 		}
 		return CheckedBoxes;
+	},
+
+	checkAll: function()
+	{
+		if (jQuery('#checkall').is(':checked')) {
+			jQuery('.checkeddocid').each(function() {
+				jQuery(this).attr('checked',true);
+				});
+		} else {
+			jQuery('.checkeddocid').each(function() {
+				jQuery(this).attr('checked',false);
+			});
+		}
+	},
+
+	checkgeneral: function()
+	{
+		if (jQuery(this).attr('checked',false)) {
+			jQuery('#checkall').attr('checked',false);
+		}
 	},
 
 	computeDocumentsData: function() {
