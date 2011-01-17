@@ -5,6 +5,7 @@
  * Copyright 2003-2004, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -222,6 +223,7 @@ function report_pie_arr($labels, $vals, $format=1) {
 	}
 
 	//now prune out vals where < 2%
+	$rem = 0;
 	for ($i=0; $i<count($vals); $i++) {
 		if (($vals[$i]/$total) < .02) {
 			$rem += $vals[$i];
