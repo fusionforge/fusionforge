@@ -114,7 +114,6 @@ function getAverageTime($atid,$start,$end) {
 				array ($atid,
 				       $start,
 				       $end));
-	exit_error(db_error(),'tracker');
 	return db_result($res,0,0);
 }
 
@@ -127,7 +126,6 @@ function getOpenCount($atid,$start,$end) {
 				array ($atid,
 				       $start,
 				       $end));
-	exit_error(db_error(),'tracker');
 	return db_result($res,0,0);
 }
 
@@ -141,7 +139,6 @@ function getStillOpenCount($atid,$start,$end) {
 				array ($atid,
 				       $end, // Yes, really.
 				       $end)) ;
-	exit_error(db_error(),'tracker');
 	return db_result($res,0,0);
 }
 
