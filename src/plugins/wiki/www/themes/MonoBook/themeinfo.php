@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7690 2010-09-17 08:46:20Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7833 2011-01-13 15:06:45Z vargenau $');
 /**
  * The new mediawiki (Wikipedia.org) default style.
  * Mediawiki 'monobook' style sheet for CSS2-capable browsers.
@@ -89,14 +89,10 @@ class WikiTheme_MonoBook extends WikiTheme_Wikilens
 	$this->addMoreHeaders(JavaScript('',array('src' => $this->_findData("wikibits.js"))));
 	if (isBrowserIE()) {
 	    $ver = browserVersion();
-	    if ($ver > 5.1 and $ver < 5.9)
-		$this->addMoreHeaders($this->_CSSlink(0,$this->_findFile('IE55Fixes.css'),'all'));
-	    elseif ($ver > 5.5 and $ver < 7.0)
+	    if ($ver > 5.5 and $ver < 7.0)
 		$this->addMoreHeaders($this->_CSSlink(0,$this->_findFile('IE60Fixes.css'),'all'));
 	    elseif ($ver >= 7.0)
 		$this->addMoreHeaders($this->_CSSlink(0,$this->_findFile('IE70Fixes.css'),'all'));
-	    else
-		$this->addMoreHeaders($this->_CSSlink(0,$this->_findFile('IE50Fixes.css'),'all'));
 	    unset($ver);
 	    $this->addMoreHeaders("\n");
 	    $this->addMoreHeaders(JavaScript('',array('src' => $this->_findData("IEFixes.js"))));

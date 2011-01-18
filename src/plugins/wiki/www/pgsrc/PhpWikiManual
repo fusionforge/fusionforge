@@ -1,6 +1,6 @@
-Date: Tue,  9 Nov 2010 16:13:37 +0000
+Date: Thu, 13 Jan 2011 17:23:46 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiManual 7736 2010-11-09 15:14:11Z vargenau $
+X-Rcs-Id: $Id: PhpWikiManual 7835 2011-01-13 16:24:20Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiManual;
   flags=EXTERNAL_PAGE;
@@ -18,6 +18,7 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="Help/HowToUseWiki">>
 <<IncludePage page="FindPage">>
 <<IncludePage page="Help/Images">>
+<<IncludePage page="Help/Adobe Flash">>
 <<IncludePage page="Help/Categories">>
 <<IncludePage page="Help/InterWiki">>
 <<IncludePage page="Help/LinkIcons">>

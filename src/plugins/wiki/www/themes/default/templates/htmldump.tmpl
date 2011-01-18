@@ -1,5 +1,5 @@
 <?php  // -*-php-*-
-// rcs_id('$Id: htmldump.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// rcs_id('$Id: htmldump.tmpl 7830 2011-01-13 14:34:22Z vargenau $');
 /*
  * This template is used only for html file dumps, and is responsible
  * mainly for the outer level <html> stuff and the and <head>.
@@ -10,13 +10,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset?>" />
-<?php /**
-       * Additional navigation links are provided here in the html header for browsers
-       * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
-       *
-       * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
-       *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
-       */ ?>
 <link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
 <link rel="help" title="<?php echo _("HowToUseWiki")?>" href="<?php echo WikiURL(_("HowToUseWiki"))?>" />
 <link rel="copyright" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />

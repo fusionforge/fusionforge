@@ -1,5 +1,5 @@
 /**
- * $Id: SpaceWiki.css 7810 2011-01-05 14:28:43Z vargenau $
+ * $Id: SpaceWiki.css 7832 2011-01-13 14:57:09Z vargenau $
  *
  * This theme will probably be renamed something like "Space" to
  * avoid any potential copyright issues.
@@ -42,8 +42,7 @@ caption {
   caption-side: top;
   text-align: left;
   margin-bottom: .5ex;
-  /* Allow the caption to extend to the full page width
-     Mac ie5.1 ignores this*/
+  /* Allow the caption to extend to the full page width */
   width: 100%;
 }
 a { color: #0053db; }
@@ -69,7 +68,6 @@ div.wikitext {
 /**
  * <hr>
  * Not all browsers support this, but it's a cool trick when it is!
- * yes=OmniWeb 4.1sp28; No=IE5.1Mac, Mozilla0.97Mac, iCAB2.6Mac.
  */
 div.wikitext hr {
   visibility: hidden; /* for Mozilla */
@@ -631,8 +629,7 @@ input[type=submit]:hover {
  */
 /* div.wikiaction, div.wikiadmin { */
 div.wikiaction, form.wikiadmin div {
-  /* Emulate the display behaviour of a table, to shrink it's width.
-   * ie5.1Mac ignores this */
+  /* Emulate the display behaviour of a table, to shrink it's width. */
   position: relative;
   display: table;
 }

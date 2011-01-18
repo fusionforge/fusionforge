@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: IncludePage.php 7812 2011-01-05 16:51:41Z vargenau $
+// $Id: IncludePage.php 7840 2011-01-18 08:44:58Z vargenau $
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -41,7 +41,6 @@ extends WikiPlugin
     function getDefaultArguments() {
         return array( 'page'    => false, // the page to include
                       'rev'     => false, // the revision (defaults to most recent)
-                      'version' => false, // same as "rev"
                       'quiet'   => false, // if set, inclusion appears as normal content
                       'bytes'   => false, // maximum number of bytes to include
                       'words'   => false, // maximum number of words to include
@@ -69,12 +68,6 @@ extends WikiPlugin
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
         extract($args);
-
-        if ($version && $rev) {
-            return $this->error(_("Choose only one of 'version' or 'rev' parameters."));
-        } elseif ($version) {
-            $rev = $version;
-        }
 
         if ($page) {
             // Expand relative page names.
@@ -152,14 +145,18 @@ extends WikiPlugin
         include_once('lib/BlockParser.php');
         $content = TransformText($ct, $r->get('markup'), $page);
 
+        array_pop($included_pages);
+
         if ($quiet)
             return $content;
 
-        return HTML(HTML::p(array('class' => 'transclusion-title'),
-                            fmt("Included from %s", WikiLink($page))),
-
-                    HTML::div(array('class' => 'transclusion'),
-                              false, $content));
+        if ($rev) {
+            $transclusion_title = fmt("Included from %s (revision %d)", WikiLink($page), $rev);
+        } else {
+            $transclusion_title = fmt("Included from %s", WikiLink($page));
+        }
+        return HTML(HTML::p(array('class' => 'transclusion-title'), $transclusion_title),
+                    HTML::div(array('class' => 'transclusion'), false, $content));
     }
 
     /**

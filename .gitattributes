@@ -3170,6 +3170,7 @@ src/plugins/wiki/www/pgsrc/Help%2FDynamicIncludePagePlugin -text
 src/plugins/wiki/www/pgsrc/Help%00252FEditMetaDataPlugin -text
 src/plugins/wiki/www/pgsrc/Help%00252FEditText -text
 src/plugins/wiki/www/pgsrc/Help%2FExternalSearchPlugin -text
+src/plugins/wiki/www/pgsrc/Help%00252FFacebookLikePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FFileInfoPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FFoafViewerPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FFrameIncludePlugin -text
@@ -3679,10 +3680,6 @@ src/plugins/wiki/www/themes/MacOSX/preview.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/MacOSX/themeinfo.php -text
 src/plugins/wiki/www/themes/Makefile -text
 src/plugins/wiki/www/themes/Makefile.global -text
-src/plugins/wiki/www/themes/MonoBook/IE50Fixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IE50Fixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IE55Fixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IE55Fixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IE60Fixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IE60Fixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IE70Fixes-min.css -text svneol=unset#text/css
@@ -3691,15 +3688,7 @@ src/plugins/wiki/www/themes/MonoBook/IEFixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IEFixes-min.js -text
 src/plugins/wiki/www/themes/MonoBook/IEFixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IEFixes.js -text
-src/plugins/wiki/www/themes/MonoBook/IEMacFixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IEMacFixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/KHTMLFixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/KHTMLFixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/Makefile -text
-src/plugins/wiki/www/themes/MonoBook/Opera6Fixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/Opera6Fixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/Opera7Fixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/Opera7Fixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/commonPrint-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/commonPrint.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/images/Edit-chalk-10bo12.png -text svneol=unset#image/png

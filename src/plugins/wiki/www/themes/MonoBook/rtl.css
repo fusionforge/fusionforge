@@ -1,5 +1,5 @@
 /**
- *  $Id: rtl.css 6413 2009-01-19 10:33:24Z vargenau $
+ *  $Id: rtl.css 7832 2011-01-13 14:57:09Z vargenau $
  */ 
 
 /*
@@ -11,9 +11,6 @@ Works mostly ok nicely on Safari 1.2.1; fine in Mozilla.
 Safari bugs (1.2.1):
 * Tabs are still appearing in left-to-right order. (Try after localizing)
 
-Opera bugs (7.23 linux):
-* Some bits of ltr text (sidebar box titles) have forward and backward versions overlapping each other
-
 IE/mac bugs:
 * The thing barfs on Hebrew and Arabic anyway, so no point testing.
 
@@ -23,11 +20,6 @@ IE6 bug:
 
 Missing features due to lack of support:
 * external link icons, icon next to user name
-
-To test:
-* Opera6
-* IE 5.0
-* etc
 
 */
 body,
@@ -49,11 +41,6 @@ body * {
 html>body .portlet {
     float: right;
     clear: right;
-}
-/* recover IEMac (might be fine with the float, but usually it's close to IE */
-*>body .portlet {
-    float: none;
-    clear: none;
 }
 .pBody {
     padding-right: 0.8em;

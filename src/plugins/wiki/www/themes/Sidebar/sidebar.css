@@ -1288,29 +1288,6 @@ div.prefsectiontip {
 }
 fieldset.operaprefsection { margin-left: 15em }
 
-/* 
-** IE/Mac fixes, hope to find a validating way to move this
-** to a separate stylesheet. This would work but doesn't validate: 
-** @import("IEMacFixes.css");
-*/
-
-/* tabs: border on the a, not the div */
-* > html #p-cactions li { border:none; }
-* > html #p-cactions li a {
-	border: 1px solid #aaa;
-	border-bottom: none;
-}
-* > html #p-cactions li.selected a { border-color: #fabd23; }
-/* footer icons need a fixed width */
-* > html #f-poweredbyico,
-* > html #f-copyrightico { width: 88px; }
-* > html #bodyContent,
-* > html #bodyContent pre {
-	overflow-x: auto;
-	width: 100%;
-	padding-bottom: 25px;
-}
-
 /* more IE fixes */
 /* float/negative margin brokenness */
 * html #footer {margin-top: 0;}
@@ -1321,18 +1298,6 @@ fieldset.operaprefsection { margin-left: 15em }
 * html div.editsection { font-size: smaller; }
 #pagehistory li.selected { position: relative; }
 
-/* Mac IE 5.0 fix; floated content turns invisible */
-* > html #column-content {
-	float: none;
-}
-* > html #column-one {
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-* > html #footer {
-	margin-left: 13.2em;
-}
 .redirectText {
 	font-size: 150%;
 	margin: 5px;

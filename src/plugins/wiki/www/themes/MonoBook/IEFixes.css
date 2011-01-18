@@ -1,5 +1,5 @@
 /**
- *  $Id: IEFixes.css 6413 2009-01-19 10:33:24Z vargenau $
+ *  $Id: IEFixes.css 7833 2011-01-13 15:06:45Z vargenau $
  */ 
 
 /*
@@ -13,16 +13,3 @@
 
 voice-family: "\"}\"";
 voice-family:inherit; 
-
-/* IE5.0 */
-@media tty { 
-    i{content:"\";/*" "*/}}; @import 'IE50Fixes.css'; {;}/*";} 
-}
-
-/* IE5.5 */
-@media tty {
-    i{content:"\";/*" "*/}}@m; @import 'IE55Fixes.css'; /*";}
-}
-
-
-

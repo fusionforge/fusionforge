@@ -1,12 +1,9 @@
 <?php  // -*-php-*-
-// rcs_id('$Id: html.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// $Id: html.tmpl 7827 2011-01-13 13:55:52Z vargenau $'
 /*
  * This template is responsible mainly for the outer level <html> stuff.
- *
- * NS/MO/IE/Op Browsers before 4.0 don't like that.
  */
-if (browserVersion() >= 4.0)
-  echo "<","?xml version=\"1.0\" encoding=\"", $charset, "\"?", ">\n";
+echo "<","?xml version=\"1.0\" encoding=\"", $charset, "\"?", ">\n";
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $GLOBALS['LANG']?>" lang="<?php echo $GLOBALS['LANG']?>">

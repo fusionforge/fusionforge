@@ -1,5 +1,5 @@
 /**
- * $Id: Hawaiian.css 7810 2011-01-05 14:28:43Z vargenau $
+ * $Id: Hawaiian.css 7832 2011-01-13 14:57:09Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up. It has not yet been tested against NS4.
@@ -29,8 +29,7 @@ caption {
   caption-side: top;
   text-align: left;
   margin-bottom: .5ex;
-  /* Allow the caption to extend to the full page width
-     Mac ie5.1 ignores this*/
+  /* Allow the caption to extend to the full page width */
   width: 100%;
 }
 
