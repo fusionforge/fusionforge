@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -23,7 +24,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 /*
 	Standard header to be used on all /project/admin/* pages
 */
@@ -42,7 +42,6 @@ function project_admin_header($params) {
 	}
 
 	site_project_header($params);
-	echo '<h1>' . $params['title'] . '</h1>';
 	
 	$labels = array();
 	$links = array();
@@ -89,10 +88,12 @@ function project_admin_header($params) {
 	$links[] = '/project/stats/?group_id='.$group_id;
 	plugin_hook("quota_link_project_admin");
 	
-	echo ($HTML->beginSubMenu());	
-	echo $HTML->printSubMenu($labels, $links);
-	plugin_hook ("groupadminmenu", $params) ;
-	echo ($HTML->endSubMenu());
+	echo $HTML->beginSubMenu();
+	echo $HTML->printSubMenu($labels, $links, false);
+	plugin_hook("groupadminmenu", $params);
+	echo $HTML->endSubMenu();
+
+	echo '<h1>' . $params['title'] . '</h1>';
 }
 
 /*
