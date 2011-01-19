@@ -17,6 +17,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * Portions Copyright 2002-2004 (c) GForge Team
  * Portions Copyright 2002-2009 (c) Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -53,21 +54,20 @@ if (forge_get_config('project_registration_restricted')) {
 
 $template_projects = group_get_template_projects() ;
 sortProjectList ($template_projects) ;
+$full_name = trim(getStringFromRequest('full_name'));
+$purpose = trim(getStringFromRequest('purpose'));
+$description = trim(getStringFromRequest('description'));
+$unix_name = trim(strtolower(getStringFromRequest('unix_name')));
+$scm = getStringFromRequest('scm');
+$is_public = getIntFromRequest('is_public', 1);
+$built_from_template = getIntFromRequest('built_from_template');
+
+$index = 1;
 
 if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
 	}
-
-	$full_name = trim(getStringFromRequest('full_name'));
-	$purpose = trim(getStringFromRequest('purpose'));
-	$description = trim(getStringFromRequest('description'));
-	$unix_name = trim(strtolower(getStringFromRequest('unix_name')));
-	$scm = getStringFromRequest('scm');
-	$is_public = getIntFromRequest('is_public');
-	$built_from_template = getIntFromRequest('built_from_template');
-	$feedback = "";
-	$error_msg = "";
 
 	if (!$scm) {
 		$scm = 'noscm' ;
@@ -106,7 +106,7 @@ if (getStringFromRequest('submit')) {
 		$send_mail = ! forge_get_config ('project_auto_approval') ;
 
 		$group = new Group();
-		$u =& session_get_user();
+		$u = session_get_user();
 		$res = $group->create(
 			$u,
 			$full_name,
@@ -152,13 +152,6 @@ if (getStringFromRequest('submit')) {
 	}
 } else if (getStringFromRequest('i_disagree')) {
 	session_redirect("/");
-} else {
-	$full_name = '';
-	$purpose = '';
-	$description = '';
-	$unix_name = '';
-	$scm = '';
-	$feedback = '';
 }
 
 site_header(array('title'=>_('Register Project')));
@@ -171,18 +164,19 @@ echo '<h1>' . _('Register Project') . '</h1>';
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-<?php
-	$index=1;
-	echo '<h3>'.$index.'. '._('Project full name').'</h3>';
-	echo _('You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).<p/>Full Name:<br/>'); ?>
-
+<h2><?php echo $index++.'. '._('Project full name') ?></h2>
+<p>
+<?php echo _('You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).') ?>
+</p>
+<p>
+<?php echo _('Full Name:') ?><br/>
 <input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
+</p>
 
 <?php
 // Don't display Project purpose if auto approval is on, because it won't be used.
 if ( !forge_get_config ('project_auto_approval') ) {
-	$index++;
-	echo '<h3>'.$index.'. '._('Project Purpose And Summarization').'</h3>';
+	echo '<h2>'.$index++.'. '._('Project Purpose And Summarization').'</h2>';
 	echo '<p>';
 	printf(_('Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.'), forge_get_config ('forge_name'));
 	echo '</p>';
@@ -192,42 +186,67 @@ if ( !forge_get_config ('project_auto_approval') ) {
 }
 ?>
 
-<?php
-	$index++;
-	echo '<h3>'.$index.'. '. _('Project Public Description').'</h3>';
-	echo '<p>';
-	echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc. Maximum length is 255 chars.');
-	echo '</p>';
-	?>
+<h2><?php echo $index++.'. '. _('Project Public Description') ?></h2>
+<p>
+<?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc. Maximum length is 255 chars.') ?>
+</p>
+
 <textarea name="description" cols="70" rows="5">
 <?php echo htmlspecialchars($description); ?>
 </textarea>
 
-<?php
-	$index++;
-	echo '<h3>'.$index.'. '._('Project Unix Name').'</h3>';
-	printf(_('In addition to full project name, you will need to choose short,"Unix" name for your project.<p/> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>'), forge_get_config('web_host')) ?>
-
+<h2><?php echo $index++.'. '._('Project Unix Name') ?></h2>
+<p><?php echo _('In addition to full project name, you will need to choose short, "Unix" name for your project.') ?></p> 
+<p><?php echo _('The "Unix Name" has several restrictions because it is used in so many places around the site. They are:') ?></p>
+<ul>
+<li><?php echo _('cannot match the unix name of any other project;') ?></li>
+<li><?php echo _('must be between 3 and 15 characters in length;') ?></li>
+<li><?php echo _('must be in lower case (upper case letters will be converted to lower case);') ?></li>
+<li><?php echo _('can only contain characters, numbers, and dashes;') ?></li>
+<li><?php echo _('must be a valid Unix username;') ?></li>
+<li><?php echo _('cannot match one of our reserved domains;') ?></li>
+<li><?php echo _('Unix name will never change for this project;') ?></li>
+</ul>
+<p><?php echo _('Your unix name is important, however, because it will be used for many things, including:') ?></p>
+<ul>
+<li><?php printf(_('a web site at <tt>unixname.%1$s</tt>,'), forge_get_config('web_host')) ?></li>
+<li><?php echo _('the URL of your source code repository,') ?></li>
+<?php if (forge_get_config('use_shell')) { ?>
+<li><?php printf(_('shell access to <tt>unixname.%1$s</tt>,'), forge_get_config('web_host')) ?></li>
+<?php } ?>
+<li><?php echo _('search engines throughout the site.') ?></li>
+</ul>
+<p>
+<?php echo _('Unix Name:') ?>
+<br />
 <input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
+</p>
 
 <?php
 	$SCMFactory = new SCMFactory() ;
 $scm_plugins=$SCMFactory->getSCMs() ;
 if (forge_get_config('use_scm') && count($scm_plugins) > 0) {	
-	$index++;
-	echo '<h3>'.$index.'. '._('Source Code').'</h3>';
-	echo _('<p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
+	echo '<h2>'.$index++.'. '._('Source Code').'</h2>';
+	echo '<p>' . _('You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.')."</p>\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
-	echo '<td><input type="radio" name="scm" value="noscm" checked="checked">'._('No SCM').'</td>';
+	if (!$scm) {
+		echo '<td><input type="radio" name="scm" value="noscm" checked="checked" />'._('No SCM').'</td>';
+	} else {
+		echo '<td><input type="radio" name="scm" value="noscm" />'._('No SCM').'</td>';
+	}
 	foreach($scm_plugins as $plugin) {
 		$myPlugin= plugin_get_object($plugin);
-		echo '<td><input type="radio" name="scm" value="'.$myPlugin->name.'">'.$myPlugin->text.'</td>';
+		echo '<td><input type="radio" name="scm" ';
+		echo 'value="'.$myPlugin->name.'"';
+		if ($scm && strcmp($scm, $myPlugin->name) == 0) {
+			echo ' checked="checked"';
+		}
+		echo ' />'.$myPlugin->text.'</td>';
 	}
 	echo '</tr></tbody></table>'."\n";
 }
 
-$index++;
-echo '<h3>'.$index.'. '._('Project template'). '</h3>';
+echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
 
 if (count ($template_projects) > 1) {
 	$tpv_arr = array () ;
@@ -275,21 +294,21 @@ if (count ($template_projects) > 1) {
 }
 
 if ($sys_use_private_project) {
-	$index++;
-	echo '<h3>'.$index.'. '._('Visibility'). '</h3>';
-	echo '<p><input type="radio" name="is_public" value="1" ';
+	echo '<h2>'.$index++.'. '._('Visibility'). '</h2>';
+	echo '<p>' . _('If you make your project private, it won\'t be visible in the project list and can\'t be accessed by non members of the project.')."</p>\n";
+	echo '<table><tbody><tr><td><strong>'._('Visibility').':</strong></td>';
+	echo '<td><input type="radio" name="is_public" value="1" ';
 	if (!isset($is_public) || $is_public) {
 		echo 'checked="checked" ';
 	}
-	echo '/>'. _('Public').'</p>';
+	echo '/>'. _('Public').'</td>';
 
-	echo '<p><input type="radio" name="is_public" value="0" ';
+	echo '<td><input type="radio" name="is_public" value="0" ';
 	if (isset ($is_public) && !$is_public) {
 		echo 'checked="checked"';
 	}
-	echo '/>'. _('Private').'</p> ';
-} else {
-	echo '<input type="hidden" name="is_public" value="1" />';
+	echo '/>'. _('Private').'</td> ';
+	echo '</tr></tbody></table>'."\n";
 }
 ?>
 
