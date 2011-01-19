@@ -4,6 +4,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -233,66 +234,59 @@ class Theme extends Layout {
         return $return;
     }
 
+	/**
+	 * beginSubMenu() - Opening a submenu.
+	 *
+	 * @return	string	Html to start a submenu.
+	 */
+	function beginSubMenu() {
+		$return = '<ul class="submenu">';
+		return $return;
+	}
 
-    /**
-     * beginSubMenu() - Opening a submenu.
-     *
-     * @return    string    Html to start a submenu.
-     */
-    function beginSubMenu () 
-    {
-        $return = '<ul class="submenu">';
-        
-        return $return;
-    }
+	/**
+	 * endSubMenu() - Closing a submenu.
+	 *
+	 * @return	string	Html to end a submenu.
+	 */
+	function endSubMenu() {
+		$return = '</ul>';
+		return $return;
+	}
 
-    /**
-     * endSubMenu() - Closing a submenu.
-     *
-     * @return    string    Html to end a submenu.
-     */
-    function endSubMenu ()
-    {
-        $return = '</ul>';
-        
-        return $return;
-    }
+	/**
+	 * printSubMenu() - Takes two array of titles and links and builds the contents of a menu.
+	 *
+	 * @param	array	The array of titles.
+	 * @param	array	The array of title links.
+	 * @param	array	The array of attributs by link
+	 * @return	string	Html to build a submenu.
+	 */
+	function printSubMenu($title_arr, $links_arr, $attr_arr) {
+		$count  = count($title_arr) - 1;
+		$return = '';
 
-    /**
-     * printSubMenu() - Takes two array of titles and links and builds the contents of a menu.
-     *
-     * @param       array   The array of titles.
-     * @param       array   The array of title links.
-     * @return    string    Html to build a submenu.
-     */
-    function printSubMenu ($title_arr,$links_arr) 
-    {
-        $count  = count($title_arr) - 1;
-        $return = '';
+		for ($i=0; $i<$count; $i++)
+			$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
 
-        for ($i=0; $i<$count; $i++)
-            $return .= "<li><span>" . util_make_link ($links_arr[$i], $title_arr[$i]) . "</span></li>";
-        
-        $return .= "<li><span>" . util_make_link ($links_arr[$i], $title_arr[$i]) . "</span></li>";
-        
-        return $return;
-    }
+		$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
+		return $return;
+	}
 
-    /**
-     * subMenu() - Takes two array of titles and links and build a menu.
-     *
-     * @param       array   The array of titles.
-     * @param       array   The array of title links.
-     * @return    string    Html to build a submenu.
-     */
-    function subMenu ($title_arr,$links_arr) 
-    {
-        $return  = $this->beginSubMenu () ;
-        $return .= $this->printSubMenu ($title_arr,$links_arr) ;
-        $return .= $this->endSubMenu () ;
-    
-        return $return;
-    }
+	/**
+	 * subMenu() - Takes two array of titles and links and build a menu.
+	 *
+	 * @param	array	The array of titles.
+	 * @param	array	The array of title links.
+	 * @param	array	The array of attributs by link
+	 * @return	string	Html to build a submenu.
+	 */
+	function subMenu($title_arr, $links_arr, $attr_arr = false) {
+		$return  = $this->beginSubMenu();
+		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
+		$return .= $this->endSubMenu();
+		return $return;
+	}
 
     /**
      * multiTableRow() - create a mutlilevel row in a table

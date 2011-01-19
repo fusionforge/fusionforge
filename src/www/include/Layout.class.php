@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 - Alain Peyrat
- * Copyright 2010 - Franck Villaume - Capgemini
+ * Copyright 2010-2011 - Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -790,7 +790,7 @@ class Layout extends Error {
 	 *
 	 * @return	string	Html to start a submenu.
 	 */
-	function beginSubMenu () {
+	function beginSubMenu() {
 		$return = '
 			<p><strong>';
 		return $return;
@@ -801,7 +801,7 @@ class Layout extends Error {
 	 *
 	 * @return	string	Html to end a submenu.
 	 */
-	function endSubMenu () {
+	function endSubMenu() {
 		$return = '</strong></p>';
 		return $return;
 	}
@@ -811,17 +811,18 @@ class Layout extends Error {
 	 *
 	 * @param	array	The array of titles.
 	 * @param	array	The array of title links.
+	 * @param	array	The array of string for title attributes.
 	 * @return	string	Html to build a submenu.
 	 */
-	function printSubMenu ($title_arr,$links_arr) {
+	function printSubMenu($title_arr, $links_arr, $attr_arr) {
 		$count=count($title_arr);
 		$count--;
 
 		$return = '';
 		for ($i=0; $i<$count; $i++) {
-			$return .= util_make_link($links_arr[$i],$title_arr[$i]).' | ';
+			$return .= util_make_link($links_arr[$i],$title_arr[$i],$attr_arr[$i]).' | ';
 		}
-		$return .= util_make_link($links_arr[$i],$title_arr[$i]);
+		$return .= util_make_link($links_arr[$i],$title_arr[$i],$attr_arr[$i]);
 		return $return;
 	}
 
@@ -830,12 +831,13 @@ class Layout extends Error {
 	 *
 	 * @param	array	The array of titles.
 	 * @param	array	The array of title links.
+	 * @param	array	The array of string for title attributes.
 	 * @return	string	Html to build a submenu.
 	 */
-	function subMenu ($title_arr,$links_arr) {
-		$return  = $this->beginSubMenu() ;
-		$return .= $this->printSubMenu($title_arr,$links_arr) ;
-		$return .= $this->endSubMenu() ;
+	function subMenu($title_arr, $links_arr, $attr_arr = false) {
+		$return  = $this->beginSubMenu();
+		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
+		$return .= $this->endSubMenu();
 		return $return;
 	}
 

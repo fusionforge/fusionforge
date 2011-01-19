@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011 Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -644,9 +645,9 @@ function html_build_priority_select_box ($name='priority', $checked_val='3', $no
 /**
  * html_buildcheckboxarray() - Build an HTML checkbox array.
  *
- * @param		array	Options array
- * @param		name	Checkbox name
- * @param		array	Array of boxes to be pre-checked
+ * @param	array	Options array
+ * @param	name	Checkbox name
+ * @param	array	Array of boxes to be pre-checked
  */
 function html_buildcheckboxarray($options,$name,$checked_array) {
 	$option_count=count($options);
@@ -665,10 +666,10 @@ function html_buildcheckboxarray($options,$name,$checked_array) {
 }
 
 /**
- *	site_header() - everything required to handle security and
- *	add navigation for user pages like /my/ and /account/
+ * site_header() - everything required to handle security and
+ * add navigation for user pages like /my/ and /account/
  *
- *	@param		array	Must contain $user_id
+ * @param	array	Must contain $user_id
  */
 function site_header($params) {
 	GLOBAL $HTML;
@@ -692,7 +693,7 @@ function site_header($params) {
 /**
  * site_footer() - Show the HTML site footer.
  *
- * @param		array	Footer params array
+ * @param	array	Footer params array
  */
 function site_footer($params) {
 	GLOBAL $HTML;
@@ -700,10 +701,10 @@ function site_footer($params) {
 }
 
 /**
- *	site_project_header() - everything required to handle
- *	security and state checks for a project web page
+ * site_project_header() - everything required to handle
+ * security and state checks for a project web page
  *
- *	@param params array() must contain $toptab and $group
+ * @param	params	array() must contain $toptab and $group
  */
 function site_project_header($params) {
 	GLOBAL $HTML;
@@ -763,21 +764,21 @@ function site_project_header($params) {
 }
 
 /**
- *	site_project_footer() - currently a simple shim
- *	that should be on every project page,  rather than
- *	a direct call to site_footer() or theme_footer()
+ * site_project_footer() - currently a simple shim
+ * that should be on every project page,  rather than
+ * a direct call to site_footer() or theme_footer()
  *
- *	@param params array() empty
+ * @param	params	array() empty
  */
 function site_project_footer($params) {
 	site_footer($params);
 }
 
 /**
- *	site_user_header() - everything required to handle security and
- *	add navigation for user pages like /my/ and /account/
+ * site_user_header() - everything required to handle security and
+ * add navigation for user pages like /my/ and /account/
  *
- *	@param params array() must contain $user_id
+ * @param	params	array() must contain $user_id
  */
 function site_user_header($params) {
 	GLOBAL $HTML;
@@ -811,32 +812,32 @@ function site_user_header($params) {
 		$arr_l[] = '/register/' ;
 	}
 
-	echo ($HTML->printSubMenu($arr_t, $arr_l)) ;
+	echo ($HTML->printSubMenu($arr_t, $arr_l, false)) ;
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->endSubMenu());
 }
 
 /**
- *	site_user_footer() - currently a simple shim that should be on every user page,
- *	rather than a direct call to site_footer() or theme_footer()
+ * site_user_footer() - currently a simple shim that should be on every user page,
+ * rather than a direct call to site_footer() or theme_footer()
  *
- *	@param params array() empty
+ * @param	params	array() empty
  */
 function site_user_footer($params) {
 	site_footer($params);
 }
 
 /**
- *	html_clean_hash_string() - Remove noise characters from hex hash string
+ * html_clean_hash_string() - Remove noise characters from hex hash string
  *
- *	Thruout SourceForge, URLs with hexadecimal hash string parameters
- *	are being sent via email to request confirmation of user actions.
- *	It was found that some mail clients distort this hash, so we take
- *	special steps to encode it in the way which help to preserve its
- *	recognition. This routine
+ * Thruout SourceForge, URLs with hexadecimal hash string parameters
+ * are being sent via email to request confirmation of user actions.
+ * It was found that some mail clients distort this hash, so we take
+ * special steps to encode it in the way which help to preserve its
+ * recognition. This routine
  *
- *	@param hashstr required hash parameter as received from browser
- *	@return pure hex string
+ * @param	hashstr	required hash parameter as received from browser
+ * @return	pure hex string
  */
 function html_clean_hash_string($hashstr) {
 
