@@ -53,6 +53,12 @@ function pm_header($params) {
 
 	$labels = array();
 	$links = array();
+
+	if (forge_check_perm('pm_admin', $group_id)) {
+		$labels[]=_('General Admin');
+		$links[]='/pm/admin/?group_id='.$group_id;
+	}
+
 	$labels[] = _('View Subprojects');
 	$links[]  = '/pm/?group_id='.$group_id;
 
