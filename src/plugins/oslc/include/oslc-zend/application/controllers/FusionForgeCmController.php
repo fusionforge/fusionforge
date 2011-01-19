@@ -44,6 +44,7 @@ class FusionForgeCmController extends CmController {
 		'oslcServiceCatalogProject' => array(
 			'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
 		 	'application/xml' => 'xml',
+			'application/x-oslc-disc-service-provider-catalog+json' => 'json',
 			'application/json' => 'json'
 		),
 	);

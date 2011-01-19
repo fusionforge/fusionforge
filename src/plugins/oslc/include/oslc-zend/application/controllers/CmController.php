@@ -55,7 +55,9 @@ class CmController extends Zend_Rest_Controller {
 								'text/xml' => 'xml',
 								'application/atom+xml' => 'xml',
 								'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
+								'application/x-oslc-disc-service-provider-catalog+json' => 'json',
 								'application/x-oslc-cm-service-description+xml' => 'xml',
+								'application/x-oslc-cm-service-description+json' => 'json',
 							 	'application/json' => 'json',
 							 	'application/x-oslc-cm-change-request+json' => 'json'
 							 	//'text/html' => '?',
@@ -100,12 +102,15 @@ class CmController extends Zend_Rest_Controller {
 							'oslcServiceCatalog' => array(
 								'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
 							 	'application/xml' => 'xml',
+								'application/x-oslc-disc-service-provider-catalog+json' => 'json',
 								'application/json' => 'json'
 								),
 
 							'oslcCmServiceDocument' => array(
 								'application/x-oslc-cm-service-description+xml' => 'xml',
-								'application/xml' => 'xml'
+								'application/xml' => 'xml',
+								'application/x-oslc-cm-service-description+json' => 'json',
+								'application/json' => 'json'
 								)
 	);
 							 	
