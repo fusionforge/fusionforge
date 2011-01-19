@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -24,7 +25,6 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/license.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 session_require_global_perm('forge_admin');

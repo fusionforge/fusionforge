@@ -9,6 +9,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -179,7 +180,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="edit_frs_filetype.php"><?php echo _('Add, Delete, or Edit File Types'); ?></a></li>
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo _('Add, Delete, or Edit Themes'); ?></a></li>
-	<li><a href="edit_licenses.php"><?php echo _('Add, Delete, or Edit Licenses'); ?></a></li>
 	<li><a href="<?php echo util_make_url ('/stats/lastlogins.php'); ?>"><?php echo _('Last Logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo _('Cron Manager'); ?></a></li>
 	<li><a href="pluginman.php"><?php echo _('Plugin Manager'); ?></a></li>

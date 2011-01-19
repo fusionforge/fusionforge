@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -41,27 +42,6 @@ require_once $gfcommon.'survey/SurveyFactory.class.php';
 require_once $gfcommon.'survey/SurveyQuestionFactory.class.php';
 require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
-
-//the license_id of "Other/proprietary" license
-define('GROUP_LICENSE_OTHER',126);
-
-$LICENSE_NAMES=array();
-
-/**
- * group_get_licences() - get the licenses list
- *
- * @return array list of licenses
- */
-function & group_get_licenses() {
-	global $LICENSE_NAMES;
-	if(empty($LICENSE_NAMES)) {
-		$result = db_query_params ('select * from licenses', array());
-		while($data = db_fetch_array($result)) {
-			$LICENSE_NAMES[$data['license_id']] = $data['license_name'];
-		}
-	}
-	return $LICENSE_NAMES;
-}
 
 $GROUP_OBJ=array();
 
@@ -956,42 +936,6 @@ class Group extends Error {
 	 */
 	function getDomain() {
 		return $this->data_array['http_domain'];
-	}
-
-	/**
-	 * getLicense - the license they chose.
-	 *
-	 * @return	int	ident of group license.
-	 */
-	function getLicense() {
-		return $this->data_array['license'];
-	}
-	
-	/**
-	 * getLicenseName - the name of the license
-	 *
-	 * @return	string	license name
-	 */
-	function getLicenseName() {
-		$licenses =& group_get_licenses();
-		if(isset($licenses[$this->data_array['license']])) {
-			return $licenses[$this->data_array['license']];
-		} else {
-			return '';
-		}
-	}
-
-	/**
-	 * getLicenseOther - optional string describing license.
-	 *
-	 * @return	string	The custom license.
-	 */
-	function getLicenseOther() {
-		if ($this->getLicense() == GROUP_LICENSE_OTHER) {
-			return $this->data_array['license_other'];
-		} else {
-			return '';
-		}
 	}
 
 	/**
