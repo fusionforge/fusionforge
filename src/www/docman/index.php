@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -84,9 +84,24 @@ switch ($action) {
 	case "trashfile":
 	case "updatecreateonline":
 	case "updateenginesearch":
-	case "updatewebdavinterface":
+	case "updatewebdavinterface": {
 		include ($gfcommon."docman/actions/$action.php");
 		break;
+	}
+}
+
+$use_tooltips = 1;
+
+if (session_loggedin()) {
+	$u =& user_get_object(user_getid());
+	if (!$u || !is_object($u)) {
+		exit_error(_('Could Not Get User'));
+	} elseif ($u->isError()) {
+		exit_error($u->getErrorMessage(),'my');
+	}
+	if (!$u->usesTooltips()) {
+		$use_tooltips = 0;
+	}
 }
 
 $df = new DocumentFactory($g);
@@ -114,12 +129,14 @@ $title = _('Document Manager: Display Document');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
+echo '<div width:100%;">';
+include ($gfcommon.'docman/views/menu.php');
+echo '</div>';
 echo '<div style="float:left; width:17%;">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 
 echo '<div style="float:right; width:82%;">';
-include ($gfcommon.'docman/views/menu.php');
 include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 

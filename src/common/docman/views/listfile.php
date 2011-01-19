@@ -32,7 +32,8 @@ global $dirid; // id of doc_group
 global $nested_docs; // flat docs array
 global $nested_groups; // flat document directories array
 global $HTML; // Layout object
-global $LUSER; // User object
+global $u; // User object
+global $use_tooltips; // enable or not tooltips in docman
 
 $DocGroupName = getNameDocGroup($dirid, $group_id);
 if (!$DocGroupName) {
@@ -50,14 +51,14 @@ jQuery(document).ready(function() {
 						{selector: '#docman-additem', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-reserveddocument', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
+						{selector: '.docman-newdocument', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
 					],
 
 		divAddItem:		jQuery('#additem'),
@@ -74,19 +75,36 @@ jQuery(document).ready(function() {
 <?php
 echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	echo '<a href="#" id="docman-editdirectory" title="'._('Edit this directory').'">'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+	echo '<a href="#" id="docman-editdirectory" ';
+	if ($use_tooltips)
+		echo 'title="'._('Edit this directory').'"';
+
+	echo ' >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 	// do not uncomment the line : trash directory is not correctly implemented
 	//echo '<a href="?group_id='.$group_id.'&action=trashdir&dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
-	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
-		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Permanently delete this directory').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid])) {
+		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" ';
+		if ($use_tooltips)
+			echo ' title="'._('Permanently delete this directory').'" ';
+
+		echo '>'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+	}
 }
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
-	echo '<a href="#" id="docman-additem" title="'. _('Add a new item in this directory') . '" >'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
+	echo '<a href="#" id="docman-additem" ';
+	if ($use_tooltips)
+		echo 'title="'. _('Add a new item in this directory') . '" ';
+
+	echo '>'. html_image('docman/insert-directory.png',22,22,array('alt'=>'additem')). '</a>';
 }
 
 if (forge_check_perm('docman', $group_id, 'read')) {
-	echo '<a href="/docman/view.php/'.$group_id.'/zip/full/'.$dirid.'" id="docman-downloadaszip" title="'. _('Download this directory as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+	echo '<a href="/docman/view.php/'.$group_id.'/zip/full/'.$dirid.'" ';
+	if ($use_tooltips)
+		echo 'class="docman-downloadaszip" title="'. _('Download this directory as a zip') . '" ';
+
+	echo '>' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 }
 
 echo '</h3>';
@@ -115,7 +133,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (!$d->getLocked() && !$d->getReserved()) {
 			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
 		} else {
-			if ($d->getReservedBy() != $LUSER->getID()) {
+			if ($d->getReservedBy() != $u->getID()) {
 				echo '<input type="checkbox" name="disabled" disabled="disabled"';
 			} else {
 				echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
@@ -131,12 +149,21 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$docurl = util_make_url('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 			}
 		}
-		echo '<td><a href="'.$docurl.'" class="docman-viewfile" title="'._('View this document').'" >';
+		echo '<td><a href="'.$docurl.'" class="docman-viewfile"';
+		if ($use_tooltips)
+			echo ' title="'._('View this document').'"';
+
+		echo ' >';
 		echo html_image($d->getFileTypeImage(), '22', '22', array('alt'=>$d->getFileType()));;
 		echo '</a></td>';
 		echo '<td>';
 		if (($d->getUpdated() && $time_new > (time() - $d->getUpdated())) || $time_new > (time() - $d->getCreated())) {
-			echo html_image('docman/new.png', '14', '14', array('alt'=>'new'));
+			$html_image_attr = array();
+			$html_image_attr['alt'] = _('new');
+			$html_image_attr['class'] = 'docman-newdocument';
+			if ($use_tooltips)
+				$html_image_attr['title'] = _('Created or updated since less than 7 days');
+			echo html_image('docman/new.png', '14', '14', $html_image_attr);
 		}
 		echo '&nbsp;'.$d->getFileName();
 		echo '</td>';
@@ -152,7 +179,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		echo '</td>';
 		echo '<td>';
 		if ($d->getReserved()) {
-			echo html_image('docman/document-reserved.png', '22', '22', array('alt'=>_('Reserved Document'),'title'=>_('Reserved Document'),'class'=>'docman-reserveddocument'));
+			$html_image_attr = array();
+			$html_image_attr['alt'] = _('Reserved Document');
+			$html_image_attr['class'] = 'docman-reserveddocument';
+			if ($use_tooltips)
+				$html_image_attr['title'] = _('Reserved Document');
+
+			echo html_image('docman/document-reserved.png', '22', '22', $html_image_attr);
 		} else {
 			echo $d->getStateName().'</td>';
 		}
@@ -182,7 +215,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo '<td>';
 			/* should we steal the lock on file ? */
 			if ($d->getLocked()) {
-				if ($d->getLockedBy() == $LUSER->getID()) {
+				if ($d->getLockedBy() == $u->getID()) {
 					$d->setLock(0);
 					/* if you change the 60000 value above, please update here too */
 				} elseif ((time() - $d->getLockdate()) > 600) {
@@ -190,43 +223,104 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				}
 			}
 			if (!$d->getLocked() && !$d->getReserved()) {
-				echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
-				echo '<a href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
-				echo '<a href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-reservefile" title="'. _('Reserve this document for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
+				echo '<a class="docman-movetotrash" href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+				if ($use_tooltips)
+					echo ' title="'. _('Move this document to trash') .'"';
+
+				echo ' >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+
+				echo '<a class="docman-editfile" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" ';
+				if ($use_tooltips)
+					echo ' title="'. _('Edit this document') .'" ';
+
+				echo '>'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+
+				echo '<a class="docman-reservefile" href="?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+				if ($use_tooltips)
+					echo ' title="'. _('Reserve this document for later edition') .'" ';
+
+				echo '>'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve this document'))). '</a>';
 			} else {
-				if ($d->getReservedBy() != $LUSER->getID()) {
+				if ($d->getReservedBy() != $u->getID()) {
 					if (forge_check_perm('docman', $group_id, 'admin')) {
-						echo '<a href="?group_id='.$group_id.'&action=enforcereserve&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-enforcereservation" title="'. _('Enforce reservation') .'" >'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
+						echo '<a class="docman-enforcereservation" href="?group_id='.$group_id.'&action=enforcereserve&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+						if ($use_tooltips)
+							echo ' title="'. _('Enforce reservation') .'" ';
+
+						echo '>'.html_image('docman/enforce-document.png',22,22,array('alt'=>_('Enforce reservation')));
 					}
 				} else {
-					echo '<a href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-movetotrash" title="'. _('Move this document to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
-					echo '<a href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" class="docman-editfile" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
-					echo '<a href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+					echo '<a class="docman-movetotrash" href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+					if ($use_tooltips)
+						echo ' title="'. _('Move this document to trash') .'" ';
+
+					echo '>'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash this document'))). '</a>';
+					echo '<a class="docman-editfile" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" ';
+					if ($use_tooltips)
+						echo ' title="'. _('Edit this document') .'" ';
+
+					echo '>'.html_image('docman/edit-file.png',22,22,array('alt'=>_('Edit this document'))). '</a>';
+					echo '<a class="docman-releasereservation" href="?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+					if ($use_tooltips)
+						echo ' title="'. _('Release reservation') .'" ';
+
+					echo '>'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
 				}
 			}
-			if ($d->isMonitoredBy($LUSER->getID())) {
+			if ($d->isMonitoredBy($u->getID())) {
 				$option = 'remove';
 				$titleMonitor = _('Stop monitoring this document');
 			} else {
 				$option = 'add';
 				$titleMonitor = _('Start monitoring this document');
 			}
-			echo '<a href="?group_id='.$group_id.'&action=monitorfile&option='.$option.'&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" class="docman-monitorfile" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
+			echo '<a class="docman-monitorfile" href="?group_id='.$group_id.'&action=monitorfile&option='.$option.'&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+			if ($use_tooltips)
+				echo ' title="'.$titleMonitor.'" ';
+
+			echo '>'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
 			echo '</td>';
 		}
 		echo '</tr>';
 	}
 	echo $HTML->listTableBottom();
 	echo '</div>';
-	echo '<div class="docmanDiv">'.html_image('docman/new.png', '14', '14', array('alt'=>'new')).' : ' . _('Created or updated since less than 7 days') .'</div>';
-	echo '<div class="docmanDiv"><p>';
-	echo _('Mass Actions for selected files:');
-	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-movetotrash" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
-	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-reservefile" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
-	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-releasereservation" title="'. _('Release reservation') .'" >'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
-	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=add&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Start monitoring') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
-	echo '<a href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" class="docman-monitorfile" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
-	echo '<a href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListFile.buildUrlByCheckbox()" id="docman-downloadaszip" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+	if (forge_check_perm('docman', $group_id, 'read')) {
+		echo '<div class="docmanDiv"><p>';
+		echo _('Mass Actions for selected files:');
+		if (forge_check_perm('docman', $group_id, 'approve')) {
+			echo '<a class="docman-movetotrash" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" ';
+			if ($use_tooltips)
+				echo ' title="'. _('Move to trash') .'" ';
+
+			echo '>'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
+			echo '<a class="docman-reservefile" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=reservefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" ';
+			if ($use_tooltips)
+				echo ' title="'. _('Reserve for later edition') .'" ';
+
+			echo '>'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
+			echo '<a class="docman-releasereservation" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=releasefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" ';
+			if ($use_tooltips)
+				echo ' title="'. _('Release reservation') .'" ';
+
+			echo '>'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+			echo '<a class="docman-monitorfile" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=add&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" ';
+			if ($use_tooltips)
+				echo ' title="'. _('Start monitoring') .'" ';
+
+			echo '>'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Start monitoring'))). '</a>';
+			echo '<a class="docman-monitorfile" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" ';
+			if ($use_tooltips)
+				echo ' title="'. _('Stop monitoring') .'" ';
+
+			echo '>'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
+		}
+		echo '<a class="docman-downloadaszip" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListFile.buildUrlByCheckbox()" ';
+		if ($use_tooltips)
+			echo ' title="'. _('Download as a zip') . '" ';
+
+		echo '>' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+	}
 	echo '</p></div>';
 	include ($gfcommon.'docman/views/editfile.php');
 }

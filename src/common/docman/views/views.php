@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,7 +29,8 @@ switch ($view) {
 	case 'editdocgroup':
 	case 'editfile':
 	case 'listfile':
-	case 'trashdir':
+	case 'listtrashfile':
+	case 'listpendingfile':
 	case 'search': {
 		include ($gfcommon.'docman/views/'.$view.'.php');
 		break;

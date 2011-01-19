@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -33,7 +33,7 @@ $df->setStateID('2');
 $d_trash_arr =& $df->getDocuments();
 
 if (!$d_trash_arr || count($d_trash_arr) < 1) {
-	echo '<div class="feedback">'._('Trash is empty').'</div>';
+	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
 ?>
 <script type="text/javascript">

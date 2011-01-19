@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -26,11 +26,12 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; //id of the doc_group
+global $use_tooltips; // enable or not tooltips in docman
 
 ?>
 
 <script type="text/javascript">
-var controller;
+var controllerAddItem;
 
 jQuery(document).ready(function() {
 	controllerAddItem = new DocManAddItemController({
@@ -60,10 +61,19 @@ function doItInject() {
 <?php
 echo '<div class="docmanDivIncluded" >';
 
-echo '<input id="buttonDoc" type="radio" name="type" value="document" /><label id="labelDoc" title="'. _('Submit a new document in this directory.').'">'. _('Submit a new document.') .'</label>';
+echo '<input id="buttonDoc" type="radio" name="type" value="document" /><label ';
+if ($use_tooltips)
+	echo 'id="labelDoc" title="'. _('Submit a new document in this directory.').'"';
+echo '>'. _('Submit a new document.') .'</label>';
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	echo '<input id="buttonDir" type="radio" name="type" value="directory" /><label id="labelDir" title="'. _('Create a directory based on this name.').'">'. _('Add a new directory.') .'</label>';
-	echo '<input id="buttonZip" type="radio" name="type" value="zip" /><label id="labelZip" title="'. _('Create a full directory tree using an compressed archive. Only zip or rar format support.').'">'. _('Inject Tree') . '</label>';
+	echo '<input id="buttonDir" type="radio" name="type" value="directory" /><label ';
+	if ($use_tooltips)
+		echo 'id="labelDir" title="'. _('Create a directory based on this name.').'"';
+	echo '>'. _('Add a new directory.') .'</label>';
+	echo '<input id="buttonZip" type="radio" name="type" value="zip" /><label ';
+	if ($use_tooltips)
+		echo 'id="labelZip" title="'. _('Create a full directory tree using an compressed archive. Only zip or rar format support.').'"';
+	echo '>'. _('Inject Tree') . '</label>';
 }
 echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
 echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';

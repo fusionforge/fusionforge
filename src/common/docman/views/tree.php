@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,7 +29,6 @@
 global $d_arr; // documents array
 global $group_id; // id of the group
 
-echo '<h3>Document Tree</h3>';
 $nested_docs = array();
 $idExposeTreeIndex = 0;
 $idhtml = 0;

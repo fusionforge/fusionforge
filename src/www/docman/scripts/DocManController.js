@@ -47,6 +47,14 @@ DocManAddItemController = function(params)
 	this.bindControls();
 };
 
+DocManMenuController = function(params)
+{
+	this.params		= params;
+
+	if ( typeof(jQuery(window).tipsy) == 'function') {
+		this.initTipsy();
+	}
+};
 
 DocManListFileController.prototype =
 {
@@ -242,6 +250,25 @@ DocManAddItemController.prototype =
 
 	/*! initializes tipsy
 	 */
+	initTipsy: function()
+	{
+		for(var i = 0; i < this.params.tipsyElements.length; i++)
+		{
+			var el = this.params.tipsyElements[i];
+
+			jQuery(el.selector).tipsy({
+				gravity: el.options.gravity,
+				delayIn: el.options.delayIn,
+				delayOut: el.options.delayOut,
+				fade: el.options.fade});
+		}
+	}
+}
+
+DocManMenuController.prototype =
+{
+	/*! initializes tipsy
+	*/
 	initTipsy: function()
 	{
 		for(var i = 0; i < this.params.tipsyElements.length; i++)
