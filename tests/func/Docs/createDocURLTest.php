@@ -69,7 +69,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("link=Uncategorized Submissions");
 		$this->clickAndWait("//img[@alt='Move to trash this document']");
-		$this->assertTextPresent("Document moved to trash successfully");
+		$this->assertTextPresent("moved to trash successfully");
 //		$this->assertTextPresent("This project has no visible documents");
 	}
 }
