@@ -99,7 +99,7 @@ class PluginManager extends Error {
 		}
 		return false ;
 	}
-	function isPluginAvailable ($plugin) {
+	function isPluginAvailable($plugin) {
 		$pluginname = $plugin->GetName();
 		$plugins_data = $this->getPlugins();
 		foreach ($plugins_data as $p_id => $p_name) {
@@ -306,7 +306,7 @@ function &plugin_get_object ($pluginname) {
  *
  * @param pluginobject - an object of a subclass of the Plugin class
  */
-function register_plugin (&$pluginobject) {
+function register_plugin(&$pluginobject) {
 	$pm =& plugin_manager_get_object () ;
 	return $pm->RegisterPlugin ($pluginobject) ;
 }
@@ -317,9 +317,9 @@ function register_plugin (&$pluginobject) {
  * @param hookname - name of the hook
  * @param params - parameters for the hook
  */
-function plugin_hook ($hookname, $params = false) {
+function plugin_hook($hookname, $params = false) {
 	$pm =& plugin_manager_get_object () ;
-	return $pm->RunHooks ($hookname, $params) ;
+	return $pm->RunHooks($hookname, $params) ;
 }
 
 /**
