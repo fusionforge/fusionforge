@@ -316,9 +316,9 @@ class Group extends Error {
 					scm_box,
 					register_purpose,
 					register_time,
-                                        enable_anonscm,
+					enable_anonscm,
 					rand_hash,
-                                        built_from_template
+					built_from_template
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
 						array(htmlspecialchars ($group_name),
@@ -1500,7 +1500,7 @@ class Group extends Error {
 	/**
 	 * getTags - Tags of this project.
 	 *
-	 * @return	string	List of tags. Commat separated
+	 * @return	string	List of tags. Comma separated
 	 */
 	function getTags() {
 		$sql = 'SELECT name FROM project_tags WHERE group_id = $1';

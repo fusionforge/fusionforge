@@ -40,7 +40,7 @@ if (!$group || !is_object($group)) {
 // This function performs very update
 function do_update(&$group, $is_public, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
-    global $error_msg;
+	global $error_msg;
 
 	db_begin();
 

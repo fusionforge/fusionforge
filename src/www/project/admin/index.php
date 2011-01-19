@@ -219,11 +219,11 @@ echo '</table>' ;
 <?php
 // This function is used to render checkboxes below
 function c($v) {
-        if ($v) {
-                return 'checked="checked"';
-        } else {
-                return '';
-        }
+	if ($v) {
+		return 'checked="checked"';
+	} else {
+		return '';
+	}
 }
 ?>
 
