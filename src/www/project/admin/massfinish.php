@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) Tim Perdue - GForge LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -64,7 +65,7 @@ if (!$accumulated_ids) {
 		ORDER BY realname ASC", array(db_int_array_to_any_clause($arr)));
 }
 
-project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
+project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id));
 
 echo '
 <h1>'._('Add Users From List').'</h1>

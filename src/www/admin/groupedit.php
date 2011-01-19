@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -92,12 +93,12 @@ if (getStringFromRequest('submit')) {
 
 }
 
-site_admin_header(array('title'=>_('Site Admin: Project Info')));
+$title = _('Site Admin: Project Info for ') . $group->getPublicName();
+site_admin_header(array('title'=>$title));
+?>
 
-echo '<h2>'.$group->getPublicName().'</h2>' ;?>
-
-<h3><?php echo util_make_link("/project/admin/?group_id=$group_id", _('[Project Admin]')); ?></h3>
-<h3><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h3>
+<h2><?php echo util_make_link("/project/admin/?group_id=$group_id", _('[Project Admin]')); ?></h2>
+<h2><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 

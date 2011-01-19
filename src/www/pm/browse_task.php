@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems, Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -167,7 +168,7 @@ $rows=count($pt_arr);
 if ($rows < 1) {
 
 	echo '
-		<div class="feedback">'._('No Matching Tasks found').'</div>
+		<p class="feedback">'._('No Matching Tasks found').'</p>
 		<p />
 		<div class="warning">'._('Add tasks using the link above').'</div>';
 	echo db_error();

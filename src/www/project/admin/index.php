@@ -8,7 +8,7 @@
  *
  * Copyright 2004 GForge, LLC - Tim Perdue
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -110,9 +110,7 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-$adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
-project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
-
+project_admin_header(array('title'=>_('Project Information'), 'group'=>$group->getID()));
 ?>
 
 <table class="my-layout-table">

@@ -6,6 +6,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -1116,7 +1117,7 @@ function util_make_link($path, $text, $extra_params=false, $absolute=false) {
 	if ($absolute) {
 		return '<a ' . $ep . 'href="' . $path . '">' . $text . '</a>' ;
 	} else {
-		return '<a ' . $ep . 'href="' . util_make_url ($path) . '">' . $text . '</a>' ;
+		return '<a ' . $ep . 'href="' . util_make_uri($path) . '">' . $text . '</a>' ;
 	}
 }
 
