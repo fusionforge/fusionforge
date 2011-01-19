@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -217,11 +218,11 @@ class GFUser extends Error {
 	 * @param	string	The users preferred default timezone.
 	 * @param	string	The users preference for receiving site updates by email.
 	 * @param	string	The users preference for receiving community updates by email.
-	 * @param	int		The ID of the language preference.
+	 * @param	int	The ID of the language preference.
 	 * @param	string	The users preferred timezone.
 	 * @param	string	The users Jabber address.
-	 * @param	int		The users Jabber preference.
-	 * @param	int		The users theme_id.
+	 * @param	int	The users Jabber preference.
+	 * @param	int	The users theme_id.
 	 * @param	string	The users unix_box.
 	 * @param	string	The users address.
 	 * @param	string	The users address part 2.
@@ -230,12 +231,13 @@ class GFUser extends Error {
 	 * @param	string	The users title.
 	 * @param	char(2)	The users ISO country_code.
 	 * @param	bool	Whether to send an email or not
+	 * @param	int	The users preference for tooltips
 	 * @returns		The newly created user ID
 	 *
 	 */
-	function create($unix_name,$firstname,$lastname,$password1,$password2,$email,
-		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
-		$unix_box='shell',$address='',$address2='',$phone='',$fax='',$title='',$ccode='US',$send_mail=true) {
+	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
+		$mail_site, $mail_va, $language_id, $timezone, $jabber_address, $jabber_only, $theme_id,
+		$unix_box = 'shell', $address = '', $address2 = '', $phone = '', $fax = '', $title = '', $ccode = 'US', $send_mail = true, $tooltip = true) {
 		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
@@ -336,7 +338,7 @@ class GFUser extends Error {
 				}
 			}
 		}
-		$unix_name=strtolower($unix_name);
+		$unix_name = strtolower($unix_name);
 		if (!account_namevalid($unix_name)) {
 			$this->setError(_('Invalid Unix Name.'));
 			return false;
@@ -344,38 +346,40 @@ class GFUser extends Error {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1 . rand() . microtime()),0,16);
 		db_begin();
-		$result = db_query_params ('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)',
-					   array ($unix_name,
-						  md5($password1),
-						  account_genunixpw($password1),
-						  htmlspecialchars($firstname.' '.$lastname),
-						  htmlspecialchars($firstname),
-						  htmlspecialchars($lastname),
-						  $email,
-						  time(),
-						  'P',
-						  $confirm_hash,
-						  (($mail_site)?"1":"0"),
-						  (($mail_va)?"1":"0"),
-						  $language_id,
-						  $timezone,
-						  $jabber_address,
-						  $jabber_only,
-						  $unix_box,
-						  htmlspecialchars($address),
-						  htmlspecialchars($address2),
-						  htmlspecialchars($phone),
-						  htmlspecialchars($fax),
-						  htmlspecialchars($title),
-						  $ccode,
-						  $theme_id));
+		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips)
+							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25)',
+					   array($unix_name,
+						 md5($password1),
+						 account_genunixpw($password1),
+						 htmlspecialchars($firstname.' '.$lastname),
+						 htmlspecialchars($firstname),
+						 htmlspecialchars($lastname),
+						 $email,
+						 time(),
+						 'P',
+						 $confirm_hash,
+						 (($mail_site)?"1":"0"),
+						 (($mail_va)?"1":"0"),
+						 $language_id,
+						 $timezone,
+						 $jabber_address,
+						 $jabber_only,
+						 $unix_box,
+						 htmlspecialchars($address),
+						 htmlspecialchars($address2),
+						 htmlspecialchars($phone),
+						 htmlspecialchars($fax),
+						 htmlspecialchars($title),
+						 $ccode,
+						 $theme_id,
+						 $tooltips));
 		if (!$result) {
 			$this->setError(_('Insert Failed: ') . db_error());
 			db_rollback();
 			return false;
 		} else {
 
-			$id = db_insertid($result,'users','user_id');
+			$id = db_insertid($result, 'users', 'user_id');
 			if (!$id) {
 				$this->setError('Could Not Get USERID: ' .db_error());
 				db_rollback();
@@ -479,8 +483,8 @@ Enjoy the site.
 				db_rollback();
 				return false;
 			}
-			$res = db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1',
-						array ($this->getID()));
+			$res = db_query_params('DELETE FROM filemodule_monitor WHERE user_id=$1',
+						array($this->getID()));
 			if (!$res) {
 				$this->setError('ERROR - ' . _('Could Not Delete From filemodule_monitor:') . ' '.db_error());
 				db_rollback();
@@ -519,9 +523,10 @@ Enjoy the site.
 	 * @param	string	The users fax.
 	 * @param	string	The users title.
 	 * @param	string	The users ccode.
+	 * @param	int	The users preference for tooltips.
 	 */
-	function update($firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
-		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode) {
+	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
+		$jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips) {
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
@@ -531,53 +536,55 @@ Enjoy the site.
 			return false;
 		}
 		if (!$jabber_only) {
-			$jabber_only=0;
+			$jabber_only = 0;
 		} else {
-			$jabber_only=1;
+			$jabber_only = 1;
 		}
 
 		db_begin();
 
-		$res = db_query_params ('
-			UPDATE users
-			SET
-			realname=$1,
-			firstname=$2,
-			lastname=$3,
-			language=$4,
-			timezone=$5,
-			mail_siteupdates=$6,
-			mail_va=$7,
-			block_ratings=$8,
-			jabber_address=$9,
-			jabber_only=$10,
-			address=$11,
-			address2=$12,
-			phone=$13,
-			fax=$14,
-			title=$15,
-			ccode=$16,
-			theme_id=$17
-			WHERE user_id=$18',
-					array (
-						htmlspecialchars($firstname . ' ' .$lastname),
-						htmlspecialchars($firstname),
-						htmlspecialchars($lastname),
-						$language_id,
-						$timezone,
-						$mail_site,
-						$mail_va,
-						$block_ratings,
-						$jabber_address,
-						$jabber_only,
-						htmlspecialchars($address) ,
-						htmlspecialchars($address2) ,
-						htmlspecialchars($phone) ,
-						htmlspecialchars($fax) ,
-						htmlspecialchars($title) ,
-						$ccode,
-						$theme_id,
-						$this->getID())) ;
+		$res = db_query_params('
+				UPDATE users
+				SET
+				realname=$1,
+				firstname=$2,
+				lastname=$3,
+				language=$4,
+				timezone=$5,
+				mail_siteupdates=$6,
+				mail_va=$7,
+				block_ratings=$8,
+				jabber_address=$9,
+				jabber_only=$10,
+				address=$11,
+				address2=$12,
+				phone=$13,
+				fax=$14,
+				title=$15,
+				ccode=$16,
+				theme_id=$17,
+				tooltips=$18
+				WHERE user_id=$19',
+			array (
+				htmlspecialchars($firstname . ' ' .$lastname),
+				htmlspecialchars($firstname),
+				htmlspecialchars($lastname),
+				$language_id,
+				$timezone,
+				$mail_site,
+				$mail_va,
+				$block_ratings,
+				$jabber_address,
+				$jabber_only,
+				htmlspecialchars($address) ,
+				htmlspecialchars($address2) ,
+				htmlspecialchars($phone) ,
+				htmlspecialchars($fax) ,
+				htmlspecialchars($title) ,
+				$ccode,
+				$theme_id,
+				$tooltips,
+				$this->getID())) ;
 
 		if (!$res) {
 			$this->setError(_('ERROR - Could Not Update User Object:'). ' ' .db_error());
@@ -589,7 +596,7 @@ Enjoy the site.
 			// user (ratings by others should not be removed,
 			// as it opens possibility to abuse rate system)
 			if (!$use_ratings && $this->usesRatings()) {
-				db_query_params ('DELETE FROM user_ratings WHERE rated_by=$1',
+				db_query_params('DELETE FROM user_ratings WHERE rated_by=$1',
 						 array($user_id));
 			}
 			if (!$this->fetchData($this->getID())) {
@@ -1355,6 +1362,15 @@ Enjoy the site.
 	 */
 	function usesRatings() {
 		return !$this->data_array['block_ratings'];
+	}
+
+	/**
+	 * usesTooltips - whether user enables or not tooltips.
+	 *
+	 * @return	boolean	success.
+	 */
+	function usesTooltips() {
+		return $this->data_array['tooltips'];
 	}
 
 	/**

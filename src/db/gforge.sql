@@ -1217,6 +1217,7 @@ CREATE TABLE users (
     ccode character(2) DEFAULT 'US'::bpchar,
     theme_id integer,
     type_id integer DEFAULT 1,
+    tooltips integer DEFAULT 1,
     unix_gid integer DEFAULT 0
 );
 

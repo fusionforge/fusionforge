@@ -3,7 +3,7 @@
  * User account main page - show settings with means to change them
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -44,7 +44,6 @@ if (getStringFromRequest('submit')) {
 		exit_form_double_submit('my');
 	}
 
-
 	$firstname = getStringFromRequest('firstname');
 	$lastname = getStringFromRequest('lastname');
 	$language = getIntFromRequest('language');
@@ -62,6 +61,7 @@ if (getStringFromRequest('submit')) {
 	$mail_va = getStringFromRequest('mail_va');
 	$remember_user = getStringFromRequest('remember_user');
 	$use_ratings = getStringFromRequest('use_ratings');
+	$use_tooltips = (getStringFromRequest('use_tooltips')) ? getStringFromRequest('use_tooltips') : 0;
 
 /*
 //needs security audit
@@ -77,7 +77,7 @@ if (getStringFromRequest('submit')) {
 	$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 
 	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)) {
+		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
 		form_release_key(getStringFromRequest('form_key'));
 		$error_msg = $u->getErrorMessage();
 		$refresh_url = '/account/?error_msg='.urlencode($error_msg);
@@ -91,7 +91,7 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-$hookParams['user']= user_get_object(user_getid());
+$hookParams['user'] = user_get_object(user_getid());
 if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
 	plugin_hook("userisactivecheckboxpost", $hookParams);
 }
@@ -257,6 +257,11 @@ echo $HTML->boxTop(_('Preferences')); ?>
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 		<?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId()));
 } ?>
+<p />
+<input type="checkbox"  name="use_tooltips" value="1"<?php
+	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
+		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
+?>
 </td></tr>
 <?php 
 plugin_hook("userisactivecheckbox", $hookParams);
