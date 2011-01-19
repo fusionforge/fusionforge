@@ -516,13 +516,13 @@ function util_line_wrap ($text, $wrap = 80, $break = "\n") {
  * @returns The HREF'ed URL
  *
  */
-function util_make_links ($data='') {
+function util_make_links($data='') {
 	if(empty($data)) { 
 		return $data; 
 	}
-	$lines = explode("\n",$data);
+	$lines = explode("\n", $data);
 	$newText = "";
-	while ( list ($key,$line) = each ($lines)) {
+	while ( list ($key, $line) = each ($lines)) {
 		// When we come here, we usually have form input
 		// encoded in entities. Our aim is to NOT include
 		// angle brackets in the URL
@@ -566,14 +566,14 @@ function show_priority_colors_key() {
  * @param		array	An array of boxes to be pre-checked
  *
  */
-function utils_buildcheckboxarray($options,$name,$checked_array) {
-	$option_count=count($options);
-	$checked_count=count($checked_array);
+function utils_buildcheckboxarray($options, $name, $checked_array) {
+	$option_count = count($options);
+	$checked_count = count($checked_array);
 
-	for ($i=1; $i<=$option_count; $i++) {
+	for ($i = 1; $i <= $option_count; $i++) {
 		echo '
 			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
-		for ($j=0; $j<$checked_count; $j++) {
+		for ($j=0; $j < $checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
 				echo ' checked';
 			}
@@ -597,30 +597,30 @@ function utils_requiredField() {
  * Be sure to include HTL_Graphs.php before using this function
  *
  * @author Tim Perdue tperdue@valinux.com
- * @param		int		The databse result set ID
- * @param		string	The title of the graph
+ * @param	int	The databse result set ID
+ * @param	string	The title of the graph
  *
  */
-Function GraphResult($result,$title) {
-	$rows=db_numrows($result);
+function GraphResult($result, $title) {
+	$rows = db_numrows($result);
 
 	if ((!$result) || ($rows < 1)) {
 		echo 'None Found.';
 	} else {
-		$names=array();
-		$values=array();
+		$names = array();
+		$values = array();
 
-		for ($j=0; $j<db_numrows($result); $j++) {
+		for ($j=0; $j < db_numrows($result); $j++) {
 			if (db_result($result, $j, 0) != '' && db_result($result, $j, 1) != '' ) {
-				$names[$j]= db_result($result, $j, 0);
-				$values[$j]= db_result($result, $j, 1);
+				$names[$j] = db_result($result, $j, 0);
+				$values[$j] = db_result($result, $j, 1);
 			}
 		}
 
 	/*
 		This is another function detailed below
 	*/
-		GraphIt($names,$values,$title);
+		GraphIt($names, $values, $title);
 	}
 }
 
@@ -628,55 +628,55 @@ Function GraphResult($result,$title) {
  * GraphIt() - Build a graph
  *
  * @author Tim Perdue tperdue@valinux.com
- * @param		array	An array of names
- * @param		array	An array of values
- * @param		string	The title of the graph
+ * @param	array	An array of names
+ * @param	array	An array of values
+ * @param	string	The title of the graph
  *
  */
-Function GraphIt($name_string,$value_string,$title) {
+function GraphIt($name_string, $value_string, $title) {
 	GLOBAL $HTML;
 
-	$counter=count($name_string);
+	$counter = count($name_string);
 
 	/*
 		Can choose any color you wish
 	*/
-	$bars=array();
+	$bars = array();
 
 	for ($i = 0; $i < $counter; $i++) {
-		$bars[$i]=$HTML->COLOR_LTBACK1;
+		$bars[$i] = $HTML->COLOR_LTBACK1;
 	}
 
-	$counter=count($value_string);
+	$counter = count($value_string);
 
 	/*
 		Figure the max_value passed in, so scale can be determined
 	*/
 
-	$max_value=0;
+	$max_value = 0;
 
 	for ($i = 0; $i < $counter; $i++) {
 		if ($value_string[$i] > $max_value) {
-			$max_value=$value_string[$i];
+			$max_value = $value_string[$i];
 		}
 	}
 
 	if ($max_value < 1) {
-		$max_value=1;
+		$max_value = 1;
 	}
 
 	/*
 		I want my graphs all to be 800 pixels wide, so that is my divisor
 	*/
 
-	$scale=(400/$max_value);
+	$scale = (400/$max_value);
 
 	/*
 		I create a wrapper table around the graph that holds the title
 	*/
 
-	$title_arr=array();
-	$title_arr[]=$title;
+	$title_arr = array();
+	$title_arr[] = $title;
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 	echo '<tr><td>';
@@ -713,7 +713,7 @@ Function GraphIt($name_string,$value_string,$title) {
 		This is the actual call to the HTML_Graphs class
 	*/
 
-	html_graph($name_string,$value_string,$bars,$vals);
+	html_graph($name_string, $value_string, $bars, $vals);
 
 	echo '
 		</td></tr>
@@ -817,7 +817,7 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
  * @returns true on success/false on error
  *
  */
-function validate_email ($address) {
+function validate_email($address) {
 	if ( preg_match( "/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/", $address) ) {
 		return true;
 	} else {
@@ -832,7 +832,7 @@ function validate_email ($address) {
  * @param	char	Separator
  * @returns	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
 */
-function validate_emails ($addresses, $separator=',') {
+function validate_emails($addresses, $separator=',') {
 	if (strlen($addresses) == 0) return array();
 	
 	$emails = explode($separator, $addresses);
@@ -856,7 +856,7 @@ function validate_emails ($addresses, $separator=',') {
  * @returns true on success/false on error
  *
  */
-function util_is_valid_filename ($file) {
+function util_is_valid_filename($file) {
 	//bad char test
 	$invalidchars = preg_replace("/[-A-Z0-9+_\. ~]/i","",$file);
 
@@ -878,7 +878,7 @@ function util_is_valid_filename ($file) {
  * @returns true on success/false on failur
  *
  */
-function valid_hostname ($hostname = "xyz") {
+function valid_hostname($hostname = "xyz") {
 
 	//bad char test
 	$invalidchars = preg_replace("/[-A-Z0-9\.]/i","",$hostname);
@@ -918,7 +918,7 @@ function valid_hostname ($hostname = "xyz") {
  * @param array     labels  strings associated to each 2^10 or
  *                  10^3(base10==true) multiple of base units
  */
-function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' bytes',  ' KB', ' MB', ' GB')) {
+function human_readable_bytes($bytes, $base10=false, $round=0, $labels=array(' bytes',  ' KB', ' MB', ' GB')) {
 	if ($bytes <= 0 || !is_array($labels) || (count($labels) <= 0)) {
 		return null;
 	}
@@ -1059,7 +1059,7 @@ function util_strip_accents($text) {
  * 
  * @return string
  */
-function normalized_urlprefix () {
+function normalized_urlprefix() {
 	$prefix = forge_get_config('url_prefix') ;
 	$prefix = preg_replace ("/^\//", "", $prefix) ;
 	$prefix = preg_replace ("/\/$/", "", $prefix) ;
@@ -1075,7 +1075,7 @@ function normalized_urlprefix () {
  * @param string $path
  * @return string URL
  */
-function util_make_url ($path = '') {
+function util_make_url($path = '') {
         if (forge_get_config('use_ssl')) {
                 $url = "https://" ;
                 $url .= forge_get_config('web_host') ;
@@ -1089,8 +1089,8 @@ function util_make_url ($path = '') {
                         $url .= ":".forge_get_config('http_port') ;
                 }
         }
-	$url .= util_make_uri ($path) ;
-	return $url ;
+	$url .= util_make_uri($path) ;
+	return $url;
 }
 
 /**
@@ -1099,14 +1099,14 @@ function util_make_url ($path = '') {
  * @param string $path
  * @return string URI
  */
-function util_make_uri ($path) {
-	$path = preg_replace ('/^\//', '', $path) ;
-	$uri = normalized_urlprefix () ;
-	$uri .= $path ;
-	return $uri ;
+function util_make_uri($path) {
+	$path = preg_replace('/^\//', '', $path);
+	$uri = normalized_urlprefix();
+	$uri .= $path;
+	return $uri;
 }
 
-function util_make_link ($path, $text, $extra_params=false, $absolute=false) {
+function util_make_link($path, $text, $extra_params=false, $absolute=false) {
 	$ep = '' ;
 	if (is_array($extra_params)) {
 		foreach ($extra_params as $key => $value) {
