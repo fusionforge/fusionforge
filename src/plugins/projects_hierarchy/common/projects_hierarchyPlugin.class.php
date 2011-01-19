@@ -3,7 +3,7 @@
  * projects_hierarchyPlugin Class
  *
  * Copyright 2006 (c) Fabien Regnier - Sogeti
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -58,10 +58,10 @@ class projects_hierarchyPlugin extends Plugin {
 			case "admin_project_link": {
 				global $gfplugins;
 				require_once $gfplugins.'projects_hierarchy/include/hierarchy_utils.php';
-				$group_id = $params;
+				$group_id = $params[0];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					include($this->name.'/view/'.$hookname.'.php');
+					include($this->name.'/view/'.$hookname.'.php&type='.$params[1]);
 				}
 				$returned = true;
 				break;
