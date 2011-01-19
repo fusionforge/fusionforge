@@ -120,10 +120,10 @@ if (getStringFromRequest('submit')) {
 			$built_from_template
 		);
 		if ($res && forge_get_config('use_scm') && $plugin) {
-			$group->setUsesSCM (true) ;
+			$group->setUseSCM (true) ;
 			$res = $group->setPluginUse ($scm, true);
 		} else {
-			$group->setUsesSCM (false) ;
+			$group->setUseSCM (false) ;
 		}
 
 		if (!$res) {

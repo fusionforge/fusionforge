@@ -1016,20 +1016,6 @@ class Group extends Error {
 		}
 	}
 
-	function setUsesSCM($booleanparam) {
-		db_begin();
-		$booleanparam = $booleanparam ? 1 : 0;
-		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
-					array($booleanparam, $this->getID()));
-		if ($res) {
-			$this->data_array['use_scm'] = $booleanparam;
-			db_commit();
-		} else {
-			db_rollback();
-			return false;
-		}
-	}
-
 	/**
 	 * enablePserver - whether or not this group has opted to enable Pserver.
 	 *
