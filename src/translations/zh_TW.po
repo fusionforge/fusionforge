@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-10 11:29+0100\n"
+"POT-Creation-Date: 2011-01-20 17:22+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -361,7 +361,7 @@ msgstr "文件分組：無效的分組編號"
 #: common/docman/include/utils.php:191 common/docman/include/utils.php:192
 #: common/docman/views/listfile.php:189 common/docman/views/listfile.php:191
 #: common/forum/ForumHTML.class.php:74 common/forum/ForumHTML.class.php:225
-#: common/forum/ForumHTML.class.php:466 common/pm/ProjectTask.class.php:1144
+#: common/forum/ForumHTML.class.php:466 common/pm/ProjectTask.class.php:1145
 #: common/tracker/Artifact.class.php:1518
 #: common/tracker/Artifact.class.php:1520
 #: common/tracker/Artifact.class.php:1524
@@ -401,7 +401,7 @@ msgstr "文件分組：無效的分組編號"
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:66
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:64
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
-#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:148
+#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:149
 #: www/softwaremap/tag_cloud.php:167 www/softwaremap/trove_list.php:297
 #: www/stats/lastlogins.php:63 www/tracker/browse.php:564
 #: www/tracker/browse.php:575 www/tracker/detail.php:64
@@ -639,7 +639,7 @@ msgid "belongs to"
 msgstr "屬於"
 
 #: common/docman/views/editdocgroup.php:56
-#: common/forum/AttachManager.class.php:149
+#: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:62
 #: common/widget/Widget_MyBookmarks.class.php:57
 #: plugins/contribtracker/www/global_admin.php:269
@@ -871,7 +871,7 @@ msgstr ""
 #: common/include/rbac_texts.php:219 common/include/rbac_texts.php:221
 #: common/widget/Widget_MyProjects.class.php:77
 #: plugins/mantisbt/www/admin/index.php:47
-#: plugins/mantisbt/www/group/index.php:52 www/include/Layout.class.php:647
+#: plugins/mantisbt/www/group/index.php:52 www/include/Layout.class.php:653
 #: www/news/news_utils.php:55 www/pm/index.php:63
 #: www/survey/include/SurveyHTML.class.php:66 www/tracker/add.php:64
 #: www/tracker/admin/ind.php:92
@@ -904,14 +904,14 @@ msgstr ""
 msgid "Your search did not match any documents"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:340
+#: common/forum/AttachManager.class.php:145 www/forum/admin/index.php:340
 #: www/forum/admin/index.php:346 www/forum/admin/index.php:411
 #: www/forum/admin/monitor.php:42
 #, fuzzy
 msgid "Could Not Get Forum Object"
 msgstr "無法更新上層文章"
 
-#: common/forum/AttachManager.class.php:150
+#: common/forum/AttachManager.class.php:151
 #: common/forum/ForumAdmin.class.php:63
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
@@ -945,7 +945,7 @@ msgstr "無法更新上層文章"
 msgid "Delete"
 msgstr "刪除"
 
-#: common/forum/AttachManager.class.php:164
+#: common/forum/AttachManager.class.php:165
 #: common/widget/WidgetLayoutManager.class.php:493
 #: common/widget/WidgetLayoutManager.class.php:519
 #: www/admin/admin_table.php:55 www/admin/database.php:171
@@ -956,35 +956,35 @@ msgstr "刪除"
 msgid "Add"
 msgstr "新增"
 
-#: common/forum/AttachManager.class.php:181
-#: common/forum/AttachManager.class.php:269
-#: common/forum/AttachManager.class.php:325
+#: common/forum/AttachManager.class.php:182
+#: common/forum/AttachManager.class.php:270
+#: common/forum/AttachManager.class.php:326
 msgid "Couldn't get message id"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:197
-#: common/forum/AttachManager.class.php:289
-#: common/forum/AttachManager.class.php:311
-#: common/forum/AttachManager.class.php:345
+#: common/forum/AttachManager.class.php:198
+#: common/forum/AttachManager.class.php:290
+#: common/forum/AttachManager.class.php:312
+#: common/forum/AttachManager.class.php:346
 msgid "File uploaded"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:199
-#: common/forum/AttachManager.class.php:292
-#: common/forum/AttachManager.class.php:315
-#: common/forum/AttachManager.class.php:348
+#: common/forum/AttachManager.class.php:200
+#: common/forum/AttachManager.class.php:293
+#: common/forum/AttachManager.class.php:316
+#: common/forum/AttachManager.class.php:349
 msgid "File not uploaded"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:237
+#: common/forum/AttachManager.class.php:238
 msgid "Invalid Extension"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:245
+#: common/forum/AttachManager.class.php:246
 msgid "Error, problem with the attachment file uploaded into the server"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:312
+#: common/forum/AttachManager.class.php:313
 msgid "File Updated Successfully"
 msgstr ""
 
@@ -1046,6 +1046,15 @@ msgstr "討論區：savePlace()"
 #: www/news/admin/index.php:227 www/news/admin/index.php:248
 msgid "Error On Update:"
 msgstr "更新時錯誤："
+
+#: common/forum/Forum.class.php:619 common/frs/FRSPackage.class.php:448
+#: common/frs/FRSRelease.class.php:358 common/include/Group.class.php:1626
+#: common/mail/MailingList.class.php:382 common/pm/ProjectGroup.class.php:372
+#: common/pm/ProjectTask.class.php:506 common/tracker/Artifact.class.php:507
+#: common/tracker/ArtifactExtraField.class.php:431
+#: common/tracker/ArtifactType.class.php:806
+msgid "Please tick all checkboxes."
+msgstr ""
 
 #: common/forum/Forum.class.php:630 common/forum/Forum.class.php:638
 #: common/forum/Forum.class.php:646
@@ -1529,8 +1538,8 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr "資料庫管理"
 
-#: common/include/Error.class.php:127 common/include/Group.class.php:439
-#: common/include/Group.class.php:511
+#: common/include/Error.class.php:127 common/include/Group.class.php:440
+#: common/include/Group.class.php:512
 #, fuzzy
 msgid "Permission denied."
 msgstr "權限不足"
@@ -1553,244 +1562,244 @@ msgstr "更新時錯誤："
 msgid "Missing Parameters"
 msgstr "缺少參數"
 
-#: common/include/Group.class.php:245
+#: common/include/Group.class.php:246
 #, fuzzy
 msgid "Group Not Found"
 msgstr "找不到檔案"
 
-#: common/include/Group.class.php:267
+#: common/include/Group.class.php:268
 #, php-format
 msgid "fetchData():: %s"
 msgstr ""
 
-#: common/include/Group.class.php:292
+#: common/include/Group.class.php:293
 msgid "Group::create: Group object already exists"
 msgstr ""
 
-#: common/include/Group.class.php:297
+#: common/include/Group.class.php:298
 #, fuzzy
 msgid "Invalid Unix name"
 msgstr "Unix名稱錯誤"
 
-#: common/include/Group.class.php:300 common/include/Group.class.php:304
+#: common/include/Group.class.php:301 common/include/Group.class.php:305
 #: common/include/User.class.php:277
 msgid "Unix name already taken"
 msgstr "Unix名稱重複"
 
-#: common/include/Group.class.php:307
+#: common/include/Group.class.php:308
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
 msgstr "請詳細說明您為什麼要在這裡註冊"
 
-#: common/include/Group.class.php:310
+#: common/include/Group.class.php:311
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
 
-#: common/include/Group.class.php:313
+#: common/include/Group.class.php:314
 msgid "Describe in a more comprehensive manner your project."
 msgstr "請詳細說明您的專案目的"
 
-#: common/include/Group.class.php:316
+#: common/include/Group.class.php:317
 msgid ""
 "Your project description is too long. Please make it smaller than 256 bytes."
 msgstr ""
 
-#: common/include/Group.class.php:358
+#: common/include/Group.class.php:359
 #, php-format
 msgid "ERROR: Could not create group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:365
+#: common/include/Group.class.php:366
 #, php-format
 msgid "ERROR: Could not get group id: %s"
 msgstr ""
 
-#: common/include/Group.class.php:395
+#: common/include/Group.class.php:396
 #, php-format
 msgid "ERROR: Could not add admin to newly created group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:434 common/include/Group.class.php:506
+#: common/include/Group.class.php:435 common/include/Group.class.php:507
 #, fuzzy
 msgid "Could not get permission."
 msgstr "無法獲得許可權"
 
-#: common/include/Group.class.php:457
+#: common/include/Group.class.php:458
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
 msgstr ""
 
-#: common/include/Group.class.php:525
+#: common/include/Group.class.php:526
 #, fuzzy, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] "E-mail位址明顯無效"
 msgstr[1] "E-mail位址明顯無效"
 
-#: common/include/Group.class.php:578
+#: common/include/Group.class.php:579
 msgid ""
 "Error updating project information: Maximum length for Project Description "
 "is 255 chars."
 msgstr ""
 
-#: common/include/Group.class.php:626
+#: common/include/Group.class.php:627
 #, fuzzy, php-format
 msgid "Error updating project information: %s"
 msgstr "專案類別"
 
-#: common/include/Group.class.php:714
+#: common/include/Group.class.php:715
 #, fuzzy
 msgid "Invalid Status Change"
 msgstr "不正確會員"
 
-#: common/include/Group.class.php:725
+#: common/include/Group.class.php:726
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:935
+#: common/include/Group.class.php:936
 msgid "Couldn't insert SCM_BOX to database"
 msgstr ""
 
-#: common/include/Group.class.php:939
+#: common/include/Group.class.php:940
 msgid "SCM Box can't be empty"
 msgstr "原始碼版本管理系統區塊不能空白"
 
-#: common/include/Group.class.php:1594
+#: common/include/Group.class.php:1595
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1603
+#: common/include/Group.class.php:1604
 #, fuzzy
 msgid "Setting tags: "
 msgstr "設定"
 
-#: common/include/Group.class.php:1632
+#: common/include/Group.class.php:1633
 msgid "Cannot Delete System Group"
 msgstr ""
 
-#: common/include/Group.class.php:1724 common/include/Group.class.php:1738
+#: common/include/Group.class.php:1725 common/include/Group.class.php:1739
 #, fuzzy
 msgid "Error Deleting News: "
 msgstr "新增討論區錯誤"
 
-#: common/include/Group.class.php:1732
+#: common/include/Group.class.php:1733
 #, fuzzy, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "無法完成執行"
 
-#: common/include/Group.class.php:1749 common/include/Group.class.php:1757
+#: common/include/Group.class.php:1750 common/include/Group.class.php:1758
 #, fuzzy
 msgid "Error Deleting Documents: "
 msgstr "錯誤插入一個組成元件"
 
-#: common/include/Group.class.php:1767
+#: common/include/Group.class.php:1768
 #, fuzzy
 msgid "Error Deleting Tags: "
 msgstr "錯誤插入一個組成元件"
 
-#: common/include/Group.class.php:1778
+#: common/include/Group.class.php:1779
 #, fuzzy
 msgid "Error Deleting Project History: "
 msgstr "專案類別"
 
-#: common/include/Group.class.php:1789
+#: common/include/Group.class.php:1790
 #, fuzzy
 msgid "Error Deleting Project Plugins: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1800
+#: common/include/Group.class.php:1801
 #, fuzzy
 msgid "Error Deleting SCM Statistics: "
 msgstr "取得 %1$s 時錯誤"
 
-#: common/include/Group.class.php:1837
+#: common/include/Group.class.php:1838
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 #, fuzzy
 msgid "Could not properly delete the mailing list"
 msgstr "無法正確刪除通訊論壇"
 
-#: common/include/Group.class.php:1846 common/include/Group.class.php:1854
+#: common/include/Group.class.php:1847 common/include/Group.class.php:1855
 #, fuzzy
 msgid "Error Deleting Trove: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1865
+#: common/include/Group.class.php:1866
 #, fuzzy
 msgid "Error Deleting Counters: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1875 common/include/Group.class.php:1883
+#: common/include/Group.class.php:1876 common/include/Group.class.php:1884
 #, fuzzy
 msgid "Error Deleting Project: "
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:1963
+#: common/include/Group.class.php:1964
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:1975 common/include/Group.class.php:2067
+#: common/include/Group.class.php:1976 common/include/Group.class.php:2068
 #, fuzzy
 msgid "Error Getting Role Object"
 msgstr "建立群組物件時發生錯誤"
 
-#: common/include/Group.class.php:2027
+#: common/include/Group.class.php:2028
 #, php-format
 msgid "ERROR: Could Not Add User To Group: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2096
+#: common/include/Group.class.php:2097
 #, fuzzy
 msgid "ERROR: User does not exist"
 msgstr "查詢不存在"
 
-#: common/include/Group.class.php:2145 common/include/Group.class.php:2161
-#: common/include/Group.class.php:2277
+#: common/include/Group.class.php:2146 common/include/Group.class.php:2162
+#: common/include/Group.class.php:2278
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2178
+#: common/include/Group.class.php:2179
 #, php-format
 msgid "ERROR: DB: artifact: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2199 common/include/Group.class.php:2212
+#: common/include/Group.class.php:2200 common/include/Group.class.php:2213
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2257 common/include/Group.class.php:2286
+#: common/include/Group.class.php:2258 common/include/Group.class.php:2287
 #: www/admin/globalroleedit.php:44 www/project/admin/roledelete.php:45
 #: www/project/admin/roleedit.php:78
 #, fuzzy
 msgid "Could Not Get Role"
 msgstr "無法完成執行"
 
-#: common/include/Group.class.php:2260 common/include/Group.class.php:2289
-#: common/include/Group.class.php:2294
+#: common/include/Group.class.php:2261 common/include/Group.class.php:2290
+#: common/include/Group.class.php:2295
 #, fuzzy, php-format
 msgid "Role: %s"
 msgstr "角色"
 
-#: common/include/Group.class.php:2264
+#: common/include/Group.class.php:2265
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2396
+#: common/include/Group.class.php:2397
 #, fuzzy
 msgid "Group already active"
 msgstr "帳號已經啟動。"
 
-#: common/include/Group.class.php:2644 common/include/Group.class.php:2723
+#: common/include/Group.class.php:2645 common/include/Group.class.php:2724
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2652
+#: common/include/Group.class.php:2653
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -1857,12 +1866,12 @@ msgstr ""
 "\n"
 "--  %7$s"
 
-#: common/include/Group.class.php:2688
+#: common/include/Group.class.php:2689
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s 專案通過審核了"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2731
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -1881,20 +1890,20 @@ msgstr ""
 "原因：\n"
 "\n"
 
-#: common/include/Group.class.php:2749
+#: common/include/Group.class.php:2750
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s 專案被取消了"
 
-#: common/include/Group.class.php:2781
+#: common/include/Group.class.php:2782
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2788
+#: common/include/Group.class.php:2789
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2800
+#: common/include/Group.class.php:2801
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -1911,12 +1920,12 @@ msgstr ""
 "請瀏覽下面網址審核這個專案：\n"
 "%5$s"
 
-#: common/include/Group.class.php:2810
+#: common/include/Group.class.php:2811
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "發表人"
 
-#: common/include/Group.class.php:2816
+#: common/include/Group.class.php:2817
 #, php-format
 msgid ""
 "\n"
@@ -1924,12 +1933,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2820 common/include/Group.class.php:2835
+#: common/include/Group.class.php:2821 common/include/Group.class.php:2836
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "新專案 %1$s 完成註冊了"
 
-#: common/include/Group.class.php:2828
+#: common/include/Group.class.php:2829
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -1948,46 +1957,46 @@ msgstr ""
 "\n"
 " %1$s 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。"
 
-#: common/include/Group.class.php:2853
+#: common/include/Group.class.php:2854
 #, fuzzy
 msgid "Group name is too short"
 msgstr "問題太簡略"
 
-#: common/include/Group.class.php:2856
+#: common/include/Group.class.php:2857
 #, fuzzy
 msgid "Group name is too long"
 msgstr "群組名稱 (編輯)"
 
-#: common/include/Group.class.php:2859
+#: common/include/Group.class.php:2860
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix名稱重複"
 
-#: common/include/Group.class.php:2950
+#: common/include/Group.class.php:2951
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:3009
+#: common/include/Group.class.php:3010
 msgid "Error: Enable to get users from group"
 msgstr ""
 
-#: common/include/Group.class.php:3030
+#: common/include/Group.class.php:3031
 #, php-format
 msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:3048
+#: common/include/Group.class.php:3049
 #, php-format
 msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:3066
+#: common/include/Group.class.php:3067
 #, php-format
 msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:3084
+#: common/include/Group.class.php:3085
 #, php-format
 msgid "ERROR - Could Not Update Group force_docman_reindex %s"
 msgstr ""
@@ -2096,14 +2105,14 @@ msgstr ""
 
 #: common/include/Navigation.class.php:406
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:149 plugins/blocks/www/index.php:168
+#: common/reporting/report_utils.php:150 plugins/blocks/www/index.php:168
 #: plugins/quota_management/www/quota_project.php:89
 msgid "Forums"
 msgstr "討論區"
 
 #: common/include/Navigation.class.php:420 common/include/rbac_texts.php:144
 #: common/include/rbac_texts.php:240 common/include/rbac_texts.php:242
-#: common/reporting/report_utils.php:145
+#: common/reporting/report_utils.php:146
 #: common/widget/Widget_ProjectPublicAreas.class.php:50
 #: www/pm/include/ProjectTaskHTML.class.php:109 www/tracker/admin/ind.php:110
 #: www/tracker/ind.php:67
@@ -2117,7 +2126,7 @@ msgstr "通信論壇"
 #: common/include/Navigation.class.php:453
 #: common/include/group_section_texts.php:32 common/include/rbac_texts.php:145
 #: common/include/rbac_texts.php:235 common/include/rbac_texts.php:237
-#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:195
+#: common/reporting/report_utils.php:158 common/reporting/report_utils.php:196
 #: common/widget/Widget_ProjectPublicAreas.class.php:129
 #: plugins/blocks/www/index.php:171 www/my/dashboard.php:77
 #: www/project/stats/project_stats_utils.php:83
@@ -2129,7 +2138,7 @@ msgid "Tasks"
 msgstr "任務"
 
 #: common/include/Navigation.class.php:468
-#: common/reporting/report_utils.php:153 plugins/blocks/www/index.php:172
+#: common/reporting/report_utils.php:154 plugins/blocks/www/index.php:172
 #: www/reporting/projectact_graph.php:106
 msgid "Docs"
 msgstr "文件"
@@ -2860,20 +2869,20 @@ msgstr "無法獲得許可權"
 msgid "No admin users ?"
 msgstr ""
 
-#: common/include/utils.php:178
+#: common/include/utils.php:179
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:550
+#: common/include/utils.php:551
 msgid "Priority Colors"
 msgstr "優先權顏色"
 
-#: common/include/utils.php:1219
+#: common/include/utils.php:1220
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "帳號已存在"
 
-#: common/include/utils.php:1235
+#: common/include/utils.php:1236
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "帳號已存在"
@@ -2970,11 +2979,11 @@ msgstr "取得 %1$s 時錯誤"
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "專案分類：需要名字和被指定人"
 
-#: common/pm/ProjectTask.class.php:688
+#: common/pm/ProjectTask.class.php:689
 msgid "Circular Dependency Detected'"
 msgstr "發現迴圈依賴'"
 
-#: common/pm/ProjectTask.class.php:1156
+#: common/pm/ProjectTask.class.php:1157
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
@@ -2983,24 +2992,24 @@ msgstr ""
 msgid "Successfully Added"
 msgstr "成功新增"
 
-#: common/reporting/report_utils.php:28 common/reporting/report_utils.php:30
+#: common/reporting/report_utils.php:29 common/reporting/report_utils.php:31
 #, php-format
 msgid "%1$s Reporting"
 msgstr "%1$s 報告"
 
-#: common/reporting/report_utils.php:41 common/reporting/report_utils.php:46
+#: common/reporting/report_utils.php:42 common/reporting/report_utils.php:47
 msgid "Weekly"
 msgstr "每週"
 
-#: common/reporting/report_utils.php:42 common/reporting/report_utils.php:47
+#: common/reporting/report_utils.php:43 common/reporting/report_utils.php:48
 msgid "Monthly"
 msgstr "每月"
 
-#: common/reporting/report_utils.php:45
+#: common/reporting/report_utils.php:46
 msgid "Daily"
 msgstr "每日"
 
-#: common/reporting/report_utils.php:57
+#: common/reporting/report_utils.php:58
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:73
 #: plugins/svntracker/common/svntrackerPlugin.class.php:66
 #: www/my/dashboard.php:125 www/news/admin/news_admin_utils.php:42
@@ -3009,43 +3018,43 @@ msgstr "每日"
 msgid "Y-m-d"
 msgstr "Y-m-d"
 
-#: common/reporting/report_utils.php:57
+#: common/reporting/report_utils.php:58
 msgid "to"
 msgstr "to"
 
-#: common/reporting/report_utils.php:71 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:72 www/pm/calendar.php:166
 msgid "Sunday"
 msgstr "星期日"
 
-#: common/reporting/report_utils.php:72 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:73 www/pm/calendar.php:166
 msgid "Monday"
 msgstr "星期一"
 
-#: common/reporting/report_utils.php:73 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:74 www/pm/calendar.php:166
 msgid "Tuesday"
 msgstr "星期二"
 
-#: common/reporting/report_utils.php:74 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:75 www/pm/calendar.php:166
 msgid "Wednesday"
 msgstr "星期三"
 
-#: common/reporting/report_utils.php:75 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:76 www/pm/calendar.php:166
 msgid "Thursday"
 msgstr "星期四"
 
-#: common/reporting/report_utils.php:76 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:77 www/pm/calendar.php:166
 msgid "Friday"
 msgstr "星期五"
 
-#: common/reporting/report_utils.php:77 www/pm/calendar.php:166
+#: common/reporting/report_utils.php:78 www/pm/calendar.php:166
 msgid "Saturday"
 msgstr "星期六"
 
-#: common/reporting/report_utils.php:88
+#: common/reporting/report_utils.php:89
 msgid "Y-m"
 msgstr "Y-m"
 
-#: common/reporting/report_utils.php:161 common/reporting/report_utils.php:199
+#: common/reporting/report_utils.php:162 common/reporting/report_utils.php:200
 #: www/reporting/projectact_graph.php:117 www/stats/site_stats_utils.php:245
 #: www/stats/site_stats_utils.php:376 www/stats/site_stats_utils.php:430
 #: www/stats/site_stats_utils.php:489 www/top/toplist.php:37
@@ -3053,12 +3062,12 @@ msgstr "Y-m"
 msgid "Downloads"
 msgstr "下載次數"
 
-#: common/reporting/report_utils.php:164
+#: common/reporting/report_utils.php:165
 #, fuzzy
 msgid "Page views"
 msgstr "頁面瀏覽數"
 
-#: common/reporting/report_utils.php:179
+#: common/reporting/report_utils.php:180
 #: www/project/stats/project_stats_utils.php:79
 #: www/project/stats/project_stats_utils.php:138
 #: www/project/stats/project_stats_utils.php:194
@@ -3067,7 +3076,7 @@ msgstr "頁面瀏覽數"
 msgid "Bugs"
 msgstr "問題回報"
 
-#: common/reporting/report_utils.php:180
+#: common/reporting/report_utils.php:181
 #: www/project/stats/project_stats_utils.php:80
 #: www/project/stats/project_stats_utils.php:139
 #: www/project/stats/project_stats_utils.php:195
@@ -3076,7 +3085,7 @@ msgstr "問題回報"
 msgid "Support"
 msgstr "支援"
 
-#: common/reporting/report_utils.php:181
+#: common/reporting/report_utils.php:182
 #: www/project/stats/project_stats_utils.php:81
 #: www/project/stats/project_stats_utils.php:140
 #: www/project/stats/project_stats_utils.php:196
@@ -3085,19 +3094,19 @@ msgstr "支援"
 msgid "Patches"
 msgstr "修補檔案"
 
-#: common/reporting/report_utils.php:182
+#: common/reporting/report_utils.php:183
 msgid "Feature Requests"
 msgstr "特色請求"
 
-#: common/reporting/report_utils.php:183
+#: common/reporting/report_utils.php:184
 msgid "Other Trackers"
 msgstr "其它追蹤者"
 
-#: common/reporting/report_utils.php:191
+#: common/reporting/report_utils.php:192
 msgid "Forum Messages"
 msgstr "討論區訊息"
 
-#: common/reporting/report_utils.php:234 www/snippet/snippet_utils.php:37
+#: common/reporting/report_utils.php:236 www/snippet/snippet_utils.php:37
 #: www/snippet/snippet_utils.php:63
 msgid "Other"
 msgstr "其它"
@@ -3391,7 +3400,7 @@ msgstr "監視已取消"
 
 #: common/widget/Widget.class.php:89 plugins/mailman/www/mailman_utils.php:61
 #: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:234
-#: www/include/Layout.class.php:1234
+#: www/include/Layout.class.php:1240
 msgid "Preferences"
 msgstr "設定"
 
@@ -4185,18 +4194,14 @@ msgstr ""
 msgid "Cannot Process your request : No ID specified"
 msgstr ""
 
-#: plugins/blocks/www/index.php:190 plugins/blocks/www/index.php:268
-#: plugins/blocks/www/index.php:316 plugins/blocks/www/index.php:376
-#: plugins/mantisbt/www/index.php:91 plugins/mantisbt/www/index.php:174
+#: plugins/blocks/www/index.php:190 plugins/blocks/www/index.php:205
+#: plugins/blocks/www/index.php:268 plugins/blocks/www/index.php:316
+#: plugins/blocks/www/index.php:376 plugins/mantisbt/www/index.php:91
+#: plugins/mantisbt/www/index.php:174
 #: plugins/quota_management/www/index.php:73
 #: plugins/quota_management/www/index.php:102
 #, php-format
 msgid "First activate the %s plugin through the Project's Admin Interface"
-msgstr ""
-
-#: plugins/blocks/www/index.php:205
-#, php-format
-msgid "First activate the %s plugin through the Project's Admin Interfacer"
 msgstr ""
 
 #: plugins/blocks/www/index.php:218
@@ -6404,7 +6409,7 @@ msgstr ""
 msgid "Edit interface, import XML dumps"
 msgstr ""
 
-#: plugins/mediawiki/common/MediaWikiPlugin.class.php:342
+#: plugins/mediawiki/common/MediaWikiPlugin.class.php:343
 #, fuzzy
 msgid "MediaWiki Plugin admin"
 msgstr "郵件管理"
@@ -6858,7 +6863,7 @@ msgid "That Trove category does not exist"
 msgstr "軟體類別不存在"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:63
-#: www/softwaremap/full_list.php:53 www/softwaremap/tag_cloud.php:53
+#: www/softwaremap/full_list.php:54 www/softwaremap/tag_cloud.php:53
 #: www/softwaremap/trove_list.php:39
 msgid "Software Map"
 msgstr "軟體地圖"
@@ -6894,7 +6899,7 @@ msgid "Browse By"
 msgstr "瀏覽者："
 
 #: plugins/projects_hierarchy/www/softwaremap.php:275
-#: www/softwaremap/full_list.php:80 www/softwaremap/trove_list.php:237
+#: www/softwaremap/full_list.php:81 www/softwaremap/trove_list.php:237
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "找到超過 <strong>%1$s</strong> 個專案"
@@ -6908,7 +6913,7 @@ msgstr[0] "找到 <strong>%1$s</strong> 個專案"
 msgstr[1] "找到 <strong>%1$s</strong> 個專案"
 
 #: plugins/projects_hierarchy/www/softwaremap.php:402
-#: www/include/Layout.class.php:1291
+#: www/include/Layout.class.php:1297
 msgid "Project Tree"
 msgstr ""
 
@@ -8295,7 +8300,7 @@ msgstr ""
 msgid "New Password (min. 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
-#: www/account/lostpw.php:45 www/users:42
+#: www/account/lostpw.php:45 www/users:44
 #, fuzzy
 msgid "That user does not exist."
 msgstr "查詢不存在"
@@ -9051,7 +9056,7 @@ msgid "Resend New Project Instruction Email"
 msgstr "重送新專案通過審核說明 Email"
 
 #: www/admin/grouplist.php:28 www/admin/grouplist.php:29
-#: www/include/Layout.class.php:1296
+#: www/include/Layout.class.php:1302
 #, fuzzy
 msgid "Project List"
 msgstr "專案"
@@ -9802,7 +9807,7 @@ msgstr "：使用者清單"
 msgid "User updated to %1$s status"
 msgstr "使用者更新到狀態 %1$s"
 
-#: www/admin/userlist.php:68 www/include/tool_reports.php:65
+#: www/admin/userlist.php:68 www/include/tool_reports.php:66
 msgid "Key"
 msgstr "鍵值"
 
@@ -10055,37 +10060,41 @@ msgstr "您可以重新評價某個人。只需要回到他們的評價頁面，
 msgid "Document Manager: Display Document"
 msgstr "專案管理：顯示文件"
 
-#: www/docman/view.php:55
+#: www/docman/view.php:54
 #, fuzzy
 msgid "Document is not available."
 msgstr "資訊未提供"
 
-#: www/docman/view.php:70
+#: www/docman/view.php:69
 msgid "No document to display - invalid or inactive document number"
 msgstr ""
 
-#: www/docman/view.php:104
+#: www/docman/view.php:103
 msgid "Unable to open zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:108
+#: www/docman/view.php:107
 msgid "Unable to fill zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:111
+#: www/docman/view.php:110
 msgid "Unable to close zip archive for backup"
 msgstr ""
 
-#: www/docman/view.php:119
+#: www/docman/view.php:118
 #, fuzzy
 msgid "No documents to backup."
 msgstr "無文件資料"
 
-#: www/docman/view.php:129
+#: www/docman/view.php:130
 msgid "Webdav Access Canceled by user"
 msgstr ""
 
-#: www/docman/view.php:135
+#: www/docman/view.php:136
+msgid "No webdav interface enabled."
+msgstr ""
+
+#: www/docman/view.php:140
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
@@ -10467,7 +10476,7 @@ msgstr "討論"
 msgid "Ultimate"
 msgstr "啟用"
 
-#: www/forum/forum.php:186 www/include/tool_reports.php:114
+#: www/forum/forum.php:186 www/include/tool_reports.php:115
 msgid "Show"
 msgstr "顯示"
 
@@ -11123,19 +11132,19 @@ msgstr "File 釋出與異動記錄"
 msgid "Release Name:"
 msgstr "釋出名稱："
 
-#: www/include/Layout.class.php:132
+#: www/include/Layout.class.php:133
 msgid "Can't find theme directory!"
 msgstr ""
 
-#: www/include/Layout.class.php:267
+#: www/include/Layout.class.php:268
 msgid "en"
 msgstr "zh-TW"
 
-#: www/include/Layout.class.php:629
+#: www/include/Layout.class.php:635
 msgid "Quick Jump To..."
 msgstr ""
 
-#: www/include/Layout.class.php:1286
+#: www/include/Layout.class.php:1292
 msgid "Tag cloud"
 msgstr ""
 
@@ -11403,40 +11412,40 @@ msgstr "註冊專案"
 msgid "Project Home"
 msgstr "新專案名稱"
 
-#: www/include/tool_reports.php:65 www/pm/index.php:109
+#: www/include/tool_reports.php:66 www/pm/index.php:109
 #: www/reporting/usersummary.php:55 www/tracker/ind.php:67
 msgid "Open"
 msgstr "開啟"
 
-#: www/include/tool_reports.php:66
+#: www/include/tool_reports.php:67
 msgid "All"
 msgstr "所有"
 
-#: www/include/tool_reports.php:70
+#: www/include/tool_reports.php:71
 msgid "No data found to report"
 msgstr "找不到資料可以報告"
 
-#: www/include/tool_reports.php:98
+#: www/include/tool_reports.php:99
 msgid "Last day(s)"
 msgstr "昨天"
 
-#: www/include/tool_reports.php:99
+#: www/include/tool_reports.php:100
 msgid "Last week(s)"
 msgstr "上星期"
 
-#: www/include/tool_reports.php:100
+#: www/include/tool_reports.php:101
 msgid "Last month(s)"
 msgstr "上個月"
 
-#: www/include/tool_reports.php:101
+#: www/include/tool_reports.php:102
 msgid "Last year(s)"
 msgstr "去年"
 
-#: www/include/tool_reports.php:102
+#: www/include/tool_reports.php:103
 msgid "Project lifespan"
 msgstr "專案期間"
 
-#: www/include/tool_reports.php:106
+#: www/include/tool_reports.php:107
 msgid "for"
 msgstr "給"
 
@@ -14956,6 +14965,11 @@ msgstr ""
 msgid "Tasks Project"
 msgstr "專案任務管理員"
 
+#: www/reporting/timeadd.php:202
+#, fuzzy
+msgid "Change week"
+msgstr "變更星期"
+
 #: www/reporting/timeadd.php:206
 msgid "Change Week"
 msgstr "變更星期"
@@ -15844,17 +15858,17 @@ msgstr "在這裡貼上程式碼"
 msgid "en_US"
 msgstr "zh_TW"
 
-#: www/softwaremap/full_list.php:82
+#: www/softwaremap/full_list.php:83
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> projects in result set."
 msgstr "找到 <strong>%1$s</strong> 個專案"
 
-#: www/softwaremap/full_list.php:86
+#: www/softwaremap/full_list.php:87
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
 
-#: www/softwaremap/full_list.php:148
+#: www/softwaremap/full_list.php:149
 #, fuzzy
 msgid "Register Date:"
 msgstr "註冊"
@@ -17877,7 +17891,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/users:34
+#: www/users:36
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
