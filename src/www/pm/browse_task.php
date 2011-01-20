@@ -438,4 +438,9 @@ if ($rows < 1) {
 
 pm_footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>
