@@ -39,7 +39,7 @@ echo '<h1>' . _('User List') . '</h1>';
  * @param               string  $user_id - the user id to act upon
  */
 function performAction($newStatus, $statusString, $user_id) {
-	$u =& user_get_object($user_id);
+	$u = user_get_object($user_id);
 	if (!$u || !is_object($u)) {
 		exit_error(_('Could Not Get User'),'home');
 	} elseif ($u->isError()) {

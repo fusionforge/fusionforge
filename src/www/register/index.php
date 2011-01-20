@@ -106,7 +106,7 @@ if (getStringFromRequest('submit')) {
 		$send_mail = ! forge_get_config ('project_auto_approval') ;
 
 		$group = new Group();
-		$u =& session_get_user();
+		$u = session_get_user();
 		$res = $group->create(
 			$u,
 			$full_name,

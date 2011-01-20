@@ -58,7 +58,7 @@ if ($group_id) {
 }
 
 $rssTitle = forge_get_config ('forge_name')." Project$title News";
-$rssLink = "http://".forge_get_config('web_host')."/news/$link";
+$rssLink = util_make_url("/news/$link");
 
 // ## one time output
 print " <channel>\n";
