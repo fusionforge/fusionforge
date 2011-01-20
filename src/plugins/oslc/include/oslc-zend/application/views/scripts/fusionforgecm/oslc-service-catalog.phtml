@@ -47,11 +47,9 @@ $child = $service->appendChild($child);*/
 <h1>OSLC-CM V1 Service Catalog document</h1>
 <pre>
 <?php
-	$xml = projects_to_service_catalog($this->baseUrl(), $this->projects);
-	//print $xml;
+	$xml = projects_to_service_catalog($this->serverUrl().$this->baseUrl(), $this->projects);
 	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
-	$text = add_links($text, "http");
-	$text = add_links($text, $this->baseUrl());
+	$text = add_links($text, $this->serverUrl().$this->baseUrl());
 	echo $text;?>
 </pre>
 </body>

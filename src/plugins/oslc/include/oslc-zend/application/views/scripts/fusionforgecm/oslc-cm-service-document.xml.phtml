@@ -27,4 +27,4 @@
 
 require('_service-document_xml.php');
 
-print project_to_service_description($this->baseUrl(), $this->project, $this->tracker);
+print project_to_service_description($this->serverUrl().$this->baseUrl(), $this->project, $this->tracker);

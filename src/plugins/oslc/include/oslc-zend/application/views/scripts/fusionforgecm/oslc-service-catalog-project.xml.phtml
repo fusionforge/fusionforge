@@ -24,4 +24,4 @@
 
 require_once('_service-catalog_xml.php');
 
-print project_trackers_to_service_catalog($this->baseUrl(), $this->trackers, $this->project);
+print project_trackers_to_service_catalog($this->serverUrl().$this->baseUrl(), $this->trackers, $this->project);

@@ -27,4 +27,4 @@
 
 require('_service-catalog_xml.php');
 
-print projects_to_service_catalog($this->baseUrl(), $this->projects);
+print projects_to_service_catalog($this->serverUrl().$this->baseUrl(), $this->projects);
