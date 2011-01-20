@@ -100,7 +100,7 @@ if ($week) {
 
 	if (!$group_project_id) {
 		$project_ids = array () ;
-		foreach (session_getuser()->getGroups() as $p) {
+		foreach (session_get_user()->getGroups() as $p) {
 			$project_ids[] = $p->getID() ;
 		}
 		
