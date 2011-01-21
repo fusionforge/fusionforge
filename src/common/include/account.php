@@ -133,7 +133,7 @@ function account_groupnamevalid($name) {
  */
 function genchr(){
 	do {	  
-		$num = util_randnum();		  
+		$num = util_randnum(46, 122);
 	} while ( ( $num > 57 && $num < 65 ) || ( $num > 90 && $num < 97 ) );	  
 	$char = chr($num);	  
 	return $char;	  
