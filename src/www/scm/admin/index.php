@@ -97,7 +97,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 					$scm = $myPlugin->name;
 					echo ' checked="checked"';
 				}
-				echo '>'.$myPlugin->text.'</td>';
+				echo ' />'.$myPlugin->text.'</td>';
 			}
 			echo '</tr></tbody></table>'."\n";
 		}
