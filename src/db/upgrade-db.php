@@ -13,7 +13,7 @@ require_once $gfcommon.'include/pre.php';
 */ 
 if (version_compare(phpversion(), '4.3.0', '<') || php_sapi_name() == 'cgi') { 
    // Handle output buffering 
-   @ob_end_flush(); 
+   while (@ob_end_flush());
    ob_implicit_flush(TRUE); 
 
    // PHP ini settings 

@@ -112,7 +112,7 @@ extends WikiPlugin
             // Content-Type, Set-Cookie, Cache-control, ...
             $request->discardOutput(); // Hijack the http request from PhpWiki.
             ob_end_clean();            // clean up after hijacking $request
-            //ob_end_flush(); //debugging
+            //while (@ob_end_flush()); //debugging
             $filename = FilenameForPage($page);
             Header("Content-disposition: attachment; filename=\""
                    . $filename . "\"");
