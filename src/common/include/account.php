@@ -124,20 +124,6 @@ function account_groupnamevalid($name) {
 }
 
 /**
- * rannum() - Generate a random number
- * 
- * This is a local function used for account_salt()
- *
- * @return int $num A random number
- *
- */
-function rannum(){	     
-	mt_srand((double)microtime()*1000000);		  
-	$num = mt_rand(46,122);		  
-	return $num;		  
-}	     
-
-/**
  * genchr() - Generate a random character
  * 
  * This is a local function used for account_salt()
@@ -147,7 +133,7 @@ function rannum(){
  */
 function genchr(){
 	do {	  
-		$num = rannum();		  
+		$num = util_randnum();		  
 	} while ( ( $num > 57 && $num < 65 ) || ( $num > 90 && $num < 97 ) );	  
 	$char = chr($num);	  
 	return $char;	  

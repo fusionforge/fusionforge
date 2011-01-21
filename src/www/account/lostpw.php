@@ -47,7 +47,7 @@ if (getStringFromRequest('submit')) {
 
 	// First, we need to create new confirm hash
 
-	$confirm_hash = md5(forge_get_config('session_key') . strval(time()) . strval(rand()));
+	$confirm_hash = md5(forge_get_config('session_key') . strval(time()) . strval(util_randbytes()));
 
 	$u->setNewEmailAndHash($u->getEmail(), $confirm_hash);
 	if ($u->isError()) {

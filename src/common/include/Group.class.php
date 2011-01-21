@@ -318,9 +318,6 @@ class Group extends Error {
 			return false;
 		} else {
 
-			srand((double)microtime()*1000000);
-			$random_num = rand(0,1000000);
-	
 			db_begin();
 	
 			$res = db_query_params ('
@@ -353,7 +350,7 @@ class Group extends Error {
 						       htmlspecialchars($purpose),
 						       time(),
 						       $is_public,
-						       md5($random_num),
+						       md5(util_randbytes()),
 						       $built_from_template)) ;
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
