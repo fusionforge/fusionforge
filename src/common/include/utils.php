@@ -1361,6 +1361,26 @@ function util_get_maxuploadfilesize() {
 	return $postfile;
 }
 
+function util_randbytes($num=6) {
+	$f = fopen("/dev/urandom", "rb");
+	$b = fread($f, $num);
+	fclose($f);
+
+	if (strlen($b) != $num)
+		exit_error(_('Internal Error'),
+			   _('Could not read from random device'));
+
+	return ($b);
+}
+
+/* maximum: 2^31 - 1 due to PHP weakness */
+function util_randnum($min=0,$max=32767) {
+	$ta = unpack("L", util_randbytes(4));
+	$n = $ta[0] & 0x7FFFFFFF;
+	$v = $n % (1 + $max - $min);
+	return ($min + $v);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
