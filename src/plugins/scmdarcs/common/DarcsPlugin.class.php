@@ -237,7 +237,7 @@ class DarcsPlugin extends SCMPlugin {
 				print '<iframe src="'.
 					util_make_url ("/plugins/scmdarcs/cgi-bin/darcsweb.cgi?r=".
 					$project->getUnixName()). '/' . $params['repo_name'] .
-					'" frameborder="no" width=100% height=700></iframe>' ;
+					'" frameborder="0" width=100% height=700></iframe>' ;
 			}
 		}
 	}
