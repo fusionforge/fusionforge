@@ -212,7 +212,7 @@ echo '</table>' ;
                array(  _('Private'), _('Public') ),
                'is_public', $group->isPublic(), false);
 	} else {
-		echo "<input type=hidden name=\"is_public\" value=\"1\">";
+		echo "<input type=hidden name=\"is_public\" value=\"1\" />";
 	}
 ?>
 

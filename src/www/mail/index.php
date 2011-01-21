@@ -83,12 +83,12 @@ if ($group_id) {
 		$currentList =& $mlArray[$j];
 		echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 		if ($currentList->isError()) {
-			echo '<td colspan="3">'.$currentList->getErrorMessage().'</td></tr>';
+			echo '<td colspan="3">'.$currentList->getErrorMessage().'</td>';
 		} else if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 			echo '<td width="33%">'.
 				'<strong>'.$currentList->getName().'</strong></td>'.
 				'<td width="33%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="33%" style="text-align:center">'._('Not activated yet').'</td></tr>';
+				'<td width="33%" style="text-align:center">'._('Not activated yet').'</td>';
 		} else {
 			echo '<td width="33%">'.
 				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
