@@ -276,66 +276,6 @@ if ($rows < 1) {
 			</tr>';
 
 		}
-/*
-
-		//PLEASE MAKE THIS INTO A SEPARATE PAGE INSTEAD OF doing such a big hack to this one
-
-		//show detail view
-		} else if ($_view == "detail") {
-			echo '
-				<tr class="priority'.$pt_arr[$i]->getPriority() .'">'.
-				'<td>'.
-				($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
-				$pt_arr[$i]->getID() .'" /> ':'').
-				$pt_arr[$i]->getID() .'</td>'.
-				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
-				'<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() ).'</td>'.
-				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-					date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate() ).'</strong></td>'.
-				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
-				echo '
-				<tr>'.
-					'<td>&nbsp;</td>'.
-					'<td colspan="4">';
-				echo nl2br( $pt_arr[$i]->getDetails() );
-				//
-				// Show details
-				//
-				$result=$pt_arr[$i]->getMessages();
-				$rows=db_numrows($result);
-		
-				if ($rows > 0) {
-					echo '
-					<h3>'._('Followups').'</h3>
-					<p>';
-		
-					$title_arr=array();
-					$title_arr[]=_('Comment');
-					$title_arr[]=_('Date');
-					$title_arr[]=_('By');
-				
-					echo $GLOBALS['HTML']->listTableTop ($title_arr);
-		
-					for ($j=0; $j < $rows; $j++) {
-						echo '
-						<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($j) .'>
-							<td>'. nl2br(db_result($result, $j, 'body')).'</td>
-							<td valign="top">'.date(_('Y-m-d H:i'),db_result($result, $j, 'postdate')).'</td>
-							<td valign="top">'.db_result($result, $j, 'user_name').'</td></tr>';
-					}
-		
-					echo $GLOBALS['HTML']->listTableBottom();
-		
-				} else {
-					echo '
-					<h3>'._('No Comments Have Been Added').'</h3>';
-				}
-				//
-				// End of show details
-				//
-				echo '</td></tr>';
-		}
-		*/
 	}
 
 	/*
