@@ -1,0 +1,77 @@
+<?php 
+// Declare used namespaces.
+$json["prefixes"]["oslc"] = "http://open-services.net/ns/core#";
+$json["prefixes"]["rdf"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+$json["prefixes"]["foaf"] = "http://http://xmlns.com/foaf/0.1/";
+$json["prefixes"]["dcterms"] = "http://purl.org/dc/terms/";
+
+// 
+$json["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#Service";
+$json["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-services/'.$this->project.'/tracker/'.$this->tracker);
+
+$json["dcterms:title"] = "OSLC CM service description document";
+$json["dcterms:description"] = "FusionForge Tracker service";
+
+$json["dcterms:publisher"]["dcterms:title"] = "OSLC CM plugin for FusionForge";
+$json["dcterms:publisher"]["dcterms:identifier"] = $this->serverUrl().$this->baseUrl();
+//$json["oslc:icon"]["rdf:ressource"] = "Url of FusionForge icon if any"
+
+// prefix definitions 
+$prefix_def["oslc:prefix"] = "dc";
+$prefix_def["oslc:prefixBase"] = "http://purl.org/dc/elements/1.1/";
+$json["oslc:prefixDefinition"][] = $prefix_def;
+
+$prefix_def["oslc:prefix"] = "foaf";
+$prefix_def["oslc:prefixBase"] = "http://http://xmlns.com/foaf/0.1/";
+$json["oslc:prefixDefinition"][] = $prefix_def;
+
+$prefix_def["oslc:prefix"] = "rdf";
+$prefix_def["oslc:prefixBase"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+$json["oslc:prefixDefinition"][] = $prefix_def;
+
+$prefix_def["oslc:prefix"] = "oslc";
+$prefix_def["oslc:prefixBase"] = "http://open-services.net/ns/core#";
+$json["oslc:prefixDefinition"][] = $prefix_def;
+
+// Services description
+
+// Domain.
+$json["service"]["domain"]["rdf:ressource"] = "http://open-services.net/ns/core#";
+
+// Creation Factory.
+$json["service"]["creationFactory"]["dcterms:title"] = "Location for creation of change Requests with a POST HTTP request";
+$json["service"]["creationFactory"]["oslc:label"] = "New Tracker items Creation";
+$json["service"]["creationFactory"]["oslc:creation"]["rdf:ressource"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/project/'.$this->project.'/tracker/'.$this->tracker);
+//$json["service"]["creationFactory"]["oslc:resourceShape"] = A ressource shape (not yet implemented);
+
+// There may be other creation Factories in the same tracker. For example 
+// a creation factory to create comment to a tracker item, to attach a file
+// to a tracker item. But, these additional creation factories would better
+// have different endpoints.  
+
+// Query capabilities.
+$json["service"]["queryCapability"]["dcterms:title"] = "GET-Based Tracker items query";
+$json["service"]["queryCapability"]["oslc:label"] = "Tracker items query";
+$json["service"]["queryCapability"]["oslc:queryBase"]["rdf:ressource"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/project/'.$this->project.'/tracker/'.$this->tracker);
+
+
+// Delegated Selection UI.
+$selection_dialog["dcterms:title"] = "Change Requests Selection Dialog";
+$selection_dialog["oslc:label"] = "Tracker items selection UI";
+$selection_dialog["oslc:dialog"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/project/'.$this->project.'/tracker/'.$this->tracker.'/ui/selection');
+$selection_dialog["oslc:hintWidth"] = "800px";
+$selection_dialog["oslc:hintHeight"] = "600px";
+// What about oslc:usage and default UI ??!!!
+$json["service"]["selctionDialog"]["Dialog"] = $selection_dialog;
+
+// Delegated Creation UI.
+$creation_dialog["dcterms:title"] = "Change Requests Creation Dialog";
+$creation_dialog["oslc:label"] = "New Tracker items Celection UI";
+$creation_dialog["oslc:dialog"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/project/'.$this->project.'/tracker/'.$this->tracker.'/ui/creation');
+$creation_dialog["oslc:hintWidth"] = "800px";
+$creation_dialog["oslc:hintHeight"] = "600px";
+// What about oslc:usage and default UI ??!!!
+$json["service"]["creationDialog"]["Dialog"] = $creation_dialog;
+
+print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
+?>

@@ -2063,6 +2063,7 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/_serv
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/_service-document_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/get.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/index.phtml -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-cm-service-document.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-cm-service-document.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-cm-service-document.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog-project.json.phtml -text

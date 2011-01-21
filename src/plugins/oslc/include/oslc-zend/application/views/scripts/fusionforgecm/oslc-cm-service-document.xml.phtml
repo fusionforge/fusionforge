@@ -25,6 +25,6 @@
 
   /* $Id$ */
 
-require('_service-document_xml.php');
+require_once'_service-document_xml.php';
 
 print project_to_service_description($this->serverUrl().$this->baseUrl(), $this->project, $this->tracker);
