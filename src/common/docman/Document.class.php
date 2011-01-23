@@ -120,23 +120,26 @@ class Document extends Error {
 			return false;
 		}
 
-		$result = db_query_params('SELECT filename, doc_group from docdata_vw where filename = $1 and doc_group = $2',
-			array($filename, $doc_group));
-
-		if (!$result || db_numrows($result) > 0) {
-			$this->setError(_('Document already published in this directory'));
-			return false;
-		}
-
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
 		$doc_initstatus = '3';
 		// If Editor - uploaded Documents are ACTIVE
 		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission ();
+			$perm =& $this->Group->getPermission();
 			if ($perm && is_object($perm) && $perm->isDocEditor()) {
 				$doc_initstatus = '1';
 			}
+		}
+
+		$result = db_query_params('SELECT filename, doc_group from docdata_vw
+						where filename = $1
+						and doc_group = $2
+						and stateid = $3',
+				array($filename, $doc_group, $doc_initstatus));
+
+		if (!$result || db_numrows($result) > 0) {
+			$this->setError(_('Document already published in this directory'));
+			return false;
 		}
 
 		// If $filetype is "text/plain", $body convert UTF-8 encoding.
