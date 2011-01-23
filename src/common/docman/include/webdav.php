@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -54,7 +54,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			return false;
 
 		if (!session_login_valid($user,$pass)) {
-			if (forge_check_perm ('docman',$group_id,'read')) {
+			if (forge_check_perm('docman',$group_id,'read')) {
 				return true;
 			}
 			return false;
@@ -239,7 +239,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 			while ($arr = db_fetch_array($res)) {
 				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
 			}
-			$res = db_query_params('select filename,filetype from doc_data where group_id = $1 and doc_group = $2',
+			$res = db_query_params('select filename, filetype from doc_data where group_id = $1 and doc_group = $2 and stateid = 1',
 						array($group_id, $analysed_path['doc_group']));
 			if (!$res) {
 				exit_error(_('webdav db error:').' '.db_error(),'docman');
