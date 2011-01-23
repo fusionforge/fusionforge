@@ -3,7 +3,7 @@
 /**
  * FusionForge document search engine
  *
- * Copyright 2010, Franck Villaume
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -24,10 +24,9 @@
  * USA
  */
 
-require dirname(__FILE__).'/../../../www/env.inc.php';
+require dirname(__FILE__).'/../../include/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
-
 
 if ($argc != 2) {
 	echo "Usage : parser_oo.php <filename>\n";
