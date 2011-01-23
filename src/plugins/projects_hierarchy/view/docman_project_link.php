@@ -2,7 +2,7 @@
 /**
  * docman hierarchy view
  *
- * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -23,6 +23,8 @@
  */
 
 echo '<h3>'._('Subprojects browsing').'</h3>';
-echo _('TO BE IMPLEMENTED VIEW ?');
+// display a tree ? with checkbox ? to limit scope of browsing
+// include children of children ?
+echo _('TO BE IMPLEMENTED VIEW');
 
 ?>

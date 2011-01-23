@@ -67,8 +67,8 @@ class projects_hierarchyPlugin extends Plugin {
 				break;
 			}
 			case "delete_link": {
-				$res_son = db_query_params('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $2 ',
-							array($params, $params));
+				$res_son = db_query_params('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $1 ',
+							array($params));
 				$returned = true;
 				break;
 			}
@@ -139,13 +139,12 @@ class projects_hierarchyPlugin extends Plugin {
 		while (list($key2, $sons2) = each($arbre)) {
 			$returnTree .= "d.add('".$key2."','".$sons2."','".$project_name[$key2][0]."','".util_make_url( '/projects/'.$project_name[$key2][1] .'/', $project_name[$key2][1] ) ."');";
 		}
-		
+
 		$returnTree .= 'document.write(d);';
 		$returnTree .= '</script>';
 		$returnTree .= '</td></tr></table>';
 		return $returnTree;
 	}
-
 }
 // Local Variables:
 // mode: php

@@ -34,32 +34,35 @@ function son_box($group_id,$name,$selected='xzxzxz') {
 			}
 		}
 		$son = db_query_params('SELECT group_id,group_name,register_time FROM groups 
-WHERE status=$1 AND type_id=1 AND group_id != $2 AND group_id <> ALL ($3) AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = $4)',
+					WHERE status = $1
+					AND type_id = 1
+					AND group_id != $2
+					AND group_id <> ALL ($3)
+					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = $4)
+					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $5);',
 					array('A',
-					       $group_id,
-					       db_int_array_to_any_clause ($skipped),
-					       'shar'));
+						$group_id,
+						db_int_array_to_any_clause($skipped),
+						'shar',
+						'projects_hierarchy'));
 	}
-	return html_build_select_box($son,$name,$selected,false);
+	return html_build_select_box($son, $name, $selected, false);
 }
 
-function link_box($group_id,$name,$selected='xzxzxz') {
+function link_box($group_id, $name, $selected='xzxzxz') {
 	global $link;
 	if (!$link) {
 		$link = db_query_params('SELECT group_id,group_name,register_time FROM groups 
-WHERE  status=$1 AND type_id=1 AND group_id != $2 
-AND  group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = $3 )
- AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $4 )',
-			array('A',
-				$group_id,
-				$group_id,
-				$group_id));
-	
-	
+					WHERE status=$1
+					AND type_id=1
+					AND group_id != $2
+					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = $2 )
+					AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $2 )
+					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $3);',
+					array('A', $group_id, 'projects_hierarchy'));
 	}
 	return html_build_select_box($link, $name, $selected, false);
 }
-
 
 function type_son_box() {
 	return "<select name='link_type' onchange=\"javascript:
@@ -76,7 +79,7 @@ document.formson.son.disabled=true
 }
 
 //search all the family,all ancestor 
-function get_family($group_id, $family='', $cpt=0){
+function get_family($group_id, $family = '', $cpt = 0){
 	$res = db_query_params('SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $1',
 				array($group_id))
 		or die (db_error ());
@@ -87,7 +90,7 @@ function get_family($group_id, $family='', $cpt=0){
 		$row = db_fetch_array($res);
 		$family[$cpt] = $row['project_id'];
 		$cpt++;
-		return get_family($row['project_id'],$family,$cpt);
+		return get_family($row['project_id'], $family, $cpt);
 	}
 	return $family;
 }
