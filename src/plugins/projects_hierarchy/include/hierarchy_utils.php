@@ -2,6 +2,7 @@
 /*
  * Copyright 2004 (c) GForge LLC
  * Copyright 2006 (c) Fabien Regnier - Sogeti
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -20,7 +21,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
  
-function son_box($group_id,$name,$selected='xzxzxz') {
+function son_box($group_id, $name, $selected = 'xzxzxz') {
 	global $son;
 	if (!$son) {
 		$family = get_family($group_id);
@@ -49,7 +50,7 @@ function son_box($group_id,$name,$selected='xzxzxz') {
 	return html_build_select_box($son, $name, $selected, false);
 }
 
-function link_box($group_id, $name, $selected='xzxzxz') {
+function link_box($group_id, $name, $selected = 'xzxzxz') {
 	global $link;
 	if (!$link) {
 		$link = db_query_params('SELECT group_id,group_name,register_time FROM groups 
@@ -82,11 +83,10 @@ document.formson.son.disabled=true
 function get_family($group_id, $family = '', $cpt = 0){
 	$res = db_query_params('SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $1',
 				array($group_id))
-		or die (db_error ());
+		or die(db_error());
 	if (!$res || db_numrows($res) < 1) {
 		//return $family;
-	}
-	else {
+	} else {
 		$row = db_fetch_array($res);
 		$family[$cpt] = $row['project_id'];
 		$cpt++;
