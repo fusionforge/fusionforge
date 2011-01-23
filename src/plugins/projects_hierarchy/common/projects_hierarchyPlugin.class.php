@@ -26,14 +26,13 @@
 class projects_hierarchyPlugin extends Plugin {
 	function projects_hierarchyPlugin() {
 		$this->Plugin();
-		$this->name = "projects_hierarchy";
+		$this->name = 'projects_hierarchy';
 		$this->text = _('Project Hierarchy'); // To show in the tabs, use...
-		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
-		$this->_addHook("groupisactivecheckboxpost"); //
-		$this->_addHook("admin_project_link");
-		$this->_addHook("project_home_link"); // to see father and sons in project home
-		$this->_addHook("display_hierarchy"); // to see the tree of projects
-		$this->_addHook("delete_link"); // to delete link
+		$this->_addHook('groupisactivecheckbox'); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook('groupisactivecheckboxpost');
+		$this->_addHook('hierarchy_views'); // include specific views
+		$this->_addHook('display_hierarchy'); // to see the tree of projects
+		$this->_addHook('delete_link'); // to delete link
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -46,24 +45,25 @@ class projects_hierarchyPlugin extends Plugin {
 				}
 				break;
 			}
-			case "project_home_link": {
-				$group_id = $params;
-				$project = group_get_object($group_id);
-				if ($project->usesPlugin($this->name)) {
-					include($this->name.'/view/'.$hookname.'.php');
-				}
-				$returned = true;
-				break;
-			}
-			case "admin_project_link": {
+			case "hierarchy_views": {
 				global $gfplugins;
-				require_once $gfplugins.'projects_hierarchy/include/hierarchy_utils.php';
+				require_once $gfplugins.$this->name.'/include/hierarchy_utils.php';
 				$group_id = $params[0];
 				$project = group_get_object($group_id);
 				if ($project->usesPlugin($this->name)) {
-					include($this->name.'/view/'.$hookname.'.php&type='.$params[1]);
+					switch ($params[1]) {
+						case "admin":
+						case "docman":
+						case "home": {
+							include($gfplugins.$this->name.'/view/'.$params[1].'_project_link.php');
+							$returned = true;
+							break;
+						}
+						default: {
+							break;
+						}
+					}
 				}
-				$returned = true;
 				break;
 			}
 			case "delete_link": {
@@ -85,7 +85,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function dTreeJS() {
-		echo '<link rel="StyleSheet" href="/splugins/projects_hierarchy/dtree.css" type="text/css" />
+		echo '<link rel="StyleSheet" href="/plugins/projects_hierarchy/dtree.css" type="text/css" />
 			<script type="text/javascript" src="/plugins/projects_hierarchy/dtree.js"></script>';
 	}
 

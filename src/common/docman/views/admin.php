@@ -102,7 +102,7 @@ function doIt(formid) {
 		echo '</form>';
 	}
 
-	plugin_hook('admin_project_link', array($group_id, 'docman'));
+	plugin_hook('hierarchy_views', array($group_id, 'docman'));
 
 	echo '</div>';
 }

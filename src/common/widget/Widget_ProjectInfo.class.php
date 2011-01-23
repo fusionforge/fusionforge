@@ -116,9 +116,10 @@ class Widget_ProjectInfo extends Widget {
 		}
 
 
-		$hook_params = array () ;
-		$hook_params['group_id'] = $group_id ;
-		plugin_hook ("project_after_description",$hook_params) ;
+		$hook_params = array();
+		$hook_params['group_id'] = $group_id;
+		plugin_hook("project_after_description",$hook_params);
+		plugin_hook('hierarchy_views', array($group_id, 'home'));
 
 	}
 	public function canBeUsedByProject(&$project) {

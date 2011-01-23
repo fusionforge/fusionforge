@@ -302,7 +302,7 @@ if(forge_get_config('use_frs')) {
 </form>
 
 <?php
-plugin_hook('admin_project_link', array($group_id, 'project'));
+plugin_hook('hierarchy_views', array($group_id, 'admin'));
 
 echo $HTML->boxBottom();?>
 

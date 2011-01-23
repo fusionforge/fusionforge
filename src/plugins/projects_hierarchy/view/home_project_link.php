@@ -22,7 +22,7 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
- 
+
 echo $HTML->boxTop(_('Linked projects'));
 $cpt_project = 0 ;
 // father request
