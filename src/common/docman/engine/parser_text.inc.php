@@ -3,6 +3,7 @@
  * FusionForge document search engine
  *
  * Copyright 2005, Fabio Bertagnin
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -23,17 +24,19 @@
  * USA
  */
 
+require_once $gfcommon.'include/config.php';
+
 function parser_text($fichin) {
 	$tstart = microtime_float();
 	if (!is_file($fichin))
 		return "";
 
-	$fp = fopen ($fichin, "r");
-	$buff = fread ($fp, filesize($fichin));
+	$fp = fopen($fichin, "r");
+	$buff = fread($fp, filesize($fichin));
 	// tout en minuscules
 	$buff = mb_strtolower($buff);
 	// élimination d'éventuels caractères unicode encore présents
-	$buff = mb_convert_encoding ($buff, "ascii");
+	$buff = mb_convert_encoding($buff, "ascii");
 	// élimination caractères avec accents 
 	// et caractères spéciaux
 	$buff = suppression_diacritics($buff);

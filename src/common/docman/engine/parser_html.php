@@ -4,7 +4,7 @@
  * FusionForge document search engine
  *
  * Copyright 2005, Fabio Bertagnin
- * Copyright 2009-2010, Franck Villaume
+ * Copyright 2009-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -25,7 +25,7 @@
  * USA
  */
 
-require dirname(__FILE__).'/../../../www/env.inc.php';
+require dirname(__FILE__).'/../../include/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
@@ -43,7 +43,7 @@ $contents = fread($fd, filesize($fichin));
 fclose($fd);
 
 $strip_content = strip_tags($contents);
-$filename = tempnam("/tmp", "tmp");
+$filename = tempnam(forge_get_config('data_path'), "tmp");
 $fd = fopen($filename, "w");
 fwrite($fd , $strip_content);
 fclose($fd);
