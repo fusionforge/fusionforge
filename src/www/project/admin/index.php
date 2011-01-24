@@ -8,7 +8,7 @@
  *
  * Copyright 2004 GForge, LLC - Tim Perdue
  * Copyright 2010 (c), Franck Villaume
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -154,43 +154,42 @@ if (forge_get_config('use_shell')) {
 <h2><?php echo _('Project tags'); ?></h2>
 <?php echo _('Add tags (use comma as separator): ') ?><br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
-</p><br />
-<?php echo _('Or pick a tag from those used by other projects: ') ?><br />
+</p>
 <?php 
-	 
-	 echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Tags').'</th>';
-echo '<th>'._('Projects').'</th>';
-echo '</tr></thead><tbody>';
+	$infos = getAllProjectTags();
+	if ($infos) {
+		echo '<br />';
+		echo _('Or pick a tag from those used by other projects: ');
+		echo '<br />';
+		echo '<table width="100%"><thead><tr>';
+		echo '<th>'._('Tags').'</th>';
+		echo '<th>'._('Projects').'</th>';
+		echo '</tr></thead><tbody>';
 
-$infos = getAllProjectTags();
+		$unix_name = $group->getUnixName();
+		foreach ($infos as $tag => $plist) {
+			$disabled = '';
+			$links = array();
+			foreach($plist as $project) {
+				$links[] = util_make_link('/projects/'.$project['unix_group_name'].'/',$project['unix_group_name']);
+				if ($project['group_id'] == $group_id) {
+					$disabled = ' disabled="disabled"';
+				}
+			}
 
-$unix_name = $group->getUnixName();
-foreach ($infos as $tag => $plist) {
-	$disabled = '';
-	$links = array();
-	foreach($plist as $project) {
-		$links[] = util_make_link('/projects/'.$project['unix_group_name'].'/',$project['unix_group_name']);
-		if ($project['group_id'] == $group_id) {
-			$disabled = ' disabled="disabled"';
+			echo '<tr>';
+			echo '<td><input type="checkbox" name="addTags[]" value="'.$tag.'"'.$disabled.' /> ';
+			if ($disabled) {
+				echo '<s>'.$tag.'</s>';
+			} else {
+				echo $tag;
+			}
+			echo '</td>';
+			echo '<td>'.implode(' ', $links).'</td>' ;
+			echo '</tr>' ;
 		}
+		echo '</table>' ;
 	}
-	
-	echo '<tr>';
-	echo '<td><input type="checkbox" name="addTags[]" value="'.$tag.'"'.$disabled.' /> ';
-	if ($disabled) {
-		echo '<s>'.$tag.'</s>';
-	} else {
-		echo $tag;
-	}
-	echo '</td>';
-	echo '<td>'.implode(' ', $links).'</td>' ;
-	echo '</tr>' ;
-}
-echo '</table>' ;
-
-
-
 } ?>
 
 <h2><?php echo _('Trove Categorization'); ?></h2>
