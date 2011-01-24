@@ -2,6 +2,7 @@
 /*
  * Copyright 2004 (c) GForge LLC
  * Copyright 2006 (c) Fabien Regnier - Sogeti
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -36,11 +37,12 @@ function son_box ($group_id,$name,$selected='xzxzxz') {
 			
 		}
 		$son = db_query_params ('SELECT group_id,group_name,register_time FROM groups 
-WHERE status=$1 AND type_id=1 AND group_id != $2 AND group_id <> ALL ($3) AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = $4)',
+WHERE status=$1 AND type_id=1 AND group_id != $2 AND group_id <> ALL ($3) AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = $4) AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $5)',
 					array ('A',
 					       $group_id,
 					       db_int_array_to_any_clause ($skipped),
-					       'shar'));
+                           'shar',
+                           'projects_hierarchy'));
 	}
 	return html_build_select_box($son,$name,$selected,false);
 }
@@ -51,11 +53,13 @@ function link_box ($group_id,$name,$selected='xzxzxz') {
 		$link = db_query_params ('SELECT group_id,group_name,register_time FROM groups 
 WHERE  status=$1 AND type_id=1 AND group_id != $2 
 AND  group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE project_id = $3 )
- AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $4 )',
+AND group_id NOT IN (SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $4 )
+AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $5)',
 			array ('A',
 				$group_id,
 				$group_id,
-				$group_id));
+                $group_id,
+                'projects_hierarchy'));
 	
 	
 	}
