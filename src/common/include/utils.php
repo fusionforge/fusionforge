@@ -1376,7 +1376,7 @@ function util_randbytes($num=6) {
 /* maximum: 2^31 - 1 due to PHP weakness */
 function util_randnum($min=0,$max=32767) {
 	$ta = unpack("L", util_randbytes(4));
-	$n = $ta[0] & 0x7FFFFFFF;
+	$n = $ta[1] & 0x7FFFFFFF;
 	$v = $n % (1 + $max - $min);
 	return ($min + $v);
 }
