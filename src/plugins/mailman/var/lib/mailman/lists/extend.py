@@ -1,3 +1,12 @@
+
+#
+# This file is part of the FusionForge mailman plugin, extending
+# mailman to allow the use of its postgresql database for user
+# retrieval
+#
+# Copyright + License : FIXME
+#
+
 from Mailman.PsycopgConnector import PsycopgConnector
 from Mailman.ForgeSecurityManager import ForgeSecurityManager
 import sys
