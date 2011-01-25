@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,8 +29,6 @@
 global $g; //group object
 global $group_id; // id of group
 
-session_require_perm('docman', $group_id, 'submit');
-
 $doc_group = getIntFromRequest('doc_group');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
@@ -38,6 +36,11 @@ $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
+
+if (!forge_check_perm('docman', $group_id, 'submit')) {
+	$return_msg = _('Docman Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+}
 
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided
@@ -130,12 +133,11 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 		//release the cookie for the document contents (should expire at the end of the session anyway)
 		setcookie("gforgecurrentdocdata", "", time() - 3600);
 	}
-	// check if the user is docman's admin
 	if (forge_check_perm('docman', $group_id, 'approve')) {
-		$return_msg = _('Document submitted successfully.');
+		$return_msg = sprintf(_('Document %s submitted successfully.',$d->getFilename());
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&feedback='.urlencode($return_msg));
 	} else {
-		$return_msg = _('Document submitted successfully : pending state (need validation).');
+		$return_msg = sprintf(_('Document %s submitted successfully : pending state (need validation).'),$d->getFilename());
 		session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 	}
 }

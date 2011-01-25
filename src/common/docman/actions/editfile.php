@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -44,10 +44,17 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$filetype = getStringFromRequest('filetype');
 	$editor = getStringFromRequest('editor');
 	$fromview = getStringFromRequest('fromview');
-	if ( 'admin' == $fromview ) {
-		$urlparam = '&view='.$fromview;
-	} else {
-		$urlparam = '&view=listfile&dirid='.$doc_group;
+	switch ($fromview) {
+		case 'admin':
+		case 'listrashfile':
+		case 'listpendingfile': {
+			$urlparam = '&view='.$fromview;
+			break;
+		}
+		default: {
+			$urlparam = '&view=listfile&dirid='.$doc_group;
+			break;
+		}
 	}
 
 	if (empty($gfcommon)) {

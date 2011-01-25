@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -27,7 +27,7 @@
 global $g; //group object
 global $group_id; // id of group
 
-if ( !forge_check_perm('docman', $group_id, 'approve')) {
+if ( !forge_check_perm('docman', $group_id, 'admin')) {
 	$return_msg = _('Docman Action Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 } else {

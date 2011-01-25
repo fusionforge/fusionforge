@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -26,8 +26,6 @@
 /* global variables used */
 global $g; // group object
 global $group_id; // id of group
-
-session_require_perm('docman', $group_id, 'approve');
 
 $doc_group = getIntFromRequest('dirid');
 $uploaded_zip = getUploadedFile('uploaded_zip');

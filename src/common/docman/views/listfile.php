@@ -119,11 +119,18 @@ include ($gfcommon.'docman/views/additem.php');
 echo '</div>';
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('<input id="checkall" type="checkbox" onchange="controllerListFile.checkAll()" />','', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
-	$classth = array('unsortable','unsortable', '', '', '', '', '', '', '');
-	if (forge_check_perm('docman', $group_id, 'approve'))
+	$tabletop = array();
+	$classth = array();
+	if (forge_check_perm('docman', $group_id, 'read')) {
+		$tabletop[] = '<input id="checkall" type="checkbox" onchange="controllerListFile.checkAll()" />';
+		$classth[] = 'unsortable';
+	}
+	array_push($tabletop, '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'));
+	array_push($classth,'unsortable', '', '', '', '', '', '', '');
+	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$tabletop[] = _('Actions');
 		$classth[] = 'unsortable';
+	}
 	echo '<div class="docmanDiv">';
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 	$time_new = 604800;
