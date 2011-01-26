@@ -344,7 +344,7 @@ function html_get_tooltip_description($element_name) {
 		case 'canned_response':
 			return( _('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the \'(admin)\' link to define your own canned responses'));
 		case 'comment':
-			return( _('Comment'));
+			return( _('Anyone can add here comments to give additional information, answers and solutions. Please, be as precise as possible to avoid misunderstanding. If relevant, screenshots or documents can be added as attached files.'));
 		case 'description':
 			return( htmlentities(_('Enter the complete description.').'<br/><br/>'.
 			_("<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post.</div>"),
