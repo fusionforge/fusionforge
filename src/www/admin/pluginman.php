@@ -4,6 +4,7 @@
  *
  * Copyright 2005 GForge, LLC
  * Copyright 2010 FusionForge Team
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -30,22 +31,27 @@ require_once $gfwww.'admin/admin_utils.php';
 // Skip non compatible plugins.
 $plugins_disabled = array('webcalendar', 'scmccase');
 
+// Skip non activable plugins due to general configuration
+if (!forge_get_config('use_scm')) {
+    array_push($plugins_disabled, 'scmarch', 'scmbzr', 'scmdarcs', 'scmgit', 'scmhg', 'scmsvn');
+}
+
 $pm = plugin_manager_get_object();
 
 if (getStringFromRequest('update')) {
 	$pluginname = getStringFromRequest('update');
 	
-	if ((getStringFromRequest('action')=='deactivate')) {
+	if ((getStringFromRequest('action') == 'deactivate')) {
 
-		$res = db_query_params ('DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
+		$res = db_query_params('DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
 			array($pluginname));
 		if (!$res) {
-			exit_error(db_error(),'admin');
+			exit_error(db_error(), 'admin');
 		} else {
 			$feedback .= sprintf(ngettext('%d user detached from plugin.', '%d users detached from plugin.', db_affected_rows($res)), db_affected_rows($res));
 		}
 
-		$res = db_query_params ('DELETE FROM group_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
+		$res = db_query_params('DELETE FROM group_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
 			array($pluginname));
 		if (!$res) {
 			exit_error(db_error(),'admin');
@@ -55,14 +61,14 @@ if (getStringFromRequest('update')) {
 
 		$res = $pm->deactivate($pluginname);
 		if (!$res) {
-			exit_error(db_error(),'admin');
+			exit_error(db_error(), 'admin');
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
 			
 			// Load the plugin and now get information from it.
 			$plugin = $pm->GetPluginObject($pluginname);
 			if (!$plugin || $plugin->isError()) {
-				exit_error(_("Couldn't get plugin object"),'admin');
+				exit_error(_("Couldn't get plugin object"), 'admin');
 			}
 			$installdir = $plugin->getInstallDir();
 			
@@ -88,7 +94,7 @@ if (getStringFromRequest('update')) {
 
 		$res = $pm->activate($pluginname);
 		if (!$res) {
-			exit_error(db_error(),'admin');
+			exit_error(db_error(), 'admin');
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
 
@@ -148,7 +154,7 @@ if($handle = opendir(forge_get_config('plugins_path'))) {
 				$addPlugin = 0;
 			}
 			$used = false;
-			$res = db_query_params('SELECT  u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
+			$res = db_query_params('SELECT u.user_name FROM plugins p, user_plugin up, users u WHERE p.plugin_name = $1 and up.user_id = u.user_id and p.plugin_id = up.plugin_id',
 				array($filename));
 			if ($res) {
 				if (db_numrows($res)>0) {
