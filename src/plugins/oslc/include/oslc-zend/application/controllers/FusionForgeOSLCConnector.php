@@ -158,7 +158,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 							if (array_key_exists($term[2],self::$status_arr))	{
 								$query['status'] = self::$status_arr[$term[2]];
 							}else	{
-								throw new BadRequestException('Invalid heliosbt:status value specified!');
+								throw new BadRequestException('Invalid oslc_cm:status value specified!');
 							}
 							break;
 						case 'helios_bt:assigned_to':
@@ -168,7 +168,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 								throw new BadRequestException("Invalid helios_bt:assigned_to: " . $term[2]); 
 							}
 							break;
-						default:  throw new BadRequestException("Invalid attribute ".$term[1]." specified in oslc_where! only heliosbt:status|assigned_to are accepted.");
+						default:  throw new BadRequestException("Invalid attribute ".$term[1]." specified in oslc_where! only oslc_cm:status|assigned_to are accepted.");
 						break;
 					}
 				}
