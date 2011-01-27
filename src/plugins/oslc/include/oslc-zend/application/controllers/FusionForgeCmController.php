@@ -512,9 +512,8 @@ class FusionForgeCmController extends CmController {
 	
 	/**
 	 * Handle OSLC services catalog access per project.
-	 * Accessed by uris like ".../cm/oslc-services/project/x"
+	 * Accessed by uris like ".../cm/oslc-cm-services/x"
 	 * where x is a project id.
-	 * 
 	 */
 	public function oslcservicecatalogprojectAction() {
 		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
@@ -537,8 +536,7 @@ class FusionForgeCmController extends CmController {
 
 	/**
 	 * 
-	 * Handles OSLC service document (service document) access.
-	 * TODO: Implement service document details.
+	 * Handles OSLC-CM service document access.
 	 */
 	public function oslccmservicedocumentAction() {
 		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
