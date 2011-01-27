@@ -59,7 +59,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->click("//input[@name='type' and @value='pasteurl']");
 		$this->type("file_url", "http://buildbot.fusionforge.org/");
 		$this->clickAndWait("submit");
-		$this->assertTextPresent("Document submitted successfully");
+		$this->assertTextPresent("Document http://buildbot.fusionforge.org/ submitted successfully");
 		$this->assertTextPresent("My document");
 		$this->assertTextPresent("L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 //		$this->clickAndWait("link=My document");
