@@ -241,7 +241,7 @@ class OSLCConnector {
 
 			$feedentry = $this->prepareChangeRequest($changerequest);
 
-			$feedentry['title'] = 'changerequest '.$identifier.' : '.$feedentry['resource']['dc:title'];
+			$feedentry['title'] = 'changerequest '.$identifier.' : '.$feedentry['resource']['dcterms:title'];
 			$feedentry['id']= $uri.$identifier;
 
 			$returned[] = $feedentry;
@@ -283,7 +283,7 @@ class OSLCConnector {
 					// TODO : use real RDF triples ?
 					$tokens = explode(':', $fieldname);
 					if( (count($tokens) == 1) && (in_array($fieldname,$dc_attr))) {
-						$fieldname = 'dc:'.$fieldname;
+						$fieldname = 'dcterms:'.$fieldname;
 					}
 					$preparedChangeRequest['resource'][$fieldname] = $value;
 					break;
