@@ -75,8 +75,21 @@ if ($host != '') {
 if ($file != '') {
 	$dump_cmd .= ' -p ' . $port;
 }
+
+$tmpfname = tempnam(sys_get_temp_dir(), "tmp");
+
+$handle = fopen($tmpfname, "w");
+$line = '';
+$line .= $host ? "$host:" : "localhost:";
+$line .= $port ? "$port:" : "5432:";
+$line .= "$database:$username:$password";
+fwrite($handle, "$line");
+fclose($handle);
+
 $dump_cmd .= ' -v -Ft -b '.$database;
-@exec('echo -n -e "'.$password.'\n" | '.$dump_cmd.' 2>&1 > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
+@exec('PGPASSFILE='.$tmpfname.' '.$dump_cmd.' 2>&1 > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
+unlink($tmpfname);
+
 if($retval!=0){
 	$err.= implode("\n", $output);
 }
