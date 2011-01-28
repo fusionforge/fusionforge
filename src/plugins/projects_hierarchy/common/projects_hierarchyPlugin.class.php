@@ -145,6 +145,18 @@ class projects_hierarchyPlugin extends Plugin {
 		$returnTree .= '</td></tr></table>';
 		return $returnTree;
 	}
+
+	/**
+	 * getChildren - find the children group_id of this project.
+	 *
+	 * @param	bool	search children of the children
+	 * @return	array	the children id group by parent id.
+	 * @access	public
+	 */
+	function getChildren($deep = false) {
+		$children = array();
+		return $children;
+	}
 }
 // Local Variables:
 // mode: php
