@@ -73,20 +73,13 @@ function createRessourceCollectionView($view){
 
 		$id = $doc->createElement('id', $entry['id']);
 		$child = $entryel->appendChild($id);
-		$link = $doc->createElement('link');
-		$child = $entryel->appendChild($link);
-		$href = $doc->createAttribute('href');
-		$child = $child->appendChild($href);
-		$href = $doc->createTextNode($entry['id']);
-		$child = $child->appendChild($href);
-
 
 		if( count($entry['resource']) ) {
 			$content = $doc->createElement('content');
 			$content = $entryel->appendChild($content);
 			$type = $doc->createAttribute('type');
 			$child = $content->appendChild($type);
-			$type = $doc->createTextNode('application/xml');
+			$type = $doc->createTextNode('application/rdf+xml');
 			$child = $child->appendChild($type);
 
 			encodeResource($doc, $content, $entry['resource']);
