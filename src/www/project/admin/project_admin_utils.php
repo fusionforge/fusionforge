@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -41,8 +42,6 @@ function project_admin_header($params) {
 		return;
 	}
 
-	site_project_header($params);
-	
 	$labels = array();
 	$links = array();
 	
@@ -88,12 +87,11 @@ function project_admin_header($params) {
 	$links[] = '/project/stats/?group_id='.$group_id;
 	plugin_hook("quota_link_project_admin");
 	
-	echo $HTML->beginSubMenu();
-	echo $HTML->printSubMenu($labels, $links, false);
-	plugin_hook("groupadminmenu", $params);
-	echo $HTML->endSubMenu();
+	$params['submenu'] = $HTML->subMenu($labels, $links);
 
-	echo '<h1>' . $params['title'] . '</h1>';
+	plugin_hook ("groupadminmenu", $params) ;
+
+	site_project_header($params);
 }
 
 /*
@@ -140,8 +138,6 @@ function show_grouphistory ($group_id) {
 		show the group_history rows that are relevant to 
 		this group_id
 	*/
-
-	echo '<h1>'._('Project History').'</h1>';
 
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);

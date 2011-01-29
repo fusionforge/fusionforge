@@ -32,7 +32,6 @@ require_once $gfwww.'survey/include/SurveyHTML.class.php';
 $title = _('Survey Privacy');
 $sh = new SurveyHtml();
 $sh->header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>';
 
 echo '<p>';
 echo _("The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.");

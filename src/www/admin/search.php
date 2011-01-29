@@ -41,7 +41,6 @@ if (!$search) {
 }
 
 site_admin_header(array('title'=>_('Admin Search Results')));
-echo '<h1>' . _('Admin Search Results') . '</h1>';
 
 function format_name($name, $status) {
 	if ($status == 'D') {

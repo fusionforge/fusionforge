@@ -3,6 +3,7 @@
  * Workflow Form
  *
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -30,7 +31,6 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 		$next = getIntFromRequest('next');
 		
 //	FORM TO UPDATE ARTIFACT TYPES
-		$ath->adminHeader(array ('title'=> _('Configure allowed roles'),'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
 
 		/*
 			List of possible user built Selection Boxes for an ArtifactType
@@ -55,8 +55,9 @@ require_once('common/tracker/ArtifactWorkflow.class.php');
 			$name[ $e['element_id'] ] = $e['element_name'];
 		}
 
+		$title = sprintf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]);
+		$ath->adminHeader(array ('title'=>$title,'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
 ?>
-	<h1><?php printf(_('Configuring allowed roles for the transitions from %1$s to %2$s'), $name[$from], $name[$next]) ?></h1>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
 		<input type="hidden" name="workflow_roles" value="1" />

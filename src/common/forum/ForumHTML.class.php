@@ -5,7 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -58,7 +58,6 @@ function forum_header($params) {
 			$params['group']=db_result($result,0,'group_id');
 			$params['toptab']='news';
 			$HTML->header($params);
-			echo '<h1>' . $params['title'] . '</h1>';
 
 			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
@@ -100,17 +99,14 @@ function forum_header($params) {
 			echo news_show_latest($params['group'],5,false);
 			echo $HTML->boxBottom();
 			echo '</td></tr></table>';
-		} else {
-			site_project_header($params);
-			echo '<h1>' . $params['title'] . '</h1>';
 		}
-	} else {
-		site_project_header($params);
-		echo '<h1>' . $params['title'] . '</h1>';
 	}
 
 	$menu_text=array();
 	$menu_links=array();
+
+	$menu_text[]=_('View Forums');
+	$menu_links[]='/forum/?group_id='.$group_id;
 
 	if ($f){
 		if ($forum_id) {
@@ -118,22 +114,21 @@ function forum_header($params) {
 			$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
 		}
 		if (forge_check_perm ('forum_admin', $f->Group->getID())) {
-			$menu_text[]=_('Admin');
+			$menu_text[]=_('Administration');
 			$menu_links[]='/forum/admin/?group_id='.$group_id;
 		} 
 	} else {
 			$gg=group_get_object($group_id);
 			if (forge_check_perm ('forum_admin', $group_id)) {
-				$menu_text[]=_('Admin');
+				$menu_text[]=_('Administration');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
 			}
 	}
 	if (count($menu_text) > 0) {
-		echo $HTML->subMenu(
-			$menu_text,
-			$menu_links
-		);
+		$params['submenu'] =$HTML->subMenu($menu_text,$menu_links);
 	}
+
+	site_project_header($params);
 
 	$pluginManager = plugin_manager_get_object();
 	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook ("blocks", "forum_".$f->getName()))
@@ -220,7 +215,7 @@ class ForumHTML extends Error {
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
 					'.
-		html_image('ic/msg.png',"10","12") .
+		html_image('ic/msg.png') .
 		$bold_begin. $msg->getSubject() . $bold_end .'&nbsp; '.
 		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>
@@ -257,7 +252,7 @@ class ForumHTML extends Error {
 		$am = new AttachManager();
 		$msgforum =& $msg->getForum();
 		$fa = new ForumAdmin($msgforum->Group->getID());
-		$url = util_make_url('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
+		$url = util_make_uri('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
 		$ret_val = 		
 		'<table border="0" width="100%" cellspacing="0">
 			<tr>
@@ -449,7 +444,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $ah_begin .
-					html_image('ic/msg.png',"10","12").' ';
+					html_image('ic/msg.png').' ';
 				/*
 					See if this message is new or not
 				*/

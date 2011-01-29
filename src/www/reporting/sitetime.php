@@ -67,7 +67,6 @@ $a2[]='subproject';
 $a2[]='user';
 
 ?>
-<h2><?php echo _('Site-Wide Time Tracking'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>

@@ -112,7 +112,6 @@ $row_cat = db_fetch_array($res_cat);
 
 site_admin_header(array('title'=>_('Edit Trove Category')));
 ?>
-<h1><?php echo _('Edit Trove Category'); ?></h1>
 
 <form action="trove_cat_edit.php" method="post">
 

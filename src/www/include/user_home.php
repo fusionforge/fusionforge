@@ -31,7 +31,6 @@ require_once $gfwww.'include/vote_function.php';
 
 $title = _('User Profile');
 $HTML->header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>';
 
 echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 

@@ -38,7 +38,6 @@ session_require_global_perm ('forge_stats', 'read') ;
 $HTML->header(array('title'=>sprintf(_('%1$s Site Project Statistical Comparisons'), forge_get_config ('forge_name'))));
 
 ?>
-<h1><?php echo _('Project Statistical Comparisons'); ?></h1>
 
 <hr />
 

@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -57,7 +58,7 @@ if ($group_id) {
 	$mlArray =& $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<div class="error">'.sprintf(_('Unable to get the list %s : %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</div>';
+		echo '<p class="error">'.sprintf(_('Unable to get the list %s : %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</p>';
 		mail_footer(array());
 		exit;
 	}

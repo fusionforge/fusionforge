@@ -87,7 +87,6 @@ if (getStringFromRequest("submit")) {
 
 $title = _("Lost Password Login") ;
 $HTML->header(array('title'=>$title));
-echo '<h1>'.$title.'</h1>' ;
 echo '<p>' ;
 printf (_('Welcome, %s. You may now change your password.'),$u->getUnixName());
 echo '</p>';

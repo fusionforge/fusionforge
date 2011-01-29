@@ -3,6 +3,7 @@
  * Task Mgr And Tracker Integration
  *
  * Copyright 2003 GForge, LLC
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -92,11 +93,11 @@ if (getStringFromRequest('add_to_task')) {
 		exit_error(_('No Available Tasks Found'));
 	}
 
-	$ath->header(array('atid'=>$ath->getID()));
+	$ath->header(array('titlevals'=>array($ath->getName()),
+		'atid'=>$ath->getID(),
+		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
 
 	echo '
-		<h3>'._('Build Relationship Between Tracker Items and Task Manager').'</h3>
-
 		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
 		<p><strong>'._('Tracker Item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
 		<p><strong>'._('Tasks Project').':</strong><br />';
@@ -147,19 +148,22 @@ if (getStringFromRequest('add_to_task')) {
 		}
 	}
 
-	$ath->header(array('atid'=>$ath->getID()));
+	$ath->header(array('titlevals'=>array($ath->getName()),
+		'atid'=>$ath->getID(),
+		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
 
-	echo '<h3>'._('Build Relationship Between Tracker Items and Task Manager').'</h3>
-		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
+	echo '<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
 		<p><strong>'._('Tracker Item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
 		<p><strong>'._('Tasks Project').':</strong></p>
 		<select name="group_project_id">';
 	for ($i=0; $i<count($pg_arr); $i++) {
 		echo '<option value="'.$pg_arr[$i]->getID().'">'.$pg_arr[$i]->getName().'</option>';
 	}
-	echo '</select><br />
-		<input type="submit" name="add_to_task" value="'._('Add Relation To Existing Task.').'." /><br />
+	echo '</select>
+		<p>
+		<input type="submit" name="add_to_task" value="'._('Add Relation to Existing Task').'" />
 		<input type="submit" name="new_task" value="'._('Create New Task').'" />
+		</p>
 		</form>';
 
 }

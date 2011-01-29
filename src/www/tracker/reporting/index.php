@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2004 (c) GForge LLC
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * @version   index.php,v 1.11 2004/08/05 20:48:59 tperdue Exp
  * @author Tim Perdue tim@gforge.org
@@ -98,23 +99,21 @@ echo db_error();
 //
 $vals=array();
 $labels=array();
-$vals[]='activity'; $labels[]='Response Time';
-$vals[]='assignee'; $labels[]='By Assignee';
+$vals[]='activity'; $labels[]=_('Response Time');
+$vals[]='assignee'; $labels[]=_('By Assignee');
 
-//required params for site_project_header();
-$params=array();
-$params['group']=$group_id;
-$params['toptab']='tracker';
-$params['title'] = _('Project Activity');
+if ($atid) {
+	$h = new ArtifactTypeHtml($group, $atid);
+} else {
+	$h = new ArtifactTypeFactoryHtml($group);
+}
 
-echo site_project_header($params);
-echo '<h1>' . _('Project Activity') . '</h1>';
+$h->header(array('title' => _('Project Activity')));
 
 ?>
-<div align="center">
-<h1>Project Activity</h1>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<table><tr>
+<table style="margin-left: auto; margin-right: auto;">
+<tr>
 <td>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <strong>Tracker:</strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
@@ -141,5 +140,4 @@ echo '<h1>' . _('Project Activity') . '</h1>';
 }
 ?>
 </p>
-</div>
-<?php echo site_project_footer(array()); ?>
+<?php $h->footer(array()); ?>

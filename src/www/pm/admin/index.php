@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -315,7 +316,7 @@ if ($add_cat && $group_project_id) {
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-	pm_header(array('title'=>_('Update Subproject Tasks: ').$pg->getName()));
+	pm_header(array('title'=>_('Change Tasks Status')));
 
 	?>
 	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>

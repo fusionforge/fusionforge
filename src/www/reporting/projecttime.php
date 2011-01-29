@@ -67,7 +67,6 @@ $a2[]='subproject';
 $a2[]='user';
 
 ?>
-<h2><?php echo _('Time Tracking By Project'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>" />

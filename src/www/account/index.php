@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -98,7 +99,6 @@ if (getStringFromRequest('submit')) {//if this is set, then the user has issued 
 
 $title = _('Account Maintenance');
 site_user_header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>';
 
 echo '<form action="'.util_make_url('/account/').'" method="post">';
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'"/>';
@@ -127,7 +127,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <td><strong><?php print date(_('Y-m-d H:i'),$u->getAddDate()); ?></strong></td>
 </tr>
 <tr valign="top">
-<td><?php echo _('User ID:'); ?> </td>
+<td><?php echo _('User Id:'); ?> </td>
 <td><strong><?php print $u->getID(); ?></strong></td>
 </tr>
 

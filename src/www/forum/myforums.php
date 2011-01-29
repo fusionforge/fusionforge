@@ -44,7 +44,6 @@ if ($group_id) {
     forum_header(array('title'=>_('My Monitored Forums')));
 } else {
     site_header(array('title'=>_('My Monitored Forums'), 'user_id' => $user_id));
-    echo "<h1>" . _('My Monitored Forums') . "</h1>";
 }
 
 //get the user monitored forums
@@ -62,7 +61,6 @@ if ( db_numrows($result) < 1) {
 }
 
 //now, i need to create a forum object per each forum that the user is monitoring
-
 $monitored_forums = array();
 for ($i=0;$i<db_numrows($result);$i++) {
 	$monitored_forums[$i] = db_fetch_array($result);

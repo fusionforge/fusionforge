@@ -53,7 +53,6 @@ if (getStringFromPost('submit')) {
 
 $title = _('Permanently and irretrievably delete project').': '.$group->getPublicName();
 site_admin_header(array('title'=>$title));
-echo '<h1>'.$title.'</h1>';
 ?>
 
 <form action="<?php echo '?group_id='.$group_id; ?>" method="post">

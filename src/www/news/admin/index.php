@@ -122,7 +122,6 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		
 		echo notepad_func();
 		echo '
-		<h1>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h1>
 		<p />
 		<form id="newsadminform" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
@@ -171,7 +170,6 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		$rows=db_numrows($result);
 		$group = group_get_object($group_id);
 		
-		echo '<h1>'._('List of News Submitted for Project').': '.$group->getPublicName().'</h1>';
 		if ($rows < 1) {
 			echo '
 				<p class="warning_msg">'._('No Queued Items Found').'</p>';
@@ -274,7 +272,6 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		$user =& user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<h1>'.sprintf(_('Approve a NewsByte For Project: %1$s'), $group->getPublicName()).'</h1>
 		<p />
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />

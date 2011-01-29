@@ -5,7 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -269,7 +269,7 @@ if ($forum_id) {
 			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 				<td><a href="'.util_make_url ('/forum/message.php?msg_id='.$msg->getID().
 							      '&amp;group_id='.$group_id).'&amp;reply=0">'.
-				html_image('ic/msg.png',"10","12").' ';
+				html_image('ic/msg.png').' ';
 			/*
 				See if this message is new or not
 				If so, highlite it in bold
@@ -343,9 +343,9 @@ ORDER BY f.most_recent_date DESC',
 			$i=0;
 			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 				$ret_val .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_url ('/forum/forum.php?thread_id='.
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'.util_make_uri('/forum/forum.php?thread_id='.
 															$row['thread_id'].'&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">'.
-					html_image('ic/cfolder15.png',"15","13") . '  &nbsp; ';
+					html_image('ic/cfolder15.png') . '  &nbsp; ';
 				/*
 						See if this message is new or not
 						If so, highlite it in bold
@@ -390,7 +390,7 @@ ORDER BY f.most_recent_date DESC',
 
 		if ($avail_rows > $max_rows) {
 			$ret_val .= '<span class="next">
-			<a href="'.util_make_url ('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
+			<a href="'.util_make_uri('/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).
 						  '&amp;forum_id='.$forum_id.'&amp;group_id='.$group_id).'">
 			<strong> '._('Older Messages') .
 				html_image('t.png',"15","15") . '</strong></a></span>';

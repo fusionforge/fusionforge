@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -21,11 +22,9 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+use_javascript('/tabber/tabber.js');
 
-$ath->header(array 
-	     ('title' => _('Modify').' [#'.$ah->getID(). '] ' 
-	      . util_unconvert_htmlspecialchars($ah->getSummary()),
-	      'atid'=>$ath->getID()));
+$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
@@ -143,7 +142,6 @@ if (session_loggedin()) {
 		<?php echo $ah->showDetails(); ?>
 	</td></tr>
 </table>
-<script type="text/javascript" src="<?php echo util_make_uri('/tabber/tabber.js') ?>"></script>
 <div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups');?>">
 <table border="0" width="80%">

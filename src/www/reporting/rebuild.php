@@ -46,7 +46,7 @@ if (getStringFromRequest('submit') && getStringFromRequest('im_sure')) {
 }
 
 report_header(_('Reporting System Initialization'));
-echo '<h2>'._('Reporting System Initialization').'</h2>';
+
 echo '<p>';
 echo _('Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.');
 echo '</p>';

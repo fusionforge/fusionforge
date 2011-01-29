@@ -3,7 +3,7 @@
  * Default Theme
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
@@ -31,6 +31,7 @@ define('TOP_TAB_HEIGHT', 30);
 define('BOTTOM_TAB_HEIGHT', 22);
 
 class Theme extends Layout {
+	var $header_displayed = false;
 
 	function Theme() {
 		// Ensure our stylesheets are loaded before the default one (reset first).
@@ -50,14 +51,30 @@ class Theme extends Layout {
 	}
 
 	function bodyHeader($params) {
-                global $user_guide;
+		global $user_guide;
+
+		// Don't display the headers twice (when errors for example).
+		if ($this->header_displayed)
+			return;
+		$this->header_displayed=true;
+		
+		// The root location for images
+		if (!isset($params['h1'])) {
+			$params['h1'] = $params['title'];
+		}
+
+		if (!$params['title']) {
+			$params['title'] = forge_get_config('forge_name');
+		} else {
+			$params['title'] = $params['title'] . " - forge_get_config('forge_name') ";
+		}
 
                 echo '
 			<table id="header" class="width-100p100">
 				<tr>
-					<td id="header-col1">
-					<h1>'.  util_make_link ('/', html_image('header/top-logo.png',192,54,array('alt'=>'FusionForge Home'))) .'</h1>
-					</td>
+					<td id="header-col1">';
+				echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('alt'=>'FusionForge Home')));
+				echo '</td>
 					<td id="header-col2">';
                 $this->searchBox();
                 echo '
@@ -69,8 +86,7 @@ class Theme extends Layout {
                         $links[] = util_make_link($items['urls'][$j], $items['titles'][$j], 
                                                   array('class'=>'userlink'), true);
                 }
-                echo implode(' | ', $links);
-                
+                echo implode(' | ', $links); 
                 plugin_hook ('headermenu', $params);
 
                 $this->quickNav();
@@ -82,17 +98,25 @@ class Theme extends Layout {
 			<!-- outer tabs -->
 			';
                 echo $this->outerTabs($params);
-                echo '<!-- inner tabs -->';
+				echo '<!-- inner tabs -->' . "\n";
                 if (isset($params['group']) && $params['group']) {
                         echo $this->projectTabs($params['toptab'],$params['group']);
                 }
                 echo '<div id="maindiv">
 ';
+//		        echo '<div class="printheader">'. forge_get_config('forge_name') . ' ' . util_make_url('/') .'</div>';
+
+				if ($params['h1']) {
+					echo '<h1>'.$params['h1'].'</h1>';
+				} else {
+					echo '<h1 class="hide">'.$params['title'].'</h1>';
+				}
+				if (isset($params['submenu']))
+					echo $params['submenu'];
         }
 
         function bodyFooter($params) {
-                echo '</div> <!-- id="maindiv" -->
-';
+			echo '</div><!-- id="maindiv" -->' . "\n";
         }
 
         function footer($params) {

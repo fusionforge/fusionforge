@@ -68,7 +68,6 @@ if (!$accumulated_ids) {
 project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id));
 
 echo '
-<h1>'._('Add Users From List').'</h1>
 <p>
 '._('Choose the role for each user and then press &quot;Add All&quot;.').'
 </p>

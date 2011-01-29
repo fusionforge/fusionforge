@@ -56,7 +56,6 @@ if (getStringFromRequest('submit')) {
 }
 
 $HTML->header(array('title'=>_('Resend confirmation email to a pending account')));
-echo '<h1>' . _('Resend confirmation email to a pending account') . '</h1>';
 
 if (forge_get_config('require_unique_email')) {
 	echo _('Fill in a user name or email address and click \'Submit\' to resend the confirmation email.');

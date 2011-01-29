@@ -3,6 +3,7 @@
  * Tracker Front Page
  *
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -44,7 +45,7 @@ site_project_header($params);
 if (forge_check_perm ('tracker_admin', $group_id)) {
 	$menu_text=array();
 	$menu_links=array();
-	$menu_text[]=_('Admin');
+	$menu_text[]=_('Administration');
 	$menu_links[]='/tracker/admin/?group_id='.$group_id;
 	echo $HTML->subMenu($menu_text,$menu_links);
 }
@@ -54,8 +55,6 @@ if (!$at_arr || count($at_arr) < 1) {
 	echo '<div class="warning">'._('No Accessible Trackers Found').'</div>';
 	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>')."</strong>";
 } else {
-
-	echo '<h1>'.$params['title'].'</h1>';
 
 	plugin_hook ("blocks", "tracker index");
 

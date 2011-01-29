@@ -27,7 +27,6 @@
 function report_header($title) {
 	$t = sprintf(_('%1$s Reporting'), forge_get_config ('forge_name')) . ": " . $title;
 	site_header(array('title'=>$t));
-	echo "<h1>".sprintf(_('%1$s Reporting'), forge_get_config ('forge_name'))."</h1>\n";
 }
 
 function report_footer() {

@@ -18,8 +18,6 @@ $res = db_query_params ('SELECT group_id,group_name,unix_group_name,homepage,sho
 			array ('A'),
 			$limit);
 
-//rss20_dump_project_result_set($res,$GLOBALS['sys_default_name'].' Full Project Listing');
-// quick and dirty fix
 rss_dump_project_result_set($res,forge_get_config ('forge_name').' Full Project Listing');
 ?>
 </rss>

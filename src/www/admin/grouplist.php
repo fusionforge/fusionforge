@@ -26,7 +26,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 site_admin_header(array('title'=>_('Project List')));
-echo '<h1>' . _('Project List') . '</h1>';
 
 $sortorder = getStringFromRequest('sortorder');
 $group_name_search = getStringFromRequest('group_name_search');

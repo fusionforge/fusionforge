@@ -31,7 +31,6 @@ require_once $gfwww.'stats/site_stats_utils.php';
 session_require_global_perm ('forge_stats', 'read') ;
 
 $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge_get_config ('forge_name'))));
-print '<h1>'._('Sitewide Statistics Graphs').'</h1>' . "\n";
 ?>
 
 <hr />

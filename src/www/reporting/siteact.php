@@ -58,7 +58,6 @@ $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','task
 report_header(_('Site-Wide Activity'));
 
 ?>
-<h2><?php echo _('Site-Wide Activity'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>

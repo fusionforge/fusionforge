@@ -54,7 +54,6 @@ if ($start == $end) {
 report_header(_('Users Added'));
 
 ?>
-<h2><?php echo _('Users Added'); ?></h2>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>

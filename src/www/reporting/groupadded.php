@@ -55,7 +55,6 @@ if ($start == $end) {
 report_header(_('Projects Added'));
 
 ?>
-<h2><?php echo _('Projects Added'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>

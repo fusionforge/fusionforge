@@ -3,6 +3,7 @@
  * FusionForge Project Management Facility
  *
  * Copyright 2002 GForge, LLC
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  */
@@ -12,8 +13,6 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 // $atid, $aid and $group_id are set in tracker.php
 
 ?>
-
-<h1><?php echo _('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(); ?></h1>
 
 <table>
 <tr>

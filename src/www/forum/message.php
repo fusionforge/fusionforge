@@ -5,6 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -184,7 +185,7 @@ if ($msg_id) {
 		}
 		$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 			<td>'. $ah_begin .
-			html_image('ic/msg.png',"10","12").' ';
+			html_image('ic/msg.png').' ';
 		/*
 			See if this message is new or not
 			If so, highlite it in bold

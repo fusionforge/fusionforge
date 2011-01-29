@@ -45,7 +45,6 @@ if (!session_loggedin()) {
 
 		site_user_header(array('title'=>_('Monitor a User')));
 
-		echo '<h1>'._('Monitor a User').'</h1>';
 		$result = db_query_params ('SELECT * FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2;',
 					   array (user_getid(),
 						  $diary_user));
@@ -77,7 +76,6 @@ if (!session_loggedin()) {
 		$HTML->footer (array());
 	} else {
 		$HTML->header(array('title'=>_('Error - Choose a User To Monitor First')));
-		echo '<h1>'._('Error - Choose a User To Monitor First').'</h1>';
 		$HTML->footer (array());
 	} 
 

@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -48,9 +49,6 @@ function pm_header($params) {
 		exit_disabled('home');
 	}
 
-	site_project_header($params);
-	echo '<h1>' . $params['title']. '</h1>';
-
 	$labels = array();
 	$links = array();
 
@@ -63,7 +61,7 @@ function pm_header($params) {
 	$links[]  = '/pm/?group_id='.$group_id;
 
 	if ($group_project_id) {
-		$labels[] = (($pg) ? $pg->getName() .': ' : '') ._('Browse tasks');
+		$labels[] = (($pg) ? $pg->getName() : '');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=browse';
 		if (session_loggedin()) {
 			$labels[] = _('Add Task');
@@ -95,10 +93,16 @@ function pm_header($params) {
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
 		$labels[] = _('Administration');
 		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
+	} else if (forge_check_perm ('pm_admin', $group_id)) {
+		$labels[] = _('Administration');
+		$links[]  = '/pm/admin/?group_id='.$group_id;
 	}
+
 	if(!empty($labels)) {
-		echo ($HTML->subMenu($labels,$links));
+		$params['submenu'] = $HTML->subMenu($labels,$links);
 	}
+
+	site_project_header($params);
 
 	if ($pg)
 		plugin_hook ("blocks", "tasks_".$pg->getName());

@@ -5,6 +5,7 @@
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team - Sung Kim
  * Copyright 2008-2010 (c) FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -57,37 +58,31 @@ class SurveyHTML extends Error {
 			exit_disabled();
 			}
 			
-			site_project_header($params);
-			
 			if ($is_admin_page && $group_id) {
-				echo ($HTML->subMenu(
+				$params['submenu'] = $HTML->subMenu(
 					array(
-						_('Surveys'),
-						_('Admin'),
-						_('Edit Survey'),
-						_('Edit Questions'),
-						_('Show Results')
+						_('Add Survey'),
+						_('Add Question'),
+						_('Show Results'),
+						_('Administration')
 					),
 					array(
-						'/survey/?group_id='.$group_id,
-						'/survey/admin/?group_id='.$group_id,
 						'/survey/admin/survey.php?group_id='.$group_id,
 						'/survey/admin/question.php?group_id='.$group_id,
-						'/survey/admin/show_results.php?group_id='.$group_id
+						'/survey/admin/show_results.php?group_id='.$group_id,
+						'/survey/admin/?group_id='.$group_id
 					)
-				));
+				);
 			} else {
+				$labels[] = _('Views Surveys');
+				$links[]  = '/survey/?group_id='.$group_id;
 				if (forge_check_perm ('project_admin', $group_id)) {
-					echo ($HTML->subMenu(
-						      array(
-								_('Administration')
-							      ),
-						      array(
-							      '/survey/admin/?group_id='.$group_id
-							      )
-						      )) ;
+						$labels[] = _('Administration');
+						$links[]  = '/survey/admin/?group_id='.$group_id;
 				}
+				$params['submenu'] = $HTML->subMenu($labels,$links); 
 			}
+			site_project_header($params);
 		}// end if (valid group id)
 	}
 	
@@ -107,15 +102,13 @@ class SurveyHTML extends Error {
 		global $group_id;
 
 		/* Default is add */
-		$title = _('Add a Question');
 		$question_button = _('Add this Question');
 
 		/* If we have a question object, it is a Modify */
 		if ($q && is_object($q) && !$q->isError() && $q->getID()) {
-			$title = _('Edit A Question');
-			$warning_msg = '<div class="warning">'. 
+			$warning_msg = '<p class="warning_msg">'.
 				_('WARNING! It is a bad idea to change a question after responses to it have been submitted').
-				'</div>';
+				'</p>';
 			$question_id = $q->getID();
 			$question = $q->getQuestion();
 			$question_type = $q->getQuestionType();
@@ -127,8 +120,7 @@ class SurveyHTML extends Error {
 			$question_type = '';
 		}
 
-		$ret = '<h1>'. $title. '</h1>';
-		$ret.= $warning_msg;
+		$ret = $warning_msg;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
@@ -167,16 +159,14 @@ class SurveyHTML extends Error {
 		}
 		
 		/* Default is add */
-		$title = _('Add a Survey');
 		$survey_button = _('Add this Survey');
 		$active = ' checked="checked" ';
 		$inactive = '';
 
 		/* If we have a survey object, it is a Modify */
 		if ($s && is_object($s) && !$s->isError() && $s->getID()) {
-			$title = _('Edit A Survey');
-			$warning_msg = '<div class="warning">'. 
-				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</div>';
+			$warning_msg = '<p class="warning_msg">'.
+				_('WARNING! It is a bad idea to edit a survey after responses have been posted').'</p>';
 			$survey_id = $s->getID();
 			$survey_title = $s->getTitle();
 			$survey_questions = $s->getQuestionString();
@@ -191,8 +181,7 @@ class SurveyHTML extends Error {
 			$survey_title = ''; 
 		}
 
-		$ret = '<h1>'. $title. '</h1>';
-		$ret.= $warning_msg;
+		$ret = $warning_msg;
 		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 		$ret.='<input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
@@ -261,7 +250,6 @@ class SurveyHTML extends Error {
 				continue;
 			}
 			
-			
 			$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n";
 			
 			$ret.= '<td>'.$arr_to_del[$i]->getID().'</td>';
@@ -297,7 +285,7 @@ class SurveyHTML extends Error {
 		global $group_id;
 		
 		$n = count($questions);
-		$ret = "<h3>" . sprintf(ngettext("%d question found", "%d questions found", $n), $n)."</h3>";
+		$ret = "<h2>" . sprintf(ngettext("%d question found", "%d questions found", $n), $n)."</h2>";
 					
 		/* Head information */
 		$title_arr = array ('Question ID', 'Question', 'Type', 'Edit/Delete');
@@ -363,7 +351,7 @@ class SurveyHTML extends Error {
 			$title_arr[] = _('Number of Votes');
 		}		
 		if ($show_vote && $user_id) {
-			$title_arr[] = _('Vote');
+			$title_arr[] = _('Did I Vote?');
 		}
 		if ($show_edit) {
 			$title_arr[] = _('Edit');
@@ -419,9 +407,9 @@ class SurveyHTML extends Error {
 			}		
 			if ($show_vote && $user_id) {
 				if ($surveys[$i]->isUserVote($user_id)) {
-					$ret.='<td>YES</td>';
+					$ret.='<td>'. _('Yes') . '</td>';
 				} else {
-					$ret.='<td>NO</td>';
+					$ret.='<td>'. _('No') . '</td>';
 				}
 			}
 			if ($show_edit) {
@@ -468,13 +456,12 @@ class SurveyHTML extends Error {
 		
 		$ret="";
 		if ($s->isUserVote(user_getid())) {
-			$ret.= '<div class="warning">'. _('Warning - you are about to vote a second time on this survey.').'</div>';
+			$ret.= '<p class="warning_msg">'. _('Warning - you are about to vote a second time on this survey.').'</p>';
 		} 
 		$ret.= '<form action="/survey/survey_resp.php" method="post">'.
 			'<input type="hidden" name="group_id" value="'.$group_id.'" />'.
 			'<input type="hidden" name="survey_id" value="'.$survey_id. '" />';
 
-		$ret.= '<h3>'.$s->getTitle().'</h3>';
 		$ret.= '<table border="0">';
 
 		/* Keep question numbers */
@@ -586,7 +573,7 @@ class SurveyHTML extends Error {
 		
 		/* No votes, no result to show */
 		if ($votes==0) {
-			$ret.= '<ul><li/>'._('No Votes').'</ul>';
+			$ret.= '<ul><li>'._('No Votes').'</li></ul>';
 			return $ret;
 		}
 
@@ -710,7 +697,6 @@ class SurveyHTML extends Error {
 			}
 	 		return $rslt;
 		}
-
 	
 	/**
          * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>

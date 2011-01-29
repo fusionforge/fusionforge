@@ -1,13 +1,14 @@
 <?php
-/**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  */
+/*
+ *
+ * SourceForge Generic Tracker facility
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * http://sourceforge.net
+ *
+ */
 
 
 require_once $gfcommon.'tracker/Artifact.class.php';
@@ -35,7 +36,6 @@ class ArtifactHtml extends Artifact {
 		$result = $this->getDetails();
 		$result = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
 		//$result = util_line_wrap( $result, 120,"\n");
-		$result = preg_replace('/(*ANYCRLF)$/m', '<br />', $result);
 		$result = preg_replace('/\r?\n/', '<br />', $result);
 
 		$title_arr = array();
@@ -84,7 +84,7 @@ class ArtifactHtml extends Artifact {
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
 				//$text = util_line_wrap( $text, 120,"\n");
-				$text = preg_replace('/\n?\r/', '<br />', $text);
+				$text = preg_replace('/\r?\n/', '<br />', $text);
 				echo "<br /><br />".$text.'</td></tr>';
 			}
 

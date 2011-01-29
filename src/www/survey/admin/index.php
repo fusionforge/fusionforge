@@ -53,7 +53,6 @@ if ( !user_ismember($group_id,'A')) {
 	exit_permission_denied(_('You are not a Project admin'),'surveys');
 }
 
-echo '<h1>'._('Survey Administration').'</h1>';
 ?>
 
 <p>

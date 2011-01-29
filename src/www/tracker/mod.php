@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -22,17 +23,13 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+use_javascript('/tabber/tabber.js');
 
-$ath->header(array 
-	     ('title' => _('Modify').' [#'.$ah->getID(). '] ' 
-	      . util_unconvert_htmlspecialchars($ah->getSummary()),
-	      'atid'=>$ath->getID()));
+$ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
 
 ?>
-	<h1>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h1>
-
 	<form id="trackermodform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>"  enctype="multipart/form-data" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<input type="hidden" name="func" value="postmod"/>
@@ -185,8 +182,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</div>
 	</td></tr>
 </table>
-<script type="text/javascript" src="<?php echo util_make_uri('/tabber/tabber.js') ?>"></script>
-<div id="tabber" class="tabber">
+div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">

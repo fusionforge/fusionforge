@@ -51,7 +51,6 @@ $s = new Survey($g, $survey_id);
 
 $title = sprintf(_('Vote for Survey: %1$s'), $s->getTitle());
 $sh->header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>';
 
 if (!$survey_id) {
     echo '<div class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</div>';

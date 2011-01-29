@@ -85,8 +85,6 @@ if (!$has_error) {
 	echo '</tr>'."\n";
 	echo $GLOBALS['HTML']->listTableBottom();
 
-	echo '<h2>'.sprintf(_('Configuring workflow for the %1$s field'), $field_name).'</h2>';
-
 	$count=count($title_arr);
 	$totitle_arr = array();
 	for ($i=0; $i<$count; $i++) {

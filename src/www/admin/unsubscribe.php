@@ -88,7 +88,6 @@ if (getStringFromRequest('submit') && $user_name) {
 site_admin_header(array('title'=>_('Site Mailings Subscription Maintenance')));
 
 ?>
-<h1><?php echo _('Site Mailings Subscription Maintenance'); ?></h1>
 
 <p>
 <?php printf(_('Use field below to find users which match given pattern with the %1$s username, real name, or email address (substring match is preformed, use \'%%\' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).'), forge_get_config ('forge_name')); ?>

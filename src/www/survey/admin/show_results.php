@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -54,7 +55,6 @@ $sh = new  SurveyHtml();
 
 $title = _('Survey Results');
 $sh->header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>';
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo '<div class="error">'._('Permission denied').'</div>';

@@ -5,6 +5,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -23,7 +24,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
  */
-
 
 require_once $gfwww.'include/Layout.class.php';
 
@@ -65,14 +65,27 @@ class Theme extends Layout {
 
     function bodyHeader($params)
     {
-        global $user_guide, $HTML;
+        global $user_guide;
+
+        // The root location for images
+        if (!isset($params['h1'])) {
+            $params['h1'] = $params['title'];
+        }
+
+        if (!$params['title']) {
+            $params['title'] = forge_get_config('forge_name');
+        } else {
+            $params['title'] = $params['title'] . " - forge_get_config('forge_name') ";
+        }
+
         echo '<table id="header" class="width-100p100">' . "\n";
         echo '<tr>' . "\n";
         echo '<td id="header-col1">' . "\n";
-        echo '<h1>'.  util_make_link ('/', html_image('/header/top-logo.png',null,null,array('alt'=>'FusionForge Home'))) .'</h1>' . "\n";
+        echo util_make_link ('/', html_image('/header/top-logo.png',null,null,array('alt'=>'FusionForge Home'))) . "\n";
+
         echo '</td>' . "\n";
         echo '<td id="header-col2">' . "\n";
-        
+
         $items = $this->navigation->getUserLinks();
         for ($j = 0; $j < count($items['titles']); $j++) 
         {
@@ -88,7 +101,7 @@ class Theme extends Layout {
         // echo $this->quicknewsbutton();
         $this->quickNav();
         $this->searchBox();
-        
+
         echo '</td></tr>' . "\n";
         echo '<tr><td colspan="2" id="header-news">' . "\n";
         //echo $this->quicknews();
@@ -101,6 +114,14 @@ class Theme extends Layout {
             
         echo '</div>' . "\n";
         echo '<div id="maindiv">' . "\n";
+
+        if ($params['h1']) {
+            echo '<h1>'.$params['h1'].'</h1>';
+        } else {
+            echo '<h1 class="hide">'.$params['title'].'</h1>';
+        }
+        if (isset($params['submenu']))
+            echo $params['submenu'];
     }
         
     function bodyFooter($params) {

@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,11 +43,8 @@
 		} elseif ($ao->isError()) {
 			exit_error($ao->getErrorMessage(),'tracker');
 		} else {
-			$title = sprintf(_('Remove a custom field element in %s'), $ath->getName()) ;
-			$ath->adminHeader(array('title'=>$title));
 
-			echo '
-				<h2>'.$title.'</h2>';
+			$ath->adminHeader(array('title'=>sprintf(_("Delete a custom field element in: %s"), $ath->getName())));
 
 			?>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">

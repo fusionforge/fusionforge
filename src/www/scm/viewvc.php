@@ -6,6 +6,7 @@
  * Portion of this file is inspired from the ViewCVS wrapper
  * contained in CodeX.
  * Copyright (c) Xerox Corporation, CodeX / CodeX Team, 2001,2002. All Rights Reserved.
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://codex.xerox.com
  *
  * Copyright 2010 (c), Franck Villaume
@@ -145,7 +146,11 @@ if (viewcvs_is_html()) {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
 		}
 	}
+	scm_header(array('title'=>_("SCM Repository"),
+		'group'=>$Group->getID()));
+
 	echo $content;
+	scm_footer(array());
 } else {
 	// TODO does not seem to work when allow_tar = 1 in ViewCVS conf
 	// (allow to generate on the fly a tar.gz): the generated file
