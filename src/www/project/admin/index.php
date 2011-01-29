@@ -202,7 +202,7 @@ echo '</table>' ;
 </p>
 
 <?php
-	if ($sys_use_private_project) {
+	if (forge_get_config('use_private_project')) {
 		echo '<p>' ;
 		echo _('Visibility: ');
 		echo html_build_select_box_from_arrays(

@@ -90,8 +90,8 @@ function session_check_session_cookie($session_cookie) {
 	if (trim($user_agent) != getStringFromServer('HTTP_USER_AGENT')) {
 		return false;
 	}
-	if (($GLOBALS['sys_session_expire'] > 0) && 
-	    ($time - time() >= $GLOBALS['sys_session_expire'])) {
+	if ((forge_get_config('session_expire') > 0) &&
+	    ($time - time() >= forge_get_config('session_expire'))) {
 		return false;
 	}
 
@@ -454,7 +454,7 @@ function session_set_new($user_id) {
 	// set session cookie
 	//
 	$cookie = session_build_session_cookie($user_id);
-	session_cookie("session_ser", $cookie, "", $GLOBALS['sys_session_expire']);
+	session_cookie("session_ser", $cookie, "", forge_get_config('session_expire'));
 	$session_ser=$cookie;
 
 	$res = db_query_params ('SELECT count(*) as c FROM user_session WHERE session_hash =$1',

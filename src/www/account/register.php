@@ -71,7 +71,7 @@ if (getStringFromRequest('submit')) {
 		exit_form_double_submit('my');
 	}
 	
-	if ($GLOBALS['sys_require_accept_conditions'] && ! $accept_conditions) {
+	if (forge_get_config('user_registration_accept_conditions') && ! $accept_conditions) {
 		$warning_msg = _("You can't register an account unless you accept the terms of use.") ;
 	} else {
 		$activate_immediately = getIntFromRequest('activate_immediately');
@@ -224,7 +224,7 @@ if (forge_get_config('use_jabber')) {
 <input type="checkbox" name="mail_va" value="1" />
 <?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
 </p>
-<?php if ($GLOBALS['sys_require_accept_conditions']) { ?>
+<?php if (forge_get_config('user_registration_accept_conditions')) { ?>
 	<p>
 	<input type="checkbox" name="accept_conditions" value="1" />
 	<?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),

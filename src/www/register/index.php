@@ -292,7 +292,7 @@ if (count ($template_projects) > 1) {
 	echo '</p>';
 }
 
-if ($sys_use_private_project) {
+if (forge_get_config('use_private_project')) {
 	echo '<h2>'.$index++.'. '._('Visibility'). '</h2>';
 	echo '<p>' . _('If you make your project private, it won\'t be visible in the project list and can\'t be accessed by non members of the project.')."</p>\n";
 	echo '<table><tbody><tr><td><strong>'._('Visibility').':</strong></td>';
