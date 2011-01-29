@@ -72,7 +72,6 @@ if (getStringFromRequest('submit')) {
 
 	$title = _('Massmail admin');
 	site_admin_header(array('title'=>$title));
-	echo '<h1>' . $title . '</h1>';
 	print "<p class=\"feedback\">" ._('Mailing successfully scheduled for delivery'). "</p>";
 	site_admin_footer(array());
 	exit();
@@ -80,7 +79,6 @@ if (getStringFromRequest('submit')) {
 
 $title = sprintf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name'));
 site_admin_header(array('title'=>$title));
-print '<h1>'.sprintf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name')) .'</h1>';
 
 print '
 <p>

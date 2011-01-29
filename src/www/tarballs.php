@@ -6,6 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2003-2004 (c) GForge
  * Copyright 2010 (c) Franck Villaume
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -59,7 +60,7 @@ if (file_exists(forge_get_config('scm_tarballs_path').'/'.$filename)) {
 
 	readfile_chunked(forge_get_config('scm_tarballs_path').'/'.$filename);
 } else {
-	session_redirect(util_make_url("/404.php"));
+	session_redirect('/404.php');
 }
 
 ?>

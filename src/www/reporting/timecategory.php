@@ -82,7 +82,6 @@ for ($i=0; $i<db_numrows($res); $i++) {
 echo $HTML->listTableBottom();
 
 ?>
-<h2><?php echo _('Manage Time Tracker Categories'); ?></h2>
 <p>
 <?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include "Meeting", "Coding", "Testing".'); ?>
 </p>

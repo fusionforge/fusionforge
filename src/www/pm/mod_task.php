@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -262,16 +263,18 @@ $title_arr[]=_('Category');
 $title_arr[]=_('User');
 $title_arr[]=' ';
 
+$xi = 0;
+
 $report=new Report();
 if ($report->isError()) {
 	exit_error($report->getErrorMessage(),'pm');
 }
 
+echo '<form action="/reporting/timeadd.php" method="post" />
+	<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
+	<input type="hidden" name="submit" value="1" />';
 echo $HTML->listTableTop ($title_arr);
-	echo '<form action="/reporting/timeadd.php" method="post" />
-	<input type="hidden" name="project_task_id" value="'.$project_task_id.'">
-	<input type="hidden" name="submit" value="1" />
-	<tr '.$HTML->boxGetAltRowStyle(@$xi++).'>
+echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 		<td style="text-align:center">'. report_weeks_box($report, 'week') .'</td>
 		<td style="text-align:center">'. report_day_adjust_box($report, 'days_adjust') .'</td>
 		<td style="text-align:center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
@@ -280,7 +283,7 @@ echo $HTML->listTableTop ($title_arr);
 		<td style="text-align:center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 	</tr></form>';
 	
-//setenv("TZ=" . $user_timezone); //restore the user�s timezone
+//setenv("TZ=" . $user_timezone); //restore the user's timezone
 	
 //
 //	Display Time Recorded for this task

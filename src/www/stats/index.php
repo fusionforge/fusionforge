@@ -36,7 +36,6 @@ $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Aggregate Statistics'), fo
 // BEGIN PAGE CONTENT CODE
 //
 
-print '<h1>'._('Sitewide aggregate statistics').'</h1>';
 ?>
 
 <hr />

@@ -61,7 +61,6 @@ $l[]='2';
 
 report_header(_('User Summary Report'));
 	?>
-	<h2><?php echo _('User Summary Report'); ?></h2>
 	<p>
 	<?php echo _('Choose the range from the pop-up boxes below. The report will list all tasks with an open date in that range.'); ?>
 	</p>

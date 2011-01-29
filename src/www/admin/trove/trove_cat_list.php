@@ -3,7 +3,7 @@
  * Site Admin: Trove Admin: browse entire Trove tree
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -46,7 +46,7 @@ function printnode ($nodeid,$text) {
 		$title = '';
 	}
 
-	print html_image('ic/cfolder15.png','15','13');
+	print html_image('ic/cfolder15.png');
 	print ('&nbsp; <span class="trove-nodes" title="'.$title.'">'.$text.'</span> ');
 	if ($nodeid == 0) {
 		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
@@ -76,7 +76,6 @@ html_use_tooltips();
 site_admin_header(array('title'=>_('Browse Trove Tree')));
 
 ?>
-<h1><?php echo _('Browse Trove Tree'); ?></h1>
 
 <?php
 

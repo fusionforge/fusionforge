@@ -71,7 +71,6 @@ for ($i=0; $i<count($abc_array); $i++) {
 
 if ($sw) {
 	?>
-	<h2><?php echo _('User Activity'); ?></h2>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>" />

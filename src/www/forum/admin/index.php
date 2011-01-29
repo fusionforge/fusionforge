@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -382,11 +383,11 @@ if (getStringFromRequest('add_forum')) {
 			exit_error($ff->getErrorMessage(),'forums');
 		}
 
-		$farr =& $ff->getForums();
+		$farr = $ff->getForums();
 
 		if ($ff->isError()) {
-			echo '<h1>'.sprintf(_('No Forums Found For %s'), $g->getPublicName()) .'</h1>';
-			echo '<div class="error">'.$ff->getErrorMessage().'</div>';
+			echo '<p class="error">'.sprintf(_('No Forums Found For %s'), $g->getPublicName())
+                 . $ff->getErrorMessage().'</p>';
 			forum_footer(array());
 			exit;
 		}
@@ -458,11 +459,11 @@ if (getStringFromRequest('add_forum')) {
 		exit_error($ff->getErrorMessage(),'forums');
 	}
 
-	$farr =& $ff->getForumsAdmin();
+	$farr = $ff->getForumsAdmin();
 
 	if ($ff->isError()) {
-		echo '<h1>'.sprintf(_('No Forums Found For %1$s'), $g->getPublicName()) .'</h1>';
-		echo '<div class="error">'.$ff->getErrorMessage().'</div>';
+		echo '<p class="error">'.sprintf(_('No Forums Found For %s'), $g->getPublicName())
+			. $ff->getErrorMessage().'</p>';
 		forum_footer(array());
 		exit;
 	}

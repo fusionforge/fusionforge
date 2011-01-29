@@ -4,6 +4,7 @@
  *
  * Copyright 2004 (c) GForge LLC
  * Copyright 2010, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -135,29 +136,26 @@ if ($role_id=='observer') {
 	}
 }
 
-project_admin_header(array('title'=>_('Edit Role'),'group'=>$group_id));
-
-//
-//	If observer role, show title
-//
 if ($role_id=='observer') {
-	echo '<h1>'._('Edit Observer').'</h1>';
-	echo _('Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.');
+	$title= _('Edit Observer');
+	$msg = _('Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.');
 } else {
 	if (!$role_id) {
-		echo '<h1>'._('New Role').'</h1>';
+		$title= _('New Role');
 	} else {
-		echo '<h1>'._('Edit Role').'</h1>';
+		$title= _('Edit Role');
 	}
 	if (USE_PFO_RBAC) {
-		echo _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the the Anonymous role has read access to a forum, all other roles will have it too.');
+		$msg = _('Use this page to edit the permissions attached to each role.  Note that each role has at least as much access as the Anonymous and LoggedIn roles.  For example, if the the Anonymous role has read access to a forum, all other roles will have it too.');
 	} else {
-		echo _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
+		$msg = _('Use this page to edit your project\'s Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.');
 	}
 }
 
+project_admin_header(array('title'=> $title,'group'=>$group_id));
+
+echo '<p>'.$msg.'</p>';
 echo '
-<p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;role_id='. $role_id .'" method="post">';
 
 if (USE_PFO_RBAC) {

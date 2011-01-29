@@ -5,6 +5,7 @@
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -44,9 +45,7 @@ if ($type == 'week') {
 
 $HTML->header(array('title'=>$title));
 
-print '<h1>'.$title.'</h1>
-
-<p><em>('._('Updated Daily').')</em></p>
+print '<p><em>('._('Updated Daily').')</em></p>
 
 <p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
 

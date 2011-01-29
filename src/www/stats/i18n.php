@@ -31,7 +31,6 @@ require_once $gfwww.'stats/site_stats_utils.php';
 session_require_global_perm ('forge_stats', 'read') ;
 
 $HTML->header(array('title' => sprintf(_('%1$s I18n Statistics: Languages Distributions'), forge_get_config ('forge_name'))));
-echo "<h1>".sprintf(_('Languages Distributions'), forge_get_config ('forge_name'))." </h1>";
 echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
 
 $total=db_result(db_query_params('SELECT count(user_name) AS total FROM users', array()),0,'total');

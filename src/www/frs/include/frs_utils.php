@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -68,11 +69,9 @@ function frs_header($params) {
 
 	$params['toptab']='frs';
 	$params['group']=$group_id;
-	site_project_header($params);
-	echo '<h1>' . $params['title'] . '</h1>';
 
 	if (forge_check_perm ('frs', $group_id, 'write')) {
-		echo $HTML->subMenu(
+		$params['submenu'] = $HTML->subMenu(
 			array(
 				_('View File Releases'),
 				_('Reporting'),
@@ -85,6 +84,7 @@ function frs_header($params) {
 				)
 			);
 	}
+	site_project_header($params);
 }
 
 function frs_footer() {

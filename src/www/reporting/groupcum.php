@@ -54,7 +54,6 @@ if ($start == $end) {
 report_header(_('Cumulative Projects'));
 
 ?>
-<h2><?php echo _('Cumulative Projects'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>

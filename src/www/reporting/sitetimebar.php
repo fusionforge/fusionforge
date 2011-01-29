@@ -55,7 +55,6 @@ if ($typ != 'r' && $start == $end) {
 report_header(_('Site-Wide Time Tracking'));
 
 ?>
-<h2><?php echo _('Site-Wide Time Tracking'); ?></h2>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="typ" value="<?php echo $typ; ?>" />
 <table><tr>

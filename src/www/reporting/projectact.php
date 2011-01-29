@@ -57,7 +57,6 @@ if ($start == $end) {
 report_header(_('Project Activity'));
 
 ?>
-<h2><?php echo _('Project Activity'); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="sw" value="<?php echo $sw; ?>" />

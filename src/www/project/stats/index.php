@@ -4,6 +4,7 @@
  *
  * Copyright 2003 GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -75,19 +76,23 @@ if (!$SPAN) {
 	if ($delta > 365) $SPAN=3;
 }
 
-project_admin_header(array('title'=>_('Project Activity').' '.$group->getPublicName(),'group'=>$group_id,'toptab'=>'admin'));
-
 $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads')) ;
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }
+
+$params['title'] = _('Project Statistics');
+$params['group'] = $group_id;
+$params['toptab'] = 'activity';
+$params['submenu'] = $HTML->subMenu(array(_('Statistics')), array('/project/stats/?group_id='.$group_id));
+
+site_project_header($params);
 
 //
 // BEGIN PAGE CONTENT CODE
 //
 ?>
 <div align="center">
-<h1><?php echo _('Project Activity'); ?></h1>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
@@ -105,6 +110,6 @@ if ($end && !is_numeric($end)) { $end = false; }
 </div>
 <?php
 
-project_admin_footer( array() );
+site_project_footer( array() );
 
 ?>

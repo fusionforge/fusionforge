@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2010 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -230,7 +230,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->assertTrue($this->isTextPresent("yourcategory"));
 
         // Set Task1 to mycategory
-        $this->click("link=To Do: Browse tasks");
+        $this->click("link=To Do");
         $this->waitForPageToLoad("30000");
         $this->click("link=exact:Task1: Hello Paris");
         $this->waitForPageToLoad("30000");
@@ -239,7 +239,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->waitForPageToLoad("30000");
 
         // Set Task2 to yourcategory
-        $this->click("link=To Do: Browse tasks");
+        $this->click("link=To Do");
         $this->waitForPageToLoad("30000");
         $this->click("link=exact:Task2: Hello France");
         $this->waitForPageToLoad("30000");
@@ -275,7 +275,7 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->assertFalse($this->isTextPresent("Task3:"));
 
         // Set Detail view to Detailed
-        $this->click("link=To Do: Browse tasks");
+        $this->click("link=To Do");
         $this->waitForPageToLoad("30000");
         $this->select("_category_id", "label=Any");
         $this->select("_view", "label=Detailed");
@@ -331,7 +331,7 @@ class CreateTask extends FForge_SeleniumTestCase
     function deleteTask()
     {
         // Delete a task
-        $this->click("link=To Do: Browse tasks");
+        $this->click("link=To Do");
         $this->waitForPageToLoad("30000");
         $this->click("link=exact:Task3: Hello World");
         $this->waitForPageToLoad("30000");
@@ -358,7 +358,7 @@ class CreateTask extends FForge_SeleniumTestCase
 	$this->waitForPageToLoad("30000");
 	$this->click("link=Tasks");
 	$this->waitForPageToLoad("30000");	    
-        $this->click("link=To Do: Browse tasks");
+        $this->click("link=To Do");
         $this->waitForPageToLoad("30000");
         $this->click("link=exact:Task1: Hello Paris");
         $this->waitForPageToLoad("30000");

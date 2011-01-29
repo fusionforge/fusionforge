@@ -162,7 +162,6 @@ if (getStringFromRequest('submit')) {
 }
 
 site_header(array('title'=>_('Register Project')));
-echo '<h1>' . _('Register Project') . '</h1>';
 ?>
 
 <p>

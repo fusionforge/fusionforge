@@ -43,7 +43,6 @@ if (!$res_logins || db_numrows($res_logins) < 1) {
 }
 
 $HTML->header(array('title'=>_('Most Recent Opened Sessions')));
-print '<h1>'._('Most Recent Opened Sessions').'</h1>';
 
 ?>
 

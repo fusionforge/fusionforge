@@ -110,9 +110,7 @@ if (getStringFromRequest('submit')) {
 	}
 }
 
-$adminheadertitle=sprintf(_('Project Admin: %1$s'), $group->getPublicName() );
-project_admin_header(array('title'=>$adminheadertitle, 'group'=>$group->getID()));
-
+project_admin_header(array('title'=>_('Project Information'), 'group'=>$group->getID()));
 ?>
 
 <table class="my-layout-table">

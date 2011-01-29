@@ -139,9 +139,10 @@ if ($group_project_id || $rows) {
 	$title_arr[]=_('Category');
 	$title_arr[]=' ';
 
-	echo $HTML->listTableTop ($title_arr);
+	$xi = 0;
+	$total_hours = 0;
 
-    $xi = 0;
+	echo $HTML->listTableTop ($title_arr);
 	while ($r=db_fetch_array($res)) {
 		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&amp;project_task_id='.$r['project_task_id'].'" method="post">
 			<input type="hidden" name="submit" value="1" />

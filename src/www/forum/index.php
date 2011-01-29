@@ -5,6 +5,7 @@
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -60,7 +61,7 @@ if ($group_id) {
 
 //	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 
-	echo $HTML->subMenu(array(_("My Monitored Forums")),array("/forum/myforums.php?group_id=$group_id"));
+	echo $HTML->printsubMenu(array(_("My Monitored Forums")),array("/forum/myforums.php?group_id=$group_id"));
 
 	plugin_hook ("blocks", "forum index");
 
@@ -82,9 +83,9 @@ if ($group_id) {
 				case 1 : $modlvl = _('Anonymous & Non Project Users');break;
 				case 2 : $modlvl = _('All Except Admins');break;
 			}
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .
-				'&amp;group_id=' . $group_id . '">'.
-				html_image("ic/forum20w.png","20","20") .
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td>'.
+				'<a href="'.util_make_uri('/forum/forum.php?forum_id='.$farr[$j]->getID().'&amp;group_id='.$group_id).'">'.
+				html_image('ic/forum20w.png') .
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a></td>
 				<td>'.$farr[$j]->getDescription().'</td>

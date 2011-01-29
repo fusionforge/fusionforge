@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright 2010, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -30,7 +31,7 @@ class RBAC extends FForge_SeleniumTestCase
 
 		$this->click("link=Admin");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Project Admin: ProjectA"));
+		$this->assertTrue($this->isTextPresent("Project Information"));
 		$this->click("link=Users and permissions");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Members of ProjectA"));

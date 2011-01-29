@@ -68,9 +68,12 @@ if (isLogged()) {
                         $_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
                         $request->params['group_id'] = $group_id; //bad!
                         if (user_ismember($group_id, 'A') || user_is_super_user()) {
-                            $title = _("Project info").' - '. $project->getPublicName();
+							if (HTTPRequest::instance()->get('update') == 'layout') {
+								$title = _("Customize layout");
+							} else {
+								$title = _("Add widgets");
+							}
                             site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'));
-							use_javascript('/scripts/codendi/LayoutManager.js');
                             $lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
                             site_footer(array());
                         } else {

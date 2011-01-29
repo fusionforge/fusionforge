@@ -32,7 +32,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 site_admin_header(array('title'=>_('Configuration Manager')));
-echo '<h1>' . _('Configuration Manager') . '</h1>';
 
 echo "<h2>".sprintf (_('Configuration from the config API (*.ini files)'))."</h2>" ;
 

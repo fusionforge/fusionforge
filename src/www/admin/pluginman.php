@@ -105,7 +105,6 @@ if (getStringFromRequest('update')) {
 }
 
 site_admin_header(array('title'=>_('Plugin Manager')));
-echo '<h1>' . _('Plugin Manager') . '</h1>';
 
 ?>
 <form name="theform" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">

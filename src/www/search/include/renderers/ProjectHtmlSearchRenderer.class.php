@@ -53,7 +53,6 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	function writeHeader() {
 		$GLOBALS['HTML']->header(array('title'=>_('Project Search'), 'pagename'=>'search'));
 		parent::writeHeader();
-		echo '<h1>' . _('Project Search') . '</h1>';
 	}
 
 	/**

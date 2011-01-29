@@ -170,7 +170,6 @@ To stop monitoring this user, login to %s and visit the following link:
 	}
 
     site_user_header(array('title'=>_('My Diary And Notes')));
-	echo '<h1>' . _('My Diary And Notes') . '</h1>';
 
 	echo '
 	<h2>'. $info_str .'</h2>

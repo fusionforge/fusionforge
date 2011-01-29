@@ -46,7 +46,6 @@ $user_id = user_getid();
 $title = sprintf(_('Surveys for %1$s'), $g->getPublicName());
 $sh = new SurveyHtml();
 $sh->header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>';
 
 plugin_hook ("blocks", "survey index");
 

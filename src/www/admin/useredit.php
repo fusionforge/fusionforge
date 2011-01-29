@@ -3,6 +3,7 @@
  * Site Admin user properties editing page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -84,7 +85,6 @@ if (getStringFromRequest('delete_user') != '' && getStringFromRequest('confirm_d
 
 $title = _('Site Admin: User Info');
 site_admin_header(array('title'=>$title));
-echo '<h1>' . $title . '</h1>'
 
 ?>
 <h2><?php echo _('Account Information'); ?><sup>1</sup></h2>
@@ -96,7 +96,7 @@ echo '<h1>' . $title . '</h1>'
 <table>
 <tr>
 <td>
-<?php echo _('User ID:'); ?>
+<?php echo _('User Id:'); ?>
 </td>
 <td>
 <?php echo $u->getID(); ?>

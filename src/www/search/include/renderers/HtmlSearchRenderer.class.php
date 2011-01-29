@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2004 (c) Guillaume Smet / Open Wide
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -97,7 +98,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$searchQuery =& $this->searchQuery;
 		$query =& $this->query;
 		
-		$html = '<h1>'.sprintf(_('Search results for <em>%1$s</em>'), $query['words']).'</h1>';
+		$html = '<h2>'.sprintf(_('Search results for <em>%1$s</em>'), $query['words']).'</h2>';
 		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
 			$html .= '<p><strong>'.sprintf(_('No matches found for <em>%1$s</em>'), $query['words']).'</strong></p>';
 			$html .= db_error();
@@ -204,7 +205,6 @@ class HtmlSearchRenderer extends SearchRenderer {
 	function getResultId($fieldName) {
 		return db_result($this->searchQuery->getResult(), 0, $fieldName);
 	}
-
 }
 
 ?>

@@ -52,6 +52,7 @@ img {
 h1 {
     color: black;
     -webkit-mask-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.296875)), to(black));
+    display: none;
 }
 
 h2 {

@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -56,14 +57,6 @@ if ($pg_arr && $pgf->isError()) {
 pm_header(array('title'=>sprintf(_('Subprojects for %1$s'), $g->getPublicName())));
 
 plugin_hook("blocks", "tasks index");
-
-if (forge_check_perm ('pm_admin', $group_id)) {
-	$menu_text=array();
-	$menu_links=array();
-	$menu_text[]=_('Admin');
-	$menu_links[]='/pm/admin/?group_id='.$group_id;
-	echo $HTML->subMenu($menu_text,$menu_links);
-}
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
 	echo '<p class="warning_msg">'._('No Subprojects Found').'</p>';

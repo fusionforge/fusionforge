@@ -81,7 +81,6 @@ if ($sw) {
 	$a2[]='subproject';
 
 	?>
-	<h2><?php echo _('User Time Reporting'); ?></h2>
 
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>" />

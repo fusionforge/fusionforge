@@ -29,7 +29,6 @@ require_once $gfwww.'admin/admin_utils.php';
 session_require_global_perm ('forge_admin');
  
 $HTML->header(array('title'=>_('User List')));
-echo '<h1>' . _('User List') . '</h1>';
 
 /**
  * performAction() - Updates the indicated user status

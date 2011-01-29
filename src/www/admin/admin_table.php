@@ -339,16 +339,12 @@ function getUnitLabel($unit) {
 	return $unit;
 }
 
-
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
 session_require_global_perm ('forge_admin');
 
 $HTML->header(array('title'=>sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit)))));
-
-echo '<h1>'.sprintf(_('Edit the %1$ss Table'), ucwords(getUnitLabel($unit))).'</h1>
-<p>'.util_make_link ('/admin/',_('Site Admin Home')).'</p>';
 
 // $table, $unit and $primary_key are variables passed from the parent scripts
 $id = getStringFromRequest('id');

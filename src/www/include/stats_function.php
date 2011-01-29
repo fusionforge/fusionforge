@@ -37,7 +37,6 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		$j=0;
@@ -68,7 +67,6 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		$count=array();
@@ -90,7 +88,6 @@ function stats_sf_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		$count=array();
@@ -120,7 +117,6 @@ function stats_project_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Logo Showings By Day');
@@ -135,7 +131,6 @@ function stats_project_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Logo Showings By Project');
@@ -156,7 +151,6 @@ function stats_browser_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Page Views By Browser');
@@ -171,7 +165,6 @@ function stats_browser_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		GraphResult($result,'Page Views By Platform');
@@ -186,7 +179,6 @@ function stats_browser_stats() {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<h1>Stats Problem</h1>';
 		echo '<p class="error">Stats Problem'.db_error().'</p>';
 	} else {
 		ShowResultSet($result,'Page Views By Platform/Browser Version');

@@ -30,8 +30,6 @@ require_once $gfcommon.'include/pre.php';
 $HTML->header(array('title'=>sprintf(_('Top %1$s Projects'), forge_get_config ('forge_name'))));
 ?>
 
-<h1><?php printf(_('Top %1$s Projects'), forge_get_config ('forge_name')); ?></h1>
-
 <p><?php printf(_('We track many project usage statistics on %1$s, and display here the top ranked projects in several categories.'), forge_get_config ('forge_name')); ?></p>
 <ul>
 <li><a href="mostactive.php?type=week"><?php echo _('Most Active This Week'); ?></a></li>
