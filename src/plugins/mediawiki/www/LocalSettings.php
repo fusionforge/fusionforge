@@ -111,7 +111,7 @@ $GLOBALS['gfplugins'] = $gfplugins ;
 $GLOBALS['sys_lang'] = forge_get_config('default_language') ;
 $GLOBALS['sys_urlroot'] = forge_get_config('url_root');
 $GLOBALS['sys_session_key'] = forge_get_config('session_key');
-$GLOBALS['sys_session_expire'] = $sys_session_expire;
+$GLOBALS['sys_session_expire'] = forge_get_config('session_expire');
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 

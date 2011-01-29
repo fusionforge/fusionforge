@@ -273,7 +273,7 @@ if (count ($template_projects) > 1) {
 	echo '</p>';
 }
 
-if ($sys_use_private_project) {
+if (forge_get_config('use_private_project')) {
 	$index++;
 	echo '<h3>'.$index.'. '._('Visibility'). '</h3>';
 	echo '<p><input type="radio" name="is_public" value="1" ';
