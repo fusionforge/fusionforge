@@ -60,7 +60,7 @@ if (!$g->usesDocman())
 	exit_disabled();
 
 if ($g->isError())
-	exit_error($g->getErrorMessage(),'docman');
+	exit_error($g->getErrorMessage(), 'docman');
 
 $dirid = getIntFromRequest('dirid');
 if (empty($dirid))
@@ -99,7 +99,7 @@ if (session_loggedin()) {
 	if (!$u || !is_object($u)) {
 		exit_error(_('Could Not Get User'));
 	} elseif ($u->isError()) {
-		exit_error($u->getErrorMessage(),'my');
+		exit_error($u->getErrorMessage(), 'my');
 	}
 	if (!$u->usesTooltips()) {
 		$use_tooltips = 0;
@@ -108,17 +108,17 @@ if (session_loggedin()) {
 
 $df = new DocumentFactory($g);
 if ($df->isError())
-	exit_error($df->getErrorMessage(),'docman');
+	exit_error($df->getErrorMessage(), 'docman');
 
 $dgf = new DocumentGroupFactory($g);
 if ($dgf->isError())
-	exit_error($dgf->getErrorMessage(),'docman');
+	exit_error($dgf->getErrorMessage(), 'docman');
 
 $nested_groups = $dgf->getNested();
 
 $dgh = new DocumentGroupHTML($g);
 if ($dgh->isError())
-	exit_error($dgh->getErrorMessage(),'docman');
+	exit_error($dgh->getErrorMessage(), 'docman');
 
 $df->setDocGroupID($dirid);
 $d_arr =& $df->getDocuments();
