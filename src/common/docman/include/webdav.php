@@ -226,7 +226,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 					$lastpath = $options['path'];
 				}
 				$back_url = substr($options['path'], 0, strrpos($options['path'], strrchr($lastpath,'/')));
-				echo '<a href="'.util_make_url($back_url).'">..</a>';
+				echo '<a href="'.util_make_uri($back_url).'">..</a>';
 			}
 			$res = db_query_params('select * from doc_groups where group_id = $1 and parent_doc_group = $2',
 						array($group_id, $analysed_path['doc_group']));
@@ -237,7 +237,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				$subpath .= '/';
 			}
 			while ($arr = db_fetch_array($res)) {
-				echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
+				echo '<li><a href="'.util_make_uri('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['groupname']).'">'.$arr['groupname'].'</a></li>';
 			}
 			$res = db_query_params('select filename, filetype from doc_data where group_id = $1 and doc_group = $2 and stateid = 1',
 						array($group_id, $analysed_path['doc_group']));
@@ -251,7 +251,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 						break;
 					}
 					default: {
-						echo '<li><a href="'.util_make_url('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename']).'">'.$arr['filename'].'</a></li>';
+						echo '<li><a href="'.util_make_uri('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename']).'">'.$arr['filename'].'</a></li>';
 					}
 				}
 			}

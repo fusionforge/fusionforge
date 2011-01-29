@@ -99,7 +99,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
 		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
 
-	$return_msg = _('Document Updated successfully.');
+	$return_msg = sprintf(_('Document %s updated successfully.'),$d->getFilename());
 	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg));
 }
 ?>

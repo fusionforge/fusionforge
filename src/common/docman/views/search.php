@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2005, Fabio Bertagnin
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -39,7 +39,8 @@ if (empty($gfcommon)) {
 $handle = $vtp->Open($templates_dir."/docman/templates/search.tpl.html");
 $vtp->NewSession($handle,"MAIN");
 
-$allchecked = ""; $onechecked = "";
+$allchecked = "";
+$onechecked = "";
 if (getStringFromPost('search_type') == "one") {$onechecked = "checked";}
 else {$allchecked = "checked";}
 $vtp->AddSession($handle,"FORMSEARCH");
@@ -55,15 +56,15 @@ $vtp->CloseSession($handle,"FORMSEARCH");
 
 if (getStringFromPost('cmd') == "search") {
 	$textsearch = getStringFromPost("textsearch");
-	$textsearch = prepare_search_text ($textsearch);
+	$textsearch = prepare_search_text($textsearch);
 	$mots = preg_split("/[\s,]+/",$textsearch);
-	$qpa = db_construct_qpa (false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
+	$qpa = db_construct_qpa(false, 'SELECT filename, filetype, docid, doc_data.stateid as stateid, doc_states.name as statename, title, description, createdate, updatedate, doc_group, group_id FROM doc_data JOIN doc_states ON doc_data.stateid = doc_states.stateid') ;
 	if (getStringFromPost('search_type') == "one") {
 		if (count($mots) > 0) {
-			$qpa = db_construct_qpa ($qpa, ' AND (FALSE');
+			$qpa = db_construct_qpa($qpa, ' AND (FALSE');
 			foreach ($mots as $mot) {
 				$mot = strtolower($mot);
-				$qpa = db_construct_qpa ($qpa, ' OR title LIKE $1 OR description LIKE $1 OR data_words LIKE $1',
+				$qpa = db_construct_qpa($qpa, ' OR title LIKE $1 OR description LIKE $1 OR data_words LIKE $1',
 							 array("%$mot%"));
 			}
 			$qpa = db_construct_qpa($qpa, ')');
@@ -154,12 +155,12 @@ function get_path_document($groupsarr, $doc_group, $group_id) {
 	foreach ($groupsarr as $group) {
 		if ($group["doc_group"] == $doc_group) {
 			if ($group["parent_doc_group"] == 0) {
-				$href = util_make_url("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
+				$href = util_make_uri("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
 				$rep .= "<a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 				break;
 			}
 			$s = get_path_document($groupsarr, $group["parent_doc_group"], $group_id);
-			$href = util_make_url ("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
+			$href = util_make_uri("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
 			$rep .= "$s / <a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 			break;
 		}

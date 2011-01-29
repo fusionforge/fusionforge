@@ -58,6 +58,7 @@ jQuery(document).ready(function() {
 						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-newdocument', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
 					],
 
@@ -65,7 +66,7 @@ jQuery(document).ready(function() {
 		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
-		docManURL:		'<?php util_make_url("docman") ?>',
+		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
 	});
 });
@@ -153,7 +154,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			default: {
-				$docurl = util_make_url('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
+				$docurl = util_make_uri('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()));
 			}
 		}
 		echo '<td><a href="'.$docurl.'" class="docman-viewfile"';
