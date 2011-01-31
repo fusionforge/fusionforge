@@ -61,7 +61,7 @@ require_once $gfwww.'plugins/mediawiki/LocalSettings.php' ;
 $src_path = forge_get_config('src_path', 'mediawiki');
 $mwscript = $src_path . '/maintenance/'.$mwscript ;
 
-array_unshift ($argv, $mwscript, '--conf', $gfplugins . 'mediawiki/www/LocalSettings.php') ;
+array_unshift ($argv, $mwscript, '--conf', $fusionforge_basedir . '/plugins/mediawiki/www/LocalSettings.php') ;
 
 while (@ob_end_flush());
 
