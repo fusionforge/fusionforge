@@ -53,6 +53,12 @@ while ( $row = db_fetch_array($project_res) ) {
 		. "/$project";
 	cron_debug("Checking $project...");
 
+	$res = db_query_params('DELETE FROM plugin_mediawiki_interwiki WHERE iw_prefix=$1', array($project));
+	$url = util_make_url("/plugins/mediawiki/wiki/$project/index.php");
+	$res = db_query_params('INSERT INTO plugin_mediawiki_interwiki VALUES ($1, $2, 1, 0)',
+			       array($project,
+				     $url));
+
 	// Create the project directory if necessary
 	if (is_dir($project_dir)) {
 		cron_debug("  Project dir $project_dir exists, so I assumen the project already exists.");

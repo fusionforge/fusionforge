@@ -50,6 +50,10 @@ foreach ($argv as $project) {
   if (!$res) {
     echo db_error();
   }
+  $res = db_query_params('DELETE FROM plugin_mediawiki_interwiki WHERE iw_prefix=$1', array($project));
+  if (!$res) {
+    echo db_error();
+  }
 }
 
   // Local Variables:
