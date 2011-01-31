@@ -258,56 +258,58 @@ function NoLinkOnMainPage(&$personal_urls){
 }
 $wgHooks['PersonalUrls'][]='NoLinkOnMainPage';
 
-class SpecialForgeRedir extends SpecialPage {
-	var $dstappendself = false;
+if (isset($_SERVER['SERVER_SOFTWARE'])) {
+	class SpecialForgeRedir extends SpecialPage {
+		var $dstappendself = false;
 
-	function getTitle() {
-		return 'SpecialForgeRedir';
-	}
-
-	function getRedirect() {
-		return $this;
-	}
-
-	function getRedirectQuery() {
-		return $this;
-	}
-
-	function getFullUrl() {
-		$u = $this->dst;
-		if ($this->dstappendself) {
-			$u .= urlencode(getStringFromServer('REQUEST_URI'));
+		function getTitle() {
+			return 'SpecialForgeRedir';
 		}
-		return util_make_url($u);
+
+		function getRedirect() {
+			return $this;
+		}
+
+		function getRedirectQuery() {
+			return $this;
+		}
+
+		function getFullUrl() {
+			$u = $this->dst;
+			if ($this->dstappendself) {
+				$u .= urlencode(getStringFromServer('REQUEST_URI'));
+			}
+			return util_make_url($u);
+		}
 	}
-}
 
-class SpecialForgeRedirLogin extends SpecialForgeRedir {
-	var $dstappendself = true;
-	var $dst = '/account/login.php?return_to=';
-}
+	class SpecialForgeRedirLogin extends SpecialForgeRedir {
+		var $dstappendself = true;
+		var $dst = '/account/login.php?return_to=';
+	}
 
-class SpecialForgeRedirCreateAccount extends SpecialForgeRedir {
-	var $dst = '/account/register.php';
-}
+	class SpecialForgeRedirCreateAccount extends SpecialForgeRedir {
+		var $dst = '/account/register.php';
+	}
 
-class SpecialForgeRedirResetPass extends SpecialForgeRedir {
-	var $dst = '/account/lostpw.php';
-}
+	class SpecialForgeRedirResetPass extends SpecialForgeRedir {
+		var $dst = '/account/lostpw.php';
+	}
 
-class SpecialForgeRedirLogout extends SpecialForgeRedir {
-	var $dstappendself = true;
-	var $dst = '/account/logout.php?return_to=';
-}
+	class SpecialForgeRedirLogout extends SpecialForgeRedir {
+		var $dstappendself = true;
+		var $dst = '/account/logout.php?return_to=';
+	}
 
-function DisableLogInOut(&$mList) {
-	$mList['Userlogin'] = 'SpecialForgeRedirLogin';
-	$mList['CreateAccount'] = 'SpecialForgeRedirCreateAccount';
-	$mList['Resetpass'] = 'SpecialForgeRedirResetPass';
-	$mList['Userlogout'] = 'SpecialForgeRedirLogout';
-	return true;
+	function DisableLogInOut(&$mList) {
+		$mList['Userlogin'] = 'SpecialForgeRedirLogin';
+		$mList['CreateAccount'] = 'SpecialForgeRedirCreateAccount';
+		$mList['Resetpass'] = 'SpecialForgeRedirResetPass';
+		$mList['Userlogout'] = 'SpecialForgeRedirLogout';
+		return true;
+	}
+	$GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
 }
-$GLOBALS['wgHooks']['SpecialPage_initList'][] = 'DisableLogInOut';
 
 $GLOBALS['wgHooks']['UserLoadFromSession'][]='FusionForgeMWAuth';
 
