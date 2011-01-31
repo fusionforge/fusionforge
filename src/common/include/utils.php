@@ -1398,6 +1398,16 @@ function util_randnum($min=0,$max=32767) {
 	return ($min + $v);
 }
 
+// sys_get_temp_dir() is only available for PHP >= 5.2.1
+if ( !function_exists('sys_get_temp_dir')) {
+	function sys_get_temp_dir() {
+		if ($temp=getenv('TMP'))    return $temp;
+		if ($temp=getenv('TEMP'))   return $temp;
+		if ($temp=getenv('TMPDIR')) return $temp;
+		return '/tmp';
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
