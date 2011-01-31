@@ -115,6 +115,9 @@ $GLOBALS['sys_session_expire'] = forge_get_config('session_expire');
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
+require_once("$IP/includes/Exception.php");
+require_once("$IP/includes/db/Database.php");
+require_once("$IP/includes/db/DatabasePostgres.php");
 class DatabaseForge extends DatabasePostgres {
 	function DatabaseForge($server=false, $user=false, $password=false,
 			       $dbName=false, $failFunction=false, $flags=0) {
