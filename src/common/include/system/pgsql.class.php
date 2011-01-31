@@ -157,7 +157,7 @@ class pgsql extends System {
 				}
 			}
 			foreach (array_unique($pids) as $pid) {
-				$this->sysGroupAddUser($p->getID(), $user_id) ;
+				$this->sysGroupAddUser($pid, $user_id) ;
 			}
 		}
 		return true;

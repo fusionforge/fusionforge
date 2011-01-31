@@ -38,7 +38,7 @@ $HTML->header(array('title'=>_('User List')));
  * @param               string  $user_id - the user id to act upon
  */
 function performAction($newStatus, $statusString, $user_id) {
-	$u =& user_get_object($user_id);
+	$u = user_get_object($user_id);
 	if (!$u || !is_object($u)) {
 		exit_error(_('Could Not Get User'),'home');
 	} elseif ($u->isError()) {

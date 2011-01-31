@@ -31,7 +31,7 @@ $fb= new ArtifactExtraField($ath,$id);
 // Get a list of all extra fields in trackers and groups that you have perms to admin
 
 $project_ids = array () ;
-foreach (session_getuser()->getGroups() as $p) {
+foreach (session_get_user()->getGroups() as $p) {
 	if (forge_check_perm ('tracker_admin', $p->getID())) {
 		$project_ids[] = $p->getID() ;
 	}
