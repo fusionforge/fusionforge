@@ -63,7 +63,7 @@ $mwscript = $src_path . '/maintenance/'.$mwscript ;
 
 array_unshift ($argv, $mwscript, '--conf', $gfplugins . 'mediawiki/www/LocalSettings.php') ;
 
-ob_end_flush() ;
+while (@ob_end_flush());
 
 require_once $mwscript ;
 

@@ -34,7 +34,7 @@ function form_generate_key() {
 	db_begin();
 	// there's about 99.999999999% probability this loop will run only once :) 
 	while(!$is_new) {
-		$key = md5(microtime() + rand() + $_SERVER["REMOTE_ADDR"]);
+		$key = md5(microtime() + util_randbytes() + $_SERVER["REMOTE_ADDR"]);
 		$res = db_query_params ('SELECT * FROM form_keys WHERE key=$1', array ($key));
 		if (!db_numrows($res)) {
 			$is_new=true;	

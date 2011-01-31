@@ -35,7 +35,7 @@ $return_to = getStringFromRequest('return_to');
 //
 if ($return_to) {
         $tmpreturn=explode('?',$return_to);
-        if (!@is_file(forge_get_config('url_root').$tmpreturn[0]) && !@is_dir(forge_get_config('url_root').$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1) && !(strpos($tmpreturn[0],'mediawiki') == 1)) {
+        if (!@is_file(forge_get_config('url_root').$tmpreturn[0]) && !@is_dir(forge_get_config('url_root').$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1) && !(strpos($tmpreturn[0],'plugins/mediawiki') == 1)) {
 	$return_to='';
 }				        }
 

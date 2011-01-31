@@ -88,7 +88,7 @@ class ForumGateway extends Error {
 	function copyMailTmp() {
 		// Unfortunatly we need a temp file
 		// mailparse needs to read content several times
-		$tmpfile = tempnam ("/tmp", "forum_gateway.".rand()."-".rand());
+		$tmpfile = tempnam ("/tmp", "forum_gateway.".util_randnum()."-".util_randnum());
 		$in = fopen("php://stdin", "r");
 		$out = fopen($tmpfile, "w");
 	

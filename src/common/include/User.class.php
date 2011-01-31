@@ -330,7 +330,7 @@ class GFUser extends Error {
 			}
 			// If we're really unlucky, then let's go brute-force
 			while (!$unix_name) {
-				$c = substr (md5($email . rand()), 0, 15);
+				$c = substr (md5($email . util_randbytes()), 0, 15);
 				if (account_namevalid($c)
 				    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
 								  array($c))) == 0) {
@@ -344,7 +344,7 @@ class GFUser extends Error {
 			return false;
 		}
 		// if we got this far, it must be good
-		$confirm_hash = substr(md5($password1 . rand() . microtime()),0,16);
+		$confirm_hash = substr(md5($password1 . util_randbytes() . microtime()),0,16);
 		db_begin();
 		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips)
 							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25)',
@@ -907,7 +907,7 @@ Enjoy the site.
 	function setNewEmailAndHash($email, $hash='') {
 
 		if (!$hash) {
-			$hash = substr(md5(strval(time()) . strval(mt_rand())), 0, 16);
+			$hash = substr(md5(strval(time()) . strval(util_randbytes())), 0, 16);
 		}
 
 		if (!$email || !validate_email($email)) {

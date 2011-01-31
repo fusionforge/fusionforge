@@ -216,7 +216,7 @@ abstract class SCMPlugin extends Plugin {
 		
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				// print '<iframe src="'.util_make_url('/scm/browser.php?title='.$group->getUnixName()).'" frameborder="no" width=100% height=700></iframe>' ;
+				// print '<iframe src="'.util_make_url('/scm/browser.php?title='.$group->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
 			}
 		}
 	}

@@ -948,21 +948,22 @@ function human_readable_bytes($bytes, $base10=false, $round=0, $labels=array(' b
  *	@return	array	array of file names.
  */
 function &ls($dir,$filter=false) {
-	if (!is_dir ($dir)) {
-		$out = array () ;
-		return $out ;
-	}
-	exec('ls -c1 '.$dir,$out);
-	if ($filter) {
-		for ($i=0; $i<count($out); $i++) {
-			if (util_is_valid_filename($out[$i]) && is_file($dir.'/'.$out[$i])) {
-				$filtered[]=$out[$i];
+	$out = array();
+
+	if (is_dir($dir) && ($h = opendir($dir))) {
+		while (($f = readdir($h)) !== false) {
+			if ($f[0] == '.')
+				continue;
+			if ($filter) {
+				if (!util_is_valid_filename($f) ||
+				    !is_file($dir . "/" . $f))
+					continue;
 			}
+			$out[] = $f;
 		}
-		return $filtered;
-	} else {
-		return $out;
+		closedir($h);
 	}
+	return $out;
 }
 
 /**
@@ -1375,6 +1376,25 @@ function util_get_compressed_file_extension() {
 	} else {
 		return '.compressed';
 	}
+
+function util_randbytes($num=6) {
+	$f = fopen("/dev/urandom", "rb");
+	$b = fread($f, $num);
+	fclose($f);
+
+	if (strlen($b) != $num)
+		exit_error(_('Internal Error'),
+			   _('Could not read from random device'));
+
+	return ($b);
+}
+
+/* maximum: 2^31 - 1 due to PHP weakness */
+function util_randnum($min=0,$max=32767) {
+	$ta = unpack("L", util_randbytes(4));
+	$n = $ta[0] & 0x7FFFFFFF;
+	$v = $n % (1 + $max - $min);
+	return ($min + $v);
 }
 
 // Local Variables:

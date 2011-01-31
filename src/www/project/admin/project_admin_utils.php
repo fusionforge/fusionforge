@@ -215,22 +215,8 @@ function prdb_namespace_seek($namecheck) {
 } //end prdb_namespace_seek()
 
 function random_pwgen() {
-
-	srand ( (double) microtime()*10000000); 
-	$rnpw = "";
-
-	for ($i = 0; $i < 10; $i++) {
-
-		$rn = rand(1,2);
-
-		if ($rn == 1) {
-			$rnpw .= rand(1,9);
-		} else {
-			$rnpw .= chr(rand(65,122));
-		}
-
-	}
-	return $rnpw;
+	return (substr(strtr(base64_encode(util_randbytes(9)), '+', '.'),
+		       0, 10));
 }
 
 function permissions_blurb() {

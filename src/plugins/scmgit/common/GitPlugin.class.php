@@ -197,7 +197,7 @@ class GitPlugin extends SCMPlugin {
 		
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="no" width=100% height=700></iframe>' ;
+				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
 			}
 		}
 	}

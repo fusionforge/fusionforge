@@ -297,10 +297,6 @@ class Group extends Error {
 			$this->setError(_('Your project description is too long. Please make it smaller than 256 bytes.'));
 			return false;
 		} else {
-
-			srand((double)microtime()*1000000);
-			$random_num = rand(0,1000000);
-
 			db_begin();
 
 			$res = db_query_params('
@@ -321,20 +317,20 @@ class Group extends Error {
 					built_from_template
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
-						array(htmlspecialchars ($group_name),
-						      $is_public,
-						      $unix_name,
-						      htmlspecialchars($description),
-						      $unix_name.".".forge_get_config('web_host'),
-						      $unix_name.".".forge_get_config('web_host'),
-						      'P',
-						      $unix_box,
-						      $scm_box,
-						      htmlspecialchars($purpose),
-						      time(),
-						      $is_public,
-						      md5($random_num),
-						      $built_from_template));
+						array (htmlspecialchars ($group_name),
+						       $is_public,
+						       $unix_name,
+						       htmlspecialchars($description),
+						       $unix_name.".".forge_get_config('web_host'),
+						       $unix_name.".".forge_get_config('web_host'),
+						       'P',
+						       $unix_box,
+						       $scm_box,
+						       htmlspecialchars($purpose),
+						       time(),
+						       $is_public,
+						       md5(util_randbytes()),
+						       $built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
 				db_rollback();

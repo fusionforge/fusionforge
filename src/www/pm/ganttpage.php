@@ -177,7 +177,7 @@ echo '<img src="'. getStringFromServer('PHP_SELF') .
 		'&amp;_resolution='.$_resolution.
 		'&amp;_category_id='.$_category_id.
 		'&amp;_size='.$_size.
-		'&amp;rand='.time().'" alt="'. _('Gantt Chart').'" />';
+		'&amp;rand='.util_randnum().'" alt="'. _('Gantt Chart').'" />';
 
 //pm_footer(array());
 ?>

@@ -148,7 +148,7 @@ class MailingList extends Error {
 			return false;
 		}
 
-		$listPassword = substr(md5($GLOBALS['session_ser'] . time() . rand(0,40000)), 0, 16);
+		$listPassword = substr(md5($GLOBALS['session_ser'] . time() . util_randbytes()), 0, 16);
 		
 		db_begin();
 		$result = db_query_params ('INSERT INTO mail_group_list (group_id,list_name,is_public,password,list_admin,status,description) VALUES ($1,$2,$3,$4,$5,$6,$7)',
@@ -170,7 +170,7 @@ class MailingList extends Error {
 		$this->fetchData($this->groupMailingListId);
 		
 		$user = &user_get_object($creator_id);
-		$userEmail = $user->getEmail();
+		$userEmail = $user ? $user->getEmail() : "";
 		if(empty($userEmail) || !validate_email($userEmail)) {
 			$this->setInvalidEmailError();
 			db_rollback();
