@@ -54,7 +54,7 @@ while ( $row = db_fetch_array($project_res) ) {
 	cron_debug("Checking $project...");
 
 	$res = db_query_params('DELETE FROM plugin_mediawiki_interwiki WHERE iw_prefix=$1', array($project));
-	$url = util_make_url("/plugins/mediawiki/wiki/$project/index.php");
+	$url = util_make_url("/plugins/mediawiki/wiki/$project/index.php/$1");
 	$res = db_query_params('INSERT INTO plugin_mediawiki_interwiki VALUES ($1, $2, 1, 0)',
 			       array($project,
 				     $url));
