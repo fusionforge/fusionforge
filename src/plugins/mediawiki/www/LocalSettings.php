@@ -72,7 +72,7 @@ $wgScriptPath       = "/plugins/mediawiki/wiki/$fusionforgeproject" ;
 $wgEmergencyContact = forge_get_config('admin_email');
 $wgPasswordSender = forge_get_config('admin_email');
 
-$wgDBtype           = "postgres";
+$wgDBtype           = "forge";
 $wgDBserver         = forge_get_config('database_host') ;
 $wgDBname           = forge_get_config('database_name');
 $wgDBuser           = forge_get_config('database_user') ;
@@ -114,6 +114,26 @@ $GLOBALS['sys_session_key'] = forge_get_config('session_key');
 $GLOBALS['sys_session_expire'] = forge_get_config('session_expire');
 $GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
+
+class DatabaseForge extends DatabasePostgres {
+	function DatabaseForge($server=false, $user=false, $password=false,
+			       $dbName=false, $failFunction=false, $flags=0) {
+		global $wgDBtype;
+		
+		$wgDBtype = "postgres";
+		return DatabasePostgres::DatabasePostgres($server, $user,
+							  $password, $dbName, $failFunction, $flags);
+	}
+	
+	function tableName($name) {
+		switch ($name) {
+		case 'interwiki':
+			return 'public.plugin_mediawiki_interwiki';
+		default:
+			return DatabasePostgres::tableName($name);
+		}
+	}
+}
 
 function FusionForgeRoleToMediawikiGroupName ($role, $project) {
 	if ($role instanceof RoleAnonymous) {

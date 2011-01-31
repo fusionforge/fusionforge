@@ -2,6 +2,7 @@ plugins/mediawiki/*                usr/share/gforge/plugins/mediawiki/
 plugins/mediawiki/bin/*            usr/share/gforge/plugins/mediawiki/bin/
 plugins/mediawiki/common/*         usr/share/gforge/plugins/mediawiki/common/
 plugins/mediawiki/cronjobs/*       usr/share/gforge/plugins/mediawiki/cronjobs/
+plugins/mediawiki/db/*		   usr/share/gforge/plugins/mediawiki/lib/
 plugins/mediawiki/www/*            usr/share/gforge/plugins/mediawiki/www/
 plugins/mediawiki/mediawiki-skin/* usr/share/mediawiki/skins/
 plugins/mediawiki/etc/httpd.d/*    usr/share/gforge/etc/httpd.d/
