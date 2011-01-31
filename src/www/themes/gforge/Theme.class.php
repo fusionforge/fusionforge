@@ -3,7 +3,7 @@
  * Default Theme
  *
  * Copyright 2010 (c) FusionForge Team
- * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *

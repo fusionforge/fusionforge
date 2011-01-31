@@ -28,6 +28,8 @@ require $gfcommon.'include/cron_utils.php';
 $database=forge_get_config('database_name');
 $username=forge_get_config('database_user');
 $password=forge_get_config('database_password');
+$host=forge_get_config('database_host');
+$port=forge_get_config('database_port');
 
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
@@ -66,7 +68,28 @@ if (!preg_match('/\\/$/',$sys_path_to_backup)) {
 
 $output = "";
 $err = "";
-@exec('echo -n -e "'.$password.'\n" | pg_dump -U '.$username.' -v -Ft -b 2>&1 '.$database.' > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
+$dump_cmd = 'pg_dump -U ' . $username;
+if ($host != '') {
+	$dump_cmd .= ' -h ' . $host;
+}
+if ($file != '') {
+	$dump_cmd .= ' -p ' . $port;
+}
+
+$tmpfname = tempnam(sys_get_temp_dir(), "tmp");
+
+$handle = fopen($tmpfname, "w");
+$line = '';
+$line .= $host ? "$host:" : "localhost:";
+$line .= $port ? "$port:" : "5432:";
+$line .= "$database:$username:$password";
+fwrite($handle, "$line");
+fclose($handle);
+
+$dump_cmd .= ' -v -Ft -b '.$database;
+@exec('PGPASSFILE='.$tmpfname.' '.$dump_cmd.' 2>&1 > '.$sys_path_to_backup.'db-'.$database.'-tmp-'.$datetime.'.tar ',$output,$retval);   //proceed with db dump
+unlink($tmpfname);
+
 if($retval!=0){
 	$err.= implode("\n", $output);
 }

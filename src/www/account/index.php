@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *

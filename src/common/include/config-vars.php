@@ -145,7 +145,6 @@ forge_define_config_item ('user_registration_accept_conditions', 'core', $GLOBAL
 forge_set_config_item_bool ('user_registration_accept_conditions', 'core') ;
 forge_define_config_item ('use_private_project', 'core', $GLOBALS['sys_use_private_project']);
 forge_set_config_item_bool ('use_private_project', 'core') ;
-
 forge_define_config_item ('compression_method', 'core', 'gzip') ;
 
 // Arch plugin

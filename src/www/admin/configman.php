@@ -33,7 +33,7 @@ require_once $gfwww.'admin/admin_utils.php';
 
 site_admin_header(array('title'=>_('Configuration Manager')));
 
-echo "<h2>".sprintf (_('Configuration from the config API (*.ini files) (experimental)'))."</h2>" ;
+echo "<h2>".sprintf (_('Configuration from the config API (*.ini files)'))."</h2>" ;
 
 $title_arr = array(_('Variable'),_('Configured value'),_('Result (possibly after interpolation)'));
 echo $HTML->listTableTop($title_arr);
