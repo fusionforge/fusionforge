@@ -3,3 +3,12 @@ AliasMatch ^/plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/api.php /usr/local/share/gfor
 AliasMatch ^/plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/index.php /usr/local/share/gforge/www/plugins/mediawiki/index.php
 AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) /var/local/lib/gforge/plugins/mediawiki/wikidata/$1/images/$2
 AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) /usr/share/mediawiki/skins/$2
+AliasMatch ^/plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/extensions/(.*) /usr/share/mediawiki/extensions/$2
+AliasMatch ^/plugins/mediawiki/dumps/(.*)$ /var/local/lib/gforge/plugins/mediawiki/dumps/$1
+
+<Directory /var/local/lib/gforge/plugins/mediawiki/dumps>
+        Options -FollowSymLinks +Indexes
+        AllowOverride None
+        order allow,deny
+        allow from all
+</Directory>
