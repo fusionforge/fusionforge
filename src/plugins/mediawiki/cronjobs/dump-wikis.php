@@ -54,7 +54,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		$tmp = tempnam(forge_get_config('data_path')."/plugins/mediawiki/dumps/", "tmp");
 		system ("$mwwrapper $project dumpBackup.php --current --quiet > $tmp") ;
 		chmod ($tmp, 0644);
-		rename ($tmp, $dumpfile);
+		rename ($tmp, $dump_file);
 	} else {
 		cron_debug("Not dumping $project (private)...");
 		if (file_exists($dump_file)) {

@@ -8,3 +8,4 @@ usr/share/gforge/etc/httpd.d
 usr/share/mediawiki/skins
 usr/share/mediawiki/skins/fusionforge
 var/lib/gforge/plugins/mediawiki/wikidata
+var/lib/gforge/plugins/mediawiki/dumps
