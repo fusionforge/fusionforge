@@ -144,6 +144,12 @@ site_project_header(array(
 
 echo "<h1>MediaWiki Plugin Admin for ".$group->getPublicName()."</h1>\n\n";
 
+echo "<h2>" . _('Nightly XML dump') . "</h2>\n";
+echo '<p>';
+printf(_('<a href="%s">Download</a> the nightly created XML dump (backup) here.'),
+       util_make_url("/plugins/mediawiki/dumps/" . $group_unix_name . ".xml"));
+echo "</p>\n";
+
 echo "<h2>\$wgLogo</h2>\n";
 echo '<div style="border:solid 1px black; margin:3px; padding:3px;">';
 if (file_exists($group_logo)) {
