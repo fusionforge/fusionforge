@@ -1376,6 +1376,7 @@ function util_get_compressed_file_extension() {
 	} else {
 		return '.compressed';
 	}
+}
 
 function util_randbytes($num=6) {
 	$f = fopen("/dev/urandom", "rb");
