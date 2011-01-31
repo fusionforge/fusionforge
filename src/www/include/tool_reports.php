@@ -3,6 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems 
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -67,7 +68,7 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 		print '<p />';
 //      		GraphResult($result,$title);
 	} else {
-		echo "<div class='warning'>"._('No data found to report')."</div>";
+		echo "<p class='warning_msg'>"._('No data found to report')."</p>";
 	}
 }
 

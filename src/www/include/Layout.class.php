@@ -4,7 +4,8 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 - Alain Peyrat
- * Copyright 2010-2011 - Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -159,7 +160,7 @@ class Layout extends Error {
 		if (isset($this->js_min[$js])) {
 			$js = $this->js_min[$js];
 		}
-		if (!isset($this->js[$js])) {
+		if ($js && !isset($this->js[$js])) {
 			$this->js[$js] = true;
 			$filename = $GLOBALS['fusionforge_basedir'].'/www'.$js;
 			if (file_exists($filename)) {

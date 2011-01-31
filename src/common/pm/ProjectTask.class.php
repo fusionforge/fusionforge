@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -205,10 +206,10 @@ class ProjectTask extends Error {
 			db_rollback();
 			return false;
 		}
-   		$this->sendNotice(1);
+		$this->sendNotice(1);
 		db_commit();
 		return true;
- 	}
+	}
 
 	/**
 	 *  fetchData - re-fetch the data for this ProjectTask from the database.

@@ -6,7 +6,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *

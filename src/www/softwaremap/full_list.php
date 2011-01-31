@@ -1,6 +1,7 @@
 <?php
 /*
  * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -56,7 +57,7 @@ $HTML->printSoftwareMapLinks();
 $res_grp = db_query_params ('
 	SELECT group_id, group_name, unix_group_name, short_description, register_time
 	FROM groups
-        WHERE status = $1 AND is_public=1 AND type_id=1 AND group_id>4 AND register_time > 0 
+	WHERE status = $1 AND is_public=1 AND type_id=1 AND group_id>4 AND register_time > 0 
 	ORDER BY group_name ASC
 ',
 			    array ('A'),
