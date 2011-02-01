@@ -141,7 +141,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (!$d->getLocked() && !$d->getReserved()) {
 			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
 		} else {
-			if ($d->getReservedBy() != $u->getID()) {
+			if (session_loggedin() && ($d->getReservedBy() != $u->getID())) {
 				echo '<input type="checkbox" name="disabled" disabled="disabled"';
 			} else {
 				echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
