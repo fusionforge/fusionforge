@@ -69,10 +69,10 @@ if (!preg_match('/\\/$/',$sys_path_to_backup)) {
 $output = "";
 $err = "";
 $dump_cmd = 'pg_dump -U ' . $username;
-if ($host != '') {
+if ($host) {
 	$dump_cmd .= ' -h ' . $host;
 }
-if ($file != '') {
+if ($port) {
 	$dump_cmd .= ' -p ' . $port;
 }
 
@@ -126,13 +126,13 @@ if (file_exists($mailman_data_dir)) {
  * Backup CVS repositories
  **************************************/ 
 $output="";
-if (file_exists($cvsdir_prefix)) {
-	@exec('tar -hjcvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar.bz2 '.$cvsdir_prefix.'/ 2>&1' ,$output,$retval);   //proceed cvsroot dir tar file creation
+if (file_exists(forge_get_config('repos_path', 'scmcvs'))) {
+	@exec('tar -hjcvf '.$sys_path_to_backup.'cvsroot-tmp-'.$datetime.'.tar.bz2 '.forge_get_config('repos_path', 'scmcvs').'/ 2>&1' ,$output,$retval);   //proceed cvsroot dir tar file creation
 	if($retval!=0){
 		$err.= implode("\n", $output);
 	}
 } else {
-	$err.= 'Unable to find CVSROOT dir. Configured value is:'.$cvsdir_prefix;
+	$err.= 'Unable to find CVSROOT dir. Configured value is:'.forge_get_config('repos_path', 'scmcvs');
 }
 
 /**************************************
