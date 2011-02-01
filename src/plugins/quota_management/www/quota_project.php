@@ -140,7 +140,7 @@ $q["quota_label"] = _('With ftp and home quota control');
 $quota_tot_1 += $q["size"];
 $quotas_disk[] = $q;
 
-$q["name"] = _('Ftp project directory');
+$q["name"] = _('FTP project directory');
 $q["path"] = "$ftp_dir"; $q["size"] = get_dir_size ("$ftp_dir");
 $q["quota_label"] = _('With ftp and home quota control');
 $quota_tot_1 += $q["size"];
