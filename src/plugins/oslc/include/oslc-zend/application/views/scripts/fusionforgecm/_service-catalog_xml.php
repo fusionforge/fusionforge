@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is (c) Copyright 2009 by Olivier BERGER, Institut
+ * This file is (c) Copyright 2009 by Olivier BERGER & Sabri LABBENE, Institut
  * TELECOM
  *
  * This program is free software; you can redistribute it and/or
@@ -25,105 +25,168 @@
 
 /* $Id$ */
 
-// Generate a OSLC-CM V1 Service Catalog document
-// (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
-// for a project, pointing to its trackers' Service Description documents
-
-function project_trackers_to_service_catalog($base_url, $trackers, $project) {
+// Generate an OSLC Core V2 ServiceProviderCatalog that lists trackers inside a FusionForge project as OSLC-CM Service Providers.
+function project_trackers_to_service_catalog($server_url, $base_url, $trackers, $project) {
 	$doc = new DOMDocument();
 	$doc->formatOutput = true;
 	
-	$root = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProviderCatalog");
+	$root = $doc->createElementNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:RDF");
 	$root = $doc->appendChild($root);
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dcterms', 'http://purl.org/dc/terms/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foaf', 'http://xmlns.com/foaf/0.1/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
 
-	$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
-	$about = $root->appendChild($child);
-	$child = $doc->createTextNode("");
-	$child = $about->appendChild($child);
+	$provider = $doc->createElement("oslc:ServiceProvider");
+	$provider->setAttribute("rdf:about", $base_url.'/cm/oslc-cm-services/'.$project);
+	
+	// Title of the ServiceProvider.
+	$titlenode = $doc->createElement("dcterms:title", "FusionForge OSLC Core V2 ServiceProvider corresponding to project ".$project);
+	$provider->appendChild($titlenode);
+	
+	// Description of the ServiceProvider.
+	$descriptionnode = $doc->createElement("dcterms:description", "Lists all trackers as Service Providers");
+	$provider->appendChild($descriptionnode);
+	
+	// Add rdf:type ressource to the ServiceProvider node.
+	$rdftype = $doc->createElement("rdf:type");
+	$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#ServiceProvider");
+	$rdftype->appendChild($rdftyperessource);
+	$provider->appendChild($rdftype);
+	
+	// Add oslc:Publisher ressource inside a dcterms:publisher node.
+	$publishernode = $doc->createElement("dcterms:publisher");
+	$publishernodecontent = $doc->createElement("oslc:Publisher");
+	$publishernodecontentid = $doc->createElement("dcterms:identifier", $base_url);
+	$publishernodecontenttitle = $doc->createElement("dcterms:title", "FusionForge OSLC V2 plugin");
+	$publishernodecontent->appendChild($publishernodecontentid);
+	$publishernodecontent->appendChild($publishernodecontenttitle);
+	$publishernode->appendChild($publishernodecontent);
+	// Add created dcterms:publisher node in the ServiceProvider node.
+	$provider->appendChild($publishernode);
+	
+	$root->appendChild($provider);
 
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $root->appendChild($child);
-
-	$child = $doc->createTextNode(TRACKER_TYPE. " Change management service provider catalog for project " . $project);
-	$child = $title->appendChild($child);
-
+	// We list trackers as Services or ServiceProvider (s) ???????????
 	foreach ($trackers as $tracker) {
-			// entry
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:entry");
-			$entry = $root->appendChild($child);
+		// oslc:service node.
+		$service = $doc->createElement("oslc:service");
+		$service->setAttribute("rdf:about", $base_url.'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
 
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProvider");
-			$sp = $entry->appendChild($child);
-			
-			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:identifier");
-			$title = $sp->appendChild($child);
-			$child = $doc->createTextNode($tracker['id']);
-			$child = $title->appendChild($child);
+		// dcterms:title
+		$stitle = $doc->createElement("dcterms:title", "OSLC-CM Service for ".$tracker['name']);
+		$service->appendChild($stitle);
 
-			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-			$title = $sp->appendChild($child);
-			$child = $doc->createTextNode($tracker['name']);
-			$child = $title->appendChild($child);
-			
-			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:description");
-			$title = $sp->appendChild($child);
-			$child = $doc->createTextNode($tracker['description']);
-			$child = $title->appendChild($child);
+		// dcterms:description
+		$sdesc = $doc->createElement("dcterms:description", $tracker['description']);
+		$service->appendChild($sdesc);
 
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:services");
-			$services = $sp->appendChild($child);
-			$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:resource");
-			$resource = $services->appendChild($child);
-			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
-			$child = $resource->appendChild($child);
+		// rdf:type
+		$rdftype = $doc->createElement("rdf:type");
+		$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#Service");
+		$rdftype->appendChild($rdftyperessource);
+		$service->appendChild($rdftype);
+		
+		// oslc:domain
+		$sdomain = $doc->createElement("oslc:domain");
+		$sdomainressource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/cm#");
+		$sdomain->appendChild($sdomainressource);
+		$service->appendChild($sdomain);
+		
+		// oslc:details
+		$tracker_url = $server_url."/tracker/index.php?group_id=".$tracker['group_id']."&atid=".$tracker['id'];
+		$sdetails = $doc->createElement("oslc:details", htmlentities($tracker_url));
+		$service->appendChild($sdetails);
+		
+		$provider->appendChild($service);
+		$root->appendChild($provider);
 		
 	}
 	return $doc->saveXML();
 }
 
-// Generate a Service Catalog that points to each project's own Service catalog
+
+// Generate an OSLC Core V2 ServiceProviderCatalog that lists projects as OSLC Service Providers.
 function projects_to_service_catalog($base_url, $projects) {
 
 	$doc = new DOMDocument();
 	$doc->formatOutput = true;
 
-	$root = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProviderCatalog");
+	// Generate namespaces for root rdf:RDF node.
+	$root = $doc->createElementNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:RDF");
 	$root = $doc->appendChild($root);
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dcterms', 'http://purl.org/dc/terms/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foaf', 'http://xmlns.com/foaf/0.1/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
 
-	$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
-	$about = $root->appendChild($child);
-	$child = $doc->createTextNode("");
-	$child = $about->appendChild($child);
-
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $root->appendChild($child);
+	$catalog = $doc->createElement("oslc:ServiceProviderCatalog");
+	$catalog->setAttribute("rdf:about", util_make_uri($base_url.'/cm/oslc-services/'));
 	
-	// TODO ? : MAY have an oslc_disc:details child element. 
+	// Title of the ServiceProviderCatalog.
+	$titlenode = $doc->createElement("dcterms:title", "FusionForge OSLC Core V2 Service Provider Catalog");
+	$catalog->appendChild($titlenode);
 	
-	$child = $doc->createTextNode(TRACKER_TYPE. " Change management service provider catalog");
-	$child = $title->appendChild($child);
-
+	// Description of the ServiceProviderCatalog.
+	$descriptionnode = $doc->createElement("dcterms:description", "Lists all projects as Service (trackers) Providers");
+	$catalog->appendChild($descriptionnode);
+	
+	// Add rdf:type ressource to the ServiceProviderCatalog node.
+	$rdftype = $doc->createElement("rdf:type");
+	$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#ServiceProviderCatalog");
+	$rdftype->appendChild($rdftyperessource);
+	$catalog->appendChild($rdftype);
+	
+	// Add oslc:Publisher ressource inside a dcterms:publisher node.
+	$publishernode = $doc->createElement("dcterms:publisher");
+	$publishernodecontent = $doc->createElement("oslc:Publisher");
+	$publishernodecontentid = $doc->createElement("dcterms:identifier", $base_url);
+	$publishernodecontenttitle = $doc->createElement("dcterms:title", "FusionForge OSLC V2 plugin");
+	$publishernodecontent->appendChild($publishernodecontentid);
+	$publishernodecontent->appendChild($publishernodecontenttitle);
+	$publishernode->appendChild($publishernodecontent);
+	// Add created dcterms:publisher node in the ServiceProviderCatalog node.
+	$catalog->appendChild($publishernode);
+	 
+	$root->appendChild($catalog);
+	
 	foreach ($projects as $proj) {
+		$sp = $doc->createElement("oslc:ServiceProvider");
+		$sp->setAttribute("rdf:about", util_make_uri($base_url.'/cm/oslc-cm-services/'.$proj['id']));
+		
+		// dcterms:title
+		$sptitle = $doc->createElement("dcterms:title", "Project: ".$proj["name"]);
+		$sp->appendChild($sptitle);
+		
+		// dcterms:description
+		$spdescription = $doc->createElement("dcterms:description", "FusionForge project ".$proj['name']." as an OSLC-CM ServiceProvider");
+		$sp->appendChild($spdescription);
+		
+		// rdf:type
+		$rdftype = $doc->createElement("rdf:type");
+		$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#ServiceProvider");
+		$rdftype->appendChild($rdftyperessource);
+		$sp->appendChild($rdftype);
+		
+		// dcterms:publisher
+		$sppublisher = $doc->createElement("dcterms:publisher");
+		$sppublishercontent = $doc->createElement("oslc:Publisher");
+		$sppublishercontentid = $doc->createElement("dcterms:identifier", $base_url);
+		$sppublishercontenttitle = $doc->createElement("dcterms:title", "FusionForge OSLC V2 plugin");
+		$sppublishercontent->appendChild($sppublishercontentid);
+		$sppublishercontent->appendChild($sppublishercontenttitle);
+		$sppublisher->appendChild($sppublishercontent);
+		$sp->appendChild($sppublisher);
 
-		if(count($proj)>0)
-		{
-			// entry
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:entry");
-			$entry = $root->appendChild($child);
+		// ServiceProvider should lis at least one oslc:service. 
+		// Telling about the oslc:domain of the service is mandatory. 
+		$service = $doc->createElement("oslc:Service");
+		$servicedomain = $doc->createElement("oslc:domain", "http://open-services.net/ns/core#Service");
+		$service->appendChild($servicedomain);
+		$sp->appendChild($service);
 
-			$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProviderCatalog");
-			$spc = $entry->appendChild($child);
-			$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
-			$about = $spc->appendChild($child);
-			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-services/'.$proj['id']);
-			$child = $about->appendChild($child);
-			
-			$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-			$title = $spc->appendChild($child);
-			$child = $doc->createTextNode($proj['name']);
-			$child = $title->appendChild($child);
-
-		}
+		$catalog->appendChild($sp);
+		$root->appendChild($catalog);
 	}
 	return $doc->saveXML();
 }
