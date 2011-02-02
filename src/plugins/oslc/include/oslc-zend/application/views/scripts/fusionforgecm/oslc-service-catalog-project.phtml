@@ -27,12 +27,12 @@ require_once('_add_hyperlinks.php');
 
 ?>
 <body>
-<h1>OSLC-CM V1 Service Catalog document</h1>
+<h1>OSLC Core V2 ServiceProvider corresponding to a FusionForge project</h1>
 <pre>
 <?php
-	$xml = project_trackers_to_service_catalog($this->serverUrl() . $this->baseUrl(), $this->trackers, $this->project);
+	$xml = project_trackers_to_service_catalog($this->serverUrl(), $this->serverUrl().$this->baseUrl(), $this->trackers, $this->project);
 	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
-	$text = add_links($text, $this->serverUrl().$this->baseUrl());
+	$text = add_links($text, $this->serverUrl());
 	echo $text;
 ?>
 </pre>
