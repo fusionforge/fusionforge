@@ -28,23 +28,9 @@
 require('_service-catalog_xml.php');
 require('_add_hyperlinks.php');
 
-/*$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:ServiceProvider");
-$sp = $entry->appendChild($child);
-
-$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-$title = $sp->appendChild($child);
-$child = $doc->createTextNode("Demo OSLC CM service provider");
-$child = $title->appendChild($child);
-
-$child = $doc->createElementNS("http://open-services.net/xmlns/discovery/1.0/", "oslc_disc:services");
-$serv = $sp->appendChild($child);
-$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:resource");
-$service = $serv->appendChild($child);
-$child = $doc->createTextNode($this->baseUrl().'/cm/oslc-cm-service');
-$child = $service->appendChild($child);*/
 ?>
 <body>
-<h1>OSLC-CM V1 Service Catalog document</h1>
+<h1>FusionForge OSLC Core V2 Service Provider Catalog</h1>
 <pre>
 <?php
 	$xml = projects_to_service_catalog($this->serverUrl().$this->baseUrl(), $this->projects);
