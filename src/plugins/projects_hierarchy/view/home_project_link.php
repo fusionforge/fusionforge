@@ -83,7 +83,7 @@ if($cpt_project != $cpt_temp){
 }
 
 if($cpt_project == 0){ 
-	echo _('No linked project avalaible');
+	echo _('No linked project available');
 	print '<hr size="1" />';
 }
 
