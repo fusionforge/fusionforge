@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is (c) Copyright 2009 by Olivier BERGER, Institut
+ * This file is (c) Copyright 2009 by Olivier BERGER & Sabri LABBENE, Institut
  * TELECOM
  *
  * This program is free software; you can redistribute it and/or
@@ -25,129 +25,121 @@
 
 /* $Id$ */
 
-// Generate a OSLC-CM V1 Change Management Service Description document (http://open-services.net/bin/view/Main/CmServiceDescriptionV1)
+// Generate an OSLC-CM V2 Service Description document
 
 function project_to_service_description($base_url, $project, $tracker) {
 
 	$doc = new DOMDocument();
 	$doc->formatOutput = true;
 
-	$root = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:ServiceDescriptor");
+	$root = $doc->createElementNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:RDF");
 	$root = $doc->appendChild($root);
+	
+	// namespaces
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dcterms', 'http://purl.org/dc/terms/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foaf', 'http://xmlns.com/foaf/0.1/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc_cm', 'http://open-services.net/ns/cm#');
+	
+	// rdf:about
+	$rdfabout = $doc->createElement("rdf:about", $base_url.'/cm/oslc-cm-service/'.$project.'/tracker/'.$tracker);
+	$root->appendChild($rdfabout);
+	
+	// rdf:type
+	$rdftype = $doc->createElement("rdf:type");
+	$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#Service");
+	
+	// oslc:Publisher ressource inside a dcterms:publisher node.
+	$publishernode = $doc->createElement("dcterms:publisher");
+	$publishernodecontent = $doc->createElement("oslc:Publisher");
+	$publishernodecontentid = $doc->createElement("dcterms:identifier", $base_url);
+	$publishernodecontenttitle = $doc->createElement("dcterms:title", "FusionForge OSLC V2 plugin");
+	$publishernodecontent->appendChild($publishernodecontentid);
+	$publishernodecontent->appendChild($publishernodecontenttitle);
+	$publishernode->appendChild($publishernodecontent);
+	// Add created dcterms:publisher node in the ServiceProvider node.
+	$root->appendChild($publishernode);
 
-	$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
-	$about = $root->appendChild($child);
-	$child = $doc->createTextNode("");
-	$child = $about->appendChild($child);
+	// dcterms:title
+	$title = $doc->createElement("dcterms:title","OSLC-CM V2 service description document");
+	$root->appendChild($title);
+	
+	//dcterms:description
+	$desc = $doc->createElement("dcterms:description","FusionForge Tracker services");
+	$root->appendChild($desc);
+	
+	/** 
+	 * Services description
+	 */
+	
+	$service = $doc->createElement("oslc:service");
+	
+	// oslc:domain
+	$sdomain = $doc->createElement("oslc:domain");
+	$sdomainressource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/cm#");
+	$sdomain->appendChild($sdomainressource);
+	$service->appendChild($sdomain);	
+	
+	// Creation Factory.
+	$cfact = $doc->createElement("creationFactory");
+	$cfacttitle = $doc->createElement("dcterms:title", "Location for creation of change Requests with a POST HTTP request");
+	$cfactlabel = $doc->createElement("oslc_label", "New Tracker items Creation");
+	$cfactcreation = $doc->createElement("oslc:creation");
+	$cfactcreationressource = $doc->createElement("rdf:ressource", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
+	$cfactcreation->appendChild($cfactcreationressource);
+	$cfact->appendChild($cfacttitle);
+	$cfact->appendChild($cfactlabel);
+	$cfact->appendChild($cfactcreation);
+	$service->appendChild($cfact);
+	
+	// Query capabilities.
+	$qc = $doc->createElement("queryCapability");
+	$qctitle = $doc->createElement("dcterms:title", "GET-Based Tracker items query");
+	$qclabel = $doc->createElement("oslc:label", "Tracker items query");
+	$qcqbase = $doc->createElement("oslc:queryBase");
+	$qcqbaseressource = $doc->createElement("rdf:ressource",$base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
+	$qcqbase->appendChild($qcqbaseressource);
+	$qc->appendChild($qctitle);
+	$qc->appendChild($qclabel);
+	$qc->appendChild($qcqbase);
+	$service->appendChild($qc);
+	
+	// Delegated Selection UI.
+	$sD = $doc->createElement("selectionDialog");
+	$d = $doc->createElement("Dialog");
+	$dtitle = $doc->createElement("dcterms:title", "Change Requests Selection Dialog");
+	$dlabel = $doc->createElement("oslc:label", "Tracker items selection UI");
+	$ddialog = $doc->createElement("oslc:dialog", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/selection');
+	$dwidth = $doc->createElement("oslc:hintWidth", "800px");
+	$dheight = $doc->createElement("oslc:hintHeight", "600px");
+	$d->appendChild($dtitle);
+	$d->appendChild($dlabel);
+	$d->appendChild($ddialog);
+	$d->appendChild($dwidth);
+	$d->appendChild($dheight);
+	$sD->appendChild($d);
+	$service->appendChild($sD);
+	
+	// Delegated Creation UI.
+	$cD = $doc->createElement("creationDialog");
+	$dialog = $doc->createElement("Dialog");
+	$dialogtitle = $doc->createElement("dcterms:title", "Change Requests Creation Dialog");
+	$dialoglabel = $doc->createElement("oslc:label", "Tracker items creation UI");
+	$dialogdialog = $doc->createElement("oslc:dialog", $base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/creation');
+	$dialogwidth = $doc->createElement("oslc:hintWidth", "800px");
+	$dialogheight = $doc->createElement("oslc:hintHeight", "600px");
+	$dialog->appendChild($dialogtitle);
+	$dialog->appendChild($dialoglabel);
+	$dialog->appendChild($dialogdialog);
+	$dialog->appendChild($dialogwidth);
+	$dialog->appendChild($dialogheight);
+	$cD->appendChild($dialog);
+	$service->appendChild($cD);
+	
 
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $root->appendChild($child);
-	$child = $doc->createTextNode("OSLC CM service description document describing a FusionForge tracker services");
-	$child = $title->appendChild($child);
-
-	// changeRequests
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:changeRequests");
-	$cr = $root->appendChild($child);
-
-	$child = $doc->createAttribute("version");
-	$version = $cr->appendChild($child);
-	$child = $doc->createTextNode("1.0");
-	$child = $version->appendChild($child);
-
-	// Simple GET-based URL-encoded query
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:simpleQuery");
-	$sq = $cr->appendChild($child);
+	$root->appendChild($service);
 	
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $sq->appendChild($child);
-	$child = $doc->createTextNode("Simple Tracker Query");
-	$child = $title->appendChild($child);
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $sq->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
-	$child = $url->appendChild($child);
-	
-	//creation factory
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:factory");
-	$crdl = $cr->appendChild($child);	
-	
-	$child = $doc->createAttribute("oslc_cm:default");
-	$option = $crdl->appendChild($child);
-	$child = $doc->createTextNode("true");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $crdl->appendChild($child);
-	$child = $doc->createTextNode("Location for creation of change requests (with a POST HTTP request)");
-	$child = $title->appendChild($child);
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $crdl->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker);
-	$child = $url->appendChild($child);
-	
-	//creation dialog
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:creationDialog");
-	$crdl = $cr->appendChild($child);	
-	
-	$child = $doc->createAttribute("oslc_cm:default");
-	$option = $crdl->appendChild($child);
-	$child = $doc->createTextNode("true");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createAttribute("oslc_cm:hintWidth");
-	$option = $crdl->appendChild($child);
-	$child = $doc->createTextNode("740px");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createAttribute("oslc_cm:hintHeight");
-	$option = $crdl->appendChild($child);
-	$child = $doc->createTextNode("540px");
-	$child = $option->appendChild($child);
-
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $crdl->appendChild($child);
-	$child = $doc->createTextNode("New Change Request Creation Dialog");
-	$child = $title->appendChild($child);
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $crdl->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/creation');
-	$child = $url->appendChild($child);
-	
-	//selection dialog
-	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:selectionDialog");
-	$sldl = $cr->appendChild($child);
-	
-	$child = $doc->createAttribute("oslc_cm:default");
-	$option = $sldl->appendChild($child);
-	$child = $doc->createTextNode("true");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createAttribute("oslc_cm:hintWidth");
-	$option = $sldl->appendChild($child);
-	$child = $doc->createTextNode("800px");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createAttribute("oslc_cm:hintHeight");
-	$option = $sldl->appendChild($child);
-	$child = $doc->createTextNode("600px");
-	$child = $option->appendChild($child);
-	
-	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
-	$title = $sldl->appendChild($child);
-	$child = $doc->createTextNode("Change Request Selection Dialog");
-	$child = $title->appendChild($child);
-
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/", "oslc_cm:url");
-	$url = $sldl->appendChild($child);
-	$child = $doc->createTextNode($base_url.'/cm/project/'.$project.'/tracker/'.$tracker.'/ui/selection');
-	$child = $url->appendChild($child);
 
 	return $doc->saveXML();
 }
