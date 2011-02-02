@@ -6,20 +6,20 @@ $json["prefixes"]["rdf"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 $json["prefixes"]["foaf"] = "http://http://xmlns.com/foaf/0.1/";
 $json["prefixes"]["dcterms"] = "http://purl.org/dc/terms/";
 
-$json["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#Service";
+$json["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#ServiceProvider";
 $json["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-services/'.$this->project);
 
-$json["dcterms:title"] = "FusionForge Change Management service provider catalog for project " . $this->project;
+$json["dcterms:title"] = "FusionForge Change Management service provider corresponding to project " . $this->project;
 $json["dcterms:description"] = "Lists trackers inside project".$this->project;
 
 $json["dcterms:publisher"]["dcterms:title"] = "OSLC CM plugin for FusionForge";
 $json["dcterms:publisher"]["dcterms:identifier"] = $this->serverUrl().$this->baseUrl();
 
 foreach($this->trackers as $tracker) {
-	$service["oslc:service"]["dc:identifier"] = $tracker["id"];
-	$service["oslc:service"]["dc:title"] = $tracker["name"];
+	$service["oslc:service"]["dcterms:title"] = $tracker["name"];
 	$service["oslc:service"]["dc:descrption"] = $tracker["description"];
-	$service["oslc:service"]["rdf:ressource"] = $this->serverUrl() . util_make_uri($this->baseUrl().'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
+	$service["oslc:service"]["rdf:type"]["rdf:ressource"] = $this->serverUrl() . util_make_uri($this->baseUrl().'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
+	$service["oslc:service"]["oslc:domain"]["rdf:ressource"] = "http://open-services.net/ns/cm#";
 	$service["oslc:service"]["oslc:details"] = $this->serverUrl() . util_make_uri("/tracker/index.php?group_id=".$tracker['group_id'].'&atid='.$tracker['id']);
 	$catalog["oslc:serviceProvider"][] = $service;
 }
