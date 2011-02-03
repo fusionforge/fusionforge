@@ -54,7 +54,7 @@ if ($return_to) {
 	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
 		$newrt = $return_to ;
 	} else {
-		$newrt = '' ;
+		$newrt = '/' ;
 	}
 	$return_to = $newrt ;
 }
@@ -83,10 +83,10 @@ if ($login) {
 			You can now optionally stay in SSL mode
 		*/
 		if ($return_to) {
-			header ("Location: " . $return_to);
+			header ("Location: " . util_make_url($return_to));
 			exit;
 		} else {
-			header ("Location: ".util_make_url ("/my/"));
+			header ("Location: " . util_make_url("/my"));
 			exit;
 		}
 	}
