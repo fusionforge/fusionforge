@@ -35,8 +35,12 @@ rmdir $DEST/emptydir
 # now the actual transfer
 rsync $OPTS $BDIR $DEST/current
 
+export FUSIONFORGE_NO_PLUGINS=true
+COMPRESSOR=$(/usr/share/gforge/bin/forge_get_compressor)
+EXTENSION=$(/usr/share/gforge/bin/forge_get_compressed_extension)
+
 echo "Dumping database"
-su -s /bin/bash postgres -c "pg_dump -F c -d gforge" | gzip -c > ${DEST}/postgres/gforge.dump.gz
+su -s /bin/bash postgres -c "pg_dump -F c -d gforge" | $COMPRESSOR > ${DEST}/postgres/gforge.dump${EXTENSION}
 
 echo "Dumping debconf keys"
 for PAT in $PATTERNS
