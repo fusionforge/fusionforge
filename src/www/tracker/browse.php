@@ -105,14 +105,13 @@ $_assigned_to = getIntFromRequest('_assigned_to');
 $_status = getIntFromRequest('_status');
 $_extra_fields = array() ;
 $aux_extra_fields = array() ;
+
 if ($set == 'custom') {
-	//
-	//may be past in next/prev url
-	//
-	if (isset($_GET['extra_fields'][$ath->getCustomStatusField()])) {
-		$_extra_fields[$ath->getCustomStatusField()] = $_GET['extra_fields'][$ath->getCustomStatusField()];
-	} elseif (isset($_POST['extra_fields'][$ath->getCustomStatusField()])) {
-		$_extra_fields[$ath->getCustomStatusField()] = $_POST['extra_fields'][$ath->getCustomStatusField()];
+	/* may be past in next/prev url */
+	$i = $ath->getCustomStatusField();
+	$tmp_extra_fields = getArrayFromRequest('extra_fields');
+	if (isset($tmp_extra_fields[$i])) {
+		$_extra_fields[$i] = $tmp_extra_fields[$i];
 	}
 }
 
