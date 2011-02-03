@@ -9,6 +9,4 @@ AliasMatch ^/plugins/mediawiki/dumps/(.*)$ {core/data_path}/plugins/mediawiki/du
 <Directory {core/data_path}/plugins/mediawiki/dumps>
         Options -FollowSymLinks +Indexes
         AllowOverride None
-        order allow,deny
-        allow from all
 </Directory>
