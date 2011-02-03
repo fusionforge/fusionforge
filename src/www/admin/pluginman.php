@@ -33,7 +33,7 @@ $plugins_disabled = array('webcalendar', 'scmccase');
 
 // Skip non activable plugins due to general configuration
 if (!forge_get_config('use_scm')) {
-    array_push($plugins_disabled, 'scmarch', 'scmbzr', 'scmdarcs', 'scmgit', 'scmhg', 'scmsvn');
+	array_push($plugins_disabled, 'scmarch', 'scmbzr', 'scmcpold', 'scmcvs', 'scmdarcs', 'scmgit', 'scmhg', 'scmsvn');
 }
 
 $pm = plugin_manager_get_object();
