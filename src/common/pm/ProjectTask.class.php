@@ -5,7 +5,8 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2010, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge.
  *
@@ -427,9 +428,10 @@ class ProjectTask extends Error {
 	function getRelatedArtifacts() {
 		if (!$this->relatedartifacts) {
 			$this->relatedartifacts=
-				db_query_params ('SELECT agl.group_id,agl.name,agl.group_artifact_id,a.artifact_id,a.open_date,a.summary 
-			FROM artifact_group_list agl, artifact a 
+				db_query_params ('SELECT agl.group_id,agl.name,agl.group_artifact_id,a.artifact_id,a.open_date,a.summary,ast.status_name
+			FROM artifact_group_list agl, artifact a, artifact_status ast
 			WHERE a.group_artifact_id=agl.group_artifact_id
+                        AND ast.id=a.status_id
 			AND EXISTS (SELECT artifact_id FROM project_task_artifact 
 				WHERE artifact_id=a.artifact_id
 				AND project_task_id=$1)',
