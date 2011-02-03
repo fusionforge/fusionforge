@@ -34,17 +34,29 @@ $return_to = getStringFromRequest('return_to');
 //      Validate return_to
 //
 if ($return_to) {
-        $tmpreturn=explode('?',$return_to);
-        if (!@is_file(forge_get_config('url_root').$tmpreturn[0]) && !@is_dir(forge_get_config('url_root').$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1) && !(strpos($tmpreturn[0],'plugins/mediawiki') == 1)) {
-	$return_to='';
-}				        }
+        $tmpreturn = explode('?',$return_to);
+	$rtpath = $tmpreturn[0] ;
+
+	if (@is_file(forge_get_config('url_root').$rtpath)
+	    || @is_dir(forge_get_config('url_root').$rtpath)
+	    || (strpos($rtpath,'/projects') == 0)
+	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
+		$newrt = $return_to ;
+	} else {
+		$newrt = '/' ;
+	}
+
+	if ($return_to == '/my' || $return_to == '/account') {
+		$return_to = '/';
+	}
+}
 
 session_logout();
 
 plugin_hook('before_logout_redirect');
 
 if ($return_to) {
-	header('Location: '.$return_to);
+	header('Location: '.util_make_url ($return_to));
 }else{
 	header('Location: '.util_make_url ('/'));
 }
