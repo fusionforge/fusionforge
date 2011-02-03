@@ -36,7 +36,9 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 	{
 		$vars = array ('sys_name',
 			       'sys_user_reg_restricted',
+			       'sys_require_accept_conditions',
 			       'sys_project_reg_restricted',
+			       'sys_use_private_project',
 			       'sys_default_domain',
 			       'sys_scm_tarballs_path',
 			       'sys_scm_snapshots_path',
@@ -117,6 +119,7 @@ class Deprecations_Tests extends PHPUnit_Framework_TestCase
 			       'sys_images_secure_url',
 			       'sys_admin_email',
 			       'sys_session_key',
+			       'sys_session_expire',
 			       'sys_show_source',
 			       'default_trove_cat',
 			       'sys_dbhost',
