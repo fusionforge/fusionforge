@@ -34,6 +34,8 @@ $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
+$uploaded_filename = getUploadedFile('uploaded_filename');
+$manual_path = getStringFromRequest('manual_path');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
 
@@ -114,6 +116,32 @@ switch ($type) {
 		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
 		$file_url = '';
 		$uploaded_data_name = $uploaded_data['name'];
+		break;
+	}
+	case 'manualupload' : {
+		if (!forge_get_config('use_manual_uploads')) {
+			$return_msg = _('Manual uploads disabled.');
+			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+		}
+		
+		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
+		$filename = $incoming.'/'.$manual_path;
+
+		if (!util_is_valid_filename($manual_path) || !is_file($filename)) {
+		$return_msg = _('Invalid file name.');
+			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
+		}
+
+		if (function_exists('finfo_open')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$uploaded_data_type = finfo_file($finfo, $filename);
+		} else {
+			$uploaded_data_type = 'application/binary';
+		}
+		$stat = stat($filename);
+		$data = fread(fopen($filename, 'r'), $stat['size']);
+		$file_url = '';
+		$uploaded_data_name = $manual_path;
 		break;
 	}
 	default: {
