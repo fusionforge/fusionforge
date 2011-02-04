@@ -1943,6 +1943,8 @@ eval {
     &update_with_sql("20101024-docman-createonline","5.0.51-9");
     &update_with_sql("20101213-project-template","5.0.51-10");
     &update_with_sql("20110110-pw-size","5.0.51-11");
+    &update_with_sql("20110118-user-tooltips","5.0.51-12");
+    &update_with_sql("20110211-docman-activityvw","5.0.51-13");
 
     ########################### INSERT HERE #################################
 
