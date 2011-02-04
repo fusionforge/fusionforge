@@ -34,7 +34,6 @@ $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
 $file_url = getStringFromRequest('file_url');
 $uploaded_data = getUploadedFile('uploaded_data');
-$uploaded_filename = getUploadedFile('uploaded_filename');
 $manual_path = getStringFromRequest('manual_path');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
