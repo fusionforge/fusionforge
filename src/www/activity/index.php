@@ -200,11 +200,10 @@ if (count($results) < 1) {
 	$cached_perms = array();
 	function check_perm_for_activity($arr) {
 		global $cached_perms;
-		
 		$s = $arr['section'];
 		$ref = $arr['ref_id'];
 		$group_id = $arr['group_id'];
-		
+
 		if (!isset($cached_perms[$s][$ref])) {
 			switch ($s) {
 				case 'commit':
@@ -237,14 +236,13 @@ if (count($results) < 1) {
 	}
 
 	usort($results, 'date_compare');
-	?>
-	<?php
 
-	$theader=array();
-	$theader[]=_('Time');
-	$theader[]=_('Activity');
-	$theader[]=_('By');
+	$theader = array();
+	$theader[] = _('Time');
+	$theader[] = _('Activity');
+	$theader[] = _('By');
 
+	echo '<br/>';
 	echo $HTML->listTableTop($theader);
 
 	$j = 0;
@@ -262,32 +260,32 @@ if (count($results) < 1) {
 		switch (@$arr['section']) {
 			case 'commit': {
 				$icon = html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
-				$url = util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
+				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Commit for Tracker Item').' [#'.$arr['subref_id'].'] '.$arr['description']);
 				break;
 			}
 			case 'trackeropen': {
 				$icon = html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url = util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Opened'));
+				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Opened'));
 				break;
 			}
 			case 'trackerclose': {
 				$icon = html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
-				$url = util_make_link ('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Closed'));
+				$url = util_make_link('/tracker/?func=detail&amp;atid='.$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Tracker Item').' [#'.$arr['subref_id'].' '.$arr['description'].' ] '._('Closed'));
 				break;
 			}
 			case 'frsrelease': {
 				$icon = html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
-				$url = util_make_link ('/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
+				$url = util_make_link('/frs/?release_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('FRS Release').' '.$arr['description']);
 				break;
 			}
 			case 'forumpost': {
 				$icon = html_image("ic/forum20g.png","20","20",array("alt"=>"Forum"));
-				$url = util_make_link ('/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
+				$url = util_make_link('/forum/message.php?msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id'],_('Forum Post ').' '.$arr['description']);
 				break;
 			}
 			case 'news': {
 				$icon = html_image("ic/write16w.png","20","20",array("alt"=>"News"));
-				$url = util_make_link ('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
+				$url = util_make_link('/forum/forum.php?forum_id='.$arr['subref_id'],_('News').' '.$arr['description']);
 				break;
 			}
 			case 'docmannew':
