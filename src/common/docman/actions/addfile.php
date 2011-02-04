@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Roland Mas
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -123,7 +124,7 @@ switch ($type) {
 			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 		}
 		
-		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
+		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
 		$filename = $incoming.'/'.$manual_path;
 
 		if (!util_is_valid_filename($manual_path) || !is_file($filename)) {
