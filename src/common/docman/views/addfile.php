@@ -43,20 +43,30 @@ if ( $dgf->getNested() == NULL ) {
 	function displayRowFile() {
 		document.getElementById('filerow').style.display = '';
 		document.getElementById('urlrow').style.display = 'none';
+		document.getElementById('pathrow').style.display = 'none';
 		document.getElementById('editrow').style.display = 'none';
 		document.getElementById('editnamerow').style.display = 'none';
 	}
 	function displayRowUrl() {
 		document.getElementById('filerow').style.display = 'none';
 		document.getElementById('urlrow').style.display = '';
+		document.getElementById('pathrow').style.display = 'none';
 		document.getElementById('editrow').style.display = 'none';
 		document.getElementById('editnamerow').style.display = 'none';
 	}
 	function displayRowEditor() {
 		document.getElementById('filerow').style.display = 'none';
 		document.getElementById('urlrow').style.display = 'none';
+		document.getElementById('pathrow').style.display = 'none';
 		document.getElementById('editrow').style.display = '';
 		document.getElementById('editnamerow').style.display = '';
+	}
+	function displayRowManual() {
+		document.getElementById('filerow').style.display = 'none';
+		document.getElementById('urlrow').style.display = 'none';
+		document.getElementById('pathrow').style.display = '';
+		document.getElementById('editrow').style.display = 'none';
+		document.getElementById('editnamerow').style.display = 'none';
 	}
 	</script>
 <?php
@@ -89,6 +99,9 @@ if ( $dgf->getNested() == NULL ) {
 						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
 					.'</td><td>
 					<input type="radio" name="type" value="httpupload" onClick="javascript:displayRowFile()" />'. _('File') .'<input type="radio" name="type" value="pasteurl" onClick="javascript:displayRowUrl()" />'. _('URL');
+			if (forge_get_config('use_manual_uploads')) {
+				echo '<input type="radio" name="type" value="manualupload" onClick="javascript:displayRowManual()" />'. _('Already-uploaded file');
+			}
 			if ($g->useCreateOnline()) {
 				echo '<input type="radio" name="type" value="editor" onClick="javascript:displayRowEditor()" />'. _('Create online');
 			}
@@ -106,6 +119,19 @@ if ( $dgf->getNested() == NULL ) {
 						<strong>'. _('URL') .'</strong>'. utils_requiredField()
 					.'</td><td>'
 						.'&nbsp;<input type="text" name="file_url" size="30" />
+					</td>
+				</tr>
+				<tr id="pathrow" style="display:none">
+					<td style="text-align:right;">
+						<strong>'. _('File') .'</strong>'. utils_requiredField() . '</td><td>';
+
+			$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
+			$manual_files_arr=ls($incoming,true);
+			echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_path','');
+			echo '<br />';
+			printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
+			       $incoming, "sftp://" . forge_get_config ('web_host') . $incoming . "/");
+			echo '
 					</td>
 				</tr>
 				<tr id="editnamerow" style="display:none">
