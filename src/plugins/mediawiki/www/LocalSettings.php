@@ -276,7 +276,7 @@ function SetupPermissionsFromRoles () {
 		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
 		
 		// Interwiki management restricted to forge admins
-		$wgGroupPermissions[$gr]['interwiki'] = $r->hasPermission ('forge_admin') ;
+		$wgGroupPermissions[$gr]['interwiki'] = $r->hasGlobalPermission ('forge_admin') ;
 	}
 }
 
