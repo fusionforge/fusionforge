@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-04 14:12+0100\n"
+"POT-Creation-Date: 2011-02-04 14:53+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -188,31 +188,35 @@ msgstr "文件：无效的文件编号"
 msgid "No Document Directory Found"
 msgstr "没有发现文件"
 
-#: common/docman/actions/addfile.php:46
+#: common/docman/actions/addfile.php:47
 #, fuzzy
 msgid "No valid Document Directory was selected."
 msgstr "没有定义文件分组"
 
-#: common/docman/actions/addfile.php:77 common/docman/actions/addfile.php:90
+#: common/docman/actions/addfile.php:78 common/docman/actions/addfile.php:91
 #, fuzzy
 msgid "Error getting blank document."
 msgstr "错误插入一个组成元件"
 
-#: common/docman/actions/addfile.php:104
+#: common/docman/actions/addfile.php:105 common/docman/actions/addfile.php:129
 #, fuzzy
 msgid "Invalid file name."
 msgstr "全名错误"
 
-#: common/docman/actions/addfile.php:119
+#: common/docman/actions/addfile.php:121
+msgid "Manual uploads disabled."
+msgstr ""
+
+#: common/docman/actions/addfile.php:146
 msgid "Unknown type submission."
 msgstr ""
 
-#: common/docman/actions/addfile.php:137
+#: common/docman/actions/addfile.php:164
 #, fuzzy
 msgid "Document submitted successfully."
 msgstr "文件已提交成功"
 
-#: common/docman/actions/addfile.php:140
+#: common/docman/actions/addfile.php:167
 #, fuzzy
 msgid "Document submitted successfully : pending state (need validation)."
 msgstr "文件已提交成功"
@@ -419,20 +423,20 @@ msgstr "文件分组：无效的分组编号"
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
 
-#: common/docman/include/utils.php:229 common/docman/views/addfile.php:63
+#: common/docman/include/utils.php:229 common/docman/views/addfile.php:73
 #: common/docman/views/editfile.php:48 common/docman/views/editfile.php:66
 #, fuzzy
 msgid "Document Title:"
 msgstr "文件标题"
 
-#: common/docman/include/utils.php:231 common/docman/views/addfile.php:63
+#: common/docman/include/utils.php:231 common/docman/views/addfile.php:73
 #: common/docman/views/editfile.php:50
 msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
 
-#: common/docman/include/utils.php:233 common/docman/views/addfile.php:64
+#: common/docman/include/utils.php:233 common/docman/views/addfile.php:74
 #: common/docman/views/editfile.php:52 common/docman/views/editfile.php:73
 #: plugins/contribtracker/www/index.php:46
 #: plugins/contribtracker/www/index.php:151
@@ -443,28 +447,28 @@ msgstr ""
 msgid "Description:"
 msgstr "说明："
 
-#: common/docman/include/utils.php:235 common/docman/views/addfile.php:64
+#: common/docman/include/utils.php:235 common/docman/views/addfile.php:74
 #: common/docman/views/editfile.php:54
 msgid "A brief description to be placed just under the title."
 msgstr ""
 
-#: common/docman/include/utils.php:239 common/docman/views/addfile.php:67
+#: common/docman/include/utils.php:239 common/docman/views/addfile.php:77
 #: common/docman/views/editfile.php:58
 msgid "Both fields are used by document search engine."
 msgstr ""
 
-#: common/docman/include/utils.php:246 common/docman/views/addfile.php:73
+#: common/docman/include/utils.php:246 common/docman/views/addfile.php:83
 msgid "Document Title"
 msgstr "文件标题"
 
 #: common/docman/include/utils.php:250 common/docman/include/utils.php:259
-#: common/docman/views/addfile.php:76 common/docman/views/addfile.php:84
+#: common/docman/views/addfile.php:86 common/docman/views/addfile.php:94
 #: common/docman/views/editfile.php:66 common/docman/views/editfile.php:73
 #, fuzzy, php-format
 msgid "(at least %1$s characters)"
 msgstr "密码至少要6个字节"
 
-#: common/docman/include/utils.php:255 common/docman/views/addfile.php:81
+#: common/docman/include/utils.php:255 common/docman/views/addfile.php:91
 #: common/docman/views/listfile.php:107 plugins/blocks/www/index.php:233
 #: plugins/contribtracker/www/global_admin.php:244
 #: plugins/contribtracker/www/global_admin.php:339
@@ -484,8 +488,8 @@ msgstr "密码至少要6个字节"
 msgid "Description"
 msgstr "说明"
 
-#: common/docman/include/utils.php:265 common/docman/views/addfile.php:91
-#: common/docman/views/editfile.php:80
+#: common/docman/include/utils.php:265 common/docman/views/addfile.php:101
+#: common/docman/views/addfile.php:126 common/docman/views/editfile.php:80
 msgid "File"
 msgstr "文件:"
 
@@ -495,7 +499,7 @@ msgid ""
 "unmodified."
 msgstr ""
 
-#: common/docman/include/utils.php:314 common/docman/views/addfile.php:142
+#: common/docman/include/utils.php:314 common/docman/views/addfile.php:168
 #: common/docman/views/editfile.php:126
 #, fuzzy
 msgid "Directory that document belongs in"
@@ -531,36 +535,48 @@ msgstr ""
 msgid "You MUST first create at least one directory to store your document."
 msgstr ""
 
-#: common/docman/views/addfile.php:89
+#: common/docman/views/addfile.php:99
 #, fuzzy
 msgid "Type of Document"
 msgstr "使用讨论区"
 
-#: common/docman/views/addfile.php:91 common/docman/views/addfile.php:106
+#: common/docman/views/addfile.php:101 common/docman/views/addfile.php:119
 #: plugins/contribtracker/www/global_admin.php:242
 msgid "URL"
 msgstr ""
 
-#: common/docman/views/addfile.php:93
+#: common/docman/views/addfile.php:103
+#, fuzzy
+msgid "Already-uploaded file"
+msgstr "选择一个FTP文件代替上传："
+
+#: common/docman/views/addfile.php:106
 #, fuzzy
 msgid "Create online"
 msgstr "创建"
 
-#: common/docman/views/addfile.php:99
+#: common/docman/views/addfile.php:112
 msgid "Upload File"
 msgstr "上传文件"
 
-#: common/docman/views/addfile.php:113 www/frs/admin/editrelease.php:287
+#: common/docman/views/addfile.php:132
+#, php-format
+msgid ""
+"Pick a file already uploaded (by SFTP or SCP) to the <a href=\"%2$s"
+"\">project's incoming directory</a> (%1$s)."
+msgstr ""
+
+#: common/docman/views/addfile.php:139 www/frs/admin/editrelease.php:287
 #: www/frs/admin/qrs.php:193
 msgid "File Name"
 msgstr "文件名"
 
-#: common/docman/views/addfile.php:150
+#: common/docman/views/addfile.php:176
 #, fuzzy
 msgid "Mandatory field"
 msgstr "管理订制栏位"
 
-#: common/docman/views/addfile.php:152
+#: common/docman/views/addfile.php:178
 msgid "Submit Information"
 msgstr "提交信息"
 
