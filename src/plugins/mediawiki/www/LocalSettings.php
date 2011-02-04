@@ -247,6 +247,14 @@ function SetupPermissionsFromRoles () {
 		$wgGroupPermissions[$gr]['importupload']  = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 		$wgGroupPermissions[$gr]['siteadmin']     = $r->hasPermission ('plugin_mediawiki_admin', $g->getID()) ;
 	}	
+
+	$rs = RBACEngine::getInstance()->getGlobalRoles();
+	foreach ($rs as $r) {
+		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
+		
+		// Interwiki management restricted to forge admins
+		$wgGroupPermissions[$gr]['interwiki'] = $r->hasPermission ('forge_admin') ;
+	}
 }
 
 function NoLinkOnMainPage(&$personal_urls){
