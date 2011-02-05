@@ -1,8 +1,8 @@
-Date: Tue,  4 Jan 2011 11:57:23 +0000
+Date: Fri,  4 Feb 2011 16:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhotoAlbumPlugin 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: Help%2FPhotoAlbumPlugin 7928 2011-02-04 15:46:03Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PhotoAlbumPlugin;
+  pagename=Help%2FPhotoAlbumPlugin;
   flags="";
   markup=2;
   charset=UTF-8
@@ -64,5 +64,8 @@ christmas.gif; Merry Christmas!
 
 == Plugin Author
 [Ted Vinke|mailto:teddy@jouwfeestje.com] <teddy@jouwfeestje.com>
+
+<noinclude>
 ----
-PhpWikiDocumentation WikiPlugin
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

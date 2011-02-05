@@ -1,8 +1,8 @@
-Date: Tue,  4 Jan 2011 11:57:23 +0000
+Date: Fri,  4 Feb 2011 16:58:00 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: MagicPhpWikiURLs 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: Help%2FMagicPhpWikiURLs 7932 2011-02-04 16:03:52Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=MagicPhpWikiURLs;
+  pagename=Help%2FMagicPhpWikiURLs;
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -125,6 +125,7 @@ yields
 
 <?plugin-form TitleSearch formsize=12 ?>
 
+<noinclude>
 ----
-
-PhpWikiDocumentation
+[[PhpWikiDocumentation]]
+</noinclude>

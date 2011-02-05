@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:58:00 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FPhpWiki 7932 2011-02-04 16:03:52Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PhpWiki;
+  pagename=Help%2FPhpWiki;
   flags="";
   markup=2;
   charset=UTF-8
@@ -13,6 +13,7 @@ Content-Transfer-Encoding: binary
 參訪我們位於 http://phpwiki.sourceforge.net 的首頁並參閱這兒的 PhpWiki
 http://phpwiki.sourceforge.net/phpwiki/.
 
+<noinclude>
 ----
-
-PhpWikiDocumentation
+[[PhpWikiDocumentation]]
+</noinclude>

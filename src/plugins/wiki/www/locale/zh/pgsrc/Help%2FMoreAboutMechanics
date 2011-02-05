@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:58:00 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: MoreAboutMechanics 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FMoreAboutMechanics 7932 2011-02-04 16:03:52Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=MoreAboutMechanics;
+  pagename=Help%2FMoreAboutMechanics;
   flags="";
   markup=2;
   charset=UTF-8
@@ -34,5 +34,7 @@ Wiki 頁面的連結是自動被連結的: AddingPages.
 PhpWiki 使用 GNU General Public license 授權,你應該參照這裡:
 http://www.gnu.org/copyleft/gpl.txt.
 
+<noinclude>
 ----
-PhpWikiDocumentation CategoryWiki
+[[PhpWikiDocumentation]]
+</noinclude>

@@ -1,8 +1,8 @@
 Date: Fri, 10 Sep 2010 13:48:49 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpHighlightPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FPhpHighlightPlugin 7870 2011-01-25 13:52:22Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=PhpHighlightPlugin;
+  pagename=Help%2FPhpHighlightPlugin;
   flags="";
   markup=2;
   charset=UTF-8
