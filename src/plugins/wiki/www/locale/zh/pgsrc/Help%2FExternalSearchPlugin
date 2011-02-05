@@ -1,8 +1,8 @@
-Date: Tue,  4 Jan 2011 11:57:23 +0000
+Date: Fri,  4 Feb 2011 16:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ExternalSearchPlugin 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: Help%2FExternalSearchPlugin 7928 2011-02-04 15:46:03Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=ExternalSearchPlugin;
+  pagename=Help%2FExternalSearchPlugin;
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -54,5 +54,8 @@ ExternalSearchPlugin 建立可以查詢 InterWiki 或其他內部站台的表單
 
 輸入PhpWiki上任何已存在的頁面名稱,以直接跳到該頁面.
 <<ExternalSearch url=PhpWiki >>
+
+<noinclude>
 ----
-PhpWikiDocumentation WikiPlugin
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>
