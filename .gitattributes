@@ -3084,6 +3084,7 @@ src/plugins/wiki/www/locale/zh/pgsrc/FullRecentChanges -text
 src/plugins/wiki/www/locale/zh/pgsrc/FullTextSearch -text
 src/plugins/wiki/www/locale/zh/pgsrc/FuzzyPages -text
 src/plugins/wiki/www/locale/zh/pgsrc/HelloWorldPlugin -text
+src/plugins/wiki/www/locale/zh/pgsrc/Help -text
 src/plugins/wiki/www/locale/zh/pgsrc/Help%2FHowToUseWiki -text
 src/plugins/wiki/www/locale/zh/pgsrc/Help%2FInterWiki -text
 src/plugins/wiki/www/locale/zh/pgsrc/Help%2FLinkIcons -text
