@@ -1,5 +1,5 @@
 /**
- * $Id: SpaceWiki.css 7832 2011-01-13 14:57:09Z vargenau $
+ * $Id: SpaceWiki.css 7851 2011-01-21 13:17:59Z vargenau $
  *
  * This theme will probably be renamed something like "Space" to
  * avoid any potential copyright issues.
@@ -37,7 +37,7 @@ table {
   /* For Mozilla */
   empty-cells: show;
 }
-td { color: white; } /* for NS4 */
+td { color: white; }
 caption {
   caption-side: top;
   text-align: left;
@@ -484,10 +484,8 @@ table.cal td.cal-today a.cal-hide {  }
 .diff .original, .diff .deleted { background: #a40024; }
 .diff .final, .diff .added { background: #cfc; }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 .diff del { background: #a40024; }
 .diff ins { background: #9f9; }
-
 
 /**
  * PageHistory, Info
@@ -541,20 +539,12 @@ b.wikisummary {
  */
 .printer { display: none; }
 
-/* PHP Warnings */
-div.errors {
+.error {
   color: red;
   background: black;
   border: medium solid red;
   clear: both;
 }
-.errors {
-  color: black;
-  background: red;
-  text-decoration: underline;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -672,7 +662,7 @@ a.wikiadmin:hover {
   padding-right: 1px;
   padding-top: 1px;
   margin-right: 1px;
-  font-size: smaller; /* too small in NS4 */
+  font-size: smaller;
 }
 .wikiunknown a:hover, .named-wikiunknown a:hover {
   border: 1px solid #403752;
@@ -750,13 +740,10 @@ div.toolbar input {
   text-align:  left;
 }
 
-
 /**
  * Edit Page & View Source
  */
-/* color: inherit; and background: inherit; display as lime in NS4 */
-div.transclusion { font-size: smaller; } /* too small in NS4 */
-
+div.transclusion { font-size: smaller; }
 
 /**
  * Diff Output
@@ -770,7 +757,6 @@ div.transclusion { font-size: smaller; } /* too small in NS4 */
   left: 0;
   top:  0;
 }
-
 
 .editdate {
   padding-top:    0.25ex;
@@ -797,26 +783,6 @@ div.toolbar .wiki:hover {
 b.wikisummary {
   padding: 2px;
   margin: 1px;
-}
-
-/**
- * Other
- */
-/* PHP Warnings */
-div.errors {
-  font-size: smaller; /* too small in NS4 */
-  margin-top:    4ex;
-  margin-bottom: 2ex;
-  padding: 0.5ex 0.25em;
-}
-.errors {
-  margin: 0;
-  padding: 0.5ex 0.25em;
-}
-
-.error {
-  padding-left: 0.25em;
-  padding-right: 0.25em;
 }
 
 /*

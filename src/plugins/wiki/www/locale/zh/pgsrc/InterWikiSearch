@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: InterWikiSearch 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: InterWikiSearch 7928 2011-02-04 15:46:03Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=InterWikiSearch;
   flags="";
@@ -13,5 +13,6 @@ Content-Transfer-Encoding: binary
 要查詢其他頁面的話可以用 ExternalSearchPlugin.
 
 <<InterWikiSearch>>
+
 ----
-WikiPlugin
+[[CategoryActionPage]]

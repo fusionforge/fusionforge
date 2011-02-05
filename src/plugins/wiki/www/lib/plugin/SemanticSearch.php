@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: SemanticSearch.php 7417 2010-05-19 12:57:42Z vargenau $');
+// rcs_id('$Id: SemanticSearch.php 7850 2011-01-21 09:41:05Z vargenau $');
 /*
  * Copyright 2007 Reini Urban
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -154,7 +154,7 @@ extends WikiPlugin
                                       )),
                              HTML::tbody
                              (HTML::tr(
-                                       HTML::td($pagefilter, ": "),
+                                       HTML::td($pagefilter, _(": ")),
                                        HTML::td($relation),
                                        HTML::td(HTML::strong(HTML::tt('  ::  '))),
                                        HTML::td($queryrel),
@@ -237,7 +237,7 @@ extends WikiPlugin
                                       )),
                              HTML::tbody
                              (HTML::tr(
-                                       HTML::td($pagefilter, ": "),
+                                       HTML::td($pagefilter, _(": ")),
                                        HTML::td($attribute),
                                        HTML::td($attr_op),
                                        HTML::td($queryatt),

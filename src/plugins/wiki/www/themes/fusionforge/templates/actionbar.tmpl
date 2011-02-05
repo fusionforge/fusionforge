@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: actionbar.tmpl 7804 2011-01-04 14:21:32Z vargenau $
+// $Id: actionbar.tmpl 7926 2011-02-01 10:47:10Z vargenau $
 
 $curuserprefs = $user->getPreferences();
 $dbh = $request->getDbh();
@@ -48,7 +48,7 @@ $isBrowse = $request->getArg('action') == 'browse';
     <td class="spacer">&nbsp;</td>
     <td class="spacer">&nbsp;</td>
 
-    <?php if (!($page->get('locked')) and (mayAccessPage('edit', $page->getName()))) { ?>
+    <?php if ($user->isAdmin() or (!($page->get('locked')) and (mayAccessPage('edit', $page->getName())))) { ?>
       <td class="bold">
       <?php if (! $dbh->isWikiPage($page->getName())) { ?>
       <?php echo Button("edit", _("Create Page")) ?>
@@ -81,7 +81,7 @@ $isBrowse = $request->getArg('action') == 'browse';
       <td><?php echo Button("PageInfo", _("Page Info")) ?></td>
 
       <td class="spacer">&nbsp;</td>
-      <td><?php echo Button(array('action'=>'BackLinks'), _("Back Links"),$page->getName()) ?></td>
+      <td><?php echo Button(array('action'=>_("BackLinks")), _("Back Links"),$page->getName()) ?></td>
 
     <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
       <?php if ($curuserprefs->get('pdfMenuItem')) { ?>
@@ -129,7 +129,7 @@ $isBrowse = $request->getArg('action') == 'browse';
     <?php } ?>
 
     <td class="spacer">&nbsp;</td>
-    <td><?php echo Button("WatchPage", _("Watch Page")) ?></td>
+    <td><?php echo Button(_("WatchPage"), _("Watch Page")) ?></td>
 
   </tr>
   </table>

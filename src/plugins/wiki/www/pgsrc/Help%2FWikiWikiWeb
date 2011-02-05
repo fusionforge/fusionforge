@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 17:30:39 +0000
+Date: Tue, 25 Jan 2011 17:23:56 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FWikiWikiWeb 7764 2010-12-09 16:36:20Z vargenau $
+X-Rcs-Id: $Id: Help%2FWikiWikiWeb 7874 2011-01-25 16:24:43Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiWikiWeb;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -27,7 +27,7 @@ You can say hello on [[RecentVisitors]], or read about [[Help:HowToUseWiki|HowTo
 [[Help:AddingPages|AddingPages]]. Currently this Wiki has no theme for discussion, so go
 ahead and play with it and have fun!!
 
---SteveWainstead.
+--[[SteveWainstead]].
 
 <noinclude>
 ----

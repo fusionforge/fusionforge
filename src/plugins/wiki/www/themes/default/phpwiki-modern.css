@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki-modern.css 7832 2011-01-13 14:57:09Z vargenau $
+ * $Id: phpwiki-modern.css 7851 2011-01-21 13:17:59Z vargenau $
  *
  * Inspiration for this stylesheet:
  *
@@ -65,12 +65,7 @@ div.wikitext {
   margin-bottom: 0;
   margin-left:  0em;
   margin-right: 0em;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
-  /* user's browser settings *
-  font-family: none; */
 }
 
 #logo img {
@@ -400,7 +395,6 @@ table.cal td.cal-today a.cal-hide {
 .diff .original, .diff .deleted { background: #fcc; }
 .diff .final, .diff .added { background: #cfc; }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 .diff del { background: #f99; }
 .diff ins { background: #9f9; }
 
@@ -420,8 +414,7 @@ td.pageinfo { font-weight: bold; }
  */
 .printer { display: none; }
 
-/* PHP Warnings */
-div.errors {
+.error {
   color: black;
   background: white;
   margin-top:    2em;
@@ -430,15 +423,6 @@ div.errors {
   font-size: smaller;
   border: thin dashed red;
 }
-.errors {
-  color: red;
-  background: inherit;
-  margin:  0;
-  padding: 0;
-  text-decoration: underline;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -448,12 +432,6 @@ div.errors {
   margin: 1ex 0;
   padding: 0.5ex 0.5em;
 }
-
-/* Hide the elements we put in just to get around NS4 bugs. */
-div.br { display: none; }
-
-/* This break NS4, but is necessary for IE4. */
-div.wikitext { width: auto; }
 
 /* Link icons */
 img.linkicon { vertical-align: middle; }

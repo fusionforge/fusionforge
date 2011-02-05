@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: InlineParser.php 7803 2011-01-04 13:10:27Z vargenau $');
+// rcs_id('$Id: InlineParser.php 7850 2011-01-21 09:41:05Z vargenau $');
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -341,7 +341,7 @@ function LinkBracketLink($bracketlink) {
 	       str_replace("\n", " ", $bracketlink), $matches);
     if (count($matches) < 4) {
     	// "[ personal\ninformation manager | PhpWiki:PersonalWiki ]"
-    	trigger_error(_("Invalid [] syntax ignored").": ".$bracketlink, E_USER_WARNING);
+    	trigger_error(_("Invalid [] syntax ignored")._(": ").$bracketlink, E_USER_WARNING);
     	return new Cached_Link;
     }
     list (, $hash, $label, $bar, $rawlink) = $matches;

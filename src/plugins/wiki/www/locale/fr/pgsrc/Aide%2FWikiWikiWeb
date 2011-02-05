@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
 X-Rcs-Id: $Id: Aide%2FWikiWikiWeb$
 Content-Type: application/x-phpwiki;
@@ -8,19 +8,21 @@ Content-Type: application/x-phpwiki;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-Un WikiWikiWeb est un site sur lequel tout le monde peut collaborer au contenu. Le Wiki le plus connu et le plus largement utilisé est le Portland Pattern Repository à http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+Un ~WikiWikiWeb est un site sur lequel tout le monde peut collaborer au contenu. Le Wiki le plus connu et le plus largement utilisé est le Portland Pattern Repository à [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
 Vous et moi pourrons trouver là-bas ces déclarations particulièrement pertinentes :
 
  ''Le tout est de rendre l'édition simple et la recherche ChercherUnePage rapide.''
 
- ''En plus d'être rapide, ce site aspire aussi aux idéaux du Zen généralement réunis sous le nom de WabiSabi. Le Zen trouve la beauté dans l'imparfait et l'éphémère. Lorsque vous y parvenez, vous n'avez besoin de rien d'autre.''
+ ''En plus d'être rapide, ce site aspire aussi aux idéaux du Zen généralement réunis sous le nom de [[Aide:WabiSabi|WabiSabi]]. Le Zen trouve la beauté dans l'imparfait et l'éphémère. Lorsque vous y parvenez, vous n'avez besoin de rien d'autre.''
 
  ''L'Univers tend vers le chaos. L'Univers tend vers Wiki.''
 
-Vous pouvez dire bonjour sur DerniersVisiteurs, ou en lire plus sur CommentUtiliserUnWiki et comment AjouterDesPages. Pour le moment ce Wiki n'a pas de thème de discussion, alors allez-y, jouez avec et amusez-vous !!
+Vous pouvez dire bonjour sur [[DerniersVisiteurs]], ou en lire plus sur [[Aide:CommentUtiliserUnWiki|CommentUtiliserUnWiki]] et comment [[Aide:AjouterDesPages|AjouterDesPages]]. Pour le moment ce Wiki n'a pas de thème de discussion, alors allez-y, jouez avec et amusez-vous !!
 
---SteveWainstead.
+--[[SteveWainstead]].
 
+<noinclude>
 ----
 [[DocumentationDePhpWiki]]
+</noinclude>

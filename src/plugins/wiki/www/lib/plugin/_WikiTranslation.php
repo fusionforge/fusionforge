@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: _WikiTranslation.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: _WikiTranslation.php 7842 2011-01-19 15:57:04Z vargenau $
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  *
@@ -44,48 +44,52 @@
 
 /* Container for untranslated pagenames. Needed to show up in locale/po/phpwiki.pot */
 $pgsrc_container =
-    _("AddCommentPlugin")  .','.
-    _("AddingPages")  .','.
     _("AllPagesCreatedByMe")  .','.
     _("AllPagesLastEditedByMe")  .','.
     _("AllPagesOwnedByMe")  .','.
-    _("AuthorHistoryPlugin") .','.
     _("BackLinks") .','.
-    _("CalendarListPlugin") .','.
-    _("CalendarPlugin") .','.
     _("CategoryCategory")  .','.
     _("CategoryHomePages")  .','.
-    _("CommentPlugin")  .','.
-    _("CreateTocPlugin")  .','.
     _("DebugInfo") .','.
     _("EditMetaData") .','.
-    _("EditMetaDataPlugin") .','.
-    _("ExternalSearchPlugin") .','.
     _("FindPage") .','.
-    _("FoafViewerPlugin") .','.
-    _("FrameIncludePlugin") .','.
     _("FullRecentChanges") .','.
-    _("HelloWorldPlugin") .','.
+    _("Help/AddingPages")  .','.
+    _("Help/AddCommentPlugin")  .','.
+    _("Help/AuthorHistoryPlugin") .','.
+    _("Help/CalendarListPlugin") .','.
+    _("Help/CalendarPlugin") .','.
+    _("Help/CommentPlugin")  .','.
+    _("Help/CreateTocPlugin")  .','.
+    _("Help/EditMetaDataPlugin") .','.
+    _("Help/ExternalSearchPlugin") .','.
+    _("Help/FoafViewerPlugin") .','.
+    _("Help/FrameIncludePlugin") .','.
+    _("Help/HelloWorldPlugin") .','.
+    _("Help/IncludePagePlugin") .','.
+    _("Help/LinkIcons") .','.
+    _("Help/MagicPhpWikiURLs") .','.
+    _("Help/MoreAboutMechanics") .','.
+    _("Help/OldStyleTablePlugin") .','.
+    _("Help/PhotoAlbumPlugin") .','.
+    _("Help/PhpHighlightPlugin") .','.
+    _("Help/PhpWeatherPlugin") .','.
+    _("Help/PhpWiki") .','.
+    _("Help/PloticusPlugin") .','.
+    _("Help/RawHtmlPlugin") .','.
+    _("Help/RedirectToPlugin") .','.
+    _("Help/RichTablePlugin") .','.
+    _("Help/SystemInfoPlugin") .','.
+    _("Help/TranscludePlugin") .','.
+    _("Help/UnfoldSubpagesPlugin") .','.
+    _("Help/UpLoadPlugin") .','.
+    _("Help/WabiSabi") .','.
+    _("Help/WikiBlogPlugin") .','.
+    _("Help/WikiPlugin") .','.
+    _("Help/WikiWikiWeb");
     _("HomePageAlias") .','.
-    _("IncludePagePlugin") .','.
     _("InterWiki") .','.
-    _("LinkIcons") .','.
-    _("MagicPhpWikiURLs") .','.
-    _("MoreAboutMechanics") .','.
-    _("NewMarkupTestPage") .','.
-    _("OldMarkupTestPage") .','.
-    _("OldStyleTablePlugin") .','.
 //  _("PageDump") .','.
-    _("PageGroupTest") .','.
-    _("PageGroupTest/Four") .','.
-    _("PageGroupTest/One") .','.
-    _("PageGroupTest/Three") .','.
-    _("PageGroupTest/Two") .','.
-    _("PgsrcTranslation") .','.
-    _("PhotoAlbumPlugin") .','.
-    _("PhpHighlightPlugin") .','.
-    _("PhpWeatherPlugin") .','.
-    _("PhpWiki") .','.
     _("PhpWikiAdministration/Chmod") .','.
     _("PhpWikiAdministration/Chown") .','.
     _("PhpWikiAdministration/Remove") .','.
@@ -94,33 +98,12 @@ $pgsrc_container =
     _("PhpWikiAdministration/SetAcl") .','.
     _("PhpWikiDocumentation") .','.
     _("PhpWikiPoll") .','.
-    _("PloticusPlugin") .','.
-    _("PgsrcTranslation") .','.
-    _("PgsrcTranslation/de") .','.
-    _("PgsrcTranslation/fr") .','.
-    _("PgsrcTranslation/it") .','.
-    _("PgsrcTranslation/es") .','.
-    _("PgsrcTranslation/nl") .','.
-    _("PgsrcTranslation/sv") .','.
-    _("PgsrcTranslation/ja") .','.
-    _("PgsrcTranslation/zh") .','.
-    _("RawHtmlPlugin") .','.
     _("RecentVisitors") .','.
-    _("RedirectToPlugin") .','.
     _("ReleaseNotes") .','.
-    _("RichTablePlugin") .','.
 //    _("SpellCheck") .','.
     _("SteveWainstead") .','.
-    _("SystemInfoPlugin") .','.
-    _("TranscludePlugin") .','.
     _("TranslateText") .','.
-    _("UnfoldSubpagesPlugin") .','.
     _("UpLoad") .','.
-    _("UpLoadPlugin") .','.
-    _("WabiSabi") .','.
-    _("WikiBlogPlugin") .','.
-    _("WikiPlugin") .','.
-    _("WikiWikiWeb");
 
 require_once('lib/PageList.php');
 

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Wed, 26 Jan 2011 17:26:56 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: StartSeite 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: StartSeite 7908 2011-01-26 16:28:16Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=StartSeite;
   flags="";
@@ -13,5 +13,5 @@ Content-Transfer-Encoding: binary
 * Bitte trage dich im GästeBuch ein.
 * Die letzten Änderungen und neue Seiten findet man unter NeuesteÄnderungen.
 * Eine Liste der [MeistBesucht]en Seiten.
-* ReleaseNotes (in Englisch)
+* [[ReleaseNotes]] (in Englisch)
 * Dieses Wiki wird verwaltet unter PhpWikiSystemverwalten.

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSetExternal.php 7417 2010-05-19 12:57:42Z vargenau $');
+// rcs_id('$Id: WikiAdminSetExternal.php 7925 2011-02-01 10:08:52Z vargenau $');
 /*
  * Copyright 2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -77,7 +77,7 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently changed:"));
+                $result->pushContent(HTML::p(_("One page has been permanently changed:")));
             } else {
                 $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
             }
@@ -85,7 +85,7 @@ extends WikiPlugin_WikiAdminSelect
             return $result;
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages changed."));
+            $result->pushContent(HTML::p_(("No pages changed.")));
             return $result;
         }
     }

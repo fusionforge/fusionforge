@@ -1,5 +1,5 @@
 /**
- *  $Id: main.css 7832 2011-01-13 14:57:09Z vargenau $
+ *  $Id: main.css 7851 2011-01-21 13:17:59Z vargenau $
  */ 
 
 /*
@@ -1588,8 +1588,8 @@ div.boxright {
 div#bottom {   
 	margin-left:   12.2em;
 }
-/* PHP Warnings */
-div.errors {
+
+.error {
 	color: black;
 	background: #eee;
 	margin-top:    1em;
@@ -1601,13 +1601,8 @@ div.errors {
 	border: medium solid red;
 	clear: both;
 }
-.errors {
-	color: red;
-	margin:  0;
-	padding: 0;
-	text-decoration: underline;
-}
-div.warning {
+
+.warning {
 	color: black;
 	background: #eee;
 	margin-top:    1em;
@@ -1851,19 +1846,6 @@ td.tdunselected {
      background-color: #DFD;
      border-color: green;
      padding: 0.5em;
-}
-
-/* style for error messages
-   Use this style if you need to display an error, e.g:
-     User does not exist
-*/
-.error {
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    background-color: #ffc0cb; /* pink */
-    border-color: red;
-    padding: 0.5em;
 }
 
 #edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {

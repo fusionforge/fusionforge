@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// $Id: themeinfo.php 7751 2010-12-04 11:49:18Z vargenau $;
+// $Id: themeinfo.php 7850 2011-01-21 09:41:05Z vargenau $;
 
 require_once('lib/WikiTheme.php');
 require_once('themes/wikilens/themeinfo.php');
@@ -32,7 +32,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens {
             session_require_global_perm ('forge_admin');
         }
 
-        $HTML->header(array('title'=> $group_public_name.': '.htmlspecialchars($pagename),
+        $HTML->header(array('title'=> $group_public_name._(": ").htmlspecialchars($pagename),
                             'group' => $group_id,
                             'toptab' => 'wiki',
                             'submenu' => $submenu->asXML()

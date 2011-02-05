@@ -12,8 +12,6 @@ $locale["%d best outgoing links: "] =
    "%d migliori link in uscita: ";
 $locale["%d most popular nearby: "] =
    "%d più popolari: ";
-$locale["%s Kb (%s bytes)"] =
-   "%s Kb (%s byte)";
 $locale["%s at %s"] =
    "%s a %s";
 $locale["%s bytes"] =
@@ -84,10 +82,6 @@ $locale["Calendar"] =
    "Calendario";
 $locale["CalendarList"] =
    "ListaCalendario";
-$locale["CalendarListPlugin"] =
-   "CalendarioListPlugin";
-$locale["CalendarPlugin"] =
-   "CalendarioPlugin";
 $locale["Cancel"] =
    "Annulla";
 $locale["Category"] =
@@ -168,8 +162,6 @@ $locale["In the time since you started editing this page, another user has saved
    "Nel tempo da quando avete cominciato pubblicare questa pagina, un altro utente ha conservato una nuova versione di esso.";
 $locale["IncludePage"] =
    "InserireLaPagina";
-$locale["IncludePagePlugin"] =
-   "InserireLaPaginaPlugin";
 $locale["IncludePages"] =
    "InserirePaginas";
 $locale["Included from %s"] =

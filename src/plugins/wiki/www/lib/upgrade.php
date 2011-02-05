@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: upgrade.php 7664 2010-08-31 15:42:34Z vargenau $');
+// rcs_id('$Id: upgrade.php 7850 2011-01-21 09:41:05Z vargenau $');
 /*
  * Copyright 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -1101,7 +1101,7 @@ class UpgradeEntry
 	$this->parent->dbi->set($this->_db_key, $this->upgrade);
 	echo "<b>",_("FIXED"),"</b>";
 	if (isset($this->reason))
-	    echo ": ", $this->reason;
+	    echo _(": "), $this->reason;
 	echo "<br />\n";
 	flush();
 	return true;
@@ -1109,7 +1109,7 @@ class UpgradeEntry
     function fail() {
 	echo " <b><font color=\"red\">", _("FAILED"), "</font></b>";
 	if (isset($this->reason))
-	    echo ": ", $this->reason;
+	    echo _(": "), $this->reason;
 	echo "<br />\n";
 	flush();
 	return false;

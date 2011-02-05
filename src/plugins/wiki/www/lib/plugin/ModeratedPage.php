@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: ModeratedPage.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: ModeratedPage.php 7850 2011-01-21 09:41:05Z vargenau $');
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -253,10 +253,10 @@ extends WikiPlugin
             require_once("lib/MailNotify.php");
             $pagename = $page->getName();
             $mailer = new MailNotify($pagename);
-            $subject = "[".WIKI_NAME.'] '.$action.': '._("ModeratedPage").' '.$pagename;
+            $subject = "[".WIKI_NAME.'] '.$action._(": ")._("ModeratedPage").' '.$pagename;
             $content =         "You are approved as Moderator of the ".WIKI_NAME. " wiki.\n".
                      "Someone wanted to edit a moderated page, which you have to approve or reject.\n\n".
-                     $action.': '._("ModeratedPage").' '.$pagename."\n"
+                     $action._(": ")._("ModeratedPage").' '.$pagename."\n"
                      //. serialize($moderated['data'][$id])
                      ."\n<".WikiURL($pagename, array('action' => _("ModeratedPage"),
                                                      'id' => $id, 'pass' => 'approve'), 1).">"
@@ -348,7 +348,7 @@ extends WikiPlugin
             $status = $this->getSiteStatus($request, $action_page);
             require_once("lib/MailNotify.php");
             $mailer = new MailNotify($pagename);
-            $subject = "[".WIKI_NAME."] $pass $action "._("ModeratedPage").': '.$pagename;
+            $subject = "[".WIKI_NAME."] $pass $action "._("ModeratedPage")._(": ").$pagename;
             $mailer->from = $request->_user->UserFrom();
             $content = sprintf(_("%s approved your wiki action from %s"),
                                  $mailer->from,CTime($moderation['timestamp']))

@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:58:32 +0000
+Date: Thu, 27 Jan 2011 10:22:55 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FURLMagiquesPhpWiki 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: Aide%2FURLMagiquesPhpWiki 7915 2011-01-27 09:24:46Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FURLMagiquesPhpWiki;
   flags=PAGE_LOCKED;
@@ -100,12 +100,12 @@ Un plugin de recherche appelé avec *<?plugin* au lieu de *<?plugin-form*
 insère simplement le résultat de la recherche du plugin :
 
 {{{
-<<TitleSearch s=wiki noheader=true >>
+<<TitleSearch s=wiki noheader=true>>
 }}}
 
 Résultats de recherche pour les pages dont le titre contient 'wiki' :
 
-<<TitleSearch s=wiki noheader=true >>
+<<TitleSearch s=wiki noheader=true>>
 
 {{{
 <?plugin-form FullTextSearch ?>
@@ -125,6 +125,7 @@ donne
 
 <?plugin-form TitleSearch formsize=12 ?>
 
+<noinclude>
 ----
-
 [[DocumentationDePhpWiki]]
+</noinclude>

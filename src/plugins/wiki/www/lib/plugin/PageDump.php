@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PageDump.php 7780 2010-12-16 12:52:11Z vargenau $');
+// rcs_id('$Id: PageDump.php 7857 2011-01-21 14:49:59Z vargenau $');
 /*
  * Copyright (C) 2003 $ThePhpWikiProgrammingTeam
  *
@@ -219,7 +219,7 @@ _("PhpWiki developers should manually inspect the downloaded file for nested mar
         return HTML($h2, HTML::em($desc),
                     HTML::pre($mailified),
                     $altpreviewbuttons,
-                    HTML::div(array('class' => 'errors'),
+                    HTML::div(array('class' => 'error'),
                               HTML::strong(_("Warning:")),
                               " ", $warning),
                     $dl, $Sep, $dlall, $Sep, $dlsvn

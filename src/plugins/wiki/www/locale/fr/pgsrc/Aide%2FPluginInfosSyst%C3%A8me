@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginInfosSyst%C3%A8me 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginInfosSyst%C3%A8me 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginInfosSyst%C3%A8me;
   flags="";
@@ -16,14 +16,19 @@ concernant PhpWiki relativement au système sur lequel il est installé.
 ===Usage
 
 {{{
- Usage:  <<SystemInfo all >>
-      ou <<SystemInfo pagestats cachestats discspace hitstats >>
-      ou <<SystemInfo version >>
-      ou <<SystemInfo current_theme >>
-      ou <<SystemInfo PHPWIKI_DIR >>
+ Usage:  <<SystemInfo all>>
+      ou <<SystemInfo pagestats cachestats discspace hitstats>>
+      ou <<SystemInfo version>>
+      ou <<SystemInfo current_theme>>
+      ou <<SystemInfo PHPWIKI_DIR>>
 }}}
 
 
 ===Exemple
 
-<<SystemInfo all >>
+<<SystemInfo all>>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

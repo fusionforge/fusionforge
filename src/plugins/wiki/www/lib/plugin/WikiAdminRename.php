@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminRename.php 7448 2010-05-31 12:01:38Z vargenau $');
+// rcs_id('$Id: WikiAdminRename.php 7850 2011-01-21 09:41:05Z vargenau $');
 /*
  * Copyright 2004,2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -263,11 +263,11 @@ extends WikiPlugin_WikiAdminSelect
 
     function renameForm(&$header, $post_args, $singlepage) {
         $table = HTML::table();
-        $this->_tablePush($table, _("Rename"). " ". _("from").': ',
+        $this->_tablePush($table, _("Rename"). " ". _("from")._(": "),
                           HTML::input(array('name' => 'admin_rename[from]',
                                             'size' => 90,
                                             'value' => $post_args['from'])));
-        $this->_tablePush($table, _("to").': ',
+        $this->_tablePush($table, _("to")._(": "),
                           HTML::input(array('name' => 'admin_rename[to]',
                                             'size' => 90,
                                             'value' => $post_args['to'])));

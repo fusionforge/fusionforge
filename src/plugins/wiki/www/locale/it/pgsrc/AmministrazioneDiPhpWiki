@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:58:08 +0000
+Date: Fri,  4 Feb 2011 16:36:44 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AmministrazioneDiPhpWiki 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: AmministrazioneDiPhpWiki 7927 2011-02-04 15:37:59Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AmministrazioneDiPhpWiki;
   flags=PAGE_LOCKED;
@@ -14,7 +14,6 @@ password in the PhpWiki config file._
 
 <<CreateToc jshide||=1 with_toclink||=1 >>
 
-----
 == Page Explorer
 
 First select pages and then define the action:
@@ -23,14 +22,8 @@ First select pages and then define the action:
 
 or call the available ~WikiAdmin actions directly:
 
-[/Rimuovi] |
-  [/Rename] |
-    [/Replace] |
-      [/SetAcl] |
-        [/Chmod] |
-          [/Chown]
+| [[/Rimuovi]] | [[/Rename]] | [[/Replace]] | [[/SetAcl]] | [[/Chmod]] | [[/Chown]]
 
-----
 == User Management
 
 PhpWiki:EmailVerification is currently non-strict, leaving some possible holes, which can be administrated below.

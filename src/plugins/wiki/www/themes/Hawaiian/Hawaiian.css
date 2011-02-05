@@ -1,8 +1,8 @@
 /**
- * $Id: Hawaiian.css 7832 2011-01-13 14:57:09Z vargenau $
+ * $Id: Hawaiian.css 7851 2011-01-21 13:17:59Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
- * ground up. It has not yet been tested against NS4.
+ * ground up.
  *
  * Mozilla's "DOM Inspector" Sidebar was an invaluable troubleshooting
  * tool for mapping the more complex CSS node selectors, such as those
@@ -69,12 +69,7 @@ div.wikitext {
   padding-right: 0.8em;
   padding-top:    0.5ex;
   padding-bottom: 0.5ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
-  /* user's browser settings *
-  font-family: none; */
 }
 div.wikitext hr { height: 1px; }
 
@@ -373,18 +368,15 @@ table.cal td.cal-day a {
 .diff .original, .diff .deleted { background: #fcc; }
 .diff .final, .diff .added { background: #cfc; }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 .diff del { background: #f99; }
 .diff ins { background: #9f9; }
-
 
 /**
  * Other
  */
 .printer { display: none; }
 
-/* PHP Warnings */
-div.errors {
+div.error {
   color: black;
   border: medium solid #d8caae;
   margin-top:    1em;
@@ -396,15 +388,6 @@ div.errors {
   font-size: smaller;
   clear: both;
 }
-.errors {
-  color: #87785c;
-  margin:  0;
-  padding: 0;
-  text-decoration: none;
-  font-weight: bold;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -463,28 +446,21 @@ li.LSRow {
   list-style-image: none;
 }
 
-/* This makes spacings in NS4 too big. */
 .toolbar, div.toolbar { margin: 0.5ex 0ex; }
 
 /* Link icons */
 img.linkicon { vertical-align: middle; }
 
-
-/* This break NS4 (display does not go full width), but is necessary for IE4. */
 div.wikitext {
   width: auto;
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
   background: url("images/tchecker-white.png") repeat;
 }
 .wiki-edithelp {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
   background: url("images/tchecker-sand.png") repeat;
 }
 .wiki-edithelp p {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
   background: url("images/tchecker-white.png") repeat;
 }
-
 
 /**
  * Diff Output
@@ -492,16 +468,10 @@ div.wikitext {
 .diff .block div { position: relative; padding-left: 1.5em; } 
 .diff .prefix    { position: absolute; left: 0.5em; top: 0; }
 
-
 /**
  * Other
  */
-div.errors {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
-  background: url("images/tchecker-sand.png") repeat;
-}
 .debug {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
   background: url("images/tchecker-sand.png") repeat;
 }
 

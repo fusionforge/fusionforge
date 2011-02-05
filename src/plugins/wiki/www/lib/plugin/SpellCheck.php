@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: SpellCheck.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: SpellCheck.php 7850 2011-01-21 09:41:05Z vargenau $');
 /**
  * Copyright 2006,2007 $ThePhpWikiProgrammingTeam
  *
@@ -175,7 +175,7 @@ extends WikiPlugin
                                               'href' => "javascript:do_replace('$word','$s')"),
                                         $s),", ");
             }
-            $list->pushContent(HTML::li($w, ": ", $r));
+            $list->pushContent(HTML::li($w, _(": "), $r));
         }
         $html->pushContent($list);
         return $html;

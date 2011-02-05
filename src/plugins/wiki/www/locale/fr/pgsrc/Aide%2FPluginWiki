@@ -1,12 +1,27 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginWiki 7919 2011-01-27 17:02:14Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginWiki;
   flags="";
   markup=2;
   charset=utf-8
 Content-Transfer-Encoding: binary
+
+PhpWiki vous permet d'étendre PhpWiki avec de nouvelles fonctionnalités via
+un mécanisme de plugins. Pour faire bref, vous étendez une classe PHP
+que nous fournissons et vous la personnalisez pour qu'elle affiche le
+contenu que vous voulez. Pour plus d'informations, voyez PluginWiki, 
+PluginBonjourLeMonde, et regardez les sources des fichiers dans lib/plugin.
+
+S'il n'y a pas d'exemple de page pour ce plugin ou que vous souhaitez plus 
+d'informations, le meilleur endroit est la source de ce plugin. Sous le 
+répertoire racine de votre wiki, le dossier lib/plugin contient tous les
+fichiers PHP des plugins.
+
+Certains plugins nécessitent des bibliothèques externes non fournies 
+avec PhpWiki ou PHP comme par exemple la librairie GD pour les 
+graphiques.
 
 PhpWiki supporte les plugins depuis 1.3.x
 
@@ -15,7 +30,7 @@ dynamique (ou autre fonctionnalité) aux pages wiki avec PhpWiki. Par exemple,
 dans ce wiki, les DernièresModifs, RétroLiens, PagesSemblables et la plupart
 des autres pages indexées sont toutes implémentées en utilisant les plugins.
 
-À plus ou moins court terme, l'ancien style phpwiki [URLMagiquesPhpWiki] sera
+À plus ou moins court terme, l'ancien style phpwiki [[URLMagiquesPhpWiki]] sera
 remplacé par des plugins également.
 
 == Exemple
@@ -41,7 +56,7 @@ quatre moyens pour spécifier leur valeur. Dans l'ordre de priorité :
 
 # L'appel du plugin peut spécifier la valeur d'un argument comme ceci :
   {{{
-  <<BackLinks page=OtherPage >>
+  <<BackLinks page=OtherPage>>
   }}}
 
 # L'arguement peut être spécifié via l'argument d'une requête HTTP. Ceci ne 
@@ -49,13 +64,13 @@ quatre moyens pour spécifier leur valeur. Dans l'ordre de priorité :
   mentionné dans l'appel du plugin : 
 
   {{{
-  <<BackLinks page >>
+  <<BackLinks page>>
   }}}
 
 # Valeurs par défaut spécifiées dans l'appel du plugin :
 
   {{{
-  <<BackLinks page||=OtherPage >>
+  <<BackLinks page||=OtherPage>>
   }}}
 
 # Le plugin remplace les valeurs par défaut pour chaque argument utilisé
@@ -77,7 +92,7 @@ passé par l'URL (arguments GET et POST définit via '||=').
    comme argument par défaut.
 
 {{{
-<<PluginName [args...] >>
+<<PluginName [args...]>>
 }}}
 
 {{{
@@ -98,6 +113,7 @@ Pages dans cette catégorie :
 * RechercheEnTexteIntégral : ChercherUnePage
 * RechercheParTitre : PagesSemblables (match_head, match_tail).
 
------
-
-[[DocumentationDePhpWiki]]
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

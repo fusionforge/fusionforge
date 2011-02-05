@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
+// rcs_id('$Id: themeinfo.php 7912 2011-01-26 17:36:20Z vargenau $');
 
 /*
  * This file defines the Sidebar theme of PhpWiki,
@@ -115,9 +115,8 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook {
 	// style.  The companion '*-heavy.css' file isn't defined, it's just
 	// expected to be in the same directory that the base style is in.
 
-	$this->setDefaultCSS(_("Sidebar"), 'sidebar.css');
-	//$this->addAlternateCSS('PhpWiki', 'phpwiki.css');
-	//$this->setDefaultCSS('PhpWiki', 'phpwiki.css');
+	$this->setDefaultCSS(_("Sidebar"), array('' => 'sidebar.css',
+                                             'print' => 'phpwiki-printer.css'));
 	$this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css', 'print, screen');
 	$this->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
 

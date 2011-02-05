@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: info.tmpl 7651 2010-08-24 14:24:17Z vargenau $');
+// rcs_id('$Id: info.tmpl 7848 2011-01-20 13:19:57Z vargenau $');
 ?>
 <?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
@@ -30,7 +30,7 @@ if ($bytes < 1024 )
     $size = fmt("%s bytes", $bytes);
 else {
     $kb = round($bytes / 1024, 1);
-    $size = fmt("%s Kb (%s bytes)", $kb, $bytes);
+    $size = fmt("%s KiB (%s bytes)", $kb, $bytes);
 }
 // Count words
 preg_match_all('/\\w+\\W*/', $revision->_data['%content'], $whitespacematches);

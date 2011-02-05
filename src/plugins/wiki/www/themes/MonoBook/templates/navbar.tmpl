@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// rcs_id('$Id: navbar.tmpl 7924 2011-01-31 16:57:48Z vargenau $');
 ?>
 <?php
 // With MonoBook it is similar to Sidebar, named boxes at the left.
@@ -16,7 +16,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
       <li><? $link = WikiLink(_("RecentChanges"), "",_("Recent changes")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?php echo $link ?></li>
       <li id="n-recentcomments"><?php echo WikiLink(_("RecentComments"), "",_("Recent comments")) ?></li>
       <li id="n-recentnewpages"><?php echo WikiLink(_("RecentNewPages"), "",_("Recent new pages")) ?></li>
-      <li id="n-likepages"><?php echo Button(array('action'=>'LikePages'),_("Like pages"), $page->getName()) ?></li>
+      <li id="n-likepages"><?php echo Button(array('action'=>_("LikePages")),_("Like pages"), $page->getName()) ?></li>
       <li id="n-randompage"><?php echo WikiLink(_("RandomPage"), "",_("Random page")) ?></li>
 <li id="n-help"><?php echo WikiLink(_("PhpWikiDocumentation"),"",_("Help")) ?></li>
     </ul>
@@ -49,7 +49,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
   <div class="pBody">
     <ul>
     <?php if ($revision) { ?>
-      <li id="t-whatlinkshere"><?php echo Button(array('action'=>'BackLinks'), _("What links here"), $page->getName()) ?></li>
+      <li id="t-whatlinkshere"><?php echo Button(array('action'=>_("BackLinks")), _("What links here"), $page->getName()) ?></li>
     <?php } ?>
     <?php $links = $page->getPageLinks(); if ($links->count() > 1) { ?>
       <li id="t-recentchangeslinked"><?php echo $WikiTheme->makeLinkButton($revision,_("Related changes"),_("RelatedChanges")) ?></li>

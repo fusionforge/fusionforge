@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminMarkup.php 7448 2010-05-31 12:01:38Z vargenau $');
+// rcs_id('$Id: WikiAdminMarkup.php 7925 2011-02-01 10:08:52Z vargenau $');
 /*
  * Copyright 2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -91,7 +91,7 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently changed:"));
+                $result->pushContent(HTML::p(_("One page has been permanently changed:")));
             } else {
                 $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
             }
@@ -99,7 +99,7 @@ extends WikiPlugin_WikiAdminSelect
             return $result;
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages changed."));
+            $result->pushContent(HTML::p(_("No pages changed.")));
             return $result;
         }
     }
@@ -187,8 +187,7 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function chmarkupForm(&$header, $post_args) {
-        $header->pushContent(_("Change markup")." ");
-        $header->pushContent(' '._("to").': ');
+        $header->pushContent(_("Change markup to: "));
         $header->pushContent(HTML::input(array('name' => 'admin_markup[markup]',
                                                'value' => $post_args['markup'])));
         return $header;

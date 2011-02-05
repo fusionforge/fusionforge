@@ -48,14 +48,10 @@ $locale["%d pages with less than %d hits (<%d%%)."] =
    "%d Seiten die weniger als %d aufgerufen haben (<%d%%).";
 $locale["%s %s %s is disallowed on this wiki for %s user '%s' (level: %s)."] =
    "%s %s »%s« ist auf diesem Wiki für %s Benutzer »%s« (Level: %s) nicht zugelassen.";
-$locale["%s Kb (%s bytes)"] =
-   "%s KB (%s Bytes)";
 $locale["%s already exists"] =
    "%s existiert bereits";
 $locale["%s at %s"] =
    "%s um %s";
-$locale["%s b"] =
-   "%s B";
 $locale["%s by %s"] =
    "%s von %s";
 $locale["%s bytes"] =
@@ -88,8 +84,6 @@ $locale["%s is not writable."] =
    "%s is nicht änderbar.";
 $locale["%s is only allowed in locked pages."] =
    "%s wird/werden nur in gesperrten Seiten erlaubt.";
-$locale["%s k"] =
-   "%s k";
 $locale["%s not defined"] =
    "%s nicht definiert";
 $locale["%s not found"] =
@@ -110,8 +104,6 @@ $locale["%s parameter missing"] =
    "%s Argument fehlt";
 $locale["%s words"] =
    "%s Wörter";
-$locale["%s(%d): no such revision"] =
-   "%s(%d): keine solche Version";
 $locale["%s: %s"] =
    "%s: %s";
 $locale["%s: Bad action"] =
@@ -238,16 +230,12 @@ $locale["AddCategory"] =
    "NeueKategorie";
 $locale["AddComment"] =
    "NeuerKommentar";
-$locale["AddCommentPlugin"] =
-   "NeuerKommentarPlugin";
 $locale["AddPageLink"] =
    "SeitenLink einfügen";
 $locale["AddPlugin"] =
    "Plugin einfügen";
 $locale["AddTemplate"] =
    "NeueVorlage";
-$locale["AddingPages"] =
-   "SeitenErzeugen";
 $locale["Adjust"] =
    "Justieren";
 $locale["Admin"] =
@@ -296,8 +284,6 @@ $locale["Appending at the end."] =
    "Füge am Ende hinzu.";
 $locale["Application name"] =
    "Anwendungsname";
-$locale["Application size: %d Kb"] =
-   "Anwendungsplatzbedarf: %d KB";
 $locale["Apply changes"] =
    "Änderungen anwenden";
 $locale["Approve"] =
@@ -340,8 +326,6 @@ $locale["Author will be logged as %s."] =
    "%s wird als Autor aufgenommen.";
 $locale["AuthorHistory"] =
    "AutorenProtokoll";
-$locale["AuthorHistoryPlugin"] =
-   "AutorenProtokollPlugin";
 $locale["Available plugins"] =
    "Verfügbare Einschubprogramme";
 $locale["Avg. Rating"] =
@@ -394,10 +378,6 @@ $locale["Calendar"] =
    "Kalender";
 $locale["CalendarList"] =
    "KalenderListe";
-$locale["CalendarListPlugin"] =
-   "KalenderListePlugin";
-$locale["CalendarPlugin"] =
-   "KalenderPlugin";
 $locale["Can't inflate data: zlib support not enabled in this PHP"] =
    "Kann Daten nicht dekomprimieren: Die zlib-Bibliothek wurde in PHP nicht installiert/aktiviert.";
 $locale["Can't mix '%s' with '%s' type format strings"] =
@@ -436,8 +416,6 @@ $locale["Change Verification Status"] =
    "Ändere Bestätigungs-Status";
 $locale["Change country"] =
    "Land ändern";
-$locale["Change markup"] =
-   "Ändere Formatierung";
 $locale["Change markup type"] =
    "Ändere Formatierungs-Typ";
 $locale["Change page attributes"] =
@@ -486,8 +464,6 @@ $locale["Comment"] =
    "Kommentar";
 $locale["Comment modified on %s by %s"] =
    "Kommentare am %s geändert von %s";
-$locale["CommentPlugin"] =
-   "KommentarPlugin";
 $locale["Comments"] =
    "Kommentare";
 $locale["Comments on %s by %s."] =
@@ -540,10 +516,6 @@ $locale["CreatePage"] =
    "NeueSeite";
 $locale["CreateToc"] =
    "InhaltsVerzeichnis";
-$locale["CreateToc disabled for old markup"] =
-   "InhaltsVerzeichnis deaktiviert für altes Markup";
-$locale["CreateTocPlugin"] =
-   "InhaltsVerzeichnisPlugin";
 $locale["Created by CreatePage"] =
    "Erzeugt von NeueSeite";
 $locale["Created directory '%s' for the page dump..."] =
@@ -634,8 +606,6 @@ $locale["Double redirect not allowed."] =
    "Rekursive Redirektion verboten.";
 $locale["Download all revisions for backup"] =
    "Alle Versionen für Backup herunterladen";
-$locale["Download for CVS"] =
-   "Für CVS herunterladen.";
 $locale["Download for backup"] =
    "Für Backup herunterladen";
 $locale["Download page contents"] =
@@ -686,8 +656,6 @@ $locale["Edit: %s"] =
    "Bearbeite: %s";
 $locale["EditMetaData"] =
    "MetaDatenBearbeiten";
-$locale["EditMetaDataPlugin"] =
-   "MetaDatenBearbeitenPlugin";
 $locale["EditText"] =
    "TextBearbeiten";
 $locale["Edited by: %s"] =
@@ -736,8 +704,6 @@ $locale["External link (remember http:// prefix)"] =
    "Externer Link (http:// prefix)";
 $locale["ExternalSearch"] =
    "FremdSuche";
-$locale["ExternalSearchPlugin"] =
-   "FremdSuchePlugin";
 $locale["FAILED"] =
    "FEHLER";
 $locale["FIXED"] =
@@ -764,14 +730,10 @@ $locale["First"] =
    "Erste";
 $locale["FoafViewer"] =
    "FoafBetrachter";
-$locale["FoafViewerPlugin"] =
-   "FoafViewerPlugin";
 $locale["Found by "] =
    "Gefunden von ";
 $locale["FrameInclude"] =
    "FrameEinbetten";
-$locale["FrameIncludePlugin"] =
-   "FrameEinbettenPlugin";
 $locale["From english to %s: "] =
    "Von Englisch nach %s: ";
 $locale["Full text search results for '%s'"] =
@@ -826,8 +788,6 @@ $locale["Height"] =
    "Höhe";
 $locale["HelloWorld"] =
    "HalloWelt";
-$locale["HelloWorldPlugin"] =
-   "HalloWeltPlugin";
 $locale["Help"] =
    "Hilfe";
 $locale["Here you can override site-specific default values."] =
@@ -888,8 +848,6 @@ $locale["Include text from another wiki page."] =
    "Text von einer andere Seite einfügen.";
 $locale["IncludePage"] =
    "SeiteEinfügen";
-$locale["IncludePagePlugin"] =
-   "SeiteEinfügenPlugin";
 $locale["IncludePages"] =
    "SeitenEinfügen";
 $locale["IncludeSiteMap"] =
@@ -988,8 +946,6 @@ $locale["Link to page"] =
    "Link auf Seite";
 $locale["LinkDatabase"] =
    "LinkDatenbank";
-$locale["LinkIcons"] =
-   "LinksIcons";
 $locale["LinkSearch"] =
    "LinkSuche";
 $locale["Links"] =
@@ -1192,8 +1148,6 @@ $locale["Old UserPage %s without stored password updated with empty password. Se
    "Ihre alte persönliche HomePage %s ohne gespeichertem Passwort wurde mit einem leeren Password gespeichert. Setzen Sie ein Passwort in Ihren BenutzerEinstellungen.";
 $locale["OldStyleTable"] =
    "TraditionellerTabellenStil";
-$locale["OldStyleTablePlugin"] =
-   "TraditionellerTabellenStilPlugin";
 $locale["Older page:"] =
    "Ältere Seite:";
 $locale["One page links to %s:"] =
@@ -1278,16 +1232,6 @@ $locale["PageGroup"] =
    "SeitenGruppe";
 $locale["PageGroup for %s"] =
    "SeitenGruppe für »%s«";
-$locale["PageGroupTest"] =
-   "SeitenGruppenTest";
-$locale["PageGroupTest/Four"] =
-   "SeitenGruppenTest/Vier";
-$locale["PageGroupTest/One"] =
-   "SeitenGruppenTest/Eins";
-$locale["PageGroupTest/Three"] =
-   "SeitenGruppenTest/Drei";
-$locale["PageGroupTest/Two"] =
-   "SeitenGruppenTest/Zwei";
 $locale["PageHistory"] =
    "SeitenProtokoll";
 $locale["PageHistory for %s"] =
@@ -1298,8 +1242,6 @@ $locale["PageName|optional label"] =
    "SeitenName|optionaler Name";
 $locale["PageTrail Plugin"] =
    "PageTrail Plugin";
-$locale["Pagedata size: %d Kb"] =
-   "Größe der Seitendaten: %d KB";
 $locale["Password cannot be changed."] =
    "Passwort konnte nicht geändert werden.";
 $locale["Password updated."] =
@@ -1328,18 +1270,10 @@ $locale["PgsrcTranslation"] =
    "PgsrcTranslation";
 $locale["PhotoAlbum"] =
    "BilderAlbum";
-$locale["PhotoAlbumPlugin"] =
-   "BilderAlbumPlugin";
 $locale["PhpHighlight"] =
    "PhpHighlight";
-$locale["PhpHighlightPlugin"] =
-   "PhpHighlightPlugin";
 $locale["PhpWeather"] =
    "PhpWetter";
-$locale["PhpWeatherPlugin"] =
-   "PhpWetterPlugin";
-$locale["PhpWiki"] =
-   "PhpWiki";
 $locale["PhpWiki engine version"] =
    "PhpWikitriebwerksversion";
 $locale["PhpWikiAdministration"] =
@@ -1378,8 +1312,6 @@ $locale["Please use one of the downloadable versions rather than copying and pas
    "Verwenden Sie bitte eine der herunterladbaren Versionen als von der obigen Vorschau zu Kopieren und Einzufügen.";
 $locale["Ploticus"] =
    "Ploticus";
-$locale["PloticusPlugin"] =
-   "PloticusPlugin";
 $locale["Plugin"] =
    "Zusatzprogramm";
 $locale["Plugin %s disabled."] =
@@ -1464,8 +1396,6 @@ $locale["Raw HTML"] =
    "Reine HTML-Befehle";
 $locale["Raw HTML is disabled in this wiki."] =
    "HTML-Befehle sind in diesem Wiki außer Kraft gesetzt.";
-$locale["RawHtmlPlugin"] =
-   "RawHtmlPlugin";
 $locale["Reason: "] =
    "Grund: ";
 $locale["Recent Comments"] =
@@ -1488,8 +1418,6 @@ $locale["Redirect"] =
    "Weiterleiten";
 $locale["RedirectTo"] =
    "WeiterLeiten";
-$locale["RedirectToPlugin"] =
-   "WeiterLeitenPlugin";
 $locale["Redirects to an external web site based on form input"] =
    "Weiterleitung der Suche zu einer externen Webseite aufgrund einer Formulareingabe";
 $locale["References"] =
@@ -1564,8 +1492,6 @@ $locale["Revision Not Found"] =
    "Version nicht gefunden";
 $locale["RichTable"] =
    "ErweiterteTabellen";
-$locale["RichTablePlugin"] =
-   "ErweiterteTabellenPlugin";
 $locale["SOAP access"] =
    "SOAP-Zugriff";
 $locale["Sample table"] =
@@ -1884,8 +1810,6 @@ $locale["Total of %d themes: "] =
    "%d Benutzeroberfläche gesamt: ";
 $locale["Transclude"] =
    "Einbetten";
-$locale["TranscludePlugin"] =
-   "EinbettenPlugin";
 $locale["Transcluded from %s"] =
    "Eingebetteter Text von %s";
 $locale["Transcluded page"] =
@@ -1932,8 +1856,6 @@ $locale["Unexpected EOF in zip file"] =
    "Unerwartetes Dateiende (EOF-Fehler) in ZIP-Datei";
 $locale["UnfoldSubpages"] =
    "UnterseitenEntfalten";
-$locale["UnfoldSubpagesPlugin"] =
-   "UnterseitenEntfaltenPlugin";
 $locale["Unknown special group '%s'"] =
    "Unbekannte Spezialgruppe »%s«";
 $locale["Unlock"] =
@@ -1954,8 +1876,6 @@ $locale["Up"] =
    "Oben";
 $locale["UpLoad"] =
    "HochLaden";
-$locale["UpLoadPlugin"] =
-   "HochLadenPlugin";
 $locale["Update Preferences"] =
    "Einstellungen Speichern";
 $locale["Upgrade"] =
@@ -2082,8 +2002,6 @@ $locale["WikiAdminUtils %s returned:"] =
    "WikiAdminUtils %s gibt zurück:";
 $locale["WikiBlog"] =
    "WikiBlog";
-$locale["WikiBlogPlugin"] =
-   "WikiBlogPlugin";
 $locale["WikiDB::renamePage() not yet implemented for this backend"] =
    "WikiDB::renamePage() für dieses Backend noch nicht implementiert";
 $locale["WikiForm"] =
@@ -2092,8 +2010,6 @@ $locale["WikiForm: %s: unknown action"] =
    "WikiForm: %s: unbekannte Aktion";
 $locale["WikiForum"] =
    "WikiForum";
-$locale["WikiPlugin"] =
-   "WikiPlugin";
 $locale["WikiPoll"] =
    "WikiUmfrage";
 $locale["WikiWikiWeb"] =
@@ -2326,12 +2242,6 @@ $locale["previous revision"] =
    "vorige Neubearbeitung";
 $locale["purge this page"] =
    "um diese Seite endgültig zu löschen";
-$locale["recursive inclusion of page %s"] =
-   "Fehler beim Einbetten der Seite %s: Rekursiver Selbstaufruf der Seite";
-$locale["recursive inclusion of page %s ignored"] =
-   "Fehler beim Einfügen der Seite %s: rekursiver Selbstaufruf ignoriert";
-$locale["recursive inclusion of url %s"] =
-   "Fehler beim Aufruf der Seite %s: Rekursion (sich selbst aufrufend)";
 $locale["remove this page"] =
    "um diese Seite zu löschen";
 $locale["rename this page"] =

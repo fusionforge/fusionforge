@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 7832 2011-01-13 14:57:09Z vargenau $
+ * $Id: fusionforge.css 7854 2011-01-21 14:18:43Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -49,12 +49,6 @@
 
 /* Because in some cases there is a <p> in nested lists */
 li p { margin:0; }
-
-/* Hide the elements we put in just to get around NS4 bugs. */
-div.br { display: none; }
-
-/* This breaks NS4, but is necessary for IE4. */
-div.wikitext { width: auto; }
 
 div.wikitext table p { margin-top: 0.3em;  margin-bottom: 0.3em;}
 
@@ -554,7 +548,6 @@ table.cal td.cal-today a.cal-hide {  }
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* entire difftextblock */
@@ -617,67 +610,49 @@ td.pageinfo { font-weight: bold; }
 
 /* Banners ============================================================ */
 
-.errors {
+.error, .warning, .debug, .hint {
     font-weight: bold;
     font-size: 11px;
     text-align: left;
     border-width: 2px;
     border-style: solid;
+    padding: 0.5em;
+}
+
+.error {
     background-color: #ffc0cb; /* pink */
     border-color: red;
-    padding: 0.5em;
-    border-radius: 1em;
-    -moz-border-radius: 1em;
-    -webkit-border-radius: 1em;
 }
 
 .warning {
-    font-weight: bold;
-    font-size: 11px;
-    text-align: left;
-    border-width: 2px;
-    border-style: solid;
     background-color: #ffd297; /* orange */
     border-color: #FFA500; /* orange */
-    padding: 0.5em;
-    border-radius: 1em;
-    -moz-border-radius: 1em;
-    -webkit-border-radius: 1em;
 }
 
-/* Debug */
 .debug {
-  color: black;
-  background: white;
-  font-family: monospace;
-  font-size: smaller;
-  margin: 1ex 0;
-  padding: 0.5ex 0.5em;
-  border: medium solid #fff8dc; /* darker ivory */
+    background-color: white;
+    border-color: #fff8dc; /* darker ivory */
 }
 
-/* Hints */
 .hint {
-    font-weight: bold;
-    font-size: 11px;
-    text-align: left;
-    border-width: 2px;
-    border-style: solid;
     background-color: #eeeeee; 
     border-color: black;
-    padding: 0.5em;
+}
+
+p.error, p.warning, p.debug, p.hint,
+div.error div.warning, div.debug, div.hint {
     border-radius: 1em;
     -moz-border-radius: 1em;
     -webkit-border-radius: 1em;
 }
 
-span.warning, span.errors, span.hint {
+span.error, span.warning, span.debug, span.hint {
   padding: 0;
 }
 
-/* Disabled Plugins */
-.disabled-plugin
-{
+/* Disabled Plugins  ================================================== */
+
+.disabled-plugin {
   clear: both;
   margin: 1ex 0;
   padding: 0;

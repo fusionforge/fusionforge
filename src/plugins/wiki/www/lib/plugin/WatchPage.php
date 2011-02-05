@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WatchPage.php 7666 2010-08-31 16:02:45Z vargenau $');
+// rcs_id('$Id: WatchPage.php 7853 2011-01-21 13:28:47Z vargenau $');
 /**
  * Copyright (C) 2006 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -89,7 +89,7 @@ extends WikiPlugin
                                        HTML::Raw('&nbsp;'),
                                        Button('submit:cancel', _("Cancel"))));
         }
-        $fieldset = HTML::fieldset(HTML::legend("Watch Page"), $form);
+        $fieldset = HTML::fieldset(HTML::legend(_("Watch Page")), $form);
         return $fieldset;
     }
 
@@ -116,8 +116,8 @@ extends WikiPlugin
             if (!defined('FUSIONFORGE') or !FUSIONFORGE) {
                 $email = $pref->get("email");
                 if (empty($email)) {
-                    return HTML::div(
-                             array('class' => 'errors'),
+                    return HTML::p(
+                             array('class' => 'error'),
                              _("ERROR: No email defined! You need to do this in your "),
                              WikiLink(_("UserPreferences")));
                 }

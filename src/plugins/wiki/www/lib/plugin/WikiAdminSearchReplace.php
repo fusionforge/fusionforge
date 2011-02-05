@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSearchReplace.php 7448 2010-05-31 12:01:38Z vargenau $');
+// rcs_id('$Id: WikiAdminSearchReplace.php 7925 2011-02-01 10:08:52Z vargenau $');
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -103,14 +103,14 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently changed:"));
+                $result->pushContent(HTML::p(_("One page has been permanently changed:")));
             } else {
                 $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
             }
             $result->pushContent($ul);
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages changed."));
+            $result->pushContent(HTML::p(_("No pages changed.")));
         }
         return $result;
     }
@@ -227,11 +227,11 @@ extends WikiPlugin_WikiAdminSelect
                                        _("Replace all occurences of the given string in the content of all pages.")),
                              HTML::br());
         $table = HTML::table();
-        $this->_tablePush($table, _("Replace").": ",
+        $this->_tablePush($table, _("Replace")._(": "),
                           HTML::input(array('name' => 'admin_replace[from]',
                                             'size' => 90,
                                             'value' => $post_args['from'])));
-        $this->_tablePush($table, _("by").': ',
+        $this->_tablePush($table, _("by")._(": "),
                           HTML::input(array('name' => 'admin_replace[to]',
                                             'size' => 90,
                                             'value' => $post_args['to'])));

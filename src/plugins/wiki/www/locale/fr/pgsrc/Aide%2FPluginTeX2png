@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginTeX2png 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginTeX2png 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginTeX2png;
   flags="";
@@ -16,12 +16,12 @@ Wiki.
 ===Usage
 
 {{{
-<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$" >>
+<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$">>
 }}}
 
 donne
 
-<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$" >>
+<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$">>
 
 ===Arguments
 
@@ -38,10 +38,10 @@ mathématiques dans une page de façon lisible. Par conséquent tout autre
 expression (comme du texte simple) est refusée : une expression qui n'est
 pas encadrée de dollar n'est pas validée. Elle est remplacée à l'affichage
 par le texte en rouge. Il est malgré tout possible d'afficher du texte
-comme <<TeX2png text="$\textrm{\LaTeX}$" >> en utilisant :
+comme <<TeX2png text="$\textrm{\LaTeX}$">> en utilisant :
 
 {{{
-<<TeX2png text="$\textrm{\LaTeX}$" >>
+<<TeX2png text="$\textrm{\LaTeX}$">>
 }}}
 
 
@@ -50,20 +50,21 @@ sophistiqués. Pour ça, il existe d'autres outils comme LaTeX2html.
 
 ===Exemples
 
-Quelques lettres grecques : <<TeX2png text="$\alpha$" >>, <<TeX2png text="$\beta$" >>, ... et une formule <<TeX2png text="$\sum_{i=1}^n \frac1{i^2}=\frac{\pi^2}{6}$" >> pour tester l'affichage en ligne.
+Quelques lettres grecques : <<TeX2png text="$\alpha$">>, <<TeX2png text="$\beta$">>, ... et une formule <<TeX2png text="$\sum_{i=1}^n \frac1{i^2}=\frac{\pi^2}{6}$">> pour tester l'affichage en ligne.
 
-*Exercice 1* On considère <<TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$" >>
+*Exercice 1* On considère <<TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$">>
 
 #Déterminer le domaine de définition de f.
-#Déterminer un domaine sur lequel f est bijective. Déterminer la réciproque <<TeX2png text="$f^{-1}(x)$" >> de f sur ce domaine.
+#Déterminer un domaine sur lequel f est bijective. Déterminer la réciproque <<TeX2png text="$f^{-1}(x)$">> de f sur ce domaine.
 #Calculer la dérivée f'(x).
 
 *Exercice 2* On considère la fonction suivante :
 
-<<TeX2png text="$$f(x) = \int_0^x e^{-t^2}\,dt, x\in\mathbb R$$" >>
-#Montrer que pour tout r positif, on a <<TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$" >> *Indication* : passer en coordonnées polaires.
-#En déduire la limite de <<TeX2png text="$f(x)$" >> lorsque x tend <<TeX2png text="vers $\infty$" >>.
+<<TeX2png text="$$f(x) = \int_0^x e^{-t^2}\,dt, x\in\mathbb R$$">>
+#Montrer que pour tout r positif, on a <<TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$">> *Indication* : passer en coordonnées polaires.
+#En déduire la limite de <<TeX2png text="$f(x)$">> lorsque x tend <<TeX2png text="vers $\infty$">>.
 
------
-
-[[DocumentationDePhpWiki]] [[CategoryPluginWiki]]
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

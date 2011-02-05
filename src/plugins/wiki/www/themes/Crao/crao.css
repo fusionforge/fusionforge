@@ -236,18 +236,11 @@ div.ie-actionbuttons {
 	margin-right: 7%;
 	margin-bottom:7%;
 	background-color: #f2f2f2;/* MODIFY-color */
-	/* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
 	border: 1px #999 solid;/* MODIFY-color */
 	padding-left: 2em; 
 	padding-right: 15px;
 	padding-top:   15px;
 	padding-bottom: 0.5ex;
-	/*This breaks Netscape 4: (display does not go 	full width).
-	 * width: auto;
-	 */
-	
 }
 /* titre */
 div.boxtitrehead {}
@@ -692,9 +685,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 	padding-right: 1em;
 	padding-top:    0.5ex;
 	padding-bottom: 0.5ex;
-	/*This breaks Netscape 4: (display does not go full width).
-	 * width: auto;
-	 */
 	clear: both;
 }
 
@@ -905,22 +895,18 @@ text-decoration: underline; }
 .diff {
 color: #000;
 	background-color: transparent;
-	/* for NS4 */
 	border: 1px solid black;
 }
 .diff .block {
 color: #000;
 	background-color: #ccc;
 	padding-left: 1em;
-	/* for NS4 */
-	/*border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
 color: #000;
 	background-color: transparent;
-	/* for NS4 */
 	border: none;
 }
 /* + - line prefix */
@@ -929,7 +915,6 @@ color: #000;
 	font-family: monospace;
 	color: black;
 	background-color: transparent;
-	/* for NS4 */
 	margin-left: 0;
 	border: none;
 }
@@ -949,18 +934,15 @@ color: #000;
 .diff .original, .diff .deleted {
 color: #000;
 	background-color: #fcc;
-	/* for NS4 */
 	border: none;
 }
 /* blocks containing added words */
 .diff .final, .diff .added {
 color: #000;
 	background-color: #cfc;
-	/* for NS4 */
 	border: none;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del {color: #000; background-color: #f99; }
 /* added words */
@@ -1073,8 +1055,7 @@ h2.wikiblog-heading {
 .interwiki-map thead td { text-decoration: underline; }
 .printer { display: none; }
 
-/* PHP Warnings */
-div.errors {
+.error {
 	color: black;
 	background-color: #eee;
 	margin-top:    1em;
@@ -1086,15 +1067,6 @@ div.errors {
 	border: medium solid red;
 	clear: both;
 }
-.errors {
-	color: red;
-	margin:  0;
-	padding: 0;
-	text-decoration: underline;
-	background-color: transparent;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -1105,9 +1077,6 @@ div.errors {
 	margin: 1ex 0;
 	padding: 0.5ex 0.5em;
 }
-
-/* Hide NS4 bugs hack elements. */
-div.br { display: none; }
 
 /*
  * table class="boxed"

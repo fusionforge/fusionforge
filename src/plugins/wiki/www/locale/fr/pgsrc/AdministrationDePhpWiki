@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:58:32 +0000
+Date: Fri,  4 Feb 2011 16:36:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AdministrationDePhpWiki 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: AdministrationDePhpWiki 7927 2011-02-04 15:37:59Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AdministrationDePhpWiki;
   flags=PAGE_LOCKED;
@@ -13,7 +13,7 @@ d'administrateur. Elles ne fonctionneront pas à moins que vous ayez défini un
 nom d'administrateur et un mot de passe dans le fichier de configuration de 
 PhpWiki_
 
-<<CreateToc jshide||=1 with_toclink||=1 >>
+<<CreateToc jshide||=1 with_toclink||=1>>
 
 ----
 == Explorateur de pages
@@ -24,14 +24,8 @@ D'abord choississez une ou plusieurs pages et ensuite définissez une action :
 
 ou appelez directement les actions ~WikiAdmin disponibles :
 
-[/Supprimer] |
-  [/Renommer] |
-    [/Remplacer] |
-      [/DéfinirAcl] |
-        [/Chown] |
-          [/Droits]
+| [[/Supprimer]] | [[/Renommer]] | [[/Remplacer]] | [[/DéfinirAcl]] | [[/Chown]] | [[/Droits]]
 
-----
 == Gestionnaire d'utilisateur
 
 PhpWiki:EmailVerification est habituellement non-strict laissant ainsi des trous possibles qui peuvent être administrés ci-dessous.
@@ -41,14 +35,14 @@ Ce bouton affichera la liste de tous les utilisateurs qui ont une adresse reconn
   <<WikiAdminUtils
            action=email-verification
            label="Vérification de l'email"
-   >>
+  >>
 
 Pour prévenir des robots occupant toutes les ressources en un court temps, bloquant depuis certaines adresses IP ou ayant un mauvais comportement, les agents utilisateurs peuvent être définis ci-dessous. Voir PhpWiki:HowToBlockRobots et MeatBall:SurgeProtector. _Note : Pas encore activé._
 
   <<WikiAdminUtils
            action=access-restrictions
            label="Restrictions d'accès"
-   >>
+  >>
 
 ----------
 == Nettoyage
@@ -149,7 +143,7 @@ Une pression sur ce bouton effacera tout le cache. Le contenu de chaque page ser
   <<WikiAdminUtils
            action=purge-cache
            label="Purge du cache"
-   >>
+  >>
 
 === Suppression des pages vides et non référencées
 
@@ -159,7 +153,7 @@ Une pression sur ce bouton effacera tout le cache. Le contenu de chaque page ser
  <<WikiAdminUtils
            action=purge-empty-pages
            label="Purge all empty unreferenced pages"
-   >>
+  >>
 
 === Suppression des pages indésirables dans la base des données wiki
 
@@ -169,7 +163,7 @@ Ce bouton effacera toutes les pages dont le nom est illégal.
   <<WikiAdminUtils
            action=purge-bad-pagenames
            label="Nettoyage de WikiDB"
-   >>
+  >>
 
 ----
 [[DocumentationDePhpWiki]]

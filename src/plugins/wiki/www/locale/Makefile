@@ -1,4 +1,4 @@
-# $Id: Makefile 7683 2010-09-10 12:07:14Z vargenau $
+# $Id: Makefile 7916 2011-01-27 12:59:49Z vargenau $
 #
 # locale/Makefile
 #
@@ -433,6 +433,7 @@ ${POT_FILE}: ../themes/fusionforge/templates/login.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/navbar.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/pagelink.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/ratings.tmpl
+${POT_FILE}: ../themes/fusionforge/templates/savepage.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/userprefs.tmpl
 ${POT_FILE}: ../themes/fusionforge/themeinfo.php
 ${POT_FILE}: ../themes/Hawaiian/lib/random.php
@@ -477,7 +478,6 @@ ${POT_FILE}: ../themes/Sidebar/hyperapplet.php
 ${POT_FILE}: ../themes/Sidebar/hyperwiki.php
 ${POT_FILE}: ../themes/Sidebar/templates/actionbar.tmpl
 ${POT_FILE}: ../themes/Sidebar/templates/body.tmpl
-${POT_FILE}: ../themes/Sidebar/templates/browse.tmpl
 ${POT_FILE}: ../themes/Sidebar/templates/calendar.tmpl
 ${POT_FILE}: ../themes/Sidebar/templates/content.tmpl
 ${POT_FILE}: ../themes/Sidebar/templates/debug.tmpl

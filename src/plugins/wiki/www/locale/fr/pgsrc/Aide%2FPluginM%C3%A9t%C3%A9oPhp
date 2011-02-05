@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:58:32 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginM%C3%A9t%C3%A9oPhp 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginM%C3%A9t%C3%A9oPhp 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginM%C3%A9t%C3%A9oPhp;
   flags="";
@@ -14,7 +14,7 @@ PluginMétéoPhp est un PluginWiki qui utilise [PhpWeather|http://phpweather.sou
 pour afficher un bout de texte avec la météo actuelle pour n'importe quel aéroport
 dans le monde. Cela ressemble à ça :
 
-<<PhpWeather menu=true >>
+<<PhpWeather menu=true>>
 
 ===Arguments 
 
@@ -30,12 +30,12 @@ dans le monde. Cela ressemble à ça :
   l'utilisateur puisse changer la station en utilisant le menu alors
   lancer le plugin comme ceci : 
   {{{
-  <<PhpWeather menu=true icao||=EKYT >>
+  <<PhpWeather menu=true icao||=EKYT>>
   }}}
   de telle sorte que la valeur peut être ré-écrite lorsque l'utilisateur
   soumet le formulaire. Si vous mettez seulement :
   {{{
-  <<PhpWeather menu=true icao=EKYT >>
+  <<PhpWeather menu=true icao=EKYT>>
   }}}
   alors rien ne se produira lorsque l'utilisateur sélectionnera une autre 
   station depuis la liste.
@@ -45,7 +45,7 @@ dans le monde. Cela ressemble à ça :
   souhaitez pré-sélectionner un pays différent de celui spécifié dans le 
   ICAO. Ainsi :  
   {{{
-  <<PhpWeather menu=true cc||=GB icao||=KTTS >>
+  <<PhpWeather menu=true cc||=GB icao||=KTTS>>
   }}}
   affichera la météo courante à NASA Shuttle Facility, États-Unis
   (<tt>KTTS</tt>) et en même temps donnera à l'utilisateur une liste des 
@@ -78,5 +78,7 @@ Le temps chez les Bretons :
 et qui est actuellement :
 <<PhpWeather cc=FR icao=LFRN language=fr units=only_metric>>
 
+<noinclude>
 ----
-[[CategoryPluginWiki]]
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

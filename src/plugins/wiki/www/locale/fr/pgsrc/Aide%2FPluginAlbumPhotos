@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:58:32 +0000
+Date: Tue, 25 Jan 2011 17:50:09 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginAlbumPhotos 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginAlbumPhotos 7879 2011-01-25 17:01:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginAlbumPhotos;
   flags="";
@@ -90,5 +90,7 @@ ou par une adresse extérieure :
 
 [Ted Vinke|mailto:teddy@jouwfeestje.com] <teddy@jouwfeestje.com>
 
+<noinclude>
 ----
-[[DocumentationDePhpWiki]] [[CategoryPluginWiki]]
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

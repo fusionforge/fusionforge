@@ -32,14 +32,10 @@ $locale["%d pages"] =
    "%d 個頁面";
 $locale["%d pages with less than %d hits (<%d%%)."] =
    "%d 個頁面少於 %d 個擊閱數(<%d%%).";
-$locale["%s Kb (%s bytes)"] =
-   "%s Kb (%s bytes)";
 $locale["%s already exists"] =
    "%s 已經存在";
 $locale["%s at %s"] =
    "%s 在 %s";
-$locale["%s b"] =
-   "%s b";
 $locale["%s by %s"] =
    "%s 被 %s";
 $locale["%s bytes"] =
@@ -62,8 +58,6 @@ $locale["%s is not writable."] =
    "%s 無法寫入.";
 $locale["%s is only allowed in locked pages."] =
    "%s 只允許在鎖定的頁面中.";
-$locale["%s k"] =
-   "%s k";
 $locale["%s not found"] =
    "%s 找不到.";
 $locale["%s of this page"] =
@@ -80,8 +74,6 @@ $locale["%s parameter missing"] =
    "%s 參數遺漏";
 $locale["%s words"] =
    "共 %s 字";
-$locale["%s(%d): no such revision"] =
-   "%s(%d): 沒有這個修訂.";
 $locale["%s: %s"] =
    "%s: %s";
 $locale["%s: Bad action"] =
@@ -162,10 +154,6 @@ $locale["Add %s hours to the server's local time when reporting times."] =
    "當回報時間時,在伺服器的本地時間加上 %s 個小時.";
 $locale["AddComment"] =
    "AddComment";
-$locale["AddCommentPlugin"] =
-   "AddCommentPlugin";
-$locale["AddingPages"] =
-   "AddingPages";
 $locale["Adjust"] =
    "調整";
 $locale["Admin"] =
@@ -194,8 +182,6 @@ $locale["Appearance"] =
    "Appearance";
 $locale["Application name"] =
    "應用程式名稱";
-$locale["Application size: %d Kb"] =
-   "應用程式大小: %d Kb";
 $locale["Are you sure you want to permanently change the selected files?"] =
    "你確定你想要永久變更選定的檔案?";
 $locale["Are you sure you want to permanently remove the selected files?"] =
@@ -220,8 +206,6 @@ $locale["Author will be logged as %s."] =
    "作者將登入為 %s.";
 $locale["AuthorHistory"] =
    "作者歷程";
-$locale["AuthorHistoryPlugin"] =
-   "AuthorHistoryPlugin";
 $locale["Available plugins"] =
    "可用的 plugin";
 $locale["BAD URL -- remove all of <, >, \""] =
@@ -250,10 +234,6 @@ $locale["Calendar"] =
    "月曆";
 $locale["CalendarList"] =
    "月曆列表";
-$locale["CalendarListPlugin"] =
-   "CalendarListPlugin";
-$locale["CalendarPlugin"] =
-   "CalendarPlugin";
 $locale["Can't inflate data: zlib support not enabled in this PHP"] =
    "無法壓縮資料: 此 PHP 的 zlib 支援未被啟動";
 $locale["Can't mix '%s' with '%s' type format strings"] =
@@ -310,8 +290,6 @@ $locale["Comment"] =
    "意見";
 $locale["Comment modified on %s by %s"] =
    "意見在 %s 被 %s 變更";
-$locale["CommentPlugin"] =
-   "CommentPlugin";
 $locale["Comments"] =
    "意見";
 $locale["Complete."] =
@@ -348,8 +326,6 @@ $locale["CreatePage"] =
    "CreatePage";
 $locale["CreateToc"] =
    "CreateToc";
-$locale["CreateTocPlugin"] =
-   "CreateTocPlugin";
 $locale["Created by CreatePage"] =
    "由 CreatePage 建立";
 $locale["Created directory '%s' for the page dump..."] =
@@ -420,8 +396,6 @@ $locale["Don't cache this page."] =
    "不要快取此頁面.";
 $locale["Double redirect not allowed."] =
    "雙重重導向是不允許的.";
-$locale["Download for CVS"] =
-   "給 CVS 的下載";
 $locale["Download for backup"] =
    "給備份用的下載";
 $locale["Downloading html zip dumps"] =
@@ -466,8 +440,6 @@ $locale["Edit: %s"] =
    "編輯: %s";
 $locale["EditMetaData"] =
    "編輯中繼資料";
-$locale["EditMetaDataPlugin"] =
-   "EditMetaDataPlugin";
 $locale["EditText"] =
    "EditText";
 $locale["Edited by: %s"] =
@@ -508,8 +480,6 @@ $locale["External Links"] =
    "外部連結";
 $locale["ExternalSearch"] =
    "外部搜尋";
-$locale["ExternalSearchPlugin"] =
-   "ExternalSearchPlugin";
 $locale["Fatal PhpWiki Error"] =
    "致命的 PhpWiki 錯誤";
 $locale["File successfully uploaded."] =
@@ -520,8 +490,6 @@ $locale["First"] =
    "開頭";
 $locale["FrameInclude"] =
    "FrameInclude";
-$locale["FrameIncludePlugin"] =
-   "FrameIncludePlugin";
 $locale["From english to %s: "] =
    "從英文到 %s:";
 $locale["Full text search results for '%s'"] =
@@ -562,8 +530,6 @@ $locale["Height"] =
    "高度";
 $locale["HelloWorld"] =
    "HelloWorld";
-$locale["HelloWorldPlugin"] =
-   "HelloWorldPlugin";
 $locale["Here you can override site-specific default values."] =
    "你可以在這裡覆寫掉站台預設的值.";
 $locale["Hide %s:"] =
@@ -608,8 +574,6 @@ $locale["Include text from another wiki page."] =
    "從其他 wiki 頁面含括文字.";
 $locale["IncludePage"] =
    "含括頁面";
-$locale["IncludePagePlugin"] =
-   "IncludePagePlugin";
 $locale["IncludeSiteMap"] =
    "IncludeSiteMap";
 $locale["Included from %s"] =
@@ -666,8 +630,6 @@ $locale["Legend"] =
    "圖例";
 $locale["LikePages"] =
    "LikePages";
-$locale["LinkIcons"] =
-   "LinkIcons";
 $locale["List PageHistory for %s"] =
    "列出 PageHistory (頁面歷程) - %s";
 $locale["List all page revisions edited by one user with diff links, or show a PageHistory-like list of a single page for only one user."] =
@@ -712,8 +674,6 @@ $locale["Login"] =
    "登入";
 $locale["MIME file %s"] =
    "MIME 檔案 %s";
-$locale["MagicPhpWikiURLs"] =
-   "MagicPhpWikiURLs";
 $locale["Make use of the Google API"] =
    "Make use of the Google API";
 $locale["Markup"] =
@@ -740,8 +700,6 @@ $locale["Modified"] =
    "已變更";
 $locale["Moniker"] =
    "名字";
-$locale["MoreAboutMechanics"] =
-   "MoreAboutMechanics";
 $locale["MostPopular"] =
    "MostPopular";
 $locale["Name"] =
@@ -752,8 +710,6 @@ $locale["New password"] =
    "新密碼";
 $locale["New users may use an empty password."] =
    "新使用者可以使用空白密碼.";
-$locale["NewMarkupTestPage"] =
-   "NewMarkupTestPage";
 $locale["Newer page:"] =
    "較新的頁面:";
 $locale["Next"] =
@@ -802,12 +758,8 @@ $locale["Okay"] =
    "Okay";
 $locale["Old UserPage %s without stored password updated with empty password. Set a password in your UserPreferences."] =
    "Old UserPage %s without stored password updated with empty password. Set a password in your UserPreferences.";
-$locale["OldMarkupTestPage"] =
-   "OldMarkupTestPage";
 $locale["OldStyleTable"] =
    "OldStyleTable";
-$locale["OldStyleTablePlugin"] =
-   "OldStyleTablePlugin";
 $locale["Older page:"] =
    "較舊的頁面:";
 $locale["One page links to %s:"] =
@@ -866,8 +818,6 @@ $locale["PageGroup"] =
    "PageGroup";
 $locale["PageGroup for %s"] =
    "頁面群組 - %s";
-$locale["PageGroupTest"] =
-   "PageGroupTest";
 $locale["PageHistory"] =
    "PageHistory";
 $locale["PageHistory for %s"] =
@@ -878,8 +828,6 @@ $locale["PageTrail"] =
    "PageTrail";
 $locale["PageTrail Plugin"] =
    "PageTrail Plugin";
-$locale["Pagedata size: %d Kb"] =
-   "頁面資料大小: %d Kb";
 $locale["Password cannot be changed."] =
    "無法變更密碼.";
 $locale["Password updated."] =
@@ -902,20 +850,10 @@ $locale["PgsrcTranslation"] =
    "PgsrcTranslation";
 $locale["PhotoAlbum"] =
    "PhotoAlbum";
-$locale["PhotoAlbumPlugin"] =
-   "PhotoAlbumPlugin";
 $locale["PhpHighlight"] =
    "PhpHighlight";
-$locale["PhpHighlightPlugin"] =
-   "PhpHighlightPlugin";
 $locale["PhpWeather"] =
    "PhpWeather";
-$locale["PhpWeatherPlugin"] =
-   "PhpWeatherPlugin";
-$locale["PhpWiki"] =
-   "PhpWiki";
-$locale["PhpWiki developers should manually inspect the downloaded file for nested markup before rewrapping with emacs and checking into CVS."] =
-   "在以 emacs 重包裝與簽入之前,PhpWiki 開發者應會因為巢狀標記而手動審閱已下載的檔案.";
 $locale["PhpWiki engine version"] =
    "PhpWiki 引擎版本";
 $locale["PhpWikiAdministration"] =
@@ -1002,8 +940,6 @@ $locale["Raw HTML"] =
    "Raw HTML";
 $locale["Raw HTML is disabled in this wiki."] =
    "Raw HTML 已經被關閉.";
-$locale["RawHtmlPlugin"] =
-   "RawHtmlPlugin";
 $locale["RecentChanges"] =
    "RecentChanges";
 $locale["RecentEdits"] =
@@ -1018,8 +954,6 @@ $locale["Redirect"] =
    "重導向";
 $locale["RedirectTo"] =
    "RedirectTo";
-$locale["RedirectToPlugin"] =
-   "RedirectToPlugin";
 $locale["Redirects to an external web site based on form input"] =
    "以表單輸入方式重導向到另外一個外部站台";
 $locale["References"] =
@@ -1066,8 +1000,6 @@ $locale["Revision Not Found"] =
    "修訂未找到";
 $locale["RichTable"] =
    "RichTable";
-$locale["RichTablePlugin"] =
-   "RichTablePlugin";
 $locale["RssFeed"] =
    "RssFeed";
 $locale["SandBox"] =
@@ -1210,8 +1142,6 @@ $locale["System default:"] =
    "系統預設:";
 $locale["SystemInfo"] =
    "SystemInfo";
-$locale["SystemInfoPlugin"] =
-   "SystemInfoPlugin";
 $locale["TODO: Google can only translate from english and french. Find a translation service for %s to language %s"] =
    "TODO: Google 只能從英文與法文轉換. 為 %s 尋找轉換到語言 %s 的服務.";
 $locale["TextFormattingRules"] =
@@ -1300,8 +1230,6 @@ $locale["Total of %d themes: "] =
    "共有 %d 組佈景主題: ";
 $locale["Transclude"] =
    "Transclude";
-$locale["TranscludePlugin"] =
-   "TranscludePlugin";
 $locale["Transcluded from %s"] =
    "Transcluded 從 %s";
 $locale["Transcluded page"] =
@@ -1330,8 +1258,6 @@ $locale["Unexpected EOF in zip file"] =
    "zip 檔案中存有不被期待的 EOF.";
 $locale["UnfoldSubpages"] =
    "UnfoldSubpages";
-$locale["UnfoldSubpagesPlugin"] =
-   "UnfoldSubpagesPlugin";
 $locale["Unlock Page"] =
    "解除鎖定頁面";
 $locale["Unlocking pages"] =
@@ -1402,8 +1328,6 @@ $locale["Visualizes the Wiki structure in a graph using the 'dot' commandline to
    "從 graphviz 使用 'dot' 命令列工具以圖形視覺化 Wiki 結構.";
 $locale["W"] =
    "寬";
-$locale["WabiSabi"] =
-   "WabiSabi";
 $locale["Wanted Pages for %s (%d total):"] =
    "%s 所需要的頁面 (共 %d):";
 $locale["Wanted Pages in this wiki (%d total):"] =
@@ -1446,16 +1370,12 @@ $locale["WikiAdminUtils"] =
    "WikiAdminUtils";
 $locale["WikiBlog"] =
    "WikiBlog";
-$locale["WikiBlogPlugin"] =
-   "WikiBlogPlugin";
 $locale["WikiDB::renamePage() not yet implemented for this backend"] =
    "後台的 WikiDB::renamePage() 還沒實作出來.";
 $locale["WikiForm"] =
    "WikiForm";
 $locale["WikiForm: %s: unknown action"] =
    "WikiForm: %s: 未知的動作";
-$locale["WikiPlugin"] =
-   "WikiPlugin";
 $locale["WikiPoll"] =
    "WikiPoll";
 $locale["WikiWikiWeb"] =
@@ -1604,12 +1524,6 @@ $locale["predecessor to the previous major change"] =
    "上次主要變更的原始文件";
 $locale["previous revision"] =
    "上一次修訂";
-$locale["recursive inclusion of page %s"] =
-   "遞迴含括頁面 %s";
-$locale["recursive inclusion of page %s ignored"] =
-   "忽略頁面 %s 的遞迴含括";
-$locale["recursive inclusion of url %s"] =
-   "遞迴含括 url %s";
 $locale["remove this page"] =
    "移除此頁面";
 $locale["renamed from %s"] =

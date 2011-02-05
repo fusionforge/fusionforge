@@ -24,12 +24,8 @@ $locale["%d pages"] =
    "%d páginas";
 $locale["%s %s %s is disallowed on this wiki for %s user '%s' (level: %s)."] =
    "%s %s %s se rechaza en este wiki para el usuario '%s' de %s (llano:  %s).";
-$locale["%s Kb (%s bytes)"] =
-   "%s Kb (%s octetos)";
 $locale["%s at %s"] =
    "%s en %s";
-$locale["%s b"] =
-   "%s o";
 $locale["%s by %s"] =
    "%s por %s";
 $locale["%s bytes"] =
@@ -162,10 +158,6 @@ $locale["Calendar"] =
    "Calendario";
 $locale["CalendarList"] =
    "CalendarioLista";
-$locale["CalendarListPlugin"] =
-   "CalendarioListaPlugin";
-$locale["CalendarPlugin"] =
-   "CalendarioPlugin";
 $locale["Cancel"] =
    "Cancelar";
 $locale["Cannot create directory '%s'"] =
@@ -264,10 +256,6 @@ $locale["Dump to directory"] =
    "Descarga al directorio";
 $locale["Dumping Pages"] =
    "Descargar Las Páginas";
-$locale["E-Mail address '%s' is not properly formatted"] =
-   "La dirección ' %s' del email no se ajusta a formato correctamente";
-$locale["E-Mail address '%s' is properly formatted"] =
-   "La dirección ' %s' del email se ajusta a formato correctamente";
 $locale["Edit"] =
    "Editar";
 $locale["Edit %s"] =
@@ -780,8 +768,6 @@ $locale["Unexpected EOF in zip file"] =
    "EOF inesperado en archivo del zip";
 $locale["UnfoldSubpages"] =
    "IncluyaPáginasSecundaria";
-$locale["UnfoldSubpagesPlugin"] =
-   "IncluyaPáginasSecundariaPlugin";
 $locale["Unknown special group '%s'"] =
    "Grupo especial desconocido '%s'";
 $locale["Unlock"] =
@@ -796,8 +782,6 @@ $locale["Unsupported argument: %s=%s"] =
    "Discusión sin apoyo: %s=%s";
 $locale["UpLoad"] =
    "UpLoad";
-$locale["UpLoadPlugin"] =
-   "UpLoadPlugin";
 $locale["Upgrade"] =
    "Mejora";
 $locale["Upload File"] =

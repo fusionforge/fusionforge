@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: UserPreferences.php 7659 2010-08-31 14:55:29Z vargenau $');
+// rcs_id('$Id: UserPreferences.php 7853 2011-01-21 13:28:47Z vargenau $');
 /**
  * Copyright (C) 2001,2002,2003,2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -70,7 +70,7 @@ extends WikiPlugin
             return '';
         if (defined('FUSIONFORGE') and FUSIONFORGE) {
             if (!($user->isAuthenticated())) {
-                return HTML::div(array('class' => 'errors'),
+                return HTML::p(array('class' => 'error'),
                                  _("Error: You are not logged in, cannot display UserPreferences."));
             }
         }
@@ -81,7 +81,7 @@ extends WikiPlugin
             or (isa($user,'_ForbiddenUser')))
         {
             $no_args = $this->getDefaultArguments();
-            $no_args['errmsg'] = HTML::div(array('class' => 'errors'),
+            $no_args['errmsg'] = HTML::p(array('class' => 'error'),
                                            _("Error: The user HomePage must be a valid WikiWord. Sorry, UserPreferences cannot be saved."));
             $no_args['isForm'] = false;
             return Template('userprefs', $no_args);

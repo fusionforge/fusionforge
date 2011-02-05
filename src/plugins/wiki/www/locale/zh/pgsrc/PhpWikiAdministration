@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:57:23 +0000
+Date: Fri,  4 Feb 2011 16:58:00 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiAdministration 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: PhpWikiAdministration 7929 2011-02-04 16:01:23Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
@@ -145,5 +145,4 @@ content-type 設為 ''application/x-phpwiki'', 而頁面的 meta-data
    >>
 
 ----
-
-PhpWikiDocumentation
+[[CategoryActionPage]]

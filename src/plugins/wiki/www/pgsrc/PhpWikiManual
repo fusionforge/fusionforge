@@ -1,6 +1,6 @@
-Date: Thu, 13 Jan 2011 17:23:46 +0000
+Date: Thu, 27 Jan 2011 17:05:57 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiManual 7835 2011-01-13 16:24:20Z vargenau $
+X-Rcs-Id: $Id: PhpWikiManual 7918 2011-01-27 16:07:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiManual;
   flags=EXTERNAL_PAGE;
@@ -10,6 +10,7 @@ Content-Transfer-Encoding: binary
 
 <<IncludePage page="Help/PhpWiki">>
 <<IncludePage page="Help/WikiWikiWeb">>
+<<IncludePage page="SteveWainstead">>
 <<IncludePage page="Help/WabiSabi">>
 <<IncludePage page="Help/AddingPages">>
 <<IncludePage page="Help/EditText">>
@@ -22,7 +23,8 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="Help/Categories">>
 <<IncludePage page="Help/InterWiki">>
 <<IncludePage page="Help/LinkIcons">>
-<<IncludePage page="Help/ActionPage">>
+<<IncludePage page="Help/PredefinedIcons">>
+<<IncludePage page="Help/WikiPlugin">>
 <<IncludePage page="Help/MagicPhpWikiURLs">>
 <<IncludePage page="Help/MoreAboutMechanics">>
 <<IncludePage page="Help/Wikicreole">>
@@ -33,3 +35,8 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="Help/PageList">>
 <<IncludePage page="Help/Advice for Mediawiki users">>
 <<IncludePages pages=<!plugin-list BackLinks page=CategoryWikiPlugin sortby=pagename exclude="Template/*" !> >>
+
+{| width="100%"
+|- align="center"
+| **END OF DOCUMENT**
+|}

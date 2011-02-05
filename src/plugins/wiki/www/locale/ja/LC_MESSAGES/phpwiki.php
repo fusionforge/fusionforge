@@ -1,7 +1,5 @@
 <?php
 
-$locale["%s Kb (%s bytes)"] =
-   "%s キロバイト(%s バイト)";
 $locale["%s bytes"] =
    "%s バイト";
 $locale["%s bytes written"] =
@@ -44,8 +42,6 @@ $locale["Appearance"] =
    "外観";
 $locale["Application name"] =
    "アプリケーション名";
-$locale["Application size: %d Kb"] =
-   "アプリケーションサイズ: %d キロバイト";
 $locale["Arguments"] =
    "引数一覧";
 $locale["Auth Level"] =

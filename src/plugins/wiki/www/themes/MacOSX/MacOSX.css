@@ -1,5 +1,5 @@
 /*
- $Id: MacOSX.css 7824 2011-01-07 13:39:30Z vargenau $
+ $Id: MacOSX.css 7851 2011-01-21 13:17:59Z vargenau $
 
  Classes:
 
@@ -36,10 +36,6 @@ input[type=submit],
 input[type=cancel],
 input[type=image] { vertical-align: middle }
 
-/*
- * NS4, defaults from body don't always propagate correctly.
- * So we need this:
- */
 h1, h2, h3, .toolbar, td { font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 input.button { font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
@@ -100,7 +96,6 @@ div.toolbar { margin: 1ex 0ex; }
 .interwiki-moniker { background: #eee; }
 .interwiki-url { background: #f8f8f8; }
 
-
 /* Mozilla RecentChanges Sidebar */
 body.sidebar {
   font-size: smaller;
@@ -112,7 +107,7 @@ body.sidebar div.wikitext {
 body.sidebar div.wikitext ul { padding-left: 1em; }
 body.sidebar h2 { margin-top: 0; }
 
-div.errors {
+div.error {
   background: #eee;
   border: 1px solid gray;
   padding-left: 0.8em;
@@ -124,23 +119,6 @@ div.errors {
   font-size: smaller;
 }
 
-.errors {
-  color: black;
-  text-decoration: underline;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin-top: 0;
-  margin-bottom: 0.5ex;
-}
-
-.error {
-  font-family: Monaco, monospace;
-  margin: 0;
-  font-size: smaller;
-}
-.error ul {
-  font-size: smaller;
-  font-family: Monaco, monospace;
-}
 /* Debug */
 .debug {
   color: black;
@@ -158,9 +136,6 @@ div.errors {
 /* Wiki Links */
 a.wiki { text-decoration: none; }
 .wiki, .named-wiki { font-weight: bold; color:#1d42be; } /*blue*/
-/* This is obscene in NS4
-  b .wiki, STRONG .wiki { font-size: larger; }
- */
 
 /* Unknown links */
 .wikiunknown a, .named-wikiunknown a, .wikiunknown U { text-decoration: none; }
@@ -308,14 +283,11 @@ div.wiki-message {
 }
 .diff .block {
   background: #d8d8d8;
-  /* for NS4 */
-  /*  border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* + - line prefix */
@@ -324,7 +296,6 @@ div.wiki-message {
   font-family: monospace;
   margin-left: -1.6em;
   color: black;
-  /* for NS4 */
   border: none;
 }
 /* changed words */
@@ -834,14 +805,10 @@ textarea.wikiedit, input.wikitext, textarea.summary {
   clear: both;
 }
 
-/* This makes spacings in NS4 too big. */
 .toolbar , div.toolbar  {
   margin : 0.5ex 0;
 }
-/* This break NS4, but is necessary for IE4. */
-div.wikitext  {
-  width : auto;
-}
+
 /* Link icons */
 img.linkicon  {
   vertical-align : middle;

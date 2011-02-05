@@ -1,6 +1,6 @@
-Date: Tue,  4 Jan 2011 11:59:41 +0000
+Date: Fri,  4 Feb 2011 16:36:18 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiSystemverwalten 7799 2011-01-04 11:05:56Z vargenau $
+X-Rcs-Id: $Id: PhpWikiSystemverwalten 7927 2011-02-04 15:37:59Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiSystemverwalten;
   flags=PAGE_LOCKED;
@@ -22,16 +22,9 @@ Entweder wähle zuerst die Seiten und führe dann die Aktion aus:
 
 oder rufe die möglichen ~WikiAdmin Aktionen direkt auf:
 
-[/Löschen] | 
-  [/Umbenennen] |
-    [/SuchenErsetzen] |
-      [/AclSetzen] |
-        [/Chown] |
-          [/Chmod]
+| [[/Löschen]] | [[/Umbenennen]] | [[/SuchenErsetzen]] | [[/AclSetzen]] | [[/Chown]] | [[/Chmod]]
 
-----
 == Benutzerverwaltung
-
 
 Setze ein Benutzer Passwort zurück:
 

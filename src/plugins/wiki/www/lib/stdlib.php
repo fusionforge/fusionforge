@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: stdlib.php 7819 2011-01-07 10:04:56Z vargenau $');
+<?php // rcs_id('$Id: stdlib.php 7920 2011-01-31 15:58:13Z vargenau $');
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -1406,7 +1406,7 @@ function CTime ($time = false)
 
 
 /**
- * Format number as kilobytes or bytes.
+ * Format number as kibibytes or bytes.
  * Short format is used for PageList
  * Long format is used in PageInfo
  *
@@ -1419,16 +1419,16 @@ function ByteFormatter ($bytes = 0, $longformat = false) {
         return fmt("-???");
     if ($bytes < 1024) {
         if (! $longformat)
-            $size = fmt("%s b", $bytes);
+            $size = fmt("%s B", $bytes);
         else
             $size = fmt("%s bytes", $bytes);
     }
     else {
         $kb = round($bytes / 1024, 1);
         if (! $longformat)
-            $size = fmt("%s k", $kb);
+            $size = fmt("%s KiB", $kb);
         else
-            $size = fmt("%s Kb (%s bytes)", $kb, $bytes);
+            $size = fmt("%s KiB (%s bytes)", $kb, $bytes);
     }
     return $size;
 }
@@ -1880,7 +1880,9 @@ function isActionPage($filename) {
 
     global $AllActionPages;
 
-    return (in_array($filename, $AllActionPages));
+    $localizedAllActionPages = array_map("gettext", $AllActionPages);
+
+    return (in_array($filename, $localizedAllActionPages));
 }
 
 /**

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginBonjourLeMonde 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginBonjourLeMonde 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginBonjourLeMonde;
   flags="";
@@ -10,12 +10,12 @@ Content-Transfer-Encoding: binary
 
 Un simple exemple de plugin :
 
-<<HelloWorld salutation="Bonjour," name="UtilisateurWiki" >>
+<<HelloWorld salutation="Bonjour," name="UtilisateurWiki">>
 
 Depuis la source de cette page :
 
 {{{
-<<HelloWorld salutation="Bonjour," name="UtilisateurWiki" >>
+<<HelloWorld salutation="Bonjour," name="UtilisateurWiki">>
 }}}
 
 -----
@@ -78,6 +78,7 @@ extends WikiPlugin
 };
 >>
 
+<noinclude>
 ----
-
-[[CategoryPluginWiki]]
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

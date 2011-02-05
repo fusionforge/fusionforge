@@ -60,14 +60,10 @@ $locale["%d pages with less than %d hits (<%d%%)."] =
    "%d pages ayant eu moins de %d visiteurs (<%d%%).";
 $locale["%s %s %s is disallowed on this wiki for %s user '%s' (level: %s)."] =
    "%s %s %s est interdite sur ce wiki pour %s l'utilisateur '%s' (niveau : %s).";
-$locale["%s Kb (%s bytes)"] =
-   "%s Ko (%s octets)";
 $locale["%s already exists"] =
    "%s existe déjà";
 $locale["%s at %s"] =
    "%s à %s";
-$locale["%s b"] =
-   "%s b";
 $locale["%s by %s"] =
    "%s par %s";
 $locale["%s bytes"] =
@@ -98,8 +94,6 @@ $locale["%s is not writable."] =
    "%s n'est pas accessible en écriture.";
 $locale["%s is only allowed in locked pages."] =
    "%s n'est autorisé que dans les pages verrouillées.";
-$locale["%s k"] =
-   "%s k";
 $locale["%s not defined"] =
    "%s : non défini";
 $locale["%s not found"] =
@@ -120,8 +114,6 @@ $locale["%s parameter missing"] =
    "%s paramètre manquant";
 $locale["%s words"] =
    "%s mots";
-$locale["%s(%d): no such revision"] =
-   "%s(%d) : révision inexistante";
 $locale["%s: %s"] =
    "%s : %s";
 $locale["%s: Bad action"] =
@@ -256,14 +248,10 @@ $locale["AddCategory"] =
    "AjoutezCatégorie";
 $locale["AddComment"] =
    "AjouterDesCommentaires";
-$locale["AddCommentPlugin"] =
-   "AjoutDesCommentaires";
 $locale["AddPageLink"] =
    "AjouterDesPagesLien";
 $locale["AddPlugin"] =
    "AjoutezPlugin";
-$locale["AddingPages"] =
-   "AjouterDesPages";
 $locale["Adjust"] =
    "Ajuster";
 $locale["Admin"] =
@@ -312,8 +300,6 @@ $locale["AppendText"] =
    "ApposezLeTexte";
 $locale["Application name"] =
    "Nom de l'application";
-$locale["Application size: %d Kb"] =
-   "Taille de l'application : %d Kb";
 $locale["Apply changes"] =
    "Appliquer les changements.";
 $locale["Are you sure you want to permanently change the selected files?"] =
@@ -348,8 +334,6 @@ $locale["Author will be logged as %s."] =
    "L'auteur sera enregistré sous le nom %s.";
 $locale["AuthorHistory"] =
    "HistoriqueAuteur";
-$locale["AuthorHistoryPlugin"] =
-   "PluginHistoriqueAuteur";
 $locale["Available plugins"] =
    "Plugins disponibles";
 $locale["Avg. Rating"] =
@@ -394,10 +378,6 @@ $locale["Calendar"] =
    "Calendrier";
 $locale["CalendarList"] =
    "ListeDuCalendrier";
-$locale["CalendarListPlugin"] =
-   "PluginListeDuCalendrier";
-$locale["CalendarPlugin"] =
-   "PluginCalendrier";
 $locale["Can't inflate data: zlib support not enabled in this PHP"] =
    "Impossible de décompresser les données : le support de zlib n'a pas été validé dans ce PHP";
 $locale["Can't mix '%s' with '%s' type format strings"] =
@@ -484,8 +464,6 @@ $locale["Comment"] =
    "Commentaire";
 $locale["Comment modified on %s by %s"] =
    "Commentaire modifié le %s par %s";
-$locale["CommentPlugin"] =
-   "PluginCommenter";
 $locale["Comments"] =
    "Commentaires";
 $locale["Comments on %s by %s."] =
@@ -538,8 +516,6 @@ $locale["CreatePage"] =
    "CréerUnePage";
 $locale["CreateToc"] =
    "CréerUneTdm";
-$locale["CreateTocPlugin"] =
-   "PluginCréerUneTdm";
 $locale["Created by CreatePage"] =
    "Créée par CréerUnePage";
 $locale["Created directory '%s' for the page dump..."] =
@@ -638,8 +614,6 @@ $locale["Don't cache this page."] =
    "Ne pas mettre en cache cette page.";
 $locale["Double redirect not allowed."] =
    "La double redirection interdit.";
-$locale["Download for CVS"] =
-   "Télécharger pour CVS";
 $locale["Download for backup"] =
    "Télécharger pour sauvegarder";
 $locale["Download page contents"] =
@@ -664,10 +638,6 @@ $locale["Dumping serial pages"] =
    "Récupération des pages sérialisées";
 $locale["E-Mail"] =
    "Adresse électronique";
-$locale["E-Mail address '%s' is not properly formatted"] =
-   "L'adresse électronique '%s' ne semble pas être correcte.";
-$locale["E-Mail address '%s' is properly formatted"] =
-   "L'adresse électronique '%s' semble être correcte.";
 $locale["E-mail"] =
    "Adresse électronique";
 $locale["E-mail Notification"] =
@@ -698,8 +668,6 @@ $locale["Edit: %s"] =
    "Modifier : %s";
 $locale["EditMetaData"] =
    "EditerLesMetaDonnées";
-$locale["EditMetaDataPlugin"] =
-   "PluginÉditerMetaData";
 $locale["EditText"] =
    "ÉditerLeContenu";
 $locale["Edited by: %s"] =
@@ -750,8 +718,6 @@ $locale["External link (remember http:// prefix)"] =
    "Lien externe (http:// prefix)";
 $locale["ExternalSearch"] =
    "RechercheExterne";
-$locale["ExternalSearchPlugin"] =
-   "PluginRechercheExterne";
 $locale["FAILED"] =
    "ÉCHOUÉ";
 $locale["FIXED"] =
@@ -772,12 +738,8 @@ $locale["FindPage"] =
    "ChercherUnePage";
 $locale["First"] =
    "Première";
-$locale["FoafViewerPlugin"] =
-   "PluginFoafViewer";
 $locale["FrameInclude"] =
    "InclureUnCadre";
-$locale["FrameIncludePlugin"] =
-   "PluginInclureUnCadre";
 $locale["From english to %s: "] =
    "De l'Anglais au %s: ";
 $locale["Full changes"] =
@@ -836,8 +798,6 @@ $locale["Height"] =
    "Hauteur";
 $locale["HelloWorld"] =
    "BonjourLeMonde";
-$locale["HelloWorldPlugin"] =
-   "PluginBonjourLeMonde";
 $locale["Help"] =
    "Aide";
 $locale["Here you can override site-specific default values."] =
@@ -898,8 +858,6 @@ $locale["Include text from another wiki page."] =
    "Inclure le texte d'une autre PageWiki.";
 $locale["IncludePage"] =
    "InclureUnePage";
-$locale["IncludePagePlugin"] =
-   "PluginInclureUnePage";
 $locale["IncludePages"] =
    "InclurePages";
 $locale["IncludeSiteMap"] =
@@ -1002,8 +960,6 @@ $locale["Link to page"] =
    "Lien vers la page";
 $locale["LinkDatabase"] =
    "LiensDatabase";
-$locale["LinkIcons"] =
-   "IcônesLiens";
 $locale["Links"] =
    "Liens";
 $locale["List"] =
@@ -1076,8 +1032,6 @@ $locale["MIME file %s"] =
    "fichier MIME %s";
 $locale["MISSING"] =
    "MANQUANT";
-$locale["MagicPhpWikiURLs"] =
-   "URLMagiquesPhpWiki";
 $locale["Major modifications only"] =
    "Modifications majeures uniquement";
 $locale["Make use of the Google API"] =
@@ -1122,8 +1076,6 @@ $locale["Modified on %s by %s"] =
    "Modifié le %s par %s";
 $locale["Moniker"] =
    "Nom";
-$locale["MoreAboutMechanics"] =
-   "DétailsTechniques";
 $locale["Most users ever online was %d at %s."] =
    "Record du nombre d'utilisateur: %d le %s.";
 $locale["MostPopular"] =
@@ -1152,8 +1104,6 @@ $locale["New users may use an empty password."] =
    "Les nouveaux utilisateurs devraient utiliser un mot de passe vide.";
 $locale["New watchlist: "] =
    "Nouvelle liste de suivi : ";
-$locale["NewMarkupTestPage"] =
-   "PageTestNouvellesMarques";
 $locale["Newer page:"] =
    "Page récente :";
 $locale["Next"] =
@@ -1224,12 +1174,8 @@ $locale["Old UserPage %s without stored password updated with empty password. Se
    "L'anciene page %s sans mot de passe attribué a été mise à jour avec un mot de passe vide. Définissez un mot de passe dans vos PréférencesUtilisateurs.";
 $locale["Old and new pages"] =
    "Pages anciennes et nouvelles";
-$locale["OldMarkupTestPage"] =
-   "PageTestAnciennesMarques";
 $locale["OldStyleTable"] =
    "TableauAncienStyle";
-$locale["OldStyleTablePlugin"] =
-   "PluginTableauAncienStyle";
 $locale["Older page:"] =
    "Ancienne page :";
 $locale["One UserPreferences field successfully updated."] =
@@ -1320,16 +1266,6 @@ $locale["PageGroup"] =
    "GroupeDePages";
 $locale["PageGroup for %s"] =
    "Groupe de pages pour %s";
-$locale["PageGroupTest"] =
-   "TestGroupeDePages";
-$locale["PageGroupTest/Four"] =
-   "TestGroupeDePages/Quatre";
-$locale["PageGroupTest/One"] =
-   "TestGroupeDePages/Un";
-$locale["PageGroupTest/Three"] =
-   "TestGroupeDePages/Trois";
-$locale["PageGroupTest/Two"] =
-   "TestGroupeDePages/Deux";
 $locale["PageHistory"] =
    "HistoriqueDeLaPage";
 $locale["PageHistory for %s"] =
@@ -1340,8 +1276,6 @@ $locale["PageTrail"] =
    "TracePage";
 $locale["PageTrail Plugin"] =
    "Pour suivre les pages à la trace";
-$locale["Pagedata size: %d Kb"] =
-   "Taille des données de la page : %d Kb";
 $locale["Password cannot be changed."] =
    "Impossible de changer le mot de passe.";
 $locale["Password updated."] =
@@ -1364,38 +1298,12 @@ $locale["Personal theme:"] =
    "Thème personnel :";
 $locale["PgsrcTranslation"] =
    "TraductionPgsrc";
-$locale["PgsrcTranslation/de"] =
-   "TraductionPgsrc/de";
-$locale["PgsrcTranslation/es"] =
-   "TraductionPgsrc/es";
-$locale["PgsrcTranslation/fr"] =
-   "TraductionPgsrc/fr";
-$locale["PgsrcTranslation/it"] =
-   "TraductionPgsrc/it";
-$locale["PgsrcTranslation/ja"] =
-   "TraductionPgsrc/ja";
-$locale["PgsrcTranslation/nl"] =
-   "TraductionPgsrc/nl";
-$locale["PgsrcTranslation/sv"] =
-   "TraductionPgsrc/sv";
-$locale["PgsrcTranslation/zh"] =
-   "TraductionPgsrc/zh";
 $locale["PhotoAlbum"] =
    "AlbumPhotos";
-$locale["PhotoAlbumPlugin"] =
-   "PluginAlbumPhotos";
 $locale["PhpHighlight"] =
    "ColorationPhp";
-$locale["PhpHighlightPlugin"] =
-   "PluginColorationPhp";
 $locale["PhpWeather"] =
    "MétéoPhp";
-$locale["PhpWeatherPlugin"] =
-   "PluginMétéoPhp";
-$locale["PhpWiki"] =
-   "PhpWiki";
-$locale["PhpWiki developers should manually inspect the downloaded file for nested markup before rewrapping with emacs and checking into CVS."] =
-   "Les développeurs de PhpWiki devraient inspecter manuellement les balises des fichiers téléchargés avant de les éditer sous emacs, et vérifier les CVS.";
 $locale["PhpWiki engine version"] =
    "Version de PhpWiki";
 $locale["PhpWikiAdministration"] =
@@ -1432,8 +1340,6 @@ $locale["Please set a password in UserPreferences."] =
    "Veuillez définir votre mot de passe dans PréférencesUtilisateurs.";
 $locale["Please use one of the downloadable versions rather than copying and pasting from the above preview."] =
    "Veuillez utiliser une des versions téléchargeables au lieu de copier-coller à partir de la prévisualisation.";
-$locale["PloticusPlugin"] =
-   "PluginPloticus";
 $locale["Plugin"] =
    "Plugin";
 $locale["Plugin %s disabled."] =
@@ -1524,8 +1430,6 @@ $locale["Raw HTML"] =
    "HTML Pur";
 $locale["Raw HTML is disabled in this wiki."] =
    "Le HTML est interdit sur ce wiki.";
-$locale["RawHtmlPlugin"] =
-   "PluginHtmlPur";
 $locale["Recent Comments"] =
    "Derniers commentaires";
 $locale["Recent Edits"] =
@@ -1552,8 +1456,6 @@ $locale["Redirect"] =
    "Redirection";
 $locale["RedirectTo"] =
    "RedirigerVers";
-$locale["RedirectToPlugin"] =
-   "PluginRedirection";
 $locale["Redirects to an external web site based on form input"] =
    "Redirige vers un site externe basé sur un formulaire";
 $locale["References"] =
@@ -1624,8 +1526,6 @@ $locale["Revision Not Found"] =
    "Révision Non Trouvée";
 $locale["RichTable"] =
    "BeauTableau";
-$locale["RichTablePlugin"] =
-   "PluginBeauTableau";
 $locale["RssFeed"] =
    "RessourcesRss";
 $locale["SOAP access"] =
@@ -1812,8 +1712,6 @@ $locale["System default:"] =
    "Système par défaut :";
 $locale["SystemInfo"] =
    "InfosSystème";
-$locale["SystemInfoPlugin"] =
-   "PluginInfosSystème";
 $locale["TODO: Google can only translate from english and french. Find a translation service for %s to language %s"] =
    "A FAIRE: Google peut uniquement traduire l'anglais et le français. Trouver un service pour traduire %s en %s";
 $locale["Table of Contents"] =
@@ -1944,8 +1842,6 @@ $locale["Total of %d themes: "] =
    "%d thèmes au total: ";
 $locale["Transclude"] =
    "Insérer";
-$locale["TranscludePlugin"] =
-   "PluginInsérer";
 $locale["Transcluded from %s"] =
    "Inséré de %s";
 $locale["Transcluded page"] =
@@ -1992,8 +1888,6 @@ $locale["Unexpected EOF in zip file"] =
    "Fin de fichier (EOF) inattendue dans le fichier Zip";
 $locale["UnfoldSubpages"] =
    "ListeDesSousPages";
-$locale["UnfoldSubpagesPlugin"] =
-   "PluginListeSousPages";
 $locale["Unknown special group '%s'"] =
    "Groupe spécial %s inconnu";
 $locale["Unlock"] =
@@ -2008,8 +1902,6 @@ $locale["Up"] =
    "Haut";
 $locale["UpLoad"] =
    "DéposerUnFichier";
-$locale["UpLoadPlugin"] =
-   "PluginDéposer";
 $locale["Update Preferences"] =
    "Mettre à jour les préférences";
 $locale["Upgrade"] =
@@ -2092,8 +1984,6 @@ $locale["Visualizes the Wiki structure in a graph using the 'dot' commandline to
    "Représenter la structure du wiki par un graphe utilisant l'outil dot de graphviz.";
 $locale["W"] =
    "L";
-$locale["WabiSabi"] =
-   "WabiSabi";
 $locale["Wanted From"] =
    "Recherchées par";
 $locale["Wanted Pages for %s (%d total):"] =
@@ -2152,8 +2042,6 @@ $locale["WikiAdminUtils"] =
    "WikiAdminUtils";
 $locale["WikiBlog"] =
    "WikiBlog";
-$locale["WikiBlogPlugin"] =
-   "PluginWikiBlog";
 $locale["WikiDB::renamePage() not yet implemented for this backend"] =
    "WikiBD::renamePage() pas encore implémentée pour le Principal";
 $locale["WikiForm"] =
@@ -2162,8 +2050,6 @@ $locale["WikiForm: %s: unknown action"] =
    "FormulaireWiki : %s : action inconnue";
 $locale["WikiForum"] =
    "WikiForum";
-$locale["WikiPlugin"] =
-   "PluginWiki";
 $locale["WikiPoll"] =
    "WikiPoll";
 $locale["WikiWikiWeb"] =
@@ -2390,12 +2276,6 @@ $locale["purge this page"] =
    "purger cette page";
 $locale["really"] =
    "vraiment";
-$locale["recursive inclusion of page %s"] =
-   "insertion récursive de la page %s";
-$locale["recursive inclusion of page %s ignored"] =
-   "insertion récursive de la page %s ignoré";
-$locale["recursive inclusion of url %s"] =
-   "insertion récursive de l'URL %s";
 $locale["remove this page"] =
    "supprimer cette page";
 $locale["rename this page"] =

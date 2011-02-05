@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 18:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: GestionDesPlugins 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: GestionDesPlugins 7890 2011-01-25 17:45:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=GestionDesPlugins;
   flags=PAGE_LOCKED;
@@ -8,21 +8,7 @@ Content-Type: application/x-phpwiki;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-PhpWiki vous permet d'étendre PhpWiki avec de nouvelles fonctionnalités via
-un mécanisme de plugins. Pour faire bref, vous étendez une classe PHP
-que nous fournissons et vous la personnalisez pour qu'elle affiche le
-contenu que vous voulez. Pour plus d'informations, voyez PluginWiki, 
-PluginBonjourLeMonde, et regardez les sources des fichiers dans lib/plugin.
-
-S'il n'y a pas d'exemple de page pour ce plugin ou que vous souhaitez plus 
-d'informations, le meilleur endroit est la source de ce plugin. Sous le 
-répertoire racine de votre wiki, le dossier lib/plugin contient tous les
-fichiers PHP des plugins.
-
-Certains plugins nécessitent des bibliothèques externes non fournies 
-avec PhpWiki ou PHP comme par exemple la librairie GD pour les 
-graphiques.
------
 <<PluginManager>>
+
 ----
-[[DocumentationDePhpWiki]] [[CategoryPluginWiki]]
+[[CatégoriePageDAction]]

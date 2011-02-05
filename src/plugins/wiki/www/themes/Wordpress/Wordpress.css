@@ -1,5 +1,5 @@
 /**
- * $Id: Wordpress.css 7821 2011-01-07 12:42:51Z vargenau $
+ * $Id: Wordpress.css 7851 2011-01-21 13:17:59Z vargenau $
  *
  * PhpWiki's Wordpress style sheet contributed by Mike Pickering
  */
@@ -444,10 +444,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px #ccc solid;
   color: black;
   border-top: 1px solid #494f5d;
   border-left:  1px solid #494f5d;
@@ -458,33 +454,16 @@ table.cal td.cal-today a.cal-hide {  }
   padding-left:  .125em;
   padding-right: .125em;
   padding: 0;
-  /* "paper" borders */
-  /*border-top: 2px #d2d2d2 solid;
-  border-left:  2px #b2b2b2 solid;
-  border-bottom:  2px #e8e6df solid;
-  border-right: 2px #e8e6df solid;*/
-/*  padding-left:  0em; 
-  padding-bottom: 0ex;*/
-/*  border-style: inset;*/
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
-  /* I'm not sure what the intent of this was, but it's
-   *  not valid CSS: */
-  /* display: editarea; */
   clear: both;
 }
 .diff .block {
   background: #ddd;
   padding-left: 1em;
-  /* for NS4 */
-  /*border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* entire difftextblock */
@@ -492,10 +471,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    0;
   margin-bottom: 0;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
@@ -505,9 +480,6 @@ table.cal td.cal-today a.cal-hide {  }
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
 }
 /* + - line prefix */
@@ -515,7 +487,6 @@ table.cal td.cal-today a.cal-hide {  }
   font-weight: normal;
   font-family: monospace;
   color: black;
-  /* for NS4 */
   margin-left: 0;
   border: none;
 }
@@ -533,22 +504,18 @@ table.cal td.cal-today a.cal-hide {  }
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
   background: #fcc;
-  /* for NS4 */
   border: none;
 }
 /* blocks containing added words */
 .diff .final, .diff .added {
   background: #cfc;
-  /* for NS4 */
   border: none;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del { background: #f99; }
 /* added words */
 .diff ins { background: #9f9; }
-
 
 /**
  * PageHistory, Info
@@ -559,14 +526,12 @@ td.pageinfo { font-weight: bold; }
   font-style: oblique;
 }
 
-
 /**
  * Other
  */
 .printer, .no-css { display: none; }
 
-/* PHP Warnings */
-div.errors {
+.error {
   color: black;
   background: #eee;
   margin-top:    1em;
@@ -578,13 +543,8 @@ div.errors {
   border: medium solid red;
   clear: both;
 }
-.errors {
-  color: red;
-  margin:  0;
-  padding: 0;
-  text-decoration: underline;
-}
-div.warning {
+
+.warning {
   color: black;
   background: #eee;
   margin-top:    1em;
@@ -596,8 +556,6 @@ div.warning {
   border: thin solid blue;
   clear: both;
 }
-.error { font-family: monospace; font-size: 120%; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -614,7 +572,6 @@ div.warning {
 .hint {
   color: black;
   background: #eeeeee;
-   /* font-size: smaller; */
   font-style: italic;
   margin-left: 3em;
   padding: 0.5ex 0.5em;
@@ -652,7 +609,6 @@ span.redirectfrom {
   font-weight: normal;
   padding-left: 1em;
 }
-
 
 /*
  * "DL tables"
@@ -695,7 +651,6 @@ blockquote.mail-style-quote {
 .mail-style-quote blockquote.mail-style-quote {
   margin-left: -0.6em;
 }
-
 
 /*
  * wikiblog
@@ -803,11 +758,9 @@ table.interwiki-map {
   margin: 1em 0 0.5em 0;
 }
 
-
 .clear-floats {
   clear: both;
 }
-
 
 /* postnuke css:*/
 .gensmall{font-size:10px}
