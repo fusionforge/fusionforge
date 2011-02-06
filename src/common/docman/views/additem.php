@@ -28,6 +28,10 @@ global $group_id; // id of the group
 global $dirid; //id of the doc_group
 global $use_tooltips; // enable or not tooltips in docman
 
+if (!forge_check_perm('docman', $group_id, 'submit')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
 ?>
 
 <script type="text/javascript">
@@ -75,21 +79,25 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo 'id="labelZip" title="'. _('Create a full directory tree using an compressed archive. Only zip or rar format support.').'"';
 	echo '>'. _('Inject Tree') . '</label>';
 }
-echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
-echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';
-include ($gfcommon.'docman/views/addsubdocgroup.php');
-echo '</div>';
+if (forge_check_perm('docman', $group_id, 'approve')) {
+	echo '<div class="docman_div_include" id="addsubdocgroup" style="display:none;">';
+	echo '<h4 class="docman_h4">'. _('Add a new subdirectory') .'</h4>';
+	include ($gfcommon.'docman/views/addsubdocgroup.php');
+	echo '</div>';
+}
 echo '<div class="docman_div_include" id="addfile" style="display:none">';
 echo '<h4 class="docman_h4">'. _('Add a new document') .'</h4>';
 include ($gfcommon.'docman/views/addfile.php');
 echo '</div>';
-echo '<div class="docman_div_include" id="zipinject" style="display:none">';
-echo '<h4 class="docman_h4">'. _('Inject a Tree') .'</h4>';
-echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&action=injectzip&dirid='.$dirid.'" enctype="multipart/form-data">';
-echo '<p>';
-echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" size="30" />';
-echo '<input id="submitinjectzip" type="button" value="'. _('Inject') .'" onclick="javascript:doItInject()" />';
-echo '</p></div>';
-echo '</form>';
-echo '</div>';
+if (forge_check_perm('docman', $group_id, 'approve')) {
+	echo '<div class="docman_div_include" id="zipinject" style="display:none">';
+	echo '<h4 class="docman_h4">'. _('Inject a Tree') .'</h4>';
+	echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&action=injectzip&dirid='.$dirid.'" enctype="multipart/form-data">';
+	echo '<p>';
+	echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" size="30" />';
+	echo '<input id="submitinjectzip" type="button" value="'. _('Inject') .'" onclick="javascript:doItInject()" />';
+	echo '</p></div>';
+	echo '</form>';
+	echo '</div>';
+}
 ?>

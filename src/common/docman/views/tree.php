@@ -29,6 +29,11 @@
 global $d_arr; // documents array
 global $group_id; // id of the group
 
+if (!forge_check_perm('docman', $group_id, 'read')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
+
 $nested_docs = array();
 $idExposeTreeIndex = 0;
 $idhtml = 0;

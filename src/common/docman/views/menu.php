@@ -32,6 +32,11 @@ global $d_arr; // document array
 global $group_id; // id of group
 global $use_tooltips; // enable or not tooltips in docman
 
+if (!forge_check_perm('docman', $group_id, 'read')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
+
 /* create the submenu following role, rules and content */
 $menu_text = array();
 $menu_links = array();
@@ -65,16 +70,15 @@ if (forge_check_perm('docman', $group_id, 'submit')) {
 		$menu_attr[] = array();
 	}
 }
-if (forge_check_perm('docman', $group_id, 'read')) {
-	if ($g->useDocmanSearch()) {
-		if ($d_arr || count($d_arr) > 1) {
-			$menu_text[] = _('Search in documents');
-			$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
-			if ($use_tooltips) {
-				$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu');
-			} else {
-				$menu_attr[] = array();
-			}
+
+if ($g->useDocmanSearch()) {
+	if ($d_arr || count($d_arr) > 1) {
+		$menu_text[] = _('Search in documents');
+		$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
+		if ($use_tooltips) {
+			$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu');
+		} else {
+			$menu_attr[] = array();
 		}
 	}
 }

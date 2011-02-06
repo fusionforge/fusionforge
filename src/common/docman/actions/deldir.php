@@ -31,18 +31,24 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Docman Action Denied.');
+	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-} else {
-
-	$dg = new DocumentGroup($g, $dirid);
-	if ($dg->isError())
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-	if (!$dg->delete($dirid, $group_id))
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-	$return_msg = _('Document Directory deleted successfully.');
-	session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
 }
+
+$dg = new DocumentGroup($g, $dirid);
+if ($dg->isError())
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+
+if (!$dg->delete($dirid, $group_id))
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+
+$parentId = $dg->getParentID();
+$return_msg = sprintf(_('Directory %s deleted successfully.'),$dg->getName());
+$returnUrl = '';
+if ($parentId) {
+	$returnUrl = '&view=listfile&dirid='.$parentId;
+}
+session_redirect('/docman/?group_id='.$group_id.$returnUrl.'&feedback='.urlencode($return_msg));
 ?>

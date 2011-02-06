@@ -29,21 +29,21 @@ global $group_id; // id of group
 global $LUSER; // User object
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Docman Action Denied.');
+	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-} else {
-	$fileid = getIntFromRequest('fileid');
-	$lock = getIntFromRequest('lock');
-	$d = new Document($g, $fileid);
-
-	if ($d->isError())
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
-
-	if ($lock == 0) {
-		echo $d->setLock($lock);
-	} else {
-		echo $d->setLock($lock, $LUSER->getID(), time());
-	}
-	exit;
 }
+
+$fileid = getIntFromRequest('fileid');
+$lock = getIntFromRequest('lock');
+$d = new Document($g, $fileid);
+
+if ($d->isError())
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+
+if ($lock == 0) {
+	echo $d->setLock($lock);
+} else {
+	echo $d->setLock($lock, $LUSER->getID(), time());
+}
+exit;
 ?>

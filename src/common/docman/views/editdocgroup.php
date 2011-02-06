@@ -5,7 +5,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -33,10 +33,14 @@ global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
 global $dgh; // document directory html
 
-if (forge_check_perm ('docman', $group_id, 'approve')) {
-	$dg = new DocumentGroup($g, $dirid);
-	if ($dg->isError())
-		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
+
+$dg = new DocumentGroup($g, $dirid);
+if ($dg->isError())
+	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 ?>
 <div class="docmanDivIncluded">
@@ -50,7 +54,7 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 				<td><?php echo _('belongs to') ?></td>
 				<td>
 <?php
-			$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
+$dgh->showSelectNestedGroups($dgf->getNested(), "parent_dirid", true, $dg->getParentId(), array($dg->getID()));
 ?>
 				</td>
 				<td><input type="submit" value="<?php echo _('Edit') ?>" name="submit" /></td>
@@ -61,6 +65,3 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 		</p>
 	</form>
 </div>
-<?php
-}
-?>

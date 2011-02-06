@@ -30,21 +30,21 @@ global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+}
+
+
 $groupname = getStringFromRequest('groupname');
 $parent_dirid = getIntFromRequest('parent_dirid');
+$dg = new DocumentGroup($g, $dirid);
+if ($dg->isError())
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Docman Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-} else {
-	$dg = new DocumentGroup($g, $dirid);
-	if ($dg->isError())
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
+if (!$dg->update($groupname, $parent_dirid))
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-	if (!$dg->update($groupname, $parent_dirid))
-		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
-
-	$return_msg = _('Document Directory Updated successfully.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
-}
+$return_msg = _('Document Directory Updated successfully.');
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>

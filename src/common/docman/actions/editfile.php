@@ -31,75 +31,75 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Document Action Denied.');
+	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-} else {
-	$doc_group = getIntFromRequest('doc_group');
-	$docid = getIntFromRequest('docid');
-	$title = getStringFromRequest('title');
-	$description = getStringFromRequest('description');
-	$data = getStringFromRequest('details'.$docid);
-	$file_url = getStringFromRequest('file_url');
-	$uploaded_data = getUploadedFile('uploaded_data');
-	$stateid = getIntFromRequest('stateid');
-	$filetype = getStringFromRequest('filetype');
-	$editor = getStringFromRequest('editor');
-	$fromview = getStringFromRequest('fromview');
-	switch ($fromview) {
-		case 'admin':
-		case 'listrashfile':
-		case 'listpendingfile': {
-			$urlparam = '&view='.$fromview;
-			break;
-		}
-		default: {
-			$urlparam = '&view=listfile&dirid='.$doc_group;
-			break;
-		}
-	}
-
-	if (empty($gfcommon)) {
-		$engine_dir = '../../common';
-	} else {
-		$engine_dir = $gfcommon;
-	}
-	$d= new Document($g, $docid, false, $engine_dir.'/docman/engine/');
-	if ($d->isError())
-		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
-
-	$sanitizer = new TextSanitizer();
-	$data = $sanitizer->SanitizeHtml($data);
-	if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
-		$filename = $d->getFileName();
-		if (!$filetype)
-			$filetype = $d->getFileType();
-
-	} elseif (!empty($uploaded_data) && $uploaded_data['name']) {
-		if (!is_uploaded_file($uploaded_data['tmp_name'])) {
-			$return_msg = sprintf(_('Invalid file attack attempt %1$s.'), $uploaded_data['name']);
-		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($return_msg));
-		}
-		$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
-		$filename = $uploaded_data['name'];
-		if (function_exists(finfo_open)) {
-			$finfo = finfo_open(FILEINFO_MIME_TYPE);
-			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
-		} else {
-			$uploaded_data_type = $uploaded_data['type'];
-		}
-	} elseif ($file_url) {
-		$data = '';
-		$filename = $file_url;
-		$filetype = 'URL';
-	} else {
-		$filename = $d->getFileName();
-		$filetype = $d->getFileType();
-	}
-
-	if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
-		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
-
-	$return_msg = sprintf(_('Document %s updated successfully.'),$d->getFilename());
-	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg));
 }
+
+$doc_group = getIntFromRequest('doc_group');
+$docid = getIntFromRequest('docid');
+$title = getStringFromRequest('title');
+$description = getStringFromRequest('description');
+$data = getStringFromRequest('details'.$docid);
+$file_url = getStringFromRequest('file_url');
+$uploaded_data = getUploadedFile('uploaded_data');
+$stateid = getIntFromRequest('stateid');
+$filetype = getStringFromRequest('filetype');
+$editor = getStringFromRequest('editor');
+$fromview = getStringFromRequest('fromview');
+switch ($fromview) {
+	case 'admin':
+	case 'listrashfile':
+	case 'listpendingfile': {
+		$urlparam = '&view='.$fromview;
+		break;
+	}
+	default: {
+		$urlparam = '&view=listfile&dirid='.$doc_group;
+		break;
+	}
+}
+
+if (empty($gfcommon)) {
+	$engine_dir = '../../common';
+} else {
+	$engine_dir = $gfcommon;
+}
+$d= new Document($g, $docid, false, $engine_dir.'/docman/engine/');
+if ($d->isError())
+	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+
+$sanitizer = new TextSanitizer();
+$data = $sanitizer->SanitizeHtml($data);
+if (($editor) && ($d->getFileData()!=$data) && (!$uploaded_data['name'])) {
+	$filename = $d->getFileName();
+	if (!$filetype)
+		$filetype = $d->getFileType();
+
+} elseif (!empty($uploaded_data) && $uploaded_data['name']) {
+	if (!is_uploaded_file($uploaded_data['tmp_name'])) {
+		$return_msg = sprintf(_('Invalid file attack attempt %1$s.'), $uploaded_data['name']);
+		session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($return_msg));
+	}
+	$data = fread(fopen($uploaded_data['tmp_name'], 'r'), $uploaded_data['size']);
+	$filename = $uploaded_data['name'];
+	if (function_exists(finfo_open)) {
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
+	} else {
+		$uploaded_data_type = $uploaded_data['type'];
+	}
+} elseif ($file_url) {
+	$data = '';
+	$filename = $file_url;
+	$filetype = 'URL';
+} else {
+	$filename = $d->getFileName();
+	$filetype = $d->getFileType();
+}
+
+if (!$d->update($filename, $filetype, $data, $doc_group, $title, $description, $stateid))
+	session_redirect('/docman/?group_id='.$group_id.$urlparam.'&error_msg='.urlencode($d->getErrorMessage()));
+
+$return_msg = sprintf(_('Document %s updated successfully.'),$d->getFilename());
+session_redirect('/docman/?group_id='.$group_id.$urlparam.'&feedback='.urlencode($return_msg));
 ?>

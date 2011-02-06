@@ -30,6 +30,11 @@
 global $g; //group object
 global $group_id; // id of group
 
+if (!forge_check_perm('docman', $group_id, 'submit')) {
+	$return_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+}
+
 $doc_group = getIntFromRequest('doc_group');
 $title = getStringFromRequest('title');
 $description = getStringFromRequest('description');
@@ -39,14 +44,9 @@ $manual_path = getStringFromRequest('manual_path');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
 
-if (!forge_check_perm('docman', $group_id, 'submit')) {
-	$return_msg = _('Docman Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-}
-
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided
-	$return_msg = _('No valid Document Directory was selected.');
+	$return_msg = _('No valid Directory was selected.');
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 }
 	

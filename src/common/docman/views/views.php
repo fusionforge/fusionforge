@@ -21,6 +21,10 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+if (!forge_check_perm('docman', $group_id, 'read')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
 
 $view = getStringFromRequest('view');
 switch ($view) {

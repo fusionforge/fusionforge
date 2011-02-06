@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -32,6 +32,11 @@ global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
 global $dgh; // document directory html
 global $nested_docs; // flat docs array
+
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
 
 foreach ($nested_docs[$dirid] as $d) {
 

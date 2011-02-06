@@ -31,23 +31,23 @@ global $dirid; //id of doc_group
 global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
-	$return_msg = _('Docman Action Denied.');
+	$return_msg = _('Document Manager Action Denied.');
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
-} else {
-	$arr_fileid = explode(',',getStringFromRequest('fileid'));
-	$return_msg = _('Document(s)').' ';
-	foreach ($arr_fileid as $fileid) {
-		$d = new Document($g, $fileid);
-		$return_msg .= $d->getFilename().' ';
-
-		if ($d->isError())
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
-
-		if (!$d->setState('2'))
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
-
-	}
-	$return_msg .= _('moved to trash successfully.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 }
+
+$arr_fileid = explode(',',getStringFromRequest('fileid'));
+$return_msg = _('Document(s)').' ';
+foreach ($arr_fileid as $fileid) {
+	$d = new Document($g, $fileid);
+	$return_msg .= $d->getFilename().' ';
+
+	if ($d->isError())
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+
+	if (!$d->setState('2'))
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+
+}
+$return_msg .= _('moved to trash successfully.');
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>

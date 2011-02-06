@@ -29,6 +29,11 @@
 global $df; // document factory
 global $nested_groups; // flat groups array
 
+if (!forge_check_perm('docman', $group_id, 'approve')) {
+	$return_msg= _('Document Manager Access Denied');
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
+}
+
 $df->setStateID('2');
 $d_trash_arr =& $df->getDocuments();
 

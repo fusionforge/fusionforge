@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * http://fusionforge.org
  *
@@ -32,6 +32,11 @@ global $group_id; // id of the group
 global $dirid; //id of the doc_group
 global $dgh; // document group html object
 global $gdf; // document grou factory object
+
+if (!forge_check_perm('docman', $group_id, 'submit')) {
+	$return_msg = _('Document Manager Action Denied.');
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+}
 
 echo '<div class="docmanDivIncluded">';
 if ( $dgf->getNested() == NULL ) {
@@ -128,14 +133,22 @@ if ( $dgf->getNested() == NULL ) {
 
 	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
 	$manual_files_arr = ls($incoming, true);
-	echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
-	echo '			<br />';
+	if (count($manual_files_arr)) {
+		echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
+		echo '		<br />';
 			printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
 				$incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
-	echo '
+		echo '
 					</td>
-				</tr>
-				<tr id="editnamerow" style="display:none">
+				</tr>';
+	} else {
+		echo '		<p class="warning">';
+			printf(_('You need first to upload file in %s'),$incoming);
+		echo '		</p>';
+		echo '			</td>
+				</tr>';
+	}
+	echo '			<tr id="editnamerow" style="display:none">
 					<td style="text-align:right;">
 						<strong>'. _('File Name') .'</strong>'. utils_requiredField()
 					.'</td><td>'
