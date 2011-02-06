@@ -290,7 +290,7 @@ function document_editdata(&$document) {
 			<?php if ($document->isURL()) {
 					echo '<a href="'.inputSpecialchars($d->getFileName()).'">[View File URL]</a>';
 				} else { ?>
-					<a target="_blank" href="../view.php/<?php echo $group_id.'/'.$document->getID().'/'.urlencode($document->getFileName()) ?>"><?php echo $document->getName(); ?></a>
+					<a target="_blank" href="/docman/view.php/<?php echo $group_id.'/'.$document->getID().'/'.urlencode($document->getFileName()) ?>"><?php echo $document->getName(); ?></a>
 			<?php } ?>
 		</td>
 	</tr>
