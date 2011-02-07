@@ -25,6 +25,12 @@
 
 use_javascript('/tabber/tabber.js');
 
+if (getStringFromRequest('commentsort') == 'anti') {
+       $sort_comments_chronologically = false;
+} else {
+       $sort_comments_chronologically = true;
+}
+
 $ath->header(array ('title'=>'[#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
 
 echo notepad_func();
@@ -111,9 +117,19 @@ echo notepad_func();
 			<?php } ?>
 		</td></tr>
 		<tr><td colspan="2">
-		<h2><?php echo _('Followup') ?></h2>
-		<?php
-		echo $ah->showMessages();
+		<h2><?php echo _('Followups: ') 
+		if ($sort_comments_chronologically) {
+			echo '<a href="' .
+			util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=anti') .
+			'">' . _('Sort comments antichronologically') . '</a>';
+		} else {
+			echo '<a href="' .
+				util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=chrono') .
+				'">' . _('Sort comments chronologically') . '</a>';
+		}
+		echo '</h2>';
+
+		echo $ah->showMessages($sort_comments_chronologically);
 		?>
 		</td></tr>
 </table>

@@ -613,11 +613,11 @@ class ProjectTask extends Error {
 	 *
 	 *  @return database result set.
 	 */
-	function getMessages() {
+	function getMessages($asc=false) {
 		return db_query_params ('SELECT * 
 		FROM project_message_user_vw 
 		WHERE project_task_id=$1
-		ORDER BY postdate DESC',
+		ORDER BY postdate ' . ($asc ? 'ASC' : 'DESC'),
 					array ($this->getID())) ;
 	}
 

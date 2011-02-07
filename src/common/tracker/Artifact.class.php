@@ -667,8 +667,8 @@ class Artifact extends Error {
 	 *
 	 *	@return database result set.
 	 */
-	function getMessages() {
-		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate DESC',
+	function getMessages($asc=false) {
+		return db_query_params ('SELECT * FROM artifact_message_user_vw WHERE artifact_id=$1 ORDER BY adddate ' . ($asc ? 'ASC' : 'DESC'),
 					array ($this->getID())) ;
 	}
 

@@ -24,6 +24,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+if (getStringFromRequest('commentsort') == 'anti') {
+       $sort_comments_chronologically = false;
+} else {
+       $sort_comments_chronologically = true;
+}
+
 pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id));
 
 ?>
@@ -163,7 +169,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td colspan="2">
-			<?php echo $pt->showMessages(); ?>
+			<?php echo $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
 		</td>
 	</tr>
 	<?php

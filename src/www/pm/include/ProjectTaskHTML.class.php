@@ -131,15 +131,26 @@ class ProjectTaskHTML extends ProjectTask {
 		}
 	}
 
-	function showMessages() {
+	function showMessages($asc=true,$whereto='/') {
 		/*
 			Show the details rows from task_history
 		*/
-		$result=$this->getMessages();
+		$result=$this->getMessages($asc);
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
-			echo '<h3>'._('Followups').'</h3>';
+			echo '<h3>'._('Followups: ');
+
+			if ($asc) {
+				echo '<a href="' .
+					util_make_url($whereto . '&amp;commentsort=anti') .
+					'">' . _('Sort comments antichronologically') . '</a>';
+			} else {
+				echo '<a href="' .
+					util_make_url($whereto . '&amp;commentsort=chrono') .
+					'">' . _('Sort comments chronologically') . '</a>';
+			}
+			echo "</h3>\n";
 
 			$title_arr=array();
 			$title_arr[]=_('Comment');

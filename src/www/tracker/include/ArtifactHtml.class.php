@@ -56,8 +56,8 @@ class ArtifactHtml extends Artifact {
 	}
 
 
-	function showMessages() {
-		$result= $this->getMessages();
+	function showMessages($asc=true) {
+		$result= $this->getMessages($asc);
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {

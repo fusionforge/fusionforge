@@ -29,6 +29,12 @@ require_once $gfwww.'include/note.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 
+if (getStringFromRequest('commentsort') == 'anti') {
+       $sort_comments_chronologically = false;
+} else {
+       $sort_comments_chronologically = true;
+}
+
 pm_header(array('title'=>_('Modify Task'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
 echo notepad_func();
@@ -230,7 +236,7 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td colspan="3">
-			<?php echo $pt->showMessages(); ?>
+			<?php echo $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
 		</td>
 	</tr>
 	<?php
