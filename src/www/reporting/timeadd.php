@@ -114,7 +114,7 @@ if ($week) {
 	}
 	?>
 		<h3><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h3>
-<p><?php
+<?php
 	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name, 
 	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
 	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
@@ -135,7 +135,7 @@ if ($group_project_id || $rows) {
 
 	$title_arr[]=_('Project/Task');
 	$title_arr[]=_('Date');
-	$title_arr[]=_('Hours');
+	$title_arr[]=_('Hours worked');
 	$title_arr[]=_('Category');
 	$title_arr[]=' ';
 
@@ -183,10 +183,10 @@ if ($group_project_id || $rows) {
 }
 if (!$group_project_id) {
 	?>
-<p>
+
 <h3><?php echo _('Add Entry'); ?></h3>
 <p><?php echo _('Choose a Project/Subproject in the Task Manager. You will then have to choose a Task and category to record your time in.'); ?>
-<p>
+</p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get" /><input type="hidden" name="week"
 	value="<?php echo $week; ?>" />
@@ -219,7 +219,7 @@ else {
 	?>
 <h3><?php echo _('Choose A Week to Record Or Edit Your Time.'); ?></h3>
 <p><?php echo _('After you choose a week, you will be prompted to choose a Project/Subproject in the Task Manager.'); ?>
-<p>
+</p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get" /><strong><?php echo _('Week Starting'); ?>:</strong><br />
 	<?php echo report_weeks_box($report,'week'); ?>
