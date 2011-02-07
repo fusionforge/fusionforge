@@ -3058,7 +3058,6 @@ src/plugins/wiki/www/locale/sv/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/sv/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/sv/pgsrc/Framsida -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp -text
-src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FBraStil -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FG%C3%A4stboken -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FHurManAnv%C3%A4nderWiki -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FL%C3%A4ggaTillSidor -text
@@ -3066,7 +3065,6 @@ src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FMerOmMekanismerna -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FPhpWiki -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FRedigeraText -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FTextformateringsregler -text
-src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FWabiSabi -text
 src/plugins/wiki/www/locale/sv/pgsrc/Hj%C3%A4lp%2FWikiWikiWeb -text
 src/plugins/wiki/www/locale/sv/pgsrc/MestPopul%C3%A4r -text
 src/plugins/wiki/www/locale/sv/pgsrc/PhpWikiAdministration -text
