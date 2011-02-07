@@ -329,14 +329,26 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($count > 0) {
 			echo '<tr><td colspan="2">';
 			echo '<b>'._("Attachments").':</b>'.'<br/>';
-			echo '<table cellspacing="0">';
-			for ($i=0; $i<$count; $i++) {
-				echo '<tr>
-				<td><a href="/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'. htmlspecialchars($file_list[$i]->getName()) .'</a></td>';
-//				<td><input type="checkbox" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'._("Delete").' </td>
+			$title_arr=array();
+			$title_arr[] = _('Size');
+			$title_arr[] = _('Name');
+			$title_arr[] = _('Date');
+			$title_arr[] = _('By');
+			$title_arr[] = _('Download');
+			echo $GLOBALS['HTML']->listTableTop($title_arr);
+			
+			foreach ($file_list as $file) {
+				echo '<tr>';
+				echo '<td>'.human_readable_bytes($file->getSize()).'</td>';
+				echo '<td>'.htmlspecialchars($file->getName()).'</td>';
+				echo '<td>'.date(_('Y-m-d H:i'), $file->getDate()).'</td>';
+				echo '<td>'.$file->getSubmittedUnixName().'</td>';
+				echo '<td><a href="/tracker/download.php/'.$group_id.'/'. $this->getID().'/'. $ah->getID() .'/'.$file->getID().'/'.$file->getName() .'">'. htmlspecialchars($file->getName()) .'</a></td>';
+//				<td><input type="checkbox" name="delete_file[]" value="'. $file->getID() .'">'._("Delete").' </td>
 				echo '</tr>';
 			}
-			echo '</table>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
 			echo '</td></tr>';
 		}
 	}
