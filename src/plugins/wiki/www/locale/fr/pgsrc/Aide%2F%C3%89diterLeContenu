@@ -1,0 +1,17 @@
+Date: Thu, 27 Jan 2011 10:22:55 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Aide%2F%C3%89diterLeContenu 7915 2011-01-27 09:24:46Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2F%C3%89diterLeContenu;
+  flags="";
+  markup=2;
+  charset=utf-8
+Content-Transfer-Encoding: binary
+
+Toute les pages (sauf les résultats de recherche) ont un lien //Modifier//. 
+Vous pouvez modifier la page que vous lisez en cliquant sur ce lien.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]]
+</noinclude>
