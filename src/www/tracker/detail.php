@@ -117,7 +117,7 @@ echo notepad_func();
 			<?php } ?>
 		</td></tr>
 		<tr><td colspan="2">
-		<h2><?php echo _('Followups: ') 
+		<h2><?php echo _('Followups: ') ;
 		if ($sort_comments_chronologically) {
 			echo '<a href="' .
 			util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=anti') .

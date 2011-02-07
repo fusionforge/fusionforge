@@ -200,16 +200,16 @@ div id="tabber" class="tabber">
 		<p>
 		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo html_get_tooltip_description('comment') ?>"></textarea></p>
-		<h2><?php echo _('Followups: ') 
-			if ($sort_comments_chronologically) {
-				echo '<a href="' .
+		<h2><?php echo _('Followups: ') ;
+		if ($sort_comments_chronologically) {
+			echo '<a href="' .
 				util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=anti') .
 				'">' . _('Sort comments antichronologically') . '</a>';
-			} else {
-				echo '<a href="' .
-					util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=chrono') .
-					'">' . _('Sort comments chronologically') . '</a>';
-			}
+		} else {
+			echo '<a href="' .
+				util_make_url('/tracker/index.php?func=detail&amp;aid=' . $aid . '&amp;group_id=' . $group_id . '&amp;atid=' . $ath->getID() . '&amp;commentsort=chrono') .
+				'">' . _('Sort comments chronologically') . '</a>';
+		}
 echo '</h2>';
 echo $ah->showMessages($sort_comments_chronologically);
 		?>
