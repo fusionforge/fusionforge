@@ -60,7 +60,13 @@ function week_to_dates( $week, $year = 0 ) {
 
 
 function stats_util_sum_array( $sum, $add ) {
+	if (!is_array($sum)) {
+		$sum = array();
+	}
 	while( list( $key, $val ) = each( $add ) ) {
+		if (!isset($sum[$key])) {
+			$sum[$key] = 0;
+		}
 		$sum[$key] += $val;
 	}
 	return $sum;

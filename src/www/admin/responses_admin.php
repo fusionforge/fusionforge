@@ -43,10 +43,10 @@ function check_select_value($value, $type) {
 <?php echo _('Existing Responses:'); ?><?php echo get_canned_responses(); ?>
 <!-- Reinhard Spisser: commenting localization, since otherwise it will not work -->
 <!--
-<input name="action" type="submit" value="<?php echo _('Edit'); ?>"/>
+<input name="action" type="submit" value="<?php echo _('Edit'); ?>" />
 <input name="action" type="submit" value="<?php echo _('Delete'); ?>" />
---->
-<input name="action" type="submit" value="Edit"/>
+-->
+<input name="action" type="submit" value="Edit" />
 <input name="action" type="submit" value="Delete" />
 <input type="checkbox" name="sure" value="<?php echo _('yes'); ?>" />
 <?php  echo _('Yes, I\'m sure'); ?>
@@ -129,7 +129,7 @@ if( $action == "Edit" ) {
 <?php echo _('Response Text:'); ?><br />
 <textarea name="response_text" cols="50" rows="10"></textarea>
 <br />
-<input type="hidden" name="action" value="Create">
+<input type="hidden" name="action" value="Create" />
 <input type="submit" name="actions" value="<?php echo _('Create'); ?>" />
 </form>
 

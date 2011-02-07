@@ -205,10 +205,10 @@ function account_shellselects($current) {
 		$this_shell = chop($shells[$i]);
 
 		if ($current == $this_shell) {
-			echo "<option selected value=$this_shell>$this_shell</option>\n";
+			echo "<option selected=\"selected\" value=$this_shell>$this_shell</option>\n";
 		} else {
 			if (! preg_match("/^#/",$this_shell)){
-				echo "<option value=$this_shell>$this_shell</option>\n";
+				echo "<option value=\"$this_shell\">$this_shell</option>\n";
 			}
 		}
 	}
