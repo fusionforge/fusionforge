@@ -252,6 +252,22 @@ $server->register(
 		$uri,$uri.'#addFile','rpc','encoded'
 );
 
+$server->register(
+        'addUploadedFile',
+        array(
+                'session_ser'=>'xsd:string',
+                'group_id'=>'xsd:int',
+                'package_id'=>'xsd:int',
+                'release_id'=>'xsd:int',
+                'file_name'=>'xsd:string',
+                'type_id'=>'xsd:int',
+                'processor_id'=>'xsd:int',
+                'release_time'=>'xsd:int'
+                ),
+        array('addUploadedFile'=>'xsd:string'),
+        $uri,$uri.'#addUploadedFile','rpc','encoded'
+);
+
 function getPackages($session_ser,$group_id) {
 	continue_session($session_ser);
 	$grp = group_get_object($group_id);
