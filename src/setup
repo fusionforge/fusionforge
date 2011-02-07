@@ -10,18 +10,25 @@ getval(){
 	read $1
 }
 
+hostname_oneword() {
+	hostname "$@" | while read first rest; do
+		printf '%s' "$first"
+		break
+	done
+}
+
 computedefault(){
 	echo "Calculating defaults"
 	# This is used to make a default working gforge.conf
 	DEFAULTsystem_name=MyForge
-	DEFAULTdomain_name=`hostname -f`
+	DEFAULTdomain_name=`hostname_oneword -f`
 	DEFAULTserver_admin=webmaster@$DEFAULTdomain_name
 	DEFAULTdb_host=
 	DEFAULTdb_port=
 	DEFAULTdb_name=gforge
 	DEFAULTdb_user=gforge
 	DEFAULTdb_password=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
-	DEFAULTip_address=`hostname -i | cut -d' ' -f1`
+	DEFAULTip_address=`hostname_oneword -i`
 	DEFAULTscm_host=scm.$DEFAULTdomain_name
 	DEFAULTshell_host=shell.$DEFAULTdomain_name
 	DEFAULTusers_host=users.$DEFAULTdomain_name

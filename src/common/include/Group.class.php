@@ -548,7 +548,7 @@ class Group extends Error {
 
 		$homepage = ltrim($homepage);
 		if (!$homepage) {
-			$homepage = forge_get_config('web_host').'/projects/'.$this->getUnixName().'/';
+			$homepage = util_make_url('/projects/' . $this->getUnixName() . '/');
 		}
 
 		if (strlen(htmlspecialchars($short_description))>255) {

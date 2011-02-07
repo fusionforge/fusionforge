@@ -174,7 +174,7 @@ if (!$res || $rows < 1) {
 
 			</td>
 			<td><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="60" /></td>
-			<td>'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</span></td>
+			<td>'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</td>
 			<td><input type="submit" name="submit" value="'._('Update').'" />
 				
 					<a href="deletepackage.php?package_id='. 

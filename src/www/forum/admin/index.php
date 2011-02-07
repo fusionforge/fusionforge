@@ -233,7 +233,7 @@ if (getStringFromRequest('add_forum')) {
 		forum_header(array('title'=>_('Delete a Message')));
 		echo '<center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-							<h3>' . _('WARNING! You are about to permanently delete a message and all of its followups!!') . '</h3><p>
+							<h3>' . _('WARNING! You are about to permanently delete a message and all of its followups!!') . '</h3>
 							<p>
 							<input type="submit" name="ok" value="' . _('Yes') . '" />
 							<input type="submit" name="cancel" value="' . _('No') . '" />    

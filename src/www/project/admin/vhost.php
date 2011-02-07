@@ -36,6 +36,8 @@ session_require_perm ('project_admin', $group_id) ;
 
 $group = group_get_object($group_id);
 
+if (!isset($feedback)) $feedback = "";
+
 if (!$group || !is_object($group)) {
         exit_error('Error','Error creating group object');
 } else if ($group->isError()) {
@@ -115,7 +117,7 @@ print '</p>';
 
 ?>
 
-<form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&createvhost=1'; ?>" method="post"> 
+<form name="new_vhost" action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group->getID().'&amp;createvhost=1'; ?>" method="post"> 
 <table border="0">
 <tr>
 	<td> <?php echo _('New Virtual Host <em>(e.g. vhost.org)</em>') ?> </td>

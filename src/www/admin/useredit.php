@@ -139,8 +139,7 @@ if ($u->getStatus() == 'D') {
 		_('Active (A)'),
 		_('Suspended (S)'));
 }
-?>
-<?php echo html_build_select_box_from_arrays(
+echo html_build_select_box_from_arrays(
 	$status_letter,	$status_text,'status', $u->getStatus(), false);
 ?>
 </td>
@@ -232,10 +231,12 @@ $title=array();
 $title[]=_('Name');
 $title[]=_('Unix name');
 $title[]=_('Operations');
-echo $GLOBALS['HTML']->listTableTop($title);
 
 $i = 0 ;
 foreach ($projects as $p) {
+	if ($i == 0) {
+		echo $GLOBALS['HTML']->listTableTop($title);
+	}
 	print '
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.util_unconvert_htmlspecialchars(htmlspecialchars($p->getPublicName())).'</td>
@@ -243,10 +244,14 @@ foreach ($projects as $p) {
 		<td width="40%">'.util_make_link ('/project/admin/?group_id='.$p->getID(),_('[Project Admin]')).'</td>
 		</tr>
 	';
-
+	$i++;
 }
 
-echo $GLOBALS['HTML']->listTableBottom();
+if ($i > 0) {
+	echo $GLOBALS['HTML']->listTableBottom();
+} else {
+	echo '<p>'._('This user is not a member of any project.').'</p>';
+}
 echo '<br />';
 
 site_admin_footer(array());

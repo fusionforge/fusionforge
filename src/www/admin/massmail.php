@@ -142,10 +142,14 @@ $title[]=_('Last user_id mailed');
 
 print '<a name="active">'._('Active Deliveries').':</a>';
 
-echo $GLOBALS['HTML']->listTableTop($title);
+$seen = false;
 
 $i = 0;
 while ($row = db_fetch_array($res)) {
+	if (!$seen) {
+		echo $GLOBALS['HTML']->listTableTop($title);
+		$seen = true;
+	}
 	echo '
 	<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 	<td>&nbsp;<a href="massmail-del.php?id='.$row['id'].'"></a></td>
@@ -158,7 +162,11 @@ while ($row = db_fetch_array($res)) {
 	';
 }
 
-echo $GLOBALS['HTML']->listTableBottom();
+if ($seen) {
+       echo $GLOBALS['HTML']->listTableBottom();
+} else {
+       echo '<p>' . _('No deliveries active.') . "</p>\n";
+}
 
 site_admin_footer(array());
 
