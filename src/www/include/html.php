@@ -678,16 +678,6 @@ function site_header($params) {
 		Check to see if logged in
 	*/
 	echo $HTML->header($params);
-
-	if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
-		echo html_error_top($GLOBALS['error_msg']);
-	}
-	if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
-		echo html_warning_top($GLOBALS['warning_msg']);
-	}
-	if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
-		echo html_feedback_top($GLOBALS['feedback']);
-	}
 }
 
 /**

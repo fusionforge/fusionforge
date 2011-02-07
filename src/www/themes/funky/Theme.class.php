@@ -115,6 +115,16 @@ class Theme extends Layout {
         echo '</div>' . "\n";
         echo '<div id="maindiv">' . "\n";
 
+        if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
+            echo $this->error_msg($GLOBALS['error_msg']);
+        }
+        if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
+            echo $this->warning_msg($GLOBALS['warning_msg']);
+        }
+        if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
+            echo $this->feedback($GLOBALS['feedback']);
+        }
+
         if ($params['h1']) {
             echo '<h1>'.$params['h1'].'</h1>';
         } else {

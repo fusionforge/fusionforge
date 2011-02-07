@@ -136,8 +136,8 @@ if ( $dgf->getNested() == NULL ) {
 	if (count($manual_files_arr)) {
 		echo html_build_select_box_from_arrays($manual_files_arr, $manual_files_arr, 'manual_path', '');
 		echo '		<br />';
-			printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-				$incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
+		printf(_('Pick a file already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
+		       $incoming, "sftp://" . forge_get_config('web_host') . $incoming . "/");
 		echo '
 					</td>
 				</tr>';
