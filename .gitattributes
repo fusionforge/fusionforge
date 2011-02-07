@@ -2812,7 +2812,6 @@ src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FTextFormatierungsRegeln -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FVorlagePlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FWabiSabi -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FWieManWikiBenutzt -text
-src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FWikiPlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FWikiTechnik -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FWikiWikiWeb -text
 src/plugins/wiki/www/locale/de/pgsrc/HochLaden -text
