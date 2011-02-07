@@ -55,5 +55,4 @@ $dg->setStateID('2');
 
 $return_msg = _('Directory moved to trash successfully.');
 session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
-}
 ?>
