@@ -103,11 +103,6 @@ if (forge_get_config('use_news') && $group->usesNews()) {
 	$texts[]	= _('News');
 }
 
-if (forge_get_config('use_scm') && $group->usesSCM()) {
-	$ids[]		= 'commit';
-	$texts[]	= _('Commits');
-}
-
 if (forge_get_config('use_frs') && $group->usesFRS()) {
 	$ids[]		= 'frsrelease';
 	$texts[]	= _('FRS Release');
