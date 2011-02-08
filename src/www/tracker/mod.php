@@ -188,7 +188,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		</div>
 	</td></tr>
 </table>
-div id="tabber" class="tabber">
+<div id="tabber" class="tabber">
 <div class="tabbertab" title="<?php echo _('Followups'); ?>">
 <table border="0" width="80%">
 	<tr><td colspan="2">
