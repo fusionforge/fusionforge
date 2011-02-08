@@ -4785,6 +4785,14 @@ tests/unit/utils/DbUtilsTest.php -text
 tests/unit/utils/HtmlPurifierTest.php -text
 tests/unit/utils/TextSanitizerTest.php -text
 tests/unit/utils/UtilsTest.php -text
+tools/VM-scripts/README.txt -text
+tools/VM-scripts/build.sh -text
+tools/VM-scripts/install-gui.sh -text
+tools/VM-scripts/install.sh -text
+tools/VM-scripts/run-testsuite.sh -text
+tools/VM-scripts/shrink.sh -text
+tools/VM-scripts/start-selenium.sh -text
+tools/VM-scripts/update.sh -text
 tools/bugzilla2GForge.pl svneol=native#text/x-perl
 tools/check_and_update_forum_role_settings.php -text
 tools/cmp-schemas.pl svneol=native#text/x-perl
