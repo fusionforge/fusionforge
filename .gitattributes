@@ -4787,6 +4787,7 @@ tests/unit/utils/TextSanitizerTest.php -text
 tests/unit/utils/UtilsTest.php -text
 tools/VM-scripts/README.txt -text
 tools/VM-scripts/build.sh -text
+tools/VM-scripts/configure-scripts.sh -text
 tools/VM-scripts/install-gui.sh -text
 tools/VM-scripts/install.sh -text
 tools/VM-scripts/run-testsuite.sh -text
