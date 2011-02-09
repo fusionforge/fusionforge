@@ -300,6 +300,14 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($taskcount > 0) {
 			echo '<tr><td colspan="2">';
 			echo '<b>'._("Related Tasks").':</b>'.'<br/>';
+			$title_arr = array();
+			$title_arr[] = _('Task Id');
+			$title_arr[] = _('Task Summary');
+			$title_arr[] = _('Start Date');
+			$title_arr[] = _('End Date');
+			$title_arr[] = _('Status');
+			echo $GLOBALS['HTML']->listTableTop($title_arr);
+
 			echo '<table cellspacing="0">';
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
@@ -309,14 +317,16 @@ class ArtifactTypeHtml extends ArtifactType {
 				$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
 				$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
 				$enddate   = date(_('Y-m-d H:i'), $taskinfo['end_date']);
+				$status   = $taskinfo['status_name'];
 				echo '<tr>
 						<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.
 						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">[T'.$taskid.'] '.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
+						<td>'.$status.'</td>
 				</tr>';
 			}
-			echo '</table>';
+			echo $GLOBALS['HTML']->listTableBottom();
 			echo '</td></tr>';
 		}
 	}
