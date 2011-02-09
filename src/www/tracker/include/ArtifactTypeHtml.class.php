@@ -297,7 +297,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		$taskcount = db_numrows($ah->getRelatedTasks());
 		
-		if (forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
+		if (forge_check_perm ('tracker_admin', $ah->ArtifactType->Group->getID())) {
 			$is_admin=false;
 		} else {
 			$is_admin=true;
