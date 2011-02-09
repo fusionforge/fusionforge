@@ -296,6 +296,12 @@ class ArtifactTypeHtml extends ArtifactType {
 		}
 
 		$taskcount = db_numrows($ah->getRelatedTasks());
+		
+		if (forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
+			$is_admin=false;
+		} else {
+			$is_admin=true;
+		}
 
 		if ($taskcount > 0) {
 			echo '<tr><td colspan="2">';
@@ -306,6 +312,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			$title_arr[] = _('Start Date');
 			$title_arr[] = _('End Date');
 			$title_arr[] = _('Status');
+			(($is_admin) ? $title_arr[]=_('Remove Relation') : '');
 			echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 			echo '<table cellspacing="0">';
@@ -323,8 +330,9 @@ class ArtifactTypeHtml extends ArtifactType {
 						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">[T'.$taskid.'] '.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
-						<td>'.$status.'</td>
-				</tr>';
+						<td>'.$status.'</td>'.
+					(($is_admin) ? '<td><input type="checkbox" name="remlink[]" value="'.$taskid.'" /></td>' : '').
+					'</tr>';
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
 			echo '</td></tr>';

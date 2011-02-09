@@ -283,7 +283,18 @@ switch (getStringFromRequest('func')) {
 		} else if (!$ath->allowsAnon() && !session_loggedin()) {
 			exit_error(_('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.'),'tracker');
 		} else {
-
+			
+			$remlink = getArrayFromRequest('remlink');
+			if (count($remlink) > 0 && forge_check_perm ('tracker_admin', $ah->ArtifactType->Group->getID())) {
+				require_once $gfcommon.'pm/ProjectTask.class.php';
+				foreach ($remlink as $tid) {
+					$pt = &projecttask_get_object($tid);
+					if (!$pt || $pt->isError())
+						exit_error(_('Error'), sprintf(_('Could not get Project Task for %d'), $tid));
+					if (!$pt->removeRelatedArtifacts(array($artifact_id)))
+						exit_error($tid."->removeRelatedArtifacts(".$artifact_id.")", $pt->getErrorMessage());
+				}
+			}
 			/*
 
 				The following logic causes fields to be overridden
