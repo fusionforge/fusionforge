@@ -1,5 +1,14 @@
 #! /bin/sh
 
+
+# Authors :
+#  Roland Mas
+#  Olivier BERGER <olivier.berger@it-sudparis.eu>
+
+# This script will install the Debian packages to be tested which have been build inside the VM
+
+# Prerequisite : running 'build.sh' and its prerequisites
+
 set -e
 set -x
 

@@ -1,5 +1,14 @@
 #! /bin/sh
 
+# Authors :
+#  Roland Mas
+#  Olivier BERGER <olivier.berger@it-sudparis.eu>
+
+# This script will build the Debian packages to be tested
+
+# Prerequisite : running 'update.sh' and its prerequisites
+
+
 # removed as the grep test below would break otherwise
 #set -e
 
