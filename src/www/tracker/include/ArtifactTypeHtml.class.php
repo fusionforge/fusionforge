@@ -303,6 +303,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			$is_admin=true;
 		}
 
+		$totalPercentage = 0;
+
 		if ($taskcount > 0) {
 			echo '<tr><td colspan="2">';
 			echo '<b>'._("Related Tasks").':</b>'.'<br/>';
@@ -318,6 +320,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			echo '<table cellspacing="0">';
 			for ($i = 0; $i < $taskcount; $i++) {
 				$taskinfo  = db_fetch_array($ah->relatedtasks, $i);
+				$totalPercentage += $taskinfo['percent_complete'];
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
 				$groupid   = $taskinfo['group_id'];
@@ -335,7 +338,10 @@ class ArtifactTypeHtml extends ArtifactType {
 					'</tr>';
 			}
 			echo $GLOBALS['HTML']->listTableBottom();
-			echo '</td></tr>';
+
+			echo "\n<hr /><p style=\"text-align:right;\">";
+			printf(_('Average completion rate: %d%%'), (int)($totalPercentage/$taskcount));
+			echo "</p>\n";			echo '</td></tr>';
 		}
 	}
 
