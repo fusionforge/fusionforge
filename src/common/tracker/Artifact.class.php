@@ -717,7 +717,7 @@ class Artifact extends Error {
 	 */
 	function getRelatedTasks() {
 		if (!$this->relatedtasks) {
-			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,ps.status_name
+			$this->relatedtasks = db_query_params ('SELECT pt.group_project_id,pt.project_task_id,pt.summary,pt.start_date,pt.end_date,pgl.group_id,pt.status_id,pt.percent_complete,ps.status_name
 			FROM project_task pt, project_group_list pgl, project_status ps
 			WHERE pt.group_project_id = pgl.group_project_id
                         AND ps.status_id = pt.status_id

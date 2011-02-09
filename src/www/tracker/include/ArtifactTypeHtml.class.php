@@ -330,7 +330,7 @@ class ArtifactTypeHtml extends ArtifactType {
 						'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">[T'.$taskid.'] '.$summary.'</a></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
-						<td>'.$status.'</td>'.
+						<td>'.$status.' ('.$taskinfo['percent_complete'].'%)</td>'.
 					(($is_admin) ? '<td><input type="checkbox" name="remlink[]" value="'.$taskid.'" /></td>' : '').
 					'</tr>';
 			}
