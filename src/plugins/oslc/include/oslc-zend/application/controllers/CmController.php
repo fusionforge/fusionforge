@@ -159,11 +159,11 @@ class CmController extends Zend_Rest_Controller {
 	  
 	  $req = $this->getRequest();
 	  //		$action = $req->getActionName();
-	  print_r("Action : ".$action);
+	  //	  print_r("Action : ".$action);
 	  
 	  // check Accept header's mime type 
 	  $accept = $req->getHeader('Accept');
-	  print_r("\nAccept : ".$accept);
+	  //print_r("\nAccept : ".$accept);
 	  
 	  // prepare an array of accepted types
 	  $accepted_types = array();
@@ -173,7 +173,7 @@ class CmController extends Zend_Rest_Controller {
 	  // make sure text/html is always an option (in last option)
 	  $accepted_types[]='text/html';
 	  //print_r("\nAccepted types:");
-	  print_r($accepted_types);
+	  //print_r($accepted_types);
 	  // If we can't directly find the accept header, then, have to negociate maybe among alternatives
 	  if(!isset($mime_types[$action][$accept])) {
 	    // use PEAR's HTTP::negotiateMimeType to identify the preferred content-type
