@@ -40,12 +40,18 @@ class FusionForgeCmController extends CmController {
 	 * @var array
 	 */
 	private static $supportedAcceptMimeTypes = array();
-
+	private static $fusionforgeSupportedAcceptMimeTypes = array(
+		'oslcServiceCatalogProject' => array(
+			'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
+		 	'application/xml' => 'xml',
+			'application/json' => 'json'
+		),
+	);
 	/**
 	 * Init FusionForge REST controller.
 	 */
 	public function init(){
-		self::$supportedAcceptMimeTypes = parent::getSupportedAcceptMimeTypes();
+		self::$supportedAcceptMimeTypes = array_merge(parent::getSupportedAcceptMimeTypes(), self::$fusionforgeSupportedAcceptMimeTypes);
 		
 		// TODO : render this path configurable
 		//		$writer = new Zend_Log_Writer_Stream('/tmp/zend-log.txt');
@@ -115,12 +121,21 @@ class FusionForgeCmController extends CmController {
 
 		// handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
 		if ( isset($params['id']) && ($params['id'] == "oslc-services")) {
-			$this->_forward('oslcServiceCatalog');
+				$this->_forward('oslcServiceCatalog');
+				return;
+		}
+		
+		// Handle OSLC-CM services catalog for specific project
+		// An OSLC-CM services catalog in FusionForge lists all the trackers 
+		// of a specific project.
+		elseif (isset($params['oslc-cm-services'])){
+			$this->_forward('oslcServiceCatalogProject');
 			return;
 		}
 		
 		// handle OSLC-CM service document access
-		elseif (isset($params['oslc-cm-service'])) {
+		// An OSLC-CM service document describes capabilities of a FusionForge tracker.
+		elseif (isset($params['oslc-cm-service']) && isset($params['tracker'])) {
 			$this->_forward('oslcCmServiceDocument');
 			return;
 		}
@@ -474,6 +489,8 @@ class FusionForgeCmController extends CmController {
 	
 	/**
 	 * Handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
+	 * Will show the list of prjects.
+	 * 
 	 */
 	public function oslcservicecatalogAction() {
 		
@@ -491,6 +508,31 @@ class FusionForgeCmController extends CmController {
 		
 		$this->getResponse()->setHeader('Content-Type', $content_type);
 	}
+	
+	/**
+	 * Handle OSLC services catalog access per project.
+	 * Accessed by uris like ".../cm/oslc-services/project/x"
+	 * where x is a project id.
+	 * 
+	 */
+	public function oslcservicecatalogprojectAction() {
+		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
+		if (! $content_type) {
+			$this->_forward('UnknownAcceptType','error');
+			return;
+		}
+		
+		$req = $this->getRequest();
+		$params = $req->getParams();
+		
+		$project = $params['oslc-cm-services'];
+		$trackers = $this->oslc->getProjectTrackers($project);
+		
+		$this->view->project = $project;
+		$this->view->trackers = $trackers;
+		
+		$this->getResponse()->setHeader('Content-Type', $content_type);
+	}
 
 	/**
 	 * 
@@ -500,15 +542,15 @@ class FusionForgeCmController extends CmController {
 	public function oslccmservicedocumentAction() {
 		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
 		if (! $content_type) {
-		  //			print_r("error");
-		  $this->_forward('UnknownAcceptType','error');
-		  return;
+			$this->_forward('UnknownAcceptType','error');
+			return;
 		}
 		
 		$req = $this->getRequest();
 		$params = $req->getParams();
-		$project = $params['oslc-cm-service'];
-		$this->view->project = $project;
+
+		$this->view->project = $params['oslc-cm-service'];
+		$this->view->tracker = $params['tracker'];
 
 		$this->getResponse()->setHeader('Content-Type', $content_type);
 

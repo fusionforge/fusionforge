@@ -48,7 +48,7 @@ $child = $service->appendChild($child);*/
 <h1>OSLC-CM V1 Service Description document</h1>
 <pre>
 <?php
-	$xml = project_to_service_description($this->baseUrl(), $this->project);
+	$xml = project_to_service_description($this->baseUrl(), $this->project, $this->tracker);
 	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
 	$text = add_links($text, "http");
 	$text = add_links($text, $this->baseUrl());

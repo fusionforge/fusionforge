@@ -1,7 +1,6 @@
 <?php
-
 /**
- * This file is (c) Copyright 2010 by Olivier Berger, Institut
+ * This file is (c) Copyright 2010 by Sabri LABBENE, Institut
  * TELECOM
  *
  * This program is free software; you can redistribute it and/or
@@ -23,8 +22,20 @@
  *
  */
 
-  /* $Id$ */
+require_once('_service-catalog_xml.php');
+require_once('_add_hyperlinks.php');
 
-require('_service-document_xml.php');
-
-print project_to_service_description($this->baseUrl(), $this->project, $this->tracker);
+?>
+<body>
+<h1>OSLC-CM V1 Service Catalog document</h1>
+<pre>
+<?php
+	$xml = project_trackers_to_service_catalog($this->baseUrl(), $this->trackers, $this->project);
+	//print $xml;
+	$text = str_replace('>', '&gt;', str_replace('<', '&lt;', $xml));
+	$text = add_links($text, "http");
+	$text = add_links($text, $this->baseUrl());
+	echo $text;
+?>
+</pre>
+</body>
