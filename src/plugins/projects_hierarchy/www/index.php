@@ -2,7 +2,7 @@
 /**
  * Copyright 2004 (c) GForge LLC
  * Copyright 2006 (c) Fabien Regnier - Sogeti
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -26,27 +26,27 @@ require_once $gfcommon.'include/pre.php';
 //require_once ('plugins/projects_hierarchy/config.php');
 
 // the header that displays for the user portion of the plugin
-function projects_hierarchy_Project_Header($params) {                                                                                                                                         
-	global $DOCUMENT_ROOT,$HTML,$id;                                                                            
-	$params['toptab']='projects_hierarchy'; 
+function projects_hierarchy_Project_Header($params) {
+	global $DOCUMENT_ROOT,$HTML,$id;
+	$params['toptab']='projects_hierarchy';
 	$params['group']=$id;
 	
-	/*                                                                                                                                                              
-		Show horizontal links                                                                                                                                   
-	*/                                                                                                                                                              
-	site_project_header($params);														
+	/*
+		Show horizontal links
+	*/
+	site_project_header($params);
 }
 
 // the header that displays for the project portion of the plugin
 function projects_hierarchy_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML,$user_id;                                                                            
-	$params['toptab']='projects_hierarchy'; 
+	global $DOCUMENT_ROOT,$HTML,$user_id;
+	$params['toptab']='projects_hierarchy';
 	$params['user']=$user_id;
 
-	/*                                                                                                                                                              
-	 Show horizontal links                                                                                                                                   
-	 */                                                                                                                                                              
-	site_user_header($params);    
+	/*
+	 Show horizontal links
+	 */
+	site_user_header($params);
 }
 
 
@@ -71,12 +71,12 @@ function projects_hierarchy_User_Header($params) {
 				exit_error("Invalid Project", "Inexistent Project");
 			}
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the projects_hierarchy plugin active
-				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
+				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
 			}
 
 			session_require_perm ('project_admin', $id) ;
 
-			projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+			projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 			// DO THE STUFF FOR THE PROJECT PART HERE
 			echo "We are in the Project projects_hierarchy plugin <br>";
 			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
@@ -88,7 +88,7 @@ function projects_hierarchy_User_Header($params) {
 			if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private projects_hierarchy part of this user
 				exit_error("Access Denied", "You cannot access other user's personal $pluginname");
 			}
-			projects_hierarchy_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));    
+			projects_hierarchy_User_Header(array('title'=>'My '.$pluginname,'pagename'=>"$pluginname",'sectionvals'=>array($realuser->getUnixName())));
 			// DO THE STUFF FOR THE USER PART HERE
 			echo "We are in the User projects_hierarchy plugin <br>";
 			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
@@ -98,12 +98,12 @@ function projects_hierarchy_User_Header($params) {
 				exit_error("Invalid Project", "Inexistent Project");
 			}
 			if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the projects_hierarchy plugin active
-				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");			
+				exit_error("Error", "First activate the $pluginname plugin through the Project's Admin Interface");
 			}
 
 			session_require_perm ('project_admin', $id) ;
 
-			projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+			projects_hierarchy_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 			// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
 			echo "We are in the Project projects_hierarchy plugin <font color=\"#ff0000\">ADMINISTRATION</font> <br>";
 			echo "Greetings from planet " . $world; // $world comes from the config file in /etc
