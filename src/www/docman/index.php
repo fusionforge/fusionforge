@@ -127,7 +127,7 @@ html_use_tooltips();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 
-$title = _('Document Manager: Display Document');
+$title = _('Document Manager');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
