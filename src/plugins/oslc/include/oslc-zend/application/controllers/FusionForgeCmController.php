@@ -63,22 +63,22 @@ class FusionForgeCmController extends CmController {
 		$req = $this->getRequest();
 		//print_r($req);
 
-		if(($req->getActionName()=='post')||($req->getActionName()=='put'))
+		$action = $req->getActionName();
+		
+		if(($action == 'post')||($action == 'put'))
 		{
 			$accept = $req->getHeader('Content-Type');
 		}
-		elseif($req->getActionName()=='get')
+		elseif($action =='get')
 		{
 			$accept = $req->getHeader('Accept');
 		}
 		
-		$action = $req->getActionName();
-		
 		$mime = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $action);
 		if($mime) {
-			$accept = $mime;
+		  $accept = $mime;
 		}
-
+		
 		// determine output format
 		if (isset(self::$supportedAcceptMimeTypes[$action])) {
 			if (isset(self::$supportedAcceptMimeTypes[$action][$accept])) {
