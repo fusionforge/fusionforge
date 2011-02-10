@@ -461,9 +461,6 @@ class FusionForgeCmController extends CmController {
 		$httpScheme = $this->getRequest()->getScheme();
 		$httpHost = $this->getRequest()->getHttpHost();
 		$requestUri = $this->getRequest()->getRequestUri();
-		$requestUri = str_replace('bugs','bug', $requestUri);
-		$requestUri = preg_replace("/project.*/", 'bug/', $requestUri);
-		$requestUri = $requestUri.(($requestUri[strlen($requestUri)-1]=='/')?'':'/');
 		$prefix = $httpScheme.'://'.$httpHost.$requestUri;
 
 		// get all resources
