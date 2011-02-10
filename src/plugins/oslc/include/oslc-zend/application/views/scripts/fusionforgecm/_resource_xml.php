@@ -26,35 +26,10 @@
 /* $Id$ */
  
 function encodeResource($doc, $container, $resource) {
-	// oslc_cm attributes
 	foreach ($resource as $field => $value) {
-		$tokens = explode(':', $field);
-		if (count($tokens) != 2)
-			throw new Exception('Bad internal resource filed type '.$field.' : missing prefix !');
-		$prefix = $tokens[0];
-		switch ($prefix) {
-			case 'dc' :
-				$prefix = 'http://purl.org/dc/terms/';
-				break;
-			case 'oslc_cm':
-				$prefix = 'http://open-services.net/ns/cm#';
-				break;
-			case 'helios_bt' :
-				$prefix = 'http://heliosplatform.sourceforge.net/ontologies/2010/05/helios_bt.owl';
-				break;
-			case 'mantisbt' :
-				$prefix = 'http://helios-platform.org/ontologies/mantisbt/';
-				break;
-			default :
-				throw new Exception('Unknown ontology prefix '.$prefix.' !');
-				break;
-		}
-		$element = $doc->createElementNS($prefix, $field, $resource[$field]);
+		$element = $doc->createElement($field, $resource[$field]);
 		$child = $container->appendChild($element);
 	}
-	
-	$mandatorytags = array('dc:title', 'dc:identifier');
-	
 }
 
 function createRessourceCollectionView($view){
@@ -69,7 +44,14 @@ function createRessourceCollectionView($view){
 	// process the ATOM feed header
 	$root = $doc->createElementNS("http://www.w3.org/2005/Atom", "feed");
 	$feed = $doc->appendChild($root);
-
+	
+	// Adds other namespaces to the 'feed' node
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dcterms', 'http://purl.org/dc/terms/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foaf', 'http://http://xmlns.com/foaf/0.1/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc_cm', 'http://open-services.net/ns/cm#');
+	 
 	$title = $doc->createElement('title', $feedtitle);
 	$child = $feed->appendChild($title);
 
@@ -120,15 +102,23 @@ function createResourceView($view)
 	$doc->formatOutput = true;
 	
 	$root = $doc->createElementNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:RDF");
-	$root = $doc->appendChild($root);
+	$ressource = $doc->appendChild($root);
 	
-	$child = $doc->createElementNS("http://open-services.net/xmlns/cm/1.0/","oslc_cm:ChangeRequest");
-	$changerequest = $root->appendChild($child);
+	// Adds other namespaces to the RDF ressource node.
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:dcterms', 'http://purl.org/dc/terms/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:foaf', 'http://http://xmlns.com/foaf/0.1/');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
+	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc_cm', 'http://open-services.net/ns/cm#');
 	
-	$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
+	$child = $doc->createElement("oslc_cm:ChangeRequest");
+	$changerequest = $ressource->appendChild($child);
+	$changerequest->setAttributeNode(new DOMAttr('rdf:about', $view->id));
+	
+	/*$child = $doc->createAttributeNS("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "rdf:about");
 	$about = $changerequest->appendChild($child);
 	$child = $doc->createTextNode($view->id);
-	$child = $about->appendChild($child);
+	$child = $about->appendChild($child);*/
 	
 	encodeResource($doc, $changerequest, $view->resource);
 	
