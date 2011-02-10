@@ -92,6 +92,7 @@ class CmController extends Zend_Rest_Controller {
 
 							'readResourceCollection' => array(
 								'application/atom+xml' => 'xml',
+								'application/xml' => 'xml',
 								'application/json' => 'json'
 								),
 
