@@ -53,6 +53,14 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->open( ROOT );
 		$this->click("link=Log In");
 		$this->waitForPageToLoad("30000");
+
+		// Check that current URL's base is the same as ROOT
+		// If the forge redirects to other URL than the one
+		// used to access it, then logout doesn't work (bug or
+		// feature ?)
+		$location=$this->getLocation();
+		$this->assertStringStartsWith('https://'.HOST.'/', $location, "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
+
 		$this->type("form_loginname", "admin");
 		$this->type("form_pw", "myadmin");
 		$this->click("login");
@@ -60,7 +68,9 @@ class LoginProcess extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Forge Admin"));
 		$this->assertTrue($this->isTextPresent("Log Out"));
 		$this->logout();
-				
+		// Verify that logout is succesfull
+		$this->assertTrue($this->isTextPresent("Log In"));
+	
 		// Test with an empty password.
 		$this->open( ROOT );
 		$this->click("link=Log In");
