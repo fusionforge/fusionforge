@@ -45,9 +45,18 @@ class FusionForgeCmController extends CmController {
 			'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
 		 	'application/xml' => 'xml',
 			'application/x-oslc-disc-service-provider-catalog+json' => 'json',
-			'application/json' => 'json'
+			'application/json' => 'json',
+			'application/rdf+xml' => 'xml'
 		),
 	);
+	private $actionMimeType;
+	
+	public function setActionMimeType($action) {
+		if(!isset($this->actionMimeType)) {
+			$this->actionMimeType = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $action);
+		}
+	}
+	
 	/**
 	 * Init FusionForge REST controller.
 	 */
@@ -75,9 +84,11 @@ class FusionForgeCmController extends CmController {
 			$accept = $req->getHeader('Accept');
 		}
 		
-		$mime = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $action);
-		if($mime) {
-		  $accept = $mime;
+		// Set the mime type for action.
+		$this->setActionMimeType($action);
+		
+		if(isset($this->actionMimeType)) {
+		  $accept = $this->actionMimeType;
 		}
 		
 		// determine output format
@@ -406,8 +417,8 @@ class FusionForgeCmController extends CmController {
 	public function readresourceAction() {
 		
 		$params = $this->getRequest()->getParams();
-		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
-		if (! $content_type) {
+		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
+		if (!isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
@@ -434,7 +445,7 @@ class FusionForgeCmController extends CmController {
 				$this->view->{$field} = $value;
 			}
 			
-			$this->getResponse()->setHeader('Content-Type', $content_type);
+			$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 		}
 		else{
 			$this->view->missing_resource = $identifier;
@@ -443,16 +454,16 @@ class FusionForgeCmController extends CmController {
 	}
 	
 	public function readresourcecollectionAction()	{
-
-		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
-		if (! $content_type) {
-		  //			print_r("error");
-		  throw new NotAcceptableException("Accept header ".$this->getRequest()->getHeader('Accept')." not supported!");
-		  return;
-		}
-		//exit;
 		$req = $this->getRequest();
 		$params = $req->getParams();
+		
+		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
+		// TODO: raise the correct error code according to the specs.
+		if (!isset($this->actionMimeType)) {
+		  //			print_r("error");
+		  throw new NotAcceptableException("Accept header ".$req->getHeader('Accept')." not supported!");
+		  return;
+		}
 		
 		// load the model. Will fetch requested change requests from the db.
 		$params = $this->oslc->init($params);
@@ -481,30 +492,29 @@ class FusionForgeCmController extends CmController {
 		}
 
 		//print_r($this->view);
-		$this->getResponse()->setHeader('Content-Type', $content_type);
+		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 		
 	}
 	
 	/**
-	 * Handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
+	 * Handle OSLC Core services provider catalog access (http://open-services.net/bin/view/Main/OslcCoreSpecification)
 	 * Will show the list of prjects.
 	 * 
 	 */
 	public function oslcservicecatalogAction() {
 		
-		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
-		if (! $content_type) {
+		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
+		if (! isset($this->actionMimeType)) {
 		  //			print_r("error");
 		  $this->_forward('UnknownAcceptType','error');
 		  return;
 		}
-		
-		// each project will generate its own service description
+		// each project is considered as a service Provider.
 		$proj_arr = $this->oslc->getProjectsList();
 		
 		$this->view->projects = $proj_arr;
 		
-		$this->getResponse()->setHeader('Content-Type', $content_type);
+		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 	
 	/**
@@ -513,8 +523,8 @@ class FusionForgeCmController extends CmController {
 	 * where x is a project id.
 	 */
 	public function oslcservicecatalogprojectAction() {
-		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
-		if (! $content_type) {
+		//$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
+		if (! isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
@@ -528,7 +538,7 @@ class FusionForgeCmController extends CmController {
 		$this->view->project = $project;
 		$this->view->trackers = $trackers;
 		
-		$this->getResponse()->setHeader('Content-Type', $content_type);
+		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 
 	/**
@@ -536,8 +546,8 @@ class FusionForgeCmController extends CmController {
 	 * Handles OSLC-CM service document access.
 	 */
 	public function oslccmservicedocumentAction() {
-		$content_type = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
-		if (! $content_type) {
+		//$this->actionMimeType = parent::checkSupportedActionMimeType(self::$supportedAcceptMimeTypes, $this->getRequest()->getActionName());
+		if (! isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
 			return;
 		}
@@ -548,7 +558,7 @@ class FusionForgeCmController extends CmController {
 		$this->view->project = $params['oslc-cm-service'];
 		$this->view->tracker = $params['tracker'];
 
-		$this->getResponse()->setHeader('Content-Type', $content_type);
+		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 
 	}
 
