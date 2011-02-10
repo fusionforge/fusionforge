@@ -128,7 +128,9 @@ class CmController extends Zend_Rest_Controller {
 			case 'fusionforge':
 				require_once($controller_dir . 'FusionForgeCmController.php');
 				break;
-				
+			case 'Codendi':
+				require_once($controller_dir . 'CodendiCmController.php');
+				break;
 			case 'demo':
 				break;
 				
@@ -221,6 +223,9 @@ class CmController extends Zend_Rest_Controller {
 				case 'fusionforge':
 					$this->_forward('get', 'fusionforgecm');
 					break;
+				case 'Codendi':
+					$this->_forward('get', 'codendicm');
+					break;
 				default:
 					break;
 			}
@@ -233,6 +238,9 @@ class CmController extends Zend_Rest_Controller {
 					break;	
 				case 'fusionforge':
 					$this->_forward('post','fusionforgecm');
+					break;
+				case 'Codendi':
+					$this->_forward('post', 'codendicm');
 					break;
 				default:
 					break;	
@@ -250,6 +258,9 @@ class CmController extends Zend_Rest_Controller {
 					break;	
 				case 'fusionforge':
 					$this->_forward('put','fusionforgecm');
+					break;
+				case 'Codendi':
+					$this->_forward('put', 'codendicm');
 					break;
 				default:
 					break;				

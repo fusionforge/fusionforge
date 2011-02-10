@@ -37,4 +37,4 @@ $json['oslc_cm:results'] = $resources;
 //print_r($json);
 
 
-print Zend_Json::prettyPrint(Zend_Json::encode($json));
+print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));

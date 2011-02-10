@@ -41,6 +41,8 @@ switch (TRACKER_TYPE) {
 		break;
 	case 'fusionforge':
 		break;
+	case 'Codendi':
+		break;
 	case 'demo':
 		// Use the PEAR File_CSV module which handles various kinds of CSV encodings
 		require_once 'File/CSV.php';
