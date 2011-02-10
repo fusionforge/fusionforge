@@ -7,36 +7,19 @@ $json["prefixes"]["dcterms"] = "http://purl.org/dc/terms/";
 
 // 
 $json["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#Service";
-$json["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-services/'.$this->project.'/tracker/'.$this->tracker);
+$json["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-service/'.$this->project.'/tracker/'.$this->tracker);
 
-$json["dcterms:title"] = "OSLC CM service description document";
+$json["dcterms:title"] = "OSLC-CM V2 service description document";
 $json["dcterms:description"] = "FusionForge Tracker service";
 
-$json["dcterms:publisher"]["dcterms:title"] = "OSLC CM plugin for FusionForge";
+$json["dcterms:publisher"]["dcterms:title"] = "FusionForge OSLC V2 plugin";
 $json["dcterms:publisher"]["dcterms:identifier"] = $this->serverUrl().$this->baseUrl();
 //$json["oslc:icon"]["rdf:ressource"] = "Url of FusionForge icon if any"
 
-// prefix definitions 
-$prefix_def["oslc:prefix"] = "dc";
-$prefix_def["oslc:prefixBase"] = "http://purl.org/dc/elements/1.1/";
-$json["oslc:prefixDefinition"][] = $prefix_def;
-
-$prefix_def["oslc:prefix"] = "foaf";
-$prefix_def["oslc:prefixBase"] = "http://http://xmlns.com/foaf/0.1/";
-$json["oslc:prefixDefinition"][] = $prefix_def;
-
-$prefix_def["oslc:prefix"] = "rdf";
-$prefix_def["oslc:prefixBase"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-$json["oslc:prefixDefinition"][] = $prefix_def;
-
-$prefix_def["oslc:prefix"] = "oslc";
-$prefix_def["oslc:prefixBase"] = "http://open-services.net/ns/core#";
-$json["oslc:prefixDefinition"][] = $prefix_def;
+// Domain.
+$json["service"]["domain"]["rdf:ressource"] = "http://open-services.net/ns/cm#";
 
 // Services description
-
-// Domain.
-$json["service"]["domain"]["rdf:ressource"] = "http://open-services.net/ns/core#";
 
 // Creation Factory.
 $json["service"]["creationFactory"]["dcterms:title"] = "Location for creation of change Requests with a POST HTTP request";
