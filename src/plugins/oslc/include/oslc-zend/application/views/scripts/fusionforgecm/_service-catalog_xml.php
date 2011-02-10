@@ -50,8 +50,7 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 	
 	// Add rdf:type ressource to the ServiceProvider node.
 	$rdftype = $doc->createElement("rdf:type");
-	$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#ServiceProvider");
-	$rdftype->appendChild($rdftyperessource);
+	$rdftype->setAttribute("rdf:resource", 'http://open-services.net/ns/core#ServiceProvider');
 	$provider->appendChild($rdftype);
 	
 	// Add oslc:Publisher ressource inside a dcterms:publisher node.
@@ -65,6 +64,11 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 	// Add created dcterms:publisher node in the ServiceProvider node.
 	$provider->appendChild($publishernode);
 	
+	// Service Provider details
+	$project_trackers_url = $server_url."/tracker/?group_id=".$project;
+	$spdetails = $doc->createElement("oslc:details");
+	$spdetails->setAttribute("rdf:resource", htmlentities($project_trackers_url));
+	$provider->appendChild($spdetails);
 	$root->appendChild($provider);
 
 	// We list trackers as Services or ServiceProvider (s) ???????????
@@ -83,24 +87,29 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 
 		// rdf:type
 		$rdftype = $doc->createElement("rdf:type");
-		$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#Service");
-		$rdftype->appendChild($rdftyperessource);
+		$rdftype->setAttribute("rdf:resource", 'http://open-services.net/ns/core#Service');
 		$service->appendChild($rdftype);
 		
 		// oslc:domain
 		$sdomain = $doc->createElement("oslc:domain");
-		$sdomainressource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/cm#");
-		$sdomain->appendChild($sdomainressource);
+		$sdomain->setAttribute("rdf:resource", "http://open-services.net/ns/cm#");
 		$service->appendChild($sdomain);
 		
 		// oslc:details
 		$tracker_url = $server_url."/tracker/index.php?group_id=".$tracker['group_id']."&atid=".$tracker['id'];
-		$sdetails = $doc->createElement("oslc:details", htmlentities($tracker_url));
+		$sdetails = $doc->createElement("oslc:details");
+		$sdetails->setAttribute("rdf:resource", htmlentities($tracker_url));
 		$service->appendChild($sdetails);
 		
 		$provider->appendChild($service);
 		$root->appendChild($provider);
 		
+	}
+	// A service provider should mention at least one (empty?) service.
+	if(count($trackers) == 0){
+		$service = $doc->createElement("oslc:service");
+		$provider->appendChild($service);
+		$root->appendChild($provider);
 	}
 	return $doc->saveXML();
 }
@@ -121,7 +130,7 @@ function projects_to_service_catalog($base_url, $projects) {
 	$root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:oslc', 'http://open-services.net/ns/core#');
 
 	$catalog = $doc->createElement("oslc:ServiceProviderCatalog");
-	$catalog->setAttribute("rdf:about", util_make_uri($base_url.'/cm/oslc-services/'));
+	$catalog->setAttribute("rdf:about", $base_url.'/cm/oslc-services/');
 	
 	// Title of the ServiceProviderCatalog.
 	$titlenode = $doc->createElement("dcterms:title", "FusionForge OSLC Core V2 Service Provider Catalog");
@@ -133,8 +142,7 @@ function projects_to_service_catalog($base_url, $projects) {
 	
 	// Add rdf:type ressource to the ServiceProviderCatalog node.
 	$rdftype = $doc->createElement("rdf:type");
-	$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#ServiceProviderCatalog");
-	$rdftype->appendChild($rdftyperessource);
+	$rdftype->setAttribute("rdf:resource", 'http://open-services.net/ns/core#ServiceProviderCatalog');
 	$catalog->appendChild($rdftype);
 	
 	// Add oslc:Publisher ressource inside a dcterms:publisher node.
@@ -152,7 +160,7 @@ function projects_to_service_catalog($base_url, $projects) {
 	
 	foreach ($projects as $proj) {
 		$sp = $doc->createElement("oslc:ServiceProvider");
-		$sp->setAttribute("rdf:about", util_make_uri($base_url.'/cm/oslc-cm-services/'.$proj['id']));
+		$sp->setAttribute("rdf:about", $base_url.'/cm/oslc-cm-services/'.$proj['id']);
 		
 		// dcterms:title
 		$sptitle = $doc->createElement("dcterms:title", "Project: ".$proj["name"]);
@@ -164,8 +172,7 @@ function projects_to_service_catalog($base_url, $projects) {
 		
 		// rdf:type
 		$rdftype = $doc->createElement("rdf:type");
-		$rdftyperessource = $doc->createElement("rdf:ressource", "http://open-services.net/ns/core#ServiceProvider");
-		$rdftype->appendChild($rdftyperessource);
+		$rdftype->setAttribute("rdf:resource", 'http://open-services.net/ns/core#ServiceProvider');
 		$sp->appendChild($rdftype);
 		
 		// dcterms:publisher
