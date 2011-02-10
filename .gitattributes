@@ -1994,6 +1994,7 @@ src/plugins/oslc/packaging/docs/plugin-oslc -text
 src/plugins/oslc/packaging/install/plugin-oslc -text
 src/plugins/oslc/packaging/links/plugin-oslc -text
 src/plugins/oslc/post-testdata.xml -text svneol=unset#text/xml
+src/plugins/oslc/tests/func/sureFireReportTest.php -text
 src/plugins/oslc/tests/run-provider-tests.sh -text
 src/plugins/oslc/tests/setup-provider-test.sh -text
 src/plugins/oslc/translations/en.po -text
