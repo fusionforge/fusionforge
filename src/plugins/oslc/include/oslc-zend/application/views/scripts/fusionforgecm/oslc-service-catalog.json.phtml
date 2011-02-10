@@ -1,14 +1,32 @@
 <?php
+$json["prefixes"]["rdf"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+$json["prefixes"]["oslc"] = "http://open-services.net/ns/core#";
+$json["prefixes"]["dcterms"] = "http://purl.org/dc/terms/";
+$json["prefixes"]["foaf"] = "http://http://xmlns.com/foaf/0.1/";
 
-$json["dc:title"] = TRACKER_TYPE. " Change management service provider catalog";
-foreach ($this->projects as $proj)
-{
-	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:title"] = $proj["name"];
-	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["oslc_disc:services"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-service/'.$proj['id']);
+$json["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#ServiceProviderCatalog";
+$json["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-services/');
+
+$json["dcterms:title"] = "FusionForge OSLC Service Provider Catalog";
+$json["dcterms:description"] = "Lists all projects as Service (trackers) Providers";
+$json["dcterms:publisher"]["dcterms:title"] = "FusionForge OSLC V2 plugin";
+$json["dcterms:publisher"]["dcterms:identifier"] = $this->serverUrl().$this->baseUrl();
+
+foreach ($this->projects as $proj) {
+	$service["oslc:ServiceProvider"]["dcterms:title"] = "Project: ".$proj["name"];
+	$service["oslc:ServiceProvider"]["dcterms:description"] = "FusionForge project ".$proj['name']." as an OSLC-CM ServiceProvider";
+	$service["oslc:ServiceProvider"]["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#ServiceProvider";
+	$service["oslc:ServiceProvider"]["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-services/'.$proj['id']);
+	$service["oslc:ServiceProvider"]["dcterms:publisher"]["dcterms:title"] = "FusionForge OSLC V2 plugin";
+	$service["oslc:ServiceProvider"]["dcterms:publisher"]["dcterms:identifier"] = $this->serverUrl().$this->baseUrl();
+	
+	// ServiceProvider should list at least one oslc:service. 
+	// Telling about the oslc:domain of the service is mandatory. 
+	$service["oslc:ServiceProvider"]["oslc:Service"]["oslc:domain"] = "http://open-services.net/ns/core#Service";
 	$catalog[] = $service;
 }
 
-$json["oslc_disc:ServiceProviderCatalog"] = $catalog;
+$json["oslc:ServiceProviderCatalog"] = $catalog;
 
 
 print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
