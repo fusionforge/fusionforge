@@ -1,14 +1,32 @@
 <?php 
-$json["dc:title"] = TRACKER_TYPE. " Change Management service provider catalog for project " . $this->project["name"];
+
+// Declare used namespaces.
+$json["prefixes"]["oslc"] = "http://open-services.net/ns/core#";
+$json["prefixes"]["rdf"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+$json["prefixes"]["foaf"] = "http://http://xmlns.com/foaf/0.1/";
+$json["prefixes"]["dcterms"] = "http://purl.org/dc/terms/";
+
+$json["rdf:type"]["rdf:ressource"] = "http://open-services.net/ns/core#Service";
+$json["rdf:about"] = $this->serverUrl().util_make_uri($this->baseUrl().'/cm/oslc-cm-services/'.$this->project);
+
+$json["dcterms:title"] = "FusionForge Change Management service provider catalog for project " . $this->project;
+$json["dcterms:description"] = "Lists trackers inside project".$this->project;
+
+$json["dcterms:publisher"]["dcterms:title"] = "OSLC CM plugin for FusionForge";
+$json["dcterms:publisher"]["dcterms:identifier"] = $this->serverUrl().$this->baseUrl();
 
 foreach($this->trackers as $tracker) {
-	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:identifier"] = $tracker["id"];
-	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:title"] = $tracker["name"];
-	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:descrption"] = $tracker["description"];
-	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["oslc_disc:services"]["rdf:ressource"] = $this->serverUrl() . util_make_uri($this->baseUrl().'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
-	$catalog[] = $service;
+	$service["oslc:service"]["dc:identifier"] = $tracker["id"];
+	$service["oslc:service"]["dc:title"] = $tracker["name"];
+	$service["oslc:service"]["dc:descrption"] = $tracker["description"];
+	$service["oslc:service"]["rdf:ressource"] = $this->serverUrl() . util_make_uri($this->baseUrl().'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id']);
+	$service["oslc:service"]["oslc:details"] = $this->serverUrl() . util_make_uri("/tracker/index.php?group_id=".$tracker['group_id'].'&atid='.$tracker['id']);
+	$catalog["oslc:serviceProvider"][] = $service;
 }
-$json["rdf:about"] = "";
+
+///
+
+
 $json["oslc_disc:ServiceProviderCatalog"] = $catalog;
 print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
 ?>
