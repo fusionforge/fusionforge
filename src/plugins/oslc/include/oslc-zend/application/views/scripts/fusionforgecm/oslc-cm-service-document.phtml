@@ -45,7 +45,7 @@ $child = $doc->createTextNode($this->baseUrl().'/cm/oslc-cm-service');
 $child = $service->appendChild($child);*/
 ?>
 <body>
-<h1>OSLC-CM V1 Service Description document</h1>
+<h1>OSLC CM service description document</h1>
 <pre>
 <?php
 	$xml = project_to_service_description($this->serverUrl() . $this->baseUrl(), $this->project, $this->tracker);
