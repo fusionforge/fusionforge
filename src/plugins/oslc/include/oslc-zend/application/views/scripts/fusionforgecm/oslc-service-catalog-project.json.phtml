@@ -1,0 +1,14 @@
+<?php 
+$json["dc:title"] = TRACKER_TYPE. " Change Management service provider catalog for project " . $this->project["name"];
+
+foreach($this->trackers as $tracker) {
+	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:identifier"] = $tracker["id"];
+	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:title"] = $tracker["name"];
+	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["dc:descrption"] = $tracker["description"];
+	$service["oslc_disc:entry"]["oslc_disc:ServiceProvider"]["oslc_disc:services"]["rdf:ressource"] = $this->base_url.'/cm/oslc-cm-service/'.$tracker['group_id'].'/tracker/'.$tracker['id'];
+	$catalog[] = $service;
+}
+$json["rdf:about"] = "";
+$json["oslc_disc:ServiceProviderCatalog"] = $catalog;
+print str_replace("\/", "/", Zend_Json::prettyPrint(Zend_Json::encode($json)));
+?>
