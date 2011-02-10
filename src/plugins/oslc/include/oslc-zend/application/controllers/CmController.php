@@ -102,6 +102,7 @@ class CmController extends Zend_Rest_Controller {
 								),
 
 							'oslcCmServiceDocument' => array(
+								'application/x-oslc-cm-service-description+xml' => 'xml',
 								'application/xml' => 'xml'
 								)
 	);
