@@ -512,7 +512,7 @@ class FusionForgeCmController extends CmController {
 	
 	/**
 	 * Handle OSLC services catalog access per project.
-	 * Accessed by uris like ".../cm/oslc-services/x"
+	 * Accessed by uris like ".../cm/oslc-cm-services/x"
 	 * where x is a project id.
 	 */
 	public function oslcservicecatalogprojectAction() {
