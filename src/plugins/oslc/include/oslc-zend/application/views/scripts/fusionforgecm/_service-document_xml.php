@@ -42,7 +42,7 @@ function project_to_service_description($base_url, $project, $tracker) {
 
 	$child = $doc->createElementNS("http://purl.org/dc/terms/", "dc:title");
 	$title = $root->appendChild($child);
-	$child = $doc->createTextNode("Demo OSLC CM services");
+	$child = $doc->createTextNode("OSLC CM service description document describing a FusionForge tracker services");
 	$child = $title->appendChild($child);
 
 	// changeRequests
