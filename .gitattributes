@@ -1984,8 +1984,6 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/error/error.json.ph
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/error.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/error.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/error/res-not-found.phtml -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm -text
-src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm -text
 src/plugins/oslc/include/oslcPlugin.class.php -text
 src/plugins/oslc/packaging/control/222plugin-oslc -text
 src/plugins/oslc/packaging/control/222plugin-oslc.shortdesc -text
