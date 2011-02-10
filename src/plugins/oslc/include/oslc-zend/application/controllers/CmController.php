@@ -54,6 +54,7 @@ class CmController extends Zend_Rest_Controller {
 								'application/xml' => 'xml',
 								'text/xml' => 'xml',
 								'application/atom+xml' => 'xml',
+								'application/rdf+xml' => 'xml',
 								'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
 								'application/x-oslc-disc-service-provider-catalog+json' => 'json',
 								'application/x-oslc-cm-service-description+xml' => 'xml',
@@ -103,7 +104,8 @@ class CmController extends Zend_Rest_Controller {
 								'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
 							 	'application/xml' => 'xml',
 								'application/x-oslc-disc-service-provider-catalog+json' => 'json',
-								'application/json' => 'json'
+								'application/json' => 'json',
+								'application/rdf+xml' => 'xml'
 								),
 
 							'oslcCmServiceDocument' => array(
@@ -162,7 +164,6 @@ class CmController extends Zend_Rest_Controller {
 	 * @return string
 	 */
 	public function checkSupportedActionMimeType($mime_types, $action) {
-	  
 	  $req = $this->getRequest();
 	  //		$action = $req->getActionName();
 	  //	  print_r("Action : ".$action);
@@ -181,24 +182,25 @@ class CmController extends Zend_Rest_Controller {
 	  //print_r("\nAccepted types:");
 	  //print_r($accepted_types);
 	  // If we can't directly find the accept header, then, have to negociate maybe among alternatives
+
 	  if(!isset($mime_types[$action][$accept])) {
 	    // use PEAR's HTTP::negotiateMimeType to identify the preferred content-type
 	    //$accept = HTTP::negotiateMimeType($accepted_types,'');
 	    $http=new HTTP();
 	    $content_type = $http->negotiateMimeType($accepted_types,'');
 	    //print_r("Accept2 : ".$content_type);
-	  }
-	  else {
+	  } else {
 	    // perfect, just found it directly (note that the 'get' action needs all of them)
 	    $content_type = $accept;
 	  }
+	  
 	  if (!$content_type) {
 	    // unsupported accept type
-	    throw new NotAcceptableException("Accept header '".$req->getHeader('Accept')."' not supported for action .'".$action."' !");
+	    throw new NotAcceptableForCRCollectionException("Accept header '".$req->getHeader('Accept')."' not supported for action .'".$action."' !");
 	  }
-		  
+	  /*
 	  // we have selected the requested type and check the corresponding output format
-	  $accept = $content_type ;
+	  $accept = $content_type;
 
 	  // if found, then check for default type for equivalent formats (the first one with same format)
 	  // should make application/xml more specific for instance
@@ -210,8 +212,8 @@ class CmController extends Zend_Rest_Controller {
 		break;
 	      }
 	    }
-	  }
-	  return $content_type; 
+	  }*/
+	  return $content_type;
 	}
 	
 	/**
