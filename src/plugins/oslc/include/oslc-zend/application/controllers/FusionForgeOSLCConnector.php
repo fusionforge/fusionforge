@@ -151,9 +151,13 @@ class FusionForgeOSLCConnector extends OslcConnector {
 
 		if(array_key_exists('where', $filter))	{
 			foreach($filter['where']['terms'] as $term)	{
-				if($term[0]=='=')	{	
+			  // equality
+				if($term[0] == '=')	{	
 					$term[2] = str_replace("\"", "", $term[2]);
 					switch($term[1])	{
+					case 'dc:title':
+					  $query['summary'] = $term[2];
+					  break;
 						case 'helios_bt:status':
 							if (array_key_exists($term[2],self::$status_arr))	{
 								$query['status'] = self::$status_arr[$term[2]];
@@ -285,7 +289,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		$af->order_col = $query['order_col'];
 		
 		// Can add here values for 'details' and 'summary'. Values comes from oslc_searchTerms
-		//$af->summary = $query['search'];
+		$af->summary = $query['summary'];
 		//$af->details =	$query['search'];
 		
 		// query the DB for requested artifacts 
