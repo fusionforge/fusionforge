@@ -242,7 +242,7 @@ class OSLCConnector {
 			$feedentry = $this->prepareChangeRequest($changerequest);
 
 			$feedentry['title'] = 'changerequest '.$identifier.' : '.$feedentry['resource']['dcterms:title'];
-			$feedentry['id']= $uri.$identifier;
+			$feedentry['id']= $uri.'/bug/'.$identifier;
 
 			$returned[] = $feedentry;
 		}
