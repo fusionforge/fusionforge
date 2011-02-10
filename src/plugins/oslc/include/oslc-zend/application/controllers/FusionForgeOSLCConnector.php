@@ -499,7 +499,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 
 		$cm_request = $changerequest->container;
 
-		$terms = array('dc:','helios_bt:');
+		$terms = array('dcterms:','helios_bt:','oslc_cm');
 		foreach($props as &$prop) {
 			$prop = str_replace($terms,"",$prop);
 			//echo $prop;
