@@ -48,13 +48,14 @@ class CmController extends Zend_Rest_Controller {
 	 * @var array
 	 */
 	private static $supportedAcceptMimeTypes = array(
-							
+							 // All potential supported accept for GETs must be listed here (including all other actions')
 							'get' => array(
 								'application/x-oslc-cm-change-request+xml' => 'xml',
 								'application/xml' => 'xml',
 								'text/xml' => 'xml',
 								'application/atom+xml' => 'xml',
 								'application/x-oslc-disc-service-provider-catalog+xml' => 'xml',
+								'application/x-oslc-cm-service-description+xml' => 'xml',
 							 	'application/json' => 'json',
 							 	'application/x-oslc-cm-change-request+json' => 'json'
 							 	//'text/html' => '?',
@@ -155,51 +156,56 @@ class CmController extends Zend_Rest_Controller {
 	 * @return string
 	 */
 	public function checkSupportedActionMimeType($mime_types, $action) {
-		
-		$req = $this->getRequest();
-		$action = $req->getActionName();
-		//print_r("Action : ".$action);
+	  
+	  $req = $this->getRequest();
+	  //		$action = $req->getActionName();
+	  print_r("Action : ".$action);
+	  
+	  // check Accept header's mime type 
+	  $accept = $req->getHeader('Accept');
+	  print_r("\nAccept : ".$accept);
+	  
+	  // prepare an array of accepted types
+	  $accepted_types = array();
+	  if(isset($mime_types[$action])) {
+	    $accepted_types = array_keys($mime_types[$action]);
+	  }
+	  // make sure text/html is always an option (in last option)
+	  $accepted_types[]='text/html';
+	  //print_r("\nAccepted types:");
+	  print_r($accepted_types);
+	  // If we can't directly find the accept header, then, have to negociate maybe among alternatives
+	  if(!isset($mime_types[$action][$accept])) {
+	    // use PEAR's HTTP::negotiateMimeType to identify the preferred content-type
+	    //$accept = HTTP::negotiateMimeType($accepted_types,'');
+	    $http=new HTTP();
+	    $content_type = $http->negotiateMimeType($accepted_types,'');
+	    //print_r("Accept2 : ".$content_type);
+	  }
+	  else {
+	    // perfect, just found it directly (note that the 'get' action needs all of them)
+	    $content_type = $accept;
+	  }
+	  if (!$content_type) {
+	    // unsupported accept type
+	    throw new NotAcceptableException("Accept header '".$req->getHeader('Accept')."' not supported for action .'".$action."' !");
+	  }
+		  
+	  // we have selected the requested type and check the corresponding output format
+	  $accept = $content_type ;
 
-		// check Accept header's mime type 
-		$accept = $req->getHeader('Accept');
-		//print_r("\nAccept : ".$accept);
-		
-		// prepare an array of accepted types
-		$accepted_types = array();
-		if(isset($mime_types[$action])) {
-			$accepted_types = array_keys($mime_types[$action]);
-		}
-		// make sure text/html is always an option (in last option)
-		$accepted_types[]='text/html';
-		//print_r($accepted_types);
-		// use PEAR's HTTP::negotiateMimeType to identify the preferred content-type
-		//$accept = HTTP::negotiateMimeType($accepted_types,'');
-		$http=new HTTP();
-		$accept = $http->negotiateMimeType($accepted_types,'');
-		
-		//print_r("Accept2 : ".$accept);
-		// text/html is always supported
-		// otherwise, has to be declared in $supportedAcceptMimeTypes[$action]
-		if (!isset($mime_types[$action][$accept]) && $accept != 'text/html') {
-		  	// unsupported accept type
-		  	throw new NotAcceptableException("Accept header ".$req->getHeader('Accept')." not supported!");
-		}
-
-		// we have selected the requested type and check the corresponding output format
-		$content_type = $accept;
-		
-		// if found, then check for default type for equivalent formats (the first one with same format)
-		// should make application/xml more specific for instance
-		if(isset($mime_types[$action][$accept])) {
-			$format = $mime_types[$action][$accept];
-			foreach ($mime_types[$action] as $key => $value) {
-				if ($value == $format) {
-					$content_type = $key;
-					break;
-				}
-			}
-		}
-		return $content_type; 
+	  // if found, then check for default type for equivalent formats (the first one with same format)
+	  // should make application/xml more specific for instance
+	  if(isset($mime_types[$action][$accept])) {
+	    $format = $mime_types[$action][$accept];
+	    foreach ($mime_types[$action] as $key => $value) {
+	      if ($value == $format) {
+		$content_type = $key;
+		break;
+	      }
+	    }
+	  }
+	  return $content_type; 
 	}
 	
 	/**
