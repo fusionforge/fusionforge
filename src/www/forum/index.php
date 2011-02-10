@@ -61,9 +61,9 @@ if ($group_id) {
 
 //	echo _('<p>Choose a forum and you can browse, search, and post messages.<p>');
 
-	echo $HTML->printsubMenu(array(_("My Monitored Forums")),array("/forum/myforums.php?group_id=$group_id"));
+	echo $HTML->printsubMenu(array(_("My Monitored Forums")), array("/forum/myforums.php?group_id=$group_id"), false);
 
-	plugin_hook ("blocks", "forum index");
+	plugin_hook("blocks", "forum index");
 
 	$tablearr=array(_('Forum'),_('Description'),_('Threads'),_('Posts'), _('Last Post'),_('Moderation Level'));
 	echo $HTML->listTableTop($tablearr);
