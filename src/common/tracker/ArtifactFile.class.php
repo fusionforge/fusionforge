@@ -179,6 +179,14 @@ class ArtifactFile extends Error {
 			return false;
 		} else {
 			db_commit();
+
+			//
+			//	Now set up our internal data structures
+			//
+			if (!$this->fetchData($id)) {
+				return false;
+			}
+
 			// If time is set, no need to add to history, will be done in batch
 			if (!array_key_exists('time', $importData)){
 				$this->Artifact->addHistory('File Added',$id.': '.$filename);
