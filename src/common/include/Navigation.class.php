@@ -71,7 +71,7 @@ class Navigation extends Error {
 	 * 
 	 * @todo: Make favicon configurable
 	 */
-	function getFavIcon($asHTML=true) {
+	function getFavIcon($asHTML = true) {
 		if (!$asHTML) {
 			return util_make_url('/images/icon.png');
 		} else {
@@ -87,36 +87,36 @@ class Navigation extends Error {
 	 *  array with the following structure: $result['titles']:
 	 *  list of titles of the feeds; $result['urls'] list of urls
 	 *  of the feeds. */
-	function getRSS($asHTML=true) {
-                if (!$asHTML) {
-                        $res = array() ;
-                        $res['titles'] = array();
-                        $res['urls'] = array();
-                        
-                        $res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS';
-                        $res['urls'][] = util_make_url('/export/rss_sfnews.php'); 
-                        
-                        $res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS 2.0';
-                        $res['urls'][] = util_make_url('/export/rss20_news.php'); 
-                        
-                        $res['titles'][] = forge_get_config ('forge_name').' - New Projects RSS';
-                        $res['urls'][] = util_make_url('/export/rss_sfprojects.php'); 
-                        
-                        if (isset($GLOBALS['group_id'])) { 
-                                $res['titles'][] = forge_get_config ('forge_name') . ' - New Activity RSS';
-                                $res['urls'][] = util_make_url('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']);
-                        }
-                        return $res;
-                } else {
-                        $feeds = $this->getRSS(false);
-                        for ($j = 0; $j < count($feeds['urls']); $j++) {
-                                echo '
-                                <link rel="alternate" title="' . $feeds['titles'][$j] 
-					. '" href="' . $feeds['urls'][$j] 
+	function getRSS($asHTML = true) {
+		if (!$asHTML) {
+			$res = array();
+			$res['titles'] = array();
+			$res['urls'] = array();
+
+			$res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS';
+			$res['urls'][] = util_make_url('/export/rss_sfnews.php');
+
+			$res['titles'][] = forge_get_config ('forge_name').' - Project News Highlights RSS 2.0';
+			$res['urls'][] = util_make_url('/export/rss20_news.php');
+
+			$res['titles'][] = forge_get_config ('forge_name').' - New Projects RSS';
+			$res['urls'][] = util_make_url('/export/rss_sfprojects.php');
+
+			if (isset($GLOBALS['group_id'])) {
+				$res['titles'][] = forge_get_config ('forge_name') . ' - New Activity RSS';
+				$res['urls'][] = util_make_url('/export/rss20_activity.php?group_id='.$GLOBALS['group_id']);
+			}
+			return $res;
+		} else {
+			$feeds = $this->getRSS(false);
+			for ($j = 0; $j < count($feeds['urls']); $j++) {
+				echo '
+				<link rel="alternate" title="' . $feeds['titles'][$j]
+					. '" href="' . $feeds['urls'][$j]
 					. '" type="application/rss+xml"/>';
-                        }
-                }
-        }
+			}
+		}
+	}
 
 	/** Get the searchBox HTML code. */
 	function getSearchBox() {
@@ -183,29 +183,29 @@ class Navigation extends Error {
 	 of the urls.
 	 */
 	function getUserLinks() {
-                $res = array();
-                if (session_loggedin()) {
-                        $u =& user_get_object(user_getid());
-                        $res['titles'][] = sprintf("%s (%s)", _('Log Out'), $u->getRealName());
-                        $res['urls'][] = util_make_uri('/account/logout.php');
+		$res = array();
+		if (session_loggedin()) {
+			$u =& user_get_object(user_getid());
+			$res['titles'][] = sprintf("%s (%s)", _('Log Out'), $u->getRealName());
+			$res['urls'][] = util_make_uri('/account/logout.php');
 
-                        $res['titles'][] = _('My Account');
-                        $res['urls'][] = util_make_uri('/account/');
-                } else {
-                        $url = '/account/login.php';
-                        if(getStringFromServer('REQUEST_METHOD') != 'POST') {
-                                $url .= '?return_to=';
-                                $url .= urlencode(getStringFromServer('REQUEST_URI'));
-                        }
-                        $res['titles'][] = _('Log In');
-                        $res['urls'][] = util_make_url($url);
-                        
-                        if (!forge_get_config ('user_registration_restricted')) {
-                                $res['titles'][] = _('New Account');
-                                $res['urls'][] = util_make_url('/account/register.php');
-                        }
-                }
-                return $res;
+			$res['titles'][] = _('My Account');
+			$res['urls'][] = util_make_uri('/account/');
+		} else {
+			$url = '/account/login.php';
+			if(getStringFromServer('REQUEST_METHOD') != 'POST') {
+				$url .= '?return_to=';
+				$url .= urlencode(getStringFromServer('REQUEST_URI'));
+			}
+			$res['titles'][] = _('Log In');
+			$res['urls'][] = util_make_url($url);
+
+			if (!forge_get_config ('user_registration_restricted')) {
+				$res['titles'][] = _('New Account');
+				$res['urls'][] = util_make_url('/account/register.php');
+			}
+		}
+		return $res;
 	}
 
 	/** Get an array of the menu of the site with the following
@@ -213,30 +213,30 @@ class Navigation extends Error {
 	 *  links. $result['urls']: list of urls. $result['selected']:
 	 *  number of the selected menu entry.
 	 */
-        function getSiteMenu() {
-                $request_uri = getStringFromServer('REQUEST_URI');
-                
-                $menu = array();
-                $menu['titles'] = array();
-                $menu['urls'] = array();
-                $selected = 0;
-                
-                // Home
-                $menu['titles'][] = _('Home');
-                $menu['urls'][] = util_make_uri('/'); 
-                
-                // My Page
-                $menu['titles'][] = _('My&nbsp;Page');
-                $menu['urls'][] = util_make_uri('/my/'); 
-                if (strstr($request_uri, util_make_uri('/my/'))
-                    || strstr($request_uri, util_make_uri('/account/'))
-                    || strstr($request_uri, util_make_uri('/register/'))
-                    || strstr($request_uri, util_make_uri('/themes/'))
-			) 
-                {
-                        $selected=count($menu['urls'])-1;
-                }
-                
+	function getSiteMenu() {
+		$request_uri = getStringFromServer('REQUEST_URI');
+
+		$menu = array();
+		$menu['titles'] = array();
+		$menu['urls'] = array();
+		$selected = 0;
+
+		// Home
+		$menu['titles'][] = _('Home');
+		$menu['urls'][] = util_make_uri('/');
+
+		// My Page
+		$menu['titles'][] = _('My&nbsp;Page');
+		$menu['urls'][] = util_make_uri('/my/');
+		if (strstr($request_uri, util_make_uri('/my/'))
+			|| strstr($request_uri, util_make_uri('/account/'))
+			|| strstr($request_uri, util_make_uri('/register/'))
+			|| strstr($request_uri, util_make_uri('/themes/'))
+			)
+		{
+			$selected=count($menu['urls'])-1;
+		}
+
 		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || forge_get_config('use_project_full_list')) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/') ;
@@ -266,7 +266,7 @@ class Navigation extends Error {
 		$plugin_urls = array();
 		$hookParams['DIRS'] = &$menu['urls'];
 		$hookParams['TITLES'] = &$menu['titles'];
-		plugin_hook ("outermenu", $hookParams);
+		plugin_hook("outermenu", $hookParams);
 
 		// try to find selected entry
 		for ($j = $before; $j < count($plugin_urls); $j++) {
@@ -278,7 +278,7 @@ class Navigation extends Error {
 		}
 
 		// Admin and Reporting 
-		if (forge_check_global_perm ('forge_admin')) {
+		if (forge_check_global_perm('forge_admin')) {
 			$user_is_super = true;
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_url('/admin/') ;
@@ -313,12 +313,12 @@ class Navigation extends Error {
 			}
 		}
 
-                $menu['selected'] = $selected;
-                          
-                return $menu;
-        }
+		$menu['selected'] = $selected;
 
-        /** Get a reference to an array of the projects menu for the
+		return $menu;
+	}
+
+	/** Get a reference to an array of the projects menu for the
 	 * project with the id $group_id with the following
 	 * structure: $result['starturl']: URL of the
 	 * projects starting page; $result['name']: public name of
@@ -330,7 +330,7 @@ class Navigation extends Error {
 	 * false. $result['selected']: number of the menu entry that
 	 * is currently selected.
 	 */
-	function getProjectMenu($group_id, $toptab="") {
+	function getProjectMenu($group_id, $toptab = "") {
 		// rebuild menu if it has never been built before, or
 		// if the toptab was set differently
 		if (!isset($this->project_menu_data[$group_id])
@@ -345,14 +345,14 @@ class Navigation extends Error {
 				//wasn't found or some other problem
 				return null;
 			}
-                        if (!$group->isProject()) {
-                                return;
-                        }
-                        
-                        $selected = 0;
-                        
-                        $menu =& $this->project_menu_data[$group_id];
-                        $menu['titles'] = array();
+			if (!$group->isProject()) {
+				return;
+			}
+
+			$selected = 0;
+
+			$menu =& $this->project_menu_data[$group_id];
+			$menu['titles'] = array();
                         $menu['urls'] = array();
                         $menu['adminurls'] = array();
 
@@ -360,7 +360,7 @@ class Navigation extends Error {
 
                         // Summary
                         $menu['titles'][] = _('Summary');
-                        if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+                        if (isset($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
                                 $url = util_make_uri('/project/?group_id=' . $group_id);
                         } else {
                                 $url = util_make_uri('/projects/' . $group->getUnixName() .'/');
