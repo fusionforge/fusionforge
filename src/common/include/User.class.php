@@ -237,7 +237,7 @@ class GFUser extends Error {
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
 		$mail_site, $mail_va, $language_id, $timezone, $jabber_address, $jabber_only, $theme_id,
-		$unix_box = 'shell', $address = '', $address2 = '', $phone = '', $fax = '', $title = '', $ccode = 'US', $send_mail = true, $tooltip = true) {
+		$unix_box = 'shell', $address = '', $address2 = '', $phone = '', $fax = '', $title = '', $ccode = 'US', $send_mail = true, $tooltips = true) {
 		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
@@ -396,7 +396,7 @@ class GFUser extends Error {
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['user_name'] = $unix_name;
 			$hook_params['user_password'] = $password1;
-			plugin_hook ("user_create", $hook_params);
+			plugin_hook("user_create", $hook_params);
 			
 			if ($send_mail) {
 				setup_gettext_from_lang_id($language_id);
