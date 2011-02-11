@@ -487,6 +487,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			$text_100=_('None');
 		}
 		$arr = $this->getExtraFieldElements($extra_field_id);
+		$keys = array();
+		$vals = array();
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
@@ -505,6 +507,8 @@ class ArtifactTypeHtml extends ArtifactType {
 	 */	
 	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any') {
 		$arr = $this->getExtraFieldElements($extra_field_id);
+		$keys = array();
+		$vals = array();
 		for ($i=0; $i<count($arr); $i++) {
 			$keys[$i]=$arr[$i]['element_id'];
 			$vals[$i]=$arr[$i]['element_name'];
