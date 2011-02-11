@@ -664,6 +664,12 @@ class Document extends Error {
 				$image = 'docman/file_type_image.png';
 				break;
 			}
+			case "audio/x-wav":
+			case "audio/x-vorbis+ogg":
+			case "audio/mpeg": {
+				$image = "docman/file_type_sound.png";
+				break;
+			}
 			case "application/pdf": {
 				$image = 'docman/file_type_pdf.png';
 				break;
