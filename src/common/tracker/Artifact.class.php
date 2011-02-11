@@ -1468,7 +1468,7 @@ class Artifact extends Error {
 				$type=$ef[$arr['extra_field_id']]['field_type'];
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					//accumulate a sub-array of values in cases where you may have multiple rows
-					if (!is_array($this->extra_field_data[$arr['extra_field_id']])) {
+					if (!array_key_exists($arr['extra_field_id'], $this->extra_field_data) || !is_array($this->extra_field_data[$arr['extra_field_id']])) {
 						$this->extra_field_data[$arr['extra_field_id']] = array();
 					}
 					$this->extra_field_data[$arr['extra_field_id']][]=$arr['field_data'];
