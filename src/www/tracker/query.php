@@ -2,6 +2,7 @@
 /**
  * Copyright 2005 (c) GForge Group, LLC; Anthony J. Pugliese,
  * Copyright 2010 (c) Fusionforge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -185,6 +186,7 @@ $order_name_arr[]=_('ID');
 $order_name_arr[]=_('Priority');
 $order_name_arr[]=_('Summary');
 $order_name_arr[]=_('Open Date');
+$order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
@@ -195,6 +197,7 @@ $order_arr[]='artifact_id';
 $order_arr[]='priority';
 $order_arr[]='summary';
 $order_arr[]='open_date';
+$order_arr[]='last_modified_date';
 $order_arr[]='close_date';
 $order_arr[]='submitted_by';
 $order_arr[]='assigned_to';

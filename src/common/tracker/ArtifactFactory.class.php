@@ -3,6 +3,7 @@
  * FusionForge trackers
  *
  * Copyright 2002, GForge, LLC
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -204,7 +205,8 @@ class ArtifactFactory extends Error {
 					   'close_date',
 					   'assigned_to',
 					   'submitted_by',
-					   'priority') ;
+					   'priority',
+					   'last_modified_date') ;
 		$efarr = $this->ArtifactType->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_TEXT,
 						    ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,
 						    ARTIFACT_EXTRAFIELDTYPE_INTEGER,

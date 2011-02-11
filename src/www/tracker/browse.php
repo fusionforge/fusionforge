@@ -189,6 +189,7 @@ $order_name_arr[]=_('ID');
 $order_name_arr[]=_('Priority');
 $order_name_arr[]=_('Summary');
 $order_name_arr[]=_('Open Date');
+$order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
@@ -199,6 +200,7 @@ $order_arr[]='artifact_id';
 $order_arr[]='priority';
 $order_arr[]='summary';
 $order_arr[]='open_date';
+$order_arr[]='last_modified_date';
 $order_arr[]='close_date';
 $order_arr[]='submitted_by';
 $order_arr[]='assigned_to';
@@ -543,6 +545,8 @@ if ($art_arr && $art_cnt > 0) {
 				$title=_('Submitted by');
 			if ($f == 'related_tasks')
 				$title=_('Related tasks');
+			if ($f == 'last_modified_date')
+				$title=_('Last Modified Date');
 		}
 		$title_arr[] = $title;
 	}
@@ -603,6 +607,9 @@ if ($art_arr && $art_cnt > 0) {
 					$s = ' ';
 				}
 				echo '</td>';
+			} else if ($f == 'last_modified_date') {
+				echo '<td>'. ($art_arr[$i]->getLastModifiedDate() ?
+				date(_('Y-m-d H:i'),$art_arr[$i]->getLastModifiedDate()) :'&nbsp; ') .'</td>';
 			} else if (intval($f) > 0) {
 				// Now display extra-fields (fields are numbers).
 				$value = $extra_data[$f]['value'];

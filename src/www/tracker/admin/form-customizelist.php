@@ -3,6 +3,7 @@
  * FusionForge Artifact update Form
  *
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -49,7 +50,8 @@ $fields = array (
 		'submitted_by' => _('Submitted By'),
 		'close_date' => _('Close Date'),
 		'details' => _('Detailed description'),
-		'related_tasks' => _('Related tasks')
+	'related_tasks' => _('Related tasks'),
+	'last_modified_date' => _('Last Modified Date')
 	);
 
 if(count($ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS))) > 0) {
