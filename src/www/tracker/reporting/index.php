@@ -43,6 +43,18 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
+$group = group_get_object($group_id);
+if (!$group || !is_object($group)) {
+        exit_no_group();
+}
+if ($group->isError()) {
+        if($group->isPermissionDeniedError()) {
+                exit_permission_denied($group->getErrorMessage());
+        } else {
+                exit_error($group->getErrorMessage(), 'tracker');
+        }
+}
+
 /*
  * Set the start date to birth of the project.
  */
@@ -59,18 +71,6 @@ if (!$end) {
 	$end = $z[count($z)-1];
 }
 if ($end < $start) list($start, $end) = array($end, $start);
-
-$group = group_get_object($group_id);
-if (!$group || !is_object($group)) {
-        exit_no_group();
-}
-if ($group->isError()) {
-        if($group->isPermissionDeniedError()) {
-                exit_permission_denied($group->getErrorMessage());
-        } else {
-                exit_error($group->getErrorMessage(), 'tracker');
-        }
-}
 
 if (!session_loggedin()) {
 	exit_not_logged_in();
