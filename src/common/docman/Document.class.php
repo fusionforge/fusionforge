@@ -571,32 +571,30 @@ class Document extends Error {
 	 * setState - set the stateid of the document.
 	 *
 	 * @param	int	The state id of the doc_states table.
-	 * @return	boolean	success.
+	 * @return	boolean	success or not.
 	 */
 	function setState($stateid) {
-		$res = db_query_params('UPDATE doc_data SET
-					stateid=$1
-					WHERE group_id=$2
-					AND docid=$3',
-					array($stateid,
-						$this->Group->getID(),
-						$this->getID())
-					);
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setOnUpdateError(db_error());
-			return false;
-		}
-		$this->sendNotice(false);
-		return true;
+		return $this->__setValueinDB('stateid', $stateid);
+	}
+
+
+	/**
+	 * setDocGroupID - set the doc_group of the document.
+	 *
+	 * @param	int	The group_id of this document.
+	 * @return	boolean	success or not.
+	 */
+	function setDocGroupID($newdocgroupid) {
+		return $this->__setValueinDB('doc_group', $newdocgroupid);
 	}
 
 	/**
-	 * setLock - set the locking status of the document
+	 * setLock - set the locking status of the document.
 	 *
-	 * @param	int	The status of the lock
-	 * @param	int	The userid who set the lock
-	 * @param	time	the epoch time
-	 * @return	boolean	success
+	 * @param	int	The status of the lock.
+	 * @param	int	The userid who set the lock.
+	 * @param	time	the epoch time.
+	 * @return	boolean	success or not.
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$res = db_query_params('UPDATE doc_data SET
@@ -867,7 +865,7 @@ class Document extends Error {
 	 *
 	 * @param	boolean	true = new document (default value)
 	 */
-	function sendNotice ($new=true) {
+	function sendNotice($new=true) {
 		$BCC = $this->Group->getDocEmailAddress();
 		if ($this->isMonitoredBy('ALL')) {
 			$BCC .= $this->getMonitoredUserEmailAddress();
@@ -927,6 +925,42 @@ class Document extends Error {
 
 		// we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
 		//$this->sendNotice(false);
+		return true;
+	}
+
+	/**
+	 * __setValueinDB - private function to update columns in db
+	 *
+	 * @param	string	the column to update
+	 * @param	int	the value to store
+	 * @return	boolean	success or not
+	 * @access	private
+	 */
+	private function __setValueinDB($column, $value) {
+		switch ($column) {
+			case "stateid":
+			case "doc_group": {
+				$qpa = db_construct_qpa();
+				$qpa = db_construct_qpa($qpa, 'UPDATE doc_data SET ');
+				$qpa = db_construct_qpa($qpa, $column);
+				$qpa = db_construct_qpa($qpa, '=$1
+								WHERE group_id=$2
+								AND docid=$3',
+								array($value,
+									$this->Group->getID(),
+									$this->getID()));
+				$res = db_query_qpa($qpa);
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setOnUpdateError(db_error().print_r($res));
+					return false;
+				}
+				break;
+			}
+			default:
+				$this->setOnUpdateError(_('wrong column name'));
+				return false;
+		}
+		$this->sendNotice(false);
 		return true;
 	}
 }
