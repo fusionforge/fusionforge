@@ -8,4 +8,5 @@ echo
 echo "Starting the OSLC provider test suite on $baseUri."
 echo
 
-mvn -Dtest=DynamicSuiteBuilder -DargLine="-Dprops=config/fusionforge/ffsandbox.properties" test
+# Run the tests and build the "site" which contains the HTML test suite reports
+mvn -Dtest=DynamicSuiteBuilder -DargLine="-Dprops=config/fusionforge/ffsandbox.properties" site
