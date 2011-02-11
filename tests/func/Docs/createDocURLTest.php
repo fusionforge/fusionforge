@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright (C) 2010 Alcatel-Lucent
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -14,23 +14,23 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
- *              
+ *
  * You should have received a copy of the GNU General Public License
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
- */             
+ */
 
-/*              
+/*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
- *              
+ *
  * "The test suite ("Contribution") has not been tested and/or
  * validated for release as or in products, combinations with products or
  * other commercial use. Any use of the Contribution is entirely made at
  * the user's own responsibility and the user can not rely on any features,
  * functionalities or performances Alcatel-Lucent has attributed to the
  * Contribution.
- *              
+ *
  * THE CONTRIBUTION BY ALCATEL-LUCENT IS PROVIDED AS IS, WITHOUT WARRANTY
  * OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
  * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPLIANCE,
@@ -67,6 +67,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
+		$this->clickAndWait("link=List files & Directories");
 		$this->clickAndWait("link=Uncategorized Submissions");
 		$this->clickAndWait("//img[@alt='Move to trash this document']");
 		$this->assertTextPresent("moved to trash successfully");

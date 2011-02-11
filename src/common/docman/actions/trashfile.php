@@ -47,6 +47,8 @@ foreach ($arr_fileid as $fileid) {
 	if (!$d->setState('2'))
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
+	if (!d->setDocGroupId('0'))
+		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 }
 $return_msg .= _('moved to trash successfully.');
 session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));

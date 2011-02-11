@@ -27,6 +27,7 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $df; // document factory
+global $dgf;
 global $nested_groups; // flat groups array
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
@@ -36,31 +37,19 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 
 $df->setStateID('2');
 $d_trash_arr =& $df->getDocuments();
+$dg_trash_arr =& $dgf->getNested('2');
 
-if (!$d_trash_arr || count($d_trash_arr) < 1) {
+if ((!$d_trash_arr || count($d_trash_arr) < 1) && (!$dg_trash_arr || count($dg_trash_arr) < 1)) {
 	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
-?>
-<script type="text/javascript">
-function displayTrashDiv() {
-	if ( 'none' == document.getElementById('listtrash').style.display ) {
-		document.getElementById('listtrash').style.display = 'block';
-	} else {
-		document.getElementById('listtrash').style.display = 'none';
-	}
-}
-</script>
-<?php
+
 	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
 	echo '<ul>';
-	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents with deleted status.') .'" onclick="javascript:doIt(\'emptytrash\')" ></li>';
+	echo '<li><input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents with deleted status.') .'" ></li>';
 	echo '</ul>';
 	echo '</form>';
-	echo '<ul>';
-	echo '<li><a href="#" onclick="javascript:displayTrashDiv()">'. _('Select documents to be resurrected from deleted status.') .'</a></li>';
-	echo '</ul>';
-	echo '<div id="listtrash" style="display:none;" >';
-	docman_display_documents($nested_groups, $df, true, 2, 0);
-	echo '</div>';
+
+	var_dump($d_trash_arr);
+	var_dump($dg_trash_arr);
 }
 ?>

@@ -71,14 +71,16 @@ function docman_recursive_display($docgroup) {
 		foreach ($nested_groups[$docgroup] as $dg) {
 			$idhtml++;
 
-			if ($dirid == $dg->getID())
-				$idExposeTreeIndex = $idhtml;
+			if ($dg->getState() != 2) {
+				if ($dirid == $dg->getID())
+					$idExposeTreeIndex = $idhtml;
 
-			echo "
-				['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=listfile&dirid=".$dg->getID()."', '', '',";
-					docman_recursive_display($dg->getID());
-			echo ",
-				],";
+				echo "
+					['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=listfile&dirid=".$dg->getID()."', '', '',";
+						docman_recursive_display($dg->getID());
+				echo ",
+					],";
+			}
 		}
 	}
 }
@@ -124,7 +126,7 @@ function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stat
 	}
 	if (isset($nested_docs[$docgroup]) && is_array($nested_docs[$docgroup])) {
 		foreach ($nested_docs[$docgroup] as $d) {
-			$d->setStateID($stateid);
+			$d->setState($stateid);
 		}
 	}
 }

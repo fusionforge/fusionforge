@@ -449,24 +449,25 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 * setStateID - set the state id of this document group
+	 * setStateID - set the state id of this document group.
 	 *
-	 * @param	int	State ID
-	 * @return	boolean success
+	 * @param	int	State ID.
+	 * @return	boolean success or not.
 	 * @access	public
 	 */
 	function setStateID($stateid) {
-		$res = db_query_params('UPDATE doc_groups SET stateid=$1
-							WHERE doc_group=$2
-							AND group_id=$3',
-							array($stateid,$this->getID(), $this->Group->getID())
-					);
+		return $this->__setValueinDB('stateid',$stateid);
+	}
 
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setOnUpdateError(_('DocumentGroup:').' '.db_error());
-			return false;
-		}
-		return true;
+	/**
+	 * setParentDocGroupId - set the parent doc_group id of this document group.
+	 *
+	 * @param	int	Parent Doc_group Id.
+	 * @return	boolean success or not.
+	 * @access	public
+	 */
+	function setParentDocGroupId($parentDocGroupId) {
+		return $this->__setValueinDB('parent_doc_group',$parentDocGroupId);
 	}
 
 	/**
@@ -555,6 +556,40 @@ class DocumentGroup extends Error {
 		}
 	}
 
+	/**
+	 * __setValueinDB - private function to update columns in db
+	 *
+	 * @param	string	the column to update
+	 * @param	int	the value to store
+	 * @return	boolean	success or not
+	 * @access	private
+	 */
+	private function __setValueinDB($column, $value) {
+		switch ($column) {
+			case "stateid":
+			case "parent_doc_group": {
+				$qpa = db_construct_qpa();
+				$qpa = db_construct_qpa($qpa, 'UPDATE doc_groups SET ');
+				$qpa = db_construct_qpa($qpa, $column);
+				$qpa = db_construct_qpa($qpa, '=$1
+								WHERE group_id=$2
+								AND doc_group=$3',
+								array($value,
+									$this->Group->getID(),
+									$this->getID()));
+				$res = db_query_qpa($qpa);
+				if (!$res || db_affected_rows($res) < 1) {
+					$this->setOnUpdateError(db_error().print_r($res));
+					return false;
+				}
+				break;
+			}
+			default:
+				$this->setOnUpdateError(_('wrong column name'));
+				return false;
+		}
+		return true;
+	}
 }
 
 // Local Variables:

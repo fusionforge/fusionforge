@@ -50,6 +50,7 @@ jQuery(document).ready(function() {
 	controllerMenu = new DocManMenuController({
 		tipsyElements:	[
 					{selector: '#addItemDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+					{selector: '#listFileDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 					{selector: '#searchDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 					{selector: '#trashDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 					{selector: '#pendingDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
@@ -60,6 +61,14 @@ jQuery(document).ready(function() {
 
 </script>
 <?
+
+$menu_text[] = _('List files & Directories');
+$menu_links[] = '/docman/?group_id='.$group_id.'&view=listfile&dirid=0';
+if ($use_tooltips) {
+	$menu_attr[] = array('title' => _('View the files and the directories in 2 panels. Left a directory tree, right a list of files of specific directory'), 'id' => 'listFileDocmanMenu');
+} else {
+	$menu_attr[] = array();
+}
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Add new item');

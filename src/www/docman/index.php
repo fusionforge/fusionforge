@@ -131,18 +131,14 @@ $title = _('Document Manager');
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
 
-echo '<div width:100%;">';
+echo '<div>';
 include ($gfcommon.'docman/views/menu.php');
 echo '</div>';
-echo '<div style="float:left; width:17%;">';
-include ($gfcommon.'docman/views/tree.php');
-echo '</div>';
 
-echo '<div style="float:right; width:82%;">';
+echo '<div>';
 include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 
-echo '<div style="clear:both; margin-bottom:5px;" />';
 site_project_footer(array());
 
 ?>

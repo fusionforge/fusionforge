@@ -43,5 +43,5 @@ if (!$emptyDir)
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode(db_error()));
 
 $return_msg = _('Emptied Trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=admin&feedback='.urlencode($return_msg));
+session_redirect('/docman/?group_id='.$group_id.'&view=trashfile&feedback='.urlencode($return_msg));
 ?>

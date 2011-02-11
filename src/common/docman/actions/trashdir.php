@@ -4,7 +4,7 @@
  *
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,8 +29,6 @@
 global $g; //group object
 global $dirid; //id of doc_group
 global $group_id; // id of group
-global $dgf; // document group factory of this group
-global $d_arr; // documents array of this group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
@@ -39,7 +37,19 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 
 /* when moving a document group to trash, it's recursive and it's applied to documents that belong to these document groups */
 /* Get the document groups info */
+$df = new DocumentFactory($g);
+if ($df->isError())
+	exit_error($df->getErrorMessage(), 'docman');
+
+$dgf = new DocumentGroupFactory($g);
+if ($dgf->isError())
+	exit_error($dgf->getErrorMessage(), 'docman');
+
 $trashnested_groups =& $dgf->getNested();
+
+$df->setDocGroupID($dirid);
+$d_arr =& $df->getDocuments();
+
 $trashnested_docs = array();
 /* put the doc objects into an array keyed of the docgroup */
 foreach ($d_arr as $doc) {
@@ -51,8 +61,13 @@ docman_recursive_stateid($dirid, $trashnested_groups, $trashnested_docs, 2);
 
 /* set this dirid to trash */
 $dg = new DocumentGroup($g, $dirid);
-$dg->setStateID('2');
+$currentParent = $dg->getParentID();
+if (!$dg->setStateID('2'))
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-$return_msg = _('Directory moved to trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&feedback='.urlencode($return_msg));
+if (!$dg->setParentDocGroupId('0'))
+	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
+
+$return_msg = sprintf(_('Directory %s moved to trash successfully.'),$dg->getName());
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&feedback='.urlencode($return_msg));
 ?>
