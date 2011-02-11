@@ -27,6 +27,9 @@ class SeleniumTests
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		
+		// Run any func tests available in the plugins
+		$suite->addTestFiles(glob("../src/plugins/*/tests/func/*Test.php"));
+
 		return $suite;
 	}
 }
