@@ -70,10 +70,6 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 				$status=0;
 			}
 
-			//foundry stuff - remove this news from the foundry so it has to be re-approved by the admin
-			db_query_params ('DELETE FROM foundry_news WHERE news_id=$1',
-			array($id));
-
 			if (!$summary) {
 				$summary='(none)';
 			}
