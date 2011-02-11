@@ -566,11 +566,10 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Summary string.
 	 */
 	function getSummary() {
-		if ($this->element_array[ARTIFACT_QUERY_SUMMARY][0]) {
-			return $this->element_array[ARTIFACT_QUERY_SUMMARY][0];
-		} else {
+		if (!isset($this->element_array[ARTIFACT_QUERY_SUMMARY][0])) {
 			return false;
 		}
+			return $this->element_array[ARTIFACT_QUERY_SUMMARY][0];
 	}
 
 	/**
@@ -579,11 +578,10 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Description string.
 	 */
 	function getDescription() {
-		if ($this->element_array[ARTIFACT_QUERY_DESCRIPTION][0]) {
-			return $this->element_array[ARTIFACT_QUERY_DESCRIPTION][0];
-		} else {
+		if (!isset($this->element_array[ARTIFACT_QUERY_DESCRIPTION][0])) {
 			return false;
 		}
+			return $this->element_array[ARTIFACT_QUERY_DESCRIPTION][0];
 	}
 
 	/**
@@ -592,11 +590,10 @@ class ArtifactQuery extends Error {
 	 *	@return	string	Folowups string.
 	 */
 	function getFollowups() {
-		if ($this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0]) {
-			return $this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0];
-		} else {
+		if (!isset($this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0])) {
 			return false;
 		}
+			return $this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0];
 	}
 
 	/**
