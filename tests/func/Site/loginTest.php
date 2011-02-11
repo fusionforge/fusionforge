@@ -59,7 +59,10 @@ class LoginProcess extends FForge_SeleniumTestCase
 		// used to access it, then logout doesn't work (bug or
 		// feature ?)
 		$location=$this->getLocation();
-		$this->assertStringStartsWith('https://'.HOST.'/', $location, "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
+		$url_regexp = str_replace('.', '\.', HOST);
+		$url_regexp = '/https?:\/\/'. $url_regexp .'\//';
+		$this->assertRegExp($url_regexp, $location, 
+				    "You may need to set 'HOST' setting in test suite's config file to something compatible with 'web_host' defined in ini file");
 
 		$this->type("form_loginname", "admin");
 		$this->type("form_pw", "myadmin");
