@@ -189,6 +189,7 @@ switch (getStringFromRequest('func')) {
 			} else if ($ah->isError()) {
 				$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
 			} else {
+				$_summary = '';
 				$_priority=(($priority != 100) ? $priority : $ah->getPriority());
 				$_status_id=(($status_id != 100) ? $status_id : $ah->getStatusID());
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
