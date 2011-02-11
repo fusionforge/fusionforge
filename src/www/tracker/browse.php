@@ -426,7 +426,8 @@ if ($af->query_type == 'default') {
 echo '
 </div>';
 
-if ($art_cnt > 0) {
+$art_cnt = count($art_arr);
+if ($art_arr && $art_cnt > 0) {
 
 	if ($query_id) {
 		$aq = new ArtifactQuery($ath,$query_id);
@@ -444,25 +445,38 @@ if ($art_cnt > 0) {
 			if ($ath->usesCustomStatuses()) {
 				$custom_id = $ath->getCustomStatusField();
 				$extra_data = $art->getExtraFieldDataText();
-				$count[ $extra_data[$custom_id]['value'] ]++;
+				@$count[ $extra_data[$custom_id]['value'] ]++;
 			} else {
-				$count[ $art->getStatusName()]++;
+				@$count[ $art->getStatusName()]++;
 			}
 		}
 		foreach($count as $n => $c) {
-			$percent[$n] = round(100*$c/count($art_arr));
+			$percent[$n] = round(100*$c/$art_cnt);
 		}
-		
+		if ($ath->getCustomStatusField()) {
+			$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
+			$keys=array_keys($efarr);
+			$field_id = $keys[0];
+			$custom_states = $ath->getExtraFieldElements($field_id);
+			$states = array();
+			if (is_array($custom_states)) {
+				foreach($custom_states as $state) {
+					$states[] = $state['element_name'];
+				}
+			}
+		} else {
+			$colors = array('#ffa0a0', '#bae0ba');
+			$res = $ath->getStatuses();
+			while ($row = db_fetch_array($res)) {
+				$states[] = $row['status_name'];
+			}
+		}
+
 		$i=0;
-		$efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
-		$keys=array_keys($efarr);
-		$field_id = $keys[0];
-		$states = $ath->getExtraFieldElements($field_id);
 		$graph = '';
 		$legend = '';
 		if (is_array($states)) {
-			foreach($states as $state) {
-				$name = $state['element_name'];
+			foreach($states as $name) {
 				if ($count[$name]) {
 					$graph  .= '<td style="background: '.$colors[$i].'; width: '.$percent[$name].'%;">&nbsp;</td>';
 					$legend .= '<td style="white-space: nowrap; width: '.$percent[$name].'%;">'."<i>$name: $count[$name] ($percent[$name]%)</i></td>";
