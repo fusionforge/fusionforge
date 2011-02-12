@@ -773,6 +773,7 @@ class Document extends Error {
 			return false;
 		}
 
+		/* TODO : NEED REAL CHECK */
 		if ($filename) {
 			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 and doc_group = $2 and stateid = $3',
 						array($filename, $doc_group, $stateid));

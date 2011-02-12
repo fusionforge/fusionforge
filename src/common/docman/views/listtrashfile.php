@@ -27,8 +27,7 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $df; // document factory
-global $dgf;
-global $nested_groups; // flat groups array
+global $dgf; // document group factory
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -36,10 +35,15 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 $df->setStateID('2');
-$d_trash_arr =& $df->getDocuments();
-$dg_trash_arr =& $dgf->getNested('2');
 
-if ((!$d_trash_arr || count($d_trash_arr) < 1) && (!$dg_trash_arr || count($dg_trash_arr) < 1)) {
+/**
+ * var must be call d_arr & nested_groups
+ * because used by tree.php
+ */
+$d_arr =& $df->getDocuments();
+$nested_groups =& $dgf->getNested('2');
+
+if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 1)) {
 	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
 
@@ -49,7 +53,12 @@ if ((!$d_trash_arr || count($d_trash_arr) < 1) && (!$dg_trash_arr || count($dg_t
 	echo '</ul>';
 	echo '</form>';
 
-	var_dump($d_trash_arr);
-	var_dump($dg_trash_arr);
+	echo '<div style="float:left; width:17%; padding-right:3px; margin-right:2px; border-right: dashed 1px black;">';
+	include ($gfcommon.'docman/views/tree.php');
+	echo '</div>';
+	echo '<div style="float:left; width:82%;">';
+		var_dump($d_arr);
+		var_dump($nested_groups);
+	echo '</div>';
 }
 ?>

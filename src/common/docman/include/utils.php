@@ -65,7 +65,7 @@ function doc_get_state_box($checkedval = 'xzxz') {
  */
 function docman_recursive_display($docgroup) {
 	global $nested_groups, $group_id;
-	global $idExposeTreeIndex, $dirid,$idhtml;
+	global $idExposeTreeIndex, $dirid, $idhtml;
 
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {

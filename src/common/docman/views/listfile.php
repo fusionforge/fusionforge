@@ -29,8 +29,7 @@
 /* global variables used */
 global $group_id; // id of the group
 global $dirid; // id of doc_group
-global $nested_docs; // flat docs array
-global $nested_groups; // flat document directories array
+global $dgf; // document group factory
 global $HTML; // Layout object
 global $u; // User object
 global $use_tooltips; // enable or not tooltips in docman
@@ -40,6 +39,16 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
+$df->setDocGroupID($dirid);
+
+/**
+ * var must be call d_arr & nested_groups
+ * because used by tree.php
+ */
+$d_arr =& $df->getDocuments();
+$nested_groups = $dgf->getNested();
+
+$nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
@@ -48,6 +57,17 @@ if ($dirid) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
 }
+
+if ($d_arr != NULL ) {
+	if (!$d_arr || count($d_arr) > 0) {
+		// Get the document groups info
+		//put the doc objects into an array keyed off the docgroup
+		foreach ($d_arr as $doc) {
+			$nested_docs[$doc->getDocGroupID()][] = $doc;
+		}
+	}
+}
+
 ?>
 
 <script type="text/javascript">

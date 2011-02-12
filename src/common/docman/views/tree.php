@@ -26,26 +26,21 @@
 
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
-global $d_arr; // documents array
 global $group_id; // id of the group
+global $nested_docs;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-$nested_docs = array();
+/**
+ * needed for docman_recursive_display function call
+ * see utils.php for more information
+ */
 $idExposeTreeIndex = 0;
 $idhtml = 0;
-if ($d_arr != NULL ) {
-	if (!$d_arr || count($d_arr) > 0) {
-		// Get the document groups info
-		//put the doc objects into an array keyed off the docgroup
-		foreach ($d_arr as $doc) {
-			$nested_docs[$doc->getDocGroupID()][] = $doc;
-		}
-	}
-}
+
 echo '<div id="documenttree" style="height:100%">';
 ?>
 
