@@ -924,8 +924,20 @@ class Document extends Error {
 			}
 		}
 
-		// we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
-		//$this->sendNotice(false);
+		/** we should be able to send a notice that this doc has been deleted .... but we need to rewrite sendNotice
+		 * $this->sendNotice(false);
+		 * @TODO delete monitoring this file */
+		return true;
+	}
+
+	/**
+	 * trash - move this file to trash
+	 *
+	 * @return	boolean	success or not.
+	 */
+	function trash() {
+		$this->setState('2');
+		$this->sendNotice(false);
 		return true;
 	}
 
@@ -952,7 +964,9 @@ class Document extends Error {
 									$this->getID()));
 				$res = db_query_qpa($qpa);
 				if (!$res || db_affected_rows($res) < 1) {
-					$this->setOnUpdateError(db_error().print_r($res));
+					var_dump($qpa);
+					exit;
+					$this->setOnUpdateError(db_error().print_r($qpa));
 					return false;
 				}
 				break;

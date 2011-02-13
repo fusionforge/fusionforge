@@ -265,7 +265,8 @@ class Group extends Error {
 	 * @param	int	The id of the project this new project is based on
 	 * @return	boolean	success or not
 	 */
-	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box='shell1', $scm_box='cvs1', $is_public=1, $send_mail=true, $built_from_template=0) {
+	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
+			$scm_box = 'cvs1', $is_public = 1, $send_mail = true, $built_from_template = 0) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -300,7 +301,7 @@ class Group extends Error {
 			db_begin();
 
 			$res = db_query_params('
-				INSERT INTO groups (
+				INSERT INTO groups(
 					group_name,
 					is_public,
 					unix_group_name,
@@ -570,15 +571,14 @@ class Group extends Error {
 				use_pm_depend_box=$8,
 				use_scm=$9,
 				use_news=$10,
-				use_docman=$11,
-				is_public=$12,
-				new_doc_address=$13,
-				send_all_docs=$14,
-				use_ftp=$15,
-				use_tracker=$16,
-				use_frs=$17,
-				use_stats=$18
-			WHERE group_id=$19',
+				is_public=$11,
+				new_doc_address=$12,
+				send_all_docs=$13,
+				use_ftp=$14,
+				use_tracker=$15,
+				use_frs=$16,
+				use_stats=$17
+			WHERE group_id=$18',
 					array(htmlspecialchars($group_name),
 					      $homepage,
 					      htmlspecialchars($short_description),
@@ -589,7 +589,6 @@ class Group extends Error {
 					      $use_pm_depend_box,
 					      $use_scm,
 					      $use_news,
-					      $use_docman,
 					      $is_public,
 					      $new_doc_address,
 					      $send_all_docs,
@@ -601,6 +600,12 @@ class Group extends Error {
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
+			db_rollback();
+			return false;
+		}
+
+		if (!$this->setUseDocman($use_docman)) {
+			$this->setError(sprintf(_('Error updating project information: use_docman %s'), db_error()));
 			db_rollback();
 			return false;
 		}
@@ -801,18 +806,18 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	is_template.
 	 */
-	function setAsTemplate ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET is_template=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+	function setAsTemplate($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET is_template=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['is_template']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -993,7 +998,7 @@ class Group extends Error {
 	}
 
 	function SetUsesAnonSCM($booleanparam) {
-		db_begin() ;
+		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0;
 		if (USE_PFO_RBAC) {
 			$r = RoleAnonymous::getInstance();
@@ -1057,11 +1062,11 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	enabled/disabled
 	 */
-	function setUseSCM ($booleanparam) {
-		db_begin () ;
+	function setUseSCM($booleanparam) {
+		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_scm']=$booleanparam;
 			db_commit () ;
@@ -1090,18 +1095,18 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	enabled/disabled
 	 */
-	function setUseMail ($booleanparam) {
-		db_begin () ;
+	function setUseMail($booleanparam) {
+		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_mail=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+		$res = db_query_params('UPDATE groups SET use_mail=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_mail']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -1136,18 +1141,18 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	enabled/disabled
 	 */
-	function setUseForum ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_forum=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+	function setUseForum($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_forum=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_forum']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -1178,18 +1183,18 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	enabled/disabled
 	 */
-	function setUseFRS ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_frs=$1 WHERE group_id=$2',
+	function setUseFRS($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_frs=$1 WHERE group_id=$2',
 					array ($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_frs']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -1257,18 +1262,29 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	enabled/disabled
 	 */
-	function setUseDocman ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_docman=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+	function setUseDocman($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_docman = $1 WHERE group_id = $2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
-			$this->data_array['use_docman']=$booleanparam;
-			db_commit () ;
-			return true ;
+			// check if / doc_group exists, if not create it
+			$trashdir = db_query_params('select groupname from doc_groups where groupname = $1 and group_id = $2',
+							array('.trash', $this->getID()));
+			if ($trashdir && db_numrows($trashdir) == 0) {
+				$resinsert = db_query_params('insert into doc_groups (groupname, group_id, stateid) values ($1, $2, $3)',
+						array('.trash', $this->getID(), '2'));
+				if (!$resinsert) {
+					db_rollback();
+					return false;
+				}
+			}
+			$this->data_array['use_docman'] = $booleanparam;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -1342,18 +1358,18 @@ class Group extends Error {
 	 *
 	 *	@param	boolean	enabled/disabled
 	 */
-	function setUsePM ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
-		$res = db_query_params ('UPDATE groups SET use_pm=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+	function setUsePM($booleanparam) {
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
+		$res = db_query_params('UPDATE groups SET use_pm=$1 WHERE group_id=$2',
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_pm']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -2334,51 +2350,51 @@ class Group extends Error {
 		}
 
 		// Switch to system language for item creation
-		setup_gettext_from_sys_lang ();
+		setup_gettext_from_sys_lang();
 
 		// Create default roles
 		if (USE_PFO_RBAC) {
-			$idadmin_group = NULL ;
+			$idadmin_group = NULL;
 			foreach (get_group_join_requests ($this) as $gjr) {
-				$idadmin_group = $gjr->getUserID() ;
+				$idadmin_group = $gjr->getUserID();
 				break ;
 			}
 			if ($idadmin_group == NULL) {
 				$idadmin_group = $user->getID();
 			}
 		} else {
-			$admin_group = db_query_params ('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
-							array ($this->getID(),
-							       'A')) ;
+			$admin_group = db_query_params('SELECT user_id FROM user_group WHERE group_id=$1 AND admin_flags=$2',
+							array($this->getID(),
+							       'A'));
 			if (db_numrows($admin_group) > 0) {
 				$idadmin_group = db_result($admin_group,0,'user_id');
 			} else {
 				$idadmin_group = $user->getID();
-				db_query_params ('INSERT INTO user_group (user_id, group_id, admin_flags) VALUES ($1, $2, $3)',
-						 array ($idadmin_group,
+				db_query_params('INSERT INTO user_group (user_id, group_id, admin_flags) VALUES ($1, $2, $3)',
+						 array($idadmin_group,
 							$this->getID(),
 							'A')) ;
 			}
 		}
 
-		$template = $this->getTemplateProject() ;
-		$id_mappings = array ();
-		$seen_local_roles = false ;
+		$template = $this->getTemplateProject();
+		$id_mappings = array();
+		$seen_local_roles = false;
 		if ($template) {
 			// Copy roles from template project
-			foreach ($template->getRoles() as $oldrole) {
+			foreach($template->getRoles() as $oldrole) {
 				if ($oldrole->getHomeProject() != NULL) {
-					$role = new Role ($this) ;
-					$data = array () ;
+					$role = new Role($this);
+					$data = array();
 					// Need to use a different role name so that the permissions aren't set from the hardcoded defaults
-					$role->create ('TEMPORARY ROLE NAME', $data, true) ;
-					$role->setName ($oldrole->getName()) ;
-					$seen_local_roles = true ;
+					$role->create('TEMPORARY ROLE NAME', $data, true);
+					$role->setName($oldrole->getName());
+					$seen_local_roles = true;
 				} else {
-					$role = $oldrole ;
-					$role->linkProject ($this) ;
+					$role = $oldrole;
+					$role->linkProject($this);
 				}
-				$id_mappings['role'][$oldrole->getID()] = $role->getID() ;
+				$id_mappings['role'][$oldrole->getID()] = $role->getID();
 				// Reuse the project_admin permission
 				$role->setSetting ('project_admin', $this->getID(), $oldrole->getSetting ('project_admin', $template->getID())) ;
 			}
@@ -2394,94 +2410,99 @@ class Group extends Error {
 			$roles = $this->getRoles() ;
 			foreach ($roles as $r) {
 				if ($r->getSetting ('project_admin', $this->getID())) {
-					$r->addUser (user_get_object ($idadmin_group)) ;
+					$r->addUser(user_get_object ($idadmin_group));
 				}
 			}
 		}
 		
 		// Temporarily switch to the submitter's identity
-		$saved_session = session_get_user () ;
-		session_set_internal ($idadmin_group) ;
+		$saved_session = session_get_user();
+		session_set_internal($idadmin_group);
 
 		if ($template) {
-			if (forge_get_config ('use_tracker')) {
-				$this->setUseTracker ($template->usesTracker()) ;
+			if (forge_get_config('use_tracker')) {
+				$this->setUseTracker ($template->usesTracker());
 				if ($template->usesTracker()) {
-					$oldatf = new ArtifactTypeFactory ($template) ;
+					$oldatf = new ArtifactTypeFactory($template);
 					foreach ($oldatf->getArtifactTypes() as $o) {
 						$t = new ArtifactType ($this) ;
 						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->allowsAnon(),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions()) ;
-						$id_mappings['tracker'][$o->getID()] = $t->getID() ;
-						$t->cloneFieldsFrom ($o->getID()) ;
+						$id_mappings['tracker'][$o->getID()] = $t->getID();
+						$t->cloneFieldsFrom ($o->getID());
 					}
 				}
 			}
 
-			if (forge_get_config ('use_pm')) {
-				$this->setUsePM ($template->usesPM()) ;
+			if (forge_get_config('use_pm')) {
+				$this->setUsePM ($template->usesPM());
 				if ($template->usesPM()) {
-					$oldpgf = new ProjectGroupFactory ($template) ;
+					$oldpgf = new ProjectGroupFactory($template);
 					foreach ($oldpgf->getProjectGroups() as $o) {
-						$pg = new ProjectGroup ($this) ;
-						$pg->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo()) ;
-						$id_mappings['pm'][$o->getID()] = $pg->getID() ;
+						$pg = new ProjectGroup($this);
+						$pg->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo());
+						$id_mappings['pm'][$o->getID()] = $pg->getID();
 					}
 				}
 			}
 
-			if (forge_get_config ('use_forum')) {
-				$this->setUseForum ($template->usesForum()) ;
+			if (forge_get_config('use_forum')) {
+				$this->setUseForum($template->usesForum()) ;
 				if ($template->usesForum()) {
-					$oldff = new ForumFactory ($template) ;
+					$oldff = new ForumFactory($template) ;
 					foreach ($oldff->getForums() as $o) {
-						$f = new Forum ($this) ;
-						$f->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo(),1,$o->allowAnonymous(),$o->getModerationLevel()) ;
-						$id_mappings['forum'][$o->getID()] = $f->getID() ;
+						$f = new Forum($this);
+						$f->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->isPublic(),$o->getSendAllPostsTo(),1,$o->allowAnonymous(),$o->getModerationLevel());
+						$id_mappings['forum'][$o->getID()] = $f->getID();
 					}
 				}
 			}
 			
-			if (forge_get_config ('use_docman')) {
-				$this->setUseDocman ($template->usesDocman()) ;
+			if (forge_get_config('use_docman')) {
+				$this->setUseDocman($template->usesDocman());
 				if ($template->usesDocman()) {
-					$olddgf = new DocumentGroupFactory ($template) ;
+					$olddgf = new DocumentGroupFactory($template);
 					// First pass: create all docgroups
-					$id_mappings['docman_docgroup'][0] = 0 ;
+					$id_mappings['docman_docgroup'][0] = 0;
 					foreach ($olddgf->getDocumentGroups() as $o) {
-						$ndgf = new DocumentGroup ($this) ;
-						$ndgf->create($this->replaceTemplateStrings($o->getName())) ;
-						$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID() ;
+						$ndgf = new DocumentGroup($this);
+						// .trash is a reserved directory
+						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
+							$ndgf->create($this->replaceTemplateStrings($o->getName()));
+							$id_mappings['docman_docgroup'][$o->getID()] = $ndgf->getID();
+						}
 					}
 					// Second pass: restore hierarchy links
 					foreach ($olddgf->getDocumentGroups() as $o) {
-						$ndgf = new DocumentGroup ($this) ;
-						$ndgf->fetchData ($id_mappings['docman_docgroup'][$o->getID()]) ;
-						$ndgf->update ($ndgf->getName(),$id_mappings['docman_docgroup'][$o->getParentID()]) ;
+						$ndgf = new DocumentGroup($this);
+						if ($o->getName() != '.trash' && $o->getParentID() == 0) {
+							$ndgf->fetchData($id_mappings['docman_docgroup'][$o->getID()]);
+							$ndgf->update($ndgf->getName(), $id_mappings['docman_docgroup'][$o->getParentID()]);
+						}
 					}
 				}
 			}
 			
-			if (forge_get_config ('use_frs')) {
-				$this->setUseFRS ($template->usesFRS()) ;
+			if (forge_get_config('use_frs')) {
+				$this->setUseFRS ($template->usesFRS());
 				if ($template->usesFRS()) {
-					foreach (get_frs_packages ($template) as $o) {
-						$newp = new FRSPackage ($this) ;
-						$nname = $this->replaceTemplateStrings($o->getName()) ;
-						$newp->create ($nname, $o->isPublic()) ;
+					foreach (get_frs_packages($template) as $o) {
+						$newp = new FRSPackage($this);
+						$nname = $this->replaceTemplateStrings($o->getName());
+						$newp->create ($nname, $o->isPublic());
 					}
 				}
 			}
 
-			if (forge_get_config ('use_mail')) {
-				$this->setUseMail ($template->usesMail()) ;
+			if (forge_get_config('use_mail')) {
+				$this->setUseMail($template->usesMail()) ;
 				if ($template->usesMail()) {
-					$oldmlf = new MailingListFactory ($template) ;
+					$oldmlf = new MailingListFactory($template);
 					foreach ($oldmlf->getMailingLists() as $o) {
-						$ml = new MailingList ($this) ;
+						$ml = new MailingList($this);
 						$nname = preg_replace ('/^'.$template->getUnixName().'-/','',$o->getName()) ;
 
 						$ndescription = $this->replaceTemplateStrings($o->getDescription()) ;
-						$ml->create ($nname, $ndescription, $o->isPublic()) ;
+						$ml->create($nname, $ndescription, $o->isPublic());
 					}
 				}
 			}
