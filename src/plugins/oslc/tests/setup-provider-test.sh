@@ -6,6 +6,7 @@
 aptitude install fusionforge-plugin-oslc
 
 # Dependencies : installed Maven 2 and JDK (aptitude install maven2 default-jdk)
+aptitude install maven2 default-jdk
 
 # We don't embedd a copy of the test suite and instead refer to the latest version on SF.net
 if [ ! -d provider-test ] ; then
