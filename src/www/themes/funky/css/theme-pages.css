@@ -143,15 +143,15 @@
 }
 
 #forge-frs h2 {
-    padding-top: 1em;
+	padding-top: 1em;
 }
 
 #forge-frs h3 {
-    font-size: small;
+	font-size: small;
 }
 
 #forge-frs .box-surround {
-    margin: 0 0.5em 0.5em 2em;
+	margin: 0 0.5em 0.5em 2em;
 }
 
 #forge-frs .box-content {
@@ -159,7 +159,7 @@
 }
 
 #forge-frs .listTable {
-    margin:0;
+	margin: 0;
 }
 
 #forge-frs .listTable td {
@@ -171,7 +171,7 @@
  * ========================================================
  */
 #user-profile-homepage {
-    
+
 }
 
 /*
@@ -183,48 +183,48 @@
 }
 
 .docman_h4 {
-    padding: 0px;
-    margin: 2px;
-    font-style: italic;
+	padding: 0px;
+	margin: 2px;
+	font-style: italic;
 }
 
 .docman_div_include {
-    border-style: solid;
-    border-color: #C2C7D1;
-    border-width: 1px;
-    padding: 2px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+	border-style: solid;
+	border-color: #C2C7D1;
+	border-width: 1px;
+	padding: 2px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .docmanDivIncluded {
-    font-size: 0.95em;
+	font-size: 0.95em;
 }
 
 .docmanSubmitDiv input {
-    margin: 5px;
+	margin: 5px;
 }
 
 .docmanDiv {
-    padding-bottom: 5px;
-    font-size: 0.9em;
+	padding-bottom: 5px;
+	font-size: 0.9em;
 }
 
 .docmanDiv table {
-    border-style: solid;
-    border-color: #C2C7D1;
-    border-width: 1px;
-    border-collapse: collapse;
-    text-align: left;
-    vertical-align: middle;
+	border-style: solid;
+	border-color: #C2C7D1;
+	border-width: 1px;
+	border-collapse: collapse;
+	text-align: left;
+	vertical-align: middle;
 }
 
 .docmanDiv td, .docmanDiv th {
-    border-style: solid;
-    border-color: #C2C7D1;
-    border-width: 1px;
-    border-collapse: collapse;
-    padding: 3px;
+	border-style: solid;
+	border-color: #C2C7D1;
+	border-width: 1px;
+	border-collapse: collapse;
+	padding: 3px;
 }
 
 /*
