@@ -308,7 +308,7 @@ class Artifact extends Error {
 			//
 			//	now send an email if appropriate
 			//
-			$this->mailFollowup(1);
+			$this->mailFollowupEx(0, 1);
 			db_commit();
 
 			return $artifact_id;
@@ -764,17 +764,18 @@ class Artifact extends Error {
 			}
 		}
 
+		$now = time();
 		$res = db_query_params ('INSERT INTO artifact_message (artifact_id,submitted_by,from_email,adddate,body) VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
 					       $user_id,
 					       $by,
-					       time(),
+					       $now,
 					       htmlspecialchars($body))) ;
 
 		$this->updateLastModifiedDate();
 
 		if ($send_followup) {
-			$this->mailFollowup(2,false);
+			$this->mailFollowupEx($now, 2, false);
 		}
 		return $res;
 	}
@@ -1035,6 +1036,7 @@ class Artifact extends Error {
 		//
 		//	handle audit trail
 		//
+		$now = time();
 		if ($this->getStatusID() != $status_id) {
 			$this->addHistory('status_id',$this->getStatusID());
 			$qpa = db_construct_qpa($qpa, ' status_id=$1,', array($status_id));
@@ -1042,7 +1044,7 @@ class Artifact extends Error {
 			$update = true;
 
 			if ($status_id != 1) {
-				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array(time()));
+				$qpa = db_construct_qpa($qpa, ' close_date=$1,', array($now));
 			} else {
 			  $qpa = db_construct_qpa($qpa, ' close_date=$1,', array(0));
 			}
@@ -1140,7 +1142,7 @@ class Artifact extends Error {
 		if ($update || $send_message){
 			if (!empty($changes)) {
 				// Send the email with changes
-				$this->mailFollowup(2, false, $changes);
+				$this->mailFollowupEx($now, 2, false, $changes);
 			}
 			db_commit();
 			return true;
@@ -1497,15 +1499,16 @@ class Artifact extends Error {
 	}				
 
 	/**
-	 *	mailFollowup - send out an email update for this artifact.
+	 *	mailFollowupEx - send out an email update for this artifact.
 	 *
+	 *	@param	time_t	Time of the change
 	 *	@param	int		(1) initial/creation (2) update.
 	 *	@param	array	Array of additional addresses to mail to.
 	 *	@param	array	Array of fields changed in this update .
 	 *	@access private
 	 *	@return	boolean	success.
 	 */
-	function mailFollowup($type, $more_addresses=false, $changes='') {
+	function mailFollowupEx($tm,$type,$more_addresses=false,$changes='') {
 
 		$monitor_ids = array();
 
@@ -1522,9 +1525,16 @@ class Artifact extends Error {
 			}
 		} else {
 			if ($sess) {
-				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName ();
+				$body = $this->ArtifactType->getName() .
+				    " item #" . $this->getID() .
+				    " was changed at " .
+				    date(_('Y-m-d H:i'), $tm) . " by " .
+				    $sess->getRealName();
 			} else {
-				$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was changed at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
+				$body = $this->ArtifactType->getName() .
+				    " item #" . $this->getID() .
+				    " was changed at " .
+				    date(_('Y-m-d H:i'), $tm);
 			}
 		}
 			      
