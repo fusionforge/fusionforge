@@ -28,6 +28,7 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'docman/Parsedata.class.php';
+require_once $gfcommon.'docman/DocumentManager.class.php';
 
 class Document extends Error {
 
@@ -568,6 +569,17 @@ class Document extends Error {
 	}
 
 	/**
+	 * clearMonitor - remove all entries of monitoring for this document.
+	 *
+	 * @return	boolean	true if success.
+	 */
+	function clearMonitor() {
+		$result = db_query_params('DELETE FROM docdata_monitored_docman WHERE doc_id = $1',
+					array($this->getID()));
+		return true;
+	}
+
+	/**
 	 * setState - set the stateid of the document.
 	 *
 	 * @param	int	The state id of the doc_states table.
@@ -598,11 +610,11 @@ class Document extends Error {
 	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$res = db_query_params('UPDATE doc_data SET
-					locked=$1,
-					locked_by=$2,
-					lockdate=$3
-					WHERE group_id=$4
-					AND docid=$5',
+					locked = $1,
+					locked_by = $2,
+					lockdate = $3
+					WHERE group_id = $4
+					AND docid = $5',
 					array($stateLock,
 						$userid,
 						$thistime,
@@ -628,10 +640,10 @@ class Document extends Error {
 	 */
 	function setReservedBy($statusReserved, $idReserver = NULL) {
 		$res = db_query_params('UPDATE doc_data SET
-					reserved=$1,
-					reserved_by=$2
-					WHERE group_id=$3
-					AND docid=$4',
+					reserved = $1,
+					reserved_by = $2
+					WHERE group_id = $3
+					AND docid = $4',
 					array($statusReserved,
 						$idReserver,
 						$this->Group->getID(),
@@ -937,7 +949,12 @@ class Document extends Error {
 	 */
 	function trash() {
 		$this->setState('2');
+		$dm = new DocumentManager($this->Group);
+		$this->setParentDocID($dm->getTrashID());
+		$this->setLock(0);
+		$this->setReservedBy(0);
 		$this->sendNotice(false);
+		$this->clearMonitor();
 		return true;
 	}
 

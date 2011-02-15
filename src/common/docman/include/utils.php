@@ -65,22 +65,20 @@ function doc_get_state_box($checkedval = 'xzxz') {
  */
 function docman_recursive_display($docgroup) {
 	global $nested_groups, $group_id;
-	global $idExposeTreeIndex, $dirid, $idhtml;
+	global $idExposeTreeIndex, $dirid, $idhtml, $linkmenu;
 
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
 			$idhtml++;
 
-			if ($dg->getState() != 2) {
-				if ($dirid == $dg->getID())
-					$idExposeTreeIndex = $idhtml;
+			if ($dirid == $dg->getID())
+				$idExposeTreeIndex = $idhtml;
 
-				echo "
-					['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=listfile&dirid=".$dg->getID()."', '', '',";
-						docman_recursive_display($dg->getID());
-				echo ",
-					],";
-			}
+			echo "
+				['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=".$linkmenu."&dirid=".$dg->getID()."', '', '',";
+					docman_recursive_display($dg->getID());
+			echo ",
+				],";
 		}
 	}
 }

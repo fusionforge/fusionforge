@@ -27,6 +27,7 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/Document.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';

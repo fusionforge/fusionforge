@@ -52,8 +52,10 @@ $d_arr =& $df->getDocuments();
 
 $trashnested_docs = array();
 /* put the doc objects into an array keyed of the docgroup */
-foreach ($d_arr as $doc) {
-	$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+if (is_array($d_arr)) {
+	foreach ($d_arr as $doc) {
+		$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+	}
 }
 
 /* set to trash content of this dirid */
@@ -65,7 +67,8 @@ $currentParent = $dg->getParentID();
 if (!$dg->setStateID('2'))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-if (!$dg->setParentDocGroupId('0'))
+$dm = new DocumentManager($g);
+if (!$dg->setParentDocGroupId($dm->getTrashID()))
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$currentParent.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 $return_msg = sprintf(_('Directory %s moved to trash successfully.'),$dg->getName());

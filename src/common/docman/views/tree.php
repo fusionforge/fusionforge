@@ -28,6 +28,7 @@
 /* global variables used */
 global $group_id; // id of the group
 global $nested_docs;
+global $linkmenu;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -56,7 +57,7 @@ echo '<div id="documenttree" style="height:100%">';
 <script type="text/javascript">
 	var myMenu =
 		[
-			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '<?php echo '?group_id='.$group_id.'&view=listfile' ?>', '', '', <?php docman_recursive_display(0); ?>
+			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '<?php echo '?group_id='.$group_id.'&view='.$linkmenu ?>', '', '', <?php docman_recursive_display(0); ?>
 			]
 		];
 

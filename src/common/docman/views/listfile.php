@@ -47,15 +47,16 @@ $df->setDocGroupID($dirid);
 */
 $d_arr =& $df->getDocuments();
 $nested_groups = $dgf->getNested();
+$linkmenu = 'listfile';
 
 $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-$DocGroupName = getNameDocGroup($dirid, $group_id);
-if (!$DocGroupName) {
-	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
-}
+	$DocGroupName = getNameDocGroup($dirid, $group_id);
+	if (!$DocGroupName) {
+		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
+	}
 }
 
 if ($d_arr != NULL ) {
@@ -74,31 +75,31 @@ if ($d_arr != NULL ) {
 var controller;
 
 jQuery(document).ready(function() {
-controllerListFile = new DocManListFileController({
-	groupId:		<?php echo $group_id ?>,
-	tipsyElements:		[
-					{selector: '#docman-additem', options:{delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#docman-trashdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-reserveddocument', options:{delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '.docman-newdocument', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
-				],
+	controllerListFile = new DocManListFileController({
+		groupId:		<?php echo $group_id ?>,
+		tipsyElements:		[
+						{selector: '#docman-additem', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-trashdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-reserveddocument', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-movetotrash', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-releasereservation', options:{gravity: 'ne',delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-reservefile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-newdocument', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
+					],
 
-	divAddItem:		jQuery('#additem'),
-	divEditDirectory:	jQuery('#editdocgroup'),
-	buttonAddItem:		jQuery('#docman-additem'),
-	buttonEditDirectory:	jQuery('#docman-editdirectory'),
-	docManURL:		'<?php util_make_uri("docman") ?>',
-	lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
-});
+		divAddItem:		jQuery('#additem'),
+		divEditDirectory:	jQuery('#editdocgroup'),
+		buttonAddItem:		jQuery('#docman-additem'),
+		buttonEditDirectory:	jQuery('#docman-editdirectory'),
+		docManURL:		'<?php util_make_uri("docman") ?>',
+		lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
+	});
 });
 
 </script>
