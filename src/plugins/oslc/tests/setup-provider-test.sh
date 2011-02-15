@@ -31,15 +31,16 @@ userId=oslctest
 pw=oslctest
 
 # Values: http://open-services.net/xmlns/cm/1.0/ | http://open-services.net/ns/cm# | both
-testVersions=http://open-services.net/xmlns/cm/1.0/
+#testVersions=http://open-services.net/xmlns/cm/1.0/
+testVersions=http://open-services.net/ns/core#
 
 ##QUERY PROPERTIES##
 #The query parameter that should be used to test equality
-queryEqualityProperty=dc:title
+queryEqualityProperty=dcterms:title
 #The parameter value used with the parameter to test equality (record with this value should exist in the system)
 queryEqualityValue=another ticket
 #The query parameter that should be used to test equality
-queryComparisonProperty=dc:modified
+queryComparisonProperty=dcterms:modified
 #The parameter value used with the parameter to test comparisons (should split the results into two non-empty sets)
 queryComparisonValue=2010-08-16T20:16:03.578Z
 #Additional non-OSLC parameters that need to be included to run queries
@@ -74,4 +75,7 @@ EOF
 fi
 
 mvn clean
+
+##surefire reports for the OSLC testsuite results##
+ln -s /root/fusionforge-Branch_5_1/src/plugins/oslc/tests/provider-test/target/site /usr/share/gforge/plugins/oslc/www/surefire
 
