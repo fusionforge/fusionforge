@@ -5,10 +5,24 @@
 ## DP: No description.
 
 @DPATCH@
-diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/include/html.php src/www/include/html.php
---- src~/www/include/html.php	2010-10-19 21:04:18.000000000 +0200
-+++ src/www/include/html.php	2010-10-29 09:29:40.576563257 +0200
-@@ -353,7 +353,7 @@
+Index: src/www/themes/funky/Theme.class.php
+===================================================================
+--- src/www/themes/funky/Theme.class.php	(revision 12285)
++++ src/www/themes/funky/Theme.class.php	(working copy)
+@@ -382,7 +382,7 @@
+ 	*/
+ 	function headerJS()
+ 	{
+-		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
++		use_javascript('/scripts/jquery/jquery.min.js');
+ 
+ 		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
+ 		echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
+Index: src/www/include/html.php
+===================================================================
+--- src/www/include/html.php	(revision 12285)
++++ src/www/include/html.php	(working copy)
+@@ -361,7 +361,7 @@
  }
  
  function html_use_tooltips() {
@@ -17,15 +31,3 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
  	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
  	use_javascript('/js/tooltips.js');
  	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
-diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/themes/funky/Theme.class.php src/www/themes/funky/Theme.class.php
---- src~/www/themes/funky/Theme.class.php	2010-10-28 19:55:57.000000000 +0200
-+++ src/www/themes/funky/Theme.class.php	2010-10-29 09:29:41.636561367 +0200
-@@ -394,7 +394,7 @@
-      */
-     function headerJS()
-     {
--		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
-+		use_javascript('/scripts/jquery/jquery.min.js');
- 
-         echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
-         echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
