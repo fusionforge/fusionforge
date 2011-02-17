@@ -68,7 +68,6 @@ delivery/fusionforge/package/config -text
 delivery/gforge/package/config -text
 delivery/novaforge/package/config -text
 /fix_phpunit.xslt -text svneol=unset#text/xml
-/gforge -text
 hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text svneol=unset#image/png
 htdocs/favicon.ico -text
