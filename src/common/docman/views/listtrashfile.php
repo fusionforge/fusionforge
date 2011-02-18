@@ -69,7 +69,8 @@ if ($d_arr != NULL ) {
 	}
 }
 
-if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 1)) {
+// $nested_groups has a system directory : .trash => so count < 2
+if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 2)) {
 	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
 	echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
