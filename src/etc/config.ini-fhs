@@ -6,4 +6,6 @@ data_path = /var/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
 
+
+; look at files in /etc/gforge/config.ini.d/ for more options
 extra_config_dirs = "$core/config_path/config.ini.d"
