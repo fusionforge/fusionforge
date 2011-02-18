@@ -17,26 +17,30 @@ default:
 
 include /usr/share/dpatch/dpatch.make
 
-PPOSTINST=$(patsubst plugins/%/NAME,debian/$(PACKAGE)-plugin-%.postinst,$(wildcard plugins/*/NAME))
-PPRERM=$(patsubst plugins/%/NAME,debian/$(PACKAGE)-plugin-%.prerm,$(wildcard plugins/*/NAME))
+# The substitutions bellow can be quite tricky, so use 'debian/rules testpat' to check if it's OK
 
-CRONDFILES=$(patsubst packaging/cron.d/%,debian/$(OLDPACKAGE)-%.cron.d,$(wildcard packaging/cron.d/[a-z]*))
-PCRONDFILES=$(patsubst %,debian/$(PACKAGE)-%.cron.d,$(shell ls  plugins/*/packaging/cron.d/[a-z]* | sed 's,.*/,,'))
+# generate a list of all .postinst filenames for all plugins which contain a 'NAME' file
+PPOSTINST=$(patsubst plugins/%/NAME, debian/$(PACKAGE)-plugin-%.postinst, $(wildcard plugins/*/NAME))
+# generate a list of all .prerm filenames for all plugins which contain a 'NAME' file
+PPRERM=$(patsubst plugins/%/NAME, debian/$(PACKAGE)-plugin-%.prerm, $(wildcard plugins/*/NAME))
 
-DIRSFILES=$(patsubst packaging/dirs/%,debian/$(OLDPACKAGE)-%.dirs,$(wildcard packaging/dirs/[a-z]*))
-PDIRSFILES=$(patsubst %,debian/$(PACKAGE)-%.dirs,$(shell ls  plugins/*/packaging/dirs/[a-z]* | sed 's,.*/,,'))
+CRONDFILES=$(patsubst packaging/cron.d/%, debian/$(OLDPACKAGE)-%.cron.d, $(wildcard packaging/cron.d/[a-z]*))
+PCRONDFILES=$(patsubst %, debian/$(PACKAGE)-%.cron.d, $(shell ls  plugins/*/packaging/cron.d/[a-z]* | sed 's,.*/,,'))
 
-LINKSFILES=$(patsubst packaging/links/%,debian/$(OLDPACKAGE)-%.links,$(wildcard packaging/links/[a-z]*))
-PLINKSFILES=$(patsubst %,debian/$(PACKAGE)-%.links,$(shell ls  plugins/*/packaging/links/[a-z]* | sed 's,.*/,,'))
+DIRSFILES=$(patsubst packaging/dirs/%, debian/$(OLDPACKAGE)-%.dirs, $(wildcard packaging/dirs/[a-z]*))
+PDIRSFILES=$(patsubst %, debian/$(PACKAGE)-%.dirs, $(shell ls  plugins/*/packaging/dirs/[a-z]* | sed 's,.*/,,'))
 
-INSTALLFILES=$(patsubst packaging/install/%,debian/$(OLDPACKAGE)-%.install,$(wildcard packaging/install/[a-z]*))
-PINSTALLFILES=$(patsubst %,debian/$(PACKAGE)-%.install,$(shell ls  plugins/*/packaging/install/[a-z]* | sed 's,.*/,,'))
+LINKSFILES=$(patsubst packaging/links/%, debian/$(OLDPACKAGE)-%.links, $(wildcard packaging/links/[a-z]*))
+PLINKSFILES=$(patsubst %, debian/$(PACKAGE)-%.links, $(shell ls  plugins/*/packaging/links/[a-z]* | sed 's,.*/,,'))
 
-DOCSFILES=$(patsubst packaging/docs/%,debian/$(OLDPACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*)) \
-		$(patsubst packaging/docs/%,debian/$(PACKAGE)-%.docs,$(wildcard packaging/docs/[a-z]*))
-PDOCSFILES=$(patsubst %,debian/$(PACKAGE)-%.docs,$(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's,.*/,,'))
+INSTALLFILES=$(patsubst packaging/install/%, debian/$(OLDPACKAGE)-%.install, $(wildcard packaging/install/[a-z]*))
+PINSTALLFILES=$(patsubst %, debian/$(PACKAGE)-%.install, $(shell ls  plugins/*/packaging/install/[a-z]* | sed 's,.*/,,'))
 
-POFILES=$(patsubst debian/dsf-po/%,debian/po/%,$(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
+DOCSFILES=$(patsubst packaging/docs/%, debian/$(OLDPACKAGE)-%.docs, $(wildcard packaging/docs/[a-z]*)) \
+		$(patsubst packaging/docs/%, debian/$(PACKAGE)-%.docs, $(wildcard packaging/docs/[a-z]*))
+PDOCSFILES=$(patsubst %, debian/$(PACKAGE)-%.docs, $(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's,.*/,,'))
+
+POFILES=$(patsubst debian/dsf-po/%, debian/po/%, $(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
 testpat:
 	@echo "PPOSTINST=$(PPOSTINST)"
@@ -105,7 +109,7 @@ debian/po/templates.pot: $(wildcard debian/dsf-in/*.templates.dsfh-in) $(wildcar
 	@debconf-updatepo --podir=debian/dsf-po
 
 debian/po/%:
-	cat $(patsubst debian/po/%,debian/dsf-po/%,$@) | $(SED_REPLACE) > $@
+	cat $(patsubst debian/po/%, debian/dsf-po/%, $@) | $(SED_REPLACE) > $@
 
 .PHONY: patch
 
@@ -187,16 +191,16 @@ install: build
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-web-apache2/usr/share/*/www/themes/$(OLDPACKAGE)/COPYING
 
 # Remove Snoopy class from binary packages (provided by libphp-snoopy)
-	find $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) -name Snoopy.class.php | xargs -r rm
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name Snoopy.class.php | xargs -r rm
 
 # Remove NuSOAP class from binary packages (provided by libnusoap-php)
-	find $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) -name nusoap.php | xargs -r rm
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name nusoap.php | xargs -r rm
 
 # Remove potential SCM artefacts from binary packages
-	find $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name .svn -or -name {arch} -or -name .arch-ids -or -name .bzr -or -name .cvsignore | xargs -r rm -rf
 
 # Also remove uuencoded files
-	find $(addprefix $(CURDIR)/debian/,$(shell dh_listpackages)) -name \*.uu | xargs -r rm
+	find $(addprefix $(CURDIR)/debian/, $(shell dh_listpackages)) -name \*.uu | xargs -r rm
 
 binary: install
 
