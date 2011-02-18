@@ -3,7 +3,7 @@
 # This should setup an OSLC Provider test suite environment
 
 # Fist, make sure the plugin is installed
-aptitude install fusionforge-plugin-oslc
+#aptitude install fusionforge-plugin-oslc
 
 # Dependencies : installed Maven 2 and JDK (aptitude install maven2 default-jdk)
 
