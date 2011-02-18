@@ -26,4 +26,5 @@ else
     a2dissite default
     invoke-rc.d apache2 restart
     su - postgres -c "pg_dump -Fc gforge" > /root/dump
+    echo "If you saw a message like 'Could not connect to database' above, don't worry, it's probably harmless."
 fi
