@@ -6,6 +6,14 @@
 # scripts symlink to give the correct up-to-date scripts versions to
 # the user
 
+# This script, itself, may need to be brought up-to-date.
+#
+# You may try : 
+#   wget "https://fusionforge.org/scm/viewvc.php/*checkout*/trunk/tools/VM-scripts/configure-scripts.sh?root=fusionforge"
+# to get the latest version from the trunk (replace '/trunk' by
+# '/branches/Branch_5_1' for Branch 5.1's version for instance.
+#
+
 if [ $# -ne 1 ]; then
     echo "Please provide branch name to work on (Branch_5_1|trunk)"
     exit 1
