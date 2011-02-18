@@ -29,30 +29,6 @@
  * tooling library
  */
 
-function getNameDocGroup($id, $group) {
-	$group_object = group_get_object($group);
-	$res = db_query_params('SELECT groupname FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-				array($id, $group));
-	if (!$res || db_numrows($res) < 1) {
-		$group_object->setError('DocumentGroup::'. _('Invalid DocumentGroup ID'));
-		return false;
-	} else {
-		return (db_result($res, 0, 'groupname'));
-	}
-}
-
-function getStateDocGroup($id, $group) {
-	$group_object = group_get_object($group);
-	$res = db_query_params('SELECT stateid FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
-				array($id, $group));
-	if (!$res || db_numrows($res) < 1) {
-		$group_object->setError('DocumentGroup:: '. _('Invalid DocumentGroup ID'));
-		return false;
-	} else {
-		return (db_result($res, 0, 'stateid'));
-	}
-}
-
 function doc_get_state_box($checkedval = 'xzxz') {
 	$res_states = db_query_params('select * from doc_states', array());
 	echo html_build_select_box($res_states, 'stateid', $checkedval, false);

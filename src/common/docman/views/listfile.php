@@ -33,6 +33,7 @@ global $dgf; // document group factory
 global $HTML; // Layout object
 global $u; // User object
 global $use_tooltips; // enable or not tooltips in docman
+global $g; // the Group object
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -53,7 +54,8 @@ $nested_docs = array();
 $DocGroupName = 0;
 
 if ($dirid) {
-	$DocGroupName = getNameDocGroup($dirid, $group_id);
+	$ndg = new DocumentGroup($g,$dirid);
+	$DocGroupName = $ndg->getName();
 	if (!$DocGroupName) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
