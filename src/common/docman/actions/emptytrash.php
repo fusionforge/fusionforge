@@ -38,10 +38,10 @@ $emptyFile = db_query_params('DELETE FROM doc_data WHERE stateid=$1 and group_id
 if (!$emptyFile)
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode(db_error()));
 
-$emptyDir = db_query_params('DELETE FROM doc_groups WHERE stateid=$1 and group_id=$2 and groupname !=$3',array('2',$group_id));
+$emptyDir = db_query_params('DELETE FROM doc_groups WHERE stateid=$1 and group_id=$2 and groupname !=$3',array('2',$group_id,'.trash'));
 if (!$emptyDir)
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode(db_error()));
 
 $return_msg = _('Emptied Trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=trashfile&feedback='.urlencode($return_msg));
+session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&feedback='.urlencode($return_msg));
 ?>
