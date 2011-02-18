@@ -68,15 +68,19 @@ if [ -L ./scripts ]; then
     rm ./scripts
 fi
 
-echo "Creating a link from 'fusionforge-$BRANCH/tools/VM-scripts/' to './scripts'."
-ln -s "fusionforge-$BRANCH/tools/VM-scripts/" scripts
+if [ -d "fusionforge-$BRANCH/tools/VM-scripts/" ]; then
+    echo "Creating a link from 'fusionforge-$BRANCH/tools/VM-scripts/' to './scripts'."
+    ln -s "fusionforge-$BRANCH/tools/VM-scripts/" scripts
 
-if [ -L scripts/reload-db.sh ]; then
-    oldlink=$(ls -ld scripts/reload-db.sh)
-    echo "Removing old scripts/reload-db.sh link ($oldlink)"
-    rm scripts/reload-db.sh
+    if [ -L scripts/reload-db.sh ]; then
+	oldlink=$(ls -ld scripts/reload-db.sh)
+	echo "Removing old scripts/reload-db.sh link ($oldlink)"
+	rm scripts/reload-db.sh
+    fi
+
+    echo "Creating a link from 'fusionforge-$BRANCH/tests/func/db_reload.sh' to 'scripts/reload-db.sh'."
+    ln -s "../../tests/func/db_reload.sh" scripts/reload-db.sh
+else
+    echo "Warning: there appears to be no 'fusionforge-$BRANCH/tools/VM-scripts/' directory."
+    echo "You may need to update the contents of the checked-out copy in 'fusionforge-$BRANCH/'."
 fi
-
-echo "Creating a link from 'fusionforge-$BRANCH/tests/func/db_reload.sh' to 'scripts/reload-db.sh'."
-ln -s "../../tests/func/db_reload.sh" scripts/reload-db.sh
-
