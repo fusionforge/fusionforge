@@ -2125,6 +2125,7 @@ src/plugins/oslc/include/oslcPlugin.class.php -text
 src/plugins/oslc/packaging/control/222plugin-oslc -text
 src/plugins/oslc/packaging/control/222plugin-oslc.shortdesc -text
 src/plugins/oslc/packaging/dirs/plugin-oslc -text
+src/plugins/oslc/packaging/docs/README.Debian -text
 src/plugins/oslc/packaging/docs/plugin-oslc -text
 src/plugins/oslc/packaging/install/plugin-oslc -text
 src/plugins/oslc/packaging/links/plugin-oslc -text
