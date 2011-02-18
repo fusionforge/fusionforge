@@ -1,3 +1,10 @@
+;
+; This is the main file that defines configuration of FusionForge (since 5.1)
+;
+; See the documentation in the wiki for more details :
+; https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Configuration#Configuration_files
+;
+
 [core]
 forge_name = FusionForge
 
