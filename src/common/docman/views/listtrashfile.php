@@ -82,16 +82,18 @@ if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) 
 	echo '<div style="float:left; width:82%;">';
 	if ($DocGroupName) {
 		echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
-		echo '<a href="#" id="docman-editdirectory" ';
-		if ($use_tooltips)
-			echo 'title="'._('Edit this directory').'"';
+		if ($DocGroupName != '.trash') {
+			echo '<a href="#" id="docman-editdirectory" ';
+			if ($use_tooltips)
+				echo 'title="'._('Edit this directory').'"';
 
-		echo ' >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
-		echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" ';
-		if ($use_tooltips)
-			echo ' title="'._('Delete permanently this directory and his content.').'" ';
+			echo ' >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
+			echo '<a href="?group_id='.$group_id.'&action=deldir&dirid='.$dirid.'" id="docman-deletedirectory" ';
+			if ($use_tooltips)
+				echo ' title="'._('Delete permanently this directory and his content.').'" ';
 
-		echo '>'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+			echo '>'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
+		}
 
 		echo '</h3>';
 
