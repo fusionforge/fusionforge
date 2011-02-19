@@ -25,6 +25,8 @@
 3rd-party/mailman/mailman_2.1.13-2coclico1.dsc -text
 3rd-party/mailman/mailman_2.1.13-2coclico4.diff.gz -text svneol=unset#application/gzip
 3rd-party/mailman/mailman_2.1.13-2coclico4.dsc -text
+3rd-party/mailman/mailman_2.1.13-4.1.debian.tar.gz -text svneol=unset#unset
+3rd-party/mailman/mailman_2.1.13-4.1.dsc -text
 3rd-party/mailman/mailman_2.1.13.orig.tar.gz -text svneol=unset#application/gzip
 3rd-party/nusoap/Makefile -text
 3rd-party/nusoap/Makefile.debian -text
