@@ -27,8 +27,6 @@ set -e
 
 case "$1" in
     configure)
-        @PACKAGE@-config
-
 	db_stop
         # Setup our Apache
 	touch /var/lib/@OLDPACKAGE@/etc/templates/httpd.vhosts  && \

@@ -27,8 +27,6 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
-
         # Patch NSS configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-nsspgsql.sh configure-files
 	ucf --debconf-ok /etc/nss-pgsql.conf.@OLDPACKAGE@-new /etc/nss-pgsql.conf

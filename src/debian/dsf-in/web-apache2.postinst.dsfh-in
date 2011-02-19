@@ -51,8 +51,6 @@ case "$1" in
 	    ln -s /etc/ssl/private/ssl-cert-snakeoil.key /etc/@OLDPACKAGE@/ssl-cert.key
 	fi
 	
-        #fusionforge-config
-
 	for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
 	    if [ ! -e /etc/gforge/httpd.conf.d/$i ] ; then
 		cp /usr/share/gforge/etc/httpd.conf.d-fhs/$i /etc/gforge/httpd.conf.d/$i

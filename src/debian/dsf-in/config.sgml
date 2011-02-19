@@ -65,6 +65,7 @@
       files derived from standard fill-in-the-blank templates (found
       in /usr/share/@PACKAGE@/templates).  The values used to fill in
       the blanks are taken from /etc/@PACKAGE@/@PACKAGE@.conf.
+      @PACKAGE@-config HAS BEEN REMOVED AND IS NOT ANYMORE REQUIRED
     </para>
 
   </refsect1>

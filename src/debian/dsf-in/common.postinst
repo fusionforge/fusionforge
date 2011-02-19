@@ -87,7 +87,6 @@ EOF
 	    PATH=$PATH:/usr/share/gforge/bin migrate-to-ini-files.sh
 	fi 
 
-	@PACKAGE@-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

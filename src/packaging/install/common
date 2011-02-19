@@ -6,7 +6,6 @@ deb-specific/cvssh                     bin/
 deb-specific/install-chroot.sh         usr/share/@OLDPACKAGE@/bin/
 deb-specific/install-ssh.sh            usr/share/@OLDPACKAGE@/bin/
 utils/fill-in-the-blanks.pl            usr/share/@OLDPACKAGE@/bin/
-deb-specific/@PACKAGE@-config          usr/sbin/
 utils/include.pl                       usr/share/@OLDPACKAGE@/lib/
 utils/forge_get_config                 usr/share/@OLDPACKAGE@/bin/
 utils/migrate-to-ini-files.sh	       usr/share/@OLDPACKAGE@/bin/

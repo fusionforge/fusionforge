@@ -56,8 +56,6 @@ case "$1" in
     configure)
 	add_onevar_mainconfile default_trove_cat 18
 
-	@PACKAGE@-config
-
         # Patch DB configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-db.sh configure-files
 	ucf --debconf-ok ${pg_hba_dir}/pg_hba.conf.@OLDPACKAGE@-new ${pg_hba_dir}/pg_hba.conf

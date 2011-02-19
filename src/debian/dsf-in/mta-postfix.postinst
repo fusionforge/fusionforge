@@ -27,8 +27,6 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
-
         # Patch Postfix configuration files
 	/usr/share/@OLDPACKAGE@/bin/install-postfix.sh configure-files
 	ucf --debconf-ok /etc/aliases.@OLDPACKAGE@-new /etc/aliases

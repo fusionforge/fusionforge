@@ -27,8 +27,6 @@ set -e
 
 case "$1" in
     configure)
-	@PACKAGE@-config
-	
 	echo "Fixing past damage in mailing-lists..."
 	if [ -z "$2" ] || dpkg --compare-versions $2 le 3rc2-4 ; then
 	    /usr/share/@OLDPACKAGE@/bin/fix-mailing-lists.pl
