@@ -171,6 +171,7 @@ debianhtml: docbook-xml docbook-xsl libxml2-utils xsltproc
 	@echo "=====> Link to docbook"
 	@[ ! -L xsl/docbook ] && ln -s /usr/share/xml/docbook/stylesheet/nwalsh xsl/docbook || echo "docbook link already done"
 	@make html
+	@rm -f xsl/docbook
 
 debianpdf: xsltproc fop
 	@make pdffop
