@@ -46,7 +46,11 @@ if (getenv('sys_localinc')) {
 	$gfconfig = '/etc/gforge/';
 } else {
 	$gfcgfile = 'local.inc';
-	$gfconfig = '';
+	if (is_dir('/etc/gforge')){
+                $gfconfig = '/etc/gforge';
+        } else {
+		$gfconfig = '';
+	}
 }
 
 if( !ini_set('include_path', $include_path ) && !set_include_path( $include_path )) {
