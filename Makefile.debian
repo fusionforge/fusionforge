@@ -225,10 +225,10 @@ orig:   # Make Debian package .orig tarball #
 phpdoc: $(PKGDIR)/docs/phpdoc/docs 
 
 doc:
-	(cd src/docs/docbook ; make debian)
+	(cd src/docs/docbook ; make debian TARGET=$(CURDIR)/build/docs/docbook/)
 
 cleandoc:
-	(cd src/docs/docbook ; make clean)
+	(cd src/docs/docbook ; make clean TARGET=$(CURDIR)/build/docs/docbook/)
 
 phpdocumentor_get:
 	[ ! -f $(documentor_path)/$(documentor_file) ] && \
