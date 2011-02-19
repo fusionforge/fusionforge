@@ -1,6 +1,0 @@
-# PLEASE DO NOT REMOVE THIS LINE
-sys_dbhost="";
-sys_dbname="alexandria";
-sys_dbuser="www";
-sys_dbpasswd="";
-sys_ldap_passwd="";
