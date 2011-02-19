@@ -167,26 +167,36 @@ clean:
 
 debian: debianhtml debianpdf
 
-debianhtml:
-	@echo "=====> Intalling necessary packages"
-	@sudo apt-get install docbook-xml docbook-xsl libxml2-utils xsltproc
+debianhtml: docbook-xml docbook-xsl libxml2-utils xsltproc
 	@echo "=====> Link to docbook"
 	@[ ! -L xsl/docbook ] && ln -s /usr/share/xml/docbook/stylesheet/nwalsh xsl/docbook || echo "docbook link already done"
 	@make html
 
-debianpdfold:
-	@echo "=====> Intalling necessary packages"
-	@sudo apt-get install db2latex-xsl texlive-latex-recommended # Was tetex-extra latex-ucs
-	@echo "Making db2latex dir"
-	@[ ! -d xsl/db2latex ] && mkdir xsl/db2latex || echo "db2latex dir already done"
-	@echo "=====> Link to docbook"
-	@[ ! -L xsl/db2latex/xsl ] && ln -s /usr/share/xml/docbook/stylesheet/db2latex/latex xsl/db2latex/xsl || echo "docbook link already done"
-	@make pdf
-
-debianpdf:
-	@echo "=====> Intalling necessary packages"
-	@sudo apt-get install xsltproc fop
+debianpdf: xsltproc fop
 	@make pdffop
 
-#xsltproc --xinclude -o tmp.fo $(XSL)/fo-stylesheet.xsl $(XML)/user_guide/user_guide_full.xml
-#$(FOP) -fo tmp.fo -pdf help_guide/user_guide.pdf
+docbook-xml: /usr/share/xml/docbook
+docbook-xsl: /usr/share/doc/docbook-xsl
+libxml2-utils: /usr/bin/xmllint
+xsltproc: /usr/bin/xsltproc
+fop: /usr/bin/fop
+
+/usr/share/xml/docbook:
+	@echo "=====> Intalling necessary docbook-xml package"
+	@sudo apt-get install docbook-xml
+
+/usr/share/doc/docbook-xsl:
+	@echo "=====> Intalling necessary docbook-xsl package"
+	@sudo apt-get install docbook-xsl
+
+/usr/bin/xmllint:
+	@echo "=====> Intalling necessary xmllint package"
+	@sudo apt-get install libxml2-utils
+
+/usr/bin/xsltproc:
+	@echo "=====> Intalling necessary xsltproc package"
+	@sudo apt-get install xsltproc
+
+/usr/bin/fop:
+	@echo "=====> Intalling necessary fop package"
+	@sudo apt-get install fop
