@@ -887,14 +887,7 @@ DEFINE(&quot;USE_CACHE&quot;, false);
       <section>
         <title>Perl</title>
         <para>If you want to use some of the Perl scripts that access the database, you&apos;ll need the <literal>DBI</literal> and <literal>DBD::Pg</literal> Perl modules.  On Red Hat systems (and variants), you can get them by installing the <literal>libdbi</literal> and <literal>libdbd-pgsql</literal> packages.  On Debian systems (and variants), the packages are called <literal>libdbi-perl</literal> and <literal>libdbd-pg-perl</literal>.</para>
-        <para>You&apos;ll also need to install <filename>utils/include.pl</filename> to <filename class="directory">/usr/share/gforge/lib/</filename>, and put some configuration variables into <filename class="directory">/etc/gforge/local.pl</filename>.  In particular, you&apos;ll need something like the following in <filename>local.pl</filename>:</para>
-        <programlisting>
-$sys_default_domain = &apos;gforge.company.com&apos; ;
-$sys_dbhost = &apos;192.168.12.34&apos; ;
-$sys_dbname = &apos;gforge&apos; ;
-$sys_dbuser = &apos;gforge&apos; ;
-$sys_dbpasswd = &apos;p455w0rd&apos; ;
-</programlisting>
+        <para>You&apos;ll also need to install <filename>utils/include.pl</filename> to <filename class="directory">/usr/share/gforge/lib/</filename>.</para>
       </section>
       <section>
         <title>Jabber Support</title>
