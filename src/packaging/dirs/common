@@ -1,15 +1,9 @@
 bin
 etc/@PACKAGE@/config.ini.d
 etc/@OLDPACKAGE@/templates
-etc/@OLDPACKAGE@/local.d
-etc/@OLDPACKAGE@/httpd.d
 usr/share/@OLDPACKAGE@/bin
 usr/share/@OLDPACKAGE@/lib
-usr/share/@OLDPACKAGE@/etc/templates
-usr/share/@OLDPACKAGE@/etc/httpd.d
-usr/share/@OLDPACKAGE@/etc/local.d
 usr/share/@OLDPACKAGE@/common
 usr/share/locale
 usr/sbin
 var/lib/@OLDPACKAGE@/www/plugins
-var/lib/@OLDPACKAGE@/etc/templates

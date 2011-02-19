@@ -1,3 +1,2 @@
-etc/httpd.d/2[0-9]*              usr/share/@OLDPACKAGE@/etc/httpd.d/
 deb-specific/create-mailing-lists.pl usr/share/@OLDPACKAGE@/bin/
 deb-specific/fix-mailing-lists.pl    usr/share/@OLDPACKAGE@/bin/

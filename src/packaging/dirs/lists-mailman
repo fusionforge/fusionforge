@@ -1,4 +1,3 @@
 etc/@OLDPACKAGE@
 usr/share/@OLDPACKAGE@/bin
-usr/share/@OLDPACKAGE@/etc/httpd.d/
 var/lib/@OLDPACKAGE@/etc
