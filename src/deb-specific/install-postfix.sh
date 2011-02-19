@@ -16,7 +16,7 @@ case "$1" in
     configure-files)
 	cp -a /etc/aliases /etc/aliases.gforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
-	noreply_to_bitbucket=$(perl -e'require "/etc/gforge/local.pl"; print "$noreply_to_bitbucket\n";')
+	noreply_to_bitbucket=`/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket`
 	if [ "$noreply_to_bitbucket" = "true" ] ; then
 	    if ! grep -q "^noreply:" /etc/aliases.gforge-new ; then
 		echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
@@ -25,7 +25,7 @@ case "$1" in
 	fi
 
 	# Redirect "gforge" mail to the site admin
-	server_admin=$(perl -e'require "/etc/gforge/local.pl"; print "$server_admin\n";')
+	server_admin=`/usr/share/gforge/bin/forge_get_config admin_email`
 	if ! grep -q "^gforge:" /etc/aliases.gforge-new ; then
 	    echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
 	    echo "gforge: $server_admin" >> /etc/aliases.gforge-new
@@ -41,7 +41,7 @@ case "$1" in
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right - add gforge domains to 'mydestination'
 	perl -e '
-require ("/etc/gforge/local.pl") ;
+chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
 my $l;
 while (($l = <>) !~ /^\s*mydestination/) { print $l; };
 chomp $l;
@@ -51,7 +51,7 @@ while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
 	grep -q '^[[:space:]]*relay_domains' $tmp1 || echo 'relay_domains = $mydestination' >>$tmp1
 	perl -i -e '
-require ("/etc/gforge/local.pl") ;
+chomp($sys_lists_host=`/usr/share/gforge/bin/forge_get_config lists_host`);
 my $l;
 while (($l = <>) !~ /^\s*relay_domains/) { print $l; };
 chomp $l;
@@ -62,7 +62,9 @@ while ($l = <>) { print $l; };
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
-require ("/etc/gforge/local.pl") ;
+chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
+chomp($sys_dbuser=`/usr/share/gforge/bin/forge_get_config database_user`);
+chomp($sys_dbname=`/usr/share/gforge/bin/forge_get_config database_name`);
 
 my $gf_block;
 my $l;
@@ -141,7 +143,7 @@ if ($seen_transport_maps == 0) {
     
     configure)
 	[ -x /usr/bin/newaliases ] && newaliases
-	perl -e'require "/etc/gforge/local.pl"; print "$sys_lists_host mailman:\n";' > /var/lib/gforge/etc/postfix-transport
+	echo "`/usr/share/gforge/bin/forge_get_config lists_host` mailman:" > /var/lib/gforge/etc/postfix-transport
 	postmap /var/lib/gforge/etc/postfix-transport	
 	;;
     
@@ -150,7 +152,7 @@ if ($seen_transport_maps == 0) {
 	tmp1=$(mktemp /tmp/$pattern)
 	cp -a /etc/aliases /etc/aliases.gforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
-	noreply_to_bitbucket=$(perl -e'require "/etc/gforge/local.pl"; print "$noreply_to_bitbucket\n";')
+	noreply_to_bitbucket=`/usr/share/gforge/bin/forge_get_config noreply_to_bitbucket`
 	if [ "$noreply_to_bitbucket" = "true" ] ; then
 	    grep -v "^noreply:" /etc/aliases.gforge-new > $tmp1
 	    cat $tmp1 > /etc/aliases.gforge-new
@@ -164,7 +166,8 @@ if ($seen_transport_maps == 0) {
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, replace the list of local domains
 	perl -e '
-require ("/etc/gforge/local.pl") ;
+chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
+chomp($sys_lists_host=`/usr/share/gforge/bin/forge_get_config lists_host`);
 while (($l = <>) !~ /^\s*mydestination/) {
   print $l;
 };
@@ -179,7 +182,7 @@ print "$l\n" ;
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
 	grep -q '^[[:space:]]*relay_domains' $tmp1 && perl -i -e '
-require ("/etc/gforge/local.pl") ;
+chomp($sys_lists_host=`/usr/share/gforge/bin/forge_get_config lists_host`);
 while (($l = <>) !~ /^\s*relay_domains/) {
   print $l;
 };

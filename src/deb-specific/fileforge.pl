@@ -11,7 +11,7 @@ no locale ;
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
 
 # Check access to secret
-require ("/etc/gforge/local.pl") ;
+require("/usr/share/gforge/lib/include.pl");
 unless ( (defined $sys_dbpasswd)
 	 and (defined $ENV{'sys_dbpasswd'})
 	 and ($sys_dbpasswd eq $ENV{'sys_dbpasswd'}) ) {

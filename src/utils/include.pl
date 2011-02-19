@@ -4,12 +4,15 @@
 ##############################
 # Global Variables
 ##############################
-$config_file	=	"/etc/gforge/local.pl";	# Local Include file for database username and password
 
 $dummy_uid      =       getpwnam('scm-gforge');                  # UserID of the dummy user that will own group's files
 $date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
 
-require $config_file;
+chomp($sys_dbuser=`/usr/share/gforge/bin/forge_get_config database_user`);
+chomp($sys_dbpasswd=`/usr/share/gforge/bin/forge_get_config database_password`);
+chomp($sys_dbhost=`/usr/share/gforge/bin/forge_get_config database_host`);
+chomp($sys_dbname=`/usr/share/gforge/bin/forge_get_config database_name`);
+chomp($sys_dbport=`/usr/share/gforge/bin/forge_get_config database_port`);
 
 ##############################
 # Database Connect Functions

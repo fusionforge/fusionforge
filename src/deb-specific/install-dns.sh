@@ -14,8 +14,8 @@ fi
 case "$1" in
     configure-files)
 	cp -a /etc/bind/named.conf /etc/bind/named.conf.gforge-new
-	domain_name=$(perl -e'require "/etc/gforge/local.pl"; print "$domain_name\n";')
-	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_ip_address\n";')
+	domain_name=`/usr/share/gforge/bin/forge_get_config web_host`
+	ip_address=`/usr/share/gforge/bin/forge_get_config ip_address`
 	# export domain_name=$1
 	# export ip_address=$2
   	if ! grep -q "// Next line inserted by GForge install" /etc/bind/named.conf.gforge-new ; then
@@ -26,9 +26,9 @@ EOF
   	fi
 	;;
     configure)
-	domain_name=$(perl -e'require "/etc/gforge/local.pl"; print "$domain_name\n";')
-	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_ip_address\n";')
-	sys_simple_dns=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_simple_dns\n";')
+	domain_name=`/usr/share/gforge/bin/forge_get_config web_host`
+	ip_address=`/usr/share/gforge/bin/forge_get_config ip_address`
+	sys_simple_dns=`/usr/share/gforge/bin/forge_get_config simple_dns`
   	serial=`date '+%Y%m%d'`01
   	# scm_host lists_host are useless for now
   	for i in domain_name ip_address serial ; do

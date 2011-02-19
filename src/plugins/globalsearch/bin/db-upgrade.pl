@@ -31,6 +31,7 @@ sub parse_sql_file ( $ ) ;
 
 require ("/usr/share/gforge/lib/include.pl") ; # Include a few predefined functions 
 require ("/usr/share/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -77,8 +78,6 @@ eval {
     if (is_lesser $version, $target) {
     debug "Adding local data." ;
         
-    do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-
     my $packed_ip = gethostbyname("$domain_name");
     my $ip_address ;
     if (defined $packed_ip) {
