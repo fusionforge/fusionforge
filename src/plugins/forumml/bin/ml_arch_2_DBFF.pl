@@ -55,7 +55,7 @@ my $PHP_PARAMS="-q -d include_path=.:/etc/gforge:/usr/share/gforge:/usr/share/gf
 #use strict;
 use DBI;
 
-require "/etc/gforge/local.pl";
+require ("/usr/share/gforge/lib/include.pl") ;
 my $dbh = DBI->connect("DBI:Pg:host=localhost ;dbname=$sys_dbname ; user= $sys_dbuser ; password=$sys_dbpasswd") or die "Couldn't connect to database: " . DBI->errstr;
 
 
