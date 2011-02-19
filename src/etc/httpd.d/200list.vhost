@@ -1,4 +1,0 @@
-# 200list.vhost begin
-<VirtualHost *:80>
-	ServerName {lists_host}
-# 200list.vhost end

@@ -1,3 +1,0 @@
-# 01common.ssl begin
-NameVirtualHost *:443
-# 01common.ssl end
