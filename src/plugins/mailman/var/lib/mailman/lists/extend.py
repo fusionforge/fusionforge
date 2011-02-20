@@ -12,17 +12,18 @@ from Mailman.ForgeSecurityManager import ForgeSecurityManager
 import sys
 
 def extendMemberAdaptor(list):
-    sys.path.append('/etc/gforge')
-    import database 
+    from iniparse import INIConfig
+    cfg = INIConfig(open('/etc/gforge/config.ini.d/mailman.ini'))
     dbparam={}
     #Config to connect to database
-    dbparam['dbhost'] = database.sys_dbhost 
-    dbparam['dbuser']=  database.sys_dbuser
-    dbparam['dbpassword'] = database.sys_dbpasswd 
-    dbparam['database'] =  database.sys_dbname
+    dbparam['dbhost'] = cfg['mailman']['dbhost']
+    dbparam['dbuser']=  cfg['mailman']['dbuser']
+    dbparam['dbpassword'] = cfg['mailman']['dbpassword']
+    dbparam['database'] =  cfg['mailman']['database']
     dbparam['refresh'] = 360
 
-    dbparam['mailman_table']= 'plugin_mailman'#table where mailman stores memeberships info
+    #table where mailman stores memeberships info
+    dbparam['mailman_table']= 'plugin_mailman'
 
     ######################	
     # Session Management #
