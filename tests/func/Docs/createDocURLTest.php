@@ -52,8 +52,11 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->populateStandardTemplate('docs');
 		$this->init();
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("link=Add new item");
-		$this->click("//input[@name='type' and @value='document']");
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->clickAndWait("buttonDir");
+		$this->type("groupname", "docdirectory");
+		$this->clickAndWait("submitaddsubgroup");
+		$this->clickAndWait("addItemDocmanMenu");
 		$this->type("title", "My document");
 		$this->type("description", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");
@@ -62,16 +65,13 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Document http://buildbot.fusionforge.org/ submitted successfully");
 		$this->assertTextPresent("My document");
 		$this->assertTextPresent("L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
-//		$this->clickAndWait("link=My document");
-//		$this->assertEquals("fusionforge.org [Hudson]", $this->getTitle());
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
-		$this->clickAndWait("link=List files & Directories");
-		$this->clickAndWait("link=Uncategorized Submissions");
-		$this->clickAndWait("//img[@alt='Move to trash this document']");
-		$this->assertTextPresent("moved to trash successfully");
-//		$this->assertTextPresent("This project has no visible documents");
+		$this->clickAndWait("listFileDocmanMenu");
+		$this->clickAndWait("link=testdir");
+		$this->clickAndWait("//img[@alt='trashdir']");
+		$this->assertTextPresent("Directory testdir moved to trash successfully");
 	}
 }
 ?>
