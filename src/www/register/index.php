@@ -247,7 +247,7 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 
 echo '<h2>'.$index++.'. '._('Project template'). '</h2>';
 
-if (count ($template_projects) > 1) {
+if (count ($template_projects) >= 1) {
 	$tpv_arr = array () ;
 	$tpn_arr = array () ;
 	echo '<p>';
