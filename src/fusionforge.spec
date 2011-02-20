@@ -383,26 +383,26 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__cp} -a plugins/scmcvs/bin/cvssh.pl $RPM_BUILD_ROOT/bin/
 
 # Fix configuration files entries (various sys_* variables)
-%{__cp} -a etc/local.inc.example $RPM_BUILD_ROOT/%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s!/path/to/gforge!%{FORGE_DIR}!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s!/path/to/jpgraph!/var/www/jpgraph-1.19!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s/\$sys_dbname=.*/\$sys_dbname='%{dbname}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s/\$sys_dbuser=.*/\$sys_dbuser='%{dbuser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s/\$sys_apache_user=.*/\$sys_apache_user='%{httpduser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s/\$sys_apache_group=.*/\$sys_apache_group='%{httpdgroup}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s|\$sys_plugins_path=.*|\$sys_plugins_path=\"%{FORGE_DIR}/plugins\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s|\$sys_upload_dir=.*|\$sys_upload_dir=\"\$sys_var_path/upload\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
-%{__sed} -i -e "s|\$sys_urlroot=.*|\$sys_urlroot=\"%{FORGE_DIR}/www\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__cp} -a etc/local.inc.example $RPM_BUILD_ROOT/%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s!/path/to/gforge!%{FORGE_DIR}!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s!/path/to/jpgraph!/var/www/jpgraph-1.19!g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s/\$sys_dbname=.*/\$sys_dbname='%{dbname}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s/\$sys_dbuser=.*/\$sys_dbuser='%{dbuser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s/\$sys_apache_user=.*/\$sys_apache_user='%{httpduser}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s/\$sys_apache_group=.*/\$sys_apache_group='%{httpdgroup}';/g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s|\$sys_plugins_path=.*|\$sys_plugins_path=\"%{FORGE_DIR}/plugins\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s|\$sys_upload_dir=.*|\$sys_upload_dir=\"\$sys_var_path/upload\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
+#%{__sed} -i -e "s|\$sys_urlroot=.*|\$sys_urlroot=\"%{FORGE_DIR}/www\";|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/local.inc
 
 # Replace sys_localinc, sys_gfdbname, sys_gfdbuser
-%{__cp} -a etc/httpd.secrets.example $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
-%{__sed} -i -e "s|sys_localinc.*$|sys_localinc %{FORGE_CONF_DIR}/local.inc|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
-%{__sed} -i -e "s|sys_gfdbname.*$|sys_gfdbname %{dbname}|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
-%{__sed} -i -e "s|sys_gfdbuser.*$|sys_gfdbname %{dbuser}|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
+#%{__cp} -a etc/httpd.secrets.example $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
+#%{__sed} -i -e "s|sys_localinc.*$|sys_localinc %{FORGE_CONF_DIR}/local.inc|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
+#%{__sed} -i -e "s|sys_gfdbname.*$|sys_gfdbname %{dbname}|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
+#%{__sed} -i -e "s|sys_gfdbuser.*$|sys_gfdbname %{dbuser}|g" $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.secrets
 
 # Apache configuration file
-%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
-%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+#%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
+#%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
 # install fusionforge crontab
 %{__install} -m 644 packaging/cron.d/cron.fusionforge $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/%{name}
 
