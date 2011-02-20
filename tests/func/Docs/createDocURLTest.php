@@ -71,7 +71,7 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("listFileDocmanMenu");
-		$this->clickAndWait("link=testdir");
+		$this->clickAndWait("link=docdirectory");
 		$this->clickAndWait("//img[@alt='trashdir']");
 		$this->assertTextPresent("Directory testdir moved to trash successfully");
 	}
