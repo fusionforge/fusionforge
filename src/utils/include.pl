@@ -13,6 +13,9 @@ chomp($sys_dbpasswd=`/usr/share/gforge/bin/forge_get_config database_password`);
 chomp($sys_dbhost=`/usr/share/gforge/bin/forge_get_config database_host`);
 chomp($sys_dbname=`/usr/share/gforge/bin/forge_get_config database_name`);
 chomp($sys_dbport=`/usr/share/gforge/bin/forge_get_config database_port`);
+chomp($file_dir=`/usr/share/gforge/bin/forge_get_config data_path`);
+chomp($grpdir_prefix=`/usr/share/gforge/bin/forge_get_config groupdir_prefix`);
+chomp($homedir_prefix=`/usr/share/gforge/bin/forge_get_config homedir_prefix`);
 
 ##############################
 # Database Connect Functions
