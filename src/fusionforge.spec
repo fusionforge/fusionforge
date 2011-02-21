@@ -574,8 +574,8 @@ if [ "$1" -eq "1" ]; then
 	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
 
 	HOSTNAME=`hostname -f`
-	%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
-	%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
+	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
+	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
 
 	/usr/bin/php %{FORGE_DIR}/fusionforge-install-4-config.php >>/var/log/%{name}-install.log 2>&1
 
@@ -585,7 +585,7 @@ if [ "$1" -eq "1" ]; then
 
 	# generate random hash for session_key
 	HASH=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-40)
-	%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{FORGE_CONF_DIR}/local.inc
+	#%{__sed} -i -e "s/sys_session_key = 'foobar'/sys_session_key = '$HASH'/g" %{FORGE_CONF_DIR}/local.inc
 
 	# add noreply mail alias
 	echo "noreply: /dev/null" >> /etc/aliases
@@ -639,8 +639,8 @@ fi
 %defattr(-, root, root)
 %doc AUTHORS* CHANGES COPYING INSTALL* NEWS README*
 %doc docs/*
-%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
-%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
+#%attr(0660, %{httpduser}, gforge) %config(noreplace) %{FORGE_CONF_DIR}/local.inc
+#%attr(0640, %{httpduser}, %{httpdgroup}) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
 %attr(0644, root, root) %{_sysconfdir}/cron.d/%{name}
 %attr(0775, %{httpduser}, %{httpdgroup}) %dir %{FORGE_VAR_LIB}/upload
 %attr(755, root, %{httpdgroup}) %dir %{FORGE_DIR}
@@ -670,7 +670,7 @@ fi
 %{FORGE_DIR}/monitor
 %{FORGE_DIR}/translations
 %{FORGE_DIR}/utils
-%{FORGE_DIR}/setup
+#%{FORGE_DIR}/setup
 %dir %{FORGE_DIR}/www
 # files under %{FORGE_DIR}/www
 %{FORGE_DIR}/www/*.php
@@ -724,7 +724,7 @@ fi
 #%{FORGE_DIR}/plugins/quota_management
 %{FORGE_LANG_DIR}
 %dir %{FORGE_CONF_DIR}
-%config(noreplace) %{FORGE_CONF_DIR}/httpd.secrets
+#%config(noreplace) %{FORGE_CONF_DIR}/httpd.secrets
 %dir %{FORGE_CONF_DIR}/httpd.d
 %dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
 %dir %{FORGE_VAR_LIB}/scmtarballs
