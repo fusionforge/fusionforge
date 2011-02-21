@@ -27,7 +27,7 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("ssh root@".HOST." '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzzz-builbot.ini'");
 
 		// Install a fake sendmail to catch all outgoing emails.
-		system("ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc'");
+		// system("ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc'");
 
 		system("ssh root@".HOST." 'service crond stop'");
 	}
