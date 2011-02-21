@@ -31,7 +31,7 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("ssh root@".HOST." '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini'");
 
 		// Install a fake sendmail to catch all outgoing emails.
-		system("ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php# /etc/gforge/local.inc'");
+		// system("ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php# /etc/gforge/local.inc'");
 
 		system("ssh root@".HOST." 'service crond stop'");
 	}
