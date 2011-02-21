@@ -21,7 +21,7 @@ class SureFireReports extends FForge_SeleniumTestCase
     echo "\nStarting OSLC test suite\n";
     $directory = dirname(dirname(__FILE__));
     echo "Executing " . $directory . "/run-provider-tests.sh\n";
-    system('cd' . $directory . '; ./run-provider-tests.sh');
+    system('cd ' . $directory . '; ./run-provider-tests.sh');
     echo "OSLC test suite executed\n\n";
 
     // Check the results in the generated HTML report
