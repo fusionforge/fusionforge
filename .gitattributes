@@ -4201,7 +4201,6 @@ src/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 src/rpm-specific/dag-rpmforge.repo -text
 src/rpm-specific/fusionforge-ci.repo -text
 src/rpm-specific/fusionforge.repo -text
-src/rpm-specific/httpd.d/gforge.conf -text
 src/rpm-specific/patches/LocalSettings.php -text
 src/rpm-specific/patches/README.mediawiki.jlbond -text
 src/rpm-specific/patches/fusionforge-4.8.3-ereg_preg.patch -text
