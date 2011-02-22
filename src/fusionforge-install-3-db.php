@@ -318,19 +318,19 @@ function install()
 
 
 	show(' * Saving database configuration in FForge config file');
-	$data = file_get_contents("$fusionforge_etc_dir/local.inc");
-	$lines = explode("\n",$data);
-	$config = '';
-	foreach ($lines as $l) {
-		$l = preg_replace("/^.sys_dbname\s*=\s*'(.*)'/", "\$sys_dbname='$gforge_db'", $l);
-		$l = preg_replace("/^.sys_dbuser\s*=\s*'(.*)'/", "\$sys_dbuser='$gforge_user'", $l);
-		$config .= $l."\n";
-	}
+	#$data = file_get_contents("$fusionforge_etc_dir/local.inc");
+	#$lines = explode("\n",$data);
+	#$config = '';
+	#foreach ($lines as $l) {
+	#	$l = preg_replace("/^.sys_dbname\s*=\s*'(.*)'/", "\$sys_dbname='$gforge_db'", $l);
+	#	$l = preg_replace("/^.sys_dbuser\s*=\s*'(.*)'/", "\$sys_dbuser='$gforge_user'", $l);
+	#	$config .= $l."\n";
+	#}
 
-	if ($fp = fopen("$fusionforge_etc_dir/local.inc", "w")) {
-		fwrite ($fp, $config);
-		fclose($fp);	
-	}
+	#if ($fp = fopen("$fusionforge_etc_dir/local.inc", "w")) {
+	#	fwrite ($fp, $config);
+	#	fclose($fp);	
+	#}
 
 	show(' * Saving installation log in /tmp/gforge-import.log');
 }
