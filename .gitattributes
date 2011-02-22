@@ -521,8 +521,6 @@ src/common/widget/Widget_ProjectMembers.class.php -text
 src/common/widget/Widget_ProjectPublicAreas.class.php -text
 src/common/widget/Widget_ProjectRss.class.php -text
 src/common/widget/Widget_Rss.class.php -text
-src/contrib/fusionforge.dia -text
-src/contrib/migrate-from-gforge-as.pl -text svneol=unset#text/x-perl
 src/cronjobs/auth_unix.php -text
 src/cronjobs/create_scm_repos.php -text
 src/cronjobs/ftp_create_group_access.php -text
