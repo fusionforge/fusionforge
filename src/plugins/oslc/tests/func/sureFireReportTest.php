@@ -24,21 +24,15 @@ class SureFireReports extends FForge_SeleniumTestCase
     system('cd ' . $directory . '; ./run-provider-tests.sh');
     echo "OSLC test suite executed\n\n";
 
-    // Check the results in the generated HTML report
+    // Check the OSLC JUnit testsuite results in the generated HTML report
     $this->open("/plugins/oslc/surefire/surefire-report.html");
-    $this->click("link=net.openservices.provider.test.oslcv2tests");
     $this->assertEquals("net.openservices.provider.test.oslcv2tests", $this->getTable("//div[@id='contentBox']/div[3]/table.1.0"));
-    $this->assertEquals("79", $this->getTable("//div[@id='contentBox']/div[3]/table.1.1"));
-    $this->assertEquals("2", $this->getTable("//div[@id='contentBox']/div[3]/table.1.2"));
-    $this->assertEquals("0", $this->getTable("//div[@id='contentBox']/div[3]/table.1.3"));
-    $this->assertEquals("0", $this->getTable("//div[@id='contentBox']/div[3]/table.1.4"));
-    $this->assertEquals("97.468%", $this->getTable("//div[@id='contentBox']/div[3]/table.1.5"));
     $this->assertEquals("ServiceProviderCatalogXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.1.1"));
+    $this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.1.6"));
     $this->assertEquals("ServiceProviderXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.3.1"));
-    $this->assertEquals("ServiceProviderCatalogRdfXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.5.1"));
-    $this->assertEquals("17", $this->getTable("//div[@id='contentBox']/div[3]/div/table.1.2"));
-    $this->assertEquals("48", $this->getTable("//div[@id='contentBox']/div[3]/div/table.3.2"));
-    $this->assertEquals("12", $this->getTable("//div[@id='contentBox']/div[3]/div/table.5.2"));
+    $this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.3.6"));
+    $this->assertEquals("ServiceProviderCatalogRdfXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.4.1"));
+    $this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.4.6"));
   }
 }
 ?>
