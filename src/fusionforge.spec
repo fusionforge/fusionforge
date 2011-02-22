@@ -659,7 +659,7 @@ fi
 # Directories under %{FORGE_DIR}
 %{FORGE_DIR}/backend
 %{FORGE_DIR}/common
-%{FORGE_DIR}/contrib
+#%{FORGE_DIR}/contrib
 %{FORGE_DIR}/cronjobs
 %{FORGE_DIR}/db
 %{FORGE_DIR}/docs
