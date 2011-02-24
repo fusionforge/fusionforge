@@ -3,7 +3,7 @@
  * MantisBPlugin Class
  *
  * Copyright 2009, Fabien Dubois - Capgemini
- * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2009-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -32,7 +32,8 @@
 require_once 'include/database-pgsql.php';
 
 class MantisBTPlugin extends Plugin {
-	function MantisBTPlugin () {
+
+	function MantisBTPlugin() {
 		$this->Plugin() ;
 		$this->name = "mantisbt" ;
 		$this->text = "MantisBT" ; // To show in the tabs, use...
@@ -53,27 +54,27 @@ class MantisBTPlugin extends Plugin {
 		$this->_addHook('group_update');
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $G_SESSION, $HTML;
 		$returned = false;
 		switch ($hookname) {
 			case "usermenu": {
 				if ($G_SESSION->usesPlugin($this->name)) {
-					$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param));
+					$param = '?type=user&user_id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(_('Personnal MantisBT page')));
 				}
 				$returned = true;
 				break;
 			}
 			case "groupmenu": {
-				$group_id=$params['group'];
+				$group_id = $params['group'];
 				$project = group_get_object($group_id);
 				if (!$project || !is_object($project) || $project->isError() || !$project->isProject()) {
 					return;
 				}
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][]=$this->text;
-					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&id=' . $group_id . '&pluginname=' . $this->name;
+					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&group_id=' . $group_id . '&pluginname=' . $this->name;
 				}
 				if ($params['toptab'] == $this->name) {
 					$params['selected']=(count($params['TITLES'])-1);
@@ -89,7 +90,7 @@ class MantisBTPlugin extends Plugin {
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/index.php?id=$userid&type=user&pluginname=".$this->name,
+					echo util_make_link("/plugins/mantisbt/?user_id=$userid&type=user&pluginname=".$this->name,
 					_('View Personal MantisBT')
 					);
 					echo '</p>';
@@ -103,7 +104,7 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/index.php?id=$group_id&type=admin&pluginname=".$this->name,
+					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name,
 					_('View Admin MantisBT')
 					);
 					echo '</p>';
@@ -111,32 +112,9 @@ class MantisBTPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
-			case "group_approved": {
-				$group_id = $params['1'];
-				$group = group_get_object($group_id);
-				if ($group->usesPlugin($this->name)) {
-					if (!$this->isProjectMantisCreated($group->getID())) {
-						if($this->addProjectMantis($group->getID())) {
-							$members = array();
-							foreach($group->getMembers() as $member) {
-								$members[] = $member->getUnixName();
-								if($this->updateUsersProjectMantis($group->getID(), $members)) {
-									$group->setPluginUse($this->name);
-									$returned = true;
-								};
-							}
-						}
-					} else {
-						$returned = true;
-					}
-				} else {
-					$returned = true;
-				}
-				break;
-			}
 			case "change_cal_permission": {
 				// mise a jour des utilisateurs avec les roles
-				$group_id=$params[1];
+				$group_id = $params[1];
 				$group = group_get_object($group_id);
 				$members = array();
 				foreach($group->getMembers() as $member){
@@ -147,7 +125,7 @@ class MantisBTPlugin extends Plugin {
 			}
 			// mise a jour de l'adresse mail utilisateur
 			case "change_cal_mail": {
-				$user_id=$params[1];
+				$user_id = $params[1];
 				// before activate this, please fix updateUserInMantis
 				//$this->updateUserInMantis($user_id);
 				$returned = true;
@@ -201,46 +179,12 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	/**
-	 * groupisactivecheckboxpost - overwrite default function : initialize plugin
+	 * addProjectMantis - inject the Group into Mantisbt thru SOAP
 	 *
+	 * @param	array	Configuration Array (url, soap_user, soap_password, sync_roles, sync_users)
 	 * @return	bool	success or not
 	 */
-	function groupisactivecheckboxpost(&$params) {
-		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-		$group = group_get_object($params['group']);
-		$flag = strtolower('use_'.$this->name);
-		$returned = false;
-		if (getStringFromRequest($flag) == 1) {
-			if (!$this->isProjectMantisCreated($group->getID())) {
-				if($this->addProjectMantis($group->getID())) {
-					$members = array();
-					foreach($group->getMembers() as $member) {
-						$members[] = $member->getUnixName();
-						if($this->updateUsersProjectMantis($group->getID(), $members)) {
-							$group->setPluginUse($this->name);
-							$returned = true;
-						};
-					}
-				}
-			} else {
-				$group->setPluginUse($this->name);
-				$returned = true;
-			}
-		} else {
-			$group->setPluginUse($this->name, false);
-			$returned = true;
-		}
-		return $returned;
-	}
-
-	/**
-	 * addProjectMantis - inject the Group into Mantisbt
-	 *
-	 * @param	int	The Group Id
-	 * @return	bool	success or not
-	 */
-	function addProjectMantis($groupId) {
-
+	function addProjectMantis($groupId, $confArr) {
 		$groupObject = group_get_object($groupId);
 		$project = array();
 		$project['name'] = $groupObject->getPublicName();
@@ -255,8 +199,8 @@ class MantisBTPlugin extends Plugin {
 		$project['description'] = $groupObject->getDescription();
 
 		try {
-			$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => forge_get_config('adminsoap_user', 'mantisbt'), "password" => forge_get_config('adminsoap_passwd', 'mantisbt'), "project" => $project));
+			$clientSOAP = new SoapClient($confArr['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$idProjetMantis = $clientSOAP->__soapCall('mc_project_add', array("username" => $confArr['soap_user'], "password" => $confArr['soap_password'], "project" => $project));
 		} catch (SoapFault $soapFault) {
 			$groupObject->setError('addProjectMantis::Error: ' . $soapFault->faultstring);
 			return false;
@@ -264,19 +208,12 @@ class MantisBTPlugin extends Plugin {
 		if (!isset($idProjetMantis) || !is_int($idProjetMantis)){
 			$groupObject->setError('addProjectMantis::Error: ' . _('Unable to create project in Mantisbt'));
 			return false;
-		}else{
-			$res = db_query_params('INSERT INTO group_mantisbt (id_group, id_mantisbt) VALUES ($1,$2)',
-					array($groupObject->getID(), $idProjetMantis));
-			if (!$res) {
-				$groupObject->setError('addProjectMantis::Error: ' . _('db_error') . ' ' .db_error());
-				return false;
-			}
 		}
-		return true;
+		return $idProjetMantis;
 	}
 
 	function removeProjectMantis($idProjet) {
-		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
+		$resIdProjetMantis = db_query_params('SELECT id_mantisbt FROM plugin_mantisbt WHERE id_group = $1',
 						array($idProjet));
 
 		echo db_error();
@@ -295,7 +232,7 @@ class MantisBTPlugin extends Plugin {
 			if (!isset($delete)){
 				echo 'removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$idProjet;
 			}else{
-				db_query_params('DELETE FROM group_mantisbt WHERE group_mantisbt.id_mantisbt = $1',
+				db_query_params('DELETE FROM plugin_mantisbt WHERE id_mantisbt = $1',
 						array($idMantisbt));
 				echo db_error();
 			}
@@ -309,7 +246,7 @@ class MantisBTPlugin extends Plugin {
 	 * @param	int	public or private
 	 * @return	bool	success or not
 	 */
-	function updateProjectMantis($groupId,$groupName, $groupIspublic) {
+	function updateProjectMantis($groupId, $groupName, $groupIspublic) {
 		$groupObject = group_get_object($groupId);
 		$projet = array();
 		$project['name'] = $groupName;
@@ -322,7 +259,7 @@ class MantisBTPlugin extends Plugin {
 			$project['view_state'] = 50;
 		}
 
-		
+
 		$idMantisbt = getIdProjetMantis($groupId);
 
 		if ($idMantisbt) {
@@ -352,7 +289,7 @@ class MantisBTPlugin extends Plugin {
 	 */
 	function isProjectMantisCreated($idProjet){
 
-		$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
+		$resIdProjetMantis = db_query_params('SELECT id_mantisbt FROM plugin_mantisbt WHERE id_group = $1',
 					array($idProjet));
 		if (!$resIdProjetMantis)
 			return false;
@@ -528,26 +465,93 @@ class MantisBTPlugin extends Plugin {
 			}
 		}
 	}
-}
 
-function getIdProjetMantis($groupId) {
+	/**
+	 * getMantisBTConf - get the mantisbt configuration id for a specific group_id
+	 *
+	 * @param	int	the group_id
+	 * @return	array	the mantisbt configuration array
+	 * @access	public
+	 */
+	function getMantisBTConf($groupId) {
+		$group = group_get_object($groupId);
+		$mantisbtConfArray = array();
+		$resIdProjetMantis = db_query_params('SELECT * FROM plugin_mantisbt WHERE id_group = $1', array($groupId));
+		if (!$resIdProjetMantis) {
+			$group->setError('getMantisBTId::error ' .db_error());
+			return $mantisbtConfArray;
+		}
 
-	$group = group_get_object($groupId);
-	$resIdProjetMantis = db_query_params('SELECT group_mantisbt.id_mantisbt FROM group_mantisbt WHERE group_mantisbt.id_group = $1',
-				array($groupId));
-	if (!$resIdProjetMantis) {
-		$group->setError('getIdProjetMantis::error ' .db_error());
-		return 0;
+		$row = db_numrows($resIdProjetMantis);
+
+		if ($row == null || count($row)>2) {
+			$mantisbtConfArray['id_mantisbt'] = 0;
+			return $mantisbtConfArray;
+		}
+
+		$row = db_fetch_array($resIdProjetMantis);
+		$mantisbtConfArray['id_mantisbt'] = $row['id_mantisbt'];
+		$mantisbtConfArray['url'] = $row['url'];
+		$mantisbtConfArray['soap_user'] = $row['soap_user'];
+		$mantisbtConfArray['soap_password'] = $row['soap_password'];
+		$mantisbtConfArray['sync_users'] = $row['sync_users'];
+		$mantisbtConfArray['sync_roles'] = $row['sync_roles'];
+		return $mantisbtConfArray;
 	}
 
-	$row = db_fetch_array($resIdProjetMantis);
-	if ($row == null || count($row)>2) {
-		$group->setError('getIdProjetMantis::error ' . _('ID project not found'));
-		return 0;
-	}else{
-		return $row['id_mantisbt'];
+	function getInitDisplay() {
+		global $gfplugins;
+		require_once $gfplugins.$this->name.'/view/init.php';
 	}
 
+	function getHeader($type) {
+		$params['toptab'] = $this->name;
+		switch ($type) {
+			case 'project': {
+				global $group_id;
+				$params['group'] = $group_id;
+				$params['title'] = $this->name . ' Project Plugin!';
+				$params['pagename'] = $this->name;
+				$params['sectionvals'] = array(group_getname($group_id));
+				site_project_header($params);
+				break;
+			}
+			case 'user': {
+				global $user_id;
+				$params['user'] = $user_id;
+				site_user_header($params);
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+		html_use_tooltips();
+	}
+
+	function initialize($group_id, $confArr) {
+		if ($confArr['mantisbtcreate']) {
+			$idProjectMantis = $this->addProjectMantis($group_id, $confArr);
+		} else {
+			$idProjectMantis = $this->getProjectMantisByName($group_id, $confArr);
+		}
+		if ($idProjectMantis) {
+			$result = db_query_params('insert into plugin_mantisbt (id_group, id_mantisbt, url, soap_user, soap_password, sync_roles, sync_users)
+							values ($1, $2, $3, $4, $5, $6, $7)',
+							array($group_id,
+								$idProjectMantis,
+								$confArr['url'],
+								$confArr['soap_user'],
+								$confArr['soap_password'],
+								$confArr['sync_roles'],
+								$confArr['sync_users']));
+			if (!$result)
+				return false;
+
+			return true;
+		}
+		return false;
+	}
 }
 // Local Variables:
 // mode: php

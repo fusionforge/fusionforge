@@ -1751,6 +1751,7 @@ src/plugins/mantisbt/action/admin/renameCategory.php -text
 src/plugins/mantisbt/action/admin/updateVersion.php -text
 src/plugins/mantisbt/action/deleteAttachment.php -text
 src/plugins/mantisbt/action/deleteNote.php -text
+src/plugins/mantisbt/action/init.php -text
 src/plugins/mantisbt/action/updateIssue.php -text
 src/plugins/mantisbt/action/updateNote.php -text
 src/plugins/mantisbt/common/MantisBTPlugin.class.php -text
@@ -1773,6 +1774,7 @@ src/plugins/mantisbt/view/admin/stat.php -text
 src/plugins/mantisbt/view/admin/viewCategorie.php -text
 src/plugins/mantisbt/view/admin/viewVersion.php -text
 src/plugins/mantisbt/view/editIssue.php -text
+src/plugins/mantisbt/view/init.php -text
 src/plugins/mantisbt/view/jumpToIssue.php -text
 src/plugins/mantisbt/view/roadmap.php -text
 src/plugins/mantisbt/view/viewAttachment.php -text
