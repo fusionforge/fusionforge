@@ -577,7 +577,7 @@ if [ "$1" -eq "1" ]; then
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
 
-; ====================
+# ====================
 	# Installation from scratch, let's generate initial config files
 	if [ ! -e %{FORGE_CONF_DIR}/config.ini.d/rpm-install.ini ] ; then
 		cat > %{FORGE_CONF_DIR}/config.ini.d/rpm-install.ini <<EOF
@@ -613,7 +613,7 @@ database_port=5432
 EOF
 		mv $t %{FORGE_CONF_DIR}/config.ini.d/rpm-install-secrets.ini
 	fi
-; ====================
+# ====================
 
 	/usr/bin/php %{FORGE_DIR}/fusionforge-install-4-config.php >>/var/log/%{name}-install.log 2>&1
 
