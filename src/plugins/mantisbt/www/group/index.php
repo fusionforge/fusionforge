@@ -3,7 +3,7 @@
 /*
  * Project MantisBT page
  *
- * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2009-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -23,43 +23,27 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$action = getStringFromRequest('action');
-$view = getStringFromRequest('view');
-
-switch ($action) {
-	case "updateIssue":
-	case "addNote":
-	case "addIssue":
-	case "deleteNote":
-	case "addAttachment":
-	case "deleteAttachment": {
-		include ("mantisbt/action/$action.php");
-		break;
-	}
-	case "updateNote":
-	case "privateNote":
-	case "publicNote": {
-		include ("mantisbt/action/updateNote.php");
-		break;
-	}
-}
+global $mantisbt;
+global $mantisbtConf;
+global $group_id;
+global $gfplugins;
 
 // submenu
-$labelTitle = array ();
+$labelTitle = array();
 $labelTitle[] = _('Roadmap');
 $labelTitle[] = _('Tickets');
 $labelPage = array();
-$labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginname."&view=roadmap";
-$labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginname;
+$labelPage[] = "/plugins/".$mantisbt->name."/?type=group&id=".$group_id."&pluginname=".$mantisbt->name."&view=roadmap";
+$labelPage[] = "/plugins/".$mantisbt->name."/?type=group&id=".$group_id."&pluginname=".$mantisbt->name;
 $userperm = $group->getPermission($user);
-if ( $userperm->isAdmin() ) {
+if ($userperm->isAdmin()) {
 	$labelTitle[] = _('Administration');
-	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
+	$labelPage[] = "/plugins/".$mantisbt->name."/?type=admin&id=".$group_id."&pluginname=".$mantisbt->name;
 	$labelTitle[] = _('Statistics');
-	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
+	$labelPage[] = "/plugins/".$mantisbt->name."/?type=admin&id=".$group_id."&pluginname=".$mantisbt->name."&view=stat";
 }
 
-echo $HTML->subMenu( $labelTitle, $labelPage );
+echo $HTML->subMenu($labelTitle, $labelPage);
 
 // page a afficher
 switch ($view) {
@@ -68,23 +52,23 @@ switch ($view) {
 	case "addIssue":
 	case "addAttachment":
 	case "roadmap": {
-		include("mantisbt/view/$view.php");
+		include($gfplugins.$mantisbt->name."/view/$view.php");
 		break;
 	}
 	case "viewIssue": {
-		include("mantisbt/view/$view.php");
-		include('mantisbt/view/viewNote.php');
-		include('mantisbt/view/viewAttachment.php');
+		include($gfplugins.$mantisbt->name."/view/$view.php");
+		include($gfplugins.$mantisbt->name."/view/viewNote.php");
+		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
 		break;
 	}
 	case "editNote":
 	case "addNote": {
-		include("mantisbt/view/addOrEditNote.php");
+		include($gfplugins.$mantisbt->name."/view/addOrEditNote.php");
 		break;
 	}
 	/* viewAllIssues is the default page */
 	default: {
-		include('mantisbt/view/viewIssues.php');
+		include($gfplugins.$mantisbt->name."/view/viewIssues.php");
 		break;
 	}
 }

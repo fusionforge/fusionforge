@@ -75,6 +75,25 @@ switch ($type) {
 		}
 
 		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
+
+		switch ($action) {
+			case "updateIssue":
+			case "addNote":
+			case "addIssue":
+			case "deleteNote":
+			case "addAttachment":
+			case "deleteAttachment": {
+				include ("mantisbt/action/$action.php");
+				break;
+			}
+			case "updateNote":
+			case "privateNote":
+			case "publicNote": {
+				include ("mantisbt/action/updateNote.php");
+				break;
+			}
+		}
+
 		$mantisbt->getHeader('project');
 
 		if ($mantisbtConf['id_mantisbt'] === 0) {

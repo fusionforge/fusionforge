@@ -32,13 +32,15 @@
  * @todo : remove all css and js
  */
 
+global $mantisbt;
+global $mantisbtConf;
 
 global $prioritiesImg, $bugPerPage;
 
 try {
 /* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
 } catch (SoapFault $soapFault) {
 	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
@@ -91,9 +93,9 @@ if (!isset($errorPage)) {
 </div>
 <br/>
 	<?php
-	
+
 	echo '<h2 style="border-bottom: 1px solid black">'. _('Tickets') .'</h2>';
-	
+
 	// recuperation des bugs
 	$listBug = array();
 	try {
@@ -124,8 +126,8 @@ if (!isset($errorPage)) {
 		// construction du tableau
 		foreach ($idsBugAll as $defect) {
 			$listBugAll[] = array( "id"=> $defect->id, "idPriority"=> $defect->priority->id,
-						"category"=> $defect->category,"project" => $defect->project->name, 
-						"severityId" => $defect->severity->id, "severity" => $defect->severity->name, 
+						"category"=> $defect->category,"project" => $defect->project->name,
+						"severityId" => $defect->severity->id, "severity" => $defect->severity->name,
 						"status" => $defect->status->name, "statusId" => $defect->status->id,
 						"last_updated" => $defect->last_updated, "handler" => $defect->handler->name,
 						"summary" => htmlspecialchars($defect->summary,ENT_QUOTES), "view_state" => $defect->view_state->id,
