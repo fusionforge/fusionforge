@@ -1863,7 +1863,6 @@ class Group extends Error {
 //echo 'rep_group_act_daily'.db_error();
 		unset($this->data_array);
 		return true;
-
 	}
 
 	/*

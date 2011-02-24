@@ -3,7 +3,7 @@
  * Site Admin group properties editing page
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
@@ -45,7 +45,6 @@ if (getStringFromPost('submit')) {
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error($group->getErrorMessage(), 'admin');
 	} else {
-		plugin_hook('delete_link',$group_id);
 		$feedback = _('Project successfully deleted');
 		session_redirect('/admin/?feedback='.urlencode($feedback));
 	}

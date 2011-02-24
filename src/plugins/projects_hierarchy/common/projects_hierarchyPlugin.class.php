@@ -32,10 +32,10 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->_addHook('groupisactivecheckboxpost');
 		$this->_addHook('hierarchy_views'); // include specific views
 		$this->_addHook('display_hierarchy'); // to see the tree of projects
-		$this->_addHook('delete_link'); // to delete link
+		$this->_addHook('group_delete'); // clean tables on delete
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $G_SESSION, $HTML;
 		$returned = false;
 		switch($hookname) {
@@ -66,14 +66,24 @@ class projects_hierarchyPlugin extends Plugin {
 				}
 				break;
 			}
-			case "delete_link": {
-				$res_son = db_query_params('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $1 ',
-							array($params));
-				$returned = true;
+			case "group_delete": {
+				if ($params['group']->usesPlugins($this->name)) {
+					if ($this->delete($params['group_id'])) {
+						$returned = true;
+					}
+				} else {
+					$returned = true;
+				}
 				break;
 			}
 		}
 		return $returned;
+	}
+
+	function delete($group_id) {
+		$res_son = db_query_params('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $1 ',
+						array($group_id));
+		return true;
 	}
 
 	function displayHierarchy() {
@@ -147,15 +157,39 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	/**
-	 * getChildren - find the children group_id of this project.
+	 * getFamily - find the children or parent group_id of this project.
 	 *
-	 * @param	bool	search children of the children
-	 * @return	array	the children id group by parent id.
+	 * @param	integer	group_id to serach for
+	 * @param	string	parent or child ?
+	 * @param	boolean	recurvice or not ?
 	 * @access	public
 	 */
-	function getChildren($deep = false) {
-		$children = array();
-		return $children;
+	function getFamily($group_id, $order, $deep = false) {
+		$localFamily = array();
+		switch ($order) {
+			case "parent": {
+				$res = db_query_params('SELECT project_id as id FROM plugin_projects_hierarchy WHERE sub_project_id = $1',
+							array($group_id));
+			}
+			case "child": {
+				$res = db_query_params('SELECT sub_project_id as id FROM plugin_projects_hierarchy WHERE project_id = $1',
+							array($group_id));
+			}
+			default: {
+				return $localFamily;
+			}
+		}
+		if ($res || db_numrows($res) > 1) {
+			while ($arr = db_fetch_array($res)) {
+				$localFamily[] = $arr['id'];
+			}
+		}
+		if ($deep) {
+			for ( $i = 0; $i < count($localFamily); $i++) {
+				$localFamily[$i] = $this->getChildren($localFamily[$i], $order, $deep);
+			}
+		}
+		return $localFamily;
 	}
 }
 // Local Variables:
