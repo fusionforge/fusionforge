@@ -581,6 +581,7 @@ if [ "$1" -eq "1" ]; then
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" /etc/httpd/conf.d/gforge.conf
+	touch %{FORGE_VAR_LIB}/etc/httpd.vhosts
 
 # ====================
 	# Installation from scratch, let's generate initial config files
