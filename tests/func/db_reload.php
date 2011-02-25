@@ -120,7 +120,7 @@ system("echo \"VACUUM FULL ANALYZE;\" | psql -q -Upostgres ".DB_NAME);
 //
 $user = new GFUser();
 $user_id = $user->create('admin', $sitename, 'Admin', $adminPassword, $adminPassword,
-	$adminEmail, 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false, 'admin');
+	$adminEmail, 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false);
 
 if (!$user_id) {
 	print "ERROR: Creating user: ".$user->getErrorMessage().':'.db_error()."\n";
