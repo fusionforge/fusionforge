@@ -1,8 +1,8 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -21,9 +21,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $group_id;
+global $mantisbt;
+
 echo '<div style="width:98%; text-align:right; padding:5px;" >';
-echo '<form name="jump" method="post" action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&view=viewIssue">';
-echo '<span>Aller au ticket :</span>';
+echo '<form name="jump" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&view=viewIssue">';
+echo '<span>'. _('Jump to ticket:'). '</span>';
 echo '<input type="text" name="idBug">';
 echo '<input type="submit" value="Ok" />';
 echo '</form>';

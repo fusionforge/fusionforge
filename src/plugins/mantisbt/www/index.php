@@ -76,6 +76,17 @@ switch ($type) {
 
 		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
 
+
+		if ($mantisbtConf['id_mantisbt'] === 0) {
+			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
+			session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg));
+		}
+
+		if (!$mantisbtConf['sync_users']) {
+			$username = $mantisbtConf['soap_user'];
+			$password = $mantisbtConf['soap_password'];
+		}
+
 		switch ($action) {
 			case "updateIssue":
 			case "addNote":
@@ -95,32 +106,26 @@ switch ($type) {
 		}
 
 		$mantisbt->getHeader('project');
+		// URL analysis
+		$sort = getStringFromRequest('sort');
+		$dir = getStringFromRequest('dir');
+		$action = getStringFromRequest('action');
+		$idBug = getStringFromRequest('idBug');
+		$idNote = getStringFromRequest('idNote');
+		$idAttachment = getStringFromRequest('idAttachment');
+		$actionAttachment = getStringFromRequest('actionAttachment');
+		$page = getStringFromRequest('page');
 
-		if ($mantisbtConf['id_mantisbt'] === 0) {
-			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
-			session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg));
+		// Si la variable $_GET['page'] existe...
+		if($page != null && $page != ''){
+			$pageActuelle=intval($page);
 		} else {
-			// URL analysis
-			$sort = getStringFromRequest('sort');
-			$dir = getStringFromRequest('dir');
-			$action = getStringFromRequest('action');
-			$idBug = getStringFromRequest('idBug');
-			$idNote = getStringFromRequest('idNote');
-			$idAttachment = getStringFromRequest('idAttachment');
-			$actionAttachment = getStringFromRequest('actionAttachment');
-			$page = getStringFromRequest('page');
-
-			// Si la variable $_GET['page'] existe...
-			if($page != null && $page != ''){
-				$pageActuelle=intval($page);
-			} else {
-				$pageActuelle=1; // La page actuelle est la n°1
-			}
-
-			$format = "%07d";
-			// do the job
-			include ($mantisbt->name.'/www/group/index.php');
+			$pageActuelle=1; // La page actuelle est la n°1
 		}
+
+		$format = "%07d";
+		// do the job
+		include ($mantisbt->name.'/www/group/index.php');
 		break;
 	}
 	case 'user': {

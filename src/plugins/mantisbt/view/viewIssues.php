@@ -1,7 +1,9 @@
 <?php
 /*
+ * MantisBT plugin
+ *
  * Copyright 2009, Fabien Dubois - Capgemini
- * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
  * http://fusionforge.org
  *
@@ -34,6 +36,8 @@
 
 global $mantisbt;
 global $mantisbtConf;
+global $username;
+global $password;
 
 global $prioritiesImg, $bugPerPage;
 
@@ -102,7 +106,7 @@ if (!isset($errorPage)) {
 		if ($type == "user"){
 			$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password, "filter" => $bugfilter ));
 		} else if ($type == "group"){
-			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis,  "page_number" => -1, "per_page" => -1, "filter" => $bugfilter));
+			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'],  "page_number" => -1, "per_page" => -1, "filter" => $bugfilter));
 		}
 	} catch (SoapFault $soapFault) {
 		echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
@@ -124,6 +128,7 @@ if (!isset($errorPage)) {
 		$indexMin = ($pageActuelle - 1) * $bugPerPage;
 		$indexMax = ($pageActuelle * $bugPerPage) -1;
 		// construction du tableau
+		$listBugAll = array();
 		foreach ($idsBugAll as $defect) {
 			$listBugAll[] = array( "id"=> $defect->id, "idPriority"=> $defect->priority->id,
 						"category"=> $defect->category,"project" => $defect->project->name,
@@ -155,7 +160,7 @@ if (!isset($errorPage)) {
 		echo	'<tr>';
 		// Priority
 		echo		'<th class="InText" width="2%">';
-		echo			'<form name="filterprority" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="filterprority" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
@@ -183,7 +188,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// ID
 		echo		'<th class="InText" width="3%">';
-		echo			'<form name="filterid" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="filterid" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		} else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
@@ -211,7 +216,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Catégorie
 		echo		'<th class="InText" width="7%">';
-		echo			'<form name="filtercat" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="filtercat" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC") {
@@ -239,7 +244,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Projet
 		echo 		'<th class="InText" width="7%">';
-		echo			'<form name="projectid" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="projectid" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC") {
@@ -267,7 +272,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Sévérité
 		echo 		'<th class="InText" width="7%">';
-		echo			'<form name="severity" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="severity" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC") {
@@ -295,7 +300,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Etat
 		echo 		'<th class="InText" width="15%">';
-		echo			'<form name="statusid" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="statusid" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC") {
@@ -323,7 +328,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Mis a jour (date)
 		echo 		'<th class="InText" width="7%">';
-		echo			'<form name="lastupdate" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="lastupdate" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC") {
@@ -351,7 +356,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// résumé
 		echo 		'<th class="InText" width="29%">';
-		echo			'<form name="summary" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="summary" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC") {
@@ -379,7 +384,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// version de détection
 		echo 		'<th class="InText" width="6%">';
-		echo			'<form name="version" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="version" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "version" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "version" && $bugfilter['dir'] == "DESC") {
@@ -407,7 +412,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// corrigé en version
 		echo		'<th class="InText" width="6%">';
-		echo			'<form name="fixed" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="fixed" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "fixed_in_version" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "fixed_in_version" && $bugfilter['dir'] == "DESC") {
@@ -435,7 +440,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// version cible : Milestone
 		echo		'<th class="InText" width="6%">';
-		echo			'<form name="target" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt">';
+		echo			'<form name="target" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "target_version" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "target_version" && $bugfilter['dir'] == "DESC") {
@@ -476,7 +481,7 @@ if (!isset($errorPage)) {
 			}else{
 				echo		'<td class="InText"></td>';
 			}
-			echo		'<td class="InText"><a class="DataLink" href="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$bug['id'].'&view=viewIssue">'.sprintf($format,$bug['id']).'</a></td>';
+			echo		'<td class="InText"><a class="DataLink" href="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$bug['id'].'&view=viewIssue">'.sprintf($format,$bug['id']).'</a></td>';
 			echo 		'<td class="InText">'.$bug['category'].'</td>';
 			echo 		'<td class="InText">'.$bug['project'].'</td>';
 			echo 		'<td class="InText">';
@@ -507,7 +512,7 @@ if (!isset($errorPage)) {
 		// Ajout de ticket
 		if ($type == "group") {
 		?>
-			<p class="notice_title" onclick='$("#expandable_ticket").slideToggle(300);'>Soumettre un ticket</p>
+			<p class="notice_title" onclick='$("#expandable_ticket").slideToggle(300);'><?php echo _('Add a new ticket') ?></p>
 			<div id='expandable_ticket' class="notice_content">
 			<?php include("addIssue.php") ?>
 			</div>
@@ -523,7 +528,7 @@ if (!isset($errorPage)) {
 			{
 				echo '| <b>'.$i.'</b>';
 			} else {
-				echo '<form style="display:inline" name="page'.$i.'" method="post" action="?type='.$type.'&id='.$id.'&pluginname=mantisbt&page='.$i.'" >';
+				echo '<form style="display:inline" name="page'.$i.'" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&page='.$i.'" >';
 				echo 	'<input type="hidden" name="sort" value="'.$bugfilter['sort'].'" />';
 				echo 	'<input type="hidden" name="dir" value="'.$bugfilter['dir'].'" />';
 				if ( isset($bugfilter['show_status'])) {
