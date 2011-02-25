@@ -29,8 +29,6 @@
  *		limit non SOAP call aka direct db access to mantisbt
  */
 
-require_once 'include/database-pgsql.php';
-
 class MantisBTPlugin extends Plugin {
 
 	function MantisBTPlugin() {
