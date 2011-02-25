@@ -24,8 +24,9 @@
 
 global $mantisbt;
 global $mantisbtConf;
-global $user;
+global $username;
 global $password;
+global $gfplugins;
 
 if (!isset($defect)) {
 	try {
@@ -40,18 +41,18 @@ if (!isset($defect)) {
 	}
 }
 
-if (!$errorPage){
+if (!isset($errorPage)){
     include('jumpToIssue.php');
     echo "<h2 style='border-bottom: 1px solid black'>Détail du ticket #$idBug</h2>";
 	echo	'<table class="innertabs">';
 	echo		'<tr>';
-	echo 			'<td width="14%" class="FullBoxTitle">Catégorie</td>';
-	echo 			'<td width="14%" class="FullBoxTitle">Sévérité</td>';
-	echo 			'<td width="14%" class="FullBoxTitle">Reproductibilité</td>';
-	echo 			'<td width="14%" class="FullBoxTitle">Date de soumission</td>';
-	echo 			'<td width="14%" class="FullBoxTitle">Date mise à jour</td>';
-	echo 			'<td width="14%" class="FullBoxTitle">Version de détection</td>';
-	echo 			'<td width="14%" class="FullBoxTitle">Milestone</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Category').'</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Severity').'</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Reproducibility').'</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Submit Date').'</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Update Date').'</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Found in').'</td>';
+	echo 			'<td width="14%" class="FullBoxTitle">'._('Target').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td class="FullBox">'.$defect->category.'</td>';
@@ -65,12 +66,12 @@ if (!$errorPage){
 	echo 			'<td class="FullBox">'.$defect->target_version.'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBoxTitle">Rapporteur</td>';
-	echo 			'<td class="FullBoxTitle">Assigné à</td>';
-	echo 			'<td class="FullBoxTitle">Priorité</td>';
-	echo 			'<td class="FullBoxTitle">Résolution</td>';
-	echo 			'<td class="FullBoxTitle">Etat</td>';
-	echo 			'<td class="FullBoxTitle">Corrigé en version</td>';
+	echo 			'<td class="FullBoxTitle">'._('Reporter').'</td>';
+	echo 			'<td class="FullBoxTitle">'._('Assigned to').'</td>';
+	echo 			'<td class="FullBoxTitle">'._('Priority').'</td>';
+	echo 			'<td class="FullBoxTitle">'._('Resolution').'</td>';
+	echo 			'<td class="FullBoxTitle">'._('Status').'</td>';
+	echo 			'<td class="FullBoxTitle">'._('Fixed in').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td class="FullBox">'.$defect->reporter->name.'</td>';
@@ -84,15 +85,15 @@ if (!$errorPage){
 	echo	'<br />';
 	echo	'<table class="innertabs">';
 	echo		'<tr>';
-	echo 			'<td width="25%" class="FullBoxTitle">Résumé</td>';
+	echo 			'<td width="25%" class="FullBoxTitle">'._('Summary').'</td>';
 	echo			'<td width="75%" class="FullBox">'.htmlspecialchars($defect->summary,ENT_QUOTES).'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td width="25%" class="FullBoxTitle">Description</td>';
+	echo 			'<td width="25%" class="FullBoxTitle">'._('Description').'</td>';
 	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td width="25%" class="FullBoxTitle">Informations complémentaires</td>';
+	echo 			'<td width="25%" class="FullBoxTitle">'. _('Additional Informations').'</td>';
 	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->additional_information, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
@@ -124,12 +125,17 @@ if (!$errorPage){
     });
 
 </script>
-<p class="notice_title" onclick='$("#expandable_edition").slideToggle(300)'>Editer le ticket</p>
+<p class="notice_title" onclick='$("#expandable_edition").slideToggle(300)'><?php echo _('Edit ticket') ?></p>
 <div id='expandable_edition' class="notice_content">
 <?php
-    include("editIssue.php");
+	if (!$errorPage) {
+		include($gfplugins.$mantisbt->name."/view/editIssue.php");
+	}
 }
 ?>
 </div>
-
-<br/>
+<?php
+	if (!$errorPage) {
+		include($gfplugins.$mantisbt->name."/view/viewNote.php");
+		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
+}

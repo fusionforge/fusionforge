@@ -1,6 +1,8 @@
 <?php
 /*
- * Copyright 2010, Franck Villaume - Capgemini
+ * MantisBT Plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -19,23 +21,30 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
+global $type;
+
 $defect = array();
 
 $defect['category'] = $_POST['categorie'];
-$defect['project']['id'] = $idProjetMantis;
+$defect['project']['id'] = $mantisbtConf['id_mantisbt'];
 
 try {
-	$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	$listSeverities = $clientSOAP->__soapCall('mc_enum_severities', array("username" => $username, "password" => $password));
 	$listReproducibilities = $clientSOAP->__soapCall('mc_enum_reproducibilities', array("username" => $username, "password" => $password));
-	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis, "acces" => 10));
+	$listUsers = $clientSOAP->__soapCall('mc_project_get_users', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'], "acces" => 10));
 	$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
 	$listPriorities = $clientSOAP->__soapCall('mc_enum_priorities', array("username" => $username, "password" => $password));
 	$listResolutions= $clientSOAP->__soapCall('mc_enum_resolutions', array("username" => $username, "password" => $password));
 	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type='.$type.'&id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
+	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname=mantisbt&view=viewIssues&error_msg='.urlencode($feedback));
 }
 foreach($listSeverities as $key => $severity){
 	if ($_POST['severite'] == $severity->name){
@@ -57,7 +66,6 @@ foreach($listUsers as $key => $mantisuser){
 	if ($username == $mantisuser->name){
 		$defect['reporter']['id'] = $mantisuser->id;
 		$defect['reporter']['name'] = $mantisuser->name;
-		$defect['reporter']['real_name'] = $mantisuser->real_name;
 		$defect['reporter']['email'] = $mantisuser->email;
 		break;
 	}
@@ -77,7 +85,6 @@ if ($_POST['handler'] != ''){
 		if ($_POST['handler'] == $mantisuser->name){
 			$defect['handler']['id'] = $mantisuser->id;
 			$defect['handler']['name'] = $mantisuser->name;
-			$defect['handler']['real_name'] = $mantisuser->real_name;
 			$defect['handler']['email'] = $mantisuser->email;
 			break;
 		}
@@ -123,10 +130,10 @@ if (isset($_POST['version'])) {
 try {
 	$newIdBug = $clientSOAP->__soapCall('mc_issue_add', array("username" => $username, "password" => $password, "issue" => $defect));
 	$feedback = _('Ticket '.$newIdBug.' created successfully');
-	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
+	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$newIdBug.'&view=viewIssue&feedback='.urlencode($feedback));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($error_msg));
+	session_redirect('plugins/mantisbt/?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
 }
 
 ?>

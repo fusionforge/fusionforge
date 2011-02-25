@@ -56,8 +56,6 @@ switch ($view) {
 	}
 	case "viewIssue": {
 		include($gfplugins.$mantisbt->name."/view/$view.php");
-		include($gfplugins.$mantisbt->name."/view/viewNote.php");
-		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
 		break;
 	}
 	case "editNote":

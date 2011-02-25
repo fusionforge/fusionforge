@@ -24,7 +24,7 @@
 
 global $mantisbt;
 global $mantisbtConf;
-global $user;
+global $username;
 global $password;
 global $group_id;
 
@@ -64,15 +64,15 @@ try {
 }
 
 if (!isset($errorPage)){
-	echo 	'<form name="issue" method="POST" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addIssue" >';
+	echo 	'<form name="issue" method="POST" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addIssue" >';
 	echo	'<table class="innertabs">';
 	echo		'<tr>';
-	echo 			'<td width="16%" class="FullBoxTitle">Catégorie</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">Reproductibilité</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">Sévérité</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">Priorité</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">Assigné à</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">Détecté en</td>';
+	echo 			'<td width="16%" class="FullBoxTitle">'._('Category').'</td>';
+	echo 			'<td width="16%" class="FullBoxTitle">'._('Reproducibility').'</td>';
+	echo 			'<td width="16%" class="FullBoxTitle">'._('Severity').'</td>';
+	echo 			'<td width="16%" class="FullBoxTitle">'._('Priority').'</td>';
+	echo 			'<td width="16%" class="FullBoxTitle">'._('Assigned to').'</td>';
+	echo 			'<td width="16%" class="FullBoxTitle">'._('Found in').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td class="FullBox">';
