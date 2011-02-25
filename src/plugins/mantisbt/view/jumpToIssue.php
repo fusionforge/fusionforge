@@ -25,7 +25,7 @@ global $group_id;
 global $mantisbt;
 
 echo '<div style="width:98%; text-align:right; padding:5px;" >';
-echo '<form name="jump" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&view=viewIssue">';
+echo '<form name="jump" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=viewIssue">';
 echo '<span>'. _('Jump to ticket:'). '</span>';
 echo '<input type="text" name="idBug">';
 echo '<input type="submit" value="Ok" />';

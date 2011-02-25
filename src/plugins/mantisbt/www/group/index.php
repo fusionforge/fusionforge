@@ -32,14 +32,14 @@ $labelTitle = array();
 $labelTitle[] = _('Roadmap');
 $labelTitle[] = _('Tickets');
 $labelPage = array();
-$labelPage[] = "/plugins/".$mantisbt->name."/?type=group&id=".$group_id."&pluginname=".$mantisbt->name."&view=roadmap";
-$labelPage[] = "/plugins/".$mantisbt->name."/?type=group&id=".$group_id."&pluginname=".$mantisbt->name;
+$labelPage[] = "/plugins/".$mantisbt->name."/?type=group&group_id=".$group_id."&pluginname=".$mantisbt->name."&view=roadmap";
+$labelPage[] = "/plugins/".$mantisbt->name."/?type=group&group_id=".$group_id."&pluginname=".$mantisbt->name;
 $userperm = $group->getPermission($user);
 if ($userperm->isAdmin()) {
 	$labelTitle[] = _('Administration');
-	$labelPage[] = "/plugins/".$mantisbt->name."/?type=admin&id=".$group_id."&pluginname=".$mantisbt->name;
+	$labelPage[] = "/plugins/".$mantisbt->name."/?type=admin&group_id=".$group_id."&pluginname=".$mantisbt->name;
 	$labelTitle[] = _('Statistics');
-	$labelPage[] = "/plugins/".$mantisbt->name."/?type=admin&id=".$group_id."&pluginname=".$mantisbt->name."&view=stat";
+	$labelPage[] = "/plugins/".$mantisbt->name."/?type=admin&group_id=".$group_id."&pluginname=".$mantisbt->name."&view=stat";
 }
 
 echo $HTML->subMenu($labelTitle, $labelPage);

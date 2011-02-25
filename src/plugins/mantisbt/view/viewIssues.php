@@ -79,7 +79,7 @@ if (!isset($errorPage)) {
 <script type="text/javascript">
 	$(document).ready(function() {
 	<?php
-		if ( !isset($_POST["projectStatus"]) && !isset($_POST["projectChildId"]) && !isset($_POST["projectFixers"]) && !isset($_POST["projectReporters"]))
+		if (!isset($_POST["projectStatus"]) && !isset($_POST["projectChildId"]) && !isset($_POST["projectFixers"]) && !isset($_POST["projectReporters"]))
 		{
 	?>
 		jQuery("#expandable_filter").hide();
@@ -160,7 +160,7 @@ if (!isset($errorPage)) {
 		echo	'<tr>';
 		// Priority
 		echo		'<th class="InText" width="2%">';
-		echo			'<form name="filterprority" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="filterprority" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
@@ -188,7 +188,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// ID
 		echo		'<th class="InText" width="3%">';
-		echo			'<form name="filterid" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="filterid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		} else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
@@ -216,7 +216,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Catégorie
 		echo		'<th class="InText" width="7%">';
-		echo			'<form name="filtercat" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="filtercat" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC") {
@@ -244,7 +244,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Projet
 		echo 		'<th class="InText" width="7%">';
-		echo			'<form name="projectid" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="projectid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC") {
@@ -272,7 +272,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Sévérité
 		echo 		'<th class="InText" width="7%">';
-		echo			'<form name="severity" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="severity" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC") {
@@ -300,7 +300,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Etat
 		echo 		'<th class="InText" width="15%">';
-		echo			'<form name="statusid" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="statusid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC") {
@@ -328,7 +328,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Mis a jour (date)
 		echo 		'<th class="InText" width="7%">';
-		echo			'<form name="lastupdate" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="lastupdate" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC") {
@@ -356,7 +356,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// résumé
 		echo 		'<th class="InText" width="29%">';
-		echo			'<form name="summary" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="summary" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC") {
@@ -384,7 +384,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// version de détection
 		echo 		'<th class="InText" width="6%">';
-		echo			'<form name="version" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="version" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "version" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "version" && $bugfilter['dir'] == "DESC") {
@@ -412,7 +412,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// corrigé en version
 		echo		'<th class="InText" width="6%">';
-		echo			'<form name="fixed" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="fixed" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "fixed_in_version" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "fixed_in_version" && $bugfilter['dir'] == "DESC") {
@@ -440,7 +440,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// version cible : Milestone
 		echo		'<th class="InText" width="6%">';
-		echo			'<form name="target" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+		echo			'<form name="target" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 		if ($bugfilter['sort'] == "target_version" && $bugfilter['dir'] == "ASC") {
 			echo			'<input type=hidden name="dir" value="DESC"/>';
 		}else if ($bugfilter['sort'] == "target_version" && $bugfilter['dir'] == "DESC") {
@@ -528,7 +528,7 @@ if (!isset($errorPage)) {
 			{
 				echo '| <b>'.$i.'</b>';
 			} else {
-				echo '<form style="display:inline" name="page'.$i.'" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&page='.$i.'" >';
+				echo '<form style="display:inline" name="page'.$i.'" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&page='.$i.'" >';
 				echo 	'<input type="hidden" name="sort" value="'.$bugfilter['sort'].'" />';
 				echo 	'<input type="hidden" name="dir" value="'.$bugfilter['dir'].'" />';
 				if ( isset($bugfilter['show_status'])) {

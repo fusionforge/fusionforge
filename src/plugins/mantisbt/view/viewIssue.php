@@ -1,9 +1,9 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
- *          Antoine Mercadal - capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2010, Antoine Mercadal - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -22,21 +22,25 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $mantisbt;
+global $mantisbtConf;
+global $user;
+global $password;
+
 if (!isset($defect)) {
 	try {
         /* do not recreate $clientSOAP object if already created by other pages */
         if (!isset($clientSOAP))
-		    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		    $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
 		$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 	} catch (SoapFault $soapFault) {
-		$msg = $soapFault->faultstring;
+		echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 		$errorPage = true;
 	}
 }
-if ($errorPage){
-	echo 	'<div class="warning" >Un probl&egrave;me est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : Ticket '.$idBug.' : <i>'.$msg.'</i></div>';
-} else {
+
+if (!$errorPage){
     include('jumpToIssue.php');
     echo "<h2 style='border-bottom: 1px solid black'>Détail du ticket #$idBug</h2>";
 	echo	'<table class="innertabs">';
@@ -95,9 +99,9 @@ if ($errorPage){
 ?>
 <style>
 .notice_title {
-    background-color: #D7E0EB; 
-    padding: 10px; 
-    font-weight: bold; 
+    background-color: #D7E0EB;
+    padding: 10px;
+    font-weight: bold;
     margin-bottom:0px;
     cursor: pointer;
     color: #4F93C3;
@@ -105,10 +109,10 @@ if ($errorPage){
 
 .notice_content {
     border: 1px solid #D7E0EB;
-    padding: 10px; 
-    font-weight: bold; 
-    -moz-border-radius-bottomright: 8px; 
-    -moz-border-radius-bottomleft: 8px; 
+    padding: 10px;
+    font-weight: bold;
+    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-bottomleft: 8px;
     -webkit-border-bottom-right-radius: 8px;
     -webkit-border-bottom-left-radius: 8px;
     margin-top:0px;
@@ -117,7 +121,7 @@ if ($errorPage){
 <script type="text/javascript">
     $(document).ready(function() {
         $("#expandable_edition").hide();
-    });    
+    });
 
 </script>
 <p class="notice_title" onclick='$("#expandable_edition").slideToggle(300)'>Editer le ticket</p>

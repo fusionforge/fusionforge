@@ -1,6 +1,8 @@
 <?php
 /*
- * Copyright 2010, Franck Villaume - Capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -20,7 +22,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-echo '<form method="POST" Action="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
+global $group_id;
+global $mantisbt;
+global $type;
+global $idBug;
+
+echo '<form method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
 echo	'<table class="innertabs">';
 echo		'<tr><td>';
 echo		_('File:'). ' '.'<input type="file" name="attachment" />';

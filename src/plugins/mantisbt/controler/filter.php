@@ -42,7 +42,7 @@ if (isset($_POST['dir'])) {
 } else {
 	$bugfilter['dir'] = "DESC";
 }
-echo	'<form name="viewissues" id="mainform" method="post" action="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'" >';
+echo	'<form name="viewissues" id="mainform" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'" >';
 if (isset($_POST['sort'])) {
 	echo '<input type="hidden" name="sort" value="'.$_POST['sort'].'" />';
 }
