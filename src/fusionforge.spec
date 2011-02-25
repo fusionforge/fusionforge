@@ -405,6 +405,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # Apache configuration file
 %{__cp} -a etc/httpd.conf.d-fhs/* $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/httpd.conf.d/
 %{__cp} -a etc/config.ini.d/defaults.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
+%{__cp} -a etc/config.ini.d/debug.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
 %{__cp} -a etc/config.ini-fhs $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini
 %{__cp} -a etc/httpd.conf-fhs $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
 #%{__cp} -a etc/gforge-httpd.conf.example $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/gforge.conf
@@ -779,6 +780,7 @@ fi
 %{FORGE_CONF_DIR}/httpd.conf.d/*
 %{_sysconfdir}/httpd/conf.d/gforge.conf
 %{FORGE_CONF_DIR}/config.ini.d/defaults.ini
+%{FORGE_CONF_DIR}/config.ini.d/debug.ini
 %{FORGE_CONF_DIR}/config.ini
 %dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
 %dir %{FORGE_VAR_LIB}/scmtarballs
