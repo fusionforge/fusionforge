@@ -1,3 +1,4 @@
+plugins/mantisbt/bin		usr/share/gforge/plugins/mantisbt/
 plugins/mantisbt/action		usr/share/gforge/plugins/mantisbt/
 plugins/mantisbt/common		usr/share/gforge/plugins/mantisbt/
 plugins/mantisbt/controler	usr/share/gforge/plugins/mantisbt/
