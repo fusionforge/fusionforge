@@ -52,7 +52,7 @@ clean:		# Clean files of fusionforge build                         #
 
 fusionforge: rpmprep		# Build rpm fusionforge packages                               #
 	cd src; find . -type f -or -type l | grep -v '/.svn/' | grep -v '/debian/' | cpio -pdumB --quiet $(RPM_TMP)/SOURCES/fusionforge-$(version)
-	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/; utils/manage-translations.sh build
+	cd $(RPM_TMP)/SOURCES/fusionforge-$(version)/; utils/manage-translations.sh build ; utils/manage-apache-config.sh build
 	rm -f $(RPM_TMP)/SOURCES/fusionforge-$(version)/utils/fusionforge-shell-postgresql.spec
 	cd $(RPM_TMP)/SOURCES/; cp fusionforge-$(version)/rpm-specific/patches/* .
 	cd $(RPM_TMP)/SOURCES/; tar cjf fusionforge-$(version).tar.bz2 fusionforge-$(version)
