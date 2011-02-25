@@ -362,6 +362,7 @@ mantisbt plugin for FusionForge.
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/svn
 %{__install} -m 755 -d $RPM_BUILD_ROOT%{FORGE_VAR_LIB}/chroot/scmrepos/cvs
 %{__install} -m 755 -d $RPM_BUILD_ROOT/home/groups
+%{__install} -m 755 -d $RPM_BUILD_ROOT/var/log/gforge
 # mock mediawiki directory because we symlink GForge skin to Monobook
 %{__install} -m 755 -d $RPM_BUILD_ROOT/usr/share/mediawiki/skins
 
@@ -774,7 +775,7 @@ fi
 %dir %{FORGE_CONF_DIR}/httpd.conf.d
 %{FORGE_CONF_DIR}/httpd.conf.d/*
 %{FORGE_CONF_DIR}/config.ini-fhs
-%{FORGE_CONF_DIR}/httpd.conf-fhs
+%{_sysconfdir}/httpd/conf.d/gforge.conf
 %dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
 %dir %{FORGE_VAR_LIB}/scmtarballs
 %dir %{FORGE_VAR_LIB}/scmsnapshots
