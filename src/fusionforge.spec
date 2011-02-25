@@ -769,6 +769,9 @@ fi
 %dir %{FORGE_CONF_DIR}
 #%config(noreplace) %{FORGE_CONF_DIR}/httpd.secrets
 %dir %{FORGE_CONF_DIR}/httpd.d
+%dir %{FORGE_CONF_DIR}/httpd.conf.d
+%{FORGE_CONF_DIR}/httpd.conf.d/*
+%{FORGE_CONF_DIR}/config.ini-fhs
 %dir %attr(0775,root,%{httpdgroup}) %{FORGE_CONF_DIR}/plugins
 %dir %{FORGE_VAR_LIB}/scmtarballs
 %dir %{FORGE_VAR_LIB}/scmsnapshots
