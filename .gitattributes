@@ -1740,6 +1740,7 @@ src/plugins/mailman/www/themes/default/images/ic/delete.png -text svneol=unset#i
 src/plugins/mailman/www/themes/default/images/ic/tick.png -text svneol=unset#image/png
 src/plugins/mantis/etc/mantis.ini -text
 src/plugins/mantis/packaging/install/plugin-mantis -text
+src/plugins/mantisbt/NAME -text
 src/plugins/mantisbt/action/addAttachment.php -text
 src/plugins/mantisbt/action/addIssue.php -text
 src/plugins/mantisbt/action/addNote.php -text
@@ -1762,6 +1763,10 @@ src/plugins/mantisbt/controler/filter_roadmap.php -text
 src/plugins/mantisbt/db/mantisbt-init.sql -text
 src/plugins/mantisbt/etc/mantisbt.ini -text
 src/plugins/mantisbt/etc/plugins/mantisbt/config.php -text
+src/plugins/mantisbt/packaging/control/224plugin-mantisbt -text
+src/plugins/mantisbt/packaging/control/224plugin-mantisbt.shortdesc -text
+src/plugins/mantisbt/packaging/install/plugin-mantisbt -text
+src/plugins/mantisbt/packaging/links/plugin-mantisbt -text
 src/plugins/mantisbt/view/addAttachment.php -text
 src/plugins/mantisbt/view/addIssue.php -text
 src/plugins/mantisbt/view/addOrEditNote.php -text

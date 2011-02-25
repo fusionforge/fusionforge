@@ -1,0 +1,7 @@
+plugins/mantisbt/action		usr/share/gforge/plugins/mantisbt/
+plugins/mantisbt/common		usr/share/gforge/plugins/mantisbt/
+plugins/mantisbt/controler	usr/share/gforge/plugins/mantisbt/
+plugins/mantisbt/view		usr/share/gforge/plugins/mantisbt/
+plugins/mantisbt/www		usr/share/gforge/plugins/mantisbt/
+plugins/mantisbt/etc/plugins/mantisbt/*  etc/gforge/plugins/mantisbt/
+plugins/mantisbt/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
