@@ -44,6 +44,12 @@ if (!$user || !is_object($user)) {
 
 $type = getStringFromRequest('type');
 $group_id = getIntFromRequest('group_id');
+if (!$type) {
+	exit_missing_params($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
+} elseif (!$group_id) {
+	exit_missing_params($_SERVER['HTTP_REFERER'], array('No GROUP_ID specified'), 'mantisbt');
+}
+
 $user_id = getIntFromRequest('user_id');
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
@@ -51,12 +57,7 @@ $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 $action = getStringFromRequest('action');
 $view = getStringFromRequest('view');
 
-if (!$type) {
-	exit_missing_params($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
-} elseif (!$group_id) {
-	exit_missing_params($_SERVER['HTTP_REFERER'], array('No GROUP_ID specified'), 'mantisbt');
-}
-
+$use_tooltips = $user->usesTooltips();
 $mantisbt = plugin_get_object('mantisbt');
 
 switch ($type) {
@@ -75,7 +76,6 @@ switch ($type) {
 		}
 
 		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
-
 
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');

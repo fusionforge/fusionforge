@@ -41,13 +41,34 @@ global $use_tooltips;
 
 echo '<form method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=init" >';
 echo '<table>';
-echo '<tr><td><label title="'._('Specify the Full URL of the MantisBT Web Server.').'" >URL</label></td><td><input type="text" size="50" maxlength="255" name="url" /></td></tr>';
-echo '<tr><td><label title="'._('Specify the user with admin right to be used thru SOAP API.').'">SOAP User</label></td><td><input type="text" size="50" maxlength="255" name="soap_user" /></td></tr>';
-echo '<tr><td><label title="'._('Specify the password of this user.').'">SOAP Password</label></td><td><input type="text" size="50" maxlength="255" name="soap_password" /></td></tr>';
-echo '<tr><td><label title="'._('If this project does NOT exist in MantisBT, do you want to create it ?').'" >Create the project in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" onclick="javascript:doMantisBTName()" value="1" ></td></tr>';
-echo '<tr><td><label title="'._('Specify the name of the project in MantisBT if already created in MantisBT').'" >Name of the project in MantisBT</label></td><td><input id="mantisbtname" type="text" size="50" maxlength="255" name="mantisbtname" /></td></tr>';
-echo '<tr><td><label title="'._('Do you want to sync FusionForge -> MantisBT users ?').'">Sync Users</label></td><td><input disabled="disabled" type="checkbox" name="sync_user" /></td></tr>';
-echo '<tr><td><label title="'._('Do you want to sync FusionForge -> MantisBT roles ?').'">Sync Roles</label></td><td><input disabled="disabled" type="checkbox" name="sync_roles" /></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('Specify the Full URL of the MantisBT Web Server.').'"';
+echo ' >URL</label></td><td><input type="text" size="50" maxlength="255" name="url" /></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('Specify the user with admin right to be used thru SOAP API.').'"';
+echo ' >SOAP User</label></td><td><input type="text" size="50" maxlength="255" name="soap_user" /></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('Specify the password of this user.').'"';
+echo ' >SOAP Password</label></td><td><input type="text" size="50" maxlength="255" name="soap_password" /></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('If this project does NOT exist in MantisBT, do you want to create it ?').'"';
+echo ' >Create the project in MantisBT</label></td><td><input id="mantisbtcreate" type="checkbox" name="mantisbtcreate" onclick="javascript:doMantisBTName()" value="1" ></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('Specify the name of the project in MantisBT if already created in MantisBT').'"';
+echo ' >Name of the project in MantisBT</label></td><td><input id="mantisbtname" type="text" size="50" maxlength="255" name="mantisbtname" /></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('Do you want to sync FusionForge -> MantisBT users ?').'"';
+echo ' >Sync Users</label></td><td><input disabled="disabled" type="checkbox" name="sync_user" /></td></tr>';
+echo '<tr><td><label ';
+if ($use_tooltips)
+	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ?').'"';
+echo ' >Sync Roles</label></td><td><input disabled="disabled" type="checkbox" name="sync_roles" /></td></tr>';
 echo '</table>';
 echo '<input type="submit" value="'._('Initialize').'" />';
 echo '</form>';
