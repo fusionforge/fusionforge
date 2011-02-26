@@ -445,7 +445,7 @@ class MantisBTPlugin extends Plugin {
 		return $returned;
 	}
 
-	/*
+	/**
 	 * __getDBType - return the type of DB used for mantisbt
 	 *
 	 * @return	string	type of the DB
@@ -497,12 +497,23 @@ class MantisBTPlugin extends Plugin {
 		return $mantisbtConfArray;
 	}
 
+	/**
+	 * getInitDisplay - display the init page
+	 * @return	bool	true only currently
+	 */
 	function getInitDisplay() {
 		global $gfplugins;
 		require_once $gfplugins.$this->name.'/view/init.php';
+		return true;
 	}
 
+	/**
+	 * getHeader - initialize header and js
+	 * @param	string	type : user, project (aka group)
+	 * @return	bool	success or not
+	 */
 	function getHeader($type) {
+		$returned = false;
 		$params['toptab'] = $this->name;
 		html_use_tooltips();
 		use_javascript('scripts/MantisBTController.js');
@@ -514,21 +525,31 @@ class MantisBTPlugin extends Plugin {
 				$params['pagename'] = $this->name;
 				$params['sectionvals'] = array(group_getname($group_id));
 				site_project_header($params);
+				$returned = true;
 				break;
 			}
 			case 'user': {
 				global $user_id;
 				$params['user'] = $user_id;
 				site_user_header($params);
+				$returned = true;
 				break;
 			}
 			default: {
 				break;
 			}
 		}
-
+		return $returned;
 	}
 
+	/**
+	 * initialize - initialize the mantisbt plugin
+	 *		create mantisbt project if needed
+	 *		save config in db
+	 * @param	int	the group id
+	 * @param	array	configuration array
+	 * @return	bool	success or not
+	 */
 	function initialize($group_id, $confArr) {
 		if ($confArr['mantisbtcreate']) {
 			$idProjectMantis = $this->addProjectMantis($group_id, $confArr);
