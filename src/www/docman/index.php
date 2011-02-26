@@ -102,9 +102,7 @@ if (session_loggedin()) {
 	} elseif ($u->isError()) {
 		exit_error($u->getErrorMessage(), 'my');
 	}
-	if (!$u->usesTooltips()) {
-		$use_tooltips = 0;
-	}
+	$use_tooltips = $u->usesTooltips();
 }
 
 $df = new DocumentFactory($g);
