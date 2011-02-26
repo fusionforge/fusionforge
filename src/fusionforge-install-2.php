@@ -167,7 +167,7 @@
 	if (!is_file("/etc/gforge/httpd.conf")) {
 		system("cp etc/httpd.conf-opt /etc/gforge/httpd.conf");
 	}
-	system("src/utils/manage-apache-config.sh build");
+	system("src/utils/manage-apache-config.sh install");
 	system("mkdir -p /etc/gforge/httpd.conf.d");
 	$h = opendir ('etc/httpd.conf.d-opt') ;
 	while (false !== ($file = readdir($h))) {
