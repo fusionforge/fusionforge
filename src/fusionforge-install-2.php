@@ -152,6 +152,17 @@
 
 	//cd /opt/gforge
 	chdir("/opt/gforge");
+	system("chown -R root:$args[3] /opt/gforge");
+	system("chmod -R 644 /opt/gforge/");
+	system("cd /opt/gforge && find -type d | xargs chmod 755");
+	system("chown -R $args[2]:$args[3] /var/lib/gforge/uploads");
+	system("chmod -R 755 /opt/gforge/cronjobs/");
+	system("chmod 755 /opt/gforge/www/scm/viewvc/bin/cgi/viewvc.cgi");
+	system("chmod 755 /opt/gforge/utils/forge_get_config");
+	system("chmod 755 /opt/gforge/utils/manage-apache-config.sh");
+	system("/opt/gforge/utils/manage-apache-config.sh build");
+	system("chmod 755 /opt/gforge/utils/manage-translations.sh");
+	system("chmod 755 /opt/gforge/utils/migrate-to-ini-files.sh");
 
 	//#restricted shell for cvs accounts
 	//echo "linea 1\n";
@@ -167,7 +178,6 @@
 	if (!is_file("/etc/gforge/httpd.conf")) {
 		system("cp etc/httpd.conf-opt /etc/gforge/httpd.conf");
 	}
-	system("src/utils/manage-apache-config.sh install");
 	system("mkdir -p /etc/gforge/httpd.conf.d");
 	$h = opendir ('etc/httpd.conf.d-opt') ;
 	while (false !== ($file = readdir($h))) {
@@ -251,16 +261,6 @@
 
 	//cd /opt/gforge
 	chdir("/opt/gforge");
-	system("chown -R root:$args[3] /opt/gforge");
-	system("chmod -R 644 /opt/gforge/");
-	system("cd /opt/gforge && find -type d | xargs chmod 755");
-	system("chown -R $args[2]:$args[3] /var/lib/gforge/uploads");
-	system("chmod -R 755 /opt/gforge/cronjobs/");
-	system("chmod 755 /opt/gforge/www/scm/viewvc/bin/cgi/viewvc.cgi");
-	system("chmod 755 /opt/gforge/utils/forge_get_config");
-	system("chmod 755 /opt/gforge/utils/manage-apache-config.sh");
-	system("chmod 755 /opt/gforge/utils/manage-translations.sh");
-	system("chmod 755 /opt/gforge/utils/migrate-to-ini-files.sh");
 	
 	if (!is_dir("/etc/gforge"))
 	{
