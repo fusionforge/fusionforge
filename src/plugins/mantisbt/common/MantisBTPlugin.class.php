@@ -505,6 +505,7 @@ class MantisBTPlugin extends Plugin {
 	function getHeader($type) {
 		$params['toptab'] = $this->name;
 		html_use_tooltips();
+		use_javascript('scripts/MantisBTController.js');
 		switch ($type) {
 			case 'project': {
 				global $group_id;
