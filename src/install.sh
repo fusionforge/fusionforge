@@ -66,16 +66,23 @@ else
 	echo "Installing FusionForge ...";
 fi
 
+echo "Install type = $type"
 if [ "$type" = "redhat" ]
 then
+	echo "Installing php"
 	yum -y install php
+	echo "Running php fusionforge-install-1-deps.php $deps"
 	php fusionforge-install-1-deps.php $deps
+	echo "Running php fusionforge-install-2.php "$hostname" apache apache"
 	php fusionforge-install-2.php "$hostname" apache apache
 
 	if [ $mode = "install" ]
 	then
+		echo "Running php fusionforge-install-3-db.php"
 		php fusionforge-install-3-db.php
+		echo "Running php db/upgrade-db.php"
 		php db/upgrade-db.php
+		echo "Running php fusionforge-install-4-config.php"
 		php fusionforge-install-4-config.php
 
 		# Post installation fixes.
@@ -93,6 +100,7 @@ then
 		cp plugins/*/etc/cron.d/* /etc/cron.d/
 		service crond reload
 	else
+		echo "Running php db/upgrade-db.php"
 		php db/upgrade-db.php
 	fi
 elif [ "$type" = "suse" ]
