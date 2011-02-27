@@ -1,6 +1,8 @@
 <?php
 /*
- * Copyright 2010, Franck Villaume - Capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -21,14 +23,18 @@
  */
 
 global $HTML;
+global $group_id;
+global $mantisbt;
 /* add category to a dedicated project */
 
-echo '<form method="POST" name="addCategory" action="index.php?type=admin&id='.$id.'&pluginname=mantisbt&action=addCategory">';
+echo '<form method="POST" name="addCategory" action="index.php?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addCategory">';
+echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new category'));
 echo '<td><input name="nameCategory" type="text"></input></td>';
 echo '<td>';
 echo '<input type="submit" value="'. _('Add') .'" />';
 echo '</td>';
 echo $HTML->boxBottom();
+echo '</tr></table>';
 echo '</form>';
 ?>

@@ -56,6 +56,7 @@ switch ($view) {
 			echo '</td><td valign="top">';
 			include ("mantisbt/view/admin/addVersion.php");
 			echo '</td></tr></table>';
+			include ("mantisbt/view/admin/viewConfiguration.php");
 		}
 		break;
 	}

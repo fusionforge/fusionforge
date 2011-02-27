@@ -1,7 +1,5 @@
 <?php
 /*
- * MantisBT plugin
- *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
@@ -22,26 +20,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-/* add a new version */
+/* view version of a dedicated group in MantisBt */
 
+/* main display */
 global $HTML;
-global $group;
-global $group_id;
 global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
 
-echo '<form method="POST" name="addVersion" action="index.php?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addVersion">';
-echo '<table><tr>';
-echo $HTML->boxTop(_('Add a new version'));
-echo '<td>';
-echo '<input name="version" type="text" size="10" />';
-if ($group->usesPlugin('projects_hierarchy')) {
-	echo '<input name="transverse" type="checkbox" value="1" >'. _('Cross version (son included)') .'</input>';
-}
-echo '</td>';
-echo '<td>';
-echo '<input type="submit" value="'. _('Add') .'" />';
-echo '</td>';
+echo $HTML->boxTop(_('Manage configuration'));
+echo 'TO BE IMPLEMENTED';
 echo $HTML->boxBottom();
-echo '</tr></table>';
-echo '</form>';
 ?>

@@ -45,9 +45,21 @@ if (!$user || !is_object($user)) {
 $type = getStringFromRequest('type');
 $group_id = getIntFromRequest('group_id');
 if (!$type) {
-	exit_missing_params($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
+	if (forge_get_config('use_ssl'))
+		$url = "https://";
+	else
+		$url = "http://";
+
+	$url .= forge_get_config('web_host');
+	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No TYPE specified'), 'mantisbt');
 } elseif (!$group_id) {
-	exit_missing_params($_SERVER['HTTP_REFERER'], array('No GROUP_ID specified'), 'mantisbt');
+	if (forge_get_config('use_ssl'))
+		$url = "https://";
+	else
+		$url = "http://";
+
+	$url .= forge_get_config('web_host');
+	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No GROUP_ID specified'), 'mantisbt');
 }
 
 $user_id = getIntFromRequest('user_id');
@@ -177,18 +189,27 @@ switch ($type) {
 
 		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
 		if (!$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'));
+			exit_permission_denied(_('You are not a member of this project'), 'home');
 		}
 
 		switch ($action) {
-			case "init":
+			case "init": {
+				global $gfplugins;
+				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
+				break;
+			}
 			case "addCategory":
 			case "addVersion":
 			case "renameCategory":
 			case "deleteCategory":
 			case "deleteVersion":
-			case "updateVersion":  {
+			case "updateVersion": {
 				global $gfplugins;
+				$mantisbtConf = $mantisbt->getMantisBTConf();
+				if (!$mantisbtConf['sync_users']) {
+					$username = $mantisbtConf['soap_user'];
+					$password = $mantisbtConf['soap_password'];
+				}
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
 			}
@@ -196,20 +217,24 @@ switch ($type) {
 
 		$mantisbt->getHeader('project');
 		//only project admin can access here
-		if ($userperm->isAdmin()) {
-			switch ($view) {
-				case "init": {
-					$mantisbt->getInitDisplay();
-					break;
-				}
-				default: {
-					$mantisbtConf = $mantisbt->getMantisBTConf();
-					$mantisbt->getAdminView();
-					break;
-				}
+		if (!$userperm->isAdmin()) {
+			exit_permission_denied(_('You are not Admin of this project'), 'mantisbt');
+		}
+
+		switch ($view) {
+			case "init": {
+				$mantisbt->getInitDisplay();
+				break;
 			}
-		} else {
-			exit_permission_denied(_('You are not Admin of this project'), 'home');
+			default: {
+				$mantisbtConf = $mantisbt->getMantisBTConf();
+				if (!$mantisbtConf['sync_users']) {
+					$username = $mantisbtConf['soap_user'];
+					$password = $mantisbtConf['soap_password'];
+				}
+				$mantisbt->getAdminView();
+				break;
+			}
 		}
 		break;
 	}
