@@ -23,6 +23,8 @@
 
 global $mantisbt;
 global $mantisbtConf;
+global $username;
+global $password;
 
 $view = getStringFromRequest('view');
 
@@ -38,7 +40,7 @@ switch ($view) {
 		/* affichage principal */
 		if (!isset($clientSOAP)) {
 			try {
-				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+				$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 			} catch (SoapFault $soapFault) {
 				echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 				$errorPage = true;

@@ -203,6 +203,7 @@ switch ($type) {
 					break;
 				}
 				default: {
+					$mantisbtConf = $mantisbt->getMantisBTConf();
 					$mantisbt->getAdminView();
 					break;
 				}
