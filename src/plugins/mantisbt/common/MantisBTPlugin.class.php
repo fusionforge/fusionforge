@@ -476,13 +476,13 @@ class MantisBTPlugin extends Plugin {
 		$mantisbtConfArray = array();
 		$resIdProjetMantis = db_query_params('SELECT * FROM plugin_mantisbt WHERE id_group = $1', array($groupId));
 		if (!$resIdProjetMantis) {
-			$group->setError('getMantisBTId::error ' .db_error());
+			$group->setError('getMantisBTId::error '.db_error());
 			return $mantisbtConfArray;
 		}
 
 		$row = db_numrows($resIdProjetMantis);
 
-		if ($row == null || count($row)>2) {
+		if ($row == null || count($row) > 2) {
 			$mantisbtConfArray['id_mantisbt'] = 0;
 			return $mantisbtConfArray;
 		}
@@ -521,7 +521,7 @@ class MantisBTPlugin extends Plugin {
 			case 'project': {
 				global $group_id;
 				$params['group'] = $group_id;
-				$params['title'] = $this->name . ' Project Plugin!';
+				$params['title'] = $this->name.' Project Plugin!';
 				$params['pagename'] = $this->name;
 				$params['sectionvals'] = array(group_getname($group_id));
 				site_project_header($params);

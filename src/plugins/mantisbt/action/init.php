@@ -32,7 +32,7 @@ $confArr['soap_password'] = getStringFromRequest('soap_password');
 $confArr['mantisbtcreate'] = getIntFromRequest('mantisbtcreate');
 $confArr['mantisbtname'] = getStringFromRequest('mantisbtname');
 
-if (!$mantisbt->initialize($group_id,$confArr))
+if (!$mantisbt->initialize($group_id, $confArr))
 	session_redirect('/plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname=mantisbt&error_msg='.urlencode($group->getErrorMessage()));
 
 $feedback = _('MantisBT plugin successfully initialized.');

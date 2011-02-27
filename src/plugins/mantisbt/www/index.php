@@ -69,6 +69,9 @@ switch ($type) {
 		if (!$group->usesPlugin($mantisbt->name)) {//check if the group has the MantisBT plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $mantisbt->name), 'home');
 		}
+		if ( $group->isError()) {
+			$error_msg .= $group->getErrorMessage();
+		}
 
 		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
 		if ( !$userperm->IsMember()) {
@@ -79,7 +82,11 @@ switch ($type) {
 
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
-			session_redirect('/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg));
+			$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg);
+			if ($error_msg) {
+				$redirect_url .= '&error_msg='.urlencode($error_msg);
+			}
+			session_redirect($redirect_url);
 		}
 
 		if (!$mantisbtConf['sync_users']) {
@@ -164,6 +171,10 @@ switch ($type) {
 		if (!$group->usesPlugin($mantisbt->name)) {//check if the group has the MantisBT plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$mantisbt->name),'home');
 		}
+		if ($group->isError()) {
+			$error_msg .= $group->getErrorMessage();
+		}
+
 		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
 		if (!$userperm->IsMember()) {
 			exit_permission_denied(_('You are not a member of this project'));
