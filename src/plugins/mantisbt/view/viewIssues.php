@@ -512,7 +512,7 @@ if (!isset($errorPage)) {
 		// Ajout de ticket
 		if ($type == "group") {
 		?>
-			<p class="notice_title" onclick='$("#expandable_ticket").slideToggle(300);'><?php echo _('Add a new ticket') ?></p>
+			<p class="notice_title" onclick='jQuery("#expandable_ticket").slideToggle(300);'><?php echo _('Add a new ticket') ?></p>
 			<div id='expandable_ticket' class="notice_content">
 			<?php include("addIssue.php") ?>
 			</div>
