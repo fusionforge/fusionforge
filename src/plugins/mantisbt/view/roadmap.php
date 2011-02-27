@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
  * http://fusionforge.org
  *
@@ -21,12 +21,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
+
 try {
 	/* do not recreate $clientSOAP object if already created by other pages */
 	if (!isset($clientSOAP))
-		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 
-	$listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
+	$listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt']));
 
 } catch (SoapFault $soapFault) {
 	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
@@ -37,7 +43,7 @@ if (!isset($errorPage)) {
 	GLOBAL $HTML;
 ?>
 <script type="text/javascript">
-	$(document).ready(function() {
+	jQuery(document).ready(function() {
 <?php
 	$view = 0;
 	foreach ($listChild as $key => $child) {
@@ -50,7 +56,7 @@ if (!isset($errorPage)) {
 	}
 	if ( $view == 0 ) {
 ?>
-	$("#expandable_filter").hide();
+	jQuery("#expandable_filter").hide();
 <?php
 	}
 ?>
@@ -79,8 +85,8 @@ if (!isset($errorPage)) {
 }
 </style>
 
-<h2 style='border-bottom: 1px solid black'>Filtres</h2>
-<p class="notice_title" onclick='$("#expandable_filter").slideToggle(300)'>Afficher les r&egrave;gles de filtrage</p>
+<h2 style='border-bottom: 1px solid black'><?php echo _('Filters') ?></h2>
+<p class="notice_title" onclick='jQuery("#expandable_filter").slideToggle(300)'><?php echo _('Display filter rules') ?></p>
 
 <div id='expandable_filter' class="notice_content" style='clear: both'>
 <?php
@@ -89,7 +95,7 @@ if (!isset($errorPage)) {
 </div>
 
 <?php
-	echo '<h2 style="border-bottom: 1px solid black">Feuille de route</h2>';
+	echo '<h2 style="border-bottom: 1px solid black">'._('Roadmap').'</h2>';
 	if (!isset($_POST['projectVersionId'])) {
 		if (isset($listVersions) && !empty($listVersions)) {
 			$listPrintVersions = $listVersions;
@@ -104,18 +110,18 @@ if (!isset($errorPage)) {
 	}
 	if (isset($listPrintVersions) && !empty($listPrintVersions)) {
 		foreach ($listPrintVersions as $key => $version) {
-			$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $idProjetMantis, "version" => $version->name ));
+			$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $mantisbtConf['id_mantisbt'], "version" => $version->name ));
 			echo	'<fieldset>';
-			$typeVersion = "Milestone";
+			$typeVersion = _('Milestone');
 			if ( $version->released ) {
-				$typeVersion = "Release";
+				$typeVersion = _('Release');
 			}
-			echo	'Version : '.$version->name.' (<i>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).' ticket(s)</i>';
+			echo	_('Version:').' '.$version->name.' (<i>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).' ticket(s)</i>';
 			echo	'<ul>';
 			foreach ( $idsBug as $key => $idBug ) {
 				$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 				if ( !array_key_exists('handler', $defect) || !array_key_exists('name', $defect->handler) ) {
-					$defect_handler_name = "non-affecte";
+					$defect_handler_name = _('no-handler');
 				} else {
 					$defect_handler_name = $defect->handler->name;
 				}
@@ -123,7 +129,7 @@ if (!isset($errorPage)) {
 				if ( $defect->status->id >= 80 ) {
 					echo '<strike>';
 				}
-				echo	'<a href="?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
+				echo	'<a href="?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
 				if ( $defect->status->id >= 80 ) {
 					echo '</strike>';
 				}
@@ -136,11 +142,11 @@ if (!isset($errorPage)) {
 		if (sizeof($listChild)) {
 			foreach ($listChild as $key => $child) {
 				if (isset($_POST['project'.$child.'VersionId'])) {
-					$resultGroupNameFusionForge = db_query_params('select groups.group_name, groups.group_id from groups,group_mantisbt
-											where groups.group_id = group_mantisbt.id_group and group_mantisbt.id_mantisbt = $1',
+					$resultGroupNameFusionForge = db_query_params('select groups.group_name, groups.group_id from groups,plugin_mantisbt
+											where groups.group_id = plugin_mantisbt.id_group and plugin_mantisbt.id_mantisbt = $1',
 											array($child));
 					$rowGroupNameFusionForge = db_fetch_array($resultGroupNameFusionForge);
-					echo $HTML->boxTop('<a style="color:white;" href="?type=group&id='.$rowGroupNameFusionForge['group_id'].'&pluginname=mantisbt">'.$rowGroupNameFusionForge['group_name'].'</a>');
+					echo $HTML->boxTop('<a style="color:white;" href="?type=group&group_id='.$rowGroupNameFusionForge['group_id'].'&pluginname='.$mantisbt->name.'">'.$rowGroupNameFusionForge['group_name'].'</a>');
 					echo '<fieldset>';
 					$listChildVersions = $clientSOAP->__soapCall('mc_project_get_versions', array("username" => $username, "password" => $password, "project_id" => $child));
 					if (!empty($listChildVersions)){
@@ -155,16 +161,16 @@ if (!isset($errorPage)) {
 							foreach ($listChildPrintVersions as $key => $childprintversion){
 								echo	'<fieldset>';
 								$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $child, "version" => $childprintversion->name ));
-								$typeVersion = "Milestone";
+								$typeVersion = _('Milestone');
 								if ( $childprintversion->released == 1 ) {
-									$typeVersion = "Release";
+									$typeVersion = _('Release');
 								}
-								echo	'Version : '.$childprintversion->name.' (<i>'.strftime("%d/%m/%Y",strtotime($childprintversion->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).'</i>';
+								echo	_('Version:').' '.$childprintversion->name.' (<i>'.strftime("%d/%m/%Y",strtotime($childprintversion->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).'</i>';
 								echo	'<ul>';
 								foreach ( $idsBug as $key => $idBug ) {
 									$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 									if ( !array_key_exists('handler', $defect) || !array_key_exists('name', $defect->handler) ) {
-										$defect_handler_name = "non-affecte";
+										$defect_handler_name = _('no-handler');
 									} else {
 										$defect_handler_name = $defect->handler->name;
 									}
@@ -172,7 +178,7 @@ if (!isset($errorPage)) {
 									if ( $defect->status->id >= 80 ) {
 										echo '<strike>';
 									}
-									echo    '<a href="?type=group&id='.$rowGroupNameFusionForge['group_id'].'&pluginname=mantisbt&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
+									echo    '<a href="?type=group&group_id='.$rowGroupNameFusionForge['group_id'].'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&view=viewIssue">'.$defect->id.'</a>: '.$defect->summary.' ('.$defect->resolution->name.') - ('.$defect_handler_name.')';
 									if ( $defect->status->id >= 80 ) {
 										echo '</strike>';
 									}
