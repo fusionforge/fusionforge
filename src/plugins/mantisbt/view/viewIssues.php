@@ -77,7 +77,7 @@ if (!isset($errorPage)) {
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	jQuery(document).ready(function() {
 	<?php
 		if (!isset($_POST["projectStatus"]) && !isset($_POST["projectChildId"]) && !isset($_POST["projectFixers"]) && !isset($_POST["projectReporters"]))
 		{
