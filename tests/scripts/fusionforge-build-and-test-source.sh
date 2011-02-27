@@ -39,7 +39,7 @@ export BUILDRESULT=$WORKSPACE/build/packages
 [ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
 mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage $WORKSPACE/apidocs
 
-make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
+[ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
 make BUILDRESULT=$WORKSPACE/build/packages buildtar
 
 cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
