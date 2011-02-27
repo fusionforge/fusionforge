@@ -285,13 +285,13 @@
 	#file_put_contents('/etc/gforge/local.inc', $content);
 
 	# Set jpgraph path.
-	if (is_dir("/usr/share/jpgraph")) {
-		system("perl -spi -e \"s!^(.sys_path_to_jpgraph)=.*!\\$1='/usr/share/jpgraph';!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_title_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_title_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_title_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
-		system("perl -spi -e \"s!//(.gantt_task_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
-		#system("perl -spi -e \"s!//(.gantt_task_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
-		#system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
-	}
+	#if (is_dir("/usr/share/jpgraph")) {
+	#	system("perl -spi -e \"s!^(.sys_path_to_jpgraph)=.*!\\$1='/usr/share/jpgraph';!\" /etc/gforge/local.inc");
+	#	system("perl -spi -e \"s!//(.gantt_title_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
+	#	system("perl -spi -e \"s!//(.gantt_title_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
+	#	system("perl -spi -e \"s!//(.gantt_title_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
+	#	system("perl -spi -e \"s!//(.gantt_task_font_family)='FF_ARIAL';!\\$1='FF_LIBERATION_SANS';!\" /etc/gforge/local.inc");
+	#	system("perl -spi -e \"s!//(.gantt_task_font_style=.*)!\\$1!\" /etc/gforge/local.inc");
+	#	system("perl -spi -e \"s!//(.gantt_task_font_size=.*)!\\$1!\" /etc/gforge/local.inc");
+	#}
 	print "\n";
