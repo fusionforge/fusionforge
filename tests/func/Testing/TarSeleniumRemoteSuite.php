@@ -15,13 +15,13 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 		} else {
 			system("scp ../../build/packages/fusionforge-*.tar.bz2 root@".HOST.":");
 		}
-		system("ssh root@centos52 'tar jxf fusionforge-*.tar.bz2'");
+		system("ssh root@".HOST." 'tar jxf fusionforge-*.tar.bz2'");
 
 		if (is_file("/tmp/timedhosts.txt")) {
 			system("scp -p /tmp/timedhosts.txt root@".HOST.":/var/cache/yum/timedhosts.txt");
 		}
 
-		system("ssh root@centos52 'cd fusionforge-*; FFORGE_RPM_REPO=http://buildbot.fusionforge.org/job/fusionforge-trunk-build-and-test-rpm/ws/build/packages/ FFORGE_DB=fforge FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin ./install.sh centos52.local'");
+		system("ssh root@".HOST." 'cd fusionforge-*; FFORGE_RPM_REPO=http://buildbot.fusionforge.org/job/fusionforge-trunk-build-and-test-rpm/ws/build/packages/ FFORGE_DB=fforge FFORGE_USER=gforge FFORGE_ADMIN_USER=ffadmin FFORGE_ADMIN_PASSWORD=ffadmin ./install.sh centos52.local'");
 
 		system("scp -p root@".HOST.":/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt");
 		system("ssh root@".HOST." '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzzz-builbot.ini'");
