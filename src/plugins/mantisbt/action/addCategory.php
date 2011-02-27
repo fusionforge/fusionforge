@@ -24,6 +24,7 @@ global $mantisbt;
 global $mantisbtConf;
 global $username;
 global $password;
+global $group_id;
 
 $nameCategory = $_POST['nameCategory'];
 

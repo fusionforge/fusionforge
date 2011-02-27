@@ -1,8 +1,8 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -22,22 +22,26 @@
  */
 
 /* renameCategory action page */
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
 
 $newCategoryName = $_POST['newCategoryName'];
 $renameCategory = $_POST['renameCategory'];
 
 if ( $newCategoryName && $renameCategory ) {
-    try {
-	    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-	    $clientSOAP->__soapCall('mc_project_rename_category_by_name', array("username" => $username, "password" => $password, "p_project_id" => $idProjetMantis, "p_category_name" => $renameCategory, "p_category_name_new" => $newCategoryName, "p_assigned_to" => ''));
-    } catch (SoapFault $soapFault) {
-        $msg = 'Error : '.$soapFault->faultstring;
-        session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($msg));
-    }
-    $feedback = 'Op&eacute;ration r&eacute;ussie';
-    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
-} else {
-    $warning = 'Param&egravetres manquants';
-    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&warning_msg='.urlencode($warning));
+	try {
+		$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		$clientSOAP->__soapCall('mc_project_rename_category_by_name', array("username" => $username, "password" => $password, "p_project_id" => $mantisbtConf['id_mantisbt'], "p_category_name" => $renameCategory, "p_category_name_new" => $newCategoryName, "p_assigned_to" => ''));
+	} catch (SoapFault $soapFault) {
+		$msg = _('Error:').' '.$soapFault->faultstring;
+		session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
+	}
+	$feedback = _('Category renamed successfully');
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 }
+$warning_msg = _('Missing category name');
+session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
 ?>
