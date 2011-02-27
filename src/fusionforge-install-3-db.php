@@ -343,7 +343,7 @@ database_host=""
 database_name='.$gforge_db.'
 database_user='.$gforge_user.'
 database_port=5432
-#database_password=$pw
+; database_password=$pw
 ';
 			fwrite ($fp, $config);
 			fclose($fp);	
