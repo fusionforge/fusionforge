@@ -210,7 +210,6 @@ if (!isset($errorPage)){
     echo	'<br/>';
     echo 	'<div align="center">';
     echo 		'<input type="button" name="submitbutton" onclick="validate();" value="'._('Update').'">';
-    echo 		'<input type="button" name="Annuler" value="Annuler" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantis->name.'\'">';
     echo 	'</div>';
     echo 	'</form>';
 }

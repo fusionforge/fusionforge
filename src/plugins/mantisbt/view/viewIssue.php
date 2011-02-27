@@ -128,14 +128,14 @@ if (!isset($errorPage)){
 <p class="notice_title" onclick='$("#expandable_edition").slideToggle(300)'><?php echo _('Edit ticket') ?></p>
 <div id='expandable_edition' class="notice_content">
 <?php
-	if (!$errorPage) {
+	if (!isset($errorPage)) {
 		include($gfplugins.$mantisbt->name."/view/editIssue.php");
 	}
 }
 ?>
 </div>
 <?php
-	if (!$errorPage) {
+	if (!isset($errorPage)) {
 		include($gfplugins.$mantisbt->name."/view/viewNote.php");
 		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
 }
