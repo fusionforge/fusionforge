@@ -467,14 +467,14 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * getMantisBTConf - get the mantisbt configuration id for a specific group_id
 	 *
-	 * @param	int	the group_id
 	 * @return	array	the mantisbt configuration array
 	 * @access	public
 	 */
-	function getMantisBTConf($groupId) {
-		$group = group_get_object($groupId);
+	function getMantisBTConf() {
+		global $group_id;
+		$group = group_get_object($group_id);
 		$mantisbtConfArray = array();
-		$resIdProjetMantis = db_query_params('SELECT * FROM plugin_mantisbt WHERE id_group = $1', array($groupId));
+		$resIdProjetMantis = db_query_params('SELECT * FROM plugin_mantisbt WHERE id_group = $1', array($group_id));
 		if (!$resIdProjetMantis) {
 			$group->setError('getMantisBTId::error '.db_error());
 			return $mantisbtConfArray;
@@ -505,6 +505,43 @@ class MantisBTPlugin extends Plugin {
 		global $gfplugins;
 		require_once $gfplugins.$this->name.'/view/init.php';
 		return true;
+	}
+
+	/**
+	 * getAdminView - display the admin page
+	 * @return	bool	true only currently
+	 */
+	function getAdminView() {
+		global $gfplugins;
+		require_once $gfplugins.$this->name.'/www/admin/index.php';
+		return true;
+	}
+
+	/**
+	 * getSubMenu - display the submenu
+	 * @return	bool	true only currently
+	 */
+	function getSubMenu() {
+		global $HTML;
+		global $group_id;
+		global $user;
+		$group = group_get_object($group_id);
+		// submenu
+		$labelTitle = array();
+		$labelTitle[] = _('Roadmap');
+		$labelTitle[] = _('Tickets');
+		$labelPage = array();
+		$labelPage[] = "/plugins/mantisbt/?type=group&group_id=".$group_id."&pluginname=".$this->name."&view=roadmap";
+		$labelPage[] = "/plugins/mantisbt/?type=group&group_id=".$group_id."&pluginname=".$this->name;
+		$userperm = $group->getPermission($user);
+		if ( $userperm->isAdmin() ) {
+			$labelTitle[] = _('Administration');
+			$labelPage[] = "/plugins/mantisbt/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
+			$labelTitle[] = _('Statistics');
+			$labelPage[] = "/plugins/mantisbt/?type=admin&group_id=".$group_id."&pluginname=".$this->name."&view=stat";
+		}
+
+		echo $HTML->subMenu($labelTitle, $labelPage);
 	}
 
 	/**

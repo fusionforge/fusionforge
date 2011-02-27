@@ -1,7 +1,7 @@
 <?php
 /*
  * Admin MantisBT page
- * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -21,37 +21,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$action = getStringFromRequest('action');
+global $mantisbt;
+global $mantisbtConf;
+
 $view = getStringFromRequest('view');
 
-switch ($action) {
-	case "addCategory":
-	case "addVersion":
-	case "renameCategory":
-	case "deleteCategory":
-	case "deleteVersion":
-	case "updateVersion": {
-		include ("mantisbt/action/admin/$action.php");
-		break;
-	}
-}
-
-// submenu
-$labelTitle = array();
-$labelTitle[] = _('Roadmap');
-$labelTitle[] = _('Tickets');
-$labelPage = array();
-$labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginname."&view=roadmap";
-$labelPage[] = "/plugins/mantisbt/?type=group&id=".$id."&pluginname=".$pluginname;
-$userperm = $group->getPermission($user);
-if ( $userperm->isAdmin() ) {
-	$labelTitle[] = _('Administration');
-	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname;
-	$labelTitle[] = _('Statistics');
-	$labelPage[] = "/plugins/mantisbt/?type=admin&id=".$id."&pluginname=".$pluginname."&view=stat";
-}
-
-echo $HTML->subMenu($labelTitle, $labelPage);
+$mantisbt->getSubMenu();
 
 switch ($view) {
 	case "editVersion":

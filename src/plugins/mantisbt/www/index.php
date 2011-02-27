@@ -78,7 +78,7 @@ switch ($type) {
 			exit_permission_denied(_('You are not a member of this project'), 'home');
 		}
 
-		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
+		$mantisbtConf = $mantisbt->getMantisBTConf();
 
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
@@ -181,7 +181,13 @@ switch ($type) {
 		}
 
 		switch ($action) {
-			case "init": {
+			case "init":
+			case "addCategory":
+			case "addVersion":
+			case "renameCategory":
+			case "deleteCategory":
+			case "deleteVersion":
+			case "updateVersion":  {
 				global $gfplugins;
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
@@ -194,6 +200,10 @@ switch ($type) {
 			switch ($view) {
 				case "init": {
 					$mantisbt->getInitDisplay();
+					break;
+				}
+				default: {
+					$mantisbt->getAdminView();
 					break;
 				}
 			}
