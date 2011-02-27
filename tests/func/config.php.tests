@@ -13,6 +13,9 @@
 // Host where selenium-rc is running
 define ('SELENIUM_RC_HOST', '192.168.0.204');
 
+// The forge's hostname
+define ('HOST', getenv('HOST'));
+
 // URL to access the application
 define ('URL', 'http://centos52.local/');
 
