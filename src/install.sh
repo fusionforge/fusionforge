@@ -87,6 +87,8 @@ then
 
 		# Post installation fixes.
 		perl -spi -e "s/^#ServerName (.*):80/ServerName $hostname:80/" /etc/httpd/conf/httpd.conf
+		# Disable ssl
+		perl -spi -e "s/^Include/#Include/" /etc/gforge/httpd.conf.d/ssl-on.inc
 
 		chkconfig httpd on
 		chkconfig postgresql on
