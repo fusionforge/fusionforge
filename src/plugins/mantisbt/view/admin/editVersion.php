@@ -55,7 +55,7 @@ foreach ($arrVersions as $key => $currentVersion) {
 if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Version Detail'));
 	echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=updateVersion">';
-	echo '<table class="innertabs">';
+	echo '<table>';
 	echo	'<thead>';
 	echo	'<tr>';
 	echo		'<th>'._('Version').'</th>';

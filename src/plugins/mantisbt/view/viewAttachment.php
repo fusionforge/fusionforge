@@ -46,13 +46,13 @@ if (empty($msg)) {
 		if (isset($defect->attachments) && count($defect->attachments) > 0) {
 			echo	'<table class="innertabs">';
 			echo '<tr>';
-			echo '<td class="FullBoxTitle">'._('Filename').'</td>';
-			echo '<td class="FullBoxTitle">'._('Actions').'</td>';
+			echo '<td>'._('Filename').'</td>';
+			echo '<td>'._('Actions').'</td>';
 			echo '</tr>';
 			foreach ($defect->attachments as $key => $attachement){
 				echo	'<tr>';
-				echo		'<td class="FullBox">'.$attachement->filename.'</td>';
-				echo 		'<td class="FullBox">';
+				echo		'<td>'.$attachement->filename.'</td>';
+				echo 		'<td>';
 				echo			'<input type=button value="'._('Download').'" onclick="window.location.href=\'getAttachment.php/'.$group_id.'/'.$attachement->id.'/'.$attachement->filename.'\'">';
 				echo			'<input type=button value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
 				echo		'</td>';

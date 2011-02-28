@@ -28,7 +28,7 @@ global $type;
 global $idBug;
 
 echo '<form method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&action=addAttachment&view=viewIssue" enctype="multipart/form-data">';
-echo	'<table class="innertabs">';
+echo	'<table>';
 echo		'<tr><td>';
 echo		_('File:'). ' '.'<input type="file" name="attachment" />';
 echo	'</td></tr></table>';
