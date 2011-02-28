@@ -51,7 +51,7 @@ if (!isset($errorPage)){
 		echo		'<td class="FullBoxTitle">'._('Type').'</td>';
 		echo 		'<td class="FullBoxTitle">'._('Action').'</td>';
 		echo	'</tr>';
-		$i = 0;
+		$i = 1;
 		foreach ($listVersions as $key => $version){
 			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
 			echo '<td class="InText">'.$version->name.'</td>';
@@ -65,11 +65,7 @@ if (!isset($errorPage)){
 				echo '<td class="InText">Milestone</td>';
 			}
 			echo '<td>';
-			print'<div style="float:left"><img src="'.util_make_url('themes/gforge/images/bouton_gauche.png').'"></img></div>
-				<div style="background: url('.util_make_url('themes/gforge/images/bouton_centre.png').');vertical-align:top;display:inline;font-size:15px">
-				<a href="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&view=editVersion&idVersion='.$version->id.'" style="color:white;font-size:0.8em;font-weight:bold;">Modifier</a>
-				</div>
-				<div style="display:inline"><img src="'.util_make_url('themes/gforge/images/bouton_droit.png').'"></img></div>';
+			echo '<a href="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=editVersion&idVersion='.$version->id.'" ">'._('Update').'</a>';
 			echo '</td></tr>';
 			$i++;
 		}
@@ -79,5 +75,4 @@ if (!isset($errorPage)){
 	}
 	echo $HTML->boxBottom();
 }
-
 ?>

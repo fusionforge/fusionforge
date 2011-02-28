@@ -32,9 +32,9 @@ global $group_id;
 if (isset($_POST['version']) && !empty($_POST['version'])) {
 	$versionStruct = array();
 	$versionStruct['name'] = $_POST['version'];
-	$versionStruct['project_id'] = $mantisbtConf['id_mantis'];
-	$versionStruct['released'] = '';
-	$versionStruct['description'] = '';
+	$versionStruct['project_id'] = $mantisbtConf['id_mantisbt'];
+	$versionStruct['released'] = 0;
+	$versionStruct['description'] = $_POST['description'];
 	$versionStruct['date_order'] = '';
 	try {
 		if (!isset($clientSOAP))
