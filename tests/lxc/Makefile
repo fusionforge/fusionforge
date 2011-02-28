@@ -8,16 +8,14 @@ SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
 default: vmdebian6-config netstaticdeb installkey
 	@echo "read the Makefile to see available targets"
 
-/cgroup/tasks: beroot mountcgroup
-
 /cgroup: beroot
 	mkdir /cgroup
 
+checkmount: checkfstab /cgroup
+	grep -q 0 /cgroup/cpuset.cpu || mount /cgroup
+
 checkfstab:
 	grep ^cgroup /etc/fstab || (echo "You need to add cgroup entry to fstab \"cgroup        /cgroup        cgroup        defaults    0    0\"" && false)
-
-mountcgroup: beroot /cgroup checkfstab
-	mount /cgroup
 
 /var/lib/lxc/vmdebian6: beroot /usr/bin/lxc-info bridging
 	mkdir $@
