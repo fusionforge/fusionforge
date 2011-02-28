@@ -68,6 +68,10 @@ installkey: beroot
 	[ -d $(VMROOT)/etc/ssh ] || mkdir -p $(VMROOT)/rootfs/etc/ssh
 	cp ssh/ssh_host_* $(VMROOT)/rootfs/etc/ssh/
 
+setname: beroot
+	echo "debian6.local" > $(VMROOT)/rootfs/etc/hostname
+	grep -q debian6.local $(VMROOT)/rootfs/etc/hosts || echo "$(IPDEBBASE).$(VEIDDEB)	debian6.local debian6" >> $(VMROOT)/rootfs/etc/hosts
+
 beroot:
 	@[ $(shell id -u) = "0" ] || (echo "you should be root to run this" ; exit 1)
 
