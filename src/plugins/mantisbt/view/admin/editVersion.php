@@ -67,7 +67,8 @@ if (!isset($errorPage)){
 	echo	'<tbody>';
 	echo	'<tr>';
 	echo		'<td><input type="text" name="version_name" value="'.htmlspecialchars($detailVersion->name,ENT_QUOTES).'" /></td>';
-	echo		'<td><input type="text" name="version_description" value="'.htmlspecialchars($detailVersion->description,ENT_QUOTES).'" /></td>';
+	(isset($detailVersion->description)) ? $description_value = htmlspecialchars($detailVersion->description,ENT_QUOTES) : $description_value = '';
+	echo		'<td><input type="text" name="version_description" value="'.$description_value.'" /></td>';
 	echo		'<td><input type="text" name="version_date_order" size="32" value="'.strftime("%d/%m/%Y",strtotime($detailVersion->date_order)).'" />(format : DD/MM/YYYY)</td>';
 	echo		'<td>';
 	echo			'<select name="version_release">';
