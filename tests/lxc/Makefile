@@ -1,8 +1,9 @@
--include config.default
--include config.$(shell hostname)
 
 VMROOT=/var/lib/lxc/vmdebian6
 SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
+
+-include config.default
+-include config.$(shell hostname)
 
 default: vmdebian6-config netstaticdeb installkey
 	@echo "read the Makefile to see available targets"
