@@ -59,8 +59,9 @@ netstaticdeb:
 	sudo sh -c "echo \"	netmask 255.255.255.0\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	sudo sh -c "echo \"	gateway $(IPDEBBASE).1\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	sudo sh -c "echo \"	dns-nameservers $(IPDEBDNS)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
-	sudo sh -c "echo \"	dns-search $(IPDEBDOMAIN)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	)
+	#sudo sh -c "echo \"	dns-search $(IPDEBDOMAIN)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
+	#
 
 installkey:
 	[ -d $(VMROOT)/root/.ssh ] || sudo mkdir -p $(VMROOT)/root/.ssh
