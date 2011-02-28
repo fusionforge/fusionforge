@@ -39,7 +39,7 @@ vmdebian6-ip: beroot
 	#sh -c "echo \"lxc.network.ipv4 = $(IPDEBBASE).$(VEIDDEB)/24\">> $(VMROOT)/config" ; \
 	#
 
-vmdebian6-start: beroot
+vmdebian6-start: beroot checkfstab
 	lxc-start -n vmdebian6 -d
 	sleep 5
 	lxc-info -n vmdebian6
