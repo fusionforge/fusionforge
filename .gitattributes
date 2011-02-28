@@ -4827,6 +4827,7 @@ tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
 tests/lxc/Makefile -text
+tests/lxc/config.christian -text
 tests/lxc/config.default -text
 tests/lxc/config.g-virtual05 -text
 tests/lxc/lxc-centos5 -text
