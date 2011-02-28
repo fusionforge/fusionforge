@@ -41,11 +41,6 @@ vmdebian6-ip: beroot
 	#sh -c "echo \"lxc.network.ipv4 = $(IPDEBBASE).$(VEIDDEB)/24\">> $(VMROOT)/config" ; \
 	#
 
-vmdebian6-start: /cgroup/tasks
-	lxc-start -n vmdebian6 -d
-	sleep 5
-	lxc-info -n vmdebian6
-
 vmdebian6-clean: beroot
 	lxc-stop -n vmdebian6 || true
 	lxc-destroy -n vmdebian6 || true
@@ -77,3 +72,9 @@ installkey: beroot
 
 beroot:
 	@[ $(shell id -u) = "0" ] || (echo "you should be root to run this" ; exit 1)
+
+start: /cgroup/tasks
+	lxc-start -n vmdebian6 -d
+	sleep 5
+	lxc-info -n vmdebian6
+
