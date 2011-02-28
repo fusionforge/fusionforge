@@ -105,6 +105,8 @@ dhcp3-client,\
 netbase,\
 net-tools,\
 iproute,\
+iputils-ping,\
+vim,\
 openssh-server
 
     cache=$1
