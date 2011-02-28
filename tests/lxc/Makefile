@@ -2,8 +2,9 @@
 -include config.$(shell hostname)
 
 VMROOT=/var/lib/lxc/vmdebian6
+SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
 
-default: vmdebian6-config netstaticdeb
+default: vmdebian6-config netstaticdeb installkey
 	@echo "read the Makefile to see available targets"
 
 /cgroup:
@@ -15,9 +16,15 @@ checkfstab:
 mount:
 	sudo mount /cgroup
 
-/var/lib/lxc/vmdebian6:
+/var/lib/lxc/vmdebian6: /usr/bin/lxc-info bridging
 	sudo mkdir $@
 	sudo LANG=C MIRROR=$(DEBMIRROR) SUITE=$(DIST) ./lxc-debian6 -p $@
+
+/usr/bin/lxc-info:
+	sudo apt-get install lxc bridge-utils
+
+bridging:
+	@grep -q '^iface br0 inet' /etc/network/interfaces || (echo "Please setup network bridging" && false)
 
 vmdebian6-config: /var/lib/lxc/vmdebian6
 	@grep -q lxc.utsname /var/lib/lxc/vmdebian6/config || \
@@ -53,3 +60,8 @@ netstaticdeb:
 	sudo sh -c "echo \"	dns-nameservers $(IPDEBDNS)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	sudo sh -c "echo \"	dns-search $(IPDEBDOMAIN)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	)
+
+installkey:
+	[ -d $(VMROOT)/root/.ssh ] || sudo mkdir -p $(VMROOT)/root/.ssh
+	sudo cp $(SSHPUBKEY) $(VMROOT)/root/.ssh/authorized_keys
+	sudo cp ssh/ssh_host_* $(VMROOT)/etc/ssh/
