@@ -57,7 +57,8 @@ if (!isset($errorPage)){
 		foreach ($listVersions as $key => $version){
 			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
 			echo '<td>'.$version->name.'</td>';
-			echo '<td>'.$version->description.'</td>';
+			(isset($version->description))? $description_value = $version->description : $description_value = '';
+			echo '<td>'.$description_value.'</td>';
 			echo '<td>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</td>';
 			/* est-ce une version release ? */
 			if ( $version->released ) {

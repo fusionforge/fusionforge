@@ -286,7 +286,6 @@ class MantisBTPlugin extends Plugin {
 	 * @return	boolean	created or not
 	 */
 	function isProjectMantisCreated($idProjet){
-
 		$resIdProjetMantis = db_query_params('SELECT id_mantisbt FROM plugin_mantisbt WHERE id_group = $1',
 					array($idProjet));
 		if (!$resIdProjetMantis)
@@ -646,6 +645,30 @@ class MantisBTPlugin extends Plugin {
 			return false;
 
 		return true;
+	}
+
+	/**
+	 * getProjectMantisByName - find the project to link with
+	 *
+	 * @param	array	configuration array
+	 * @return	int	the mantisbt id
+	 */
+	function getProjectMantisByName($group_id, $confArr) {
+		$groupObject = group_get_object($group_id);
+		try {
+			$clientSOAP = new SoapClient($confArr['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$mantisbtProjectArr = $clientSOAP->__soapCall('mc_projects_get_user_accessible', array("username" => $confArr['soap_user'], "password" => $confArr['soap_password']));
+		} catch (SoapFault $soapFault) {
+			$groupObject->setError('getProjectMantisByName::Error: ' . $soapFault->faultstring);
+			return false;
+		}
+		foreach ($mantisbtProjectArr as $mantisbtProject) {
+			if ($mantisbtProject->name == $confArr['mantisbtname']) {
+				return $mantisbtProject->id;
+			}
+		}
+		$groupObject->setError('getProjectMantisByName::Error: mantisbt project not found');
+		return false;
 	}
 }
 // Local Variables:
