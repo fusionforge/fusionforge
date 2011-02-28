@@ -107,7 +107,8 @@ if (!isset($errorPage)){
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td width="25%" class="FullBoxTitle">'. _('Additional Informations').'</td>';
-	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->additional_information, ENT_QUOTES).'</textarea></td>';
+	(isset($defect->additional_information))? $additional_value = htmlspecialchars($defect->additional_information, ENT_QUOTES) : $additional_value = '';
+	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'. $additional_value .'</textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
 ?>
