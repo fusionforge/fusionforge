@@ -53,7 +53,7 @@ if (empty($msg)) {
 				echo	'<tr>';
 				echo		'<td class="FullBox">'.$attachement->filename.'</td>';
 				echo 		'<td class="FullBox">';
-				echo			'<input type=button value="'._('Download').'" onclick="window.location.href=\'getAttachment.php/'.$attachement->id.'/'.$attachement->filename.'\'">';
+				echo			'<input type=button value="'._('Download').'" onclick="window.location.href=\'getAttachment.php/'.$group_id.'/'.$attachement->id.'/'.$attachement->filename.'\'">';
 				echo			'<input type=button value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
 				echo		'</td>';
 				echo 	'</tr>';
