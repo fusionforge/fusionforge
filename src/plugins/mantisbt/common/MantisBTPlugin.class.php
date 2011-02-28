@@ -211,29 +211,28 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	function removeProjectMantis($idProjet) {
-		$resIdProjetMantis = db_query_params('SELECT id_mantisbt FROM plugin_mantisbt WHERE id_group = $1',
-						array($idProjet));
+		$groupObject = group_get_object($idProjet);
+		$localMantisbtConf = $this->getMantisBTConf();
 
-		echo db_error();
-		$row = db_fetch_array($resIdProjetMantis);
-
-		if ($row == null || count($row)>2) {
-			echo 'removeProjetMantis:: ' . _('No project found');
-		}else{
-			$idMantisbt = $row['id_mantisbt'];
+		if (!$localMantisbtConf) {
+			$groupObject->setError('removeProjetMantis::Error' . ' '. _('No project found'));
+			return false;
+		} else {
 			try {
-				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-				$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt));
+				$clientSOAP = new SoapClient($localMantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+				$delete = $clientSOAP->__soapCall('mc_project_delete', array("username" => $localMantisbtConf['soap_user'], "password" => $localMantisbtConf['soap_password'], "project_id" => $localMantisbtConf['id_mantisbt']));
 			} catch (SoapFault $soapFault) {
-				echo $soapFault->faultstring;
+				$groupObject->setError('removeProjetMantis::Error' . ' '.$soapFault->faultstring);
+				return false;
 			}
 			if (!isset($delete)){
-				echo 'removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$idProjet;
+				$groupObject->setError('removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$localMantisbtConf['id_mantisbt']);
+				return false
 			}else{
 				db_query_params('DELETE FROM plugin_mantisbt WHERE id_mantisbt = $1',
-						array($idMantisbt));
-				echo db_error();
+						array($localMantisbtConf['id_mantisbt']));
 			}
+			return true;
 		}
 	}
 
