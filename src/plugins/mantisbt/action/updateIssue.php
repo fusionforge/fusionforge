@@ -1,7 +1,10 @@
 <?php
 /*
- * Copyright 2010, Franck Villaume - Capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -20,7 +23,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
+global $idBug;
+
+$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 if ($defect->category != $_POST['categorie']) {
 	$defect->category = $_POST['categorie'];
@@ -150,7 +160,7 @@ try {
 	$clientSOAP->__soapCall('mc_issue_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue" => $defect));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
+	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
 }
 
 //TODO : est-ce vraiment utilise ?
@@ -173,6 +183,6 @@ if ($_POST['note_ajout'] != null && $_POST['note_ajout'] != ''){
 }
 
 $feedback = _('Task succeeded');
-session_redirect('plugins/mantisbt/?type=group&id='.$id.'&pluginname=mantisbt&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
+session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 
 ?>

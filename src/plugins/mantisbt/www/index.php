@@ -106,6 +106,14 @@ switch ($type) {
 			$password = $mantisbtConf['soap_password'];
 		}
 
+		$sort = getStringFromRequest('sort');
+		$dir = getStringFromRequest('dir');
+		$idBug = getStringFromRequest('idBug');
+		$idNote = getStringFromRequest('idNote');
+		$idAttachment = getStringFromRequest('idAttachment');
+		$actionAttachment = getStringFromRequest('actionAttachment');
+		$page = getStringFromRequest('page');
+
 		switch ($action) {
 			case "updateIssue":
 			case "addNote":
@@ -126,14 +134,6 @@ switch ($type) {
 
 		$mantisbt->getHeader('project');
 		// URL analysis
-		$sort = getStringFromRequest('sort');
-		$dir = getStringFromRequest('dir');
-		$action = getStringFromRequest('action');
-		$idBug = getStringFromRequest('idBug');
-		$idNote = getStringFromRequest('idNote');
-		$idAttachment = getStringFromRequest('idAttachment');
-		$actionAttachment = getStringFromRequest('actionAttachment');
-		$page = getStringFromRequest('page');
 
 		// Si la variable $_GET['page'] existe...
 		if($page != null && $page != ''){

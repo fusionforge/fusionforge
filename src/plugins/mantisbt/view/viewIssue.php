@@ -56,15 +56,15 @@ if (!isset($errorPage)){
 	echo 			'<td width="14%" class="FullBoxTitle">'._('Target').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBox">'.$defect->category.'</td>';
-	echo 			'<td class="FullBox">'.$defect->severity->name.'</td>';
-	echo 			'<td class="FullBox">'.$defect->reproducibility->name.'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->category)) ? '' : $defect->category .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->severity->name)) ? '' : $defect->severity->name .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->reproducibility->name)) ? '' : $defect->reproducibility->name .'</td>';
 	// TODO a revoir le problème des dates
 	date_default_timezone_set("UTC");
 	echo 			'<td class="FullBox">'.date("Y-m-d G:i",strtotime($defect->date_submitted)).'</td>';
 	echo 			'<td class="FullBox">'.date("Y-m-d G:i",strtotime($defect->last_updated)).'</td>';
-	echo 			'<td class="FullBox">'.$defect->version.'</td>';
-	echo 			'<td class="FullBox">'.$defect->target_version.'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->version)) ? '' : $defect->version .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->target_version)) ? '' : $defect->target_version .'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td class="FullBoxTitle">'._('Reporter').'</td>';
@@ -75,12 +75,12 @@ if (!isset($errorPage)){
 	echo 			'<td class="FullBoxTitle">'._('Fixed in').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBox">'.$defect->reporter->name.'</td>';
-	echo 			'<td class="FullBox">'.$defect->handler->name.'</td>';
-	echo 			'<td class="FullBox">'.$defect->priority->name.'</td>';
-	echo 			'<td class="FullBox">'.$defect->resolution->name.'</td>';
-	echo 			'<td class="FullBox">'.$defect->status->name.'</td>';
-	echo 			'<td class="FullBox">'.$defect->fixed_in_version.'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->reporter->name)) ? '' : $defect->reporter->name .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->handler->name)) ? '' : $defect->handler->name .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->priority->name)) ? '' : $defect->priority->name .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->resolution->name)) ? '' : $defect->resolution->name .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->status->name)) ? '' : $defect->status->name .'</td>';
+	echo 			'<td class="FullBox">'. (isset($defect->fixed_in_version)) ? '' : $defect->fixed_in_version .'</td>';
 	echo		'</tr>';
 	echo	'</table>';
 	echo	'<br />';
@@ -126,7 +126,7 @@ if (!isset($errorPage)){
     });
 
 </script>
-<p class="notice_title" onclick='$("#expandable_edition").slideToggle(300)'><?php echo _('Edit ticket') ?></p>
+<p class="notice_title" onclick='jQuery("#expandable_edition").slideToggle(300)'><?php echo _('Edit ticket') ?></p>
 <div id='expandable_edition' class="notice_content">
 <?php
 	if (!isset($errorPage)) {

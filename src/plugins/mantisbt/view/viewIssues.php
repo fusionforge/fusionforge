@@ -481,7 +481,7 @@ if (!isset($errorPage)) {
 			}else{
 				echo		'<td class="InText"></td>';
 			}
-			echo		'<td class="InText"><a class="DataLink" href="?type='.$type.'&id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$bug['id'].'&view=viewIssue">'.sprintf($format,$bug['id']).'</a></td>';
+			echo		'<td class="InText"><a class="DataLink" href="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$bug['id'].'&view=viewIssue">'.sprintf($format,$bug['id']).'</a></td>';
 			echo 		'<td class="InText">'.$bug['category'].'</td>';
 			echo 		'<td class="InText">'.$bug['project'].'</td>';
 			echo 		'<td class="InText">';

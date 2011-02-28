@@ -81,8 +81,8 @@ if (!isset($errorPage)){
     echo		'<tr>';
     echo 			'<td class="FullBox">';
     echo				'<select name="categorie" class="sirhen" >';
-    echo					"<option></option>";
-    echo                    '<option selected>'.$defect->category.'</option>';
+    echo					'<option></option>';
+    echo					'<option selected>'. (isset($defect->category)) ? '' : $defect->category .'</option>';
     foreach ($listCategories as $key => $category){
 	    echo			    '<option>'.$category.'</option>';
     }
@@ -90,7 +90,7 @@ if (!isset($errorPage)){
     echo			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="severite" class="sirhen">';
-	echo    			    '<option selected>'.$defect->severity->name.'</option>';
+	echo    			    '<option selected>'. (isset($defect->severity->name)) ? '' : $defect->severity->name.'</option>';
     foreach ($listSeverities as $key => $severity){
 	    echo			    '<option>'.$severity->name.'</option>';
     }
@@ -98,7 +98,7 @@ if (!isset($errorPage)){
     echo			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="reproductibilite" class="sirhen">';
-    echo			        '<option selected>'.$defect->reproducibility->name.'</option>';
+    echo			        '<option selected>'. (isset($defect->reproducibility->name)) ? '' : $defect->reproducibility->name.'</option>';
     foreach ($listReproducibilities as $key => $reproducibility){
 	    echo			    '<option>'.$reproducibility->name.'</option>';
     }
@@ -119,7 +119,7 @@ if (!isset($errorPage)){
     echo		'<tr>';
     echo 			'<td class="FullBox">';
     echo				'<select name="reporter" class="sirhen">';
-	echo			        '<option selected>'.$defect->reporter->name.'</option>';
+	echo			        '<option selected>'. (isset($defect->reporter->name)) ? '' : $defect->reporter->name.'</option>';
     foreach ($listReporters as $key => $user){
 		echo			    '<option>'.$user->name.'</option>';
     }
@@ -127,7 +127,7 @@ if (!isset($errorPage)){
     echo			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="handler" class="sirhen">';
-    echo			        '<option selected>'.$defect->handler->name.'</option>';
+    echo			        '<option selected>'. (isset($defect->handler->name)) ? '' : $defect->handler->name.'</option>';
     echo					'<option></option>';
     foreach ($listDevelopers as $key => $user){
 		echo			    '<option>'.$user->name.'</option>';
@@ -136,7 +136,7 @@ if (!isset($errorPage)){
     echo			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="priorite" class="sirhen">';
-	echo			        '<option selected>'.$defect->priority->name.'</option>';
+	echo			        '<option selected>'. (isset($defect->priority->name)) ? '' : $defect->priority->name.'</option>';
     foreach ($listPriorities as $key => $priority){
 	    echo			    '<option>'.$priority->name.'</option>';
     }
@@ -144,7 +144,7 @@ if (!isset($errorPage)){
     echo 			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="resolution" class="sirhen">';
-	echo			        '<option selected>'.$defect->resolution->name.'</option>';
+	echo			        '<option selected>'. (isset($defect->resolution->name)) ? '' : $defect->resolution->name.'</option>';
     foreach ($listResolutions as $key => $resolution){
 	    echo			    '<option>'.$resolution->name.'</option>';
     }
@@ -152,7 +152,7 @@ if (!isset($errorPage)){
     echo 			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="etat" class="sirhen">';
-	echo			        '<option selected>'.$defect->status->name.'</option>';
+	echo			        '<option selected>'. (isset($defect->status->name)) ? '' : $defect->status->name.'</option>';
     foreach ($listStatus as $key => $status){
 		echo			    '<option>'.$status->name.'</option>';
     }
@@ -166,7 +166,7 @@ if (!isset($errorPage)){
     echo		'</tr>';
     echo 			'<td class="FullBox">';
     echo				'<select name="version" class="sirhen">';
-	echo			        '<option selected>'.$defect->version.'</option>';
+	echo			        '<option selected>'. (isset($defect->version)) ? '' : $defect->version.'</option>';
     echo					'<option></option>';
     foreach ($listVersions as $key => $version){
 	    echo			    '<option>'.$version->name.'</option>';
@@ -175,7 +175,7 @@ if (!isset($errorPage)){
     echo			'</td>';
     echo 			'<td class="FullBox">';
     echo				'<select name="fixed_in_version" class="sirhen">';
-	echo			        '<option selected>'.$defect->fixed_in_version.'</option>';
+	echo			        '<option selected>'. (isset($defect->fixed_in_version)) ? '' : $defect->fixed_in_version.'</option>';
     echo					'<option></option>';
     foreach ($listVersions as $key => $fixed_version){
 		echo			    '<option>'.$fixed_version->name.'</option>';
@@ -184,7 +184,7 @@ if (!isset($errorPage)){
     echo			'</td>';
     echo 			'<td colspan="3" class="FullBox">';
     echo				'<select name="target_version" class="sirhen">';
-	echo			        '<option selected>'.$defect->target_version.'</option>';
+	echo			        '<option selected>'. (isset($defect->target_version)) ? '' : $defect->target_version.'</option>';
     echo					'<option></option>';
     foreach ($listVersionsMilestone as $key => $target_version){
 		echo			    '<option>'.$target_version->name.'</option>';

@@ -23,42 +23,46 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-if (empty($msg)) {
-    if (!isset($defect)){
-	    try{
-		    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-		    $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
-	    }catch (SoapFault $soapFault) {
-		    $error_attachment = $soapFault->faultstring;
-		    $errorPage = true;
-	    }
-    }
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
 
-    if ($errorPage){
-	    echo 	'<div>Un probl&egrave;me est survenu lors de la r&eacute;cup&eacute;ration des donn&eacute;es : '.$error_attachment.'</div>';
-    }else {
-        echo "<h2 style='border-bottom: 1px solid black'>Fichiers attach&eacute;s</h2>";
-        $boxTitle = 'Fichiers attach&eacute;s (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$idBug.'&view=addAttachment">Ajouter un fichier</a>)';
-	    if ($defect->attachments) {
-		    echo	'<table class="innertabs">';
-		    echo '<tr>';
-		    echo '<td class="FullBoxTitle">Nom du fichier</td>';
-		    echo '<td class="FullBoxTitle">Actions</td>';
-		    echo '</tr>';
-		    foreach ($defect->attachments as $key => $attachement){
-			    echo	'<tr>';
-			    echo		'<td class="FullBox">'.$attachement->filename.'</td>';
-			    echo 		'<td class="FullBox">';
-			    echo			'<input type=button value="Télécharger" onclick="window.location.href=\'getAttachment.php/'.$attachement->id.'/'.$attachement->filename.'\'">';
-			    echo			'<input type=button value="Supprimer" onclick="window.location.href=\'?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
-			    echo		'</td>';
-			    echo 	'</tr>';
-		    }
-            echo "</table>";
-	    } else {
-            echo "Il n'y a pas de fichier attach&eacute; pour ce ticket.";
-        }
-    }
+if (empty($msg)) {
+	if (!isset($defect)){
+		try{
+			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+			$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
+		}catch (SoapFault $soapFault) {
+			echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+			$errorPage = true;
+		}
+	}
+
+	if (!isset($errorPage)){
+		echo '<h2 style="border-bottom: 1px solid black">'._('Attached files').'</h2>';
+		$boxTitle = 'Fichiers attach&eacute;s (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=addAttachment">Ajouter un fichier</a>)';
+		if (isset($defect->attachments) && count($defect->attachments) > 0) {
+			echo	'<table class="innertabs">';
+			echo '<tr>';
+			echo '<td class="FullBoxTitle">'._('Filename').'</td>';
+			echo '<td class="FullBoxTitle">'._('Actions').'</td>';
+			echo '</tr>';
+			foreach ($defect->attachments as $key => $attachement){
+				echo	'<tr>';
+				echo		'<td class="FullBox">'.$attachement->filename.'</td>';
+				echo 		'<td class="FullBox">';
+				echo			'<input type=button value="'._('Download').'" onclick="window.location.href=\'getAttachment.php/'.$attachement->id.'/'.$attachement->filename.'\'">';
+				echo			'<input type=button value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
+				echo		'</td>';
+				echo 	'</tr>';
+			}
+		echo "</table>";
+		} else {
+			echo '<p class="warning">'._('No attached files for this ticket').'</p>';
+		}
+	}
 ?>
 <style>
 .notice_title {
@@ -82,12 +86,12 @@ if (empty($msg)) {
 }
 </style>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#expandable_file").hide();
-    });    
+    jQuery(document).ready(function() {
+        jQuery("#expandable_file").hide();
+    });
 
 </script>
-<p class="notice_title" onclick='$("#expandable_file").slideToggle(300)'>Ajouter un fichier</p>
+<p class="notice_title" onclick='jQuery("#expandable_file").slideToggle(300)'><?php echo _('Add file') ?></p>
 <div id='expandable_file' class="notice_content">
 <?php
     include("addAttachment.php");
