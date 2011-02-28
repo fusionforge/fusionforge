@@ -159,7 +159,7 @@ if (!isset($errorPage)) {
 		$picto_bas = util_make_url('themes/gforge/images/picto_fleche_bas_marron.png');
 		$nbligne++;
 		include('jumpToIssue.php');
-		echo '<table style="border: 1px solid #3d7c95">';
+		echo '<table>';
 		echo	'<tr>';
 		// Priority
 		echo		'<th width="2%">';

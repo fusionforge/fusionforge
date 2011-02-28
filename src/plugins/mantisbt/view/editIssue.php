@@ -174,7 +174,7 @@ if (!isset($errorPage)){
 	echo			'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td">'._('Found in').'</td>';
+	echo 			'<td>'._('Found in').'</td>';
 	echo 			'<td>'._('Fixed in').'</td>';
 	echo 			'<td colspan="3">'._('Target').'</td>';
 	echo		'</tr>';
