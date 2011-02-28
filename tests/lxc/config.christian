@@ -22,4 +22,5 @@ VZTEMPLATEDIR=/var/lib/vz/template
 
 USERCLIENT=chris
 
+DEBMIRROR=http://christian.bayle.eu/debian
 DIST=squeeze
