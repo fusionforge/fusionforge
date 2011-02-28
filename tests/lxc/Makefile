@@ -9,7 +9,7 @@ default: vmdebian6-config netstaticdeb installkey
 	@echo "read the Makefile to see available targets"
 
 /cgroup: beroot
-	mkdir /cgroup
+	[ ! -d /cgroup ] || mkdir /cgroup
 
 checkmount: checkfstab /cgroup
 	grep -q 0 /cgroup/cpuset.cpu || mount /cgroup
