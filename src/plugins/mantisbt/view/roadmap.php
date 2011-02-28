@@ -112,7 +112,12 @@ if (!isset($errorPage)) {
 	}
 	if (isset($listPrintVersions) && !empty($listPrintVersions)) {
 		foreach ($listPrintVersions as $key => $version) {
-			$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $mantisbtConf['id_mantisbt'], "version" => $version->name ));
+			try {
+				$idsBug = $clientSOAP->__soapCall('mc_issue_get_list_by_project_for_specific_version', array("username" => $username, "password" => $password, "project" => $mantisbtConf['id_mantisbt'], "version" => $version->name ));
+			} catch (SoapFault $soapFault) {
+				echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
+				break;
+			}
 			echo	'<fieldset>';
 			$typeVersion = _('Milestone');
 			if ( $version->released ) {
