@@ -14,10 +14,10 @@ RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
 SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
 
 # Default config
-include config.default
+include ../config/default
 
 # Optional local change
--include config.$(shell hostname)
+-include ../config/$(shell hostname)
 
 # Local customization can be done using a local.<hostname> file
 # This is convenient if you use local mirror

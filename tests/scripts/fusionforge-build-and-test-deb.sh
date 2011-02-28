@@ -6,10 +6,12 @@ export WORKSPACE=${WORKSPACE:-$CURDIR}
 export CONFIG_PHP=func/config.php.buildbotDEB
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
+# get config 
+. tests/config/default
+if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+
 if [ "x${HUDSON_URL}" = "x" ]
 then
-	. tests/openvz/config.default
-	if [ -f tests/openvz/config.`hostname` ] ; then . tests/openvz/config.`hostname`; fi
 	export VEID=$VEIDDEB
 	export IPBASE=$IPDEBBASE
 	export IPDNS=$IPDEBDNS
@@ -25,8 +27,6 @@ then
 	export SELENIUM_RC_HOST=localhost
 	export USEVZCTL=true
 else
-	. tests/openvz/config.default
-	if [ -f tests/openvz/config.`hostname` ] ; then . tests/openvz/config.`hostname`; fi
 	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 	export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
 	export VZPRIVATEDIR
