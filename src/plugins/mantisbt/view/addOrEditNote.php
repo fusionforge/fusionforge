@@ -50,13 +50,13 @@ try {
 
 if (!isset($errorPage)){
 	if($view == "editNote"){
-		$labelboxTitle = 'Modifier la note';
+		$labelboxTitle = _('Modify note');
 		$actionform = 'updateNote';
-		$labelButtonSubmit = 'Mettre à jour';
+		$labelButtonSubmit = _('Update');
 	} else {
-		$labelboxTitle = 'Ajouter la note';
+		$labelboxTitle = _('Add note');
 		$actionform = 'addNote';
-		$labelButtonSubmit = 'Valider';
+		$labelButtonSubmit = _('Submit');
 	}
 
 	echo 		'<div align="center" id="add_edit_note">';

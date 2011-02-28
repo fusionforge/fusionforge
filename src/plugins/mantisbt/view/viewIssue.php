@@ -121,8 +121,8 @@ if (!isset($errorPage)){
 }
 </style>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#expandable_edition").hide();
+    jQuery(document).ready(function() {
+        jQuery("#expandable_edition").hide();
     });
 
 </script>
