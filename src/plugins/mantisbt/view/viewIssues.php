@@ -236,7 +236,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="category_id" />';
-		echo				'<a class="DataLink" href="javascript:document.filtercat.submit();">Cat&eacute;gorie';
+		echo				'<a class="DataLink" href="javascript:document.filtercat.submit();">'._('Category');
 		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC" ) {
@@ -264,7 +264,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="project_id" />';
-		echo				'<a class="DataLink" href="javascript:document.projectid.submit();">Projet';
+		echo				'<a class="DataLink" href="javascript:document.projectid.submit();">'._('Project');
 		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC" ) {
@@ -292,7 +292,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="severity" />';
-		echo				'<a class="DataLink" href="javascript:document.severity.submit();">S&eacute;v&eacute;rit&eacute;';
+		echo				'<a class="DataLink" href="javascript:document.severity.submit();">'._('Severity');
 		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC" ) {
@@ -320,7 +320,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="status" />';
-		echo				'<a class="DataLink" href="javascript:document.statusid.submit();">Etat';
+		echo				'<a class="DataLink" href="javascript:document.statusid.submit();">'._('Status');
 		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC" ) {
@@ -348,7 +348,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="last_updated" />';
-		echo				'<a class="DataLink" href="javascript:document.lastupdate.submit();">Mis à jour';
+		echo				'<a class="DataLink" href="javascript:document.lastupdate.submit();">'._('Last update');
 		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC" ) {
@@ -376,7 +376,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="summary" />';
-		echo				'<a class="DataLink" href="javascript:document.summary.submit();">R&eacute;sum&eacute;';
+		echo				'<a class="DataLink" href="javascript:document.summary.submit();">'._('Summary');
 		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC" ) {
@@ -405,7 +405,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="version" />';
-		echo				'<a class="DataLink" href="javascript:document.version.submit();">D&eacute;tect&eacute; en';
+		echo				'<a class="DataLink" href="javascript:document.version.submit();">'._('Detected in');
 		if ($bugfilter['sort'] == "version" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "version" && $bugfilter['dir'] == "DESC" ) {
@@ -433,7 +433,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="fixed_in_version" />';
-		echo				'<a class="DataLink" href="javascript:document.fixed.submit();">Corrig&eacute; en';
+		echo				'<a class="DataLink" href="javascript:document.fixed.submit();">'._('Fixed in');
 		if ($bugfilter['sort'] == "fixed_in_version" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "fixed_in_version" && $bugfilter['dir'] == "DESC" ) {
@@ -461,7 +461,7 @@ if (!isset($errorPage)) {
 			}
 		}
 		echo				'<input type=hidden name="sort" value="target_version" />';
-		echo				'<a class="DataLink" href="javascript:document.target.submit();">Milestone';
+		echo				'<a class="DataLink" href="javascript:document.target.submit();">'._('Target');
 		if ($bugfilter['sort'] == "target_version" && $bugfilter['dir'] == "ASC" ){
 			echo				'<img src="'.$picto_haut.'">';
 		}else if ($bugfilter['sort'] == "target_version" && $bugfilter['dir'] == "DESC" ) {

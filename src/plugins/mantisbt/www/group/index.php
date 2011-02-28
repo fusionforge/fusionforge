@@ -26,8 +26,9 @@ global $mantisbt;
 global $mantisbtConf;
 global $group_id;
 global $gfplugins;
+global $use_tooltips;
 
-$mantisbt->getSubMenu();
+$mantisbt->getSubMenu($use_tooltips);
 
 // page a afficher
 switch ($view) {

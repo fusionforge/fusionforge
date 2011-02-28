@@ -25,10 +25,10 @@ global $mantisbt;
 global $mantisbtConf;
 global $username;
 global $password;
+global $use_tooltips;
+global $view;
 
-$view = getStringFromRequest('view');
-
-$mantisbt->getSubMenu();
+$mantisbt->getSubMenu($use_tooltips);
 
 switch ($view) {
 	case "editVersion":
