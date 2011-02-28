@@ -114,6 +114,7 @@ if (!isset($errorPage)) {
 	}
 
 	if (!isset($errorPage)) {
+		global $listStatus; // retrieve from filter.php
 		$pageActuelle = getIntFromRequest('page');
 		if (empty($pageActuelle)) {
 			$pageActuelle = 1;
@@ -130,14 +131,16 @@ if (!isset($errorPage)) {
 		// construction du tableau
 		$listBugAll = array();
 		foreach ($idsBugAll as $defect) {
-			$listBugAll[] = array( "id"=> $defect->id, "idPriority"=> $defect->priority->id,
-						"category"=> $defect->category,"project" => $defect->project->name,
-						"severityId" => $defect->severity->id, "severity" => $defect->severity->name,
-						"status" => $defect->status->name, "statusId" => $defect->status->id,
-						"last_updated" => $defect->last_updated, "handler" => $defect->handler->name,
-						"summary" => htmlspecialchars($defect->summary,ENT_QUOTES), "view_state" => $defect->view_state->id,
-						"version" => $defect->version, "fixed_in_version" => $defect->fixed_in_version,
-						"target_version" => $defect->target_version
+			foreach ($listStatus as $loopStatus) {
+				if ($loopStatus->id == $defect->status) {
+					$statusname = $loopStatus->name;
+				}
+			}
+			$listBugAll[] = array( "id"=> $defect->id, "idPriority"=> $defect->priority,
+						"category"=> $defect->category,"project" => $defect->project,
+						"severityId" => $defect->severity, "statusId" => $defect->status,
+						"last_updated" => $defect->last_updated, "status_name" => $statusname,
+						"summary" => htmlspecialchars($defect->summary,ENT_QUOTES), "view_state" => $defect->view_state,
 				);
 		}
 
@@ -382,6 +385,7 @@ if (!isset($errorPage)) {
 		echo 				'</a>';
 		echo			'</form>';
 		echo 		'</th>';
+/* currently informations are missing in header
 		// version de détection
 		echo 		'<th class="InText" width="6%">';
 		echo			'<form name="version" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
@@ -464,6 +468,7 @@ if (!isset($errorPage)) {
 			echo				'<img src="'.$picto_bas.'">';
 		}
 		echo 				'</a>';
+*/
 		echo			'</form>';
 		echo 		'</th>';
 		echo	'</tr>';
@@ -471,11 +476,7 @@ if (!isset($errorPage)) {
 		$format = "%07d";
 		foreach($listBug as $key => $bug){
 			$nbligne++;
-			if ($nbligne % 2 == 0) {
-				echo	'<tr class="LignePaire">';
-			} else {
-				echo '<tr class="LigneImpaire">';
-			}
+			echo '<tr '.$HTML->boxGetAltRowStyle($nbligne).'">';
 			if($prioritiesImg[$bug['idPriority']] != ""){
 				echo		'<td class="InText"><img src="./img/'.$prioritiesImg[$bug['idPriority']].'"></td>';
 			}else{
@@ -488,21 +489,23 @@ if (!isset($errorPage)) {
 			if($bug['severityId'] > 50){
 				echo		'<b>';
 			}
-			echo			$bug['severity'];
+			echo			$bug['severityId'];
 			if($bug['severityId'] > 50){
 				echo		'</b>';
 			}
 			echo		'</td>';
-			echo 		'<td class="InText">'.$bug['status'].' ('.$bug['handler'].')</td>';
+			echo 		'<td class="InText">'.$bug['status_name'].'</td>';
 			echo 		'<td class="InText">'.strftime("%d/%m/%Y",strtotime($bug['last_updated'])).'</td>';
 			echo 		'<td class="InText">'.$bug['summary'];
 			if ($bug['view_state'] == 50){
 				echo '<img src="./img/protected.gif">';
 			}
 			echo 		'</td>';
+/*
 			echo 		'<td class="InText">'.$bug['version'].'</td>';
 			echo 		'<td class="InText">'.$bug['fixed_in_version'].'</td>';
 			echo 		'<td class="InText">'.$bug['target_version'].'</td>';
+*/
 			echo	'</tr>';
 			$cpt ++;
 		}

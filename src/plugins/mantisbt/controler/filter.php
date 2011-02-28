@@ -51,7 +51,7 @@ if (isset($_POST['dir'])) {
 }
 
 try {
-	$listStatus= $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
+	$listStatus = $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 } catch (SoapFault $soapFault) {
 	echo '<div class="warning" >'. _('Technical error occurs during data retrieving:'). ' ' .$soapFault->faultstring.'</div>';
 	$errorPage = true;
@@ -87,7 +87,7 @@ if (!isset($errorPage)) {
 		}
 
 		if (!isset($errorPage)) {
-			if ( 0 != sizeof($listChild) ) {
+			if (sizeof($listChild)) {
 				echo '<div style="float: left; margin-right: 10px; width: 160px">';
 				echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Include child projects:') .'</h4>';
 
