@@ -34,8 +34,8 @@ $confArr['soap_user'] = getStringFromRequest('soap_user');
 $confArr['soap_password'] = getStringFromRequest('soap_password');
 
 if (!$mantisbt->updateConf($group_id, $confArr))
-	session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname=mantisbt&error_msg='.urlencode($group->getErrorMessage()));
+	session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($group->getErrorMessage()));
 
 $feedback = _('MantisBT configuration successfully updated.');
-session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 ?>
