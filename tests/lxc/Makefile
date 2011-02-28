@@ -12,7 +12,7 @@ default: vmdebian6-config netstaticdeb installkey
 	mkdir /cgroup
 
 checkfstab:
-	grep ^cgroup /etc/fstab || echo "You need to add cgroup entry to fstab \"cgroup        /cgroup        cgroup        defaults    0    0\""
+	grep ^cgroup /etc/fstab || (echo "You need to add cgroup entry to fstab \"cgroup        /cgroup        cgroup        defaults    0    0\"" && false)
 
 mount: beroot
 	mount /cgroup
