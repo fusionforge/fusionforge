@@ -24,3 +24,4 @@ USERCLIENT=chris
 
 DEBMIRROR=http://christian.bayle.eu/debian
 DIST=squeeze
+VMENGINE=lxc

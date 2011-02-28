@@ -9,6 +9,7 @@ export SELENIUM_RC_DIR=$WORKSPACE/reports
 # get config 
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+export VMENGINE
 
 if [ "x${HUDSON_URL}" = "x" ]
 then

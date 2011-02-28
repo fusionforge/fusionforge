@@ -26,3 +26,4 @@ SSHPUBKEY=~admrsc/.ssh/id_rsa.pub
 
 DIST=squeeze
 DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
+VMENGINE=lxc
