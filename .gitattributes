@@ -4826,6 +4826,11 @@ tests/func/config.php.sample -text
 tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
+tests/lxc/Makefile -text
+tests/lxc/config.default -text
+tests/lxc/config.g-virtual05 -text
+tests/lxc/lxc-centos5 -text
+tests/lxc/lxc-debian6 -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/config.christian -text

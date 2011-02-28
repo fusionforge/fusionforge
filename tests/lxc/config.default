@@ -1,0 +1,25 @@
+#
+# In this file you can find vars that are useable 
+# both as an include in a Makefile or
+# be sourced in a shell
+# So it should only be stuffs like VAR=value
+#
+VEIDDEB=105
+VEIDCEN=110
+
+DEBVERS=6.0
+CENTVERS=5.5
+
+IPDEBBASE=192.168.222
+IPDEBDNS=192.168.222.1
+
+IPCENTOSBASE=192.168.222
+IPCENTOSDNS=192.168.222.1
+
+VZPRIVATEDIR=/var/lib/vz/private
+# You shouldn't change the next line, don't really work
+VZTEMPLATEDIR=/var/lib/vz/template
+
+USERCLIENT=root
+
+DIST=squeeze
