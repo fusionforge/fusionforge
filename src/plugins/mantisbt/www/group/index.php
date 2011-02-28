@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Project MantisBT page
  *
  * Copyright 2009-2011, Franck Villaume - Capgemini

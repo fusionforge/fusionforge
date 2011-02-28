@@ -1,5 +1,7 @@
 <?php
-/*
+/**
+ * MantisBT plugin
+ *
  * Copyright 2010, Franck Villaume - Capgemini
  * http://fusionforge.org
  *

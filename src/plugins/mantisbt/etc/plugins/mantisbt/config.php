@@ -1,8 +1,9 @@
 <?php
-
-/*
- * Copyright 2010, Capgemini
- * Author: Franck Villaume - Capgemini
+/**
+ * MantisBT plugin
+ *
+ * Copyright 2010, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -20,6 +21,8 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+
+//TODO MAKE IT USEFULL
 
 $prioritiesImg[10] = '';
 $prioritiesImg[20] = 'priority_low_1.gif';

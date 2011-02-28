@@ -1,8 +1,9 @@
 <?php
-
-/*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+/**
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -23,20 +24,27 @@
 
 /* deleteVersion action page */
 
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
+
 $deleteVersion = $_POST['deleteVersion'];
 
 if ($deleteVersion) {
-    try {
-	    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+	try {
+		if(!isset($clientSOAP))
+			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 	    $clientSOAP->__soapCall('mc_project_version_delete', array("username" => $username, "password" => $password, "version_id" => $deleteVersion));
-    } catch (SoapFault $soapFault) {
-        $msg = 'Erreur : '.$soapFault->faultstring;
-        session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($msg));
-    }
-    $feedback = 'Op&eacute;ration r&eacute;ussie';
-    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+	} catch (SoapFault $soapFault) {
+		$msg = _('Error:').' '.$soapFault->faultstring;
+		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
+	}
+	$feedback = _('Version deleted successfully');
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 } else {
-    $warning = 'Param&egravetres manquants';
-    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&warning_msg='.urlencode($warning));
+	$warning = _('Missing parameters to delete version');
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning));
 }
 ?>

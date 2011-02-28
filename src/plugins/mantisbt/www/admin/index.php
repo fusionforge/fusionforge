@@ -1,6 +1,7 @@
 <?php
-/*
+/**
  * Admin MantisBT page
+ *
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
