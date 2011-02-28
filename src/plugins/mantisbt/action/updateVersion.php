@@ -1,8 +1,9 @@
 <?php
-
 /*
- * Copyright 2010, Capgemini
- * Authors: Franck Villaume - capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -22,6 +23,11 @@
  */
 
 /* update a version action page */
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
 
 $version_id = $_POST['version_id'];
 
@@ -31,14 +37,14 @@ if ( $_POST['version_release'] == 1 ) {
 } else {
 	$version_data['released'] = 0;
 }
-$version_data['project_id'] = $idProjetMantis;
+$version_data['project_id'] = $mantisbtConf['id_mantisbt'];
 $version_data['name'] = $_POST['version_name'];
+$version_data['description'] = $_POST['version_description'];
 list($day, $month, $year) = split('[/.-]', $_POST['version_date_order']);
 $version_data['date_order'] = $month."/".$day."/".$year;
-$version_data['description'] = '';
 
 try {
-    $clientSOAP = new SoapClient("http://".forge_get_config('server','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+    $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
     $clientSOAP->__soapCall('mc_project_version_update', array("username" => $username, "password" => $password, "version_id" => $version_id, "version" => $version_data));
     if (isset($_POST['transverse'])) {
         $listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
@@ -53,10 +59,10 @@ try {
         }
     }
 } catch (SoapFault $soapFault) {
-    $msg = 'Erreur : '.$version_data['name'].' '.$soapFault->faultstring;
-    session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisb&error_msg='.urlencode($msg));
+	$error_msg = _('Task failed:').' '.$version_data['name'].' '.$soapFault->faultstring;
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
 }
-$feedback = 'Op&eacute;ration r&eacute;ussie';
-session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+$feedback = _('Task succeeded');
+session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 
 ?>

@@ -67,7 +67,7 @@ if (!isset($errorPage)){
 	echo	'<tbody>';
 	echo	'<tr>';
 	echo		'<td><input type="text" name="version_name" value="'.htmlspecialchars($detailVersion->name,ENT_QUOTES).'" /></td>';
-	echo		'<td><input type="text" name="version_name" value="'.htmlspecialchars($detailVersion->description,ENT_QUOTES).'" /></td>';
+	echo		'<td><input type="text" name="version_description" value="'.htmlspecialchars($detailVersion->description,ENT_QUOTES).'" /></td>';
 	echo		'<td><input type="text" name="version_date_order" size="32" value="'.strftime("%d/%m/%Y",strtotime($detailVersion->date_order)).'" />(format : DD/MM/YYYY)</td>';
 	echo		'<td>';
 	echo			'<select name="version_release">';
@@ -89,7 +89,7 @@ if (!isset($errorPage)){
 	echo '<input type="hidden" name="version_id" value="'.$idVersion.'"></input>';
 	echo '<input type="hidden" name="version_old_name" value="'.$detailVersion->name.'"></input>';
 	echo '<br/>';
-	echo '<input type="submit" value="'. _('Add') .'" />';
+	echo '<input type="submit" value="'. _('Update') .'" />';
 	echo '</form>';
 	echo $HTML->boxBottom();
 
