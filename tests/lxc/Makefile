@@ -55,10 +55,10 @@ netstaticdeb: beroot
 	sh -c "echo \"	address $(IPDEBBASE).$(VEIDDEB)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	sh -c "echo \"	netmask 255.255.255.0\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	sh -c "echo \"	gateway $(IPDEBBASE).1\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
-	sh -c "echo \"	dns-nameservers $(IPDEBDNS)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	)
 
 netstaticdns: beroot
+	#sh -c "echo \"	dns-nameservers $(IPDEBDNS)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	#sh -c "echo \"	dns-search $(IPDEBDOMAIN)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	#
 
