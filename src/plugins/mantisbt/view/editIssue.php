@@ -84,17 +84,17 @@ if (!isset($errorPage)){
 
 	$boxTitle = _('Edit Ticket: ').sprintf($format,$defect->id);
 	echo 	'<form name="issue" Method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&action=updateIssue&view=viewIssue">';
-	echo	'<table class="innertabs">';
+	echo	'<table>';
 	echo		'<tr>';
-	echo 			'<td width="20%" class="FullBoxTitle">'._('Category').'</td>';
-	echo 			'<td width="20%" class="FullBoxTitle">'._('Severity').'</td>';
-	echo 			'<td width="20%" class="FullBoxTitle">'._('Reproducibility').'</td>';
-	echo 			'<td width="20%" class="FullBoxTitle">'._('Submit Date').'</td>';
-	echo 			'<td width="20%" class="FullBoxTitle">'._('Update Date').'</td>';
+	echo 			'<td width="20%">'._('Category').'</td>';
+	echo 			'<td width="20%">'._('Severity').'</td>';
+	echo 			'<td width="20%">'._('Reproducibility').'</td>';
+	echo 			'<td width="20%">'._('Submit Date').'</td>';
+	echo 			'<td width="20%">'._('Update Date').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="categorie" class="sirhen" >';
+	echo 			'<td>';
+	echo				'<select name="categorie">';
 	echo					'<option></option>';
 	echo					'<option selected>'. $category_value .'</option>';
 	foreach ($listCategories as $key => $category){
@@ -102,16 +102,16 @@ if (!isset($errorPage)){
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="severite" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="severite">';
 		echo    			    '<option selected>'. $severity_value .'</option>';
 	foreach ($listSeverities as $key => $severity){
 		echo			    '<option>'.$severity->name.'</option>';
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="reproductibilite" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="reproductibilite">';
 	echo			        '<option selected>'. $reproducibility_value .'</option>';
 	foreach ($listReproducibilities as $key => $reproducibility){
 		echo			    '<option>'.$reproducibility->name.'</option>';
@@ -120,27 +120,27 @@ if (!isset($errorPage)){
 	echo			'</td>';
 	// TODO a revoir le problème des dates
 	date_default_timezone_set("UTC");
-	echo 			'<td class="FullBox">'.date("Y-m-d G:i",strtotime($defect->date_submitted)).'</td>';
-	echo 			'<td class="FullBox">'.date("Y-m-d G:i",strtotime($defect->last_updated)).'</td>';
+	echo 			'<td>'.date("Y-m-d G:i",strtotime($defect->date_submitted)).'</td>';
+	echo 			'<td>'.date("Y-m-d G:i",strtotime($defect->last_updated)).'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBoxTitle">'._('Reporter').'</td>';
-	echo 			'<td class="FullBoxTitle">'._('Assigned to').'</td>';
-	echo 			'<td class="FullBoxTitle">'._('Priority').'</td>';
-	echo 			'<td class="FullBoxTitle">'._('Resolution').'</td>';
-	echo 			'<td class="FullBoxTitle">'._('Status').'</td>';
+	echo 			'<td>'._('Reporter').'</td>';
+	echo 			'<td>'._('Assigned to').'</td>';
+	echo 			'<td>'._('Priority').'</td>';
+	echo 			'<td>'._('Resolution').'</td>';
+	echo 			'<td>'._('Status').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="reporter" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="reporter">';
 		echo			        '<option selected>'. $reporter_value.'</option>';
 	foreach ($listReporters as $key => $user){
 			echo			    '<option>'.$user->name.'</option>';
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="handler" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="handler">';
 	echo			        '<option selected>'. $handler_value .'</option>';
 	echo					'<option></option>';
 	foreach ($listDevelopers as $key => $user){
@@ -148,24 +148,24 @@ if (!isset($errorPage)){
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="priorite" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="priorite">';
 		echo			        '<option selected>'. $priority_value .'</option>';
 	foreach ($listPriorities as $key => $priority){
 		echo			    '<option>'.$priority->name.'</option>';
 	}
 	echo				'</select>';
 	echo 			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="resolution" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="resolution">';
 		echo			        '<option selected>'. $resolution_value .'</option>';
 	foreach ($listResolutions as $key => $resolution){
 		echo			    '<option>'.$resolution->name.'</option>';
 	}
 	echo				'</select>';
 	echo 			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="etat" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="etat">';
 		echo			        '<option selected>'. $status_value .'</option>';
 	foreach ($listStatus as $key => $status){
 			echo			    '<option>'.$status->name.'</option>';
@@ -174,12 +174,13 @@ if (!isset($errorPage)){
 	echo			'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBoxTitle">'._('Found in').'</td>';
-	echo 			'<td class="FullBoxTitle">'._('Fixed in').'</td>';
-	echo 			'<td colspan="3" class="FullBoxTitle">'._('Target').'</td>';
+	echo 			'<td">'._('Found in').'</td>';
+	echo 			'<td>'._('Fixed in').'</td>';
+	echo 			'<td colspan="3">'._('Target').'</td>';
 	echo		'</tr>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="version" class="sirhen">';
+	echo		'<tr>';
+	echo 			'<td>';
+	echo				'<select name="version">';
 		echo			        '<option selected>'. $version_value .'</option>';
 	echo					'<option></option>';
 	foreach ($listVersions as $key => $version){
@@ -187,8 +188,8 @@ if (!isset($errorPage)){
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="fixed_in_version" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="fixed_in_version">';
 		echo			        '<option selected>'. $fixed_value .'</option>';
 	echo					'<option></option>';
 	foreach ($listVersions as $key => $fixed_version){
@@ -196,8 +197,8 @@ if (!isset($errorPage)){
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td colspan="3" class="FullBox">';
-	echo				'<select name="target_version" class="sirhen">';
+	echo 			'<td colspan="3">';
+	echo				'<select name="target_version">';
 		echo			        '<option selected>'. $target_value .'</option>';
 	echo					'<option></option>';
 	foreach ($listVersionsMilestone as $key => $target_version){
@@ -208,18 +209,18 @@ if (!isset($errorPage)){
 	echo		'<tr>';
 	echo	'</table>';
 	echo	'<br/>';
-	echo	'<table class="innertabs">';
+	echo	'<table>';
 	echo		'<tr>';
-	echo			'<td width="20%" class="FullBoxTitle">'._('Summary').'&nbsp;<span style="font-weight:normal">'._('(max128 char )').'</span></td>';
-	echo			'<td class="FullBox"><input type="text" value="'.htmlspecialchars($defect->summary,ENT_QUOTES).'" name="resume" MAXLENGTH="128" style="width:99%"></td>';
+	echo			'<td width="20%">'._('Summary').'&nbsp;<span style="font-weight:normal">'._('(max128 char )').'</span></td>';
+	echo			'<td><input type="text" value="'.htmlspecialchars($defect->summary,ENT_QUOTES).'" name="resume" MAXLENGTH="128" style="width:99%"></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo			'<td width="20%" class="FullBoxTitle">'._('Description').'</td>';
-	echo			'<td class="FullBox"><textarea name="description" style="width:99%;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
+	echo			'<td width="20%">'._('Description').'</td>';
+	echo			'<td><textarea name="description" style="width:99%;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo			'<td width="20%" class="FullBoxTitle">'._('Additional Informations').'</td>';
-	echo			'<td class="FullBox"><textarea name="informations" style="width:99%;" rows="6">'. $additional_value .'</textarea></td>';
+	echo			'<td width="20%">'._('Additional Informations').'</td>';
+	echo			'<td><textarea name="informations" style="width:99%;" rows="6">'. $additional_value .'</textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
 	echo	'<br/>';

@@ -66,54 +66,54 @@ try {
 
 if (!isset($errorPage)){
 	echo 	'<form name="issue" method="POST" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addIssue" >';
-	echo	'<table class="innertabs">';
+	echo	'<table>';
 	echo		'<tr>';
-	echo 			'<td width="16%" class="FullBoxTitle">'._('Category').'</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">'._('Reproducibility').'</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">'._('Severity').'</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">'._('Priority').'</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">'._('Assigned to').'</td>';
-	echo 			'<td width="16%" class="FullBoxTitle">'._('Found in').'</td>';
+	echo 			'<td width="16%">'._('Category').'</td>';
+	echo 			'<td width="16%">'._('Reproducibility').'</td>';
+	echo 			'<td width="16%">'._('Severity').'</td>';
+	echo 			'<td width="16%">'._('Priority').'</td>';
+	echo 			'<td width="16%">'._('Assigned to').'</td>';
+	echo 			'<td width="16%">'._('Found in').'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="categorie" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="categorie">';
 	foreach ($listCategories as $key => $category){
 		echo				"<option>".$category."</option>";
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="reproductibilite" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="reproductibilite">';
 	foreach ($listReproducibilities as $key => $reproducibility){
 		echo				"<option>".$reproducibility->name."</option>";
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="severite" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="severite">';
 	foreach ($listSeverities as $key => $severity){
 		echo				"<option>".$severity->name."</option>";
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="priorite" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="priorite">';
 	foreach ($listPriorities as $key => $priority){
 		echo				"<option>".$priority->name."</option>";
 	}
 	echo				'</select>';
 	echo 			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="handler" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="handler">';
 	echo					"<option></option>";
 	foreach ($listDevelopers as $key => $user){
 		echo				"<option>".$user->name."</option>";
 	}
 	echo				'</select>';
 	echo			'</td>';
-	echo 			'<td class="FullBox">';
-	echo				'<select name="version" class="sirhen">';
+	echo 			'<td>';
+	echo				'<select name="version">';
 	echo					"<option></option>";
 	foreach ($listVersions as $key => $version){
 		echo				"<option>".$version->name."</option>";
@@ -123,18 +123,18 @@ if (!isset($errorPage)){
 	echo		'</tr>';
 	echo	'</table>';
 	echo	'<br/>';
-	echo	'<table class="innertabs">';
+	echo	'<table>';
 	echo		'<tr>';
-	echo 			'<td width="20%" lass="FullBoxTitle">Résumé * <span style="font-weight:normal">(128 caractères max)</span></td>';
-	echo			'<td class="FullBox"><input type="text" name="resume" MAXLENGTH="128" style="width:99%;"></td>';
+	echo 			'<td width="20%">Résumé * <span style="font-weight:normal">(128 caractères max)</span></td>';
+	echo			'<td><input type="text" name="resume" MAXLENGTH="128" style="width:99%;"></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBoxTitle">'.('Description').' *</td>';
-	echo			'<td class="FullBox"><textarea name="description" style="width:99%;" rows="12"></textarea></td>';
+	echo 			'<td>'.('Description').' *</td>';
+	echo			'<td"><textarea name="description" style="width:99%;" rows="12"></textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td class="FullBoxTitle">'._('Additional informations').'</td>';
-	echo			'<td class="FullBox"><textarea name="informations" style="width:99%;" rows="12"></textarea></td>';
+	echo 			'<td>'._('Additional informations').'</td>';
+	echo			'<td><textarea name="informations" style="width:99%;" rows="12"></textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
 	echo 	'<div align="center">';

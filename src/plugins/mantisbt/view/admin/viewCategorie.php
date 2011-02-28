@@ -45,16 +45,16 @@ if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Manage categories'));
 	// General category is shared so no edit...
 	if (sizeof($listCategories) > 1) {
-		echo	'<table class="innertabs">';
+		echo	'<table>';
 		echo		'<tr>';
-		echo			'<td class="FullBoxTitle">'._('Category').'</td>';
-		echo			'<td colspan="2" class="FullBoxTitle">'._('Actions').'</td>';
+		echo			'<td>'._('Category').'</td>';
+		echo			'<td colspan="2">'._('Actions').'</td>';
 		echo		'</tr>';
 		$i = 1;
 		foreach ($listCategories as $key => $category){
 			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
 			if ( $category != 'General' ) {
-				echo '<td class="InText">'.$category.'</td>';
+				echo '<td>'.$category.'</td>';
 				echo '<td>';
 				echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=renameCategory">';
 				echo '<input type="hidden" name="renameCategory" value="'.htmlspecialchars($category).'" />';
@@ -62,7 +62,7 @@ if (!isset($errorPage)){
 				echo '<input type="submit" value="'._('Rename').'" />';
 				echo '</td>';
 				echo '</form>';
-				echo '<td class="InText">';
+				echo '<td>';
 				echo '<form method="POST" action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=deleteCategory">';
 				echo '<input type="hidden" name="deleteCategory" value="'.htmlspecialchars($category).'" />';
 				echo '<input type="submit" value="'._('Delete').'" />';

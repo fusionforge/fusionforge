@@ -45,11 +45,11 @@ if (!isset($errorPage)){
 	$total = array('open' => 0, 'resolved' => 0, 'resolved' => 0, 'closed' => 0, 'total' => 0);
 	echo $HTML->boxTop(_('Tickets oer Status'));
 	echo	'<tr>';
-	echo		'<th class="InTextBrown">'._('Project').'</th>';
-	echo		'<th class="InTextBrown">'._('Open').'</th>';
-	echo		'<th class="InTextBrown">'._('Fixed').'</th>';
-	echo		'<th class="InTextBrown">'._('Closed').'</th>';
-	echo		'<th class="InTextBrown">'._('Total').'</th>';
+	echo		'<th>'._('Project').'</th>';
+	echo		'<th>'._('Open').'</th>';
+	echo		'<th>'._('Fixed').'</th>';
+	echo		'<th>'._('Closed').'</th>';
+	echo		'<th>'._('Total').'</th>';
 	echo	'</tr>';
 	$nbligne = 1;
 	foreach ($stats as $stat) {
@@ -60,14 +60,14 @@ if (!isset($errorPage)){
 		echo '<tr '.$HTML->boxGetAltRowStyle($nbligne).'">';
 
 		if ($stat->project_level > 1){
-			echo sprintf('<td class="InTextBrown">%s >> <a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',$indentation,group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
+			echo sprintf('<td>%s >> <a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',$indentation,group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
 		}else{
-			echo sprintf('<td class="InTextBrown"><a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
+			echo sprintf('<td><a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
 		}
-		echo		'<td class="InTextBrown">'.$stat->open.'</td>';
-		echo		'<td class="InTextBrown">'.$stat->resolved.'</td>';
-		echo		'<td class="InTextBrown">'.$stat->closed.'</td>';
-		echo		'<td class="InTextBrown">'.$stat->total.'</td>';
+		echo		'<td>'.$stat->open.'</td>';
+		echo		'<td>'.$stat->resolved.'</td>';
+		echo		'<td>'.$stat->closed.'</td>';
+		echo		'<td>'.$stat->total.'</td>';
 		echo	'</tr>';
 
 		// calcul du total
@@ -78,11 +78,11 @@ if (!isset($errorPage)){
 		$nbligne++;
 	}
 	echo	'<tr>';
-	echo		'<td class="InTextBrown"></td>';
-	echo		'<td class="InTextBrown">'.$total['open'].'</td>';
-	echo		'<td class="InTextBrown">'.$total['resolved'].'</td>';
-	echo		'<td class="InTextBrown">'.$total['closed'].'</td>';
-	echo		'<td class="InTextBrown">'.$total['total'].'</td>';
+	echo		'<td></td>';
+	echo		'<td>'.$total['open'].'</td>';
+	echo		'<td>'.$total['resolved'].'</td>';
+	echo		'<td>'.$total['closed'].'</td>';
+	echo		'<td>'.$total['total'].'</td>';
 	echo	'</tr>';
 echo $HTML->boxBottom();
 

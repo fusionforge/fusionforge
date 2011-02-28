@@ -42,10 +42,10 @@ if (empty($msg)) {
 	echo '<h2 style="border-bottom: 1px solid black">'._('Notes').'</h2>';
 
 	if (isset($defect->notes)){
-		echo    '<table class="innertabs">';
+		echo    '<table>';
 		foreach ($defect->notes as $key => $note){
 		    echo	'<tr>';
-		    echo		'<td width="10%" class="FullBoxTitle">';
+		    echo		'<td width="10%">';
 		    echo 			'('.sprintf($format,$note->id).')';
 		    echo 			'<br/>';
 		    echo			$note->reporter->name;
@@ -54,11 +54,11 @@ if (empty($msg)) {
 		    //date_default_timezone_set("UTC");
 		    echo 			date("Y-m-d G:i",strtotime($note->date_submitted));
 		    echo 		'</td>';
-		    echo		'<td width="9%" class="FullBoxTitle">';
+		    echo		'<td width="9%">';
 		    echo 			'<input type=button name="upNote" value="'._('Modify').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$note->id.'&view=editNote\'">';
 		    echo 			'<input type=button name="delNote" value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$note->id.'&action=deleteNote&view=viewIssue\'">';
 		    echo 		"</td>";
-		    echo 		'<td class="FullBox">';
+		    echo 		'<td>';
 		    echo		'<textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" row="3">'.htmlspecialchars($note->text, ENT_QUOTES).'</textarea>';
 		    echo 		"</td>";
 		    echo 	'</tr>';

@@ -45,26 +45,26 @@ try {
 if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Manage versions'));
 	if (sizeof($listVersions)) {
-		echo '<table class="innertabs">';
+		echo '<table>';
 		echo	'<tr>';
-		echo		'<td class="FullBoxTitle">'._('Version').'</td>';
-		echo		'<td class="FullBoxTitle">'._('Description').'</td>';
-		echo		'<td class="FullBoxTitle">'._('Target Date').'</td>';
-		echo		'<td class="FullBoxTitle">'._('Type').'</td>';
-		echo 		'<td class="FullBoxTitle">'._('Action').'</td>';
+		echo		'<td>'._('Version').'</td>';
+		echo		'<td>'._('Description').'</td>';
+		echo		'<td>'._('Target Date').'</td>';
+		echo		'<td>'._('Type').'</td>';
+		echo 		'<td>'._('Action').'</td>';
 		echo	'</tr>';
 		$i = 1;
 		foreach ($listVersions as $key => $version){
 			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
-			echo '<td class="InText">'.$version->name.'</td>';
-			echo '<td class="InText">'.$version->description.'</td>';
-			echo '<td class="InText">'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</td>';
+			echo '<td>'.$version->name.'</td>';
+			echo '<td>'.$version->description.'</td>';
+			echo '<td>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</td>';
 			/* est-ce une version release ? */
 			if ( $version->released ) {
-				echo '<td class="InText">Release</td>';
+				echo '<td>Release</td>';
 			/* juste une milestone alors */
 			} else {
-				echo '<td class="InText">Milestone</td>';
+				echo '<td>Milestone</td>';
 			}
 			echo '<td>';
 			echo '<a href="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=editVersion&idVersion='.$version->id.'" ">'._('Update').'</a>';

@@ -59,12 +59,12 @@ if (!isset($errorPage)){
 		$labelButtonSubmit = _('Submit');
 	}
 
-	echo 		'<div align="center" id="add_edit_note">';
+	echo 		'<div id="add_edit_note">';
 	echo 		'<form Method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue">';
-	echo				'<table class="innertabs">';
+	echo				'<table>';
 	echo 					'<tr>';
 	(isset($noteEdit->text))? $note_value = $noteEdit->text : $note_value = '';
-	echo						'<td class="FullBox" ><textarea name="edit_texte_note" style="width:99%;" rows=12>'.$note_value.'</textarea></td>';
+	echo						'<td><textarea name="edit_texte_note" style="width:99%;" rows=12>'.$note_value.'</textarea></td>';
 	echo 					'</tr>';
 	echo				'</table>';
 	echo 				'<input type=button onclick="this.form.submit();this.disabled=true;" value="'.$labelButtonSubmit.'">';

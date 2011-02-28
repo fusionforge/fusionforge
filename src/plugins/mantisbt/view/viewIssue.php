@@ -98,17 +98,17 @@ if (!isset($errorPage)){
 	echo	'<br />';
 	echo	'<table class="innertabs">';
 	echo		'<tr>';
-	echo 			'<td width="25%" class="FullBoxTitle">'._('Summary').'</td>';
-	echo			'<td width="75%" class="FullBox">'.htmlspecialchars($defect->summary,ENT_QUOTES).'</td>';
+	echo 			'<td width="25%">'._('Summary').'</td>';
+	echo			'<td width="75%">'.htmlspecialchars($defect->summary,ENT_QUOTES).'</td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td width="25%" class="FullBoxTitle">'._('Description').'</td>';
-	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
+	echo 			'<td width="25%">'._('Description').'</td>';
+	echo			'<td width="75%"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'.htmlspecialchars($defect->description, ENT_QUOTES).'</textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td width="25%" class="FullBoxTitle">'. _('Additional Informations').'</td>';
+	echo 			'<td width="25%">'. _('Additional Informations').'</td>';
 	(isset($defect->additional_information))? $additional_value = htmlspecialchars($defect->additional_information, ENT_QUOTES) : $additional_value = '';
-	echo			'<td width="75%" class="FullBox"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'. $additional_value .'</textarea></td>';
+	echo			'<td width="75%"><textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" rows="6">'. $additional_value .'</textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';
 ?>
