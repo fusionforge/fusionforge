@@ -30,7 +30,7 @@ global $mantisbt;
 echo '<form method="POST" name="addCategory" action="index.php?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=addCategory">';
 echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new category'));
-echo '<td><input name="nameCategory" type="text"></input></td>';
+echo '<td><label>'._('Name').'<input name="nameCategory" type="text"></input></td>';
 echo '<td>';
 echo '<input type="submit" value="'. _('Add') .'" />';
 echo '</td>';

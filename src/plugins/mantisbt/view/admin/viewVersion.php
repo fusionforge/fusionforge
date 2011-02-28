@@ -46,18 +46,16 @@ if (!isset($errorPage)){
 		echo '<table class="innertabs">';
 		echo	'<tr>';
 		echo		'<td class="FullBoxTitle">'._('Version').'</td>';
+		echo		'<td class="FullBoxTitle">'._('Description').'</td>';
 		echo		'<td class="FullBoxTitle">'._('Target Date').'</td>';
 		echo		'<td class="FullBoxTitle">'._('Type').'</td>';
 		echo 		'<td class="FullBoxTitle">'._('Action').'</td>';
 		echo	'</tr>';
 		$i = 0;
 		foreach ($listVersions as $key => $version){
-			if ( $i % 2 == 0 ) {
-				echo '<tr class="LignePaire">';
-			} else {
-				echo '<tr class="LigneImpaire">';
-			}
+			echo '<tr '.$HTML->boxGetAltRowStyle($i).'">';
 			echo '<td class="InText">'.$version->name.'</td>';
+			echo '<td class="InText">'.$version->description.'</td>';
 			echo '<td class="InText">'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</td>';
 			/* est-ce une version release ? */
 			if ( $version->released ) {

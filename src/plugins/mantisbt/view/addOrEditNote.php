@@ -63,7 +63,7 @@ if (!isset($errorPage)){
 	echo 		'<form Method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$idNote.'&action='.$actionform.'&view=viewIssue">';
 	echo				'<table class="innertabs">';
 	echo 					'<tr>';
-	echo						'<td class="FullBox" ><textarea name="edit_texte_note" style="width:99%;" rows=12>'.$noteEdit->text.'</textarea></td>';
+	echo						'<td class="FullBox" ><textarea name="edit_texte_note" style="width:99%;" rows=12>'.(isset($noteEdit->text))? '' : $noteEdit->text.'</textarea></td>';
 	echo 					'</tr>';
 	echo				'</table>';
 	echo 				'<input type=button onclick="this.form.submit();this.disabled=true;" value="'.$labelButtonSubmit.'">';

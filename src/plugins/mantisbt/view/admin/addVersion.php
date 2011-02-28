@@ -33,10 +33,14 @@ echo '<form method="POST" name="addVersion" action="index.php?type=admin&group_i
 echo '<table><tr>';
 echo $HTML->boxTop(_('Add a new version'));
 echo '<td>';
-echo '<input name="version" type="text" size="10" />';
+echo '<label>'._('Name').'</label><input name="version" type="text" size="10" />';
 if ($group->usesPlugin('projects_hierarchy')) {
 	echo '<input name="transverse" type="checkbox" value="1" >'. _('Cross version (son included)') .'</input>';
 }
+echo '</td>';
+echo '</tr><tr>';
+echo '<td>';
+echo '<label>'._('Description').'</label><input name="description" type="text" size="20" />';
 echo '</td>';
 echo '<td>';
 echo '<input type="submit" value="'. _('Add') .'" />';

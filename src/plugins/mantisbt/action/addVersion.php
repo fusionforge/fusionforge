@@ -1,6 +1,9 @@
 <?php
 /*
- * Copyright 2010, Franck Villaume - Capgemini
+ * MantisBT plugin
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -19,16 +22,24 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $mantisbt;
+global $mantisbtConf;
+global $username;
+global $password;
+global $group_id;
+
 /* addVersion action page */
 if (isset($_POST['version']) && !empty($_POST['version'])) {
 	$versionStruct = array();
 	$versionStruct['name'] = $_POST['version'];
-	$versionStruct['project_id'] = $idProjetMantis;
+	$versionStruct['project_id'] = $mantisbtConf['id_mantis'];
 	$versionStruct['released'] = '';
 	$versionStruct['description'] = '';
 	$versionStruct['date_order'] = '';
 	try {
-		$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+		if (!isset($clientSOAP))
+			$clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+
 		$clientSOAP->__soapCall('mc_project_version_add', array("username" => $username, "password" => $password, "version" => $versionStruct));
 		if (isset($_POST['transverse'])) {
 			$listChild = $clientSOAP->__soapCall('mc_project_get_all_subprojects', array("username" => $username, "password" => $password, "project_id" => $idProjetMantis));
@@ -45,18 +56,18 @@ if (isset($_POST['version']) && !empty($_POST['version'])) {
 						$clientSOAP->__soapCall('mc_project_version_add', array("username" => $username, "password" => $password, "version" => $versionStruct));
 					} catch (SoapFault $soapFault) {
 						$msg = _('Task failed:').' '.$versionStruct['name'].' '.$soapFault->faultstring;
-						session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($msg));
+						session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 					}
 				}
 			}
 		}
 	} catch (SoapFault $soapFault) {
 		$msg = _('Task failed:').' '.$versionStruct['name'].' '.$soapFault->faultstring;
-		session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&error_msg='.urlencode($msg));
+		session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($msg));
 	}
-	$feedback = _('Task succeeded');
-	session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+	$feedback = _('Task succeeded.');
+	session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 }
-$warning_msg = _('Missing version');
-session_redirect('plugins/mantisbt/?type=admin&id='.$id.'&pluginname=mantisbt&warning_msg='.urlencode($warning_msg));
+$warning_msg = _('Missing version.');
+session_redirect('plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&warning_msg='.urlencode($warning_msg));
 ?>
