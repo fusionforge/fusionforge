@@ -203,7 +203,8 @@ switch ($type) {
 			case "renameCategory":
 			case "deleteCategory":
 			case "deleteVersion":
-			case "updateVersion": {
+			case "updateVersion":
+			case "updateConf": {
 				global $gfplugins;
 				$mantisbtConf = $mantisbt->getMantisBTConf();
 				if (!$mantisbtConf['sync_users']) {

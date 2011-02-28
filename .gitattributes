@@ -1752,6 +1752,7 @@ src/plugins/mantisbt/action/deleteNote.php -text
 src/plugins/mantisbt/action/deleteVersion.php -text
 src/plugins/mantisbt/action/init.php -text
 src/plugins/mantisbt/action/renameCategory.php -text
+src/plugins/mantisbt/action/updateConf.php -text
 src/plugins/mantisbt/action/updateIssue.php -text
 src/plugins/mantisbt/action/updateNote.php -text
 src/plugins/mantisbt/action/updateVersion.php -text

@@ -627,6 +627,26 @@ class MantisBTPlugin extends Plugin {
 		}
 		return false;
 	}
+
+	/**
+	 * updateConf - update the MantisBT plugin configuration
+	 *
+	 * @param	int	the group_id
+	 * @param	array	configuration array
+	 * @return	bool	success or not
+	 */
+	function updateConf($group_id, $confArr) {
+		$result = db_query_params('update plugin_mantisbt  set url = $1 , soap_user = $2, soap_password = $3
+						where id_group = $4',
+					array($confArr['url'],
+						$confArr['soap_user'],
+						$confArr['soap_password'],
+						$group_id));
+		if (!$result)
+			return false;
+
+		return true;
+	}
 }
 // Local Variables:
 // mode: php
