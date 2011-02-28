@@ -66,4 +66,5 @@ netstaticdeb:
 installkey:
 	[ -d $(VMROOT)/root/.ssh ] || sudo mkdir -p $(VMROOT)/root/.ssh
 	sudo cp $(SSHPUBKEY) $(VMROOT)/root/.ssh/authorized_keys
+	[ -d $(VMROOT)/etc/ssh ] || sudo mkdir -p $(VMROOT)/etc/ssh
 	sudo cp ssh/ssh_host_* $(VMROOT)/etc/ssh/
