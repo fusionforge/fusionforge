@@ -18,7 +18,7 @@ require_once('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 // don't include this in ProjectImporter, for unit test purposes, so do it here, in caller
-//require_once $gfcommon.'import/import_users.php';
+require_once $gfcommon.'import/import_users.php';
 //print_r($gfplugins.'projectimport/common/ProjectImporter.class.php');
 
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
@@ -28,6 +28,7 @@ include_once('arc/ARC2.php');
 
 /**
  * Manages the display of the page : HTML + forms
+ * 
  * @author Olivier Berger
  *
  */
@@ -152,9 +153,10 @@ class ProjectImportPage {
 	/**
 	 * Tries to match imported users to forge users, and display mapping form bits if needed
 	 * @param array of ARC2 resources $imported_users
+	 * @param boolean apply the changes
 	 * @return html string
 	 */
-	function match_users($imported_users)
+	function match_users($imported_users, $apply = FALSE)
 	{
 		global $group_id, $feedback;
 		
@@ -162,6 +164,8 @@ class ProjectImportPage {
 		$html_tbody = '';
 					
 		$needs_to_warn = FALSE;
+		
+		$mapping_all_users_provided = TRUE;
 		
 		// displays all imported users with the found matching existing forge user if any
 		foreach($imported_users as $user => $userres) {
@@ -174,10 +178,6 @@ class ProjectImportPage {
 			if (array_key_exists($imported_username, $this->posted_user_mapping)) {
 				$already_mapped = $this->posted_user_mapping[$imported_username];
 				$username = $this->posted_user_mapping[$imported_username];
-				if ($this->message) {
-						$this->message .= '<br />';
-				}
-				$this->message .= sprintf(_('you asked to map user "%s" to existing forge user "%s"'), $imported_username, $username);
 			}
 			else {
 				// try to find user with same login
@@ -189,6 +189,8 @@ class ProjectImportPage {
 			$user_object = user_get_object_by_name($username);
 			// if the user hasn't mapped it already, try some automatic mapping
 			if ( ! $already_mapped ) {
+				$mapping_all_users_provided = FALSE;
+				
 				// if we have found an existing user with the same login, try to match it automatically
 				if ($user_object) {
 					$automatically_matched = $username;
@@ -212,7 +214,7 @@ class ProjectImportPage {
 					}
 				}
 			}
-
+			
 			if (! $user_object) {
 				if ($feedback) $feedback .= '<br />';
 				$feedback .= sprintf(_('Failed to find existing user matching imported user "%s"'), $username);
@@ -248,9 +250,9 @@ class ProjectImportPage {
 		
 			$existing_users = array();
 			foreach($active_users as $user) {
-				if ($user->isMember($group_id)) {
+				//if ($user->isMember($group_id)) {
 					$existing_users[] = $user->getUnixName();
-				}
+				//}
 			}
 			
 			foreach($existing_users as $existing_user) {
@@ -266,33 +268,81 @@ class ProjectImportPage {
 			$html_tbody .= '</tr>';
 
 		} // foreach
-		
+
+		// OK, now, render the HTML
+
 		if (count($imported_users)) {
-			
-			if ($needs_to_warn) {
-				$html .= '<p>'._('Failed to find existing users matching some imported users.').'<br />'.
+
+			// If we have to provide the user with some dialog about mapping
+			if (! $mapping_all_users_provided) {
+				
+				$html .= $this->display_users($imported_users);
+				
+				if ($needs_to_warn) {
+					$html .= '<p>'._('Failed to find existing users matching some imported users.').'<br />'.
 					_('If you wish to map their data to existing users, choose them in the form bellow, and re-submit it:'). '</p>';
+				}
+				else {
+					$html .= '<p>'._('You may change some mappings and re-submit.');
+				}
+					
+					
+				$html .= $this->html_generator->boxTop(_("Matching imported users to existing forge users"));
+					
+				$html .= '<table width="100%"><thead><tr>';
+				$html .= '<th>'._('Imported user logname').'</th>';
+				$html .= '<th>'._('Imported user email').'</th>';
+				$html .= '<th>'._('To map to existing user').'</th>';
+				$html .= '</tr></thead><tbody>';
+				$html .= '<input type="hidden" name="submit_mappings" value="y" />';
+			
+				$html .= $html_tbody;
+		
+				// $html .= '</form>';
+				$html .= '</tbody></table>';
+				$html .= $this->html_generator->boxBottom();
 			}
 			else {
-				$html .= '<p>'._('You may change the mappings and re-submit.');
+				// the mapping must be applied as all users mapping has been posted
+				//if ($apply) {
+				$can_proceed = TRUE;
+				$users = array();
+				foreach ($imported_users as $user => $userres) {
+					$imported_username = $this->importer->get_user_name($user);
+					$username = $this->posted_user_mapping[$imported_username];
+					$user_object = user_get_object_by_name($username);
+					if ($user_object) {
+						if ($this->message) {
+							$this->message .= '<br />';
+						}
+						if ( $user_object->isMember($group_id) ) {
+							// no need to add it, already in the group
+							$this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is already in the project : no need to add it.'), $imported_username, $username);
+						}
+						else {
+							// need to add it to the group
+							$role = array();
+							$role['role'] = $this->importer->get_user_role($user);
+							$users[$username] = $role;
+							$this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is not yet in the project : need to add it.'), $imported_username, $username);
+						}
+					}
+					else {
+						// user not found : probably messing with the form post
+						$feedback .= sprintf(_('Failed to find mapped user "%s"'), $username);
+						$can_proceed = FALSE;
+					}
+				}
+				if($can_proceed) {
+					$check=TRUE;
+					if($apply) $check = FALSE;
+					$check = TRUE;
+					user_fill($users, $group_id, $check);
+				}
+				$html .= "All (mapped) imported users added to the group.";
+				// }
 			}
 			
-			
-			$html .= $this->html_generator->boxTop(_("Matching imported users to existing forge users"));
-			
-			$html .= '<table width="100%"><thead><tr>';
-			$html .= '<th>'._('Imported user logname').'</th>';
-			$html .= '<th>'._('Imported user email').'</th>';
-			$html .= '<th>'._('To map to existing user').'</th>';
-			$html .= '</tr></thead><tbody>';
-			$html .= '<input type="hidden" name="submit_mappings" value="y" />';
-			
-			$html .= $html_tbody;
-		
-			//			$html .= '</form>';
-			$html .= '</tbody></table>';
-			$html .= $this->html_generator->boxBottom();
-
 		}
 		return $html;
 
@@ -324,10 +374,7 @@ class ProjectImportPage {
 				if (! $this->form_header_already_displayed) {
 					$this->form_header_already_displayed = true;
 					$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
-				}
-
-				$html .= $this->display_users($imported_users);
-		
+				}		
 				
 				// Handle missing users, taking into account the user mapping form elements 
 				// that may have been provided

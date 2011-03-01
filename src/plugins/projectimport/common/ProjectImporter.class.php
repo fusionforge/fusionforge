@@ -243,6 +243,10 @@ class ProjectImporter {
 		$res = $this->users[$user];
 		return $res->getPropValue('sioc:email');
 	}
+	
+	function get_user_role($user) {
+		return $this->user_roles[$user];
+	}
 
 	function display_user($user) {
 		$html = '';
@@ -254,7 +258,7 @@ class ProjectImporter {
 		$person = $res->getPropValue('sioc:account_of');
 		$res = $this->persons[$person];
 		$name = $res->getPropValue('foaf:name');
-		$role = $this->user_roles[$user];
+		$role = $this->get_user_role($user);
 		
 		$html .= 'User :<br />';
 		$html .= ' account name : '. $username .'<br />';
