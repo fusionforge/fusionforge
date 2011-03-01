@@ -1,3 +1,4 @@
 plugins/projectimport/common/*                  usr/share/@OLDPACKAGE@/plugins/projectimport/common/
 plugins/projectimport/www/*                     usr/share/@OLDPACKAGE@/plugins/projectimport/www/
 plugins/projectimport/etc/plugins/projectimport/*        etc/@OLDPACKAGE@/plugins/projectimport/
+plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php	usr/share/@OLDPACKAGE@/plugins/projectimport/common/	

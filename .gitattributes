@@ -2073,6 +2073,9 @@ src/plugins/oslc/translations/gforge.pot -text
 src/plugins/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/plugins/oslc/www/admin/index.php -text
 src/plugins/oslc/www/index.php -text
+src/plugins/projectimport/3rd-party/README -text
+src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php -text
+src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/README -text
 src/plugins/projectimport/INSTALL -text
 src/plugins/projectimport/NAME -text
 src/plugins/projectimport/README -text
