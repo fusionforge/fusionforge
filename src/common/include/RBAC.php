@@ -26,6 +26,7 @@
 
 require "PFO-RBAC.interface.php";
 
+// TODO : remove this which is security issue ?
 if (true || file_exists ('/tmp/fusionforge-use-pfo-rbac')) {
 	define ('USE_PFO_RBAC', true);
 } else {
@@ -34,13 +35,34 @@ if (true || file_exists ('/tmp/fusionforge-use-pfo-rbac')) {
 
 // Code shared between classes
 
+/**
+ * TODO: RBAC::BaseRole Enter description here ...
+ *
+ */
 abstract class BaseRole extends Error {
+	/**
+	 * TODO: Enter description here ...
+	 * @var unknown_type
+	 */
 	var $role_values;
+	/**
+	 * TODO: Enter description here ...
+	 * @var unknown_type
+	 */
 	var $defaults;
+	/**
+	 * TODO: Enter description here ...
+	 * @var unknown_type
+	 */
 	var $global_settings;
 
+	// var $perms_array;
+	// var $setting_array;
+	
 	public function BaseRole() {
 		if (USE_PFO_RBAC) {
+			// TODO: document these tables
+			// $gfcommon.'include/rbac_texts.php' may provide some hints...
 			$this->role_values = array(
 				'forge_admin' => array(0, 1),
 				'approve_projects' => array(0, 1),
@@ -69,13 +91,15 @@ abstract class BaseRole extends Error {
 				'webcal' => array(0, 1, 2),
 				);
 
+			// Global permissions
 			$this->global_settings = array(
-				'forge_admin',
-				'approve_projects',
-				'approve_news',
+				'forge_admin', // “God mode”: all actions allowed 
+				'approve_projects', // Ability to approve pending projects 
+				'approve_news', // Ability to approve news bits to the forge front page 
 				'forge_stats'
 				);
 
+			// TODO: document these	(Project-related permissions ?)
 			$this->defaults = array(
 				'Admin' => array(            'project_admin'=> 1,
 							     'project_read' => 1,
@@ -344,6 +368,7 @@ abstract class BaseRole extends Error {
 				$this->setError('BaseRole::fetchData()::'.db_error());
 				return false;
 			}
+			// TODO: document perms_array
 			$this->perms_array=array();
 			while ($arr = db_fetch_array($res)) {
 				$this->perms_array[$arr['section_name']][$arr['ref_id']] = $arr['perm_val'];
@@ -578,12 +603,16 @@ abstract class BaseRole extends Error {
 		return $result ;
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @return multitype:
+	 */
 	function getGlobalSettings () {
 		$result = array () ;
 
 		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news') ;
 		foreach ($sections as $section) {
-			$result[$section][-1] = $this->getVal ($section, -1) ;
+			$result[$section][-1] = $this->getVal($section, -1) ;
 		}
 		// Add settings not yet listed so far (probably plugins)
 		foreach (array_keys ($this->perms_array) as $section) {
@@ -597,8 +626,14 @@ abstract class BaseRole extends Error {
 		return $result ;
 	}
 
-        function getSetting($section, $reference) {
-                if (isset ($this->perms_array[$section][$reference])) {
+    /**
+     * TODO: Enter description here ...
+     * @param unknown_type $section
+     * @param unknown_type $reference
+     * @return number|boolean
+     */
+    function getSetting($section, $reference) {
+        if (isset ($this->perms_array[$section][$reference])) {
 			$value = $this->perms_array[$section][$reference] ;
 		} else {
 			$value = 0 ;
@@ -723,15 +758,15 @@ abstract class BaseRole extends Error {
 	 *	@param	integer	The ref_id (ex: group_artifact_id, group_forum_id) for this item.
 	 *	@return integer	The value of this item.
 	 */
-	function getVal($section,$ref_id) {
+	function getVal($section, $ref_id) {
 		global $role_default_array;
 		if (!$ref_id) {
 			$ref_id=0;
 		}
 		if (USE_PFO_RBAC) {
-			return $this->getSetting ($section, $ref_id) ;
+			return $this->getSetting($section, $ref_id) ;
 		} else {
-			if (array_key_exists ($section, $this->setting_array)) {
+			if (array_key_exists($section, $this->setting_array)) {
 				return $this->setting_array[$section][$ref_id];
 			} else {
 				return 0 ;
@@ -1332,6 +1367,10 @@ abstract class BaseRole extends Error {
 
 // Actual classes
 
+/**
+ * TODO: RBAC::RoleExplicit Enter description here ...
+ *
+ */
 abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 	public function addUsers($users) {
 		global $SYS;
@@ -1527,6 +1566,10 @@ abstract class RoleUnion extends BaseRole implements PFO_RoleUnion {
 	}
 }
 
+/**
+ * TODO: Enter description here ...
+ *
+ */
 class RoleComparator {
 	var $criterion = 'composite' ;
 	var $reference_project = NULL ;
@@ -1564,6 +1607,12 @@ class RoleComparator {
 		}
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @param Role $a
+	 * @param Role $b
+	 * @return number
+	 */
 	function CompareNoRef ($a, $b) {
 		$ap = $a->getHomeProject() ;
 		$bp = $b->getHomeProject() ;
