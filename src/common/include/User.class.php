@@ -132,6 +132,13 @@ function &user_get_objects_by_name($username_arr) {
 	return user_get_objects($arr);
 }
 
+function &user_get_objects_by_email($email_arr) {
+	$res=db_query_params('SELECT user_id FROM users WHERE lower(email) = ANY ($1)',
+				array(db_string_array_to_any_clause ($email_arr)));
+	$arr =& util_result_column_to_array($res, 0);
+	return user_get_objects($arr);
+}
+
 function &user_get_active_users() {
 	$res=db_query_params('SELECT user_id FROM users WHERE status=$1',
 			      array('A'));
@@ -1592,7 +1599,7 @@ Enjoy the site.
 
 
 /**
- * user_ismember() - DEPRECATED; DO NOT USE!
+ * user_ismember() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
  *
  * @param		int		The Group ID
  * @param		int		The Type
@@ -1608,7 +1615,7 @@ function user_ismember($group_id,$type=0) {
 }
 
 /**
- * user_getname() - DEPRECATED; DO NOT USE!
+ * user_getname() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
  *
  * @param		int		The User ID
  * @deprecated
