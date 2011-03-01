@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec ./start_vz.sh "$@"
+exec ./start_${VMENGINE}.sh "$@"
