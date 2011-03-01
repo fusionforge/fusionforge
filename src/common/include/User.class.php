@@ -1527,12 +1527,20 @@ Enjoy the site.
 	 * @param	object	group object
 	 * @return	object	Role object
 	 */
-	function getRole(&$group) {
+	function getRole(&$g) {
+		if (is_int ($g) || is_string($g)) {
+			$group_id = $g;
+		} else {
+			$group_id = $g->getID();
+		}
 		foreach ($this->getRoles () as $r) {
-			if ($r instanceof RoleExplicit
-			    && $r->getHomeProject() != NULL
-			    && $r->getHomeProject()->getID() == $group->getID()) {
-				return $r;
+			if ($r instanceof RoleExplicit ) {
+				$homeproj = $r->getHomeProject();
+				if ($homeproj) {
+					if ($homeproj->getID() == $group_id) {
+						return $r;
+					}
+				}
 			}
 		}
 		return false;
