@@ -1,6 +1,6 @@
 <?php
 /**
- * Project Admin Main Page
+ * Project Admin Users Page
  *
  * This page contains administrative information for the project as well
  * as allows to manage it. This page should be accessible to all project
