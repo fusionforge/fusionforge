@@ -1793,7 +1793,7 @@ class ArtifactComparator {
 		if ($aid == $bid) {
 			return 0;
 		}
-		return ($a < $b) ? -1 : 1;
+		return ($aid < $bid) ? -1 : 1;
 	}
 }
 
