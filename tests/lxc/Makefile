@@ -39,12 +39,9 @@ vmdebian6-ip: beroot
 	#sh -c "echo \"lxc.network.ipv4 = $(IPDEBBASE).$(VEIDDEB)/24\">> $(VMROOT)/config" ; \
 	#
 
-vmdebian6-clean: beroot
+cleandeb6: beroot
 	lxc-stop -n vmdebian6 || true
 	lxc-destroy -n vmdebian6 || true
-
-/var/lib/lxc/vmcentos5: beroot
-	mkdir $@
 
 netstaticdeb: beroot
 	@grep -q "iface eth0 inet static" $(VMROOT)/rootfs/etc/network/interfaces || \
@@ -78,8 +75,26 @@ setname: beroot
 beroot:
 	@[ $(shell id -u) = "0" ] || (echo "you should be root to run this" ; exit 1)
 
-start: /cgroup/tasks
+lxcstart: /cgroup/tasks
 	lxc-start -n vmdebian6 -d
 	sleep 5
 	lxc-info -n vmdebian6
 
+addrights: beroot
+	lxc-setcap
+
+delrights: beroot
+	lxc-setcap -d
+
+installtemplate: beroot
+	cp lxc-debian6 /usr/lib/lxc/templates/
+
+create: 
+	sudo LANG=C MIRROR=$(DEBMIRROR) SUITE=$(DIST) /usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6
+
+start:
+	sudo LANG=C /usr/bin/lxc-start -n debian6.local -d
+
+destroy:
+	sudo LANG=C /usr/bin/lxc-stop -n debian6.local
+	sudo LANG=C /usr/bin/lxc-destroy -n debian6.local

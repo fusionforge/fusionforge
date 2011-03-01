@@ -4862,8 +4862,10 @@ tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
 tests/lxc/Makefile -text
+tests/lxc/config.debian6 -text
 tests/lxc/lxc-centos5 -text
 tests/lxc/lxc-debian6 -text
+tests/lxc/lxc-debian6.postinst -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/interfaces.sample -text
@@ -4886,6 +4888,7 @@ tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-build-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
+tests/scripts/start_lxc.sh -text
 tests/scripts/start_vm.sh -text svneol=unset#text/x-sh
 tests/scripts/start_vz.sh -text svneol=unset#text/x-sh
 tests/scripts/stop_vm.sh -text svneol=unset#text/x-sh

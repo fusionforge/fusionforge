@@ -1,0 +1,26 @@
+#! /bin/sh -x
+
+. ../config/default
+if [ -f ../config/`hostname` ] ; then . ../config/`hostname`; fi
+path=/var/lib/lxc/$1
+rootfs=$path/rootfs
+
+if [ -e $rootfs/etc/network/interfaces ]
+then
+cat <<EOF > $rootfs/etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+	address $IPDEBBASE.$VEIDDEB
+	netmask 255.255.255.0
+	gateway $IPDEBBASE.1
+
+EOF
+fi
+
+[ -d $rootfs/root/.ssh ] || mkdir $rootfs/root/.ssh
+cp $SSHPUBKEY $rootfs/root/.ssh/authorized_keys
+[ -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
+[ -e ssh ] || cp ssh/ssh_host_* $rootfs/etc/ssh/
