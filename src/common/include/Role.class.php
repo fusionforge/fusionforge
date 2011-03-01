@@ -26,6 +26,10 @@
 require_once $gfcommon.'include/rbac_texts.php' ;
 require_once $gfcommon.'include/RBAC.php' ;
 
+/**
+ * TODO: FusionForge roles - Enter description here ...
+ *
+ */
 class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	var $data_array;
@@ -174,7 +178,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 * @param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
 	 * @return	integer	The id on success or false on failure.
 	 */
-	function create($role_name,$data,$newproject=false) {
+	function create($role_name, $data, $newproject=false) {
 		if (USE_PFO_RBAC) {
 			if ($this->Group == NULL) {
 				if (!forge_check_global_perm ('forge_admin')) {
@@ -214,14 +218,14 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					return false;
 				}
 			}
-			
+				
 			if ($this->Group == NULL) {
 				$res = db_query_params ('INSERT INTO pfo_role (role_name) VALUES ($1)',
-							array (htmlspecialchars($role_name))) ;
+				array (htmlspecialchars($role_name))) ;
 			} else {
 				$res = db_query_params ('INSERT INTO pfo_role (home_group_id, role_name) VALUES ($1, $2)',
-							array ($this->Group->getID(),
-							       htmlspecialchars($role_name))) ;
+				array ($this->Group->getID(),
+				htmlspecialchars($role_name))) ;
 			}
 			if (!$res) {
 				$this->setError('create::'.db_error());
@@ -238,66 +242,69 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$this->data_array['role_name'] = $role_name ;
 
 			$this->update ($role_name, $data) ;
-			
+				
 			$this->normalizeData () ;
-		} else {
-		$perm =& $this->Group->getPermission ();
-		if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
+			
+		} else { // not USE_PFO_RBAC
+			
+			$perm =& $this->Group->getPermission ();
+			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
+				$this->setPermissionDeniedError();
+				return false;
+			}
 
-		// Check if role_name is not already used.
-		$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
+			// Check if role_name is not already used.
+			$res = db_query_params('SELECT role_name FROM role WHERE group_id=$1 AND role_name=$2',
 			array ($this->Group->getID(), htmlspecialchars($role_name)));
-		if (db_numrows($res)) {
-			$this->setError('Cannot create a role with this name (already used)');
-			return false;
-		}
+			if (db_numrows($res)) {
+				$this->setError('Cannot create a role with this name (already used)');
+				return false;
+			}
 
-		db_begin();
-		$res = db_query_params ('INSERT INTO role (group_id, role_name) VALUES ($1, $2)',
-					array ($this->Group->getID(),
-					       htmlspecialchars($role_name))) ;
-		if (!$res) {
-			$this->setError('create::'.db_error());
-			db_rollback();
-			return false;
-		}
-		$role_id=db_insertid($res,'role','role_id');
-		if (!$role_id) {
-			$this->setError('create::db_insertid::'.db_error());
-			db_rollback();
-			return false;
-		}
+			db_begin();
+			$res = db_query_params ('INSERT INTO role (group_id, role_name) VALUES ($1, $2)',
+			array ($this->Group->getID(),
+			htmlspecialchars($role_name))) ;
+			if (!$res) {
+				$this->setError('create::'.db_error());
+				db_rollback();
+				return false;
+			}
+			$role_id=db_insertid($res,'role','role_id');
+			if (!$role_id) {
+				$this->setError('create::db_insertid::'.db_error());
+				db_rollback();
+				return false;
+			}
 
-		$arr1 = array_keys($data);
-		for ($i=0; $i<count($arr1); $i++) {	
-		//	array_values($Report->adjust_days)
-			$arr2 = array_keys($data[$arr1[$i]]);
-			for ($j=0; $j<count($arr2); $j++) {
-				$usection_name=$arr1[$i];
-				$uref_id=$arr2[$j];
-				$uvalue=$data[$arr1[$i]][$arr2[$j]];
-				if (!$uref_id) {
-					$uref_id=0;
-				}
-				if (!$uvalue) {
-					$uvalue=0;
-				}
-				$res = db_query_params ('INSERT INTO role_setting (role_id,section_name,ref_id,value) VALUES ($1,$2,$3,$4)',
+			$arr1 = array_keys($data);
+			for ($i=0; $i<count($arr1); $i++) {	
+			//	array_values($Report->adjust_days)
+				$arr2 = array_keys($data[$arr1[$i]]);
+				for ($j=0; $j<count($arr2); $j++) {
+					$usection_name=$arr1[$i];
+					$uref_id=$arr2[$j];
+					$uvalue=$data[$arr1[$i]][$arr2[$j]];
+					if (!$uref_id) {
+						$uref_id=0;
+					}
+					if (!$uvalue) {
+						$uvalue=0;
+					}
+					$res = db_query_params ('INSERT INTO role_setting (role_id,section_name,ref_id,value) VALUES ($1,$2,$3,$4)',
 							array ($role_id,
 							       $usection_name,
 							       $uref_id,
 							       $uvalue)) ;
-				if (!$res) {
-					$this->setError('create::insertsetting::'.db_error());
-					db_rollback();
-					return false;
+					if (!$res) {
+						$this->setError('create::insertsetting::'.db_error());
+						db_rollback();
+						return false;
+					}
 				}
 			}
 		}
-		}
+		
 		if (!$this->fetchData($role_id)) {
 			db_rollback();
 			return false;
@@ -306,6 +313,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 		return $role_id;
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @param unknown_type $name
+	 * @return Ambigous <number, boolean, contents>|boolean
+	 */
 	function createDefault($name) {
 		if ($this->Group == NULL) {
 			return $this->create($name,array(),true);
@@ -413,7 +425,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				db_rollback();
 				return false;
 			}
-		} else {
+			
+		} else { // not USE_PFO_RBAC
+			
 			if (!is_numeric($this->getID())) {
 				$this->setError('Role::delete() role_id is not an integer');
 				return false;
@@ -441,15 +455,15 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			db_begin();
 			
 			$res=db_query_params('DELETE FROM role WHERE group_id=$1 AND role_id=$2',
-					     array($this->Group->getID(), $this->getID()));
+			array($this->Group->getID(), $this->getID()));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError('delete::name::'.db_error());
 				db_rollback();
 				return false;
 			}
-			
+				
 			db_commit();
-			
+				
 			return true;
 		}
 	}
@@ -462,7 +476,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function setUser($user_id) {
 		global $SYS;
+		
 		if (USE_PFO_RBAC) {
+			
 			if ($this->Group == NULL) {
 				if (!forge_check_global_perm ('forge_admin')) {
 					$this->setPermissionDeniedError();
@@ -472,59 +488,61 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$this->setPermissionDeniedError();
 				return false;
 			}
-			
+				
 			return $this->addUser (user_get_object($user_id)) ;
-		} else {
+				
+		} else { // not USE_PFO_RBAC
+				
 			$perm =& $this->Group->getPermission ();
 			if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
 
-		db_begin();
-		//
-		//	See if role is actually changing
-		//
-		$res = db_query_params('SELECT role_id FROM user_group WHERE user_id=$1 AND group_id=$2',
-					array($user_id,
-					       $this->Group->getID()));
-		$old_roleid=db_result($res,0,0);
-		if ($this->getID() == $old_roleid) {
-			db_commit();
-			return true;
-		}
-		//
-		//	Get the old role so we can compare new values to old
-		//
-		$oldrole= new Role($this->Group, $old_roleid);
-		if (!$oldrole || !is_object($oldrole) || $oldrole->isError()) {
-			$this->setError($oldrole->getErrorMessage());
-			db_rollback();
-			return false;
-		}
+			db_begin();
+			//
+			//	See if role is actually changing
+			//
+			$res = db_query_params('SELECT role_id FROM user_group WHERE user_id=$1 AND group_id=$2',
+			array($user_id,
+			$this->Group->getID()));
+			$old_roleid=db_result($res,0,0);
+			if ($this->getID() == $old_roleid) {
+				db_commit();
+				return true;
+			}
+			//
+			//	Get the old role so we can compare new values to old
+			//
+			$oldrole= new Role($this->Group, $old_roleid);
+			if (!$oldrole || !is_object($oldrole) || $oldrole->isError()) {
+				$this->setError($oldrole->getErrorMessage());
+				db_rollback();
+				return false;
+			}
 
-		//
-		//	Iterate each setting to see if it's changing
-		//	If not, no sense updating it
-		//
-		$arr1 = array_keys($this->setting_array);
-		for ($i = 0; $i < count($arr1); $i++) {
-		//	array_values($Report->adjust_days)
-			$arr2 = array_keys($this->setting_array[$arr1[$i]]);
-			for ($j=0; $j<count($arr2); $j++) {
-				$usection_name=$arr1[$i];
-				$uref_id = $arr2[$j];
-				$uvalue = $this->setting_array[$usection_name][$uref_id];
-				if (!$uref_id) {
-					$uref_id=0;
-				}
-				if (!$uvalue) {
-					$uvalue=0;
-				}
-				//
-				//	See if this setting changed. If so, then update it
-				//
-	//			if (($this->getVal($usection_name,$uref_id) != $oldrole->getVal($usection_name,$uref_id)) || ($old_roleid == 1)) {
+			//
+			//	Iterate each setting to see if it's changing
+			//	If not, no sense updating it
+			//
+			$arr1 = array_keys($this->setting_array);
+			for ($i = 0; $i < count($arr1); $i++) {
+				//	array_values($Report->adjust_days)
+				$arr2 = array_keys($this->setting_array[$arr1[$i]]);
+				for ($j=0; $j<count($arr2); $j++) {
+					$usection_name=$arr1[$i];
+					$uref_id = $arr2[$j];
+					$uvalue = $this->setting_array[$usection_name][$uref_id];
+					if (!$uref_id) {
+						$uref_id=0;
+					}
+					if (!$uvalue) {
+						$uvalue=0;
+					}
+					//
+					//	See if this setting changed. If so, then update it
+					//
+					//			if (($this->getVal($usection_name,$uref_id) != $oldrole->getVal($usection_name,$uref_id)) || ($old_roleid == 1)) {
 					if ($usection_name == 'frs') {
 						$update_usergroup=true;
 					} elseif ($usection_name == 'scm') {
@@ -535,9 +553,9 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 						//
 						$cvs_flags=$this->getVal('scm',0);
 						$res2 = db_query_params ('UPDATE user_group SET cvs_flags=$1 WHERE user_id=$2 AND group_id=$3',
-									 array ($cvs_flags,
-										$user_id,
-										$this->Group->getID())) ;
+						array ($cvs_flags,
+						$user_id,
+						$this->Group->getID())) ;
 						if (!$res2) {
 							$this->setError('update::scm::'.db_error());
 							db_rollback();
@@ -590,10 +608,10 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 					} elseif ($usection_name == 'pmadmin') {
 						$update_usergroup=true;
 					}
-	//			}
+					//			}
+				}
 			}
-		}
-	//	if ($update_usergroup) {
+			//	if ($update_usergroup) {
 			$res = db_query_params ('UPDATE user_group
 			       SET admin_flags=$1,
 				   forum_flags=$2,
@@ -620,16 +638,16 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				return false;
 			}
 
-	//	}
+			//	}
 
-		$hook_params = array();
-		$hook_params['role'] =& $this;
-		$hook_params['role_id'] = $this->getID();
-		$hook_params['user_id'] = $user_id;
-		plugin_hook("role_setuser", $hook_params);
+			$hook_params = array();
+			$hook_params['role'] =& $this;
+			$hook_params['role_id'] = $this->getID();
+			$hook_params['user_id'] = $user_id;
+			plugin_hook("role_setuser", $hook_params);
 
-		db_commit();
-		return true;
+			db_commit();
+			return true;
 		}
 
 	}
