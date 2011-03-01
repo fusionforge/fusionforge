@@ -24,6 +24,10 @@
 
 require_once $gfcommon.'include/RBAC.php' ;
 
+/**
+ * TODO: Enter description here ...
+ *
+ */
 class RBACEngine extends Error implements PFO_RBACEngine {
 	private static $_instance ;
 	private $_cached_roles = array () ;
@@ -31,6 +35,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	private $_cached_global_roles = NULL ;
 	private $_cached_public_roles = NULL ;
 
+	// singleton constructor
 	public static function getInstance() {
 		if (!isset(self::$_instance)) {
 			$c = __CLASS__;
@@ -427,6 +432,11 @@ function forge_check_perm ($section, $reference, $action = NULL) {
 	return $engine->isActionAllowed($section, $reference, $action) ;
 }
 
+/**
+ * TODO: Enter description here ...
+ * @param unknown_type $section
+ * @param unknown_type $action
+ */
 function forge_check_global_perm ($section, $action = NULL) {
 	$engine = RBACEngine::getInstance() ;
 
