@@ -7,7 +7,7 @@ require_once $gfcommon.'pm/ProjectCategory.class.php';
 require_once $gfcommon.'pm/ProjectGroup.class.php';
 require_once $gfcommon.'pm/ProjectTask.class.php';
 require_once($gfcommon.'include/User.class.php');
-require_once($gfcommon.'import/import_arrays.php');
+//require_once($gfcommon.'import/import_arrays.php');
 
 class Tasks{
 

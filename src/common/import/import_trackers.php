@@ -6,8 +6,16 @@ require_once($gfcommon.'tracker/Artifact.class.php');
 require_once($gfcommon.'include/User.class.php');
 require_once($gfcommon.'tracker/ArtifactExtraField.class.php');
 require_once($gfcommon.'tracker/ArtifactFile.class.php');
-require_once($gfcommon.'import/import_arrays.php');
+//require_once($gfcommon.'import/import_arrays.php');
 
+define('TRACKER_IS_PUBLIC', 1);
+define('TRACKER_ALLOW_ANON', 0);
+define('TRACKER_BUGS', 1);
+define('TRACKER_SUPPORT', 2);
+define('TRACKER_PATCHES', 3);
+define('TRACKER_FEATURES', 4);
+
+static $NOT_EXTRA_FIELDS = array('assigned_to', 'attachments', 'class', 'comments', 'date', 'history', 'priority', 'status_id', 'submitter', 'summary', 'closed_at', 'description', 'type', 'type_of_search', 'id');//last 3 should not be there at all.
 
 /**
  * findType - get the type of a field from its name, value, and vocabulary : default 0 (text box), otherwise 1 (select box) or 2 (multi choice field)
@@ -56,16 +64,21 @@ function createFieldElements($aef, $vocabulary){
  * @return false if failed
  */
 function createFields($at, $data){
+	global $NOT_EXTRA_FIELDS;
 //new dBug($data);
 	//TODO:Create ExtraFields	
-	include $GLOBALS['gfcommon'].'import/import_arrays.php';
+	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
 	$artifactToCheck = $data["artifacts"][0];
 	foreach($artifactToCheck as $fieldName => $fieldValue){
-		if (!in_array($fieldName, $notExtraFields)){
+		if (!in_array($fieldName, $NOT_EXTRA_FIELDS)){
 			$type = findType($fieldName, $fieldValue, $data["vocabulary"]);
 			$aef = new ArtifactExtraField($at);
+			
+			$defaultExtraFieldsSettings = array(0,0,0);
+			$defaultTextFieldsSettings = array(40,100,0);
+			
 			if($type==ARTIFACT_EXTRAFIELDTYPE_TEXT){
-				$extraFieldSettings = $defaultTextFieldsSettings;
+				$extraFieldSettings = $defaultTextFieldsSettings;				
 			}
 			else{
 				$extraFieldSettings = $defaultExtraFieldsSettings;
@@ -91,6 +104,7 @@ function createFields($at, $data){
  * @param array	Tracker data from JSON
  * @return ArtifactType	the tracker created
  */
+
 function createTracker($tracker, $group, $data){
 	//	Create a tracker
 	db_begin();
@@ -99,12 +113,24 @@ function createTracker($tracker, $group, $data){
 		db_rollback();
 		return false;
 	}
-	include $GLOBALS['gfcommon'].'import/import_arrays.php';
+	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
+	
+	$base_tracker_association = array( 'bugs' => TRACKER_BUGS, 'support' => TRACKER_SUPPORT, 'patches' => TRACKER_PATCHES, 'features' => TRACKER_FEATURES );
 	if(array_key_exists($tracker, $base_tracker_association)){
 		$valueType = $base_tracker_association[$tracker];
 	} else {
 		$valueType = 0;
 	}
+	
+	$is_public = TRACKER_IS_PUBLIC;
+	$allow_anon = TRACKER_ALLOW_ANON;
+	$email_all = '';
+	$email_address = '';
+	$due_period = 30;
+	$use_resolution = 0;
+	$submit_instructions = 0;
+	$use_resolution = 0;
+	
 	if (!$at->create($data["label"], $data["label"], $is_public, $allow_anon, $email_all, $email_address, $due_period, $use_resolution, $submit_instructions, $use_resolution, $valueType)) {
 		db_rollback();
 		return false;
@@ -214,10 +240,14 @@ function addFiles($artifact, $jsonArtifact){
  * createArtifacts - Create all the artifacts for an ArtifactType from an array of data.
  * @param ArtifactType The ArtifactType object which the artifacts to be added belong to.
  * @param array	The data of all the artifacts of the current Type (dictionary)
+ * @param $hashrn
+ * @param $hashlogin
  */
-function createArtifacts($at, $data, $hashrn, $hashlogin){
+function createArtifacts($at, $data, $hashrn, $hashlogin) {
+	global $NOT_EXTRA_FIELDS;
+	
 	$name_id = array();
-	include $GLOBALS['gfcommon'].'import/import_arrays.php';
+	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
 	$extra_fields_ids = $at->getExtraFields();
 
 
@@ -240,7 +270,7 @@ function createArtifacts($at, $data, $hashrn, $hashlogin){
 		$arti = new Artifact($at);
 		$extra_fields_array = array();
 		foreach($artifact as $fieldName => $fieldValue){
-			if(!in_array($fieldName, $notExtraFields)){
+			if(!in_array($fieldName, $NOT_EXTRA_FIELDS)){
 //new dBug(array($fieldName,$fieldValue));
 				if(is_array($fieldValue)){
 					$mf = array();

@@ -1,12 +1,87 @@
 <?php
 
-require_once('import_arrays.php');
+//require_once('import_arrays.php');
 
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'include/RoleObserver.class.php';
 require_once $gfcommon.'include/rbac_texts.php';
+
+$equivs_text_value['projectadmin']['None']='0';
+$equivs_text_value['projectadmin']['Admin']='A';
+$equivs_text_value['frs']['Read']='0';
+$equivs_text_value['frs']['Write']='1';
+$equivs_text_value['scm']['No Access']='-1';
+$equivs_text_value['scm']['Read']='0';
+$equivs_text_value['scm']['Write']='1';
+$equivs_text_value['docman']['Read/Post']='0';
+$equivs_text_value['docman']['Admin']='1';
+$equivs_text_value['forumadmin']['None']='0';
+$equivs_text_value['forumadmin']['Admin']='2';
+$equivs_text_value['forum']['No Access']='-1';
+$equivs_text_value['forum']['Read']='0';
+$equivs_text_value['forum']['Post']='1';
+$equivs_text_value['forum']['Admin']='2';
+$equivs_text_value['trackeradmin']['None']='0';
+$equivs_text_value['trackeradmin']['Admin']='2';
+$equivs_text_value['tracker']['No Access']='-1';
+$equivs_text_value['tracker']['Read']='0';
+$equivs_text_value['tracker']['Tech']='1';
+$equivs_text_value['tracker']['Tech & Admin']='2';
+$equivs_text_value['tracker']['Admin Only']='3';
+$equivs_text_value['pmadmin']['None']='0';
+$equivs_text_value['pmadmin']['Admin']='2';
+$equivs_text_value['pm']['No Access']='-1';
+$equivs_text_value['pm']['Read']='0';
+$equivs_text_value['pm']['Tech']='1';
+$equivs_text_value['pm']['Tech & Admin']='2';
+$equivs_text_value['pm']['Admin Only']='3';
+$equivs_text_value['webcal']['No access']='0';
+$equivs_text_value['webcal']['Modify']='1';
+$equivs_text_value['webcal']['See']='2';
+
+
+$observer_equivs_text_value['projectpublic']['Private']=0;
+$observer_equivs_text_value['projectpublic']['Public']=1;
+$observer_equivs_text_value['scmpublic']['Private']=0;
+$observer_equivs_text_value['scmpublic']['Public (PServer)']=1;
+$observer_equivs_text_value['forumpublic']['Private']=0;
+$observer_equivs_text_value['forumpublic']['Public']=1;
+$observer_equivs_text_value['forumanon']['No Anonymous Posts']=0;
+$observer_equivs_text_value['forumanon']['Allow Anonymous Posts']=1;
+$observer_equivs_text_value['trackerpublic']['Private']=0;
+$observer_equivs_text_value['trackerpublic']['Public']=1;
+$observer_equivs_text_value['trackeranon']['No Anonymous Posts']=0;
+$observer_equivs_text_value['trackeranon']['Allow Anonymous Posts']=1;
+$observer_equivs_text_value['pmpublic']['Private']=0;
+$observer_equivs_text_value['pmpublic']['Public']=1;
+$observer_equivs_text_value['frspackage']['Private']=0;
+$observer_equivs_text_value['frspackage']['Public']=1;
+
+
+$equivs_name_value['Documentation Manager']='docman';
+$equivs_name_value['File Release System']='frs';
+$equivs_name_value['Forum Admin']='forumadmin';
+$equivs_name_value['Forum:']='forum';
+$equivs_name_value['Project Admin']='projectadmin';
+$equivs_name_value['Tasks Admin']='pmadmin';
+$equivs_name_value['Tasks:']='pm';
+$equivs_name_value['Tracker Admin']='trackeradmin';
+$equivs_name_value['Tracker:']='tracker';
+$equivs_name_value['Webcal']='webcal';
+$equivs_name_value['SCM']='scm';
+
+
+$observer_equivs_name_value['Project']='projectpublic';
+$observer_equivs_name_value['SCM']='scmpublic';
+$observer_equivs_name_value['Forum:']='forumpublic';
+$observer_equivs_name_value['Forum:AnonPost:']='forumanon';
+$observer_equivs_name_value['Tracker:']='trackerpublic';
+$observer_equivs_name_value['Project']='projectpublic';
+$observer_equivs_name_value['Tracker:AnonPost:']='trackeranon';
+$observer_equivs_name_value['Tasks:']='pmpublic';
+$observer_equivs_name_value['Files']='frspackage';
 
 global $cache_forums;
 global $cache_tasks;
@@ -304,40 +379,40 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
                   ... }
 */
 function user_fill($users, $group_id, $check=False){
-	
-  $group =& group_get_object($group_id);
-  if (!$group || !is_object($group)) {
-    exit_error('Error','Could Not Get Group');
-  } elseif ($group->isError()) {
-    exit_error('Error',$group->getErrorMessage());
-  }
 
-  foreach ($users as $user => $role){
-    global $feedback;
-    global $message;
-    $user_object = &user_get_object_by_name($user);
-    if (!$user_object) {
-      $feedback .= sprintf(_('Failed to find user %s'), $user);
-    } else {
-      $user_id = $user_object->getID();
-      $role_id = get_role_by_name($role['role'],$group_id);
-      if(!$check) {
-	if (!$group->addUser($user,$role_id)) {
-	  $feedback = $group->getErrorMessage();
-	} else {
-	  echo 'User added:'.$user.'<br>';
-	  $feedback = _('User Added Successfully');
-	
-	  //plugin webcal
-	  //change assistant for webcal 
-	  $params[0] = $user_id;
-	  $params[1] = $group_id;
-	  plugin_hook('change_cal_permission',$params);
+	$group =& group_get_object($group_id);
+	if (!$group || !is_object($group)) {
+		exit_error('Error','Could Not Get Group');
+	} elseif ($group->isError()) {
+		exit_error('Error',$group->getErrorMessage());
 	}
-      }
-      else {
-	$message .= 'Need to add user: '.$user.' to group with role '. $role_id. "<br />\n";
-      }
-    }
-  }
-}	
+
+	foreach ($users as $user => $role){
+		global $feedback;
+		global $message;
+		$user_object = &user_get_object_by_name($user);
+		if (!$user_object) {
+			$feedback .= sprintf(_('Failed to find user %s'), $user);
+		} else {
+			$user_id = $user_object->getID();
+			$role_id = get_role_by_name($role['role'],$group_id);
+			if(!$check) {
+				if (!$group->addUser($user,$role_id)) {
+					$feedback = $group->getErrorMessage();
+				} else {
+					echo 'User added:'.$user.'<br>';
+					$feedback = _('User Added Successfully');
+
+					//plugin webcal
+					//change assistant for webcal
+					$params[0] = $user_id;
+					$params[1] = $group_id;
+					plugin_hook('change_cal_permission',$params);
+				}
+			}
+			else {
+				$message .= 'Need to add user: '.$user.' to group with role '. $role_id. "<br />\n";
+			}
+		}
+	}
+}
