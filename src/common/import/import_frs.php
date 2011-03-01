@@ -56,17 +56,17 @@ $pkg->clearError();
 				foreach($rel_content['files'] as $fname => $fcontent){
 //					Create File
 					$file = new FRSFile($rel);
-					$res = db_query("SELECT processor_id
+					$res = db_query_params('SELECT processor_id
 						FROM frs_processor
-						WHERE name='".$fcontent['processor']."'");
+						WHERE name=$1', array($fcontent['processor']));
 					//TODO:Cleanup, there must be a function to catch only one result
 					while ($row=db_fetch_array($res)){
 						$processor_id=$row['processor_id'];
 					}
 
-					$res = db_query("SELECT type_id
+					$res = db_query_params('SELECT type_id
 						FROM frs_filetype
-						WHERE name='".$fcontent['type']."'");
+						WHERE name=$1', array($fcontent['type']));
 					//TODO:Cleanup, there must be a function to catch only one result
 					while ($row=db_fetch_array($res)){
 						$type_id=$row['type_id'];

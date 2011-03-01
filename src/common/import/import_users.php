@@ -98,9 +98,9 @@ global $cache_frs;
 
 function get_role_by_name($role,$group_id){
 	$role_id = FALSE;
-  $res = db_query("SELECT role_id
+  $res = db_query_params('SELECT role_id
 					FROM role
-					WHERE group_id='$group_id' AND role_name='$role'");
+					WHERE group_id=$1 AND role_name=$2', array($group_id, $role));
   //TODO:Cleanup, there must be a function to catch only one result
   while ($row=db_fetch_array($res)){
     $role_id=$row['role_id'];
@@ -109,9 +109,9 @@ function get_role_by_name($role,$group_id){
 }
 function check_roles(&$roles, $group_id){
   $rolestodelete = array();
-  $res = db_query("SELECT role_id,role_name
+  $res = db_query_params('SELECT role_id,role_name
 					FROM role
-					WHERE group_id='$group_id'");
+					WHERE group_id=$1', array($group_id));
 		
   while ($row_roles=db_fetch_array($res)){
     $res_roles[]=array($row_roles['role_name'],$row_roles['role_id']);
@@ -136,8 +136,8 @@ function get_forum_id($forumname,$group_id,$i){
     $forum_id = $cache_forums[$forumname];
   }
   else {
-    $res = db_query("SELECT group_forum_id,forum_name 
-					FROM forum_group_list WHERE group_id='$group_id'");
+    $res = db_query_params('SELECT group_forum_id,forum_name 
+					FROM forum_group_list WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['forum_name']==$forumname){
 	$cache_forums[$row['forum_name']]=array($row['group_forum_id'],1);
@@ -162,8 +162,8 @@ function get_tasks_id($taskname,$group_id,$i){
     $task_id = $cache_tasks[$taskname][0];
   }
   else {
-    $res = db_query("SELECT group_project_id,project_name 
-					FROM project_group_list WHERE group_id='$group_id'");
+    $res = db_query_params('SELECT group_project_id,project_name 
+					FROM project_group_list WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['project_name']==$taskname){
 	$cache_tasks[$row['project_name']]=array($row['group_project_id'],1);
@@ -188,8 +188,8 @@ function get_tracker_id($trackername,$group_id,$i){
     $tracker_id = $cache_trackers[$trackername][0];
   }
   else {
-    $res = db_query("SELECT group_artifact_id,name 
-				FROM artifact_group_list WHERE group_id='$group_id'");
+    $res = db_query_params('SELECT group_artifact_id,name 
+				FROM artifact_group_list WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['name']==$trackername){
 	$cache_trackers[$row['name']]=array($row['group_artifact_id'],1);
@@ -215,8 +215,8 @@ function get_frs_id($frsname, $group_id){
     $frs_id = $cache_frs[$frsname][0];
   }
   else {
-    $res = db_query("SELECT package_id,name 
-				FROM frs_package WHERE group_id='$group_id'");
+    $res = db_query_param('SELECT package_id,name 
+				FROM frs_package WHERE group_id=$1', array($group_id));
     while ($row=db_fetch_array($res)){
       if ($row['name']==$frsname){
 	$cache_frs[$row['name']]=array($row['package_id'],1);
