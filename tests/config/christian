@@ -21,6 +21,7 @@ VZPRIVATEDIR=/data/openvz/private
 VZTEMPLATEDIR=/var/lib/vz/template
 
 USERCLIENT=chris
+SSHPUBKEY=~buildbot/.ssh/id_rsa.pub
 
 DEBMIRROR=http://christian.bayle.eu/debian
 DIST=squeeze
