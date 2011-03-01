@@ -35,6 +35,14 @@ MantisBTInitController = function(params)
 	this.bindControls();
 };
 
+MantisBTInitUserController = function(params)
+{
+	this.params	= params;
+
+	if ( typeof(jQuery(window).tipsy) == 'function') {
+		this.initTipsy();
+	}
+};
 
 MantisBTInitController.prototype =
 {
@@ -64,6 +72,22 @@ MantisBTInitController.prototype =
 			this.params.inputName.attr('disabled',false);
 		} else {
 			this.params.inputName.attr('disabled',true);
+		}
+	},
+}
+
+MantisBTInitUserController.prototype =
+{
+	/*! initializes tipsy
+	*/
+	initTipsy: function() {
+		for(var i = 0; i < this.params.tipsyElements.length; i++) {
+			var el = this.params.tipsyElements[i];
+			jQuery(el.selector).tipsy({
+				gravity: el.options.gravity,
+						  delayIn: el.options.delayIn,
+						  delayOut: el.options.delayOut,
+						  fade: el.options.fade});
 		}
 	},
 }

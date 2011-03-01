@@ -35,7 +35,7 @@ global $use_tooltips;
 var controller;
 
 jQuery(document).ready(function() {
-	controllerListFile = new MantisBTInitController({
+	controllerMantisBTInit = new MantisBTInitController({
 		groupId:		<?php echo $group_id ?>,
 		tipsyElements:		[
 						{selector: '#mantisbtinit-url', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
@@ -43,7 +43,6 @@ jQuery(document).ready(function() {
 						{selector: '#mantisbtinit-password', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#mantisbtinit-create', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#mantisbtinit-name', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#mantisbtinit-syncusers', options:{gravity: 'w',delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#mantisbtinit-syncroles', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
 					],
 		checkboxCreate:		jQuery('#mantisbtcreate'),
@@ -77,10 +76,6 @@ echo '<tr><td><label id="mantisbtinit-name" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the name of the project in MantisBT if already created in MantisBT').'"';
 echo ' >Name of the project in MantisBT</label></td><td><input id="mantisbtname" type="text" size="50" maxlength="255" name="mantisbtname" /></td></tr>';
-echo '<tr><td><label id="mantisbtinit-syncusers" ';
-if ($use_tooltips)
-	echo 'title="'._('Do you want to sync FusionForge -> MantisBT users ?').'"';
-echo ' >Sync Users</label></td><td><input disabled="disabled" type="checkbox" name="sync_user" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-syncroles" ';
 if ($use_tooltips)
 	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ?').'"';

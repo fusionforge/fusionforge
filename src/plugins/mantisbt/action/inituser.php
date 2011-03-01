@@ -22,19 +22,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-global $group_id; // the group id
 global $mantisbt; // the mantisbt object
-global $group; // the group object
 
 $confArr = array();
-$confArr['url'] = getStringFromRequest('url');
-$confArr['sync_roles'] = 0;
-$confArr['soap_user'] = getStringFromRequest('soap_user');
-$confArr['soap_password'] = getStringFromRequest('soap_password');
+$confArr['mantisbt_user'] = getStringFromRequest('mantisbt_user');
+$confArr['mantisbt_password'] = getStringFromRequest('mantisbt_password');
+$confArr['mantisbtcreate'] = getIntFromRequest('mantisbtcreate');
 
-if (!$mantisbt->updateConf($group_id, $confArr))
-	session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($group->getErrorMessage()));
+if (!$mantisbt->initializeUser($confArr))
+	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&error_msg='.urlencode($group->getErrorMessage()));
 
-$feedback = _('MantisBT configuration successfully updated.');
-session_redirect('/plugins/mantisbt/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
+$feedback = _('MantisBT User successfully initialized.');
+session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 ?>

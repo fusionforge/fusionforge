@@ -28,6 +28,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $group_id;
+global $editable;
 
 if (empty($msg)) {
 	if (!isset($defect)){
@@ -54,7 +55,9 @@ if (empty($msg)) {
 				echo		'<td>'.$attachement->filename.'</td>';
 				echo 		'<td>';
 				echo			'<input type=button value="'._('Download').'" onclick="window.location.href=\'getAttachment.php/'.$group_id.'/'.$attachement->id.'/'.$attachement->filename.'\'">';
-				echo			'<input type=button value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
+				if ($editable)
+					echo		'<input type=button value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&idAttachment='.$attachement->id.'&action=deleteAttachment&view=viewIssue\'">';
+
 				echo		'</td>';
 				echo 	'</tr>';
 			}
@@ -91,10 +94,14 @@ if (empty($msg)) {
     });
 
 </script>
+<?php
+	if ($editable) {
+?>
 <p class="notice_title" onclick='jQuery("#expandable_file").slideToggle(300)'><?php echo _('Add file') ?></p>
 <div id='expandable_file' class="notice_content">
 <?php
-    include("addAttachment.php");
+		include("addAttachment.php");
+	}
 ?>
 </div>
 <br/>

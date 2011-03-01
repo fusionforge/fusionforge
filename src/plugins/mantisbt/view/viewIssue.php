@@ -28,6 +28,7 @@ global $mantisbtConf;
 global $username;
 global $password;
 global $gfplugins;
+global $editable;
 
 if (!isset($defect)) {
 	try {
@@ -42,7 +43,7 @@ if (!isset($defect)) {
 	}
 }
 
-if (!isset($errorPage)){
+if (!isset($errorPage)) {
     include('jumpToIssue.php');
     echo "<h2 style='border-bottom: 1px solid black'>Détail du ticket #$idBug</h2>";
 	echo	'<table>';
@@ -139,11 +140,15 @@ if (!isset($errorPage)){
     });
 
 </script>
+<?php
+	if ($editable) {
+?>
 <p class="notice_title" onclick='jQuery("#expandable_edition").slideToggle(300)'><?php echo _('Edit ticket') ?></p>
 <div id='expandable_edition' class="notice_content">
 <?php
-	if (!isset($errorPage)) {
-		include($gfplugins.$mantisbt->name."/view/editIssue.php");
+		if (!isset($errorPage)) {
+			include($gfplugins.$mantisbt->name."/view/editIssue.php");
+		}
 	}
 }
 ?>
@@ -152,4 +157,5 @@ if (!isset($errorPage)){
 	if (!isset($errorPage)) {
 		include($gfplugins.$mantisbt->name."/view/viewNote.php");
 		include($gfplugins.$mantisbt->name."/view/viewAttachment.php");
-}
+	}
+?>

@@ -1,7 +1,8 @@
 <?php
 /**
  * User MantisBT page
- * Copyright 2010, Franck Villaume - Capgemini
+ *
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -21,39 +22,60 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-$action = getStringFromRequest('action');
+global $HTML;
+global $mantisbt;
+
 $view = getStringFromRequest('view');
 
-switch ($action) {
-	case "updateIssue":
-	case "updateNote":
-	case "addNote":
-	case "deleteNote":
-	case "addAttachment":
-	case "deleteAttachment":
-		include ("mantisbt/action/$action.php");
-		break;
+// submenu
+$labelTitle = array();
+$labelTitle[] = _('My Tickets');
+$labelPage = array();
+$labelPage[] = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name;
+$labelAttr = array();
+if ($use_tooltips) {
+	$labelAttr[] = array('title' => _('View My tickets.'), 'id' => 'ticketView');
+} else {
+	$labelAttr[] = array();
+	$labelAttr[] = array();
 }
+$labelTitle[] = _('Administration');
+$labelPage[] = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=adminuser';
+if ($use_tooltips) {
+	$labelAttr[] = array('title' => _('Manage your mantisbt account.'), 'id' => 'adminView');
+} else {
+	$labelAttr[] = array();
+}
+
+
+
+echo $HTML->subMenu($labelTitle, $labelPage, $labelAttr);
 
 // page a afficher
 switch ($view) {
+	case "inituser":
 	case "editIssue":
+	case "viewIssues":
 	case "addAttachment":
-	case "viewNote":
+	case "adminuser":
+	case "viewNote": {
 		include ("mantisbt/view/$view.php");
 		break;
-	case "viewIssue":
+	}
+	case "viewIssue": {
 		include ("mantisbt/view/$view.php");
 		include ("mantisbt/view/viewNote.php");
 		include ("mantisbt/view/viewAttachment.php");
 		break;
+	}
 	case "editNote":
-	case "addNote":
+	case "addNote": {
 		include ("mantisbt/view/addOrEditNote.php");
 		break;
+	}
 	// default page is view All issues
-	default:
+	default: {
 		include('mantisbt/view/viewIssues.php');
+	}
 }
-
 ?>

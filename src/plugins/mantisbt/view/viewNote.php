@@ -28,6 +28,7 @@ global $username;
 global $password;
 global $group_id;
 global $idBug;
+global $editable;
 
 //$msg is coming from previous soap error
 if (empty($msg)) {
@@ -44,24 +45,26 @@ if (empty($msg)) {
 	if (isset($defect->notes)){
 		echo    '<table>';
 		foreach ($defect->notes as $key => $note){
-		    echo	'<tr>';
-		    echo		'<td width="10%">';
-		    echo 			'('.sprintf($format,$note->id).')';
-		    echo 			'<br/>';
-		    echo			$note->reporter->name;
-		    echo 			'<br/>';
-		    // TODO
-		    //date_default_timezone_set("UTC");
-		    echo 			date("Y-m-d G:i",strtotime($note->date_submitted));
-		    echo 		'</td>';
-		    echo		'<td width="9%">';
-		    echo 			'<input type=button name="upNote" value="'._('Modify').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$note->id.'&view=editNote\'">';
-		    echo 			'<input type=button name="delNote" value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$note->id.'&action=deleteNote&view=viewIssue\'">';
-		    echo 		"</td>";
-		    echo 		'<td>';
-		    echo		'<textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" row="3">'.htmlspecialchars($note->text, ENT_QUOTES).'</textarea>';
-		    echo 		"</td>";
-		    echo 	'</tr>';
+			echo	'<tr>';
+			echo		'<td width="10%">';
+			echo			'('.sprintf($format,$note->id).')';
+			echo			'<br/>';
+			echo		$note->reporter->name;
+			echo			'<br/>';
+			// TODO
+			//date_default_timezone_set("UTC");
+			echo			date("Y-m-d G:i",strtotime($note->date_submitted));
+			echo		'</td>';
+			if ($editable) {
+				echo		'<td width="9%">';
+				echo			'<input type=button name="upNote" value="'._('Modify').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$note->id.'&view=editNote\'">';
+				echo			'<input type=button name="delNote" value="'._('Delete').'" onclick="window.location.href=\'?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&idNote='.$note->id.'&action=deleteNote&view=viewIssue\'">';
+				echo		"</td>";
+			}
+			echo		'<td>';
+			echo		'<textarea disabled name="description" style="width:99%; background-color:white; color:black; border: none;" row="3">'.htmlspecialchars($note->text, ENT_QUOTES).'</textarea>';
+			echo		"</td>";
+			echo	'</tr>';
 		}
 		echo "</table>";
 	} else {
@@ -96,15 +99,17 @@ if (empty($msg)) {
     });
 
 </script>
+<?php
+	if ($editable) {
+?>
 <p class="notice_title" onclick='jQuery("#expandable_note").slideToggle(300)'><?php echo _('Add note') ?></p>
 <div id='expandable_note' class="notice_content">
 <?php
-    include("addOrEditNote.php");
+		include("addOrEditNote.php");
+	}
 ?>
 </div>
-
 <br/>
-
 <?php
 }
 ?>

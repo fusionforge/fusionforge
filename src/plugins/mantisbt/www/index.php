@@ -28,22 +28,8 @@ require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfconfig.'plugins/mantisbt/config.php';
 
-if (!session_loggedin()) {
-	exit_not_logged_in();
-}
-
-$user = session_get_user(); // get the session user
-
-if (!$user || !is_object($user)) {
-	exit_error(_('Invalid User'), 'home');
-} else if ( $user->isError()) {
-	exit_error($user->isError(), 'home');
-} else if ( !$user->isActive()) {
-	exit_error(_('User not active'), 'home');
-}
-
 $type = getStringFromRequest('type');
-$group_id = getIntFromRequest('group_id');
+
 if (!$type) {
 	if (forge_get_config('use_ssl'))
 		$url = "https://";
@@ -52,28 +38,29 @@ if (!$type) {
 
 	$url .= forge_get_config('web_host');
 	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No TYPE specified'), 'mantisbt');
-} elseif (!$group_id) {
-	if (forge_get_config('use_ssl'))
-		$url = "https://";
-	else
-		$url = "http://";
-
-	$url .= forge_get_config('web_host');
-	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No GROUP_ID specified'), 'mantisbt');
 }
 
-$user_id = getIntFromRequest('user_id');
+
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-$action = getStringFromRequest('action');
-$view = getStringFromRequest('view');
 
-$use_tooltips = $user->usesTooltips();
+$use_tooltips = 1;
+$editable = 1;
 $mantisbt = plugin_get_object('mantisbt');
 
 switch ($type) {
 	case 'group': {
+		$group_id = getIntFromRequest('group_id');
+		if (!$group_id) {
+			if (forge_get_config('use_ssl'))
+				$url = "https://";
+			else
+				$url = "http://";
+
+			$url .= forge_get_config('web_host');
+			exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No GROUP_ID specified'), 'mantisbt');
+		}
 		$group = group_get_object($group_id);
 		if (!$group) {
 			exit_no_group();
@@ -85,13 +72,20 @@ switch ($type) {
 			$error_msg .= $group->getErrorMessage();
 		}
 
-		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group (optional)
-		if ( !$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'), 'home');
+		if (session_loggedin()) {
+			$user = session_get_user(); // get the session user
+
+			if (!$user || !is_object($user)) {
+				exit_error(_('Invalid User'), 'home');
+			} else if ( $user->isError()) {
+				exit_error($user->isError(), 'home');
+			} else if ( !$user->isActive()) {
+				exit_error(_('User not active'), 'home');
+			}
 		}
 
 		$mantisbtConf = $mantisbt->getMantisBTConf();
-
+		$view = getStringFromRequest('view');
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
 			$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg);
@@ -101,9 +95,27 @@ switch ($type) {
 			session_redirect($redirect_url);
 		}
 
-		if (!$mantisbtConf['sync_users']) {
+		$action = '';
+		if (isset($user)) {
+			$userperm = $group->getPermission($user);
+			if ($userperm->IsMember()) {
+				$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
+				if ($mantisbtUserConf) {
+					$username = $mantisbtUserConf['user'];
+					$password = $mantisbtUserConf['password'];
+				} else {
+					$warning_msg = _('Your mantisbt user is not initialized.');
+					session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg));
+				}
+				$action = getStringFromRequest('action');
+			}
+			$use_tooltips = $user->usesTooltips();
+		}
+
+		if (!isset($username) || !isset($password)) {
 			$username = $mantisbtConf['soap_user'];
 			$password = $mantisbtConf['soap_password'];
+			$editable = 0;
 		}
 
 		$sort = getStringFromRequest('sort');
@@ -113,6 +125,7 @@ switch ($type) {
 		$idAttachment = getStringFromRequest('idAttachment');
 		$actionAttachment = getStringFromRequest('actionAttachment');
 		$page = getStringFromRequest('page');
+		global $gfplugins;
 
 		switch ($action) {
 			case "updateIssue":
@@ -121,13 +134,13 @@ switch ($type) {
 			case "deleteNote":
 			case "addAttachment":
 			case "deleteAttachment": {
-				include ("mantisbt/action/$action.php");
+				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
 			}
 			case "updateNote":
 			case "privateNote":
 			case "publicNote": {
-				include ("mantisbt/action/updateNote.php");
+				include($gfplugins.$mantisbt->name.'/action/updateNote.php');
 				break;
 			}
 		}
@@ -148,20 +161,55 @@ switch ($type) {
 		break;
 	}
 	case 'user': {
-		if (!($user) || !($user->usesPlugin($pluginname))) {
-			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $pluginname), 'my');
+		if (!session_loggedin()) {
+			exit_not_logged_in();
 		}
-		if ( (!$user) || ($user->getID() != $user_id)) { // if someone else tried to access the private MantisBT part of this user
-			exit_permission_denied(sprintf(_('You cannot access other user\'s personal %s'), $pluginname), 'my');
+		$user = session_get_user();
+		if (!($user) || !($user->usesPlugin($mantisbt->name))) {
+			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $mantisbt->name), 'my');
 		}
 
-		// URL analysis
+		$action = getStringFromRequest('action');
+		$view = getStringFromRequest('view');
 		$sort = getStringFromRequest('sort');
 		$dir = getStringFromRequest('dir');
 		$action = getStringFromRequest('action');
 		$idBug = getStringFromRequest('idBug');
 		$idNote = getStringFromRequest('idNote');
 		$page = getStringFromRequest('page');
+
+
+		if ($view != 'inituser' && $action != 'inituser') {
+			$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
+			if ($mantisbtUserConf) {
+				$username = $mantisbtUserConf['user'];
+				$password = $mantisbtUserConf['password'];
+			}  else {
+				$warning_msg = _('Your mantisbt user is not initialized.');
+				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg);
+				if ($error_msg) {
+					$redirect_url .= '&error_msg='.urlencode($error_msg);
+				}
+				session_redirect($redirect_url);
+			}
+		}
+		$use_tooltips = $user->usesTooltips();
+
+		switch ($action) {
+			case "inituser":
+			case "updateIssue":
+			case "updateNote":
+			case "addNote":
+			case "deleteNote":
+			case "addAttachment":
+			case "deleteAttachment":
+			case "updateuserConf": {
+				global $gfplugins;
+				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
+				break;
+			}
+		}
+
 		// Si la variable $_GET['page'] existe...
 		if($page != null && $page != '') {
 			$pageActuelle=intval($page);
@@ -176,6 +224,20 @@ switch ($type) {
 		break;
 	}
 	case 'admin': {
+		if (!session_loggedin()) {
+			exit_not_logged_in();
+		}
+		$group_id = getIntFromRequest('group_id');
+		if (!$group_id) {
+			if (forge_get_config('use_ssl'))
+				$url = "https://";
+			else
+				$url = "http://";
+
+			$url .= forge_get_config('web_host');
+			exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No GROUP_ID specified'), 'mantisbt');
+		}
+
 		$group = group_get_object($group_id);
 		if (!$group) {
 			exit_no_group();
@@ -186,10 +248,43 @@ switch ($type) {
 		if ($group->isError()) {
 			$error_msg .= $group->getErrorMessage();
 		}
-
+		$user = session_get_user();
 		$userperm = $group->getPermission($user);//we'll check if the user belongs to the group
 		if (!$userperm->IsMember()) {
 			exit_permission_denied(_('You are not a member of this project'), 'home');
+		}
+
+		if (!$userperm->isAdmin()) {
+			exit_permission_denied(_('You are not Admin of this project'), 'mantisbt');
+		}
+
+		$mantisbtConf = $mantisbt->getMantisBTConf();
+		$action = getStringFromRequest('action');
+		$view = getStringFromRequest('view');
+		if ($view != 'init' && $action != 'init') {
+			if ($mantisbtConf['id_mantisbt'] === 0) {
+				$warning_msg = _('The mantisbt plugin for this project is not initialized.');
+				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=init&warning_msg='.urlencode($warning_msg);
+				if ($error_msg) {
+					$redirect_url .= '&error_msg='.urlencode($error_msg);
+				}
+				session_redirect($redirect_url);
+			}
+
+			if (isset($user)) {
+				$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
+				if ($mantisbtUserConf) {
+					$username = $mantisbtUserConf['user'];
+					$password = $mantisbtUserConf['password'];
+				}
+				$use_tooltips = $user->usesTooltips();
+			}
+
+			// no user init ? we shoud force this user to init his account
+			if (!isset($username) || !isset($password)) {
+				$warning_msg = _('Your mantisbt user is not initialized.');
+				session_redirect('/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg));
+			}
 		}
 
 		switch ($action) {
@@ -206,11 +301,6 @@ switch ($type) {
 			case "updateVersion":
 			case "updateConf": {
 				global $gfplugins;
-				$mantisbtConf = $mantisbt->getMantisBTConf();
-				if (!$mantisbtConf['sync_users']) {
-					$username = $mantisbtConf['soap_user'];
-					$password = $mantisbtConf['soap_password'];
-				}
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
 			}
@@ -218,9 +308,6 @@ switch ($type) {
 
 		$mantisbt->getHeader('project');
 		//only project admin can access here
-		if (!$userperm->isAdmin()) {
-			exit_permission_denied(_('You are not Admin of this project'), 'mantisbt');
-		}
 
 		switch ($view) {
 			case "init": {
@@ -228,11 +315,6 @@ switch ($type) {
 				break;
 			}
 			default: {
-				$mantisbtConf = $mantisbt->getMantisBTConf();
-				if (!$mantisbtConf['sync_users']) {
-					$username = $mantisbtConf['soap_user'];
-					$password = $mantisbtConf['soap_password'];
-				}
 				$mantisbt->getAdminView();
 				break;
 			}

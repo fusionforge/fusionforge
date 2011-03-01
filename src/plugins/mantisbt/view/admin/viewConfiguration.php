@@ -2,7 +2,7 @@
 /**
  * MantisBT plugin
  *
- * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -22,14 +22,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-/* view version of a dedicated group in MantisBt */
-
-/* main display */
 global $HTML;
 global $mantisbt;
 global $mantisbtConf;
-global $username;
-global $password;
 
 echo $HTML->boxTop(_('Manage configuration'));
 echo '<form method="POST" Action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=updateConf">';

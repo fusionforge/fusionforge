@@ -32,6 +32,9 @@ $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id = $arr[4];
 $idAttachment=$arr[5];
 
+if (!session_loggedin()) {
+	exit_not_logged_in();
+}
 $user = session_get_user(); // get the session user
 
 if (!$user || !is_object($user)) {
@@ -60,12 +63,18 @@ if ( !$userperm->IsMember()) {
 	exit_permission_denied(_('You are not a member of this project'), 'home');
 }
 
-
 $mantisbtConf = $mantisbt->getMantisBTConf();
 
-if (!$mantisbtConf['sync_users']) {
-	$username = $mantisbtConf['soap_user'];
-	$password = $mantisbtConf['soap_password'];
+$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
+if ($mantisbtUserConf) {
+	$username = $mantisbtUserConf['user'];
+	$password = $mantisbtUserConf['password'];
+}
+
+// no user init ? we shoud force this user to init his account
+if (!isset($username) || !isset($password)) {
+	$warning_msg = _('Your mantisbt user is not initialized.');
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=user&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg));
 }
 
 if ($idAttachment) {

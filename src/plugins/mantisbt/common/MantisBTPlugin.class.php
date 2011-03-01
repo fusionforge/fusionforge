@@ -71,8 +71,16 @@ class MantisBTPlugin extends Plugin {
 					return;
 				}
 				if ($project->usesPlugin($this->name)) {
-					$params['TITLES'][]=$this->text;
-					$params['DIRS'][]='/plugins/' . $this->name . '/?type=group&group_id=' . $group_id . '&pluginname=' . $this->name;
+					$params['TITLES'][] = $this->text;
+					$params['DIRS'][] = '/plugins/'.$this->name.'/?type=group&group_id=' . $group_id . '&pluginname=' . $this->name;
+					if (session_loggedin()) {
+						$user = session_get_user();
+						$userperm = $project->getPermission($user);
+						if ($userperm->isAdmin()) {
+							$params['TITLES'][] = $this->text . _('Admin');
+							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id . '&pluginname=' . $this->name;
+						}
+					}
 				}
 				if ($params['toptab'] == $this->name) {
 					$params['selected']=(count($params['TITLES'])-1);
@@ -88,9 +96,7 @@ class MantisBTPlugin extends Plugin {
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/?user_id=$userid&type=user&pluginname=".$this->name,
-					_('View Personal MantisBT')
-					);
+					echo util_make_link('/plugins/'.$this->name.'/?user_id=$userid&type=user&pluginname='.$this->name, _('View Personal MantisBT'));
 					echo '</p>';
 				}
 				$returned = true;
@@ -179,7 +185,7 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * addProjectMantis - inject the Group into Mantisbt thru SOAP
 	 *
-	 * @param	array	Configuration Array (url, soap_user, soap_password, sync_roles, sync_users)
+	 * @param	array	Configuration Array (url, soap_user, soap_password, sync_roles)
 	 * @return	bool	success or not
 	 */
 	function addProjectMantis($groupId, $confArr) {
@@ -490,7 +496,6 @@ class MantisBTPlugin extends Plugin {
 		$mantisbtConfArray['url'] = $row['url'];
 		$mantisbtConfArray['soap_user'] = $row['soap_user'];
 		$mantisbtConfArray['soap_password'] = $row['soap_password'];
-		$mantisbtConfArray['sync_users'] = $row['sync_users'];
 		$mantisbtConfArray['sync_roles'] = $row['sync_roles'];
 		return $mantisbtConfArray;
 	}
@@ -531,8 +536,8 @@ class MantisBTPlugin extends Plugin {
 		$labelTitle[] = _('Roadmap');
 		$labelTitle[] = _('Tickets');
 		$labelPage = array();
-		$labelPage[] = "/plugins/mantisbt/?type=group&group_id=".$group_id."&pluginname=".$this->name."&view=roadmap";
-		$labelPage[] = "/plugins/mantisbt/?type=group&group_id=".$group_id."&pluginname=".$this->name;
+		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name."&view=roadmap";
+		$labelPage[] = "/plugins/".$this->name."/?type=group&group_id=".$group_id."&pluginname=".$this->name;
 		$labelAttr = array();
 		if ($enable_tooltips) {
 			$labelAttr[] = array('title' => _('View the roadmap, per version tickets'), 'id' => 'roadmapView');
@@ -544,9 +549,9 @@ class MantisBTPlugin extends Plugin {
 		$userperm = $group->getPermission($user);
 		if ( $userperm->isAdmin() ) {
 			$labelTitle[] = _('Administration');
-			$labelPage[] = "/plugins/mantisbt/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
+			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name;
 			$labelTitle[] = _('Statistics');
-			$labelPage[] = "/plugins/mantisbt/?type=admin&group_id=".$group_id."&pluginname=".$this->name."&view=stat";
+			$labelPage[] = "/plugins/".$this->name."/?type=admin&group_id=".$group_id."&pluginname=".$this->name."&view=stat";
 			if ($enable_tooltips) {
 				$labelAttr[] = array('title' => _('Manage versions, categories and general configuration.'), 'id' => 'adminView');
 				$labelAttr[] = array('title' => _('View global statistics.'), 'id' => 'statView');
@@ -565,13 +570,14 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {
+		global $gfplugins;
 		$returned = false;
-		$params['toptab'] = $this->name;
 		html_use_tooltips();
-		use_javascript('scripts/MantisBTController.js');
+		use_javascript('/plugins/'.$this->name.'/scripts/MantisBTController.js');
 		switch ($type) {
 			case 'project': {
 				global $group_id;
+				$params['toptab'] = $this->name;
 				$params['group'] = $group_id;
 				$params['title'] = $this->name.' Project Plugin!';
 				$params['pagename'] = $this->name;
@@ -609,21 +615,39 @@ class MantisBTPlugin extends Plugin {
 			$idProjectMantis = $this->getProjectMantisByName($group_id, $confArr);
 		}
 		if ($idProjectMantis) {
-			$result = db_query_params('insert into plugin_mantisbt (id_group, id_mantisbt, url, soap_user, soap_password, sync_roles, sync_users)
+			$result = db_query_params('insert into plugin_mantisbt (id_group, id_mantisbt, url, soap_user, soap_password, sync_roles)
 							values ($1, $2, $3, $4, $5, $6, $7)',
 							array($group_id,
 								$idProjectMantis,
 								$confArr['url'],
 								$confArr['soap_user'],
 								$confArr['soap_password'],
-								$confArr['sync_roles'],
-								$confArr['sync_users']));
+								$confArr['sync_roles']));
 			if (!$result)
 				return false;
 
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * initialize - initialize the mantisbt user
+	 *		save config in db
+	 * @param	array	configuration array
+	 * @return	bool	success or not
+	 */
+	function initializeUser($confArr) {
+		global $user;
+		$result = db_query_params('insert into plugin_mantisbt_users (id_user, mantisbt_user, mantisbt_password)
+							values ($1, $2, $3)',
+							array($user->getID(),
+								$confArr['mantisbt_user'],
+								$confArr['mantisbt_password']));
+		if (!$result)
+			return false;
+
+		return true;
 	}
 
 	/**
@@ -634,12 +658,31 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function updateConf($group_id, $confArr) {
-		$result = db_query_params('update plugin_mantisbt  set url = $1 , soap_user = $2, soap_password = $3
+		$result = db_query_params('update plugin_mantisbt set url = $1 , soap_user = $2, soap_password = $3
 						where id_group = $4',
 					array($confArr['url'],
 						$confArr['soap_user'],
 						$confArr['soap_password'],
 						$group_id));
+		if (!$result)
+			return false;
+
+		return true;
+	}
+
+	/**
+	 * updateUserConf - update the MantisBT User configuration
+	 *
+	 * @param	array	configuration array
+	 * @return	bool	success or not
+	 */
+	function updateUserConf($confArr) {
+		global $user;
+		$result = db_query_params('update plugin_mantisbt_users set mantisbt_user = $1 , mantisbt_password = $2
+						where id_user = $3',
+					array($confArr['mantisbt_user'],
+						$confArr['mantisbt_password'],
+						$user->getID()));
 		if (!$result)
 			return false;
 
@@ -668,6 +711,32 @@ class MantisBTPlugin extends Plugin {
 		}
 		$groupObject->setError('getProjectMantisByName::Error: mantisbt project not found');
 		return false;
+	}
+
+	/**
+	 * getUserConf - return the user / password for the user id mantisbt account
+	 *
+	 * @return	array	the user configuration
+	 */
+	function getUserConf() {
+		global $user;
+		$userConf = array();
+		$resIdUser = db_query_params('SELECT mantisbt_user, mantisbt_password FROM plugin_mantisbt_users WHERE id_user = $1', array($user->getID()));
+		if (!$resIdUser) {
+			$user->setError('getUserConf::error '.db_error());
+			return false;
+		}
+
+		$row = db_numrows($resIdUser);
+
+		if ($row == null || count($row) > 2) {
+			return false;
+		}
+
+		$row = db_fetch_array($resIdUser);
+		$userConf['user'] = $row['mantisbt_user'];
+		$userConf['password'] = $row['mantisbt_password'];
+		return $userConf;
 	}
 }
 // Local Variables:

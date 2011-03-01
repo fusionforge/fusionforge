@@ -1751,11 +1751,13 @@ src/plugins/mantisbt/action/deleteCategory.php -text
 src/plugins/mantisbt/action/deleteNote.php -text
 src/plugins/mantisbt/action/deleteVersion.php -text
 src/plugins/mantisbt/action/init.php -text
+src/plugins/mantisbt/action/inituser.php -text
 src/plugins/mantisbt/action/renameCategory.php -text
 src/plugins/mantisbt/action/updateConf.php -text
 src/plugins/mantisbt/action/updateIssue.php -text
 src/plugins/mantisbt/action/updateNote.php -text
 src/plugins/mantisbt/action/updateVersion.php -text
+src/plugins/mantisbt/action/updateuserConf.php -text
 src/plugins/mantisbt/bin/db-delete.pl -text
 src/plugins/mantisbt/bin/db-upgrade.pl -text
 src/plugins/mantisbt/common/MantisBTPlugin.class.php -text
@@ -1782,8 +1784,10 @@ src/plugins/mantisbt/view/admin/stat.php -text
 src/plugins/mantisbt/view/admin/viewCategorie.php -text
 src/plugins/mantisbt/view/admin/viewConfiguration.php -text
 src/plugins/mantisbt/view/admin/viewVersion.php -text
+src/plugins/mantisbt/view/adminuser.php -text
 src/plugins/mantisbt/view/editIssue.php -text
 src/plugins/mantisbt/view/init.php -text
+src/plugins/mantisbt/view/inituser.php -text
 src/plugins/mantisbt/view/jumpToIssue.php -text
 src/plugins/mantisbt/view/roadmap.php -text
 src/plugins/mantisbt/view/viewAttachment.php -text

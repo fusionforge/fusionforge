@@ -125,12 +125,12 @@ if (!isset($errorPage)){
 	echo	'<br/>';
 	echo	'<table>';
 	echo		'<tr>';
-	echo 			'<td width="20%">Résumé * <span style="font-weight:normal">(128 caractères max)</span></td>';
+	echo 			'<td width="20%">'._('Summary').' * <span style="font-weight:normal">'._('(128 char max)').'</span></td>';
 	echo			'<td><input type="text" name="resume" MAXLENGTH="128" style="width:99%;"></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td>'.('Description').' *</td>';
-	echo			'<td"><textarea name="description" style="width:99%;" rows="12"></textarea></td>';
+	echo 			'<td>'._('Description').' *</td>';
+	echo			'<td><textarea name="description" style="width:99%;" rows="12"></textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
 	echo 			'<td>'._('Additional informations').'</td>';

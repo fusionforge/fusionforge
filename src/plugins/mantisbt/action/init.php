@@ -29,15 +29,14 @@ global $group; // the group object
 $confArr = array();
 $confArr['url'] = getStringFromRequest('url');
 $confArr['sync_roles'] = 0;
-$confArr['sync_users'] = 0;
 $confArr['soap_user'] = getStringFromRequest('soap_user');
 $confArr['soap_password'] = getStringFromRequest('soap_password');
 $confArr['mantisbtcreate'] = getIntFromRequest('mantisbtcreate');
 $confArr['mantisbtname'] = getStringFromRequest('mantisbtname');
 
 if (!$mantisbt->initialize($group_id, $confArr))
-	session_redirect('/plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname=mantisbt&error_msg='.urlencode($group->getErrorMessage()));
+	session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&error_msg='.urlencode($group->getErrorMessage()));
 
 $feedback = _('MantisBT plugin successfully initialized.');
-session_redirect('/plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname=mantisbt&feedback='.urlencode($feedback));
+session_redirect('/plugins/'.$mantisbt->name.'/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
 ?>
