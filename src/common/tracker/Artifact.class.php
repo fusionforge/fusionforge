@@ -1756,19 +1756,24 @@ class ArtifactComparator {
 			}
 			break ;
 		case 'open_date':
-			$aid = $a->getOpenDate() ;
-			$bid = $b->getOpenDate() ;
-			return ($a < $b) ? -1 : 1;
+			$a_date = $a->getOpenDate() ;
+			$b_date = $b->getOpenDate() ;
+			return ($a_date < $b_date) ? -1 : 1;
 			break;
 		case 'close_date':
-			$aid = $a->getCloseDate() ;
-			$bid = $b->getCloseDate() ;
-			return ($a < $b) ? -1 : 1;
+			$a_date = $a->getCloseDate() ;
+			$b_date = $b->getCloseDate() ;
+			return ($a_date < $b_date) ? -1 : 1;
+			break;
+		case 'last_modified_date':
+			$a_date = $a->getLastModifiedDate() ;
+			$b_date = $b->getLastModifiedDate() ;
+			return ($a_date < $b_date) ? -1 : 1;
 			break;
 		case 'priority':
-			$aid = $a->getPriority() ;
-			$bid = $b->getPriority() ;
-			return ($a < $b) ? -1 : 1;
+			$a_prority = $a->getPriority() ;
+			$b_prority = $b->getPriority() ;
+			return ($a_prority < $b_prority) ? -1 : 1;
 			break;
 		default:
 			$aa=$a->getExtraFieldDataText();
@@ -1785,7 +1790,7 @@ class ArtifactComparator {
 		// When in doubt, sort on artifact ID
 		$aid = $a->getID() ;
 		$bid = $b->getID() ;
-		if ($a == $b) {
+		if ($aid == $bid) {
 			return 0;
 		}
 		return ($a < $b) ? -1 : 1;
