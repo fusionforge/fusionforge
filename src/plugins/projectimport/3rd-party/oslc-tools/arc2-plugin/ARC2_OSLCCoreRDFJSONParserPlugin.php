@@ -4,7 +4,7 @@
 
 RDF Parser for ARC2 to OSLC Core RDF JSON format
 
-Copyright (c) 2010 Olivier Berger, Institut Télécom
+Copyright (c) 2010 Olivier Berger, Institut Tï¿½lï¿½com
 
 homepage: See http://oslc-tools.svn.sourceforge.net/viewvc/oslc-tools/language-libs/php/arc2-plugin/
 license:  
@@ -252,3 +252,4 @@ class ARC2_OSLCCoreRDFJSONParserPlugin extends ARC2_JSONParser {
 
 }
 
+?>

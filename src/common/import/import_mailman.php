@@ -133,6 +133,5 @@ class Mailman {
 			}
 		}
 	}
-	
-	
 
+?>
