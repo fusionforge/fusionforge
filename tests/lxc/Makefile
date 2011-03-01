@@ -62,11 +62,14 @@ netstaticdns: beroot
 	#sh -c "echo \"	dns-search $(IPDEBDOMAIN)\" >> $(VMROOT)/rootfs/etc/network/interfaces" ; \
 	#
 
-installkey: beroot
+installkey: beroot ssh
 	[ -d $(VMROOT)/root/.ssh ] || mkdir -p $(VMROOT)/rootfs/root/.ssh
 	cp $(SSHPUBKEY) $(VMROOT)/rootfs/root/.ssh/authorized_keys
 	[ -d $(VMROOT)/etc/ssh ] || mkdir -p $(VMROOT)/rootfs/etc/ssh
 	cp ssh/ssh_host_* $(VMROOT)/rootfs/etc/ssh/
+
+ssh:
+	[ -e ssh ] || (echo "You need a ssh dir containing host keys like /etc/ssh_host_*" && false)
 
 setname: beroot
 	echo "debian6.local" > $(VMROOT)/rootfs/etc/hostname
