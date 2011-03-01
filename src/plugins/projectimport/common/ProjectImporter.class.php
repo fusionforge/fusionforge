@@ -28,7 +28,11 @@ include_once('ARC2_OSLCCoreRDFJSONParserPlugin.php');
 
 #require_once $gfcommon.'import/import_users.php';
 
+//require_once $gfcommon.'import/import_trackers.php';
+
+
 define('FORGEPLUCKER_NS', 'http://planetforge.org/ns/forgeplucker_dump/');
+define('PLANETFORGE_NS', 'http://coclico-project.org/ontology/planetforge#');
 
 /**
  * TODO Enter description here ...
@@ -51,11 +55,15 @@ class ProjectImporter {
 	 */
 	protected $users;
 	
+	protected $persons;
+	
 	/**
 	 * User names for the users found in the dump
 	 * @var array of strings (keys are URIs)
 	 */
 	protected $user_names;
+	
+	protected $user_roles;
 	
 	/**
 	 * Enter description here ...
@@ -90,7 +98,7 @@ class ProjectImporter {
 				'forgeplucker' => FORGEPLUCKER_NS,
 				'doap' => 'http://usefulinc.com/ns/doap#',
 				'sioc' => 'http://rdfs.org/sioc/ns#',
-				'planetforge' => 'http://coclico-project.org/ontology/planetforge#'
+				'planetforge' => PLANETFORGE_NS
 				);
 	/**
 	 * TODO Enter description here ...
@@ -103,8 +111,10 @@ class ProjectImporter {
 	  
 	  $this->trackers = array();
 	  $this->users = False;
+	  $this->persons = False;
 	  $this->project_dump_res = False;
 	  $this->user_names = array();
+	  $this->user_roles = array();
 	  
 	}
 
@@ -234,6 +244,27 @@ class ProjectImporter {
 		return $res->getPropValue('sioc:email');
 	}
 
+	function display_user($user) {
+		$html = '';
+		
+		$username = $this->get_user_name($user);
+		$email = $this->get_user_email($user);
+		
+		$res = $this->users[$user];
+		$person = $res->getPropValue('sioc:account_of');
+		$res = $this->persons[$person];
+		$name = $res->getPropValue('foaf:name');
+		$role = $this->user_roles[$user];
+		
+		$html .= 'User :<br />';
+		$html .= ' account name : '. $username .'<br />';
+		$html .= ' email : '. $email .'<br />';
+		$html .= ' owner : '. $name .'<br />';
+		$html .= ' role : '. $role .'<br />';
+		$html .= '<br/>';
+		
+		return $html;
+	}
 	/**
 	 * Extract users / persons from the dump
 	 * @param unknown_type $dumpres
@@ -241,9 +272,12 @@ class ProjectImporter {
 	 */
 	function get_users() {
 		if (! $this->users) {
+			
 			$dumpres = $this->project_dump();
+			
 			$this->users = array();
-			// USERS
+			
+			// parse the users
 			$users = $dumpres->getPropValues('forgeplucker:users');
 			foreach ($users as $user) {
 				//	      print_r($this->index[$user]);
@@ -253,10 +287,16 @@ class ProjectImporter {
 				$this->users[$user] = $res;
 				//			print 'Found user : '. $accountName . "\n";
 			}
+			
+			$this->persons = array();
+			
+			// parse persons and link users to the persons
 			$persons = $dumpres->getPropValues('forgeplucker:persons');
 			foreach ($persons as $person) {
 				$res = $this->make_resource($this->index, $person);
 				 
+				$this->persons[$person] = $res;
+				
 				//			print 'Found person : '. $res->getPropValue('foaf:name') . "\n";
 				//	      print_r($this->index[$person]);
 				//print_r($res->getProps());
@@ -364,7 +404,7 @@ class ProjectImporter {
 //			$results[] = array($name, $description, $homepage, $hosted_by);
 			$results[] = $res;
 			// handle project's roles
-			$users_roles=array();
+			$this->user_roles=array();
 			$roles = $res->getPropValues('sioc:scope_of');
 			foreach($roles as $role) {
 				$roleres = $this->make_resource($this->index, $role);
@@ -373,15 +413,17 @@ class ProjectImporter {
 				//		print_r($name);
 				//print_r($users);
 				foreach($users as $user) {
-					$users_roles[$this->user_names[$user]] = array('role' => $name);
+					//echo "role : $name for $user ";
+				//	$this->user_roles[$this->user_names[$user]] = array('role' => $name);
+					$this->user_roles[$user] = $name;
 				}
 			}
-			//	      print_r($users_roles);
+			//	      print_r($user_roles);
 //			echo "creating roles of existing users in the project\n";
 //			echo "calling user_fill(".'$users'.", $this->group_id)\nwhere ".'$users'." is";
 			// check user_fill : True == check mode
-//			user_fill($users_roles, $this->group_id, True);
-//			print_r($users_roles);
+//			user_fill($user_roles, $this->group_id, True);
+//			print_r($user_roles);
 //			echo "\n";
 
 		}
@@ -389,19 +431,27 @@ class ProjectImporter {
 		return $results;
 	}
 
-	// handle project's spaces
-
+	/**
+	 * Enter description here ...
+	 * @param URI $space
+	 * @param ARC2 resource $spaceres
+	 */
 	function decode_space($space, $spaceres) {
+		
 		$types = $spaceres->getPropValues('rdf:type');
 		$supported_type = False;
+		
 		foreach($types as $type) {
 
 			// Case of the trackers
-			if ($type == 'http://coclico-project.org/ontology/planetforge#Tracker') {
+			if ($type == PLANETFORGE_NS.'Tracker') {
+				
 				$supported_type = True;
+				
 				//		      print 'Found tracker :'. $space . "\n";
 				$tracker = array('uri' => $space);
-				// Decode TRACKER
+				
+				// Decode TRACKER contents
 				$artifacts = $spaceres->getPropValues('oslc:results');
 				$tracker['artifacts'] = array();
 				foreach ($artifacts as $artifact) {
@@ -409,10 +459,13 @@ class ProjectImporter {
 					//			print 'Found tracker artifact :'. $artifact . "\n";
 					$cmres = $this->make_resource($this->index, $artifact);
 					$tracker['artifacts'][] = array('uri' => $artifact,
-									'details' => $cmres->getProps());
+													'details' => $cmres->getProps());
 				}
 //				$this->trackers[] = $tracker;
 				echo '<pre>'. htmlspecialchars(print_r($tracker, True)) . '</pre>';
+				
+				tracker_fill($trackers, $group_id, $users);
+				
 				break;
 			}
 			// other cases 

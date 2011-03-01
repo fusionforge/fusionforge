@@ -18,7 +18,7 @@ require_once('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
 // don't include this in ProjectImporter, for unit test purposes, so do it here, in caller
-require_once $gfcommon.'import/import_users.php';
+//require_once $gfcommon.'import/import_users.php';
 //print_r($gfplugins.'projectimport/common/ProjectImporter.class.php');
 
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
@@ -57,7 +57,7 @@ class ProjectImportPage {
 	}
 
 	/**
-	 * Initializes data structurs from POSTed data coming from the form input
+	 * Initializes data structures from POSTed data coming from the form input
 	 */
 	function initialize_from_submitted_data() {
 		global $group_id, $feedback;
@@ -91,7 +91,7 @@ class ProjectImportPage {
 					if(!strncmp($key, 'map_', 4)) {
 						$imported_user = substr($key, 4);
 						$mapped_user = getStringFromPost($key);
-						//						print_r('Mapped : '. $imported_user . ' to ' . $mapped_user);
+						// print_r('Mapped : '. $imported_user . ' to ' . $mapped_user);
 						//						echo '<br />';
 						if($mapped_user) {
 							$this->posted_user_mapping[$imported_user] = $mapped_user;
@@ -134,6 +134,21 @@ class ProjectImportPage {
 		$this->message .= $message;
 	}
 	
+	function display_users($imported_users) 
+	{
+		$html = '';
+		
+		$html .= $this->html_generator->boxTop(_("Users found in imported file"));
+		
+		foreach($imported_users as $user => $userres) {
+			$html .= $this->importer->display_user($user);
+		}
+		
+		$html .= $this->html_generator->boxBottom();
+		
+		return $html;
+	}
+	
 	/**
 	 * Tries to match imported users to forge users, and display mapping form bits if needed
 	 * @param array of ARC2 resources $imported_users
@@ -144,75 +159,136 @@ class ProjectImportPage {
 		global $group_id, $feedback;
 		
 		$html = '';
+		$html_tbody = '';
+					
+		$needs_to_warn = FALSE;
 		
-		$res_memb = db_query_params('SELECT users.realname,users.user_id,
-			users.user_name,user_group.admin_flags,user_group.role_id
-			FROM users,user_group 
-			WHERE users.user_id=user_group.user_id 
-			AND user_group.group_id=$1 ORDER BY users.realname',
-		array($group_id));
-
-		$existing_users = array();
-		while ($row_memb=db_fetch_array($res_memb)) {
-			$existing_users[] = $row_memb['user_name'];
-		}
-			
-		$matching_users_header_displayed = False;
-			
-		//$missing_users = array();
+		// displays all imported users with the found matching existing forge user if any
 		foreach($imported_users as $user => $userres) {
+			
 			$imported_username = $this->importer->get_user_name($user);
 			$email = $this->importer->get_user_email($user);
+			
+			$already_mapped = FALSE;
+			// check if the user already chose to map it
 			if (array_key_exists($imported_username, $this->posted_user_mapping)) {
+				$already_mapped = $this->posted_user_mapping[$imported_username];
 				$username = $this->posted_user_mapping[$imported_username];
+				if ($this->message) {
+						$this->message .= '<br />';
+				}
+				$this->message .= sprintf(_('you asked to map user "%s" to existing forge user "%s"'), $imported_username, $username);
 			}
 			else {
+				// try to find user with same login
 				$username = $imported_username;
 			}
-			//			print_r('check for '.$username);
-			$user_object = &user_get_object_by_name($username);
-			if (!$user_object) {
-				//		$missing_users[] = $username;
+			
+			$automatically_matched = FALSE;
+			
+			$user_object = user_get_object_by_name($username);
+			// if the user hasn't mapped it already, try some automatic mapping
+			if ( ! $already_mapped ) {
+				// if we have found an existing user with the same login, try to match it automatically
+				if ($user_object) {
+					$automatically_matched = $username;
+					if ($this->message) {
+						$this->message .= '<br />';
+					}
+					$this->message .= sprintf(_('Found matching existing forge user with same login "%s"'), $username);
+				}
+				else {
+					// try to match by email
+					$emails = array(strtolower($email));
+					$user_objects = user_get_objects_by_email($emails);
+					if (count($user_objects) == 1) {
+						$user_object=$user_objects[0];
+						$username = $user_object->getUnixName();
+						$automatically_matched = $username;
+						if ($this->message) {
+							$this->message .= '<br />';
+						}
+						$this->message .= sprintf(_('Found matching existing forge user "%s" with same email "%s"'), $username, $email);
+					}
+				}
+			}
+
+			if (! $user_object) {
 				if ($feedback) $feedback .= '<br />';
 				$feedback .= sprintf(_('Failed to find existing user matching imported user "%s"'), $username);
-
-				if (! $matching_users_header_displayed) {
-					$matching_users_header_displayed = True;
-
-					$html .= $this->html_generator->boxTop(_("Matching imported users"));
-
-					$html .= '<p>'._('Failed to find existing users matching the following imported users.').'<br />'.
-					_('If you wish to map their data to existing users, choose them in the form bellow, and re-submit it:'). '</p>';
-
-					$html .= '<table width="100%"><thead><tr>';
-					$html .= '<th>'._('User logname').'</th>';
-					$html .= '<th>'._('email').'</th>';
-					$html .= '<th>'._('map to').'</th>';
-					$html .= '</tr></thead><tbody>';
-					$html .= '<input type="hidden" name="submit_mappings" value="y" />';
-				}
-
-				$html .= '<tr>';
-				$html .= '<td style="white-space: nowrap;">'. $username .'</td>';
-				$html .= '<td style="white-space: nowrap;">'. $email .'</td>';
-				$html .= '<td><select name="map_'.$username.'">';
-
-				$html .= '<option value="0" selected="selected">'._('Select existing user').'</option>';
-				foreach($existing_users as $existing_user) {
-					$html .= '<option value="'. $existing_user .'">'. $existing_user .'</option>';
-				}
-				$html .= '</select></td>';
-				$html .= '</tr>';
-
-			} else {
-				if ($this->message) {
-					$this->message .= '<br />';
-				}
-				$this->message .= sprintf(_('Found matching user for imported user "%s" : "%s"'), $imported_username, $username);
+				$needs_to_warn = TRUE;
 			}
-		} // foreach
 			
-		if ($matching_users_header_displayed) {
+			$html_tbody .= '<tr>';
+			$html_tbody .= '<td style="white-space: nowrap;">'. $imported_username .'</td>';
+			$html_tbody .= '<td style="white-space: nowrap;">'. $email .'</td>';
+			$html_tbody .= '<td><select name="map_'.$imported_username.'">';
+
+			if ($user_object) {
+				$html_tbody .= '<option value="0">'._('Optionally change for another existing user').'</option>';
+			}
+			else {
+				$html_tbody .= '<option value="0" selected="selected">'._('Select existing user').'</option>';
+			}
+				
+			// Load users members of the project
+			/*
+			$res_memb = db_query_params('SELECT users.realname,users.user_id,
+			users.user_name,user_group.admin_flags,user_group.role_id
+			FROM users,user_group
+			WHERE users.user_id=user_group.user_id
+			AND user_group.group_id=$1 ORDER BY users.realname',
+			array($group_id));
+
+			$existing_users = array();
+			while ($row_memb=db_fetch_array($res_memb)) {
+			$existing_users[] = $row_memb['user_name'];
+			}*/
+			$active_users = user_get_active_users();
+		
+			$existing_users = array();
+			foreach($active_users as $user) {
+				if ($user->isMember($group_id)) {
+					$existing_users[] = $user->getUnixName();
+				}
+			}
+			
+			foreach($existing_users as $existing_user) {
+				if ( ($already_mapped && ($existing_user == $already_mapped)) ||
+					 ($automatically_matched && ($existing_user == $automatically_matched)) ) {
+					$html_tbody .= '<option value="'. $existing_user .'" selected="selected">'. $existing_user .'</option>';
+				}
+				else {
+					$html_tbody .= '<option value="'. $existing_user .'">'. $existing_user .'</option>';
+				}
+			}
+			$html_tbody .= '</select></td>';
+			$html_tbody .= '</tr>';
+
+		} // foreach
+		
+		if (count($imported_users)) {
+			
+			if ($needs_to_warn) {
+				$html .= '<p>'._('Failed to find existing users matching some imported users.').'<br />'.
+					_('If you wish to map their data to existing users, choose them in the form bellow, and re-submit it:'). '</p>';
+			}
+			else {
+				$html .= '<p>'._('You may change the mappings and re-submit.');
+			}
+			
+			
+			$html .= $this->html_generator->boxTop(_("Matching imported users to existing forge users"));
+			
+			$html .= '<table width="100%"><thead><tr>';
+			$html .= '<th>'._('Imported user logname').'</th>';
+			$html .= '<th>'._('Imported user email').'</th>';
+			$html .= '<th>'._('To map to existing user').'</th>';
+			$html .= '</tr></thead><tbody>';
+			$html .= '<input type="hidden" name="submit_mappings" value="y" />';
+			
+			$html .= $html_tbody;
+		
 			//			$html .= '</form>';
 			$html .= '</tbody></table>';
 			$html .= $this->html_generator->boxBottom();
@@ -231,7 +307,8 @@ class ProjectImportPage {
 		
 		$html = '';
 		
-		// If the posted JSON file indeed contains a project dump, an importer was created, and if it has data we can work
+		// If the posted JSON file indeed contains a project dump, an importer was created, 
+		// and if it has data we can work
 		if($this->importer) {
 			// If it indeed has valid data
 			if ($this->importer->has_project_dump()) {
@@ -243,13 +320,17 @@ class ProjectImportPage {
 
 				$projects = $this->importer->get_projects();
 
-				// always display the form : to be improved TODO
+				// start HTML output
 				if (! $this->form_header_already_displayed) {
 					$this->form_header_already_displayed = true;
 					$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
 				}
+
+				$html .= $this->display_users($imported_users);
+		
 				
-				// Handle missing users, taking into account the user mapping form elements that may have been provided
+				// Handle missing users, taking into account the user mapping form elements 
+				// that may have been provided
 				$html .= $this->match_users($imported_users);
 				
 				// Then handle project(s)
@@ -267,18 +348,24 @@ class ProjectImportPage {
 
 					// Display project attributes
 					foreach($projects as $project) {
+						
+						// Display project's general description
 						$html .= '<table id="project-summary-and-devs" class="my-layout-table" summary="">
-	                             <tr>
-		                     <td>
-			             <h2>'._('Details of imported project : ').'<pre>'.$this->importer->get_project_name($project).'</pre></h2>
-			             <h3>'._('Project summary').'</h3>';
+	                               <tr>
+		                             <td>
+			                            <h2>'._('Details of imported project : ').
+			                             '<pre>'.$this->importer->get_project_name($project).'</pre>
+			                            </h2>
+			                            <h3>'._('Project summary').'</h3>';
 						$html .= '<p><pre>'.$this->importer->get_project_description($project).'</pre></p>';
 
 						$spaces = $this->importer->project_get_spaces($project);
 
-						// if no spaces posted to be imported, display checkboxes to prompt user for spaces to be imported for next POST 
-						if(!count($this->posted_spaces_imported)) {
+						// if no spaces posted to be imported, display checkboxes to prompt user 
+						// for spaces to be imported for next POST 
+						if( ! count($this->posted_spaces_imported) ) {
 
+							// spaces header first
 							if(count($spaces)) {
 								$html .= $this->html_generator->boxTop(_("Project's spaces found"));
 								if (! $this->form_header_already_displayed) {
@@ -318,13 +405,12 @@ class ProjectImportPage {
 							//					$html .= 'to be imported:';
 							//					print_r($this->posted_spaces_imported);
 							//					$html .= '<br />';
-							foreach($spaces as $space => $spaceres) {
-								$uri = $space;
+							foreach($spaces as $uri => $spaceres) {
 								$sha_uri = sha1($uri);
 								//						$html .= 'sha1 :'.$sha_uri.'<br />';
 								if (in_array($sha_uri, $this->posted_spaces_imported)) {
 									$html .= 'Importing :'.$uri.'<br />';
-									$this->importer->decode_space($space, $spaceres);
+									$this->importer->decode_space($uri, $spaceres);
 								}
 							}
 						}
@@ -344,6 +430,7 @@ class ProjectImportPage {
 	function display_main() {
 		global $feedback, $group_id;
 		
+		// Do the work, first !
 		$html = $this->do_work();
 		
 		if($this->message) {
@@ -354,14 +441,13 @@ class ProjectImportPage {
 		echo $html;
 		
 		// If invoked initially (not on callback) or if more details needed
-		
 		// display the last part of the form for JSON file upload
 		if (! $this->form_header_already_displayed) {
 			echo '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
 			$this->form_header_already_displayed = True;
 		}
 
-		
+		// If user mapping has been provided, then display it
 		if(count($this->posted_user_mapping)) {
 			foreach ($this->posted_user_mapping as $imported_user => $mapped_user) {
 				echo '<input type="hidden" name="map_'. $imported_user .'" value="'. $mapped_user .'" />';
@@ -369,6 +455,7 @@ class ProjectImportPage {
 			echo '<input type="hidden" name="submit_mappings" value="y" />';
 		}
 
+		// finally, display the file upload form
 		echo '<input type="hidden" name="group_id" value="' . $group_id . '" />
                     <fieldset><legend>Please upload a file :</legend>
 		       <p><center>
@@ -398,7 +485,7 @@ if (session_loggedin()) {
 
 	$this_page = new ProjectImportPage($HTML);
 
-	//	print_r($_POST);
+	//print_r($_POST);
 	
 	$message = '';
 	
