@@ -1,7 +1,7 @@
 Package: @PACKAGE@-plugin-projectimport
 Homepage: https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Project_Import_plugin
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, libarc-php, ${misc:Depends}
 Description: Project Import plugin for FusionForge
  This plugin allows the import of a project data previously exported
  with ForgePlucker, or a compatible tool.
