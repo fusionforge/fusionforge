@@ -616,7 +616,7 @@ class MantisBTPlugin extends Plugin {
 		}
 		if ($idProjectMantis) {
 			$result = db_query_params('insert into plugin_mantisbt (id_group, id_mantisbt, url, soap_user, soap_password, sync_roles)
-							values ($1, $2, $3, $4, $5, $6, $7)',
+							values ($1, $2, $3, $4, $5, $6)',
 							array($group_id,
 								$idProjectMantis,
 								$confArr['url'],
