@@ -2074,6 +2074,7 @@ src/plugins/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/plugins/oslc/www/admin/index.php -text
 src/plugins/oslc/www/index.php -text
 src/plugins/projectimport/INSTALL -text
+src/plugins/projectimport/NAME -text
 src/plugins/projectimport/README -text
 src/plugins/projectimport/common/ProjectImportPlugin.class.php -text
 src/plugins/projectimport/common/ProjectImporter.class.php -text
