@@ -663,7 +663,13 @@ class Group extends Error {
 	/**
 	 * getStatus - the status code.
 	 *
-	 * Statuses	char	include I,H,A,D.
+	 * Statuses	char	include I,H,A,D,P.
+	 * TODO : document what these mean :
+	 *   A: Active
+	 *   H: Hold
+	 *   P: Pending
+	 *   I: Incomplete
+	 *   D: ?
 	 */
 	function getStatus() {
 		return $this->data_array['status'];
@@ -672,7 +678,13 @@ class Group extends Error {
 	/**
 	 * setStatus - set the status code.
 	 *
-	 * Statuses include I,H,A,D.
+	 * Statuses include I,H,A,D,P.
+	 * TODO : document what these mean :
+	 *   A: Active
+	 *   H: Hold
+	 *   P: Pending
+	 *   I: Incomplete
+	 *   D: ?
 	 *
 	 * @param	object	User requesting operation (for access control).
 	 * @param	string	Status value.
@@ -1853,14 +1865,14 @@ class Group extends Error {
 		//	Delete reporting
 		//
 		$res = db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
-					array ($this->getID()));
-//echo 'rep_group_act_monthly'.db_error();
+		array ($this->getID()));
+		//echo 'rep_group_act_monthly'.db_error();
 		$res = db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
-					array ($this->getID()));
-//echo 'rep_group_act_weekly'.db_error();
+		array ($this->getID()));
+		//echo 'rep_group_act_weekly'.db_error();
 		$res = db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1',
-					array ($this->getID()));
-//echo 'rep_group_act_daily'.db_error();
+		array ($this->getID()));
+		//echo 'rep_group_act_daily'.db_error();
 		unset($this->data_array);
 		return true;
 	}
@@ -1868,7 +1880,7 @@ class Group extends Error {
 	/*
 		Basic functions to add/remove users to/from a group
 		and update their permissions
-	*/
+		*/
 
 	/**
 	 * addUser - controls adding a user to a group.
@@ -1913,7 +1925,7 @@ class Group extends Error {
 			//
 			$user_id = db_result($res_newuser,0,'user_id');
 
-			$role = new Role($this,$role_id);
+			$role = new Role($this, $role_id);
 			if (!$role || !is_object($role)) {
 				$this->setError(_('Error Getting Role Object'));
 				db_rollback();
@@ -1923,9 +1935,9 @@ class Group extends Error {
 				db_rollback();
 				return false;
 			}
-			
+				
 			if (USE_PFO_RBAC) {
-				$role->addUser(user_get_object ($user_id)) ;
+				$role->addUser(user_get_object($user_id)) ;
 				if (!$SYS->sysCheckCreateGroup($this->getID())){
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
@@ -1936,101 +1948,101 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
-			} else {
+			} else { // NOT USE_PFO_RBAC
 
-			//
-			//	if not already a member, add them
-			//
-			$res_member = db_query_params('SELECT user_id 
+				//
+				//	if not already a member, add them
+				//
+				$res_member = db_query_params('SELECT user_id
 				FROM user_group 
 				WHERE user_id=$1 AND group_id=$2',
-						       array($user_id, $this->getID()));
+				array($user_id, $this->getID()));
 
-			if (db_numrows($res_member) < 1) {
-				//
-				//	Create this user's row in the user_group table
-				//
-				$res = db_query_params('INSERT INTO user_group 
-					(user_id,group_id,admin_flags,forum_flags,project_flags,
-					doc_flags,cvs_flags,member_role,release_flags,artifact_flags)
-					VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-							array($user_id,
-							      $this->getID(),
-							      '',
-							      0,
-							      0,
-							      0,
-							      1,
-							      100,
-							      0,
-							      0));
+				if (db_numrows($res_member) < 1) {
+					//
+					//	Create this user's row in the user_group table
+					//
+					$res = db_query_params('INSERT INTO user_group
+						(user_id,group_id,admin_flags,forum_flags,project_flags,
+						doc_flags,cvs_flags,member_role,release_flags,artifact_flags)
+						VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+						array($user_id,
+							$this->getID(),
+							'',
+							0,
+							0,
+							0,
+							1,
+							100,
+							0,
+							0));
 
-				//verify the insert worked
-				if (!$res || db_affected_rows($res) < 1) {
-					$this->setError(sprintf(_('ERROR: Could Not Add User To Group: %s'),db_error()));
-					db_rollback();
-					return false;
+					//verify the insert worked
+					if (!$res || db_affected_rows($res) < 1) {
+						$this->setError(sprintf(_('ERROR: Could Not Add User To Group: %s'),db_error()));
+						db_rollback();
+						return false;
+					}
+					//
+					//	check and create if group doesn't exists
+					//
+					//echo "<h2>Group::addUser SYS->sysCheckCreateGroup(".$this->getID().")</h2>";
+					if (!$SYS->sysCheckCreateGroup($this->getID())){
+						$this->setError($SYS->getErrorMessage());
+						db_rollback();
+						return false;
+					}
+					//
+					//	check and create if user doesn't exists
+					//
+					//echo "<h2>Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
+					if (!$SYS->sysCheckCreateUser($user_id)) {
+						$this->setError($SYS->getErrorMessage());
+						db_rollback();
+						return false;
+					}
+					//
+					//	Role setup
+					//
+					//echo "<h2>Group::addUser role->setUser($user_id)</h2>";
+					if (!$role->setUser($user_id)) {
+						$this->setError('addUser::role::setUser'.$role->getErrorMessage());
+						db_rollback();
+						return false;
+					}
+				} else {
+					//
+					//  user was already a member
+					//  make sure they are set up
+					//
+					$user= user_get_object($user_id,$res_newuser);
+					$user->fetchData($user->getID());
+					$role = new Role($this,$role_id);
+					if (!$role || !is_object($role)) {
+						$this->setError(_('Error Getting Role Object'));
+						db_rollback();
+						return false;
+					} elseif ($role->isError()) {
+						$this->setError('addUser::roleget::'.$role->getErrorMessage());
+						db_rollback();
+						return false;
+					}
+					//echo "<h2>Already Member Group::addUser role->setUser($user_id)</h2>";
+					if (!$role->setUser($user_id)) {
+						$this->setError('addUser::role::setUser'.$role->getErrorMessage());
+						db_rollback();
+						return false;
+					}
+					//
+					//	set up their system info
+					//
+					//echo "<h2>Already Member Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
+					if (!$SYS->sysCheckCreateUser($user_id)) {
+						$this->setError($SYS->getErrorMessage());
+						db_rollback();
+						return false;
+					}
 				}
-				//
-				//	check and create if group doesn't exists
-				//
-//echo "<h2>Group::addUser SYS->sysCheckCreateGroup(".$this->getID().")</h2>";
-				if (!$SYS->sysCheckCreateGroup($this->getID())){
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-				//
-				//	check and create if user doesn't exists
-				//
-//echo "<h2>Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
-				if (!$SYS->sysCheckCreateUser($user_id)) {
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-				//
-				//	Role setup
-				//
-//echo "<h2>Group::addUser role->setUser($user_id)</h2>";
-				if (!$role->setUser($user_id)) {
-					$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-			} else {
-				//
-				//  user was already a member
-				//  make sure they are set up 
-				//
-				$user= user_get_object($user_id,$res_newuser);
-				$user->fetchData($user->getID());
-				$role = new Role($this,$role_id);
-				if (!$role || !is_object($role)) {
-					$this->setError(_('Error Getting Role Object'));
-					db_rollback();
-					return false;
-				} elseif ($role->isError()) {
-					$this->setError('addUser::roleget::'.$role->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-//echo "<h2>Already Member Group::addUser role->setUser($user_id)</h2>";
-				if (!$role->setUser($user_id)) {
-					$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-				//
-				//	set up their system info
-				//
-//echo "<h2>Already Member Group::addUser SYS->sysCheckCreateUser($user_id)</h2>";
-				if (!$SYS->sysCheckCreateUser($user_id)) {
-					$this->setError($SYS->getErrorMessage());
-					db_rollback();
-					return false;
-				}
-			}
 			} // USE_PFO_RBAC
 		} else {
 			//
@@ -3126,6 +3138,10 @@ function getAllProjectTags($onlyvisible = true) {
 	return $result;
 }
 
+/**
+ * Utility class to compare project based in various criteria (names, unixnames, id, ...)
+ *
+ */
 class ProjectComparator {
 	var $criterion = 'name' ;
 
