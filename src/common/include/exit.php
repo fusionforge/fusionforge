@@ -26,7 +26,7 @@
  * exit_error() - Exit PHP with error
  *
  * @param	string	Error text
- * @param	string  toptab for navigation bar
+ * @param	string	toptab for navigation bar
  */
 function exit_error($text="", $toptab='') {
 	global $HTML,$group_id;
@@ -40,16 +40,16 @@ function exit_error($text="", $toptab='') {
  * exit_permission_denied() - Exit with permission denied error
  *
  * @param	string	$reason_descr
- * @param   string  toptab needed for navigation
+ * @param	string	toptab needed for navigation
  */
-function exit_permission_denied($reason_descr='',$toptab='') {
+function exit_permission_denied($reason_descr='', $toptab='') {
 	if(!session_loggedin()) {
 		exit_not_logged_in();
 	} else {
 		if (!$reason_descr) {
 			$reason_descr=_('Permission denied. This project\'s administrator will have to grant you permission to view this page.');
 		}
-		exit_error($reason_descr,$toptab);
+		exit_error($reason_descr, $toptab);
 	}
 }
 
@@ -63,7 +63,7 @@ function exit_not_logged_in() {
 
 /**
  * exit_no_group() - Exit with no group chosen error
- * @param	string toptab
+ * @param	string	toptab
  */
 function exit_no_group() {
 	exit_error(_('Permission denied. No project was chosen, project does not exist or you can\'t access it.'),$toptab='');
@@ -72,30 +72,30 @@ function exit_no_group() {
 /**
  * exit_missing_param() - Exit with missing required parameters error
  *
- * @param   string  URL : usually $_SERVER['HTTP_REFERER'] minus forge_get_config('web_host') + forge_get_config('use_ssl')
- * @param   array   array of missing parameters
- * @param   string  toptab needed for navigation
+ * @param	string	URL : usually $_SERVER['HTTP_REFERER'] minus forge_get_config('web_host') + forge_get_config('use_ssl')
+ * @param	array	array of missing parameters
+ * @param	string	toptab needed for navigation
  */
-function exit_missing_param($url='',$missing_params=array(),$toptab='') {
-    if (!empty($missing_params)) {
-        $error = _('Missing required parameters : ');
-        foreach ($missing_params as $missing_param) {
-            $error .= $missing_param.' ';
-        }
-    } else {
-        $error = sprintf(_('Missing required parameters.'));
-    }
-    if (!empty($url)) {
-        session_redirect($url.'&error_msg='.urlencode($error));
-    } else {
-	    exit_error($error,$toptab);
-    }
+function exit_missing_param($url='', $missing_params=array(), $toptab='') {
+	if (!empty($missing_params)) {
+		$error = _('Missing required parameters : ');
+		foreach ($missing_params as $missing_param) {
+		$error .= $missing_param.' ';
+		}
+	} else {
+		$error = sprintf(_('Missing required parameters.'));
+	}
+	if (!empty($url)) {
+		session_redirect($url.'&error_msg='.urlencode($error));
+	} else {
+		exit_error($error,$toptab);
+	}
 }
 
 /**
  * exit_disabled() - Exit with disabled feature error.
  *
- * @param   string  toptab needed for navigation
+ * @param	string	toptab needed for navigation
  */
 function exit_disabled($toptab='summary') {
 	exit_error(_('The Site Administrator has turned off this feature.'),$toptab);
@@ -104,7 +104,7 @@ function exit_disabled($toptab='summary') {
 /**
  * exit_form_double_submit() - Exit with double submit error.
  *
- * @param   string  toptab needed for navigation
+ * @param	string	toptab needed for navigation
  */
 function exit_form_double_submit($toptab='') {
 	exit_error(_('You Attempted To Double-submit this item. Please avoid double-clicking.'),$toptab);
