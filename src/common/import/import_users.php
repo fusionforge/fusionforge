@@ -2,11 +2,13 @@
 
 //require_once('import_arrays.php');
 
+/*
 require_once $gfwww.'include/pre.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'include/RoleObserver.class.php';
 require_once $gfcommon.'include/rbac_texts.php';
+*/
 
 $equivs_text_value['projectadmin']['None']='0';
 $equivs_text_value['projectadmin']['Admin']='A';
@@ -95,6 +97,7 @@ global $cache_frs;
 
 
 function get_role_by_name($role,$group_id){
+	$role_id = FALSE;
   $res = db_query("SELECT role_id
 					FROM role
 					WHERE group_id='$group_id' AND role_name='$role'");
@@ -374,10 +377,14 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
   //	var_dump($debugdata);
 }
 	
-/*
-  'user_name' => {'role': 'role_name'
+
+/**
+ * Insert users into the group
+ * @param unknown_type $users 'user_name' => {'role': 'role_name' }
                   ... }
-*/
+ * @param unknown_type $group_id group to insert users into
+ * @param unknown_type $check
+ */
 function user_fill($users, $group_id, $check=False){
 
 	$group =& group_get_object($group_id);
