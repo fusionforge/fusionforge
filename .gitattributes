@@ -454,6 +454,16 @@ src/common/docman/views/views.php -text
 src/common/event/Event.class.php -text
 src/common/forum/AttachManager.class.php -text
 src/common/forum/ForumAdmin.class.php -text
+src/common/import/import_arrays.php -text
+src/common/import/import_docman.php -text
+src/common/import/import_forums.php -text
+src/common/import/import_frs.php -text
+src/common/import/import_mailman.php -text
+src/common/import/import_news.php -text
+src/common/import/import_svn.php -text
+src/common/import/import_tasks.php -text
+src/common/import/import_trackers.php -text
+src/common/import/import_users.php -text
 src/common/include/Codendi_HTMLPurifier.class.php -text
 src/common/include/Codendi_Request.class.php -text
 src/common/include/DatabaseInstaller.class.php -text
