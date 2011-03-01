@@ -1254,6 +1254,12 @@ function use_stylesheet($css, $media='') {
 
 // array_replace_recursive only appeared in PHP 5.3.0
 if (!function_exists('array_replace_recursive')) {
+	/**
+	 * Replaces elements from passed arrays into the first array recursively
+	 * @param array $a1 The array in which elements are replaced. 
+	 * @param array $a2 The array from which elements will be extracted. 
+	 * @return Returns an array, or NULL if an error occurs. 
+	 */
 	function array_replace_recursive ($a1, $a2) {
 		$result = $a1 ;
 
