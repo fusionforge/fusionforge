@@ -60,9 +60,11 @@ class oslcPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_uri('/plugins/oslc/');
+                $params['ADMIN'][]='';
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
+                $params['ADMIN'][]='';
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {

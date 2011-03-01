@@ -68,10 +68,12 @@ class ExtraTabsPlugin extends Plugin {
 					switch ($row_tab['type']) {
 					case 0: // Link
 						$params['DIRS'][] = $row_tab['tab_url'];
+                        $params['ADMIN'][] = '';
 						break;
 						
 					case 1: // Iframe
 						$params['DIRS'][] = '/plugins/'.$this->name.'/iframe.php?group_id='.$group_id.'&amp;tab_name='.$row_tab['tab_name'];
+                        $params['ADMIN'][] = '';
 						if (isset($params['toptab']) && ($params['toptab'] == $row_tab['tab_name'])) {
 							$params['selected'] = count($params['TITLES']) - 1;
 						}

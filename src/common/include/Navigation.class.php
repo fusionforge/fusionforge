@@ -10,7 +10,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -23,7 +23,7 @@
  */
 
 require_once $gfwww.'search/include/SearchManager.class.php';
- 
+
 /**
  * This class provides all the navigational elements to be used by the themes,
  * like the site menu, the project menus, and the user links.
@@ -68,15 +68,15 @@ class Navigation extends Error {
 	/** Get the HTML code for the favicon links of the site (to be
 	 *  put into the <head>. If $asHTML is false, it will return
 	 *  the URL of the favicon.
-	 * 
+	 *
 	 * @todo: Make favicon configurable
 	 */
 	function getFavIcon($asHTML = true) {
 		if (!$asHTML) {
 			return util_make_url('/images/icon.png');
 		} else {
-			return '<link rel="icon" type="image/png" href="' 
-				. $this->getFavIcon(false) .'" />' 
+			return '<link rel="icon" type="image/png" href="'
+				. $this->getFavIcon(false) .'" />'
 				. '<link rel="shortcut icon" type="image/png" href="'
 				. $this->getFavIcon(false) .'" />';
 		}
@@ -130,7 +130,7 @@ class Navigation extends Error {
 		}
 
 		$defaultWords = htmlspecialchars($defaultWords);
-		
+
 		// if there is no search currently, set the default
 		if (!isset($type_of_search) ) {
 			$exact = 1;
@@ -153,7 +153,7 @@ class Navigation extends Error {
 			<select name="type_of_search">';
 		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
 			$searchEngine =& $searchEngines[$i];
-			$res .= '<option value="' . $searchEngine->getType() . '"' 
+			$res .= '<option value="' . $searchEngine->getType() . '"'
 				. ( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' )
 				. '>' . $searchEngine->getLabel($parameters) . '</option>' . "\n";
 		}
@@ -163,12 +163,12 @@ class Navigation extends Error {
 		foreach($parameters AS $name => $value) {
 			$res .= '<input type="hidden" value="'.$value.'" name="'.$name.'" />' . "\n";
 		}
-		$res .= '<input type="text" size="12" id="searchBox-words" name="words" value="' 
+		$res .= '<input type="text" size="12" id="searchBox-words" name="words" value="'
 			. $defaultWords . '" />' . "\n";
 		$res .= '<input type="submit" name="Search" value="'._('Search').'" />' . "\n";
 
 		if (isset($group_id) && $group_id) {
-			$res .= util_make_link('/search/advanced_search.php?group_id=' . 
+			$res .= util_make_link('/search/advanced_search.php?group_id=' .
 					       $group_id, _('Advanced search'));
 		}
 		$res .= '</div>';
@@ -277,7 +277,7 @@ class Navigation extends Error {
 			}
 		}
 
-		// Admin and Reporting 
+		// Admin and Reporting
 		if (forge_check_global_perm('forge_admin')) {
 			$user_is_super = true;
 			$menu['titles'][] = _('Site Admin');
@@ -295,7 +295,7 @@ class Navigation extends Error {
 		}
 
 		// Project
-		if (isset($GLOBALS['group_id'])) { 
+		if (isset($GLOBALS['group_id'])) {
 			// get group info using the common result set
 			$project =& group_get_object($GLOBALS['group_id']);
 			if ($project && is_object($project)) {
@@ -334,7 +334,7 @@ class Navigation extends Error {
 		// rebuild menu if it has never been built before, or
 		// if the toptab was set differently
 		if (!isset($this->project_menu_data[$group_id])
-			|| ($toptab != "") 
+			|| ($toptab != "")
 			|| ($toptab != $this->project_menu_data[$group_id]['last_toptab'])) {
 			// get the group and permission objects
 			$group = group_get_object($group_id);
@@ -390,7 +390,7 @@ class Navigation extends Error {
 			 $TABS_TITLES[]=_('Home Page');
                         */
 
-                        // Project Activity tab 
+                        // Project Activity tab
                         $menu['titles'][] = _('Activity');
                         $menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
                         $menu['adminurls'][] = false;
@@ -421,9 +421,9 @@ class Navigation extends Error {
                                 } else {
                                         $menu['adminurls'][] = false;
                                 }
-                                if ($toptab == "tracker" || 
-                                    $toptab == "bugs" || 
-                                    $toptab == "support" || 
+                                if ($toptab == "tracker" ||
+                                    $toptab == "bugs" ||
+                                    $toptab == "support" ||
                                     $toptab == "patch") {
 					$selected = (count($menu['urls'])-1);
 				}
@@ -521,7 +521,7 @@ class Navigation extends Error {
                         $hookParams['TITLES'] =& $menu['titles'];
                         $hookParams['toptab'] =& $toptab;
                         $hookParams['selected'] =& $selected;
-                        plugin_hook ("groupmenu_scm", $hookParams) ; 
+                        plugin_hook ("groupmenu_scm", $hookParams) ;
 
                         // fill up adminurls
                         for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
@@ -546,6 +546,7 @@ class Navigation extends Error {
 			$hookParams = array();
 			$hookParams['group'] = $group_id ;
 			$hookParams['DIRS'] =& $menu['urls'];
+			$hookParams['ADMIN'] =& $menu['adminurls'];
 			$hookParams['TITLES'] =& $menu['titles'];
 			$hookParams['toptab'] =& $toptab;
 			$hookParams['selected'] =& $selected;
@@ -576,8 +577,8 @@ class Navigation extends Error {
 	function getPoweredBy($asHTML=true) {
 		$res['url'] = 'http://fusionforge.org/';
 		$res['image'] = util_make_uri('/images/pow-fusionforge.png');
-		$res['title'] = '<img src="' 
-			. $res['image'] 
+		$res['title'] = '<img src="'
+			. $res['image']
 			. '" alt="Powered By FusionForge" border="0" />';
 		$res['html'] = util_make_link($res['url'], $res['title'], array(), true);
 		if ($asHTML) {
@@ -599,13 +600,13 @@ class Navigation extends Error {
                         $res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
                         $res['title'] = _('Show source');
 		} else {
-                        return ($asHTML ? "" : NULL); 
+                        return ($asHTML ? "" : NULL);
 		}
                 if (!$asHTML) {
                         return $res;
 		} else {
-                        return util_make_link($res['url'], $res['title'], 
-                                              array('class' => 'showsource'), 
+                        return util_make_link($res['url'], $res['title'],
+                                              array('class' => 'showsource'),
                                               true);
 		}
 	}

@@ -63,6 +63,7 @@ class quota_managementPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_url ('/plugins/quota_management/index.php?type=group&id=' . $group_id . "&pluginname=" . $this->name) ; // we indicate the part we're calling is the project one
+                $params['ADMIN'][]='';
 			} else {
 			//	$params['TITLES'][]=$this->text." is [Off]";
 			}	

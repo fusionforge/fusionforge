@@ -57,6 +57,7 @@ class GforgeWikiPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/wiki/g/'.$project->getUnixName().'/HomePage';
+                $params['ADMIN'][]='';
 			} else {
 				$this->hooks["groupmenu"] = "";
 				//$params['TITLES'][]=$this->text." [Off]";
