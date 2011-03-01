@@ -225,10 +225,10 @@ class MantisBTPlugin extends Plugin {
 				$groupObject->setError('removeProjetMantis::Error' . ' '.$soapFault->faultstring);
 				return false;
 			}
-			if (!isset($delete)){
+			if (!isset($delete)) {
 				$groupObject->setError('removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$localMantisbtConf['id_mantisbt']);
-				return false
-			}else{
+				return false;
+			} else {
 				db_query_params('DELETE FROM plugin_mantisbt WHERE id_mantisbt = $1',
 						array($localMantisbtConf['id_mantisbt']));
 			}
