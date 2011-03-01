@@ -29,6 +29,9 @@
 require_once $gfcommon.'include/PluginManager.class.php';
 require_once $gfcommon.'include/utils.php';
 
+/**
+ * Maps symbolic values to localised texts for the role permissions
+ */
 function setup_rbac_strings () {
 	global $rbac_permission_names, $rbac_edit_section_names ;
 	
@@ -156,7 +159,7 @@ function setup_rbac_strings () {
 									    'webcal' => _('Webcal'),
 									    )
 			) ;
-	} else {
+	} else { // Not USE_PFO_RBAC
 		$rbac_permission_names = array_replace_recursive ($rbac_permission_names, 
 								  array (
 									  'frspackage0' => _('Private'),
