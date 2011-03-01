@@ -17,6 +17,8 @@
 require_once('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
+require_once $gfwww.'include/role_utils.php';
+
 // don't include this in ProjectImporter, for unit test purposes, so do it here, in caller
 require_once $gfcommon.'import/import_users.php';
 //print_r($gfplugins.'projectimport/common/ProjectImporter.class.php');
@@ -44,6 +46,9 @@ class ProjectImportPage {
 	// will contain mapping of imported users to forge users
 	protected $posted_user_mapping;
 
+	// will contain roles of users added to the project
+	protected $posted_new_member_roles;
+	
 	protected $form_header_already_displayed;
 	
 	protected $html_generator;
@@ -54,6 +59,7 @@ class ProjectImportPage {
 		$this->form_header_already_displayed = false;
 		$this->importer = False;
 		$this->posted_user_mapping = array();
+		$this->posted_new_member_roles = array();
 		$this->posted_spaces_imported = array();
 	}
 
@@ -96,6 +102,20 @@ class ProjectImportPage {
 						//						echo '<br />';
 						if($mapped_user) {
 							$this->posted_user_mapping[$imported_user] = $mapped_user;
+						}
+					}
+				}
+			}
+			if (getStringFromPost('submit_new_roles')) {
+				foreach (array_keys($_POST) as $key) {
+					//					print_r('key : '. $key);
+					if(!strncmp($key, 'role_', 5)) {
+						$added_user = substr($key, 5);
+						$new_role = getStringFromPost($key);
+						// print_r('Mapped : '. $imported_user . ' to ' . $mapped_user);
+						//						echo '<br />';
+						if($new_role) {
+							$this->posted_new_member_roles[$added_user] = $new_role;
 						}
 					}
 				}
@@ -158,20 +178,65 @@ class ProjectImportPage {
 	 */
 	function match_users($imported_users, $apply = FALSE)
 	{
-		global $group_id, $feedback;
+		global $group_id, $feedback, $message;
 		
 		$html = '';
 		$html_tbody = '';
 					
 		$needs_to_warn = FALSE;
 		
+		// if mapping has been provided for all imported users
 		$mapping_all_users_provided = TRUE;
 		
-		// displays all imported users with the found matching existing forge user if any
+		// if all mapped users are already in the project
+		$all_mapped_users_in_project = TRUE;
+		
+		// if all new project members roles posted by user
+		$all_new_project_members_roles_set = TRUE;
+		
+		// array of existing forge users and the imported users that have been mapped to it
+		$new_member_map_users = array();
+		
+		/*
+		$role_names = array();
+		$group_object = group_get_object($group_id);
+		$existing_roles = $group_object->getRoles();
+		foreach ($existing_roles as $role) {
+			$name = $role->getName();
+			$role_names[$name] = & $role;
+		}
+		*/
+		
+		// Load users members of the project (may be needed later for display of user mapping selection widgets)
+		$existing_users = array();
+		$active_users = user_get_active_users();
+		foreach($active_users as $user_object) {
+			$username = $user_object->getUnixName();
+			print_r('User : '.$username .'<br />');
+			$role = '';
+			if ($user_object->isMember($group_id)) {
+				print_r('member of project as ');
+				$role = $user_object->getRole($group_id);
+				if ($role) {
+					$role = $role->getName();
+					print_r($role . '<br />');
+				}
+				else {
+					print_r('dunno...<br />');				
+				}
+			}
+			else {
+				print_r('not member of project...<br />');	
+			}
+			$existing_users[] = array( 'name' => $username,
+											 'role' => $role);
+		}
+
+		// displays all imported users, with the found matching existing forge user, if any
 		foreach($imported_users as $user => $userres) {
 			
 			$imported_username = $this->importer->get_user_name($user);
-			$email = $this->importer->get_user_email($user);
+			$imported_email = $this->importer->get_user_email($user);
 			
 			$already_mapped = FALSE;
 			// check if the user already chose to map it
@@ -201,7 +266,7 @@ class ProjectImportPage {
 				}
 				else {
 					// try to match by email
-					$emails = array(strtolower($email));
+					$emails = array(strtolower($imported_email));
 					$user_objects = user_get_objects_by_email($emails);
 					if (count($user_objects) == 1) {
 						$user_object=$user_objects[0];
@@ -210,7 +275,7 @@ class ProjectImportPage {
 						if ($this->message) {
 							$this->message .= '<br />';
 						}
-						$this->message .= sprintf(_('Found matching existing forge user "%s" with same email "%s"'), $username, $email);
+						$this->message .= sprintf(_('Found matching existing forge user "%s" with same email "%s"'), $username, $imported_email);
 					}
 				}
 			}
@@ -221,55 +286,73 @@ class ProjectImportPage {
 				$needs_to_warn = TRUE;
 			}
 			
+			// now construct mapping table to be displayed later
 			$html_tbody .= '<tr>';
 			$html_tbody .= '<td style="white-space: nowrap;">'. $imported_username .'</td>';
-			$html_tbody .= '<td style="white-space: nowrap;">'. $email .'</td>';
-			$html_tbody .= '<td><select name="map_'.$imported_username.'">';
-
-			if ($user_object) {
-				$html_tbody .= '<option value="0">'._('Optionally change for another existing user').'</option>';
-			}
-			else {
-				$html_tbody .= '<option value="0" selected="selected">'._('Select existing user').'</option>';
-			}
-				
-			// Load users members of the project
-			/*
-			$res_memb = db_query_params('SELECT users.realname,users.user_id,
-			users.user_name,user_group.admin_flags,user_group.role_id
-			FROM users,user_group
-			WHERE users.user_id=user_group.user_id
-			AND user_group.group_id=$1 ORDER BY users.realname',
-			array($group_id));
-
-			$existing_users = array();
-			while ($row_memb=db_fetch_array($res_memb)) {
-			$existing_users[] = $row_memb['user_name'];
-			}*/
-			$active_users = user_get_active_users();
-		
-			$existing_users = array();
-			foreach($active_users as $user) {
-				//if ($user->isMember($group_id)) {
-					$existing_users[] = $user->getUnixName();
-				//}
-			}
+			$html_tbody .= '<td style="white-space: nowrap;">'. $imported_email .'</td>';
+			$html_tbody .= '<td>'. $this->importer->get_user_role($user) . '</td>';
 			
-			foreach($existing_users as $existing_user) {
-				if ( ($already_mapped && ($existing_user == $already_mapped)) ||
-					 ($automatically_matched && ($existing_user == $automatically_matched)) ) {
-					$html_tbody .= '<option value="'. $existing_user .'" selected="selected">'. $existing_user .'</option>';
+			// if not all mapping of users has been provided, then must display selection widgets
+			if (! $mapping_all_users_provided ) {
+				
+				$html_tbody .= '<td><select name="map_'.$imported_username.'">';
+
+				if ($user_object) {
+					$html_tbody .= '<option value="0">'._('Optionally change for another existing user').'</option>';
 				}
 				else {
-					$html_tbody .= '<option value="'. $existing_user .'">'. $existing_user .'</option>';
+					$html_tbody .= '<option value="0" selected="selected">'._('Select existing user').'</option>';
 				}
+				// TODO : use html_build_select_box_from_arrays(...); ?
+				foreach($existing_users as $existing_user) {
+					$name = $existing_user['name'];
+					$role = $existing_user['role'];
+					if ($role) {
+						$line = $name . ' (' . $role . ')';
+					} else {
+						$line = $name . ' ('. _('to be added to project') . ')';
+					}
+					if ( ($already_mapped && ($name == $already_mapped)) ||
+					($automatically_matched && ($name == $automatically_matched)) ) {
+						$html_tbody .= '<option value="'. $name .'" selected="selected">'. $line.'</option>';
+					}
+					else {
+						$html_tbody .= '<option value="'. $name .'">'. $line .'</option>';
+					}
+				}
+				$html_tbody .= '</select></td>';
 			}
-			$html_tbody .= '</select></td>';
+			else { // will display the mapped user anyway
+				$role = ' ('. _('need to add to project'). ')';
+				$user_object = user_get_object_by_name($already_mapped);
+				// if mapped user is already project member
+				if ($user_object->isMember($group_id)) {
+					$role = $user_object->getRole($group_id);
+					if ($role) {
+						$role = ' ('. $role->getName() . ')';
+					}
+				}
+				else {
+					// memorize the list of users that need to be added to the project
+					if (! array_key_exists($already_mapped, $new_member_map_users)) {
+						$new_member_map_users[$already_mapped] = array();
+					}
+					$new_member_map_users[$already_mapped][] = $imported_username;
+					$all_mapped_users_in_project = FALSE;
+					
+					if ( ! array_key_exists($already_mapped, $this->posted_new_member_roles) ) {
+						$all_new_project_members_roles_set = FALSE;
+					}
+				}
+				$html_tbody .= '<td>'. $already_mapped . $role;
+				$html_tbody .= '<input type="hidden" name="map_'.$imported_username.'" value="'.$already_mapped.'" />';
+				$html_tbody .= '</td>';
+			}
 			$html_tbody .= '</tr>';
 
 		} // foreach
 
-		// OK, now, render the HTML
+		// OK, now, will be able to render the HTML
 
 		if (count($imported_users)) {
 
@@ -285,65 +368,127 @@ class ProjectImportPage {
 				else {
 					$html .= '<p>'._('You may change some mappings and re-submit.');
 				}
-					
-					
-				$html .= $this->html_generator->boxTop(_("Matching imported users to existing forge users"));
-					
-				$html .= '<table width="100%"><thead><tr>';
-				$html .= '<th>'._('Imported user logname').'</th>';
-				$html .= '<th>'._('Imported user email').'</th>';
-				$html .= '<th>'._('To map to existing user').'</th>';
-				$html .= '</tr></thead><tbody>';
-				$html .= '<input type="hidden" name="submit_mappings" value="y" />';
-			
-				$html .= $html_tbody;
-		
-				// $html .= '</form>';
-				$html .= '</tbody></table>';
-				$html .= $this->html_generator->boxBottom();
 			}
-			else {
+			
+			// display users mapping table
+			$html .= $this->html_generator->boxTop(_("Matching imported users to existing forge users"));
+				
+			$html .= '<table width="100%"><thead><tr>';
+			$html .= '<th>'._('Imported user logname').'</th>';
+			$html .= '<th>'._('Imported user email').'</th>';
+			$html .= '<th>'._('Initial role').'</th>';
+			if (! $mapping_all_users_provided) {
+				$html .= '<th>'._('Map to existing user (role)').'</th>';
+			} else {
+				$html .= '<th>'._('Mapped to existing user').'</th>';
+			}
+			$html .= '</tr></thead><tbody>';
+			$html .= '<input type="hidden" name="submit_mappings" value="y" />';
+				
+			$html .= $html_tbody;
+
+			$html .= '</tbody></table>';
+			$html .= $this->html_generator->boxBottom();
+			
+			
+			if ($mapping_all_users_provided) {
 				// the mapping must be applied as all users mapping has been posted
+				
 				//if ($apply) {
 				$can_proceed = TRUE;
+				
+				// now, need to check if new (mapped to) users need to be added to (roles of) the project
+				if ( ! $all_mapped_users_in_project ) {
+					
+					// if the new project members haven't been posted by the user display box
+					if ( ! $all_new_project_members_roles_set ) { 
+					
+						$html .= $this->html_generator->boxTop(_("Matching new project members roles"));
+							
+						$html .= '<table width="100%"><thead><tr>';
+						$html .= '<th>'._('New project member').'</th>';
+						$html .= '<th>'._('Imported users mapped to it').'</th>';
+						$html .= '<th>'._('New role').'</th>';
+							
+						$html .= '</tr></thead><tbody>';
+							
+						foreach($new_member_map_users as $new_member => $imported_users_mapped) {
+							$html .= '<tr>';
+							$html .= '<td>'. $new_member . '</td>';
+							$html .= '<td>'. implode(', ', $imported_users_mapped) . '</td>';
+
+							// TODO : use a more sophisticated select box maybe : the selection by default of the first may not be the right thing to suggest ?
+							$html .= '<td>'. role_box($group_id, 'role_'.$new_member) . '</td>';
+							$html .= '</tr>';
+						}
+							
+						$html .= '<input type="hidden" name="submit_new_roles" value="y" />';
+
+						$html .= '</tbody></table>';
+						$html .= $this->html_generator->boxBottom();
+					}
+				}
+
+				// Last check if we can proceed to the user's import
 				$users = array();
 				foreach ($imported_users as $user => $userres) {
+					
+					//print_r('Check for : '. $user. '<br />');
+					
 					$imported_username = $this->importer->get_user_name($user);
-					$username = $this->posted_user_mapping[$imported_username];
-					$user_object = user_get_object_by_name($username);
+					$mapped_to_username = $this->posted_user_mapping[$imported_username];
+					$user_object = user_get_object_by_name($mapped_to_username);
+					
 					if ($user_object) {
-						if ($this->message) {
-							$this->message .= '<br />';
-						}
-						if ( $user_object->isMember($group_id) ) {
+						if ( ! $user_object->isMember($group_id) ) {
 							// no need to add it, already in the group
-							$this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is already in the project : no need to add it.'), $imported_username, $username);
-						}
-						else {
+							// $this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is already in the project : no need to add it.'), $imported_username, $mapped_to_username);
+						
 							// need to add it to the group
-							$role = array();
-							$role['role'] = $this->importer->get_user_role($user);
-							$users[$username] = $role;
-							$this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is not yet in the project : need to add it.'), $imported_username, $username);
+							if ( array_key_exists($mapped_to_username, $this->posted_new_member_roles) ) {
+								$role = $this->posted_new_member_roles[$mapped_to_username];
+								$rolename = $this->importer->get_user_role($user);
+								
+								$users[$mapped_to_username] = array( 'role' => $role );
+								
+								if ($this->message) {
+									$this->message .= '<br />';
+								}
+								$this->message .= sprintf(_('Imported user "%s" (role "%s"), mapped as "%s" which is not yet in the project : need to add it as role "%s".'), 
+												$imported_username, $rolename, $mapped_to_username, $role);
+							}
+							else {
+								$can_proceed = FALSE;
+							}
+							
 						}
 					}
 					else {
 						// user not found : probably messing with the form post
-						$feedback .= sprintf(_('Failed to find mapped user "%s"'), $username);
+						$feedback .= sprintf(_('Failed to find mapped user "%s"'), $mapped_to_username);
 						$can_proceed = FALSE;
 					}
-				}
+				} // foreach
+				
 				if($can_proceed) {
+					print_r('We can proceed !');
 					$check=TRUE;
 					if($apply) $check = FALSE;
-					$check = TRUE;
+					
+					// For security, for now : TODO to be removed later
+					//$check = TRUE;
 					user_fill($users, $group_id, $check);
+					$html .= $message;
+				}
+				else {
+					$feedback .= "Couldn't proceed!";
 				}
 				$html .= "All (mapped) imported users added to the group.";
 				// }
 			}
 			
 		}
+		
 		return $html;
 
 	}
@@ -378,7 +523,8 @@ class ProjectImportPage {
 				
 				// Handle missing users, taking into account the user mapping form elements 
 				// that may have been provided
-				$html .= $this->match_users($imported_users);
+				$apply = TRUE;
+				$html .= $this->match_users($imported_users, $apply);
 				
 				// Then handle project(s)
 
@@ -401,12 +547,12 @@ class ProjectImportPage {
 	                               <tr>
 		                             <td>
 			                            <h2>'._('Details of imported project : ').
-			                             '<pre>'.$this->importer->get_project_name($project).'</pre>
+			                             '<pre>'.$project->getName().'</pre>
 			                            </h2>
 			                            <h3>'._('Project summary').'</h3>';
-						$html .= '<p><pre>'.$this->importer->get_project_description($project).'</pre></p>';
+						$html .= '<p><pre>'.$project->getDescription().'</pre></p>';
 
-						$spaces = $this->importer->project_get_spaces($project);
+						$spaces = $project->getSpaces();
 
 						// if no spaces posted to be imported, display checkboxes to prompt user 
 						// for spaces to be imported for next POST 

@@ -380,13 +380,15 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
 
 /**
  * Insert users into the group
- * @param unknown_type $users 'user_name' => {'role': 'role_name' }
+ * @param unknown_type $users 'user_name' => {'role': role_id }
                   ... }
  * @param unknown_type $group_id group to insert users into
  * @param unknown_type $check
  */
 function user_fill($users, $group_id, $check=False){
-
+		global $feedback;
+		global $message;
+	
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_error('Error','Could Not Get Group');
@@ -395,14 +397,15 @@ function user_fill($users, $group_id, $check=False){
 	}
 
 	foreach ($users as $user => $role){
-		global $feedback;
-		global $message;
 		$user_object = &user_get_object_by_name($user);
 		if (!$user_object) {
 			$feedback .= sprintf(_('Failed to find user %s'), $user);
 		} else {
 			$user_id = $user_object->getID();
-			$role_id = get_role_by_name($role['role'],$group_id);
+			
+			//$role_id = get_role_by_name($role['role'],$group_id);
+			$role_id = $role['role'];
+			
 			if(!$check) {
 				if (!$group->addUser($user,$role_id)) {
 					$feedback = $group->getErrorMessage();
