@@ -11,7 +11,6 @@ EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
 VZCTL=/usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
 RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
-SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
 
 # Default config
 include ../config/default
