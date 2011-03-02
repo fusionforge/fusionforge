@@ -21,5 +21,5 @@ then
 fi
 
 sudo /usr/bin/lxc-create -n $HOST -f ../lxc/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
-sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst -n $HOST --address=$IPDEBBASE.$VEIDEB --netmask=$IPDEBMASK --gateway=$IPDEBGW --pubkey=$SSHPUBKEY --hostkeydir=$HOSTKEYDIR
+sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst -n $HOST --address=$IPDEBBASE.$VEIDDEB --netmask=$IPDEBMASK --gateway=$IPDEBGW --pubkey=$SSHPUBKEY --hostkeydir=$HOSTKEYDIR
 sudo /usr/bin/lxc-start -n $HOST -d
