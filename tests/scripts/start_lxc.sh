@@ -21,9 +21,24 @@ then
 	fi
 fi
 
-sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
-sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst -p /var/lib/lxc/$HOST -n $HOST --address=$IPDEBBASE.$VEIDDEB --netmask=$IPDEBMASK --gateway=$IPDEBGW --pubkey=$SSHPUBKEY --hostkeydir=$HOSTKEYDIR
-sudo /usr/bin/lxc-start -n $HOST -d
+if [ ! -e /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE ]
+then 
+	echo "/usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE not found"
+	echo "you need to install template"
+	echo "run: (cd $lxcdir ; sudo make)"
+else
+	sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
+fi
+if [ ! -e /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst ]
+then
+	sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst \
+		-p /var/lib/lxc/$HOST -n $HOST \
+		--address=$IPDEBBASE.$VEIDDEB \
+		--netmask=$IPDEBMASK \
+		--gateway=$IPDEBGW \
+		--pubkey=$SSHPUBKEY \
+		--hostkeydir=$HOSTKEYDIR
+	sudo /usr/bin/lxc-start -n $HOST -d
 
 ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
 ret=$?
