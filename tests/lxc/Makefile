@@ -4,7 +4,8 @@ VMROOT=/var/lib/lxc/vmdebian6
 -include ../config/default
 -include ../config/$(shell hostname)
 
-default: vmdebian6-config netstaticdeb installkey
+#default: vmdebian6-config netstaticdeb installkey
+default: installtemplate
 	@echo "read the Makefile to see available targets"
 
 /cgroup: beroot
