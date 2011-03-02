@@ -14,6 +14,7 @@ then
 	if [ -z "$1" ]
 	then
 		echo "usage : $0 <hostname>"
+		exit 1
 	else
 		HOST=$1
 	fi
