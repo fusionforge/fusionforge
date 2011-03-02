@@ -32,6 +32,10 @@ fi
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst ]
 then
+	echo "/usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst not found"
+	echo "you need to install template"
+	echo "run: (cd $lxcdir ; sudo make)"
+else
 	sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst \
 		-p /var/lib/lxc/$HOST -n $HOST \
 		--address=$IPDEBBASE.$VEIDDEB \
