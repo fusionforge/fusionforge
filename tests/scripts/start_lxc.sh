@@ -29,6 +29,7 @@ then
 else
 	sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
 fi
+
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst ]
 then
 	sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst \
@@ -39,6 +40,7 @@ then
 		--pubkey=$SSHPUBKEY \
 		--hostkeydir=$HOSTKEYDIR
 	sudo /usr/bin/lxc-start -n $HOST -d
+fi
 
 ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
 ret=$?
