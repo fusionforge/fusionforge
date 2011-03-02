@@ -23,9 +23,9 @@ iface eth0 inet static
 	gateway $gateway
 
 EOF
+	else
+		exit 2
 	fi
-else
-	exit 2
 fi
 }
 
