@@ -1,5 +1,24 @@
 #! /bin/sh -x
 
-sudo LANG=C MIRROR=$DEBMIRROR SUITE=$DIST /usr/bin/lxc-create -n $HOST -f ../lxc/config.$LXCTEMPLATE -t $LXCTEMPLATE
-cd ../lxc ; sudo ./lxc-debian6.postinst $HOST
-sudo LANG=C /usr/bin/lxc-start -n $HOST -d
+# You need to allow current user to sudo on /usr/bin/lxc-create /usr/bin/lxc-start /usr/lib/lxc/templates/lxc-debian6.postinst
+
+if [ -z "$LXCDEBTEMPLATE" ]
+then
+	configdir=`basename $0`/../config
+	. $configdir/default
+	if [ -f $configdir/`hostname` ] ; then . $configdir/`hostname`; fi
+fi
+
+if [ -z "$HOST" ]
+then
+	if [ -z "$1" ]
+	then
+		echo "usage : $0 <hostname>"
+	else
+		HOST=$1
+	fi
+fi
+
+sudo /usr/bin/lxc-create -n $HOST -f ../lxc/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
+sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst -n $HOST --address=$IPDEBBASE.$VEIDEB --netmask=$IPDEBMASK --gateway=$IPDEBGW --pubkey=$SSHPUBKEY --hostkeydir=$HOSTKEYDIR
+sudo /usr/bin/lxc-start -n $HOST -d
