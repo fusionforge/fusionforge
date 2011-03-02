@@ -214,8 +214,9 @@ class mailmanPlugin extends Plugin {
 				return false;
 			}
 		}
+		// TODO : WTF ? : I think this should probably be gotten rid of -- OlivierBerger
 		elseif ($hookname=='site_admin_option_hook') {
-			echo '<li><a href="'.$this->getPluginPath().'/">Template</a></li>';
+			echo '<li><a href="'.$this->getPluginPath().'/">Template [' . _('Mailman plugin') . ']</a></li>';
 		}
 		
 		

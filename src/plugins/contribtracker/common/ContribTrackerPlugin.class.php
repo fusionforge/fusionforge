@@ -172,7 +172,7 @@ class ContribTrackerPlugin extends Plugin {
                 elseif ($hookname == "site_admin_option_hook") {
                         ?>
                         <li><?php echo util_make_link ('/plugins/'.$this->name.'/global_admin.php',
-                                                       _('Edit actors and roles for the contribution tracker plugin')
+                                                       _('Edit actors and roles'). ' [' . _('Contribution tracker plugin') . ']')
                                 ); ?></li>
                         <?php
                 } 

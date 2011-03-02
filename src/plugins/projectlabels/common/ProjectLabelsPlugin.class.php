@@ -14,7 +14,7 @@ class ProjectLabelsPlugin extends Plugin {
 		
 		if ($hookname == "site_admin_option_hook") {
 			echo '<li>' . util_make_link ('/plugins/projectlabels/index.php',
-						      _('Project labels')) . '</li>';
+						      _('Project labels'). ' [' . _('Project labels plugin') . ']') . '</li>';
 		} elseif ($hookname == "project_before_description") {
 			$group_id=$params['group_id'];
 			$project = &group_get_object($group_id);
