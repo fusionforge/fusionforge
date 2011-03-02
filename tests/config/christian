@@ -20,7 +20,6 @@ VZPRIVATEDIR=/data/openvz/private
 # You shouldn't change the next line, don't really work
 VZTEMPLATEDIR=/var/lib/vz/template
 
-USERCLIENT=chris
 SSHPUBKEY=~buildbot/.ssh/id_rsa.pub
 
 DEBMIRROR=http://christian.bayle.eu/debian
