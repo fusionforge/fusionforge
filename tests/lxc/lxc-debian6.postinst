@@ -2,7 +2,7 @@
 
 configure_network()
 {
-if [ $# -ne 4 ]
+if [ $# -ne 5 ]
 then
 	exit 1
 else
@@ -10,6 +10,7 @@ else
 	address=$2
 	netmask=$3
 	gateway=$4
+	hostname=$5
 	if [ -e $rootfs/etc/network/interfaces ]
 	then
 		cat <<EOF > $rootfs/etc/network/interfaces
@@ -22,6 +23,9 @@ iface eth0 inet static
 	netmask $netmask
 	gateway $gateway
 
+EOF
+		cat <<EOF >> $rootfs/etc/hosts
+$address	$hostname.local $hostname
 EOF
 	else
 		exit 2
@@ -96,7 +100,7 @@ fi
 
 rootfs=$path/rootfs
 
-configure_network $rootfs $address $netmask $gateway
+configure_network $rootfs $address $netmask $gateway $name
 if [ $? -ne 0 ]; then
     echo "failed to configure network"
     exit 1
