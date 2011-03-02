@@ -390,6 +390,13 @@ had been written.
                a <li> block and will appear on the Site Admin page in the
                Site Utilities list.
 
+  Hook Name  : site_admin_project_maintenance_hook
+  Locations  : www/admin/index.php
+  Description: Use this to provide a link to the project maintenance pages
+               for your plugin. The hook should obey the plugin_hook_by_reference()
+               protocol and concatenate a <li> HTML block to params['result'] so 
+               that it can appear in the "Plugins Project Maintenance" subsection
+
   Hook Name  : task_extra_detail
   Parameters : task_id - The numeric ID for a task
   Locations  : www/pm/detail_task.php
@@ -428,5 +435,7 @@ had been written.
   Locations  : www/include/project_home.php
   Description: Used to provide plugin specific infos on a group's
                public area.
+
+TODO : document user_logo (plugin_hook_by_reference) : returns in params['content'] 
 
   -- Roland Mas <lolando@debian.org>

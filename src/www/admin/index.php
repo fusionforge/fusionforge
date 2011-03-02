@@ -155,6 +155,20 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	</form></li>
 	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo _('Private Projects'); ?></a></li>
 </ul>
+<?php
+	$params = array('result' => '');
+	$plugins_site_admin_project_html = '';
+	plugin_hook_by_reference("site_admin_project_maintenance_hook", $params);
+	if ($params['result']) {
+			$plugins_site_admin_project_html = $params['result'];
+	}
+	if ($plugins_site_admin_project_html) {
+		echo '<h3>'.  _('Plugins Project Maintenance') .'</h3>';
+		echo '<ul>';
+		echo $plugins_site_admin_project_html;
+		echo '</ul>';
+	}
+?>
 
 <h2><?php echo _('News'); ?></h2>
 <ul>
