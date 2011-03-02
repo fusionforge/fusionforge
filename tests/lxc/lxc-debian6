@@ -108,6 +108,10 @@ net-tools,\
 iproute,\
 iputils-ping,\
 vim,\
+less,\
+htop,\
+zsh,\
+debconf-utils,\
 openssh-server
 
     cache=$1
