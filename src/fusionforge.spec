@@ -175,6 +175,15 @@ applications. It is based on Web technologies such as REST, RDF, or AJAX.
 This package provides an OSLC-CM V2 compatible plugin for FusionForge
 tracker system.
 
+%package plugin-projectimport
+Summary: Project Import plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-projectimport
+Project import plugin for FusionForge
+This plugin allows the import of a project data previously exported
+with ForgePlucker, or a compatible tool.
+
 %package plugin-projects_hierarchy
 Summary: projects_hierarchy plugin for FusionForge
 Group: Development/Tools
@@ -528,6 +537,9 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # plugin: oslc
 %{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
 
+# plugin : projectimport
+%{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
+
 # plugin: projectlabels
 %{__ln_s} ../../plugins/projectlabels/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectlabels
 
@@ -822,6 +834,11 @@ fi
 %{FORGE_CONF_DIR}/httpd.d/plugin-oslc.inc
 %{FORGE_DIR}/plugins/oslc
 %{FORGE_DIR}/www/plugins/oslc
+
+%files plugin-projectimport
+%config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
+%{FORGE_DIR}/plugins/projectimport
+%{FORGE_DIR}/www/plugins/projectimport
 
 %files plugin-projects_hierarchy
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects_hierarchy.ini
