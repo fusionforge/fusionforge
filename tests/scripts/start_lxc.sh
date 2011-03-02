@@ -24,3 +24,13 @@ fi
 sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
 sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst -p /var/lib/lxc/$HOST -n $HOST --address=$IPDEBBASE.$VEIDDEB --netmask=$IPDEBMASK --gateway=$IPDEBGW --pubkey=$SSHPUBKEY --hostkeydir=$HOSTKEYDIR
 sudo /usr/bin/lxc-start -n $HOST -d
+
+ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
+ret=$?
+
+if [ $ret -ne 0 ];then
+        sleep 10;
+        ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
+fi
+
+sleep 1
