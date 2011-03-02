@@ -25,7 +25,7 @@ iface eth0 inet static
 
 EOF
 		cat <<EOF >> $rootfs/etc/hosts
-$address	$hostname.local $hostname
+$address	$hostname
 EOF
 	else
 		exit 2
