@@ -1,4 +1,4 @@
-#! /bin/sh -x
+#! /bin/sh
 
 # You need to allow current user to sudo on /usr/bin/lxc-create /usr/bin/lxc-start /usr/lib/lxc/templates/lxc-debian6.postinst
 
