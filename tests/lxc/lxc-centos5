@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# template script for generating fedora container for LXC
+# template script for generating centos container for LXC
 #
 
 #
@@ -24,111 +24,123 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-DISTRO=fedora-10
+DISTRO=centos-5
 
-configure_fedora()
+configure_centos()
 {
     rootfs=$1
     hostname=$2
 
-    # disable selinux in fedora
+    # disable selinux in centos
     mkdir -p $rootfs/selinux
     echo 0 > $rootfs/selinux/enforce
 
    # configure the network using the dhcp
-    cat <<EOF > $rootfs/etc/network/interfaces
-auto lo
-iface lo inet loopback
-
-auto eth0
-iface eth0 inet dhcp
-EOF
+#    cat <<EOF > $rootfs/etc/network/interfaces
+#auto lo
+#iface lo inet loopback
+#
+#auto eth0
+#iface eth0 inet dhcp
+#EOF
 
     # set the hostname
-    cat <<EOF > $rootfs/etc/hostname
-$hostname
-EOF
+#    cat <<EOF > $rootfs/etc/hostname
+#$hostname
+#EOF
     # set minimal hosts
-    cat <<EOF > $rootfs/etc/hosts
-127.0.0.1 localhost $hostname
-EOF
+#    cat <<EOF > $rootfs/etc/hosts
+#127.0.0.1 localhost $hostname
+#EOF
 
     # provide the lxc service
-    cat <<EOF > $rootfs/etc/init/lxc.conf
-# fake some events needed for correct startup other services
-
-description     "Container Upstart"
-
-start on startup
-
-script
-        rm -rf /var/run/*.pid
-        rm -rf /var/run/network/*
-        /sbin/initctl emit stopped JOB=udevtrigger --no-wait
-        /sbin/initctl emit started JOB=udev --no-wait
-end script
-EOF
-
-    cat <<EOF > $rootfs/etc/init/console.conf
-# console - getty
+#    cat <<EOF > $rootfs/etc/init/lxc.conf
+## fake some events needed for correct startup other services
 #
-# This service maintains a console on tty1 from the point the system is
-# started until it is shut down again.
+#description     "Container Upstart"
+#
+#start on startup
+#
+#script
+#        rm -rf /var/run/*.pid
+#        rm -rf /var/run/network/*
+#        /sbin/initctl emit stopped JOB=udevtrigger --no-wait
+#        /sbin/initctl emit started JOB=udev --no-wait
+#end script
+#EOF
 
-start on stopped rc RUNLEVEL=[2345]
-stop on runlevel [!2345]
+#    cat <<EOF > $rootfs/etc/init/console.conf
+## console - getty
+##
+## This service maintains a console on tty1 from the point the system is
+## started until it is shut down again.
+#
+#start on stopped rc RUNLEVEL=[2345]
+#stop on runlevel [!2345]
+#
+#respawn
+#exec /sbin/getty -8 38400 /dev/console
+#EOF
 
-respawn
-exec /sbin/getty -8 38400 /dev/console
-EOF
-
-    cat <<EOF > $rootfs/lib/init/fstab
-# /lib/init/fstab: lxc system fstab
-none            /spu                      spufs           gid=spu,optional                  0 0
-none            /tmp                      none            defaults                          0 0
-none            /var/lock                 tmpfs           nodev,noexec,nosuid,showthrough   0 0
-none            /lib/init/rw              tmpfs           mode=0755,nosuid,optional         0 0
-EOF
+#    cat <<EOF > $rootfs/lib/init/fstab
+## /lib/init/fstab: lxc system fstab
+#none            /spu                      spufs           gid=spu,optional                  0 0
+#none            /tmp                      none            defaults                          0 0
+#none            /var/lock                 tmpfs           nodev,noexec,nosuid,showthrough   0 0
+#none            /lib/init/rw              tmpfs           mode=0755,nosuid,optional         0 0
+#EOF
 
     # reconfigure some services
-    if [ -z "$LANG" ]; then
-	chroot $rootfs locale-gen en_US.UTF-8
-	chroot $rootfs update-locale LANG=en_US.UTF-8
-    else
-	chroot $rootfs locale-gen $LANG
-	chroot $rootfs update-locale LANG=$LANG
-    fi
+#    if [ -z "$LANG" ]; then
+#	chroot $rootfs locale-gen en_US.UTF-8
+#	chroot $rootfs update-locale LANG=en_US.UTF-8
+#    else
+#	chroot $rootfs locale-gen $LANG
+#	chroot $rootfs update-locale LANG=$LANG
+#    fi
 
     # remove pointless services in a container
-    chroot $rootfs /usr/sbin/update-rc.d -f ondemand remove
+#    chroot $rootfs /usr/sbin/update-rc.d -f ondemand remove
 
-    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls u*.conf); do mv $f $f.orig; done'
-    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls tty[2-9].conf); do mv $f $f.orig; done'
-    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls plymouth*.conf); do mv $f $f.orig; done'
-    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls hwclock*.conf); do mv $f $f.orig; done'
-    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls module*.conf); do mv $f $f.orig; done'
+#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls u*.conf); do mv $f $f.orig; done'
+#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls tty[2-9].conf); do mv $f $f.orig; done'
+#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls plymouth*.conf); do mv $f $f.orig; done'
+#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls hwclock*.conf); do mv $f $f.orig; done'
+#    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls module*.conf); do mv $f $f.orig; done'
 
     echo "Please change root-password !"
     echo "root:root" | chroot $rootfs chpasswd
 
+mkdir -p $rootfs/dev/pts
+test -e $rootfs/dev/tty || mknod $rootfs/dev/tty c 5 0
+test -e $rootfs/dev/console || mknod $rootfs/dev/console c 5 1
+test -e $rootfs/dev/tty0 || mknod $rootfs/dev/tty0 c 4 0
+test -e $rootfs/dev/tty1 || mknod $rootfs/dev/tty1 c 4 1
+test -e $rootfs/dev/tty2 || mknod $rootfs/dev/tty2 c 4 2
+test -e $rootfs/dev/tty3 || mknod $rootfs/dev/tty3 c 4 3
+test -e $rootfs/dev/tty4 || mknod $rootfs/dev/tty4 c 4 4
+
     return 0
 }
 
-download_fedora()
+download_centos()
 {
     cache=$1
     arch=$2
 
-    # check the mini fedora was not already downloaded
+    # check the mini centos was not already downloaded
     mkdir -p "$cache/partial-$arch"
     if [ $? -ne 0 ]; then
 	echo "Failed to create '$cache/partial-$arch' directory"
 	return 1
     fi
 
-    # download a mini fedora into a cache
-    echo "Downloading fedora minimal ..."
-    febootstrap $DISTRO $cache/partial-$arch
+    # download a mini centos into a cache
+    echo "Downloading centos minimal ..."
+    #febootstrap $DISTRO $cache/partial-$arch
+    rinsearch=`dpkg-architecture -qDEB_BUILD_ARCH`
+    rinse --config /etc/rinse/rinse.conf --arch $rinsearch --distribution $DISTRO --directory $cache/partial-$arch
+    
     if [ $? -ne 0 ]; then
 	echo "Failed to download the rootfs, aborting."
 	return 1
@@ -140,21 +152,21 @@ download_fedora()
     return 0
 }
 
-copy_fedora()
+copy_centos()
 {
     cache=$1
     arch=$2
     rootfs=$3
 
-    # make a local copy of the minifedora
+    # make a local copy of the minicentos
     echo -n "Copying rootfs to $rootfs ..."
     cp -a $cache/rootfs-$arch $rootfs || return 1
     return 0
 }
 
-install_fedora()
+install_centos()
 {
-    cache="/var/cache/lxc/fedora"
+    cache="/var/cache/lxc/centos"
     rootfs=$1
     mkdir -p /var/lock/subsys/
     (
@@ -168,15 +180,15 @@ install_fedora()
 
 	echo "Checking cache download in $cache/rootfs-$arch ... "
 	if [ ! -e "$cache/rootfs-$arch" ]; then
-	    download_fedora $cache $arch
+	    download_centos $cache $arch
 	    if [ $? -ne 0 ]; then
-		echo "Failed to download 'fedora base'"
+		echo "Failed to download 'centos base'"
 		return 1
 	    fi
 	fi
 
 	echo "Copy $cache/rootfs-$arch to $rootfs ... "
-	copy_fedora $cache $arch $rootfs
+	copy_centos $cache $arch $rootfs
 	if [ $? -ne 0 ]; then
 	    echo "Failed to copy rootfs"
 	    return 1
@@ -239,7 +251,7 @@ EOF
 
 clean()
 {
-    cache="/var/cache/lxc/fedora"
+    cache="/var/cache/lxc/centos"
 
     if [ ! -e $cache ]; then
 	exit 0
@@ -292,9 +304,9 @@ if [ ! -z "$clean" -a -z "$path" ]; then
     exit 0
 fi
 
-type febootstrap
+type rinse
 if [ $? -ne 0 ]; then
-    echo "'febootstrap' command is missing"
+    echo "'rinse' command is missing"
     exit 1
 fi
 
@@ -310,15 +322,15 @@ fi
 
 rootfs=$path/rootfs
 
-install_fedora $rootfs
+install_centos $rootfs
 if [ $? -ne 0 ]; then
-    echo "failed to install fedora"
+    echo "failed to install centos"
     exit 1
 fi
 
-configure_fedora $rootfs $name
+configure_centos $rootfs $name
 if [ $? -ne 0 ]; then
-    echo "failed to configure fedora for a container"
+    echo "failed to configure centos for a container"
     exit 1
 fi
 

@@ -89,13 +89,24 @@ delrights: beroot
 installtemplate: beroot
 	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
 	cp lxc-debian6.postinst /usr/lib/lxc/templates/
+	cp lxc-centos5 /usr/lib/lxc/templates/
 
-create: 
-	sudo LANG=C MIRROR=$(DEBMIRROR) SUITE=$(DIST) /usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6
+createdeb: beroot
+	/usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6
 
-start:
+createcos: beroot
+	/usr/bin/lxc-create -n centos5.local -f config.centos5 -t centos5
+
+startdeb:
 	sudo LANG=C /usr/bin/lxc-start -n debian6.local -d
 
-destroy:
+startcos:
+	sudo LANG=C /usr/bin/lxc-start -n centos5.local
+
+destroydeb: beroot
 	sudo LANG=C /usr/bin/lxc-stop -n debian6.local
 	sudo LANG=C /usr/bin/lxc-destroy -n debian6.local
+
+destroycos: beroot
+	sudo LANG=C /usr/bin/lxc-stop -n centos5.local
+	sudo LANG=C /usr/bin/lxc-destroy -n centos5.local
