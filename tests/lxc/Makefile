@@ -1,6 +1,5 @@
 
 VMROOT=/var/lib/lxc/vmdebian6
-SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
 
 -include ../config/default
 -include ../config/$(shell hostname)
@@ -87,7 +86,8 @@ delrights: beroot
 	lxc-setcap -d
 
 installtemplate: beroot
-	cp lxc-debian6 /usr/lib/lxc/templates/
+	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
+	cp lxc-debian6.postinst /usr/lib/lxc/templates/
 
 create: 
 	sudo LANG=C MIRROR=$(DEBMIRROR) SUITE=$(DIST) /usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6
