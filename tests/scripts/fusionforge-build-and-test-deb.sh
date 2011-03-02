@@ -10,7 +10,6 @@ export SELENIUM_RC_DIR=$WORKSPACE/reports
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
 export VMENGINE
-export LXCTEMPLATE=debian6
 
 if [ "x${HUDSON_URL}" = "x" ]
 then
