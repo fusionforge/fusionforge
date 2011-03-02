@@ -4,7 +4,7 @@
 
 if [ -z "$LXCDEBTEMPLATE" ]
 then
-	configdir=`basename $0`/../config
+	configdir=`dirname $0`/../config
 	. $configdir/default
 	if [ -f $configdir/`hostname` ] ; then . $configdir/`hostname`; fi
 fi
