@@ -96,12 +96,6 @@ fi
 
 rootfs=$path/rootfs
 
-install_debian $rootfs
-if [ $? -ne 0 ]; then
-    echo "failed to install debian"
-    exit 1
-fi
-
 configure_network $rootfs $address $netmask $gateway
 if [ $? -ne 0 ]; then
     echo "failed to configure network"
