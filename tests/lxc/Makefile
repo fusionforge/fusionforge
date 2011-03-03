@@ -90,6 +90,7 @@ installtemplate: beroot
 	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
 	cp lxc-debian6.postinst /usr/lib/lxc/templates/
 	cp lxc-centos5 /usr/lib/lxc/templates/
+	cp lxc-centos5.postinst /usr/lib/lxc/templates/
 
 createdeb: beroot
 	/usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6

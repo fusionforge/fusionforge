@@ -1,0 +1,123 @@
+#! /bin/sh
+
+configure_network()
+{
+if [ $# -ne 5 ]
+then
+	exit 1
+else
+	rootfs=$1
+	address=$2
+	netmask=$3
+	gateway=$4
+	hostname=$5
+	if [ -e $rootfs/etc/network/interfaces ]
+	then
+		cat <<EOF > $rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+IPADDR=$address
+NETMASK=$netmask
+#NETWORK=
+#BROADCAST
+ONBOOT=yes
+BOOTPROTO=none
+USERCTL=no
+EOF
+		cat <<EOF >> $rootfs/sysconfig/network
+NETWORKING=yes
+FORWARD_IPV4=yes
+HOSTNAME=$hostname
+GATEWAY=$gateway
+GATEWAYDEV=eth0
+EOF
+
+	else
+		exit 2
+	fi
+fi
+}
+
+configure_pubkey(){
+	rootfs=$1
+	pubkey=$2
+	if [ $# -ne 2 ]
+	then
+		exit 1
+	else
+		[ -d $rootfs/root/.ssh ] || mkdir $rootfs/root/.ssh
+		cp $pubkey $rootfs/root/.ssh/authorized_keys
+	fi
+}
+
+configure_hostkeydir(){
+	rootfs=$1
+	hostkeydir=$2
+	if [ $# -ne 2 ]
+	then
+		exit 1
+	else
+		[ -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
+		[ -e $hostkeydir ] || cp $hostkeydir/ssh_host_* $rootfs/etc/ssh/
+	fi
+}
+
+usage()
+{
+    cat <<EOF
+$1 -h|--help -p|--path=<path> --clean --address=<address> --netmask=<netmask> --gateway=<gateway> --pubkey=<pubkey> --hostkeydir=<hostkeydir>
+EOF
+    return 0
+}
+
+options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address:,netmask:,gateway:,pubkey:,hostkeydir: -- "$@")
+if [ $? -ne 0 ]; then
+        usage $(basename $0)
+        exit 1
+fi
+eval set -- "$options"
+
+while true
+do
+    case "$1" in
+        -h|--help)      usage $0 && exit 0;;
+        -p|--path)      path=$2; shift 2;;
+        -n|--name)      name=$2; shift 2;;
+	--address)	address=$2; shift 2;;
+	--netmask)	netmask=$2; shift 2;;
+	--gateway)	gateway=$2; shift 2;;
+	--pubkey)	pubkey=$2; shift 2;;
+	--hostkeydir)	hostkeydir=$2; shift 2;;
+        --)             shift 1; break ;;
+        *)              break ;;
+    esac
+done
+
+if [ -z "$path" ]; then
+    echo "'path' parameter is required"
+    exit 1
+fi
+
+if [ "$(id -u)" != "0" ]; then
+    echo "This script should be run as 'root'"
+    exit 1
+fi
+
+rootfs=$path/rootfs
+
+configure_network $rootfs $address $netmask $gateway $name
+if [ $? -ne 0 ]; then
+    echo "failed to configure network"
+    exit 1
+fi
+
+configure_pubkey $rootfs $pubkey
+if [ $? -ne 0 ]; then
+    echo "failed to configure pubkey"
+    exit 1
+fi
+
+configure_hostkeydir $rootfs $hostkeydir
+if [ $? -ne 0 ]; then
+    echo "failed to configure hostkeydir"
+    exit 1
+fi
