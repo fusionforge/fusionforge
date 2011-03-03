@@ -23,19 +23,19 @@
  */
 
 class ContribTrackerPlugin extends Plugin {
-	function ContribTrackerPlugin () {
+	function ContribTrackerPlugin() {
 		$this->Plugin() ;
-		$this->name = "contribtracker" ;
-		$this->text = "Contribution Tracker" ; // To show in the tabs, use...
-		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
-		$this->hooks[] = "project_before_frs"; // project summary page
-                $this->hooks[] = "site_admin_option_hook"; // to show in the site admin page
+		$this->name = "contribtracker";
+		$this->text = "Contribution Tracker"; // To show in the tabs, use...
+		$this->_addHook("groupmenu");	// To put into the project tabs
+		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
+		$this->_addHook("groupisactivecheckboxpost"); //
+		$this->_addHook("project_admin_plugins"); // to show up in the admin page for group
+		$this->_addHook("project_before_frs"); // project summary page
+                $this->_addHook("site_admin_option_hook"); // to show in the site admin page
 	}
 
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
@@ -51,7 +51,7 @@ class ContribTrackerPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][] = '<nobr>'._('Contribution tracker').'</nobr>' ;
 				$params['DIRS'][]='/plugins/'.$this->name.'/?group_id=' . $group_id ;
-                $params['ADMIN'][]='';
+				$params['ADMIN'][]='';
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -168,21 +168,19 @@ class ContribTrackerPlugin extends Plugin {
 						      echo $HTML->boxBottom();
 				echo '</div>';
 			}
+		} elseif ($hookname == "site_admin_option_hook") {
+			?>
+			<li><?php echo util_make_link ('/plugins/'.$this->name.'/global_admin.php',
+						_('Edit actors and roles'). ' [' . _('Contribution tracker plugin') . ']'); ?></li>
+			<?php
 		}
-                elseif ($hookname == "site_admin_option_hook") {
-                        ?>
-                        <li><?php echo util_make_link ('/plugins/'.$this->name.'/global_admin.php',
-                                                       _('Edit actors and roles'). ' [' . _('Contribution tracker plugin') . ']'); ?></li>
-                        <?php
-                } 
-
 	}
 
 	function getActors () {
 		$res = db_query_params ('SELECT actor_id FROM plugin_contribtracker_actor',
 					array ()) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerActor ($id) ;
@@ -195,7 +193,7 @@ class ContribTrackerPlugin extends Plugin {
 		$res = db_query_params ('SELECT struct_id FROM plugin_contribtracker_legal_structure',
 					array ()) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerLegalStructure ($id) ;
@@ -208,7 +206,7 @@ class ContribTrackerPlugin extends Plugin {
 		$res = db_query_params ('SELECT role_id FROM plugin_contribtracker_role',
 					array ()) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerRole ($id) ;
@@ -221,7 +219,7 @@ class ContribTrackerPlugin extends Plugin {
 		$res = db_query_params ('SELECT contrib_id FROM plugin_contribtracker_contribution',
 					array ()) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerContribution ($id) ;
@@ -236,7 +234,7 @@ class ContribTrackerPlugin extends Plugin {
 		$res = db_query_params ('SELECT contrib_id FROM plugin_contribtracker_contribution WHERE group_id = $1',
 					array ($group->getId())) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerContribution ($id) ;
@@ -288,7 +286,7 @@ class ContribTrackerRole extends Error {
 			$this->setError(sprintf('ContribTrackerRole(): %s',db_error()));
 			return false;
 		}
-		
+
 		$this->data_array = db_fetch_array ($res) ;
 		return true ;
 	}
@@ -317,7 +315,7 @@ class ContribTrackerRole extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -341,7 +339,7 @@ class ContribTrackerRole extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -362,7 +360,7 @@ class ContribTrackerRole extends Error {
 		}
 
 		$this->data_array = array () ;
-		
+
 		return true ;
 	}
 
@@ -375,7 +373,7 @@ class ContribTrackerRole extends Error {
 	}
 	function getName () { return $this->data_array['name'] ; }
 	function getDescription () { return $this->data_array['description'] ; }
-	
+
 }
 
 class ContribTrackerLegalStructure extends Error {
@@ -396,7 +394,7 @@ class ContribTrackerLegalStructure extends Error {
 			$this->setError(sprintf('ContribTrackerLegalStructure(): %s',db_error()));
 			return false;
 		}
-		
+
 		$this->data_array = db_fetch_array ($res) ;
 		return true ;
 	}
@@ -424,7 +422,7 @@ class ContribTrackerLegalStructure extends Error {
 			db_rollback () ;
 			return false ;
 		}
-		
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -447,7 +445,7 @@ class ContribTrackerLegalStructure extends Error {
 			db_rollback () ;
 			return false ;
 		}
-		
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -468,7 +466,7 @@ class ContribTrackerLegalStructure extends Error {
 		}
 
 		$this->data_array = array () ;
-		
+
 		return true ;
 	}
 
@@ -500,7 +498,7 @@ class ContribTrackerActor extends Error {
 			$this->setError(sprintf('ContribTrackerActor(): %s',db_error()));
 			return false;
 		}
-		
+
 		$this->data_array = db_fetch_array ($res) ;
 		return true ;
 	}
@@ -533,7 +531,7 @@ class ContribTrackerActor extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -561,7 +559,7 @@ class ContribTrackerActor extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -582,7 +580,7 @@ class ContribTrackerActor extends Error {
 		}
 
 		$this->data_array = array () ;
-		
+
 		return true ;
 	}
 
@@ -606,7 +604,7 @@ class ContribTrackerActor extends Error {
 		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE actor_id = $1',
 					array ($this->getId())) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerParticipation ($id) ;
@@ -637,7 +635,7 @@ class ContribTrackerContribution extends Error {
 			$this->setError(sprintf('ContribTrackerContribution(): %s',db_error()));
 			return false;
 		}
-		
+
 		$this->data_array = db_fetch_array ($res) ;
 		return true ;
 	}
@@ -668,7 +666,7 @@ class ContribTrackerContribution extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -694,7 +692,7 @@ class ContribTrackerContribution extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -715,7 +713,7 @@ class ContribTrackerContribution extends Error {
 		}
 
 		$this->data_array = array () ;
-		
+
 		return true ;
 	}
 
@@ -737,7 +735,7 @@ class ContribTrackerContribution extends Error {
 		$res = db_query_params ('SELECT participation_id FROM plugin_contribtracker_participation WHERE contrib_id = $1',
 					array ($this->getId())) ;
 		$ids = util_result_column_to_array ($res, 0) ;
-		
+
 		$results = array () ;
 		foreach ($ids as $id) {
 			$results[] = new ContribTrackerParticipation ($id) ;
@@ -774,7 +772,7 @@ class ContribTrackerParticipation extends Error {
 			$this->setError(sprintf('ContribTrackerParticipation(): %s',db_error()));
 			return false;
 		}
-		
+
 		$this->data_array = db_fetch_array ($res) ;
 		return true ;
 	}
@@ -807,7 +805,7 @@ class ContribTrackerParticipation extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -836,7 +834,7 @@ class ContribTrackerParticipation extends Error {
 			db_rollback () ;
 			return false ;
 		}
-			
+
 		db_commit () ;
 		return $this->fetchData ($id) ;
 	}
@@ -875,7 +873,7 @@ class ContribTrackerParticipation extends Error {
 		db_commit () ;
 
 		$this->data_array = array () ;
-		
+
 		return true ;
 	}
 
@@ -891,7 +889,7 @@ class ContribTrackerParticipation extends Error {
 			return ;
 		}
 		$contrib_id = $this->getContribution()->getId() ;
-		
+
 		db_begin () ;
 		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
 					array ($id)) ;
@@ -918,7 +916,7 @@ class ContribTrackerParticipation extends Error {
 			return ;
 		}
 		$contrib_id = $this->getContribution()->getId() ;
-		
+
 		db_begin () ;
 		$res = db_query_params ('UPDATE plugin_contribtracker_participation SET index = 0 WHERE participation_id = $1',
 					array ($id)) ;

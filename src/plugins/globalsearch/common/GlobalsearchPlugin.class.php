@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004, GForge, LLC
  * Copyright 2007-2009, Roland Mas
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -24,25 +25,28 @@
  */
 
 class globalSearchPlugin extends Plugin {
-	function globalSearchPlugin () {
-		$this->Plugin() ;
-		$this->name = "globalsearch" ;
-		$this->hooks[] = "site_admin_option_hook" ;
-		$this->hooks[] = "features_boxes_top" ;
+	function globalSearchPlugin() {
+		$this->Plugin();
+		$this->name = "globalsearch";
+		$this->_addHook('site_admin_option_hook');
+		$this->_addHook('features_boxes_top');
 	}
 
-	function CallHook ($hookname, &$params) {
-		global $Language, $G_SESSION, $HTML, $group_id;
+	function CallHook($hookname, &$params) {
+		global $HTML;
 
 		if ($hookname == "site_admin_option_hook") {
 			print '<li><a href="/plugins/globalsearch/edit_assoc_sites.php">'._("Admin Associated Forges"). ' [' . _('Global Search plugin') . ']</a></li>';
 		} elseif ($hookname == "features_boxes_top") {
-            (isset($params['returned_text'])) ? $params['returned_text'] .= $HTML->boxTop(_('Associated Forges'), 'Associated_Forges') : $params['returned_text'] = $HTML->boxTop(_('Associated Forges'), 'Associated_Forges');
-			$params['returned_text'] .= $this->show_top_n_assocsites (5) ;
-			$params['returned_text'] .= $this->search_box () ;
+			(isset($params['returned_text'])) ? $params['returned_text'] .= $HTML->boxTop(_('Associated Forges'), 'Associated_Forges') : $params['returned_text'] = $HTML->boxTop(_('Associated Forges'), 'Associated_Forges');
+			$params['returned_text'] .= $this->show_top_n_assocsites(5);
+			$params['returned_text'] .= $this->search_box();
 		}
 	}
-	
+
+	/**
+	 * @return	string	html code to display
+	 */
 	function show_globalsearch_stats_boxes() {
 		GLOBAL $HTML;
 
@@ -56,8 +60,11 @@ class globalSearchPlugin extends Plugin {
 		return $return;
 	}
 
+	/**
+	 * @return	string	html code to display
+	 */
 	function search_box() {
-		global $HTML,$gwords,$gexact,$otherfreeknowledge;
+		global $HTML, $gwords, $gexact, $otherfreeknowledge;
 
 		$return = '<form method="post" action="/plugins/globalsearch/">';
 		$return .= $HTML->html_text_input_img_submit('gwords', 'magnifier.png', 'search_associated_forges', '', $gwords, _('Search associated forges'));
@@ -71,19 +78,18 @@ class globalSearchPlugin extends Plugin {
 	/**
 	 * show_top_n_assocsites() - Show the n top ranked associated sites
 	 *
-	 * @param   string  Number of associated sites to show
-	 *
+	 * @param	string	Number of associated sites to show
+	 * @return	string	html code to display
 	 */
 	function show_top_n_assocsites($num_assocsites) {
-		$res_top_n_assoc = db_query_params ('
-                SELECT a.title, a.link, count(*) AS numprojects 
-                FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a 
-                WHERE p.assoc_site_id = a.assoc_site_id AND p.assoc_site_id IN 
-                        (SELECT assoc_site_id FROM plugin_globalsearch_assoc_site 
-                        WHERE status_id = 2 AND enabled=$1 ORDER BY rank LIMIT $2) 
-                GROUP BY a.title, a.link',
-						    array('t',
-							  $num_assocsites));
+		$res_top_n_assoc = db_query_params('
+							SELECT a.title, a.link, count(*) AS numprojects
+							FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a
+							WHERE p.assoc_site_id = a.assoc_site_id AND p.assoc_site_id IN
+								(SELECT assoc_site_id FROM plugin_globalsearch_assoc_site
+								WHERE status_id = 2 AND enabled=$1 ORDER BY rank LIMIT $2)
+							GROUP BY a.title, a.link',
+							array('t', $num_assocsites));
 
 		if (db_numrows($res_top_n_assoc) == 0) {
 			return _('No stats available')." ".db_error();
@@ -109,12 +115,13 @@ class globalSearchPlugin extends Plugin {
 	/**
 	 * stats_get_total_projects_assoc_sites() - Show the total number of projects of associated sites
 	 *
-	 * @param   string  Number of associated sites to show
+	 * @param	string	Number of associated sites to show
+	 * @return	string	statistiques
 	 *
 	 */
 	function stats_get_total_projects_assoc_sites() {
-		$res_count = db_query_params ('SELECT count(*) AS numprojects FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a WHERE p.assoc_site_id = a.assoc_site_id AND a.status_id = 2',
-			array());
+		$res_count = db_query_params('SELECT count(*) AS numprojects FROM plugin_globalsearch_assoc_site_project p, plugin_globalsearch_assoc_site a WHERE p.assoc_site_id = a.assoc_site_id AND a.status_id = 2',
+						array());
 		if (db_numrows($res_count) > 0) {
 			$row_count = db_fetch_array($res_count);
 			return $row_count['numprojects'];
