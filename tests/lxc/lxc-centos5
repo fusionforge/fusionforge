@@ -111,7 +111,20 @@ configure_centos()
     echo "Please change root-password !"
     echo "root:root" | chroot $rootfs chpasswd
 
-mkdir -p $rootfs/dev/pts
+#sed -i -e '/getty/d' $rootfs/etc/inittab
+sed -i -e '/start_udev/d' $rootfs/etc/rc.d/rc.sysinit
+
+rm -f $rootfs/etc/mtab
+ln -s /proc/mounts $rootfs/etc/mtab
+
+test -e $rootfs/dev/ptmx || mknod $rootfs/dev/ptmx c 5 2
+test -e $rootfs/dev/pts || mkdir $rootfs/dev/pts
+test -e $rootfs/dev/null || mknod $rootfs/dev/null c 1 3
+test -e $rootfs/dev/random || mknod -m 644 $rootfs/dev/random c 1 8
+test -e $rootfs/dev/urandom || mknod $rootfs/dev/urandom c 1 9
+
+#test -e $rootfs/dev/pts/0 || mknod $rootfs/dev/pts/0 c 136 0
+
 test -e $rootfs/dev/tty || mknod $rootfs/dev/tty c 5 0
 test -e $rootfs/dev/console || mknod $rootfs/dev/console c 5 1
 test -e $rootfs/dev/tty0 || mknod $rootfs/dev/tty0 c 4 0
