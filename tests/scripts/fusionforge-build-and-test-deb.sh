@@ -6,35 +6,39 @@ export WORKSPACE=${WORKSPACE:-$CURDIR}
 export CONFIG_PHP=func/config.php.buildbotDEB
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
+
 # get config 
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+
+export VEID=$VEIDDEB
+
+export LXCTEMPLATE=$LXCDEBTEMPLATE
+
+export IPBASE=$IPDEBBASE
+export IPDNS=$IPDEBDNS
+export IPMASK=$IPDEBMASK
+export IPGW=$IPDEBGW
+
+ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
+export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
+export VZPRIVATEDIR
+export HOST=debian6.local
+export DEBMIRROR
+
+export DIST
 export VMENGINE
 
 if [ "x${HUDSON_URL}" = "x" ]
 then
-	export VEID=$VEIDDEB
-	export IPBASE=$IPDEBBASE
-	export IPDNS=$IPDEBDNS
-	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
-	export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
-	export VZPRIVATEDIR
-	export DIST
-	export DEBMIRROR
 	export BASEDIR=${BASEDIR:-/~`id -un`/ws}
+	export USEVZCTL=true
+	export SELENIUM_RC_HOST=localhost
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
 	export FFORGE_DEB_REPO=http://`hostname -f`$BASEDIR/build/debian
-	export HOST=debian6.local
-	export SELENIUM_RC_HOST=localhost
-	export USEVZCTL=true
 else
-	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
-	export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
-	export VZPRIVATEDIR
-	export DIST
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 	export FFORGE_DEB_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/debian
-	export HOST=debian6.local
 fi
 export DB_NAME=gforge
 export CONFIGURED=true
