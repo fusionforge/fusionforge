@@ -23,7 +23,7 @@ ONBOOT=yes
 BOOTPROTO=none
 USERCTL=no
 EOF
-		cat <<EOF > $rootfs/sysconfig/network
+		cat <<EOF > $rootfs/etc/sysconfig/network
 NETWORKING=yes
 FORWARD_IPV4=yes
 HOSTNAME=$hostname
