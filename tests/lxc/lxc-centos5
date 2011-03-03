@@ -82,6 +82,10 @@ configure_centos()
 #exec /sbin/getty -8 38400 /dev/console
 #EOF
 #sed -i -e '/getty/d' $rootfs/etc/inittab
+# Disable tty5 and tty6
+sed -i -e '/^5:/d' $rootfs/etc/inittab
+sed -i -e '/^6:/d' $rootfs/etc/inittab
+# Enable console
 cat <<EOF >> $rootfs/etc/inittab
 0:2345:respawn:/sbin/mingetty console
 EOF
