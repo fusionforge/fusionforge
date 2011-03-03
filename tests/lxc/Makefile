@@ -104,11 +104,7 @@ stopdeb:
 	sudo LANG=C /usr/bin/lxc-stop -n debian6.local
 
 startcos:
-	sudo LANG=C /usr/bin/lxc-start -n centos5.local
-
-screencos:
-	screen -dmS lxc-centos sudo /usr/bin/lxc-start -n centos5.local
-	#screen -x lxc-centos
+	sudo LANG=C /usr/bin/lxc-start -n centos5.local -d
 
 stopcos:
 	sudo LANG=C /usr/bin/lxc-stop -n centos5.local
