@@ -81,9 +81,9 @@ configure_centos()
 #respawn
 #exec /sbin/getty -8 38400 /dev/console
 #EOF
-sed -i -e '/getty/d' $rootfs/etc/inittab
+#sed -i -e '/getty/d' $rootfs/etc/inittab
 cat <<EOF >> $rootfs/etc/inittab
-1:2345:respawn:/sbin/mingetty console
+0:2345:respawn:/sbin/mingetty console
 EOF
 
 #    cat <<EOF > $rootfs/lib/init/fstab
