@@ -4,28 +4,17 @@
 # be sourced in a shell
 # So it should only be stuffs like VAR=value
 #
-VEIDDEB=105
-VEIDCEN=110
-
-DEBVERS=6.0
-CENTVERS=5.5
-
 IPDEBBASE=192.168.50
 IPDEBDNS=192.168.50.5
 IPDEBMASK=255.255.255.0
 IPDEBGW=192.168.50.1
 
-IPCENTOSBASE=192.168.50
-IPCENTOSDNS=192.168.50.5
-IPCENTOSMASK=255.255.255.0
-IPCENTOSGW=192.168.50.1
-
-VZPRIVATEDIR=/data/openvz/private
-# You shouldn't change the next line, don't really work
-VZTEMPLATEDIR=/var/lib/vz/template
+IPCOSBASE=192.168.50
+IPCOSDNS=192.168.50.5
+IPCOSMASK=255.255.255.0
+IPCOSGW=192.168.50.1
 
 SSHPUBKEY=~buildbot/.ssh/id_rsa.pub
 
 DEBMIRROR=http://christian.bayle.eu/debian
-DIST=squeeze
 VMENGINE=lxc

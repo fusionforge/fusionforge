@@ -4,7 +4,7 @@
 configdir=`dirname $0`/../config
 lxcdir=`dirname $0`/../lxc
 
-if [ -z "$LXCDEBTEMPLATE" ]
+if [ -z "$LXCTEMPLATE" ]
 then
 	. $configdir/default
 	if [ -f $configdir/`hostname` ] ; then . $configdir/`hostname`; fi
@@ -18,29 +18,45 @@ then
 		exit 1
 	else
 		HOST=$1
+		case $HOST in
+			*deb*)
+				LXCTEMPLATE=$LXCDEBTEMPLATE
+				IPBASE=$IPDEBBASE
+				VEID=$VEIDDEB
+				IPMASK=$IPDEBMASK
+				IPGW=$IPDEBGW
+				;;
+			*centos*)
+				LXCTEMPLATE=$LXCCOSTEMPLATE
+				IPBASE=$IPCOSBASE
+				VEID=$VEIDCOS
+				IPMASK=$IPCOSMASK
+				IPGW=$IPCOSGW
+				;;
+		esac
 	fi
 fi
 
-if [ ! -e /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE ]
+if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
-	echo "/usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE not found"
+	echo "/usr/lib/lxc/templates/lxc-$LXCTEMPLATE not found"
 	echo "you need to install template"
 	echo "run: (cd $lxcdir ; sudo make)"
 else
-	sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCDEBTEMPLATE -t $LXCDEBTEMPLATE
+	sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCTEMPLATE -t $LXCTEMPLATE
 fi
 
-if [ ! -e /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst ]
+if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst ]
 then
-	echo "/usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst not found"
+	echo "/usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst not found"
 	echo "you need to install template"
 	echo "run: (cd $lxcdir ; sudo make)"
 else
-	sudo /usr/lib/lxc/templates/lxc-$LXCDEBTEMPLATE.postinst \
+	sudo /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst \
 		-p /var/lib/lxc/$HOST -n $HOST \
-		--address=$IPDEBBASE.$VEIDDEB \
-		--netmask=$IPDEBMASK \
-		--gateway=$IPDEBGW \
+		--address=$IPBASE.$VEID \
+		--netmask=$IPMASK \
+		--gateway=$IPGW \
 		--pubkey=$SSHPUBKEY \
 		--hostkeydir=$HOSTKEYDIR
 	sudo /usr/bin/lxc-start -n $HOST -d

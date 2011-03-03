@@ -13,11 +13,11 @@ export VMENGINE
 
 if [ "x${HUDSON_URL}" = "x" ]
 then
-	export VEID=$VEIDCEN
-	export IPBASE=$IPCENTOSBASE
-	export IPDNS=$IPCENTOSDNS
+	export VEID=$VEIDCOS
+	export IPBASE=$IPCOSBASE
+	export IPDNS=$IPCOSDNS
 	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
-	export VZTEMPLATE=centos-$CENTVERS-$ARCH-minimal
+	export VZTEMPLATE=centos-$COSVERS-$ARCH-minimal
 	export VZPRIVATEDIR
 	export DIST
 	export BASEDIR=${BASEDIR:-/~`id -un`/ws}
