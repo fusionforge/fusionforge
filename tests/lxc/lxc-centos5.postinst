@@ -11,7 +11,7 @@ else
 	netmask=$3
 	gateway=$4
 	hostname=$5
-	if [ -e $rootfs/etc/network/interfaces ]
+	if [ -e $rootfs/etc/sysconfig/network-scripts ]
 	then
 		cat <<EOF > $rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
@@ -23,7 +23,7 @@ ONBOOT=yes
 BOOTPROTO=none
 USERCTL=no
 EOF
-		cat <<EOF >> $rootfs/sysconfig/network
+		cat <<EOF > $rootfs/sysconfig/network
 NETWORKING=yes
 FORWARD_IPV4=yes
 HOSTNAME=$hostname
