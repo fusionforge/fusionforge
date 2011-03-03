@@ -81,6 +81,10 @@ configure_centos()
 #respawn
 #exec /sbin/getty -8 38400 /dev/console
 #EOF
+sed -i -e '/getty/d' $rootfs/etc/inittab
+cat <<EOF >> $rootfs/etc/inittab
+1:2345:respawn:/sbin/mingetty console
+EOF
 
 #    cat <<EOF > $rootfs/lib/init/fstab
 ## /lib/init/fstab: lxc system fstab
@@ -89,6 +93,12 @@ configure_centos()
 #none            /var/lock                 tmpfs           nodev,noexec,nosuid,showthrough   0 0
 #none            /lib/init/rw              tmpfs           mode=0755,nosuid,optional         0 0
 #EOF
+cat <<EOF > $rootfs/etc/fstab
+none /dev/pts devpts defaults 0 0
+none /proc    proc   defaults 0 0
+none /sys     sysfs  defaults 0 0
+none /dev/shm tmpfs  defaults 0 0
+EOF
 
     # reconfigure some services
 #    if [ -z "$LANG" ]; then
@@ -111,27 +121,33 @@ configure_centos()
     echo "Please change root-password !"
     echo "root:root" | chroot $rootfs chpasswd
 
-#sed -i -e '/getty/d' $rootfs/etc/inittab
 sed -i -e '/start_udev/d' $rootfs/etc/rc.d/rc.sysinit
 
 rm -f $rootfs/etc/mtab
 ln -s /proc/mounts $rootfs/etc/mtab
 
-test -e $rootfs/dev/ptmx || mknod $rootfs/dev/ptmx c 5 2
-test -e $rootfs/dev/pts || mkdir $rootfs/dev/pts
-test -e $rootfs/dev/null || mknod $rootfs/dev/null c 1 3
-test -e $rootfs/dev/random || mknod -m 644 $rootfs/dev/random c 1 8
-test -e $rootfs/dev/urandom || mknod $rootfs/dev/urandom c 1 9
+mv $rootfs/dev $rootfs/dev.old
+mkdir $rootfs/dev
+test -e $rootfs/dev/null    || mknod -m 666 $rootfs/dev/null c 1 3
+test -e $rootfs/dev/zero    || mknod -m 666 $rootfs/dev/zero c 1 5
+test -e $rootfs/dev/random  || mknod -m 666 $rootfs/dev/random c 1 8
+test -e $rootfs/dev/urandom || mknod -m 666 $rootfs/dev/urandom c 1 9
+test -e $rootfs/dev/pts     || mkdir -m 755 $rootfs/dev/pts
+test -e $rootfs/dev/shm     || mkdir -m 1777 $rootfs/dev/shm
+test -e $rootfs/dev/tty     || mknod -m 666 $rootfs/dev/tty c 5 0
+test -e $rootfs/dev/console || mknod -m 600 $rootfs/dev/console c 5 1
+test -e $rootfs/dev/tty0    || mknod -m 666 $rootfs/dev/tty0 c 4 0
+test -e $rootfs/dev/full    || mknod -m 666 $rootfs/dev/full c 1 7
+test -e $rootfs/dev/initctl || mknod -m 600 $rootfs/dev/initctl p
+test -e $rootfs/dev/ptmx    || mknod -m 666 $rootfs/dev/ptmx c 5 2
 
 #test -e $rootfs/dev/pts/0 || mknod $rootfs/dev/pts/0 c 136 0
-
-test -e $rootfs/dev/tty || mknod $rootfs/dev/tty c 5 0
-test -e $rootfs/dev/console || mknod $rootfs/dev/console c 5 1
-test -e $rootfs/dev/tty0 || mknod $rootfs/dev/tty0 c 4 0
-test -e $rootfs/dev/tty1 || mknod $rootfs/dev/tty1 c 4 1
-test -e $rootfs/dev/tty2 || mknod $rootfs/dev/tty2 c 4 2
-test -e $rootfs/dev/tty3 || mknod $rootfs/dev/tty3 c 4 3
-test -e $rootfs/dev/tty4 || mknod $rootfs/dev/tty4 c 4 4
+test -e $rootfs/dev/tty1 || mknod -m 666 $rootfs/dev/tty1 c 4 1
+test -e $rootfs/dev/tty2 || mknod -m 666 $rootfs/dev/tty2 c 4 2
+test -e $rootfs/dev/tty3 || mknod -m 666 $rootfs/dev/tty3 c 4 3
+test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
+test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
+test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
     return 0
 }
@@ -221,14 +237,14 @@ copy_configuration()
     name=$3
 
     cat <<EOF >> $path/config
-lxc.utsname = $name
+# lxc.utsname = $name
 
 lxc.tty = 4
 lxc.pts = 1024
 lxc.rootfs = $rootfs
 lxc.mount  = $path/fstab
 
-lxc.console = /dev/console
+# lxc.console = /dev/console
 
 lxc.cgroup.devices.deny = a
 # /dev/null and zero
@@ -251,7 +267,8 @@ EOF
     cat <<EOF > $path/fstab
 proc            $rootfs/proc         proc    nodev,noexec,nosuid 0 0
 devpts          $rootfs/dev/pts      devpts defaults 0 0
-sysfs           $rootfs/sys          sysfs defaults  0 0
+#sysfs           $rootfs/sys          sysfs defaults  0 0
+tmpfs           $rootfs/dev/shm      tmpfs defaults 0 0
 EOF
 
     if [ $? -ne 0 ]; then
