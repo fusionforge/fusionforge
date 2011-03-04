@@ -127,7 +127,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '</p>';
 				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			} else {
-				$b = '<p class="warning">'._('Missing configuration for access use_ssh and use_dav disabled').'</p>';
+				$b = '<p class="warning">'._('Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled').'</p>';
 			}
 		} else {
 			echo 'TOTO';
