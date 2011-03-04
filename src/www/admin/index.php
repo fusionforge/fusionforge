@@ -78,6 +78,21 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
     </li>
 	<li><a href="userlist.php?status=P"><?php echo _('Pending users'); ?></a></li>
 </ul>
+<?php
+	$params = array('result' => '');
+	$plugins_site_admin_project_html = '';
+	plugin_hook_by_reference("site_admin_user_maintenance_hook", $params);
+	if ($params['result']) {
+			$plugins_site_admin_user_html = $params['result'];
+	}
+	if ($plugins_site_admin_user_html) {
+		echo '<h3>'.  _('Plugins User Maintenance') .'</h3>';
+		echo '<ul>';
+		echo $plugins_site_admin_user_html;
+		echo '</ul>';
+	}
+?>
+
 <?php if (USE_PFO_RBAC) { ?>
 <h2><?php echo _('Global roles and permissions'); ?></h2>
 	<ul>

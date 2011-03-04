@@ -397,6 +397,13 @@ had been written.
                protocol and concatenate a <li> HTML block to params['result'] so 
                that it can appear in the "Plugins Project Maintenance" subsection
 
+  Hook Name  : site_admin_user_maintenance_hook
+  Locations  : www/admin/index.php
+  Description: Use this to provide a link to the user maintenance pages
+               for your plugin. The hook should obey the plugin_hook_by_reference()
+               protocol and concatenate a <li> HTML block to params['result'] so 
+               that it can appear in the "Plugins User Maintenance" subsection
+
   Hook Name  : task_extra_detail
   Parameters : task_id - The numeric ID for a task
   Locations  : www/pm/detail_task.php
