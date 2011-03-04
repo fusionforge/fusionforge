@@ -10,7 +10,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -22,52 +22,52 @@
  * USA
  */
 
-forge_define_config_item ('default_server', 'scmgit', forge_get_config ('web_host')) ;
-forge_define_config_item ('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git') ;
+forge_define_config_item('default_server', 'scmgit', forge_get_config ('web_host')) ;
+forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git') ;
 
 class GitPlugin extends SCMPlugin {
-	function GitPlugin () {
-		$this->SCMPlugin () ;
+	function GitPlugin() {
+		$this->SCMPlugin();
 		$this->name = 'scmgit';
 		$this->text = 'Git';
-		$this->hooks[] = 'scm_browser_page';
-		$this->hooks[] = 'scm_update_repolist' ;
-		$this->hooks[] = 'scm_generate_snapshots' ;
-		$this->hooks[] = 'scm_gather_stats' ;
+		$this->_addHook('scm_browser_page');
+		$this->_addHook('scm_update_repolist');
+		$this->_addHook('scm_generate_snapshots');
+		$this->_addHook('scm_gather_stats');
 
-		$this->register () ;
+		$this->register();
 	}
 
 	function getDefaultServer() {
 		return forge_get_config('default_server', 'scmgit') ;
 	}
 
-        function printShortStats ($params) {
-                $project = $this->checkParams ($params) ;
-                if (!$project) {
-                        return false ;
-                }
+	function printShortStats ($params) {
+		$project = $this->checkParams($params);
+		if (!$project) {
+			return false;
+		}
 
-                if ($project->usesPlugin($this->name)) {
-                        $result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
-                                                  array ($project->getID())) ;
-                        $commit_num = db_result($result,0,'commits');
-                        $add_num    = db_result($result,0,'adds');
-                        if (!$commit_num) {
-                                $commit_num=0;
-                        }
-                        if (!$add_num) {
-                                $add_num=0;
-                        }
-                        echo ' (Git: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
-                }
-        }
+		if ($project->usesPlugin($this->name)) {
+			$result = db_query_params('SELECT sum(commits) AS commits, sum(adds) AS adds FROM stats_cvs_group WHERE group_id=$1',
+						array ($project->getID())) ;
+			$commit_num = db_result($result,0,'commits');
+			$add_num    = db_result($result,0,'adds');
+			if (!$commit_num) {
+				$commit_num=0;
+			}
+			if (!$add_num) {
+				$add_num=0;
+			}
+			echo ' (Git: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+		}
+	}
 
-	function getBlurb () {
+	function getBlurb() {
 		return '<p>' . _('Documentation for Git is available at <a href="http://git-scm.com/">http://git-scm.com/</a>.') . '</p>';
 	}
 
-	function getInstructionsForAnon ($project) {
+	function getInstructionsForAnon($project) {
 		$b = '<h2>' . _('Anonymous Git Access') . '</h2>';
 		$b .= '<p>';
 		$b .= _('This project\'s Git repository can be checked out through anonymous access with the following command.');
@@ -77,17 +77,17 @@ class GitPlugin extends SCMPlugin {
 		$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$project->getUnixName().'.git').'</tt><br />';
 		$b .= '</p>';
 
-		$result = db_query_params ('SELECT u.user_id, u.user_name, u.realname FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
+		$result = db_query_params('SELECT u.user_id, u.user_name, u.realname FROM plugin_scmgit_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2',
 					   array ($project->getID(),
-						  'A')) ;
-		$rows = db_numrows ($result) ;
+						  'A'));
+		$rows = db_numrows($result);
 
 		if ($rows > 0) {
 			$b .= '<h2>';
 			$b .= _('Developer\'s repository');
 			$b .= '</h2>';
 			$b .= '<p>';
-			$b .= ngettext ('One of this project\'s members also has a personal Git repository that can be checked out anonymously.',
+			$b .= ngettext('One of this project\'s members also has a personal Git repository that can be checked out anonymously.',
 					'Some of this project\'s members also have personal Git repositories that can be checked out anonymously.',
 				$rows);
 			$b .= '</p>';
@@ -96,7 +96,7 @@ class GitPlugin extends SCMPlugin {
 				$user_id = db_result($result,$i,'user_id');
 				$user_name = db_result($result,$i,'user_name');
 				$real_name = db_result($result,$i,'realname');
-				$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $real_name).')<br />';
+				$b .= '<tt>git clone '.util_make_url('/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git').'</tt> ('.util_make_link_u ($user_name, $user_id, $real_name).')<br />';
 			}
 			$b .= '</p>';
 		}
@@ -104,10 +104,11 @@ class GitPlugin extends SCMPlugin {
 		return $b ;
 	}
 
-	function getInstructionsForRW ($project) {
+	function getInstructionsForRW($project) {
+
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid()) ;
-			$d = $u->getUnixName() ;
+			$u =& user_get_object(user_getid());
+			$d = $u->getUnixName();
 			if (forge_get_config('use_ssh', 'scmgit')) {
 				$b = '<h2>';
 				$b .= _('Developer GIT Access via SSH');
@@ -125,8 +126,11 @@ class GitPlugin extends SCMPlugin {
 				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+			} else {
+				$b = '<p class="warning">'._('Missing configuration for access use_ssh and use_dav disabled').'</p>';
 			}
 		} else {
+			echo 'TOTO';
 			$b = '<h2>';
 			$b .= _('Developer GIT Access via SSH');
 			$b .= '</h2>';
@@ -139,9 +143,9 @@ class GitPlugin extends SCMPlugin {
 		if (session_loggedin()) {
                         $u =& user_get_object(user_getid()) ;
 			if ($u->getUnixStatus() == 'A') {
-				$result = db_query_params ('SELECT * FROM plugin_scmgit_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2',
+				$result = db_query_params('SELECT * FROM plugin_scmgit_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2',
 							   array ($project->getID(),
-								  $u->getID())) ;
+								  $u->getID()));
 				if ($result && db_numrows ($result) > 0) {
 					$b .= '<h2>';
 					$b .= _('Access to your personal repository');
@@ -170,7 +174,7 @@ class GitPlugin extends SCMPlugin {
 			}
 		}
 
-		return $b ;
+		return $b;
 	}
 
 	function getSnapshotPara ($project) {
@@ -194,7 +198,7 @@ class GitPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
 				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
@@ -222,7 +226,7 @@ class GitPlugin extends SCMPlugin {
 
 // 		$result = db_query_params('SELECT u.realname, u.user_name, u.user_id, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined FROM stats_cvs_user s, users u WHERE group_id=$1 AND s.user_id=u.user_id AND (commits>0 OR adds >0) GROUP BY u.user_id, realname, user_name, u.user_id ORDER BY combined DESC, realname',
 // 					  array ($project->getID()));
-		
+
 // 		if (db_numrows($result) > 0) {
 // 			$b .= $HTML->boxMiddle(_('Repository Statistics'));
 
@@ -232,10 +236,10 @@ class GitPlugin extends SCMPlugin {
 // 				_('Commits')
 // 				);
 // 			$b .= $HTML->listTableTop($tableHeaders);
-			
+
 // 			$i = 0;
 // 			$total = array('adds' => 0, 'commits' => 0);
-			
+
 // 			while($data = db_fetch_array($result)) {
 // 				$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
 // 				$b .= '<td width="50%">' ;
@@ -257,12 +261,12 @@ class GitPlugin extends SCMPlugin {
 // 		return $b ;
 // 	}
 
-	function getStatsBlock ($project) {
+	function getStatsBlock($project) {
 		return ;
 	}
 
-	function createOrUpdateRepo ($params) {
-		$project = $this->checkParams ($params) ;
+	function createOrUpdateRepo($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
@@ -271,10 +275,10 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$project_name = $project->getUnixName() ;
+		$project_name = $project->getUnixName();
 		$root = forge_get_config('repos_path', 'scmgit') . '/' . $project_name ;
-		$unix_group = 'scm_' . $project_name ;
-                system ("mkdir -p $root") ;
+		$unix_group = 'scm_' . $project_name;
+                system ("mkdir -p $root");
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_file ("$main_repo/HEAD") && !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs")) {
@@ -405,12 +409,12 @@ class GitPlugin extends SCMPlugin {
 	function gatherStats ($params) {
 		global $last_user, $usr_adds, $usr_deletes,
 		$usr_updates, $updates, $adds;
-		
+
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -491,7 +495,7 @@ class GitPlugin extends SCMPlugin {
 					return false ;
 				}
 			}
-				
+
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
 
