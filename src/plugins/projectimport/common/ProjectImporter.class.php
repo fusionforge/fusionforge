@@ -36,10 +36,29 @@ define('PLANETFORGE_NS', 'http://coclico-project.org/ontology/planetforge#');
 
 class ImportedProject {
 	
+	protected $full_name;
+	//protected $purpose;
+	protected $description;
+	protected $unix_name;
+	protected $scm;
+	protected $is_public;
+	protected $built_from_template;
+	
 	function ImportedProject($res) {
 		$this->res = $res;
-/*		$this->name = $res->getPropValue('doap:name');
-		$this->description = $res->getPropValue('dcterms:description');
+		
+		$this->unix_name = $this->res->getPropValue('doap:name');
+		$this->description = $this->res->getPropValue('dcterms:description');
+		$this->is_public = 0;
+		
+		/*
+		$this->full_name = $this->res->getPropValue('doap:name');
+		$this->purpose = $this->res->getPropValue('doap:name');
+		$this->unix_name = $this->res->getPropValue('doap:name');
+		$this->scm = $this->res->getPropValue('doap:name');
+		$this->is_public = $this->res->getPropValue('doap:name');
+		$this->built_from_template = $this->res->getPropValue('doap:name');
+			
 		$this->homepage = $res->getPropValue('doap:homepage');
 		$this->hosted_by = $res->getPropValue('planetforge:hosted_by');
 		*/
@@ -56,17 +75,32 @@ class ImportedProject {
 	/**
 	 * Returns a project's name
 	 */
-	function getName() {
-		return $this->res->getPropValue('doap:name');
+	function getUnixName() {
+		return $this->unix_name;
 	}
-
+	
 	/**
 	 * Return a project's description
 	 */
 	function getDescription() {
-		return $this->res->getPropValue('dcterms:description');
+		return $this->description;
 	}
 
+	function getFullName() {
+		if ($this->full_name) {
+			return $this->full_name;
+		}
+		else {
+			return $this->getUnixName();
+		}
+	}
+	/*
+	function getPurpose() {
+		return $this->purpose;
+	}*/
+	function getIsPublic() {
+		return $this->is_public;
+	}
 	/**
 	 * Return the spaces used by a project
 	 * @param ARC2 resource $projectres

@@ -26,26 +26,29 @@ class ProjectImportPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "projectimport" ;
 		$this->text = "Project import" ; // To show in the tabs, use...
+		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
+		/*
 		$this->hooks[] = "user_personal_links";//to make a link to the user's personal part of the plugin
 		$this->hooks[] = "usermenu" ;
-		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "userisactivecheckbox" ; // The "use ..." checkbox in user account
 		$this->hooks[] = "userisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
+		*/
+		$this->hooks[] = "site_admin_project_maintenance_hook";
 	}
 
 	function CallHook ($hookname, $params) {
 		global $use_projectimportplugin,$G_SESSION,$HTML;
-		if ($hookname == "usermenu") {
+		/*if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("projectimport")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/projectimport/index.php' . $param ));				
 			}
-		} elseif ($hookname == "groupmenu") {
+		} else */ if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
@@ -65,7 +68,7 @@ class ProjectImportPlugin extends Plugin {
 				$params['DIRS'][]='';
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
+		} /*elseif ($hookname == "groupisactivecheckbox") {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
@@ -150,8 +153,23 @@ class ProjectImportPlugin extends Plugin {
 		}												    
 		elseif ($hookname == "blahblahblah") {
 			// ...
-		} 
+		}
+		*/
 	}
+	
+	/**
+	 * Displays the link in the Project Admin part of the Site Admin ('site_admin_project_maintenance_hook' plugin_hook_by_reference() -style hook)
+	 * @param array $params for concatenating return value in ['results']
+	 */
+	function site_admin_project_maintenance_hook (&$params) {
+		$html = $params['result'];
+		$html .= '<li>'.
+			util_make_link ('/plugins/'.$this->name.'/projectsimport.php',
+						     _("Import projects"). ' [' . _('Project import plugin') . ']') .'</li>';
+		$params['result'] = $html;
+	}
+
+	
 }
 
 // Local Variables:

@@ -26,7 +26,7 @@ require_once $gfcommon.'import/import_users.php';
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
 
 // Dependency on php-arc
-include_once('arc/ARC2.php');
+//include_once('arc/ARC2.php');
 
 /**
  * Manages the display of the page : HTML + forms
@@ -547,7 +547,7 @@ class ProjectImportPage {
 	                               <tr>
 		                             <td>
 			                            <h2>'._('Details of imported project : ').
-			                             '<pre>'.$project->getName().'</pre>
+			                             '<pre>'.$project->getUnixName().'</pre>
 			                            </h2>
 			                            <h3>'._('Project summary').'</h3>';
 						$html .= '<p><pre>'.$project->getDescription().'</pre></p>';

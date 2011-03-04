@@ -2090,6 +2090,7 @@ src/plugins/projectimport/packaging/docs/plugin-projectimport -text
 src/plugins/projectimport/packaging/install/plugin-projectimport -text
 src/plugins/projectimport/packaging/links/plugin-projectimport -text
 src/plugins/projectimport/www/index.php -text
+src/plugins/projectimport/www/projectsimport.php -text
 src/plugins/projectlabels/NAME -text
 src/plugins/projectlabels/README -text
 src/plugins/projectlabels/bin/db-delete.pl -text svneol=unset#text/x-perl
