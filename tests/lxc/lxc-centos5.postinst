@@ -30,7 +30,9 @@ HOSTNAME=$hostname
 GATEWAY=$gateway
 GATEWAYDEV=eth0
 EOF
-
+                cat <<EOF >> $rootfs/etc/hosts
+$address        $hostname
+EOF
 	else
 		exit 2
 	fi
