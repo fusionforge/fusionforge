@@ -1,4 +1,4 @@
-#!/bin/sh -xe
+#!/bin/sh -e
 
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
@@ -6,26 +6,38 @@ export WORKSPACE=${WORKSPACE:-$CURDIR}
 export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
+
 # get config 
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+
+export VEID=$VEIDCOS
+
+export LXCTEMPLATE=$LXCCOSTEMPLATE
+
+export IPBASE=$IPCOSBASE
+export IPDNS=$IPCOSDNS
+export IPMASK=$IPCOSMASK
+export IPGW=$IPCOSGW
+
+ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
+export VZTEMPLATE=centos-$COSVERS-$ARCH-minimal
+export VZPRIVATEDIR
+export HOST=centos5.local
+export DEBMIRROR
+
+export DIST
 export VMENGINE
+export SSHPUBKEY
+export HOSTKEYDIR
 
 if [ "x${HUDSON_URL}" = "x" ]
 then
-	export VEID=$VEIDCOS
-	export IPBASE=$IPCOSBASE
-	export IPDNS=$IPCOSDNS
-	ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
-	export VZTEMPLATE=centos-$COSVERS-$ARCH-minimal
-	export VZPRIVATEDIR
-	export DIST
 	export BASEDIR=${BASEDIR:-/~`id -un`/ws}
+	export USEVZCTL=true
+	export SELENIUM_RC_HOST=localhost
 	export SELENIUM_RC_URL=http://`hostname -f`$BASEDIR/reports
 	export FFORGE_RPM_REPO=http://`hostname -f`$BASEDIR/build/packages
-	export HOST=centos5.local
-	export SELENIUM_RC_HOST=localhost
-	export USEVZCTL=true
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
