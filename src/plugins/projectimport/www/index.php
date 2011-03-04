@@ -212,22 +212,25 @@ class ProjectImportPage {
 		$active_users = user_get_active_users();
 		foreach($active_users as $user_object) {
 			$username = $user_object->getUnixName();
-			print_r('User : '.$username .'<br />');
+			//print_r('User : '.$username .'<br />');
 			$role = '';
 			if ($user_object->isMember($group_id)) {
-				print_r('member of project as ');
+				//print_r('member of project as ');
 				$role = $user_object->getRole($group_id);
 				if ($role) {
 					$role = $role->getName();
-					print_r($role . '<br />');
+					//print_r($role . '<br />');
 				}
-				else {
+				/*
+				 else {
 					print_r('dunno...<br />');				
-				}
+				}*/
 			}
+			/*
 			else {
 				print_r('not member of project...<br />');	
 			}
+			*/
 			$existing_users[] = array( 'name' => $username,
 											 'role' => $role);
 		}
@@ -471,7 +474,7 @@ class ProjectImportPage {
 				} // foreach
 				
 				if($can_proceed) {
-					print_r('We can proceed !');
+					//print_r('We can proceed !');
 					$check=TRUE;
 					if($apply) $check = FALSE;
 					
