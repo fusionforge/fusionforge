@@ -154,6 +154,7 @@ test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
 test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
 cp /etc/localtime $rootfs/etc/localtime
+cp /etc/timezone $rootfs/etc/timezone
 
     return 0
 }
@@ -174,7 +175,16 @@ download_centos()
     echo "Downloading centos minimal ..."
     #febootstrap $DISTRO $cache/partial-$arch
     rinsearch=`dpkg-architecture -qDEB_BUILD_ARCH`
-    rinse --config /etc/rinse/rinse.conf --arch $rinsearch --distribution $DISTRO --directory $cache/partial-$arch
+    cat <<EOF > /var/cache/rinse/centos5-arch.pkglist
+openssh-server
+man
+zsh
+bind-utils
+openssh-clients
+php
+wget
+EOF
+    rinse --config /etc/rinse/rinse.conf --arch $rinsearch --distribution $DISTRO --add-pkg-list /var/cache/rinse/centos5-arch.pkglist --directory $cache/partial-$arch
     
     if [ $? -ne 0 ]; then
 	echo "Failed to download the rootfs, aborting."
