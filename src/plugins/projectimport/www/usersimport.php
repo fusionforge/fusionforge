@@ -14,12 +14,7 @@
  * 
  */
 
-// Import projects from a JSON file (Site Admin tool)
-// will just create the project as if submitted from register/index.php
-// it will stay there until approved by and an admin (no auto approval)
-// Nothing more done, like importing users/roles/data : will need to be approved first
-
-// TODO : ask for confirmation on projects to be created, instead of creating directly without confirmation
+// Import users from a JSON file (Site Admin tool)
 
 require_once('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
@@ -35,7 +30,7 @@ include_once('arc/ARC2.php');
  * @author Olivier Berger
  *
  */
-class ProjectsImportPage {
+class UsersImportPage {
 
 	protected $message;
 	
@@ -45,7 +40,7 @@ class ProjectsImportPage {
 	
 	protected $html_generator;
 	
-	function ProjectsImportPage($HTML) {
+	function UsersImportPage($HTML) {
 		$this->html_generator = $HTML;
 		$this->message = '';
 		$this->form_header_already_displayed = false;
@@ -61,7 +56,7 @@ class ProjectsImportPage {
 		global $feedback;
 		
 		$params= array();
-		$params['title']=_('Projects importer');
+		$params['title']=_('Users importer');
 		$params['toptab']='projectimport';
 		
 		site_admin_header($params);
@@ -124,7 +119,7 @@ class ProjectsImportPage {
 			//			print_r($imported_file);
 			$this->importer->parse_OSLCCoreRDFJSON($json);
 
-			$debug = FALSE;
+			$debug = TRUE;
 			if($debug) {
 			 // Debug the loaded triples 
 			 $triples = $this->importer->parse_OSLCCoreRDFJSON($json);
@@ -152,79 +147,63 @@ class ProjectsImportPage {
 		// If it indeed has valid data
 		if ($this->importer->has_project_dump()) {
 			$this->message .= "Here are the results from your upload :";
-
-			$projects = $this->importer->get_projects();
-
+				
 			// start HTML output
 			if (! $this->form_header_already_displayed) {
 				$this->form_header_already_displayed = true;
 				$html .= '<form enctype="multipart/form-data" action="'.getStringFromServer('PHP_SELF').'" method="post">';
 			}
-			// Then handle project(s)
+				
+			$imported_users = $this->importer->get_user_objs();
+				
+			if (count($imported_users)) {
+				$html .= $this->html_generator->boxTop(_("Users found in imported file"));
 
-			if(count($projects)) {
+				foreach($imported_users as $user => $user_obj) {
 
-				// Display project's general description
-				$html .= '<table id="project-summary-and-devs" class="my-layout-table" summary="">';
+					$unix_name = $user_obj->getUnixName();
+					$email = $user_obj->getEmail();
+
+					$firstname = $user_obj->getFirstname();
+					$lastname = $user_obj->getLastname();
 					
-				// Display project attributes
-				foreach($projects as $project) {
+					$theme_id=$this->html_generator->getThemeIdFromName(forge_get_config('default_theme'));
+					$password1 = substr(md5($GLOBALS['session_ser'] . time() . util_randbytes()), 0, 8);
+					$password2 = $password1;
+					$language_id = language_name_to_lang_id (choose_language_from_context ());
+					
+					$new_user = new GFUser();
+					$res = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
+						$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
+						$address,$address2,$phone,$fax,$title,$ccode,$send_mail);
 
-					$full_name = $project->getFullName();
-					$unix_name = $project->getUnixName();
-					$description = $project->getDescription();
-					$purpose = 'Imported from JSON file';
-					$scm_host = '';
-					$is_public = $project->getIsPublic();
-					$send_mail = ! forge_get_config ('project_auto_approval') ;
-					$built_from_template = 0 ;
-
-					$group = new Group();
-					$u = session_get_user();
-					$res = $group->create(
-						$u,
-						$full_name,
-						$unix_name,
-						$description,
-						$purpose,
-						'shell1',
-						$scm_host,
-						$is_public,
-						$send_mail,
-						$built_from_template);
-						
 					if (!$res) {
-						$error_msg = $group->getErrorMessage();
+						$error_msg = $new_user->getErrorMessage();
 						if ($feedback) $feedback .= '<br />';
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
 							
-						$html .= '<tr>
-		                             <td>
-			                            <h2>'._('Failed to create project'). ': <pre>'. $unix_name .'</pre>
-			                            </h2>';
+						$html .= _('Failed to create user'). ': <pre>'. $unix_name .'</pre>';
 					}
 					else {
-						$html .= '<tr>
-		                             <td>
-			                            <h2>'._('Created project'). ': <pre>'. $unix_name .'</pre>
-			                            </h2>';
-
+						$html .= _('Created user'). ': <pre>'. $unix_name .'</pre>';
 					}
-					$html .= '<h3>'._('Project summary').'</h3>';
-					$html .= '<p><pre>'. $description .'</pre></p>';
 
-					$html .= '<p>full_name : '. $full_name .'</p>';
-					//$html .= '<p>purpose : '. $project->getPurpose() .'</p>';
-					$html .= '<p>is_public : '. $is_public .'</p>';
-					$html .= '</td></tr>';
-
+					$html .= 'User :<br />';
+					$html .= ' account name : '. $unix_name .'<br />';
+					$html .= ' email : '. $email .'<br />';
+					$html .= ' firstname : '. $firstname .'<br />';
+					$html .= ' lastname : '. $lastname .'<br />';
+					$html .= '<br/>';
 				}
-				$html .= '</table>';
-			}
-			else {
-				$feedback .= 'parsing problem <br />';
+
+				$html .= $this->html_generator->boxBottom();
+
 			}
 		}
+		else {
+				$feedback .= 'parsing problem <br />';
+		}
+		
 		return $html;
 	}
 	
@@ -236,7 +215,7 @@ session_require_global_perm ('forge_admin');
 
 global $group_id, $feedback;
 
-$this_page = new ProjectsImportPage($HTML);
+$this_page = new UsersImportPage($HTML);
 
 //print_r($_POST);
 
@@ -249,7 +228,7 @@ if (getStringFromRequest('submit')) {
 		
 }
 else {
-	$message .= "You can import a list of projects from a JSON RDF document compatible with ForgePlucker's dump format.<br />";
+	$message .= "You can import a list of users from a JSON RDF document compatible with ForgePlucker's dump format.<br />";
 }
 
 $this_page->display_headers($message);

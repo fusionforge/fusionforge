@@ -35,6 +35,7 @@ define('FORGEPLUCKER_NS', 'http://planetforge.org/ns/forgeplucker_dump/');
 define('PLANETFORGE_NS', 'http://coclico-project.org/ontology/planetforge#');
 
 class ImportedProject {
+	protected $res;
 	
 	protected $full_name;
 	//protected $purpose;
@@ -156,7 +157,45 @@ class ImportedProjectRole {
 }
 
 class ImportedUser {
-	protected $initial_role;
+	protected $res;
+	
+	protected $unix_name;
+	protected $firstname;
+	protected $lastname;
+	protected $email;	
+	
+	//protected $initial_role;
+	function ImportedUser($res) {
+		$this->res = $res;
+		
+		$this->unix_name = $this->res->getPropValue('foaf:accountName');
+		$this->email = $this->res->getPropValue('sioc:email');
+
+	}
+	function init_owner_props($res) {
+		$name = $res->getPropValue('foaf:name');
+		print_r('Name: '.$name);
+		$first = '';
+		$last = '';
+		list($first, $last) = explode(' ', str_replace('/\s+/gi',' ',$name), 2);
+		print_r('first: '.$first);
+		print_r('last: '.$last);
+		$this->firstname = $first;
+		$this->lastname = $last;
+	}	
+	function getUnixName() {
+		return $this->unix_name;
+	}
+	function getEmail() {
+		return $this->email;
+	}
+	function getFirstname() {
+		return $this->firstname;
+	}
+	function getLastname() {
+		return $this->lastname;
+	}
+	
 }
 /**
  * TODO Enter description here ...
@@ -447,13 +486,18 @@ class ProjectImporter {
 			$dumpres = $this->project_dump();
 			
 			$this->users = array();
+			$this->user_objs = array();
 			
 			// parse the users
 			$users = $dumpres->getPropValues('forgeplucker:users');
 			foreach ($users as $user) {
 				//	      print_r($this->index[$user]);
 				$res = ProjectImporter::make_resource($user);
-				$accountName = $res->getPropValue('foaf:accountName');
+				
+				$user_obj = new ImportedUser($res);
+				$this->user_objs[$user] = $user_obj;
+				
+				$accountName = $user_obj->getUnixName();
 				$this->user_names[$user] = $accountName;
 				$this->users[$user] = $res;
 				//			print 'Found user : '. $accountName . "\n";
@@ -478,6 +522,9 @@ class ProjectImporter {
 					if (! $user->getPropValue('sioc:account_of')) {
 						$user->setProp('sioc:account_of', $person);
 					}
+					
+					$user_obj = & $this->user_objs[$account];
+					$user_obj->init_owner_props($res);
 				}
 			}
 			/*		foreach ($this->users as $user) {
@@ -488,6 +535,16 @@ class ProjectImporter {
 		}
 		return $this->users;
 	}
+	function get_user_objs() {
+		if (! $this->user_objs) {
+			
+			$this->get_users();
+			
+		}
+		return $this->user_objs;
+	}
+	
+	
 	function supportsTool($tool)
 	{
 		return in_array($tool, $this->providers);

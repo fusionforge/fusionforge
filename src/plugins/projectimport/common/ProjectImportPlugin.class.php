@@ -36,7 +36,9 @@ class ProjectImportPlugin extends Plugin {
 		$this->hooks[] = "userisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
 		*/
+		// The plugin has a link added to the Project administration part of site admin
 		$this->hooks[] = "site_admin_project_maintenance_hook";
+		$this->hooks[] = "site_admin_user_maintenance_hook";
 	}
 
 	function CallHook ($hookname, $params) {
@@ -158,7 +160,7 @@ class ProjectImportPlugin extends Plugin {
 	}
 	
 	/**
-	 * Displays the link in the Project Admin part of the Site Admin ('site_admin_project_maintenance_hook' plugin_hook_by_reference() -style hook)
+	 * Displays the link in the Project Maintenance part of the Site Admin ('site_admin_project_maintenance_hook' plugin_hook_by_reference() -style hook)
 	 * @param array $params for concatenating return value in ['results']
 	 */
 	function site_admin_project_maintenance_hook (&$params) {
@@ -166,6 +168,18 @@ class ProjectImportPlugin extends Plugin {
 		$html .= '<li>'.
 			util_make_link ('/plugins/'.$this->name.'/projectsimport.php',
 						     _("Import projects"). ' [' . _('Project import plugin') . ']') .'</li>';
+		$params['result'] = $html;
+	}
+
+	/**
+	 * Displays the link in the User Maintenance part of the Site Admin ('site_admin_user_maintenance_hook' plugin_hook_by_reference() -style hook)
+	 * @param array $params for concatenating return value in ['results']
+	 */
+	function site_admin_user_maintenance_hook (&$params) {
+		$html = $params['result'];
+		$html .= '<li>'.
+			util_make_link ('/plugins/'.$this->name.'/usersimport.php',
+						     _("Import users"). ' [' . _('Project import plugin') . ']') .'</li>';
 		$params['result'] = $html;
 	}
 
