@@ -23,7 +23,7 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'scm/include/scm_utils.php';    
+require_once $gfwww.'scm/include/scm_utils.php';
 
 $group_id = getIntFromRequest("group_id");
 $group = group_get_object($group_id);
@@ -32,12 +32,12 @@ if (!$group || !is_object($group)) {
 }
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 
-plugin_hook ("blocks", "scm index");
+plugin_hook("blocks", "scm index");
 
-$hook_params = array () ;
-$hook_params['group_id'] = $group_id ;
-plugin_hook ("scm_page", $hook_params) ;
+$hook_params = array();
+$hook_params['group_id'] = $group_id;
+plugin_hook("scm_page", $hook_params);
 
-scm_footer(); 
+scm_footer();
 
 ?>

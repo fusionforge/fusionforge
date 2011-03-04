@@ -30,14 +30,14 @@ require_once $gfcommon.'scm/SCMFactory.class.php';
 $group_id = getIntFromRequest('group_id');
 
 // Check permissions
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm('project_admin', $group_id);
 
 if (getStringFromRequest('submit')) {
-	$hook_params = array ();
+	$hook_params = array();
 	$hook_params['group_id'] = $group_id;
 
 	$scmradio = '';
-	$scmvars = array_keys (_getRequestArray());
+	$scmvars = array_keys(_getRequestArray());
 	foreach (_getRequestArray() as $key => $value) {
 		foreach ($scm_list as $scm) {
 			if ($key == strstr($key, $scm . "_")) {
@@ -67,7 +67,7 @@ if (getStringFromRequest('submit')) {
 		}
 	}
 
-	plugin_hook ("scm_admin_update", $hook_params);
+	plugin_hook("scm_admin_update", $hook_params);
 }
 
 scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
@@ -81,7 +81,7 @@ scm_header(array('title'=>_('SCM Repository'),'group'=>$group_id));
 
 	$SCMFactory = new SCMFactory();
 	$scm_plugins = $SCMFactory->getSCMs();
-	if (count($scm_plugins) != 0) {	
+	if (count($scm_plugins) != 0) {
 		if (count($scm_plugins) == 1) {
 			$myPlugin = plugin_get_object($scm_plugins[0]);
 			echo '<input type="hidden" name="scmradio" value="'.$myPlugin->name.'" />' ;

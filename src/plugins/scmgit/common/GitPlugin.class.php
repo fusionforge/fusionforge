@@ -130,7 +130,6 @@ class GitPlugin extends SCMPlugin {
 				$b = '<p class="warning">'._('Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled').'</p>';
 			}
 		} else {
-			echo 'TOTO';
 			$b = '<h2>';
 			$b .= _('Developer GIT Access via SSH');
 			$b .= '</h2>';
@@ -173,40 +172,39 @@ class GitPlugin extends SCMPlugin {
 				}
 			}
 		}
-
 		return $b;
 	}
 
-	function getSnapshotPara ($project) {
+	function getSnapshotPara($project) {
 
 		$b = "" ;
 		$filename = $project->getUnixName().'-scm-latest.tar'.util_get_compressed_file_extension();
 		if (file_exists(forge_get_config('scm_snapshots_path').'/'.$filename)) {
 			$b .= '<p>[' ;
-			$b .= util_make_link ("/snapshots.php?group_id=".$project->getID(),
+			$b .= util_make_link("/snapshots.php?group_id=".$project->getID(),
 					      _('Download the nightly snapshot')
-				) ;
+				);
 			$b .= ']</p>';
 		}
 		return $b ;
 	}
 
-	function printBrowserPage ($params) {
+	function printBrowserPage($params) {
 		global $HTML;
 
-		$project = $this->checkParams ($params) ;
+		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
 
-		if ($project->usesPlugin ($this->name)) {
-			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
+		if ($project->usesPlugin($this->name)) {
+			if ($this->browserDisplayable($project)) {
+				print '<iframe src="'.util_make_url("/plugins/scmgit/cgi-bin/gitweb.cgi?p=".$project->getUnixName().'/'.$project->getUnixName().'.git').'" frameborder="0" width=100% height=700></iframe>' ;
 			}
 		}
 	}
 
-	function getBrowserLinkBlock ($project) {
+	function getBrowserLinkBlock($project) {
 		global $HTML ;
 		$b = $HTML->boxMiddle(_('Git Repository Browser'));
 		$b .= '<p>';
@@ -346,25 +344,25 @@ class GitPlugin extends SCMPlugin {
 		}
 	}
 
-	function updateRepositoryList ($params) {
-		$groups = $this->getGroups () ;
-		$list = array () ;
+	function updateRepositoryList($params) {
+		$groups = $this->getGroups();
+		$list = array();
 		foreach ($groups as $project) {
-			if ($this->browserDisplayable ($project)) {
-				$list[] = $project ;
+			if ($this->browserDisplayable($project)) {
+				$list[] = $project;
 			}
 		}
 
-		$config_dir = '/etc/gforge/plugins/scmgit' ;
+		$config_dir = forge_get_config('config_path').'/plugins/scmgit';
 		$fname = $config_dir . '/gitweb.conf' ;
-		$config_f = fopen ($fname.'.new', 'w') ;
+		$config_f = fopen($fname.'.new', 'w') ;
 		$rootdir = forge_get_config('repos_path', 'scmgit');
 		fwrite($config_f, "\$projectroot = '$rootdir';\n");
 		fwrite($config_f, "\$projects_list = '$config_dir/gitweb.list';\n");
-		fwrite($config_f, "@git_base_url_list = ('". util_make_url ('/anonscm/git') . "');\n");
-		fwrite($config_f, "\$logo = '". util_make_url ('/plugins/scmgit/git-logo.png') . "';\n");
-		fwrite($config_f, "\$favicon = '". util_make_url ('/plugins/scmgit/git-favicon.png')."';\n");
-		fwrite($config_f, "\$stylesheet = '". util_make_url ('/plugins/scmgit/gitweb.css')."';\n");
+		fwrite($config_f, "@git_base_url_list = ('". util_make_url('/anonscm/git') . "');\n");
+		fwrite($config_f, "\$logo = '". util_make_url('/plugins/scmgit/git-logo.png') . "';\n");
+		fwrite($config_f, "\$favicon = '". util_make_url('/plugins/scmgit/git-favicon.png')."';\n");
+		fwrite($config_f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
 		fwrite($config_f, "\$prevent_xss = 'true';\n");
 		fclose($config_f);
 		chmod ($fname.'.new', 0644) ;
@@ -372,39 +370,41 @@ class GitPlugin extends SCMPlugin {
 
 		$fname = $config_dir . '/gitweb.list' ;
 
-		$f = fopen ($fname.'.new', 'w') ;
+		$f = fopen ($fname.'.new', 'w');
 		foreach ($list as $project) {
                         $repos = $this->getRepositories($rootdir . "/" .  $project->getUnixName());
                         foreach ($repos as $repo) {
                                 $reldir = substr($repo, strlen($rootdir) + 1);
-			        fwrite ($f, $reldir . "\n");
+			        fwrite($f, $reldir . "\n");
                         }
 		}
-		fclose ($f) ;
-		chmod ($fname.'.new', 0644) ;
-		rename ($fname.'.new', $fname) ;
+		fclose($f);
+		chmod($fname.'.new', 0644);
+		rename($fname.'.new', $fname);
 	}
 
-        function getRepositories($path) {
-                if (! is_dir($path))
-                        return;
-                $list = array();
-                $entries = scandir($path);
-                foreach ($entries as $entry) {
-                        $fullname = $path . "/" . $entry;
-                        if (($entry == ".") or ($entry == ".."))
-                                continue;
-                        if (is_dir($fullname)) {
-                                if (is_link($fullname))
-                                        continue;
-                                $result = $this->getRepositories($fullname);
-                                $list = array_merge($list, $result);
-                        } else if ($entry == "HEAD") {
-                                $list[] = $path;
-                        }
-                }
-                return $list;
-        }
+	function getRepositories($path) {
+		if (! is_dir($path)) {
+			echo 'pas de path ?';
+			return;
+		}
+		$list = array();
+		$entries = scandir($path);
+		foreach ($entries as $entry) {
+			$fullname = $path . "/" . $entry;
+			if (($entry == ".") or ($entry == ".."))
+				continue;
+			if (is_dir($fullname)) {
+				if (is_link($fullname))
+					continue;
+				$result = $this->getRepositories($fullname);
+				$list = array_merge($list, $result);
+			} else if ($entry == "HEAD") {
+				$list[] = $path;
+			}
+		}
+		return $list;
+	}
 
 	function gatherStats ($params) {
 		global $last_user, $usr_adds, $usr_deletes,

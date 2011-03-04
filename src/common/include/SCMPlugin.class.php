@@ -10,7 +10,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -46,7 +46,7 @@ abstract class SCMPlugin extends Plugin {
 
 	function CallHook ($hookname, &$params) {
 		global $HTML ;
-		
+
 		switch ($hookname) {
 		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
@@ -62,7 +62,7 @@ abstract class SCMPlugin extends Plugin {
 			$this->printAdminPage ($params) ;
 			break ;
 		case 'scm_admin_update':
-			$this->adminUpdate ($params) ;
+			$this->adminUpdate($params);
 			break ;
 		case 'scm_stats':
 			$this->printShortStats ($params) ;
@@ -94,13 +94,13 @@ abstract class SCMPlugin extends Plugin {
 		$scm_list[] = $this->name ;
 	}
 
-	function browserDisplayable ($project) {
-		if ($project->usesSCM ()
+	function browserDisplayable($project) {
+		if ($project->usesSCM()
 		    && $project->usesPlugin($this->name)
 		    && $project->enableAnonSCM()) {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -111,7 +111,7 @@ abstract class SCMPlugin extends Plugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin ($this->name)) {
 			echo ' ('.$this->text.')' ;
 		}
@@ -172,7 +172,7 @@ abstract class SCMPlugin extends Plugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin ($this->name)) {
 
 			// Table for summary info
@@ -183,7 +183,7 @@ abstract class SCMPlugin extends Plugin {
 			if ($project->enableAnonSCM()) {
 				print $this->getInstructionsForAnon ($project) ;
 			}
-	
+
 			// Instructions for developer access
 			print $this->getInstructionsForRW ($project) ;
 
@@ -196,24 +196,24 @@ abstract class SCMPlugin extends Plugin {
 			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
 			echo _('Data about current and past states of the repository') ;
-			if ($this->browserDisplayable ($project)) {
-				echo $this->getStatsBlock($project) ;
-				echo $this->getBrowserLinkBlock ($project) ;
+			if ($this->browserDisplayable($project)) {
+				echo $this->getStatsBlock($project);
+				echo $this->getBrowserLinkBlock($project);
 			}
-			
+
 			echo $HTML->boxBottom();
 			print '</td></tr></table>' ;
 		}
 	}
 
-	function printBrowserPage ($params) {
+	function printBrowserPage($params) {
 		global $HTML;
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
 				// print '<iframe src="'.util_make_url('/scm/browser.php?title='.$group->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
@@ -221,28 +221,28 @@ abstract class SCMPlugin extends Plugin {
 		}
 	}
 
-	function printAdminPage ($params) {
+	function printAdminPage($params) {
 		$group = group_get_object($params['group_id']);
-		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
+		if ( $group->usesPlugin($this->name) && $group->isPublic()) {
 			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
 		}
 	}
-	
-	function adminUpdate ($params) {
-		$project = $this->checkParams ($params) ;
+
+	function adminUpdate($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return false;
 		}
-		
-		if ($project->usesPlugin ($this->name) ) {
-			if ($params['scm_enable_anonymous']) {
+
+		if ($project->usesPlugin($this->name) ) {
+			if (isset($params['scm_enable_anonymous']) && $params['scm_enable_anonymous']) {
 				$project->SetUsesAnonSCM(true);
 			} else {
 				$project->SetUsesAnonSCM(false);
 			}
 		}
 	}
-	
+
 	function checkParams ($params) {
 		$group_id = $params['group_id'] ;
 		$project = group_get_object($group_id);
@@ -251,10 +251,10 @@ abstract class SCMPlugin extends Plugin {
 		} elseif ($project->isError()) {
 			return false;
 		}
-		
+
 		return $project ;
 	}
-	
+
 	function c($v) {
 		if ($v) {
 			return 'checked="checked"';
@@ -262,7 +262,7 @@ abstract class SCMPlugin extends Plugin {
 			return '';
 		}
 	}
-	
+
 }
 
 // Local Variables:
