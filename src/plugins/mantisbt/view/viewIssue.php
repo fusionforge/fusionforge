@@ -45,7 +45,7 @@ if (!isset($defect)) {
 
 if (!isset($errorPage)) {
     include('jumpToIssue.php');
-    echo "<h2 style='border-bottom: 1px solid black'>Détail du ticket #$idBug</h2>";
+    echo '<h2>'._('Ticket').' #'.$idBug.'</h2>';
 	echo	'<table>';
 	echo		'<tr style="background-color: gray;">';
 	echo 			'<td width="14%" >'._('Category').'</td>';
@@ -113,27 +113,6 @@ if (!isset($errorPage)) {
 	echo		'</tr>';
 	echo	'</table>';
 ?>
-<style>
-.notice_title {
-    background-color: #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    margin-bottom:0px;
-    cursor: pointer;
-    color: #4F93C3;
-}
-
-.notice_content {
-    border: 1px solid #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    -moz-border-radius-bottomright: 8px;
-    -moz-border-radius-bottomleft: 8px;
-    -webkit-border-bottom-right-radius: 8px;
-    -webkit-border-bottom-left-radius: 8px;
-    margin-top:0px;
-}
-</style>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery("#expandable_edition").hide();

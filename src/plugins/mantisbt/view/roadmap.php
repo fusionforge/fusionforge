@@ -64,30 +64,6 @@ if (!isset($errorPage)) {
 ?>
 	});
 </script>
-
-<style>
-.notice_title {
-	background-color: #D7E0EB;
-	padding: 10px;
-	font-weight: bold;
-	margin-bottom:0px;
-	cursor: pointer;
-	color: #4F93C3;
-}
-
-.notice_content {
-	border: 1px solid #D7E0EB;
-	padding: 10px;
-	font-weight: bold;
-	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-bottomleft: 8px;
-	-webkit-border-bottom-right-radius: 8px;
-	-webkit-border-bottom-left-radius: 8px;
-	margin-top:0px;
-}
-</style>
-
-<h2 style='border-bottom: 1px solid black'><?php echo _('Filters') ?></h2>
 <p class="notice_title" onclick='jQuery("#expandable_filter").slideToggle(300)'><?php echo _('Display filter rules') ?></p>
 
 <div id='expandable_filter' class="notice_content" style='clear: both'>
@@ -97,7 +73,6 @@ if (!isset($errorPage)) {
 </div>
 
 <?php
-	echo '<h2 style="border-bottom: 1px solid black">'._('Roadmap').'</h2>';
 	if (!isset($_POST['projectVersionId'])) {
 		if (isset($listVersions) && !empty($listVersions)) {
 			$listPrintVersions = $listVersions;
@@ -201,6 +176,8 @@ if (!isset($errorPage)) {
 				}
 			}
 		}
+	} else {
+		echo '<p class="warning">'._('No versions to display').'</p>';
 	}
 }
 ?>

@@ -1820,6 +1820,7 @@ src/plugins/mantisbt/www/img/up.gif -text svneol=unset#image/gif
 src/plugins/mantisbt/www/img/update.png -text svneol=unset#image/png
 src/plugins/mantisbt/www/index.php -text
 src/plugins/mantisbt/www/scripts/MantisBTController.js -text
+src/plugins/mantisbt/www/style.css -text
 src/plugins/mantisbt/www/user/index.php -text
 src/plugins/mediawiki/NAME -text
 src/plugins/mediawiki/README -text

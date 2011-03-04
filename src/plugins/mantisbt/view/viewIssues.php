@@ -61,30 +61,7 @@ if ($type != 'user') {
 }
 
 if (!isset($errorPage)) {
-	echo '<h2 style="border-bottom: 1px solid black">'._('Filters'). '</h2>';
 ?>
-<style>
-.notice_title {
-	background-color: #D7E0EB;
-	padding: 10px;
-	font-weight: bold;
-	margin-bottom:0px;
-	cursor: pointer;
-	color: #4F93C3;
-}
-
-.notice_content {
-	border: 1px solid #D7E0EB;
-	padding: 10px;
-	font-weight: bold;
-	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-bottomleft: 8px;
-	-webkit-border-bottom-right-radius: 8px;
-	-webkit-border-bottom-left-radius: 8px;
-	margin-top:0px;
-}
-</style>
-
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 	<?php
@@ -98,7 +75,7 @@ if (!isset($errorPage)) {
 		jQuery("#expandable_ticket").hide();
 	});
 </script>
-<p class="notice_title" onclick='jQuery("#expandable_filter").slideToggle(300)'><?php echo _('Display Filtering rules') ?></p>
+<p class="notice_title" onclick='jQuery("#expandable_filter").slideToggle(300)'><?php echo _('Display filter rules') ?></p>
 <div id='expandable_filter' class="notice_content" style='clear: both'>
 	<?php
 		include('mantisbt/controler/filter.php');
@@ -106,9 +83,6 @@ if (!isset($errorPage)) {
 </div>
 <br/>
 	<?php
-
-	echo '<h2 style="border-bottom: 1px solid black">'. _('Tickets') .'</h2>';
-
 	// recuperation des bugs
 	$listBug = array();
 	try {

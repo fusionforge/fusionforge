@@ -47,8 +47,6 @@ if ($use_tooltips) {
 	$labelAttr[] = array();
 }
 
-
-
 echo $HTML->subMenu($labelTitle, $labelPage, $labelAttr);
 
 // page a afficher

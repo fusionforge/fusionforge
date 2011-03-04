@@ -574,6 +574,7 @@ class MantisBTPlugin extends Plugin {
 		$returned = false;
 		html_use_tooltips();
 		use_javascript('/plugins/'.$this->name.'/scripts/MantisBTController.js');
+		use_stylesheet('/plugins/'.$this->name.'/style.css');
 		switch ($type) {
 			case 'project': {
 				global $group_id;

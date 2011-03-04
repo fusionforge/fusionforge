@@ -40,7 +40,7 @@ if (empty($msg)) {
 		$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
 	}
 
-	echo '<h2 style="border-bottom: 1px solid black">'._('Notes').'</h2>';
+	echo '<h2>'._('Notes').'</h2>';
 
 	if (isset($defect->notes)){
 		echo    '<table>';
@@ -71,28 +71,6 @@ if (empty($msg)) {
 		echo '<p class="warning">'._('No notes for this ticket').'</p>';
 	}
 ?>
-
-<style>
-.notice_title {
-    background-color: #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    margin-bottom:0px;
-    cursor: pointer;
-    color: #4F93C3;
-}
-
-.notice_content {
-    border: 1px solid #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    -moz-border-radius-bottomright: 8px;
-    -moz-border-radius-bottomleft: 8px;
-    -webkit-border-bottom-right-radius: 8px;
-    -webkit-border-bottom-left-radius: 8px;
-    margin-top:0px;
-}
-</style>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery("#expandable_note").hide();

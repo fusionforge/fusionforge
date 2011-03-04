@@ -42,7 +42,7 @@ if (empty($msg)) {
 	}
 
 	if (!isset($errorPage)){
-		echo '<h2 style="border-bottom: 1px solid black">'._('Attached files').'</h2>';
+		echo '<h2>'._('Attached files').'</h2>';
 		$boxTitle = 'Fichiers attach&eacute;s (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=addAttachment">Ajouter un fichier</a>)';
 		if (isset($defect->attachments) && count($defect->attachments) > 0) {
 			echo	'<table class="innertabs">';
@@ -67,27 +67,6 @@ if (empty($msg)) {
 		}
 	}
 ?>
-<style>
-.notice_title {
-    background-color: #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    margin-bottom:0px;
-    cursor: pointer;
-    color: #4F93C3;
-}
-
-.notice_content {
-    border: 1px solid #D7E0EB;
-    padding: 10px;
-    font-weight: bold;
-    -moz-border-radius-bottomright: 8px;
-    -moz-border-radius-bottomleft: 8px;
-    -webkit-border-bottom-right-radius: 8px;
-    -webkit-border-bottom-left-radius: 8px;
-    margin-top:0px;
-}
-</style>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         jQuery("#expandable_file").hide();
