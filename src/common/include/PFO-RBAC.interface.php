@@ -46,6 +46,9 @@ interface PFO_RBACEngine {
 	 * singleton creator
 	 */
 	public static function getInstance() ;
+	/**
+	 * returns roles available to the user in the current session
+	 */
 	public function getAvailableRoles() ; // From session
 	public function isActionAllowed($section, $reference, $action = NULL) ;
 	public function isGlobalActionAllowed($section, $action = NULL) ;

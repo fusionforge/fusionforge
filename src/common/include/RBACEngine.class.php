@@ -45,6 +45,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return self::$_instance;
 	}
 
+	/* (non-PHPdoc)
+	 * @see PFO_RBACEngine::getAvailableRoles()
+	 */
 	public function getAvailableRoles() {
 		if ($this->_cached_available_roles != NULL) {
 			return $this->_cached_available_roles ;
