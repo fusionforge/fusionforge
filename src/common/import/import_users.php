@@ -9,7 +9,7 @@ require_once $gfcommon.'include/Role.class.php';
 require_once $gfcommon.'include/RoleObserver.class.php';
 require_once $gfcommon.'include/rbac_texts.php';
 */
-
+/*
 $equivs_text_value['projectadmin']['None']='0';
 $equivs_text_value['projectadmin']['Admin']='A';
 $equivs_text_value['frs']['Read']='0';
@@ -42,8 +42,8 @@ $equivs_text_value['pm']['Admin Only']='3';
 $equivs_text_value['webcal']['No access']='0';
 $equivs_text_value['webcal']['Modify']='1';
 $equivs_text_value['webcal']['See']='2';
-
-
+*/
+/*
 $observer_equivs_text_value['projectpublic']['Private']=0;
 $observer_equivs_text_value['projectpublic']['Public']=1;
 $observer_equivs_text_value['scmpublic']['Private']=0;
@@ -60,8 +60,8 @@ $observer_equivs_text_value['pmpublic']['Private']=0;
 $observer_equivs_text_value['pmpublic']['Public']=1;
 $observer_equivs_text_value['frspackage']['Private']=0;
 $observer_equivs_text_value['frspackage']['Public']=1;
-
-
+*/
+/*
 $equivs_name_value['Documentation Manager']='docman';
 $equivs_name_value['File Release System']='frs';
 $equivs_name_value['Forum Admin']='forumadmin';
@@ -73,8 +73,8 @@ $equivs_name_value['Tracker Admin']='trackeradmin';
 $equivs_name_value['Tracker:']='tracker';
 $equivs_name_value['Webcal']='webcal';
 $equivs_name_value['SCM']='scm';
-
-
+*/
+/*
 $observer_equivs_name_value['Project']='projectpublic';
 $observer_equivs_name_value['SCM']='scmpublic';
 $observer_equivs_name_value['Forum:']='forumpublic';
@@ -84,18 +84,19 @@ $observer_equivs_name_value['Project']='projectpublic';
 $observer_equivs_name_value['Tracker:AnonPost:']='trackeranon';
 $observer_equivs_name_value['Tasks:']='pmpublic';
 $observer_equivs_name_value['Files']='frspackage';
-
+*/
+/*
 global $cache_forums;
 global $cache_tasks;
 global $cache_trackers;
 global $cache_frs;	
-	
+*/
 //$cache_forums=array();
 //$cache_tasks=array();
 //$cache_trackers=array();
 //$cache_frs=array();	
 
-
+/*
 function get_role_by_name($role,$group_id){
 	$role_id = FALSE;
   $res = db_query_params('SELECT role_id
@@ -107,6 +108,9 @@ function get_role_by_name($role,$group_id){
   }
   return $role_id;
 }
+*/
+
+/*
 function check_roles(&$roles, $group_id){
   $rolestodelete = array();
   $res = db_query_params('SELECT role_id,role_name
@@ -126,8 +130,8 @@ function check_roles(&$roles, $group_id){
   }
   return $rolestodelete;
 }
-	
-
+*/	
+/*
 function get_forum_id($forumname,$group_id,$i){
   $forum_id=-1;
 		
@@ -153,7 +157,8 @@ function get_forum_id($forumname,$group_id,$i){
   }
   return $forum_id;
 }
-	
+*/
+/*
 function get_tasks_id($taskname,$group_id,$i){
   $task_id=-1;
 		
@@ -179,7 +184,8 @@ function get_tasks_id($taskname,$group_id,$i){
   }
   return $task_id;
 }
-	
+*/
+/*
 function get_tracker_id($trackername,$group_id,$i){
   $tracker_id=-1;
 		
@@ -206,8 +212,8 @@ function get_tracker_id($trackername,$group_id,$i){
   }
   return $tracker_id;
 }
-	
-	
+*/	
+/*
 function get_frs_id($frsname, $group_id){
   $frs_id=-1;
   if(array_key_exists($trackername,$cache_frs)){
@@ -230,7 +236,8 @@ function get_frs_id($frsname, $group_id){
 		
   return $frs_id;
 }
-	
+*/
+/*	
 function role_update($group_id, $rolename, $role_id, $data){
 
   if ($role_id=='observer') {
@@ -267,32 +274,33 @@ function role_update($group_id, $rolename, $role_id, $data){
     plugin_hook('change_cal_permission_auto',$group_id);	
   }
 }
+*/
 	
-function role_create($group_id, $rolename, $data){
-  $role = new Role(group_get_object($group_id),false);
-  if (!$role || !is_object($role)) {
-    exit_error('Error',_('Could Not Get Role'));
-  } elseif ($role->isError()) {
-    exit_error('Error',$role->getErrorMessage());
-  }
-  echo "<br>Role added:".$rolename;/*
-				     var_dump($rolename);	
-				     echo "<br>";
-				     echo "groupidid:<br>";
-				     var_dump($group_id);
-				     echo "<br>";
-				     echo "data:<br>";
-				     var_dump($data);
-				     echo "<br>";*/
-  $role_id=$role->create($rolename,$data);
-  if (!$role_id) {
-    $feedback = $role->getErrorMessage();
-  } else {
-    $feedback = _('Successfully Created New Role');
-  }
-  plugin_hook('change_cal_permission_auto',$group_id);	
-}
-	
+//function role_create($group_id, $rolename, $data){
+//  $role = new Role(group_get_object($group_id),false);
+//  if (!$role || !is_object($role)) {
+//    exit_error('Error',_('Could Not Get Role'));
+//  } elseif ($role->isError()) {
+//    exit_error('Error',$role->getErrorMessage());
+//  }
+//  echo "<br>Role added:".$rolename;/*
+//				     var_dump($rolename);	
+//				     echo "<br>";
+//				     echo "groupidid:<br>";
+//				     var_dump($group_id);
+//				     echo "<br>";
+//				     echo "data:<br>";
+//				     var_dump($data);
+//				     echo "<br>";*/
+//  $role_id=$role->create($rolename,$data);
+//  if (!$role_id) {
+//    $feedback = $role->getErrorMessage();
+//  } else {
+//    $feedback = _('Successfully Created New Role');
+//  }
+//  plugin_hook('change_cal_permission_auto',$group_id);	
+//}
+/* TODO : reactivate or get rid, depending if still of any use 	
 function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $observer_equivs_text_value, $observer_equivs_name_value ){
   //	$debugdata=array();
   foreach($roles as $rolename => $rights){
@@ -376,7 +384,7 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
   }
   //	var_dump($debugdata);
 }
-	
+*/
 
 /**
  * Insert users into the group
@@ -386,8 +394,8 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
  * @param unknown_type $check
  */
 function user_fill($users, $group_id, $check=False){
-		global $feedback;
-		global $message;
+	global $feedback;
+	global $message;
 	
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group)) {
