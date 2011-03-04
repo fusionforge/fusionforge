@@ -18,24 +18,24 @@ then
 		exit 1
 	else
 		HOST=$1
-		case $HOST in
-			*deb*)
-				LXCTEMPLATE=$LXCDEBTEMPLATE
-				IPBASE=$IPDEBBASE
-				VEID=$VEIDDEB
-				IPMASK=$IPDEBMASK
-				IPGW=$IPDEBGW
-				;;
-			*centos*)
-				LXCTEMPLATE=$LXCCOSTEMPLATE
-				IPBASE=$IPCOSBASE
-				VEID=$VEIDCOS
-				IPMASK=$IPCOSMASK
-				IPGW=$IPCOSGW
-				;;
-		esac
 	fi
 fi
+case $HOST in
+	*deb*)
+		LXCTEMPLATE=$LXCDEBTEMPLATE
+		IPBASE=$IPDEBBASE
+		VEID=$VEIDDEB
+		IPMASK=$IPDEBMASK
+		IPGW=$IPDEBGW
+		;;
+	*centos*)
+		LXCTEMPLATE=$LXCCOSTEMPLATE
+		IPBASE=$IPCOSBASE
+		VEID=$VEIDCOS
+		IPMASK=$IPCOSMASK
+		IPGW=$IPCOSGW
+		;;
+esac
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
