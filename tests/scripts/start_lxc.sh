@@ -39,9 +39,9 @@ then
 	fi
 fi
 [ -z $IPBASE ] || exit 2
-[ -z $VEID ] || exit 2
-[ -z $IPMASK ] || exit 2
-[ -z $IPGW ] || exit 2
+[ -z $VEID ] || exit 3
+[ -z $IPMASK ] || exit 4
+[ -z $IPGW ] || exit 5
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
