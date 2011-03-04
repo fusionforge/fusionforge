@@ -252,6 +252,7 @@ class MantisBTPlugin extends Plugin {
 	function updateProjectMantis($groupId, $groupName, $groupIspublic) {
 		$groupObject = group_get_object($groupId);
 		$projet = array();
+		$localMantisbtConf = $this->getMantisBTConf();
 		$project['name'] = $groupName;
 		$project['status'] = "development";
 
@@ -262,13 +263,10 @@ class MantisBTPlugin extends Plugin {
 			$project['view_state'] = 50;
 		}
 
-
-		$idMantisbt = getIdProjetMantis($groupId);
-
-		if ($idMantisbt) {
+		if ($localMantisbtConf['id_mantisbt'] != 0) {
 			try {
-				$clientSOAP = new SoapClient(forge_get_config('server_url','mantisbt')."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
-				$update = $clientSOAP->__soapCall('mc_project_update', array("username" => forge_get_config('adminsoap_user','mantisbt'), "password" => forge_get_config('adminsoap_password','mantisbt'), "project_id" => $idMantisbt, "project" => $project));;
+				$clientSOAP = new SoapClient($localMantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
+				$update = $clientSOAP->__soapCall('mc_project_update', array("username" => $localMantisbtConf['soap_user'], "password" => $localMantisbtConf['soap_password'], "project_id" => $localMantisbtConf['id_mantisbt'], "project" => $project));
 			} catch (SoapFault $soapFault) {
 				$groupObject->setError('updateProjectMantis::Error' . ' '. $soapFault->faultstring);
 				return false;
