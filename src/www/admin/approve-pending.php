@@ -185,7 +185,9 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	print "<p><strong>" ._('Other Information')."</strong></p>";
 	print "<p>" ._('Unix Project Name:'). " ".$row_grp['unix_group_name']."</p>";
 
-	print "<p>" ._('Submitted Description:'). "</p><blockquote>".$row_grp['register_purpose']."</blockquote>";
+	print "<p>" ._('Submitted Description:'). "</p><blockquote>".$row_grp['short_description']."</blockquote>";
+
+	print "<p>" ._('Purpose of submission:'). "</p><blockquote>".$row_grp['register_purpose']."</blockquote>";
 
 	if ($row_grp['license']=="other") {
 		print "<p>" ._('License Other:'). "</p><blockquote>".$row_grp['license_other']."</blockquote>";
