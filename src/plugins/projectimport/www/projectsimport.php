@@ -222,7 +222,7 @@ class ProjectsImportPage {
 				$html .= '</table>';
 			}
 			else {
-				$feedback .= 'parsing problem <br />';
+				$feedback .= 'Found no projects <br />';
 			}
 		}
 		return $html;

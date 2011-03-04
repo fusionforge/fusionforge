@@ -15,6 +15,9 @@
  */
 
 // Import users from a JSON file (Site Admin tool)
+// Users are created in the pending queue, and await forge admin moderation
+
+// TODO : add confirmation pass instead of batch insertion
 
 require_once('../../../www/env.inc.php');
 require_once $gfwww.'include/pre.php';
@@ -119,7 +122,7 @@ class UsersImportPage {
 			//			print_r($imported_file);
 			$this->importer->parse_OSLCCoreRDFJSON($json);
 
-			$debug = TRUE;
+			$debug = FALSE;
 			if($debug) {
 			 // Debug the loaded triples 
 			 $triples = $this->importer->parse_OSLCCoreRDFJSON($json);
@@ -146,6 +149,7 @@ class UsersImportPage {
 		// and if it has data we can work
 		// If it indeed has valid data
 		if ($this->importer->has_project_dump()) {
+			
 			$this->message .= "Here are the results from your upload :";
 				
 			// start HTML output
@@ -199,11 +203,11 @@ class UsersImportPage {
 				$html .= $this->html_generator->boxBottom();
 
 			}
-		}
-		else {
-				$feedback .= 'parsing problem <br />';
-		}
 		
+			else {
+				$feedback .= 'Found no users<br />';
+			}
+		}
 		return $html;
 	}
 	
