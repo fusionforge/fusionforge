@@ -28,6 +28,8 @@ export DEBMIRROR
 
 export DIST
 export VMENGINE
+export SSHPUBKEY
+export HOSTKEYDIR
 
 if [ "x${HUDSON_URL}" = "x" ]
 then
