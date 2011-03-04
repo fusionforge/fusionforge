@@ -1,5 +1,7 @@
 #! /usr/bin/perl -w
 
+# TODO : document what this script is doing
+
 use DBI;
 use File::Temp ;
 use strict ;
