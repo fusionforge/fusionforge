@@ -18,24 +18,30 @@ then
 		exit 1
 	else
 		HOST=$1
+		# When HOST is given as an arg, I have to guesse which data to take
+		# depending on the host name
+		case $HOST in
+			*deb*)
+				LXCTEMPLATE=$LXCDEBTEMPLATE
+				IPBASE=$IPDEBBASE
+				VEID=$VEIDDEB
+				IPMASK=$IPDEBMASK
+				IPGW=$IPDEBGW
+				;;
+			*centos*)
+				LXCTEMPLATE=$LXCCOSTEMPLATE
+				IPBASE=$IPCOSBASE
+				VEID=$VEIDCOS
+				IPMASK=$IPCOSMASK
+				IPGW=$IPCOSGW
+				;;
+		esac
 	fi
 fi
-case $HOST in
-	*deb*)
-		LXCTEMPLATE=$LXCDEBTEMPLATE
-		IPBASE=$IPDEBBASE
-		VEID=$VEIDDEB
-		IPMASK=$IPDEBMASK
-		IPGW=$IPDEBGW
-		;;
-	*centos*)
-		LXCTEMPLATE=$LXCCOSTEMPLATE
-		IPBASE=$IPCOSBASE
-		VEID=$VEIDCOS
-		IPMASK=$IPCOSMASK
-		IPGW=$IPCOSGW
-		;;
-esac
+[ -z $IPBASE ] || exit 2
+[ -z $VEID ] || exit 2
+[ -z $IPMASK ] || exit 2
+[ -z $IPGW ] || exit 2
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
