@@ -119,6 +119,7 @@ class ImportedProject {
 			$spaceres = ProjectImporter::make_resource($space);
 			$provider = $spaceres->getPropValue('planetforge:provided_by');
 			if (! $importer->supportsTool($provider))	{
+				if ($feedback) $feedback .= '<br />';
 				$feedback .= 'error : no supported provider for '. $space .': '. $provider."!\n";
 			}
 			else {
@@ -174,12 +175,9 @@ class ImportedUser {
 	}
 	function init_owner_props($res) {
 		$name = $res->getPropValue('foaf:name');
-		print_r('Name: '.$name);
 		$first = '';
 		$last = '';
 		list($first, $last) = explode(' ', str_replace('/\s+/gi',' ',$name), 2);
-		print_r('first: '.$first);
-		print_r('last: '.$last);
 		$this->firstname = $first;
 		$this->lastname = $last;
 	}	
@@ -250,7 +248,7 @@ class ProjectImporter {
 					      'planetforge:NewsTool',
 					      'planetforge:FilesReleasesTool',
 						  'planetforge:SvnScmTool');
-		
+
 	/**
 	 * Enter description here ...
 	 * @var unknown_type
@@ -265,17 +263,17 @@ class ProjectImporter {
 				'doap' => 'http://usefulinc.com/ns/doap#',
 				'sioc' => 'http://rdfs.org/sioc/ns#',
 				'planetforge' => PLANETFORGE_NS
-				);
-				
+	);
+
 	public static function getInstance() {
 		if (!isset(self::$_instance)) {
 			$c = __CLASS__;
 			self::$_instance = new $c;
 		}
-		
+
 		return self::$_instance;
 	}
-				
+
 	/**
 	 * TODO Enter description here ...
 	 * @param unknown_type $group_id
@@ -286,17 +284,17 @@ class ProjectImporter {
 			$the_group_id = $group_id;
 		}
 		self::$_instance = $this;
-	  $this->group_id = $the_group_id;
-	  $this->index = False;
-	  
-	  
-	  $this->trackers = array();
-	  $this->users = False;
-	  $this->persons = False;
-	  $this->project_dump_res = False;
-	  $this->user_names = array();
-	  $this->user_roles = array();
-	  
+		$this->group_id = $the_group_id;
+		$this->index = False;
+
+
+		$this->trackers = array();
+		$this->users = False;
+		$this->persons = False;
+		$this->project_dump_res = False;
+		$this->user_names = array();
+		$this->user_roles = array();
+
 	}
 
 	/**
@@ -306,59 +304,68 @@ class ProjectImporter {
 	 */
 	function parse_OSLCCoreRDFJSON($json)
 	{
-	  $conf = array('ns' => ProjectImporter::$ns);
+		$conf = array('ns' => ProjectImporter::$ns);
 
-	  // "load" the ARC2 plugin to parse RDF ala OSLC in JSON 
-	  $parser = ARC2::getComponent("OSLCCoreRDFJSONParserPlugin", $conf);
+		// "load" the ARC2 plugin to parse RDF ala OSLC in JSON
+		$parser = ARC2::getComponent("OSLCCoreRDFJSONParserPlugin", $conf);
 
-/*
+		$debug = FALSE;
+		//$debug = TRUE;
+		if ($debug) {
 			$arr = json_decode($json, true);
 			if ($arr) {
-//				$feedback = "JSON decoded to :";
-//				$message .= '<pre>'. nl2br(print_r($arr, true)) . '</pre>';
-				$prefixes=false;
-				$result=false;
-				foreach($arr as $type => $tabType){
-//					$message .= 'type: '.$type.'<br />';
-//					$message .= '<pre>'. nl2br(print_r($tabType, true)) . '</pre>';
+				$message = "JSON decoded to :";
+				$message .= '<pre>'. nl2br(print_r($arr, true)) . '</pre>';
+				echo $message;
+				
+				/*
+				 $prefixes=false;
+				 $result=false;
+				 foreach($arr as $type => $tabType){
+				 //					$message .= 'type: '.$type.'<br />';
+				 //					$message .= '<pre>'. nl2br(print_r($tabType, true)) . '</pre>';
 
-					if ($type=="users"){
-						$users = $tabType;	
-					}
-					elseif($type=="roles"){
-						$roles = $tabType;
-					}
-					elseif($type=="trackers"){
-						$trackers = $tabType;
-					}
-					elseif($type=="docman"){
-						$docman = $tabType;
+				 if ($type=="users"){
+				 $users = $tabType;
+				 }
+				 elseif($type=="roles"){
+				 $roles = $tabType;
+				 }
+				 elseif($type=="trackers"){
+				 $trackers = $tabType;
+				 }
+				 elseif($type=="docman"){
+				 $docman = $tabType;
 					}
 					elseif($type=="frs"){
 						$frs = $tabType;
 					}
 					elseif($type=='forums'){
 						$forums = $tabType;
-					}
-					elseif($type=='forgeplucker:trackers') {
+						}
+						elseif($type=='forgeplucker:trackers') {
 						foreach($tabType as $bar)
 						{
-							$result = json_encode($bar);
+						$result = json_encode($bar);
 						}
 						break;
-					}
-					elseif($type=='prefixes') {
+						}
+						elseif($type=='prefixes') {
 						$prefixes = $tabType;
-					}
-				}
-				$result['prefixes']=$prefixes;
-				$message .= '<pre>'. nl2br(print_r($arr, true)) . '</pre>';
+						}
+						}
+						$result['prefixes']=$prefixes;
+						$message .= '<pre>'. nl2br(print_r($arr, true)) . '</pre>';
 				$arr = $parser->parseData($result);
 */
+			}
+		}
 	  $parser->parseData($json);
 	  $triples = $parser->getTriples();
-//			echo 'triples :';
-//			print_r($triples);
+	  if ($debug) {
+			echo 'triples :';
+			echo '<pre>'. nl2br(print_r($triples, true)) . '</pre>';
+	  }
 	  $this->index = ARC2::getSimpleIndex($triples, false);
 	  return $triples;
 	}
@@ -372,11 +379,11 @@ class ProjectImporter {
 	static function make_resource($uri) {
 		$importer = ProjectImporter::getInstance();
 		$index = $importer->index;
-	  $conf = array('ns' => ProjectImporter::$ns);
-	  $res = ARC2::getResource($conf);
-	  $res->setIndex($index);
-	  $res->setUri($uri);
-	  return $res;
+		$conf = array('ns' => ProjectImporter::$ns);
+		$res = ARC2::getResource($conf);
+	  	$res->setIndex($index);
+	  	$res->setUri($uri);
+	  	return $res;
 	}
 
 	/**
@@ -388,10 +395,20 @@ class ProjectImporter {
 			$dumpres = array();
 
 			$dumpresuri = False;
+			$debug = FALSE;
+			//$debug = TRUE;
+			if($debug) {
+				echo '<pre>';
+				print_r($this->index);
+				echo '</pre>';
+			}
 			foreach ($this->index as $uri => $resource) {
+				//echo '<pre>';
+				//print_r('URI : '. $uri);
+				//print_r($resource);
+				//echo '</pre><br />';
 				$res = ProjectImporter::make_resource($uri);
 				if ($res->hasPropValue('rdf:type', 'http://planetforge.org/ns/forgeplucker_dump/project_dump#')) {
-					//	    if ($this->is_project_dump($resource)) {
 					$dumpresuri = $uri;
 					break;
 				}
@@ -401,6 +418,25 @@ class ProjectImporter {
 				//	    $dumpres = $this->index[$dumpresuri];Enter description here ...
 				$dumpres = ProjectImporter::make_resource($dumpresuri);
 			}
+			else {
+				// assuming it misses the top-level resource, so adding one
+				if (array_key_exists('', $this->index)) {
+					$base = $this->index[''];
+				
+
+					$about = array();
+					$about[] = array('value' => 'http://coin.example.com/');
+					$base['http://www.w3.org/1999/02/22-rdf-syntax-ns#about'] = $about;
+
+					$type = array();
+					$type[] = array('value' => 'http://planetforge.org/ns/forgeplucker_dump/project_dump#');
+					$base['http://www.w3.org/1999/02/22-rdf-syntax-ns#type'] = $type; 
+
+					$this->index['http://coin.example.com/'] = $base;
+					$dumpres = ProjectImporter::make_resource('http://coin.example.com/');
+				}
+			}
+			//print_r($dumpres);
 			$this->project_dump_res = $dumpres;
 		}
 		return $this->project_dump_res;
@@ -491,6 +527,7 @@ class ProjectImporter {
 			// parse the users
 			$users = $dumpres->getPropValues('forgeplucker:users');
 			foreach ($users as $user) {
+				//print_r('User : '.$user);
 				//	      print_r($this->index[$user]);
 				$res = ProjectImporter::make_resource($user);
 				
