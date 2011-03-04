@@ -418,7 +418,7 @@ function user_fill($users, $group_id, $check=False){
 				if (!$group->addUser($user,$role_id)) {
 					$feedback = $group->getErrorMessage();
 				} else {
-					echo 'User added:'.$user.'<br>';
+					//echo 'User added:'.$user.'<br>';
 					$feedback = _('User Added Successfully');
 
 					//plugin webcal
