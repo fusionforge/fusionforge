@@ -38,10 +38,10 @@ then
 		esac
 	fi
 fi
-[ -z $IPBASE ] || exit 2
-[ -z $VEID ] || exit 3
-[ -z $IPMASK ] || exit 4
-[ -z $IPGW ] || exit 5
+[ -z $IPBASE ] && exit 2
+[ -z $VEID ] && exit 3
+[ -z $IPMASK ] && exit 4
+[ -z $IPGW ] && exit 5
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
