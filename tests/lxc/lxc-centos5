@@ -179,7 +179,7 @@ download_centos()
 
     cat <<EOF > /var/cache/rinse/$DISTRO-$arch.before_post_install
 echo "Rinse defines mirror=\$mirror in config"
-server=`echo \$mirror | cut -d/ -f3`
+server=\`echo \$mirror | cut -d/ -f3\`
 echo "Disable mirrorlists"
 sed -i -e "s/^mirrorlist=/#mirrorlist=/" $cache/partial-$arch/etc/yum.repos.d/CentOS-Base.repo
 echo "Setup baseurl on server \$server"
