@@ -255,6 +255,7 @@ class Group extends Error {
 	 * create - Create new group.
 	 *
 	 * This method should be called on empty Group object.
+	 * It will add an entry for a pending group/project (status 'P') 
 	 *
 	 * @param	object	The User object.
 	 * @param	string	The full name of the user.
