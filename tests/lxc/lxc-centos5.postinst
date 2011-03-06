@@ -59,7 +59,7 @@ configure_hostkeydir(){
 		exit 1
 	else
 		[ -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
-		[ -e $hostkeydir ] || cp $hostkeydir/ssh_host_* $rootfs/etc/ssh/
+		[ -e $hostkeydir ] && cp $hostkeydir/ssh_host_* $rootfs/etc/ssh/
 	fi
 }
 
