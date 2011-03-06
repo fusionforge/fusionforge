@@ -29,7 +29,7 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 
 		system("scp -p root@".HOST.":/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt");
 		system("ssh root@".HOST." '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini'");
-		system("ssh root@".HOST." '/usr/share/tests/func/db_reload.php'");
+		system("ssh root@".HOST." 'php -f /usr/share/tests/func/db_reload.php'");
 		system("ssh root@".HOST." 'su - postgres -c \"pg_dump -Fc gforge\" > /root/dump'") ;
 
 		// Install a fake sendmail to catch all outgoing emails.
