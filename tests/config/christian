@@ -14,7 +14,7 @@ IPCOSDNS=192.168.50.5
 IPCOSMASK=255.255.255.0
 IPCOSGW=192.168.50.1
 
-SSHPUBKEY=~buildbot/.ssh/id_rsa.pub
+SSHPUBKEY=~/.ssh/id_rsa.pub
 
 DEBMIRROR=http://christian.bayle.eu/debian
 VMENGINE=lxc
