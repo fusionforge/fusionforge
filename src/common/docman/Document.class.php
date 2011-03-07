@@ -950,7 +950,7 @@ class Document extends Error {
 	function trash() {
 		$this->setState('2');
 		$dm = new DocumentManager($this->Group);
-		$this->setParentDocID($dm->getTrashID());
+		$this->setDocGroupID($dm->getTrashID());
 		$this->setLock(0);
 		$this->setReservedBy(0);
 		$this->sendNotice(false);
