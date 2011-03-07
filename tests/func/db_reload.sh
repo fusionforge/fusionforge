@@ -1,4 +1,5 @@
 #! /bin/sh
+[ $# -eq 1 ] || exit 1
 
 echo "Cleaning up the database"
 if type invoke-rc.d 
@@ -9,7 +10,7 @@ else
 fi
 
 invoke-rc.d postgresql restart
-su - postgres -c "dropdb -e gforge"
+su - postgres -c "dropdb -e $1"
 echo "Executing: pg_restore -C -d template1 < /root/dump"
 su - postgres -c "pg_restore -C -d template1" < /root/dump
 

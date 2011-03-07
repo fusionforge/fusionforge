@@ -24,7 +24,7 @@ define ('ROOT', '');
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "ssh root@".HOST." '/root/db_reload.sh ; touch /tmp/fusionforge-use-pfo-rbac'");
+define('DB_INIT_CMD', "ssh root@".HOST." '/root/db_reload.sh ".DB_NAME."; touch /tmp/fusionforge-use-pfo-rbac'");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')
