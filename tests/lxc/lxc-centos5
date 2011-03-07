@@ -121,6 +121,7 @@ EOF
 #    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls plymouth*.conf); do mv $f $f.orig; done'
 #    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls hwclock*.conf); do mv $f $f.orig; done'
 #    chroot $rootfs /bin/bash -c 'cd /etc/init; for f in $(ls module*.conf); do mv $f $f.orig; done'
+mv $rootfs/sbin/hwclock $rootfs/sbin/hwclock.removed_by_lxc
 
     echo "Please change root-password !"
     echo "root:root" | chroot $rootfs chpasswd
@@ -175,7 +176,7 @@ download_centos()
     echo "Downloading centos minimal ..."
     #febootstrap $DISTRO $cache/partial-$arch
     rinsearch=`dpkg-architecture -qDEB_BUILD_ARCH`
-    pkglist="openssh-server man zsh bind-utils openssh-clients php wget"
+    pkglist="openssh-server man zsh bind-utils openssh-clients php wget avahi"
 
     cat <<EOF > /var/cache/rinse/$DISTRO-$arch.before_post_install
 echo "Rinse defines mirror=\$mirror in config"
