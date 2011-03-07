@@ -25,7 +25,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("ssh root@".HOST." 'LANG=C a2dissite default'");
 		system("ssh root@".HOST." 'LANG=C invoke-rc.d apache2 reload'");
 		system("ssh root@".HOST." 'LANG=C touch /tmp/fusionforge-use-pfo-rbac'");
-		system("scp ../tests/func/db_reload.sh root@".HOST.":");
+		system("scp ../tests/func/db_reload.sh root@".HOST.":/root");
 		system("ssh root@".HOST." '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini'");
 		system("ssh root@".HOST." 'su - postgres -c \"pg_dump -Fc ".DB_NAME."\" > /root/dump'") ;
 		system("ssh root@".HOST." 'invoke-rc.d cron stop'");
