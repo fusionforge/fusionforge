@@ -98,10 +98,11 @@ EOF
 #none            /lib/init/rw              tmpfs           mode=0755,nosuid,optional         0 0
 #EOF
 cat <<EOF > $rootfs/etc/fstab
-none /dev/pts devpts defaults 0 0
-none /proc    proc   defaults 0 0
-none /sys     sysfs  defaults 0 0
-none /dev/shm tmpfs  defaults 0 0
+# NOT MOUNTING IN LXC
+#none /dev/pts devpts defaults 0 0
+#none /proc    proc   defaults 0 0
+#none /sys     sysfs  defaults 0 0
+#none /dev/shm tmpfs  defaults 0 0
 EOF
 
     # reconfigure some services
@@ -276,7 +277,7 @@ copy_configuration()
 lxc.tty = 4
 lxc.pts = 1024
 lxc.rootfs = $rootfs
-lxc.mount  = $path/fstab
+# lxc.mount  = $path/fstab
 
 # lxc.console = /dev/console
 
@@ -296,14 +297,19 @@ lxc.cgroup.devices.allow = c 136:* rwm
 lxc.cgroup.devices.allow = c 5:2 rwm
 # rtc
 lxc.cgroup.devices.allow = c 254:0 rwm
+
+# mounts point
+lxc.mount.entry=proc $rootfs/proc proc nodev,noexec,nosuid 0 0
+lxc.mount.entry=devpts $rootfs/dev/pts devpts defaults 0 0
+lxc.mount.entry=sysfs $rootfs/sys sysfs defaults  0 0
 EOF
 
-    cat <<EOF > $path/fstab
-proc            $rootfs/proc         proc    nodev,noexec,nosuid 0 0
-devpts          $rootfs/dev/pts      devpts defaults 0 0
-#sysfs           $rootfs/sys          sysfs defaults  0 0
-tmpfs           $rootfs/dev/shm      tmpfs defaults 0 0
-EOF
+#    cat <<EOF > $path/fstab
+#proc            $rootfs/proc         proc    nodev,noexec,nosuid 0 0
+#devpts          $rootfs/dev/pts      devpts defaults 0 0
+##sysfs           $rootfs/sys          sysfs defaults  0 0
+#tmpfs           $rootfs/dev/shm      tmpfs defaults 0 0
+#EOF
 
     if [ $? -ne 0 ]; then
 	echo "Failed to add configuration"
