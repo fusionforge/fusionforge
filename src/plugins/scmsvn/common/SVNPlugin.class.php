@@ -302,7 +302,7 @@ class SVNPlugin extends SCMPlugin {
 			}
 
 			if ( $project->enableAnonSCM() ) {
-				$access_data .= ".forge_get_config('anonsvn_login', 'scmsvn').= r\n" ;
+				$access_data .= forge_get_config('anonsvn_login', 'scmsvn')." = r\n" ;
 				$access_data .= "* = r\n" ;
 				
 			}
@@ -312,7 +312,7 @@ class SVNPlugin extends SCMPlugin {
 		foreach ($svnusers as $user_id => $user) {
 			$password_data .= $user->getUnixName().':'.$user->getUnixPasswd()."\n" ;
 		}
-		$password_data .= forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_pass', 'scmsvn'))."\n";
+		$password_data .= forge_get_config('anonsvn_login', 'scmsvn').":".htpasswd_apr1_md5(forge_get_config('anonsvn_password', 'scmsvn'))."\n";
 
 		$fname = forge_get_config('data_path').'/svnroot-authfile' ;
 		$f = fopen ($fname.'.new', 'w') ;

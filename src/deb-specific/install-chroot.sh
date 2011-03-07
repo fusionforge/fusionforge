@@ -10,7 +10,7 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-CHROOTDIR=/var/lib/gforge/chroot
+CHROOTDIR=$(/usr/share/gforge/bin/forge_get_config chroot)
 
 case "$1" in
     configure)
