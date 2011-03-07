@@ -9,6 +9,7 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 		parent::setUp();
 
 		system("scp -r ../tests root@".HOST.":/opt");
+		system("scp ../tests/func/db_reload.sh root@".HOST.":/root");
 
 		if (getenv('BUILDRESULT')) {
 			system("scp ".getenv('BUILDRESULT')."/fusionforge-*.tar.bz2 root@".HOST.":");

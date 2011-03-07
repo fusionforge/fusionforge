@@ -9,6 +9,7 @@ class RPMSeleniumRemoteSuite extends SeleniumRemoteSuite
 		parent::setUp();
 
 		system("scp -r ../tests root@".HOST.":/usr/share");
+		system("scp ../tests/func/db_reload.sh root@".HOST.":/root");
 		system("ssh root@".HOST." 'ln -s gforge /usr/share/src'");
 		
 		system("scp -rp ~/fusionforge_repo root@".HOST.":");
