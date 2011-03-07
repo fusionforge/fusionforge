@@ -112,6 +112,7 @@ less,\
 htop,\
 zsh,\
 debconf-utils,\
+avahi-utils,\
 openssh-server
 
     cache=$1
