@@ -3,7 +3,7 @@
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
 
-export CONFIG_PHP=func/config.php.buildbotDEB
+export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 

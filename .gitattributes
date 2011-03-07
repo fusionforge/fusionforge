@@ -4858,7 +4858,6 @@ tests/func/Trackers/relationTest.php -text
 tests/func/Trackers/trackersTest.php -text
 tests/func/Trackers/workflowTest.php -text
 tests/func/config.php.buildbot -text
-tests/func/config.php.buildbotDEB -text
 tests/func/config.php.ffsandbox -text
 tests/func/config.php.sample -text
 tests/func/config.php.tests -text
