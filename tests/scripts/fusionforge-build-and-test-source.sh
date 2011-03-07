@@ -11,7 +11,7 @@ export SELENIUM_RC_DIR=$WORKSPACE/reports
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
 
-export VEID=$VEIDCOS
+export VEID=$VEIDSRC
 
 export LXCTEMPLATE=$LXCCOSTEMPLATE
 
@@ -23,7 +23,7 @@ export IPGW=$IPCOSGW
 ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 export VZTEMPLATE=centos-$COSVERS-$ARCH-minimal
 export VZPRIVATEDIR
-export HOST=centos5.local
+export HOST=centos5src.local
 export DEBMIRROR
 
 export DIST
@@ -41,7 +41,6 @@ then
 else
 	export SELENIUM_RC_URL=${HUDSON_URL}job/$JOB_NAME/ws/reports
 	export FFORGE_RPM_REPO=${HUDSON_URL}job/$JOB_NAME/ws/build/packages
-	export HOST=centos52.local
 	export VZTEMPLATE=centos-5-x86
 fi
 export DB_NAME=fforge
