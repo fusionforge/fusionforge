@@ -143,6 +143,9 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		return $result ;
 	}
 
+	/* (non-PHPdoc)
+	 * @see PFO_RBACEngine::isActionAllowed()
+	 */
 	public function isActionAllowed ($section, $reference, $action = NULL) {
 		$rlist = $this->getAvailableRoles () ;
 		foreach ($rlist as $r) {
@@ -429,6 +432,12 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 	}
 }
 
+/**
+ * Check if permission is allowed for an action on a reference in the context of a section
+ * @param string $section
+ * @param unknown_type $reference (group_id, ...)
+ * @param string $action
+ */
 function forge_check_perm ($section, $reference, $action = NULL) {
 	$engine = RBACEngine::getInstance() ;
 

@@ -50,6 +50,12 @@ interface PFO_RBACEngine {
 	 * returns roles available to the user in the current session
 	 */
 	public function getAvailableRoles() ; // From session
+	/**
+	 * TODO Enter description here ...
+	 * @param string $section
+	 * @param unknown_type $reference group_id, ...
+	 * @param string $action
+	 */
 	public function isActionAllowed($section, $reference, $action = NULL) ;
 	public function isGlobalActionAllowed($section, $action = NULL) ;
 	public function isActionAllowedForUser($user, $section, $reference, $action = NULL) ;
