@@ -44,6 +44,16 @@ if (count ($argv) == 3) {
 				print "$s/$v\n" ;
 			}
 		}
+	} elseif ($argv[1] == 'list-all-variables-values') {
+		$c = FusionForgeConfig::get_instance () ;
+		$sections = $c->get_sections() ;
+		foreach ($sections as $s) {
+			$variables = $c->get_variables($s) ;
+			foreach ($variables as $v) {
+				$value = forge_get_config ($v, $s);
+				print "$s/$v: $value\n" ;
+			}
+		}
 	} else {
 		$v = forge_get_config ($argv[1]) ;
 		if ($v === true) {
@@ -58,7 +68,8 @@ if (count ($argv) == 3) {
 For instance: .../forge-get-config web_host
               .../forge-get-config repo_prefix scmsvn
 
-Or:           .../forge-get-config list-all-variables
+Or:           .../forge-get-config list-all-variables, for all variables
+              .../forge-get-config list-all-variables-values, for all variables and their values
 " ;
         exit (1) ;
 }
