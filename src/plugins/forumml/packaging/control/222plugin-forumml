@@ -1,4 +1,4 @@
 Package: @PACKAGE@-plugin-forumml
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, php5-cli, php-mail, php-mail-mime, php-mail-mbox, php-mail-mimedecode, python-iniparse, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @PACKAGE@-plugin-mailman, php5-cli, php-mail, php-mail-mime, php-mail-mbox, php-mail-mimedecode, python-iniparse, ${misc:Depends}
 Description: collaborative development tool - ForumML plugin
