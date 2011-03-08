@@ -111,6 +111,7 @@ fi
 
 rootfs=$path/rootfs
 hostkeydir=/var/lib/lxc/ssh
+[ -d $hostkeydir ] || mkdir $hostkeydir
 mkdir $hostkeydir
 
 configure_network $rootfs $address $netmask $gateway $name

@@ -117,7 +117,7 @@ fi
 
 rootfs=$path/rootfs
 hostkeydir=/var/lib/lxc/ssh
-mkdir $hostkeydir
+[ -d $hostkeydir ] || mkdir $hostkeydir
 
 configure_network $rootfs $address $netmask $gateway $name
 if [ $? -ne 0 ]; then
