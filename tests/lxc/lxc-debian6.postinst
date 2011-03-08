@@ -48,24 +48,36 @@ configure_pubkey(){
 configure_hostkeydir(){
 	rootfs=$1
 	hostkeydir=$2
-	if [ $# -ne 2 ]
+	name=$3
+	if [ $# -ne 3 ]
 	then
 		exit 1
 	else
 		[ -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
-		[ -e $hostkeydir ] || cp $hostkeydir/ssh_host_* $rootfs/etc/ssh/
+		if [ -e $hostkeydir ]
+		then 
+			if [ ! -d $hostkeydir/$name ]
+			then
+				mkdir $hostkeydir/$name
+				echo "Creating SSH2 RSA key; this may take some time ..."
+				ssh-keygen -q -f $hostkeydir/$name/ssh_host_rsa_key -N '' -t rsa
+				echo "Creating SSH2 DSA key; this may take some time ..."
+				ssh-keygen -q -f $hostkeydir/$name/ssh_host_dsa_key -N '' -t dsa
+			fi
+			cp $hostkeydir/$name/ssh_host_* $rootfs/etc/ssh/
+		fi
 	fi
 }
 
 usage()
 {
     cat <<EOF
-$1 -h|--help -p|--path=<path> --clean --address=<address> --netmask=<netmask> --gateway=<gateway> --pubkey=<pubkey> --hostkeydir=<hostkeydir>
+$1 -h|--help -p|--path=<path> --clean --address=<address> --netmask=<netmask> --gateway=<gateway> --pubkey=<pubkey>
 EOF
     return 0
 }
 
-options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address:,netmask:,gateway:,pubkey:,hostkeydir: -- "$@")
+options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address:,netmask:,gateway:,pubkey: -- "$@")
 if [ $? -ne 0 ]; then
         usage $(basename $0)
         exit 1
@@ -82,7 +94,6 @@ do
 	--netmask)	netmask=$2; shift 2;;
 	--gateway)	gateway=$2; shift 2;;
 	--pubkey)	pubkey=$2; shift 2;;
-	--hostkeydir)	hostkeydir=$2; shift 2;;
         --)             shift 1; break ;;
         *)              break ;;
     esac
@@ -99,6 +110,8 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 rootfs=$path/rootfs
+hostkeydir=/var/lib/lxc/ssh
+mkdir $hostkeydir
 
 configure_network $rootfs $address $netmask $gateway $name
 if [ $? -ne 0 ]; then
@@ -112,7 +125,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-configure_hostkeydir $rootfs $hostkeydir
+configure_hostkeydir $rootfs $hostkeydir $name
 if [ $? -ne 0 ]; then
     echo "failed to configure hostkeydir"
     exit 1

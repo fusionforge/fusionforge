@@ -63,8 +63,7 @@ else
 		--address=$IPBASE.$VEID \
 		--netmask=$IPMASK \
 		--gateway=$IPGW \
-		--pubkey=$SSHPUBKEY \
-		--hostkeydir=$HOSTKEYDIR
+		--pubkey=$SSHPUBKEY
 	sudo /usr/bin/lxc-start -n $HOST -d
 fi
 
