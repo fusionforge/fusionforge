@@ -21,6 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+forge_define_config_item('storage_base','projectimport-plugin','$core/data_path/plugins/projectimport/');
+
 class ProjectImportPlugin extends Plugin {
 	function ProjectImportPlugin () {
 		$this->Plugin() ;

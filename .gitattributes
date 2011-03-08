@@ -2084,6 +2084,7 @@ src/plugins/projectimport/common/ProjectImportPlugin.class.php -text
 src/plugins/projectimport/common/ProjectImporter.class.php -text
 src/plugins/projectimport/common/projectimport-init.php -text
 src/plugins/projectimport/etc/plugins/projectimport/config.php -text
+src/plugins/projectimport/etc/projectimport.ini -text
 src/plugins/projectimport/packaging/control/222plugin-projectimport -text
 src/plugins/projectimport/packaging/control/222plugin-projectimport.shortdesc -text
 src/plugins/projectimport/packaging/dirs/plugin-projectimport -text
