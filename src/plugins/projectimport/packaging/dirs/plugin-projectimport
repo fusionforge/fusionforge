@@ -1,2 +1,3 @@
 usr/share/@OLDPACKAGE@/plugins/projectimport/common
 usr/share/@OLDPACKAGE@/plugins/projectimport/www
+var/lib/@OLDPACKAGE@/plugins/projectimport
