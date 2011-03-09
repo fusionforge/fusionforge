@@ -1608,7 +1608,7 @@ Enjoy the site.
 
 /**
  * user_ismember() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
- *
+ *  May need to be replaced by forge_check_perm ('project_admin', $group_id) if checking for project admin 
  * @param		int		The Group ID
  * @param		int		The Type
  * @deprecated
