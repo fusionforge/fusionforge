@@ -1,4 +1,4 @@
-Project importer plugin for FusionForge 5.0.x
+Project importer plugin for FusionForge 5.1+
 
 Developped as part of the COCLICO project.
 
@@ -12,3 +12,5 @@ Dependencies :
  - ARC2 for PHP library (cf. http://arc.semsol.org/ or https://github.com/semsol/arc2)
  - OSLC Core compatible RDF JSON parser plugin for ARC2 :
    svn co https://oslc-tools.svn.sourceforge.net/svnroot/oslc-tools/language-libs/php/arc2-plugin/
+
+Current status : see https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Project_Import_plugin
