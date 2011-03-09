@@ -59,6 +59,7 @@ make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORK
 make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze
 
 (cd tests/scripts ; ./start_vm.sh $HOST)
+scp -r tests root@$HOST:/root
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
 

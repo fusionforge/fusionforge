@@ -61,6 +61,7 @@ sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusi
 sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/fusionforge.repo
 
 (cd tests/scripts ; ./start_vm.sh $HOST)
+scp -r tests root@$HOST:/root
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentos52Tests.php
 
