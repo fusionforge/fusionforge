@@ -383,4 +383,3 @@ class FileManagerPage {
 		return $filechosen;
 	}
 }
-
