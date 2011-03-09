@@ -2083,6 +2083,7 @@ src/plugins/projectimport/README -text
 src/plugins/projectimport/bin/install.sh -text
 src/plugins/projectimport/common/ProjectImportPlugin.class.php -text
 src/plugins/projectimport/common/ProjectImporter.class.php -text
+src/plugins/projectimport/common/UploadedFiles.class.php -text
 src/plugins/projectimport/common/projectimport-init.php -text
 src/plugins/projectimport/etc/plugins/projectimport/config.php -text
 src/plugins/projectimport/etc/projectimport.ini -text

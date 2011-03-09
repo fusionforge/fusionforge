@@ -19,11 +19,14 @@ require_once $gfwww.'include/pre.php';
 
 require_once $gfwww.'include/role_utils.php';
 
+//require_once $gfcommon.'valid/rule.class.php';
+
 // don't include this in ProjectImporter, for unit test purposes, so do it here, in caller
 require_once $gfcommon.'import/import_users.php';
 //print_r($gfplugins.'projectimport/common/ProjectImporter.class.php');
 
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
+require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
 
 // Dependency on php-arc
 //include_once('arc/ARC2.php');
@@ -40,6 +43,9 @@ class ProjectImportPage {
 	
 	protected $importer;
 
+	protected $posted_selecteddumpfile;
+	protected $posted_uploadedfile;
+	
 	// will contain the list of spaces to be imported
 	protected $posted_spaces_imported;
 
@@ -53,7 +59,10 @@ class ProjectImportPage {
 	
 	protected $html_generator;
 	
+	protected $storage;
+	
 	function ProjectImportPage($HTML) {
+		global $group_id;
 		$this->html_generator = $HTML;
 		$this->message = '';
 		$this->form_header_already_displayed = false;
@@ -61,8 +70,16 @@ class ProjectImportPage {
 		$this->posted_user_mapping = array();
 		$this->posted_new_member_roles = array();
 		$this->posted_spaces_imported = array();
+		$this->storage = new ProjectFilesDirectory($group_id, $this->html_generator);
+		$this->posted_selecteddumpfile = False;
+		$this->posted_uploadedfile = False;
 	}
 
+	function feedback($message) {
+		global $feedback;
+		if ($feedback) $feedback .= '<br />';
+		$feedback .= $message;
+	}
 	/**
 	 * Initializes data structures from POSTed data coming from the form input
 	 */
@@ -70,15 +87,84 @@ class ProjectImportPage {
 		global $group_id, $feedback;
 
 		$group_id = getIntFromRequest('group_id');
-		$json = getUploadedFile('json');
-		$imported_file = $json['tmp_name'];
-		$json = fread(fopen($imported_file, 'r'), $json['size']);
-		if(! $json) {
-			$feedback = "Error : missing data";
+		
+		$filechosen = FALSE;
+		$uploaded_file = getUploadedFile('uploaded_file');
+		//print_r($uploaded_file);
+		
+		// process chosen file -> $filechosen set after this (or not)
+		if (getStringFromPost('submit_file')) {
+			$filesha1s = array();
+			foreach (array_keys($_POST) as $key) {
+				if(!strncmp($key, 'file_', 5)) {
+					$filesha1 = substr($key, 5);
+					$filesha1s[] = $filesha1;
+				}
+			}
+			if (count($filesha1s) > 1) {
+				
+				$this->feedback(_('Please select only one file'));
+			} else {
+				if (count($filesha1s) == 1) {
+					$filechosen = $this->storage->getFilePath($filesha1s[0]);
+					if(!$filechosen) {
+						$this->feedback(_('File not found on server'));
+					}
+				}
+			}
+		}
+		
+		// Process uploaded file : $this->posted_selecteddumpfile set afterwards (or not)
+		// May use codendi's rules to check results of upload ?
+		//$rule_file = new Rule_File(); 
+		//if ($rule_file->isValid($uploaded_file)) {
+		if($uploaded_file['error'] == UPLOAD_ERR_OK  ) {
+			if ($filechosen) {
+				$this->feedback(_('Please either select existing file OR upload new file'));
+				$filechosen = False;
+			}
+			else {
+				$imported_file = $uploaded_file['tmp_name'];
+				$imported_file = $this->storage->addFile($imported_file, $uploaded_file['name']);
+				if(! $imported_file) {
+					$this->feedback($this->storage->getErrorMessage());
+				}
+				else {
+					$this->posted_uploadedfile = $uploaded_file['name'];
+					$this->message .= sprintf(_('File "%s" uploaded and pre-selected'),$this->posted_uploadedfile);
+				}
+			}
 		}
 		else {
-
-			//			print_r($imported_file);
+			$error_code = $uploaded_file['error'];
+			if ($error_code != UPLOAD_ERR_NO_FILE ) {
+				switch ($error_code) {
+        			case UPLOAD_ERR_INI_SIZE:
+            			$this->feedback(_('The uploaded file exceeds the upload_max_filesize directive in php.ini'));
+        			case UPLOAD_ERR_FORM_SIZE:
+            			$this->feedback(_('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form'));
+        			case UPLOAD_ERR_PARTIAL:
+            			$this->feedback(_('The uploaded file was only partially uploaded'));
+        			/* case UPLOAD_ERR_NO_FILE:
+            			return 'No file was uploaded';*/
+        			case UPLOAD_ERR_NO_TMP_DIR:
+            			$this->feedback(_('Missing a temporary folder'));
+        			case UPLOAD_ERR_CANT_WRITE:
+            			$this->feedback(_('Failed to write file to disk'));
+        			case UPLOAD_ERR_EXTENSION:
+            			$this->feedback(_('File upload stopped by extension'));
+        			default:
+            			$this->feedback(_('Unknown upload error %d', $error_code));
+    			} 
+			}
+		}
+		
+		// if a file was chose among the existing ones, try to import its JSON contents
+		if($filechosen) {
+			//print_r($filechosen);
+			$this->posted_selecteddumpfile = $filechosen;
+			$json = fread(fopen($this->posted_selecteddumpfile, 'r'),filesize($this->posted_selecteddumpfile));
+			//print_r($json);
 			$this->importer = new ProjectImporter($group_id);
 			$this->importer->parse_OSLCCoreRDFJSON($json);
 
@@ -135,6 +221,9 @@ class ProjectImportPage {
 			//	print_r($posted_spaces_imported);
 			//	echo '<br />';
 			
+		}
+		if ((! $this->posted_selecteddumpfile) && (! $this->posted_uploadedfile)) {
+			$this->feedback(_('Please select an existing file to process, or upload a new one'));
 		}
 	}
 	
@@ -284,8 +373,7 @@ class ProjectImportPage {
 			}
 			
 			if (! $user_object) {
-				if ($feedback) $feedback .= '<br />';
-				$feedback .= sprintf(_('Failed to find existing user matching imported user "%s"'), $username);
+				$this->feedback(sprintf(_('Failed to find existing user matching imported user "%s"'), $username));
 				$needs_to_warn = TRUE;
 			}
 			
@@ -468,7 +556,7 @@ class ProjectImportPage {
 					}
 					else {
 						// user not found : probably messing with the form post
-						$feedback .= sprintf(_('Failed to find mapped user "%s"'), $mapped_to_username);
+						$this->feedback(sprintf(_('Failed to find mapped user "%s"'), $mapped_to_username));
 						$can_proceed = FALSE;
 					}
 				} // foreach
@@ -484,7 +572,7 @@ class ProjectImportPage {
 					$html .= $message;
 				}
 				else {
-					$feedback .= "Couldn't proceed!";
+					$this->feedback("Couldn't proceed!");
 				}
 				$html .= "All (mapped) imported users added to the group.";
 				// }
@@ -612,9 +700,12 @@ class ProjectImportPage {
 						}
 					}
 				}
+				else { // count($projects)
+					$this->feedback(_('No project found'));
+				}
 			}
-			else {
-				$feedback .= 'parsing problem <br />';
+			else { // not $this->importer->has_project_dump()
+				$this->feedback(_('parsing problem'));
 			}
 		}
 		return $html;
@@ -651,19 +742,44 @@ class ProjectImportPage {
 			echo '<input type="hidden" name="submit_mappings" value="y" />';
 		}
 
+		$preselected = False;
+		if (!$feedback) {
+			if ($this->posted_selecteddumpfile) {
+				$preselected = basename($this->posted_selecteddumpfile);
+			}
+			elseif ($this->posted_uploadedfile) {
+				$preselected = $this->posted_uploadedfile;
+			}
+		}
+		
+		$selectiondialog = $this->storage->displayFileSelectionForm($preselected);
+		
+		echo $selectiondialog;
+		
+		if($selectiondialog) { // there are some selectable files already
+			if ($preselected) {
+				$legend = _('Confirm selected file or upload a new one');
+			}
+			else {
+				$legend = _('Select a file or upload a new one');
+			}
+		} else { // there are yet no files
+			$legend = _('Please upload a file');
+		}
+        
 		// finally, display the file upload form
-		echo '<input type="hidden" name="group_id" value="' . $group_id . '" />
-                    <fieldset><legend>Please upload a file :</legend>
+		echo '<fieldset><legend>'. $legend .'</legend>
 		       <p><center>
-                          <input type="file" id="json" name="json" tabindex="2" size="30" />
-                       </center></p>
-                    </fieldset>
-                    <div style="text-align:center;">
+                          <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" size="30" />
+                  </center></p>
+               </fieldset>';
+        
+		echo '<input type="hidden" name="group_id" value="' . $group_id . '" />';
+		echo '<div style="text-align:center;">
                       <input type="submit" name="submit" value="Submit" />
-                    </div>
-              </form>';
-
-
+                    </div>';
+		echo '</form>';
+		
 		site_project_footer(array());
 		
 	}
@@ -673,7 +789,7 @@ class ProjectImportPage {
 if (session_loggedin()) {
 
 	// The user should be project admin
-	if (!user_ismember($group_id,'A')) {
+	if ( ! forge_check_perm('project_admin', $group_id) ) {
 		exit_permission_denied(_('You cannot import project unless you are an admin on that project'));
 	}
 
