@@ -14,7 +14,7 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
 
-		system("cd scripts; ./start_vm.sh ".HOST);
+		//system("cd scripts; ./start_vm.sh ".HOST);
 
 		//system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/*pend.php root@centos52:/opt/tests");
 		//system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/phpunit_coverage.php root@centos52:/opt/gforge/www");

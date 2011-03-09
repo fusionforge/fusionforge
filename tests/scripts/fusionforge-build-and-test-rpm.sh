@@ -56,6 +56,7 @@ cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
 sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
 sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/fusionforge.repo
 
+(cd tests/scripts ; ./start_vm.sh $HOST)
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php
 

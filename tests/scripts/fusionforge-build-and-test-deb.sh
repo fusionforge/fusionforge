@@ -58,6 +58,7 @@ make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORK
 (cd 3rd-party/php-mail-mbox ; make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze)
 make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze
 
+(cd tests/scripts ; ./start_vm.sh $HOST)
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
 
