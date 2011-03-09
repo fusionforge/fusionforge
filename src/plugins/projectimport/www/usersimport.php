@@ -1,17 +1,29 @@
 <?php
 
 /**
- * ProjectImport plugin for FusionForge 5.0.x
+ * User importing script for site admin
  *
+ * Copyright (c) 2011 Olivier Berger & Institut Telecom
  *
- * This is the beginning of a project import pugin
- * 
- * Author : Olivier Berger <olivier.berger@it-sudparis.eu>
- * 
- * Copyright (c) Olivier Berger & Institut Télécom
- * 
- * Released under the GNU GPL v2 or later
- * 
+ * This program was developped in the frame of the COCLICO project
+ * (http://www.coclico-project.org/) with financial support of the Paris
+ * Region council.
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
 // Import users from a JSON file (Site Admin tool)
@@ -24,6 +36,7 @@ require_once $gfwww.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
+require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
 
 include_once('arc/ARC2.php');
 
@@ -33,22 +46,20 @@ include_once('arc/ARC2.php');
  * @author Olivier Berger
  *
  */
-class UsersImportPage {
+class UsersImportPage extends FileManagerPage {
 
-	protected $message;
-	
 	protected $importer;
 
 	protected $form_header_already_displayed;
-	
-	protected $html_generator;
-	
+		
 	function UsersImportPage($HTML) {
-		$this->html_generator = $HTML;
-		$this->message = '';
 		$this->form_header_already_displayed = false;
 		
 		$this->importer = ProjectImporter::getInstance();
+		
+		$storage = new SiteAdminFilesDirectory($HTML);
+		
+		parent::FileManagerPage($HTML, $storage);
 	}
 	
 	/**
@@ -91,10 +102,25 @@ class UsersImportPage {
 			$this->form_header_already_displayed = True;
 		}
 
+		$preselected = False;
+		
+		if (!$feedback) {
+			if ($this->posted_selecteddumpfile) {
+				$preselected = basename($this->posted_selecteddumpfile);
+			}
+			elseif ($this->posted_uploadedfile) {
+				$preselected = $this->posted_uploadedfile;
+			}
+		}
+		
+		$selectiondialog = $this->storage->displayFileSelectionForm($preselected);
+		
+		echo $selectiondialog;
+		
 		// finally, display the file upload form
 		echo '<fieldset><legend>Please upload a file :</legend>
 		       <p><center>
-                          <input type="file" id="json" name="json" tabindex="2" size="30" />
+                          <input type="file" id="uploaded_file" name="uploaded_file" tabindex="2" size="30" />
                        </center></p>
                     </fieldset>
                     <div style="text-align:center;">
@@ -111,28 +137,35 @@ class UsersImportPage {
 	function initialize_from_submitted_data() {
 		global $feedback;
 
-		$json = getUploadedFile('json');
-		$imported_file = $json['tmp_name'];
-		$json = fread(fopen($imported_file, 'r'), $json['size']);
-		if(! $json) {
-			$feedback = "Error : missing data";
-		}
-		else {
-
-			//			print_r($imported_file);
-			$this->importer->parse_OSLCCoreRDFJSON($json);
-
-			$debug = FALSE;
-			if($debug) {
-			 // Debug the loaded triples 
-			 $triples = $this->importer->parse_OSLCCoreRDFJSON($json);
-			 $ser = ARC2::getTurtleSerializer();
-
-			 if(count($triples)) {
-				$this->message .= '<pre>'. nl2br(htmlspecialchars($ser->toTurtle($triples))) . '</pre>';
+		$filechosen = $this->initialize_chosenfile_from_submitted();
+		if($filechosen) {
+			//print_r($filechosen);
+			$json = fread(fopen($this->posted_selecteddumpfile, 'r'),filesize($this->posted_selecteddumpfile));
+				if(! $json) {
+				$feedback = "Error : missing data";
+			}
+			else {
+	
+				//			print_r($imported_file);
+				$this->importer->parse_OSLCCoreRDFJSON($json);
+	
+				$debug = FALSE;
+				if($debug) {
+				 // Debug the loaded triples 
+				 $triples = $this->importer->parse_OSLCCoreRDFJSON($json);
+				 $ser = ARC2::getTurtleSerializer();
+	
+				 if(count($triples)) {
+					$this->message .= '<pre>'. nl2br(htmlspecialchars($ser->toTurtle($triples))) . '</pre>';
+					}
 				}
 			}
 		}
+			
+		if ((! $this->posted_selecteddumpfile) && (! $this->posted_uploadedfile)) {
+			$this->feedback(_('Please select an existing file to process, or upload a new one'));
+		}
+		
 	}
 	
 	

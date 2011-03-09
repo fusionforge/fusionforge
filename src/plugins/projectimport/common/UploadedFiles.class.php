@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Manages uploaded files
+ * Utility classes to manage uploaded files
  * 
  * Copyright (c) 2011 Olivier Berger & Institut Telecom
  *
@@ -25,6 +25,9 @@
  * along with GForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
+
+// TODO : add cleanup mechanism for storage
+
 
 /**
  * Generic file storage management class

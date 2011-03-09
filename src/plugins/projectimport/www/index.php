@@ -1,17 +1,29 @@
 <?php
 
 /**
- * ProjectImport plugin for FusionForge 5.0.x
+ * Project data importing script for project admin
  *
+ * Copyright (c) 2011 Olivier Berger & Institut Telecom
  *
- * This is the beginning of a project import pugin
- * 
- * Author : Olivier Berger <olivier.berger@it-sudparis.eu>
- * 
- * Copyright (c) Olivier Berger & Institut Télécom
- * 
- * Released under the GNU GPL v2 or later
- * 
+ * This program was developped in the frame of the COCLICO project
+ * (http://www.coclico-project.org/) with financial support of the Paris
+ * Region council.
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
 require_once('../../../www/env.inc.php');
@@ -30,22 +42,17 @@ require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
 
 // Dependency on php-arc
 //include_once('arc/ARC2.php');
-
 /**
  * Manages the display of the page : HTML + forms
  * 
  * @author Olivier Berger
  *
  */
-class ProjectImportPage {
+class ProjectImportPage extends FileManagerPage {
 
-	protected $message;
 	
 	protected $importer;
 
-	protected $posted_selecteddumpfile;
-	protected $posted_uploadedfile;
-	
 	// will contain the list of spaces to be imported
 	protected $posted_spaces_imported;
 
@@ -57,28 +64,17 @@ class ProjectImportPage {
 	
 	protected $form_header_already_displayed;
 	
-	protected $html_generator;
-	
-	protected $storage;
-	
+
 	function ProjectImportPage($HTML) {
 		global $group_id;
-		$this->html_generator = $HTML;
-		$this->message = '';
 		$this->form_header_already_displayed = false;
 		$this->importer = False;
 		$this->posted_user_mapping = array();
 		$this->posted_new_member_roles = array();
 		$this->posted_spaces_imported = array();
-		$this->storage = new ProjectFilesDirectory($group_id, $this->html_generator);
-		$this->posted_selecteddumpfile = False;
-		$this->posted_uploadedfile = False;
-	}
-
-	function feedback($message) {
-		global $feedback;
-		if ($feedback) $feedback .= '<br />';
-		$feedback .= $message;
+		$storage = new ProjectFilesDirectory($HTML, $group_id);
+		
+		parent::FileManagerPage($HTML, $storage);
 	}
 	/**
 	 * Initializes data structures from POSTed data coming from the form input
@@ -88,81 +84,11 @@ class ProjectImportPage {
 
 		$group_id = getIntFromRequest('group_id');
 		
-		$filechosen = FALSE;
-		$uploaded_file = getUploadedFile('uploaded_file');
-		//print_r($uploaded_file);
-		
-		// process chosen file -> $filechosen set after this (or not)
-		if (getStringFromPost('submit_file')) {
-			$filesha1s = array();
-			foreach (array_keys($_POST) as $key) {
-				if(!strncmp($key, 'file_', 5)) {
-					$filesha1 = substr($key, 5);
-					$filesha1s[] = $filesha1;
-				}
-			}
-			if (count($filesha1s) > 1) {
-				
-				$this->feedback(_('Please select only one file'));
-			} else {
-				if (count($filesha1s) == 1) {
-					$filechosen = $this->storage->getFilePath($filesha1s[0]);
-					if(!$filechosen) {
-						$this->feedback(_('File not found on server'));
-					}
-				}
-			}
-		}
-		
-		// Process uploaded file : $this->posted_selecteddumpfile set afterwards (or not)
-		// May use codendi's rules to check results of upload ?
-		//$rule_file = new Rule_File(); 
-		//if ($rule_file->isValid($uploaded_file)) {
-		if($uploaded_file['error'] == UPLOAD_ERR_OK  ) {
-			if ($filechosen) {
-				$this->feedback(_('Please either select existing file OR upload new file'));
-				$filechosen = False;
-			}
-			else {
-				$imported_file = $uploaded_file['tmp_name'];
-				$imported_file = $this->storage->addFile($imported_file, $uploaded_file['name']);
-				if(! $imported_file) {
-					$this->feedback($this->storage->getErrorMessage());
-				}
-				else {
-					$this->posted_uploadedfile = $uploaded_file['name'];
-					$this->message .= sprintf(_('File "%s" uploaded and pre-selected'),$this->posted_uploadedfile);
-				}
-			}
-		}
-		else {
-			$error_code = $uploaded_file['error'];
-			if ($error_code != UPLOAD_ERR_NO_FILE ) {
-				switch ($error_code) {
-        			case UPLOAD_ERR_INI_SIZE:
-            			$this->feedback(_('The uploaded file exceeds the upload_max_filesize directive in php.ini'));
-        			case UPLOAD_ERR_FORM_SIZE:
-            			$this->feedback(_('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form'));
-        			case UPLOAD_ERR_PARTIAL:
-            			$this->feedback(_('The uploaded file was only partially uploaded'));
-        			/* case UPLOAD_ERR_NO_FILE:
-            			return 'No file was uploaded';*/
-        			case UPLOAD_ERR_NO_TMP_DIR:
-            			$this->feedback(_('Missing a temporary folder'));
-        			case UPLOAD_ERR_CANT_WRITE:
-            			$this->feedback(_('Failed to write file to disk'));
-        			case UPLOAD_ERR_EXTENSION:
-            			$this->feedback(_('File upload stopped by extension'));
-        			default:
-            			$this->feedback(_('Unknown upload error %d', $error_code));
-    			} 
-			}
-		}
+		$filechosen = $this->initialize_chosenfile_from_submitted();
 		
 		// if a file was chose among the existing ones, try to import its JSON contents
 		if($filechosen) {
 			//print_r($filechosen);
-			$this->posted_selecteddumpfile = $filechosen;
 			$json = fread(fopen($this->posted_selecteddumpfile, 'r'),filesize($this->posted_selecteddumpfile));
 			//print_r($json);
 			$this->importer = new ProjectImporter($group_id);
