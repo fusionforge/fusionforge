@@ -837,6 +837,7 @@ fi
 
 %files plugin-projectimport
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
 %{FORGE_DIR}/plugins/projectimport
 %{FORGE_DIR}/www/plugins/projectimport
 
