@@ -155,8 +155,8 @@ test -e $rootfs/dev/tty4 || mknod -m 666 $rootfs/dev/tty4 c 4 4
 test -e $rootfs/dev/tty5 || mknod -m 666 $rootfs/dev/tty5 c 4 5
 test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 
-cp /etc/localtime $rootfs/etc/localtime
-cp /etc/timezone $rootfs/etc/timezone
+#cp /etc/localtime $rootfs/etc/localtime
+#cp /etc/timezone $rootfs/etc/timezone
 
     return 0
 }
