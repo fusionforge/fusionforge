@@ -87,4 +87,6 @@ do
 	fi
 done
 
+#ssh -X root@$IPBASE.$VEID "LANG=C java -jar selenium-server.jar -interactive &"
+
 sleep 1
