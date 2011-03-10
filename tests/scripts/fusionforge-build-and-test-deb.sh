@@ -82,7 +82,9 @@ ssh root@$HOST "invoke-rc.d cron stop" || true
 
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
-
 cd ..
+
+(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+
 cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
 xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
