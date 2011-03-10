@@ -81,13 +81,18 @@ ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 # ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php# /etc/gforge/local.inc'
 ssh root@$HOST "service crond stop" || true
 
-cd tests
-phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php
+if $REMOTESELENIUM
+then
+	echo "Run phpunit test on $HOST"
+else
+	cd tests
+	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php
+	cd ..
+fi
 if [ "x$SELENIUM_RC_DIR" != "x" ]
 then
 	scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
 fi
-cd ..
 if $KEEPVM 
 then
 	echo "Keeping vm $HOST alive"
