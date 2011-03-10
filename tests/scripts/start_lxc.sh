@@ -21,6 +21,13 @@ then
 		# When HOST is given as an arg, I have to guesse which data to take
 		# depending on the host name
 		case $HOST in
+			*deb*src*)
+				LXCTEMPLATE=$LXCDEBTEMPLATE
+				IPBASE=$IPDEBBASE
+				VEID=$VEIDSEB
+				IPMASK=$IPDEBMASK
+				IPGW=$IPDEBGW
+				;;
 			*deb*)
 				LXCTEMPLATE=$LXCDEBTEMPLATE
 				IPBASE=$IPDEBBASE
