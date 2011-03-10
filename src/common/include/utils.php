@@ -1149,7 +1149,7 @@ function util_display_user($username, $user_id,$text, $size='xs') {
         $hook_params['username'] = $username;
         $hook_params['user_id'] = $user_id;
         $hook_params['user_link'] = '';
-        plugin_hook_by_reference("plugin_oslc_compact_user_link", $hook_params);
+        plugin_hook_by_reference("user_link_with_tooltip", $hook_params);
         if($hook_params['user_link'] != ''){
                 return $hook_params['user_link'];
         }

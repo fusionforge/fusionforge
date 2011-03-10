@@ -34,10 +34,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook("plugin_oslc_compact_user_link"); 
-		$this->_addHook("plugin_oslc_compact_user_view");
-		$this->_addHook("plugin_oslc_compact_cr_link");
-		$this->_addHook("plugin_oslc_compact_cr_view");
+		$this->_addHook("user_link_with_tooltip"); 
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
 	}
 
@@ -153,27 +150,10 @@ class oslcPlugin extends Plugin {
 						     _('oslc Admin')).'</p>' ;
 			}
 		}
-		elseif ($hookname == "plugin_oslc_compact_user_link"){
+		elseif ($hookname == "user_link_with_tooltip"){
 			require_once dirname( __FILE__ ).'/CompactRessource.class.php';
 			$CR = new CompactRessource($params);
 			$params['user_link'] = $CR->compactUserLink($params['username'], $params['user_id']);
-		}
-		elseif ($hookname == "plugin_oslc_compact_user_view") {
-			// Create needed params here.
-			
-			require_once dirname( __FILE__ ).'/CompactRessource.class.php';
-			$CR = new CompactRessource($params);
-			$params['compact_user'] = $CR->CompactUser();
-		}
-		elseif ($hookname == "plugin_oslc_compact_cr_link") {
-			//
-		}
-		elseif ($hookname == "plugin_oslc_compact_cr_view") {
-			// Create needed params here.
-			
-			require_once dirname( __FILE__ ).'/CompactRessource.class.php';
-			$CompactRessource = new CompactRessource($params);
-			return $CR->CompactChangeRequest();
 		}
 		elseif ($hookname == "javascript_file") {
 			echo '<script type="text/javascript" src="/plugins/oslc/scripts/pluginOSLCHoverScripts.js"></script>'."\n";
