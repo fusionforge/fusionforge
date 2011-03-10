@@ -120,7 +120,10 @@ htop,\
 zsh,\
 debconf-utils,\
 avahi-utils,\
-openssh-server
+openssh-server,\
+xbase-clients,\
+phpunit,\
+openjdk-6-jre
 
     cache=$1
     arch=$2
