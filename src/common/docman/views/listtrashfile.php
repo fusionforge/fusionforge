@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -40,7 +41,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 $df->setStateID('2');
 
 /**
- * var must be call d_arr & nested_groups
+ * var must be named d_arr & nested_groups
  * because used by tree.php
  */
 $d_arr =& $df->getDocuments();
@@ -73,6 +74,31 @@ if ($d_arr != NULL ) {
 if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 2)) {
 	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
+
+?>
+<script type="text/javascript">
+var controllerListTrash;
+
+jQuery(document).ready(function() {
+	controllerListTrash = new DocManListFileController({
+		groupId:		<?php echo $group_id ?>,
+		tipsyElements:		[
+						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-trashdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
+					],
+
+		divEditDirectory:	jQuery('#editdocgroup'),
+		buttonEditDirectory:	jQuery('#docman-editdirectory'),
+		docManURL:		'<?php util_make_uri("docman") ?>',
+		lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
+	});
+});
+</script>
+<?php
 	echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
 	echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents with deleted status.') .'" >';
 	echo '</form></div>';
@@ -105,7 +131,7 @@ if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) 
 	}
 
 	if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-		$tabletop = array('<input id="checkall" type="checkbox" onchange="controllerListFile.checkAll()" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+		$tabletop = array('<input id="checkall" type="checkbox" onchange="controllerListTrash.checkAll()" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 		echo '<div class="docmanDiv">';
 		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
@@ -113,7 +139,7 @@ if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) 
 		foreach ($nested_docs[$dirid] as $d) {
 			echo '<tr>';
 			echo '<td>';
-			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListFile.checkgeneral()" />';
+			echo '<input type="checkbox" value="'.$d->getID().'" id="checkeddocid" class="checkeddocid" onchange="controllerListTrash.checkgeneral()" />';
 			echo '</td>';
 			switch ($d->getFileType()) {
 				case "URL": {
@@ -177,13 +203,13 @@ if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) 
 			}
 
 			echo '<td>';
-			echo '<a class="docman-delete" href="?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+			echo '<a class="docman-delete" href="?group_id='.$group_id.'&action=deletefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
 			if ($use_tooltips)
 				echo ' title="'. _('Delete permanently this document.') .'"';
 
 			echo ' >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently this document.'))). '</a>';
 
-			echo '<a class="docman-editfile" href="#" onclick="javascript:controllerListFile.toggleEditFileView(\''.$d->getID().'\')" ';
+			echo '<a class="docman-editfile" href="#" onclick="javascript:controllerListTrash.toggleEditFileView(\''.$d->getID().'\')" ';
 			if ($use_tooltips)
 				echo ' title="'. _('Edit this document') .'" ';
 
@@ -195,12 +221,12 @@ if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) 
 		echo '</div>';
 		echo '<div class="docmanDiv"><p>';
 		echo _('Mass Actions for selected files:');
-		echo '<a class="docman-delete" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox()" ';
+		echo '<a class="docman-delete" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" ';
 		if ($use_tooltips)
 			echo ' title="'. _('Delete permanently.') .'" ';
 
 		echo '>'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
-		echo '<a class="docman-downloadaszip" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListFile.buildUrlByCheckbox()" ';
+		echo '<a class="docman-downloadaszip" href="#" onClick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" ';
 		if ($use_tooltips)
 			echo ' title="'. _('Download as a zip') . '" ';
 
