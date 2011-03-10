@@ -4,6 +4,7 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -28,16 +29,15 @@ class Parsedata {
 	/**
 	 * Constructor.
 	 *
-	 * @param	string
+	 * @param	string	path to the parser list file
 	 * @return	boolean	true
 	 */
 	var $parsers;
 	var $p_path = "";
 
-	function Parsedata($ppath="") {
+	function Parsedata($ppath = "") {
 		$this->p_path = $ppath;
-		$p = get_parser_list ($ppath);
-		$this->parsers = $p;
+		$this->parsers = $this->get_parser_list($ppath);
 		return true;
 	}
 
@@ -48,13 +48,13 @@ class Parsedata {
 		if (array_key_exists($filetype, $this->parsers)) {
 			// parse data if good parser exists
 			$parser = $this->p_path.$this->parsers[$filetype];
-			$filename = tempnam("/tmp/","tmp");
-			$fp = fopen ($filename, "w");
-			fwrite ($fp, $data1);
-			fclose ($fp);
+			$filename = tempnam("/tmp/", "tmp");
+			$fp = fopen($filename, "w");
+			fwrite($fp, $data1);
+			fclose($fp);
 			$cmd = "php -f $parser $filename";
-			$rep = shell_exec ($cmd);
-			if ( file_exists ($filename ) ) {
+			$rep = shell_exec($cmd);
+			if (file_exists($filename)) {
 				unlink($filename);
 			}
 		}
@@ -62,12 +62,12 @@ class Parsedata {
 		$data2 = utf8_decode("$title $description");
 		// temporary file for treatement
 		$filename = tempnam("/tmp", "tmp");
-		$fp = fopen ($filename, "w");
-		fwrite ($fp, $data2);
-		fclose ($fp);
+		$fp = fopen($filename, "w");
+		fwrite($fp, $data2);
+		fclose($fp);
 		$cmd = $this->p_path.$this->parsers["text/plain"];
 		$cmd = "php -f $cmd $filename";
-		$rep1 = shell_exec ($cmd);
+		$rep1 = shell_exec($cmd);
 		// dont need to unlink the filename because parser_text already remove it
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
@@ -76,23 +76,23 @@ class Parsedata {
 		echo "$text \n";
 		ob_flush();
 	}
-}
 
-function get_parser_list($parser_path) {
-	$file = $parser_path."parser_list.txt";
-	$rep = array();
-	$fp = fopen ($file, "r");
-	if ($fp) {
-		$buff = fread($fp, 2048);
-		$a1 = explode ("\n", $buff);
-		foreach ($a1 as $a) {
-			if (trim($a) != "" && substr($a, 0,1) != "#") {
-				$a2 = explode ("|", $a);
-				$rep[$a2[0]] = $a2[1];
+	function get_parser_list($parser_path) {
+		$file = $parser_path."parser_list.txt";
+		$rep = array();
+		$fp = fopen($file, "r");
+		if ($fp) {
+			$buff = fread($fp, 2048);
+			$a1 = explode("\n", $buff);
+			foreach ($a1 as $a) {
+				if (trim($a) != "" && substr($a, 0,1) != "#") {
+					$a2 = explode ("|", $a);
+					$rep[$a2[0]] = $a2[1];
+				}
 			}
 		}
+		return $rep;
 	}
-	return $rep;
 }
 
 // Local Variables:

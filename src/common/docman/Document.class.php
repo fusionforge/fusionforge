@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -981,8 +982,6 @@ class Document extends Error {
 									$this->getID()));
 				$res = db_query_qpa($qpa);
 				if (!$res || db_affected_rows($res) < 1) {
-					var_dump($qpa);
-					exit;
 					$this->setOnUpdateError(db_error().print_r($qpa));
 					return false;
 				}
