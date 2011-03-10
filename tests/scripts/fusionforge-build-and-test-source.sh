@@ -77,7 +77,7 @@ ssh root@$HOST "cd /root/tests/func; CONFIGURED=true CONFIG_PHP=config.php.build
 ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 #  Install a fake sendmail to catch all outgoing emails.
 # ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc"
-ssh root@$HOST "service crond stop"
+ssh root@$HOST "service crond stop" || true
 
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentos52Tests.php
