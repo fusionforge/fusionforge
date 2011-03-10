@@ -2097,7 +2097,6 @@ src/plugins/oslc/tests/setup-provider-test.sh -text
 src/plugins/oslc/translations/en.po -text
 src/plugins/oslc/translations/gforge.pot -text
 src/plugins/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
-src/plugins/oslc/www/CompactRessourceView.class.php -text
 src/plugins/oslc/www/admin/index.php -text
 src/plugins/oslc/www/index.php -text
 src/plugins/oslc/www/scripts/pluginOSLCHoverScripts.js -text

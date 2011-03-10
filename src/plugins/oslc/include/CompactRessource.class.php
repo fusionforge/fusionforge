@@ -23,23 +23,10 @@
  *
  */
 
-require_once dirname(dirname(__FILE__)).'/www/CompactRessourceView.class.php';
-require_once 'utils.php';
-
 class CompactRessource {
 	
-	private $view = null;
-	
-	public function __construct($params){
-		$this->params = $params;
-		/*if (isset($params['username'])) {
-			//$this->ressource_type = $params['ressourceType'];
-			$this->ressource_uri = $this->serverUrl().'/users/'.$params['username'];
-			//$this->username = $params['username'];
-			//$this->user_link = $params['user_link'];
-		}*/
+	public function __construct(){
 
-		$this->view = new CompactRessourceView();
 	}
 	
 	public function compactUserLink($username, $user_id) {
@@ -51,31 +38,5 @@ class CompactRessource {
 		$url .= '<div id="compact_user_'.$username.'"></div>';
 		return $url;
 	}
-	
-	public function CompactUser() {
-		$params['userUri'] = util_make_url_u ($this->params['user']->getUnixName(), $this->params['user']->getID());
-		$params['userCompactUri'] = util_make_url('/plugins/oslc/compact/user/'.$this->params['user']->getUnixName());
-		// full name
-		$user_title = $this->params['user']->getTitle();
-		$params['title'] = ($user_title ? $user_title .' ' :''). $this->params['user']->getRealName();
-		// login name
-		$params['shortTitle'] = $this->params['user']->getUnixName();
-		
-		$params['iconUrl'] = "";
-		
-		return $this->view->CompactUserView($params);
-	}
-	
-	public function CompactChangeRequest(){
-		$params['ressourceUri'] = "";
-		$params['title'] = "";
-		$params['shortTitle'] = "";
-		$params['iconUrl'] = "";
-		$params['smUrl'] = "";
-		$params['lgUrl'] = "";
-		
-		return $this->view->CompactChangeRequestView($params);
-	}
-	
 }
 ?>
