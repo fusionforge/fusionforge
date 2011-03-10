@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
@@ -59,7 +59,7 @@ sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/f
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
 ssh root@$HOST "ln -s gforge /usr/share/src"
-scp -rp ~/fusionforge_repo root@$HOST:
+[ ! -e ~/fusionforge_repo ] || scp -rp ~/fusionforge_repo root@$HOST:
 scp -rp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 if [ "x$FFORGE_RPM_REPO" != "x" ]
 then
