@@ -28,7 +28,7 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 		if (getenv('SELENIUM_RC_DIR')) {
 			system("scp -r root@".HOST.":/var/log ".getenv('SELENIUM_RC_DIR'));
 		}
-		system("cd scripts; ./stop_vm.sh ".HOST);
+		// system("cd scripts; ./stop_vm.sh ".HOST);
 	}
 }
 ?>
