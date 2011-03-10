@@ -88,10 +88,10 @@ else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php
 	cd ..
-fi
-if [ "x$SELENIUM_RC_DIR" != "x" ]
-then
-	scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
+	if [ "x$SELENIUM_RC_DIR" != "x" ]
+	then
+		scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
+	fi
 fi
 if $KEEPVM 
 then
