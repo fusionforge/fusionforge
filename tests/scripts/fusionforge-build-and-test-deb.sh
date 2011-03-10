@@ -65,6 +65,10 @@ if [ "x$DEBMIRROR" != "x" ]
 then
 	ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
 fi
+if [ "x$DEBMIRRORSEC" != "x" ]
+then
+	ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
+fi
 ssh root@$HOST "echo \"deb file:/debian $DIST main\" > /etc/apt/sources.list"
 scp -r $WORKSPACE/build/debian root@$HOST:/ 
 gpg --export --armor | ssh root@$HOST "apt-key add -"

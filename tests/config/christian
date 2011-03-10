@@ -17,4 +17,5 @@ IPCOSGW=192.168.50.1
 SSHPUBKEY=~/.ssh/id_rsa.pub
 
 DEBMIRROR=http://christian.bayle.eu/debian
+DEBMIRRORSEC=http://christian.bayle.eu/debian-security
 VMENGINE=lxc
