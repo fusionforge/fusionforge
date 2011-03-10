@@ -53,7 +53,7 @@ configure_hostkeydir(){
 	then
 		exit 1
 	else
-		[ ! -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
+		[ -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
 		if [ -e $hostkeydir ]
 		then 
 			if [ ! -d $hostkeydir/$name ]
