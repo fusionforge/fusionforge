@@ -1,0 +1,44 @@
+<?php 
+/**
+ * This file is (c) Copyright 2010 by Sabri LABBENE, Institut
+ * TELECOM
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * This program has been developed in the frame of the HELIOS
+ * project with financial support of its funders.
+ *
+ */
+$user_real_name = $this->user->getRealName();
+$user_name = $this->user->getUnixName();
+$user_id = $this->user->getID();
+$user_uri = $this->serverUrl().'/users/'.$user_name;
+$user_title = $this->user->getTitle();
+$title = ($user_title ? $user_title .' ' :''). $user_real_name;?>
+
+<html>
+<head>
+<title>User: <?php echo $user_real_name;?> (Idenntifier: <?php echo $user_id;?>)</title>
+<link rel="SHORTCUT ICON" href="oslc.png"></link>
+</head>
+<body>
+<i>Compact User Preview </i><br/>
+User Name: <?php echo $title;?><br/>
+Login Name: <?php echo $user_name;?> <br/>
+Identifier:  <?php echo $user_id;?> <br/>
+Member since: <?php print date(_('Y-m-d H:i'), $this->user->getAddDate()); ?><br/>
+<small>URI: <?php echo $user_uri;?></small><br/>
+</body>
+</html>

@@ -1933,14 +1933,17 @@ src/plugins/oslc/cronjobs/manage_oslc.php -text
 src/plugins/oslc/db/oslc-init.sql -text
 src/plugins/oslc/etc/httpd.d/plugin-oslc.inc -text
 src/plugins/oslc/etc/plugins/oslc/config.php -text
+src/plugins/oslc/include/CompactRessource.class.php -text
 src/plugins/oslc/include/oslc-zend/application/Bootstrap.php -text
 src/plugins/oslc/include/oslc-zend/application/basic-pwd.txt -text
 src/plugins/oslc/include/oslc-zend/application/configs/application.ini -text
 src/plugins/oslc/include/oslc-zend/application/controllers/CmController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/CodendiCmController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/CodendiOSLCConnector.php -text
+src/plugins/oslc/include/oslc-zend/application/controllers/CompactController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/ErrorController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeCmController.php -text
+src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeCompactController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/FusionForgeOSLCConnector.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/MantisCmController.php -text
 src/plugins/oslc/include/oslc-zend/application/controllers/MantisOSLCConnector.php -text
@@ -2049,6 +2052,9 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-resource.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/show-creation-ui.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/show-selection-ui.phtml -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/_compact_user_xml.php -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/oslc-compact-user-small.phtml -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecompact/oslc-compact-user.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_add_hyperlinks.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_resource_xml.php -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/mantiscm/_service-catalog_xml.php -text
@@ -2091,8 +2097,10 @@ src/plugins/oslc/tests/setup-provider-test.sh -text
 src/plugins/oslc/translations/en.po -text
 src/plugins/oslc/translations/gforge.pot -text
 src/plugins/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
+src/plugins/oslc/www/CompactRessourceView.class.php -text
 src/plugins/oslc/www/admin/index.php -text
 src/plugins/oslc/www/index.php -text
+src/plugins/oslc/www/scripts/pluginOSLCHoverScripts.js -text
 src/plugins/projectlabels/NAME -text
 src/plugins/projectlabels/README -text
 src/plugins/projectlabels/bin/db-delete.pl -text svneol=unset#text/x-perl
