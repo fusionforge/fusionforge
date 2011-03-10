@@ -66,12 +66,9 @@ then
 	ssh root@$HOST "cd /etc/yum.repos.d/; wget $FFORGE_RPM_REPO/fusionforge.repo"
 fi
 sleep 5
-if [ -e "/tmp/timedhosts.txt" ] 
-then
-	scp -p /tmp/timedhosts.txt root@$HOST:/var/cache/yum/timedhosts.txt
-fi
+[ ! -e "/tmp/timedhosts.txt" ] || scp -p /tmp/timedhosts.txt root@$HOST:/var/cache/yum/timedhosts.txt
 ssh root@$HOST "yum install -y fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks"
-[ ! -e /tmp/timedhosts.txt ] || scp -p root@$HOST:/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt
+scp -p root@$HOST:/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt || true
 ssh root@$HOST "cd /usr/share/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
 ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 # Install a fake sendmail to catch all outgoing emails.
