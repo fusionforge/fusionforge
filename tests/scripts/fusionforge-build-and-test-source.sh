@@ -81,6 +81,10 @@ ssh root@$HOST "service crond stop" || true
 
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentos52Tests.php
+if [ "x$SELENIUM_RC_DIR" != "x" ]
+then
+	scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
+fi
 cd ..
 
 (cd tests/scripts ; sh ./stop_vm.sh $HOST)
