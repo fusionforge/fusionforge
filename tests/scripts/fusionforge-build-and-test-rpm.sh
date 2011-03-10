@@ -56,6 +56,11 @@ cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
 sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
 sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/fusionforge.repo
 
+if $KEEPVM
+then
+	echo "Destroying vm $HOST"
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+fi
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
 ssh root@$HOST "ln -s gforge /usr/share/src"
@@ -83,8 +88,12 @@ then
 	scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
 fi
 cd ..
-
-(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+if $KEEPVM 
+then
+	echo "Keeping vm $HOST alive"
+else
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+fi
 
 cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
 xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml

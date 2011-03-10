@@ -58,6 +58,11 @@ make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORK
 (cd 3rd-party/php-mail-mbox ; make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze)
 make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rsqueeze
 
+if $KEEPVM 
+then
+	echo "Destroying vm $HOST"
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+fi
 (cd tests/scripts ; ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
 ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
@@ -87,8 +92,12 @@ then
 	scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
 fi
 cd ..
-
-(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+if $KEEPVM 
+then
+	echo "Keeping vm $HOST alive"
+else
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+fi
 
 cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
 xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml

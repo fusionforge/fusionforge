@@ -19,3 +19,5 @@ SSHPUBKEY=~/.ssh/id_rsa.pub
 DEBMIRROR=http://christian.bayle.eu/debian
 DEBMIRRORSEC=http://christian.bayle.eu/debian-security
 VMENGINE=lxc
+REMOTESELENIUM=true
+KEEPVM=true
