@@ -129,6 +129,14 @@ mv $rootfs/sbin/hwclock $rootfs/sbin/hwclock.removed_by_lxc
 
 sed -i -e '/start_udev/d' $rootfs/etc/rc.d/rc.sysinit
 
+    # fix avahi
+    if [ -f $rootfs/etc/init.d/avahi-daemon ]
+    then
+	echo 'Fix avahi'
+        sed -i -e "s!-D!-D --no-rlimits!" $rootfs/etc/init.d/avahi-daemon
+    fi
+
+
 #rm -f $rootfs/etc/mtab
 #ln -s /proc/mounts $rootfs/etc/mtab
 

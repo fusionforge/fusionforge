@@ -89,6 +89,13 @@ EOF
     chroot $rootfs /usr/sbin/update-rc.d -f hwclock.sh remove
     chroot $rootfs /usr/sbin/update-rc.d -f hwclockfirst.sh remove
 
+    # fix avahi
+    if [ -f $rootfs/etc/init.d/avahi-daemon ]
+    then
+	echo 'Fix avahi'
+	sed -i -e "s!-D!-D --no-rlimits!" $rootfs/etc/init.d/avahi-daemon 
+    fi
+
     echo "root:root" | chroot $rootfs chpasswd
     echo "Root password is 'root', please change !"
 
