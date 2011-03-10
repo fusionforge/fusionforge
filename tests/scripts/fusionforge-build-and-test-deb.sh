@@ -60,6 +60,22 @@ make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORK
 
 (cd tests/scripts ; ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
+ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
+if [ "x$DEBMIRROR" != "x" ]
+then
+	ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
+fi
+ssh root@$HOST "echo \"deb file:/debian $DIST main\" > /etc/apt/sources.list"
+scp -r $WORKSPACE/build/debian root@$HOST:/ 
+gpg --export --armor | ssh root@$HOST "apt-key add -"
+sleep 5
+ssh root@$HOST "apt-get update"
+ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-plugin-forumml fusionforge-full"
+ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload ; LANG=C touch /tmp/fusionforge-use-pfo-rbac"
+ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini"
+ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+ssh root@$HOST "invoke-rc.d cron stop"
+
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
 

@@ -58,6 +58,26 @@ sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/f
 
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
+ssh root@$HOST "ln -s gforge /usr/share/src"
+scp -rp ~/fusionforge_repo root@$HOST:
+scp -rp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
+if [ "x$FFORGE_RPM_REPO" != "x" ]
+then
+	ssh root@$HOST "cd /etc/yum.repos.d/; wget $FFORGE_RPM_REPO/fusionforge.repo"
+fi
+sleep 5
+if [ -e "/tmp/timedhosts.txt" ] 
+then
+	scp -p /tmp/timedhosts.txt root@$HOST:/var/cache/yum/timedhosts.txt
+fi
+ssh root@$HOST "yum install -y fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-ldapextauth fusionforge-plugin-scmgit fusionforge-plugin-blocks"
+scp -p root@$HOST:/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt
+ssh root@$HOST "cd /usr/share/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
+ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+# Install a fake sendmail to catch all outgoing emails.
+# ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/usr/share/tests/scripts/catch_mail.php# /etc/gforge/local.inc'
+ssh root@$HOST "service crond stop"
+
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php
 

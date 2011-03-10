@@ -7,6 +7,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 	protected function setUp()
 	{
 		parent::setUp();
+/*
 
 		system("scp -r ../tests/preseed root@".HOST.":/root/");
 		system("ssh root@".HOST." 'cat /root/preseed/* | LANG=C debconf-set-selections'");
@@ -29,6 +30,7 @@ class DEBSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("ssh root@".HOST." '(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini'");
 		system("ssh root@".HOST." 'su - postgres -c \"pg_dump -Fc ".DB_NAME."\" > /root/dump'") ;
 		system("ssh root@".HOST." 'invoke-rc.d cron stop'");
+*/
 	}
 }
 ?>

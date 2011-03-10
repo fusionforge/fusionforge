@@ -8,6 +8,7 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 	{
 		parent::setUp();
 
+		/*
 		system("scp -r ../tests root@".HOST.":/opt");
 		system("scp ../tests/func/db_reload.sh root@".HOST.":/root");
 
@@ -29,10 +30,8 @@ class TarSeleniumRemoteSuite extends SeleniumRemoteSuite
 		system("ssh root@".HOST." 'cd /opt/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=".DB_NAME." php db_reload.php'");
                 system("ssh root@".HOST." 'su - postgres -c \"pg_dump -Fc ".DB_NAME."\" > /root/dump'") ;
 
-		// Install a fake sendmail to catch all outgoing emails.
-		// system("ssh root@".HOST." 'perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc'");
-
 		system("ssh root@".HOST." 'service crond stop'");
+		*/
 	}
 }
 ?>
