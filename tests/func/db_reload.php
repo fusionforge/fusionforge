@@ -73,8 +73,11 @@ if (!file_exists($forge_root)) {
 	if (!file_exists($forge_root)) {
 		$forge_root = '/usr/share/gforge';
 		if (!file_exists($forge_root)) {
-			print "ERROR: Unable to guess location of fusionforge main directory (gforge), aborting.\n";
-			exit(1);
+			$forge_root = '/opt/gforge';
+			if (!file_exists($forge_root)) {
+				print "ERROR: Unable to guess location of fusionforge main directory (gforge), aborting.\n";
+				exit(1);
+			}
 		}
 	}
 }
