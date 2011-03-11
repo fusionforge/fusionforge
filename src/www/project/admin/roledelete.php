@@ -75,7 +75,7 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF') ?>?group_id=<?php echo $group_id ?>&amp;role_id=<?php echo $role_id ?>" method="post">
 <p>
-<input name="sure" value="1" type="checkbox" /><?php echo _("I'm Sure.") ?><br />
+<input name="sure" value="1" type="checkbox" /><?php echo _("I'm Sure") ?><br />
 </p>
 
 <p>
