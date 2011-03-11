@@ -138,17 +138,17 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1',
-						     html_image('ic/xmail16w.png','20','20').' '._('Stop Monitoring')).' | ';
+							     html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
 			} else {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1',
-						     html_image('ic/mail16w.png','20','20').' '._('Monitor Forum')).' | ';
+						     html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
 			}
 			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
-					     html_image('ic/save.png','24','24') .' '._('Save Place')).' | ';
+					     html_image('ic/save.png') .' '._('Save Place')).' | ';
 		}
 	} elseif ($f) {
 		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-			html_image('ic/mail16w.png','20','20').' '._('Monitor Forum').'</a> | ';		
+			html_image('ic/mail16w.png').' '._('Monitor Forum').'</a> | ';		
 	}
 
 	if ($f && $forum_id) {
@@ -592,7 +592,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="10" cols="70" wrap="soft">' . $body . '</textarea>';
+					echo '<textarea name="body"  rows="10" cols="70">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		?> <?php //$text_support->displayTextField('body'); ?> <br>
