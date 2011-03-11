@@ -155,6 +155,7 @@ class ForumAdmin extends Error {
 	function ExecuteAction ($action) {
         global $HTML;
 		
+		$feedback='';
 		if ($action == "change_status") { //change a forum
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
