@@ -3,6 +3,7 @@
  * FusionForge source control management
  *
  * Copyright 2004-2009, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -224,7 +225,7 @@ abstract class SCMPlugin extends Plugin {
 	function printAdminPage ($params) {
 		$group = group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
-			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Access').'</strong></p>';
+			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Read Access').'</strong></p>';
 		}
 	}
 	
@@ -235,7 +236,7 @@ abstract class SCMPlugin extends Plugin {
 		}
 		
 		if ($project->usesPlugin ($this->name) ) {
-			if ($params['scm_enable_anonymous']) {
+			if (isset($params['scm_enable_anonymous']) && $params['scm_enable_anonymous']) {
 				$project->SetUsesAnonSCM(true);
 			} else {
 				$project->SetUsesAnonSCM(false);
