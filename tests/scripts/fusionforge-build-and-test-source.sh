@@ -67,6 +67,7 @@ then
 fi
 (cd tests/scripts ; ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
+scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 if [ "x$BUILDRESULT" != "x" ]
 then
 	scp $BUILDRESULT/fusionforge-*.tar.bz2 root@$HOST:

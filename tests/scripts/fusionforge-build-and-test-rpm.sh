@@ -63,6 +63,7 @@ then
 fi
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
+scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "ln -s gforge /usr/share/src"
 [ ! -e ~/fusionforge_repo ] || scp -rp ~/fusionforge_repo root@$HOST:
 scp -rp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/

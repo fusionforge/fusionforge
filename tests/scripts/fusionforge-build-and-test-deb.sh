@@ -66,6 +66,7 @@ then
 fi
 (cd tests/scripts ; ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
+scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
 if [ "x$DEBMIRROR" != "x" ]
 then
