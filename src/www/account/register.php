@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -243,7 +244,7 @@ if (forge_get_config('use_jabber')) {
 <input type="submit" name="submit" value="<?php echo _('Register'); ?>" />
 </p>
 </form>
-<p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
+<p><a href="pending-resend.php"><?php echo _('Resend confirmation email to a pending account'); ?></a></p>
 
 <?php site_footer(array());
 

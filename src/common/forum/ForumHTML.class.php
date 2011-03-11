@@ -323,17 +323,19 @@ class ForumHTML extends Error {
 						<td>' . _('File to upload') . ':   <input type="file" name="attachment1"/></td>
 					</tr>
 					<tr>
-						<td class="warning">' . _('Warning: Current file will be deleted permanently') . '</td>
+						<td class="warning">' . _('Warning: Uploaded file will replace current file') . '</td>
 					</tr>
 			</table>
-			<input type="submit" name="go" value="'._('Update').'">
+				<input type="submit" name="go" value="'._('Update').'" />
 			<input type="hidden" name="doedit" value="1"/>
 			<input type="hidden" name="edit" value="yes"/>
 			<input type="hidden" name="forum_id" value="'.$forum_id.'"/>
 			<input type="hidden" name="group_id" value="'.$group_id.'"/>
 			<input type="hidden" name="attachid" value="'.$attachid.'"/>
 			<input type="hidden" name="msg_id" value="'.$msg_id.'"/>
-			</fieldset></form><p>';
+			</fieldset>
+			</form>
+			<p/>';
 		return $return_val;
 	}
 
