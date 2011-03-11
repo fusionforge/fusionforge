@@ -4,6 +4,8 @@
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -184,19 +186,15 @@ if ($pending=="yes") {
 	$res = db_query_params ('SELECT * FROM forum_attachment WHERE attachmentid=$1',
 			array ($attachid));
 }
-if ( (!$res) ) {
+
+if (!$res || !db_numrows($res) ) {
 	exit_error("Attachment Download error: ".db_error(),'forums');
 }
 $extension = substr(strrchr(strtolower(db_result($res,0,'filename')), '.'), 1);
 
-if (!$extension) {
-	goodbye(_('The Attachment does not exist'));
-}
-
 $last = gmdate('D, d M Y H:i:s', db_result($res,0,'dateline'));
-header('X-Powered-By:');
 header('Last-Modified: ' . $last . ' GMT');
-header('ETag: "' . db_result($res,0,'attachmentid') . '"');
+header('ETag: "' . db_result($res,0,'attachmentid').db_result($res,0,'filehash') . '"');
 
 if ($extension != 'txt') {
 	header("Content-disposition: inline; filename=\"" . db_result($res,0,'filename') . "\"");
