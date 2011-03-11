@@ -28,9 +28,9 @@
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 //require_once 'checks.php';
-if (!session_loggedin()) {
+/*if (!session_loggedin()) {
 		exit_not_logged_in();
-	}
+	}*/
 
 try {
 	$oauthprovider_server = new OAuthServer(FFDbOAuthDataStore::singleton());

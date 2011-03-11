@@ -92,45 +92,28 @@ class OauthAuthzToken extends OAuthToken {
    * 
    * @param int $p_id
    */
-  static function load( $p_id ) {
+  static function load( $p_id, $token_type ) {
   	
   	$DBSTORE = FFDbOAuthDataStore::singleton();
   	
-  	// this is a hack to retrieve the table name from the base class
-    $CHILD_CLASS = get_called_class();
-    $token_type = $CHILD_CLASS::TOKEN_TYPE;
-
-    $t_row = $DBSTORE->find_token_from_id($token_type, $p_id);
+  	$t_row = $DBSTORE->find_token_from_id($token_type, $p_id);
     
     if(!$t_row) {
     	exit_error( "Error trying to load token!", 'oauthprovider' );
     }
-    // again a hackfor the dispatching of the values
-    return $CHILD_CLASS::row_to_new_token($t_row);
+    return $t_row;
   }
 
   /**
    * @param int $user_id
    * @return Ambigous <multitype:, unknown>
    */
-  static function load_all($user_id=null) {
+  static function load_all($user_id=null, $token_type) {
   	
   	$DBSTORE = FFDbOAuthDataStore::singleton();
   	
-    $CHILD_CLASS = get_called_class();
-    $token_type = $CHILD_CLASS::TOKEN_TYPE;
-    
     $t_rows = $DBSTORE->find_all_tokens($token_type, $user_id);
-
-    $t_tokens = array();
-
-    foreach ($t_rows as $t_row) {
-      $t_token = $CHILD_CLASS::row_to_new_token($t_row);
-
-      $t_tokens[] = $t_token;
-    }
-
-    return $t_tokens;
+    return $t_rows;    
   }
 
   /**
@@ -139,20 +122,16 @@ class OauthAuthzToken extends OAuthToken {
    * @param string $p_token_key
    * @return OauthAuthzToken subclass
    */
-  static function load_by_key( $p_token_key ) {
+  static function load_by_key( $p_token_key, $token_type ) {
 
   	$DBSTORE = FFDbOAuthDataStore::singleton();
-  	
-    $CHILD_CLASS = get_called_class();
-    $token_type = $CHILD_CLASS::TOKEN_TYPE;
-	
+  	    
 	$t_row = $DBSTORE->find_token_from_key($token_type, $p_token_key);
     
     if(!$t_row) {
     	exit_error( "Error trying to load ".$token_type." token!", 'oauthprovider' );
     }
-    // again a hackfor the dispatching of the values
-    return $CHILD_CLASS::row_to_new_token($t_row);
+    return $t_row;
   }
 
   /**
@@ -167,13 +146,10 @@ class OauthAuthzToken extends OAuthToken {
   /**
    * @param int $p_id
    */
-  function delete() {
+  function delete($token_type) {
   	
   	$DBSTORE = FFDbOAuthDataStore::singleton();
-  	
-    $CHILD_CLASS = get_called_class();
-    $token_type = $CHILD_CLASS::TOKEN_TYPE;
-    
+  	    
 	$DBSTORE->delete_token( $token_type, $this->id);
   }
 

@@ -62,6 +62,3 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 
 		session_redirect( '/plugins/'.$pluginname.'/consumer.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname);
 	}
-
-	
-

@@ -164,5 +164,3 @@ class oauthproviderPlugin extends Plugin {
 		return array( '<a href="' . $gfplugins.'oauthprovider/www/access_tokens.php' . '">' . $plugin_oauthprovider_menu_account_summary. '</a>', );
 	  }
 }
-
-?>

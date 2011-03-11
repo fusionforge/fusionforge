@@ -75,6 +75,33 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
 
     return $t_token;
   }
+  
+  static function load( $p_id ) {
+  	$row = parent::load($p_id, self::TOKEN_TYPE);
+  	return self::row_to_new_token($row);
+  }
+  
+  static function load_all($user_id=null)	{
+  	$rows = parent::load_all($user_id=null, self::TOKEN_TYPE);
+  	$tokens = array();
+
+    foreach ($rows as $row) {
+      $token = self::row_to_new_token($row);
+
+      $tokens[] = $token;
+    }
+
+    return $tokens;
+  }
+  
+  static function load_by_key( $p_token_key )	{
+  	$row = parent::load_by_key($p_token_key, self::TOKEN_TYPE);
+  	return self::row_to_new_token($row);
+  }
+  
+  function delete()	{
+  	parent::delete(self::TOKEN_TYPE);
+  }
 
   /**
    * Saves the token properly to the DB (insert or update with proper columns)
@@ -100,4 +127,3 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
   
   
 };
-

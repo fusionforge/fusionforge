@@ -60,7 +60,3 @@ foreach( $t_tokens as $t_token ) {
 echo $HTML->listTableBottom();
 
 site_project_footer(array());
-
-
-
-

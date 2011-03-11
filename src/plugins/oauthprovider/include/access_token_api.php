@@ -61,6 +61,33 @@ class OauthAuthzAccessToken extends OauthAuthzToken {
     $t_token->id = $t_row['id'];
     return $t_token;
   }
+  
+  static function load( $p_id ) {
+  	$row = parent::load($p_id, self::TOKEN_TYPE);
+  	return self::row_to_new_token($row);
+  }
+  
+  static function load_all($user_id=null)	{
+  	$rows = parent::load_all($user_id=null, self::TOKEN_TYPE);
+  	$tokens = array();
+
+    foreach ($rows as $row) {
+      $token = self::row_to_new_token($row);
+
+      $tokens[] = $token;
+    }
+
+    return $tokens;
+  }
+  
+  static function load_by_key( $p_token_key )	{
+  	$row = parent::load_by_key($p_token_key, self::TOKEN_TYPE);
+  	return self::row_to_new_token($row);
+  }
+  
+  function delete()	{
+  	parent::delete(self::TOKEN_TYPE);
+  }
 
   /**
    * Loads tokens related to a particular consumer (and a particular user, if specified)
@@ -74,15 +101,12 @@ class OauthAuthzAccessToken extends OauthAuthzToken {
   	$DBSTORE = FFDbOAuthDataStore::singleton();
   	
   	// this is a hack to retrieve the table name from the base class
-    $CHILD_CLASS = get_called_class();
-    $t_token_type = $CHILD_CLASS::TOKEN_TYPE;
-
-    $t_rows = $DBSTORE->find_tokens_by_consumer($t_token_type, $consumer_id, $user_id);
+    $t_rows = $DBSTORE->find_tokens_by_consumer(self::TOKEN_TYPE, $consumer_id, $user_id);
      	
     $t_tokens = array();
 
     foreach ($t_rows as $t_row) {
-      $t_token = $CHILD_CLASS::row_to_new_token($t_row);
+      $t_token = self::row_to_new_token($t_row);
 
       $t_tokens[] = $t_token;
     }
@@ -120,4 +144,3 @@ class OauthAuthzAccessToken extends OauthAuthzToken {
   }
   
 };
-

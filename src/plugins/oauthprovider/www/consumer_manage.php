@@ -102,5 +102,3 @@ $i = 0;
 <?php
 //html_page_bottom1( __FILE__ );
 site_project_footer(array());
-
-
