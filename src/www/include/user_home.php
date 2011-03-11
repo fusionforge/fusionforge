@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems 
  * Copyright 2010, FusionForge Team
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -44,7 +45,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 <table class="my-layout-table" id="user-profile-personal-info">
 <tr> 
 	<td>
-		<?php echo _('User Id') ?>
+		<?php echo _('User Id:') ?>
 	</td>
 	<td>
 		<strong>
@@ -66,14 +67,14 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 </tr>
 
 <tr>
-	<td><?php echo _('Login name') ?></td>
+	<td><?php echo _('Login name:') ?></td>
 	<td><strong><span property="sioc:name"><?php 
 		print $user->getUnixName(); 
 		?></span></strong></td>
 </tr>
 
 <tr>
-	<td><?php echo _('Real name') ?> </td>
+	<td><?php echo _('Real Name:') ?> </td>
 	<td>
 		<div rev="foaf:account" xmlns:foaf="http://xmlns.com/foaf/0.1/">
 			<div about="#me" typeof="foaf:Person">
@@ -88,7 +89,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 
 <?php if(!isset($GLOBALS['sys_show_contact_info']) || $GLOBALS['sys_show_contact_info']) { ?>
 <tr>
-	<td><?php echo _('Your Email Address') ?>: </td>
+	<td><?php echo _('Email Address:') ?>: </td>
 	<td>
 	<strong><?php 
 		$user_mail=$user->getEmail();
@@ -138,7 +139,7 @@ echo $user->getPhone();
 
 <tr>
 	<td>
-	<?php echo _('Site Member Since') ?>
+	<?php echo _('Site Member Since:') ?>
 	</td>
 	<td><strong><?php print date(_('Y-m-d H:i'), $user->getAddDate()); ?></strong>
     </td>
@@ -166,9 +167,7 @@ if (forge_get_config('use_diary')) {
 		echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
 	 
 		/*
-
 			Get their diary information
-
 		*/
 
 		$res = db_query_params ('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
@@ -253,7 +252,14 @@ echo "</div>\n"; // end of about=""
 $me = session_get_user(); 
 if (forge_get_config('use_ratings')) {
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
-	printf(_('<p>If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.</p><p>The %1$s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.</p>'), forge_get_config ('forge_name'));
+
+print "<p>";
+print _('If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.');
+print "</p>";
+
+print "<p>";
+printf(_('The %s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.'), forge_get_config ('forge_name'));
+print "</p>";
 ?>
 
 	<div class="align-center">
