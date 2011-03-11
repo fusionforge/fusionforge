@@ -94,8 +94,8 @@ class Widget_MyProjects extends Widget {
 		
 		if (isset($private_shown) && $private_shown) {
 			$html_my_projects .= '
-			    <TR class="'.$class .'"><TD colspan="2" class="small">'.
-				'(*)&nbsp;'._("<em>Private project</em>").'</td></tr>';
+                <tr class="'.$class .'"><td colspan="2" class="small">'.
+                '(*)&nbsp;<em>' . _("Private project").'</em></td></tr>';
 		}
 		$html_my_projects .= '</table>';
 	}

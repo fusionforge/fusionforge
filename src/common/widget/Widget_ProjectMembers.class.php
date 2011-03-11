@@ -98,8 +98,6 @@ class Widget_ProjectMembers extends Widget {
 			echo "</p>\n";
 		}
 
-			
-
 		echo '<p><span rel="sioc:has_usergroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';
 		echo '<span about="members/" typeof="sioc:UserGroup">';
 		echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
