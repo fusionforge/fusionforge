@@ -337,6 +337,13 @@ Requires: %{name} >= %{version}, php, postgresql
 %description plugin-mantisbt
 mantisbt plugin for FusionForge. 
 
+%package plugin-oauthprovider
+Summary: oauthprovider plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description plugin-oauthprovider
+oauthprovider plugin for FusionForge. 
+
 %prep
 %setup -q
 #%patch1 -p1
@@ -554,6 +561,9 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # plugin: mantisbt
 %{__ln_s} ../../plugins/mantisbt/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantisbt
+
+# plugin: oauthprovider
+%{__ln_s} ../../plugins/oauthprovider/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oauthprovider
 
 ### END OF PLUGIN SETUP ###
 
@@ -960,6 +970,10 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mantisbt.ini
 %{FORGE_DIR}/plugins/mantisbt
 %{FORGE_DIR}/www/plugins/mantisbt
+
+%files plugin-oauthprovider
+%config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
+%{FORGE_DIR}/plugins/oauthprovider
 
 %changelog
 * Fri May 28 2010 - Alain Peyrat <aljeux@free.fr> - 5.0.50-1
