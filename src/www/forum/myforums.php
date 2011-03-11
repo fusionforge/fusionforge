@@ -7,6 +7,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * Copyright 2005 (c) - Daniel Perez
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -152,8 +153,8 @@ for($i=0;$i<sizeof($monitored_forums);$i++) {
 		$date = $f->getMostRecentDate()? date(_('Y-m-d H:i'),$f->getMostRecentDate()) : '';
 		echo '<tr '. $HTML->boxGetAltRowStyle($j++) . '>
 			<td>' . $this_forum_group->getPublicName() . '</td>
-			<td><a href="forum.php?forum_id='. $f->getID() .'">'.
-			html_image("ic/forum20w.png","20","20") .
+			<td><a href="forum.php?forum_id='. $f->getID() .'&amp;group_id='.$this_forum_group->getID().'">'.
+			html_image('ic/forum20w.png') .
 			'&nbsp;' .
 			$f->getName() .'</a></td>
 			<td style="text-align:center">'.$f->getThreadCount().'</td>
