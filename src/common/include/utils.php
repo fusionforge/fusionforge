@@ -6,7 +6,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -602,7 +602,7 @@ function utils_requiredField() {
  * @param		string	The title of the graph
  *
  */
-Function GraphResult($result,$title) {
+function GraphResult($result, $title) {
 	$rows=db_numrows($result);
 
 	if ((!$result) || ($rows < 1)) {
@@ -634,7 +634,7 @@ Function GraphResult($result,$title) {
  * @param		string	The title of the graph
  *
  */
-Function GraphIt($name_string,$value_string,$title) {
+function GraphIt($name_string, $value_string, $title) {
 	GLOBAL $HTML;
 
 	$counter=count($name_string);

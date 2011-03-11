@@ -69,8 +69,8 @@ class PluginManager extends Error {
 	/**
 	 * GetPluginObject() - get a particular plugin object
 	 *
-	 * @param pluginname - name of plugin
-	 * @return a plugin object or false if not available
+	 * @param	string	name of plugin
+	 * @return	object	plugin object or false if not available
 	 */
 	function GetPluginObject ($pluginname) {
 		if (!isset($this->plugins_objects [$pluginname])) {
@@ -86,8 +86,8 @@ class PluginManager extends Error {
 	/**
 	 * PluginIsInstalled() - is a plugin installed?
 	 *
-	 * @param pluginname - name of plugin
-	 * @return boolean, true if installed
+	 * @param	string	name of plugin
+	 * @return	boolean	true if installed
 	 */
 	function PluginIsInstalled ($pluginname) {
 		$plugins_data = $this->getPlugins() ;
@@ -211,7 +211,7 @@ class PluginManager extends Error {
 	/**
 	 * RegisterPlugin() - register a plugin
 	 *
-	 * @param pluginobject - an object of a subclass of the Plugin class
+	 * @param	object	an object of a subclass of the Plugin class
 	 */
 	function RegisterPlugin (&$pluginobject) {
 		if (!$pluginobject->GetName ()) {
@@ -257,7 +257,8 @@ class PluginManager extends Error {
 	/**
 	 * CountHookListeners() - number of listeners on a particular hook
 	 *
-	 * @param hookname - name of the hook
+	 * @param	string	name of the hook
+	 * @return	int	nb of listeners for this hookname
 	 */
 	function CountHookListeners ($hookname) {
 		if (isset($this->hooks_to_plugins[$hookname])) {

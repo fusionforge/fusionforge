@@ -33,8 +33,8 @@ define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 /**
  * Gets a Forum object from its id
  * 
- * @param forum_id the Forum id
- * @return the Forum object	
+ * @param	int	the Forum id
+ * @return	object	the Forum object
  */
 function &forum_get_object($forum_id) {
 	$res = db_query_params ('SELECT group_id FROM forum_group_list WHERE group_forum_id=$1',
