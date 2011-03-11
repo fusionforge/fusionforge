@@ -21,26 +21,18 @@ class SureFireReports extends FForge_SeleniumTestCase
     echo "\nStarting OSLC test suite\n";
     $directory = dirname(dirname(__FILE__));
     echo "Executing " . $directory . "/run-provider-tests.sh\n";
-    system('cd '. $directory . '; ./run-provider-tests.sh');
+    system('cd ' . $directory . '; ./run-provider-tests.sh');
     echo "OSLC test suite executed\n\n";
 
-    // Check the results in the generated HTML report
+    // Check the OSLC JUnit testsuite results in the generated HTML report
     $this->open("/plugins/oslc/surefire/surefire-report.html");
-    $this->click("link=net.openservices.provider.test.oslcv1tests");
-
-    $this->assertEquals("net.openservices.provider.test.oslcv1tests", $this->getText("//div[@id='contentBox']/div[3]/div/h3"));
-
-    $this->assertEquals("ServiceProviderCatalogTests", $this->getText("//div[@id='contentBox']/div[3]/div/h3[contains(.,'net.openservices.provider.test.oslcv1tests')]/../table/tbody/tr[2]/td[2]"));
-
-    // Tests
-    $this->assertEquals("56", $this->getText("//div[@id='contentBox']/div[3]/div/h3[contains(.,'net.openservices.provider.test.oslcv1tests')]/../table/tbody/tr[2]/td[3]"));
-    // Errors
-    $this->assertEquals("0", $this->getText("//div[@id='contentBox']/div[3]/div/h3[contains(.,'net.openservices.provider.test.oslcv1tests')]/../table/tbody/tr[2]/td[4]"));
-    // Failures
-    $this->assertEquals("8", $this->getText("//div[@id='contentBox']/div[3]/div/h3[contains(.,'net.openservices.provider.test.oslcv1tests')]/../table/tbody/tr[2]/td[5]"));
-    // Skipped
-    $this->assertEquals("0", $this->getText("//div[@id='contentBox']/div[3]/div/h3[contains(.,'net.openservices.provider.test.oslcv1tests')]/../table/tbody/tr[2]/td[6]"));
+    $this->assertEquals("net.openservices.provider.test.oslcv2tests", $this->getTable("//div[@id='contentBox']/div[3]/table.1.0"));
+    $this->assertEquals("ServiceProviderCatalogXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.1.1"));
+    $this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.1.6"));
+    $this->assertEquals("ServiceProviderXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.3.1"));
+    $this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.3.6"));
+    $this->assertEquals("ServiceProviderCatalogRdfXmlTests", $this->getTable("//div[@id='contentBox']/div[3]/div/table.4.1"));
+    $this->assertEquals("100%", $this->getTable("//div[@id='contentBox']/div[3]/div/table.4.6"));
   }
 }
-
 ?>
