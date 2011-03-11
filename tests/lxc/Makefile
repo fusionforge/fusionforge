@@ -5,8 +5,11 @@ VMROOT=/var/lib/lxc/vmdebian6
 -include ../config/$(shell hostname)
 
 #default: vmdebian6-config netstaticdeb installkey
-default: installtemplate
+default: installtemplate ../selenium-server.jar
 	@echo "read the Makefile to see available targets"
+
+../selenium-server.jar:
+	cp ../../3rd-party/selenium/binary/selenium-server-*/selenium-server.jar ..
 
 /cgroup: beroot
 	[ ! -d /cgroup ] || mkdir /cgroup
