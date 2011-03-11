@@ -1,13 +1,10 @@
 <?php
-
 /**
  * FusionForge Forum Attachments download Page
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://fusionforge.org/
- *
- * @version   
  *
  * This file is part of FusionForge.
  *

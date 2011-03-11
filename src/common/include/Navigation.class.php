@@ -177,7 +177,6 @@ class Navigation extends Error {
 		return $res;
         }
         
-
         /** Get an array of the user links (Login/Logout/My
 	 Account/Register) with the following structure:
 	 $result['titles']: list of the titles. $result['urls']: list
@@ -332,15 +331,14 @@ class Navigation extends Error {
 	 * false. $result['selected']: number of the menu entry that
 	 * is currently selected.
 	 */
-        function &getProjectMenu ($group_id, $toptab="") {
+	function getProjectMenu($group_id, $toptab="") {
                 // rebuild menu if it has never been built before, or
                 // if the toptab was set differently
                 if (!isset($this->project_menu_data[$group_id])
                     || ($toptab != "") 
-                    || ($toptab != $this->project_menu_data[$group_id]['last_toptab'])) 
-                {
+			|| ($toptab != $this->project_menu_data[$group_id]['last_toptab'])) {
                         // get the group and permission objects
-                        $group =& group_get_object($group_id);
+			$group = group_get_object($group_id);
                         if (!$group || !is_object($group)) {
                                 return;
                         }
@@ -432,7 +430,6 @@ class Navigation extends Error {
 				}
                         }
                         
-                        
                         // Mailing Lists
                         if ($group->usesMail()) {
                                 $menu['titles'][] = _('Lists');
@@ -445,7 +442,6 @@ class Navigation extends Error {
                                 if ($toptab == "mail") {
                                         $selected = (count($menu['urls'])-1);
                                 }
-                                
                         }
                         
                         // Project/Task Manager
@@ -460,7 +456,6 @@ class Navigation extends Error {
                                 if ($toptab == "pm") {
                                         $selected = (count($menu['urls'])-1);
                                 }
-                                
                         }
                         
                         // Doc Manager
@@ -475,7 +470,6 @@ class Navigation extends Error {
                                 if ($toptab == "docman") {
                                         $selected = (count($menu['urls'])-1);
                                 }
-                                
                         }
                         
                         // Surveys
@@ -528,7 +522,6 @@ class Navigation extends Error {
                         $hookParams['TITLES'] =& $menu['titles'];
                         $hookParams['toptab'] =& $toptab;
                         $hookParams['selected'] =& $selected;
-                        
                         plugin_hook ("groupmenu_scm", $hookParams) ; 
                         
                         // fill up adminurls
@@ -557,14 +550,10 @@ class Navigation extends Error {
                         $hookParams['TITLES'] =& $menu['titles'];
                         $hookParams['toptab'] =& $toptab;
                         $hookParams['selected'] =& $selected;
-                        
                         plugin_hook ("groupmenu", $hookParams) ;
                         
                         // fill up adminurls
-                        for ($i = 0; 
-                             $i < count($menu['urls']) - count($menu['adminurls']); 
-                             $i++) 
-                        {
+			for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
                                 $menu['adminurls'][] = false;
                         }
                         
@@ -607,7 +596,6 @@ class Navigation extends Error {
 	 *  $result['title']: Title of the link.
 	 */
         function getShowSource($asHTML=true) {
-
                 if (forge_get_config('show_source')) {
                         $res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
                         $res['title'] = _('Show source');

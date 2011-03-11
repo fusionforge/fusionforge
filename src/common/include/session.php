@@ -479,7 +479,6 @@ function session_set_new($user_id) {
 	} else {
 		session_set_internal ($user_id, $res) ;
 	}
-
 }
 
 function session_set_internal ($user_id, $res=false) {

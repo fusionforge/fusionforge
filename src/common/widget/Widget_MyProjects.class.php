@@ -33,6 +33,7 @@ class Widget_MyProjects extends Widget {
     function getTitle() {
         return _("My Projects");
     }
+
     function getContent() {
         $html_my_projects = '';
 
@@ -146,6 +147,7 @@ class Widget_MyProjects extends Widget {
 			    );
 	    }
     }
+
     function getDescription() {
 	    return _("List the projects you belong to. Selecting any of these projects brings you to the corresponding Project Summary page.");
     }

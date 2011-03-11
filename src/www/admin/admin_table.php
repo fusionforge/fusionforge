@@ -253,10 +253,6 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 		echo db_error();
 	}
 
-
-
-
-
 	$field_list = getStringFromRequest('__fields__');
 	$fields = explode(",", $field_list);
 	$values = array(); $v = array ();

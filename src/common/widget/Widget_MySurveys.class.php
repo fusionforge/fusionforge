@@ -97,7 +97,6 @@ class Widget_MySurveys extends Widget {
 							$class="bgcolor-grey";
 						}
 
-
 						$group_survey_id= $survey->getId();
 						$survey_title = $survey->getTitle();
 						$devsurvey_is_active = $survey->isActive();

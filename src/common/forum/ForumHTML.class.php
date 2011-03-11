@@ -628,9 +628,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 } else {
 	//do nothing
 }
-
 }
-
 }
 // Local Variables:
 // mode: php

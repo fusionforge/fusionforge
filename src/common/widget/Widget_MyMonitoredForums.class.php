@@ -106,8 +106,6 @@ class Widget_MyMonitoredForums extends Widget {
 					$class="bgcolor-grey";
 				}
 
-
-
 				$group_forum_id = db_result($result2,$i,'group_forum_id');
 
 				$html .= '

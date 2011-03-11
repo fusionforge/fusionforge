@@ -65,7 +65,6 @@ class ForumAdmin extends Error {
 		return $return;
 	}
 	
-	
 	/**
 	 *  PrintAdminOptions - prints the different administrator option for the forums (heading).
 	 *

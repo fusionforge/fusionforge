@@ -246,7 +246,6 @@ class PluginManager extends Error {
 				$result = $result && $returned ;
 			}
 		}
-
 		// Return true only if all the plugins have returned true.
 		return $result;
 	}
@@ -267,8 +266,8 @@ class PluginManager extends Error {
 		} else {
 			return 0 ;
 		}
-
 	}
+
 	function isPluginAllowedForProject($p, $group_id) {
 		$Group = group_get_object($group_id);
 		return $Group->usesPlugin($p->getName());
