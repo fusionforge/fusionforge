@@ -32,13 +32,20 @@ require_once 'checks.php';
 	exit_error("Only the Project Admin can access this page.", 'oauthprovider');
 }*/
 
-$t_tokens = OauthAuthzRequestToken::load_all(user_getid());
+if(forge_check_global_perm ('forge_admin'))	$admin_access=true;
+
+if($admin_access)	{
+	$t_tokens = OauthAuthzRequestToken::load_all();
+}else {
+	$t_tokens = OauthAuthzRequestToken::load_all(user_getid());
+}
 
 $headers = array(
 	$plugin_oauthprovider_consumer_name,
 	$plugin_oauthprovider_key,
 	$plugin_oauthprovider_secret,
 	$plugin_oauthprovider_authorized,
+	$plugin_oauthprovider_role,
 	$plugin_oauthprovider_user,
 	$plugin_oauthprovider_time_stamp,
 	'DELETE'
@@ -52,10 +59,25 @@ $i=0;
 foreach( $t_tokens as $t_token ) {
 	$consumer = OauthAuthzConsumer::load($t_token->getConsumerId());
 	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-	echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&token_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
+	if($admin_access)	{
+		echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&token_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
+	}else {
+		echo '<td>'.$consumer->getName().'</td>';
+	}
 	echo '<td>'.$t_token->key.'</td>';
 	echo '<td>'.$t_token->secret.'</td>';
-	echo '<td>'.$t_token->authorized.'</td>';
+	if($t_token->getAuthorized()==1)	$auth = 'Yes';
+	else $auth = 'No';
+	echo '<td>'.$auth.'</td>';
+	$role_id =$t_token->getRole(); 
+	if($role_id!=0)	{
+		//echo 'Roleid: '.$role_id;
+		$role = RBACEngine::getInstance()->getRoleById($role_id);
+		//print_r($role);
+		echo '<td>'.$role->getName().'</td>';
+	}else {
+		echo '<td>'.'---'.'</td>';
+	}	
 	if($t_token->getUserId() > 0 ) {
 		$user_object =& user_get_object($t_token->getUserId());
           $user = $user_object->getRealName().' ('.$user_object->getUnixName().')';

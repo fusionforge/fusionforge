@@ -108,8 +108,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	 */
 	function find_all_consumers() {
 		$t_consumer_table = "plugin_oauthprovider_consumer";
-
-		$t_result = db_query("SELECT * FROM $t_consumer_table ORDER BY name ASC");
+		$t_result = db_query_params("SELECT * FROM $t_consumer_table ORDER BY name ASC", array());
 
 		$t_rows = array();
 
@@ -305,7 +304,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		}
 		else {
 			$t_query = "SELECT * FROM $t_token_table";
-			$t_result = db_query( $t_query );
+			$t_result = db_query_params( $t_query, array() );
 		}
 
 		$t_rows = array();
@@ -582,7 +581,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 			$token_id = db_insertid($t_result, $t_token_table, 'id');
 			return $token_id;
 		}
-		else { # update, feature to be added later, with lifetime feature support
+		else { # TODO feature to be added later, with lifetime/limited access feature support
 			//$t_query = "UPDATE $t_token_table SET consumer_id=$1, token_key=$2, token_secret=$3, user_id=$4, time_stamp=$4 WHERE id=$5";
 			//db_query_params( $t_query, array( $token->getConsumerId(), $token->key, $token->secret, $token->getUserId(), $token->gettime_stamp(), $token->getId() ) );
 			exit_error("The access token already exists and cannot be modified.", 'oauthprovider');

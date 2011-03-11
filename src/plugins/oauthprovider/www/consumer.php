@@ -64,12 +64,12 @@ if(count($t_consumers)>0)	{
 	<td class="center"><?php echo ( $t_consumer->getEmail() ) ?></td>
 	<td><?php echo ( substr($t_consumer->key, 0, 10).'...' ) ?></td>
     <td><?php 
-	if ( $t_can_manage ) {
+	//if ( $t_can_manage ) {
 	  echo ( substr($t_consumer->secret, 0, 10).'...' );
-	}
+	/*}
 	else {
 	  echo '**************';
-	} ?></td>
+	}*/ ?></td>
 	<td class="center">
       <?php 
 	if ( $t_can_manage ) {

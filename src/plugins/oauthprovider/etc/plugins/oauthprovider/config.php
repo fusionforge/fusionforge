@@ -36,6 +36,7 @@ $plugin_oauthprovider_consumer = 'Consumer';
 $plugin_oauthprovider_request_tokens = 'Request Tokens';
 $plugin_oauthprovider_access_tokens = 'Access Tokens';
 $plugin_oauthprovider_name = 'Name';
+$plugin_oauthprovider_role = 'Role';
 $plugin_oauthprovider_url = 'URL';
 $plugin_oauthprovider_desc = 'Description';
 $plugin_oauthprovider_email = 'Email';

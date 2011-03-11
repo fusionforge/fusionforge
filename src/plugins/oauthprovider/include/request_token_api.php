@@ -69,7 +69,7 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
    * @return OauthAuthzRequestToken
    */
   static function row_to_new_token ($t_row) {
-    $t_token = new OauthAuthzRequestToken( $t_row['consumer_id'], $t_row['token_key'], $t_row['token_secret'], $t_row['authorized'], $t_row['role_id'], $t_row['user_id'], $t_row['time_stamp'] );
+    $t_token = new OauthAuthzRequestToken( $t_row['consumer_id'], $t_row['token_key'], $t_row['token_secret'], $t_row['authorized'], $t_row['user_id'], $t_row['role_id'], $t_row['time_stamp'] );
 
     $t_token->id = $t_row['id'];
 
