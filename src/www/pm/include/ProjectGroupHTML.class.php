@@ -88,6 +88,8 @@ function pm_header($params) {
 		$labels[] = _('Administration');
 		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
 	} else if (forge_check_perm ('pm_admin', $group_id)) {
+		$labels[] = _('Reporting');
+		$links[]  = '/pm/reporting/?group_id='.$group_id;
 		$labels[] = _('Administration');
 		$links[]  = '/pm/admin/?group_id='.$group_id;
 	}
