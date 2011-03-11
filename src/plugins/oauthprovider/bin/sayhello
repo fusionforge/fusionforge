@@ -1,0 +1,9 @@
+#! /usr/bin/perl -w
+
+my $world ;
+
+do "/etc/gforge/plugins/oauthprovider/world.conf"
+    or die "Cannot read /etc/gforge/plugins/oauthprovider/world.conf" ;
+
+print STDOUT "Hello $world on STDOUT!\n" ;
+print STDERR "Hello $world on STDERR!\n" ;

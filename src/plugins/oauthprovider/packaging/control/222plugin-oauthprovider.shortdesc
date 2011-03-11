@@ -1,0 +1,3 @@
+ This plugin contains the oauthprovider subsystem of FusionForge. It allows each
+ FusionForge project to have its own oauthprovider, and gives some
+ control over it to the project's administrator.

@@ -1,0 +1,8 @@
+common/*                  usr/share/gforge/plugins/oauthprovider/common/
+include/*                 usr/share/gforge/plugins/oauthprovider/include/
+db/*                      usr/share/gforge/plugins/oauthprovider/db/
+bin/*                     usr/share/gforge/plugins/oauthprovider/bin/
+www/*                     usr/share/gforge/plugins/oauthprovider/www/
+cronjobs/*                usr/share/gforge/cronjobs
+etc/plugins/oauthprovider/*     etc/gforge/plugins/oauthprovider/
+etc/httpd.d/*             usr/share/gforge/etc/httpd.d/

@@ -1,0 +1,5 @@
+etc/gforge/httpd.d
+etc/gforge/plugins/oauthprovider
+usr/share/gforge/plugins/oauthprovider/cgi-bin
+usr/share/gforge/plugins/oauthprovider/common
+usr/share/gforge/plugins/oauthprovider/www
