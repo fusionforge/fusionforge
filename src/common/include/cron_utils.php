@@ -4,6 +4,7 @@
  *
  * Copyright 2003, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -54,6 +55,11 @@ $cron_arr[23]='backup_site.php';
 $cron_arr[24]='svn-stats.php';
 $cron_arr[25]='homedirs.php';
 $cron_arr[26]='update_users.php';
+$cron_arr[27]='create_scm_repos.php';
+$cron_arr[28]='gather_scm_stats.php';
+
+$cron_arr[901]='create_groups.php';
+$cron_arr[902]='mailing_lists_index.php';
 
 function cron_entry($job,$output) {
 	$sql='INSERT INTO cron_history (rundate,job,output) 
