@@ -29,7 +29,6 @@ $LIMIT = 50;
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/account.php';
-require_once $gfcommon.'include/license.php';
 require_once $gfwww.'include/canned_responses.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
@@ -166,8 +165,6 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	</table>
 
 	<p>
-	<strong><?php echo _('License:')." "; print license_getname($row_grp['license']); ?></strong>
-
 	<?php
 
 		if (forge_get_config('use_shell')) {

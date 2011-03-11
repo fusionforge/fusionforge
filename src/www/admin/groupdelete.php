@@ -24,7 +24,6 @@
 
 require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'include/license.php';
 require_once $gfwww.'admin/admin_utils.php';
 
 session_require_global_perm ('forge_admin');
@@ -45,7 +44,7 @@ if (getStringFromPost('submit')) {
 	if (!$group->delete($sure, $reallysure, $reallyreallysure)) {
 		exit_error($group->getErrorMessage(),'admin');
 	} else {
-		plugin_hook('delete_link',$_GET['group_id']) ;
+		plugin_hook('delete_link',$group_id);
         $feedback = _('Project successfully deleted');
         session_redirect('/admin/?feedback='.urlencode($feedback));
 	}
