@@ -34,6 +34,8 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
+		$this->_addHook("user_link_with_tooltip"); 
+		$this->_addHook("javascript_file"); // Add js files for oslc plugin
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -60,11 +62,11 @@ class oslcPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]=util_make_uri('/plugins/oslc/');
-                $params['ADMIN'][]='';
+				$params['ADMIN'][]='';
 			} else {
 				$params['TITLES'][]=$this->text." is [Off]";
 				$params['DIRS'][]='';
-                $params['ADMIN'][]='';
+				$params['ADMIN'][]='';
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -149,7 +151,15 @@ class oslcPlugin extends Plugin {
 				echo '<p>'.util_make_link ("/plugins/oslc/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('oslc Admin')).'</p>' ;
 			}
-		}												    
+		}
+		elseif ($hookname == "user_link_with_tooltip"){
+			require_once dirname( __FILE__ ).'/CompactRessource.class.php';
+			$CR = new CompactRessource($params);
+			$params['user_link'] = $CR->compactUserLink($params['username'], $params['user_id']);
+		}
+		elseif ($hookname == "javascript_file") {
+			echo '<script type="text/javascript" src="/plugins/oslc/scripts/pluginOSLCHoverScripts.js"></script>'."\n";
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
