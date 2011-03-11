@@ -563,7 +563,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__ln_s} ../../plugins/mantisbt/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/mantisbt
 
 # plugin: oauthprovider
-%{__ln_s} ../../plugins/oauthprovider/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oauthprovider
+#%{__ln_s} ../../plugins/oauthprovider/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oauthprovider
 
 ### END OF PLUGIN SETUP ###
 
@@ -973,6 +973,7 @@ fi
 
 %files plugin-oauthprovider
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
+%{FORGE_CONF_DIR}/httpd.d/62plugin-oauthprovider
 %{FORGE_DIR}/plugins/oauthprovider
 
 %changelog
