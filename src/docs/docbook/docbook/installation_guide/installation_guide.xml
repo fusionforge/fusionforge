@@ -19,7 +19,7 @@
    For instance, an installation of FusionForge hosts over 450 users and over 140 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
   </para>
     <para>
-   You can find additionnal information about hardware used by several installations of FusionForge in the <ulink url="http://gforge.org/docman/view.php/1/52/gforge-sites.html">FusionForge sites list maintained by Tom Copeland</ulink>.
+   You can find additionnal information about hardware used by several installations of FusionForge in the <ulink url="http://fusionforge.org/docman/view.php/1/52/gforge-sites.html">FusionForge sites list maintained by Tom Copeland</ulink>.
   </para>
   </section>
   <section>
@@ -1123,8 +1123,6 @@ $conn = pg_connect(
     <para>You may also be missing GD support or be missing JPGraph or have it installed improperly. The <filename class="directory">jpgraph/src/</filename> directory should be specified accurately in your <filename class="directory">local.inc</filename> file, and you should include a <filename>/</filename> at the end of the path specified. In addition, you should modify <filename>jpgraph.php</filename> to set <literal>USE_CACHE=false</literal>.</para>
     <para>Q: How do I upgrade my database?</para>
     <para>A: As stated above, you must apply the changes that are listed in date order in the <filename class="directory">db/</filename> directory to your database. Only the changes that are not already in your old <filename class="directory">db/</filename> directory should be applied, and they should be applied and checked <emphasis>in order</emphasis>.</para>
-    <para>Q: I&apos;m getting an error about BaseLanguage.class.php not being found.</para>
-    <para>A: Make sure your localization path is correctly specified in the local.inc file and that it is readable <emphasis>and</emphasis> writable by the apache user.</para>
     <para>Q: When I click on <quote>/projects/</quote> or <quote>/users/</quote> links, I get the source code instead of the page I expected.</para>
     <para>A: As shown in the example <filename>httpd.conf</filename> files above, you may have to switch to using the <literal>&lt;Files&gt;</literal> or <literal>&lt;Location&gt;</literal> directives depending on your server version.</para>
     <para>Q: How do I backup FusionForge?</para>
