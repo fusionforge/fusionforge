@@ -306,12 +306,13 @@ class ArtifactExtraFieldElement extends Error {
 
 		$result = db_query_params ('DELETE FROM artifact_extra_field_elements WHERE element_id=$1',
 				    array ($this->getID())) ;
-		if ($result && db_affected_rows($result) > 0) {
-			return true;
-		} else {
+		if (! $result || ! db_affected_rows($result)) {
 			$this->setError(db_error());
 			return false;
 		}
+		$result = db_query_params ('DELETE FROM artifact_workflow_event WHERE from_value_id=$1 OR to_value_id=$1',
+				    array ($this->getID())) ;
+		return true;
 	}
 }
 
