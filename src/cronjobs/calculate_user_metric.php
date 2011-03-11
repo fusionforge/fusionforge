@@ -58,7 +58,7 @@ ON user_metric_history(month,day,user_id);
 		what we want - a list of the top users on the site.
 
 */
-require (dirname(__FILE__).'/../www/env.inc.php');
+require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
