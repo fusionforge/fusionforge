@@ -59,7 +59,7 @@ sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/f
 if $KEEPVM
 then
 	echo "Destroying vm $HOST"
-	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root

@@ -61,7 +61,7 @@ make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORK
 if $KEEPVM 
 then
 	echo "Destroying vm $HOST"
-	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
 (cd tests/scripts ; ./start_vm.sh $HOST)
 scp -r tests root@$HOST:/root
