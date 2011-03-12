@@ -56,7 +56,7 @@ mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage $WORKSPACE/apidoc
 [ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
 make BUILDRESULT=$WORKSPACE/build/packages buildtar
 
-(cd 3rdparty/selenium ; make getselenium)
+(cd 3rd-party/selenium ; make getselenium)
 
 cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
 sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
