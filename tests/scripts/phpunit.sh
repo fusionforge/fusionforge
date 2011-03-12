@@ -1,4 +1,19 @@
-#! /bin/sh -x
+#! /bin/sh
+if [ $# -eq 1 ]
+then
+        testsuite=$1
+else
+        echo "You must give the testsuite to run :"
+	echo "	- DEBDebian60Tests.php"
+	echo "	- RPMCentos52Tests.php"
+	echo "	- TarCentos52Tests.php"
+fi
+if [ "x$testsuite" == "x" ]
+then
+        echo "Forge test suite not found"
+        exit 1
+fi
+
 SELENIUM_RC_DIR=/var/log
 WORKSPACE=/root
 [ -d $WORKSPACE/reports ] || mkdir $WORKSPACE/reports
@@ -58,6 +73,6 @@ echo "This will run phpunit tests"
 killall -9 java
 LANG=C java -jar selenium-server.jar -interactive >/dev/null &
 cd tests
-phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
+phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite
 cd ..
 killall -9 java

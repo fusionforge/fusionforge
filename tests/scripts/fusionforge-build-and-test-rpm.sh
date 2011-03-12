@@ -85,7 +85,7 @@ ssh root@$HOST "service crond stop" || true
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
-	ssh -X root@$HOST "tests/scripts/phpunit.sh"
+	ssh -X root@$HOST "tests/scripts/phpunit.sh RPMCentos52Tests.php"
 else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php

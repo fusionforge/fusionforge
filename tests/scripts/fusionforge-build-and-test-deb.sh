@@ -90,7 +90,7 @@ ssh root@$HOST "invoke-rc.d cron stop" || true
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
-	ssh -X root@$HOST "tests/scripts/phpunit.sh" 
+	ssh -X root@$HOST "tests/scripts/phpunit.sh DEBDebian60Tests.php" 
 else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
