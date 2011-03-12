@@ -4956,6 +4956,7 @@ tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-build-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
+tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_lxc.sh -text
 tests/scripts/start_vm.sh -text svneol=unset#text/x-sh

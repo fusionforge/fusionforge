@@ -90,8 +90,7 @@ ssh root@$HOST "invoke-rc.d cron stop" || true
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
-	ssh -X root@$HOST "java -jar selenium-server.jar" &
-	ssh -X root@$HOST "cd tests; CONFIG_PHP=$CONFIG_PHP SELENIUM_RC_URL=$SELENIUM_RC_URL SELENIUM_RC_HOST=$HOST phpunit DEBDebian60Tests.php"
+	ssh -X root@$HOST "tests/scripts/phpunit.sh" 
 else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php
