@@ -1,5 +1,16 @@
 #! /bin/sh
-[ $# -eq 1 ] || exit 1
+if [ $# -eq 1 ]
+then
+	database=$1
+else
+	export PATH=$PATH:/usr/share/gforge/bin/:/opt/gforge/bin
+	database=`forge_get_config database_name`
+fi
+if [ "x$database" == "x" ]
+then
+	echo "Forge database name not found"
+	exit 1
+fi
 
 echo "Cleaning up the database"
 if type invoke-rc.d 2>/dev/null
@@ -11,7 +22,7 @@ else
 	service postgresql restart
 fi
 
-su - postgres -c "dropdb -e $1"
+su - postgres -c "dropdb -e $database"
 echo "Executing: pg_restore -C -d template1 < /root/dump"
 su - postgres -c "pg_restore -C -d template1" < /root/dump
 
