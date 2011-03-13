@@ -3,7 +3,7 @@ if [ $# -eq 1 ]
 then
 	database=$1
 else
-	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/bin
+	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
 	database=`forge_get_config database_name`
 fi
 if [ "x$database" == "x" ]
