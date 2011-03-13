@@ -71,7 +71,7 @@ EOF
 
 echo "This will run phpunit tests"
 killall -9 java
-LANG=C java -jar selenium-server.jar -interactive >/dev/null &
+LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/null &
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite
 cd ..
