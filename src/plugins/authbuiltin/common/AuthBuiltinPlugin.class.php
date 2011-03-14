@@ -69,21 +69,6 @@ class AuthBuiltinPlugin extends AuthPlugin {
 </p>
 </form>' ;
 	}
-
-	function login($user) {
-		if (!$this->isRequired() && !$this->isSufficient()) {
-			return true;
-		}
-		$this->saved_user = $user;
-		$this->setSessionCookie();
-	}
-
-	function logout() {
-		if (!$this->isRequired() && !$this->isSufficient()) {
-			return true;
-		}
-		$this->unsetSessionCookie();
-	}
 }
 
 // Local Variables:

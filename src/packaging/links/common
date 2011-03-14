@@ -1,4 +1,4 @@
 /usr/share/@PACKAGE@/common/include/database-pgsql.php /usr/share/@PACKAGE@/common/include/database.php
 /etc/@PACKAGE@/config.ini /etc/@OLDPACKAGE@/config.ini
 /etc/@PACKAGE@/config.ini.d /etc/@OLDPACKAGE@/config.ini.d
-/usr/share/@PACKAGE@/plugins/authbuiltin/www /usr/share/@PACKAGE@/www/plugins/authbuiltin
+/usr/share/@OLDPACKAGE@/plugins/authbuiltin/www /usr/share/@OLDPACKAGE@/www/plugins/authbuiltin

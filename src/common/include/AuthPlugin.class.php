@@ -135,19 +135,36 @@ abstract class AuthPlugin extends Plugin {
 		session_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
 	}
 
+	function login($user) {
+		if ($this->isSufficient() || $this->isRequired()) {
+			$this->saved_user = $user;
+			$this->setSessionCookie();
+		} else {
+			return true;
+		}
+	}
+
+	function logout() {
+		if ($this->isSufficient() || $this->isRequired()) {
+			$this->unsetSessionCookie();
+		} else {
+			return true;
+		}
+	}
+
 	protected function unsetSessionCookie() {
 		session_cookie($this->cookie_name, '');
 	}
 
-	protected function isRequired() {
+	public function isRequired() {
 		return forge_get_config('required', $this->name);
 	}
 
-	protected function isSufficient() {
+	public function isSufficient() {
 		return forge_get_config('sufficient', $this->name);
 	}
 
-	protected function syncDataOn($event) {
+	public function syncDataOn($event) {
 		$configval = forge_get_config('sync_data_on', $this->name);
 		$events = array();
 
