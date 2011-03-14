@@ -108,7 +108,9 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			foreach (explode(',', forge_get_config('mapping', $this->name))
 				 as $map_entry) {
 				list ($fffield, $ldapfield) = explode('=',$map_entry);
-				$user_data[$fffield] = $data[$ldapfield][0];
+				if (array_key_exists($ldapfield, $data)) {
+					$user_data[$fffield] = $data[$ldapfield][0];
+				}
 			}
 
 			if (!$u->create ($user_data['unix_name'],
@@ -161,7 +163,9 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		foreach (explode(',', forge_get_config('mapping', $this->name))
 			 as $map_entry) {
 			list ($fffield, $ldapfield) = explode('=',$map_entry);
-			$mapped_data[$fffield] = $data[$ldapfield][0];
+			if (array_key_exists($ldapfield, $data)) {
+				$mapped_data[$fffield] = $data[$ldapfield][0];
+			}
 		}
 		
 		$u->update($mapped_data['firstname'],
@@ -309,8 +313,9 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 
 		// If the ldap server does not allow anonymous bind,
 		// then authentificate with the server.
-		if ($this->ldap_bind_dn) {
-			if (!@ldap_bind($conn, $this->ldap_bind_dn, $this->ldap_bind_pwd)) {
+		if (forge_get_config('manager_dn', $this->name)) {
+			if (!@ldap_bind($conn, forge_get_config('manager_dn', $this->name),
+					forge_get_config('ldap_password'))) {
 				error_log("LDAP application bind failed.");
 				return false;
 			}
