@@ -250,7 +250,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			}
 		}
 
-		$res = ldap_search($this->ldap_conn, forge_get_config('base_dn', $this->name), "($ldapfield=$loginname)");
+		$res = ldap_search($this->ldap_conn, forge_get_config('base_dn', $this->name), "($fieldname=$loginname)");
 		if (!$res || ldap_count_entries($this->ldap_conn, $res) == 0) {
 			// No user by that name in LDAP directory
 			return false;
