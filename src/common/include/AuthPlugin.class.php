@@ -42,7 +42,8 @@ abstract class ForgeAuthPlugin extends Plugin {
 		// get_extra_roles - add new roles not necessarily stored in the database
 		// restrict_roles - filter out unwanted roles
 		// close_auth_session - terminate an authentication session
-
+		
+		$this->saved_user = NULL;
 	}
 
 	// Hook dispatcher
@@ -142,14 +143,15 @@ abstract class ForgeAuthPlugin extends Plugin {
 		session_set_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
 	}
 
-	function login($user) {
+	function login($username) {
 		if ($this->isSufficient() || $this->isRequired()) {
-			$this->saved_user = $user;
-			$this->setSessionCookie();
 			$params = array();
-			$params['user'] = $user;
+			$params['username'] = $username;
 			$params['event'] = 'login';
 			plugin_hook('sync_account_info', $params);
+			$user = user_get_object_by_name($username);
+			$this->saved_user = $user;
+			$this->setSessionCookie();
 		} else {
 			return true;
 		}

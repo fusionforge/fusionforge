@@ -30,12 +30,11 @@ require_once $GLOBALS['gfcommon'].'include/User.class.php';
 class LdapextauthPlugin extends ForgeAuthPlugin {
 	protected $saved_login;
 	protected $saved_password;
-	protected $saved_user;
 	protected $saved_data;
 
-	function LdapextauthPlugin () {
+	function LdapextauthPlugin() {
 		global $gfconfig;
-		$this->ForgeAuthPlugin() ;
+		$this->ForgeAuthPlugin();
 		$this->name = "ldapextauth";
 		$this->text = "LDAP authentication";
 
@@ -47,10 +46,9 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 
 		$this->cookie_name = 'forge_session_ldapextauth';
 
-		$this->ldap_conn = false ;
+		$this->ldap_conn = false;
 		$this->saved_login = '';
 		$this->saved_password = '';
-		$this->saved_user = NULL;
 		$this->saved_data = array();
 
 		$this->declareConfigVars();
@@ -60,22 +58,93 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		if (!$this->syncDataOn($params['event'])) {
 			return true;
 		}
-		$u = $params['user'];
+		$n = $params['username'];
 		$data = $this->saved_data;
 
 		if (!$data) {
-			$data = $this->fetchDataForUser($u->getUnixName());
+			$data = $this->fetchDataForUser($n);
 		}
 
 		if (!$data) {
-			error_log("No data to sync from LDAP for user ".$u->getUnixName());
+			error_log("No data to sync from LDAP for username ".$n);
 			return true;
+		}
+
+		$u = user_get_object_by_name($n);
+
+		if (!$u) {
+			// No user by that name yet, let's create it
+
+			$u = new GFUser();
+
+			$user_data = array();
+			
+			$user_data['unix_name'] = $n;
+			$user_data['firstname'] = '';
+			$user_data['lastname'] = '';
+			if ($this->saved_password == '') {
+				$user_data['password1'] = 'INVALID';
+			} else {
+				$user_data['password1'] = $this->saved_password;
+			}
+			$user_data['password2'] = $user_data['password1'];
+			$user_data['email'] = '';
+			$user_data['mail_site'] = 1;
+			$user_data['mail_va'] = 0;
+			$user_data['language_id'] = 1;
+			$user_data['timezone'] = 'GMT';
+			$user_data['jabber_address'] = '';
+			$user_data['jabber_only'] = 0;
+			$user_data['theme_id'] = 1;
+			$user_data['unix_box'] = '';
+			$user_data['address'] = '';
+			$user_data['address2'] = '';
+			$user_data['phone'] = '';
+			$user_data['fax'] = '';
+			$user_data['title'] = '';
+			$user_data['ccode'] = 'US';
+			$send_mail = false;
+
+			foreach (explode(',', forge_get_config('mapping', $this->name))
+				 as $map_entry) {
+				list ($fffield, $ldapfield) = explode('=',$map_entry);
+				$user_data[$fffield] = $this->data[$ldapfield][0];
+			}
+
+			if (!$u->create ($user_data['unix_name'],
+					 $user_data['firstname'],
+					 $user_data['lastname'],
+					 $user_data['password1'],
+					 $user_data['password2'],
+					 $user_data['email'],
+					 $user_data['mail_site'],
+					 $user_data['mail_va'],
+					 $user_data['language_id'],
+					 $user_data['timezone'],
+					 $user_data['jabber_address'],
+					 $user_data['jabber_only'],
+					 $user_data['theme_id'],
+					 $user_data['unix_box'],
+					 $user_data['address'],
+					 $user_data['address2'],
+					 $user_data['phone'],
+					 $user_data['fax'],
+					 $user_data['title'],
+					 $user_data['ccode'],
+					 $send_mail)) {
+				return false;
+			}
+			
+			if (!$u->setStatus ('A')) {
+				return false;
+			}
 		}
 
 		if ($u->getStatus() == 'D') {
 			$u->setStatus('A');
 		}
-		if (!session_check_credentials_in_database($this->saved_login, $this->saved_password, false)) {
+		if ($this->saved_password != ''
+		    && !session_check_credentials_in_database($this->saved_login, $this->saved_password, false)) {
 			$u->setPasswd($this->saved_password);
 		}
 		
@@ -131,21 +200,21 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		echo _('LDAP Login name:');
 		echo '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
-</form>' ;
+</form>';
 	}
 
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
 
-		forge_define_config_item ('start_tls', $this->name, 'no');
-		forge_set_config_item_bool ('start_tls', $this->name) ;
+		forge_define_config_item('start_tls', $this->name, 'no');
+		forge_set_config_item_bool('start_tls', $this->name);
 
-		forge_define_config_item ('ldap_server', $this->name, 'ldap.example.com');
-		forge_define_config_item ('ldap_port', $this->name, 389);
-		forge_define_config_item ('base_dn', $this->name, 'ou=users,dc=example,dc=com');
-		forge_define_config_item ('skipped_users', $this->name, '');
-		forge_define_config_item ('manager_dn', $this->name, '');
-		forge_define_config_item ('manager_password', $this->name, '');
+		forge_define_config_item('ldap_server', $this->name, 'ldap.example.com');
+		forge_define_config_item('ldap_port', $this->name, 389);
+		forge_define_config_item('base_dn', $this->name, 'ou=users,dc=example,dc=com');
+		forge_define_config_item('skipped_users', $this->name, '');
+		forge_define_config_item('manager_dn', $this->name, '');
+		forge_define_config_item('manager_password', $this->name, '');
 	}
 
 	/// HELPERS
@@ -172,12 +241,12 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			}
 		}
 
-		$res = ldap_search($this->ldap_conn, forge_get_config('base_dn', $this->name), "($ldapfield=$loginname)") ;
+		$res = ldap_search($this->ldap_conn, forge_get_config('base_dn', $this->name), "($ldapfield=$loginname)");
 		if (!$res || ldap_count_entries($this->ldap_conn, $res) == 0) {
 			// No user by that name in LDAP directory
 			return false;
 		}
-		$info = ldap_get_entries ($this->ldap_conn,$res);
+		$info = ldap_get_entries($this->ldap_conn,$res);
 		$data = $info[0];
 		return $data;
 	}
@@ -192,7 +261,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			}
 		}
 
-		$data = fetchDataForUser($loginname) ;
+		$data = fetchDataForUser($loginname);
 		if (!$data) {
 			return FORGE_AUTH_AUTHORITATIVE_REJECT;
 		}
@@ -216,13 +285,13 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		$server = forge_get_config('ldap_server', $this->name);
 		$port = forge_get_config('ldap_port', $this->name);
 		if ($port) {
-			$conn = ldap_connect ($server, $port);
+			$conn = ldap_connect($server, $port);
 		} else {
-			$conn = ldap_connect ($server);
+			$conn = ldap_connect($server);
 		}
 
 		if (forge_get_config('ldap_version')) {
-			if (!ldap_set_option ($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
+			if (!ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
 				return false;
 			}
 		}

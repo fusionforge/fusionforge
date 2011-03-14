@@ -75,7 +75,7 @@ if ($login) {
 	$test = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
 	if ($test == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
 		if ($plugin->isSufficient()) {
-			$plugin->login(user_get_object_by_name($form_loginname));
+			$plugin->login($form_loginname);
 		}
 		if ($return_to) {
 			header ("Location: " . util_make_url($return_to));

@@ -24,11 +24,6 @@ require_once $GLOBALS['gfcommon'].'include/User.class.php';
 require_once 'CAS.php';
 
 class AuthCASPlugin extends ForgeAuthPlugin {
-	protected $saved_login;
-	protected $saved_password;
-	protected $saved_user;
-	protected $saved_data;
-
 	function AuthCASPlugin () {
 		global $gfconfig;
 		$this->ForgeAuthPlugin() ;

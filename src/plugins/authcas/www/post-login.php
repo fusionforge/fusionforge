@@ -79,7 +79,7 @@ if ($login) {		     // The user just clicked the Login button
 } elseif ($postcas) {		// The user is coming back from CAS
 	if (phpCAS::isAuthenticated()) {
 		if ($plugin->isSufficient()) {
-			$plugin->login(user_get_object_by_name($form_loginname));
+			$plugin->login($form_loginname);
 		}
 		if ($return_to) {
 			header ("Location: " . util_make_url($return_to));
