@@ -22,6 +22,7 @@
  */
 
 forge_define_config_item('storage_base','projectimport-plugin','$core/data_path/plugins/projectimport/');
+forge_define_config_item('libmagic_db','projectimport-plugin','/usr/share/misc/magic.mgc');
 
 class ProjectImportPlugin extends Plugin {
 	function ProjectImportPlugin () {

@@ -42,6 +42,8 @@ class AbstractFilesDirectory extends Error {
 		
 	protected $html_generator;
 	
+	protected static $finfo;
+	
 	/**
 	 * Initializes the directory permissions
 	 */
@@ -56,6 +58,12 @@ class AbstractFilesDirectory extends Error {
 		}
 	}
 	
+	protected static function finfo() {
+		if (!isset(self::$finfo)) {
+			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport-plugin'));
+		}
+		return self::$finfo;
+	}
 	/**
 	 * Constructor
 	 * @param HTML generator $HTML
@@ -64,6 +72,11 @@ class AbstractFilesDirectory extends Error {
 	public function AbstractFilesDirectory($HTML, $storage_base=False) {
 		
 		$this->html_generator = $HTML;
+		
+		if (!isset(self::$finfo)) {
+			self::$finfo = new finfo(FILEINFO_MIME, forge_get_config('libmagic_db', 'projectimport-plugin'));
+		}
+		
 		if(! $storage_base) {
 			$storage_base = tempnam("/tmp", "ff-projectimport");
 		}
@@ -115,19 +128,39 @@ class AbstractFilesDirectory extends Error {
 		return $html;
 	}
 	
+	public function getMimeType($filepath) {
+		$finfo = self::finfo();
+		if (!$finfo) {
+			$this->setError(_('Opening fileinfo database failed'));
+			return false;
+		}
+		$mimetype = $finfo->file($filepath);
+		$mimetype = strstr($mimetype, ';', true);
+			
+		// try to identify OpenDocument Package Zip container
+		if ($mimetype == 'application/octet-stream') {
+			$zip = new ZipArchive;
+			$res = $zip->open($filepath);
+			if ($res === TRUE) {
+				// if it has a mimetype file in the zip, then read its contents 
+				$contents = $zip->getFromName('mimetype');
+				if($contents) {
+					$mimetype = $contents;
+				}
+			}	
+		}
+		return $mimetype;
+	}
+	
 	/**
 	 * Returns an HTML box/table containing (single) file selection radio buttons
 	 * @param string $preselected filename
 	 * @return boolean|string
 	 */
 	public function displayFileSelectionForm($preselected = False) {
-		$html = '';
-		$finfo = new finfo(FILEINFO_MIME, "/usr/share/misc/magic"); // return mime type ala mimetype extension
+		$html = '';		
 
-		if (!$finfo) {
-			$this->setError(_('Opening fileinfo database failed'));
-			return false;
-		}
+		
 		
 		if (is_dir($this->dir_path)) {
 			$contents = scandir($this->dir_path);
@@ -143,10 +176,19 @@ class AbstractFilesDirectory extends Error {
 					if ($file != '.' && $file != '..') {
 						$filepath = $this->dir_path . $file;
 						$filetype = filetype($filepath);
-						$html .= '<tr>';
-						$html .= '<td style="white-space: nowrap;"><tt>'. $file .'</tt></td>';
+						$mimetype = False;
 						if ($filetype == 'file') {
-							$mimetype = $finfo->file($filepath);
+							$mimetype = $this->getMimeType($filepath);
+						}
+						$html .= '<tr>';
+						if ($mimetype == 'application/x-planetforge-forge-export') {
+							$html .= '<td style="white-space: nowrap;"><tt><b>'. $file .'</b></tt></td>';
+							$mimetype = '<b>PlanetForge forge export container ('.$mimetype.')</b>';
+						}
+						else {
+							$html .= '<td style="white-space: nowrap;"><tt>'. $file .'</tt></td>';
+						}
+						if ($filetype == 'file') {
 							$html .= '<td style="white-space: nowrap;">' . $mimetype . '</td>';
 							$sha_filename = sha1($file);
 							if ($file == $preselected) {
