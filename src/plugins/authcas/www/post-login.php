@@ -65,29 +65,42 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
-// Start authentication proper
-if ($login) {		     // The user just clicked the Login button
-	// Let's send them to CAS
+$plugin->initCAS();
 
-	$plugin->initCAS();
-	$return_url = util_make_url('/plugins/authcas/post-login.php?postcas=true&return_to='.htmlspecialchars($return_to));
-
-	$GLOBALS['PHPCAS_CLIENT']->setURL($return_url);
-
-	phpCAS::forceAuthentication();
-
-} elseif ($postcas) {		// The user is coming back from CAS
-	if (phpCAS::isAuthenticated()) {
-		if ($plugin->isSufficient()) {
-			$plugin->login($form_loginname);
-		}
-		if ($return_to) {
-			header ("Location: " . util_make_url($return_to));
-			exit;
-		} else {
-			header ("Location: " . util_make_url("/my"));
-			exit;
-		}
+if (phpCAS::isAuthenticated()) {
+	if ($plugin->isSufficient()) {
+		$plugin->login(phpCAS::getUser());
+	}
+	if ($return_to) {
+		header ("Location: " . util_make_url($return_to));
+		exit;
+	} else {
+		header ("Location: " . util_make_url("/my"));
+		exit;
+	}
+} else {
+	if ($login) {		     // The user just clicked the Login button
+		// Let's send them to CAS
+		
+		$return_url = util_make_url('/plugins/authcas/post-login.php?postcas=true&return_to='.htmlspecialchars($return_to));
+		
+		$GLOBALS['PHPCAS_CLIENT']->setURL($return_url);
+		
+		phpCAS::forceAuthentication();
+		
+	} elseif ($postcas) {		// The user is coming back from CAS
+		if (phpCAS::isAuthenticated()) {
+			if ($plugin->isSufficient()) {
+				$plugin->login(phpCAS::getUser());
+			}
+			if ($return_to) {
+				header ("Location: " . util_make_url($return_to));
+				exit;
+			} else {
+				header ("Location: " . util_make_url("/my"));
+				exit;
+			}
+		} 
 	}
 }
 

@@ -54,6 +54,12 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 			       forge_get_config('cas_server', $this->name),
 			       intval(forge_get_config('cas_port', $this->name)),
 			       '');
+		if (forge_get_config('validate_server_certificate', $this->name)) {
+			// TODO
+		} else {
+			phpCAS::setNoCasServerValidation();
+		}
+
 		self::$init = true;
 	}
 
@@ -84,9 +90,9 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		$user_id_from_cookie = $this->checkSessionCookie();
 		if ($user_id_from_cookie) {
 			$user = user_get_object($user_id_from_cookie);
+			$this->login($user->getUnixName());
 		} elseif (phpCAS::isAuthenticated()) {
-			$user = user_get_object_by_name(phpCAS::getUser());
-			$this->login($user);
+			$this->login(phpCAS::getUser());
 		}
 		
 		if ($user) {
@@ -130,6 +136,8 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		forge_define_config_item ('cas_port', $this->name, 443);
 		forge_define_config_item ('cas_version', $this->name, '2.0');
 
+		forge_define_config_item('validate_server_certificate', $this->name, 'no');
+		forge_set_config_item_bool('validate_server_certificate', $this->name);
 	}
 
 }

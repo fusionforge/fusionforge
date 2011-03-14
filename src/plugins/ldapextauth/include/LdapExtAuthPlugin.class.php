@@ -108,7 +108,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			foreach (explode(',', forge_get_config('mapping', $this->name))
 				 as $map_entry) {
 				list ($fffield, $ldapfield) = explode('=',$map_entry);
-				$user_data[$fffield] = $this->data[$ldapfield][0];
+				$user_data[$fffield] = $data[$ldapfield][0];
 			}
 
 			if (!$u->create ($user_data['unix_name'],
@@ -161,7 +161,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		foreach (explode(',', forge_get_config('mapping', $this->name))
 			 as $map_entry) {
 			list ($fffield, $ldapfield) = explode('=',$map_entry);
-			$mapped_data[$fffield] = $this->saved_data[$ldapfield][0];
+			$mapped_data[$fffield] = $data[$ldapfield][0];
 		}
 		
 		$u->update($mapped_data['firstname'],
@@ -241,7 +241,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		foreach (explode(',', forge_get_config('mapping', $this->name))
 			 as $map_entry) {
 			list ($fffield, $ldapfield) = explode('=',$map_entry);
-			if ($fffield = 'username') {
+			if ($fffield == 'username') {
 				$fieldname = $ldapfield;
 			}
 		}
