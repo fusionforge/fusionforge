@@ -1245,7 +1245,7 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -1268,7 +1268,7 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -1889,7 +1889,7 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 
@@ -1931,7 +1931,7 @@ eval {
         @reqlist = () ;
 
         &update_db_version ($target) ;
-        &debug ("Committing.") ;
+        &debug ("...OK.") ;
         $dbh->commit () ;
     }
 

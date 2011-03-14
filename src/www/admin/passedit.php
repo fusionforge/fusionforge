@@ -75,7 +75,7 @@ if (getStringFromRequest('submit')) {
 		plugin_hook('change_cal_password',$u->getID());
 	}
 
-	site_admin_header(array('title'=>_('Site·Admin:·Successfully Changed·User·Password')));
+	site_admin_header(array('title'=>_('Site Admin: Successfully Changed User Password')));
 
 	printf(_('<h2>%1$s Password Change Confirmation</h2><p>You have changed the password of %2$s (%3$s).</p>'), forge_get_config('forge_name'), $u->getUnixName(), $u->getRealName());
 	printf('<p>'._("Go back to %s.").'</p>', '<a href="userlist.php">'._("the Full User List").'</a>');

@@ -53,7 +53,6 @@ class HudsonJob {
         $this->_setStreamContext();
         
         $this->buildJobObject();
-        $this->configJobObject();
         
     }
     function getHudsonControler() {
@@ -64,7 +63,10 @@ class HudsonJob {
         $this->dom_job = $this->_getXMLObject($this->hudson_job_url);
     }
     
-	public function configJobObject() {
+    public function configJobObject() {
+	if ($this->config_job) {
+	    return;
+	}
         $this->config_job = $this->_getXMLObject($this->hudson_config_job_url);
     }
     
@@ -289,7 +291,8 @@ class HudsonJob {
         }
     }
     
-	function getSvnLocation() {
+    function getSvnLocation() {
+        $this->configJobObject();
         return $this->config_job->scm->locations->{'hudson.scm.SubversionSCM_-ModuleLocation'}->remote;
     }
     
