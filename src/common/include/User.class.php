@@ -531,9 +531,10 @@ Enjoy the site.
 	 * @param	string	The users title.
 	 * @param	string	The users ccode.
 	 * @param	int	The users preference for tooltips.
+	 * @param	string	The users email.
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
-		$jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips) {
+			$jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips, $email='') {
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
@@ -597,28 +598,33 @@ Enjoy the site.
 			$this->setError(_('ERROR - Could Not Update User Object:'). ' ' .db_error());
 			db_rollback();
 			return false;
-		} else {
-			// If there's a transaction from using to not
-			// using ratings, remove all rating made by the
-			// user (ratings by others should not be removed,
-			// as it opens possibility to abuse rate system)
-			if (!$use_ratings && $this->usesRatings()) {
-				db_query_params('DELETE FROM user_ratings WHERE rated_by=$1',
-						 array($user_id));
-			}
-			if (!$this->fetchData($this->getID())) {
-				db_rollback();
-				return false;
-			}
-			
-			$hook_params = array ();
-			$hook_params['user'] = $this;
-			$hook_params['user_id'] = $this->getID();
-			plugin_hook ("user_update", $hook_params);
-			
-			db_commit();
-			return true;
 		}
+
+		if ($email && $email != $this->getEmail()
+		    && !$this->setEmail($email)) {
+			return false;
+		}
+
+		// If there's a transaction from using to not
+		// using ratings, remove all rating made by the
+		// user (ratings by others should not be removed,
+		// as it opens possibility to abuse rate system)
+		if (!$use_ratings && $this->usesRatings()) {
+			db_query_params('DELETE FROM user_ratings WHERE rated_by=$1',
+					array($user_id));
+		}
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+		
+		$hook_params = array ();
+		$hook_params['user'] = $this;
+		$hook_params['user_id'] = $this->getID();
+		plugin_hook ("user_update", $hook_params);
+		
+		db_commit();
+		return true;
 	}
 
 	/**
