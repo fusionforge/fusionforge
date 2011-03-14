@@ -1,4 +1,3 @@
 plugins/ldapextauth/include              usr/share/@OLDPACKAGE@/plugins/ldapextauth/
 plugins/ldapextauth/www              usr/share/@OLDPACKAGE@/plugins/ldapextauth/
 plugins/ldapextauth/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
-plugins/ldapextauth/etc/plugins/ldapextauth/*  etc/gforge/plugins/ldapextauth/
