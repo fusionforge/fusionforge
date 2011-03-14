@@ -73,7 +73,6 @@ if ($login) {
 		exit_form_double_submit();
 	}
 	$success = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
-	$success = ($form_pw == 'toto');
 	if ($success) {
 		if ($plugin->isSufficient()) {
 			$plugin->login(user_get_object_by_name($form_loginname));

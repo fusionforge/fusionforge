@@ -1,31 +1,26 @@
-gforge-plugin-ldapextauth
--------------------------
+fusionforge-plugin-ldapextauth
+------------------------------
 
-This is the external LDAP authentication plugin for Gforge.
-
-Prerequisite:
-
-- install Perl, DBI and DBD::Pg as per Gforge's INSTALL file
+This is the external LDAP authentication plugin for FusionForge.
 
 Installation:
 
-- files from etc/ go to /etc/gforge/plugins/ldapextauth
-- files from bin/ go to /usr/share/gforge/plugins/ldapextauth/bin
-- files from include/ go to /usr/share/gforge/plugins/ldapextauth/include
+- files from include/ go to /usr/share/gforge/plugins/ldapextauth/include/
+- files from www/ go to /usr/share/gforge/www/plugins/ldapextauth/
 
 Setup:
 
-- customise files in /etc/gforge/plugins/ldapextauth to match your
+- customise /etc/fusionforge/config.ini.d/ldapextauth.ini to match your
 LDAP installation (server, base DN, and mapping)
-- /usr/share/gforge/plugins/ldapextauth/bin/db-upgrade.pl
-- /usr/share/gforge/bin/register-plugin ldapextauth "LDAP external authentication"
+- /usr/share/gforge/bin/register-plugin ldapextauth "LDAP external
+authentication"
 
-Voilà, you can now log into Gforge with your existing loginname and
-password.  Your account will be created the first time you log in
+Voilà, you can now log into FusionForge with your existing loginname
+and password.  Your account will be created the first time you log in
 (which means you can't add someone to a group before his/her first
 login).
 
- -- Roland Mas <lolando@debian.org>, Tue May 18 22:14:54 2004
+ -- Roland Mas <lolando@debian.org>, Wed, 23 Feb 2011 14:43:39 +0100
 
 Local Variables:
 mode: readme-debian

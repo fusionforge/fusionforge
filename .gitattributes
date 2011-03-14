@@ -1679,8 +1679,6 @@ src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_
 src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#image/png
 src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#image/png
 src/plugins/ldapextauth/NAME -text
-src/plugins/ldapextauth/bin/db-delete.pl svneol=native#text/x-perl
-src/plugins/ldapextauth/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/ldapextauth/etc/ldapextauth.ini -text
 src/plugins/ldapextauth/packaging/control/300plugin-ldapextauth -text
 src/plugins/ldapextauth/packaging/control/300plugin-ldapextauth.shortdesc -text
