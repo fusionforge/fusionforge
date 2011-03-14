@@ -28,7 +28,7 @@
 require_once $GLOBALS['gfcommon'].'include/User.class.php';
 // require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/mapping.php' ;
 
-class LdapextauthPlugin extends AuthPlugin {
+class LdapextauthPlugin extends ForgeAuthPlugin {
 	protected $saved_login;
 	protected $saved_password;
 	protected $saved_user;
@@ -36,7 +36,7 @@ class LdapextauthPlugin extends AuthPlugin {
 
 	function LdapextauthPlugin () {
 		global $gfconfig;
-		$this->Plugin() ;
+		$this->ForgeAuthPlugin() ;
 		$this->name = "ldapextauth";
 		$this->text = "LDAP authentication";
 

@@ -22,13 +22,13 @@
  * USA
  */
 
-class AuthBuiltinPlugin extends AuthPlugin {
+class AuthBuiltinPlugin extends ForgeAuthPlugin {
 	/**
 	 * AuthBuiltinPlugin() - constructor
 	 *
 	 */	
 	function AuthBuiltinPlugin() {
-		$this->AuthPlugin();
+		$this->ForgeAuthPlugin();
 
 		$this->name = 'authbuiltin';
 		$this->text = 'Built-in authentication';

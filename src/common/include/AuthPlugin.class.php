@@ -26,12 +26,12 @@ define('FORGE_AUTH_AUTHORITATIVE_ACCEPT', 1);
 define('FORGE_AUTH_AUTHORITATIVE_REJECT', 2);
 define('FORGE_AUTH_NOT_AUTHORITATIVE', 3);
 
-abstract class AuthPlugin extends Plugin {
+abstract class ForgeAuthPlugin extends Plugin {
 	/**
-	 * AuthPlugin() - constructor
+	 * ForgeAuthPlugin() - constructor
 	 *
 	 */
-	function AuthPlugin() {
+	function ForgeAuthPlugin() {
 		$this->Plugin();
 		// Common hooks that can be enabled per plugin:
 		// check_auth_session - is there a valid session?
