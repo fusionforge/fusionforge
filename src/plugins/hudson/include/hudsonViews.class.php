@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (c) 2010 Alcatel-Lucent
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is a part of Codendi.
  *
@@ -42,7 +43,7 @@ class hudsonViews extends Views {
 
 		parent::header();
 //		echo $this->_getHelp();
-		echo '<h1>'.$this->_getTitle().'</h1>';
+//		echo '<h1>'.$this->_getTitle().'</h1>';
 	}
 	function _getTitle() {
 //		return _("Continuous Integration");

@@ -3,7 +3,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems 
  * Copyright 2010, FusionForge Team
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -49,7 +49,7 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 			echo "$titles[$i]=>$opened[$i]/$all[$i]<br />";
 		}
 */
-		$scale=graph_calculate_scale(array($opened,$all),400);
+		$scale=graph_calculate_scale(array($open,$all),400);
 		$props["scale"]=$scale;
 		$props["cellspacing"]=5;
 		$props = hv_graph_defaults($props);

@@ -155,6 +155,7 @@ class ForumAdmin extends Error {
 	function ExecuteAction ($action) {
         global $HTML;
 		
+		$feedback='';
 		if ($action == "change_status") { //change a forum
 			$forum_name = getStringFromRequest('forum_name');
 			$description = getStringFromRequest('description');
@@ -326,7 +327,10 @@ class ForumAdmin extends Error {
 				return;			
 			}
 
-			$options = array("1" => "No action","2" => "Delete","3" => "Release"); //array with the supported actions
+			//array with the supported actions
+			$options = array("1" => _("No action"),
+                             "2" => _("Delete"),
+                             "3" => _("Release"));
 			//i'll make a hidden variable, helps to determine when the user updates the info, which action corresponds to which msgID
 			$ids='';
 			for($i=0;$i<db_numrows($res);$i++) {

@@ -27,41 +27,14 @@ class SVNCommitEmailPlugin extends Plugin {
 		$this->Plugin() ;
 		$this->name = "svncommitemail" ;
 		$this->text = "Source Code and Mailing List Integration" ;
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
+		$this->hooks[] = "groupisactivecheckbox" ;
+		$this->hooks[] = "groupisactivecheckboxpost" ;
 	}
 
-	function CallHook ($hookname, &$params) {
-		global $use_svncommitemailplugin,$G_SESSION,$HTML;
-		$group_id=$params['group'];
-		if ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-			$group = group_get_object($group_id);
-			if ($group->usesPlugin('scmsvn')) {
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="checkbox" name="use_svncommitemailplugin" value="1" ';
-				// checked or unchecked?
-				if ( $group->usesPlugin ( $this->name ) ) {
-					echo 'checked="checked"';
-				}
-				echo " /><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<strong>Use ".$this->text." Plugin</strong>";
-				echo "</td>";
-				echo "</tr>";
-			}
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-			$group = &group_get_object($group_id);
-			$use_svncommitemailplugin = getStringFromRequest('use_svncommitemailplugin');
-			if ( $use_svncommitemailplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
+	function groupisactivecheckbox (&$params) {
+		$group = group_get_object($params['group']);
+		if ($group->usesPlugin('scmsvn') || $group->usesPlugin('websvn')) {
+			parent::groupisactivecheckbox($params);
 		} 
 	}
 }

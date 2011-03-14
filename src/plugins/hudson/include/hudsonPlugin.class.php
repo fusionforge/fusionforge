@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright Copyright (c) Xerox Corporation, Codendi 2007-2008.
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is licensed under the GNU General Public License version 2. See the file COPYING.
  * 
@@ -86,6 +86,14 @@ class hudsonPlugin extends Plugin {
 
 		}	
 	}
+
+	function groupisactivecheckbox (&$params) {
+		$group = group_get_object($params['group']);
+		if ($group->usesPlugin('scmsvn')) {
+			parent::groupisactivecheckbox($params);
+		}
+	}
+
 	function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'hudsonPluginInfo')) {
 			require_once('hudsonPluginInfo.class.php');

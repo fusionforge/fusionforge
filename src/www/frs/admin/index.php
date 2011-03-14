@@ -6,6 +6,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -55,7 +56,6 @@ if (getStringFromRequest('submit')) {
 	$func = getStringFromRequest('func');
 	$package_id = getIntFromRequest('package_id');
 	$package_name = trim(getStringFromRequest('package_name'));
-	$status_id = getIntFromRequest('status_id');
 	$is_public = getStringFromRequest('is_public');
 
 	/*
@@ -101,6 +101,7 @@ if (getStringFromRequest('submit')) {
 		} elseif ($frsp->isError()) {
 			exit_error($frsp->getErrorMessage(),'frs');
 		}
+		$status_id = $frsp->getStatus();
 		if (!$frsp->update($package_name,$status_id)) {
 			exit_error($frsp->getErrorMessage(),'frs');
 		} else {

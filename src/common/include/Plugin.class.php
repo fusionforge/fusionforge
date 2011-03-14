@@ -4,8 +4,9 @@
  *
  * Copyright 2002, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
- * Portions Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Portions Copyright 2010 (c) Mélanie Le Bail
+ * Copyright 2001-2009, Xerox Corporation, Codendi Team
+ * Copyright 2010, Mélanie Le Bail
+ * Copyright 2011, Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.

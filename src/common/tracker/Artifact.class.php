@@ -956,13 +956,13 @@ class Artifact extends Error {
 			$ef = $this->ArtifactType->getExtraFields();
 			$ef_new = $newArtifactType->getExtraFields();
 			foreach($extra_fields as $extra_id => $value) {
-				$alias = $ef[$extra_id]['alias'];
+				$alias = preg_replace('/^@/', '', $ef[$extra_id]['alias']);
 				$type  = $ef[$extra_id]['field_type'];
 
 				// Search if there is an extra field with the same alias.
 				$new_id = 0;
 				foreach($ef_new as $id => $arr) {
-					if ($arr['alias'] == $alias) {
+					if (preg_replace('/^@/', '', $arr['alias']) == $alias) {
 						$new_id = $id;
 					}
 				}

@@ -5,6 +5,7 @@
  * Copyright 2005 GForge, LLC
  * Copyright 2010 FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -192,10 +193,15 @@ foreach ($filelist as $filename) {
 		if ($res) {
 			if (db_numrows($res)>0) {
 				$users = " ";
-				for($i=0;$i<db_numrows($res);$i++) {
+				$nb_users = db_numrows($res);
+				for($i=0;$i<$nb_users;$i++) {
 					$users .= db_result($res,$i,0) . " | ";
 				}
 				$users = substr($users,0,strlen($users) - 3); //remove the last |
+				// If there are too many users, replace the list with number of users
+				if ($nb_users > 100) {
+					$users = util_make_link("/admin/userlist.php?usingplugin=$filename", '<b>'.sprintf(_("%d users"), $nb_users).'</b>');
+				}
 			} else {
 				$users = _('None');
 			}
@@ -206,10 +212,15 @@ foreach ($filelist as $filename) {
 		if ($res) {
 			if (db_numrows($res)>0) {
 				$groups = " ";
-				for($i=0;$i<db_numrows($res);$i++) {
+				$nb_groups = db_numrows($res);
+				for($i=0;$i<$nb_groups;$i++) {
 					$groups .= db_result($res,$i,0) . " | ";
 				}
 				$groups = substr($groups,0,strlen($groups) - 3); //remove the last |
+				// If there are too many projects, replace the list with number of projects
+				if ($nb_groups > 100) {
+					$groups = util_make_link("/admin/grouplist.php?usingplugin=$filename", '<b>'.sprintf(_("%d projects"), $nb_groups).'</b>');
+				}
 			} else {
 				$groups = _('None');
 			}

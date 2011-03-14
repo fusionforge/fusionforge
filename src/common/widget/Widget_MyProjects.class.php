@@ -141,7 +141,7 @@ class Widget_MyProjects extends Widget {
 					  'title'       => $title,
 					  'description' => $desc,
 					  'link'        => $url)
-				);
+			    );
 		}
 	}
 

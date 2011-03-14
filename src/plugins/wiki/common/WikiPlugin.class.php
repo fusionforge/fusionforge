@@ -89,7 +89,7 @@ class GforgeWikiPlugin extends Plugin {
 						SEARCH__TYPE_IS_WIKI,
 						new WikiSearchEngine(SEARCH__TYPE_IS_WIKI,
 								'WikiHtmlSearchRenderer', 
-						_("This projects's wiki"), $group_id)
+						_("This project's wiki"), $group_id)
 					);
 				}
 			}
@@ -184,7 +184,7 @@ class GforgeWikiPlugin extends Plugin {
 						$arr['realname'] = $data['author'];
 						$arr['icon']=html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
 						$arr['title'] = 'Wiki Page '.$arr['pagename'];
-						$arr['link'] = '/wiki/g/'.$group_name.'/'.urlencode($arr['pagename']);
+						$arr['link'] = '/wiki/g/'.$group_name.'/'.rawurlencode($arr['pagename']);
 						$arr['description']= $arr['title'];
 						$params['results'][] = $arr;
 					}

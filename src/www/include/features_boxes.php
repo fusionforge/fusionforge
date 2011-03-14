@@ -2,6 +2,7 @@
 /**
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,7 +30,7 @@ require_once $gfcommon.'include/tag_cloud.php';
 require_once $gfcommon.'include/Stats.class.php';
 
 function show_features_boxes() {
-	GLOBAL $HTML;
+	global $HTML;
 	
 	plugin_hook ("features_boxes_top", array());
 	$return = '<h2 class="skip">' . _('Features Boxes') . '</h2>';

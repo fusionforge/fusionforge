@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -142,7 +143,7 @@ class ArtifactType extends Error {
 	 *  @param	array	The associative array of data.
 	 *	@return boolean	success.
 	 */
-	function ArtifactType(&$Group,$artifact_type_id=false, $arr=false) {
+	function ArtifactType($Group,$artifact_type_id=false, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError('No Valid Group Object');
@@ -152,7 +153,7 @@ class ArtifactType extends Error {
 			$this->setError('ArtifactType: '.$Group->getErrorMessage());
 			return false;
 		}
-		$this->Group =& $Group;
+		$this->Group = $Group;
 		if ($artifact_type_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($artifact_type_id)) {

@@ -4,6 +4,7 @@
  *
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -26,7 +27,7 @@
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
-function &get_frs_packages($Group) {
+function get_frs_packages($Group) {
 	$ps = array();
 	$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1',
 				array ($Group->getID())) ;

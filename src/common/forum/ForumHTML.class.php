@@ -138,17 +138,17 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1',
-						     html_image('ic/xmail16w.png','20','20').' '._('Stop Monitoring')).' | ';
+							     html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
 			} else {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1',
-						     html_image('ic/mail16w.png','20','20').' '._('Monitor Forum')).' | ';
+						     html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
 			}
 			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
-					     html_image('ic/save.png','24','24') .' '._('Save Place')).' | ';
+					     html_image('ic/save.png') .' '._('Save Place')).' | ';
 		}
 	} elseif ($f) {
 		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-			html_image('ic/mail16w.png','20','20').' '._('Monitor Forum').'</a> | ';		
+			html_image('ic/mail16w.png').' '._('Monitor Forum').'</a> | ';		
 	}
 
 	if ($f && $forum_id) {
@@ -323,17 +323,19 @@ class ForumHTML extends Error {
 						<td>' . _('File to upload') . ':   <input type="file" name="attachment1"/></td>
 					</tr>
 					<tr>
-						<td class="warning">' . _('Warning: Current file will be deleted permanently') . '</td>
+						<td class="warning">' . _('Warning: Uploaded file will replace current file') . '</td>
 					</tr>
 			</table>
-			<input type="submit" name="go" value="'._('Update').'">
+				<input type="submit" name="go" value="'._('Update').'" />
 			<input type="hidden" name="doedit" value="1"/>
 			<input type="hidden" name="edit" value="yes"/>
 			<input type="hidden" name="forum_id" value="'.$forum_id.'"/>
 			<input type="hidden" name="group_id" value="'.$group_id.'"/>
 			<input type="hidden" name="attachid" value="'.$attachid.'"/>
 			<input type="hidden" name="msg_id" value="'.$msg_id.'"/>
-			</fieldset></form><p>';
+			</fieldset>
+			</form>
+			<p/>';
 		return $return_val;
 	}
 
@@ -590,7 +592,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		plugin_hook("text_editor",$params);
 		if (!$GLOBALS['editor_was_set_up']) {
 			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body"  rows="10" cols="70" wrap="soft">' . $body . '</textarea>';
+					echo '<textarea name="body"  rows="10" cols="70">' . $body . '</textarea>';
 		}
 		unset($GLOBALS['editor_was_set_up']);
 		?> <?php //$text_support->displayTextField('body'); ?> <br>
@@ -628,9 +630,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 } else {
 	//do nothing
 }
-
 }
-
 }
 // Local Variables:
 // mode: php

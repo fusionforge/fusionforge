@@ -5,7 +5,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * The rest Copyright 2002-2005 (c) GForge Team
- * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
  *
@@ -131,6 +131,7 @@ class AttachManager extends Error {
 			$pend = "";
 		}
 		
+		$attach = '';
 		$attachid = '';
 		if ($res && db_numrows($res)) {
 			$attachid = db_result($res,0,'attachmentid');

@@ -5,6 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
+ * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -237,8 +238,8 @@ class Forum extends Error {
 	 * @return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {
-		$res = db_query_params ('SELECT * FROM forum_group_list_vw WHERE group_forum_id=$1',
-					array ($group_forum_id)) ;
+		$res=db_query_params('SELECT * FROM forum_group_list_vw	WHERE group_forum_id=$1 AND group_id=$2',
+			array($group_forum_id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid forum group identifier'));
 			return false;
