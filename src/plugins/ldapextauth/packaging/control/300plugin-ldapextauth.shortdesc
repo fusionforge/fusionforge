@@ -1,0 +1,4 @@
+ This plugin contains an LDAP authentication mechanism for
+ FusionForge. It allows users to authenticate against an external LDAP
+ directory, and syncs some of their personal information from LDAP
+ into the FusionForge database.

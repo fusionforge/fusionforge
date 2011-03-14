@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for @OLDPACKAGE@-plugin-mediawiki
+# postinst script for @OLDPACKAGE@-plugin-@PLUGSHORTNAME@
 #
 # see: dh_installdeb(1)
 
