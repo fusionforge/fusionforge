@@ -84,7 +84,7 @@ if (db_numrows($mail_res)<1) {
 }
 
 $type = db_result($mail_res, 0, 'type');
-if (!$table_mapping[$type]) {
+if (!$type) {
 	$err .= "Unknown mailing type\n";
 	m_exit();
 }
