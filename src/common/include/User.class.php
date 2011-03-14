@@ -1369,6 +1369,68 @@ Enjoy the site.
 	}
 
 	/**
+	 *	setMD5Passwd - Changes user's MD5 password.
+	 *
+	 *	@param	string	The MD5-hashed password.
+	 *	@return boolean success.
+	 */
+	function setMD5Passwd($md5) {
+		global $SYS;
+
+		db_begin();
+
+		if ($md5) {
+			$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
+						array ($md5_pw,
+						       $this->getID())) ;
+			
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
+				db_rollback();
+				return false;
+			} 
+		}
+		db_commit();
+		return true;
+	}
+
+	/**
+	 *	setUnixPasswd - Changes user's Unix-hashed password.
+	 *
+	 *	@param	string	The Unix-hashed password.
+	 *	@return boolean success.
+	 */
+	function setUnixPasswd($unix) {
+		global $SYS;
+
+		db_begin();
+
+		if ($unix) {
+			$res = db_query_params ('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
+						array ($unix_pw,
+						       $this->getID())) ;
+			
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
+				db_rollback();
+				return false;
+			} 
+			
+			// Now change system password, but only if corresponding
+			// entry exists (i.e. if user have shell access)
+			if ($SYS->sysCheckUser($this->getID())) {
+				if (!$SYS->sysUserSetAttribute($this->getID(),"userPassword",'{crypt}'.$unix)) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+			}
+		}
+		db_commit();
+		return true;
+	}
+
+	/**
 	 * usesRatings - whether user participates in rating system.
 	 *
 	 * @return	boolean	success.

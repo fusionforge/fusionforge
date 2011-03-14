@@ -150,6 +150,8 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		
 		$mapped_data = array(
 			'username' => $u->getUnixName(),
+			'md5_password' => '',
+			'unix_password' => '',
 			'firstname' => $u->getFirstName(),
 			'lastname' => $u->getLastName(),
 			'email' => $u->getEmail(),
@@ -179,6 +181,9 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			   $u->getTitle(),
 			   $u->getCountryCode(),
 			   $mapped_data['email']);
+
+		$u->setMD5Passwd ($mapped_data['md5_password']);
+		$u->setUnixPasswd ($mapped_data['unix_password']);
 	}
 
 	function displayAuthForm($params) {
@@ -227,7 +232,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		if (forge_get_config('manager_dn', $this->name)) {
 			ldap_bind($this->ldap_conn, 
 				   forge_get_config('manager_dn', $this->name),
-				   forge_get_config('manager_password', $this->name));
+				   forge_get_config('ldap_password'));
 		} else {
 			ldap_bind($this->ldap_conn);
 		}
