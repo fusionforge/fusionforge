@@ -464,6 +464,8 @@ src/common/import/import_svn.php -text
 src/common/import/import_tasks.php -text
 src/common/import/import_trackers.php -text
 src/common/import/import_users.php -text
+src/common/include/AuthPlugin.class.php -text
+src/common/include/BuiltinAuthPlugin.class.php -text
 src/common/include/Codendi_HTMLPurifier.class.php -text
 src/common/include/Codendi_Request.class.php -text
 src/common/include/DatabaseInstaller.class.php -text

@@ -27,12 +27,22 @@
 require_once $GLOBALS['gfcommon'].'include/User.class.php';
 require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/mapping.php' ;
 
-class LdapextauthPlugin extends Plugin {
+class LdapextauthPlugin extends AuthPlugin {
+	protected $saved_login;
+	protected $saved_password;
+	protected $saved_user;
+	protected $saved_data;
+
 	function LdapextauthPlugin () {
 		global $gfconfig;
 		$this->Plugin() ;
 		$this->name = "ldapextauth";
-		$this->hooks[] = "session_before_login";
+		$this->_addHook("session_before_login");
+		$this->_addHook("check_auth_session");
+		$this->_addHook("fetch_auth_info");
+		$this->_addHook("sync_account_info");
+		$this->_addHook("close_auth_session");
+
 		
 		$this->ldap_conn = false ;
 		$this->base_dn = '';
@@ -68,31 +78,75 @@ class LdapextauthPlugin extends Plugin {
 			// Array of login not managed by LDAP (local account).
 			$this->ldap_skip_users = $ldap_skip_users ;
 		}
+
+		$this->saved_login = '';
+		$this->saved_password = '';
+		$this->saved_user = NULL;
+		$this->saved_data = array();
 	}
 	
 	function CallHook ($hookname, &$params) {
-		global $HTML ;
-		
-		$loginname = $params['loginname'] ;
-		$passwd = $params['passwd'] ;
-
-		debuglog("\nLDAP: CallHook ($hookname) - ". date("F j, Y, g:i a") );
-
-		// Skip users from LDAP check (local account).
-		if (in_array($loginname, $this->ldap_skip_users))
-			return true;
-		
 		switch ($hookname) {
 		case "session_before_login":
 			// Authenticate against LDAP
+			debuglog("\nLDAP: CallHook ($hookname) - ". date("F j, Y, g:i a") );
+			$loginname = $params['loginname'] ;
+			$passwd = $params['passwd'] ;
+			// Skip users from LDAP check (local account).
+			if (in_array($loginname, $this->ldap_skip_users))
+				return true;
 			return $this->AuthUser ($loginname, $passwd) ;
 			break;
-		case "blah":
-			// Should not happen
-			break;
 		default:
-			// Forgot something
+			return parent::CallHook($hookname, $params);
 		}
+	}
+
+	function checkLDAPCredentials($loginname, $passwd) {
+		if (!$this->ldap_conn) {
+			$r = $this->ConnectLdap($this->ldap_server, $this->ldap_port);
+			if (!$r && $this->ldap_altserver) {
+				ldap_close($this->ldap_conn);
+				$r = $this->ConnectLdap($this->ldap_altserver, $this->ldap_altport);
+			}
+			if (!$r) {
+				// No connection to LDAP directory
+				return FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
+
+		$res = ldap_search($this->ldap_conn, $this->base_dn, $this->user_dn . $loginname) ;
+		if (!$res || ldap_count_entries($this->ldap_conn, $res) == 0) {
+			// No user by that name in LDAP directory
+			return FORGE_AUTH_AUTHORITATIVE_REJECT;
+		}
+
+		$info = ldap_get_entries ($this->ldap_conn,$res);
+		$data = $info[0];
+		if (@ldap_bind($this->ldap_conn, $data['dn'], $passwd)) {
+			// OK
+			$this->saved_data = $data;
+			$this->saved_password = $passwd;
+			return FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+		} else {
+			// Probably invalid password
+			return FORGE_AUTH_AUTHORITATIVE_REJECT;
+		}
+	}
+
+	function syncAccountInfo() {
+		$u = user_get_object_by_name ($saved_login) ;
+		if ($u) {
+			if ($u->getStatus() == 'D') {
+				debuglog("Account deleted, reactivating it.");
+				$u->setStatus('A');
+			}
+			if (!session_login_valid_dbonly ($this->saved_login, $this->saved_password, false)) {
+				$u->setPasswd ($passwd) ;
+			}
+
+		} else {
+		}		
 	}
 
 	function AuthUser ($loginname, $passwd) {
@@ -347,5 +401,10 @@ function debuglog($msg) {
 	fwrite ($fp, $msg."\n");
 	fclose($fp);
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

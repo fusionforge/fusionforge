@@ -533,7 +533,6 @@ function session_getdata($user_id) {
  *	@return none
  */
 function session_set() {
-	plugin_hook('session_set_entry');
 	global $G_SESSION;
 	global $session_ser;
 
@@ -541,36 +540,40 @@ function session_set() {
 	// otherwise make new session
 	$id_is_good = false;
 
-	// If user says he's logged in (by presenting cookie), check that
-	if ($session_ser) {
-
-		$user_id = session_check_session_cookie($session_ser);
-
-		if ($user_id) {
-
-			$result = session_getdata($user_id);
-
-			if (db_numrows($result) > 0) {
-				$id_is_good = true;
-			}
+	$params = array();
+	$params['auth_token'] = $session_ser;
+	$params['results'] = array();
+	plugin_hook('check_auth_session');
+	
+	$seen_yes = false;
+	$seen_no = false;
+	foreach ($params['results'] as $p => $r) {
+		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
+			$seen_yes = true;
+		} elseif ($r == FORGE_AUTH_AUTHORITATIVE_REJECT) {
+			$seen_no = true;
 		}
-	} // else (hash does not exist) or (session hash is bad)
+	}
+	if ($seen_yes && !$seen_no) {
+		$id_is_good = true;
+	}
 
-	if ($id_is_good) {
-		$G_SESSION = user_get_object($user_id, $result);
-		if ($G_SESSION) {
-			$G_SESSION->setLoggedIn(true);
-		}
+	$params = array();
+	$params['results'] = NULL;
+	plugin_hook('fetch_authenticated_user');
+	
+	$G_SESSION = $params['results'];
+	if ($G_SESSION) {
+		$G_SESSION->setLoggedIn(true);
 	} else {
 		$G_SESSION=false;
-
+		
 		// if there was bad session cookie, kill it and the user cookie
 		//
 		if ($session_ser) {
 			session_logout();
 		}
 	}
-	plugin_hook('session_set_return');
 
 	RBACEngine::getInstance()->invalidateRoleCaches() ;
 }
