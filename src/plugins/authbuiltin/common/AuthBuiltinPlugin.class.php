@@ -29,8 +29,10 @@ class AuthBuiltinPlugin extends AuthPlugin {
 	 */	
 	function AuthBuiltinPlugin() {
 		$this->AuthPlugin();
+
 		$this->name = 'authbuiltin';
 		$this->text = 'Built-in authentication';
+
 		$this->_addHook('check_auth_session');
 		$this->_addHook('fetch_authenticated_user');
 		$this->_addHook('display_auth_form');
@@ -39,9 +41,14 @@ class AuthBuiltinPlugin extends AuthPlugin {
 		// get_extra_roles - add new roles not necessarily stored in the database
 		// restrict_roles - filter out unwanted roles
 		$this->_addHook('close_auth_session');
+
+		$this->declareConfigVars();
 	}
 
 	function displayAuthForm($params) {
+		if (!$this->isRequired() && !$this->isSufficient()) {
+			return true;
+		}
 		$return_to = $params['return_to'];
 		$loginname = '';
 
@@ -64,11 +71,17 @@ class AuthBuiltinPlugin extends AuthPlugin {
 	}
 
 	function login($user) {
+		if (!$this->isRequired() && !$this->isSufficient()) {
+			return true;
+		}
 		$this->saved_user = $user;
 		$this->setSessionCookie();
 	}
 
 	function logout() {
+		if (!$this->isRequired() && !$this->isSufficient()) {
+			return true;
+		}
 		$this->unsetSessionCookie();
 	}
 }

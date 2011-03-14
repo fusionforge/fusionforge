@@ -42,6 +42,7 @@ abstract class AuthPlugin extends Plugin {
 		// get_extra_roles - add new roles not necessarily stored in the database
 		// restrict_roles - filter out unwanted roles
 		// close_auth_session - terminate an authentication session
+
 	}
 
 	// Hook dispatcher
@@ -86,10 +87,18 @@ abstract class AuthPlugin extends Plugin {
 		}
 		if ($user_id) {
 			$this->saved_user = user_get_object($user_id);
-			$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			if ($this->isSufficient()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
 		} else {
 			$this->saved_user = NULL;
-			$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
 		}
 	}
 
@@ -130,6 +139,45 @@ abstract class AuthPlugin extends Plugin {
 		session_cookie($this->cookie_name, '');
 	}
 
+	protected function isRequired() {
+		return forge_get_config('required', $this->name);
+	}
+
+	protected function isSufficient() {
+		return forge_get_config('sufficient', $this->name);
+	}
+
+	protected function syncDataOn($event) {
+		$configval = forge_get_config('sync_data_on', $this->name);
+		$events = array();
+
+		switch ($configval) {
+		case 'every-page':
+			$events = array('every-page','login','user-creation');
+			break;
+		case 'login':
+			$events = array('login','user-creation');
+			break;
+		case 'user-creation':
+			$events = array('user-creation');
+			break;
+		case 'never':
+			$events = array();
+			break;
+		}
+		
+		return in_array($event, $events);
+	}
+
+	protected function declareConfigVars() {
+		forge_define_config_item ('required', $this->name, 'yes');
+		forge_set_config_item_bool ('required', $this->name) ;
+
+		forge_define_config_item ('sufficient', $this->name, 'yes');
+		forge_set_config_item_bool ('sufficient', $this->name) ;
+
+		forge_define_config_item ('sync_data_on', $this->name, 'never');
+	}
 }
 
 // Local Variables:
