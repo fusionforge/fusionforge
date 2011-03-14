@@ -264,10 +264,7 @@ class ArtifactFactory extends Error {
 		$this->sort=$_sort_ord;
 		$this->order_col=$_order_col;
 		$this->status=$_status;
-		if (gettype($_assigned_to) === 'integer' || 
-			gettype($_assigned_to) === 'string') {
-			$this->assigned_to=$_assigned_to;
-		}
+		$this->assigned_to=$_assigned_to;
 		$this->extra_fields=$_extra_fields;
 		$this->setChangedFrom($_changed);
 	}

@@ -956,6 +956,17 @@ class ArtifactType extends Error {
 			return false;
 		}
 		
+		$result = db_query_params('SELECT count(*) AS count FROM artifact_group_list WHERE group_id=$1 AND name=$2 AND group_artifact_id!=$3',
+								  array ($this->Group->getID(), $name, $this->getID()));
+		if (! $result) {
+			$this->setError('ArtifactType::Update(): '.db_error());
+			return false;
+		}
+		if (db_result($result, 0, 'count')) {
+			$this->setError(_('Tracker name already used'));
+			return false;
+		}
+		
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
