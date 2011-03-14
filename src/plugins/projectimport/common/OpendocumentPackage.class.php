@@ -29,9 +29,14 @@ require_once 'OpenDocument.php';
 require_once 'OpenDocument/Document.php';
 require_once 'OpenDocument/Storage/Zip.php';
 
+/**
+ * Manifest file entries (for META-INF/manifest.xml contents)
+ *
+ */
 class OpenDocument_ManifestFileEntry {
 	protected $fullpath;
 	protected $mediatype;	
+	
 	public function OpenDocument_ManifestFileEntry($fullpath, $mediatype) {
 		$this->fullpath = $fullpath;
 		$this->mediatype = $mediatype;
@@ -44,6 +49,10 @@ class OpenDocument_ManifestFileEntry {
 	}
 }
 
+/**
+ * Extends OpenDocument_Manifest to make it loadable from existing file rather than only to be created and saved
+ *
+ */
 class OpenDocumentPackage_Manifest extends OpenDocument_Manifest {
 	
 	protected $fileentries;
@@ -52,6 +61,11 @@ class OpenDocumentPackage_Manifest extends OpenDocument_Manifest {
     {
         $this->fileentries = array();
     }
+    
+    /**
+     * Load from a DOMDocument
+     * @param DOMDocument $dom
+     */
     public function load($dom)
     {
     	$this->dom = $dom;
@@ -66,6 +80,11 @@ class OpenDocumentPackage_Manifest extends OpenDocument_Manifest {
 		}
     }
 
+    /**
+     * Return array of file paths whose media-type matches
+     * @param string $mediatype
+     * @return array of strings
+     */
     public function getFilesByMediaType($mediatype) {
     	$result = array();
     	foreach ($this->fileentries as $entry) {
@@ -102,26 +121,11 @@ class OpenDocument_Other extends OpenDocument_Document {
         $this->storage = $storage;
         
         $this->manifestDOM   = $storage->getManifestDom();
-        //$this->metaXPath = new DOMXPath($this->metaDOM);
-/*
-        print_r($this->metaDOM);
-        return;
-        */
+
         $this->manifest = new OpenDocumentPackage_Manifest();
         $this->manifest->load($this->manifestDOM);
-        
-        //print_r($manifest);
-        //echo self::toText($this->manifestDOM);
-        /*$childrenNodes = $this->metaDOM->childNodes;
-        foreach ($childrenNodes as $child) {
-        	//print_r('child : '. $child->nodeName);
-        	
-        	
-            }
-
-        }
-            */
-      }
+    }
+    /*
 	static function toText($obj)
 	{
 	    $text = '';
@@ -136,10 +140,6 @@ class OpenDocument_Other extends OpenDocument_Document {
 	            break;
 	        case 'DOMElement':
             	$text .= ' element attributes: ';
-            	/*foreach ($obj->attributes as $attr) {
-            		$text .= 
-            	}*/
-            	//$text .= print_r($obj->attributes, TRUE);
             	$attributes = $obj->attributes;
             	for ($i = 0; $i < $attributes->length; $i ++) {
                 	$name  = $attributes->item($i)->name;
@@ -154,11 +154,21 @@ class OpenDocument_Other extends OpenDocument_Document {
 	    }
 	    return $text;
 	}
-	
-	public function getFileNamesByMediaType($mediatype) {
+	*/
+    
+    /**
+     * Return array of file paths whose media-type matches
+     * @param string $mediatype
+     * @return array of strings
+     */
+    public function getFileNamesByMediaType($mediatype) {
 		return $this->manifest->getFilesByMediaType($mediatype);
 	}
 	
+	/**
+	 * Return the contents of a file present in the archive
+	 * @param unknown_type $filename
+	 */
 	public function getFileContents($filename) {
 		return $this->storage->loadContentsFromZip($filename);
 	}
@@ -186,11 +196,7 @@ class OpenDocumentPackage_Storage_Zip extends OpenDocument_Storage_Zip {
         if ($this->zip->open($file) !== true) {
             throw new OpenDocument_Exception('Cannot open ZIP file: ' . $file);
         }
-        //$this->contentDom  = $this->loadDomFromZip($this->zip, 'content.xml');
         $this->manifestDom     = $this->loadDomFromZip($this->zip, 'META-INF/manifest.xml');
-        //        $this->settingsDom = $this->loadDomFromZip($this->zip, 'settings.xml');
-        //$this->stylesDom   = $this->loadDomFromZip($this->zip, 'styles.xml');
-        //FIXME: what to do with embedded files (e.g. images)?
     }
 
     /**
@@ -229,74 +235,8 @@ class OpendocumentPackage extends OpenDocument {
         $storage->open($file);
 
         $mimetype = $storage->getMimeType();
-		echo "MIME : ".$mimetype;
-        /*
-        switch ($mimetype) {
-        case 'application/vnd.oasis.opendocument.text':
-            $class = 'OpenDocument_Document_Text';
-            break;
-        default:
-            throw new OpenDocument_Exception(
-                'Unsupported MIME type ' . $mimetype
-            );
-            break;
-        }
-
-        self::includeClassFile($class);
-		*/
+//		echo "MIME : ".$mimetype;
         return new OpenDocument_Other($storage);
     }
 	
 }
-
-//$odt = OpendocumentPackage::open('test.zip');
-
-//echo "mime type: ". $odt->getMimeType();
-/*
-function toText($obj)
-{
-    $text = '';
-    foreach ($obj->getChildren() as $child) {
-        switch (get_class($child)) {
-        case 'OpenDocument_Element_Text':
-            $text .= $child->text;
-            break;
-        case 'OpenDocument_Element_Paragraph':
-            $text .= toText($child);
-            $text .= "\n";
-            break;
-        case 'OpenDocument_Element_Span':
-            $text .= '<span>';
-            $text .= toText($child);
-            $text .= '</span>';
-            break;
-        case 'OpenDocument_Element_Heading':
-            $text .= '<h' . $child->level . '>';
-            $text .= toText($child);
-            $text .= '</h' . $child->level . '>';
-            break;
-        case 'OpenDocument_Element_Hyperlink':
-            $text .= '<a href="' . $child->location . '" target="' . $child->target . '">';
-            $text .= toText($child);
-            $text .= '</a>';
-            break;
-        default:
-            $text .= '<del>unknown element</del>';
-        }
-    }
-    return $text;
-}
-*/
-/*
-print_r($odt);
-
-exit(0);
-//loop throught document children
-foreach ($odt->getChildren() as $child) {
-    //strip headings
-   
-	echo toText($child);
-	//print_r($child);
-	//echo $child->text;
-}
-*/
