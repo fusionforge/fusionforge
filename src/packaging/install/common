@@ -23,3 +23,7 @@ cronjobs/create_scm_repos.php          usr/share/@OLDPACKAGE@/cronjobs/
 cronjobs/gather_scm_stats.php          usr/share/@OLDPACKAGE@/cronjobs/
 cronjobs/generate_scm_snapshots.php    usr/share/@OLDPACKAGE@/cronjobs/
 locales/*                              usr/share/locale/
+#
+plugins/authbuiltin/common          usr/share/@OLDPACKAGE@/plugins/authbuiltin/
+plugins/authbuiltin/www             usr/share/@OLDPACKAGE@/plugins/authbuiltin/
+plugins/authbuiltin/etc/*.ini 	    etc/@OLDPACKAGE@/config.ini.d/
