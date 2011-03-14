@@ -70,7 +70,7 @@ if ($login) {		     // The user just clicked the Login button
 	// Let's send them to CAS
 
 	$plugin->initCAS();
-	$return_url = util_make_url('/plugins/authcas/post-login.php?back=true&return_to='.htmlspecialchars($return_to));
+	$return_url = util_make_url('/plugins/authcas/post-login.php?postcas=true&return_to='.htmlspecialchars($return_to));
 
 	$GLOBALS['PHPCAS_CLIENT']->setURL($return_url);
 
@@ -78,6 +78,9 @@ if ($login) {		     // The user just clicked the Login button
 
 } elseif ($postcas) {		// The user is coming back from CAS
 	if (phpCAS::isAuthenticated()) {
+		if ($plugin->isSufficient()) {
+			$plugin->login(user_get_object_by_name($form_loginname));
+		}
 		if ($return_to) {
 			header ("Location: " . util_make_url($return_to));
 			exit;

@@ -43,10 +43,11 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		$this->saved_login = '';
 		$this->saved_user = NULL;
 
+		$this->cookie_name = 'forge_session_cas';
+
 		$this->declareConfigVars();
 	}
 
-	private static $cas_client = false;
 	private static $init = false;
 
 	function initCAS() {
@@ -54,10 +55,10 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 			return;
 		}
 
-		self::$cas_client = phpCAS::client(forge_get_config('cas_version', $this->name),
-						   forge_get_config('cas_server', $this->name),
-						   intval(forge_get_config('cas_port', $this->name)),
-						   '');
+		phpCAS::client(forge_get_config('cas_version', $this->name),
+			       forge_get_config('cas_server', $this->name),
+			       intval(forge_get_config('cas_port', $this->name)),
+			       '');
 		self::$init = true;
 	}
 
@@ -82,16 +83,26 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 	function checkAuthSession(&$params) {
 		$this->initCAS();
 
-		if (phpCAS::isAuthenticated()) {
+		$this->saved_user = NULL;
+		$user = NULL;
+
+		$user_id_from_cookie = $this->checkSessionCookie();
+		if ($user_id_from_cookie) {
+			$user = user_get_object($user_id_from_cookie);
+		} elseif (phpCAS::isAuthenticated()) {
+			$user = user_get_object_by_name(phpCAS::getUser());
+			$this->login($user);
+		}
+		
+		if ($user) {
 			if ($this->isSufficient()) {
-				$this->saved_user = user_get_object_by_name(phpCAS::getUser());
+				$this->saved_user = $user;
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
 				
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
 		} else {
-			$this->saved_user = NULL;
 			if ($this->isRequired()) {
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
 			} else {
@@ -110,17 +121,20 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		$this->initCAS();
 
 		if ($this->isSufficient() || $this->isRequired()) {
-			phpCAS::logout(util_make_url('/'));
+			$this->unsetSessionCookie();
+			phpCAS::logoutWithRedirectService(util_make_url('/'));
 		} else {
 			return true;
 		}
 	}
+
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
 
 		forge_define_config_item ('cas_server', $this->name, 'cas.example.com');
 		forge_define_config_item ('cas_port', $this->name, 443);
 		forge_define_config_item ('cas_version', $this->name, '2.0');
+
 	}
 
 }
