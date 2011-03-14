@@ -258,6 +258,10 @@
 	{
 		symlink ("../../plugins/blocks/www", "blocks");
 	}
+		if (!is_dir("authbuiltin"))
+	{
+		symlink ("../../plugins/authbuiltin/www", "authbuiltin");
+	}
 
 	//cd /opt/gforge
 	chdir("/opt/gforge");
