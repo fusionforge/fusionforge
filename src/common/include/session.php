@@ -557,10 +557,16 @@ function session_set() {
 		$params = array();
 		$params['results'] = NULL;
 		plugin_hook_by_reference('fetch_authenticated_user', $params);
+		$user = $params['results'];
 		
-		$G_SESSION = $params['results'];
-		if ($G_SESSION) {
-			$G_SESSION->setLoggedIn(true);
+		if ($user) {
+			$params = array();
+			$params['username'] = $user->getUnixName();
+			$params['event'] = 'every-page';
+			plugin_hook('sync_account_info', $params);
+
+			$user->setLoggedIn(true);
+			$G_SESSION = $user;
 		} else {
 			$G_SESSION=false;
 		}
