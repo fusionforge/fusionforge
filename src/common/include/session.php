@@ -73,6 +73,9 @@ function session_get_session_cookie_hash($session_cookie) {
  *	@return user_id if cookie is ok, false otherwise
  */
 function session_check_session_cookie($session_cookie) {
+	if ($session_cookie == '') {
+		return false;
+	}
 
 	list ($session_serial, $hash) = explode('-*-', $session_cookie);
 	$session_serial = base64_decode($session_serial);
@@ -108,12 +111,7 @@ function session_check_session_cookie($session_cookie) {
  *
  */
 function session_logout() {
-
-	// delete both session and username cookies
-	// NB: cookies must be deleted with the same scope parameters they were set with
-	//
-	session_cookie('session_ser', '');
-
+	plugin_hook('close_auth_session');
 	RBACEngine::getInstance()->invalidateRoleCaches() ;
 	return true;
 }
@@ -155,7 +153,11 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
 }
 
-function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
+function session_login_valid_dbonly($loginname, $passwd, $allowpending=false) {
+	return session_check_credentials_in_database($loginname, $passwd, $allowpending);
+}
+
+function session_check_credentials_in_database($loginname, $passwd, $allowpending=false) {
 	global $feedback,$userstatus;
 
 	//  Try to get the users from the database using user_id and (MD5) user_pw
@@ -200,7 +202,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 			$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
 						array (md5($passwd),
 						       $usr['user_id'])) ;
-			return session_login_valid_dbonly($loginname, $passwd, $allowpending) ;
+			return session_check_credentials_in_database($loginname, $passwd, $allowpending) ;
 		}
 	} else {
 		// If we're here, then the user has typed a password matching the (MD5) user_pw
@@ -216,7 +218,7 @@ function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 				$res = db_query_params ('UPDATE users SET unix_pw=$1 WHERE user_id=$2',
 							array (account_genunixpw($passwd),
 							       $usr['user_id'])) ;
-				return session_login_valid_dbonly($loginname, $passwd, $allowpending) ;
+				return session_check_credentials_in_database($loginname, $passwd, $allowpending) ;
 			} else {
 				// Invalidate (MD5) user_pw, refuse authentication
 				$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
@@ -543,8 +545,8 @@ function session_set() {
 	$params = array();
 	$params['auth_token'] = $session_ser;
 	$params['results'] = array();
-	plugin_hook('check_auth_session');
-	
+	plugin_hook_by_reference('check_auth_session', $params);
+
 	$seen_yes = false;
 	$seen_no = false;
 	foreach ($params['results'] as $p => $r) {
@@ -560,8 +562,8 @@ function session_set() {
 
 	$params = array();
 	$params['results'] = NULL;
-	plugin_hook('fetch_authenticated_user');
-	
+	plugin_hook_by_reference('fetch_authenticated_user', $params);
+
 	$G_SESSION = $params['results'];
 	if ($G_SESSION) {
 		$G_SESSION->setLoggedIn(true);
@@ -575,7 +577,8 @@ function session_set() {
 		}
 	}
 
-	RBACEngine::getInstance()->invalidateRoleCaches() ;
+	$re = RBACEngine::getInstance();
+	$re->invalidateRoleCaches() ;
 }
 
 //TODO - this should be generalized and used for pre.php, 

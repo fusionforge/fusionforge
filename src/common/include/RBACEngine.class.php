@@ -75,7 +75,45 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 			}
 		}
 		
+		$params = array();
+		$params['current_roles'] = $this->_cached_available_roles;
+		$params['new_roles'] = array();
+		plugin_hook_by_reference('get_extra_roles', $params);
+		foreach ($params['new_roles'] as $r) {
+			$this->addAvailableRole($r);
+		}
+		
+		$params = array();
+		$params['current_roles'] = $this->_cached_available_roles;
+		$params['dropped_roles'] = array();
+		plugin_hook_by_reference('restrict_roles', $params);
+		foreach ($params['dropped_roles'] as $r) {
+			$this->dropAvailableRole($r);
+		}
+		
 		return $this->_cached_available_roles ;
+	}
+
+	private function addAvailableRole($role) {
+		$seen = false;
+		foreach ($this->_cached_available_roles as $r) {
+			if ($r->getID() == $role->getID()) {
+				$seen = true;
+			}
+		}
+		if (!$seen) {
+			$this->_cached_available_roles[] = $role;
+		}
+	}
+
+	private function dropAvailableRole($role) {
+		$new_roles = array();
+		foreach ($this->_cached_available_roles as $r) {
+			if ($r->getID() != $role->getID()) {
+				$new_roles[] = $r;
+			}
+		}
+		$this->_cached_available_roles = $new_roles;
 	}
 
 	public function getGlobalRoles() {

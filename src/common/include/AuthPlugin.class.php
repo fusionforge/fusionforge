@@ -22,9 +22,9 @@
  * USA
  */
 
-define(FORGE_AUTH_AUTHORITATIVE_ACCEPT, 1);
-define(FORGE_AUTH_AUTHORITATIVE_REJECT, 2);
-define(FORGE_AUTH_NOT_AUTHORITATIVE, 3);
+define('FORGE_AUTH_AUTHORITATIVE_ACCEPT', 1);
+define('FORGE_AUTH_AUTHORITATIVE_REJECT', 2);
+define('FORGE_AUTH_NOT_AUTHORITATIVE', 3);
 
 abstract class AuthPlugin extends Plugin {
 	/**
@@ -78,25 +78,22 @@ abstract class AuthPlugin extends Plugin {
 
 	// Default mechanisms
 	protected $saved_user;
-	function checkAuthSession($params) {
+	function checkAuthSession(&$params) {
 		if (isset($params['auth_token']) && $params['auth_token'] != '') {
-			$user = $this->checkSessionToken($params['auth_token']);
+			$user_id = $this->checkSessionToken($params['auth_token']);
 		} else {
-			$user = $this->checkSessionCookie();
+			$user_id = $this->checkSessionCookie();
 		}
-		if ($user) {
-			$this->saved_user = $user;
-		} else {
-			$this->saved_user = NULL;
-		}
-		if ($user) {
+		if ($user_id) {
+			$this->saved_user = user_get_object($user_id);
 			$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
 		} else {
+			$this->saved_user = NULL;
 			$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 		}
 	}
 
-	function fetchAuthUser($params) {
+	function fetchAuthUser(&$params) {
 		$params['results'] = $this->saved_user;
 	}
 
@@ -104,6 +101,14 @@ abstract class AuthPlugin extends Plugin {
 		$this->unsetSessionCookie();
 	}
 
+	function getExtraRoles(&$params) {
+		// $params['new_roles'][] = RBACEngine::getInstance()->getRoleById(123);
+	}
+	
+	function restrictRoles(&$params) {
+		// $params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById(123);
+	}
+	
 	// Helper functions for individual plugins
 	protected $cookie_name = 'session_ser';
 
@@ -117,7 +122,7 @@ abstract class AuthPlugin extends Plugin {
 	}
 
 	protected function setSessionCookie() {
-		$cookie = session_build_session_cookie($user_id);
+		$cookie = session_build_session_cookie($this->saved_user->getID());
 		session_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
 	}
 

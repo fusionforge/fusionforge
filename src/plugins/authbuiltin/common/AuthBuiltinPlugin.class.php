@@ -22,13 +22,15 @@
  * USA
  */
 
-abstract class BuiltinAuthPlugin extends AuthPlugin {
+class AuthBuiltinPlugin extends AuthPlugin {
 	/**
-	 * BuiltinAuthPlugin() - constructor
+	 * AuthBuiltinPlugin() - constructor
 	 *
 	 */	
-	function BuiltinAuthPlugin() {
+	function AuthBuiltinPlugin() {
 		$this->AuthPlugin();
+		$this->name = 'authbuiltin';
+		$this->text = 'Built-in authentication';
 		$this->_addHook('check_auth_session');
 		$this->_addHook('fetch_authenticated_user');
 		$this->_addHook('display_auth_form');
@@ -38,7 +40,7 @@ abstract class BuiltinAuthPlugin extends AuthPlugin {
 		// restrict_roles - filter out unwanted roles
 		$this->_addHook('close_auth_session');
 	}
-	
+
 	function displayAuthForm($params) {
 		$return_to = $params['return_to'];
 		$loginname = '';
@@ -47,13 +49,7 @@ abstract class BuiltinAuthPlugin extends AuthPlugin {
 	}
 
 	function _displayAuthForm($return_to, $login_name) {
-		if (session_issecure()) {
-			$login_button = _('Login with SSL');
-		} else {
-			$login_button = _('Login'); 
-		}
-
-		echo '<form action="' . util_make_url('/plugins/builtinauth/postlogin.php'); . '" method="post">
+		echo '<form action="' . util_make_url('/plugins/authbuiltin/post-login.php') . '" method="post">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p>';
@@ -62,11 +58,19 @@ abstract class BuiltinAuthPlugin extends AuthPlugin {
 		} else {
 			echo _('Login name:');
 		}
-		echo '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($login_name)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . $login_button . '" />
+		echo '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($login_name)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
 </form>' ;
 	}
 
+	function login($user) {
+		$this->saved_user = $user;
+		$this->setSessionCookie();
+	}
+
+	function logout() {
+		$this->unsetSessionCookie();
+	}
 }
 
 // Local Variables:

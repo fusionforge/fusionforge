@@ -53,8 +53,6 @@ if ($return_to) {
 
 session_logout();
 
-plugin_hook('before_logout_redirect');
-
 if ($return_to) {
 	header('Location: '.util_make_url ($return_to));
 }else{

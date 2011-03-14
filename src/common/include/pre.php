@@ -182,6 +182,9 @@ if (forge_get_config('database_name')!=""){
 	// SCM-specific plugins subsystem
 	require_once $gfcommon.'include/SCMPlugin.class.php' ;
 	
+	// Authentication-specific plugins subsystem
+	require_once $gfcommon.'include/AuthPlugin.class.php' ;
+
 	if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true') {
 		setup_plugin_manager () ;
 	}
@@ -251,6 +254,7 @@ if (forge_get_config('database_name')!=""){
 	
 	setup_gettext_from_context();
 }
+
 
 /*
 RESERVED VARIABLES
