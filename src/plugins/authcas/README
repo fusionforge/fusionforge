@@ -1,0 +1,27 @@
+fusionforge-plugin-authcas
+--------------------------
+
+This is the external CAS authentication plugin for FusionForge.
+
+Installation:
+
+- files from include/ go to /usr/share/gforge/plugins/authcas/include/
+- files from www/ go to /usr/share/gforge/www/plugins/authcas/
+
+Setup:
+
+- customise /etc/fusionforge/config.ini.d/authcas.ini to match your
+LDAP installation (server, base DN, and mapping)
+- /usr/share/gforge/bin/register-plugin authcas "CAS external
+authentication"
+
+Voilà, you can now log into FusionForge with your existing CAS
+session.  Your account will be created the first time you log in
+(which means you can't add someone to a group before his/her first
+login).
+
+ -- Roland Mas <lolando@debian.org>, Wed, 23 Feb 2011 15:01:24 +0100
+
+Local Variables:
+mode: readme-debian
+End:

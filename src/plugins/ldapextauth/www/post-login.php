@@ -95,11 +95,6 @@ if ($login) {
 	}		
 }
 
-if (isset($session_hash)) {
-	//nuke their old session
-	session_logout();
-}
-
 $HTML->header(array('title'=>'Login'));
 
 if ($login && !$success) {
@@ -125,6 +120,8 @@ if ($login && !$success) {
 	html_feedback_top($feedback);
 }
 
+$params = array();
+$params['return_to'] = $return_to;
 plugin_hook('display_auth_form');
 
 $HTML->footer(array());

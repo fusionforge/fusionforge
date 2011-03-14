@@ -50,7 +50,9 @@ if ($triggered) {
 }
 echo '</p>';
 
-plugin_hook('display_auth_form');
+$params = array();
+$params['return_to'] = $return_to;
+plugin_hook('display_auth_form', $params);
 
 $HTML->footer(array());
 

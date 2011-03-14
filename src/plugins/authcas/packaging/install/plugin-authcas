@@ -1,0 +1,3 @@
+plugins/authcas/include              usr/share/@OLDPACKAGE@/plugins/authcas/
+plugins/authcas/www              usr/share/@OLDPACKAGE@/plugins/authcas/
+plugins/authcas/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
