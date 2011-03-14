@@ -1683,6 +1683,7 @@ src/plugins/ldapextauth/bin/db-upgrade.pl svneol=native#text/x-perl
 src/plugins/ldapextauth/etc/ldapextauth.ini -text
 src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
 src/plugins/ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
+src/plugins/ldapextauth/www/post-login.php -text
 src/plugins/mailman/Mailman.ori/Archiver/Archiver.py -text
 src/plugins/mailman/Mailman.ori/MailList.py -text
 src/plugins/mailman/Mailman.ori/SecurityManager.py -text

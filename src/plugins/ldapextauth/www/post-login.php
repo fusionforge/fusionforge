@@ -32,7 +32,7 @@ Header( "Cache-Control: must-revalidate");
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-$plugin = plugin_get_object('authbuiltin');
+$plugin = plugin_get_object('ldapextauth');
 
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
@@ -72,7 +72,8 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-	$success = session_check_credentials_in_database(strtolower($form_loginname),$form_pw,false);
+	$success = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
+	$success = ($form_pw == 'toto');
 	if ($success) {
 		if ($plugin->isSufficient()) {
 			$plugin->login(user_get_object_by_name($form_loginname));

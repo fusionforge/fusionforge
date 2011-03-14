@@ -43,27 +43,14 @@ if (isset($session_hash)) {
 $HTML->header(array('title'=>'Login'));
 
 echo '<p>';
-
 if ($triggered) {
 	echo '<div class="warning">' ;
 	echo _('You\'ve been redirected to this login page because you have tried accessing a page that was not available to you as an anonymous user.');
 	echo '</div> ' ;
 }
-echo _('Cookies must be enabled past this point.');
 echo '</p>';
 
 plugin_hook('display_auth_form');
-?>
-<p><a href="lostpw.php"><?php echo _('[Lost your password?]'); ?></a></p>
-<?php
-// hide "new account" item if restricted to admin
-if (!forge_get_config ('user_registration_restricted')) {
-	echo '<p><a href="register.php">'._('[New Account]').'</a></p>';
-}
-?>
-<p><a href="pending-resend.php"><?php echo _('[Resend confirmation email to a pending account]'); ?></a></p>
-
-<?php
 
 $HTML->footer(array());
 

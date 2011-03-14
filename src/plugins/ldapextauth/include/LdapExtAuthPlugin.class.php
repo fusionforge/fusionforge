@@ -1,11 +1,12 @@
 <?php
 /** External authentication via LDAP for FusionForge
- * Copyright 2003 Roland Mas <lolando@debian.org>
- * Copyright 2004 Roland Mas <roland@gnurandal.com> 
- *                The Gforge Group, LLC <http://gforgegroup.com/>
- * Copyright 2004 Christian Bayle <bayle@debian.org>
- * Copyright 2009-2010 Alain Peyrat, Alcatel-Lucent
- * Copyright 2009 Chris Dalzell, OpenGameForge.org
+ * Copyright 2003, Roland Mas <lolando@debian.org>
+ * Copyright 2004, Roland Mas <roland@gnurandal.com> 
+ *                 The Gforge Group, LLC <http://gforgegroup.com/>
+ * Copyright 2004, Christian Bayle <bayle@debian.org>
+ * Copyright 2009-2010, Alain Peyrat, Alcatel-Lucent
+ * Copyright 2009, Chris Dalzell, OpenGameForge.org
+ * Copyright 2011, Roland Mas
  *
  * This file is part of FusionForge
  *
@@ -25,7 +26,7 @@
  */
 
 require_once $GLOBALS['gfcommon'].'include/User.class.php';
-require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/mapping.php' ;
+// require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/mapping.php' ;
 
 class LdapextauthPlugin extends AuthPlugin {
 	protected $saved_login;
@@ -37,12 +38,15 @@ class LdapextauthPlugin extends AuthPlugin {
 		global $gfconfig;
 		$this->Plugin() ;
 		$this->name = "ldapextauth";
-		$this->_addHook("session_before_login");
+		$this->text = "LDAP authentication";
+
+		$this->_addHook('display_auth_form');
 		$this->_addHook("check_auth_session");
-		$this->_addHook("fetch_auth_info");
+		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("sync_account_info");
 		$this->_addHook("close_auth_session");
 
+		$this->cookie_name = 'forge_session_ldapextauth';
 		
 		$this->ldap_conn = false ;
 		$this->base_dn = '';
@@ -55,7 +59,7 @@ class LdapextauthPlugin extends AuthPlugin {
 		$this->ldap_bind_dn = '';
 		$this->ldap_bind_pwd = '';
 		$this->ldap_skip_users = '';
-		require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/config.php' ;
+		// require_once $GLOBALS['gfconfig'].'plugins/ldapextauth/config.php' ;
 		if (isset($base_dn)) {
 			$this->base_dn = $base_dn ;
 		}
@@ -102,6 +106,51 @@ class LdapextauthPlugin extends AuthPlugin {
 		}
 	}
 
+	function syncAccountInfo($params) {
+		if (!$this->syncDataOn($params['event'])) {
+			return true;
+		}
+		$u = $params['user'];
+		$u->setEmail('toto@tata.com');
+		$data = $this->saved_data;
+
+		if ($u) {
+			if ($u->getStatus() == 'D') {
+				debuglog("Account deleted, reactivating it.");
+				$u->setStatus('A');
+			}
+			if (!session_login_valid_dbonly ($this->saved_login, $this->saved_password, false)) {
+				$u->setPasswd ($passwd) ;
+			}
+
+		} else {
+		}		
+	}
+
+	function displayAuthForm($params) {
+		if (!$this->isRequired() && !$this->isSufficient()) {
+			return true;
+		}
+		$return_to = $params['return_to'];
+		$loginname = '';
+
+		echo '<h2>'._('LDAP authentication').'</h2>';
+		echo '<p>';
+		echo _('Cookies must be enabled past this point.');
+		echo '</p>';
+
+		echo '<form action="' . util_make_url('/plugins/ldapextauth/post-login.php') . '" method="post">
+<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
+<input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
+<p>';
+		echo _('LDAP Login name:');
+		echo '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
+</p>
+</form>' ;
+	}
+
+	/// HELPERS
+
 	function checkLDAPCredentials($loginname, $passwd) {
 		if (!$this->ldap_conn) {
 			$r = $this->ConnectLdap($this->ldap_server, $this->ldap_port);
@@ -134,20 +183,48 @@ class LdapextauthPlugin extends AuthPlugin {
 		}
 	}
 
-	function syncAccountInfo() {
-		$u = user_get_object_by_name ($saved_login) ;
-		if ($u) {
-			if ($u->getStatus() == 'D') {
-				debuglog("Account deleted, reactivating it.");
-				$u->setStatus('A');
-			}
-			if (!session_login_valid_dbonly ($this->saved_login, $this->saved_password, false)) {
-				$u->setPasswd ($passwd) ;
-			}
+	function ConnectLDAP($server, $port) {
 
+		debuglog("LDAP: ldap_connect($server,$port)");
+		if ($port) {
+			$this->ldap_conn = ldap_connect ($server, $port);
 		} else {
-		}		
+			$this->ldap_conn = ldap_connect ($server);
+		}
+		debuglog("LDAP: Ldap handle: ".$this->ldap_conn);
+
+		if (forge_get_config('ldap_version')) {
+			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'));");
+			if (!ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
+				debuglog("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
+				return false;
+			}
+		}
+
+		if ($this->ldap_start_tls) {
+			debuglog("LDAP: ldap_start_tls($this->ldap_conn)");
+			if (!ldap_start_tls($this->ldap_conn)) {
+				syslog(LOG_ERR, "FusionForge: LDAP start_tls failed: ".ldap_error($this->ldap_conn));
+				debuglog("LDAP: ldap_start_tls() failed: ".ldap_error($this->ldap_conn));
+				return false;
+			}
+		}
+
+		// If the ldap server does not allow anonymous bind,
+		// then authentificate with the server.
+		if ($this->ldap_bind_dn) {
+			debuglog("LDAP: ldap_bind() (application bind)");
+			if (!@ldap_bind($this->ldap_conn, $this->ldap_bind_dn, $this->ldap_bind_pwd)) {
+				debuglog("LDAP: ldap_bind() failed (application bind): ". ldap_error($this->ldap_conn));
+				syslog(LOG_ERR, "FusionForge:LDAP application bind failed, using DB login/passwd instead.");
+				return false;
+			}
+		}
+
+		return true;
 	}
+
+	/// LEGACY
 
 	function AuthUser ($loginname, $passwd) {
 		global $feedback;
@@ -354,46 +431,6 @@ class LdapextauthPlugin extends AuthPlugin {
 		}
 	}
 
-	function ConnectLDAP($server, $port) {
-
-		debuglog("LDAP: ldap_connect($server,$port)");
-		if ($port) {
-			$this->ldap_conn = ldap_connect ($server, $port);
-		} else {
-			$this->ldap_conn = ldap_connect ($server);
-		}
-		debuglog("LDAP: Ldap handle: ".$this->ldap_conn);
-
-		if (forge_get_config('ldap_version')) {
-			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'));");
-			if (!ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
-				debuglog("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
-				return false;
-			}
-		}
-
-		if ($this->ldap_start_tls) {
-			debuglog("LDAP: ldap_start_tls($this->ldap_conn)");
-			if (!ldap_start_tls($this->ldap_conn)) {
-				syslog(LOG_ERR, "FusionForge: LDAP start_tls failed: ".ldap_error($this->ldap_conn));
-				debuglog("LDAP: ldap_start_tls() failed: ".ldap_error($this->ldap_conn));
-				return false;
-			}
-		}
-
-		// If the ldap server does not allow anonymous bind,
-		// then authentificate with the server.
-		if ($this->ldap_bind_dn) {
-			debuglog("LDAP: ldap_bind() (application bind)");
-			if (!@ldap_bind($this->ldap_conn, $this->ldap_bind_dn, $this->ldap_bind_pwd)) {
-				debuglog("LDAP: ldap_bind() failed (application bind): ". ldap_error($this->ldap_conn));
-				syslog(LOG_ERR, "FusionForge:LDAP application bind failed, using DB login/passwd instead.");
-				return false;
-			}
-		}
-
-		return true;
-	}
 }
 
 function debuglog($msg) {

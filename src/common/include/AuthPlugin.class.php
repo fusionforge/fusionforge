@@ -89,6 +89,7 @@ abstract class AuthPlugin extends Plugin {
 			$this->saved_user = user_get_object($user_id);
 			if ($this->isSufficient()) {
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
@@ -103,11 +104,17 @@ abstract class AuthPlugin extends Plugin {
 	}
 
 	function fetchAuthUser(&$params) {
-		$params['results'] = $this->saved_user;
+		if ($this->saved_user && $this->isSufficient()) {
+			$params['results'] = $this->saved_user;
+		}
 	}
 
 	function closeAuthSession($params) {
-		$this->unsetSessionCookie();
+		if ($this->isSufficient() || $this->isRequired()) {
+			$this->unsetSessionCookie();
+		} else {
+			return true;
+		}
 	}
 
 	function getExtraRoles(&$params) {
@@ -119,10 +126,10 @@ abstract class AuthPlugin extends Plugin {
 	}
 	
 	// Helper functions for individual plugins
-	protected $cookie_name = 'session_ser';
+	protected $cookie_name = 'forge_session';
 
 	protected function checkSessionToken($token) {
-		return session_check_session_cookie($token);
+		return session_check_session_token($token);
 	}
 
 	protected function checkSessionCookie() {
@@ -131,29 +138,25 @@ abstract class AuthPlugin extends Plugin {
 	}
 
 	protected function setSessionCookie() {
-		$cookie = session_build_session_cookie($this->saved_user->getID());
-		session_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
+		$cookie = session_build_session_token($this->saved_user->getID());
+		session_set_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
 	}
 
 	function login($user) {
 		if ($this->isSufficient() || $this->isRequired()) {
 			$this->saved_user = $user;
 			$this->setSessionCookie();
-		} else {
-			return true;
-		}
-	}
-
-	function logout() {
-		if ($this->isSufficient() || $this->isRequired()) {
-			$this->unsetSessionCookie();
+			$params = array();
+			$params['user'] = $user;
+			$params['event'] = 'login';
+			plugin_hook('sync_account_info', $params);
 		} else {
 			return true;
 		}
 	}
 
 	protected function unsetSessionCookie() {
-		session_cookie($this->cookie_name, '');
+		session_set_cookie($this->cookie_name, '');
 	}
 
 	public function isRequired() {

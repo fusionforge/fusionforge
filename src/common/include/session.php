@@ -41,43 +41,47 @@ $G_SESSION = false;
 $session_ser = getStringFromCookie('session_ser');
 
 /**
- *	session_build_session_cookie() - Construct session cookie for the user
+ *	session_build_session_token() - Construct session token for the user
  *
  *	@param		int		User_id of the logged in user
- *	@return cookie value
+ *	@return string token value
  */
-function session_build_session_cookie($user_id) {
+function session_build_session_token($user_id) {
+	if (!$user_id) {
+		return '';
+	}
+
 	$session_serial = $user_id.'-*-'.time().'-*-'.getStringFromServer('REMOTE_ADDR').'-*-'.getStringFromServer('HTTP_USER_AGENT');
 	$session_serial_hash = md5($session_serial.forge_get_config('session_key'));
-	$session_serial_cookie = base64_encode($session_serial).'-*-'.$session_serial_hash;
-	return $session_serial_cookie;
+	$session_serial_token = base64_encode($session_serial).'-*-'.$session_serial_hash;
+	return $session_serial_token;
 }
 
 /**
- *	session_get_session_cookie_hash() - Get hash of session cookie
+ *	session_get_hash_from_token() - Get hash of session token
  *
  *	This hash can be used as a key to identify session, e.g. in DB.
  *
- *	@param		string	Value of the session cookie
+ *	@param		string	Value of the session token
  *	@return hash
  */
-function session_get_session_cookie_hash($session_cookie) {
-	list ($junk, $hash) = explode('-*-', $session_cookie);
+function session_get_hash_from_token($session_token) {
+	list ($junk, $hash) = explode('-*-', $session_token);
 	return $hash;
 }
 
 /**
- *	session_check_session_cookie() - Check that session cookie passed from user is ok
+ *	session_check_session_token() - Check that session token passed from user is ok
  *
- *	@param		string	Value of the session cookie
- *	@return user_id if cookie is ok, false otherwise
+ *	@param		string	Value of the session token
+ *	@return user_id if token is ok, false otherwise
  */
-function session_check_session_cookie($session_cookie) {
-	if ($session_cookie == '') {
+function session_check_session_token($session_token) {
+	if ($session_token == '') {
 		return false;
 	}
 
-	list ($session_serial, $hash) = explode('-*-', $session_cookie);
+	list ($session_serial, $hash) = explode('-*-', $session_token);
 	$session_serial = base64_decode($session_serial);
 	$new_hash = md5($session_serial.forge_get_config('session_key'));
 
@@ -317,7 +321,7 @@ function session_issecure() {
 }
 
 /**
- *	session_cookie() - Set a session cookie
+ *	session_set_cookie() - Set a session cookie
  *
  *	Set a cookie with default temporal scope of the current browser session
  *	and URL space of the current webserver
@@ -328,7 +332,7 @@ function session_issecure() {
  *	@param		string	Expiration time in UNIX seconds (default 0)
  *	@return true/false
  */
-function session_cookie($name ,$value, $domain = '', $expiration = 0) {
+function session_set_cookie($name ,$value, $domain = '', $expiration = 0) {
 	if (php_sapi_name() != 'cli') {
 		if ( $expiration != 0){
 			setcookie($name, $value, time() + $expiration, '/', $domain, 0);
@@ -451,26 +455,19 @@ function session_require_login () {
  *	@return none
  */
 function session_set_new($user_id) {
-	global $session_ser;
+	$token = session_build_session_token($user_id);
 
-	// set session cookie
-	//
-	$cookie = session_build_session_cookie($user_id);
-	session_cookie("session_ser", $cookie, "", forge_get_config('session_expire'));
-	$session_ser=$cookie;
-
-	$res = db_query_params ('SELECT count(*) as c FROM user_session WHERE session_hash =$1',
-				array (session_get_session_cookie_hash($cookie))) ;
+	$res = db_query_params ('SELECT count(*) as c FROM user_session WHERE session_hash = $1',
+				array (session_get_hash_from_token($token))) ;
 	if (!$res || db_result($res,0,'c') < 1) {
 		db_query_params ('INSERT INTO user_session (session_hash,ip_addr,time,user_id) VALUES ($1,$2,$3,$4)',
-				 array (session_get_session_cookie_hash($cookie),
+				 array (session_get_hash_from_token($token),
 					getStringFromServer('REMOTE_ADDR'),
 					time(),
 					$user_id)) ;
 	}
 
 	// check uniqueness of the session_hash in the database
-	// 
 	$res = session_getdata($user_id);
 
 	if (!$res) {
@@ -557,26 +554,18 @@ function session_set() {
 		}
 	}
 	if ($seen_yes && !$seen_no) {
-		$id_is_good = true;
-	}
-
-	$params = array();
-	$params['results'] = NULL;
-	plugin_hook_by_reference('fetch_authenticated_user', $params);
-
-	$G_SESSION = $params['results'];
-	if ($G_SESSION) {
-		$G_SESSION->setLoggedIn(true);
-	} else {
-		$G_SESSION=false;
+		$params = array();
+		$params['results'] = NULL;
+		plugin_hook_by_reference('fetch_authenticated_user', $params);
 		
-		// if there was bad session cookie, kill it and the user cookie
-		//
-		if ($session_ser) {
-			session_logout();
+		$G_SESSION = $params['results'];
+		if ($G_SESSION) {
+			$G_SESSION->setLoggedIn(true);
+		} else {
+			$G_SESSION=false;
 		}
 	}
-
+	
 	$re = RBACEngine::getInstance();
 	$re->invalidateRoleCaches() ;
 }

@@ -159,14 +159,10 @@ function FusionForgeRoleToMediawikiGroupName ($role, $project) {
 function FusionForgeMWAuth( $user, &$result ) {
 	global $fusionforgeproject, $wgGroupPermissions ;
 
-	$cookie = getStringFromCookie ('session_ser') ;
-        if ($cookie != '') {
-                $s = session_check_session_cookie ($cookie);
-        } else {
-                $s = false ;
-        }
-        if ($s) {
-                $u = user_get_object ($s);
+	session_set();
+
+        if (session_loggedin()) {
+                $u = session_get_user();
 		$g = group_get_object_by_name ($fusionforgeproject) ;
 
                 $mwname = ucfirst($u->getUnixName ()) ;
