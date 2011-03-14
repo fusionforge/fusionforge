@@ -23,6 +23,10 @@ require_once($controller_dir . 'CompactController.php');
 require(APPLICATION_PATH.'/../../../../../common/include/env.inc.php');
 require_once $gfwww.'include/pre.php';
 
+/**
+ * TODO: Enter description here ...
+ *
+ */
 class FusionForgeCompactController extends CompactController {
 	
 	private $actionMimeType;
@@ -85,6 +89,9 @@ class FusionForgeCompactController extends CompactController {
 		}
 	}
 	
+	/**
+	 * TODO: Enter description here ...
+	 */
 	public function oslccompactuserAction() {
 		if (! isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');
@@ -100,6 +107,9 @@ class FusionForgeCompactController extends CompactController {
 		$this->getResponse()->setHeader('Content-Type', 'xml');
 	}
 	
+	/**
+	 * TODO: Enter description here ...
+	 */
 	public function oslccompactusersmallAction() {
 		if (! isset($this->actionMimeType)) {
 			$this->_forward('UnknownAcceptType','error');

@@ -20,6 +20,10 @@ require_once('HTTP.php');
 $exceptions_dir = dirname( dirname( __FILE__ )) . DIRECTORY_SEPARATOR. 'exceptions'. DIRECTORY_SEPARATOR;
 require_once($exceptions_dir . 'oslcException.php');
 
+/**
+ * TODO : document me
+ *
+ */
 class CompactController extends Zend_Rest_Controller {
 	
 	private static $supportedAcceptMimeTypes = array(
