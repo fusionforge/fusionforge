@@ -72,8 +72,8 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-	$success = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
-	if ($success) {
+	$test = $plugin->checkLDAPCredentials(strtolower($form_loginname),$form_pw);
+	if ($test == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
 		if ($plugin->isSufficient()) {
 			$plugin->login(user_get_object_by_name($form_loginname));
 		}
@@ -84,14 +84,15 @@ if ($login) {
 			header ("Location: " . util_make_url("/my"));
 			exit;
 		}
-	} else {
+	} elseif ($test == FORGE_AUTH_AUTHORITATIVE_REJECT) {
 		if ($form_loginname && $form_pw) {
 			$warning_msg = _('Invalid Password Or User Name');
 		} else {
 			$warning_msg = _('Missing Password Or Users Name');
 		}
-		
-	}
+	} else {
+		$warning_msg = _('LDAP server unreachable');
+	}		
 }
 
 if (isset($session_hash)) {
