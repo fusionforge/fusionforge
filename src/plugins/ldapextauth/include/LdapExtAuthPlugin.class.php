@@ -143,7 +143,6 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		forge_define_config_item ('ldap_server', $this->name, 'ldap.example.com');
 		forge_define_config_item ('ldap_port', $this->name, 389);
 		forge_define_config_item ('base_dn', $this->name, 'ou=users,dc=example,dc=com');
-		forge_define_config_item ('user_dn', $this->name, 'uid=');
 		forge_define_config_item ('skipped_users', $this->name, '');
 		forge_define_config_item ('manager_dn', $this->name, '');
 		forge_define_config_item ('manager_password', $this->name, '');
@@ -164,7 +163,16 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 			ldap_bind($this->ldap_conn);
 		}
 
-		$res = ldap_search($this->ldap_conn, forge_get_config('base_dn', $this->name), forge_get_config('user_dn', $this->name) . $loginname) ;
+		$fieldname = 'uid';
+		foreach (explode(',', forge_get_config('mapping', $this->name))
+			 as $map_entry) {
+			list ($fffield, $ldapfield) = explode('=',$map_entry);
+			if ($fffield = 'username') {
+				$fieldname = $ldapfield;
+			}
+		}
+
+		$res = ldap_search($this->ldap_conn, forge_get_config('base_dn', $this->name), "($ldapfield=$loginname)") ;
 		if (!$res || ldap_count_entries($this->ldap_conn, $res) == 0) {
 			// No user by that name in LDAP directory
 			return false;
