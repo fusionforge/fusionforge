@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-04 14:53+0100\n"
+"POT-Creation-Date: 2011-03-09 20:49+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -380,7 +380,7 @@ msgstr "Grupo de Documentos: ID de Grupo de Documentos Inválida"
 #: plugins/hudson/include/HudsonBuild.class.php:110
 #: plugins/projects_hierarchy/www/softwaremap.php:333
 #: www/account/index.php:122 www/admin/cronman.php:79
-#: www/admin/grouplist.php:124 www/admin/massmail.php:155
+#: www/admin/grouplist.php:124 www/admin/massmail.php:159
 #: www/admin/search.php:106 www/admin/search.php:176
 #: www/admin/userlist.php:107 www/developer/diary.php:52
 #: www/developer/diary.php:83 www/export/tracker.php:112
@@ -587,7 +587,7 @@ msgid "Name of the document directory to create:"
 msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:48 www/admin/responses_admin.php:133
-#: www/project/admin/database.php:185 www/project/admin/vhost.php:123
+#: www/project/admin/database.php:185 www/project/admin/vhost.php:125
 msgid "Create"
 msgstr "Criar"
 
@@ -766,7 +766,7 @@ msgstr "Atualizado"
 #: www/admin/pluginman.php:118 www/admin/search.php:95
 #: www/admin/search.php:159 www/frs/admin/editrelease.php:236
 #: www/frs/admin/index.php:155 www/my/dashboard.php:69
-#: www/news/admin/index.php:137 www/people/editjob.php:75
+#: www/news/admin/index.php:133 www/people/editjob.php:75
 #: www/people/editjob.php:167 www/people/viewjob.php:73
 #: www/pm/browse_task.php:158 www/pm/detail_task.php:145
 #: www/pm/ganttpage.php:163 www/pm/mod_task.php:195 www/pm/mod_task.php:212
@@ -937,14 +937,14 @@ msgstr "Não Pude Atualizar o Principal"
 #: plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php:387
 #: www/admin/admin_table.php:153 www/admin/admin_table.php:320
 #: www/admin/responses_admin.php:47 www/admin/trove/trove_cat_edit.php:153
-#: www/admin/useredit.php:197 www/forum/admin/index.php:190
+#: www/admin/useredit.php:196 www/forum/admin/index.php:190
 #: www/forum/admin/index.php:201 www/frs/admin/deletepackage.php:74
 #: www/frs/admin/deleterelease.php:78 www/frs/admin/index.php:181
-#: www/frs/admin/showreleases.php:115 www/news/admin/index.php:139
+#: www/frs/admin/showreleases.php:115 www/news/admin/index.php:135
 #: www/people/people_utils.php:178 www/people/people_utils.php:323
 #: www/people/skills_utils.php:47 www/people/skills_utils.php:105
 #: www/pm/admin/index.php:384 www/pm/admin/index.php:395
-#: www/project/admin/vhost.php:146 www/reporting/timeadd.php:157
+#: www/project/admin/vhost.php:148 www/reporting/timeadd.php:157
 #: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:311
 #: www/tracker/admin/form-addextrafield.php:57
 #: www/tracker/admin/form-addextrafield.php:82
@@ -1051,8 +1051,8 @@ msgstr "Forum::savePlace()"
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
-#: www/news/admin/index.php:93 www/news/admin/index.php:215
-#: www/news/admin/index.php:225 www/news/admin/index.php:246
+#: www/news/admin/index.php:89 www/news/admin/index.php:211
+#: www/news/admin/index.php:221 www/news/admin/index.php:242
 msgid "Error On Update:"
 msgstr "Erro Ao Atualizar:"
 
@@ -1142,7 +1142,7 @@ msgstr "Mensagem"
 #: plugins/mailman/www/mailman_utils.php:181 www/account/editsshkeys.php:86
 #: www/account/index.php:294 www/account/lostlogin.php:101
 #: www/admin/groupedit.php:230 www/admin/trove/trove_cat_edit.php:153
-#: www/admin/useredit.php:202 www/admin/vhost.php:190
+#: www/admin/useredit.php:201 www/admin/vhost.php:190
 #: www/forum/admin/index.php:179 www/frs/admin/index.php:178
 #: www/mail/admin/index.php:230 www/mail/admin/index.php:281
 #: www/people/people_utils.php:177 www/people/people_utils.php:322
@@ -2116,7 +2116,7 @@ msgid "My&nbsp;Page"
 msgstr "Minha&nbsp;Página"
 
 #: common/include/Navigation.class.php:242 www/project/admin/index.php:164
-#: www/reporting/index.php:48 www/stats/site_stats_utils.php:491
+#: www/reporting/index.php:48 www/stats/site_stats_utils.php:497
 msgid "Projects"
 msgstr "Projetos"
 
@@ -2176,8 +2176,8 @@ msgstr "Listas"
 #: www/project/stats/project_stats_utils.php:83
 #: www/project/stats/project_stats_utils.php:142
 #: www/project/stats/project_stats_utils.php:198
-#: www/stats/site_stats_utils.php:254 www/stats/site_stats_utils.php:380
-#: www/stats/site_stats_utils.php:435
+#: www/stats/site_stats_utils.php:260 www/stats/site_stats_utils.php:386
+#: www/stats/site_stats_utils.php:441
 msgid "Tasks"
 msgstr "Tarefas"
 
@@ -2203,8 +2203,8 @@ msgstr "Notícias"
 
 #: common/include/Navigation.class.php:511 common/include/rbac_texts.php:152
 #: common/include/rbac_texts.php:249 common/include/rbac_texts.php:250
-#: plugins/blocks/www/index.php:175 www/stats/site_stats_utils.php:257
-#: www/stats/site_stats_utils.php:381 www/stats/site_stats_utils.php:436
+#: plugins/blocks/www/index.php:175 www/stats/site_stats_utils.php:263
+#: www/stats/site_stats_utils.php:387 www/stats/site_stats_utils.php:442
 msgid "SCM"
 msgstr ""
 
@@ -2825,8 +2825,8 @@ msgstr "Regra/Posição"
 #: www/include/html.php:390 www/include/html.php:467 www/include/html.php:484
 #: www/include/html.php:518 www/include/html.php:559 www/pm/ganttpage.php:67
 #: www/tracker/include/ArtifactTypeHtml.class.php:487
-#: www/tracker/include/ArtifactTypeHtml.class.php:526
-#: www/tracker/include/ArtifactTypeHtml.class.php:663
+#: www/tracker/include/ArtifactTypeHtml.class.php:530
+#: www/tracker/include/ArtifactTypeHtml.class.php:667
 msgid "None"
 msgstr "Nenhum"
 
@@ -3095,9 +3095,9 @@ msgid "Y-m"
 msgstr ""
 
 #: common/reporting/report_utils.php:161 common/reporting/report_utils.php:199
-#: www/reporting/projectact_graph.php:117 www/stats/site_stats_utils.php:245
-#: www/stats/site_stats_utils.php:376 www/stats/site_stats_utils.php:430
-#: www/stats/site_stats_utils.php:489 www/top/toplist.php:37
+#: www/reporting/projectact_graph.php:117 www/stats/site_stats_utils.php:251
+#: www/stats/site_stats_utils.php:382 www/stats/site_stats_utils.php:436
+#: www/stats/site_stats_utils.php:495 www/top/toplist.php:37
 #: www/top/toplist.php:53
 msgid "Downloads"
 msgstr "Downloads"
@@ -3111,8 +3111,8 @@ msgstr "Visual. de Pág."
 #: www/project/stats/project_stats_utils.php:79
 #: www/project/stats/project_stats_utils.php:138
 #: www/project/stats/project_stats_utils.php:194
-#: www/stats/site_stats_utils.php:248 www/stats/site_stats_utils.php:377
-#: www/stats/site_stats_utils.php:431
+#: www/stats/site_stats_utils.php:254 www/stats/site_stats_utils.php:383
+#: www/stats/site_stats_utils.php:437
 msgid "Bugs"
 msgstr "Bugs"
 
@@ -3120,8 +3120,8 @@ msgstr "Bugs"
 #: www/project/stats/project_stats_utils.php:80
 #: www/project/stats/project_stats_utils.php:139
 #: www/project/stats/project_stats_utils.php:195
-#: www/stats/site_stats_utils.php:249 www/stats/site_stats_utils.php:378
-#: www/stats/site_stats_utils.php:432
+#: www/stats/site_stats_utils.php:255 www/stats/site_stats_utils.php:384
+#: www/stats/site_stats_utils.php:438
 msgid "Support"
 msgstr "Suporte"
 
@@ -3129,8 +3129,8 @@ msgstr "Suporte"
 #: www/project/stats/project_stats_utils.php:81
 #: www/project/stats/project_stats_utils.php:140
 #: www/project/stats/project_stats_utils.php:196
-#: www/stats/site_stats_utils.php:250 www/stats/site_stats_utils.php:379
-#: www/stats/site_stats_utils.php:433
+#: www/stats/site_stats_utils.php:256 www/stats/site_stats_utils.php:385
+#: www/stats/site_stats_utils.php:439
 msgid "Patches"
 msgstr "Correções"
 
@@ -3273,7 +3273,7 @@ msgstr ""
 "Artefato: Apenas Membros do Grupo Podem Visualizar Tipos de Artefato Privados"
 
 #: common/tracker/Artifact.class.php:224 common/tracker/Artifact.class.php:756
-#: www/tracker/tracker.php:92 www/tracker/tracker.php:284
+#: www/tracker/tracker.php:92 www/tracker/tracker.php:285
 msgid ""
 "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
 "Login."
@@ -3431,7 +3431,7 @@ msgstr ""
 "Status são obrigatórios"
 
 #: common/tracker/ArtifactType.class.php:212
-#: common/tracker/ArtifactType.class.php:962
+#: common/tracker/ArtifactType.class.php:973
 msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
@@ -3442,6 +3442,11 @@ msgstr ""
 #: common/tracker/ArtifactType.class.php:572
 msgid "Tracker Monitoring Deactivated"
 msgstr ""
+
+#: common/tracker/ArtifactType.class.php:966
+#, fuzzy
+msgid "Tracker name already used"
+msgstr "Nome unix já selecionado"
 
 #: common/widget/Widget.class.php:89 plugins/mailman/www/mailman_utils.php:61
 #: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:234
@@ -3461,7 +3466,7 @@ msgstr "Preferências"
 #: www/admin/globalroleedit.php:233 www/admin/index.php:153
 #: www/forum/admin/index.php:428 www/include/vote_function.php:282
 #: www/my/bookmark_add.php:51 www/my/bookmark_edit.php:64
-#: www/news/admin/index.php:161 www/news/admin/index.php:307
+#: www/news/admin/index.php:157 www/news/admin/index.php:303
 #: www/news/news_utils.php:43 www/news/submit.php:169 www/pm/add_task.php:54
 #: www/pm/add_task.php:149 www/pm/add_task.php:163 www/pm/admin/index.php:221
 #: www/pm/admin/index.php:266 www/pm/admin/index.php:303
@@ -4232,7 +4237,7 @@ msgstr ""
 #: plugins/blocks/www/index.php:227
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:197
-#: plugins/scmsvn/common/SVNPlugin.class.php:192 www/admin/useredit.php:232
+#: plugins/scmsvn/common/SVNPlugin.class.php:192 www/admin/useredit.php:231
 #: www/project/admin/editimages.php:268 www/reporting/usersummary.php:102
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/sendmessage.php:70
@@ -4649,7 +4654,7 @@ msgstr "Nome"
 msgid "URL:"
 msgstr ""
 
-#: plugins/contribtracker/www/index.php:149 www/admin/useredit.php:179
+#: plugins/contribtracker/www/index.php:149 www/admin/useredit.php:178
 msgid "Email:"
 msgstr "E-mail:"
 
@@ -5139,7 +5144,7 @@ msgstr "Enviar uma nova versão"
 
 #: plugins/forumml/www/index.php:110 www/admin/massmail.php:114
 #: www/admin/massmail.php:139 www/developer/diary.php:76
-#: www/news/admin/index.php:141 www/news/admin/index.php:287
+#: www/news/admin/index.php:137 www/news/admin/index.php:283
 #: www/news/admin/news_admin_utils.php:57 www/news/submit.php:151
 #: www/sendmessage.php:70 www/sendmessage.php:151
 msgid "Subject"
@@ -5443,7 +5448,7 @@ msgstr "Fóruns para %1$s"
 
 #: plugins/globalsearch/www/index.php:169
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
-#: www/stats/site_stats_utils.php:242
+#: www/stats/site_stats_utils.php:248
 #, fuzzy
 msgid "Project Name"
 msgstr "Nome do Novo Projeto"
@@ -5475,47 +5480,47 @@ msgid "Wrong Job URL: %s"
 msgstr ""
 
 #: plugins/hudson/include/HudsonBuild.class.php:61
-#: plugins/hudson/include/HudsonJob.class.php:89
+#: plugins/hudson/include/HudsonJob.class.php:91
 #: plugins/hudson/include/HudsonTestResult.class.php:66
 #, php-format
 msgid "Unable to read file at URL: %s"
 msgstr ""
 
 #: plugins/hudson/include/HudsonBuild.class.php:64
-#: plugins/hudson/include/HudsonJob.class.php:92
+#: plugins/hudson/include/HudsonJob.class.php:94
 #: plugins/hudson/include/HudsonTestResult.class.php:69
 #, fuzzy, php-format
 msgid "File not found at URL: %s"
 msgstr "Enquete não encontrada."
 
-#: plugins/hudson/include/HudsonJob.class.php:135
+#: plugins/hudson/include/HudsonJob.class.php:137
 #: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:91
 #: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:69
 #, fuzzy
 msgid "Success"
 msgstr "Nenhum Alteração"
 
-#: plugins/hudson/include/HudsonJob.class.php:139
-#: plugins/hudson/include/HudsonJob.class.php:147
-#: plugins/hudson/include/HudsonJob.class.php:155
-#: plugins/hudson/include/HudsonJob.class.php:163
+#: plugins/hudson/include/HudsonJob.class.php:141
+#: plugins/hudson/include/HudsonJob.class.php:149
+#: plugins/hudson/include/HudsonJob.class.php:157
+#: plugins/hudson/include/HudsonJob.class.php:165
 msgid "In progress"
 msgstr ""
 
-#: plugins/hudson/include/HudsonJob.class.php:143
+#: plugins/hudson/include/HudsonJob.class.php:145
 msgid "Unstable"
 msgstr ""
 
-#: plugins/hudson/include/HudsonJob.class.php:151
+#: plugins/hudson/include/HudsonJob.class.php:153
 msgid "Failure"
 msgstr ""
 
-#: plugins/hudson/include/HudsonJob.class.php:159
+#: plugins/hudson/include/HudsonJob.class.php:161
 #, fuzzy
 msgid "Pending"
 msgstr "(*)Pendente"
 
-#: plugins/hudson/include/HudsonJob.class.php:167
+#: plugins/hudson/include/HudsonJob.class.php:169
 #, fuzzy
 msgid "Unknown status"
 msgstr "Estado da Conta Unix"
@@ -7119,7 +7124,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:172
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:217
 #: plugins/scmsvn/common/SVNPlugin.class.php:212 www/pm/index.php:103
-#: www/pm/mod_task.php:317 www/stats/site_stats_utils.php:280
+#: www/pm/mod_task.php:317 www/stats/site_stats_utils.php:286
 #: www/tracker/ind.php:66
 msgid "Total"
 msgstr "Total"
@@ -7353,7 +7358,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:153
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:198
 #: plugins/scmsvn/common/SVNPlugin.class.php:193
-#: www/stats/site_stats_utils.php:299
+#: www/stats/site_stats_utils.php:305
 msgid "Adds"
 msgstr "Adições"
 
@@ -7361,7 +7366,7 @@ msgstr "Adições"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:199
 #: plugins/scmsvn/common/SVNPlugin.class.php:194
 #: utils/fixscripts/populate_template_project.php:189
-#: www/activity/index.php:108 www/stats/site_stats_utils.php:298
+#: www/activity/index.php:108 www/stats/site_stats_utils.php:304
 #: www/tracker/detail.php:143 www/tracker/mod-limited.php:179
 #: www/tracker/mod.php:232
 msgid "Commits"
@@ -8568,21 +8573,21 @@ msgstr "Ítem Rastreador"
 
 #: www/activity/index.php:276 www/activity/index.php:281
 #: www/tracker/taskmgr.php:102 www/tracker/taskmgr.php:156
-#: www/tracker/tracker.php:300
+#: www/tracker/tracker.php:301
 msgid "Tracker Item"
 msgstr "Ítem Rastreador"
 
-#: www/activity/index.php:276 www/stats/site_stats_utils.php:283
-#: www/stats/site_stats_utils.php:285 www/stats/site_stats_utils.php:287
-#: www/stats/site_stats_utils.php:289 www/stats/site_stats_utils.php:293
+#: www/activity/index.php:276 www/stats/site_stats_utils.php:289
+#: www/stats/site_stats_utils.php:291 www/stats/site_stats_utils.php:293
+#: www/stats/site_stats_utils.php:295 www/stats/site_stats_utils.php:299
 #, fuzzy
 msgid "Opened"
 msgstr "Data de Abertura"
 
 #: www/activity/index.php:281 www/reporting/usersummary.php:56
-#: www/stats/site_stats_utils.php:284 www/stats/site_stats_utils.php:286
-#: www/stats/site_stats_utils.php:288 www/stats/site_stats_utils.php:290
-#: www/stats/site_stats_utils.php:294
+#: www/stats/site_stats_utils.php:290 www/stats/site_stats_utils.php:292
+#: www/stats/site_stats_utils.php:294 www/stats/site_stats_utils.php:296
+#: www/stats/site_stats_utils.php:300
 #, fuzzy
 msgid "Closed"
 msgstr "Data Fechada"
@@ -8715,7 +8720,7 @@ msgstr "sim"
 msgid "Add this custom response to canned responses"
 msgstr ""
 
-#: www/admin/approve-pending.php:163 www/news/admin/index.php:286
+#: www/admin/approve-pending.php:163 www/news/admin/index.php:282
 #: www/project/admin/users.php:257
 msgid "Reject"
 msgstr ""
@@ -8967,7 +8972,7 @@ msgstr "E-mail de instrução enviado"
 msgid "Site Admin: Project Info"
 msgstr "Administrador do Site: Informações de Grupo"
 
-#: www/admin/groupedit.php:99 www/admin/useredit.php:243
+#: www/admin/groupedit.php:99 www/admin/useredit.php:244
 msgid "[Project Admin]"
 msgstr "[Administrador de Projeto]"
 
@@ -9036,7 +9041,7 @@ msgid "Register Time"
 msgstr ""
 
 #: www/admin/grouplist.php:88 www/admin/search.php:156
-#: www/admin/useredit.php:233 www/project/admin/massadd.php:92
+#: www/admin/useredit.php:232 www/project/admin/massadd.php:92
 #: www/project/admin/massfinish.php:80
 #, fuzzy
 msgid "Unix name"
@@ -9321,9 +9326,13 @@ msgstr "ID"
 msgid "Last user_id mailed"
 msgstr "Última user_id postada"
 
+#: www/admin/massmail.php:168
+msgid "No deliveries active."
+msgstr ""
+
 #: www/admin/passedit.php:78
 #, fuzzy
-msgid "Site·Admin:·Successfully Changed·User·Password"
+msgid "Site Admin: Successfully Changed User Password"
 msgstr "Senha Trocada com Sucesso"
 
 #: www/admin/passedit.php:80
@@ -9714,23 +9723,23 @@ msgstr "Nome do usuário:"
 msgid "Web account status"
 msgstr "Estado da conta Web"
 
-#: www/admin/useredit.php:156
+#: www/admin/useredit.php:155
 msgid "Unix Account Status"
 msgstr "Estado da Conta Unix"
 
-#: www/admin/useredit.php:165
+#: www/admin/useredit.php:164
 msgid "Unix Shell:"
 msgstr "Shell Unix:"
 
-#: www/admin/useredit.php:188
+#: www/admin/useredit.php:187
 msgid "Current confirm hash:"
 msgstr "Hash de confirmação atual:"
 
-#: www/admin/useredit.php:196
+#: www/admin/useredit.php:195
 msgid "I want to delete this user"
 msgstr ""
 
-#: www/admin/useredit.php:204
+#: www/admin/useredit.php:203
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
 "properties pertinent to user within specific group, visit admin page of that "
@@ -9740,7 +9749,7 @@ msgstr ""
 "usuário. Para editar propriedades pertinentes ao usuário relativas a um "
 "grupo específico, visite a página de administração desse grupo (abaixo)."
 
-#: www/admin/useredit.php:213
+#: www/admin/useredit.php:212
 msgid ""
 "Unix status updated mirroring web status, unless it has value 'No unix "
 "account (N)'"
@@ -9748,15 +9757,20 @@ msgstr ""
 "Estado do Unix atualizado espelhando o estado da web, a menos que tenha o "
 "valor 'Sem conta unix (N)'"
 
-#: www/admin/useredit.php:223
+#: www/admin/useredit.php:222
 #, fuzzy
 msgid "Projects Membership"
 msgstr "Lista de Membros de Projeto"
 
-#: www/admin/useredit.php:234 www/admin/vhost.php:180
-#: www/project/admin/database.php:212 www/project/admin/vhost.php:139
+#: www/admin/useredit.php:233 www/admin/vhost.php:180
+#: www/project/admin/database.php:212 www/project/admin/vhost.php:141
 msgid "Operations"
 msgstr "Operações"
+
+#: www/admin/useredit.php:253
+#, fuzzy
+msgid "This user is not a member of any project."
+msgstr "Esse desenvolvedor não é membro de nenhum projeto."
 
 #: www/admin/userlist.php:31
 #, fuzzy
@@ -9819,7 +9833,7 @@ msgstr "Mudar"
 msgid "User list for project: "
 msgstr "Lista de usuários para o grupo:"
 
-#: www/admin/userlist.php:142 www/stats/site_stats_utils.php:85
+#: www/admin/userlist.php:142 www/stats/site_stats_utils.php:91
 #, fuzzy
 msgid "All Projects"
 msgstr "Todos os Administradores de Projeto"
@@ -11960,8 +11974,8 @@ msgstr "Prioridade"
 msgid "Assigned to"
 msgstr "Atribuído Para"
 
-#: www/my/dashboard.php:75 www/news/admin/index.php:133
-#: www/news/admin/index.php:281 www/pm/detail_task.php:34
+#: www/my/dashboard.php:75 www/news/admin/index.php:129
+#: www/news/admin/index.php:277 www/pm/detail_task.php:34
 #: www/pm/mod_task.php:45
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
@@ -12031,8 +12045,8 @@ msgstr "Atualizar Uma Entrada"
 msgid "My Diary And Notes"
 msgstr "Meu Diário E Anotações"
 
-#: www/my/diary.php:186 www/news/admin/index.php:143
-#: www/news/admin/index.php:289 www/news/submit.php:154
+#: www/my/diary.php:186 www/news/admin/index.php:139
+#: www/news/admin/index.php:285 www/news/submit.php:154
 msgid "Details"
 msgstr ""
 
@@ -12133,61 +12147,61 @@ msgstr "Novas Liberações"
 msgid "Older Releases"
 msgstr "Liberações Antigas"
 
-#: www/news/admin/index.php:96 www/news/admin/index.php:217
+#: www/news/admin/index.php:92 www/news/admin/index.php:213
 #, fuzzy
 msgid "Newsbyte Updated."
 msgstr "Enquete não encontrada."
 
-#: www/news/admin/index.php:109 www/news/admin/index.php:254
+#: www/news/admin/index.php:105 www/news/admin/index.php:250
 #, fuzzy
 msgid "News admin"
 msgstr "Administrador de Notícias"
 
-#: www/news/admin/index.php:118 www/news/admin/index.php:265
+#: www/news/admin/index.php:114 www/news/admin/index.php:261
 #, fuzzy
 msgid "Newsbyte not found"
 msgstr "Enquete não encontrada."
 
-#: www/news/admin/index.php:138
+#: www/news/admin/index.php:134
 msgid "Displayed"
 msgstr ""
 
-#: www/news/admin/index.php:160
+#: www/news/admin/index.php:156
 #, php-format
 msgid ""
 "If this item is on the %1$s home page and you edit it, it will be removed "
 "from the home page."
 msgstr ""
 
-#: www/news/admin/index.php:175 www/news/admin/news_admin_utils.php:70
+#: www/news/admin/index.php:171 www/news/admin/news_admin_utils.php:70
 msgid "No Queued Items Found"
 msgstr "Nenhum Ítem em Fila Encontrado Para o Projeto"
 
-#: www/news/admin/index.php:228
+#: www/news/admin/index.php:224
 #, fuzzy
 msgid "Newsbyte Deleted."
 msgstr "Enquete não encontrada."
 
-#: www/news/admin/index.php:249
+#: www/news/admin/index.php:245
 #, fuzzy
 msgid "Newsbytes Rejected."
 msgstr "Enquete não encontrada."
 
-#: www/news/admin/index.php:268
+#: www/news/admin/index.php:264
 #, fuzzy
 msgid "Newsbyte deleted"
 msgstr "Enquete não encontrada."
 
-#: www/news/admin/index.php:279
+#: www/news/admin/index.php:275
 #, fuzzy
 msgid "Submitted for project"
 msgstr "Esses são os Ítens de Notícia que Foram Enviados Para o Projeto"
 
-#: www/news/admin/index.php:284
+#: www/news/admin/index.php:280
 msgid "Approve For Front Page"
 msgstr ""
 
-#: www/news/admin/index.php:285
+#: www/news/admin/index.php:281
 msgid "Do Nothing"
 msgstr ""
 
@@ -13409,7 +13423,7 @@ msgstr ""
 msgid "Original Comment"
 msgstr "Comentário original"
 
-#: www/pm/detail_task.php:140 www/reporting/timeadd.php:138
+#: www/pm/detail_task.php:140
 msgid "Hours"
 msgstr ""
 
@@ -13575,7 +13589,7 @@ msgstr ""
 msgid "Week"
 msgstr ""
 
-#: www/pm/mod_task.php:260 www/stats/site_stats_utils.php:373
+#: www/pm/mod_task.php:260 www/stats/site_stats_utils.php:379
 msgid "Day"
 msgstr "Dia"
 
@@ -13777,7 +13791,7 @@ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
 
 #: www/project/admin/editimages.php:60 www/tracker/tracker.php:146
-#: www/tracker/tracker.php:378
+#: www/tracker/tracker.php:379
 #, fuzzy
 msgid "Invalid filename"
 msgstr "Nome completo inválido"
@@ -14371,29 +14385,29 @@ msgstr ""
 msgid "Link external role"
 msgstr ""
 
-#: www/project/admin/vhost.php:60
+#: www/project/admin/vhost.php:62
 msgid "Virtual Host scheduled for creation."
 msgstr "Host Virtual agendado para criação."
 
-#: www/project/admin/vhost.php:66
+#: www/project/admin/vhost.php:68
 #, php-format
 msgid "Not a valid hostname - %1$s"
 msgstr "Não é um nome de host válido - %1$s"
 
-#: www/project/admin/vhost.php:97
+#: www/project/admin/vhost.php:99
 msgid "VHOST deleted"
 msgstr "VHOST deletado"
 
-#: www/project/admin/vhost.php:104
+#: www/project/admin/vhost.php:106
 msgid "Virtual Host Management"
 msgstr "Gerenciamento de Host Virtual"
 
-#: www/project/admin/vhost.php:106
+#: www/project/admin/vhost.php:108
 #, fuzzy
 msgid "Add New Virtual Host"
 msgstr "Adicionar Host Virtual"
 
-#: www/project/admin/vhost.php:109
+#: www/project/admin/vhost.php:111
 #, php-format
 msgid ""
 "To add a new virtual host - simply point a <strong>CNAME</strong> for "
@@ -14401,7 +14415,7 @@ msgid ""
 "currently host mail (i.e. cannot be an MX) or DNS</strong>."
 msgstr ""
 
-#: www/project/admin/vhost.php:113
+#: www/project/admin/vhost.php:115
 #, php-format
 msgid ""
 "Clicking on \"create\" will schedule the creation of the Virtual Host.  This "
@@ -14409,15 +14423,15 @@ msgid ""
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
 
-#: www/project/admin/vhost.php:121
+#: www/project/admin/vhost.php:123
 msgid "New Virtual Host <em>(e.g. vhost.org)</em>"
 msgstr "Novo Host Virtual <em>(ex.: vhost.org)</em>"
 
-#: www/project/admin/vhost.php:138
+#: www/project/admin/vhost.php:140
 msgid "Virtual Host"
 msgstr "Host Virtual"
 
-#: www/project/admin/vhost.php:155
+#: www/project/admin/vhost.php:157
 msgid "No VHOSTs defined"
 msgstr "Nenhum VHOST definido"
 
@@ -14519,7 +14533,7 @@ msgid "Areas"
 msgstr ""
 
 #: www/project/stats/project_stats_utils.php:71
-#: www/stats/site_stats_utils.php:370
+#: www/stats/site_stats_utils.php:376
 #, php-format
 msgid "Statistics for the past %1$s days"
 msgstr "Estatísticas para os últimos %1$s dias."
@@ -14527,7 +14541,7 @@ msgstr "Estatísticas para os últimos %1$s dias."
 #: www/project/stats/project_stats_utils.php:77
 #: www/project/stats/project_stats_utils.php:136
 #: www/project/stats/project_stats_utils.php:192
-#: www/reporting/projectact_graph.php:146 www/stats/site_stats_utils.php:243
+#: www/reporting/projectact_graph.php:146 www/stats/site_stats_utils.php:249
 msgid "Page Views"
 msgstr "Visual. de Pág."
 
@@ -14540,7 +14554,7 @@ msgstr "D/l"
 #: www/project/stats/project_stats_utils.php:82
 #: www/project/stats/project_stats_utils.php:141
 #: www/project/stats/project_stats_utils.php:197
-#: www/stats/site_stats_utils.php:251 www/stats/site_stats_utils.php:434
+#: www/stats/site_stats_utils.php:257 www/stats/site_stats_utils.php:440
 msgid "All Trkr"
 msgstr "Todos Rastr."
 
@@ -14957,6 +14971,10 @@ msgstr ""
 msgid "Project/Task"
 msgstr ""
 
+#: www/reporting/timeadd.php:138
+msgid "Hours worked"
+msgstr ""
+
 #: www/reporting/timeadd.php:179
 msgid "Total Hours"
 msgstr ""
@@ -15213,7 +15231,7 @@ msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:391
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:423
-#: www/stats/site_stats_utils.php:159
+#: www/stats/site_stats_utils.php:165
 msgid "all"
 msgstr "totos"
 
@@ -16021,88 +16039,88 @@ msgstr "IP de Origem"
 msgid "%1$s Site Project Statistical Comparisons"
 msgstr "Comparações Estatísticas de Projetos"
 
-#: www/stats/site_stats_utils.php:86
+#: www/stats/site_stats_utils.php:92
 #, fuzzy
 msgid "Special Projects"
 msgstr "Melhores Projetos"
 
-#: www/stats/site_stats_utils.php:111
+#: www/stats/site_stats_utils.php:117
 #, php-format
 msgid " (no category found with ID %d)"
 msgstr ""
 
-#: www/stats/site_stats_utils.php:143
+#: www/stats/site_stats_utils.php:149
 msgid "Projects in trove category:"
 msgstr "Projetos na categoria do repositório:"
 
-#: www/stats/site_stats_utils.php:147
+#: www/stats/site_stats_utils.php:153
 msgid "OR enter Special Project List:"
 msgstr "OU infome Lista Especial de Projetos:"
 
-#: www/stats/site_stats_utils.php:149
+#: www/stats/site_stats_utils.php:155
 msgid "<strong>comma separated</strong> group_id's)"
 msgstr "id's de grupos <strong>separados por vírgulas</strong>)"
 
-#: www/stats/site_stats_utils.php:151
+#: www/stats/site_stats_utils.php:157
 msgid "Report:"
 msgstr "Relatório:"
 
-#: www/stats/site_stats_utils.php:158
+#: www/stats/site_stats_utils.php:164
 msgid "last_30"
 msgstr "últimos_30"
 
-#: www/stats/site_stats_utils.php:165
+#: www/stats/site_stats_utils.php:171
 msgid "View by:"
 msgstr "Visto por:"
 
-#: www/stats/site_stats_utils.php:170
+#: www/stats/site_stats_utils.php:176
 msgid "Generate Report"
 msgstr "Gerar Relatório"
 
-#: www/stats/site_stats_utils.php:277
+#: www/stats/site_stats_utils.php:283
 msgid "Site"
 msgstr "Site"
 
-#: www/stats/site_stats_utils.php:278
+#: www/stats/site_stats_utils.php:284
 msgid "Subdomain"
 msgstr "Sub-domínio"
 
-#: www/stats/site_stats_utils.php:297
+#: www/stats/site_stats_utils.php:303
 msgid "Checkouts"
 msgstr ""
 
-#: www/stats/site_stats_utils.php:346
+#: www/stats/site_stats_utils.php:352
 msgid "Query returned no valid data."
 msgstr "A consulta não retornou dados válidos."
 
-#: www/stats/site_stats_utils.php:374 www/stats/site_stats_utils.php:428
-#: www/stats/site_stats_utils.php:487
+#: www/stats/site_stats_utils.php:380 www/stats/site_stats_utils.php:434
+#: www/stats/site_stats_utils.php:493
 msgid "Site Views"
 msgstr "Visual. do Site"
 
-#: www/stats/site_stats_utils.php:375 www/stats/site_stats_utils.php:429
-#: www/stats/site_stats_utils.php:488
+#: www/stats/site_stats_utils.php:381 www/stats/site_stats_utils.php:435
+#: www/stats/site_stats_utils.php:494
 msgid "Subdomain Views"
 msgstr "Visual. do Sub-domínio"
 
-#: www/stats/site_stats_utils.php:406 www/stats/site_stats_utils.php:462
+#: www/stats/site_stats_utils.php:412 www/stats/site_stats_utils.php:468
 msgid "No Data"
 msgstr "Nenhum Dado"
 
-#: www/stats/site_stats_utils.php:424
+#: www/stats/site_stats_utils.php:430
 #, php-format
 msgid "Statistics for the past %1$s months"
 msgstr "Estatísticas para os últimos %1$s meses."
 
-#: www/stats/site_stats_utils.php:427
+#: www/stats/site_stats_utils.php:433
 msgid "Month"
 msgstr "Mês"
 
-#: www/stats/site_stats_utils.php:483
+#: www/stats/site_stats_utils.php:489
 msgid "Current Aggregate Statistics for All Time"
 msgstr "Estatísticas Agregadas Atuais de Todos os Tempos"
 
-#: www/stats/site_stats_utils.php:490
+#: www/stats/site_stats_utils.php:496
 msgid "Developers"
 msgstr "Desenvolvedores"
 
@@ -17427,7 +17445,7 @@ msgid ""
 msgstr ""
 
 #: www/tracker/browse.php:694
-#: www/tracker/include/ArtifactTypeHtml.class.php:622
+#: www/tracker/include/ArtifactTypeHtml.class.php:626
 msgid "Nobody"
 msgstr "Ninguém"
 
@@ -17490,10 +17508,10 @@ msgid "Changes"
 msgstr "Alterações"
 
 #: www/tracker/download.php:51 www/tracker/taskmgr.php:35
-#: www/tracker/tracker.php:90 www/tracker/tracker.php:280
-#: www/tracker/tracker.php:442 www/tracker/tracker.php:459
-#: www/tracker/tracker.php:488 www/tracker/tracker.php:509
-#: www/tracker/tracker.php:558
+#: www/tracker/tracker.php:90 www/tracker/tracker.php:281
+#: www/tracker/tracker.php:443 www/tracker/tracker.php:460
+#: www/tracker/tracker.php:489 www/tracker/tracker.php:510
+#: www/tracker/tracker.php:559
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
@@ -17542,7 +17560,7 @@ msgstr ""
 msgid "Related Tasks"
 msgstr ""
 
-#: www/tracker/include/ArtifactTypeHtml.class.php:602
+#: www/tracker/include/ArtifactTypeHtml.class.php:606
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -17715,7 +17733,7 @@ msgstr "Adicionar Relação Para Tarefa Existente."
 msgid "Create New Task"
 msgstr "Criar Nova Tarefa"
 
-#: www/tracker/tracker.php:138 www/tracker/tracker.php:372
+#: www/tracker/tracker.php:138 www/tracker/tracker.php:373
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Não Pude Atualizar o Principal"
@@ -17729,72 +17747,72 @@ msgstr ""
 msgid "Item %s successfully created"
 msgstr "Ítem Criado com Sucesso"
 
-#: www/tracker/tracker.php:246
+#: www/tracker/tracker.php:247
 #, fuzzy
 msgid "Updated Successfully"
 msgstr "Atualizado com sucesso"
 
-#: www/tracker/tracker.php:310 www/tracker/tracker.php:329
+#: www/tracker/tracker.php:311 www/tracker/tracker.php:330
 #, fuzzy
 msgid "Comment added"
 msgstr "Comentário"
 
-#: www/tracker/tracker.php:353
+#: www/tracker/tracker.php:354
 #, php-format
 msgid "ERROR: Skipping attachment %d: file is too large."
 msgstr ""
 
-#: www/tracker/tracker.php:357
+#: www/tracker/tracker.php:358
 #, php-format
 msgid "ERROR: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
-#: www/tracker/tracker.php:381
+#: www/tracker/tracker.php:382
 #, fuzzy
 msgid "File Upload: Error"
 msgstr "Envio de Arquivo: Sucesso"
 
-#: www/tracker/tracker.php:384
+#: www/tracker/tracker.php:385
 msgid "File Upload: Successful"
 msgstr "Envio de Arquivo: Sucesso"
 
-#: www/tracker/tracker.php:401
+#: www/tracker/tracker.php:402
 #, fuzzy
 msgid "Could Not Create File Object::"
 msgstr "Não Pude Atualizar o Principal"
 
-#: www/tracker/tracker.php:406
+#: www/tracker/tracker.php:407
 msgid "File Delete:"
 msgstr "Deleção de Arquivo:"
 
-#: www/tracker/tracker.php:409
+#: www/tracker/tracker.php:410
 msgid "File Delete: Successful"
 msgstr "Deleção de Arquivo: Sucesso"
 
-#: www/tracker/tracker.php:420
+#: www/tracker/tracker.php:421
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Ítem Criado com Sucesso"
 
-#: www/tracker/tracker.php:447 www/tracker/tracker.php:464
+#: www/tracker/tracker.php:448 www/tracker/tracker.php:465
 #, fuzzy
 msgid "Monitoring Started"
 msgstr "Monitoramento iniciado"
 
-#: www/tracker/tracker.php:449 www/tracker/tracker.php:466
+#: www/tracker/tracker.php:450 www/tracker/tracker.php:467
 #, fuzzy
 msgid "Monitoring Deactivated"
 msgstr "Monitoramento Desativado"
 
-#: www/tracker/tracker.php:514
+#: www/tracker/tracker.php:515
 msgid "Confirmation failed. Artifact not deleted"
 msgstr ""
 
-#: www/tracker/tracker.php:518
+#: www/tracker/tracker.php:519
 msgid "Artifact Delete Failed"
 msgstr ""
 
-#: www/tracker/tracker.php:520
+#: www/tracker/tracker.php:521
 msgid "Artifact Deleted Successfully"
 msgstr ""
 
