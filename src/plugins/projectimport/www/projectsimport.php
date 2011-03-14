@@ -39,6 +39,7 @@ require_once $gfwww.'admin/admin_utils.php';
 
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
 require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
+require_once $gfplugins.'projectimport/common/OpendocumentPackage.class.php';
 
 include_once('arc/ARC2.php');
 
@@ -141,8 +142,25 @@ class ProjectsImportPage extends FileManagerPage {
 
 		$filechosen = $this->initialize_chosenfile_from_submitted();
 		if($filechosen) {
+			
+			$filepath = $this->posted_selecteddumpfile;
+
+			if ($this->storage->getMimeType($filepath) == 'application/x-planetforge-forge-export') {
+				$package = OpendocumentPackage::open($filepath);
+				
+				
+		        $dumpfilenames = $package->getFileNamesByMediaType('application/x-forgeplucker-oslc-rdf+json');
+        		if (count($dumpfilenames) == 1) {
+        			$filename = $dumpfilenames[0];
+
+        			$contents = $package->getFileContents($filename);
+        			print_r($contents);
+        		}
+	
+				//print_r($package);
+			}
 			//print_r($filechosen);
-			$json = fread(fopen($this->posted_selecteddumpfile, 'r'),filesize($this->posted_selecteddumpfile));
+			$json = fread(fopen($filepath, 'r'), filesize($filepath));
 
 			if(! $json) {
 				$feedback = "Error : missing data";
@@ -173,6 +191,9 @@ class ProjectsImportPage extends FileManagerPage {
 	
 	/**
 	 * Does the main work
+	 * 
+	 * initialize_from_submitted_data() has already been called to intialize objects sent as POST vars
+	 * 
 	 * @return html string
 	 */
 	function do_work() {

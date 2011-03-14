@@ -2143,6 +2143,7 @@ src/plugins/projectimport/INSTALL -text
 src/plugins/projectimport/NAME -text
 src/plugins/projectimport/README -text
 src/plugins/projectimport/bin/install.sh -text
+src/plugins/projectimport/common/OpendocumentPackage.class.php -text
 src/plugins/projectimport/common/ProjectImportPlugin.class.php -text
 src/plugins/projectimport/common/ProjectImporter.class.php -text
 src/plugins/projectimport/common/UploadedFiles.class.php -text
