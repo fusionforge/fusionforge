@@ -316,7 +316,7 @@ class MantisBTPlugin extends Plugin {
 			db_rollback($dbConnection);
 		} else {
 			db_query_params('UPDATE mantis_user_table set email = $1 where username = $2',array($row['email'],$row['user_name']),'-1','0',$dbConnection);
-			echo db_error();
+			echo db_error($dbConnection);
 		}
 	}
 
@@ -392,7 +392,7 @@ class MantisBTPlugin extends Plugin {
 
 			if (!$result) {
 				$this->setError(_('Insert Failed') . db_error($dbConnection));
-				db_rollback();
+				db_rollback($dbConnection);
 				return false;
 			}
 		}

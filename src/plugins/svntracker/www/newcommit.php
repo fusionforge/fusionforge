@@ -139,7 +139,7 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_svntracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
-			$return['Error']='Problems with Artifact $Num: '.db_error($DBRes);
+			$return['Error']='Problems with Artifact $Num: '.db_error();
 			db_rollback();
 		} else {
 			$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_master (holder_id, svn_date, log_text, file, prev_version, actual_version, author) VALUES ($1, $2, $3, $4, $5, $6, $7)',
@@ -151,7 +151,7 @@ AND artifact_group_list.group_id=$1 AND artifact.artifact_id=$2',
 							 $Config['ActualVersion'],
 							 $Config['UserName'])) ;
 			if(!$DBRes) {
-				$return['Error']="Problems with Artifact $Num: ".db_error($DBRes)."\n";
+				$return['Error']="Problems with Artifact $Num: ".db_error()."\n";
 				db_rollback();
 			} else {
 				db_commit();
@@ -195,7 +195,7 @@ AND project_group_list.group_id=$2',
 			array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_svntracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
-			$return['Error']='Problems with Task $Num: '.db_error($DBRes);
+			$return['Error']='Problems with Task $Num: '.db_error();
 			db_rollback();
 		} else {
 			$DBRes = db_query_params ('INSERT INTO plugin_svntracker_data_master 

@@ -124,7 +124,7 @@ function addArtifactLog($Config, $GroupId, $Num)
 					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
-			$return['Error']='Problems with Artifact $Num: '.db_error($DBRes);
+			$return['Error']='Problems with Artifact $Num: '.db_error();
 			db_rollback();
 		} else {
 			$DBRes = db_query_params ('INSERT INTO plugin_cvstracker_data_master (holder_id, cvs_date, log_text, file, prev_version, actual_version, author) VALUES ($1,$2,$3,$4,$5,$6,$7)',
@@ -174,7 +174,7 @@ function addTaskLog($Config, $GroupId, $Num)
 					  array ($Num));
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
-			$return['Error']='Problems with Task $Num: '.db_error($DBRes);
+			$return['Error']='Problems with Task $Num: '.db_error();
 			db_rollback();
 		} else {
 			$DBRes = db_query_params ('INSERT INTO plugin_cvstracker_data_master (holder_id, cvs_date, log_text, file, prev_version, actual_version, author) VALUES ($1,$2,$3,$4,$5,$6,$7)',

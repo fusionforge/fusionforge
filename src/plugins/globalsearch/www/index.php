@@ -153,7 +153,7 @@ if (!$result || $rows < 1) {
         $no_rows = 1;
         echo "<h2>".sprintf (_('No matches found for %1$s'),
 			     $gwords)."</h2>";
-        echo db_error();
+        echo db_error(SYS_DB_SEARCH);
 
 } else {
 

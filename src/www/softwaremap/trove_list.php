@@ -237,7 +237,7 @@ if ( $cat === 'c' ) {
 	$qpa = db_construct_qpa($qpa, ' ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC');
 	$res_grp = db_query_qpa($qpa, $TROVE_HARDQUERYLIMIT, 0, SYS_DB_TROVE);
 
-	echo db_error();
+	echo db_error(SYS_DB_TROVE);
 	$querytotalcount = db_numrows($res_grp);
 
 	// #################################################################

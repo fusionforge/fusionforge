@@ -63,7 +63,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 		$res = db_query_params($sql, array($group_id),  7, 0, SYS_DB_STATS);
 	}
 
-	echo db_error();
+	echo db_error(SYS_DB_STATS);
 
    // if there are any days, we have valid data.
 	if ( ($valid_days = db_numrows( $res )) > 0 ) {
@@ -109,7 +109,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 
 	} else {
 		echo _('Project did not exist on this date.');
-		echo db_error() .'</p>';
+		echo db_error(SYS_DB_STATS) .'</p>';
 	}
 
 }
@@ -168,7 +168,7 @@ function stats_project_monthly( $group_id ) {
 
 	} else {
 		echo _('Project did not exist on this date.')."<p>";
-		echo db_error();
+		echo db_error(SYS_DB_STATS);
 	}
 }
 
@@ -180,7 +180,6 @@ function stats_project_all( $group_id ) {
 		WHERE group_id=$1
 	", array($group_id), -1, 0, SYS_DB_STATS);
 	$row = db_fetch_array($res);
-//	echo db_error();
 
 	?>
 	<p><strong><?php echo _('Statistics for All Time') ?></strong></p>

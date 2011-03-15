@@ -116,24 +116,31 @@ function db_connect_if_needed () {
         }
 }
 
-function db_switcher(&$dbserver=NULL) {
+function db_switcher($dbserver=NULL) {
 	switch ($dbserver) {
 	case NULL:
 	case 'SYS_DB_PRIMARY':
-		$dbserver = SYS_DB_PRIMARY ;
+		$dbconn = SYS_DB_PRIMARY ;
 		break ;
 	case 'SYS_DB_STATS':
-		$dbserver = SYS_DB_STATS ;
+		$dbconn = SYS_DB_STATS ;
 		break ;
 	case 'SYS_DB_TROVE':
-		$dbserver = SYS_DB_TROVE ;
+		$dbconn = SYS_DB_TROVE ;
 		break ;
 	case 'SYS_DB_SEARCH':
-		$dbserver = SYS_DB_SEARCH ;
+		$dbconn = SYS_DB_SEARCH ;
 		break ;
 	default:
-		$dbserver = SYS_DB_PRIMARY ;
+		// Cope with $dbserver already being a connection
+		if (pg_dbname($dbserver)) {
+			$dbconn = $dbserver;
+		} else {
+			$dbconn = SYS_DB_PRIMARY ;
+		}
 	}
+	
+	return $dbconn;
 }	
 
 /**
@@ -149,7 +156,7 @@ function db_switcher(&$dbserver=NULL) {
  */
 function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
-	db_switcher ($dbserver) ;
+	$dbconn = db_switcher($dbserver) ;
 
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
@@ -164,12 +171,11 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	$res = @pg_query($dbserver,$qstring);
+	$res = @pg_query($dbconn,$qstring);
 	if (!$res) {
-		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> '.db_error());
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
+		error_log('SQL> ' . db_error($dbconn));
 	}
-	//echo "\n<br />|*| [$qstring]: ".db_error();
 	return $res;
 }
 
@@ -184,7 +190,7 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
  */
 function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
-	db_switcher ($dbserver) ;
+	$dbconn = db_switcher($dbserver) ;
 
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
@@ -203,12 +209,11 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 		}
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
-	$res = @pg_query($dbserver,$qstring);
+	$res = @pg_query($dbconn,$qstring);
 	if (!$res) {
-		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> '.db_error());
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
+		error_log('SQL> ' . db_error($dbconn));
 	}
-	//echo "\n<br />|*| [$qstring]: ".db_error();
 	return $res;
 }
 
@@ -224,7 +229,7 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
  */
 function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) {
 	db_connect_if_needed () ;
-	db_switcher ($dbserver) ;
+	$dbconn = db_switcher($dbserver) ;
 
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
@@ -239,10 +244,10 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) 
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	$res = @pg_query_params($dbserver,$qstring,$params);
+	$res = @pg_query_params($dbconn,$qstring,$params);
 	if (!$res) {
-		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> '. db_error($dbserver));
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
+		error_log('SQL> ' . db_error($dbconn));
 	}
 	return $res;
 }
@@ -468,14 +473,11 @@ function db_fetch_array_by_row($qhandle, $row) {
  *	@return int id of the primary key or 0 on failure.
  */
 function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=NULL) {
-	$sql="SELECT max($pkey_field_name) AS id FROM $table_name";
-	//echo $sql;
+	$sql = "SELECT max($pkey_field_name) AS id FROM $table_name";
 	$res = db_query_params ($sql, array(), -1, 0, $dbserver);
 	if (db_numrows($res) >0) {
 		return db_result($res,0,'id');
 	} else {
-	//	echo "No Rows Matched";
-	//	echo db_error();
 		return 0;
 	}
 }
@@ -487,8 +489,9 @@ function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=NULL) {
  *	@return text error message.
  */
 function db_error($dbserver=NULL) {
-	//return @pg_errormessage($dbserver); 
-	return pg_last_error($dbserver);
+	$dbconn = db_switcher($dbserver);
+
+	return pg_last_error($dbconn);
 }
 
 /**
