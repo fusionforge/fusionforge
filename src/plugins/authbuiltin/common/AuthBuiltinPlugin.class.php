@@ -22,6 +22,11 @@
  * USA
  */
 
+/**
+ * Default authentication mechanism based on DB user's password storage
+ *
+ */
+
 class AuthBuiltinPlugin extends ForgeAuthPlugin {
 	/**
 	 * AuthBuiltinPlugin() - constructor
@@ -45,6 +50,11 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$this->declareConfigVars();
 	}
 
+	/**
+	 * Display a form to input credentials : default login dialog
+	 * @param unknown_type $params
+	 * @return boolean
+	 */
 	function displayAuthForm($params) {
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;

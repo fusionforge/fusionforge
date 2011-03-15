@@ -50,6 +50,8 @@ if ($triggered) {
 }
 echo '</p>';
 
+// see AuthBuiltinPlugin::displayAuthForm() that should do the work by default
+
 $params = array();
 $params['return_to'] = $return_to;
 plugin_hook('display_auth_form', $params);

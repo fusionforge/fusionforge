@@ -1,12 +1,13 @@
 <?php
 /**
- * FusionForge login page
+ * FusionForge AuthCas login page
  *
  * This is main login page. It takes care of different account states
  * (by disallowing logging in with non-active account, with appropriate
  * notice).
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2011, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -25,6 +26,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// FIXME : WTF ?!?!?!?
 Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
 Header( "Cache-Control: no-cache"); 
 Header( "Cache-Control: must-revalidate"); 
@@ -62,8 +64,11 @@ if ($return_to) {
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
+	// redirect
 	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
+
+// Here comes CAS standard magic (which will redirect to the CAS server, etc.)
 
 $plugin->initCAS();
 

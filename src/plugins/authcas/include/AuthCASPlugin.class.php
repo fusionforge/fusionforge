@@ -21,8 +21,14 @@
  */
 
 require_once $GLOBALS['gfcommon'].'include/User.class.php';
+
+// from phpCAS (https://wiki.jasig.org/display/CASC/phpCAS)
 require_once 'CAS.php';
 
+/**
+ * Authentication manager for FusionForge CASification
+ *
+ */
 class AuthCASPlugin extends ForgeAuthPlugin {
 	function AuthCASPlugin () {
 		global $gfconfig;
@@ -63,6 +69,11 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		self::$init = true;
 	}
 
+	/**
+	 * Display a form to input credentials
+	 * @param unknown_type $params
+	 * @return boolean
+	 */
 	function displayAuthForm($params) {
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
@@ -81,6 +92,10 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 </form>' ;
 	}
 
+    /**
+	 * Is there a valid session?
+	 * @param unknown_type $params
+	 */
 	function checkAuthSession(&$params) {
 		$this->initCAS();
 
@@ -112,6 +127,10 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		}
 	}
 
+	/**
+	 * What GFUser is logged in?
+	 * @param unknown_type $params
+	 */
 	function fetchAuthUser(&$params) {
 		if ($this->saved_user && $this->isSufficient()) {
 			$params['results'] = $this->saved_user;
@@ -123,12 +142,19 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 
 		if ($this->isSufficient() || $this->isRequired()) {
 			$this->unsetSessionCookie();
+			// logs user out from CAS
+			// TODO : make it optional to not mess with other apps' SSO sessions with CAS
 			phpCAS::logoutWithRedirectService(util_make_url('/'));
 		} else {
 			return true;
 		}
 	}
 
+	/**
+	 * Terminate an authentication session
+	 * @param unknown_type $params
+	 * @return boolean
+	 */
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
 

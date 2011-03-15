@@ -22,10 +22,16 @@
  * USA
  */
 
+// See for details http://lists.fusionforge.org/pipermail/fusionforge-general/2011-February/001335.html
+
 define('FORGE_AUTH_AUTHORITATIVE_ACCEPT', 1);
 define('FORGE_AUTH_AUTHORITATIVE_REJECT', 2);
 define('FORGE_AUTH_NOT_AUTHORITATIVE', 3);
 
+/**
+ * Pluggable Authentication plugins base class
+ *
+ */
 abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * ForgeAuthPlugin() - constructor
@@ -35,7 +41,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 		$this->Plugin();
 		// Common hooks that can be enabled per plugin:
 		// check_auth_session - is there a valid session?
-		// fetch_auth_info - what GFUser is logged in?
+		// fetch_authenticated_user - what GFUser is logged in?
 		// display_auth_form - display a form to input credentials
 		// display_create_user_form - display a form to create a user from external auth
 		// sync_account_info - sync identity from external source (realname, email, etc.)
@@ -56,12 +62,15 @@ abstract class ForgeAuthPlugin extends Plugin {
 			$this->fetchAuthUser($params);
 			break;
 		case 'display_auth_form':
+			// no default implementation, but see AuthBuiltinPlugin::displayAuthForm()
 			$this->displayAuthForm($params);
 			break;
 		case 'display_create_user_form':
+			// no default implementation
 			$this->displayCreateUserForm($params);
 			break;
 		case 'sync_account_info':
+			// no default implementation
 			$this->syncAccountInfo($params);
 			break;
 		case 'get_extra_roles':
@@ -80,6 +89,10 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	// Default mechanisms
 	protected $saved_user;
+	/**
+	 * Is there a valid session?
+	 * @param unknown_type $params
+	 */
 	function checkAuthSession(&$params) {
 		if (isset($params['auth_token']) && $params['auth_token'] != '') {
 			$user_id = $this->checkSessionToken($params['auth_token']);
@@ -104,12 +117,21 @@ abstract class ForgeAuthPlugin extends Plugin {
 		}
 	}
 
+	/**
+	 * What GFUser is logged in?
+	 * @param unknown_type $params
+	 */
 	function fetchAuthUser(&$params) {
 		if ($this->saved_user && $this->isSufficient()) {
 			$params['results'] = $this->saved_user;
 		}
 	}
 
+	/**
+	 * Terminate an authentication session
+	 * @param unknown_type $params
+	 * @return boolean
+	 */
 	function closeAuthSession($params) {
 		if ($this->isSufficient() || $this->isRequired()) {
 			$this->unsetSessionCookie();
@@ -118,10 +140,18 @@ abstract class ForgeAuthPlugin extends Plugin {
 		}
 	}
 
+	/**
+	 * Add new roles not necessarily stored in the database
+	 * @param unknown_type $params
+	 */
 	function getExtraRoles(&$params) {
 		// $params['new_roles'][] = RBACEngine::getInstance()->getRoleById(123);
 	}
 	
+	/**
+	 * Filter out unwanted roles
+	 * @param unknown_type $params
+	 */
 	function restrictRoles(&$params) {
 		// $params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById(123);
 	}
@@ -143,6 +173,11 @@ abstract class ForgeAuthPlugin extends Plugin {
 		session_set_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @param string $username
+	 * @return boolean
+	 */
 	function login($username) {
 		if ($this->isSufficient() || $this->isRequired()) {
 			$params = array();
@@ -161,14 +196,27 @@ abstract class ForgeAuthPlugin extends Plugin {
 		session_set_cookie($this->cookie_name, '');
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @return Ambigous <Ambigous, NULL, boolean>
+	 */
 	public function isRequired() {
 		return forge_get_config('required', $this->name);
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @return Ambigous <Ambigous, NULL, boolean>
+	 */
 	public function isSufficient() {
 		return forge_get_config('sufficient', $this->name);
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @param unknown_type $event
+	 * @return boolean
+	 */
 	public function syncDataOn($event) {
 		$configval = forge_get_config('sync_data_on', $this->name);
 		$events = array();
@@ -191,6 +239,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 		return in_array($event, $events);
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 */
 	protected function declareConfigVars() {
 		forge_define_config_item ('required', $this->name, 'yes');
 		forge_set_config_item_bool ('required', $this->name) ;
