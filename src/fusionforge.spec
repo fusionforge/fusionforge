@@ -81,6 +81,13 @@ A system plugin for authenticating users in fusionforge. A-Select is a framework
 where users can be authenticated by several means with Authentication
 Service Providers.
 
+%package plugin-authcas
+Summary: External CAS authentication plugin for FusionForge.
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description plugin-authcas
+External CAS authentication plugin for FusionForge.
+
 %package plugin-cvssyncmail
 Summary: Provides email notifications of changes to CVS repositories
 Group: Development/Tools
@@ -452,6 +459,12 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # plugin: aselectextauth
 
+# plugin: authbuiltin (internal plugin)
+%{__ln_s} ../../plugins/authbuiltin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authbuiltin
+
+# plugin: authcas
+%{__ln_s} ../../plugins/authcas/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authcas
+
 # plugin: cvssyncmail
 
 # plugin: cvstracker
@@ -469,9 +482,6 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # plugin: hudson
 %{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
-
-# plugin: ldapextauth
-%{__rm} -rf $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/ldapextauth/rpm-specific
 
 # plugin: mantis
 
@@ -771,10 +781,18 @@ fi
 /home/groups
 /var/log/gforge
 /bin/cvssh.pl
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authbuiltin.ini
+%{FORGE_DIR}/plugins/authbuiltin
+%{FORGE_DIR}/www/plugins/authbuiltin
 
 %files plugin-aselectextauth
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/aselectextauth.ini
 %{FORGE_DIR}/plugins/aselectextauth
+
+%files plugin-authcas
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authcas.ini
+%{FORGE_DIR}/plugins/authcas
+%{FORGE_DIR}/www/plugins/authcas
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
@@ -813,7 +831,6 @@ fi
 %{FORGE_DIR}/www/plugins/hudson
 
 %files plugin-ldapextauth
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/ldapextauth/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/ldapextauth.ini
 %{FORGE_DIR}/plugins/ldapextauth
 
