@@ -1,8 +1,9 @@
-/* 
+/*
  * FusionForge Funky Theme
  *
  * Copyright 2009 Matthieu FAURE // Open-S: global clean-up
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -10,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -20,15 +21,15 @@
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
- * 
+ *
  * CONTENT: all page-related styles
  * ========================================================
  */
 
-/* 
+/*
  * PAGE: home page
  * ========================================================
- */ 
+ */
 
 /* =bd (main body)
 ----------------------------------------------- */
@@ -46,17 +47,17 @@
 }
 
 #title-home-page {
-	text-align: center;	
+	text-align: center;
 }
 
 #Latest_News h3 {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-weight: bold;	
+    font-weight: bold;
 }
 
 #Latest_News em {
-    padding-left: 1em;  
+    padding-left: 1em;
 }
 
 /* remove inherited background-image */
@@ -73,11 +74,11 @@
 }
 
 #Associated_Forges td {
-    padding-right: 1em;  
+    padding-right: 1em;
 }
 
 #Associated_Forges .align-right {
-    text-align: right;	
+    text-align: right;
 }
 
 #Recently_Registered_Projects td {
@@ -95,10 +96,10 @@
     padding-left: 5px;
 }
 
-/* 
+/*
  * PAGE: project home
  * ========================================================
- */ 
+ */
 #project-summary-and-devs {
 	margin-top: 0.5em;
 }
@@ -111,7 +112,7 @@
     margin: 1em 0.5em;
 }
 
-/* 
+/*
  * PAGE: frs
  * ========================================================
  */
@@ -166,7 +167,7 @@
 	width: 12%;
 }
 
-/* 
+/*
  * PAGE: user_home (eg: http://fusionforge/user/<username>)
  * ========================================================
  */
