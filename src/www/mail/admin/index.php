@@ -245,7 +245,7 @@ if ($group_id) {
 			'title' => _('Mailing List Administration'))
 		);
 
-		$mlArray =& $mlFactory->getMailingLists();
+		$mlArray = $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
 			echo '<p>'._('Error').' '.sprintf(_('Unable to get the list %s'), $group->getPublicName()) .'</p>';
