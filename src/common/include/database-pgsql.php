@@ -312,7 +312,7 @@ $_sys_db_transaction_level = 0;
 /**
  *	db_begin() - Begin a transaction.
  *
- *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ *  @param		constant		Database server ('DB_PRIMARY', 'DB_STATS', 'DB_TROVE', 'DB_SEARCH')
  *	@return true.
  */
 function db_begin($dbserver=NULL) {
@@ -331,7 +331,7 @@ function db_begin($dbserver=NULL) {
 /**
  *	db_commit() - Commit a transaction.
  *
- *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ *  @param		constant		Database server ('DB_PRIMARY', 'DB_STATS', 'DB_TROVE', 'DB_SEARCH')
  *	@return true on success/false on failure.
  */
 function db_commit($dbserver=NULL) {
@@ -356,7 +356,7 @@ function db_commit($dbserver=NULL) {
 /**
  *	db_rollback() - Rollback a transaction.
  *
- *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ *  @param		constant		Database server ('DB_PRIMARY', 'DB_STATS', 'DB_TROVE', 'DB_SEARCH')
  *	@return true on success/false on failure.
  */
 function db_rollback($dbserver=NULL) {
@@ -485,7 +485,7 @@ function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=NULL) {
 /**
  *  db_error() - Returns the last error from the database.
  *
- *  @param		constant		Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
+ *  @param		constant		Database server ('DB_PRIMARY', 'DB_STATS', 'DB_TROVE', 'DB_SEARCH')
  *	@return text error message.
  */
 function db_error($dbserver=NULL) {

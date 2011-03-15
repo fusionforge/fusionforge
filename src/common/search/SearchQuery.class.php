@@ -186,7 +186,7 @@ class SearchQuery extends Error {
 			$qpa,
 			$this->rowsPerPage + 1,
 			$this->offset,
-			SYS_DB_SEARCH
+			'DB_SEARCH'
 		);
 
 		$this->rowsTotalCount = db_numrows($this->result);

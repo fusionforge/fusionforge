@@ -146,14 +146,14 @@ $qpa = db_construct_qpa ($qpa, ')) ORDER BY '.$order) ;
 
 $limit=25;
 
-$result = db_query_qpa ($qpa, $limit+1, $offset, SYS_DB_SEARCH);
+$result = db_query_qpa ($qpa, $limit+1, $offset, 'DB_SEARCH');
 $rows = $rows_returned = db_numrows($result);
 
 if (!$result || $rows < 1) {
         $no_rows = 1;
         echo "<h2>".sprintf (_('No matches found for %1$s'),
 			     $gwords)."</h2>";
-        echo db_error(SYS_DB_SEARCH);
+        echo db_error('DB_SEARCH');
 
 } else {
 

@@ -49,7 +49,7 @@ function trove_genfullpaths($mynode,$myfullpath,$myfullpathids) {
 			SELECT trove_cat_id,fullname
 			FROM trove_cat
 			WHERE parent=$1
-			AND trove_cat_id!=0;", array($mynode), -1, 0, SYS_DB_TROVE);
+			AND trove_cat_id!=0;", array($mynode), -1, 0, 'DB_TROVE');
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_genfullpaths($row_child['trove_cat_id'],
@@ -78,7 +78,7 @@ function trove_updaterootparent($mynode,$rootnode) {
 			SELECT trove_cat_id
 			FROM trove_cat
 			WHERE parent=$1
-			AND trove_cat_id!=0;", array($mynode), -1, 0, SYS_DB_TROVE);
+			AND trove_cat_id!=0;", array($mynode), -1, 0, 'DB_TROVE');
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_updaterootparent($row_child['trove_cat_id'],$rootnode);
@@ -103,7 +103,7 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 	$res_verifycat = db_query_params("
 		SELECT trove_cat_id,fullpath_ids
 		FROM trove_cat
-		WHERE trove_cat_id=$1", array($trove_cat_id), -1, 0, SYS_DB_TROVE);
+		WHERE trove_cat_id=$1", array($trove_cat_id), -1, 0, 'DB_TROVE');
 
 	if (db_numrows($res_verifycat) != 1) return 1;
 	$row_verifycat = db_fetch_array($res_verifycat);
