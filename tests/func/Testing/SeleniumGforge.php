@@ -227,6 +227,9 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function login($username)
 	{
 		$this->open( ROOT );
+		if ($this->isTextPresent('Log Out')) {
+			$this->logout();
+		}
 		$this->clickAndWait("link=Log In");
 		$this->triggeredLogin($username);
 	}
