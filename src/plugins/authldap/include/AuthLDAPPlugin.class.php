@@ -27,15 +27,15 @@
 
 require_once $GLOBALS['gfcommon'].'include/User.class.php';
 
-class LdapextauthPlugin extends ForgeAuthPlugin {
+class AuthLDAPPlugin extends ForgeAuthPlugin {
 	protected $saved_login;
 	protected $saved_password;
 	protected $saved_data;
 
-	function LdapextauthPlugin() {
+	function AuthLDAPPlugin() {
 		global $gfconfig;
 		$this->ForgeAuthPlugin();
-		$this->name = "ldapextauth";
+		$this->name = "authldap";
 		$this->text = "LDAP authentication";
 
 		$this->_addHook('display_auth_form');
@@ -44,7 +44,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		$this->_addHook("sync_account_info");
 		$this->_addHook("close_auth_session");
 
-		$this->cookie_name = 'forge_session_ldapextauth';
+		$this->cookie_name = 'forge_session_authldap';
 
 		$this->ldap_conn = false;
 		$this->saved_login = '';
@@ -202,7 +202,7 @@ class LdapextauthPlugin extends ForgeAuthPlugin {
 		echo _('Cookies must be enabled past this point.');
 		echo '</p>';
 
-		echo '<form action="' . util_make_url('/plugins/ldapextauth/post-login.php') . '" method="post">
+		echo '<form action="' . util_make_url('/plugins/authldap/post-login.php') . '" method="post">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p>';

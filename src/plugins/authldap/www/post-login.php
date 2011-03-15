@@ -32,7 +32,7 @@ Header( "Cache-Control: must-revalidate");
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
-$plugin = plugin_get_object('ldapextauth');
+$plugin = plugin_get_object('authldap');
 
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');

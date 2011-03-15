@@ -1,4 +1,4 @@
-%define plugin		ldapextauth
+%define plugin		authldap
 %{!?release:%define release 1}
 
 Summary: LDAP external authentication plugin for GForge CDE

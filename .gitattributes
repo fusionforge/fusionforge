@@ -712,6 +712,7 @@ src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
 src/etc/config.ini-usrlocal -text
 src/etc/config.ini.d/aselectextauth.ini -text
+src/etc/config.ini.d/authldap.ini -text
 src/etc/config.ini.d/blocks.ini -text
 src/etc/config.ini.d/contribtracker.ini -text
 src/etc/config.ini.d/cvssyncmail.ini -text
@@ -725,7 +726,6 @@ src/etc/config.ini.d/forumml.ini -text
 src/etc/config.ini.d/globalsearch.ini -text
 src/etc/config.ini.d/gravatar.ini -text
 src/etc/config.ini.d/hudson.ini -text
-src/etc/config.ini.d/ldapextauth.ini -text
 src/etc/config.ini.d/mailman.ini -text
 src/etc/config.ini.d/mantis.ini -text
 src/etc/config.ini.d/mantisbt.ini -text
@@ -896,6 +896,14 @@ src/plugins/authcas/packaging/docs/plugin-authcas -text
 src/plugins/authcas/packaging/install/plugin-authcas -text
 src/plugins/authcas/packaging/links/plugin-authcas -text
 src/plugins/authcas/www/post-login.php -text
+src/plugins/authldap/NAME -text
+src/plugins/authldap/etc/authldap.ini -text
+src/plugins/authldap/packaging/control/300plugin-authldap -text
+src/plugins/authldap/packaging/control/300plugin-authldap.shortdesc -text
+src/plugins/authldap/packaging/docs/plugin-authldap -text
+src/plugins/authldap/packaging/install/plugin-authldap -text
+src/plugins/authldap/packaging/links/plugin-authldap -text
+src/plugins/authldap/www/post-login.php -text
 src/plugins/blocks/NAME -text
 src/plugins/blocks/common/blocks-init.php -text
 src/plugins/blocks/common/blocksPlugin.class.php -text
@@ -1690,14 +1698,6 @@ src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_
 src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_my_jobs.png -text svneol=unset#image/png
 src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_results.png -text svneol=unset#image/png
 src/plugins/hudson/www/themes/default/images/widget_preview/fr_FR_hudson_widget_test_trend.png -text svneol=unset#image/png
-src/plugins/ldapextauth/NAME -text
-src/plugins/ldapextauth/etc/ldapextauth.ini -text
-src/plugins/ldapextauth/packaging/control/300plugin-ldapextauth -text
-src/plugins/ldapextauth/packaging/control/300plugin-ldapextauth.shortdesc -text
-src/plugins/ldapextauth/packaging/docs/plugin-ldapextauth -text
-src/plugins/ldapextauth/packaging/install/plugin-ldapextauth -text
-src/plugins/ldapextauth/packaging/links/plugin-ldapextauth -text
-src/plugins/ldapextauth/www/post-login.php -text
 src/plugins/mailman/Mailman.ori/Archiver/Archiver.py -text
 src/plugins/mailman/Mailman.ori/MailList.py -text
 src/plugins/mailman/Mailman.ori/SecurityManager.py -text

@@ -256,6 +256,21 @@ Description: collaborative development tool - CAS authentication plugin
  FusionForge. It allows users to authenticate against an external CAS
  server.
 
+Package: fusionforge-plugin-authldap
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php5-ldap, ${misc:Depends}
+Description: collaborative development tool - LDAP authentication plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains an LDAP authentication mechanism for
+ FusionForge. It allows users to authenticate against an external LDAP
+ directory, and syncs some of their personal information from LDAP
+ into the FusionForge database.
+
 Package: fusionforge-plugin-blocks
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
@@ -359,21 +374,6 @@ Description: collaborative development tool - Hudson plugin
  This plugin contains the Hudson subsystem of FusionForge. It allows each
  FusionForge project to have its own Hudson, and gives some
  control over it to the project's administrator.
-
-Package: fusionforge-plugin-ldapextauth
-Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php5-ldap, ${misc:Depends}
-Description: collaborative development tool - LDAP authentication plugin
- FusionForge provides many tools to aid collaboration in a
- development project, such as bug-tracking, task management,
- mailing-lists, SCM repository, forums, support request helper,
- web/FTP hosting, release management, etc. All these services are
- integrated into one web site and managed through a web interface.
- .
- This plugin contains an LDAP authentication mechanism for
- FusionForge. It allows users to authenticate against an external LDAP
- directory, and syncs some of their personal information from LDAP
- into the FusionForge database.
 
 Package: fusionforge-plugin-mailman
 Architecture: all

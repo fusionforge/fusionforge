@@ -143,11 +143,11 @@ Requires: %{name} >= %{version}, php
 %description plugin-hudson
 This plugin adds hudson integration to FusionForge.
 
-%package plugin-ldapextauth
+%package plugin-authldap
 Summary: external LDAP authentication for FusionForge plugin
 Group: Development/Tools
 Requires: %{name} >= %{version}, php, php-ldap
-%description plugin-ldapextauth
+%description plugin-authldap
 This plugin provides LDAP authentication capability for FusionForge.
 
 %package plugin-mantis
@@ -830,9 +830,9 @@ fi
 %{FORGE_DIR}/plugins/hudson
 %{FORGE_DIR}/www/plugins/hudson
 
-%files plugin-ldapextauth
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/ldapextauth.ini
-%{FORGE_DIR}/plugins/ldapextauth
+%files plugin-authldap
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authldap.ini
+%{FORGE_DIR}/plugins/authldap
 
 %files plugin-mantis
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/mantis/

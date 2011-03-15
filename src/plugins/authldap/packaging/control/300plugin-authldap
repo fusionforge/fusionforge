@@ -1,4 +1,4 @@
-Package: @PACKAGE@-plugin-ldapextauth
+Package: @PACKAGE@-plugin-authldap
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, php5-ldap, ${misc:Depends}
 Description: collaborative development tool - LDAP authentication plugin

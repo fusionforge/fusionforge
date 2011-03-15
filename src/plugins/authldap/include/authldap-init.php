@@ -22,11 +22,11 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'ldapextauth/include/LdapExtAuthPlugin.class.php' ;
+require_once $gfplugins.'authldap/include/AuthLDAPPlugin.class.php' ;
 
-$LdapExtAuthPluginObject = new LdapExtAuthPlugin ;
+$AuthLDAPPluginObject = new AuthLDAPPlugin ;
 
-register_plugin ($LdapExtAuthPluginObject) ;
+register_plugin ($AuthLDAPPluginObject) ;
 
 // Local Variables:
 // mode: php
