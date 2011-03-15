@@ -2160,11 +2160,12 @@ src/plugins/oslc/www/scripts/pluginOSLCHoverScripts.js -text
 src/plugins/projectimport/3rd-party/README -text
 src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php -text
 src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/README -text
+src/plugins/projectimport/3rd-party/pear/README -text
+src/plugins/projectimport/3rd-party/pear/opendocument-packages.patch -text
 src/plugins/projectimport/INSTALL -text
 src/plugins/projectimport/NAME -text
 src/plugins/projectimport/README -text
 src/plugins/projectimport/bin/install.sh -text
-src/plugins/projectimport/common/OpendocumentPackage.class.php -text
 src/plugins/projectimport/common/ProjectImportPlugin.class.php -text
 src/plugins/projectimport/common/ProjectImporter.class.php -text
 src/plugins/projectimport/common/UploadedFiles.class.php -text

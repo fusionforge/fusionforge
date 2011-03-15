@@ -1,0 +1,1608 @@
+diff --git a/OpenDocument.php b/OpenDocument.php
+index c761dcb..47818ad 100644
+--- a/OpenDocument.php
++++ b/OpenDocument.php
+@@ -29,6 +29,7 @@
+ 
+ require_once 'OpenDocument/Storage/Zip.php';
+ require_once 'OpenDocument/Exception.php';
++require_once 'OpenDocument/Document.php';
+ 
+ /**
+ * Base class containing methods to open and create documents.
+@@ -116,32 +117,44 @@ abstract class OpenDocument
+      *
+      * @param string $file Name (path) of file to open
+      *
+-     * @return OpenDocument_Document A document object
++     * @return OpenDocument_OfficeDocument A document object
+      *
+      * @throw OpenDocument_Exception
+      */
+     public static function open($file)
+     {
+-        //FIXME: detect correct storage
+-        $storage = new OpenDocument_Storage_Zip();
++        $storage = new OpenDocumentPackage_Storage_Zip();
+         $storage->open($file);
+ 
+         $mimetype = $storage->getMimeType();
+ 
++        //FIXME: detect correct storage
++//        
++//        $mimetype = $storage->getMimeType();
++
+         switch ($mimetype) {
+         case 'application/vnd.oasis.opendocument.text':
+             $class = 'OpenDocument_Document_Text';
++
++            self::includeClassFile($class);
++
++            // hack
++            $storage = new OpenDocument_Storage_Zip();
++            $storage->open($file);
++            
++            return new $class($storage);
+             break;
+         default:
+-            throw new OpenDocument_Exception(
+-                'Unsupported MIME type ' . $mimetype
+-            );
++            
++            return new OpenDocument_Document($storage);
++        
++            
++//            throw new OpenDocument_Exception(
++//                'Unsupported MIME type ' . $mimetype
++//            );
+             break;
+         }
+ 
+-        self::includeClassFile($class);
+-
+-        return new $class($storage);
+     }//public static function open($file)
+ 
+ 
+@@ -155,7 +168,7 @@ abstract class OpenDocument
+      * @param mixed  $storage Storage class or object to use. Object need to
+      *                        implement OpenDocument_Storage
+      *
+-     * @return OpenDocument_Document Document object
++     * @return OpenDocument_OfficeDocument Document object
+      *
+      * @throws OpenDocument_Exception In case the type is unsupported, or
+      *                                the document or storage class cannot
+diff --git a/OpenDocument/Document.php b/OpenDocument/Document.php
+index 0e97358..affc7d0 100644
+--- a/OpenDocument/Document.php
++++ b/OpenDocument/Document.php
+@@ -28,6 +28,77 @@
+ * @since    File available since Release 0.1.0
+ */
+ 
++require_once 'OpenDocument/Manifest.php';
++
++
++/**
++ * Minimal implementation of a document without the Office aspects
++ *
++ * Needed by OpendocumentPackage
++ *
++ * @author Olivier Berger
++ *
++ * TODO : should be the other way around : OpenDocument_Document extends OpenDocument_Other
++ */
++class OpenDocument_Document {
++    /**
++     * Storage driver object
++     *
++     * @var OpenDocument_Storage
++     */
++    protected $storage = null;
++
++	/**
++     * DOMDocument for meta information
++     *
++     * @var DOMDocument
++     */
++    protected $manifestDOM;
++    
++    protected $manifest;
++
++
++    /**
++     * Constructor
++     *
++     * @param string $storage Storage object
++     *
++     * @throws OpenDocument_Exception
++     */
++    public function __construct(OpenDocumentPackage_Storage $storage)
++    {
++        $this->open($storage);
++    }
++
++	public function open(OpenDocumentPackage_Storage $storage)
++	{
++        $this->storage = $storage;
++        
++        $this->manifestDOM   = $storage->getManifestDom();
++
++        $this->manifest = new OpenDocument_Manifest();
++        $this->manifest->load($this->manifestDOM);
++    }
++    
++	/**
++	 * Return the contents of a file present in the archive
++	 * @param unknown_type $filename
++	 */
++	public function getFileContents($filename) {
++		return $this->storage->loadContentsFromZip($filename);
++	}
++    
++    /**
++     * Return array of file paths whose media-type matches
++     * @param string $mediatype
++     * @return array of strings
++     */
++    public function getFileNamesByMediaType($mediatype) {
++		return $this->manifest->getFilesByMediaType($mediatype);
++	}
++
++}
++
+ /**
+ * Base for all document classes.
+ *
+@@ -38,7 +109,7 @@
+ * @license  http://www.gnu.org/copyleft/lesser.html Lesser General Public License 2.1
+ * @link     http://pear.php.net/package/OpenDocument
+ */
+-class OpenDocument_Document
++class OpenDocument_OfficeDocument extends OpenDocument_Document
+ {
+     /**
+      * DOMNode of content node
+@@ -118,13 +189,6 @@ class OpenDocument_Document
+     protected $stylesXPath;
+ 
+     /**
+-     * Storage driver object
+-     *
+-     * @var OpenDocument_Storage
+-     */
+-    protected $storage = null;
+-
+-    /**
+      * Collection of children objects
+      *
+      * @var ArrayIterator
+@@ -134,20 +198,6 @@ class OpenDocument_Document
+ 
+ 
+     /**
+-     * Constructor
+-     *
+-     * @param string $storage Storage object
+-     *
+-     * @throws OpenDocument_Exception
+-     */
+-    public function __construct(OpenDocument_Storage $storage)
+-    {
+-        $this->open($storage);
+-    }
+-
+-
+-
+-    /**
+      * Open the given file
+      *
+      * @param string $storage Storage object
+@@ -158,8 +208,8 @@ class OpenDocument_Document
+      */
+     public function open(OpenDocument_Storage $storage)
+     {
+-        $this->storage = $storage;
+-
++        parent::open($storage);
++        
+         $this->mimetype = 'application/vnd.oasis.opendocument.text';
+ 
+         $this->contentDOM   = $storage->getContentDom();
+@@ -190,8 +240,7 @@ class OpenDocument_Document
+         $this->setMax();
+     }
+ 
+-
+-
++	
+     /**
+      * Provide read only access to cursor private variable
+      *
+diff --git a/OpenDocument/Document/Text.php b/OpenDocument/Document/Text.php
+index 8de48fd..83d8ebe 100644
+--- a/OpenDocument/Document/Text.php
++++ b/OpenDocument/Document/Text.php
+@@ -46,7 +46,7 @@ require_once 'OpenDocument/Element/Hyperlink.php';
+ * @license  http://www.gnu.org/copyleft/lesser.html Lesser General Public License 2.1
+ * @link     http://pear.php.net/package/OpenDocument
+ */
+-class OpenDocument_Document_Text extends OpenDocument_Document
++class OpenDocument_Document_Text extends OpenDocument_OfficeDocument
+ {
+     /**
+      * Fills $this->children with all DOMNodes
+diff --git a/OpenDocument/Element.php b/OpenDocument/Element.php
+index e0d1e43..29c3abd 100644
+--- a/OpenDocument/Element.php
++++ b/OpenDocument/Element.php
+@@ -54,7 +54,7 @@ abstract class OpenDocument_Element
+     /**
+      * Element OpenDocument
+      *
+-     * @var OpenDocument_Document
++     * @var OpenDocument_OfficeDocument
+      */
+     protected $document;
+     
+@@ -76,9 +76,9 @@ abstract class OpenDocument_Element
+      * Constructor
+      *
+      * @param DOMNode               $node
+-     * @param OpenDocument_Document $document
++     * @param OpenDocument_OfficeDocument $document
+      */
+-    public function __construct(DOMNode $node, OpenDocument_Document $document)
++    public function __construct(DOMNode $node, OpenDocument_OfficeDocument $document)
+     {
+         $this->node            = $node;
+         $this->document        = $document;
+@@ -98,7 +98,7 @@ abstract class OpenDocument_Element
+     /**
+      * Get element document
+      *
+-     * @return OpenDocument_Document
++     * @return OpenDocument_OfficeDocument
+      */
+     public function getDocument()
+     {
+diff --git a/OpenDocument/Element/Heading.php b/OpenDocument/Element/Heading.php
+index 5a22bb0..6e8cbed 100644
+--- a/OpenDocument/Element/Heading.php
++++ b/OpenDocument/Element/Heading.php
+@@ -82,7 +82,7 @@ class OpenDocument_Element_Heading extends OpenDocument_StyledElement
+      * @param DOMNode      $node     Node to add heading to
+      * @param OpenDocument $document Document to add heading to
+      */
+-    public function __construct(DOMNode $node, OpenDocument_Document $document)
++    public function __construct(DOMNode $node, OpenDocument_OfficeDocument $document)
+     {
+         parent::__construct($node, $document);
+         $this->level = $node->getAttributeNS(OpenDocument::NS_TEXT, 'outline-level');
+@@ -104,7 +104,7 @@ class OpenDocument_Element_Heading extends OpenDocument_StyledElement
+      */
+     public static function instance($object, $content, $level = 1)
+     {
+-        if ($object instanceof OpenDocument_Document) {
++        if ($object instanceof OpenDocument_OfficeDocument) {
+             $document = $object;
+             $node     = $object->cursor;
+         } else if ($object instanceof OpenDocument_Element) {
+@@ -112,7 +112,7 @@ class OpenDocument_Element_Heading extends OpenDocument_StyledElement
+             $node     = $object->getNode();
+         } else {
+             throw new OpenDocument_Exception(
+-                'OpenDocument_Element or OpenDocument_Document expected',
++                'OpenDocument_Element or OpenDocument_OfficeDocument expected',
+                 OpenDocument_Exception::ELEM_OR_DOC_EXPECTED
+             );
+         }
+diff --git a/OpenDocument/Element/Hyperlink.php b/OpenDocument/Element/Hyperlink.php
+index 128c04f..fac1567 100644
+--- a/OpenDocument/Element/Hyperlink.php
++++ b/OpenDocument/Element/Hyperlink.php
+@@ -102,7 +102,7 @@ class OpenDocument_Element_Hyperlink extends OpenDocument_StyledElement
+      * @param DOMNode      $node     Node to add heading to
+      * @param OpenDocument $document Document to add heading to
+      */
+-    public function __construct(DOMNode $node, OpenDocument_Document $document)
++    public function __construct(DOMNode $node, OpenDocument_OfficeDocument $document)
+     {
+         parent::__construct($node, $document);
+         $this->location = $node->getAttributeNS(OpenDocument::NS_XLINK, 'href');
+@@ -130,7 +130,7 @@ class OpenDocument_Element_Hyperlink extends OpenDocument_StyledElement
+     public static function instance(
+         $object, $content, $location, $type = 'simple', $target = '', $name = ''
+     ) {
+-        if ($object instanceof OpenDocument_Document) {
++        if ($object instanceof OpenDocument_OfficeDocument) {
+             $document = $object;
+             $node = $object->cursor;
+         } else if ($object instanceof OpenDocument_Element) {
+@@ -138,7 +138,7 @@ class OpenDocument_Element_Hyperlink extends OpenDocument_StyledElement
+             $node = $object->getNode();
+         } else {
+             throw new OpenDocument_Exception(
+-                'Object must be OpenDocument_Document or OpenDocument_Element',
++                'Object must be OpenDocument_OfficeDocument or OpenDocument_Element',
+                 OpenDocument_Exception::ELEM_OR_DOC_EXPECTED
+             );
+         }
+diff --git a/OpenDocument/Element/Paragraph.php b/OpenDocument/Element/Paragraph.php
+index bed7acd..783b17d 100644
+--- a/OpenDocument/Element/Paragraph.php
++++ b/OpenDocument/Element/Paragraph.php
+@@ -1,44 +1,44 @@
+ <?php
+ /**
+-* PEAR OpenDocument package
+-* 
+-* PHP version 5
+-*
+-* LICENSE: This library is free software; you can redistribute it and/or
+-* modify it under the terms of the GNU Lesser General Public
+-* License as published by the Free Software Foundation; either
+-* version 2.1 of the License, or (at your option) any later version.
+-* 
+-* This library is distributed in the hope that it will be useful,
+-* but WITHOUT ANY WARRANTY; without even the implied warranty of
+-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-* Lesser General Public License for more details.
+-* 
+-* You should have received a copy of the GNU Lesser General Public
+-* License along with this library; if not, write to the Free Software
+-* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+-* 
+-* @category File_Formats
+-* @package  OpenDocument
+-* @author   Alexander Pak <irokez@gmail.com>
+-* @license  http://www.gnu.org/copyleft/lesser.html  Lesser General Public License 2.1
+-* @version  CVS: $Id$
+-* @link     http://pear.php.net/package/OpenDocument
+-* @since    File available since Release 0.1.0
+-*/
++ * PEAR OpenDocument package
++ *
++ * PHP version 5
++ *
++ * LICENSE: This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ * @category File_Formats
++ * @package  OpenDocument
++ * @author   Alexander Pak <irokez@gmail.com>
++ * @license  http://www.gnu.org/copyleft/lesser.html  Lesser General Public License 2.1
++ * @version  CVS: $Id$
++ * @link     http://pear.php.net/package/OpenDocument
++ * @since    File available since Release 0.1.0
++ */
+ 
+ require_once 'OpenDocument/StyledElement.php';
+ 
+ /**
+-* Paragraph element
+-*
+-* @category File_Formats
+-* @package  OpenDocument
+-* @author   Alexander Pak <irokez@gmail.com>
+-* @license  http://www.gnu.org/copyleft/lesser.html  Lesser General Public License 2.1
+-* @link     http://pear.php.net/package/OpenDocument
+-* @since    File available since Release 0.1.0
+-*/
++ * Paragraph element
++ *
++ * @category File_Formats
++ * @package  OpenDocument
++ * @author   Alexander Pak <irokez@gmail.com>
++ * @license  http://www.gnu.org/copyleft/lesser.html  Lesser General Public License 2.1
++ * @link     http://pear.php.net/package/OpenDocument
++ * @since    File available since Release 0.1.0
++ */
+ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+ {
+     /**
+@@ -50,12 +50,12 @@ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+      * Node namespace
+      */
+     const nodePrefix = 'text';
+-    
++
+     /**
+      * Node name
+      */
+     const nodeName = 'p';
+-    
++
+     /**
+      * Element style name prefix
+      *
+@@ -68,18 +68,18 @@ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+      * @var string
+      */
+     const styleFamily = 'paragraph';
+-    
++
+ 
+     /**
+      * Constructor
+      *
+      * @param DOMNode               $node     Node to add heading to
+-     * @param OpenDocument_Document $document Document to add heading to
++     * @param OpenDocument_OfficeDocument $document Document to add heading to
+      */
+-    public function __construct(DOMNode $node, OpenDocument_Document $document)
++    public function __construct(DOMNode $node, OpenDocument_OfficeDocument $document)
+     {
+         parent::__construct($node, $document);
+-        
++
+         $this->allowedElements = array(
+             'OpenDocument_Element_Span',
+             'OpenDocument_Element_Hyperlink',
+@@ -98,7 +98,7 @@ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+      */
+     public static function instance($object, $content)
+     {
+-        if ($object instanceof OpenDocument_Document) {
++        if ($object instanceof OpenDocument_OfficeDocument) {
+             $document = $object;
+             $node = $object->cursor;
+         } else if ($object instanceof OpenDocument_Element) {
+@@ -106,15 +106,15 @@ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+             $node = $object->getNode();
+         } else {
+             throw new OpenDocument_Exception(
+-                OpenDocument_Exception::ELEM_OR_DOC_EXPECTED
++            OpenDocument_Exception::ELEM_OR_DOC_EXPECTED
+             );
+         }
+-        
++
+         $element = new OpenDocument_Element_Paragraph(
+-            $node->ownerDocument->createElementNS(
+-                self::nodeNS, self::nodeName
+-            ),
+-            $document
++        $node->ownerDocument->createElementNS(
++        self::nodeNS, self::nodeName
++        ),
++        $document
+         );
+         $node->appendChild($element->node);
+ 
+@@ -136,7 +136,7 @@ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+     }
+ 
+     /************** Elements ****************/
+-    
++
+     /**
+      * Create text element.
+      *
+@@ -161,13 +161,13 @@ class OpenDocument_Element_Paragraph extends OpenDocument_StyledElement
+      * @return OpenDocument_Element_Hyperlink
+      */
+     public function createHyperlink(
+-        $text, $location, $type = 'simple', $target = '', $name = ''
++    $text, $location, $type = 'simple', $target = '', $name = ''
+     ) {
+         return OpenDocument_Element_Hyperlink::instance(
+-            $this, $text, $location, $type, $target, $name
++        $this, $text, $location, $type, $target, $name
+         );
+     }
+-    
++
+     /**
+      * Create OpenDocument_Span element
+      *
+diff --git a/OpenDocument/Element/Span.php b/OpenDocument/Element/Span.php
+index 8effcc3..ee6758d 100644
+--- a/OpenDocument/Element/Span.php
++++ b/OpenDocument/Element/Span.php
+@@ -79,7 +79,7 @@ class OpenDocument_Element_Span extends OpenDocument_StyledElement
+      */
+     public static function instance($object, $content)
+     {
+-        if ($object instanceof OpenDocument_Document) {
++        if ($object instanceof OpenDocument_OfficeDocument) {
+             $document = $object;
+             $node = $object->cursor;
+         } else if ($object instanceof OpenDocument_Element) {
+diff --git a/OpenDocument/Element/Text.php b/OpenDocument/Element/Text.php
+index d7c443e..a6d50f4 100644
+--- a/OpenDocument/Element/Text.php
++++ b/OpenDocument/Element/Text.php
+@@ -52,9 +52,9 @@ class OpenDocument_Element_Text extends OpenDocument_Element
+      * Constructor
+      *
+      * @param DOMNode               $node     Node to add heading to
+-     * @param OpenDocument_Document $document Document to add heading to
++     * @param OpenDocument_OfficeDocument $document Document to add heading to
+      */
+-    public function __construct(DOMNode $node, OpenDocument_Document $document)
++    public function __construct(DOMNode $node, OpenDocument_OfficeDocument $document)
+     {
+         parent::__construct($node, $document);
+         $this->text = $node->wholeText;
+@@ -70,7 +70,7 @@ class OpenDocument_Element_Text extends OpenDocument_Element
+      */
+     public static function instance($object, $text)
+     {
+-        if ($object instanceof OpenDocument_Document) {
++        if ($object instanceof OpenDocument_OfficeDocument) {
+             $document = $object;
+             $node = $object->cursor;
+         } else if ($object instanceof OpenDocument_Element) {
+diff --git a/OpenDocument/Manifest.php b/OpenDocument/Manifest.php
+index 3bb8b86..a7d3ce4 100644
+--- a/OpenDocument/Manifest.php
++++ b/OpenDocument/Manifest.php
+@@ -16,6 +16,26 @@
+ require_once 'OpenDocument.php';
+ 
+ /**
++ * Manifest file entries (for META-INF/manifest.xml contents)
++ *
++ */
++class OpenDocument_ManifestFileEntry {
++	protected $fullpath;
++	protected $mediatype;	
++	
++	public function OpenDocument_ManifestFileEntry($fullpath, $mediatype) {
++		$this->fullpath = $fullpath;
++		$this->mediatype = $mediatype;
++	}
++	public function getFullPath() {
++		return $this->fullpath;
++	}
++	public function getMediaType() {
++		return $this->mediatype;
++	}
++}
++
++/**
+  * OpenDocument manifest file for ZIPs.
+  *
+  * @category File_Formats
+@@ -40,7 +60,7 @@ class OpenDocument_Manifest
+      */
+     protected $fileroot = null;
+ 
+-
++	protected $fileentries;
+ 
+     /**
+      * Create a new instance
+@@ -48,9 +68,27 @@ class OpenDocument_Manifest
+     public function __construct()
+     {
+         $this->prepareDom();
++        $this->fileentries = array();
+     }
+ 
+-
++    /**
++     * Load from a DOMDocument
++     * @param DOMDocument $dom
++     */
++    public function load($dom)
++    {
++    	$this->dom = $dom;
++    	$this->fileroot = $this->dom->documentElement;
++
++    	foreach ($dom->getElementsByTagNameNS(OpenDocument::NS_MANIFEST, 'file-entry') as $element) {
++    		$attr = $element->getAttributeNodeNS(OpenDocument::NS_MANIFEST, 'full-path');
++    		$fullpath = $attr->value;
++    		$attr = $element->getAttributeNodeNS(OpenDocument::NS_MANIFEST, 'media-type');
++    		$mediatype = $attr->value;
++    		$this->addFile($fullpath, $mediatype);
++		}
++    }
++    
+ 
+     /**
+      * Prepares the DOM document used internally
+@@ -81,21 +119,7 @@ class OpenDocument_Manifest
+      */
+     public function addFile($file, $mimetype)
+     {
+-        $entry = $this->dom->createElementNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:file-entry'
+-        );
+-        $entry->setAttributeNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:full-path',
+-            $file
+-        );
+-        $entry->setAttributeNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:media-type',
+-            $mimetype
+-        );
+-        $this->fileroot->appendChild($entry);
++        $this->fileentries[] = new OpenDocument_ManifestFileEntry($file, $mimetype);        
+     }
+ 
+ 
+@@ -109,29 +133,23 @@ class OpenDocument_Manifest
+      */
+     public function addMimeType($mimetype)
+     {
+-        $entry = $this->dom->createElementNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:file-entry'
+-        );
+-        $entry->setAttributeNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:full-path',
+-            '/'
+-        );
+-        $entry->setAttributeNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:media-type',
+-            $mimetype
+-        );
+-        $entry->setAttributeNS(
+-            OpenDocument::NS_MANIFEST,
+-            'manifest:version',
+-            '1.2'
+-        );
+-        $this->fileroot->appendChild($entry);
++        $this->addFile('/', $mimetype);
+     }
+ 
+-
++    /**
++     * Return array of file paths whose media-type matches
++     * @param string $mediatype
++     * @return array of strings
++     */
++    public function getFilesByMediaType($mediatype) {
++    	$result = array();
++    	foreach ($this->fileentries as $entry) {
++    		if ($entry->getMediaType() == $mediatype) {
++    			$result[] = $entry->getFullPath();
++    		}
++    	}
++    	return $result;
++    }
+ 
+     /**
+      * Returns the full XML representation of the manifest
+@@ -140,6 +158,33 @@ class OpenDocument_Manifest
+      */
+     public function __toString()
+     {
++        foreach($this->fileentries as $fileentry) {
++            $file = $fileentry->getFullPath();
++            $mimetype = $fileentry->getMediaType();
++            
++            $entry = $this->dom->createElementNS(
++                OpenDocument::NS_MANIFEST,
++            	'manifest:file-entry'
++            );
++            $entry->setAttributeNS(
++                OpenDocument::NS_MANIFEST,
++            	'manifest:full-path',
++                $file
++            );
++            $entry->setAttributeNS(
++                OpenDocument::NS_MANIFEST,
++            	'manifest:media-type',
++                $mimetype
++            );
++            if($file == '/') {
++                $entry->setAttributeNS(
++                    OpenDocument::NS_MANIFEST,
++            		'manifest:version',
++            		'1.2'
++                );
++            }
++            $this->fileroot->appendChild($entry);
++        }
+         return $this->dom->saveXML();
+     }
+ 
+diff --git a/OpenDocument/Storage.php b/OpenDocument/Storage.php
+index 43d126c..e40d838 100644
+--- a/OpenDocument/Storage.php
++++ b/OpenDocument/Storage.php
+@@ -7,6 +7,7 @@
+ * @category File_Formats
+ * @package  OpenDocument
+ * @author   Christian Weiske <cweiske@php.net>
++* @author   Olivier Berger <olivier.berger@it-sudparis.eu>
+ * @license  http://www.gnu.org/copyleft/lesser.html  Lesser General Public License 2.1
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/OpenDocument
+@@ -14,6 +15,97 @@
+ */
+ 
+ /**
++ * Generic OpenDocument Package data and file storage interface.
++ * Each storage mechanism needs to implement this interface.
++ *
++ * The OpenDocument Package specification defines a ZIP file containing several subdocuments
++ *
++ * @category File_Formats
++ * @package  OpenDocument
++ * @author   Christian Weiske <cweiske@php.net>
++ * @license  http://www.gnu.org/copyleft/lesser.html Lesser General Public License 2.1
++ * @link     http://pear.php.net/package/OpenDocument
++ */
++interface OpenDocumentPackage_Storage
++{
++    /**
++     * Opens the given file.
++     * An implementation might open the zip file
++     * or verify that the file itself exists.
++     *
++     * @param string $file Path of the file to open.
++     *
++     * @return void
++     *
++     * @throws OpenDocument_Exception In case loading the file
++     *                                did not work or the file
++     *                                does not exist.
++     *
++     * @see create()
++     */
++    public function open($file);
++
++    /**
++     * Returns the MIME type of the opened file.
++     *
++     * @return string MIME Type.
++     */
++    public function getMimeType();
++
++    /**
++     * Returns the DOM object containing the manifest.
++     *
++     * @return DOMDocument
++     */
++    public function getManifestDom();
++    
++    /**
++     * Saves the file as the given file name.
++     *
++     * @param string $file Path of the file to open.
++     *
++     * @return void
++     *
++     * @throws OpenDocument_Exception In case saving the file
++     *                                did not work.
++     *
++     * @see create()
++     * @see open()
++     */
++    public function save($file = null);
++
++    /**
++     * Adds a file to the document.
++     * Returns the file name that has to be used to reference
++     * the file in the document content.
++     *
++     * @param string $path     File path
++     * @param string $mimetype MIME type of the file. Leave it null
++     *                         for auto detection.
++     *
++     * @return string Relative filename that has to be used to
++     *                reference the file in content.
++     *
++     * @see removeFile()
++     */
++    public function addFile($path, $mimetype = null);
++
++    /**
++     * Removes an already added file from the document.
++     *
++     * @param string $relpath Relative path that was returned
++     *                        by addFile()
++     *
++     * @return void
++     *
++     * @see addFile()
++     */
++    public function removeFile($relpath);
++
++
++}
++
++/**
+  * Generic OpenDocument data and file storage interface.
+  * Each storage mechanism needs to implement this interface.
+  *
+@@ -31,7 +123,7 @@
+  * @license  http://www.gnu.org/copyleft/lesser.html Lesser General Public License 2.1
+  * @link     http://pear.php.net/package/OpenDocument
+  */
+-interface OpenDocument_Storage
++interface OpenDocument_Storage extends OpenDocumentPackage_Storage
+ {
+     /**
+      * Creates a new file.
+@@ -52,30 +144,6 @@ interface OpenDocument_Storage
+     public function create($type, $file = null);
+ 
+     /**
+-     * Opens the given file.
+-     * An implementation might open the zip file
+-     * or verify that the file itself exists.
+-     *
+-     * @param string $file Path of the file to open.
+-     *
+-     * @return void
+-     *
+-     * @throws OpenDocument_Exception In case loading the file
+-     *                                did not work or the file
+-     *                                does not exist.
+-     *
+-     * @see create()
+-     */
+-    public function open($file);
+-
+-    /**
+-     * Returns the MIME type of the opened file.
+-     *
+-     * @return string MIME Type.
+-     */
+-    public function getMimeType();
+-
+-    /**
+      * Returns the Dom object containing the content.
+      *
+      * @return DOMDocument
+@@ -104,21 +172,6 @@ interface OpenDocument_Storage
+     public function getStylesDom();
+ 
+     /**
+-     * Saves the file as the given file name.
+-     *
+-     * @param string $file Path of the file to open.
+-     *
+-     * @return void
+-     *
+-     * @throws OpenDocument_Exception In case saving the file
+-     *                                did not work.
+-     *
+-     * @see create()
+-     * @see open()
+-     */
+-    public function save($file = null);
+-
+-    /**
+      * Sets the DOM object containing the content.
+      * <office:document-content>
+      *
+@@ -157,47 +210,18 @@ interface OpenDocument_Storage
+      * @return void
+      */
+     public function setStylesDom(DOMDocument $styles);
+-
+-    /**
+-     * Adds a file to the document.
+-     * Returns the file name that has to be used to reference
+-     * the file in the document content.
+-     *
+-     * @param string $path     File path
+-     * @param string $mimetype MIME type of the file. Leave it null
+-     *                         for auto detection.
+-     *
+-     * @return string Relative filename that has to be used to
+-     *                reference the file in content.
+-     *
+-     * @see removeFile()
+-     */
+-    public function addFile($path, $mimetype = null);
+-
+-    /**
+-     * Removes an already added file from the document.
+-     *
+-     * @param string $relpath Relative path that was returned
+-     *                        by addFile()
+-     *
+-     * @return void
+-     *
+-     * @see addFile()
+-     */
+-    public function removeFile($relpath);
+-
+-
++    
+ 
+     /**
+      * Imports data from another storage object
+      *
+-     * @param OpenDocument_Storage $storage Storage object
++     * @param OpenDocumentPackage_Storage $storage Storage object
+      *
+      * @return void
+      *
+      * @throws OpenDocument_Exception In case something goes wrong
+      */
+     public function import(OpenDocument_Storage $storage);
+-}
+-
++    
++}    
+ ?>
+\ No newline at end of file
+diff --git a/OpenDocument/Storage/Single.php b/OpenDocument/Storage/Single.php
+index bca1e6a..f0ee7ba 100644
+--- a/OpenDocument/Storage/Single.php
++++ b/OpenDocument/Storage/Single.php
+@@ -256,6 +256,16 @@ class OpenDocument_Storage_Single implements OpenDocument_Storage
+         return 'application/vnd.oasis.opendocument.text';
+     }
+ 
++    /**
++     * Returns the DOM object containing the meta data.
++     *
++     * @return DOMDocument
++     */
++    public function getManifestDom()
++    {
++        return False;
++    }
++    
+ 
+ 
+     /**
+diff --git a/OpenDocument/Storage/Zip.php b/OpenDocument/Storage/Zip.php
+index 5bf9b8e..64c41ab 100644
+--- a/OpenDocument/Storage/Zip.php
++++ b/OpenDocument/Storage/Zip.php
+@@ -17,7 +17,7 @@ require_once 'OpenDocument/Manifest.php';
+ require_once 'OpenDocument/Storage.php';
+ 
+ /**
+- * Zip storage - the default OpenDocument storage.
++ * Zip storage - the default OpenDocument Packages storage.
+  * Creates one zip file containing several XML files.
+  *
+  * @category File_Formats
+@@ -26,8 +26,8 @@ require_once 'OpenDocument/Storage.php';
+  * @license  http://www.gnu.org/copyleft/lesser.html Lesser General Public License 2.1
+  * @link     http://pear.php.net/package/OpenDocument
+  */
+-class OpenDocument_Storage_Zip implements OpenDocument_Storage
+-{
++class OpenDocumentPackage_Storage_Zip implements OpenDocumentPackage_Storage {
++
+     /**
+      * File name to store file as
+      *
+@@ -43,65 +43,13 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+     protected $zip = null;
+ 
+     /**
+-     * DOM document containing the content
+-     *
+-     * @var DOMDocument
+-     */
+-    protected $contentDom = null;
+-
+-    /**
+-     * DOM document containing the meta data
+-     *
+-     * @var DOMDocument
+-     */
+-    protected $metaDom = null;
+-
+-    /**
+-     * DOM document containing the settings
++     * DOM document containing the manifest data
+      *
+      * @var DOMDocument
+      */
+-    protected $settingsDom = null;
+-
+-    /**
+-     * DOM document containing the styles
+-     *
+-     * @var DOMDocument
+-     */
+-    protected $stylesDom = null;
+-
+-
+-
+-    /**
+-     * Creates a new file.
+-     * The file name may be passed, but can be omitted if the
+-     * final storage location is not known yet.
+-     *
+-     * Storage drivers may choose to create temporary files or
+-     * directories in case no file name is given here.
+-     *
+-     * @param string $type Document type ('text', 'spreadsheet')
+-     * @param string $file Name of the file to be created
+-     *
+-     * @return void
+-     *
+-     * @throws OpenDocument_Exception In case creating the given file
+-     *                                is not possible.
+-     */
+-    public function create($type, $file = null)
+-    {
+-        if ($file !== null) {
+-            $this->checkWritability($file);
+-        }
+-
+-        //load file content
+-        $this->loadFile(self::getTemplateFile($type));
+-
+-        //reset file name to our new file to prevent overwriting the template
+-        $this->file = $file;
+-    }//public function create(..)
+-
+-
++    protected $manifestDom = null;
++	
++    protected $mimetype;
+ 
+     /**
+      * Opens the given file, loading the XML into memory
+@@ -162,8 +110,6 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+         throw new OpenDocument_Exception('File is not readable: ' . $file);
+     }
+ 
+-
+-
+     /**
+      * Loads content of the given file.
+      *
+@@ -178,21 +124,25 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+      * @throws OpenDocument_Exception When the file is corrupt or
+      *                                does not exist.
+      */
+-    protected function loadFile($file)
++	protected function loadFile($file)
+     {
+-        $zip = new ZipArchive();
+-        if ($zip->open($file) !== true) {
++        $this->zip = new ZipArchive();
++        
++        if ($this->zip->open($file) !== true) {
+             throw new OpenDocument_Exception('Cannot open ZIP file: ' . $file);
+         }
+-        $this->contentDom  = $this->loadDomFromZip($zip, 'content.xml');
+-        $this->metaDom     = $this->loadDomFromZip($zip, 'meta.xml');
+-        $this->settingsDom = $this->loadDomFromZip($zip, 'settings.xml');
+-        $this->stylesDom   = $this->loadDomFromZip($zip, 'styles.xml');
+-        //FIXME: what to do with embedded files (e.g. images)?
++        $this->manifestDom     = $this->loadDomFromZip($this->zip, 'META-INF/manifest.xml');
++        
++        // load from included 'mimetype' file contents.
++        // may need to load from manifest file
++        $file = 'mimetype';
++        $index = $this->zip->locateName($file);
++        if ($index === false) {
++            throw new OpenDocument_Exception('File not found in zip: ' . $file);
++        }
++        $this->mimetype = $this->zip->getFromIndex($index);
+     }
+ 
+-
+-
+     /**
+      * Loads the DOM document of the given file name from the zip archive
+      *
+@@ -206,18 +156,24 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+      */
+     protected function loadDomFromZip(ZipArchive $zip, $file)
+     {
+-        $index = $zip->locateName($file);
+-        if ($index === false) {
+-            throw new OpenDocument_Exception('File not found in zip: ' . $file);
+-        }
+-
++        $contents = $this->loadContentsFromZip($file);
+         $dom = new DOMDocument();
+-        $dom->loadXML($zip->getFromIndex($index));
++        $dom->loadXML($contents);
+ 
+         return $dom;
+     }
+ 
++	public function loadContentsFromZip($filepath)
++    {
++        $index = $this->zip->locateName($filepath);
++        if ($index === false) {
++            throw new OpenDocument_Exception('File not found in zip: ' . $filepath);
++        }
+ 
++        return $this->zip->getFromIndex($index);
++    }
++
++    
+ 
+     /**
+      * Returns the MIME type of the opened file.
+@@ -226,13 +182,209 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+      */
+     public function getMimeType()
+     {
+-        //FIXME: implement functionality
+-        //load from manifest first
+-        //if null, load from content
+-        return 'application/vnd.oasis.opendocument.text';
++        return $this->mimetype;
++    }
++
++    /**
++     * Returns the DOM object containing the meta data.
++     *
++     * @return DOMDocument
++     */
++    public function getManifestDom()
++    {
++        return $this->manifestDom;
++    }
++    
++
++    // FIXME : save()
++
++    /**
++     * Saves the file as the given file name.
++     *
++     * @param string $file Path of the file to save.
++     *
++     * @return void
++     *
++     * @throws OpenDocument_Exception In case saving the file
++     *                                did not work.
++     *
++     * @see create()
++     * @see open()
++     */
++    public function save($file = null)
++    {
++        if ($file === null) {
++            $file = $this->file;
++        }
++        if ($file === null) {
++            throw new OpenDocument_Exception(
++                'No file name given for saving'
++            );
++        }
++
++        $zip = new ZipArchive();
++        $res = $zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
++        if ($res !== true) {
++            //FIXME: find a better way to pass on the zip error code
++            throw new OpenDocument_Exception(
++               'Failed to open zip file for saving: ' . $file,
++               $res
++            );
++        }
++        //as soon as ZipArchive exposes compression options,
++        // FIXME this and make it uncompressed
++        $mimetype = $this->getMimeType();
++        $zip->addFromString('mimetype', $mimetype);
++
++        $manifest = new OpenDocument_Manifest();
++        $manifest->addMimeType($mimetype);
++
++        $this->saveContents($manifest, $zip);
++        
++        $zip->addFromString('META-INF/manifest.xml', (string)$manifest);
++
++        $zip->close();
++    }//public function save(..)
++    
++    protected function saveContents(& $manifest, & $zip) {
++        // FIXME do nothing more for the moment : this class standalone works in read only
++        
+     }
+ 
++    
++
++    /**
++     * Adds a file to the document.
++     * Returns the file name that has to be used to reference
++     * the file in the document content.
++     *
++     * @param string $path     File path
++     * @param string $mimetype MIME type of the file. Leave it null
++     *                         for auto detection.
++     *
++     * @return string Relative filename that has to be used to
++     *                reference the file in content.
++     *
++     * @see removeFile()
++     */
++    public function addFile($path, $mimetype = null)
++    {
++        throw new OpenDocument_Exception('Adding files not supported yet');
++    }
++
++
++
++    /**
++     * Removes an already added file from the document.
++     *
++     * @param string $relpath Relative path that was returned
++     *                        by addFile()
++     *
++     * @return void
++     *
++     * @see addFile()
++     */
++    public function removeFile($relpath)
++    {
++        throw new OpenDocument_Exception('Removing files not supported yet');
++    }
++
++    
++}
++
++/**
++ * Zip storage - the default OpenDocument storage.
++ * Creates one zip file containing several XML files.
++ *
++ * @category File_Formats
++ * @package  OpenDocument
++ * @author   Christian Weiske <cweiske@php.net>
++ * @license  http://www.gnu.org/copyleft/lesser.html Lesser General Public License 2.1
++ * @link     http://pear.php.net/package/OpenDocument
++ */
++class OpenDocument_Storage_Zip extends OpenDocumentPackage_Storage_Zip implements OpenDocument_Storage
++{
++    /**
++     * DOM document containing the content
++     *
++     * @var DOMDocument
++     */
++    protected $contentDom = null;
++
++    /**
++     * DOM document containing the meta data
++     *
++     * @var DOMDocument
++     */
++    protected $metaDom = null;
++
++    /**
++     * DOM document containing the settings
++     *
++     * @var DOMDocument
++     */
++    protected $settingsDom = null;
++
++    /**
++     * DOM document containing the styles
++     *
++     * @var DOMDocument
++     */
++    protected $stylesDom = null;
++
++    /**
++     * Creates a new file.
++     * The file name may be passed, but can be omitted if the
++     * final storage location is not known yet.
++     *
++     * Storage drivers may choose to create temporary files or
++     * directories in case no file name is given here.
++     *
++     * @param string $type Document type ('text', 'spreadsheet')
++     * @param string $file Name of the file to be created
++     *
++     * @return void
++     *
++     * @throws OpenDocument_Exception In case creating the given file
++     *                                is not possible.
++     */
++    public function create($type, $file = null)
++    {
++        if ($file !== null) {
++            $this->checkWritability($file);
++        }
++
++        //load file content
++        $this->loadFile(self::getTemplateFile($type));
+ 
++        //reset file name to our new file to prevent overwriting the template
++        $this->file = $file;
++    }//public function create(..)
++
++    /**
++     * Loads content of the given file.
++     *
++     * Sets $this->file to $file.
++     * One needs to make sure the file is readable before calling
++     * this method.
++     *
++     * @param string $file Filename
++     *
++     * @return void
++     *
++     * @throws OpenDocument_Exception When the file is corrupt or
++     *                                does not exist.
++     */
++    protected function loadFile($file)
++    {
++        parent::loadFile($file);
++        
++        $this->contentDom  = $this->loadDomFromZip($this->zip, 'content.xml');
++        $this->metaDom     = $this->loadDomFromZip($this->zip, 'meta.xml');
++        $this->settingsDom = $this->loadDomFromZip($this->zip, 'settings.xml');
++        $this->stylesDom   = $this->loadDomFromZip($this->zip, 'styles.xml');
++        //FIXME: what to do with embedded files (e.g. images)?
++    }
+ 
+     /**
+      * Returns the DOM object containing the content.
+@@ -244,8 +396,6 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+         return $this->contentDom;
+     }
+ 
+-
+-
+     /**
+      * Returns the DOM object containing the meta data.
+      *
+@@ -256,8 +406,6 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+         return $this->metaDom;
+     }
+ 
+-
+-
+     /**
+      * Returns the DOM object containing the settings.
+      *
+@@ -268,8 +416,6 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+         return $this->settingsDom;
+     }
+ 
+-
+-
+     /**
+      * Returns the DOM object containing the styles.
+      *
+@@ -280,8 +426,6 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+         return $this->stylesDom;
+     }
+ 
+-
+-
+     /**
+      * Saves the file as the given file name.
+      *
+@@ -295,34 +439,10 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+      * @see create()
+      * @see open()
+      */
+-    public function save($file = null)
+-    {
+-        if ($file === null) {
+-            $file = $this->file;
+-        }
+-        if ($file === null) {
+-            throw new OpenDocument_Exception(
+-                'No file name given for saving'
+-            );
+-        }
+-
+-        $zip = new ZipArchive();
+-        $res = $zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+-        if ($res !== true) {
+-            //FIXME: find a better way to pass on the zip error code
+-            throw new OpenDocument_Exception(
+-               'Failed to open zip file for saving: ' . $file,
+-               $res
+-            );
+-        }
+-        //as soon as ZipArchive exposes compression options,
+-        // FIXME this and make it uncompressed
+-        $mimetype = $this->getMimeTypeFromContent($this->contentDom);
+-        $zip->addFromString('mimetype', $mimetype);
+-
+-        $manifest = new OpenDocument_Manifest();
+-        $manifest->addMimeType($mimetype);
+-
++    protected function saveContents(& $manifest, & $zip) {
++        
++        parent::saveContents($manifest, $zip);
++        
+         $manifest->addFile('content.xml', 'text/xml');
+         $zip->addFromString('content.xml', $this->contentDom->saveXML());
+ 
+@@ -337,14 +457,20 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+ 
+         //FIXME: add image files added with addFile()
+ 
+-        $zip->addFromString('META-INF/manifest.xml', (string)$manifest);
+-
+-        $zip->close();
+-    }//public function save(..)
+-
++    }//public function saveContents(..)
+ 
+ 
+     /**
++     * Returns the MIME type of the opened file.
++     *
++     * @return string MIME Type.
++     */
++    public function getMimeType()
++    {
++        return $this->getMimeTypeFromContent($this->contentDom);
++    }
++    
++    /**
+      * Extracts the textual MIME type from the content DOM object
+      *
+      * @param DOMDocument $content DOM object of content
+@@ -420,44 +546,6 @@ class OpenDocument_Storage_Zip implements OpenDocument_Storage
+ 
+ 
+     /**
+-     * Adds a file to the document.
+-     * Returns the file name that has to be used to reference
+-     * the file in the document content.
+-     *
+-     * @param string $path     File path
+-     * @param string $mimetype MIME type of the file. Leave it null
+-     *                         for auto detection.
+-     *
+-     * @return string Relative filename that has to be used to
+-     *                reference the file in content.
+-     *
+-     * @see removeFile()
+-     */
+-    public function addFile($path, $mimetype = null)
+-    {
+-        throw new OpenDocument_Exception('Adding files not supported yet');
+-    }
+-
+-
+-
+-    /**
+-     * Removes an already added file from the document.
+-     *
+-     * @param string $relpath Relative path that was returned
+-     *                        by addFile()
+-     *
+-     * @return void
+-     *
+-     * @see addFile()
+-     */
+-    public function removeFile($relpath)
+-    {
+-        throw new OpenDocument_Exception('Removing files not supported yet');
+-    }
+-
+-
+-
+-    /**
+      * Returns the path of a template file for the given file type.
+      *
+      * @param string $type File type ('text', 'spreadsheet')
+diff --git a/OpenDocument/StyledElement.php b/OpenDocument/StyledElement.php
+index 94d9112..162fc32 100644
+--- a/OpenDocument/StyledElement.php
++++ b/OpenDocument/StyledElement.php
+@@ -80,10 +80,10 @@ abstract class OpenDocument_StyledElement extends OpenDocument_Element
+      * Constructor
+      *
+      * @param DOMNode               $node     DOM node to create element for
+-     * @param OpenDocument_Document $document Document object the element is
++     * @param OpenDocument_OfficeDocument $document Document object the element is
+      *                                        being created for
+      */
+-    public function __construct(DOMNode $node, OpenDocument_Document $document)
++    public function __construct(DOMNode $node, OpenDocument_OfficeDocument $document)
+     {
+         parent::__construct($node, $document);
+         $this->style = new OpenDocument_ElementStyle($this);
+diff --git a/examples/read.php b/examples/read.php
+index 37f523d..40f9cd7 100644
+--- a/examples/read.php
++++ b/examples/read.php
+@@ -14,5 +14,5 @@ foreach ($odt->getChildren() as $child) {
+ 
+ //save as no_headings.pdt
+ $odt->save('no_headings.odt');
+-echo "saved as no-headings.odt\n";
++echo "saved as no_headings.odt\n";
+ ?>
+\ No newline at end of file
+diff --git a/tests/packagezipstorage.phpt b/tests/packagezipstorage.phpt
+new file mode 100644
+index 0000000..fc4a6c1
+--- /dev/null
++++ b/tests/packagezipstorage.phpt
+@@ -0,0 +1,77 @@
++--TEST--
++Test Zip storage functionality
++--FILE--
++<?php
++require_once 'OpenDocument/Storage/Zip.php';
++
++$zip = new OpenDocument_Storage_Zip();
++$zip->create('text');
++$doms = array(
++    'content'  => $zip->getContentDom(),
++    'meta'     => $zip->getMetaDom(),
++    'settings' => $zip->getSettingsDom(),
++    'styles'   => $zip->getStylesDom()
++);
++
++foreach ($doms as $type => $dom) {
++    $root = $dom->firstChild;
++    $root->appendChild(
++        $dom->createElement('test', $type . '-unittest')
++    );
++}
++$zip->setContentDom($doms['content']);
++$zip->setMetaDom($doms['meta']);
++$zip->setSettingsDom($doms['settings']);
++$zip->setStylesDom($doms['styles']);
++
++$name = sys_get_temp_dir() . '/opendocumentunittest-zip';
++$zip->save($name);
++unset($zip, $dom, $root);
++
++var_dump(file_exists($name));
++
++$zip = new OpenDocumentPackage_Storage_Zip();
++$zip->open($name);
++var_dump(
++    $zip,
++    $zip->getMimeType()
++);
++echo $zip->getManifestDom()->saveXML();
++?>
++--CLEAN--
++<?php
++unlink(sys_get_temp_dir() . '/opendocumentunittest-zip');
++?>
++--EXPECT--
++bool(true)
++object(OpenDocumentPackage_Storage_Zip)#9 (4) {
++  ["file":protected]=>
++  NULL
++  ["zip":protected]=>
++  object(ZipArchive)#1 (5) {
++    ["status"]=>
++    int(0)
++    ["statusSys"]=>
++    int(0)
++    ["numFiles"]=>
++    int(6)
++    ["filename"]=>
++    string(29) "/tmp/opendocumentunittest-zip"
++    ["comment"]=>
++    string(0) ""
++  }
++  ["manifestDom":protected]=>
++  object(DOMDocument)#3 (0) {
++  }
++  ["mimetype":protected]=>
++  string(39) "application/vnd.oasis.opendocument.text"
++}
++string(39) "application/vnd.oasis.opendocument.text"
++<?xml version="1.0" encoding="utf-8"?>
++<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0">
++  <manifest:file-entry manifest:full-path="/" manifest:media-type="application/vnd.oasis.opendocument.text" manifest:version="1.2"/>
++  <manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/>
++  <manifest:file-entry manifest:full-path="meta.xml" manifest:media-type="text/xml"/>
++  <manifest:file-entry manifest:full-path="settings.xml" manifest:media-type="text/xml"/>
++  <manifest:file-entry manifest:full-path="styles.xml" manifest:media-type="text/xml"/>
++</manifest:manifest>
+\ No newline at end of file
