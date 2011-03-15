@@ -76,4 +76,5 @@ LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/nu
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite
 cd ..
-killall -9 java
+killall -QUIT firefox-bin
+killall -QUIT java
