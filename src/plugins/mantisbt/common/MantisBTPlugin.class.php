@@ -23,12 +23,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-/*
- * @todo :	need a massive cleanup
- *		deal correctly with password (might need direct db access ?)
- *		limit non SOAP call aka direct db access to mantisbt
- */
-
 class MantisBTPlugin extends Plugin {
 
 	function MantisBTPlugin() {
@@ -47,9 +41,9 @@ class MantisBTPlugin extends Plugin {
 		$this->_addHook('change_cal_mail');
 		$this->_addHook('add_cal_link_father');
 		$this->_addHook('del_cal_link_father');
-		$this->_addHook('group_approved');
 		$this->_addHook('group_delete');
 		$this->_addHook('group_update');
+		$this->_addHook('site_admin_option_hook');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -113,6 +107,11 @@ class MantisBTPlugin extends Plugin {
 					);
 					echo '</p>';
 				}
+				$returned = true;
+				break;
+			}
+			case "site_admin_option_hook": {
+				echo '<li>'.util_make_link("/plugins/mantisbt/?group_id=forge&type=admin&pluginname=".$this->name,_('Global MantisBT admin')).'</li>';
 				$returned = true;
 				break;
 			}
