@@ -86,7 +86,10 @@ function exit_missing_param($url='', $missing_params=array(), $toptab='') {
 		$error = sprintf(_('Missing required parameters.'));
 	}
 	if (!empty($url)) {
-		session_redirect($url.'&error_msg='.urlencode($error));
+		if (strpos($url,'?')) {
+			session_redirect($url.'&error_msg='.urlencode($error));
+		}
+		session_redirect($url.'?error_msg='.urlencode($error));
 	} else {
 		exit_error($error,$toptab);
 	}
