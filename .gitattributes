@@ -2092,6 +2092,7 @@ src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/oslc-service-catalog.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/post.phtml -text
+src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/put.json.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/put.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/put.xml.phtml -text
 src/plugins/oslc/include/oslc-zend/application/views/scripts/fusionforgecm/read-bugnote-collection.json.phtml -text
