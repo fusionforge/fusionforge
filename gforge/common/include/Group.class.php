@@ -2166,7 +2166,7 @@ class Group extends Error {
 		//
 		if ($GLOBALS['sys_use_mail']) {
 			$mlist = new MailingList($this);
-			if (!$mlist->create('commits',_('Commits'),1,$idadmin_group)) {
+			if (!$mlist->create('commits',_('Commits'),$this->isPublic(),$idadmin_group)) {
 				$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
 				db_rollback();
 				setup_gettext_from_context();
