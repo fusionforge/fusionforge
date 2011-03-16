@@ -21,6 +21,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+// Declare and init variables to store messages
+$feedback = '';
+$warning_msg = '';
+$error_msg = '';
+
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/config.php';
 
@@ -141,10 +146,6 @@ if ($sysdebug_enable) {
 // Get constants used for flags or status
 require $gfcommon.'include/constants.php';
 
-// Declare and init variables to store messages
-$feedback = '';
-$warning_msg = '';
-$error_msg = '';
 
 // Base error library for new objects
 require_once $gfcommon.'include/Error.class.php';
@@ -248,6 +249,10 @@ require_once $gfcommon.'include/gettext.php';
 require_once $gfcommon.'include/group_section_texts.php';
 
 setup_gettext_from_context();
+
+$feedback = htmlspecialchars(getStringFromRequest('feedback', $feedback));
+$error_msg = htmlspecialchars(getStringFromRequest('error_msg', $error_msg));
+$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg', $warning_msg));
 
 /*
 RESERVED VARIABLES
