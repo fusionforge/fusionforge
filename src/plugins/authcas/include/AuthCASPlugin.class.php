@@ -44,8 +44,6 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		$this->saved_login = '';
 		$this->saved_user = NULL;
 
-		$this->cookie_name = 'forge_session_cas';
-
 		$this->declareConfigVars();
 	}
 

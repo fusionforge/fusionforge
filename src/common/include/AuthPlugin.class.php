@@ -157,20 +157,27 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 	
 	// Helper functions for individual plugins
-	protected $cookie_name = 'forge_session';
+	protected $cookie_name;
+
+	protected function getCookieName() {
+		if ($this->cookie_name) {
+			return $this->cookie_name;
+		}
+		return 'forge_session_'.$this->name;
+	}
 
 	protected function checkSessionToken($token) {
 		return session_check_session_token($token);
 	}
 
 	protected function checkSessionCookie() {
-		$token = getStringFromCookie($this->cookie_name);
+		$token = getStringFromCookie($this->getCookieName());
 		return $this->checkSessionToken($token);
 	}
 
 	protected function setSessionCookie() {
 		$cookie = session_build_session_token($this->saved_user->getID());
-		session_set_cookie($this->cookie_name, $cookie, "", forge_get_config('session_expire'));
+		session_set_cookie($this->getCookieName(), $cookie, "", forge_get_config('session_expire'));
 	}
 
 	/**
@@ -194,7 +201,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	protected function unsetSessionCookie() {
-		session_set_cookie($this->cookie_name, '');
+		session_set_cookie($this->getCookieName(), '');
 	}
 
 	/**

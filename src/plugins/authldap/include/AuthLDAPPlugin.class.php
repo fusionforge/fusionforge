@@ -44,8 +44,6 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		$this->_addHook("sync_account_info");
 		$this->_addHook("close_auth_session");
 
-		$this->cookie_name = 'forge_session_authldap';
-
 		$this->ldap_conn = false;
 		$this->saved_login = '';
 		$this->saved_password = '';
