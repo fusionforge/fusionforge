@@ -54,7 +54,14 @@ echo '</p>';
 
 $params = array();
 $params['return_to'] = $return_to;
-plugin_hook('display_auth_form', $params);
+$params['html_snippets'] = array();
+plugin_hook_by_reference('display_auth_form', $params);
+
+foreach ($params['html_snippets'] as $p => $s) {
+	$plugin = plugin_get_object($p);
+	echo '<h2>'.$plugin->text.'</h2>';
+	echo $s;
+}
 
 $HTML->footer(array());
 

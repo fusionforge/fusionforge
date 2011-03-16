@@ -190,7 +190,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		$u->setUnixPasswd ($mapped_data['unix_password']);
 	}
 
-	function displayAuthForm($params) {
+	function displayAuthForm(&$params) {
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
@@ -199,7 +199,6 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 
 		$result = '';
 
-		$result .= '<h2>'._('LDAP authentication').'</h2>';
 		$result .= '<p>';
 		$result .= _('Cookies must be enabled past this point.');
 		$result .= '</p>';
@@ -213,7 +212,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 </p>
 </form>';
 
-		echo $result;
+		$params['html_snippets'][$this->name] = $result;
 	}
 
 	protected function declareConfigVars() {

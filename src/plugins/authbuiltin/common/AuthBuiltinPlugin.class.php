@@ -55,7 +55,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 	 * @param unknown_type $params
 	 * @return boolean
 	 */
-	function displayAuthForm($params) {
+	function displayAuthForm(&$params) {
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
@@ -64,7 +64,6 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 
 		$result = '';
 
-		$result .= '<h2>'._('Internal authentication').'</h2>';
 		$result .= '<p>';
 		$result .= _('Cookies must be enabled past this point.');
 		$result .= '</p>';
@@ -89,7 +88,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		}
 		$result .= '<p>' . util_make_link ('/account/pending-resend.php', _('[Resend confirmation email to a pending account]')) . '</p>';
 
-		echo $result;
+		$params['html_snippets'][$this->name] = $result;
 	}
 }
 

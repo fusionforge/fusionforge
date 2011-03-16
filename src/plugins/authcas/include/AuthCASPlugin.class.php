@@ -74,7 +74,7 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 	 * @param unknown_type $params
 	 * @return boolean
 	 */
-	function displayAuthForm($params) {
+	function displayAuthForm(&$params) {
 		if (!$this->isRequired() && !$this->isSufficient()) {
 			return true;
 		}
@@ -84,7 +84,9 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 
 		$result = '';
 
-		$result .= '<h2>'._('CAS authentication').'</h2>';
+		$result .= '<p>';
+		$result .= _('Cookies must be enabled past this point.');
+		$result .= '</p>';
 
 		$result .= '<form action="' . util_make_url('/plugins/authcas/post-login.php') . '" method="get">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
@@ -93,7 +95,7 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 </p>
 </form>' ;
 
-		echo $result;
+		$params['html_snippets'][$this->name] = $result;
 	}
 
     /**
