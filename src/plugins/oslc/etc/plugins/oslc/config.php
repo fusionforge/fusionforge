@@ -44,7 +44,8 @@ switch (TRACKER_TYPE) {
 		throw new Exception('Unsupported TRACKER_TYPE : '. TRACKER_TYPE .' !');
 		break;
 }
-
+/*
+define(AUTH_TYPE, 'oauth');
 // Define the backend tracker type : by defaut : mantis
 defined('AUTH_TYPE')
     || define('AUTH_TYPE', (getenv('AUTH_TYPE') ? getenv('AUTH_TYPE') : 'basic'));
@@ -75,5 +76,5 @@ switch (AUTH_TYPE) {
 		throw new Exception('Unsupported AUTH_TYPE : '. AUTH_TYPE .' !');
 		break;
 }
-
+*/
 ?>

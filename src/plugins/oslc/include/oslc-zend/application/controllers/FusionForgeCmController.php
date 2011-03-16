@@ -120,7 +120,7 @@ class FusionForgeCmController extends CmController {
 		$params = $this->getRequest()->getParams();
 
 		// check authentication although it's not yet really useful
-		/*$login = null;
+		$login = null;
 		$authenticated = $this->retrieveAuthentication($login);
 		if(isset($login)) {
 			// Basic auth requested
@@ -129,7 +129,7 @@ class FusionForgeCmController extends CmController {
 				// can't go on;
 				throw new Exception('Invalid authentication provided !');
 			}
-		}*/
+		}
 
 		// handle OSLC services catalog access (http://open-services.net/bin/view/Main/OslcServiceProviderCatalogV1)
 		if ( isset($params['id']) && ($params['id'] == "oslc-services")) {
@@ -580,29 +580,34 @@ class FusionForgeCmController extends CmController {
 		$this->view->data = $data;
 	}
 	
-		/**
-	 * Performs authentication according to the configured AUTH_TYPE configured
+	/**
+	 * Performs authentication according to the authorization header recieved.
 	 *
 	 * @param string $login
-	 * @return True if auth is valid, in which case $login is modified.
-	 * 		   If there was actually no auth requested, then return False, but $login will be set to null.
+	 * @return True if auth is valid, FALSE otherwise.
 	 */
 
 	private function retrieveAuthentication(&$login) {
-		switch (AUTH_TYPE) {
-			case 'basic':
+		$request = $this->getRequest();
+		$auth = $request->getHeader('Authorization');
+		if ($auth) {
+			$auth_type = explode(' ',$auth);
+			$auth_type = $auth_type[0];
+			if (strcasecmp($auth_type, 'OAuth')) {
+				$returned = $this->oslc->checkOauthAuthorization($auth);
+				return $returned;
+			} elseif (strcasecmp($auth_type, 'basic')) {
 				return $this->retrieveRequestAuthHttpBasic($login);
-				break;
-			case 'oauth':
-				return $this->checkOauthAuthorization($login);
-				break;
-			default:
-				throw new BadRequestException('Unsupported AUTH_TYPE : '. AUTH_TYPE .' !');
-				break;
+			} else {
+				throw new BadRequestException('Unsupported Authorization type : '. $auth_type .' !');	
+			}
+		} else {
+			return FALSE;
 		}
+
 	}
 	
-/**
+	/**
 	 * Helper function that performs HTTP Basic authentication from request parameters/headers
 	 *
 	 * @param string $login

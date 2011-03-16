@@ -703,6 +703,10 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		$basicResolver = new FusionForge_Http_Auth_Resolver($login, $password);
 		return $basicResolver;
 	}
+	
+	public function checkOauthAuthorization($auth){
+		// Add code for Oauth authentication.
+	}
 }
 
 // HTTP auth adapater's resolver using FusionForge APIs for user + password verification
