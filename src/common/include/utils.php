@@ -3,7 +3,7 @@
  * FusionForge miscellaneous utils
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
- * Copyright 2009-2010, Roland Mas
+ * Copyright 2009-2011, Roland Mas
  * Copyright 2009-2010, Franck Villaume - Capgemini
  * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
@@ -1394,14 +1394,30 @@ function util_get_compressed_file_extension() {
 }
 
 function util_randbytes($num=6) {
-	$f = fopen("/dev/urandom", "rb");
-	$b = fread($f, $num);
-	fclose($f);
+	$b = '';
 
-	if (strlen($b) != $num)
-		exit_error(_('Internal Error'),
-			   _('Could not read from random device'));
+	// Let's try /dev/urandom first
+	$f = @fopen("/dev/urandom", "rb");
+	if ($f !== FALSE) {
+		$b .= @fread($f, $num);
+		fclose($f);
+	}
 
+	// Hm.  No /dev/urandom?  Try /dev/random.
+	if (strlen($b) < $num) {
+		$f = @fopen("/dev/random", "rb");
+		if ($f !== FALSE) {
+			$b .= @fread($f, $num);
+			fclose($f);
+		}
+	}
+
+	// Still no luck?  Fall back to PHP's built-in PRNG
+	while (strlen($b) < $num) {
+		$b .= uniqid(mt_rand(), true);
+	}
+
+	$b = substr($b, 0, $num);
 	return ($b);
 }
 

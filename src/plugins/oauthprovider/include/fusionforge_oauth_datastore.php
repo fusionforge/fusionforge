@@ -218,8 +218,8 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	 */
 	function new_consumer_keys()
 	{
-		$key = md5($this->key_secret_generator(20));
-		$secret = md5($this->key_secret_generator(20));
+		$key = md5($this->util_randbytes(20));
+		$secret = md5($this->util_randbytes(20));
 		return array($key, $secret);
 	}
 
@@ -439,30 +439,6 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	}
 
 	/**
-	 * Generates random key-secret values
-	 *  
-	 */
-	protected function key_secret_generator($len)	{
-		$pr_bits = '';
-		
-		//use openssl_random_pseudo_bytes??
-
-		//cannot use util_randbytes as it exits if unsuccessful
-		$fp = @fopen('/dev/urandom','rb');
-		if ($fp !== FALSE) {
-    		$pr_bits .= @fread($fp,$len);
-    		@fclose($fp);
-		}
-				
-        // in case the above doesnt work or is not enough
-        $pr_bits .= uniqid(mt_rand(), true);
-        //$hash = sha1($pr_bits);  // sha1 gives us a 40-byte hash, md5 32
-        		
-		return $pr_bits;
-	}
-	
-
-	/**
 	 * Generates an new token in the DB
 	 * 
  	 * It will auto-purge request tokens older than 24 hours that haven't been converted to access tokens in time (cleanup made every 100 request token creation)
@@ -474,8 +450,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	protected function new_token($consumer, $token_type, $role_id=0) {
 		$t_token_table = $this->token_table_name($token_type);
 
-		// TODO : use some PRNG maybe
-		$random = $this->key_secret_generator(32);
+		$random = $this->util_randbytes(32);
 		$hash = sha1($random);
 		$key = substr($hash, 0, 20);
 		$secret = substr($hash, 20, 40);
