@@ -197,19 +197,23 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		$return_to = $params['return_to'];
 		$loginname = '';
 
-		echo '<h2>'._('LDAP authentication').'</h2>';
-		echo '<p>';
-		echo _('Cookies must be enabled past this point.');
-		echo '</p>';
+		$result = '';
 
-		echo '<form action="' . util_make_url('/plugins/authldap/post-login.php') . '" method="post">
+		$result .= '<h2>'._('LDAP authentication').'</h2>';
+		$result .= '<p>';
+		$result .= _('Cookies must be enabled past this point.');
+		$result .= '</p>';
+
+		$result .= '<form action="' . util_make_url('/plugins/authldap/post-login.php') . '" method="post">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p>';
-		echo _('LDAP Login name:');
-		echo '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
+		$result .= _('LDAP Login name:');
+		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
 </form>';
+
+		echo $result;
 	}
 
 	protected function declareConfigVars() {

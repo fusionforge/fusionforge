@@ -58,14 +58,18 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 		}
 		$return_to = $params['return_to'];
 
-		echo '<h2>'._('HTTP authentication').'</h2>';
+		$result = '';
 
-		echo '<form action="' . util_make_url('/plugins/authhttpd/post-login.php') . '" method="get">
+		$result .= '<h2>'._('HTTP authentication').'</h2>';
+
+		$result .= '<form action="' . util_make_url('/plugins/authhttpd/post-login.php') . '" method="get">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via HTTP authentication') . '" />
 </p>
 </form>' ;
+		
+		echo $result;
 	}
 
 	/**

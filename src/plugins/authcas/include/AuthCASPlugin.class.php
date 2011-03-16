@@ -82,14 +82,18 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 
 		$this->initCAS();
 
-		echo '<h2>'._('CAS authentication').'</h2>';
+		$result = '';
 
-		echo '<form action="' . util_make_url('/plugins/authcas/post-login.php') . '" method="get">
+		$result .= '<h2>'._('CAS authentication').'</h2>';
+
+		$result .= '<form action="' . util_make_url('/plugins/authcas/post-login.php') . '" method="get">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p><input type="submit" name="login" value="' . _('Login via CAS') . '" />
 </p>
 </form>' ;
+
+		echo $result;
 	}
 
     /**

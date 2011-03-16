@@ -62,30 +62,34 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$return_to = $params['return_to'];
 		$loginname = '';
 
-		echo '<h2>'._('Internal authentication').'</h2>';
-		echo '<p>';
-		echo _('Cookies must be enabled past this point.');
-		echo '</p>';
+		$result = '';
 
-		echo '<form action="' . util_make_url('/plugins/authbuiltin/post-login.php') . '" method="post">
+		$result .= '<h2>'._('Internal authentication').'</h2>';
+		$result .= '<p>';
+		$result .= _('Cookies must be enabled past this point.');
+		$result .= '</p>';
+
+		$result .= '<form action="' . util_make_url('/plugins/authbuiltin/post-login.php') . '" method="post">
 <input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 <p>';
 		if (forge_get_config('require_unique_email')) {
-			echo _('Login name or email address');
+			$result .= _('Login name or email address');
 		} else {
-			echo _('Login name:');
+			$result .= _('Login name:');
 		}
-		echo '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
+		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password:') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
 </form>' ;
 
-		echo '<p>' . util_make_link ('/plugins/authbuiltin/lostpw.php', _('[Lost your password?]')) . '</p>';
+		$result .= '<p>' . util_make_link ('/plugins/authbuiltin/lostpw.php', _('[Lost your password?]')) . '</p>';
 		// hide "new account" item if restricted to admin
 		if (!forge_get_config ('user_registration_restricted')) {
-			echo '<p>' . util_make_link ('/plugins/authbuiltin/register.php', _('[New Account]')) . '</p>';
+			$result .= '<p>' . util_make_link ('/plugins/authbuiltin/register.php', _('[New Account]')) . '</p>';
 		}
-		echo '<p>' . util_make_link ('/account/pending-resend.php', _('[Resend confirmation email to a pending account]')) . '</p>';
+		$result .= '<p>' . util_make_link ('/account/pending-resend.php', _('[Resend confirmation email to a pending account]')) . '</p>';
+
+		echo $result;
 	}
 }
 
