@@ -35,7 +35,7 @@ require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once('../../../www/include/login-form.php');
 
-$plugin = plugin_get_object('authcas');
+$plugin = plugin_get_object('authhttpd');
 
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');

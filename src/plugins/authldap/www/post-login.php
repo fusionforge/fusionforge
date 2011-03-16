@@ -98,7 +98,7 @@ if ($login) {
 
 $HTML->header(array('title'=>'Login'));
 
-if ($login && !$success) {
+if ($login) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
 	if (!isset($userstatus)) {

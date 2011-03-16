@@ -73,8 +73,7 @@ if ($login) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit();
 	}
-	$success = session_check_credentials_in_database(strtolower($form_loginname),$form_pw,false);
-	if ($success) {
+	if (session_check_credentials_in_database(strtolower($form_loginname),$form_pw,false)) {
 		if ($plugin->isSufficient()) {
 			$plugin->startSession($form_loginname);
 		}
@@ -97,7 +96,7 @@ if ($login) {
 
 $HTML->header(array('title'=>'Login'));
 
-if ($login && !$success) {
+if ($login) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
 	if (!isset($userstatus)) {
