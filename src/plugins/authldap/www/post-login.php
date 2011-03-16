@@ -31,6 +31,7 @@ Header( "Cache-Control: must-revalidate");
 
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once('../../../www/include/login-form.php');
 
 $plugin = plugin_get_object('authldap');
 
@@ -120,9 +121,8 @@ if ($login && !$success) {
 	html_feedback_top($feedback);
 }
 
-$params = array();
-$params['return_to'] = $return_to;
-plugin_hook('display_auth_form');
+// Otherwise, display the login form again
+display_login_form($return_to, $triggered);
 
 $HTML->footer(array());
 

@@ -96,6 +96,8 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 </form>' ;
 
 		$params['html_snippets'][$this->name] = $result;
+
+		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authcas/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)).'&login=1');
 	}
 
     /**

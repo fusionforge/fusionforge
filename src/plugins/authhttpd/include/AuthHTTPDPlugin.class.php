@@ -72,6 +72,9 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 </form>' ;
 		
 		$params['html_snippets'][$this->name] = $result;
+
+		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authhttpd/post-login.php?return_to
+='.htmlspecialchars(stripslashes($return_to)));
 	}
 
 	/**

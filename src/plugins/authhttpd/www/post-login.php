@@ -33,6 +33,7 @@ Header( "Cache-Control: must-revalidate");
 
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once('../../../www/include/login-form.php');
 
 $plugin = plugin_get_object('authcas');
 
@@ -44,24 +45,6 @@ $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 $error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $triggered = getIntFromRequest('triggered');
 
-//
-//	Validate return_to
-//
-if ($return_to) {
-	$tmpreturn=explode('?',$return_to);
-	$rtpath = $tmpreturn[0] ;
-
-	if (@is_file(forge_get_config('url_root').$rtpath)
-	    || @is_dir(forge_get_config('url_root').$rtpath)
-	    || (strpos($rtpath,'/projects') == 0)
-	    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
-		$newrt = $return_to ;
-	} else {
-		$newrt = '/' ;
-	}
-	$return_to = $newrt ;
-}
-
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
 	// redirect
@@ -72,6 +55,8 @@ if ($plugin->isSufficient()) {
 	$plugin->startSession($GLOBALS['REMOTE_USER']);
 }
 if ($return_to) {
+	validate_return_to($return_to);
+
 	header ("Location: " . util_make_url($return_to));
 	exit;
 } else {

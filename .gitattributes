@@ -4546,6 +4546,7 @@ src/www/images/widget/widget-preview-project_svn-stats.png -text svneol=unset#im
 src/www/images/widget/widget-preview-rss.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview-twitterfollow.png -text svneol=unset#image/png
 src/www/images/widget/widget-preview.png -text svneol=unset#image/png
+src/www/include/login-form.php -text
 src/www/include/pre.php -text
 src/www/include/unicode.php -text
 src/www/js/common.js -text
