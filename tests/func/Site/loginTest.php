@@ -51,8 +51,10 @@ class LoginProcess extends FForge_SeleniumTestCase
 	{
 		// Test with a normal login.
 		$this->open( ROOT );
-		$this->click("link=Log In");
-		$this->waitForPageToLoad("30000");
+		if (!$this->isTextPresent("Log In")) {
+			$this->logout();
+		}
+		$this->clickAndWait("link=Log In");
 
 		// Check that current URL's base is the same as ROOT
 		// If the forge redirects to other URL than the one
