@@ -160,6 +160,7 @@ $sys_use_diary=true;
 $sys_use_bookmarks=true;
 $sys_use_project_tags=true;
 $sys_use_project_full_list=true;
+$sys_use_dav=false;
 
 // This one exists purely for hysteric raisins
 $sys_use_mwframe=false;
