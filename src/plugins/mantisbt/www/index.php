@@ -196,14 +196,14 @@ switch ($type) {
 		$use_tooltips = $user->usesTooltips();
 
 		switch ($action) {
-			case "inituser":
-			case "updateIssue":
-			case "updateNote":
-			case "addNote":
-			case "deleteNote":
-			case "addAttachment":
-			case "deleteAttachment":
-			case "updateuserConf": {
+			case 'inituser':
+			case 'updateIssue':
+			case 'updateNote':
+			case 'addNote':
+			case 'deleteNote':
+			case 'addAttachment':
+			case 'deleteAttachment':
+			case 'updateuserConf': {
 				global $gfplugins;
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
@@ -288,18 +288,18 @@ switch ($type) {
 		}
 
 		switch ($action) {
-			case "init": {
+			case 'init': {
 				global $gfplugins;
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
 			}
-			case "addCategory":
-			case "addVersion":
-			case "renameCategory":
-			case "deleteCategory":
-			case "deleteVersion":
-			case "updateVersion":
-			case "updateConf": {
+			case 'addCategory':
+			case 'addVersion':
+			case 'renameCategory':
+			case 'deleteCategory':
+			case 'deleteVersion':
+			case 'updateVersion':
+			case 'updateConf': {
 				global $gfplugins;
 				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
 				break;
@@ -310,7 +310,7 @@ switch ($type) {
 		//only project admin can access here
 
 		switch ($view) {
-			case "init": {
+			case 'init': {
 				$mantisbt->getInitDisplay();
 				break;
 			}
@@ -319,6 +319,11 @@ switch ($type) {
 				break;
 			}
 		}
+		break;
+	}
+	case 'globaladmin': {
+		$mantisbt->getHeader('globaladmin');
+		$mantisbt->getGlobalAdminView();
 		break;
 	}
 }

@@ -111,7 +111,7 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			case "site_admin_option_hook": {
-				echo '<li>'.util_make_link("/plugins/mantisbt/?group_id=forge&type=admin&pluginname=".$this->name,_('Global MantisBT admin')).'</li>';
+				echo '<li>'.util_make_link("/plugins/mantisbt/?type=globaladmin&pluginname=".$this->name,_('Global MantisBT admin')).'</li>';
 				$returned = true;
 				break;
 			}
@@ -591,6 +591,14 @@ class MantisBTPlugin extends Plugin {
 				$returned = true;
 				break;
 			}
+			case 'globaladmin': {
+				session_require_global_perm('forge_admin');
+				global $gfwww;
+				require_once($gfwww.'admin/admin_utils.php');
+				site_admin_header(array('title'=>_('Site MantisBT Admin'), 'toptab' => ''));
+				$returned = true;
+				break;
+			}
 			default: {
 				break;
 			}
@@ -735,6 +743,16 @@ class MantisBTPlugin extends Plugin {
 		$userConf['user'] = $row['mantisbt_user'];
 		$userConf['password'] = $row['mantisbt_password'];
 		return $userConf;
+	}
+
+	/**
+	 * getGlobalAdminView - display the Global Admin View
+	 *
+	 * @return	bool	true
+	 */
+	function getGlobalAdminView() {
+		echo 'TOBEIMPLEMENTED';
+		return true;
 	}
 }
 // Local Variables:
