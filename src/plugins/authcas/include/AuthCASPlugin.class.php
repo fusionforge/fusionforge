@@ -105,9 +105,8 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		$user_id_from_cookie = $this->checkSessionCookie();
 		if ($user_id_from_cookie) {
 			$user = user_get_object($user_id_from_cookie);
-			$this->login($user->getUnixName());
 		} elseif (phpCAS::isAuthenticated()) {
-			$this->login(phpCAS::getUser());
+			$user = $this->startSession(phpCAS::getUser());
 		}
 		
 		if ($user) {

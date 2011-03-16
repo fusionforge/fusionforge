@@ -75,7 +75,7 @@ if ($login) {
 	$success = session_check_credentials_in_database(strtolower($form_loginname),$form_pw,false);
 	if ($success) {
 		if ($plugin->isSufficient()) {
-			$plugin->login($form_loginname);
+			$plugin->startSession($form_loginname);
 		}
 		if ($return_to) {
 			header ("Location: " . util_make_url($return_to));

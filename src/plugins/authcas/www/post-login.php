@@ -74,7 +74,7 @@ $plugin->initCAS();
 
 if (phpCAS::isAuthenticated()) {
 	if ($plugin->isSufficient()) {
-		$plugin->login(phpCAS::getUser());
+		$plugin->startSession(phpCAS::getUser());
 	}
 	if ($return_to) {
 		header ("Location: " . util_make_url($return_to));
@@ -96,7 +96,7 @@ if (phpCAS::isAuthenticated()) {
 	} elseif ($postcas) {		// The user is coming back from CAS
 		if (phpCAS::isAuthenticated()) {
 			if ($plugin->isSufficient()) {
-				$plugin->login(phpCAS::getUser());
+				$plugin->startSession(phpCAS::getUser());
 			}
 			if ($return_to) {
 				header ("Location: " . util_make_url($return_to));

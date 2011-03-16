@@ -174,11 +174,11 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	/**
-	 * TODO: Enter description here ...
+	 * Start a new session for a user
 	 * @param string $username
 	 * @return boolean
 	 */
-	function login($username) {
+	function startSession($username) {
 		if ($this->isSufficient() || $this->isRequired()) {
 			$params = array();
 			$params['username'] = $username;
@@ -187,8 +187,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 			$user = user_get_object_by_name($username);
 			$this->saved_user = $user;
 			$this->setSessionCookie();
+			return $user;
 		} else {
-			return true;
+			return false;
 		}
 	}
 
