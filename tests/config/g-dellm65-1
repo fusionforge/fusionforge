@@ -17,4 +17,4 @@ IPCOSGW=10.194.10.1
 
 SSHPUBKEY=~buildbot/.ssh/id_rsa.pub
 
-DEBMIRROR=http://10.194.10.128/debian
+DEBMIRROR=http://127.0.0.1/debian
