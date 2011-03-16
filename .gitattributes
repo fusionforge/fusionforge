@@ -758,6 +758,7 @@ src/etc/httpd.conf.d/auth-main.inc -text
 src/etc/httpd.conf.d/auth-projects.inc -text
 src/etc/httpd.conf.d/block-trace.inc -text
 src/etc/httpd.conf.d/log.inc -text
+src/etc/httpd.conf.d/plugin-authhttpd.inc -text
 src/etc/httpd.conf.d/plugin-fckeditor.inc -text
 src/etc/httpd.conf.d/plugin-generic.inc -text
 src/etc/httpd.conf.d/plugin-mailman.inc -text
@@ -896,6 +897,18 @@ src/plugins/authcas/packaging/docs/plugin-authcas -text
 src/plugins/authcas/packaging/install/plugin-authcas -text
 src/plugins/authcas/packaging/links/plugin-authcas -text
 src/plugins/authcas/www/post-login.php -text
+src/plugins/authhttpd/NAME -text
+src/plugins/authhttpd/README -text
+src/plugins/authhttpd/etc/authhttpd.ini -text
+src/plugins/authhttpd/gforge-plugin-authhttpd.spec -text
+src/plugins/authhttpd/include/AuthHTTPDPlugin.class.php -text
+src/plugins/authhttpd/include/authhttpd-init.php -text
+src/plugins/authhttpd/packaging/control/302plugin-authhttpd -text
+src/plugins/authhttpd/packaging/control/302plugin-authhttpd.shortdesc -text
+src/plugins/authhttpd/packaging/docs/plugin-authhttpd -text
+src/plugins/authhttpd/packaging/install/plugin-authhttpd -text
+src/plugins/authhttpd/packaging/links/plugin-authhttpd -text
+src/plugins/authhttpd/www/post-login.php -text
 src/plugins/authldap/NAME -text
 src/plugins/authldap/etc/authldap.ini -text
 src/plugins/authldap/packaging/control/300plugin-authldap -text

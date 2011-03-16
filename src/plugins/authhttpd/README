@@ -1,0 +1,27 @@
+fusionforge-plugin-authhttpd
+----------------------------
+
+This is the external HTTPD authentication plugin for FusionForge.
+
+Installation:
+
+- files from include/ go to /usr/share/gforge/plugins/authhttpd/include/
+- files from www/ go to /usr/share/gforge/www/plugins/authhttpd/
+
+Setup:
+
+- customise /etc/fusionforge/config.ini.d/authhttpd.ini to match your
+LDAP installation (server, base DN, and mapping)
+- /usr/share/gforge/bin/register-plugin authhttpd "HTTPD external
+authentication"
+
+Voilà, FusionForge now reuses your existing HTTPD authentication
+(Basic or otherwise).  Your account will be created the first time you
+log in (which means you can't add someone to a group before his/her
+first login).
+
+ -- Roland Mas <lolando@debian.org>, Wed, 16 Mar 2011 15:44:20 +0100
+
+Local Variables:
+mode: readme-debian
+End:

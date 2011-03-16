@@ -1,0 +1,3 @@
+plugins/authhttpd/include              usr/share/@OLDPACKAGE@/plugins/authhttpd/
+plugins/authhttpd/www              usr/share/@OLDPACKAGE@/plugins/authhttpd/
+plugins/authhttpd/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
