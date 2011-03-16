@@ -75,7 +75,7 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 
 	foreach ($params['html_snippets'] as $p => $s) {
 		$plugin = plugin_get_object($p);
-		echo '<div class="tabbertab" title="'$plugin->text.'">';
+		echo '<div class="tabbertab" title="'.$plugin->text.'">';
 		echo $s;
 		echo '</div>';
 	}
