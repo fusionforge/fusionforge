@@ -88,6 +88,7 @@ delrights: beroot
 
 installtemplate: beroot
 	cat lxc-debian6 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > /usr/lib/lxc/templates/lxc-debian6
+	chmod 755 /usr/lib/lxc/templates/lxc-debian6
 	cp lxc-debian6.postinst /usr/lib/lxc/templates/
 	cp lxc-centos5 /usr/lib/lxc/templates/
 	cp lxc-centos5.postinst /usr/lib/lxc/templates/
