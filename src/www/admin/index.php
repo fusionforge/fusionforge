@@ -10,6 +10,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -80,7 +81,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </ul>
 <?php
 	$params = array('result' => '');
-	$plugins_site_admin_project_html = '';
+	$plugins_site_admin_user_html = '';
 	plugin_hook_by_reference("site_admin_user_maintenance_hook", $params);
 	if ($params['result']) {
 			$plugins_site_admin_user_html = $params['result'];
@@ -224,7 +225,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	}
 	if(forge_get_config('use_project_database')) { ?>
 		<li><a href="database.php"><?php echo _('Project Database Administration'); ?></a></li>
-	<?php } 
+	<?php }
 	if(forge_get_config('use_people')) { ?>
         <li><a href="<?php echo util_make_url ('/people/admin/'); ?>"><?php echo _('Job / Categories Administration'); ?></a></li>
 	<?php } ?>
