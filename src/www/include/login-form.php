@@ -21,6 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+use_javascript('/tabber/tabber.js');
+
 function validate_return_to(&$return_to='/') {
 	$newrt = '/' ;
 
@@ -68,15 +70,18 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 		echo '</div> ' ;
 		echo '</p>';
 	}
-	
-	// see AuthBuiltinPlugin::displayAuthForm() that should do the work by default
-	
+
+	echo '<div id="tabber" class="tabber">';
+
 	foreach ($params['html_snippets'] as $p => $s) {
 		$plugin = plugin_get_object($p);
-		echo '<h2>'.$plugin->text.'</h2>';
+		echo '<div class="tabbertab" title="'$plugin->text.'">';
 		echo $s;
+		echo '</div>';
 	}
 	
+	echo '</div>';
+
 	if (!$formonly) {
 		$HTML->footer(array());
 	}
