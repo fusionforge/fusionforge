@@ -1889,6 +1889,7 @@ src/plugins/mediawiki/packaging/links/plugin-mediawiki -text
 src/plugins/mediawiki/www/LocalSettings.php -text
 src/plugins/mediawiki/www/frame.php -text
 src/plugins/mediawiki/www/plugin_admin.php -text
+src/plugins/oauthprovider/README -text
 src/plugins/oauthprovider/bin/db-delete.pl -text
 src/plugins/oauthprovider/bin/db-upgrade.pl -text
 src/plugins/oauthprovider/bin/sayhello -text
