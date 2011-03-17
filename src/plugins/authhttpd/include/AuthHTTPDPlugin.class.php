@@ -71,8 +71,7 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 		
 		$params['html_snippets'][$this->name] = $result;
 
-		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authhttpd/post-login.php?return_to
-='.htmlspecialchars(stripslashes($return_to)));
+		$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authhttpd/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)));
 	}
 
 	/**
@@ -83,7 +82,11 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 		$this->saved_user = NULL;
 		$user = NULL;
 
-		$username = $GLOBALS['REMOTE_USER'];
+		if (isset($GLOBALS['REMOTE_USER'])) {
+			$username = $GLOBALS['REMOTE_USER'];
+		} else {
+			$username = NULL;
+		}
 
 		if ($username) {
 			$user = user_get_object_by_name($username);

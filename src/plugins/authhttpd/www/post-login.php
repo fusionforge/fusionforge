@@ -51,7 +51,7 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
-if ($plugin->isSufficient()) {
+if ($plugin->isSufficient() && isset($GLOBALS['REMOTE_USER'])) {
 	$plugin->startSession($GLOBALS['REMOTE_USER']);
 }
 if ($return_to) {
