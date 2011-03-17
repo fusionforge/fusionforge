@@ -59,7 +59,9 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 	if ($full_page) {
 		if (count($params['html_snippets']) == 1
 		    && count($params['transparent_redirect_urls']) == 1) {
-			session_redirect($params['transparent_redirect_urls'][0]);
+			$urls = array_values($params['transparent_redirect_urls']);
+			header('Location: '.$urls[0]);
+			print("\n\n");
 		}
 	
 		$HTML->header(array('title'=>'Login'));
