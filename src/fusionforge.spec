@@ -88,6 +88,13 @@ Requires: %{name} >= %{version}, php, postgresql
 %description plugin-authcas
 External CAS authentication plugin for FusionForge.
 
+%package plugin-authhttpd
+Summary: External HTTPD authentication plugin for FusionForge.
+Group: Development/Tools
+Requires: %{name} >= %{version}, php, postgresql
+%description plugin-authhttpd
+External HTTPD authentication plugin for FusionForge.
+
 %package plugin-cvssyncmail
 Summary: Provides email notifications of changes to CVS repositories
 Group: Development/Tools
@@ -465,6 +472,9 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 # plugin: authcas
 %{__ln_s} ../../plugins/authcas/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authcas
 
+# plugin: authhttpd
+%{__ln_s} ../../plugins/authhttpd/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/authhttpd
+
 # plugin: cvssyncmail
 
 # plugin: cvstracker
@@ -793,6 +803,11 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authcas.ini
 %{FORGE_DIR}/plugins/authcas
 %{FORGE_DIR}/www/plugins/authcas
+
+%files plugin-authhttpd
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authhttpd.ini
+%{FORGE_DIR}/plugins/authhttpd
+%{FORGE_DIR}/www/plugins/authhttpd
 
 %files plugin-cvssyncmail
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/cvssyncmail.ini
