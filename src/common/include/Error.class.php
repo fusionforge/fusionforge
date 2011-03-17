@@ -30,6 +30,11 @@ define('ERROR__ON_UPDATE_ERROR', 4);
 define('ERROR__GROUPID_ERROR', 5);
 define('ERROR__MISSING_PARAMS_ERROR', 6);
 
+/**
+ * Error handling utility class
+ *
+ */
+
 class Error {
 	/**
 	 * The current error state.
