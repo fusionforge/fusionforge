@@ -56,7 +56,7 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 	$params['transparent_redirect_urls'] = array();
 	plugin_hook_by_reference('display_auth_form', $params);
 
-	if (!$formonly) {
+	if ($full_page) {
 		if (count($params['html_snippets']) == 1
 		    && count($params['transparent_redirect_urls']) == 1) {
 			session_redirect($params['transparent_redirect_urls'][0]);
@@ -96,7 +96,7 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 		echo '</div>';
 	}
 
-	if (!$formonly) {
+	if ($full_page) {
 		$HTML->footer(array());
 	}
 }
