@@ -27,6 +27,11 @@
  * USA
  */
 
+/**
+ * Plugin base class
+ *
+ */
+
 class Plugin extends Error {
 	var $name;
 	var $hooks;
