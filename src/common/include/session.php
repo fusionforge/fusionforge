@@ -349,7 +349,18 @@ function session_set_cookie($name ,$value, $domain = '', $expiration = 0) {
  *	@return never returns
  */
 function session_redirect($loc) {
-	header('Location: '.util_make_url ($loc));
+	session_redirect_external(util_make_url ($loc));
+	exit;
+}
+
+/**
+ *	session_redirect_external() - Redirect browser to a (potentially external) URL
+ *
+ *	@param		string	Absolute URL, not necessarily within the site
+ *	@return never returns
+ */
+function session_redirect_external($url) {
+	header('Location: '.$url);
 	print("\n\n");
 	exit;
 }
