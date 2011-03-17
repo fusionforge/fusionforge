@@ -472,6 +472,7 @@ src/common/include/HTTPRequest.class.php -text
 src/common/include/Navigation.class.php -text
 src/common/include/PFO-RBAC.interface.php -text
 src/common/include/PluginInfo.class.php -text
+src/common/include/PluginPersistence.class.php -text
 src/common/include/ProjectManager.class.php -text
 src/common/include/RBAC.php -text
 src/common/include/RBACEngine.class.php -text
