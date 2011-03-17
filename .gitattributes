@@ -713,9 +713,6 @@ src/etc/config.ini-fhs -text
 src/etc/config.ini-opt -text
 src/etc/config.ini-usrlocal -text
 src/etc/config.ini.d/aselectextauth.ini -text
-src/etc/config.ini.d/authbuiltin.ini -text
-src/etc/config.ini.d/authcas.ini -text
-src/etc/config.ini.d/authhttpd.ini -text
 src/etc/config.ini.d/authldap.ini -text
 src/etc/config.ini.d/blocks.ini -text
 src/etc/config.ini.d/contribtracker.ini -text
