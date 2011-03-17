@@ -73,16 +73,28 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 		echo '</p>';
 	}
 
-	echo '<div id="tabber" class="tabber">';
+	
+	if (count ($params['html_snippets']) > 1) {
+		$use_tabber = true;
+		echo '<div id="tabber" class="tabber">';
+	} else {
+		$use_tabber = false;
+	}
 
 	foreach ($params['html_snippets'] as $p => $s) {
 		$plugin = plugin_get_object($p);
-		echo '<div class="tabbertab" title="'.$plugin->text.'">';
+		if ($use_tabber) {
+			echo '<div class="tabbertab" title="'.$plugin->text.'">';
+		}
 		echo $s;
-		echo '</div>';
+		if ($use_tabber) {
+			echo '</div>';
+		}
 	}
 	
-	echo '</div>';
+	if ($use_tabber) {
+		echo '</div>';
+	}
 
 	if (!$formonly) {
 		$HTML->footer(array());
