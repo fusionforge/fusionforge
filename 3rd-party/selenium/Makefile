@@ -18,7 +18,7 @@ binary/selenium-server-1.0.3: binary/selenium-remote-control-1.0.3.zip
 	cd binary ; [ -d selenium-server-1.0.3 ] || unzip selenium-remote-control-1.0.3.zip
 
 binary/selenium-remote-control-1.0.3.zip: binary
-	cd binary ; wget -c http://selenium.googlecode.com/files/selenium-remote-control-1.0.3.zip
+	cd binary ; wget -q -c http://selenium.googlecode.com/files/selenium-remote-control-1.0.3.zip
 
 binary:
 	mkdir binary
