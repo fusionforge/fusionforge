@@ -22,6 +22,8 @@
  *
  */
 
+// User authorization endpoint
+
 // This displays the request token authorization dialog to the user
 
 //should be changed as session_require_login returns with error if not logged in

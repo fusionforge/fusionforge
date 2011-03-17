@@ -22,6 +22,8 @@
  *
  */
 
+// OAuth PHP library (http://code.google.com/p/oauth/source/browse/#svn%2Fcode%2Fphp) as of rev. 622
+
 require_once('OAuth.php');
 
 /**

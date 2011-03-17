@@ -4,6 +4,8 @@
  * oauthprovider plugin
  *
  * Daniel Perez <danielperez.arg@gmail.com>
+ * 
+ * FIXME : FIX copyright
  *
  * This is an example to watch things in action. You can obviously modify things and logic as you see fit
  */

@@ -32,7 +32,8 @@ $t_consumers = OauthAuthzConsumer::load_all();
 
 $t_can_manage = false;
 if(forge_check_global_perm ('forge_admin')) $t_can_manage = true;
-	
+
+// FIXME : use $HTML->boxTop() and likes bellow
 if(count($t_consumers)>0)	{	
 ?>
 
