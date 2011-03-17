@@ -1,5 +1,7 @@
 <?php
 
+// FIXME: missing copyright header
+
 class DatabaseInstaller extends Error {
 	
 	function DatabaseInstaller($name='', $path='') {
@@ -7,6 +9,10 @@ class DatabaseInstaller extends Error {
 		$this->path	= $path;	
 	}
 
+	/**
+	 * TODO: Enter description here ...
+	 * @return boolean|Ambigous <boolean, string>
+	 */
 	function install() {
 		$name = $this->name;
 		$path = $this->path;
@@ -22,6 +28,10 @@ class DatabaseInstaller extends Error {
 		return $this->setError(_('No database installation scripts found.'));
 	}
 	
+	/**
+	 * TODO: Enter description here ...
+	 * @return boolean|string
+	 */
 	function upgrade() {
 		$name = $this->name;
 		$path = $this->path;
