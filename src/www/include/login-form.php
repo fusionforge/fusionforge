@@ -46,6 +46,8 @@ function display_login_page($return_to='/', $triggered=false) {
 }
 
 function display_login_form($return_to='/', $triggered=false, $full_page=false) {
+	global $HTML;
+
 	validate_return_to($return_to);
 
 	$params = array();
