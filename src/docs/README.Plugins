@@ -75,6 +75,8 @@ described below (simplified descriptions):
 |                          )
 `----
 
+TODO: add plugins_persistence, group_plugin_persistence, user_plugin_persistence
+
   "plugins" lists the installed plugins, with the numeric id, the
 string handle (say, "acmetimetracker") and a description.
 
