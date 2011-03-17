@@ -1,4 +1,4 @@
-<Location {core/groupdir_prefix}/plugins/authhttpd/post-login.php>
+<Location {core/url_prefix}/plugins/authhttpd/post-login.php>
   # You'll need to customize the following according to your needs
 
   AuthType Basic
