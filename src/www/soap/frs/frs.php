@@ -3,7 +3,7 @@
  * SOAP File Release System Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
- * http://gforge.org
+ * http://fusionforge.org
  *
  * This file is part of FusionForge.
  *
@@ -24,8 +24,8 @@
 
 require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
-//require_once $gfcommon.'frs/FRSFileType.class.php';
-//require_once $gfcommon.'frs/FRSFileProcessorType.class.php';
+require_once $gfcommon.'frs/FRSFileType.class.php';
+require_once $gfcommon.'frs/FRSFileProcessorType.class.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/FRSRelease.class.php';
 
