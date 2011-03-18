@@ -5,7 +5,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org/
  *
@@ -42,10 +42,10 @@ $project = group_get_object($group_id);
 if (!$project || !is_object($project)) {
     exit_no_group();
 } elseif ($project->isError()) {
-	exit_error($project->getErrorMessage(),'frs');
+	exit_error($project->getErrorMessage(), 'frs');
 }
 
-session_require_perm ('frs', $group_id, 'write') ;
+session_require_perm('frs', $group_id, 'write');
 
 /*
 	Relatively simple form to edit/add packages of releases
@@ -55,68 +55,67 @@ session_require_perm ('frs', $group_id, 'write') ;
 if (getStringFromRequest('submit')) {
 	$func = getStringFromRequest('func');
 	$package_id = getIntFromRequest('package_id');
-	$package_name = trim(getStringFromRequest('package_name'));
-	$is_public = getStringFromRequest('is_public');
+	$package_name = htmlspecialchars(trim(getStringFromRequest('package_name')));
+	$is_public = getIntFromRequest('is_public');
+	$status_id = getIntFromRequest('status_id');
 
 	/*
 		make updates to the database
 	*/
-	if ($func=='add_package' && $package_name) {
+	if ($func == 'add_package' && $package_name) {
 
 		//create a new package
 		$frsp = new FRSPackage($project);
 		if (!$frsp || !is_object($frsp)) {
-			exit_error(_('Could Not Get FRS Package'),'frs');
+			exit_error(_('Could Not Get FRS Package'), 'frs');
 		} elseif ($frsp->isError()) {
-			exit_error($frsp->getErrorMessage(),'frs');
+			exit_error($frsp->getErrorMessage(), 'frs');
 		}
-		if (!$frsp->create($package_name,$is_public)) {
-			exit_error($frsp->getErrorMessage(),'frs');
+		if (!$frsp->create($package_name, $is_public)) {
+			exit_error($frsp->getErrorMessage(), 'frs');
 		} else {
 			$feedback .=_('Added Package');
 		}
 
-	} elseif ($func=='delete_package' && $package_id) {
+	} elseif ($func == 'delete_package' && $package_id) {
 
 		//delete a package
-		$frsp = new FRSPackage($project,$package_id);
+		$frsp = new FRSPackage($project, $package_id);
 		if (!$frsp || !is_object($frsp)) {
-			exit_error(_('Could Not Get FRS Package'),'frs');
+			exit_error(_('Could Not Get FRS Package'), 'frs');
 		} elseif ($frsp->isError()) {
-			exit_error($frsp->getErrorMessage(),'frs');
+			exit_error($frsp->getErrorMessage(), 'frs');
 		}
-		
+
 		$sure = getIntFromRequest("sure");
 		$really_sure = getIntFromRequest("really_sure");
-		if (!$frsp->delete($sure,$really_sure)) {
-			exit_error($frsp->getErrorMessage(),'frs');
+		if (!$frsp->delete($sure, $really_sure)) {
+			exit_error($frsp->getErrorMessage(), 'frs');
 		} else {
 			$feedback .=_('Deleted');
 		}
 
-	} else if ($func=='update_package' && $package_id && $package_name && $status_id) {
-		$frsp = new FRSPackage($project,$package_id);
+	} else if ($func == 'update_package' && $package_id && $package_name) {
+		$frsp = new FRSPackage($project, $package_id);
 		if (!$frsp || !is_object($frsp)) {
-			exit_error(_('Could Not Get FRS Package'),'frs');
+			exit_error(_('Could Not Get FRS Package'), 'frs');
 		} elseif ($frsp->isError()) {
-			exit_error($frsp->getErrorMessage(),'frs');
+			exit_error($frsp->getErrorMessage(), 'frs');
 		}
-		$status_id = $frsp->getStatus();
-		if (!$frsp->update($package_name,$status_id)) {
-			exit_error($frsp->getErrorMessage(),'frs');
+		if (!$frsp->update($package_name, $status_id, $is_public)) {
+			exit_error($frsp->getErrorMessage(), 'frs');
 		} else {
 			$feedback .= _('Updated Package');
 		}
 	}
 }
 
+frs_admin_header(array('title'=>_('Release Edit/File Releases'), 'group'=>$group_id));
 
-frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_id));
-
-$res=db_query_params ('SELECT status_id,package_id,name AS package_name 
-	FROM frs_package WHERE group_id=$1',
+$res = db_query_params('SELECT status_id, package_id, name AS package_name, is_public
+			FROM frs_package WHERE group_id=$1',
 			array($group_id));
-$rows=db_numrows($res);
+$rows = db_numrows($res);
 if ($res && $rows > 0) {
 	echo '<h2>'._('QRS').'</h2>';
 	printf(_('Click here to %1$s quick-release a file %2$s'), '<a href="qrs.php?group_id=' . $group_id . '">', '</a>').'<br />';
@@ -150,44 +149,45 @@ if ($res && $rows > 0) {
 if (!$res || $rows < 1) {
 	echo '<div class="warning">'._('You Have No Packages Defined').'</div>';
 } else {
-	$title_arr=array();
-	$title_arr[]=_('Releases');
-	$title_arr[]=_('Package name');
-	$title_arr[]=_('Status');
+	$title_arr = array();
+	$title_arr[] = _('Releases');
+	$title_arr[] = _('Package name');
+	$title_arr[] = _('Status');
+	$title_arr[] = _('Publicly Viewable');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	for ($i=0; $i<$rows; $i++) {
+	for ($i = 0; $i < $rows; $i++) {
 		echo '
 		<form action="'. getStringFromServer('PHP_SELF') .'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="func" value="update_package" />
-		<input type="hidden" name="package_id" value="'. db_result($res,$i,'package_id') .'" />
+		<input type="hidden" name="package_id" value="'. db_result($res, $i, 'package_id') .'" />
 		<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<td style="white-space: nowrap;" align="center">
-					<a href="qrs.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
+					<a href="qrs.php?package_id='.
+						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Add Release').']</strong>
 					</a>
-				
-					<a href="showreleases.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Edit Releases').']</strong>
+
+					<a href="showreleases.php?package_id='.
+						db_result($res, $i, 'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Edit Releases').']</strong>
 					</a>
 
 			</td>
-			<td><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="60" /></td>
-			<td>'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</td>
+			<td><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" /></td>
+			<td>'.frs_show_status_popup('status_id', db_result($res, $i, 'status_id')).'</td>
+			<td>'.frs_show_public_popup('is_public', db_result($res, $i, 'is_public')).'</td>
 			<td><input type="submit" name="submit" value="'._('Update').'" />
-				
-					<a href="deletepackage.php?package_id='. 
+
+					<a href="deletepackage.php?package_id='.
 						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['._('Delete').']</strong>
 					</a>
-				
+
 			</td>
 			</tr></form>';
 	}
 
 	echo $GLOBALS['HTML']->listTableBottom();
-
 }
 
 /*

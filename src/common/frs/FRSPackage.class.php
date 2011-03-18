@@ -5,6 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -12,7 +13,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -41,7 +42,7 @@ function get_frs_packages($Group) {
 
 /**
  * Gets a FRSPackage object from the given package id
- * 
+ *
  * @param	int	the package id
  * @param	array	the DB handle if passed in (optional)
  * @return	object	the FRSPackage object
@@ -129,7 +130,7 @@ class FRSPackage extends Error {
 	 *	@param	boolean	Whether it's public or not. 1=public 0=private.
 	 *	@return	boolean success.
 	 */
-	function create($name,$is_public=1) {
+	function create($name, $is_public = 1) {
 
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
@@ -178,7 +179,7 @@ class FRSPackage extends Error {
 			if (!is_dir($newdirlocation)) {
 				@mkdir($newdirlocation);
 			}
-			
+
 			// this 2 should normally silently fail (because it's called with the apache user) but if it's root calling the create() method, then the owner and group for the directory should be changed
 			@chown($newdirlocation,forge_get_config('apache_user'));
 			@chgrp($newdirlocation,forge_get_config('apache_group'));
@@ -320,7 +321,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 		return $res;
-	}	
+	}
 
 	/**
 	 *  isMonitoring - Is the current user in the list of people monitoring this package.
@@ -359,18 +360,19 @@ class FRSPackage extends Error {
 	 *
 	 *	@param	string	The name of this package.
 	 *	@param	int	The status_id of this package from frs_status table.
+	 *	@param	int	public or private : 1 or 0
 	 *	@return	boolean success.
 	 */
-	function update($name,$status) {
+	function update($name, $status, $is_public = 1) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
 
-		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
+		if (!forge_check_perm('frs', $this->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
-		}		
+		}
 		if($this->getName()!=htmlspecialchars($name)) {
 			$res = db_query_params ('SELECT * FROM frs_package WHERE group_id=$1 AND name=$2',
 						array ($this->Group->getID(),
@@ -381,9 +383,10 @@ class FRSPackage extends Error {
 			}
 		}
 		db_begin();
-		$res = db_query_params ('UPDATE frs_package SET	name=$1, status_id=$2 WHERE group_id=$3 AND package_id=$4',
+		$res = db_query_params('UPDATE frs_package SET	name=$1, status_id=$2, is_public=$3 WHERE group_id=$4 AND package_id=$5',
 					array (htmlspecialchars($name),
 					       $status,
+					       $is_public,
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
@@ -401,12 +404,12 @@ class FRSPackage extends Error {
 		$newdirname = $this->getFileName();
 		$olddirlocation = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$olddirname;
 		$newdirlocation = forge_get_config('upload_dir').'/'.$this->Group->getUnixName().'/'.$newdirname;
-		
+
 		if(($olddirname!=$newdirname)){
 			if(is_dir($newdirlocation)){
 				$this->setError('FRSPackage::update() Error Updating Package: Directory Already Exists');
 				db_rollback();
-				return false;	
+				return false;
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
 					$this->setError("FRSPackage::update() Error Updating Package: Couldn't rename dir");
@@ -414,7 +417,7 @@ class FRSPackage extends Error {
 					return false;
 				}
 			}
-		}	
+		}
 		db_commit();
 		$this->createNewestReleaseFilesAsZip();
 		return true;
@@ -479,23 +482,23 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  Function that selects the newest release. 
+	 *  Function that selects the newest release.
 	 *  The newest release is the release with the highest ID
-	 * 
+	 *
 	 *  @return object FRSRelease
 	 */
-	
+
 	function getNewestRelease() {
 		$result = db_query_params('SELECT MAX(release_id) AS release_id FROM frs_release WHERE package_id=$1',
 					  array ($this->getID())) ;
-		
+
 		if ($result && db_numrows($result) == 1) {
 			$row = db_fetch_array($result);
 			return frsrelease_get_object($row['release_id']);
 		} else {
 			$this->setError('FRSRelease:: No valid max release id');
 			return false;
-		} 
+		}
 	}
 
 	public function getNewestReleaseZipName () {
@@ -518,11 +521,11 @@ class FRSPackage extends Error {
 		}
 
 		$files = $release->getFiles();
-	
+
 		foreach ($files as $f) {
-			$filePath = $filesPath.'/'.$f->getName();	
+			$filePath = $filesPath.'/'.$f->getName();
 			$zip->addFile($filePath,$f->getName());
-		} 
+		}
 
 		$zip->close();
 	}

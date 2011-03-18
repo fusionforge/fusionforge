@@ -13,7 +13,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -233,9 +233,9 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
 	$return = '
 		<select name="'.$select_name.'">';
 
-	$rows=count($vals);
+	$rows = count($vals);
 
-	for ($i=0; $i<$rows; $i++) {
+	for ($i = 0; $i < $rows; $i++) {
 		if ( $samevals ) {
 			$return .= "\n\t\t<option value=\"" . $vals[$i] . "\"";
 			if ($vals[$i] == $checked_val) {
@@ -544,7 +544,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 /**
  * html_build_multiple_select_box_from_arrays() - Takes two arrays and builds a multi-select box
  *
- * @param		array	id of the field  
+ * @param		array	id of the field
  * @param		array	Text to be displayed
  * @param		string	id of the items selected
  * @param		string	The item that should be checked
@@ -575,7 +575,7 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
 	$rows=count($ids);
 	for ($i=0; $i<$rows; $i++) {
 		if (( $ids[$i] != '100') || ($ids[$i] == '100' && !$show_100)) {
-			$return .=' 
+			$return .='
 				<option value="'.$ids[$i].'"';
 			/*
 				Determine if it's checked
@@ -747,9 +747,9 @@ function site_project_header($params) {
 	if (!isset($params['h1'])){
 		$params['h1'] = $h1;
 	}
-	
+
 	site_header($params);
-	
+
 //	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
 }
 

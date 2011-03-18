@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -33,11 +33,11 @@ require_once $gfcommon.'frs/FRSFile.class.php';
  *	  @param array	The result array, if it's passed in
  *	  @return object  FRSRelease object
  */
-function &frsrelease_get_object($release_id, $data=false) {
+function &frsrelease_get_object($release_id, $data = false) {
 	global $FRSRELEASE_OBJ;
 	if (!isset($FRSRELEASE_OBJ['_'.$release_id.'_'])) {
 		if ($data) {
-					//the db result handle was passed in
+			//the db result handle was passed in
 		} else {
 			$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1',
 						array ($release_id)) ;
@@ -47,7 +47,7 @@ function &frsrelease_get_object($release_id, $data=false) {
 			}
 			$data = db_fetch_array($res);
 		}
-		$FRSPackage =& frspackage_get_object($data['package_id']);
+		$FRSPackage = frspackage_get_object($data['package_id']);
 		$FRSRELEASE_OBJ['_'.$release_id.'_']= new FRSRelease($FRSPackage,$data['release_id'],$data);
 	}
 	return $FRSRELEASE_OBJ['_'.$release_id.'_'];
@@ -78,7 +78,7 @@ class FRSRelease extends Error {
 	 *  @param  array   The associative array of data.
 	 *	@return	boolean	success.
 	 */
-	function FRSRelease(&$FRSPackage, $release_id=false, $arr=false) {
+	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
 		$this->Error();
 		if (!$FRSPackage || !is_object($FRSPackage)) {
 			$this->setError('FRSRelease:: No Valid FRSPackage Object');
@@ -289,10 +289,10 @@ class FRSRelease extends Error {
 				    $this->FRSPackage->getName());
 		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package "%3$s".
 
-Release note: 
-		
+Release note:
+
 %4$s
-								
+
 Change note:
 
 %5$s
@@ -307,16 +307,16 @@ versions of this package were released. If you don\'t wish to be
 notified in the future, please login to %7$s and click this link:
 
 %8$s
-		
 
-		
-	
+
+
+
 
 '
 ),
 					      $this->FRSPackage->Group->getPublicName(),
 					      $this->FRSPackage->Group->getUnixName(),
-					      $this->FRSPackage->getName(), 
+					      $this->FRSPackage->getName(),
 					      $this->getNotes(),
 					      $this->getChanges(),
 					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
@@ -326,7 +326,7 @@ notified in the future, please login to %7$s and click this link:
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
 		}
-		
+
 	}
 
 	/**
@@ -373,14 +373,14 @@ notified in the future, please login to %7$s and click this link:
 			$this->FRSPackage->Group->getUnixName() . '/' .
 			$this->FRSPackage->getFileName().'/'.
 			$this->getFileName().'/';
-		
+
 		// double-check we're not trying to remove root dir
 		if (util_is_root_dir($dir)) {
 			$this->setError('Release::delete error: trying to delete root dir');
 			return false;
 		}
 		rmdir($dir);
-		
+
 		db_query_params ('DELETE FROM frs_release WHERE release_id=$1 AND package_id=$2',
 				 array ($this->getID(),
 					$this->FRSPackage->getID())) ;
@@ -398,13 +398,13 @@ notified in the future, please login to %7$s and click this link:
 	 *	@param	int	The unix date of the release.
 	 *	@return	boolean success.
 	 */
-	function update($status,$name,$notes,$changes,$preformatted,$release_date) {
+	function update($status, $name, $notes, $changes, $preformatted, $release_date) {
 		if (strlen($name) < 3) {
 			$this->setError(_('FRSPackage Name Must Be At Least 3 Characters'));
 			return false;
 		}
-		
-		if (!forge_check_perm ('frs', $this->FRSPackage->Group->getID(), 'write')) {
+
+		if (!forge_check_perm('frs', $this->FRSPackage->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -414,8 +414,8 @@ notified in the future, please login to %7$s and click this link:
 		} else {
 			$preformatted = 0;
 		}
-		
-		if($this->getName()!=htmlspecialchars($name)) {
+
+		if($this->getName() != htmlspecialchars($name)) {
 			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
 						array ($this->FRSPackage->getID(),
 						       htmlspecialchars($name))) ;
@@ -423,7 +423,7 @@ notified in the future, please login to %7$s and click this link:
 				$this->setError('FRSRelease::update() Error On Update: Name Already Exists');
 				return false;
 			}
-		}		
+		}
 		db_begin();
 		$res = db_query_params ('UPDATE frs_release SET	name=$1,status_id=$2,notes=$3,
 			changes=$4,preformatted=$5,release_date=$6,released_by=$7
@@ -453,12 +453,12 @@ notified in the future, please login to %7$s and click this link:
 		$newfilename = $this->getFileName();
 		$olddirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$oldfilename;
 		$newdirlocation = forge_get_config('upload_dir').'/'.$this->FRSPackage->Group->getUnixName().'/'.$this->FRSPackage->getFileName().'/'.$newfilename;
-	
+
 		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
 			if (is_dir($newdirlocation)) {
 				$this->setError('FRSRelease::update() Error Updating Release: Directory Already Exists');
 				db_rollback();
-				return false;	
+				return false;
 			} else {
 				if(!rename($olddirlocation,$newdirlocation)) {
 					$this->setError("FRSRelease::update() Error Updating Release: Couldn't rename dir");
@@ -466,7 +466,7 @@ notified in the future, please login to %7$s and click this link:
 					return false;
 				}
 			}
-		}	
+		}
 		db_commit();
 		$this->FRSPackage->createNewestReleaseFilesAsZip();
 		return true;

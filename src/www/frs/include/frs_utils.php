@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org/
  *
  * This file is part of FusionForge.
@@ -43,7 +44,7 @@ function frs_admin_header($params) {
 		return;
 	}
 
-	session_require_perm ('frs', $group_id, 'write') ;
+	session_require_perm('frs', $group_id, 'write');
 
 	frs_header($params);
 }
@@ -67,10 +68,10 @@ function frs_header($params) {
 		exit_no_group();
 	}
 
-	$params['toptab']='frs';
-	$params['group']=$group_id;
+	$params['toptab'] = 'frs';
+	$params['group'] = $group_id;
 
-	if (forge_check_perm ('frs', $group_id, 'write')) {
+	if (forge_check_perm('frs', $group_id, 'write')) {
 		$params['submenu'] = $HTML->subMenu(
 			array(
 				_('View File Releases'),
@@ -96,21 +97,32 @@ function frs_footer() {
 	The following functions are for the FRS (File Release System)
 */
 
+/*
+	pop-up box of public / private frs statuses
+*/
+
+function frs_show_public_popup($name='is_public', $checked_val="xzxz") {
+	/*
+		return a pop-up select box of statuses
+	*/
+	$FRS_PUBLIC_RES = array('private', 'public');
+	return html_build_select_box_from_array($FRS_PUBLIC_RES, $name, $checked_val, false);
+}
 
 /*
 	pop-up box of supported frs statuses
 */
 
-function frs_show_status_popup ($name='status_id', $checked_val="xzxz") {
+function frs_show_status_popup($name='status_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of statuses
 	*/
 	global $FRS_STATUS_RES;
 	if (!isset($FRS_STATUS_RES)) {
-		$FRS_STATUS_RES=db_query_params ('SELECT * FROM frs_status',
+		$FRS_STATUS_RES=db_query_params('SELECT * FROM frs_status',
 			array());
 	}
-	return html_build_select_box ($FRS_STATUS_RES,$name,$checked_val,false);
+	return html_build_select_box($FRS_STATUS_RES, $name, $checked_val, false);
 }
 
 /*
@@ -123,19 +135,19 @@ function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 	*/
 	global $FRS_FILETYPE_RES;
 	if (!isset($FRS_FILETYPE_RES)) {
-		$FRS_FILETYPE_RES=db_query_params ('SELECT * FROM frs_filetype ORDER BY type_id',
+		$FRS_FILETYPE_RES=db_query_params('SELECT * FROM frs_filetype ORDER BY type_id',
 			array());
 	}
-	return html_build_select_box ($FRS_FILETYPE_RES,$name,$checked_val,true,_('Must Choose One'));
+	return html_build_select_box($FRS_FILETYPE_RES, $name, $checked_val, true, _('Must Choose One'));
 }
 
 /*
 	pop-up box of supported frs processor options
 */
 
-function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
+function frs_show_processor_popup($name='processor_id', $checked_val="xzxz") {
 	/*
-		return a pop-up select box of the available processors 
+		return a pop-up select box of the available processors
 	*/
 	global $FRS_PROCESSOR_RES;
 	if (!isset($FRS_PROCESSOR_RES)) {
@@ -160,9 +172,9 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 		return 'ERROR - GROUP ID REQUIRED';
 	} else {
 		if (!isset($FRS_RELEASE_RES)) {
-			$FRS_RELEASE_RES = db_query_params("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) FROM frs_release,frs_package 
-WHERE frs_package.group_id=$1 
-AND frs_release.package_id=frs_package.package_id", 
+			$FRS_RELEASE_RES = db_query_params("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) FROM frs_release,frs_package
+WHERE frs_package.group_id=$1
+AND frs_release.package_id=frs_package.package_id",
 							   array($group_id));
 			echo db_error();
 		}
@@ -183,7 +195,7 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 		return 'ERROR - GROUP ID REQUIRED';
 	} else {
 		if (!isset($FRS_PACKAGE_RES)) {
-			$FRS_PACKAGE_RES=db_query_params ('SELECT package_id,name 
+			$FRS_PACKAGE_RES=db_query_params ('SELECT package_id,name
 				FROM frs_package WHERE group_id=$1',
 			array($group_id));
 			echo db_error();
