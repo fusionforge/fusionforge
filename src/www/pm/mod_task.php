@@ -320,7 +320,6 @@ echo '
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td></tr>';
-$total_hours += db_result($res,$i,'hours');
 
 echo $HTML->listTableBottom();
 
