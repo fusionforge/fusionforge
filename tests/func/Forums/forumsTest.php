@@ -156,6 +156,28 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("Error: a mailing list with the same email address already exists"));
 	}
+
+	function testHtmlFiltering()
+	{
+		// Create the first message (Message1/Text1).
+		$this->populateStandardTemplate('forums');
+		$this->init();
+		$this->clickAndWait("link=Forums");
+		$this->assertFalse($this->isTextPresent("Permission denied."));
+		$this->assertTextPresent("open-discussion");
+		$this->clickAndWait("link=open-discussion");
+		$this->clickAndWait("link=Start New Thread");
+		$this->type("subject", "Message1");
+		$this->type("body", "Text1 <script>Hacker inside</script> done");
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("Message Posted Successfully");
+		$this->clickAndWait("link=Forums");
+		$this->assertTextPresent("open-discussion");
+		$this->clickAndWait("link=open-discussion");
+		$this->assertTextPresent("Message1");
+		$this->assertFalse($this->isTextPresent("Hacker inside"));
+		$this->assertFalse($this->isTextPresent("Text1  done"));
+	}
 }
 
 // Local Variables:
