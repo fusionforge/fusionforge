@@ -242,7 +242,7 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) 
 	$res = @pg_query_params($dbserver,$qstring,$params);
 	if (!$res) {
 		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> '.db_error());
+		error_log('SQL> '.db_error($dbserver));
 	}
 	return $res;
 }
@@ -487,7 +487,7 @@ function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=NULL) {
  *	@return text error message.
  */
 function db_error($dbserver=NULL) {
-	return @pg_errormessage($dbserver);
+	return pg_last_error($dbserver);
 }
 
 /**
