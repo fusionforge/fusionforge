@@ -60,9 +60,9 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->registerEmailAddressForNotification();
         // $this->createSubproject();
         // $this->createPrivateSubproject();
-        $this->displayGANTT();
-        //$this->displayActivityReportByDeveloper();
-        //$this->displayActivityReportBySubproject();
+        // $this->displayGANTT();
+        // $this->displayActivityReportByDeveloper();
+        // $this->displayActivityReportBySubproject();
         $this->exportCSV();
     }
 
@@ -378,6 +378,11 @@ class CreateTask extends FForge_SeleniumTestCase
         $this->clickAndWait("link=To Do");
         $this->click("link=Gantt Chart");
         $this->waitForPopUp("Gantt_Chart", "30000");
+        $this->selectWindow("name=Gantt_Chart");
+        $this->assertTextPresent("Assignee");
+
+        $this->close();
+        $this->selectWindow("");
     }
 
     function displayActivityReportByDeveloper()
