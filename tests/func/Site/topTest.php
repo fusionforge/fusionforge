@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright (C) 2008 Alain Peyrat <aljeux@free.fr>
- * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
+ * Copyright (C) 2009 - 2010 Alain Peyrat, Alcatel-Lucent
  *
  * This file is part of FusionForge.
  *
@@ -43,35 +43,43 @@
  * ALONE BASIS."
  */
 
-require_once 'func/Testing/SeleniumGforge.php';
+require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class Top extends FForge_SeleniumTestCase
 {
-    function testWalkInTop()
+    function skiptestWalkInTop()
     {
-    	$this->open( ROOT );
+		$this->populateStandardTemplate('forums');
+    	$this->init();
+
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=open-discussion");
+		$this->clickAndWait("link=Start New Thread");
+		$this->type("subject", "Message1");
+		$this->type("body", "Text1");
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("Message Posted Successfully");
+		
+		sleep(1);
+		$this->cron("cronjobs/project_weekly_metric.php");
 
 		// Test that from the main page we access the most active this week.    
-	    $this->click("link=[ More ]");
-    	$this->waitForPageToLoad("30000");
-    	$this->assertTrue($this->isTextPresent("Most Active This Week"));
+		$this->clickAndWait("link=Home");
+		$this->clickAndWait("link=[More]");
+		$this->assertTextPresent("Most Active This Week");
 
     	// Test that we can return back to all the tops.
-    	$this->click("link=[View Other Top Categories]");
-    	$this->waitForPageToLoad("30000");
-    	$this->assertTrue($this->isTextPresent("We track many project usage statistics"));
+		$this->clickAndWait("link=[View Other Top Categories]");
+		$this->assertTextPresent("We track many project usage statistics");
 
     	// Test that we can go the view the most active all time.
-    	$this->click("link=Most Active All Time");
-    	$this->waitForPageToLoad("30000");
-    	$this->assertTrue($this->isTextPresent("Most Active All Time"));
+		$this->clickAndWait("link=Most Active All Time");
+		$this->assertTextPresent("Most Active All Time");
 
     	// Return back to tops.
-    	$this->click("link=[View Other Top Categories]");
-    	$this->waitForPageToLoad("30000");
-    	$this->click("link=Top Downloads");
-    	$this->waitForPageToLoad("30000");
-    	$this->assertTrue($this->isTextPresent("Rank"));
+		$this->clickAndWait("link=[View Other Top Categories]");
+		$this->clickAndWait("link=Top Downloads");
+		$this->assertTextPresent("Rank");
     }
 }
 

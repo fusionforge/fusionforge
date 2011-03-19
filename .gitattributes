@@ -4833,7 +4833,7 @@ tests/func/RBAC/rbacTest.php -text
 tests/func/README.TXT -text
 tests/func/Site/loginTest.php -text
 tests/func/Site/projectsTest.php -text
-tests/func/Site/top.php -text
+tests/func/Site/topTest.php -text
 tests/func/Site/troveTest.php -text
 tests/func/Soap/AllTests.php -text
 tests/func/Soap/checks.php -text
