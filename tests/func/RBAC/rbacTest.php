@@ -376,8 +376,8 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View public packages only");
 		$this->select("//select[contains(@name,'data[frs]')]", "label=View all packages");
 		$this->click ("//input[@value='Submit']") ;
-		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View all packages");
 		$this->waitForPageToLoad("30000");
+		$this->assertSelected("//select[contains(@name,'data[frs]')]", "View all packages");
 
 		// Check that SD is technician on trackers but DM isn't
 		$this->click("link=Tracker");
