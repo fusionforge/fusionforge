@@ -97,8 +97,6 @@ if (isset($session_hash)) {
 	session_logout();
 }
 
-$HTML->header(array('title'=>'Login'));
-
 if ($login && !$success) {
 	form_release_key(getStringFromRequest('form_key'));	
 	// Account Pending
@@ -117,10 +115,9 @@ if ($login && !$success) {
 			$error_msg .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), forge_get_config ('forge_name'), util_make_url ("/support/?group_id=1"));
 		}
 	}
-	html_error_top($error_msg);
-	html_warning_top($warning_msg);
-	html_feedback_top($feedback);
 }
+
+$HTML->header(array('title'=>'Login'));
 
 echo '<p>';
 
