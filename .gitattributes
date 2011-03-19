@@ -4839,6 +4839,7 @@ tests/func/Soap/AllTests.php -text
 tests/func/Soap/checks.php -text
 tests/func/Soap/login.php -text
 tests/func/Soap/usergroup.php -text
+tests/func/Surveys/surveysTest.php -text
 tests/func/Tasks/createTaskTest.php -text
 tests/func/Testing/DEBSeleniumRemoteSuite.php -text
 tests/func/Testing/RPMSeleniumRemoteSuite.php -text

@@ -52,8 +52,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		// Create the first message (Message1/Text1).
 		$this->populateStandardTemplate('forums');
 		$this->init();
-		$this->click("link=Forums");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Forums");
 		$this->assertFalse($this->isTextPresent("Permission denied."));
 		$this->assertTrue($this->isTextPresent("open-discussion"));
 		$this->click("link=open-discussion");
@@ -110,23 +109,19 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->logout();
 
 		$this->gotoProject('ProjectA');
-		$this->click("link=Forums");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=open-discussion");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Welcome to open-discussion");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Forums");
+		$this->clickAndWait("link=open-discussion");
+		$this->clickAndWait("link=Welcome to Open-Discussion");
 		$this->click("link=[ reply ]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin('admin');
 		$this->type("body", "Here is my 19823 reply");
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Message Posted Successfully"));
+		$this->clickAndWait("submit");
+		$this->assertTextPresent("Message Posted Successfully");
 		$this->click("link=Welcome to open-discussion");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Here is my 19823 reply"));
+		$this->assertTextPresent("Here is my 19823 reply");
 
 	}
 	

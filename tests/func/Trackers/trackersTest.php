@@ -74,29 +74,23 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->assertTrue($this->isTextPresent("Description1"));
 
 		// Test: Adding a comment and checking that it is recorded.
-		$this->type("details", "This is comment 1");
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Summary1");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("This is comment 1"));
+		$this->type("details", 'This is comment 1');
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Summary1");
+		$this->assertTextPresent('This is comment 1');
 
 		// Test: Adding a second comment and checking that it is recorded.
-		$this->type("details", "Comment 2 added");
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Summary1");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Comment 2 added"));
-		$this->assertTrue($this->isTextPresent("This is comment 1"));
+		$this->type("details", 'Comment 2 \n added');
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Summary1");
+		$this->assertTextPresent('Comment 2 \n added');
+		$this->assertTextPresent("This is comment 1");
 
 		// Test: Adding another comment (chars) and checking that it is recorded.
 		$this->type("details", "This & été");
-		$this->click("submit");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Summary1");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("This & été"));
+		$this->clickAndWait("submit");
+		$this->clickAndWait("link=Summary1");
+		$this->assertTextPresent("This & été");
 
 		// Test: Updating the URL extra field and checking that it is recorded.
 		$this->type("//form[@id='trackermodform']//input[@type='text']", "http://google.com/");
@@ -141,13 +135,11 @@ class CreateTracker extends FForge_SeleniumTestCase
 		$this->click("//tr[@id='field-number']/td[4]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "1");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Element inserted"));
+		$this->clickAndWait("post_changes");
+		$this->assertTextPresent("Element inserted");
 		$this->type("name", "2");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("Element inserted"));
+		$this->clickAndWait("post_changes");
+		$this->assertTextPresent("Element inserted");
 
 		// Testing [#3609]: Select Box does not accept 0 as choice
 		$this->type("name", "0");
