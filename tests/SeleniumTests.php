@@ -25,6 +25,7 @@ class SeleniumTests
 		$suite->addTestFiles(glob("func/Forums/*Test.php"));
 		$suite->addTestFiles(glob("func/News/*Test.php"));
 		$suite->addTestFiles(glob("func/PluginsBlocks/*Test.php"));
+		$suite->addTestFiles(glob("func/PluginsOnlineHelp/*Test.php"));
 		$suite->addTestFiles(glob("func/RBAC/*Test.php"));
 		$suite->addTestFiles(glob("func/Surveys/*Test.php"));
 
