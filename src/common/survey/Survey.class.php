@@ -111,7 +111,7 @@ class Survey extends Error {
 		$group_id = $this->Group->GetID();
 		
 		/* Make old style survey string from array: 1, 2, 3, ..., n */
-		$survey_questions = $this->_makeQuestionString(array_reverse($add_questions));
+		$survey_questions = $this->_makeQuestionString($add_questions);
 
 		$result = db_query_params ('INSERT INTO surveys (survey_title,group_id,survey_questions,is_active) VALUES ($1,$2,$3,$4)',
 					   array (htmlspecialchars($survey_title),
@@ -158,9 +158,6 @@ class Survey extends Error {
 			return false;
 		}
 		
-		if (is_array($add_questions))
-			$add_questions = array_reverse($add_questions);
-			
 		$survey_questions = $this->_updateQuestionString($add_questions, $del_questions);
 		$result = db_query_params ('UPDATE surveys SET survey_title=$1, survey_questions=$2, is_active=$3 WHERE survey_id=$4 AND group_id=$5',
 					   array (htmlspecialchars($survey_title),
