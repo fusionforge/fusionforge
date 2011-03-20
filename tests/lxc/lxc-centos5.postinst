@@ -2,15 +2,13 @@
 
 configure_network()
 {
-if [ $# -ne 5 ]
+rootfs=$1
+hostname=$2
+if [ $# -eq 5 ]
 then
-	exit 1
-else
-	rootfs=$1
-	address=$2
-	netmask=$3
-	gateway=$4
-	hostname=$5
+	address=$3
+	netmask=$4
+	gateway=$5
 	if [ -e $rootfs/etc/sysconfig/network-scripts ]
 	then
 		cat <<EOF > $rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
@@ -33,8 +31,31 @@ EOF
                 cat <<EOF >> $rootfs/etc/hosts
 $address        $hostname
 EOF
+		echo "Network configured with static ip"
 	else
 		exit 2
+	fi
+else
+	if [ -e $rootfs/etc/sysconfig/network-scripts ]
+	then
+		cat <<EOF > $rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+ONBOOT=yes
+BOOTPROTO=dhcp
+USERCTL=no
+EOF
+		cat <<EOF > $rootfs/etc/sysconfig/network
+NETWORKING=yes
+FORWARD_IPV4=yes
+HOSTNAME=$hostname
+GATEWAYDEV=eth0
+EOF
+                cat <<EOF >> $rootfs/etc/hosts
+127.0.1.1       $hostname
+EOF
+		echo "Network configured with dhcp"
+	else
+		exit 3
 	fi
 fi
 }
@@ -83,7 +104,7 @@ EOF
     return 0
 }
 
-options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address:,netmask:,gateway:,pubkey: -- "$@")
+options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address,netmask,gateway,pubkey: -- "$@")
 if [ $? -ne 0 ]; then
         usage $(basename $0)
         exit 1
@@ -119,7 +140,7 @@ rootfs=$path/rootfs
 hostkeydir=/var/lib/lxc/ssh
 [ -d $hostkeydir ] || mkdir $hostkeydir
 
-configure_network $rootfs $address $netmask $gateway $name
+configure_network $rootfs $name $address $netmask $gateway
 if [ $? -ne 0 ]; then
     echo "failed to configure network"
     exit 1

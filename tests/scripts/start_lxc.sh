@@ -49,13 +49,15 @@ then
 				IPMASK=$IPCOSMASK
 				IPGW=$IPCOSGW
 				;;
+			*fgdeb*)
+				LXCTEMPLATE=$LXCDEBTEMPLATE
+				;;
+			*fgcos*)
+				LXCTEMPLATE=$LXCCOSTEMPLATE
+				;;
 		esac
 	fi
 fi
-[ -z $IPBASE ] && exit 2
-[ -z $VEID ] && exit 3
-[ -z $IPMASK ] && exit 4
-[ -z $IPGW ] && exit 5
 
 if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE ]
 then 
@@ -72,12 +74,19 @@ then
 	echo "you need to install template"
 	echo "run: (cd $lxcdir ; sudo make)"
 else
-	sudo /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst \
+	if [ "x$VEID" != "x" ]
+	then 
+		sudo /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst \
 		-p /var/lib/lxc/$HOST -n $HOST \
 		--address=$IPBASE.$VEID \
 		--netmask=$IPMASK \
 		--gateway=$IPGW \
 		--pubkey=$SSHPUBKEY
+	else
+		sudo /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst \
+		-p /var/lib/lxc/$HOST -n $HOST \
+		--pubkey=$SSHPUBKEY
+	fi
 	sudo /usr/bin/lxc-start -n $HOST -d
 fi
 
