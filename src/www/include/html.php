@@ -779,31 +779,31 @@ function site_user_header($params) {
 	*/
 	site_header($params);
 	echo ($HTML->beginSubMenu());
-	$arr_t = array() ;
-	$all_l = array() ;
+	$arr_t = array();
+	$all_l = array();
 
-	$arr_t[] = _('My Personal Page') ;
+	$arr_t[] = _('My Personal Page');
 	$arr_l[] = '/my/' ;
 
-	$arr_t[] = _('Trackers dashboard') ;
-	$arr_l[] = '/my/dashboard.php' ;
+	$arr_t[] = _('Trackers dashboard');
+	$arr_l[] = '/my/dashboard.php';
 
 	if (forge_get_config('use_diary')) {
-		$arr_t[] = _('Diary &amp; Notes') ;
-		$arr_l[] = '/my/diary.php' ;
+		$arr_t[] = _('Diary &amp; Notes');
+		$arr_l[] = '/my/diary.php';
 	}
 
-	$arr_t[] = _('Account Maintenance') ;
-	$arr_l[] = '/account/' ;
+	$arr_t[] = _('Account Maintenance');
+	$arr_l[] = '/account/';
 
-	if (!forge_get_config ('project_registration_restricted')
-			|| forge_check_global_perm ('approve_projects', '')) {
-		$arr_t[] = _('Register Project') ;
-		$arr_l[] = '/register/' ;
+	if (!forge_get_config('project_registration_restricted')
+			|| forge_check_global_perm('approve_projects', '')) {
+		$arr_t[] = _('Register Project');
+		$arr_l[] = '/register/';
 	}
 
-	echo ($HTML->printSubMenu($arr_t, $arr_l, false)) ;
-	plugin_hook ("usermenu", false) ;
+	echo ($HTML->printSubMenu($arr_t, $arr_l, false));
+	plugin_hook("usermenu", false);
 	echo ($HTML->endSubMenu());
 }
 

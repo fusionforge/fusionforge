@@ -2,6 +2,7 @@
 /*
  * http://fusionforge.org
  *
+ * Copyright 2011, Franck Villaume - TrivialDev
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify
@@ -35,58 +36,55 @@ use_javascript('/scripts/codendi/ReorderColumns.js');
 
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {
-    
-    $request =& HTTPRequest::instance();
-    $lm = new WidgetLayoutManager();
-    $vLayoutId = new Valid_UInt('layout_id');
-    $vLayoutId->required();
-    if ($request->valid($vLayoutId)) {
-        $layout_id = $request->get('layout_id');
 
-        $vOwner = new Valid_Widget_Owner('owner');
-        $vOwner->required();
+	$request =& HTTPRequest::instance();
+	$lm = new WidgetLayoutManager();
+	$vLayoutId = new Valid_UInt('layout_id');
+	$vLayoutId->required();
+	if ($request->valid($vLayoutId)) {
+		$layout_id = $request->get('layout_id');
+
+		$vOwner = new Valid_Widget_Owner('owner');
+		$vOwner->required();
         if ($request->valid($vOwner)) {
-            $owner = $request->get('owner');
-            $owner_id   = (int)substr($owner, 1);
-            $owner_type = substr($owner, 0, 1);
-            switch($owner_type) {
-                case WidgetLayoutManager::OWNER_TYPE_USER:
-                    $owner_id = user_getid();
-
-		    		$userm=UserManager::instance();
-		    		$current=$userm->getCurrentUser();
+		$owner = $request->get('owner');
+		$owner_id   = (int)substr($owner, 1);
+		$owner_type = substr($owner, 0, 1);
+		switch($owner_type) {
+			case WidgetLayoutManager::OWNER_TYPE_USER:
+				$owner_id = user_getid();
+				$userm=UserManager::instance();
+				$current=$userm->getCurrentUser();
 		    		echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
-                  //my_header(array('title'=>$title, 'selected_top_tab' => '/my/'));
-                    $lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
-                    site_footer(array());
-                    
-                    break;
-                case WidgetLayoutManager::OWNER_TYPE_GROUP:
-                    $pm = ProjectManager::instance();
-                    if ($project = $pm->getProject($owner_id)) {
-                        $group_id = $owner_id;
-                        $_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
-                        $request->params['group_id'] = $group_id; //bad!
-                        if (user_ismember($group_id, 'A') || user_is_super_user()) {
-							if (HTTPRequest::instance()->get('update') == 'layout') {
-								$title = _("Customize layout");
-							} else {
-								$title = _("Add widgets");
-							}
-                            site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'));
-                            $lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
-                            site_footer(array());
-                        } else {
-                            $GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
+				site_footer(array());
+				break;
+			case WidgetLayoutManager::OWNER_TYPE_GROUP:
+				$pm = ProjectManager::instance();
+				if ($project = $pm->getProject($owner_id)) {
+					$group_id = $owner_id;
+					$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
+					$request->params['group_id'] = $group_id; //bad!
+					if (user_ismember($group_id, 'A') || user_is_super_user()) {
+						if (HTTPRequest::instance()->get('update') == 'layout') {
+							$title = _("Customize layout");
+						} else {
+							$title = _("Add widgets");
+						}
+						site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'));
+						$lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
+						site_footer(array());
+					} else {
+						$GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
+					}
+				}
+				break;
+			default:
+			break;
+			}
+		}
+	}
 } else {
-    exit_not_logged_in();
+	exit_not_logged_in();
 }
 ?>

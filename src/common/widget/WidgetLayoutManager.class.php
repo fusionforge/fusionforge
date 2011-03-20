@@ -19,9 +19,10 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('common/widget/WidgetLayout.class.php');
-require_once('common/widget/Widget.class.php');
+require_once $gfcommon.'widget/WidgetLayout.class.php';
+require_once $gfcommon.'widget/Widget.class.php';
 require_once $gfcommon.'include/preplugins.php';
+
 /**
  * WidgetLayoutManager
  * 
@@ -34,33 +35,31 @@ class WidgetLayoutManager {
 
 	/**
 	 * displayLayout
-	 * 
+	 *
 	 * Display the default layout for the "owner". It my be the home page, the project summary page or /my/ page.
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
 	 */
 	function displayLayout($owner_id, $owner_type) {
 		$sql = "SELECT * from owner_layouts where owner_id=$1 and owner_type=$2";
-		$res = db_query_params($sql,array($owner_id,$owner_type));
+		$res = db_query_params($sql, array($owner_id, $owner_type));
 		if($res && db_numrows($res)<1) {
-			if($owner_type==self::OWNER_TYPE_USER) {
+			if($owner_type = self::OWNER_TYPE_USER) {
 				$this->createDefaultLayoutForUser($owner_id);
 				$this->displayLayout($owner_id,$owner_type);
-			}
-			else {
+			} else {
 				$this->createDefaultLayoutForProject($owner_id,1);
 				$this->displayLayout($owner_id,$owner_type);
 			}
-		}
-		else {
-			$sql = "SELECT l.* 
-				FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id) 
-				WHERE o.owner_type = $1 
-				AND o.owner_id = $2 
+		} else {
+			$sql = "SELECT l.*
+				FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
+				WHERE o.owner_type = $1
+				AND o.owner_id = $2
 				AND o.is_default = 1
 				";
-			$req = db_query_params($sql,array($owner_type,$owner_id));
+			$req = db_query_params($sql, array($owner_type ,$owner_id));
 			if ($data = db_fetch_array($req)) {
 				$readonly = !$this->_currentUserCanUpdateLayout($owner_id, $owner_type);
 //				if (!$readonly) {
@@ -94,16 +93,16 @@ class WidgetLayoutManager {
 					unset($row);
 				}
 				$layout->display($readonly, $owner_id, $owner_type);
-			}      
+			}
 		}
 	}
 
 	/**
 	 * _currentUserCanUpdateLayout
-	 * 
+	 *
+	 * @param	int	owner_id
+	 * @param	char	owner_type
 	 * @return boolean true if the user dan uppdate the layout (add/remove widget, collapse, set preferences, ...)
-	 * @param  owner_id  
-	 * @param  owner_type  
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
 		$readonly = true;
@@ -129,7 +128,7 @@ class WidgetLayoutManager {
 	}
 	/**
 	 * createDefaultLayoutForUser
-	 * 
+	 *
 	 * Create the first layout for the user and add some initial widgets:
 	 * - MyArtifacts
 	 * - MyProjects
@@ -139,12 +138,12 @@ class WidgetLayoutManager {
 	 * - MyMonitoredForums
 	 * - and widgets of plugins if they want to listen to the event default_widgets_for_new_owner
 	 *
-	 * @param  owner_id The id of the newly created user
+	 * @param	int	owner_id The id of the newly created user
 	 */
 	function createDefaultLayoutForUser($owner_id) {
 		$owner_type = self::OWNER_TYPE_USER;
 		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) VALUES (1, 1, $1, $2)";
-		if (db_query_params($sql,array($owner_id,$owner_type))) {
+		if (db_query_params($sql, array($owner_id, $owner_type))) {
 
 			$sql = "INSERT INTO layouts_contents(owner_id, owner_type, layout_id, column_id, name, rank) VALUES ";
 
@@ -171,19 +170,19 @@ class WidgetLayoutManager {
 
 	/**
 	 * createDefaultLayoutForProject
-	 * 
+	 *
 	 * Create the first layout for a new project, based on its parent template.
 	 * Add some widgets based also on its parent configuration and on its service configuration.
 	 *
-	 * @param  group_id  the id of the newly created project
-	 * @param  template_id  the id of the project template
+	 * @param	int	group_id  the id of the newly created project
+	 * @param	int	template_id  the id of the project template
 	 */
 	function createDefaultLayoutForProject($group_id, $template_id) {
 		$pm = ProjectManager::instance();
 		$project = $pm->getProject($group_id);
-		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) 
-			SELECT layout_id, is_default, $1, owner_type 
-			FROM owner_layouts 
+		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type)
+			SELECT layout_id, is_default, $1, owner_type
+			FROM owner_layouts
 			WHERE owner_type = $2
 			AND owner_id = $3
 			";
@@ -203,7 +202,7 @@ class WidgetLayoutManager {
 							$sql = "INSERT INTO layouts_contents(owner_id, owner_type, content_id, layout_id, column_id, name, rank, is_minimized, is_removed, display_preferences) 
 								VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);
 							";
-							db_query_params($sql,array($group_id , self::OWNER_TYPE_GROUP , $content_id ,  $data['layout_id'] ,  $data['column_id'] ,  $data['name'] ,  $data['rank'] ,  $data['is_minimized'] ,  $data['is_removed'] ,  $data['display_preferences'] ));
+							db_query_params($sql, array($group_id , self::OWNER_TYPE_GROUP , $content_id ,  $data['layout_id'] ,  $data['column_id'] ,  $data['name'] ,  $data['rank'] ,  $data['is_minimized'] ,  $data['is_removed'] ,  $data['display_preferences'] ));
 							echo db_error();
 						}
 					}
@@ -214,13 +213,11 @@ class WidgetLayoutManager {
 	}
 
 	/**
-	 * displayAvailableWidgets
-	 * 
-	 * Display all widget that the user can add to the layout
+	 * displayAvailableWidgets - Display all widget that the user can add to the layout
 	 *
-	 * @param  owner_id 
-	 * @param  owner_type 
-	 * @param  layout_id 
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
 		$used_widgets = array();
@@ -555,12 +552,12 @@ class WidgetLayoutManager {
 	/**
 	 * addWidget
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  widget  
-	 * @param  request  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	object	widget
+	 * @param	object	request
 	 */
 	function addWidget($owner_id, $owner_type, $layout_id, $name, &$widget, &$request) {
 		//Search for the right column. (The first used)
@@ -658,11 +655,11 @@ class WidgetLayoutManager {
 	/**
 	 * removeWidget
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  instance_id  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	int	instance_id
 	 */
 	function removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, &$widget) {
 		$sql = "DELETE FROM layouts_contents WHERE owner_type =$1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -675,11 +672,11 @@ class WidgetLayoutManager {
 	/**
 	 * mimizeWidget
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  instance_id  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	int	instance_id
 	 */
 	function mimizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET is_minimized = 1 WHERE owner_type = $1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -690,11 +687,11 @@ class WidgetLayoutManager {
 	/**
 	 * maximizeWidget
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  instance_id  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	int	instance_id
 	 */
 	function maximizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET is_minimized = 0 WHERE owner_type =$1 AND owner_id =$2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -705,11 +702,11 @@ class WidgetLayoutManager {
 	/**
 	 * displayWidgetPreferences
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  instance_id  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	int	instance_id
 	 */
 	function displayWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET display_preferences = 1, is_minimized = 0 WHERE owner_type = $1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -720,11 +717,11 @@ class WidgetLayoutManager {
 	/**
 	 * hideWidgetPreferences
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  instance_id  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	int	instance_id
 	 */
 	function hideWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id) {
 		$sql = "UPDATE layouts_contents SET display_preferences = 0 WHERE owner_type = $1 AND owner_id = $2 AND layout_id = $3 AND name = $4 AND content_id = $5";
@@ -735,17 +732,16 @@ class WidgetLayoutManager {
 	/**
 	 * reorderLayout
 	 *
-	 * @param  owner_id  
-	 * @param  owner_type  
-	 * @param  layout_id  
-	 * @param  name  
-	 * @param  instance_id  
+	 * @param	int	owner_id
+	 * @param	char	owner_type
+	 * @param	int	layout_id
+	 * @param	string	name
+	 * @param	int	instance_id
 	 */
 	function reorderLayout($owner_id, $owner_type, $layout_id, &$request) {
 		$keys = array_keys($_REQUEST);
 		foreach($keys as $key) {
 			if (preg_match('`widgetlayout_col_\d+`', $key)) {
-
 
 				$split = explode('_', $key);
 				$column_id = (int)$split[count($split)-1];
