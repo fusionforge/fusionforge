@@ -21,39 +21,41 @@ then
 		# When HOST is given as an arg, I have to guesse which data to take
 		# depending on the host name
 		case $HOST in
-			*deb*src*)
+			deb*src*)
 				LXCTEMPLATE=$LXCDEBTEMPLATE
 				IPBASE=$IPDEBBASE
 				VEID=$VEIDSEB
 				IPMASK=$IPDEBMASK
 				IPGW=$IPDEBGW
 				;;
-			*deb*)
+			deb*)
 				LXCTEMPLATE=$LXCDEBTEMPLATE
 				IPBASE=$IPDEBBASE
 				VEID=$VEIDDEB
 				IPMASK=$IPDEBMASK
 				IPGW=$IPDEBGW
 				;;
-			*centos*src*)
+			centos*src*)
 				LXCTEMPLATE=$LXCCOSTEMPLATE
 				IPBASE=$IPCOSBASE
 				VEID=$VEIDSRC
 				IPMASK=$IPCOSMASK
 				IPGW=$IPCOSGW
 				;;
-			*centos*)
+			centos*)
 				LXCTEMPLATE=$LXCCOSTEMPLATE
 				IPBASE=$IPCOSBASE
 				VEID=$VEIDCOS
 				IPMASK=$IPCOSMASK
 				IPGW=$IPCOSGW
 				;;
-			*fgdeb*)
+			fgdeb*)
 				LXCTEMPLATE=$LXCDEBTEMPLATE
+				VEID=""
 				;;
-			*fgcos*)
+			fgcos*)
 				LXCTEMPLATE=$LXCCOSTEMPLATE
+				VEID=""
 				;;
 		esac
 	fi
