@@ -102,7 +102,6 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 <input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
 Your OpenID identifier: <input type="text" name="openid_identifier" /> 
 <input type="submit" name="login" value="' . _('Login via OpenID') . '" />
-<button>Submit</button>
 </form>';
 /*
 		$result .= '<form action="' . util_make_url('/plugins/authcas/post-login.php') . '" method="get">
