@@ -143,7 +143,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		if($res) {
 			$row = db_fetch_array_by_row($res, 0);
 			if($row) {
-				$user_id = $row['user_name'];
+				$user_name = $row['user_name'];
 			}
 		}
 		return $user_name;

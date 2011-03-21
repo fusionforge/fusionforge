@@ -271,6 +271,20 @@ Description: collaborative development tool - LDAP authentication plugin
  directory, and syncs some of their personal information from LDAP
  into the FusionForge database.
 
+Package: fusionforge-plugin-authopenid
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, ${misc:Depends}
+Description: collaborative development tool - OpenID consumer authentication plugin
+ FusionForge provides many tools to aid collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, SCM repository, forums, support request helper,
+ web/FTP hosting, release management, etc. All these services are
+ integrated into one web site and managed through a web interface.
+ .
+ This plugin contains an OpenID consumer authentication mechanism for
+ FusionForge. It allows users to authenticate against external OpenID
+ providers.
+
 Package: fusionforge-plugin-blocks
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}

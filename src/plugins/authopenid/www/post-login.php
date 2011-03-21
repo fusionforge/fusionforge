@@ -80,9 +80,11 @@ try {
     		
     		// initiate session
 	    	if ($plugin->isSufficient()) {
+	    		$user = False;
+	    		
 	    		$username = $plugin->getUserNameFromOpenIDIdentity($plugin->openid->identity);
 				if ($username) {
-					$user = $this->startSession($username);
+					$user = $plugin->startSession($username);
 				}
 			
 				if($user) {
