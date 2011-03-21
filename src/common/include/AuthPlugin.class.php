@@ -195,9 +195,14 @@ abstract class ForgeAuthPlugin extends Plugin {
 		return $this->checkSessionToken($token);
 	}
 
+	/**
+	 * Sets the session cookie according to the user in $this->saved_user
+	 */
 	protected function setSessionCookie() {
-		$cookie = session_build_session_token($this->saved_user->getID());
-		session_set_cookie($this->getCookieName(), $cookie, "", forge_get_config('session_expire'));
+		if($this->saved_user) {
+			$cookie = session_build_session_token($this->saved_user->getID());
+			session_set_cookie($this->getCookieName(), $cookie, "", forge_get_config('session_expire'));
+		}
 	}
 
 	/**
