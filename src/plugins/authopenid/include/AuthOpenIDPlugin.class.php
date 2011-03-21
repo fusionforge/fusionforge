@@ -49,6 +49,9 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("close_auth_session");
+		$this->_addHook("usermenu") ;
+		$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
+		$this->_addHook("userisactivecheckboxpost") ; //
 
 		$this->saved_login = '';
 		$this->saved_user = NULL;
@@ -184,7 +187,15 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		forge_set_config_item_bool ('sufficient', $this->name) ;
 	
 	}
-
+	
+	public function usermenu($params) {
+		global $G_SESSION, $HTML;
+		$text = $this->text; // this is what shows in the tab
+		if ($G_SESSION->usesPlugin($this->name)) {
+			//$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
+			echo $HTML->PrintSubMenu (array ($text), array ('/plugins/authopenid/index.php'), array(_('coin pan')));				
+		}
+	}
 }
 
 // Local Variables:
