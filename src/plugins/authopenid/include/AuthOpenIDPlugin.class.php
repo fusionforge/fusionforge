@@ -60,22 +60,7 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->declareConfigVars();
 	}
 
-	function startSession($username) {
-		if ($this->isSufficient() || $this->isRequired()) {
-			$username = $this->getUserIdFromOpenIDIdentity($username);
-			$params = array();
-			$params['username'] = $username;
-			$params['event'] = 'login';
-			plugin_hook('sync_account_info', $params);
-			$user = user_get_object_by_name($username);
-			$this->saved_user = $user;
-			$this->setSessionCookie();
-			return $user;
-		} else {
-			return false;
-		}
-	}
-	
+
 	/**
 	 * Display a form to input credentials
 	 * @param unknown_type $params
@@ -122,9 +107,9 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 			$user = user_get_object($user_id);
 		} else {
 			if ($this->openid && $this->openid->identity) {
-				$user_id = $this->getUserIdFromOpenIDIdentity($this->openid->identity);
-				if ($user_id) {
-					$user = $this->startSession($user_id);
+				$username = $this->getUserNameFromOpenIDIdentity($this->openid->identity);
+				if ($username) {
+					$user = $this->startSession($username);
 				}
 			}
 		}
@@ -146,17 +131,22 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		}
 	}
 
-	protected function getUserIdFromOpenIDIdentity($openid_identity) {
-		$user_id = FALSE;
-		$res = db_query_params('SELECT user_id FROM plugin_authopenid_user_identities WHERE openid_identity=$1',
+	/**
+	 * Enter description here ...
+	 * @param unknown_type $openid_identity
+	 * @return Ambigous <boolean, associative>
+	 */
+	public function getUserNameFromOpenIDIdentity($openid_identity) {
+		$user_name = FALSE;
+		$res = db_query_params('SELECT users.user_name FROM users, plugin_authopenid_user_identities WHERE users.user_id = plugin_authopenid_user_identities.user_id AND openid_identity=$1',
 							    array($openid_identity));
 		if($res) {
 			$row = db_fetch_array_by_row($res, 0);
 			if($row) {
-				$user_id = $row['user_id'];
+				$user_id = $row['user_name'];
 			}
 		}
-		return $user_id;
+		return $user_name;
 	}
 	/**
 	 * What GFUser is logged in?

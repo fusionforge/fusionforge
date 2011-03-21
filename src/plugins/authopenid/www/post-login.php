@@ -71,7 +71,7 @@ try {
         
     // or we are called back by the OpenID provider
     } elseif($plugin->openid->mode == 'cancel') {
-        echo 'User has canceled authentication!';
+        $warning_msg .= _('User has canceled authentication');
     } else {
     	
     	// Authentication should have been attempted by OpenID provider
@@ -80,16 +80,25 @@ try {
     		
     		// initiate session
 	    	if ($plugin->isSufficient()) {
-				$plugin->startSession($plugin->openid->identity);
-			}
-			// redirect to the proper place in the forge
-			if ($return_to) {
-				validate_return_to($return_to);
+	    		$username = $plugin->getUserNameFromOpenIDIdentity($plugin->openid->identity);
+				if ($username) {
+					$user = $this->startSession($username);
+				}
+			
+				if($user) {
+					// redirect to the proper place in the forge
+					if ($return_to) {
+						validate_return_to($return_to);
 	
-				session_redirect($return_to);
-			} else {
-				session_redirect("/my");
-			}
+						session_redirect($return_to);
+					} else {
+						session_redirect("/my");
+					}
+				}
+				else {
+					$warning_msg .= sprintf (_("Unknown user with identity '%s'"),$plugin->openid->identity);
+				}
+	    	}
 		}
     }
     
