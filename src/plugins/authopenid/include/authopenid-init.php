@@ -24,7 +24,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'authcas/include/AuthOpenIDPlugin.class.php' ;
+require_once $gfplugins.'authopenid/include/AuthOpenIDPlugin.class.php' ;
 
 $AuthOpenIDPluginObject = new AuthOpenIDPlugin ;
 
