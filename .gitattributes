@@ -923,6 +923,7 @@ src/plugins/authopenid/3rd-party/lightopenid/example.php -text
 src/plugins/authopenid/3rd-party/lightopenid/openid.php -text
 src/plugins/authopenid/NAME -text
 src/plugins/authopenid/README -text
+src/plugins/authopenid/db/authopenid.sql -text
 src/plugins/authopenid/etc/authopenid.ini -text
 src/plugins/authopenid/include/AuthOpenIDPlugin.class.php -text
 src/plugins/authopenid/include/authopenid-init.php -text

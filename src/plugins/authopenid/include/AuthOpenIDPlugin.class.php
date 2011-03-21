@@ -53,7 +53,6 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->saved_login = '';
 		$this->saved_user = NULL;
 
-		//$this->openid = new LightOpenID;
 		$this->openid = FALSE;
 		
 		$this->openid_identity = FALSE;
@@ -77,27 +76,6 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		}
 	}
 	
-	/*
-	private static $init = false;
-
-	function initCAS() {
-		if (self::$init) {
-			return;
-		}
-
-		phpCAS::client(forge_get_config('cas_version', $this->name),
-			       forge_get_config('cas_server', $this->name),
-			       intval(forge_get_config('cas_port', $this->name)),
-			       '');
-		if (forge_get_config('validate_server_certificate', $this->name)) {
-			// TODO
-		} else {
-			phpCAS::setNoCasServerValidation();
-		}
-
-		self::$init = true;
-	}
-*/
 	/**
 	 * Display a form to input credentials
 	 * @param unknown_type $params
@@ -108,8 +86,6 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 			return true;
 		}
 		$return_to = $params['return_to'];
-
-		//$this->initCAS();
 
 		$result = '';
 
@@ -123,17 +99,9 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 Your OpenID identifier: <input type="text" name="openid_identifier" /> 
 <input type="submit" name="login" value="' . _('Login via OpenID') . '" />
 </form>';
-/*
-		$result .= '<form action="' . util_make_url('/plugins/authcas/post-login.php') . '" method="get">
-<input type="hidden" name="form_key" value="' . form_generate_key() . '"/>
-<input type="hidden" name="return_to" value="' . htmlspecialchars(stripslashes($return_to)) . '" />
-<p><input type="submit" name="login" value="' . _('Login via CAS') . '" />
-</p>
-</form>' ;
-*/
+
 		$params['html_snippets'][$this->name] = $result;
 
-		//$params['transparent_redirect_urls'][$this->name] = util_make_url('/plugins/authcas/post-login.php?return_to='.htmlspecialchars(stripslashes($return_to)).'&login=1');
 	}
 
     /**
@@ -142,8 +110,6 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	 */
 	
 	function checkAuthSession(&$params) {
-		print_r('AuthOpenIDPlugincheckAuthSession');
-		print_r($params);
 		$this->saved_user = NULL;
 		$user = NULL;
 
@@ -153,7 +119,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 			$user_id = $this->checkSessionCookie();
 		}
 		if ($user_id) {
-			$this->saved_user = user_get_object($user_id);
+			$user = user_get_object($user_id);
 		} else {
 			if ($this->openid && $this->openid->identity) {
 				$user_id = $this->getUserIdFromOpenIDIdentity($this->openid->identity);
@@ -181,22 +147,22 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	}
 
 	protected function getUserIdFromOpenIDIdentity($openid_identity) {
-		if ($openid_identity == 'http://www-public.it-sudparis.eu/~berger_o/') {
-			return 'admin';
-		} else {
-			return FALSE;
+		$user_id = FALSE;
+		$res = db_query_params('SELECT user_id FROM plugin_authopenid_user_identities WHERE openid_identity=$1',
+							    array($openid_identity));
+		if($res) {
+			$row = db_fetch_array_by_row($res, 0);
+			if($row) {
+				$user_id = $row['user_id'];
+			}
 		}
+		return $user_id;
 	}
 	/**
 	 * What GFUser is logged in?
 	 * @param unknown_type $params
 	 */
 	/*
-	function fetchAuthUser(&$params) {
-		if ($this->saved_user && $this->isSufficient()) {
-			$params['results'] = $this->saved_user;
-		}
-	}
 
 	function closeAuthSession($params) {
 		$this->initCAS();

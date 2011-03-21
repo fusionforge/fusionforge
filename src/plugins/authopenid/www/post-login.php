@@ -53,7 +53,7 @@ $triggered = getIntFromRequest('triggered');
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
 	// redirect
-	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
+	session_redirect_external('https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
 try {
@@ -66,7 +66,7 @@ try {
 		// We're just called by the login form : redirect to the OpenID provider
         if(isset($_POST['openid_identifier'])) {
             $plugin->openid->identity = $_POST['openid_identifier'];
-            header('Location: ' . $plugin->openid->authUrl());
+            session_redirect_external($plugin->openid->authUrl());
         }
         
     // or we are called back by the OpenID provider
@@ -86,11 +86,9 @@ try {
 			if ($return_to) {
 				validate_return_to($return_to);
 	
-				header ("Location: " . util_make_url($return_to));
-				exit;
+				session_redirect($return_to);
 			} else {
-				header ("Location: " . util_make_url("/my"));
-				exit;
+				session_redirect("/my");
 			}
 		}
     }
