@@ -456,4 +456,18 @@ TODO : document Auth plugins :
                it should return an HTML dialog appened to passed $params['html_snippets']
                it may return a redirection URL appened to  $params['transparent_redirect_urls']
 
+  Hook Name  : check_auth_session
+  Parameters : auth_token ??
+  Locations  : common/include/session.php
+  Description: is there a valid session?
+               it returns a ??? appened to passed $params['results'] :FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT
+
+  Hook Name  : fetch_authenticated_user
+  Parameters : ??
+  Locations  : common/include/session.php
+  Description: what GFUser is logged in?
+               it returns a user object in passed $params['results']
+
+
+
   -- Roland Mas <lolando@debian.org>
