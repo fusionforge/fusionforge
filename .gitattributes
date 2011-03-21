@@ -925,7 +925,7 @@ src/plugins/authopenid/NAME -text
 src/plugins/authopenid/README -text
 src/plugins/authopenid/bin/db-delete.pl -text
 src/plugins/authopenid/bin/db-upgrade.pl -text
-src/plugins/authopenid/db/authopenid.sql -text
+src/plugins/authopenid/db/authopenid-init.sql -text
 src/plugins/authopenid/etc/authopenid.ini -text
 src/plugins/authopenid/include/AuthOpenIDPlugin.class.php -text
 src/plugins/authopenid/include/authopenid-init.php -text
