@@ -51,7 +51,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 	}
 
 	/**
-	 * Display a form to input credentials : default login dialog
+	 * Display a form to input credentials : default login dialog ('display_auth_form' hook)
 	 * @param unknown_type $params
 	 * @return boolean
 	 */

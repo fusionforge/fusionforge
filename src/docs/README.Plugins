@@ -447,4 +447,13 @@ had been written.
 
 TODO : document user_logo (plugin_hook_by_reference) : returns in params['content'] 
 
+TODO : document Auth plugins :
+
+  Hook Name  : display_auth_form
+  Parameters : return_to
+  Locations  : www/include/login-form.php
+  Description: returns a login dialog and/or a redirect URL :
+               it should return an HTML dialog appened to passed $params['html_snippets']
+               it may return a redirection URL appened to  $params['transparent_redirect_urls']
+
   -- Roland Mas <lolando@debian.org>

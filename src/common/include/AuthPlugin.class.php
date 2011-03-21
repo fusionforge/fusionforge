@@ -63,6 +63,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 			break;
 		case 'display_auth_form':
 			// no default implementation, but see AuthBuiltinPlugin::displayAuthForm()
+			//  $params can be passed with a 'return_to' attribute
+			//  it should return an HTML dialog appened to passed $params['html_snippets']
+            //  it may return a redirection URL appened to  $params['transparent_redirect_urls']
 			$this->displayAuthForm($params);
 			break;
 		case 'display_create_user_form':
