@@ -1,3 +1,4 @@
-plugins/authopenid/include              usr/share/@OLDPACKAGE@/plugins/authopenid/
-plugins/authopenid/www              usr/share/@OLDPACKAGE@/plugins/authopenid/
-plugins/authopenid/etc/*.ini 	     etc/@PACKAGE@/config.ini.d/
+plugins/authopenid/include   usr/share/@OLDPACKAGE@/plugins/authopenid/
+plugins/authopenid/www       usr/share/@OLDPACKAGE@/plugins/authopenid/
+plugins/authopenid/etc/*.ini etc/@PACKAGE@/config.ini.d/
+plugins/authopenid/db/*      usr/share/@OLDPACKAGE@/plugins/authopenid/db/
