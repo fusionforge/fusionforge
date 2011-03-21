@@ -86,7 +86,7 @@ EOF
     return 0
 }
 
-options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address,netmask,gateway,pubkey: -- "$@")
+options=$(getopt -o hp:n:c -l help,path:,name:,clean:,address:,netmask:,gateway:,pubkey: -- "$@")
 if [ $? -ne 0 ]; then
         usage $(basename $0)
         exit 1
