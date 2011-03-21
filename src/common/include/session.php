@@ -551,6 +551,10 @@ function session_set() {
 	$id_is_good = false;
 
 	$params = array();
+	// pass the session_ser from cookie to the auth plugins 
+	// (see AuthBuiltinPlugin::checkAuthSession() or likes)
+	// expect FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	// in results
 	$params['auth_token'] = $session_ser;
 	$params['results'] = array();
 	plugin_hook_by_reference('check_auth_session', $params);
@@ -565,6 +569,8 @@ function session_set() {
 		}
 	}
 	if ($seen_yes && !$seen_no) {
+		// see AuthBuiltinPlugin::fetchAuthUser() or likes
+		// expect user object in results
 		$params = array();
 		$params['results'] = NULL;
 		plugin_hook_by_reference('fetch_authenticated_user', $params);
@@ -582,6 +588,7 @@ function session_set() {
 			$G_SESSION=false;
 		}
 	}
+	// TODO: else... what ?
 	
 	$re = RBACEngine::getInstance();
 	$re->invalidateRoleCaches() ;
