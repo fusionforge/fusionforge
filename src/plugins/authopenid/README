@@ -1,0 +1,10 @@
+fusionforge-plugin-authopenid
+-----------------------------
+
+This is meant to be the external OpenID authentication plugin for FusionForge.
+
+-- Olivier Berger
+
+Local Variables:
+mode: readme-debian
+End:
