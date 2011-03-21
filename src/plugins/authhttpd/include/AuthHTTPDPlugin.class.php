@@ -92,6 +92,7 @@ class AuthHTTPDPlugin extends ForgeAuthPlugin {
 			$user = user_get_object_by_name($username);
 		}
 		
+		// TODO : shouldn't this part be factorized as it seems quite common for many plugins ?
 		if ($user) {
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;

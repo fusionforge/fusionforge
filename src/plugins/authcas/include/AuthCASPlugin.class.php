@@ -108,15 +108,19 @@ class AuthCASPlugin extends ForgeAuthPlugin {
 		$this->saved_user = NULL;
 		$user = NULL;
 
+		// FIXME: couldn't we just check parent::checkAuthSession() to take into account auth_token ? or I missed something
+		// if we already have a session/user active, use it
 		$user_id_from_cookie = $this->checkSessionCookie();
 		if ($user_id_from_cookie) {
 			$user = user_get_object($user_id_from_cookie);
 			$this->saved_user = $user;
 			$this->setSessionCookie();
 		} elseif (phpCAS::isAuthenticated()) {
+			// otherwise, use the CAS user
 			$user = $this->startSession(phpCAS::getUser());
 		}
 		
+		// TODO : document this
 		if ($user) {
 			if ($this->isSufficient()) {
 				$this->saved_user = $user;

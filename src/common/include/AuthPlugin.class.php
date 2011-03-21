@@ -30,6 +30,8 @@ define('FORGE_AUTH_NOT_AUTHORITATIVE', 3);
 
 /**
  * Pluggable Authentication plugins base class
+ * 
+ * By default, the session cookie is used
  *
  */
 abstract class ForgeAuthPlugin extends Plugin {
@@ -91,12 +93,23 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 
 	// Default mechanisms
+	
+	
+	/**
+	 * TODO: Enter description here ...
+	 * @var unknown_type
+	 */
 	protected $saved_user;
+	
 	/**
 	 * Is there a valid session?
+	 * 
 	 * @param unknown_type $params
+	 * @return FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	 * TODO : document 'auth_token' param
 	 */
 	function checkAuthSession(&$params) {
+		// check the session cookie/token to get a user_id
 		if (isset($params['auth_token']) && $params['auth_token'] != '') {
 			$user_id = $this->checkSessionToken($params['auth_token']);
 		} else {
@@ -106,7 +119,6 @@ abstract class ForgeAuthPlugin extends Plugin {
 			$this->saved_user = user_get_object($user_id);
 			if ($this->isSufficient()) {
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
 			}
@@ -122,7 +134,11 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	/**
 	 * What GFUser is logged in?
+	 * 
+	 * This will generate a valid forge user (by default, it was generated and cached already in saved_user)
+	 * 
 	 * @param unknown_type $params
+	 * @return array $params['results'] containing user object
 	 */
 	function fetchAuthUser(&$params) {
 		if ($this->saved_user && $this->isSufficient()) {
@@ -160,6 +176,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 	}
 	
 	// Helper functions for individual plugins
+	// FIXME : where is $this->cookie_name set ?
 	protected $cookie_name;
 
 	protected function getCookieName() {
