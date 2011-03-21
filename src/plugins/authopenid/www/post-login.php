@@ -70,7 +70,7 @@ try {
         }
         
     // or we are called back by the OpenID provider
-    } elseif($openid->mode == 'cancel') {
+    } elseif($plugin->openid->mode == 'cancel') {
         echo 'User has canceled authentication!';
     } else {
     	

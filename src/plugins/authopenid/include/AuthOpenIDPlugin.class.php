@@ -37,6 +37,8 @@ require_once $GLOBALS['gfcommon'].'include/User.class.php';
 class AuthOpenIDPlugin extends ForgeAuthPlugin {
 	var $openid;
 	
+	var $openid_identity;
+	
 	function AuthOpenIDPlugin () {
 		global $gfconfig;
 		$this->ForgeAuthPlugin() ;
@@ -53,10 +55,28 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 
 		//$this->openid = new LightOpenID;
 		$this->openid = FALSE;
-			
+		
+		$this->openid_identity = FALSE;
+		
 		$this->declareConfigVars();
 	}
 
+	function startSession($username) {
+		if ($this->isSufficient() || $this->isRequired()) {
+			$username = $this->getUserIdFromOpenIDIdentity($username);
+			$params = array();
+			$params['username'] = $username;
+			$params['event'] = 'login';
+			plugin_hook('sync_account_info', $params);
+			$user = user_get_object_by_name($username);
+			$this->saved_user = $user;
+			$this->setSessionCookie();
+			return $user;
+		} else {
+			return false;
+		}
+	}
+	
 	/*
 	private static $init = false;
 
@@ -120,20 +140,27 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	 * Is there a valid session?
 	 * @param unknown_type $params
 	 */
-	/*
+	
 	function checkAuthSession(&$params) {
-		$this->initCAS();
-
+		print_r('AuthOpenIDPlugincheckAuthSession');
+		print_r($params);
 		$this->saved_user = NULL;
 		$user = NULL;
 
-		$user_id_from_cookie = $this->checkSessionCookie();
-		if ($user_id_from_cookie) {
-			$user = user_get_object($user_id_from_cookie);
-			$this->saved_user = $user;
-			$this->setSessionCookie();
-		} elseif (phpCAS::isAuthenticated()) {
-			$user = $this->startSession(phpCAS::getUser());
+		if (isset($params['auth_token']) && $params['auth_token'] != '') {
+			$user_id = $this->checkSessionToken($params['auth_token']);
+		} else {
+			$user_id = $this->checkSessionCookie();
+		}
+		if ($user_id) {
+			$this->saved_user = user_get_object($user_id);
+		} else {
+			if ($this->openid && $this->openid->identity) {
+				$user_id = $this->getUserIdFromOpenIDIdentity($this->openid->identity);
+				if ($user_id) {
+					$user = $this->startSession($user_id);
+				}
+			}
 		}
 		
 		if ($user) {
@@ -152,7 +179,14 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 			}
 		}
 	}
-*/
+
+	protected function getUserIdFromOpenIDIdentity($openid_identity) {
+		if ($openid_identity == 'http://www-public.it-sudparis.eu/~berger_o/') {
+			return 'admin';
+		} else {
+			return FALSE;
+		}
+	}
 	/**
 	 * What GFUser is logged in?
 	 * @param unknown_type $params
@@ -184,14 +218,15 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	 */
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
-/*
-		forge_define_config_item ('cas_server', $this->name, 'cas.example.com');
-		forge_define_config_item ('cas_port', $this->name, 443);
-		forge_define_config_item ('cas_version', $this->name, '2.0');
+		
+		// Change vs default 
+		forge_define_config_item ('required', $this->name, 'yes');
+		forge_set_config_item_bool ('required', $this->name) ;
 
-		forge_define_config_item('validate_server_certificate', $this->name, 'no');
-		forge_set_config_item_bool('validate_server_certificate', $this->name);
-		*/
+		// Change vs default
+		forge_define_config_item ('sufficient', $this->name, 'yes');
+		forge_set_config_item_bool ('sufficient', $this->name) ;
+	
 	}
 
 }
