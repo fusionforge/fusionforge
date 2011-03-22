@@ -16,7 +16,7 @@ IPCOSDNS=10.194.11.20
 IPCOSMASK=255.255.255.0
 IPCOSGW=10.194.10.1
 
-SSHPUBKEY=~admrsc/.ssh/id_rsa.pub
+SSHPUBKEY=~/.ssh/id_rsa.pub
 
 DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
 VMENGINE=lxc
