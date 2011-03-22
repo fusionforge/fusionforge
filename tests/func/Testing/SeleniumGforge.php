@@ -77,6 +77,11 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 //		$this->test->assertFalse($this->isTextPresent("Warning: Missing argument"));
 //	}
 
+	protected function cron($cmd)
+	{
+		system("/usr/bin/php -q /usr/share/gforge/$cmd");
+	}
+
 	protected function init() {
 		$this->createAndGoto('ProjectA');
 	}
@@ -221,6 +226,20 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Uncategorized Submissions"));
 		}
+	}
+
+	protected function initSvn($project='ProjectA', $user='admin')
+	{
+		// Remove svnroot directory before creating the project.
+		$repo = '/svnroot/'.strtolower($project);
+		if (is_dir($repo)) {
+			system("rm -fr $repo");
+		}
+
+		$this->init($project, $user);
+
+		// Run manually the cron for creating the svn structure.
+		$this->cron("cronjobs/create_scm_repos.php");
 	}
 
 	protected function login($username)
