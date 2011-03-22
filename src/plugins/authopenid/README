@@ -3,6 +3,26 @@ fusionforge-plugin-authopenid
 
 This is meant to be the external OpenID authentication plugin for FusionForge.
 
+If the plugin is activated by a user in its account management page, then 
+he/she may login to FusionForge using OpenID (provided that the plugin is 
+activated on the whole site/forge, of course).
+
+Any number of OpenID identities (URLs) can be used by a forg user to authenticate.
+
+Only one user may use an OpenID identity simultaneously.
+
+OpenID identities must have been added through the account management's OpenID tab, 
+and are associated to the user, provided he/she owns them (i.e. can successfully 
+log-in to these URLs).
+
+The logged-in session is granted full privileges of the user, for now. 
+This should be improved in a later version, as OpenID may not be trusted for critical 
+operations on the forge.
+
+The code depends on the lightopenid library (http://code.google.com/p/lightopenid/)
+
+USE IT AT YOUR OWN RISKS : THIS IS JUST A VERY EARLY PLUGIN, AND NO SECURITY AUDIT WAS CONDUCTED !
+ 
 -- Olivier Berger
 
 Local Variables:

@@ -151,25 +151,7 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		}
 		return $user_name;
 	}
-	/**
-	 * What GFUser is logged in?
-	 * @param unknown_type $params
-	 */
-	/*
 
-	function closeAuthSession($params) {
-		$this->initCAS();
-
-		if ($this->isSufficient() || $this->isRequired()) {
-			$this->unsetSessionCookie();
-			// logs user out from CAS
-			// TODO : make it optional to not mess with other apps' SSO sessions with CAS
-			phpCAS::logoutWithRedirectService(util_make_url('/'));
-		} else {
-			return true;
-		}
-	}
-*/
 	/**
 	 * Terminate an authentication session
 	 * @param unknown_type $params
@@ -188,6 +170,10 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 	
 	}
 	
+	/**
+	 * Displays link to OpenID identities management tab in user's page ('usermenu' hook)
+	 * @param unknown_type $params
+	 */
 	public function usermenu($params) {
 		global $G_SESSION, $HTML;
 		$text = $this->text; // this is what shows in the tab

@@ -918,6 +918,7 @@ src/plugins/authldap/packaging/docs/plugin-authldap -text
 src/plugins/authldap/packaging/install/plugin-authldap -text
 src/plugins/authldap/packaging/links/plugin-authldap -text
 src/plugins/authldap/www/post-login.php -text
+src/plugins/authopenid/3rd-party/README -text
 src/plugins/authopenid/3rd-party/lightopenid/example-google.php -text
 src/plugins/authopenid/3rd-party/lightopenid/example.php -text
 src/plugins/authopenid/3rd-party/lightopenid/openid.php -text
