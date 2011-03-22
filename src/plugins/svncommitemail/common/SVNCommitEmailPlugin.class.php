@@ -29,6 +29,7 @@ class SVNCommitEmailPlugin extends Plugin {
 		$this->text = "Source Code and Mailing List Integration" ;
 		$this->hooks[] = "groupisactivecheckbox" ;
 		$this->hooks[] = "groupisactivecheckboxpost" ;
+		$this->hooks[] = "cmd_for_post_commit_hook";
 	}
 
 	function groupisactivecheckbox (&$params) {
@@ -36,6 +37,12 @@ class SVNCommitEmailPlugin extends Plugin {
 		if ($group->usesPlugin('scmsvn') || $group->usesPlugin('websvn')) {
 			parent::groupisactivecheckbox($params);
 		} 
+	}
+
+	function cmd_for_post_commit_hook (&$params) {
+		$params['hooks'][$this->name] =  '/usr/bin/php -d include_path='.ini_get('include_path').
+			' '.forge_get_config('plugins_path').'/svncommitemail/bin/commit-email.php '.$params['repos'].' "$2" '.
+			$params['unix_group_name'].'-commits@'.forge_get_config('lists_host');
 	}
 }
 
