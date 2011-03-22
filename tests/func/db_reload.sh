@@ -6,7 +6,7 @@ else
 	export PATH=$PATH:/usr/share/gforge/bin/:/usr/share/gforge/utils:/opt/gforge/utils
 	database=`forge_get_config database_name`
 fi
-if [ "x$database" == "x" ]
+if [ "x$database" = "x" ]
 then
 	echo "Forge database name not found"
 	exit 1
