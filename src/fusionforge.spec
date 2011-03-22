@@ -105,7 +105,7 @@ External OpenID authentication plugin for FusionForge.
 %package plugin-cvssyncmail
 Summary: Provides email notifications of changes to CVS repositories
 Group: Development/Tools
-Requires: %{name} >= %{version}, %{name}-scmcvs, python, php
+Requires: %{name} >= %{version}, %{name}-plugin-scmcvs, python, php
 %description plugin-cvssyncmail
 This plugin adds the capability to notify users of changes to CVS repositories
 in FusionForge.
@@ -113,7 +113,7 @@ in FusionForge.
 %package plugin-cvstracker
 Summary: Links CVS log messages to trackers and tasks.
 Group: Development/Tools
-Requires: %{name} >= %{version}, %{name}-scmcvs, php, postgresql
+Requires: %{name} >= %{version}, %{name}-plugin-scmcvs, php, postgresql
 %description plugin-cvstracker
 This is a fusionforge plugin that allows linking CVS log messages to
 trackers and tasks. It will review all commits in a project and search for
@@ -288,14 +288,14 @@ to FusionForge.
 %package plugin-svncommitemail
 Summary: subversion commit email plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion, perl, %{name}-scmsvn >= %{version}
+Requires: %{name} >= %{version}, php, subversion, perl, %{name}-plugin-scmsvn >= %{version}
 %description plugin-svncommitemail
 This RPM installs subversion commit email notification plugin for FusionForge.
 
 %package plugin-svntracker
 Summary: SVNTracker plugin for FusionForge
 Group: Development/Tools
-Requires: %{name} >= %{version}, php, subversion, perl, postgresql, %{name}-scmsvn >= %{version}
+Requires: %{name} >= %{version}, php, subversion, perl, postgresql, %{name}-plugin-scmsvn >= %{version}
 %description plugin-svntracker
 SVNTracker plugin allows linking SVN log messages to Trackers and tasks.
 It will review all commits in a project and search for a specific string
