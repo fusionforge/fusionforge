@@ -246,7 +246,7 @@ class SVNPlugin extends SCMPlugin {
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			system ("svnadmin create $repo") ;
-			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches") ;
+			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
 		}
 
 		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
