@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -74,7 +74,7 @@ class SVNPlugin extends SCMPlugin {
 			echo ' (SVN: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
-	
+
 	function getBlurb () {
 		return '<p>' . _('Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.') . '</p>';
 	}
@@ -224,7 +224,7 @@ class SVNPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
 				print '<iframe src="'.util_make_url ("/scm/viewvc.php/?root=".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
@@ -237,7 +237,7 @@ class SVNPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -248,6 +248,8 @@ class SVNPlugin extends SCMPlugin {
 			system ("svnadmin create $repo") ;
 			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches") ;
 		}
+
+		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
 
 		if (forge_get_config('use_ssh', 'scmsvn')) {
 			$unix_group = 'scm_' . $project->getUnixName() ;
@@ -340,7 +342,7 @@ class SVNPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -366,7 +368,7 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-	
+
 			$d1 = date ('Y-m-d', $start_time - 150000) ;
 			$d2 = date ('Y-m-d', $end_time + 150000) ;
 
@@ -392,7 +394,7 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
-	
+
 			$xml_parser = xml_parser_create();
 			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
@@ -411,7 +413,7 @@ class SVNPlugin extends SCMPlugin {
 					break;
 				}
 			}
-			
+
 			xml_parser_free ($xml_parser);
 
 			// inserting group results in stats_cvs_groups
@@ -428,7 +430,7 @@ class SVNPlugin extends SCMPlugin {
 					return false ;
 				}
 			}
-				
+
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
 
@@ -467,7 +469,7 @@ class SVNPlugin extends SCMPlugin {
 		if (!$project) {
 			return false ;
 		}
-		
+
 		$group_name = $project->getUnixName() ;
 
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar.gz';
@@ -528,7 +530,86 @@ class SVNPlugin extends SCMPlugin {
 		unlink ("$tmp/tarball.tar.gz") ;
 		system ("rm -rf $tmp") ;
 	}
-  }
+
+	function installOrUpdateCmds($project, $unix_group_name, $repos) {
+
+		$hooks = array();
+		$params = array();
+		$params['unix_group_name'] = $unix_group_name;
+		$group = group_get_object_by_name($unix_group_name);
+		$params['group_id'] = $group->getID();
+		$params['repos'] = $repos;
+		$params['hooks'] = &$hooks;
+		plugin_hook('cmd_for_post_commit_hook', $params);
+
+		foreach ($params['hooks'] as $plugin => $cmd ) {
+			if (getenv('sys_localinc')) {
+				$cmd = 'sys_localinc='.getenv(sys_localinc).' '.$cmd;
+			}
+			$contents = @file_get_contents($repos."/hooks/post-commit");
+			if ($project->usesPlugin($plugin)) {
+				if (strstr($contents, "#begin added by $plugin") === false ) {
+					$this->installCmdInHook($repos, $plugin, $cmd);
+				} else {
+					$this->updateCmdInHook($repos, $plugin, $cmd);
+				}
+			} elseif (!$project->usesPlugin($plugin) &&
+			(strstr($contents, "#begin added by $plugin") !== false )) {
+				$this->removeCmdInHook($repos, $plugin);
+			}
+		}
+	}
+
+	function installCmdInHook($repos, $name, $text) {
+
+		if (file_exists($repos.'/hooks/post-commit')) {
+			$FOut = fopen($repos.'/hooks/post-commit', "a+");
+			$Line = '';
+		} else {
+			$FOut = fopen($repos.'/hooks/post-commit', "w");
+			$Line = '#!/bin/sh'."\n"; // add this line to first line or else the script fails
+		}
+
+		if ($FOut) {
+			$Line .= "\n#begin added by $name\n$text\n#end added by $name\n";
+
+			fwrite($FOut, $Line);
+
+			system("chmod 700 $repos/hooks/post-commit");
+			fclose($FOut);
+		}
+	}
+
+	function updateCmdInHook($repos, $plugin, $text) {
+
+		$contents = @file_get_contents($repos."/hooks/post-commit");
+
+		$new = preg_replace("/(#begin added by $plugin\n)(.*)(\n#end added by $plugin)/s", '$1{COMMAND}$3', $contents);
+		$new = str_replace('{COMMAND}', $text, $new);
+
+		if ($contents !== $new) {
+			$fout = fopen($repos.'/hooks/post-commit', "w");
+			fwrite($fout, $new);
+			fclose($fout);
+		}
+	}
+
+	function removeCmdInHook($repos, $plugin) {
+
+		$contents = @file_get_contents($repos."/hooks/post-commit");
+		$new = preg_replace("/#begin added by $plugin\n.*?\n#end added by $plugin/s", '', $contents);
+
+		if ($contents !== $new) {
+			if (preg_match("/^#\!\/bin\/sh(\n+)$/s", $new)) {
+				unlink($repos.'/hooks/post-commit');
+			} else {
+				$fout = fopen($repos.'/hooks/post-commit', "w");
+				fwrite($fout, $new);
+				fclose($fout);
+			}
+		}
+	}
+}
 
 // End of class, helper functions now
 
