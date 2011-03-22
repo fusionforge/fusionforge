@@ -38,6 +38,14 @@ class svntrackerPlugin extends Plugin {
 		$this->hooks[] = "artifact_extra_detail";
 		$this->hooks[] = "task_extra_detail";
 		$this->hooks[] = "update_svn_repository";
+		$this->hooks[] = "cmd_for_post_commit_hook";
+	}
+
+	function groupisactivecheckbox (&$params) {
+		$group = group_get_object($params['group']);
+		if ($group->usesPlugin('scmsvn') || $group->usesPlugin('websvn')) {
+			parent::groupisactivecheckbox($params);
+		}
 	}
 
 	/**
@@ -228,32 +236,8 @@ class svntrackerPlugin extends Plugin {
 	*/
 	function CallHook ($hookname, &$params) {
 		global $group_id, $G_SESSION, $HTML, $use_svntrackerplugin,$aid ;
-		if ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			$group = &group_get_object($group_id);
-			if ($group->usesPlugin('scmsvn')) {
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="checkbox" name="use_svntrackerplugin" value="1" ';
-				// Checked or Unchecked?
-				if ( $group->usesPlugin ( $this->name ) ) {
-					echo 'checked="checked"';;
-				}
-				echo " /><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<strong>Use ".$this->text." Plugin</strong>";
-				echo "</td>";
-				echo "</tr>";
-			}
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			$group = &group_get_object($group_id);
-			if ( getStringFromRequest('use_svntrackerplugin') ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "artifact_extra_detail") {
+
+		if ($hookname == "artifact_extra_detail") {
 			$DBResult = db_query_params ('SELECT * FROM plugin_svntracker_data_master,
 plugin_svntracker_data_artifact WHERE plugin_svntracker_data_artifact.group_artifact_id=$1 AND plugin_svntracker_data_master.holder_id=plugin_svntracker_data_artifact.id ORDER BY svn_date',
 						     array ($aid));
@@ -263,6 +247,9 @@ plugin_svntracker_data_artifact WHERE plugin_svntracker_data_artifact.group_arti
 plugin_svntracker_data_artifact WHERE plugin_svntracker_data_artifact.project_task_id=$1 AND plugin_svntracker_data_master.holder_id=plugin_svntracker_data_artifact.id ORDER BY svn_date',
 						     array ($params['task_id']));
 			$this->getCommitEntries($DBResult, $group_id);
+		} elseif ($hookname == 'cmd_for_post_commit_hook') {
+			$params['hooks'][$this->name] = '/usr/bin/php -d include_path='.ini_get('include_path').
+				' '.forge_get_config('plugins_path').'/svntracker/bin/post.php '.$params['repos'].' "$2"';
 		} /*elseif ($hookname == "update_svn_repository") {
 			$Group = group_get_object($params["group_id"]);
 			if ($Group->usesPlugin("cvstracker")) {
