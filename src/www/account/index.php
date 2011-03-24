@@ -264,6 +264,7 @@ echo $HTML->boxTop(_('Preferences')); ?>
 ?>
 </td></tr>
 <?php 
+// displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 ?>
 <tr><td>
