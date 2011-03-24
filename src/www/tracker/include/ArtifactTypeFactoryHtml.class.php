@@ -80,4 +80,3 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 // End:
 
 ?>
-
