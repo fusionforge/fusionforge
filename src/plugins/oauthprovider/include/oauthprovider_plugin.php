@@ -21,6 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+// TODO : fix missing copyright
+
 class oauthproviderPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
