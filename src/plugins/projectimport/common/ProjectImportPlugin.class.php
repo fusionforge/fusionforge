@@ -44,7 +44,7 @@ class ProjectImportPlugin extends Plugin {
 		$this->hooks[] = "site_admin_user_maintenance_hook";
 	}
 
-	function CallHook ($hookname, $params) {
+	function CallHook ($hookname, &$params) {
 		global $use_projectimportplugin,$G_SESSION,$HTML;
 		/*if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
