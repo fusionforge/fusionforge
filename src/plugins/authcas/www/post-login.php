@@ -48,7 +48,7 @@ $triggered = getIntFromRequest('triggered');
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
 	// redirect
-	session_redirect_external('https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'))
+	session_redirect_external('https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 	//header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
