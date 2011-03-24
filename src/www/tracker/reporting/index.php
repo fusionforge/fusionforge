@@ -30,6 +30,7 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfwww.'tracker/include/ArtifactTypeHtml.class.php';
+require_once $gfwww.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
@@ -126,7 +127,7 @@ $h->header(array('title' => _('Project Activity')));
 </form>
 <p>
 <?php if ($atid) {
-		if (!$area || $area == 'activity') { 
+		if (!$area || $area == 'activity') {
 	?>
 	<img src="trackeract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid"; ?>" width="640" height="480" alt="" />
 	<?php
