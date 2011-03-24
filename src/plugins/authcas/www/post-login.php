@@ -48,7 +48,8 @@ $triggered = getIntFromRequest('triggered');
 if (forge_get_config('use_ssl') && !session_issecure()) {
 	//force use of SSL for login
 	// redirect
-	header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
+	session_redirect_external('https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'))
+	//header('Location: https://'.getStringFromServer('HTTP_HOST').getStringFromServer('REQUEST_URI'));
 }
 
 // Here comes CAS standard magic (which will redirect to the CAS server, etc.)
@@ -61,12 +62,13 @@ if (phpCAS::isAuthenticated()) {
 	}
 	if ($return_to) {
 		validate_return_to($return_to);
-
-		header ("Location: " . util_make_url($return_to));
-		exit;
+		session_redirect($return_to);
+		//header ("Location: " . util_make_url($return_to));
+		//exit;
 	} else {
-		header ("Location: " . util_make_url("/my"));
-		exit;
+		session_redirect("/my");
+		//header ("Location: " . util_make_url("/my"));
+		//exit;
 	}
 } else {
 	if ($login) {		     // The user just clicked the Login button
@@ -86,11 +88,13 @@ if (phpCAS::isAuthenticated()) {
 			if ($return_to) {
 				validate_return_to($return_to);
 				
-				header ("Location: " . util_make_url($return_to));
-				exit;
+				session_redirect($return_to);
+				//header ("Location: " . util_make_url($return_to));
+				//exit;
 			} else {
-				header ("Location: " . util_make_url("/my"));
-				exit;
+				session_redirect("/my");
+				//header ("Location: " . util_make_url("/my"));
+				//exit;
 			}
 		} 
 	}

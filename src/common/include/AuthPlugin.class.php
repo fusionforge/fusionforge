@@ -96,8 +96,9 @@ abstract class ForgeAuthPlugin extends Plugin {
 	
 	
 	/**
-	 * TODO: Enter description here ...
-	 * @var unknown_type
+	 * Current forge user
+	 * 
+	 * @var object GFUser
 	 */
 	protected $saved_user;
 	
@@ -179,6 +180,11 @@ abstract class ForgeAuthPlugin extends Plugin {
 	// FIXME : where is $this->cookie_name set ?
 	protected $cookie_name;
 
+	/**
+	 * Returns the session cookie name for the auth plugin (by default forge_session_AUTHPLUGINNAME)
+	 * 
+	 * @return string
+	 */
 	protected function getCookieName() {
 		if ($this->cookie_name) {
 			return $this->cookie_name;
