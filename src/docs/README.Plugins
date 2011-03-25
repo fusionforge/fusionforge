@@ -1,8 +1,8 @@
-DEBIAN GFORGE PLUGINS HOWTO
+FUSIONFORGE PLUGINS HOWTO
 --------------------------------
 
-Here is a short HOWTO explaining how plugins work in Debian
-GForge, and how to make a new one.
+Here is a short HOWTO explaining how plugins work, and how to make
+a new one.
 
   It was written by Roland Mas <lolando@debian.org>.
 
@@ -307,6 +307,11 @@ had been written.
   Description: Used to provide a plugin specific menu entry in the header
                top menu (after: Login, Logout, My Account).
                See plugin online_help for example of use.
+
+  Hook Name  : htmlhead
+  Locations  : www/include/Layout.class.php (& derived classes)
+  Description: Used to allow plugins to include code in the <head>.
+               See plugin message for example of use.
 
   Hook Name  : javascript
   Locations  : www/include/Layout.class.php

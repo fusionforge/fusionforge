@@ -246,6 +246,10 @@
 	{
 		symlink ("../../plugins/svntracker/www/", "svntracker");
 	}
+	if (!is_dir("message"))
+	{
+		symlink ("../../plugins/message/www/", "message");
+	}
 	if (!is_dir("scmcvs"))
 	{
 		symlink ("../../plugins/scmcvs/www", "scmcvs");

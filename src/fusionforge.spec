@@ -178,6 +178,14 @@ Requires: %{name} >= %{version}, php, mediawiki
 %description plugin-mediawiki
 This is a plugin to integrate MediaWiki within FusionForge.
 
+%package plugin-message
+Summary: Global Information Message plugin for FusionForge
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-message
+This is a plugin to add a global announce message for FusionForge.
+It can be use to warn users for planned or current outage.
+
 %package plugin-online_help
 Summary: online_help plugin for FusionForge
 Group: Development/Tools
@@ -524,6 +532,9 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 #%{__cp} -f %{SOURCE2} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/usr/share/mediawiki/LocalSettings.php
 # insert our own README file
 %{__cp} -f %{SOURCE1} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/README.jlbond
+
+# plugin: message
+%{__ln_s} ../../plugins/message/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/message
 
 # plugin: online_help
 
@@ -879,6 +890,10 @@ fi
 /usr/share/mediawiki/skins/gforge
 /usr/share/mediawiki/skins/GForge.deps.php
 /usr/share/mediawiki/skins/GForge.php
+
+%files plugin-message
+%{FORGE_DIR}/plugins/message
+%{FORGE_DIR}/www/plugins/message
 
 %files plugin-online_help
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/online_help.ini
