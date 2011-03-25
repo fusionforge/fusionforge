@@ -1909,10 +1909,10 @@ src/plugins/mediawiki/packaging/links/plugin-mediawiki -text
 src/plugins/mediawiki/www/LocalSettings.php -text
 src/plugins/mediawiki/www/frame.php -text
 src/plugins/mediawiki/www/plugin_admin.php -text
+src/plugins/oauthprovider/NAME -text
 src/plugins/oauthprovider/README -text
 src/plugins/oauthprovider/bin/db-delete.pl -text
 src/plugins/oauthprovider/bin/db-upgrade.pl -text
-src/plugins/oauthprovider/bin/sayhello -text
 src/plugins/oauthprovider/common/oauthprovider-init.php -text
 src/plugins/oauthprovider/cronjobs/manage_oauthprovider.php -text
 src/plugins/oauthprovider/db/oauthprovider-init.sql -text
@@ -1936,7 +1936,6 @@ src/plugins/oauthprovider/include/fusionforge_oauth_datastore.php -text
 src/plugins/oauthprovider/include/oauthprovider_plugin.php -text
 src/plugins/oauthprovider/include/request_token_api.php -text
 src/plugins/oauthprovider/include/token_api.php -text
-src/plugins/oauthprovider/packaging/control/000source -text
 src/plugins/oauthprovider/packaging/control/222plugin-oauthprovider -text
 src/plugins/oauthprovider/packaging/control/222plugin-oauthprovider.shortdesc -text
 src/plugins/oauthprovider/packaging/dirs/plugin-oauthprovider -text
