@@ -32,7 +32,7 @@ class CompactRessource {
 	public function compactUserLink($username, $user_id) {
 		$ressource_uri = util_make_url('/plugins/oslc/compact/user/'.$username);
 		$url = '<a href="'. util_make_url_u ($username, $user_id) . '"' .
-		' onmouseover="hover(\''. $ressource_uri . '\', \'compact_user_' . $username . '\');" onmouseout="closeHover();">' . 
+		' onmouseover="hover(\''. util_make_url_u ($username, $user_id) . '\', \'compact_user_' . $username . '\');" onmouseout="closeHover();">' . 
 		$username . '</a>';
 		// Add div that will contain the popup
 		$url .= '<div id="compact_user_'.$username.'"></div>';

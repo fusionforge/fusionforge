@@ -36,6 +36,8 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("user_link_with_tooltip"); 
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
+		$this->_addHook("script_accepted_types");
+		$this->_addHook("content_negociated_user_home");		
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -158,7 +160,20 @@ class oslcPlugin extends Plugin {
 			$params['user_link'] = $CR->compactUserLink($params['username'], $params['user_id']);
 		}
 		elseif ($hookname == "javascript_file") {
-			echo '<script type="text/javascript" src="/plugins/oslc/scripts/pluginOSLCHoverScripts.js"></script>'."\n";
+			use_javascript('/plugins/oslc/scripts/pluginOSLCHoverScripts.js');
+		}
+		elseif($hookname == "script_accepted_types"){
+			$script = $params['script']; 
+			if ($script == 'user_home') { 
+				$params['accepted_types'][] = 'application/x-oslc-compact+xml'; 
+			} 
+		}
+		elseif($hookname == "content_negociated_user_home") {
+			$username = $params['username']; 
+			$accept = $params['accept']; 
+			if($accept == 'application/x-oslc-compact+xml') {
+				$params['return'] = '/plugins/oslc/compact/user/'.$username;
+			}
 		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
