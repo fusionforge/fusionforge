@@ -28,6 +28,9 @@ require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';    
 require_once $gfcommon.'include/User.class.php';    
 
+// PEAR::HTTP (for negotiateMimeType())
+require_once('HTTP.php');
+
 $normalized_urlprefix = normalized_urlprefix();
 $pathinfo = substr_replace(getStringFromServer('REQUEST_URI'), '', 0, strlen($normalized_urlprefix)-1);
 $expl_pathinfo = explode('/', $pathinfo);
@@ -36,20 +39,49 @@ if (!$expl_pathinfo[2]) {
 	exit_error(_('No User Name Provided'));
 }
 
+// By default, text/html is accepted
+$accepted_types = array('text/html');
+
+// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
+$hook_params = array();
+$hook_params['script'] = 'user_home';
+$hook_params['accepted_types'] = $accepted_types;
+plugin_hook_by_reference('script_accepted_types', $hook_params);
+if(isset($hook_params['accepted_types'])){
+	$accepted_types = $hook_params['accepted_types'];
+}
+
+// negociate accepted content-type depending on the preferred ones declared by client
+$http=new HTTP();
+$content_type = $http->negotiateMimeType($accepted_types,'text/html');
+
+$username = urldecode($expl_pathinfo[2]);
+
 //get the user object based on the user_name in the URL
-$user =& user_get_object_by_name( urldecode($expl_pathinfo[2]) );
+$user =& user_get_object_by_name( $username );
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
 	exit_error(_('That user does not exist.'));
 
 } else {
+	// if a custom content-type is selected, then redirect to plugin's rendering
+	if($content_type != 'text/html') {
+ 		$hook_params = array();
+        $hook_params['username'] = $username;
+        $hook_params['accept'] = $content_type;
+		$hook_params['return'] = '';
+        plugin_hook_by_reference('content_negociated_user_home', $hook_params);
+        if($hook_params['return'] != ''){
+			$uri = $hook_params['return'];
+	   		session_redirect($uri);
+		}
+	} else { // default HTML view
+		$user_id = $user->getID();
 
-	$user_id = $user->getID();
-
-	//now show the user page
-	include $gfwww.'include/user_home.php';
-
+		//now show the user page
+		include $gfwww.'include/user_home.php';
+	}
 }
 
 // Local Variables:
