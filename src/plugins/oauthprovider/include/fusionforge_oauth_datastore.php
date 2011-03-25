@@ -218,8 +218,8 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	 */
 	function new_consumer_keys()
 	{
-		$key = md5($this->util_randbytes(20));
-		$secret = md5($this->util_randbytes(20));
+		$key = md5(util_randbytes(20));
+		$secret = md5(util_randbytes(20));
 		return array($key, $secret);
 	}
 
@@ -450,7 +450,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 	protected function new_token($consumer, $token_type, $role_id=0) {
 		$t_token_table = $this->token_table_name($token_type);
 
-		$random = $this->util_randbytes(32);
+		$random = util_randbytes(32);
 		$hash = sha1($random);
 		$key = substr($hash, 0, 20);
 		$secret = substr($hash, 20, 40);
