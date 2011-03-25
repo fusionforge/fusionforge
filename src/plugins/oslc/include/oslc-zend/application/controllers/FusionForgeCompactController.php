@@ -104,7 +104,7 @@ class FusionForgeCompactController extends CompactController {
 		$user_obj = user_get_object_by_name($params['user']);
 		$this->view->user = $user_obj;
 		
-		$this->getResponse()->setHeader('Content-Type', 'xml');
+		$this->getResponse()->setHeader('Content-Type', 'application/x-oslc-compact+xml');
 	}
 	
 	/**
@@ -121,7 +121,7 @@ class FusionForgeCompactController extends CompactController {
 
 		$user_obj = user_get_object_by_name($params['user']);
 		$this->view->user = $user_obj;
-		//print($this->actionMimeType); die();
+
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 }
