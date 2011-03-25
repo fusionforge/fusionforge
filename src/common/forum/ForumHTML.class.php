@@ -437,8 +437,8 @@ class ForumHTML extends Error {
 				/*
 					If it this is the message being displayed, don't show a link to it
 				*/
-				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
-					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'&amp;group_id='.$group_id).'">';
+				if ($current_message != $msg_arr[$msg_id][$i]->getID()) {
+					$ah_begin='<a href="'.util_make_url ('/forum/message.php?msg_id='. $msg_arr[$msg_id][$i]->getID() .'&amp;group_id='.$group_id).'">';
 					$ah_end='</a>';
 				} else {
 					$ah_begin='';
@@ -450,7 +450,7 @@ class ForumHTML extends Error {
 				/*
 					See if this message is new or not
 				*/
-				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) {
+				if ($this->Forum->getSavedDate() < $msg_arr[$msg_id][$i]->getPostDate()) {
 					$bold_begin='<strong>';
 					$bold_end='</strong>';
 				} else {
@@ -458,15 +458,15 @@ class ForumHTML extends Error {
 					$bold_end='';
 				}
 
-				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
-					'<td>'.util_make_link_u ($msg_arr["$msg_id"][$i]->getPosterName(),$msg_arr["$msg_id"][$i]->getPosterID(),$msg_arr["$msg_id"][$i]->getPosterRealName()) .'</td>'.
-				'<td>'.date(_('Y-m-d H:i'), $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
+				$ret_val .= $bold_begin.$msg_arr[$msg_id][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
+					'<td>'.util_display_user($msg_arr[$msg_id][$i]->getPosterName(),$msg_arr[$msg_id][$i]->getPosterID(),$msg_arr[$msg_id][$i]->getPosterRealName()) .'</td>'.
+					'<td>'.date(_('Y-m-d H:i'), $msg_arr[$msg_id][$i]->getPostDate() ).'</td></tr>';
 
-				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
+				if ($msg_arr[$msg_id][$i]->hasFollowups() > 0) {
 					/*
 						Call yourself, incrementing the level
 					*/
-					$ret_val .= $this->showSubmessages($msg_arr,$msg_arr["$msg_id"][$i]->getID(),($level+1));
+					$ret_val .= $this->showSubmessages($msg_arr,$msg_arr[$msg_id][$i]->getID(),($level+1));
 				}
 			}
 		}
