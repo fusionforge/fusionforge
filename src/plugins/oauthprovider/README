@@ -3,4 +3,43 @@ Implementation of an OAuth provider for FusionForge.
 Depends on OAuth PHP library (http://code.google.com/p/oauth/source/browse/#svn%2Fcode%2Fphp) as of rev. 622
 (packaged in Debian in liboauth-php package).
 
+To test the OAuth plugin, you may use the 'command-line.php' provided script :
+
+1. Create a consumer in FF : this will generate a key and secret that you'll need to pass to command-line.php 
+(for instance, let's assume that you get 2a879dc112593828254c5127381d1b9a and 6cd7286abbdd0740c6fdfefcae3c8ec2, 
+that we'll use in the example runs below) :
+
+2. Generate a request token for that consumer (assuming that the forge runs on https://192.168.122.90) :
+
+ $ php example/command-line.php request_token 2a879dc112593828254c5127381d1b9a 6cd7286abbdd0740c6fdfefcae3c8ec2
+ 
+You'll get :
+
+ received request token :
+  $oauth_token : 2a38e3972926eb155514
+  $oauth_token_secret : 0920d9d074892dc96697
+
+ Go to the following URL in your FusionForge session to authorize the request token:
+  https://192.168.122.90/plugins/oauthprovider/authorize.php?oauth_token=2a38e3972926eb155514
+
+ Upon completion, you will be able request access tokens with the authorized token.
+
+3. Follow the provided instructions to access the authorization dialog (here by browsing 
+https://192.168.122.90/plugins/oauthprovider/authorize.php?oauth_token=2a38e3972926eb155514 with a valid 
+FusionForge session) where you'll be prompted for a role to grant to the consumer for that request token.
+
+4. Once you've authorized it, you may use your consumer and your request token's keys and secrets, to request 
+an access token :
+ 
+ $ php example/command-line.php access_token 2a879dc112593828254c5127381d1b9a 6cd7286abbdd0740c6fdfefcae3c8ec2 2a38e3972926eb155514 0920d9d074892dc96697
+ 
+5. Hopefully, you'll get an access token :
+
+ received access token :
+  $oauth_token : 471cd074f441556f70bc
+  $oauth_token_secret : 72a2fa4d05b5b9c47c3a
+
+6. You may now use this access token to access FusionForge scripts.
+
+
 -- OlivierBerger

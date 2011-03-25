@@ -46,16 +46,16 @@ if($admin_access)	{
 }
 
 $headers = array(
-	$plugin_oauthprovider_consumer_name,
-	$plugin_oauthprovider_key,
-	$plugin_oauthprovider_secret,
-	$plugin_oauthprovider_role,
-	$plugin_oauthprovider_user,
-	$plugin_oauthprovider_time_stamp,
+	_('Consumer name'),
+	_('Key'),
+	_('Secret'),
+	_('Role'),
+	_('User'),
+	_('Authorized on'),
 	'DELETE'
 	);
-echo $HTML->boxTop($plugin_oauthprovider_access_tokens);
-echo $HTML->boxBottom();
+echo $HTML->boxTop(_('Access Tokens'));
+
 echo $HTML->listTableTop($headers);
 
 $i = 0;
@@ -63,7 +63,7 @@ foreach( $t_tokens as $t_token ) {
 	$consumer = OauthAuthzConsumer::load($t_token->getConsumerId());
 	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 	if($admin_access)	{
-		echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id. '&consumer_id=' . $t_token->getConsumerId(),$consumer->getName()).'</td>';
+		echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
 	}else {
 		echo '<td>'.$consumer->getName().'</td>';
 	}
@@ -86,11 +86,13 @@ foreach( $t_tokens as $t_token ) {
 	}
 	echo '<td>'.$user.'</td>';
 	echo '<td>'.date(DATE_RFC822, $t_token->gettime_stamp()) .'</td>';
-	echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?type='.$type.'&id='.$id.'&token_id=' . $t_token->getId() . '&token_type=access' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), $plugin_oauthprovider_delete). '</td>';
+	echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?token_id=' . $t_token->getId() . '&token_type=access' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), _('Delete')). '</td>';
 	echo '</tr>';
 	$i++;
 }
 	
 echo $HTML->listTableBottom();
+
+echo $HTML->boxBottom();
 
 site_project_footer(array());

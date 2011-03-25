@@ -36,7 +36,7 @@ class oauthproviderPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook("manage_menu");
+		$this->_addHook("site_admin_option_hook");
 		$this->_addHook("account_menu");
 	}
 
@@ -45,9 +45,8 @@ class oauthproviderPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("oauthprovider")) {
-				$param = '?type=user&id=' . $G_SESSION->getId(); // we indicate the part we're calling is the user one
-				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/oauthprovider/index.php' . $param ));				
+				echo  $HTML->PrintSubMenu (array ($text),
+						  array ('/plugins/oauthprovider/index.php'), array(''));				
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -133,7 +132,7 @@ class oauthproviderPlugin extends Plugin {
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>' ;
-				echo util_make_link ("/plugins/oauthprovider/index.php?id=$userid&type=user",
+				echo util_make_link ("/plugins/oauthprovider/index.php?type=user",
 						     _('View Personal oauthprovider')
 					);
 				echo '</p>';
@@ -147,8 +146,8 @@ class oauthproviderPlugin extends Plugin {
 						     _('oauthprovider Admin')).'</p>' ;
 			}
 		}
-		elseif ($hookname == "manage_menu")	{
-			$this->manage_menu();
+		elseif ($hookname == "site_admin_option_hook")	{
+			$this->site_admin_option_hook();
 		}						
 		elseif ($hookname == "account_menu")	{
 			$this->account_menu();
@@ -158,8 +157,8 @@ class oauthproviderPlugin extends Plugin {
 		} 
 	}
 	
-	function manage_menu( ) {
-		return array( '<a href="' . $gfplugins.'oauthprovider/www/manage.php' . '">' . $plugin_oauthprovider_menu_advanced_summary. '</a>', );
+	function site_admin_option_hook( ) {
+		echo '<li>'. util_make_link ('/plugins/oauthprovider/consumer.php', _('Manage OAuth consumers'). ' [' . _('OAuth provider plugin') . ']'). '</li>';
 	  }
 	
 	function account_menu( ) {

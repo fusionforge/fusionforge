@@ -38,12 +38,8 @@ require_once 'checks.php';
 //non-admin users shud be able to do authorisations
 //session_require_global_perm('project_admin');
 
+$pluginname = 'oauthprovider';
 
-?>
-
-<h2><?php echo $plugin_oauthprovider_pending_authorizations ?></h2>
-
-<?php
 
 try {
 	
@@ -54,6 +50,10 @@ try {
 	//  echo "token : $p_token";
 
 	$t_request_token = OauthAuthzRequestToken::load_by_key($p_token);
+
+	oauthprovider_CheckUser();
+	
+	echo '<h2>'. _('Pending authorization requests via OAuth') .'</h2>';
 	
 	if($type=="group") $groupname = $name;
 	else $groupname = null;
@@ -63,9 +63,24 @@ try {
 	//echo "group: ".$groupid;
 	$user = user_get_object($user_id);
 	$roles = array () ;
-	foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($user) as $role) {
-		if ($role->getHomeProject() && $role->getHomeProject()->getID() == $group->getID()) {
-			$roles[] = $role ;
+	
+	foreach (RBACEngine::getInstance()->getAvailableRolesForUser($user) as $role) {
+		//print_r('role :');
+		//print_r($role);
+		
+		if ($role->getHomeProject()) {
+			if($groupname) {
+				if ($role->getHomeProject()->getID() == $group->getID()) {
+					print_r('role :');
+					print_r($role);
+				}
+			}
+			else {
+				print_r('role :');
+				print_r($role);
+				$roles[] = $role ;
+			}
+			
 		}
 	}
 	
@@ -94,37 +109,37 @@ try {
 		}
 	
 		// Now we can display the pending request token and point to the authorization confirmation dialog
-	echo sprintf( $plugin_oauthprovider_pending_authorization, $consumer->getName(), $date ) . ' ';
+	echo sprintf( _('Consumer <b>"%s"</b> wants to be authorized to access Fusionforge on your behalf (asked %s)'), $consumer->getName(), $date ) . ' ';
 	echo "<table><tr><td>";
 	if( isset($time_stamp) ) {
 		// the time_stamp is recent enough so we can allow authorization
 		//echo "<br />";
-		echo '<form action="token_authorize.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'" method="post">';
+		echo '<form action="token_authorize.php" method="post">';
 		echo '<input type="hidden" name="plugin_oauthprovider_token_authorize_token" value="'.form_generate_key().'"/>';
 		echo '<input type="hidden" name="token_id" value="'.$t_request_token->getId().'"/>';
 		echo '<input type="hidden" name="callback_url" value="'.urlencode($callback_url).'"/>';
 			
 		echo "<table><tr><td>Role:</td><td><select name=\"rolelist\">";
 		foreach($roles as $role)	{
-			echo '<option value="'.$role->getID().'">'.$role->getName().'</option>';
+			echo '<option value="'.$role->getID().'">'.$role->getDisplayableName().'</option>';
 		}
 		echo "</select></td>";
 		
-		echo '<td><input type="submit" value="'. $plugin_oauthprovider_authorize .'"/></td></tr></table>';
+		echo '<td><input type="submit" value="'. _('Authorize') .'"/></td></tr></table>';
 		echo '</form>';
 		
 	}
 	else {
 		// just display an inactive authorization link
-		print "<a href=\"\">". $plugin_oauthprovider_authorize ."</a>" ;
+		print "<a href=\"\">". _('Authorize') ."</a>" ;
 	}
 	echo '</td><td>';
 	// Denying it is always an option
-	echo '<form action="token_deny.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'" method="post">';
+	echo '<form action="token_deny.php" method="post">';
 	echo '<input type="hidden" name="plugin_oauthprovider_token_deny_token" value="'.form_generate_key().'"/>';
 	echo '<input type="hidden" name="token_id" value="'.$t_request_token->getId().'"/>';
 	echo "<table><tr><td><b>OR</b></td>";
-	echo '<td><input type="submit" value="'. $plugin_oauthprovider_deny .'"/></td></tr></table>';
+	echo '<td><input type="submit" value="'. _('Deny') .'"/></td></tr></table>';
 	echo '</form>';
 	echo '</td></tr></table>'
 	?>

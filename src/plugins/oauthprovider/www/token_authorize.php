@@ -36,8 +36,9 @@ try {
 	$f_callback_url = urldecode(getStringFromPost( 'callback_url' ));
 	$f_role_id = getStringFromPost( 'rolelist' );
 
-	//  echo "token_id : $f_token_id \n";
-	//  echo "callback_url: $f_callback_url \n";
+	//echo "token_id : $f_token_id \n";
+	//echo "callback_url: $f_callback_url \n";
+	//exit(0);
 	$t_token = OauthAuthzRequestToken::load( $f_token_id );
 
 	if($t_token) {
@@ -56,9 +57,14 @@ try {
 
 		form_release_key(getStringFromRequest('plugin_oauthprovider_token_authorize_token'));
 		
+		if($f_callback_url) {
 		//echo "Redirect : $callback_url?oauth_token=$p_token \n";exit;
 		Header("Location: $f_callback_url?oauth_token=$p_token");
 		//session_redirect( $f_callback_url . "?oauthprovider_token=$p_token" );
+		}
+		else {
+			echo "Succesfully authorized oauth_token:". $p_token ."\n";
+		}
 	}
 
 } catch (OAuthException $e) {

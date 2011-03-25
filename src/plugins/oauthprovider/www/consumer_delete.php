@@ -37,7 +37,7 @@ $f_consumer_id = getStringFromGet( 'consumer_id' );
 
 $t_consumer = OauthAuthzConsumer::load( $f_consumer_id );
 
-//helper_ensure_confirmed( sprintf( $plugin_oauthprovider_ensure_consumer_delete, $t_consumer->getName() ), $plugin_oauthprovider_delete_consumer );
+//helper_ensure_confirmed( sprintf( $plugin_oauthprovider_ensure_consumer_delete, $t_consumer->getName() ), _('Delete')_consumer );
 
 $t_consumer->delete();
 

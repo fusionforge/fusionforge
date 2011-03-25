@@ -26,6 +26,7 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
 
 form_key_is_valid(getStringFromRequest('plugin_oauthprovider_token_delete_token'));
 
@@ -42,10 +43,10 @@ else if ($f_type == 'request'){
 	$t_token = OauthAuthzRequestToken::load( $f_token_id );
 }
 
-//helper_ensure_confirmed( sprintf( $plugin_oauthprovider_ensure_token_delete, $t_token->key ), $plugin_oauthprovider_delete_token );
+//helper_ensure_confirmed( sprintf( $plugin_oauthprovider_ensure_token_delete, $t_token->key ), _('Delete')_token );
 //equivalent for fusionforge not found yet
 
 $t_token->delete();
 
 form_release_key(getStringFromRequest('plugin_oauthprovider_token_delete_token'));
-session_redirect( '/plugins/'.$pluginname.'/'. $f_type.'_tokens.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname);
+session_redirect( '/plugins/'.$pluginname.'/'. $f_type.'_tokens.php');

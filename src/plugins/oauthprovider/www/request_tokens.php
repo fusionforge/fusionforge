@@ -27,6 +27,8 @@ require_once $gfwww.'include/pre.php';
 
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
 /*if($type!=admin)
 {
 	exit_error("Only the Project Admin can access this page.", 'oauthprovider');
@@ -35,24 +37,25 @@ require_once 'checks.php';
 if(forge_check_global_perm ('forge_admin'))	$admin_access=true;
 
 if($admin_access)	{
+	oauthprovider_CheckSiteAdmin();
 	$t_tokens = OauthAuthzRequestToken::load_all();
 }else {
+	oauthprovider_CheckUser();
 	$t_tokens = OauthAuthzRequestToken::load_all(user_getid());
 }
 
 $headers = array(
-	$plugin_oauthprovider_consumer_name,
-	$plugin_oauthprovider_key,
-	$plugin_oauthprovider_secret,
-	$plugin_oauthprovider_authorized,
-	$plugin_oauthprovider_role,
-	$plugin_oauthprovider_user,
-	$plugin_oauthprovider_time_stamp,
+	_('Consumer name'),
+	_('Key'),
+	_('Secret'),
+	_('Authorized'),
+	_('Role'),
+	_('User'),
+	_('Authorized on'),
 	'DELETE'
 	);
 
-echo $HTML->boxTop($plugin_oauthprovider_request_tokens);
-echo $HTML->boxBottom();
+echo $HTML->boxTop(_('Request Tokens'));
 echo $HTML->listTableTop($headers);
 
 $i=0;
@@ -60,7 +63,7 @@ foreach( $t_tokens as $t_token ) {
 	$consumer = OauthAuthzConsumer::load($t_token->getConsumerId());
 	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 	if($admin_access)	{
-		echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&token_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
+		echo '<td>'.util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_token->getConsumerId(), $consumer->getName()).'</td>';
 	}else {
 		echo '<td>'.$consumer->getName().'</td>';
 	}
@@ -86,13 +89,14 @@ foreach( $t_tokens as $t_token ) {
 	}
 	echo '<td>'.$user.'</td>';
 	echo '<td>'.date(DATE_RFC822, $t_token->gettime_stamp()) .'</td>';
-	echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname.'&token_id=' . $t_token->getId() . '&token_type=request' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), $plugin_oauthprovider_delete).'</td>';
+	echo '<td>'.util_make_link('/plugins/'.$pluginname.'/token_delete.php?token_id=' . $t_token->getId() . '&token_type=request' . '&plugin_oauthprovider_token_delete_token='.form_generate_key(), _('Delete')).'</td>';
 	echo '</tr>';
 	$i++;
 	
 }
 
 echo $HTML->listTableBottom();
+echo $HTML->boxBottom();
 
 //html_page_bottom1( __FILE__ );
 site_project_footer(array());

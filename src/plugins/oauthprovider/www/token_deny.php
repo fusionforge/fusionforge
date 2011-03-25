@@ -28,6 +28,8 @@ require_once $gfwww.'include/pre.php';
 
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
 // deletes a request token if the users refuses to authorize it for a consumer
 form_key_is_valid(getStringFromRequest('plugin_oauthprovider_token_deny_token'));
 
@@ -47,11 +49,13 @@ try {
 
     $t_token->delete();
     
+    oauthprovider_CheckUser();
+    
     ?>
 
-<h2><?php echo $plugin_oauthprovider_authorization_denied ?></h2>
+<h2><?php echo _('Authorization Denied') ?></h2>
 
-<p><?php echo sprintf( $plugin_oauthprovider_denied_consumer_authorization, $consumer->getName() )?></p>
+<p><?php echo sprintf( _('You have denied Consumer "%s" access to Fusionforge on your behalf. The pending OAuth token request has been deleted.'), $consumer->getName() )?></p>
 
 <?php
 
@@ -65,3 +69,7 @@ try {
 	exit_error( "Error trying to deny/delete token!", 'oauthprovider' );
 	
 }
+
+site_project_footer(array());
+
+?>
