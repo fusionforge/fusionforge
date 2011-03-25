@@ -26,6 +26,10 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
+oauthprovider_CheckSiteAdmin();
+
 session_require_global_perm('forge_admin');
 
 $f_consumer_id = getIntFromGet( 'consumer_id' );
@@ -39,41 +43,42 @@ $i = 0;
 <table class="width75" align="center" cellspacing="1">
 
 <tr>
-<td class="form-title" colspan="2"><?php echo $plugin_oauthprovider_manage_consumer ?></td>
+<td class="form-title" colspan="2"><?php echo _('Manage Consumer') ?></td>
 <td class="right">
 <?php
-	print util_make_link('/plugins/'.$pluginname.'/index.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname , $plugin_oauthprovider_back);
+	print util_make_link('/plugins/'.$pluginname.'/consumer.php' , _('Back'));
 ?>
 </td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_name ?></td>
+
+<td class="category"><?php echo _('Name') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getName() ) ?></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_url ?></td>
+<td class="category"><?php echo _('URL') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getUrl() ) ?></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_desc ?></td>
+<td class="category"><?php echo _('Description') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getDesc() ) ?></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_email ?></td>
+<td class="category"><?php echo _('Email') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->getEmail() ) ?></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_key ?></td>
+<td class="category"><?php echo _('Key') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->key ) ?></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_secret ?></td>
+<td class="category"><?php echo _('Secret') ?></td>
 <td colspan="2"><?php echo ( $t_consumer->secret ) ?></td>
 </tr>
 
@@ -85,14 +90,14 @@ $i = 0;
 
 <tr>
 <td colspan="1">
-<form action="<?php echo 'consumer_update_page.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname . '&consumer_id=' . $t_consumer->getId() ?>" method="post">
-	<input type="submit" value="<?php echo $plugin_oauthprovider_update_consumer ?>"/>
+<form action="<?php echo 'consumer_update_page.php?consumer_id=' . $t_consumer->getId() ?>" method="post">
+	<input type="submit" value="<?php echo _('Update Consumer') ?>"/>
 </form>
 </td>
 <td colspan="1">
-<form action="<?php echo 'consumer_delete.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname . '&consumer_id=' . $t_consumer->getId() ?>" method="post">
+<form action="<?php echo 'consumer_delete.php?consumer_id=' . $t_consumer->getId() ?>" method="post">
 	<?php echo '<input type="hidden" name="plugin_oauthprovider_consumer_delete_token" value="'.form_generate_key().'"/>' ?>
-	<input type="submit" value="<?php echo $plugin_oauthprovider_delete_consumer ?>"/>
+	<input type="submit" value="<?php echo _('Delete Consumer') ?>"/>
 </form>
 </td>
 </tr>

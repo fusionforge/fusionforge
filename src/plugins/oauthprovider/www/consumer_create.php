@@ -28,6 +28,9 @@ require_once $gfwww.'include/pre.php';
 
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
+global $feedback;
 
 if(!form_key_is_valid(getStringFromRequest('plugin_oauthprovider_consumer_create_token')))	{
 	exit_form_double_submit('admin');
@@ -43,9 +46,12 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 
 	if (($msg=OauthAuthzConsumer::check_consumer_values($f_consumer_name, $f_consumer_url, $f_consumer_desc, $f_consumer_email))!=null) {
 		//$missing_params[] = _('"Consumer Name"');
-		echo "<p><font color=\"#ff0000\">.$msg.</font></p>"; 
+		$feedback .= $msg; 
 		//exit_missing_param('', $missing_params,'oauthprovider');
 		form_release_key(getStringFromRequest('plugin_oauthprovider_consumer_create_token'));
+		
+		//site_admin_header(array('title'=>_('Create OAuth consumer')));
+		
 		include 'consumer.php';
 	}
 	else {
@@ -60,5 +66,5 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 
 		form_release_key(getStringFromRequest('plugin_oauthprovider_consumer_create_token'));
 
-		session_redirect( '/plugins/'.$pluginname.'/consumer.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname);
+		session_redirect( '/plugins/'.$pluginname.'/consumer.php');
 	}

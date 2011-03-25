@@ -26,6 +26,7 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
 
 form_key_is_valid(getStringFromRequest('plugin_oauthprovider_consumer_delete_token'));
 
@@ -41,4 +42,4 @@ $t_consumer = OauthAuthzConsumer::load( $f_consumer_id );
 $t_consumer->delete();
 
 form_release_key(getStringFromRequest('plugin_oauthprovider_consumer_delete_token'));
-session_redirect( '/plugins/'.$pluginname.'/index.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname);
+session_redirect( '/plugins/'.$pluginname.'/consumer.php');

@@ -27,7 +27,8 @@ global $gfwww;
 require_once('../../../env.inc.php');
 require_once '../checks.php';	
 
-	
+oauthprovider_CheckUser();
+
 ?>
 
 <h3>OAuth endpoints</h3>

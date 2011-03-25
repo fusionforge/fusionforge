@@ -25,6 +25,10 @@
 require_once('../../env.inc.php');
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
+oauthprovider_CheckUser();
+
 ?>
 
 <h3>OAuth endpoints</h3>
@@ -59,13 +63,13 @@ require_once 'checks.php';
 <?php
 //global $plugin_oauthprovider_consumers, $plugin_oauthprovider_request_tokens;
 # Create a basic href link to the manage.php plugin page
-if(($type == 'admin')||(forge_check_global_perm ('forge_admin'))	){
-	echo '<a href="', '/plugins/'.$pluginname.'/consumer.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname , '">', 'Consumers', '</a> <br>';
+if( forge_check_global_perm ('forge_admin') ){
+	echo util_make_link('/plugins/'.$pluginname.'/consumer.php', _('Consumers')). ' <br />';
 }
 
 
-echo '<a href="', '/plugins/'.$pluginname.'/request_tokens.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname , '">', 'Request tokens', '</a><br> ';
-echo '<a href="', '/plugins/'.$pluginname.'/access_tokens.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname , '">', 'Access tokens', '</a><br> ';
+echo '<a href="', '/plugins/'.$pluginname.'/request_tokens.php?type='.$type.'&id='.$id , '">', 'Request tokens', '</a><br> ';
+echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php', _('Access tokens')).'<br /> ';
 
 //html_page_bottom();
 site_project_footer(array());

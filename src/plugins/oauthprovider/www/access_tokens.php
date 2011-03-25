@@ -29,13 +29,19 @@ require_once $gfwww.'include/pre.php';
 
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
 $user_id = user_getid();
+// TODO : remove $id
+$id = $user_id;
 
 if(forge_check_global_perm ('forge_admin'))	$admin_access=true;
 
 if($admin_access)	{
+	oauthprovider_CheckSiteAdmin();
 	$t_tokens = OauthAuthzAccessToken::load_all();
 }else {
+	oauthprovider_CheckUser();
 	$t_tokens = OauthAuthzAccessToken::load_all($user_id);
 }
 

@@ -27,6 +27,8 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
 form_key_is_valid(getStringFromRequest( 'plugin_oauthprovider_consumer_update_token' ));
 
 //access_ensure_global_level( plugin_config_get( 'manage_threshold' ) ); // equivalent function to be added later for ff
@@ -59,4 +61,4 @@ $t_consumer->save();
 
 form_release_key(getStringFromRequest( 'plugin_oauthprovider_consumer_update_token' ));
 
-session_redirect( '/plugins/'.$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname. '&consumer_id=' . $t_consumer->getId()  );
+session_redirect( '/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId()  );

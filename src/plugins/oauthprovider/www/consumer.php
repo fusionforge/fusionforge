@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Manage OAuth consumers
+ * 
  * This file is (c) Copyright 2010 by Olivier BERGER, Madhumita DHAR, Institut TELECOM
  *
  * This program is free software; you can redistribute it and/or
@@ -27,6 +29,10 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once 'checks.php';	
 
+$pluginname = 'oauthprovider';
+
+oauthprovider_CheckSiteAdmin();
+
 $user = session_get_user(); // get the session user
 $t_consumers = OauthAuthzConsumer::load_all();
 
@@ -35,28 +41,11 @@ if(forge_check_global_perm ('forge_admin')) $t_can_manage = true;
 
 // FIXME : use $HTML->boxTop() and likes bellow
 if(count($t_consumers)>0)	{	
-?>
+	echo $HTML->boxTop(_('OAuth consumers'));
 
-<br/>
-<table align="center" cellspacing="1">
-
-  <tr>
-  <td class="form-title"><?php echo $plugin_oauthprovider_consumers ?></td>
-  </tr>
-
-  <tr class="row-category">
-  <td><?php echo $plugin_oauthprovider_consumer ?></td>
-  <td><?php echo $plugin_oauthprovider_url ?></td>
-  <td><?php echo $plugin_oauthprovider_desc ?></td>
-  <td><?php echo $plugin_oauthprovider_email ?></td>
-  <td><?php echo $plugin_oauthprovider_key ?></td>
-  <td><?php echo $plugin_oauthprovider_secret ?></td>  
-  <td></td>
-  <td></td>
-  </tr>
-
-<?php
-			
+	echo $HTML->listTableTop(array(_('Consumer'), _('URL'), _('Description'), _('Email'), _('Key'), _('Secret'), '', ''));
+	
+	$i = 0;
 	foreach( $t_consumers as $t_consumer ) { ?>
 	<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
     <td><?php echo ( $t_consumer->getName() ) ?></td>
@@ -73,65 +62,67 @@ if(count($t_consumers)>0)	{
 	}*/ ?></td>
 	<td class="center">
       <?php 
-	if ( $t_can_manage ) {
-	  
-	  print util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname . '&consumer_id=' . $t_consumer->getId() , $plugin_oauthprovider_manage);
+	if ( $t_can_manage ) {	  
+	  print util_make_link('/plugins/'.$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId() , _('Manage'));
 	}
       ?>
     </td>
     <td class="center">
       <?php 
 	if ( $t_can_manage ) {
-	  print util_make_link('/plugins/'.$pluginname.'/consumer_delete.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname . '&consumer_id=' . $t_consumer->getId() . '&plugin_oauthprovider_consumer_delete_token='.form_generate_key(), $plugin_oauthprovider_delete);
-	  
+	  print util_make_link('/plugins/'.$pluginname.'/consumer_delete.php?consumer_id=' . $t_consumer->getId() . '&plugin_oauthprovider_consumer_delete_token='.form_generate_key(), _('Delete'));
 	}
-      ?>
-    </td>    
-  </tr>
-<?php } ?>
+    } 
+    echo $HTML->listTableBottom();
+    
+echo $HTML->boxBottom();
 
-</table>
-
-<?php
 }
 else {
-	echo '<p>There are currently no customers in the database.</p>';
+	echo '<p>'. _('There are currently no OAuth consumers registered in the database').'</p>';
 }
 
-if ( $t_can_manage ) { ?>
+if ( $t_can_manage ) { 
+
+$f_consumer_name = getStringFromPost( 'consumer_name' );
+$f_consumer_url = getStringFromPost( 'consumer_url' );
+$f_consumer_desc = getStringFromPost( 'consumer_desc' );
+$f_consumer_email = getStringFromPost( 'consumer_email' );
+	
+	?>
 <br/>
-<form action="<?php echo 'consumer_create.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname ?>" method="post">
+<form action="consumer_create.php" method="post">
 <?php echo '<input type="hidden" name="plugin_oauthprovider_consumer_create_token" value="'.form_generate_key().'"/>' ?>
 <table class="width50" align="center" cellspacing="1">
 
 <tr>
-<td class="form-title" colspan="2"><?php echo $plugin_oauthprovider_create_consumer ?></td>
+<td class="form-title" colspan="2"><?php echo _('Create Consumer') ?></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_name ?></td>
-<td><input name="consumer_name" maxlength="128" size="40"/></td>
+<tr>
+<td class="category"><?php echo _('Name') ?></td>
+<td><input name="consumer_name" maxlength="128" size="40" value="<?php echo $f_consumer_name ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_url ?></td>
-<td><input name="consumer_url" maxlength="250" size="40"/></td>
+<tr>
+<td class="category"><?php echo _('URL') ?></td>
+<td><input name="consumer_url" maxlength="250" size="40" value="<?php echo $f_consumer_url ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_desc ?></td>
-<td><input name="consumer_desc" maxlength="250" size="40"/></td>
+<tr>
+<td class="category"><?php echo _('Description') ?></td>
+<td><input name="consumer_desc" maxlength="250" size="40" value="<?php echo $f_consumer_desc ?>"/></td>
 </tr>
 
-<tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_email ?></td>
-<td><input name="consumer_email" maxlength="250" size="40"/></td>
+<tr>
+<td class="category"><?php echo _('Email') ?></td>
+<td><input name="consumer_email" maxlength="250" size="40" value="<?php echo $f_consumer_email ?>"/></td>
 </tr>
 
 
 
 <tr>
-<td class="center" colspan="2"><input type="submit" value="<?php echo $plugin_oauthprovider_create_consumer ?>"/></td>
+<td class="center" colspan="2"><input type="submit" value="<?php echo _('Create Consumer') ?>"/></td>
 </tr>
 
 </table>

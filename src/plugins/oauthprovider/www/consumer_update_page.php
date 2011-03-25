@@ -22,10 +22,13 @@
  *
  */
 
-
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 require_once 'checks.php';	
+
+$pluginname = 'oauthprovider';
+
+oauthprovider_CheckSiteAdmin();
 
 session_require_global_perm('forge_admin');
 
@@ -38,49 +41,49 @@ $i=0;
 ?>
 
 <br/>
-<form action="<?php echo 'consumer_update.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname ?>" method="post">
+<form action="consumer_update.php" method="post">
 <?php echo '<input type="hidden" name="plugin_oauthprovider_consumer_update_token" value="'.form_generate_key().'"/>' ?>
 <input type="hidden" name="consumer_id" value="<?php echo $t_consumer->getId() ?>"/>
 <table class="width60" align="center" cellspacing="1">
 
 <tr>
-<td class="form-title"><?php echo $plugin_oauthprovider_update_consumer ?></td>
-<td class="right"><?php print util_make_link("/plugins/".$pluginname.'/consumer_manage.php?type='.$type.'&id='.$id.'&pluginname='.$pluginname. '&consumer_id=' . $t_consumer->getId(), $plugin_oauthprovider_back_consumer ); ?></td>
+<td class="form-title"><?php echo _('Update Consumer') ?></td>
+<td class="right"><?php print util_make_link("/plugins/".$pluginname.'/consumer_manage.php?consumer_id=' . $t_consumer->getId(), _('Cancel') ); ?></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_name ?></td>
+<td class="category"><?php echo _('Name') ?></td>
 <td><input name="consumer_name" maxlength="128" size="40" value="<?php echo ( $t_consumer->getName() ) ?>"/></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_url ?></td>
+<td class="category"><?php echo _('URL') ?></td>
 <td><input name="consumer_url" maxlength="250" size="40" value="<?php echo ( $t_consumer->getUrl() ) ?>"/></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_desc ?></td>
+<td class="category"><?php echo _('Description') ?></td>
 <td><input name="consumer_desc" maxlength="250" size="40" value="<?php echo ( $t_consumer->getDesc() ) ?>"/></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_email ?></td>
+<td class="category"><?php echo _('Email') ?></td>
 <td><input name="consumer_email" maxlength="250" size="40" value="<?php echo ( $t_consumer->getEmail() ) ?>"/></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_key ?></td>
+<td class="category"><?php echo _('Key') ?></td>
 <td><input name="consumer_key" readonly="readonly" maxlength="250" size="40" value="<?php echo ( $t_consumer->key ) ?>"/></td>
 </tr>
 
 <tr <?php echo $HTML->boxGetAltRowStyle($i++) ?>>
-<td class="category"><?php echo $plugin_oauthprovider_secret ?></td>
+<td class="category"><?php echo _('Secret') ?></td>
 <td><input name="consumer_secret" readonly="readonly" maxlength="250" size="40" value="<?php echo ( $t_consumer->secret ) ?>"/></td>
 </tr>
 
 <tr>
-<td class="center" colspan="1"><input type="submit" name="update" value="<?php echo  $plugin_oauthprovider_update_consumer ?>"/></td>
-<td class="center" colspan="1"><input type="submit" name="keys_update" value="<?php echo  $plugin_oauthprovider_renew_keys_update_consumer ?>"/></td>
+<td class="center" colspan="1"><input type="submit" name="update" value="<?php echo  _('Update Consumer') ?>"/></td>
+<td class="center" colspan="1"><input type="submit" name="keys_update" value="<?php echo  _('Regenerate keys & Update Consumer') ?>"/></td>
 </tr>
 </table>
 </form>
