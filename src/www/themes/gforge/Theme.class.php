@@ -106,6 +106,8 @@ class Theme extends Layout {
 ';
 //		        echo '<div class="printheader">'. forge_get_config('forge_name') . ' ' . util_make_url('/') .'</div>';
 
+                plugin_hook('message', array());
+
 				if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
 					echo $this->error_msg($GLOBALS['error_msg']);
 				}

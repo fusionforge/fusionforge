@@ -240,6 +240,7 @@ class Layout extends Error {
 			<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<?php
+		plugin_hook('htmlhead', array());
 		$this->headerTitle($params);
 		$this->headerFavIcon();
 		$this->headerRSS();

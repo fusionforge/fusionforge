@@ -115,6 +115,8 @@ class Theme extends Layout {
 		echo '</div>' . "\n";
 		echo '<div id="maindiv">' . "\n";
 
+        plugin_hook('message', array());
+
 		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
 			echo $this->error_msg($GLOBALS['error_msg']);
 		}

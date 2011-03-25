@@ -726,3 +726,13 @@ table.progress td :hover { background: none }
 	clear: left;
 	margin-bottom: 1px;
 }
+
+#message_box {
+   display:none;
+   background:#ffc;
+   border:1px solid #CCCCCC;
+   text-align:center;
+   font-weight:bold;
+   width:99%;
+   padding: 4px;
+}
