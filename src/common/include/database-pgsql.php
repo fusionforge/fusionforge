@@ -206,9 +206,8 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 	$res = @pg_query($dbserver,$qstring);
 	if (!$res) {
 		error_log('SQL: '. preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> '.db_error());
+		error_log('SQL> '.db_error($dbserver));
 	}
-	//echo "\n<br />|*| [$qstring]: ".db_error();
 	return $res;
 }
 
