@@ -215,6 +215,7 @@ function install()
 		foreach ($tables as $table) {
 			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
 		}
+		run("su - postgres -c \"psql $gforge_db -c \\\"UPDATE pg_ts_cfg SET locale='en_US.UTF-8' WHERE ts_name='default'\\\"\"");
 //	} else {
 //		show(" * Creating FTS default configuation (Full Text Search)");
 //		run("su - postgres -c \"psql $gforge_db < $fusionforge_src_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
