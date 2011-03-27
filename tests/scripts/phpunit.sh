@@ -8,7 +8,7 @@ else
 	echo "	- RPMCentos52Tests.php"
 	echo "	- TarCentos52Tests.php"
 fi
-if [ "x$testsuite" == "x" ]
+if [ "x$testsuite" = "x" ]
 then
         echo "Forge test suite not found"
         exit 1
