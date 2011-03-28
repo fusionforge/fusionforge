@@ -299,9 +299,9 @@ function install()
 
 //	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, user_pw, unix_pw) VALUES ('$admin_user', '$pw_md5', '$pw_crypt')\\\"\"");
 		if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
-			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\\\"\"");
+			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\\\"\"");
 		} else {
-			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"");
+			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"");
 		}
 
 //echo "BREAKPOINT 2\n";
