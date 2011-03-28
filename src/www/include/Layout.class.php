@@ -636,7 +636,7 @@ class Layout extends Error {
 
 				foreach ($groups as $g) {
 					$group_id = $g->getID();
-					$menu =& $this->navigation->getProjectMenu($group_id);
+					$menu = $this->navigation->getProjectMenu($group_id);
 
 					echo '
 						<option value="' . $menu['starturl'] . '">' 
@@ -670,7 +670,7 @@ class Layout extends Error {
 	 */
 	function projectTabs($toptab, $group_id) {
 		// get group info using the common result set
-		$menu =& $this->navigation->getProjectMenu($group_id, $toptab);
+		$menu = $this->navigation->getProjectMenu($group_id, $toptab);
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], true, $menu['selected'], 'white');
 	}
 

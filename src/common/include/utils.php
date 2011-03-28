@@ -1219,7 +1219,7 @@ function check_email_available($group, $email, &$response) {
 		$response .= $mlFactory->getErrorMessage();
 		return false;
 	}
-	$mlArray =& $mlFactory->getMailingLists();
+	$mlArray = $mlFactory->getMailingLists();
 	if ($mlFactory->isError()) {
 		$response .= $mlFactory->getErrorMessage();
 		return false;
@@ -1238,7 +1238,7 @@ function check_email_available($group, $email, &$response) {
 		$response .= $ff->getErrorMessage();
 		return false;
 	}
-	$farr =& $ff->getForums();
+	$farr = $ff->getForums();
 	$prefix = $group->getUnixName() . '-';
 	for ($j = 0; $j < count($farr); $j++) {
 		if (is_object($farr[$j])) {

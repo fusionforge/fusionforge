@@ -1343,7 +1343,7 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		$already_there = array () ;
 		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE user_id=ANY($1) AND role_id=$2',
 					array (db_int_array_to_any_clause($ids), $this->getID())) ;
-		while ($arr =& db_fetch_array($res)) {
+		while ($arr = db_fetch_array($res)) {
 			$already_there[] = $arr['user_id'] ;
 		}
 
