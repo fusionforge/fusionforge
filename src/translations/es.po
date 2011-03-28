@@ -13628,7 +13628,7 @@ msgstr "Editar Marcadores"
 #: www/my/dashboard.php:39 www/my/index.php:42 www/widgets/widgets.php:58
 #, php-format
 msgid "Personal Page For %s"
-msgstr "Página personal de"
+msgstr "Página personal de %s"
 
 #: www/my/dashboard.php:46
 msgid "All trackers for my projects"
