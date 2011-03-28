@@ -1,6 +1,6 @@
 Summary: HTML Purifier is a standards-compliant HTML filter library written in PHP.
 Name: php-htmlpurifier
-Version: 4.2.0
+Version: 4.3.0
 Release: 1
 License: LGPL
 Group: Development/Languages
@@ -14,8 +14,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
 Requires: php >= 5.0.5
 
-Provides: htmlpurifier = 4.2.0-1
-Obsoletes: htmlpurifier < 4.2.0-1
+Obsoletes: htmlpurifier
 
 %description
 HTML Purifier is a standards-compliant HTML filter library written in PHP. HTML
@@ -62,6 +61,9 @@ This package includes the documentation for %{name}.
 %doc art benchmarks configdoc CREDITS docs INSTALL INSTALL.fr.utf8 LICENSE NEWS README TODO VERSION WHATSNEW WYSIWYG
 
 %changelog
+* Sat Nov 20 2010 Alain Peyrat <aljeux@free.fr>  - 4.3.0-1
+- Updated to v4.3.0
+
 * Sat Nov 20 2010 Alain Peyrat <aljeux@free.fr>  - 4.2.0-1
 - Renamed to php-htmlpurifier
 
