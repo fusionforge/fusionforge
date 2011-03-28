@@ -31,6 +31,7 @@ FusionForge-5.1:
 * RPM packages for Red Hat (and derived) distributions
 * New extratabs iframe option to allow embeding another site using an
   iframe (Alcatel-Lucent)
+* Improved Spanish translation (Libresoft)
 
 FusionForge-5.0.2:
 * Maintenance release, bugfixes mostly.
