@@ -8,7 +8,7 @@ RPM_TMP=~/rpmbuild
 DEPOT=~/depot
 BUILDRESULT=~/fusionforge_repo
 
-HTMLPURIFIER_VERSION=4.2.0
+HTMLPURIFIER_VERSION=4.3.0
 WEBDAV_SERVER_VERSION=1.0.0RC5
 
 all: php-htmlpurifier php-jpgraph php-pear-HTTP_WebDAV_Server dist getselenium
