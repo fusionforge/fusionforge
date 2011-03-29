@@ -41,6 +41,8 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("site_admin_option_hook");
 		$this->_addHook("account_menu");
+		$this->_addHook("check_auth_session");
+		$this->_addHook("fetch_authenticated_user");
 		
 		
 		$this->declareConfigVars();
@@ -171,4 +173,94 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 	function account_menu( ) {
 		return array( '<a href="' . $gfplugins.'oauthprovider/www/access_tokens.php' . '">' . $plugin_oauthprovider_menu_account_summary. '</a>', );
 	  }
+	  
+	protected function declareConfigVars() {
+		parent::declareConfigVars();
+		
+		// Change vs default 
+		forge_define_config_item ('required', $this->name, 'no');
+		forge_set_config_item_bool ('required', $this->name) ;
+
+		// Change vs default
+		forge_define_config_item ('sufficient', $this->name, 'yes');
+		forge_set_config_item_bool ('sufficient', $this->name) ;
+	
+	}
+
+	/**
+	 * Is there a valid session?
+	 * @param unknown_type $params
+	 */
+	
+	function checkAuthSession(&$params) {
+		$this->saved_user = NULL;
+		$user = NULL;
+
+		try {
+			$oauthprovider_server = new OAuthServer(FFDbOAuthDataStore::singleton());
+			
+			$hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
+			$oauthprovider_server->add_signature_method($hmac_method);
+			
+			$req = OAuthRequest::from_request();
+			list($consumer, $token) = $oauthprovider_server->verify_request( $req);
+			
+			// Now, the request is valid.
+			
+			// We know which consumer is connected
+			//echo "Authenticated as consumer : \n";
+			//print_r($consumer);
+			//echo "  name: ". $consumer->getName() ."\n";
+			//echo "  key: $consumer->key\n";
+			//echo "\n";
+			
+			// And on behalf of which user it connects
+			//echo "Authenticated with access token whose key is :  $token->key \n";
+			//echo "\n";
+			$t_token = OauthAuthzAccessToken::load_by_key($token->key);
+			$user =& user_get_object($t_token->getUserId());
+			//$user_name = $user->getRealName().' ('.$user->getUnixName().')';
+			//echo "Acting on behalf of user : $user_name\n";
+			//echo "\n";
+			
+			// TODO: but with which role is the user authenticated ??
+			
+		} catch (OAuthException $e) {
+			$code = $e->getCode();
+			if ($code) {
+				switch($code) {
+					case 401:
+						header('HTTP/1.1 401 Unauthorized', 401);
+						break;
+					case 400:
+						header('HTTP/1.1 400 Bad Request', 400);
+						break;
+					default:
+						break;
+				}
+			}
+			
+			echo "OAuth problem - code $code: \n";
+			print($e->getMessage() . "\n<hr />\n");
+			print_r($req);
+		}
+		
+		if ($user) {
+			if ($this->isSufficient()) {
+				$this->saved_user = $user;
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
+				
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		} else {
+			if ($this->isRequired()) {
+				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
+			} else {
+				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
+			}
+		}
+	}
+	
+	
 }
