@@ -534,7 +534,7 @@ class OAuthServer {/*{{{*/
       $version = 1.0;
     }
     if ($version && $version != $this->version) {
-      throw new OAuthException("OAuth version '$version' not supported");
+      throw new OAuthException("OAuth version '$version' not supported", 400);
     }
     return $version;
   }/*}}}*/
@@ -551,7 +551,7 @@ class OAuthServer {/*{{{*/
     if (!in_array($signature_method, 
                   array_keys($this->signature_methods))) {
       throw new OAuthException(
-        "Signature method '$signature_method' not supported try one of the following: " . implode(", ", array_keys($this->signature_methods))
+        "Signature method '$signature_method' not supported try one of the following: " . implode(", ", array_keys($this->signature_methods)), 400
       );      
     }
     return $this->signature_methods[$signature_method];
@@ -563,12 +563,12 @@ class OAuthServer {/*{{{*/
   private function get_consumer(&$request) {/*{{{*/
     $consumer_key = @$request->get_parameter("oauth_consumer_key");
     if (!$consumer_key) {
-      throw new OAuthException("Invalid consumer key");
+      throw new OAuthException("Invalid consumer key", 400);
     }
 
     $consumer = $this->data_store->lookup_consumer($consumer_key);
     if (!$consumer) {
-      throw new OAuthException("Invalid consumer");
+      throw new OAuthException("Invalid consumer", 401);
     }
 
     return $consumer;
@@ -583,7 +583,7 @@ class OAuthServer {/*{{{*/
       $consumer, $token_type, $token_field
     );
     if (!$token) {
-      throw new OAuthException("Invalid $token_type token: $token_field");
+      throw new OAuthException("Invalid $token_type token: $token_field", 401);
     }
     return $token;
   }/*}}}*/
@@ -611,7 +611,7 @@ class OAuthServer {/*{{{*/
     );
 
     if (!$valid_sig) {
-      throw new OAuthException("Invalid signature");
+      throw new OAuthException("Invalid signature", 401);
     }
   }/*}}}*/
 
@@ -622,7 +622,7 @@ class OAuthServer {/*{{{*/
     // verify that timestamp is recentish
     $now = time();
     if ($now - $timestamp > $this->timestamp_threshold) {
-      throw new OAuthException("Expired timestamp, yours $timestamp, ours $now");
+      throw new OAuthException("Expired timestamp, yours $timestamp, ours $now", 401);
     }
   }/*}}}*/
 
@@ -633,7 +633,7 @@ class OAuthServer {/*{{{*/
     // verify that the nonce is uniqueish
     $found = $this->data_store->lookup_nonce($consumer, $token, $nonce, $timestamp);
     if ($found) {
-      throw new OAuthException("Nonce already used: $nonce");
+      throw new OAuthException("Nonce already used: $nonce", 401);
     }
   }/*}}}*/
 
@@ -719,7 +719,7 @@ class SimpleOAuthDataStore extends OAuthDataStore {/*{{{*/
     $secret = time() + time();
     $token = new OAuthToken($key, md5(md5($secret)));
     if (!dba_insert("${type}_$key", serialize($token), $this->dbh)) {
-      throw new OAuthException("doooom!");
+      throw new OAuthException("doooom!", 400);
     }
     return $token;
   }/*}}}*/
