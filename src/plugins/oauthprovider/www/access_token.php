@@ -52,10 +52,10 @@ try {
 	if ($code) {
 		switch($code) {
 			case 401:
-				header('HTTP/1.1 401 Unauthorized');
+				header('HTTP/1.1 401 Unauthorized', 401);
 				break;
 			case 400:
-				header('HTTP/1.1 400 Bad Request');
+				header('HTTP/1.1 400 Bad Request', 400);
 				break;
 			default:
 				break;
