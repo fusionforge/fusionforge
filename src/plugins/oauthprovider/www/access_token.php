@@ -48,6 +48,19 @@ try {
 	print $token;
 
 } catch (OAuthException $e) {
+	$code = $e->getCode();
+	if ($code) {
+		switch($code) {
+			case 401:
+				header('HTTP/1.1 401 Unauthorized');
+				break;
+			case 400:
+				header('HTTP/1.1 400 Bad Request');
+				break;
+			default:
+				break;
+		}
+	}
 	print($e->getMessage() . "\n<hr />\n");
 	print_r($req);
 	die();
