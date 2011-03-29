@@ -21,7 +21,7 @@ if ($argc < 2) {
 }
 
 	
-function request_curl($url, $params=array()) {
+function request_curl(&$code, $url, $params=array()) {
 	$method='GET';
         $params = http_build_query($params, '', '&');
         $curl = curl_init($url . ($method == 'GET' && $params ? '?' . $params : ''));
@@ -34,7 +34,16 @@ function request_curl($url, $params=array()) {
         curl_setopt($curl, CURLOPT_HTTPGET, true);
         
         $response = curl_exec($curl);
-	return $response;
+        if(curl_errno($curl))
+		{
+    		echo 'Curl error: ' . curl_error($curl);
+    		$code = -1;
+    		return False;
+		}
+		else {
+			$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+			return $response;
+		}
 }
 
 function retrieve_request_token($request_token_endpoint, $consumer_key, $consumer_secret) {
@@ -59,7 +68,8 @@ function retrieve_request_token($request_token_endpoint, $consumer_key, $consume
 	//print "request url: " . $req_req->to_url(). "\n";
 	//print_r($req_req);
 	
-	$response = request_curl($req_req->to_url());
+	$code = -1;
+	$response = request_curl($code, $req_req->to_url());
 	
 	//print_r($response);
 	$params = array();
@@ -111,19 +121,31 @@ function retrieve_access_token($access_token_endpoint, $consumer_key, $consumer_
 	
 	//print "request url: " . $req_req->to_url(). "\n";
 	//print_r($req_req);
+	
+	$code = -1;
+	$response = request_curl($code, $acc_req->to_url());
+	
+	//print_r($response);
+	
+	//echo "code : ";
+	//echo $code;
+	//echo "\n";
+	
+	if ($code == 200) {
+		$params = array();
+		parse_str($response, $params);
+		print_r($params);
 		
-	$response = request_curl($acc_req->to_url());
-	
-	//print_r($response)
-	
-	$params = array();
-	parse_str($response, $params);
-	//print_r($params);
-	
-	echo "received access token :\n";
-	echo ' $oauth_token : '. $params['oauth_token'] ."\n";
-	echo ' $oauth_token_secret : '. $params['oauth_token_secret'] ."\n";
-	echo "\n";
+		echo "received access token :\n";
+		echo ' $oauth_token : '. $params['oauth_token'] ."\n";
+		echo ' $oauth_token_secret : '. $params['oauth_token_secret'] ."\n";
+		echo "\n";
+	}
+	else {
+		echo 'received error code : ' . $code . "\n";
+		echo ' '. $response;
+		exit(1);
+	}
 	
 }
 
