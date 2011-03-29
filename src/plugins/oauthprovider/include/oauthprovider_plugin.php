@@ -3,6 +3,7 @@
 /**
  * oauthproviderPlugin Class
  *
+ * This file is (c) Copyright 2010, 2011 by Olivier BERGER, Madhumita DHAR, Institut TELECOM
  *
  * This file is part of FusionForge.
  *
@@ -23,9 +24,11 @@
 
 // TODO : fix missing copyright
 
-class oauthproviderPlugin extends Plugin {
-	public function __construct($id=0) {
-		$this->Plugin($id) ;
+class oauthproviderPlugin extends ForgeAuthPlugin {
+	public function __construct() {
+		
+		$this->ForgeAuthPlugin() ;
+		
 		$this->name = 'oauthprovider';
 		$this->text = 'OAuthProvider'; // To show in the tabs, use...
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
@@ -38,18 +41,21 @@ class oauthproviderPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("site_admin_option_hook");
 		$this->_addHook("account_menu");
+		
+		
+		$this->declareConfigVars();
 	}
 
-	function CallHook ($hookname, $params) {
-		global $use_oauthproviderplugin,$G_SESSION,$HTML;
-		if ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
+	function usermenu() {
+		global $G_SESSION,$HTML;
+	$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("oauthprovider")) {
 				echo  $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/oauthprovider/index.php'), array(''));				
 			}
-		} elseif ($hookname == "groupmenu") {
-			$group_id=$params['group'];
+	}
+	function groupmenu() {
+		$group_id=$params['group'];
 			$project = &group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
@@ -68,8 +74,9 @@ class oauthproviderPlugin extends Plugin {
 				$params['DIRS'][]='';
 			}	
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		} elseif ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
+	}
+	function groupisactivecheckbox() {
+		//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
@@ -86,8 +93,11 @@ class oauthproviderPlugin extends Plugin {
 			echo "<strong>Use ".$this->text." Plugin</strong>";
 			echo "</td>";
 			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+	}
+	function groupisactivecheckboxpost() {
+				global $use_oauthproviderplugin;
+		
+	// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
 			$group = &group_get_object($group_id);
 			$use_oauthproviderplugin = getStringFromRequest('use_oauthproviderplugin');
@@ -96,8 +106,9 @@ class oauthproviderPlugin extends Plugin {
 			} else {
 				$group->setPluginUse ( $this->name, false );
 			}
-		}elseif ($hookname == "userisactivecheckbox") {
-			//Check if the group is active
+	}
+	function userisactivecheckbox () {
+		//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
@@ -114,8 +125,11 @@ class oauthproviderPlugin extends Plugin {
 			echo "<strong>Use ".$this->text." Plugin</strong>";
 			echo "</td>";
 			echo "</tr>";
-		} elseif ($hookname == "userisactivecheckboxpost") {
-			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+	}
+	function userisactivecheckboxpost() {
+				global $use_oauthproviderplugin;
+		
+	// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$use_oauthproviderplugin = getStringFromPost('use_oauthproviderplugin');
@@ -124,8 +138,9 @@ class oauthproviderPlugin extends Plugin {
 			} else {
 				$user->setPluginUse ( $this->name, false );
 			}
-		} elseif ($hookname == "user_personal_links") {
-			// this displays the link in the user's profile page to it's personal oauthprovider (if you want other sto access it, youll have to change the permissions in the index.php
+	}
+	function user_personal_links() {
+	// this displays the link in the user's profile page to it's personal oauthprovider (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
 			$text = $params['text'];
@@ -137,24 +152,16 @@ class oauthproviderPlugin extends Plugin {
 					);
 				echo '</p>';
 			}
-		} elseif ($hookname == "project_admin_plugins") {
-			// this displays the link in the project admin options page to it's  oauthprovider administration
+	}
+	function project_admin_plugins( ) {
+					// this displays the link in the project admin options page to it's  oauthprovider administration
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p>'.util_make_link ("/plugins/oauthprovider/admin/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('oauthprovider Admin')).'</p>' ;
 			}
-		}
-		elseif ($hookname == "site_admin_option_hook")	{
-			$this->site_admin_option_hook();
-		}						
-		elseif ($hookname == "account_menu")	{
-			$this->account_menu();
-		}						    
-		elseif ($hookname == "blahblahblah") {
-			// ...
-		} 
+		
 	}
 	
 	function site_admin_option_hook( ) {
