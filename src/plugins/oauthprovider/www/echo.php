@@ -22,49 +22,24 @@
  *
  */
 
-# This script demonstrates the way to protect access to a resource using OAuth.
+# This script demonstrates the way to protect access to a resource using OAuth (see README for example of its use).
 
 require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 //require_once 'checks.php';	
 
+// Here the session should be constructed with the OAuthprovider plugin set as sufficient (and no other required).
+$user = session_get_user(); // get the session user
 
-
-
-try {
-  $oauthprovider_server = new OAuthServer(FFDbOAuthDataStore::singleton());
-
-  $hmac_method = new OAuthSignatureMethod_HMAC_SHA1();
-  $oauthprovider_server->add_signature_method($hmac_method);
-
-  $req = OAuthRequest::from_request();
-  list($consumer, $token) = $oauthprovider_server->verify_request( $req);
-
-  // Now, the request is valid.
-
-  // We know which consumer is connected
-  echo "Authenticated as consumer : \n";
-  //print_r($consumer);
-  echo "  name: ". $consumer->getName() ."\n";
-  echo "  key: $consumer->key\n";
-  echo "\n";
-
-  // And on behalf of which user it connects
-  echo "Authenticated with access token whose key is :  $token->key \n";
-  echo "\n";
-  $t_token = OauthAuthzAccessToken::load_by_key($token->key);
-  $user_object =& user_get_object($t_token->getUserId());
-  $user = $user_object->getRealName().' ('.$user_object->getUnixName().')';
-  echo "Acting on behalf of user : $user\n";
-  echo "\n";
-
-  echo "Received message : \n";
-  $message = $_GET['message'];
-  print_r($message);
-
-
-} catch (OAuthException $e) {
-  print($e->getMessage() . "\n<hr />\n");
-  print_r($req);
-  die();
+if($user) {
+	$user = $user->getRealName().' ('.$user->getUnixName().')';
+	echo "Acting on behalf of user : $user\n";
+	echo "\n";
+	
+	echo "Received message : \n";
+	$message = $_GET['message'];
+	print_r($message);
+}
+else {
+	echo "Sorry, you didn't authenticate successfully!";
 }
