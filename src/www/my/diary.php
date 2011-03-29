@@ -105,17 +105,22 @@ AND user_diary_monitor.monitored_user=$1',
 									    forge_get_config ('forge_name'),
 									    $u->getRealName(),
 									    $summary) ;
-							$body = util_line_wrap($details) ;
-							$body .= _("
+							$sanitizer = new TextSanitizer();
+							$body = $details;
+							if (strstr($body,'<br/>') || strstr($body,'<br />')) {
+								$body = preg_replace("/[\n\r]/", '', $body);
+							}
+							$body = $sanitizer->convertNeededTagsForEmail($body);
+							$body = strip_tags($body);
+							$body = $sanitizer->convertExtendedCharsForEmail($body);
+
+							$body .= _('
 
 ______________________________________________________________________
 You are receiving this email because you elected to monitor this user.
-To stop monitoring this user, login to %s and visit the following link:
-
-%s
-",
-								   forge_get_config ('forge_name'),
-								   util_make_url ("/developer/monitor.php?diary_user=". user_getid())) ;
+To stop monitoring this user, visit the following link:
+');
+							$body .= util_make_url("/developer/monitor.php?diary_user=".user_getid());
 							
 							util_send_message($to, $subject, $body, $to, $tolist);
 							
@@ -171,6 +176,13 @@ To stop monitoring this user, login to %s and visit the following link:
 
     site_user_header(array('title'=>_('My Diary And Notes')));
 
+	$params['name'] = "details";
+	$params['body'] = $_details;
+	$params['height'] = "350";
+	$params['width'] = "100%";
+	$params['content'] = '<textarea name="details" rows="10" cols="60">'.$_details.'</textarea>';
+	plugin_hook_by_reference("text_editor", $params);
+
 	echo '
 	<h2>'. $info_str .'</h2>
 
@@ -183,9 +195,8 @@ To stop monitoring this user, login to %s and visit the following link:
 		<input type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong>'._('Details').':</strong><br />
-		<textarea name="details" rows="15" cols="60">'. $_details .'</textarea>
-	</td></tr>
+	<tr><td colspan="2"><strong>'._('Details').':</strong><br />'.
+		$params['content'].'</td></tr>
 	<tr><td colspan="2">
 		<p>
 		<input type="submit" name="submit" value="'._('SUBMIT ONLY ONCE').'" />
