@@ -1913,6 +1913,7 @@ src/plugins/message/common/messagePlugin.class.php -text
 src/plugins/message/db/message-init.sql -text
 src/plugins/message/www/index.php -text
 src/plugins/message/www/js/message.js -text
+src/plugins/oauthprovider/3rd-party/README -text
 src/plugins/oauthprovider/3rd-party/oauth-php/CHANGELOG.txt -text
 src/plugins/oauthprovider/3rd-party/oauth-php/LICENSE.txt -text
 src/plugins/oauthprovider/3rd-party/oauth-php/OAuth.php -text

@@ -1,0 +1,5 @@
+The OAuth library is a copy of the code from http://code.google.com/p/oauth/source/browse/#svn%2Fcode%2Fphp 
+as of rev. 622 (the version packaged in Debian), and to which a patch was applied 
+(http://code.google.com/p/oauth/issues/detail?id=48#c4).
+
+-- Olivier Berger
