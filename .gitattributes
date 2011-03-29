@@ -1913,6 +1913,17 @@ src/plugins/message/common/messagePlugin.class.php -text
 src/plugins/message/db/message-init.sql -text
 src/plugins/message/www/index.php -text
 src/plugins/message/www/js/message.js -text
+src/plugins/oauthprovider/3rd-party/oauth-php/CHANGELOG.txt -text
+src/plugins/oauthprovider/3rd-party/oauth-php/LICENSE.txt -text
+src/plugins/oauthprovider/3rd-party/oauth-php/OAuth.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/OAuth_TestServer.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/doc/design.txt -text
+src/plugins/oauthprovider/3rd-party/oauth-php/example/access_token.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/example/client.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/example/common.inc.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/example/echo_api.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/example/index.php -text
+src/plugins/oauthprovider/3rd-party/oauth-php/example/request_token.php -text
 src/plugins/oauthprovider/NAME -text
 src/plugins/oauthprovider/README -text
 src/plugins/oauthprovider/bin/db-delete.pl -text
