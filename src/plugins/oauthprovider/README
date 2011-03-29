@@ -39,7 +39,19 @@ an access token :
   $oauth_token : 471cd074f441556f70bc
   $oauth_token_secret : 72a2fa4d05b5b9c47c3a
 
-6. You may now use this access token to access FusionForge scripts.
+6. You may now use this access token to access FusionForge scripts. For instance the provided echo script, with :
 
+ $ php example/command-line.php call_echo 2a879dc112593828254c5127381d1b9a 6cd7286abbdd0740c6fdfefcae3c8ec2 471cd074f441556f70bc 72a2fa4d05b5b9c47c3a toto
+
+ Authenticated as consumer : 
+  name: coinpan
+  key: 2a879dc112593828254c5127381d1b9a
+
+ Authenticated with access token whose key is :  471cd074f441556f70bc 
+
+ Acting on behalf of user : Mr or Mrs You (you)
+
+ Received message : 
+ toto
 
 -- OlivierBerger
