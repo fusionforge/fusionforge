@@ -1034,6 +1034,7 @@ fi
 %{FORGE_DIR}/www/plugins/mantisbt
 
 %files plugin-oauthprovider
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/oauthprovider.ini
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/oauthprovider/
 %{FORGE_CONF_DIR}/httpd.d/62plugin-oauthprovider
 %{FORGE_DIR}/plugins/oauthprovider
