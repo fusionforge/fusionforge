@@ -65,6 +65,9 @@ if (!$group || !is_object($group)) {
 	exit_error($group->getErrorMessage(),'news');
 }
 
+$summary = getStringFromRequest('summary');
+$details = getStringFromRequest('details');
+
 if (session_loggedin()) {
 
 	if (!user_ismember($group_id,'A')) {
@@ -79,8 +82,6 @@ if (session_loggedin()) {
 		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 			exit_form_double_submit('news');
 		}
-		$summary = getStringFromRequest('summary');
-		$details = getStringFromRequest('details');
 
 		//check to make sure both fields are there
 		if ($summary && $details) {
@@ -149,7 +150,7 @@ if (session_loggedin()) {
 		<p><strong>'._('For project').' '.$group->getPublicName().'</strong></p>
 		<p>
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
-		<input type="text" name="summary" value="" size="60" maxlength="60" /></p>
+		<input type="text" name="summary" value="'.$summary.'" size="60" maxlength="60" /></p>
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
 	
@@ -158,12 +159,12 @@ if (session_loggedin()) {
 	$params['name'] = 'details';
 	$params['width'] = "800";
 	$params['height'] = "500";
-	$params['body'] = "";
+	$params['body'] = $details;
 	$params['group'] = $group_id;
 	plugin_hook("text_editor",$params);
 	if (!$GLOBALS['editor_was_set_up']) {
 		//if we don't have any plugin for text editor, display a simple textarea edit box
-		echo '<textarea name="details" rows="5" cols="50"></textarea><br />';
+		echo '<textarea name="details" rows="5" cols="50">'.$details.'</textarea><br />';
 	}
 	unset($GLOBALS['editor_was_set_up']);
 	echo '<div><input type="submit" name="submit" value="'._('Submit').'" />
