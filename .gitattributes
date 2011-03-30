@@ -1849,6 +1849,7 @@ src/plugins/mantisbt/view/admin/editVersion.php -text
 src/plugins/mantisbt/view/admin/stat.php -text
 src/plugins/mantisbt/view/admin/viewCategorie.php -text
 src/plugins/mantisbt/view/admin/viewConfiguration.php -text
+src/plugins/mantisbt/view/admin/viewGlobalConfiguration.php -text
 src/plugins/mantisbt/view/admin/viewVersion.php -text
 src/plugins/mantisbt/view/adminuser.php -text
 src/plugins/mantisbt/view/editIssue.php -text

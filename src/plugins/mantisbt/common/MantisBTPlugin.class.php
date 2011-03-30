@@ -595,7 +595,7 @@ class MantisBTPlugin extends Plugin {
 				session_require_global_perm('forge_admin');
 				global $gfwww;
 				require_once($gfwww.'admin/admin_utils.php');
-				site_admin_header(array('title'=>_('Site MantisBT Admin'), 'toptab' => ''));
+				site_admin_header(array('title'=>_('Site Global MantisBT Admin'), 'toptab' => ''));
 				$returned = true;
 				break;
 			}
@@ -746,12 +746,36 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	/**
+	 * getGlobalconf - return the global configuration defined at forge level
+	 *
+	 * @return	array	the global configuration array
+	 */
+	function getGlobalconf() {
+		$resGlobConf = db_query_params('SELECT * from plugin_mantisbt_global',array());
+		if (!$resGlobConf) {
+			return false;
+		}
+
+		$row = db_numrows($resGlobConf);
+
+		if ($row == null || count($row) > 2) {
+			return false;
+		}
+
+		return db_fetch_array($resGlobConf);
+	}
+
+	/**
 	 * getGlobalAdminView - display the Global Admin View
 	 *
 	 * @return	bool	true
 	 */
 	function getGlobalAdminView() {
-		echo 'TOBEIMPLEMENTED';
+		global $gfplugins;
+		$user = session_get_user();
+		$use_tooltips = $user->usesTooltips();
+		$mantisbtGlobalConf = $this->getGlobalconf();
+		require_once $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
 }

@@ -50,6 +50,7 @@ MantisBTInitController.prototype =
 	 */
 	bindControls: function() {
 		this.params.checkboxCreate.click(jQuery.proxy(this, "toggleInputName"));
+		this.params.checkboxGlobalConf.click(jQuery.proxy(this, "toggleAllInput"));
 	},
 
 	/*! initializes tipsy
@@ -72,6 +73,20 @@ MantisBTInitController.prototype =
 			this.params.inputName.attr('disabled',false);
 		} else {
 			this.params.inputName.attr('disabled',true);
+		}
+	},
+
+	toggleAllInput: function() {
+		if (!this.params.checkboxGlobalConf.is(":checked")) {
+			this.params.inputName.attr('disabled',false);
+			this.params.inputUrl.attr('disabled',false);
+			this.params.inputUser.attr('disabled',false);
+			this.params.inputPassword.attr('disabled',false);
+		} else {
+			this.params.inputName.attr('disabled',true);
+			this.params.inputUrl.attr('disabled',true);
+			this.params.inputUser.attr('disabled',true);
+			this.params.inputPassword.attr('disabled',true);
 		}
 	},
 }
