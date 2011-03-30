@@ -36,6 +36,7 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("user_link_with_tooltip"); 
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
+		$this->_addHook("cssfile");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");		
 	}
@@ -155,12 +156,15 @@ class oslcPlugin extends Plugin {
 			}
 		}
 		elseif ($hookname == "user_link_with_tooltip"){
-			require_once dirname( __FILE__ ).'/CompactRessource.class.php';
-			$CR = new CompactRessource($params);
-			$params['user_link'] = $CR->compactUserLink($params['username'], $params['user_id']);
+			$params['user_link'] = '<a class="personPopupTrigger" href="'. util_make_url_u ($params['username'], $params['user_id']) .
+				'" rel="' . $params['username'] . '">'. $params['username'] . '</a>';
 		}
 		elseif ($hookname == "javascript_file") {
-			use_javascript('/plugins/oslc/scripts/pluginOSLCHoverScripts.js');
+			use_javascript('/scripts/jquery/jquery.js');
+			use_javascript('/plugins/oslc/scripts/userTooltip.js');
+		}
+		elseif ($hookname == "cssfile") {
+			use_stylesheet('/plugins/oslc/css/userTooltipStyle.css');
 		}
 		elseif($hookname == "script_accepted_types"){
 			$script = $params['script']; 

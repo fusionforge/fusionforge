@@ -2042,7 +2042,6 @@ src/plugins/oslc/db/oslc-init.sql -text
 src/plugins/oslc/etc/httpd.d/plugin-oslc.inc -text
 src/plugins/oslc/etc/oslc.ini -text
 src/plugins/oslc/etc/plugins/oslc/config.php -text
-src/plugins/oslc/include/CompactRessource.class.php -text
 src/plugins/oslc/include/oslc-zend/application/Bootstrap.php -text
 src/plugins/oslc/include/oslc-zend/application/basic-pwd.txt -text
 src/plugins/oslc/include/oslc-zend/application/configs/application.ini -text
@@ -2209,8 +2208,19 @@ src/plugins/oslc/translations/en.po -text
 src/plugins/oslc/translations/gforge.pot -text
 src/plugins/oslc/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/plugins/oslc/www/admin/index.php -text
+src/plugins/oslc/www/css/userTooltipStyle.css -text
+src/plugins/oslc/www/images/userTooltip/balloon_bottom.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_bottomLeft.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_bottomRight.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_left.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_right.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_tail.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_top.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_topLeft.png -text
+src/plugins/oslc/www/images/userTooltip/balloon_topRight.png -text
+src/plugins/oslc/www/images/userTooltip/oslc.png -text
 src/plugins/oslc/www/index.php -text
-src/plugins/oslc/www/scripts/pluginOSLCHoverScripts.js -text
+src/plugins/oslc/www/scripts/userTooltip.js -text
 src/plugins/projectimport/3rd-party/README -text
 src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php -text
 src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/README -text

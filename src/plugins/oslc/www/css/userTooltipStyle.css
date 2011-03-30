@@ -1,0 +1,64 @@
+#personPopupContainer
+{
+	position:absolute;
+	left:0;
+	top:0;
+	display:none;
+	z-index: 20000;
+}
+
+.personPopupPopup {
+}
+
+.personPopupResult {
+	background: #FFF;
+}
+
+#personPopupContent {
+	background: #FFF;
+	min-width: 175px;
+	min-height: 50px;
+}
+
+.personPopupPopup .personPopupImage {
+	margin: 5px;
+	margin-right: 15px;
+}
+
+.personPopupPopup .corner{
+	width: 19px;
+	height: 15px;
+}
+
+.personPopupPopup .topLeft {
+	background: url(/plugins/oslc/images/userTooltip/balloon_topLeft.png) no-repeat right;
+}
+
+.personPopupPopup .bottomLeft {
+	background: url(/plugins/oslc/images/userTooltip/balloon_bottomLeft.png) no-repeat right top;
+}
+
+.personPopupPopup .left {
+	background: url(/plugins/oslc/images/userTooltip/balloon_left.png) repeat-y right;
+}
+
+.personPopupPopup .right {
+	background: url(/plugins/oslc/images/userTooltip/balloon_right.png) repeat-y;
+}
+
+.personPopupPopup .topRight {
+	background: url(/plugins/oslc/images/userTooltip/balloon_topRight.png) no-repeat;
+}
+
+.personPopupPopup .bottomRight {
+	background: url(/plugins/oslc/images/userTooltip/balloon_bottomRight.png) no-repeat;
+}  
+
+.personPopupPopup .top {
+	background: url(/plugins/oslc/images/userTooltip/balloon_top.png) repeat-x;
+}
+
+.personPopupPopup .bottom {
+	background: url(/plugins/oslc/images/userTooltip/balloon_bottom.png) repeat-x;
+	text-align: center;  
+}

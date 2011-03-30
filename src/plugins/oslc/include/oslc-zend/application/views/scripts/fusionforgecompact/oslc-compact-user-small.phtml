@@ -31,14 +31,37 @@ $title = ($user_title ? $user_title .' ' :''). $user_real_name;?>
 <html>
 <head>
 <title>User: <?php echo $user_real_name;?> (Idenntifier: <?php echo $user_id;?>)</title>
-<link rel="SHORTCUT ICON" href="oslc.png"></link>
 </head>
 <body>
-<i>Compact User Preview </i><br/>
-User Name: <?php echo $title;?><br/>
-Login Name: <?php echo $user_name;?> <br/>
-Identifier:  <?php echo $user_id;?> <br/>
-Member since: <?php print date(_('Y-m-d H:i'), $this->user->getAddDate()); ?><br/>
-<small>URI: <?php echo $user_uri;?></small><br/>
+<table>
+<tr>
+	<td colspan="2"><i>Compact User Preview</i></td>
+</tr>
+<tr>
+	<td rowspan="5"><img src="/plugins/oslc/images/userTooltip/oslc.png" /> </td>
+	<td><b>User Name:</b> <?php echo $title;?></td>
+</tr>
+<tr>
+	<td><b>Login Name:</b> <?php echo $user_name;?></td>
+</tr>
+<tr>
+	<td><b>Identifier:</b>  <?php echo $user_id;?></td>
+</tr>
+<tr>
+	<td><b>Member since:</b> <?php print date(_('Y-m-d H:i'), $this->user->getAddDate()); ?></td>
+</tr>
+<tr>
+	<td><small><b>URI:</b> <a href="<?php echo $user_uri;?>"><?php echo $user_uri;?></a></small></td>
+</tr>
+</table>
+
+<!-- 
+<b>User Name:</b> <?php echo $title;?><br/>
+<b>Login Name:</b> <?php echo $user_name;?> <br/>
+<b>Identifier:</b>  <?php echo $user_id;?> <br/>
+<b>Member since:</b> <?php print date(_('Y-m-d H:i'), $this->user->getAddDate()); ?><br/>
+<small><b>URI:</b> <?php echo $user_uri;?></small><br/>
+</table>
+-->
 </body>
 </html>
