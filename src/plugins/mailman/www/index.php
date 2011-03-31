@@ -23,15 +23,11 @@ $Group = $pm->getProject($group_id);
 if (isset ($group_id)) {
 	
 	if (!$Group || !is_object($Group)) {
-		
 		exit_error(_('Error'), 'Could Not Get Group');
-	}
-	elseif ($Group->isError()) {
-		
+	} elseif ($Group->isError()) {
 		exit_no_group();
 	}
 
-	
 	$mlFactory = new MailmanListFactory($Group);
 	if (!$mlFactory || !is_object($mlFactory)) {
 		exit_error(_('Error'), 'Could Not Get MailmanListFactory');
@@ -66,12 +62,16 @@ if (isset ($group_id)) {
 
 	if (isLogged()){
 		if ($mlFactory->compareInfos()) {
-		echo _('<p>You seem to have mailman account with a different name or password. If you want to update mailman information, click on ');
-		echo '<a href="index.php?group_id=' . $group_id . '&action=update">' . _('Update</p>') . '</a>';
+			echo '<p>';
+			echo _('You seem to have mailman account with a different name or password. If you want to update mailman information, click on ');
+			echo '<a href="index.php?group_id=' . $group_id . '&action=update">' . _('Update') . '</a>';
+			echo '</p>';
 	}
 	}
 	
-	echo _('<p>Choose a list to browse, search, and post messages.</p>');
+	echo '<p>';
+	echo _('Choose a list to browse, search, and post messages.');
+	echo '</p>';
 
 	table_begin();
 	for ($j = 0; $j < $mlCount; $j++) {
