@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: install.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: install.php 7964 2011-03-05 17:05:30Z vargenau $
 
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
@@ -49,7 +49,7 @@ function run_install($part = '') {
     }
     // setup default settings
     if (!$already and !defined("_PHPWIKI_INSTALL_RUNNING")) {
-    	define("_PHPWIKI_INSTALL_RUNNING", true);
+        define("_PHPWIKI_INSTALL_RUNNING", true);
         include(dirname(__FILE__)."/../configurator.php");
     }
     $already = 1;

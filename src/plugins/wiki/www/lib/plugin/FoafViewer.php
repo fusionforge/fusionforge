@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: FoafViewer.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: FoafViewer.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  *

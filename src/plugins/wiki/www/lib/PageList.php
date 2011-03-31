@@ -1,5 +1,5 @@
 <?php
-//rcs_id('$Id: PageList.php 7740 2010-11-11 14:45:18Z rurban $');
+//$Id: PageList.php 7964 2011-03-05 17:05:30Z vargenau $
 /* Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -725,14 +725,14 @@ class PageList {
     }
 
     /**
-     * @param	caption	string or HTML
+     * @param    caption    string or HTML
      */
     function setCaption ($caption) {
         $this->_caption = $caption;
     }
 
     /**
-     * @param	caption	string or HTML
+     * @param    caption    string or HTML
      */
     function addCaption ($caption) {
         $this->_caption = HTML($this->_caption," ",$caption);
@@ -836,49 +836,49 @@ class PageList {
     /* ignore from, but honor limit */
     function addPages ($page_iter) {
         // TODO: if limit check max(strlen(pagename))
-	$limit = $page_iter->limit();
+    $limit = $page_iter->limit();
         $i = 0;
-	if ($limit) {
-	    list($from, $limit) = $this->limit($limit);
-	    $this->_options['slice'] = 0;
-	    $limit += $from;
+    if ($limit) {
+        list($from, $limit) = $this->limit($limit);
+        $this->_options['slice'] = 0;
+        $limit += $from;
             while ($page = $page_iter->next()) {
                 $i++;
                 if ($from and $i < $from)
                     continue;
-	        if (!$limit or ($limit and $i < $limit))
-		    $this->addPage($page);
+            if (!$limit or ($limit and $i < $limit))
+            $this->addPage($page);
             }
-	} else {
-	    $this->_options['slice'] = 0;
+    } else {
+        $this->_options['slice'] = 0;
             while ($page = $page_iter->next()) {
-		$this->addPage($page);
+        $this->addPage($page);
             }
-	}
-	if (! is_array($page_iter->_options) || ! array_key_exists('limit_by_db', $page_iter->_options) || ! $page_iter->_options['limit_by_db'])
-		$this->_options['slice'] = 1;
-	if ($i and empty($this->_options['count']))
-	    $this->_options['count'] = $i;
+    }
+    if (! is_array($page_iter->_options) || ! array_key_exists('limit_by_db', $page_iter->_options) || ! $page_iter->_options['limit_by_db'])
+        $this->_options['slice'] = 1;
+    if ($i and empty($this->_options['count']))
+        $this->_options['count'] = $i;
     }
 
     function addPageList (&$list) {
         if (empty($list)) return;  // Protect reset from a null arg
         if (isset($this->_options['limit'])) { // extract from,count from limit
-	    list($from, $limit) = WikiDB_backend::limit($this->_options['limit']);
-	    $limit += $from;
+        list($from, $limit) = WikiDB_backend::limit($this->_options['limit']);
+        $limit += $from;
         } else {
-	    $limit = 0;
+        $limit = 0;
         }
-	$this->_options['slice'] = 0;
+    $this->_options['slice'] = 0;
         $i = 0;
         foreach ($list as $page) {
             $i++;
             if ($from and $i < $from)
                 continue;
-	    if (!$limit or ($limit and $i < $limit)) {
+        if (!$limit or ($limit and $i < $limit)) {
                 if (is_object($page)) $page = $page->_pagename;
                 $this->addPage((string)$page);
-	    }
+        }
         }
     }
 

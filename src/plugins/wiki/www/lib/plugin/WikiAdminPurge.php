@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminPurge.php 7447 2010-05-31 11:29:39Z vargenau $');
+// $Id: WikiAdminPurge.php 8005 2011-03-31 08:45:20Z vargenau $
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -74,15 +74,15 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently purged:"));
+                $result->pushContent(HTML::p(_("One page has been permanently purged:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently purged:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been permanently purged:", $count)));
             }
             $result->pushContent($ul);
             return $result;
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages purged."));
+            $result->pushContent(HTML::p(_("No pages purged.")));
             return $result;
         }
     }

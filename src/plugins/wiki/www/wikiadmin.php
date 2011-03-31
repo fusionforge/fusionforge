@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: wikiadmin.php 7856 2011-01-21 14:48:27Z vargenau $
+<?php // -*-php-*- $Id: wikiadmin.php 7960 2011-03-04 13:58:21Z vargenau $
 /*
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -52,9 +52,9 @@ $user = session_get_user(); // get the session user
 if (!$user || !is_object($user)) {
     exit_error(_('Invalid User'),'home');
 } else if ( $user->isError()) {
-	exit_error($user->getErrorMessage(),'home');
+    exit_error($user->getErrorMessage(),'home');
 } else if ( !$user->isActive()) {
-	exit_error(_('User not active'),'home');
+    exit_error(_('User not active'),'home');
 }
 
 $type = getStringFromRequest('type');
@@ -70,14 +70,14 @@ if (!$type) {
     if ($type == 'admin_post') {
         $group = group_get_object($group_id);
         if ( !$group) {
-			exit_no_group();
+            exit_no_group();
         }
         if (!($group->usesPlugin($pluginname))) { //check if the group has the wiki plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+            exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
         }
         $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
         if ( !$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'),'home');
+            exit_permission_denied(_('You are not a member of this project'),'home');
         }
         //only project admin can access here
         if ( $userperm->isAdmin() ) {
@@ -89,7 +89,7 @@ if (!$type) {
                     $config[$c] = 0;
                 }
             }
- 
+
             foreach ($config as $config_name => $config_value) {
                 $r = $wc->updateWikiConfig($config_name, $config_value);
                 if (!$r) exit_error("Error", $wc->getErrorMessage());
@@ -104,10 +104,10 @@ if (!$type) {
     if ($type == 'admin') {
         $group = group_get_object($group_id);
         if ( !$group) {
-			exit_no_group();
+            exit_no_group();
         }
         if ( ! ($group->usesPlugin ($pluginname)) ) {//check if the group has the plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+            exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
         }
         $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
         if ( !$userperm->IsMember()) {

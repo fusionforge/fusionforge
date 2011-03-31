@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSetAcl.php 7850 2011-01-21 09:41:05Z vargenau $');
+// $Id: WikiAdminSetAcl.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -120,17 +120,17 @@ extends WikiPlugin_WikiAdminSelect
                 }
             }
         } else {
-            $result->pushContent(HTML::p(fmt("Invalid ACL")));
+            $result->pushContent(HTML::p(_("Invalid ACL")));
         }
         if ($count) {
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count > 1) {
-                $result->pushContent(HTML::p(fmt("%s pages have been changed.",$count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been changed.", $count)));
             }
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p(fmt("No pages changed.")));
+            $result->pushContent(HTML::p(_("No pages changed.")));
         }
         return $result;
     }

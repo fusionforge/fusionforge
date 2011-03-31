@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: MediawikiTable.php 7735 2010-11-09 13:45:32Z vargenau $');
+// $Id: MediawikiTable.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: SemanticRelations.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: SemanticRelations.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2005 Reini Urban
  *

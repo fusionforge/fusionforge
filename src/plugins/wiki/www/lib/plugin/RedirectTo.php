@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: RedirectTo.php 7653 2010-08-30 10:41:28Z vargenau $');
+// $Id: RedirectTo.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2002 $ThePhpWikiProgrammingTeam
  *

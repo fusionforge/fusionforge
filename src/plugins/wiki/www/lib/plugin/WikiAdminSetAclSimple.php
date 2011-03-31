@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSetAclSimple.php 7644 2010-08-13 13:34:26Z vargenau $');
+// $Id: WikiAdminSetAclSimple.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent

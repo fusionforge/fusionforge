@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: Captcha.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: Captcha.php 7964 2011-03-05 17:05:30Z vargenau $
 /**
  * Session Captcha v1.0
  *   by Gavin M. Roy <gmr@bteg.net>
@@ -11,7 +11,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This File is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -35,20 +35,20 @@ class Captcha {
 
     function captchaword() {
         if ( ! $this->request->getSessionVar('captchaword')) {
-	    $this->request->setSessionVar('captchaword', $this->get_word());
-	}
+        $this->request->setSessionVar('captchaword', $this->get_word());
+    }
         return $this->request->getSessionVar('captchaword');
     }
 
     function Failed () {
         if ($this->request->getSessionVar('captcha_ok') == true)
             return false;
-	
+
         if ( ! array_key_exists ( 'captcha_input', $this->meta )
              or ($this->request->getSessionVar('captchaword')
                  and ($this->request->getSessionVar('captchaword') != $this->meta['captcha_input'])))
             return true;
-	
+
         $this->request->setSessionVar('captcha_ok', true);
         return false;
     }
@@ -70,9 +70,9 @@ class Captcha {
         return $el;
     }
 
-    function get_word () { 
+    function get_word () {
         if (USE_CAPTCHA_RANDOM_WORD)
-            return get_dictionary_word(); 
+            return get_dictionary_word();
         else
             return rand_ascii_readable($this->length); // lib/stdlib.php
     }
@@ -99,10 +99,10 @@ class Captcha {
     // Draw the Spiral
     function spiral( &$im, $origin_x = 100, $origin_y = 100, $r = 0, $g = 0, $b = 0 ) {
         $theta = 1;
-        $thetac = 6;  
-        $radius = 15;  
-        $circles = 10;  
-        $points = 35;  
+        $thetac = 6;
+        $radius = 15;
+        $circles = 10;
+        $points = 35;
         $lcolor = imagecolorallocate( $im, $r, $g, $b );
         for( $i = 0; $i < ( $circles * $points ) - 1; $i++ ) {
             $theta = $theta + $thetac;
@@ -121,7 +121,7 @@ class Captcha {
     function image ( $word ) {
         $width  =& $this->width;
         $height =& $this->height;
-    
+
         // Create the Image
         $jpg = ImageCreate($width,$height);
         $bg  = ImageColorAllocate($jpg,255,255,255);
@@ -134,7 +134,7 @@ class Captcha {
 
         $x = rand(10, 30);
         $y = rand(50, $height-20); //50-60
-        
+
         // randomize the chars
         for ($i=0; $i < strlen($word); $i++) {
             $angle += rand(-5, 5);
@@ -145,8 +145,8 @@ class Captcha {
             if ( $y < 10 )  $y = 11;
             elseif ( $y > $height-10 ) $y = $height-11;
             $x += rand($size, $size*2);
-            imagettftext($jpg, $size, $angle, $x, $y, $tx, 
-                         realpath(findfile("lib/captcha/Vera.ttf")), 
+            imagettftext($jpg, $size, $angle, $x, $y, $tx,
+                         realpath(findfile("lib/captcha/Vera.ttf")),
                          $word[$i]);
         }
 
@@ -159,18 +159,18 @@ class Captcha {
         imageline($jpg, 0,$height-1,$width-1,$height-1,$tx);
         imageline($jpg, $width-1,0,$width-1,$height-1,$tx);
 
-	if (function_exists("ImageJpeg")) {
-	    header("Content-type: image/jpeg");
-	    ImageJpeg($jpg);
-	} elseif (function_exists("ImagePNG")) {
-	    header("Content-type: image/png");
-	    ImagePNG($jpg);
-	} elseif (function_exists("ImageGIF")) {
-	    header("Content-type: image/gif");
-	    ImageGIF($jpg);
-	} else {
-	    trigger_error("missing GD bitmap support", E_USER_WARNING);
-	}
+    if (function_exists("ImageJpeg")) {
+        header("Content-type: image/jpeg");
+        ImageJpeg($jpg);
+    } elseif (function_exists("ImagePNG")) {
+        header("Content-type: image/png");
+        ImagePNG($jpg);
+    } elseif (function_exists("ImageGIF")) {
+        header("Content-type: image/gif");
+        ImageGIF($jpg);
+    } else {
+        trigger_error("missing GD bitmap support", E_USER_WARNING);
+    }
     }
 
 }
@@ -181,5 +181,5 @@ class Captcha {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

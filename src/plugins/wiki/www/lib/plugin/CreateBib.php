@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateBib.php 7760 2010-12-09 15:07:23Z vargenau $');
+// $Id: CreateBib.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *

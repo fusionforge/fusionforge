@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: ExternalReferrer.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: ExternalReferrer.php 7964 2011-03-05 17:05:30Z vargenau $
 
 /**
  * Detect external referrers
@@ -11,8 +11,8 @@
 if (!function_exists('isExternalReferrer')) { // also defined in stdlib.php
   function isExternalReferrer(&$request) {
     if ($referrer = $request->get('HTTP_REFERER')) {
-    	$home = SCRIPT_NAME; // was SERVER_URL, check sister wiki's: same host but other other script url
-    	if (substr(strtolower($referrer),0,strlen($home)) == strtolower($home)) return false;
+        $home = SCRIPT_NAME; // was SERVER_URL, check sister wiki's: same host but other other script url
+        if (substr(strtolower($referrer),0,strlen($home)) == strtolower($home)) return false;
         require_once("lib/ExternalReferrer.php");
         $se = new SearchEngines();
         return $se->parseSearchQuery($referrer);

@@ -1,16 +1,16 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
+Date: Wed,  9 Mar 2011 18:04:46 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Framsida 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Framsida 7997 2011-03-15 17:26:17Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Framsida;
   flags="";
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-* Vad är WikiWikiWeb? En beskrivning av dess användning.
-* Lär dig [HurManAnvänderWiki] och lär dig att [LäggaTillSidor].
-* Använd [Sandlådan] för att experimentera med Wiki-sidor.
-* Signera gärna ditt namn i [Gästboken].
-* Se [SenasteÄndringar] för nya sidor och de senaste ändringarna.
-* Kolla vilken sida som är [MestPopulär].
-* Läs ReleaseNotes (på engelska).
+* Vad är [[Hjälp:WikiWikiWeb|WikiWikiWeb]]? En beskrivning av dess användning.
+* Lär dig [[Hjälp:HurManAnvänderWiki|HurManAnvänderWiki]] och lär dig att [[Hjälp:LäggaTillSidorLäggaTillSidor]].
+* Använd [[Sandlådan]] för att experimentera med Wiki-sidor.
+* Signera gärna ditt namn i [[Gästboken]].
+* Se [[SenasteÄndringar]] för nya sidor och de senaste ändringarna.
+* Kolla vilken sida som är [[MestPopulär]].
+* Läs [[ReleaseNotes]] (på engelska).

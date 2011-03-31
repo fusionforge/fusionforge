@@ -3,7 +3,7 @@
  *
  * Things which must be done and defined before anything else.
  */
-// rcs_id('$Id: prepend.php 7684 2010-09-10 12:13:48Z vargenau $');
+// $Id: prepend.php 7964 2011-03-05 17:05:30Z vargenau $
 
 // see lib/stdlib.php: phpwiki_version()
 define('PHPWIKI_VERSION', '1.4.0RC1');
@@ -34,9 +34,9 @@ foreach (array('SERVER','REQUEST','GET','POST','SESSION','ENV','COOKIE') as $k) 
 // A new php-5.1.x feature: Turn off php-5.1.x auto_globals_jit = On, or use this mess below.
 if (empty($GLOBALS['HTTP_SERVER_VARS'])) {
     $GLOBALS['HTTP_SERVER_VARS']  =& $_SERVER;
-    $GLOBALS['HTTP_ENV_VARS'] 	  =& $_ENV;
-    $GLOBALS['HTTP_GET_VARS'] 	  =& $_GET;
-    $GLOBALS['HTTP_POST_VARS'] 	  =& $_POST;
+    $GLOBALS['HTTP_ENV_VARS']       =& $_ENV;
+    $GLOBALS['HTTP_GET_VARS']       =& $_GET;
+    $GLOBALS['HTTP_POST_VARS']       =& $_POST;
     $GLOBALS['HTTP_SESSION_VARS'] =& $_SESSION;
     $GLOBALS['HTTP_COOKIE_VARS']  =& $_COOKIE;
     $GLOBALS['HTTP_REQUEST_VARS'] =& $_REQUEST;
@@ -64,7 +64,7 @@ if (defined('DEBUG') and (DEBUG & 8) and extension_loaded("xdebug")) {
 }
 if (defined('DEBUG') and (DEBUG & 32) and extension_loaded("apd")) {
     apd_set_pprof_trace();
-    /*	FUNCTION_TRACE      1
+    /*    FUNCTION_TRACE      1
         ARGS_TRACE          2
         ASSIGNMENT_TRACE    4
         STATEMENT_TRACE     8
@@ -110,7 +110,7 @@ class DebugTimer {
                        $this->getTime('utime', $now),
                        $this->getTime('stime', $now));
     }
-      
+
     function _CLK_TCK() {
         // FIXME: this is clearly not always right.
         // But how to figure out the right value?
@@ -125,7 +125,7 @@ class DebugTimer {
 $RUNTIMER = new DebugTimer;
 /*
 if (defined('E_STRICT') and (E_ALL & E_STRICT)) // strict php5?
-    error_reporting(E_ALL & ~E_STRICT); 	// exclude E_STRICT
+    error_reporting(E_ALL & ~E_STRICT);     // exclude E_STRICT
 else
     error_reporting(E_ALL); // php4
 //echo " prepend: ", error_reporting();
@@ -144,12 +144,12 @@ function ExitWiki($errormsg = false)
 
     if ($in_exit)
         exit;
-  
+
     $in_exit = true;
 
     global $ErrorManager;
     $ErrorManager->flushPostponedErrors();
- 
+
     if(!empty($errormsg)) {
         PrintXML(HTML::br(), $errormsg);
         print "\n</body></html>";
@@ -169,5 +169,5 @@ if (!defined('DEBUG') or (defined('DEBUG') and DEBUG > 2)) {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css 7851 2011-01-21 13:17:59Z vargenau $
+ * $Id: phpwiki.css 7965 2011-03-07 09:47:31Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -11,7 +11,7 @@
 
 /**
  * General
- */ 
+ */
 img { border: 0; }
 
 form { margin: 0ex; }
@@ -60,7 +60,7 @@ div.wikitext {
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0.8em; 
+  padding-left:  0.8em;
   padding-right: 0.8em;
   padding-top:    0.5ex;
   padding-bottom: 0.5ex;
@@ -78,17 +78,15 @@ input#inp-openid {
   padding-left: 18px !important;
 }
 
-/* .interwiki-map thead td { text-decoration: underline; } */
-
 /*
 ** RecentChanges
 */
-.pageinfo-majoredit { 
-	font-weight: bold;
+.pageinfo-majoredit {
+    font-weight: bold;
 }
 .wiki-summary {
-  	font-size: 94%;
-  	font-style: italic;
+      font-size: 94%;
+      font-style: italic;
 }
 
 /* Mozilla RecentChanges Sidebar */
@@ -105,7 +103,7 @@ body.sidebar h2 { margin-top: 0; }
 
 /**
  * Wiki Forms
- * 
+ *
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
@@ -144,14 +142,14 @@ input.wikiaction, input.button, input.wikiadmin {
     /* font-size: inherit; */
 }
 
-a.wikiaction, a.wikiaction:visited, input.wikiaction, input.button { 
-    background-color: #ddd; 
+a.wikiaction, a.wikiaction:visited, input.wikiaction, input.button {
+    background-color: #ddd;
 }
 
 .wikiunsafe { background-color: #fcc; }
 
-a.wikiadmin, a.wikiadmin:visited, input.wikiadmin  { 
-    background-color: #fdd; 
+a.wikiadmin, a.wikiadmin:visited, input.wikiadmin  {
+    background-color: #fdd;
 }
 
 /* Unknown links */
@@ -184,8 +182,8 @@ h1 .backlinks { text-decoration: underline; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
 /* image buttons */
-a.wikibutton, a.wikibutton:visited, input.wikibutton  { 
-    background-color: white; 
+a.wikibutton, a.wikibutton:visited, input.wikibutton  {
+    background-color: white;
 }
 
 /**
@@ -201,7 +199,7 @@ h1 { margin: 0; font-size: 140% }
  */
 table, td { font-family: Arial, Helvetica, sans-serif; }
 caption { font-family: Arial, Helvetica, sans-serif; }
-.pagelist { 
+.pagelist {
   font-size: smaller;
 }
 .pagelist thead td {
@@ -234,7 +232,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   background-color: ThreeDLightShadow;
   color: black;
 }
-
 
 /**
  * Toolbar
@@ -317,7 +314,7 @@ textarea.wikiedit {
   display: none;
   z-index: 100;
   background-color: white;
-  border: 1px solid #d0d0d0; 
+  border: 1px solid #d0d0d0;
   font-size: 9px;
   overflow: hidden;
 }
@@ -326,9 +323,9 @@ textarea.wikiedit {
 }
 #LSResult .evenrow {
   background-color: #f0f0f0;
-} 
+}
 #LSREsult .oddrow {
-} 
+}
 .LSEnd {
   text-align: right;
 }
@@ -337,7 +334,7 @@ textarea.wikiedit {
 }
 .LSRow {
   padding: 1px;
-} 
+}
 ul.LSRes {
   margin: 0px;
   padding: 0px;
@@ -356,14 +353,14 @@ li.LSRow {
   text-decoration: underline;
   margin-bottom: 0.25ex;
   margin-right:  0.25em;
-} 
+}
 .transclusion, .wiki-edithelp {
   font-size: smaller;
 }
 .transclusion {
   border: 1px solid gray;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:     0px;
   padding-bottom:  0px;
   margin-left:   0.25em;
@@ -405,13 +402,13 @@ table.cal {
   padding: 1px;
   /* For Mozilla */
   empty-cells: hide;
-} 
+}
 
 /* cells */
 table.cal td {
   background: white;
   text-align: right;
-} 
+}
 
 /* Month-name header */
 table.cal-header { font-size: larger; }
@@ -481,7 +478,7 @@ table.cal td.cal-today a.cal-hide {  }
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0em; 
+  padding-left:  0em;
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
@@ -543,8 +540,8 @@ td.pageinfo { font-weight: bold; }
   background: #eee;
   margin-top:    1em;
   margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:    0.8ex;
   padding-bottom: 0;
   border: medium solid red;
@@ -555,8 +552,8 @@ td.pageinfo { font-weight: bold; }
   background: #eee;
   margin-top:    1em;
   margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:    0.8ex;
   padding-bottom: 0;
   border: thin solid blue;
@@ -578,7 +575,6 @@ td.pageinfo { font-weight: bold; }
 .hint {
   color: black;
   background: #eeeeee;
-   /* font-size: smaller; */
   font-style: italic;
   margin-left: 3em;
   padding: 0.5ex 0.5em;
@@ -627,8 +623,8 @@ span.redirectfrom {
 .wiki-dl-table tr {
   border-top: 2px #444 solid;
   border-bottom: 2px #444 solid;
-  border-left: none; 
-  border-right: none; 
+  border-left: none;
+  border-right: none;
 }
 .wiki-dl-table th,
 .wiki-dl-table td {
@@ -795,11 +791,11 @@ td.sidebar { border-spacing: 0px; margin: 0ex;}
 /* plugin BoxRight */
 div.boxright {
   background-color: #e9fbff;
-  width: 200px; 
+  width: 200px;
   right: 10px;
-  padding: 0.5em; 
-  float: right; 
-  border: thin solid #888888; 
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
   padding: 0.5em;
 }
 
@@ -811,7 +807,7 @@ div.rssitem { border-top: thin dashed #aaa; }
 a.rssicon { font-weight:normal; font-size:small; vertical-align:middle; }
 
 /* SqlResult */
-table.sqlresult { 
+table.sqlresult {
   border: 1px outset gray;
   background: white;
   margin: 0.5ex 0.5em;
@@ -827,8 +823,8 @@ table.sqlresult td {
 /**
  * TeX2png plugin
  */
-img.tex { 
-  vertical-align: middle; 
+img.tex {
+  vertical-align: middle;
 }
 
 /**
@@ -903,7 +899,7 @@ input.numeric { text-align: right; }
 
 /**
  * Wiki Forms
- * 
+ *
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
@@ -930,7 +926,7 @@ div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin 
  * Links
  */
 
-/* Make wikiaction links look like buttons */ 
+/* Make wikiaction links look like buttons */
 a.wikiaction, a.wikiadmin, a.wikiunsafe,
 input.wikiaction, input.wikiadmin, input.wikiunsafe, input.button {
   color: black;
@@ -971,7 +967,7 @@ div#actionbuttons a#btn-edit {
   padding-right: 0.5em !important;
 }
 /* image buttons */
-a.wikibutton, a.wikibutton:visited, input.wikibutton  { 
+a.wikibutton, a.wikibutton:visited, input.wikibutton  {
   background-color: white;
   border: 0;
 }
@@ -1029,8 +1025,8 @@ table.boxed th, table.bordered th {
 }
 
 #edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {
-	background-color: #ffce7b;
-	border: 1px solid #ffa500;
+    background-color: #ffce7b;
+    border: 1px solid #ffa500;
 }
 
 /* For emacs users

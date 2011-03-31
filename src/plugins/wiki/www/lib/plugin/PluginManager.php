@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PluginManager.php 7659 2010-08-31 14:55:29Z vargenau $');
+// $Id: PluginManager.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent

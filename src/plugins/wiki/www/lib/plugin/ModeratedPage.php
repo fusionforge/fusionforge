@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: ModeratedPage.php 7850 2011-01-21 09:41:05Z vargenau $');
+// $Id: ModeratedPage.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent

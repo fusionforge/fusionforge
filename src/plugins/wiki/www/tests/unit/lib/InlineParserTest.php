@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: InlineParserTest.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: InlineParserTest.php 7956 2011-03-03 17:08:31Z vargenau $
 
 /* Copyright (C) 2004 Dan Frankowski <dfrankow@cs.umn.edu>
  *           (C) 2006, 2007 Reini Urban <rurban@x-ray.at>

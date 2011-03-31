@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: FacebookLike.php 7639 2010-08-11 12:15:16Z vargenau $');
+// $Id: FacebookLike.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2010 Reini Urban
  *

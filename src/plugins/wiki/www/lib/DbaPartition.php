@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: DbaPartition.php 7417 2010-05-19 12:57:42Z vargenau $');
+<?php // $Id: DbaPartition.php 7964 2011-03-05 17:05:30Z vargenau $
 
 class DbaPartition
 {
@@ -10,11 +10,11 @@ class DbaPartition
     function open($mode = 'w') {
         $this->_h->open();
     }
-    
+
     function close() {
         $this->_h->close();
     }
-            
+
     function firstkey() {
         $dbh = &$this->_h;
         $prefix = &$this->_p;
@@ -40,7 +40,7 @@ class DbaPartition
     function exists($key) {
         return $this->_h->exists($this->_p . $key);
     }
-    
+
     function fetch($key) {
         return $this->_h->fetch($this->_p . $key);
     }
@@ -60,7 +60,7 @@ class DbaPartition
     function get($key) {
         return $this->_h->get($this->_p . $key);
     }
-    
+
     function set($key, $val) {
         return $this->_h->set($this->_p . $key, $val);
     }

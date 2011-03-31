@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PDO.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: PDO.php 7956 2011-03-03 17:08:31Z vargenau $
 
 /*
  * Copyright 2005 $ThePhpWikiProgrammingTeam

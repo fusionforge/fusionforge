@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Video.php 7676 2010-09-08 10:08:16Z vargenau $');
+// $Id: Video.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2009 Roger Guignard and Marc-Etienne Vargenau, Alcatel-Lucent
  *

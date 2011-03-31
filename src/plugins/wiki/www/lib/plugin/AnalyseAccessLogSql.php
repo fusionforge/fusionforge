@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: AnalyseAccessLogSql.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: AnalyseAccessLogSql.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2005 Charles Corrigan and $ThePhpWikiProgrammingTeam
  *

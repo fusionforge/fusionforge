@@ -21,7 +21,7 @@
  You should have received a copy of the GNU Lesser General Public
  License along with this library; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- 
+
  If you have any questions or comments, please email:
 
  Chris Petersen
@@ -35,7 +35,7 @@
  */
 
 /*
- * Objectified, simplified, documented and added the two other queries 
+ * Objectified, simplified, documented and added the two other queries
  * by Reini Urban
  */
 
@@ -132,7 +132,7 @@ class GoogleSearchResults {
  *   resultElement that comes from that host contains the host name in
  *   this parameter.
  *
- *   <directoryCategory> - array with "fullViewableName" and 
+ *   <directoryCategory> - array with "fullViewableName" and
  *   "specialEncoding" keys.
  *
  *   <directoryTitle> - If the URL for this resultElement is contained
@@ -174,13 +174,13 @@ class Google {
         return $this;
     }
 
-    /** 
+    /**
      * doGoogleSearch
      *
      * See http://www.google.com/help/features.html for examples of
      * advanced features.  Anything that works at the Google web site
      * will work as a query string in this method.
-     * 
+     *
      * You can use the start and maxResults parameters to page through
      * multiple pages of results. Note that 'maxResults' is currently
      * limited by Google to 10.  See the API reference for more
@@ -263,7 +263,7 @@ class Google {
     /**
      * Get spelling suggestions from Google
      *
-     * @param  string phrase   word or phrase to spell-check 
+     * @param  string phrase   word or phrase to spell-check
      * @return string          text of any suggested replacement, or None
      */
     function doSpellingSuggestion($phrase) {

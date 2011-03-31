@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Utils.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: Utils.php 7967 2011-03-07 13:08:01Z vargenau $
 /*
  * Copyright 2004 Mike Cassano
  *
@@ -18,9 +18,6 @@
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-
-/**
  */
 
 function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM) {
@@ -64,15 +61,15 @@ function getPageTextData($fromUser, $dbi, $START_DELIM, $DELIM) {
     if (is_object($fromUser))
         $fromUser = $fromUser->getId();
     if ($fromUser == "")
-    	return "";
+        return "";
     $userPage = $dbi->getPage($fromUser);
     $transformed = $userPage->getCurrentRevision();
     $pageArray = $transformed->getContent();
     $p = -1;
     for ($i = 0; $i < count($pageArray); $i++){
-    	if($pageArray[$i] != ""){
+        if($pageArray[$i] != ""){
             if(!((strpos($pageArray[$i], $START_DELIM)) === FALSE)){
-            	$p = $i;
+                $p = $i;
                 break;
             }
         }

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSearchReplace.php 7925 2011-02-01 10:08:52Z vargenau $');
+// $Id: WikiAdminSearchReplace.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -103,9 +103,9 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p(_("One page has been permanently changed:")));
+                $result->pushContent(HTML::p(_("One page has been changed:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been changed:", $count)));
             }
             $result->pushContent($ul);
         } else {
@@ -186,7 +186,7 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header->pushContent(
               HTML::p(HTML::strong(
-                                   _("Are you sure you want to permanently replace text in the selected files?"))));
+                                   _("Are you sure you want to replace text in the selected files?"))));
             $this->replaceForm($header, $post_args);
         } else {
             $button_label = _("Search & Replace");

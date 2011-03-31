@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id PhpWeather.php 2002-08-26 15:30:13 rurban$');
+// $Id: PhpWeather.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *

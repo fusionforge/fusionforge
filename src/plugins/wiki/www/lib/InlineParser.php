@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: InlineParser.php 7850 2011-01-21 09:41:05Z vargenau $');
+// $Id: InlineParser.php 7964 2011-03-05 17:05:30Z vargenau $
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004-2010 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -147,27 +147,27 @@ class RegexpSet
         // sf.net: Fatal error: Allowed memory size of 8388608 bytes exhausted
         //         (tried to allocate 634 bytes)
         if (_INLINE_OPTIMIZATION) { // disabled, wrong
-	    // So we try to minize memory usage, by looping explicitly,
-	    // and storing only those regexp which actually match.
-	    // There may be more than one, so we have to find the longest,
-	    // and match inside until the shortest is empty.
-	    $matched = array(); $matched_ind = array();
-	    for ($i=0; $i<count($regexps); $i++) {
-		if (!trim($regexps[$i])) {
-		    trigger_error("empty regexp $i", E_USER_WARNING);
-		    continue;
-		}
-		$pat= "/ ( . $repeat ) ( " . $regexps[$i] . " ) /x";
-		if (preg_match($pat, $text, $_m)) {
-		    $m = $_m; // FIXME: prematch, postmatch is wrong
-		    $matched[] = $regexps[$i];
-		    $matched_ind[] = $i;
-		    $regexp_ind = $i;
-		}
-	    }
-	    // To overcome ANCHORED:
-	    // We could sort by longest match and iterate over these.
-	    if (empty($matched)) return false;
+        // So we try to minize memory usage, by looping explicitly,
+        // and storing only those regexp which actually match.
+        // There may be more than one, so we have to find the longest,
+        // and match inside until the shortest is empty.
+        $matched = array(); $matched_ind = array();
+        for ($i=0; $i<count($regexps); $i++) {
+        if (!trim($regexps[$i])) {
+            trigger_error("empty regexp $i", E_USER_WARNING);
+            continue;
+        }
+        $pat= "/ ( . $repeat ) ( " . $regexps[$i] . " ) /x";
+        if (preg_match($pat, $text, $_m)) {
+            $m = $_m; // FIXME: prematch, postmatch is wrong
+            $matched[] = $regexps[$i];
+            $matched_ind[] = $i;
+            $regexp_ind = $i;
+        }
+        }
+        // To overcome ANCHORED:
+        // We could sort by longest match and iterate over these.
+        if (empty($matched)) return false;
         }
         $match = new RegexpSet_match;
 
@@ -200,7 +200,7 @@ class RegexpSet
           if (!$_already_dumped) {
             var_dump($regexps);
             if (_INLINE_OPTIMIZATION)
-            	var_dump($matched);
+                var_dump($matched);
             var_dump($matched_ind);
           }
           $_already_dumped = 1;
@@ -338,11 +338,11 @@ function LinkBracketLink($bracketlink) {
     // Strip brackets and leading space
     // bug#1904088  Some brackets links on 2 lines cause the parser to crash
     preg_match('/(\#?) \[\s* (?: (.*?) \s* (?<!' . ESCAPE_CHAR . ')(\|) )? \s* (.+?) \s*\]/x',
-	       str_replace("\n", " ", $bracketlink), $matches);
+           str_replace("\n", " ", $bracketlink), $matches);
     if (count($matches) < 4) {
-    	// "[ personal\ninformation manager | PhpWiki:PersonalWiki ]"
-    	trigger_error(_("Invalid [] syntax ignored")._(": ").$bracketlink, E_USER_WARNING);
-    	return new Cached_Link;
+        // "[ personal\ninformation manager | PhpWiki:PersonalWiki ]"
+        trigger_error(_("Invalid [] syntax ignored")._(": ").$bracketlink, E_USER_WARNING);
+        return new Cached_Link;
     }
     list (, $hash, $label, $bar, $rawlink) = $matches;
 
@@ -396,9 +396,9 @@ function LinkBracketLink($bracketlink) {
      * Normally /Page links to the subpage /Page.
      */
     if (SUBPAGE_SEPARATOR == '/') {
-    	if (preg_match('/^\.\.\//', $link)) {
+        if (preg_match('/^\.\.\//', $link)) {
             return new Cached_ExternalLink($link, $label);
-    	}
+        }
     } else if (preg_match('/^(\.\.\/|\/)/', $link)) {
         return new Cached_ExternalLink($link, $label);
     }
@@ -524,18 +524,18 @@ class Markup_bracketlink  extends SimpleMarkup
 class Markup_spellcheck extends SimpleMarkup
 {
     function Markup_spellcheck () {
-	$this->suggestions = $GLOBALS['request']->getArg('suggestions');
+    $this->suggestions = $GLOBALS['request']->getArg('suggestions');
     }
     function getMatchRegexp () {
-    	if (empty($this->suggestions))
-    	    return "(?# false )";
-	$words = array_keys($this->suggestions);
+        if (empty($this->suggestions))
+            return "(?# false )";
+    $words = array_keys($this->suggestions);
         return "(?<= \W ) (?:" . join('|', $words) . ") (?= \W )";
     }
 
     function markup ($match) {
-    	if (empty($this->suggestions) or empty($this->suggestions[$match]))
-    	    return $match;
+        if (empty($this->suggestions) or empty($this->suggestions[$match]))
+            return $match;
         return new Cached_SpellCheck(UnWikiEscape($match), $this->suggestions[$match]);
     }
 }
@@ -738,41 +738,41 @@ class Markup_old_emphasis  extends BalancedMarkup
 class Markup_nestled_emphasis extends BalancedMarkup
 {
     function getStartRegexp() {
-	static $start_regexp = false;
+    static $start_regexp = false;
 
-	if (!$start_regexp) {
-	    // The three possible delimiters
+    if (!$start_regexp) {
+        // The three possible delimiters
             // (none of which can be followed by itself.)
-	    $i = "_ (?! _)";
-	    $b = "\\* (?! \\*)";
-	    $tt = "= (?! =)";
+        $i = "_ (?! _)";
+        $b = "\\* (?! \\*)";
+        $tt = "= (?! =)";
 
-	    $any = "(?: ${i}|${b}|${tt})"; // any of the three.
+        $any = "(?: ${i}|${b}|${tt})"; // any of the three.
 
-	    // Any of [_*=] is okay if preceded by space or one of [-"'/:]
-	    $start[] = "(?<= \\s|^|[-\"'\\/:]) ${any}";
+        // Any of [_*=] is okay if preceded by space or one of [-"'/:]
+        $start[] = "(?<= \\s|^|[-\"'\\/:]) ${any}";
 
-	    // _ or * is okay after = as long as not immediately followed by =
-	    $start[] = "(?<= =) (?: ${i}|${b}) (?! =)";
-	    // etc...
-	    $start[] = "(?<= _) (?: ${b}|${tt}) (?! _)";
-	    $start[] = "(?<= \\*) (?: ${i}|${tt}) (?! \\*)";
+        // _ or * is okay after = as long as not immediately followed by =
+        $start[] = "(?<= =) (?: ${i}|${b}) (?! =)";
+        // etc...
+        $start[] = "(?<= _) (?: ${b}|${tt}) (?! _)";
+        $start[] = "(?<= \\*) (?: ${i}|${tt}) (?! \\*)";
 
 
-	    // any delimiter okay after an opening brace ( [{<(] )
-	    // as long as it's not immediately followed by the matching closing
-	    // brace.
-	    $start[] = "(?<= { ) ${any} (?! } )";
-	    $start[] = "(?<= < ) ${any} (?! > )";
-	    $start[] = "(?<= \\( ) ${any} (?! \\) )";
-	
-	    $start = "(?:" . join('|', $start) . ")";
-	
-	    // Any of the above must be immediately followed by non-whitespace.
-	    $start_regexp = $start . "(?= \S)";
-	}
+        // any delimiter okay after an opening brace ( [{<(] )
+        // as long as it's not immediately followed by the matching closing
+        // brace.
+        $start[] = "(?<= { ) ${any} (?! } )";
+        $start[] = "(?<= < ) ${any} (?! > )";
+        $start[] = "(?<= \\( ) ${any} (?! \\) )";
 
-	return $start_regexp;
+        $start = "(?:" . join('|', $start) . ")";
+
+        // Any of the above must be immediately followed by non-whitespace.
+        $start_regexp = $start . "(?= \S)";
+    }
+
+    return $start_regexp;
     }
 
     function getEndRegexp ($match) {
@@ -810,22 +810,22 @@ class Markup_html_divspan extends BalancedMarkup
         "<(?: div|span )(?: \s[^>]*)?>";
 
     function getEndRegexp ($match) {
-    	if (substr($match,1,4) == 'span')
-    	    $tag = 'span';
-    	else
-    	    $tag = 'div';
+        if (substr($match,1,4) == 'span')
+            $tag = 'span';
+        else
+            $tag = 'div';
         return "<\\/" . $tag . '>';
     }
 
     function markup ($match, $body) {
-    	if (substr($match,1,4) == 'span')
-    	    $tag = 'span';
-    	else
-    	    $tag = 'div';
-    	$rest = substr($match,1+strlen($tag),-1);
-    	if (!empty($rest)) {
+        if (substr($match,1,4) == 'span')
+            $tag = 'span';
+        else
+            $tag = 'div';
+        $rest = substr($match,1+strlen($tag),-1);
+        if (!empty($rest)) {
             $args = parse_attributes($rest);
-    	} else {
+        } else {
             $args = array();
         }
         return new HtmlElement($tag, $args, $body);
@@ -840,18 +840,18 @@ class Markup_html_abbr extends BalancedMarkup
     var $_start_regexp = "<(?: abbr|acronym )(?: [^>]*)?>";
 
     function getEndRegexp ($match) {
-    	if (substr($match,1,4) == 'abbr')
-    	    $tag = 'abbr';
-    	else
-    	    $tag = 'acronym';
+        if (substr($match,1,4) == 'abbr')
+            $tag = 'abbr';
+        else
+            $tag = 'acronym';
         return "<\\/" . $tag . '>';
     }
 
     function markup ($match, $body) {
-    	if (substr($match,1,4) == 'abbr')
-    	    $tag = 'abbr';
-    	else
-    	    $tag = 'acronym';
+        if (substr($match,1,4) == 'abbr')
+            $tag = 'abbr';
+        else
+            $tag = 'acronym';
         $rest = substr($match,1+strlen($tag),-1);
         $attrs = parse_attributes($rest);
         // Remove attributes other than title and lang
@@ -875,7 +875,7 @@ class Markup_color extends BalancedMarkup {
     var $_end_regexp = "%%";
 
     function markup ($match, $body) {
-    	$color = strtolower(substr($match, 7, -1));
+        $color = strtolower(substr($match, 7, -1));
 
         $morecolors = array('beige' => '#f5f5dc',
                             'brown' => '#a52a2a',
@@ -942,7 +942,7 @@ class Markup_plugin extends SimpleMarkup
     var $_match_regexp = '<\?plugin(?:-form)?\s[^\n]+?\?>';
 
     function markup ($match) {
-	return new Cached_PluginInvocation($match);
+    return new Cached_PluginInvocation($match);
     }
 }
 
@@ -954,7 +954,7 @@ class Markup_plugin_wikicreole extends SimpleMarkup
     function markup ($match) {
         $pi = str_replace("<<", "<?plugin ", $match);
         $pi = str_replace(">>", " ?>", $pi);
-	return new Cached_PluginInvocation($pi);
+    return new Cached_PluginInvocation($pi);
     }
 }
 
@@ -966,21 +966,21 @@ class Markup_xml_plugin extends BalancedMarkup
     //var $_start_regexp = "<(?: ".join('|',PLUGIN_MARKUP_MAP)." )(?: \s[^>]*)>";
 
     function getStartRegexp () {
-	global $PLUGIN_MARKUP_MAP;
+    global $PLUGIN_MARKUP_MAP;
         static $_start_regexp;
         if ($_start_regexp) return $_start_regexp;
         if (empty($PLUGIN_MARKUP_MAP)) return '';
         //"<(?: html|search|extsearch|dot|toc|math|richtable|include|tex )(?: \s[^>]*)>"
-	$_start_regexp = "<(?: ".join('|',array_keys($PLUGIN_MARKUP_MAP))." )(?: \s[^>]*|\\/ )>";
+    $_start_regexp = "<(?: ".join('|',array_keys($PLUGIN_MARKUP_MAP))." )(?: \s[^>]*|\\/ )>";
         return $_start_regexp;
     }
     function getEndRegexp ($match) {
         return "<\\/" . $match . '>';
     }
     function markup ($match, $body) {
-	global $PLUGIN_MARKUP_MAP;
+    global $PLUGIN_MARKUP_MAP;
         $name = substr($match,2,-2);
-	$vars = '';
+    $vars = '';
         if (preg_match('/^(\S+)\|(.*)$/', $name, $_m)) {
             $name = $_m[1];
             $vars = $_m[2]; //str_replace(' ', '&', $_m[2]);
@@ -990,7 +990,7 @@ class Markup_xml_plugin extends BalancedMarkup
             return "";
         }
         $plugin = $PLUGIN_MARKUP_MAP[$name];
-	return new Cached_PluginInvocation("<"."?plugin $plugin $vars $body ?".">");
+    return new Cached_PluginInvocation("<"."?plugin $plugin $vars $body ?".">");
     }
 }
 
@@ -1093,8 +1093,8 @@ class Markup_template_plugin  extends SimpleMarkup
 
         // It's a video
         if (is_video($imagename)) {
-    	    $s = '<'.'?plugin Video file="' . $imagename . '" ?'.'>';
-	    return new Cached_PluginInvocation($s);
+            $s = '<'.'?plugin Video file="' . $imagename . '" ?'.'>';
+        return new Cached_PluginInvocation($s);
         }
 
         $page = str_replace("\n", "", $page);
@@ -1119,10 +1119,10 @@ class Markup_template_plugin  extends SimpleMarkup
         }
 
         if ($vars)
-    	    $s = '<'.'?plugin Template page="'.$page.'" '.$vars.' ?'.'>';
-    	else
-    	    $s = '<'.'?plugin Template page="' . $page . '" ?'.'>';
-	return new Cached_PluginInvocation($s);
+            $s = '<'.'?plugin Template page="'.$page.'" '.$vars.' ?'.'>';
+        else
+            $s = '<'.'?plugin Template page="' . $page . '" ?'.'>';
+    return new Cached_PluginInvocation($s);
     }
 }
 
@@ -1178,8 +1178,8 @@ class InlineTransformer
 
     function InlineTransformer ($markup_types = false) {
         global $request;
-	// We need to extend the inline parsers by certain actions, like SearchHighlight,
-	// SpellCheck and maybe CreateToc.
+    // We need to extend the inline parsers by certain actions, like SearchHighlight,
+    // SpellCheck and maybe CreateToc.
         if (!$markup_types) {
             $non_default = false;
             $markup_types = array
@@ -1195,22 +1195,22 @@ class InlineTransformer
                  'html_emphasis', 'html_abbr', 'plugin', 'plugin_wikicreole',
                  'isonumchars', 'isohexchars', /*'html_entities'*/
                  );
-	    if (DISABLE_MARKUP_WIKIWORD)
+        if (DISABLE_MARKUP_WIKIWORD)
                 $markup_types = array_remove($markup_types, 'wikiword');
 
-	    $action = $request->getArg('action');
-	    if ($action == 'SpellCheck' and $request->getArg('suggestions'))
-	    {   // insert it after url
-		array_splice($markup_types, 2, 1, array('url','spellcheck'));
-	    }
-	    if (isset($request->_searchhighlight))
-	    {   // insert it after url
-		array_splice($markup_types, 2, 1, array('url','searchhighlight'));
+        $action = $request->getArg('action');
+        if ($action == 'SpellCheck' and $request->getArg('suggestions'))
+        {   // insert it after url
+        array_splice($markup_types, 2, 1, array('url','spellcheck'));
+        }
+        if (isset($request->_searchhighlight))
+        {   // insert it after url
+        array_splice($markup_types, 2, 1, array('url','searchhighlight'));
                 //$request->setArg('searchhighlight', false);
-	    }
+        }
         } else {
             $non_default = true;
-	}
+    }
         foreach ($markup_types as $mtype) {
             $class = "Markup_$mtype";
             $this->_addMarkup(new $class);

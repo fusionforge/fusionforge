@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PageDump.php 7857 2011-01-21 14:49:59Z vargenau $');
+// $Id: PageDump.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright (C) 2003 $ThePhpWikiProgrammingTeam
  *

@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: tinymce.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: tinymce.php 7956 2011-03-03 17:08:31Z vargenau $
 /**
  * Multiple browser support, currently Mozilla (PC, Mac and Linux), 
  * MSIE (PC) and FireFox (PC, Mac and Linux) and some limited Safari support.

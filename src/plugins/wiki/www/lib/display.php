@@ -1,6 +1,6 @@
 <?php
 // display.php: fetch page or get default content
-// rcs_id('$Id: display.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: display.php 8002 2011-03-17 09:10:25Z vargenau $
 
 require_once('lib/Template.php');
 
@@ -17,7 +17,7 @@ function GleanKeywords ($page) {
     $links = $page->getPageLinks();
     $keywords[] = SplitPagename($page->getName());
     while ($link = $links->next()) {
-    	$m = array();
+        $m = array();
         if (preg_match($KeywordLinkRegexp, $link->getName(), $m))
             $keywords[] = SplitPagename($m[0]);
     }
@@ -37,7 +37,7 @@ function RedirectorLink($pagename) {
                    $pagename);
 }
 
-/* only on ?action= */  
+/* only on ?action= */
 function actionPage(&$request, $action) {
     global $WikiTheme;
     global $robots;
@@ -71,7 +71,7 @@ function actionPage(&$request, $action) {
     $args = array();
     if (GOOGLE_LINKS_NOFOLLOW) {
         $robots = "noindex,nofollow";
-	$args = array('ROBOTS_META' => $robots);
+    $args = array('ROBOTS_META' => $robots);
     }
 
     /* Handle other formats: So far we had html only.
@@ -81,83 +81,83 @@ function actionPage(&$request, $action) {
        rdf and owl are handled by SemanticWeb.
     */
     $format = $request->getArg('format');
-  
+
     /* At first the single page formats: html, xml */
     if ($pagename == _("LinkDatabase")) {
         $template = Template('browse', array('CONTENT' => $transformedContent));
-	GeneratePage($template, $pagetitle, $revision, $args);
+    GeneratePage($template, $pagetitle, $revision, $args);
     } elseif (!$format or $format == 'html' or $format == 'sidebar' or $format == 'contribs') {
-	$template = Template('browse', array('CONTENT' => $transformedContent));
-	GeneratePage($template, $pagetitle, $revision, $args);
+    $template = Template('browse', array('CONTENT' => $transformedContent));
+    GeneratePage($template, $pagetitle, $revision, $args);
     } elseif ($format == 'xml') {
-    	$request->setArg('format','');
-	$template = new Template('browse', $request,
+        $request->setArg('format','');
+    $template = new Template('browse', $request,
                                  array('revision' => $revision,
                                        'CONTENT'  => $transformedContent,
-				       ));
-	$html = GeneratePageAsXML($template, $pagename, $revision /*,
-				  array('VALID_LINKS' => $args['VALID_LINKS'])*/);
-	header("Content-Type: application/xhtml+xml; charset=" . $GLOBALS['charset']);
-	echo $html;
+                       ));
+    $html = GeneratePageAsXML($template, $pagename, $revision /*,
+                  array('VALID_LINKS' => $args['VALID_LINKS'])*/);
+    header("Content-Type: application/xhtml+xml; charset=" . $GLOBALS['charset']);
+    echo $html;
     } else {
-    	$pagelist = null;
-    	require_once('lib/WikiPlugin.php');
-	// Then the multi-page formats
-	// rss (if not already handled by RecentChanges)
-	// Need the pagelist from the first plugin
-	foreach($transformedContent->_content as $cached_element) {
-	    if (is_a($cached_element, "Cached_PluginInvocation")) {
-	        $loader = new WikiPluginLoader;
-	        $markup = null;
-	        // return the first found pagelist
-	        $pagelist = $loader->expandPI($cached_element->_pi, $request,
-	                                      $markup, $pagename);
-	        if (is_a($pagelist, 'PageList'))
-	            break;
-	    }
-	}
+        $pagelist = null;
+        require_once('lib/WikiPlugin.php');
+    // Then the multi-page formats
+    // rss (if not already handled by RecentChanges)
+    // Need the pagelist from the first plugin
+    foreach($transformedContent->_content as $cached_element) {
+        if (is_a($cached_element, "Cached_PluginInvocation")) {
+            $loader = new WikiPluginLoader;
+            $markup = null;
+            // return the first found pagelist
+            $pagelist = $loader->expandPI($cached_element->_pi, $request,
+                                          $markup, $pagename);
+            if (is_a($pagelist, 'PageList'))
+                break;
+        }
+    }
         if (!$pagelist or !is_a($pagelist, 'PageList')) {
-	    if (!in_array($format, array("rss91","rss2","rss","atom","rdf")))
-		trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.",
-				      $format)
-			      ."\n".("Fall back to single page mode"), E_USER_WARNING);
-	    require_once('lib/PageList.php');
-	    $pagelist = new PageList();
-	    if ($format == 'pdf')
-	        $pagelist->addPage($page);
-	} else {
+        if (!in_array($format, array("rss91","rss2","rss","atom","rdf")))
+        trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.",
+                      $format)
+                  ."\n".("Fall back to single page mode"), E_USER_WARNING);
+        require_once('lib/PageList.php');
+        $pagelist = new PageList();
+        if ($format == 'pdf')
+            $pagelist->addPage($page);
+    } else {
             foreach ($pagelist->_pages as $page) {
-            	$name = $page->getName();
-            	if ($name != $pagename and $page->exists())
+                $name = $page->getName();
+                if ($name != $pagename and $page->exists())
                     $args['VALID_LINKS'][] = $name;
             }
-	}
-	if ($format == 'pdf') {
-	    require_once("lib/pdf.php");
-	    array_unshift($args['VALID_LINKS'], $pagename);
-	    ConvertAndDisplayPdfPageList($request, $pagelist, $args);
-	}
-	elseif ($format == 'ziphtml') { // need to fix links
-	    require_once('lib/loadsave.php');
-	    array_unshift($args['VALID_LINKS'], $pagename);
-	    $request->setArg('zipname', FilenameForPage($pagename).".zip");
-	    $request->setArg('pages', $args['VALID_LINKS']);
-	    $request->setArg('format','');
-	    MakeWikiZipHtml($request);
-	} // time-sorted RDF á la RecentChanges
-	elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
+    }
+    if ($format == 'pdf') {
+        require_once("lib/pdf.php");
+        array_unshift($args['VALID_LINKS'], $pagename);
+        ConvertAndDisplayPdfPageList($request, $pagelist, $args);
+    }
+    elseif ($format == 'ziphtml') { // need to fix links
+        require_once('lib/loadsave.php');
+        array_unshift($args['VALID_LINKS'], $pagename);
+        $request->setArg('zipname', FilenameForPage($pagename).".zip");
+        $request->setArg('pages', $args['VALID_LINKS']);
+        $request->setArg('format','');
+        MakeWikiZipHtml($request);
+    } // time-sorted RDF á la RecentChanges
+    elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
             $args = $request->getArgs();
             //$request->setArg('format','');
             if ($pagename == _("RecentChanges")) {
                 $template->printExpansion($args);
-	    } else {
-	        require_once("lib/plugin/RecentChanges.php");
-	        $plugin = new WikiPlugin_RecentChanges();
+        } else {
+            require_once("lib/plugin/RecentChanges.php");
+            $plugin = new WikiPlugin_RecentChanges();
                 return $plugin->format($plugin->getChanges($request->_dbi, $args), $args);
-	    }
-	} elseif ($format == 'json') { // for faster autocompletion on searches
-	    $req_args =& $request->args;
-	    unset($req_args['format']);
+        }
+    } elseif ($format == 'json') { // for faster autocompletion on searches
+        $req_args =& $request->args;
+        unset($req_args['format']);
             $json = array('count' => count($pagelist->_pages),
                           'list'  => $args['VALID_LINKS'],
                           'args'  => $req_args,
@@ -171,25 +171,25 @@ function actionPage(&$request, $action) {
             }
             header("Content-Type: application/json");
             die($json_enc);
-	} elseif ($format == 'rdf') { // all semantic relations and attributes
-	    require_once("lib/SemanticWeb.php");
-	    $rdf = new RdfWriter($request, $pagelist);
-	    $rdf->format();
-	} elseif ($format == 'rdfs') {
-	    require_once("lib/SemanticWeb.php");
-	    $rdf = new RdfsWriter($request, $pagelist);
-	    $rdf->format();
-	} elseif ($format == 'owl') { // or daml?
-	    require_once("lib/SemanticWeb.php");
-	    $rdf = new OwlWriter($request, $pagelist);
-	    $rdf->format();
-	} else {
-	    if (!in_array($pagename, array(_("LinkDatabase"))))
-		trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
-	    	              E_USER_WARNING);
-	    $template = Template('browse', array('CONTENT' => $transformedContent));
-	    GeneratePage($template, $pagetitle, $revision, $args);
-	}
+    } elseif ($format == 'rdf') { // all semantic relations and attributes
+        require_once("lib/SemanticWeb.php");
+        $rdf = new RdfWriter($request, $pagelist);
+        $rdf->format();
+    } elseif ($format == 'rdfs') {
+        require_once("lib/SemanticWeb.php");
+        $rdf = new RdfsWriter($request, $pagelist);
+        $rdf->format();
+    } elseif ($format == 'owl') { // or daml?
+        require_once("lib/SemanticWeb.php");
+        $rdf = new OwlWriter($request, $pagelist);
+        $rdf->format();
+    } else {
+        if (!in_array($pagename, array(_("LinkDatabase"))))
+        trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
+                          E_USER_WARNING);
+        $template = Template('browse', array('CONTENT' => $transformedContent));
+        GeneratePage($template, $pagetitle, $revision, $args);
+    }
     }
     $request->checkValidators();
     flush();
@@ -208,7 +208,7 @@ function displayPage(&$request, $template=false) {
             NoSuchRevision($request, $page, $version);
         /* Tell Google (and others) to ignore old versions of pages */
         $robots = "noindex,nofollow";
-	$toks['ROBOTS_META'] = $robots;
+    $toks['ROBOTS_META'] = $robots;
     }
     else {
         $revision = $page->getCurrentRevision();
@@ -221,17 +221,17 @@ function displayPage(&$request, $template=false) {
         // DOCTYPE html needed to allow unencoded entities like &nbsp; without !CDATA[]
         echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',"\n";
-	if ($page->exists()) {
-	    header("Last-Modified: " . Rfc1123DateTime($revision->get('mtime')));
-	    $request->cacheControl();
-	    $request->setArg('format','');
+    if ($page->exists()) {
+        header("Last-Modified: " . Rfc1123DateTime($revision->get('mtime')));
+        $request->cacheControl();
+        $request->setArg('format','');
             $page_content = $revision->getTransformedContent();
             $page_content->printXML();
             $request->_is_buffering_output = false; // avoid wrong Content-Length with errors
             $request->finish();
         }
         else {
-	    $request->cacheControl();
+        $request->cacheControl();
             echo('<div style="display:none;" />');
             $request->_is_buffering_output = false; // avoid wrong Content-Length with errors
             $request->finish();
@@ -275,7 +275,7 @@ function displayPage(&$request, $template=false) {
         $redirect_message = HTML::span(array('class' => 'redirectfrom'),
                                        fmt("(Redirected from %s)",
                                            RedirectorLink($redirect_from)));
-    // abuse the $redirected template var for some status update notice                                     
+    // abuse the $redirected template var for some status update notice
     } elseif ($request->getArg('errormsg')) {
         $redirect_message = $request->getArg('errormsg');
         $request->setArg('errormsg', false);
@@ -303,8 +303,8 @@ function displayPage(&$request, $template=false) {
     // On external searchengine (google) referrer, highlight the searchterm and
     // pass through the Searchhighlight actionpage.
     if ($result = isExternalReferrer($request)) {
-    	if (!empty($result['query'])) {
-    	    if (ENABLE_SEARCHHIGHLIGHT) {
+        if (!empty($result['query'])) {
+            if (ENABLE_SEARCHHIGHLIGHT) {
                 $request->_searchhighlight = $result;
                 $request->appendValidators(array('%mtime' => time())); // force no cache(?)
                 // Should be changed to check the engine and search term only
@@ -312,9 +312,9 @@ function displayPage(&$request, $template=false) {
                 $page_content = new TransformedText($revision->getPage(),
                                                     $revision->getPackedContent(),
                                                     $revision->getMetaData());
-		/* Now add the SearchHighlight plugin to the top of the page, in memory only.
-		   You can parametrize this by changing the SearchHighlight action page.
-		*/
+        /* Now add the SearchHighlight plugin to the top of the page, in memory only.
+           You can parametrize this by changing the SearchHighlight action page.
+        */
                 if ($actionpage = $request->findActionPage('SearchHighlight')) {
                     $actionpage = $request->getPage($actionpage);
                     $actionrev = $actionpage->getCurrentRevision();
@@ -326,34 +326,26 @@ function displayPage(&$request, $template=false) {
                     $toks['SEARCH_ENGINE'] = $result['engine'];
                     $toks['SEARCH_ENGINE_URL'] = $result['engine_url'];
                     $toks['SEARCH_TERM'] = $result['query'];
-		    //$toks['HEADER'] = HTML($actionpage->getName(),": ",$pageheader); // h1 with backlink
+            //$toks['HEADER'] = HTML($actionpage->getName(),": ",$pageheader); // h1 with backlink
                     $actioncontent = new TransformedText($actionrev->getPage(),
                                                          $actionrev->getPackedContent(),
                                                          $actionrev->getMetaData());
-		    // prepend the actionpage in front of the hightlighted content
-	            $toks['CONTENT'] = HTML($actioncontent, $page_content);
+            // prepend the actionpage in front of the hightlighted content
+                $toks['CONTENT'] = HTML($actioncontent, $page_content);
                 }
-	    }
-	} else {
+        }
+    } else {
             $page_content = $revision->getTransformedContent();
-	}
+    }
     } else {
         $page_content = $revision->getTransformedContent();
     }
- 
-    /* Check for special pagenames, which are no actionpages. */
-    /*
-    if ( $pagename == _("RecentVisitors")) {
-        $robots = "noindex,follow";
-        $toks['ROBOTS_META'] = $robots;
-    } else
-    */
+
     if ($pagename == _("SandBox")) {
         $robots = "noindex,nofollow";
         $toks['ROBOTS_META'] = $robots;
     } else if (isActionPage($pagename)) {
-        // AllPages must not be indexed, but must be followed to get all pages
-        $robots = "noindex,follow";
+        $robots = "noindex,nofollow";
         $toks['ROBOTS_META'] = $robots;
     } else if (!isset($toks['ROBOTS_META'])) {
         $robots = "index,follow";
@@ -379,44 +371,44 @@ function displayPage(&$request, $template=false) {
     /* Only single page versions. rss only if not already handled by RecentChanges.
      */
     if (!$format or $format == 'html' or $format == 'sidebar' or $format == 'contribs') {
-	$template->printExpansion($toks);
+    $template->printExpansion($toks);
     } else {
-	// No pagelist here. Single page version only
-	require_once("lib/PageList.php");
-	$pagelist = new PageList();
-	$pagelist->addPage($page);
-	if ($format == 'pdf') {
-	    require_once("lib/pdf.php");
-	    $request->setArg('format','');
-	    ConvertAndDisplayPdfPageList($request, $pagelist);
-	// time-sorted rdf a la RecentChanges
-	} elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
-	    //$request->setArg('format','');
+    // No pagelist here. Single page version only
+    require_once("lib/PageList.php");
+    $pagelist = new PageList();
+    $pagelist->addPage($page);
+    if ($format == 'pdf') {
+        require_once("lib/pdf.php");
+        $request->setArg('format','');
+        ConvertAndDisplayPdfPageList($request, $pagelist);
+    // time-sorted rdf a la RecentChanges
+    } elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
+        //$request->setArg('format','');
             if ($pagename == _("RecentChanges"))
                 $template->printExpansion($toks);
-            else {  
-	        require_once("lib/plugin/RecentChanges.php");
-	        $plugin = new WikiPlugin_RecentChanges();
+            else {
+            require_once("lib/plugin/RecentChanges.php");
+            $plugin = new WikiPlugin_RecentChanges();
                 $args = $request->getArgs();
                 return $plugin->format($plugin->getChanges($request->_dbi, $args), $args);
             }
-	} elseif ($format == 'rdf') { // all semantic relations and attributes
-	    require_once("lib/SemanticWeb.php");
-	    $rdf = new RdfWriter($request, $pagelist);
-	    $rdf->format();
-	} elseif ($format == 'owl') { // or daml?
-	    require_once("lib/SemanticWeb.php");
-	    $rdf = new OwlWriter($request, $pagelist);
-	    $rdf->format();
-	} elseif ($format == 'json') { // include page content asynchronously
-	    $request->setArg('format','');
-	    if ($page->exists())
-            	$content = $page_content->asXML();
+    } elseif ($format == 'rdf') { // all semantic relations and attributes
+        require_once("lib/SemanticWeb.php");
+        $rdf = new RdfWriter($request, $pagelist);
+        $rdf->format();
+    } elseif ($format == 'owl') { // or daml?
+        require_once("lib/SemanticWeb.php");
+        $rdf = new OwlWriter($request, $pagelist);
+        $rdf->format();
+    } elseif ($format == 'json') { // include page content asynchronously
+        $request->setArg('format','');
+        if ($page->exists())
+                $content = $page_content->asXML();
             else
                 $content = '';
-	    $req_args = $request->args;
-	    unset($req_args['format']);
-	    // no meta-data so far, just the content
+        $req_args = $request->args;
+        unset($req_args['format']);
+        // no meta-data so far, just the content
             $json = array('content' => $content,
                           'args'    => $req_args,
                           'phpwiki-version' => PHPWIKI_VERSION);
@@ -429,19 +421,19 @@ function displayPage(&$request, $template=false) {
             }
             header("Content-Type: application/json");
             die($json_enc);
-	} else {
-	    if (!in_array($pagename, array(_("LinkDatabase"))))
-		trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
-	    	              E_USER_WARNING);
-	    $template->printExpansion($toks);
-	}
+    } else {
+        if (!in_array($pagename, array(_("LinkDatabase"))))
+        trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
+                          E_USER_WARNING);
+        $template->printExpansion($toks);
     }
-  
+    }
+
     $page->increaseHitCount();
 
     if ($request->getArg('action') != 'pdf') {
         $request->checkValidators();
-    	flush();
+        flush();
     }
     return '';
 }

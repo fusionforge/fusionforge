@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: TexToPng.php 7639 2010-08-11 12:15:16Z vargenau $');
+// $Id: TexToPng.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2002 Johannes Große

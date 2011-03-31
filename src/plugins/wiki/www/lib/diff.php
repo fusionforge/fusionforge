@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: diff.php 7546 2010-06-17 14:09:32Z vargenau $');
+// $Id: diff.php 7953 2011-03-03 16:21:48Z vargenau $
 // diff.php
 //
 // PhpWiki diff output code.
@@ -44,7 +44,7 @@ class _HWLDF_WordAccumulator {
 
         foreach ($words as $word) {
             // new-line should only come as first char of word.
-            if ($word === "") 
+            if ($word === "")
                 continue;
             if ($word[0] == "\n") {
                 $this->_group .= " ";
@@ -220,13 +220,13 @@ function showDiff (&$request) {
         $version = $request->getArg('version');
         $previous = $request->getArg('previous');
     }
- 
+
     // abort if page doesn't exist
     $dbi = $request->getDbh();
     $page = $request->getPage();
     $current = $page->getCurrentRevision(false);
     if ($current->getVersion() < 1) {
-	$html = HTML::div(array('class'=>'wikitext','id'=>'difftext'),
+        $html = HTML::div(array('class'=>'wikitext','id'=>'difftext'),
                           HTML::p(fmt("I'm sorry, there is no such page as %s.",
                                       WikiLink($pagename, 'unknown'))));
         require_once('lib/Template.php');
@@ -317,14 +317,16 @@ function showDiff (&$request) {
 
         if ($diff->isEmpty()) {
             $html->pushContent(HTML::hr(),
-                               HTML::p(_("Content of versions "), $old->getVersion(),
-                                       _(" and "), $new->getVersion(), _(" is identical.")));
+                               HTML::p(sprintf(_("Content of versions %1$s and %2$s is identical."),
+                                               $old->getVersion(),
+                                               $new->getVersion())));
             // If two consecutive versions have the same content, it is because the page was
             // renamed, or metadata changed: ACL, owner, markup.
             // We give the reason by printing the summary.
             if (($new->getVersion() - $old->getVersion()) == 1) {
-                $html->pushContent(HTML::p(_("Version "), $new->getVersion(), 
-                                           _(" was created because: "), $new->get('summary')));
+                $html->pushContent(HTML::p(sprintf(_("Version %1$s was created because: %2$s"),
+                                                   $new->getVersion(),
+                                                   $new->get('summary'))));
             }
         } else {
             $fmt = new HtmlUnifiedDiffFormatter;

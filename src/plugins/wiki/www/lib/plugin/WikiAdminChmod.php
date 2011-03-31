@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminChmod.php 7647 2010-08-23 15:10:10Z vargenau $');
+// $Id: WikiAdminChmod.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -76,15 +76,15 @@ extends WikiPlugin_WikiAdminSelect
                 }
             }
         } else {
-            $ul->pushContent(HTML::li(fmt("Invalid chmod string")));
+            $ul->pushContent(HTML::li(_("Invalid chmod string")));
         }
         if ($count) {
             $dbi->touch();
             return HTML($ul,
-                        HTML::p(fmt("%s pages have been changed.",$count)));
+                        HTML::p(fmt("%d pages have been changed.", $count)));
         } else {
             return HTML($ul,
-                        HTML::p(fmt("No pages changed.")));
+                        HTML::p(_("No pages changed.")));
         }
     }
 

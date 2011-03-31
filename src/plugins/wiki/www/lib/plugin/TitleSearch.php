@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: TitleSearch.php 7554 2010-06-21 08:56:10Z rurban $');
+// $Id: TitleSearch.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999,2000,2001,2002,2004,2005,2010 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent

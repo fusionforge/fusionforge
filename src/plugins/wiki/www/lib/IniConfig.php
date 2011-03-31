@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: IniConfig.php 7693 2010-09-17 11:33:14Z rurban $');
+// $Id: IniConfig.php 8004 2011-03-31 07:51:51Z vargenau $
 /**
  * A configurator intended to read its config from a PHP-style INI file,
  * instead of a PHP file.
@@ -77,23 +77,23 @@ function save_dump($file) {
         $ignore["_".$key]++;
     }
     foreach (array("HTTP_POST_FILES","GLOBALS","RUNTIMER","ErrorManager",'LANG',
-    		   'HOME_PAGE','request','SCRIPT_NAME','VIRTUAL_PATH','SCRIPT_FILENAME') as $key)
-    	$ignore[$key]++;
+               'HOME_PAGE','request','SCRIPT_NAME','VIRTUAL_PATH','SCRIPT_FILENAME') as $key)
+        $ignore[$key]++;
     $fp = fopen($file, "wb");
     fwrite($fp,"<?php\n");
     fwrite($fp,"function wiki_configrestore(){\n");
     //TODO: optimize this by removing ignore, big serialized array and merge into existing GLOBALS
     foreach ($vars as $var => $val) {
-    	if (!$ignore[$var])
+        if (!$ignore[$var])
             fwrite($fp, "\$GLOBALS['".$var."']=unserialize(\""
-            		    .addslashes(serialize($val))."\");\n");
+                        .addslashes(serialize($val))."\");\n");
     }
     // cannot be optimized, maybe leave away predefined consts somehow
     foreach (get_defined_constants() as $var => $val) {
-    	if (substr($var,0,4) != "PHP_" and substr($var,0,2) != "E_"
-    	    and substr($var,0,2) != "T_"  and substr($var,0,2) != "M_")
+        if (substr($var,0,4) != "PHP_" and substr($var,0,2) != "E_"
+            and substr($var,0,2) != "T_"  and substr($var,0,2) != "M_")
             fwrite($fp, "if(!defined('".$var."')) define('".$var."',unserialize(\""
-            	        .addslashes(serialize($val))."\"));\n");
+                        .addslashes(serialize($val))."\"));\n");
     }
     fwrite($fp, "return 'noerr';}");
     fwrite($fp,"?>");
@@ -148,7 +148,7 @@ function IniConfig($file) {
          'ALLOWED_PROTOCOLS', 'INLINE_IMAGES', 'SUBPAGE_SEPARATOR', /*'KEYWORDS',*/
          // extra logic:
          //'DATABASE_PREFIX', 'DATABASE_DSN', 'DATABASE_TYPE', 'DATABASE_DBHANDLER',
-	 'DATABASE_OPTIMISE_FREQUENCY',
+         'DATABASE_OPTIMISE_FREQUENCY',
          'INTERWIKI_MAP_FILE', 'COPYRIGHTPAGE_TITLE', 'COPYRIGHTPAGE_URL',
          'AUTHORPAGE_TITLE', 'AUTHORPAGE_URL',
          'WIKI_NAME_REGEXP',
@@ -158,7 +158,7 @@ function IniConfig($file) {
          'WYSIWYG_BACKEND', 'PLUGIN_MARKUP_MAP',
          // extra logic:
          'SERVER_NAME','SERVER_PORT','SCRIPT_NAME', 'DATA_PATH', 'PHPWIKI_DIR', 'VIRTUAL_PATH',
-	 'EXTERNAL_HTML2PDF_PAGELIST', 'PLUGIN_CACHED_CACHE_DIR'
+         'EXTERNAL_HTML2PDF_PAGELIST', 'PLUGIN_CACHED_CACHE_DIR'
          );
 
     // Optional values which need to be defined.
@@ -176,7 +176,7 @@ function IniConfig($file) {
          'SESSION_SAVE_PATH',
          'TOOLBAR_PAGELINK_PULLDOWN', 'TOOLBAR_TEMPLATE_PULLDOWN', 'TOOLBAR_IMAGE_PULLDOWN',
          'EXTERNAL_LINK_TARGET', 'ACCESS_LOG_SQL', 'USE_EXTERNAL_HTML2PDF',
-	 'LOGIN_LOG','LDAP_SEARCH_FILTER'
+         'LOGIN_LOG','LDAP_SEARCH_FILTER'
          );
 
     // List of all valid config options to be define()d which take booleans.
@@ -201,7 +201,7 @@ function IniConfig($file) {
          'DISABLE_MARKUP_WIKIWORD', 'ENABLE_MARKUP_COLOR', 'ENABLE_MARKUP_TEMPLATE',
          'ENABLE_MARKUP_MEDIAWIKI_TABLE',
          'ENABLE_MARKUP_DIVSPAN', 'USE_BYTEA', 'UPLOAD_USERDIR', 'DISABLE_UNITS',
-	 'ENABLE_SEARCHHIGHLIGHT', 'DISABLE_UPLOAD_ONLY_ALLOWED_EXTENSIONS',
+         'ENABLE_SEARCHHIGHLIGHT', 'DISABLE_UPLOAD_ONLY_ALLOWED_EXTENSIONS',
          'ENABLE_AUTH_OPENID', 'INSECURE_ACTIONS_LOCALHOST_ONLY',
          'ENABLE_MAILNOTIFY', 'ENABLE_RECENTCHANGESBOX', 'ENABLE_PAGE_PUBLIC',
          'ENABLE_AJAX', 'ENABLE_EXTERNAL_PAGES',
@@ -211,11 +211,11 @@ function IniConfig($file) {
     $rs = @parse_ini_file($file);
     $rsdef = @parse_ini_file(dirname(__FILE__)."/../config/config-default.ini");
     foreach ($rsdef as $k => $v) {
-    	if (defined($k)) {
-    	    $rs[$k] = constant($k);
-    	} elseif (!isset($rs[$k])) {
-    	    $rs[$k] = $v;
-    	}
+        if (defined($k)) {
+            $rs[$k] = constant($k);
+        } elseif (!isset($rs[$k])) {
+            $rs[$k] = $v;
+        }
     }
     unset($k); unset($v);
 
@@ -293,13 +293,13 @@ function IniConfig($file) {
 
     // Database
     global $DBParams;
-    foreach (array('DATABASE_TYPE' 	=> 'dbtype',
-    		   'DATABASE_DSN'  	=> 'dsn',
-    		   'DATABASE_SESSION_TABLE' => 'db_session_table',
-    		   'DATABASE_DBA_HANDLER'   => 'dba_handler',
-    	           'DATABASE_DIRECTORY' => 'directory',
-    	           'DATABASE_TIMEOUT'   => 'timeout',
-    	           'DATABASE_PREFIX'    => 'prefix')
+    foreach (array('DATABASE_TYPE'     => 'dbtype',
+               'DATABASE_DSN'      => 'dsn',
+               'DATABASE_SESSION_TABLE' => 'db_session_table',
+               'DATABASE_DBA_HANDLER'   => 'dba_handler',
+                   'DATABASE_DIRECTORY' => 'directory',
+                   'DATABASE_TIMEOUT'   => 'timeout',
+                   'DATABASE_PREFIX'    => 'prefix')
              as $item => $k)
     {
         if (defined($item)) {
@@ -350,18 +350,18 @@ function IniConfig($file) {
     // Expiry stuff
     global $ExpireParams;
     foreach (array('major','minor','author') as $major) {
-    	foreach (array('max_age','min_age','min_keep','keep','max_keep') as $max) {
-    	    $item = strtoupper($major) . '_'. strtoupper($max);
+        foreach (array('max_age','min_age','min_keep','keep','max_keep') as $max) {
+            $item = strtoupper($major) . '_'. strtoupper($max);
             if (defined($item)) $val = constant($item);
             elseif (array_key_exists($item, $rs))
                 $val = $rs[$item];
-    	    elseif (array_key_exists($item, $rsdef))
+            elseif (array_key_exists($item, $rsdef))
                 $val = $rsdef[$item];
             if (!isset($ExpireParams[$major]))
                 $ExpireParams[$major] = array();
             $ExpireParams[$major][$max] = $val;
             unset($rs[$item]);
-    	}
+        }
     }
     unset($item); unset($major); unset($max);
 
@@ -409,34 +409,36 @@ function IniConfig($file) {
 
     // TODO: Currently unsupported on non-SQL. Nice to have for RhNavPlugin
     // CHECKME: PDO
-    if (array_key_exists('ACCESS_LOG_SQL', $rs)) {
-    	// WikiDB_backend::isSql() not yet loaded
-        if (!in_array(DATABASE_TYPE, array('SQL','ADODB','PDO')))
-            // override false config setting on no SQL WikiDB database.
-            define('ACCESS_LOG_SQL', 0);
-    }
-    // SQL defaults to ACCESS_LOG_SQL = 2
-    else {
-        define('ACCESS_LOG_SQL',
-               in_array(DATABASE_TYPE, array('SQL','ADODB','PDO')) ? 2 : 0);
+    if (!defined('ACCESS_LOG_SQL')) {
+        if (array_key_exists('ACCESS_LOG_SQL', $rs)) {
+            // WikiDB_backend::isSql() not yet loaded
+            if (!in_array(DATABASE_TYPE, array('SQL','ADODB','PDO'))) {
+                // override false config setting on no SQL WikiDB database.
+                define('ACCESS_LOG_SQL', 0);
+            }
+        // SQL defaults to ACCESS_LOG_SQL = 2
+        } else {
+            define('ACCESS_LOG_SQL',
+            in_array(DATABASE_TYPE, array('SQL','ADODB','PDO')) ? 2 : 0);
+        }
     }
 
     global $PLUGIN_MARKUP_MAP;
     $PLUGIN_MARKUP_MAP = array();
     if (defined('PLUGIN_MARKUP_MAP') and trim(PLUGIN_MARKUP_MAP) != "") {
-	$_map = preg_split('/\s+/', PLUGIN_MARKUP_MAP);
-	foreach ($_map as $v) {
-	    list($xml,$plugin) = explode(':', $v);
-	    if (!empty($xml) and !empty($plugin))
-	        $PLUGIN_MARKUP_MAP[$xml] = $plugin;
-	}
-	unset($_map); unset($xml); unset($plugin); unset($v);
+    $_map = preg_split('/\s+/', PLUGIN_MARKUP_MAP);
+    foreach ($_map as $v) {
+        list($xml,$plugin) = explode(':', $v);
+        if (!empty($xml) and !empty($plugin))
+            $PLUGIN_MARKUP_MAP[$xml] = $plugin;
+    }
+    unset($_map); unset($xml); unset($plugin); unset($v);
     }
 
     if (empty($rs['TEMP_DIR'])) {
-	$rs['TEMP_DIR'] = "/tmp";
-	if (getenv("TEMP"))
-	    $rs['TEMP_DIR'] = getenv("TEMP");
+    $rs['TEMP_DIR'] = "/tmp";
+    if (getenv("TEMP"))
+        $rs['TEMP_DIR'] = getenv("TEMP");
     }
     // optional values will be set to '' to simplify the logic.
     foreach ($_IC_OPTIONAL_VALUE as $item) {
@@ -445,7 +447,7 @@ function IniConfig($file) {
             continue;
         }
         if (array_key_exists($item, $rs)) {
-	    _check_int_constant($rs[$item]);
+        _check_int_constant($rs[$item]);
             define($item, $rs[$item]);
             unset($rs[$item]);
         } else
@@ -453,7 +455,7 @@ function IniConfig($file) {
     }
 
     if (USE_EXTERNAL_HTML2PDF) {
-	$item = 'EXTERNAL_HTML2PDF_PAGELIST';
+    $item = 'EXTERNAL_HTML2PDF_PAGELIST';
         if (defined($item)) {
             unset($rs[$item]);
         } elseif (array_key_exists($item, $rs)) {
@@ -461,7 +463,7 @@ function IniConfig($file) {
             unset($rs[$item]);
         } elseif (array_key_exists($item, $rsdef)) {
             define($item, $rsdef[$item]);
-	}
+    }
     }
     unset($item);
 
@@ -541,7 +543,7 @@ function IniConfig($file) {
         if (defined($item)) {
             continue;
         } else {
-	    _check_int_constant($v);
+        _check_int_constant($v);
             define($item, $v);
         }
     }
@@ -792,7 +794,7 @@ function fixup_static_configs($file) {
 
     // If user has not defined PHPWIKI_DIR, and we need it
     if (!defined('PHPWIKI_DIR') and !file_exists("themes/default")) {
-    	$themes_dir = FindFile("themes");
+        $themes_dir = FindFile("themes");
         define('PHPWIKI_DIR', dirname($themes_dir));
     }
 
@@ -823,7 +825,7 @@ function fixup_static_configs($file) {
 
     /*$configurator_link = HTML(HTML::br(), "=>",
                               HTML::a(array('href'=>DATA_PATH."/configurator.php"),
-    								  _("Configurator")));*/
+                                      _("Configurator")));*/
     // check whether the crypt() function is needed and present
     if (defined('ENCRYPTED_PASSWD') && !function_exists('crypt')) {
         $error = sprintf("Encrypted passwords cannot be used: %s.",
@@ -838,8 +840,8 @@ function fixup_static_configs($file) {
 
     // Basic configurator validation
     if (!defined('ADMIN_USER') or ADMIN_USER == '') {
-    	$error = sprintf("%s may not be empty. Please update your configuration.",
-       			 "ADMIN_USER");
+        $error = sprintf("%s may not be empty. Please update your configuration.",
+                    "ADMIN_USER");
         // protect against recursion
         if (!preg_match("/config\-(dist|default)\.ini$/", $file)
             and !defined("_PHPWIKI_INSTALL_RUNNING"))
@@ -854,9 +856,9 @@ function fixup_static_configs($file) {
         }
     }
     if (!defined('ADMIN_PASSWD') or ADMIN_PASSWD == '') {
-    	$error = sprintf("%s may not be empty. Please update your configuration.",
-       			 "ADMIN_PASSWD");
-    	// protect against recursion
+        $error = sprintf("%s may not be empty. Please update your configuration.",
+                    "ADMIN_PASSWD");
+        // protect against recursion
         if (!preg_match("/config\-(dist|default)\.ini$/", $file)
            and !defined("_PHPWIKI_INSTALL_RUNNING"))
         {
@@ -958,7 +960,7 @@ function fixup_dynamic_configs($file) {
     }
     else {
         $chback = 0;
-    	if ($LANG != 'en') {
+        if ($LANG != 'en') {
 
             // Working around really weird gettext problems: (4.3.2, 4.3.6 win)
             // bindtextdomain() in returns the current domain path.
@@ -1096,12 +1098,14 @@ function fixup_dynamic_configs($file) {
         }
     }
 
-    if (VIRTUAL_PATH != SCRIPT_NAME) {
-        // Apache action handlers are used.
-        define('PATH_INFO_PREFIX', VIRTUAL_PATH . '/');
+    if (!defined('PATH_INFO_PREFIX')) {
+        if (VIRTUAL_PATH != SCRIPT_NAME) {
+            // Apache action handlers are used.
+            define('PATH_INFO_PREFIX', VIRTUAL_PATH . '/');
+        } else {
+            define('PATH_INFO_PREFIX', '/');
+        }
     }
-    else
-        define('PATH_INFO_PREFIX', '/');
 
     define('PHPWIKI_BASE_URL',
            SERVER_URL . (USE_PATH_INFO ? VIRTUAL_PATH . '/' : SCRIPT_NAME));
@@ -1118,7 +1122,7 @@ function fixup_dynamic_configs($file) {
         $SCRIPT_FILENAME = str_replace('\\\\','\\',strtr($SCRIPT_FILENAME, '/', '\\'));
     define('SCRIPT_FILENAME', $SCRIPT_FILENAME);
 
-    // Get remote host name, if apache hasn't done it for us
+    // Get remote host name, if Apache hasn't done it for us
     if (empty($HTTP_SERVER_VARS['REMOTE_HOST'])
         and !empty($HTTP_SERVER_VARS['REMOTE_ADDR'])
         and ENABLE_REVERSE_DNS)

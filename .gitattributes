@@ -2881,7 +2881,6 @@ src/plugins/wiki/www/locale/.htaccess -text
 src/plugins/wiki/www/locale/Makefile -text
 src/plugins/wiki/www/locale/README -text
 src/plugins/wiki/www/locale/README.de.txt -text
-src/plugins/wiki/www/locale/cvt-utf8.sh -text svneol=unset#text/x-sh
 src/plugins/wiki/www/locale/de/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/de/LC_MESSAGES/phpwiki.php -text
 src/plugins/wiki/www/locale/de/pgsrc/%C3%84hnlicheSeiten -text
@@ -3121,7 +3120,6 @@ src/plugins/wiki/www/locale/it/pgsrc/ScatolaDiSabbia -text
 src/plugins/wiki/www/locale/it/pgsrc/SteveWainstead -text
 src/plugins/wiki/www/locale/it/pgsrc/TrovaPagina -text
 src/plugins/wiki/www/locale/it/pgsrc/TutteLePagine -text
-src/plugins/wiki/www/locale/it/pgsrc/UserPreferences -text
 src/plugins/wiki/www/locale/it/pgsrc/VisitatoriRecenti -text
 src/plugins/wiki/www/locale/ja/LC_MESSAGES/phpwiki.mo -text
 src/plugins/wiki/www/locale/ja/LC_MESSAGES/phpwiki.php -text

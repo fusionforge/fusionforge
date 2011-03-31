@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: AllPages.php 7681 2010-09-10 11:31:37Z vargenau $');
+// $Id: AllPages.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
  *

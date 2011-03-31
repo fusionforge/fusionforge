@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminRename.php 7850 2011-01-21 09:41:05Z vargenau $');
+// $Id: WikiAdminRename.php 8007 2011-03-31 09:25:39Z vargenau $
 /*
  * Copyright 2004,2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -120,10 +120,10 @@ extends WikiPlugin_WikiAdminSelect
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
                 $result->pushContent(HTML::p(
-                  "One page has been permanently renamed:"));
+                  _("One page has been renamed:")));
             } else {
                 $result->pushContent(HTML::p(
-                  fmt("%s pages have been permanently renamed:", $count)));
+                  fmt("%d pages have been renamed:", $count)));
             }
             $result->pushContent($ul);
             return $result;
@@ -206,7 +206,7 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header->pushContent(
               HTML::p(HTML::strong(
-                _("Are you sure you want to permanently rename the selected pages?"))));
+                _("Are you sure you want to rename the selected pages?"))));
             $header = $this->renameForm($header, $post_args, $singlepage);
         } else {
             if ($singlepage === true) {
@@ -236,7 +236,7 @@ extends WikiPlugin_WikiAdminSelect
         return HTML::form(array('action' => $request->getPostURL(),
                                 'method' => 'post'),
                           HTML::fieldset(
-                              HTML::legend("Rename page"),
+                              HTML::legend(_("Rename page")),
                               $header,
                               $buttons,
                               $list,

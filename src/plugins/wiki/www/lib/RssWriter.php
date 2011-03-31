@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: RssWriter.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // $Id: RssWriter.php 7964 2011-03-05 17:05:30Z vargenau $
 /*
  * Code for creating RSS 1.0.
  */
@@ -20,30 +20,30 @@ class RssWriter extends XmlElement
                           array('xmlns' => "http://purl.org/rss/1.0/",
                                 'xmlns:rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'));
 
-	$this->_modules = array(
+    $this->_modules = array(
             //Standards
-	    'content'	=> "http://purl.org/rss/1.0/modules/content/",
-	    'dc'	=> "http://purl.org/dc/elements/1.1/",
-	    'sy'	=> "http://purl.org/rss/1.0/modules/syndication/",
+        'content'    => "http://purl.org/rss/1.0/modules/content/",
+        'dc'    => "http://purl.org/dc/elements/1.1/",
+        'sy'    => "http://purl.org/rss/1.0/modules/syndication/",
             //Proposed
             'wiki'      => "http://purl.org/rss/1.0/modules/wiki/",
-	    'ag'	=> "http://purl.org/rss/1.0/modules/aggregation/",
-	    'annotate'	=> "http://purl.org/rss/1.0/modules/annotate/",
-	    'audio'	=> "http://media.tangent.org/rss/1.0/",
-	    'cp'	=> "http://my.theinfo.org/changed/1.0/rss/",
-	    'rss091'	=> "http://purl.org/rss/1.0/modules/rss091/",
-	    'slash'	=> "http://purl.org/rss/1.0/modules/slash/",
-	    'taxo'	=> "http://purl.org/rss/1.0/modules/taxonomy/",
-	    'thr'	=> "http://purl.org/rss/1.0/modules/threading/"
-	    );
+        'ag'    => "http://purl.org/rss/1.0/modules/aggregation/",
+        'annotate'    => "http://purl.org/rss/1.0/modules/annotate/",
+        'audio'    => "http://media.tangent.org/rss/1.0/",
+        'cp'    => "http://my.theinfo.org/changed/1.0/rss/",
+        'rss091'    => "http://purl.org/rss/1.0/modules/rss091/",
+        'slash'    => "http://purl.org/rss/1.0/modules/slash/",
+        'taxo'    => "http://purl.org/rss/1.0/modules/taxonomy/",
+        'thr'    => "http://purl.org/rss/1.0/modules/threading/"
+        );
 
-	$this->_uris_seen = array();
+    $this->_uris_seen = array();
         $this->_items = array();
     }
 
     function registerModule($alias, $uri) {
-	assert(!isset($this->_modules[$alias]));
-	$this->_modules[$alias] = $uri;
+    assert(!isset($this->_modules[$alias]));
+    $this->_modules[$alias] = $uri;
     }
 
     // Args should include:
@@ -53,7 +53,7 @@ class RssWriter extends XmlElement
     function channel($properties, $uri = false) {
         $this->_channel = $this->__node('channel', $properties, $uri);
     }
-  
+
     // Args should include:
     //  'title', 'link'
     // and can include:
@@ -94,24 +94,24 @@ class RssWriter extends XmlElement
                 $seq->pushContent($this->__ref('rdf:li', $item));
         }
         $channel->pushContent(new XmlElement('items', false, $seq));
-   
-	if (isset($this->_image)) {
-            $channel->pushContent($this->__ref('image', $this->_image));
-	    $items[] = $this->_image;
-	}
-	if (isset($this->_textinput)) {
-            $channel->pushContent($this->__ref('textinput', $this->_textinput));
-	    $items[] = $this->_textinput;
-	}
 
-	$this->pushContent($channel);
-	if ($items)
-	    $this->pushContent($items);
+    if (isset($this->_image)) {
+            $channel->pushContent($this->__ref('image', $this->_image));
+        $items[] = $this->_image;
+    }
+    if (isset($this->_textinput)) {
+            $channel->pushContent($this->__ref('textinput', $this->_textinput));
+        $items[] = $this->_textinput;
+    }
+
+    $this->pushContent($channel);
+    if ($items)
+        $this->pushContent($items);
 
         $this->__spew();
         $this->_finished = true;
     }
-          
+
     /**
      * Write output to HTTP client.
      */
@@ -121,16 +121,16 @@ class RssWriter extends XmlElement
         //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         $this->printXML();
     }
-      
-  
+
+
     /**
      * Create a new RDF <em>typedNode</em>.
      */
     function __node($type, $properties, $uri = false) {
-	if (! $uri)
-	    $uri = $properties['link'];
-	$attr['rdf:about'] = $this->__uniquify_uri($uri);
-	return new XmlElement($type, $attr,
+    if (! $uri)
+        $uri = $properties['link'];
+    $attr['rdf:about'] = $this->__uniquify_uri($uri);
+    return new XmlElement($type, $attr,
                               $this->__elementize($properties));
     }
 
@@ -138,44 +138,44 @@ class RssWriter extends XmlElement
      * Check object URI for uniqueness, create a unique URI if needed.
      */
     function __uniquify_uri ($uri) {
-	if (!$uri || isset($this->_uris_seen[$uri])) {
-	    $n = count($this->_uris_seen);
-	    $uri = $this->_channel->getAttr('rdf:about') . "#uri$n";
-	    assert(!isset($this->_uris_seen[$uri]));
-	}
-	$this->_uris_seen[$uri] = true;
-	return $uri;
+    if (!$uri || isset($this->_uris_seen[$uri])) {
+        $n = count($this->_uris_seen);
+        $uri = $this->_channel->getAttr('rdf:about') . "#uri$n";
+        assert(!isset($this->_uris_seen[$uri]));
+    }
+    $this->_uris_seen[$uri] = true;
+    return $uri;
     }
 
     /**
      * Convert hash of RDF properties to <em>propertyElt</em>s.
      */
     function __elementize ($elements) {
-	$out = array();
+    $out = array();
         foreach ($elements as $prop => $val) {
-	    $this->__check_predicate($prop);
-	    if (is_array($val))
-	        $out[] = new XmlElement($prop, $val);
-	    elseif (is_object($val))  
-		    $out[] = $val;
-	    else
-	        $out[] = new XmlElement($prop, false, $val);
-	}
-	return $out;
+        $this->__check_predicate($prop);
+        if (is_array($val))
+            $out[] = new XmlElement($prop, $val);
+        elseif (is_object($val))
+            $out[] = $val;
+        else
+            $out[] = new XmlElement($prop, false, $val);
+    }
+    return $out;
     }
 
     /**
      * Check property predicates for XMLNS sanity.
      */
     function __check_predicate ($name) {
-	if (preg_match('/^([^:]+):[^:]/', $name, $m)) {
-	    $ns = $m[1];
-	    if (! $this->getAttr("xmlns:$ns")) {
-		if (!isset($this->_modules[$ns]))
-		    die("$name: unknown namespace ($ns)");
-		$this->setAttr("xmlns:$ns", $this->_modules[$ns]);
-	    }
-	}
+    if (preg_match('/^([^:]+):[^:]/', $name, $m)) {
+        $ns = $m[1];
+        if (! $this->getAttr("xmlns:$ns")) {
+        if (!isset($this->_modules[$ns]))
+            die("$name: unknown namespace ($ns)");
+        $this->setAttr("xmlns:$ns", $this->_modules[$ns]);
+        }
+    }
     }
 
     /**
@@ -197,10 +197,10 @@ class AtomFeed extends RssWriter {
     // and can include:
     //  'URI'
     function feed($properties, $uri = false) {
-    	global $LANG;
-    	$attr = array('xmlns' => 'http://www.w3.org/2005/Atom',
-        	      'version' => '0.3', // or 1.0
-        	      'lang' => $LANG);
+        global $LANG;
+        $attr = array('xmlns' => 'http://www.w3.org/2005/Atom',
+                  'version' => '0.3', // or 1.0
+                  'lang' => $LANG);
         $this->_channel = $this->__node('feed', $attr, $properties, $uri);
     }
 
@@ -218,10 +218,10 @@ class AtomFeed extends RssWriter {
      * Create a new entry
      */
     function __node($type, $attr, $properties, $uri = false) {
-	if (! $uri)
-	    $uri = $properties['link'];
-	//$attr['rdf:about'] = $this->__uniquify_uri($uri);
-	return new XmlElement($type, $attr,
+    if (! $uri)
+        $uri = $properties['link'];
+    //$attr['rdf:about'] = $this->__uniquify_uri($uri);
+    return new XmlElement($type, $attr,
                               $this->__elementize($properties));
     }
 
@@ -242,9 +242,9 @@ class AtomFeed extends RssWriter {
 
         $channel = &$this->_channel;
         $items = &$this->_items;
-	if ($items)
-	    $channel->pushContent($items);
-	$this->pushContent($channel);
+    if ($items)
+        $channel->pushContent($items);
+    $this->pushContent($channel);
 
         $this->__spew();
         $this->_finished = true;
@@ -257,5 +257,5 @@ class AtomFeed extends RssWriter {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

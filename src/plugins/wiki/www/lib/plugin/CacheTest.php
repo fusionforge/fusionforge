@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CacheTest.php 7639 2010-08-11 12:15:16Z vargenau $');
+// $Id: CacheTest.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright (C) 2002 Johannes Große
  *

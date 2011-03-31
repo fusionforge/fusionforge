@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: ImageTile.php 7507 2010-06-09 10:10:41Z vargenau $
+<?php // -*-php-*- $Id: ImageTile.php 7960 2011-03-04 13:58:21Z vargenau $
 // FIXME! This is a mess. Everything.
 require_once('lib/stdlib.php');
 
@@ -13,8 +13,8 @@ if (preg_match('/^(http|ftp|https):\/\//i',$_REQUEST['url'])) {
         if (preg_match('/DATA_PATH/',$config[0])) {
             list($key,$value) = explode('=', $config[0]);
             $data_path = trim($value).'/';
-	    break;
-	}
+        break;
+    }
     }
     fclose($fp);
     @mkdir($data_path."uploads/thumbs",0775);

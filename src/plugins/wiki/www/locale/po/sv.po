@@ -5,15 +5,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PhpWiki-1.3.4pre\n"
+"Project-Id-Version: PhpWiki 1.4.0RC1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-27 14:09+0100\n"
+"POT-Creation-Date: 2011-03-31 11:42+0200\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../lib/CachedMarkup.php:536
@@ -72,8 +72,8 @@ msgstr ""
 msgid "version %s"
 msgstr "version %s"
 
-#: ../lib/diff.php:203 ../lib/plugin/Diff.php:69 ../lib/WikiTheme.php:534
-#: ../lib/WikiTheme.php:536
+#: ../lib/diff.php:203 ../lib/plugin/Diff.php:69 ../lib/WikiTheme.php:532
+#: ../lib/WikiTheme.php:534
 #, php-format
 msgid "by %s"
 msgstr "av %s"
@@ -89,7 +89,7 @@ msgstr "Ingen"
 msgid "I'm sorry, there is no such page as %s."
 msgstr ""
 
-#: ../lib/diff.php:233 ../lib/diff.php:340
+#: ../lib/diff.php:233 ../lib/diff.php:342
 #, php-format
 msgid "Diff: %s"
 msgstr "Diff av: %s"
@@ -145,29 +145,6 @@ msgstr ""
 msgid "Older page:"
 msgstr ""
 
-#: ../lib/diff.php:320 ../lib/plugin/Diff.php:182
-#, fuzzy
-msgid "Content of versions "
-msgstr "nuvarande version"
-
-#: ../lib/diff.php:321 ../lib/plugin/Diff.php:183
-msgid " and "
-msgstr ""
-
-#: ../lib/diff.php:321 ../lib/plugin/Diff.php:183
-#, fuzzy
-msgid " is identical."
-msgstr "Versionerna är identiska"
-
-#: ../lib/diff.php:326 ../lib/plugin/Diff.php:188
-#, fuzzy
-msgid "Version "
-msgstr "Version"
-
-#: ../lib/diff.php:327 ../lib/plugin/Diff.php:189
-msgid " was created because: "
-msgstr ""
-
 #: ../lib/display.php:55 ../lib/display.php:321
 #: ../lib/plugin/HelloWorld.php:65 ../lib/plugin/PageGroup.php:158
 #: ../lib/plugin/PageGroup.php:169 ../lib/plugin/PageGroup.php:185
@@ -185,12 +162,12 @@ msgstr ""
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: ../lib/display.php:86 ../lib/display.php:187 ../lib/display.php:433
+#: ../lib/display.php:86 ../lib/display.php:187 ../lib/display.php:425
 #: ../lib/plugin/LinkDatabase.php:42
 msgid "LinkDatabase"
 msgstr ""
 
-#: ../lib/display.php:151 ../lib/display.php:395 ../lib/loadsave.php:1575
+#: ../lib/display.php:151 ../lib/display.php:387 ../lib/loadsave.php:1575
 #: ../lib/plugin/RecentChanges.php:62 ../lib/plugin/RecentChanges.php:210
 #: ../lib/plugin/RecentChanges.php:217 ../lib/plugin/RecentChanges.php:393
 #: ../lib/plugin/RecentChanges.php:681 ../lib/plugin/RecentChanges.php:1160
@@ -213,7 +190,7 @@ msgstr ""
 msgid "RecentChanges"
 msgstr "SenasteÄndringar"
 
-#: ../lib/display.php:188 ../lib/display.php:434
+#: ../lib/display.php:188 ../lib/display.php:426
 #: ../lib/plugin/FileInfo.php:124 ../lib/TextSearchQuery.php:115
 #, php-format
 msgid "Unsupported argument: %s=%s"
@@ -224,6 +201,9 @@ msgstr ""
 #: ../themes/blog/templates/navbar.tmpl:11
 #: ../themes/Crao/templates/navbar.tmpl:18
 #: ../themes/default/templates/navbar.tmpl:21
+#: ../themes/fusionforge/templates/actionbar.tmpl:84
+#: ../themes/MonoBook/templates/navbar.tmpl:52
+#: ../themes/Sidebar/templates/navbar.tmpl:48
 #: ../themes/smaller/templates/navbar.tmpl:17
 #: ../themes/wikilens/templates/navbar.tmpl:22
 msgid "BackLinks"
@@ -239,7 +219,7 @@ msgstr ""
 msgid "(Redirected from %s)"
 msgstr "(Insättning från %s)"
 
-#: ../lib/display.php:351 ../themes/Crao/templates/head.tmpl:63
+#: ../lib/display.php:344 ../themes/Crao/templates/head.tmpl:63
 #: ../themes/Crao/templates/head.tmpl:64
 #: ../themes/default/templates/head.tmpl:71
 #: ../themes/default/templates/head.tmpl:72
@@ -341,7 +321,7 @@ msgstr "Ledsen för allt besvär."
 msgid "Versions are identical"
 msgstr "Versionerna är identiska"
 
-#: ../lib/editpage.php:557 ../themes/MacOSX/themeinfo.php:140
+#: ../lib/editpage.php:557 ../themes/MacOSX/themeinfo.php:138
 msgid "Page Locked"
 msgstr "Sidan är Låst"
 
@@ -368,9 +348,8 @@ msgstr ""
 #: ../lib/plugin/ModeratedPage.php:261 ../lib/plugin/ModeratedPage.php:263
 #: ../lib/plugin/ModeratedPage.php:347 ../lib/plugin/ModeratedPage.php:351
 #: ../lib/plugin/ModeratedPage.php:406 ../lib/plugin/ModeratedPage.php:431
-#, fuzzy
 msgid "ModeratedPage"
-msgstr "SökEfterSida"
+msgstr ""
 
 #: ../lib/editpage.php:569
 #, php-format
@@ -451,9 +430,8 @@ msgid "Save"
 msgstr "Spara"
 
 #: ../lib/editpage.php:709
-#, fuzzy
 msgid "Changes"
-msgstr "SenasteÄndringar"
+msgstr "Ändringar"
 
 #: ../lib/editpage.php:713 ../lib/plugin/UpLoad.php:161
 #: ../lib/plugin/UpLoad.php:166 ../lib/plugin/WikiForm.php:101
@@ -623,7 +601,6 @@ msgstr "Senaste"
 
 #: ../lib/EditToolbar.php:192 ../lib/plugin/CreateToc.php:469
 #: ../lib/plugin/CreateToc.php:484
-#, fuzzy
 msgid "Table of Contents"
 msgstr "Innehåll"
 
@@ -713,15 +690,15 @@ msgstr ""
 msgid "%s: file not found"
 msgstr "%s: fila ingen funna"
 
-#: ../lib/IniConfig.php:991
+#: ../lib/IniConfig.php:993
 msgid "CategoryGroup"
 msgstr ""
 
-#: ../lib/IniConfig.php:993
+#: ../lib/IniConfig.php:995
 msgid "An unnamed PhpWiki"
 msgstr ""
 
-#: ../lib/IniConfig.php:995 ../lib/upgrade.php:70
+#: ../lib/IniConfig.php:997 ../lib/upgrade.php:70
 #: ../themes/blog/templates/browse-footer.tmpl:6
 #: ../themes/default/templates/userprefs.tmpl:132
 #: ../themes/fusionforge/templates/navbar.tmpl:9
@@ -745,7 +722,7 @@ msgstr ""
 #: ../lib/upgrade.php:1112 ../themes/blog/templates/blogform.tmpl:10
 #: ../themes/default/templates/blogform.tmpl:10
 #: ../themes/fusionforge/templates/blogform.tmpl:10
-#: ../themes/fusionforge/themeinfo.php:35
+#: ../themes/fusionforge/themeinfo.php:43
 msgid ": "
 msgstr ""
 
@@ -1451,7 +1428,7 @@ msgid "FullTextSearch"
 msgstr "Fulltextsökning"
 
 #: ../lib/main.php:1131 ../lib/plugin/RecentChanges.php:808
-#: ../lib/plugin/TitleSearch.php:44 ../lib/WikiTheme.php:1485
+#: ../lib/plugin/TitleSearch.php:44 ../lib/WikiTheme.php:1475
 #: ../themes/Crao/templates/navbar.tmpl:5
 #: ../themes/Crao/templates/navbar.tmpl:9
 #: ../themes/Crao/templates/navbar.tmpl:52
@@ -2224,7 +2201,7 @@ msgid "Edit %s"
 msgstr "Redigera %s"
 
 #: ../lib/plugin/Calendar.php:41 ../lib/plugin/Calendar.php:45
-#: ../lib/WikiTheme.php:1540 ../lib/WikiUser.php:478
+#: ../lib/WikiTheme.php:1530 ../lib/WikiUser.php:478
 #: ../themes/blog/templates/sidebar.tmpl:16
 #: ../themes/Crao/templates/head.tmpl:83
 #: ../themes/Crao/templates/navbar.tmpl:29
@@ -2381,13 +2358,36 @@ msgstr ""
 msgid "DeadEndPages"
 msgstr ""
 
-#: ../lib/plugin/Diff.php:36 ../lib/WikiTheme.php:1041
+#: ../lib/plugin/Diff.php:36 ../lib/WikiTheme.php:1031
 #: ../themes/blog/themeinfo.php:67
 msgid "Diff"
 msgstr "Diff"
 
 #: ../lib/plugin/Diff.php:40
 msgid "Display differences between revisions"
+msgstr ""
+
+#: ../lib/plugin/Diff.php:182
+#, fuzzy
+msgid "Content of versions "
+msgstr "nuvarande version"
+
+#: ../lib/plugin/Diff.php:183
+msgid " and "
+msgstr ""
+
+#: ../lib/plugin/Diff.php:183
+#, fuzzy
+msgid " is identical."
+msgstr "Versionerna är identiska"
+
+#: ../lib/plugin/Diff.php:188
+#, fuzzy
+msgid "Version "
+msgstr "Version"
+
+#: ../lib/plugin/Diff.php:189
+msgid " was created because: "
 msgstr ""
 
 #: ../lib/plugin/DynamicIncludePage.php:35
@@ -2862,6 +2862,8 @@ msgstr ""
 
 #: ../lib/plugin/LikePages.php:30 ../themes/Crao/templates/navbar.tmpl:17
 #: ../themes/default/templates/navbar.tmpl:20
+#: ../themes/fusionforge/templates/navbar.tmpl:17
+#: ../themes/MonoBook/templates/navbar.tmpl:19
 #: ../themes/Portland/templates/navbar.tmpl:8
 #: ../themes/smaller/templates/navbar.tmpl:16
 #: ../themes/wikilens/templates/navbar.tmpl:21
@@ -3224,7 +3226,7 @@ msgstr ""
 msgid "Contents"
 msgstr "Innehåll"
 
-#: ../lib/plugin/PageGroup.php:87 ../lib/stdlib.php:2170
+#: ../lib/plugin/PageGroup.php:87 ../lib/stdlib.php:2172
 #, php-format
 msgid "<%s: no such section>"
 msgstr ""
@@ -3537,7 +3539,7 @@ msgstr ""
 #: ../lib/plugin/PluginManager.php:122 ../lib/plugin/PluginManager.php:124
 #: ../lib/upgrade.php:205 ../themes/MonoBook/templates/navbar.tmpl:21
 msgid "Help"
-msgstr ""
+msgstr "Hjälp"
 
 #: ../lib/plugin/PopularNearby.php:44
 msgid "PopularNearby"
@@ -3563,9 +3565,8 @@ msgid "%d most popular nearby: "
 msgstr "De %d mest populära grannarna: "
 
 #: ../lib/plugin/PopularTags.php:33
-#, fuzzy
 msgid "PopularTags"
-msgstr "MestPopulär"
+msgstr ""
 
 #: ../lib/plugin/PopularTags.php:37
 msgid "List the most popular tags."
@@ -3576,9 +3577,8 @@ msgid "CategoryCategory"
 msgstr ""
 
 #: ../lib/plugin/PopularTags.php:71
-#, fuzzy
 msgid "Category"
-msgstr "Nuvarande sida:"
+msgstr ""
 
 #: ../lib/plugin/PopularTags.php:72
 msgid "Topic"
@@ -5028,6 +5028,9 @@ msgid "Wanted Pages in this wiki:"
 msgstr ""
 
 #: ../lib/plugin/WatchPage.php:36
+#: ../themes/fusionforge/templates/actionbar.tmpl:132
+#: ../themes/MonoBook/templates/actionbar.tmpl:57
+#: ../themes/Sidebar/templates/actionbar.tmpl:30
 #, fuzzy
 msgid "WatchPage"
 msgstr "Bredd"
@@ -5058,7 +5061,7 @@ msgstr ""
 msgid "The page %s is already watched!"
 msgstr ""
 
-#: ../lib/plugin/WatchPage.php:88 ../lib/WikiTheme.php:1040
+#: ../lib/plugin/WatchPage.php:88 ../lib/WikiTheme.php:1030
 #: ../themes/blog/templates/actionbar.tmpl:19 ../themes/blog/themeinfo.php:66
 #: ../themes/Crao/templates/actionbar.tmpl:5
 #: ../themes/default/templates/actionbar.tmpl:16
@@ -5140,10 +5143,14 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminChmod.php:84 ../lib/plugin/WikiAdminSetAcl.php:129
 #, php-format
-msgid "%s pages have been changed."
+msgid "%d pages have been changed."
 msgstr ""
 
-#: ../lib/plugin/WikiAdminChmod.php:87 ../lib/plugin/WikiAdminSetAcl.php:133
+#: ../lib/plugin/WikiAdminChmod.php:87 ../lib/plugin/WikiAdminChown.php:99
+#: ../lib/plugin/WikiAdminMarkup.php:102
+#: ../lib/plugin/WikiAdminSearchReplace.php:113
+#: ../lib/plugin/WikiAdminSetAcl.php:133
+#: ../lib/plugin/WikiAdminSetExternal.php:88
 msgid "No pages changed."
 msgstr ""
 
@@ -5206,11 +5213,17 @@ msgstr "Sätter in sidan %s, version %s från %s"
 msgid "Could not change owner of page '%s' to '%s'."
 msgstr ""
 
+#: ../lib/plugin/WikiAdminChown.php:91 ../lib/plugin/WikiAdminMarkup.php:94
+#: ../lib/plugin/WikiAdminSearchReplace.php:106
+#: ../lib/plugin/WikiAdminSetExternal.php:80
+msgid "One page has been changed:"
+msgstr ""
+
 #: ../lib/plugin/WikiAdminChown.php:93 ../lib/plugin/WikiAdminMarkup.php:96
 #: ../lib/plugin/WikiAdminSearchReplace.php:108
 #: ../lib/plugin/WikiAdminSetExternal.php:82
 #, php-format
-msgid "%s pages have been permanently changed:"
+msgid "%d pages have been changed:"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminChown.php:106 ../lib/plugin/_WikiTranslation.php:94
@@ -5219,8 +5232,7 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminChown.php:171
 #, fuzzy
-msgid ""
-"Are you sure you want to permanently change the owner of the selected pages?"
+msgid "Are you sure you want to change the owner of the selected pages?"
 msgstr "Ta bort sida nu"
 
 #: ../lib/plugin/WikiAdminChown.php:175
@@ -5266,9 +5278,7 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminMarkup.php:163
 #, fuzzy
-msgid ""
-"Are you sure you want to permanently change the markup type of the selected "
-"files?"
+msgid "Are you sure you want to change the markup type of the selected files?"
 msgstr "Ta bort sida nu"
 
 #: ../lib/plugin/WikiAdminMarkup.php:167
@@ -5302,10 +5312,19 @@ msgstr "Tog bort sidan '%s'."
 msgid "Didn't purge page '%s'. Access denied."
 msgstr "Tog bort sidan '%s'."
 
+#: ../lib/plugin/WikiAdminPurge.php:77
+msgid "One page has been permanently purged:"
+msgstr ""
+
 #: ../lib/plugin/WikiAdminPurge.php:79
 #, php-format
-msgid "%s pages have been permanently purged:"
+msgid "%d pages have been permanently purged:"
 msgstr ""
+
+#: ../lib/plugin/WikiAdminPurge.php:85
+#, fuzzy
+msgid "No pages purged."
+msgstr "De %d mest populära sidorna för den här wikin:"
 
 #: ../lib/plugin/WikiAdminPurge.php:92
 msgid "PhpWikiAdministration/Purge"
@@ -5343,10 +5362,19 @@ msgstr "Tog bort sidan '%s'."
 msgid "Didn't remove page '%s'. Access denied."
 msgstr "Tog bort sidan '%s'."
 
+#: ../lib/plugin/WikiAdminRemove.php:121
+msgid "One page has been removed:"
+msgstr ""
+
 #: ../lib/plugin/WikiAdminRemove.php:123
 #, php-format
-msgid "%s pages have been permanently removed:"
+msgid "%d pages have been removed:"
 msgstr ""
+
+#: ../lib/plugin/WikiAdminRemove.php:129
+#, fuzzy
+msgid "No pages removed."
+msgstr "De %d mest populära sidorna för den här wikin:"
 
 #: ../lib/plugin/WikiAdminRemove.php:136 ../lib/plugin/_WikiTranslation.php:95
 msgid "PhpWikiAdministration/Remove"
@@ -5358,8 +5386,9 @@ msgid "Remove"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminRemove.php:197
-msgid "Are you sure you want to permanently remove the selected files?"
-msgstr ""
+#, fuzzy
+msgid "Are you sure you want to remove the selected files?"
+msgstr "Ta bort sida nu"
 
 #: ../lib/plugin/WikiAdminRemove.php:200
 msgid "Remove selected pages"
@@ -5417,9 +5446,13 @@ msgstr ""
 msgid "Couldn't rename page '%s' to '%s'."
 msgstr ""
 
+#: ../lib/plugin/WikiAdminRename.php:123
+msgid "One page has been renamed:"
+msgstr ""
+
 #: ../lib/plugin/WikiAdminRename.php:126
 #, php-format
-msgid "%s pages have been permanently renamed:"
+msgid "%d pages have been renamed:"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminRename.php:132
@@ -5432,10 +5465,10 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminRename.php:209
 #, fuzzy
-msgid "Are you sure you want to permanently rename the selected pages?"
+msgid "Are you sure you want to rename the selected pages?"
 msgstr "Ta bort sida nu"
 
-#: ../lib/plugin/WikiAdminRename.php:213
+#: ../lib/plugin/WikiAdminRename.php:213 ../lib/plugin/WikiAdminRename.php:239
 #, fuzzy
 msgid "Rename page"
 msgstr "Ta bort sida"
@@ -5497,8 +5530,7 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminSearchReplace.php:189
 #, fuzzy
-msgid ""
-"Are you sure you want to permanently replace text in the selected files?"
+msgid "Are you sure you want to replace text in the selected files?"
 msgstr "Ta bort sida nu"
 
 #: ../lib/plugin/WikiAdminSearchReplace.php:194
@@ -5716,7 +5748,7 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:147
 #, php-format
-msgid "Deleted %s pages with invalid names:"
+msgid "Deleted %d pages with invalid names:"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:168
@@ -5733,7 +5765,7 @@ msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:180
 #, php-format
-msgid "Deleted %s unreferenced pages:"
+msgid "Deleted %d unreferenced pages:"
 msgstr ""
 
 #: ../lib/plugin/WikiAdminUtils.php:183
@@ -5964,9 +5996,8 @@ msgid "Help/HelloWorldPlugin"
 msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:69
-#, fuzzy
 msgid "Help/IncludePagePlugin"
-msgstr "SökEfterSida"
+msgstr "Hjälp/SökEfterSida"
 
 #: ../lib/plugin/_WikiTranslation.php:70
 msgid "Help/LinkIcons"
@@ -5978,7 +6009,7 @@ msgstr ""
 
 #: ../lib/plugin/_WikiTranslation.php:72
 msgid "Help/MoreAboutMechanics"
-msgstr ""
+msgstr "Hjälp/MerOmMekanismerna"
 
 #: ../lib/plugin/_WikiTranslation.php:73
 msgid "Help/OldStyleTablePlugin"
@@ -6140,7 +6171,7 @@ msgstr ""
 msgid "Sorry, this page does not exist."
 msgstr ""
 
-#: ../lib/purgepage.php:22 ../lib/purgepage.php:56 ../lib/WikiTheme.php:1048
+#: ../lib/purgepage.php:22 ../lib/purgepage.php:56 ../lib/WikiTheme.php:1038
 #, fuzzy
 msgid "Purge Page"
 msgstr "Namn på Sidan"
@@ -6162,7 +6193,7 @@ msgid ""
 "the database."
 msgstr ""
 
-#: ../lib/removepage.php:22 ../lib/removepage.php:56 ../lib/WikiTheme.php:1047
+#: ../lib/removepage.php:22 ../lib/removepage.php:56 ../lib/WikiTheme.php:1037
 msgid "Remove Page"
 msgstr "Ta bort sida"
 
@@ -6331,11 +6362,11 @@ msgstr ""
 msgid "Unable to open directory '%s' for reading"
 msgstr ""
 
-#: ../lib/stdlib.php:1942
+#: ../lib/stdlib.php:1944
 msgid "Okay"
 msgstr ""
 
-#: ../lib/stdlib.php:2127 ../lib/stdlib.php:2140
+#: ../lib/stdlib.php:2129 ../lib/stdlib.php:2142
 #, php-format
 msgid "... (first %s words)"
 msgstr ""
@@ -6723,8 +6754,8 @@ msgstr ""
 msgid "Unable to connect to LDAP server %s"
 msgstr ""
 
-#: ../lib/wikilens/Buddy.php:30 ../lib/wikilens/Buddy.php:39
-#: ../lib/wikilens/Buddy.php:43
+#: ../lib/wikilens/Buddy.php:22 ../lib/wikilens/Buddy.php:31
+#: ../lib/wikilens/Buddy.php:35
 msgid "Buddies:"
 msgstr ""
 
@@ -6752,7 +6783,7 @@ msgstr ""
 msgid "Top Recommendations"
 msgstr ""
 
-#: ../lib/wikilens/Utils.php:59
+#: ../lib/wikilens/Utils.php:56
 msgid "Members:"
 msgstr ""
 
@@ -6802,69 +6833,64 @@ msgstr ""
 msgid "%s: not a subclass of WikiPlugin."
 msgstr ""
 
-#: ../lib/WikiTheme.php:451
+#: ../lib/WikiTheme.php:449
 msgid "Never edited"
 msgstr ""
 
-#: ../lib/WikiTheme.php:458
+#: ../lib/WikiTheme.php:456
 #, php-format
 msgid "%s at %s"
 msgstr "%s i %s"
 
-#: ../lib/WikiTheme.php:462
+#: ../lib/WikiTheme.php:460 ../lib/WikiTheme.php:471
 #, php-format
-msgid "Version %s, saved %s"
+msgid "Version %s, saved on %s"
 msgstr "Version %s, sparade %s"
 
-#: ../lib/WikiTheme.php:464
+#: ../lib/WikiTheme.php:462
 #, php-format
 msgid "Last edited %s"
 msgstr "Senast ändrad %s"
 
 #: ../lib/WikiTheme.php:473
 #, php-format
-msgid "Version %s, saved on %s"
-msgstr "Version %s, sparade %s"
-
-#: ../lib/WikiTheme.php:475
-#, php-format
 msgid "Last edited on %s"
 msgstr "Senast ändrad %s"
 
-#: ../lib/WikiTheme.php:491
+#: ../lib/WikiTheme.php:489
 msgid "today"
 msgstr "i dag"
 
-#: ../lib/WikiTheme.php:498
+#: ../lib/WikiTheme.php:496
 msgid "yesterday"
 msgstr "i går"
 
-#: ../lib/WikiTheme.php:519 ../lib/WikiTheme.php:521
+#: ../lib/WikiTheme.php:517 ../lib/WikiTheme.php:519
 #, php-format
 msgid "Owner: %s"
 msgstr ""
 
-#: ../lib/WikiTheme.php:629
+#: ../lib/WikiTheme.php:627
 #, php-format
 msgid "Empty link to: %s"
 msgstr ""
 
-#: ../lib/WikiTheme.php:644 ../themes/MacOSX/themeinfo.php:78
+#: ../lib/WikiTheme.php:642 ../themes/MacOSX/themeinfo.php:78
 #, php-format
 msgid "Create: %s"
 msgstr ""
 
-#: ../lib/WikiTheme.php:665
+#: ../lib/WikiTheme.php:663
 #, php-format
 msgid "Google:%s"
 msgstr ""
 
-#: ../lib/WikiTheme.php:690
+#: ../lib/WikiTheme.php:688
 #, php-format
 msgid "'%s': Bad page name"
 msgstr ""
 
-#: ../lib/WikiTheme.php:1042 ../themes/Crao/templates/signin.tmpl:14
+#: ../lib/WikiTheme.php:1032 ../themes/Crao/templates/signin.tmpl:14
 #: ../themes/Crao/templates/signin.tmpl:30
 #: ../themes/default/templates/signin.tmpl:16
 #: ../themes/default/templates/signin.tmpl:27
@@ -6877,63 +6903,63 @@ msgstr ""
 msgid "Sign Out"
 msgstr "Logga ut"
 
-#: ../lib/WikiTheme.php:1043 ../lib/WikiUserNew.php:509
+#: ../lib/WikiTheme.php:1033 ../lib/WikiUserNew.php:509
 #: ../lib/WikiUser.php:228 ../themes/Crao/templates/signin.tmpl:53
 #: ../themes/default/templates/login.tmpl:86
 #: ../themes/smaller/templates/signin.tmpl:54
 msgid "Sign In"
 msgstr "Anslut"
 
-#: ../lib/WikiTheme.php:1044
+#: ../lib/WikiTheme.php:1034
 #, fuzzy
 msgid "Rename Page"
 msgstr "Ta bort sida"
 
-#: ../lib/WikiTheme.php:1045 ../themes/MacOSX/themeinfo.php:138
+#: ../lib/WikiTheme.php:1035 ../themes/MacOSX/themeinfo.php:136
 msgid "Lock Page"
 msgstr "Lås Sida"
 
-#: ../lib/WikiTheme.php:1046 ../themes/MacOSX/themeinfo.php:139
+#: ../lib/WikiTheme.php:1036 ../themes/MacOSX/themeinfo.php:137
 msgid "Unlock Page"
 msgstr "Lås upp Sida"
 
-#: ../lib/WikiTheme.php:1218
+#: ../lib/WikiTheme.php:1208
 msgid ""
 "Some action(page) wanted to add more headers, but they were already printed."
 msgstr ""
 
-#: ../lib/WikiTheme.php:1315 ../themes/Hawaiian/themeinfo.php:34
-#: ../themes/MacOSX/themeinfo.php:107 ../themes/MonoBook/themeinfo.php:116
-#: ../themes/Portland/themeinfo.php:63 ../themes/shamino_com/themeinfo.php:61
+#: ../lib/WikiTheme.php:1305 ../themes/Hawaiian/themeinfo.php:34
+#: ../themes/MacOSX/themeinfo.php:105 ../themes/MonoBook/themeinfo.php:109
+#: ../themes/Portland/themeinfo.php:63 ../themes/shamino_com/themeinfo.php:59
 #: ../themes/Sidebar/themeinfo.php:120 ../themes/SpaceWiki/themeinfo.php:46
-#: ../themes/wikilens/themeinfo.php:33 ../themes/Wordpress/themeinfo.php:65
+#: ../themes/wikilens/themeinfo.php:31 ../themes/Wordpress/themeinfo.php:65
 msgid "Printer"
 msgstr "Skrivare"
 
-#: ../lib/WikiTheme.php:1316 ../themes/MacOSX/themeinfo.php:108
-#: ../themes/MonoBook/themeinfo.php:117 ../themes/shamino_com/themeinfo.php:62
-#: ../themes/wikilens/themeinfo.php:34
+#: ../lib/WikiTheme.php:1306 ../themes/MacOSX/themeinfo.php:106
+#: ../themes/MonoBook/themeinfo.php:110 ../themes/shamino_com/themeinfo.php:60
+#: ../themes/wikilens/themeinfo.php:32
 msgid "Top & bottom toolbars"
 msgstr ""
 
-#: ../lib/WikiTheme.php:1317 ../themes/Hawaiian/themeinfo.php:35
-#: ../themes/MonoBook/themeinfo.php:118 ../themes/Portland/themeinfo.php:64
-#: ../themes/shamino_com/themeinfo.php:63 ../themes/Sidebar/themeinfo.php:121
-#: ../themes/SpaceWiki/themeinfo.php:47 ../themes/wikilens/themeinfo.php:35
+#: ../lib/WikiTheme.php:1307 ../themes/Hawaiian/themeinfo.php:35
+#: ../themes/MonoBook/themeinfo.php:111 ../themes/Portland/themeinfo.php:64
+#: ../themes/shamino_com/themeinfo.php:61 ../themes/Sidebar/themeinfo.php:121
+#: ../themes/SpaceWiki/themeinfo.php:47 ../themes/wikilens/themeinfo.php:33
 #: ../themes/Wordpress/themeinfo.php:66
 msgid "Modern"
 msgstr "Ny|modig"
 
-#: ../lib/WikiTheme.php:1818
+#: ../lib/WikiTheme.php:1808
 #, fuzzy, php-format
 msgid "Plugin %s: undefined"
 msgstr "%s: fila ingen funna"
 
-#: ../lib/WikiTheme.php:1841
+#: ../lib/WikiTheme.php:1831
 msgid "Related Links"
 msgstr ""
 
-#: ../lib/WikiTheme.php:1862
+#: ../lib/WikiTheme.php:1852
 msgid "External Links"
 msgstr ""
 
@@ -7291,9 +7317,8 @@ msgstr "Nuvarande sida:"
 #: ../themes/Portland/templates/editpage.tmpl:83
 #: ../themes/Wordpress/templates/editpage.tmpl:91
 #: ../themes/Wordpress/templates/editpage.tmpl:96
-#, fuzzy
 msgid "Help/GoodStyle"
-msgstr "BraStil"
+msgstr "Hjälp/BraStil"
 
 #: ../themes/blog/templates/blogform.tmpl:24
 #: ../themes/Crao/templates/editpage.tmpl:93
@@ -7316,9 +7341,8 @@ msgstr "%s: Redigeringstips."
 #: ../themes/fusionforge/templates/editpage.tmpl:79
 #: ../themes/Portland/templates/editpage.tmpl:84
 #: ../themes/Wordpress/templates/editpage.tmpl:97
-#, fuzzy
 msgid "Help/TextFormattingRules"
-msgstr "Textformateringsregler"
+msgstr "Hjälp/Textformateringsregler"
 
 #: ../themes/blog/templates/blogform.tmpl:25
 #: ../themes/Crao/templates/editpage.tmpl:94
@@ -7596,9 +7620,8 @@ msgstr ""
 #: ../themes/default/templates/editpage.tmpl:118
 #: ../themes/Portland/templates/editpage.tmpl:79
 #: ../themes/Wordpress/templates/editpage.tmpl:92
-#, fuzzy
 msgid "Help/OldTextFormattingRules"
-msgstr "Textformateringsregler"
+msgstr "Hjälp/Textformateringsregler"
 
 #: ../themes/Crao/templates/head.tmpl:24 ../themes/Crao/templates/head.tmpl:25
 #: ../themes/Crao/templates/htmldump.tmpl:15
@@ -8422,17 +8445,34 @@ msgstr ""
 msgid "User Preferences"
 msgstr "Inställningar"
 
+#: ../themes/fusionforge/templates/userprefs.tmpl:189
+#, fuzzy
+msgid "User preferences for this project"
+msgstr "Inställningar"
+
 #: ../themes/fusionforge/templates/userprefs.tmpl:192
 #: ../themes/fusionforge/templates/userprefs.tmpl:214
 msgid "E-mail Notification"
+msgstr ""
+
+#: ../themes/fusionforge/templates/userprefs.tmpl:210
+msgid "Global user preferences (for all projects)"
 msgstr ""
 
 #: ../themes/fusionforge/templates/userprefs.tmpl:240
 msgid "Menus"
 msgstr ""
 
+#: ../themes/fusionforge/templates/userprefs.tmpl:244
+msgid "Top Menu"
+msgstr ""
+
 #: ../themes/fusionforge/templates/userprefs.tmpl:259
 msgid "PDF"
+msgstr ""
+
+#: ../themes/fusionforge/templates/userprefs.tmpl:284
+msgid "Left Menu"
 msgstr ""
 
 #: ../themes/fusionforge/templates/userprefs.tmpl:301
@@ -8452,12 +8492,12 @@ msgstr ""
 msgid "Hide or show LinkIcons."
 msgstr ""
 
-#: ../themes/fusionforge/themeinfo.php:53
+#: ../themes/fusionforge/themeinfo.php:61
 #, fuzzy
 msgid "This page is external."
 msgstr "Sätter in sidan %s, version %s från %s"
 
-#: ../themes/fusionforge/themeinfo.php:55
+#: ../themes/fusionforge/themeinfo.php:63
 msgid ""
 "This project is shared with third-party users (non Alcatel-Lucent users)."
 msgstr ""
@@ -8699,6 +8739,9 @@ msgstr ""
 #: ../themes/Wordpress/templates/actionbar.tmpl:10
 msgid "Edit old revision"
 msgstr ""
+
+#~ msgid "Version %s, saved %s"
+#~ msgstr "Version %s, sparade %s"
 
 #, fuzzy
 #~ msgid "Include of '%s' failed."

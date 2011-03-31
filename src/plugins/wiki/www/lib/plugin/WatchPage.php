@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WatchPage.php 7853 2011-01-21 13:28:47Z vargenau $');
+// $Id: WatchPage.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright (C) 2006 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent

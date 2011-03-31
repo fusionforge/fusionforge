@@ -1,14 +1,14 @@
-<?php // rcs_id('$Id: FileFinder.php 7692 2010-09-17 11:32:55Z rurban $');
+<?php // $Id: FileFinder.php 7964 2011-03-05 17:05:30Z vargenau $
 
 require_once(dirname(__FILE__).'/stdlib.php');
 
 /**
  * A class for finding files.
- * 
- * This should really provided by pear. We don't want really to mess around 
+ *
+ * This should really provided by pear. We don't want really to mess around
  * with all the lousy systems. (WindowsNT, Win95, Mac, ...)
  * But pear has only System and File, which do nothing.
- * Anyway, in good PHP style we ignore the rest of the world and try to behave 
+ * Anyway, in good PHP style we ignore the rest of the world and try to behave
  * as on unix only. That means we use / as pathsep in all our constants.
  */
 class FileFinder
@@ -57,11 +57,11 @@ class FileFinder
      * Force using '/' as path seperator.
      */
     function forcePathSlashes ($path, $sep='/') {
-    	if (is_array($path)) {
-    	    $result = array();
-    	    foreach ($path as $dir) { $result[] = $this->forcePathSlashes($dir,$sep); }
-    	    return $result;
-    	} else {
+        if (is_array($path)) {
+            $result = array();
+            foreach ($path as $dir) { $result[] = $this->forcePathSlashes($dir,$sep); }
+            return $result;
+        } else {
             if (isWindows() or $this->_isOtherPathsep()) {
                 if (isWindows()) $from = "\\";
                 else $from = "\\";
@@ -73,9 +73,9 @@ class FileFinder
                         $path = '\\\\' . str_replace('\\\\','\\',substr($path,2));
                 }
                 return strtr($path, $from, $sep);
-            } else 
+            } else
                 return $path;
-    	}
+        }
     }
 
     /**
@@ -106,7 +106,7 @@ class FileFinder
     }
 
     /**
-     * The system-dependent path-separator character. 
+     * The system-dependent path-separator character.
      * UNIX,WindowsNT,MacOSX: /
      * Windows95: \
      * Mac:       :
@@ -115,7 +115,7 @@ class FileFinder
      * @return string path_separator.
      */
     function _get_syspath_separator () {
-    	if (!empty($this->_pathsep)) return $this->_pathsep;
+        if (!empty($this->_pathsep)) return $this->_pathsep;
         elseif (isWindowsNT()) return "/"; // we can safely use '/'
         elseif (isWindows()) return "\\";  // FAT might use '\'
         // VMS or LispM is really weird, we ignore it.
@@ -123,12 +123,12 @@ class FileFinder
     }
 
     /**
-     * The path-separator character of the given path. 
+     * The path-separator character of the given path.
      * Windows accepts "/" also, but gets confused with mixed path_separators,
      * e.g "C:\Apache\phpwiki/locale/button"
-     * > dir "C:\Apache\phpwiki/locale/button" => 
+     * > dir "C:\Apache\phpwiki/locale/button" =>
      *       Parameterformat nicht korrekt - "locale"
-     * So if there's any '\' in the path, either fix them to '/' (not in Win95 or FAT?) 
+     * So if there's any '\' in the path, either fix them to '/' (not in Win95 or FAT?)
      * or use '\' for ours.
      *
      * @access private
@@ -148,13 +148,13 @@ class FileFinder
      *
      * @access private
      * @param $path string Path.
-     * @return bool True if path is absolute. 
+     * @return bool True if path is absolute.
      */
     function _is_abs($path) {
         if (substr($path,0,1) == '/') {
             return true;
         } elseif (isWindows() and preg_match("/^[a-z]:/i", $path)
-                  and (substr($path,2,1) == "/" or substr($path,2,1) == "\\")) 
+                  and (substr($path,2,1) == "/" or substr($path,2,1) == "\\"))
         {
             return true;
         } else {
@@ -170,7 +170,7 @@ class FileFinder
      * @return bool New path (destructive)
      */
     function _strip_last_pathchar(&$path) {
-        if (substr($path,-1) == '/' or substr($path,-1) == "\\") 
+        if (substr($path,-1) == '/' or substr($path,-1) == "\\")
             $path = substr($path,0,-1);
         return $path;
     }
@@ -203,12 +203,12 @@ class FileFinder
         foreach ($this->_path as $dir) {
             // ensure we use the same pathsep
             if ($this->_isOtherPathsep()) {
-            	$dir = $this->slashifyPath($dir);
-            	$file = $this->slashifyPath($file);
+                $dir = $this->slashifyPath($dir);
+                $file = $this->slashifyPath($file);
                 if (file_exists($dir . $this->_pathsep . $file))
                     return $dir;
             } elseif (@file_exists($dir . $this->_pathsep . $file))
-               	return $dir;
+                   return $dir;
         }
         return false;
     }
@@ -224,7 +224,7 @@ class FileFinder
      */
     function _get_ini_separator () {
         return isWindows() ? ';' : ':';
-        // return preg_match('/^Windows/', php_uname()) 
+        // return preg_match('/^Windows/', php_uname())
     }
 
     /**
@@ -322,7 +322,7 @@ class FileFinder
             if (!empty($lang))
                 return $lang;
         }
-            
+
         foreach (array('LC_ALL', 'LC_MESSAGES', 'LC_RESPONSES', 'LANG') as $var) {
             $lang = getenv($var);
             if (!empty($lang))
@@ -462,14 +462,14 @@ function FindFile ($file, $missing_okay = false, $slashify = false)
     static $finder;
     if (!isset($finder)) {
         $finder = new FileFinder;
-    	// remove "/lib" from dirname(__FILE__)
-    	$wikidir = preg_replace('/.lib$/','',dirname(__FILE__));
+        // remove "/lib" from dirname(__FILE__)
+        $wikidir = preg_replace('/.lib$/','',dirname(__FILE__));
         // let the system favor its local pear?
-    	$finder->_append_to_include_path(dirname(__FILE__)."/pear");
-    	$finder->_prepend_to_include_path($wikidir);
+        $finder->_append_to_include_path(dirname(__FILE__)."/pear");
+        $finder->_prepend_to_include_path($wikidir);
         // Don't override existing INCLUDE_PATH config.
         if (!defined("INCLUDE_PATH"))
- 	    define("INCLUDE_PATH", implode($finder->_get_ini_separator(), $finder->_path));
+         define("INCLUDE_PATH", implode($finder->_get_ini_separator(), $finder->_path));
     }
     $s = $finder->findFile($file, $missing_okay);
     if ($slashify)
@@ -495,9 +495,9 @@ function FindLocalizedButtonFile ($file, $missing_okay = false, $re_init = false
     return $buttonfinder->findFile($file, $missing_okay);
 }
 
-/** 
+/**
  * Prefixes with PHPWIKI_DIR and slashify.
- * For example to unify with 
+ * For example to unify with
  *   require_once dirname(__FILE__).'/lib/file.php'
  *   require_once 'lib/file.php' loading style.
  * Doesn't expand "~" or symlinks yet. truename would be perfect.
@@ -522,7 +522,7 @@ function NormalizeLocalFileName($file) {
     }
 }
 
-/** 
+/**
  * Prefixes with DATA_PATH and slashify
  */
 function NormalizeWebFileName($file) {

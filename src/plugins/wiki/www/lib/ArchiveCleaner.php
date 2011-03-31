@@ -1,19 +1,19 @@
-<?php 
-// rcs_id('$Id: ArchiveCleaner.php 7417 2010-05-19 12:57:42Z vargenau $');
+<?php
+// $Id: ArchiveCleaner.php 7964 2011-03-05 17:05:30Z vargenau $
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  *
  * This file is part of PhpWiki.
- * 
+ *
  * PhpWiki is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -24,7 +24,7 @@ class ArchiveCleaner
     function ArchiveCleaner ($expire_params) {
         $this->expire_params = $expire_params;
     }
-    
+
     function isMergeable($revision) {
         if ( ! $revision->get('is_minor_edit') )
             return false;
@@ -43,20 +43,20 @@ class ArchiveCleaner
         while ($page = $iter->next())
             $this->cleanPageRevisions($page);
     }
-        
+
     function cleanPageRevisions($page) {
         $INFINITY = 0x7fffffff;
 
         $expire = &$this->expire_params;
         foreach (array('major', 'minor', 'author') as $class)
             $counter[$class] = new ArchiveCleaner_Counter($expire[$class]);
-        // shortcut to keep all    
-        if (($counter['minor']->min_keep == $INFINITY) 
+        // shortcut to keep all
+        if (($counter['minor']->min_keep == $INFINITY)
             and ($counter['major']->min_keep == $INFINITY))
             return;
 
         $authors_seen = array();
-        
+
         $current = $page->getCurrentRevision(false);
 
         for ( $revision = $page->getRevisionBefore($current,false);
@@ -117,11 +117,11 @@ class ArchiveCleaner_Counter
 
         if ($this->min_age > $this->max_age)
             $this->min_age = $this->max_age;
-            
+
         $this->now = time();
         $this->count = 0;
         $this->previous_supplanted = false;
-        
+
     }
 
     function computeAge($revision) {
@@ -148,14 +148,14 @@ class ArchiveCleaner_Counter
         $this->previous_supplanted = $supplanted;
         return ($this->now - $supplanted) / (24 * 3600);
     }
-        
+
     function keep($revision) {
-    	$INFINITY = 0x7fffffff;
-    	if ($this->min_keep == $INFINITY)
-    	    return true;
+        $INFINITY = 0x7fffffff;
+        if ($this->min_keep == $INFINITY)
+            return true;
         $count = ++$this->count;
         $age = $this->computeAge($revision);
-        
+
         if ($count > $this->max_keep)
             return false;
         if ($age <= $this->min_age || $count <= $this->min_keep)
@@ -170,5 +170,5 @@ class ArchiveCleaner_Counter
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

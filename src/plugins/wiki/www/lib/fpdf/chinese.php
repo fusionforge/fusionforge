@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: chinese.php 7617 2010-07-15 19:22:14Z vargenau $');
+// $Id: chinese.php 7956 2011-03-03 17:08:31Z vargenau $
 
 // PDF functions taken from FPDF http://www.fpdf.org
 

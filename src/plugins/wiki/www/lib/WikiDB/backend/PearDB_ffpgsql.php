@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PearDB_ffpgsql.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: PearDB_ffpgsql.php 7957 2011-03-03 17:38:22Z vargenau $
 
 /*
  * Copyright (C) 2001-2009 $ThePhpWikiProgrammingTeam
@@ -318,6 +318,9 @@ extends WikiDB_backend_PearDB_pgsql
             $exclude = " AND $page_tbl.pagename NOT IN ".$this->_sql_set($exclude);
         else
             $exclude='';
+
+        // Horrible hack
+        $include_empty=false;
 
         if (strstr($orderby, 'mtime ')) { // multiple columns possible
             if ($include_empty) {

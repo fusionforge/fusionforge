@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminRemove.php 7448 2010-05-31 12:01:38Z vargenau $');
+// $Id: WikiAdminRemove.php 8005 2011-03-31 08:45:20Z vargenau $
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -118,15 +118,15 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently removed:"));
+                $result->pushContent(HTML::p(_("One page has been removed:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently removed:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been removed:", $count)));
             }
             $result->pushContent($ul);
             return $result;
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages removed."));
+            $result->pushContent(HTML::p(_("No pages removed.")));
             return $result;
         }
     }
@@ -194,7 +194,7 @@ extends WikiPlugin_WikiAdminSelect
         if ($next_action == 'verify') {
             $button_label = _("Yes");
             $header->pushContent(HTML::p(HTML::strong(
-                _("Are you sure you want to permanently remove the selected files?"))));
+                _("Are you sure you want to remove the selected files?"))));
         }
         else {
             $button_label = _("Remove selected pages");

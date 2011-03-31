@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: RatingsUser.php 7659 2010-08-31 14:55:29Z vargenau $');
+// $Id: RatingsUser.php 7967 2011-03-07 13:08:01Z vargenau $
 /* Copyright (C) 2004 Dan Frankowski
  * Copyright (C) 2010 Roger Guignard, Alcatel-Lucent
  *
@@ -77,13 +77,13 @@ class RatingsUser {
         return $this->_rdbi;
     }
 
-    // XXX: may want to think about caching ratings in the PHP session 
+    // XXX: may want to think about caching ratings in the PHP session
     // since a WikiUser is created for *every* access, in which case rate.php
     // will want to change to use this object instead of direct db access
 
     /**
      * Check whether $user is allowed to view this user's ratings
-     * 
+     *
      * @return bool True if $user can view this user's ratings, false otherwise
      */
     function allow_view_ratings($user)
@@ -93,7 +93,7 @@ class RatingsUser {
 
     /**
      * Gets this user's ratings
-     * 
+     *
      * @return array Assoc. array [page_name][dimension] = _UserRating object
      */
     function get_ratings()
@@ -104,13 +104,13 @@ class RatingsUser {
 
     /**
     * Gets this user's mean rating across a dimension
-    * 
+    *
     * @return float Mean rating
     */
     function mean_rating($dimension = 0)
     {
         // use memoized result if available
-        if (isset($this->_mean_ratings[$dimension])) 
+        if (isset($this->_mean_ratings[$dimension]))
         {
             return $this->_mean_ratings[$dimension];
         }
@@ -147,8 +147,6 @@ class RatingsUser {
         $this->_load_ratings();
         if (isset($dimension))
         {
-            
-
             if (isset($this->_ratings[$pagename][$dimension]))
             {
                 return true;
@@ -231,7 +229,7 @@ class RatingsUser {
         {
             return $this->_pearson_sims[$user->getId()][$dimension];
         }
-    
+
         $ratings1 = $this->get_ratings();
         $mean1    = $this->mean_rating($dimension);
         // XXX: sanify user input?
@@ -278,7 +276,7 @@ class RatingsUser {
         // items that the similarity was based on
 
         // prevent division-by-zero
-        if (sqrt($sum11) == 0 || sqrt($sum12) == 0) 
+        if (sqrt($sum11) == 0 || sqrt($sum12) == 0)
             $sim = array(0, $n);
         else
         // Pearson similarity
@@ -368,9 +366,9 @@ class RatingsUser {
                 }
                 $this->_num_ratings++;
                 $this->_ratings[$rating['pagename']][$rating['dimension']]
-                  = new _UserRating($this->_userid, 
+                  = new _UserRating($this->_userid,
                                     $rating['pagename'],
-                                    $rating['dimension'], 
+                                    $rating['dimension'],
                                     $rating['ratingvalue']);
             }
 
@@ -382,7 +380,7 @@ class RatingsUser {
 /** Represent a rating. */
 class _UserRating
 {
-    function _UserRating ($rater, $ratee, $dimension, $rating) 
+    function _UserRating ($rater, $ratee, $dimension, $rating)
     {
         $this->rater     = (string)$rater;
         $this->ratee     = (string)$ratee;
@@ -390,42 +388,42 @@ class _UserRating
         $this->rating    = (float)$rating;
     }
 
-    function get_rater() 
+    function get_rater()
     {
         return $this->rater;
     }
 
-    function get_ratee() 
+    function get_ratee()
     {
         return $this->ratee;
     }
 
-    function get_rating() 
+    function get_rating()
     {
         return $this->rating;
     }
 
-    function get_dimension() 
+    function get_dimension()
     {
         return $this->dimension;
     }
 
-    function set_rater() 
+    function set_rater()
     {
         $this->rater = (string)$rater;
     }
 
-    function set_ratee() 
+    function set_ratee()
     {
         $this->ratee = (string)$ratee;
     }
 
-    function set_rating() 
+    function set_rating()
     {
         $this->rating = (float)$rating;
     }
 
-    function set_dimension() 
+    function set_dimension()
     {
         $this->dimension = (int)$dimension;
     }

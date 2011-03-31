@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PagePerm.php 7659 2010-08-31 14:55:29Z vargenau $');
+// $Id: PagePerm.php 7964 2011-03-05 17:05:30Z vargenau $
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -62,15 +62,15 @@
  */
 
 /* Symbolic special ACL groups. Untranslated to be stored in page metadata*/
-define('ACL_EVERY',	   '_EVERY');
-define('ACL_ANONYMOUS',	   '_ANONYMOUS');
-define('ACL_BOGOUSER',	   '_BOGOUSER');
+define('ACL_EVERY',       '_EVERY');
+define('ACL_ANONYMOUS',       '_ANONYMOUS');
+define('ACL_BOGOUSER',       '_BOGOUSER');
 define('ACL_HASHOMEPAGE',  '_HASHOMEPAGE');
-define('ACL_SIGNED',	   '_SIGNED');
+define('ACL_SIGNED',       '_SIGNED');
 define('ACL_AUTHENTICATED','_AUTHENTICATED');
-define('ACL_ADMIN',	   '_ADMIN');
-define('ACL_OWNER',	   '_OWNER');
-define('ACL_CREATOR',	   '_CREATOR');
+define('ACL_ADMIN',       '_ADMIN');
+define('ACL_OWNER',       '_OWNER');
+define('ACL_CREATOR',       '_CREATOR');
 
 // Return an page permissions array for this page.
 // To provide ui helpers to view and change page permissions:
@@ -90,7 +90,7 @@ function pagePermissions($pagename) {
         return array('page', $perm);
     // or no permissions defined; returned inherited permissions, to be displayed in gray
     } elseif ($pagename == '.') { // stop recursion in pathological case.
-    	// "." defined, without any acl
+        // "." defined, without any acl
         return array('default', new PagePermission());
     } else {
         return array('inherited', pagePermissions(getParentPage($pagename)));
@@ -106,9 +106,9 @@ function pagePermissionsSimpleFormat($perm_tree, $owner, $group=false) {
         $perm = $perm_tree[1];
     elseif (is_array($perm_tree[1])) {
         $perm_tree = pagePermissionsSimpleFormat($perm_tree[1],$owner,$group);
-	if (isa($perm_tree[1],'pagepermission'))
-	    $perm = $perm_tree[1];
-	elseif (isa($perm_tree,'htmlelement'))
+    if (isa($perm_tree[1],'pagepermission'))
+        $perm = $perm_tree[1];
+    elseif (isa($perm_tree,'htmlelement'))
             return $perm_tree;
     }
     */
@@ -174,10 +174,10 @@ function action2access ($action) {
         return 'view';
 
     case 'dumpserial':
-	if (INSECURE_ACTIONS_LOCALHOST_ONLY and is_localhost())
-	    return 'dump';
-	else
-	    return 'view';
+    if (INSECURE_ACTIONS_LOCALHOST_ONLY and is_localhost())
+        return 'dump';
+    else
+        return 'view';
 
     // performance and security relevant
     case 'xmlrpc':
@@ -203,7 +203,7 @@ function action2access ($action) {
         break;
     case 'upload':
     case 'loadfile':
-	// probably create/edit but we cannot check all page permissions, can we?
+    // probably create/edit but we cannot check all page permissions, can we?
     case 'remove':
     case 'purge':
     case 'lock':
@@ -211,7 +211,7 @@ function action2access ($action) {
     case 'upgrade':
     case 'chown':
     case 'setacl':
-	return 'change';
+    return 'change';
     default:
         //Todo: Plugins should be able to override its access type
         if (isWikiWord($action))
@@ -237,10 +237,10 @@ function _requiredAuthorityForPagename($access, $pagename) {
 
     // Exceptions:
     if (FUSIONFORGE) {
-    	if ($pagename != '.' && isset($request->_user->_is_external) && $request->_user->_is_external && ! $page->get('external')) {
-    		$permcache[$pagename][$access] = 0;
-    		return 0;
-    	}
+        if ($pagename != '.' && isset($request->_user->_is_external) && $request->_user->_is_external && ! $page->get('external')) {
+            $permcache[$pagename][$access] = 0;
+            return 0;
+        }
     }
     if ((READONLY or $request->_dbi->readonly)
         and in_array($access, array('edit','create','change')))
@@ -260,7 +260,7 @@ function _requiredAuthorityForPagename($access, $pagename) {
         if ($pagename == '.') {
             $perm = new PagePermission();
             if ($perm->isAuthorized('change', $request->_user)) {
-            	// warn the user to set ACL of ".", if he has permissions to do so.
+                // warn the user to set ACL of ".", if he has permissions to do so.
                 trigger_error(". (dotpage == rootpage for inheriting pageperm ACLs) exists without any ACL!\n".
                               "Please do ?action=setacl&pagename=.", E_USER_WARNING);
             }
@@ -281,7 +281,7 @@ function _requiredAuthorityForPagename($access, $pagename) {
         $permcache[$pagename][$access] = $authorized;
         return $authorized;
     } elseif ($pagename == '.') {
-    	return false;
+        return false;
     } else {
         return _requiredAuthorityForPagename($access, getParentPage($pagename));
     }
@@ -372,7 +372,7 @@ class PagePermission {
      */
     function isAuthorized($access, $user) {
         $allow = -1;
-    	if (!empty($this->perm{$access})) {
+        if (!empty($this->perm{$access})) {
             foreach ($this->perm[$access] as $group => $bool) {
                 if ($this->isMember($user, $group)) {
                     return $bool;
@@ -456,29 +456,29 @@ class PagePermission {
             $perm['dump'] = array(ACL_ADMIN => true,
                                   ACL_OWNER => true);
         elseif (INSECURE_ACTIONS_LOCALHOST_ONLY) {
-	    if (is_localhost())
-		$perm['dump'] = array(ACL_EVERY => true);
-	    else
-		$perm['dump'] = array(ACL_ADMIN => true);
-	}
-	else
-	    $perm['dump'] = array(ACL_EVERY => true);
+        if (is_localhost())
+        $perm['dump'] = array(ACL_EVERY => true);
+        else
+        $perm['dump'] = array(ACL_ADMIN => true);
+    }
+    else
+        $perm['dump'] = array(ACL_EVERY => true);
         if (defined('REQUIRE_SIGNIN_BEFORE_EDIT') && REQUIRE_SIGNIN_BEFORE_EDIT)
             $perm['edit'] = array(ACL_SIGNED => true);
         // view:
         if (!ALLOW_ANON_USER) {
             if (!ALLOW_USER_PASSWORDS)
-            	$perm['view'] = array(ACL_SIGNED => true);
+                $perm['view'] = array(ACL_SIGNED => true);
             else
-            	$perm['view'] = array(ACL_AUTHENTICATED => true);
+                $perm['view'] = array(ACL_AUTHENTICATED => true);
             $perm['view'][ACL_BOGOUSER] = ALLOW_BOGO_LOGIN ? true : false;
         }
         // edit:
         if (!ALLOW_ANON_EDIT) {
             if (!ALLOW_USER_PASSWORDS)
-            	$perm['edit'] = array(ACL_SIGNED => true);
+                $perm['edit'] = array(ACL_SIGNED => true);
             else
-            	$perm['edit'] = array(ACL_AUTHENTICATED => true);
+                $perm['edit'] = array(ACL_AUTHENTICATED => true);
             $perm['edit'][ACL_BOGOUSER] = ALLOW_BOGO_LOGIN ? true : false;
             $perm['create'] = $perm['edit'];
         }
@@ -500,9 +500,9 @@ class PagePermission {
      * do a recursive comparison
      */
     function equal($otherperm) {
-    	// The equal function seems to be unable to detect removed perm.
-    	// Use case is when a rule is removed.
-    	return (print_r($this->perm, true) === print_r($otherperm, true));
+        // The equal function seems to be unable to detect removed perm.
+        // Use case is when a rule is removed.
+        return (print_r($this->perm, true) === print_r($otherperm, true));
     }
 
     /**

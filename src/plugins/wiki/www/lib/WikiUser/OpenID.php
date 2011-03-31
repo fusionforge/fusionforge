@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: OpenID.php 7640 2010-08-11 12:33:25Z vargenau $');
+// $Id: OpenID.php 7956 2011-03-03 17:08:31Z vargenau $
 /*
  * Copyright (C) 2010 ReiniUrban
  * Zend_OpenId_Consumer parts from Zend licensed under

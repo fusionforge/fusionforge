@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7690 2010-09-17 08:46:20Z vargenau $');
+// $Id: themeinfo.php 7968 2011-03-07 13:39:47Z vargenau $
 
 /**
  * This file defines a blog theme for PhpWiki,
@@ -52,7 +52,7 @@ class WikiTheme_blog extends WikiTheme {
         $this->calendarInit(true);
     }
 
-    /* overload to load from Sidebar */  
+    /* overload to load from Sidebar */
     function _findFile ($file, $missing_okay=false) {
         if (file_exists($this->_path . "themes/".$this->_name."/$file"))
             return "themes/".$this->_name."/$file";
@@ -83,7 +83,7 @@ class WikiTheme_blog extends WikiTheme {
             return '_blog_RecentChanges_BoxFormatter';
         return '_blog_RecentChanges_Formatter';
     }
-  
+
     /* TODO: use the blog summary as label instead of the pagename */
     function linkExistingWikiWord($wikiword, $linktext = '', $version = false) {
         global $request;
@@ -103,7 +103,7 @@ class WikiTheme_blog extends WikiTheme {
              $default_text = $wikiword->shortName;
          else
              $default_text = $wikiword;
-       
+
         if (!empty($linktext)) {
             $link->pushContent($linktext);
             $link->setAttr('class', 'named-wiki');
@@ -118,44 +118,44 @@ class WikiTheme_blog extends WikiTheme {
     }
 
     function load() {
-	// CSS file defines fonts, colors and background images for this
-	// style.
+    // CSS file defines fonts, colors and background images for this
+    // style.
 
-	// override sidebar definitions:
-	$this->setDefaultCSS(_("blog"), 'Kubrick.css');
-	if (isBrowserIE()) {
-	    $this->addMoreHeaders($this->_CSSlink(0, $this->_findFile('IEFixes.css'),'all'));
-	}
-	$this->addButtonAlias(_("(diff)"), "[diff]" );
-	$this->addButtonAlias("...", "alltime");
+    // override sidebar definitions:
+    $this->setDefaultCSS(_("blog"), 'Kubrick.css');
+    if (isBrowserIE()) {
+        $this->addMoreHeaders($this->_CSSlink(0, $this->_findFile('IEFixes.css'),'all'));
+    }
+    $this->addButtonAlias(_("(diff)"), "[diff]" );
+    $this->addButtonAlias("...", "alltime");
 
-	$this->setButtonSeparator("");
+    $this->setButtonSeparator("");
 
-	/**
-	 * WikiWords can automatically be split by inserting spaces between
-	 * the words. The default is to leave WordsSmashedTogetherLikeSo.
-	 */
-	$this->setAutosplitWikiWords(false);
+    /**
+     * WikiWords can automatically be split by inserting spaces between
+     * the words. The default is to leave WordsSmashedTogetherLikeSo.
+     */
+    $this->setAutosplitWikiWords(false);
 
-	/**
-	 * If true (default) show create '?' buttons on not existing pages, even if the
-	 * user is not signed in.
-	 * If false, anon users get no links and it looks cleaner, but then they
-	 * cannot easily fix missing pages.
-	 */
-	$this->setAnonEditUnknownLinks(false);
+    /**
+     * If true (default) show create '?' buttons on not existing pages, even if the
+     * user is not signed in.
+     * If false, anon users get no links and it looks cleaner, but then they
+     * cannot easily fix missing pages.
+     */
+    $this->setAnonEditUnknownLinks(false);
 
-	/*
-	 * You may adjust the formats used for formatting dates and times
-	 * below.  (These examples give the default formats.)
-	 * Formats are given as format strings to PHP strftime() function See
-	 * http://www.php.net/manual/en/function.strftime.php for details.
-	 * Do not include the server's zone (%Z), times are converted to the
-	 * user's time zone.
-	 */
-	//$this->setDateFormat("%B %d, %Y");
-	$this->setDateFormat("%A, %B %e, %Y"); // must not contain time
-	$this->setTimeFormat("%H:%M:%S");
+    /*
+     * You may adjust the formats used for formatting dates and times
+     * below.  (These examples give the default formats.)
+     * Formats are given as format strings to PHP strftime() function See
+     * http://www.php.net/manual/en/function.strftime.php for details.
+     * Do not include the server's zone (%Z), times are converted to the
+     * user's time zone.
+     */
+    //$this->setDateFormat("%B %d, %Y");
+    $this->setDateFormat("%A, %B %e, %Y"); // must not contain time
+    $this->setTimeFormat("%H:%M:%S");
     }
 }
 
@@ -168,5 +168,5 @@ define("PAGETRAIL_ARROW", " » ");
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

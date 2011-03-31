@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Diff.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: Diff.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999, 2000, 2001, 2002, 2004 $ThePhpWikiProgrammingTeam
  *

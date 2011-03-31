@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: UserRatings.php 7447 2010-05-31 11:29:39Z vargenau $');
+// $Id: UserRatings.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 2004 Dan Frankowski
  *

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PearDB_mysql.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: PearDB_mysql.php 7956 2011-03-03 17:08:31Z vargenau $
 
 require_once('lib/WikiDB/backend/PearDB.php');
 

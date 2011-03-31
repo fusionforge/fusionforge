@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminChown.php 7925 2011-02-01 10:08:52Z vargenau $');
+// $Id: WikiAdminChown.php 7955 2011-03-03 16:41:35Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -88,9 +88,9 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p(_("One page has been permanently changed:")));
+                $result->pushContent(HTML::p(_("One page has been changed:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been changed:", $count)));
             }
             $result->pushContent($ul);
             return $result;
@@ -168,7 +168,7 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header->pushContent(
               HTML::p(HTML::strong(
-                _("Are you sure you want to permanently change the owner of the selected pages?"))));
+                _("Are you sure you want to change the owner of the selected pages?"))));
             $header = $this->chownForm($header, $post_args);
         }
         else {

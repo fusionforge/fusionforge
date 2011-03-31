@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: purgepage.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: purgepage.php 7953 2011-03-03 16:21:48Z vargenau $
 require_once('lib/Template.php');
 
 function PurgePage (&$request) {

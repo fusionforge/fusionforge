@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: AccessLog.php 7639 2010-08-11 12:15:16Z vargenau $');
+// $Id: AccessLog.php 7964 2011-03-05 17:05:30Z vargenau $
 /*
  * Copyright 2005, 2007 Reini Urban
  *
@@ -57,7 +57,7 @@ class Request_AccessLog {
             if (!$request->_dbi->isSQL()) {
                 trigger_error("Unsupported database backend for ACCESS_LOG_SQL.\nNeed DATABASE_TYPE=SQL or ADODB or PDO");
             } else {
-            	global $DBParams;
+                global $DBParams;
                 //$this->_dbi =& $request->_dbi;
                 $this->logtable = (!empty($DBParams['prefix']) ? $DBParams['prefix'] : '')."accesslog";
             }
@@ -126,8 +126,8 @@ class Request_AccessLog {
         if ($this->logtable) {
             // mysql specific only:
             return $this->read_sql("request_host=".$this->_dbi->quote($host)
-				   ." AND time_stamp > ". (time()-$since_minutes*60)
-				   ." ORDER BY time_stamp DESC");
+                   ." AND time_stamp > ". (time()-$since_minutes*60)
+                   ." ORDER BY time_stamp DESC");
         } else {
             $iter = new WikiDB_Array_generic_iter();
             $logs =& $iter->_array;
@@ -160,7 +160,7 @@ class Request_AccessLog {
             $entry = new Request_AccessLogEntry($this);
             $re = '/^(\S+)\s(\S+)\s(\S+)\s\[(.+?)\] "([^"]+)" (\d+) (\d+) "([^"]*)" "([^"]*)"$/';
             if (preg_match($re, $s, $m)) {
-            	list(,$entry->host, $entry->ident, $entry->user, $entry->time,
+                list(,$entry->host, $entry->ident, $entry->user, $entry->time,
                      $entry->request, $entry->status, $entry->size,
                      $entry->referer, $entry->user_agent) = $m;
             }
@@ -176,8 +176,8 @@ class Request_AccessLog {
         return $this->sqliter->next();
     }
     function _read_sql_query($where='') {
-    	global $request;
-    	$dbh =& $request->_dbi;
+        global $request;
+        $dbh =& $request->_dbi;
         $log_tbl =& $this->logtable;
         return $dbh->genericSqlIter("SELECT *,request_uri as request,request_time as time,remote_user as user,"
                                     ."remote_host as host,agent as user_agent"
@@ -187,8 +187,8 @@ class Request_AccessLog {
 
     /* done in request->finish() before the db is closed */
     function write_sql() {
-    	global $request;
-    	$dbh =& $request->_dbi;
+        global $request;
+        $dbh =& $request->_dbi;
         if (isset($this->entries) and $dbh and $dbh->isOpen())
             foreach ($this->entries as $entry) {
                 $entry->write_sql();
@@ -236,7 +236,7 @@ class Request_AccessLogEntry
         $this->logfile = $accesslog->logfile;
         $this->time = time();
         $this->status = 200;    // see setStatus()
-        $this->size = 0;	// see setSize()
+        $this->size = 0;    // see setSize()
     }
 
     /**
@@ -350,7 +350,7 @@ class Request_AccessLogEntry
     /* This is better been done by apache mod_log_sql */
     /* If ACCESS_LOG_SQL & 2 we do write it by our own */
     function write_sql() {
-    	global $request;
+        global $request;
 
         $dbh =& $request->_dbi;
         if ($dbh and $dbh->isOpen() and $this->_accesslog->logtable) {
@@ -365,7 +365,7 @@ class Request_AccessLogEntry
                 if (!empty($args['pref']['passwd2']))   $args['pref']['passwd2'] = '<not displayed>';
                 $this->request_args = substr(serialize($args),0,254); // if VARCHAR(255) is used.
             } else {
-          	$this->request_args = $request->get('QUERY_STRING');
+              $this->request_args = $request->get('QUERY_STRING');
             }
             $this->request_method = $request->get('REQUEST_METHOD');
             $this->request_uri = $request->get('REQUEST_URI');

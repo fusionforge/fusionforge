@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 7854 2011-01-21 14:18:43Z vargenau $
+ * $Id: fusionforge.css 7981 2011-03-10 10:52:34Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -722,7 +722,7 @@ blockquote.mail-style-quote {
 .mail-style-quote blockquote.mail-style-quote {
     margin-left: 0.3em;
     margin-bottom : 0em;
-    background: transparent;
+    background-color: transparent;
     border-style: none;
     border-left: medium solid #284;
     padding: 0em;

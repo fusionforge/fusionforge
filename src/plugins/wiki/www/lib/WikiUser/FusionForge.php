@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: FusionForge.php 7750 2010-12-04 11:40:09Z vargenau $');
+// $Id: FusionForge.php 7956 2011-03-03 17:08:31Z vargenau $
 /*
  * Copyright (C) 2006 Alain Peyrat
  *

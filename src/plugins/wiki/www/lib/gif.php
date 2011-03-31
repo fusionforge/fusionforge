@@ -81,7 +81,7 @@ function gif_outputAsJpeg($gif, $lpszFileName, $bgColor = -1)
             if(@fileSize($lpszFileName) > 0) {
                 return true;
             }
-          
+
             @unLink($lpszFileName);
         }
     }
@@ -106,7 +106,7 @@ function gif_getSize($gif, &$width, &$height)
     else {
         return false;
     }
-  
+
     return true;
 }
 
@@ -143,7 +143,7 @@ class CGIFLZW
         while(($iIndex = $this->LZWCommand($data, false)) >= 0) {
             $ret .= chr($iIndex);
         }
-      
+
         $datLen = $stLen - strlen($data);
 
         if($iIndex != -2) {
@@ -157,7 +157,7 @@ class CGIFLZW
         if($bInit) {
             $this->SetCodeSize = ord($data{0});
             $data = substr($data, 1);
-          
+
             $this->CodeSize    = $this->SetCodeSize + 1;
             $this->ClearCode   = 1 << $this->SetCodeSize;
             $this->EndCode     = $this->ClearCode + 1;
@@ -188,7 +188,7 @@ class CGIFLZW
                 $this->OldCode   = $this->FirstCode;
             }
             while($this->FirstCode == $this->ClearCode);
-          
+
             return $this->FirstCode;
         }
 
@@ -233,7 +233,7 @@ class CGIFLZW
             while($Code >= $this->ClearCode) {
                 $this->Stack[$this->sp] = $this->Vals[$Code];
                 $this->sp++;
-              
+
                 if($Code == $this->Next[$Code]) // Circular table entry, big GIF Error!
                     return -1;
 
@@ -282,36 +282,36 @@ class CGIFLZW
                 }
                 return -1;
             }
-          
+
             $this->Buf[0] = $this->Buf[$this->LastByte - 2];
             $this->Buf[1] = $this->Buf[$this->LastByte - 1];
-          
+
             $Count = ord($data{0});
             $data  = substr($data, 1);
-          
-			if($Count) {
-				for($i = 0; $i < $Count; $i++) {
-					$this->Buf[2 + $i] = ord($data{$i});
-				}
-				$data = substr($data, $Count);
-			}
-			else {
-				$this->Done = 1;
-			}
 
-			$this->LastByte = 2 + $Count;
-			$this->CurBit   = ($this->CurBit - $this->LastBit) + 16;
-			$this->LastBit  = (2 + $Count) << 3;
-		}
+            if($Count) {
+                for($i = 0; $i < $Count; $i++) {
+                    $this->Buf[2 + $i] = ord($data{$i});
+                }
+                $data = substr($data, $Count);
+            }
+            else {
+                $this->Done = 1;
+            }
 
-		$iRet = 0;
-		for($i = $this->CurBit, $j = 0; $j < $this->CodeSize; $i++, $j++) {
-			$iRet |= (($this->Buf[intval($i / 8)] & (1 << ($i % 8))) != 0) << $j;
-		}
+            $this->LastByte = 2 + $Count;
+            $this->CurBit   = ($this->CurBit - $this->LastBit) + 16;
+            $this->LastBit  = (2 + $Count) << 3;
+        }
 
-		$this->CurBit += $this->CodeSize;
-		return $iRet;
-	}
+        $iRet = 0;
+        for($i = $this->CurBit, $j = 0; $j < $this->CodeSize; $i++, $j++) {
+            $iRet |= (($this->Buf[intval($i / 8)] & (1 << ($i % 8))) != 0) << $j;
+        }
+
+        $this->CurBit += $this->CodeSize;
+        return $iRet;
+    }
 }
 
 class CGIFCOLORTABLE
@@ -701,7 +701,7 @@ class CGIF
             return false;
         }
         $data = @fRead($fh, @fileSize($lpszFileName));
-        //		@fClose($fh);
+        //        @fClose($fh);
         //      $data=fread($fh,filesize($lpszFileName));
         while(!feof($fh)) {
             $data = $data . @fread($fh, 1024);
@@ -725,10 +725,10 @@ class CGIF
 
             $this->m_bLoaded = true;
             return true;
-	}
+    }
 
-	function getSize($lpszFileName, &$width, &$height)
-	{
+    function getSize($lpszFileName, &$width, &$height)
+    {
             if(!($fh = @fOpen($lpszFileName, "rb"))) {
                 return false;
             }

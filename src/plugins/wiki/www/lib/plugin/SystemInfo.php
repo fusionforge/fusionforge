@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: SystemInfo.php 7848 2011-01-20 13:19:57Z vargenau $');
+// $Id: SystemInfo.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright (C) 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PageGroup.php 7700 2010-09-20 16:03:26Z vargenau $');
+// $Id: PageGroup.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PrevNext.php 7447 2010-05-31 11:29:39Z vargenau $');
+// $Id: PrevNext.php 7955 2011-03-03 16:41:35Z vargenau $
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent

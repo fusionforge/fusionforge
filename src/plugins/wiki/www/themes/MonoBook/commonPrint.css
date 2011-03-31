@@ -1,6 +1,6 @@
 /**
- *  $Id: commonPrint.css 7183 2009-10-05 16:59:27Z vargenau $
- */ 
+ *  $Id: commonPrint.css 7991 2011-03-10 13:09:42Z vargenau $
+ */
 
 /*
 ** Mediawiki Print style sheet for CSS2-capable browsers.
@@ -10,10 +10,10 @@
 ** Copyright Alexander Limi
 */
 
-@page { 
-  size: A4 portrait; 
+@page {
+  size: A4 portrait;
   margin: 17mm 10mm 17mm 10mm;
-} 
+}
 
 h1 {
   string-set: header content();
@@ -24,7 +24,7 @@ h1 {
     content: "Phpwiki";
   }
   @top-right {
-    content: string(header); 
+    content: string(header);
   }
   @bottom-left {
     content: "Page " counter(page) " of " counter(pages);
@@ -33,7 +33,7 @@ h1 {
 
 @page :right {
   @top-left {
-    content: string(header); 
+    content: string(header);
   }
   @top-right {
     content: "Phpwiki";
@@ -52,7 +52,7 @@ h1 {
   }
 }
 
-h1, h2, h3, h4, h5, h6 { page-break-after: avoid; } 
+h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
 
 /* Do not cut tables with class "nobreak" */
 
@@ -65,20 +65,19 @@ a.stub,
 a.new{ color:#ba0000; text-decoration:none; }
 
 .toc,
-#toc { 
-    /*border:1px solid #2f6fab;*/
+#toc {
     border:1px solid #aaaaaa;
     background-color:#f9f9f9;
     padding:5px;
 }
 .tocindent {
-	margin-left: 2em;
+    margin-left: 2em;
 }
 .tocline {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 .toctoggle, .editsection {
-	font-size: smaller;
+    font-size: smaller;
 }
 
 div.toclist a::after {
@@ -86,22 +85,22 @@ div.toclist a::after {
 }
 
 /* images */
-div.floatright { 
-    float: right; 
+div.floatright {
+    float: right;
     margin: 0;
     position:relative;
     border: 0.5em solid White;
     border-width: 0.5em 0 0.8em 1.4em;
 }
-div.floatright p { font-style: italic;} 
-div.floatleft { 
-    float: left; 
+div.floatright p { font-style: italic;}
+div.floatleft {
+    float: left;
     margin: 0.3em 0.5em 0.5em 0;
     position:relative;
     border: 0.5em solid White;
     border-width: 0.5em 1.4em 0.8em 0;
 }
-div.floatleft p { font-style: italic; } 
+div.floatleft p { font-style: italic; }
 /* thumbnails */
 div.thumb {
     margin-bottom: 0.5em;
@@ -136,10 +135,10 @@ div.tleft {
 
 /* table standards */
 table.rimage {
-    float:right; 
-    width:1pt; 
+    float:right;
+    width:1pt;
     position:relative;
-    margin-left:1em; 
+    margin-left:1em;
     margin-bottom:1em;
     text-align:center;
 }
@@ -174,13 +173,13 @@ span.debug {
     display: none;
 }
 
-ul { 
+ul {
     list-style-type: square;
 }
 
 #content {
     background: none;
-    border: none ! important;
+    border-style: none ! important;
     font-size: 11pt;
     padding: 0 ! important;
     margin: 0 ! important;
@@ -197,7 +196,7 @@ h1, h2, h3, h4, h5, h6
 
 p, .documentDescription {
     margin: 1em 0 ! important;
-    line-height: 1.2em;    
+    line-height: 1.2em;
 }
 
 pre {
@@ -221,11 +220,11 @@ a {
 
 a:link, a:visited {
     color: #520;
-    background: transparent;
+    background-color: transparent;
     text-decoration: underline;
 }
 /*
-#content a:link:after, 
+#content a:link:after,
 #content a:visited:after {
    content: " ( " attr(href) " ) ";
 }*/
@@ -245,20 +244,20 @@ a:link, a:visited {
 }
 /* MSIE/Win doesn't understand 'inherit' */
 a, a.external, a.new, a.stub {
-	color: black ! important;
-	text-decoration: none ! important;
+    color: black ! important;
+    text-decoration: none ! important;
 }
 
 /* Continue ... */
 a, a.external, a.new, a.stub {
-	color: inherit ! important;
-	text-decoration: inherit ! important;
+    color: inherit ! important;
+    text-decoration: inherit ! important;
 }
 
 
 /* Show some stuff */
 .urlexpansion {
-	display: inline ! important;
+    display: inline ! important;
 }
 
 div.townBox {
@@ -274,7 +273,7 @@ div.townBox {
 }
 div.townBox dl {
     padding: 0;
-    margin: 0 0 0.3em 0; 
+    margin: 0 0 0.3em 0;
     font-size: 96%;
 }
 div.townBox dl dt {

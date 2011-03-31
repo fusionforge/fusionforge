@@ -1,18 +1,18 @@
 /**
- * $Id: Wordpress.css 7851 2011-01-21 13:17:59Z vargenau $
+ * $Id: Wordpress.css 7965 2011-03-07 09:47:31Z vargenau $
  *
  * PhpWiki's Wordpress style sheet contributed by Mike Pickering
  */
 
-/* 
-	Blue-Fade Theme 
-	Modified 2004-01-20 by Alex King (http://www.alexking.org/)
+/*
+    Blue-Fade Theme
+    Modified 2004-01-20 by Alex King (http://www.alexking.org/)
 
-	based on:
-	Default WordPress by Dave Shea || http://mezzoblue.com
-	Modifications by Matthew Mullenweg || http://photomatt.net
-	This is just a basic layout, with only the bare minimum defined.
-	Please tweak this and make it your own. :)
+    based on:
+    Default WordPress by Dave Shea || http://mezzoblue.com
+    Modifications by Matthew Mullenweg || http://photomatt.net
+    This is just a basic layout, with only the bare minimum defined.
+    Please tweak this and make it your own. :)
 */
 
 /* This stuff was copied straight out of portland.css */
@@ -93,7 +93,7 @@ a {
         color: #036;
         text-decoration: none;  /* This was added */
 }
- 
+
 a:visited {
         color: #369;
 }
@@ -270,7 +270,7 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   color: black;
 }
 
-.wikipaging { 
+.wikipaging {
   font-size: x-small;
 }
 
@@ -312,7 +312,7 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   display: none;
   z-index: 100;
   background-color: white;
-  border: 1px solid #d0d0d0; 
+  border: 1px solid #d0d0d0;
   font-size: 9px;
   overflow: hidden;
 }
@@ -321,9 +321,9 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 }
 #LSResult .evenrow {
   background-color: #f0f0f0;
-} 
+}
 #LSREsult .oddrow {
-} 
+}
 .LSEnd {
   text-align: right;
 }
@@ -332,7 +332,7 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 }
 .LSRow {
   padding: 1px;
-} 
+}
 ul.LSRes {
   margin: 0px;
   padding: 0px;
@@ -351,14 +351,14 @@ li.LSRow {
   text-decoration: underline;
   margin-bottom: 0.25ex;
   margin-right:  0.25em;
-} 
+}
 .transclusion, .wiki-edithelp {
   font-size: smaller;
 }
 .transclusion {
   border: 1px solid gray;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:     0px;
   padding-bottom:  0px;
   margin-left:   0.25em;
@@ -400,13 +400,13 @@ table.cal {
   padding: 1px;
   /* For Mozilla */
   empty-cells: hide;
-} 
+}
 
 /* cells */
 table.cal td {
   background: white;
   text-align: right;
-} 
+}
 
 /* Month-name header */
 table.cal-header { font-size: larger; }
@@ -476,7 +476,7 @@ table.cal td.cal-today a.cal-hide {  }
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0em; 
+  padding-left:  0em;
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
@@ -536,8 +536,8 @@ td.pageinfo { font-weight: bold; }
   background: #eee;
   margin-top:    1em;
   margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:    0.8ex;
   padding-bottom: 0;
   border: medium solid red;
@@ -549,8 +549,8 @@ td.pageinfo { font-weight: bold; }
   background: #eee;
   margin-top:    1em;
   margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:    0.8ex;
   padding-bottom: 0;
   border: thin solid blue;
@@ -620,8 +620,8 @@ span.redirectfrom {
 .wiki-dl-table tr {
   border-top: 2px #444 solid;
   border-bottom: 2px #444 solid;
-  border-left: none; 
-  border-right: none; 
+  border-left: none;
+  border-right: none;
 }
 .wiki-dl-table th,
 .wiki-dl-table td {
@@ -785,11 +785,11 @@ td.sidebar { border-spacing: 0px; margin: 0ex;}
 /* plugin BoxRight */
 div.boxright {
   background-color: #e9fbff;
-  width: 200px; 
+  width: 200px;
   right: 10px;
-  padding: 0.5em; 
-  float: right; 
-  border: thin solid #888888; 
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
   padding: 0.5em;
 }
 
@@ -800,7 +800,7 @@ div.itemdesc {  padding-left: 1em; }
 div.rssitem { border-top: thin dashed #aaa; }
 
 /* SqlResult */
-table.sqlresult { 
+table.sqlresult {
   border: 1px outset gray;
   background: white;
   margin: 0.5ex 0.5em;
@@ -816,8 +816,8 @@ table.sqlresult td {
 /**
  * TeX2png plugin
  */
-img.tex { 
-  vertical-align: middle; 
+img.tex {
+  vertical-align: middle;
 }
 
 /**

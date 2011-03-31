@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
+Date: Tue, 15 Mar 2011 18:42:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Hj%C3%A4lp%2FL%C3%A4ggaTillSidor 7873 2011-01-25 14:31:48Z vargenau $
+X-Rcs-Id: $Id: Hj%C3%A4lp%2FL%C3%A4ggaTillSidor 7998 2011-03-15 17:43:49Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Hj%C3%A4lp%2FL%C3%A4ggaTillSidor;
   flags="";
@@ -9,22 +9,22 @@ Content-Transfer-Encoding: binary
 
 Allt du behöver göra för att skapa en sida i Wiki är att komma på en
 meningsfull titel, skriva alla ord med stor bokstav i början av ordet
-och [SättaIhopDemSåHär]. Wiki kommer automatiskt att känna igen det som
+och [[SättaIhopDemSåHär]]. Wiki kommer automatiskt att känna igen det som
 en hyperlänk. Alternativt kan du sätt vad som helst innanför
-[hakparenteser]. Wiki känner inte igen länkar med sammansatta ord om
+[[hakparenteser]]. Wiki känner inte igen länkar med sammansatta ord om
 orden innehåller å,ä eller ö, t.ex. GratisÖlÅtAllaÄlgar. I dessa fall
 måste hakparenteser användas.
 
-Sedan kan du [KlickaPåFrågetecknet] efter hyperlänken så öppnar Wiki ett
+Sedan kan du [[KlickaPåFrågetecknet]] efter hyperlänken så öppnar Wiki ett
 fönster där du kan beskriva den nya sidan.
 
 Vill du lägga till ett dokument med komplicerad design till Wiki är det
 bättre om du ger en URL istället för att försöka skriva dokumentet här. Det
 gör du på det här sättet:
 
-Projekthemsidan för PhpWiki: http://phpwiki.sourceforge.net
+Projekthemsidan för [[Hjälp:PhpWiki|PhpWiki]]: http://phpwiki.sourceforge.net
 
-Wiki stöder inte HTML-taggar (se [Textformateringsregler]). <taggar>De
+Wiki stöder inte HTML-taggar (se [[Textformateringsregler]]). <taggar>De
 kommer att rendreras som text.</taggar> Wiki är menat att vara så
 enkelt som möjligt för att uppmuntra dess användning.
 

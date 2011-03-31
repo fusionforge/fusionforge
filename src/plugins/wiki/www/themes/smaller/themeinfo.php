@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: themeinfo.php 7968 2011-03-07 13:39:47Z vargenau $
 /**
  * tiny actionbar, only Edit (if signed in) and Info => PageInfo,
  *   all other Actionbars buttons in info.tmpl
@@ -40,18 +40,15 @@ class WikiTheme_smaller extends WikiTheme {
 
         return $this->makeButton($label, WikiURL($pagename, $attr), $class);
     }
-    
 }
 
 $WikiTheme = new WikiTheme_smaller('smaller');
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// (c-file-style: "gnu")
 // Local Variables:
 // mode: php
 // tab-width: 8
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: imdb.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // $Id: imdb.php 7964 2011-03-05 17:05:30Z vargenau $
 /**
  * Copyright 2004 Reini Urban
  *
@@ -363,5 +363,5 @@ SELECT m.title, m.date, n.name, c.role
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

@@ -1,7 +1,7 @@
-<?php // -*-php-*- $Id: configurator.php 7834 2011-01-13 15:38:07Z vargenau $
+<?php // -*-php-*- $Id: configurator.php 7960 2011-03-04 13:58:21Z vargenau $
 /*
  * Copyright 2002,2003,2005,2008-2010 $ThePhpWikiProgrammingTeam
- * Copyright 2002 Martin Geisler <gimpster@gimpster.com> 
+ * Copyright 2002 Martin Geisler <gimpster@gimpster.com>
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
@@ -12,19 +12,19 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PhpWiki; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /**
- * Starts automatically the first time by IniConfig("config/config.ini") 
+ * Starts automatically the first time by IniConfig("config/config.ini")
  * if it doesn't exist.
  *
  * DONE:
@@ -40,24 +40,24 @@
  * o parse_ini_file("config-dist.ini") for the commented vars
  * o check automatically for commented and optional vars
  * o fix _optional, to ignore existing config.ini and only use config-default.ini values
- * o mixin class for commented 
+ * o mixin class for commented
  * o fix SQL quotes, AUTH_ORDER quotes and file forward slashes
  * o posted values validation, extend js validation for sane DB values
  * o read config-dist.ini into sections, comments, and optional/required settings
  *
  * A file config/config.ini will be automatically generated, if writable.
  *
- * NOTE: If you have a starterscript outside PHPWIKI_DIR but no 
- * config/config.ini yet (very unlikely!), you must define DATA_PATH in the 
- * starterscript, otherwise the webpath to configurator is unknown, and 
+ * NOTE: If you have a starterscript outside PHPWIKI_DIR but no
+ * config/config.ini yet (very unlikely!), you must define DATA_PATH in the
+ * starterscript, otherwise the webpath to configurator is unknown, and
  * subsequent requests will fail. (POST to save the INI)
  */
 
 global $HTTP_SERVER_VARS, $HTTP_POST_VARS, $tdwidth;
-if (empty($_SERVER)) 	$_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
-if (empty($_GET)) 	$_GET    =& $GLOBALS['HTTP_GET_VARS'];
-if (empty($_ENV)) 	$_ENV    =& $GLOBALS['HTTP_ENV_VARS'];
-if (empty($_POST)) 	$_POST   =& $GLOBALS['HTTP_POST_VARS'];
+if (empty($_SERVER))         $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
+if (empty($_GET))         $_GET    =& $GLOBALS['HTTP_GET_VARS'];
+if (empty($_ENV))         $_ENV    =& $GLOBALS['HTTP_ENV_VARS'];
+if (empty($_POST))         $_POST   =& $GLOBALS['HTTP_POST_VARS'];
 
 if (empty($configurator))
     $configurator = "configurator.php";
@@ -66,9 +66,9 @@ if (!strstr($_SERVER["SCRIPT_NAME"], $configurator) and defined('DATA_PATH'))
 $scriptname = str_replace('configurator.php', 'index.php', $_SERVER["SCRIPT_NAME"]);
 if (strstr($_SERVER["SCRIPT_NAME"],"/php")) {  // cgi got this different
     if (defined('DATA_PATH'))
-	$scriptname = DATA_PATH . "/index.php";
+        $scriptname = DATA_PATH . "/index.php";
     else
-	$scriptname = str_replace('configurator.php', 'index.php', $_SERVER["PHP_SELF"]);
+        $scriptname = str_replace('configurator.php', 'index.php', $_SERVER["PHP_SELF"]);
 }
 
 $tdwidth = 700;
@@ -81,22 +81,22 @@ if (!function_exists('_http_user')) {
     function _http_user() {
         if (!isset($_SERVER))
             $_SERVER = $GLOBALS['HTTP_SERVER_VARS'];
-	if (!empty($_SERVER['PHP_AUTH_USER']))
-	    return array($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
-	if (!empty($_SERVER['REMOTE_USER']))
-	    return array($_SERVER['REMOTE_USER'], $_SERVER['PHP_AUTH_PW']);
+        if (!empty($_SERVER['PHP_AUTH_USER']))
+            return array($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+        if (!empty($_SERVER['REMOTE_USER']))
+            return array($_SERVER['REMOTE_USER'], $_SERVER['PHP_AUTH_PW']);
         if (!empty($GLOBALS['HTTP_ENV_VARS']['REMOTE_USER']))
-	    return array($GLOBALS['HTTP_ENV_VARS']['REMOTE_USER'], 
-	                 $GLOBALS['HTTP_ENV_VARS']['PHP_AUTH_PW']);
-	if (!empty($GLOBALS['REMOTE_USER']))
-	    return array($GLOBALS['REMOTE_USER'], $GLOBALS['PHP_AUTH_PW']);
-	    
-	// MsWindows IIS:
-	if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
+            return array($GLOBALS['HTTP_ENV_VARS']['REMOTE_USER'],
+                         $GLOBALS['HTTP_ENV_VARS']['PHP_AUTH_PW']);
+        if (!empty($GLOBALS['REMOTE_USER']))
+            return array($GLOBALS['REMOTE_USER'], $GLOBALS['PHP_AUTH_PW']);
+
+        // MsWindows IIS:
+        if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
             list($userid, $passwd) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
             return array($userid, $passwd);
-	}
-	return array('','');
+        }
+        return array('','');
     }
     function _http_logout() {
         if (!isset($_SERVER))
@@ -105,52 +105,52 @@ if (!function_exists('_http_user')) {
         // better_srand(); $realm = microtime().rand();
         header('WWW-Authenticate: Basic realm="'.WIKI_NAME.'"');
         if (strstr(php_sapi_name(), 'apache'))
-            header('HTTP/1.0 401 Unauthorized'); 
-        else    
+            header('HTTP/1.0 401 Unauthorized');
+        else
             header("Status: 401 Access Denied"); //IIS and CGI need that
         unset($GLOBALS['REMOTE_USER']);
         unset($_SERVER['PHP_AUTH_USER']);
         unset($_SERVER['PHP_AUTH_PW']);
 
-	trigger_error("Permission denied. Require ADMIN_USER.", E_USER_ERROR);
-	exit();
+        trigger_error("Permission denied. Require ADMIN_USER.", E_USER_ERROR);
+        exit();
     }
 }
 
-// If config.ini exists, we require ADMIN_USER access by faking HttpAuth. 
+// If config.ini exists, we require ADMIN_USER access by faking HttpAuth.
 // So nobody can see or reset the password(s).
 if (file_exists($fs_config_file)) {
     // Require admin user
     if (!defined('ADMIN_USER') or !defined('ADMIN_PASSWD')) {
-    	if (!function_exists("IniConfig")) {
-    	    include_once("lib/prepend.php");
-	    include_once("lib/IniConfig.php");
-    	}
-	IniConfig($fs_config_file);
+            if (!function_exists("IniConfig")) {
+                include_once("lib/prepend.php");
+            include_once("lib/IniConfig.php");
+            }
+        IniConfig($fs_config_file);
     }
     if (!defined('ADMIN_USER') or ADMIN_USER == '') {
-	trigger_error("Configuration problem:\nADMIN_USER not defined in \"$fs_config_file\".\n"
-		      . "Cannot continue: You have to fix that manually.", E_USER_ERROR);
-	exit();
+        trigger_error("Configuration problem:\nADMIN_USER not defined in \"$fs_config_file\".\n"
+                      . "Cannot continue: You have to fix that manually.", E_USER_ERROR);
+        exit();
     }
 
     list($admin_user, $admin_pw) = _http_user();
     //$required_user = ADMIN_USER;
     if (empty($admin_user) or $admin_user != ADMIN_USER)
     {
-	_http_logout();
+        _http_logout();
     }
     // check password
     if (ENCRYPTED_PASSWD and function_exists('crypt')) {
-        if (crypt($admin_pw, ADMIN_PASSWD) != ADMIN_PASSWD) 
-	    _http_logout();
+        if (crypt($admin_pw, ADMIN_PASSWD) != ADMIN_PASSWD)
+            _http_logout();
     } elseif ($admin_pw != ADMIN_PASSWD) {
         _http_logout();
     }
 } else {
     if (!function_exists("IniConfig")) {
         include_once("lib/prepend.php");
-	include_once("lib/IniConfig.php");
+        include_once("lib/IniConfig.php");
     }
     $def_file = (substr(PHP_OS,0,3) == 'WIN') ? 'config\\config-default.ini' : 'config/config-default.ini';
     $fs_def_file = dirname(__FILE__) . (substr(PHP_OS,0,3) == 'WIN' ? '\\' : '/') . $def_file;
@@ -163,7 +163,7 @@ echo '<','?xml version="1.0" encoding="utf-8"?',">\n";
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- $Id: configurator.php 7834 2011-01-13 15:38:07Z vargenau $ -->
+<!-- $Id: configurator.php 7960 2011-03-04 13:58:21Z vargenau $ -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Configuration tool for PhpWiki <?php echo $config_file ?></title>
 <style type="text/css" media="screen">
@@ -247,8 +247,8 @@ function do_init() {
   for (var i = 0; i < rows.length; i++) {
     var tr = rows[i];
     if (tr.className == 'header')
-	if (!show || tr.id != show)
-	    toggle_group(tr.id);
+        if (!show || tr.id != show)
+            toggle_group(tr.id);
   }
 
   // Select text in textarea upon focus
@@ -258,7 +258,7 @@ function do_init() {
     area.addEventListener('focus', listener, false);
   }
 }
-  
+
 -->
 </script>
 </head>
@@ -282,7 +282,7 @@ define('DEBUG', 0);
  * TO CHANGE THE CONFIGURATION OF YOUR PHPWIKI, DO *NOT* MODIFY THIS FILE!
  * more instructions go here
  *
- * Todo: 
+ * Todo:
  *   * fix include_path
  *   * eval config.ini to get the actual settings.
  */
@@ -305,8 +305,8 @@ define('DEBUG', 0);
  *   for the html version of the descriptive text.
  *
  * - Double-quotes and dollar signs in the descriptive text must be
- *   escaped: \" and \$. Instead of escaping double-quotes you can use 
- *   single (') quotes for the enclosing quotes. 
+ *   escaped: \" and \$. Instead of escaping double-quotes you can use
+ *   single (') quotes for the enclosing quotes.
  *
  * - Special characters like < and > must use html entities,
  *   they will be converted back to characters for the final output.
@@ -316,11 +316,11 @@ $SEPARATOR = ";=================================================================
 
 $preamble = "
 ; This is the main configuration file for PhpWiki in INI-style format.
-; Note that certain characters are used as comment char and therefore 
+; Note that certain characters are used as comment char and therefore
 ; these entries must be in double-quotes. Such as \":\", \";\", \",\" and \"|\"
 ; Take special care for DBAUTH_ sql statements. (Part 3a)
 ;
-; This file is divided into several parts: Each one has different configuration 
+; This file is divided into several parts: Each one has different configuration
 ; settings you can change; in all cases the default should work on your system,
 ; however, we recommend you tailor things to your particular setting.
 ; Here undefined definitions get defined by config-default.ini settings.
@@ -341,7 +341,7 @@ else {
   if (substr(PHP_OS,0,3) == 'WIN') {
       $include_path = dirname(__FILE__) . ';' . ini_get('include_path');
       if (strchr(ini_get('include_path'),'/'))
-	  $include_path = strtr($include_path,'\\','/');
+          $include_path = strtr($include_path,'\\','/');
   } else {
     $include_path = dirname(__FILE__) . ':' . ini_get('include_path');
   }
@@ -369,12 +369,12 @@ new boolean_define_commented_optional('ENABLE_WYSIWYG');
 
 $properties["WYSIWYG_BACKEND"] =
 new _define_selection(
-'WYSIWYG_BACKEND', 
+'WYSIWYG_BACKEND',
 array('Wikiwyg'   => 'Wikiwyg',
       'tinymce'   => 'tinymce',
-      'FCKeditor' => 'FCKeditor', 
-      'spaw'      => 'spaw', 
-      'htmlarea3' => 'htmlarea3', 
+      'FCKeditor' => 'FCKeditor',
+      'spaw'      => 'spaw',
+      'htmlarea3' => 'htmlarea3',
       'htmlarea2' => 'htmlarea2',
 ));
 
@@ -446,11 +446,11 @@ You must set this! Username and password of the administrator.",
 
 $properties["Admin Password"] =
 new _define_password('ADMIN_PASSWD', ADMIN_PASSWD, "
-You must set this! 
+You must set this!
 For heaven's sake pick a good password.
 
 If your version of PHP supports encrypted passwords, your password will be
-automatically encrypted within the generated config file. 
+automatically encrypted within the generated config file.
 Use the \"Create Random Password\" button to create a good (random) password.
 
 ADMIN_PASSWD is ignored on HttpAuth",
@@ -469,7 +469,7 @@ new boolean_define_optional
        'false' => "false. just record the address as given by the httpd server"));
 
 $properties["ZIP Dump Authentication"] =
-new boolean_define_optional('ZIPDUMP_AUTH', 
+new boolean_define_optional('ZIPDUMP_AUTH',
                     array('false' => "false. Everyone may download zip dumps",
                           'true'  => "true. Only admin may download zip dumps"));
 
@@ -502,14 +502,14 @@ new _define_commented_optional('ACCESS_LOG', ACCESS_LOG);
 
 $properties["Access Log SQL"] =
 new _define_selection(
-'ACCESS_LOG_SQL', 
+'ACCESS_LOG_SQL',
 array('0' => 'disabled',
       '1' => 'read only',
       '2' => 'read + write'));
 
 $properties["Compress Output"] =
 new boolean_define_commented_optional
-( 'COMPRESS_OUTPUT', 
+( 'COMPRESS_OUTPUT',
   array(''      => 'undefined - GZIP compress when appropriate.',
         'false' => 'Never compress output.',
         'true'  => 'Always try to compress output.'));
@@ -525,7 +525,7 @@ new _define_selection_optional
 HTTP CACHE_CONTROL
 
 This controls how PhpWiki sets the HTTP cache control
-headers (Expires: and Cache-Control:) 
+headers (Expires: and Cache-Control:)
 
 Choose one of:
 <dl>
@@ -579,7 +579,7 @@ new _define_optional('SESSION_SAVE_PATH', defined('SESSION_SAVE_PATH') ? SESSION
 
 $properties["Force PHP Database Sessions"] =
 new boolean_define_commented_optional
-('USE_DB_SESSION', 
+('USE_DB_SESSION',
  array('false' => 'Disable database sessions, use files',
        'true'  => 'Enable database sessions'));
 
@@ -663,7 +663,7 @@ To connect over a local named socket, use something like
 <pre>
   unix(/var/lib/mysql/mysql.sock)
 </pre>
-here. 
+here.
 mysql on Windows via named pipes might need 127.0.0.1");
 
 $properties["SQL Database Name"] =
@@ -678,7 +678,7 @@ $dsn_sqldbname = $properties["SQL Database Name"]->value();
 $dsn_sqlstring = $dsn_sqltype."://{$dsn_sqluser}:{$dsn_sqlpass}@{$dsn_sqlhostorsock}/{$dsn_sqldbname}";
 
 $properties["SQL dsn"] =
-new unchangeable_define("DATABASE_DSN", 
+new unchangeable_define("DATABASE_DSN",
                         $dsn_sqlstring, "
 Calculated from the settings above:");
 
@@ -698,7 +698,7 @@ Note: This prefix is NOT prepended to the default DBAUTH_
 
 $properties["DATABASE_PERSISTENT"] =
 new boolean_define_commented_optional
-('DATABASE_PERSISTENT', 
+('DATABASE_PERSISTENT',
  array('false' => "Disabled",
        'true'  => "Enabled"));
 
@@ -724,7 +724,7 @@ new _define_selection('DATABASE_DBA_HANDLER',
                     'db4'  => "DB4 - BerkeleyDB (Sleepycat) DB4."), "
 Use 'gdbm', 'dbm', 'db2', 'db3' or 'db4' depending on your DBA handler methods supported: <br />  "
                       . (function_exists("dba_handlers") ? join(", ",dba_handlers()) : "")
-		      . "\n\nBetter not use other hacks such as inifile, flatfile or cdb");
+                      . "\n\nBetter not use other hacks such as inifile, flatfile or cdb");
 
 $properties["dba timeout"] =
 new numeric_define("DATABASE_TIMEOUT", DATABASE_TIMEOUT, "
@@ -754,7 +754,7 @@ There are two basic classes of revisions: major and minor. Which
 class a revision belongs in is determined by whether the author
 checked the \"this is a minor revision\" checkbox when they saved the
 page.
- 
+
 There is, additionally, a third class of revisions: author
 revisions. The most recent non-mergable revision from each distinct
 author is and author revision.
@@ -803,11 +803,11 @@ is not changed.
 
 $properties["Major Edits: keep minimum days"] =
     new numeric_define('MAJOR_MIN_KEEP', MAJOR_MIN_KEEP, "
-Default: Keep for unlimited time. 
+Default: Keep for unlimited time.
 Set to 0 to enable archive cleanup");
 $properties["Minor Edits: keep minumum days"] =
     new numeric_define('MINOR_MIN_KEEP', MINOR_MIN_KEEP, "
-Default: Keep for unlimited time. 
+Default: Keep for unlimited time.
 Set to 0 to enable archive cleanup");
 
 $properties["Major Edits: how many"] =
@@ -863,42 +863,42 @@ $properties["Allow Bogo Login"] =
 new boolean_define_optional('ALLOW_BOGO_LOGIN',
                     array('true'  => "true. Users may Sign In with any WikiWord, without password. (Default)",
                           'false' => "false. Require stricter authentication."), "
-If ALLOW_BOGO_LOGIN is false, you may not login with any wikiword username and empty password. 
+If ALLOW_BOGO_LOGIN is false, you may not login with any wikiword username and empty password.
 If true, users are allowed to create themselves with any WikiWord username. See below.");
 
 $properties["Allow User Passwords"] =
 new boolean_define_optional('ALLOW_USER_PASSWORDS',
                     array('true'  => "True user authentication with password checking. (Default)",
                           'false' => "false. Ignore authentication settings below."), "
-If ALLOW_USER_PASSWORDS is true, the authentication settings below define where and how to 
+If ALLOW_USER_PASSWORDS is true, the authentication settings below define where and how to
 check against given username/passwords. For completely security disable BOGO_LOGIN and ANON_EDIT above.");
 
 $properties["User Authentication Methods"] =
     new array_define('USER_AUTH_ORDER', array("PersonalPage", "Db"), "
-Many different methods can be used to check user's passwords. 
+Many different methods can be used to check user's passwords.
 Try any of these in the given order:
 <dl>
 <dt>BogoLogin</dt>
-	<dd>WikiWord username, with no *actual* password checking,
+        <dd>WikiWord username, with no *actual* password checking,
         although the user will still have to enter one.</dd>
 <dt>PersonalPage</dt>
-	<dd>Store passwords in the users homepage metadata (simple)</dd>
+        <dd>Store passwords in the users homepage metadata (simple)</dd>
 <dt>Db</dt>
-	<dd>Use DBAUTH_AUTH_* (see below) with PearDB or ADODB only.</dd>
+        <dd>Use DBAUTH_AUTH_* (see below) with PearDB or ADODB only.</dd>
 <dt>LDAP</dt>
-	<dd>Authenticate against LDAP_AUTH_HOST with LDAP_BASE_DN.</dd>
+        <dd>Authenticate against LDAP_AUTH_HOST with LDAP_BASE_DN.</dd>
 <dt>IMAP</dt>
-	<dd>Authenticate against IMAP_AUTH_HOST (email account)</dd>
+        <dd>Authenticate against IMAP_AUTH_HOST (email account)</dd>
 <dt>POP3</dt>
-	<dd>Authenticate against POP3_AUTH_HOST (email account)</dd>
+        <dd>Authenticate against POP3_AUTH_HOST (email account)</dd>
 <dt>Session</dt>
-	<dd>Get username and level from a PHP session variable. (e.g. for FusionForge)</dd>
+        <dd>Get username and level from a PHP session variable. (e.g. for FusionForge)</dd>
 <dt>File</dt>
-	<dd>Store username:crypted-passwords in .htaccess like files. 
+        <dd>Store username:crypted-passwords in .htaccess like files.
          Use Apache's htpasswd to manage this file.</dd>
 <dt>HttpAuth</dt>
-	<dd>Use the protection by the webserver (.htaccess/.htpasswd) (experimental)
-	Enforcing HTTP Auth not yet. Note that the ADMIN_USER should exist also.
+        <dd>Use the protection by the webserver (.htaccess/.htpasswd) (experimental)
+        Enforcing HTTP Auth not yet. Note that the ADMIN_USER should exist also.
         Using HttpAuth disables all other methods and no userauth sessions are used.</dd>
 </dl>
 
@@ -919,22 +919,22 @@ new numeric_define('PASSWORD_LENGTH_MINIMUM', PASSWORD_LENGTH_MINIMUM);
 $properties["USER_AUTH_POLICY"] =
 new _define_selection('USER_AUTH_POLICY',
               array('first-only' => "first-only - use only the first method in USER_AUTH_ORDER",
-                    'old'  	=> "old - ignore USER_AUTH_ORDER (legacy)",
-                    'strict'  	=> "strict - check all methods for userid + password (recommended)",
-                    'stacked'  	=> "stacked - check all methods for userid, and if found for password"), "
+                    'old'          => "old - ignore USER_AUTH_ORDER (legacy)",
+                    'strict'          => "strict - check all methods for userid + password (recommended)",
+                    'stacked'          => "stacked - check all methods for userid, and if found for password"), "
 The following policies are available for user authentication:
 <dl>
 <dt>first-only</dt>
-	<dd>use only the first method in USER_AUTH_ORDER</dd>
+        <dd>use only the first method in USER_AUTH_ORDER</dd>
 <dt>old</dt>
-	<dd>ignore USER_AUTH_ORDER and try to use all available 
+        <dd>ignore USER_AUTH_ORDER and try to use all available
         methods as in the previous PhpWiki releases (slow)</dd>
 <dt>strict</dt>
-	<dd>check if the user exists for all methods: 
-        on the first existing user, try the password. 
+        <dd>check if the user exists for all methods:
+        on the first existing user, try the password.
         dont try the other methods on failure then</dd>
 <dt>stacked</dt>
-	<dd>check the given user - password combination for all
+        <dd>check the given user - password combination for all
         methods and return true on the first success.</dd></dl>");
 
 $properties["ENABLE_USER_NEW"] =
@@ -971,7 +971,7 @@ is obtained.  Supported values are:
 <dt>FILE</dt>
           <dd>Flatfile. See AUTH_GROUP_FILE below.</dd>
 <dt>LDAP</dt>
-          <dd>LDAP groups. See \"LDAP authentication options\" above and 
+          <dd>LDAP groups. See \"LDAP authentication options\" above and
           lib/WikiGroup.php. (experimental)</dd></dl>");
 
 $properties["CATEGORY_GROUP_PAGE"] =
@@ -1112,12 +1112,12 @@ and their values as NAME=value pairs separated by colons.");
 
 $properties["LDAP AUTH USER"] =
     new _define_optional('LDAP_AUTH_USER', "CN=ldapuser,ou=Users,o=Development,dc=mycompany.com", "
-DN to initially bind to the LDAP server as. This is needed if the server doesn't 
+DN to initially bind to the LDAP server as. This is needed if the server doesn't
 allow anonymous queries. (Windows Active Directory Server)");
 
 $properties["LDAP AUTH PASSWORD"] =
     new _define_optional('LDAP_AUTH_PASSWORD', "secret", "
-Password to use to initially bind to the LDAP server, as the DN 
+Password to use to initially bind to the LDAP server, as the DN
 specified in the LDAP_AUTH_USER option (above).");
 
 $properties["LDAP SEARCH FIELD"] =
@@ -1145,12 +1145,12 @@ Default: ou=Groups");
 $properties["LDAP Authentication"] =
 new unchangeable_variable('LDAP Authentication', "
 ; If USER_AUTH_ORDER contains Ldap:
-; 
+;
 ; The LDAP server to connect to.  Can either be a hostname, or a complete
 ; URL to the server (useful if you want to use ldaps or specify a different
 ; port number).
 ;LDAP_AUTH_HOST = \"ldap://localhost:389\"
-; 
+;
 ; The organizational or domain BASE DN: e.g. \"dc=mydomain,dc=com\".
 ;
 ; Note: ou=Users and ou=Groups are used for GroupLdap Membership
@@ -1162,11 +1162,11 @@ new unchangeable_variable('LDAP Authentication', "
 ; and their values as NAME=value pairs separated by colons.
 ; LDAP_SET_OPTION = \"LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0\"
 
-; DN to initially bind to the LDAP server as. This is needed if the server doesn't 
+; DN to initially bind to the LDAP server as. This is needed if the server doesn't
 ; allow anonymous queries. (Windows Active Directory Server)
 ; LDAP_AUTH_USER = \"CN=ldapuser,ou=Users,o=Development,dc=mycompany.com\"
 
-; Password to use to initially bind to the LDAP server, as the DN 
+; Password to use to initially bind to the LDAP server, as the DN
 ; specified in the LDAP_AUTH_USER option (above).
 ; LDAP_AUTH_PASSWORD = secret
 
@@ -1196,7 +1196,7 @@ If USER_AUTH_ORDER contains IMAP:
 The IMAP server to check usernames from. Defaults to localhost.
 
 Some IMAP_AUTH_HOST samples:
-  localhost, localhost:143/imap/notls, 
+  localhost, localhost:143/imap/notls,
   localhost:993/imap/ssl/novalidate-cert (SuSE refuses non-SSL conections)");
 
 } else { // function_exists('imap_open')
@@ -1205,9 +1205,9 @@ $properties["IMAP Authentication"] =
   new unchangeable_variable('IMAP_AUTH_HOST',"
 ; If USER_AUTH_ORDER contains IMAP:
 ; The IMAP server to check usernames from. Defaults to localhost.
-; 
+;
 ; Some IMAP_AUTH_HOST samples:
-;   localhost, localhost:143/imap/notls, 
+;   localhost, localhost:143/imap/notls,
 ;   localhost:993/imap/ssl/novalidate-cert (SuSE refuses non-SSL conections)
 ;IMAP_AUTH_HOST = localhost:143/imap/notls", "
 Ignored. No IMAP support in this php. configure --with-imap");
@@ -1262,7 +1262,7 @@ new _define_selection_optional('THEME',
                     'SpaceWiki' => "SpaceWiki",
                     'Hawaiian' => "Hawaiian",
                     'MonoBook'  => 'MonoBook [experimental]',
-                    'blog' 	=> 'blog [experimental]',
+                    'blog'         => 'blog [experimental]',
                     ), "
 THEME
 
@@ -1330,11 +1330,11 @@ WIKI_PGSRC can either name a directory or a zip file. In either case
 WIKI_PGSRC is scanned for files -- one file per page.
 <pre>
 // Default (old) behavior:
-define('WIKI_PGSRC', 'pgsrc'); 
+define('WIKI_PGSRC', 'pgsrc');
 // New style:
-define('WIKI_PGSRC', 'wiki.zip'); 
-define('WIKI_PGSRC', 
-       '../Logs/Hamwiki/hamwiki-20010830.zip'); 
+define('WIKI_PGSRC', 'wiki.zip');
+define('WIKI_PGSRC',
+       '../Logs/Hamwiki/hamwiki-20010830.zip');
 </pre>");
 
 $properties["Default Wiki Page Source"] =
@@ -1394,7 +1394,7 @@ $properties["Keyword Link Regexp"] =
 new _define_optional('KEYWORDS', '\"Category* OR Topic*\"', "
 Search term used for automatic page classification by keyword extraction.
 
-Any links on a page to pages whose names match this search 
+Any links on a page to pages whose names match this search
 will be used keywords in the keywords html meta tag. This is an aid to
 classification by search engines. The value of the match is
 used as the keyword.
@@ -1438,7 +1438,7 @@ new boolean_define_optional('ENABLE_MARKUP_COLOR');
 $properties["DISABLE_MARKUP_WIKIWORD"] =
 new boolean_define_optional('DISABLE_MARKUP_WIKIWORD');
 
-$properties["ENABLE_MARKUP_DIVSPAN" ] = 
+$properties["ENABLE_MARKUP_DIVSPAN" ] =
 new boolean_define_optional('ENABLE_MARKUP_DIVSPAN');
 
 ///////////////////
@@ -1461,9 +1461,9 @@ Canonical httpd port of the server on which this PhpWiki resides.",
 "onchange=\"validate_ereg('Sorry, \'%s\' is no valid port number.', '^[0-9]+$', 'SERVER_PORT', this);\"");
 
 $properties["Server Protocol"] =
-    new _define_selection_optional_commented('SERVER_PROTOCOL', 
-		    array('http'  => 'http',
-			  'https' => 'https'));
+    new _define_selection_optional_commented('SERVER_PROTOCOL',
+                    array('http'  => 'http',
+                          'https' => 'https'));
 
 $properties["Script Name"] =
     new _define_commented_optional('SCRIPT_NAME', $scriptname);
@@ -1475,18 +1475,18 @@ $properties["PhpWiki Install Directory"] =
 new _define_commented_optional('PHPWIKI_DIR', dirname(__FILE__));
 
 $properties["Use PATH_INFO"] =
-new _define_selection_optional_commented('USE_PATH_INFO', 
-		    array(''      => 'automatic',
-			  'true'  => 'use PATH_INFO',
-			  'false' => 'do not use PATH_INFO'), "
-PhpWiki will try to use short urls to pages, eg 
+new _define_selection_optional_commented('USE_PATH_INFO',
+                    array(''      => 'automatic',
+                          'true'  => 'use PATH_INFO',
+                          'false' => 'do not use PATH_INFO'), "
+PhpWiki will try to use short urls to pages, eg
 http://www.example.com/index.php/HomePage
-If you want to use urls like 
+If you want to use urls like
 http://www.example.com/index.php?pagename=HomePage
 then define 'USE_PATH_INFO' as false by uncommenting the line below.
 NB:  If you are using Apache >= 2.0.30, then you may need to to use
 the directive \"AcceptPathInfo On\" in your Apache configuration file
-(or in an appropriate <.htaccess> file) for the short urls to work:  
+(or in an appropriate <.htaccess> file) for the short urls to work:
 See http://httpd.apache.org/docs-2.0/mod/core.html#acceptpathinfo
 
 See also http://phpwiki.sourceforge.net/phpwiki/PrettyWiki for more ideas
@@ -1500,7 +1500,7 @@ $properties["Virtual Path"] =
 new _define_commented_optional('VIRTUAL_PATH', '/SomeWiki', "
 VIRTUAL_PATH is the canonical URL path under which your your wiki
 appears. Normally this is the same as dirname(SCRIPT_NAME), however
-using e.g. seperate starter scripts, apaches mod_actions (or mod_rewrite), 
+using e.g. seperate starter scripts, apaches mod_actions (or mod_rewrite),
 you can make it something different.
 
 If you do this, you should set VIRTUAL_PATH here or in the starter scripts.
@@ -1542,7 +1542,7 @@ Miscellaneous settings
 ");
 
 $properties["Strict Mailable Pagedumps"] =
-    new boolean_define_optional('STRICT_MAILABLE_PAGEDUMPS', 
+    new boolean_define_optional('STRICT_MAILABLE_PAGEDUMPS',
      array('false' => "binary",
            'true'  => "quoted-printable"));
 
@@ -1556,8 +1556,8 @@ $properties["HTML Dump Filename Suffix"] =
     new _define_optional('HTML_DUMP_SUFFIX');
 
 $properties["Pagename of Recent Changes"] =
-    new _define_optional('RECENT_CHANGES', 
-			 "RecentChanges");
+    new _define_optional('RECENT_CHANGES',
+                         "RecentChanges");
 
 $properties["Disable HTTP Redirects"] =
     new boolean_define_commented_optional('DISABLE_HTTP_REDIRECT');
@@ -1637,14 +1637,14 @@ Cached Plugin Settings. (pear Cache)
 ");
 
 $properties["pear Cache USECACHE"] =
-new boolean_define_optional('PLUGIN_CACHED_USECACHE', 
+new boolean_define_optional('PLUGIN_CACHED_USECACHE',
                     array('true'  => 'Enabled',
-			  'false' => 'Disabled'), "
+                          'false' => 'Disabled'), "
 Enable or disable pear caching of plugins.");
 $properties["pear Cache Database Container"] =
-new _define_selection_optional('PLUGIN_CACHED_DATABASE', 
+new _define_selection_optional('PLUGIN_CACHED_DATABASE',
                                array('file' => 'file'), "
-Curently only file is supported. 
+Curently only file is supported.
 db, trifile and imgfile might be supported, but you must hack that by yourself.");
 
 $properties["pear Cache cache directory"] =
@@ -1665,9 +1665,9 @@ $properties["pear Cache MAXARGLEN"] =
 new numeric_define_optional('PLUGIN_CACHED_MAXARGLEN', "1000", "
 max. generated url length.");
 $properties["pear Cache FORCE_SYNCMAP"] =
-new boolean_define_optional('PLUGIN_CACHED_FORCE_SYNCMAP', 
+new boolean_define_optional('PLUGIN_CACHED_FORCE_SYNCMAP',
                     array('true'  => 'Enabled',
-			  'false' => 'Disabled'), "");
+                          'false' => 'Disabled'), "");
 $properties["pear Cache IMGTYPES"] =
 new list_define('PLUGIN_CACHED_IMGTYPES', "png|gif|gd|gd2|jpeg|wbmp|xbm|xpm", "
 Handle those image types via GD handles. Check your GD supported image types.");
@@ -1682,7 +1682,7 @@ text_from_dist("_MAGIC_CLOSE_FILE");
 // begin class definitions
 
 /**
- * A basic config-dist.ini configuration line in the form of a variable. 
+ * A basic config-dist.ini configuration line in the form of a variable.
  * (not needed anymore, we have only defines)
  *
  * Produces a string in the form "$name = value;"
@@ -1699,40 +1699,40 @@ class _variable {
 
     function _variable($config_item_name, $default_value='', $description = '', $jscheck = '') {
         $this->config_item_name = $config_item_name;
-	if (!$description)
-	    $description = text_from_dist($config_item_name);
+        if (!$description)
+            $description = text_from_dist($config_item_name);
         $this->description = $description;
-	if (defined($config_item_name) 
-	    and !preg_match("/(selection|boolean)/", get_class($this))
-	    and !preg_match("/^(SCRIPT_NAME|VIRTUAL_PATH|TEMP_DIR)$/", $config_item_name))
-	    $this->default_value = constant($config_item_name); // ignore given default value
-	elseif ($config_item_name == $default_value)
-	    $this->default_value = '';
-	else
-	    $this->default_value = $default_value;
-	$this->jscheck = $jscheck;
+        if (defined($config_item_name)
+            and !preg_match("/(selection|boolean)/", get_class($this))
+            and !preg_match("/^(SCRIPT_NAME|VIRTUAL_PATH|TEMP_DIR)$/", $config_item_name))
+            $this->default_value = constant($config_item_name); // ignore given default value
+        elseif ($config_item_name == $default_value)
+            $this->default_value = '';
+        else
+            $this->default_value = $default_value;
+        $this->jscheck = $jscheck;
         if (preg_match("/variable/i", get_class($this)))
-	    $this->prefix = "\$";
-	elseif (preg_match("/ini_set/i", get_class($this)))
+            $this->prefix = "\$";
+        elseif (preg_match("/ini_set/i", get_class($this)))
             $this->prefix = "ini_get: ";
         else
-	    $this->prefix = "";
+            $this->prefix = "";
     }
 
     function _define($config_item_name, $default_value='', $description = '', $jscheck = '') {
-    	$this->_variable($config_item_name, $default_value, $description, $jscheck);
+            $this->_variable($config_item_name, $default_value, $description, $jscheck);
     }
 
     function value() {
       global $HTTP_POST_VARS;
       if (isset($HTTP_POST_VARS[$this->config_item_name]))
           return $HTTP_POST_VARS[$this->config_item_name];
-      else 
+      else
           return $this->default_value;
     }
 
     function _config_format($value) {
-	return '';
+        return '';
         $v = $this->get_config_item_name();
         // handle arrays: a|b --> a['b']
         if (strpos($v, '|')) {
@@ -1755,11 +1755,11 @@ class _variable {
     function get_config_item_header() {
        if (strchr($this->config_item_name,'|')) {
           list($var,$param) = explode('|',$this->config_item_name);
-	  return "<b>" . $this->prefix . $var . "['" . $param . "']</b><br />";
+          return "<b>" . $this->prefix . $var . "['" . $param . "']</b><br />";
        }
        elseif ($this->config_item_name[0] != '_')
-	  return "<b>" . $this->prefix . $this->config_item_name . "</b><br />";
-       else 
+          return "<b>" . $this->prefix . $this->config_item_name . "</b><br />";
+       else
           return '';
     }
 
@@ -1784,10 +1784,10 @@ class _variable {
     }
 
     function get_html() {
-    	$size = strlen($this->default_value) > 45 ? 90 : 50;
-	return $this->get_config_item_header() . 
-	    "<input type=\"text\" size=\"$50\" name=\"" . $this->get_config_item_name() . "\" value=\"" . htmlspecialchars($this->default_value) . "\" " . 
-	    $this->jscheck . " />" . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+            $size = strlen($this->default_value) > 45 ? 90 : 50;
+        return $this->get_config_item_header() .
+            "<input type=\"text\" size=\"$50\" name=\"" . $this->get_config_item_name() . "\" value=\"" . htmlspecialchars($this->default_value) . "\" " .
+            $this->jscheck . " />" . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
     }
 }
 
@@ -1798,9 +1798,9 @@ extends _variable {
     }
     // function get_html() { return false; }
     function get_html() {
-	return $this->get_config_item_header() . 
-	"<em>Not editable.</em>" . 
-	"<pre>" . $this->default_value."</pre>";
+        return $this->get_config_item_header() .
+        "<em>Not editable.</em>" .
+        "<pre>" . $this->default_value."</pre>";
     }
     function _get_config_line($posted_value) {
         if ($this->description)
@@ -1808,11 +1808,11 @@ extends _variable {
         return "${n}".$this->default_value;
     }
     function get_instructions($title) {
-	global $tdwidth;
+        global $tdwidth;
         $i = "<h3>" . $title . "</h3>\n    " . nl2p($this->_get_description()) . "\n";
         // $i .= "<em>Not editable.</em><br />\n<pre>" . $this->default_value."</pre>";
-        return '<tr><td width="100%" class="unchangeable-variable-top" colspan="2">'."\n".$i."</td></tr>\n" 
-	. '<tr style="border-top: none;"><td class="unchangeable-variable-left" width="'.$tdwidth.'">&nbsp;</td>';
+        return '<tr><td width="100%" class="unchangeable-variable-top" colspan="2">'."\n".$i."</td></tr>\n"
+        . '<tr style="border-top: none;"><td class="unchangeable-variable-left" width="'.$tdwidth.'">&nbsp;</td>';
     }
 }
 
@@ -1843,25 +1843,25 @@ extends _variable {
         if (!empty($HTTP_POST_VARS[$this->config_item_name]))
             return $HTTP_POST_VARS[$this->config_item_name];
         else {
-	    list($option, $label) = each($this->default_value);
+            list($option, $label) = each($this->default_value);
             return $option;
         }
     }
     function get_html() {
-	$output = $this->get_config_item_header();
+        $output = $this->get_config_item_header();
         $output .= '<select name="' . $this->get_config_item_name() . "\">\n";
         /* The first option is the default */
-	$values = $this->default_value;
-	if (defined($this->get_config_item_name()))
-	    $this->default_value = constant($this->get_config_item_name());
-	else
-	    $this->default_value = null;
+        $values = $this->default_value;
+        if (defined($this->get_config_item_name()))
+            $this->default_value = constant($this->get_config_item_name());
+        else
+            $this->default_value = null;
 
         foreach ($values as $option => $label) {
-	    if (!is_null($this->default_value) && $this->default_value === $option)
-		$output .= "  <option value=\"$option\" selected=\"selected\">$label</option>\n";
-	    else
-		$output .= "  <option value=\"$option\">$label</option>\n";
+            if (!is_null($this->default_value) && $this->default_value === $option)
+                $output .= "  <option value=\"$option\" selected=\"selected\">$label</option>\n";
+            else
+                $output .= "  <option value=\"$option\">$label</option>\n";
         }
         $output .= "</select>\n";
         return $output;
@@ -1883,10 +1883,10 @@ extends _variable {
             return "${n}" . $this->_config_format($posted_value);
     }
     function get_html() {
-    	$size = strlen($this->default_value) > 45 ? 90 : 50;
-	return $this->get_config_item_header() 
-            . "<input type=\"text\" size=\"$size\" name=\"" . htmlentities($this->get_config_item_name()) 
-            . "\" value=\"" . htmlentities($this->default_value) . "\" {$this->jscheck} />" 
+            $size = strlen($this->default_value) > 45 ? 90 : 50;
+        return $this->get_config_item_header()
+            . "<input type=\"text\" size=\"$size\" name=\"" . htmlentities($this->get_config_item_name())
+            . "\" value=\"" . htmlentities($this->default_value) . "\" {$this->jscheck} />"
             . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
     }
 }
@@ -1905,8 +1905,8 @@ extends _define {
     }
 }
 
-/** 
- * We don't use _optional anymore, because INI-style config's don't need that. 
+/**
+ * We don't use _optional anymore, because INI-style config's don't need that.
  * IniConfig.php does the optional logic now.
  * But we use _optional for config-default.ini options
  */
@@ -1919,13 +1919,13 @@ extends _define { }
 class _define_notempty
 extends _define {
     function get_html() {
-	$s = $this->get_config_item_header() 
-            . "<input type=\"text\" size=\"50\" name=\"" . $this->get_config_item_name() 
+        $s = $this->get_config_item_header()
+            . "<input type=\"text\" size=\"50\" name=\"" . $this->get_config_item_name()
             . "\" value=\"" . $this->default_value . "\" {$this->jscheck} />";
         if (empty($this->default_value))
-	    return $s . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Cannot be empty.</p>";
-	else
-	    return $s . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+            return $s . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Cannot be empty.</p>";
+        else
+            return $s . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
     }
 }
 
@@ -2002,7 +2002,7 @@ class _variable_selection_optional
 extends _variable_selection { }
 
 class _define_selection_optional_commented
-extends _define_selection_optional { 
+extends _define_selection_optional {
     function _get_config_line($posted_value) {
         if ($this->description)
             $n = "\n";
@@ -2019,11 +2019,11 @@ class _define_password
 extends _define {
 
     function _define_password($config_item_name, $default_value='', $description = '', $jscheck = '') {
-    	if ($config_item_name == $default_value) $default_value = '';
+            if ($config_item_name == $default_value) $default_value = '';
         $this->_define($config_item_name, $default_value, $description, $jscheck);
         if (!$jscheck)
-            $this->jscheck = "onchange=\"validate_ereg('Sorry, \'%s\' cannot be empty.', '^.+$', '" 
-		. $this->get_config_item_name() . "', this);\"";
+            $this->jscheck = "onchange=\"validate_ereg('Sorry, \'%s\' cannot be empty.', '^.+$', '"
+                . $this->get_config_item_name() . "', this);\"";
     }
     function _get_config_line($posted_value) {
         if ($this->description)
@@ -2060,10 +2060,10 @@ extends _define {
 }
 
 class _define_password_optional
-extends _define_password { 
+extends _define_password {
 
     function _define_password_optional($config_item_name, $default_value='', $description = '', $jscheck = '') {
-    	if ($config_item_name == $default_value) $default_value = '';
+            if ($config_item_name == $default_value) $default_value = '';
         if (!$jscheck) $this->jscheck = " ";
         $this->_define($config_item_name, $default_value, $description, $jscheck);
     }
@@ -2074,20 +2074,20 @@ extends _define_password {
         if ($posted_value == '') {
             return "${n};" . $this->_config_format("");
         } else {
-	    return "${n}" . $this->_config_format($posted_value);
+            return "${n}" . $this->_config_format($posted_value);
         }
     }
     function get_html() {
-	$s = $this->get_config_item_header();
-	// dont re-encrypt already encrypted passwords
-	$value = $this->value();
-	$encrypted = !empty($GLOBALS['properties']["Encrypted Passwords"]) and 
-	             $GLOBALS['properties']["Encrypted Passwords"]->value();
-	if (empty($value))
-	    $encrypted = false;
+        $s = $this->get_config_item_header();
+        // dont re-encrypt already encrypted passwords
+        $value = $this->value();
+        $encrypted = !empty($GLOBALS['properties']["Encrypted Passwords"]) and
+                     $GLOBALS['properties']["Encrypted Passwords"]->value();
+        if (empty($value))
+            $encrypted = false;
         $s .= "<input type=\"". ($encrypted ? "text" : "password") . "\" name=\"" . $this->get_config_item_name()
            . "\" value=\"" . $value . "\" {$this->jscheck} />";
-	return $s;
+        return $s;
     }
 }
 
@@ -2097,35 +2097,35 @@ extends _define_password_optional { }
 class _variable_password
 extends _variable {
     function _variable_password($config_item_name, $default_value='', $description = '', $jscheck = '') {
-    	if ($config_item_name == $default_value) $default_value = '';
+            if ($config_item_name == $default_value) $default_value = '';
         $this->_define($config_item_name, $default_value, $description, $jscheck);
         if (!$jscheck)
             $this->jscheck = "onchange=\"validate_ereg('Sorry, \'%s\' cannot be empty.', '^.+$', '" . $this->get_config_item_name() . "', this);\"";
     }
     function get_html() {
-	global $HTTP_POST_VARS, $HTTP_GET_VARS;
-	$s = $this->get_config_item_header();
+        global $HTTP_POST_VARS, $HTTP_GET_VARS;
+        $s = $this->get_config_item_header();
         if (isset($HTTP_POST_VARS['create']) or isset($HTTP_GET_VARS['create'])) {
-	    $new_password = random_good_password();
-	    $this->default_value = $new_password;
-	    $s .= "Created password: <strong>$new_password</strong><br />&nbsp;<br />";
-	}
-	// dont re-encrypt already encrypted passwords
-	$value = $this->value();
-	$encrypted = !empty($GLOBALS['properties']["Encrypted Passwords"]) and 
-	             $GLOBALS['properties']["Encrypted Passwords"]->value();
-	if (empty($value))
-	    $encrypted = false;
+            $new_password = random_good_password();
+            $this->default_value = $new_password;
+            $s .= "Created password: <strong>$new_password</strong><br />&nbsp;<br />";
+        }
+        // dont re-encrypt already encrypted passwords
+        $value = $this->value();
+        $encrypted = !empty($GLOBALS['properties']["Encrypted Passwords"]) and
+                     $GLOBALS['properties']["Encrypted Passwords"]->value();
+        if (empty($value))
+            $encrypted = false;
         $s .= "<input type=\"". ($encrypted ? "text" : "password") . "\" name=\"" . $this->get_config_item_name()
-           . "\" value=\"" . $value . "\" {$this->jscheck} />" 
+           . "\" value=\"" . $value . "\" {$this->jscheck} />"
            . "&nbsp;&nbsp;<input type=\"submit\" name=\"create\" value=\"Create Random Password\" />";
-	if (empty($value))
-	    $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Cannot be empty.</p>";
-	elseif (strlen($this->default_value) < 4)
-	    $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Must be longer than 4 chars.</p>";
-	else
-	    $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
-	return $s;
+        if (empty($value))
+            $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Cannot be empty.</p>";
+        elseif (strlen($this->default_value) < 4)
+            $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Must be longer than 4 chars.</p>";
+        else
+            $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        return $s;
     }
 }
 
@@ -2144,9 +2144,9 @@ extends _variable {
         $rows = max(3, count($list_values) +1);
         $list_values = join("\n", $list_values);
         $ta = $this->get_config_item_header();
-	$ta .= "<textarea cols=\"18\" rows=\"". $rows ."\" name=\"".$this->get_config_item_name()."\" {$this->jscheck}>";
+        $ta .= "<textarea cols=\"18\" rows=\"". $rows ."\" name=\"".$this->get_config_item_name()."\" {$this->jscheck}>";
         $ta .= $list_values . "</textarea>";
-	$ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
         return $ta;
     }
 }
@@ -2165,9 +2165,9 @@ extends _define {
         if ($list_values)
             $list_values = join("\n", $list_values);
         $ta = $this->get_config_item_header();
-	$ta .= "<textarea cols=\"18\" rows=\"". $rows ."\" name=\"".$this->get_config_item_name()."\" {$this->jscheck}>";
+        $ta .= "<textarea cols=\"18\" rows=\"". $rows ."\" name=\"".$this->get_config_item_name()."\" {$this->jscheck}>";
         $ta .= $list_values . "</textarea>";
-	$ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
         return $ta;
     }
 }
@@ -2175,7 +2175,7 @@ extends _define {
 class array_variable
 extends _variable {
     function _config_format($value) {
-        return sprintf("%s = \"%s\"", $this->get_config_item_name(), 
+        return sprintf("%s = \"%s\"", $this->get_config_item_name(),
                        is_array($value) ? join(':', $value) : $value);
     }
     function _get_config_line($posted_value) {
@@ -2189,15 +2189,15 @@ extends _variable {
             return "\n;" . $this->_config_format('');
     }
     function get_html() {
-    	if (is_array($this->default_value))
+            if (is_array($this->default_value))
             $list_values = join("\n", $this->default_value);
-        else    
+        else
             $list_values = $this->default_value;
         $rows = max(3, count($this->default_value) +1);
         $ta = $this->get_config_item_header();
         $ta .= "<textarea cols=\"18\" rows=\"". $rows ."\" name=\"".$this->get_config_item_name()."\" {$this->jscheck}>";
         $ta .= $list_values . "</textarea>";
-	$ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
         return $ta;
     }
 }
@@ -2205,7 +2205,7 @@ extends _variable {
 class array_define
 extends _define {
     function _config_format($value) {
-        return sprintf("%s = \"%s\"", $this->get_config_item_name(), 
+        return sprintf("%s = \"%s\"", $this->get_config_item_name(),
                        is_array($value) ? join(' : ', $value) : $value);
     }
     function _get_config_line($posted_value) {
@@ -2219,16 +2219,16 @@ extends _define {
             return "\n;" . $this->_config_format('');
     }
     function get_html () {
-	if (!$this->default_value)
-	    $this->default_value = array();
-	elseif (is_string($this->default_value))
-	    $this->default_value = preg_split("/[\s,:]+/", $this->default_value, -1, PREG_SPLIT_NO_EMPTY);
-	$list_values = join(" : \n", $this->default_value);
+        if (!$this->default_value)
+            $this->default_value = array();
+        elseif (is_string($this->default_value))
+            $this->default_value = preg_split("/[\s,:]+/", $this->default_value, -1, PREG_SPLIT_NO_EMPTY);
+        $list_values = join(" : \n", $this->default_value);
         $rows = max(3, count($this->default_value) + 1);
         $ta = $this->get_config_item_header();
         $ta .= "<textarea cols=\"18\" rows=\"". $rows ."\" name=\"".$this->get_config_item_name()."\" {$this->jscheck}>";
         $ta .= $list_values . "</textarea>";
-	$ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
         return $ta;
     }
 }
@@ -2241,7 +2241,7 @@ extends _variable {
         if ($v = $HTTP_POST_VARS[$this->config_item_name])
             return $v;
         else {
-	    return ini_get($this->get_config_item_name);
+            return ini_get($this->get_config_item_name);
         }
     }
     function _config_format($value) {
@@ -2262,20 +2262,20 @@ extends _define {
     // adds ->values property, instead of ->default_value
     function boolean_define($config_item_name, $values = false, $description = '', $jscheck = '') {
         $this->config_item_name = $config_item_name;
-	if (!$description)
-	    $description = text_from_dist($config_item_name);
+        if (!$description)
+            $description = text_from_dist($config_item_name);
         $this->description = $description;
-	// TESTME: get boolean default value from config-default.ini
-	if (defined($config_item_name))
-	    $this->default_value = constant($config_item_name); // ignore given default value
+        // TESTME: get boolean default value from config-default.ini
+        if (defined($config_item_name))
+            $this->default_value = constant($config_item_name); // ignore given default value
         elseif (is_array($values))
-	    list($this->default_value,$dummy) = $values[0];
-        if (!$values) 
+            list($this->default_value,$dummy) = $values[0];
+        if (!$values)
             $values = array('false' => "Disabled",
                             'true'  => "Enabled");
-	$this->values  = $values;
-	$this->jscheck = $jscheck;
-	$this->prefix = "";
+        $this->values  = $values;
+        $this->jscheck = $jscheck;
+        $this->prefix = "";
     }
     function _get_config_line($posted_value) {
         if ($this->description)
@@ -2291,18 +2291,18 @@ extends _define {
     //TODO: radiobuttons, no list
     function get_html() {
         $output = $this->get_config_item_header();
-	$name = $this->get_config_item_name();
+        $name = $this->get_config_item_name();
         $output .= '<select name="' . $name . "\" {$this->jscheck}>\n";
-	$values = $this->values;
-	$default_value = $this->default_value ? 'true' : 'false';
+        $values = $this->values;
+        $default_value = $this->default_value ? 'true' : 'false';
         /* There can usually only be two options, there can be
          * three options in the case of a boolean_define_commented_optional */
         while (list($option, $label) = each($values)) {
-	    if (!is_null($this->default_value) and $option === $default_value)
-		$output .= "  <option value=\"$option\" selected=\"selected\">$label</option>\n";
-	    else
-		$output .= "  <option value=\"$option\">$label</option>\n";
-	}
+            if (!is_null($this->default_value) and $option === $default_value)
+                $output .= "  <option value=\"$option\" selected=\"selected\">$label</option>\n";
+            else
+                $output .= "  <option value=\"$option\">$label</option>\n";
+        }
         $output .= "</select>\n";
         return $output;
     }
@@ -2338,11 +2338,11 @@ extends _variable {
         return "\n".$SEPARATOR . str_replace("\n", "\n; ", $d) ."\n".$this->default_value;
     }
     function get_instructions($title) {
-	$id = preg_replace("/\W/","",$this->config_item_name);
-	$group_name = preg_replace("/\W/","",$title);
-	$i = "<tr class=\"header\" id=\"$id\">\n<td class=\"part\" width=\"100%\" colspan=\"2\" bgcolor=\"#eeeeee\">\n";
+        $id = preg_replace("/\W/","",$this->config_item_name);
+        $group_name = preg_replace("/\W/","",$title);
+        $i = "<tr class=\"header\" id=\"$id\">\n<td class=\"part\" width=\"100%\" colspan=\"2\" bgcolor=\"#eeeeee\">\n";
         $i .= "<h2>" . $title . "</h2>\n    " . nl2p($this->_get_description()) ."\n";
-	$i .= "<p><a href=\"javascript:toggle_group('$id')\" id=\"{$id}_text\">Hide options.</a></p>";
+        $i .= "<p><a href=\"javascript:toggle_group('$id')\" id=\"{$id}_text\">Hide options.</a></p>";
         return  $i ."</td>\n";
     }
     function get_html() {
@@ -2369,30 +2369,30 @@ function nl2p($text) {
 function text_from_dist($var) {
     static $distfile = 0;
     static $f;
-    
+
     if (!$distfile) {
-    	$sep = (substr(PHP_OS,0,3) == 'WIN' ? '\\' : '/');
-	$distfile = dirname(__FILE__) . $sep . "config" . $sep . "config-dist.ini";
-	$f = fopen($distfile, "r");
+            $sep = (substr(PHP_OS,0,3) == 'WIN' ? '\\' : '/');
+        $distfile = dirname(__FILE__) . $sep . "config" . $sep . "config-dist.ini";
+        $f = fopen($distfile, "r");
     }
     if ($var == '_MAGIC_CLOSE_FILE') {
-	fclose($f);
-	return;
+        fclose($f);
+        return;
     }
     // if all vars would be in natural order as in the config-dist this would not be needed.
-    fseek($f, 0); 
+    fseek($f, 0);
     $par = "\n";
     while (!feof($f)) {
-	$s = fgets($f);
-	if (preg_match("/^; \w/", $s)) {
-	    $par .= (substr($s,2) . " ");
-	} elseif (preg_match("/^;\s*$/", $s)) {
-	    $par .= "\n\n";
-	}
-	if (preg_match("/^;?".preg_quote($var)."\s*=/", $s))
-	    return $par;
-	if (preg_match("/^\s*$/", $s)) // new paragraph
-	    $par = "\n";
+        $s = fgets($f);
+        if (preg_match("/^; \w/", $s)) {
+            $par .= (substr($s,2) . " ");
+        } elseif (preg_match("/^;\s*$/", $s)) {
+            $par .= "\n\n";
+        }
+        if (preg_match("/^;?".preg_quote($var)."\s*=/", $s))
+            return $par;
+        if (preg_match("/^\s*$/", $s)) // new paragraph
+            $par = "\n";
     }
     return '';
 }
@@ -2432,13 +2432,13 @@ function random_good_password ($minlength = 5, $maxlength = 8) {
   better_srand();
   if (function_exists('mt_rand')) // mersenne twister
       $length = mt_rand($minlength, $maxlength);
-  else	// the usually bad glibc rand()
+  else        // the usually bad glibc rand()
       $length = rand($minlength, $maxlength);
   while ($length > 0) {
       if (function_exists('mt_rand'))
-	  $newchar = mt_rand($start, $end);
+          $newchar = mt_rand($start, $end);
       else
-	  $newchar = rand($start, $end);
+          $newchar = rand($start, $end);
       if (! strrpos($valid_chars,$newchar) ) continue; // skip holes
       $newpass .= sprintf("%c", $newchar);
       $length--;
@@ -2465,7 +2465,7 @@ if (!function_exists('is_a')) {
 }
 
 
-if (!empty($HTTP_POST_VARS['action']) 
+if (!empty($HTTP_POST_VARS['action'])
     and $HTTP_POST_VARS['action'] == 'make_config'
     and !empty($HTTP_POST_VARS['ADMIN_USER'])
     and !empty($HTTP_POST_VARS['ADMIN_PASSWD'])
@@ -2508,7 +2508,7 @@ if (!empty($HTTP_POST_VARS['action'])
     else {
       $fp = false;
     }
-    
+
     if ($fp) {
         fputs($fp, utf8_encode($config));
         fclose($fp);
@@ -2520,8 +2520,8 @@ if (!empty($HTTP_POST_VARS['action'])
         }
     } else {
         echo "<p>The configuration file could <b>not</b> be written.<br />\n",
-	    " You should copy the above configuration to a file, ",
-	    "and manually save it as <code><b>config/config.ini</b></code>.</p>\n";
+            " You should copy the above configuration to a file, ",
+            "and manually save it as <code><b>config/config.ini</b></code>.</p>\n";
     }
 
     echo "<hr />\n<p>Here's the configuration file based on your answers:</p>\n";
@@ -2537,8 +2537,8 @@ if (!empty($HTTP_POST_VARS['action'])
     $posted = $GLOBALS['HTTP_POST_VARS'];
     // No action has been specified - we make a form.
 
-    if (!empty($GLOBALS['HTTP_GET_VARS']['start_debug'])) 
-    	$configurator .= ("?start_debug=" . $GLOBALS['HTTP_GET_VARS']['start_debug']);
+    if (!empty($GLOBALS['HTTP_GET_VARS']['start_debug']))
+            $configurator .= ("?start_debug=" . $GLOBALS['HTTP_GET_VARS']['start_debug']);
     echo '
 <form action="',$configurator,'" method="post">
 <input type="hidden" name="action" value="make_config" />
@@ -2551,7 +2551,7 @@ if (!empty($HTTP_POST_VARS['action'])
             if (defined('DEBUG') and DEBUG)  $h = get_class($obj) . "<br />\n" . $h;
             echo "<td>".$h."</td>\n";
         }
-	echo '</tr>';
+        echo '</tr>';
     }
 
     echo '

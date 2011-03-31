@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: HtmlParser.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: HtmlParser.php 7964 2011-03-05 17:05:30Z vargenau $
 /**
  * HtmlParser Class: Conversion HTML => wikimarkup
  * Requires XmlParser, XmlElement and the expat (or now the libxml) library. This is all in core.
@@ -50,7 +50,7 @@ extends XmlParser
      *  possible more dialects: MediaWiki, kwiki, c2
      */
     function HtmlParser($dialect = "PhpWiki2", $encoding = '') {
-    	$classname = "HtmlParser_".$dialect;
+        $classname = "HtmlParser_".$dialect;
         if (class_exists($classname))
             $this->dialect = new $classname;
         else {
@@ -58,8 +58,8 @@ extends XmlParser
         }
         $this->_handlers =& $this->dialect->_handlers;
         $this->XmlParser($encoding);
-	xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, 0);
-	xml_parser_set_option($this->_parser, XML_OPTION_SKIP_WHITE, 1);
+    xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, 0);
+    xml_parser_set_option($this->_parser, XML_OPTION_SKIP_WHITE, 1);
     }
 
     // The three callbacks, called on walking through the HTML tree.
@@ -75,8 +75,8 @@ extends XmlParser
     */
 
     function output () {
-    	if (is_null($this->root))
-    	    $this->root = $GLOBALS['xml_parser_root'];
+        if (is_null($this->root))
+            $this->root = $GLOBALS['xml_parser_root'];
         $output = $this->wikify( $this->root );
         return $output;
     }

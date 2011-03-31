@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PageListColumns.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: PageListColumns.php 7958 2011-03-03 17:52:53Z vargenau $
 
 /*
  * Copyright 2004 Mike Cassano
@@ -57,7 +57,7 @@ class _PageList_Column_numbacklinks extends _PageList_Column_custom
 class _PageList_Column_coagreement extends _PageList_Column_custom
 {
     function _PageList_Column_coagreement ($params) {
-    	$this->_pagelist =& $params[3];
+        $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
@@ -89,7 +89,7 @@ class _PageList_Column_coagreement extends _PageList_Column_custom
 class _PageList_Column_minmisery extends _PageList_Column_custom
 {
     function _PageList_Column_minmisery ($params) {
-    	$this->_pagelist =& $params[3];
+        $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
@@ -104,7 +104,7 @@ class _PageList_Column_minmisery extends _PageList_Column_custom
         $active_userId = $active_user->getId();
         $dbi = $request->getDbh();
         $p = MinMisery($dbi, $pagename, $this->_selectedBuddies, $active_userId);
-       	$imgFix = floor($p * 2) / 2;
+           $imgFix = floor($p * 2) / 2;
         return HTML::img(array('src' => $WikiTheme->getImageURL("Rateit" . $imgFix)));
     }
 }
@@ -113,7 +113,7 @@ class _PageList_Column_averagerating extends _PageList_Column_custom
 {
     function _PageList_Column_averagerating ($params)
     {
-    	$this->_pagelist =& $params[3];
+        $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
@@ -147,7 +147,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
     var $_dimension;
 
     function _PageList_Column_ratingvalue ($params) {
-    	$this->_pagelist =& $params[3];
+        $this->_pagelist =& $params[3];
         $this->_user =& $params[4];//$this->_pagelist->getOption('user');
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension   = $this->_pagelist->getOption('dimension');
@@ -212,7 +212,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
 class _PageList_Column_ratingwidget extends _PageList_Column_custom
 {
     function _PageList_Column_ratingwidget ($params) {
-    	$this->_pagelist =& $params[3];
+        $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
         if (!$this->_dimension) $this->_dimension = 0;
@@ -255,7 +255,7 @@ class _PageList_Column_prediction extends _PageList_Column
         $active_user = $request->getUser();
         // This needs to be a reference so things aren't recomputed for this user
         $this->_active_ratings_user =& RatingsUserFactory::getUser($active_user->getId());
-    
+
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');;
@@ -302,9 +302,9 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
         global $request;
         $active_user = $request->getUser();
         if (is_string($active_user)) {
-	    //FIXME: try to find the bug at test.php which sets request->_user and ->_group
-	    trigger_error("request->getUser => string: $active_user", E_USER_WARNING);
-	    $active_user = new MockUser($active_user,true);
+        //FIXME: try to find the bug at test.php which sets request->_user and ->_group
+        trigger_error("request->getUser => string: $active_user", E_USER_WARNING);
+        $active_user = new MockUser($active_user,true);
         }
         // No, I don't know exactly why, but this needs to be a reference for
         // the memoization in pearson_similarity and mean_rating to work
@@ -369,25 +369,25 @@ $WikiTheme->addPageListColumn
    (
     'numbacklinks'
       => array('_PageList_Column_numbacklinks','custom:numbacklinks',
-	       _("# things"), 'center'),
-    'rating' 
+           _("# things"), 'center'),
+    'rating'
       => array('_PageList_Column_ratingwidget','custom:rating',
-	       _("Rate"), false),
+           _("Rate"), false),
     'ratingvalue'
       => array('_PageList_Column_ratingvalue','custom:ratingvalue',
-	       _("Rating"), 'center'),
+           _("Rating"), 'center'),
     'coagreement'
       => array('_PageList_Column_coagreement','custom:coagreement',
-	       _("Go?"), 'center'),
+           _("Go?"), 'center'),
     'minmisery'
       => array('_PageList_Column_minmisery','custom:minmisery',
-	       _("MinMisery"), 'center'),
+           _("MinMisery"), 'center'),
     'averagerating'
       => array('_PageList_Column_averagerating','custom:averagerating',
-	       _("Avg. Rating"), 'left'),
+           _("Avg. Rating"), 'left'),
     'top3recs'
       => array('_PageList_Column_top3recs','custom:top3recs',
-	       _("Top Recommendations"), 'left'),
+           _("Top Recommendations"), 'left'),
     /*'prediction'
       => array('_PageList_Column_prediction','custom:prediction',
                 _("Prediction"), false),*/

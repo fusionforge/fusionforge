@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: RateIt.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: RateIt.php 7959 2011-03-03 18:02:58Z vargenau $
 /*
  * Copyright 2004,2007,2009 $ThePhpWikiProgrammingTeam
  *
@@ -177,7 +177,7 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
         } else {
             header('Content-type: image/png');
             echo base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAAA1BMVEX///'
-			         .'+nxBvIAAAAAXRSTlMAQObYZgAAABNJREFUeF4NwAEBAAAAgJD+r5YGAAQAAXHhfPAAAAAASUVORK5CYII=');
+                     .'+nxBvIAAAAAXRSTlMAQObYZgAAABNJREFUeF4NwAEBAAAAgJD+r5YGAAQAAXHhfPAAAAAASUVORK5CYII=');
         }
         exit;
     }
