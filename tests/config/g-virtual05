@@ -21,3 +21,4 @@ SSHPUBKEY=~/.ssh/id_rsa.pub
 DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
 VMENGINE=lxc
 REMOTESELENIUM=true
+KEEPVM=true
