@@ -50,6 +50,12 @@ export CONFIGURED=true
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage
 
+if $KEEPVM
+then
+	echo "Destroying vm $HOST"
+	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
+fi
+
 make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
@@ -70,12 +76,6 @@ if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
 	sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
 fi
 scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
-
-if $KEEPVM
-then
-	echo "Destroying vm $HOST"
-	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
-fi
 
 scp -r tests root@$HOST:/root
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
