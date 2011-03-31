@@ -82,8 +82,6 @@ if (getStringFromRequest('submit')) {
 		$group->isPublic()
 	);
 	
-	//100 $logo_image_id
-
 	if (!$res) {
 		$error_msg = $group->getErrorMessage();
 	} else {

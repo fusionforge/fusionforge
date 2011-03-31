@@ -36,8 +36,6 @@ session_require_perm ('project_admin', $group_id) ;
 
 $group = group_get_object($group_id);
 
-if (!isset($feedback)) $feedback = "";
-
 if (!$group || !is_object($group)) {
         exit_error('Error','Error creating group object');
 } else if ($group->isError()) {
