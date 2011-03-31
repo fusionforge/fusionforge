@@ -57,6 +57,7 @@ function forum_header($params) {
 			// checks which group the news item belongs to
 			$params['group']=db_result($result,0,'group_id');
 			$params['toptab']='news';
+			$params['title']= _('Forum: ') . db_result($result,0,'summary');
 			$HTML->header($params);
 
 			echo '<table><tr><td valign="top">';
