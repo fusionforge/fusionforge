@@ -22,7 +22,7 @@
  *
  */
 
-$(function(){  
+jQuery(function(){  
 	var hideDelay = 500;    
 	var hideTimer = null;  
 
@@ -48,24 +48,24 @@ $(function(){
 			+ '</div>'
 	);  
 
-	$('body').append(container);
+	jQuery('body').append(container);
 	
-	$('.personPopupTrigger').live('mouseover', function() {  
-		var username = $(this).attr('rel');
+	jQuery('.personPopupTrigger').live('mouseover', function() {  
+		var username = jQuery(this).attr('rel');
 
 		if (hideTimer) {
 			clearTimeout(hideTimer);  
 		}
-		var pos = $(this).offset();
-		var width = $(this).width();
+		var pos = jQuery(this).offset();
+		var width = jQuery(this).width();
 		container.css({  
 			left: (pos.left + width) + 'px',  
 			top: pos.top - 5 + 'px'  
 		});
 
-		$('#personPopupContent').html('&nbsp;');  
+		jQuery('#personPopupContent').html('&nbsp;');  
 
-		$.ajax({  
+		jQuery.ajax({  
 			type: 'GET',
 			url: '/users/' + username,
 			dataType: 'xml',
@@ -81,7 +81,7 @@ $(function(){
 						if( oslcDoc ) {
 							var prevDocUrl = oslcDoc.getAttribute('rdf:ressource');
 							if( prevDocUrl ) {
-								$('#personPopupContent').load(prevDocUrl);
+								jQuery('#personPopupContent').load(prevDocUrl);
 							}
 						}
 					}
@@ -92,7 +92,7 @@ $(function(){
 		container.css('display', 'block');  
 	});  
 
-	$('.personPopupTrigger').live('mouseout', function() { 
+	jQuery('.personPopupTrigger').live('mouseout', function() { 
 		if (hideTimer) { 
 			clearTimeout(hideTimer);
 		}
@@ -104,14 +104,14 @@ $(function(){
 	});
 
 	// Allow mouse over of details without hiding details  
-	$('#personPopupContainer').mouseover(function() {  
+	jQuery('#personPopupContainer').mouseover(function() {  
 		if (hideTimer) { 
 			clearTimeout(hideTimer);
 		}
 	});  
 
 	// Hide after mouseout  
-	$('#personPopupContainer').mouseout(function() {  
+	jQuery('#personPopupContainer').mouseout(function() {  
 		if (hideTimer){  
 			clearTimeout(hideTimer);
 		}
