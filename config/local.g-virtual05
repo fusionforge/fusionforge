@@ -1,2 +1,3 @@
 BUILDERDIR=/var/cache/pbuilder/fusionforge
 DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
+KEEPVM=true
