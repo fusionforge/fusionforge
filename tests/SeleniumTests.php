@@ -6,7 +6,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'PHPUnit/Framework.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
-class SeleniumTests
+class AllTests
 {
 	public static function main()
 	{

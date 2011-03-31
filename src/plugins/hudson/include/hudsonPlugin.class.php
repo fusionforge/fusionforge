@@ -26,7 +26,6 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook("userisactivecheckbox") ; // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost") ; //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
-		$this->_addHook('javascript_file', 'jsFile', false);
 		$this->_addHook('javascript',  false);
 		$this->_addHook('cssfile', 'cssFile', false);
 
@@ -70,8 +69,6 @@ class hudsonPlugin extends Plugin {
 			use_stylesheet('/plugins/hudson/themes/default/css/style.css');
 		} elseif ($hookname == "cssfile") {
 			$this->cssFile($params);
-		} elseif ($hookname == "javascript_file") {
-			$this->jsFile($params);
 		} elseif ($hookname == "project_is_deleted") {
 			$this->projectIsDeleted($params);
 		} elseif ($hookname == "widget_instance") {
@@ -111,10 +108,6 @@ class hudsonPlugin extends Plugin {
 		   ) {
 			use_stylesheet($this->getThemePath().'/css/style.css');
 		}
-	}
-
-	function jsFile($params) {
-		use_javascript('/plugins/hudson/hudson_tab.js');
 	}
 
 	/**
