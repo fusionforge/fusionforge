@@ -604,9 +604,9 @@ if [ "$1" -eq "1" ]; then
 		echo ""
 		echo "   http://$HOSTNAME/"
 		echo ""
-		echo "The default fusionforge administrator account and password is:"
+		echo "The FusionForge administrator account and password is:"
 		echo ""
-		echo "Account Name = %{fforge_admin}"
+		echo "Account Name = $FFORGE_ADMIN_USER"
 		echo "Password = $FFORGE_ADMIN_PASSWORD"
 		#echo "Please change it to something appropriate upon initial login."
 		# give user a few seconds to read the message
