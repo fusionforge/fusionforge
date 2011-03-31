@@ -52,25 +52,35 @@ mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage
 
 make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
+(cd tests/scripts ; sh ./start_vm.sh $HOST)
+
+# FUSIONFORGE REPO
 cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
 sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
-sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/fusionforge.repo
+if [ ! -z "$FFORGE_RPM_REPO" ]
+then
+	sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+fi
+scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
+[ ! -e ~/fusionforge_repo ] || scp -rp ~/fusionforge_repo root@$HOST:
+
+# DAG
+cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
+if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
+	sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+fi
+scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 
 if $KEEPVM
 then
 	echo "Destroying vm $HOST"
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
-(cd tests/scripts ; sh ./start_vm.sh $HOST)
+
 scp -r tests root@$HOST:/root
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "ln -s gforge /usr/share/src"
-[ ! -e ~/fusionforge_repo ] || scp -rp ~/fusionforge_repo root@$HOST:
-scp -rp src/rpm-specific/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
-if [ "x$FFORGE_RPM_REPO" != "x" ]
-then
-	ssh root@$HOST "cd /etc/yum.repos.d/; wget $FFORGE_RPM_REPO/fusionforge.repo"
-fi
+
 sleep 5
 [ ! -e "/tmp/timedhosts.txt" ] || scp -p /tmp/timedhosts.txt root@$HOST:/var/cache/yum/timedhosts.txt
 ssh root@$HOST "yum install -y fusionforge fusionforge-plugin-scmsvn fusionforge-plugin-online_help fusionforge-plugin-extratabs fusionforge-plugin-authldap fusionforge-plugin-scmgit fusionforge-plugin-blocks"
