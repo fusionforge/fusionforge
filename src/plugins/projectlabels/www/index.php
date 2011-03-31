@@ -189,20 +189,20 @@ if (db_numrows($res) >= 1) {
 
 		  echo "<h2>"._('Add new labels')."</h2>" ;
 		  echo _('You can create new labels with the form below.') ?></p>
-<p>
 
 <form name="new_label" action="<?php echo util_make_url ('/plugins/projectlabels/') ; ?>" method="post">
+<p>
 <input type="hidden" name="func" value="addlabel" />
 <?php echo utils_requiredField(); ?>
 		  <?php echo _('Name of the label:') ; ?><br/>
 <input type="text" size="15" maxlength="32" name="label_name" value="<?php echo _('potm') ; ?>"/> <br/>
 		  <?php echo _('Displayed text (or HTML) for the label:') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
-		  cols='80'><?php echo _('<p><b>Project of the month!</b></p>') ; ?>
+		  cols='80'><p><b><?php echo _('Project of the month!') ; ?></b></p>
 </textarea><br/>
 <input type="submit" value="<?php echo _('Add label') ?>" />
-</form>
 </p>
+</form>
 
 <?php
 site_admin_footer(array());
