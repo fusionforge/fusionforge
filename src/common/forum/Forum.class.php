@@ -223,11 +223,11 @@ class Forum extends Error {
 			setup_gettext_from_context();
 			if (!$fm->create($string, $string)) {
 				$this->setError($fm->getErrorMessage());
+				db_rollback();
 				return false;
 			}
 		}
 		db_commit();
-
 		return true;
 	}
 

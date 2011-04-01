@@ -32,7 +32,7 @@ class fckeditorPlugin extends Plugin {
 	function fckeditorPlugin () {
 		$this->Plugin() ;
 		$this->name = "fckeditor" ;
-		$this->text = "HTML editor";
+		$this->text = _("HTML editor");
 		$this->hooks[] = "groupisactivecheckbox";
 		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "text_editor"; // shows the editor
@@ -86,30 +86,28 @@ class fckeditorPlugin extends Plugin {
 				return false;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) { // only if the plugin is activated for the project show the fckeditor box
-				if (strtoupper(getStringFromServer('HTTPS')) == 'ON') {
-					$http = "https://";
-				} else {
-					$http = "http://";
-				}
-				if (@$params['name']) {
-					$oFCKeditor = new FCKeditor($params['name']) ;
-				} else {
-					$oFCKeditor = new FCKeditor('body') ;
-				}
+				$name = isset($params['name'])? $params['name'] : 'body';
+				$oFCKeditor = new FCKeditor($name) ;
 				if ($use_system_fckeditor) {
-					$oFCKeditor->BasePath = util_make_url ('/fckeditor/');
+					$oFCKeditor->BasePath = util_make_uri('/fckeditor/');
 					$oFCKeditor->Config['CustomConfigurationsPath'] = "/plugins/fckeditor/fckconfig.js"  ;
 				} else {
-					$oFCKeditor->BasePath = util_make_url('/plugins/' . $this->name . '/');
+					$oFCKeditor->BasePath = util_make_uri('/plugins/' . $this->name . '/');
 				}
-				$oFCKeditor->Value = $params['body']; // this is the initial text that will be displayed (if any)
-				$oFCKeditor->Width = $params['width'];
+				$oFCKeditor->Value = $params['body'];
+				if (isset($params['width'])) $oFCKeditor->Width = $params['width'];
 				$oFCKeditor->Height = $params['height'];
-				$oFCKeditor->ToolbarSet = "FusionForge";
-				$oFCKeditor->Create() ;
-				$GLOBALS['editor_was_set_up'] = true;
-			} else {
-				return false;
+				$oFCKeditor->ToolbarSet = isset($params['toolbar']) ? $params['toolbar']: 'FusionForge';
+				$h = '<input type="hidden" name="_'.$name.'_content_type" value="html" />'."\n";
+				$h .= $oFCKeditor->CreateHtml() ;
+
+				// If content is present, return the html code in content.
+				if (isset($params['content'])) {
+					$params['content'] = $h;
+				} else {
+					$GLOBALS['editor_was_set_up'] = true;
+					echo $h ;
+				}
 			}
 		}
 	}
