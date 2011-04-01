@@ -454,6 +454,8 @@ src/common/docman/views/views.php -text
 src/common/event/Event.class.php -text
 src/common/forum/AttachManager.class.php -text
 src/common/forum/ForumAdmin.class.php -text
+src/common/frs/FRSFileProcessorType.class.php -text
+src/common/frs/FRSFileType.class.php -text
 src/common/import/import_arrays.php -text
 src/common/import/import_docman.php -text
 src/common/import/import_forums.php -text

@@ -74,7 +74,7 @@ if (getStringFromRequest('submit')) {
 		if (!$frsp->create($package_name, $is_public)) {
 			exit_error($frsp->getErrorMessage(), 'frs');
 		} else {
-			$feedback .=_('Added Package');
+			$feedback .= _('Added Package');
 		}
 
 	} elseif ($func == 'delete_package' && $package_id) {
@@ -92,7 +92,7 @@ if (getStringFromRequest('submit')) {
 		if (!$frsp->delete($sure, $really_sure)) {
 			exit_error($frsp->getErrorMessage(), 'frs');
 		} else {
-			$feedback .=_('Deleted');
+			$feedback .= _('Deleted');
 		}
 
 	} else if ($func == 'update_package' && $package_id && $package_name) {
@@ -155,7 +155,7 @@ if (!$res || $rows < 1) {
 	$title_arr[] = _('Status');
 	$title_arr[] = _('Publicly Viewable');
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 	for ($i = 0; $i < $rows; $i++) {
 		echo '

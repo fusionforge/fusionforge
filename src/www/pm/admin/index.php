@@ -290,8 +290,8 @@ if ($add_cat && $group_project_id) {
 	<input type="radio" name="is_public" value="1" checked="checked" /><?php echo _('Yes') ?><br />
 	<input type="radio" name="is_public" value="0" /><?php echo _('No') ?><p />
 	<p />
-	<h3><?php echo _('New Subproject Name').utils_requiredField() ?></h3>
-	<p />
+	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
+	<br />
 	<input type="text" name="project_name" value="" size="15" maxlength="30" />
 	<p />
 	<strong><?php echo _('Description').utils_requiredField() ?></strong><br />
