@@ -200,16 +200,43 @@ EOF
     chmod 755 /var/cache/rinse/$DISTRO-$arch.before_post_install
 
     cat <<EOF > /var/cache/rinse/$DISTRO-$arch.after_post_install
+# MOUNT PROC
+echo "Mount /proc"
 chroot $cache/partial-$arch /bin/mount proc /proc -t proc
+# INSTALL PACKAGES
+echo "Install $pkglist"
 chroot $cache/partial-$arch /usr/bin/yum -y install $pkglist
+EOF
+
+if grep -q  ^http_proxy /etc/wgetrc
+then
+	PROXY=`grep ^http_proxy /etc/wgetrc | tail -1 | sed -e 's!.*http://!!' -e 's!/!!'`
+	export PROXY
+
+    cat <<EOF >> /var/cache/rinse/$DISTRO-$arch.after_post_install
+# PROXY CONF FROM WGET
+echo "Set up proxy $PROXY for pear"
+chroot $cache/partial-$arch /usr/bin/pear config-set http_proxy $PROXY
+EOF
+fi
+
+    cat <<EOF >> /var/cache/rinse/$DISTRO-$arch.after_post_install
+# INSTALL PHPUNIT
 # phpunit install, requires: php-pear php-dom
+echo "Updating pear.php.net pear channel"
 chroot $cache/partial-$arch /usr/bin/pear channel-update pear.php.net
 #optional?# chroot $cache/partial-$arch /usr/bin/pear channel-discover components.ez.no
+echo "Discovering pear.phpunit.de pear channel"
 chroot $cache/partial-$arch /usr/bin/pear channel-discover pear.phpunit.de
+echo "Discovering pear.symfony-project.com pear channel"
 chroot $cache/partial-$arch /usr/bin/pear channel-discover pear.symfony-project.com
+echo "Upgrading pear"
 chroot $cache/partial-$arch /usr/bin/pear upgrade-all
 chroot $cache/partial-$arch /usr/bin/pear upgrade --force PEAR
+echo "Installing phpunit/PHPUnit"
 chroot $cache/partial-$arch /usr/bin/pear install --alldeps phpunit/PHPUnit
+# UMOUNT PROC
+echo "Umount /proc"
 chroot $cache/partial-$arch /bin/umount /proc
 EOF
     chmod 755 /var/cache/rinse/$DISTRO-$arch.after_post_install
