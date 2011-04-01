@@ -40,11 +40,6 @@ if (!$type) {
 	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No TYPE specified'), 'mantisbt');
 }
 
-
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-
 $use_tooltips = 1;
 $editable = 1;
 $mantisbt = plugin_get_object('mantisbt');

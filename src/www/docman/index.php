@@ -44,9 +44,6 @@ session_require_perm('docman', $group_id, 'read');
 
 /* get informations from request or $_POST */
 $group_id = getIntFromRequest('group_id');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
 
 /* validate group */
 if (!$group_id)
@@ -134,5 +131,4 @@ include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 
 site_project_footer(array());
-
 ?>
