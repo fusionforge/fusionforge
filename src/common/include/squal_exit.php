@@ -30,7 +30,7 @@
  * @param		string	Error toptab
  */
 function exit_error($title,$toptab='') {
-	print 'ERROR - '.$text;
+	print 'ERROR - '.$title;
 	exit;
 }
 
@@ -72,7 +72,7 @@ function exit_missing_param($url='',$missing_params=array(),$toptab='') {
  * @param   string  toptab needed for navigation
  */
 function exit_disabled($toptab='') {
-       exit_error('DISABLED FEATURE');
+	exit_error('DISABLED FEATURE');
 }
 
 ?>

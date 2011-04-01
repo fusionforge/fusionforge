@@ -81,6 +81,7 @@ if (getStringFromRequest('submit')) {
 		$tags,
 		$group->isPublic()
 	);
+
 	if (!$res) {
 		$error_msg = $group->getErrorMessage();
 		$group->clearError();

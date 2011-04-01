@@ -215,6 +215,7 @@ function install()
 		foreach ($tables as $table) {
 			run('su - postgres -c "psql '.$gforge_db.' -c \\"GRANT ALL on '.$table.' TO '.$gforge_user.';\\""');
 		}
+		run("su - postgres -c \"psql $gforge_db -c \\\"UPDATE pg_ts_cfg SET locale='en_US.UTF-8' WHERE ts_name='default'\\\"\"");
 //	} else {
 //		show(" * Creating FTS default configuation (Full Text Search)");
 //		run("su - postgres -c \"psql $gforge_db < $fusionforge_src_dir/db/FTS-20081108.sql\" >> /tmp/gforge-import.log");
@@ -298,9 +299,9 @@ function install()
 
 //	run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, user_pw, unix_pw) VALUES ('$admin_user', '$pw_md5', '$pw_crypt')\\\"\"");
 		if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
-			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\\\"\"");
+			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A'); INSERT INTO pfo_user_role (user_id, role_id) VALUES (currval('users_pk_seq'), 3)\\\"\"");
 		} else {
-			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"");
+			run("su - postgres -c \"psql $gforge_db -c \\\"INSERT INTO users (user_name, realname, firstname, lastname, email, user_pw, unix_pw, status, theme_id) VALUES ('$admin_user', 'Forge Admin', 'Forge', 'Admin', 'root@localhost.localdomain', '$pw_md5', '$pw_crypt', 'A', 1); INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (currval('users_pk_seq'), 1, 'A')\\\"\"");
 		}
 
 //echo "BREAKPOINT 2\n";

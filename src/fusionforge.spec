@@ -631,8 +631,14 @@ if [ "$1" -eq "1" ]; then
 	if [ $ret -ne 0 ] ; then
 	    FFORGE_DB=%{dbname}
 	    FFORGE_USER=%{dbuser}
-	    FFORGE_ADMIN_USER=%{fforge_admin}
-	    FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
+	    if [ "x${FFORGE_ADMIN_USER}" = "x" ]
+	    then
+	        FFORGE_ADMIN_USER=%{fforge_admin}
+	    fi
+	    if [ "x${FFORGE_ADMIN_PASSWORD}" = "x" ]
+	    then
+	        FFORGE_ADMIN_PASSWORD=$(/bin/dd if=/dev/urandom bs=32 count=1 2>/dev/null | /usr/bin/sha1sum | cut -c1-8)
+	    fi
 	    export FFORGE_DB FFORGE_USER FFORGE_ADMIN_USER FFORGE_ADMIN_PASSWORD
 	    /usr/bin/php %{FORGE_DIR}/fusionforge-install-3-db.php >>/var/log/%{name}-install.log 2>&1
 	else
@@ -670,9 +676,9 @@ if [ "$1" -eq "1" ]; then
 		echo ""
 		echo "   http://$HOSTNAME/"
 		echo ""
-		echo "The default fusionforge administrator account and password is:"
+		echo "The FusionForge administrator account and password is:"
 		echo ""
-		echo "Account Name = %{fforge_admin}"
+		echo "Account Name = $FFORGE_ADMIN_USER"
 		echo "Password = $FFORGE_ADMIN_PASSWORD"
 		#echo "Please change it to something appropriate upon initial login."
 		# give user a few seconds to read the message

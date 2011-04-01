@@ -58,15 +58,16 @@ if (getStringFromPost('submit')) {
 		exit_error($ml->getErrorMessage(),'home');
 	} else {
 		$feedback= _('Mailing List Successfully deleted');
-		session_redirect('?group_id='.$group_id.'&feedback='.urlencode($feedback));
+		session_redirect('/mail/admin/?group_id='.$group_id.'&feedback='.urlencode($feedback));
 	}
 }
 
-mail_header(array('title' => _('Permanently Delete List')));
+mail_header(array('title' => _('Permanently Delete Mailing List ') . $ml->getName()));
 
 ?>
-<h2><?php echo $ml->getName(); ?></h2>
+<fieldset>
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $ml->getID(); ?>">
+<p>Do you really want to delete mailing list <?php echo $ml->getName(); ?>?</p>
 <p>
 <input type="checkbox" name="sure" value="1" /><?php echo _('Confirm Delete'); ?><br />
 </p>
@@ -74,6 +75,7 @@ mail_header(array('title' => _('Permanently Delete List')));
 <input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
 </p>
 </form>
+</fieldset>
 <?php
 
 mail_footer(array());

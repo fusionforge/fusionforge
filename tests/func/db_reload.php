@@ -61,11 +61,6 @@ if ( !CONFIGURED ) {
 	exit(1);
 }
 
-$opt_restart = true;
-if (isset($argv[1]) && $argv[1] == '-no-restart') {
-	$opt_restart = false;
-}
-
 // Search location of fusionforge main directory (gforge).
 $forge_root = dirname(dirname(dirname(__FILE__))).'/src';
 if (!file_exists($forge_root)) {
@@ -98,10 +93,8 @@ $adminEmail = 'nobody@nowhere.com';
 
 $session_hash = '000TESTSUITE000';
 
-//set_include_path(".:/opt/gforge/:/opt/gforge/www/include/:/etc/gforge/");
-
 require_once $forge_root.'/www/env.inc.php';
-require_once $gfwww.'include/pre.php';
+require_once $gfcommon.'include/pre.php';
 
 $files = glob(dirname(__FILE__)."/sql/*.sql");
 foreach ($files as $filename) {

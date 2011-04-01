@@ -71,7 +71,7 @@ class SVNPlugin extends SCMPlugin {
 			if (!$add_num) {
 				$add_num=0;
 			}
-			echo ' (SVN: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
+			echo ' (Subversion: '.sprintf(_('<strong>%1$s</strong> commits, <strong>%2$s</strong> adds'), number_format($commit_num, 0), number_format($add_num, 0)).")";
 		}
 	}
 
@@ -227,7 +227,7 @@ class SVNPlugin extends SCMPlugin {
 
 		if ($project->usesPlugin ($this->name)) {
 			if ($this->browserDisplayable ($project)) {
-				print '<iframe src="'.util_make_url ("/scm/viewvc.php/?root=".$project->getUnixName()).'" frameborder="0" width=100% height=700></iframe>' ;
+				session_redirect("/scm/viewvc.php/?root=".$project->getUnixName());
 			}
 		}
 	}

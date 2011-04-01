@@ -22,6 +22,8 @@ require_once $gfcommon.'include/pre.php';
 require_once('preplugins.php');
 require_once('plugins_utils.php');
 
+use_javascript('/plugins/hudson/hudson_tab.js');
+
 $plugin_manager = PluginManager::instance();
 $p = $plugin_manager->getPluginByName('hudson');
 

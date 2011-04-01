@@ -212,7 +212,7 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
 	$res = @pg_query($dbconn,$qstring);
 	if (!$res) {
 		error_log('SQL: ' . preg_replace('/\n\t+/', ' ',$qstring));
-		error_log('SQL> ' . db_error($dbconn));
+		error_log('SQL> ' . db_error($dbserver));
 	}
 	return $res;
 }

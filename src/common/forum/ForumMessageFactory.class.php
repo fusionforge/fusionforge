@@ -221,9 +221,11 @@ class ForumMessageFactory extends Error {
 		}
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
-		if (!$result || $rows < 1) {
-			$this->setError('No Messages Found '.db_error());
+		if (!$result) {
+			$this->setError('Error when fetching messages '.db_error());
 			return false;
+		} else if ($rows < 1) {
+			$this->forum_messages = array();
 		} else {
 			while ($arr = db_fetch_array($result)) {
 				$this->forum_messages[] = new ForumMessage($this->Forum, $arr['msg_id'], $arr);

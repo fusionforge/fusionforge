@@ -55,6 +55,7 @@ $ss = & $sf->getSurveys();
 if (!$ss) {
     echo '<p class="warning_msg">' . (_('No Survey is found')) . '</p>';
 } else {
+	echo '<p>' . _('Select a survey to vote') . '</p>';
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }
 
