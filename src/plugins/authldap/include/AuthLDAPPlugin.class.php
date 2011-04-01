@@ -301,7 +301,9 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 		}
 
 		if (forge_get_config('ldap_version')) {
+			debuglog("LDAP: ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, ".forge_get_config('ldap_version').");");
 			if (!ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, forge_get_config('ldap_version'))) {
+				debuglog("LDAP: ldap_set_option() failed: ".ldap_error($this->ldap_conn));
 				return false;
 			}
 		}

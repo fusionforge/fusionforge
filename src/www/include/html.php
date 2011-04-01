@@ -72,7 +72,7 @@ function make_user_link($username,$displayname='') {
 }
 
 /**
- * html_feedback_top() - Show the feedback output at the bottom of the page.
+ * html_feedback_bottom() - Show the feedback output at the bottom of the page.
  *
  * @param	string	The feedback.
  */
@@ -686,7 +686,7 @@ function site_header($params) {
  * @param	array	Footer params array
  */
 function site_footer($params) {
-	GLOBAL $HTML;
+	global $HTML;
 	$HTML->footer($params);
 }
 
@@ -697,7 +697,7 @@ function site_footer($params) {
  * @param	params	array() must contain $toptab and $group
  */
 function site_project_header($params) {
-	GLOBAL $HTML;
+	global $HTML;
 
 	/*
 		Check to see if active
@@ -749,8 +749,6 @@ function site_project_header($params) {
 	}
 
 	site_header($params);
-
-//	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
 }
 
 /**

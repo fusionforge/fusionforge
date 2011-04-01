@@ -59,14 +59,7 @@ function news_header($params) {
 	if ($group_id && ($group_id != forge_get_config('news_group'))) {
 		site_project_header($params);
 	} else {
-		$HTML->header($params);
-		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
-			echo html_error_top($GLOBALS['error_msg']);
-		}
-		if (!empty($feedback)) {			
-			html_feedback_top($feedback);
-		}
-
+		site_header($params);
 	}
 }
 
