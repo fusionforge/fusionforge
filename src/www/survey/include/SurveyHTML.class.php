@@ -397,7 +397,8 @@ class SurveyHTML extends Error {
 			$ret.= '<td>'.$strike_open.util_make_link ('/survey/survey.php?group_id='.$group_id.'&amp;survey_id='. $surveys[$i]->getID(), $surveys[$i]->getTitle()). $strike_close.'</td>';
 
 			if ($show_questions) {
-				$ret.= '<td>'.$surveys[$i]->getQuestionString().'</td>';
+				// add a space after comma
+				$ret.= '<td>'.str_replace(",", ", ", $surveys[$i]->getQuestionString()).'</td>';
 			}
 			if ($show_number_questions) {
 				$ret.= '<td>'.$surveys[$i]->getNumberOfQuestions().'</td>';
@@ -488,8 +489,6 @@ class SurveyHTML extends Error {
 				
 				$ret.= $index++.'&nbsp;&nbsp;&nbsp;&nbsp;<br /></td><td>';
 			}
-			
-			
 			
 			switch($question_type) {
 			case 1: /* This is a radio-button question. Values 1-5.

@@ -80,7 +80,7 @@ class MailingListFactory extends Error {
 	 * @param boolean $admin if we are in admin mode (we want to see deleted lists)
 	 *	@return	array	The array of MailingList objects.
 	 */
-	function &getMailingLists() {
+	function getMailingLists() {
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
 			return $this->mailingLists;
 		}
@@ -93,7 +93,6 @@ class MailingListFactory extends Error {
 		}
 
 		$result = db_query_params ('SELECT * FROM mail_group_list WHERE group_id=$1 AND is_public = ANY ($2) ORDER BY list_name',
-
 					   array ($this->Group->getID(),
 						  db_int_array_to_any_clause (array (MAIL__MAILING_LIST_IS_PRIVATE,
 										     MAIL__MAILING_LIST_IS_PUBLIC)))) ;

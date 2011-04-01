@@ -87,17 +87,12 @@ if (!function_exists('pg_connect')) {
 	exit;
 }
 
-// Drop & create a fresh database before running this test suite.
-if ($opt_restart) {
-	system("service httpd restart 2>&1 >/dev/null");
-}
-system("service postgresql restart 2>&1 >/dev/null");
-system("su - postgres -c 'dropdb -q ".DB_NAME."'");
-system("su - postgres -c 'createdb -q --encoding UNICODE ".DB_NAME."'");
-system("psql -q -U".DB_USER." ".DB_NAME." -f $forge_root/db/gforge.sql >> /var/log/gforge-import.log 2>&1");
+system("echo \"DROP SCHEMA public CASCADE;CREATE SCHEMA public;\" | psql -q -Upostgres ".DB_NAME." > /var/log/fusionforge-init.log 2>&1");
+system("echo \"GRANT ALL ON SCHEMA public TO ".DB_USER.";\" | psql -q -Upostgres ".DB_NAME." >> /var/log/fusionforge-init.log 2>&1");
+
+system("psql -q -U".DB_USER." ".DB_NAME." -f $forge_root/db/gforge.sql >> /var/log/fusionforge-init.log 2>&1");
 system("php $forge_root/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
 
-$sitename = 'ACOS Forge';
 $adminPassword = 'myadmin';
 $adminEmail = 'nobody@nowhere.com';
 
@@ -107,12 +102,6 @@ $session_hash = '000TESTSUITE000';
 
 require_once $forge_root.'/www/env.inc.php';
 require_once $gfwww.'include/pre.php';
-
-// Install tsearch2 for phpwiki & patch it for safe backups.
-//system("psql -q -Upostgres ".DB_NAME." < /usr/share/pgsql/contrib/tsearch2.sql >/dev/null 2>&1");
-//system("psql -q -Upostgres ".DB_NAME." < /opt/gforge/acde/sql/20080408-regprocedure_update.sql");
-//system("echo \"GRANT SELECT ON pg_ts_dict, pg_ts_parser, pg_ts_cfg, pg_ts_cfgmap TO gforge;\" | psql -q -Upostgres ".DB_NAME);
-//system("echo \"UPDATE pg_ts_cfg set locale = 'en_US.UTF-8' WHERE ts_name = 'default';\" | psql -q -Upostgres ".DB_NAME);
 
 $files = glob(dirname(__FILE__)."/sql/*.sql");
 foreach ($files as $filename) {
@@ -126,7 +115,7 @@ system("echo \"VACUUM FULL ANALYZE;\" | psql -q -Upostgres ".DB_NAME);
 //
 $user = new GFUser();
 $user_id = $user->create('admin', $sitename, 'Admin', $adminPassword, $adminPassword,
-	$adminEmail, 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false);
+	$adminEmail, 1, 1, 1,'GMT','',0,1,'', '','','','','','US',false, 'admin');
 
 if (!$user_id) {
 	print "ERROR: Creating user: ".$user->getErrorMessage().':'.db_error()."\n";
@@ -143,11 +132,8 @@ if (!$user_id) {
 				array ($user_id,
 				       'A'));
 
-// Commented, PFO_RBAC is activated by default.
-//	if (file_exists ('/tmp/fusionforge-use-pfo-rbac')) { // USE_PFO_RBAC
-		$res = db_query_params ('INSERT INTO pfo_user_role VALUES ($1, 3)',
-					array ($user_id)) ;
-//	}
+	$res = db_query_params ('INSERT INTO pfo_user_role VALUES ($1, 3)',
+				array ($user_id)) ;
 }
 
 ?>

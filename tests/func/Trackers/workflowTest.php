@@ -49,18 +49,15 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 {
 	function testWorkflow()
 	{
+		// Testing extra-fields
 		$this->populateStandardTemplate('trackers');
 		$this->init();
 			
-		// Testing extra-fields
-		$this->click("link=Tracker");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=Bugs");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Tracker");
+		$this->clickAndWait("link=Bugs");
 		$this->click("//a[contains(@href, '".ROOT. "/tracker/admin/')]");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Manage Custom Fields");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("link=Manage Custom Fields");
 		$this->type("name", "MyStatus");
 		$this->type("alias", "mystatus");
 		$this->click("document.forms[2].field_type[6]");
@@ -93,24 +90,18 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		$this->click("//tr[@id='field-mystatus']/td[4]/a[1]");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Open");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("post_changes");
 		$this->type("name", "Resolved");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("post_changes");
 		$this->type("name", "Validated");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("post_changes");
 		$this->type("name", "Verified");
 		$this->select("status_id", "label=Closed");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("post_changes");
 		$this->type("name", "Duplicated");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("post_changes");
 		$this->type("name", "Postponed");
-		$this->click("post_changes");
-		$this->waitForPageToLoad("30000");
+		$this->clickAndWait("post_changes");
 		$this->type("name", "Closed");
 		$this->select("status_id", "label=Closed");
 		$this->click("post_changes");
