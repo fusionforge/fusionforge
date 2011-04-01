@@ -238,7 +238,7 @@ class TrackerGateway extends Error {
 
 		// $Group not needed, but let the code here to support
 		// tracker additions in the Future
-		$Group =& group_get_object_by_name($argv[1]);
+			$Group = group_get_object_by_name($argv[1]);
 		if (!$Group || !is_object($Group)) {
 			$this->setError('Could Not Get Group Object');
 			return false;

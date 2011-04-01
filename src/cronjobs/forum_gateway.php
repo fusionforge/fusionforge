@@ -163,12 +163,12 @@ class ForumGateway extends Error {
 		if (preg_match('/(\[)([0-9]*)(\])/',$subj,$arr)) {
 			$this->Parent=$arr[2];
 			$parent_end=(strpos($subj,'['.$arr[2].']')) + strlen('['.$arr[2].']');
-			$this->Subject = addslashes(substr($subj,$parent_end));
+			$this->Subject = substr($subj,$parent_end);
 		} else {
-			$this->Subject = addslashes($subj);
+			$this->Subject = $subj;
 			$this->Parent=0;
 		}
-		$this->Body =& addslashes($mp->getBody());
+		$this->Body =& $mp->getBody();
 //DBG( "body1:". $this->Body);
 
 		$begin = strpos($this->Body, FORUM_MAIL_MARKER);
