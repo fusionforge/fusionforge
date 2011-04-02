@@ -1,3 +1,35 @@
+FusionForge-5.0.3:
+Summary of changes:
+* htmlpurifier upgraded to 4.3.0
+* mailing lists now are as public as the project they’re in upon creation possible data leak, security fix, spotted by <scamp:#fusionforge>, 10x!
+* MFC r11973: Fix XSD conformity errors in the generated WSDL.
+* Stop trying to copy unneeded libcap into chroot
+* Applied patch [#214]: PHP warning if search query is empty
+* Added missing spaces to fix SQL queries [#208]
+* [#207] Backport file from trunk to fix php warning in project_hierarchy plugin
+* Fixed database credentials used for MTA and NSS on new installations
+* Improve SVN checkout message and allow pure anonymous access for svn over http (webdav)
+* Fix warning if no mailman-aliases files.
+* Source install: No chgrp(scm_*) when no shell as groups are not created
+* CVS plugin: clear warning when removing non existing files (at least for the first run)
+* Source install: Disabling crons: tarball.php no longer available, get_news_approved.pl not working
+* Allow user to register projects by default.
+* Remove xslt on svn example file (for http).
+* Fixed hang during removal of -mta-postfix in some conditions
+* Fixed Mediawiki creation script so it uses the appropriate database and user
+* Fixed XSS vulnerability reported by 'Bluetouff'
+* Validate mailing-list names when creating/deleting them
+* Merged updated translations from Pootle (Spanish and Italian)
+* Handle amd64 architectures and add missing files in chroot creation
+* Support rsyslog as well as syslogd
+* Fixed bad detection of PostgreSQL's init script
+* Fix URL for roadmap
+* Fix for bug #200
+* Fix admin_table_postadd
+* htmlpurifier upgraded to 4.2.0
+* Fixed SQL query in snippet browsing
+* Fix database creation problems in case of an SQL_ASCII default for PostgreSQL
+
 FusionForge-5.0.2:
 * Maintenance release, bugfixes mostly.
 
