@@ -75,6 +75,12 @@ LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/nu
 #LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
 cd tests
 phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite
+retcode=$?
 cd ..
+# on debian
 killall -9 firefox-bin
+# on centos
+killall -9 firefox
+# kill java stuffs
 killall -QUIT java
+exit $retcode
