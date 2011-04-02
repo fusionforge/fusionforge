@@ -48,7 +48,7 @@ export CONFIGURED=true
 
 [ ! -d $WORKSPACE/build ] || rm -fr $WORKSPACE/build
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
-mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage
+mkdir -p $WORKSPACE/build/packages $WORKSPACE/build/config $WORKSPACE/reports/coverage
 
 if $KEEPVM
 then
@@ -77,7 +77,13 @@ if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
 fi
 scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/
 
+cat > $WORKSPACE/build/config/phpunit <<-EOF
+HUDSON_URL=$HUDSON_URL
+JOB_NAME=$JOB_NAME
+EOF
+
 scp -r tests root@$HOST:/root
+scp -r $WORKSPACE/build/config  root@$HOST:/root
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "ln -s gforge /usr/share/src"
 

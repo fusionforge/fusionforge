@@ -47,6 +47,9 @@ export CONFIGURED=true
 
 [ ! -d $WORKSPACE/build/packages ] || rm -fr $WORKSPACE/build/packages
 mkdir -p $WORKSPACE/build/packages
+[ ! -d $WORKSPACE/build/config ] || rm -fr $WORKSPACE/build/config
+mkdir -p $WORKSPACE/build/config
+
 # Comment out the next line when you don't want to rebuild all the time
 [ ! -d $WORKSPACE/build/debian ] || rm -fr $WORKSPACE/build/debian
 [ -d $WORKSPACE/build/debian ] || mkdir $WORKSPACE/build/debian
@@ -64,8 +67,16 @@ then
 	echo "Destroying vm $HOST"
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
+
 (cd tests/scripts ; ./start_vm.sh $HOST)
+
+cat > $WORKSPACE/build/config/phpunit <<-EOF
+HUDSON_URL=$HUDSON_URL
+JOB_NAME=$JOB_NAME
+EOF
+
 scp -r tests root@$HOST:/root
+scp -r $WORKSPACE/build/config  root@$HOST:/root
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
 if [ "x$DEBMIRROR" != "x" ]

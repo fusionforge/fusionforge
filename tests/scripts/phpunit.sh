@@ -14,8 +14,9 @@ then
         exit 1
 fi
 
-SELENIUM_RC_DIR=/var/log
 WORKSPACE=/root
+[ ! -f $WORKSPACE/root/config/phpunit ] || . $WORKSPACE/root/config/phpunit 
+SELENIUM_RC_DIR=$WORKSPACE/reports
 [ -d $WORKSPACE/reports ] || mkdir $WORKSPACE/reports
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
 SELENIUM_RC_HOST=`hostname -f`
@@ -69,13 +70,13 @@ define ('WSDL_URL', URL.'soap/index.php?wsdl');
 ?>
 EOF
 
+retcode=0
 echo "This will run phpunit tests"
 killall -9 java
 LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/null &
 #LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
 cd tests
-phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite
-retcode=$?
+phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite || retcode=$?
 cd ..
 # on debian
 killall -9 firefox-bin

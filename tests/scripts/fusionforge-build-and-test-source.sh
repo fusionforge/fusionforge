@@ -49,9 +49,10 @@ export CONFIGURED=true
 export BUILDRESULT=$WORKSPACE/build/packages
 
 [ ! -d $WORKSPACE/build/packages ] || rm -fr $WORKSPACE/build/packages
+[ ! -d $WORKSPACE/build/config ] || rm -fr $WORKSPACE/build/config
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 [ ! -d $WORKSPACE/apidocs ] || rm -fr $WORKSPACE/apidocs
-mkdir -p $WORKSPACE/build/packages $WORKSPACE/reports/coverage $WORKSPACE/apidocs
+mkdir -p $WORKSPACE/build/packages $WORKSPACE/build/config $WORKSPACE/reports/coverage $WORKSPACE/apidocs
 
 [ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
 make BUILDRESULT=$WORKSPACE/build/packages buildtar
@@ -67,8 +68,16 @@ then
 	echo "Destroying vm $HOST"
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST || true)
 fi
+
 (cd tests/scripts ; ./start_vm.sh $HOST)
+
+cat > $WORKSPACE/build/config/phpunit <<-EOF
+HUDSON_URL=$HUDSON_URL
+JOB_NAME=$JOB_NAME
+EOF
+
 scp -r tests root@$HOST:/root
+scp -r $WORKSPACE/build/config  root@$HOST:/root
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 if [ "x$BUILDRESULT" != "x" ]
 then
