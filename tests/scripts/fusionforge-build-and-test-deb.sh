@@ -103,6 +103,7 @@ if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
 	ssh -X root@$HOST "tests/scripts/phpunit.sh DEBDebian60Tests.php" 
+	scp root@$HOST:reports/* $WORKSPACE/reports/
 else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml DEBDebian60Tests.php || retcode=$?
