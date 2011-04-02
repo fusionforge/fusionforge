@@ -99,7 +99,7 @@ then
 	ssh -X root@$HOST "tests/scripts/phpunit.sh RPMCentos52Tests.php"
 else
 	cd tests
-	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php || retcode=1
+	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php || retcode=$?
 	cd ..
 	if [ "x$SELENIUM_RC_DIR" != "x" ]
 	then

@@ -87,13 +87,14 @@ ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
 # ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc"
 ssh root@$HOST "service crond stop" || true
 
+retcode=0
 if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
 	ssh -X root@$HOST "tests/scripts/phpunit.sh TarCentos52Tests.php"
 else
 	cd tests
-	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentos52Tests.php
+	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml TarCentos52Tests.php || retcode=$?
 	cd ..
 	if [ "x$SELENIUM_RC_DIR" != "x" ]
 	then
@@ -108,4 +109,4 @@ then
 else
 	(cd tests/scripts ; sh ./stop_vm.sh $HOST)
 fi
-
+exit $retcode
