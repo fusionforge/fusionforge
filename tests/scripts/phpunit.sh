@@ -15,7 +15,7 @@ then
 fi
 
 WORKSPACE=/root
-[ ! -f $WORKSPACE/root/config/phpunit ] || . $WORKSPACE/root/config/phpunit 
+[ ! -f $WORKSPACE/config/phpunit ] || . $WORKSPACE/config/phpunit 
 SELENIUM_RC_DIR=$WORKSPACE/reports
 [ -d $WORKSPACE/reports ] || mkdir $WORKSPACE/reports
 SELENIUM_RC_URL=${HUDSON_URL}job/${JOB_NAME}/ws/reports
