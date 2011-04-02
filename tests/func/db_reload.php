@@ -88,6 +88,7 @@ system("echo \"GRANT ALL ON SCHEMA public TO ".DB_USER.";\" | psql -q -Upostgres
 system("psql -q -U".DB_USER." ".DB_NAME." -f $forge_root/db/gforge.sql >> /var/log/fusionforge-init.log 2>&1");
 system("php $forge_root/db/upgrade-db.php >> /var/log/gforge-upgrade-db.log 2>&1");
 
+$sitename='TestForge';
 $adminPassword = 'myadmin';
 $adminEmail = 'nobody@nowhere.com';
 
