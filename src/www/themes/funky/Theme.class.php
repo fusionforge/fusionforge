@@ -5,6 +5,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge.
@@ -67,12 +68,11 @@ class Theme extends Layout {
 	{
 		global $user_guide;
 
-		// The root location for images
-		if (!isset($params['h1'])) {
+		if (!isset($params['h1']) && isset($params['title'])) {
 			$params['h1'] = $params['title'];
 		}
 
-		if (!$params['title']) {
+		if (!isset($params['title'])) {
 			$params['title'] = forge_get_config('forge_name');
 		} else {
 			$params['title'] = $params['title'] . " - forge_get_config('forge_name') ";
@@ -115,7 +115,7 @@ class Theme extends Layout {
 		echo '</div>' . "\n";
 		echo '<div id="maindiv">' . "\n";
 
-        plugin_hook('message', array());
+		plugin_hook('message', array());
 
 		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
 			echo $this->error_msg($GLOBALS['error_msg']);
@@ -127,9 +127,9 @@ class Theme extends Layout {
 			echo $this->feedback($GLOBALS['feedback']);
 		}
 
-		if ($params['h1']) {
+		if (isset($params['h1'])) {
 			echo '<h1>'.$params['h1'].'</h1>';
-		} else {
+		} elseif (isset($params['title'])) {
 			echo '<h1 class="hide">'.$params['title'].'</h1>';
 		}
 		if (isset($params['submenu']))
@@ -144,7 +144,6 @@ class Theme extends Layout {
 	{
 		$this->bodyFooter($params);
 		echo '<div class="footer">' . "\n";
-		// echo '<div>Theme designed by Antoine Mercadal. Copyright &copy; 2010 Capgemini';
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
 		echo '<div style="clear:both"></div></div></body></html>' . "\n";

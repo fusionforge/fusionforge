@@ -362,7 +362,7 @@ class Layout extends Error {
 		}
 
 		$params['template'] = ' {menu}';
-		plugin_hook ('headermenu', $params);
+		plugin_hook('headermenu', $params);
 
 		$this->quickNav();
 
@@ -1308,7 +1308,6 @@ class Layout extends Error {
 		
 		echo $this->subMenu($subMenuTitle, $subMenuUrl);
 	}
-
 }
 
 // Local Variables:

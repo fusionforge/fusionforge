@@ -5,6 +5,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -47,7 +48,6 @@ class Theme extends Layout {
 		$this->themeurl = util_make_url('themes/gforge/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
-
 	}
 
 	function bodyHeader($params) {
@@ -59,11 +59,11 @@ class Theme extends Layout {
 		$this->header_displayed=true;
 		
 		// The root location for images
-		if (!isset($params['h1'])) {
+		if (!isset($params['h1']) && isset($params['title'])) {
 			$params['h1'] = $params['title'];
 		}
 
-		if (!$params['title']) {
+		if (!isset($params['title'])) {
 			$params['title'] = forge_get_config('forge_name');
 		} else {
 			$params['title'] = $params['title'] . " - forge_get_config('forge_name') ";
@@ -76,21 +76,21 @@ class Theme extends Layout {
 				echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('alt'=>'FusionForge Home')));
 				echo '</td>
 					<td id="header-col2">';
-                $this->searchBox();
-                echo '
+		$this->searchBox();
+		echo '
 					</td>
 					<td id="header-col3">
 			';
-                $items = $this->navigation->getUserLinks();
-                for ($j = 0; $j < count($items['titles']); $j++) {
-                        $links[] = util_make_link($items['urls'][$j], $items['titles'][$j], 
-                                                  array('class'=>'userlink'), true);
-                }
-                echo implode(' | ', $links); 
-                plugin_hook ('headermenu', $params);
+		$items = $this->navigation->getUserLinks();
+		for ($j = 0; $j < count($items['titles']); $j++) {
+			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j],
+						array('class'=>'userlink'), true);
+		}
+		echo implode(' | ', $links);
+		plugin_hook('headermenu', $params);
 
-                $this->quickNav();
-                echo '
+		$this->quickNav();
+		echo '
 					</td>
 				</tr>
 			</table>
@@ -99,37 +99,37 @@ class Theme extends Layout {
 			';
                 echo $this->outerTabs($params);
 				echo '<!-- inner tabs -->' . "\n";
-                if (isset($params['group']) && $params['group']) {
-                        echo $this->projectTabs($params['toptab'],$params['group']);
-                }
-                echo '<div id="maindiv">
+		if (isset($params['group']) && $params['group']) {
+			echo $this->projectTabs($params['toptab'],$params['group']);
+		}
+		echo '<div id="maindiv">
 ';
 //		        echo '<div class="printheader">'. forge_get_config('forge_name') . ' ' . util_make_url('/') .'</div>';
 
-                plugin_hook('message', array());
+		plugin_hook('message', array());
 
-				if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
-					echo $this->error_msg($GLOBALS['error_msg']);
-				}
-				if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
-					echo $this->warning_msg($GLOBALS['warning_msg']);
-				}
-				if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
-					echo $this->feedback($GLOBALS['feedback']);
-				}
+		if(isset($GLOBALS['error_msg']) && $GLOBALS['error_msg']) {
+			echo $this->error_msg($GLOBALS['error_msg']);
+		}
+		if(isset($GLOBALS['warning_msg']) && $GLOBALS['warning_msg']) {
+			echo $this->warning_msg($GLOBALS['warning_msg']);
+		}
+		if(isset($GLOBALS['feedback']) && $GLOBALS['feedback']) {
+			echo $this->feedback($GLOBALS['feedback']);
+		}
 
-				if ($params['h1']) {
-					echo '<h1>'.$params['h1'].'</h1>';
-				} else {
-					echo '<h1 class="hide">'.$params['title'].'</h1>';
-				}
-				if (isset($params['submenu']))
-					echo $params['submenu'];
-        }
+		if (isset($params['h1'])) {
+			echo '<h1>'.$params['h1'].'</h1>';
+		} elseif (isset($params['title'])) {
+			echo '<h1 class="hide">'.$params['title'].'</h1>';
+		}
+		if (isset($params['submenu']))
+			echo $params['submenu'];
+	}
 
-        function bodyFooter($params) {
-			echo '</div><!-- id="maindiv" -->' . "\n";
-        }
+	function bodyFooter($params) {
+		echo '</div><!-- id="maindiv" -->' . "\n";
+	}
 
         function footer($params) {
 		$this->bodyFooter($params);
@@ -156,16 +156,16 @@ class Theme extends Layout {
 	 */
 	function boxTop($title, $id = '') {
 		$t_result = '
-        	<div id="' . $this->toSlug($id) . '" class="box-surround">
-            	<div id="'. $this->toSlug($id) . '-title" class="box-title">
-            		<div class="box-title-left">
-            			<div class="box-title-right">
-                			<h3 class="box-title-content" id="'. $this->toSlug($id) .'-title-content">'. $title .'</h3>
-                		</div> <!-- class="box-title-right" -->
-                	</div> <!-- class="box-title-left" -->
-                </div> <!-- class="box-title" -->
-            	<div id="'. $this->toSlug($id) .'-content" class="box-content">
-            ';
+		<div id="' . $this->toSlug($id) . '" class="box-surround">
+		<div id="'. $this->toSlug($id) . '-title" class="box-title">
+			<div class="box-title-left">
+				<div class="box-title-right">
+					<h3 class="box-title-content" id="'. $this->toSlug($id) .'-title-content">'. $title .'</h3>
+				</div> <!-- class="box-title-right" -->
+			</div> <!-- class="box-title-left" -->
+		</div> <!-- class="box-title" -->
+		<div id="'. $this->toSlug($id) .'-content" class="box-content">
+		';
 		return $t_result;
 	}
 
@@ -177,10 +177,10 @@ class Theme extends Layout {
 	 */
 	function boxMiddle($title, $id = '') {
 		$t_result ='
-	        	</div> <!-- class="box-content" -->
-	        <h3 id="title-'. $this->toSlug($id).'" class="box-middle">'.$title.'</h3>
-	       	<div class="box-content">
-        ';
+			</div> <!-- class="box-content" -->
+		<h3 id="title-'. $this->toSlug($id).'" class="box-middle">'.$title.'</h3>
+		<div class="box-content">
+	';
 		return $t_result;
 	}
 
@@ -190,8 +190,8 @@ class Theme extends Layout {
 	 */
 	function boxBottom() {
 		$t_result='
-                </div> <!-- class="box-content" -->
-            </div> <!-- class="box-surround" -->
+		</div> <!-- class="box-content" -->
+	</div> <!-- class="box-surround" -->
 		';
 		return $t_result;
 	}
@@ -246,7 +246,7 @@ class Theme extends Layout {
 				$separ_img  = $folder.'separator.gif';
 				$css_class  = $nested ? 'bottomTab' : 'topTab';
 			}
-            
+
 			$clear_img = $this->imgurl.'clear.png';
 */
 			$return .= "\n";
@@ -259,7 +259,7 @@ class Theme extends Layout {
 			}
 			$return .= '>';
 			$return .= '<div';
-            
+
 			if ($nested) {
 				$return .= ' class="nested"';
 			}
@@ -306,12 +306,11 @@ class Theme extends Layout {
 		}
 
 		$return .= '</tr>
-        </table>
-        <!-- end tabs -->';
+	</table>
+	<!-- end tabs -->';
 
 		return $return;
 	}
-
 
 	/**
 	 * beginSubMenu() - Opening a submenu.
@@ -320,7 +319,7 @@ class Theme extends Layout {
 	 */
 	function beginSubMenu () {
 		$return = '
-            <p><strong>';
+	<p><strong>';
 		return $return;
 	}
 
@@ -364,7 +363,7 @@ class Theme extends Layout {
 	 */
 	function subMenu($title_arr, $links_arr, $attr_arr = false) {
 		$return  = $this->beginSubMenu();
-		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr) ;
+		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
 		$return .= $this->endSubMenu();
 		return $return;
 	}
@@ -383,7 +382,7 @@ class Theme extends Layout {
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {
 		$return= '
-        <tr class="ff" '.$row_attr;
+	<tr class="ff" '.$row_attr;
 		if ( $istitle ) {
 			$return .=' align="center"';
 		}
@@ -405,7 +404,7 @@ class Theme extends Layout {
 
 		}
 		$return .= '</tr>
-        ';
+	';
 
 		return $return;
 	}

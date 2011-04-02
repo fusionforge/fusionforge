@@ -3,6 +3,7 @@
  * FusionForge navigation
  *
  * Copyright 2009 - 2010, Olaf Lenz
+ * Copyright 2011, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -54,7 +55,7 @@ class Navigation extends Error {
 	function getTitle($params, $asHTML = true) {
 		if (!$asHTML) {
 			// get the title
-			if (!$params['title']) {
+			if (!isset($params['title'])) {
 				return forge_get_config('forge_name');
 			} else {
 				return forge_get_config('forge_name') . ': ' . $params['title'];
@@ -239,7 +240,7 @@ class Navigation extends Error {
 
 		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || forge_get_config('use_project_full_list')) {
 			$menu['titles'][] = _('Projects');
-			$menu['urls'][] = util_make_uri('/softwaremap/') ;
+			$menu['urls'][] = util_make_uri('/softwaremap/');
 			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -247,7 +248,7 @@ class Navigation extends Error {
 
 		if (forge_get_config('use_snippet')) {
 			$menu['titles'][] = _('Code&nbsp;Snippets');
-			$menu['urls'][] = util_make_uri('/snippet/') ;
+			$menu['urls'][] = util_make_uri('/snippet/');
 			if (strstr($request_uri, util_make_uri('/snippet/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -255,7 +256,7 @@ class Navigation extends Error {
 
 		if (forge_get_config('use_people')) {
 			$menu['titles'][] = _('Project&nbsp;Openings');
-			$menu['urls'][] = util_make_uri('/people/') ;
+			$menu['urls'][] = util_make_uri('/people/');
 			if (strstr($request_uri, util_make_uri('/people/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -281,14 +282,14 @@ class Navigation extends Error {
 		if (forge_check_global_perm('forge_admin')) {
 			$user_is_super = true;
 			$menu['titles'][] = _('Site Admin');
-			$menu['urls'][] = util_make_url('/admin/') ;
+			$menu['urls'][] = util_make_url('/admin/');
 			if (strstr($request_uri, util_make_uri('/admin/'))) {
 				$selected=count($menu['urls'])-1;
 			}
 		}
 		if (forge_check_global_perm ('forge_stats', 'read')) {
 			$menu['titles'][] = _('Reporting');
-			$menu['urls'][] = util_make_uri('/reporting/') ;
+			$menu['urls'][] = util_make_uri('/reporting/');
 			if (strstr($request_uri, util_make_uri('/reporting/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -358,175 +359,175 @@ class Navigation extends Error {
 
 			$menu['name'] = $group->getPublicName();
 
-                        // Summary
-                        $menu['titles'][] = _('Summary');
-                        if (isset($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-                                $url = util_make_uri('/project/?group_id=' . $group_id);
-                        } else {
-                                $url = util_make_uri('/projects/' . $group->getUnixName() .'/');
-                        }
-                        $menu['urls'][] = $url;
-                        $menu['adminurls'][] = false;
-                        if ($toptab == "home") {
-                                $selected = (count($menu['urls'])-1);
-                        }
+			// Summary
+			$menu['titles'][] = _('Summary');
+			if (isset($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
+				$url = util_make_uri('/project/?group_id=' . $group_id);
+			} else {
+				$url = util_make_uri('/projects/' . $group->getUnixName() .'/');
+			}
+			$menu['urls'][] = $url;
+			$menu['adminurls'][] = false;
+			if ($toptab == "home") {
+				$selected = (count($menu['urls'])-1);
+			}
 
-                        // setting these allows to change the initial project page
-                        $menu['starturl'] = $url;
+			// setting these allows to change the initial project page
+			$menu['starturl'] = $url;
 
-                        // Project Admin
-                        if (forge_check_perm ('project_admin', $group_id)) {
-                                $menu['titles'][] = _('Admin');
-                                $menu['urls'][] = util_make_uri('/project/admin/?group_id=' . $group_id);
-                                $menu['adminurls'][] = false;
-                                if ($toptab == "admin") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
-
-                        /* Homepage
-			 // check for use_home_tab?
-			 $TABS_DIRS[]='http://'. $this->getHomePage();
-			 $TABS_TITLES[]=_('Home Page');
-                        */
-
-                        // Project Activity tab
-                        $menu['titles'][] = _('Activity');
-                        $menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
-                        $menu['adminurls'][] = false;
-                        if ($toptab == "activity") {
-                                $selected = (count($menu['urls'])-1);
-                        }
-
-                        // Forums
-                        if ($group->usesForum()) {
-                                $menu['titles'][] = _('Forums');
-                                $menu['urls'][] = util_make_uri('/forum/?group_id=' . $group_id);
-                                if (forge_check_perm ('forum_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url('/forum/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "forums") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
-
-                        // Artifact Tracking
-                        if ($group->usesTracker()) {
-                                $menu['titles'][] = _('Tracker');
-                                $menu['urls'][] = util_make_uri('/tracker/?group_id=' . $group_id);
-                                if (forge_check_perm ('tracker_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "tracker" ||
-                                    $toptab == "bugs" ||
-                                    $toptab == "support" ||
-                                    $toptab == "patch") {
+			// Project Admin
+			if (forge_check_perm ('project_admin', $group_id)) {
+				$menu['titles'][] = _('Admin');
+				$menu['urls'][] = util_make_uri('/project/admin/?group_id=' . $group_id);
+				$menu['adminurls'][] = false;
+				if ($toptab == "admin") {
 					$selected = (count($menu['urls'])-1);
 				}
-                        }
+			}
 
-                        // Mailing Lists
-                        if ($group->usesMail()) {
-                                $menu['titles'][] = _('Lists');
-                                $menu['urls'][] = util_make_uri('/mail/?group_id=' . $group_id);
-                                if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_url('/mail/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "mail") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
+			/* Homepage
+			// check for use_home_tab?
+			$TABS_DIRS[]='http://'. $this->getHomePage();
+			$TABS_TITLES[]=_('Home Page');
+			*/
 
-                        // Project/Task Manager
-                        if ($group->usesPm()) {
-                                $menu['titles'][] = _('Tasks');
-                                $menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);
-                                if (forge_check_perm ('pm_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_uri('/pm/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "pm") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
+			// Project Activity tab
+			$menu['titles'][] = _('Activity');
+			$menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
+			$menu['adminurls'][] = false;
+			if ($toptab == "activity") {
+				$selected = (count($menu['urls'])-1);
+			}
 
-                        // Doc Manager
-                        if ($group->usesDocman()) {
-                                $menu['titles'][] = _('Docs');
-                                $menu['urls'][] = util_make_uri('/docman/?group_id=' . $group_id);
-                                if (forge_check_perm ('docman', $group_id, 'approve')) {
-                                        $menu['adminurls'][] = util_make_uri('/docman/?group_id='.$group_id.'&amp;view=admin');
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "docman") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
+			// Forums
+			if ($group->usesForum()) {
+				$menu['titles'][] = _('Forums');
+				$menu['urls'][] = util_make_uri('/forum/?group_id=' . $group_id);
+				if (forge_check_perm ('forum_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_url('/forum/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "forums") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
 
-                        // Surveys
-                        if ($group->usesSurvey()) {
-                                $menu['titles'][] = _('Surveys');
-                                $menu['urls'][] = util_make_uri('/survey/?group_id=' . $group_id);
-                                if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_uri('/survey/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "surveys") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
+			// Artifact Tracking
+			if ($group->usesTracker()) {
+				$menu['titles'][] = _('Tracker');
+				$menu['urls'][] = util_make_uri('/tracker/?group_id=' . $group_id);
+				if (forge_check_perm ('tracker_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "tracker" ||
+				$toptab == "bugs" ||
+				$toptab == "support" ||
+				$toptab == "patch") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
 
-                        // News
-                        if ($group->usesNews()) {
-                                $menu['titles'][] = _('News');
-                                $menu['urls'][] = util_make_uri('/news/?group_id=' . $group_id);
-                                if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_uri('/news/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "news") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
+			// Mailing Lists
+			if ($group->usesMail()) {
+				$menu['titles'][] = _('Lists');
+				$menu['urls'][] = util_make_uri('/mail/?group_id=' . $group_id);
+				if (forge_check_perm ('project_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_url('/mail/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "mail") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
 
-                        // SCM systems
-                        if ($group->usesSCM()) {
-                                $menu['titles'][] = _('SCM');
-                                $menu['urls'][] = util_make_uri('/scm/?group_id=' . $group_id);
-                                // eval cvs_flags?
-                                if (forge_check_perm ('project_admin', $group_id)) {
-                                        $menu['adminurls'][] = util_make_uri('/scm/admin/?group_id='.$group_id);
-                                } else {
-                                        $menu['adminurls'][] = false;
-                                }
-                                if ($toptab == "scm") {
-                                        $selected = (count($menu['urls'])-1);
-                                }
-                        }
+			// Project/Task Manager
+			if ($group->usesPm()) {
+				$menu['titles'][] = _('Tasks');
+				$menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);
+				if (forge_check_perm ('pm_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_uri('/pm/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "pm") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
 
-                        // groupmenu_after_scm hook
-                        $hookParams = array();
-                        $hookParams['group_id'] = $group_id ;
-                        $hookParams['DIRS'] =& $menu['urls'];
-                        $hookParams['TITLES'] =& $menu['titles'];
-                        $hookParams['toptab'] =& $toptab;
-                        $hookParams['selected'] =& $selected;
-                        plugin_hook ("groupmenu_scm", $hookParams) ;
+			// Doc Manager
+			if ($group->usesDocman()) {
+				$menu['titles'][] = _('Docs');
+				$menu['urls'][] = util_make_uri('/docman/?group_id=' . $group_id);
+				if (forge_check_perm ('docman', $group_id, 'approve')) {
+					$menu['adminurls'][] = util_make_uri('/docman/?group_id='.$group_id.'&amp;view=admin');
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "docman") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
 
-                        // fill up adminurls
-                        for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
-                                $menu['adminurls'][] = false;
-                        }
+			// Surveys
+			if ($group->usesSurvey()) {
+				$menu['titles'][] = _('Surveys');
+				$menu['urls'][] = util_make_uri('/survey/?group_id=' . $group_id);
+				if (forge_check_perm ('project_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_uri('/survey/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "surveys") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
+
+			// News
+			if ($group->usesNews()) {
+				$menu['titles'][] = _('News');
+				$menu['urls'][] = util_make_uri('/news/?group_id=' . $group_id);
+				if (forge_check_perm ('project_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_uri('/news/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "news") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
+
+			// SCM systems
+			if ($group->usesSCM()) {
+				$menu['titles'][] = _('SCM');
+				$menu['urls'][] = util_make_uri('/scm/?group_id=' . $group_id);
+				// eval cvs_flags?
+				if (forge_check_perm ('project_admin', $group_id)) {
+					$menu['adminurls'][] = util_make_uri('/scm/admin/?group_id='.$group_id);
+				} else {
+					$menu['adminurls'][] = false;
+				}
+				if ($toptab == "scm") {
+					$selected = (count($menu['urls'])-1);
+				}
+			}
+
+			// groupmenu_after_scm hook
+			$hookParams = array();
+			$hookParams['group_id'] = $group_id ;
+			$hookParams['DIRS'] =& $menu['urls'];
+			$hookParams['TITLES'] =& $menu['titles'];
+			$hookParams['toptab'] =& $toptab;
+			$hookParams['selected'] =& $selected;
+			plugin_hook ("groupmenu_scm", $hookParams);
+
+			// fill up adminurls
+			for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
+				$menu['adminurls'][] = false;
+			}
 
 			// Downloads
 			if ($group->usesFRS()) {
@@ -544,13 +545,13 @@ class Navigation extends Error {
 
 			// groupmenu hook
 			$hookParams = array();
-			$hookParams['group'] = $group_id ;
+			$hookParams['group'] = $group_id;
 			$hookParams['DIRS'] =& $menu['urls'];
 			$hookParams['ADMIN'] =& $menu['adminurls'];
 			$hookParams['TITLES'] =& $menu['titles'];
 			$hookParams['toptab'] =& $toptab;
 			$hookParams['selected'] =& $selected;
-			plugin_hook ("groupmenu", $hookParams) ;
+			plugin_hook("groupmenu", $hookParams);
 
 			// fill up adminurls
 			for ($i = 0; $i < count($menu['urls']) - count($menu['adminurls']); $i++) {
@@ -563,7 +564,7 @@ class Navigation extends Error {
 				$menu['last_toptab'] = $toptab;
 			}
 		}
-		return $this->project_menu_data[$group_id] ;
+		return $this->project_menu_data[$group_id];
 	}
 
 	/**
@@ -597,17 +598,17 @@ class Navigation extends Error {
 	 */
 	function getShowSource($asHTML=true) {
 		if (forge_get_config('show_source')) {
-                        $res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
-                        $res['title'] = _('Show source');
+			$res['url'] = util_make_url('/source.php?file='.getStringFromServer('SCRIPT_NAME'));
+			$res['title'] = _('Show source');
 		} else {
-                        return ($asHTML ? "" : NULL);
+			return ($asHTML ? "" : NULL);
 		}
-                if (!$asHTML) {
-                        return $res;
+		if (!$asHTML) {
+			return $res;
 		} else {
-                        return util_make_link($res['url'], $res['title'],
-                                              array('class' => 'showsource'),
-                                              true);
+			return util_make_link($res['url'], $res['title'],
+					array('class' => 'showsource'),
+					true);
 		}
 	}
 }
