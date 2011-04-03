@@ -55,7 +55,10 @@ export BUILDRESULT=$WORKSPACE/build/packages
 mkdir -p $WORKSPACE/build/packages $WORKSPACE/build/config $WORKSPACE/reports/coverage $WORKSPACE/apidocs
 
 [ ! -e $HOME/doxygen-1.6.3/bin/doxygen ] || make build-doc DOCSDIR=$WORKSPACE/apidocs DOXYGEN=$HOME/doxygen-1.6.3/bin/doxygen
+
 make BUILDRESULT=$WORKSPACE/build/packages buildtar
+
+make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages src
 
 (cd 3rd-party/selenium ; make getselenium)
 

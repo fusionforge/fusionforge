@@ -32,6 +32,7 @@ list:
 	@cat Makefile.rh | grep '^.*:.*#$$' | sed 's/^\(.*:\).*#\(.*\)#$$/\1		\2/'
 
 all: 3rd-party fusionforge dist
+src: 3rd-party dist
 
 rpmprep:
 	-rm -Rf $(RPM_TMP)/*
