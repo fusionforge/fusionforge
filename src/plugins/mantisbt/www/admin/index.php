@@ -62,5 +62,4 @@ switch ($view) {
 		break;
 	}
 }
-
 ?>

@@ -2,6 +2,7 @@
  * MantisBT Plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -43,6 +44,17 @@ MantisBTInitUserController = function(params)
 		this.initTipsy();
 	}
 };
+
+MantisBTAdminViewController = function(params)
+{
+	this.params	= params;
+
+	if ( typeof(jQuery(window).tipsy) == 'function') {
+		this.initTipsy();
+	}
+	this.bindControls();
+};
+
 
 MantisBTInitController.prototype =
 {
@@ -103,6 +115,42 @@ MantisBTInitUserController.prototype =
 						  delayIn: el.options.delayIn,
 						  delayOut: el.options.delayOut,
 						  fade: el.options.fade});
+		}
+	},
+}
+
+MantisBTAdminViewController.prototype =
+{
+	/*! Binds the controls to the actions
+	 */
+	bindControls: function() {
+		if (typeof(this.params.checkboxGlobalConf) != "undefined") {
+			this.params.checkboxGlobalConf.click(jQuery.proxy(this, "toggleAllInput"));
+		}
+	},
+
+	/*! initializes tipsy
+	*/
+	initTipsy: function() {
+		for(var i = 0; i < this.params.tipsyElements.length; i++) {
+			var el = this.params.tipsyElements[i];
+			jQuery(el.selector).tipsy({
+				gravity: el.options.gravity,
+						  delayIn: el.options.delayIn,
+						  delayOut: el.options.delayOut,
+						  fade: el.options.fade});
+		}
+	},
+
+	toggleAllInput: function() {
+		if (!this.params.checkboxGlobalConf.is(":checked")) {
+			this.params.inputUrl.attr('disabled',false);
+			this.params.inputUser.attr('disabled',false);
+			this.params.inputPassword.attr('disabled',false);
+		} else {
+			this.params.inputUrl.attr('disabled',true);
+			this.params.inputUser.attr('disabled',true);
+			this.params.inputPassword.attr('disabled',true);
 		}
 	},
 }

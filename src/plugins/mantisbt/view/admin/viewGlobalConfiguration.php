@@ -27,6 +27,27 @@ global $mantisbt;
 global $mantisbtGlobalConf;
 global $use_tooltips;
 
+?>
+<script type="text/javascript">
+var controller;
+
+jQuery(document).ready(function() {
+	controllerMantisBTAdminViewControler = new MantisBTAdminViewController({
+		tipsyElements:		[
+						{selector: '#mantisbtinit-url', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#mantisbtinit-user', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#mantisbtinit-password', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#mantisbtinit-syncroles', options:{gravity: 'w', delayIn: 500, delayOut: 0, fade: true}},
+					],
+		inputUrl:		jQuery('#mantisbturl'),
+		inputUser:		jQuery('#mantisbtuser'),
+		inputPassword:		jQuery('#mantisbtpassword'),
+	});
+});
+
+</script>
+<?
+
 echo $HTML->boxTop(_('Manage Global configuration'));
 echo '<form method="POST" Action="?type=admin&pluginname='.$mantisbt->name.'&action=updateGlobalConf">';
 echo '<table>';
@@ -44,7 +65,7 @@ if ($use_tooltips)
 echo ' >SOAP Password</label></td><td><input type="text" size="50" maxlength="255" name="soap_password" value="'.$mantisbtGlobalConf['soap_password'].'" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-syncroles" ';
 if ($use_tooltips)
-	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ?').'"';
+	echo 'title="'._('Do you want to sync FusionForge -> MantisBT roles ? Not implemented yet.').'"';
 echo ' >Sync Roles</label></td><td><input disabled="disabled" type="checkbox" name="sync_roles" /></td></tr>';
 echo '</table>';
 echo '<input type="submit" value="'._('Update').'" />';

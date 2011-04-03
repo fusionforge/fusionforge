@@ -664,11 +664,12 @@ class MantisBTPlugin extends Plugin {
 	 * @return	bool	success or not
 	 */
 	function updateConf($group_id, $confArr) {
-		$result = db_query_params('update plugin_mantisbt set url = $1 , soap_user = $2, soap_password = $3
-						where id_group = $4',
+		$result = db_query_params('update plugin_mantisbt set url = $1 , soap_user = $2, soap_password = $3, use_global = $4
+						where id_group = $5',
 					array($confArr['url'],
 						$confArr['soap_user'],
 						$confArr['soap_password'],
+						$confArr['global_conf'],
 						$group_id));
 		if (!$result)
 			return false;
