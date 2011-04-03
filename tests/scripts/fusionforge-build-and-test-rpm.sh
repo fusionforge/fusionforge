@@ -111,7 +111,7 @@ fi
 
 if [ "x$SELENIUM_RC_DIR" != "x" ]
 then
-	scp -r root@$HOST:/var/log/ $SELENIUM_RC_DIR
+	rsync -av root@$HOST:/var/log/ $SELENIUM_RC_DIR/
 fi
 cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
 xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
