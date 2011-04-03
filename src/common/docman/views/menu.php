@@ -60,7 +60,7 @@ jQuery(document).ready(function() {
 });
 
 </script>
-<?
+<?php
 
 $menu_text[] = _('List files & Directories');
 $menu_links[] = '/docman/?group_id='.$group_id.'&view=listfile&dirid=0';
