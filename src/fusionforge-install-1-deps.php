@@ -132,6 +132,7 @@ gpgcheck = 0';
 	file_put_contents('/etc/yum.repos.d/fusionforge.repo', $repo);
 }
 function addDagRPMForgeYumRepo() {
+	if(!is_file(/etc/yum.repos.d/dag-rpmforge.repo)){
 	INFO("Adding Dag RPMForge YUM repository\n");
 	$repo = '
 # Name: RPMforge RPM Repository for Red Hat Enterprise 5 - dag
@@ -144,6 +145,7 @@ enabled = 1
 protect = 0
 gpgcheck = 0';
 	file_put_contents('/etc/yum.repos.d/dag-rpmforge.repo', $repo);
+	}
 }
 
 if (count($argv) < 2) {
