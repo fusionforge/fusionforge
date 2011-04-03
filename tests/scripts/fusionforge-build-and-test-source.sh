@@ -59,10 +59,6 @@ make BUILDRESULT=$WORKSPACE/build/packages buildtar
 
 (cd 3rd-party/selenium ; make getselenium)
 
-cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
-sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
-sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" $WORKSPACE/build/packages/fusionforge.repo
-
 if $KEEPVM
 then
 	echo "Destroying vm $HOST"
@@ -70,6 +66,15 @@ then
 fi
 
 (cd tests/scripts ; ./start_vm.sh $HOST)
+
+# FUSIONFORGE REPO
+cp src/rpm-specific/fusionforge.repo $WORKSPACE/build/packages/fusionforge.repo
+sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" $WORKSPACE/build/packages/fusionforge.repo
+if [ ! -z "$FFORGE_RPM_REPO" ]
+then
+	sed -i "s#baseurl = .*#baseurl = ${FFORGE_RPM_REPO}/#" $WORKSPACE/build/packages/fusionforge.repo
+fi
+scp $WORKSPACE/build/packages/fusionforge.repo root@$HOST:/etc/yum.repos.d/
 
 # DAG
 cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo

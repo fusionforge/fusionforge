@@ -112,6 +112,7 @@ function installArk() {
 }
 
 function addFusionForgeYumRepo() {
+	if(!is_file("/etc/yum.repos.d/fusionforge.repo")){
 	INFO("Adding FusionForge YUM repository\n");
 
 	if (getenv('FFORGE_RPM_REPO')) {
@@ -130,6 +131,7 @@ enabled = 1
 protect = 0
 gpgcheck = 0';
 	file_put_contents('/etc/yum.repos.d/fusionforge.repo', $repo);
+	}
 }
 function addDagRPMForgeYumRepo() {
 	if(!is_file("/etc/yum.repos.d/dag-rpmforge.repo")){
