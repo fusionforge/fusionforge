@@ -120,7 +120,7 @@ use_javascript('/js/sortable.js');
 
 $title = _('Document Manager');
 
-site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman'));
+site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'docman'));
 
 echo '<div>';
 include ($gfcommon.'docman/views/menu.php');

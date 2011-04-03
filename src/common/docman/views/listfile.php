@@ -101,17 +101,22 @@ jQuery(document).ready(function() {
 		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
-		lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
+		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
+		divLeft:		jQuery('#left'),
+		divHandle:		jQuery('#handle'),
+		divRight:		jQuery('#right')
 	});
 });
 
 </script>
 
 <?php
-echo '<div style="float:left; width:17%; padding-right:3px; margin-right:2px; border-right: dashed 1px black;">';
+echo '<div id="left" "style="float:left; width:17%;">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
-echo '<div style="float:left; width:82%;">';
+echo '<div id="handle" style="float:left; height:100px; margin:1px; width:3px; background: #000;"></div>';
+echo '<div id="right" "style="float:left;">';
+echo '<div style="overflow:auto;">';
 if ($DocGroupName) {
 	echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $group_id, 'approve')) {
@@ -370,7 +375,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 } else {
 	echo '<p class="warning">'._('No documents to display').'</p>';
 }
-
+echo '</div>';
 echo '</div>';
 echo '<div style="clear:both"; />';
 ?>

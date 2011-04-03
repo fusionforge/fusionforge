@@ -31,17 +31,18 @@ DocManListFileController = function(params)
 	this.lockInterval	= [];
 	this.params		= params;
 
-	if ( typeof(jQuery(window).tipsy) == 'function') {
+	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
 	}
 	this.bindControls();
+	this.resizableDiv();
 };
 
 DocManAddItemController = function(params)
 {
 	this.params		= params;
 
-	if ( typeof(jQuery(window).tipsy) == 'function') {
+	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
 	}
 	this.bindControls();
@@ -51,7 +52,7 @@ DocManMenuController = function(params)
 {
 	this.params		= params;
 
-	if ( typeof(jQuery(window).tipsy) == 'function') {
+	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
 	}
 };
@@ -64,6 +65,24 @@ DocManListFileController.prototype =
 	{
 		this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
 		this.params.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
+	},
+
+	resizableDiv:function() {
+		this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
+		var params = this.params;
+		var w = jQuery('body').width() - 18;
+		jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
+			if (typeof(isDragging) != 'undefined') {
+				if (isDragging) {
+					params.divLeft.css('width', e.pageX);
+					params.divRight.css('width', w - e.pageX);
+				}
+			}
+		});
+	},
+
+	dragging: function() {
+		isDragging = true;
 	},
 
 	/*! initializes tipsy
