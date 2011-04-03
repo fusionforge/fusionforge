@@ -75,7 +75,7 @@ killall -9 java
 LANG=C java -jar selenium-server.jar -browserSessionReuse -singleWindow >/dev/null &
 #LANG=C java -jar selenium-server.jar -singleWindow >/dev/null &
 cd tests
-phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml $testsuite || retcode=$?
+phpunit --log-junit $SELENIUM_RC_DIR/phpunit-selenium.xml $testsuite || retcode=$?
 cd ..
 # on debian
 killall -9 firefox-bin
