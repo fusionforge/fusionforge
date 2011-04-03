@@ -99,7 +99,7 @@ do
 
 	if [ $ret -ne 0 ];then
 		echo -n $loop
-		sleep 10;
+		sleep 20;
 		ssh -o 'StrictHostKeyChecking=no' "root@$HOST" uname -a
 		ret=$?
 	fi
