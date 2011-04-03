@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -29,8 +30,10 @@ $confArr['mantisbt_user'] = getStringFromRequest('mantisbt_user');
 $confArr['mantisbt_password'] = getStringFromRequest('mantisbt_password');
 $confArr['mantisbtcreate'] = getIntFromRequest('mantisbtcreate');
 
-if (!$mantisbt->initializeUser($confArr))
-	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&error_msg='.urlencode($group->getErrorMessage()));
+if (!$mantisbt->initializeUser($confArr)) {
+	$error_msg = _('Failed to initialize user.');
+	session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&error_msg='.urlencode($error_msg));
+}
 
 $feedback = _('MantisBT User successfully initialized.');
 session_redirect('/plugins/mantisbt/?type=user&pluginname='.$mantisbt->name.'&feedback='.urlencode($feedback));
