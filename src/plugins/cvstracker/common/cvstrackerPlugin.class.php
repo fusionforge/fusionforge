@@ -42,6 +42,13 @@ class cvstrackerPlugin extends Plugin {
 		$this->hooks[] = "get_cvs_loginfo_lines";
 	}
 
+	function groupisactivecheckbox (&$params) {
+		$group = group_get_object($params['group']);
+		if ($group->usesPlugin('scmcvs')) {
+			parent::groupisactivecheckbox($params);
+		}
+	}
+
 	/**
 	* It display a table with commit related to this tracker or task_extra_detail
 	*
@@ -259,34 +266,9 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function CallHook ($hookname, &$params) {
-		global $group_id, $G_SESSION, $HTML, $use_cvstrackerplugin,$aid ;
-		$use_cvstrackerplugin = getIntFromRequest('use_cvstrackerplugin');
-		if ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			$group = group_get_object($group_id);
-			if ($group->usesPlugin('scmcvs')) {
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="checkbox" name="use_cvstrackerplugin" value="1" ';
-				// checked or unchecked?
-				if ( $group->usesPlugin ( $this->name ) ) {
-					echo "checked";
-				}
-				echo "><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<strong>Use ".$this->text." Plugin</strong>";
-				echo "</td>";
-				echo "</tr>";
-			}
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			$group = group_get_object($group_id);
-			if ( $use_cvstrackerplugin == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "artifact_extra_detail") {
+		global $group_id, $G_SESSION, $HTML, $aid ;
+
+		if ($hookname == "artifact_extra_detail") {
 			$DBResult = db_query_params ('SELECT * FROM plugin_cvstracker_data_master,plugin_cvstracker_data_artifact WHERE plugin_cvstracker_data_artifact.group_artifact_id=$1 AND plugin_cvstracker_data_master.holder_id=plugin_cvstracker_data_artifact.id ORDER BY cvs_date',
 						     array ($aid)) ;
 			$this->getCommitEntries($DBResult, $group_id);
