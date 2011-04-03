@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 });
 
 </script>
-<?
+<?php
 
 echo $HTML->boxTop(_('Manage configuration'));
 echo '<form method="POST" Action="?type=admin&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&action=updateConf">';

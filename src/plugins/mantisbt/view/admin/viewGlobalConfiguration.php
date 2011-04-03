@@ -3,6 +3,7 @@
  * MantisBT plugin
  *
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -46,7 +47,7 @@ jQuery(document).ready(function() {
 });
 
 </script>
-<?
+<?php
 
 echo $HTML->boxTop(_('Manage Global configuration'));
 echo '<form method="POST" Action="?type=admin&pluginname='.$mantisbt->name.'&action=updateGlobalConf">';
