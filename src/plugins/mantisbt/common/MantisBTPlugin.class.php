@@ -38,10 +38,6 @@ class MantisBTPlugin extends Plugin {
 		$this->_addHook('userisactivecheckbox'); // The "use ..." checkbox in user account
 		$this->_addHook('userisactivecheckboxpost'); //
 		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
-		$this->_addHook('change_cal_permission');
-		$this->_addHook('change_cal_mail');
-		$this->_addHook('add_cal_link_father');
-		$this->_addHook('del_cal_link_father');
 		$this->_addHook('group_delete');
 		$this->_addHook('group_update');
 		$this->_addHook('site_admin_option_hook');
@@ -113,34 +109,6 @@ class MantisBTPlugin extends Plugin {
 			}
 			case "site_admin_option_hook": {
 				echo '<li>'.util_make_link("/plugins/mantisbt/?type=globaladmin&pluginname=".$this->name,_('Global MantisBT admin')).'</li>';
-				$returned = true;
-				break;
-			}
-			case "change_cal_permission": {
-				// mise a jour des utilisateurs avec les roles
-				$group_id = $params[1];
-				$group = group_get_object($group_id);
-				$members = array();
-				foreach($group->getMembers() as $member){
-					$members[] = $member->data_array['user_name'];
-				}
-				$this->updateUsersProjetMantis($group->data_array['group_id'],$members);
-				break;
-			}
-			// mise a jour de l'adresse mail utilisateur
-			case "change_cal_mail": {
-				$user_id = $params[1];
-				// before activate this, please fix updateUserInMantis
-				//$this->updateUserInMantis($user_id);
-				$returned = true;
-				break;
-			}
-			case "add_cal_link_father":
-			case "del_cal_link_father": {
-				$sub_group_id = $params[0];
-				$group_id = $params[1];
-				// before activate this, please fix refreshHierarchyMantisBt
-				//$this->refreshHierarchyMantisBt();
 				$returned = true;
 				break;
 			}
@@ -235,8 +203,12 @@ class MantisBTPlugin extends Plugin {
 				$groupObject->setError('removeProjetMantis:: ' . _('No project found in MantisBT') . ' ' .$localMantisbtConf['id_mantisbt']);
 				return false;
 			} else {
-				db_query_params('DELETE FROM plugin_mantisbt WHERE id_mantisbt = $1',
+				$res = db_query_params('DELETE FROM plugin_mantisbt WHERE id_mantisbt = $1',
 						array($localMantisbtConf['id_mantisbt']));
+				if (!$res) {
+					$groupObject->setError('removeProjetMantis:: ' . _('Cannot delete in database') . ' ' .$localMantisbtConf['id_mantisbt']);
+					return false;
+				}
 			}
 			return true;
 		}
@@ -298,171 +270,6 @@ class MantisBTPlugin extends Plugin {
 			return true;
 		}else{
 			return false;
-		}
-	}
-
-	function updateUserInMantis($user_id) {
-		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
-		// recuperation du nouveau mail
-		$resUser = db_query_params('SELECT user_name, email FROM users WHERE user_id = $1',array($user_id));
-		echo db_error();
-		$row = db_fetch_array($resUser);
-
-		// WONT WORK : db_connect_host is not in any fusionforge api
-		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-		if(!$dbConnection){
-			$errMantis1 = "Error : Could not open connection" . db_error($dbConnection);
-			echo $errMantis1;
-			db_rollback($dbConnection);
-		} else {
-			db_query_params('UPDATE mantis_user_table set email = $1 where username = $2',array($row['email'],$row['user_name']),'-1','0',$dbConnection);
-			echo db_error($dbConnection);
-		}
-	}
-
-	/**
-	 * updateUsersProjectMantis - inject Username in mantisbt for specific project
-	 *
-	 * @param	int	Group Id
-	 * @param	array	Unix username array
-	 * @return	boolean	success or not
-	 */
-	function updateUsersProjectMantis($groupId, $members) {
-		$groupObject = group_get_object($groupId);
-		$returned = false;
-		global $role;
-
-		// @TODO put that in config file ?
-		if ($role == null){
-			$role['Manager'] = 70;
-			$role['Concepteur'] = 55;
-			$role['Collaborateur'] = 55;
-			$role['Rapporteur'] = 55;
-		}
-
-		// @TODO : make a robust function there based on RBAC ?
-		$stateForge = array();
-		foreach ($members as $key => $member){
-			$resUserRole = db_query_params('SELECT role.role_name
-							FROM role, user_group, users
-							WHERE users.user_name = $1
-							AND ( user_group.user_id = users.user_id AND user_group.group_id = $2 )
-							AND user_group.role_id = role.role_id',
-							array($member, $groupObject->getID()));
-			if (!$resUserRole) {
-				$groupObject->setError('updateUsersProjectMantis::'. _('Error : Cannot retrieve information about role') . ' ' .db_error());
-				return $returned;
-			} else {
-				$row = db_fetch_array($resUserRole);
-				$stateForge[$member]['name'] = $member;
-				$stateForge[$member]['role'] = $row['role_name'];
-			}
-		}
-
-		if ($this->__getDBType() === "pgsql") {
-			if ($this->__updateUsersProjectMantisPgsql($groupObject->getID(), $stateForge)) {
-				$returned = true;
-			}
-		}
-		return $returned;
-	}
-
-
-
-	function refreshHierarchyMantisBt(){
-		global $sys_mantisbt_host, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_db_port, $sys_mantisbt_db_name;
-
-		$hierarchies=db_query_params('SELECT project_id, sub_project_id FROM plugin_projects_hierarchy WHERE activated=true',array());
-		echo db_error();
-		// WONT WORK : db_connect_host is not in any fusionforge api
-		$dbConnection = db_connect_host($sys_mantisbt_db_name, $sys_mantisbt_db_user, $sys_mantisbt_db_password, $sys_mantisbt_host, $sys_mantisbt_db_port);
-		if(!$dbConnection){
-			db_rollback($dbConnection);
-			return false;
-		}
-
-		db_begin($dbConnection);
-		db_query_params('TRUNCATE TABLE mantis_project_hierarchy_table', array() , '-1', 0, $dbConnection);
-		while ($hierarchy = db_fetch_array($hierarchies)) {
-			$result = db_query_params ('INSERT INTO mantis_project_hierarchy_table (child_id, parent_id, inherit_parent) VALUES ($1, $2, $3)',
-						array (getIdProjetMantis($hierarchy['sub_project_id']), getIdProjetMantis($hierarchy['project_id']), 1),
-						'-1',
-						0,
-						$dbConnection);
-
-			if (!$result) {
-				$this->setError(_('Insert Failed') . db_error($dbConnection));
-				db_rollback($dbConnection);
-				return false;
-			}
-		}
-
-		db_commit($dbConnection);
-		pg_close($dbConnection);
-		return true;
-	}
-
-	/**
-	 * __updateUsersProjectMantisPgsql - update Users for this project in PostgreSQL DB
-	 *
-	 * @param	int	this Group Id
-	 * @param	array	the role of this forge
-	 * @return	boolean	success or not
-	 * @private
-	 */
-	function __updateUsersProjectMantisPgsql($groupId, $stateForge) {
-		$groupObject = group_get_object($groupId);
-		$returned = false;
-		// WONT WORK : db_connect_host is not in any fusionforge api
-		$dbConnection = db_connect_host(forge_get_config('db_name','mantisbt'), forge_get_config('db_user','mantisbt'), forge_get_config('db_password','mantisbt'), forge_get_config('db_host','mantisbt'), forge_get_config('db_port','mantisbt'));
-		if(!$dbConnection) {
-			$groupObject->setError('updateUsersProjectMantis::'. _('Error : Could not open connection') . db_error($dbConnection));
-			db_rollback($dbConnection);
-		} else {
-			$idMantis = getIdProjetMantis($groupId);
-			$result = pg_delete($dbConnection,"mantis_project_user_list_table",array("project_id"=>$idMantis));
-			if (!$result){
-				echo 'updateUsersProjectMantis::Error '. _('Unable to clean roles in Mantisbt');
-			}else{
-				foreach($stateForge as $member => $array){
-
-					$resultIdUser = db_query_params('SELECT mantis_user_table.id FROM mantis_user_table WHERE mantis_user_table.username = $1',
-								array($member), '-1', 0, $dbConnection);
-
-					$rowIdUser = db_fetch_array($resultIdUser);
-					$idUser = $rowIdUser['id'];
-
-					$resultInsert = pg_insert($dbConnection,
-									"mantis_project_user_list_table",
-									array("project_id" => $idMantis, "user_id" => $idUser, "access_level" => $role[$array['role']])
-								);
-					if (!isset($resultInsert)) {
-						echo 'updateUsersProjectMantis::Error '. _('Unable to update roles in mantisbt');
-					} else {
-						$returned = true;
-					}
-				}
-			}
-		}
-		return $returned;
-	}
-
-	/**
-	 * __getDBType - return the type of DB used for mantisbt
-	 *
-	 * @return	string	type of the DB
-	 * @private
-	 */
-	function __getDBType() {
-		switch (forge_get_config('db_name','mantisbt')) {
-			case "pgsql": {
-				return "pgsql";
-				break;
-			}
-			default: {
-				return false;
-				break;
-			}
 		}
 	}
 
