@@ -103,18 +103,19 @@ if $REMOTESELENIUM
 then
 	echo "Run phpunit test on $HOST"
 	ssh -X root@$HOST "tests/scripts/phpunit.sh RPMCentos52Tests.php"
-	scp root@$HOST:reports/* $WORKSPACE/reports/
 else
 	cd tests
 	phpunit --log-junit $WORKSPACE/reports/phpunit-selenium.xml RPMCentos52Tests.php || retcode=$?
 	cd ..
-	if [ "x$SELENIUM_RC_DIR" != "x" ]
-	then
-		scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
-	fi
-	cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
-	xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
 fi
+
+if [ "x$SELENIUM_RC_DIR" != "x" ]
+then
+	scp -r root@$HOST:/var/log $SELENIUM_RC_DIR
+fi
+cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
+xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
+
 if $KEEPVM 
 then
 	echo "Keeping vm $HOST alive"
