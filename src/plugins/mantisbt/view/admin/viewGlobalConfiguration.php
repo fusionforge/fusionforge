@@ -25,8 +25,9 @@
 
 global $HTML;
 global $mantisbt;
-global $mantisbtGlobalConf;
 global $use_tooltips;
+
+$mantisbtGlobalConf = $mantisbt->getGlobalconf();
 
 ?>
 <script type="text/javascript">
@@ -49,8 +50,8 @@ jQuery(document).ready(function() {
 </script>
 <?php
 
-echo $HTML->boxTop(_('Manage Global configuration'));
-echo '<form method="POST" Action="?type=admin&pluginname='.$mantisbt->name.'&action=updateGlobalConf">';
+echo $HTML->boxTop(_('Manage configuration'));
+echo '<form method="POST" Action="?type=globaladmin&pluginname='.$mantisbt->name.'&action=updateGlobalConf">';
 echo '<table>';
 echo '<tr><td><label id="mantisbtinit-url" ';
 if ($use_tooltips)

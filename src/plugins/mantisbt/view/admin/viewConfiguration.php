@@ -57,7 +57,11 @@ echo '<table>';
 echo '<tr><td><label id="mantisbtinit-global" ';
 if ($use_tooltips)
 	echo 'title="'._('Use the global configuration defined at forge level').'"';
-echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" /></td></tr>';
+echo ' >'._('Use global configuration').'</label></td><td><input id="mantisbtglobalconf" type="checkbox" name="global_conf" ';
+if ($mantisbtConf['use_global']) {
+	echo 'checked="checked" ';
+}
+echo '/></td></tr>';
 echo '<tr><td><label id="mantisbtinit-url" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the Full URL of the MantisBT Web Server.').'"';

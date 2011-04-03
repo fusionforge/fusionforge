@@ -53,8 +53,17 @@ MantisBTAdminViewController = function(params)
 		this.initTipsy();
 	}
 	this.bindControls();
+	this.initCheckboxGlobalConf();
 };
 
+MantisBTMenuControler = function(params)
+{
+	this.params	= params;
+
+	if ( typeof(jQuery(window).tipsy) == 'function') {
+		this.initTipsy();
+	}
+};
 
 MantisBTInitController.prototype =
 {
@@ -129,6 +138,20 @@ MantisBTAdminViewController.prototype =
 		}
 	},
 
+	initCheckboxGlobalConf: function() {
+		if (typeof(this.params.checkboxGlobalConf) != "undefined") {
+			if (!this.params.checkboxGlobalConf.is(":checked")) {
+				this.params.inputUrl.attr('disabled',false);
+				this.params.inputUser.attr('disabled',false);
+				this.params.inputPassword.attr('disabled',false);
+			} else {
+				this.params.inputUrl.attr('disabled',true);
+				this.params.inputUser.attr('disabled',true);
+				this.params.inputPassword.attr('disabled',true);
+			}
+		}
+	},
+
 	/*! initializes tipsy
 	*/
 	initTipsy: function() {
@@ -151,6 +174,22 @@ MantisBTAdminViewController.prototype =
 			this.params.inputUrl.attr('disabled',true);
 			this.params.inputUser.attr('disabled',true);
 			this.params.inputPassword.attr('disabled',true);
+		}
+	},
+}
+
+MantisBTMenuControler.prototype =
+{
+	/*! initializes tipsy
+	*/
+	initTipsy: function() {
+		for(var i = 0; i < this.params.tipsyElements.length; i++) {
+			var el = this.params.tipsyElements[i];
+			jQuery(el.selector).tipsy({
+				gravity: el.options.gravity,
+						  delayIn: el.options.delayIn,
+						  delayOut: el.options.delayOut,
+						  fade: el.options.fade});
 		}
 	},
 }

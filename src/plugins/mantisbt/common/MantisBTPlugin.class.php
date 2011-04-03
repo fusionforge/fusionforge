@@ -4,6 +4,7 @@
  *
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2009-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -490,10 +491,18 @@ class MantisBTPlugin extends Plugin {
 
 		$row = db_fetch_array($resIdProjetMantis);
 		$mantisbtConfArray['id_mantisbt'] = $row['id_mantisbt'];
-		$mantisbtConfArray['url'] = $row['url'];
-		$mantisbtConfArray['soap_user'] = $row['soap_user'];
-		$mantisbtConfArray['soap_password'] = $row['soap_password'];
 		$mantisbtConfArray['sync_roles'] = $row['sync_roles'];
+		$mantisbtConfArray['use_global'] = $row['use_global'];
+		if ($mantisbtConfArray['use_global']) {
+			$mantisbtGlobConf = $this->getGlobalconf();
+			$mantisbtConfArray['url'] = $mantisbtGlobConf['url'];
+			$mantisbtConfArray['soap_user'] = $mantisbtGlobConf['soap_user'];
+			$mantisbtConfArray['soap_password'] = $mantisbtGlobConf['soap_password'];
+		} else {
+			$mantisbtConfArray['url'] = $row['url'];
+			$mantisbtConfArray['soap_user'] = $row['soap_user'];
+			$mantisbtConfArray['soap_password'] = $row['soap_password'];
+		}
 		return $mantisbtConfArray;
 	}
 
@@ -767,6 +776,33 @@ class MantisBTPlugin extends Plugin {
 	}
 
 	/**
+	 * updateGlobalConf - update the global configuration in database
+	 *
+	 * @param	array	configuration array (url, soap_user, soap_password)
+	 * @return	bool	true on success
+	 */
+	function updateGlobalConf($confArr) {
+		if (!isset($confArr['url']) || !isset($confArr['soap_user']) || !isset($confArr['soap_password']))
+			return false;
+
+		$res = db_query_params('truncate plugin_mantisbt_global',array());
+		if (!$res)
+			return false;
+
+		$res = db_query_params('insert into plugin_mantisbt_global (url, soap_user, soap_password)
+					values ($1, $2, $3)',
+					array(
+						$confArr['url'],
+						$confArr['soap_user'],
+						$confArr['soap_password'],
+					));
+		if (!$res)
+			return false;
+
+		return true;
+	}
+
+	/**
 	 * getGlobalAdminView - display the Global Admin View
 	 *
 	 * @return	bool	true
@@ -775,8 +811,7 @@ class MantisBTPlugin extends Plugin {
 		global $gfplugins;
 		$user = session_get_user();
 		$use_tooltips = $user->usesTooltips();
-		$mantisbtGlobalConf = $this->getGlobalconf();
-		require_once $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
+		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
 }

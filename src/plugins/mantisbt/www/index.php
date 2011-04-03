@@ -5,6 +5,7 @@
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2010, Antoine Mercadal - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -317,6 +318,14 @@ switch ($type) {
 		break;
 	}
 	case 'globaladmin': {
+		$action = getStringFromRequest('action');
+		switch ($action) {
+			case 'updateGlobalConf': {
+				global $gfplugins;
+				include($gfplugins.$mantisbt->name.'/action/'.$action.'.php');
+				break;
+			}
+		}
 		$mantisbt->getHeader('globaladmin');
 		$mantisbt->getGlobalAdminView();
 		break;

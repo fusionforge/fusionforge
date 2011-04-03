@@ -3,6 +3,7 @@
  * Admin MantisBT page
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -28,6 +29,24 @@ global $username;
 global $password;
 global $use_tooltips;
 global $view;
+
+?>
+<script type="text/javascript">
+var controller;
+
+jQuery(document).ready(function() {
+	controlerMantisBTMenuControler = new MantisBTMenuControler({
+		tipsyElements:		[
+						{selector: '#roadmapView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#ticketView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#adminView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#statView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+					],
+	});
+});
+
+</script>
+<?php
 
 $mantisbt->getSubMenu($use_tooltips);
 

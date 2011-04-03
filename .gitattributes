@@ -1822,6 +1822,7 @@ src/plugins/mantisbt/action/init.php -text
 src/plugins/mantisbt/action/inituser.php -text
 src/plugins/mantisbt/action/renameCategory.php -text
 src/plugins/mantisbt/action/updateConf.php -text
+src/plugins/mantisbt/action/updateGlobalConf.php -text
 src/plugins/mantisbt/action/updateIssue.php -text
 src/plugins/mantisbt/action/updateNote.php -text
 src/plugins/mantisbt/action/updateVersion.php -text
