@@ -434,9 +434,9 @@ Description: Mediawiki plugin for FusionForge
  .
  This plugin allows each project to embed Mediawiki under a tab.
 
-Package: fusionforge
+Package: fusionforge-plugin-oauthprovider
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, php5-cli, liboauth-php, ${misc:Depends}
 Description: collaborative development tool - oauthprovider plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
