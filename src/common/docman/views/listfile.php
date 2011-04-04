@@ -111,12 +111,11 @@ jQuery(document).ready(function() {
 </script>
 
 <?php
-echo '<div id="left" "style="float:left; width:17%;">';
+echo '<div id="left" style="float:left; width:17%;">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 echo '<div id="handle" style="float:left; height:100px; margin:1px; width:3px; background: #000;"></div>';
-echo '<div id="right" "style="float:left;">';
-echo '<div style="overflow:auto;">';
+echo '<div id="right" style="float:left;">';
 if ($DocGroupName) {
 	echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $group_id, 'approve')) {
@@ -375,7 +374,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 } else {
 	echo '<p class="warning">'._('No documents to display').'</p>';
 }
-echo '</div>';
 echo '</div>';
 echo '<div style="clear:both"; />';
 ?>
