@@ -114,7 +114,7 @@ jQuery(document).ready(function() {
 echo '<div id="left" style="float:left; width:17%;">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
-echo '<div id="handle" style="float:left; height:100px; margin:1px; width:3px; background: #000;"></div>';
+echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
 echo '<div id="right" style="float:left;">';
 if ($DocGroupName) {
 	echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';

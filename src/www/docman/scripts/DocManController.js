@@ -36,6 +36,7 @@ DocManListFileController = function(params)
 	}
 	this.bindControls();
 	this.resizableDiv();
+	this.initHandlerSize();
 };
 
 DocManAddItemController = function(params)
@@ -79,6 +80,14 @@ DocManListFileController.prototype =
 				}
 			}
 		});
+	},
+
+	initHandlerSize:function() {
+		if (this.params.divLeft.height() > this.params.divRight.height()) {
+			this.params.divHandle.css('height', this.params.divLeft.height());
+		} else {
+			this.params.divHandle.css('height', this.params.divRight.height());
+		}
 	},
 
 	dragging: function() {
