@@ -70,7 +70,7 @@ DocManListFileController.prototype =
 	resizableDiv:function() {
 		this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
 		var params = this.params;
-		var w = jQuery('body').width() - 18;
+		var w = jQuery('maindiv').width() - 18;
 		jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
 			if (typeof(isDragging) != 'undefined') {
 				if (isDragging) {
@@ -103,7 +103,7 @@ DocManListFileController.prototype =
 
 	/*! toggle edit group view div visibility
 	 */
-	toggleEditDirectoryView: function() 
+	toggleEditDirectoryView: function()
 	{
 		if (!this.params.divEditDirectory.is(":visible"))
 		{
@@ -202,10 +202,10 @@ DocManListFileController.prototype =
 
 	computeDocumentsData: function() {
 		/*
-		TODO:  
+		TODO:
 		build the array in php is not dynamic, and clearly, this sucks.
 		It would be better to be able to ask JSON data containing the contents of a dir
-		etc. and compute this data with Javascript in order to build the table. 
+		etc. and compute this data with Javascript in order to build the table.
 		This will avoids to reload the page when you simply want to lock / remove / add a file etc.
 		*/
 	}
