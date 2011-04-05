@@ -77,9 +77,13 @@ DocManListFileController.prototype =
 				if (isDragging) {
 					params.divLeft.css('width', e.pageX);
 					params.divRight.css('width', w - e.pageX);
+					for (var i = 0; i< jQuery('.ThemeXPFolderText > a').length; i++) {
+						jQuery('.ThemeXPFolderText > a')[i]['href'] = jQuery('.ThemeXPFolderText > a')[i]['href'] + '&tree=' + params.divLeft.width();
+					}
 				}
 			}
 		});
+
 	},
 
 	initHandlerSize:function() {
@@ -87,6 +91,9 @@ DocManListFileController.prototype =
 			this.params.divHandle.css('height', this.params.divLeft.height());
 		} else {
 			this.params.divHandle.css('height', this.params.divRight.height());
+		}
+		if (this.params.treesize != 0) {
+			this.params.divLeft.css('width', this.params.treesize);
 		}
 	},
 
