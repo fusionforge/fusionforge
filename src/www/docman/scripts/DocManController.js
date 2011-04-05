@@ -71,7 +71,7 @@ DocManListFileController.prototype =
 	resizableDiv:function() {
 		this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
 		var params = this.params;
-		var w = jQuery('maindiv').width() - 18;
+		var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
 		jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
 			if (typeof(isDragging) != 'undefined') {
 				if (isDragging) {
