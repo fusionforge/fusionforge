@@ -114,6 +114,7 @@ plugins/coclico/codendi-specific/common/dao/include/DataAccessObject.class.php -
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccess -text
 plugins/coclico/codendi-specific/common/dao/include/diffDataAccessObject -text
 plugins/coclico/codendi-specific/env.inc.php -text
+plugins/coclico/codendi-specific/extendcodendi.py -text
 plugins/coclico/codendi-specific/www/include/plugins_utils.php -text
 plugins/coclico/soapadmin/README.txt -text
 plugins/coclico/soapadmin/bin/db-delete.pl -text svneol=unset#text/x-perl
