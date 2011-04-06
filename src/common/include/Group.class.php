@@ -323,7 +323,6 @@ class Group extends Error {
 			$res = db_query_params ('
 				INSERT INTO groups (
 					group_name,
-					is_public,
 					unix_group_name,
 					short_description,
 					http_domain,
@@ -337,9 +336,8 @@ class Group extends Error {
 					rand_hash,
                                         built_from_template
 				)
-				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
+				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)',
 						array (htmlspecialchars ($group_name),
-						       $is_public,
 						       $unix_name,
 						       htmlspecialchars($description),
 						       $unix_name.".".forge_get_config('web_host'),
@@ -349,7 +347,7 @@ class Group extends Error {
 						       $scm_box,
 						       htmlspecialchars($purpose),
 						       time(),
-						       $is_public,
+						       0,
 						       md5(util_randbytes()),
 						       $built_from_template)) ;
 			if (!$res || db_affected_rows($res) < 1) {
@@ -442,11 +440,10 @@ class Group extends Error {
 
 		$res = db_query_params ('
 			UPDATE groups
-			SET is_public=$1, type_id=$2,
-				unix_box=$3, http_domain=$4
-			WHERE group_id=$5',
-					array ($is_public,
-					       $type_id,
+			SET type_id=$1,
+				unix_box=$2, http_domain=$3
+			WHERE group_id=$4',
+					array ($type_id,
 					       $unix_box,
 					       $http_domain,
 					       $this->getID())) ;
@@ -458,9 +455,6 @@ class Group extends Error {
 		}
 
 		// Log the audit trail
-		if ($is_public != $this->isPublic()) {
-			$this->addHistory('is_public', $this->isPublic());
-		}
 		if ($type_id != $this->data_array['type_id']) {
 			$this->addHistory('type_id', $this->data_array['type_id']);
 		}
@@ -592,14 +586,13 @@ class Group extends Error {
 				use_scm=$9,
 				use_news=$10,
 				use_docman=$11,
-				is_public=$12,
-				new_doc_address=$13,
-				send_all_docs=$14,
-				use_ftp=$15,
-				use_tracker=$16,
-				use_frs=$17,
-				use_stats=$18
-			WHERE group_id=$19',
+				new_doc_address=$12,
+				send_all_docs=$13,
+				use_ftp=$14,
+				use_tracker=$15,
+				use_frs=$16,
+				use_stats=$17
+			WHERE group_id=$18',
 					array (htmlspecialchars($group_name),
 					       $homepage,
 					       htmlspecialchars($short_description),
@@ -611,7 +604,6 @@ class Group extends Error {
 					       $use_scm,
 					       $use_news,
 					       $use_docman,
-					       $is_public,
 					       $new_doc_address,
 					       $send_all_docs,
 					       $use_ftp,
@@ -780,7 +772,7 @@ class Group extends Error {
 	}
 
 	/**
-	 *	isPublic - Simply returns the is_public flag from the database.
+	 *	isPublic - Wrapper around RBAC to check if a project is anonymously readable
 	 *
 	 *	@return	boolean	is_public.
 	 */
@@ -2599,7 +2591,7 @@ class Group extends Error {
 			plugin_hook_by_reference ('clone_project_from_template', $params) ;
 		} else {
 			// Disable everything
-			$res = db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, is_public=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
+			$res = db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
 
 						array ($this->getID())) ;
 		}
