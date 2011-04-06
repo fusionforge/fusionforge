@@ -161,13 +161,12 @@ Your OpenID identifier: <input type="text" name="openid_identifier" />
 		parent::declareConfigVars();
 		
 		// Change vs default 
-		forge_define_config_item ('required', $this->name, 'yes');
+		forge_define_config_item ('required', $this->name, 'no');
 		forge_set_config_item_bool ('required', $this->name) ;
 
 		// Change vs default
-		forge_define_config_item ('sufficient', $this->name, 'yes');
+		forge_define_config_item ('sufficient', $this->name, 'no');
 		forge_set_config_item_bool ('sufficient', $this->name) ;
-	
 	}
 	
 	/**
