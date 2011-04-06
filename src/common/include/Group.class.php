@@ -785,7 +785,8 @@ class Group extends Error {
 	 *	@return	boolean	is_public.
 	 */
 	function isPublic() {
-		return $this->data_array['is_public'];
+		$ra = RoleAnonymous::getInstance() ;
+		return $ra->hasPermission('project_read', $this->getID());
 	}
 
 	/**
@@ -1654,13 +1655,11 @@ class Group extends Error {
 		$res = db_query_params ('DELETE FROM user_group WHERE group_id=$1', 
 					array ($this->getID())) ;
 
-		// unlink roles to this project
-		if ($this->isPublic()) {
-			$ra = RoleAnonymous::getInstance();
-			$rl = RoleLoggedIn::getInstance();
-			$ra->unlinkProject($this);
-			$rl->unlinkProject($this);
-		}
+		// unlink roles from this project
+		$ra = RoleAnonymous::getInstance();
+		$rl = RoleLoggedIn::getInstance();
+		$ra->unlinkProject($this);
+		$rl->unlinkProject($this);
 		// @todo : unlink all the other roles created in the project...
 
 		//

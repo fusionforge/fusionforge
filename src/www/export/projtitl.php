@@ -61,13 +61,7 @@ if ( !$group_id ) {
 //
 //  Add checks to see if they have perms to view this
 //
-if (!$group->isPublic()) {
-    if (!session_loggedin()) {
-        exit_permission_denied();
-    } elseif (!user_ismember($group_id)) {
-        exit_permission_denied();
-    }
-}
+session_require_perm ('project_read', $group_id);
 
 echo '<h1>Welcome to '.$group->getPublicName().' project!</h1>
 <p>';

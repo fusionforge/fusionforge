@@ -64,13 +64,10 @@ if ($group_id && $atid) {
 	//
 	//  Add checks to see if they have perms to view this
 	//
-	if (!$group->isPublic()) {
-		if (!session_loggedin()) {
-			endOnError('Permission Denied');
-			$errors = true;
-		} elseif (!user_ismember($group_id)) {
-			endOnError('Permission Denied');
-		}
+	;
+	if (!session_check_perm ('tracker', $atid)) {
+		endOnError('Permission Denied');
+		$errors = true;
 	}
 	//
 	//	Create the ArtifactType object
@@ -193,4 +190,10 @@ if ($group_id && $atid) {
 	displayError('Project ID or Artifact ID Not Set');
 	endDocument();
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

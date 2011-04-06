@@ -77,13 +77,7 @@ if ($group_id) {
 	if(!$group || !is_object ($group)) {
 		exit_no_group () ;
 	}
-	if (!$group->isPublic()) {
-		$perm =& $group->getPermission ();
-		
-		if (!$perm || !is_object($perm) || !$perm->isMember()) {
-			exit_no_group () ;
-		}
-	}
+	session_require_perm ('project_read', $group_id);
 
 	$contrib_id = getIntFromRequest ('contrib_id') ;
 	if ($contrib_id) {    // List only one particular contribution

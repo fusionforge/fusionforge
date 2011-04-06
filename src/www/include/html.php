@@ -726,10 +726,8 @@ function site_project_header($params) {
 		exit_error(sprintf(_('Project Problem: %s'),$project->getErrorMessage()),'home');
 	}
 
-	//group is private
-	if (!$project->isPublic()) {
-		session_require_perm ('project_read', $group_id);
-	}
+	// Check permissions in case of restricted access
+	session_require_perm ('project_read', $group_id);
 
 	//for dead projects must be member of admin project
 	if (!$project->isActive()) {
