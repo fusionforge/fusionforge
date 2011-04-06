@@ -3,6 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -36,7 +37,7 @@ DocManListFileController = function(params)
 	}
 	this.bindControls();
 	this.resizableDiv();
-	this.initHandlerSize();
+	this.initSize();
 };
 
 DocManAddItemController = function(params)
@@ -78,7 +79,11 @@ DocManListFileController.prototype =
 					params.divLeft.css('width', e.pageX);
 					params.divRight.css('width', w - e.pageX);
 					for (var i = 0; i< jQuery('.ThemeXPFolderText > a').length; i++) {
-						jQuery('.ThemeXPFolderText > a')[i]['href'] = jQuery('.ThemeXPFolderText > a')[i]['href'] + '&tree=' + params.divLeft.width();
+						if (!jQuery('.ThemeXPFolderText > a')[i]['href'].match('&tree')) {
+							jQuery('.ThemeXPFolderText > a')[i]['href'] = jQuery('.ThemeXPFolderText > a')[i]['href'] + '&tree=' + params.divLeft.width();
+						} else {
+							jQuery('.ThemeXPFolderText > a')[i]['href'] = jQuery('.ThemeXPFolderText > a')[i]['href'].replace(/&tree=[0-9]*$/,'&tree='+params.divLeft.width())
+						}
 					}
 				}
 			}
@@ -86,14 +91,14 @@ DocManListFileController.prototype =
 
 	},
 
-	initHandlerSize:function() {
+	initSize:function() {
 		if (this.params.divLeft.height() > this.params.divRight.height()) {
 			this.params.divHandle.css('height', this.params.divLeft.height());
 		} else {
 			this.params.divHandle.css('height', this.params.divRight.height());
 		}
 		if (this.params.treesize != 0) {
-			this.params.divLeft.css('width', this.params.treesize);
+			this.params.divLeft.css('width', parseInt(this.params.treesize));
 		}
 	},
 
