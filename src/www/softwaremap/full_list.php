@@ -57,23 +57,24 @@ $HTML->printSoftwareMapLinks();
 $res_grp = db_query_params ('
 	SELECT group_id, group_name, unix_group_name, short_description, register_time
 	FROM groups
-	WHERE status = $1 AND is_public=1 AND type_id=1 AND group_id>4 AND register_time > 0 
+	WHERE status = $1 AND type_id=1 AND group_id>4 AND register_time > 0 
 	ORDER BY group_name ASC
 ',
 			    array ('A'),
 			    $TROVE_HARDQUERYLIMIT);
-echo db_error();
-$querytotalcount = db_numrows($res_grp);
+$projects = array();
+while ($row_grp = db_fetch_array($res_grp)) {
+	if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
+		continue ;
+	}
+	$projects[] = $row_grp;
+}
+$querytotalcount = count($projects);
 	
 // #################################################################
 // limit/offset display
 
-// no funny stuff with get vars
-
-$page = isset($_GET['page'])?$_GET['page']:FALSE;
-if (!is_numeric($page)) {
-	$page = 1;
-}
+$page = getIntFromRequest('page',1);
 
 // store this as a var so it can be printed later as well
 $html_limit = '<span style="text-align:center;font-size:smaller">';
@@ -108,18 +109,17 @@ print $html_limit."<hr />\n";
 
 // #################################################################
 // print actual project listings
-// note that the for loop starts at 1, not 0
-for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) { 
-	$row_grp = db_fetch_array($res_grp);
+for ($i_proj=0;$i_proj<=$querytotalcount;$i_proj++) { 
+	$row_grp = $projects[$i];
 
 	// check to see if row is in page range
-	if (($i_proj > (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj <= ($page*$TROVE_BROWSELIMIT))) {
+	if (($i_proj >= (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj < ($page*$TROVE_BROWSELIMIT))) {
 		$viewthisrow = 1;
 	} else {
 		$viewthisrow = 0;
 	}	
 
-	if ($row_grp && $viewthisrow) {
+	if ($viewthisrow) {
 		
 		// Embed RDFa description for /projects/PROJ_NAME 
 		$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
@@ -148,12 +148,6 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		print '</td>';
 		print '<td valign="bottom" style="text-align:right;"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';
-/*
-                if ($row_grp['jobs_count']) {
-                	print '<tr><td colspan="2" align="center">'
-                              .'<a href="/people/?group_id='.$row_grp['group_id'].'">[This project needs help]</a></td></td>';
-                }
-*/
         print '</table>';
         print '</div>'; // /doap:Project
 		print '<hr />';
