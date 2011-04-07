@@ -195,7 +195,10 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 	function checkAuthSession(&$params) {
 		$this->saved_user = NULL;
 		$user = NULL;
-
+		$code = NULL;
+		$req = NULL;
+		$errormsg = NULL;
+		
 		try {
 			$oauthprovider_server = new OAuthServer(FFDbOAuthDataStore::singleton());
 			
@@ -227,22 +230,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			
 		} catch (OAuthException $e) {
 			$code = $e->getCode();
-			if ($code) {
-				switch($code) {
-					case 401:
-						header('HTTP/1.1 401 Unauthorized', 401);
-						break;
-					case 400:
-						header('HTTP/1.1 400 Bad Request', 400);
-						break;
-					default:
-						break;
-				}
-			}
-			
-			echo "OAuth problem - code $code: \n";
-			print($e->getMessage() . "\n<hr />\n");
-			print_r($req);
+			$errormsg = $e->getMessage();
 		}
 		
 		if ($user) {
@@ -255,6 +243,22 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 			}
 		} else {
 			if ($this->isRequired()) {
+				if ($code) {
+					switch($code) {
+						case 401:
+							header('HTTP/1.1 401 Unauthorized', 401);
+							break;
+						case 400:
+							header('HTTP/1.1 400 Bad Request', 400);
+							break;
+						default:
+							break;
+					}
+				}
+				
+				echo "OAuth problem - code $code: \n";
+				print($errormsg . "\n<hr />\n");
+				print_r($req);
 				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
 			} else {
 				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
