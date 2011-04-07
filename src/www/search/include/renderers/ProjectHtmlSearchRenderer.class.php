@@ -61,22 +61,26 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 	 * @return string html output
 	 */
 	function getRows() {
-		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
 		
 		$return = '';
+		$i = 0;
 		
-		for($i = 0; $i < $rowsCount; $i++) {
-			if (db_result($result, $i, 'type') == 2) {
+		while ($row = db_fetch_array($result)) {
+			if (!forge_check_perm ('project_read', $row_top['group_id'])) {
+				continue ;
+			}
+			$i++;
+			if ($row['type'] == 2) {
 				$what = 'foundry';
 			} else {
 				$what = 'projects';
 			}		
 			$return .= '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>'
-				.'<td width="30%"><a href="'.util_make_url('/'.$what.'/'.db_result($result, $i, 'unix_group_name').'/').'">'
+				.'<td width="30%"><a href="'.util_make_url('/'.$what.'/'.$row['unix_group_name'].'/').'">'
 				.html_image('ic/msg.png', '10', '12')
-				.' '.$this->highlightTargetWords(db_result($result, $i, 'group_name')).'</a></td>'
-				.'<td width="70%">'.$this->highlightTargetWords(db_result($result, $i, 'short_description')).'</td></tr>';
+				.' '.$this->highlightTargetWords($row['group_name']).'</a></td>'
+				.'<td width="70%">'.$this->highlightTargetWords($row['short_description']).'</td></tr>';
 		}
 		
 		return $return;

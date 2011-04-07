@@ -53,7 +53,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 							 'SELECT headline(unix_group_name, q) as unix_group_name, headline(short_description, q) as short_description, type_id, groups.group_id, license, register_time FROM groups, groups_idx, to_tsquery($1) q ',
 							 array (implode (' ', $words))) ;
 				$qpa = db_construct_qpa ($qpa,
-							 'WHERE status IN ($1, $2) AND is_public=1 AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
+							 'WHERE status IN ($1, $2) AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
 							 array ('A',
 								'H',
 								'')) ;
@@ -80,7 +80,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 'SELECT unix_group_name, short_description, type_id, groups.group_id, license, register_time FROM groups ') ;
 				$qpa = db_construct_qpa ($qpa,
-							 'WHERE status IN ($1, $2) AND is_public=1 AND short_description <> $3',
+							 'WHERE status IN ($1, $2) AND short_description <> $3',
 							 array ('A',
 								'H',
 								'')) ;
@@ -104,7 +104,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 			}
 		} else {
 			$qpa = db_construct_qpa ($qpa,
-						 'SELECT group_name,unix_group_name,type_id,groups.group_id, short_description,license,register_time FROM groups WHERE status IN ($1, $2) AND is_public=1 AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
+						 'SELECT group_name,unix_group_name,type_id,groups.group_id, short_description,license,register_time FROM groups WHERE status IN ($1, $2) AND short_description <> $3 AND groups.group_id = groups_idx.group_id',
 							 array ('A',
 								'H',
 								'')) ;
