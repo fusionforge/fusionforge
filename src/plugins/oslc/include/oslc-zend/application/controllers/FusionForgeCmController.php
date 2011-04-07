@@ -639,6 +639,9 @@ class FusionForgeCmController extends CmController {
 				//print_r('request username'.$login);
 				//print_r('request password'.$password);
 			}
+			elseif ($auth[0] == 'OAuth') {
+				session_set_for_authplugin('oauthprovider');
+			}
 			else {
 				throw new BadRequestException('Unsupported auth method : '. $auth[0] .' !');
 			}
