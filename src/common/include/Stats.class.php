@@ -60,12 +60,12 @@ class Stats extends Error {
 	*/
 	function getMostActiveStats($type, $offset) {
 		if ($type == 'week') 	{
-			return db_query_params ('SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile FROM groups,project_weekly_metric WHERE groups.group_id=project_weekly_metric.group_id AND groups.is_public=1 AND groups.type_id=1 AND groups.status = $1 AND groups.use_stats=1 ORDER BY ranking ASC',
+			return db_query_params ('SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile FROM groups,project_weekly_metric WHERE groups.group_id=project_weekly_metric.group_id AND groups.type_id=1 AND groups.status = $1 AND groups.use_stats=1 ORDER BY ranking ASC',
 						array('A'),
 						0,
 						$offset) ;
 		} else {
-			return db_query_params ('SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile FROM groups g,stats_project_all_vw s WHERE g.group_id=s.group_id AND g.is_public=1 AND g.type_id=1 AND g.status = $1 AND g.use_stats=1 AND s.group_ranking > 0 ORDER BY ranking ASC',
+			return db_query_params ('SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile FROM groups g,stats_project_all_vw s WHERE g.group_id=s.group_id AND g.type_id=1 AND g.status = $1 AND g.use_stats=1 AND s.group_ranking > 0 ORDER BY ranking ASC',
 						array('A'),
 						0,
 						$offset) ;
@@ -79,7 +79,7 @@ class Stats extends Error {
 	* @return a resultset of unix_group_name, group_name, items
 	*/
 	function getTopMessagesPosted() {
-		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.is_public=1 AND g.status=$1 GROUP BY g.unix_group_name, g.group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.unix_group_name, g.group_name ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}
@@ -91,7 +91,7 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopPageViews() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.is_public=1 AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC', 
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC', 
 					array ('A'),
 					100) ;
 	}
@@ -103,7 +103,7 @@ class Stats extends Error {
 	* @return a resultset of group_name, unix_group_name, items
 	*/
 	function getTopDownloads() {
-		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 AND g.is_public=1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC',
+		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name ORDER BY items DESC',
 					array ('A'),
 					100) ;
 	}

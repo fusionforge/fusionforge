@@ -59,6 +59,9 @@ $rows=db_numrows($res_top);
 
 $i=0;
 while ($row_top = db_fetch_array($res_top)) {
+	if (!forge_check_perm ('project_read', $row_top['group_id'])) {
+		continue ;
+	}
 	$i++;
 	print '
 	<tr '. $HTML->boxGetAltRowStyle($i) .'>

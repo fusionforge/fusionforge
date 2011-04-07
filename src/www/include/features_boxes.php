@@ -118,26 +118,13 @@ function show_top_downloads() {
 
 
 function stats_getprojects_active_public() {
-	$res_count = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 AND is_public=1',
-			array ('A'));
-	if (db_numrows($res_count) > 0) {
-		$row_count = db_fetch_array($res_count);
-		return $row_count['count'];
-	} else {
-		return "error";
-	}
+	$ff = new FusionForge();
+	return $ff->getNumberOfPublicHostedProjects();
 }
 
 function stats_getprojects_total() {
-	$res_count = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 OR status=$2',
-			array('A',
-				'H'));
-	if (db_numrows($res_count) > 0) {
-		$row_count = db_fetch_array($res_count);
-		return $row_count['count'];
-	} else {
-		return "error";
-	}
+	$ff = new FusionForge();
+	return $ff->getNumberOfHostedProjects();
 }
 
 function stats_getpageviews_total() {
