@@ -78,13 +78,7 @@ DocManListFileController.prototype =
 				if (isDragging) {
 					params.divLeft.css('width', e.pageX);
 					params.divRight.css('width', w - e.pageX);
-					for (var i = 0; i< jQuery('.ThemeXPFolderText > a').length; i++) {
-						if (!jQuery('.ThemeXPFolderText > a')[i]['href'].match('&tree')) {
-							jQuery('.ThemeXPFolderText > a')[i]['href'] = jQuery('.ThemeXPFolderText > a')[i]['href'] + '&tree=' + params.divLeft.width();
-						} else {
-							jQuery('.ThemeXPFolderText > a')[i]['href'] = jQuery('.ThemeXPFolderText > a')[i]['href'].replace(/&tree=[0-9]*$/,'&tree='+params.divLeft.width())
-						}
-					}
+					jQuery.Storage.set("treesize",""+params.divLeft.width());
 				}
 			}
 		});
@@ -97,9 +91,9 @@ DocManListFileController.prototype =
 		} else {
 			this.params.divHandle.css('height', this.params.divRight.height());
 		}
-		if (this.params.treesize != 0) {
-			this.params.divLeft.css('width', parseInt(this.params.treesize));
-		}
+ 		if (jQuery.Storage.get("treesize") != 0) {
+ 			this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
+ 		}
 	},
 
 	dragging: function() {

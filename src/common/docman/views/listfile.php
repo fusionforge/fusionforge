@@ -41,8 +41,6 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-$treesize = getIntFromRequest('tree');
-
 $df->setDocGroupID($dirid);
 
 /**
@@ -107,7 +105,6 @@ jQuery(document).ready(function() {
 		divLeft:		jQuery('#left'),
 		divHandle:		jQuery('#handle'),
 		divRight:		jQuery('#right'),
-		treesize:		'<?php echo $treesize ?>'
 	});
 });
 

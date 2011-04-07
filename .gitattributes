@@ -790,6 +790,7 @@ src/image-sources/pow-fusionforge.xcf -text
 src/image-sources/top-logo.xcf -text
 src/install-common.inc -text
 src/install.sh -text svneol=unset#text/x-sh
+src/lib/vendor/jquery-storage/jquery.Storage.js -text
 src/lib/vendor/jquery-tipsy/LICENSE -text
 src/lib/vendor/jquery-tipsy/README -text
 src/lib/vendor/jquery-tipsy/Rakefile -text
