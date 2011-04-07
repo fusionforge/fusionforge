@@ -28,6 +28,8 @@ require_once('../../env.inc.php');
 require_once $gfwww.'include/pre.php';
 //require_once 'checks.php';	
 
+session_set_for_authplugin('oauthprovider');
+
 // Here the session should be constructed with the OAuthprovider plugin set as sufficient (and no other required).
 $user = session_get_user(); // get the session user
 

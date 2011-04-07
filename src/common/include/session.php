@@ -594,6 +594,68 @@ function session_set() {
 	$re->invalidateRoleCaches() ;
 }
 
+/**
+ * Re initializes a session, trusting a non-sufficient plugin only temporarily
+ * 
+ * The checkAuthSession of the Auth plugin will have to acknowledge the 'sufficient_forced' param in 'check_auth_session' hook
+ * @param string $authpluginname
+ */
+function session_set_for_authplugin($authpluginname) {
+	global $G_SESSION;
+	global $session_ser;
+
+	// assume bad session_hash and session. If all checks work, then allow
+	// otherwise make new session
+	$id_is_good = false;
+
+	$params = array();
+	// pass the session_ser from cookie to the auth plugins 
+	// (see AuthBuiltinPlugin::checkAuthSession() or likes)
+	// expect FORGE_AUTH_AUTHORITATIVE_ACCEPT, FORGE_AUTH_AUTHORITATIVE_REJECT or FORGE_AUTH_NOT_AUTHORITATIVE
+	// in results
+	$params['sufficient_forced'] = $authpluginname;
+	
+	$params['auth_token'] = $session_ser;
+	$params['results'] = array();
+	
+	plugin_hook_by_reference('check_auth_session', $params);
+	
+	$seen_yes = false;
+	foreach ($params['results'] as $p => $r) {
+		if ($r == FORGE_AUTH_AUTHORITATIVE_ACCEPT) {
+			$seen_yes = true;
+		}
+	}
+
+	if ($seen_yes) {
+		echo "user ok\n";
+		// see AuthBuiltinPlugin::fetchAuthUser() or likes
+		// expect user object in results
+		$params = array();
+		$params['results'] = NULL;
+		
+		plugin_hook_by_reference('fetch_authenticated_user', $params);
+		
+		$user = $params['results'];
+		
+		if ($user) {
+			$params = array();
+			$params['username'] = $user->getUnixName();
+			$params['event'] = 'every-page';
+			plugin_hook('sync_account_info', $params);
+
+			$user->setLoggedIn(true);
+			$G_SESSION = $user;
+		} else {
+			$G_SESSION=false;
+		}
+	}
+	// TODO: else... what ?
+	
+	$re = RBACEngine::getInstance();
+	$re->invalidateRoleCaches() ;
+}
+
 //TODO - this should be generalized and used for pre.php, 
 //SOAP, forum_gateway.php, tracker_gateway.php, etc to 
 //setup languages
