@@ -22,8 +22,14 @@ DirectoryIndex index.html index.php
 Include {core/config_path}/httpd.conf.d/plugin-*.inc
 
 Alias /images/ {core/source_path}/www/images/
+Alias /scripts/jquery/ {core/source_path}/lib/vendor/jquery/
+Alias /scripts/jquery-tipsy/ {core/source_path}/lib/vendor/jquery-tipsy/
+Alias /scripts/jquery-storage/ {core/source_path}/lib/vendor/jquery-storage/
+Alias /scripts/prototype/ {core/source_path}/lib/vendor/prototype/
+Alias /scripts/scriptaculous/ {core/source_path}/lib/vendor/scriptaculous/
+Alias /scripts/yui/ {core/source_path}/lib/vendor/yui/build/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf
 # Include {core/config_path}/httpd.conf.d/projects-in-mainvhost.inc
-  
+
