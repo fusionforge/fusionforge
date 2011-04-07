@@ -367,6 +367,11 @@ function html_use_tooltips() {
 	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
 }
 
+function html_use_storage() {
+	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+	use_javascript('/scripts/jquery-storage/jquery.Storage.js');
+}
+
 /**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
