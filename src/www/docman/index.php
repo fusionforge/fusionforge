@@ -115,6 +115,7 @@ if ($dgh->isError())
 	exit_error($dgh->getErrorMessage(), 'docman');
 
 html_use_tooltips();
+html_use_storage();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 
