@@ -201,6 +201,11 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->open( ROOT ) ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
+
+		$this->logout();
+		$this->open( ROOT ) ;
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
 	}
 
 	function testProjectRolesAndPermissions()
