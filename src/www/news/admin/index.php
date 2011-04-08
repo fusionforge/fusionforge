@@ -316,7 +316,6 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 			WHERE is_approved=0
 			AND news_bytes.group_id=groups.group_id
 			AND post_date > $1
-			AND groups.is_public=1
 			AND groups.status=$2
 			ORDER BY post_date', array ($old_date, 'A')) ;
 

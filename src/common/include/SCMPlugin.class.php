@@ -224,7 +224,9 @@ abstract class SCMPlugin extends Plugin {
 
 	function printAdminPage($params) {
 		$group = group_get_object($params['group_id']);
-		if ( $group->usesPlugin ( $this->name ) && $group->isPublic()) {
+		$ra = RoleAnonymous::getInstance() ;
+
+		if ( $group->usesPlugin ( $this->name ) && $ra->hasPermission('project_read', $group->getID())) {
 			print '<p><input type="checkbox" name="scm_enable_anonymous" value="1" '.$this->c($group->enableAnonSCM()).' /><strong>'._('Enable Anonymous Read Access').'</strong></p>';
 		}
 	}

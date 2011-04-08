@@ -23,11 +23,7 @@ class WikiTheme_fusionforge extends WikiTheme_Wikilens {
         $domain = textdomain(NULL);
         textdomain('fusionforge');
 
-        //group is private
-        if (!$project->isPublic()) {
-            //if it's a private group, you must be a member of that group
-            session_require_perm('project_read', $group_id);
-        }
+	session_require_perm ('project_read', $group_id);
 
         //for dead projects must be member of admin project
         if (!$project->isActive()) {

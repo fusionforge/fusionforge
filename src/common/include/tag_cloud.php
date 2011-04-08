@@ -98,21 +98,28 @@ function tag_cloud($params = '') {
 
 	$return = '';
 
-	$res = db_query_params ('SELECT name,count(*) AS count
+	$res = db_query_params ('SELECT project_tags.name,project_tags.group_id
 					 FROM project_tags, groups
 					 WHERE project_tags.group_id = groups.group_id
-					 AND status = $1 AND is_public=1 AND type_id=1 AND register_time > 0
-					 GROUP BY name ORDER BY count DESC',
+					 AND groups.status = $1 AND groups.type_id=1 AND groups.register_time > 0',
 				array ('A')) ;
-	if (db_numrows($res) > 0) {
+	$tag_count = array();
+	while ($row = db_fetch_array($res)) {
+		if (forge_check_perm ('project_read', $row['group_id'])) {
+			if (!isset ($tag_count[$row['name']])) {
+				$tag_count[$row['name']] = 0;
+			}
+			$tag_count[$row['name']]++;
+		}
+	}
+	if (count($tag_count) > 0) {
 		$count_min = 0;
 		$count_max = 0;
 		$nb = 1;
 		// Search upper and lower tag frequencies; stop when maximum tag number to display is reached
-		while ($row = db_fetch_array($res)) {
-			$tag_count[$row['name']] = $row['count'];
-			if ($count_min == 0 || $row['count'] < $count_min) $count_min = $row['count'];
-			if ($row['count'] > $count_max) $count_max = $row['count'];
+		foreach ($tag_count as $name => $count) {
+			if ($count_min == 0 || $count < $count_min) $count_min = $count;
+			if ($count > $count_max) $count_max = $count;
 			if ($params['nb_max'] && $nb >= $params['nb_max']) break; // no limit if nb_max == 0
 			$nb++;
 		}
@@ -167,5 +174,10 @@ function list_project_tag($group_id) {
 
 	return $return;
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

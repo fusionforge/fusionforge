@@ -50,6 +50,7 @@ class Widget_MyProjects extends Widget {
 		} else {
 			$html_my_projects .= '<table style="width:100%">';
 			$i = 0;
+			$ra = RoleAnonymous::getInstance();
 			foreach ($groups as $g) {
 				$i++;
 				$html_my_projects .= '
@@ -73,7 +74,7 @@ class Widget_MyProjects extends Widget {
 					$html_my_projects .= ' <small><A HREF="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</A></small>';
 				}
 				$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
-				if (!$g->isPublic()) {
+				if (!$ra->hasPermission('project_read', $group->getID())) {
 					$html_my_projects .= ' (*)';
 					$private_shown = true;
 				}

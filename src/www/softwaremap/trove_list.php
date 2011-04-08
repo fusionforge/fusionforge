@@ -230,16 +230,22 @@ if ( $cat === 'c' ) {
 // one listing for each project
 
 	$qpa = db_construct_qpa();
-	$qpa = db_construct_qpa($qpa, 'SELECT * FROM trove_agg') ;
-	$qpa = db_join_qpa($qpa, $qpa_alias) ;
+	$qpa = db_construct_qpa($qpa, 'SELECT * FROM trove_agg');
+	$qpa = db_join_qpa($qpa, $qpa_alias);
 	$qpa = db_construct_qpa($qpa, ' WHERE trove_agg.trove_cat_id=$1', array($form_cat));
-	$qpa = db_join_qpa($qpa, $qpa_and) ;
+	$qpa = db_join_qpa($qpa, $qpa_and);
 	$qpa = db_construct_qpa($qpa, ' ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC');
-	$res_grp = db_query_qpa($qpa, $TROVE_HARDQUERYLIMIT, 0, 'DB_TROVE');
-
-	echo db_error('DB_TROVE');
-	$querytotalcount = db_numrows($res_grp);
-
+	$res_grp = db_query_qpa($qpa, $TROVE_HARDQUERYLIMIT, 0, DB_TROVE);
+	
+	$projects = array();
+	while ($row_grp = db_fetch_array($res_grp)) {
+		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
+			continue ;
+		}
+		$projects[] = $row_grp;
+	}
+	$querytotalcount = count($projects);
+	
 	// #################################################################
 	// limit/offset display
 
@@ -248,53 +254,51 @@ if ( $cat === 'c' ) {
 	if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
 		$html_limit .= 'More than ';
 		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
+		
 	}
 	$html_limit .= sprintf(ngettext('<strong>%1$s</strong> project in result set.', '<strong>%1$s</strong> projects in result set.', $querytotalcount), $querytotalcount);
-
+	
 	// only display pages stuff if there is more to display
 	if ($querytotalcount > $TROVE_BROWSELIMIT) {
 		$html_limit .= ' Displaying '.$TROVE_BROWSELIMIT.' per page. Projects sorted by activity ranking.<br />';
 
 		// display all the numbers
-		for ($i = 1; $i <= ceil($querytotalcount / $TROVE_BROWSELIMIT); $i++) {
+		for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
 			$html_limit .= ' ';
 			$displayed_i = '&lt;'.$i.'&gt;';
 			if ($page == $i) {
-				$html_limit .= "<strong>$displayed_i</strong>";
+				$html_limit .= "<strong>$displayed_i</strong>" ;
 			} else {
-			$html_limit .= util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$form_cat.$discrim_url.'&page='.$i,
-							       $displayed_i
-					) ;
+				$viewthisrow = 0;
 			}
 			$html_limit .= ' ';
 		}
 	}
-
+	
 	print $html_limit."<hr />\n";
 
 	// #################################################################
 	// print actual project listings
-	// note that the for loop starts at 1, not 0
-	for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
-		$row_grp = db_fetch_array($res_grp);
-
+	for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
+		$row_grp = $projects[$i_proj];
+		
 		// check to see if row is in page range
-		if (($i_proj > (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj <= ($page*$TROVE_BROWSELIMIT))) {
+		if (($i_proj >= (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj < ($page*$TROVE_BROWSELIMIT))) {
 			$viewthisrow = 1;
 		} else {
 			$viewthisrow = 0;
-		}
-
+		}	
+		
 		if ($row_grp && $viewthisrow) {
 			print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
 			print "$i_proj. " ;
-			print util_make_link_g($row_grp['unix_group_name'],
-					$row_grp['group_id'],
-					"<strong>".htmlspecialchars($row_grp['group_name'])."</strong> ");
+			print util_make_link_g ($row_grp['unix_group_name'],
+						$row_grp['group_id'],
+						"<strong>".htmlspecialchars($row_grp['group_name'])."</strong> ");
 			if ($row_grp['short_description']) {
 				print "- " . htmlspecialchars($row_grp['short_description']);
 			}
-
+			
 			print '<br />&nbsp;';
 			// extra description
 			print "</td></tr>\n<tr valign=\"top\"><td>";

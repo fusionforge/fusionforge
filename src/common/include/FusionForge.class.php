@@ -3,7 +3,7 @@
  * FusionForge top-level information
  *
  * Copyright 2002, GForge, LLC
- * Copyright 2009, Roland Mas
+ * Copyright 2009-2011, Roland Mas
  *
  * This file is part of FusionForge.
  *
@@ -42,23 +42,37 @@ class FusionForge extends Error {
 	}
 
 	function getNumberOfPublicHostedProjects() {
-		$res = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1 AND is_public=1',
+		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
 				      array ('A'));	
-		if (!$res || db_numrows($res) < 1) {
+		if (!$res) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
 		}
-		return $this->parseCount($res);
+		$count = 0;
+		$ra = RoleAnonymous::getInstance() ;
+		while ($row = db_fetch_array($res)) {
+			if ($ra->hasPermission('project_read', $row['group_id'])) {
+				$count++;
+			}
+		}
+		return $count;
 	}
 
 	function getNumberOfHostedProjects() {
-		$res = db_query_params ('SELECT count(*) AS count FROM groups WHERE status=$1',
+		$res = db_query_params ('SELECT group_id FROM groups WHERE status=$1',
 					array ('A'));	
-		if (!$res || db_numrows($res) < 1) {
+		if (!$res) {
 			$this->setError('Unable to get hosted project count: '.db_error());
 			return false;
 		}
-		return $this->parseCount($res);
+		$count = 0;
+		$ra = RoleAnonymous::getInstance() ;
+		while ($row = db_fetch_array($res)) {
+			if ($ra->hasPermission('project_read', $row['group_id'])) {
+				$count++;
+			}
+		}
+		return $count;
 	}
 
 	function getNumberOfActiveUsers() {
@@ -73,16 +87,18 @@ class FusionForge extends Error {
 
 
 	function getPublicProjectNames() {
-		$res = db_query_params ('SELECT unix_group_name FROM groups WHERE status=$1 AND is_public=1 ORDER BY unix_group_name',
+		$res = db_query_params ('SELECT unix_group_name, group_id FROM groups WHERE status=$1 ORDER BY unix_group_name',
 					array ('A'));
 		if (!$res) {
 			$this->setError('Unable to get list of public projects: '.db_error());
 			return false;
 		}
-		$rows=db_numrows($res);
 		$result = array();
-		for ($i=0; $i<$rows; $i++) {
-			$result[$i] = db_result($res, $i, 'unix_group_name');
+		$ra = RoleAnonymous::getInstance() ;
+		while ($row = db_fetch_array($res)) {
+			if ($ra->hasPermission('project_read', $row['group_id'])) {
+				$result[] = $row['unix_group_name'];
+			}
 		}
 		return $result;
 	}

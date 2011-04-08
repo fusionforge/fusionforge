@@ -55,6 +55,9 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	// item outputs
 	$addendum = '' ;
 	while ($row = db_fetch_array($res)) {
+		if (!forge_check_perm ('project_read', $row['group_id'])) {
+			continue ;
+		}
                 if ($callback) {
                 	$addendum=$callback($row);
                 }
