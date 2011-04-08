@@ -202,10 +202,14 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
 
+		// Non-regression test for #265
 		$this->logout();
 		$this->open( ROOT ) ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;
+		$this->click("link=First TotoNews") ;
+		$this->waitForPageToLoad("30000");
+		$this->assertFalse ($this->isPermissionDenied()) ;
 	}
 
 	function testProjectRolesAndPermissions()
