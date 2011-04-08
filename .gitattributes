@@ -732,7 +732,6 @@ src/etc/config.ini.d/globalsearch.ini -text
 src/etc/config.ini.d/gravatar.ini -text
 src/etc/config.ini.d/hudson.ini -text
 src/etc/config.ini.d/mailman.ini -text
-src/etc/config.ini.d/mantis.ini -text
 src/etc/config.ini.d/mantisbt.ini -text
 src/etc/config.ini.d/mediawiki.ini -text
 src/etc/config.ini.d/online_help.ini -text
