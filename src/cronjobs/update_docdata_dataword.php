@@ -45,7 +45,7 @@ if (!$result) {
 }
 
 if ($result) {
-	while ($arr = db_fetch_array($result)) 	{
+	while ($arr = db_fetch_array($result)) {
 		$resarr[] = $arr;
 	}
 }
@@ -70,17 +70,12 @@ foreach ($resarr as $item) {
 	}
 	$timeend = microtime_float();
 	$timetrait = $timeend - $timestart;
-	print_debug("analyze $item[filename]  type=$item[filetype]  octets in=$lenin  octets out=$len   time=$timetrait sec");
+	echo "analyze $item[filename]  type=$item[filetype]  octets in=$lenin  octets out=$len  time=$timetrait sec";
 }
 $timeendtrait = microtime_float();
 $timetot = $timeendtrait - $timestarttrait;
 db_query_params('UPDATE groups set force_docman_reindex = $1', array('0'));
-//print_debug ("End analyze : $compt files, $timetot secs.");
-
-
-function print_debug ($text) {
-	echo "$text\n";
-}
+//echo "End analyze : $compt files, $timetot secs.";
 
 function microtime_float() {
   list($usec, $sec) = explode(" ", microtime());
