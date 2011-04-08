@@ -59,25 +59,24 @@ $page = getIntFromRequest('page', 1);
 echo '<br />' . tag_cloud(array('selected' => $selected_tag, 'nb_max' => 100)) . '<br /><br />';
 
 if ($selected_tag) {
-
-	$cond_rq = '';
 	$res_grp = db_query_params('
 		SELECT groups.group_id, group_name, unix_group_name, short_description, register_time
 		FROM project_tags, groups
 		WHERE name = $1
 		AND project_tags.group_id = groups.group_id
-		AND status = $2 AND is_public=1 AND type_id=1 AND register_time > 0
+		AND status = $2 AND type_id=1 AND register_time > 0
 		ORDER BY group_name ASC', 
 		array($selected_tag, 'A'), $TROVE_HARDQUERYLIMIT);
-	$querytotalcount = db_numrows($res_grp);
-	if ($querytotalcount > 0) {
-		while ($group = db_fetch_array($res_grp)) {
-			$groups[] = "'" . $group['group_id'] . "'";
+	$projects = array();
+	$project_ids = array();
+	while ($row_grp = db_fetch_array($res_grp)) {
+		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
+			continue ;
 		}
-		$cond_rq = ' AND group_id IN (' . join(',', $groups) . ') ';
+		$projects[] = $row_grp;
+		$project_ids[] = $row_grp['group_id'];
 	}
-
-	echo db_error();
+	$querytotalcount = count($projects);
 
 	// #################################################################
 	// limit/offset display
@@ -119,12 +118,11 @@ if ($selected_tag) {
 
 	// #################################################################
 	// print actual project listings
-	// note that the for loop starts at 1, not 0
-	for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
-		$row_grp = db_fetch_array_by_row($res_grp, $i_proj-1);
+	for ($i_proj=0;$i_proj<=$querytotalcount;$i_proj++) {
+		$row_grp = $projects[$i_proj];
 
 		// check to see if row is in page range
-		if (($i_proj > (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj <= ($page*$TROVE_BROWSELIMIT))) {
+		if (($i_proj >= (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj < ($page*$TROVE_BROWSELIMIT))) {
 			$viewthisrow = 1;
 		} else {
 			$viewthisrow = 0;

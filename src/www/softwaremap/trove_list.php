@@ -224,8 +224,14 @@ $qpa = db_join_qpa ($qpa, $qpa_and) ;
 $qpa = db_construct_qpa ($qpa, ' ORDER BY trove_agg.trove_cat_id ASC, trove_agg.ranking ASC') ;
 $res_grp = db_query_qpa ($qpa, $TROVE_HARDQUERYLIMIT, 0, SYS_DB_TROVE);
 
-echo db_error();
-$querytotalcount = db_numrows($res_grp);
+$projects = array();
+while ($row_grp = db_fetch_array($res_grp)) {
+	if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
+		continue ;
+	}
+	$projects[] = $row_grp;
+}
+$querytotalcount = count($projects);
 	
 // #################################################################
 // limit/offset display
@@ -262,12 +268,11 @@ print $html_limit."<hr />\n";
 
 // #################################################################
 // print actual project listings
-// note that the for loop starts at 1, not 0
-for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
-	$row_grp = db_fetch_array($res_grp);
+for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
+	$row_grp = $projects[$i_proj];
 
 	// check to see if row is in page range
-	if (($i_proj > (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj <= ($page*$TROVE_BROWSELIMIT))) {
+	if (($i_proj >= (($page-1)*$TROVE_BROWSELIMIT)) && ($i_proj < ($page*$TROVE_BROWSELIMIT))) {
 		$viewthisrow = 1;
 	} else {
 		$viewthisrow = 0;
