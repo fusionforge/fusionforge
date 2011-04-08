@@ -164,13 +164,6 @@ Requires: %{name} >= %{version}, php, php-ldap
 %description plugin-authldap
 This plugin provides LDAP authentication capability for FusionForge.
 
-%package plugin-mantis
-Summary: MantisBT plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-mantis
-A plugin to use the MantisBT web-based bug tracking system with FusionForge.
-
 %package plugin-mediawiki
 Summary: Mediawiki plugin for FusionForge
 Group: Development/Tools
@@ -510,8 +503,6 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 # plugin: hudson
 %{__ln_s} ../../plugins/hudson/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/hudson
-
-# plugin: mantis
 
 # plugin: mediawiki
 # create symlink for apache configuration for mediawiki plugin
@@ -880,12 +871,6 @@ fi
 %files plugin-authldap
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/authldap.ini
 %{FORGE_DIR}/plugins/authldap
-
-%files plugin-mantis
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/mantis/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mantis.ini
-%{FORGE_DIR}/plugins/mantis
-%{FORGE_DIR}/www/plugins/mantis
 
 %files plugin-mediawiki
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mediawiki.ini
