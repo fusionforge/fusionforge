@@ -29,6 +29,24 @@ global $username;
 global $password;
 global $group_id;
 global $idBug;
+global $type;
+global $user_id;
+
+$redirect_url = 'plugins/mantisbt/?type='.$type;
+switch ($type) {
+	case "group": {
+		$redirect_url .= '&group_id='.$group_id;
+		break;
+	}
+	case "type": {
+		$redirect_url .= '&user_id='.$user_id;
+		break;
+	}
+	default: {
+		$error_msg = _('No type found');
+		session_redirect('plugins/mantisbt/&error_msg='.urlencode($error_msg));
+	}
+}
 
 $clientSOAP = new SoapClient($mantisbtConf['url']."/api/soap/mantisconnect.php?wsdl", array('trace'=>true, 'exceptions'=>true));
 $defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
@@ -160,29 +178,10 @@ try {
 	$clientSOAP->__soapCall('mc_issue_update', array("username" => $username, "password" => $password, "issue_id" => $idBug, "issue" => $defect));
 } catch (SoapFault $soapFault) {
 	$error_msg = _('Task failed:').' '.$soapFault->faultstring;
-	session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
-}
-
-//TODO : est-ce vraiment utilise ?
-if ($_POST['note_ajout'] != null && $_POST['note_ajout'] != ''){
-	$note = array();
-	$note['text'] = $_POST['note_ajout'];
-	if( isset($_POST['note_privee']) &&  $_POST['note_privee'] == 'on'){
-		if (!isset($listViewStates)){
-			$listViewStates = $clientSOAP->__soapCall('mc_enum_view_states', array("username" => $username, "password" => $password));
-		}
-		foreach($listViewStates as $key => $viewState){
-			if ($viewState->id == 50){
-				$note['view_state']['id'] = $viewState->id;
-				$note['view_state']['name'] = $viewState->name;
-				break;
-			}
-		}
-	}
-	$clientSOAP->__soapCall('mc_issue_note_add', array("username" => $username, "password" => $password, "issue_id" => $idBug, "note" => $note));
+	session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&error_msg='.urlencode($feedback));
 }
 
 $feedback = _('Task succeeded');
-session_redirect('plugins/mantisbt/?type=group&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
+session_redirect($redirect_url.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=viewIssue&feedback='.urlencode($feedback));
 
 ?>
