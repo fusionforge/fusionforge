@@ -50,7 +50,7 @@ forge_define_config_item ('default_timezone', 'core', $GLOBALS['sys_default_time
 forge_define_config_item ('default_country_code', 'core', $GLOBALS['sys_default_country_code']) ;
 forge_define_config_item ('use_scm', 'core', $GLOBALS['sys_use_scm']) ;
 forge_set_config_item_bool ('use_scm', 'core') ;
-forge_define_config_item ('use_dav', 'core', $GLOBALS['sys_use_dav']) ;
+forge_define_config_item ('use_dav', 'core', @$GLOBALS['sys_use_dav']) ;
 forge_set_config_item_bool ('use_dav', 'core') ;
 forge_define_config_item ('use_tracker', 'core', $GLOBALS['sys_use_tracker']) ;
 forge_set_config_item_bool ('use_tracker', 'core') ;
