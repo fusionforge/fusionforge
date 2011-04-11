@@ -486,6 +486,7 @@ function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=NULL) {
  *	@return text error message.
  */
 function db_error($dbserver=NULL) {
+	db_switcher($dbserver) ;
 	return pg_last_error($dbserver);
 }
 
