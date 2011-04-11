@@ -5052,6 +5052,7 @@ tests/preseed/lists -text
 tests/preseed/mailman -text
 tests/preseed/postgresql -text
 tests/scripts/catch_mail.php -text
+tests/scripts/cdx40-build-and-test-source.sh -text
 tests/scripts/fusionforge-build-and-test-deb.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
