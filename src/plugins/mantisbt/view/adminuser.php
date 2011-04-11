@@ -27,7 +27,7 @@
 /* main display */
 global $HTML;
 global $mantisbt;
-global $mantisbtUserConf;
+global $mantisbtConf;
 
 echo $HTML->boxTop(_('Manage your account'));
 echo '<form method="POST" Action="?type=user&pluginname='.$mantisbt->name.'&action=updateuserConf">';
@@ -35,11 +35,11 @@ echo '<table>';
 echo '<tr><td><label id="mantisbtinit-user" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify your mantisbt user.').'"';
-echo ' >MantisBT User</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" value="'.$mantisbtUserConf['user'].'" /></td></tr>';
+echo ' >MantisBT User</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_user" value="'.$mantisbtConf['user'].'" /></td></tr>';
 echo '<tr><td><label id="mantisbtinit-password" ';
 if ($use_tooltips)
 	echo 'title="'._('Specify the password of this user.').'"';
-echo ' >MantisBT Password</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_password" value="'.$mantisbtUserConf['password'].'" /></td></tr>';
+echo ' >MantisBT Password</label></td><td><input type="text" size="50" maxlength="255" name="mantisbt_password" value="'.$mantisbtConf['password'].'" /></td></tr>';
 echo '</table>';
 echo '<input type="submit" value="'._('Update').'" />';
 echo '</form>';

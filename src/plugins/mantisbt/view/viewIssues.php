@@ -4,6 +4,7 @@
  *
  * Copyright 2009, Fabien Dubois - Capgemini
  * Copyright 2009-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * Copyright 2010, Antoine Mercadal - Capgemini
  * http://fusionforge.org
  *
@@ -87,7 +88,7 @@ if (!isset($errorPage)) {
 	$listBug = array();
 	try {
 		if ($type == "user"){
-			$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password, "filter" => $bugfilter ));
+			$idsBugAll = $clientSOAP->__soapCall('mc_issue_get_filtered_by_user', array("username" => $username, "password" => $password, "filter" => $bugfilter));
 		} else if ($type == "group"){
 			$idsBugAll = $clientSOAP->__soapCall('mc_project_get_issue_headers', array("username" => $username, "password" => $password, "project_id" => $mantisbtConf['id_mantisbt'],  "page_number" => -1, "per_page" => -1, "filter" => $bugfilter));
 		}

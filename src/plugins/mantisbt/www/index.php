@@ -174,12 +174,11 @@ switch ($type) {
 		$idNote = getStringFromRequest('idNote');
 		$page = getStringFromRequest('page');
 
-
 		if ($view != 'inituser' && $action != 'inituser') {
-			$mantisbtUserConf = $mantisbt->getUserConf($user->getID());
-			if ($mantisbtUserConf) {
-				$username = $mantisbtUserConf['user'];
-				$password = $mantisbtUserConf['password'];
+			$mantisbtConf = $mantisbt->getUserConf($user->getID());
+			if ($mantisbtConf) {
+				$username = $mantisbtConf['user'];
+				$password = $mantisbtConf['password'];
 			}  else {
 				$warning_msg = _('Your mantisbt user is not initialized.');
 				$redirect_url = '/plugins/'.$mantisbt->name.'/?type=user&pluginname='.$mantisbt->name.'&view=inituser&warning_msg='.urlencode($warning_msg);
