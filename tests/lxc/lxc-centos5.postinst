@@ -57,6 +57,14 @@ EOF
 	else
 		exit 3
 	fi
+	# When domain is not local, avahi completed by send hostname
+	hostnamebase=`echo $hostname | cut -d. -f1`
+	if [ "$hostnamebase.local" != "$hostname" ]
+	then
+		cat <<EOF > $rootfs/etc/dhclient.conf
+send host-name "$hostnamebase";
+EOF
+	fi
 fi
 }
 
