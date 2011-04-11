@@ -62,8 +62,8 @@ class Widget_MyProjects extends Widget {
 				$role_names = array();
 				foreach ($roles as $r) {
 					if ($r instanceof RoleExplicit
-					    && $r->getHomeProject() != NULL
-					    && $r->getHomeProject()->getID() == $g->getID()) {
+						&& $r->getHomeProject() != NULL
+						&& $r->getHomeProject()->getID() == $g->getID()) {
 						$role_names[] = $r->getName();
 						if ($r->hasPermission('project_admin', $g->getID())) {
 							$isadmin = true;
@@ -90,7 +90,7 @@ class Widget_MyProjects extends Widget {
 
 			if (isset($private_shown) && $private_shown) {
 				$html_my_projects .= '
-				    <TR '. $HTML->boxGetAltRowStyle($i) .'"><TD colspan="2" class="small">'.
+					<TR '. $HTML->boxGetAltRowStyle($i) .'"><TD colspan="2" class="small">'.
 					'(*)&nbsp;'._("<em>Private project</em>").'</td></tr>';
 			}
 			$html_my_projects .= '</table>';
@@ -130,19 +130,19 @@ class Widget_MyProjects extends Widget {
 			$url = util_make_url('/projects/' . $project->getUnixName());
 
 			if ( !RoleAnonymous::getInstance()->hasPermission('project_read',$pid)) {
-			    $title .= ' (*)';
-		    }
-		    
-		    $desc = "Project: $url\n";
-		    if (forge_check_perm ('project_admin', $pid)) {
-			    $desc .= '<br />Admin: '. util_make_url('/project/admin/?group_id='.$pid);
-		    }
-		    
-		    $rss->addItem(array(
-					  'title'       => $title,
-					  'description' => $desc,
-					  'link'        => $url)
-			    );
+				$title .= ' (*)';
+			}
+
+			$desc = "Project: $url\n";
+			if (forge_check_perm ('project_admin', $pid)) {
+				$desc .= '<br />Admin: '. util_make_url('/project/admin/?group_id='.$pid);
+			}
+			
+			$rss->addItem(array(
+						'title'       => $title,
+						'description' => $desc,
+						'link'        => $url)
+					);
 		}
 	}
 
