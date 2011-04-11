@@ -57,6 +57,10 @@ then
 				LXCTEMPLATE=$LXCCOSTEMPLATE
 				VEID=""
 				;;
+			cdx*)
+				LXCTEMPLATE=$LXCCOSTEMPLATE
+				VEID=""
+				;;
 		esac
 	fi
 fi
