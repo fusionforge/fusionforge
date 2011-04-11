@@ -74,7 +74,7 @@ class Widget_MyProjects extends Widget {
 					$html_my_projects .= ' <small><A HREF="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</A></small>';
 				}
 				$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
-				if (!$ra->hasPermission('project_read', $group->getID())) {
+				if (!$ra->hasPermission('project_read', $g->getID())) {
 					$html_my_projects .= ' (*)';
 					$private_shown = true;
 				}
