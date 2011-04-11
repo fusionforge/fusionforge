@@ -1246,22 +1246,22 @@ abstract class BaseRole extends Error {
 		$new_pa['tracker'] = array () ;
 		foreach ($projects as $p) {
 			$atf = new ArtifactTypeFactory ($p) ;
-			$trackers = $atf->getArtifactTypes () ;
-			foreach ($trackers as $t) {
+			$trackerids = $atf->getAllArtifactTypeIds () ;
+			foreach ($trackerids as $tid) {
 				if (USE_PFO_RBAC) {
 					if (array_key_exists ('tracker', $this->perms_array)
-					    && array_key_exists ($t->getID(), $this->perms_array['tracker']) ) {
-						$new_pa['tracker'][$t->getID()] = $this->perms_array['tracker'][$t->getID()] ;
+					    && array_key_exists ($tid, $this->perms_array['tracker']) ) {
+						$new_pa['tracker'][$tid] = $this->perms_array['tracker'][$tid] ;
 					} elseif (array_key_exists ('new_tracker', $this->perms_array)
 					    && array_key_exists ($p->getID(), $this->perms_array['new_tracker']) ) {
-						$new_pa['tracker'][$t->getID()] = $new_pa['new_tracker'][$p->getID()] ;
+						$new_pa['tracker'][$tid] = $new_pa['new_tracker'][$p->getID()] ;
 					}
 				} else {
 					if (array_key_exists ('tracker', $this->setting_array)
-					    && array_key_exists ($t->getID(), $this->setting_array['tracker']) ) {
-						$new_sa['tracker'][$t->getID()] = $this->setting_array['tracker'][$t->getID()] ;
+					    && array_key_exists ($tid, $this->setting_array['tracker']) ) {
+						$new_sa['tracker'][$tid] = $this->setting_array['tracker'][$tid] ;
 					} else {
-						$new_sa['tracker'][$t->getID()] = $new_sa['newtracker'][0] ;
+						$new_sa['tracker'][$tid] = $new_sa['newtracker'][0] ;
 					}
 				}
 			}
@@ -1272,22 +1272,22 @@ abstract class BaseRole extends Error {
 		$new_pa['forum'] = array () ;
 		foreach ($projects as $p) {
 			$ff = new ForumFactory ($p) ;
-			$forums = $ff->getForums () ;
-			foreach ($forums as $f) {
+			$fids = $ff->getAllForumIds () ;
+			foreach ($fids as $fid) {
 				if (USE_PFO_RBAC) {
 					if (array_key_exists ('forum', $this->perms_array)
-					    && array_key_exists ($f->getID(), $this->perms_array['forum']) ) {
-						$new_pa['forum'][$f->getID()] = $this->perms_array['forum'][$f->getID()] ;
+					    && array_key_exists ($fid, $this->perms_array['forum']) ) {
+						$new_pa['forum'][$fid] = $this->perms_array['forum'][$fid] ;
 					} elseif (array_key_exists ('new_forum', $this->perms_array)
 					    && array_key_exists ($p->getID(), $this->perms_array['new_forum']) ) {
-						$new_pa['forum'][$f->getID()] = $new_pa['new_forum'][$p->getID()] ;
+						$new_pa['forum'][$fid] = $new_pa['new_forum'][$p->getID()] ;
 					}
 				} else {
 					if (array_key_exists ('forum', $this->setting_array)
-					    && array_key_exists ($f->getID(), $this->setting_array['forum']) ) {
-						$new_sa['forum'][$f->getID()] = $this->setting_array['forum'][$f->getID()] ;
+					    && array_key_exists ($fid, $this->setting_array['forum']) ) {
+						$new_sa['forum'][$fid] = $this->setting_array['forum'][$fid] ;
 					} else {
-						$new_sa['forum'][$f->getID()] = $new_sa['newforum'][0] ;
+						$new_sa['forum'][$fid] = $new_sa['newforum'][0] ;
 					}
 				}
 			}
@@ -1298,22 +1298,22 @@ abstract class BaseRole extends Error {
 		$new_pa['pm'] = array () ;
 		foreach ($projects as $p) {
 			$pgf = new ProjectGroupFactory ($p) ;
-			$pgs = $pgf->getProjectGroups () ;
-			foreach ($pgs as $g) {
+			$pgids = $pgf->getAllProjectGroupIds () ;
+			foreach ($pgids as $gid) {
 				if (USE_PFO_RBAC) {
 					if (array_key_exists ('pm', $this->perms_array)
-					    && array_key_exists ($g->getID(), $this->perms_array['pm']) ) {
-						$new_pa['pm'][$g->getID()] = $this->perms_array['pm'][$g->getID()] ;
+					    && array_key_exists ($gid, $this->perms_array['pm']) ) {
+						$new_pa['pm'][$gid] = $this->perms_array['pm'][$gid] ;
 					} elseif (array_key_exists ('new_pm', $this->perms_array)
 					    && array_key_exists ($p->getID(), $this->perms_array['new_pm']) ) {
-						$new_pa['pm'][$g->getID()] = $new_pa['new_pm'][$p->getID()] ;
+						$new_pa['pm'][$gid] = $new_pa['new_pm'][$p->getID()] ;
 					}
 				} else {
 					if (array_key_exists ('pm', $this->setting_array)
-					    && array_key_exists ($g->getID(), $this->setting_array['pm']) ) {
-						$new_sa['pm'][$g->getID()] = $this->setting_array['pm'][$g->getID()] ;
+					    && array_key_exists ($gid, $this->setting_array['pm']) ) {
+						$new_sa['pm'][$gid] = $this->setting_array['pm'][$gid] ;
 					} else {
-						$new_sa['pm'][$g->getID()] = $new_sa['newpm'][0] ;
+						$new_sa['pm'][$gid] = $new_sa['newpm'][0] ;
 					}
 				}
 			}
