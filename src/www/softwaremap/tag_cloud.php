@@ -70,8 +70,8 @@ if ($selected_tag) {
 	$projects = array();
 	$project_ids = array();
 	while ($row_grp = db_fetch_array($res_grp)) {
-		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
-			continue ;
+		if (!forge_check_perm('project_read', $row_grp['group_id'])) {
+			continue;
 		}
 		$projects[] = $row_grp;
 		$project_ids[] = $row_grp['group_id'];
@@ -90,7 +90,7 @@ if ($selected_tag) {
 		$html_limit .= sprintf(ngettext('<strong>%d</strong> project in result set.',
 						'<strong>%d</strong> projects in result set.',
 						$querytotalcount),
-				       $querytotalcount) ;
+						$querytotalcount);
 	}
 
 	// only display pages stuff if there is more to display
@@ -99,10 +99,10 @@ if ($selected_tag) {
 		$html_limit .= sprintf (ngettext ('Displaying %d project per page. Projects sorted by alphabetical order.<br />',
 						  'Displaying %d projects per page. Projects sorted by alphabetical order.<br />',
 						  $TROVE_BROWSELIMIT),
-					$TROVE_BROWSELIMIT) ;
+						$TROVE_BROWSELIMIT);
 
 		// display all the numbers
-		for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
+		for ($i=1 ;$i <= ceil($querytotalcount/$TROVE_BROWSELIMIT); $i++) {
 			$html_limit .= ' ';
 			if ($page != $i) {
 				$html_limit .= util_make_link ('/softwaremap/tag_cloud.php?tag='.$selected_tag.'&page='.$i,
@@ -118,7 +118,7 @@ if ($selected_tag) {
 
 	// #################################################################
 	// print actual project listings
-	for ($i_proj=0;$i_proj<=$querytotalcount;$i_proj++) {
+	for ($i_proj = 0; $i_proj < $querytotalcount; $i_proj++) {
 		$row_grp = $projects[$i_proj];
 
 		// check to see if row is in page range
