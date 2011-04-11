@@ -80,7 +80,7 @@ switch ($type) {
 			}
 		}
 
-		$mantisbtConf = $mantisbt->getMantisBTConf();
+		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
 		$view = getStringFromRequest('view');
 		if ($mantisbtConf['id_mantisbt'] === 0) {
 			$warning_msg = _('The mantisbt plugin for this project is not initialized.');
@@ -157,6 +157,7 @@ switch ($type) {
 		break;
 	}
 	case 'user': {
+
 		if (!session_loggedin()) {
 			exit_not_logged_in();
 		}
@@ -164,6 +165,7 @@ switch ($type) {
 		if (!($user) || !($user->usesPlugin($mantisbt->name))) {
 			exit_error(sprintf(_('First activate the User\'s %s plugin through Account Maintenance Page'), $mantisbt->name), 'my');
 		}
+
 
 		$action = getStringFromRequest('action');
 		$view = getStringFromRequest('view');
@@ -190,6 +192,7 @@ switch ($type) {
 		}
 		$use_tooltips = $user->usesTooltips();
 
+
 		switch ($action) {
 			case 'inituser':
 			case 'updateIssue':
@@ -214,6 +217,7 @@ switch ($type) {
 
 		$format = "%07d";
 		// do the job
+
 		$mantisbt->getHeader('user');
 		include($mantisbt->name.'/www/user/index.php');
 		break;
@@ -253,7 +257,7 @@ switch ($type) {
 			exit_permission_denied(_('You are not Admin of this project'), 'mantisbt');
 		}
 
-		$mantisbtConf = $mantisbt->getMantisBTConf();
+		$mantisbtConf = $mantisbt->getMantisBTConf($group_id);
 		$action = getStringFromRequest('action');
 		$view = getStringFromRequest('view');
 		if ($view != 'init' && $action != 'init') {

@@ -186,7 +186,7 @@ class MantisBTPlugin extends Plugin {
 
 	function removeProjectMantis($idProjet) {
 		$groupObject = group_get_object($idProjet);
-		$localMantisbtConf = $this->getMantisBTConf();
+		$localMantisbtConf = $this->getMantisBTConf($groupObject->getID());
 
 		if (!$localMantisbtConf) {
 			$groupObject->setError('removeProjetMantis::Error' . ' '. _('No project found'));
@@ -224,7 +224,7 @@ class MantisBTPlugin extends Plugin {
 	function updateProjectMantis($groupId, $groupName, $groupIspublic) {
 		$groupObject = group_get_object($groupId);
 		$projet = array();
-		$localMantisbtConf = $this->getMantisBTConf();
+		$localMantisbtConf = $this->getMantisBTConf($groupObject->getID());
 		$project['name'] = $groupName;
 		$project['status'] = "development";
 
@@ -276,11 +276,11 @@ class MantisBTPlugin extends Plugin {
 	/**
 	 * getMantisBTConf - get the mantisbt configuration id for a specific group_id
 	 *
+	 * @param	integer	the group_id
 	 * @return	array	the mantisbt configuration array
 	 * @access	public
 	 */
-	function getMantisBTConf() {
-		global $group_id;
+	function getMantisBTConf($group_id) {
 		$group = group_get_object($group_id);
 		$mantisbtConfArray = array();
 		$resIdProjetMantis = db_query_params('SELECT * FROM plugin_mantisbt WHERE id_group = $1', array($group_id));
@@ -310,6 +310,7 @@ class MantisBTPlugin extends Plugin {
 			$mantisbtConfArray['soap_user'] = $row['soap_user'];
 			$mantisbtConfArray['soap_password'] = $row['soap_password'];
 		}
+
 		return $mantisbtConfArray;
 	}
 
@@ -559,6 +560,13 @@ class MantisBTPlugin extends Plugin {
 		$row = db_fetch_array($resIdUser);
 		$userConf['user'] = $row['mantisbt_user'];
 		$userConf['password'] = $row['mantisbt_password'];
+		$userConf['url'] = array();
+		foreach ($user->getGroups() as $groupObject) {
+			if ($groupObject->usesPlugin($this->name)) {
+				$mantisbtGroupConf = $this->getMantisBTConf($groupObject->getID());
+				$userConf['url'][] = $mantisbtGroupConf['url'];
+			}
+		}
 		return $userConf;
 	}
 
