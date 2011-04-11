@@ -37,6 +37,32 @@ require_once $gfcommon.'include/pre.php';
 //
 //	test to see if the logger was successful in setting up the objects
 //
+
+$default_content_type = 'text/html';
+
+// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
+$hook_params = array();
+$hook_params['script'] = 'project_home';
+$hook_params['accepted_types'] = array();
+plugin_hook_by_reference('script_accepted_types', $hook_params);
+if(isset($hook_params['accepted_types'])){
+        // By default, text/html is accepted
+        $accepted_types = array($default_content_type);
+        $new_accepted_types = $hook_params['accepted_types'];
+        $accepted_types = array_merge($accepted_types, $new_accepted_types);
+        
+        // PEAR::HTTP (for negotiateMimeType())
+        require_once('HTTP.php');
+
+        // negociate accepted content-type depending on the preferred ones declared by client
+        $http=new HTTP();
+        $content_type = $http->negotiateMimeType($accepted_types,'text/html');
+}
+else {
+        $content_type = $default_content_type;
+}
+
+
 if (!$group_id || !$project) {
 	exit_no_group();
 } else {
@@ -54,8 +80,21 @@ if (!$group_id || !$project) {
 		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
 		exit();
 	} else {
-		//show the project summary page
-		include $gfwww.'include/project_home.php';
+		// if a custom content-type is selected, then redirect to plugin's rendering
+		if($content_type != $default_content_type) {
+			$hook_params = array();
+			$hook_params['groupname'] = $project->getUnixName();
+			$hook_params['accept'] = $content_type;
+			$hook_params['return'] = '';
+			plugin_hook_by_reference('content_negociated_project_home', $hook_params);
+			if($hook_params['return'] != ''){
+				$uri = $hook_params['return'];
+				session_redirect($uri);
+			}
+		} else {
+			//show the project summary page
+			include $gfwww.'include/project_home.php';
+		}
 	}
 }
 

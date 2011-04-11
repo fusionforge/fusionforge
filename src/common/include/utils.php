@@ -1145,7 +1145,8 @@ function util_make_link_u ($username, $user_id,$text) {
  * @return string
  */
 function util_display_user($username, $user_id,$text, $size='xs') {
-        $hook_params = array();
+	$hook_params = array();
+	$hook_params['resource_type'] = 'user';
         $hook_params['username'] = $username;
         $hook_params['user_id'] = $user_id;
         $hook_params['user_link'] = '';
@@ -1185,8 +1186,19 @@ function util_make_url_u ($username, $user_id) {
  * @param string $text
  * @return string
  */
-function util_make_link_g ($groupame, $group_id,$text) {
-	return '<a href="' . util_make_url_g ($groupame, $group_id) . '">' . $text . '</a>' ;
+function util_make_link_g ($groupname, $group_id,$text) {
+	$hook_params =array();
+	$hook_params['resource_type']  = 'group';
+        $hook_params['group_name'] = $groupname;
+	$hook_params['group_id'] = $group_id;
+	$hook_params['link_text'] = $text;
+        $hook_params['group_link'] = '';
+        plugin_hook_by_reference('project_link_with_tooltip', $hook_params);
+        if($hook_params['group_link'] != '') {
+                return $hook_params['group_link'];
+        }
+
+	return '<a href="' . util_make_url_g ($groupname, $group_id) . '">' . $text . '</a>' ;
 }
 
 /**

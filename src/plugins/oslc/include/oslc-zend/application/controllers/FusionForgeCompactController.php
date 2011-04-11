@@ -87,6 +87,14 @@ class FusionForgeCompactController extends CompactController {
 			$this->_forward('oslcCompactUser');
 			return;
 		}
+		if(isset($params['project']) && isset($params['type']) && $params['type'] == "small") {
+			$this->_forward('oslcCompactProjectSmall');
+			return;
+		}
+		if(isset($params['project']) && !isset($params['type'])) {
+			$this->_forward('oslcCompactProject');
+			return;
+		}
 	}
 	
 	/**
@@ -108,6 +116,24 @@ class FusionForgeCompactController extends CompactController {
 	}
 	
 	/**
+	 * Enter description here ...
+	 */
+	public function oslccompactprojectAction() {
+		if (! isset($this->actionMimeType)) {
+			$this->_forward('UnknownAcceptType','error');
+			return;
+		}
+
+		$req = $this->getRequest();
+		$params = $req->getParams();
+		
+		$group_obj = group_get_object_by_name($params['project']);
+		$this->view->project = $group_obj;
+		
+		$this->getResponse()->setHeader('Content-Type', 'application/x-oslc-compact+xml');
+	}
+	
+	/**
 	 * TODO: Enter description here ...
 	 */
 	public function oslccompactusersmallAction() {
@@ -122,6 +148,21 @@ class FusionForgeCompactController extends CompactController {
 		$user_obj = user_get_object_by_name($params['user']);
 		$this->view->user = $user_obj;
 
+		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
+	}
+	
+	public function oslccompactprojectsmallAction() {
+		if (! isset($this->actionMimeType)) {
+			$this->_forward('UnknownAcceptType','error');
+			return;
+		}
+
+		$req = $this->getRequest();
+		$params = $req->getParams();
+		
+		$group_obj = group_get_object_by_name($params['project']);
+		$this->view->project = $group_obj;
+		
 		$this->getResponse()->setHeader('Content-Type', $this->actionMimeType);
 	}
 }

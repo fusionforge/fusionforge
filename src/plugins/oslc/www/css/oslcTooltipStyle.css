@@ -47,7 +47,7 @@
 }
 
 .personPopupPopup .topRight {
-	background: url(/plugins/oslc/images/userTooltip/balloon_topRight.png) no-repeat;
+	background: url(/plugins/oslc/images/userTooltip/balloon_topRight.png) no-repeat left;
 }
 
 .personPopupPopup .bottomRight {
@@ -55,7 +55,7 @@
 }  
 
 .personPopupPopup .top {
-	background: url(/plugins/oslc/images/userTooltip/balloon_top.png) repeat-x;
+	background: url(/plugins/oslc/images/userTooltip/balloon_top.png) repeat-x bottom;
 }
 
 .personPopupPopup .bottom {

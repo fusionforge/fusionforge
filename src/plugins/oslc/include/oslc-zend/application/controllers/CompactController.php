@@ -33,7 +33,7 @@ class CompactController extends Zend_Rest_Controller {
 		'oslccompactuser' => array(
 			'application/x-oslc-compact+xml' => 'xml'
 		),
-		'oslccompactusersmall' => array(
+		'oslccompactproject' => array(
 			'application/x-oslc-compact+xml' => 'xml'
 		)
 	);

@@ -50,8 +50,17 @@ jQuery(function(){
 
 	jQuery('body').append(container);
 	
-	jQuery('.personPopupTrigger').live('mouseover', function() {  
-		var username = jQuery(this).attr('rel');
+	jQuery('.personPopupTrigger').live('mouseover', function() {
+		var params = jQuery(this).attr('rel').split(',');
+		var resourceType = params[0];
+		var resourceId = params[1];
+
+		if(resourceType == 'user') {
+			resource = 'users';
+		}
+		if(resourceType == 'project'){
+			resource = 'projects';
+		}
 
 		if (hideTimer) {
 			clearTimeout(hideTimer);  
@@ -63,11 +72,11 @@ jQuery(function(){
 			top: pos.top - 5 + 'px'  
 		});
 
-		jQuery('#personPopupContent').html('&nbsp;');  
+		jQuery('#personPopupContent').html('&nbsp;');
 
 		jQuery.ajax({  
 			type: 'GET',
-			url: '/users/' + username,
+			url: '/'+ resource +'/' + resourceId + '/',
 			dataType: 'xml',
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Accept","application/x-oslc-compact+xml");

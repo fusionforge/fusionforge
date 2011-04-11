@@ -35,10 +35,12 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("userisactivecheckboxpost"); //
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("user_link_with_tooltip"); 
+		$this->_addHook("project_link_with_tooltip");
 		$this->_addHook("javascript_file"); // Add js files for oslc plugin
 		$this->_addHook("cssfile");
 		$this->_addHook("script_accepted_types");
-		$this->_addHook("content_negociated_user_home");		
+		$this->_addHook("content_negociated_user_home");
+		$this->_addHook("content_negociated_project_home");		
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -156,19 +158,25 @@ class oslcPlugin extends Plugin {
 			}
 		}
 		elseif ($hookname == "user_link_with_tooltip"){
-			$params['user_link'] = '<a class="personPopupTrigger" href="'. util_make_url_u ($params['username'], $params['user_id']) .
-				'" rel="' . $params['username'] . '">'. $params['username'] . '</a>';
+			require_once dirname( __FILE__ ) . '/compactResource.class.php';
+			$cR = new compactResource($params);
+			$params['user_link'] = $cR->getResourceLink();
+		}
+		elseif ($hookname == "project_link_with_tooltip") {
+			require_once dirname( __FILE__ ) . '/compactResource.class.php';
+			$cR = new compactResource($params);
+			$params['group_link'] = $cR->getResourceLink();			
 		}
 		elseif ($hookname == "javascript_file") {
 			use_javascript('/scripts/jquery/jquery.js');
-			use_javascript('/plugins/oslc/scripts/userTooltip.js');
+			use_javascript('/plugins/oslc/scripts/oslcTooltip.js');
 		}
 		elseif ($hookname == "cssfile") {
-			use_stylesheet('/plugins/oslc/css/userTooltipStyle.css');
+			use_stylesheet('/plugins/oslc/css/oslcTooltipStyle.css');
 		}
 		elseif($hookname == "script_accepted_types"){
 			$script = $params['script']; 
-			if ($script == 'user_home') { 
+			if ($script == 'user_home' || $script == 'project_home') { 
 				$params['accepted_types'][] = 'application/x-oslc-compact+xml'; 
 			} 
 		}
@@ -177,6 +185,13 @@ class oslcPlugin extends Plugin {
 			$accept = $params['accept']; 
 			if($accept == 'application/x-oslc-compact+xml') {
 				$params['return'] = '/plugins/oslc/compact/user/'.$username;
+			}
+		}
+		elseif($hookname == "content_negociated_project_home") {
+			$projectname = $params['groupname'];
+			$accept = $params['accept'];
+			if($accept == 'application/x-oslc-compact+xml') {
+				$params['return'] = '/plugins/oslc/compact/project/'.$projectname;
 			}
 		}
 		elseif ($hookname == "blahblahblah") {
