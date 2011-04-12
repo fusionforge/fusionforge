@@ -108,7 +108,7 @@ EOF
     hostnamebase=`echo $hostname | cut -d. -f1`
     if [ "$hostnamebase.local" != "$hostname" ]
         then
-            cat <<EOF >> $rootfs/etc/dhcp3/dhclient.conf
+            cat <<EOF >> $rootfs/etc/dhcp/dhclient.conf
 send host-name "$hostnamebase";
 EOF
     fi
