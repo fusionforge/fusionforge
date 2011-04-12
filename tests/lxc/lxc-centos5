@@ -399,13 +399,26 @@ install_centos()
     return $?
 }
 
+gen_mac()
+{
+	dd if=/dev/urandom bs=1 count=3 2>/dev/null | od -tx1 | head -1 | cut -d' ' -f2- | awk '{ print "00:16:3e:"$$1":"$$2":"$$3 }'
+}
+
 copy_configuration()
 {
     path=$1
     rootfs=$2
     name=$3
+    macdir=$4
+    
+    if [ ! -e "$macdir/$name" ]
+    then
+	gen_mac > $macdir/$name
+    fi
+    macaddr=`cat $macdir/$name`
 
     cat <<EOF >> $path/config
+lxc.network.hwaddr = $macaddr
 # lxc.utsname = $name
 
 lxc.tty = 4
@@ -533,6 +546,7 @@ fi
 rootfs=$path/rootfs
 oldhostkeydir=/var/lib/lxc/ssh
 hostkeydir=/var/cache/lxc/ssh
+macdir=/var/cache/lxc/mac
 if [ -e $oldhostkeydir ]
 then
     if [ ! -e $hostkeydir ]
@@ -543,6 +557,10 @@ fi
 if [ ! -e $hostkeydir ]
 then
     mkdir $hostkeydir
+fi
+if [ ! -e $macdir ]
+then
+    mkdir $macdir
 fi
 
 install_centos $rootfs
@@ -557,7 +575,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-copy_configuration $path $rootfs $name
+copy_configuration $path $rootfs $name $macdir
 if [ $? -ne 0 ]; then
     echo "failed write configuration file"
     exit 1
