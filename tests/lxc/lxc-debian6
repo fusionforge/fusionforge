@@ -111,6 +111,7 @@ EOF
             cat <<EOF >> $rootfs/etc/dhcp3/dhclient.conf
 send host-name "$hostnamebase";
 EOF
+    fi
 
     # set the hostname
     cat <<EOF > $rootfs/etc/hostname
