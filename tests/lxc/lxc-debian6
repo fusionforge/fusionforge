@@ -104,6 +104,13 @@ EOF
 		exit 3
 	fi
     fi
+    # When domain is not local, avahi completed by send hostname
+    hostnamebase=`echo $hostname | cut -d. -f1`
+    if [ "$hostnamebase.local" != "$hostname" ]
+        then
+            cat <<EOF >> $rootfs/etc/dhcp3/dhclient.conf
+send host-name "$hostnamebase";
+EOF
 
     # set the hostname
     cat <<EOF > $rootfs/etc/hostname
@@ -285,13 +292,26 @@ install_debian()
     return $?
 }
 
+gen_mac()
+{
+	dd if=/dev/urandom bs=1 count=3 2>/dev/null | od -tx1 | head -1 | cut -d' ' -f2- | awk '{ print "00:16:3e:"$1":"$2":"$3 }'
+}
+
 copy_configuration()
 {
     path=$1
     rootfs=$2
     name=$3
+    macdir=$4
+
+    if [ ! -e "$macdir/$name" ]
+    then
+        gen_mac > $macdir/$name
+    fi
+    macaddr=`cat $macdir/$name`
 
     cat <<EOF >> $path/config
+lxc.network.hwaddr = $macaddr
 lxc.tty = 4
 lxc.pts = 1024
 lxc.rootfs = $rootfs
@@ -400,6 +420,7 @@ fi
 rootfs=$path/rootfs
 oldhostkeydir=/var/lib/lxc/ssh
 hostkeydir=/var/cache/lxc/ssh
+macdir=/var/cache/lxc/mac
 if [ -e $oldhostkeydir ]
 then
     if [ ! -e $hostkeydir ]
@@ -410,6 +431,10 @@ fi
 if [ ! -e $hostkeydir ]
 then
     mkdir $hostkeydir
+fi
+if [ ! -e $macdir ]
+then
+    mkdir $macdir
 fi
 
 install_debian $rootfs
@@ -424,7 +449,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-copy_configuration $path $rootfs $name
+copy_configuration $path $rootfs $name $macdir
 if [ $? -ne 0 ]; then
     echo "failed write configuration file"
     exit 1
