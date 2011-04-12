@@ -119,9 +119,19 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 rootfs=$path/rootfs
-hostkeydir=/var/lib/lxc/ssh
-[ -d $hostkeydir ] || mkdir $hostkeydir
-mkdir $hostkeydir
+oldhostkeydir=/var/lib/lxc/ssh
+hostkeydir=/var/cache/lxc/ssh
+if [ -e $oldhostkeydir ]
+then
+	if [ ! -e $hostkeydir ]
+	then
+		mv $oldhostkeydir $hostkeydir
+	fi
+fi
+if [ ! -e $hostkeydir ] 
+then 
+	mkdir $hostkeydir
+fi
 
 configure_network $rootfs $name $address $netmask $gateway
 if [ $? -ne 0 ]; then
