@@ -679,6 +679,10 @@ Enjoy the site.
 			$this->setError(_('ERROR: Invalid status value'));
 			return false;
 		}
+		if ($this->getStatus() != 'P' && $status == 'P') {
+			$this->setError('ERROR: You can\'t set pending status if user is suspend or active');
+			return false;
+		}
 
 		db_begin();
 		$res = db_query_params ('UPDATE users SET status=$1 WHERE user_id=$2',
