@@ -43,93 +43,87 @@ function forum_header($params) {
 	$params['group']=$group_id;
 	$params['toptab']='forums';
 
-	/*
-		bastardization for news
-		Show icon bar unless it's a news forum
-	*/
-	if ($group_id == forge_get_config('news_group')) {
-		//this is a news item, not a regular forum
-		if ($forum_id) {
-			// Show this news item at the top of the page
-			$result = db_query_params ('SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id=$1',
-						   array ($forum_id));
-
+	if ($forum_id) {
+		// Check if this is a news item, to display it at the top of the page
+		$result = db_query_params ('SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id=$1',
+					   array ($forum_id));
+		
+		if (db_numrows($result) == 1) {
+			
 			// checks which group the news item belongs to
 			$params['group']=db_result($result,0,'group_id');
 			$params['toptab']='news';
 			$params['title']= _('Forum: ') . db_result($result,0,'summary');
 			$HTML->header($params);
-
+		
 			echo '<table><tr><td valign="top">';
-			if (!$result || db_numrows($result) < 1) {
-				echo '<p class="error">'._('Error - this news item was not found').'</p>';
-			} else {
-				$user = user_get_object(db_result($result,0,'submitted_by'));
-				$group = group_get_object($params['group']);
-				if (!$group || !is_object($group) || $group->isError()) {
-					exit_no_group();
-				}
-				echo '<p>
+			$user = user_get_object(db_result($result,0,'submitted_by'));
+			$group = group_get_object($params['group']);
+			if (!$group || !is_object($group) || $group->isError()) {
+				exit_no_group();
+			}
+			echo '<p>
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong>'.
-					util_make_link ('/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&amp;group_id='.$group_id,
-							db_result($result,0,'summary')).'<br/>
+				util_make_link ('/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&amp;group_id='.$group_id,
+						db_result($result,0,'summary')).'<br/>
 				<strong>'._('Project').':</strong>'.
-					util_make_link_g ($group->getUnixName(),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
+				util_make_link_g ($group->getUnixName(),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
 				</p>
 				';
-				$body = db_result($result,0,'details');
-				$body = TextSanitizer::purify($body);
-				if (!strstr($body,'<')) {
-					//backwards compatibility for non html messages
-					echo util_make_links(nl2br($body)); 
-				} else {
-					echo util_make_links($body);
-				}
-
-				// display classification
-				if ($params['group'] == forge_get_config('news_group')) { 
-				   print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
-				} elseif (forge_get_config('use_trove')) {
-				   print stripslashes(trove_getcatlisting($params['group'],0,1));
-				}
+			$body = db_result($result,0,'details');
+			$body = TextSanitizer::purify($body);
+			if (!strstr($body,'<')) {
+				//backwards compatibility for non html messages
+				echo util_make_links(nl2br($body)); 
+			} else {
+				echo util_make_links($body);
+			}
+			
+			// display classification
+			if ($params['group'] == forge_get_config('news_group')) { 
+				print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
+			} elseif (forge_get_config('use_trove')) {
+				print stripslashes(trove_getcatlisting($params['group'],0,1));
 			}
 			echo '</td><td valign="top" width="35%">';
 			echo $HTML->boxTop(_('Latest News'));
 			echo news_show_latest($params['group'],5,false);
 			echo $HTML->boxBottom();
 			echo '</td></tr></table>';
+		} else {
+			$HTML->header($params);
 		}
-	}
-
-	$menu_text=array();
-	$menu_links=array();
-
-	$menu_text[]=_('View Forums');
-	$menu_links[]='/forum/?group_id='.$group_id;
-
-	if ($f){
-		if ($forum_id) {
-			$menu_text[]=_('Discussion Forums:') .' '. $f->getName();
-			$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
-		}
-		if (forge_check_perm ('forum_admin', $f->Group->getID())) {
-			$menu_text[]=_('Administration');
-			$menu_links[]='/forum/admin/?group_id='.$group_id;
-		} 
 	} else {
+		$menu_text=array();
+		$menu_links=array();
+		
+		$menu_text[]=_('View Forums');
+		$menu_links[]='/forum/?group_id='.$group_id;
+		
+		if ($f){
+			if ($forum_id) {
+				$menu_text[]=_('Discussion Forums:') .' '. $f->getName();
+				$menu_links[]='/forum/forum.php?forum_id='.$forum_id;
+			}
+			if (forge_check_perm ('forum_admin', $f->Group->getID())) {
+				$menu_text[]=_('Administration');
+				$menu_links[]='/forum/admin/?group_id='.$group_id;
+			} 
+		} else {
 			$gg=group_get_object($group_id);
 			if (forge_check_perm ('forum_admin', $group_id)) {
 				$menu_text[]=_('Administration');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
 			}
+		}
+		if (count($menu_text) > 0) {
+			$params['submenu'] =$HTML->subMenu($menu_text,$menu_links);
+		}
+		
+		site_project_header($params);
 	}
-	if (count($menu_text) > 0) {
-		$params['submenu'] =$HTML->subMenu($menu_text,$menu_links);
-	}
-
-	site_project_header($params);
 
 	$pluginManager = plugin_manager_get_object();
 	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook ("blocks", "forum_".$f->getName()))

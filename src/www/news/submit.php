@@ -97,13 +97,12 @@ if (session_loggedin()) {
 			*/
 			
 			db_begin();
-			$g=group_get_object(forge_get_config('news_group'));
-			$f=new Forum($g);
+			$f = new Forum($group);
 			if (!$f->create(preg_replace('/[^_\.0-9a-z-]/','-', strtolower($summary)),$details,1,'',0,0)) {
 				db_rollback();
 				exit_error($f->getErrorMessage(),'news');
 			}
-			$g->normalizeAllRoles();
+			$group->normalizeAllRoles();
 			$new_id=$f->getID();
 			$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) 
  VALUES ($1, $2, $3, $4, $5, $6, $7)';

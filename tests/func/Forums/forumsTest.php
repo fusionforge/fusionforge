@@ -47,7 +47,7 @@ require_once dirname(dirname(__FILE__)).'/Testing/SeleniumGforge.php';
 
 class CreateForum extends FForge_SeleniumTestCase
 {
-	function skiptestSimplePost()
+	function testSimplePost()
 	{
 		// Create the first message (Message1/Text1).
 		$this->populateStandardTemplate('forums');
@@ -102,7 +102,7 @@ class CreateForum extends FForge_SeleniumTestCase
 	 * to the login page, then will reply and then
 	 * we check that his reply is present in the thread.
 	 */
-	function skiptestReplyToMessage()
+	function testReplyToMessage()
 	{
 		$this->populateStandardTemplate('forums');
 		$this->init();
@@ -111,7 +111,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
-		$this->clickAndWait("link=Welcome to Open-Discussion");
+		$this->clickAndWait("link=Welcome to open-discussion");
 		$this->click("link=[ reply ]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isLoginRequired());
@@ -126,14 +126,14 @@ class CreateForum extends FForge_SeleniumTestCase
 	}
 	
 	/*
-	 * Verify that it is imposible to use name already used by a mailing list
+	 * Verify that it is impossible to use name already used by a mailing list
 	 */
-	function skiptestEmailAddressNotAlreadyUsed() {
+	function testEmailAddressNotAlreadyUsed() {
 		$this->populateStandardTemplate('forums');
 		$this->init();
 		$this->click("link=Mailing Lists");
 		$this->waitForPageToLoad("30000");
-		$this->click("//body/div[@id='maindiv']/p[1]/strong/a");
+		$this->click("//body/div[@id='maindiv']/p[1]/strong/a[2]");
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Add Mailing List");
 		$this->waitForPageToLoad("30000");
@@ -143,8 +143,6 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isTextPresent("List Added"));
 		$this->click("link=Forums");
-		$this->waitForPageToLoad("30000");
-		$this->click("link=open-discussion");
 		$this->waitForPageToLoad("30000");
 		$this->click("//body/div[@id='maindiv']/p[1]/strong/a[2]");
 		$this->waitForPageToLoad("30000");
