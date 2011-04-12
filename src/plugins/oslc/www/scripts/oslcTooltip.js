@@ -26,9 +26,9 @@ jQuery(function(){
 	var hideDelay = 500;    
 	var hideTimer = null;  
 
-	// One instance that's reused to show info for the current person  
-	var container = $('<div id="personPopupContainer">'  
-			+ '<table width="" border="0" cellspacing="0" cellpadding="0" class="personPopupPopup">'  
+	// One instance that's reused to show info for the current resource  
+	var container = $('<div id="resourcePopupContainer">'  
+			+ '<table width="" border="0" cellspacing="0" cellpadding="0" class="resourcePopupPopup">'  
 			+ '<tr>'  
 			+ '   <td class="corner topLeft"></td>'  
 			+ '   <td class="top"></td>'  
@@ -36,7 +36,7 @@ jQuery(function(){
 			+ '</tr>'  
 			+ '<tr>'  
 			+ '   <td class="left">&nbsp;</td>'
-			+ '   <td class="personPopupResult"><div id="personPopupContent"></div></td>'  
+			+ '   <td class="resourcePopupResult"><div id="resourcePopupContent"></div></td>'  
 			+ '   <td class="right">&nbsp;</td>'  
 			+ '</tr>'  
 			+ '<tr>'  
@@ -50,7 +50,7 @@ jQuery(function(){
 
 	jQuery('body').append(container);
 	
-	jQuery('.personPopupTrigger').live('mouseover', function() {
+	jQuery('.resourcePopupTrigger').live('mouseover', function() {
 		var params = jQuery(this).attr('rel').split(',');
 		var resourceType = params[0];
 		var resourceId = params[1];
@@ -72,7 +72,7 @@ jQuery(function(){
 			top: pos.top - 5 + 'px'  
 		});
 
-		jQuery('#personPopupContent').html('&nbsp;');
+		jQuery('#resourcePopupContent').html('&nbsp;');
 
 		jQuery.ajax({  
 			type: 'GET',
@@ -90,7 +90,7 @@ jQuery(function(){
 						if( oslcDoc ) {
 							var prevDocUrl = oslcDoc.getAttribute('rdf:ressource');
 							if( prevDocUrl ) {
-								jQuery('#personPopupContent').load(prevDocUrl);
+								jQuery('#resourcePopupContent').load(prevDocUrl);
 							}
 						}
 					}
@@ -101,7 +101,7 @@ jQuery(function(){
 		container.css('display', 'block');  
 	});  
 
-	jQuery('.personPopupTrigger').live('mouseout', function() { 
+	jQuery('.resourcePopupTrigger').live('mouseout', function() { 
 		if (hideTimer) { 
 			clearTimeout(hideTimer);
 		}
@@ -113,14 +113,14 @@ jQuery(function(){
 	});
 
 	// Allow mouse over of details without hiding details  
-	jQuery('#personPopupContainer').mouseover(function() {  
+	jQuery('#resourcePopupContainer').mouseover(function() {  
 		if (hideTimer) { 
 			clearTimeout(hideTimer);
 		}
 	});  
 
 	// Hide after mouseout  
-	jQuery('#personPopupContainer').mouseout(function() {  
+	jQuery('#resourcePopupContainer').mouseout(function() {  
 		if (hideTimer){  
 			clearTimeout(hideTimer);
 		}

@@ -43,12 +43,12 @@ class compactResource {
 	}
 	
 	public function getUserLink($username, $user_id) {
-		return '<a class="personPopupTrigger" href="'. util_make_url_u ($username, $user_id) .
+		return '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
 				'" rel="user,' . $username . '">'. $username . '</a>';
 	}	
 	
 	public function getProjectLink($group_name, $group_id, $link_text) {
-		return '<a class="personPopupTrigger" href="'. util_make_url_g ($group_name, $group_id) .
+		return '<a class="resourcePopupTrigger" href="'. util_make_url_g ($group_name, $group_id) .
 				'" rel="project,' . $group_name . '">'. $link_text . '</a>';
 	}
 	
