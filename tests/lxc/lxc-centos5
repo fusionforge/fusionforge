@@ -28,30 +28,79 @@ DISTRO=centos-5
 
 configure_centos()
 {
-    rootfs=$1
-    hostname=$2
+    path=$1
+    rootfs=$2
+    hostname=$3
 
     # disable selinux in centos
     mkdir -p $rootfs/selinux
     echo 0 > $rootfs/selinux/enforce
 
-   # configure the network using the dhcp
-#    cat <<EOF > $rootfs/etc/network/interfaces
-#auto lo
-#iface lo inet loopback
-#
-#auto eth0
-#iface eth0 inet dhcp
-#EOF
-
-    # set the hostname
-#    cat <<EOF > $rootfs/etc/hostname
-#$hostname
-#EOF
-    # set minimal hosts
-#    cat <<EOF > $rootfs/etc/hosts
-#127.0.0.1 localhost $hostname
-#EOF
+    if grep -q ^lxc.network.ipv4 $path/config
+    then
+        # configure static network
+        lxc_network_ipv4=`grep ^lxc.network.ipv4 $path/config | cut -d= -f2`
+        address=`echo $lxc_network_ipv4 | cut -d/ -f1`
+	netmask=`netmask -s $lxc_network_ipv4 | cut -d/ -f2`
+        if [ -e $rootfs/etc/sysconfig/network-scripts ]
+        then
+                cat <<EOF > $rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+IPADDR=$address
+NETMASK=$netmask
+#NETWORK=
+#BROADCAST=
+ONBOOT=yes
+BOOTPROTO=none
+USERCTL=no
+EOF
+                cat <<EOF > $rootfs/etc/sysconfig/network
+NETWORKING=yes
+FORWARD_IPV4=yes
+HOSTNAME=$hostname
+#GATEWAY=
+GATEWAYDEV=eth0
+EOF
+                cat <<EOF >> $rootfs/etc/hosts
+$address        $hostname
+EOF
+                echo "Network configured with static ip"
+        else
+                exit 2
+        fi
+        
+    else
+        # configure the network using the dhcp
+        if [ -e $rootfs/etc/sysconfig/network-scripts ]
+        then
+                cat <<EOF > $rootfs/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+ONBOOT=yes
+BOOTPROTO=dhcp
+USERCTL=no
+EOF
+                cat <<EOF > $rootfs/etc/sysconfig/network
+NETWORKING=yes
+FORWARD_IPV4=yes
+HOSTNAME=$hostname
+GATEWAYDEV=eth0
+EOF
+                cat <<EOF >> $rootfs/etc/hosts
+127.0.1.1       $hostname
+EOF
+                echo "Network configured with dhcp"
+        else
+                exit 3
+        fi
+        # When domain is not local, avahi completed by send hostname
+        hostnamebase=`echo $hostname | cut -d. -f1`
+        if [ "$hostnamebase.local" != "$hostname" ]
+        then
+                cat <<EOF > $rootfs/etc/dhclient.conf
+send host-name "$hostnamebase";
+EOF
+        fi
+    fi
 
     # provide the lxc service
 #    cat <<EOF > $rootfs/etc/init/lxc.conf
@@ -167,6 +216,48 @@ test -e $rootfs/dev/tty6 || mknod -m 666 $rootfs/dev/tty6 c 4 6
 #cp /etc/timezone $rootfs/etc/timezone
 
     return 0
+}
+
+configure_pubkey(){
+	path=$1
+	rootfs=$2
+        if grep -q ^\#lxc.pubkey $path/config
+        then
+		pubkey=`grep ^\#lxc.pubkey $path/config | cut -d= -f2`
+	fi
+	if [ ! -e $rootfs/root/.ssh ]
+	then
+		mkdir $rootfs/root/.ssh
+	fi
+	if [ ! -z "$pubkey" ]
+	then
+		echo "Copying $pubkey -> $rootfs/root/.ssh/authorized_keys"
+		cp $pubkey $rootfs/root/.ssh/authorized_keys
+	fi
+}
+
+configure_hostkeydir(){
+	rootfs=$1
+	hostkeydir=$2
+	name=$3
+	if [ $# -ne 3 ]
+	then
+		exit 1
+	else
+		[ -d $rootfs/etc/ssh ] || mkdir -p $rootfs/etc/ssh
+		if [ -e $hostkeydir ]
+		then 
+			if [ ! -d $hostkeydir/$name ]
+			then
+				mkdir $hostkeydir/$name
+				echo "Creating SSH2 RSA key; this may take some time ..."
+				ssh-keygen -q -f $hostkeydir/$name/ssh_host_rsa_key -N '' -t rsa
+				echo "Creating SSH2 DSA key; this may take some time ..."
+				ssh-keygen -q -f $hostkeydir/$name/ssh_host_dsa_key -N '' -t dsa
+			fi
+			cp $hostkeydir/$name/ssh_host_* $rootfs/etc/ssh/
+		fi
+	fi
 }
 
 download_centos()
@@ -417,6 +508,12 @@ if [ ! -z "$clean" -a -z "$path" ]; then
     exit 0
 fi
 
+type netmask
+if [ $? -ne 0 ]; then
+    echo "'netmask' command is missing"
+    exit 1
+fi
+
 type rinse
 if [ $? -ne 0 ]; then
     echo "'rinse' command is missing"
@@ -434,6 +531,19 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 rootfs=$path/rootfs
+oldhostkeydir=/var/lib/lxc/ssh
+hostkeydir=/var/cache/lxc/ssh
+if [ -e $oldhostkeydir ]
+then
+    if [ ! -e $hostkeydir ]
+    then
+        mv $oldhostkeydir $hostkeydir
+    fi
+fi
+if [ ! -e $hostkeydir ]
+then
+    mkdir $hostkeydir
+fi
 
 install_centos $rootfs
 if [ $? -ne 0 ]; then
@@ -441,7 +551,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-configure_centos $rootfs $name
+configure_centos $path $rootfs $name
 if [ $? -ne 0 ]; then
     echo "failed to configure centos for a container"
     exit 1
@@ -450,6 +560,18 @@ fi
 copy_configuration $path $rootfs $name
 if [ $? -ne 0 ]; then
     echo "failed write configuration file"
+    exit 1
+fi
+
+configure_pubkey $path $rootfs
+if [ $? -ne 0 ]; then
+    echo "failed to configure pubkey"
+    exit 1
+fi
+
+configure_hostkeydir $rootfs $hostkeydir $name
+if [ $? -ne 0 ]; then
+    echo "failed to configure hostkeydir"
     exit 1
 fi
 

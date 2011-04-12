@@ -5033,9 +5033,7 @@ tests/lxc/Makefile -text
 tests/lxc/config.centos5 -text
 tests/lxc/config.debian6 -text
 tests/lxc/lxc-centos5 -text
-tests/lxc/lxc-centos5.postinst -text
 tests/lxc/lxc-debian6 -text
-tests/lxc/lxc-debian6.postinst -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/interfaces.sample -text

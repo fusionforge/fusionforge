@@ -71,28 +71,18 @@ then
 	echo "you need to install template"
 	echo "run: (cd $lxcdir ; sudo make)"
 else
-	sudo /usr/bin/lxc-create -n $HOST -f $lxcdir/config.$LXCTEMPLATE -t $LXCTEMPLATE
-fi
-
-if [ ! -e /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst ]
-then
-	echo "/usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst not found"
-	echo "you need to install template"
-	echo "run: (cd $lxcdir ; sudo make)"
-else
-	if [ "x$VEID" != "x" ]
-	then 
-		sudo /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst \
-		-p /var/lib/lxc/$HOST -n $HOST \
-		--address=$IPBASE.$VEID \
-		--netmask=$IPMASK \
-		--gateway=$IPGW \
-		--pubkey=$SSHPUBKEY
-	else
-		sudo /usr/lib/lxc/templates/lxc-$LXCTEMPLATE.postinst \
-		-p /var/lib/lxc/$HOST -n $HOST \
-		--pubkey=$SSHPUBKEY
+	tmpconf=`mktemp`
+	cat $lxcdir/config.$LXCTEMPLATE > $tmpconf
+	if [ ! -z "$VEID" ] 
+	then
+		CIDRMASK=`netmask -c $IPBASE.$VEID/$IPMASK | cut -d/ -f2`
+		echo "lxc.network.ipv4 = $IPBASE.$VEID/$CIDRMASK" >> $tmpconf
+		# Next is a bit hacky, the only way I found to pass pubkey to the template
+		# LXC don't allow to pass extra args
+		echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
 	fi
+	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $LXCTEMPLATE
+	rm -f $tmpconf
 	sudo /usr/bin/lxc-start -n $HOST -d
 fi
 
