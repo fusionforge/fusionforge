@@ -48,6 +48,8 @@ scp $WORKSPACE/build/packages/epel.repo root@$HOST:/etc/yum.repos.d/
 cp src/rpm-specific/dag-rpmforge.repo $WORKSPACE/build/packages/dag-rpmforge.repo
 if [ ! -z "$DAG_RPMFORGE_REPO" ] ; then
         sed -i "s#http://apt.sw.be/redhat#${DAG_RPMFORGE_REPO}#" $WORKSPACE/build/packages/dag-rpmforge.repo
+	# disable dag by default
+        sed -i "s#enabled = 1#enabled = 0#" $WORKSPACE/build/packages/dag-rpmforge.repo
 fi
 scp $WORKSPACE/build/packages/dag-rpmforge.repo root@$HOST:/etc/yum.repos.d/ 
 
