@@ -401,7 +401,7 @@ install_centos()
 
 gen_mac()
 {
-	dd if=/dev/urandom bs=1 count=3 2>/dev/null | od -tx1 | head -1 | cut -d' ' -f2- | awk '{ print "00:16:3e:"$$1":"$$2":"$$3 }'
+	dd if=/dev/urandom bs=1 count=3 2>/dev/null | od -tx1 | head -1 | cut -d' ' -f2- | awk '{ print "00:16:3e:"$1":"$2":"$3 }'
 }
 
 copy_configuration()
