@@ -135,10 +135,14 @@ if ($u->getStatus() == 'D') {
 		_('Active (A)'),
 		_('Suspended (S)'),
 		_('Deleted (D)'));
+} else if ($u->getStatus() == 'P') {
+        $status_letter = array('P','A','S');
+        $status_text   = array(_('Pending (P)'),
+                _('Active (A)'),
+                _('Suspended (S)'));
 } else {
-	$status_letter = array('P','A','S');
-	$status_text   = array(_('Pending (P)'),
-		_('Active (A)'),
+	$status_letter = array('A','S');
+	$status_text   = array(_('Active (A)'),
 		_('Suspended (S)'));
 }
 ?>
