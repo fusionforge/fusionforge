@@ -77,10 +77,10 @@ else
 	then
 		CIDRMASK=`netmask -c $IPBASE.$VEID/$IPMASK | cut -d/ -f2`
 		echo "lxc.network.ipv4 = $IPBASE.$VEID/$CIDRMASK" >> $tmpconf
-		# Next is a bit hacky, the only way I found to pass pubkey to the template
-		# LXC don't allow to pass extra args
-		echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
 	fi
+	# Next is a bit hacky, the only way I found to pass pubkey to the template
+	# LXC don't allow to pass extra args
+	echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
 	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $LXCTEMPLATE
 	rm -f $tmpconf
 	sudo /usr/bin/lxc-start -n $HOST -d
