@@ -40,6 +40,7 @@ $status = getIntFromRequest('status');
 $summary = getStringFromRequest('summary');
 $details = getStringFromRequest('details');
 $id = getIntFromRequest('id');
+$for_group = getIntFromRequest('for_group');
 
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
@@ -61,6 +62,14 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 
 	*/
 	if ($post_changes) {
+		$result = db_query_params("SELECT nb.forum_id, fgl.group_id FROM news_bytes nb, forum_group_list fgl WHERE nb.id=$1 AND nb.group_id=$2 AND nb.forum_id=fgl.group_forum_id", array($id, $group_id));
+		if (db_numrows($result) < 1) {
+			exit_error(_('Newsbyte not found'),'news');
+		}
+		
+		$forum_id = db_result($result,0,'forum_id');
+		$old_group_id = db_result($result,0,'group_id');
+	
 		if ($approve) {
 			/*
 				Update the db so the item shows on the home page
@@ -77,22 +86,38 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 				$details='(none)';
 			}
 			
-				if (getStringFromRequest('_details_content_type') == 'html') {
-					$details = TextSanitizer::purify($details);
-				} else {
-					$details = htmlspecialchars($details);
-				}
+			if (getStringFromRequest('_details_content_type') == 'html') {
+				$details = TextSanitizer::purify($details);
+			} else {
+				$details = htmlspecialchars($details);
+			}
+
+			db_begin(); 
 			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2, 
 details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
-
+			
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= _('Error On Update:');
 				$error_msg .= db_error();
+				db_rollback();
 			} else {
+				// If the forum has been moved to the newsadmin project
+				// (because the newsbyte has been approved),
+				// reassign it back to its original project
+				if ($group_id != $old_group_id) {
+					$result = db_query_params("UPDATE forum_group_list SET group_id=$1 WHERE group_forum_id=$2", array($group_id, $forum_id));
+					
+					$for_group = group_get_object($group_id);
+					$for_group->normalizeAllRoles();
+					$sitenews_group = group_get_object(forge_get_config('news_group'));
+					$sitenews_group->normalizeAllRoles();
+				}
+
 				$feedback .= _('Newsbyte Updated.');
 				// No notification if news is deleted.
 //				if ($status != 4)
 //					send_news_notification_email($id);
+				db_commit();
 			}
 			/*
 				Show the list_queue
@@ -196,6 +221,14 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 	if ($post_changes) {
 		if ($approve) {
+
+			$result=db_query_params("SELECT * FROM news_bytes WHERE id=$1 AND group_id=$2", array($id, $for_group));
+			if (db_numrows($result) < 1) {
+				exit_error(_('Newsbyte not found'),'news');
+			}
+			
+			$forum_id = db_result($result,0,'forum_id');
+
 			if ($status==1) {
 				/*
 					Update the db so the item shows on the home page
@@ -205,22 +238,45 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 				} else {
 					$details = htmlspecialchars($details);
 				}
-				$result=db_query_params("UPDATE news_bytes SET is_approved='1', post_date=$1, 
-summary=$2, details=$3 WHERE id=$4", array(time(), htmlspecialchars($summary), $details, $id));
+				db_begin();
+				$result=db_query_params('UPDATE news_bytes SET is_approved=1, post_date=$1, summary=$2, details=$3 WHERE id=$4',
+							array(time(),
+							      htmlspecialchars($summary),
+							      $details,
+							      $id));
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= _('Error On Update:');
+					db_rollback();
 				} else {
+					db_query_params('UPDATE forum_group_list SET group_id=$1 WHERE group_forum_id=$2',
+							array(forge_get_config('news_group'),
+							      $forum_id));
+					$for_group = group_get_object($for_group);
+					$for_group->normalizeAllRoles();
+					$sitenews_group = group_get_object(forge_get_config('news_group'));
+					$sitenews_group->normalizeAllRoles();
+					db_commit();
 					$feedback .= _('Newsbyte Updated.');
 				}
 			} else if ($status==2) {
 				/*
 					Move msg to deleted status
 				*/
+				db_begin();
 				$result=db_query_params("UPDATE news_bytes SET is_approved='2' WHERE id=$1", array($id));
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= _('Error On Update:');
 					$error_msg .= db_error();
+					db_rollback();
 				} else {
+					db_query_params('UPDATE forum_group_list SET group_id=$1 WHERE group_forum_id=$2',
+							array($for_group,
+							      $forum_id));
+					$for_group = group_get_object($for_group);
+					$for_group->normalizeAllRoles();
+					$sitenews_group = group_get_object(forge_get_config('news_group'));
+					$sitenews_group->normalizeAllRoles();
+					db_commit();
 					$feedback .= _('Newsbyte Deleted.');
 				}
 			}
