@@ -41,14 +41,18 @@ $sortorder = util_ensure_value_in_set ($sortorder,
 					      'members',
 					      'is_template')) ;
 
-if ($sortorder == 'is_template') {
+$sqlsortorder = $sortorder;
+
+if ($sortorder == 'is_public') {
+	$sortorder = 'group_name' ;
+} elseif ($sortorder == 'is_template') {
 	$sortorder = 'is_template DESC' ;
 }
 
 if ($group_name_search != '') {
 	echo "<p>"._('Projects that begin with'). " <strong>".$group_name_search."</strong></p>\n";
 	if (USE_PFO_RBAC) {
-		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name ORDER BY '.$sortorder,
+		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
 					array (strtolower ("$group_name_search%"))) ;
 	} else {
 	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
@@ -62,11 +66,11 @@ ORDER BY '.$sortorder,
 	}
 } else {
 	if (USE_PFO_RBAC) {
-		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
+		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
 		if ($status) {
 			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 		}
-		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name ORDER BY '.$sortorder) ;
+		$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder) ;
 		$res = db_query_qpa ($qpa) ;
 	} else {
 		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
@@ -106,8 +110,30 @@ $headerLinks = array(
 
 echo $HTML->listTableTop($headers, $headerLinks);
 
+if (USE_PFO_RBAC) {
+	$public_rows = array();
+	$private_rows = array();
+	$ra = RoleAnonymous::getInstance() ;
+	while ($grp = db_fetch_array($res)) {
+		if ($ra->hasPermission('project_read', $row['group_id'])) {
+			$grp['is_public'] = 1;
+			$public_rows[] = $grp;
+		} else {
+			$grp['is_public'] = 0;
+			$private_rows[] = $grp;
+		}
+	}
+	$rows = $private_rows;
+	array_merge($rows, $public_rows);
+} else {
+	$rows = array();
+	while ($grp = db_fetch_array($res)) {
+		$rows[] = $grp;
+	}
+}
+
 $i = 0;
-while ($grp = db_fetch_array($res)) {
+foreach ($rows as $grp) {
 
 	if ($grp['status']=='A'){
 		$status="active";
