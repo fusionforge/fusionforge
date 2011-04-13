@@ -44,7 +44,7 @@ try {
 if (!isset($errorPage)){
 	echo $HTML->boxTop(_('Manage categories'));
 	// General category is shared so no edit...
-	if (sizeof($listCategories) > 1) {
+	if (count($listCategories) > 1) {
 		echo	'<table>';
 		echo		'<tr>';
 		echo			'<td>'._('Category').'</td>';
