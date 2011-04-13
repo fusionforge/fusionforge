@@ -83,7 +83,7 @@ function show_top_downloads() {
 		frs_dlstats_grouptotal_vw.downloads
 		FROM frs_dlstats_grouptotal_vw,groups
 		WHERE
-		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.is_public=1 and groups.status=$1
+		frs_dlstats_grouptotal_vw.group_id=groups.group_id AND groups.status=$1
 		ORDER BY downloads DESC
 	',
 					array ('A'));
