@@ -1982,6 +1982,11 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
+				if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
 			} else {
 
 			//
