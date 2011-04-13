@@ -10,7 +10,12 @@ export SELENIUM_RC_DIR=$WORKSPACE/reports
 # get config 
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
-export HOST=centos5src.$DNSDOMAIN
+if [ ! -z "$1" ]
+then
+	export HOST="$1"
+else
+	export HOST=centos5src.$DNSDOMAIN
+fi
 
 export VEID=$VEIDSRC
 
