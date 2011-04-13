@@ -182,7 +182,6 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
-		$query = NULL;
 		
 		if ($title === '')
 			$title = $section;
@@ -194,9 +193,9 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();			
 			$result .= $GLOBALS['HTML']->listTableBottom();			
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $query['words']).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em> - No sections available (check your permissions)'), $this->words).'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em>'), $query['words']).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for <em>%s</em>'), $this->words).'</p>';
 		}
 		return $result;
 	}
