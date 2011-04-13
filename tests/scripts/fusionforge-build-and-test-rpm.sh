@@ -10,6 +10,7 @@ export SELENIUM_RC_DIR=$WORKSPACE/reports
 # get config 
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+export HOST=centos5.$DNSDOMAIN
 
 export VEID=$VEIDCOS
 
@@ -23,7 +24,6 @@ export IPGW=$IPCOSGW
 ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 export VZTEMPLATE=centos-$COSVERS-$ARCH-minimal
 export VZPRIVATEDIR
-export HOST=centos5.local
 export DEBMIRROR
 
 export DIST

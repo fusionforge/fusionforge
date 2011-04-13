@@ -10,6 +10,7 @@ export SELENIUM_RC_DIR=$WORKSPACE/reports
 # get config 
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+export HOST=debian6.$DNSDOMAIN
 
 export VEID=$VEIDDEB
 
@@ -23,7 +24,6 @@ export IPGW=$IPDEBGW
 ARCH=`dpkg-architecture -qDEB_BUILD_ARCH`
 export VZTEMPLATE=debian-$DEBVERS-$ARCH-minimal
 export VZPRIVATEDIR
-export HOST=debian6.local
 export DEBMIRROR
 
 export DIST

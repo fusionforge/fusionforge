@@ -36,3 +36,4 @@ DIST=squeeze
 VMENGINE=vz
 REMOTESELENIUM=false
 KEEPVM=false
+DNSDOMAIN=local

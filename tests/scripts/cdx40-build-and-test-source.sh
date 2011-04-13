@@ -6,12 +6,12 @@ export CONFIG_PHP=func/config.php.buildbot
 export SELENIUM_RC_HOST=${SELENIUM_RC_HOST:-`hostname -i`}
 export SELENIUM_RC_DIR=$WORKSPACE/reports
 
-export HOST=cdx40.local
 export DEBMIRROR
 
 # get config
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
+export HOST=cdx40.$DNSDOMAIN
 
 export LXCTEMPLATE=$LXCCOSTEMPLATE
 
