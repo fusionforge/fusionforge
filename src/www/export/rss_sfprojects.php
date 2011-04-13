@@ -30,8 +30,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 
 $res = db_query_params ('SELECT group_id,group_name,unix_group_name,homepage,short_description
 	FROM groups
-	WHERE is_public=1
-	AND status=$1
+	WHERE status=$1
         ORDER BY group_id DESC',
 			array('A'),
 			$limit);

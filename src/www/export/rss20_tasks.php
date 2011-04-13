@@ -165,7 +165,7 @@ if(0<pg_num_rows($res))
 {
 	while($i<pg_num_rows($res))
 	{
-		$sql1="SELECT group_id,project_name FROM project_group_list WHERE group_project_id='".pg_fetch_result($res,$i,'group_project_id')."'";// AND is_public";
+		$sql1="SELECT group_id,project_name FROM project_group_list WHERE group_project_id='".pg_fetch_result($res,$i,'group_project_id')."'";
 		$res1=pg_query($sql1);
 		if(pg_num_rows($res1)==1)
 		{
