@@ -122,7 +122,7 @@ if ($role_id=='observer') {
 				if ($role instanceof RoleExplicit) {
 					$role->setPublic($public) ;
 				}
-				if (!$role->update($role_name,$data)) {
+				if (!$role->update($role_name,$data,false)) {
 					$error_msg .= $role->getErrorMessage();
 				} else {
 					$feedback = _('Successfully Updated Role');
