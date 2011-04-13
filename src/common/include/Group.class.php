@@ -2597,6 +2597,7 @@ class Group extends Error {
 		}
 
 		$this->normalizeAllRoles () ;
+		$this->activateUsers();
 
 		// Switch back to user preference
 		session_set_internal ($saved_session->getID()) ;
