@@ -38,7 +38,6 @@ $res=db_query_params ('SELECT
 				WHERE 
 					news_bytes.group_id=groups.group_id 
 					AND groups.status=$1
-					AND groups.is_public = 1
 				ORDER BY 
 					post_date 
 				DESC',
@@ -59,6 +58,10 @@ print "  <language>en-us</language>\n";
 $outputtotal = 0;
 $seen = array() ;
 while ($row = db_fetch_array($res)) {
+	if (!forge_check_perm('project_read', $row['group_id'])) {
+		continue;
+	}
+	
 	if (!isset ($seen[$row['group_id']])) {
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";

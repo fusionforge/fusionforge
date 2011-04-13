@@ -36,7 +36,9 @@ $limit = getIntFromRequest('limit', 10);
 if ($limit > 100) $limit = 100;
 
 if ($group_id) {
-	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 AND is_public=1',
+	forge_require_perm('project_read', $group_id);
+	
+	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1',
 				array($group_id),
 				1);
 	$row = db_fetch_array($res);
@@ -76,7 +78,6 @@ $res = db_query_params ('SELECT forum_id,summary,post_date,details,g.group_id,g.
 FROM news_bytes, groups g,users u
 WHERE news_bytes.group_id=g.group_id
 AND u.user_id=news_bytes.submitted_by
-AND g.is_public=1
 AND g.status=$1
 AND news_bytes.is_approved <> 4
 AND (g.group_id=$2 OR 1 != $3)

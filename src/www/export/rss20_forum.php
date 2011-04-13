@@ -244,10 +244,8 @@ if (!$error_no_messages){
         WHERE f.posted_by=u.user_id
         AND g.group_id = fg.group_id
         AND f.group_forum_id = fg.group_forum_id 
-        AND g.is_public=1
         AND g.status=$1
-        AND g.use_forum=1
-        AND fg.is_public=1 ',
+        AND g.use_forum=1 ',
 			     array ('A')) ;
     $cnt = 0;
     if ($n_forums > 0) {
@@ -267,13 +265,14 @@ if (!$error_no_messages){
 			     array ($number_items)) ;
     
     $res_msg = db_query_qpa($qpa);
-    if (!$res_msg || db_numrows($res_msg) < 1) {
+    if (!$res_msg) {
             error_log(_("Forum RSS: Forum not found: ").' '.db_error(),0);
     }
-    if ($debug) error_log("Forum RSS: Error",0);
-
 
     while ($row_msg = db_fetch_array($res_msg)) {
+	    if (!forge_check_perm('forum',$row_msg['group_forum_id'],'read')) {
+		    continue;
+	    }
         //get thread name for posting
         $res_thread = db_query_params('SELECT subject FROM forum WHERE is_followup_to=0 AND thread_id = $1',
 				      array ($row_msg['thread_id']));

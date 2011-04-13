@@ -46,6 +46,7 @@ $res_new = db_query_params ('SELECT groups.group_name,
 	users.user_name,
 	users.user_id,
 	frs_release.release_id,
+	frs_package.package_id,
 	frs_release.name AS release_version,
 	frs_release.release_date,
 	frs_release.released_by,
@@ -58,8 +59,7 @@ $res_new = db_query_params ('SELECT groups.group_name,
 	AND frs_release.released_by = users.user_id 
 	AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id 
 	AND frs_release.status_id=1 
-	AND frs_package.is_public=1
-	AND groups.is_public=1 )
+	AND frs_package.is_public=1 )
 	ORDER BY frs_release.release_date DESC',
 			    array($start_time),
 			    21,
@@ -68,18 +68,21 @@ $res_new = db_query_params ('SELECT groups.group_name,
 if (!$res_new || db_numrows($res_new) < 1) {
 	echo '<p class="error">' . _('No new releases found') . db_error().'</p>';
 } else {
+	$rows = array();
 
-	if ( db_numrows($res_new) > 20 ) {
-		$rows = 20;
-	} else {
-		$rows = db_numrows($res_new);
+	$i = 0;
+	while (($i < 20) && ($row_new = db_fetch_array($res_new))) {
+		if (forge_check_perm('frs', $row_new['group_id'], 'read_public')) {
+			$i++;
+			$rows[] = $row_new;
+		}
 	}
 
 	print '
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">';
 	$seen = array();
-	for ($i=0; $i<$rows; $i++) {
-		$row_new = db_fetch_array($res_new);
+	$i = 0;
+	foreach ($rows as $row_new) {
 		// avoid dupulicates of different file types
 		if (!isset($seen[$row_new['group_id']])) {
 			print '

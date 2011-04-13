@@ -1939,6 +1939,11 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
+				if (!$SYS->sysGroupCheckUser($this->getID(),$user_id)) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
 			} else { // NOT USE_PFO_RBAC
 
 				//
@@ -2559,6 +2564,7 @@ class Group extends Error {
 		}
 
 		$this->normalizeAllRoles();
+		$this->activateUsers();
 
 		// Switch back to user preference
 		session_set_internal($saved_session->getID());

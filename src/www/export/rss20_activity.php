@@ -34,7 +34,9 @@ $url = util_make_url ('/');
 $url = rtrim($url, '/');
 
 if ($group_id) {
-	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1 and is_public=1',
+	forge_require_perm('project_read', $group_id);
+
+	$res = db_query_params ('SELECT group_name FROM groups WHERE group_id=$1',
 				array($group_id),
 				1);
 	$row = db_fetch_array($res);
@@ -73,40 +75,63 @@ if ($group_id) {
 
 	// ## item outputs
 	while ($arr = db_fetch_array($res)) {
-		print "  <item>\n";
 
 		switch ($arr['section']) {
 			case 'commit': {
+				if (!forge_check_perm('tracker',$arr['ref_id'],'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'trackeropen': {
+				if (!forge_check_perm('tracker',$arr['ref_id'],'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Opened')."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'trackerclose': {
+				if (!forge_check_perm('tracker',$arr['ref_id'],'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'frsrelease': {
+				if (!forge_check_perm('frs',$arr['group_id'],'read_public')) {
+					continue (2);
+				}
+				print "  <item>\n";
 				print "   <title>".htmlspecialchars('FRS Release [#'.$arr['description'].']')."</title>\n";
 				print "   <link>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'forumpost': {
+				if (!forge_check_perm('forum',$arr['ref_id'],'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
 				print "   <title>".htmlspecialchars('Forum Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
 				break;
 			}
 			case 'news': {
+				if (!forge_check_perm('forum',$arr['subref_id'],'read')) {
+					continue (2);
+				}
+				print "  <item>\n";
 				print "   <title>".htmlspecialchars('News Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/forum/forum.php?forum_id=".$arr['subref_id']."</link>\n";
 				print "   <comments>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comments>\n";

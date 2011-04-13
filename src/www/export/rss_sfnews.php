@@ -37,7 +37,6 @@ function getres ($gid, $l) {
 	FROM news_bytes, groups g,users u
 	WHERE news_bytes.group_id=g.group_id
 	AND u.user_id=news_bytes.submitted_by
-	AND g.is_public=1
 	AND g.status=$1
 	AND g.group_id=$2
 	ORDER BY post_date desc',
@@ -49,7 +48,6 @@ function getres ($gid, $l) {
 	FROM news_bytes, groups g,users u
 	WHERE news_bytes.group_id=g.group_id
 	AND u.user_id=news_bytes.submitted_by
-	AND g.is_public=1
 	AND g.status=$1
 	AND is_approved=1
 	ORDER BY post_date desc',
@@ -70,6 +68,9 @@ print " <rdf:Seq>\n";
 
 $res = getres ($group_id, $limit) ;
 while ($row = db_fetch_array($res)) {
+	if (!forge_check_perm('forum',$row['forum_id'],'read')) {
+		continue;
+	}
 	print " <rdf:li rdf:resource=\"".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."\" />\n";
 }
 
@@ -79,6 +80,9 @@ print " </channel>\n";
 
 $res = getres ($group_id, $limit) ;
 while ($row = db_fetch_array($res)) {
+	if (!forge_check_perm('forum',$row['forum_id'],'read')) {
+		continue;
+	}
 	print "\n <item rdf:about=\"".util_make_url ('/forum/forum.php?forum_id='.$row['forum_id'])."\">\n";
 	print "   <title>".htmlspecialchars($row['summary'])."</title>\n";
 	// if news group, link is main page

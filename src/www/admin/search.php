@@ -135,21 +135,34 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 		$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
 		$crit_desc .= " status=$status";
 	}
-	if ($is_public != -1) {
-		$qpa = db_construct_qpa ($qpa, ' AND is_public=$1', array ($is_public)) ;
-		$crit_desc .= " is_public=$is_public";
-	}
 
 	if ($crit_desc) {
 		$crit_desc = "(".trim($crit_desc).")";
 	}
 
 	$result = db_query_qpa ($qpa) ;
-	print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', db_numrows($result)), $crit_desc, db_numrows($result)).'</strong></p>';
-	
 	if (db_numrows($result) < 1) {
 		echo db_error();
 	} else {
+
+		$rows = array();
+		$ra = RoleAnonymous::getInstance() ;
+		while ($row = db_fetch_array($result)) {
+			
+			if ($is_public == 1) {
+				if ($ra->hasPermission('project_read', $row['group_id'])) {
+					$rows[] = $row;
+				}
+			} elseif ($is_public == 0) {
+				if (!$ra->hasPermission('project_read', $row['group_id'])) {
+					$rows[] = $row;
+				}
+			} else {
+				$rows[] = $row;
+			}
+		}
+		
+		print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', count($rows)), $crit_desc, count($rows)).'</strong></p>';
 
 		$title=array();
 		$title[]=_('ID');
@@ -161,10 +174,9 @@ WHERE (group_id=$1 OR lower (unix_group_name) LIKE $2 OR lower (group_name) LIKE
 		echo $GLOBALS['HTML']->listTableTop($title);
 
 		$i = 0;
-		while ($row = db_fetch_array($result)) {
-
+		foreach ($rows as $row) {
 			$extra_status = "";
-			if (!$row['is_public']) {
+			if (!$ra->hasPermission('project_read', $row['group_id'])) {
 				$extra_status = "/PRV";
 			}
 			
