@@ -4,3 +4,4 @@ plugins/oauthprovider/db/*                      usr/share/gforge/plugins/oauthpr
 plugins/oauthprovider/bin/*                     usr/share/gforge/plugins/oauthprovider/bin/
 plugins/oauthprovider/www/*                     usr/share/gforge/plugins/oauthprovider/www/
 plugins/oauthprovider/etc/plugins/oauthprovider/*     etc/gforge/plugins/oauthprovider/
+plugins/oauthprovider/etc/*.ini etc/@PACKAGE@/config.ini.d/
