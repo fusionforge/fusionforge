@@ -15,9 +15,9 @@ then
 	export HOST=$1
 else
 	export HOST=debian6.$DNSDOMAIN
+	export VEID=$VEIDDEB
 fi
 
-export VEID=$VEIDDEB
 
 export LXCTEMPLATE=$LXCDEBTEMPLATE
 

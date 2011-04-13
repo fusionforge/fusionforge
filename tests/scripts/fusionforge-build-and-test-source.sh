@@ -15,9 +15,9 @@ then
 	export HOST="$1"
 else
 	export HOST=centos5src.$DNSDOMAIN
+	export VEID=$VEIDSRC
 fi
 
-export VEID=$VEIDSRC
 
 export LXCTEMPLATE=$LXCCOSTEMPLATE
 
