@@ -126,16 +126,23 @@ function &getPublicProjectNames($session_ser) {
 */
 function &groups_to_soap($grps) {
 	$return = array();
+	$ra = RoleAnonymous::getInstance() ;
 
 	for ($i=0; $i<count($grps); $i++) {
 		if ($grps[$i]->isError()) {
 			//skip it if it had an error
 		} else {
+			$gid = $grps[$i]->data_array['group_id'];
+			if ($ra->hasPermission('project_read', $gid)) {
+				$is_public = 1;
+			} else {
+				$is_public = 0;
+			}
 			//build an array of just the fields we want
 			$return[] = array('group_id'=>$grps[$i]->data_array['group_id'], 
 			'group_name'=>$grps[$i]->data_array['group_name'],
 			'homepage'=>$grps[$i]->data_array['homepage'],
-			'is_public'=>$grps[$i]->data_array['is_public'],
+			'is_public'=>$is_public,
 			'status'=>$grps[$i]->data_array['status'],
 			'unix_group_name'=>$grps[$i]->data_array['unix_group_name'],
 			'short_description'=>$grps[$i]->data_array['short_description'],
