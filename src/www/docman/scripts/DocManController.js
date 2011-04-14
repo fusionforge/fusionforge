@@ -82,7 +82,6 @@ DocManListFileController.prototype =
 				}
 			}
 		});
-
 	},
 
 	initSize:function() {
