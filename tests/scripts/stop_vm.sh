@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec ./stop_vz.sh "$@"
+exec ./stop_${VMENGINE}.sh "$@"

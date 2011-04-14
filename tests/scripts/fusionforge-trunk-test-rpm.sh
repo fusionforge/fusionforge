@@ -12,7 +12,7 @@ export CONFIGURED=true
 rm -fr build/ reports/
 mkdir -p build/packages reports/coverage
 
-cp gforge/rpm-specific/fusionforge.repo build/packages/fusionforge.repo
+cp src/rpm-specific/fusionforge.repo build/packages/fusionforge.repo
 sed -i "s#http://fusionforge.org/#${HUDSON_URL}#" build/packages/fusionforge.repo
 sed -i "s#baseurl = .*#baseurl = $FFORGE_RPM_REPO/#" build/packages/fusionforge.repo
 

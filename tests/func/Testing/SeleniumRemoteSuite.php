@@ -13,23 +13,11 @@ class SeleniumRemoteSuite extends PHPUnit_Framework_TestSuite
 			$this->screenshotPath = getenv('SELENIUM_RC_DIR');
 			$this->screenshotUrl = getenv('SELENIUM_RC_URL');
 		}
-
-		system("cd scripts; ./start_vm.sh ".HOST);
-
-		//system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/*pend.php root@centos52:/opt/tests");
-		//system("scp /usr/share/php/PHPUnit/Extensions/SeleniumTestCase/phpunit_coverage.php root@centos52:/opt/gforge/www");
-		//system("ssh root@centos52 'perl -spi -e \'s!^auto_prepend_file.*!auto_prepend_file=/opt/tests/prepend.php!\' /etc/php.ini');
-		//system("ssh root@centos52 'perl -spi -e \'s!^auto_append_file.*!auto_append_file=/opt/tests/append.php!\' /etc/php.ini');
-
-		system("ssh root@centos52 'service crond stop'");
 	}
 
 	protected function tearDown()
 	{
-		if (getenv('SELENIUM_RC_DIR')) {
-			system("scp -r root@".HOST.":/var/log ".getenv('SELENIUM_RC_DIR'));
-		}
-		system("cd scripts; ./stop_vm.sh ".HOST);
+		echo "tearDown\n";
 	}
 }
 ?>

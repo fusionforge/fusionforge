@@ -24,7 +24,7 @@ define ('ROOT', '');
 define('DB_NAME', getenv('DB_NAME'));
 define('DB_USER', 'gforge');
 define('DB_PASSWORD', '@@FFDB_PASS@@');
-define('DB_INIT_CMD', "ssh root@".HOST." 'cd /opt/tests/func 2>/dev/null || cd /usr/share/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=".DB_NAME." php db_reload.php ; touch /tmp/fusionforge-use-pfo-rbac'");
+define('DB_INIT_CMD', "ssh root@".HOST." '/root/tests/func/db_reload.sh ".DB_NAME." >/dev/null;'");
 
 // this should be an existing user of the forge together with its password
 // (the password should be different from 'myadmin')

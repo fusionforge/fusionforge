@@ -4,20 +4,19 @@ RINSECONF=/etc/rinse/rinse.conf
 RINSEBPI=
 RINSEPOSTINST=--after-post-install $(CURDIR)/local.rinse.api
 VEIDDEBTEMP=242
-VEIDCENTEMP=243
+VEIDCOSTEMP=243
 ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
 EXTRADEBPACKAGE=--include=ssh,less,htop,zsh,vim,debconf-utils
-EXTRACENTOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
+EXTRACOSPACKAGE=openssh-server,man,zsh,bind-utils,openssh-clients,php,wget
 VZCTL=/usr/sbin/vzctl
 DEBOOTSTRAP=/usr/sbin/debootstrap
-RINSE=extrapackage="$(EXTRACENTOSPACKAGE)" /usr/sbin/rinse
-SSHPUBKEY=~$(USERCLIENT)/.ssh/id_rsa.pub
+RINSE=extrapackage="$(EXTRACOSPACKAGE)" /usr/sbin/rinse
 
 # Default config
-include config.default
+include ../config/default
 
 # Optional local change
--include config.$(shell hostname)
+-include ../config/$(shell hostname)
 
 # Local customization can be done using a local.<hostname> file
 # This is convenient if you use local mirror
@@ -29,15 +28,15 @@ default:
 	@echo " make net : this will setup a /etc/vz/vznet.conf to register new virtual host to vmbr0 bridge"
 	@echo "  See interfaces.sample to know how to setup a bridge"
 	@echo " make builddebiantemplate : build an openvz debian template (uses VEIDDEBTEMP=$(VEIDDEBTEMP))"
-	@echo " make buildcentostemplate : build an openvz centos template (uses VEIDCENTEMP=$(VEIDCENTEMP))"
+	@echo " make buildcentostemplate : build an openvz centos template (uses VEIDCOSTEMP=$(VEIDCOSTEMP))"
 	@echo ""
 	@echo " make createdeb   : build a debian openvz vm with ID=$(VEIDDEB) from the debian template"
 	@echo " make netdhcpdeb  : set dhcp network for debian openvz vm with ID=$(VEIDDEB)"
 	@echo " make netstaticdeb: set static network for debian openvz vm with ID=$(VEIDDEB)"
 	@echo ""
-	@echo " make createcentos   : build a centos openvz vm with ID=$(VEIDCEN) from the centos template"
-	@echo " make netdhcpcentos  : set dhcp network for centos openvz vm with ID=$(VEIDCEN)"
-	@echo " make netstaticcentos: set static network for centos openvz vm with ID=$(VEIDCEN)"
+	@echo " make createcentos   : build a centos openvz vm with ID=$(VEIDCOS) from the centos template"
+	@echo " make netdhcpcentos  : set dhcp network for centos openvz vm with ID=$(VEIDCOS)"
+	@echo " make netstaticcentos: set static network for centos openvz vm with ID=$(VEIDCOS)"
 	@echo ""
 	@echo "Read Makefile for other targets"
 
@@ -67,53 +66,53 @@ builddebiantemplate: beroot builddebianvm
 	cd $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/debian-$(DEBVERS)-$(ARCH)-minimal.tar.gz .
 
 buildcentostemplate: beroot buildcentosvm
-	$(VZCTL) set $(VEIDCENTEMP) --ostemplate centos-$(CENTVERS) --applyconfig basic --save
-	#rm $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/ssh/ssh_host_*
+	$(VZCTL) set $(VEIDCOSTEMP) --ostemplate centos-$(COSVERS) --applyconfig basic --save
+	#rm $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/ssh/ssh_host_*
 	# Disable getty in /etc/inittab as openvz do not have that.
-	[ ! -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/inittab ] || (grep -q getty $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/inittab || \
-		sed -i -e '/getty/d' $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/inittab)
+	[ ! -f $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/inittab ] || (grep -q getty $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/inittab || \
+		sed -i -e '/getty/d' $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/inittab)
 	# Don't start_udev
-	sed -i -e '/start_udev/d' $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/rc.d/rc.sysinit
+	sed -i -e '/start_udev/d' $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/rc.d/rc.sysinit
 	# Link /etc/mtab to /proc/mtab to make mount work as expected.
-	rm -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/mtab
-	ln -s /proc/mounts $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/mtab
+	rm -f $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/mtab
+	ln -s /proc/mounts $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/mtab
 	# LocalTime
-	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/localtime
+	#ln -sf /usr/share/zoneinfo/Europe/Paris $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/localtime
 	# Remove hostname
-	[ ! -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
-	## NOW uses vzctl set $(VEIDCENTEMP) --hostname command
-	##echo "127.0.0.1 centos5.local localhost.localdomain localhost" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hosts
-	##echo "centos5.local" > $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/hostname
-	##echo "HOSTNAME=centos5.local" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/sysconfig/network
+	[ ! -f $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/hostname ] || rm $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/hostname
+	## NOW uses vzctl set $(VEIDCOSTEMP) --hostname command
+	##echo "127.0.0.1 centos5.local localhost.localdomain localhost" > $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/hosts
+	##echo "centos5.local" > $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/hostname
+	##echo "HOSTNAME=centos5.local" >> $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/sysconfig/network
 	#
-	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/ptmx ]     || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/ptmx c 5 2
-	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/pts ]      || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mkdir /dev/pts
-	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/vz/private/50/dev/ttyp ] || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /sbin/MAKEDEV -d /vz/private/50/dev ttyp ptyp
-	-rm -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/null
-	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/null ]     || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/null c 1 3
-	chmod ugo+w $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/null
-	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/random ]   || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod -m 644 /dev/random c 1 8
-	-rm -f $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/urandom 
-	[ -c $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/urandom ]  || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mknod /dev/urandom c 1 9 
-	chmod ugo+w $(VZPRIVATEDIR)/$(VEIDCENTEMP)/dev/urandom
-	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/var/lock/rpm ] || chroot $(VZPRIVATEDIR)/$(VEIDCENTEMP) /bin/mkdir /var/lock/rpm	
-	touch $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
-	grep -q devpts $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab || \
-		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/fstab
-	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh ] || mkdir $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh
-	cp $(SSHPUBKEY) $(VZPRIVATEDIR)/$(VEIDCENTEMP)/root/.ssh/authorized_keys
-	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDCENTEMP)/etc/ssh/
-	cd $(VZPRIVATEDIR)/$(VEIDCENTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(CENTVERS)-$(ARCH)-minimal.tar.gz .
+	[ -c $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/ptmx ]     || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /bin/mknod /dev/ptmx c 5 2
+	[ -d $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/pts ]      || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /bin/mkdir /dev/pts
+	[ -c $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/vz/private/50/dev/ttyp ] || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /sbin/MAKEDEV -d /vz/private/50/dev ttyp ptyp
+	-rm -f $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/null
+	[ -c $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/null ]     || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /bin/mknod /dev/null c 1 3
+	chmod ugo+w $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/null
+	[ -c $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/random ]   || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /bin/mknod -m 644 /dev/random c 1 8
+	-rm -f $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/urandom 
+	[ -c $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/urandom ]  || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /bin/mknod /dev/urandom c 1 9 
+	chmod ugo+w $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/dev/urandom
+	[ -d $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/var/lock/rpm ] || chroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP) /bin/mkdir /var/lock/rpm	
+	touch $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/fstab
+	grep -q devpts $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/fstab || \
+		echo "none /dev/pts devpts mode=0620 0 0" >> $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/fstab
+	[ -d $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/root/.ssh ] || mkdir $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/root/.ssh
+	cp $(SSHPUBKEY) $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/root/.ssh/authorized_keys
+	cp ssh/ssh_host_* $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/etc/ssh/
+	cd $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/ ; tar --numeric-owner -zcf $(VZTEMPLATEDIR)/cache/centos-$(COSVERS)-$(ARCH)-minimal.tar.gz .
 
 builddebianvm: beroot $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/tmp/vzdebvm
 
 $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/tmp/vzdebvm:
 	[ -d $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/tmp/vzdebvm ] || ($(DEBOOTSTRAP) --arch $(ARCH) $(EXTRADEBPACKAGE) $(DIST) $(VZPRIVATEDIR)/$(VEIDDEBTEMP) $(DEBMIRROR) && touch $(VZPRIVATEDIR)/$(VEIDDEBTEMP)/tmp/vzdebvm)
 
-buildcentosvm: beroot $(VZPRIVATEDIR)/$(VEIDCENTEMP)/tmp/vzcentvm
+buildcentosvm: beroot $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/tmp/vzcentvm
 
-$(VZPRIVATEDIR)/$(VEIDCENTEMP)/tmp/vzcentvm:
-	[ -d $(VZPRIVATEDIR)/$(VEIDCENTEMP)/tmp/vzcentvm ] || ($(RINSE) $(RINSEBPI) $(RINSEPOSTINST) --config $(RINSECONF) --arch $(ARCH) --distribution centos-5 --directory $(VZPRIVATEDIR)/$(VEIDCENTEMP) && touch $(VZPRIVATEDIR)/$(VEIDCENTEMP)/tmp/vzcentvm)
+$(VZPRIVATEDIR)/$(VEIDCOSTEMP)/tmp/vzcentvm:
+	[ -d $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/tmp/vzcentvm ] || ($(RINSE) $(RINSEBPI) $(RINSEPOSTINST) --config $(RINSECONF) --arch $(ARCH) --distribution centos-5 --directory $(VZPRIVATEDIR)/$(VEIDCOSTEMP) && touch $(VZPRIVATEDIR)/$(VEIDCOSTEMP)/tmp/vzcentvm)
 
 cleanvz:
 	[ ! -d $(VZPRIVATEDIR)/$(VEID) ] || $(VZCTL) stop $(VEID)
@@ -121,7 +120,7 @@ cleanvz:
 	-rm -f /etc/vz/conf/$(VEID).conf.destroyed
 
 cleancentos: beroot
-	make cleanvz VEID=$(VEIDCEN)
+	make cleanvz VEID=$(VEIDCOS)
 	
 cleandeb: beroot
 	make cleanvz VEID=$(VEIDDEB)
@@ -149,19 +148,19 @@ netstaticdeb: beroot
 
 netdhcpcentos: beroot
 	# Add eth0 interface
-	$(VZCTL) set $(VEIDCEN) --netif_add eth0 --save
+	$(VZCTL) set $(VEIDCOS) --netif_add eth0 --save
 	# Setup dhcp
-	echo "DEVICE=eth0" > $(VZPRIVATEDIR)/$(VEIDCEN)/etc/sysconfig/network-scripts/ifcfg-eth0
-	echo "BOOTPROTO=dhcp" >> $(VZPRIVATEDIR)/$(VEIDCEN)/etc/sysconfig/network-scripts/ifcfg-eth0
-	echo "ONBOOT=yes" >> $(VZPRIVATEDIR)/$(VEIDCEN)/etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "DEVICE=eth0" > $(VZPRIVATEDIR)/$(VEIDCOS)/etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "BOOTPROTO=dhcp" >> $(VZPRIVATEDIR)/$(VEIDCOS)/etc/sysconfig/network-scripts/ifcfg-eth0
+	echo "ONBOOT=yes" >> $(VZPRIVATEDIR)/$(VEIDCOS)/etc/sysconfig/network-scripts/ifcfg-eth0
 	# Setup dhclient extra
-	[ -f $(VZPRIVATEDIR)/$(VEIDCEN)/etc/dhclient.conf ] || \
-		echo "send host-name \"`hostname`-$(VEIDCEN)\";" > $(VZPRIVATEDIR)/$(VEIDCEN)/etc/dhclient.conf
+	[ -f $(VZPRIVATEDIR)/$(VEIDCOS)/etc/dhclient.conf ] || \
+		echo "send host-name \"`hostname`-$(VEIDCOS)\";" > $(VZPRIVATEDIR)/$(VEIDCOS)/etc/dhclient.conf
 	
 netstaticcentos: beroot
-	$(VZCTL) set $(VEIDCEN) --hostname `hostname`-$(VEIDCEN)  --save
-	$(VZCTL) set $(VEIDCEN) --ipadd $(IPCENTOSBASE).$(VEIDCEN) --save
-	$(VZCTL) set $(VEIDCEN) --nameserver $(IPCENTOSDNS) --save
+	$(VZCTL) set $(VEIDCOS) --hostname `hostname`-$(VEIDCOS)  --save
+	$(VZCTL) set $(VEIDCOS) --ipadd $(IPCOSBASE).$(VEIDCOS) --save
+	$(VZCTL) set $(VEIDCOS) --nameserver $(IPCOSDNS) --save
 
 netctl:
 	sysctl -w net.ipv4.ip_forward=1
@@ -187,7 +186,7 @@ createdeb: beroot cleandeb
 	make netstaticdeb
 	
 createcentos: beroot cleancentos
-	$(VZCTL) create $(VEIDCEN) --private $(VZPRIVATEDIR)/$(VEIDCEN) --ostemplate centos-$(CENTVERS)-$(ARCH)-minimal
+	$(VZCTL) create $(VEIDCOS) --private $(VZPRIVATEDIR)/$(VEIDCOS) --ostemplate centos-$(COSVERS)-$(ARCH)-minimal
 	make netstaticcentos
 	
 beroot:

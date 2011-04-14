@@ -1,0 +1,3 @@
+DEBMIRROR=http://10.194.10.128/debian
+RINSECONF=local.g-virtual05.rinse.conf
+RINSEBPI=--before-post-install $(CURDIR)/local.g-virtual05.rinse.bpi

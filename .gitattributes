@@ -4829,6 +4829,10 @@ tests/build/documentation/DocumentationTest.php -text
 tests/build/packages/BuildTest.php -text
 tests/code/deprecations/DeprecationsTest.php -text
 tests/code/syntax/SyntaxTest.php -text
+tests/config/christian -text
+tests/config/default -text
+tests/config/g-dellm65-1 -text
+tests/config/g-virtual05 -text
 tests/func/AllTests.php -text
 tests/func/Docs/createDocURLTest.php -text
 tests/func/Forums/forumsTest.php -text
@@ -4857,21 +4861,23 @@ tests/func/Trackers/relationTest.php -text
 tests/func/Trackers/trackersTest.php -text
 tests/func/Trackers/workflowTest.php -text
 tests/func/config.php.buildbot -text
-tests/func/config.php.buildbotDEB -text
 tests/func/config.php.ffsandbox -text
 tests/func/config.php.sample -text
 tests/func/config.php.tests -text
 tests/func/db_reload.php -text
 tests/func/db_reload.sh -text
+tests/lxc/Makefile -text
+tests/lxc/config.centos5 -text
+tests/lxc/config.debian6 -text
+tests/lxc/lxc-centos5 -text
+tests/lxc/lxc-debian6 -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
-tests/openvz/config.christian -text
-tests/openvz/config.default -text
-tests/openvz/config.g-virtual05 -text
 tests/openvz/interfaces.sample -text
 tests/openvz/local.christian -text
 tests/openvz/local.christian.rinse.bpi -text
 tests/openvz/local.christian.rinse.conf -text
+tests/openvz/local.g-dellm65-1 -text
 tests/openvz/local.g-t3500-cb -text
 tests/openvz/local.g-virtual05 -text
 tests/openvz/local.g-virtual05.rinse.bpi -text
@@ -4881,14 +4887,18 @@ tests/preseed/lists -text
 tests/preseed/mailman -text
 tests/preseed/postgresql -text
 tests/scripts/catch_mail.php -text
+tests/scripts/cdx40-build-and-test-source.sh -text
 tests/scripts/fusionforge-build-and-test-deb.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-build-and-test-source.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-build-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
+tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
+tests/scripts/start_lxc.sh -text
 tests/scripts/start_vm.sh -text svneol=unset#text/x-sh
 tests/scripts/start_vz.sh -text svneol=unset#text/x-sh
+tests/scripts/stop_lxc.sh -text
 tests/scripts/stop_vm.sh -text svneol=unset#text/x-sh
 tests/scripts/stop_vz.sh -text svneol=unset#text/x-sh
 tests/unit/config/ConfigTest.php -text
