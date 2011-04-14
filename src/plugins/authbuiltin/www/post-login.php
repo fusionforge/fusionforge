@@ -25,9 +25,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
-Header( "Cache-Control: no-cache"); 
-Header( "Cache-Control: must-revalidate"); 
+Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+Header( "Cache-Control: no-cache");
+Header( "Cache-Control: must-revalidate");
 
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -39,9 +39,6 @@ $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
 $form_loginname = getStringFromRequest('form_loginname');
 $form_pw = getStringFromRequest('form_pw');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $triggered = getIntFromRequest('triggered');
 
 //
@@ -90,18 +87,18 @@ if ($login) {
 		} else {
 			$warning_msg = _('Missing Password Or Users Name');
 		}
-		
+
 	}
 }
 
 $HTML->header(array('title'=>'Login'));
 
 if ($login) {
-	form_release_key(getStringFromRequest('form_key'));	
+	form_release_key(getStringFromRequest('form_key'));
 	// Account Pending
 	if (!isset($userstatus)) {
 		if (isset ($form_loginname)) {
-			$u = user_get_object_by_name($form_loginname) || 
+			$u = user_get_object_by_name($form_loginname) ||
 				user_get_object_by_email($form_loginname) ;
 			if (!$u) {
 				$warning_msg .= '<br /><p>'. _('Your account does not exist.').'</p>';

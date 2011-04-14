@@ -36,10 +36,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
 
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-
 site_admin_header(array('title'=>_('Site Admin')));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');

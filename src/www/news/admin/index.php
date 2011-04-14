@@ -42,8 +42,6 @@ $details = getStringFromRequest('details');
 $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-
 if ($group_id && $group_id != forge_get_config('news_group')) {
 	session_require_perm ('project_admin', $group_id) ;
 
@@ -66,10 +64,10 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 		if (db_numrows($result) < 1) {
 			exit_error(_('Newsbyte not found'),'news');
 		}
-		
+
 		$forum_id = db_result($result,0,'forum_id');
 		$old_group_id = db_result($result,0,'group_id');
-	
+
 		if ($approve) {
 			/*
 				Update the db so the item shows on the home page
@@ -85,16 +83,16 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 			if (!$details) {
 				$details='(none)';
 			}
-			
+
 			if (getStringFromRequest('_details_content_type') == 'html') {
 				$details = TextSanitizer::purify($details);
 			} else {
 				$details = htmlspecialchars($details);
 			}
 
-			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2, 
+			$result = db_query_params("UPDATE news_bytes SET is_approved=$1, summary=$2,
 details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
-			
+
 			if (!$result || db_affected_rows($result) < 1) {
 				$error_msg .= _('Error On Update:');
 				$error_msg .= db_error();
@@ -120,9 +118,9 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		if (db_numrows($result) < 1) {
 			exit_error(_('Newsbyte not found'),'news');
 		}
-		
+
 		$group = group_get_object($group_id);
-		
+
 		echo notepad_func();
 		echo '
 		<p />
@@ -144,7 +142,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		<strong>'._('Subject').'</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
 		<strong>'._('Details').'</strong>'.notepad_button('document.forms.newsadminform.details').'<br />';
-		
+
 		$GLOBALS['editor_was_set_up']=false;
 		$params = array () ;
 		$params['name'] = 'details';
@@ -158,7 +156,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 			echo '<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />';
 		}
 		unset($GLOBALS['editor_was_set_up']);
-		
+
 		echo '<p>
 		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), forge_get_config ('forge_name')).'</strong><br /></p>
 		<input type="submit" name="submit" value="'._('Submit').'" />
@@ -172,7 +170,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		$result=db_query_params("SELECT * FROM news_bytes WHERE is_approved <> 4 AND group_id=$1", array($group_id));
 		$rows=db_numrows($result);
 		$group = group_get_object($group_id);
-		
+
 		if ($rows < 1) {
 			echo '
 				<p class="warning_msg">'._('No Queued Items Found').'</p>';

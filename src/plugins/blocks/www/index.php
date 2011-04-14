@@ -56,15 +56,15 @@ require_once $gfcommon.'survey/SurveyFactory.class.php';
 
 function getAvailableBlocks($group) {
 	$blocks = array(
-		'summary_description' => 
+		'summary_description' =>
 			_("Block to replace the default project description with an enhanced one."),
 //	To be reworked to play nice with the widgets page.
-//		'summary_right' => 
+//		'summary_right' =>
 //			_("Block in the summary page (right)"),
-		'request_join' => 
+		'request_join' =>
 			_("Block to list informations requested to ask to join a project"),
 	);
-	
+
 	if ($group->usesForum()) {
 		// Get the blocks in the forums.
 		$blocks['forum index'] = _("Display block at the top of the listing");
@@ -73,7 +73,7 @@ function getAvailableBlocks($group) {
 			$blocks['forum_'.$f->getName()] = _("Display block at the top");
 		}
 	}
-	
+
 	if ($group->usesTracker()) {
 		// Get the blocks in the trackers.
 		$blocks['tracker index'] = _("Display block at the top of the listing");
@@ -135,14 +135,14 @@ function getAvailableBlocks($group) {
 }
 
 // the header that displays for the user portion of the plugin
-function blocks_Project_Header($params) {                                                                                                                                         
+function blocks_Project_Header($params) {
 	global $DOCUMENT_ROOT,$HTML,$id;
-	$params['toptab']='blocks'; 
+	$params['toptab']='blocks';
 	$params['group']=$id;
-	/*                                                                                                                                                              
-		Show horizontal links                                                                                                                                   
-	*/                                                                                                                                                              
-	site_project_header($params);														
+	/*
+		Show horizontal links
+	*/
+	site_project_header($params);
 }
 
 $user = session_get_user(); // get the session user
@@ -162,7 +162,6 @@ $pluginname = getStringFromRequest('pluginname');
 $name = getStringFromRequest('name');
 $body = getStringFromRequest('body');
 $activate = getArrayFromRequest('activate');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 $blocks_text = array(
 	'forum' => _('Forums'),
@@ -192,7 +191,7 @@ if (!$type) {
 
 		session_require_perm ('project_admin', $id) ;
 
-		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 		// DO THE STUFF FOR THE PROJECT PART HERE
 		echo "We are in the Project blocks plugin <br />";
 		echo "Greetings from planet " . $world; // $world comes from the config file in /etc
@@ -202,11 +201,11 @@ if (!$type) {
 			exit_no_group();
 		}
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');			
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
 		}
 		session_require_perm ('project_admin', $id) ;
 
-		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
 
 		$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
@@ -265,7 +264,7 @@ if (!$type) {
 			exit_no_group();
 		}
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');			
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
 		}
 		session_require_perm ('project_admin', $id) ;
 
@@ -276,7 +275,7 @@ if (!$type) {
 			$status[ $row['name'] ] = $row['status'];
 		}
 		$blocks = getAvailableBlocks($group);
-			
+
 		// Workaround when a block has a name with a &amp; inside.
 		// It seems sadly converted by the form (or php?).
 		foreach ($activate as $k => $v) {
@@ -288,10 +287,10 @@ if (!$type) {
 		}
 
 		foreach ($blocks as $b => $help) {
-				
+
 			if (!$activate[$b])
 				$activate[$b] = 0;
-					
+
 			if ((!isset($status[$b]) && $activate[$b]) ||
 			    (isset($status[$b]) && $activate[$b] !== $status[$b]))
 				// Must be updated.
@@ -317,18 +316,18 @@ if (!$type) {
 		}
 		session_require_perm ('project_admin', $id) ;
 
-		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));    
+		blocks_Project_Header(array('title'=>$pluginname . ' Project Plugin!','pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
 		// DO THE STUFF FOR THE PROJECT ADMINISTRATION PART HERE
-			
+
 		$blocks = getAvailableBlocks($group);
 		$res = db_query_params('SELECT content FROM plugin_blocks WHERE group_id=$1 AND name=$2',
 				       array($id, $name));
 		$body = db_result($res,0,"content");
-			
+
 		print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
-				
+
 		print "<center>";
-		print "<b>$blocks[$name]</b> ($name)";				
+		print "<b>$blocks[$name]</b> ($name)";
 		print "<form action=\"/plugins/blocks/\" method=\"post\">";
 		print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
 		print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
@@ -344,7 +343,7 @@ if (!$type) {
 				$body = $templates['*'];
 			}
 		}
-			
+
 		$params['body'] = $body;
 		$params['width'] = "800";
 		$params['height'] = "500";
@@ -373,7 +372,7 @@ if (!$type) {
 			exit_no_group();
 		}
 		if ( ! ($group->usesPlugin ( $pluginname )) ) {//check if the group has the blocks plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');			
+			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
 		}
 		session_require_perm ('project_admin', $id) ;
 

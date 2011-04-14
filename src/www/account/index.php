@@ -27,9 +27,6 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/timezones.php';
 
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
-
 session_require_login();
 
 // get global users vars
@@ -263,7 +260,7 @@ echo $HTML->boxTop(_('Preferences')); ?>
 		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
 ?>
 </td></tr>
-<?php 
+<?php
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 ?>

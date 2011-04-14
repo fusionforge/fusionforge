@@ -42,27 +42,25 @@ $details = getStringFromRequest('details');
 $id = getIntFromRequest('id');
 $for_group = getIntFromRequest('for_group');
 
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-
 /*
-  
+
   News uber-user admin pages
-  
+
   Show all waiting news items except those already rejected.
-  
+
   Admin members of forge_get_config('news_group') (news project) can edit/change/approve news items
-  
+
 */
 session_require_global_perm ('approve_news') ;
 
 if ($post_changes) {
 	if ($approve) {
-		
+
 		$result=db_query_params("SELECT * FROM news_bytes WHERE id=$1 AND group_id=$2", array($id, $for_group));
 		if (db_numrows($result) < 1) {
 			exit_error(_('Newsbyte not found'),'news');
 		}
-			
+
 		$forum_id = db_result($result,0,'forum_id');
 
 		if ($status==1) {
@@ -107,8 +105,8 @@ if ($post_changes) {
 		  Move msg to rejected status
 		*/
 		$news_id = getArrayFromRequest('news_id');
-		$result = db_query_params("UPDATE news_bytes 
-SET is_approved='2' 
+		$result = db_query_params("UPDATE news_bytes
+SET is_approved='2'
 WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 		if (!$result || db_affected_rows($result) < 1) {
 			$error_msg .= _('Error On Update:');
@@ -126,8 +124,8 @@ if ($approve) {
 	  Show the submit form
 	*/
 
-	$result=db_query_params("SELECT groups.unix_group_name,groups.group_id,news_bytes.* 
-FROM news_bytes,groups WHERE id=$1 
+	$result=db_query_params("SELECT groups.unix_group_name,groups.group_id,news_bytes.*
+FROM news_bytes,groups WHERE id=$1
 AND news_bytes.group_id=groups.group_id ", array($id));
 	if (db_numrows($result) < 1) {
 		exit_error(_('Newsbyte not found'),'news');
@@ -135,7 +133,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 	if (db_result($result,0,'is_approved') == 4) {
 		exit_error(_('Newsbyte deleted'),'news');
 	}
-		
+
 	$group = group_get_object(db_result($result,0,'group_id'));
 	$user =& user_get_object(db_result($result,0,'submitted_by'));
 
@@ -155,7 +153,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		<strong>'._('Subject').':</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
 		<strong>'._('Details').':</strong><br />';
-		
+
 	$GLOBALS['editor_was_set_up']=false;
 	$params = array () ;
 	$params['name'] = 'details';
@@ -168,9 +166,9 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		//if we don't have any plugin for text editor, display a simple textarea edit box
 		echo '<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />';
 	}
-	unset($GLOBALS['editor_was_set_up']);		
-		
-		
+	unset($GLOBALS['editor_was_set_up']);
+
+
 	echo '<br />
 		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';

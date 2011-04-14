@@ -38,7 +38,6 @@ require_once $gfcommon.'tracker/ArtifactExtraFieldElement.class.php';
 
 $group_id = getIntFromRequest('group_id');
 $atid = getIntFromRequest('atid');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 $add_extrafield = '';
 
@@ -96,7 +95,7 @@ if ($group_id && $atid) {
 	} else {
 		$actions = array('add_extrafield', 'customize_list', 'workflow', 'workflow_roles', 'add_opt',
 			'updownorder_opt', 'post_changes_order', 'post_changes_alphaorder', 'copy_opt', 'add_canned',
-			'clone_tracker', 'uploadtemplate', 'downloadtemplate', 'downloadcurrenttemplate', 
+			'clone_tracker', 'uploadtemplate', 'downloadtemplate', 'downloadcurrenttemplate',
 			'update_canned', 'update_box', 'update_opt', 'delete', 'delete_opt', 'deleteextrafield','update_type');
 		$action = '';
 		foreach ($actions as $a) {
@@ -107,7 +106,7 @@ if ($group_id && $atid) {
 		}
 	}
 
-	if ($action == 'add_extrafield') {  
+	if ($action == 'add_extrafield') {
 
 		include $gfwww.'tracker/admin/form-addextrafield.php';
 

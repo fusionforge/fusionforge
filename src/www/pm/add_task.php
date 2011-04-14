@@ -12,7 +12,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -28,9 +28,6 @@ require_once $gfwww.'include/note.php';
 
 $related_artifact_id = getIntFromRequest('related_artifact_id');
 $related_artifact_summary = getStringFromRequest('related_artifact_summary');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 
 pm_header(array('title'=>_('Add a new Task'),'group_project_id'=>$group_project_id));
 echo notepad_func();
@@ -46,7 +43,7 @@ echo notepad_func();
 		<td>
 		<strong><?php echo _('Category') ?></strong><br />
 		<?php
-		echo $pg->categoryBox('category_id'); 
+		echo $pg->categoryBox('category_id');
 		echo util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,'('._('admin').')');
 		?>
 		</td>

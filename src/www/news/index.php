@@ -31,7 +31,6 @@ require_once $gfcommon.'forum/Forum.class.php';
 $group_id = getIntFromRequest('group_id');
 $limit = getIntFromRequest('limit');
 $offset = getIntFromRequest('offset');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 news_header(array('title'=>_('News')));
 

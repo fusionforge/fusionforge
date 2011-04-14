@@ -35,16 +35,14 @@ require_once $gfcommon.'mail/MailingListFactory.class.php';
 
 $group_id = getIntFromRequest('group_id');
 
-$feedback = getStringFromRequest('feedback');
-
 if ($group_id) {
 	$group = group_get_object($group_id);
 	if (!$group || !is_object($group) || $group->isError()) {
 		exit_no_group();
 	}
-	
+
 	session_require_perm ('project_admin', $group->getID()) ;
-	
+
 	//
 	//	Post Changes to database
 	//
@@ -56,7 +54,7 @@ if ($group_id) {
 
 			if (check_email_available($group, $group->getUnixName() . '-' . getStringFromPost('list_name'), $error_msg)) {
 				$mailingList = new MailingList($group);
-			
+
 				if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 					exit_form_double_submit('mail');
 				}
@@ -67,7 +65,7 @@ if ($group_id) {
 					form_release_key(getStringFromRequest("form_key"));
 					exit_error($mailingList->getErrorMessage(),'mail');
 				}
-			
+
 				if(!$mailingList->create(
 					getStringFromPost('list_name'),
 					getStringFromPost('description'),
@@ -87,13 +85,13 @@ if ($group_id) {
 		//
 		} elseif (getStringFromPost('change_status') == 'y') {
 			$mailingList = new MailingList($group, getIntFromGet('group_list_id'));
-			
+
 			if(!$mailingList || !is_object($mailingList)) {
 				exit_error(_('Error getting the list'),'mail');
 			} elseif($mailingList->isError()) {
 				exit_error($mailingList->getErrorMessage(),'mail');
 			}
-			
+
 			if(!$mailingList->update(
 				unInputSpecialChars(getStringFromPost('description')),
 				getIntFromPost('is_public', MAIL__MAILING_LIST_IS_PUBLIC)
@@ -110,13 +108,13 @@ if ($group_id) {
 	//
 	if (getIntFromRequest('reset_pw') == 1) {
 		$mailingList = new MailingList($group, getIntFromGet('group_list_id'));
-		
+
 		if(!$mailingList || !is_object($mailingList)) {
 			exit_error(_('Error getting the list'),'mail');
 		} elseif($mailingList->isError()) {
 			exit_error($mailingList->getErrorMessage(),'mail');
 		}
-		
+
 		if($mailingList->getStatus() == MAIL__MAILING_LIST_IS_CONFIGURED) {
 			if(!$mailingList->update(
 				   $mailingList->getDescription(),
@@ -143,12 +141,12 @@ if ($group_id) {
 		print '<p>';
 		print _('It will take <span class="important">6-24 Hours</span> for your list to be created.');
 		print '</p>';
-		
+
 		$mlFactory = new MailingListFactory($group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
 			exit_error($mlFactory->getErrorMessage(),'mail');
 		}
-		
+
 		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
@@ -156,7 +154,7 @@ if ($group_id) {
 			mail_footer(array());
 			exit;
 		}
-		
+
 		$tableHeaders = array(
 			_('Existing mailing lists')
 		);
@@ -205,13 +203,13 @@ if ($group_id) {
 //
 	} elseif(getIntFromGet('change_status') && getIntFromGet('group_list_id')) {
 		$mailingList = new MailingList($group, getIntFromGet('group_list_id'));
-			
+
 		if(!$mailingList || !is_object($mailingList)) {
 			exit_error(_('Error getting the list'),'mail');
 		} elseif($mailingList->isError()) {
 			exit_error($mailingList->getErrorMessage(),'mail');
 		}
-   	
+
 		mail_header(array(
 			'title' => _('Mail admin')));
 		?>

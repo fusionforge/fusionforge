@@ -35,9 +35,6 @@ require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
 $group_id = getIntFromRequest('group_id');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$warnig_msg = htmlspecialchars(getStringFromRequest('warnig_msg'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 
 session_require_perm ('project_admin', $group_id) ;
 
@@ -227,7 +224,7 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 
 <table width="100%" cellpadding="2" cellspacing="2">
 	<tr valign="top">
-		<td width="50%"><?php 
+		<td width="50%"><?php
 		//
 		//	Pending requests
 		//
@@ -330,14 +327,14 @@ foreach ($members as $user) {
 			}
 			echo '</a></td>';
 			$seen = true ;
-		} 
-			
+		}
+
 		echo '
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 			  <input type="hidden" name="submit" value="y" />
 			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
 			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
-			
+
 		echo '<td style="white-space: nowrap;">';
 		echo $role->getName() ;
 		echo '<input type="hidden" name="role_id" value="'.$role->getID().'" />' ;
@@ -351,7 +348,7 @@ foreach ($members as $user) {
 			  <input type="hidden" name="submit" value="y" />
 			  <input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
 			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
-			
+
 	echo '<tr><td style="white-space: nowrap;">';
 	echo role_box($group_id,'role_id',$role->getID());
 	echo '</td><td><input type="submit" name="adduser" value="'._("Grant extra role").'" />
@@ -361,10 +358,10 @@ foreach ($members as $user) {
 echo '</tbody></table>';
 
 		echo $HTML->boxBottom();
-	
+
 		?></td>
 		<td><?php
-			 
+
 
 
 
@@ -439,7 +436,7 @@ $names = array () ;
 foreach ($unused_external_roles as $r) {
 	$ids[] = $r->getID() ;
 	$names[] = $r->getDisplayableName($group) ;
-}		
+}
 echo '<tr><form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
 echo '<input type="hidden" name="submit" value="y" />' ;
 echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
@@ -453,7 +450,7 @@ echo '</table>' ;
 	}
 }
 
-echo $HTML->boxBottom(); 
+echo $HTML->boxBottom();
 ?></td>
 	</tr>
 

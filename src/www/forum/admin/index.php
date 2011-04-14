@@ -38,7 +38,6 @@ require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML in
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
 $deleteforum = getStringFromRequest('deleteforum');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 global $HTML;
 
@@ -119,7 +118,7 @@ if (getStringFromRequest('add_forum')) {
 
 		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",0) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
-				
+
 			<strong>'._('Email All Posts To:').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="60" />
 			</p>
@@ -141,7 +140,7 @@ if (getStringFromRequest('add_forum')) {
 	echo '<p>'._('You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.').'</p>';
 	$fa = new ForumAdmin($f->Group->getID());
 	$fa->PrintAdminPendingOption($group_forum_id);
-		
+
 	echo '
 			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 				<p>
@@ -149,7 +148,7 @@ if (getStringFromRequest('add_forum')) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-				
+
 				<strong>'._('Allow Anonymous Posts?').'</strong><br />
 				<input type="radio" name="allow_anonymous" value="1"'.(($f->AllowAnonymous() == 1)?' checked="checked"':'').' /> '._('Yes').'<br />
 				<input type="radio" name="allow_anonymous" value="0"'.(($f->AllowAnonymous() == 0)?' checked="checked"':'').'/> '._('No').'
@@ -162,7 +161,7 @@ if (getStringFromRequest('add_forum')) {
 				<p>' .
 		html_build_select_box_from_assoc(array("0" => _('No Moderation') ,"1" => _('Moderated Level 1'),"2" => _('Moderated Level 2') ),"moderation_level",$f->getModerationLevel()) . '
 				<br />' . _('Moderated Level 1') . ': ' . _('To moderate anonymous posts (if allowed in public forum) and posts from non-member users.') . '<br />' . _('Moderated Level 2') . ': ' . _('To moderate ALL posts.') . '<p>
-				
+
 
 				<strong>'._('Forum Name').':</strong><br />
 				<input type="text" name="forum_name" value="'. $f->getName() .'" size="20" maxlength="30" />
@@ -204,7 +203,7 @@ if (getStringFromRequest('add_forum')) {
 
 } elseif ( getStringFromRequest("deletemsg") ) {
 	// delete message handling
-		
+
 	$forum_id = getIntFromRequest("forum_id");
 	$thread_id = getIntFromRequest("thread_id");
 	$msg_id = getIntFromRequest("deletemsg");
@@ -236,7 +235,7 @@ if (getStringFromRequest('add_forum')) {
 							<h3>' . _('WARNING! You are about to permanently delete a message and all of its followups!!') . '</h3>
 							<p>
 							<input type="submit" name="ok" value="' . _('Yes') . '" />
-							<input type="submit" name="cancel" value="' . _('No') . '" />    
+							<input type="submit" name="cancel" value="' . _('No') . '" />
 							<input type="hidden" name="deletemsg" value="'.$msg_id.'" />
 							<input type="hidden" name="group_id" value="'.$group_id.'" />
 							<input type="hidden" name="forum_id" value="'.$forum_id.'" />
@@ -271,10 +270,10 @@ if (getStringFromRequest('add_forum')) {
 		}
 		$subject = getStringFromRequest('subject');
 		$body = getStringFromRequest('body');
-			
+
 		$sanitizer = new TextSanitizer();
 		$body = $sanitizer->SanitizeHtml($body);
-			
+
 		$is_followup_to = getStringFromRequest('is_followup_to');
 		$form_key = getStringFromRequest('form_key');
 		$posted_by = getStringFromRequest('posted_by');
@@ -293,30 +292,30 @@ if (getStringFromRequest('add_forum')) {
 	} elseif (getStringFromRequest("cancel")) {
 		// the user cancelled the request, go back to forum
 		session_redirect('/forum/message.php?msg_id='.$msg_id);
-	} else { 
+	} else {
 		//print the edit message confirmation
-			
+
 		$f = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f || !is_object($f)) {
 			exit_error(_('Error Getting Forum'),'forums');
 		} elseif ($f->isError()) {
 			exit_error($f->getErrorMessage(),'forums');
 		}
-			
+
 		$fm=new ForumMessage($f,$msg_id,false,false);
 		if (!$fm || !is_object($fm)) {
 			exit_error(_('Error Getting ForumMessage'),'forums');
 		} elseif ($fm->isError()) {
 			exit_error($fm->getErrorMessage(),'forums');
 		}
-			
+
 		$fh = new ForumHTML($f);
 		if (!$fh || !is_object($fh)) {
 			exit_error(_('Error Getting ForumHTML'),'forums');
 		} elseif ($fh->isError()) {
 			exit_error($fh->getErrorMessage(),'forums');
 		}
-			
+
 		forum_header(array('title'=>_('Edit a Message')));
 		$fh->showEditForm($fm);
 		forum_footer(array());
@@ -373,11 +372,11 @@ if (getStringFromRequest('add_forum')) {
 			session_redirect('/forum/forum.php?thread_id='.$thread_id.'&forum_id='.$forum_id);
 		}
 		exit;
-	} else { 
+	} else {
 		// Display select box to select new forum
 
 					forum_header(array('title'=>_('Move Thread')));
-					
+
 		$ff = new ForumFactory($g);
 		if (!$ff || !is_object($ff) || $ff->isError()) {
 			exit_error($ff->getErrorMessage(),'forums');
@@ -406,14 +405,14 @@ if (getStringFromRequest('add_forum')) {
 				$forums[$farr[$j]->getID()] = $farr[$j]->getName();
 			}
 		}
-					
+
 		$f_from = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f_from || !is_object($f_from)) {
 			exit_error(_('Could Not Get Forum Object'),'forums');
 		} elseif ($f_from->isError()) {
 			exit_error($f_from->getErrorMessage(),'forums');
 		}
-					
+
 		echo '<center>
 							<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 							<p><strong>' . sprintf(_('Move thread from %s forum to the following forum:'), $f_from->getName()) . '</strong></p>
@@ -426,7 +425,7 @@ if (getStringFromRequest('add_forum')) {
 			html_build_select_box_from_assoc($forums,'new_forum_id',$forum_id) .
 			'<br /><br />
 							<input type="submit" name="ok" value="' . _("Submit") . '" />
-							<input type="submit" name="cancel" value="' . _("Cancel") . '" />    
+							<input type="submit" name="cancel" value="' . _("Cancel") . '" />
 							</p>
 							</form>
 							</center>';

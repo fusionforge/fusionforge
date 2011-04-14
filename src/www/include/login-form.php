@@ -23,29 +23,29 @@
 
 use_javascript('/tabber/tabber.js');
 
-function validate_return_to(&$return_to='/') {
-	$newrt = '/' ;
+function validate_return_to(&$return_to = '/') {
+	$newrt = '/';
 
 	if ($return_to) {
 		$tmpreturn=explode('?',$return_to);
 		$rtpath = $tmpreturn[0] ;
-		
+
 		if (@is_file(forge_get_config('url_root').$rtpath)
 		    || @is_dir(forge_get_config('url_root').$rtpath)
 		    || (strpos($rtpath,'/projects') == 0)
 		    || (strpos($rtpath,'/plugins/mediawiki') == 0)) {
-			$newrt = $return_to ;
+			$newrt = $return_to;
 		}
 	}
 
 	$return_to = $newrt;
 }
 
-function display_login_page($return_to='/', $triggered=false) {
+function display_login_page($return_to = '/', $triggered = false) {
 	display_login_form($return_to, $triggered, true);
 }
 
-function display_login_form($return_to='/', $triggered=false, $full_page=false) {
+function display_login_form($return_to = '/', $triggered = false, $full_page = false) {
 	global $HTML;
 
 	validate_return_to($return_to);
@@ -62,7 +62,7 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 			$urls = array_values($params['transparent_redirect_urls']);
 			session_redirect_external($urls[0]);
 		}
-	
+
 		$HTML->header(array('title'=>'Login'));
 	}
 
@@ -74,7 +74,7 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 		echo '</p>';
 	}
 
-	
+
 	if (count ($params['html_snippets']) > 1) {
 		$use_tabber = true;
 		echo '<div id="tabber" class="tabber">';
@@ -92,7 +92,7 @@ function display_login_form($return_to='/', $triggered=false, $full_page=false) 
 			echo '</div>';
 		}
 	}
-	
+
 	if ($use_tabber) {
 		echo '</div>';
 	}

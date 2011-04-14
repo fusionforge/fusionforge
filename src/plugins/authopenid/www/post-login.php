@@ -22,13 +22,13 @@
  * You should have received a copy of the GNU General Public License
  * along with FusionForge; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
- * 
+ *
  */
 
 // FIXME : WTF ?!?!?!?
-Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
-Header( "Cache-Control: no-cache"); 
-Header( "Cache-Control: must-revalidate"); 
+Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+Header( "Cache-Control: no-cache");
+Header( "Cache-Control: must-revalidate");
 
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -42,10 +42,6 @@ $plugin = plugin_get_object('authopenid');
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
 $openid_identifier = getStringFromRequest('openid_identifier');
-
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $triggered = getIntFromRequest('triggered');
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
@@ -55,12 +51,12 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 }
 
 try {
-	
+
 	// initialize the OpenID lib handler which will read the posted args
 	$plugin->openid = new LightOpenID;
 	// check the 'openid_mode' that may be set on returning from OpenID provider
 	if(!$plugin->openid->mode) {
-		
+
 		// We're just called by the login form : redirect to the OpenID provider
         if(isset($_POST['openid_identifier'])) {
         	$openid_identifier = $_POST['openid_identifier'];
@@ -72,20 +68,20 @@ try {
         		$warning_msg = _('No such OpenID identity registered yet');
         	}
         }
-        
+
     // or we are called back by the OpenID provider
     } elseif($plugin->openid->mode == 'cancel') {
         $warning_msg .= _('User has canceled authentication');
     } else {
-    	
+
     	// Authentication should have been attempted by OpenID provider
     	if ($plugin->openid->validate()) {
     		// If user successfully logged in to OpenID provider
-    		
+
     		// initiate session
 	    	if ($plugin->isSufficient()) {
 	    		$user = False;
-	    		
+
 	    		$username = $plugin->getUserNameFromOpenIDIdentity($plugin->openid->identity);
 				if ($username) {
 					$user_tmp = user_get_object_by_name($username);
@@ -96,12 +92,12 @@ try {
 						$warning_msg = _('OpenID plugin not activated for the user account');
 					}
 				}
-			
+
 				if($user) {
 					// redirect to the proper place in the forge
 					if ($return_to) {
 						validate_return_to($return_to);
-	
+
 						session_redirect($return_to);
 					} else {
 						session_redirect("/my");
@@ -113,10 +109,10 @@ try {
 	    	}
 		}
     }
-    
+
 	// Otherwise, display the login form again
 	display_login_page($return_to, $triggered);
-        
+
 } catch(ErrorException $e) {
     echo 'OpenID error'. $e->getMessage();
 }

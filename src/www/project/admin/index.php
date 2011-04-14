@@ -35,7 +35,6 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 require_once $gfcommon.'include/GroupJoinRequest.class.php';
 
 $group_id = getIntFromRequest('group_id');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
 
 session_require_perm ('project_admin', $group_id) ;
 
@@ -70,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	$addTags = getArrayFromRequest('addTags');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
-	
+
 	if (trim($tags) != "") {
 		$tags .= ",";
 	}
@@ -99,7 +98,7 @@ if (getStringFromRequest('submit')) {
 		$tags,
 		0
 	);
-	
+
 	//100 $logo_image_id
 
 	if (!$res) {
@@ -119,13 +118,13 @@ project_admin_header(array('title'=>_('Project Information'), 'group'=>$group->g
 <?php echo $HTML->boxTop(_('Misc. Project Information'));
 
 if (forge_get_config('use_shell')) {
-?> 
+?>
 <p><?php echo _('Group shell (SSH) server:&nbsp;') ?><strong><?php echo $group->getUnixName().'.'.forge_get_config('web_host'); ?></strong></p>
 <p><?php echo _('Group directory on shell server:&nbsp;') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
 <p><?php echo _('Project WWW directory on shell server:&nbsp;') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></strong></p>
 <?php
 	} //end of use_shell condition
-?> 
+?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
@@ -152,7 +151,7 @@ if (forge_get_config('use_shell')) {
 <?php echo _('Add tags (use comma as separator): ') ?><br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
 </p>
-<?php 
+<?php
 	$infos = getAllProjectTags();
 	if ($infos) {
 		echo '<br />';
@@ -215,7 +214,7 @@ if(forge_get_config('use_mail')) {
 ?>
 <input type="hidden" name="use_mail" value="<?php echo ($group->usesMail() ? '1' : '0'); ?>" />
 <?php
-} 
+}
 
 if(forge_get_config('use_survey')) {
 ?>

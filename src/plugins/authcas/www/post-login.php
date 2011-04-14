@@ -27,9 +27,9 @@
  */
 
 // FIXME : WTF ?!?!?!?
-Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
-Header( "Cache-Control: no-cache"); 
-Header( "Cache-Control: must-revalidate"); 
+Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+Header( "Cache-Control: no-cache");
+Header( "Cache-Control: must-revalidate");
 
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -40,9 +40,6 @@ $plugin = plugin_get_object('authcas');
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
 $postcas = getStringFromRequest('postcas');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $triggered = getIntFromRequest('triggered');
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
@@ -73,13 +70,13 @@ if (phpCAS::isAuthenticated()) {
 } else {
 	if ($login) {		     // The user just clicked the Login button
 		// Let's send them to CAS
-		
+
 		$return_url = util_make_url('/plugins/authcas/post-login.php?postcas=true&return_to='.htmlspecialchars($return_to));
-		
+
 		$GLOBALS['PHPCAS_CLIENT']->setURL($return_url);
-		
+
 		phpCAS::forceAuthentication();
-		
+
 	} elseif ($postcas) {		// The user is coming back from CAS
 		if (phpCAS::isAuthenticated()) {
 			if ($plugin->isSufficient()) {
@@ -87,7 +84,7 @@ if (phpCAS::isAuthenticated()) {
 			}
 			if ($return_to) {
 				validate_return_to($return_to);
-				
+
 				session_redirect($return_to);
 				//header ("Location: " . util_make_url($return_to));
 				//exit;
@@ -96,7 +93,7 @@ if (phpCAS::isAuthenticated()) {
 				//header ("Location: " . util_make_url("/my"));
 				//exit;
 			}
-		} 
+		}
 	}
 }
 

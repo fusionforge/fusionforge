@@ -27,9 +27,9 @@
  */
 
 // FIXME : WTF ?!?!?!?
-Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
-Header( "Cache-Control: no-cache"); 
-Header( "Cache-Control: must-revalidate"); 
+Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT");
+Header( "Cache-Control: no-cache");
+Header( "Cache-Control: must-revalidate");
 
 require_once('../../../www/env.inc.php');
 require_once $gfcommon.'include/pre.php';
@@ -40,9 +40,6 @@ $plugin = plugin_get_object('authhttpd');
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
 $postcas = getStringFromRequest('postcas');
-$feedback = htmlspecialchars(getStringFromRequest('feedback'));
-$warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));
-$error_msg = htmlspecialchars(getStringFromRequest('error_msg'));
 $triggered = getIntFromRequest('triggered');
 
 if (forge_get_config('use_ssl') && !session_issecure()) {
