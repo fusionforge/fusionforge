@@ -63,6 +63,8 @@ fi
 
 make -f Makefile.rh BUILDRESULT=$WORKSPACE/build/packages all
 
+(cd 3rd-party/selenium ; make getselenium)
+
 (cd tests/scripts ; sh ./start_vm.sh $HOST)
 
 # FUSIONFORGE REPO
