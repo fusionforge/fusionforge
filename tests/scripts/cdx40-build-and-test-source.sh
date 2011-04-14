@@ -11,7 +11,12 @@ export DEBMIRROR
 # get config
 . tests/config/default
 if [ -f tests/config/`hostname` ] ; then . tests/config/`hostname`; fi
-export HOST=cdx40.$DNSDOMAIN
+if [ ! -z "$1" ]
+then
+        export HOST=$1
+else
+	export HOST=cdx40.$DNSDOMAIN
+fi
 
 export LXCTEMPLATE=$LXCCOSTEMPLATE
 
