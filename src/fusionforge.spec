@@ -639,6 +639,7 @@ if [ "$1" -eq "1" ]; then
 	fi
 
 	/usr/bin/php %{FORGE_DIR}/db/upgrade-db.php >>/var/log/%{name}-install.log 2>&1
+	/usr/bin/php %{FORGE_DIR}/utils/normalize_roles.php >>/var/log/%{name}-install.log 2>&1
 
 	HOSTNAME=`hostname -f`
 	#%{__sed} -i -e "s!gforge.company.com!$HOSTNAME!g" %{FORGE_CONF_DIR}/local.inc

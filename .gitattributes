@@ -597,6 +597,7 @@ src/db/20110222-pluginify-auth.sql -text
 src/db/20110310-docman-trashdir.sql -text
 src/db/20110405-forum_attachment_fix-bug284.sql -text
 src/db/20110408-anonymous-read-news.sql -text
+src/db/20110414-move-news-forums-to-own-project.sql -text
 src/db/FTI-20061025.sql -text
 src/db/SQL_2.6/replicate.sh svneol=native#text/x-sh
 src/db/gforge-data-mysql.sql -text
@@ -4448,7 +4449,6 @@ src/utils/cvs1/cvstar_genlist.pl svneol=native#text/x-perl
 src/utils/cvs1/cvstar_superscript.pl svneol=native#text/x-perl
 src/utils/decode_images.sh svneol=native#text/x-sh
 src/utils/fill-in-the-blanks.pl svneol=native#text/x-perl
-src/utils/fixscripts/normalize_roles.php -text
 src/utils/fixscripts/populate_template_project.php -text
 src/utils/forge_get_compressed_extension -text
 src/utils/forge_get_compressor -text
@@ -4467,6 +4467,7 @@ src/utils/ldap/sql2ldifmod.pl -text svneol=unset#text/x-perl
 src/utils/manage-apache-config.sh -text svneol=unset#text/x-sh
 src/utils/manage-translations.sh -text svneol=unset#text/x-sh
 src/utils/migrate-to-ini-files.sh -text svneol=unset#text/x-sh
+src/utils/normalize_roles.php -text
 src/utils/underworld-dummy/dns_conf.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/dump_database.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ia64_dump.pl svneol=native#text/x-perl
@@ -4476,6 +4477,7 @@ src/utils/underworld-dummy/new_aliases.pl svneol=native#text/x-perl
 src/utils/underworld-dummy/ssh_dump.pl svneol=native#text/x-perl
 src/www/admin/globalroleedit.php -text
 src/www/admin/passedit.php -text
+src/www/admin/pending-news.php -text
 src/www/admin/pi.php -text
 src/www/docman/scripts/DocManController.js -text
 src/www/env.inc.php -text

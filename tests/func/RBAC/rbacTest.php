@@ -176,19 +176,19 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		// Try to push it to front page with user toto
-		$this->open( ROOT . '/news/admin/') ;
+		$this->open( ROOT . '/admin/pending-news.php') ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isPermissionDenied()) ;
 
 		// Try to push it to front page with user projapp
 		$this->switchUser ("projapp") ;
-		$this->open( ROOT . '/news/admin/') ;
+		$this->open( ROOT . '/admin/pending-news.php') ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isPermissionDenied()) ;
 
 		// Push it to front page with user newsmod
 		$this->switchUser ("newsmod") ;
-		$this->open( ROOT . '/news/admin/') ;
+		$this->open( ROOT . '/admin/pending-news.php') ;
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue ($this->isTextPresent("These items need to be approved")) ;
 		$this->assertTrue ($this->isTextPresent("First TotoNews")) ;

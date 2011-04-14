@@ -188,7 +188,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 <h2><?php echo _('News'); ?></h2>
 <ul>
-	<li><?php echo util_make_link ('/news/admin/',_('Approve/Reject')); ?> <?php echo _('Front-page news'); ?></li>
+	<li><?php echo util_make_link ('/admin/pending-news.php',_('Pending news (moderation for front-page)')); ?></li>
 </ul>
 
 <h2><?php echo _('Stats'); ?></h2>

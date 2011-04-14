@@ -104,6 +104,7 @@ then
 	else
 		echo "Running php db/upgrade-db.php"
 		php db/upgrade-db.php
+		php utils/normalize_roles.php
 	fi
 elif [ "$type" = "suse" ]
 then
