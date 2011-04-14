@@ -59,7 +59,6 @@ $purpose = trim(getStringFromRequest('purpose'));
 $description = trim(getStringFromRequest('description'));
 $unix_name = trim(strtolower(getStringFromRequest('unix_name')));
 $scm = getStringFromRequest('scm');
-$is_public = getIntFromRequest('is_public', 1);
 $built_from_template = getIntFromRequest('built_from_template');
 
 $index = 1;
@@ -115,7 +114,7 @@ if (getStringFromRequest('submit')) {
 			$purpose,
 			'shell1',
 			$scm_host,
-			$is_public,
+			0,
 			$send_mail,
 			$built_from_template
 		);
@@ -290,24 +289,6 @@ if (count ($template_projects) >= 1) {
 	printf(_('Since no template project is available, your project will start empty.')) ;
 	echo '<input type="hidden" name="built_from_template" value="0" />' ;
 	echo '</p>';
-}
-
-if (forge_get_config('use_private_project')) {
-	echo '<h2>'.$index++.'. '._('Visibility'). '</h2>';
-	echo '<p>' . _('If you make your project private, it won\'t be visible in the project list and can\'t be accessed by non members of the project.')."</p>\n";
-	echo '<table><tbody><tr><td><strong>'._('Visibility').':</strong></td>';
-	echo '<td><input type="radio" name="is_public" value="1" ';
-	if (!isset($is_public) || $is_public) {
-		echo 'checked="checked" ';
-	}
-	echo '/>'. _('Public').'</td>';
-
-	echo '<td><input type="radio" name="is_public" value="0" ';
-	if (isset ($is_public) && !$is_public) {
-		echo 'checked="checked"';
-	}
-	echo '/>'. _('Private').'</td> ';
-	echo '</tr></tbody></table>'."\n";
 }
 ?>
 
