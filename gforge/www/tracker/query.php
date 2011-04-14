@@ -289,7 +289,7 @@ echo '
 echo'
 <table width="100%" class="tablecontent">';
 if ($ath->userIsAdmin()) {
-	$default_query = db_result(db_query_params('"SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
+	$default_query = db_result(db_query_params('SELECT query_name FROM artifact_query WHERE query_type=2 AND group_artifact_id=$1',
 						   array ($ath->getID())),
 				   0,
 				   'query_name');
