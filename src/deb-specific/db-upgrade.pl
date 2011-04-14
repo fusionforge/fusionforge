@@ -1945,7 +1945,7 @@ eval {
     &update_with_sql("20110110-pw-size","5.0.51-11");
     &update_with_sql("20110405-forum_attachment_fix-bug284","5.0.51-12");
     &update_with_sql("20110408-anonymous-read-news","5.0.51-13");
-    &update_with_sql("20110411-move-news-forums-to-own-project","5.0.51-14");
+    &update_with_sql("20110414-move-news-forums-to-own-project","5.0.51-14");
 
     ########################### INSERT HERE #################################
 
