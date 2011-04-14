@@ -146,8 +146,6 @@ forge_set_config_item_bool ('show_source', 'core') ;
 forge_define_config_item ('default_trove_cat', 'core', $GLOBALS['default_trove_cat']) ;
 forge_define_config_item ('user_registration_accept_conditions', 'core', $GLOBALS['sys_require_accept_conditions']);
 forge_set_config_item_bool ('user_registration_accept_conditions', 'core') ;
-forge_define_config_item ('use_private_project', 'core', $GLOBALS['sys_use_private_project']);
-forge_set_config_item_bool ('use_private_project', 'core') ;
 
 // Arch plugin
 if (file_exists ($gfconfig.'plugins/scmarch/config.php')) {

@@ -68,7 +68,6 @@ if (getStringFromRequest('submit')) {
 	$use_stats = getStringFromRequest('use_stats');
 	$tags = getStringFromRequest('form_tags');
 	$addTags = getArrayFromRequest('addTags');
-	$is_public = getIntFromRequest('is_public');
 	$new_doc_address = getStringFromRequest('new_doc_address');
 	$send_all_docs = getStringFromRequest('send_all_docs');
 	
@@ -98,7 +97,7 @@ if (getStringFromRequest('submit')) {
 		$use_frs,
 		$use_stats,
 		$tags,
-		$is_public
+		0
 	);
 	
 	//100 $logo_image_id
@@ -199,19 +198,6 @@ if (forge_get_config('use_shell')) {
 <p>
 <input type="text" name="form_homepage" size="100" value="<?php echo $group->getHomePage(); ?>" />
 </p>
-
-<?php
-	if (forge_get_config('use_private_project')) {
-		echo '<p>' ;
-		echo _('Visibility: ');
-		echo html_build_select_box_from_arrays(
-               array('0','1'),
-               array(  _('Private'), _('Public') ),
-               'is_public', $group->isPublic(), false);
-	} else {
-		echo "<input type=hidden name=\"is_public\" value=\"1\" />";
-	}
-?>
 
 <?php
 // This function is used to render checkboxes below
