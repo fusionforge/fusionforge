@@ -185,7 +185,7 @@ class GFUser extends Error {
 	 * @param	int	The user_id
 	 * @param	int	The database result set OR array of data
 	 */
-	function GFUser($id=false,$res=false) {
+	function GFUser($id = false, $res = false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
@@ -440,11 +440,11 @@ Enjoy the site.
 -- the %3$s staff
 '),
 					       $this->getUnixName(),
-					       util_make_url ('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
-					       forge_get_config ('forge_name')));
+					       util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
+					       forge_get_config('forge_name')));
 		util_send_message(
 			$this->getEmail(),
-			sprintf(_('%1$s Account Registration'), forge_get_config ('forge_name')),
+			sprintf(_('%1$s Account Registration'), forge_get_config('forge_name')),
 			$message
 		);
 	}
@@ -584,15 +584,15 @@ Enjoy the site.
 				$block_ratings,
 				$jabber_address,
 				$jabber_only,
-				htmlspecialchars($address) ,
-				htmlspecialchars($address2) ,
-				htmlspecialchars($phone) ,
-				htmlspecialchars($fax) ,
-				htmlspecialchars($title) ,
+				htmlspecialchars($address),
+				htmlspecialchars($address2),
+				htmlspecialchars($phone),
+				htmlspecialchars($fax),
+				htmlspecialchars($title),
 				$ccode,
 				$theme_id,
 				$tooltips,
-				$this->getID())) ;
+				$this->getID()));
 
 		if (!$res) {
 			$this->setError(_('ERROR - Could Not Update User Object:'). ' ' .db_error());
@@ -1161,16 +1161,16 @@ Enjoy the site.
 	 * @return array	Array of groups.
 	 */
 	function &getGroups($onlylocal = true) {
-		$ids = array () ;
+		$ids = array();
 		foreach ($this->getRoles() as $r) {
 			if ($onlylocal) {
 				if ($r instanceof RoleExplicit
 				    && $r->getHomeProject() != NULL) {
-					$ids[] = $r->getHomeProject()->getID() ;
+					$ids[] = $r->getHomeProject()->getID();
 				}
 			} else {
 				foreach ($r->getLinkedProjects() as $p) {
-					$ids[] = $p->getID() ;
+					$ids[] = $p->getID();
 				}
 			}
 		}
@@ -1373,10 +1373,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *	setMD5Passwd - Changes user's MD5 password.
+	 * setMD5Passwd - Changes user's MD5 password.
 	 *
-	 *	@param	string	The MD5-hashed password.
-	 *	@return boolean success.
+	 * @param	string	The MD5-hashed password.
+	 * @return	boolean	success.
 	 */
 	function setMD5Passwd($md5) {
 		global $SYS;
@@ -1384,9 +1384,9 @@ Enjoy the site.
 		db_begin();
 
 		if ($md5) {
-			$res = db_query_params ('UPDATE users SET user_pw=$1 WHERE user_id=$2',
-						array ($md5_pw,
-						       $this->getID())) ;
+			$res = db_query_params('UPDATE users SET user_pw=$1 WHERE user_id=$2',
+						array($md5_pw,
+						       $this->getID()));
 			
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
@@ -1399,10 +1399,10 @@ Enjoy the site.
 	}
 
 	/**
-	 *	setUnixPasswd - Changes user's Unix-hashed password.
+	 * setUnixPasswd - Changes user's Unix-hashed password.
 	 *
-	 *	@param	string	The Unix-hashed password.
-	 *	@return boolean success.
+	 * @param	string	The Unix-hashed password.
+	 * @return	boolean	success.
 	 */
 	function setUnixPasswd($unix) {
 		global $SYS;
@@ -1410,9 +1410,9 @@ Enjoy the site.
 		db_begin();
 
 		if ($unix) {
-			$res = db_query_params ('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
+			$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
 						array ($unix_pw,
-						       $this->getID())) ;
+						       $this->getID()));
 			
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
@@ -1531,9 +1531,9 @@ Enjoy the site.
 	 * @return	boolean	success.
 	 */
 	function getMailingsPrefs($mailing_id) {
-		if ($mailing_id=='va') {
+		if ($mailing_id == 'va') {
 			return $this->data_array['mail_va'];
-		} else if ($mailing_id=='site') {
+		} else if ($mailing_id == 'site') {
 			return $this->data_array['mail_siteupdates'];
 		} else {
 			return 0;
@@ -1546,14 +1546,14 @@ Enjoy the site.
 	 * @param	boolean	If false, disable general site mailings, else - all.
 	 * @return	boolean	success.
 	 */
-	function unsubscribeFromMailings($all=false) {
+	function unsubscribeFromMailings($all = false) {
 		$res1 = $res2 = $res3 = true;
 		$res1 = db_query_params ('UPDATE users SET mail_siteupdates=0, mail_va=0 WHERE user_id=$1',
 					 array ($this->getID())) ;
 		if ($all) {
-			$res2 = db_query_params ('DELETE FROM forum_monitored_forums WHERE user_id=$1',
+			$res2 = db_query_params('DELETE FROM forum_monitored_forums WHERE user_id=$1',
 						 array ($this->getID())) ;
-			$res3 = db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1',
+			$res3 = db_query_params('DELETE FROM filemodule_monitor WHERE user_id=$1',
 						 array ($this->getID())) ;
 		}
 
@@ -1618,12 +1618,12 @@ Enjoy the site.
 		return false;
 	}
 
-	function getRoles () {
-		return RBACEngine::getInstance()->getAvailableRolesForUser($this) ;
+	function getRoles() {
+		return RBACEngine::getInstance()->getAvailableRolesForUser($this);
 	}
 
 	/* Codendi Glue */
-	function isMember($g,$type=0){
+	function isMember($g, $type = 0){
 		if (is_int ($g) || is_string($g)) {
 			$group = group_get_object ($g) ;
 			$group_id = $g ;
@@ -1635,28 +1635,28 @@ Enjoy the site.
 		switch ($type) {
 		case 'P2':
 			//pm admin
-			return forge_check_perm_for_user($this,'pm_admin',$group_id) ;
+			return forge_check_perm_for_user($this, 'pm_admin', $group_id);
 			break; 
 		case 'F2':
 			//forum admin
-			return forge_check_perm_for_user($this,'forum_admin',$group_id) ;
+			return forge_check_perm_for_user($this, 'forum_admin', $group_id);
 			break; 
 		case 'A':
 			//admin for this group
-			return forge_check_perm_for_user($this,'project_admin',$group_id) ;
+			return forge_check_perm_for_user($this, 'project_admin', $group_id);
 			break;
 		case 'D1':
 			//document editor
-			return forge_check_perm_for_user($this,'docman',$group_id,'admin') ;
+			return forge_check_perm_for_user($this, 'docman', $group_id, 'admin');
 			break;
 		case '0':
 		default:
 			foreach ($this->getGroups() as $p) {
 				if ($p->getID() == $group_id) {
-					return true ;
+					return true;
 				}
 			}
-			return false ;
+			return false;
 			break;
 		}
 	}
