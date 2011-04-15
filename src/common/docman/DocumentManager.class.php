@@ -45,8 +45,6 @@ class DocumentManager extends Error {
 	 * Constructor.
 	 *
 	 * @param	object	The Group object to which this document is associated.
-	 * @param	int	The docid.
-	 * @param	array	The associative array of data.
 	 * @return	boolean	success.
 	 */
 	function DocumentManager(&$Group) {
@@ -77,7 +75,7 @@ class DocumentManager extends Error {
 	/**
 	 * getTrashID - the trash doc_group id for this DocumentManager.
 	 *
-	 * @return	int	The trash doc_group id.
+	 * @return	integer	The trash doc_group id.
 	 */
 	function getTrashID() {
 		if (isset($this->data_array['trashid']))
@@ -96,6 +94,31 @@ class DocumentManager extends Error {
 			$this->setError('DocumentManager:: trash not found');
 			return -1;
 		}
+	}
+
+	/**
+	 * cleanTrash - delete all items in trash for this DocumentManager
+	 *
+	 * @return	boolean	true on success
+	 */
+	function cleanTrash() {
+		$trashId = $this->getTrashID();
+		if ($trashId !== -1) {
+			db_begin();
+			$emptyFile = db_query_params('DELETE FROM doc_data WHERE stateid=$1 and group_id=$2', array('2', $this->Group->getID()));
+			if (!$emptyFile)	{
+				db_rollback();
+				return false;
+			}
+			$emptyDir = db_query_params('DELETE FROM doc_groups WHERE stateid=$1 and group_id=$2 and groupname !=$3', array('2', $this->Group->getID(), '.trash'));
+			if (!$emptyDir) {
+				db_rollback();
+				return false;
+			}
+			db_commit();
+			return true;
+		}
+		return false;
 	}
 }
 

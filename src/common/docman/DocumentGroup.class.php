@@ -157,7 +157,7 @@ class DocumentGroup extends Error {
 	/**
 	 * delete - delete a DocumentGroup.
 	 * WARNING delete is recursive and permanent
-	 * @param	int	Document Group Id, integer Project Group Id
+	 * @param	integer	Document Group Id, integer Project Group Id
 	 * @return	boolean	success
 	 * @access	public
 	 */
@@ -231,7 +231,7 @@ class DocumentGroup extends Error {
 	/**
 	 * fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
-	 * @param	int	ID of the doc_group.
+	 * @param	integer	ID of the doc_group.
 	 * @return	boolean	success
 	 * @access	public
 	 */
@@ -250,7 +250,7 @@ class DocumentGroup extends Error {
 	/**
 	 * getGroup - get the Group Object this DocumentGroup is associated with.
 	 *
-	 * @return Object Group.
+	 * @return	Object Group.
 	 * @access	public
 	 */
 	function &getGroup() {
@@ -260,7 +260,7 @@ class DocumentGroup extends Error {
 	/**
 	 * getID - get this DocumentGroup's ID.
 	 *
-	 * @return	int	The id #.
+	 * @return	integer	The id #.
 	 * @access	public
 	 */
 	function getID() {
@@ -270,7 +270,7 @@ class DocumentGroup extends Error {
 	/**
 	 * getID - get parent DocumentGroup's id.
 	 *
-	 * @return	int	The id #.
+	 * @return	integer	The id #.
 	 * @access	public
 	 */
 	function getParentID() {
@@ -290,7 +290,7 @@ class DocumentGroup extends Error {
 	/**
 	 * getState - get the state id.
 	 *
-	 * @return	int	The state id.
+	 * @return	integer	The state id.
 	 * @access	public
 	 */
 	function getState() {
@@ -301,7 +301,7 @@ class DocumentGroup extends Error {
 	 * update - update a DocumentGroup.
 	 *
 	 * @param	string	Name of the category.
-	 * @param	int	the doc_group id of the parent. default = 0
+	 * @param	integer	the doc_group id of the parent. default = 0
 	 * @return	boolean	success or not
 	 * @access	public
 	 */
@@ -354,17 +354,17 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	* hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
-	*
-	* A group has associated documents if and only if there are documents associated to this
-	* group or to any of its childs
-	*
-	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
-	* @param	object	The DocumentFactory object
-	* @param	int	(optional) State of the documents
-	* @return	boolean	success
-	* @access	public
-	*/
+	 * hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
+	 *
+	 * A group has associated documents if and only if there are documents associated to this
+	 * group or to any of its childs
+	 *
+	 * @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
+	 * @param	object	The DocumentFactory object
+	 * @param	int	(optional) State of the documents
+	 * @return	boolean	success
+	 * @access	public
+	 */
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
 		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
@@ -405,13 +405,13 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	* hasSubgroup - Checks if this group has a specified subgroup associated to it
-	*
-	* @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
-	* @param	int	ID of the subgroup
-	* @return	boolean	success
-	* @access	public
-	*/
+	 * hasSubgroup - Checks if this group has a specified subgroup associated to it
+	 *
+	 * @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
+	 * @param	int	ID of the subgroup
+	 * @return	boolean	success
+	 * @access	public
+	 */
 	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
 		$doc_group_id = $this->getID();
 

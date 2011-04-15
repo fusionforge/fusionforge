@@ -30,7 +30,7 @@
 DocManListFileController = function(params)
 {
 	this.lockInterval	= [];
-	this.params		= params;
+	this.params	= params;
 
 	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
@@ -42,7 +42,7 @@ DocManListFileController = function(params)
 
 DocManAddItemController = function(params)
 {
-	this.params		= params;
+	this.params	= params;
 
 	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
@@ -52,7 +52,7 @@ DocManAddItemController = function(params)
 
 DocManMenuController = function(params)
 {
-	this.params		= params;
+	this.params	= params;
 
 	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
@@ -66,7 +66,9 @@ DocManListFileController.prototype =
 	bindControls: function()
 	{
 		this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
-		this.params.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
+		if (typeof(this.params.buttonAddItem) != 'undefined') {
+			this.params.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
+		}
 	},
 
 	resizableDiv:function() {

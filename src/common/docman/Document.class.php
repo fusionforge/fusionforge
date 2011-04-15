@@ -994,6 +994,14 @@ class Document extends Error {
 		$this->sendNotice(false);
 		return true;
 	}
+
+	function createVersion() {
+
+	}
+
+	function deleteVersion() {
+
+	}
 }
 
 // Local Variables:

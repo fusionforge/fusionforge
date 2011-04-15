@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -39,7 +40,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	}
 }
 
-$groupname = $_POST['groupname'];
+$groupname = getStringFromRequest('groupname');
 
 $dg = new DocumentGroup($g);
 

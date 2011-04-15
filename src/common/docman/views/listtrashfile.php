@@ -81,20 +81,23 @@ var controllerListTrash;
 
 jQuery(document).ready(function() {
 	controllerListTrash = new DocManListFileController({
-		groupId:		<?php echo $group_id ?>,
+		groupId:			<?php echo $group_id ?>,
 		tipsyElements:		[
 						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '.docman-delete', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-trashdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
-					],
+						],
 
-		divEditDirectory:	jQuery('#editdocgroup'),
+		divEditDirectory:		jQuery('#editdocgroup'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
-		lockIntervalDelay:	60000 //in microsecond and if you change this value, please update the check value 600
+		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
+		divLeft:			jQuery('#left'),
+		divHandle:			jQuery('#handle'),
+		divRight:			jQuery('#right'),
 	});
 });
 </script>
@@ -103,10 +106,11 @@ jQuery(document).ready(function() {
 	echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents with deleted status.') .'" >';
 	echo '</form></div>';
 
-	echo '<div style="float:left; width:17%; padding-right:3px; margin-right:2px; border-right: dashed 1px black;">';
+	echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';
 	include ($gfcommon.'docman/views/tree.php');
 	echo '</div>';
-	echo '<div style="float:left; width:82%;">';
+	echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
+	echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 	if ($DocGroupName) {
 		echo '<h3 class="docman_h3" >Directory : <i>'.$DocGroupName.'</i>&nbsp;';
 		if ($DocGroupName != '.trash') {

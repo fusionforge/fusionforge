@@ -41,19 +41,19 @@ class DocumentFactory extends Error {
 	/**
 	 * The Documents dictionary.
 	 *
-	 * @var	array	Contains doc_group_id as key and the array of documents associated to that id. 
+	 * @var	array		Contains doc_group_id as key and the array of documents associated to that id. 
 	 */
 	var $Documents;
 
 	/**
 	 * The stateid limit
-	 * @var	int	Contains the stateid to limit return documents in getDocuments.
+	 * @var	integer	Contains the stateid to limit return documents in getDocuments.
 	 */
 	var $stateid;
 
 	/**
 	 * The doc_group_id limit
-	 * @var	int	Contains the doc_group id to limit return documents in getDocuments.
+	 * @var	integer	Contains the doc_group id to limit return documents in getDocuments.
 	 */
 	var $docgroupid;
 
@@ -66,14 +66,14 @@ class DocumentFactory extends Error {
 
 	/**
 	 * The columns order
-	 * @var	array	Contains the order of columns to sort before return documents in getDocuments.
+	 * @var	array		Contains the order of columns to sort before return documents in getDocuments.
 	 *		Default value is title order
 	 */
 	var $order = array('title');
 
 	/**
 	 * The limit
-	 * @var	int	Contains the limit of documents retrieve by getDocuments.
+	 * @var	integer	Contains the limit of documents retrieve by getDocuments.
 	 *		Default value is 0 which means NO LIMIT
 	 */
 	var $limit = 0;
@@ -113,7 +113,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setStateID - call this before getDocuments() if you want to limit to a specific state.
 	 *
-	 * @param	int	The stateid from the doc_states table.
+	 * @param	integer	The stateid from the doc_states table.
 	 * @access	public
 	 */
 	function setStateID($stateid) {
@@ -123,7 +123,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
 	 *
-	 * @param	int	The doc_group from the doc_groups table.
+	 * @param	integer	The doc_group from the doc_groups table.
 	 * @access	public
 	 */
 	function setDocGroupID($docgroupid) {
@@ -262,8 +262,8 @@ class DocumentFactory extends Error {
 	/**
 	 * getDocuments - returns an array of Document objects.
 	 *
-	 * @param	int	no cache : force reinit $this->Documents : default: cache is used
-	 * @return	array	Document objects.
+	 * @param	integer	no cache : force reinit $this->Documents : default: cache is used
+	 * @return	array		Document objects.
 	 * @access	public
 	 */
 	function &getDocuments($nocache = 0) {
