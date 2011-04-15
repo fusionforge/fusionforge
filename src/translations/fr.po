@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-04-15 10:51+0200\n"
-"PO-Revision-Date: 2011-01-10 11:40+0100\n"
+"PO-Revision-Date: 2011-04-15 11:27+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: fr\n"
@@ -194,7 +194,7 @@ msgstr "Nom de fichier invalide."
 
 #: common/docman/actions/addfile.php:121
 msgid "Manual uploads disabled."
-msgstr ""
+msgstr "Les publications de fichiers manuelles sont désactivées."
 
 #: common/docman/actions/addfile.php:146
 msgid "Unknown type submission."
@@ -689,7 +689,7 @@ msgstr "Document indisponible."
 
 #: common/docman/views/help.php:34
 msgid "Direct Webdav URL"
-msgstr ""
+msgstr "Accès direct par WebDAV"
 
 #: common/docman/views/listfile.php:79 common/docman/views/listfile.php:94
 msgid "Edit this directory"
@@ -809,7 +809,7 @@ msgstr "Éditer ce répertoire"
 
 #: common/docman/views/listfile.php:236
 msgid "Reserve this document for later edition"
-msgstr ""
+msgstr "Réserver ce document pour une édition ultérieure"
 
 #: common/docman/views/listfile.php:236
 #, fuzzy
@@ -818,7 +818,7 @@ msgstr "Chercher à l'intérieur des documents"
 
 #: common/docman/views/listfile.php:240
 msgid "Enforce reservation"
-msgstr ""
+msgstr "Appliquer la réservation"
 
 #: common/docman/views/listfile.php:245
 #, fuzzy
@@ -1058,7 +1058,7 @@ msgstr "Erreur lors de la mise à jour :"
 #: common/tracker/ArtifactExtraField.class.php:431
 #: common/tracker/ArtifactType.class.php:807
 msgid "Please tick all checkboxes."
-msgstr ""
+msgstr "Veuillez cocher toutes les cases de confirmation."
 
 #: common/forum/Forum.class.php:631 common/forum/Forum.class.php:639
 #: common/forum/Forum.class.php:647
@@ -2936,7 +2936,7 @@ msgstr "Erreur lors de l'insertion"
 
 #: common/include/utils.php:1380
 msgid "Could not read from random device"
-msgstr ""
+msgstr "Erreur lors de la lecture du générateur de nombres aléatoires."
 
 #: common/mail/MailingList.class.php:63
 #: common/mail/MailingListFactory.class.php:56
@@ -3662,6 +3662,8 @@ msgid ""
 "You can monitor documents by clicking on the appropriate icon action in the "
 "directory itself."
 msgstr ""
+"Vous pouvez surveiller des documents en cliquant sur l'icône\n"
+"correspondante dans le répertoire."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:98
 #: common/widget/Widget_MyMonitoredFp.class.php:106
@@ -3698,12 +3700,16 @@ msgid ""
 "If you monitor forums, you will be sent new posts in the form of an email, "
 "with a link to the new message."
 msgstr ""
+"Si vous surveillez des forums, vous recevrez les nouveaux articles\n"
+"par courrier électronique, avec un lien vers le message."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:57
 msgid ""
 "You can monitor forums by clicking on the appropriate menu item in the "
 "discussion forum itself."
 msgstr ""
+"Vous pouvez surveiller des forums en cliquant sur le lien\n"
+"correspondant dans le forum lui-même."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:116
 msgid "Stop monitoring this Forum?"
@@ -3737,12 +3743,18 @@ msgid ""
 "If you monitor files, you will be sent new release notices via email, with a "
 "link to the new file on our download server."
 msgstr ""
+"Si vous surveillez des fichiers, vous recevrez par courrier\n"
+"électronique une notification de toute nouvelle publication, avec un\n"
+"lien vers le nouveau fichier."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:55
 msgid ""
 "You can monitor files by visiting a project's &quot;Summary Page&quot; and "
 "clicking on the appropriate icon in the files section."
 msgstr ""
+"Vous pouvez surveiller des fichiers en visitant la page de résumé d'un\n"
+"projet et en cliquant sur l'icône correspondante dans la section des\n"
+"fichiers."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:104
 msgid "Stop Monitoring this Package?"
@@ -3945,6 +3957,15 @@ msgid ""
 "listed in your Personal Page and can be canceled from this page or from the "
 "main page of the file release system."
 msgstr ""
+"Liste des paquets les plus récents disponibles au téléchargement.<br\n"
+"/>Une icône de Notes de Publication donne une liste des derniers\n"
+"changements et des commentaires des développeurs sur une révision.<br\n"
+"/>L'icône de supervision permet de déclencher la surveillance d'un\n"
+"paquet. À toute publication d'une nouvelle version d'un paquet,\n"
+"vous recevrez une notification par courrier électronique.  Tous les\n"
+"paquets que vous surveillez sont listés sur votre page personnelle, et\n"
+"la surveillance peut être annulée depuis cette page ou depuis la page\n"
+"du système de publication de fichiers."
 
 #: common/widget/Widget_ProjectLatestNews.class.php:65
 msgid "List the last 10 pieces of news posted by the project members."
@@ -4063,6 +4084,12 @@ msgid ""
 "the screen except that it shows additional information about each of the "
 "service (e.g. total number of open bugs, tasks, ...)"
 msgstr ""
+"Liste de tous les services activés pour ce projet, avec quelques\n"
+"informations supplémentaires pour chacun.  Cliquez sur un de ces liens\n"
+"pour accéder au service correspondant.<br />Cette section a un rôle\n"
+"similaire au menu principal du projet en haut de page, mais elle\n"
+"fournit des informations supplémentaires sur chaque service (par\n"
+"exemple, nombre de rapports d'anomalies ouverts, de tâches en cours, etc.)."
 
 #: common/widget/Widget_Rss.class.php:99
 msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
@@ -4230,6 +4257,8 @@ msgstr ""
 #: plugins/blocks/www/index.php:65
 msgid "Block to list informations requested to ask to join a project"
 msgstr ""
+"Bloc de HTML listant des informations qu'il est demandé de fournir\n"
+"lorsqu'un utilisateur demande à rejoindre un projet."
 
 #: plugins/blocks/www/index.php:70 plugins/blocks/www/index.php:79
 #: plugins/blocks/www/index.php:88 plugins/blocks/www/index.php:97
@@ -4237,17 +4266,17 @@ msgstr ""
 #: plugins/blocks/www/index.php:121 plugins/blocks/www/index.php:126
 #: plugins/blocks/www/index.php:131
 msgid "Display block at the top of the listing"
-msgstr ""
+msgstr "Afficher ce bloc en haut de la liste."
 
 #: plugins/blocks/www/index.php:73 plugins/blocks/www/index.php:82
 #: plugins/blocks/www/index.php:91 plugins/blocks/www/index.php:100
 #: plugins/blocks/www/index.php:115
 msgid "Display block at the top"
-msgstr ""
+msgstr "Afficher ce bloc en haut"
 
 #: plugins/blocks/www/index.php:107
 msgid "Display block at the top of the main page"
-msgstr ""
+msgstr "Afficher ce bloc en haut de page"
 
 #: plugins/blocks/www/index.php:151 plugins/mantisbt/www/getAttachment.php:38
 #: plugins/mantisbt/www/index.php:60 plugins/quota_management/www/index.php:51
@@ -4261,11 +4290,11 @@ msgstr "Utilisateur non valide car inactif"
 
 #: plugins/blocks/www/index.php:180
 msgid "Cannot Process your request : No TYPE specified"
-msgstr ""
+msgstr "Erreur de traitement de votre requête : pas de type spécifié."
 
 #: plugins/blocks/www/index.php:182
 msgid "Cannot Process your request : No ID specified"
-msgstr ""
+msgstr "Erreur de traitement de votre requête : pas d'identifiant spécifié."
 
 #: plugins/blocks/www/index.php:190 plugins/blocks/www/index.php:205
 #: plugins/blocks/www/index.php:268 plugins/blocks/www/index.php:316
@@ -4276,12 +4305,16 @@ msgstr ""
 #, php-format
 msgid "First activate the %s plugin through the Project's Admin Interface"
 msgstr ""
+"Vous devez d'abord activer le plugin %s par l'interface\n"
+"d'administration du projet."
 
 #: plugins/blocks/www/index.php:218
 msgid ""
 "Blocks are customizable HTML boxes in the left or right side of the pages "
 "the web site. They are created manually."
 msgstr ""
+"Les blocs sont des morceaux de HTML personnalisables et créés\n"
+"manuellement qui sont affichés d'un côté ou de l'autre des pages du site."
 
 #: plugins/blocks/www/index.php:227
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
@@ -4315,6 +4348,9 @@ msgid ""
 "Edit the block as you want. If you activate the HTML editor, you will be "
 "able to use WYSIWYG formatting (bold, colors...)"
 msgstr ""
+"Éditez le bloc à votre convenance.  Si vous activez l'éditeur HTML,\n"
+"vous pourrez utiliser du formatage visuel « WYSIWYG » (texte en gras,\n"
+"couleurs, etc.)."
 
 #: plugins/blocks/www/index.php:360
 #: plugins/contribtracker/www/global_admin.php:400
@@ -4968,7 +5004,7 @@ msgstr "Supprimer l'onglet"
 
 #: plugins/fckeditor/common/fckeditorPlugin.class.php:35
 msgid "HTML editor"
-msgstr ""
+msgstr "Éditeur HTML"
 
 #: plugins/forumml/include/ForumMLGroupSearchEngine.class.php:17
 #, fuzzy
@@ -5065,12 +5101,11 @@ msgstr "Joindre des fichiers"
 
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:127
 msgid "Erase"
-msgstr ""
+msgstr "Effacer"
 
 #: plugins/forumml/www/forumml_utils.php:686
-#, fuzzy
 msgid "Invalid email "
-msgstr "Adresse de messagerie non valide."
+msgstr "Adresse de messagerie non valide "
 
 #: plugins/forumml/www/forumml_utils.php:733
 #, fuzzy
@@ -5486,7 +5521,7 @@ msgstr "Avec succès"
 #: plugins/hudson/include/HudsonJob.class.php:157
 #: plugins/hudson/include/HudsonJob.class.php:165
 msgid "In progress"
-msgstr ""
+msgstr "En cours"
 
 #: plugins/hudson/include/HudsonJob.class.php:145
 #, fuzzy
@@ -5495,7 +5530,7 @@ msgstr "Activée"
 
 #: plugins/hudson/include/HudsonJob.class.php:153
 msgid "Failure"
-msgstr ""
+msgstr "Échec"
 
 #: plugins/hudson/include/HudsonJob.class.php:161
 #, fuzzy
@@ -5522,7 +5557,7 @@ msgstr "Fichier actuel"
 #: plugins/hudson/include/hudsonPlugin.class.php:20
 #: plugins/hudson/include/hudsonViews.class.php:50
 msgid "Hudson"
-msgstr ""
+msgstr "Hudson"
 
 #: plugins/hudson/include/hudson.class.php:60
 #: plugins/hudson/include/hudson.class.php:86
@@ -5653,11 +5688,11 @@ msgstr "Produire le rapport d'activité"
 
 #: plugins/hudson/include/hudsonPluginDescriptor.class.php:25
 msgid "Continuous Integration"
-msgstr ""
+msgstr "Intégration continue"
 
 #: plugins/hudson/include/hudsonPluginDescriptor.class.php:25
 msgid "Continuous Integration with Hudson"
-msgstr ""
+msgstr "Intégration continue avec Hudson"
 
 #: plugins/hudson/include/hudsonViews.class.php:59
 #: utils/fixscripts/populate_template_project.php:82
@@ -7425,20 +7460,20 @@ msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:111
 msgid "<p>where REPO can be: "
-msgstr ""
+msgstr "<p>où REPO peut être : "
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:111
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:616
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:116
 msgid "<p><em>No repositories defined.</em></p>"
-msgstr ""
+msgstr "<p><em>Aucun dépôt défini.</em></p>"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:120
 msgid "<p><em>Repository not yet created, wait an hour.</em></p>"
-msgstr ""
+msgstr "<p><em>Dépôt pas encore créé, veuillez patienter.</em></p>"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:127
 #, fuzzy
@@ -7480,7 +7515,7 @@ msgstr "Parcourir le dépôt Darcs"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:181
 msgid "<p>No repositories to browse</p>"
-msgstr ""
+msgstr "<p>Aucun dépôt disponible pour la navigation.</p>"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:615
 #, fuzzy
@@ -7558,7 +7593,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:122
 #: plugins/scmgit/common/GitPlugin.class.php:141
 msgid "Developer GIT Access via HTTP"
-msgstr ""
+msgstr "Accès Git pour les développeurs par HTTP"
 
 #: plugins/scmgit/common/GitPlugin.class.php:125
 #: plugins/scmgit/common/GitPlugin.class.php:144
@@ -7611,11 +7646,18 @@ msgid ""
 "project's main repository.  Note that the personal repository may take some "
 "time before it is created (less than an hour in most situations)."
 msgstr ""
+"Vous pouvez cloner l'état actuel du dépôt principal du projet vers un\n"
+"dépôt personnel.  Vous aurez un accès exclusif en écriture à ce dépôt,\n"
+"les autres membres du projet n'auront qu'un accès en lecture.  Les\n"
+"droits d'accès pour les non-membres seront régis par les mêmes règles\n"
+"que pour le dépôt principal.  Notez que le dépôt personnel peut\n"
+"ne pas apparaître immédiatement (mais sa création est généralement\n"
+"effective en moins d'une heure)."
 
 #: plugins/scmgit/common/GitPlugin.class.php:175
 #, php-format
 msgid "<a href=\"%s\">Request a personal repository</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Créer un dépôt personnel</a>."
 
 #: plugins/scmgit/common/GitPlugin.class.php:218
 msgid "Git Repository Browser"
@@ -7641,12 +7683,14 @@ msgid ""
 "You have already requested a personal Git repository for this project.  If "
 "it does not exist yet, it will be created shortly."
 msgstr ""
+"Vous avez déjà demandé un dépôt Git personnel pour ce projet.  S'il\n"
+"n'existe pas encore, il sera créé prochainement."
 
 #: plugins/scmgit/www/index.php:37
 msgid ""
 "You have now requested a personal Git repository for this project.  If will "
 "be created shortly."
-msgstr ""
+msgstr "Vous avez demandé un dépôt Git personnel pour ce projet.  Il sera créé prochainement."
 
 #: plugins/scmhg/common/HgPlugin.class.php:43
 #, fuzzy
@@ -7661,7 +7705,7 @@ msgstr "Activer l'accès anonyme"
 #: plugins/scmhg/common/HgPlugin.class.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:73
 msgid "Developer Mercurial Access via SSH"
-msgstr ""
+msgstr "Accès Mercurial pour les développeurs via SSH"
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
 #, fuzzy
@@ -7718,7 +7762,7 @@ msgstr "Le mot de passe à fournir est : "
 #: plugins/scmsvn/common/SVNPlugin.class.php:124
 #: plugins/scmsvn/common/SVNPlugin.class.php:143
 msgid "Developer Subversion Access via SSH"
-msgstr ""
+msgstr "Accès Subversion pour les développeurs via SSH"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:127
 #, fuzzy
@@ -7734,7 +7778,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:133
 #: plugins/scmsvn/common/SVNPlugin.class.php:152
 msgid "Developer Subversion Access via DAV"
-msgstr ""
+msgstr "Accès Subversion pour les développeurs via WebDAV"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:136
 #, fuzzy
