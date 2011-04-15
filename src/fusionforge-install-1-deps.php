@@ -133,12 +133,19 @@ gpgcheck = 0';
 }
 function addDagRPMForgeYumRepo() {
 	INFO("Adding Dag RPMForge YUM repository\n");
+
+	if (getenv('DAG_RPMFORGE_REPO')) {
+		$rpm_repo = getenv('DAG_RPMFORGE_REPO');
+	} else {
+		$rpm_repo = 'http://apt.sw.be/redhat/el5/en/$basearch/dag';
+	}
+
 	$repo = '
 # Name: RPMforge RPM Repository for Red Hat Enterprise 5 - dag
 # URL: http://rpmforge.net/
 [dag-rpmforge]
 name = Red Hat Enterprise $releasever - RPMforge.net - dag
-baseurl = http://apt.sw.be/redhat/el5/en/$basearch/dag
+baseurl = '.$rpm_repo.'
 #mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
 enabled = 1
 protect = 0
