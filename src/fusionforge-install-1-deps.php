@@ -137,7 +137,7 @@ function addDagRPMForgeYumRepo() {
 	if (getenv('DAG_RPMFORGE_REPO')) {
 		$rpm_repo = getenv('DAG_RPMFORGE_REPO');
 	} else {
-		$rpm_repo = 'http://apt.sw.be/redhat/el5/en/$basearch/dag';
+		$rpm_repo = 'http://apt.sw.be/redhat';
 	}
 
 	$repo = '
@@ -145,7 +145,7 @@ function addDagRPMForgeYumRepo() {
 # URL: http://rpmforge.net/
 [dag-rpmforge]
 name = Red Hat Enterprise $releasever - RPMforge.net - dag
-baseurl = '.$rpm_repo.'
+baseurl = '.$rpm_repo.'/el5/en/$basearch/dag
 #mirrorlist = http://apt.sw.be/redhat/el5/en/mirrors-rpmforge
 enabled = 1
 protect = 0
