@@ -35,9 +35,15 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 $df->setStateID('3');
-$d_pending_arr =& $df->getDocuments();
 
-if (!$d_pending_arr || count($d_pending_arr) < 1) {
+/**
+ * var must be named d_arr & nested_groups
+ * because used by tree.php
+ */
+$d_arr =& $df->getDocuments();
+$nested_groups = $dgf->getNested();
+
+if (!$d_arr || count($d_arr) < 1) {
 	echo '<div class="warning">'._('No pending documents').'</div>';
 } else {
 	docman_display_documents($nested_groups, $df, true, 3, 0);
