@@ -105,6 +105,7 @@ jQuery(document).ready(function() {
 		divLeft:			jQuery('#left'),
 		divHandle:			jQuery('#handle'),
 		divRight:			jQuery('#right'),
+		divsEdit:			'<?php if (isset($nested_docs[$dirid])) { echo $nested_docs[$dirid]; } ?>',
 	});
 });
 

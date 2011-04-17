@@ -81,6 +81,9 @@ DocManListFileController.prototype =
 					params.divLeft.css('width', e.pageX);
 					params.divRight.css('width', w - e.pageX);
 					jQuery.Storage.set("treesize",""+params.divLeft.width());
+								for(var i = 0; i < this.params.divsEdit.length; i++) {
+									jQuery('#editfile'+this.params.divsEdit[i]).css(this.params.divRight.width());
+								}
 				}
 			}
 		});
@@ -96,6 +99,9 @@ DocManListFileController.prototype =
  			this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
 			var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
 			this.params.divRight.css('width', w - this.params.divLeft.width());
+			for(var i = 0; i < this.params.divsEdit.length; i++) {
+				jQuery('#editfile'+this.params.divsEdit[i]).css(this.params.divRight.width());
+			}
  		}
 	},
 
