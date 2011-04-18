@@ -87,13 +87,13 @@ ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
 if [ "x$DEBMIRROR" != "x" ]
 then
 	ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
-	ssh root@$HOST "echo \"deb $DEBMIRROR unstable main\" > /etc/apt/sources.list"
 fi
 if [ "x$DEBMIRRORSEC" != "x" ]
 then
 	ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
 fi
 ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
+ssh root@$HOST "echo \"deb http://ftp.fr.debian.org/debian unstable main\" > /etc/apt/sources.list"
 ssh root@$HOST "cat >> /etc/apt/preferences" <<EOF
 APT::Default-Release "$DIST";
 
