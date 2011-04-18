@@ -349,11 +349,11 @@ class ArtifactFactory extends Error {
 		//if assigned to selected, and more to where clause
 		if ($this->assigned_to) {
 			if (is_array($this->assigned_to)) {
-				$wheresql .= 'AND assigned_to = ANY ($'.$paramcount++ ;
+				$wheresql .= ' AND assigned_to = ANY ($'.$paramcount++ ;
 				$params[] = db_int_array_to_any_clause ($this->assigned_to) ;
 				$wheresql .= ')' ;
 			} else {
-				$wheresql .= 'AND assigned_to = $'.$paramcount++ ;
+				$wheresql .= ' AND assigned_to = $'.$paramcount++ ;
 				$params[] = $this->assigned_to ;
 			}
 		}
