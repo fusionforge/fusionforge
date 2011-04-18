@@ -106,7 +106,7 @@ Pin-Priority: 50
 
 EOF
     ssh root@$HOST "apt-get update"
-    ssh root@$HOST "apt-get install -t unstable libjs-jquery-tipsy"
+    ssh root@$HOST "apt-get install -y --force-yes -t unstable libjs-jquery-tipsy"
 fi
 
 ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
