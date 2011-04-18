@@ -84,7 +84,7 @@ Description: collaborative development tool - shared files
 
 Package: gforge-web-apache2
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), libphp-simplepie, libjs-yui, libjs-scriptaculous, libjs-jquery, libphp-jpgraph, ${misc:Depends}
+Depends: gforge-common, gforge-db-postgresql | gforge-db, libapache2-mod-php5, php5-cgi, php5-pgsql, php5-gd, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, cronolog, python, ssl-cert, libnusoap-php, php-htmlpurifier (>= 4.0), libphp-simplepie, libjs-yui, libjs-scriptaculous, libjs-jquery, libjs-jquery-tipsy, libphp-jpgraph, ${misc:Depends}
 Recommends: locales | locales-all
 Provides: gforge-web
 Conflicts: gforge-web
