@@ -242,6 +242,36 @@ Description: collaborative development tool - mailing-lists (using Mailman)
  .
  This package controls the interaction between FusionForge and Mailman.
 
+Package: gforge-plugin-extratabs
+Architecture: all
+Depends: fusionforge-plugin-extratabs, ${misc:Depends}
+Description: Extratabs plugin for FusionForge (transitional package)
+ This package is only present for transitional purposes and can be safely removed.
+
+Package: gforge-plugin-globalsearch
+Architecture: all
+Depends: fusionforge-plugin-globalsearch, ${misc:Depends}
+Description: Globalsearch plugin for FusionForge (transitional package)
+ This package is only present for transitional purposes and can be safely removed.
+
+Package: gforge-plugin-mediawiki
+Architecture: all
+Depends: fusionforge-plugin-mediawiki, ${misc:Depends}
+Description: Mediawiki plugin for FusionForge (transitional package)
+ This package is only present for transitional purposes and can be safely removed.
+
+Package: gforge-plugin-projectlabels
+Architecture: all
+Depends: fusionforge-plugin-projectlabels, ${misc:Depends}
+Description: Projectlabels plugin for FusionForge (transitional package)
+ This package is only present for transitional purposes and can be safely removed.
+
+Package: gforge-plugin-scmgit
+Architecture: all
+Depends: fusionforge-plugin-scmgit, ${misc:Depends}
+Description: Git plugin for FusionForge (transitional package)
+ This package is only present for transitional purposes and can be safely removed.
+
 Package: fusionforge-plugin-blocks
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, php5-cli, ${misc:Depends}
@@ -259,8 +289,8 @@ Description: collaborative development tool - Blocks plugin
 Package: fusionforge-plugin-contribtracker
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Conflicts: gforge-plugin-contribtracker
-Replaces: gforge-plugin-contribtracker
+Conflicts: gforge-plugin-contribtracker (<< 5.0.51-2)
+Replaces: gforge-plugin-contribtracker (<< 5.0.51-2)
 Provides: gforge-plugin-contribtracker
 Description: Contribution tracker plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
@@ -275,8 +305,8 @@ Description: Contribution tracker plugin for FusionForge
 Package: fusionforge-plugin-extratabs
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, ${misc:Depends}
-Conflicts: gforge-plugin-extratabs
-Replaces: gforge-plugin-extratabs
+Conflicts: gforge-plugin-extratabs (<< 5.0.51-2)
+Replaces: gforge-plugin-extratabs (<< 5.0.51-2)
 Provides: gforge-plugin-extratabs
 Description: Extratabs plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
@@ -305,8 +335,8 @@ Description: collaborative development tool - ForumML plugin
 Package: fusionforge-plugin-globalsearch
 Architecture: all
 Depends: gforge-common (>= 4.6.99), gforge-db-postgresql (>= 4.6.99) | gforge-db, gforge-web-apache2 (>= 4.6.99) | gforge-web, libxml-rss-perl, libgetopt-mixed-perl, libdbi-perl, libwww-perl, libcrypt-ssleay-perl, libunicode-string-perl, ${misc:Depends}
-Conflicts: gforge-plugin-globalsearch
-Replaces: gforge-plugin-globalsearch
+Conflicts: gforge-plugin-globalsearch (<< 5.0.51-2)
+Replaces: gforge-plugin-globalsearch (<< 5.0.51-2)
 Provides: gforge-plugin-globalsearch
 Description: Globalsearch plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
@@ -365,8 +395,8 @@ Description: collaborative development tool - mailing-lists plugin (using Mailma
 Package: fusionforge-plugin-mediawiki
 Architecture: all
 Depends: gforge-common (>= 4.8), gforge-db-postgresql (>= 4.8) | gforge-db, gforge-web-apache2 (>= 4.8) | gforge-web, postgresql-contrib | mysql-server, mediawiki (>= 1:1.15~), php5-cli, php5-gd, ${misc:Depends}
-Conflicts: gforge-plugin-mediawiki
-Replaces: gforge-plugin-mediawiki
+Conflicts: gforge-plugin-mediawiki (<< 5.0.51-2)
+Replaces: gforge-plugin-mediawiki (<< 5.0.51-2)
 Provides: gforge-plugin-mediawiki
 Description: Mediawiki plugin for FusionForge
  FusionForge provides many tools to aid collaboration in a
@@ -482,8 +512,8 @@ Package: fusionforge-plugin-scmgit
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache2 | gforge-web, gforge-shell-postgresql | gforge-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
 Provides: fusionforge-plugin-scm, gforge-plugin-scmgit
-Conflicts: gforge-plugin-scmgit
-Replaces: gforge-plugin-scmgit
+Conflicts: gforge-plugin-scmgit (<< 5.0.51-2)
+Replaces: gforge-plugin-scmgit (<< 5.0.51-2)
 Description: collaborative development tool - Git plugin
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,

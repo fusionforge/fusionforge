@@ -902,6 +902,7 @@ src/packaging/control/110dns-bind9 -text
 src/packaging/control/110dns-bind9.shortdesc -text
 src/packaging/control/120lists-mailman -text
 src/packaging/control/120lists-mailman.shortdesc -text
+src/packaging/control/999transitional -text
 src/packaging/control/AAAdesc -text
 src/packaging/control/Makefile -text
 src/packaging/cron.d/00phpcron -text
