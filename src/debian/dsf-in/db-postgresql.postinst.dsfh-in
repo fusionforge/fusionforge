@@ -87,7 +87,7 @@ case "$1" in
 	    exit $v
 	fi
 
-	if dpkg --compare-versions $2 lt 5.1-1 ; then
+	if [ -n "$2" ] && dpkg --compare-versions $2 lt 5.1-1 ; then
             echo "Normalizing all roles and permissions"
             PATH=$PATH:/usr/share/gforge/bin normalize_roles.php
         fi
