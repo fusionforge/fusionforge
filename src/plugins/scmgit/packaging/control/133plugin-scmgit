@@ -1,7 +1,7 @@
 Package: @PACKAGE@-plugin-scmgit
 Architecture: all
 Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 | @OLDPACKAGE@-web, @OLDPACKAGE@-shell-postgresql | @OLDPACKAGE@-shell, git (>= 1:1.7) | git-core, gitweb (>= 1:1.7), php5-cli, ${misc:Depends}
-Provides: @PACKAGE@-plugin-scm, @OLDPACKAGE@-plugin-scmgit
+Provides: @PACKAGE@-plugin-scm
 Conflicts: @OLDPACKAGE@-plugin-scmgit (<< 5.0.51-2)
 Replaces: @OLDPACKAGE@-plugin-scmgit (<< 5.0.51-2)
 Description: collaborative development tool - Git plugin
