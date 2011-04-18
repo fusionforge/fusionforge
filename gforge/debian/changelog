@@ -1,8 +1,8 @@
-fusionforge (5.0.2+svn-1) unstable; urgency=low
+fusionforge (5.0.3-1) unstable; urgency=low
 
-  * Bumped upstream version number to avoid upgrade problems.
+  * New upstream bugfix release.
 
- -- Roland Mas <lolando@debian.org>  Fri, 26 Nov 2010 10:31:33 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 15 Apr 2011 14:55:34 +0200
 
 fusionforge (5.0.2-5) unstable; urgency=low
 
