@@ -1,7 +1,6 @@
 Package: @PACKAGE@-plugin-extratabs
 Architecture: all
 Depends: @OLDPACKAGE@-common (>= 4.6.99), @OLDPACKAGE@-db-postgresql (>= 4.6.99) | @OLDPACKAGE@-db, @OLDPACKAGE@-web-apache2 (>= 4.6.99) | @OLDPACKAGE@-web, ${misc:Depends}
-Conflicts: @OLDPACKAGE@-plugin-extratabs
-Replaces: @OLDPACKAGE@-plugin-extratabs
-Provides: @OLDPACKAGE@-plugin-extratabs
+Conflicts: @OLDPACKAGE@-plugin-extratabs (<< 5.0.51-2)
+Replaces: @OLDPACKAGE@-plugin-extratabs (<< 5.0.51-2)
 Description: Extratabs plugin for FusionForge

@@ -92,12 +92,31 @@ if [ "x$DEBMIRRORSEC" != "x" ]
 then
 	ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
 fi
+
+# Temporary hack to grab libjs-jquery-tipsy from unstable until it reaches testing/backports
+if [ $DIST = squeeze ] ; then
+    ssh root@$HOST "echo \"deb http://ftp.fr.debian.org/debian unstable main\" >> /etc/apt/sources.list"
+    ssh root@$HOST "cat >> /etc/apt/apt.conf.d/unstable" <<EOF
+APT::Default-Release "$DIST";
+EOF
+    ssh root@$HOST "cat >> /etc/apt/preferences.d/unstable" <<EOF
+Package: *
+Pin: release a=unstable
+Pin-Priority: 50
+
+EOF
+    ssh root@$HOST "apt-get update"
+    ssh root@$HOST "apt-get install -y --force-yes -t unstable libjs-jquery-tipsy"
+fi
+
 ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
 scp -r $WORKSPACE/build/debian root@$HOST:/ 
 gpg --export --armor | ssh root@$HOST "apt-key add -"
 sleep 5
 ssh root@$HOST "apt-get update"
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-plugin-forumml fusionforge-full"
+echo "Set forge admin password"
+ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin myadmin"
 ssh root@$HOST "LANG=C a2dissite default ; LANG=C invoke-rc.d apache2 reload ; LANG=C touch /tmp/fusionforge-use-pfo-rbac"
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-builbot.ini"
 ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"

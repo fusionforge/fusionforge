@@ -5,11 +5,32 @@
 ## DP: No description.
 
 @DPATCH@
-Index: src/www/themes/funky/Theme.class.php
-===================================================================
---- src/www/themes/funky/Theme.class.php	(revision 12285)
-+++ src/www/themes/funky/Theme.class.php	(working copy)
-@@ -382,7 +382,7 @@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/include/html.php src/www/include/html.php
+--- src~/www/include/html.php	2011-04-08 14:54:44.000000000 +0200
++++ src/www/include/html.php	2011-04-18 17:02:51.041924007 +0200
+@@ -361,14 +361,14 @@
+ }
+ 
+ function html_use_tooltips() {
+-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+-	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
++	use_javascript('/scripts/jquery/jquery.min.js');
++	use_javascript('/scripts/jquery-tipsy/jquery.tipsy.js');
+ 	use_javascript('/js/tooltips.js');
+-	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
++	use_stylesheet('/scripts/jquery-tipsy/stylesheets/tipsy.css');
+ }
+ 
+ function html_use_storage() {
+-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
++	use_javascript('/scripts/jquery/jquery.min.js');
+ 	use_javascript('/scripts/jquery-storage/jquery.Storage.js');
+ }
+ 
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' src~/www/themes/funky/Theme.class.php src/www/themes/funky/Theme.class.php
+--- src~/www/themes/funky/Theme.class.php	2011-04-07 16:16:04.000000000 +0200
++++ src/www/themes/funky/Theme.class.php	2011-04-18 17:01:21.590438478 +0200
+@@ -383,7 +383,7 @@
  	*/
  	function headerJS()
  	{
@@ -18,16 +39,3 @@ Index: src/www/themes/funky/Theme.class.php
  
  		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
  		echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
-Index: src/www/include/html.php
-===================================================================
---- src/www/include/html.php	(revision 12285)
-+++ src/www/include/html.php	(working copy)
-@@ -361,7 +361,7 @@
- }
- 
- function html_use_tooltips() {
--	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
-+	use_javascript('/scripts/jquery/jquery.min.js');
- 	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
- 	use_javascript('/js/tooltips.js');
- 	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
