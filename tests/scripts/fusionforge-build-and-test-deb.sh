@@ -87,16 +87,26 @@ ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
 if [ "x$DEBMIRROR" != "x" ]
 then
 	ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
+	ssh root@$HOST "echo \"deb $DEBMIRROR unstable main\" > /etc/apt/sources.list"
 fi
 if [ "x$DEBMIRRORSEC" != "x" ]
 then
 	ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
 fi
 ssh root@$HOST "echo \"deb file:/debian $DIST main\" >> /etc/apt/sources.list"
+ssh root@$HOST "cat >> /etc/apt/preferences" <<EOF
+APT::Default-Release "$DIST";
+
+Package: *
+Pin: release a=unstable
+Pin-Priority: 50
+
+EOF
 scp -r $WORKSPACE/build/debian root@$HOST:/ 
 gpg --export --armor | ssh root@$HOST "apt-key add -"
 sleep 5
 ssh root@$HOST "apt-get update"
+ssh root@$HOST "apt-get -y --force-yes install -t unstable libjs-jquery-tipsy"
 ssh root@$HOST "UCF_FORCE_CONFFNEW=yes DEBIAN_FRONTEND=noninteractive LANG=C apt-get -y --force-yes install postgresql-contrib fusionforge-plugin-forumml fusionforge-full"
 echo "Set forge admin password"
 ssh root@$HOST "/usr/share/gforge/bin/forge_set_password admin myadmin"
