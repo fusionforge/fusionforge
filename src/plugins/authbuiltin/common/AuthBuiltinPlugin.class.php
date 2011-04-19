@@ -81,10 +81,10 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 </p>
 </form>' ;
 
-		$result .= '<p>' . util_make_link ('/plugins/authbuiltin/lostpw.php', _('[Lost your password?]')) . '</p>';
+		$result .= '<p>' . util_make_link ('/account/lostpw.php', _('[Lost your password?]')) . '</p>';
 		// hide "new account" item if restricted to admin
 		if (!forge_get_config ('user_registration_restricted')) {
-			$result .= '<p>' . util_make_link ('/plugins/authbuiltin/register.php', _('[New Account]')) . '</p>';
+			$result .= '<p>' . util_make_link ('/account/register.php', _('[New Account]')) . '</p>';
 		}
 		$result .= '<p>' . util_make_link ('/account/pending-resend.php', _('[Resend confirmation email to a pending account]')) . '</p>';
 
