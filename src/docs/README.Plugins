@@ -450,7 +450,18 @@ had been written.
   Description: Used to provide plugin specific infos on a group's
                public area.
 
-TODO : document user_logo (plugin_hook_by_reference) : returns in params['content'] 
+  Hook Name  : user_logo
+  Parameters : user_id, size, content (return value)
+  Locations  : common/include/utils.php
+  Description: plugin_hook_by_reference hook used to provide a user
+               picture in params['content'] (see gravatar plugin for instance)
+
+  Hook Name  : user_link_with_tooltip
+  Parameters : username, user_id, user_link (return value)
+  Locations  : common/include/utils.php
+  Description: plugin_hook_by_reference hook used to replace util_display_user()
+               default behaviour, returns value in params['user_link']
+               (see oslc plugin for instance)
 
 TODO : document Auth plugins :
 
