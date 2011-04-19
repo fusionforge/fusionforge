@@ -156,7 +156,14 @@ class Layout extends Error {
 
 	}
 
+	/**
+	 * Constructs a list of Javascript files followed by some timestamp 
+	 *
+	 * TODO document the purpose of this : probably to avoid caching versions updated on the server
+	 * @param string $js path to the JS file
+	 */
 	function addJavascript($js) {
+		// TODO : what's the point of this ? ... unused ?
 		if (isset($this->js_min[$js])) {
 			$js = $this->js_min[$js];
 		}
