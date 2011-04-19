@@ -18,13 +18,13 @@ set -e
 case "$1" in
     install|upgrade)
 	dpkg-divert --package @PACKAGE@-plugin-mailman \
-		--divert /usr/lib/mailman/Mailman/Archiver/Archiver.py.old \
+		--divert /usr/lib/mailman/Mailman/Archiver/Archiver.py.fusionforge \
 		--rename /usr/lib/mailman/Mailman/Archiver/Archiver.py
 	dpkg-divert --package @PACKAGE@-plugin-mailman \
-		--divert /usr/lib/mailman/Mailman/SecurityManager.py.old \
+		--divert /usr/lib/mailman/Mailman/SecurityManager.py.fusionforge \
 		--rename /usr/lib/mailman/Mailman/SecurityManager.py
 	dpkg-divert --package @PACKAGE@-plugin-mailman \
-		--divert /usr/lib/mailman/Mailman/MailList.py.old \
+		--divert /usr/lib/mailman/Mailman/MailList.py.fusionforge \
 		--rename /usr/lib/mailman/Mailman/MailList.py
     ;;
 
