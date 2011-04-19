@@ -17,7 +17,7 @@ use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $sys_urlroot $sf_cache_dir $sys_name $sys_themeroot
     $sys_news_group $sys_dbhost $sys_dbname $sys_dbuser $sys_dbpasswd
     $sys_ldap_base_dn $sys_ldap_host $admin_login $admin_password
-    $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
+    $domain_name $newsadmin_groupid $statsadmin_groupid
     $skill_list/ ;
 use vars qw/$pluginname/ ;
 

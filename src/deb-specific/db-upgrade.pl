@@ -30,6 +30,7 @@ require ("$libdir/sqlhelper.pm") ; # Our SQL functions
 require ("$libdir/include.pl");  # Some other functions
 chomp($sys_news_group=`/usr/share/gforge/bin/forge_get_config news_group`);
 chomp($domain_name=`/usr/share/gforge/bin/forge_get_config web_host`);
+chomp($server_admin=`/usr/share/gforge/bin/forge_get_config admin_email`);
 
 &db_connect ;
 

@@ -172,7 +172,7 @@ class MailingList extends Error {
 		$user = &user_get_object($creator_id);
 		$userEmail = $user ? $user->getEmail() : "";
 		if(empty($userEmail) || !validate_email($userEmail)) {
-			$this->setInvalidEmailError($userEmail);
+			$this->setInvalidEmailError();
 			db_rollback();
 			return false;
 		} else {
