@@ -36,7 +36,8 @@ class oslcPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook("user_link_with_tooltip"); 
 		$this->_addHook("project_link_with_tooltip");
-		$this->_addHook("javascript_file"); // Add js files for oslc plugin
+		$this->_addHook("javascript_file"); // Add js files for oslc plugin	
+		$this->_addHook("javascript"); // Add js initialization code
 		$this->_addHook("cssfile");
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
@@ -170,6 +171,10 @@ class oslcPlugin extends Plugin {
 		elseif ($hookname == "javascript_file") {
 			use_javascript('/scripts/jquery/jquery.js');
 			use_javascript('/plugins/oslc/scripts/oslcTooltip.js');
+		}
+		elseif ($hookname == "javascript") {
+			// make sure jquery won't conflict with prototype
+		       echo 'jQuery.noConflict();';
 		}
 		elseif ($hookname == "cssfile") {
 			use_stylesheet('/plugins/oslc/css/oslcTooltipStyle.css');
