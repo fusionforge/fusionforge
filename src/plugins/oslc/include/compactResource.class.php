@@ -18,43 +18,66 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * This program has been developed in the frame of the HELIOS
+ * This program has been developed in the frame of the COCLICO
  * project with financial support of its funders.
  *
  */
 
+/**
+ * Enter description here ...
+ * @param unknown_type $params
+ */
 class compactResource {
 	public $params;
+	
 	
 	public function __construct($params) {
 		$this->params = $params;
 	}
 	
 	public function getResourceLink() {
-		if($this->params['resource_type'] == 'user') {
-			return $this->getUserLink($this->params['username'], $this->params['user_id']);
-		} elseif($this->params['resource_type'] == 'group') {
-			return $this->getProjectLink($this->params['group_name'], $this->params['group_id'], $this->params['link_text']);
-		} elseif($this->params['resource_type'] == 'artifact') {
-			return $this->getArtifactLink();
-		} else {
-			return 'Unknown resource type !';
-		}
+		// TBD.
 	}
 	
-	public function getUserLink($username, $user_id) {
+	public static function createCompactResource($params) {
+		switch ($params['resource_type']) {
+			case 'user' :
+				return new UserCompactResource($params);
+				break;
+			case 'group' :
+				return new GroupCompactResource($params);
+				break;
+			case 'artifact' :
+				return new compatResource($params);
+				break;
+			default :
+				return 'Unknown resource type !';
+				break;
+		}
+	}
+}
+
+class UserCompactResource extends compactResource {
+
+	public function getResourceLink() {
+		$username = $this->params['username'];
+		$user_id = $this->params['user_id'];
 		return '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
 				'" rel="user,' . $username . '">'. $username . '</a>';
 	}	
 	
-	public function getProjectLink($group_name, $group_id, $link_text) {
+}
+
+class GroupCompactResource extends compactResource {
+	
+	public function getResourceLink() {
+		$group_name = $this->params['group_name'];
+		$group_id = $this->params['group_id'];
+		$link_text = $this->params['link_text'];
 		return '<a class="resourcePopupTrigger" href="'. util_make_url_g ($group_name, $group_id) .
 				'" rel="project,' . $group_name . '">'. $link_text . '</a>';
 	}
 	
-	public function getArtifactLink() {
-		// TBD.
-	}
-} 
+}
 
 ?>

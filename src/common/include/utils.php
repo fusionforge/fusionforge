@@ -1144,19 +1144,20 @@ function util_make_link_u ($username, $user_id,$text) {
  * @param string $size
  * @return string
  */
-function util_display_user($username, $user_id,$text, $size='xs') {
-	$hook_params = array();
-	$hook_params['resource_type'] = 'user';
-        $hook_params['username'] = $username;
-        $hook_params['user_id'] = $user_id;
-        $hook_params['user_link'] = '';
-        plugin_hook_by_reference("user_link_with_tooltip", $hook_params);
+function util_display_user($username, $user_id, $text, $size='xs') {
+		// Invoke user_link_with_tooltip plugin
+  		$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => '');
+        plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
         if($hook_params['user_link'] != ''){
                 return $hook_params['user_link'];
         }
 
+        // If no plugin replaced it, then back to default standard link
+        
+        // Invoke user_logo plugin (see gravatar plugin for instance)
         $params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
         plugin_hook_by_reference('user_logo', $params);
+        
         $url = '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>';
         if ($params['content']) {
                 return $params['content'].$url.'<div class="new_line"></div>';
@@ -1265,6 +1266,10 @@ function check_email_available($group, $email, &$response) {
 	return true;
 }
 
+/**
+ * Adds the Javascript file to the lits to be used
+ * @param unknown_type $js
+ */
 function use_javascript($js) {
 	return $GLOBALS['HTML']->addJavascript($js);
 }
