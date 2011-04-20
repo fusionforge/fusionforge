@@ -95,7 +95,7 @@ fi
 
 # Temporary hack to grab libjs-jquery-tipsy from unstable until it reaches testing/backports
 if [ $DIST = squeeze ] ; then
-    ssh root@$HOST "echo \"deb http://ftp.fr.debian.org/debian unstable main\" >> /etc/apt/sources.list"
+    ssh root@$HOST "echo \"deb $DEBMIRROR unstable main\" >> /etc/apt/sources.list"
     ssh root@$HOST "cat >> /etc/apt/apt.conf.d/unstable" <<EOF
 APT::Default-Release "$DIST";
 EOF
