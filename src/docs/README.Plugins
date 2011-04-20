@@ -317,7 +317,7 @@ had been written.
   Locations  : www/include/Layout.class.php
                www/include/LayoutSF.class.php
   Description: Provides a place to add inline Javascript into the page.
-               The output of the hook should be pure Javascript, as it will
+               The output (in $params['return']) of the hook should be pure Javascript, as it will
                be placed within an existing <script> block.
   [TODO: The output of the hook appears after the closing SGML comment marker
    and before the closing </script> element. Is this what is really indended?]

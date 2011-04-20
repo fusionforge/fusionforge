@@ -192,7 +192,7 @@ class oslcPlugin extends Plugin {
 		}
 		elseif ($hookname == "javascript") {
 			// make sure jquery won't conflict with prototype
-		       echo 'jQuery.noConflict();';
+			$params['return'] = 'jQuery.noConflict();';
 		}
 		elseif ($hookname == "cssfile") {
 			use_stylesheet('/plugins/oslc/css/oslcTooltipStyle.css');

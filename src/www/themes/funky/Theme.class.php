@@ -392,12 +392,18 @@ class Theme extends Layout {
 		echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
 
-		echo '<script type="text/javascript">';
-		plugin_hook("javascript",false);
-		echo '</script>'."\n";
-
 		plugin_hook("javascript_file",false);
 		echo $this->getJavascripts();
+		
+		// invoke the 'javascript' hook for custom javascript addition
+		$params = array('return' => false);
+		plugin_hook("javascript",$params);
+		$javascript = $params['return'];
+		if($javascript) {
+			echo '<script type="text/javascript">';
+			echo $javascript;
+			echo '</script>'."\n";
+		}
 		?>
 		<script type="text/javascript">
 		jQuery.noConflict();

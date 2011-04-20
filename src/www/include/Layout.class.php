@@ -338,10 +338,17 @@ class Layout extends Error {
 			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 		plugin_hook ("javascript_file",false);
 		echo $this->getJavascripts();
-		echo '<script type="text/javascript">';
-		plugin_hook ("javascript",false);
-		echo '
+		
+		// invoke the 'javascript' hook for custom javascript addition
+		$params = array('return' => false);
+		plugin_hook("javascript",$params);
+		$javascript = $params['return'];
+		if($javascript) {
+			echo '<script type="text/javascript">';
+			echo $javascript;
+			echo '
 			</script>';
+		}
 	}
 
 	function headerForgepluckerMeta() {
