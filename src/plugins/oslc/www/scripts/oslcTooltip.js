@@ -17,10 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * This program has been developed in the frame of the HELIOS
+ * This program has been developed in the frame of the COCLICO
  * project with financial support of its funders.
  *
  */
+
+// This is heavily inspired by code presented in http://rndnext.blogspot.com/2009/02/jquery-ajax-tooltip.html from Caleb Tucker
+// TODO : verify license
+// TODO : use the improved version with hoverIntent plugin (http://cherne.net/brian/resources/jquery.hoverIntent.html) as documented in : http://rndnext.blogspot.com/2009/02/jquery-live-and-plugins.html
 
 jQuery(function(){  
 	var hideDelay = 500;    
