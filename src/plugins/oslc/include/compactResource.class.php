@@ -62,8 +62,22 @@ class UserCompactResource extends compactResource {
 	public function getResourceLink() {
 		$username = $this->params['username'];
 		$user_id = $this->params['user_id'];
-		return '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
+		
+		// invoke user_logo hook
+		$logo_params = array('user_id' => $user_id, 'size' => $this->params['size'], 'content' => '');
+        plugin_hook_by_reference('user_logo', $logo_params);
+        
+        $html = '';
+        // construct a link that is the base for a hover popup.
+        $url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
 				'" rel="user,' . $username . '">'. $username . '</a>';
+        if ($logo_params['content']) {
+        	$html = $logo_params['content'] . $url .'<div class="new_line"></div>';
+        }
+		else {
+			$html = $url;
+		}
+		return $html;
 	}	
 	
 }

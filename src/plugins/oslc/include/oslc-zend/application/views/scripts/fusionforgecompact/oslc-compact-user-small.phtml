@@ -26,13 +26,30 @@ $user_name = $this->user->getUnixName();
 $user_id = $this->user->getID();
 $user_uri = $this->serverUrl().'/users/'.$user_name;
 $user_title = $this->user->getTitle();
-$title = ($user_title ? $user_title .' ' :''). $user_real_name;?>
+$title = ($user_title ? $user_title .' ' :''). $user_real_name;
 
+// invoke user_logo hook
+$logo_params = array('user_id' => $user_id, 'size' => 'm', 'content' => '');
+plugin_hook_by_reference('user_logo', $logo_params);
+        
+if ($logo_params['content']) {
+	$logo = $logo_params['content'];
+}
+else {
+	$logo = '';
+}
+?>
 <html>
 <head>
-<title>User: <?php echo $user_real_name;?> (Idenntifier: <?php echo $user_id;?>)</title>
+<title>User: <?php echo $user_real_name;?> (Identifier: <?php echo $user_id;?>)</title>
 </head>
 <body>
+<table>
+<tr>
+<td>
+<?php echo $logo;?>
+</td>
+<td>
 <table>
 <tr>
 	<td colspan="2"><i>Compact User Preview</i></td>
@@ -55,7 +72,9 @@ $title = ($user_title ? $user_title .' ' :''). $user_real_name;?>
 	<td><small><b>URI:</b> <a href="<?php echo $user_uri;?>"><?php echo $user_uri;?></a></small></td>
 </tr>
 </table>
-
+</td>
+</tr>
+</table>
 <!-- 
 <b>User Name:</b> <?php echo $title;?><br/>
 <b>Login Name:</b> <?php echo $user_name;?> <br/>

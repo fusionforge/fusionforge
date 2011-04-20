@@ -166,24 +166,7 @@ class oslcPlugin extends Plugin {
 		elseif ($hookname == "project_link_with_tooltip") {
 			require_once dirname( __FILE__ ) . '/compactResource.class.php';
 			$cR = compactResource::createCompactResource($params);
-			$params['group_link'] = $cR->getResourceLink();			
-			/*
-			// replace behaviour of util_display_user()
-		
-			// invoke user_logo hook
-			$logo_params = array('user_id' => $params['user_id'], 'size' => $params['size'], 'content' => '');
-        	plugin_hook_by_reference('user_logo', $logo_params);
-        
-        	// construct a link that is the base for a hover popup.
-        	$url = '<a class="personPopupTrigger" href="'. util_make_url_u ($params['username'], $params['user_id']) .
-				'" rel="' . $params['username'] . '">'. $params['username'] . '</a>';
-        	if ($logo_params['content']) {
-                $params['user_link'] = $logo_params['content'] . $url .'<div class="new_line"></div>';
-        	}
-			else {
-				$params['user_link'] = $url;
-			}
-			*/
+			$params['group_link'] = $cR->getResourceLink();
 		}
 		elseif ($hookname == "javascript_file") {
 			// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
