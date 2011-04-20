@@ -1,1 +1,2 @@
 plugins/gravatar/common/*		usr/share/gforge/plugins/gravatar/common/
+plugins/gravatar/etc/*.ini		etc/@PACKAGE@/config.ini.d/
