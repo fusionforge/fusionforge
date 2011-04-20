@@ -207,14 +207,42 @@ class oslcPlugin extends Plugin {
 			$username = $params['username']; 
 			$accept = $params['accept']; 
 			if($accept == 'application/x-oslc-compact+xml') {
-				$params['return'] = '/plugins/oslc/compact/user/'.$username;
+				$params['content_type'] = 'application/x-oslc-compact+xml';
+				$params['content'] = '<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oslc="http://open-services.net/ns/core#">
+  <oslc:Compact rdf:about="/plugins/oslc/compact/user/'. $username .'">
+    <dcterms:title>'. $username . '</dcterms:title>
+    <oslc:shortTitle>'. $username . '</oslc:shortTitle>
+    <oslc:smallPreview>
+      <oslc:Preview>
+        <oslc:document rdf:ressource="/plugins/oslc/compact/user/'. $username .'/type/small"/>
+        <oslc:hintWidth>500px</oslc:hintWidth>
+        <oslc:hintHeight>150px</oslc:hintHeight>
+      </oslc:Preview>
+    </oslc:smallPreview>
+  </oslc:Compact>
+</rdf:RDF>';
 			}
 		}
 		elseif($hookname == "content_negociated_project_home") {
 			$projectname = $params['groupname'];
 			$accept = $params['accept'];
 			if($accept == 'application/x-oslc-compact+xml') {
-				$params['return'] = '/plugins/oslc/compact/project/'.$projectname;
+				$params['content_type'] = 'application/x-oslc-compact+xml';
+				$params['content'] = '<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:oslc="http://open-services.net/ns/core#">
+  <oslc:Compact rdf:about="/plugins/oslc/compact/project/'. $projectname .'">
+    <dcterms:title>'. $projectname . '</dcterms:title>
+    <oslc:shortTitle>'. $projectname . '</oslc:shortTitle>
+    <oslc:smallPreview>
+      <oslc:Preview>
+        <oslc:document rdf:ressource="/plugins/oslc/compact/project/'. $projectname .'/type/small"/>
+        <oslc:hintWidth>500px</oslc:hintWidth>
+        <oslc:hintHeight>150px</oslc:hintHeight>
+      </oslc:Preview>
+    </oslc:smallPreview>
+  </oslc:Compact>
+</rdf:RDF>';
 			}
 		}
 		elseif ($hookname == "blahblahblah") {

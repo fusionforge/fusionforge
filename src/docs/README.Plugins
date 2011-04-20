@@ -484,6 +484,6 @@ TODO : document Auth plugins :
   Description: what GFUser is logged in?
                it returns a user object in passed $params['results']
 
-
+TODO: document content_negociated_user_home and content_negociated_project_home
 
   -- Roland Mas <lolando@debian.org>

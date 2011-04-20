@@ -31,7 +31,7 @@ jQuery(function(){
 	var hideTimer = null;  
 
 	// One instance that's reused to show info for the current resource  
-	var container = $('<div id="resourcePopupContainer">'  
+	var container = jQuery('<div id="resourcePopupContainer">'  
 			+ '<table width="" border="0" cellspacing="0" cellpadding="0" class="resourcePopupPopup">'  
 			+ '<tr>'  
 			+ '   <td class="corner topLeft"></td>'  
@@ -76,7 +76,7 @@ jQuery(function(){
 			top: pos.top - 5 + 'px'  
 		});
 
-		jQuery('#resourcePopupContent').html('&nbsp;');
+		jQuery('#resourcePopupContent').html('<i>...loading '+ resource +' compact preview...</i>');
 
 		jQuery.ajax({  
 			type: 'GET',
@@ -85,6 +85,7 @@ jQuery(function(){
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Accept","application/x-oslc-compact+xml");
 			},
+			
 			success: function(data) { 
 				var smPreview = data.documentElement.getElementsByTagName('oslc:smallPreview')[0];
 				if( smPreview ) {
