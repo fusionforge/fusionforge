@@ -1,8 +1,13 @@
 #!/bin/sh
 
+# TODO missing copyright
+
+#set -x
+
+path=$(dirname $0)
 modelfullname=HelloWorld
 modelminus=`echo $modelfullname | tr '[A-Z]' '[a-z]'`
-modelplugdir=$modelminus
+modelplugdir=$path/$modelminus
 dopackage=0
 
 usage() {
@@ -29,18 +34,21 @@ else
 	echo "Creating $1 plugin"
 	echo "Creating directory $plugdir"
 	[ ! -d $plugdir ] && mkdir $plugdir
-	(cd $modelplugdir;find bin;find etc;find common;find include;find www;find utils;find db;find cronjobs;find tests; find translations)|sort|while read debfile
+	(cd $modelplugdir;find bin;find etc;find common;find include;find www;find utils;find db;find cronjobs;find tests; find translations; find README; find NAME)|sort|while read debfile
 	do
-		if [ -d $modelminus/$debfile ]
+		if [ -d $modelplugdir/$debfile ]
 		then
 			newdebdir=`echo $debfile | sed "s/$modelminus/$minus/g"`
-			[ -d $plugdir/$newdebdir ] || (echo "Making directory $plugdir/$newdebdir" ; mkdir $plugdir/$newdebdir)
+			if [ ! -d $plugdir/$newdebdir ]
+			then
+				echo "Making directory $plugdir/$newdebdir" ; mkdir $plugdir/$newdebdir
+			fi
 		else
 			newdebfile=`echo $debfile | sed "s/$modelminus/$minus/g"`
 			if [ ! -f $plugdir/$newdebfile ]
 			then
 				echo "Creating $plugdir/$newdebfile"
-				cat $modelminus/$debfile | \
+				cat $modelplugdir/$debfile | \
 					sed "s/$modelminus/$minus/g" | \
 					sed "s/$modelfullname/$fullname/g" > \
 				$plugdir/$newdebfile
@@ -55,7 +63,7 @@ else
 		chmod +x $plugdir/bin/*
 		(cd $modelplugdir;find debian;find packaging)|sort|while read debfile
 		do
-			if [ -d $modelminus/$debfile ]
+			if [ -d $modelplugdir/$debfile ]
 			then
 				newdebdir=`echo $debfile | sed "s/$modelminus/$minus/g"`
 				[ -d $plugdir/$newdebdir ] || (echo "Making directory $plugdir/$newdebdir" ; mkdir $plugdir/$newdebdir)
@@ -64,7 +72,7 @@ else
 				if [ ! -f $plugdir/$newdebfile ]
 				then
 					echo "Creating $plugdir/$newdebfile"
-					cat $modelminus/$debfile | \
+					cat $modelplugdir/$debfile | \
 						sed "s/$modelminus/$minus/g" | \
 						sed "s/$modelfullname/$fullname/g" > \
 					$plugdir/$newdebfile
