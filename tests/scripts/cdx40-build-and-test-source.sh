@@ -1,4 +1,4 @@
-#! /bin/sh -e
+#! /bin/sh -x
 export CURDIR=`pwd`
 export WORKSPACE=${WORKSPACE:-$CURDIR}
 
@@ -42,6 +42,15 @@ fi
 [ ! -d $WORKSPACE/reports ] || rm -fr $WORKSPACE/reports
 mkdir -p $WORKSPACE/build/packages $WORKSPACE/build/config $WORKSPACE/reports/coverage
 
+cat > $WORKSPACE/build/config/phpunit <<-EOF
+HUDSON_URL=$HUDSON_URL
+JOB_NAME=$JOB_NAME
+EOF
+
+scp -r tests root@$HOST:/root
+scp -r $WORKSPACE/build/config  root@$HOST:/root
+scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
+
 # EPEL
 cp src/rpm-specific/epel-short.repo $WORKSPACE/build/packages/epel.repo
 if [ ! -z "$EPEL_REPO" ] ; then
@@ -84,7 +93,7 @@ ssh root@$HOST chmod +x codendi_install.sh
 ssh root@$HOST yum install -y $CDXPACKAGES
 
 ssh root@$HOST /root/codendi_install.sh
-ssh root@cdx40.local /usr/share/codendi/src/utils/generate_ssl_certificate.sh <<-FIN
+ssh root@$HOST /usr/share/codendi/src/utils/generate_ssl_certificate.sh <<-FIN
 y
 FR
 ISERE
@@ -99,6 +108,18 @@ admin@$HOST
 
 
 FIN
+#================
+retcode=0
+
+echo "Run phpunit test on $HOST"
+ssh -X root@$HOST "tests/scripts/phpunit.sh CDXCentos52Tests.php" || retcode=$?
+
+if [ "x$SELENIUM_RC_DIR" != "x" ]
+then
+        rsync -av root@$HOST:/var/log/ $SELENIUM_RC_DIR/
+fi
+cp $WORKSPACE/reports/phpunit-selenium.xml $WORKSPACE/reports/phpunit-selenium.xml.org
+xalan -in $WORKSPACE/reports/phpunit-selenium.xml.org -xsl fix_phpunit.xslt -out $WORKSPACE/reports/phpunit-selenium.xml
 #================
 
 if $KEEPVM
