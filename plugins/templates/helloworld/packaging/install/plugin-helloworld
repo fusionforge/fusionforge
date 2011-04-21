@@ -1,8 +1,9 @@
-common/*                  usr/share/gforge/plugins/helloworld/common/
-include/*                 usr/share/gforge/plugins/helloworld/include/
-db/*                      usr/share/gforge/plugins/helloworld/db/
-bin/*                     usr/share/gforge/plugins/helloworld/bin/
-www/*                     usr/share/gforge/plugins/helloworld/www/
-cronjobs/*                usr/share/gforge/cronjobs
-etc/plugins/helloworld/*     etc/gforge/plugins/helloworld/
-etc/httpd.d/*             usr/share/gforge/etc/httpd.d/
+plugins/helloworld/common/*                  usr/share/@OLDPACKAGE@/plugins/helloworld/common/
+plugins/helloworld/include/*                 usr/share/@OLDPACKAGE@/plugins/helloworld/include/
+plugins/helloworld/db/*                      usr/share/@OLDPACKAGE@/plugins/helloworld/db/
+plugins/helloworld/bin/*                     usr/share/@OLDPACKAGE@/plugins/helloworld/bin/
+plugins/helloworld/www/*                     usr/share/@OLDPACKAGE@/plugins/helloworld/www/
+plugins/helloworld/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
+plugins/helloworld/etc/plugins/helloworld/*     etc/@OLDPACKAGE@/plugins/helloworld/
+plugins/helloworld/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+plugins/helloworld/etc/helloworld.ini	             etc/@PACKAGE@/config.ini.d/

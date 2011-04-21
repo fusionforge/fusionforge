@@ -360,6 +360,8 @@ plugins/old/webcalendar/www/ws/get_reminders.php -text
 plugins/old/webcalendar/www/ws/login.php -text
 plugins/old/webcalendar/www/year.php -text
 plugins/templates/createplugin.sh -text svneol=unset#text/x-sh
+plugins/templates/helloworld/NAME -text
+plugins/templates/helloworld/README -text
 plugins/templates/helloworld/bin/db-delete.pl -text svneol=unset#text/x-perl
 plugins/templates/helloworld/bin/db-upgrade.pl -text svneol=unset#text/x-perl
 plugins/templates/helloworld/cronjobs/manage_helloworld.php -text
@@ -375,6 +377,7 @@ plugins/templates/helloworld/debian/dsf-in/plugin-helloworld.prerm -text
 plugins/templates/helloworld/debian/po/templates.pot -text
 plugins/templates/helloworld/debian/rules -text
 plugins/templates/helloworld/debian/source/format -text
+plugins/templates/helloworld/etc/helloworld.ini -text
 plugins/templates/helloworld/etc/httpd.d/62plugin-helloworld -text
 plugins/templates/helloworld/packaging/control/000source -text
 plugins/templates/helloworld/packaging/control/222plugin-helloworld -text
