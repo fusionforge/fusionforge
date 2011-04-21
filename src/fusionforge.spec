@@ -464,6 +464,7 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/rpm-specific
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/*/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/*/*.spec
+%{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/plugins/foafprofiles
 
 ### Plugin setup ###
 %{__cp} $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/*/etc/*.ini $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/
