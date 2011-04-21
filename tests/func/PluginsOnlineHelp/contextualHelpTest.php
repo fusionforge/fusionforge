@@ -48,9 +48,9 @@ class ContextualHelp extends FForge_SeleniumTestCase
 {
     function testContextualHelp()
     {
-	$this->login ('admin');
         $this->init();
         $this->activatePlugin('online_help');
+	$this->login ('admin');
 
         $this->clickAndWait("link=Home");
         $this->click("link=Get Help");
