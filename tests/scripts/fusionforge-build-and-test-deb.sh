@@ -84,14 +84,8 @@ scp -r tests root@$HOST:/root
 scp -r $WORKSPACE/build/config  root@$HOST:/root
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 ssh root@$HOST "cat /root/tests/preseed/* | LANG=C debconf-set-selections"
-if [ "x$DEBMIRROR" != "x" ]
-then
-	ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
-fi
-if [ "x$DEBMIRRORSEC" != "x" ]
-then
-	ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
-fi
+ssh root@$HOST "echo \"deb $DEBMIRROR $DIST main\" > /etc/apt/sources.list"
+ssh root@$HOST "echo \"deb $DEBMIRRORSEC $DIST/updates main\" > /etc/apt/sources.list.d/security.list"
 
 # Temporary hack to grab libjs-jquery-tipsy from unstable until it reaches testing/backports
 if [ $DIST = squeeze ] ; then
