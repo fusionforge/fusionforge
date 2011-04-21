@@ -80,7 +80,7 @@ class ContextualHelp extends FForge_SeleniumTestCase
         $this->click("link=Get Help");
         $this->waitForPopUp("HelpWindow", "30000");
         $this->selectWindow("name=HelpWindow");
-//        $this->assertTextPresent("Search in mailing lists");
+        $this->assertTextPresent("Mailing Lists");
 
         $this->close();
         $this->selectWindow("");
@@ -128,7 +128,7 @@ class ContextualHelp extends FForge_SeleniumTestCase
         $this->click("link=Get Help");
         $this->waitForPopUp("HelpWindow", "30000");
         $this->selectWindow("name=HelpWindow");
-//        $this->assertTextPresent("Managing packages and releases via PHP CLI");
+        $this->assertTextPresent("Managing packages and releases via CLI");
         $this->close();
         $this->selectWindow("");
     }
