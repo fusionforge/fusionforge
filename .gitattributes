@@ -985,6 +985,16 @@ src/plugins/cvstracker/etc/cvstracker.ini -text
 src/plugins/cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
 src/plugins/cvstracker/packaging/docs/plugin-cvstracker -text
 src/plugins/cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
+src/plugins/doaprdf/NAME -text
+src/plugins/doaprdf/README -text
+src/plugins/doaprdf/common/doaprdf-init.php -text
+src/plugins/doaprdf/etc/doaprdf.ini -text
+src/plugins/doaprdf/include/doaprdfPlugin.class.php -text
+src/plugins/doaprdf/packaging/control/222plugin-doaprdf -text
+src/plugins/doaprdf/packaging/control/222plugin-doaprdf.shortdesc -text
+src/plugins/doaprdf/packaging/dirs/plugin-doaprdf -text
+src/plugins/doaprdf/packaging/docs/plugin-doaprdf -text
+src/plugins/doaprdf/packaging/install/plugin-doaprdf -text
 src/plugins/env.inc.php -text
 src/plugins/externalsearch/bin/db-delete.pl svneol=native#text/x-perl
 src/plugins/externalsearch/bin/db-upgrade.pl svneol=native#text/x-perl
