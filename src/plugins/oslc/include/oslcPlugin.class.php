@@ -50,7 +50,7 @@ class oslcPlugin extends Plugin {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("oslc")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
-				echo ' | ' . $HTML->PrintSubMenu (array ($text),
+				echo $HTML->PrintSubMenu (array ($text),
 						  array ('/plugins/oslc/index.php' . $param ));				
 			}
 		} elseif ($hookname == "groupmenu") {
