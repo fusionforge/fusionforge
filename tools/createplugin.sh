@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# TODO : missing copyright
+
+# You should instead probably use ../plugins/templates/createplugin.sh that is more up-to-date
+
 usage() {
 	echo Usage: $0 PluginName
 }
