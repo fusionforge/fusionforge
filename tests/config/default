@@ -37,3 +37,5 @@ VMENGINE=vz
 REMOTESELENIUM=false
 KEEPVM=false
 DNSDOMAIN=local
+DEBMIRROR=http://cdn.debian.net/debian/
+DEBMIRRORSEC=http://security.debian.org/
