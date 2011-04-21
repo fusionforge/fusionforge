@@ -1,0 +1,9 @@
+plugins/foafprofiles/common/*                  usr/share/@OLDPACKAGE@/plugins/foafprofiles/common/
+plugins/foafprofiles/include/*                 usr/share/@OLDPACKAGE@/plugins/foafprofiles/include/
+plugins/foafprofiles/db/*                      usr/share/@OLDPACKAGE@/plugins/foafprofiles/db/
+plugins/foafprofiles/bin/*                     usr/share/@OLDPACKAGE@/plugins/foafprofiles/bin/
+plugins/foafprofiles/www/*                     usr/share/@OLDPACKAGE@/plugins/foafprofiles/www/
+plugins/foafprofiles/cronjobs/*                usr/share/@OLDPACKAGE@/cronjobs
+plugins/foafprofiles/etc/plugins/foafprofiles/*     etc/@OLDPACKAGE@/plugins/foafprofiles/
+plugins/foafprofiles/etc/httpd.d/*             usr/share/@OLDPACKAGE@/etc/httpd.d/
+plugins/foafprofiles/etc/foafprofiles.ini	             etc/@PACKAGE@/config.ini.d/foafprofiles.ini
