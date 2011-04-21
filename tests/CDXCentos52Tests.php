@@ -19,7 +19,7 @@ class CDXCentos52Tests
 		$suite = new RPMSeleniumRemoteSuite('PHPUnit');
 
 		// Selenium tests
-//		$suite->addTestFiles(glob("func/Site/*Test.php"));
+		$suite->addTestFiles(glob("func/Site/*Test.php"));
 //		$suite->addTestFiles(glob("func/Trackers/*Test.php"));
 //		$suite->addTestFiles(glob("func/Tasks/*Test.php"));
 //		$suite->addTestFiles(glob("func/Docs/*Test.php"));
