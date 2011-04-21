@@ -3,6 +3,11 @@
 /**
  * foafprofilesPlugin Class
  *
+ * Copyright 2011, Olivier Berger & Institut Telecom
+ *
+ * This program was developped in the frame of the COCLICO project
+ * (http://www.coclico-project.org/) with financial support of the Paris
+ * Region council.
  *
  * This file is part of FusionForge.
  *
@@ -26,16 +31,19 @@ class foafprofilesPlugin extends Plugin {
 		$this->Plugin($id) ;
 		$this->name = "foafprofiles";
 		$this->text = "FOAFProfiles!"; // To show in the tabs, use...
-		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
-		$this->_addHook("usermenu");
-		$this->_addHook("groupmenu");	// To put into the project tabs
-		$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
-		$this->_addHook("groupisactivecheckboxpost"); //
-		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
-		$this->_addHook("userisactivecheckboxpost"); //
-		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
+		//$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
+		//$this->_addHook("usermenu");
+		//$this->_addHook("groupmenu");	// To put into the project tabs
+		//$this->_addHook("groupisactivecheckbox"); // The "use ..." checkbox in editgroupinfo
+		//$this->_addHook("groupisactivecheckboxpost"); //
+		//$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
+		//$this->_addHook("userisactivecheckboxpost"); //
+		//$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
+		$this->_addHook("script_accepted_types");
+		$this->_addHook("content_negociated_user_home");
+		
 	}
-
+/*
 	function CallHook ($hookname, &$params) {
 		global $use_foafprofilesplugin,$G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
@@ -118,6 +126,61 @@ class foafprofilesPlugin extends Plugin {
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		} 
+	}
+	*/
+	
+	/**
+	 * Declares itself as accepting RDF XML on /users
+	 * @param unknown_type $params
+	 */
+	function script_accepted_types (&$params) {
+		$script = $params['script']; 
+		if ($script == 'user_home') { 
+			$params['accepted_types'][] = 'application/rdf+xml'; 
+		} 
+	}
+	
+	/**
+	 * Outputs user's FOAF profile
+	 * @param unknown_type $params
+	 */
+	function content_negociated_user_home (&$params) {
+		$username = $params['username']; 
+		$accept = $params['accept']; 
+		
+		if($accept == 'application/rdf+xml') {
+				$params['content_type'] = 'application/rdf+xml';
+			
+				$user_obj = user_get_object_by_name($username);
+				
+				$user_real_name = $user_obj->getRealName();
+				$user_email = $user_obj->getEmail();
+				$mbox = 'mailto:'.$user_email;
+				$mbox_sha1sum = sha1($mbox);
+				
+				$params['content'] = '<?xml version="1.0"?>
+				<rdf:RDF
+      				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      				xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      				xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      				xmlns:sioc="http://rdfs.org/sioc/ns#">
+      				
+      			<foaf:OnlineAccount rdf:about="">
+      				<foaf:accountServiceHomepage rdf:resource="/"/>
+      				<foaf:accountName>'. $username .'</foaf:accountName>
+      				<sioc:account_of rdf:resource="#person" />
+      				<foaf:accountProfilePage rdf:resource="" />
+    			</foaf:OnlineAccount>
+    			
+      			<foaf:Person rdf:ID="person">
+      				<foaf:name>'. $username .'</foaf:name>
+					<foaf:holdsAccount rdf:resource="" />
+					<foaf:mbox_sha1sum>'. $mbox_sha1sum .'</foaf:mbox_sha1sum>
+    			</foaf:Person>
+    			
+    			</rdf:RDF>';
+  
+		}
 	}
 }
 

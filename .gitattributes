@@ -1510,6 +1510,8 @@ src/plugins/fckeditor/www/fcktemplates.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fckutils.cfm -text
 src/plugins/foafprofiles/NAME -text
 src/plugins/foafprofiles/README -text
+src/plugins/foafprofiles/common/foafprofiles-init.php -text
+src/plugins/foafprofiles/etc/foafprofiles.ini -text
 src/plugins/foafprofiles/include/foafprofilesPlugin.class.php -text
 src/plugins/foafprofiles/packaging/control/222plugin-foafprofiles -text
 src/plugins/foafprofiles/packaging/control/222plugin-foafprofiles.shortdesc -text
