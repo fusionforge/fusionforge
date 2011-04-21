@@ -1505,6 +1505,8 @@ src/plugins/fckeditor/www/fckpackager.xml -text svneol=unset#text/xml
 src/plugins/fckeditor/www/fckstyles.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fcktemplates.xml svneol=native#text/xml
 src/plugins/fckeditor/www/fckutils.cfm -text
+src/plugins/foafprofiles/NAME -text
+src/plugins/foafprofiles/README -text
 src/plugins/forumml/NAME -text
 src/plugins/forumml/README.txt -text
 src/plugins/forumml/TODO -text
