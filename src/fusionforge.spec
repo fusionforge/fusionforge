@@ -119,6 +119,13 @@ This is a fusionforge plugin that allows linking CVS log messages to
 trackers and tasks. It will review all commits in a project and search for
 specific string to know which task or tracker is related.
 
+%package plugin-doaprdf
+Summary: DOAP RDF for projects
+Group: Development/Tools
+Requires: %{name} >= %{version}, php
+%description plugin-doaprdf
+DOAP RDF for projects
+
 %package plugin-externalsearch
 Summary: external search plugin for FusionForge
 Group: Development/Tools
@@ -843,6 +850,10 @@ fi
 %{FORGE_DIR}/plugins/cvstracker
 %{FORGE_DIR}/www/plugins/cvstracker
 %attr(-,%{httpduser},%{httpdgroup}) %{FORGE_CONF_DIR}/plugins/cvstracker
+
+%files plugin-doaprdf
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/doaprdf.ini
+%{FORGE_DIR}/plugins/doaprdf
 
 %files plugin-externalsearch
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/externalsearch/
