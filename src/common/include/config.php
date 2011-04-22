@@ -85,6 +85,14 @@ class FusionForgeConfig {
 		}
 	}
 
+	public function reset_value ($section, $var, $value) {
+		if (!isset ($this->settings[$section])) {
+			$this->settings[$section] = array () ;
+		}
+
+		$this->settings[$section][$var] = $value ;
+	}
+
 	function read_config_file ($file) {
 		if (file_exists($file) && is_readable($file)) {
 			$sections = parse_ini_file ($file, true) ;
@@ -224,6 +232,12 @@ function forge_read_config_dir ($path) {
 	foreach ($files as $file) {
 		$c->read_config_file ($file) ;
 	}
+}
+
+function forge_reset_config_item ($var, $section, $default) {
+	$c = FusionForgeConfig::get_instance () ;
+
+	return $c->reset_value ($section, $var, $default) ;
 }
 
 // Local Variables:
