@@ -54,7 +54,7 @@ WHERE status=$1 and add_date < $2 AND users.user_id=user_group.user_id)',
 			 array ('P',
 				$then));
 	$err .= db_error();
-}	
+}
 $result = db_query_params ('SELECT user_id, email FROM users WHERE status=$1 and add_date < $2',
 			   array ('P',
 				  $then));
