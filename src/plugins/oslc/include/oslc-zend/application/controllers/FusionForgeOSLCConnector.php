@@ -321,10 +321,12 @@ class FusionForgeOSLCConnector extends OslcConnector {
 			// construct data for tracker extra fields and their values.
 			$extrafields = $at->getExtraFields();
 			$keys = array_keys($extrafields);
+
 			for ($k = 0; $k<count($keys); $k++){
 				$i = $keys[$k];
+
 				if ($extrafields[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT){
-					$efelements = $at->getExtraFieldElements($extrafields[$i]);
+					$efelements = $at->getExtraFieldElements($extrafields[$i]['extra_field_id']);
 					foreach ($efelements as $key => $value){
 						$data[$extrafields[$i]['field_name']][] = $efelements[$key]['element_name'];
 					}
@@ -332,14 +334,10 @@ class FusionForgeOSLCConnector extends OslcConnector {
 					$data[$extrafields[$i]['field_name']] = '';
 				}
 			}
-
 			// Add assigned to data. We use default FusionForge UI for assigned_to selectBox. 
 			$ath = new ArtifactTypeHtml($group,$tracker);
 			$data['assigned_to'] = $ath->technicianBox('assigned_to'); 
 
-			// Add priority data. We use default FusionForge UI for priority selectBox.
-			$data['priority'] = build_priority_select_box('priority');
-						
 			// Add summary and detailed description.
 			$data['summary'] = '';
 			$data['description'] = '';
@@ -596,7 +594,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 	 */
 	public function createChangeRequest($creation_params){
 		$cm_request = $creation_params['new']->container;
-
+		print_r($cm_request);
 		$grp = group_get_object($creation_params['project']);
 
 		if(!$grp || !is_object($grp)){
