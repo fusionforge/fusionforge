@@ -2250,6 +2250,7 @@ src/plugins/oslc/www/images/Tooltip/balloon_topLeft.png -text
 src/plugins/oslc/www/images/Tooltip/balloon_topRight.png -text
 src/plugins/oslc/www/images/Tooltip/oslc.png -text
 src/plugins/oslc/www/index.php -text
+src/plugins/oslc/www/scripts/json.js -text
 src/plugins/oslc/www/scripts/oslcTooltip.js -text
 src/plugins/projectimport/3rd-party/README -text
 src/plugins/projectimport/3rd-party/oslc-tools/arc2-plugin/ARC2_OSLCCoreRDFJSONParserPlugin.php -text
