@@ -363,7 +363,6 @@ class FusionForgeCmController extends CmController {
 						$newchangerequest = FusionForgeChangeRequest::CreateFusionForgeArrayFromJson($body);
 						break;
 				}
-				//print_r($newchangerequest);
 	
 				$creationparams = array('project' => $params['project'],
 										'tracker' => $params['tracker'],
@@ -395,11 +394,10 @@ class FusionForgeCmController extends CmController {
 			$newlocation = $httpScheme.'://'.$httpHost.$baseURL.'/'.$controllerName.'/project/'.$params['project'].'/tracker/'.$params['tracker'].'/bug/'.$identifier;
 		}
 		
-		//logout the user
-		session_logout();
-				
 		//redirect to new change request
-		$this->getResponse()->setRedirect($newlocation,201);
+		$this->getResponse()->setHttpResponseCode(200);
+		$this->getResponse()->appendBody($newlocation);
+		//$this->getResponse()->setRedirect($newlocation,201);
 	}
 	public function indexAction(){
 		

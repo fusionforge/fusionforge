@@ -65,9 +65,9 @@ jQuery(function(){
 	jQuery("#createbutton").click(function() {
 		createBugData();
 		jQuery.ajax({
-			url: URL,
 			type: "POST",
-			postData: jQuery.toJSON(postdata),
+			url: URL,
+			data: jQuery.toJSON(postdata),
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
 			},
@@ -100,11 +100,11 @@ jQuery(function(){
 	jQuery("#creatensendbutton").click(function() {
 		createBugData();
 		jQuery.ajax({
+			type: "POST",
 			url: URL,
-			postData: jQuery.toJSON(postdata),
-			headers: {
-				'Content-Type': "application/x-oslc-cm-change-request+json",
-				//'Authorization': "Basic " + dojox.encoding.base64.encode(convertToByteArray(userpass))
+			data: jQuery.toJSON(postdata),
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
 			},
 			dataType: "json",
 			success: function(data, ioArgs) {

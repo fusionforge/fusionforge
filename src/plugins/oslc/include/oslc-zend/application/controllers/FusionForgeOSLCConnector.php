@@ -594,7 +594,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 	 */
 	public function createChangeRequest($creation_params){
 		$cm_request = $creation_params['new']->container;
-		print_r($cm_request);
+
 		$grp = group_get_object($creation_params['project']);
 
 		if(!$grp || !is_object($grp)){
