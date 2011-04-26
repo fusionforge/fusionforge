@@ -593,10 +593,11 @@ class FusionForgeCmController extends CmController {
 		if ($auth) {
 			$auth_type = explode(' ',$auth);
 			$auth_type = $auth_type[0];
-			if (strcasecmp($auth_type, 'OAuth')) {
-				$returned = $this->oslc->checkOauthAuthorization($auth);
-				return $returned;
-			} elseif (strcasecmp($auth_type, 'basic')) {
+			if (strcasecmp($auth_type, 'OAuth')==0) {
+				/*$returned = $this->oslc->checkOauthAuthorization($auth);
+				return $returned;*/
+				session_set_for_authplugin('oauthprovider');
+			} elseif (strcasecmp($auth_type, 'basic')==0) {
 				return $this->retrieveRequestAuthHttpBasic($login);
 			} else {
 				throw new BadRequestException('Unsupported Authorization type : '. $auth_type .' !');	
@@ -639,9 +640,9 @@ class FusionForgeCmController extends CmController {
 				//print_r('request username'.$login);
 				//print_r('request password'.$password);
 			}
-			elseif ($auth[0] == 'OAuth') {
+			/*elseif ($auth[0] == 'OAuth') {
 				session_set_for_authplugin('oauthprovider');
-			}
+			}*/
 			else {
 				throw new BadRequestException('Unsupported auth method : '. $auth[0] .' !');
 			}
