@@ -19,7 +19,7 @@ IPCOSGW=10.194.10.1
 SSHPUBKEY=~/.ssh/id_rsa.pub
 
 DEBMIRROR=http://g-rub.rd.francetelecom.fr:3142/debian
-DEBMIRRORSEC=deb http://g-rub.rd.francetelecom.fr:3142/debian-security
+DEBMIRRORSEC=http://g-rub.rd.francetelecom.fr:3142/debian-security
 DAG_RPMFORGE_REPO=http://g-virtual02.rd.francetelecom.fr/dag/redhat
 EPEL_REPO=http://g-virtual02.rd.francetelecom.fr/epel
 
