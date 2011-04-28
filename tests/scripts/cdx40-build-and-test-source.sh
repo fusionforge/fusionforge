@@ -84,12 +84,12 @@ ssh root@$HOST yum install -y rsync make rpm-build yum-priorities
 #ssh root@$HOST yum install -y $BUILDDEPS $MISSINGCVS $MISSINGHIL $MISSINGMUNIN
 #ssh root@$HOST "cd /usr/src/redhat ; make"
 # Coping prebuilded
-rsync -rlptD CDROM/ root@$HOST:/root/
+rsync -rlptD $WORKSPACE/CDROM/ root@$HOST:/root/
 # Next is done in codendi.tgz
 #rsync -a $CDXVERS/src/ root@$HOST:/usr/share/codendi/src/
 
-scp Codendi_4.0/codendi_tools/codendi_install.sh root@$HOST:
-scp Codendi_4.0/codendi_tools/localconf root@$HOST:
+scp $WORKSPACE/$CDXVERS/codendi_tools/codendi_install.sh root@$HOST:
+scp $WORKSPACE/$CDXVERS/codendi_tools/localconf root@$HOST:
 ssh root@$HOST chmod +x codendi_install.sh
 ssh root@$HOST yum install -y $CDXPACKAGES
 
