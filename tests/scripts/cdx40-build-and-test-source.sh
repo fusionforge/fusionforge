@@ -49,6 +49,7 @@ EOF
 
 scp -r tests root@$HOST:/root
 scp -r $WORKSPACE/build/config  root@$HOST:/root
+(cd 3rd-party/selenium ; make )
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 
 # EPEL
@@ -88,7 +89,7 @@ rsync -rlptD CDROM/ root@$HOST:/root/
 #rsync -a $CDXVERS/src/ root@$HOST:/usr/share/codendi/src/
 
 scp Codendi_4.0/codendi_tools/codendi_install.sh root@$HOST:
-scp localconf root@$HOST:
+scp Codendi_4.0/codendi_tools/localconf root@$HOST:
 ssh root@$HOST chmod +x codendi_install.sh
 ssh root@$HOST yum install -y $CDXPACKAGES
 
