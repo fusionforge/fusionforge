@@ -68,6 +68,7 @@ jQuery(function(){
 			type: "POST",
 			url: URL,
 			data: jQuery.toJSON(postdata),
+			dataType: 'json',
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
 			},
@@ -76,24 +77,25 @@ jQuery(function(){
 				result = data;
 				refresh();
 			},
-			error: function(err, ioargs) {
-               	var response = jQuery.parseJSON(ioargs.xhr.responseText);
+			error: function(jqXHR, textStatus, errorThrown) {
+				//alert(textStatus+' x '+jqXHR.responseText);
+               	var response = jQuery.parseJSON(jqXHR.responseText);
                	var errmsg, errcode;
                	for (var key in response) {
-						var obj = response[key];						   
-						if(key=="oslc_cm:Error")   {
-						   for (var i in obj) {
-							  if(i=="oslc_cm:statusCode")	{
-								  errcode = obj[i];
-							  }else if(i=="oslc_cm:message")	{
-								  errmsg = obj[i];
-							  } 
-						   }
-						   var errtext = "Error " + errcode + ": " + errmsg;
-						   alert(errtext);
-					   }
+					var obj = response[key];						   
+					if(key=="oslc_cm:Error") {
+						for (var i in obj) {
+							if(i=="oslc_cm:statusCode")	{
+								errcode = obj[i];
+							}else if(i=="oslc_cm:message") {
+								errmsg = obj[i];
+							}
+						}
+						var errtext = "Error " + errcode + ": " + errmsg;
+						alert(errtext);
 					}
 				}
+			}
 		});
 	});
 
@@ -120,8 +122,8 @@ jQuery(function(){
 				//alert(datatosend);
 				respondWithPostMessage(datatosend);
 			},
-			error: function(err, ioargs) {
-               	var response = jQuery.parseJSON(ioargs.xhr.responseText);
+			error: function(jqXHR, textStatus, errorThrown) {
+               	var response = jQuery.parseJSON(jqXHR.responseText);
                	var errmsg, errcode;
 				for (var key in response) {
 						var obj = response[key];						   
