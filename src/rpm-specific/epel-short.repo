@@ -4,5 +4,5 @@ baseurl=http://download.fedoraproject.org/pub/epel/5/$basearch
 #mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel5&arch=$basearch
 failovermethod=priority
 enabled=0
-gpgcheck=1
+gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL
