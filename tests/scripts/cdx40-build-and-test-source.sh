@@ -49,7 +49,7 @@ EOF
 
 scp -r tests root@$HOST:/root
 scp -r $WORKSPACE/build/config  root@$HOST:/root
-(cd 3rd-party/selenium ; make )
+(cd 3rd-party/selenium ; make getselenium)
 scp 3rd-party/selenium/binary/selenium-server-current/selenium-server.jar root@$HOST:/root
 
 # EPEL
