@@ -109,7 +109,9 @@ admin@$HOST
 
 
 FIN
-#================
+#=== Mediawiki ===
+ssh root@$HOST yum --enablerepo=epel -y  install mediawiki115
+#=================
 retcode=0
 
 echo "Run phpunit test on $HOST"
