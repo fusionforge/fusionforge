@@ -17,7 +17,7 @@ use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $sys_urlroot $sf_cache_dir $sys_name $sys_themeroot
     $sys_news_group $sys_dbhost $sys_dbname $sys_dbuser $sys_dbpasswd
     $sys_ldap_base_dn $sys_ldap_host $admin_login $admin_password
-    $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
+    $domain_name $newsadmin_groupid $statsadmin_groupid
     $skill_list/ ;
 use vars qw/$pluginname/ ;
 
@@ -69,33 +69,6 @@ eval {
 	$dbh->commit () ;
     }
     
-#    $version = &get_db_version ;
-#    $target = "0.2" ;
-#    if (is_lesser $version, $target) {
-#	debug "Adding local data." ;
-#	
-#	do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-#	
-#	my $ip_address = qx/host $domain_name | awk '{print \}'/ ;
-#	
-#	@reqlist = (
-#		    "INSERT INTO plugin_".$pluginname."_sample_data (domain, ip_address) VALUES ('$domain_name', '$ip_address')",
-#		    ) ;
-#	
-#	foreach my $s (@reqlist) {
-#	    $query = $s ;
-#	    # debug $query ;
-#	    $sth = $dbh->prepare ($query) ;
-#	    $sth->execute () ;
-#	    $sth->finish () ;
-#	}
-#	@reqlist = () ;
-#	
-#	&update_db_version ($target) ;
-#	debug "Committing." ;
-#	$dbh->commit () ;
-#    }
-
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian FusionForge." ;
 

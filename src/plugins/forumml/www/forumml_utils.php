@@ -126,7 +126,7 @@ function plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset) {
 	// Total number of threads
 	$nbThreads = 0;
 $res = getForumMLDao()->countAllThreadsFromList($list_id);
-	if ($res && !db_error($res)) {
+	if ($res && !db_error()) {
 		$row = $res->getRow();
 		$nbThreads = $row['nb'];
 	}

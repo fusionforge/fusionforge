@@ -1521,6 +1521,7 @@ src/plugins/forumml/debian/po/templates.pot -text
 src/plugins/forumml/debian/rules -text
 src/plugins/forumml/debian/source/format -text
 src/plugins/forumml/etc/forumml.inc -text
+src/plugins/forumml/etc/forumml.ini -text
 src/plugins/forumml/include/ForumMLGroupSearchEngine.class.php -text
 src/plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php -text
 src/plugins/forumml/include/ForumMLInsert.class.php -text
