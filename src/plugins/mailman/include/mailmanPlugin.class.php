@@ -94,6 +94,7 @@ class mailmanPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we�re calling is the project one
+                $params['ADMIN'][]='';
 			} 
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		} elseif ($hookname == "groupisactivecheckbox") {
@@ -213,8 +214,9 @@ class mailmanPlugin extends Plugin {
 				return false;
 			}
 		}
+		// TODO : WTF ? : I think this should probably be gotten rid of -- OlivierBerger
 		elseif ($hookname=='site_admin_option_hook') {
-			echo '<li><a href="'.$this->getPluginPath().'/">Template</a></li>';
+			echo '<li><a href="'.$this->getPluginPath().'/">Template [' . _('Mailman plugin') . ']</a></li>';
 		}
 		
 		

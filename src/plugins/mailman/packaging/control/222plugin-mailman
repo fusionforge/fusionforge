@@ -1,6 +1,6 @@
 Package: @PACKAGE@-plugin-mailman
 Architecture: all
-Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-mta-exim4 | @OLDPACKAGE@-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, ${misc:Depends}
+Depends: @OLDPACKAGE@-common, @OLDPACKAGE@-db-postgresql | @OLDPACKAGE@-db, @OLDPACKAGE@-mta-exim4 | @OLDPACKAGE@-mta, apache2 (>= 2.0.52), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32) | debconf-2.0, ucf, mailman (>= 2.1.13), python-psycopg2, python-mysqldb, python-iniparse, ${misc:Depends}
 Provides: @OLDPACKAGE@-lists
 Conflicts: @OLDPACKAGE@-lists
 Description: collaborative development tool - mailing-lists plugin (using Mailman)

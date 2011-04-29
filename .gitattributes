@@ -1758,6 +1758,7 @@ src/plugins/mailman/etc/httpd.d/20list -text
 src/plugins/mailman/etc/httpd.d/20zlist.vhost -text
 src/plugins/mailman/etc/httpd.d/21list.vhost.ssl -text
 src/plugins/mailman/etc/httpd.d/62plugin-list-mailman -text
+src/plugins/mailman/etc/mailman.ini -text
 src/plugins/mailman/etc/plugins/mailman/config.php -text
 src/plugins/mailman/include/BackendMailmanList.class.php -text
 src/plugins/mailman/include/MailmanList.class.php -text
