@@ -762,6 +762,7 @@ fi
 %{FORGE_DIR}/www/plugins/fckeditor
 
 %files plugin-forumml
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/forumml.ini
 %{FORGE_DIR}/plugins/forumml
 %{FORGE_DIR}/www/plugins/forumml
 
@@ -900,6 +901,7 @@ fi
 
 %files plugin-mailman
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/mailman/
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/mailman.ini
 %{FORGE_CONF_DIR}/httpd.d/62plugin-list-mailman
 %{FORGE_CONF_DIR}/httpd.d/200list.vhost
 %{FORGE_CONF_DIR}/httpd.d/20list
