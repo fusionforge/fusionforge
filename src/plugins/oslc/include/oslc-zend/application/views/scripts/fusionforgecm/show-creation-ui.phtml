@@ -3,6 +3,7 @@
 <?php 
 	$project = $this->data['project'];
 	$tracker = $this->data['tracker'];
+	$oauth_auth_header = $this->oauth_auth_header;
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -57,7 +58,8 @@ jQuery(function(){
 	var project = "<?php echo $project;?>";
 	var tracker = "<?php echo $tracker;?>";
 	var URL = '<?php echo $this->baseUrl(); ?>'+"/cm/project/"+project+"/tracker/"+tracker;
-	var result;
+	var oauth_auth_header = '<?php echo $oauth_auth_header;?>';
+	var result
 	var postdata;
 	var userpass;
 	var error = false;
@@ -71,6 +73,7 @@ jQuery(function(){
 			dataType: 'json',
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
+				xhr.setRequestHeader("Authorization", oauth_auth_header);
 			},
 			success: function(data, ioArgs) {
 				alert("The url of the bug just created is: "+data);                  	 	                        

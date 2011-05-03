@@ -574,6 +574,20 @@ class FusionForgeCmController extends CmController {
 		$params = $req->getParams();
 		$project = $params['project'];
 		$tracker = $params['tracker'];
+		if(isset($params['oauth_signature']) && isset($params['oauth_token']) && isset($params['oauth_consumer_key']) &&
+			isset($params['oauth_signature_method']) && isset($params['oauth_timestamp']) && 
+			isset($params['oauth_nonce'])) {
+			
+			$oauth_auth_header = 'OAuth oauth_token="' . $params['oauth_token'] 
+			. '", oauth_signature_method="' . $params['oauth_signature_method']
+			. '", oauth_signature="'.$params['oauth_signature']
+			. '", oauth_consumer_key="' . $params['oauth_consumer_key']
+			. '", oauth_timestamp="' . $params['oauth_timestamp']
+			. '", oauth_nonce="' . $params['oauth_nonce'];
+			//. '", oauth_version="' . $params['oauth_version'];
+			
+			$this->view->oauth_auth_header = $oauth_auth_header;
+		}
 		$data = $this->oslc->getDataForCreationUi($project, $tracker);
 		$this->view->data = $data;
 	}
