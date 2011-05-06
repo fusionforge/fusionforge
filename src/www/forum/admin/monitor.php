@@ -53,14 +53,17 @@ users,forum_monitored_forums fmf where fmf.user_id=users.user_id and
 fmf.forum_id =$1 order by users.user_id',
 			array ($group_forum_id));
 
-$head=array();
-$head[]='User';
-$head[]='Email';
-$head[]='Realname';
+if ($res && db_numrows($res) == 0) {
+	echo '<p class="information">'._('No Monitoring Users').'</p>';
+	forum_footer(array());
+	exit;
+}
+
+$tableHeaders = array(_('User'), _('Email'), _('Realname'));
 
 $j=0;
 
-echo $HTML->listTableTop($head);
+echo $HTML->listTableTop($tableHeaders);
 
 while ($arr=db_fetch_array($res)) {
 
