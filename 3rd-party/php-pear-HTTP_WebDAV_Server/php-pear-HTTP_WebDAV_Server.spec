@@ -34,7 +34,7 @@ pear -q -c pearrc \
 
 %install
 rm -rf %{buildroot}
-#pear channel-update pear.php.net
+pear channel-update pear.php.net
 pear -c pearrc install --nodeps --packagingroot %{buildroot} %{SOURCE0}
 
 # Clean up unnecessary files
