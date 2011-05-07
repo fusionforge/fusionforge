@@ -4,7 +4,10 @@
 	$project = $this->data['project'];
 	$tracker = $this->data['tracker'];
 	$oauth_auth_header = $this->oauth_auth_header;
+	$build_url = $this->build_url;
+	$build_number = $this->build_number;
 ?>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>OSLC Creation UI</title>
@@ -59,11 +62,16 @@ jQuery(function(){
 	var tracker = "<?php echo $tracker;?>";
 	var URL = '<?php echo $this->baseUrl(); ?>'+"/cm/project/"+project+"/tracker/"+tracker;
 	var oauth_auth_header = '<?php echo $oauth_auth_header;?>';
+	var build_url = '<?php echo $build_url;?>';
+	var build_number = '<?php echo $build_number;?>';
 	var result
 	var postdata;
 	var userpass;
 	var error = false;
 
+	jQuery("#titletext").val('Hudson Build #' + build_number + ' Failure');
+	jQuery("#descriptiontext").val('Follow the build url for more details about the failure: ' + build_url);
+	
 	jQuery("#createbutton").click(function() {
 		createBugData();
 		jQuery.ajax({
@@ -75,8 +83,8 @@ jQuery(function(){
 				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
 				xhr.setRequestHeader("Authorization", oauth_auth_header);
 			},
-			success: function(data, ioArgs) {
-				alert("The url of the bug just created is: "+data);                  	 	                        
+			success: function(data, textStatus) {
+				alert("The url of the bug just created is: "+data.responsetext);                  	 	                        
 				result = data;
 				refresh();
 			},
@@ -102,7 +110,7 @@ jQuery(function(){
 		});
 	});
 
-	jQuery("#creatensendbutton").click(function() {
+/*	jQuery("#creatensendbutton").click(function() {
 		createBugData();
 		jQuery.ajax({
 			type: "POST",
@@ -145,7 +153,7 @@ jQuery(function(){
 			}
 		});
 	});			
-
+*/
 	var convertToByteArray = function(data) {
 		var bin=[] ;
 		for (var i=0; i<data.length; i++){
@@ -190,9 +198,7 @@ jQuery(function(){
 	}
 
 	function refresh() {
-		jQuery(".textclass").each(function(item, index, array)	{
-			item.value = "";
-		});
+		jQuery(".textclass").val('');
 		
 		jQuery(".listclass").each(function(item, index, array)	{
 			item.selectedIndex = 0;
@@ -255,9 +261,13 @@ jQuery(function(){
 				</tr>
 				<tr><td align="center">
 					<button id="createbutton">CREATE CHANGE REQUEST</button>
-				</td><td align="center">
+				</td>
+				<!-- 
+				<td align="center">
 					<button id="creatensendbutton">CREATE CHANGE REQUEST AND ADD TO CLIENT</button>
-				</td></tr>
+				</td>
+				-->
+				</tr>
 			</table>
 		</td>
 		</tr>

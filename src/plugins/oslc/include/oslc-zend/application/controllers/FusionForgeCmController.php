@@ -574,19 +574,25 @@ class FusionForgeCmController extends CmController {
 		$params = $req->getParams();
 		$project = $params['project'];
 		$tracker = $params['tracker'];
-		if(isset($params['oauth_signature']) && isset($params['oauth_token']) && isset($params['oauth_consumer_key']) &&
-			isset($params['oauth_signature_method']) && isset($params['oauth_timestamp']) && 
-			isset($params['oauth_nonce'])) {
+		if(isset($params['auth_signature']) && isset($params['auth_token']) && isset($params['auth_consumer_key']) &&
+			isset($params['auth_signature_method']) && isset($params['auth_timestamp']) && 
+			isset($params['auth_nonce'])) {
 			
-			$oauth_auth_header = 'OAuth oauth_token="' . $params['oauth_token'] 
-			. '", oauth_signature_method="' . $params['oauth_signature_method']
-			. '", oauth_signature="'.$params['oauth_signature']
-			. '", oauth_consumer_key="' . $params['oauth_consumer_key']
-			. '", oauth_timestamp="' . $params['oauth_timestamp']
-			. '", oauth_nonce="' . $params['oauth_nonce'];
-			//. '", oauth_version="' . $params['oauth_version'];
+			$oauth_auth_header = 'OAuth oauth_signature="' . rawurlencode(substr($params['auth_signature'],1,-1)) 
+			. '",oauth_token='.$params['auth_token']
+			. ',oauth_consumer_key=' . $params['auth_consumer_key']
+			. ',oauth_version=' . $params['auth_version']
+			. ',oauth_signature_method=' . $params['auth_signature_method']
+			. ',oauth_timestamp=' . $params['auth_timestamp']
+			. ',oauth_nonce=' . $params['auth_nonce'];
 			
 			$this->view->oauth_auth_header = $oauth_auth_header;
+		}
+		if(isset($params['build_url'])) {
+			$this->view->build_url = $params['build_url'];
+		}
+		if (isset($params['build_number'])) {
+			$this->view->build_number = $params['build_number'];
 		}
 		$data = $this->oslc->getDataForCreationUi($project, $tracker);
 		$this->view->data = $data;
