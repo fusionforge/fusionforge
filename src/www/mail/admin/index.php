@@ -147,7 +147,7 @@ if ($group_id) {
 			exit_error($mlFactory->getErrorMessage(),'mail');
 		}
 
-		$mlArray =& $mlFactory->getMailingLists();
+		$mlArray = $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
 			echo '<p class="error">'._('Error').' '._('Unable to get the lists') .$mlFactory->getErrorMessage().'</p>';
