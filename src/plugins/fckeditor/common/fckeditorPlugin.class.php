@@ -3,6 +3,7 @@
  * FusionForge Plugin FCKeditor Plugin Class
  *
  * Copyright 2005 (c) Daniel A. Pérez <daniel@gforgegroup.com> , <danielperez.arg@gmail.com>
+ * Copyright 2011, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge-plugin-fckeditor
  *
@@ -19,73 +20,62 @@
  * You should have received a copy of the GNU General Public License
  * along with FusionForge-plugin-fckeditor; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
- *
  */
  
 /**
  * The fckeditorPlugin class. It implements the Hooks for the presentation
  *  of the text editor whenever needed
- *
  */
 
 class fckeditorPlugin extends Plugin {
 	function fckeditorPlugin () {
-		$this->Plugin() ;
+		$this->Plugin();
 		$this->name = "fckeditor" ;
 		$this->text = _("HTML editor");
-		$this->hooks[] = "groupisactivecheckbox";
-		$this->hooks[] = "groupisactivecheckboxpost";
-		$this->hooks[] = "text_editor"; // shows the editor
+		$this->_addHook("groupisactivecheckbox");
+		$this->_addHook("groupisactivecheckboxpost");
+		$this->_addHook('userisactivecheckbox');
+		$this->_addHook('userisactivecheckboxpost');
+		$this->_addHook("text_editor"); // shows the editor
 	}
 
 	/**
 	* The function to be called for a Hook
 	*
-	* @param    String  $hookname  The name of the hookname that has been happened
-	* @param    String  $params    The params of the Hook
+	* @param		String	$hookname  The name of the hookname that has been happened
+	* @param		String	$params    The params of the Hook
 	*
 	*/
-	function CallHook ($hookname, &$params) {
+	function CallHook($hookname, &$params) {
 		global $group_id;
 
 		if (file_exists ("/usr/share/fckeditor/fckeditor.php")) {
-			$use_system_fckeditor = true ;
+			$use_system_fckeditor = true;
 			require_once("/usr/share/fckeditor/fckeditor.php");
 		} else {
-			$use_system_fckeditor = false ;
+			$use_system_fckeditor = false;
 			require_once $GLOBALS['gfplugins'].'fckeditor/www/fckeditor.php';
 		}
 
-		if ($hookname == "groupisactivecheckbox") {
-			//Check if the group is active
-			$group = &group_get_object($group_id);
-			echo "<tr>";
-			echo "<td>";
-			echo ' <input type="checkbox" name="use_fckeditorplugin" value="1" ';
-			// checked or unchecked?
-			if ( $group->usesPlugin ( $this->name ) ) {
-				echo "checked=\"checked\"";
+		if ($hookname == "text_editor") {
+			$display = 0;
+			if (isset($params['group'])) {
+				$group_id=$params['group']; // get the project id
+				$project = &group_get_object($group_id);
+				if ( (!$project) || (!is_object($project)) || ($project->isError()) || (!$project->isProject()) ) {
+					return false;
+				}
+				if ( $project->usesPlugin ( $this->name ) ) { // only if the plugin is activated for the project show the fckeditor box
+					$display = 1;
+				}
+			} else if (isset($params['user_id'])) {
+				$userid = $params['user_id'];
+				$user = user_get_object($userid);
+				if ($user->usesPlugin($this->name)) {
+					$display = 1;
+				}
 			}
-			echo " /><br/>";
-			echo "</td>";
-			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin (for forums and news)</strong>";
-			echo "</td>";
-			echo "</tr>";
-		} elseif ($hookname == "groupisactivecheckboxpost") {
-			$group = &group_get_object($group_id);
-			if ( getStringFromRequest('use_fckeditorplugin') == 1 ) {
-				$group->setPluginUse ( $this->name );
-			} else {
-				$group->setPluginUse ( $this->name, false );
-			}
-		} elseif ($hookname == "text_editor") {
-			$group_id=$params['group']; // get the project id
-			$project = &group_get_object($group_id);
-			if ( (!$project) || (!is_object($project)) || ($project->isError()) || (!$project->isProject()) ) {
-				return false;
-			}
-			if ( $project->usesPlugin ( $this->name ) ) { // only if the plugin is activated for the project show the fckeditor box
+			if ($display) {
 				$name = isset($params['name'])? $params['name'] : 'body';
 				$oFCKeditor = new FCKeditor($name) ;
 				if ($use_system_fckeditor) {
@@ -106,7 +96,7 @@ class fckeditorPlugin extends Plugin {
 					$params['content'] = $h;
 				} else {
 					$GLOBALS['editor_was_set_up'] = true;
-					echo $h ;
+					echo $h;
 				}
 			}
 		}
@@ -117,5 +107,4 @@ class fckeditorPlugin extends Plugin {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
 ?>

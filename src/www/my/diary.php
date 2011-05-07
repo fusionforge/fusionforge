@@ -32,9 +32,7 @@ if (!forge_get_config('use_diary')) {
 }
 
 if (!session_loggedin()) {
-
 	exit_not_logged_in();
-
 } else {
 
 	$u =& session_get_user();
@@ -77,23 +75,22 @@ WHERE user_id=$4 AND id=$5',
 		} else if (getStringFromRequest('add')) {
 			//inserting a new diary entry
 
-
 			$res=db_query_params ('INSERT INTO user_diary (user_id,date_posted,summary,details,is_public) VALUES 
-($1,$2,$3,$4,$5)',
-			array(user_getid() ,
-				time() ,
-				$summary,
-				$details,
-				$is_public));
+								($1,$2,$3,$4,$5)',
+								array(user_getid() ,
+									time() ,
+									$summary,
+									$details,
+									$is_public));
 			if ($res && db_affected_rows($res) > 0) {
 				$feedback .= _('Item Added');
 				if ($is_public) {
 
 					//send an email if users are monitoring
 					$result=db_query_params ('SELECT users.email from user_diary_monitor,users 
-WHERE user_diary_monitor.user_id=users.user_id 
-AND user_diary_monitor.monitored_user=$1',
-			array(user_getid() ));
+										WHERE user_diary_monitor.user_id=users.user_id
+										AND user_diary_monitor.monitored_user=$1',
+										array(user_getid() ));
 					$rows=db_numrows($result);
 
 					if ($result) {
@@ -153,9 +150,9 @@ To stop monitoring this user, visit the following link:
 
 	if ($diary_id) {
 
-		$res=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2',
-			array(user_getid() ,
-				$diary_id));
+		$res=db_query_params('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2',
+							array(user_getid(),
+								$diary_id));
 		if (!$res || db_numrows($res) < 1) {
 			$feedback .= _('Entry not found or does not belong to you');
 			$proc_str='add';
@@ -174,13 +171,14 @@ To stop monitoring this user, visit the following link:
 		$_diary_id = '';
 	}
 
-    site_user_header(array('title'=>_('My Diary And Notes')));
+	site_user_header(array('title'=>_('My Diary And Notes')));
 
 	$params['name'] = "details";
 	$params['body'] = $_details;
 	$params['height'] = "350";
 	$params['width'] = "100%";
 	$params['content'] = '<textarea name="details" rows="10" cols="60">'.$_details.'</textarea>';
+	$params['user_id'] = $u->getID();
 	plugin_hook_by_reference("text_editor", $params);
 
 	echo '
