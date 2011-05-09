@@ -574,6 +574,12 @@ class FusionForgeCmController extends CmController {
 		$params = $req->getParams();
 		$project = $params['project'];
 		$tracker = $params['tracker'];
+		
+		$httpScheme = $this->getRequest()->getScheme();
+		$httpHost = $this->getRequest()->getHttpHost();
+		$prefix = $httpScheme.'://'.$httpHost;
+		$this->view->delegUrl = $prefix;
+		
 		if(isset($params['auth_signature']) && isset($params['auth_token']) && isset($params['auth_consumer_key']) &&
 			isset($params['auth_signature_method']) && isset($params['auth_timestamp']) && 
 			isset($params['auth_nonce'])) {

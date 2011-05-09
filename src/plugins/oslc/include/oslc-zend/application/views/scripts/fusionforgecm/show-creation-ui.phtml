@@ -83,9 +83,9 @@ jQuery(function(){
 				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
 				xhr.setRequestHeader("Authorization", oauth_auth_header);
 			},
-			success: function(data, textStatus) {
-				alert("The url of the bug just created is: "+data.responsetext);                  	 	                        
-				result = data;
+			success: function(jqXHR, textStatus, errorThrown) {
+				alert("The url of the bug just created is: "+jQuery.parseJSON(jqXHR.responsetext));                  	 	                        
+				//result = data;
 				refresh();
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -208,13 +208,13 @@ jQuery(function(){
 
 		</script>
     </head>
-    <body>
-        <h1><?php echo strtoupper($project); ?>: Creation UI for OSLC</h1><hr/>
-        <!-- <p>some details of the query and blah blah to be added here</p> -->
+    <body bgcolor="#e8e6e6">
+        <!--<h1><?php echo strtoupper($project); ?>: Creation UI for OSLC</h1><hr/>
+         <p>some details of the query and blah blah to be added here</p> -->
         
         <br>
-        <!-- <p><b>Project: <?php echo $project ?></b></p> -->
-        <table>
+        <p><b><?php echo $this->delegUrl.'/plugins/oslc/cm/project/'.$project.'/tracker/'.$tracker.'/ui/creation'; ?></b></p>
+        <table border-color>
         	     		
         </table>
         <table border=1>        
