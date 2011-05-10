@@ -32,13 +32,7 @@ require_once $gfconfig.'plugins/mantisbt/config.php';
 $type = getStringFromRequest('type');
 
 if (!$type) {
-	if (forge_get_config('use_ssl'))
-		$url = "https://";
-	else
-		$url = "http://";
-
-	$url .= forge_get_config('web_host');
-	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No TYPE specified'), 'mantisbt');
+	exit_missing_param($_SERVER['HTTP_REFERER']), array('No TYPE specified'), 'mantisbt');
 }
 
 $use_tooltips = 1;
@@ -49,13 +43,7 @@ switch ($type) {
 	case 'group': {
 		$group_id = getIntFromRequest('group_id');
 		if (!$group_id) {
-			if (forge_get_config('use_ssl'))
-				$url = "https://";
-			else
-				$url = "http://";
-
-			$url .= forge_get_config('web_host');
-			exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No GROUP_ID specified'), 'mantisbt');
+			exit_missing_param($_SERVER['HTTP_REFERER']), array('No GROUP_ID specified'), 'mantisbt');
 		}
 		$group = group_get_object($group_id);
 		if (!$group) {
@@ -228,13 +216,7 @@ switch ($type) {
 		}
 		$group_id = getIntFromRequest('group_id');
 		if (!$group_id) {
-			if (forge_get_config('use_ssl'))
-				$url = "https://";
-			else
-				$url = "http://";
-
-			$url .= forge_get_config('web_host');
-			exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array('No GROUP_ID specified'), 'mantisbt');
+			exit_missing_param($_SERVER['HTTP_REFERER']), array('No GROUP_ID specified'), 'mantisbt');
 		}
 
 		$group = group_get_object($group_id);

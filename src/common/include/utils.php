@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2011, Roland Mas
- * Copyright 2009-2010, Franck Villaume - Capgemini
+ * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  *
@@ -14,7 +14,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -59,7 +59,7 @@ function htpasswd_apr1_md5($plainpasswd) {
     "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
     return "$"."apr1"."$".$salt."$".$tmp;
 }
- 
+
 /**
  * is_utf8($string) - utf-8 detection
  *
@@ -92,11 +92,11 @@ function is_utf8($str) {
 }
 
 /**
- * removeCRLF() - remove any Carriage Return-Line Feed from a string. 
+ * removeCRLF() - remove any Carriage Return-Line Feed from a string.
  * That function is useful to remove the possibility of a CRLF Injection when sending mail
  * All the data that we will send should be passed through that function
  *
- * @param	   string  The string that we want to empty from any CRLF 
+ * @param	   string  The string that we want to empty from any CRLF
  */
 function util_remove_CRLF($str) {
 	return strtr($str, "\015\012", '  ');
@@ -174,7 +174,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if (!$from) {
 		$from='noreply@'.forge_get_config('web_host');
 	}
-	
+
 
 	$charset = _('UTF-8');
 	if (!$charset) {
@@ -198,7 +198,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		"\nContent-type: text/$type; charset=$charset".
 		"\n\n".
 		util_convert_body($body, $charset);
-	
+
 	if (!forge_get_config('sendmail_path')){
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
@@ -223,7 +223,7 @@ function util_encode_mailaddr($email,$name,$charset) {
 				$name,$charset,"UTF-8")).
 			"?=";
 	}
-	
+
 	return $name." <".$email."> ";
 }
 
@@ -269,7 +269,7 @@ function util_convert_body($str,$charset) {
 	if (!function_exists('mb_convert_encoding') || $charset == 'UTF-8') {
 		return $str;
 	}
-	
+
 	return mb_convert_encoding($str,$charset,"UTF-8");
 }
 
@@ -458,7 +458,7 @@ function util_wrap_find_space($string,$wrap) {
 					if ($code <= 0x7F ||
 					    $code >= 0xC0) {
 						//Here is single byte character
-						//or head of multi byte character  
+						//or head of multi byte character
 						return $wrap;
 					}
 					//Do not break multi byte character
@@ -518,8 +518,8 @@ function util_line_wrap ($text, $wrap = 80, $break = "\n") {
  *
  */
 function util_make_links($data='') {
-	if(empty($data)) { 
-		return $data; 
+	if(empty($data)) {
+		return $data;
 	}
 	$lines = explode("\n", $data);
 	$newText = "";
@@ -763,14 +763,14 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 				$headersCellData[] = array($fieldName);
 			}
 		}
-		
+
 		/*  Create the title  */
 		if(strlen($title) > 0) {
 			$titleCellData = array();
 			$titleCellData[] = array($title, 'colspan="'.count($headersCellData).'"');
 			echo $HTML->multiTableRow('', $titleCellData, TRUE);
 		}
-		
+
 		/* Display the headers */
 		if($displayHeaders) {
 			echo $HTML->multiTableRow('', $headersCellData, TRUE);
@@ -835,10 +835,10 @@ function validate_email($address) {
 */
 function validate_emails($addresses, $separator=',') {
 	if (strlen($addresses) == 0) return array();
-	
+
 	$emails = explode($separator, $addresses);
 	$ret 	= array();
-	
+
 	if (is_array($emails)) {
 		foreach ($emails as $email) {
 			$email = trim($email);		// This is done so we can validate lists like "a@b.com, c@d.com"
@@ -914,7 +914,7 @@ function valid_hostname($hostname = "xyz") {
  * @version        1.0
  * @param int       bytes   is the size
  * @param bool     base10  enable base 10 representation, otherwise
- *                 default base 2  is used  
+ *                 default base 2  is used
  * @param int       round   number of fractional digits
  * @param array     labels  strings associated to each 2^10 or
  *                  10^3(base10==true) multiple of base units
@@ -977,12 +977,12 @@ function readfile_chunked($filename, $returnBytes=true) {
     $chunksize = 1*(1024*1024); // 1MB chunks
     $buffer = '';
     $byteCounter = 0;
-    
+
     $handle = fopen($filename, 'rb');
     if ($handle === false) {
         return false;
     }
-    
+
     ob_start () ;
     while (!feof($handle)) {
 	    $buffer = fread($handle, $chunksize);
@@ -1029,7 +1029,7 @@ function util_containts_dot_or_dotdot($dir) {
     if (util_is_dot_or_dotdot($sub_dir))
       return true;
   }
-  
+
   return false;
 }
 
@@ -1058,7 +1058,7 @@ function util_strip_accents($text) {
 
 /**
  * Constructs the forge's URL prefix out of forge_get_config('url_prefix')
- * 
+ *
  * @return string
  */
 function normalized_urlprefix() {
@@ -1066,38 +1066,51 @@ function normalized_urlprefix() {
 	$prefix = preg_replace ("/^\//", "", $prefix) ;
 	$prefix = preg_replace ("/\/$/", "", $prefix) ;
 	$prefix = "/$prefix/" ;
-	if ($prefix == '//') 
+	if ($prefix == '//')
 		$prefix = '/' ;
 	return $prefix ;
 }
 
 /**
+ * Construct the base URL http[s]://forge_name[:port]
+ *
+ * @return	string base URL
+ */
+function util_make_base_url() {
+	if (forge_get_config('use_ssl')) {
+		$url = "https://" ;
+	} else {
+		$url = "http://" ;
+	}
+	$url .= forge_get_config('web_host') ;
+	if (forge_get_config('https_port') != 443) {
+		$url .= ":".forge_get_config('https_port') ;
+	}
+	return $url;
+}
+/**
  * Construct full URL from a relative path
- * 
- * @param string $path
- * @return string URL
+ *
+ * @param	string	$path
+ * @return	string	URL
  */
 function util_make_url($path = '') {
-        if (forge_get_config('use_ssl')) {
-                $url = "https://" ;
-                $url .= forge_get_config('web_host') ;
-                if (forge_get_config('https_port') != 443) {
-                        $url .= ":".forge_get_config('https_port') ;
-                }
-        } else {
-                $url = "http://" ;
-                $url .= forge_get_config('web_host') ;
-                if (forge_get_config('http_port') != 80) {
-                        $url .= ":".forge_get_config('http_port') ;
-                }
-        }
-	$url .= util_make_uri($path) ;
+	$url = util_make_base_url().util_make_uri($path) ;
 	return $url;
 }
 
 /**
+ * Find the relative URL from full URL, removing http[s]://forge_name[:port]
+ *
+ * @param	string	URL
+ */
+function util_find_relative_referer($url) {
+	return str_replace(util_make_base_url(), '', $url);
+}
+
+/**
  * Construct proper (relative) URI (prepending prefix)
- * 
+ *
  * @param string $path
  * @return string URI
  */
@@ -1124,7 +1137,7 @@ function util_make_link($path, $text, $extra_params=false, $absolute=false) {
 
 /**
  * Create an HTML link to a user's profile page
- * 
+ *
  * @param string $username
  * @param int $user_id
  * @param string $text
@@ -1137,7 +1150,7 @@ function util_make_link_u ($username, $user_id,$text) {
 /**
  * Display username with link to a user's profile page
  * and icon face if possible.
- * 
+ *
  * @param string $username
  * @param int $user_id
  * @param string $text
@@ -1153,11 +1166,11 @@ function util_display_user($username, $user_id, $text, $size='xs') {
         }
 
         // If no plugin replaced it, then back to default standard link
-        
+
         // Invoke user_logo plugin (see gravatar plugin for instance)
         $params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
         plugin_hook_by_reference('user_logo', $params);
-        
+
         $url = '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>';
         if ($params['content']) {
                 return $params['content'].$url.'<div class="new_line"></div>';
@@ -1167,7 +1180,7 @@ function util_display_user($username, $user_id, $text, $size='xs') {
 
 /**
  * Create URL for user's profile page
- * 
+ *
  * @param string $username
  * @param int $user_id
  * @return string URL
@@ -1204,7 +1217,7 @@ function util_make_link_g ($groupname, $group_id,$text) {
 
 /**
  * Create URL for a project's page
- * 
+ *
  * @param string $groupame
  * @param int $group_id
  * @return string
@@ -1244,7 +1257,7 @@ function check_email_available($group, $email, &$response) {
 			return false;
 		}
 	}
-		
+
 	// Check if a forum with same name already exists
 	$ff = new ForumFactory($group);
 	if (!$ff || !is_object($ff) || $ff->isError()) {
@@ -1261,7 +1274,7 @@ function check_email_available($group, $email, &$response) {
 			}
 		}
 	}
-	
+
 	// Email is available
 	return true;
 }
@@ -1282,9 +1295,9 @@ function use_stylesheet($css, $media='') {
 if (!function_exists('array_replace_recursive')) {
 	/**
 	 * Replaces elements from passed arrays into the first array recursively
-	 * @param array $a1 The array in which elements are replaced. 
-	 * @param array $a2 The array from which elements will be extracted. 
-	 * @return Returns an array, or NULL if an error occurs. 
+	 * @param array $a1 The array in which elements are replaced.
+	 * @param array $a2 The array from which elements will be extracted.
+	 * @return Returns an array, or NULL if an error occurs.
 	 */
 	function array_replace_recursive ($a1, $a2) {
 		$result = $a1 ;
@@ -1298,7 +1311,7 @@ if (!function_exists('array_replace_recursive')) {
 			    !isset ($result[$k]) || !is_array ($result[$k])) {
 				$result[$k] = $v ;
 			}
-			
+
 			$result[$k] = array_replace_recursive ($result[$k],
 							       $v) ;
 		}

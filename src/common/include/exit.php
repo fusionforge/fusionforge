@@ -3,7 +3,7 @@
  * FusionForge : Exit functions
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010, Franck Villaume
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
  *
@@ -28,8 +28,8 @@
  * @param	string	Error text
  * @param	string	toptab for navigation bar
  */
-function exit_error($text="", $toptab='') {
-	global $HTML,$group_id;
+function exit_error($text = "", $toptab = '') {
+	global $HTML, $group_id;
 	$HTML->header(array('title'=>_('Exiting with error'), 'group'=>$group_id, 'toptab'=>$toptab));
 	echo $HTML->error_msg(htmlspecialchars($text));
 	$HTML->footer(array());
@@ -42,7 +42,7 @@ function exit_error($text="", $toptab='') {
  * @param	string	$reason_descr
  * @param	string	toptab needed for navigation
  */
-function exit_permission_denied($reason_descr='', $toptab='') {
+function exit_permission_denied($reason_descr = '', $toptab = '') {
 	if(!session_loggedin()) {
 		exit_not_logged_in();
 	} else {
@@ -66,32 +66,33 @@ function exit_not_logged_in() {
  * @param	string	toptab
  */
 function exit_no_group() {
-	exit_error(_('Permission denied. No project was chosen, project does not exist or you can\'t access it.'),$toptab='');
+	exit_error(_('Permission denied. No project was chosen, project does not exist or you can\'t access it.'), '');
 }
 
 /**
  * exit_missing_param() - Exit with missing required parameters error
  *
- * @param	string	URL : usually $_SERVER['HTTP_REFERER'] minus forge_get_config('web_host') + forge_get_config('use_ssl')
+ * @param	string	URL : usually $_SERVER['HTTP_REFERER']
  * @param	array	array of missing parameters
  * @param	string	toptab needed for navigation
  */
-function exit_missing_param($url='', $missing_params=array(), $toptab='') {
+function exit_missing_param($url = '', $missing_params = array(), $toptab = '') {
 	if (!empty($missing_params)) {
 		$error = _('Missing required parameters : ');
 		foreach ($missing_params as $missing_param) {
-		$error .= $missing_param.' ';
+			$error .= $missing_param.' ';
 		}
 	} else {
 		$error = sprintf(_('Missing required parameters.'));
 	}
-	if (!empty($url)) {
-		if (strpos($url,'?')) {
-			session_redirect($url.'&error_msg='.urlencode($error));
+	$redirect_url = util_find_relative_referer($url);
+	if (!empty($redirect_url)) {
+		if (strpos($redirect_url,'?')) {
+			session_redirect($redirect_url.'&error_msg='.urlencode($error));
 		}
-		session_redirect($url.'?error_msg='.urlencode($error));
+		session_redirect($redirect_url.'?error_msg='.urlencode($error));
 	} else {
-		exit_error($error,$toptab);
+		exit_error($error, $toptab);
 	}
 }
 
@@ -100,8 +101,8 @@ function exit_missing_param($url='', $missing_params=array(), $toptab='') {
  *
  * @param	string	toptab needed for navigation
  */
-function exit_disabled($toptab='summary') {
-	exit_error(_('The Site Administrator has turned off this feature.'),$toptab);
+function exit_disabled($toptab = 'summary') {
+	exit_error(_('The Site Administrator has turned off this feature.'), $toptab);
 }
 
 /**
@@ -109,8 +110,8 @@ function exit_disabled($toptab='summary') {
  *
  * @param	string	toptab needed for navigation
  */
-function exit_form_double_submit($toptab='') {
-	exit_error(_('You Attempted To Double-submit this item. Please avoid double-clicking.'),$toptab);
+function exit_form_double_submit($toptab = '') {
+	exit_error(_('You Attempted To Double-submit this item. Please avoid double-clicking.'), $toptab);
 }
 
 // Local Variables:

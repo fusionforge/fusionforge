@@ -90,12 +90,6 @@ if ($idAttachment) {
 	header('Content-type: application/binary');
 	echo base64_decode($content);
 } else {
-	if (forge_get_config('use_ssl'))
-		$url = "https://";
-	else
-		$url = "http://";
-
-	$url .= forge_get_config('web_host');
-	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)), array(_('No idAttachment')), 'mantisbt');
+	exit_missing_param($_SERVER['HTTP_REFERER'], array(_('No idAttachment')), 'mantisbt');
 }
 ?>

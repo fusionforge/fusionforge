@@ -49,7 +49,7 @@ if (!$doc_group || $doc_group == 100) {
 	$return_msg = _('No valid Directory was selected.');
 	session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 }
-	
+
 if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !$name))) {
 	$missing_params = array();
 	if (!$title)
@@ -58,14 +58,7 @@ if (!$title || !$description || (!$uploaded_data && !$file_url && (!$editor && !
 	if (!$description)
 		$missing_params[] = 'description';
 
-	if (forge_get_config('use_ssl'))
-		$url = "https://";
-	else
-		$url = "http://";
-
-	$url .= forge_get_config('web_host');
-
-	exit_missing_param(substr($_SERVER['HTTP_REFERER'], strlen($url)),$missing_params,'docman');
+	exit_missing_param($_SERVER['HTTP_REFERER'], $missing_params, 'docman');
 }
 
 if (empty($gfcommon)) {
@@ -123,7 +116,7 @@ switch ($type) {
 			$return_msg = _('Manual uploads disabled.');
 			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 		}
-		
+
 		$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
 		$filename = $incoming.'/'.$manual_path;
 
