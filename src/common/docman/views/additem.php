@@ -64,7 +64,6 @@ function doItInject() {
 </script>
 <?php
 echo '<div class="docmanDivIncluded" >';
-
 echo '<input id="buttonDoc" type="radio" name="type" value="document" /><label ';
 if ($use_tooltips)
 	echo 'id="labelDoc" title="'. _('Submit a new document in this directory.').'"';
@@ -96,8 +95,9 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<p>';
 	echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" size="30" />';
 	echo '<input id="submitinjectzip" type="button" value="'. _('Inject') .'" onclick="javascript:doItInject()" />';
-	echo '</p></div>';
+	echo '</p>';
 	echo '</form>';
 	echo '</div>';
 }
+echo '</div>';
 ?>
