@@ -95,17 +95,16 @@ jQuery(document).ready(function() {
 						{selector: '.docman-monitorfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-newdocument', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}}
 					],
-
 		divAddItem:		jQuery('#additem'),
-		divEditDirectory:		jQuery('#editdocgroup'),
+		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonAddItem:		jQuery('#docman-additem'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
-		divLeft:			jQuery('#left'),
-		divHandle:			jQuery('#handle'),
-		divRight:			jQuery('#right'),
-		divsEdit:			'<?php if (isset($nested_docs[$dirid])) { echo $nested_docs[$dirid]; } ?>',
+		divLeft:		jQuery('#left'),
+		divHandle:		jQuery('#handle'),
+		divRight:		jQuery('#right'),
+		divsEdit:		'<?php if (isset($nested_docs[$dirid])) { echo $nested_docs[$dirid]; } ?>',
 	});
 });
 
@@ -159,6 +158,8 @@ if ($DocGroupName) {
 		echo '<h4 class="docman_h4">'. _('Edit this directory') .'</h4>';
 		include ($gfcommon.'docman/views/editdocgroup.php');
 		echo '</div>';
+	}
+	if (forge_check_perm('docman', $group_id, 'submit')) {
 		echo '<div class="docman_div_include" id="additem" style="display:none">';
 		echo '<h4 class="docman_h4">'. _('Add a new item') .'</h4>';
 		include ($gfcommon.'docman/views/additem.php');
