@@ -32,7 +32,7 @@ require_once $gfconfig.'plugins/mantisbt/config.php';
 $type = getStringFromRequest('type');
 
 if (!$type) {
-	exit_missing_param($_SERVER['HTTP_REFERER']), array('No TYPE specified'), 'mantisbt');
+	exit_missing_param($_SERVER['HTTP_REFERER'], array('No TYPE specified'), 'mantisbt');
 }
 
 $use_tooltips = 1;
@@ -216,7 +216,7 @@ switch ($type) {
 		}
 		$group_id = getIntFromRequest('group_id');
 		if (!$group_id) {
-			exit_missing_param($_SERVER['HTTP_REFERER']), array('No GROUP_ID specified'), 'mantisbt');
+			exit_missing_param($_SERVER['HTTP_REFERER'], array('No GROUP_ID specified'), 'mantisbt');
 		}
 
 		$group = group_get_object($group_id);
