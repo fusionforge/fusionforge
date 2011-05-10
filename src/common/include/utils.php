@@ -1105,7 +1105,15 @@ function util_make_url($path = '') {
  * @param	string	URL
  */
 function util_find_relative_referer($url) {
-	return str_replace(util_make_base_url(), '', $url);
+	$relative_url = str_replace(util_make_base_url(), '', $url);
+	//now remove previous feedback, error_msg or warning_msg
+	$relative_url = preg_replace('/&error_msg=.*&/', '&', $relative_url);
+	$relative_url = preg_replace('/&warning_msg=.*&/', '&', $relative_url);
+	$relative_url = preg_replace('/&feedback=.*&/', '&', $relative_url);
+	$relative_url = preg_replace('/&error_msg=.*/', '', $relative_url);
+	$relative_url = preg_replace('/&warning_msg=.*/', '', $relative_url);
+	$relative_url = preg_replace('/&feedback=.*/', '', $relative_url);
+	return $relative_url;
 }
 
 /**
