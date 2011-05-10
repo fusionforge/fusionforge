@@ -43,7 +43,7 @@ switch ($type) {
 	case 'group': {
 		$group_id = getIntFromRequest('group_id');
 		if (!$group_id) {
-			exit_missing_param($_SERVER['HTTP_REFERER']), array('No GROUP_ID specified'), 'mantisbt');
+			exit_missing_param($_SERVER['HTTP_REFERER'], array('No GROUP_ID specified'), 'mantisbt');
 		}
 		$group = group_get_object($group_id);
 		if (!$group) {
