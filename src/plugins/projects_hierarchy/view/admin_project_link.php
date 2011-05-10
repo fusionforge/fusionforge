@@ -23,6 +23,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+global $group_id;
+
 echo '<h3>'._('Modify the hierarchy').'</h3>';
 echo '<form action="/plugins/projects_hierarchy/add_son.php?group_id='.$group_id.'" method="POST" name="formson">';
 //select box of sons
