@@ -2293,6 +2293,7 @@ src/plugins/projectlabels/packaging/links/plugin-projectlabels -text
 src/plugins/projectlabels/www/index.php -text
 src/plugins/projects_hierarchy/AUTHORS -text
 src/plugins/projects_hierarchy/COPYING -text
+src/plugins/projects_hierarchy/actions/projectsHierarchyDocman.php -text
 src/plugins/projects_hierarchy/common/projects_hierarchy-init.php -text
 src/plugins/projects_hierarchy/common/projects_hierarchyPlugin.class.php -text
 src/plugins/projects_hierarchy/db/projects_hierarchy-init.sql -text

@@ -112,7 +112,7 @@ class projects_hierarchyPlugin extends Plugin {
 		while ($row = db_fetch_array($res)) {
 			//$tree[$row['father_name']][] = $row['son_name'];
 			$tree[$row['father_id']][] = $row['son_id'];
-			//get the unix name of the project 
+			//get the unix name of the project
 			$project_name[$row['father_id']][0] = $row['father_name'];
 			$project_name[$row['son_id']][0] = $row['son_name'];
 			$project_name[$row['father_id']][1] = $row['father_unix_name'];
@@ -131,12 +131,12 @@ class projects_hierarchyPlugin extends Plugin {
 
 		while (list($key, $sons) = each($tree)) {
 			// Really don't know why there is a warning there, and added @
-			if(@!$arbre[$key] != 0){ 
+			if(@!$arbre[$key] != 0){
 				$arbre[$key] = 0;
 			}
 			$cpt_pere = $key;
 			foreach ($sons as $son) {
-				$arbre[$son] = $cpt_pere; 
+				$arbre[$son] = $cpt_pere;
 			}
 		}
 
@@ -162,6 +162,7 @@ class projects_hierarchyPlugin extends Plugin {
 	 * @param	integer	group_id to serach for
 	 * @param	string	parent or child ?
 	 * @param	boolean	recurvice or not ?
+	 * @return	array	array of arrays with group_id of parent or childs
 	 * @access	public
 	 */
 	function getFamily($group_id, $order, $deep = false) {
@@ -190,6 +191,51 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 		}
 		return $localFamily;
+	}
+
+	function getDocmanStatus($group_id) {
+		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1',
+					array($group_id));
+		if (!$res)
+			return false;
+
+		return $res['docman'];
+	}
+
+	function setDocmanStatus($group_id, $status = false) {
+		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE project_id = $2',
+					array($status, $group_id));
+		var_dump(db_error());
+		if (!$res)
+			return false;
+
+		return true;
+	}
+
+	/**
+	 * redirect - encapsulate session_redirect to handle correctly the redirection URL
+	 *
+	 * @param	string	usually http_referer from $_SERVER
+	 * @param	string	type of feedback : error, warning, feedback
+	 * @param	string	the message of feedback
+	 * @access	public
+	 */
+	function redirect($http_referer, $type, $message) {
+		switch ($type) {
+			case 'warning_msg':
+			case 'error_msg':
+			case 'feedback': {
+				break;
+			}
+			default: {
+				$type = 'error_msg';
+			}
+		}
+		$url = util_find_relative_referer($http_referer);
+		if (strpos($url,'?')) {
+			session_redirect($url.'&'.$type.'='.urlencode($message));
+		}
+		session_redirect($url.'?'.$type.'='.urlencode($message));
 	}
 }
 // Local Variables:

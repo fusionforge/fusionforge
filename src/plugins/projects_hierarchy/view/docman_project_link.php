@@ -22,9 +22,32 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
-echo '<h3>'._('Subprojects browsing').'</h3>';
-// display a tree ? with checkbox ? to limit scope of browsing
-// include children of children ?
-echo _('TO BE IMPLEMENTED VIEW');
+global $g; //group object
+global $group_id; // id of the group
+$projectsHierarchy = plugin_get_object('projects_hierarchy');
 
+if ($projectsHierarchy->getFamily($group_id,'parent')) {
+	echo '<form id="projectsHierarchyDocman" name="projectsHierarchyDocman" method="post" action="/plugins/'.$projectsHierarchy->name.'/?action=projectsHierarchyDocman&id='.$group_id.'&type=group" >';
+	echo '<ul>';
+	$label = _('Enable hierarchical browsing');
+	$status = 1;
+	if ($projectsHierarchy->getDocmanStatus($group_id)) {
+		$label = _('Disable hierarchical browsing');
+		$status = 0;
+	}
+	echo '<input name="status" type="hidden" value="'.$status.'" />';
+	echo '<li><input id="projectsHierarchyDocmanSubmit" type="submit" value="'.$label.'" /></li>';
+	echo '</ul>';
+	echo '</form>';
+}
+
+$childs = $projectsHierarchy->getFamily($group_id,'child', true);
+if (sizeof($childs)) {
+	if ($projectsHierarchy->getDocmanStatus($group_id)) {
+		echo '<h3>'._('Subprojects Browsing Selection').'</h3>';
+		// display a tree ? with checkbox ? to limit scope of browsing
+		// include children of children ?
+		echo _('TO BE IMPLEMENTED VIEW');
+	}
+}
 ?>
