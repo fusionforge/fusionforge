@@ -65,7 +65,9 @@ DocManListFileController.prototype =
 	 */
 	bindControls: function()
 	{
-		this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
+		if (typeof(this.params.buttonEditDirectory) != 'undefined') {
+			this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
+		}
 		if (typeof(this.params.buttonAddItem) != 'undefined') {
 			this.params.buttonAddItem.click(jQuery.proxy(this, "toggleAddItemView"));
 		}
@@ -132,10 +134,10 @@ DocManListFileController.prototype =
 		if (!this.params.divEditDirectory.is(":visible"))
 		{
 			this.params.divEditDirectory.show();
-			this.params.divAddItem.hide();
-		}
-		else
-		{
+			if (typeof(this.params.divAddItem) != 'undefined') {
+				this.params.divAddItem.hide();
+			}
+		} else {
 			this.params.divEditDirectory.hide();
 		}
 	},
