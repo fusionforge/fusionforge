@@ -39,7 +39,7 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 }
 
 echo '<div class="docmanDivIncluded">';
-if ( $dgf->getNested() == NULL ) {
+if ($dgf->getNested() == NULL) {
 	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</div>';
 } else {
 	/* display the add new documentation form */
@@ -78,9 +78,9 @@ if ( $dgf->getNested() == NULL ) {
 <?php
 	echo '<p><strong>'. _('Document Title:') .'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
 	echo '<p><strong>'. _('Description:') .'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
+	if ($g->useDocmanSearch())
+		echo '<p>'._('Both fields are used by the document search engine.').'</p>';
 
-	if ($g->useDocmanSearch()) 
-		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
 
 	echo '<form name="adddata" action="?group_id='.$group_id.'&action=addfile" method="post" enctype="multipart/form-data">
 			<table>
@@ -88,8 +88,8 @@ if ( $dgf->getNested() == NULL ) {
 					<td style="text-align:right;">
 						<strong>'. _('Document Title').'</strong>'.utils_requiredField()
 					.'</td><td>'
-			.'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
-			.sprintf(_('(at least %1$s characters)'), 5)
+					.'&nbsp;<input type="text" name="title" size="40" maxlength="255" />&nbsp;'
+					.sprintf(_('(at least %1$s characters)'), 5)
 					.'</td>
 				</tr>
 				<tr>
@@ -187,7 +187,7 @@ if ( $dgf->getNested() == NULL ) {
 				</tr>';
 	}
 	echo '	</table>';
-	echo utils_requiredField() .' '. _('Mandatory field');
+	echo '<span>'.utils_requiredField() .' '. _('Mandatory fields').'</span>';
 	echo '	<div class="docmanSubmitDiv">
 			<input type="submit" name="submit" value="'. _('Submit Information'). '" />
 		</div>
