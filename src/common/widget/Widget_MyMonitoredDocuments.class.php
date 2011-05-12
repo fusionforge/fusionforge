@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  *
  * This file is a part of FusionForge.
  *
@@ -119,8 +120,8 @@ class Widget_MyMonitoredDocuments extends Widget {
     function getAjaxUrl($owner_id, $owner_type) {
         $request =& HTTPRequest::instance();
         $ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
-        if ($request->exist('hide_item_id') || $request->exist('hide_forum')) {
-            $ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_forum=' . $request->get('hide_forum');
+        if ($request->exist('hide_item_id') || $request->exist('hide_document')) {
+            $ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_document=' . $request->get('hide_document');
         }
         return $ajax_url;
     }
