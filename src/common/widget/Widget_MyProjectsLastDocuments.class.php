@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - TrivialDev
  *
  * This file is a part of FusionForge.
  *
@@ -12,7 +13,7 @@
  *
  * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -20,8 +21,7 @@
  */
 
 require_once('Widget.class.php');
-require_once('common/docman/DocumentFactory.class.php');
-require_once('common/docman/DocumentGroup.class.php');
+include $gfcommon.'docman/DocumentFactory.class.php';
 
 /**
 * Widget_MyProjectsLastDocuments
@@ -42,12 +42,12 @@ class Widget_MyProjectsLastDocuments extends Widget {
 		global $HTML;
 		$user = session_get_user();
 		$groups = $user->getGroups();
-		sortProjectList($groups);
-		$request =& HTTPRequest::instance();
 
 		if (count ($groups) < 1) {
 			$html_my_projects .= '<div class="warning">'. _("You're not a member of any project") .'</div>';
 		} else {
+			sortProjectList($groups);
+			$request =& HTTPRequest::instance();
 			$html_my_projects .= '<table style="width:100%">';
 			$i = 0;
 			foreach ($groups as $g) {
