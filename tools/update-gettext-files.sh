@@ -1,9 +1,9 @@
 #!/bin/sh
-if [ -e src/translations/gforge.pot ] ; then        # We're in the parent dir
+if [ -e src/translations/fusionforge.pot ] ; then        # We're in the parent dir
     cd src
-elif [ -e ../src/translations/gforge.pot ] ; then   # We're in tools/ or src/
+elif [ -e ../src/translations/fusionforge.pot ] ; then   # We're in tools/ or src/
     cd ../src
-elif [ -e ../translations/gforge.pot ] ; then       # In a subdir of src/
+elif [ -e ../translations/fusionforge.pot ] ; then       # In a subdir of src/
     cd ..
 else
     echo "Couldn't find translations directory..."
