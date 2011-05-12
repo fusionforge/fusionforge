@@ -473,8 +473,8 @@ table.progress td :hover { background: none }
 
 #widget-categories li.selected {
 	font-weight: bold;
-	margin-top: 0.2em;
-	margin-bottom: 0.2em;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 #widget-categories li.selected a:after {
