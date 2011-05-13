@@ -1,6 +1,8 @@
 # $Id$
 #-
 # Backported Debian packages on which FusionForge depends.
+#
+# wget -O - http://fusionforge.fusionforge.org/deb-repo/repo-key.asc | sudo apt-key add -
 
 deb http://fusionforge.fusionforge.org/deb-repo/ lenny 3rd-party
 deb-src http://fusionforge.fusionforge.org/deb-repo/ lenny 3rd-party
