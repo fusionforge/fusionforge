@@ -131,6 +131,7 @@ htdocs/fusionforge-resized-transp.png -text svneol=unset#image/png
 htdocs/gforge47etch.jpg -text svneol=unset#image/jpeg
 htdocs/index-ajax-0.html -text
 htdocs/index-ajax-1.html -text
+htdocs/index-ajax-10.html -text
 htdocs/index-ajax-2.html -text
 htdocs/index-ajax-3.html -text
 htdocs/index-ajax-4.html -text
