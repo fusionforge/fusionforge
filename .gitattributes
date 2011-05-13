@@ -76,6 +76,9 @@ htdocs/deb-repo/dists/hardy/distinfo.sh -text
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.debian.tar.gz -text
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.dsc -text
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery-goodies/jquery-goodies_3.orig.tar.gz -text
+htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery/jquery_1.4.2-2~bpo50+1.diff.gz -text
+htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery/jquery_1.4.2-2~bpo50+1.dsc -text
+htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery/jquery_1.4.2.orig.tar.gz -text
 htdocs/deb-repo/dists/lenny/distinfo.sh -text
 htdocs/deb-repo/mkdebidx.sh -text
 htdocs/favicon.ico -text
