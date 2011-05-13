@@ -15,29 +15,30 @@ of each files.
 The new FusionForge Team
 ----------------------------------------------------------------------------
 
-TODO : name all contributors to FusionForge. The list below was
-extracted from the SVN stats.
+TODO: name all contributors to FusionForge. The list below was
+mostly extracted from the SVN stats.
 
-Roland Mas
-Grégory Cuellar
+Patrick Apel
 Christian Bayle
-Alain Peyrat
-Guillaume Smet
-Julien Heyman
-Ognyan Kulev
-Alexandre Neymann
-Reinhard Spisser
-Francisco Gimeno
-Mathieu Peltier
-Olivier Meunier
-Olaf Lenz
-Franck Villaume
-Pierre Lacoste
-Thorsten Glaser
-Gonéri Le Bouder
 Mélanie Le Bail
 Olivier Berger
+Gonéri Le Bouder
+Grégory Cuellar
+Francisco Gimeno
+Thorsten Glaser
+Julien Heyman
+Ognyan Kulev
+Pierre Lacoste
+Olaf Lenz
+Roland Mas
+Olivier Meunier
+Alexandre Neymann
+Mathieu Peltier
+Alain Peyrat
 Philip Schwartz
+Guillaume Smet
+Reinhard Spisser
+Franck Villaume
 
 
 See also AUTHORS.gforge and AUTHORS.sourceforge for prior contributors.
@@ -45,4 +46,3 @@ See also AUTHORS.gforge and AUTHORS.sourceforge for prior contributors.
 # Local Variables:
 # coding: utf-8
 # End:
-
