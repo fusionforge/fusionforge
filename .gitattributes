@@ -72,6 +72,30 @@ delivery/novaforge/package/config -text
 /fix_phpunit.xslt -text svneol=unset#text/xml
 hook/ubuntu/G00ubukey -text
 htdocs/box-grad2.png -text svneol=unset#image/png
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.debian.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery-goodies/jquery-goodies_3.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery/jquery_1.4.2-2~bpo50+1.diff.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery/jquery_1.4.2-2~bpo50+1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jquery/jquery_1.4.2.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jqueryui/jqueryui_1.7.2-1~bpo50+1.diff.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jqueryui/jqueryui_1.7.2-1~bpo50+1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/jqueryui/jqueryui_1.7.2.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/libnusoap-php/nusoap_0.7.3-4.debian.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/libnusoap-php/nusoap_0.7.3-4.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/libnusoap-php/nusoap_0.7.3.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/php-htmlpurifier/php-htmlpurifier_4.3.0+dfsg1-1.diff.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/php-htmlpurifier/php-htmlpurifier_4.3.0+dfsg1-1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/php-htmlpurifier/php-htmlpurifier_4.3.0+dfsg1.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/php-http/php-http_1.4.1-1~bpo50+1.diff.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/php-http/php-http_1.4.1-1~bpo50+1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/php-http/php-http_1.4.1.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/yui/yui_2.8.2r1~squeeze-1~bpo50+1.diff.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/yui/yui_2.8.2r1~squeeze-1~bpo50+1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/yui/yui_2.8.2r1~squeeze.orig.tar.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/zendframework/zendframework_1.11.4-1~bpo50+1.diff.gz -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/zendframework/zendframework_1.11.4-1~bpo50+1.dsc -text
+htdocs/deb-repo/dists/hardy/3rd-party/Packages/zendframework/zendframework_1.11.4.orig.tar.gz -text
 htdocs/deb-repo/dists/hardy/distinfo.sh -text
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.debian.tar.gz -text
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/jquery-goodies/jquery-goodies_3-1~bpo50+1.dsc -text
@@ -98,6 +122,7 @@ htdocs/deb-repo/dists/lenny/3rd-party/Packages/zendframework/zendframework_1.11.
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/zendframework/zendframework_1.11.4-1~bpo50+1.dsc -text
 htdocs/deb-repo/dists/lenny/3rd-party/Packages/zendframework/zendframework_1.11.4.orig.tar.gz -text
 htdocs/deb-repo/dists/lenny/distinfo.sh -text
+htdocs/deb-repo/mkdebidx.lnk -text
 htdocs/deb-repo/mkdebidx.sh -text
 htdocs/deb-repo/repo-key.asc -text
 htdocs/deb-repo/sources.txt -text

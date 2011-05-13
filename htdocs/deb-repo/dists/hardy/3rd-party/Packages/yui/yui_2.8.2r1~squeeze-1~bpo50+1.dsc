@@ -1,0 +1,1 @@
+../../../../lenny/3rd-party/Packages/yui/yui_2.8.2r1~squeeze-1~bpo50+1.dsc

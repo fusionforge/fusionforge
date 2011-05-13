@@ -1,0 +1,10 @@
+# $Id$
+#${suitename}/${distname}/${pN}/${pp} <suite>
+hardy/3rd-party/jquery/source lenny
+hardy/3rd-party/jquery-goodies/source lenny
+hardy/3rd-party/jqueryui/source lenny
+hardy/3rd-party/libnusoap-php/source lenny
+hardy/3rd-party/php-htmlpurifier/source lenny
+hardy/3rd-party/php-http/source lenny
+hardy/3rd-party/yui/source lenny
+hardy/3rd-party/zendframework/source lenny
