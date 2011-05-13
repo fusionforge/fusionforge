@@ -342,9 +342,8 @@ class Layout extends Error {
 		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
 		 */
 		$ff = new FusionForge();
-		return sprintf('<meta name="Forge-Identification" content="%s:%s" />', 
-				$ff->software_name,
-				$ff->software_version) . "\n";
+		printf('<meta name="Forge-Identification" content="%s:%s" />\n',
+		    $ff->software_name, $ff->software_version);
 	}
 
 	function bodyHeader($params){
