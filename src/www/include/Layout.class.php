@@ -341,9 +341,11 @@ class Layout extends Error {
 		 * Forge-Identification Meta Header, Version 1.0
 		 * cf. http://home.gna.org/forgeplucker/forge-identification.html
 		 */
+		echo "\t\t\t";
 		$ff = new FusionForge();
-		printf('<meta name="Forge-Identification" content="%s:%s" />\n',
+		printf('<meta name="Forge-Identification" content="%s:%s" />',
 		    $ff->software_name, $ff->software_version);
+		echo "\n";
 	}
 
 	function bodyHeader($params){
