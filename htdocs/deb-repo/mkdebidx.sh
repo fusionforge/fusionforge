@@ -1,5 +1,6 @@
 #!/bin/mksh
-rcsid='$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.47 2011/04/27 12:59:06 tg Exp $'
+rcsid='$Id$'
+#rcsid='$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.47 2011/04/27 12:59:06 tg Exp $'
 #-
 # Copyright (c) 2008, 2009, 2010, 2011
 #	Thorsten Glaser <tg@mirbsd.org>
@@ -20,16 +21,17 @@ rcsid='$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.47 2011/04/27 12:59:06 tg E
 # of said person's immediate fault when using the work as intended.
 
 set -A normarchs -- i386
-repo_keyid=0x405422DD
+export GNUPGHOME=/var/lib/gforge/chroot/home/groups/fusionforge/.gnupg
+repo_keyid=0x89BBCAF4
 # either '' (locally) or 'remsign user@host.domain.com' (remote ssh)
 gpg_remote=
-repo_origin='The MirOS Project'
-repo_label=wtf
-repo_title='MirDebian “WTF” Repository'
+repo_origin='The FusionForge Project'
+repo_label=ff3rdpty
+repo_title='FusionForge 3rd-party DEB Repository'
 function repo_description {
 	typeset suite_nick=$1
 
-	print -nr -- "WTF ${suite_nick} Repository"
+	print -nr -- "FusionForge 3rd-party Repository for ${suite_nick}"
 }
 
 
@@ -184,7 +186,8 @@ for suite in dists/*; do
 		fi
 		print " $nm $ns $n"
 	done) >$suite/Release
-	$gpg_remote gpg -u $repo_keyid -sb <$suite/Release >$suite/Release.gpg
+	$gpg_remote gpg --passphrase-file=$GNUPGHOME/seckey.pass \
+	    -u $repo_keyid -sb <$suite/Release >$suite/Release.gpg
 done
 
 print "\n===> Creating debidx.htm\n"
@@ -372,6 +375,8 @@ for suite in dists/*; do
 		done
 	done
 done
+
+:>timestamp
 
 (cat <<'EOF'
 <?xml version="1.0"?>

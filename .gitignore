@@ -61,5 +61,7 @@ htdocs/deb-repo/dists/lenny/3rd-party/binary-sparc
 htdocs/deb-repo/dists/lenny/3rd-party/source
 htdocs/deb-repo/dists/lenny/Release
 htdocs/deb-repo/dists/lenny/Release.gpg
+htdocs/deb-repo/mkdebidx.log
+htdocs/deb-repo/timestamp
 src/www/scm/viewvc/viewvc.org/*.tar.gz
 src/www/scm/viewvc/viewvc.org/*.zip
