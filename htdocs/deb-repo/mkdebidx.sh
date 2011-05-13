@@ -187,6 +187,7 @@ for suite in dists/*; do
 		print " $nm $ns $n"
 	done) >$suite/Release
 	$gpg_remote gpg --passphrase-file=$GNUPGHOME/seckey.pass \
+	    --no-permission-warning --batch \
 	    -u $repo_keyid -sb <$suite/Release >$suite/Release.gpg
 done
 

@@ -1,0 +1,11 @@
+# $Id$
+#-
+# Backported Debian packages on which FusionForge depends.
+
+deb http://fusionforge.fusionforge.org/deb-repo/ lenny 3rd-party
+deb-src http://fusionforge.fusionforge.org/deb-repo/ lenny 3rd-party
+
+# or
+
+deb http://fusionforge.fusionforge.org/deb-repo/ hardy 3rd-party
+deb-src http://fusionforge.fusionforge.org/deb-repo/ hardy 3rd-party
