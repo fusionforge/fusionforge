@@ -105,7 +105,7 @@ switch ($type) {
 		$return_msg = _('Invalid file name.');
 			session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($return_msg));
 		}
-		if (function_exists(finfo_open)) {
+		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
 		} else {
