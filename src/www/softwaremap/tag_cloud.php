@@ -118,7 +118,7 @@ if ($selected_tag) {
 
 	// #################################################################
 	// print actual project listings
-	for ($i_proj=0;$i_proj<=$querytotalcount;$i_proj++) {
+	for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		$row_grp = $projects[$i_proj];
 
 		// check to see if row is in page range
