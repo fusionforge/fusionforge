@@ -1,5 +1,5 @@
 #!/bin/mksh
-rcsid='$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.48 2011/05/13 13:30:31 tg Exp $'
+rcsid='$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.51 2011/05/13 20:53:29 tg Exp $'
 rcsid='$Id$'
 #-
 # Copyright (c) 2008, 2009, 2010, 2011
@@ -102,6 +102,7 @@ for suite in dists/*; do
 	allsuites="$allsuites${allsuites:+ }${suite##*/}"
 	[[ $suites = : || $suites = *:"$suite":* ]] || continue
 	archs=
+	distribution=
 	. $suite/distinfo.sh
 	suitearchs=${archs:-${normarchs[*]}}
 	components=Components:
@@ -153,7 +154,7 @@ for suite in dists/*; do
 	(cat <<-EOF
 		Origin: ${repo_origin}
 		Label: ${repo_label}
-		Suite: ${suite##*/}
+		Suite: ${distribution:-${suite##*/}}
 		Codename: ${suite##*/}
 		Date: $(date -u)
 		Architectures: all ${dpkgarchs[*]} source
@@ -161,9 +162,15 @@ for suite in dists/*; do
 		Description: $(repo_description "$nick")
 		MD5Sum:
 	EOF
+	exec 4>$suite/Release-sha1
+	exec 5>$suite/Release-sha2
+	print -u4 SHA1:
+	print -u5 SHA256:
 	cd $suite
 	set -A cache_fn
 	set -A cache_md5
+	set -A cache_sha1
+	set -A cache_sha2
 	set -A cache_size
 	for n in Contents-* */{binary-*,source}/{Packag,Sourc}es*; do
 		[[ -f $n ]] || continue
@@ -180,16 +187,29 @@ for suite in dists/*; do
 		if [[ $nc = "$nn" ]]; then
 			nm=${cache_md5[Lcdbhash_result]}
 			ns=${cache_size[Lcdbhash_result]}
+			nsha1=${cache_sha1[Lcdbhash_result]}
+			nsha2=${cache_sha2[Lcdbhash_result]}
 		else
+			# GNU *sum tools are horridly inefficient
 			set -A x -- $(md5sum "$nn")
 			nm=${x[0]}
+			set -A x -- $(sha1sum "$nn")
+			nsha1=${x[0]}
+			set -A x -- $(sha256sum "$nn")
+			nsha2=${x[0]}
 			ns=$(stat -c '%s' "$nn")
 			cache_md5[Lcdbhash_result]=$nm
 			cache_size[Lcdbhash_result]=$ns
 			cache_fn[Lcdbhash_result]=$nn
+			cache_sha1[Lcdbhash_result]=$nsha1
+			cache_sha2[Lcdbhash_result]=$nsha2
 		fi
 		print " $nm $ns $n"
+		print -u4 " $nsha1 $ns $n"
+		print -u5 " $nsha2 $ns $n"
 	done) >$suite/Release
+	cat $suite/Release-sha1 $suite/Release-sha2 >>$suite/Release
+	rm $suite/Release-sha1 $suite/Release-sha2
 	$gpg_remote gpg --passphrase-file=$GNUPGHOME/seckey.pass \
 	    --no-permission-warning --batch \
 	    -u $repo_keyid -sb <$suite/Release >$suite/Release.gpg
@@ -393,7 +413,7 @@ done
 EOF
 print -r -- " <title>${repo_title} Index</title>"
 cat <<'EOF'
- <meta name="generator" content="$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.48 2011/05/13 13:30:31 tg Exp $" />
+ <meta name="generator" content="$MirOS: contrib/hosted/tg/deb/mkdebidx.sh,v 1.51 2011/05/13 20:53:29 tg Exp $" />
  <style type="text/css">
   table {
    border: 1px solid black;
