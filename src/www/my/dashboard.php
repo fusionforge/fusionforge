@@ -36,6 +36,7 @@ require_once $gfcommon.'pm/ProjectTasksForUser.class.php';
 if (!session_loggedin()) {
 	exit_not_logged_in();
 } else {
+	$u = session_get_user();
 	site_user_header(array('title'=>sprintf(_('Personal Page For %s'), $u->getRealName())));
 	?>
 
