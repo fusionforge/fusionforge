@@ -50,7 +50,7 @@ class MantisBTPlugin extends Plugin {
 			case "usermenu": {
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&user_id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(_('Personnal MantisBT page')));
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personnal MantisBT page'))));
 				}
 				$returned = true;
 				break;
@@ -87,7 +87,13 @@ class MantisBTPlugin extends Plugin {
 				//check if the user has the plugin activated
 				if ($user->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link('/plugins/'.$this->name.'/?user_id=$userid&type=user&pluginname='.$this->name, _('View Personal MantisBT'));
+					$arr_t = array();
+					if ($user->usesTooltips()) {
+						$arr_t[] = array('title' => _('Manage your mantisbt account and follow your tickets'));
+					} else {
+						$arr_t[] = array();
+					}
+					echo util_make_link('/plugins/'.$this->name.'/?user_id=$userid&type=user&pluginname='.$this->name, _('View Personal MantisBT'), $arr_t);
 					echo '</p>';
 				}
 				$returned = true;
@@ -99,8 +105,7 @@ class MantisBTPlugin extends Plugin {
 				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					echo '<p>';
-					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name,
-					_('View Admin MantisBT')
+					echo util_make_link("/plugins/mantisbt/?group_id=$group_id&type=admin&pluginname=".$this->name, _('View Admin MantisBT')
 					);
 					echo '</p>';
 				}
@@ -403,7 +408,7 @@ class MantisBTPlugin extends Plugin {
 			}
 			case 'user': {
 				global $user_id;
-				$params['user'] = $user_id;
+				$params['user_id'] = $user_id;
 				site_user_header($params);
 				$returned = true;
 				break;
