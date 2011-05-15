@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2011, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -35,7 +36,7 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 } else {
 
-	$u =& session_get_user();
+	$u = session_get_user();
 	$diary_id = getIntFromRequest('diary_id');
 
 	if (getStringFromRequest('submit')) {

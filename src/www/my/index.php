@@ -38,8 +38,9 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	exit_not_logged_in();
 }
 
+$user = session_get_user();
 use_javascript('/tabber/tabber.js');
-site_user_header(array('title'=>sprintf(_('Personal Page For %s'), user_getname())));
+site_user_header(array('title'=>sprintf(_('Personal Page For %s'), $user->getRealName())));
 
 $sql = "SELECT l.*
 		FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)
@@ -47,11 +48,11 @@ $sql = "SELECT l.*
 		AND o.owner_id = $2
 		AND o.is_default = 1
 		";
-$res = db_query_params($sql,array('u', user_getid()));
+$res = db_query_params($sql,array('u', $user->getID()));
 $layout_id = db_result($res, 0 , 'id');
 
 echo '<ul class="widget_toolbar">';
-$url = "/widgets/widgets.php?owner=u".user_getid().
+$url = "/widgets/widgets.php?owner=u".$user->getID().
 	"&amp;layout_id=".$layout_id;
 echo '	<li ><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
 echo '	<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
@@ -59,7 +60,7 @@ echo '</ul>';
 
 
 $lm = new WidgetLayoutManager();
-$lm->displayLayout(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER);
+$lm->displayLayout($user->getID(), WidgetLayoutManager::OWNER_TYPE_USER);
 
 site_user_footer(array());
 

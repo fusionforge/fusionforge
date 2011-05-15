@@ -209,13 +209,26 @@ class Theme extends Layout {
 		}
 	}
 
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $nested=false, 
-			      $selected=false, $sel_tab_bgcolor='WHITE', 
-			      $total_width='100%') {
+	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, 
+					$selected=false, $sel_tab_bgcolor='WHITE',
+					$total_width='100%') {
 		$count=count($TABS_DIRS);
 		if ($count < 1) {
 			return;
 		}
+
+		$use_tooltips = 1;
+
+		if (session_loggedin()) {
+			$u =& user_get_object(user_getid());
+			if (!$u || !is_object($u)) {
+				exit_error(_('Could Not Get User'));
+			} elseif ($u->isError()) {
+				exit_error($u->getErrorMessage(), 'my');
+			}
+			$use_tooltips = $u->usesTooltips();
+		}
+
 		$return = '
 		<!-- start tabs -->
 		<table class="tabGenerator width-100p100" summary="" ';
@@ -280,7 +293,11 @@ class Theme extends Layout {
 				$return .= ' class="nested"';
 			}
 			$return .= '>' . "\n";
-			$return .= '<a href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>' . "\n";
+			$return .= '<a ';
+			if ($use_tooltips)
+				$return .= ' title="'.$TABS_TOOLTIPS[$i].'"';
+
+			$return .= ' href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>' . "\n";
 			$return .= '</div>';
 			$return .= '</div>' . "\n";
 			$return .= '</td>' . "\n";
@@ -315,9 +332,9 @@ class Theme extends Layout {
 	/**
 	 * beginSubMenu() - Opening a submenu.
 	 *
-	 * @return    string    Html to start a submenu.
+	 * @return	string	Html to start a submenu.
 	 */
-	function beginSubMenu () {
+	function beginSubMenu() {
 		$return = '
 	<p><strong>';
 		return $return;
@@ -371,13 +388,13 @@ class Theme extends Layout {
 	/**
 	 * multiTableRow() - create a mutlilevel row in a table
 	 *
-	 * @param    string    the row attributes
-	 * @param    array    the array of cell data, each element is an array,
-	 *                      the first item being the text,
-	 *                    the subsequent items are attributes (dont include
-	 *                    the bgcolor for the title here, that will be
-	 *                    handled by $istitle
-	 * @param    boolean is this row part of the title ?
+	 * @param	string	the row attributes
+	 * @param	array	the array of cell data, each element is an array,
+	 *					the first item being the text,
+	 *					the subsequent items are attributes (dont include
+	 *					the bgcolor for the title here, that will be
+	 *					handled by $istitle
+	 * @param	boolean	is this row part of the title ?
 	 *
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {

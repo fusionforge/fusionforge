@@ -30,7 +30,7 @@ require_once $gfcommon.'include/timezones.php';
 session_require_login();
 
 // get global users vars
-$u =& user_get_object(user_getid());
+$u = session_get_user();
 if (!$u || !is_object($u)) {
 	exit_error(_('Could Not Get User'));
 } elseif ($u->isError()) {

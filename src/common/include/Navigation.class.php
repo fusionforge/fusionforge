@@ -220,43 +220,49 @@ class Navigation extends Error {
 		$menu = array();
 		$menu['titles'] = array();
 		$menu['urls'] = array();
+		$menu['tooltips'] = array();
 		$selected = 0;
 
 		// Home
 		$menu['titles'][] = _('Home');
 		$menu['urls'][] = util_make_uri('/');
+		$menu['tooltips'][] = _('Main Page');
 
 		// My Page
 		$menu['titles'][] = _('My&nbsp;Page');
 		$menu['urls'][] = util_make_uri('/my/');
+		$menu['tooltips'][] = _('Your Page, widgets selected by you to follow your items.');
 		if (strstr($request_uri, util_make_uri('/my/'))
 			|| strstr($request_uri, util_make_uri('/account/'))
 			|| strstr($request_uri, util_make_uri('/register/'))
 			|| strstr($request_uri, util_make_uri('/themes/'))
 			)
 		{
-			$selected=count($menu['urls'])-1;
+			$selected = count($menu['urls'])-1;
 		}
 
 		if (forge_get_config('use_trove') || forge_get_config('use_project_tags') || forge_get_config('use_project_full_list')) {
 			$menu['titles'][] = _('Projects');
 			$menu['urls'][] = util_make_uri('/softwaremap/');
+			$menu['tooltips'][] = _('Map of projects, by categories or types.');
 			if (strstr($request_uri, util_make_uri('/softwaremap/'))) {
-				$selected=count($menu['urls'])-1;
+				$selected = count($menu['urls'])-1;
 			}
 		}
 
 		if (forge_get_config('use_snippet')) {
 			$menu['titles'][] = _('Code&nbsp;Snippets');
 			$menu['urls'][] = util_make_uri('/snippet/');
+			$menu['tooltips'][] = _('Tooling library. Small coding tips.');
 			if (strstr($request_uri, util_make_uri('/snippet/'))) {
-				$selected=count($menu['urls'])-1;
+				$selected = count($menu['urls'])-1;
 			}
 		}
 
 		if (forge_get_config('use_people')) {
 			$menu['titles'][] = _('Project&nbsp;Openings');
 			$menu['urls'][] = util_make_uri('/people/');
+			$menu['tooltips'][] = _('Hiring Market Place.');
 			if (strstr($request_uri, util_make_uri('/people/'))) {
 				$selected=count($menu['urls'])-1;
 			}
@@ -267,6 +273,7 @@ class Navigation extends Error {
 		$plugin_urls = array();
 		$hookParams['DIRS'] = &$menu['urls'];
 		$hookParams['TITLES'] = &$menu['titles'];
+		$hookParams['TOOLTIPS'] = &$menu['tooltips'];
 		plugin_hook("outermenu", $hookParams);
 
 		// try to find selected entry
@@ -283,15 +290,17 @@ class Navigation extends Error {
 			$user_is_super = true;
 			$menu['titles'][] = _('Site Admin');
 			$menu['urls'][] = util_make_url('/admin/');
+			$menu['tooltips'][] = _('Administration Submenu to handle global configuration, users & projects.');
 			if (strstr($request_uri, util_make_uri('/admin/'))) {
-				$selected=count($menu['urls'])-1;
+				$selected = count($menu['urls'])-1;
 			}
 		}
 		if (forge_check_global_perm ('forge_stats', 'read')) {
 			$menu['titles'][] = _('Reporting');
 			$menu['urls'][] = util_make_uri('/reporting/');
+			$menu['tooltips'][] = _('Statistics about visits, users & projects in time frame.');
 			if (strstr($request_uri, util_make_uri('/reporting/'))) {
-				$selected=count($menu['urls'])-1;
+				$selected = count($menu['urls'])-1;
 			}
 		}
 
@@ -304,6 +313,7 @@ class Navigation extends Error {
 				} elseif (!$project->isProject()) {
 				} else {
 					$menu['titles'][] = $project->getPublicName();
+					$menu['tooltips'][] = _('Project home page, widgets selected to follow specific items.');
 					if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
 						$menu['urls'][]=util_make_uri('/project/?group_id') .$project->getId();
 					} else {

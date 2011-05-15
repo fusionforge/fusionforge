@@ -1129,8 +1129,8 @@ function util_make_uri($path) {
 	return $uri;
 }
 
-function util_make_link($path, $text, $extra_params=false, $absolute=false) {
-	$ep = '' ;
+function util_make_link($path, $text, $extra_params = false, $absolute = false) {
+	$ep = '';
 	if (is_array($extra_params)) {
 		foreach ($extra_params as $key => $value) {
 			$ep .= "$key=\"$value\" ";

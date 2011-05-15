@@ -33,8 +33,7 @@ define('BOTTOM_TAB_HEIGHT', 22);
 
 class Theme extends Layout {
 
-	function Theme()
-	{
+	function Theme() {
 		// Parent constructor
 		$this->Layout();
 		$this->themeurl = util_make_url('themes/funky/');
@@ -46,13 +45,11 @@ class Theme extends Layout {
 		$this->addStylesheet('/themes/funky/css/theme-pages.css');
 	}
 
-	function quicknewsbutton()
-	{
+	function quicknewsbutton() {
 		return "<div class='quicknews-toggle'><a href=# onclick='jQuery(\".quicknews\").slideToggle()'>news</a></div>";
 	}
 
-	function quicknews()
-	{
+	function quicknews() {
 		$ret = "<div class='quicknews'>";
 		$ret .= "<ul>";
 		$ret .= "<li><h1>news de ouf</h1>hello world</li>";
@@ -64,8 +61,7 @@ class Theme extends Layout {
 		return $ret;
 	}
 
-	function bodyHeader($params)
-	{
+	function bodyHeader($params) {
 		global $user_guide;
 
 		if (!isset($params['h1']) && isset($params['title'])) {
@@ -140,8 +136,7 @@ class Theme extends Layout {
 		echo '</div><!-- id="maindiv" -->' . "\n";
 	}
 
-	function footer($params)
-	{
+	function footer($params) {
 		$this->bodyFooter($params);
 		echo '<div class="footer">' . "\n";
 		echo $this->navigation->getPoweredBy();
@@ -150,14 +145,13 @@ class Theme extends Layout {
 	}
 
 	/**
-	* boxTop() - Top HTML box
-	*
-	* @param   string  Box title
-	* @param   bool    Whether to echo or return the results
-	* @param   string  The box background color
-	*/
-	function boxTop($title, $id = '')
-	{
+	 * boxTop() - Top HTML box
+	 *
+	 * @param	string	Box title
+	 * @param	bool		Whether to echo or return the results
+	 * @param	string	The box background color
+	 */
+	function boxTop($title, $id = '') {
 		$t_result = '';
 		$t_result .= '<div id="' . $this->toSlug($id) . '" class="box-surround">';
 		$t_result .= '<div id="'. $this->toSlug($id) . '-title" class="box-title">';
@@ -168,59 +162,66 @@ class Theme extends Layout {
 	}
 
 	/**
-	* boxMiddle() - Middle HTML box
-	*
-	* @param   string  Box title
-	* @param   string  The box background color
-	*/
-	function boxMiddle($title, $id = '')
-	{
+	 * boxMiddle() - Middle HTML box
+	 *
+	 * @param	string	Box title
+	 * @param	string	The box background color
+	 */
+	function boxMiddle($title, $id = '') {
 		$t_result ='<div id="title-'. $this->toSlug($id).'" class="box-middle">'.$title.'</div>';
 
 		return $t_result;
 	}
 
 	/**
-	* boxContent() - Content HTML box
-	*
-	* @param   string  Box content
-	*/
-	function boxContent($content, $id = '')
-	{
+	 * boxContent() - Content HTML box
+	 *
+	 * @param	string	Box content
+	 */
+	function boxContent($content, $id = '') {
 		$t_result ='<div id="'. $this->toSlug($id) .'-content" class="box-content">'.$content.'</div>';
 		return $t_result;
 	}
 
 	/**
-	* boxBottom() - Bottom HTML box
-	*
-	*/
-	function boxBottom()
-	{
+	 * boxBottom() - Bottom HTML box
+	 *
+	 */
+	function boxBottom() {
 		$t_result='</div><!-- class="box-surround" -->';
 
 		return $t_result;
 	}
 
 	/**
-	* boxGetAltRowStyle() - Get an alternating row style for tables
-	*
-	* @param               int             Row number
-	*/
-	function boxGetAltRowStyle($i)
-	{
+	 * boxGetAltRowStyle() - Get an alternating row style for tables
+	 *
+	 * @param	int	Row number
+	 */
+	function boxGetAltRowStyle($i) 	{
 		if ($i % 2 == 0)
 			return 'class="bgcolor-white"';
 		else
 			return 'class="bgcolor-grey"';
 	}
 
-	function tabGenerator($TABS_DIRS, $TABS_TITLES, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%')
-	{
+	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
 		$count = count($TABS_DIRS);
 
 		if ($count < 1)
 			return;
+
+		$use_tooltips = 1;
+
+		if (session_loggedin()) {
+			$u =& user_get_object(user_getid());
+			if (!$u || !is_object($u)) {
+				exit_error(_('Could Not Get User'));
+			} elseif ($u->isError()) {
+				exit_error($u->getErrorMessage(), 'my');
+			}
+			$use_tooltips = $u->usesTooltips();
+		}
 
 		$return = '<!-- start tabs -->';
 		$return .= '<table class="tabGenerator width-100p100" summary="" ';
@@ -242,6 +243,9 @@ class Theme extends Layout {
 			// middle part
 			$return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;"><a href="'.$TABS_DIRS[$i].'">' . "\n";
 			$return .= '<span';
+
+			if ($use_tooltips)
+				$return .= ' title="'.$TABS_TOOLTIPS[$i].'"';
 
 			if ($selected == $i)
 				$return .= ' class="selected"';
@@ -320,67 +324,59 @@ class Theme extends Layout {
 	}
 
 	/**
-	* multiTableRow() - create a mutlilevel row in a table
-	*
-	* @param    string    the row attributes
-	* @param    array    the array of cell data, each element is an array,
-	*                      the first item being the text,
-	*                    the subsequent items are attributes (dont include
-	*                    the bgcolor for the title here, that will be
-	*                    handled by $istitle
-	* @param    boolean is this row part of the title ?
-	*
-	*/
+	 * multiTableRow() - create a mutlilevel row in a table
+	 *
+	 * @param	string	the row attributes
+	 * @param	array	the array of cell data, each element is an array,
+	 *					the first item being the text,
+	 *					the subsequent items are attributes (dont include
+	 *					the bgcolor for the title here, that will be
+	 *					handled by $istitle
+	 * @param	boolean	is this row part of the title ?
+	 *
+	 */
 	function multiTableRow($row_attr, $cell_data, $istitle)
 	{
 		$return= '<tr class="ff" '.$row_attr;
-
 		if ( $istitle )
 			$return .=' align="center"';
 
 		$return .= '>';
-
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
 			$return .='<td class="ff" ';
-
 			for ( $a=1; $a < count($cell_data[$c]); $a++)
 				$return .= $cell_data[$c][$a].' ';
 
 			$return .= '>';
-
 			if ( $istitle )
 				$return .='<strong>';
 
 			$return .= $cell_data[$c][0];
-
 			if ( $istitle )
 				$return .='</strong>';
 
 			$return .= '</td>';
-
 		}
 		$return .= '</tr>';
-
 		return $return;
 	}
 
 	/**
-	* getThemeIdFromName()
-	*
-	* @param    string  the dirname of the theme
-	* @return    integer the theme id
-	*/
+	 * getThemeIdFromName()
+	 *
+	 * @param	string	the dirname of the theme
+	 * @return	integer	the theme id
+	 */
 	function getThemeIdFromName($dirname)
 	{
 		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1', array($dirname));
-
-		return db_result($res,0,'theme_id');
+		return db_result($res, 0, 'theme_id');
 	}
 
 	/**
-	* headerJS() - creates the JS headers and calls the plugin javascript hook
-	* @todo generalize this
-	*/
+	 * headerJS() - creates the JS headers and calls the plugin javascript hook
+	 * @todo generalize this
+	 */
 	function headerJS()
 	{
 		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
@@ -397,7 +393,7 @@ class Theme extends Layout {
 		
 		// invoke the 'javascript' hook for custom javascript addition
 		$params = array('return' => false);
-		plugin_hook("javascript",$params);
+		plugin_hook("javascript", $params);
 		$javascript = $params['return'];
 		if($javascript) {
 			echo '<script type="text/javascript">';
@@ -409,11 +405,10 @@ class Theme extends Layout {
 		jQuery.noConflict();
 		jQuery(window).load(function(){
 			jQuery(".quicknews").hide();
-					setTimeout("jQuery('.feedback').hide('slow')",5000);
+					setTimeout("jQuery('.feedback').hide('slow')", 5000);
 		});
 		</script>
 		<?php
-
 	}
 }
 

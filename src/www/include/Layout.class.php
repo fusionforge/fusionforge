@@ -625,7 +625,7 @@ class Layout extends Error {
 
 	function outerTabs($params) {
 		$menu = $this->navigation->getSiteMenu();
-		echo $this->tabGenerator($menu['urls'], $menu['titles'], false, $menu['selected'], '');
+		echo $this->tabGenerator($menu['urls'], $menu['titles'], $menu['tooltips'], false, $menu['selected'], '');
 	}
 
 	/**
@@ -689,7 +689,7 @@ class Layout extends Error {
 		echo $this->tabGenerator($menu['urls'], $menu['titles'], true, $menu['selected'], 'white');
 	}
 
-	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='white',$total_width='100%') {
+	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {
 
 		$count=count($TABS_DIRS);
 		$width=intval((100/$count));
@@ -738,7 +738,7 @@ class Layout extends Error {
 				$return .= '
 					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 				//
 				//	Last graphic on right-side
 				//
@@ -760,7 +760,7 @@ class Layout extends Error {
 				$return .= '
 					<td '.$rowspan.'colspan="2" valign="top" width="20" style="background:url('.$this->imgbaseurl . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png)">'.
 					'<img src="'.$this->imgbaseurl . 'clear.png" height="2" width="20" alt="" /></td>'.
-					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link ($TABS_DIRS[$i],$TABS_TITLES[$i],array('class'=>(($issel)?'tabsellink':'tablink')),true).'</td>';
+					'<td '.$rowspan.'style="background:url('.$this->imgbaseurl . $bgimg.')" width="'.$width.'%" align="center">'.util_make_link($TABS_DIRS[$i], $TABS_TITLES[$i], array('class'=>(($issel)?'tabsellink':'tablink')), true).'</td>';
 
 			}
 		}

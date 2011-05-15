@@ -251,7 +251,7 @@ if ( $cat === 'c' ) {
 
 	// store this as a var so it can be printed later as well
 	$html_limit = '';
-	if ($querytotalcount == $TROVE_HARDQUERYLIMIT){
+	if ($querytotalcount == $TROVE_HARDQUERYLIMIT) {
 		$html_limit .= 'More than ';
 		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
 		
