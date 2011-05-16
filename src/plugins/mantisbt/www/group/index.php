@@ -35,12 +35,12 @@ var controller;
 
 jQuery(document).ready(function() {
 	controlerMantisBTMenuControler = new MantisBTMenuControler({
-		tipsyElements:		[
-						{selector: '#roadmapView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#ticketView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#adminView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#statView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					],
+		tipsyElements:	[
+					{selector: '#roadmapView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+					{selector: '#ticketView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+					{selector: '#adminView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+					{selector: '#statView', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
+				],
 	});
 });
 

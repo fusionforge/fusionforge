@@ -216,7 +216,7 @@ if (!isset($errorPage)) {
 		echo 		'</th>';
 		// Projet
 		echo 		'<th width="7%">';
-		echo			'<form name="projectid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		echo			'<form name="projectid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
 // 		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC") {
 // 			echo			'<input type=hidden name="dir" value="DESC"/>';
 // 		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC") {
