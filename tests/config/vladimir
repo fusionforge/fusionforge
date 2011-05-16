@@ -1,0 +1,8 @@
+
+#
+# In this file you can find vars that are useable 
+# both as an include in a Makefile or
+# be sourced in a shell
+# So it should only be stuffs like VAR=value
+#
+VMENGINE=lxc
