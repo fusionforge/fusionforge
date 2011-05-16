@@ -77,7 +77,7 @@ if (!isset($errorPage)) {
 	// recuperation des bugs
 	$listBug = array();
 
-	global $listStatus; // retrieve from filter.php
+	$listStatus = $clientSOAP->__soapCall('mc_enum_status', array("username" => $username, "password" => $password));
 	$pageActuelle = getIntFromRequest('page');
 	if (empty($pageActuelle)) {
 		$pageActuelle = 1;
@@ -86,8 +86,8 @@ if (!isset($errorPage)) {
 	$nombreBugs = count ($idsBugAll);
 	$nombreDePages=ceil($nombreBugs/$bugPerPage);
 	// Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
-	if($pageActuelle>$nombreDePages) {
-		$pageActuelle=$nombreDePages;
+	if($pageActuelle > $nombreDePages) {
+		$pageActuelle = $nombreDePages;
 	}
 	$indexMin = ($pageActuelle - 1) * $bugPerPage;
 	$indexMax = ($pageActuelle * $bugPerPage) -1;
@@ -129,227 +129,235 @@ if (!isset($errorPage)) {
 		echo	'<tr>';
 		// Priority
 		echo		'<th width="2%">';
-		echo			'<form name="filterprority" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="priority" />';
-		echo				'<a href="javascript:document.filterprority.submit();">P';
-		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="filterprority" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="priority" />';
+// 		echo				'<a href="javascript:document.filterprority.submit();">P';
+// 		if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		} else if ($bugfilter['sort'] == "priority" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo 'P';
 		echo 		'</th>';
 		// ID
 		echo		'<th width="3%">';
-		echo			'<form name="filterid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		} else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="id" />';
-		echo				'<a href="javascript:document.filterid.submit();">ID';
-		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="filterid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		} else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="id" />';
+// 		echo				'<a href="javascript:document.filterid.submit();">ID';
+// 		if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "id" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo 'ID';
 		echo 		'</th>';
 		// Catégorie
 		echo		'<th width="7%">';
-		echo			'<form name="filtercat" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="category_id" />';
-		echo				'<a href="javascript:document.filtercat.submit();">'._('Category');
-		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="filtercat" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="category_id" />';
+// 		echo				'<a href="javascript:document.filtercat.submit();">'._('Category');
+// 		if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "category_id" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo _('Category');
 		echo 		'</th>';
 		// Projet
 		echo 		'<th width="7%">';
 		echo			'<form name="projectid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="project_id" />';
-		echo				'<a href="javascript:document.projectid.submit();">'._('Project');
-		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="project_id" />';
+// 		echo				'<a href="javascript:document.projectid.submit();">'._('Project');
+// 		if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "project_id" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo _('Project');
 		echo 		'</th>';
 		// Sévérité
 		echo 		'<th width="7%">';
-		echo			'<form name="severity" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="severity" />';
-		echo				'<a href="javascript:document.severity.submit();">'._('Severity');
-		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="severity" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="severity" />';
+// 		echo				'<a href="javascript:document.severity.submit();">'._('Severity');
+// 		if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "severity" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo _('Severity');
 		echo 		'</th>';
 		// Etat
 		echo 		'<th width="15%">';
-		echo			'<form name="statusid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="status" />';
-		echo				'<a href="javascript:document.statusid.submit();">'._('Status');
-		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="statusid" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="status" />';
+// 		echo				'<a href="javascript:document.statusid.submit();">'._('Status');
+// 		if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "status" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo _('Status');
 		echo 		'</th>';
 		// Mis a jour (date)
 		echo 		'<th width="7%">';
-		echo			'<form name="lastupdate" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="last_updated" />';
-		echo				'<a href="javascript:document.lastupdate.submit();">'._('Last update');
-		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="lastupdate" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="last_updated" />';
+// 		echo				'<a href="javascript:document.lastupdate.submit();">'._('Last update');
+// 		if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "last_updated" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo _('Last update');
 		echo 		'</th>';
 		// résumé
 		echo 		'<th width="29%">';
-		echo			'<form name="summary" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
-		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC") {
-			echo			'<input type=hidden name="dir" value="DESC"/>';
-		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC") {
-			echo			'<input type="hidden" name="dir" value="ASC"/>';
-		}
-		if ( isset($bugfilter['show_status'])) {
-			foreach ($bugfilter['show_status'] as $key => $childStatus) {
-				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
-			}
-		}
-		if ( isset($bugfilter['project_id'])) {
-			foreach ($bugfilter['project_id'] as $key => $childId) {
-				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
-			}
-		}
-		echo				'<input type=hidden name="sort" value="summary" />';
-		echo				'<a href="javascript:document.summary.submit();">'._('Summary');
-		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC" ) {
-			echo				'<img src="'.$picto_haut.'">';
-		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC" ) {
-			echo				'<img src="'.$picto_bas.'">';
-		}
-		echo 				'</a>';
-		echo			'</form>';
+// 		echo			'<form name="summary" method="post" action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'">';
+// 		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC") {
+// 			echo			'<input type=hidden name="dir" value="DESC"/>';
+// 		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC") {
+// 			echo			'<input type="hidden" name="dir" value="ASC"/>';
+// 		}
+// 		if ( isset($bugfilter['show_status'])) {
+// 			foreach ($bugfilter['show_status'] as $key => $childStatus) {
+// 				echo	'<input type="hidden" name="projectStatus[]" value="'.$childStatus.'"/>';
+// 			}
+// 		}
+// 		if ( isset($bugfilter['project_id'])) {
+// 			foreach ($bugfilter['project_id'] as $key => $childId) {
+// 				echo	'<input type="hidden" name="projectChildId[]" value="'.$childId.'"/>';
+// 			}
+// 		}
+// 		echo				'<input type=hidden name="sort" value="summary" />';
+// 		echo				'<a href="javascript:document.summary.submit();">'._('Summary');
+// 		if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "ASC" ) {
+// 			echo				'<img src="'.$picto_haut.'">';
+// 		}else if ($bugfilter['sort'] == "summary" && $bugfilter['dir'] == "DESC" ) {
+// 			echo				'<img src="'.$picto_bas.'">';
+// 		}
+// 		echo 				'</a>';
+// 		echo			'</form>';
+		echo _('Summary');
 		echo 		'</th>';
 /* currently informations are missing in header
 		// version de détection
@@ -434,9 +442,9 @@ if (!isset($errorPage)) {
 			echo				'<img src="'.$picto_bas.'">';
 		}
 		echo 				'</a>';
-*/
 		echo			'</form>';
 		echo 		'</th>';
+*/
 		echo	'</tr>';
 		$cpt = 0;
 		$format = "%07d";
