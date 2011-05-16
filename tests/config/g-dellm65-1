@@ -5,16 +5,23 @@
 # be sourced in a shell
 # So it should only be stuffs like VAR=value
 #
-IPDEBBASE=10.194.10
-IPDEBDNS=10.194.11.20
-IPDEBMASK=255.255.255.0
-IPDEBGW=10.194.10.1
 
-IPCOSBASE=10.194.10
-IPCOSDNS=10.194.11.20
-IPCOSMASK=255.255.255.0
-IPCOSGW=10.194.10.1
+# Static IP example
+debian6=lxc:debian6:10.194.10.105/24:10.194.10.1
+debian6src=lxc:debian6:10.194.10.120/24:10.194.10.1
+centos5=lxc:centos5:10.194.10.110/24:10.194.10.1
+centos5src=lxc:centos5:10.194.10.115/24:10.194.10.1
+
+# Dynamic IP example
+#debian6=lxc:debian6::
+#debian6src=lxc:debian6::
+#centos5=lxc:centos5::
+#centos5src=lxc:centos5::
 
 SSHPUBKEY=~/.ssh/id_rsa.pub
+VMENGINE=lxc
+KEEPVM=true
+REMOTESELENIUM=true
 
-DEBMIRROR=http://127.0.0.1/debian
+DEBMIRROR=http://10.194.10.128/debian
+DEBMIRRORSEC=http://10.194.10.128/debian-security
