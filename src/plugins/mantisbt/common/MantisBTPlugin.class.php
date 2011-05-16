@@ -50,7 +50,7 @@ class MantisBTPlugin extends Plugin {
 			case "usermenu": {
 				if ($G_SESSION->usesPlugin($this->name)) {
 					$param = '?type=user&user_id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personnal MantisBT page'))));
+					echo $HTML->PrintSubMenu(array($this->text), array('/plugins/mantisbt/index.php' . $param), array(array('title' => _('Personal MantisBT page'))));
 				}
 				$returned = true;
 				break;
