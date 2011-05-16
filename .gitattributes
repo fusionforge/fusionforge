@@ -5116,6 +5116,7 @@ tests/lxc/config.centos5 -text
 tests/lxc/config.debian6 -text
 tests/lxc/lxc-centos5 -text
 tests/lxc/lxc-debian6 -text
+tests/lxc/start -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/interfaces.sample -text
@@ -5141,6 +5142,7 @@ tests/scripts/fusionforge-trunk-test-rpm.sh -text svneol=unset#text/x-sh
 tests/scripts/phpunit.sh -text
 tests/scripts/scan_deprecated.pl -text svneol=unset#text/x-perl
 tests/scripts/start_lxc.sh -text
+tests/scripts/start_vm -text
 tests/scripts/start_vm.sh -text svneol=unset#text/x-sh
 tests/scripts/start_vz.sh -text svneol=unset#text/x-sh
 tests/scripts/stop_lxc.sh -text

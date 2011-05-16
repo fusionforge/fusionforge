@@ -1,0 +1,29 @@
+#! /bin/sh -x
+
+lxcdir=`dirname $0`/../lxc
+
+IFS=: ; VARS=`eval echo \\\$$BASEHOST` ; unset IFS ; set $VARS
+VMENGINE=$1
+TEMPLATE=$2
+CIDR=$3
+IPGW=$4
+
+if [ ! -e /usr/lib/lxc/templates/lxc-$TEMPLATE ]
+then 
+	echo "/usr/lib/lxc/templates/lxc-$TEMPLATE not found"
+	echo "you need to install template"
+	echo "run: (cd $lxcdir ; sudo make)"
+else
+	tmpconf=`mktemp`
+	cat $lxcdir/config.$TEMPLATE > $tmpconf
+	if [ ! -z "$CIDR" ] 
+	then
+		echo "lxc.network.ipv4 = $CIDR" >> $tmpconf
+	fi
+	# Next is a bit hacky, the only way I found to pass pubkey to the template
+	# LXC don't allow to pass extra args
+	echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
+	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $LXCTEMPLATE
+	rm -f $tmpconf
+	sudo /usr/bin/lxc-start -n $HOST -d
+fi
