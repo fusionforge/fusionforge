@@ -40,7 +40,7 @@ class Theme extends Layout {
 
 		// Parent constructor
 		$this->Layout();
-		$this->doctype = 'strict';
+		//$this->doctype = 'strict';
 		$this->themeurl = util_make_url('themes/gforge/');
 		$this->imgbaseurl = $this->themeurl . 'images/';
 		$this->imgroot = $this->imgbaseurl;
