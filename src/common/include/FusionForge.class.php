@@ -22,19 +22,37 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+
+if (file_exists($gfcommon.'pkginfo.inc.php')) {
+	require $gfcommon.'pkginfo.inc.php';
+}
+
 class FusionForge extends Error {
 
 	var $software_name ;
+	var $software_type ;
 	var $software_version ;
 
 	/**
 	 *	FusionForge - FusionForge object constructor
 	 */
 	function FusionForge() {
+		global $forge_pkg_name, $forge_pkg_version;
+
 		$this->Error();
 
 		$this->software_name = 'FusionForge' ;
 		$this->software_version = '5.0.90' ;
+
+		if (isset($forge_pkg_name) && isset($forge_pkg_version)) {
+			$this->software_name = $forge_pkg_name;
+			$this->software_version = $forge_pkg_version;
+		}
+
+		$this->software_type = $this->software_name;
+		if (isset($forge_pkg_type)) {
+			$this->software_type = $forge_pkg_type;
+		}
 
 		return true;
 	}

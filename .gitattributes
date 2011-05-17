@@ -607,6 +607,7 @@ src/deb-specific/install-postfix.sh svneol=native#text/x-sh
 src/deb-specific/install-skel.sh svneol=native#text/x-sh
 src/deb-specific/install-ssh.sh svneol=native#text/x-sh
 src/deb-specific/manage-uufiles.sh svneol=native#text/x-sh
+src/deb-specific/pkginfo.inc.php -text
 src/deb-specific/prepare-vhosts-file.pl svneol=native#text/x-perl
 src/deb-specific/ssh_dump_update.pl svneol=native#text/x-perl
 src/deb-specific/stats_cvs.pl svneol=native#text/x-perl

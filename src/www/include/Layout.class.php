@@ -343,7 +343,7 @@ class Layout extends Error {
 		echo "\t\t\t";
 		$ff = new FusionForge();
 		printf('<meta name="Forge-Identification" content="%s:%s" />',
-		    $ff->software_name, $ff->software_version);
+		    $ff->software_type, $ff->software_version);
 		echo "\n";
 	}
 
