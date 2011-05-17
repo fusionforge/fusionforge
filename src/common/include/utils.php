@@ -8,22 +8,20 @@
  * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  *
- * This file is part of FusionForge.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
- * FusionForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published
- * by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * FusionForge is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with FusionForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
- * USA
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 /**
@@ -1431,6 +1429,11 @@ function util_get_compressed_file_extension() {
 	}
 }
 
+/* return $1 if $1 is set, ${2:-false} otherwise */
+function util_ifsetor(&$val, $default = false) {
+	return (isset($val) ? $val : $default);
+}
+
 function util_randbytes($num=6) {
 	$b = '';
 
@@ -1475,6 +1478,12 @@ if ( !function_exists('sys_get_temp_dir')) {
 		if ($temp=getenv('TMPDIR')) return $temp;
 		return '/tmp';
 	}
+}
+
+/* secure a (possibly already HTML encoded) string */
+function util_html_secure($s) {
+	return htmlentities(html_entity_decode($s, ENT_QUOTES, "UTF-8"),
+	    ENT_QUOTES, "UTF-8");
 }
 
 // Local Variables:
