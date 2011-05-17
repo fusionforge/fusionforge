@@ -187,7 +187,7 @@ class ArtifactHtml extends Artifact {
 			}
 			$text = '[#'.$arr['artifact_id'].']';
 			$url = '/tracker/?func=detail&amp;aid='.$arr['artifact_id'].'&amp;group_id='.$arr['group_id'].'&amp;atid='.$arr['group_artifact_id'];
-			$arg = 'title="'.$arr['summary'].'"' ;
+			$arg = 'title="'.util_html_secure($arr['summary']).'"' ;
 			if ($arr['status_id'] == 2) {
 				$arg .= 'class="artifact_closed"';
 			}

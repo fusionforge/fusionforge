@@ -169,15 +169,13 @@ if (session_loggedin()) {
 */
 					?>
 
-<script type="text/javascript">
-<!--
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function show_add_snippet_box() {
 	newWindow = open("","occursDialog","height=500,width=300,scrollbars=yes,resizable=yes");
 	newWindow.location=('/snippet/add_snippet_to_package.php?snippet_package_version_id=<?php
 			echo $snippet_package_version_id; ?>');
 }
-// -->
-</script>
+/* ]]> */</script>
 <body onLoad="show_add_snippet_box()">
 
 <p><span class="important"><?php echo _('IMPORTANT!'); ?></span></p>

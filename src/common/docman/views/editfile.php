@@ -35,12 +35,12 @@ global $nested_docs; // flat docs array
 foreach ($nested_docs[$dirid] as $d) {
 
 ?>
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 	function doItEditData<?php echo $d->getID(); ?>() {
 		document.getElementById('editdata<?php echo $d->getID(); ?>').submit();
 		document.getElementById('submiteditdata<?php echo $d->getID(); ?>').disabled = true;
 	}
-</script>
+/* ]]> */</script>
 <div id="editfile<?php echo $d->getID(); ?>" style="display:none" class="docman_div_include">
 <p>
 <strong>
@@ -57,7 +57,7 @@ foreach ($nested_docs[$dirid] as $d) {
 		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
 ?>
 
-	<form id="editdata<?php echo $d->getID(); ?>" name="editdata<?php echo $d->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&fromview=listfile&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
+	<form id="editdata<?php echo $d->getID(); ?>" name="editdata<?php echo $d->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&amp;action=editfile&amp;fromview=listfile&amp;dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
 
 <table border="0">
 	<tr>
@@ -104,14 +104,14 @@ foreach ($nested_docs[$dirid] as $d) {
 					$params['body'] = $d->getFileData();
 					plugin_hook("text_editor",$params);
 					if (!$GLOBALS['editor_was_set_up']) {
-						echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+						echo '<textarea name="details'.$d->getID().'" rows="15" cols="70">'. $d->getFileData() .'</textarea><br />';
 					}
 					unset($GLOBALS['editor_was_set_up']);
 					echo '<input type="hidden" name="filetype" value="text/html">';
 					break;
 				}
 				default: {
-					echo '<textarea name="details'.$d->getID().'" rows="15" cols="70" wrap="soft">'. $d->getFileData() .'</textarea><br />';
+					echo '<textarea name="details'.$d->getID().'" rows="15" cols="70">'. $d->getFileData() .'</textarea><br />';
 					echo '<input type="hidden" name="filetype" value="text/plain">';
 				}
 			}

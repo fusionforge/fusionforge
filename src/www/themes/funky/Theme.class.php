@@ -397,20 +397,20 @@ class Theme extends Layout {
         echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
 
-        echo '<script type="text/javascript">';
+        echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */';
         plugin_hook ("javascript",false);
-        echo '</script>'."\n";
+        echo '/* ]]> */</script>'."\n";
 
         plugin_hook ("javascript_file",false);
 		echo $this->getJavascripts();
         ?>
-        <script type="text/javascript">
+	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
             jQuery.noConflict();
             jQuery(window).load(function(){
                     jQuery(".quicknews").hide();
 					setTimeout("jQuery('.feedback').hide('slow')",5000);
             });
-        </script>
+	/* ]]> */</script>
         <?php
     
     }

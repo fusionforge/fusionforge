@@ -112,7 +112,7 @@ class Widget_MyArtifacts extends Widget {
 		} else {
 			$html_my_artifacts .= _("You have no artifacts");
 		}
-		$html_my_artifacts .= '<TR><TD COLSPAN="3">'.(($this->_artifact_show == 'N' || count($my_artifacts) > 0)?'&nbsp;':_("None")).'</TD></TR>';
+		$html_my_artifacts .= '<tr><td colspan="3">'.(($this->_artifact_show == 'N' || count($my_artifacts) > 0)?' ':_("None")).'</td></tr>';
 		$html_my_artifacts .= '</table>';
 		return $html_my_artifacts;
 	}
@@ -169,8 +169,8 @@ class Widget_MyArtifacts extends Widget {
 					list($hide_now,$count_diff,$hide_url) = 
 						my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
 					$html_hdr =  '<tr class="boxitem"><td colspan="3">' .
-						$hide_url.'<A HREF="/tracker/?group_id='.$group_id_old.'&atid='.$atid_old.'">'.
-						$group_name." - ".$tracker_name.'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+						$hide_url.'<a href="/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old.'">'.
+						$group_name." - ".$tracker_name.'</a>    ';
 					$count_new = max(0, $count_diff);
 
 					$html_hdr .= my_item_count($count_aids,$count_new).'</td></tr>';
@@ -229,13 +229,13 @@ class Widget_MyArtifacts extends Widget {
 						}
 
 						$html .= '
-							<TR class="'.$class.'">'.
-							'<TD class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</TD>'.
-							'<TD><A HREF="/tracker/?func=detail&group_id='.
-							$group_id.'&aid='.$aid.'&atid='.$atid.
-							'">'. stripslashes($summary).'</A></TD>'.
-							'<TD class="small">';
-						$html .= '&nbsp;'.$AS_flag.'</TD></TR>';
+							<tr class="'.$class.'">'.
+							'<td class="priority'.$trackers_array->getPriority().'">'.$trackers_array->getPriority().'</td>'.
+							'<td><a href="/tracker/?func=detail&amp;group_id='.
+							$group_id.'&amp;aid='.$aid.'&amp;atid='.$atid.
+							'">'. stripslashes($summary).'</a></td>'.
+							'<td class="small">';
+						$html .= ' '.$AS_flag.'</td></tr>';
 
 					}
 				}
@@ -246,8 +246,8 @@ class Widget_MyArtifacts extends Widget {
 		if ($atid_old != 0 && $count_aids != 0) {
 			list($hide_now,$count_diff,$hide_url) = my_hide_url('artifact',$atid_old,$hide_item_id,$count_aids,$hide_artifact);
 			$html_hdr = ($j ? '<tr class="boxitem"><td colspan="3">' : '').
-				$hide_url.'<A HREF="/tracker/?group_id='.$group_id_old.'&atid='.$atid_old.'">'.
-				$group_name." - ".$tracker_name.'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+				$hide_url.'<a href="/tracker/?group_id='.$group_id_old.'&amp;atid='.$atid_old.'">'.
+				$group_name." - ".$tracker_name.'</a>    ';
 			$count_new = max(0, $count_diff);
 
 			$html_hdr .= my_item_count($count_aids,$count_new).'</td></tr>';

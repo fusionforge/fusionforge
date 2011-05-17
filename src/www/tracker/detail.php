@@ -46,7 +46,7 @@ echo notepad_func();
 						$text=_('Monitor');
 					}
 					echo '
-					<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.html_get_tooltip_description('monitor').'"><strong>'.
+					<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.util_html_secure(html_get_tooltip_description('monitor')).'"><strong>'.
 						html_image('ic/'.$img.'','20','20').' '.$text.'</strong></a>';
 					?>
 			</td>

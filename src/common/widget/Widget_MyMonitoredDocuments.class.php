@@ -70,8 +70,8 @@ class Widget_MyMonitoredDocuments extends Widget {
 		list($hide_now,$count_diff,$hide_url) = my_hide_url('document',$group_id,$hide_item_id,$rows,$hide_document);
 
 		$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
-			$hide_url.'<A HREF="/docman/?group_id='.$group_id.'">'.
-			db_result($result,$j,'group_name').'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+			$hide_url.'<a href="/docman/?group_id='.$group_id.'">'.
+			db_result($result,$j,'group_name').'</a>    ';
 
 		$html = '';
 		$count_new = max(0, $count_diff);
@@ -91,12 +91,12 @@ class Widget_MyMonitoredDocuments extends Widget {
 				$docid = db_result($result2,$i,'docid');
 
 				$html .= '
-					<TR class="'. $class .'"><TD WIDTH="99%">'.
-					'&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'">'.
-					stripslashes(db_result($result2,$i,'filename')).'</A></TD>'.
-					'<TD ALIGN="center"><A HREF="/docman/?group_id='.$group_id.'&action=monitorfile&option=remove&view=listfile&dirid='.$doc_group.'&fileid='.$docid.'">'.
-					'<IMG SRC="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" HEIGHT="16" WIDTH="16" '.
-					'BORDER=0 ALT="'._("STOP MONITORING").'"></A></TD></TR>';
+					<tr class="'. $class .'"><td width="99%">'.
+					'   - <a href="/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$doc_group.'">'.
+					stripslashes(db_result($result2,$i,'filename')).'</a></td>'.
+					'<td align="center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
+					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
+					'border="0" alt="'._("STOP MONITORING").'" /></a></td></tr>';
 			}
 		}
 

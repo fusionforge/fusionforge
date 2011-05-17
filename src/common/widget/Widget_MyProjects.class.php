@@ -59,9 +59,9 @@ class Widget_MyProjects extends Widget {
 			}
 			
 			$html_my_projects .= '
-			<TR class="'. $class .'"><TD WIDTH="99%">'.
-				'<A href="/projects/'. $g->getUnixName() .'/">'.
-				$g->getPublicName().'</A>';
+			<tr class="'. $class .'"><td width="99%">'.
+				'<a href="/projects/'. $g->getUnixName() .'/">'.
+				$g->getPublicName().'</a>';
 			
 			$isadmin = false ;
 			$role_names = array () ;
@@ -76,7 +76,7 @@ class Widget_MyProjects extends Widget {
 				}
 			}
 			if ($isadmin) {
-				$html_my_projects .= ' <small><A HREF="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</A></small>';
+				$html_my_projects .= ' <small><a href="/project/admin/?group_id='.$g->getID().'">['._("Admin").']</a></small>';
 			}
 			$html_my_projects .= ' <small>('.htmlspecialchars (implode (', ', $role_names)).')</small>';
 			if (!$ra->hasPermission('project_read', $g->getID())) {
@@ -84,19 +84,19 @@ class Widget_MyProjects extends Widget {
 				$private_shown = true;
 			}
 			if (!$isadmin) {
-				$html_my_projects .= '</TD>'.
-					'<td><A href="rmproject.php?group_id='. $g->getID().
+				$html_my_projects .= '</td>'.
+					'<td><a href="rmproject.php?group_id='. $g->getID().
 					'" onClick="return confirm(\''._("Quit this project?").'\')">'.
-					'<IMG SRC="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD></TR>';
+					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" border="0" /></a></td></tr>';
 			} else {
-				$html_my_projects .= '</td><td>&nbsp;</td></TR>';
+				$html_my_projects .= '</td><td> </td></tr>';
 			}
 		}
 		
 		if (isset($private_shown) && $private_shown) {
 			$html_my_projects .= '
                 <tr class="'.$class .'"><td colspan="2" class="small">'.
-                '(*)&nbsp;<em>' . _("Private project").'</em></td></tr>';
+                '(*) <em>' . _("Private project").'</em></td></tr>';
 		}
 		$html_my_projects .= '</table>';
 	}

@@ -89,10 +89,10 @@ class Widget_MyTasks extends Widget {
                 list($hide_now,$count_diff,$hide_url) = my_hide_url('pm',$group_project_id,$hide_item_id,$rows2,$hide_pm);
         
                 $html_hdr = ($j ? '<tr class="boxitem"><td colspan="3">' : '').
-                    $hide_url.'<A HREF="/pm/task.php?group_id='.$group_id.
-                    '&group_project_id='.$group_project_id.'">'.
+                    $hide_url.'<a href="/pm/task.php?group_id='.$group_id.
+                    '&amp;group_project_id='.$group_project_id.'">'.
                     db_result($result,$j,'group_name').' - '.
-                    db_result($result,$j,'project_name').'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+                    db_result($result,$j,'project_name').'</a>    ';
                 $html = '';
                 $count_new = max(0, $count_diff);
                 for ($i=0; $i<$rows2; $i++) {
@@ -100,12 +100,12 @@ class Widget_MyTasks extends Widget {
                     if (!$hide_now) {
         
                     $html .= '
-                    <TR class=priority"'.db_result($result2,$i,'priority').
-                        '"><TD class="small"><A HREF="/pm/task.php/?func=detailtask&project_task_id='.
-                        db_result($result2, $i, 'project_task_id').'&group_id='.
-                        $group_id.'&group_project_id='.$group_project_id.
-                        '">'.stripslashes(db_result($result2,$i,'summary')).'</A></TD>'.
-                        '<TD class="small">'.(db_result($result2,$i,'percent_complete')).'%</TD></TR>';
+                    <tr class=priority"'.db_result($result2,$i,'priority').
+                        '"><td class="small"><a href="/pm/task.php/?func=detailtask&amp;project_task_id='.
+                        db_result($result2, $i, 'project_task_id').'&amp;group_id='.
+                        $group_id.'&amp;group_project_id='.$group_project_id.
+                        '">'.stripslashes(db_result($result2,$i,'summary')).'</a></td>'.
+                        '<td class="small">'.(db_result($result2,$i,'percent_complete')).'%</td></tr>';
         
                     }
                 }

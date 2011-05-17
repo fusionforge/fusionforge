@@ -52,7 +52,7 @@ class Widget_MySurveys extends Widget {
 		
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
-			$html_my_surveys .= _("<P>There are no surveys in your groups.<P><BR>&nbsp;");
+			$html_my_surveys .= _("<p>There are no surveys in your groups.<p><br /> ");
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';
@@ -81,8 +81,8 @@ class Widget_MySurveys extends Widget {
 				list($hide_now,$count_diff,$hide_url) = my_hide_url('survey',$group_id,$hide_item_id,count($surveys),$hide_survey);
 
 				$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
-					$hide_url.'<A HREF="/survey/?group_id='.$group_id.'">'.
-					$project->getPublicName().'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+					$hide_url.'<a href="/survey/?group_id='.$group_id.'">'.
+					$project->getPublicName().'</a>    ';
 
 				$html = '';
 				$count_new = max(0, $count_diff);
@@ -102,9 +102,9 @@ class Widget_MySurveys extends Widget {
 						$devsurvey_is_active = $survey->isActive();
 						if($devsurvey_is_active == 1 ) {
 							$html .= '
-								<TR class="'. $class .'"><TD WIDTH="99%">'.
-								'&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/survey/survey.php?group_id='.$group_id.'&survey_id='.$group_survey_id.'">'.
-								$survey_title.'</A></TD></TR>';
+								<tr class="'. $class .'"><td width="99%">'.
+								'   - <a href="/survey/survey.php?group_id='.$group_id.'&amp;survey_id='.$group_survey_id.'">'.
+								$survey_title.'</a></td></tr>';
 						}
 					}
 				}

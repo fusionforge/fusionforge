@@ -70,14 +70,14 @@ $ath->header(array ('title'=>_('Submit New')));
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary') ?><?php echo utils_requiredField(); ?>:</strong><br />
-		<input id="tracker-summary" type="text" name="summary" size="80" maxlength="255" title="<?php echo html_get_tooltip_description('summary') ?>" />
+		<input id="tracker-summary" type="text" name="summary" size="80" maxlength="255" title="<?php echo util_html_secure(html_get_tooltip_description('summary')) ?>" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
 		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>:</strong><?php echo notepad_button('document.forms.trackeraddform.details') ?><br /> 
-		<textarea id="tracker-description" name="details" rows="20" cols="79" title="<?php echo html_get_tooltip_description('description') ?>"></textarea>
+		<textarea id="tracker-description" name="details" rows="20" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')) ?>"></textarea>
 		</td>
 	</tr>
 

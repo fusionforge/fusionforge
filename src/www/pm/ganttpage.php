@@ -135,8 +135,7 @@ $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_siz
 		}
 		//echo "XX $_size $gantt_width $gantt_height XX";
 		?>
-		<script type="text/javascript">
-<!--
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		function setSize(width,height) {
 			if (window.outerWidth) {
 				window.outerWidth = width;
@@ -151,8 +150,7 @@ $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_siz
 			}
 		}
 		window.setSize(<?php echo $gantt_width; ?>,<?php echo $gantt_height; ?>);
-//-->
-		</script>
+		/* ]]> */</script>
 		<?php
 
 echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">

@@ -89,7 +89,7 @@ class ProjectGroupFactory extends Error {
 	 *
 	 *	@return	array	The array of ProjectGroups.
 	 */
-	function getProjectGroups() {
+	function &getProjectGroups() {
 		if ($this->projectGroups) {
 			return $this->projectGroups;
 		}

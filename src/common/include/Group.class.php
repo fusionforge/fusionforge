@@ -1815,7 +1815,7 @@ class Group extends Error {
 		//	Delete Mailing List Factory
 		//
 		$mlf = new MailingListFactory($this);
-		$ml_arr =& $mlf->getMailingLists();
+		$ml_arr = $mlf->getMailingLists();
 		foreach ($ml_arr as $i) {
 			if (!is_object($i)) {
 				continue;

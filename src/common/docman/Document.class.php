@@ -789,7 +789,7 @@ class Document extends Error {
 			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
+				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&amp;view=listfile&amp;dirid='.$this->getDocGroupID());
 
 			util_send_message('', $subject, $body, '', $BCC);
 		}

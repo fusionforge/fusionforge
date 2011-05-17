@@ -70,7 +70,7 @@ function docman_recursive_display($docgroup) {
 				$idExposeTreeIndex = $idhtml;
 
 			echo "
-				['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif"></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&view=listfile&dirid=".$dg->getID()."', '', '',";
+				['".'<span class="JSCookTreeFolderClosed"><i><img alt="" src="\' + ctThemeXPBase + \'folder1.gif" /></i></span><span class="JSCookTreeFolderOpen"><i><img alt="" src="\' + ctThemeXPBase + \'folderopen1.gif" /></i></span>'."', '".addslashes($dg->getName())."', '?group_id=".$group_id."&amp;view=listfile&amp;dirid=".$dg->getID()."', '', '',";
 					docman_recursive_display($dg->getID());
 			echo ",
 				],";
@@ -147,7 +147,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 		return;
 	}
 	
-	echo '<script type="text/javascript">';
+	echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */';
 	echo 'var lockInterval = new Array();';
 	echo 'function EditData(iddiv) {';
 	echo '	if ( "none" == document.getElementById(\'editdata\'+iddiv).style.display ) {';
@@ -160,7 +160,7 @@ function docman_display_documents(&$nested_groups, &$document_factory, $is_edito
 	echo '		clearInterval(lockInterval[iddiv]);';
 	echo '	}';
 	echo '}';
-	echo '</script>';
+	echo '/* ]]> */</script>';
 	echo '<ul style="list-style-type: none">';
 	$child_count = count($nested_groups["$parent_group"]);
 	
@@ -238,7 +238,7 @@ function document_editdata(&$document) {
 		echo '<p>'. _('Both fields are used by document search engine.'). '</p>';
 ?>
 
-	<form id="editdata<?php echo $document->getID(); ?>" name="editdata<?php echo $document->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&action=editfile&fromview=admin&dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
+	<form id="editdata<?php echo $document->getID(); ?>" name="editdata<?php echo $document->getID(); ?>" action="?group_id=<?php echo $group_id; ?>&amp;action=editfile&amp;fromview=admin&amp;dirid=<?php echo $dirid; ?>" method="post" enctype="multipart/form-data">
 
 <table>
 	<tr>
@@ -291,14 +291,14 @@ function document_editdata(&$document) {
 					$params['group'] = $group_id;
 					plugin_hook("text_editor",$params);
 					if (!$GLOBALS['editor_was_set_up']) {
-						echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+						echo '<textarea name="details'.$document->getID().'" rows="15" cols="70">'. $document->getFileData()  .'</textarea><br />';
 					}
 					echo '<input type="hidden" name="filetype" value="text/html">';
 					unset($GLOBALS['editor_was_set_up']);
 					break;
 				}
 				default: {
-					echo '<textarea name="details'.$document->getID().'" rows="15" cols="70" wrap="soft">'. $document->getFileData()  .'</textarea><br />';
+					echo '<textarea name="details'.$document->getID().'" rows="15" cols="70">'. $document->getFileData()  .'</textarea><br />';
 					echo '<input type="hidden" name="filetype" value="text/plain">';
 				}
 			}

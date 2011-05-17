@@ -318,8 +318,7 @@ if ($rows < 1) {
 		$tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'assigned_to',
 		'100',true,_('No Change'));
 
-		echo '<script language="JavaScript" type="text/javascript">
-	<!--
+		echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 	function checkAll(val) {
 		al=document.taskList;
 		len = al.elements.length;
@@ -330,9 +329,7 @@ if ($rows < 1) {
 			}
 		}
 	}
-	//-->
-	</script>
-
+	/* ]]> */</script>
 			<table width="100%" border="0">
 			<tr><td colspan="2">
 
@@ -340,8 +337,7 @@ if ($rows < 1) {
 -
    <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
 
-<p>
-<div class="warning">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div></p>
+<div class="warning">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div>
 			</td></tr>
 
 			<tr>

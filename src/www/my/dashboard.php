@@ -103,7 +103,7 @@ if (!session_loggedin()) {
         	                        $af = new ArtifactFactory($ath);
                 	                $af->setup(0,"priority","DESC",0,"",0,1,null);
                         	        // get artifacts from object
-                                	$art_arr =& $af->getArtifacts();
+                                	$art_arr = $af->getArtifacts();
 	                                if (count($art_arr) > 0) {
         	                                echo '<tr><td colspan="' . (array_sum($display_col)+1) . '" align="left" style="color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;"><strong>&nbsp;&middot;&nbsp;'. 
 							util_make_link ('/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID(),

@@ -36,27 +36,27 @@ $menu_links = array();
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Submit new documentation');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=addfile';
+	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=addfile';
 }
 
 if (session_loggedin()) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$menu_text[] = _('Add new documentation directory');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=addsubdocgroup';
+		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=addsubdocgroup';
 	}
 }
 
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {
 		$menu_text[] = _('Search in documents');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
+		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
 	}
 }
 
 if (session_loggedin()) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$menu_text[] = _('Admin');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
+		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
 	}
 }
 

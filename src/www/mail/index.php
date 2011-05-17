@@ -54,7 +54,7 @@ if ($group_id) {
 
 	plugin_hook ("blocks", "mail index");
 
-	$mlArray =& $mlFactory->getMailingLists();
+	$mlArray = $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
 		echo '<p class="error">'.sprintf(_('Unable to get the list %s : %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</p>';

@@ -52,7 +52,7 @@ if (session_loggedin()) {
 					$text=_('Monitor');
 				}
 				echo '
-				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.html_get_tooltip_description('monitor').'"><strong>'.
+				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.util_html_secure(html_get_tooltip_description('monitor')).'"><strong>'.
 					html_image('ic/'.$img.'','20','20').' '.$text.'</strong></a>';
 				?>
 			</td>
@@ -164,7 +164,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	?>
 	<tr>
 		<td><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
-		<input id="tracker-summary" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
+		<input id="tracker-summary" title="<?php echo util_html_secure(_('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.')) ?>" type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary(); 
 			?>" maxlength="255" />
 		</td>
@@ -175,7 +175,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		<div id="edit" style="display:none;">
 		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
 		<br />
-		<textarea id="tracker-description" name="description" rows="30" cols="79" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
+		<textarea id="tracker-description" name="description" rows="30" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')) ?>"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
 		<div id="show" style="display:block;">
 		<?php echo $ah->showDetails(true); ?>
@@ -193,7 +193,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		?>
 		<p>
 		<strong><?php echo _('OR Attach A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
-		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo html_get_tooltip_description('comment') ?>"></textarea></p>
+		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
 		<h2><?php echo _('Followup') ?>:</h2>
 		<?php
 			echo $ah->showMessages(); 

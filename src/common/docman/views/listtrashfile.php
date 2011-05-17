@@ -35,7 +35,7 @@ if (!$d_trash_arr || count($d_trash_arr) < 1) {
 	echo '<div class="feedback">'._('Trash is empty').'</div>';
 } else {
 ?>
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function displayTrashDiv() {
 	if ( 'none' == document.getElementById('listtrash').style.display ) {
 		document.getElementById('listtrash').style.display = 'block';
@@ -43,9 +43,9 @@ function displayTrashDiv() {
 		document.getElementById('listtrash').style.display = 'none';
 	}
 }
-</script>
+/* ]]> */</script>
 <?php
-	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
+	echo '<form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
 	echo '<ul>';
 	echo '<li><input id="submitemptytrash" type="button" value="'. _('Delete permanently all documents with deleted status.') .'" onclick="javascript:doIt(\'emptytrash\')" ></li>';
 	echo '</ul>';

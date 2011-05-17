@@ -83,7 +83,7 @@ class Artifacts extends Error {
 	 *  @param	boolean	Database query offset.
 	 *  @return an array of artifact objects on success / false on failure.
 	 */
-	function &getArtifacts($offset=false) {
+	function getArtifacts($offset=false) {
 		if (!$offset) {
 			$offset = 0;
 		}

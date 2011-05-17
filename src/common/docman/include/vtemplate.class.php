@@ -115,7 +115,7 @@ switch($errno){
 }
 $this->titre .= ": <br>";
 if ($disp){
-//	$web = "Pour plus d'informations, consultez la <a href=\"http://www.virtual-solution.net/vtemplate/docs/debug-mod.php?version=".VTEMPLATE_VERSION."&build=".VTEMPLATE_BUILD."&type=".VTEMPLATE_TYPE."&error=$code\" target=\"_blank\">doc en ligne</a>";
+//	$web = "Pour plus d'informations, consultez la <a href=\"http://www.virtual-solution.net/vtemplate/docs/debug-mod.php?version=".VTEMPLATE_VERSION."&amp;build=".VTEMPLATE_BUILD."&amp;type=".VTEMPLATE_TYPE."&amp;error=$code\" target=\"_blank\">doc en ligne</a>";
 //	echo "<font face=verdana size=2 color=red><u>$this->titre</u><i>$this->msg</i>$web<br><br></font>";
 	echo "<font face=verdana size=2 color=red><u>$this->titre</u><i>$this->msg</i>$infos<br><br></font>";
 }

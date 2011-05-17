@@ -44,9 +44,9 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$editor = getStringFromRequest('editor');
 	$fromview = getStringFromRequest('fromview');
 	if ( 'admin' == $fromview ) {
-		$urlparam = '&view='.$fromview;
+		$urlparam = '&amp;view='.$fromview;
 	} else {
-		$urlparam = '&view=listfile&dirid='.$doc_group;
+		$urlparam = '&amp;view=listfile&amp;dirid='.$doc_group;
 	}
 
 	if (empty($gfcommon)) {

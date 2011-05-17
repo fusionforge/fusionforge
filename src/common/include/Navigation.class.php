@@ -109,9 +109,10 @@ class Navigation extends Error {
                         $feeds = $this->getRSS(false);
                         for ($j = 0; $j < count($feeds['urls']); $j++) {
                                 echo '
-                                <link rel="alternate" title="' . $feeds['titles'][$j] 
-					. '" href="' . $feeds['urls'][$j] 
-					. '" type="application/rss+xml"/>';
+                                <link rel="alternate" title="' .
+				    util_html_secure($feeds['titles'][$j]) .
+				    '" href="' . $feeds['urls'][$j] .
+				    '" type="application/rss+xml"/>';
                         }
                 }
         }

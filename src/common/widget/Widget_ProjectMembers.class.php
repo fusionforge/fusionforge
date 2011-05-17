@@ -42,7 +42,6 @@ class Widget_ProjectMembers extends Widget {
 
 		$iam_member = false ;
 		if (count($admins) > 0) {
-			echo "<p>\n";
 			echo '<span class="develtitle">'._('Project Admins').'</span><br />';
 			foreach ($admins as $u) {
 				echo '<div rel="doap:maintainer">'."\n";
@@ -64,11 +63,9 @@ class Widget_ProjectMembers extends Widget {
 				}
 				$seen[] = $u->getID() ;
 			}
-			echo "</p>\n";
 		}
 		$seen_member = false ;
 		if (count($members) > 0) {
-			echo "<p>\n";
 			foreach ($members as $u) {
 				if (in_array ($u->getID(), $seen)) {
 					continue ;
@@ -95,7 +92,6 @@ class Widget_ProjectMembers extends Widget {
 					$iam_member = true ;
 				}
 			}
-			echo "</p>\n";
 		}
 
 		echo '<p><span rel="sioc:has_usergroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';

@@ -91,8 +91,8 @@ class Widget_MyMonitoredForums extends Widget {
 		list($hide_now,$count_diff,$hide_url) = my_hide_url('forum',$group_id,$hide_item_id,$rows2,$hide_forum);
 
 		$html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
-			$hide_url.'<A HREF="/forum/?group_id='.$group_id.'">'.
-			db_result($result,$j,'group_name').'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+			$hide_url.'<a href="/forum/?group_id='.$group_id.'">'.
+			db_result($result,$j,'group_name').'</a>    ';
 
 		$html = '';
 		$count_new = max(0, $count_diff);
@@ -109,13 +109,13 @@ class Widget_MyMonitoredForums extends Widget {
 				$group_forum_id = db_result($result2,$i,'group_forum_id');
 
 				$html .= '
-					<TR class="'. $class .'"><TD WIDTH="99%">'.
-					'&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/forum/forum.php?forum_id='.$group_forum_id.'">'.
-					stripslashes(db_result($result2,$i,'forum_name')).'</A></TD>'.
-					'<TD ALIGN="center"><A HREF="/my/stop_monitor.php?forum_id='.$group_forum_id.
+					<tr class="'. $class .'"><td width="99%">'.
+					'   - <a href="/forum/forum.php?forum_id='.$group_forum_id.'">'.
+					stripslashes(db_result($result2,$i,'forum_name')).'</a></td>'.
+					'<td align="center"><a href="/my/stop_monitor.php?forum_id='.$group_forum_id.
 					'" onClick="return confirm(\''._("Stop monitoring this Forum?").'\')">'.
 					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
-					'border=0 alt="'._("Stop monitoring").'"></a></td></tr>';
+					'border="0" alt="'._("Stop monitoring").'" /></a></td></tr>';
 			}
 		}
 

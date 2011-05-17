@@ -86,7 +86,7 @@ class AttachManager extends Error {
 	*/
 	
 	function PrintHelperFunctions() {
-		return '<script type="text/javascript">
+		return '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		
 		function confirmDel() {
 			var agree=confirm("Proceed with deletion? ");
@@ -103,7 +103,7 @@ class AttachManager extends Error {
 			newwindow = window.open(url, \'Attach\', \'statusbar=no,menubar=no,toolbar=no,scrollbars=yes,resizable=yes,width=600,height=480\');
 			if (window.focus) {newwindow.focus()}
 		}
-		</script>';
+		/* ]]> */</script>';
 	}
 	
 	 /**

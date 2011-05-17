@@ -394,8 +394,7 @@ else {
 			echo '<table ><tr><td>';
 			
 			?>
-			<script type="text/javascript">
-				<!--
+			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 			//add files dtress.css, dtree.js et du dossier img
 				d = new dTree('d');	
 				d.add(0,-1,'<?php echo _('Project Tree');?>');
@@ -410,7 +409,7 @@ else {
 				document.write(d);
 		
 				
-			</script>
+			/* ]]> */</script>
 			<?php
 			echo '</td></tr></table>';
 		}

@@ -146,8 +146,8 @@ if (forge_get_config('use_shell')) {
 </p>
 
 <?php if (forge_get_config('use_project_tags')) { ?>
-<p>
 <h2><?php echo _('Project tags'); ?></h2>
+<p>
 <?php echo _('Add tags (use comma as separator): ') ?><br />
 <input type="text" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
 </p>
@@ -184,7 +184,7 @@ if (forge_get_config('use_shell')) {
 			echo '<td>'.implode(' ', $links).'</td>' ;
 			echo '</tr>' ;
 		}
-		echo '</table>' ;
+		echo '</tbody></table>' ;
 	}
 } ?>
 

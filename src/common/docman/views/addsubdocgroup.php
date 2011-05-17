@@ -29,15 +29,15 @@ global $group_id; // id of the group
 global $dirid; //id of the doc_group
 
 ?>
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function doItAddSubGroup() {
 	document.getElementById('addsubgroup').submit();
 	document.getElementById('submitaddsubgroup').disabled = true;
 }
-</script>
+/* ]]> */</script>
 <?php
 echo '<div class="docmanDivIncluded" >';
-echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid.'">';
+echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&amp;action=addsubdocgroup&amp;dirid='.$dirid.'">';
 if ($dirid) {
 	echo _('Name of the document subdirectory to create:'). ' ';
 } else {

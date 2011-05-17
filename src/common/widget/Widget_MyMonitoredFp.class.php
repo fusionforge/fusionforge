@@ -88,22 +88,22 @@ class Widget_MyMonitoredFp extends Widget {
                 list($hide_now,$count_diff,$hide_url) = my_hide_url('frs',$group_id,$hide_item_id,$rows2,$hide_frs);
         
                 $html_hdr = ($j ? '<tr class="boxitem"><td colspan="2">' : '').
-                    $hide_url.'<A HREF="/project/?group_id='.$group_id.'">'.
-                    db_result($result,$j,'group_name').'</A>&nbsp;&nbsp;&nbsp;&nbsp;';
+                    $hide_url.'<a href="/project/?group_id='.$group_id.'">'.
+                    db_result($result,$j,'group_name').'</a>    ';
         
                 $html = '';
                 $count_new = max(0, $count_diff);
                 for ($i=0; $i<$rows2; $i++) {
                     if (!$hide_now) {
                         $html .='
-                        <TR class="'. util_get_alt_row_color($i) .'">'.
-                            '<TD WIDTH="99%">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;<A HREF="/file/showfiles.php?group_id='.$group_id.'">'.
-                            db_result($result2,$i,'name').'</A></TD>'.
-                            '<TD><A HREF="/file/filemodule_monitor.php?filemodule_id='.
+                        <tr class="'. util_get_alt_row_color($i) .'">'.
+                            '<td width="99%">    - <a href="/file/showfiles.php?group_id='.$group_id.'">'.
+                            db_result($result2,$i,'name').'</a></td>'.
+                            '<td><a href="/file/filemodule_monitor.php?filemodule_id='.
                             db_result($result2,$i,'filemodule_id').
                             '" onClick="return confirm(\''._("Stop Monitoring this Package?").'\')">'.
-                            '<IMG SRC="'.util_get_image_theme("ic/trash.png").'" HEIGHT="16" WIDTH="16" '.
-                            'BORDER=0" ALT="'._("STOP MONITORING").'"></A></TD></TR>';
+                            '<img src="'.util_get_image_theme("ic/trash.png").'" height="16" width="16" '.
+                            'border="0" alt="'._("STOP MONITORING").'" /></a></td></tr>';
                     }
                 }
                 
