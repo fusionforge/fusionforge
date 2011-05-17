@@ -413,6 +413,20 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/utils/fusionforge-shell-postgresql.spec
 
+# Identify this FusionForge version
+# keep type intact and change forge in derivates,
+# unless there are deep changes (type is used for
+# the Forge-Identification meta header)
+WHICH_TYPE=FusionForge
+WHICH_FORGE=FusionForge
+WHICH_VERSION=%{version}-%{release}
+%{__sed} \
+    -e 's!@PKGNAME@!${WHICH_FORGE}!g' \
+    -e 's!@PKGVERSION@!${WHICH_VERSION}!g' \
+    -e 's!@PLUCKERNAME@!${WHICH_TYPE}!g' \
+    <$RPM_BUILD_ROOT/%{FORGE_DIR}/deb-specific/pkginfo.inc.php \
+    >$RPM_BUILD_ROOT/%{FORGE_DIR}/common/pkginfo.inc.php
+
 %{__rm} -f $RPM_BUILD_ROOT%{FORGE_DIR}/COPYING.php
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/packaging
 %{__rm} -fr $RPM_BUILD_ROOT/%{FORGE_DIR}/deb-specific
