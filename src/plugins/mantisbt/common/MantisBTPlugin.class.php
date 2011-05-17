@@ -64,6 +64,7 @@ class MantisBTPlugin extends Plugin {
 				if ($project->usesPlugin($this->name)) {
 					$params['TITLES'][] = $this->text;
 					$params['DIRS'][] = '/plugins/'.$this->name.'/?type=group&group_id=' . $group_id . '&pluginname=' . $this->name;
+					$params['TOOLTIPS'][] = _('Tickets Management');
 					if (session_loggedin()) {
 						$user = session_get_user();
 						$userperm = $project->getPermission($user);
