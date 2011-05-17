@@ -704,6 +704,7 @@ fi
 %{FORGE_DIR}/www/admin
 %{FORGE_DIR}/www/developer
 %{FORGE_DIR}/www/docman
+%{FORGE_DIR}/www/DTD
 %{FORGE_DIR}/www/export
 %{FORGE_DIR}/www/forum
 %{FORGE_DIR}/www/frs
