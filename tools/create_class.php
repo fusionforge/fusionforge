@@ -1,25 +1,24 @@
 #! /usr/bin/php
 <?php
 /**
- * Class Generator for Gforge
+ * Class Generator for FusionForge
  *
  * Copyright 2005 (c) Francisco Gimeno
  *
- * This file is part of FusionForge.
- *
- * FusionForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
  * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with FusionForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 require ('squal_pre.php');
@@ -35,29 +34,32 @@ function generateHeader($tableName,$author="Gforge Class Generator by Francisco 
 	/* In the future, we should be able to read this from a file */
 	$input = "<?php\n".
 		"/**\n".
-	 	" * Gforge %{CLASS_NAME} Facility\n".
+	 	" * FusionForge %{CLASS_NAME} Facility\n".
 	 	" *\n".
-	 	" * Copyright %{YEAR} (c) %{AUTHOR}\n".
+	 	" * Copyright (c) %{YEAR} %{AUTHOR}\n".
 	 	" *\n".
-		" * This file is part of %{PROJECT}.\n".
+		" * This file is part of FusionForge. FusionForge is free software;\n".
+		" * you can redistribute it and/or modify it under the terms of the\n".
+		" * GNU General Public License as published by the Free Software\n".
+		" * Foundation; either version 2 of the Licence, or (at your option)\n".
+		" * any later version.\n".
 		" *\n".
+		" * FusionForge is distributed in the hope that it will be useful,\n".
+		" * but WITHOUT ANY WARRANTY; without even the implied warranty of\n".
+		" * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n".
+		" * GNU General Public License for more details.\n".
 		" *\n".
-		" * %{PROJECT} is free software: you can redistribute it and/or modify\n".
- 		" * it under the terms of the GNU General Public License as published by\n".
- 		" * the Free Software Foundation; either version 2 of the License, or\n".
- 		" * (at your option) any later version.\n".
- 		" *\n".
- 		" * %{PROJECT} distributed in the hope that it will be useful,\n".
- 		" * but WITHOUT ANY WARRANTY; without even the implied warranty of\n".
- 		" * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n".
- 		" * GNU General Public License for more details.\n".
- 		" *\n".
- 		" * You should have received a copy of the GNU General Public License\n".
- 		" * along with %{PROJECT}; if not, write to the Free Software\n".
- 		" * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US\n".
+		" * You should have received a copy of the GNU General Public License along\n".
+		" * with FusionForge; if not, write to the Free Software Foundation, Inc.,\n".
+		" * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.\n".
  		" */\n".
-		"/*\n\n\n\t%{TITLE}\n\tBy %{AUTHOR}, %{YEAR}\n\n\tRewrite in OO and coding ".
-		"guidelines 12/2002 by Tim Perdue\n\n\n*/\n".
+		"\n".
+		"/**\n".
+		" * %{TITLE}\n".
+		" * By %{AUTHOR}, %{YEAR}\n".
+		" * Rewrite in OO and coding guidelines 12/2002 by Tim Perdue\n".
+		" */\n".
+		"\n".
 		"require_once('common/include/Error.class');\n";
 		"require_once('common/include/Validator.class');\n\n";
 
