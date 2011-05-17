@@ -426,10 +426,11 @@ WHERE users.user_id=$2
  	*
  	* @param		int		The ID of the group from which to remove the user
  	* @param		int		The ID of the user to remove
+	* @param		bool	Only remove user from CVS group (not currently implemented)
  	* @returns true on success/false on error
  	*
  	*/
-	function sysGroupRemoveUser($group_id,$user_id) {
+	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
 		$res = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2',
 					 array ($user_id,
 						$group_id)) ;

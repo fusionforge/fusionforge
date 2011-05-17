@@ -64,7 +64,7 @@ class MailmanListFactory extends Error {
 	 *	@param	object	The Group object to which these mailing lists are associated.
 	 */
 	function MailmanListFactory(& $Group) {
-		$this->_mailingDAO =& new MailmanListDao(CodendiDataAccess::instance());	
+		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());	
 		$this->Error();
 		
 		if (!$Group || !is_object($Group)) {

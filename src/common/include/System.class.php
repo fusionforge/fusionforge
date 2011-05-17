@@ -209,8 +209,8 @@ class System extends Error {
  	*
  	*/
 	function sysGroupUpdateUser($group_id,$user_id,$cvs_only=0) {
-		$this->sysGroupRemoveUser($group_id,$user_id,$cvs_only=0);
-		$this->sysGroupAddUser($group_id,$user_id,$cvs_only=0);
+		$this->sysGroupRemoveUser($group_id,$user_id,$cvs_only);
+		$this->sysGroupAddUser($group_id,$user_id,$cvs_only);
 		return true;
 	}
 }
