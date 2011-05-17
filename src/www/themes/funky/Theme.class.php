@@ -388,7 +388,7 @@ class Theme extends Layout {
      */
     function headerJS()
     {
-		use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+		html_use_jquery();
 
         echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
         echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
