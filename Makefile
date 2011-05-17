@@ -15,7 +15,7 @@ BUILDRESULT=$(CURDIR)/result
 
 DOXYGEN=doxygen
 
-VER=$(shell LANG=C grep '>software_version' src/common/include/FusionForge.class.php | cut -d\' -f2)
+VER=$(shell LC_ALL=C sed -n '/>software_version/s/^.*'\''\([0-9.]*\)'\''.*$$/\1/p' src/common/include/FusionForge.class.php)
 in_svn_repo:= $(wildcard .svn/)
 ifeq ($(strip $(in_svn_repo)),)
 	ID=unknown
