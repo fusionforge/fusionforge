@@ -139,6 +139,41 @@ forge_define_config_item ('sysdebug_akelos', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_akelos', 'core') ;
 // Load extra func to add extras func like debug
 $sysdebug_enable = forge_get_config('sysdebug_enable');
+
+$sysDTDs = array(
+	/*
+	 * we could use xhtml-rdfa-1.dtd but would need to
+	 * mirror the entire XHTML/1.1 shebang then, too
+	 */
+	'strict' => array(
+		'dtdfile' => 'xhtml1-strict.dtd',
+		'doctype' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+	),
+	/* the original XHTML/1.0 Transitional */
+	'transitional-orig' => array(
+		'dtdfile' => 'xhtml1-transitional.dtd',
+		'doctype' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
+	),
+	/* XHTML/1.0 Transitional + RDFa 1.0 */
+	'transitional' => array(
+		'dtdfile' => 'xhtml10t-rdfa10.dtd',
+		'doctype' => '<!DOCTYPE html SYSTEM "http://evolvis.org/DTD/xhtml10t-rdfa10.dtd">'
+	),
+);
+
+$sysXMLNSs = 'xmlns="http://www.w3.org/1999/xhtml"';
+if (!$sysdebug_enable || !forge_get_config('sysdebug_xmlstarlet')) {
+	foreach (array(
+		'dc' => 'http://purl.org/dc/elements/1.1/',
+		'doap' => 'http://usefulinc.com/ns/doap#',
+		'foaf' => 'http://xmlns.com/foaf/0.1/',
+		'planetforge' => 'http://coclico-project.org/ontology/planetforge#',
+		'sioc' => 'http://rdfs.org/sioc/ns#',
+	    ) as $key => $value) {
+		$sysXMLNSs .= ' xmlns:' . $key . '="' . $value . '"';
+	}
+}
+
 if ($sysdebug_enable) {
 	require $gfcommon.'include/extras-debug.php';
 }

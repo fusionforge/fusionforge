@@ -34,7 +34,7 @@ $HTML->header(array('title'=>$title));
 
 echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 
-<div about="" typeof="sioc:UserAccount" xmlns:sioc="http://rdfs.org/sioc/ns#">
+<div about="" typeof="sioc:UserAccount">
 
 <table width="100%" cellpadding="2" cellspacing="2" border="0">
 <tr>
@@ -49,10 +49,10 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 	<td>
 		<strong>
 <?php
-//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
+//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity">';
 //echo '</div>';
 // description as a FusionForge Community member
-//print '<div property ="dc:Identifier" content="'.$user_id.'" xmlns:dc="http://purl.org/dc/elements/1.1/">';
+//print '<div property ="dc:Identifier" content="'.$user_id.'">';
 
 	if (session_loggedin() && user_ismember(1)) {
 		echo util_make_link ('/admin/useredit.php?user_id='.$user_id,$user_id);
@@ -75,7 +75,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 <tr>
 	<td><?php echo _('Real Name:') ?> </td>
 	<td>
-		<div rev="foaf:account" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+		<div rev="foaf:account">
 			<div about="#me" typeof="foaf:Person">
 				<strong><span property="foaf:name"><?php 
 				$user_title = $user->getTitle();
@@ -198,7 +198,7 @@ $roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
 sortRoleList ($roles) ;
 
 // see if there were any groups
-echo '<div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#">'."\n";
+echo '<div>'."\n";
 if (count ($projects) < 1) {
 	?>
 	<p><?php echo _('This developer is not a member of any projects.') ?></p>
@@ -223,7 +223,7 @@ if (count ($projects) < 1) {
 			    && $r->getHomeProject() != NULL
 			    && $r->getHomeProject()->getID() == $p->getID()) {
 				$role_names[] = $r->getName() ;
-				print '<div property="sioc:has_function" content= "'.$r->getName().'" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+				print '<div property="sioc:has_function" content= "'.$r->getName().'">';
 			}
 		}
 		

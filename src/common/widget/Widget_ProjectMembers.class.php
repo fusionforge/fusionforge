@@ -47,12 +47,12 @@ class Widget_ProjectMembers extends Widget {
 				echo '<div rel="doap:maintainer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
-				echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
+				echo '<div typeof="foaf:Person" about="'.
 					$developer_url.'#me' .'" >'."\n";
 				echo '<div rel="foaf:account">'."\n";
 				echo '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
-					'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
+					'">'."\n";
 				echo util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
 				echo "</div>\n"; // /sioc:UserAccount
 				echo "</div>\n"; // /foaf:holdsAccount
@@ -77,12 +77,12 @@ class Widget_ProjectMembers extends Widget {
 				echo '<div rel="doap:developer">'."\n";
 				// A foaf:Person that holds an account on the forge
 				$developer_url = util_make_url_u ($u->getUnixName(),$u->getID());
-				echo '<div typeof="foaf:Person" xmlns:foaf="http://xmlns.com/foaf/0.1/" about="'.
+				echo '<div typeof="foaf:Person" about="'.
 					$developer_url.'#me' .'" >'."\n";
 				echo '<div rel="foaf:account">'."\n";
 				echo '<div typeof="sioc:UserAccount" about="'.
 					$developer_url.
-					'" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
+					'">'."\n";
 				echo util_display_user($u->getUnixName(),$u->getID(),$u->getRealName())."\n";
 				echo "</div>\n"; // /sioc:UserAccount
 				echo "</div>\n"; // /foaf:holdsAccount
@@ -94,7 +94,7 @@ class Widget_ProjectMembers extends Widget {
 			}
 		}
 
-		echo '<p><span rel="sioc:has_usergroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+		echo '<p><span rel="sioc:has_usergroup">';
 		echo '<span about="members/" typeof="sioc:UserGroup">';
 		echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
 		echo util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %1$d Member(s)'),count($members)));

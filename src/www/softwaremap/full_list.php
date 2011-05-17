@@ -122,8 +122,8 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		
 		// Embed RDFa description for /projects/PROJ_NAME 
 		$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
-		print '<div typeof="doap:Project sioc:Space" about="'.$proj_uri.'" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
-		print '<span rel="planetforge:hosted_by" resource="'. util_make_url ('/') .'" xmlns:planetforge="http://coclico-project.org/ontology/planetforge#"></span>'."\n";
+		print '<div typeof="doap:Project sioc:Space" about="'.$proj_uri.'">'."\n";
+		print '<span rel="planetforge:hosted_by" resource="'. util_make_url ('/') .'"></span>'."\n";
 		
 		print '<table border="0" cellpadding="0" width="100%">';
 		print '<tr valign="top"><td colspan="2">';

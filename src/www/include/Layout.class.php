@@ -260,14 +260,15 @@ class Layout extends Error {
 	 *
 	 */
 	function headerHTMLDeclaration() {
+		global $sysDTDs, $sysXMLNSs;
+
 		print '<?xml version="1.0" encoding="utf-8"?>'."\n";
-		if (isset($this->doctype) && $this->doctype=='strict') {
-			echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'."\n";
-		} else {
-			echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n";
-		} 
-		echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'
-			. _('en') . '" lang="' . _('en') . '">'."\n";
+		if (!util_ifsetor($this->doctype) || !util_ifsetor($sysDTDs[$this->doctype])) {
+			$this->doctype = 'transitional';
+		}
+		echo $sysDTDs[$this->doctype]['doctype'] . "\n";
+		echo '<html xml:lang="' . _('en') . '" lang="' . _('en') .
+		    '" ' . $sysXMLNSs . ">\n";
 	}
 
 	/**

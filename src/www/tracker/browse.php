@@ -308,7 +308,7 @@ $proj_url = util_make_url_g($group->getUnixName(),$group_id);
 // inside /tracker/cm/. There each tracker has a URL in the form .../project/PROJ_NAME/atid/ATID
 $tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $proj_name .'/atid/'. $ath->getID());
 print '<div about="'. $tracker_stdzd_uri
-	.'" typeof="sioc:Container" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:doap="http://usefulinc.com/ns/doap#">'."\n";
+	.'" typeof="sioc:Container">'."\n";
 print '<span rel="http://www.w3.org/2002/07/owl#sameAs" resource="" />'."\n";
 print '<span rev="doap:bug-database sioc:space_of" resource="'. $proj_url .'" />'."\n";
 print "</div>\n"; // end of about
