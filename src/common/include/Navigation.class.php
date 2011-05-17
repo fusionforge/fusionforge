@@ -51,7 +51,8 @@ class Navigation extends Error {
 	 *  $params contains a value for the key 'title', this title
 	 *  is appended to the title generated here. If $asHTML is
 	 *  set to false, it will return only the title in plain
-	 *  text. */
+	 *  text.
+	 */
 	function getTitle($params, $asHTML = true) {
 		if (!$asHTML) {
 			// get the title
@@ -87,7 +88,8 @@ class Navigation extends Error {
 	 *  into the <head>. If $asHTML is false, it will return an
 	 *  array with the following structure: $result['titles']:
 	 *  list of titles of the feeds; $result['urls'] list of urls
-	 *  of the feeds. */
+	 *  of the feeds.
+	 */
 	function getRSS($asHTML = true) {
 		if (!$asHTML) {
 			$res = array();
@@ -119,9 +121,11 @@ class Navigation extends Error {
 		}
 	}
 
-	/** Get the searchBox HTML code. */
+	/**
+	 * Get the searchBox HTML code.
+	 */
 	function getSearchBox() {
-		global $words,$forum_id,$group_id,$group_project_id,$atid,$exact,$type_of_search;
+		global $words, $forum_id, $group_id, $group_project_id, $atid, $exact, $type_of_search;
 
 		$res = "";
 		if (get_magic_quotes_gpc()) {
@@ -178,10 +182,9 @@ class Navigation extends Error {
 		return $res;
 	}
 
-	/** Get an array of the user links (Login/Logout/My
-	 Account/Register) with the following structure:
-	 $result['titles']: list of the titles. $result['urls']: list
-	 of the urls.
+	/**
+	 * Get an array of the user links (Login/Logout/My Account/Register) with the following structure:
+	 *	$result['titles']: list of the titles. $result['urls']: list of the urls.
 	 */
 	function getUserLinks() {
 		$res = array();
@@ -209,10 +212,12 @@ class Navigation extends Error {
 		return $res;
 	}
 
-	/** Get an array of the menu of the site with the following
-	 *  structure: $result['titles']: list of titles of the
-	 *  links. $result['urls']: list of urls. $result['selected']:
-	 *  number of the selected menu entry.
+	/**
+	 * Get an array of the menu of the site with the following structure:
+	 *	$result['titles']: list of titles of the links.
+	 *	$result['urls']: list of urls.
+	 *	$result['tooltips']: list of tooltips (html title).
+	 *	$result['selected']: number of the selected menu entry.
 	 */
 	function getSiteMenu() {
 		$request_uri = getStringFromServer('REQUEST_URI');
@@ -329,17 +334,16 @@ class Navigation extends Error {
 		return $menu;
 	}
 
-	/** Get a reference to an array of the projects menu for the
-	 * project with the id $group_id with the following
-	 * structure: $result['starturl']: URL of the
-	 * projects starting page; $result['name']: public name of
-	 * the project; $result['titles']: list of titles of the menu
-	 * entries; $result['urls']: list of urls of the menu
-	 * entries; $result['adminurls']: list of urls to the admin
-	 * pages of the menu entries. If the user has no admin
-	 * permissions, the correpsonding adminurl is
-	 * false. $result['selected']: number of the menu entry that
-	 * is currently selected.
+	/**
+	 * Get a reference to an array of the projects menu for the project with the id $group_id with the following structure:
+	 *	$result['starturl']: URL of the projects starting page;
+	 *	$result['name']: public name of the project;
+	 *	$result['titles']: list of titles of the menu entries;
+	 *	$result['tooltips']: list of tooltips (html title) of the menu entries;
+	 *	$result['urls']: list of urls of the menu entries;
+	 *	$result['adminurls']: list of urls to the admin pages of the menu entries.
+	 *	If the user has no admin permissions, the correpsonding adminurl is false.
+	 *	$result['selected']: number of the menu entry that is currently selected.
 	 */
 	function getProjectMenu($group_id, $toptab = "") {
 		// rebuild menu if it has never been built before, or
@@ -364,13 +368,15 @@ class Navigation extends Error {
 
 			$menu =& $this->project_menu_data[$group_id];
 			$menu['titles'] = array();
-                        $menu['urls'] = array();
-                        $menu['adminurls'] = array();
+			$menu['tooltips'] = array();
+			$menu['urls'] = array();
+			$menu['adminurls'] = array();
 
 			$menu['name'] = $group->getPublicName();
 
 			// Summary
 			$menu['titles'][] = _('Summary');
+			$menu['tooltips'][] = _('Project Homepage. Widgets oriented');
 			if (isset($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
 				$url = util_make_uri('/project/?group_id=' . $group_id);
 			} else {
@@ -388,6 +394,7 @@ class Navigation extends Error {
 			// Project Admin
 			if (forge_check_perm ('project_admin', $group_id)) {
 				$menu['titles'][] = _('Admin');
+				$menu['tooltips'][] = _('Project Administration.');
 				$menu['urls'][] = util_make_uri('/project/admin/?group_id=' . $group_id);
 				$menu['adminurls'][] = false;
 				if ($toptab == "admin") {
@@ -403,6 +410,7 @@ class Navigation extends Error {
 
 			// Project Activity tab
 			$menu['titles'][] = _('Activity');
+			$menu['tooltips'][] = _('Last activities per category.');
 			$menu['urls'][] = util_make_uri('/activity/?group_id=' . $group_id);
 			$menu['adminurls'][] = false;
 			if ($toptab == "activity") {
@@ -412,6 +420,7 @@ class Navigation extends Error {
 			// Forums
 			if ($group->usesForum()) {
 				$menu['titles'][] = _('Forums');
+				$menu['tooltips'][] = _('Tech & help forums.');
 				$menu['urls'][] = util_make_uri('/forum/?group_id=' . $group_id);
 				if (forge_check_perm ('forum_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_url('/forum/admin/?group_id='.$group_id);
@@ -426,6 +435,7 @@ class Navigation extends Error {
 			// Artifact Tracking
 			if ($group->usesTracker()) {
 				$menu['titles'][] = _('Tracker');
+				$menu['tooltips'][] = _('Issues, tickets, bugs.');
 				$menu['urls'][] = util_make_uri('/tracker/?group_id=' . $group_id);
 				if (forge_check_perm ('tracker_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_url('/tracker/admin/?group_id='.$group_id);
@@ -443,6 +453,7 @@ class Navigation extends Error {
 			// Mailing Lists
 			if ($group->usesMail()) {
 				$menu['titles'][] = _('Lists');
+				$menu['tooltips'][] = _('Mailing Lists.');
 				$menu['urls'][] = util_make_uri('/mail/?group_id=' . $group_id);
 				if (forge_check_perm ('project_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_url('/mail/admin/?group_id='.$group_id);
@@ -457,6 +468,7 @@ class Navigation extends Error {
 			// Project/Task Manager
 			if ($group->usesPm()) {
 				$menu['titles'][] = _('Tasks');
+				$menu['tooltips'][] = _('Project Management.');
 				$menu['urls'][] = util_make_uri('/pm/?group_id=' . $group_id);
 				if (forge_check_perm ('pm_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_uri('/pm/admin/?group_id='.$group_id);
@@ -471,6 +483,7 @@ class Navigation extends Error {
 			// Doc Manager
 			if ($group->usesDocman()) {
 				$menu['titles'][] = _('Docs');
+				$menu['tooltips'][] = _('Document Management.');
 				$menu['urls'][] = util_make_uri('/docman/?group_id=' . $group_id);
 				if (forge_check_perm ('docman', $group_id, 'approve')) {
 					$menu['adminurls'][] = util_make_uri('/docman/?group_id='.$group_id.'&amp;view=admin');
@@ -485,6 +498,7 @@ class Navigation extends Error {
 			// Surveys
 			if ($group->usesSurvey()) {
 				$menu['titles'][] = _('Surveys');
+				$menu['tooltips'][] = _('Online surveys, project needs your point of view.');
 				$menu['urls'][] = util_make_uri('/survey/?group_id=' . $group_id);
 				if (forge_check_perm ('project_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_uri('/survey/admin/?group_id='.$group_id);
@@ -499,6 +513,7 @@ class Navigation extends Error {
 			// News
 			if ($group->usesNews()) {
 				$menu['titles'][] = _('News');
+				$menu['tooltips'][] = _('Flash head line from the project.');
 				$menu['urls'][] = util_make_uri('/news/?group_id=' . $group_id);
 				if (forge_check_perm ('project_admin', $group_id)) {
 					$menu['adminurls'][] = util_make_uri('/news/admin/?group_id='.$group_id);
@@ -513,6 +528,7 @@ class Navigation extends Error {
 			// SCM systems
 			if ($group->usesSCM()) {
 				$menu['titles'][] = _('SCM');
+				$menu['tooltips'][] = _('Source Content Management, peer-review and source discovery.');
 				$menu['urls'][] = util_make_uri('/scm/?group_id=' . $group_id);
 				// eval cvs_flags?
 				if (forge_check_perm ('project_admin', $group_id)) {
@@ -530,6 +546,7 @@ class Navigation extends Error {
 			$hookParams['group_id'] = $group_id ;
 			$hookParams['DIRS'] =& $menu['urls'];
 			$hookParams['TITLES'] =& $menu['titles'];
+			$hookParams['TOOLTIPS'] =& $menu['tooltips'];
 			$hookParams['toptab'] =& $toptab;
 			$hookParams['selected'] =& $selected;
 			plugin_hook ("groupmenu_scm", $hookParams);
@@ -542,6 +559,7 @@ class Navigation extends Error {
 			// Downloads
 			if ($group->usesFRS()) {
 				$menu['titles'][] = _('Files');
+				$menu['tooltips'][] = _('All published files organized per version.');
 				$menu['urls'][] = util_make_uri('/frs/?group_id=' . $group_id);
 				if (forge_check_perm ('frs', $group_id, 'write')) {
 					$menu['adminurls'][] = util_make_uri('/frs/admin/?group_id='.$group_id);
@@ -559,6 +577,7 @@ class Navigation extends Error {
 			$hookParams['DIRS'] =& $menu['urls'];
 			$hookParams['ADMIN'] =& $menu['adminurls'];
 			$hookParams['TITLES'] =& $menu['titles'];
+			$hookParams['TOOLTIPS'] =& $menu['tooltips'];
 			$hookParams['toptab'] =& $toptab;
 			$hookParams['selected'] =& $selected;
 			plugin_hook("groupmenu", $hookParams);
