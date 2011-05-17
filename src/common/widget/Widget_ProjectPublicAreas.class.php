@@ -69,7 +69,7 @@ class Widget_ProjectPublicAreas extends Widget {
 					// with OSLC-CM server API
 					$group_artifact_id = db_result($result, $j, 'group_artifact_id');
 					$tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $project->getUnixName() .'/atid/'. $group_artifact_id);
-					echo '<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container" xmlns:sioc="http://rdfs.org/sioc/ns#">'."\n";
+					echo '<li about="'. $tracker_stdzd_uri . '" typeof="sioc:Container">'."\n";
 					print '<span rel="http://www.w3.org/2002/07/owl#sameAs">'."\n";
 					echo util_make_link ('/tracker/?atid='. $group_artifact_id . '&amp;group_id='.$group_id.'&amp;func=browse',db_result($result, $j, 'name')) . ' ' ;
 					echo "</span>\n"; // /owl:sameAs
@@ -87,7 +87,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesForum()) {
 			echo '<div class="public-area-box">';
-			//	print '<hr size="1" /><a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
+			//	print '<hr size="1" /><a rel="sioc:container_of" href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
 			$link_content = $HTML->getForumPic('') . '&nbsp;' . _('Public Forums');
 			echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
 			print ' (';

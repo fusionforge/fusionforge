@@ -41,7 +41,7 @@ echo '<p>' . _('If you would like to contribute to this project by becoming a de
 $project =& group_get_object($group_id);
 $project_stdzd_uri = util_make_url_g ($project->getUnixName(), $group_id);
 $usergroup_stdzd_uri = $project_stdzd_uri.'members/';
-print '<div about="'. $usergroup_stdzd_uri .'" typeof="sioc:UserGroup" xmlns:sioc="http://rdfs.org/sioc/ns#">';
+print '<div about="'. $usergroup_stdzd_uri .'" typeof="sioc:UserGroup">';
 print '<span rel="http://www.w3.org/2002/07/owl#sameAs" resource=""></span>';
 print '<span rev="sioc:has_usergroup" resource="'. $project_stdzd_uri . '"></span>';
 print '</div>';
@@ -78,11 +78,11 @@ foreach ($members as $user) {
 	}
 	
 	/*
-        print '<span property ="dc:Identifier" content="'.$user->getID().'" xmlns:dc="http://purl.org/dc/elements/1.1/">';
+        print '<span property ="dc:Identifier" content="'.$user->getID().'">';
         echo '</span>';
         print '<span property="foaf:accountName" content="'.$user->getUnixName().'">';
         echo '</span>';
-        print '<span property="fusionforge:has_job" content="'.$role_string.'" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
+        print '<span property="fusionforge:has_job" content="'.$role_string.'">';
         echo '</span>';*/
 
 	if (USE_PFO_RBAC) {

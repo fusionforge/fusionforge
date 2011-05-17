@@ -65,14 +65,14 @@ class FusionForgeTemplate extends QuickTemplate {
 	 * @access private
 	 */
 	function execute() {
-		global $wgRequest;
+		global $wgRequest, $sysDTDs;
 		$this->skin = $skin = $this->data['skin'];
 		$action = $wgRequest->getText( 'action' );
 
 		// Suppress warnings to prevent notices about missing indexes in $this->data
 		wfSuppressWarnings();
 
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		echo $sysDTDs['transitional']['doctype']; ?>
 <html xmlns="<?php $this->text('xhtmldefaultnamespace') ?>" <?php
 	foreach($this->data['xhtmlnamespaces'] as $tag => $ns) {
 		?>xmlns:<?php echo "{$tag}=\"{$ns}\" ";

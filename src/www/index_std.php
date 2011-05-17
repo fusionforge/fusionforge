@@ -92,7 +92,7 @@ echo $HTML->boxBottom();
 		printf (_('This site is running %1$s version %2$s'),
 			$forge->software_name,
 			$forge->software_version) ;
-			printf('<div about="" typeof="planetforge:ForgeService" xmlns:planetforge="http://coclico-project.org/ontology/planetforge#">'."\n"
+			printf('<div about="" typeof="planetforge:ForgeService">'."\n"
 				.'<div rel="planetforge:operated_by">'."\n"
 				.'<div about="#forge" typeof="planetforge:ForgeSoftware">'."\n"
 				.'<span property="planetforge:name" content="%1$s"></span>'."\n"
