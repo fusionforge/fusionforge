@@ -30,7 +30,7 @@
 Summary: FusionForge Collaborative Development Environment
 Name: fusionforge
 Version: @@VERSION@@
-Release: 1%{?dist}
+Release: 2%{?dist}
 BuildArch: noarch
 License: GPL
 Group: Development/Tools
@@ -930,6 +930,9 @@ fi
 %{FORGE_DIR}/www/plugins/mantisbt
 
 %changelog
+* Tue May 17 2011 - Thorsten Glaser <t.glaser@tarent.de> - 5.0.50-2
+- Adapted for versioning of the forge via the packaging
+
 * Fri May 28 2010 - Alain Peyrat <aljeux@free.fr> - 5.0.50-1
 - Ported to 5.1 tree.
 - Reworked logic with rights on configuration files.
