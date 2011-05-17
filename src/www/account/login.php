@@ -33,7 +33,7 @@ require_once $gfcommon.'include/pre.php';
 
 $return_to = getStringFromRequest('return_to');
 $login = getStringFromRequest('login');
-$form_loginname = getStringFromRequest('form_loginname');
+$form_loginname = trim(getStringFromRequest('form_loginname'));
 $form_pw = getStringFromRequest('form_pw');
 $feedback = htmlspecialchars(getStringFromRequest('feedback'));
 $warning_msg = htmlspecialchars(getStringFromRequest('warning_msg'));

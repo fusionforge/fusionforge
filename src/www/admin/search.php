@@ -32,8 +32,8 @@ require_once('../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 
-$search = getStringFromRequest('search');
-$usersearch = getStringFromRequest('usersearch');
+$search = trim(getStringFromRequest('search'));
+$usersearch = trim(getStringFromRequest('usersearch'));
 
 if (!$search) {
 	exit_error(_('Refusing to display whole DB. Please use a CLI query if you wish to do this.'),'admin');
