@@ -1368,6 +1368,11 @@ function util_get_maxuploadfilesize() {
 	return $postfile;
 }
 
+/* return $1 if $1 is set, ${2:-false} otherwise */
+function util_ifsetor(&$val, $default = false) {
+	return (isset($val) ? $val : $default);
+}
+
 function util_randbytes($num=6) {
 	$f = fopen("/dev/urandom", "rb");
 	$b = fread($f, $num);
@@ -1396,6 +1401,12 @@ if ( !function_exists('sys_get_temp_dir')) {
 		if ($temp=getenv('TMPDIR')) return $temp;
 		return '/tmp';
 	}
+}
+
+/* secure a (possibly already HTML encoded) string */
+function util_html_secure($s) {
+	return htmlentities(html_entity_decode($s, ENT_QUOTES, "UTF-8"),
+	    ENT_QUOTES, "UTF-8");
 }
 
 // Local Variables:
