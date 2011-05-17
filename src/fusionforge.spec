@@ -421,9 +421,9 @@ WHICH_TYPE=FusionForge
 WHICH_FORGE=FusionForge
 WHICH_VERSION=%{version}-%{release}
 %{__sed} \
-    -e 's!@PKGNAME@!${WHICH_FORGE}!g' \
-    -e 's!@PKGVERSION@!${WHICH_VERSION}!g' \
-    -e 's!@PLUCKERNAME@!${WHICH_TYPE}!g' \
+    -e "s!@PKGNAME@!${WHICH_FORGE}!g" \
+    -e "s!@PKGVERSION@!${WHICH_VERSION}!g" \
+    -e "s!@PLUCKERNAME@!${WHICH_TYPE}!g" \
     <$RPM_BUILD_ROOT/%{FORGE_DIR}/deb-specific/pkginfo.inc.php \
     >$RPM_BUILD_ROOT/%{FORGE_DIR}/common/pkginfo.inc.php
 
