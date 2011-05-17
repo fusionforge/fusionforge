@@ -357,8 +357,12 @@ function html_get_tooltip_description($element_name) {
 	}
 }
 
+function html_use_jquery() {
+    use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+}
+
 function html_use_tooltips() {
-	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+	html_use_jquery();
 	use_javascript('/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js');
 	use_javascript('/js/tooltips.js');
 	use_stylesheet('/scripts/jquery-tipsy/src/stylesheets/tipsy.css');
