@@ -1,25 +1,25 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
+Date: Tue, 15 Mar 2011 18:44:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: MerOmMekanismerna 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Hj%C3%A4lp%2FMerOmMekanismerna 7999 2011-03-15 17:45:29Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=MerOmMekanismerna;
+  pagename=Hj%C3%A4lp%2FMerOmMekanismerna;
   flags="";
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-PhpWiki är skriven i skriptspråket PHP, tillgängligt på
+[[Hjälp:PhpWiki|PhpWiki]] är skriven i skriptspråket PHP, tillgängligt på
 http://www.php.net/. PHP liknar C och Perl till syntaxen och fungerar
-som ASP, EmbPerl eller JSP.
+som ASP, ~EmbPerl eller JSP.
 
-PhpWiki består av dussin filer med en blandning av PHP och
-HTML. Webbsidorna som en PHP-baserad WikiWikiWeb består av finns i en
+~PhpWiki består av dussin filer med en blandning av PHP och
+HTML. Webbsidorna som en PHP-baserad [[Hjälp:WikiWikiWeb|WikiWikiWeb]] består av finns i en
 DBM-fil med backupkopior av tidigare versioner i en andra DBM-fil.
 
 Varje gång en användare vill titta på en sida tas den från DBM-filen
 och rendreras. Användaren anropar bara filen index.php, som sedan
 bestämmer vilka andra php-filer som ska inkluderas.
 
-Länkar till andra sidor i wikin länkas automatiskt: PhpWiki. Detta är
+Länkar till andra sidor i wikin länkas automatiskt: ~PhpWiki. Detta är
 kanske den bästa aspekten med en wiki, möjligheten att lägga till
 sidor endast genom att länka till dem. Den näst bästa saken är hur
 lätt det är att skapa externa länkar:
@@ -32,5 +32,5 @@ lätt det är att skapa externa länkar:
 Kombinerat med en namnrymd och ett enkelt uppmärkningsspråk gör att
 Wiki visar mycket av det som är karaktäristiskt för WabiSabi.
 
-PhpWiki är licensierat under Gnu General Public license som du kan
+~PhpWiki är licensierat under Gnu General Public license som du kan
 läsa här: http://www.gnu.org/copyleft/gpl.txt
