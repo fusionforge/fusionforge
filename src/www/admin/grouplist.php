@@ -114,7 +114,7 @@ if (USE_PFO_RBAC) {
 	$private_rows = array();
 	$ra = RoleAnonymous::getInstance() ;
 	while ($grp = db_fetch_array($res)) {
-		if ($ra->hasPermission('project_read', $row['group_id'])) {
+		if ($ra->hasPermission('project_read', $grp['group_id'])) {
 			$grp['is_public'] = 1;
 			$public_rows[] = $grp;
 		} else {
