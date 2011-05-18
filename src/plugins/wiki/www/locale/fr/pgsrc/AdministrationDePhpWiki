@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Fri,  4 Feb 2011 16:36:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AdministrationDePhpWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: AdministrationDePhpWiki 7927 2011-02-04 15:37:59Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=AdministrationDePhpWiki;
   flags=PAGE_LOCKED;
@@ -13,7 +13,7 @@ d'administrateur. Elles ne fonctionneront pas à moins que vous ayez défini un
 nom d'administrateur et un mot de passe dans le fichier de configuration de 
 PhpWiki_
 
-<<CreateToc jshide||=1 with_toclink||=1 >>
+<<CreateToc jshide||=1 with_toclink||=1>>
 
 ----
 == Explorateur de pages
@@ -24,14 +24,8 @@ D'abord choississez une ou plusieurs pages et ensuite définissez une action :
 
 ou appelez directement les actions ~WikiAdmin disponibles :
 
-[/Supprimer] |
-  [/Renommer] |
-    [/Remplacer] |
-      [/DéfinirAcl] |
-        [/Chown] |
-          [/Droits]
+| [[/Supprimer]] | [[/Renommer]] | [[/Remplacer]] | [[/DéfinirAcl]] | [[/Chown]] | [[/Droits]]
 
-----
 == Gestionnaire d'utilisateur
 
 PhpWiki:EmailVerification est habituellement non-strict laissant ainsi des trous possibles qui peuvent être administrés ci-dessous.
@@ -41,14 +35,14 @@ Ce bouton affichera la liste de tous les utilisateurs qui ont une adresse reconn
   <<WikiAdminUtils
            action=email-verification
            label="Vérification de l'email"
-   >>
+  >>
 
 Pour prévenir des robots occupant toutes les ressources en un court temps, bloquant depuis certaines adresses IP ou ayant un mauvais comportement, les agents utilisateurs peuvent être définis ci-dessous. Voir PhpWiki:HowToBlockRobots et MeatBall:SurgeProtector. _Note : Pas encore activé._
 
   <<WikiAdminUtils
            action=access-restrictions
            label="Restrictions d'accès"
-   >>
+  >>
 
 ----------
 == Nettoyage
@@ -65,7 +59,7 @@ dans un état virginal en chargeant sa version par défaut depuis pgsrc:
 
 Ces liens mènent à des fichiers compressés au format ZIP, générés à la volée et contenant toutes les pages de votre Wiki. Le fichier zip sera téléchargé sur votre ordinateur.
 
-Cette __[Sauvegarde ZIP | phpwiki:?action=zip]__ ne contient que la dernière version de chaque page, tandis que cet __[Archivage ZIP | phpwiki:?action=zip&include=all]__ contient toutes les versions archivées.
+Cette **[Sauvegarde ZIP | phpwiki:?action=zip]** ne contient que la dernière version de chaque page, tandis que cet **[Archivage ZIP | phpwiki:?action=zip&include=all]** contient toutes les versions archivées.
 
 Si le PhpWiki est configuré pour le permettre, n'importe qui peut télécharger un fichier zip.
 
@@ -111,11 +105,11 @@ Actuellement, les pages sont stockées, une par fichier, sous forme de messages 
 
 === Anciens formats
 
-__Fichiers sérialisés__
+**Fichiers sérialisés**
 
 La commande de sauvegarde dans un répertoire récupérait les pages en tant que chaînes php ''serialized()''. Cela rendait les fichiers très difficiles à lire pour les humains, et presque impossibles à éditer.
 
-__Fichiers simples__
+**Fichiers simples**
 
 Avant cela, le texte des pages était simplement enregistré dans un fichier -- ce qui signifie que toutes les métadonnées des pages étaient perdues. Notez que lorsqu'on charge des ''fichiers simples'', le nom de la page est déduit du nom du fichier.
 
@@ -129,7 +123,7 @@ Les fonctions de téléchargement et de chargement reconnaîtront automatiquemen
 
 Ceci génèrera un répertoire de pages statiques convenables pour une distribution sur disque où des serveurs web ne sont pas disponible. Les liens variés pour les fonctions d'édition et de navigation sont enlevés de ces pages.
 
-La collection de fichiers XHTML peut aussi être téléchargée comme une __[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]__.
+La collection de fichiers XHTML peut aussi être téléchargée comme une **[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]**.
 
 ----
 
@@ -149,7 +143,7 @@ Une pression sur ce bouton effacera tout le cache. Le contenu de chaque page ser
   <<WikiAdminUtils
            action=purge-cache
            label="Purge du cache"
-   >>
+  >>
 
 === Suppression des pages vides et non référencées
 
@@ -159,7 +153,7 @@ Une pression sur ce bouton effacera tout le cache. Le contenu de chaque page ser
  <<WikiAdminUtils
            action=purge-empty-pages
            label="Purge all empty unreferenced pages"
-   >>
+  >>
 
 === Suppression des pages indésirables dans la base des données wiki
 
@@ -169,7 +163,7 @@ Ce bouton effacera toutes les pages dont le nom est illégal.
   <<WikiAdminUtils
            action=purge-bad-pagenames
            label="Nettoyage de WikiDB"
-   >>
+  >>
 
 ----
 [[DocumentationDePhpWiki]]

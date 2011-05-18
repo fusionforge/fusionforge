@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: EditToolbar.php 7696 2010-09-20 10:20:25Z rurban $');
+// $Id: EditToolbar.php 8071 2011-05-18 14:56:14Z vargenau $
 /* Copyright 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -24,7 +24,7 @@
  * EDIT Toolbar Initialization.
  * The default/themes/toolbar.js is from Mediawiki, this PHP is written from scratch.
  *
- * Features: 
+ * Features:
  * - save-preview and formatting buttons from mediawiki
  * - Search&Replace from walterzorn.de
  * - pageinsert popup by Reini Urban (TODO: should be a pulldown, use acdropdown)
@@ -40,10 +40,10 @@ class EditToolbar {
         //FIXME: enable Undo button for all other buttons also, not only the search/replace button
         if (JS_SEARCHREPLACE) {
             $this->tokens['JS_SEARCHREPLACE'] = 1;
-            $undo_btn = $WikiTheme->getImageURL("ed_undo.png"); 
-            $undo_d_btn = $WikiTheme->getImageURL("ed_undo_d.png"); 
+            $undo_btn = $WikiTheme->getImageURL("ed_undo.png");
+            $undo_d_btn = $WikiTheme->getImageURL("ed_undo_d.png");
             // JS_SEARCHREPLACE from walterzorn.de
-	    $js = Javascript("
+        $js = Javascript("
 uri_undo_btn   = '".$undo_btn."'
 msg_undo_alt   = '"._("Undo")."'
 uri_undo_d_btn = '".$undo_d_btn."'
@@ -58,24 +58,24 @@ msg_repl_ok        = '"._("OK")."'
 msg_repl_close     = '"._("Close")."'
 ");
             if (empty($WikiTheme->_headers_printed)) {
-		$WikiTheme->addMoreHeaders($js);
-		$WikiTheme->addMoreAttr('body', "SearchReplace"," onload='define_f()'");
-	    } else { // from an actionpage: WikiBlog, AddComment, WikiForum
-		printXML($js);
-	    }
+        $WikiTheme->addMoreHeaders($js);
+        $WikiTheme->addMoreAttr('body', "SearchReplace"," onload='define_f()'");
+        } else { // from an actionpage: WikiBlog, AddComment, WikiForum
+        printXML($js);
+        }
         } else {
             $WikiTheme->addMoreAttr('body', "editfocus", "document.getElementById('edit-content]').editarea.focus()");
         }
-    
+
         if (ENABLE_EDIT_TOOLBAR) {
             $js = JavaScript('',array('src' => $WikiTheme->_findData("toolbar.js")));
             if (empty($WikiTheme->_headers_printed)) {
                 $WikiTheme->addMoreHeaders($js);
             }
-	    else { // from an actionpage: WikiBlog, AddComment, WikiForum
+        else { // from an actionpage: WikiBlog, AddComment, WikiForum
                 printXML($js);
                 printXML(JavaScript('define_f()'));
-	    }
+        }
         }
 
         require_once("lib/WikiPluginCached.php");
@@ -98,7 +98,7 @@ msg_repl_close     = '"._("Close")."'
         } else {
             $content = $this->_generate();
             // regenerate buttons every 1 hr/6 hrs
-            $cache->save($id, $content, DEBUG ? '+3600' : '+21600', 'toolbarcache'); 
+            $cache->save($id, $content, DEBUG ? '+3600' : '+21600', 'toolbarcache');
             $this->tokens['EDIT_TOOLBAR'] =& $content;
         }
     }
@@ -117,7 +117,7 @@ msg_repl_close     = '"._("Close")."'
             if (FUSIONFORGE or DISABLE_MARKUP_WIKIWORD or (!isWikiWord($username))) {
                 $username = '[['.$username.']]';
             }
-	    $signature = " ––".$username." ".CTime();
+        $signature = " ––".$username." ".CTime();
             $toolarray = array(
                            array(
                                  "image"=>"ed_format_bold.png",
@@ -201,20 +201,20 @@ msg_repl_close     = '"._("Close")."'
                                  "sample"=>_("Template Name"),
                                  "title"=>_("Template"))
                            );
-            $btn = new SubmitImageButton(_("Save"), "edit[save]", 'toolbar', 
+            $btn = new SubmitImageButton(_("Save"), "edit[save]", 'toolbar',
                                          $WikiTheme->getImageURL("ed_save.png"));
             $btn->addTooltip(_("Save"));
-	    $btn->setAccesskey("s");
+        $btn->setAccesskey("s");
             $toolbar .= ('document.writeln("'.addslashes($btn->asXml()).'");'."\n");
-	    // preview not supported yet on Wikiblog
+        // preview not supported yet on Wikiblog
             if (empty($WikiTheme->_headers_printed)) {
-		$btn = new SubmitImageButton(_("Preview"), "edit[preview]", 'toolbar', 
-					     $WikiTheme->getImageURL("ed_preview.png"));
-		$btn->addTooltip(_("Preview"));
-		$btn->setAccesskey("p");
-		$toolbar .= ('document.writeln("'.addslashes($btn->asXml()).'");'."\n");
-	    }
-    
+        $btn = new SubmitImageButton(_("Preview"), "edit[preview]", 'toolbar',
+                         $WikiTheme->getImageURL("ed_preview.png"));
+        $btn->addTooltip(_("Preview"));
+        $btn->setAccesskey("p");
+        $toolbar .= ('document.writeln("'.addslashes($btn->asXml()).'");'."\n");
+        }
+
             foreach ($toolarray as $tool) {
                 $image = $WikiTheme->getImageURL($tool["image"]);
                 $open  = $tool["open"];
@@ -230,14 +230,14 @@ msg_repl_close     = '"._("Close")."'
             }
             /* Fails with Chrome */
             if (!isBrowserSafari()) {
-                $toolbar .= ("addInfobox('" 
-                             . addslashes( _("Click a button to get an example text") ) 
+                $toolbar .= ("addInfobox('"
+                             . addslashes( _("Click a button to get an example text") )
                              . "');\n");
             }
         }
 
         if (JS_SEARCHREPLACE) {
-            $undo_d_btn = $WikiTheme->getImageURL("ed_undo_d.png"); 
+            $undo_d_btn = $WikiTheme->getImageURL("ed_undo_d.png");
             //$redo_btn = $WikiTheme->getImageURL("ed_redo.png");
             $sr_btn   = $WikiTheme->getImageURL("ed_replace.png");
             //TODO: generalize the UNDO button and fix it for Search & Replace
@@ -260,8 +260,8 @@ msg_repl_close     = '"._("Close")."'
             $sr_html = '';
         }
 
-        //TODO: Delegate this to run-time with showing an hidden input at the right, and do 
-	// a seperate moacdropdown and xmlrpc:titleSearch.
+        //TODO: Delegate this to run-time with showing an hidden input at the right, and do
+    // a seperate moacdropdown and xmlrpc:titleSearch.
 
         // Button to generate categories, display in extra window as popup and insert
         $sr_html = HTML($sr_html, $this->categoriesPulldown());
@@ -300,19 +300,19 @@ msg_repl_close     = '"._("Close")."'
         if ($pages) {
             $categories = array();
             while ($p = $pages->next()) {
-		$page = $p->getName();
+        $page = $p->getName();
                 if (FUSIONFORGE) {
                     $categories[] = "['$page', '%0A----%0A%5B%5B".$page."%5D%5D']";
-		} else if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page))) {
-		    $categories[] = "['$page', '%0A%5B".$page."%5D']";
-		} else {
-		    $categories[] = "['$page', '%0A".$page."']";
+        } else if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page))) {
+            $categories[] = "['$page', '%0A%5B".$page."%5D']";
+        } else {
+            $categories[] = "['$page', '%0A".$page."']";
                 }
             }
             if (!$categories) return '';
-	    // Ensure this to be inserted at the very end. Hence we added the id to the function.
+        // Ensure this to be inserted at the very end. Hence we added the id to the function.
             $more_buttons = HTML::img(array('class'=> "toolbar",
-					    'id' => 'tb-categories',
+                        'id' => 'tb-categories',
                                             'src'  => $WikiTheme->getImageURL("ed_category.png"),
                                             'title'=>_("AddCategory"),
                                             'alt'=>"AddCategory", // to detect this at js
@@ -362,7 +362,7 @@ msg_repl_close     = '"._("Close")."'
             }
             $plugin_js = substr($plugin_js, 1);
             $more_buttons = HTML::img(array('class'=>"toolbar",
-					    'id' => 'tb-plugins',
+                        'id' => 'tb-plugins',
                                             'src'  => $WikiTheme->getImageURL("ed_plugins.png"),
                                             'title'=>_("AddPlugin"),
                                             'alt'=>_("AddPlugin"),
@@ -385,14 +385,14 @@ msg_repl_close     = '"._("Close")."'
             global $WikiTheme;
             $pages = array();
             while ($p = $page_iter->next()) {
-		$page = $p->getName();
-		if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page)))
-		    $pages[] = "['$page', '%5B".$page."%5D']";
-		else
-		    $pages[] = "['$page', '$page']";
+        $page = $p->getName();
+        if (DISABLE_MARKUP_WIKIWORD or (!isWikiWord($page)))
+            $pages[] = "['$page', '%5B".$page."%5D']";
+        else
+            $pages[] = "['$page', '$page']";
             }
             return HTML("\n", HTML::img(array('class'=>"toolbar",
-					      'id' => 'tb-pages',
+                          'id' => 'tb-pages',
                                               'src'  => $WikiTheme->getImageURL("ed_pages.png"),
                                               'title'=>_("AddPageLink"),
                                               'alt'=>_("AddPageLink"),
@@ -430,7 +430,7 @@ msg_repl_close     = '"._("Close")."'
             }
             $image_js = substr($image_js, 1);
             $more_buttons = HTML::img(array('class'=>"toolbar",
-					    'id' => 'tb-images',
+                        'id' => 'tb-images',
                                             'src'  => $WikiTheme->getImageURL("ed_image.png"),
                                             'title'=>_("Add Image or Video"),
                                             'alt'=>_("Add Image or Video"),
@@ -465,7 +465,7 @@ msg_repl_close     = '"._("Close")."'
             if (!empty($pages_js))
                 return HTML("\n", HTML::img
                             (array('class'=>"toolbar",
-				   'id' => 'tb-templates',
+                   'id' => 'tb-templates',
                                    'src'  => $WikiTheme->getImageURL("ed_template.png"),
                                    'title'=>_("AddTemplate"),
                                    'alt'=>_("AddTemplate"),

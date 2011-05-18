@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: SystemInfo.php 7562 2010-06-23 15:31:48Z vargenau $');
+// $Id: SystemInfo.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Copyright (C) 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -397,9 +397,9 @@ extends WikiPluginCached
             $pagesize = $content['pagesize'];
         }
 
-        $s  = sprintf(_("Application size: %d Kb"), $appsize);
+        $s  = sprintf(_("Application size: %d KiB"), $appsize);
         if ($pagesize)
-            $s  .= ", " . sprintf(_("Pagedata size: %d Kb", $pagesize));
+            $s  .= ", " . sprintf(_("Pagedata size: %d KiB", $pagesize));
         return $s;
     }
 

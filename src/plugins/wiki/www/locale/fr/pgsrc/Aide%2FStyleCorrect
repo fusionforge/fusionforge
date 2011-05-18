@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FStyleCorrect 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FStyleCorrect 7919 2011-01-27 17:02:14Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FStyleCorrect;
   flags="";
@@ -12,8 +12,11 @@ Content-Transfer-Encoding: binary
 
 --Strunk et White, "Les Éléments du Style"
 
-''Et ainsi un manuel américain, lecture typiquement requise auprès d'étudiants de 10e niveau en anglais, exalte sans le savoir certaines vertus du WabiSabi''
+''Et ainsi un manuel américain, lecture typiquement requise auprès d'étudiants de 10e niveau en anglais, exalte sans le savoir certaines vertus du [[Aide:WabiSabi|WabiSabi]]''
 
 --scummings
+
+<noinclude>
 ----
 [[DocumentationDePhpWiki]]
+</noinclude>

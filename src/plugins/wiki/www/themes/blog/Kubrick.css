@@ -6,8 +6,6 @@
   This is a work in progress - some of the original CSS may need collapsing
 */
 
-/* @import url("../default/phpwiki.css"); */
-
 body {
   margin: 20px auto;
   padding: 0; 
@@ -534,9 +532,10 @@ h3.comments {
   }
 /* End Headers */
 
-
-
 /* Begin Images */
+
+img { border: 0; }
+
 p img {
   padding: 0;
   max-width: 100%;
@@ -573,8 +572,6 @@ img.alignleft {
   float: left
   }
 /* End Images */
-
-
 
 /* Begin Lists
 
@@ -684,10 +681,6 @@ hr {
   display: none;
   }
 
-a img {
-  border: none;
-  }
-
 .navigation {
   display: block;
   text-align: center;
@@ -705,10 +698,6 @@ a img {
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px #ccc solid;
   color: black;
   border-top: 1px solid #494f5d;
   border-left:  1px solid #494f5d;
@@ -719,33 +708,16 @@ a img {
   padding-left:  .125em;
   padding-right: .125em;
   padding: 0;
-  /* "paper" borders */
-  /*border-top: 2px #d2d2d2 solid;
-  border-left:  2px #b2b2b2 solid;
-  border-bottom:  2px #e8e6df solid;
-  border-right: 2px #e8e6df solid;*/
-/*  padding-left:  0em; 
-  padding-bottom: 0ex;*/
-/*  border-style: inset;*/
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
-  /* I'm not sure what the intent of this was, but it's
-   *  not valid CSS: */
-  /* display: editarea; */
   clear: both;
 }
 .diff .block {
   background: #ddd;
   padding-left: 1em;
-  /* for NS4 */
-  /*border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* entire difftextblock */
@@ -754,10 +726,6 @@ a img {
   margin-top:    0;
   margin-bottom: 0;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
@@ -767,9 +735,6 @@ a img {
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
 }
 /* + - line prefix */
@@ -777,7 +742,6 @@ a img {
   font-weight: normal;
   font-family: monospace;
   color: black;
-  /* for NS4 */
   margin-left: 0;
   border: none;
 }
@@ -795,17 +759,14 @@ a img {
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
   background: #fcc;
-  /* for NS4 */
   border: none;
 }
 /* blocks containing added words */
 .diff .final, .diff .added {
   background: #cfc;
-  /* for NS4 */
   border: none;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del { background: #f99; }
 /* added words */
@@ -862,7 +823,6 @@ table.sqlresult td {
  * TeX2png plugin
  */
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 

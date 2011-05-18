@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FPluginManagerPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FPluginManagerPlugin 7757 2010-12-09 13:53:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPluginManagerPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -52,20 +52,20 @@ files for the plugins.
 
 == External Requirements ==
 
-Some plugins require correctly configured PLUGIN_CACHED and external libraries 
-not provided with ~PhpWiki or PHP, such as 
-* [PHP with GD support | php-function:ref.image] for the [[Help:text2pngPlugin|text2png]] plugin, 
+Some plugins require correctly configured PLUGIN_CACHED and external libraries
+not provided with ~PhpWiki or PHP, such as
+* [PHP with GD support | php-function:ref.image] for the [[Help:text2pngPlugin|text2png]] plugin,
 * [LaTeX2HTML | ftp://ftp.dante.de/tex-archive/support/latex2html ] for the [[Help:TexToPngPlugin|TexToPng]] plugin and [[Help:TeX2pngPlugin|TeX2png]] plugin,
-* [graphviz | http://graphviz.org/] for the [[Help:GraphVizPlugin|GraphViz]] plugin and [[Help:VisualWikiPlugin|VisualWiki]] plugin, 
-* [ploticus | http://ploticus.sourceforge.net/] for the [[Help:PloticusPlugin|Ploticus]] plugin, 
+* [graphviz | http://graphviz.org/] for the [[Help:GraphVizPlugin|GraphViz]] plugin and [[Help:VisualWikiPlugin|VisualWiki]] plugin,
+* [ploticus | http://ploticus.sourceforge.net/] for the [[Help:PloticusPlugin|Ploticus]] plugin,
 * [phpweather | http://phpweather.sf.net] for the [[Help:PhpWeatherPlugin|PhpWeather]] plugin,
 * [highlight | http://www.andre-simon.de/] for the [[Help:SyntaxHighlighterPlugin|SyntaxHighlighter]] plugin,
 * a browser with [<iframe> support|http://www.cs.tut.fi/~jkorpela/html/iframe.html] for the [[Help:TranscludePlugin|Transclude]] plugin,
 * USE_DB_SESSION = true (default for the peardb, adodb or dba backends) for the [[Help:WhoIsOnlinePlugin|WhoIsOnline]] plugin,
 * --with-xml support (with expat or libxml2) for the [[Help:RssFeedPlugin|RssFeed]] plugin (~ProjectSummary, ~RecentReleases) and ~HtmlParser support (~ImportHtml, ~HtmlAreaEditing),
-* PHP Mail functionality (php.ini: SMTP + sendmail_from on Windows or sendmail_path) for email 
+* PHP Mail functionality (php.ini: SMTP + sendmail_from on Windows or sendmail_path) for email
   PhpWiki:PageChangeNotifications and ModeratedPage's,
-* a [Google license key | http://www.google.com/apis/] for the [[Help:GooglePluginPlugin|GooglePlugin]] plugin, 
+* a [Google license key | http://www.google.com/apis/] for the [[Help:GooglePluginPlugin|GooglePlugin]] plugin,
 * optionally an external recommender engine (none yet, php only so far) and the wikilens theme for the [[Help:RateItPlugin|RateIt]] plugin,
 * optionally apache/mod_log_{my}sql for fast, external log analysis if ACCESS_LOG_SQL=1 (Referer, Abuse Prevention).
   See ##lib/Request.php## and http://www.outoforder.cc/projects/apache/mod_log_sql/

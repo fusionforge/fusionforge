@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: FrameInclude.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: FrameInclude.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -73,19 +73,20 @@ extends WikiPlugin
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        global $WikiTheme;
 
         $args = ($this->getArgs($argstr, $request));
         extract($args);
 
-        if ($request->getArg('action') != 'browse')
-            return $this->disabled("(action != 'browse')");
-        if (! $request->isGetOrHead())
+        if ($request->getArg('action') != 'browse') {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
+        if (! $request->isGetOrHead()) {
             return $this->disabled("(method != 'GET')");
+        }
 
         if (!$src and $page) {
             if ($page == $request->get('pagename')) {
-                return $this->error(sprintf(_("recursive inclusion of page %s"),
+                return $this->error(sprintf(_("Recursive inclusion of page %s"),
                                             $page));
             }
             $src = WikiURL($page);
@@ -97,7 +98,7 @@ extends WikiPlugin
 
         // FIXME: How to normalize url's to compare against recursion?
         if ($src == $request->getURLtoSelf() ) {
-            return $this->error(sprintf(_("recursive inclusion of url %s"),
+            return $this->error(sprintf(_("Recursive inclusion of url %s"),
                                         $src));
         }
 

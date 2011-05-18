@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminUtils.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: WikiAdminUtils.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Copyright 2003,2004,2006 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -54,13 +54,15 @@ extends WikiPlugin
         $args['action'] = strtolower($args['action']);
         extract($args);
 
-        if (!$action)
+        if (!$action) {
             $this->error("No action specified");
+        }
         if (!($default_label = $this->_getLabel($action))) {
             return HTML::div(array('class' => "error"), fmt("Bad action requested: %s", $action));
         }
-        if ($request->getArg('action') != 'browse')
-            return $this->disabled("(action != 'browse')");
+        if ($request->getArg('action') != 'browse') {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
 
         $posted = $request->getArg('wikiadminutils');
 
@@ -144,7 +146,7 @@ extends WikiPlugin
         if (!$count)
             return _("No pages with bad names had to be deleted.");
         else {
-            return HTML(fmt("Deleted %s pages with invalid names:", $count),
+            return HTML(fmt("Deleted %d pages with invalid names:", $count),
                         HTML::div(array('align'=>'left'), $list));
         }
     }
@@ -177,7 +179,7 @@ extends WikiPlugin
         if (!$count)
             return _("No empty, unreferenced pages were found.");
         else
-            return HTML(fmt("Deleted %s unreferenced pages:", $count),
+            return HTML(fmt("Deleted %d unreferenced pages:", $count),
                         HTML::div(array('align'=>'left'), $list),
                         ($notpurgable ?
         fmt("The %d not-purgable pages/links are links in some page(s). You might want to edit them.",

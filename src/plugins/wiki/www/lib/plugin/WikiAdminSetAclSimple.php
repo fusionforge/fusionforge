@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSetAclSimple.php 7644 2010-08-13 13:34:26Z vargenau $');
+// $Id: WikiAdminSetAclSimple.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -43,11 +43,14 @@ extends WikiPlugin_WikiAdminSetAcl
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        if ($request->getArg('action') != 'browse')
-            if ($request->getArg('action') != _("PhpWikiAdministration/SetAclSimple"))
-                return $this->disabled("(action != 'browse')");
-        if (!ENABLE_PAGEPERM)
+        if ($request->getArg('action') != 'browse') {
+            if ($request->getArg('action') != _("PhpWikiAdministration/SetAclSimple")) {
+                return $this->disabled(_("Plugin not run: not in browse mode"));
+            }
+        }
+        if (!ENABLE_PAGEPERM) {
             return $this->disabled("ENABLE_PAGEPERM = false");
+        }
 
         $args = $this->getArgs($argstr, $request);
         $this->_args = $args;

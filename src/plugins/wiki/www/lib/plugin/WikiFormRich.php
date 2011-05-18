@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiFormRich.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: WikiFormRich.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004,2006,2007 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -172,6 +172,7 @@ extends WikiPlugin
         if (empty($action)) {
             return $this->error(fmt("A required argument '%s' is missing.", "action"));
         }
+
         $form = HTML::form(array('action' => $request->getPostURL(),
                                  'method' => strtolower($method),
                                  'class'  => 'wikiformrich',
@@ -241,7 +242,7 @@ extends WikiPlugin
               case 'combobox': // text left
                   $input['autocomplete'] = 1;
               case 'pulldown':
-                  $values = @$input['value'];
+                  $values = isset($input['value']) ? $input['value'] : '';
                   unset($input['value']);
                   unset($input['type']);
                   if (is_string($values)) $values = explode(",", $values);
@@ -321,7 +322,7 @@ extends WikiPlugin
         // only match begin: autocomplete_matchbegin, or
         $input['autocomplete_matchsubstring'] = "true";
         if (empty($values)) {
-            if ($input['method']) {
+            if (isset($input['method']) && $input['method']) {
                 if (empty($input['args'])) {
                     if (preg_match("/^(.*?) (.*)$/",$input['method'],$m)) {
                         $input['method'] = $m[1];

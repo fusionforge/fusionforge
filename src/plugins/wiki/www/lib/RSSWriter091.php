@@ -21,7 +21,7 @@
 // for outputting RecentChanges in RSS 0.91 format
 // ----------------------------------------------------------------------
 
-// rcs_id('$Id: RSSWriter091.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: RSSWriter091.php 7964 2011-03-05 17:05:30Z vargenau $
 
 include_once("lib/RssWriter.php");
 class RSSWriter091 extends RSSWriter
@@ -38,13 +38,13 @@ class RSSWriter091 extends RSSWriter
     {
         if (isset($this->_finished))
             return;
-      
+
         $channel = &$this->_channel;
         $items = &$this->_items;
-    
+
         if ($items)
             {
-		foreach ($items as $i)
+        foreach ($items as $i)
                     $channel->pushContent($i);
             }
         $this->pushContent($channel);
@@ -56,7 +56,7 @@ class RSSWriter091 extends RSSWriter
      * Create a new RDF <em>typedNode</em>.
      */
     function __node($type, $properties, $uri = false) {
-	return new XmlElement($type, '',
+    return new XmlElement($type, '',
                               $this->__elementize($properties));
     }
 
@@ -66,8 +66,8 @@ class RSSWriter091 extends RSSWriter
     function __spew() {
         header("Content-Type: application/xml; charset=" . RSS_ENCODING);
         printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
-		print("<!DOCTYPE rss PUBLIC \"-//Netscape Communications//DTD RSS 0.91//EN\"\n");
-		print("\"http://my.netscape.com/publish/formats/rss-0.91.dtd\">\n\n");
+        print("<!DOCTYPE rss PUBLIC \"-//Netscape Communications//DTD RSS 0.91//EN\"\n");
+        print("\"http://my.netscape.com/publish/formats/rss-0.91.dtd\">\n\n");
         $this->printXML();
     }
 
@@ -114,24 +114,24 @@ extends _RecentChanges_RSSFormatter
                      'language' => 'en-US');
 
         /* FIXME: language should come from $LANG (or other config variable). */
-      
-        /* FIXME: other things one might like in <channel>:                 
+
+        /* FIXME: other things one might like in <channel>:
          * managingEditor
          * webmaster
          * lastBuildDate
          * copyright
          */
     }
-  
-      
+
+
     function item_properties ($rev)
     {
         $page = $rev->getPage();
         $pagename = $page->getName();
-      
-        return array( 'title'		=> SplitPagename($pagename),
-                      'description'	=> $this->summary($rev),
-                      'link'		=> $this->pageURL($rev)                
+
+        return array( 'title'        => SplitPagename($pagename),
+                      'description'    => $this->summary($rev),
+                      'link'        => $this->pageURL($rev)
                       );
     }
 }
@@ -142,5 +142,5 @@ extends _RecentChanges_RSSFormatter
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

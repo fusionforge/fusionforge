@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: UnfoldSubpages.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: UnfoldSubpages.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002,2004,2005 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -97,7 +97,7 @@ extends WikiPlugin_IncludePage
                     continue;
             // A page cannot include itself. Avoid doublettes.
             if (in_array($cpagename, $included_pages)) {
-                $content->pushContent(HTML::p(sprintf(_("recursive inclusion of page %s ignored"),
+                $content->pushContent(HTML::p(sprintf(_("Recursive inclusion of page %s ignored"),
                                                       $cpagename)));
                 continue;
             }
@@ -127,7 +127,7 @@ extends WikiPlugin_IncludePage
                     if (in_array($m[1], $included_pages)) {
                             if (!$quiet)
                             $content->pushContent(
-                                HTML::p(sprintf(_("recursive inclusion of page %s ignored"),
+                                HTML::p(sprintf(_("Recursive inclusion of page %s ignored"),
                                                 $cpagename.' => '.$m[1])));
                         continue;
                     }

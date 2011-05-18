@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: TextSearchQuery.php 7417 2010-05-19 12:57:42Z vargenau $');
+<?php // $Id: TextSearchQuery.php 7964 2011-03-05 17:05:30Z vargenau $
 /**
  * A text search query, converting queries to PCRE and SQL matchers.
  *
@@ -11,7 +11,7 @@
  * <dt> wiki word or page
  *   <dd> Match strings containing the substring 'wiki' AND either the substring
  *        'word' OR the substring 'page'.
- * <dt> auto-detect regex hints, glob-style or regex-style, and converts them 
+ * <dt> auto-detect regex hints, glob-style or regex-style, and converts them
  *      to PCRE and SQL matchers:
  *   <dd> "^word$" => EXACT(phrase)
  *   <dd> "^word"  => STARTS_WITH(phrase)
@@ -45,11 +45,11 @@
  * double-up on the quote character: 'I''m hungry' is equivalent to
  * "I'm hungry".
  *
- * Force regex on "re:word" => posix-style, "/word/" => pcre-style 
+ * Force regex on "re:word" => posix-style, "/word/" => pcre-style
  * or use regex='glob' to use file wildcard-like matching. (not yet)
  *
- * The parsed tree is then converted to the needed PCRE (highlight, 
- * simple backends) or SQL functions. 
+ * The parsed tree is then converted to the needed PCRE (highlight,
+ * simple backends) or SQL functions.
  *
  * @author: Jeff Dairiki
  * @author: Reini Urban (case and regex detection, enhanced sql callbacks)
@@ -107,7 +107,7 @@ class TextSearchQuery {
      * @see TextSearchQuery
      */
     function TextSearchQuery($search_query, $case_exact=false, $regex='auto') {
-        if ($regex == 'none' or !$regex) 
+        if ($regex == 'none' or !$regex)
             $this->_regex = 0;
         elseif (defined("TSQ_REGEX_".strtoupper($regex)))
             $this->_regex = constant("TSQ_REGEX_".strtoupper($regex));
@@ -115,24 +115,24 @@ class TextSearchQuery {
             trigger_error(fmt("Unsupported argument: %s=%s", 'regex', $regex));
             $this->_regex = 0;
         }
-	$this->_regex_modifier = ($case_exact?'':'i').'sS';
+    $this->_regex_modifier = ($case_exact?'':'i').'sS';
         $this->_case_exact = $case_exact;
         if ($regex != 'pcre') {
-	    $parser = new TextSearchQuery_Parser;
-	    $this->_tree = $parser->parse($search_query, $case_exact, $this->_regex);
-	    $this->_optimize(); // broken under certain circumstances: "word -word -word"
-	    if (defined("FULLTEXTSEARCH_STOPLIST"))
-		$this->_stoplist = FULLTEXTSEARCH_STOPLIST;
-	    else // default stoplist, localizable.
-		$this->_stoplist = _("(A|An|And|But|By|For|From|In|Is|It|Of|On|Or|The|To|With)");
-	}
-	else {
-	    $this->_tree = new TextSearchQuery_node_regex_pcre($search_query);
-	    if (preg_match("/^\/(.*)\/(\w*)$/", $search_query, $m)) {
-	    	$this->_tree->word = $m[1];
-	    	$this->_regex_modifier = $m[2]; // overrides case_exact
-	    }
-	}
+        $parser = new TextSearchQuery_Parser;
+        $this->_tree = $parser->parse($search_query, $case_exact, $this->_regex);
+        $this->_optimize(); // broken under certain circumstances: "word -word -word"
+        if (defined("FULLTEXTSEARCH_STOPLIST"))
+        $this->_stoplist = FULLTEXTSEARCH_STOPLIST;
+        else // default stoplist, localizable.
+        $this->_stoplist = _("(A|An|And|But|By|For|From|In|Is|It|Of|On|Or|The|To|With)");
+    }
+    else {
+        $this->_tree = new TextSearchQuery_node_regex_pcre($search_query);
+        if (preg_match("/^\/(.*)\/(\w*)$/", $search_query, $m)) {
+            $this->_tree->word = $m[1];
+            $this->_regex_modifier = $m[2]; // overrides case_exact
+        }
+    }
     }
 
     function getType() { return 'text'; }
@@ -146,7 +146,7 @@ class TextSearchQuery {
      */
     function asRegexp() {
         if (!isset($this->_regexp)) {
-            if (!isset($this->_regex_modifier)) 
+            if (!isset($this->_regex_modifier))
                 $this->_regex_modifier = ($this->_case_exact?'':'i').'sS';
             if ($this->_regex)
                 $this->_regexp =  '/' . $this->_tree->regexp() . '/'.$this->_regex_modifier;
@@ -160,29 +160,29 @@ class TextSearchQuery {
      * Match query against string.
      * EXACT ("Term") ignores the case_exact setting.
      *
-     * @param $string string The string to match. 
+     * @param $string string The string to match.
      * @return boolean True if the string matches the query.
      */
     function match($string) {
-    	if ($this->_tree->_op == TSQ_TOK_ALL)   return true;
-    	if ($this->_tree->_op == TSQ_TOK_EXACT) return $this->_tree->word == $string;
+        if ($this->_tree->_op == TSQ_TOK_ALL)   return true;
+        if ($this->_tree->_op == TSQ_TOK_EXACT) return $this->_tree->word == $string;
         return preg_match($this->asRegexp(), $string);
     }
 
     /* How good does it match? Returns a number */
     function score($string) {
-	$score = 0.0;
-	$i = 10;
-	foreach (array_unique($this->_tree->highlight_words()) as $word) {
-	    if ($nummatch = preg_match_all("/".preg_quote($word, '/')."/".
-	                                       $this->_regex_modifier, 
-	                                   $string, $out))
-	        $score += ($i-- * $nummatch);
-	}
-	return min(1.0, $score / 10.0);
+    $score = 0.0;
+    $i = 10;
+    foreach (array_unique($this->_tree->highlight_words()) as $word) {
+        if ($nummatch = preg_match_all("/".preg_quote($word, '/')."/".
+                                           $this->_regex_modifier,
+                                       $string, $out))
+            $score += ($i-- * $nummatch);
+    }
+    return min(1.0, $score / 10.0);
     }
 
-    
+
     /**
      * Get a regular expression suitable for highlighting matched words.
      *
@@ -199,7 +199,7 @@ class TextSearchQuery {
             } else {
                 foreach ($words as $key => $word)
                     $words[$key] = preg_quote($word, '/');
-                $this->_hilight_regexp = '(?'.($this->_case_exact?'':'i').':' 
+                $this->_hilight_regexp = '(?'.($this->_case_exact?'':'i').':'
                                              . join('|', $words) . ')';
             }
         }
@@ -207,7 +207,7 @@ class TextSearchQuery {
     }
 
     /**
-     * Make an SQL clause which matches the query. 
+     * Make an SQL clause which matches the query.
      * Deprecated, use makeSqlClauseObj instead.
      *
      * @param $make_sql_clause_cb WikiCallback
@@ -353,8 +353,8 @@ class NullTextSearchQuery extends TextSearchQuery {
      * @see TextSearchQuery
      */
     function NullTextSearchQuery() {}
-    function asRegexp()		{ return '/^(?!a)a/x'; }
-    function match($string)	{ return false; }
+    function asRegexp()        { return '/^(?!a)a/x'; }
+    function match($string)    { return false; }
     function getHighlightRegexp() { return ""; }
     function makeSqlClause($make_sql_clause_cb) { return "(1 = 0)"; }
     function asString() { return "NullTextSearchQuery"; }
@@ -363,14 +363,14 @@ class NullTextSearchQuery extends TextSearchQuery {
 /**
  * A simple algebraic matcher for numeric attributes.
  *  NumericSearchQuery can do ("population < 20000 and area > 1000000", array("population", "area"))
- *  ->match(array('population' => 100000, 'area' => 10000000)) 
+ *  ->match(array('population' => 100000, 'area' => 10000000))
  *
  * Supports all mathematical PHP comparison operators, plus ':=' for equality.
  *   "(x < 2000000 and x >= 10000) or (x >= 100 and x < 2000)"
  *   "x := 100000" is the same as "x == 100000"
  *
- * Since this is basic numerics only, we simply try to get away with 
- * replacing the variable values at the right positions and do an eval then. 
+ * Since this is basic numerics only, we simply try to get away with
+ * replacing the variable values at the right positions and do an eval then.
  *
  * @package NumericSearchQuery
  * @author Reini Urban
@@ -383,111 +383,111 @@ class NumericSearchQuery
      *   NumericSearchQuery("population > 20000 or population < 200", "population")
      *   NumericSearchQuery("population < 20000 and area > 1000000", array("population", "area"))
      *
-     * With a single variable it is easy: The valid name must be matched elsewhere, just 
+     * With a single variable it is easy: The valid name must be matched elsewhere, just
      * replace the given number in match in the query.
      *   ->match(2000)
      *
      * With matching a struct we need strict names, no * as name is allowed.
-     * So always when the placeholder is an array, the names of the target struct must match 
+     * So always when the placeholder is an array, the names of the target struct must match
      * and all vars be defined. Use the method can_match($struct) therefore.
      *
      * @access public
      * @param $search_query string   A numerical query with placeholders as variable.
-     * @param $placeholders array or string  All placeholders in the query must be defined 
-     * 	here, and will be replaced by the matcher.
+     * @param $placeholders array or string  All placeholders in the query must be defined
+     *     here, and will be replaced by the matcher.
      */
     function NumericSearchQuery($search_query, $placeholders) {
-	// added some basic security checks against user input
+    // added some basic security checks against user input
         $this->_query = $search_query;
-	$this->_placeholders = $placeholders;
+    $this->_placeholders = $placeholders;
 
-	// we should also allow the M_ constants
-	$this->_allowed_functions = explode(':','abs:acos:acosh:asin:asinh:atan2:atan:atanh:base_convert:bindec:ceil:cos:cosh:decbin:dechex:decoct:deg2rad:exp:expm1:floor:fmod:getrandmax:hexdec:hypot:is_finite:is_infinite:is_nan:lcg_value:log10:log1p:log:max:min:mt_getrandmax:mt_rand:mt_srand:octdec:pi:pow:rad2deg:rand:round:sin:sinh:sqrt:srand:tan:tanh');
-	$this->_allowed_operators = explode(',', '-,<,<=,>,>=,==,!=,*,+,/,(,),%,and,or,xor,<<,>>,===,!==,&,^,|,&&,||');
-	$this->_parser_check = array();
-	// check should be fast, so make a hash
-	foreach ($this->_allowed_functions as $f)
-	    $this->_parser_check[$f] = 1;
-	foreach ($this->_allowed_operators as $f)
-	    $this->_parser_check[$f] = 1;
-	if (is_array($placeholders))
-	    foreach ($placeholders as $f)
-		$this->_parser_check[$f] = 1;
-	else $this->_parser_check[$placeholders] = 1;	
+    // we should also allow the M_ constants
+    $this->_allowed_functions = explode(':','abs:acos:acosh:asin:asinh:atan2:atan:atanh:base_convert:bindec:ceil:cos:cosh:decbin:dechex:decoct:deg2rad:exp:expm1:floor:fmod:getrandmax:hexdec:hypot:is_finite:is_infinite:is_nan:lcg_value:log10:log1p:log:max:min:mt_getrandmax:mt_rand:mt_srand:octdec:pi:pow:rad2deg:rand:round:sin:sinh:sqrt:srand:tan:tanh');
+    $this->_allowed_operators = explode(',', '-,<,<=,>,>=,==,!=,*,+,/,(,),%,and,or,xor,<<,>>,===,!==,&,^,|,&&,||');
+    $this->_parser_check = array();
+    // check should be fast, so make a hash
+    foreach ($this->_allowed_functions as $f)
+        $this->_parser_check[$f] = 1;
+    foreach ($this->_allowed_operators as $f)
+        $this->_parser_check[$f] = 1;
+    if (is_array($placeholders))
+        foreach ($placeholders as $f)
+        $this->_parser_check[$f] = 1;
+    else $this->_parser_check[$placeholders] = 1;
 
-	// This is a speciality: := looks like the attribute definition and is 
-	// therefore a dummy check for this definition.
-	// php-4.2.2 has a problem with /\b:=\b/ matching "population := 1223400"
-	$this->_query = preg_replace("/:=/", "==", $this->_query);
-	$this->_query = $this->check_query($this->_query);
+    // This is a speciality: := looks like the attribute definition and is
+    // therefore a dummy check for this definition.
+    // php-4.2.2 has a problem with /\b:=\b/ matching "population := 1223400"
+    $this->_query = preg_replace("/:=/", "==", $this->_query);
+    $this->_query = $this->check_query($this->_query);
     }
 
     function getType() { return 'numeric'; }
 
     /**
      * Check the symbolic definition query against unwanted functions and characters.
-     * "population < 20000 and area > 1000000" vs 
-     *   "area > 1000000 and mail($me,file("/etc/passwd"),...)" 
+     * "population < 20000 and area > 1000000" vs
+     *   "area > 1000000 and mail($me,file("/etc/passwd"),...)"
      * http://localhost/wikicvs/SemanticSearch?attribute=*&attr_op=<0 and find(1)>&s=-0.01&start_debug=1
      */
     function check_query ($query) {
-	$tmp = $query; // check for all function calls, in case the tokenizer is not available.
-    	while (preg_match("/([a-z][a-z0-9]+)\s*\((.*)$/i", $tmp, $m)) {
-	    if (!in_array($m[1], $this->_allowed_functions)
-		and !in_array($m[1], $this->_allowed_operators))
-	    {
-		trigger_error("Illegal function in query: ".$m[1], E_USER_WARNING);
-		return '';
-	    }
-	    $tmp = $m[2];
-	}
-	
-	// Strictly check for illegal functions and operators, which are no placeholders.
-	if (function_exists('token_get_all')) {
-	    $parsed = token_get_all("<?$query?>");
-	    foreach ($parsed as $x) { // flat, non-recursive array
-		if (is_string($x) and !isset($this->_parser_check[$x])) {
-		    // single char op or name
-		    trigger_error("Illegal string or operator in query: \"$x\"", E_USER_WARNING);
-		    $query = '';
-	        }
-		elseif (is_array($x)) {
-		    $n = token_name($x[0]);
-		    if ($n == 'T_OPEN_TAG' or $n == 'T_WHITESPACE' 
-		        or $n == 'T_CLOSE_TAG' or $n == 'T_LNUMBER'
-		        or $n == 'T_CONST' or $n == 'T_DNUMBER' ) continue;
-		    if ($n == 'T_VARIABLE') { // but we do allow consts
-			trigger_error("Illegal variable in query: \"$x[1]\"", E_USER_WARNING);
-			$query = '';
-		    }    
-		    if (is_string($x[1]) and !isset($this->_parser_check[$x[1]])) {
-			// multi-char char op or name
-			trigger_error("Illegal $n in query: \"$x[1]\"", E_USER_WARNING);
-			$query = '';
-		    }
-		}
-	    }
-	    //echo "$query <br>";
-	    //$this->_parse_token($parsed);
-	    //echo "<br>\n";
-	    //var_dump($parsed);
-	    /* 
-"_x > 0" => 
+    $tmp = $query; // check for all function calls, in case the tokenizer is not available.
+        while (preg_match("/([a-z][a-z0-9]+)\s*\((.*)$/i", $tmp, $m)) {
+        if (!in_array($m[1], $this->_allowed_functions)
+        and !in_array($m[1], $this->_allowed_operators))
+        {
+        trigger_error("Illegal function in query: ".$m[1], E_USER_WARNING);
+        return '';
+        }
+        $tmp = $m[2];
+    }
+
+    // Strictly check for illegal functions and operators, which are no placeholders.
+    if (function_exists('token_get_all')) {
+        $parsed = token_get_all("<?$query?>");
+        foreach ($parsed as $x) { // flat, non-recursive array
+        if (is_string($x) and !isset($this->_parser_check[$x])) {
+            // single char op or name
+            trigger_error("Illegal string or operator in query: \"$x\"", E_USER_WARNING);
+            $query = '';
+            }
+        elseif (is_array($x)) {
+            $n = token_name($x[0]);
+            if ($n == 'T_OPEN_TAG' or $n == 'T_WHITESPACE'
+                or $n == 'T_CLOSE_TAG' or $n == 'T_LNUMBER'
+                or $n == 'T_CONST' or $n == 'T_DNUMBER' ) continue;
+            if ($n == 'T_VARIABLE') { // but we do allow consts
+            trigger_error("Illegal variable in query: \"$x[1]\"", E_USER_WARNING);
+            $query = '';
+            }
+            if (is_string($x[1]) and !isset($this->_parser_check[$x[1]])) {
+            // multi-char char op or name
+            trigger_error("Illegal $n in query: \"$x[1]\"", E_USER_WARNING);
+            $query = '';
+            }
+        }
+        }
+        //echo "$query <br>";
+        //$this->_parse_token($parsed);
+        //echo "<br>\n";
+        //var_dump($parsed);
+        /*
+"_x > 0" =>
 { T_OPEN_TAG "<?"} { T_STRING "_x"} { T_WHITESPACE " "} ">" { T_WHITESPACE " "} { T_LNUMBER "0"} { T_CLOSE_TAG "?>"}
-	Interesting: on-char ops, as ">" are not tokenized.
+    Interesting: on-char ops, as ">" are not tokenized.
 "_x <= 0"
 { T_OPEN_TAG "< ?" } { T_STRING "_x" } { T_WHITESPACE " " } { T_IS_SMALLER_OR_EQUAL "<=" } { T_WHITESPACE " " } { T_LNUMBER "0" } { T_CLOSE_TAG "?>" }
-	     */
-	} else {
-	    // Detect illegal characters besides nums, words and ops. 
-	    // So attribute names can not be utf-8
-	    $c = "/([^\d\w.,\s".preg_quote(join("",$this->_allowed_operators),"/")."])/";
-	    if (preg_match($c, $query, $m)) {
-		trigger_error("Illegal character in query: ".$m[1], E_USER_WARNING);
-		return '';
-	    }
-	}
-	return $query;
+         */
+    } else {
+        // Detect illegal characters besides nums, words and ops.
+        // So attribute names can not be utf-8
+        $c = "/([^\d\w.,\s".preg_quote(join("",$this->_allowed_operators),"/")."])/";
+        if (preg_match($c, $query, $m)) {
+        trigger_error("Illegal character in query: ".$m[1], E_USER_WARNING);
+        return '';
+        }
+    }
+    return $query;
     }
 
     /**
@@ -495,8 +495,8 @@ class NumericSearchQuery
      * "4560000 < 20000 and 1456022 > 1000000"
      */
     function _live_check () {
-	// TODO: check $this->_workquery again?
-	return !empty($this->_workquery);
+    // TODO: check $this->_workquery again?
+    return !empty($this->_workquery);
     }
 
     /**
@@ -505,12 +505,12 @@ class NumericSearchQuery
      * @return array The names as array of strings. => ('x', 'y') the placeholders.
      */
     function getVars() {
-	if(is_array($this->_placeholders)) return $this->_placeholders;
-	else return array($this->_placeholders);
+    if(is_array($this->_placeholders)) return $this->_placeholders;
+    else return array($this->_placeholders);
     }
 
     /**
-     * Strip non-numeric chars from the variable (as the groupseperator) and replace 
+     * Strip non-numeric chars from the variable (as the groupseperator) and replace
      * it in the symbolic query for evaluation.
      *
      * @access private
@@ -519,23 +519,23 @@ class NumericSearchQuery
      * @return string
      */
     function _bind($value, $x) {
-	// TODO: check is_number, is_float, is_integer and do casting
-	$this->_bound[] = array('linkname'  => $x,
-	        		'linkvalue' => $value);
-	$value = preg_replace("/[^-+0123456789.,]/", "", $value);
-	//$c = "/\b".preg_quote($x,"/")."\b/";
-	$this->_workquery = preg_replace("/\b".preg_quote($x,"/")."\b/", $value, $this->_workquery);
-	// FIXME: do again a final check. now only numbers and some operators are allowed.
-	return $this->_workquery;
+    // TODO: check is_number, is_float, is_integer and do casting
+    $this->_bound[] = array('linkname'  => $x,
+                    'linkvalue' => $value);
+    $value = preg_replace("/[^-+0123456789.,]/", "", $value);
+    //$c = "/\b".preg_quote($x,"/")."\b/";
+    $this->_workquery = preg_replace("/\b".preg_quote($x,"/")."\b/", $value, $this->_workquery);
+    // FIXME: do again a final check. now only numbers and some operators are allowed.
+    return $this->_workquery;
     }
-    
+
     /* array of successfully bound vars, and in case of success, the resulting vars
      */
     function _bound() {
-    	return $this->_bound;
+        return $this->_bound;
     }
 
-    /** 
+    /**
      * With an array of placeholders we need a hash to check against, if all required names are given.
      * Purpose: Be silent about missing vars, just return false.
      `*
@@ -545,20 +545,20 @@ class NumericSearchQuery
      * @return boolean
      */
     function can_match(&$variables) {
-    	if (empty($this->_query))
-    	    return false;
-	$p =& $this->_placeholders;
-	if (!is_array($variables) and !is_array($p))
-	    return $variables == $p; // This was easy.
-	// Check if all placeholders have definitions. can be overdefined but not underdefined.
-	if (!is_array($p)) {
-	    if (!isset($variables[$p])) return false;
-	} else {
-	    foreach ($p as $x) {
-		if (!isset($variables[$x])) return false;
-	    }
-	}
-	return true;
+        if (empty($this->_query))
+            return false;
+    $p =& $this->_placeholders;
+    if (!is_array($variables) and !is_array($p))
+        return $variables == $p; // This was easy.
+    // Check if all placeholders have definitions. can be overdefined but not underdefined.
+    if (!is_array($p)) {
+        if (!isset($variables[$p])) return false;
+    } else {
+        foreach ($p as $x) {
+        if (!isset($variables[$x])) return false;
+        }
+    }
+    return true;
     }
 
     /**
@@ -571,36 +571,36 @@ class NumericSearchQuery
      * @return boolean
      */
     function match(&$variable) {
-	$p =& $this->_placeholders;
-	$this->_workquery = $this->_query;
-	if (!is_array($p)) {
-	    if (is_array($variable)) { // which var to match? we cannot decide this here
-		if (!isset($variable[$p]))
-		    trigger_error("Required NumericSearchQuery->match variable $x not defined.", E_USER_ERROR);
-		$this->_bind($variable[$p], $p);
-	    } else {
-		$this->_bind($variable, $p);
-	    }
-	} else {
-	    foreach ($p as $x) {
-		if (!isset($variable[$x]))
-		    trigger_error("Required NumericSearchQuery->match variable $x not defined.", E_USER_ERROR);
-		$this->_bind($variable[$x], $x);
-	    }
-	}
-    	if (!$this->_live_check()) // check returned an error
-    	    return false;
-    	$search = $this->_workquery;
-	$result = false;
-	//if (DEBUG & _DEBUG_VERBOSE)
-	//    trigger_error("\$result = (boolean)($search);", E_USER_NOTICE);
-	// We might have a numerical problem:
-	// php-4.2.2 eval'ed as module: "9.636e+08 > 1000" false; 
-	// php-5.1.2 cgi true, 4.2.2 cgi true
-	eval("\$result = (boolean)($search);");
-	if ($result and is_array($p)) {
-	    return $this->_bound();
-	}
+    $p =& $this->_placeholders;
+    $this->_workquery = $this->_query;
+    if (!is_array($p)) {
+        if (is_array($variable)) { // which var to match? we cannot decide this here
+        if (!isset($variable[$p]))
+            trigger_error("Required NumericSearchQuery->match variable $x not defined.", E_USER_ERROR);
+        $this->_bind($variable[$p], $p);
+        } else {
+        $this->_bind($variable, $p);
+        }
+    } else {
+        foreach ($p as $x) {
+        if (!isset($variable[$x]))
+            trigger_error("Required NumericSearchQuery->match variable $x not defined.", E_USER_ERROR);
+        $this->_bind($variable[$x], $x);
+        }
+    }
+        if (!$this->_live_check()) // check returned an error
+            return false;
+        $search = $this->_workquery;
+    $result = false;
+    //if (DEBUG & _DEBUG_VERBOSE)
+    //    trigger_error("\$result = (boolean)($search);", E_USER_NOTICE);
+    // We might have a numerical problem:
+    // php-4.2.2 eval'ed as module: "9.636e+08 > 1000" false;
+    // php-5.1.2 cgi true, 4.2.2 cgi true
+    eval("\$result = (boolean)($search);");
+    if ($result and is_array($p)) {
+        return $this->_bound();
+    }
         return $result;
     }
 }
@@ -647,7 +647,7 @@ class TextSearchQuery_node
     function sql()    { return $this->word; }
 
     function _sql_quote() {
-	global $request;
+    global $request;
         $word = preg_replace('/(?=[%_\\\\])/', "\\", $this->word);
         return $request->_dbi->_backend->qstr($word);
     }
@@ -661,7 +661,7 @@ extends TextSearchQuery_node
 {
     var $op = "WORD";
     var $_op = TSQ_TOK_WORD;
-    
+
     function TextSearchQuery_node_word($word) {
         $this->word = $word;
     }
@@ -756,7 +756,7 @@ extends TextSearchQuery_node
 {
     var $op = "NOT";
     var $_op = TSQ_TOK_NOT;
-    
+
     function TextSearchQuery_node_not($leaf) {
         $this->leaves = array($leaf);
     }
@@ -768,7 +768,7 @@ extends TextSearchQuery_node
             return $leaf->leaves[0]; // ( NOT ( NOT x ) ) -> x
         return $this;
     }
-    
+
     function regexp() {
         $leaf = &$this->leaves[0];
         return '(?!' . $leaf->regexp() . ')';
@@ -828,7 +828,7 @@ class TextSearchQuery_node_and
 extends TextSearchQuery_node_binop
 {
     var $op = "AND";
-    
+
     function optimize() {
         $this->_flatten();
 
@@ -851,7 +851,7 @@ extends TextSearchQuery_node_binop
                       (new TextSearchQuery_node_or($nots)) );
             array_unshift($this->leaves, $node->optimize());
         }
-        
+
         assert(!empty($this->leaves));
         if (count($this->leaves) == 1)
             return $this->leaves[0];  // (AND x) -> x
@@ -882,7 +882,7 @@ extends TextSearchQuery_node_binop
     function regexp() {
         // We will combine any of our direct descendents which are WORDs
         // into a single (?=.*(?:word1|word2|...)) regexp.
-        
+
         $regexps = array();
         $words = array();
 
@@ -917,39 +917,39 @@ extends TextSearchQuery_node_binop
 //   op's (and, or, not) are forced to lowercase in the tokenizer.
 //
 ////////////////////////////////////////////////////////////////
-class TextSearchQuery_Parser 
+class TextSearchQuery_Parser
 {
     /*
      * This is a simple recursive descent parser, based on the following grammar:
      *
-     * toplist	:
-     *		| toplist expr
-     *		;
+     * toplist    :
+     *        | toplist expr
+     *        ;
      *
      *
-     * list	: expr
-     *		| list expr
-     *		;
+     * list    : expr
+     *        | list expr
+     *        ;
      *
-     * expr	: atom
-     *		| expr BINOP atom
-     *		;
+     * expr    : atom
+     *        | expr BINOP atom
+     *        ;
      *
-     * atom	: '(' list ')'
-     *		| NOT atom
-     *		| WORD
-     *		;
+     * atom    : '(' list ')'
+     *        | NOT atom
+     *        | WORD
+     *        ;
      *
      * The terminal tokens are:
      *
      *
-     * and|or		  BINOP
-     * -|not		  NOT
-     * (		  LPAREN
-     * )		  RPAREN
+     * and|or          BINOP
+     * -|not          NOT
+     * (          LPAREN
+     * )          RPAREN
      * /[^-()\s][^()\s]*  WORD
-     * /"[^"]*"/	  WORD
-     * /'[^']*'/	  WORD
+     * /"[^"]*"/      WORD
+     * /'[^']*'/      WORD
      *
      * ^WORD              TextSearchQuery_phrase_starts_with
      * WORD*              STARTS_WITH
@@ -968,7 +968,7 @@ class TextSearchQuery_Parser
         unset($this->lexer);
         return $tree;
     }
-    
+
     function get_list ($is_toplevel = false) {
         $list = array();
 
@@ -977,10 +977,10 @@ class TextSearchQuery_Parser
         $accept_as_words = TSQ_TOK_NOT | TSQ_TOK_BINOP;
         if ($is_toplevel)
             $accept_as_words |= TSQ_TOK_LPAREN | TSQ_TOK_RPAREN;
-        
+
         while ( ($expr = $this->get_expr())
                 || ($expr = $this->get_word($accept_as_words)) )
-	{
+    {
             $list[] = $expr;
         }
 
@@ -1002,14 +1002,14 @@ class TextSearchQuery_Parser
     function get_expr () {
         if ( ($expr = $this->get_atom()) === false ) // protect against '0'
             return false;
-        
+
         $savedpos = $this->lexer->tell();
         // Bug#1791564: allow string '0'
         while ( ($op = $this->lexer->get(TSQ_TOK_BINOP)) !== false) {
             if ( ! ($right = $this->get_atom()) ) {
                 break;
             }
-            
+
             if ($op == 'and')
                 $expr = new TextSearchQuery_node_and(array($expr, $right));
             else {
@@ -1023,7 +1023,7 @@ class TextSearchQuery_Parser
 
         return $expr;
     }
-    
+
 
     function get_atom() {
         if ($atom = $this->get_word(TSQ_ALLWORDS)) // Bug#1791564 not involved: '*'
@@ -1034,9 +1034,9 @@ class TextSearchQuery_Parser
             if ( ($list = $this->get_list()) && $this->lexer->get(TSQ_TOK_RPAREN) ) {
                 return $list;
             } else {
-            	// Fix Bug#1792170
+                // Fix Bug#1792170
                 // Handle " ( " or "(test" without closing ")" as plain word
-		$this->lexer->seek($savedpos);
+        $this->lexer->seek($savedpos);
                 return new TextSearchQuery_node_word($this->lexer->get(-1));
             }
         }
@@ -1049,23 +1049,23 @@ class TextSearchQuery_Parser
     }
 
     function get_word($accept = TSQ_ALLWORDS) {
-    	// Performance shortcut for ( and ). This is always false
-	if (!empty($this->lexer->tokens[$this->lexer->pos])) {
-	    list ($type, $val) = $this->lexer->tokens[$this->lexer->pos];
-	    if ($type == TSQ_TOK_LPAREN or $type == TSQ_TOK_RPAREN)
-		return false;
-	}
+        // Performance shortcut for ( and ). This is always false
+    if (!empty($this->lexer->tokens[$this->lexer->pos])) {
+        list ($type, $val) = $this->lexer->tokens[$this->lexer->pos];
+        if ($type == TSQ_TOK_LPAREN or $type == TSQ_TOK_RPAREN)
+        return false;
+    }
         foreach (array("WORD","STARTS_WITH","ENDS_WITH","EXACT",
                        "REGEX","REGEX_GLOB","REGEX_PCRE","ALL") as $tok) {
             $const = constant("TSQ_TOK_".$tok);
             // Bug#1791564: allow word '0'
-            if ( $accept & $const and 
+            if ( $accept & $const and
                 (($word = $this->lexer->get($const)) !== false))
             {
                 // phrase or word level?
                 if ($tok == 'STARTS_WITH' and $this->lexer->query_str[0] == '^')
                     $classname = "TextSearchQuery_phrase_".strtolower($tok);
-                elseif ($tok == 'ENDS_WITH' and 
+                elseif ($tok == 'ENDS_WITH' and
                         string_ends_with($this->lexer->query_str,'$'))
                     $classname = "TextSearchQuery_phrase_".strtolower($tok);
                 else
@@ -1078,8 +1078,8 @@ class TextSearchQuery_Parser
 }
 
 class TextSearchQuery_Lexer {
-    function TextSearchQuery_Lexer ($query_str, $case_exact=false, 
-                                    $regex=TSQ_REGEX_AUTO) 
+    function TextSearchQuery_Lexer ($query_str, $case_exact=false,
+                                    $regex=TSQ_REGEX_AUTO)
     {
         $this->tokens = $this->tokenize($query_str, $case_exact, $regex);
         $this->query_str = $query_str;
@@ -1097,7 +1097,7 @@ class TextSearchQuery_Lexer {
     function eof() {
         return $this->pos == count($this->tokens);
     }
-    
+
     /**
      * TODO: support more regex styles, esp. prefer the forced ones over auto
      * re: and // stuff
@@ -1128,7 +1128,7 @@ class TextSearchQuery_Lexer {
                 $val = "%";
                 $type = TSQ_TOK_ALL;
             }
-            
+
             // ^word
             elseif ($regex & (TSQ_REGEX_AUTO|TSQ_REGEX_POSIX|TSQ_REGEX_PCRE)
                     and preg_match('/^\^([^-()][^()\s]*)\s*/', $buf, $m)) {
@@ -1167,7 +1167,7 @@ class TextSearchQuery_Lexer {
                 $val = strtolower($m[1]);
                 $type = TSQ_TOK_NOT;
             }
-            
+
             // "words "
             elseif (preg_match('/^ " ( (?: [^"]+ | "" )* ) " \s*/x', $buf, $m)) {
                 $val = str_replace('""', '"', $m[1]);
@@ -1191,27 +1191,27 @@ class TextSearchQuery_Lexer {
 
             /* refine the simple parsing from above: bla*bla, bla?bla, ...
             if ($regex and $type == TSQ_TOK_WORD) {
-            	if (substr($val,0,1) == "^")
-            	    $type = TSQ_TOK_STARTS_WITH;
-            	elseif (substr($val,0,1) == "*")
-            	    $type = TSQ_TOK_ENDS_WITH;
-            	elseif (substr($val,-1,1) == "*")
-            	    $type = TSQ_TOK_STARTS_WITH;
+                if (substr($val,0,1) == "^")
+                    $type = TSQ_TOK_STARTS_WITH;
+                elseif (substr($val,0,1) == "*")
+                    $type = TSQ_TOK_ENDS_WITH;
+                elseif (substr($val,-1,1) == "*")
+                    $type = TSQ_TOK_STARTS_WITH;
             }
             */
             $tokens[] = array($type, $val);
         }
         return $tokens;
     }
-    
+
     function get($accept) {
         if ($this->pos >= count($this->tokens))
             return false;
-        
+
         list ($type, $val) = $this->tokens[$this->pos];
         if (($type & $accept) == 0)
             return false;
-        
+
         $this->pos++;
         return $val;
     }
@@ -1223,5 +1223,5 @@ class TextSearchQuery_Lexer {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

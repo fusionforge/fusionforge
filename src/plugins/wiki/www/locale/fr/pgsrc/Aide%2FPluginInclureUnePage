@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginInclureUnePage 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginInclureUnePage 7919 2011-01-27 17:02:14Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginInclureUnePage;
   flags="";
@@ -14,13 +14,18 @@ Vous pouvez aussi charger des pages externes sur un mode plus limité avec
 PluginInclureUnCadre. Par exemple, les lignes suivantes :
 
 {{{
-<<IncludePage page="PageAccueil" >>
+<<IncludePage page="PageAccueil">>
 
-<<IncludePage page="WabiSabi" >>
+<<IncludePage page="Aide/WabiSabi">>
 }}}
 
 donne :
 
-<<IncludePage page="PageAccueil" >>
+<<IncludePage page="PageAccueil">>
 
-<<IncludePage page="WabiSabi" >>
+<<IncludePage page="Aide/WabiSabi">>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: XmlParser.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: XmlParser.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Base XmlParser Class.
  * Requires the expat.so/.dll, usually enabled by default.
@@ -34,7 +34,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -93,7 +93,7 @@ class XmlParser {
         if (is_string($attrs) and !empty($attrs)) {
             // lowercase attr names
             foreach(explode(' ', $attrs) as $pair) {
-            	if (strstr($pair,"=")) {
+                if (strstr($pair,"=")) {
                     list($key,$val) = explode('=', $pair);
                     $key = strtolower(trim($key));
                     $val = str_replace(array('"',"'"),'',trim($val));
@@ -114,9 +114,9 @@ class XmlParser {
             $this->current->_content[] =& $node;    // copy or ref?
             $node->previous =& $this->current;      // ref to parallel prev
         }
-        $this->current =& $node;	  		// ref
+        $this->current =& $node;              // ref
         if (empty($this->root)) {
-            $this->root =& $node; 		 	// ref for === test below
+            $this->root =& $node;              // ref for === test below
             $GLOBALS['xml_parser_root'] =& $this->root;  // copy
         }
     }
@@ -155,7 +155,7 @@ class XmlParser {
             }
             $content = "";
             while ($data = fread($fp, 4096))  {
-            	$content .= $data;
+                $content .= $data;
             }
             fclose($fp);
             $this->parse($content);

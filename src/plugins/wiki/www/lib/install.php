@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: install.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: install.php 8071 2011-05-18 14:56:14Z vargenau $
 
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -49,7 +49,7 @@ function run_install($part = '') {
     }
     // setup default settings
     if (!$already and !defined("_PHPWIKI_INSTALL_RUNNING")) {
-    	define("_PHPWIKI_INSTALL_RUNNING", true);
+        define("_PHPWIKI_INSTALL_RUNNING", true);
         include(dirname(__FILE__)."/../configurator.php");
     }
     $already = 1;

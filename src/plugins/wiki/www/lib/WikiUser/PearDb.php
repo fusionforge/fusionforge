@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: PearDb.php 7640 2010-08-11 12:33:25Z vargenau $');
+// $Id: PearDb.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2004 ReiniUrban
  *
@@ -16,10 +16,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 include_once("lib/WikiUser/Db.php");
 
 class _PearDbPassUser

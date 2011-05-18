@@ -1,5 +1,5 @@
 /**
- * $Id: portland.css 6464 2009-01-30 18:07:40Z vargenau $
+ * $Id: portland.css 7821 2011-01-07 12:42:51Z vargenau $
  *
  * PhpWiki's Portland style sheet based on the original Wiki
  *
@@ -12,7 +12,7 @@ body {
 }
 
 img {
-  border : 0 none;
+  border: 0;
 }
 
 .wiki-edithelp {
@@ -63,6 +63,26 @@ body.sidebar {
 }
 body.sidebar div.wikitext ul { padding-left: 1em; }
 body.sidebar h2 { margin-top: 0; }
+
+/* IncludePage plugin ================================================= */
+
+.transclusion-title {
+   font-style: oblique;
+   font-size: 0.75em;
+   text-decoration: underline;
+   text-align: right;
+}
+
+.transclusion {
+   background: lightgreen;
+   border: thin;
+   border-style: solid;
+   padding-left: 0.8em;
+   padding-right: 0.8em;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   margin: 0.5ex 0px;
+}
 
 /*
  * table class="boxed"

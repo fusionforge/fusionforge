@@ -1,13 +1,13 @@
-# $Id: Makefile 7436 2010-05-21 09:19:15Z vargenau $
+# $Id: Makefile 7833 2011-01-13 15:06:45Z vargenau $
 #
 # themes/MonoBook/Makefile
 #
 # minify CSS and JS
 #
 
-CSS_SRC = IE50Fixes.css  IE70Fixes.css   KHTMLFixes.css   commonPrint.css  rtl.css \
-	  IE55Fixes.css  IEFixes.css     Opera6Fixes.css  main.css         wikiprintable.css \
-	  IE60Fixes.css  IEMacFixes.css  Opera7Fixes.css  monobook.css     wikistandard.css
+CSS_SRC = IE70Fixes.css   commonPrint.css  rtl.css \
+	  IEFixes.css     main.css         wikiprintable.css \
+	  IE60Fixes.css  monobook.css     wikistandard.css
 MAIN    = wikibits
 JS_MAIN = wikibits.js
 # JS_REST = IEFixes.js

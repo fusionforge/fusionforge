@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
 ?>
 <!-- The top navigation/search bar -->
 <form action="<?php echo WikiURL(_("TitleSearch"))?>"
@@ -13,8 +13,8 @@
              onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
              onmouseout="window.status=''; return true;" />
     <?php if (!empty($revision)) { ?>
-     <?php echo $SEP?><?php echo Button(array('action'=>'LikePages'),_("LikePages"),$page->getName()) ?>
-     <?php echo $SEP?><?php echo Button(array('action'=>'BackLinks'), _("BackLinks"),$page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>_("LikePages")),_("LikePages"),$page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>_("BackLinks")), _("BackLinks"),$page->getName()) ?>
     <?php } ?>
     <?php if (!empty($user) && $user->isAdmin()) { ?>
      <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "","Admin") ?>

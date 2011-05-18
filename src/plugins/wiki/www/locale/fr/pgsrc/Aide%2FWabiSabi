@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 10:22:55 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FWabiSabi 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FWabiSabi 7915 2011-01-27 09:24:46Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FWabiSabi;
   flags="";
@@ -30,3 +30,8 @@ Caractéristiques matérielles du wabi-sabi :
 * simple
 * adorable
 Pour plus de détails sur le wabi-sabi, voir http://www.art.unt.edu/ntieva/artcurr/japan/wabisabi.htm.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]]
+</noinclude>

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Transclude.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: Transclude.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -85,7 +85,7 @@ extends WikiPlugin
         // FIXME: Better recursion detection.
         // FIXME: Currently this doesnt work at all.
         if ($src == $request->getURLtoSelf() ) {
-            return $this->error(fmt("recursive inclusion of url %s", $src));
+            return $this->error(fmt("Recursive inclusion of url %s", $src));
         }
         if (! IsSafeURL($src)) {
             return $this->error(_("Bad url in src: remove all of <, >, \""));
@@ -143,7 +143,7 @@ extends WikiPlugin
                 frame.height = content.height + 2 * frame.marginHeight;
             }
             catch (e) {
-              // Can not get content.height unless transcluded doc
+              // Cannot get content.height unless transcluded doc
               // is from the same server...
               return;
             }

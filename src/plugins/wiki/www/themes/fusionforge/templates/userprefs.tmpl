@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: userprefs.tmpl 7720 2010-10-22 18:38:33Z vargenau $'
+// $Id: userprefs.tmpl 7945 2011-03-02 10:15:46Z vargenau $'
 // Todo: Move the logic and code to the plugin
 // This is very experimental and the read-only part an ugly hack so far.
 foreach (explode(',','errmsg,isForm') as $var) {
@@ -186,7 +186,7 @@ if ( $isForm ) {
 <?php } ?>
 
 <fieldset style="margin-bottom: 1em;">
-<legend><strong>User preferences for this project</strong></legend>
+<legend><strong><?php echo _("User preferences for this project")?></strong></legend>
 <table border="0" width="100%">
 
   <tr><td colspan="3"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
@@ -207,7 +207,7 @@ if ( $isForm ) {
 </fieldset>
 
 <fieldset style="margin-bottom: 1em;">
-<legend><strong>Global user preferences (for all projects)</strong></legend>
+<legend><strong><?php echo _("Global user preferences (for all projects)")?></strong></legend>
 
 <table border="0" width="100%">
 
@@ -241,7 +241,7 @@ if ( $isForm ) {
   <tr>
      <td>
        <fieldset>
-       <legend>Top Menu</legend>
+       <legend><?php echo _("Top Menu")?></legend>
        <table cellpadding="0" cellspacing="0">
          <tr>
             <td>
@@ -281,7 +281,7 @@ if ( $isForm ) {
 
      <td valign="top">
        <fieldset>
-       <legend>Left Menu</legend>
+       <legend><?php echo _("Left Menu")?></legend>
        <table cellpadding="0" cellspacing="0">
          <tr>
             <td>

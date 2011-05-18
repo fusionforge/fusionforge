@@ -1,8 +1,8 @@
 <?php // -*-php-*-
-// rcs_id('$Id: Template.php 7700 2010-09-20 16:03:26Z vargenau $');
+// $Id: Template.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -70,7 +70,6 @@ extends WikiPlugin
                      'page'    => false, // the page to include
                      'vars'    => false, // TODO: get rid of this, all remaining args should be vars
                      'rev'     => false, // the revision (defaults to most recent)
-                     'version' => false, // same as "rev"
                      'section' => false, // just include a named section
                      'sectionhead' => false // when including a named section show the heading
                      );
@@ -84,7 +83,7 @@ extends WikiPlugin
     // TODO: check if page can really be pulled from the args, or if it is just the basepage.
     function getWikiPageLinks($argstr, $basepage) {
         $args = $this->getArgs($argstr);
-        $page = @$args['page'];
+        $page = isset($args['page'])? $args['page']: '';
         if ($page) {
             // Expand relative page names.
             $page = new WikiPageName($page, $basepage);
@@ -99,12 +98,6 @@ extends WikiPlugin
         $args = $this->getArgs($argstr, $request);
         $vars = $args['vars'] ? $args['vars'] : $this->vars;
         $page = $args['page'];
-
-        if ($args['version'] && $args['rev']) {
-            return $this->error(_("Choose only one of 'version' or 'rev' parameters."));
-        } elseif ($args['version']) {
-            $args['rev'] = $args['version'];
-        }
 
         if ($page) {
             // Expand relative page names.
@@ -127,7 +120,7 @@ extends WikiPlugin
         // Protect from recursive inclusion. A page can include itself once
         static $included_pages = array();
         if (in_array($page, $included_pages)) {
-            return $this->error(sprintf(_("recursive inclusion of page %s"),
+            return $this->error(sprintf(_("Recursive inclusion of page %s"),
                                         $page));
         }
 
@@ -144,6 +137,9 @@ extends WikiPlugin
 
         $p = $dbi->getPage($page);
         if ($args['rev']) {
+            if (!is_whole_number($args['rev']) or !($args['rev']>0)) {
+                return $this->error(_("Error: rev must be a positive integer."));
+            }
             $r = $p->getRevision($args['rev']);
             if ((!$r) || ($r->hasDefaultContents())) {
                 return $this->error(sprintf(_("%s: no such revision %d."),
@@ -168,7 +164,7 @@ extends WikiPlugin
             }
             // trap recursive redirects
             if (in_array($m[1], $included_pages)) {
-                return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+                return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                                                 $page.' => '.$m[1]));
             }
             $page = $m[1];
@@ -253,8 +249,9 @@ extends WikiPlugin
                 $var['BASE_URL'] = PHPWIKI_BASE_URL;
 
             foreach ($var as $key => $val) {
-                //$content = preg_replace("/%%".preg_quote($key,"/")."%%/", $val, $content);
-                $content = str_replace("%%".$key."%%", $val, $content);
+                // We have to decode the double quotes that have been encoded
+                // in inline or block parser.
+                $content = str_replace("%%".$key."%%", htmlspecialchars_decode($val), $content);
             }
         }
         return $content;

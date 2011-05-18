@@ -1,5 +1,5 @@
 <?php
-//rcs_id('$Id: PageList.php 7710 2010-10-01 11:45:58Z vargenau $');
+//$Id: PageList.php 8071 2011-05-18 14:56:14Z vargenau $
 /* Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -725,14 +725,14 @@ class PageList {
     }
 
     /**
-     * @param	caption	string or HTML
+     * @param    caption    string or HTML
      */
     function setCaption ($caption) {
         $this->_caption = $caption;
     }
 
     /**
-     * @param	caption	string or HTML
+     * @param    caption    string or HTML
      */
     function addCaption ($caption) {
         $this->_caption = HTML($this->_caption," ",$caption);
@@ -836,49 +836,49 @@ class PageList {
     /* ignore from, but honor limit */
     function addPages ($page_iter) {
         // TODO: if limit check max(strlen(pagename))
-	$limit = $page_iter->limit();
+    $limit = $page_iter->limit();
         $i = 0;
-	if ($limit) {
-	    list($from, $limit) = $this->limit($limit);
-	    $this->_options['slice'] = 0;
-	    $limit += $from;
+    if ($limit) {
+        list($from, $limit) = $this->limit($limit);
+        $this->_options['slice'] = 0;
+        $limit += $from;
             while ($page = $page_iter->next()) {
                 $i++;
                 if ($from and $i < $from)
                     continue;
-	        if (!$limit or ($limit and $i < $limit))
-		    $this->addPage($page);
+            if (!$limit or ($limit and $i < $limit))
+            $this->addPage($page);
             }
-	} else {
-	    $this->_options['slice'] = 0;
+    } else {
+        $this->_options['slice'] = 0;
             while ($page = $page_iter->next()) {
-		$this->addPage($page);
+        $this->addPage($page);
             }
-	}
-	if (! is_array($page_iter->_options) || ! array_key_exists('limit_by_db', $page_iter->_options) || ! $page_iter->_options['limit_by_db'])
-		$this->_options['slice'] = 1;
-	if ($i and empty($this->_options['count']))
-	    $this->_options['count'] = $i;
+    }
+    if (! is_array($page_iter->_options) || ! array_key_exists('limit_by_db', $page_iter->_options) || ! $page_iter->_options['limit_by_db'])
+        $this->_options['slice'] = 1;
+    if ($i and empty($this->_options['count']))
+        $this->_options['count'] = $i;
     }
 
     function addPageList (&$list) {
         if (empty($list)) return;  // Protect reset from a null arg
         if (isset($this->_options['limit'])) { // extract from,count from limit
-	    list($from, $limit) = WikiDB_backend::limit($this->_options['limit']);
-	    $limit += $from;
+        list($from, $limit) = WikiDB_backend::limit($this->_options['limit']);
+        $limit += $from;
         } else {
-	    $limit = 0;
+        $limit = 0;
         }
-	$this->_options['slice'] = 0;
+    $this->_options['slice'] = 0;
         $i = 0;
         foreach ($list as $page) {
             $i++;
             if ($from and $i < $from)
                 continue;
-	    if (!$limit or ($limit and $i < $limit)) {
+        if (!$limit or ($limit and $i < $limit)) {
                 if (is_object($page)) $page = $page->_pagename;
                 $this->addPage((string)$page);
-	    }
+        }
         }
     }
 
@@ -1040,7 +1040,7 @@ class PageList {
         // expand wildcards from list of all pages
         if (preg_match('/[\?\*]/', $input) or substr($input,0,1) == "^") {
             include_once("lib/TextSearchQuery.php");
-            $search = new TextSearchQuery(str_replace(",", " ", $input), true,
+            $search = new TextSearchQuery(str_replace(",", " or ", $input), true,
                                          (substr($input,0,1) == "^") ? 'posix' : 'glob');
             $dbi = $GLOBALS['request']->getDbh();
             $iter = $dbi->titleSearch($search, $sortby, $limit, $exclude);

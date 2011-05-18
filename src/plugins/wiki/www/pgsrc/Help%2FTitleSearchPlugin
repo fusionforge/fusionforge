@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:39:15 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FTitleSearchPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FTitleSearchPlugin 7755 2010-12-09 13:39:40Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTitleSearchPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -73,6 +73,9 @@ All [[Help:PageList|PageList]] arguments, plus the following ones.
 * [[PhpWiki:ReiniUrban|Reini Urban]]
 
 == See Also ==
+* [[Help:FullTextSearchPlugin]]
+* [[Help:ExternalSearchPlugin]]
+* [[Help:InterWikiSearchPlugin]]
 
 <noinclude>
 ----

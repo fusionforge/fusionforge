@@ -1,5 +1,5 @@
 <?php // -*- php -*-
-// rcs_id('$Id: blogform.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// $Id: blogform.tmpl 7850 2011-01-21 09:41:05Z vargenau $
 ?>
 <div class="wikiblog wikiblog-form">
 <form action="<?php echo $request->getPostURL()?>" method="post" name="editpage"
@@ -7,7 +7,7 @@
   <input type="hidden" name="edit[pagename]" value="<?php echo $PAGENAME?>" />
   <input type="hidden" name="mode" value="add" />
   <div class="wikiblog-form">
-     <?php echo _("Headline").': ' ?><br />
+     <?php echo _("Headline")._(": ") ?><br />
      <input id="wikiblog-summary" class="wikitext" type="text" style="width:540px" size="60"
                    maxlength="256" name="edit[summary]" value="" />
      <?php echo $EDIT_TOOLBAR ?>

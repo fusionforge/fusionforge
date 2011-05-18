@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: UpLoad 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: UpLoad 7928 2011-02-04 15:46:03Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=UpLoad;
   flags="";
@@ -8,9 +8,10 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-__這是實驗性的頁面. 現在只有 Wiki 管理者才能使用.__
+**這是實驗性的頁面. 現在只有 Wiki 管理者才能使用.**
 
 ----
-<<UpLoad >>
+<<UpLoad>>
+
 ----
-WikiPlugin PluginManager
+[[CategoryActionPage]]

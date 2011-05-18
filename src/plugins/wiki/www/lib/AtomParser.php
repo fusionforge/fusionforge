@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: AtomParser.php 7509 2010-06-09 11:35:44Z rurban $
+// $Id: AtomParser.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2010 Sébastien Le Callonnec
  *
@@ -16,14 +16,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 /**
  * This class is a poor-man Atom parser, it does no validation of the feed.
  * The content of an entry ("payload") is not parsed but rather returned "as-is",
  * as its format can be text, html or xhtml.
- * 
+ *
  * @author: Sébastien Le Callonnec
  */
 require_once('lib/XmlParser.php');
@@ -44,7 +44,7 @@ extends XmlParser
     var $icon = '';
     var $rights = '';
     var $logo = '';
-    
+
     var $categories = array();
 
     var $authors = array();
@@ -64,7 +64,7 @@ extends XmlParser
     var $id = '';
     var $links = array();
     var $summary = '';
-    
+
     var $inside_content = false;
     var $content = '';
 
@@ -165,7 +165,7 @@ extends XmlParser
 
     function cdata($parser, $data) {
         global $current_tag, $current_attrs;
-        
+
         if ($this->inside_content) {
             $this->content .= $data;
         } else {
@@ -244,7 +244,7 @@ extends XmlParser
             return trim($element);
         }
     }
-    
+
     function serialize_tag($tag_name, $attributes) {
         $tag = "<" . $tag_name;
         foreach ($attributes as $k => $v) {

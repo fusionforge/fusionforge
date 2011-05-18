@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: ListSubpages.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: ListSubpages.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -91,7 +91,7 @@ extends WikiPlugin
             // A page cannot include itself. Avoid doublettes.
             static $included_pages = array();
             if (in_array($page, $included_pages)) {
-                $content->pushContent(HTML::p(sprintf(_("recursive inclusion of page %s ignored"),
+                $content->pushContent(HTML::p(sprintf(_("Recursive inclusion of page %s ignored"),
                                                       $page)));
                 continue;
             }

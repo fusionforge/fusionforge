@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FLdapSearchPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FLdapSearchPlugin 7757 2010-12-09 13:53:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FLdapSearchPlugin;
   flags=PAGE_LOCKED;
@@ -17,54 +17,54 @@ The **~LdapSearch** [[Help:WikiPlugin|plugin]] displays a LDAP query as table.
            host="localhost"
            port=389
            basedn=""
- 	   filter="(cn=*)"
-           attributes=""  
- >>
-<<LdapSearch host=ldap.example.com filter="(ou=web-team)" 
+           filter="(cn=*)"
+           attributes=""
+>>
+<<LdapSearch host=ldap.example.com filter="(ou=web-team)"
                       attributes="sn cn telephonenumber">>
 <<LdapSearch host="ldap.itd.umich.edu" basedn="" filter="(sn=jensen)" attributes="cn drink">>
 <<LdapSearch host=ldap.example.com attributes="cn sn telephonenumber">>
 <<LdapSearch host=bugs.debian.org port=10101 basedn="dc=current,dc=bugs,dc=debian,dc=org"
-                      filter="(debbugsPackage=phpwiki)" 
+                      filter="(debbugsPackage=phpwiki)"
                       attributes="debbugsSeverity debbugsState debbugsTitle">>
 }}}
 
 == Arguments ==
 
 host _(default: from LDAP_AUTH_HOST or localhost)_:
-	hostname or ip or ldap:// uri to connect to.
+        hostname or ip or ldap:// uri to connect to.
 
 port _(default: from LDAP_AUTH_HOST or 389)_:
-	portnumber to connect to.
+        portnumber to connect to.
 
 basedn _(default: LDAP_BASE_DN)_:
-	connect string: "ou=Users,o=Development,dc=mycompany.com"
+        connect string: "ou=Users,o=Development,dc=mycompany.com"
 
 filter _(default: "(cn=*)")_:
-	Optional ldap_search() filter argument
+        Optional ldap_search() filter argument
 
 attributes _(default: empty)_ :
-	space seperated fields to return as table columns: "cn sn"
+        space seperated fields to return as table columns: "cn sn"
 
 options:
-	ldap_set_option(). Default: LDAP_SET_OPTION if host == LDAP_AUTH_HOST
-	Column seperated name=value pairs. Esp. needed for Windows Active directory:
-	"LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0"
+        ldap_set_option(). Default: LDAP_SET_OPTION if host == LDAP_AUTH_HOST
+        Column seperated name=value pairs. Esp. needed for Windows Active directory:
+        "LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0"
 user:
-	Default: LDAP_AUTH_USER if host == LDAP_AUTH_HOST
+        Default: LDAP_AUTH_USER if host == LDAP_AUTH_HOST
 password:
-	Default: LDAP_AUTH_PASSWORD if host == LDAP_AUTH_HOST
-	user and password are required for Windows Active directory.
+        Default: LDAP_AUTH_PASSWORD if host == LDAP_AUTH_HOST
+        user and password are required for Windows Active directory.
 
 == Examples ==
 
-<<WikiFormRich action=LdapSearch 
+<<WikiFormRich action=LdapSearch
         editbox[] name=host value=bugs.debian.org size=80
         editbox[] name=port value=10101 size=80
         editbox[] name=basedn value="dc=current,dc=bugs,dc=debian,dc=org" size=80
-	editbox[] name=filter value="(debbugsPackage=phpwiki)" size=80
+        editbox[] name=filter value="(debbugsPackage=phpwiki)" size=80
         editbox[] name=attributes value="debbugsSeverity debbugsState debbugsTitle" size=80
-	submit[] reset[]
+        submit[] reset[]
 >>
 
 == Author ==

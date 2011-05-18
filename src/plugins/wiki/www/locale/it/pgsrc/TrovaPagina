@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Tue,  4 Jan 2011 11:58:08 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: TrovaPagina 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: TrovaPagina 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=TrovaPagina;
   flags=PAGE_LOCKED;
@@ -24,4 +24,4 @@ Usa il seguente campo per una ricerca completa del testo. Verranno impiegati alc
 ------
 Separa le parole con uno spazio. Tutte le parole devono corrispondere.
 %%%Per escludere delle parole falle precedere dal segno di '-'.
-%%%Esempio: 'wiki text -php' cerca per tutte le pagine contenenti la parola wiki __e__ il testo 'text', ma __non__  quelle contenenti 'php'
+%%%Esempio: 'wiki text -php' cerca per tutte le pagine contenenti la parola wiki **e** il testo 'text', ma **non**  quelle contenenti 'php'

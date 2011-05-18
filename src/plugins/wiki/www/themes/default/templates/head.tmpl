@@ -1,5 +1,5 @@
 <?php  // -*-php-*-
-// rcs_id('$Id: head.tmpl 7618 2010-07-16 06:59:16Z vargenau $');
+// $Id: head.tmpl 7956 2011-03-03 17:08:31Z vargenau $
 ?>
 <head>
 <?php if (ENABLE_XHTML_XML and strstr($request->get('HTTP_ACCEPT'),'application/xhtml+xml')) { ?>
@@ -24,13 +24,6 @@
 <meta name="PHPWIKI_VERSION" content="<?php echo PHPWIKI_VERSION?>" />
 <base href="<?php echo PHPWIKI_BASE_URL?>" />
 <link rel="shortcut icon" href="<?php echo $WikiTheme->getImageURL('favicon.ico')?>" />
-<?php /**
-       * Additional navigation links are provided here in the html header for browsers
-       * which support them: Mozilla, iCab, Amaya (and certain versions of Opera??).
-       *
-       * See http://www.w3.org/TR/html401/struct/links.html#edef-LINK
-       *     http://www.euronet.nl/~tekelenb/WWW/LINK/index.html
-       */ ?>
 <?php /* The next few lines are wrapped in an odd manner to allow gettext string extraction: cd locale;make */ ?>
 <link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
 <link rel="help" title="<?php echo 
@@ -117,7 +110,9 @@ _("UserPreferences"))?>" />
       $pagetitle = " - ". AsString($TITLE);
 ?>
 <title><?php echo WIKI_NAME.$pagetitle ?></title>
+<?php if (ENABLE_OPEN_GRAPH) { ?>
 <meta property="og:title" content="<?php echo strip_tags($TITLE) ?>"/>
 <meta property="og:site_name" content="<?php echo WIKI_NAME ?>"/>
+<?php } ?>
 <?php echo $WikiTheme->getMoreHeaders() ?>
 </head>

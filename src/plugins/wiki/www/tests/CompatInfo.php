@@ -2,7 +2,7 @@
 /* Get the Compatibility info for phpwiki
    http://pear.php.net/package/PHP_CompatInfo
 
-   $Id: CompatInfo.php 7638 2010-08-11 11:58:40Z vargenau $
+   $Id: CompatInfo.php 8071 2011-05-18 14:56:14Z vargenau $
 */
 /*
  * Copyright (C) 2004 Reini Urban <rurban@x-ray.at>
@@ -20,7 +20,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -47,7 +47,7 @@ $dir = preg_replace('/\/'.basename(dirname(__FILE__)).'$/', '', $dir);
 $debug = !empty($_GET['debug']);
 $detail = !empty($_GET['detail']);
 // echo $dir;
-$options = array('file_ext' 	=> array('php'),
+$options = array('file_ext'     => array('php'),
                  'ignore_files' => array(__FILE__),
                  'recurse_dir'  => true,
                  'ignore_functions' => array(),
@@ -102,7 +102,7 @@ foreach ($r as $key => $info) {
                 $const = array_shift($info['constants']);
             }
             out_row(array($file, $info['version'], $ext, $const));
-          
+
             if (is_array($info['extensions'])
                 and sizeof($info['extensions']) >= sizeof($info['constants'])) {
                 foreach ($info['extensions'] as $i => $ext) {
@@ -158,5 +158,5 @@ if ($debug) {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:  
+// End:
 ?>

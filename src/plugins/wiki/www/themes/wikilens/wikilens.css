@@ -1,5 +1,5 @@
 /**
- * $Id: wikilens.css 7327 2010-04-15 08:16:21Z vargenau $
+ * $Id: wikilens.css 7821 2011-01-07 12:42:51Z vargenau $
  * We have two possibilities to override the default:
  * 1. import is ns4 incompatible
  * 2. add a 2nd css in themeinfo.php
@@ -36,10 +36,11 @@ td.leftnav {
   border-bottom: 1px #e6e6fa solid; /* lavender */
 }
 
+img { border: 0; }
+
 #logo img {
   margin: 0;
   float: left;
-  border: 0;
 }
 
 #toolbar {

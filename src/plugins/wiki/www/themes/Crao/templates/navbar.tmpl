@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: navbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
 ?>
 <!-- The top navigation/search bar -->
 <form action="<?php echo WikiURL(_("TitleSearch"))?>"
@@ -14,8 +14,8 @@
 <?php echo WikiLink(_("RecentChanges"), "button") ?>
 <?php if (!empty($revision)) { ?>
 <?php echo $SEP?><?php echo Button("RelatedChanges", _("RelatedChanges")) ?>
-<?php echo $SEP?><?php echo Button("LikePages", _("LikePages")) ?>
-<?php echo $SEP?><?php echo Button("BackLinks", _("BackLinks")) ?>
+<?php echo $SEP?><?php echo Button(_("LikePages"), _("LikePages")) ?>
+<?php echo $SEP?><?php echo Button(_("BackLinks"), _("BackLinks")) ?>
 <?php } ?>
 </td>
 <td align="right" width="150">

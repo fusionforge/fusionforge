@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: HtmlElement5.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // $Id: HtmlElement5.php 7964 2011-03-05 17:05:30Z vargenau $
 /**
  * Code for writing the HTML subset of XML.
  * @author: Jeff Dairiki
@@ -33,7 +33,7 @@ class HtmlElement extends XmlElement
         assert(count($args) >= 1);
         assert(is_string($args[0]));
         $this->_tag = array_shift($args);
-      
+
         if ($args && is_array($args[0]))
             $this->_attr = array_shift($args);
         else {
@@ -56,7 +56,7 @@ class HtmlElement extends XmlElement
             elseif ($args[0] === false)
                 array_shift($args);
         }
-      
+
         if (count($args) == 1 && is_array($args[0]))
             $args = $args[0];
         $this->_content = $args;
@@ -69,7 +69,7 @@ class HtmlElement extends XmlElement
      */
     function addTooltip ($tooltip_text, $accesskey = null) {
         $this->setAttr('title', $tooltip_text);
-	if ($accesskey) $this->setAccesskey($accesskey);
+    if ($accesskey) $this->setAccesskey($accesskey);
 
         // FIXME: this should be initialized from title by an onLoad() function.
         //        (though, that may not be possible.)
@@ -81,25 +81,25 @@ class HtmlElement extends XmlElement
     }
 
     function setAccesskey ($key) {
-	global $WikiTheme;
-	if (strlen($key) != 1) return;
-	$this->setAttr("accesskey", $key);
+    global $WikiTheme;
+    if (strlen($key) != 1) return;
+    $this->setAttr("accesskey", $key);
 
         if (!empty($this->_attr['title'])) {
-	    if (preg_match("/\[(alt-)?(.)\]$/", $this->_attr['title'], $m))
-	    {
-		$this->_attr['title'] = preg_replace
+        if (preg_match("/\[(alt-)?(.)\]$/", $this->_attr['title'], $m))
+        {
+        $this->_attr['title'] = preg_replace
                     ("/\[(alt-)?(.)\]$/",
                      "[".$WikiTheme->tooltipAccessKeyPrefix()."-\\2]",
                      $this->_attr['title']);
-	    } else  {
-		$this->_attr['title'] .=
+        } else  {
+        $this->_attr['title'] .=
                     " [".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
-	    }
-	} else {
-	    $this->_attr['title'] =
+        }
+    } else {
+        $this->_attr['title'] =
                 "[".$WikiTheme->tooltipAccessKeyPrefix()."-$key]";
-	}
+    }
     }
 
     function emptyTag () {
@@ -126,7 +126,7 @@ class HTML extends HtmlElement {
     public static function raw ($html_text) {
         return new RawXml($html_text);
     }
-  
+
     function getTagProperties($tag) {
         $props = &$GLOBALS['HTML_TagProperties'];
         return isset($props[$tag]) ? $props[$tag] : 0;
@@ -544,7 +544,7 @@ function IfJavaScript($if_content = false, $else_content = false) {
     }
     return HTML($html);
 }
-  
+
 // Local Variables:
 // mode: php
 // tab-width: 8

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:39:15 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FInterWikiSearchPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FInterWikiSearchPlugin 7755 2010-12-09 13:39:40Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FInterWikiSearchPlugin;
   flags=PAGE_LOCKED;
@@ -8,17 +8,29 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_short description_
+The **~FullTextSearch** [[Help:WikiPlugin|plugin]] performs searches on ~InterWiki sites listed in InterWikiMap.
 
 == Usage ==
 {{{
-<<InterWikiSearch>>
+<<InterWikiSearch arguments>>
 }}}
 
 == Arguments ==
 
-page _(default: current pagename)_:
-  The page to execute upon.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| The search term
+| //none//
+|-
+| **formsize**
+|
+| 30
+|}
 
 == Example ==
 
@@ -32,6 +44,9 @@ page _(default: current pagename)_:
 * [[PhpWiki:ReiniUrban|Reini Urban]]
 
 == See Also ==
+* [[Help:TitleSearchPlugin]]
+* [[Help:FullTextSearchPlugin]]
+* [[Help:ExternalSearchPlugin]]
 
 <noinclude>
 ----

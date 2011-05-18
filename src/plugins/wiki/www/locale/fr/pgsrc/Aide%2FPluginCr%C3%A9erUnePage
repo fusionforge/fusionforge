@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 17:50:09 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginCr%C3%A9erUnePage 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginCr%C3%A9erUnePage 7879 2011-01-25 17:01:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCr%C3%A9erUnePage;
   flags="";
@@ -27,11 +27,11 @@ de la page à créer puis cliquez sur le bouton.
 }}}
 
 ===Arguments
-__s__: |
+**s**: |
   Le nom de la page qui sera passé au plugin. Par défaut : ""
-__initial_content__:  |
+**initial_content**:  |
   La nouvelle page sera pré-remplie avec ce contenu. Par défaut : "" 
-__template__:  |
+**template**:  |
   La nouvelle page sera pré-remplie avec ce contenu de cette page. Par défaut : "" 
 
 
@@ -49,3 +49,8 @@ Dan Frankowski
 <?plugin-form CreatePage s=MaPagePersonnelle ?>
 
 Voir aussi PhpWiki:EasilyCreateNewPages
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

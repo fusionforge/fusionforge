@@ -5,6 +5,16 @@ can be found at http://www.gnu.org/copyleft/gpl.txt.
 See ./INSTALL for installation notes.
 Read ./UPGRADING before upgrading from a previous version of PhpWiki.
 
+Supported browsers:
+
+Phpwiki should work with the following browsers:
+* Firefox >= 2
+* Safari >= 5
+* Opera >= 8
+* Chrome >= 6
+* Konqueror >= 3.5
+* Internet Explorer >= 6 (so no Internet Explorer for Macintosh)
+
 Additional docs:
 
 doc/:

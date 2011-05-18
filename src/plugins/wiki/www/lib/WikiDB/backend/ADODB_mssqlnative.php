@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: ADODB_mssqlnative.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: ADODB_mssqlnative.php 7956 2011-03-03 17:08:31Z vargenau $
 
 /**
  * MS SQL extensions for the ADODB DB backend.

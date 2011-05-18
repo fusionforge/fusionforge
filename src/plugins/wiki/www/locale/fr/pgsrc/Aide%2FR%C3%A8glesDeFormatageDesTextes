@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FR%C3%A8glesDeFormatageDesTextes 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FR%C3%A8glesDeFormatageDesTextes 7919 2011-01-27 17:02:14Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FR%C3%A8glesDeFormatageDesTextes;
   flags=PAGE_LOCKED;
@@ -189,21 +189,22 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 
 !!! Créer toute sorte de liens spéciaux
 
-* Voir [URLMagiquesPhpWiki] pour obtenir des détails gores sur la façon d'écrire 
+* Voir [[URLMagiquesPhpWiki]] pour obtenir des détails gores sur la façon d'écrire 
   divers types de liens de maintenance du wiki.
 
 !!! Insérer des plugins
 
 * quelques plugins embarqués dans les pages ajoutent des possibilités au Wiki. Par exemple,
   <verbatim>
-  <<BackLinks page=PageAccueil info=hits >>
+  <<BackLinks page=PageAccueil info=hits>>
   </verbatim>
   donne
-  <<BackLinks page=PageAccueil info=hits >>
+  <<BackLinks page=PageAccueil info=hits>>
 
 * pour plus d'informations sur les plugins, voir PluginWiki, et GestionPlugin pour 
   la liste des plugins.
 
+<noinclude>
 ----
-
 [[DocumentationDePhpWiki]]
+</noinclude>

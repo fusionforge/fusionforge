@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: actionbar.tmpl 7633 2010-08-09 14:00:30Z vargenau $');
+// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
 ?>
 <?php
   //$p = $WikiTheme->tooltipAccessKeyPrefix();
@@ -12,7 +12,7 @@
 <div class="portlet" id="p-cactions">
   <h5><?php echo _("Views") ?></h5>
   <ul>
-    <?php if (!string_ends_with($pagename, _("/Discussion"))) { ?>
+    <?php if (!string_ends_with($pagename, SUBPAGE_SEPARATOR._("Discussion"))) { ?>
       <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
       <?php echo ActionButton(array(),
 		       $isActionPage ? _("ActionPage") : _("Article"), 
@@ -54,7 +54,7 @@
     <?php } ?>
 
     <?php if ( $user->isSignedIn() ) { ?>
-      <?php echo ActionButton("WatchPage", _("Watch"), false, 
+      <?php echo ActionButton(_("WatchPage"), _("Watch"), false, 
 		       array('title'=>"Add/Remove this to/from the list of pages you're monitoring for changes [alt-l]")) ?>
     <?php } ?>
   </ul>

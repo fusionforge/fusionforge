@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2F_WikiTranslationPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2F_WikiTranslationPlugin 7757 2010-12-09 13:53:00Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2F_WikiTranslationPlugin;
   flags=PAGE_LOCKED;
@@ -10,12 +10,12 @@ Content-Transfer-Encoding: binary
 
 Display pagenames and other internal strings in various languages.
 
-Can also be used to let a favorite translation service translate a whole page. 
+Can also be used to let a favorite translation service translate a whole page.
 Current favorite: translate.google.com if from_lang = en or fr
 
 == Usage ==
 {{{
-  <<_WikiTranslation languages=de,en,sv string="" page="" 
+  <<_WikiTranslation languages=de,en,sv string="" page=""
                             what=pages from_lang=0 nolinks=0 noT=0 debug=0
  >>
 }}}
@@ -40,7 +40,7 @@ nolinks:
   Do not display any links (for development only)
 noT:
   Do not display the T link (for development only)
-  
+
 == Example ==
 
 {{{

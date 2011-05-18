@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 18:16:42 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: RechercheInterWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: RechercheInterWiki 7884 2011-01-25 17:17:11Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=RechercheInterWiki;
   flags="";
@@ -8,12 +8,13 @@ Content-Type: application/x-phpwiki;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-Interroge chaque Wiki apparaissant dans la CarteInterWiki en entrant 
+Interroge chaque Wiki apparaissant dans la [[CarteInterWiki]] en entrant 
 un nom de page souhaité ci-dessous.
 
 Pour ajouter une de ces recherches à une autre page, utiliser 
-PluginRechercheExterne.
+le greffon [[Aide:PluginRechercheExterne|RechercheExterne]].
 
 <<InterWikiSearch>>
+
 ----
-[[CategoryPluginWiki]]
+[[CatégoriePageDAction]]

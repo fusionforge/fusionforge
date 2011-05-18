@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:47:11 +0000
+Date: Wed, 13 Apr 2011 18:02:22 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiAdministration 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: PhpWikiAdministration 8049 2011-04-13 16:04:19Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
@@ -78,8 +78,8 @@ Here you can upload ZIP archives, or individual files from your
 === Load File ===
 
 Here you can load ZIP archives, individual files or entire
-directories. The file or directory must be local to the http
-server. You can also use this form to load from an http: or ftp: URL.
+directories. The file or directory is located in the Web DAV of your project.
+You can also use this form to load from an http: or ftp: URL.
 
 <<WikiForm action=loadfile>>
 <<WikiForm action=loadfile buttontext="Load & Overwrite" overwrite=1>>
@@ -113,6 +113,8 @@ This will generate a directory of static pages suitable for
 distribution on disk where no web server is available. The various
 links for page editing functions and navigation are removed from the
 pages.
+
+The directory will be located in the Web DAV of your project.
 
 The XHTML file collection can also be downloaded as an **[[phpwiki:?action=ziphtml|XHTML ZIP Snapshot]]**.
 

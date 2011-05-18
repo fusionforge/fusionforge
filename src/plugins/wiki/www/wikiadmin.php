@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: wikiadmin.php 7713 2010-10-08 13:56:07Z vargenau $
+<?php // -*-php-*- $Id: wikiadmin.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -16,9 +16,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
+*/
 
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
@@ -44,63 +44,52 @@
 
 require_once dirname(__FILE__)."/../../env.inc.php";
 require_once $gfcommon.'include/pre.php';
-require_once forge_get_config('plugins_path').'/wiki/common/WikiPlugin.class.php';
-require_once forge_get_config('plugins_path').'/wiki/common/wikiconfig.class.php';
-
-// the header that displays for the user portion of the plugin
-function wiki_Project_Header($params) {
-    global $id;
-    $params['toptab']='wiki';
-    $params['group']=$id;
-    /*
-        Show horizontal links
-    */
-    site_project_header($params);
-}
+require_once forge_get_config('plugins_path').'wiki/common/WikiPlugin.class.php';
+require_once forge_get_config('plugins_path').'wiki/common/wikiconfig.class.php';
 
 $user = session_get_user(); // get the session user
 
 if (!$user || !is_object($user)) {
     exit_error(_('Invalid User'),'home');
 } else if ( $user->isError()) {
-	exit_error($user->getErrorMessage(),'home');
+    exit_error($user->getErrorMessage(),'home');
 } else if ( !$user->isActive()) {
-	exit_error(_('User not active'),'home');
+    exit_error(_('User not active'),'home');
 }
 
 $type = getStringFromRequest('type');
-$id = getIntFromRequest('id');
+$group_id = getIntFromRequest('group_id');
 $pluginname = 'wiki';
 $config = getArrayFromRequest('config');
 
 if (!$type) {
-    exit_missing_params($_SERVER['HTTP_REFERER'],array(_('No TYPE specified')),'home');
-} elseif (!$id) {
-    exit_missing_params($_SERVER['HTTP_REFERER'],array(_('No ID specified')),'home');
+    exit_missing_param('',array(_('No TYPE specified')),'home');
+} elseif (!$group_id) {
+    exit_missing_param('',array(_('No ID specified')),'home');
 } else {
     if ($type == 'admin_post') {
-        $group = group_get_object($id);
+        $group = group_get_object($group_id);
         if ( !$group) {
-			exit_no_group();
+            exit_no_group();
         }
         if (!($group->usesPlugin($pluginname))) { //check if the group has the wiki plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+            exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
         }
         $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
         if ( !$userperm->IsMember()) {
-			exit_permission_denied(_('You are not a member of this project'),'home');
+            exit_permission_denied(_('You are not a member of this project'),'home');
         }
         //only project admin can access here
         if ( $userperm->isAdmin() ) {
 
-            $wc = new WikiConfig($id);
+            $wc = new WikiConfig($group_id);
 
             foreach ($wc->getWikiConfigNames() as $c) {
                 if ( ! array_key_exists($c, $config)) {
                     $config[$c] = 0;
                 }
             }
- 
+
             foreach ($config as $config_name => $config_value) {
                 $r = $wc->updateWikiConfig($config_name, $config_value);
                 if (!$r) exit_error("Error", $wc->getErrorMessage());
@@ -113,12 +102,12 @@ if (!$type) {
         }
     }
     if ($type == 'admin') {
-        $group = group_get_object($id);
+        $group = group_get_object($group_id);
         if ( !$group) {
-			exit_no_group();
+            exit_no_group();
         }
         if ( ! ($group->usesPlugin ($pluginname)) ) {//check if the group has the plugin active
-			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
+            exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'),$pluginname),'home');
         }
         $userperm = $group->getPermission($user); //we'll check if the user belongs to the group
         if ( !$userperm->IsMember()) {
@@ -126,9 +115,13 @@ if (!$type) {
         }
         //only project admin can access here
         if ( $userperm->isAdmin() ) {
-            wiki_Project_Header(array('title'=>"Configuration for your project's Wiki",'pagename'=>"$pluginname",'sectionvals'=>array(group_getname($id))));
+            site_project_header(array('title' => _("Configuration for your project's wiki"),
+                                      'pagename' => $pluginname,
+                                      'group'    => $group_id,
+                                      'toptab'   => 'wiki',
+                                      'sectionvals' => array(group_getname($group_id))));
 
-            $wc = new WikiConfig($id);
+            $wc = new WikiConfig($group_id);
 
             print "<table>\n";
             print "<tr>\n";
@@ -136,7 +129,7 @@ if (!$type) {
             print "<fieldset>\n";
             print "<legend>"._('Wiki Configuration')."</legend>\n";
             print "<form action=\"/wiki/wikiadmin.php\" method=\"post\">\n";
-            print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
+            print "<input type=\"hidden\" name=\"group_id\" value=\"$group_id\" />\n";
             print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
             print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
 

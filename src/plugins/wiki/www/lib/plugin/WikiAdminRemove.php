@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminRemove.php 7448 2010-05-31 12:01:38Z vargenau $');
+// $Id: WikiAdminRemove.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -118,23 +118,25 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently removed:"));
+                $result->pushContent(HTML::p(_("One page has been removed:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently removed:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been removed:", $count)));
             }
             $result->pushContent($ul);
             return $result;
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages removed."));
+            $result->pushContent(HTML::p(_("No pages removed.")));
             return $result;
         }
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        if ($request->getArg('action') != 'browse')
-            if ($request->getArg('action') != _("PhpWikiAdministration/Remove"))
-                return $this->disabled("(action != 'browse')");
+        if ($request->getArg('action') != 'browse') {
+            if ($request->getArg('action') != _("PhpWikiAdministration/Remove")) {
+                return $this->disabled(_("Plugin not run: not in browse mode"));
+            }
+        }
 
         $args = $this->getArgs($argstr, $request);
         if (!is_numeric($args['min_age']))
@@ -194,7 +196,7 @@ extends WikiPlugin_WikiAdminSelect
         if ($next_action == 'verify') {
             $button_label = _("Yes");
             $header->pushContent(HTML::p(HTML::strong(
-                _("Are you sure you want to permanently remove the selected files?"))));
+                _("Are you sure you want to remove the selected files?"))));
         }
         else {
             $button_label = _("Remove selected pages");

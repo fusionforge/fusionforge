@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: SOAP.php 7638 2010-08-11 11:58:40Z vargenau $
+<?php // -*-php-*- $Id: SOAP.php 7960 2011-03-04 13:58:21Z vargenau $
 /**
  * SOAP server
  * Taken from http://www.wlug.org.nz/archive/
@@ -64,7 +64,7 @@ function checkCredentials(&$server, &$credentials, $access, $pagename) {
         $request->_user = new WikiUser($request, $credentials['username']);
     }
     $request->_user->AuthCheck(array('userid' => $credentials['username'],
-				     'passwd' => $credentials['password']));
+                                     'passwd' => $credentials['password']));
     if (! mayAccessPage ($access, $pagename))
         $server->fault(401,'',"no permission");
 }
@@ -86,12 +86,12 @@ $server->bindings[ $server->ports[$server->currentPort]['binding'] ]['endpoint']
 $server->soapaction = $url; // soap_transport_http
 
 $actions = array('getPageContent','getPageRevision','getCurrentRevision',
-	         'getPageMeta','doSavePage','getAllPagenames',
-	         'getBackLinks','doTitleSearch','doFullTextSearch',
-		 'getRecentChanges','listLinks','listPlugins',
-		 'getPluginSynopsis','callPlugin','listRelations',
-		 'linkSearch'
-		 );
+                 'getPageMeta','doSavePage','getAllPagenames',
+                 'getBackLinks','doTitleSearch','doFullTextSearch',
+                 'getRecentChanges','listLinks','listPlugins',
+                 'getPluginSynopsis','callPlugin','listRelations',
+                 'linkSearch'
+                 );
 foreach ($actions as $action) {
     $server->register($actions);
     $server->operations[$actions]['soapaction'] = $url;
@@ -214,16 +214,16 @@ function getRecentChanges($limit=false, $since=false, $include_minor=false, $cre
     checkCredentials($server,$credentials,'view',_("RecentChanges"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $params = array('limit' => $limit, 'since' => $since,
-		    'include_minor_revisions' => $include_minor);
+                    'include_minor_revisions' => $include_minor);
     $page_iter = $dbi->mostRecent($params);
     $pages = array();
     while ($page = $page_iter->next()) {
         $pages[] = array('pagename' => $page->getName(),
-			 'lastModified' => $page->get('mtime'),
-			 'author'  => $page->get('author'),
-			 'summary' => $page->get('summary'), // added with 1.3.13
-			 'version' => $page->getVersion()
-			 );
+                         'lastModified' => $page->get('mtime'),
+                         'author'  => $page->get('author'),
+                         'summary' => $page->get('summary'), // added with 1.3.13
+                         'version' => $page->getVersion()
+                         );
     }
     return $pages;
 }
@@ -236,8 +236,8 @@ function listLinks($pagename, $credentials=false) {
     $linkiterator = $page->getPageLinks();
     $links = array();
     while ($currentpage = $linkiterator->next()) {
-	if ($currentpage->exists())
-	    $links[] = array('pagename' => $currentpage->getName());
+        if ($currentpage->exists())
+            $links[] = array('pagename' => $currentpage->getName());
     }
     return $links;
 }
@@ -298,8 +298,8 @@ function callPlugin($pluginname, $pluginargs, $credentials=false) {
     $pagelist = $p->run($dbi, $pluginargs, $request, $basepage);
     $pages = array();
     if (is_object($pagelist) and isa($pagelist, 'PageList')) {
-	foreach ($pagelist->pageNames() as $name)
-	    $pages[] = array('pagename' => $name);
+        foreach ($pagelist->pageNames() as $name)
+            $pages[] = array('pagename' => $name);
     }
     return $pages;
 }
@@ -322,8 +322,8 @@ function listRelations($option = 1, $credentials=false) {
     $only_attributes = $option & 2 and !($option & 1);
     $sorted = !($option & 4);
     return $dbh->listRelations($also_attributes,
-			       $only_attributes,
-			       $sorted);
+                               $only_attributes,
+                               $sorted);
 }
 // some basic semantic search
 function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=false) {
@@ -334,17 +334,17 @@ function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=
     $pagequery = new TextSearchQuery($pages);
     $linkquery = new TextSearchQuery($search);
     if ($linktype == 'relation') {
-	$relquery = new TextSearchQuery($relation);
-	$links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
+        $relquery = new TextSearchQuery($relation);
+        $links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
     } elseif ($linktype == 'attribute') { // only numeric search withh attributes!
-	$relquery = new TextSearchQuery($relation);
-	require_once("lib/SemanticWeb.php");
-	// search: "population > 1 million and area < 200 km^2" relation="*" pages="*"
-	$linkquery = new SemanticAttributeSearchQuery($search, $relation);
-	$links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
+        $relquery = new TextSearchQuery($relation);
+        require_once("lib/SemanticWeb.php");
+        // search: "population > 1 million and area < 200 km^2" relation="*" pages="*"
+        $linkquery = new SemanticAttributeSearchQuery($search, $relation);
+        $links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype, $relquery);
     } else {
-	// we already do have forward and backlinks as SOAP
-	$links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype);
+        // we already do have forward and backlinks as SOAP
+        $links = $dbi->_backend->link_search($pagequery, $linkquery, $linktype);
     }
     return $links->asArray();
 }
@@ -357,5 +357,5 @@ $server->service($GLOBALS['HTTP_RAW_POST_DATA']);
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

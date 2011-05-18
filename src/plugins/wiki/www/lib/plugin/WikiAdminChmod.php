@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminChmod.php 7647 2010-08-23 15:10:10Z vargenau $');
+// $Id: WikiAdminChmod.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -76,21 +76,22 @@ extends WikiPlugin_WikiAdminSelect
                 }
             }
         } else {
-            $ul->pushContent(HTML::li(fmt("Invalid chmod string")));
+            $ul->pushContent(HTML::li(_("Invalid chmod string")));
         }
         if ($count) {
             $dbi->touch();
             return HTML($ul,
-                        HTML::p(fmt("%s pages have been changed.",$count)));
+                        HTML::p(fmt("%d pages have been changed.", $count)));
         } else {
             return HTML($ul,
-                        HTML::p(fmt("No pages changed.")));
+                        HTML::p(_("No pages changed.")));
         }
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        if (!DEBUG)
+        if (!DEBUG) {
             return $this->disabled("WikiAdminChmod not yet enabled. Set DEBUG to try it.");
+        }
 
         $args = $this->getArgs($argstr, $request);
         $this->_args = $args;

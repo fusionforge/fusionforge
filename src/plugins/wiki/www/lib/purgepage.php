@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: purgepage.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: purgepage.php 8065 2011-05-04 10:27:44Z vargenau $
 require_once('lib/Template.php');
 
 function PurgePage (&$request) {
@@ -50,7 +50,7 @@ function PurgePage (&$request) {
         $dbi = $request->getDbh();
         $dbi->purgePage($pagename);
         $dbi->touch();
-        $html = HTML::div(array('class' => 'feedback'), fmt("Purged page '%s' successfully.", $pagename));
+        $html = HTML::p(array('class' => 'feedback'), fmt("Purged page '%s' successfully.", $pagename));
     }
 
     GeneratePage($html, _("Purge Page"));

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminPurge.php 7447 2010-05-31 11:29:39Z vargenau $');
+// $Id: WikiAdminPurge.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -74,23 +74,25 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently purged:"));
+                $result->pushContent(HTML::p(_("One page has been permanently purged:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently purged:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been permanently purged:", $count)));
             }
             $result->pushContent($ul);
             return $result;
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages purged."));
+            $result->pushContent(HTML::p(_("No pages purged.")));
             return $result;
         }
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        if ($request->getArg('action') != 'browse')
-            if ($request->getArg('action') != _("PhpWikiAdministration/Purge"))
-                return $this->disabled("(action != 'browse')");
+        if ($request->getArg('action') != 'browse') {
+            if ($request->getArg('action') != _("PhpWikiAdministration/Purge")) {
+                return $this->disabled(_("Plugin not run: not in browse mode"));
+            }
+        }
 
         $args = $this->getArgs($argstr, $request);
         $this->_args =& $args;

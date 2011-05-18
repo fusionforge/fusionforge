@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: PageDump.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: PageDump.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2003 $ThePhpWikiProgrammingTeam
  *
@@ -16,13 +16,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 /**
  * PhpWikiPlugin for PhpWiki developers to generate single page dumps
- * for checking into cvs, or for users or the admin to produce a
+ * for checking into Subversion, or for users or the admin to produce a
  * downloadable page dump of a single page.
  *
  * This plugin will also be useful to (semi-)automatically sync pages
@@ -36,7 +36,7 @@
  *
  * Usage:
  *  Direct URL access:
- *   http://...phpwiki/PageDump?page=HomePage?format=forcvs
+ *   http://...phpwiki/PageDump?page=HomePage?format=forsvn
  *   http://...phpwiki/index.php?PageDump&page=HomePage
  *   http://...phpwiki/index.php?PageDump&page=HomePage&download=1
  *  Static:
@@ -63,7 +63,7 @@ extends WikiPlugin
         return array('s'    => false,
                      'page' => '[pagename]',
                      //'encoding' => 'binary', // 'binary', 'quoted-printable'
-                     'format' => false, // 'normal', 'forcvs', 'backup'
+                     'format' => false, // 'normal', 'forsvn', 'forcvs', 'backup'
                      // display within WikiPage or give a downloadable
                      // raw pgsrc?
                      'download' => false);
@@ -91,7 +91,7 @@ extends WikiPlugin
         $mailified = MailifyPage($p, ($format == 'backup') ? 99 : 1);
 
         // fixup_headers massages the page dump headers depending on
-        // the 'format' argument, 'normal'(default) or 'forcvs'.
+        // the 'format' argument, 'normal'(default) or 'forsvn'.
         //
         // Normal: Don't add X-Rcs-Id, add unique Message-Id, don't
         // strip any fields from Content-Type.
@@ -102,8 +102,8 @@ extends WikiPlugin
 
         $this->pagename = $page;
         $this->generateMessageId($mailified);
-        if ($format == 'forcvs')
-            $this->fixup_headers_forcvs($mailified);
+        if (($format == 'forsvn') || ($format == 'forcvs'))
+            $this->fixup_headers_forsvn($mailified);
         else // backup or normal
             $this->fixup_headers($mailified);
 
@@ -142,11 +142,11 @@ extends WikiPlugin
         // text if it is too long--unless quoted-printable (TODO).
         $mailified = wordwrap($mailified, 70);
 
-        $dlcvs = Button(array(//'page' => $page,
+        $dlsvn = Button(array(//'page' => $page,
                               'action' => $this->getName(),
-                              'format'=> 'forcvs',
+                              'format'=> 'forsvn',
                               'download'=> true),
-                        _("Download for CVS"),
+                        _("Download for Subversion"),
                         $page);
         $dl = Button(array(//'page' => $page,
                            'action' => $this->getName(),
@@ -166,7 +166,7 @@ extends WikiPlugin
         if (!$Sep = $WikiTheme->getButtonSeparator())
             $Sep = " ";
 
-        if ($format == 'forcvs') {
+        if ($format == 'forsvn') {
             $desc = _("(formatted for PhpWiki developers as pgsrc template, not for backing up)");
             $altpreviewbuttons = HTML(
                                       Button(array('action' => $this->getName()),
@@ -183,7 +183,7 @@ extends WikiPlugin
             $desc = _("(formatted for backing up: all revisions)"); // all revisions
             $altpreviewbuttons = HTML(
                                       Button(array('action' => $this->getName(),
-                                                   'format'=> 'forcvs'),
+                                                   'format'=> 'forsvn'),
                                              _("Preview as developer format"),
                                              $page),
                                       $Sep,
@@ -196,7 +196,7 @@ extends WikiPlugin
             $desc = _("(normal formatting: latest revision only)");
             $altpreviewbuttons = HTML(
                                       Button(array('action' => $this->getName(),
-                                                   'format'=> 'forcvs'),
+                                                   'format'=> 'forsvn'),
                                              _("Preview as developer format"),
                                              $page),
                                       $Sep,
@@ -212,17 +212,17 @@ _("Please use one of the downloadable versions rather than copying and pasting f
 _("The wordwrap of the preview doesn't take nested markup or list indentation into consideration!")
 . " ",
 HTML::em(
-_("PhpWiki developers should manually inspect the downloaded file for nested markup before rewrapping with emacs and checking into CVS.")
+_("PhpWiki developers should manually inspect the downloaded file for nested markup before rewrapping with emacs and checking into Subversion.")
          )
                         );
 
         return HTML($h2, HTML::em($desc),
                     HTML::pre($mailified),
                     $altpreviewbuttons,
-                    HTML::div(array('class' => 'errors'),
+                    HTML::div(array('class' => 'error'),
                               HTML::strong(_("Warning:")),
                               " ", $warning),
-                    $dl, $Sep, $dlall, $Sep, $dlcvs
+                    $dl, $Sep, $dlall, $Sep, $dlsvn
                     );
     }
 
@@ -269,10 +269,10 @@ _("PhpWiki developers should manually inspect the downloaded file for nested mar
         $mailified = implode("\n", array_values($return));
     }
 
-    function fixup_headers_forcvs(&$mailified) {
+    function fixup_headers_forsvn(&$mailified) {
         $array = explode("\n", $mailified);
 
-        // Massage headers to prepare for developer checkin to CVS.
+        // Massage headers to prepare for developer checkin to Subversion.
         $item_to_insert = "X-Rcs-Id: \$Id\$";
         $insert_into_key_position = 2;
         $returnval_ignored = array_splice($array,

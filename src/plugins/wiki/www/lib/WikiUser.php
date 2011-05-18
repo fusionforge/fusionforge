@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: WikiUser.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: WikiUser.php 7964 2011-03-05 17:05:30Z vargenau $
 
 // It is anticipated that when userid support is added to phpwiki,
 // this object will hold much more information (e-mail,
@@ -51,7 +51,7 @@ function UpgradeUser ($olduser, $user) {
     if (isa($user,'WikiUser') and isa($olduser,'WikiUser')) {
         // populate the upgraded class with the values from the old object
         foreach (get_object_vars($olduser) as $k => $v) {
-            $user->$k = $v;	
+            $user->$k = $v;
         }
         $GLOBALS['request']->_user = $user;
         return $user;
@@ -61,7 +61,7 @@ function UpgradeUser ($olduser, $user) {
 }
 
 /**
-* 
+*
 */
 class WikiUser {
     var $_userid = false;
@@ -71,8 +71,8 @@ class WikiUser {
 
     /**
      * Constructor.
-     * 
-     * Populates the instance variables and calls $this->_ok() 
+     *
+     * Populates the instance variables and calls $this->_ok()
      * to ensure that the parameters are valid.
      * @param mixed $userid String of username or WikiUser object.
      * @param integer $authlevel Authorization level.
@@ -103,7 +103,7 @@ class WikiUser {
 
     /**
     * Get the string indicating how the user was authenticated.
-    * 
+    *
     * Get the string indicating how the user was authenticated.
     * Does not seem to be set - jbw
     * @return string The method of authentication.
@@ -114,8 +114,8 @@ class WikiUser {
 
     /**
      * Invariant
-     * 
-     * If the WikiUser object has a valid authorization level and the 
+     *
+     * If the WikiUser object has a valid authorization level and the
      * userid is a string returns true, else false.
      * @return boolean If valid level and username string true, else false
      */
@@ -147,7 +147,7 @@ class WikiUser {
     }
 
     function getAuthenticatedId() {
-    	//assert($this->_request);
+        //assert($this->_request);
         return ( $this->isAuthenticated()
                  ? $this->_userid
                  : $this->_request->get('REMOTE_ADDR') ); // FIXME: globals
@@ -352,7 +352,7 @@ class WikiUser {
     }
 
     // No cookies anymore for all prefs, only the userid. PHP creates
-    // a session cookie in memory, which is much more efficient, 
+    // a session cookie in memory, which is much more efficient,
     // but not persistent. Get persistency with a homepage or DB Prefs
     //
     // Return the number of changed entries
@@ -389,7 +389,7 @@ class WikiUser {
                             // An "empty" page could still be
                             // intentionally locked by admin to
                             // prevent its creation.
-                            //                            
+                            //
                             // FIXME: This permission situation should
                             // probably be handled by the DB backend,
                             // once the new WikiUser code has been
@@ -431,7 +431,7 @@ class WikiUser {
             if (empty($this->_dbi)) {
                 if (DEBUG) printSimpleTrace(debug_backtrace());
             } else {
-            	$this->_homepage = $this->_dbi->getPage($this->_userid);
+                $this->_homepage = $this->_dbi->getPage($this->_userid);
             }
             return $this->_homepage;
         }
@@ -539,7 +539,7 @@ class WikiUser {
         $prefs = $this->getPreferences();
         if (ENCRYPTED_PASSWD)
             $prefs->set('passwd', crypt($newpasswd));
-        else 
+        else
             $prefs->set('passwd', $newpasswd);
         $this->setPreferences($prefs);
         return true;

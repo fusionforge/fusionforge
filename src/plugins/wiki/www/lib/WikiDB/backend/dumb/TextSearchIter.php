@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: TextSearchIter.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: TextSearchIter.php 7956 2011-03-03 17:08:31Z vargenau $
 
 class WikiDB_backend_dumb_TextSearchIter
 extends WikiDB_backend_iterator

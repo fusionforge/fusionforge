@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSetAcl.php 7651 2010-08-24 14:24:17Z vargenau $');
+// $Id: WikiAdminSetAcl.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -120,27 +120,30 @@ extends WikiPlugin_WikiAdminSelect
                 }
             }
         } else {
-            $result->pushContent(HTML::p(fmt("Invalid ACL")));
+            $result->pushContent(HTML::p(_("Invalid ACL")));
         }
         if ($count) {
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count > 1) {
-                $result->pushContent(HTML::p(fmt("%s pages have been changed.",$count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been changed.", $count)));
             }
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p(fmt("No pages changed.")));
+            $result->pushContent(HTML::p(_("No pages changed.")));
         }
         return $result;
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        if ($request->getArg('action') != 'browse')
-            if ($request->getArg('action') != _("PhpWikiAdministration/SetAcl"))
-                return $this->disabled("(action != 'browse')");
-        if (!ENABLE_PAGEPERM)
+        if ($request->getArg('action') != 'browse') {
+            if ($request->getArg('action') != _("PhpWikiAdministration/SetAcl")) {
+                return $this->disabled(_("Plugin not run: not in browse mode"));
+            }
+        }
+        if (!ENABLE_PAGEPERM) {
             return $this->disabled("ENABLE_PAGEPERM = false");
+        }
 
         $args = $this->getArgs($argstr, $request);
         $this->_args = $args;
@@ -241,10 +244,10 @@ extends WikiPlugin_WikiAdminSelect
             $type = _("individual page permission");
         elseif ($type == 'default')
             $type = _("default page permission");
-        $header->pushContent(HTML::strong(_("Type").': '), HTML::tt($type),HTML::br());
-        $header->pushContent(HTML::strong(_("ACL").': '), HTML::tt($perm->asAclLines()),HTML::br());
+        $header->pushContent(HTML::strong(_("Type")._(": ")), HTML::tt($type),HTML::br());
+        $header->pushContent(HTML::strong(_("ACL")._(": ")), HTML::tt($perm->asAclLines()),HTML::br());
 
-        $header->pushContent(HTML::p(HTML::strong(_("Description").': '),
+        $header->pushContent(HTML::p(HTML::strong(_("Description")._(": ")),
                                      _("Selected Grant checkboxes allow access, unselected checkboxes deny access."),
                                      _("To ignore delete the line."),
                                      _("To add check 'Add' near the dropdown list.")

@@ -1,16 +1,16 @@
-<?php 
-  // rcs_id('$Id: hyperapplet.php 7589 2010-07-02 07:31:33Z vargenau $');
-/* Download hyperapplet.jar (or hyperwiki.jar) and GraphXML.dtd from 
+<?php
+  // $Id: hyperapplet.php 7968 2011-03-07 13:39:47Z vargenau $
+/* Download hyperapplet.jar (or hyperwiki.jar) and GraphXML.dtd from
  *   http://hypergraph.sourceforge.net/download.html
  *   and place it into your theme directory.
  * Include this php file and adjust the width/height.
- * The static version requires a dumped "LinkDatabase.xml" via 
+ * The static version requires a dumped "LinkDatabase.xml" via
  *   cd themes/default; wget http://localhost/wiki/index.php/LinkDatabase?format=xml -O LinkDatabase.xml
  * into the same dir as hyperapplet.jar
  */
 global $WikiTheme;
 ?>
-<applet code="hypergraph.applications.hexplorer.HExplorerApplet.class" align="baseline" 
+<applet code="hypergraph.applications.hexplorer.HExplorerApplet.class" align="baseline"
         archive="<?php echo $WikiTheme->_finddata("hyperapplet.jar") ?>"
         width="160" height="360">
 <?php // the dynamic version: ?>

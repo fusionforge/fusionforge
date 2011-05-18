@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: DbSession.php 7449 2010-05-31 12:38:21Z vargenau $');
+<?php // $Id: DbSession.php 7964 2011-03-05 17:05:30Z vargenau $
 
 /**
  * Store sessions data in Pear DB / ADODB / dba / PDO, ....
@@ -29,7 +29,7 @@ class DbSession
         $db_type = $dbh->getParam('dbtype');
         if (isa($dbh, 'WikiDB')) {
             @include_once("lib/DbSession/".$db_type.".php");
-            
+
             $class = "DbSession_".$db_type;
             if (class_exists($class)) {
                 // dba has no ->_dbh, so this is used for the session link
@@ -43,7 +43,7 @@ class DbSession
                              $db_type), E_USER_WARNING);
         return false;
     }
-    
+
     function currentSessions() {
         return $this->_backend->currentSessions();
     }

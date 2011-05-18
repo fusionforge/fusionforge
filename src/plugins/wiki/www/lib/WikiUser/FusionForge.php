@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: FusionForge.php 7715 2010-10-14 15:49:22Z vargenau $');
+// $Id: FusionForge.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2006 Alain Peyrat
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -43,13 +43,13 @@ class _FusionForgePassUser extends _PassUser {
     }
 
     function userExists() {
-            global $group_id;
+        global $group_id;
 
         // Mapping (PhpWiki vs FusionForge) performed is:
         //     ANON  for non logged or non member
         //     USER  for member of the project.
         //     ADMIN for member having admin rights
-        if (session_loggedin()){
+        if (session_loggedin()) {
 
             // Get project object (if error => ANON)
             $project = group_get_object($group_id);
@@ -83,8 +83,8 @@ class _FusionForgePassUser extends _PassUser {
                 return $this;
             }
         }
-               $this->_level = WIKIAUTH_ANON;
-               return false;
+        $this->_level = WIKIAUTH_ANON;
+        return false;
     }
 
     function checkPass($submitted_password) {

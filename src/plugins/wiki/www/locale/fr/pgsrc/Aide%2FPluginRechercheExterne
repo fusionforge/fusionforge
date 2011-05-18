@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginRechercheExterne 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginRechercheExterne 7919 2011-01-27 17:02:14Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginRechercheExterne;
   flags=PAGE_LOCKED;
@@ -8,10 +8,8 @@ Content-Type: application/x-phpwiki;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-=== Descrition
-
-Le PluginRechercheExterne crée un formulaire pour interroger les
-InterWiki~s ou autres sites Internet.
+Le plugin **~RechercheExterne** crée un formulaire pour interroger les
+~InterWikis ou autres sites Internet.
 
 === Usage
 
@@ -24,21 +22,21 @@ InterWiki~s ou autres sites Internet.
 
 
 === Arguments
-__url__:
-  Spécifie un wiki depuis la CarteInterWiki ou une url. N'importe quel
+**url**:
+  Spécifie un wiki depuis la [[CarteInterWiki]] ou une URL. N'importe quel
   texte saisi par l'utilisateur sera ajouté à l'url de recherche. La 
-  chaîne '__=%s=__' peut être utilisée pour insérer une requête de 
+  chaîne '**=%s=**' peut être utilisée pour insérer une requête de 
   recherche dans l'url plutôt que de l'ajouter.
 
-__name__:
+**name**:
   Texte à afficher dans le bouton de validation. Pour les sites 
-  InterWiki, c'est le nom wiki par défaut. Pour les autres url, 
+  ~InterWiki, c'est le nom wiki par défaut. Pour les autres url, 
   c'est le texte "External Search" par défaut.
 
-__formsize__:
+**formsize**:
   Spécifie la taille de la zone de saisie (30 caractères par défaut)
 
-__debug__:
+**debug**:
   Ne redirige pas réellement vers le site externe mais affiche juste 
   l'url vers lequel il devrait l'être.
 
@@ -53,18 +51,21 @@ __debug__:
 }}}
 
 Effectue une recherche en texte intégral sur les wiki multiples :
-<<ExternalSearch url="http://sunir.org/apps/meta.pl?" name="Recherche Metawiki" >>
+<<ExternalSearch url="http://sunir.org/apps/meta.pl?" name="Recherche Metawiki">>
 
 Effectue une recherche en texte intégral sur [MeatBall|MeatBall:SiteSearch] wiki:
-<<ExternalSearch url="http://www.usemod.com/cgi-bin/mb.pl?" name="Recherche MeatBall" >>
+<<ExternalSearch url="http://www.usemod.com/cgi-bin/mb.pl?" name="Recherche MeatBall">>
 
 Recherche sur le site web PHP pour une fonction :
-<<ExternalSearch url=php-lookup >>
+<<ExternalSearch url=php-lookup>>
 
 Entre le nom d'une fonction PHP pour voir la page de documentation :
-<<ExternalSearch url=php-function >>
+<<ExternalSearch url=php-function>>
 
 Entre n'importe quel nom de page sur PhpWiki pour arriver sur cette page :
-<<ExternalSearch url=PhpWiki >>
+<<ExternalSearch url=PhpWiki>>
+
+<noinclude>
 ----
-[[DocumentationDePhpWiki]] [[CategoryPluginWiki]]
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

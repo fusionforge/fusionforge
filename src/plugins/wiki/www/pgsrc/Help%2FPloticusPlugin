@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
+Date: Tue,  4 Jan 2011 12:22:49 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FPloticusPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FPloticusPlugin 7800 2011-01-04 11:25:32Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPloticusPlugin;
   flags=PAGE_LOCKED;
@@ -8,7 +8,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **Ploticus** [[Help:WikiPlugin|plugin]] passes all its arguments to the ploticus
+The **Ploticus** [[Help:WikiPlugin|plugin]] passes all its arguments to the Ploticus
 binary and displays the result as PNG, GIF, EPS, SVG, SVGZ or SWF.
 Ploticus is a free, GPL, non-interactive software package
 for producing plots, charts, and graphics from data.
@@ -27,38 +27,56 @@ or without any script: (not tested)
 
 {{{
 <<Ploticus -prefab vbars
-	data=myfile.dat delim=tab y=1 
-	clickmapurl="http://mywiki.url/wiki/?pagename=@2" 
-	clickmaplabel="@3" -csmap 
+        data=myfile.dat delim=tab y=1
+        clickmapurl="http://mywiki.url/wiki/?pagename=@2"
+        clickmaplabel="@3" -csmap
 >>
 }}}
 
-TODO: ~PloticusSql - create intermediate data from SQL. Similar to [SqlResult|Help:SqlResultPlugin], 
+TODO: ~PloticusSql - create intermediate data from SQL. Similar to [[Help:SqlResultPlugin|SqlResult]] plugin,
 just in graphic form.
 For example to produce nice looking pagehit statistics or ratings statistics.
 Ploticus has its own sql support within #getproc data, but this would expose security information.
 
 == Arguments ==
-__device__: |
-  gif, png, jpeg, svg, svgz, eps, swf. Any -T parameter supported by ploticus. Default: png
-__data__:  |
-  optionally add data by <!plugin-list !> pagelist plugins.  See [WikiPlugin|Help:WikiPlugin]
-__alt__:  |
-  alt text for the image
-__-prefab__:  |
-  use the given prefab script (may need PLOTICUS_PREFABS)
-__-csmap__:  |
-  If a clickable map should be produced (not yet tested)
-  passed to ploticus as -csmap -mapfile $tempfile.map 
-__help__:  |
-  Show a help screen
 
-All other arguments are used as source to ploticus.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **device**
+| gif, png, jpeg, svg, svgz, eps, swf. Any -T parameter supported by Ploticus.
+| png
+|-
+| **data**
+| optionally add data by <!plugin-list !> pagelist plugins.  See [[Help:WikiPlugin]]
+|
+|-
+| **alt**
+| alt text for the image
+|
+|-
+| **~-prefab**
+| use the given prefab script (may need PLOTICUS_PREFABS)
+|
+|-
+| **~-csmap**
+| If a clickable map should be produced (not yet tested) passed to Ploticus as -csmap -mapfile $tempfile.map
+|
+|-
+| **help**
+| Show a help screen
+|
+|}
+
+All other arguments are used as source to Ploticus.
 
 == Known Problems ==
 
 For Windows you need either a gd library with GIF support or
-a Ploticus with PNG support. This comes only with the Cygwin 
+a Ploticus with PNG support. This comes only with the Cygwin
 build so far.
 
 == Optional Configuration ==
@@ -70,7 +88,7 @@ config.ini:
 prefabs need the environment variable PLOTICUS_PREFABS. Default: /usr/share/ploticus.
 Maybe also set by the config variable PLOTICUS_PREFABS.
 
-See also [WikiPluginCached|Help:WikiPluginCached] options in config.ini.
+See also [[Help:WikiPluginCached]] options in config.ini.
 
 == Examples ==
 
@@ -82,16 +100,16 @@ See also [WikiPluginCached|Help:WikiPluginCached] options in config.ini.
 
 //  specify data using {proc getdata}
 #proc getdata
-data:	Brazil 22
-	Columbia 17
-	"Costa Rica" 22
-	Guatemala 3
-	Honduras 12
-	Mexico 14
-	Nicaragua 28
-	Belize 9
- 	United\nStates 21
-	Canada 8
+data:   Brazil 22
+        Columbia 17
+        "Costa Rica" 22
+        Guatemala 3
+        Honduras 12
+        Mexico 14
+        Nicaragua 28
+        Belize 9
+         United\nStates 21
+        Canada 8
 
 //  render the pie graph using {proc pie}
 #proc pie
@@ -106,7 +124,7 @@ colors: yellow pink pink pink pink yellow pink
 labelfarout: 1.05
 >>
 
-The pie chart above was produced by this code from the ploticus
+The pie chart above was produced by this code from the Ploticus
 testsuite:
 
 {{{
@@ -118,16 +136,16 @@ testsuite:
 
 //  specify data using {proc getdata}
 #proc getdata
-data:	Brazil 22
-	Columbia 17
-	"Costa Rica" 22
-	Guatemala 3
-	Honduras 12
-	Mexico 14
-	Nicaragua 28
-	Belize 9
- 	United\nStates 21
-	Canada 8
+data:   Brazil 22
+        Columbia 17
+        "Costa Rica" 22
+        Guatemala 3
+        Honduras 12
+        Mexico 14
+        Nicaragua 28
+        Belize 9
+         United\nStates 21
+        Canada 8
 
 //  render the pie graph using {proc pie}
 #proc pie

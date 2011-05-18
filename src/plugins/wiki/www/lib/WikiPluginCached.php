@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: WikiPluginCached.php 7639 2010-08-11 12:15:16Z vargenau $');
+<?php // $Id: WikiPluginCached.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2002 Johannes Große
  * Copyright (C) 2004,2007 Reini Urban
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -32,19 +32,19 @@ require_once "lib/WikiPlugin.php";
 // types:
 define('PLUGIN_CACHED_HTML', 0);         // cached html (extensive calculation)
 define('PLUGIN_CACHED_IMG_INLINE', 1);   // gd images
-define('PLUGIN_CACHED_MAP', 2);    	 // area maps
-define('PLUGIN_CACHED_SVG', 3);    	 // special SVG/SVGZ object
+define('PLUGIN_CACHED_MAP', 2);         // area maps
+define('PLUGIN_CACHED_SVG', 3);         // special SVG/SVGZ object
 define('PLUGIN_CACHED_SVG_PNG', 4);      // special SVG/SVGZ object with PNG fallback
-define('PLUGIN_CACHED_SWF', 5);    	 // special SWF (flash) object
-define('PLUGIN_CACHED_PDF', 6);    	 // special PDF object (inlinable?)
-define('PLUGIN_CACHED_PS', 7);    	 // special PS object (inlinable?)
+define('PLUGIN_CACHED_SWF', 5);         // special SWF (flash) object
+define('PLUGIN_CACHED_PDF', 6);         // special PDF object (inlinable?)
+define('PLUGIN_CACHED_PS', 7);         // special PS object (inlinable?)
 // boolean tests:
 define('PLUGIN_CACHED_IMG_ONDEMAND', 64);// don't cache
-define('PLUGIN_CACHED_STATIC', 128); 	 // make it available via /uploads/, not via /getimg.php?id=
+define('PLUGIN_CACHED_STATIC', 128);      // make it available via /uploads/, not via /getimg.php?id=
 
 /**
- * An extension of the WikiPlugin class to allow image output and    
- * cacheing.                                                       
+ * An extension of the WikiPlugin class to allow image output and
+ * cacheing.
  * There are several abstract functions to be overloaded.
  * Have a look at the example files
  * <ul><li>plugin/TexToPng.php</li>
@@ -55,9 +55,9 @@ define('PLUGIN_CACHED_STATIC', 128); 	 // make it available via /uploads/, not v
  * </ul>
  *
  * @author  Johannes Große, Reini Urban
- */                                                              
+ */
 class WikiPluginCached extends WikiPlugin
-{ 
+{
     var $_static;
     /**
      * Produces URL and id number from plugin arguments which later on,
@@ -74,7 +74,7 @@ class WikiPluginCached extends WikiPlugin
      * TODO: check if args is needed at all (on lost cache)
      */
     function genUrl($cache, $argarray) {
-    	global $request;
+        global $request;
         //$cacheparams = $GLOBALS['CacheParams'];
 
         $plugincall = serialize( array(
@@ -146,21 +146,21 @@ class WikiPluginCached extends WikiPlugin
         $this->_static = false;
         if ($this->_type & PLUGIN_CACHED_STATIC
             or $request->getArg('action') == 'pdf') // htmldoc doesn't grok subrequests
-        {  
+        {
             $this->_type = $this->_type & ~PLUGIN_CACHED_STATIC;
             $this->_static = true;
         }
-  
+
         // ---------- embed static image, no getimg.php? url -----------------
         if (0 and $this->_static) {
             //$content = $cache->get($id, 'imagecache');
             $content = array();
             if ($this->produceImage($content, $this, $dbi, $sortedargs, $request, 'html')) {
-            	// save the image in uploads
-            	return $this->embedImg($content['url'], $dbi, $sortedargs, $request);
+                // save the image in uploads
+                return $this->embedImg($content['url'], $dbi, $sortedargs, $request);
             } else {
-            	// copy the cached image into uploads if older
-            	return HTML();
+                // copy the cached image into uploads if older
+                return HTML();
             }
         }
 
@@ -268,7 +268,7 @@ class WikiPluginCached extends WikiPlugin
      *             <li>PLUGIN_CACHED_IMG_INLINE</li>
      *             <li>PLUGIN_CACHED_IMG_ONDEMAND</li>
      *             <li>PLUGIN_CACHED_MAP</li>
-     *             </ul>  
+     *             </ul>
      */
     function getPluginType() {
         return PLUGIN_CACHED_IMG_ONDEMAND;
@@ -327,7 +327,7 @@ class WikiPluginCached extends WikiPlugin
      *                                WikiPlugin->getArgs anymore.
      * @param  request   Request      ???
      * @return           string       'png', 'jpeg' or 'gif'
-     */  
+     */
     function getImageType(&$dbi, $argarray, &$request) {
         if (in_array($argarray['imgtype'], preg_split('/\s*:\s*/', PLUGIN_CACHED_IMGTYPES)))
             return $argarray['imgtype'];
@@ -521,14 +521,14 @@ class WikiPluginCached extends WikiPlugin
      */
 
     function decideImgType($wish) {
-        if ($wish=='html') return $wish;               
+        if ($wish=='html') return $wish;
         if ($wish=='jpg') { $wish = 'jpeg'; }
 
         $supportedtypes = array();
         // Todo: swf, pdf, ...
         $imagetypes = array(
             'png'   => IMG_PNG,
-            'gif'   => IMG_GIF,                           
+            'gif'   => IMG_GIF,
             'jpeg'  => IMG_JPEG,
             'wbmp'  => IMG_WBMP,
             'xpm'   => IMG_XPM,
@@ -542,7 +542,7 @@ class WikiPluginCached extends WikiPlugin
             $presenttypes = ImageTypes();
             foreach ($imagetypes as $imgtype => $bitmask)
                 if ( $presenttypes && $bitmask )
-                    array_push($supportedtypes, $imgtype);      
+                    array_push($supportedtypes, $imgtype);
         } else {
             foreach ($imagetypes as $imgtype => $bitmask)
                 if (function_exists("Image".$imgtype))
@@ -554,7 +554,7 @@ class WikiPluginCached extends WikiPlugin
             return reset($supportedtypes);
         else
             return 'html';
-      
+
     } // decideImgType
 
 
@@ -660,8 +660,8 @@ class WikiPluginCached extends WikiPlugin
             } else {
                 $id = $cache->generateId( $plugincall );
             }
-        } 
-        return true;   
+        }
+        return true;
     } // checkCall1
 
 
@@ -674,7 +674,7 @@ class WikiPluginCached extends WikiPlugin
      *                             name and parameters of the plugin call
      * @param  request    Request  ???
      * @return            boolean  false if an error occurs, true otherwise.
-     *               
+     *
      */
     function checkCall2(&$plugincall, $request) {
         // if plugincall wasn't sent by URL, it must have been
@@ -688,7 +688,7 @@ class WikiPluginCached extends WikiPlugin
                     $id );
                 $this->printError($errorformat, $errortext);
                 return false;
-            }     
+            }
         }
         $plugincall = unserialize($plugincall);
         return true;
@@ -730,13 +730,13 @@ class WikiPluginCached extends WikiPlugin
             return false;
         }
 
-        // image handle -> image data      
+        // image handle -> image data
         if (!empty($this->_static)) {
             $ext = "." . $content['imagetype'];
             if (is_string($imagehandle) and file_exists($imagehandle)) {
-            	if (preg_match("/.(\w+)$/",$imagehandle,$m)) {
-            	    $ext = "." . $m[1];
-            	}
+                if (preg_match("/.(\w+)$/",$imagehandle,$m)) {
+                    $ext = "." . $m[1];
+                }
             }
             $tmpfile = tempnam(getUploadFilePath(), PLUGIN_CACHED_FILENAME_PREFIX . $ext);
             if (!strstr(basename($tmpfile), $ext)) {
@@ -764,7 +764,7 @@ class WikiPluginCached extends WikiPlugin
             $content['image'] = fread($fp, filesize($tmpfile));
             fclose($fp);
             if (!empty($this->_static)) {
-            	// on static it is in "uploads/" but in wikicached also
+                // on static it is in "uploads/" but in wikicached also
                 $content['file'] = $tmpfile;
                 $content['url'] = getUploadDataPath() . basename($tmpfile);
                 return true;
@@ -783,21 +783,21 @@ class WikiPluginCached extends WikiPlugin
     }
 
     function tempnam($prefix = "") {
-	if (preg_match("/^(.+)\.(\w{2,4})$/", $prefix, $m)) {
-	    $prefix = $m[1];
-	    $ext = ".".$m[2];
-	} else {
-	    $ext = isWindows()? ".tmp" : "";
-	}
+    if (preg_match("/^(.+)\.(\w{2,4})$/", $prefix, $m)) {
+        $prefix = $m[1];
+        $ext = ".".$m[2];
+    } else {
+        $ext = isWindows()? ".tmp" : "";
+    }
         $temp = tempnam(isWindows() ? str_replace('/', "\\", PLUGIN_CACHED_CACHE_DIR)
                                     : PLUGIN_CACHED_CACHE_DIR,
                        $prefix ? $prefix : PLUGIN_CACHED_FILENAME_PREFIX);
         if (isWindows()) {
-	    if ($ext != ".tmp") unlink($temp);
+        if ($ext != ".tmp") unlink($temp);
             $temp = preg_replace("/\.tmp$/", $ext, $temp);
-	} else {
-	    $temp .= $ext;
-	}
+    } else {
+        $temp .= $ext;
+    }
         return $temp;
     }
 
@@ -811,7 +811,7 @@ class WikiPluginCached extends WikiPlugin
      * @param  errorformat string        outputs errors in 'png', 'gif', 'jpeg' or 'html'
      */
     function fetchImageFromCache($dbi, $request, $errorformat='png') {
-        $cache   = $this->newCache();    
+        $cache   = $this->newCache();
         $errorformat = $this->decideImgType($errorformat);
         // get id
         if (!$this->checkCall1($id, $plugincall, $cache, $request, $errorformat)) return false;
@@ -883,7 +883,7 @@ class WikiPluginCached extends WikiPlugin
     function resetError() {
         $this->_errortext = '';
     }
-     
+
     /**
      * Returns all accumulated error messages.
      *
@@ -977,7 +977,7 @@ class WikiPluginCached extends WikiPlugin
         }
 
         // prepare Parameters
-      
+
         // set maximum values
         $IMAGESIZE  = array(
             'cols'   => 80,
@@ -1028,7 +1028,7 @@ class WikiPluginCached extends WikiPlugin
         $bg  = ImageColorAllocate($im, $bgcol[0], $bgcol[1], $bgcol[2]);
 
         ImageFilledRectangle($im, 0, 0, $IMAGESIZE['width']-1, $IMAGESIZE['height']-1, $bg);
-  
+
         // write text lines
         foreach($lines as $nr => $textstr) {
             ImageString( $im, $fontnr, $marginx, $marginy+$nr*$chary,

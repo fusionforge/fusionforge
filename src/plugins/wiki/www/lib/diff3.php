@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: diff3.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: diff3.php 7964 2011-03-05 17:05:30Z vargenau $
 // diff3.php
 //
 // A class for computing three way diffs
@@ -12,7 +12,7 @@ require_once('lib/difflib.php');
 
 class _Diff3_Block {
     var $type = 'diff3';
-    
+
     function _Diff3_Block ($orig = false, $final1 = false, $final2 = false) {
         $this->orig = $orig ? $orig : array();
         $this->final1 = $final1 ? $final1 : array();
@@ -38,10 +38,10 @@ class _Diff3_Block {
     }
 }
 
-    
+
 class _Diff3_CopyBlock extends _Diff3_Block {
     var $type = 'copy';
-    
+
     function _Diff3_CopyBlock ($lines = false) {
         $this->orig = $lines ? $lines : array();
         $this->final1 = &$this->orig;
@@ -51,7 +51,7 @@ class _Diff3_CopyBlock extends _Diff3_Block {
     function merged() {
         return $this->orig;
     }
-    
+
     function is_conflict () {
         return false;
     }
@@ -65,12 +65,12 @@ class _Diff3_BlockBuilder {
     function _init() {
         $this->orig = $this->final1 = $this->final2 = array();
     }
-    
-        
+
+
     function _append (&$array, $lines) {
         array_splice($array, sizeof($array), 0, $lines);
     }
-    
+
     function input($lines) {
         if ($lines)
             $this->_append($this->orig, $lines);
@@ -89,7 +89,7 @@ class _Diff3_BlockBuilder {
     function is_empty() {
         return !$this->orig && !$this->final1 && !$this->final2;
     }
-    
+
     function finish() {
         if ($this->is_empty())
             return false;
@@ -121,7 +121,7 @@ class Diff3 {
 //          print_r($e1);
 //          print_r($e2);
 //          echo "====\n";
-           
+
             if ($e1 && $e2 && $e1->type == 'copy' && $e2->type == 'copy') {
                 // We have copy blocks from both diffs.  This is the (only)
                 // time we want to emit a diff3 copy block.
@@ -155,10 +155,10 @@ class Diff3 {
                         array_splice($e2->orig, 0, $norig);
                         $bb->input($orig);
                     }
-                    
+
                     if ($e1->type == 'copy')
                         $bb->out1(array_splice($e1->final, 0, $norig));
-                                                     
+
                     if ($e2->type == 'copy')
                         $bb->out2(array_splice($e2->final, 0, $norig));
                 }
@@ -191,7 +191,7 @@ class Diff3 {
                                      array("======="),
                                      $block->final2,
                                      array(">>>>>>>" . ($label2 ? " $label2" : '')));
-				$this->ConflictingBlocks++;
+                $this->ConflictingBlocks++;
             }
             else {
                 $lines = array_merge($lines, $block->merged());
@@ -207,5 +207,5 @@ class Diff3 {
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

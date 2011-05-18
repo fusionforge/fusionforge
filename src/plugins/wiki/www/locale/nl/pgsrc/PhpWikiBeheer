@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
+Date: Fri,  4 Feb 2011 16:36:35 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiBeheer 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: PhpWikiBeheer 7927 2011-02-04 15:37:59Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiBeheer;
   flags=PAGE_LOCKED;
@@ -14,7 +14,6 @@ en wachtwoord in het PhpWiki configuratiebestand hebt gezet.
 
 <<CreateToc jshide||=1 with_toclink||=1 >>
 
-----
 == Page Explorer
 
 First select pages and then define the action:
@@ -23,14 +22,8 @@ First select pages and then define the action:
 
 or call the available ~WikiAdmin actions directly:
 
-[/Verwijder] |
-  [/Rename] |
-    [/Vervangt] |
-      [/SetAcl] |
-        [/Chmod] |
-          [/Chown]
+| [[/Verwijder]] | [[/Rename]] | [[/Vervangt]] | [[/SetAcl]] | [[/Chmod]] | [[/Chown]]
 
-----
 == User Management
 
 PhpWiki:EmailVerification is currently non-strict, leaving some possible holes, which can be 

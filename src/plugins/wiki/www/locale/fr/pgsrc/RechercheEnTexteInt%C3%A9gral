@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: RechercheEnTexteInt%C3%A9gral 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: RechercheEnTexteInt%C3%A9gral 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=RechercheEnTexteInt%C3%A9gral;
   flags=PAGE_LOCKED;
@@ -8,7 +8,7 @@ Content-Type: application/x-phpwiki;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-<<FullTextSearch >>
+<<FullTextSearch>>
 
 ----
 
@@ -19,4 +19,7 @@ Recherches supplémentaires :
 
 ----
 
-<<IncludePage page=ChercherUnePage quiet=1 section=Trucs sectionhead=1 >>
+<<IncludePage page=ChercherUnePage quiet=1 section=Trucs sectionhead=1>>
+
+----
+[[CatégoriePageDAction]]

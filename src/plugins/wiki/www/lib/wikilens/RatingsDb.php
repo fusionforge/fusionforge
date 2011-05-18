@@ -1,10 +1,10 @@
 <?php // -*-php-*-
-// rcs_id('$Id: RatingsDb.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: RatingsDb.php 7967 2011-03-07 13:08:01Z vargenau $
 
 /*
  * @author:  Dan Frankowski (wikilens group manager), Reini Urban (as plugin)
  *
- * TODO: 
+ * TODO:
  * - fix RATING_STORAGE = WIKIPAGE (dba, file)
  * - fix smart caching
  * - finish mysuggest.c (external engine with data from mysql)
@@ -30,7 +30,7 @@ if (!defined('RATING_STORAGE'))
     // but this is problematic.
     define('RATING_STORAGE', $GLOBALS['request']->_dbi->_backend->isSQL() ? 'SQL' : 'WIKIPAGE');
     //define('RATING_STORAGE','WIKIPAGE');   // not fully supported yet
-   
+
 // leave undefined for internal, slow php engine.
 //if (!defined('RATING_EXTERNAL'))
 //    define('RATING_EXTERNAL',PHPWIKI_DIR . 'suggest.exe');
@@ -61,38 +61,38 @@ class RatingsDb extends WikiDB {
             } elseif (isa($this->_backend, 'WikiDB_backend_ADODOB')) {
                 $this->_sqlbackend = &$this->_backend;
                 $this->dbtype = "ADODB";
-            } else { 
-            	include_once("lib/WikiDB/backend/ADODB.php");
-            	// It is not possible to decouple a ref from the source again. (4.3.11)
-            	// It replaced the main request backend. So we don't initialize _sqlbackend before.
-            	//$this->_sqlbackend = clone($this->_backend);
+            } else {
+                include_once("lib/WikiDB/backend/ADODB.php");
+                // It is not possible to decouple a ref from the source again. (4.3.11)
+                // It replaced the main request backend. So we don't initialize _sqlbackend before.
+                //$this->_sqlbackend = clone($this->_backend);
                 $this->_sqlbackend = new WikiDB_backend_ADODB($GLOBALS['DBParams']);
-            	$this->dbtype = "ADODB";
+                $this->dbtype = "ADODB";
             }
             $this->iter_class = "WikiDB_backend_".$this->dbtype."_generic_iter";
 
             extract($this->_sqlbackend->_table_names);
             if (empty($rating_tbl)) {
-                $rating_tbl = (!empty($GLOBALS['DBParams']['prefix']) 
+                $rating_tbl = (!empty($GLOBALS['DBParams']['prefix'])
                                ? $GLOBALS['DBParams']['prefix'] : '') . 'rating';
                 $this->_sqlbackend->_table_names['rating_tbl'] = $rating_tbl;
             }
         } else {
-        	$this->iter_class = "WikiDB_Array_PageIterator";
+            $this->iter_class = "WikiDB_Array_PageIterator";
         }
     }
-    
+
     // this is a singleton.  It ensures there is only 1 ratingsDB.
     function & getTheRatingsDb(){
         static $_theRatingsDb;
-        
+
         if (!isset($_theRatingsDb)){
             $_theRatingsDb = new RatingsDb();
-        } 
+        }
         //echo "rating db is $_theRatingsDb";
         return $_theRatingsDb;
     }
-   
+
 
 /// *************************************************************************************
 // FIXME
@@ -110,7 +110,7 @@ class RatingsDb extends WikiDB {
 
     function deleteRating($userid=null, $pagename=null, $dimension=null) {
         if (is_null($dimension)) $dimension = $this->dimension;
-        if (is_null($userid))    $userid = $this->userid; 
+        if (is_null($userid))    $userid = $this->userid;
         if (is_null($pagename))  $pagename = $this->pagename;
         if (RATING_STORAGE == 'SQL') {
             $this->sql_delete_rating($userid, $pagename, $dimension);
@@ -118,13 +118,13 @@ class RatingsDb extends WikiDB {
             $this->metadata_set_rating($userid, $pagename, $dimension, -1);
         }
     }
-    
+
     function getRating($userid=null, $pagename=null, $dimension=null) {
         if (RATING_STORAGE == 'SQL') {
             $ratings_iter = $this->sql_get_rating($dimension, $userid, $pagename);
             if ($rating = $ratings_iter->next() and isset($rating['ratingvalue'])) {
                 return $rating['ratingvalue'];
-            } else 
+            } else
                 return false;
         } else {
             return $this->metadata_get_rating($userid, $pagename, $dimension);
@@ -133,20 +133,19 @@ class RatingsDb extends WikiDB {
 
     function getUsersRated($dimension=null, $orderby = null) {
         if (is_null($dimension)) $dimension = $this->dimension;
-        //if (is_null($userid))    $userid = $this->userid; 
+        //if (is_null($userid))    $userid = $this->userid;
         //if (is_null($pagename))  $pagename = $this->pagename;
         if (RATING_STORAGE == 'SQL') {
             $ratings_iter = $this->sql_get_users_rated($dimension, $orderby);
             if ($rating = $ratings_iter->next() and isset($rating['ratingvalue'])) {
                 return $rating['ratingvalue'];
-            } else 
+            } else
                 return false;
         } else {
             return $this->metadata_get_users_rated($dimension, $orderby);
         }
     }
-   
-    
+
     /**
      * Get ratings.
      *
@@ -184,7 +183,7 @@ class RatingsDb extends WikiDB {
      *               If this is null (or left off), the info returned
      *               is for the 'ratee' page (i.e., thing being rated).
      *
-     * @return DB iterator with results 
+     * @return DB iterator with results
      */
     function get_rating($dimension=null, $rater=null, $ratee=null,
                         $orderby = null, $pageinfo = "ratee") {
@@ -192,7 +191,7 @@ class RatingsDb extends WikiDB {
             $ratings_iter = $this->sql_get_rating($dimension, $rater, $pagename);
             if ($rating = $ratings_iter->next() and isset($rating['ratingvalue'])) {
                 return $rating['ratingvalue'];
-            } else 
+            } else
                 return false;
         } else {
             return $this->metadata_get_rating($rater, $pagename, $dimension);
@@ -205,12 +204,12 @@ class RatingsDb extends WikiDB {
     function get_users_rated($dimension=null, $pagename = null, $orderby = null) {
         if (RATING_STORAGE == 'SQL') {
             $ratings_iter = $this->sql_get_users_rated($dimension, $pagename, $orderby);
-	    // iter as userid
-	    $users = array();
-	    while ($rating = $ratings_iter->next()) {
-		$users[] = $rating['userid'];
-	    }
-	    return $users;
+        // iter as userid
+        $users = array();
+        while ($rating = $ratings_iter->next()) {
+        $users[] = $rating['userid'];
+        }
+        return $users;
         } else {
             return $this->metadata_get_users_rated($dimension, $pagename, $orderby);
         }
@@ -225,9 +224,9 @@ class RatingsDb extends WikiDB {
         if (RATING_STORAGE == 'SQL') {
             return $this->sql_get_rating($dimension, $rater, $ratee, $orderby, $pageinfo);
         } else {
-	    // empty dummy iterator
-	    $pages = array();
-	    return new WikiDB_Array_PageIterator($pages);
+        // empty dummy iterator
+        $pages = array();
+        return new WikiDB_Array_PageIterator($pages);
         }
     }
 
@@ -275,9 +274,9 @@ class RatingsDb extends WikiDB {
             $this->metadata_set_rating($userid, $pagename, $dimension, $rating);
         }
     }
-    
+
     //function getUsersRated(){}
-    
+
 //*******************************************************************************
     // TODO:
     // Use wikilens/RatingsUser.php for the php methods.
@@ -287,22 +286,22 @@ class RatingsDb extends WikiDB {
     //   http://www-users.cs.umn.edu/~karypis/suggest/
     // until we implement a simple recommendation engine.
     // Note that "suggest" is only free for non-profit organizations.
-    // I am currently writing a binary CGI mysuggest using suggest, which loads 
+    // I am currently writing a binary CGI mysuggest using suggest, which loads
     // data from mysql.
     function getPrediction($userid=null, $pagename=null, $dimension=null) {
         if (is_null($dimension)) $dimension = $this->dimension;
-        if (is_null($userid))    $userid   = $this->userid; 
+        if (is_null($userid))    $userid   = $this->userid;
         if (is_null($pagename))  $pagename = $this->pagename;
 
         if (RATING_STORAGE == 'SQL') {
             $dbh = &$this->_sqlbackend;
             if (isset($pagename))
                 $page = $dbh->_get_pageid($pagename);
-            else 
+            else
                 return 0;
             if (isset($userid))
                 $user = $dbh->_get_pageid($userid);
-            else 
+            else
                 return 0;
         }
         if (defined('RATING_EXTERNAL') and RATING_EXTERNAL) {
@@ -325,7 +324,7 @@ class RatingsDb extends WikiDB {
      */
     function php_prediction($userid=null, $pagename=null, $dimension=null) {
         if (is_null($dimension)) $dimension = $this->dimension;
-        if (is_null($userid))    $userid   = $this->userid; 
+        if (is_null($userid))    $userid   = $this->userid;
         if (is_null($pagename))  $pagename = $this->pagename;
         if (empty($this->buddies)) {
             require_once("lib/wikilens/RatingsUser.php");
@@ -335,7 +334,7 @@ class RatingsDb extends WikiDB {
         }
         return $user->knn_uu_predict($pagename, $this->buddies, $dimension);
     }
-    
+
     function getNumUsers($pagename=null, $dimension=null) {
         if (is_null($dimension)) $dimension = $this->dimension;
         if (is_null($pagename))  $pagename = $this->pagename;
@@ -349,7 +348,7 @@ class RatingsDb extends WikiDB {
             $data = $page->get('rating');
             if (!empty($data[$dimension]))
                 return count($data[$dimension]);
-            else 
+            else
                 return 0;
         }
     }
@@ -359,23 +358,23 @@ class RatingsDb extends WikiDB {
         if (is_null($pagename))  $pagename = $this->pagename;
         if (RATING_STORAGE == 'SQL') {
             $dbi = &$this->_sqlbackend;
-	    if (isset($pagename) || isset($dimension)) {
-		$where = "WHERE";
-	    }
+        if (isset($pagename) || isset($dimension)) {
+        $where = "WHERE";
+        }
             if (isset($pagename)) {
                 $raterid = $this->_sqlbackend->_get_pageid($pagename, true);
                 $where .= " raterpage=$raterid";
             }
             if (isset($dimension)) {
-		if (isset($pagename)) $where .= " AND";
+        if (isset($pagename)) $where .= " AND";
                 $where .= " dimension=$dimension";
             }
             //$dbh = &$this->_dbi;
             extract($dbi->_table_names);
             $query = "SELECT AVG(ratingvalue) as avg"
-		   . " FROM $rating_tbl r, $page_tbl p "
-		   . $where
-		   . " GROUP BY raterpage";
+           . " FROM $rating_tbl r, $page_tbl p "
+           . $where
+           . " GROUP BY raterpage";
             $result = $dbi->_dbh->query($query);
             $iter = new $this->iter_class($this, $result);
             $row = $iter->next();
@@ -387,8 +386,8 @@ class RatingsDb extends WikiDB {
             if (!empty($data[$dimension]))
                 // hash of userid => rating
                 return array_sum(array_values($data[$dimension])) / count($data[$dimension]);
-	    else
-		return 0;
+        else
+        return 0;
         }
     }
 //*******************************************************************************
@@ -431,7 +430,7 @@ class RatingsDb extends WikiDB {
      *               If this is null (or left off), the info returned
      *               is for the 'ratee' page (i.e., thing being rated).
      *
-     * @return DB iterator with results 
+     * @return DB iterator with results
      */
     function sql_get_rating($dimension=null, $rater=null, $ratee=null,
                             $orderby=null, $pageinfo = "ratee") {
@@ -449,16 +448,16 @@ class RatingsDb extends WikiDB {
     // all users who rated this page resp if null all pages.. needed?
     function metadata_get_users_rated($dimension=null, $pagename=null, $orderby=null) {
         if (is_null($dimension)) $dimension = $this->dimension;
-	$users = array();
-	if (!$pagename) {
-	    // TODO: all pages?
-	    return new WikiDB_Array_PageIterator($users);
-	}
-	$page = $this->_dbi->getPage($pagename);
-	$data = $page->get('rating');
-	if (!empty($data[$dimension])) {
-	    //array($userid => (float)$rating);
-	    return new WikiDB_Array_PageIterator(array_keys($data[$dimension]));
+    $users = array();
+    if (!$pagename) {
+        // TODO: all pages?
+        return new WikiDB_Array_PageIterator($users);
+    }
+    $page = $this->_dbi->getPage($pagename);
+    $data = $page->get('rating');
+    if (!empty($data[$dimension])) {
+        //array($userid => (float)$rating);
+        return new WikiDB_Array_PageIterator(array_keys($data[$dimension]));
         }
         return new WikiDB_Array_PageIterator($users);
     }
@@ -487,19 +486,19 @@ class RatingsDb extends WikiDB {
         }
         if (isset($ratee)) {
             if(is_array($ratee)){
-        		$where .= " AND (";
-        		for($i = 0; $i < count($ratee); $i++){
-        			$rateeid = $dbi->_get_pageid($ratee[$i], true);
-            		$where .= "rateepage=$rateeid";
-        			if($i != (count($ratee) - 1)){
-        				$where .= " OR ";
-        			}
-        		}
-        		$where .= ")";
-        	} else {
-        		$rateeid = $dbi->_get_pageid($ratee, true);
-            	$where .= " AND rateepage=$rateeid";
-        	}
+                $where .= " AND (";
+                for($i = 0; $i < count($ratee); $i++){
+                    $rateeid = $dbi->_get_pageid($ratee[$i], true);
+                    $where .= "rateepage=$rateeid";
+                    if($i != (count($ratee) - 1)){
+                        $where .= " OR ";
+                    }
+                }
+                $where .= ")";
+            } else {
+                $rateeid = $dbi->_get_pageid($ratee, true);
+                $where .= " AND rateepage=$rateeid";
+            }
         }
         $orderbyStr = "";
         if (isset($orderby)) {
@@ -508,10 +507,10 @@ class RatingsDb extends WikiDB {
         if (isset($rater) or isset($ratee)) $what = '*';
         // same as _get_users_rated_result()
         else {
-	    $what = 'DISTINCT p.pagename';
-	    if ($pageinfo == 'rater')
-		$what = 'DISTINCT p.pagename as userid';
-	}
+        $what = 'DISTINCT p.pagename';
+        if ($pageinfo == 'rater')
+        $what = 'DISTINCT p.pagename as userid';
+    }
 
         $query = "SELECT $what"
                . " FROM $rating_tbl r, $page_tbl p "
@@ -582,24 +581,24 @@ class RatingsDb extends WikiDB {
         $insert = "INSERT INTO $rating_tbl (dimension, raterpage, rateepage, ratingvalue, rateeversion)"
             ." VALUES ('$dimension', $raterid, $rateeid, '$rating', '$rateeversion')";
         $dbi->_dbh->query($insert);
-        
+
         $dbi->unlock();
         return true;
     }
 
     function metadata_get_rating($userid, $pagename, $dimension) {
-    	if (!$pagename) return false;
+        if (!$pagename) return false;
         $page = $this->_dbi->getPage($pagename);
         $data = $page->get('rating');
         if (!empty($data[$dimension][$userid]))
             return (float)$data[$dimension][$userid];
-        else 
+        else
             return false;
     }
 
     function metadata_set_rating($userid, $pagename, $dimension, $rating = -1) {
-    	if (!$pagename) return false;
-    	$page = $this->_dbi->getPage($pagename);
+        if (!$pagename) return false;
+        $page = $this->_dbi->getPage($pagename);
         $data = $page->get('rating');
         if ($rating == -1)
             unset($data[$dimension][$userid]);
@@ -615,7 +614,7 @@ class RatingsDb extends WikiDB {
 }
 
 /*
-class RatingsDB_backend_PearDB 
+class RatingsDB_backend_PearDB
 extends WikiDB_backend_PearDB {
     function get_rating($dimension=null, $rater=null, $ratee=null,
                         $orderby=null, $pageinfo = "ratee") {
@@ -623,7 +622,7 @@ extends WikiDB_backend_PearDB {
                          $dimension, $rater, $ratee, $orderby, $pageinfo);
         return new WikiDB_backend_PearDB_generic_iter($this, $result);
     }
-    
+
     function get_users_rated($dimension=null, $orderby=null) {
         $result = $this->_get_users_rated_result(
                          $dimension, $orderby);
@@ -655,20 +654,20 @@ extends WikiDB_backend_PearDB {
             $where .= " AND raterpage=$raterid";
         }
         if (isset($ratee)) {
-        	if(is_array($ratee)){
-        		$where .= " AND (";
-        		for($i = 0; $i < count($ratee); $i++){
-        			$rateeid = $this->_get_pageid($ratee[$i], true);
-            		$where .= "rateepage=$rateeid";
-        			if($i != (count($ratee) - 1)){
-        				$where .= " OR ";
-        			}
-        		}
-        		$where .= ")";
-        	} else {
-        		$rateeid = $this->_get_pageid($ratee, true);
-            	$where .= " AND rateepage=$rateeid";
-        	}
+            if(is_array($ratee)){
+                $where .= " AND (";
+                for($i = 0; $i < count($ratee); $i++){
+                    $rateeid = $this->_get_pageid($ratee[$i], true);
+                    $where .= "rateepage=$rateeid";
+                    if($i != (count($ratee) - 1)){
+                        $where .= " OR ";
+                    }
+                }
+                $where .= ")";
+            } else {
+                $rateeid = $this->_get_pageid($ratee, true);
+                $where .= " AND rateepage=$rateeid";
+            }
         }
 
         $orderbyStr = "";
@@ -685,7 +684,7 @@ extends WikiDB_backend_PearDB {
 
         return $result;
     }
-    
+
     function _get_users_rated_result($dimension=null, $orderby=null) {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -735,7 +734,7 @@ extends WikiDB_backend_PearDB {
         $this->unlock();
         return true;
     }
-} 
+}
 */
 
 // Local Variables:

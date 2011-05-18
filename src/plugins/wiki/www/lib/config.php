@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: config.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: config.php 7964 2011-03-05 17:05:30Z vargenau $
 /*
  * NOTE: The settings here should probably not need to be changed.
  * The user-configurable settings have been moved to IniConfig.php
@@ -20,8 +20,8 @@ define ('_DEBUG_APD',      32); // APD tracing/profiling
 define ('_DEBUG_LOGIN',    64); // verbose login debug-msg (settings and reason for failure)
 define ('_DEBUG_SQL',     128); // force check db, force optimize, print some debugging logs
 define ('_DEBUG_REMOTE',  256); // remote debug into subrequests (xmlrpc, ajax, wikiwyg, ...)
-				// or test local SearchHighlight.
-				// internal links have persistent ?start_debug=1
+                // or test local SearchHighlight.
+                // internal links have persistent ?start_debug=1
 
 function isCGI() {
     return (substr(php_sapi_name(),0,3) == 'cgi' and
@@ -98,8 +98,8 @@ function isBrowserOpera($version = false) {
  */
 function guessing_lang ($languages=false) {
     if (!$languages) {
-    	// make this faster
-    	$languages = array("en","de","es","fr","it","ja","zh","nl","sv");
+        // make this faster
+        $languages = array("en","de","es","fr","it","ja","zh","nl","sv");
     }
 
     $accept = false;
@@ -184,7 +184,7 @@ function guessing_setlocale ($category, $locale) {
             if (strlen($lang) > 2) {
                 foreach ($alt as $try => $locs) {
                     if (in_array($locale, $locs) or in_array($lang, $locs)) {
-                    	//if (empty($GLOBALS['LANG'])) $GLOBALS['LANG'] = $try;
+                        //if (empty($GLOBALS['LANG'])) $GLOBALS['LANG'] = $try;
                         return $try;
                     }
                 }
@@ -335,6 +335,15 @@ if (!function_exists('str_ireplace')) {
   }
 }
 
+// htmlspecialchars_decode exists for PHP >= 5.1
+if (!function_exists('htmlspecialchars_decode')) {
+
+  function htmlspecialchars_decode($text) {
+      return strtr($text, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
+  }
+
+}
+
 /**
  * safe php4 definition for clone.
  * php5 copies objects by reference, but we need to clone "deep copy" in some places.
@@ -370,11 +379,11 @@ function getUploadFilePath() {
 }
 function getUploadDataPath() {
     if (defined('UPLOAD_DATA_PATH')) {
-	return string_ends_with(UPLOAD_DATA_PATH, "/")
-	    ? UPLOAD_DATA_PATH : UPLOAD_DATA_PATH."/";
+    return string_ends_with(UPLOAD_DATA_PATH, "/")
+        ? UPLOAD_DATA_PATH : UPLOAD_DATA_PATH."/";
     }
     return SERVER_URL . (string_ends_with(DATA_PATH, "/") ? '' : "/")
-	 . DATA_PATH . '/uploads/';
+     . DATA_PATH . '/uploads/';
 }
 
 // Local Variables:

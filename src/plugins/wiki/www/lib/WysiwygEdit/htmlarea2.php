@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: htmlarea2.php 7454 2010-05-31 13:02:02Z vargenau $');
+// $Id: htmlarea2.php 7956 2011-03-03 17:08:31Z vargenau $
 /**
  * requires installation into themes/default/htmlarea2/
  * Output the javascript function to check for MS Internet Explorer >= 5.5 on Windows

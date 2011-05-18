@@ -1,6 +1,6 @@
-Date: Fri, 17 Sep 2010 14:12:16 +0000
+Date: Thu,  9 Dec 2010 17:30:39 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ReleaseNotes 7695 2010-09-17 11:49:14Z rurban $
+X-Rcs-Id: $Id: ReleaseNotes 7764 2010-12-09 16:36:20Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ReleaseNotes;
   flags=PAGE_LOCKED;
@@ -14,12 +14,12 @@ Content-Transfer-Encoding: binary
 
 This is a new major release, where everything changed from 1.2, and lots of changes since 13.4.
 
-An important modification in this release is the implementation 
+An important modification in this release is the implementation
 of full Wikicreole 1.0 syntax, including additions.
 
 The "classic" Phpwiki syntax is still supported.
 
-The documentation pages found in pgsrc have been mostly converted to UTF-8 and 
+The documentation pages found in pgsrc have been mostly converted to UTF-8 and
 Wikicreole syntax (with the addition of tables in Mediawiki syntax, since Wikicreole 1.0
 does not support "complex" tables with block elements in cells, like lists or
 paragraphs).
@@ -27,7 +27,7 @@ paragraphs).
 Improved dumping, pageset handling for format= with ~ActionPages.
 e.g. dump pagesets or multi-page pdf's.
 
-The Sidebar theme is now an extension of the Monobook theme (known from Wikipedia), 
+The Sidebar theme is now an extension of the Monobook theme (known from Wikipedia),
 the new fusionforge theme is to be used together with FusionForge (the successor of Gforge).
 
 === Fixes ===
@@ -49,7 +49,7 @@ the new fusionforge theme is to be used together with FusionForge (the successor
 * XHTML validation corrections (vargenau)
 * avoid recursive modification when renaming a page like '~PageFoo to '~PageFooTwo' (vargenau)
 * fix Bug#1808002 Table of contents plugin does not nest numbering (vargenau)
-* fix Bug#1903815 Cannot put "0" in ~RichTable cell, cell becomes empty (vargenau) 
+* fix Bug#1903815 Cannot put "0" in ~RichTable cell, cell becomes empty (vargenau)
 * fix Bug#1904088  Some brackets links with \n cause the parser to crash
 * fixed incorrect numbering in Table of Contents numbering (vargenau)
 * fix Bug#1967147 ~FileInfoPlugin does not allow display=owner
@@ -70,8 +70,8 @@ the new fusionforge theme is to be used together with FusionForge (the successor
 * aesthetic request: remove ?action=edit after edit
 * create interim pages as minor not see them in RecentChanges
 * default theme: use standard search template (~LiveSearch)
-* [Help:CalendarPlugin] changed default start_wday from 0 to 1 (Monday)
-* [Help:CalendarListPlugin] pages now in parallel with Calendar: year + month args as start base.
+* [[Help:CalendarPlugin]] changed default start_wday from 0 to 1 (Monday)
+* [[Help:CalendarListPlugin]] pages now in parallel with Calendar: year + month args as start base.
   The behaviour before 2007 with last/next_n_days was to start now.
 * removed fpdf support. only use external converters
 * change rename action from access perm change to edit: allow the signed-in user to rename.
@@ -247,7 +247,7 @@ more plugins and enhancements. UTF-8 should work.
 * changed Semantic attribute syntax from ":-" to ":=" (relevant to cvs users only)
 * change ~TextSearchQuery handling of regex=pcre: plain string, no parsing at all,
   detect and apply modifiers.
-* enhance text2png arguments and features. See [Help:text2pngPlugin]
+* enhance text2png arguments and features. See [[Help:text2pngPlugin]]
 * Template plugin: allow passing arbitrary args, not just in vars.
 * added old gd support to ~PhotoAlbum thumbs (~ImageTile)
 * Improve ~LdapSearch plugin and add action page.

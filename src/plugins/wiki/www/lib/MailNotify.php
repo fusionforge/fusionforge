@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: MailNotify.php 7666 2010-08-31 16:02:45Z vargenau $');
+// $Id: MailNotify.php 8071 2011-05-18 14:56:14Z vargenau $
 /* Copyright (C) 2006-2007,2009 Reini Urban
  * Copyright (C) 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -28,7 +28,7 @@
  * We add WikiDB handlers and register ourself there:
  *   onChangePage, onDeletePage, onRenamePage
  * Administrative actions:
- *   [Watch] WatchPage - add a page, or delete watch handlers into the users 
+ *   [Watch] WatchPage - add a page, or delete watch handlers into the users
  *                       pref[notifyPages] slot.
  *   My WatchList      - view or edit list/regex of pref[notifyPages].
  *   EMailConfirm methods: send and verify
@@ -51,9 +51,9 @@ if (!defined("MAILER_LOG"))
 class MailNotify {
 
     function MailNotify($pagename) {
-	$this->pagename = $pagename; /* which page */
+    $this->pagename = $pagename; /* which page */
         $this->emails  = array();    /* to which addresses */
-        $this->userids = array();    /* corresponding array of displayed names, 
+        $this->userids = array();    /* corresponding array of displayed names,
                                         don't display the email addresses */
         /* From: from whom the mail appears to be */
         $this->from = $this->fromId();
@@ -142,8 +142,8 @@ class MailNotify {
                         }
                     }
 
-                    if (!$user) { // handle the case for ModeratePage: 
-                        	  // no prefs, just userid's.
+                    if (!$user) { // handle the case for ModeratePage:
+                              // no prefs, just userid's.
                         $emails[] = $this->userEmail($userid, false);
                         $userids[] = $userid;
                     } else {
@@ -175,7 +175,7 @@ class MailNotify {
         $this->userids = array_unique($userids);
         return array($this->emails, $this->userids);
     }
-    
+
     function sendMail($subject,
                       $content,
                       $notice = false,
@@ -199,28 +199,29 @@ class MailNotify {
                    "Content-Transfer-Encoding: 8bit";
 
         $ok = mail(($to = array_shift($emails)),
-                   $encoded_subject, 
-		   $subject."\n".$content,
-		   $headers
-		   );
-	if (MAILER_LOG and is_writable(MAILER_LOG)) {
-	    $f = fopen(MAILER_LOG, "a");
-	    fwrite($f, "\n\nX-MailSentOK: " . $ok ? 'OK' : 'FAILED');
-	    if (!$ok) {
-		global $ErrorManager;
-		// get last error message
-		$last_err = 
-                    $ErrorManager->_postponed_errors[count($ErrorHandler->_postponed_errors)-1];
-		fwrite($f, "\nX-MailFailure: " . $last_err);
-	    }
-	    fwrite($f, "\nDate: " . CTime());
-	    fwrite($f, "\nSubject: $encoded_subject");
-	    fwrite($f, "\nFrom: $from");
-	    fwrite($f, "\nTo: $to");
-	    fwrite($f, "\nBcc: ".join(',', $emails));
-	    fwrite($f, "\n\n". $content);
-	    fclose($f);
-	}
+                   $encoded_subject,
+           $subject."\n".$content,
+           $headers
+           );
+    if (MAILER_LOG and is_writable(MAILER_LOG)) {
+        global $ErrorManager;
+
+        $f = fopen(MAILER_LOG, "a");
+        fwrite($f, "\n\nX-MailSentOK: " . $ok ? 'OK' : 'FAILED');
+
+        if (!$ok && isset($ErrorManager->_postponed_errors[count($ErrorManager->_postponed_errors)-1])) {
+            // get last error message
+            $last_err = $ErrorManager->_postponed_errors[count($ErrorManager->_postponed_errors)-1];
+            fwrite($f, "\nX-MailFailure: " . $last_err);
+        }
+        fwrite($f, "\nDate: " . CTime());
+        fwrite($f, "\nSubject: $encoded_subject");
+        fwrite($f, "\nFrom: $from");
+        fwrite($f, "\nTo: $to");
+        fwrite($f, "\nBcc: ".join(',', $emails));
+        fwrite($f, "\n\n". $content);
+        fclose($f);
+    }
         if ($ok) {
             if (!$silent)
                 trigger_error(sprintf($notice, $this->pagename)
@@ -231,13 +232,13 @@ class MailNotify {
         } else {
             trigger_error(sprintf($notice, $this->pagename)
                           . " "
-                          . sprintf(_("Error: Couldn't send %s to %s"), 
-                                   $subject."\n".$content, join(',',$this->userids)), 
+                          . sprintf(_("Error: Couldn't send %s to %s"),
+                                   $subject."\n".$content, join(',',$this->userids)),
                           E_USER_WARNING);
             return false;
         }
     }
-    
+
     /**
      * Send udiff for a changed page to multiple users.
      * See rename and remove methods also
@@ -246,9 +247,9 @@ class MailNotify {
 
         global $request;
 
-        if (@is_array($request->_deferredPageChangeNotification)) {
+        if (isset($request->_deferredPageChangeNotification)) {
             // collapse multiple changes (loaddir) into one email
-            $request->_deferredPageChangeNotification[] = 
+            $request->_deferredPageChangeNotification[] =
                 array($this->pagename, $this->emails, $this->userids);
             return;
         }
@@ -264,21 +265,21 @@ class MailNotify {
             if (empty($prevdata['%content']))
                 $prevdata = $backend->get_versiondata($this->pagename, $previous, true);
             $other_content = explode("\n", $prevdata['%content']);
-            
+
             include_once("lib/difflib.php");
             $diff2 = new Diff($other_content, $this_content);
             //$context_lines = max(4, count($other_content) + 1,
             //                     count($this_content) + 1);
             $fmt = new UnifiedDiffFormatter(/*$context_lines*/);
-            $content  = $this->pagename . " " . $previous . " " . 
+            $content  = $this->pagename . " " . $previous . " " .
                 Iso8601DateTime($prevdata['mtime']) . "\n";
-            $content .= $this->pagename . " " . $version . " " .  
+            $content .= $this->pagename . " " . $version . " " .
                 Iso8601DateTime($meta['mtime']) . "\n";
             $content .= $fmt->format($diff2);
-            
+
         } else {
             $difflink = WikiURL($this->pagename,array(),true);
-            $content = $this->pagename . " " . $version . " " .  
+            $content = $this->pagename . " " . $version . " " .
                 Iso8601DateTime($meta['mtime']) . "\n";
             $content .= _("New page");
             $content .= "\n\n";
@@ -286,25 +287,25 @@ class MailNotify {
         }
         $editedby = sprintf(_("Edited by: %s"), $this->from);
         $summary = sprintf(_("Summary: %s"), $meta['summary']);
-        $this->sendMail($subject, 
+        $this->sendMail($subject,
                         $editedby."\n".$summary."\n".$difflink."\n\n".$content);
     }
 
-    /** 
+    /**
      * Support mass rename / remove (not yet tested)
      */
     function sendPageRenameNotification ($to, &$meta) {
         global $request;
 
         if (@is_array($request->_deferredPageRenameNotification)) {
-            $request->_deferredPageRenameNotification[] = 
+            $request->_deferredPageRenameNotification[] =
                 array($this->pagename, $to, $meta, $this->emails, $this->userids);
         } else {
             $pagename = $this->pagename;
             $editedby = sprintf(_("Edited by: %s"), $this->from);
             $subject = sprintf(_("Page rename %s to %s"), $pagename, $to);
             $link = WikiURL($to, true);
-            $this->sendMail($subject, 
+            $this->sendMail($subject,
                             $editedby."\n".$link."\n\n"."Renamed $pagename to $to");
         }
     }
@@ -314,20 +315,20 @@ class MailNotify {
      */
     function onChangePage (&$wikidb, &$wikitext, $version, &$meta) {
         $result = true;
-	if (!isa($GLOBALS['request'],'MockRequest')) {
-	    $notify = $wikidb->get('notify');
+    if (!isa($GLOBALS['request'],'MockRequest')) {
+        $notify = $wikidb->get('notify');
             /* Generate notification emails? */
-	    if (!empty($notify) and is_array($notify)) {
+        if (!empty($notify) and is_array($notify)) {
                 if (empty($this->pagename))
                     $this->pagename = $meta['pagename'];
-		// TODO: Should be used for ModeratePage and RSS2 Cloud xml-rpc also.
+        // TODO: Should be used for ModeratePage and RSS2 Cloud xml-rpc also.
                 $this->getPageChangeEmails($notify);
                 if (!empty($this->emails)) {
                     $result = $this->sendPageChangeNotification($wikitext, $version, $meta);
                 }
-	    }
-	}
-	return $result;
+        }
+    }
+    return $result;
     }
 
     function onDeletePage (&$wikidb, $pagename) {
@@ -349,19 +350,19 @@ class MailNotify {
 
     function onRenamePage (&$wikidb, $oldpage, $new_pagename) {
         $result = true;
-	if (!isa($GLOBALS['request'], 'MockRequest')) {
-	    $notify = $wikidb->get('notify');
-	    if (!empty($notify) and is_array($notify)) {
-		$this->getPageChangeEmails($notify);
-		if (!empty($this->emails)) {
-		    $newpage = $wikidb->getPage($new_pagename);
-		    $current = $newpage->getCurrentRevision();
-		    $meta = $current->_data;
+    if (!isa($GLOBALS['request'], 'MockRequest')) {
+        $notify = $wikidb->get('notify');
+        if (!empty($notify) and is_array($notify)) {
+        $this->getPageChangeEmails($notify);
+        if (!empty($this->emails)) {
+            $newpage = $wikidb->getPage($new_pagename);
+            $current = $newpage->getCurrentRevision();
+            $meta = $current->_data;
                     $this->pagename = $oldpage;
-		    $result = $this->sendPageRenameNotification($new_pagename, $meta);
-		}
-	    }
-	}
+            $result = $this->sendPageRenameNotification($new_pagename, $meta);
+        }
+        }
+    }
     }
 
     /**
@@ -387,10 +388,10 @@ e-mail features on %s, open this link in your browser:
 %s
 
 If this is *not* you, don't follow the link. This confirmation code
-will expire at %s.", 
-                       $ip, $userid, WIKI_NAME, WIKI_NAME, 
+will expire at %s.",
+                       $ip, $userid, WIKI_NAME, WIKI_NAME,
                        WikiURL(HOME_PAGE, array('action' => 'ConfirmEmail',
-                                                'id' => $id), 
+                                                'id' => $id),
                                true),
                        CTime($expire_date));
         $this->sendMail($subject, $content, "", true);
@@ -463,5 +464,5 @@ will expire at %s.",
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

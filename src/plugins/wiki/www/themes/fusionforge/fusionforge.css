@@ -1,8 +1,8 @@
 /**
- * $Id: fusionforge.css 7707 2010-09-22 14:57:42Z vargenau $
+ * $Id: fusionforge.css 8071 2011-05-18 14:56:14Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2009 Alcatel-Lucent
+ * Copyright (C) 2008-2010 Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -17,9 +17,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
+*/
 
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
@@ -43,24 +43,69 @@
  * ALONE BASIS."
  */
 
-/* Because in some cases there is a <p> in nested lists */
-li p { margin:0; }
-
-/* Hide the elements we put in just to get around NS4 bugs. */
-div.br { display: none; }
-
-/* This makes spacings in NS4 too big. */
-.toolbar, div.toolbar { margin: 0.5ex 0ex; }
-
-/* This breaks NS4, but is necessary for IE4. */
-div.wikitext { width: auto; }
-
-div.wikitext table p { margin-top: 0.3em;  margin-bottom: 0.3em;}
-
 /**
  * General
  */
-/* for NS4 */
+
+body {
+	margin: 0 0 0 0;
+}
+
+form { margin: 0; }
+
+img { border: 0; vertical-align: middle; }
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #565c5e; /* Alcatel-Lucent grey */
+}
+
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.6em; line-height:1.1em;}
+h3 { font-size: 1.2em; line-height:1.3em;}
+h4 { font-size: 1.0em; line-height:1.3em;}
+h5 { font-size: 0.8em; }
+h6 { font-size: 0.6em; }
+
+/* Titles in the page. */
+h1, .titlebar, .widget_titlebar {
+	background: url(/themes/alcatel-lucent/images/bgrd_hpage_header.gif) white;
+	background-position: bottom;
+	background-repeat: repeat-x;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 4px;
+	padding-bottom: 6px;
+	border-top:1px solid #dddddd;
+	border-bottom:1px solid #dddddd;
+	vertical-align: middle;
+	font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
+	color: #554295; /* Alcatel-Lucent violet */
+	font-weight: normal;
+	font-size: 1.8em;
+	line-height: 1.3em;
+	text-align: left;
+	height: 24px;
+	margin-top: 4px;
+}
+
+/* Hack for the wiki that inserts an unneccessary </p> */
+.titlebar p {
+	color: #554295; /* Alcatel-Lucent violet */
+	font-size: 1em;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.titlebar a {
+	padding-left: 10px;
+}
+
+/* Because in some cases there is a <p> in nested lists */
+li p { margin:0; }
+
+div.wikitext table p { margin-top: 0.3em;  margin-bottom: 0.3em;}
+
 img { vertical-align: baseline; }
 input { margin: 0.1em; }
 input.numeric { text-align: right; }
@@ -72,6 +117,21 @@ fieldset {
 legend {
     border: 1px solid #d8d8e7;
     background-color: white;
+}
+
+img { border: 0; }
+
+form { margin: 0ex; }
+
+table {
+    /* For Mozilla */
+    empty-cells: show;
+}
+
+caption {
+    caption-side: top;
+    text-align: left;
+    margin-bottom: .5ex;
 }
 
 /**
@@ -90,15 +150,14 @@ div.wikiaction, form.wikiadmin div {
   margin-top: 0.5ex;
   margin-bottom: 0.5ex;
   padding: 0.5ex 0.5em;
-  /* Emulate the display behaviour of a table, to shrink it's width.
-   * ie5.1Mac ignores this */
+  /* Emulate the display behaviour of a table, to shrink it's width. */
   display: table;
 }
 
 /* Add space between the input field and following buttons, but not after the last button. */
 div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin input[type=file] { margin-right: 0.5em; }
 
-div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
+div#actionbuttons { line-height: 3.0ex; }
 
 /* QuestionMark */
 .wikiunknown a, .named-wikiunknown a {
@@ -116,42 +175,6 @@ div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
 img.linkicon { vertical-align: middle; }
 
 img.inlineimage { vertical-align: middle; }
-
-/**
- * Edit Page & View Source
- */
-/* color: inherit; and background: inherit; display as lime in NS4 */
-
-/**
- * Diff Output
- */
-.diff .prefix {
-  position: relative;
-  left: -1em;
-}
-/* deleted & added words */
-.diff del, .diff ins {
-  padding-left: 1px;
-  padding-right: 1px;
-}
-
-/**
- * General
- */ 
-img { border: 0ex; }
-
-form { margin: 0ex; }
-
-table {
-  /* For Mozilla */
-  empty-cells: show;
-}
-
-caption {
-  caption-side: top;
-  text-align: left;
-  margin-bottom: .5ex;
-}
 
 /**
  * Wiki
@@ -172,7 +195,6 @@ div.wikitext pre {
 div.wikitext {
   margin-top:    1ex;
   margin-bottom: 0.5ex;
-  background: white;
   padding-bottom: 1em;
   clear: both;
 }
@@ -230,16 +252,22 @@ input.wikiaction, input.button, input.wikiadmin {
 }
 h1 .backlinks { text-decoration: none; color: inherit; }
 
-h1 { font-weight: bold; }
-
 /* Interwiki links */
 .wikipage  { font-weight: normal; }
 .interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
-/**
- * Table of content
- */
+table.wikipaging { 
+    border-width: 1px;
+    border-style: solid; 
+    border-color: black; 
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* CreateToc plugin =================================================== */
+
 div.toc {
     border: 1px solid #aaaaaa;
     background-color: #f9f9f9;
@@ -257,10 +285,10 @@ div.toc p { margin: 0; }
  * headings
  */
 div.toc p.toctitle, h2, h3, h4, h5, h6 { 
-	font-family: Verdana, Arial, Helvetica, sans-serif; 
-        padding-top: .5em;
-        padding-bottom: .17em;
-        border-bottom: 1px solid #aaaaaa;
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    padding-top: .5em;
+    padding-bottom: .17em;
+    border-bottom: 1px solid #aaaaaa;
 }
 
 h1, h1 .backlinks, h2, .wikitext h2 a, h3, .wikitext h3 a, h4, .wikitext h4 a, h5, h6 {
@@ -299,8 +327,8 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 /**
  * Toolbar
  */
-.toolbar, input.button, #signin { 
-	font-family: Verdana, Arial, Helvetica, sans-serif; 
+.toolbar, input.button { 
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
 }
 
 .toolbar {
@@ -326,28 +354,22 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 }
 
 .tooltitle {
-	font-weight: bold ;
+    font-weight: bold ;
 }
 
-#navbuttons, #actionbuttons {
+#actionbuttons {
   white-space: nowrap;
 }
 
-#navbuttons .named-wiki,
 #actionbuttons .named-wiki,
-#navbuttons .wikiaction,
 #actionbuttons .wikiaction,
-#navbuttons .wikiadmin,
 #actionbuttons .wikiadmin {
   font-weight: normal;
   color: #565c5e; /* Alcatel-Lucent grey */
 }
 
-#navbuttons .named-wiki:hover,
 #actionbuttons .named-wiki:hover,
-#navbuttons .wikiaction:hover,
 #actionbuttons .wikiaction:hover,
-#navbuttons .wikiadmin:hover,
 #actionbuttons .wikiadmin:hover {
   text-decoration: underline;
 }
@@ -381,7 +403,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 
 #logo img {
   float: right;
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
@@ -457,13 +478,15 @@ li.LSRow {
   list-style-image: none;
 }
 
-/* PageTrail plugin */
+/* PageTrail plugin =================================================== */
+
 .pagetrail {
      background-color: #FFFF99;
      padding: 0.2em;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;
@@ -506,9 +529,8 @@ li.LSRow {
   margin: 0;
 }
 
-/**
- * Calendar plugin
- */
+/* Calendar plugin ==================================================== */
+
 table.cal {
   border: 1px outset gray;
   background: white;
@@ -552,15 +574,23 @@ table.cal td.cal-today {
  /* text */
 table.cal td.cal-today a.cal-hide {  }
 
-/**
- * Diff Output
- */
+/* Diff plugin ======================================================== */
+
+.diff .prefix {
+  position: relative;
+  left: -1em;
+}
+/* deleted & added words */
+.diff del, .diff ins {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
 /* main box */
 .diff {
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  border: 1px #ccc solid;
   color: black;
   border-top: 1px solid #494f5d;
   border-left:  1px solid #494f5d;
@@ -581,7 +611,6 @@ table.cal td.cal-today a.cal-hide {  }
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* entire difftextblock */
@@ -589,7 +618,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    0;
   margin-bottom: 0;
   background: white;
-  border: 1px black solid;
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
@@ -635,64 +663,122 @@ table.cal td.cal-today a.cal-hide {  }
 /* added words */
 .diff ins { background: #9f9; }
 
-/**
- * PageHistory, Info
- */
+/* PageInfo plugin ==================================================== */
+
 td.pageinfo { font-weight: bold; }
 .pageinfo-minoredit, .pageinfo-authorid {
   font-size: smaller;
   font-style: oblique;
 }
 
-div.errors {
+/* Banners ============================================================ */
+
+p.success, p.feedback, p.warning, p.warning_msg, p.error, p.information,
+div.success, div.feedback, div.warning, div.warning_msg, div.error, div.information {
+   font-weight: bold;
+   font-size: 12px;
+   text-align: center;
+   border: 1px solid;
+   margin: 15px 0px;
+   padding: 10px 10px 10px 10px;
+}
+
+.success, .feedback {
+   border-color: green;
+   background-color: #DFF2BF;
+}
+.warning_msg, .warning {
+   border-color: orange;
+   background-color: #FEEFB3;
+}
+.error {
+   border-color: red;
+   background-color: #FFBABA;
+}
+.information {
+   border-color: blue;
+   background-color: #BDE5F8;
+}
+
+p.success, p.feedback, 
+p.warning, p.warning_msg, 
+p.error, 
+p.information,
+div.success, div.feedback, 
+div.warning, div.warning_msg, 
+div.error, 
+div.information {
+   text-align: left;
+   background-repeat: no-repeat;
+   background-position: 10px;
+   -moz-border-radius: 1em;
+   -webkit-border-radius: 1em;
+   border-radius: 1em;
+   padding: 10px 10px 10px 50px;
+}
+
+div.success, div.feedback,
+p.success, p.feedback {
+   color: #4F8A10;
+   background-image:url('/themes/base-alcatel-lucent/images/success.png');
+}
+div.feedback p, div.feedback li,
+div.success p, div.success li {
+   color: #4F8A10;
+}
+
+div.warning, div.warning_msg,
+p.warning, p.warning_msg {
+   color: #9F6000;
+   background-image: url('/themes/base-alcatel-lucent/images/warning.png');
+}
+div.warning p, div.warning_msg p,
+div.warning li, div.warning_msg li {
+   color: #9F6000;
+}
+
+div.error,
+p.error {
+   color: #D8000C;
+   background-image: url('/themes/base-alcatel-lucent/images/error.png');
+}
+div.error p,
+div.error li {
+   color: #D8000C;
+}
+
+div.information,
+p.information {
+   color: #00529B;
+   background-image: url('/themes/base-alcatel-lucent/images/info.png');
+}
+
+.error, .warning, .debug, .hint {
     font-weight: bold;
-    border-width: 2px;
+    font-size: 11px;
+    text-align: left;
+    border-width: 1px;
     border-style: solid;
-    background-color: #ffc0cb; /* pink */
-    border-color: red;
     padding: 0.5em;
 }
 
-div.warning {
-  color: black;
-  background: #eee;
-  margin-top:    1em;
-  margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
-  padding-top:    0.8ex;
-  padding-bottom: 0;
-  border: thin solid blue;
-  clear: both;
-}
-
-/* Debug */
 .debug {
-  color: black;
-  background: white;
-  font-family: monospace;
-  font-size: smaller;
-  margin: 1ex 0;
-  padding: 0.5ex 0.5em;
-  border: medium solid #fff8dc; /* darker ivory */
+    background-color: white;
+    border-color: #fff8dc; /* darker ivory */
 }
 
-/* Hints */
 .hint {
-  color: black;
-  background: #eeeeee;
-  font-style: italic;
-  margin-left: 3em;
-  padding: 0.5ex 0.5em;
-  border: thin solid #aaaaaa;
+    background-color: #eeeeee; 
+    border-color: black;
 }
-span.hint {
+
+span.error, span.warning, span.debug, span.hint {
   padding: 0;
 }
 
-/* Disabled Plugins */
-.disabled-plugin
-{
+/* Disabled Plugins  ================================================== */
+
+.disabled-plugin {
   clear: both;
   margin: 1ex 0;
   padding: 0;
@@ -710,6 +796,8 @@ span.hint {
   margin: 0;
   padding: 0.3ex 0.5em;
 }
+
+/* RedirectTo plugin ================================================== */
 
 /* "(Redirected from ...)" message. */
 span.redirectfrom {
@@ -752,19 +840,19 @@ span.redirectfrom {
  * "E-mail" style blockquote
  */
 blockquote.mail-style-quote {
-	margin: 0em;
-	margin-bottom: 1em;
-	border: 1px solid #284;
-	padding: 0.5em;
+    margin: 0em;
+    margin-bottom: 1em;
+    border: 1px solid #284;
+    padding: 0.5em;
 } 
 .mail-style-quote blockquote.mail-style-quote {
-        margin-left: 0.3em;
-	margin-bottom : 0em;
-	background: transparent;
-	border-style: none;
-	border-left: medium solid #284;
-	padding: 0em;
-	padding-left: 0.5em;
+    margin-left: 0.3em;
+    margin-bottom : 0em;
+    background-color: transparent;
+    border-style: none;
+    border-left: medium solid #284;
+    padding: 0em;
+    padding-left: 0.5em;
 }
 
 /*
@@ -774,7 +862,6 @@ blockquote.mail-style-quote {
 .floatright { float: right; }
 
 div.wikiblog {
-  /* border: thin black solid; */
   margin: 1ex 2em;
   padding: 0 0;
 }
@@ -872,7 +959,6 @@ table.interwiki-map {
   clear: both;
 }
 
-
 /* postnuke css:*/
 .gensmall{font-size:10px}
 .genmed{font-size:11px}
@@ -919,17 +1005,14 @@ table.sqlresult td {
   border: 1px solid gray;
 }
 
-/**
- * TeX2png plugin
- */
+/* TeX2png plugin ===================================================== */
+
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 
-/**
- * PhotoAlbum plugin
- */
+/* PhotoAlbum plugin ================================================== */
+
 .boldsmall {
   font-weight: bold;
   font-size: 11px;
@@ -938,7 +1021,6 @@ img.tex {
 #content {
     margin: 0;
     padding: 1em 1em 1.5em 1em;
-    background: white;
     border: 1px solid #aaaaaa;
     line-height: 1.2em;
     position: relative;
@@ -948,9 +1030,9 @@ img.tex {
 /* the left column width is specified in class .portlet */
 
 #footer {
-        text-align: right;
-        vertical-align: bottom;
-        font-style: italic;
+    text-align: right;
+    vertical-align: bottom;
+    font-style: italic;
 }
 
 /*
@@ -992,7 +1074,8 @@ table.boxed th, table.bordered th {
     background-color: #d8d8d8;
 }
 
-/* plugin BoxRight */
+/* BoxRight plugin ==================================================== */
+
 div.boxright {
   background-color: #e9fbff;
   width: 200px; 
@@ -1021,6 +1104,11 @@ td.tdunselected {
 }
 
 /* Main wiki browse banner */
+
+.browsebanner {
+   clear: both;
+}
+
 .browsebanner table {
    width: 100%;
    background-color: #e9fbff;
@@ -1034,6 +1122,8 @@ td.tdunselected {
    font-weight: bold;
    font-style: oblique;
 }
+
+/* RateIt plugin ====================================================== */
 
 .rateit {
    font-size: 60%;

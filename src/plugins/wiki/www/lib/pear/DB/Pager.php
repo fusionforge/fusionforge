@@ -20,13 +20,12 @@
 //  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 //
 //
-// $Id: Pager.php 7417 2010-05-19 12:57:42Z vargenau $
+// $Id: Pager.php 8075 2011-05-18 16:10:53Z vargenau $
 ///
 // Based on DB_Pager 0.7 from the pear.php.net repository. 
 // The only modifications made have been modification of the include paths.
 //
-// rcs_id('$Id: Pager.php 7417 2010-05-19 12:57:42Z vargenau $');
-// rcs_id('From Pear CVS: Id: Pager.php,v 1.3 2002/05/12 13:59:40 cox Exp');
+// From Pear CVS: Id: Pager.php,v 1.3 2002/05/12 13:59:40 cox Exp
 
 require_once 'PEAR.php';
 require_once 'DB.php';

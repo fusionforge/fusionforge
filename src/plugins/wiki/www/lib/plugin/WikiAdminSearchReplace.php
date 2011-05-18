@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: WikiAdminSearchReplace.php 7448 2010-05-31 12:01:38Z vargenau $');
+// $Id: WikiAdminSearchReplace.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -103,22 +103,23 @@ extends WikiPlugin_WikiAdminSelect
             $dbi->touch();
             $result->setAttr('class', 'feedback');
             if ($count == 1) {
-                $result->pushContent(HTML::p("One page has been permanently changed:"));
+                $result->pushContent(HTML::p(_("One page has been changed:")));
             } else {
-                $result->pushContent(HTML::p(fmt("%s pages have been permanently changed:", $count)));
+                $result->pushContent(HTML::p(fmt("%d pages have been changed:", $count)));
             }
             $result->pushContent($ul);
         } else {
             $result->setAttr('class', 'error');
-            $result->pushContent(HTML::p("No pages changed."));
+            $result->pushContent(HTML::p(_("No pages changed.")));
         }
         return $result;
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-            // no action=replace support yet
-        if ($request->getArg('action') != 'browse')
-            return $this->disabled("(action != 'browse')");
+        // no action=replace support yet
+        if ($request->getArg('action') != 'browse') {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
 
         $args = $this->getArgs($argstr, $request);
         $this->_args = $args;
@@ -186,7 +187,7 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header->pushContent(
               HTML::p(HTML::strong(
-                                   _("Are you sure you want to permanently replace text in the selected files?"))));
+                                   _("Are you sure you want to replace text in the selected files?"))));
             $this->replaceForm($header, $post_args);
         } else {
             $button_label = _("Search & Replace");
@@ -227,11 +228,11 @@ extends WikiPlugin_WikiAdminSelect
                                        _("Replace all occurences of the given string in the content of all pages.")),
                              HTML::br());
         $table = HTML::table();
-        $this->_tablePush($table, _("Replace").": ",
+        $this->_tablePush($table, _("Replace")._(": "),
                           HTML::input(array('name' => 'admin_replace[from]',
                                             'size' => 90,
                                             'value' => $post_args['from'])));
-        $this->_tablePush($table, _("by").': ',
+        $this->_tablePush($table, _("by")._(": "),
                           HTML::input(array('name' => 'admin_replace[to]',
                                             'size' => 90,
                                             'value' => $post_args['to'])));

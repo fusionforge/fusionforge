@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 17:50:09 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginTableauAncienStyle 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginTableauAncienStyle 7879 2011-01-25 17:01:33Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginTableauAncienStyle;
   flags="";
@@ -33,31 +33,31 @@ affichera
 |> Marco       |< Polo      |  Moins cher   |< Pas disponible
 >>
 
-Remarquez que de multiple __|__ conduisent à des colonnes étendus
-et que des__v__ peuvent être utilisé pour étendre des lignes. Un 
-__>__ engendre une colonne justifiée à droite, __<__ une colonne 
-justifiée à gauche et __^__ une colonne centrée (position par 
+Remarquez que de multiple **|** conduisent à des colonnes étendus
+et que des**v** peuvent être utilisé pour étendre des lignes. Un 
+**>** engendre une colonne justifiée à droite, **<** une colonne 
+justifiée à gauche et **^** une colonne centrée (position par 
 défaut).
 
 ===Arguments
 
-__caption__:
+**caption**:
 
   une chaîne. Par défaut : ""
 
-__border__:
+**border**:
 
   un nombre. Par défaut : 1
 
-__cellspacing__:
+**cellspacing**:
 
   un nombre. Par défaut : 1
 
-__cellpadding__:
+**cellpadding**:
 
   un nombre. Par défaut : 1
 
-__summary__:
+**summary**:
 
   une chaîne. Par défaut : ""
 
@@ -70,3 +70,8 @@ par niveau sont autorisés dans les cellules.
 Utiliser l'ancien style ne devrait pas avoir beaucoup plus de sens puisqu'on 
 ne peut pas inclure d'appels de plugin sur plusieurs lignes en utilisant
 les anciennes règles.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: CreateToc.php 7709 2010-09-30 15:48:54Z vargenau $');
+// $Id: CreateToc.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -122,11 +122,6 @@ extends WikiPlugin
         return $str;
     }
 
-    function preg_quote ($heading) {
-        return str_replace(array("/",".","?","*"),
-                               array('\/','\.','\?','\*'), $heading);
-    }
-
     // Get HTML header corresponding to current level (level is set of ! or =)
     function _getHeader($level) {
 
@@ -214,7 +209,9 @@ extends WikiPlugin
                 }
             }
         }
-        trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
+        // Do not trigger error, it happens e.g. for "<<CreateToc pagename=AnotherPage>>"
+        // trigger_error("Heading <$h> $heading </$h> not found\n", E_USER_NOTICE);
+
         return 0;
     }
 
@@ -386,6 +383,11 @@ extends WikiPlugin
         if (($notoc) or ($liststyle == 'ol')) {
             $with_counter = 1;
         }
+        if ($firstlevelstyle and ($firstlevelstyle != 'number') 
+                             and ($firstlevelstyle != 'letter')
+                             and ($firstlevelstyle != 'roman')) {
+            return $this->error(_("Error: firstlevelstyle must be 'number', 'letter' or 'roman'"));
+        }
 
         // Check if page exists.
         if (!($dbi->isWikiPage($pagename))) {
@@ -401,6 +403,9 @@ extends WikiPlugin
         $page = $dbi->getPage($pagename);
 
         if ($version) {
+            if (!is_whole_number($version) or !($version>0)) {
+                return $this->error(_("Error: version must be a positive integer."));
+            }
             $r = $page->getRevision($version);
             if ((!$r) || ($r->hasDefaultContents())) {
                 return $this->error(sprintf(_("%s: no such revision %d."),

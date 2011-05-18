@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki-printer.css 7002 2009-07-06 19:52:11Z vargenau $
+ * $Id: phpwiki-printer.css 7913 2011-01-26 17:48:29Z vargenau $
  *
  * PhpWiki style sheet for the printed page:
  * Black on white only, with no toolbar commands and no link icons.
@@ -159,7 +159,8 @@ textarea.wikiedit {
   display: none;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;
@@ -253,8 +254,7 @@ table.cal td.cal-today {
   display: none;
 }
 
-/* PHP Warnings */
-div.errors {
+.error {
   margin-top:    1em;
   margin-bottom: 1em;
   padding-left:  0.8em; 
@@ -264,25 +264,26 @@ div.errors {
   font-size: smaller;
   border: 0.5pt solid black;
   clear: both;
-/*
-  display: none;
-*/
 }
-.errors h4 {
-  margin:  0;
-  padding: 0;
-  text-decoration: underline;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
-  /* font-family: monospace;
-  margin: 1ex 0;*/
   display: none;
 }
 
+.portlet {
+  display: none;
+}
+
+#img-logo-right, #rateit-widget-top, #footer {
+  display: none;
+}
+
+#content {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 
 /* For emacs users
  *

@@ -1,6 +1,6 @@
-Date: Tue, 21 Sep 2010 09:44:16 +0000
+Date: Wed,  4 May 2011 17:46:02 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FCreateTocPlugin 7705 2010-09-21 07:45:12Z vargenau $
+X-Rcs-Id: $Id: Help%2FCreateTocPlugin 8068 2011-05-04 15:48:08Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCreateTocPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -32,7 +32,7 @@ The Table of Contents can easily be inserted by clicking on the TOC button in th
 | true
 |-
 | **firstlevelstyle**
-| Style of first level numbering: number, letter or roman.
+| Style of first level numbering: //number//, //letter// or //roman//.
 | number
 |-
 | **headers**
@@ -48,7 +48,7 @@ The Table of Contents can easily be inserted by clicking on the TOC button in th
 | false
 |-
 | **liststyle**
-| List style: dl or ol or ul. Using ol is equivalent to with_counter=1.
+| List style: //dl// or //ol// or //ul//. Using //ol// is equivalent to //with_counter=1//.
 | dl
 |-
 | **noheader**
@@ -63,16 +63,16 @@ The Table of Contents can easily be inserted by clicking on the TOC button in th
 | Table of Contents of which page?
 | current pagename
 |-
-| **version**
-| page version
-| most recent version
-|-
 | **position**
-| Where to display the Table of Contents: full, left or right.
+| Where to display the Table of Contents: //full//, //left// or //right//.
 | full
 |-
+| **version**
+| Page version
+| most recent version
+|-
 | **width**
-| Width of Table of Contents (if position is left or right)
+| Width of Table of Contents (if position is //left// or //right//)
 | 200px
 |-
 | **with_counter**

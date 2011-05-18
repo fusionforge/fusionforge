@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: pdf.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: pdf.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2003 Olivier PLATHEY
  * Copyright (C) 200? Don Sebà
@@ -18,9 +18,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */ 
+ */
 
 //define("USE_EXTERNAL_HTML2PDF", "htmldoc --quiet --format pdf14 --jpeg --webpage --no-toc --no-title %s");
 /**
@@ -45,13 +45,13 @@ function ConvertAndDisplayPdfPageList (&$request, $pagelist, $args = array()) {
     $cache = new WikiPluginCached;
     $cache->newCache();
     $tmpfile = $cache->tempnam();
-    $tmpdir = dirname($tmpfile); 
+    $tmpdir = dirname($tmpfile);
     unlink ($tmpfile);
 
     $WikiTheme->DUMP_MODE = 'PDFHTML';
-    _DumpHtmlToDir($tmpdir, 
-    		   new WikiDB_Array_generic_iter($pagelist->_pages),
-    		   $request->getArg('exclude'));
+    _DumpHtmlToDir($tmpdir,
+               new WikiDB_Array_generic_iter($pagelist->_pages),
+               $request->getArg('exclude'));
     $WikiTheme->DUMP_MODE = false;
     return;
 }
@@ -75,7 +75,7 @@ function ConvertAndDisplayPdf (&$request) {
     displayPage($request, new Template('htmldump', $request));
     $html = ob_get_contents();
     $WikiTheme->DUMP_MODE = false;
-    
+
     // check hook for external converters
     if (defined('USE_EXTERNAL_HTML2PDF')
         and USE_EXTERNAL_HTML2PDF)
@@ -97,7 +97,7 @@ function ConvertAndDisplayPdf (&$request) {
     // clean the hints errors
     global $ErrorManager;
     $ErrorManager->destroyPostponedErrors();
-    
+
     if (!empty($errormsg)) {
         $request->discardOutput();
     }

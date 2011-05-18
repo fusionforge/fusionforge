@@ -1,5 +1,5 @@
 /**
- * $Id: SpaceWiki.css 7331 2010-04-15 09:04:51Z vargenau $
+ * $Id: SpaceWiki.css 7851 2011-01-21 13:17:59Z vargenau $
  *
  * This theme will probably be renamed something like "Space" to
  * avoid any potential copyright issues.
@@ -37,13 +37,12 @@ table {
   /* For Mozilla */
   empty-cells: show;
 }
-td { color: white; } /* for NS4 */
+td { color: white; }
 caption {
   caption-side: top;
   text-align: left;
   margin-bottom: .5ex;
-  /* Allow the caption to extend to the full page width
-     Mac ie5.1 ignores this*/
+  /* Allow the caption to extend to the full page width */
   width: 100%;
 }
 a { color: #0053db; }
@@ -69,7 +68,6 @@ div.wikitext {
 /**
  * <hr>
  * Not all browsers support this, but it's a cool trick when it is!
- * yes=OmniWeb 4.1sp28; No=IE5.1Mac, Mozilla0.97Mac, iCAB2.6Mac.
  */
 div.wikitext hr {
   visibility: hidden; /* for Mozilla */
@@ -367,12 +365,11 @@ textarea.wikiedit {
 }
 
 
-/**
- * IncludePage plugin
- */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   font-style: oblique;
-  font-size: smaller; /* 0.75em; */
+  font-size: smaller;
   text-decoration: none;
   text-align: right;
 } 
@@ -487,10 +484,8 @@ table.cal td.cal-today a.cal-hide {  }
 .diff .original, .diff .deleted { background: #a40024; }
 .diff .final, .diff .added { background: #cfc; }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 .diff del { background: #a40024; }
 .diff ins { background: #9f9; }
-
 
 /**
  * PageHistory, Info
@@ -544,20 +539,12 @@ b.wikisummary {
  */
 .printer { display: none; }
 
-/* PHP Warnings */
-div.errors {
+.error {
   color: red;
   background: black;
   border: medium solid red;
   clear: both;
 }
-.errors h4 {
-  color: black;
-  background: red;
-  text-decoration: underline;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -632,8 +619,7 @@ input[type=submit]:hover {
  */
 /* div.wikiaction, div.wikiadmin { */
 div.wikiaction, form.wikiadmin div {
-  /* Emulate the display behaviour of a table, to shrink it's width.
-   * ie5.1Mac ignores this */
+  /* Emulate the display behaviour of a table, to shrink it's width. */
   position: relative;
   display: table;
 }
@@ -676,7 +662,7 @@ a.wikiadmin:hover {
   padding-right: 1px;
   padding-top: 1px;
   margin-right: 1px;
-  font-size: smaller; /* too small in NS4 */
+  font-size: smaller;
 }
 .wikiunknown a:hover, .named-wikiunknown a:hover {
   border: 1px solid #403752;
@@ -754,13 +740,10 @@ div.toolbar input {
   text-align:  left;
 }
 
-
 /**
  * Edit Page & View Source
  */
-/* color: inherit; and background: inherit; display as lime in NS4 */
-div.transclusion { font-size: smaller; } /* too small in NS4 */
-
+div.transclusion { font-size: smaller; }
 
 /**
  * Diff Output
@@ -774,7 +757,6 @@ div.transclusion { font-size: smaller; } /* too small in NS4 */
   left: 0;
   top:  0;
 }
-
 
 .editdate {
   padding-top:    0.25ex;
@@ -801,26 +783,6 @@ div.toolbar .wiki:hover {
 b.wikisummary {
   padding: 2px;
   margin: 1px;
-}
-
-/**
- * Other
- */
-/* PHP Warnings */
-div.errors {
-  font-size: smaller; /* too small in NS4 */
-  margin-top:    4ex;
-  margin-bottom: 2ex;
-  padding: 0.5ex 0.25em;
-}
-.errors h4 {
-  margin: 0;
-  padding: 0.5ex 0.25em;
-}
-
-.error {
-  padding-left: 0.25em;
-  padding-right: 0.25em;
 }
 
 /*

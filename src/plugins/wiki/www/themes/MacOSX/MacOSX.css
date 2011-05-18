@@ -1,5 +1,5 @@
 /*
- $Id: MacOSX.css 7331 2010-04-15 09:04:51Z vargenau $
+ $Id: MacOSX.css 7851 2011-01-21 13:17:59Z vargenau $
 
  Classes:
 
@@ -36,10 +36,6 @@ input[type=submit],
 input[type=cancel],
 input[type=image] { vertical-align: middle }
 
-/*
- * NS4, defaults from body don't always propagate correctly.
- * So we need this:
- */
 h1, h2, h3, .toolbar, td { font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 input.button { font-family: "Lucida Grande", Helvetica, Arial, sans-serif; }
@@ -48,9 +44,6 @@ input.numeric {
   text-align: right;
 }
 .wikitext pre { font-family: Monaco, monospace; }
-
-
-
 
 input[type=text] {
   border-top:    1px solid #7c7c7c;
@@ -66,16 +59,11 @@ form.wikiadmin input[type=file] {
   margin-right: 0.5em;
 }
 
-
-
 /**
  * Wiki
  */
 div.wikitext {
   background: white;
-  /* for NS4 */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
@@ -85,10 +73,7 @@ div.wikitext {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin: 0.5ex 0px;
-  /* This breaks Netscape 4: (display does not go full width).
-  width: auto;
-  */
-clear: both;
+  clear: both;
 }
 
 input.wikitext { margin:0px; }
@@ -98,7 +83,6 @@ input[type=text] {
 }
 
 div.toolbar { margin: 1ex 0ex; }
-
 
 /**
  * PageTypes
@@ -112,7 +96,6 @@ div.toolbar { margin: 1ex 0ex; }
 .interwiki-moniker { background: #eee; }
 .interwiki-url { background: #f8f8f8; }
 
-
 /* Mozilla RecentChanges Sidebar */
 body.sidebar {
   font-size: smaller;
@@ -124,8 +107,7 @@ body.sidebar div.wikitext {
 body.sidebar div.wikitext ul { padding-left: 1em; }
 body.sidebar h2 { margin-top: 0; }
 
-
-div.errors {
+div.error {
   background: #eee;
   border: 1px solid gray;
   padding-left: 0.8em;
@@ -137,23 +119,6 @@ div.errors {
   font-size: smaller;
 }
 
-.errors h4 {
-  color: black;
-  text-decoration: underline;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin-top: 0;
-  margin-bottom: 0.5ex;
-}
-
-.error {
-  font-family: Monaco, monospace;
-  margin: 0;
-  font-size: smaller;
-}
-.error ul {
-  font-size: smaller;
-  font-family: Monaco, monospace;
-}
 /* Debug */
 .debug {
   color: black;
@@ -165,22 +130,12 @@ div.errors {
   border: 1px solid #eee;
 }
 
-
-/*
- * Style for <hr>s in wiki markup.
- */
-.wikitext hr {}
-
-
 /*
  * Link styles
  */
 /* Wiki Links */
 a.wiki { text-decoration: none; }
 .wiki, .named-wiki { font-weight: bold; color:#1d42be; } /*blue*/
-/* This is obscene in NS4
-  b .wiki, STRONG .wiki { font-size: larger; }
- */
 
 /* Unknown links */
 .wikiunknown a, .named-wikiunknown a, .wikiunknown U { text-decoration: none; }
@@ -202,15 +157,10 @@ i .interwiki, em .interwiki { font-style: normal; }
  */
 a.wikiaction, a.wikiadmin { text-decoration: none; }
 
-/*
- * No border on external link icons.
- */
-img.linkicon, img.rssicon { border: 0px; }
+img { border: 0; }
 img.rssicon { vertical-align: middle; }
-/* This screws up NS4, moved to phpwiki-heavy.css
-img.linkicon { vertical-align: middle; }
-*/
 img.wiki-button { vertical-align: middle; }
+.wiki-button { border:0; }
 
 a.wikiaction { border: 0; }
 
@@ -230,21 +180,8 @@ a.cal-arrow { text-decoration: none; }
   font-size: smaller;
   text-decoration: none;
 }
-table.cal {
-  /* for NS4 */
-  /*border: 1px solid black;
-
-  border-top:    1px solid #7c7c7c;
-  border-left:   1px solid #c3c3c3;
-  border-bottom: 1px solid #dddddd;
-  border-right:  1px solid #c3c3c3;
-  background: #bebebe;*/
-}
 table.cal td {
   background: white;
-  /* for NS4 */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
@@ -258,72 +195,80 @@ table.cal-header td {
 table.cal td.cal-dayname { background: #e8e8e8; }
 table.cal td.cal-today {
   background:    #f4f4f4;
-  /* for NS4 */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
   border-right:  1px solid #c3c3c3;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  /* font-style: oblique; */
-  font-size: smaller; /* 0.75em; */
+  font-size: smaller;
   text-decoration: underline;
   text-align: right;
+  font-style: oblique;
+  margin-bottom: 0.25ex;
+  margin-right:  0.25em;
 }
 
-div.transclusion {
-  /* background: #fff url("images/bgpaper8.png"); */
-  /* background: white; */
+.transclusion {
   background: #fdfdfd;
-  /* for NS4 */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
   border-right:  1px solid #c3c3c3;
-
   padding-left:  0.8em;
   padding-right: 0.8em;
   padding-top:    0px;
   padding-bottom: 0px;
   margin: 0.5ex ;
+  margin-left:   0.25em;
+  margin-right:  0.25em;
+  margin-bottom: 0.1ex;
+  font-size: smaller;
 }
 
 /* The transclusion of the TextEditingRules Synopsis on templates/editpage.html */
-div.wiki-edithelp .transclusion {
+.wiki-edithelp .transclusion {
   font-size: smaller;
   background: inherit;
   padding: 0.5ex 0.5em;
   margin: 0.2ex 5%;
 }
-div.wiki-edithelp .transclusion p { margin: 0; }
-div.wiki-edithelp {
-  /* background: #fff url("images/bgpaper8.png"); */
+.wiki-edithelp .transclusion p { margin: 0; }
+.wiki-edithelp {
   background: white;
-  /* for NS4 */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
   border-right:  1px solid #c3c3c3;
-
+  padding-left:  0.5em;
+  padding-right: 0.5em;
+  padding-top:    0.75ex;
+  padding-bottom: 0.75ex;
+  margin-left:  0;
+  margin-right: 0;
+  margin-top: 1ex;
+  margin-bottom: 1ex;
   font-size: smaller;
-  padding: 6pt;
+}
+.wiki-edithelp p {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left:  0.5em;
+  padding-right: 0.5em;
+  padding-top:    0.5ex;
+  padding-bottom: 0.5ex;
+  margin: 0;
 }
 div.wiki-message {
   background: #fff url("images/bggranular.png");
   border: solid 1px #d8d8d8;
   padding: 6pt;
 }
-.printer { display: none; }
 
+.printer { display: none; }
 
 /**
  * Diff Output
@@ -331,9 +276,6 @@ div.wiki-message {
 /* main box */
 .diff {
   background: white;
-  /* for NS4 */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
@@ -341,14 +283,11 @@ div.wiki-message {
 }
 .diff .block {
   background: #d8d8d8;
-  /* for NS4 */
-  /*  border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* + - line prefix */
@@ -357,7 +296,6 @@ div.wiki-message {
   font-family: monospace;
   margin-left: -1.6em;
   color: black;
-  /* for NS4 */
   border: none;
 }
 /* changed words */
@@ -401,7 +339,6 @@ div.wiki-message {
 .diff .added:last-child {
   border-bottom: 2px solid #9f9; /* cfc */
 }
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del { background: #fcc; } /* f99 */
 /* added words */
@@ -424,7 +361,6 @@ div.wiki-message {
 .pagelist thead td u { text-decoration: none; }
 /* Yellow highlight for every td of mouseover'd tr in pagelist tbody
    ie mac ignores all these */
-/*.pagelist tbody tr:hover>td { background: #ffff99; }*/
 .pagelist tbody tr:hover>td {
   border: solid #ffff99 2px;
 }
@@ -581,51 +517,6 @@ ul li.rc-major, ul li.rc-minor {
   text-indent: -3em;
 }
 
-/* IncludePage plugin */
-.transclusion-title {
-  text-align: right;
-  font-style: oblique;
-  font-size:  smaller;
-  text-decoration: underline;
-  margin-bottom: 0.25ex;
-  margin-right:  0.25em;
-} 
-.transclusion, .wiki-edithelp {
-  font-size: smaller;
-}
-.transclusion {
-  border: 1px solid gray;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
-  padding-top:     0px;
-  padding-bottom:  0px;
-  margin-left:   0.25em;
-  margin-right:  0.25em;
-  margin-bottom: 0.1ex;
-}
-.wiki-edithelp {
-  background: white;
-  border: medium solid #fff8dc; /* darker ivory */
-  padding-left:  0.5em;
-  padding-right: 0.5em;
-  padding-top:    0.75ex;
-  padding-bottom: 0.75ex;
-  margin-left:  0;
-  margin-right: 0;
-  margin-top: 1ex;
-  margin-bottom: 1ex;
-}
-.wiki-edithelp .wiki {
-  /* color: #5454ff;*/
-}
-.wiki-edithelp p {
-  font-family: Arial, Helvetica, sans-serif;
-  padding-left:  0.5em;
-  padding-right: 0.5em;
-  padding-top:    0.5ex;
-  padding-bottom: 0.5ex;
-  margin: 0;
-}
 /**
  * PageHistory, Info
  */
@@ -634,7 +525,6 @@ td.pageinfo { font-weight: bold; }
   font-size: smaller;
   font-style: oblique;
 }
-
 
 /**
  * Other
@@ -683,7 +573,6 @@ blockquote.mail-style-quote {
   margin-left: -0.6em;
 }
 
-
 /*
  * wikiblog
  */
@@ -699,11 +588,7 @@ div.wikiblog > div {
   margin: 0 0;
   padding: 0.5ex 0.5em;
 }
-div.wikiblog-header {
-  /* background-color: #ccf; */
-}
 div.wikiblog > div.wikiblog-footer {
-  /* background-color: #eee; */
   padding: 0.2ex 0.5em;
 }
 h3.wikiblog-summary {
@@ -712,17 +597,12 @@ h3.wikiblog-summary {
   margin: 0 0 1ex 0;
 }
 
-div.wikiblog.wikiblog-form {
-  /* background-color: #eee; */
-}
-
 table.wikiblog-form {
   width: auto;
   border-collapse: collapse;
   margin: 0.25em 0;
 }
 .wikiblog-form caption {
-  /* background-color: #ccf; */
   caption-side: top;
   font-weight: bold;
   text-align: left;
@@ -790,8 +670,6 @@ table.interwiki-map {
   margin: 1em 0 0.5em 0;
 }
 
-
-
 /* postnuke css:*/
 .gensmall{font-size:10px}
 .genmed{font-size:11px}
@@ -847,7 +725,6 @@ table.sqlresult td {
  * TeX2png plugin
  */
 img.tex { 
-  border: 0ex;
   vertical-align: middle; 
 }
 
@@ -858,7 +735,6 @@ img.tex {
   font-weight: bold;
   font-size: 11px;
 }
-
 
 .wikiwyg_toolbar {
     background: #D3D3D3;
@@ -915,12 +791,8 @@ span.wikiwyg_control_link a {
 /**
  * Wiki
  */
-/* this completely prevents NS4 from editing pages. */
 textarea.wikiedit, input.wikitext, textarea.summary {
   background: white;
-  /* for older browsers */
-  border: 1px solid black;
-
   border-top:    1px solid #7c7c7c;
   border-left:   1px solid #c3c3c3;
   border-bottom: 1px solid #dddddd;
@@ -930,27 +802,17 @@ textarea.wikiedit, input.wikitext, textarea.summary {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin: 0.5ex 0px;
- /* This breaks Netscape 4: (display does not go full width).
-    width: auto;
- */
- clear: both;
+  clear: both;
 }
 
-
-
-/* This makes spacings in NS4 too big. */
 .toolbar , div.toolbar  {
   margin : 0.5ex 0;
 }
-/* This break NS4, but is necessary for IE4. */
-div.wikitext  {
-  width : auto;
-}
+
 /* Link icons */
 img.linkicon  {
   vertical-align : middle;
 }
-
 
 /**
  * PageTypes
@@ -961,7 +823,6 @@ img.linkicon  {
   padding-left: 1em;
   padding-right: 1em;
 }
-
 
 /**
  * Diff Output
@@ -990,7 +851,6 @@ img.linkicon  {
   top:  0;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted & added words */
 .diff del, .diff ins {
   padding-left: 0.5ex;

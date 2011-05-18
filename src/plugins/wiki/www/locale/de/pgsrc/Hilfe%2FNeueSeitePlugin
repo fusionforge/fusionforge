@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Tue,  4 Jan 2011 11:59:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Hilfe%2FNeueSeitePlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Hilfe%2FNeueSeitePlugin 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FNeueSeitePlugin;
   flags=PAGE_LOCKED;
@@ -23,11 +23,11 @@ gebe den Namen der neuen Seite an und klicke auf den NeueSeite Knopf.
 }}}
 
 === Argumente
-__s__: |
+**s**: |
   Der Name für die neue Seite. Vorgabe: ""
-__initial_content__:  |
+**initial_content**:  |
   Die neue Seite wird mit diesem Inhalt erzeugt. Vorgabe: ""
-__template__:  |
+**template**:  |
   Die neue Seite wird mit dem Inhalt dieser Seite erzeugt. Vorgabe: ""
 
 === Bekannte Probleme

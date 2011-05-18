@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// rcs_id('$Id: loadsave.php 7739 2010-11-10 16:51:32Z vargenau $');
+// $Id: loadsave.php 8071 2011-05-18 14:56:14Z vargenau $
 
 /*
  * Copyright 1999,2000,2001,2002,2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
@@ -18,7 +18,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -28,7 +28,7 @@ require_once("lib/Template.php");
 /**
  * ignore fatal errors during dump
  */
-function _dump_error_handler(&$error) {
+function _dump_error_handler($error) {
     if ($error->isFatal()) {
         $error->errno = E_USER_WARNING;
         return true;
@@ -217,12 +217,12 @@ function FilenameForPage ($pagename, $action = false)
 {
     $enc = rawurlencode($pagename);
     if (!$action) {
-    	global $request;
-	$action = $request->getArg('action');
+        global $request;
+    $action = $request->getArg('action');
     }
     if ($action != 'dumpserial') { // zip, ziphtml, dumphtml
-	// For every %2F we will need to mkdir -p dirname($pagename)
-	$enc = preg_replace('/%2F/', '/', $enc);
+    // For every %2F we will need to mkdir -p dirname($pagename)
+    $enc = preg_replace('/%2F/', '/', $enc);
     }
     $enc = preg_replace('/^\./', '%2E', $enc);
     $enc = preg_replace('/%20/', ' ',   $enc);
@@ -250,7 +250,7 @@ function MakeWikiZip (&$request)
     }
     $include_empty = false;
     if ($request->getArg('include') == 'empty') {
-	$include_empty = true;
+    $include_empty = true;
     }
 
     $zip = new ZipWriter("Created by PhpWiki " . PHPWIKI_VERSION, $zipname);
@@ -276,8 +276,8 @@ function MakeWikiZip (&$request)
     $timeout = (! $request->getArg('start_debug')) ? 30 : 240;
 
     while ($page = $page_iter->next()) {
-	$request->args = $request_args; // some plugins might change them (esp. on POST)
-        longer_timeout($timeout); 	// Reset watchdog
+    $request->args = $request_args; // some plugins might change them (esp. on POST)
+        longer_timeout($timeout);     // Reset watchdog
 
         $current = $page->getCurrentRevision();
         if ($current->getVersion() == 0)
@@ -339,7 +339,7 @@ function DumpToDir (&$request)
     }
     $include_empty = false;
     if ($request->getArg('include') == 'empty') {
-	$include_empty = true;
+    $include_empty = true;
     }
     if ($pages = $request->getArg('pages')) {  // which pagenames
         if ($pages == '[]') // current page
@@ -353,8 +353,8 @@ function DumpToDir (&$request)
     $timeout = (! $request->getArg('start_debug')) ? 30 : 240;
 
     while ($page = $page_iter->next()) {
-	$request->args = $request_args; // some plugins might change them (esp. on POST)
-        longer_timeout($timeout); 	// Reset watchdog
+    $request->args = $request_args; // some plugins might change them (esp. on POST)
+        longer_timeout($timeout);     // Reset watchdog
 
         $pagename = $page->getName();
         if (!isa($request,'MockRequest')) {
@@ -412,16 +412,16 @@ function _copyMsg($page, $smallmsg) {
 function mkdir_p($pathname, $permission = 0777) {
     $arr = explode("/", $pathname);
     if (empty($arr)) {
-	return mkdir($pathname, $permission);
+    return mkdir($pathname, $permission);
     }
     $s = array_shift($arr);
     $ok = TRUE;
     foreach ($arr as $p) {
-	$curr = "$s/$p";
-	if (!is_dir($curr))
-	    $ok = mkdir($curr, $permission);
-	$s = $curr;
-	if (!$ok) return FALSE;
+    $curr = "$s/$p";
+    if (!is_dir($curr))
+        $ok = mkdir($curr, $permission);
+    $s = $curr;
+    if (!$ok) return FALSE;
     }
     return TRUE;
 }
@@ -531,12 +531,12 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
     global $WikiTheme, $request, $ErrorManager;
     $silent = true; $zip = false; $directory = false;
     if ($WikiTheme->DUMP_MODE == 'HTML') {
-	$directory = $target;
-	$silent = false;
+        $directory = $target;
+        $silent = false;
     } elseif ($WikiTheme->DUMP_MODE == 'PDFHTML') {
-	$directory = $target;
+        $directory = $target;
     } elseif (is_object($target)) { // $WikiTheme->DUMP_MODE == 'ZIPHTML'
-	$zip = $target;
+        $zip = $target;
     }
 
     $request->_TemplatesProcessed = array();
@@ -547,176 +547,180 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
     }
     $WikiTheme->VALID_LINKS = array();
     if ($request->getArg('format')) { // pagelist
-	$page_iter_sav = $page_iter;
-	foreach ($page_iter_sav->asArray() as $handle) {
-	    $WikiTheme->VALID_LINKS[] = is_string($handle) ? $handle : $handle->getName();
-	}
-	$page_iter_sav->reset();
+        $page_iter_sav = $page_iter;
+        foreach ($page_iter_sav->asArray() as $handle) {
+            $WikiTheme->VALID_LINKS[] = is_string($handle) ? $handle : $handle->getName();
+        }
+        $page_iter_sav->reset();
     }
 
-    if (defined('HTML_DUMP_SUFFIX'))
+    if (defined('HTML_DUMP_SUFFIX')) {
         $WikiTheme->HTML_DUMP_SUFFIX = HTML_DUMP_SUFFIX;
-    $_bodyAttr = @$WikiTheme->_MoreAttr['body'];
-    unset($WikiTheme->_MoreAttr['body']);
+    }
+    if (isset($WikiTheme->_MoreAttr['body'])) {
+        $_bodyAttr = $WikiTheme->_MoreAttr['body'];
+        unset($WikiTheme->_MoreAttr['body']);
+    }
 
     $ErrorManager->pushErrorHandler(new WikiFunctionCb('_dump_error_handler'));
 
     // check if the dumped file will be accessible from outside
     $doc_root = $request->get("DOCUMENT_ROOT");
     if ($WikiTheme->DUMP_MODE == 'HTML') {
-	$ldir = NormalizeLocalFileName($directory);
-	$wikiroot = NormalizeLocalFileName('');
-	if (string_starts_with($ldir, $doc_root)) {
-	    $link_prefix = substr($directory, strlen($doc_root))."/";
-	} elseif (string_starts_with($ldir, $wikiroot)) {
-	    $link_prefix = NormalizeWebFileName(substr($directory, strlen($wikiroot)))."/";
-	} else {
-	    $prefix = '';
-	    if (isWindows()) {
-		$prefix = '/'; // . substr($doc_root,0,2); // add drive where apache is installed
-	    }
-	    $link_prefix = "file://".$prefix.$directory."/";
-	}
+        $ldir = NormalizeLocalFileName($directory);
+        $wikiroot = NormalizeLocalFileName('');
+        if (string_starts_with($ldir, $doc_root)) {
+            $link_prefix = substr($directory, strlen($doc_root))."/";
+        } elseif (string_starts_with($ldir, $wikiroot)) {
+            $link_prefix = NormalizeWebFileName(substr($directory, strlen($wikiroot)))."/";
+        } else {
+            $prefix = '';
+            if (isWindows()) {
+                $prefix = '/'; // . substr($doc_root,0,2); // add drive where apache is installed
+            }
+            $link_prefix = "file://".$prefix.$directory."/";
+        }
     } else {
-	$link_prefix = "";
+        $link_prefix = "";
     }
 
     $request_args = $request->args;
     $timeout = (! $request->getArg('start_debug')) ? 60 : 240;
     if ($directory) {
-    	if (isWindows())
-    	    $directory = str_replace("\\", "/", $directory); // no Win95 support.
-	@mkdir("$directory/images");
+        if (isWindows())
+            $directory = str_replace("\\", "/", $directory); // no Win95 support.
+        if (!is_dir("$directory/images"))
+            mkdir("$directory/images");
     }
     $already = array();
     $outfiles = array();
     $already_images = array();
 
     while ($page = $page_iter->next()) {
-    	if (is_string($page)) {
+        if (is_string($page)) {
             $pagename = $page;
             $page = $request->_dbi->getPage($pagename);
-    	} else {
+        } else {
             $pagename = $page->getName();
-    	}
-	if (empty($firstpage)) $firstpage = $pagename;
-	if (array_key_exists($pagename, $already))
-	    continue;
-	$already[$pagename] = 1;
+        }
+        if (empty($firstpage)) $firstpage = $pagename;
+        if (array_key_exists($pagename, $already))
+            continue;
+        $already[$pagename] = 1;
         $current = $page->getCurrentRevision();
         //if ($current->getVersion() == 0)
         //    continue;
 
-	$request->args = $request_args; // some plugins might change them (esp. on POST)
-        longer_timeout($timeout); 	// Reset watchdog
+        $request->args = $request_args; // some plugins might change them (esp. on POST)
+        longer_timeout($timeout);     // Reset watchdog
 
-	if ($zip) {
-	    $attrib = array('mtime'    => $current->get('mtime'),
+        if ($zip) {
+            $attrib = array('mtime'    => $current->get('mtime'),
                             'is_ascii' => 1);
-	    if ($page->get('locked'))
-		$attrib['write_protected'] = 1;
-	} elseif (!$silent) {
-	    if (!isa($request,'MockRequest')) {
-		PrintXML(HTML::br(), $pagename, ' ... ');
-		flush();
-	    }
+            if ($page->get('locked'))
+                $attrib['write_protected'] = 1;
+        } elseif (!$silent) {
+            if (!isa($request,'MockRequest')) {
+                PrintXML(HTML::br(), $pagename, ' ... ');
+                flush();
+            }
         }
         if (in_array($pagename, $excludeList)) {
-	    if (!$silent and !isa($request,'MockRequest')) {
-		PrintXML(_("Skipped."));
-		flush();
-	    }
+            if (!$silent and !isa($request,'MockRequest')) {
+                PrintXML(_("Skipped."));
+                flush();
+            }
             continue;
         }
         $relative_base = '';
         if ($WikiTheme->DUMP_MODE == 'PDFHTML')
-	    $request->setArg('action', 'pdf');   // to omit cache headers
+            $request->setArg('action', 'pdf');   // to omit cache headers
         $request->setArg('pagename', $pagename); // Template::_basepage fix
         $filename = FilenameForPage($pagename) . $WikiTheme->HTML_DUMP_SUFFIX;
-	$args = array('revision'      => $current,
-		      'CONTENT'       => $current->getTransformedContent(),
+        $args = array('revision'      => $current,
+                      'CONTENT'       => $current->getTransformedContent(),
                       'relative_base' => $relative_base);
-	// For every %2F will need to mkdir -p dirname($pagename)
-	if (preg_match("/(%2F|\/)/", $filename)) {
-	    // mkdir -p and set relative base for subdir pages
-	    $filename = preg_replace("/%2F/", "/", $filename);
-	    $count = substr_count($filename, "/");
-	    $dirname = dirname($filename);
-	    if ($directory)
-		mkdir_p($directory."/".$dirname);
-	    // Fails with "XX / YY", "XX" is created, "XX / YY" cannot be written
-	    // if (isWindows()) // interesting Windows bug: cannot mkdir "bla "
-	    // Since dumps needs to be copied, we have to disallow this for all platforms.
-	    $filename = preg_replace("/ \//", "/", $filename);
-	    $relative_base = "../";
-	    while ($count > 1) {
-		$relative_base .= "../";
-		$count--;
-	    }
-	    $args['relative_base'] = $relative_base;
-	}
+        // For every %2F will need to mkdir -p dirname($pagename)
+        if (preg_match("/(%2F|\/)/", $filename)) {
+            // mkdir -p and set relative base for subdir pages
+            $filename = preg_replace("/%2F/", "/", $filename);
+            $count = substr_count($filename, "/");
+            $dirname = dirname($filename);
+            if ($directory)
+                mkdir_p($directory."/".$dirname);
+            // Fails with "XX / YY", "XX" is created, "XX / YY" cannot be written
+            // if (isWindows()) // interesting Windows bug: cannot mkdir "bla "
+            // Since dumps needs to be copied, we have to disallow this for all platforms.
+            $filename = preg_replace("/ \//", "/", $filename);
+            $relative_base = "../";
+            while ($count > 1) {
+                $relative_base .= "../";
+                $count--;
+            }
+            $args['relative_base'] = $relative_base;
+        }
         $msg = HTML();
 
         $DUMP_MODE = $WikiTheme->DUMP_MODE;
         $data = GeneratePageasXML(new Template('browse', $request, $args),
-        			 $pagename, $current, $args);
+                     $pagename, $current, $args);
         $WikiTheme->DUMP_MODE = $DUMP_MODE;
 
-	if (preg_match_all("/<img .*?src=\"(\/.+?)\"/", $data, $m)) {
-	    // fix to local relative path for uploaded images, so that pdf will work
-	    foreach ($m[1] as $img_file) {
-	    	$base = basename($img_file);
-	    	$data = str_replace('src="'.$img_file.'"','src="images/'.$base.'"', $data);
-	        if (array_key_exists($img_file, $already_images))
-	            continue;
-	        $already_images[$img_file] = 1;
-		// resolve src from webdata to file
-		$src = $doc_root . $img_file;
-		if (file_exists($src) and $base) {
-		    if ($directory) {
-		        $target = "$directory/images/$base";
-			if (copy($src, $target)) {
-			    if (!$silent)
-				_copyMsg($img_file, fmt("... copied to %s", $target));
-			} else {
-			    if (!$silent)
-				_copyMsg($img_file, fmt("... not copied to %s", $target));
-			}
-		    } else {
-		    	$target = "images/$base";
-			$zip->addSrcFile($target, $src);
-		    }
-		}
-	    }
-	}
+        if (preg_match_all("/<img .*?src=\"(\/.+?)\"/", $data, $m)) {
+            // fix to local relative path for uploaded images, so that pdf will work
+            foreach ($m[1] as $img_file) {
+                $base = basename($img_file);
+                $data = str_replace('src="'.$img_file.'"','src="images/'.$base.'"', $data);
+                if (array_key_exists($img_file, $already_images))
+                    continue;
+                $already_images[$img_file] = 1;
+                // resolve src from webdata to file
+                $src = $doc_root . $img_file;
+                if (file_exists($src) and $base) {
+                    if ($directory) {
+                        $target = "$directory/images/$base";
+                        if (copy($src, $target)) {
+                            if (!$silent)
+                                _copyMsg($img_file, fmt("... copied to %s", $target));
+                        } else {
+                            if (!$silent)
+                                _copyMsg($img_file, fmt("... not copied to %s", $target));
+                        }
+                    } else {
+                        $target = "images/$base";
+                        $zip->addSrcFile($target, $src);
+                    }
+                }
+            }
+        }
 
-	if ($directory) {
-	    $outfile = $directory."/".$filename;
-	    if ( !($fd = fopen($outfile, "wb")) ) {
-		$msg->pushContent(HTML::strong(fmt("couldn't open file '%s' for writing",
-						   $outfile)));
-		$request->finish($msg);
-	    }
-	    $len = strlen($data);
-	    $num = fwrite($fd, $data, $len);
-	    if ($pagename != $filename) {
-		$link = LinkURL($link_prefix.$filename, $filename);
-		$msg->pushContent(HTML::small(_("saved as "), $link, " ... "));
-	    }
-	    $msg->pushContent(HTML::small(fmt("%s bytes written", $num), "\n"));
-	    if (!$silent) {
-		if (!isa($request, 'MockRequest')) {
-		    PrintXML($msg);
-		}
-		flush();
-		$request->chunkOutput();
-	    }
-	    assert($num == $len);
-	    fclose($fd);
-	    $outfiles[] = $outfile;
-	} else {
-	    $zip->addRegularFile($filename, $data, $attrib);
-	}
+    if ($directory) {
+        $outfile = $directory."/".$filename;
+        if ( !($fd = fopen($outfile, "wb")) ) {
+        $msg->pushContent(HTML::strong(fmt("couldn't open file '%s' for writing",
+                           $outfile)));
+        $request->finish($msg);
+        }
+        $len = strlen($data);
+        $num = fwrite($fd, $data, $len);
+        if ($pagename != $filename) {
+        $link = LinkURL($link_prefix.$filename, $filename);
+        $msg->pushContent(HTML::small(_("saved as "), $link, " ... "));
+        }
+        $msg->pushContent(HTML::small(fmt("%s bytes written", $num), "\n"));
+        if (!$silent) {
+        if (!isa($request, 'MockRequest')) {
+            PrintXML($msg);
+        }
+        flush();
+        $request->chunkOutput();
+        }
+        assert($num == $len);
+        fclose($fd);
+        $outfiles[] = $outfile;
+    } else {
+        $zip->addRegularFile($filename, $data, $attrib);
+    }
 
         if (USECACHE) {
             $request->_dbi->_cache->invalidate_cache($pagename);
@@ -729,10 +733,10 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
         unset($msg);
         unset($current->_transformedContent);
         unset($current);
-	if (!empty($template)) {
-	    unset($template->_request);
-	    unset($template);
-	}
+    if (!empty($template)) {
+        unset($template->_request);
+        unset($template);
+    }
         unset($data);
     }
     $page_iter->free();
@@ -741,28 +745,28 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
     if (!empty($WikiTheme->dumped_images) and is_array($WikiTheme->dumped_images)) {
         // @mkdir("$directory/images");
         foreach ($WikiTheme->dumped_images as $img_file) {
-	    if (array_key_exists($img_file, $already_images))
-	        continue;
-	    $already_images[$img_file] = 1;
+        if (array_key_exists($img_file, $already_images))
+            continue;
+        $already_images[$img_file] = 1;
             if ($img_file
                 and ($from = $WikiTheme->_findFile($img_file, true))
                 and basename($from))
             {
-		if ($directory) {
-		    $target = "$directory/images/".basename($from);
-		    if ($silent)
-			copy($WikiTheme->_path . $from, $target);
-		    else {
-			if (copy($WikiTheme->_path . $from, $target)) {
-			    _copyMsg($from, fmt("... copied to %s", $target));
-			} else {
-			    _copyMsg($from, fmt("... not copied to %s", $target));
-			}
-		    }
-		} else {
-		    $target = "images/".basename($from);
-		    $zip->addSrcFile($target, $WikiTheme->_path . $from);
-		}
+        if ($directory) {
+            $target = "$directory/images/".basename($from);
+            if ($silent)
+            copy($WikiTheme->_path . $from, $target);
+            else {
+            if (copy($WikiTheme->_path . $from, $target)) {
+                _copyMsg($from, fmt("... copied to %s", $target));
+            } else {
+                _copyMsg($from, fmt("... not copied to %s", $target));
+            }
+            }
+        } else {
+            $target = "images/".basename($from);
+            $zip->addSrcFile($target, $WikiTheme->_path . $from);
+        }
             } elseif (!$silent) {
                 _copyMsg($from, _("... not found"));
             }
@@ -772,32 +776,32 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
     if (!empty($WikiTheme->dumped_buttons)
          and is_array($WikiTheme->dumped_buttons))
     {
-    	// Buttons also
-	if ($directory)
-	    @mkdir("$directory/images/buttons");
+        // Buttons also
+        if ($directory && !is_dir("$directory/images/buttons"))
+            mkdir("$directory/images/buttons");
         foreach ($WikiTheme->dumped_buttons as $text => $img_file) {
             if (array_key_exists($img_file, $already_images))
-	        continue;
-	    $already_images[$img_file] = 1;
+                continue;
+        $already_images[$img_file] = 1;
             if ($img_file
                 and ($from = $WikiTheme->_findFile($img_file, true))
                 and basename($from))
             {
-		if ($directory) {
-		    $target = "$directory/images/buttons/".basename($from);
-		    if ($silent)
-			copy($WikiTheme->_path . $from, $target);
-		    else {
-			if (copy($WikiTheme->_path . $from, $target)) {
-			    _copyMsg($from, fmt("... copied to %s", $target));
-			} else {
-			    _copyMsg($from, fmt("... not copied to %s", $target));
-			}
-		    }
-		} else {
-		    $target = "images/buttons/".basename($from);
-		    $zip->addSrcFile($target, $WikiTheme->_path . $from);
-		}
+        if ($directory) {
+            $target = "$directory/images/buttons/".basename($from);
+            if ($silent)
+            copy($WikiTheme->_path . $from, $target);
+            else {
+                if (copy($WikiTheme->_path . $from, $target)) {
+                    _copyMsg($from, fmt("... copied to %s", $target));
+                } else {
+                    _copyMsg($from, fmt("... not copied to %s", $target));
+                }
+            }
+        } else {
+            $target = "images/buttons/".basename($from);
+            $zip->addSrcFile($target, $WikiTheme->_path . $from);
+        }
             } elseif (!$silent) {
                 _copyMsg($from, _("... not found"));
             }
@@ -806,29 +810,29 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
     if (!empty($WikiTheme->dumped_css) and is_array($WikiTheme->dumped_css)) {
         foreach ($WikiTheme->dumped_css as $css_file) {
             if (array_key_exists($css_file, $already_images))
-	        continue;
-	    $already_images[$css_file] = 1;
+                continue;
+        $already_images[$css_file] = 1;
             if ($css_file
                 and ($from = $WikiTheme->_findFile(basename($css_file), true))
                 and basename($from))
             {
-		// TODO: fix @import url(main.css);
-		if ($directory) {
-		    $target = "$directory/" . basename($css_file);
-		    if ($silent)
-			copy($WikiTheme->_path . $from, $target);
-		    else {
-			if (copy($WikiTheme->_path . $from, $target)) {
-			    _copyMsg($from, fmt("... copied to %s", $target));
-			} else {
-			    _copyMsg($from, fmt("... not copied to %s", $target));
-			}
-		    }
-		} else {
-		    //$attrib = array('is_ascii' => 0);
-		    $target = basename($css_file);
-		    $zip->addSrcFile($target, $WikiTheme->_path . $from);
-		}
+        // TODO: fix @import url(main.css);
+        if ($directory) {
+            $target = "$directory/" . basename($css_file);
+            if ($silent)
+            copy($WikiTheme->_path . $from, $target);
+            else {
+            if (copy($WikiTheme->_path . $from, $target)) {
+                _copyMsg($from, fmt("... copied to %s", $target));
+            } else {
+                _copyMsg($from, fmt("... not copied to %s", $target));
+            }
+            }
+        } else {
+            //$attrib = array('is_ascii' => 0);
+            $target = basename($css_file);
+            $zip->addSrcFile($target, $WikiTheme->_path . $from);
+        }
             } elseif (!$silent) {
                 _copyMsg($from, _("... not found"));
             }
@@ -836,44 +840,44 @@ function _DumpHtmlToDir ($target, $page_iter, $exclude = false)
     }
 
     if ($zip)
-	$zip->finish();
+    $zip->finish();
 
     if ($WikiTheme->DUMP_MODE == 'PDFHTML') {
-	if (USE_EXTERNAL_HTML2PDF and $outfiles) {
-	    $cmd = EXTERNAL_HTML2PDF_PAGELIST.' "'.join('" "', $outfiles).'"';
-	    $filename = FilenameForPage($firstpage);
-	    if (DEBUG) {
-		$tmpfile = $directory . "/createpdf.bat";
-		$fp = fopen($tmpfile, "wb");
-		fwrite($fp, $cmd . " > $filename.pdf");
-		fclose($fp);
-	    }
-	    if (!headers_sent()) {
-		Header('Content-Type: application/pdf');
-		passthru($cmd);
-	    }
-	    else {
-		$tmpdir = getUploadFilePath();
-		$s = passthru($cmd . " > $tmpdir/$filename.pdf");
-		$errormsg = "<br />\nGenerated <a href=\"".getUploadDataPath()."$filename.pdf\">Upload:$filename.pdf</a>\n";
-		$errormsg .= $s;
-		echo $errormsg;
-	    }
-	    if (!DEBUG) {
-		foreach($outfiles as $f) unlink($f);
-	    }
-	}
-	if (!empty($errormsg)) {
-	    $request->discardOutput();
-	    $GLOBALS['ErrorManager']->_postponed_errors = array();
-	}
+    if (USE_EXTERNAL_HTML2PDF and $outfiles) {
+        $cmd = EXTERNAL_HTML2PDF_PAGELIST.' "'.join('" "', $outfiles).'"';
+        $filename = FilenameForPage($firstpage);
+        if (DEBUG) {
+        $tmpfile = $directory . "/createpdf.bat";
+        $fp = fopen($tmpfile, "wb");
+        fwrite($fp, $cmd . " > $filename.pdf");
+        fclose($fp);
+        }
+        if (!headers_sent()) {
+        Header('Content-Type: application/pdf');
+        passthru($cmd);
+        }
+        else {
+        $tmpdir = getUploadFilePath();
+        $s = passthru($cmd . " > $tmpdir/$filename.pdf");
+        $errormsg = "<br />\nGenerated <a href=\"".getUploadDataPath()."$filename.pdf\">Upload:$filename.pdf</a>\n";
+        $errormsg .= $s;
+        echo $errormsg;
+        }
+        if (!DEBUG) {
+        foreach($outfiles as $f) unlink($f);
+        }
+    }
+    if (!empty($errormsg)) {
+        $request->discardOutput();
+        $GLOBALS['ErrorManager']->_postponed_errors = array();
+    }
     }
 
     $ErrorManager->popErrorHandler();
 
     $WikiTheme->HTML_DUMP_SUFFIX = '';
     $WikiTheme->DUMP_MODE = false;
-    $WikiTheme->_MoreAttr['body'] = $_bodyAttr;
+    $WikiTheme->_MoreAttr['body'] = isset($_bodyAttr) ? $_bodyAttr : '';
 }
 
 
@@ -933,14 +937,14 @@ function SavePage (&$request, &$pageinfo, $source, $filename)
     $skip = false;
     $edit = $request->getArg('edit');
     if ($merging) {
-    	if (isset($edit['keep_old'])) {
+        if (isset($edit['keep_old'])) {
             $merging = false;
             $skip = true;
-    	}
-    	elseif (isset($edit['overwrite'])) {
+        }
+        elseif (isset($edit['overwrite'])) {
             $merging = false;
             $overwrite = true;
-    	}
+        }
         elseif ( $current and (! $current->hasDefaultContents())
          && ($current->getPackedContent() != $content) )
         {
@@ -966,8 +970,8 @@ function SavePage (&$request, &$pageinfo, $source, $filename)
         $mesg->pushContent(' ', fmt("from %s", $source));
 
     if (!$current) {
-    	//FIXME: This should not happen! (empty vdata, corrupt cache or db)
-    	$current = $page->getCurrentRevision();
+        //FIXME: This should not happen! (empty vdata, corrupt cache or db)
+        $current = $page->getCurrentRevision();
     }
     if ($current->getVersion() == 0) {
         $versiondata['author'] = ADMIN_USER;
@@ -988,12 +992,12 @@ function SavePage (&$request, &$pageinfo, $source, $filename)
                 }
             }
             else {
-		if (isset($edit['keep_old'])) {
-		    $mesg->pushContent(' ', fmt("keep old"));
-		} else {
-		    $mesg->pushContent(' ', fmt("has edit conflicts - skipped"));
-		    $needs_merge = true; // hackish, to display the buttons
-		}
+        if (isset($edit['keep_old'])) {
+            $mesg->pushContent(' ', fmt("keep old"));
+        } else {
+            $mesg->pushContent(' ', fmt("has edit conflicts - skipped"));
+            $needs_merge = true; // hackish, to display the buttons
+        }
                 $skip = true;
             }
         }
@@ -1008,9 +1012,9 @@ function SavePage (&$request, &$pageinfo, $source, $filename)
     }
 
     if (! $skip ) {
-    	// in case of failures print the culprit:
+        // in case of failures print the culprit:
         if (!isa($request,'MockRequest')) {
-    	    PrintXML(HTML::p(WikiLink($pagename))); flush();
+            PrintXML(HTML::p(WikiLink($pagename))); flush();
         }
         $new = $page->save($content, WIKIDB_FORCE_CREATE, $versiondata);
         $dbi->touch();
@@ -1284,8 +1288,8 @@ function LoadFile (&$request, $filename, $text = false, $mtime = false)
 
     $default_pagename = rawurldecode($basename);
     if ( ($parts = ParseMimeifiedPages($text)) ) {
-    	if (count($parts) > 1)
-    	    $overwrite = $request->getArg('overwrite');
+        if (count($parts) > 1)
+            $overwrite = $request->getArg('overwrite');
         usort($parts, 'SortByPageVersion');
         foreach ($parts as $pageinfo) {
             // force overwrite
@@ -1298,7 +1302,7 @@ function LoadFile (&$request, $filename, $text = false, $mtime = false)
             if ($overwrite)
                 $request->setArg('overwrite', $overwrite);
             else
-	        unset($request->_args['overwrite']);
+            unset($request->_args['overwrite']);
     }
     else if ( ($pageinfo = ParseSerializedPage($text, $default_pagename,
                                                $request->getUser())) ) {
@@ -1343,7 +1347,7 @@ function LoadZip (&$request, $zipfile, $files = false, $exclude = false) {
             flush();
             continue;
         }
-        longer_timeout($timeout); 	// longer timeout per page
+        longer_timeout($timeout);     // longer timeout per page
         LoadFile($request, $fn, $data, $attrib['mtime']);
     }
 }
@@ -1368,7 +1372,7 @@ function LoadDir (&$request, $dirname, $files = false, $exclude = false) {
     }
     $timeout = (! $request->getArg('start_debug')) ? 20 : 120;
     foreach ($files as $file) {
-        longer_timeout($timeout); 	// longer timeout per page
+        longer_timeout($timeout);     // longer timeout per page
         if (substr($file,-1,1) != '~')  // refuse to load backup files
             LoadFile($request, "$dirname/$file");
     }
@@ -1476,8 +1480,8 @@ function LoadFileOrDir (&$request)
     $source = $request->getArg('source');
     $finder = new FileFinder;
     $source = $finder->slashifyPath($source);
-    StartLoadDump($request, 
-    	sprintf(_("Loading '%s'"), $source));
+    StartLoadDump($request,
+        sprintf(_("Loading '%s'"), $source));
     LoadAny($request, $source);
     EndLoadDump($request);
 }

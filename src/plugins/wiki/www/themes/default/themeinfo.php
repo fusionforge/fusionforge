@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// rcs_id('$Id: themeinfo.php 7638 2010-08-11 11:58:40Z vargenau $');
+// $Id: themeinfo.php 7968 2011-03-07 13:39:47Z vargenau $
 
 /*
  * This file defines the default appearance ("theme") of PhpWiki.
@@ -22,5 +22,5 @@ $WikiTheme = new WikiTheme('default');
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

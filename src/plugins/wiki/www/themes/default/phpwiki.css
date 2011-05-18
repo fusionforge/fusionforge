@@ -1,5 +1,5 @@
 /**
- * $Id: phpwiki.css 7331 2010-04-15 09:04:51Z vargenau $
+ * $Id: phpwiki.css 7965 2011-03-07 09:47:31Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
  * ground up.
@@ -11,8 +11,8 @@
 
 /**
  * General
- */ 
-img { border: 0ex; }
+ */
+img { border: 0; }
 
 form { margin: 0ex; }
 
@@ -56,22 +56,14 @@ div.wikitext {
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background-color: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px black solid;
-  /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0.8em; 
+  padding-left:  0.8em;
   padding-right: 0.8em;
   padding-top:    0.5ex;
   padding-bottom: 0.5ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
 }
 /* for the login template */
@@ -86,17 +78,15 @@ input#inp-openid {
   padding-left: 18px !important;
 }
 
-/* .interwiki-map thead td { text-decoration: underline; } */
-
 /*
 ** RecentChanges
 */
-.pageinfo-majoredit { 
-	font-weight: bold;
+.pageinfo-majoredit {
+    font-weight: bold;
 }
 .wiki-summary {
-  	font-size: 94%;
-  	font-style: italic;
+      font-size: 94%;
+      font-style: italic;
 }
 
 /* Mozilla RecentChanges Sidebar */
@@ -113,7 +103,7 @@ body.sidebar h2 { margin-top: 0; }
 
 /**
  * Wiki Forms
- * 
+ *
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
@@ -152,14 +142,14 @@ input.wikiaction, input.button, input.wikiadmin {
     /* font-size: inherit; */
 }
 
-a.wikiaction, a.wikiaction:visited, input.wikiaction, input.button { 
-    background-color: #ddd; 
+a.wikiaction, a.wikiaction:visited, input.wikiaction, input.button {
+    background-color: #ddd;
 }
 
 .wikiunsafe { background-color: #fcc; }
 
-a.wikiadmin, a.wikiadmin:visited, input.wikiadmin  { 
-    background-color: #fdd; 
+a.wikiadmin, a.wikiadmin:visited, input.wikiadmin  {
+    background-color: #fdd;
 }
 
 /* Unknown links */
@@ -192,8 +182,8 @@ h1 .backlinks { text-decoration: underline; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
 
 /* image buttons */
-a.wikibutton, a.wikibutton:visited, input.wikibutton  { 
-    background-color: white; 
+a.wikibutton, a.wikibutton:visited, input.wikibutton  {
+    background-color: white;
 }
 
 /**
@@ -209,7 +199,7 @@ h1 { margin: 0; font-size: 140% }
  */
 table, td { font-family: Arial, Helvetica, sans-serif; }
 caption { font-family: Arial, Helvetica, sans-serif; }
-.pagelist { 
+.pagelist {
   font-size: smaller;
 }
 .pagelist thead td {
@@ -243,7 +233,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   color: black;
 }
 
-
 /**
  * Toolbar
  */
@@ -272,17 +261,9 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
   padding: 0;
   padding-top: 0.25ex;
 }
-/*
-div#logo {
-  float: right;
-}
-*/
+
 #logo img {
   float: right;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
@@ -333,7 +314,7 @@ textarea.wikiedit {
   display: none;
   z-index: 100;
   background-color: white;
-  border: 1px solid #d0d0d0; 
+  border: 1px solid #d0d0d0;
   font-size: 9px;
   overflow: hidden;
 }
@@ -342,9 +323,9 @@ textarea.wikiedit {
 }
 #LSResult .evenrow {
   background-color: #f0f0f0;
-} 
+}
 #LSREsult .oddrow {
-} 
+}
 .LSEnd {
   text-align: right;
 }
@@ -353,7 +334,7 @@ textarea.wikiedit {
 }
 .LSRow {
   padding: 1px;
-} 
+}
 ul.LSRes {
   margin: 0px;
   padding: 0px;
@@ -363,7 +344,8 @@ li.LSRow {
   list-style-image: none;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;
@@ -371,14 +353,14 @@ li.LSRow {
   text-decoration: underline;
   margin-bottom: 0.25ex;
   margin-right:  0.25em;
-} 
+}
 .transclusion, .wiki-edithelp {
   font-size: smaller;
 }
 .transclusion {
   border: 1px solid gray;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:     0px;
   padding-bottom:  0px;
   margin-left:   0.25em;
@@ -420,13 +402,13 @@ table.cal {
   padding: 1px;
   /* For Mozilla */
   empty-cells: hide;
-} 
+}
 
 /* cells */
 table.cal td {
   background: white;
   text-align: right;
-} 
+}
 
 /* Month-name header */
 table.cal-header { font-size: larger; }
@@ -464,10 +446,6 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    1ex;
   margin-bottom: 0.5ex;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px #ccc solid;
   color: black;
   border-top: 1px solid #494f5d;
   border-left:  1px solid #494f5d;
@@ -478,33 +456,16 @@ table.cal td.cal-today a.cal-hide {  }
   padding-left:  .125em;
   padding-right: .125em;
   padding: 0;
-  /* "paper" borders */
-  /*border-top: 2px #d2d2d2 solid;
-  border-left:  2px #b2b2b2 solid;
-  border-bottom:  2px #e8e6df solid;
-  border-right: 2px #e8e6df solid;*/
-/*  padding-left:  0em; 
-  padding-bottom: 0ex;*/
-/*  border-style: inset;*/
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
-  /* I'm not sure what the intent of this was, but it's
-   *  not valid CSS: */
-  /* display: editarea; */
   clear: both;
 }
 .diff .block {
   background: #ddd;
   padding-left: 1em;
-  /* for NS4 */
-  /*border: none;*/
 }
 
 /* individual blocks */
 .diff .context {
   background: white;
-  /* for NS4 */
   border: none;
 }
 /* entire difftextblock */
@@ -512,22 +473,15 @@ table.cal td.cal-today a.cal-hide {  }
   margin-top:    0;
   margin-bottom: 0;
   background: white;
-  /* Netscape 4 requires this 1px border.
-     Without it, the paper borders below cause
-     the white background to disappear. */
-  border: 1px black solid;
   /* "paper" borders */
   border-top:  1px #e8e6df solid;
   border-left: 1px #e8e6df solid;
   border-bottom: 1px #d2d2d2 solid;
   border-right:  1px #b2b2b2 solid;
-  padding-left:  0em; 
+  padding-left:  0em;
   padding-right: 0em;
   padding-top:    0ex;
   padding-bottom: 0ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
 }
 /* + - line prefix */
@@ -535,7 +489,6 @@ table.cal td.cal-today a.cal-hide {  }
   font-weight: normal;
   font-family: monospace;
   color: black;
-  /* for NS4 */
   margin-left: 0;
   border: none;
 }
@@ -553,17 +506,14 @@ table.cal td.cal-today a.cal-hide {  }
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
   background: #fcc;
-  /* for NS4 */
   border: none;
 }
 /* blocks containing added words */
 .diff .final, .diff .added {
   background: #cfc;
-  /* for NS4 */
   border: none;
 }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
 /* deleted words */
 .diff del { background: #f99; }
 /* added words */
@@ -585,39 +535,30 @@ td.pageinfo { font-weight: bold; }
  */
 .printer, .no-css { display: none; }
 
-/* PHP Warnings */
-div.errors {
+.error {
   color: black;
   background: #eee;
   margin-top:    1em;
   margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:    0.8ex;
   padding-bottom: 0;
   border: medium solid red;
   clear: both;
 }
-h4.errors {
-  color: red;
-  margin:  0;
-  padding: 0;
-  text-decoration: underline;
-}
-div.warning {
+.warning {
   color: black;
   background: #eee;
   margin-top:    1em;
   margin-bottom: 1em;
-  padding-left:  0.8em; 
-  padding-right: 0.8em; 
+  padding-left:  0.8em;
+  padding-right: 0.8em;
   padding-top:    0.8ex;
   padding-bottom: 0;
   border: thin solid blue;
   clear: both;
 }
-.error { font-family: monospace; font-size: 120%; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -634,7 +575,6 @@ div.warning {
 .hint {
   color: black;
   background: #eeeeee;
-   /* font-size: smaller; */
   font-style: italic;
   margin-left: 3em;
   padding: 0.5ex 0.5em;
@@ -683,8 +623,8 @@ span.redirectfrom {
 .wiki-dl-table tr {
   border-top: 2px #444 solid;
   border-bottom: 2px #444 solid;
-  border-left: none; 
-  border-right: none; 
+  border-left: none;
+  border-right: none;
 }
 .wiki-dl-table th,
 .wiki-dl-table td {
@@ -851,11 +791,11 @@ td.sidebar { border-spacing: 0px; margin: 0ex;}
 /* plugin BoxRight */
 div.boxright {
   background-color: #e9fbff;
-  width: 200px; 
+  width: 200px;
   right: 10px;
-  padding: 0.5em; 
-  float: right; 
-  border: thin solid #888888; 
+  padding: 0.5em;
+  float: right;
+  border: thin solid #888888;
   padding: 0.5em;
 }
 
@@ -867,7 +807,7 @@ div.rssitem { border-top: thin dashed #aaa; }
 a.rssicon { font-weight:normal; font-size:small; vertical-align:middle; }
 
 /* SqlResult */
-table.sqlresult { 
+table.sqlresult {
   border: 1px outset gray;
   background: white;
   margin: 0.5ex 0.5em;
@@ -883,9 +823,8 @@ table.sqlresult td {
 /**
  * TeX2png plugin
  */
-img.tex { 
-  border: 0ex;
-  vertical-align: middle; 
+img.tex {
+  vertical-align: middle;
 }
 
 /**
@@ -949,26 +888,18 @@ span.wikiwyg_control_link a {
     vertical-align: top;
 }
 
-/* Hide the elements we put in just to get around NS4 bugs. */
-div.br { display: none; }
-
-/* This makes spacings in NS4 too big. */
 .toolbar, div.toolbar { margin: 0.5ex 0ex; }
-
-/* This breaks NS4, but is necessary for IE4. */
-div.wikitext { width: auto; }
 
 /**
  * General
  */
-/* for NS4 */
 img { vertical-align: baseline; }
 input { margin: 0.1em; }
 input.numeric { text-align: right; }
 
 /**
  * Wiki Forms
- * 
+ *
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
@@ -993,34 +924,18 @@ div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin 
 
 /**
  * Links
-  border-top:  1px solid #b2b2d1;
-  border-left: 1px solid #d2d2f1;
-  border-bottom: 1px solid #86929e;
-  border-right:  1px solid #86929e;
  */
 
-/* Make wikiaction links look like buttons */ 
+/* Make wikiaction links look like buttons */
 a.wikiaction, a.wikiadmin, a.wikiunsafe,
 input.wikiaction, input.wikiadmin, input.wikiunsafe, input.button {
   color: black;
-/*
-  border-top:  1px solid #c6d2de;
-  border-left: 1px solid #c6d2de;
-  border-bottom: 1px solid #494f5d;
-  border-right:  1px solid #494f5d;
-
-  padding-top:    0.15ex;
-  padding-bottom: 0.25ex;
-  padding-left:  .5em;
-  padding-right: .5em;
-*/
   border: 1px outset;
   padding: 0.05ex 0.25em 0.1ex 0.25em;
   height: auto;
   width: auto;
   /* Prevent buttons from overlapping when the toolbar is wrapped. */
   line-height: 2.6ex;
-  /*margin: 2ex 0.2em;*/
 }
 
 div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
@@ -1040,11 +955,9 @@ div#navbuttons, div#signin, div#actionbuttons { line-height: 3.0ex; }
 /* Link icons */
 img.linkicon { vertical-align: middle; }
 
-
 /**
  * Edit Page & View Source
  */
-/* color: inherit; and background: inherit; display as lime in NS4 */
 
 /* http://universaleditbutton.org */
 div#actionbuttons a#btn-edit {
@@ -1054,7 +967,7 @@ div#actionbuttons a#btn-edit {
   padding-right: 0.5em !important;
 }
 /* image buttons */
-a.wikibutton, a.wikibutton:visited, input.wikibutton  { 
+a.wikibutton, a.wikibutton:visited, input.wikibutton  {
   background-color: white;
   border: 0;
 }
@@ -1071,12 +984,6 @@ a.wikibutton, a.wikibutton:visited, input.wikibutton  {
   padding-left: 1px;
   padding-right: 1px;
 }
-
-/**
- * Other
- */
-/* PHP Warnings */
-div.errors { font-size: smaller }
 
 /*
  * table class="boxed"
@@ -1118,8 +1025,8 @@ table.boxed th, table.bordered th {
 }
 
 #edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {
-	background-color: #ffce7b;
-	border: 1px solid #ffa500;
+    background-color: #ffce7b;
+    border: 1px solid #ffa500;
 }
 
 /* For emacs users

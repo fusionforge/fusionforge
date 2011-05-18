@@ -1,8 +1,8 @@
 /**
- * $Id: Hawaiian.css 7331 2010-04-15 09:04:51Z vargenau $
+ * $Id: Hawaiian.css 7983 2011-03-10 11:03:10Z vargenau $
  *
  * This incarnation of this stylesheet is a complete rewrite from the
- * ground up. It has not yet been tested against NS4.
+ * ground up.
  *
  * Mozilla's "DOM Inspector" Sidebar was an invaluable troubleshooting
  * tool for mapping the more complex CSS node selectors, such as those
@@ -29,8 +29,7 @@ caption {
   caption-side: top;
   text-align: left;
   margin-bottom: .5ex;
-  /* Allow the caption to extend to the full page width
-     Mac ie5.1 ignores this*/
+  /* Allow the caption to extend to the full page width */
   width: 100%;
 }
 
@@ -42,7 +41,9 @@ caption {
 /* Main wiki text box */
 body {
   color: black;
-  background: white url("images/uhhbackground.jpg") repeat;
+  background-color: white;
+  background-image: url("images/uhhbackground.jpg");
+  background-repeat: repeat;
   font-family: Arial, Helvetica, sans-serif;
   margin: 1ex 0.5em;
 }
@@ -56,7 +57,7 @@ body p {
   margin-bottom: 1ex;
 }
 img#signature {
-  background: white;
+  background-color: white;
   border: 1px outset gray;
   padding-left:  8px; 
   padding-right: 8px;
@@ -70,12 +71,7 @@ div.wikitext {
   padding-right: 0.8em;
   padding-top:    0.5ex;
   padding-bottom: 0.5ex;
-  /*This breaks Netscape 4: (display does not go full width).
-   * width: auto;
-   */
   clear: both;
-  /* user's browser settings *
-  font-family: none; */
 }
 div.wikitext hr { height: 1px; }
 
@@ -147,8 +143,8 @@ caption { font-family: Arial, Helvetica, sans-serif; }
 }
 .pagelist thead, .pagelist thead u {
 }
-.pagelist tr.evenrow { background: #eee; }
-.pagelist tr.oddrow  { background: white; }
+.pagelist tr.evenrow { background-color: #eee; }
+.pagelist tr.oddrow  { background-color: white; }
 th.gridbutton {
   background-color: ThreeDLightShadow;
   color: black;
@@ -211,7 +207,8 @@ input.button { font-family: Arial, Helvetica, sans-serif; }
   font-size: smaller;
 }
 
-/* IncludePage plugin */
+/* IncludePage plugin ================================================= */
+
 .transclusion-title {
   text-align: right;
   font-style: oblique;
@@ -275,7 +272,8 @@ table.cal table.cal-header td {
   padding-top: 110px;
 }
 table.cal thead tr:first-child {
-  background: url("images/pictures/SteamVolcanoDusk.jpg") no-repeat;
+  background-image: url("images/pictures/SteamVolcanoDusk.jpg");
+  background-repeat: no-repeat;
   background-position: center;
   font-size: larger;
 }
@@ -283,7 +281,7 @@ table.cal thead tr:first-child {
 table.cal table.cal-header td {
   text-align: center;
   color: white;
-  background: transparent;
+  background-color: transparent;
   border: 0;
 }
  /* arrow text */
@@ -309,7 +307,7 @@ table.cal tr .cal-dayname {
  /* cells */
 table.cal tbody td {
   border: 0.5pt solid #ddd;
-  background: white;
+  background-color: white;
   text-align: right;
 } 
  /* text */
@@ -322,7 +320,7 @@ a.cal-hide {
   /* cell */
 table.cal td.cal-today {
   margin: 1px;
-  background: white;
+  background-color: white;
   border: 0.5pt solid black;
 }
   /* text */
@@ -333,7 +331,7 @@ table.cal td.cal-today a {
   /* cell */
 table.cal td.cal-day {
   margin: 1px;
-  background: white;
+  background-color: white;
   border: 0.5pt solid black;
 }
   /* text */
@@ -349,14 +347,13 @@ table.cal td.cal-day a {
 
 /* main box */
 .diff .block {
-  background: #ccc;
-  /*border: 1px solid black;*/
+  background-color: #ccc;
   padding: 0.5ex 0.5em;
   margin:  0.5ex 0;
 }
 
 /* individual lines */
-.diff .context { background: white; }
+.diff .context { background-color: white; }
 
 /* + - line prefix */
 .diff .block tt{
@@ -370,21 +367,18 @@ table.cal td.cal-day a {
   font-weight: bold;
   text-decoration: none;
 }
-.diff .original, .diff .deleted { background: #fcc; }
-.diff .final, .diff .added { background: #cfc; }
+.diff .original, .diff .deleted { background-color: #fcc; }
+.diff .final, .diff .added { background-color: #cfc; }
 
-/* These don't work in NS4 -- it completely ignores <del> and <ins>. */
-.diff del { background: #f99; }
-.diff ins { background: #9f9; }
-
+.diff del { background-color: #f99; }
+.diff ins { background-color: #9f9; }
 
 /**
  * Other
  */
 .printer { display: none; }
 
-/* PHP Warnings */
-div.errors {
+div.error {
   color: black;
   border: medium solid #d8caae;
   margin-top:    1em;
@@ -396,15 +390,6 @@ div.errors {
   font-size: smaller;
   clear: both;
 }
-.errors h4 {
-  color: #87785c;
-  margin:  0;
-  padding: 0;
-  text-decoration: none;
-  font-weight: bold;
-}
-.error { font-family: monospace; }
-.error ul { font-family: monospace; }
 
 /* Debug */
 .debug {
@@ -422,9 +407,9 @@ div.errors {
 /**
  * Search Results
  */
-.search-context { background: white; font-style: oblique; }
+.search-context { background-color: white; font-style: oblique; }
 .search-term {
-  background: yellow;
+  background-color: yellow;
   font-weight: normal;
 }
 #LSResult {
@@ -463,28 +448,24 @@ li.LSRow {
   list-style-image: none;
 }
 
-/* This makes spacings in NS4 too big. */
 .toolbar, div.toolbar { margin: 0.5ex 0ex; }
 
 /* Link icons */
 img.linkicon { vertical-align: middle; }
 
-
-/* This break NS4 (display does not go full width), but is necessary for IE4. */
 div.wikitext {
   width: auto;
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
-  background: url("images/tchecker-white.png") repeat;
+  background-image: url("images/tchecker-white.png");
+  background-repeat: repeat;
 }
 .wiki-edithelp {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
-  background: url("images/tchecker-sand.png") repeat;
+  background-image: url("images/tchecker-sand.png");
+  background-repeat: repeat;
 }
 .wiki-edithelp p {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
-  background: url("images/tchecker-white.png") repeat;
+  background-image: url("images/tchecker-white.png");
+  background-repeat: repeat;
 }
-
 
 /**
  * Diff Output
@@ -492,17 +473,12 @@ div.wikitext {
 .diff .block div { position: relative; padding-left: 1.5em; } 
 .diff .prefix    { position: absolute; left: 0.5em; top: 0; }
 
-
 /**
  * Other
  */
-div.errors {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
-  background: url("images/tchecker-sand.png") repeat;
-}
 .debug {
-  /* NS4 doesn't know about png with transparency so it renders the whole image solid black */
-  background: url("images/tchecker-sand.png") repeat;
+  background-image: url("images/tchecker-sand.png");
+  background-repeat: repeat;
 }
 
 /*

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: RssParser.php 7641 2010-08-11 13:00:46Z vargenau $');
+// $Id: RssParser.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Simple RSSParser Class
  * Based on Duncan Gough RSSParser class
@@ -25,7 +25,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -78,7 +78,7 @@ extends XmlParser {
                 $this->items = array();
                 $GLOBALS['rss_parser_items'] =& $this->items;
             } elseif (!empty($this->items[0]['link']) and $this->items[0]['title'] == '') {
-            	// override the initial <items> list with detailed <item>'s
+                // override the initial <items> list with detailed <item>'s
                 $this->items = array();
                 $GLOBALS['rss_parser_items'] =& $this->items;
             }
@@ -124,15 +124,15 @@ extends XmlParser {
             if (empty($this->item[$current_tag]))
                 $this->item[$current_tag] = '';
             if ($current_tag == 'LINK') {
-            	if (trim($data))
-            	    $this->item[$current_tag] = trim($data);
+                if (trim($data))
+                    $this->item[$current_tag] = trim($data);
             } else {
                 $this->item[$current_tag] .= trim($data);
             }
         } elseif ($this->list_items) {
             if ($current_tag == 'RDF:LI') {
-            	// FIXME: avoid duplicates. cdata called back 4x per RDF:LI
-            	if ($this->items[count($this->items)-1]['link'] != @$current_attrs['RDF:RESOURCE'])
+                // FIXME: avoid duplicates. cdata called back 4x per RDF:LI
+                if ($this->items[count($this->items)-1]['link'] != @$current_attrs['RDF:RESOURCE'])
                     $this->items[] = array('link' => @$current_attrs['RDF:RESOURCE'],
                                            'title' => '');
             }
@@ -169,12 +169,12 @@ extends XmlParser {
                           E_USER_WARNING);
         //OO workaround: parser object looses its params. we have to store them in globals
         if ($is_final) {
-    	    if (empty($this->items)) {
+            if (empty($this->items)) {
                 $this->items   = @$GLOBALS['rss_parser_items'];
                 $this->channel = @$GLOBALS['rss_parser_channel'];
-    	    }
-    	    unset($GLOBALS['rss_parser_items']);
-    	    unset($GLOBALS['rss_parser_channel']);
+            }
+            unset($GLOBALS['rss_parser_items']);
+            unset($GLOBALS['rss_parser_channel']);
         }
     }
 }

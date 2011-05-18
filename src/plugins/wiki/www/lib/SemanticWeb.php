@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: SemanticWeb.php 7663 2010-08-31 15:23:17Z vargenau $');
+<?php // $Id: SemanticWeb.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * What to do on ?format=rdf  What to do on ?format=owl
  *
@@ -99,7 +99,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -119,117 +119,117 @@ require_once('lib/Units.php');
 class RdfWriter extends RssWriter // in fact it should be rewritten to be other way round.
 {
     function RdfWriter (&$request, &$pagelist) {
-	$this->_request =& $request;
-	$this->_pagelist =& $pagelist;
+    $this->_request =& $request;
+    $this->_pagelist =& $pagelist;
         $this->XmlElement('rdf:RDF',
                           array('xmlns' => "http://purl.org/rss/1.0/",
                                 'xmlns:rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'));
 
-	$this->_modules = array(
+    $this->_modules = array(
             //Standards
-	    'content'	=> "http://purl.org/rss/1.0/modules/content/",
-	    'dc'	=> "http://purl.org/dc/elements/1.1/",
-	    );
+        'content'    => "http://purl.org/rss/1.0/modules/content/",
+        'dc'    => "http://purl.org/dc/elements/1.1/",
+        );
 
-	$this->_uris_seen = array();
+    $this->_uris_seen = array();
         $this->_items = array();
 
-	$this->wiki_xmlns_xml = WikiURL(_("UriResolver")."?",false,true);
-	$this->wiki_xmlns_url = PHPWIKI_BASE_URL;
+    $this->wiki_xmlns_xml = WikiURL(_("UriResolver")."?",false,true);
+    $this->wiki_xmlns_url = PHPWIKI_BASE_URL;
 
-	$this->pre_ns_buffer =
-	    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" .
-	    "<!DOCTYPE rdf:RDF[\n" .
-	    "\t"."<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n" .
-	    "\t"."<!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>\n" .
-	    "\t"."<!ENTITY owl 'http://www.w3.org/2002/07/owl#'>\n" .
-	    "\t"."<!ENTITY smw 'http://smw.ontoware.org/2005/smw#'>\n" .
-	    "\t"."<!ENTITY smwdt 'http://smw.ontoware.org/2005/smw-datatype#'>\n" .
-	    // A note on "wiki": this namespace is crucial as a fallback when it would be illegal to start e.g. with a number. In this case, one can always use wiki:... followed by "_" and possibly some namespace, since _ is legal as a first character.
-	    "\t"."<!ENTITY wiki '" . $this->wiki_xmlns_xml .  "'>\n" .
-	    "\t"."<!ENTITY relation '" . $this->wiki_xmlns_xml .
-	    $this->makeXMLExportId(urlencode(str_replace(' ', '_', _("Relation") . ':'))) .  "'>\n" .
-	    "\t"."<!ENTITY attribute '" . $this->wiki_xmlns_xml .
-	    $this->makeXMLExportId(urlencode(str_replace(' ', '_', _("Attribute") . ':'))) .  "'>\n" .
-	    "\t"."<!ENTITY wikiurl '" . $this->wiki_xmlns_url .  "'>\n" .
-	    "]>\n\n" .
-	    "<rdf:RDF\n" .
-	    "\t"."xmlns:rdf=\"&rdf;\"\n" .
-	    "\t"."xmlns:rdfs=\"&rdfs;\"\n" .
-	    "\t"."xmlns:owl =\"&owl;\"\n" .
-	    "\t"."xmlns:smw=\"&smw;\"\n" .
-	    "\t"."xmlns:wiki=\"&wiki;\"\n" .
-	    "\t"."xmlns:relation=\"&relation;\"\n" .
-	    "\t"."xmlns:attribute=\"&attribute;\"";
-	$this->post_ns_buffer =
-	    "\n\t<!-- reference to the Semantic MediaWiki schema -->\n" .
-	    "\t"."<owl:AnnotationProperty rdf:about=\"&smw;hasArticle\">\n" .
-	    "\t\t"."<rdfs:isDefinedBy rdf:resource=\"http://smw.ontoware.org/2005/smw\"/>\n" .
-	    "\t"."</owl:AnnotationProperty>\n" .
-	    "\t"."<owl:AnnotationProperty rdf:about=\"&smw;hasType\">\n" .
-	    "\t\t"."<rdfs:isDefinedBy rdf:resource=\"http://smw.ontoware.org/2005/smw\"/>\n" .
-	    "\t"."</owl:AnnotationProperty>\n" .
-	    "\t"."<owl:Class rdf:about=\"&smw;Thing\">\n" .
-	    "\t\t"."<rdfs:isDefinedBy rdf:resource=\"http://smw.ontoware.org/2005/smw\"/>\n" .
-	    "\t"."</owl:Class>\n" .
-	    "\t<!-- exported page data -->\n";
+    $this->pre_ns_buffer =
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" .
+        "<!DOCTYPE rdf:RDF[\n" .
+        "\t"."<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>\n" .
+        "\t"."<!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>\n" .
+        "\t"."<!ENTITY owl 'http://www.w3.org/2002/07/owl#'>\n" .
+        "\t"."<!ENTITY smw 'http://smw.ontoware.org/2005/smw#'>\n" .
+        "\t"."<!ENTITY smwdt 'http://smw.ontoware.org/2005/smw-datatype#'>\n" .
+        // A note on "wiki": this namespace is crucial as a fallback when it would be illegal to start e.g. with a number. In this case, one can always use wiki:... followed by "_" and possibly some namespace, since _ is legal as a first character.
+        "\t"."<!ENTITY wiki '" . $this->wiki_xmlns_xml .  "'>\n" .
+        "\t"."<!ENTITY relation '" . $this->wiki_xmlns_xml .
+        $this->makeXMLExportId(urlencode(str_replace(' ', '_', _("Relation") . ':'))) .  "'>\n" .
+        "\t"."<!ENTITY attribute '" . $this->wiki_xmlns_xml .
+        $this->makeXMLExportId(urlencode(str_replace(' ', '_', _("Attribute") . ':'))) .  "'>\n" .
+        "\t"."<!ENTITY wikiurl '" . $this->wiki_xmlns_url .  "'>\n" .
+        "]>\n\n" .
+        "<rdf:RDF\n" .
+        "\t"."xmlns:rdf=\"&rdf;\"\n" .
+        "\t"."xmlns:rdfs=\"&rdfs;\"\n" .
+        "\t"."xmlns:owl =\"&owl;\"\n" .
+        "\t"."xmlns:smw=\"&smw;\"\n" .
+        "\t"."xmlns:wiki=\"&wiki;\"\n" .
+        "\t"."xmlns:relation=\"&relation;\"\n" .
+        "\t"."xmlns:attribute=\"&attribute;\"";
+    $this->post_ns_buffer =
+        "\n\t<!-- reference to the Semantic MediaWiki schema -->\n" .
+        "\t"."<owl:AnnotationProperty rdf:about=\"&smw;hasArticle\">\n" .
+        "\t\t"."<rdfs:isDefinedBy rdf:resource=\"http://smw.ontoware.org/2005/smw\"/>\n" .
+        "\t"."</owl:AnnotationProperty>\n" .
+        "\t"."<owl:AnnotationProperty rdf:about=\"&smw;hasType\">\n" .
+        "\t\t"."<rdfs:isDefinedBy rdf:resource=\"http://smw.ontoware.org/2005/smw\"/>\n" .
+        "\t"."</owl:AnnotationProperty>\n" .
+        "\t"."<owl:Class rdf:about=\"&smw;Thing\">\n" .
+        "\t\t"."<rdfs:isDefinedBy rdf:resource=\"http://smw.ontoware.org/2005/smw\"/>\n" .
+        "\t"."</owl:Class>\n" .
+        "\t<!-- exported page data -->\n";
     }
 
     function format() {
-	header( "Content-type: application/rdf+xml; charset=UTF-8" );
-	echo $this->pre_ns_buffer;
-	echo ">\n";
+    header( "Content-type: application/rdf+xml; charset=UTF-8" );
+    echo $this->pre_ns_buffer;
+    echo ">\n";
 
-	$first = true;
-	$dbi =	$this->_request->_dbi;
-	/* Elements per page:
-	   out-links internal, out-links external
-	   backlinks
-	   relations
-	   attributes
-	*/
-	foreach ($this->_pagelist->_pages as $page) {
-	    $relation = new TextSearchQuery("*");
-	    foreach (array('linkto','linkfrom','relation','attribute') as $linktype) {
-		$linkiter = $dbi->linkSearch($pages, $search, $linktype, $relation);
-	    }
-	    while ($link = $linkiter->next()) {
-		if (mayAccessPage('view', $rev->_pagename)) {
-		    $linkto->addItem($this->item_properties($rev),
-				     $this->pageURI($rev));
-		    if ($first)
-			$this->setValidators($rev);
-		    $first = false;
-		}
-	    }
-	}
+    $first = true;
+    $dbi =    $this->_request->_dbi;
+    /* Elements per page:
+       out-links internal, out-links external
+       backlinks
+       relations
+       attributes
+    */
+    foreach ($this->_pagelist->_pages as $page) {
+        $relation = new TextSearchQuery("*");
+        foreach (array('linkto','linkfrom','relation','attribute') as $linktype) {
+        $linkiter = $dbi->linkSearch($pages, $search, $linktype, $relation);
+        }
+        while ($link = $linkiter->next()) {
+        if (mayAccessPage('view', $rev->_pagename)) {
+            $linkto->addItem($this->item_properties($rev),
+                     $this->pageURI($rev));
+            if ($first)
+            $this->setValidators($rev);
+            $first = false;
+        }
+        }
+    }
 
-	echo $this->post_ns_buffer;
-	echo "</rdf:RDF>\n";
+    echo $this->post_ns_buffer;
+    echo "</rdf:RDF>\n";
     }
 
     /** This function transforms a valid url-encoded URI into a string
      *  that can be used as an XML-ID. The mapping should be injective.
      */
     function makeXMLExportId($uri) {
-	$uri = str_replace( '-', '-2D', $uri);
-	//$uri = str_replace( ':', '-3A', $uri); //already done by PHP
-	//$uri = str_replace( '_', '-5F', $uri); //not necessary
-	$uri = str_replace( array('"',  '#',   '&', "'",  '+',  '=',  '%'),
-			    array('-22','-23','-26','-27','-2B','-3D','-'),
-			    $uri);
-	return $uri;
+    $uri = str_replace( '-', '-2D', $uri);
+    //$uri = str_replace( ':', '-3A', $uri); //already done by PHP
+    //$uri = str_replace( '_', '-5F', $uri); //not necessary
+    $uri = str_replace( array('"',  '#',   '&', "'",  '+',  '=',  '%'),
+                array('-22','-23','-26','-27','-2B','-3D','-'),
+                $uri);
+    return $uri;
     }
 
     /** This function transforms an XML-ID string into a valid
      *  url-encoded URI. This is the inverse to makeXMLExportID.
      */
     function makeURIfromXMLExportId($id) {
-	$id = str_replace( array('-22','-23','-26','-27','-2B','-3D','-'),
-			   array('"',  '#',  '&',  "'",  '+',  '=',  '%'),
-			   $id);
-	$id = str_replace( '-2D', '-', $id);
-	return $id;
+    $id = str_replace( array('-22','-23','-26','-27','-2B','-3D','-'),
+               array('"',  '#',  '&',  "'",  '+',  '=',  '%'),
+               $id);
+    $id = str_replace( '-2D', '-', $id);
+    return $id;
     }
 }
 
@@ -283,9 +283,9 @@ extends NumericSearchQuery
 {
     /*
     var $base_units = array('m'   => explode(',','km,miles,cm,dm,mm,ft,inch,inches,meter'),
-			    'm^2' => explode(',','km^2,ha,cm^2,mi^2'),
-			    'm^3' => explode(',','km^3,lit,cm^3,dm^3,gallons'),
-			    );
+                'm^2' => explode(',','km^2,ha,cm^2,mi^2'),
+                'm^3' => explode(',','km^3,lit,cm^3,dm^3,gallons'),
+                );
     */
 
     /**
@@ -293,9 +293,9 @@ extends NumericSearchQuery
      * population > 1 million
      */
     function SemanticAttributeSearchQuery($search_query, $placeholders, $unit = '') {
-	$this->NumericSearchQuery($search_query, $placeholders);
-	$this->_units = new Units();
-	$this->unit = $unit;
+    $this->NumericSearchQuery($search_query, $placeholders);
+    $this->_units = new Units();
+    $this->unit = $unit;
     }
 
     /**
@@ -310,33 +310,33 @@ extends NumericSearchQuery
      * @return string
      */
     function _bind($value, $x) {
-    	$ori_value = $value;
-	$value = preg_replace("/,/", "", $value);
-	$this->_bound[] = array('linkname'  => $x,
-	        		'linkvalue' => $value);
-	// We must ensure that the same baseunits are matched against.
-	// We cannot compare m^2 to m or ''
-	$val_base = $this->_units->basevalue($value);
+        $ori_value = $value;
+    $value = preg_replace("/,/", "", $value);
+    $this->_bound[] = array('linkname'  => $x,
+                    'linkvalue' => $value);
+    // We must ensure that the same baseunits are matched against.
+    // We cannot compare m^2 to m or ''
+    $val_base = $this->_units->basevalue($value);
         if (!DISABLE_UNITS and $this->_units->baseunit($value) != $this->unit) {
-	    // Poor user has selected an attribute, but no unit. assume he means the baseunit
-	    if (count($this->getVars() == 1) and $this->unit == '') {
-		;
-	    } else {
-		// non-matching units are silently ignored
-		$this->_workquery = '';
-		return '';
-	    }
+        // Poor user has selected an attribute, but no unit. assume he means the baseunit
+        if (count($this->getVars() == 1) and $this->unit == '') {
+        ;
+        } else {
+        // non-matching units are silently ignored
+        $this->_workquery = '';
+        return '';
+        }
         }
         $value = $val_base;
-	if (!is_numeric($value)) {
-	    $this->_workquery = ''; //must return false
-	    trigger_error("Cannot match against non-numeric attribute value $x := $ori_value",
-			  E_USER_NOTICE);
-	    return '';
-	}
+    if (!is_numeric($value)) {
+        $this->_workquery = ''; //must return false
+        trigger_error("Cannot match against non-numeric attribute value $x := $ori_value",
+              E_USER_NOTICE);
+        return '';
+    }
 
-	$this->_workquery = preg_replace("/\b".preg_quote($x,"/")."\b/", $value, $this->_workquery);
-	return $this->_workquery;
+    $this->_workquery = preg_replace("/\b".preg_quote($x,"/")."\b/", $value, $this->_workquery);
+    return $this->_workquery;
     }
 
 }

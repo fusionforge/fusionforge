@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginListeDesSousPages 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginListeDesSousPages 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginListeDesSousPages;
   flags="";
@@ -24,49 +24,49 @@ un peu instable
 === Usage
 
 {{{
-     <<UnfoldSubpages >>
-  ou <<UnfoldSubpages sortby=-mtime words=50 maxpages=5 >>
-  ou <<UnfoldSubpages quiet=1 smalltitle=1 >>
-  ou <<UnfoldSubpages sections=2 words=100 >>
-  ou <<UnfoldSubpages lines=3 >>
+     <<UnfoldSubpages>>
+  ou <<UnfoldSubpages sortby=-mtime words=50 maxpages=5>>
+  ou <<UnfoldSubpages quiet=1 smalltitle=1>>
+  ou <<UnfoldSubpages sections=2 words=100>>
+  ou <<UnfoldSubpages lines=3>>
   ou <<UnfoldSubpages pagename="AdministrationDePhpWiki" 
-              section="Arguments" sectionhead=1 >>
+              section="Arguments" sectionhead=1>>
 }}}
 
 ===Arguments
 
-__pagename__:
+**pagename**:
   Un nom de page ou le page courante lorsque le nom est vide : Par défaut : ""
-__quiet__:
+**quiet**:
   N'affiche pas d'en-tête. Par défaut : false
-__sortby__:
+**sortby**:
   Trier par + (ASC) ou - (DESC) et sur une colonne. Multiples colonnes comme 
   sortby="-hits,-mtime" pas encore implémenté. colonnes acceptées : 
   ~[+|-]pagename, ~[+|-]mtime, ~[+|-]hits. Par défaut : "pagename"
-__maxpages__:
+**maxpages**:
   Nombre maximum de pages à inclure ou toutes lorsque ce n'est précisé. Par 
   défaut : false
-__sections__:
+**sections**:
   Nombre maximum de parties par pages à inclure toutes lorsque ce n'est précisé.
   Par défaut : false
-__section__:
+**section**:
   Inclure cette section par page seulement lorsque c'est défini. Par défaut : false
-__sectionhead__:
+**sectionhead**:
   Montre l'en-tête lorsqu'on inclus une partie nommée. Par défaut : false
-__smalltitle__:
+**smalltitle**:
   Si c'est validé, cache le titre d'importation, affiche seulement un petit lien
   au début de la page. Par défaut : false
-__words__:
+**words**:
   Nombre maximum de mots par pages à inclure. Par défaut : false
-__lines__:
+**lines**:
   Nombre maximum de lignes par pages à inclure. Par défaut : false
-__bytes__:
+**bytes**:
   Nombre maximum d'octets par pages à inclure. Par défaut : false
 
 ===Arguments obsolètes
-__pages__:
+**pages**:
   obsolète, renommé en maxpages
-__sort__:
+**sort**:
   'asc' ou 'desc'. Obsolète : utiliser "+" ou "-" avant le nom de la 
   colonne avec sortby.
 
@@ -75,10 +75,14 @@ __sort__:
 La ligne
 
 {{{
-<<UnfoldSubpages pagename=AdministrationDePhpWiki >>
+<<UnfoldSubpages pagename=AdministrationDePhpWiki>>
 }}}
 
 affiche toutes les pages qui dépendent de AdministrationDePhpWiki :
 
-<<UnfoldSubpages pagename=AdministrationDePhpWiki >>
+<<UnfoldSubpages pagename=AdministrationDePhpWiki>>
 
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

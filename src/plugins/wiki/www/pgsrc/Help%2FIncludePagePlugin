@@ -1,6 +1,6 @@
-Date: Mon, 20 Sep 2010 16:44:13 +0000
+Date: Mon, 17 Jan 2011 17:13:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FIncludePagePlugin 7699 2010-09-20 14:45:28Z vargenau $
+X-Rcs-Id: $Id: Help%2FIncludePagePlugin 7839 2011-01-17 16:16:15Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludePagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -31,10 +31,6 @@ The pages will render in distinct tables. You can also load external pages in a 
 |-
 | **rev**
 | the revision
-| most recent revision
-|-
-| **version**
-| page revision (same as ##rev##)
 | most recent revision
 |-
 | **quiet**

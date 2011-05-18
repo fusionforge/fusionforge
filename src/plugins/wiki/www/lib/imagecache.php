@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: imagecache.php 7417 2010-05-19 12:57:42Z vargenau $');
+<?php // $Id: imagecache.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2002 Johannes Große
  *
@@ -15,9 +15,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */ 
+ */
 
 /**
  * Gets an image from the cache and prints it to the browser.
@@ -50,7 +50,7 @@ function deducePagename ($request) {
     }
     elseif ($this->isPost()) {
         global $HTTP_GET_VARS;
-        if (isset($HTTP_GET_VARS['pagename'])) { 
+        if (isset($HTTP_GET_VARS['pagename'])) {
             return $HTTP_GET_VARS['pagename'];
         }
     }
@@ -58,7 +58,7 @@ function deducePagename ($request) {
     $query_string = $request->get('QUERY_STRING');
     if (preg_match('/^[^&=]+$/', $query_string))
         return urldecode($query_string);
-    
+
     return HOME_PAGE;
 }
 
@@ -70,7 +70,7 @@ function deduceUsername() {
         return $HTTP_SERVER_VARS['PHP_AUTH_USER'];
     if (!empty($HTTP_ENV_VARS['REMOTE_USER']))
         return $HTTP_ENV_VARS['REMOTE_USER'];
-    
+
     if ($user = $request->getSessionVar('wiki_user')) {
         $request->_user = $user;
         $request->_user->_authhow = 'session';
@@ -88,12 +88,12 @@ function deduceUsername() {
 /**
  * Initializes PhpWiki and calls the plugin specified in the url to
  * produce an image. Furthermore, allow the usage of Apache's
- * ErrorDocument mechanism in order to make this file only called when 
+ * ErrorDocument mechanism in order to make this file only called when
  * image could not be found in the cache.
  * (see doc/README.phpwiki-cache for further information).
  */
 function mainImageCache() {
-    $request = new Request;   
+    $request = new Request;
     // normalize pagename
     $request->setArg('pagename', deducePagename($request));
     $pagename = $request->getArg('pagename');
@@ -102,13 +102,13 @@ function mainImageCache() {
         $request->_user = new _AnonUser();
         $request->_prefs =& $request->_user->_prefs;
     } else {
-    	$request->_user = new WikiUser($request);
+        $request->_user = new WikiUser($request);
         $request->_prefs = new UserPreferences();
     }
-    
+
     // Enable the output of most of the warning messages.
     // The warnings will screw up zip files and setpref though.
-    // They will also screw up my images... But I think 
+    // They will also screw up my images... But I think
     // we should keep them.
     global $ErrorManager;
     $ErrorManager->setPostponedErrorMask(E_NOTICE|E_USER_NOTICE);
@@ -127,24 +127,24 @@ function mainImageCache() {
 
         $uri = $request->get('REDIRECT_URL');
         $query = $request->get('REDIRECT_QUERY_STRING');
-        $uri .= $query ? '?'.$query : '';        
+        $uri .= $query ? '?'.$query : '';
 
         if (!$uri) {
             $uri = $request->get('REQUEST_URI');
         }
         if (!$uri) {
-            $cache->printError( 'png', 
+            $cache->printError( 'png',
                 'Could not deduce image identifier or creation'
                 . ' parameters. (Neither REQUEST nor REDIRECT'
-                . ' obtained.)' ); 
+                . ' obtained.)' );
             return;
-        }    
+        }
         //$cacheparams = $GLOBALS['CacheParams'];
         if (!preg_match(':^(.*/)?'.PLUGIN_CACHED_FILENAME_PREFIX.'([^\?/]+)\.img(\?args=([^\?&]*))?$:', $uri, $matches)) {
             $cache->printError('png', "I do not understand this URL: $uri");
             return;
-        }        
-        
+        }
+
         $request->setArg('id', $matches[2]);
         if ($matches[4]) {
             // md5 args?
@@ -166,5 +166,5 @@ mainImageCache();
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End:   
+// End:
 ?>

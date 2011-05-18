@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
+Date: Tue,  4 Jan 2011 11:57:15 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ZoekPagina 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: ZoekPagina 7799 2011-01-04 11:05:56Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ZoekPagina;
   flags=PAGE_LOCKED;
@@ -25,6 +25,6 @@ Gebruik deze voor het doorzoeken van alle tekst.  Dit kan een paar seconden dure
 Scheid woorden met een spatie.  Alle woorden moeten gevonden worden.
 %%%Om woorden uit te zonderen, plak er een '-' voor.
 %%%Voorbeeld: 'wiki tekst -php' zoekt naar alle pagina's die de woorden
-'wiki' __en__ 'tekst' bevatten, maar __niet__ het woord 'php.
+'wiki' **en** 'tekst' bevatten, maar **niet** het woord 'php.
 
 

@@ -1,8 +1,8 @@
-Date: Tue,  9 Nov 2010 16:13:37 +0000
+Date: Tue, 11 Jan 2011 13:48:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FRichTablePlugin 7682 2010-09-10 12:03:36Z vargenau $ 
+X-Rcs-Id: $Id: Help%2FImages 7826 2011-01-11 12:52:54Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=Help%2FRichTablePlugin;
+  pagename=Help%2FImages;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   markup=2;
   charset=UTF-8
@@ -12,7 +12,7 @@ You can easily **use images in the wiki**.
 
 == Uploaded images ==
 
-First, image files need to be uploaded in the wiki. For that purpose, you will use the 
+First, image files need to be uploaded in the wiki. For that purpose, you will use the
 [[Help:UpLoadPlugin|UpLoad]] plugin.
 
 === Toolbar ===
@@ -43,12 +43,12 @@ will inline the image.
 inlines the image with an alternative text.
 
 {{{
-[[some link|{{myimage.png}}]] 
+[[some link|{{myimage.png}}]]
 }}}
 if you click on the image, will goto "some link"
 
 {{{
-[[some link|{{myimage.png|alt text}}]] 
+[[some link|{{myimage.png|alt text}}]]
 }}}
 same with alternative
 
@@ -100,7 +100,12 @@ will give:
 
 [[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/poweredby_phpwiki_51x31.png]]
 
+== See Also ==
+* [[Help:Adobe Flash]]
+* [[Help:VideoPlugin]]
+* [[Help:Wikicreole]]
+
 <noinclude>
 ----
-[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+[[PhpWikiDocumentation]]
 </noinclude>

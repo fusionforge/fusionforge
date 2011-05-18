@@ -1,4 +1,4 @@
-<?php // rcs_id('$Id: DbaDatabase.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php // $Id: DbaDatabase.php 8034 2011-04-11 09:22:33Z vargenau $
 
 require_once('lib/ErrorManager.php');
 
@@ -14,14 +14,12 @@ class DbaDatabase
         $this->_handler = $handler;
         $this->_timeout = DBA_DATABASE_DEFAULT_TIMEOUT;
         $this->_dbh = false;
-        if (function_exists("dba_handlers")) { // since php-4.3.0
-            if (!in_array($handler, dba_handlers()))
-                $this->_error(
-                    sprintf(
-                	    _("The DBA handler %s is unsupported!")."\n".
-                    	    _("Supported handlers are: %s"),
-                    	    $handler, join(",",dba_handlers())));
-        }
+        if (!in_array($handler, dba_handlers()))
+            $this->_error(
+                sprintf(
+                    _("The DBA handler %s is unsupported!")."\n".
+                        _("Supported handlers are: %s"),
+                         $handler, join(",",dba_handlers())));
         $this->readonly = false;
         if ($mode)
             $this->open($mode);
@@ -30,11 +28,11 @@ class DbaDatabase
     function set_timeout($timeout) {
         $this->_timeout = $timeout;
     }
-  
+
     function open($mode = 'w') {
         if ($this->_dbh)
             return;             // already open.
-      
+
         $watchdog = $this->_timeout;
 
         global $ErrorManager;
@@ -53,9 +51,9 @@ class DbaDatabase
         if ((strlen($mode) == 1)) {
             // PHP 4.3.x Windows lock bug workaround: http://bugs.php.net/bug.php?id=23975
             if (isWindows()) {
-                $mode .= "-"; 			// suppress locking, or
-            } elseif ($this->_handler != 'gdbm') { 	// gdbm does it internally
-            	$mode .= "d"; 			// else use internal locking
+                $mode .= "-";             // suppress locking, or
+            } elseif ($this->_handler != 'gdbm') {     // gdbm does it internally
+                $mode .= "d";             // else use internal locking
             }
         }
         while (($dbh = dba_open($this->_file, $mode, $this->_handler)) < 1) {
@@ -96,7 +94,7 @@ class DbaDatabase
                 $this->readonly = true;
                 if (!file_exists($this->_file)) {
                     $ErrorManager->handleError($error);
-	            flush();
+                flush();
                 }
             }
             else {
@@ -116,7 +114,7 @@ class DbaDatabase
     function exists($key) {
         return dba_exists($key, $this->_dbh);
     }
-  
+
     function fetch($key) {
         $val = dba_fetch($key, $this->_dbh);
         if ($val === false)
@@ -134,7 +132,7 @@ class DbaDatabase
             return $this->_error("replace($key)");
     }
 
-  
+
     function firstkey() {
         return dba_firstkey($this->_dbh);
     }
@@ -182,7 +180,7 @@ class DbaDatabase
             return $this->_error("optimize()");
         return 1;
     }
-  
+
     function _error($mes) {
         //trigger_error("DbaDatabase: $mes", E_USER_WARNING);
         //return false;
@@ -207,5 +205,5 @@ class DbaDatabase
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

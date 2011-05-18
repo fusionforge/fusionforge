@@ -1,5 +1,5 @@
 <?php
-// rcs_id('$Id: WysiwygEdit.php 7417 2010-05-19 12:57:42Z vargenau $');
+// $Id: WysiwygEdit.php 7964 2011-03-05 17:05:30Z vargenau $
 /**
  * Baseclass for WysiwygEdit/*
  *
@@ -7,10 +7,10 @@
  *   tinymce, htmlarea3, FCKeditor, spaw, htmlarea2, Wikiwyg
  * Not yet enabled as default, since we cannot convert HTML to Wiki Markup yet.
  * (See HtmlParser.php for the ongoing efforts)
- * We might use a PageType=html, which is contra wiki, but some people 
+ * We might use a PageType=html, which is contra wiki, but some people
  * might prefer HTML markup.
  *
- * TODO: Change from ENABLE_WYSIWYG constant to user preference variable 
+ * TODO: Change from ENABLE_WYSIWYG constant to user preference variable
  *       (checkbox setting or edit click as in gmail),
  *       when HtmlParser is finished.
  * Based upon htmlarea3.php and tinymce.php
@@ -25,17 +25,17 @@ require_once("lib/InlineParser.php");
 
 class WysiwygEdit {
 
-    function WysiwygEdit() { 
+    function WysiwygEdit() {
         $this->_transformer_tags = false;
     }
 
     function Head($name='edit[content]') {
-        trigger_error("virtual", E_USER_ERROR); 
+        trigger_error("virtual", E_USER_ERROR);
     }
 
     // to be called after </textarea>
     function Textarea($textarea,$wikitext,$name='edit[content]') {
-        trigger_error("virtual", E_USER_ERROR); 
+        trigger_error("virtual", E_USER_ERROR);
     }
 
     /**
@@ -45,10 +45,10 @@ class WysiwygEdit {
      */
     function ConvertBefore($text) {
         require_once("lib/BlockParser.php");
-    	$xml = TransformText($text, 2.0, $GLOBALS['request']->getArg('pagename'));
+        $xml = TransformText($text, 2.0, $GLOBALS['request']->getArg('pagename'));
         return $xml->AsXML();
     }
-    
+
     /**
      * FIXME: Handler to convert the HTML formatting back to wiki formatting.
      * Derived from InlineParser, but returning wiki text instead of HtmlElement objects.
@@ -81,7 +81,7 @@ class Markup_html_simple_tag extends Markup_html_emphasis {
         case 'b':
         case 'strong':
             return "*".$body."*";
-        case 'big': 
+        case 'big':
             return "<big>".$body."</big>";
         case 'i':
         case 'em':
@@ -119,7 +119,7 @@ class Markup_html_spanbold extends BalancedMarkup
 class HtmlTransformer extends InlineTransformer
 {
     function HtmlTransformer ($tags = false) {
-        if (!$tags) $tags = 
+        if (!$tags) $tags =
             array('escape','html_br','html_spanbold','html_simple_tag',
                   'html_p',);
         /*

@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Wed, 26 Jan 2011 15:38:21 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ChercherUnePage 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: ChercherUnePage 7904 2011-01-26 14:39:55Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=ChercherUnePage;
   flags=PAGE_LOCKED;
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: binary
 
 Voici quelques bons points de départ pour la navigation.
 
-* CommentUtiliserUnWiki vous donne quelques informations rapides sur le marquage Wiki.
+* [[Aide:CommentUtiliserUnWiki|CommentUtiliserUnWiki]] vous donne quelques informations rapides sur le marquage Wiki.
 * Les DernièresModifs sont enregistrées automatiquement.
 * DétailsTechniques sur la navigation et l'édition sur ce serveur.
 
@@ -29,7 +29,7 @@ ceux qui s'épellent ou sonnent de façon similaire (en anglais).
 ------
 ==== Trucs
 Séparez les mots par des espaces.
-__Tous__ les mots doivent correspondre (c'est le ET logique)%%%
+**Tous** les mots doivent correspondre (c'est le ET logique)%%%
 Pour exclure un mot, faites-le précéder d'un '-'.%%%
 Exemple : 'wiki text -php' recherche toutes les pages contenant les mots 'wiki'
-__et__ 'text', mais ne contenant __pas__ le mot 'php'.
+**et** 'text', mais ne contenant **pas** le mot 'php'.

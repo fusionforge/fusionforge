@@ -1,8 +1,8 @@
 <?php // -*-php-*-
-// rcs_id('$Id: IncludePage.php 7700 2010-09-20 16:03:26Z vargenau $');
+// $Id: IncludePage.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -41,7 +41,6 @@ extends WikiPlugin
     function getDefaultArguments() {
         return array( 'page'    => false, // the page to include
                       'rev'     => false, // the revision (defaults to most recent)
-                      'version' => false, // same as "rev"
                       'quiet'   => false, // if set, inclusion appears as normal content
                       'bytes'   => false, // maximum number of bytes to include
                       'words'   => false, // maximum number of words to include
@@ -70,12 +69,6 @@ extends WikiPlugin
         $args = $this->getArgs($argstr, $request);
         extract($args);
 
-        if ($version && $rev) {
-            return $this->error(_("Choose only one of 'version' or 'rev' parameters."));
-        } elseif ($version) {
-            $rev = $version;
-        }
-
         if ($page) {
             // Expand relative page names.
             $page = new WikiPageName($page, $basepage);
@@ -89,7 +82,7 @@ extends WikiPlugin
         // TextFormattingRules).
         static $included_pages = array();
         if (in_array($page, $included_pages)) {
-            return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+            return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                                         $page));
         }
 
@@ -106,6 +99,9 @@ extends WikiPlugin
 
         $p = $dbi->getPage($page);
         if ($rev) {
+            if (!is_whole_number($rev) or !($rev>0)) {
+                return $this->error(_("Error: rev must be a positive integer."));
+            }
             $r = $p->getRevision($rev);
             if ((!$r) || ($r->hasDefaultContents())) {
                 return $this->error(sprintf(_("%s: no such revision %d."),
@@ -129,7 +125,7 @@ extends WikiPlugin
             }
             // trap recursive redirects
             if (in_array($m[1], $included_pages)) {
-                return $this->error(sprintf(_("recursive inclusion of page %s ignored"),
+                return $this->error(sprintf(_("Recursive inclusion of page %s ignored"),
                                                 $page.' => '.$m[1]));
             }
             $page = $m[1];
@@ -157,11 +153,13 @@ extends WikiPlugin
         if ($quiet)
             return $content;
 
-        return HTML(HTML::p(array('class' => 'transclusion-title'),
-                            fmt("Included from %s", WikiLink($page))),
-
-                    HTML::div(array('class' => 'transclusion'),
-                              false, $content));
+        if ($rev) {
+            $transclusion_title = fmt("Included from %s (revision %d)", WikiLink($page), $rev);
+        } else {
+            $transclusion_title = fmt("Included from %s", WikiLink($page));
+        }
+        return HTML(HTML::p(array('class' => 'transclusion-title'), $transclusion_title),
+                    HTML::div(array('class' => 'transclusion'), false, $content));
     }
 
     /**
@@ -199,26 +197,6 @@ extends WikiPlugin
         return $ct;
     }
 };
-
-// This is an excerpt from the css file I use:
-//
-// .transclusion-title {
-//   font-style: oblique;
-//   font-size: 0.75em;
-//   text-decoration: underline;
-//   text-align: right;
-// }
-//
-// DIV.transclusion {
-//   background: lightgreen;
-//   border: thin;
-//   border-style: solid;
-//   padding-left: 0.8em;
-//   padding-right: 0.8em;
-//   padding-top: 0px;
-//   padding-bottom: 0px;
-//   margin: 0.5ex 0px;
-// }
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,24 @@
-<?php // -*-php-*-
-// rcs_id('$Id: backend.php 7638 2010-08-11 11:58:40Z vargenau $');
+<?php
+// $Id: backend.php 8071 2011-05-18 14:56:14Z vargenau $
+/*
+ * Copyright 2004-2010 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 
 /*
   Pagedata
@@ -183,7 +202,7 @@ class WikiDB_backend
     }
 
     /**
-     * Delete page (and all it's revisions) from the database.
+     * Delete page (and all its revisions) from the database.
      *
      */
     function purge_page($pagename) {

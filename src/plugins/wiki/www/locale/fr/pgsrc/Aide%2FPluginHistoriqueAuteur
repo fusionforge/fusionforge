@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FPluginHistoriqueAuteur 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginHistoriqueAuteur 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginHistoriqueAuteur;
   flags="";
@@ -12,11 +12,16 @@ Ce plugin vous permet d'afficher l'historique des éditions d'un auteur particul
 Vous pouvez aussi bien spécifier le nom de la page (page courante par défaut).
 
 {{{
-<<AuthorHistory user="test" >>
+<<AuthorHistory user="test">>
 
-<<AuthorHistory page=HomePage >>
+<<AuthorHistory page=HomePage>>
 }}}
 
 Le second exemple aura la page courante par défaut. Nous ne pouvons vous fournir 
 d'autres exemples puisque nous ne connaissons par les noms d'utilisateurs potentiels
 de votre wiki.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

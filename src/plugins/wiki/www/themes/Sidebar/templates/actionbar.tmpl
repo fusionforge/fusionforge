@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// rcs_id('$Id: actionbar.tmpl 7589 2010-07-02 07:31:33Z vargenau $');
+// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
   $dbh = $request->getDbh();
   $isAdmin = $user->isAdmin();
   $pagename = $page->getName();
@@ -27,7 +27,7 @@
     <?php echo ActionButton(_("PageHistory"),_("History"),false,array('title'=>_("Past versions of this page.")." [alt-h]")) ?>
     <?php echo ActionButton("diff") ?>
     <?php if ($user->isSignedIn()) { ?>
-      <?php echo ActionButton("WatchPage", _("Watch"), false, 
+      <?php echo ActionButton(_("WatchPage"), _("Watch"), false, 
 		       array('title'=>_("Add/Remove this to/from the list of pages you're monitoring for changes")." [alt-l]")) ?>
     <?php } ?>
   </ul>

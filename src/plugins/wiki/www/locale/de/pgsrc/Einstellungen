@@ -1,6 +1,6 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Fri,  4 Feb 2011 17:33:12 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Einstellungen 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Einstellungen 7936 2011-02-04 16:33:39Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Einstellungen;
   flags=PAGE_LOCKED;
@@ -10,5 +10,3 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 <<RedirectTo page=BenutzerEinstellungen>>
-----
-WikiPlugin PluginManager
