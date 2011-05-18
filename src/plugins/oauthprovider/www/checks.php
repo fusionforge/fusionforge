@@ -107,7 +107,7 @@ function oauthprovider_CheckUser() {
 			if($name) $realuser = user_get_object_by_name($name);
 			else  $realuser = user_get_object($id);
 			if (!($realuser) || !($realuser->usesPlugin($pluginname))) {
-				exit_error("First activate the User's $pluginname plugin through Account Manteinance Page", 'oauthprovider');
+				exit_error("First activate the User's $pluginname plugin through Account Maintenance Page", 'oauthprovider');
 			}
 			if ( (!$user) || ($user->getID() != $id)) { // if someone else tried to access the private oauthprovider part of this user
 				exit_error("Access Denied, You cannot access other user's personal $pluginname", 'oauthprovider');
