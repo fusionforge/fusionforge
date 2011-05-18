@@ -61,6 +61,10 @@ DOCSFILES=$(patsubst packaging/docs/%, debian/$(OLDPACKAGE)-%.docs, $(wildcard p
 # plugins 'docs' files
 PDOCSFILES=$(patsubst %, debian/$(PACKAGE)-%.docs, $(shell ls  plugins/*/packaging/docs/[a-z]* | sed 's,.*/,,'))
 
+# 'examples' files
+PEXAMPLESFILES=$(patsubst %, debian/$(PACKAGE)-%.examples, $(shell ls  plugins/*/packaging/examples/[a-z]* | sed 's,.*/,,'))
+
+
 # po files
 POFILES=$(patsubst debian/dsf-po/%, debian/po/%, $(wildcard debian/dsf-po/*) debian/po/POTFILES.in)
 
@@ -80,12 +84,13 @@ testpat:
 	@echo "PLINKSFILES=$(PLINKSFILES)"
 	@echo "PINSTALLFILES=$(PINSTALLFILES)"
 	@echo "PDOCSFILES=$(PDOCSFILES)"
+	@echo "PEXAMPLESFILES=$(PEXAMPLESFILES)"
 
 remove-binary-files:
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 .PHONY: conffiles
-conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) debian/control
+conffiles: $(PPOSTINST) $(PPRERM) $(CRONDFILES) $(DIRSFILES) $(LINKSFILES) $(INSTALLFILES) $(DOCSFILES) $(PCRONDFILES) $(PDIRSFILES) $(PLINKSFILES) $(PINSTALLFILES) $(PDOCSFILES) $(PEXAMPLESFILES) debian/control
 
 # Construct the plugin's 'postinst' script out of a template in debian/dsf-in/plugin.postinst
 debian/$(PACKAGE)-plugin-%.postinst:
@@ -130,6 +135,9 @@ debian/$(OLDPACKAGE)-%.docs:
 	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
 debian/$(PACKAGE)-%.docs:
 	$(SED_REPLACE) $(CURDIR)/packaging/docs/$* > $@
+
+debian/$(PACKAGE)-plugin-%.examples:
+	$(SED_REPLACE) $(CURDIR)/plugins/$*/packaging/examples/plugin-$* > $@
 
 # Construct the control file
 debian/control: $(wildcard packaging/control/*) $(wildcard plugins/*/packaging/control/[1-9][0-9][0-9]*) 
@@ -186,6 +194,7 @@ clean: remove-binary-files unpatch
 	rm -f $(CURDIR)/debian/*.links
 	rm -f $(CURDIR)/debian/*.install
 	rm -f $(CURDIR)/debian/*.docs
+	rm -f $(CURDIR)/debian/*.examples
 	rm -f $(CURDIR)/debian/$(PACKAGE)-config.sgml
 	rm -f $(CURDIR)/debian/$(OLDPACKAGE)-common.manpages
 	rm -f cvssh.1 $(PACKAGE)-config.1
