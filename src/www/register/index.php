@@ -215,10 +215,10 @@ if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '<h3>'.$index.'. '._('Source Code').'</h3>';
 	echo _('<p>You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.</p>')."\n";
 	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
-	echo '<td><input type="radio" name="scm" value="noscm" checked="checked">'._('No SCM').'</td>';
+	echo '<td><input type="radio" name="scm" value="noscm" checked="checked" />'._('No SCM').'</td>';
 	foreach($scm_plugins as $plugin) {
 		$myPlugin= plugin_get_object($plugin);
-		echo '<td><input type="radio" name="scm" value="'.$myPlugin->name.'">'.$myPlugin->text.'</td>';
+		echo '<td><input type="radio" name="scm" value="'.$myPlugin->name.'" />'.$myPlugin->text.'</td>';
 	}
 	echo '</tr></tbody></table>'."\n";
 }
