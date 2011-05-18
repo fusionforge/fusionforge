@@ -65,7 +65,7 @@ class mailmanPlugin extends Plugin {
 	function getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'MailmanPluginInfo')) {
 			require_once('MailmanPluginInfo.class.php');
-			$this->pluginInfo =& new MailmanPluginInfo($this);
+			$this->pluginInfo = new MailmanPluginInfo($this);
 		}
 		return $this->pluginInfo;
 	}
@@ -155,11 +155,11 @@ class mailmanPlugin extends Plugin {
 			$order_name_arr[]=_('Remove');
 			$order_name_arr[]=_('Monitored Lists');
 			echo $HTML->listTableTop($order_name_arr);
-			$dao = & new MailmanListDao(CodendiDataAccess::instance());	
+			$dao = new MailmanListDao(CodendiDataAccess::instance());	
 			$result = $dao->listsMonitoredByUser($current_user->getEmail());
 			for ($i=0; $i<$result->rowCount(); $i++) {
 				$listResult = $result->getRow();
-				$list =& new MailmanList($listResult['group_id'],$listResult['group_list_id']);
+				$list = new MailmanList($listResult['group_id'],$listResult['group_list_id']);
 				if ($list->isError()) {
 						$this->setError($list->getErrorMessage());
 				} else {

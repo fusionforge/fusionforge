@@ -60,7 +60,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 
 function ffOutputHandler($buffer) {
-	global $ffErrors, $gfcommon, $sysDTDs;
+	global $ffErrors, $gfcommon, $sysDTDs, $HTML;
 
 	if (! getenv ('SERVER_SOFTWARE')) {
 		return $buffer ;
@@ -131,9 +131,13 @@ function ffOutputHandler($buffer) {
 			1 => array("pipe", "w"),
 			2 => array("pipe", "w"),
 		    );
+		$doctype = util_ifsetor($HTML->doctype);
+		if (!$doctype) {
+			$doctype = 'transitional';
+		}
 		$xmlstarlet = proc_open("xmlstarlet val -d " .
-		    escapeshellarg($dtdpath . $sysDTDs['transitional']['dtdfile']) .
-		    " -", $dspec, $pipes);
+		    escapeshellarg($dtdpath . $sysDTDs[$doctype]['dtdfile']) .
+		    " -e -", $dspec, $pipes);
 		$rv = 0;
 		if (is_resource($xmlstarlet)) {
 			fwrite($pipes[0], $cbuf);

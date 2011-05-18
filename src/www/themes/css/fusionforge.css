@@ -733,9 +733,14 @@ div.layout-manager-column-remove_hover {
 }
 
 #ffErrors .error {
+	background-color: inherit;
 	border-width: 0px;
 	padding: 0px;
 	color: red;
+}
+
+#ffErrors .warning {
+	background-color: inherit;
 }
 
 .img-shadow-l {

@@ -80,7 +80,7 @@ class MailmanList extends Error {
 	function MailmanList($group_id, $groupListId = false, $dataArray = false) {
 		$pm = ProjectManager::instance();
 		$Group = $pm->getProject($group_id);
-		$this->_mailingDAO =& new MailmanListDao(CodendiDataAccess::instance());	
+		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());	
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailmanList'));
