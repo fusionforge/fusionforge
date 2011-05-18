@@ -1,5 +1,6 @@
 <?php
 
+$sysdebug_dbquery = forge_get_config('sysdebug_dbquery');
 $sysdebug_ignored = forge_get_config('sysdebug_ignored');
 if (!isset($ffErrors))
 	$ffErrors = array();

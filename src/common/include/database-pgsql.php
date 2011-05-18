@@ -146,6 +146,8 @@ function db_switcher(&$dbserver=NULL) {
  *	@return int result set handle.
  */
 function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
+	global $sysdebug_dbquery;
+
 	db_connect_if_needed () ;
 	db_switcher ($dbserver) ;
 
@@ -160,6 +162,11 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=NULL) {
 			$offset=0;
 		}
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
+	}
+
+	if ($sysdebug_dbquery) {
+		ffDebug('trace', "tracing call of db_query():\n",
+		    debug_string_backtrace());
 	}
 
 	$res = @pg_query($dbserver,$qstring);
@@ -220,6 +227,8 @@ function db_query_from_file($file,$limit='-1',$offset=0,$dbserver=NULL) {
  *	@return int result set handle.
  */
 function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) {
+	global $sysdebug_dbquery;
+
 	db_connect_if_needed () ;
 	db_switcher ($dbserver) ;
 
@@ -234,6 +243,11 @@ function db_query_params($qstring,$params,$limit='-1',$offset=0,$dbserver=NULL) 
 			$offset=0;
 		}
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
+	}
+
+	if ($sysdebug_dbquery) {
+		ffDebug('trace', "tracing call of db_query_params():\n",
+		    debug_string_backtrace());
 	}
 
 	$res = @pg_query_params($dbserver,$qstring,$params);
