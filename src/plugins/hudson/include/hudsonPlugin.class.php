@@ -62,7 +62,7 @@ class hudsonPlugin extends Plugin {
 				$params['TITLES'][] = $this->text;
 				$params['DIRS'][] = '/plugins/hudson/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the project one
 				$params['ADMIN'][] = '';
-				$params['TOOLTIPS'] = _('Continuus Integration Scheduler');
+				$params['TOOLTIPS'][] = _('Continuus Integration Scheduler');
 			}
 			if (isset($params['toptab'])) {
 				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
