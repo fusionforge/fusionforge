@@ -276,6 +276,7 @@ class Navigation extends Error {
 		$before = count($menu['urls']);
 		$plugin_urls = array();
 		$hookParams['DIRS'] = &$menu['urls'];
+		$hookParams['ADMIN'] =& $menu['adminurls'];
 		$hookParams['TITLES'] = &$menu['titles'];
 		$hookParams['TOOLTIPS'] = &$menu['tooltips'];
 		plugin_hook("outermenu", $hookParams);
@@ -544,6 +545,7 @@ class Navigation extends Error {
 			$hookParams = array();
 			$hookParams['group_id'] = $group_id ;
 			$hookParams['DIRS'] =& $menu['urls'];
+			$hookParams['ADMIN'] =& $menu['adminurls'];
 			$hookParams['TITLES'] =& $menu['titles'];
 			$hookParams['TOOLTIPS'] =& $menu['tooltips'];
 			$hookParams['toptab'] =& $toptab;
