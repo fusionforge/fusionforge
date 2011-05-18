@@ -1,24 +1,24 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Thu, 27 Jan 2011 18:00:26 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: InterWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FInterWiki 7919 2011-01-27 17:02:14Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=InterWiki;
+  pagename=Aide%2FInterWiki;
   flags="";
   markup=2;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
-Ce wiki accepte les liens InterWiki dans un style copié sur celui du wiki 
+Ce wiki accepte les liens **~InterWiki** dans un style copié sur celui du wiki 
 [UseMod:]. Les liens vers des pages d'autres wikis peuvent être réalisés 
 sans avoir à connaître ou taper les URL complets, par exemple : 
 MeatBall:InterWiki produira un lien vers la page nommée "~InterWiki" sur 
 MeatballWiki.
 
-La carte InterWiki est extraite du bloc <verbatim> dans la CarteInterWiki, 
+La carte ~InterWiki est extraite du bloc <verbatim> dans la [[CarteInterWiki]], 
 mais cette page doit être verrouillée pour que cela fonctionne. 
 Ceci interdit aux hackers potentiels de pouvoir changer abominablement 
 tous les liens ~InterWiki pour qu'ils pointent vers un URL diabolique. 
-Si aucune carte n'est trouvée dans la CarteInterWiki (ou si la page n'est 
+Si aucune carte n'est trouvée dans la [[CarteInterWiki]] (ou si la page n'est 
 pas verrouillée), PhpWiki utilisera à la place le fichier lib/interwiki.map
 de votre distribution phpwiki. Le fichier de la carte ~Interwiki est 
 utilisée sur PhpWiki : vous pouvez la voir sur [http://phpwiki.sf.net/interwiki.map].
@@ -29,7 +29,7 @@ mais il n'est pas tout à fait identique. Une différence notable par rapport
 à [UseMod:] est que PhpWiki supporte les '%s' au sein des URL dans la 
 carte -- voir l'entrée RFC pour un exemple de son fonctionnement.
 
-Toutes les entrées de la carte InterWiki ne sont pas forcément des wikis. 
+Toutes les entrées de la carte ~InterWiki ne sont pas forcément des wikis. 
 Par exemple, celles-ci sont juste des sites web 
 normaux : Dictionary:fungible, [JargonFile:Alderson loop], [IMDB:Roman Holiday], 
 RFC:2822, et ISBN:020171499X.
@@ -40,7 +40,10 @@ Ainsi [Category:Category] crée un lien vers la page CategoryCategory, et
 pourtant cette page n'apparaîtra pas dans la liste des rétroliens de 
 CategoryCategory.
 
-Le terme "InterWiki" se réfère aussi à un concept plus large. Voir 
-PhpWiki:InterWikiSearch pour plus de liens.
+Le terme "~InterWiki" se réfère aussi à un concept plus large. Voir 
+[[PhpWiki:InterWikiSearch]] pour plus de liens.
+
+<noinclude>
 ----
 [[DocumentationDePhpWiki]]
+</noinclude>
