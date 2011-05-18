@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
+Date: Tue,  4 Jan 2011 11:57:15 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ToverPhpWikiURLs 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FToverPhpWikiURLs 7864 2011-01-22 20:11:13Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=ToverPhpWikiURLs;
+  pagename=Help%2FToverPhpWikiURLs;
   flags=PAGE_LOCKED;
   charset=utf-8
 Content-Transfer-Encoding: binary
@@ -14,7 +14,7 @@ naar beheers- en andere speciale functies in PhpWiki.  Hier is een
 korte beschrijving hoe ze werken.
 
 De basissyntax van een phpwiki: URL is
-  __phpwiki:__''paginanaam''__?__''vraag-argen''
+  **phpwiki:**''paginanaam''**?**''vraag-argen''
 
 Als ''paginanaam'' wordt weggelaten, wordt het de huidige pagina.
 
@@ -25,29 +25,29 @@ formaat zijn.
 
 FIXME: can these be localised?
 De "action=''x''" parameter moet altijd worden opgegeven.  Het kan er
-een zijn van __browse__, __info__, __diff__, __search__, __edit__,
-__zip__, __dumpserial__, __loadserial__, __remove__, __lock__,
-__unlock__, __login__, __logout__, __setprefs__ of __save__.
-The standaard actie is __browse__.
+een zijn van **browse**, **info**, **diff**, **search**, **edit**,
+**zip**, **dumpserial**, **loadserial**, **remove**, **lock**,
+**unlock**, **login**, **logout**, **setprefs** of **save**.
+The standaard actie is **browse**.
 
 
 Sommige van deze acties accepteren andere parameters.
 
-;__info__: Accepteert __showpagesource__.
-;__search__: Accepteert __searchterm__, and __searchtype__.
-;__edit__: Accepteert __version__.
-;__remove__: Accepteert __verify__.
-;__save__: Accepteert __editversion__, __minor_edit__, en __content__.
-;__setprefs__: Accepteert __edit_area_width__, __edit_area_height__.
+;**info**: Accepteert **showpagesource**.
+;**search**: Accepteert **searchterm**, and **searchtype**.
+;**edit**: Accepteert **version**.
+;**remove**: Accepteert **verify**.
+;**save**: Accepteert **editversion**, **minor_edit**, en **content**.
+;**setprefs**: Accepteert **edit_area_width**, **edit_area_height**.
 
 === Tover Koppelingen Schrijven in Wiki Pagina's
 
 Een toverkoppeling ziet eruit als:
 
-  __[[__ ''tekst'' __|__ ''phpwiki-url'' __]__
+  **[[** ''tekst'' **|** ''phpwiki-url'' **]**
 
 
-Het "''tekst'' __|__" deel is optioneel maar meestal wel aan te raden.
+Het "''tekst'' **|**" deel is optioneel maar meestal wel aan te raden.
 Als dit is opgegeven wordt dit het etiket voor de koppeling.
 
 Het ''phpwiki-url'' gedeelte is ook optioneel.  Als dit wordt
@@ -69,7 +69,7 @@ Andere mogelijkheden:
 === Tover Formulieren schrijven in Wiki Pagina's
 
 Als een van de ''vraag-argen'' een waarde heeft als
-  ''arg''__=__''opt-breedte''__(__''opt-verstek-waarde''__)__
+  ''arg''**=**''opt-breedte''**(**''opt-verstek-waarde''**)**
 zal de koppeling worden weergegeven als een formulier, in plaats van een anker.
 
 ''Opt-breedte'', als opgegeven specificeert de breedte van het invoerveld,
