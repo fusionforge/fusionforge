@@ -60,7 +60,8 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 
 function ffOutputHandler($buffer) {
-	global $ffErrors, $sysdebug_enable, $gfcommon, $sysDTDs, $HTML;
+	global $ffErrors, $sysdebug_enable, $sysdebug_lazymode_on,
+	    $gfcommon, $sysDTDs, $HTML;
 
 	if (! getenv ('SERVER_SOFTWARE')) {
 		return $buffer ;
@@ -69,6 +70,19 @@ function ffOutputHandler($buffer) {
 	/* in case we’re aborted */
 	if (!$sysdebug_enable)
 		return $buffer;
+
+	/* if content-type != text/html* assume abortion */
+	if ($sysdebug_lazymode_on) {
+		$thdr = 'content-type:';
+		$tstr = 'content-type: text/html';
+		foreach (headers_list() as $h) {
+			if (strncasecmp($h, $thdr, strlen($thdr)))
+				continue;
+			if (strncasecmp($h, $tstr, strlen($tstr)))
+				/* application/something, maybe */
+				return $buffer;
+		}
+	}
 
 	/* stop calling ffErrorHandler */
 	restore_error_handler();
@@ -231,6 +245,7 @@ if (forge_get_config('sysdebug_phphandler')) {
 	set_error_handler("ffErrorHandler");
 }
 
+$sysdebug_lazymode_on = false;
 ob_start("ffOutputHandler", 0, false);
 
 function sysdebug_off($hdr=false, $replace=true, $resp=false) {
@@ -256,6 +271,12 @@ function sysdebug_off($hdr=false, $replace=true, $resp=false) {
 	}
 
 	return $buf;
+}
+
+function sysdebug_lazymode($enable) {
+	global $sysdebug_lazymode_on;
+
+	$sysdebug_lazymode_on = $enable ? true : false;
 }
 
 function ffDebug($type,$intro,$pretext) {

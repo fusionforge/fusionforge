@@ -188,6 +188,9 @@ if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 
 		return false;
 	}
+	function sysdebug_lazymode($enable) {
+		/* nothing */
+	}
 }
 
 // Get constants used for flags or status
