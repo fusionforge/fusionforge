@@ -2892,6 +2892,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginRedirection -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginRessourcesRss -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginTableauAncienStyle -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginTeX2png -text
+src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginTestDeCache -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginWikiBlog -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FR%C3%A8glesDeFormatageDesTextes -text
@@ -2946,7 +2947,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/SommaireDuProjet -text
 src/plugins/wiki/www/locale/fr/pgsrc/SondagePhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/SteveWainstead -text
 src/plugins/wiki/www/locale/fr/pgsrc/Suivre -text
-src/plugins/wiki/www/locale/fr/pgsrc/TestDeCache -text
 src/plugins/wiki/www/locale/fr/pgsrc/TousLesUtilisateurs -text
 src/plugins/wiki/www/locale/fr/pgsrc/ToutesLesPages -text
 src/plugins/wiki/www/locale/fr/pgsrc/TraduireUnTexte -text
