@@ -24,9 +24,9 @@
 global $gfplugins;
 require_once $gfplugins.'scmsvn/common/SVNPlugin.class.php' ;
 
-$SVNPluginObject = new SVNPlugin ;
+$SVNPluginObject = new SVNPlugin;
 
-register_plugin ($SVNPluginObject) ;
+register_plugin($SVNPluginObject);
 
 // Local Variables:
 // mode: php
