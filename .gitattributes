@@ -2469,6 +2469,16 @@ src/plugins/scmhg/packaging/control/134plugin-scmhg -text
 src/plugins/scmhg/packaging/control/134plugin-scmhg.shortdesc -text
 src/plugins/scmhg/packaging/dirs/plugin-scmhg -text
 src/plugins/scmhg/packaging/install/plugin-scmhg -text
+src/plugins/scmhook/common/languages/Base.tab -text
+src/plugins/scmhook/common/scmhook-init.php -text
+src/plugins/scmhook/common/scmhookPlugin.class.php -text
+src/plugins/scmhook/cronjobs/updateScmRepo.php -text
+src/plugins/scmhook/db/scmhook-init.sql -text
+src/plugins/scmhook/etc/scmhook.ini -text
+src/plugins/scmhook/library/scmsvn/cronjobs/updateScmRepo.php -text
+src/plugins/scmhook/library/scmsvn/hooks/check-mime-type.pl -text
+src/plugins/scmhook/library/scmsvn/skel/pre-commit.check-mime-type.pl -text
+src/plugins/scmhook/library/scmsvn/skel/pre-commit.head -text
 src/plugins/scmsvn/NAME -text
 src/plugins/scmsvn/bin/install.sh svneol=native#text/x-sh
 src/plugins/scmsvn/etc/scmsvn.ini -text
