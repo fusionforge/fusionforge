@@ -52,7 +52,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 		$msg .= "\n" .
 		    '<pre style="font-weight:normal; font-size:90%; color:#000066; line-height:100%;">' .
 		    htmlentities(debug_string_backtrace()) . "</pre>";
-	
+
 	$ffErrors[] = array('type' => $type, 'message' => $msg);
 	/* Don't execute PHP internal error handler */
 	return true;
@@ -60,11 +60,15 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 
 function ffOutputHandler($buffer) {
-	global $ffErrors, $gfcommon, $sysDTDs, $HTML;
+	global $ffErrors, $sysdebug_enable, $gfcommon, $sysDTDs, $HTML;
 
 	if (! getenv ('SERVER_SOFTWARE')) {
 		return $buffer ;
 	}
+
+	/* in case we’re aborted */
+	if (!$sysdebug_enable)
+		return $buffer;
 
 	/* stop calling ffErrorHandler */
 	restore_error_handler();
@@ -76,10 +80,13 @@ function ffOutputHandler($buffer) {
 	$divstring = "\n\n" . '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		function toggle_ffErrors() {
 			var errorsblock = document.getElementById("ffErrorsBlock");
+			var errorsgroup = document.getElementById("ffErrors");
 			if (errorsblock.style.display == "none") {
 				errorsblock.style.display = "block";
+				errorsgroup.style.right = "10px";
 			} else {
 				errorsblock.style.display = "none";
+				errorsgroup.style.right = "300px";
 			}
 		}' . "\n/* ]]> */</script>\n<div id=\"ffErrors\">\n" .
 	    '<a href="javascript:toggle_ffErrors();">Click to toggle</a>' .
@@ -225,3 +232,49 @@ if (forge_get_config('sysdebug_phphandler')) {
 }
 
 ob_start("ffOutputHandler", 0, false);
+
+function sysdebug_off($hdr=false, $replace=true, $resp=false) {
+	global $sysdebug_enable;
+
+	if ($sysdebug_enable) {
+		$sysdebug_enable = false;
+		$buf = ob_get_flush();
+
+		if ($buf === false) {
+			$buf = "";
+		}
+	} else {
+		$buf = false;
+	}
+
+	if ($hdr !== false) {
+		if ($resp === false) {
+			header($hdr, $replace);
+		} else {
+			header($hdr, $replace, $resp);
+		}
+	}
+
+	return $buf;
+}
+
+function ffDebug($type,$intro,$pretext) {
+	global $ffErrors;
+
+	if (!$type) {
+		$type = 'debug';
+	}
+	$text = "";
+	if ($intro) {
+		$text .= htmlentities($intro);
+	}
+	if ($pretext) {
+		$text .= '<pre style="font-weight:normal; font-size:90%; color:#000066;">' .
+		    htmlentities($pretext) . "</pre>";
+	}
+
+	$ffErrors[] = array(
+		'type' => $type,
+		'message' => $text,
+	    );
+}

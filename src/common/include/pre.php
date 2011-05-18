@@ -174,8 +174,20 @@ if (!$sysdebug_enable || !forge_get_config('sysdebug_xmlstarlet')) {
 	}
 }
 
-if ($sysdebug_enable) {
+if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 	require $gfcommon.'include/extras-debug.php';
+} else {
+	function sysdebug_off($hdr=false, $replace=true, $resp=false) {
+		if ($hdr !== false) {
+			if ($resp === false) {
+				header($hdr, $replace);
+			} else {
+				header($hdr, $replace, $resp);
+			}
+		}
+
+		return false;
+	}
 }
 
 // Get constants used for flags or status
