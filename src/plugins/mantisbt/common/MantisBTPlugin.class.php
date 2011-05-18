@@ -69,13 +69,12 @@ class MantisBTPlugin extends Plugin {
 						$user = session_get_user();
 						$userperm = $project->getPermission($user);
 						if ($userperm->isAdmin()) {
-							$params['TITLES'][] = $this->text . _('Admin');
 							$params['ADMIN'][] = '/plugins/'.$this->name.'/?type=admin&group_id=' . $group_id . '&pluginname=' . $this->name;
 						}
 					}
-				}
-				if ($params['toptab'] == $this->name) {
-					$params['selected']=(count($params['TITLES'])-1);
+					if (isset($params['toptab'])) {
+						(($params['toptab'] == $this->name) ? $params['selected'] = (count($params['TITLES'])-1) : '' );
+					}
 				}
 				$returned = true;
 				break;
