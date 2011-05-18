@@ -690,7 +690,7 @@ class Layout extends Error {
 	function projectTabs($toptab, $group_id) {
 		// get group info using the common result set
 		$menu = $this->navigation->getProjectMenu($group_id, $toptab);
-		echo $this->tabGenerator($menu['urls'], $menu['titles'], true, $menu['selected'], 'white');
+		echo $this->tabGenerator($menu['urls'], $menu['titles'], $menu['tooltips'], true, $menu['selected'], 'white');
 	}
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false, $selected=false, $sel_tab_bgcolor='white', $total_width='100%') {

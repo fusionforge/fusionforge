@@ -4,7 +4,7 @@
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is licensed under the GNU General Public License version 2. See the file COPYING.
- * 
+ *
  * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
  *
  * HudsonPlugin
@@ -44,7 +44,7 @@ class hudsonPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("hudson")) {
 				$param = '?type=user&amp;id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
-						array ('/plugins/hudson/index.php' . $param ));				
+						array ('/plugins/hudson/index.php' . $param ));
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
@@ -58,11 +58,12 @@ class hudsonPlugin extends Plugin {
 			if (!$project->isProject()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
-				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/hudson/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the project one
-                $params['ADMIN'][]='';
-			} 
+			if ( $project->usesPlugin( $this->name )) {
+				$params['TITLES'][] = $this->text;
+				$params['DIRS'][] = '/plugins/hudson/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we're calling is the project one
+				$params['ADMIN'][] = '';
+				$params['TOOLTIPS'] = _('Continuus Integration Scheduler');
+			}
 			if (isset($params['toptab'])) {
 				(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 			}
@@ -81,7 +82,7 @@ class hudsonPlugin extends Plugin {
 		} elseif ($hookname == "ajax_reference_tooltip") {
 			$this->ajax_reference_tooltip($params);
 
-		}	
+		}
 	}
 
 	function groupisactivecheckbox (&$params) {
@@ -105,7 +106,7 @@ class hudsonPlugin extends Plugin {
 		if (strpos($_SERVER['REQUEST_URI'], $this->getPluginPath()) === 0 ||
 				strpos($_SERVER['REQUEST_URI'], '/my/') === 0 ||
 				strpos($_SERVER['REQUEST_URI'], '/projects/') === 0 ||
-				strpos($_SERVER['REQUEST_URI'], '/widgets/') === 0 
+				strpos($_SERVER['REQUEST_URI'], '/widgets/') === 0
 		   ) {
 			use_stylesheet($this->getThemePath().'/css/style.css');
 		}
@@ -229,7 +230,7 @@ class hudsonPlugin extends Plugin {
 					$build_id = $arr[1];
 					$dar = $job_dao->searchByJobName($job_name, $group_id);
 				} else {
-					$build_id = $val; 
+					$build_id = $val;
 					$dar = $job_dao->searchByGroupID($group_id);
 					if ($dar->rowCount() != 1) {
 						$dar = null;
@@ -238,7 +239,7 @@ class hudsonPlugin extends Plugin {
 				if ($dar && $dar->valid()) {
 					$row = $dar->current();
 					$build = new HudsonBuild($row['job_url'].'/'.$build_id.'/');
-					echo '<strong>' . _("Build performed on:") . '</strong> ' . $build->getBuildTime() . '<br />'; 
+					echo '<strong>' . _("Build performed on:") . '</strong> ' . $build->getBuildTime() . '<br />';
 					echo '<strong>' . _("Status:") . '</strong> ' . $build->getResult();
 				} else {
 					echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
@@ -277,8 +278,8 @@ class hudsonPlugin extends Plugin {
 						$html .= _("Weather Report:").'<img src="'.$job->getWeatherReportIcon().'" align="middle" />';
 						$html .= '  </td>';
 						$html .= ' </tr>';
-						$html .= '</table>';  
-						echo $html;    
+						$html .= '</table>';
+						echo $html;
 					} catch (Exception $e) {
 					}
 				} else {
