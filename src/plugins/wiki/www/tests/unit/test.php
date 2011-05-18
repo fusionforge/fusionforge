@@ -1,7 +1,7 @@
 <?php // #!/usr/local/bin/php -Cq
 /* Copyright (C) 2004 Dan Frankowski <dfrankow@cs.umn.edu>
  * Copyright (C) 2004,2005,2006 Reini Urban <rurban@x-ray.at>
- * $Id: test.php 7638 2010-08-11 11:58:40Z vargenau $
+ * $Id: test.php 8071 2011-05-18 14:56:14Z vargenau $
  *
  * This file is part of PhpWiki.
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -98,7 +98,7 @@ if ((int)substr(phpversion(), 1) >= 5)
     array_push($database_backends, 'PDO_pqsql', 'PDO_sqlite', 'PDO_mysql');
                                    //'PDO_oci', 'PDO_odbc'
 
-//TODO: convert cvs test                         
+//TODO: convert cvs test
 // For "cvs" see the seperate tests/unit_test_backend_cvs.php (cvs is experimental)
 //TODO: read some database values from config.ini, just use the "test_" prefix
 // "flatfile" testing occurs in "tests/unit/.testbox/flatfile"
@@ -146,10 +146,8 @@ function printSimpleTrace($bt) {
 function assert_callback( $script, $line, $message ) {
    echo "assert failed: script ", $script," line ", $line," :";
    echo "$message";
-   if (function_exists('debug_backtrace')) { // >= 4.3.0
-       echo "Traceback:\n";
-       printSimpleTrace(debug_backtrace());
-   }
+   echo "Traceback:\n";
+   printSimpleTrace(debug_backtrace());
    exit;
 }
 $foo = assert_options( ASSERT_CALLBACK, 'assert_callback');
@@ -386,7 +384,7 @@ elseif (!empty($HTTP_SERVER_VARS['argv']))
 elseif (!ini_get("register_argc_argv"))
     echo "Could not read cmd args (register_argc_argv=Off?)\n";
 // purge the testbox
-  
+
 $debug_level = 1; //was 9, _DEBUG_VERBOSE | _DEBUG_TRACE
 //if (defined('E_STRICT')) $debug_level = 5; // add PARSER flag on php5
 $user_level  = 1; // BOGO (conflicts with RateIt)
@@ -417,7 +415,7 @@ if (isset($HTTP_SERVER_VARS['REQUEST_METHOD'])) {
     }
 } elseif (!empty($argv) and preg_match("/test\.php$/", $argv[0])) {
     array_shift($argv);
-}  
+}
 if (!empty($argv)) {
     $runtests = array();
     $define = array();
@@ -635,7 +633,7 @@ foreach ($run_database_backends as $dbtype) {
         $suite  = new PHPUnit_TestSuite("phpwiki");
         if (file_exists(dirname(__FILE__).'/lib/'.$test.'.php'))
             require_once dirname(__FILE__).'/lib/'.$test.'.php';
-        else  
+        else
             require_once dirname(__FILE__).'/lib/plugin/'.$test.'.php';
         $suite->addTest( new PHPUnit_TestSuite($test) );
 
@@ -667,5 +665,5 @@ if (isset($HTTP_SERVER_VARS['REQUEST_METHOD']))
 // c-basic-offset: 4
 // c-hanging-comment-ender-p: nil
 // indent-tabs-mode: nil
-// End: 
+// End:
 ?>

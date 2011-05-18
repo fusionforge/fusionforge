@@ -1,5 +1,5 @@
 <?php
-// $Id: AnalyseAccessLogSql.php 7955 2011-03-03 16:41:35Z vargenau $
+// $Id: AnalyseAccessLogSql.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2005 Charles Corrigan and $ThePhpWikiProgrammingTeam
  *
@@ -16,9 +16,10 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 /**
  * A plugin that provides a framework and some useful queries to analyse the SQL
  * access log. This information may be sensitive and so is limited to

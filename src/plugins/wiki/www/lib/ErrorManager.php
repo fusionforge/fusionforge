@@ -1,4 +1,4 @@
-<?php // $Id: ErrorManager.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php // $Id: ErrorManager.php 8031 2011-04-11 08:36:32Z vargenau $
 
 if (isset($GLOBALS['ErrorManager'])) return;
 
@@ -55,7 +55,7 @@ class ErrorManager
         $this->_postpone_mask = 0;
         $this->_postponed_errors = array();
 
-        set_error_handler('ErrorManager_errorHandler');
+        // set_error_handler('ErrorManager_errorHandler');
     }
 
     /**
@@ -274,8 +274,7 @@ class ErrorManager
 
             if (defined('DEBUG') and (DEBUG & _DEBUG_TRACE)) {
                 echo "error_reporting=",error_reporting(),"\n<br />";
-                if (function_exists("debug_backtrace")) // >= 4.3.0
-                    $error->printSimpleTrace(debug_backtrace());
+                $error->printSimpleTrace(debug_backtrace());
             }
         $this->_die($error);
         }
@@ -299,8 +298,7 @@ class ErrorManager
                 $this->_noCacheHeaders();
                 if (defined('DEBUG') and (DEBUG & _DEBUG_TRACE)) {
                     echo "error_reporting=",error_reporting(),"\n";
-                    if (function_exists("debug_backtrace")) // >= 4.3.0
-                        $error->printSimpleTrace(debug_backtrace());
+                    $error->printSimpleTrace(debug_backtrace());
                 }
                 $error->printXML();
             }

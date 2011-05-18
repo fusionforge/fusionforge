@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: Template.php 7839 2011-01-17 16:16:15Z vargenau $
+// $Id: Template.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -83,7 +83,7 @@ extends WikiPlugin
     // TODO: check if page can really be pulled from the args, or if it is just the basepage.
     function getWikiPageLinks($argstr, $basepage) {
         $args = $this->getArgs($argstr);
-        $page = @$args['page'];
+        $page = isset($args['page'])? $args['page']: '';
         if ($page) {
             // Expand relative page names.
             $page = new WikiPageName($page, $basepage);
@@ -137,6 +137,9 @@ extends WikiPlugin
 
         $p = $dbi->getPage($page);
         if ($args['rev']) {
+            if (!is_whole_number($args['rev']) or !($args['rev']>0)) {
+                return $this->error(_("Error: rev must be a positive integer."));
+            }
             $r = $p->getRevision($args['rev']);
             if ((!$r) || ($r->hasDefaultContents())) {
                 return $this->error(sprintf(_("%s: no such revision %d."),

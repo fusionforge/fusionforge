@@ -1,5 +1,5 @@
 /**
- * $Id: fusionforge.css 7981 2011-03-10 10:52:34Z vargenau $
+ * $Id: fusionforge.css 8071 2011-05-18 14:56:14Z vargenau $
  *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -17,9 +17,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
+*/
 
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
@@ -46,6 +46,60 @@
 /**
  * General
  */
+
+body {
+	margin: 0 0 0 0;
+}
+
+form { margin: 0; }
+
+img { border: 0; vertical-align: middle; }
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #565c5e; /* Alcatel-Lucent grey */
+}
+
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.6em; line-height:1.1em;}
+h3 { font-size: 1.2em; line-height:1.3em;}
+h4 { font-size: 1.0em; line-height:1.3em;}
+h5 { font-size: 0.8em; }
+h6 { font-size: 0.6em; }
+
+/* Titles in the page. */
+h1, .titlebar, .widget_titlebar {
+	background: url(/themes/alcatel-lucent/images/bgrd_hpage_header.gif) white;
+	background-position: bottom;
+	background-repeat: repeat-x;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 4px;
+	padding-bottom: 6px;
+	border-top:1px solid #dddddd;
+	border-bottom:1px solid #dddddd;
+	vertical-align: middle;
+	font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
+	color: #554295; /* Alcatel-Lucent violet */
+	font-weight: normal;
+	font-size: 1.8em;
+	line-height: 1.3em;
+	text-align: left;
+	height: 24px;
+	margin-top: 4px;
+}
+
+/* Hack for the wiki that inserts an unneccessary </p> */
+.titlebar p {
+	color: #554295; /* Alcatel-Lucent violet */
+	font-size: 1em;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.titlebar a {
+	padding-left: 10px;
+}
 
 /* Because in some cases there is a <p> in nested lists */
 li p { margin:0; }
@@ -202,6 +256,15 @@ h1 .backlinks { text-decoration: none; color: inherit; }
 .wikipage  { font-weight: normal; }
 .interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
 .interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
+
+table.wikipaging { 
+    border-width: 1px;
+    border-style: solid; 
+    border-color: black; 
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 /* CreateToc plugin =================================================== */
 
@@ -610,23 +673,93 @@ td.pageinfo { font-weight: bold; }
 
 /* Banners ============================================================ */
 
+p.success, p.feedback, p.warning, p.warning_msg, p.error, p.information,
+div.success, div.feedback, div.warning, div.warning_msg, div.error, div.information {
+   font-weight: bold;
+   font-size: 12px;
+   text-align: center;
+   border: 1px solid;
+   margin: 15px 0px;
+   padding: 10px 10px 10px 10px;
+}
+
+.success, .feedback {
+   border-color: green;
+   background-color: #DFF2BF;
+}
+.warning_msg, .warning {
+   border-color: orange;
+   background-color: #FEEFB3;
+}
+.error {
+   border-color: red;
+   background-color: #FFBABA;
+}
+.information {
+   border-color: blue;
+   background-color: #BDE5F8;
+}
+
+p.success, p.feedback, 
+p.warning, p.warning_msg, 
+p.error, 
+p.information,
+div.success, div.feedback, 
+div.warning, div.warning_msg, 
+div.error, 
+div.information {
+   text-align: left;
+   background-repeat: no-repeat;
+   background-position: 10px;
+   -moz-border-radius: 1em;
+   -webkit-border-radius: 1em;
+   border-radius: 1em;
+   padding: 10px 10px 10px 50px;
+}
+
+div.success, div.feedback,
+p.success, p.feedback {
+   color: #4F8A10;
+   background-image:url('/themes/base-alcatel-lucent/images/success.png');
+}
+div.feedback p, div.feedback li,
+div.success p, div.success li {
+   color: #4F8A10;
+}
+
+div.warning, div.warning_msg,
+p.warning, p.warning_msg {
+   color: #9F6000;
+   background-image: url('/themes/base-alcatel-lucent/images/warning.png');
+}
+div.warning p, div.warning_msg p,
+div.warning li, div.warning_msg li {
+   color: #9F6000;
+}
+
+div.error,
+p.error {
+   color: #D8000C;
+   background-image: url('/themes/base-alcatel-lucent/images/error.png');
+}
+div.error p,
+div.error li {
+   color: #D8000C;
+}
+
+div.information,
+p.information {
+   color: #00529B;
+   background-image: url('/themes/base-alcatel-lucent/images/info.png');
+}
+
 .error, .warning, .debug, .hint {
     font-weight: bold;
     font-size: 11px;
     text-align: left;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
     padding: 0.5em;
-}
-
-.error {
-    background-color: #ffc0cb; /* pink */
-    border-color: red;
-}
-
-.warning {
-    background-color: #ffd297; /* orange */
-    border-color: #FFA500; /* orange */
 }
 
 .debug {
@@ -637,13 +770,6 @@ td.pageinfo { font-weight: bold; }
 .hint {
     background-color: #eeeeee; 
     border-color: black;
-}
-
-p.error, p.warning, p.debug, p.hint,
-div.error div.warning, div.debug, div.hint {
-    border-radius: 1em;
-    -moz-border-radius: 1em;
-    -webkit-border-radius: 1em;
 }
 
 span.error, span.warning, span.debug, span.hint {
@@ -978,6 +1104,11 @@ td.tdunselected {
 }
 
 /* Main wiki browse banner */
+
+.browsebanner {
+   clear: both;
+}
+
 .browsebanner table {
    width: 100%;
    background-color: #e9fbff;

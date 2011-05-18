@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: UnfoldSubpages.php 7805 2011-01-04 17:50:32Z vargenau $
+// $Id: UnfoldSubpages.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002,2004,2005 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 

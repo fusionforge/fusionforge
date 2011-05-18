@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: RssParser.php 7964 2011-03-05 17:05:30Z vargenau $
+// $Id: RssParser.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Simple RSSParser Class
  * Based on Duncan Gough RSSParser class
@@ -25,7 +25,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 

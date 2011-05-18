@@ -1,5 +1,5 @@
 <?php
-// $Id: IniConfig.php 8004 2011-03-31 07:51:51Z vargenau $
+// $Id: IniConfig.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * A configurator intended to read its config from a PHP-style INI file,
  * instead of a PHP file.
@@ -29,7 +29,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 

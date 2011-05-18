@@ -1,5 +1,5 @@
 <?php
-// $Id: Captcha.php 7964 2011-03-05 17:05:30Z vargenau $
+// $Id: Captcha.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Session Captcha v1.0
  *   by Gavin M. Roy <gmr@bteg.net>
@@ -18,7 +18,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with This File; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 

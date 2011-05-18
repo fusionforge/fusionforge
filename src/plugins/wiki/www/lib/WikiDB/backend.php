@@ -1,5 +1,5 @@
 <?php
-// $Id: backend.php 7754 2010-12-09 09:55:08Z vargenau $
+// $Id: backend.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004-2010 Reini Urban
  *
@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
 /*

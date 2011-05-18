@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: configurator.php 7960 2011-03-04 13:58:21Z vargenau $
+<?php // -*-php-*- $Id: configurator.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002,2003,2005,2008-2010 $ThePhpWikiProgrammingTeam
  * Copyright 2002 Martin Geisler <gimpster@gimpster.com>
@@ -19,7 +19,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -163,7 +163,7 @@ echo '<','?xml version="1.0" encoding="utf-8"?',">\n";
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- $Id: configurator.php 7960 2011-03-04 13:58:21Z vargenau $ -->
+<!-- $Id: configurator.php 8071 2011-05-18 14:56:14Z vargenau $ -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Configuration tool for PhpWiki <?php echo $config_file ?></title>
 <style type="text/css" media="screen">
@@ -723,7 +723,7 @@ new _define_selection('DATABASE_DBA_HANDLER',
                     'db3'  => "DB3 - BerkeleyDB (Sleepycat) DB3. Default on Windows but not on every Linux",
                     'db4'  => "DB4 - BerkeleyDB (Sleepycat) DB4."), "
 Use 'gdbm', 'dbm', 'db2', 'db3' or 'db4' depending on your DBA handler methods supported: <br />  "
-                      . (function_exists("dba_handlers") ? join(", ",dba_handlers()) : "")
+                      . join(", ",dba_handlers())
                       . "\n\nBetter not use other hacks such as inifile, flatfile or cdb");
 
 $properties["dba timeout"] =
@@ -2472,7 +2472,7 @@ if (!empty($HTTP_POST_VARS['action'])
     )
 {
 
-    $timestamp = date ('dS of F, Y H:i:s');
+    $timestamp = date ('dS \of F, Y H:i:s');
 
     $config = "
 ; This is a local configuration file for PhpWiki.

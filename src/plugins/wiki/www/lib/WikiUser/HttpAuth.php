@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-// $Id: HttpAuth.php 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: HttpAuth.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright (C) 2004 ReiniUrban
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 

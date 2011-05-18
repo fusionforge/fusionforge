@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<!-- $Id: passencrypt.php 6198 2008-08-26 09:14:36Z vargenau $ -->
+<!-- $Id: passencrypt.php 8071 2011-05-18 14:56:14Z vargenau $ -->
 <title>Password Encryption Tool</title>
 <!--
 Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
@@ -22,7 +22,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
+with PhpWiki; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
 </head>

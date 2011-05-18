@@ -1,4 +1,4 @@
-<?php // $Id: BlockParser.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php // $Id: BlockParser.php 8071 2011-05-18 14:56:14Z vargenau $
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  * Copyright (C) 2004,2005 Reini Urban
  * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -16,10 +16,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
 //require_once('lib/HtmlElement.php');
 require_once('lib/CachedMarkup.php');
 require_once('lib/InlineParser.php');
@@ -1381,13 +1380,8 @@ function TransformTextPre ($text, $markup = 2.0, $basepage=false) {
     if (!empty($markup) && $markup < 2.0) {
         $text = ConvertOldMarkup($text);
     }
-    // WikiCreole
-    /*if (!empty($markup) && $markup == 3) {
-        $text = ConvertFromCreole($text);
-    }*/
     // Expand leading tabs.
     $text = expand_tabs($text);
-    //set_time_limit(3);
     $output = new WikiText($text);
 
     return $output;

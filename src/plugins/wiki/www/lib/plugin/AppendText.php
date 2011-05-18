@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: AppendText.php 7955 2011-03-03 16:41:35Z vargenau $
+// $Id: AppendText.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -122,7 +122,8 @@ extends WikiPlugin
         $meta = $current->_data;
         $meta['summary'] = sprintf(_("AppendText to %s"), $pagename);
         if ($page->save($newtext, $current->getVersion() + 1, $meta)) {
-            $message->pushContent(_("Page successfully updated."), HTML::br());
+            $message->pushContent(HTML::p(array('class' => 'feedback'),
+                                          _("Page successfully updated.")));
         }
 
         // AppendText has been called from the same page that got modified

@@ -1,4 +1,4 @@
-<?php // $Id: stdlib.php 7969 2011-03-07 15:23:53Z vargenau $
+<?php // $Id: stdlib.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -97,6 +97,7 @@
     is_localhost($url)
     javascript_quote_string($s)
     isSerialized($s)
+    is_whole_number($var)
     parse_attributes($line)
     is_image ($filename)
     is_video ($filename)
@@ -158,7 +159,7 @@ function UnMangleXmlIdentifier($str) {
 function getCookieName() {
     return preg_replace("/[^\d\w]/", "_", WIKI_NAME) . "_WIKI_ID";
 }
- 
+
 /**
  * Generates a valid URL for a given Wiki pagename.
  * @param mixed $pagename If a string this will be the name of the Wiki page to link to.
@@ -418,9 +419,6 @@ function LinkImage($url, $alt = "") {
     // support new syntax: [prefix/image.jpg size=50% border=n]
     if (empty($alt)) $alt = "";
 
-    // Extract URL
-    $arr = explode(' ',$url);
-    if (!empty($arr)) $url = $arr[0];
     if (! IsSafeURL($url)) {
         $link = HTML::span(array('class' => 'error'), _("BAD URL -- remove all of <, >, \""));
         return $link;
@@ -428,9 +426,13 @@ function LinkImage($url, $alt = "") {
     // spaces in inline images must be %20 encoded!
     $link = HTML::img(array('src' => $url));
 
-    // Extract attributes
-    $arr = parse_attributes(strstr($ori_url, " "));
+    // Extract attributes and shorten url
+    $arr = parse_attributes(strstr($url, " "));
     foreach ($arr as $attr => $value) {
+        // strip attr=... url suffix
+        $i = strpos($url, $attr);
+        $url = substr($url, 0, $i-1);
+        $link->setAttr('src', $url);
         // These attributes take strings: lang, id, title, alt
         if (($attr == "lang")
           || ($attr == "id")
@@ -476,7 +478,7 @@ function LinkImage($url, $alt = "") {
         }
     }
     // Correct silently the most common error
-    if ($url != $ori_url and empty($arr) and !preg_match("/^http/",$url)) {
+    if (strstr($ori_url, " ") and !preg_match("/^http/",$url)) {
     // space belongs to the path
     $file = NormalizeLocalFileName($ori_url);
         if (file_exists($file)) {
@@ -576,6 +578,7 @@ function LinkImage($url, $alt = "") {
  *   http://www.alleged.org.uk/pdc/2002/svg-object.html
  *
  * Allowed object tags:
+ *   ID
  *   DATA=URI (object data)
  *   CLASSID=URI (location of implementation)
  *   ARCHIVE=CDATA (archive files)
@@ -593,7 +596,7 @@ function LinkImage($url, $alt = "") {
  */
 function ImgObject($img, $url) {
     // get the url args: data="sample.svgz" type="image/svg+xml" width="400" height="300"
-    $params = explode(",","data,classid,archive,codebase,name,usemap,type,".
+    $params = explode(",","id,width,height,data,classid,archive,codebase,name,usemap,type,".
               "codetype,standby,tabindex,declare");
     if (is_array($url)) {
         $args = $url;
@@ -2378,6 +2381,14 @@ function javascript_quote_string($s) {
 
 function isSerialized($s) {
     return (!empty($s) and (strlen($s) > 3) and (substr($s,1,1) == ':'));
+}
+
+/**
+ * Determine if a variable represents a whole number
+ */
+
+function is_whole_number($var) {
+  return (is_numeric($var) && (intval($var)==floatval($var)));
 }
 
 /**

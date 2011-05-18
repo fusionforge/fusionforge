@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiAdminPurge.php 8005 2011-03-31 08:45:20Z vargenau $
+// $Id: WikiAdminPurge.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -88,9 +88,11 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-        if ($request->getArg('action') != 'browse')
-            if ($request->getArg('action') != _("PhpWikiAdministration/Purge"))
-                return $this->disabled("(action != 'browse')");
+        if ($request->getArg('action') != 'browse') {
+            if ($request->getArg('action') != _("PhpWikiAdministration/Purge")) {
+                return $this->disabled(_("Plugin not run: not in browse mode"));
+            }
+        }
 
         $args = $this->getArgs($argstr, $request);
         $this->_args =& $args;

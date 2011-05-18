@@ -1,5 +1,5 @@
 <?php
-// $Id: removepage.php 7953 2011-03-03 16:21:48Z vargenau $
+// $Id: removepage.php 8065 2011-05-04 10:27:44Z vargenau $
 require_once('lib/Template.php');
 
 function RemovePage (&$request) {
@@ -50,7 +50,7 @@ function RemovePage (&$request) {
         $dbi = $request->getDbh();
         $dbi->deletePage($pagename);
         $dbi->touch();
-        $html = HTML::div(array('class' => 'feedback'), fmt("Removed page '%s' successfully.", $pagename));
+        $html = HTML::p(array('class' => 'feedback'), fmt("Removed page '%s' successfully.", $pagename));
     }
 
     GeneratePage($html, _("Remove Page"));

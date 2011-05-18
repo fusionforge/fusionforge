@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: IncludePages.php 7955 2011-03-03 16:41:35Z vargenau $
+// $Id: IncludePages.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -40,18 +40,18 @@ extends WikiPlugin_IncludePage
     }
 
     function getDefaultArguments() {
-            return array_merge(
-                           array( 'pages'   => false,  // the pages to include
+        return array_merge(array( 'pages'   => false,  // the pages to include
                                   'exclude' => false), // the pages to exclude
                            WikiPlugin_IncludePage::getDefaultArguments()
-                           );
+                          );
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
         $args = $this->getArgs($argstr, $request);
-            $html = HTML();
-        if (empty($args['pages']))
+        $html = HTML();
+        if (empty($args['pages'])) {
             return $html;
+        }
         $include = new WikiPlugin_IncludePage();
 
         if (is_string($args['exclude']) and !empty($args['exclude'])) {
@@ -67,11 +67,17 @@ extends WikiPlugin_IncludePage
             $argstr = preg_replace("/pages=<\?plugin-list.*?\>/", "", $argstr);
         }
 
-            foreach ($args['pages'] as $page) {
+        // IncludePage plugin has no "pages" argument.
+        // Remove it to avoid warning.
+        $argstr = preg_replace('/pages=".*?"/', "", $argstr);
+        $argstr = preg_replace('/pages=\S*\s/', "", $argstr);
+        $argstr = preg_replace('/pages=\S*/', "", $argstr);
+
+        foreach ($args['pages'] as $page) {
             if (empty($args['exclude']) or !in_array($page, $args['exclude'])) {
                 $html = HTML($html, $include->run($dbi, "page='$page' ".$argstr, $request, $basepage));
             }
-            }
+        }
         return $html;
     }
 };

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiAdminUtils.php 7955 2011-03-03 16:41:35Z vargenau $
+// $Id: WikiAdminUtils.php 8071 2011-05-18 14:56:14Z vargenau $
 /**
  * Copyright 2003,2004,2006 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -54,13 +54,15 @@ extends WikiPlugin
         $args['action'] = strtolower($args['action']);
         extract($args);
 
-        if (!$action)
+        if (!$action) {
             $this->error("No action specified");
+        }
         if (!($default_label = $this->_getLabel($action))) {
             return HTML::div(array('class' => "error"), fmt("Bad action requested: %s", $action));
         }
-        if ($request->getArg('action') != 'browse')
-            return $this->disabled("(action != 'browse')");
+        if ($request->getArg('action') != 'browse') {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
 
         $posted = $request->getArg('wikiadminutils');
 

@@ -1,4 +1,4 @@
-<?php //$Id: WikiDB.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php //$Id: WikiDB.php 8063 2011-05-04 10:22:51Z vargenau $
 require_once('lib/PageType.php');
 
 /**
@@ -675,9 +675,7 @@ class WikiDB {
     // SQL result: for simple select or create/update queries
     // returns the database specific resource type
     function genericSqlQuery($sql, $args=false) {
-        if (function_exists('debug_backtrace')) { // >= 4.3.0
-            echo "<pre>", printSimpleTrace(debug_backtrace()), "</pre>\n";
-        }
+        echo "<pre>", printSimpleTrace(debug_backtrace()), "</pre>\n";
         trigger_error("no SQL database", E_USER_ERROR);
         return false;
     }
@@ -685,9 +683,7 @@ class WikiDB {
     // SQL iter: for simple select or create/update queries
     // returns the generic iterator object (count,next)
     function genericSqlIter($sql, $field_list = NULL) {
-        if (function_exists('debug_backtrace')) { // >= 4.3.0
-            echo "<pre>", printSimpleTrace(debug_backtrace()), "</pre>\n";
-        }
+        echo "<pre>", printSimpleTrace(debug_backtrace()), "</pre>\n";
         trigger_error("no SQL database", E_USER_ERROR);
         return false;
     }
@@ -738,7 +734,7 @@ class WikiDB_Page
             if (!(is_string($pagename) and $pagename != '')) {
                 if (function_exists("xdebug_get_function_stack")) {
                     echo "xdebug_get_function_stack(): "; var_dump(xdebug_get_function_stack());
-                } elseif (function_exists("debug_backtrace")) { // >= 4.3.0
+                } else {
                     printSimpleTrace(debug_backtrace());
                 }
                 trigger_error("empty pagename", E_USER_WARNING);
@@ -1081,8 +1077,9 @@ class WikiDB_Page
         $cache = &$this->_wikidb->_cache;
         $pagename = &$this->_pagename;
 
-        if (! $version or $version == -1) // 0 or false
+        if ((!$version) or ($version == 0) or ($version == -1)) { // 0 or false
             return new WikiDB_PageRevision($this->_wikidb, $pagename, 0);
+        }
 
         assert($version > 0);
         $vdata = $cache->get_versiondata($pagename, $version, $need_content);
@@ -1328,7 +1325,10 @@ class WikiDB_Page
                 return;         // values identical, skip update.
         }
 
-        if ($this->_wikidb->readonly) { trigger_error("readonly database", E_USER_WARNING); return; }
+        if (isset($this->_wikidb->readonly) and ($this->_wikidb->readonly)) {
+            trigger_error("readonly database", E_USER_WARNING);
+            return;
+        }
         $cache->update_pagedata($pagename, array($key => $newval));
     }
 

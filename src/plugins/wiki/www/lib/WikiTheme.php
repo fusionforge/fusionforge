@@ -1,4 +1,4 @@
-<?php // $Id: WikiTheme.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php // $Id: WikiTheme.php 8071 2011-05-18 14:56:14Z vargenau $
 /* Copyright (C) 2002,2004,2005,2006,2008,2009,2010 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -272,7 +272,7 @@ class WikiTheme {
         }
         else if (!$missing_okay) {
             trigger_error("$this->_theme/$file: not found", E_USER_NOTICE);
-            if ((DEBUG & _DEBUG_TRACE) && function_exists('debug_backtrace')) { // >= 4.3.0
+            if (DEBUG & _DEBUG_TRACE) {
                 echo "<pre>", printSimpleTrace(debug_backtrace()), "</pre>\n";
             }
         }

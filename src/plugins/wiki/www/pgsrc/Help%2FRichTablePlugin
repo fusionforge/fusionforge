@@ -1,6 +1,6 @@
-Date: Thu, 16 Dec 2010 12:56:02 +0000
+Date: Wed, 13 Apr 2011 16:54:29 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FRichTablePlugin 7778 2010-12-16 11:56:28Z vargenau $
+X-Rcs-Id: $Id: Help%2FRichTablePlugin 8048 2011-04-13 14:56:50Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRichTablePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -17,22 +17,39 @@ use [[Help:MediawikiTablePlugin|Mediawiki tables]] instead.
 
 The contents of each cell are individually processed by the ~BlockParser. This means that you can do interesting things like put **invoke plugins**, use **enumerated lists** etc within each cell!
 
-* A ##"-"## (dash) at the start of a new line represents a new row in the table.
-* A ##"|"## (vertical bar or pipe) at the start of a new line represents a cell.
-* Attributes for the tags
-** A line that starts with a ##"*"## (star or asterisk) after a ##"|"## is parsed for attributes for the corresponding cell.
-** Attributes for the table are given on line that starts with a ##"*"##, only if the line appears before any other line except whitespace.
-** A line that starts with a ##-## is always parsed for attributes since it can't have any content, unlike a cell.
-* Cell contents
-** Cell contents are processed by the ~BlockParser.
-** Any line that starts with a ##"*"## anywhere other than the table attribute line is treated as normal content.
-** Any line that starts with whitespace is also treated as content.
-** Any cell line that does not have a ##"*"## after the ##"|"## is treated as normal content.
-** All content lines that follow a cell line are added to that cell. They can contain arbitrary text except the above cases.
-** If there is no cell in the current row, content lines are dropped silently.
-* The two special characters ##"~~"## and ##"?>"## should be escaped as ##"\~~"## and ##"?\>"##. I havn't discovered any other characters yet that might need to be escaped. This is required for the block parser to work.
+A ##"-"## (dash) at the start of a new line represents a new row in the table.
 
-We allow attributes with or without quotes (")
+A ##"|"## (vertical bar or pipe) at the start of a new line represents a cell.
+
+=== Attributes for the tags ===
+
+A line that starts with a ##"~*"## (star or asterisk) after a ##"|"## is parsed for attributes for the corresponding cell.
+
+Attributes for the table are given on line that starts with a ##"~*"##, only if the line appears before any other line except whitespace.
+
+A line that starts with a ##-## is always parsed for attributes since it can't have any content, unlike a cell.
+
+=== Cell contents ===
+
+Cell contents are processed by the ~BlockParser.
+
+Any line that starts with a ##"~*"## anywhere other than the table attribute line is treated as normal content.
+
+Any line that starts with whitespace is also treated as content.
+
+Any cell line that does not have a ##"~*"## after the ##"|"## is treated as normal content.
+
+All content lines that follow a cell line are added to that cell. They can contain arbitrary text except the above cases.
+
+If there is no cell in the current row, content lines are dropped silently.
+
+=== Special characters ===
+
+The two special characters ##"~~"## and ##"?>"## should be escaped as ##"\~~"## and ##"?\>"##. I havn't discovered any other characters yet that might need to be escaped. This is required for the block parser to work.
+
+=== Attributes ===
+
+We allow attributes with or without quotes ("):
 {{{
 border=1, cellpadding="5"
 style="font-family: sans-serif; border-top:1px solid #dddddd;"
@@ -110,10 +127,10 @@ This cell uses the row color
 }}}
 
 == Known Bugs ==
-* The plugin can't nest itself yet. Thus nested tables are currently not possible.
+* The plugin can't nest itself. Thus nested tables are currently not possible. See [[Help:MediawikiTablePlugin|Mediawiki tables]] to have nested tables.
 
 == Author ==
-* [Sameer D. Sahasrabuddhe|http://www.it.iitb.ac.in/~sameerds/phpwiki/index.php/RichTablePlugin]
+* [[http://www.it.iitb.ac.in/~sameerds/phpwiki/index.php/RichTablePlugin|Sameer D. Sahasrabuddhe]]
 
 <noinclude>
 ----

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: WikiAdminRename.php 8007 2011-03-31 09:25:39Z vargenau $
+// $Id: WikiAdminRename.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2004,2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -53,12 +53,13 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function renameHelper($name, $from, $to, $options = false) {
-            if ($options['regex'])
-                return preg_replace('/'.$from.'/'.($options['icase']?'i':''), $to, $name);
-            elseif ($options['icase'])
-                return str_ireplace($from, $to, $name);
-            else
+        if (isset($options['regex'])) {
+            return preg_replace('/'.$from.'/'.(isset($options['icase'])?'i':''), $to, $name);
+        } elseif (isset($options['icase'])) {
+            return str_ireplace($from, $to, $name);
+        } else {
             return str_replace($from, $to, $name);
+        }
     }
 
     function renamePages(&$dbi, &$request, $pages, $from, $to, $updatelinks=false,
@@ -136,10 +137,11 @@ extends WikiPlugin_WikiAdminSelect
     }
 
     function run($dbi, $argstr, &$request, $basepage) {
-            $action = $request->getArg('action');
+        $action = $request->getArg('action');
         if ($action != 'browse' and $action != 'rename'
-                                and $action != _("PhpWikiAdministration")."/"._("Rename"))
-            return $this->disabled("(action != 'browse')");
+                                and $action != _("PhpWikiAdministration")."/"._("Rename")) {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
 
         if ($action == 'rename') {
             // We rename a single page.
@@ -298,9 +300,9 @@ class _PageList_Column_renamed_pagename extends _PageList_Column {
     function _getValue ($page_handle, &$revision_handle) {
         global $request;
         $post_args = $request->getArg('admin_rename');
-        $options = array('regex' => @$post_args['regex'],
-                         'icase' => @$post_args['icase']);
-
+        $options =
+          array('regex' => isset($post_args['regex']) ? $post_args['regex'] : null,
+                'icase' => isset($post_args['icase']) ? $post_args['icase'] : null);
         $value = $post_args
             ? WikiPlugin_WikiAdminRename::renameHelper
                 ($page_handle->getName(),

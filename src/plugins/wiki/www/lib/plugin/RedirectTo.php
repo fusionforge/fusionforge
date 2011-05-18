@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: RedirectTo.php 7955 2011-03-03 16:41:35Z vargenau $
+// $Id: RedirectTo.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 2002 $ThePhpWikiProgrammingTeam
  *
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -85,8 +85,9 @@ extends WikiPlugin
             return $this->error(fmt("Recursive redirect to self: '%s'", $url));
         }
 
-        if ($request->getArg('action') != 'browse')
-            return $this->disabled("(action != 'browse')");
+        if ($request->getArg('action') != 'browse') {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
 
         $redirectfrom = $request->getArg('redirectfrom');
         if ($redirectfrom !== false) {

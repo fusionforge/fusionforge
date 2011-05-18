@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: IncludePage.php 7840 2011-01-18 08:44:58Z vargenau $
+// $Id: IncludePage.php 8071 2011-05-18 14:56:14Z vargenau $
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -17,7 +17,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -99,6 +99,9 @@ extends WikiPlugin
 
         $p = $dbi->getPage($page);
         if ($rev) {
+            if (!is_whole_number($rev) or !($rev>0)) {
+                return $this->error(_("Error: rev must be a positive integer."));
+            }
             $r = $p->getRevision($rev);
             if ((!$r) || ($r->hasDefaultContents())) {
                 return $this->error(sprintf(_("%s: no such revision %d."),

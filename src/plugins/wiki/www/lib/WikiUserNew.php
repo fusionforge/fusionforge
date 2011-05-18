@@ -1,5 +1,5 @@
 <?php //-*-php-*-
-//$Id: WikiUserNew.php 7964 2011-03-05 17:05:30Z vargenau $
+//$Id: WikiUserNew.php 8072 2011-05-18 15:45:03Z vargenau $
 /* Copyright (C) 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright (C) 2009-2010 Roger Guignard, Alcatel-Lucent
@@ -17,9 +17,10 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+
 /**
  * This is a complete OOP rewrite of the old WikiUser code with various
  * configurable external authentication methods.

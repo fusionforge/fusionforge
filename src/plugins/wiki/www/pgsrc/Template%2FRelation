@@ -1,6 +1,6 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
+Date: Wed, 13 Apr 2011 15:47:43 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Template%2FRelation 7757 2010-12-09 13:53:00Z vargenau $
+X-Rcs-Id: $Id: Template%2FRelation 8046 2011-04-13 13:50:57Z vargenau $
 Content-Type: application/x-phpwiki;
   pagename=Template%2FRelation;
   flags="";
@@ -8,7 +8,7 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-//SemanticSearch for pages with the *%%PAGENAME%%* relation://
+//SemanticSearch for pages with the// **//%%PAGENAME%%//** //relation://
 
 <<SemanticSearch page="*" relation=%%PAGENAME%% s="*" case_exact=1 noform=1 >>
 
