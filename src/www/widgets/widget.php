@@ -80,6 +80,7 @@ if ($request->valid($vOwner)) {
                             break;
                         case 'ajax':
                             if ($widget->isAjax()) {
+				sysdebug_off();
                                 $widget->loadContent($instance_id);
                                 echo $widget->getContent();
                                 exit();
