@@ -75,7 +75,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 				.'<td>'.db_result($result, $i, 'artifact_id').'</td>'
 				.'<td><a href="'.util_make_url ('/tracker/?group_id='.$groupId.'&amp;atid=' . db_result($result, $i, 'group_artifact_id') . '&amp;func=detail&aid=' . db_result($result, $i, 'artifact_id')).'"> '
-				. html_image('ic/msg.png', '10', '12', array('border'=>'0'))
+				. html_image('ic/tracker20g.png')
 				. ' '.db_result($result, $i, 'summary').'</a></td>'
 				. '<td>'.db_result($result, $i, 'realname')."</td>"
 				. '<td>'.date($dateFormat, db_result($result, $i, 'open_date')).'</td></tr>';
