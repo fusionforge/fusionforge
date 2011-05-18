@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:45 +0000
+Date: Tue, 25 Jan 2011 21:26:14 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AjouterDesCommentaires 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aide%2FPluginAjouterDesCommentaires 7896 2011-01-25 20:27:58Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=AjouterDesCommentaires;
+  pagename=Aide%2FPluginAjouterDesCommentaires;
   flags="";
   markup=2;
   charset=utf-8
@@ -17,20 +17,20 @@ wikicomment-header, wikicomment-body, wikicomment-footer.
 
 ===Usage
 {{{
-     <<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0 >>
+     <<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0>>
 }}}
 
 ===Arguments
-__jshide__: |
+**jshide**: |
   Booléen si les commentaires et/ou le texte doivent être initialement cachés
   et développés par un clique. Par défaut : 0
-__order__:  |
+**order**:  |
   Affiche les commentaires dans l'ordre chronologique (order=normal) ou inverse (order=reverse)
-__mode__:  |
+**mode**:  |
   Ajouter et/ou montrer. Défaut : add,show
-__noheader__:  |
+**noheader**:  |
   Booléen si le titre "Commentaires" au format h2 doit être omis. Par défaut : 0
-__pagename__:  |
+**pagename**:  |
   Attacher à quelle page ? Par défaut : la page courante.
 
 ===Avertissements
@@ -39,8 +39,9 @@ jshide pas vraiment bien testé.
 
 ===Exemples
 
-<<AddComment jshide||=1 >>
+<<AddComment jshide||=1>>
 
+<noinclude>
 ----
-
-[[CategoryPluginWiki]]
+[[DocumentationDePhpWiki]] [[CatégoriePluginWiki]]
+</noinclude>

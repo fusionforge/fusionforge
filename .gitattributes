@@ -2870,6 +2870,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FInterWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FLienGoogle -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPlugin%C3%89diterMetaData -text
+src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginAjouterDesCommentaires -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginAlbumPhotos -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginBeauTableau -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginBonjourLeMonde -text
@@ -2900,7 +2901,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FStyleCorrect -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FURLMagiquesPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FWabiSabi -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FWikiWikiWeb -text
-src/plugins/wiki/www/locale/fr/pgsrc/AjouterDesCommentaires -text
 src/plugins/wiki/www/locale/fr/pgsrc/AliasAccueil -text
 src/plugins/wiki/www/locale/fr/pgsrc/Bac%C3%80Sable -text
 src/plugins/wiki/www/locale/fr/pgsrc/CarteInterWiki -text
