@@ -31,31 +31,31 @@ require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/AttachManager.class.php';
 
 function forum_header($params) {
-	global $HTML,$group_id,$forum_name,$forum_id,$f,$group_forum_id;
+	global $HTML, $group_id, $forum_name, $forum_id, $f, $group_forum_id;
 
 	if ($group_forum_id) {
-		$forum_id=$group_forum_id;
+		$forum_id = $group_forum_id;
 	}
 	if (!forge_get_config('use_forum')) {
 		exit_disabled();
 	}
 
-	$params['group']=$group_id;
-	$params['toptab']='forums';
+	$params['group'] = $group_id;
+	$params['toptab'] = 'forums';
 
 	if ($forum_id) {
 		// Check if this is a news item, to display it at the top of the page
-		$result = db_query_params ('SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id=$1',
+		$result = db_query_params('SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id=$1',
 					   array ($forum_id));
-		
+
 		if (db_numrows($result) == 1) {
-			
+
 			// checks which group the news item belongs to
-			$params['group']=db_result($result,0,'group_id');
-			$params['toptab']='news';
-			$params['title']= _('Forum: ') . db_result($result,0,'summary');
+			$params['group'] = db_result($result, 0, 'group_id');
+			$params['toptab'] = 'news';
+			$params['title'] = _('Forum: ') . db_result($result,0,'summary');
 			$HTML->header($params);
-		
+
 			echo '<table><tr><td valign="top">';
 			$user = user_get_object(db_result($result,0,'submitted_by'));
 			$group = group_get_object($params['group']);
@@ -66,23 +66,23 @@ function forum_header($params) {
 				<strong>'._('Posted by').':</strong> '.$user->getRealName().'<br />
 				<strong>'._('Date').':</strong> '. date(_('Y-m-d H:i'),db_result($result,0,'post_date')).'<br />
 				<strong>'._('Summary').':</strong>'.
-				util_make_link ('/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'&amp;group_id='.$group_id,
-						db_result($result,0,'summary')).'<br/>
+				util_make_link('/forum/forum.php?forum_id='.db_result($result, 0, 'forum_id').'&amp;group_id='.$group_id,
+						db_result($result, 0, 'summary')).'<br/>
 				<strong>'._('Project').':</strong>'.
-				util_make_link_g ($group->getUnixName(),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
+				util_make_link_g($group->getUnixName(),db_result($result, 0, 'group_id'),$group->getPublicName()).'<br />
 				</p>
 				';
 			$body = db_result($result,0,'details');
 			$body = TextSanitizer::purify($body);
 			if (!strstr($body,'<')) {
 				//backwards compatibility for non html messages
-				echo util_make_links(nl2br($body)); 
+				echo util_make_links(nl2br($body));
 			} else {
 				echo util_make_links($body);
 			}
-			
+
 			// display classification
-			if ($params['group'] == forge_get_config('news_group')) { 
+			if ($params['group'] == forge_get_config('news_group')) {
 				print stripslashes(trove_news_getcatlisting(db_result($result,0,'forum_id'),0,1));
 			} elseif (forge_get_config('use_trove')) {
 				print stripslashes(trove_getcatlisting($params['group'],0,1));
@@ -96,12 +96,12 @@ function forum_header($params) {
 			$HTML->header($params);
 		}
 	} else {
-		$menu_text=array();
-		$menu_links=array();
-		
-		$menu_text[]=_('View Forums');
-		$menu_links[]='/forum/?group_id='.$group_id;
-		
+		$menu_text = array();
+		$menu_links = array();
+
+		$menu_text[] = _('View Forums');
+		$menu_links[] = '/forum/?group_id='.$group_id;
+
 		if ($f){
 			if ($forum_id) {
 				$menu_text[]=_('Discussion Forums:') .' '. $f->getName();
@@ -110,7 +110,7 @@ function forum_header($params) {
 			if (forge_check_perm ('forum_admin', $f->Group->getID())) {
 				$menu_text[]=_('Administration');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
-			} 
+			}
 		} else {
 			$gg=group_get_object($group_id);
 			if (forge_check_perm ('forum_admin', $group_id)) {
@@ -121,14 +121,14 @@ function forum_header($params) {
 		if (count($menu_text) > 0) {
 			$params['submenu'] =$HTML->subMenu($menu_text,$menu_links);
 		}
-		
+
 		site_project_header($params);
 	}
 
 	$pluginManager = plugin_manager_get_object();
 	if ($f && $pluginManager->PluginIsInstalled('blocks') && plugin_hook ("blocks", "forum_".$f->getName()))
 		echo '<br />';
-	
+
 	if (session_loggedin() ) {
 		if ($f) {
 			if ($f->isMonitoring()) {
@@ -143,7 +143,7 @@ function forum_header($params) {
 		}
 	} elseif ($f) {
 		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
-			html_image('ic/mail16w.png').' '._('Monitor Forum').'</a> | ';		
+			html_image('ic/mail16w.png').' '._('Monitor Forum').'</a> | ';
 	}
 
 	if ($f && $forum_id) {
@@ -248,10 +248,10 @@ class ForumHTML extends Error {
 		$msgforum =& $msg->getForum();
 		$fa = new ForumAdmin($msgforum->Group->getID());
 		$url = util_make_uri('/forum/message.php?msg_id='. $msg->getID() .'&amp;group_id='.$group_id);
-		$ret_val = 		
+		$ret_val =
 		'<table border="0" width="100%" cellspacing="0">
 			<tr>
-				<td class="tablecontent" style="white-space: nowrap;" valign="top">'; 
+				<td class="tablecontent" style="white-space: nowrap;" valign="top">';
 
 		$params = array('user_id' => $msg->getPosterID(), 'size' => 's', 'content' => '');
 		plugin_hook_by_reference("user_logo", $params);
@@ -266,14 +266,14 @@ class ForumHTML extends Error {
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';
 		if (forge_check_perm ('forum_admin', $msgforum->Group->getID())) {
 			$ret_val .= $fa->PrintAdminMessageOptions($msg->getID(),$group_id,$msg->getThreadID(),$msgforum->getID());
-		} 
+		}
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID());
 		$ret_val .= '
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					'; 
+					';
 					if (strpos($msg->getBody(),'<') === false) {
 			$ret_val .= nl2br($msg->getBody()); //backwards compatibility for non html messages
 		} else {
@@ -300,17 +300,17 @@ class ForumHTML extends Error {
 
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
 		$return_val = '
-			
+
 			<form action="' . getStringFromServer('PHP_SELF') . '" method="post" enctype="multipart/form-data">
 			<table>
 			<tr>
 				<td>' . _('Current File') . ": <span class=\"selected\">" . $filename . '</span></td>
 			</tr>
 			</table>
-			
+
 			<fieldset class=\"fieldset\">
 			<table>
-					
+
 					<tr>
 						<td>' . _('Use the "Browse" button to find the file you want to attach') . '</td>
 					</tr>
@@ -353,8 +353,8 @@ class ForumHTML extends Error {
 					<td>" . _('File to upload') . ":   <input type=\"file\" name=\"attachment1\"/></td>
 				</tr>
 		</table>
-		
-		</fieldset>";	
+
+		</fieldset>";
 
 	}
 
@@ -526,13 +526,13 @@ class ForumHTML extends Error {
 		}
 		unset($GLOBALS['editor_was_set_up']);
 				?>
-			<br /><br />		
+			<br /><br />
 
 				<p>
 				<?php //$this->LinkAttachForm();?>
 				<p>
-		
-		
+
+
 		<?php
 		?>
 		<br />
@@ -551,7 +551,7 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 	global $group_id;
 
 	$body = '';
-	
+
 	if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
 		if ($subject) {
 			//if this is a followup, put a RE: before it if needed
@@ -594,8 +594,8 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		<br>
 		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
 		<p><?php $this->LinkAttachForm();?>
-		
-		
+
+
 		<p><?php
 		if (!session_loggedin()) {
 			echo '<span class="highlight">';

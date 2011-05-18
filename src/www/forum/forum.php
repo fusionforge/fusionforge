@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001, Tim Perdue - Sourceforge
  * Copyright 2002, Tim Perdue - GForge, LLC
- * Copyright 2010 (c) Franck Villaume - Capgemini
+ * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -46,14 +46,14 @@ if ($forum_id) {
 	/*
 		Get the group_id based on this forum_id
 	*/
-	$result=db_query_params ('SELECT group_id
+	$result=db_query_params('SELECT group_id
 		FROM forum_group_list
 		WHERE group_forum_id=$1',
 			array($forum_id));
 	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('Error forum not found: ').db_error(),'forums');
+		exit_error(_('Error forum not found: ').db_error(), 'forums');
 	}
-	$group_id=db_result($result,0,'group_id');
+	$group_id = db_result($result,0,'group_id');
 
 	//
 	//	Set up local objects
@@ -63,11 +63,11 @@ if ($forum_id) {
 		exit_no_group();
 	}
 
-	$f=new Forum($g,$forum_id);
+	$f=new Forum($g, $forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error(_('Error getting new Forum'),'forums');
+		exit_error(_('Error getting new Forum'), 'forums');
 	} elseif ($f->isError()) {
-		exit_error($f->getErrorMessage(),'forums');
+		exit_error($f->getErrorMessage(), 'forums');
 	}
 
 	/*
@@ -81,13 +81,13 @@ if ($forum_id) {
 		$body = getStringFromRequest('body');
 		$is_followup_to = getStringFromRequest('is_followup_to');
 
-		$fm=new ForumMessage($f);
+		$fm = new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error getting new ForumMessage'),'forums');
+			exit_error(_('Error getting new ForumMessage'), 'forums');
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error getting new ForumMessage:'.' '.$fm->getErrorMessage()),'forums');
+			exit_error(_('Error getting new ForumMessage:'.' '.$fm->getErrorMessage()), 'forums');
 		}
 
 		if (getStringFromRequest('_body_content_type') == 'html') {
@@ -105,16 +105,16 @@ if ($forum_id) {
 
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to,$has_attach) || $fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error creating ForumMessage:').' '.$fm->getErrorMessage(),'forums');
+			exit_error(_('Error creating ForumMessage:').' '.$fm->getErrorMessage(), 'forums');
 		} else {
 			if ($fm->isPending() ) {
-				$feedback=_('Message Queued for moderation -> Please wait until the admin approves/rejects it');
+				$feedback = _('Message Queued for moderation -> Please wait until the admin approves/rejects it');
 			} else {
-				$feedback=_('Message Posted Successfully');
+				$feedback = _('Message Posted Successfully');
 			}
-			$am = NEW AttachManager();//object that will handle and insert the attachment into the db
+			$am = new AttachManager();//object that will handle and insert the attachment into the db
 			$am->SetForumMsg($fm);
-			$am->attach($attach,$group_id,0,$fm->getID());
+			$am->attach($attach, $group_id, 0, $fm->getID());
 			foreach ($am->Getmessages() as $item) {
 				$feedback .= "<br />" . $item;
 			}
@@ -130,14 +130,14 @@ if ($forum_id) {
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
 		form_release_key(getStringFromRequest("form_key"));
-		exit_error(_('Error getting new ForumMessageFactory'),'forums');
+		exit_error(_('Error getting new ForumMessageFactory'), 'forums');
 	} elseif ($fmf->isError()) {
 		form_release_key(getStringFromRequest("form_key"));
-		exit_error($fmf->getErrorMessage(),'forums');
+		exit_error($fmf->getErrorMessage(), 'forums');
 	}
 
 //echo "<br /> style: $style|max_rows: $max_rows|offset: $offset+";
-	$fmf->setUp($offset,$style,$max_rows,$set);
+	$fmf->setUp($offset, $style, $max_rows, $set);
 
 	$style=$fmf->getStyle();
 	$max_rows=$fmf->max_rows;
@@ -147,12 +147,12 @@ if ($forum_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error(_('Error getting new ForumHTML'),'forums');
+		exit_error(_('Error getting new ForumHTML'), 'forums');
 	} elseif ($fh->isError()) {
-		exit_error($fh->getErrorMessage(),'forums');
+		exit_error($fh->getErrorMessage(), 'forums');
 	}
 
-	forum_header(array('title'=>_('Forum: ') . $f->getName(),'forum_id'=>$forum_id));
+	forum_header(array('title'=>_('Forum: ') . $f->getName(), 'forum_id'=>$forum_id));
 
 /**
  *
