@@ -1,22 +1,22 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Tue,  4 Jan 2011 11:58:08 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ComeUsareWiki 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aiuto%2FComeUsareWiki 7860 2011-01-22 12:39:04Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=ComeUsareWiki;
+  pagename=Aiuto%2FComeUsareWiki;
   flags=PAGE_LOCKED;
   charset=utf-8
 Content-Transfer-Encoding: binary
 
 ''"Wiki wiki"'' significa "veloce" in Hawaiano
 
-__Tutto quello che devi sapere è:__
+**Tutto quello che devi sapere è:**
 
 * Per mofificare qualsiasi pagina clicca sul pulsante Modifica Testo alla fine della pagina. Fallo adesso e leggi il sorgente della pagina, tutto avrà più senso
 
 * Puoi ottenere il corsivo circondando le parole con due apici da entrambe le parti come ''questo ad esempio''
 
-* Puoi ottenere testo in __grassetto__ usando gli underscore in questo modo sempre circondando il testo 
-* E, __''grassetto corsivo''__ usandoli entrambi
+* Puoi ottenere testo in **grassetto** usando gli underscore in questo modo sempre circondando il testo 
+* E, **''grassetto corsivo''** usandoli entrambi
 * Potrai ottenere liste puntate aggiungendo un
 * all'inizio di una linea
 * Per avere un font monospace (tipo macchina da scrivere) puoi iniziare con uno spazio la riga come ad esempio:

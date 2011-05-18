@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Tue,  4 Jan 2011 11:58:08 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: MagicPhpWikiURLs 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Aiuto%2FMagicPhpWikiURLs 7860 2011-01-22 12:39:04Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=MagicPhpWikiURLs;
+  pagename=Aiuto%2FMagicPhpWikiURLs;
   flags=PAGE_LOCKED;
   charset=utf-8
 Content-Transfer-Encoding: binary
@@ -14,7 +14,7 @@ administrative and other special functions in PhpWiki.  Here is a
 brief description of how they work.
 
 The basic syntax of a phpwiki: URL is
-  __phpwiki:__''pagename''__?__''query-args''
+  **phpwiki:**''pagename''**?**''query-args''
 
 If ''pagename'' is omitted it defaults to the current page.
 
@@ -22,32 +22,32 @@ If ''pagename'' is omitted it defaults to the current page.
 HTTP GET format.
 
 The "action=''x''" parameter should almost always be given.  It can be one of
-__browse__, __info__, __diff__, __search__, __edit__,
-__zip__, __dumpserial__, __loadserial__,
-__remove__, __lock__, __unlock__,
-__login__, __logout__, __setprefs__ or __save__.
-The default action is __browse__.
+**browse**, **info**, **diff**, **search**, **edit**,
+**zip**, **dumpserial**, **loadserial**,
+**remove**, **lock**, **unlock**,
+**login**, **logout**, **setprefs** or **save**.
+The default action is **browse**.
 
 Some of the actions accept other parameters.
 
-;__info__: Accepts __showpagesource__.
-;__search__: Accepts __searchterm__, and __searchtype__.
-;__edit__: Accepts __version__.
-;__remove__: Accepts __verify__.
-;__save__: Accepts __editversion__, __minor_edit__, and  __content__.
-;__setprefs__: Accepts __edit_area_width__, __edit_area_height__.
+;**info**: Accepts **showpagesource**.
+;**search**: Accepts **searchterm**, and **searchtype**.
+;**edit**: Accepts **version**.
+;**remove**: Accepts **verify**.
+;**save**: Accepts **editversion**, **minor_edit**, and  **content**.
+;**setprefs**: Accepts **edit_area_width**, **edit_area_height**.
 
 
 === Writing Magic Links in Wiki Pages
 
 A magic link looks like:
 
-  __[[__ ''text'' __|__ ''phpwiki-url'' __]__
+  **[[** ''text'' **|** ''phpwiki-url'' **]**
 
-The "''text'' __|__" is optional but usually recommended.
+The "''text'' **|**" is optional but usually recommended.
 If given it will provide the label for the link.
 
-The ''phpwiki-url'' is a __phpwiki:__ URL as described above.
+The ''phpwiki-url'' is a **phpwiki:** URL as described above.
 
 ==== Some examples
 
@@ -63,10 +63,10 @@ Other possibilites:
 
 === Writing Magic Forms in Wiki Pages
 
-''__Note__: Magic forms are on their way out, I think.  They are being superceded by <''''?plugin-form>s.''
+''**Note**: Magic forms are on their way out, I think.  They are being superceded by <''''?plugin-form>s.''
 
 If one of the ''query-args'' has a value like
-  ''arg''__=__''opt-width''__(__''opt-dflt-val''__)__
+  ''arg''**=**''opt-width''**(**''opt-dflt-val''**)**
 the link will be rendered as a form, rather than as an anchor.
 
 ''Opt-width'', if given specifies the size of the input area, while
