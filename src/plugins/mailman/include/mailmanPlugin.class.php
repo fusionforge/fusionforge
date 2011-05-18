@@ -75,7 +75,7 @@ class mailmanPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mailman")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we�re calling is the user one
+				$param = '?type=user&id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we�re calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 					array ('/plugins/mailman/index.php' . $param ));				
 			}
@@ -93,7 +93,7 @@ class mailmanPlugin extends Plugin {
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
-				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . "&pluginname=" . $this->name; // we indicate the part we�re calling is the project one
+				$params['DIRS'][]='/plugins/mailman/index.php?group_id=' . $group_id . "&amp;pluginname=" . $this->name; // we indicate the part we�re calling is the project one
                 $params['ADMIN'][]='';
 			} 
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
@@ -130,11 +130,10 @@ class mailmanPlugin extends Plugin {
 			// this displays the link in the user�s profile page to it�s personal mailman (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
 			$user = user_get_object($userid);
-			$text = $params['text'];
 			//check if the user has the plugin activated
 			if ($user->usesPlugin($this->name)) {
 				echo '	<p>' ;
-				echo util_make_link ("/plugins/mailman/index.php?id=$userid&type=user&pluginname=".$this->name,
+				echo util_make_link ("/plugins/mailman/index.php?id=$userid&amp;type=user&amp;pluginname=".$this->name,
 									 _('View Personal mailman')
 				);
 				echo '</p>';
@@ -144,7 +143,7 @@ class mailmanPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$group = &group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
-				echo '<p>'.util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
+				echo '<p>'.util_make_link ("/plugins/projects_hierarchy/index.php?id=".$group->getID().'&amp;type=admin&amp;pluginname='.$this->name,
 									 _('View the mailman Administration')).'</p>';
 			}
 		}												    

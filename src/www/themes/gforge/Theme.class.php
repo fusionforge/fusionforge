@@ -153,16 +153,29 @@ class Theme extends Layout {
 	 * @param   string  The box background color
 	 */
 	function boxTop($title, $id = '') {
+		if ($id) {
+			$id = $this->toSlug($id);
+			$idid = ' id="' . $id . '"';
+			$idtitle = ' id="' . $id . '-title"';
+			$idtcont = ' id="' . $id . '-title-content"';
+			$idcont = ' id="' . $id . '-content"';
+		} else {
+			$idid = "";
+			$idtitle = "";
+			$idtcont = "";
+			$idcont = "";
+		}
+
 		$t_result = '
-		<div id="' . $this->toSlug($id) . '" class="box-surround">
-		<div id="'. $this->toSlug($id) . '-title" class="box-title">
+		<div' . $idid . ' class="box-surround">
+		<div' . $idtitle . ' class="box-title">
 			<div class="box-title-left">
 				<div class="box-title-right">
-					<h3 class="box-title-content" id="'. $this->toSlug($id) .'-title-content">'. $title .'</h3>
+					<h3 class="box-title-content"' . $idtcont . '>'. $title .'</h3>
 				</div> <!-- class="box-title-right" -->
 			</div> <!-- class="box-title-left" -->
 		</div> <!-- class="box-title" -->
-		<div id="'. $this->toSlug($id) .'-content" class="box-content">
+		<div' . $idcont . ' class="box-content">
 		';
 		return $t_result;
 	}
@@ -174,9 +187,16 @@ class Theme extends Layout {
 	 * @param   string  The box background color
 	 */
 	function boxMiddle($title, $id = '') {
+		if ($id) {
+			$id = $this->toSlug($id);
+			$idtitle = ' id="' . $id . '-title"';
+		} else {
+			$idtitle = "";
+		}
+
 		$t_result ='
 			</div> <!-- class="box-content" -->
-		<h3 id="title-'. $this->toSlug($id).'" class="box-middle">'.$title.'</h3>
+		<h3' . $idtitle . ' class="box-middle">'.$title.'</h3>
 		<div class="box-content">
 	';
 		return $t_result;

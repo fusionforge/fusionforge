@@ -52,7 +52,7 @@ if (forge_check_perm ('tracker_admin', $group_id)) {
 
 if (!$at_arr || count($at_arr) < 1) {
 	echo '<div class="warning">'._('No Accessible Trackers Found').'</div>';
-	echo "<p><strong>".sprintf(_('No trackers have been set up, or you cannot view them.<p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>')."</strong>";
+	printf(_('<p><strong>No trackers have been set up, or you cannot view them.</strong></p><p><span class="important">The Admin for this project will have to set up data types using the %1$s admin page %2$s</span></p>'), '<a href="'.util_make_url ('/tracker/admin/?group_id='.$group_id).'">', '</a>');
 } else {
 
 	plugin_hook ("blocks", "tracker index");

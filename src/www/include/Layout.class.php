@@ -650,7 +650,7 @@ class Layout extends Error {
 
 				echo '
 					<form id="quicknavform" name="quicknavform" action=""><div>
-					<select name="quicknav" id="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
+					<select name="quicknav" id="quicknav">
 					<option value="">'._('Quick Jump To...').'</option>';
 
 				foreach ($groups as $g) {
@@ -1239,9 +1239,13 @@ class Layout extends Error {
 		if (function_exists('iconv')) {
 			$string = @iconv('UTF-8', 'ASCII//TRANSLIT', $string);
 		}
-		$string = preg_replace("/[^a-zA-Z0-9- ]/", "-", $string);
+		$string = preg_replace("/[^a-zA-Z0-9_:. -]/", "-", $string);
 		$string = strtolower($string);
 		$string = str_replace(" ", $space, $string);
+		if (!preg_match("/^[a-zA-Z:_]/", $string)) {
+			/* some chars aren't allowed at the begin */
+			$string = "_" . $string;
+		}
 		return $string;
 	}
 

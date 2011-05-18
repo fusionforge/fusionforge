@@ -120,7 +120,7 @@ $p =& $plugin_manager->getPluginByName('mailman');
 				}
 			} else {
 				echo htmlspecialchars($currentList->getDescription()).'</td>';
-				$archives =' <A HREF="index.php?group_id='.$request->get('group_id').'&action=pipermail&id='.$currentList->getID().'">'._('Archives').'</A>';
+				$archives =' <a href="index.php?group_id='.$request->get('group_id').'&amp;action=pipermail&amp;id='.$currentList->getID().'">'._('Archives').'</a>';
 				plugin_hook('browse_archives', array('html' => &$archives, 'group_list_id' => $currentList->getID()));
 				echo '<td>'.$archives.'</td>';
 				if(isLogged())
@@ -136,7 +136,7 @@ $p =& $plugin_manager->getPluginByName('mailman');
 						echo  '</a></td> <td></td>';
 					}
 					if ($currentList->getListAdminID() == $current_user->getID()){
-						echo ' <td> <A HREF="index.php?group_id='. $request->get('group_id').'&action=admin&id='. $currentList->getID() .'">'._('Administrate').'</A> ';
+						echo ' <td> <a href="index.php?group_id='. $request->get('group_id').'&amp;action=admin&amp;id='. $currentList->getID() .'">'._('Administrate').'</a> ';
 					}
 					else { echo '<td>';}
 				}
@@ -172,17 +172,17 @@ function display_list_admin($currentList)
 				echo	'<td>'._('Not activated yet').'</td>';
 			}
 			else{
-				echo '<td>'._('Error during creation').'  <A HREF="/plugins/mailman/admin/index.php?group_id='.$request->get('group_id').'&action=recreate&group_list_id='.$currentList->getID().'">'._('Re-create').'</A></td>';
+				echo '<td>'._('Error during creation').'  <a href="/plugins/mailman/admin/index.php?group_id='.$request->get('group_id').'&amp;action=recreate&amp;group_list_id='.$currentList->getID().'">'._('Re-create').'</a></td>';
 			}
 			echo '<td></td><td></td><td></td>';
 		} else {
 
 			echo '<td>'.htmlspecialchars($currentList->getDescription()).'</td>';
-			echo '<td> <A HREF="index.php?group_id='.$request->get('group_id').'&change_status=1&group_list_id='.$currentList->getID().'">'._('Update').'</A></td>';
+			echo '<td> <a href="index.php?group_id='.$request->get('group_id').'&amp;change_status=1&amp;group_list_id='.$currentList->getID().'">'._('Update').'</a></td>';
 			echo '<td> <a href="deletelist.php?group_id='.$currentList->Group->getID().'&id='.$currentList->getID().'">'. _('Delete').'</td>';
 
 			if ($currentList->getListAdminID() == $current_user->getID()){
-				echo ' <td> <A HREF="../index.php?group_id='. $request->get('group_id').'&action=admin&id='. $currentList->getID() .'">'._('Administrate from Mailman').'</td> ';
+				echo ' <td> <a href="../index.php?group_id='. $request->get('group_id').'&amp;action=admin&amp;id='. $currentList->getID() .'">'._('Administrate from Mailman').'</a></td> ';
 			}
 		}
 
@@ -201,21 +201,21 @@ function mailman_header($params) {
 	$params['toptab'] = 'mailman';
 
 	site_project_header($params);
-	echo '<P><B>';
+	echo '<p><b>';
 	// admin link is only displayed if the user is a project administrator
 	if ($current_user->isMember($request->get('group_id'),'A')) {
 		if (isset($params['admin'])){
-			echo '<A HREF="index.php?group_id='.$request->get('group_id').'">'._('Administration').'</A>';
+			echo '<a href="index.php?group_id='.$request->get('group_id').'">'._('Administration').'</a>';
 		}
 		else{
-			echo '<A HREF="admin/index.php?group_id='.$request->get('group_id').'">'._('Administration').'</A>';
+			echo '<a href="admin/index.php?group_id='.$request->get('group_id').'">'._('Administration').'</a>';
 		}
 
 	}
 	if ($params['help']) {
 		helpButton($params['help']);
 	}
-
+	echo "</b></p>\n";
 }
 
 function mail_footer($params) {

@@ -157,6 +157,7 @@ echo notepad_func();
 </div>
 <div class="tabbertab" title="<?php echo _('Commits'); ?>" >
 <table border="0" width="80%">
+<tr><td colspan="2"><!-- dummy in case the hook is empty --></td></tr>
 	<?php
 		$hookParams['artifact_id']=$aid;
 		plugin_hook("artifact_extra_detail",$hookParams);

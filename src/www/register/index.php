@@ -131,7 +131,7 @@ if (getStringFromRequest('submit')) {
 			$HTML->header(array('title'=>_('Registration complete')));
 
 			if ( ! forge_get_config ('project_auto_approval') ) {
-				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 			} else if ($group->isError()) {
 				printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
 			} else {
@@ -140,7 +140,7 @@ if (getStringFromRequest('submit')) {
 				if (!$group->approve( user_get_object_by_name ( forge_get_config ('project_auto_approval_user') ) ) ) {
 					printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 				} else {
-					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 				}
 			}
 

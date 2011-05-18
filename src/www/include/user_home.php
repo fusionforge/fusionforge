@@ -174,7 +174,7 @@ if (forge_get_config('use_diary')) {
 		echo _('Diary/Note entries:').' '.db_result($res,0,0).'
 		<p>';
 		//.'<span rel="foaf:weblog">'
-		echo util_make_link ('/developer/diary.php?diary_user='.$user_id,_('View Diary & Notes'));
+		echo util_make_link ('/developer/diary.php?diary_user='.$user_id,htmlentities(_('View Diary & Notes')));
 		//.'</span>'.
 		echo '</p>
 		<p>';
@@ -204,7 +204,7 @@ if (count ($projects) < 1) {
 	<p><?php echo _('This developer is not a member of any projects.') ?></p>
 	<?php
 } else { // endif no groups
-	print "<p>"._('This developer is a member of the following projects:')."<br />&nbsp;";
+	print "<p>"._('This developer is a member of the following projects:')."</p>\n";
 	
 	foreach ($projects as $p) {
 		$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
@@ -213,17 +213,19 @@ if (count ($projects) < 1) {
 		$usergroup_uri = $project_uri .'members/';
 		
 		
-		print '<span rel="sioc:member_of">'."\n"
+		print '<div rel="sioc:member_of">'."\n"
 			.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
-			.'<span rel="sioc:usergroup_of">'."\n"
+			.'<div rel="sioc:usergroup_of">'."\n"
 			.'<div about="'. $project_uri .'" typeof="sioc:Space">';
 		$role_names = array () ;
+		$sioc_has_function_close = "";
 		foreach ($roles as $r) {
 			if ($r instanceof RoleExplicit
 			    && $r->getHomeProject() != NULL
 			    && $r->getHomeProject()->getID() == $p->getID()) {
 				$role_names[] = $r->getName() ;
 				print '<div property="sioc:has_function" content= "'.$r->getName().'">';
+				$sioc_has_function_close .= "</div>";
 			}
 		}
 		
@@ -237,12 +239,12 @@ if (count ($projects) < 1) {
 			print '<span rev="doap:developer" resource="#me"></span>';
 		}
 		
+		echo $sioc_has_function_close."\n";  // sioc:has_function
 		echo "</div>\n";  // sioc:Space .../projects/A_PROJECT/
-		echo "</span>\n"; // sioc:usergroup_of
+		echo "</div>\n"; // sioc:usergroup_of
 		echo "</div>\n";  // sioc:UserGroup .../projects/A_PROJECT/members
-		echo "</span>\n"; // sioc:member_of
+		echo "</div>\n"; // sioc:member_of
 	}
-	print '</p>';
 } // end if groups
 echo "</div>\n"; // prefixes
 

@@ -133,6 +133,8 @@ forge_define_config_item ('sysdebug_backtraces', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_backtraces', 'core') ;
 forge_define_config_item ('sysdebug_ignored', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_ignored', 'core') ;
+forge_define_config_item ('sysdebug_dbquery', 'core', 'false') ;
+forge_set_config_item_bool ('sysdebug_dbquery', 'core') ;
 forge_define_config_item ('sysdebug_xmlstarlet', 'core', 'false') ;
 forge_set_config_item_bool ('sysdebug_xmlstarlet', 'core') ;
 forge_define_config_item ('sysdebug_akelos', 'core', 'false') ;
@@ -174,8 +176,25 @@ if (!$sysdebug_enable || !forge_get_config('sysdebug_xmlstarlet')) {
 	}
 }
 
-if ($sysdebug_enable) {
+if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 	require $gfcommon.'include/extras-debug.php';
+} else {
+	$sysdebug_dbquery = false;
+
+	function sysdebug_off($hdr=false, $replace=true, $resp=false) {
+		if ($hdr !== false) {
+			if ($resp === false) {
+				header($hdr, $replace);
+			} else {
+				header($hdr, $replace, $resp);
+			}
+		}
+
+		return false;
+	}
+	function sysdebug_lazymode($enable) {
+		/* nothing */
+	}
 }
 
 // Get constants used for flags or status

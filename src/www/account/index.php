@@ -234,30 +234,39 @@ if (forge_get_config('use_jabber')) {
 // ############################# Preferences
 echo $HTML->boxTop(_('Preferences')); ?>
 
+<div>
 <input type="checkbox" name="mail_site" value="1"<?php
 	if ($u->getMailingsPrefs('site')) print " checked=\"checked\""; ?> />
 	<?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
+</div>
 
-<p /><input type="checkbox"  name="mail_va" value="1"<?php
+<div>
+<input type="checkbox"  name="mail_va" value="1"<?php
 	if ($u->getMailingsPrefs('va')) print " checked=\"checked\""; ?> />
 	<?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
+</div>
+
 <?php /*
-<p /><input type="checkbox"  name="remember_user" value="1"<?php
+<div>
+<input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked=\"checked\""; ?> />
 <?php printf(_('"Remember me". <i>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>'),util_make_url ('/my/'));
+echo "\n</div>";
 */ ?>
 
-<p />
 <?php if (forge_get_config('use_ratings')) { ?>
+<div>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 		<?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId()));
+echo "\n</div>";
 } ?>
-<p />
+<p>
 <input type="checkbox"  name="use_tooltips" value="1"<?php
 	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
 		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
 ?>
+</p>
 </td></tr>
 <?php
 // displays a "Use xxxx Plugin" checkbox

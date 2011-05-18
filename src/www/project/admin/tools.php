@@ -311,7 +311,7 @@ if($group->usesPM()) { ?>
 	<p><a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Tasks Admin') ?></a></p>
 <?php }
 if($group->usesDocman()) { ?>
-	<p><a href="/docman/?group_id=<?php echo $group->getID(); ?>&view=admin"><?php echo _('Documents Admin') ?></a></p>
+	<p><a href="/docman/?group_id=<?php echo $group->getID(); ?>&amp;view=admin"><?php echo _('Documents Admin') ?></a></p>
 <?php }
 if($group->usesSurvey()) { ?>
 	<p><a href="/survey/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Survey Admin') ?></a></p>

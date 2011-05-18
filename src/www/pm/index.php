@@ -83,13 +83,13 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		global $sortcol, $sortorder ;
 
 		if ($sortcol != $val) {
-			return util_make_link ("/pm/?group_id=$group_id&sortcol=$val",
+			return util_make_link ("/pm/?group_id=$group_id&amp;sortcol=$val",
 					       $title) ;
 		} elseif ($sortorder == 'a') {
-			return util_make_link ("/pm/?group_id=$group_id&sortcol=$val&sortorder=d",
+			return util_make_link ("/pm/?group_id=$group_id&amp;sortcol=$val&amp;sortorder=d",
 					       $title.' ▴') ;
 		} else {
-			return util_make_link ("/pm/?group_id=$group_id&sortcol=$val&sortorder=a",
+			return util_make_link ("/pm/?group_id=$group_id&amp;sortcol=$val&amp;sortorder=a",
 					       $title.' ▾') ;
 		}
 	}

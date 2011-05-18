@@ -18,12 +18,14 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-  /** This contains the local settings for Mediawiki as used in the
-   *  Mediawiki plugin of FusionForge.
-   */
+
+/** This contains the local settings for Mediawiki as used in the
+ *  Mediawiki plugin of FusionForge.
+ */
 
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
+sysdebug_lazymode(true);
 
 $IP = forge_get_config('master_path', 'mediawiki');
 
