@@ -1,0 +1,65 @@
+Date: Thu, 13 Jan 2011 17:58:21 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: Help%2FFacebookLikePlugin 7836 2011-01-13 17:04:53Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FFacebookLikePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~FacebookLike** [[Help:WikiPlugin|plugin]] will include a "Facebook-like" button in your wiki page.
+
+== Usage ==
+
+{{{
+<<FacebookLike arguments >>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **width**
+| Button width
+| 450
+|-
+| **height**
+| Button height
+| 35
+|-
+| **colorscheme**
+| 'light' or 'dark'
+| light
+|-
+| **show_faces**
+| 
+| false
+|-
+| **layout**
+| 'standard' or 'button_count'
+| standard
+|-
+| **action**
+| 'like' 'recommend'
+| like
+|}
+
+== Examples ==
+
+== Author ==
+
+* [[PhpWiki:ReiniUrban|Reini Urban]]
+
+== See Also ==
+
+* [[http://developers.facebook.com/docs/reference/plugins/like]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>
