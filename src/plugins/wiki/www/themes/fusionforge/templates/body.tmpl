@@ -1,6 +1,9 @@
 <?php // -*-php-*-
-// $Id: body.tmpl 7720 2010-10-22 18:38:33Z vargenau $
+// $Id: body.tmpl 8028 2011-04-08 13:57:12Z vargenau $
 ?>
+<?php if ($WikiTheme->DUMP_MODE) { ?>
+<body>
+<?php } ?>
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
 <td valign="top">
@@ -44,3 +47,6 @@ else
 </tr>
 </table>
 <?php echo Template('bottom') ?>
+<?php if ($WikiTheme->DUMP_MODE) { ?>
+</body>
+<?php } ?>

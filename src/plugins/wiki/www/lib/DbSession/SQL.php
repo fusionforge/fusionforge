@@ -1,4 +1,4 @@
-<?php // $Id: SQL.php 7956 2011-03-03 17:08:31Z vargenau $
+<?php // $Id: SQL.php 8043 2011-04-13 13:10:09Z vargenau $
 
 /**
  * DB sessions for pear DB
@@ -107,8 +107,7 @@ extends DbSession
             //if (preg_match('|^[a-zA-Z0-9/+=]+$|', $res))
             $res = base64_decode($res);
         if (strlen($res) > 4000) {
-            trigger_error("Overlarge session data! ".strlen($res).
-                        " gt. 4000", E_USER_WARNING);
+            // trigger_error("Overlarge session data! ".strlen($res). " gt. 4000", E_USER_WARNING);
             $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/',"",$res);
             $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/','s:4:"hits"',$res);
             if (strlen($res) > 4000) $res = '';

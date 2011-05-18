@@ -20,7 +20,7 @@
 //  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 //
 //
-// $Id: Pager.php 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: Pager.php 8075 2011-05-18 16:10:53Z vargenau $
 ///
 // Based on DB_Pager 0.7 from the pear.php.net repository. 
 // The only modifications made have been modification of the include paths.

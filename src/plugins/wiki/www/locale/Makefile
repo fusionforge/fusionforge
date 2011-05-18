@@ -1,4 +1,4 @@
-# $Id: Makefile 7941 2011-03-01 15:03:53Z vargenau $
+# $Id: Makefile 8027 2011-04-08 13:03:38Z vargenau $
 #
 # locale/Makefile
 #
@@ -431,7 +431,6 @@ ${POT_FILE}: ../themes/fusionforge/templates/editpage.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/html.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/login.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/navbar.tmpl
-${POT_FILE}: ../themes/fusionforge/templates/pagelink.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/ratings.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/savepage.tmpl
 ${POT_FILE}: ../themes/fusionforge/templates/userprefs.tmpl

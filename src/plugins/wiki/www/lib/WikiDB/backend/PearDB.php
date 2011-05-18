@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: PearDB.php 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: PearDB.php 8042 2011-04-13 13:02:42Z vargenau $
 
 require_once('lib/WikiDB/backend.php');
 //require_once('lib/FileFinder.php');
@@ -395,7 +395,7 @@ extends WikiDB_backend
         unset($data['mtime']);
         assert(!empty($mtime));
 
-        @$content = (string) $data['%content'];
+        $content = isset($data['%content']) ? (string)$data['%content'] : '';
         unset($data['%content']);
 
         unset($data['%pagedata']);

@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: login.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+// $Id: login.tmpl 8011 2011-04-04 15:20:14Z vargenau $
 ?>
 <?php if ($fail_message) { ?>
   <p><strong><?php echo $fail_message?></strong></p>
@@ -68,7 +68,7 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
 <tr>
 <td>
 <fieldset>
-<legend>Sign In</legend>
+<legend><?php echo _("Sign In") ?></legend>
 <table cellspacing="4">
 <tr>
   <td align="right"><?php echo _("UserId:") ?></td>

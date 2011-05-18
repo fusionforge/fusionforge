@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: PearDB_ffpgsql.php 7957 2011-03-03 17:38:22Z vargenau $
+// $Id: PearDB_ffpgsql.php 8071 2011-05-18 14:56:14Z vargenau $
 
 /*
  * Copyright (C) 2001-2009 $ThePhpWikiProgrammingTeam
@@ -18,9 +18,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- */
+*/
 
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
@@ -110,8 +110,12 @@ extends WikiDB_backend_PearDB_pgsql
             $this->_get_pageid($pagename, true); // Creates page record
         }
       
-        @$hits = (int)$data['hits'];
-        unset($data['hits']);
+        if (isset($data['hits'])) {
+             $hits = (int)$data['hits'];
+             unset($data['hits']);
+        } else {
+             $hits = 0;
+        }
 
         foreach ($newdata as $key => $val) {
             if ($key == 'hits')
