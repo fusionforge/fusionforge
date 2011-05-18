@@ -1,20 +1,20 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Tue,  4 Jan 2011 11:59:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: WieManWikiBenutzt 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Hilfe%2FWieManWikiBenutzt 7858 2011-01-22 09:33:54Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=WieManWikiBenutzt;
+  pagename=Hilfe%2FWieManWikiBenutzt;
   flags="";
   charset=utf-8
 Content-Transfer-Encoding: binary
 
 ''»Wiki wiki«'' heißt »schnell« auf Hawai'anisch.
 
-__Alles was du wissen mußt ist:__
+**Alles was du wissen mußt ist:**
 
 * Klicke auf »Editieren« am unteren Ende der Seite, um sie zu bearbeiten. Du solltest das gleich jetzt tun und den Quelltext dieser Seite lesen - es ergibt dann mehr Sinn.
 * Kursiven Text bekommt man, indem man Wörter in jeweils zwei Apostrophen ' einschließt, ''wie in diesem Beispiel''.
-* Fette Schrift bekommt man, indem man Wörter in jeweils zwei untergesetzten Strichen einschließt, __wie in diesem Beispiel__
-* Und beides, indem man __''beides verwendet''__.
+* Fette Schrift bekommt man, indem man Wörter in jeweils zwei untergesetzten Strichen einschließt, **wie in diesem Beispiel**
+* Und beides, indem man **''beides verwendet''**.
 * Eine Liste erhält man, indem man eine Zeile mit einem Sternchen »*« startet.
 * Vorformatierten Text rückt man mit mindestens einem Leerzeichen ein:
 
