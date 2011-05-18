@@ -147,6 +147,10 @@ function ffOutputHandler($buffer) {
 			fclose($pipes[1]);
 			fclose($pipes[2]);
 			$rv = proc_close($xmlstarlet);
+			/* work around Debian #627158 */
+			$serr = join("\n", preg_grep(
+			    '/^-:[0-9]*: Entity'." 'nbsp' ".'not defined$/',
+			    explode("\n", $serr), PREG_GREP_INVERT));
 		} else
 			$valck[] = array(
 				'msg' => "could not run xmlstarlet"
