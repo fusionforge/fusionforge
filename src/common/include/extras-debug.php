@@ -50,7 +50,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 	if (forge_get_config('sysdebug_backtraces'))
 		$msg .= "\n" .
-		    '<pre style="font-weight:normal; font-size:90%; color:#000066;">' .
+		    '<pre style="font-weight:normal; font-size:90%; color:#000066; line-height:100%;">' .
 		    htmlentities(debug_string_backtrace()) . "</pre>";
 	
 	$ffErrors[] = array('type' => $type, 'message' => $msg);
@@ -71,7 +71,7 @@ function ffOutputHandler($buffer) {
 
 	$dtdpath = $gfcommon . 'include/';
 	// this is, sadly, necessary (especially in ff-plugin-mediawiki)
-	$pre_tag = "<pre style=\"margin:0; padding:0; border:0;\">";
+	$pre_tag = "<pre style=\"margin:0; padding:0; border:0; line-height:125%;\">";
 
 	$divstring = "\n\n" . '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		function toggle_ffErrors() {
@@ -190,7 +190,7 @@ function ffOutputHandler($buffer) {
 	/* append XHTML source code, if validation failed */
 	if ($appsrc) {
 		if (!$sysdebug_akelos || $vbuf == $sbuf[1])
-			$vbuf = "<ol><li>" . $pre_tag . join("</pre></li>\n<li>" . $pre_tag, explode("\n", htmlentities(rtrim($cbuf)))) . "</pre></li></ol>";
+			$vbuf = "<ol><li>" . $pre_tag . join(" </pre></li>\n<li>" . $pre_tag, explode("\n", htmlentities(rtrim($cbuf)))) . " </pre></li></ol>";
 		else
 			$vbuf = $pre_tag . htmlentities(rtrim($sbuf[0])) . "</pre>" . $vbuf;
 		$valck[] = array(
