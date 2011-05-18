@@ -2901,6 +2901,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/Bac%C3%80Sable -text
 src/plugins/wiki/www/locale/fr/pgsrc/CarteInterWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Cat%C3%A9gorieCat%C3%A9gorie -text
 src/plugins/wiki/www/locale/fr/pgsrc/Cat%C3%A9gorieGroupes -text
+src/plugins/wiki/www/locale/fr/pgsrc/Cat%C3%A9goriePageDAction -text
 src/plugins/wiki/www/locale/fr/pgsrc/Cat%C3%A9goriePagesAccueil -text
 src/plugins/wiki/www/locale/fr/pgsrc/Cat%C3%A9goriePluginWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/ChangementsLi%C3%A9s -text
@@ -2924,6 +2925,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/InterWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/LesPlusVisit%C3%A9es -text
 src/plugins/wiki/www/locale/fr/pgsrc/LienGoogle -text
 src/plugins/wiki/www/locale/fr/pgsrc/ListeDePages -text
+src/plugins/wiki/www/locale/fr/pgsrc/ManuelPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/ModifsR%C3%0025A9centesPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/NotesDeVersion -text
 src/plugins/wiki/www/locale/fr/pgsrc/PageAccueil -text
@@ -2943,6 +2945,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/RechercheParTitre -text
 src/plugins/wiki/www/locale/fr/pgsrc/SommaireDuProjet -text
 src/plugins/wiki/www/locale/fr/pgsrc/SondagePhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/SteveWainstead -text
+src/plugins/wiki/www/locale/fr/pgsrc/Suivre -text
 src/plugins/wiki/www/locale/fr/pgsrc/TestDeCache -text
 src/plugins/wiki/www/locale/fr/pgsrc/TousLesUtilisateurs -text
 src/plugins/wiki/www/locale/fr/pgsrc/ToutesLesPages -text
