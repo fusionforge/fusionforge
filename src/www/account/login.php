@@ -118,13 +118,13 @@ if ($login && !$success) {
 
 $HTML->header(array('title'=>'Login'));
 
-echo '<p>';
-
 if ($triggered) {
 	echo '<div class="warning">' ;
 	echo _('You\'ve been redirected to this login page because you have tried accessing a page that was not available to you as an anonymous user.');
 	echo '</div> ' ;
 }
+
+echo '<p>';
 echo _('Cookies must be enabled past this point.');
 
 ?>

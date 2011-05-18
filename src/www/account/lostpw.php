@@ -70,7 +70,7 @@ to change your password:
 
 		$HTML->header(array('title'=>"Lost Password Confirmation"));
 
-		echo '<p>'.printf(_('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="%1$s">'._("Home").'</a>', util_make_url ('/')).'</p>';
+		printf('<p>' . _('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.') . '</p><p><a href="%1$s">'._("Home").'</a></p>', util_make_url('/'));
 
 		$HTML->footer(array());
 		exit();

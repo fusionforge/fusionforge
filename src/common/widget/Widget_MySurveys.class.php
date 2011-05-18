@@ -52,7 +52,7 @@ class Widget_MySurveys extends Widget {
 		
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
-			$html_my_surveys .= _("<p>There are no surveys in your groups.<p><br /> ");
+			$html_my_surveys .= _("<p>There are no surveys in your groups.</p>");
 		} else {
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';

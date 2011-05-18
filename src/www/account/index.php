@@ -232,37 +232,46 @@ if (forge_get_config('use_jabber')) {
 // ############################# Preferences
 echo $HTML->boxTop(_('Preferences')); ?>
 
+<div>
 <input type="checkbox" name="mail_site" value="1"<?php
 	if ($u->getMailingsPrefs('site')) print " checked=\"checked\""; ?> />
 	<?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
+</div>
 
-<p /><input type="checkbox"  name="mail_va" value="1"<?php
+<div>
+<input type="checkbox"  name="mail_va" value="1"<?php
 	if ($u->getMailingsPrefs('va')) print " checked=\"checked\""; ?> />
 	<?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
+</div>
+
 <?php /*
-<p /><input type="checkbox"  name="remember_user" value="1"<?php
+<div>
+<input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked=\"checked\""; ?> />
 <?php printf(_('"Remember me". <i>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>'),util_make_url ('/my/'));
+echo "\n</div>";
 */ ?>
 
-<p />
 <?php if (forge_get_config('use_ratings')) { ?>
+<div>
 <input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 		  <?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId())); 
-} ?>	
-</td></tr>
-<?php 
+echo "\n</div>";
+} ?>
+
+<table><tr><td><!-- hook[ --></td></tr>
+<?php
+/* each hook emits a complete table row */
 $hookParams['user']= user_get_object(user_getid());
 if (getStringFromRequest('submit')) {//if this is set, then the user has issued an Update
 	plugin_hook("userisactivecheckboxpost", $hookParams);
 } else {
 	plugin_hook("userisactivecheckbox", $hookParams);
 }
-?>
-<tr><td>
+echo "\n\n</table><!-- ]hook -->\n";
 
-<?php echo $HTML->boxBottom();
+echo $HTML->boxBottom();
 
 // ############################### Shell Account
 
