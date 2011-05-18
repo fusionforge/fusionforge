@@ -59,7 +59,6 @@ report_header(_('Project Activity'));
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
 <table><tr>
 <td><strong><?php echo _('Project'); ?>:</strong><br /><?php echo report_group_box('g_id',$g_id); ?></td>
 <td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area); ?></td>
