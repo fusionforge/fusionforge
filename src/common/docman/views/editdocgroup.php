@@ -43,7 +43,7 @@ if ($dg->isError())
 
 ?>
 <div class="docmanDivIncluded">
-	<form name="editgroup" action="?group_id=<?php echo $group_id; ?>&action=editdocgroup" method="post">
+	<form name="editgroup" action="?group_id=<?php echo $group_id; ?>&amp;action=editdocgroup" method="post">
 		<input type="hidden" name="dirid" value="<?php echo $dirid; ?>" />
 		<table>
 			<tr>

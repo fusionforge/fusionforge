@@ -40,7 +40,7 @@ class Widget_ProjectInfo extends Widget {
 			$list_tag = list_project_tag($group_id);
 			echo '<p>'.html_image('ic/tag.png'). ' ';
 			if ($list_tag) {
-				print _('Tags').':&nbsp;'. $list_tag;
+				print _('Tags').': '. $list_tag;
 			}
 			else {
 				$project = group_get_object($group_id);
@@ -51,20 +51,20 @@ class Widget_ProjectInfo extends Widget {
 					print _('No tag defined for this project');
 				}
 			}
-			echo '</p>';
+			echo "</p>\n";
 		}
 
 		if(forge_get_config('use_trove')) {
 			print "<br />\n";
-			print stripslashes(trove_getcatlisting($group_id,0,1,1));
+			print stripslashes(trove_getcatlisting($group_id,0,1,1))."\n";
 		}
 
 		// registration date
 		$project_start_date = $project->getStartDate();
-		print(_('Registered:&nbsp;') . 
+		print(_('Registered: ') . 
 				'<span property="doap:created" content="'.date('Y-m-d', $project_start_date).'">'.
 				date(_('Y-m-d H:i'), $project_start_date).
-				'</span>');
+				"</span>\n");
 
 		// Get the activity percentile
 		// CB hide stats if desired
@@ -79,12 +79,12 @@ class Widget_ProjectInfo extends Widget {
 			if (!$actv_res) {
 				$actv_res=0;
 			}
-			print '<br />'.sprintf (_('Activity Ranking: %d'), $actv_res) ;
-			print '<br />'.sprintf(_('View project <a href="%1$s" >Statistics</a>'),util_make_url ('/project/stats/?group_id='.$group_id));
+			print '<br />'.sprintf (_('Activity Ranking: %d'), $actv_res)."\n";
+			print '<br />'.sprintf(_('View project <a href="%1$s" >Statistics</a>'),util_make_url ('/project/stats/?group_id='.$group_id))."\n";
 			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPm() && forge_get_config('use_pm')) ) {
-				print sprintf(_(' or <a href="%1$s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id));
+				print sprintf(_(' or <a href="%1$s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id))."\n";
 			}
-			print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). '&nbsp;' . html_image('ic/rss.png',16,16,array());
+			print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array())."\n";
 		}
 
 		if(forge_get_config('use_people')) {
@@ -99,13 +99,14 @@ class Widget_ProjectInfo extends Widget {
 			if ($jobs_res) {
 				$num=db_numrows($jobs_res);
 				if ($num>0) {
-					print '<br /><br />';
+					print '<p>';
 					printf(
 							ngettext('HELP WANTED: This project is looking for a <a href="%1$s">"%2$s"</a>.',
 								'HELP WANTED: This project is looking for people to fill <a href="%1$s">several different positions</a>.',
 								$num),
 							util_make_url ('/people/?group_id='.$group_id),
 							db_result($jobs_res,0,"name"));
+					print "</p>\n";
 					//print '<div rel="fusionforge:has_job" typeof="fusionforge:Job" xmlns:fusionforge="http://fusionforge.org/fusionforge#">';
 					//print '<span rel="dc:title" content="'. db_result($jobs_res,0,"name").'" xmlns:dc="http://purl.org/dc/elements/1.1/">'; 
 					//print '</span>';

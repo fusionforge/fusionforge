@@ -6,6 +6,7 @@
  * Copyright 2010 - Alain Peyrat
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -203,7 +204,8 @@ class Layout extends Error {
 	function getJavascripts() {
 		$code = '';
 		foreach ($this->javascripts as $js) {
-			$code .= '    <script type="text/javascript" src="'.$js.'"></script>'."\n";
+			$code .= "\t\t\t";
+			$code .= '<script type="text/javascript" src="'.$js.'"></script>'."\n";
 		}
 		return $code;
 	}
@@ -211,10 +213,11 @@ class Layout extends Error {
 	function getStylesheets() {
 		$code = '';
 		foreach ($this->stylesheets as $c) {
+			$code .= "\t\t\t";
 			if ($c['media']) {
-				$code .= '    <link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
+				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'" media="'.$c['media'].'" />'."\n";
 			} else {
-				$code .= '    <link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
+				$code .= '<link rel="stylesheet" type="text/css" href="'.$c['css'].'"/>'."\n";
 			}
 		}
 		return $code;
@@ -1070,7 +1073,7 @@ class Layout extends Error {
 			}
 		}
 		$return .= '/>
-			<input type="image" id="' . $id . '_submit" src="' . $this->imgbaseurl . $img_src . '" alt="' . $img_alt . '" title="' . $img_title . '"';
+			<input type="image" id="' . $id . '_submit" src="' . $this->imgbaseurl . $img_src . '" alt="' . util_html_secure($img_alt) . '" title="' . util_html_secure($img_title) . '"';
 		if (is_array($img_extra_params)) {
 			foreach ($img_extra_params as $key => $img_extra_params_value) {
 				$return .= $key . '="' . $img_extra_params_value . '" ';
@@ -1244,51 +1247,51 @@ class Layout extends Error {
 
 	function widget(&$widget, $layout_id, $readonly, $column_id, $is_minimized, $display_preferences, $owner_id, $owner_type) {
 		$element_id = 'widget_'. $widget->id .'-'. $widget->getInstanceId();
-		echo '<div class="widget" id="'. $element_id .'">';
-		echo '<div class="widget_titlebar '. ($readonly?'':'widget_titlebar_handle') .'">';
-		echo '<div class="widget_titlebar_title">'. $widget->getTitle() .'</div>';
+		echo '<div class="widget" id="'. $element_id . "\">\n";
+		echo '<div class="widget_titlebar '. ($readonly?'':'widget_titlebar_handle') . "\">\n";
+		echo '<div class="widget_titlebar_title">'. $widget->getTitle() . "</div>\n";
 		if (!$readonly) {
-			echo '<div class="widget_titlebar_close"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=widget&amp;name['. $widget->id .'][remove]='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto('ic/close.png', 'Close','Close') .'</a></div>';
+			echo '<div class="widget_titlebar_close"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=widget&amp;name['. $widget->id .'][remove]='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto('ic/close.png', 'Close','Close') . "</a></div>\n";
 			if ($is_minimized) {
-				echo '<div class="widget_titlebar_maximize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=maximize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getTogglePlusForWidgets(),  'Maximize', 'Maximize') .'</a></div>';
+				echo '<div class="widget_titlebar_maximize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=maximize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getTogglePlusForWidgets(),  'Maximize', 'Maximize') . "</a></div>\n";
 			} else {
-				echo '<div class="widget_titlebar_minimize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=minimize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getToggleMinusForWidgets(),  'Minimize', 'Minimize') .'</a></div>';
+				echo '<div class="widget_titlebar_minimize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=minimize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getToggleMinusForWidgets(),  'Minimize', 'Minimize') . "</a></div>\n";
 			}
 			if (strlen($widget->hasPreferences())) {
-				echo '<div class="widget_titlebar_prefs"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=preferences&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;layout_id='. $layout_id .'">'. _('Preferences') .'</a></div>';
+				echo '<div class="widget_titlebar_prefs"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=preferences&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;layout_id='. $layout_id .'">'. _('Preferences') . "</a></div>\n";
 			}
 		}
 		if ($widget->hasRss()) {
-			echo '<div class="widget_titlebar_rss"><a href="'.$widget->getRssUrl($owner_id, $owner_type).'">rss</a></div>';
+			echo '<div class="widget_titlebar_rss"><a href="'.$widget->getRssUrl($owner_id, $owner_type) . "\">rss</a></div>\n";
 		}
-		echo '</div>';
+		echo "</div>\n";
 		$style = '';
 		if ($is_minimized) {
 			$style = 'display:none;';
 		}
-		echo '<div class="widget_content" style="'. $style .'">';
+		echo '<div class="widget_content" style="'. $style . "\">\n";
 		if (!$readonly && $display_preferences) {
-			echo '<div class="widget_preferences">'. $widget->getPreferencesForm($layout_id, $owner_id, $owner_type) .'</div>';
+			echo '<div class="widget_preferences">'. $widget->getPreferencesForm($layout_id, $owner_id, $owner_type) . "</div>\n";
 		}
 		if ($widget->isAjax()) {
 			echo '<div id="'. $element_id .'-ajax">';
 			echo '<noscript><iframe width="99%" frameborder="0" src="'. $widget->getIframeUrl($owner_id, $owner_type) .'"></iframe></noscript>';
-			echo '</div>';
+			echo "</div>\n";
 		} else {
 			echo $widget->getContent();
 		}
-		echo '</div>';
+		echo "</div>\n";
 		if ($widget->isAjax()) {
-			echo '<script type="text/javascript">'."
+			echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */'."
 				document.observe('dom:loaded', function () {
 						$('$element_id-ajax').update('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner') ."</div>');
 						new Ajax.Updater('$element_id-ajax', 
 							'". $widget->getAjaxUrl($owner_id, $owner_type) ."'
 							);
 						});
-			</script>";
+			/* ]]> */</script>";
 		}
-		echo '</div>';
+		echo "</div>\n";
 	}
 
 	function _getTogglePlusForWidgets() {

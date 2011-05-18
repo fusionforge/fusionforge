@@ -345,8 +345,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		//create javascript methods for select none/all
 		$res .= '
-        <script type="text/javascript">
-            <!-- method for disable/enable checkboxes
+            <!-- method for disable/enable checkboxes -->
+	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
             function setCheckBoxes(parent, checked) {
 
 
@@ -355,8 +355,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                             if (document.advancedsearch.elements[i].name.substr(0, parent.length) == parent)
                                 document.advancedsearch.elements[i].checked = checked;
                 }
-            //-->
-        </script>
+	/* ]]> */</script>
         ';
 		return $res;
 	}

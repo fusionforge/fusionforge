@@ -46,7 +46,7 @@ class Widget_MyAdmin extends Widget {
 		
 		$html_my_admin .= $this->_get_admin_row(
 			$i++, 
-			vsprintf(_('Users in <a href="%s"><B>P</B> (pending) Status</a>'), array("/admin/userlist.php?status=P")),
+			vsprintf(_('Users in <a href="%s"><b>P</b> (pending) Status</a>'), array("/admin/userlist.php?status=P")),
 			$pending_users,
 			$this->_get_color($pending_users)
 			);
@@ -54,7 +54,7 @@ class Widget_MyAdmin extends Widget {
 		if (isset($GLOBALS['sys_user_approval']) && $GLOBALS['sys_user_approval'] == 1) {
 			$html_my_admin .= $this->_get_admin_row(
 				$i++, 
-				vsprintf(_('Validated users <a href="%s"><B>pending email activation</B></a>'), array("/admin/approve_pending_users.php?page=validated")),
+				vsprintf(_('Validated users <a href="%s"><b>pending email activation</b></a>'), array("/admin/approve_pending_users.php?page=validated")),
 				$validated_users,
 				$this->_get_color($validated_users)
 				);
@@ -68,7 +68,7 @@ class Widget_MyAdmin extends Widget {
 
 		$html_my_admin .= $this->_get_admin_row(
 			$i++, 
-			vsprintf(_('Groups in <a href="%s"><B>P</B> (pending) Status</A>'), array("/admin/approve-pending.php")),
+			vsprintf(_('Groups in <a href="%s"><b>P</b> (pending) Status</a>'), array("/admin/approve-pending.php")),
 			$pending_projects,
 			$this->_get_color($pending_projects)
 			);

@@ -159,12 +159,12 @@ function get_path_document($groupsarr, $doc_group, $group_id) {
 	foreach ($groupsarr as $group) {
 		if ($group["doc_group"] == $doc_group) {
 			if ($group["parent_doc_group"] == 0) {
-				$href = util_make_uri("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
+				$href = util_make_uri("docman/?group_id=$group_id&amp;view=listfile&amp;dirid=$group[doc_group]");
 				$rep .= "<a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 				break;
 			}
 			$s = get_path_document($groupsarr, $group["parent_doc_group"], $group_id);
-			$href = util_make_uri("docman/?group_id=$group_id&view=listfile&dirid=$group[doc_group]");
+			$href = util_make_uri("docman/?group_id=$group_id&amp;view=listfile&amp;dirid=$group[doc_group]");
 			$rep .= "$s / <a href=\"$href\" style=\"color:#00610A;\">$group[groupname]</a>";
 			break;
 		}

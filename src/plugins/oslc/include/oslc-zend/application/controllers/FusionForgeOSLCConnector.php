@@ -289,7 +289,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 		//$af->details =	$query['search'];
 		
 		// query the DB for requested artifacts 
-		$art_arr =& $af->getArtifacts();
+		$art_arr = $af->getArtifacts();
 		
 		if ($art_arr === false) {
 			throw new Exception('Error '. $af->getErrorMessage());
@@ -457,7 +457,7 @@ class FusionForgeOSLCConnector extends OslcConnector {
 			$af->setup(0,'','',0,$set,$_assigned_to,$_status);
 
 			// query the DB for requested artifacts 
-			$art_arr =& $af->getArtifacts();
+			$art_arr = $af->getArtifacts();
 
 			if ($art_arr === false) {
 				throw new Exception('Error '. $af->getErrorMessage());

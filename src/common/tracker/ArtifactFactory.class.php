@@ -295,7 +295,7 @@ class ArtifactFactory extends Error {
 	 *
 	 *	@return	array	The array of Artifact objects.
 	 */
-	function &getArtifacts() {
+	function getArtifacts() {
 		if (!empty($this->artifacts)) {
 			return $this->artifacts;
 		}

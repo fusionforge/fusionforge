@@ -92,7 +92,7 @@ require_once('common/widget/Widget_MyMonitoredDocuments.class.php');
 		$prefs .= '<fieldset><legend>'. _("Preferences") .'</legend>';
 		$prefs .= $this->getPreferences();
 		$prefs .= '<br />';
-		$prefs .= '<input type="submit" name="cancel" value="'. _("Cancel") .'" />&nbsp;';
+		$prefs .= '<input type="submit" name="cancel" value="'. _("Cancel") .'" /> ';
 		$prefs .= '<input type="submit" value="'. _("Submit") .'" />';
 		$prefs .= '</fieldset>';
 		$prefs .= '</form>';

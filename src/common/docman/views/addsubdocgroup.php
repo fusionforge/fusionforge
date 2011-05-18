@@ -34,15 +34,15 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 ?>
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function doItAddSubGroup() {
 	document.getElementById('addsubgroup').submit();
 	document.getElementById('submitaddsubgroup').disabled = true;
 }
-</script>
+/* ]]> */</script>
 <?php
 echo '<div class="docmanDivIncluded" >';
-echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&action=addsubdocgroup&dirid='.$dirid.'">';
+echo '<form id="addsubgroup" name="addsubgroup" method="post" action="?group_id='.$group_id.'&amp;action=addsubdocgroup&amp;dirid='.$dirid.'">';
 if ($dirid) {
 	echo _('Name of the document subdirectory to create:'). ' ';
 } else {

@@ -139,7 +139,7 @@ pm_header(array('title'=>_('Calendar'),'group'=>$group_id));
  */
 function make_task_link($task, $type) {
 	global $HTML, $group_id, $group_project_id;
-	return '<a title="'. sprintf(_('Task summary: %s'), $task->getSummary())
+	return '<a title="'. util_html_secure(sprintf(_('Task summary: %s'), $task->getSummary()))
 		. '" href="'.util_make_url ('/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID() . '&amp;group_id=' . $group_id . '&amp;group_project_id=' .$group_project_id)
 		. '">' . ($type == 'begin' ?
 			  sprintf(_('Task %d begins'), $task->getID()) :

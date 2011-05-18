@@ -44,7 +44,7 @@ if ($dgf->getNested() == NULL) {
 	/* display the add new documentation form */
 	/* @todo - use jquery and javascript controler */
 ?>
-	<script type="text/javascript" >
+	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 	function displayRowFile() {
 		document.getElementById('filerow').style.display = '';
 		document.getElementById('urlrow').style.display = 'none';
@@ -73,7 +73,7 @@ if ($dgf->getNested() == NULL) {
 		document.getElementById('editrow').style.display = 'none';
 		document.getElementById('editnamerow').style.display = 'none';
 	}
-	</script>
+	/* ]]> */</script>
 <?php
 	echo '<p><strong>'. _('Document Title:') .'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
 	echo '<p><strong>'. _('Description:') .'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
@@ -81,7 +81,7 @@ if ($dgf->getNested() == NULL) {
 		echo '<p>'._('Both fields are used by the document search engine.').'</p>';
 
 
-	echo '<form name="adddata" action="?group_id='.$group_id.'&action=addfile" method="post" enctype="multipart/form-data">
+	echo '<form name="adddata" action="?group_id='.$group_id.'&amp;action=addfile" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td style="text-align:right;">

@@ -46,12 +46,12 @@ class Widget_MyBookmarks extends Widget {
 		} else {
 			$html_my_bookmarks .= '<table style="width:100%">';
 			for ($i=0; $i<$rows; $i++) {
-				$html_my_bookmarks .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>';
-				$html_my_bookmarks .= '<A HREF="'. db_result($result,$i,'bookmark_url') .'">'. db_result($result,$i,'bookmark_title') .'</A> ';
-				$html_my_bookmarks .= '<small><A HREF="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['._("Edit").']</A></SMALL></TD>';
-				$html_my_bookmarks .= '<td style="text-align:right"><A HREF="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id');
+				$html_my_bookmarks .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
+				$html_my_bookmarks .= '<a href="'. db_result($result,$i,'bookmark_url') .'">'. db_result($result,$i,'bookmark_title') .'</a> ';
+				$html_my_bookmarks .= '<small><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['._("Edit").']</a></small></td>';
+				$html_my_bookmarks .= '<td style="text-align:right"><a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id');
 				$html_my_bookmarks .= '" onClick="return confirm(\''._("Delete this bookmark?").'\')">';
-				$html_my_bookmarks .= '<IMG SRC="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" HEIGHT="16" WIDTH="16" BORDER="0" ALT="DELETE"></A></td></tr>';
+				$html_my_bookmarks .= '<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" border="0" alt="DELETE" /></a></td></tr>';
 			}
 			$html_my_bookmarks .= '</table>';
 		}

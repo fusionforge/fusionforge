@@ -46,7 +46,7 @@ function printnode ($nodeid,$text) {
 	}
 
 	print html_image('ic/cfolder15.png');
-	print ('&nbsp; <span class="trove-nodes" title="'.$title.'">'.$text.'</span> ');
+	print ('&nbsp; <span class="trove-nodes" title="'.util_html_secure($title).'">'.$text.'</span> ');
 	if ($nodeid == 0) {
 		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['._('Add').']</a> ');
 	} else {

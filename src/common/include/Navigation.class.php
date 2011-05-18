@@ -86,6 +86,7 @@ class Navigation extends Error {
 	 *  into the <head>. If $asHTML is false, it will return an
 	 *  array with the following structure: $result['titles']:
 	 *  list of titles of the feeds; $result['urls'] list of urls
+<<<<<<< .working
 	 *  of the feeds.
 	 */
 	function getRSS($asHTML = true) {
@@ -112,9 +113,10 @@ class Navigation extends Error {
 			$feeds = $this->getRSS(false);
 			for ($j = 0; $j < count($feeds['urls']); $j++) {
 				echo '
-				<link rel="alternate" title="' . $feeds['titles'][$j]
-					. '" href="' . $feeds['urls'][$j]
-					. '" type="application/rss+xml"/>';
+				<link rel="alternate" title="' .
+				    util_html_secure($feeds['titles'][$j]) .
+				    '" href="' . $feeds['urls'][$j] .
+				    '" type="application/rss+xml"/>';
 			}
 		}
 	}

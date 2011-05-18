@@ -394,18 +394,18 @@ class Theme extends Layout {
 		plugin_hook("javascript", $params);
 		$javascript = $params['return'];
 		if($javascript) {
-			echo '<script type="text/javascript">';
+			echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */'."\n";
 			echo $javascript;
-			echo '</script>'."\n";
+			echo "\n/* ]]> */</script>\n";
 		}
 		?>
-		<script type="text/javascript">
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		jQuery.noConflict();
 		jQuery(window).load(function(){
 			jQuery(".quicknews").hide();
 					setTimeout("jQuery('.feedback').hide('slow')", 5000);
 		});
-		</script>
+		/* ]]> */</script>
 		<?php
 	}
 }

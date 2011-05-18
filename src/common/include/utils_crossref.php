@@ -57,7 +57,7 @@ function _artifactid2url ($id, $mode='') {
 	if (db_numrows($res) == 1) {
 		$row = db_fetch_array($res);
 		$url = '/tracker/?func=detail&amp;aid='.$id.'&amp;group_id='.$row['group_id'].'&amp;atid='.$row['group_artifact_id'];
-		$arg = 'title="'.$row['summary'].'"' ;
+		$arg = 'title="'.util_html_secure($row['summary']).'"' ;
 		if ($row['status_id'] == 2) {
 			$arg .= 'class="artifact_closed"'; 
 		}

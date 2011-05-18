@@ -93,7 +93,7 @@ if ($group_id && $atid) {
 	//
 	// Loop through each artifact object and show the results
 	//
-	if (!$alist =& $artifacts->getArtifacts($offset)) {
+	if (!$alist = $artifacts->getArtifacts($offset)) {
 		displayError($artifacts->getErrorMessage());
 		$errors = true;
 	}

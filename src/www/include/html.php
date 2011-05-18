@@ -412,7 +412,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 
 	$title = html_get_tooltip_description($select_name);
 	$return .= '
-		<select'.$id.' name="'.$select_name.'" title="'.$title.'">';
+		<select'.$id.' name="'.$select_name.'" title="'.util_html_secure($title).'">';
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
@@ -632,7 +632,7 @@ function build_priority_select_box ($name='priority', $checked_val='3', $nochang
  */
 function html_build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
 ?>
-	<select id="tracker-<?php echo $name ?>" name="<?php echo $name; ?>" title="<?php echo html_get_tooltip_description($name) ?>">
+	<select id="tracker-<?php echo $name ?>" name="<?php echo $name; ?>" title="<?php echo util_html_secure(html_get_tooltip_description($name)) ?>">
 <?php if($nochange) { ?>
 	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo _('No Change') ?></option>
 <?php }  ?>

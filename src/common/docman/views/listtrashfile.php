@@ -75,7 +75,7 @@ if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) 
 } else {
 
 ?>
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 var controllerListTrash;
 
 jQuery(document).ready(function() {
@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
 		divRight:			jQuery('#right'),
 	});
 });
-</script>
+/* ]]> */</script>
 <?php
 	echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&action=emptytrash" >';
 	echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents with deleted status.') .'" >';

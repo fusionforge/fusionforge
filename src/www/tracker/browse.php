@@ -139,7 +139,7 @@ $_status=$af->status;
 $_assigned_to=$af->assigned_to;
 $_extra_fields=$af->extra_fields;
 
-$art_arr =& $af->getArtifacts();
+$art_arr = $af->getArtifacts();
 
 if (!$art_arr && $af->isError()) {
 	exit_error($af->getErrorMessage(),'tracker');
@@ -602,7 +602,7 @@ if ($art_arr && $art_cnt > 0) {
 					if ($rest['status_id'] == 2) {
 						$title = '<strike>'.$title.'</strike>';
 					}
-					print $s.'<a href="'.$link.'" title="'.$rest['summary'].'">'.$title.'</a>';
+					print $s.'<a href="'.$link.'" title="'.util_html_secure($rest['summary']).'">'.$title.'</a>';
 					$s = ' ';
 				}
 				echo '</td>';
@@ -659,8 +659,7 @@ if ($art_arr && $art_cnt > 0) {
 		Mass Update Code
 	*/
 	if ($IS_ADMIN) {
-		echo '<script type="text/javascript">
-	<!--
+		echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 	function checkAll(val) {
 		al=document.artifactList;
 		len = al.elements.length;
@@ -671,8 +670,7 @@ if ($art_arr && $art_cnt > 0) {
 			}
 		}
 	}
-	//-->
-	</script>
+	/* ]]> */</script>
 
 			<table width="100%" border="0" id="admin_mass_update">
 			<tr><td colspan="2">
@@ -681,8 +679,7 @@ if ($art_arr && $art_cnt > 0) {
 -
   <a href="javascript:checkAll(0)">'._('Clear &nbsp;all').'</a>
 
-<p>
-<div class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div></p>
+<div class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</div>
 			</td></tr>';
 
 		//

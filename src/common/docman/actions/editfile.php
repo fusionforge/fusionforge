@@ -49,11 +49,11 @@ switch ($fromview) {
 	case 'admin':
 	case 'listrashfile':
 	case 'listpendingfile': {
-		$urlparam = '&view='.$fromview;
+		$urlparam = '&amp;view='.$fromview;
 		break;
 	}
 	default: {
-		$urlparam = '&view=listfile&dirid='.$doc_group;
+		$urlparam = '&amp;view=listfile&amp;dirid='.$doc_group;
 		break;
 	}
 }

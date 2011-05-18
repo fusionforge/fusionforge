@@ -36,12 +36,12 @@ if ( !forge_check_perm ('docman', $group_id, 'admin')) {
 ?>
 
 <div id="principalAdminDiv" class="docmanDivIncluded">
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 function doIt(formid) {
 	document.getElementById(formid).submit();
 	document.getElementById('submit'+formid).disabled = true;
 }
-</script>
+/* ]]> */</script>
 <?php
 echo '<form id="backup" name="backup" method="post" action="'. util_make_uri('/docman/view.php/'.$group_id.'/backup') .'" >';
 echo '<ul>';
@@ -63,7 +63,7 @@ echo '<li><input name="status" type="hidden" value="'.$createOnlineStatus.'"><in
 echo '</ul>';
 echo '</form>';
 
-echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&action=updateenginesearch" >';
+echo '<form id="searchengine" name="searchengine" method="post" action="?group_id='.$group_id.'&amp;action=updateenginesearch" >';
 echo '<ul>';
 
 $searchEngineStatus = '1';
@@ -79,7 +79,7 @@ echo '</form>';
 
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {
-		echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&action=forcereindexenginesearch">';
+		echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&amp;action=forcereindexenginesearch">';
 		echo '<ul>';
 		echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
 		echo '</ul>';
@@ -88,7 +88,7 @@ if ($g->useDocmanSearch()) {
 }
 
 if (forge_get_config('use_webdav')) {
-	echo '<form id="webdavinterface" name="webdavinterface" method="post" action="?group_id='.$group_id.'&action=updatewebdavinterface" >';
+	echo '<form id="webdavinterface" name="webdavinterface" method="post" action="?group_id='.$group_id.'&amp;action=updatewebdavinterface" >';
 	echo '<ul>';
 	$webdavStatus = '1';
 	$labelWebdavInterface = _('Enable Webdav Interface');

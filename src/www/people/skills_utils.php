@@ -180,7 +180,7 @@ function handle_multi_edit($skill_ids = array()) {
 						'<td class="tableheading">'._('Keywords (max 255 characters)').'</td>'.
 					'</tr>'.
 					'<tr>'.
-						'<td><textarea name="keywords[]" rows="3" cols="85" wrap="soft">'.db_result($result, $i,'keywords').'</textarea></td>'.
+						'<td><textarea name="keywords[]" rows="3" cols="85">'.db_result($result, $i,'keywords').'</textarea></td>'.
 					'</tr>'.
 					
 				 '</table>';

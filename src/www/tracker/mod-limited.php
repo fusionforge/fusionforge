@@ -59,7 +59,7 @@ if (session_loggedin()) {
 					$text=_('Monitor');
 				}
 				echo '
-				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.html_get_tooltip_description('monitor').'"><strong>'.
+				<a id="tracker-monitor" href="index.php?group_id='.$group_id.'&amp;artifact_id='.$ah->getID().'&amp;atid='.$ath->getID().'&amp;func=monitor" title="'.util_html_secure(html_get_tooltip_description('monitor')).'"><strong>'.
 					html_image('ic/'.$img.'','20','20').' '.$text.'</strong></a>';
 				?>
 			</td>
@@ -109,12 +109,12 @@ if (session_loggedin()) {
 
 	<tr>
 		<td><strong><?php echo _('Assigned to')?>:</strong><br />
-		<span id="tracker-assigned_to" title="<?php echo html_get_tooltip_description('assigned_to') ?>">
+		<span id="tracker-assigned_to" title="<?php echo util_html_secure(html_get_tooltip_description('assigned_to')) ?>">
 		<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)
 		</span></td>
 		<td>
 		<strong><?php echo _('Priority') ?>:</strong><br />
-		<span id="tracker-priority" title="<?php echo html_get_tooltip_description('priority') ?>">
+		<span id="tracker-priority" title="<?php echo util_html_secure(html_get_tooltip_description('priority')) ?>">
 		<?php echo $ah->getPriority(); ?>
 		</span></td>
 	</tr>
@@ -123,7 +123,7 @@ if (session_loggedin()) {
 		<td>
 		<?php if (!$ath->usesCustomStatuses()) { ?>
 			<strong><?php echo _('State') ?>:</strong><br />
-			<span id="tracker-status_id" title="<?php echo html_get_tooltip_description('status_id') ?>">
+			<span id="tracker-status_id" title="<?php echo util_html_secure(html_get_tooltip_description('status_id')) ?>">
 			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
 			<span>
 		<?php } ?>
@@ -137,7 +137,7 @@ if (session_loggedin()) {
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
-			<span id="tracker-summary" title="<?php echo html_get_tooltip_description('summary') ?>">
+			<span id="tracker-summary" title="<?php echo util_html_secure(html_get_tooltip_description('summary')) ?>">
 			<?php echo $ah->getSummary(); ?>
 			<span>
 		</td>
@@ -153,7 +153,7 @@ if (session_loggedin()) {
 <table border="0" width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('OR Attach A Comment') ?>: <?php echo notepad_button('document.forms.trackermodlimitedform.details') ?></strong><br />
-		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo html_get_tooltip_description('comment') ?>"></textarea>
+		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
 		<p>
 		<h2><?php echo _('Followups: ') ;
 		if ($sort_comments_chronologically) {

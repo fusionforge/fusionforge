@@ -42,7 +42,7 @@ $menu_links = array();
 $menu_attr = array();
 
 ?>
-<script type="text/javascript">
+<script type="text/javascript">//<![CDATA[
 var controllerMenu;
 
 jQuery(document).ready(function() {
@@ -58,7 +58,7 @@ jQuery(document).ready(function() {
 	});
 });
 
-</script>
+/* ]]> */</script>
 <?php
 
 $menu_text[] = _('List files & Directories');
@@ -82,7 +82,7 @@ if (forge_check_perm('docman', $group_id, 'submit')) {
 if ($g->useDocmanSearch()) {
 	if ($d_arr || count($d_arr) > 1) {
 		$menu_text[] = _('Search in documents');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
+		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
 		if ($use_tooltips) {
 			$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu');
 		} else {
@@ -112,7 +112,7 @@ if (session_loggedin()) {
 	}
 	if (forge_check_perm('docman', $group_id, 'admin')) {
 		$menu_text[] = _('Admin');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
+		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
 		if ($use_tooltips) {
 			$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu');
 		} else {

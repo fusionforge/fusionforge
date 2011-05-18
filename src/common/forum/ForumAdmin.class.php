@@ -291,7 +291,7 @@ class ForumAdmin extends Error {
 			}
 			
 			echo '
-			<script type="text/javascript">
+			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		
 			function confirmDel() {
 				var agree=confirm("' . _('Proceed? Actions are permanent!') . '");
@@ -301,7 +301,7 @@ class ForumAdmin extends Error {
 					return false;
 				}
 			}
-			</script>
+			/* ]]> */</script>
 			<form name="pending" action="pending.php" method="post">
 			<input type="hidden" name="action" value="update_pending" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />

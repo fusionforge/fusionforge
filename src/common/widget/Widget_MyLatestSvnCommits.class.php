@@ -69,7 +69,7 @@ class Widget_MyLatestSvnCommits extends Widget {
                             $html .= '<div style="padding-left:20px; padding-bottom:4px; color:#555">';
                             $html .= util_make_links(substr($data['description'], 0, 255), $project->getGroupId());
                             if (strlen($data['description']) > 255) {
-                                $html .= '&nbsp;[...]';
+                                $html .= ' [...]';
                             }
                             $html .= '</div>';
                             $html .= '</div>';

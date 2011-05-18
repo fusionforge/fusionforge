@@ -73,7 +73,7 @@ if ($d_arr != NULL ) {
 
 ?>
 
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 var controllerListFile;
 
 jQuery(document).ready(function() {
@@ -107,7 +107,7 @@ jQuery(document).ready(function() {
 	});
 });
 
-</script>
+/* ]]> */</script>
 
 <?php
 echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';

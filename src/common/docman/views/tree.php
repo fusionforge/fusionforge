@@ -44,16 +44,15 @@ $idhtml = 0;
 echo '<div id="documenttree" style="height:100%">';
 ?>
 
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 	var myThemeXPBase = "<?php echo util_make_uri('/jscook/ThemeXP/'); ?>";
-</script>
+/* ]]> */</script>
 <script type="text/javascript" src="<?php echo util_make_uri('/jscook/JSCookTree.js'); ?>"></script>
-<link rel="stylesheet" href="<?php echo util_make_uri('/jscook/ThemeXP/theme.css'); ?>" type="text/css" />
 <script src="<?php echo util_make_uri('/jscook/ThemeXP/theme.js'); ?>" type="text/javascript"></script>
 
 <div id="myMenuID" style="overflow:auto;"></div>
 
-<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 	var myMenu =
 		[
 			['<span class="JSCookTreeFolderClosed"><i><img alt="" src="' + myThemeXPBase + 'folder1.gif" /></i></span><span id="ctItemID0" class="JSCookTreeFolderOpen"><i><img alt="" src="' + myThemeXPBase + 'folderopen1.gif" /></i></span>', '/', '<?php echo '?group_id='.$group_id.'&view='.$linkmenu ?>', '', '', <?php docman_recursive_display(0); ?>
@@ -64,7 +63,7 @@ echo '<div id="documenttree" style="height:100%">';
 	ctExposeTreeIndex(treeIndex, <?php echo $idExposeTreeIndex ?>);
 	var openItem = ctGetSelectedItem(treeIndex);
 	ctOpenFolder(openItem);
-</script>
+/* ]]> */</script>
 
 <?php
 echo '</div>';
