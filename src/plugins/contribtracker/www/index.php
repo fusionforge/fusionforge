@@ -42,11 +42,11 @@ function display_contribution ($c, $show_groups = false) {
 	print '<strong>'._('Date:').'</strong> ' ;
 	print strftime (_('%Y-%m-%d'), $c->getDate ()) ;
 	print '<br />' ;
-	
+
 	print '<strong>'._('Description:').'</strong> ' ;
 	print htmlspecialchars ($c->getDescription ()) ;
 	print '<br />' ;
-	
+
 	$parts = $c->getParticipations () ;
 	print '<strong>'.ngettext('Participant:',
 				  'Participants:',
@@ -69,7 +69,7 @@ function display_contribution ($c, $show_groups = false) {
 	}
 	print '</ul>' ;
 }
-	
+
 $group_id = getIntFromRequest ('group_id') ;
 $actor_id = getIntFromRequest ('actor_id') ;
 if ($group_id) {
@@ -92,7 +92,7 @@ if ($group_id) {
 		$params['group'] = $group_id ;
 		$params['title'] = _('Contribution details') ;
 		$params['pagename'] = 'contribtracker' ;
-		$params['sectionvals'] = array($group->getPublicName());    
+		$params['sectionvals'] = array($group->getPublicName());
 
 		site_project_header ($params) ;
 
@@ -106,7 +106,7 @@ if ($group_id) {
 		$params['pagename'] = 'contribtracker' ;
 		$params['sectionvals'] = array($group->getPublicName());
 
-		site_project_header ($params) ;
+		site_project_header($params);
 
 		$contribs = $plugin->getContributionsByGroup ($group) ;
 
@@ -114,9 +114,6 @@ if ($group_id) {
 			print '<h1>'._('No contributions').'</h1>' ;
 			print _('No contributions have been recorded for this project yet.') ;
 		} else {
-			print '<h1>'.sprintf (_('Contributions for project %s'),
-					    htmlspecialchars ($group->getPublicName())).'</h1>' ;
-			
 			foreach ($contribs as $c) {
 				display_contribution ($c) ;
 				print '<hr />' ;
@@ -130,7 +127,7 @@ if ($group_id) {
 	}
 
 	$HTML->header(array('title'=>_('Actor details'),'pagename'=>'contribtracker'));
-	
+
 	print '<h1>'.sprintf(_('Actor details for %s'),
 			     htmlspecialchars($actor->getName())).'</h1>' ;
 	print '<ul>' ;
@@ -151,9 +148,9 @@ if ($group_id) {
 			print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
 		}
 	}
-	
+
 	$participations = $actor->getParticipations () ;
-	
+
 	if (count ($participations) == 0) {
 		printf (_("%s hasn't been involved in any contributions yet"),
 			htmlspecialchars($actor->getName())) ;
@@ -162,7 +159,7 @@ if ($group_id) {
 					      'Contributions by %s',
 					      count($participations)),
 				     htmlspecialchars($actor->getName())).'</h1>' ;
-		
+
 		foreach ($participations as $p) {
 			$c = $p->getContribution () ;
 			print '<h2>' . util_make_link ('/plugins/'.$plugin->name.'/?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
@@ -178,9 +175,9 @@ if ($group_id) {
 	}
 } else {			// Latest contributions, globally
 	$HTML->header(array('title'=>_('Contributions'),'pagename'=>'contribtracker'));
-	
+
 	$contribs = $plugin->getContributions () ;
-	
+
 	if (count ($contribs) == 0) {
 		print '<h1>'._('No contributions').'</h1>' ;
 		print _('No contributions have been recorded yet.') ;
@@ -197,7 +194,7 @@ if ($group_id) {
 			}
 		}
 	}
-}	
+}
 
 site_project_footer(array());
 
