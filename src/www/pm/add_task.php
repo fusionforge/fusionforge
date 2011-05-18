@@ -145,10 +145,10 @@ unset($GLOBALS['editor_was_set_up']);
 	<tr>
 		<td colspan="2">
 		<input type="submit" value="<?php echo _('Submit') ?>" name="submit" />
+		<input type="hidden" name="duration" value="0" />
+		<input type="hidden" name="parent_id" value="0" />
 		</td>
 	</tr>
-	<input type="hidden" name="duration" value="0" />
-	<input type="hidden" name="parent_id" value="0" />
 <!--
 will add duration and parent_id choices at some point
 	<tr>

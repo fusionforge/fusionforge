@@ -248,22 +248,30 @@ if ($rows < 1) {
 			'<td>'.
 			($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
 			$pt_arr[$i]->getID() .'" /> ':'').
-			$pt_arr[$i]->getID() .'</td>';
+			$pt_arr[$i]->getID() ."</td>\n";
 		if ($display_col['summary'])
-			echo '<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>';
+			echo '<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() ."</a></td>\n";
 		if ($display_col['start_date']) 
-			echo '<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() ).'</td>';
+			echo '<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() )."</td>\n";
 		if ($display_col['end_date']) 
-			echo '<td>'. (($now>$pt_arr[$i]->getEndDate() && $pt_arr[$i]->getStatusId() != 2 )?'<strong>* ':'&nbsp; ') .
-				date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate() ).'</strong></td>';
+			echo '<td>';
+			if ($now>$pt_arr[$i]->getEndDate() && $pt_arr[$i]->getStatusId() != 2 ) {
+				echo '<strong>* ';
+				$x = "</strong>";
+			} else {
+				echo '&nbsp; ';
+				$x = "";
+			}
+			echo date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate()) .
+			    $x . "</td>\n";
 		if ($display_col['percent_complete']) 
-			echo '<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>';
+			echo '<td>'. $pt_arr[$i]->getPercentComplete() ."%</td>\n";
 		if ($display_col['category']) 
-			echo '<td>'. $pt_arr[$i]->getCategoryName() .'</td>';
+			echo '<td>'. $pt_arr[$i]->getCategoryName() ."</td>\n";
 		if ($display_col['assigned_to'])
-			echo '<td>'. $pg->renderAssigneeList($pt_arr[$i]->getAssignedTo()) .'</td>';
+			echo '<td>'. $pg->renderAssigneeList($pt_arr[$i]->getAssignedTo()) ."</td>\n";
 		if ($display_col['priority'])
-			echo '<td>'. $pt_arr[$i]->getPriority() .'</td>';
+			echo '<td>'. $pt_arr[$i]->getPriority() ."</td>\n";
 
 		echo '
 			</tr>';

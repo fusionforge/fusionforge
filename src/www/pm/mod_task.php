@@ -195,10 +195,10 @@ unset($GLOBALS['editor_was_set_up']);
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
+		<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>" />
+		<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>" />
 		</td>
 	</tr>
-	<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>" />
-	<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>" />
 <!--
 //will add duration and parent selection boxes
 	<tr>
@@ -269,7 +269,7 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage(),'pm');
 }
 
-echo '<form action="/reporting/timeadd.php" method="post" />
+echo '<form action="/reporting/timeadd.php" method="post">
 	<input type="hidden" name="project_task_id" value="'.$project_task_id.'" />
 	<input type="hidden" name="submit" value="1" />';
 echo $HTML->listTableTop ($title_arr);
@@ -280,7 +280,7 @@ echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 		<td style="text-align:center">'.report_time_category_box('time_code',false).'</td>
 		<td>&nbsp;</td>
 		<td style="text-align:center"><input type="submit" name="add" value="'._('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
-	</tr></form>';
+	</tr>';
 	
 //setenv("TZ=" . $user_timezone); //restore the user's timezone
 	
@@ -321,6 +321,7 @@ echo '
 <td>&nbsp;</td></tr>';
 
 echo $HTML->listTableBottom();
+echo "</form>\n";
 
 pm_footer(array());
 

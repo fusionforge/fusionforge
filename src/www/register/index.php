@@ -131,7 +131,7 @@ if (getStringFromRequest('submit')) {
 			$HTML->header(array('title'=>_('Registration complete')));
 
 			if ( ! forge_get_config ('project_auto_approval') ) {
-				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+				printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 			} else if ($group->isError()) {
 				printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
 			} else {
@@ -140,7 +140,7 @@ if (getStringFromRequest('submit')) {
 				if (!$group->approve( user_get_object_by_name ( forge_get_config ('project_auto_approval_user') ) ) ) {
 					printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
 				} else {
-					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.<p/>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+					printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
 				}
 			}
 
@@ -171,7 +171,7 @@ site_header(array('title'=>_('Register Project')));
 <?php
 	$index=1;
 	echo '<h3>'.$index.'. '._('Project full name').'</h3>';
-	echo _('You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).<p/>Full Name:<br/>'); ?>
+	echo _('<p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p><p>Full Name:</p>'); ?>
 
 <input size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
 
@@ -203,7 +203,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <?php
 	$index++;
 	echo '<h3>'.$index.'. '._('Project Unix Name').'</h3>';
-	printf(_('In addition to full project name, you will need to choose short,"Unix" name for your project.<p/> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p/>Unix Name:<br/>'), forge_get_config('web_host')) ?>
+	printf(_('<p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p>The "Unix Name" has several restrictions because it is used in so many places around the site. They are:</p><ul><li>Cannot match the unix name of any other project</li><li>Must be between 3 and 15 characters in length</li><li>Must be in lower case</li><li>Can only contain characters, numbers, and dashes</li><li>Must be a valid unix username</li><li>Cannot match one of our reserved domains</li><li>Unix name will never change for this project</li></ul><p/>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.%1$s</tt></li><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.%1$s</tt></li><li>Shell access to <tt>unixname.%1$s</tt></li><li>Search engines throughout the site</li></ul><p>Unix Name:</p>'), forge_get_config('web_host')) ?>
 
 <input type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
 
