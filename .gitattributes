@@ -2779,6 +2779,7 @@ src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FVorlagePlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FWikiPlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/HochLaden -text
 src/plugins/wiki/www/locale/de/pgsrc/InterWikiListe -text
+src/plugins/wiki/www/locale/de/pgsrc/KategorieAktionSeite -text
 src/plugins/wiki/www/locale/de/pgsrc/KategorieKategorie -text
 src/plugins/wiki/www/locale/de/pgsrc/KategorieWikiPlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/LeereSeiten -text

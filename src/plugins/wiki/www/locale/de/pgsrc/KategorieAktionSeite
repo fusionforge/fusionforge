@@ -1,0 +1,14 @@
+Date: Fri, 10 Sep 2010 13:48:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+X-Rcs-Id: $Id: KategorieAktionSeite 7935 2011-02-04 16:28:16Z vargenau $
+Content-Type: application/x-phpwiki;
+  pagename=KategorieAktionSeite;
+  flags=PAGE_LOCKED;
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+<<BackLinks info||=pagename,mtime,hits,author sortby||=pagename>>
+
+----
+[[KategorieKategorie]]
