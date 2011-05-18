@@ -10,6 +10,14 @@ PACKAGE=fusionforge
 SRCPACKAGE=fusionforge
 FORGENAME=FusionForge
 
+# Identify this FusionForge version
+# keep type intact and change forge in derivates,
+# unless there are deep changes (type is used for
+# the Forge-Identification meta header)
+WHICH_TYPE=FusionForge
+WHICH_FORGE=FusionForge
+WHICH_VERSION:=$(shell dpkg-parsechangelog | sed -n '/^Version: /s///p')
+
 # Replace macros present in the files for forge's name
 SED_REPLACE=sed -e 's/@PACKAGE@/$(PACKAGE)/g' -e 's/@SRCPACKAGE@/$(SRCPACKAGE)/g' -e 's/@OLDPACKAGE@/$(OLDPACKAGE)/g' -e 's/@FORGENAME@/$(FORGENAME)/g'
 
@@ -208,6 +216,13 @@ clean: remove-binary-files unpatch
 
 install: build
 	dh $@
+
+	sed \
+	    -e 's!@PKGNAME@!${WHICH_FORGE}!g' \
+	    -e 's!@PKGVERSION@!${WHICH_VERSION}!g' \
+	    -e 's!@PLUCKERNAME@!${WHICH_TYPE}!g' \
+	    <$(CURDIR)/deb-specific/pkginfo.inc.php \
+	    >$(CURDIR)/debian/$(OLDPACKAGE)-common/usr/share/$(OLDPACKAGE)/common/pkginfo.inc.php
 
 # 	Fix permissions
 	chmod 755 $(CURDIR)/debian/*/*/*/*/bin/* $(CURDIR)/debian/*/*/*/*/cronjobs/* \
