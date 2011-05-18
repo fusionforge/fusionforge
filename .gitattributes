@@ -2045,6 +2045,7 @@ src/plugins/oauthprovider/packaging/control/222plugin-oauthprovider -text
 src/plugins/oauthprovider/packaging/control/222plugin-oauthprovider.shortdesc -text
 src/plugins/oauthprovider/packaging/dirs/plugin-oauthprovider -text
 src/plugins/oauthprovider/packaging/docs/plugin-oauthprovider -text
+src/plugins/oauthprovider/packaging/examples/plugin-oauthprovider -text
 src/plugins/oauthprovider/packaging/install/plugin-oauthprovider -text
 src/plugins/oauthprovider/packaging/links/plugin-oauthprovider -text
 src/plugins/oauthprovider/translations/en.po -text
