@@ -6,7 +6,7 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// $Id: themeinfo.php 8078 2011-05-18 16:44:31Z vargenau $;
+// $Id: themeinfo.php 8081 2011-05-19 19:27:35Z vargenau $;
 
 require_once('lib/WikiTheme.php');
 require_once('themes/wikilens/themeinfo.php');
