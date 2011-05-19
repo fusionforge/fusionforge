@@ -38,7 +38,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
 		$this->text = 'Subversion';
-		$this->svn_root = '/svn';
+		$this->svn_root = '/scmrepos/svn';
 		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
