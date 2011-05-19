@@ -14,7 +14,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -67,17 +67,19 @@ class ExtraTabsPlugin extends Plugin {
 					switch ($row_tab['type']) {
 					case 0: // Link
 						$params['DIRS'][] = $row_tab['tab_url'];
-                        $params['ADMIN'][] = '';
+						$params['ADMIN'][] = '';
+						$params['TOOLTIPS'][] = '';
 						break;
-						
+
 					case 1: // Iframe
 						$params['DIRS'][] = '/plugins/'.$this->name.'/iframe.php?group_id='.$group_id.'&amp;tab_name='.$row_tab['tab_name'];
-                        $params['ADMIN'][] = '';
+						$params['ADMIN'][] = '';
+						$params['TOOLTIPS'][] = '';
 						if (isset($params['toptab']) && ($params['toptab'] == $row_tab['tab_name'])) {
 							$params['selected'] = count($params['TITLES']) - 1;
 						}
 						break;
-						
+
 					default:
 						return;
 					}
@@ -94,8 +96,8 @@ class ExtraTabsPlugin extends Plugin {
 					$data['tab_name'] = $params['project']->replaceTemplateStrings ($row['tab_name']) ;
 					$data['index'] = $row['index'] ;
 					$tabs[] = $data ;
-				}			 
-				
+				}
+
 				foreach ($tabs as $tab) {
 					db_query_params ('INSERT INTO plugin_extratabs_main (tab_url, tab_name, index, group_id) VALUES ($1,$2,$3,$4)',
 							 array ($data['tab_url'],
