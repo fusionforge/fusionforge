@@ -27,13 +27,13 @@ class scmhookPlugin extends Plugin {
 		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "adminScmHook";
+		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_admin_update";
 	}
 
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
-			case "adminScmHook": {
+			case "scm_admin_page": {
 				$group_id = $params['group_id'];
 				$group = &group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
