@@ -121,7 +121,7 @@ class Widget_MyMonitoredDocuments extends Widget {
         $request =& HTTPRequest::instance();
         $ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
         if ($request->exist('hide_item_id') || $request->exist('hide_document')) {
-            $ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_document=' . $request->get('hide_document');
+            $ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_document=' . $request->get('hide_document');
         }
         return $ajax_url;
     }

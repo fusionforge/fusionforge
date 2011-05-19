@@ -62,7 +62,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline)
 
 function ffOutputHandler($buffer) {
 	global $ffErrors, $sysdebug_enable, $sysdebug_lazymode_on,
-	    $gfcommon, $sysDTDs, $HTML;
+	    $sysdebug_doframe, $gfcommon, $sysDTDs, $sysXMLNSs, $HTML;
 
 	if (! getenv ('SERVER_SOFTWARE')) {
 		return $buffer ;
@@ -106,6 +106,20 @@ function ffOutputHandler($buffer) {
 		}' . "\n/* ]]> */</script>\n<div id=\"ffErrors\">\n" .
 	    '<a href="javascript:toggle_ffErrors();">Click to toggle</a>' .
 	    "\n<div id=\"ffErrorsBlock\">";
+
+	$doctype = util_ifsetor($HTML->doctype);
+	if (!$doctype) {
+		$doctype = 'transitional';
+	}
+
+	if ($sysdebug_doframe) {
+		$initial = '<?xml version="1.0" encoding="utf-8"?>' .
+		    $sysDTDs[$doctype]['doctype'] .
+		    '<html xml:lang="en" ' . $sysXMLNSs .
+		    "><head><title>AJAX frame</title></head><body>\n";
+		$bufferstrip = strlen($initial);
+		$buffer = $initial . $buffer . '</body></html>';
+	}
 
 	/* cut off </body></html> (hopefully only) at the end */
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
@@ -162,10 +176,6 @@ function ffOutputHandler($buffer) {
 			1 => array("pipe", "w"),
 			2 => array("pipe", "w"),
 		    );
-		$doctype = util_ifsetor($HTML->doctype);
-		if (!$doctype) {
-			$doctype = 'transitional';
-		}
 		$xmlstarlet = proc_open("xmlstarlet val -d " .
 		    escapeshellarg($dtdpath . $sysDTDs[$doctype]['dtdfile']) .
 		    " -e -", $dspec, $pipes);
@@ -247,7 +257,11 @@ function ffOutputHandler($buffer) {
 	/* return final buffer */
 	if ($has_div)
 		$buffer .= "\n</div></div>";
-	return ($buffer . "\n</body></html>\n");
+	if ($sysdebug_doframe) {
+		return substr($buffer, $bufferstrip);
+	} else {
+		return $buffer . "\n</body></html>\n";
+	}
 }
 
 if (forge_get_config('sysdebug_phphandler')) {
@@ -256,7 +270,14 @@ if (forge_get_config('sysdebug_phphandler')) {
 }
 
 $sysdebug_lazymode_on = false;
+$sysdebug_doframe = false;
 ob_start("ffOutputHandler", 0, false);
+
+function sysdebug_ajaxbody($enable=true) {
+	global $sysdebug_doframe;
+
+	$sysdebug_doframe = $enable;
+}
 
 function sysdebug_off($hdr=false, $replace=true, $resp=false) {
 	global $sysdebug_enable;

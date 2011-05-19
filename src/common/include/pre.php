@@ -195,6 +195,9 @@ if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 	function sysdebug_lazymode($enable) {
 		/* nothing */
 	}
+	function sysdebug_ajaxbody($enable) {
+		/* nothing */
+	}
 }
 
 // Get constants used for flags or status

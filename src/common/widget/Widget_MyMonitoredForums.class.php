@@ -140,7 +140,7 @@ class Widget_MyMonitoredForums extends Widget {
         $request =& HTTPRequest::instance();
         $ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
         if ($request->exist('hide_item_id') || $request->exist('hide_forum')) {
-            $ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_forum=' . $request->get('hide_forum');
+            $ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_forum=' . $request->get('hide_forum');
         }
         return $ajax_url;
     }
