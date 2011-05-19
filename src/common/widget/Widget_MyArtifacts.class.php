@@ -108,9 +108,10 @@ class Widget_MyArtifacts extends Widget {
 		}
 
 		if (count($my_artifacts) > 0) {
-			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 0);
+			$html_my_artifacts .= $this->_display_artifacts($my_artifacts, 1);
 		} else {
-			$html_my_artifacts .= _("You have no artifacts");
+			$html_my_artifacts .= '<tr><td colspan="3">' .
+			    _("You have no artifacts") . '</td></tr>';
 		}
 		$html_my_artifacts .= '<tr><td colspan="3">'.(($this->_artifact_show == 'N' || count($my_artifacts) > 0)?' ':_("None")).'</td></tr>';
 		$html_my_artifacts .= '</table>';
@@ -156,7 +157,6 @@ class Widget_MyArtifacts extends Widget {
 			$atid = $trackers_array->getArtifactType()->getID();
 			$group_id = $trackers_array->getArtifactType()->getGroup()->getID();
 
-			// {{{ check permissions
 			//create group
 			$group = $pm->getProject($group_id);
 			if (!$group || !is_object($group) || $group->isError()) {
@@ -262,7 +262,7 @@ class Widget_MyArtifacts extends Widget {
 		$request =& HTTPRequest::instance();
 		$ajax_url = parent::getAjaxUrl($owner_id, $owner_type);
 		if ($request->exist('hide_item_id') || $request->exist('hide_artifact')) {
-			$ajax_url .= '&hide_item_id=' . $request->get('hide_item_id') . '&hide_artifact=' . $request->get('hide_artifact');
+			$ajax_url .= '&amp;hide_item_id=' . $request->get('hide_item_id') . '&amp;hide_artifact=' . $request->get('hide_artifact');
 		}
 		return $ajax_url;
 	}

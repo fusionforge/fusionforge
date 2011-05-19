@@ -68,10 +68,10 @@ function my_hide_url ($svc, $db_item_id, $item_id, $count, $hide) {
     }
 
     if ($hide) {
-                $hide_url= '<a href="?hide_'.$svc.'=0&hide_item_id='.$db_item_id.'"><img src="../images/pointer_right.png"  border="0" title="'._('Expand').'" alt="'._('Expand').'"></a>&nbsp;';
+                $hide_url= '<a href="?hide_'.$svc.'=0&amp;hide_item_id='.$db_item_id.'"><img src="../images/pointer_right.png"  border="0" title="'._('Expand').'" alt="'._('Expand').'" /></a> ';
                 $hide_now = true;
     } else {
-                $hide_url= '<a href="?hide_'.$svc.'=1&hide_item_id='.$db_item_id.'"><img src="../images/pointer_down.png"   border="0" title="'._('Collapse').'" alt="'._('Collapse').'"></a>&nbsp;';
+                $hide_url= '<a href="?hide_'.$svc.'=1&amp;hide_item_id='.$db_item_id.'"><img src="../images/pointer_down.png"   border="0" title="'._('Collapse').'" alt="'._('Collapse').'" /></a> ';
                 $hide_now = false;
     }
 

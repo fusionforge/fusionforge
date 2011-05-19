@@ -58,10 +58,10 @@ class Theme extends Layout {
 		
 		// The root location for images
 		if (!isset($params['h1']) && isset($params['title'])) {
-			$params['h1'] = $params['title'];
+			$params['h1'] = util_ifsetor($params['title'], "!! title not set !!");
 		}
 
-		if (!isset($params['title'])) {
+		if (!util_ifsetor($params['title'])) {
 			$params['title'] = forge_get_config('forge_name');
 		} else {
 			$params['title'] = $params['title'] . " - forge_get_config('forge_name') ";

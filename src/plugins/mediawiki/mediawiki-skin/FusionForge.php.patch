@@ -61,7 +61,7 @@
  	<div id="globalWrapper">
  		<div id="column-content">
  	<div id="content">
-@@ -242,7 +260,13 @@
+@@ -242,7 +260,12 @@
  
  -->
  <?php endif; ?>
@@ -71,7 +71,6 @@
 +	} else { ?>
  </body></html>
 +<?php	} ?>
-+        <!-- FUSIONFORGE Footer END -->
  <?php
  	wfRestoreWarnings();
  	} // end of execute() method

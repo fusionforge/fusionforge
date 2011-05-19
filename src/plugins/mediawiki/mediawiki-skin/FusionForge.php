@@ -270,7 +270,6 @@ class FusionForgeTemplate extends QuickTemplate {
 	} else { ?>
 </body></html>
 <?php	} ?>
-        <!-- FUSIONFORGE Footer END -->
 <?php
 	wfRestoreWarnings();
 	} // end of execute() method
