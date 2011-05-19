@@ -38,7 +38,12 @@ class SVNPlugin extends SCMPlugin {
 		$this->SCMPlugin () ;
 		$this->name = 'scmsvn';
 		$this->text = 'Subversion';
-		$this->svn_root = '/scmrepos/svn';
+		$this->svn_root_fs = '/scmrepos/svn';
+		if (!dir_exists($this->svn_root_fs.'/.')) {
+			$this->svn_root_fs = forge_get_config('repos_path',
+			    $this->name);
+		}
+		$this->svn_root_dav = '/svn';
 		$this->hooks[] = 'scm_browser_page';
 		$this->hooks[] = 'scm_update_repolist' ;
 		$this->hooks[] = 'scm_generate_snapshots' ;
@@ -100,10 +105,10 @@ class SVNPlugin extends SCMPlugin {
 		$b .= '<p>' ;
 		$module = $this->topModule($project);
 		if (forge_get_config('use_ssh', 'scmsvn')) {
-			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root.'/'.$project->getUnixName().$module.'</tt><br />';
+			$b .= '<tt>svn checkout svn://'.$project->getSCMBox().$this->svn_root_fs.'/'.$project->getUnixName().$module.'</tt><br />';
 		}
 		if (forge_get_config('use_dav', 'scmsvn')) {
-			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_login', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root .'/'. $project->getUnixName() .$module.'</tt><br/><br/>';
+			$b .= '<tt>svn checkout --username '.forge_get_config('anonsvn_login', 'scmsvn').' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . $project->getSCMBox(). $this->svn_root_dav .'/'. $project->getUnixName() .$module.'</tt><br/><br/>';
 			$b .= _('The password is ').forge_get_config('anonsvn_password', 'scmsvn').'<br/>';
 		}
 		$b .= '</p>';
@@ -125,7 +130,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout svn+ssh://'.$d.'@' . $project->getSCMBox() . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<h2>';
@@ -134,7 +139,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the SVN tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmsvn')) {
@@ -144,7 +149,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->svn_root .'/'. $project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout svn+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . $this->svn_root_fs .'/'. $project->getUnixName().$module.'</tt></p>' ;
 			}
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$b .= '<h2>';
@@ -153,7 +158,7 @@ class SVNPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root .'/'.$project->getUnixName().$module.'</tt></p>' ;
+				$b .= '<p><tt>svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $project->getSCMBox() . $this->svn_root_dav .'/'.$project->getUnixName().$module.'</tt></p>' ;
 			}
 		}
 		return $b ;
