@@ -83,8 +83,8 @@ class scmhookPlugin extends Plugin {
 		$group_id = $params['group_id'];
 		$hooksString = '';
 		foreach($params as $key => $value) {
-			if ($key == strstr($key, 'hook_')) {
-				$hookname = substr_replace($key,'',0,strlen('hook_'));
+			if ($key == strstr($key, 'scm')) {
+				$hookname = preg_replace('/scm[a-z][a-z][a-z]_/','',$key);
 				$extensions = $this->getAllowedExtension();
 				foreach($extensions as $extension) {
 					$hookname = preg_replace('/_'.$extension.'$/', '.'.$extension, $hookname);
@@ -98,8 +98,10 @@ class scmhookPlugin extends Plugin {
 		}
 		$res = db_query_params('UPDATE plugin_scmhook set hooks = $1, need_update = 1 where id_group = $2',
 					array($hooksString, $group_id));
+
 		if (!$res)
 			return false;
+
 		return true;
 	}
 
@@ -116,16 +118,18 @@ class scmhookPlugin extends Plugin {
 			echo '<thead><tr><th>'._('Enable Repository Hooks').'</th></tr></thead>';
 			echo '<tbody>';
 			for ($i = 0; $i < count($hooksAvailable); $i++) {
+				$labelHook = preg_replace('/scm[a-z][a-z][a-z]_/','',$hooksAvailable[$i]);
 				echo '<tr><td>';
 				echo '<input name="'.$hooksAvailable[$i].'" type="checkbox"';
-				if (in_array($hooksAvailable[$i], $hooksEnabled))
+
+				if (in_array($labelHook, $hooksEnabled))
 					echo ' checked="checked"';
 
 				if ($statusDeploy)
 					echo ' disabled="disabled"';
 
 				echo '/>';
-				echo '<label>'.preg_replace('/.*_/','',$hooksAvailable[$i]).'</label>';
+				echo '<label>'.$labelHook.'</label>';
 				echo '</td></tr>';
 			}
 			echo '</tbody></table></div>';
