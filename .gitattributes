@@ -545,6 +545,7 @@ src/common/include/config-vars.php -text
 src/common/include/config.php -text
 src/common/include/env.inc.php -text
 src/common/include/extras-debug.php -text
+src/common/include/forge_events.php -text
 src/common/include/group_section_texts.php -text
 src/common/include/minijson.php -text
 src/common/include/plugins_utils.php -text
@@ -605,6 +606,8 @@ src/cronjobs/generate_scm_snapshots.php -text
 src/cronjobs/get_news_notapproved.pl svneol=native#text/x-perl
 src/cronjobs/gforge-db-backup.sh -text svneol=unset#text/x-sh
 src/cronjobs/homedirs.php -text
+src/cronjobs/job-restart.sh -text
+src/cronjobs/job-server.pl -text
 src/cronjobs/mail/publicize_list.py -text
 src/cronjobs/update_docdata_dataword.php -text
 src/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
