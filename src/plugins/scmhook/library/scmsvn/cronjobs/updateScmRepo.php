@@ -34,8 +34,7 @@
  */
 function updateScmRepo($params) {
 	global $sys_gforge_user;
-	global $sys_apache_user;
-	global $sys_apache_group;
+
 	$group_id = $params['group_id'];
 	$hooksString = $params['hooksString'];
 	$svndir_root = $params['scm_root'];
