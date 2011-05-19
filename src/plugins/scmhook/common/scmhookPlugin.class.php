@@ -33,40 +33,6 @@ class scmhookPlugin extends Plugin {
 
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
-			case "groupisactivecheckbox": {
-				//Check if the group is active
-				// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
-				$group_id=$params['group'];
-				$group = &group_get_object($group_id);
-				echo "<tr>";
-				echo "<td>";
-				echo ' <input type="CHECKBOX" name="use_scmhookplugin" value="1" ';
-				// CHECKED OR UNCHECKED?
-				if ( $group->usesPlugin($this->name)) {
-					echo "CHECKED";
-				}
-				echo "><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<strong>Use ".$this->text." Plugin</strong>";
-				echo "</td>";
-				echo "</tr>";
-				break;
-			}
-			case "groupisactivecheckboxpost": {
-				// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
-				$group_id=$params['group'];
-				$group = &group_get_object($group_id);
-				$use_scmhookplugin = getStringFromRequest('use_scmhookplugin');
-				if ( $use_scmhookplugin == 1 ) {
-					$group->setPluginUse($this->name);
-					$this->add($group_id);
-				} else {
-					$group->setPluginUse($this->name, false);
-					$this->remove($group_id);
-				}
-				break;
-			}
 			case "adminScmHook": {
 				$group_id = $params['group_id'];
 				$group = &group_get_object($group_id);
@@ -82,19 +48,34 @@ class scmhookPlugin extends Plugin {
 		}
 	}
 
-	function add($group_id) {
-		$res = db_query_params('INSERT INTO plugin_scmhook (id_group) VALUES ($1)', array($group_id));
+	function exists($group_id) {
+		$res = db_query_params('SELECT id_group FROM plugin_scmhook WHERE id_group = $1', array($group_id));
 		if (!$res)
 			return false;
 
+		if (db_numrows($res))
+			return true;
+
+		return false;
+	}
+
+	function add($group_id) {
+		if (!$this->exists($group_id)) {
+			$res = db_query_params('INSERT INTO plugin_scmhook (id_group) VALUES ($1)', array($group_id));
+			if (!$res)
+				return false;
+
+		}
 		return true;
 	}
 
 	function remove($group_id) {
-		$res = db_query_params('DELETE FROM plugin_scmhook where id_group = $1', array($group_id));
-		if (!$res)
-			return false;
+		if ($this->exists($group_id)) {
+			$res = db_query_params('DELETE FROM plugin_scmhook where id_group = $1', array($group_id));
+			if (!$res)
+				return false;
 
+		}
 		return true;
 	}
 
@@ -202,6 +183,23 @@ class scmhookPlugin extends Plugin {
 
 	function getAllowedExtension() {
 		return array("sh", "pl");
+	}
+
+	/**
+	 * override default groupisactivecheckboxpost function for init value in db
+	 */
+	function groupisactivecheckboxpost(&$params) {
+		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+		$group = group_get_object($params['group']);
+		$flag = strtolower('use_'.$this->name);
+		if ( getIntFromRequest($flag) == 1 ) {
+			$group->setPluginUse($this->name);
+			$this->add($group->getID());
+		} else {
+			$group->setPluginUse($this->name, false);
+			$this->remove($group->getID());
+		}
+		return true;
 	}
 }
 
