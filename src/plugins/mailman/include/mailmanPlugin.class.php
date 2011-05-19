@@ -75,7 +75,7 @@ class mailmanPlugin extends Plugin {
 		if ($hookname == "usermenu") {
 			$text = $this->text; // this is what shows in the tab
 			if ($G_SESSION->usesPlugin("mailman")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we�re calling is the user one
+				$param = '?type=user&amp;id=' . $G_SESSION->getId() . "&amp;pluginname=" . $this->name; // we indicate the part we�re calling is the user one
 				echo ' | ' . $HTML->PrintSubMenu (array ($text),
 					array ('/plugins/mailman/index.php' . $param ));				
 			}
@@ -176,9 +176,9 @@ class mailmanPlugin extends Plugin {
 					}
 					echo '
 						<tr '.$HTML->boxGetAltRowStyle(0).'><td class="align-center"><a href="/plugins/mailman/index.php?group_id='.$group->getID().
-						'&action=unsubscribe&id='.$l->getID().'">' .
+						'&amp;action=unsubscribe&amp;id='.$l->getID().'">' .
 						'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'border="0" alt="" /></a>' .
-						'</td><td width="99%"><a href="/plugins/mailman/index.php?group_id='.$group->getID().'&action=options&id='.$l->getID().'">'.
+						'</td><td width="99%"><a href="/plugins/mailman/index.php?group_id='.$group->getID().'&amp;action=options&amp;id='.$l->getID().'">'.
 						$l->getName().'"</a></td></tr>';
 					$last_group= $group->getID();
 				}

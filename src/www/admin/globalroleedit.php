@@ -139,8 +139,10 @@ if ($role instanceof RoleExplicit) {
 		
 		foreach ($users as $user) {
 			echo '
+<!-- to fix XHTML --><tr><td colspan="2">
 		<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">
-		<input type="hidden" name="role_id" value="'.$role_id.'">
+		<input type="hidden" name="role_id" value="'.$role_id.'" />
+<table>
                         <tr>
                         <td style="white-space: nowrap;">
 			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
@@ -156,9 +158,11 @@ if ($role instanceof RoleExplicit) {
 			echo '<td><input type="submit" name="rmuser" value="'._("Remove").'" />
                         </td>
 			</tr>
-                </form>';
-			echo '</tbody></table>';
+</table>
+                </form>
+</td></tr>';
 		}
+		echo '</tbody></table>';
 	} else {
 		echo '<p><strong>'._('No users currently have this role').'</strong></p>' ;
 	}
@@ -171,24 +175,23 @@ if ($role instanceof RoleExplicit) {
 			name="form_unix_name" size="10" value="" />
 		<input type="submit" name="adduser"
 			value="<?php echo _("Add User") ?>" />
-		<input type="hidden" name="role_id" value="<?php echo $role_id; ?>">
+		<input type="hidden" name="role_id" value="<?php echo $role_id; ?>" />
 		</p>
 		</form>
 <?php
 }
 		
 echo '
-<p>
 <form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">';
-echo '<input type="hidden" name="role_id" value="'.$role_id.'">' ;
+echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
 		
 if ($role instanceof RoleExplicit) {
-	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"></p>';
+	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /></p>';
 	echo '<input type="checkbox" name="public" value="1"' ;
 	if ($role->isPublic()) {
-		echo ' checked' ;
+		echo ' checked="checked"' ;
 	}
-	echo '> '._('Public role (can be referenced by projects)').'</p>' ;
+	echo '/> '._('Public role (can be referenced by projects)');
 } else {
 	echo '<p><strong>'._('Role Name').'</strong><br />'.$role->getName().'</p>';
 }

@@ -89,7 +89,7 @@ if (!session_loggedin()) {
 			if(count($at_arr) > 0) {
  	                       	echo '
         	                <tr>
-                	        <td colspan="' . (array_sum($display_col)+1) . '" align="left" style="background-color: #CADACA; padding-top: 4px; border-top: 1px dotted darkgreen; border-bottom: 1px solid darkgreen; font-size: larger; color: darkgreen;"><strong>&nbsp;&bull;&nbsp;' .
+                	        <td colspan="' . (array_sum($display_col)+1) . '" align="left" style="background-color: #CADACA; padding-top: 4px; border-top: 1px dotted darkgreen; border-bottom: 1px solid darkgreen; font-size: larger; color: darkgreen;"><strong> • ' .
 					util_make_link ('/tracker/?group_id='.$p->getID(),
 							$p->getPublicName())
 					. '</strong></td></tr>';
@@ -105,16 +105,16 @@ if (!session_loggedin()) {
                         	        // get artifacts from object
                                 	$art_arr = $af->getArtifacts();
 	                                if (count($art_arr) > 0) {
-        	                                echo '<tr><td colspan="' . (array_sum($display_col)+1) . '" align="left" style="color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;"><strong>&nbsp;&middot;&nbsp;'. 
-							util_make_link ('/tracker/?group_id='.$at->Group->getID().'&atid='.$at->getID(),
+        	                                echo '<tr><td colspan="' . (array_sum($display_col)+1) . '" align="left" style="color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;"><strong> · '. 
+							util_make_link ('/tracker/?group_id='.$at->Group->getID().'&amp;atid='.$at->getID(),
 									$at->getName()) . '</strong></td></tr>';
                 	                        $toggle=0;
                         	                foreach($art_arr as $art) {
                                 	                echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' valign="top"><td align="center">'. $art->getID() .'</td>';
                                         	        if ($display_col['summary'])
-                                                	echo '<td align="left"><a href="/tracker/?func=detail&aid='.
+                                                	echo '<td align="left"><a href="/tracker/?func=detail&amp;aid='.
 	                                                        $art->getID() .
-        	                                                '&group_id='. $p->getID() .'&atid='.
+        	                                                '&amp;group_id='. $p->getID() .'&amp;atid='.
                 	                                        $ath->getID().'">'.
                         	                                $art->getSummary().
                                 	                        '</a></td>';
@@ -146,7 +146,7 @@ if (!session_loggedin()) {
 											$pg = new ProjectGroup($g, $projectid);
 											echo $pg->getName().'<br/>';
      										        $summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-											echo '<a href="../pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid.'">';
+											echo '<a href="../pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">';
 											echo $summary;
 											echo '</a>';
 										}
@@ -161,7 +161,7 @@ if (!session_loggedin()) {
 				if (!$art_found) {
 					echo '
         		        	<tr>
-                		        <td colspan="' . (array_sum($display_col)+1) . '" align="left"><strong>&nbsp;--</strong></td></tr>';
+                		        <td colspan="' . (array_sum($display_col)+1) . '" align="left"><strong> --</strong></td></tr>';
 				}
 			}
 		}
