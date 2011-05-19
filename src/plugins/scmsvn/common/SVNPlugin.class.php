@@ -231,21 +231,21 @@ class SVNPlugin extends SCMPlugin {
 		}
 	}
 
-	function createOrUpdateRepo ($params) {
-		$project = $this->checkParams ($params) ;
+	function createOrUpdateRepo($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false ;
 		}
 
-		if (! $project->usesPlugin ($this->name)) {
+		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
 
-		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName() ;
+		$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
 			system ("svnadmin create $repo") ;
-			system ("svn mkdir -m'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null") ;
+			system ("svn mkdir -m 'Init' file:///$repo/trunk file:///$repo/tags file:///$repo/branches >/dev/null");
 		}
 
 		$this->installOrUpdateCmds($project, $project->getUnixName(), $repo);
