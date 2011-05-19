@@ -125,7 +125,7 @@ class scmhookPlugin extends Plugin {
 					echo ' disabled="disabled"';
 
 				echo '/>';
-				echo '<label>'.$hooksAvailable[$i].'</label>';
+				echo '<label>'.preg_replace('/.*_/','',$hooksAvailable[$i]).'</label>';
 				echo '</td></tr>';
 			}
 			echo '</tbody></table></div>';
