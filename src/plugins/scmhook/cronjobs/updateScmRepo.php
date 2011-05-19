@@ -29,7 +29,7 @@ require_once $gfcommon.'include/cron_utils.php';
 require_once $gfplugins.'scmhook/common/scmhookPlugin.class.php';
 
 // if you want debug output, uncomment the verbose variable.
-//$verbose = true;
+$verbose = true;
 
 ############
 ###### START
@@ -71,7 +71,7 @@ while ($row = db_fetch_array($res)) {
 			$params = array();
 			$params['group_id'] = $group_id;
 			$params['hooksString'] = $row['hooks'];
-			$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
+			$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $group->getUnixName();
 
 			if (updateScmRepo($params)) {
 				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(1, $group_id));
