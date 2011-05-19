@@ -39,7 +39,7 @@ class SVNPlugin extends SCMPlugin {
 		$this->name = 'scmsvn';
 		$this->text = 'Subversion';
 		$this->svn_root_fs = '/scmrepos/svn';
-		if (!dir_exists($this->svn_root_fs.'/.')) {
+		if (!file_exists($this->svn_root_fs.'/.')) {
 			$this->svn_root_fs = forge_get_config('repos_path',
 			    $this->name);
 		}
