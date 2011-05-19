@@ -33,65 +33,48 @@
  * @return	boolean	success or not
  */
 function updateScmRepo($params) {
-	global $sys_gforge_user;
-
 	$group_id = $params['group_id'];
 	$hooksString = $params['hooksString'];
 	$svndir_root = $params['scm_root'];
-	$group = &group_get_object($group_id);
+	$group = group_get_object($group_id);
 	$scmhookPlugin = new scmhookPlugin;
 	$hooksAvailable = $scmhookPlugin->getAvailableHooks($group_id);
-	$scm_box = $group->getSCMBox();
 	$unixname = $group->getUnixName();
 
-	$cr = 0;
-	// clean-up
-	$cr = passthru("ssh $sys_gforge_user@$scm_box \"[ -d $svndir_root/$unixname ]\"", $cr);
-	if ($cr == 0) {
-		$cr = passthru("ssh $sys_gforge_user@$scm_box \"sudo rm $svndir_root/$unixname/hooks/pre-commit\"", $cr);
+	if (is_dir($svndir_root)) {
+		@unlink($svndir_root.'/hooks/pre-commit');
+		@unlink($svndir_root.'/hooks/post-commit');
 		foreach($hooksAvailable as $hookAvailable) {
-			$cr = passthru("ssh $sys_gforge_user@$scm_box \"sudo rm $svndir_root/$unixname/hooks/$hookAvailable\"", $cr);
+			@unlink($svndir_root.'/hooks/'.$hookAvailable);
 		}
-	}
-	// deploy new hooks
-	$newHooks = explode('|', $hooksString);
-	$cr = passthru("ssh $sys_gforge_user@$scm_box \"mkdir -p /tmp/hooks/$unixname\"", $cr);
-	if ($cr == 0) {
+
+		$newHooks = explode('|', $hooksString);
 		foreach($newHooks as $newHook) {
-			exec('scp '.dirname(__FILE__).'/../hooks/'.$newHook.' '.$sys_gforge_user.'@'.$scm_box.':/tmp/hooks/'.$unixname.'/');
+			copy(dirname(__FILE__).'/../hooks/'.$newHook, $svndir_root.'/hooks/'.$newHook);
+			chmod($svndir_root.'/hooks/'.$newHook, 0755);
 		}
-		$cr = passthru("ssh $sys_gforge_user@$scm_box sudo mv /tmp/hooks/$unixname/* $svndir_root/$unixname/hooks/", $cr);
-		$cr = passthru("ssh $sys_gforge_user@$scm_box sudo chown -R apache:apache $svndir_root/$unixname/hooks", $cr);
+		// prepare the pre-commit
+		$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
+		fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit.head'));
+		$loopid = 0;
+		$string = '';
 		foreach($newHooks as $newHook) {
-			$cr = passthru("ssh $sys_gforge_user@$scm_box sudo chmod 755 $svndir_root/$unixname/hooks/$newHook", $cr);
+			if ($loopid) {
+				//insert && \ between commands
+				$string .= ' && ';
+			}
+			$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/pre-commit.'.$newHook));
+			$loopid = 1;
 		}
+		$string .= "\n";
+		fwrite($file,$string);
+		fclose($file);
+		copy('/tmp/pre-commit-'.$unixname.'.tmp', $svndir_root.'/hooks/pre-commit');
+		chmod($svndir_root.'/hooks/pre-commit', 0755);
+		unlink('/tmp/pre-commit-'.$unixname.'.tmp');
+		return true;
 	}
-	// prepare the pre-commit
-	$file = fopen("/tmp/pre-commit-$unixname.tmp", "w");
-	fwrite($file, file_get_contents(dirname(__FILE__).'/../skel/pre-commit.head'));
-	$loopid = 0;
-	$string = '';
-	foreach($newHooks as $newHook) {
-		if ($loopid) {
-			//insert && \ between commands
-			$string .= ' && ';
-		}
-		$string .= rtrim(file_get_contents(dirname(__FILE__).'/../skel/pre-commit.'.$newHook));
-		$loopid = 1;
-	}
-	$string .= "\n";
-	fwrite($file,$string);
-	fclose($file);
-	logger ("INFO", "pre-commit file generated for project $unixname");
-	// deploy pre-commit
-	exec('scp /tmp/pre-commit-'.$unixname.'.tmp '.$sys_gforge_user.'@'.$scm_box.':/tmp/hooks/'.$unixname.'/pre-commit');
-	$cr = passthru("ssh $sys_gforge_user@$scm_box sudo mv /tmp/hooks/$unixname/pre-commit $svndir_root/$unixname/hooks/", $cr);
-	$cr = passthru("ssh $sys_gforge_user@$scm_box sudo chown -R apache:apache $svndir_root/$unixname/hooks", $cr);
-	$cr = passthru("ssh $sys_gforge_user@$scm_box sudo chmod 755 $svndir_root/$unixname/hooks/pre-commit", $cr);
-	// clean the tmp dirs
- 	passthru("ssh $sys_gforge_user@$scm_box \"rm -rf /tmp/hooks/$unixname\"");
-	exec("rm /tmp/pre-commit-$unixname.tmp");
-	return true;
+	return false;
 }
 
 ?>

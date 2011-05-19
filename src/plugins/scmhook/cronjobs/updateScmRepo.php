@@ -74,7 +74,7 @@ while ($row = db_fetch_array($res)) {
 			$params['scm_root'] = forge_get_config('repos_path', 'scmsvn') . '/' . $group->getUnixName();
 
 			if (updateScmRepo($params)) {
-				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(1, $group_id));
+				$res = db_query_params('UPDATE plugin_scmhook set need_update = $1 where id_group = $2', array(0, $group_id));
 				if (!$res) {
 					$returnvalue = false;
 				}
