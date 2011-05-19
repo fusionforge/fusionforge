@@ -109,7 +109,9 @@ function ffOutputHandler($buffer) {
 
 	/* cut off </body></html> (hopefully only) at the end */
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
+	$bufend = array(false, substr($buffer, -100));
 	if (substr($buffer, -strlen("</html>")) != "</html>") {
+		$bufend[0] = true;
 		$ffErrors[] = array('type' => "error",
 		    'message' => htmlentities("does not end with </html> tag"));
 		$buffer = str_ireplace("</html>", "", $buffer);
@@ -117,12 +119,19 @@ function ffOutputHandler($buffer) {
 		$buffer = substr($buffer, 0, -strlen("</html>"));
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
 	if (substr($buffer, -strlen("</body>")) != "</body>") {
+		$bufend[0] = true;
 		$ffErrors[] = array('type' => "error",
 		    'message' => htmlentities("does not end with </body> tag"));
 		$buffer = str_ireplace("</body>", "", $buffer);
 	} else
 		$buffer = substr($buffer, 0, -strlen("</body>"));
 	$buffer = rtrim($buffer);	/* spaces, newlines, etc. */
+
+	if ($bufend[0]) {
+		$ffErrors[] = array('type' => "info",
+		    'message' => "The output has ended thus: " .
+		    htmlentities($bufend[1]));
+	}
 
 	/* append errors, if any */
 	$has_div = false;
