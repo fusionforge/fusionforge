@@ -1403,6 +1403,54 @@ if ( !function_exists('sys_get_temp_dir')) {
 	}
 }
 
+/* convert '\n' to <br /> or </p><p> */
+function util_pwrap($encoded_string) {
+	return str_replace("<p></p>", "",
+	    str_replace("<p><br />", "<p>",
+	    "<p>" . str_replace("<br /><br />", "</p><p>",
+	    implode("<br />",
+	    explode("\n",
+	    $encoded_string
+	    ))) . "</p>"));
+}
+function util_ttwrap($encoded_string) {
+	return str_replace("<p><tt></tt></p>", "",
+	    str_replace("<p><tt><br />", "<p><tt>",
+	    "<p><tt>" . str_replace("<br /><br />", "</tt></p><p><tt>",
+	    implode("<br />",
+	    explode("\n",
+	    $encoded_string
+	    ))) . "</tt></p>"));
+}
+
+/* takes a string and returns it HTML encoded, URIs made to hrefs */
+function util_uri_grabber($unencoded_string, $tryaidtid=false) {
+	/* escape all ^A and ^B as ^BX^B and ^BY^B, respectively */
+	$s = str_replace("\x01", "\x02X\x02", str_replace("\x02", "\x02Y\x02",
+	    $unencoded_string));
+	/* replace all URIs with ^AURI^A */
+	$s = preg_replace(
+	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$._!~*\'()%-]+)|',
+	    "\x01\$1\x01", $s);
+	if (!$s)
+		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
+	/* encode the string */
+	$s = htmlentities($s, ENT_QUOTES, "UTF-8");
+	/* convert 「^Afoo^A」 to 「<a href="foo">foo</a>」 */
+	$s = preg_replace('|\x01([^\x01]+)\x01|',
+	    '<a href="$1">$1</a>', $s);
+	if (!$s)
+		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
+//	/* convert [#123] to links if found */
+//	if ($tryaidtid)
+//		$s = util_tasktracker_links($s);
+	/* convert ^BX^B and ^BY^B back to ^A and ^B, respectively */
+	$s = str_replace("\x02Y\x02", "\x02", str_replace("\x02X\x02", "\x01",
+	    $s));
+	/* return the final result */
+	return $s;
+}
+
 /* secure a (possibly already HTML encoded) string */
 function util_html_secure($s) {
 	return htmlentities(html_entity_decode($s, ENT_QUOTES, "UTF-8"),
