@@ -54,14 +54,14 @@ if ($group_name_search != '') {
 		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
 					array (strtolower ("$group_name_search%"))) ;
 	} else {
-	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
-FROM groups
-LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
-WHERE license_id=license
-AND lower(group_name) LIKE $1
-GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name
-ORDER BY '.$sortorder,
-				array (strtolower ("$group_name_search%"))) ;
+		$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
+							FROM groups
+							LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
+							WHERE license_id=license
+							AND lower(group_name) LIKE $1
+							GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name
+							ORDER BY '.$sortorder,
+							array (strtolower ("$group_name_search%"))) ;
 	}
 } else {
 	if (USE_PFO_RBAC) {
@@ -73,9 +73,9 @@ ORDER BY '.$sortorder,
 		$res = db_query_qpa ($qpa) ;
 	} else {
 		$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_public,groups.is_template,status,license_name,COUNT(user_group.group_id) AS members
-FROM groups
-LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
-WHERE license_id=license',
+								FROM groups
+								LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses
+								WHERE license_id=license',
 					 array ()) ;
 		if ($status) {
 			$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
