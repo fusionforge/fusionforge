@@ -3,6 +3,7 @@
  * Role Editing Page
  *
  * Copyright 2010, Roland Mas
+ * Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -108,15 +109,24 @@ if (getStringFromRequest('adduser')) {
 	}
 }
 
-if (getStringFromRequest('rmuser')) {
-	if ($role instanceof RoleExplicit) {
-		$user_id = getIntFromRequest ('user_id') ;
-		$u = user_get_object ($user_id) ;
-		if ($u && $u instanceof GFUser && !$u->isError()) {
-			if ($role->removeUser ($u)) {
-				$feedback .= _('User removed successfully') ;
-			} else {
-				$error_msg .= _("Error while removing user from role") ;
+if (getStringFromRequest('dormusers')) {
+	$reallyremove = getStringFromRequest('reallyremove');
+	if (!$reallyremove) {
+		$error_msg .= _('ERROR: You did not tick the “really remove” box!');
+	} else if ($role instanceof RoleExplicit) {
+		$rmlist = getArrayFromRequest('rmusers');
+		foreach ($rmlist as $user_id) {
+			$u = user_get_object ($user_id) ;
+			if ($u && $u instanceof GFUser && !$u->isError()) {
+				if ($role->removeUser ($u)) {
+					$feedback .= sprintf(
+					    _('User %s removed successfully') . "\n",
+					    $u->getUnixName());
+				} else {
+					$error_msg .= sprintf(
+					    _("Error while removing user %s from role")  . "\n",
+					    $u->getUnixName());
+				}
 			}
 		}
 	} else {
@@ -132,37 +142,39 @@ if ($role instanceof RoleExplicit) {
 	if (count ($users) > 0) {
 		echo '<p><strong>'._('Current users with this role').'</strong></p>' ;
 
-		echo '<table><thead><tr>';
-		echo '<th>'._('User name').'</th>';
-		echo '<th>'._('Remove').'</th>';
-		echo '</tr></thead><tbody>';
-		
-		foreach ($users as $user) {
-			echo '
-<!-- to fix XHTML --><tr><td colspan="2">
+		echo '
 		<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">
 		<input type="hidden" name="role_id" value="'.$role_id.'" />
-<table>
-                        <tr>
-                        <td style="white-space: nowrap;">
-			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
-			  <a href="/users/'.$user->getUnixName().'">';
+		<table><thead><tr>
+			<th>'._('User name').'</th>
+			<th>'._('Remove').'</th>
+		</tr></thead><tbody>';
+
+		foreach ($users as $user) {
+			echo '
+		<tr>
+			<td style="white-space:nowrap;">
+				<a href="/users/'.$user->getUnixName().'">';
 			$display = $user->getRealName();
-			if (!empty($display)) {
-				echo $user->getRealName();
-			} else {
-				echo $user->getUnixName();
+			if (empty($display)) {
+				$display = $user->getUnixName();
 			}
-			echo '</a>
-			</td>';
-			echo '<td><input type="submit" name="rmuser" value="'._("Remove").'" />
-                        </td>
-			</tr>
-</table>
-                </form>
-</td></tr>';
+			echo $display . '</a>
+			</td><td>
+				<input type="checkbox" name="rmusers[]" value="' .
+			    $user->getID() . '" /> ' . _('Remove') . '
+			</td>
+		</tr>';
 		}
-		echo '</tbody></table>';
+		echo '
+		<tr><td colspan="2">
+			<input type="checkbox" name="reallyremove" value="1" />
+			' . _('Really remove ticked users from role?') . '
+		</td></tr><tr><td colspan="2">
+			<input type="submit" name="dormusers" value="' .
+		    _("Remove") . '" />
+		</td></tr>
+		</tbody></table></form>';
 	} else {
 		echo '<p><strong>'._('No users currently have this role').'</strong></p>' ;
 	}
