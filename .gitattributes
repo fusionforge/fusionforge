@@ -3739,8 +3739,10 @@ src/plugins/wiki/www/themes/Sidebar/hyperapplet.php -text
 src/plugins/wiki/www/themes/Sidebar/hyperwiki.jar -text
 src/plugins/wiki/www/themes/Sidebar/hyperwiki.php -text
 src/plugins/wiki/www/themes/Sidebar/images/UEB16.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/Sidebar/images/bullet.png -text
 src/plugins/wiki/www/themes/Sidebar/images/logo.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/images/mini_help.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/Sidebar/images/wikiuser.png -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/README -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/calendar-phpwiki.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Sidebar/jscalendar/calendar-setup.js -text
@@ -3840,6 +3842,7 @@ src/plugins/wiki/www/themes/blog/Kubrick-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/Kubrick.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/Makefile -text
 src/plugins/wiki/www/themes/blog/images/Edit-chalk-10bo12.png -text svneol=unset#image/png
+src/plugins/wiki/www/themes/blog/images/UEB16.png -text
 src/plugins/wiki/www/themes/blog/images/actionbarbg.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/bottom_sidebar_round.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/crumb.png -text svneol=unset#image/png
