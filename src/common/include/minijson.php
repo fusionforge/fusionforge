@@ -68,6 +68,7 @@ function minijson_encode($x, $ri="") {
 	}
 	if (is_string($x)) {
 		$rs = "\"";
+		$x .= "\0";
 		/*
 		 * A bit unbelievable: not only does mb_check_encoding
 		 * not exist from the start, but also does it not check
@@ -260,14 +261,14 @@ function minijson_decode($sj, &$ov, $depth=32) {
 			$p++;
 
 		/* parse recursively */
-		$rv = minijson_decode_value(&$j, &$p, &$ov, $depth);
+		$rv = minijson_decode_value($j, $p, $ov, $depth);
 	} else {
 		$ov = "input not valid UTF-8";
 	}
 
 	if ($rv) {
 		/* skip optional whitespace after tokens */
-		minijson_skip_wsp(&$j, &$p);
+		minijson_skip_wsp($j, $p);
 
 		/* end of string? */
 		if ($j[$p] !== 0) {
@@ -312,7 +313,7 @@ function minijson_decode_array(&$j, &$p, &$ov, $depth) {
 	/* I wish there were a goto in PHP… */
 	while (true) {
 		/* skip optional whitespace between tokens */
-		minijson_skip_wsp(&$j, &$p);
+		minijson_skip_wsp($j, $p);
 
 		/* end of the array? */
 		if ($j[$p] == 0x5D) {
@@ -343,7 +344,7 @@ function minijson_decode_array(&$j, &$p, &$ov, $depth) {
 
 		/* parse the member value */
 		$v = NULL;
-		if (!minijson_decode_value(&$j, &$p, &$v, $depth)) {
+		if (!minijson_decode_value($j, $p, $v, $depth)) {
 			/* pass through error code */
 			$ov = $v;
 			return false;
@@ -358,7 +359,7 @@ function minijson_decode_object(&$j, &$p, &$ov, $depth) {
 
 	while (true) {
 		/* skip optional whitespace between tokens */
-		minijson_skip_wsp(&$j, &$p);
+		minijson_skip_wsp($j, $p);
 
 		/* end of the object? */
 		if ($j[$p] == 0x7D) {
@@ -388,7 +389,7 @@ function minijson_decode_object(&$j, &$p, &$ov, $depth) {
 		$first = false;
 
 		/* skip optional whitespace between tokens */
-		minijson_skip_wsp(&$j, &$p);
+		minijson_skip_wsp($j, $p);
 
 		/* parse the member key */
 		if ($j[$p++] != 0x22) {
@@ -396,14 +397,14 @@ function minijson_decode_object(&$j, &$p, &$ov, $depth) {
 			return false;
 		}
 		$k = null;
-		if (!minijson_decode_string(&$j, &$p, &$k)) {
+		if (!minijson_decode_string($j, $p, $k)) {
 			/* pass through error code */
 			$ov = $k;
 			return false;
 		}
 
 		/* skip optional whitespace between tokens */
-		minijson_skip_wsp(&$j, &$p);
+		minijson_skip_wsp($j, $p);
 
 		/* key-value separator? */
 		if ($j[$p++] != 0x3A) {
@@ -413,7 +414,7 @@ function minijson_decode_object(&$j, &$p, &$ov, $depth) {
 
 		/* parse the member value */
 		$v = NULL;
-		if (!minijson_decode_value(&$j, &$p, &$v, $depth)) {
+		if (!minijson_decode_value($j, $p, $v, $depth)) {
 			/* pass through error code */
 			$ov = $v;
 			return false;
@@ -424,7 +425,7 @@ function minijson_decode_object(&$j, &$p, &$ov, $depth) {
 
 function minijson_decode_value(&$j, &$p, &$ov, $depth) {
 	/* skip optional whitespace between tokens */
-	minijson_skip_wsp(&$j, &$p);
+	minijson_skip_wsp($j, $p);
 
 	/* parse begin of Value token */
 	$wc = $j[$p++];
@@ -462,19 +463,19 @@ function minijson_decode_value(&$j, &$p, &$ov, $depth) {
 		$ov = "expected alse after f near wchar #" . $p;
 	} else if ($wc == 0x5B) {
 		if (--$depth > 0) {
-			return minijson_decode_array(&$j, &$p, &$ov, $depth);
+			return minijson_decode_array($j, $p, $ov, $depth);
 		}
 		$ov = "recursion limit exceeded at wchar #" . $p;
 	} else if ($wc == 0x7B) {
 		if (--$depth > 0) {
-			return minijson_decode_object(&$j, &$p, &$ov, $depth);
+			return minijson_decode_object($j, $p, $ov, $depth);
 		}
 		$ov = "recursion limit exceeded at wchar #" . $p;
 	} else if ($wc == 0x22) {
-		return minijson_decode_string(&$j, &$p, &$ov);
+		return minijson_decode_string($j, $p, $ov);
 	} else if ($wc == 0x2D || ($wc >= 0x30 && $wc <= 0x39)) {
 		$p--;
-		return minijson_decode_number(&$j, &$p, &$ov);
+		return minijson_decode_number($j, $p, $ov);
 	} else {
 		$ov = sprintf("unexpected U+%04X at wchar #%u", $wc, $p);
 	}
@@ -521,8 +522,8 @@ function minijson_decode_string(&$j, &$p, &$ov) {
 				$v = 0;
 				for ($tmp = 1; $tmp <= 4; $tmp++) {
 					$v <<= 4;
-					if (!minijson_get_hexdigit(&$j, &$p,
-					    &$v, $tmp)) {
+					if (!minijson_get_hexdigit($j, $p,
+					    $v, $tmp)) {
 						/* pass through error code */
 						return false;
 					}
