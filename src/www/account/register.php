@@ -231,7 +231,7 @@ if (forge_get_config('use_jabber')) {
 		      util_make_url ('/terms.php')); ?>
 	</p>
 <?php } ?>
-<?php if (forge_check_global_perm ('forge_admin')) { ?>
+<?php if (false && forge_check_global_perm ('forge_admin')) { ?>
 	<p><input type="checkbox" name="activate_immediately" value="0" />
 <?php print _('Activate this user immediately') ; ?>
 	</p>
