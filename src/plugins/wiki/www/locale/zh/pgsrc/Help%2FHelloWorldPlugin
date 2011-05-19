@@ -1,7 +1,7 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
 Content-Type: application/x-phpwiki;
-  pagename=HelloWorldPlugin;
+  pagename=Help%2FHelloWorldPlugin;
   flags="";
   author=test;
   version=10;
@@ -76,3 +76,8 @@ extends WikiPlugin
     }
 };
 >>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

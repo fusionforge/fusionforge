@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:58:00 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: CalendarPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FCalendarPlugin 7931 2011-02-04 16:03:06Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=CalendarPlugin;
+  pagename=Help%2FCalendarPlugin;
   flags="";
   markup=2;
   charset=UTF-8
@@ -31,15 +31,15 @@ CalendarPlugin 可以用來在 wiki 頁面的月曆. 對 PersonalWiki~s 來說�
 
 ==== 月份的選擇
 
-__year__:
+**year**:
 
   為月曆指定年. (預設: 目前的年份.)
 
-__month__:
+**month**:
 
   為月曆指定月份. (預設: 目前的月份.)
 
-__month_offset__:
+**month_offset**:
 
   加到 ''month''. 可以用來含括好幾個月的月曆到一個 wiki 頁面.
 
@@ -47,29 +47,29 @@ __month_offset__:
 
 ==== "Day Page" (日頁面)名稱
 
-__date_format__:
+**date_format**:
 
   使用 [Strftime| php-function:strftime] 風格的格式字串來為 "day pages"
   產生頁面名稱.  預設值為 =%Y-%m-%d=.
 
-__prefix__:
+**prefix**:
 
   Prepended to the date (formatted per ''date_format'') to generate
   the "day page" names. The default value is =~[pagename]/=.
 
 ==== Appearance
 
-__month_format__:
+**month_format**:
 
   使用 [Strftime| php-function:strftime] 風格的格式字串產生
   月曆的標題. (預設為 =%B, %Y=.)
 
-__wday_format__:
+**wday_format**:
 
   使用 [Strftime| php-function:strftime] 風格的格式字串產生
   在月曆上頭的 day-of-week 名稱.
 
-__start_wday__:
+**start_wday**:
 
   每週是由那一天開始.  這會是一個介於 0 (Sunday)到 6(Saturday) 的整數.
 
@@ -88,6 +88,7 @@ http://inauspicious.org/files/screenshots/calender.png|screenshot, a
 [calendar.php|http://inauspicious.org/files/phpwiki/calendar.php]
 (which renders a view of the year.)
 
+<noinclude>
 ----
-
-PhpWikiDocumentation
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

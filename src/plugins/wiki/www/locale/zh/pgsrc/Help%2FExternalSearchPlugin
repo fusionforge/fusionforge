@@ -1,8 +1,8 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Fri,  4 Feb 2011 16:44:25 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ExternalSearchPlugin 7682 2010-09-10 12:03:36Z vargenau $
+X-Rcs-Id: $Id: Help%2FExternalSearchPlugin 7928 2011-02-04 15:46:03Z vargenau $
 Content-Type: application/x-phpwiki;
-  pagename=ExternalSearchPlugin;
+  pagename=Help%2FExternalSearchPlugin;
   flags=PAGE_LOCKED;
   markup=2;
   charset=UTF-8
@@ -22,19 +22,19 @@ ExternalSearchPlugin 建立可以查詢 InterWiki 或其他內部站台的表單
 
 
 === Arguments
-__url__:
+**url**:
   指定來自 InterWikiMap 或 url 的 wiki. 任何被使用者輸入的文字將會附加在
-  搜尋 url 後面. 這段替代字串 '__=%s=__' 將會被用來在 url 裡插入搜尋查詢,
+  搜尋 url 後面. 這段替代字串 '**=%s=**' 將會被用來在 url 裡插入搜尋查詢,
   而不是附加了.
 
-__name__:
+**name**:
   在送出按鈕上的文字. 對 InterWiki 站台來說,預設為 wiki 名稱,對其他 url 
   來說,預設為 "External Search".
 
-__formsize__:
+**formsize**:
   指定輸入區域大小. (預設: 30 個字元)
 
-__debug__:
+**debug**:
   不要真的重導向到外部站台, 只要印出要被重導向到的 url.
 
 
@@ -54,5 +54,8 @@ __debug__:
 
 輸入PhpWiki上任何已存在的頁面名稱,以直接跳到該頁面.
 <<ExternalSearch url=PhpWiki >>
+
+<noinclude>
 ----
-PhpWikiDocumentation WikiPlugin
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>
