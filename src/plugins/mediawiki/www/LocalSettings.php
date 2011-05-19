@@ -272,11 +272,11 @@ if (isset($_SERVER['SERVER_SOFTWARE'])) {
 	class SpecialForgeRedir extends SpecialPage {
 		var $dstappendself = false;
 
-		function getTitle() {
+		function getTitle($subpage="") {
 			return 'SpecialForgeRedir';
 		}
 
-		function getRedirect() {
+		function getRedirect($subpage="") {
 			return $this;
 		}
 
