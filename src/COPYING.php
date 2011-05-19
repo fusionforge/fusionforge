@@ -2,8 +2,8 @@
 /*-
  * CAPTCHA support for FusionForge (or whatever your module does)
  *
- * Copyright © 2010
- *      First M. Last <user@domain>
+ * Copyright © 2011
+ *	First M. Last <user@domain>
  * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
