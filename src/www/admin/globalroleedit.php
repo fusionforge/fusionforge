@@ -25,8 +25,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
 
-site_admin_header(array('title'=>_('Site Admin')));
-
 $role_id = getIntFromRequest('role_id');
 $data = getStringFromRequest('data');
 
@@ -126,6 +124,8 @@ if (getStringFromRequest('rmuser')) {
 	}
 }
 
+
+site_admin_header(array('title'=>_('Site Admin')));
 
 if ($role instanceof RoleExplicit) {
 	$users = $role->getUsers () ;
