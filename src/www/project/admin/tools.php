@@ -86,8 +86,8 @@ if (getStringFromRequest('submit')) {
 		$group->clearError();
 	} else {
 		// This is done so plugins can enable/disable themselves from the project
-		$hookParams['group']=$group_id;
-		if (!plugin_hook("groupisactivecheckboxpost",$hookParams)) {
+		$hookParams['group'] = $group_id;
+		if (!plugin_hook("groupisactivecheckboxpost", $hookParams)) {
 			if ($group->isError()) {
 				$error_msg = $group->getErrorMessage();
 				$group->clearError();
@@ -176,7 +176,7 @@ if(forge_get_config('use_mail')) {
 </td>
 </tr>
 <?php
-} 
+}
 
 if(forge_get_config('use_pm')) {
 ?>
@@ -253,8 +253,8 @@ if(forge_get_config('use_frs')) {
 <strong><?php echo _('Use File Release System') ?></strong>
 </td>
 </tr>
-<?php 
-} 
+<?php
+}
 
 if(forge_get_config('use_ftp')) {
 ?>
@@ -276,7 +276,7 @@ if(forge_get_config('use_ftp')) {
 </td>
 </tr>
 
-<?php 
+<?php
 $hookParams['group']=$group_id;
 plugin_hook("groupisactivecheckbox",$hookParams);
 ?>
@@ -292,7 +292,7 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 <br />
 
 <?php
-echo $HTML->boxBottom(); 
+echo $HTML->boxBottom();
 echo '</td>';
 
 echo '<td>';
