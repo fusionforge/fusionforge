@@ -125,7 +125,6 @@ class projects_hierarchyPlugin extends Plugin {
 		global $project_name;
 		$returnTree = '';
 
-		$returnTree .= "<br/>";
 		$arbre = array();
 		$cpt_pere = 0;
 
@@ -205,7 +204,6 @@ class projects_hierarchyPlugin extends Plugin {
 	function setDocmanStatus($group_id, $status = false) {
 		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE project_id = $2',
 					array($status, $group_id));
-		var_dump(db_error());
 		if (!$res)
 			return false;
 
