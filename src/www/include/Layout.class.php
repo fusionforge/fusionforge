@@ -650,7 +650,7 @@ class Layout extends Error {
 
 				echo '
 					<form id="quicknavform" name="quicknavform" action=""><div>
-					<select name="quicknav" id="quicknav">
+					<select name="quicknav" id="quicknav" onchange="location.href=document.quicknavform.quicknav.value">
 					<option value="">'._('Quick Jump To...').'</option>';
 
 				foreach ($groups as $g) {
