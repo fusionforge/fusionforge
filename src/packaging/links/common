@@ -1,3 +1,3 @@
-/usr/share/@PACKAGE@/common/include/database-pgsql.php /usr/share/@PACKAGE@/common/include/database.php
+/usr/share/@OLDPACKAGE@/common/include/database-pgsql.php /usr/share/@OLDPACKAGE@/common/include/database.php
 /etc/@PACKAGE@/config.ini /etc/@OLDPACKAGE@/config.ini
 /etc/@PACKAGE@/config.ini.d /etc/@OLDPACKAGE@/config.ini.d
