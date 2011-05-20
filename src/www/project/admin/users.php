@@ -1,14 +1,12 @@
 <?php
-/**
+/*-
  * Project Admin Main Page
- *
- * This page contains administrative information for the project as well
- * as allows to manage it. This page should be accessible to all project
- * members, but only admins may perform most functions.
  *
  * Copyright 2004 GForge, LLC
  * Copyright 2006 federicot
- * http://fusionforge.org
+ * Copyright © 2011
+ *	Thorsten Glaser <t.glaser@tarent.de>
+ * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,6 +22,10 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *-
+ * This page contains administrative information for the project as well
+ * as allows to manage it. This page should be accessible to all project
+ * members, but only admins may perform most functions.
  */
 
 require_once('../../env.inc.php');
@@ -310,7 +312,7 @@ $members = $group->getUsers() ;
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('User name').'</th>';
 echo '<th>'._('Role').'</th>';
-echo '<th>'._('Action').'</th>';
+echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
 foreach ($members as $user) {
@@ -327,38 +329,43 @@ foreach ($members as $user) {
 	foreach ($roles as $role) {
 		echo '<tr>' ;
 		if (!$seen) {
-			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'"><a href="/users/'.$user->getUnixName().'">';
+			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">
+			<a href="/users/'.$user->getUnixName().'">';
 			$display = $user->getRealName();
 			if (!empty($display)) {
 				echo $user->getRealName();
 			} else {
 				echo $user->getUnixName();
 			}
-			echo '</a></td>';
+			echo "</a></td>\n";
 			$seen = true ;
 		}
 
 		echo '<td colspan="2">
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-			  <input type="hidden" name="submit" value="y" />
-			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
-			  <input type="hidden" name="group_id" value="'. $group_id .'" />
-		<table><tr><td style="white-space: nowrap;">';
-		echo $role->getName() ;
-		echo '<input type="hidden" name="role_id" value="'.$role->getID().'" />' ;
-		echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
-		</td></tr></table></form></td></tr>';
+		<div style="float:left;">
+			' . $role->getName() . '
+		</div><div style="float:right;">
+			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+			<input type="hidden" name="submit" value="y" />
+			<input type="hidden" name="user_id" value="'.$user->getID().'" />
+			<input type="hidden" name="group_id" value="'. $group_id .'" />
+			<input type="hidden" name="role_id" value="'.$role->getID().'" />
+			<input type="submit" name="rmuser" value="'._("Remove").'" />
+			</form>
+		</div></td></tr>';
 	}
 
 	echo '<tr><td colspan="2">
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-			  <input type="hidden" name="submit" value="y" />
-			  <input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
-			  <input type="hidden" name="group_id" value="'. $group_id .'" />
-		<table><tr><td style="white-space: nowrap;">';
-	echo role_box($group_id,'role_id',$role->getID());
-	echo '</td><td><input type="submit" name="adduser" value="'._("Grant extra role").'" />
-		</td></tr></table></form></td></tr>';
+		<input type="hidden" name="submit" value="y" />
+		<input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
+		<input type="hidden" name="group_id" value="'. $group_id .'" />
+		<div style="float:left;">
+			' . role_box($group_id,'role_id',$role->getID()) . '
+		</div><div style="float:right;">
+			<input type="submit" name="adduser" value="'._("Grant extra role").'" />
+		</div>
+		</form></td></tr>';
 }
 echo '</tbody></table>';
 
