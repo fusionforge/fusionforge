@@ -46,13 +46,13 @@ class Layout extends Error {
 	 * Which doctype to use. Can be configured in the
 	 * constructor. If set to 'strict', headerHTMLDeclaration will
 	 * create a doctype definition that uses the strict doctype,
-	 * otherwise it will use the transitional doctype.  
+	 * otherwise it will use the transitional doctype.
 	 * @var string $doctype
 	 */
 	var $doctype = 'transitional';
 
 	/**
-	 * The default main page content 
+	 * The default main page content
 	 * @var	string	$rootindex
 	 */
 	var $rootindex = 'index_std.php';
@@ -60,37 +60,37 @@ class Layout extends Error {
 	/**
 	 * The base directory of the theme in the servers file system
 	 * @var	string	$themedir
-	 */ 
+	 */
 	var $themedir;
 
 	/**
 	 * The base url of the theme
 	 * @var	string	$themeurl
-	 */ 
+	 */
 	var $themeurl;
 
 	/**
 	 * The base directory of the image files in the servers file system
 	 * @var	string	$imgdir
-	 */ 
+	 */
 	var $imgdir;
 
 	/**
 	 * The base url of the image files
 	 * @var	string	$imgbaseurl
-	 */ 
+	 */
 	var $imgbaseurl;
 
 	/**
 	 * The base directory of the js files in the servers file system
 	 * @var	string	$jsdir
-	 */ 
+	 */
 	var $jsdir;
 
 	/**
 	 * The base url of the js files
 	 * @var	string	$jsbaseurl
-	 */ 
+	 */
 	var $jsbaseurl;
 
 	/**
@@ -157,7 +157,7 @@ class Layout extends Error {
 	}
 
 	/**
-	 * Constructs a list of Javascript files followed by some timestamp 
+	 * Constructs a list of Javascript files followed by some timestamp
 	 *
 	 * TODO document the purpose of this : probably to avoid caching versions updated on the server
 	 * @param string $js path to the JS file
@@ -223,8 +223,8 @@ class Layout extends Error {
 		return $code;
 	}
 
-	/** 
-	 * header() - generates the complete header of page by calling 
+	/**
+	 * header() - generates the complete header of page by calling
 	 * headerStart() and bodyHeader().
 	 */
 	function header($params) {
@@ -235,11 +235,11 @@ class Layout extends Error {
 	}
 
 	/**
-	 * headerStart() - generates the header code for all themes up to the 
+	 * headerStart() - generates the header code for all themes up to the
 	 * closing </head>.
-	 * Override any of the methods headerHTMLDeclaration(), headerTitle(), 
-	 * headerFavIcon(), headerRSS(), headerSearch(), headerCSS(), or 
-	 * headerJS() to adapt your theme. 
+	 * Override any of the methods headerHTMLDeclaration(), headerTitle(),
+	 * headerFavIcon(), headerRSS(), headerSearch(), headerCSS(), or
+	 * headerJS() to adapt your theme.
 	 *
 	 * @param	array	Header parameters array
 	 */
@@ -255,16 +255,16 @@ class Layout extends Error {
 		$this->headerRSS();
 		$this->headerSearch();
 		$this->headerCSS();
-		$this->headerJS(); 
-		$this->headerForgepluckerMeta(); 
+		$this->headerJS();
+		$this->headerForgepluckerMeta();
 		?>
 			</head>
 		<?php
-	} 
+	}
 
 	/**
 	 * headerHTMLDeclaration() - generates the HTML declaration, i.e. the
-	 * XML declaration, the doctype definition, and the opening <html>. 
+	 * XML declaration, the doctype definition, and the opening <html>.
 	 *
 	 */
 	function headerHTMLDeclaration() {
@@ -280,7 +280,7 @@ class Layout extends Error {
 	}
 
 	/**
-	 * headerTitle() - creates the <title> header 
+	 * headerTitle() - creates the <title> header
 	 *
 	 * @param	array	Header parameters array
 	 */
@@ -310,13 +310,13 @@ class Layout extends Error {
 	 *
 	 */
 	function headerSearch() {
-		echo '<link rel="search" title="' 
-			. forge_get_config ('forge_name').'" href="' 
-			. util_make_url ('/export/search_plugin.php') 
+		echo '<link rel="search" title="'
+			. forge_get_config ('forge_name').'" href="'
+			. util_make_url ('/export/search_plugin.php')
 			. '" type="application/opensearchdescription+xml"/>'."\n";
 	}
 
-	/** 
+	/**
 	 * Create the CSS headers for all cssfiles in $cssfiles and
 	 * calls the plugin cssfile hook.
 	 */
@@ -341,7 +341,7 @@ class Layout extends Error {
 			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 		plugin_hook ("javascript_file",false);
 		echo $this->getJavascripts();
-		
+
 		// invoke the 'javascript' hook for custom javascript addition
 		$params = array('return' => false);
 		plugin_hook("javascript",$params);
@@ -601,7 +601,7 @@ class Layout extends Error {
 		}
 		$return = "\n".
 			'<table'.$args.'>';
-		
+
 		if (count($titleArray)) {
 			$return .= '<thead><tr>';
 
@@ -650,7 +650,7 @@ class Layout extends Error {
 
 				echo '
 					<form id="quicknavform" name="quicknavform" action=""><div>
-					<select name="quicknav" id="quicknav">
+					<select name="quicknav" id="quicknav" onChange="location.href=document.quicknavform.quicknav.value">
 					<option value="">'._('Quick Jump To...').'</option>';
 
 				foreach ($groups as $g) {
@@ -658,17 +658,17 @@ class Layout extends Error {
 					$menu = $this->navigation->getProjectMenu($group_id);
 
 					echo '
-						<option value="' . $menu['starturl'] . '">' 
+						<option value="' . $menu['starturl'] . '">'
 						. $menu['name'] .'</option>';
 
 					for ($j = 0; $j < count($menu['urls']); $j++) {
 						echo '
-							<option value="' . $menu['urls'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
+							<option value="' . $menu['urls'][$j] .'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 							. $menu['titles'][$j] . '</option>';
 						if (@$menu['adminurls'][$j]) {
 							echo  '
-								<option value="' . $menu['adminurls'][$j] 
-								. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' 
+								<option value="' . $menu['adminurls'][$j]
+								. '">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 								. _('Admin') . '</option>';
 						}
 					}
@@ -795,7 +795,7 @@ class Layout extends Error {
 
 
 		return $return.'
-			</table> 
+			</table>
 
 			<!-- end tabs -->
 			';
@@ -951,7 +951,7 @@ class Layout extends Error {
 	 * getThemeIdFromName()
 	 *
 	 * @param	string  the dirname of the theme
-	 * @return	integer the theme id	
+	 * @return	integer the theme id
 	 */
 	function getThemeIdFromName($dirname) {
 		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
@@ -967,7 +967,7 @@ class Layout extends Error {
 		foreach ($params as $b => $v) {
 			$prms[] = '<input type="hidden" name="'.$b.'" value="'.$v.'" />'."\n";
 		}
-		$prm = join('	 	', $prms);	 
+		$prm = join('	 	', $prms);
 
 		foreach ($buttons as $b => $v) {
 			$btns[] = '<input type="submit" name="'.$b.'" value="'.$v.'" />'."\n";
@@ -1223,7 +1223,7 @@ class Layout extends Error {
 
 	function getPicto($url, $title, $alt, $width = '20', $height = '20') {
 		if (!$alt) {
-			$alt = $title;   
+			$alt = $title;
 		}
 		return html_image($url, $width, $height, array('title'=>$title, 'alt'=>$alt));
 	}
@@ -1289,7 +1289,7 @@ class Layout extends Error {
 			echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */'."
 				document.observe('dom:loaded', function () {
 						$('$element_id-ajax').update('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner') ."</div>');
-						new Ajax.Updater('$element_id-ajax', 
+						new Ajax.Updater('$element_id-ajax',
 							'". $widget->getAjaxUrl($owner_id, $owner_type) ."'
 							);
 						});
@@ -1312,22 +1312,22 @@ class Layout extends Error {
 	function printSoftwareMapLinks() {
 		$subMenuTitle = array();
 		$subMenuUrl = array();
-		
+
 		if (forge_get_config('use_project_tags')) {
 			$subMenuTitle[] = _('Tag cloud');
 			$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 		}
-		
+
 		if (forge_get_config('use_trove')) {
 			$subMenuTitle[] = _('Project Tree');
 			$subMenuUrl[] = '/softwaremap/trove_list.php';
 		}
-		
+
 		if (forge_get_config('use_project_full_list')) {
 			$subMenuTitle[] = _('Project List');
 			$subMenuUrl[] = '/softwaremap/full_list.php';
 		}
-		
+
 		echo $this->subMenu($subMenuTitle, $subMenuUrl);
 	}
 }
