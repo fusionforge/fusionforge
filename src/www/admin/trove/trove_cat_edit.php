@@ -105,7 +105,7 @@ $res_cat = db_query_params ('SELECT * FROM trove_cat WHERE trove_cat_id=$1',
 			array($trove_cat_id)) ;
 
 if (db_numrows($res_cat)<1) {
-	exit_error( _('No Such Category, That trove cat does not exist'),'trove');
+	exit_error( _('No such category, that trove cat does not exist'), 'trove');
 }
 $row_cat = db_fetch_array($res_cat);
 
