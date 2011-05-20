@@ -23,8 +23,10 @@ else
 fi
 
 su - postgres -c "dropdb -e $database"
-echo "Executing: pg_restore -C -d template1 < /root/dump"
-su - postgres -c "pg_restore -C -d template1" < /root/dump
+#echo "Executing: pg_restore -C -d template1 < /root/dump"
+#su - postgres -c "pg_restore -C -d template1" < /root/dump
+echo "Executing: psql < /root/dump"
+su - postgres -c "psql" < /root/dump
 
 if type invoke-rc.d 2>/dev/null
 then
