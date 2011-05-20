@@ -241,15 +241,18 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 				?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
 			method="post">
+		<input type="hidden" name="submit" value="y" />
+		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
+		<input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" />
 		<table width="100%">
 			<tr>
-				<td style="white-space: nowrap;"><input type="hidden" name="submit"
-					value="y" /> <input type="hidden" name="form_userid"
-					value="<?php echo $user->getId(); ?>" /> <input type="hidden"
-					name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a
-					href="/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a>
+				<td style="white-space: nowrap;"><a
+					href="/users/<?php
+						echo $user->getUnixName();
+					?>"><?php echo $user->getRealName(); ?></a>
 				</td>
-				<td style="white-space: nowrap; text-align: right;"><?php echo role_box($group_id,'role_id'); ?>
+				<td style="white-space: nowrap; text-align: right;"><?php
+					echo role_box($group_id,'role_id'); ?>
 				<input type="submit" name="acceptpending"
 					value="<?php echo _("Accept") ?>" />
 				<input type="submit" name="rejectpending"
