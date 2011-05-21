@@ -159,7 +159,7 @@ class GitPlugin extends SCMPlugin {
 					$b .= '<p>';
 					$b .= _('You have a personal repository for this project, accessible through SSH with the following method. Enter your site password when prompted.');
 					$b .= '</p>';
-					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . forge_get_config('scm_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
+					$b .= '<p><tt>git clone git+ssh://'.$u->getUnixName().'@' . $project->getSCMBox() . forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $u->getUnixName() .'.git</tt></p>' ;
 				} else {
 					$glist = $u->getGroups();
 					foreach ($glist as $g) {
