@@ -114,7 +114,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			} elseif (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
@@ -123,7 +123,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
@@ -133,7 +133,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			} elseif (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
@@ -142,7 +142,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= '<p>';
 				$b .= _('Only project developers can access the GIT tree via this method. Enter your site password when prompted.');
 				$b .= '</p>';
-				$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
+				$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $project->getUnixName() .'.git</tt></p>' ;
 			}
 		}
 
