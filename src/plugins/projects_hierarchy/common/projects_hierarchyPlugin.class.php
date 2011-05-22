@@ -194,17 +194,29 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function getDocmanStatus($group_id) {
-		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1',
+		$res = db_query_params('SELECT docman FROM plugin_projects_hierarchy WHERE project_id = $1 or sub_project_id = $1 limit 1',
 					array($group_id));
 		if (!$res)
 			return false;
 
-		return $res['docman'];
+		$resArr = db_fetch_array($res);
+		if ($resArr['docman'] == 't')
+			return true;
+
+		return false;
 	}
 
-	function setDocmanStatus($group_id, $status = false) {
-		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE project_id = $2',
-					array($status, $group_id));
+	/**
+	 * setDocmanStatus - allow parent to browse your document manager and allow yourself to select your childs to be browsed.
+	 *
+	 * @param	integer	your groud_id
+	 * @param	boolean	the status to set
+	 * @return	boolean	success or not
+	 */
+	function setDocmanStatus($group_id, $status = 0) {
+		$res = db_query_params('UPDATE plugin_projects_hierarchy set docman = $1 WHERE sub_project_id = $2 OR project_id = $3',
+					array($status, $group_id, $group_id));
+
 		if (!$res)
 			return false;
 

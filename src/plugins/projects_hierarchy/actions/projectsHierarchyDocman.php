@@ -26,11 +26,7 @@ global $_SERVER;
 global $id;
 
 $status = getIntFromRequest('status');
-if ($status) {
-	$status = true;
-} else {
-	$status = false;
-}
+
 if ($projectsHierarchy->setDocmanStatus($id, $status))
 	$projectsHierarchy->redirect($_SERVER['HTTP_REFERER'], 'feedback', _('Successfully update status of hierarchical browsing'));
 
