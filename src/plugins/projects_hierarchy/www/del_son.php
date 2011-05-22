@@ -1,18 +1,16 @@
 <?php
 /**
- * Role Editing Page
+ * Projects Hierarchy Plugin
  *
- * Copyright 2004 (c) GForge LLC
+ * Copyright 2006, Fabien Regnier fabien.regnier@sogeti.com
+ * Copyright 2011, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
- * @author Fabien Regnier fabien.regnier@sogeti.com
- * @date 2006-10-10
- *
- * This file is part of FusionForge.
- *
- * FusionForge is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
  *
  * FusionForge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,7 +18,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
@@ -30,7 +28,7 @@ require_once $gfcommon.'include/pre.php';
 $group_id = getIntFromRequest('group_id');
 $sub_group_id = getIntFromRequest('sub_group_id');
 
-session_require_perm ('project_admin', $group_id) ;
+session_require_perm('project_admin', $group_id);
 
 //plugin webcal
 $params[0] = $sub_group_id;
