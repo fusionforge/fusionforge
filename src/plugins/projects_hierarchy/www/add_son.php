@@ -31,15 +31,15 @@ $sub_project_id = getIntFromRequest('sub_project_id');
 $com = getStringFromRequest('com');
 
 //add link between two projects
-$res = db_query_params('SELECT project_id ,sub_project_id,link_type FROM plugin_projects_hierarchy
-					WHERE project_id = $1 AND sub_project_id = $2 AND sub_project_id = $3',
+$res = db_query_params('SELECT project_id, sub_project_id, link_type FROM plugin_projects_hierarchy
+					WHERE project_id = $1 AND sub_project_id = $2 AND link_type = $3',
 					array($group_id,
 						$sub_project_id,
 						'shar'));
 
 if (!$res) {
 	$error_msg = _('Unable to retrieve data from DB');
-	session_redirect('/project/admin/index.php?group_id='.$group_id.'&error_msg='.$urlencode($error_msg));
+	session_redirect('/project/admin/index.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
 }
 
 if (db_numrows($res) == 0) {
