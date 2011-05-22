@@ -185,9 +185,10 @@ class projects_hierarchyPlugin extends Plugin {
 				$localFamily[] = $arr['id'];
 			}
 		}
+
 		if ($deep) {
 			for ( $i = 0; $i < count($localFamily); $i++) {
-				$localFamily[$i] = $this->getChildren($localFamily[$i], $order, $deep);
+				$localFamily[$i] = $this->getFamily($localFamily[$i], $order, $deep);
 			}
 		}
 		return $localFamily;
