@@ -1532,6 +1532,15 @@ Enjoy the site.
 		}
 
 		switch ($type) {
+		case 0:
+		default:
+			foreach ($this->getGroups() as $p) {
+				if ($p->getID() == $group_id) {
+					return true ;
+				}
+			}
+			return false ;
+			break;
 		case 'P2':
 			//pm admin
 			return forge_check_perm_for_user($this,'pm_admin',$group_id) ;
@@ -1547,15 +1556,6 @@ Enjoy the site.
 		case 'D1':
 			//document editor
 			return forge_check_perm_for_user($this,'docman',$group_id,'admin') ;
-			break;
-		case '0':
-		default:
-			foreach ($this->getGroups() as $p) {
-				if ($p->getID() == $group_id) {
-					return true ;
-				}
-			}
-			return false ;
 			break;
 		}
 	}
