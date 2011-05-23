@@ -112,7 +112,7 @@ class MantisBTPlugin extends Plugin {
 				break;
 			}
 			case "site_admin_option_hook": {
-				echo '<li>'.util_make_link("/plugins/mantisbt/?type=globaladmin&pluginname=".$this->name,_('Global MantisBT admin')).'</li>';
+				echo '<li>'.$this->getAdminOptionLink().'</li>';
 				$returned = true;
 				break;
 			}
@@ -632,6 +632,10 @@ class MantisBTPlugin extends Plugin {
 		$use_tooltips = $user->usesTooltips();
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
+	}
+
+	function getAdminOptionLink() {
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global MantisBT admin'));
 	}
 }
 // Local Variables:
