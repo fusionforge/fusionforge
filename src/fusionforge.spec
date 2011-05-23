@@ -262,6 +262,15 @@ Requires: %{name} >= %{version}, php, hg
 %description plugin-scmhg
 This is a plugin to integrate Mercurial (hg) version control system with FusionForge
 
+%package plugin-scmhook
+Summary: Source Code Hooks plugin
+Group: Development/Tools
+Requires: %{name} >= %{version}
+%description plugin-scmhook
+This plugin provide a simple hook system for various version control system.
+It allows project admins to activate/desactivate predefined hooks on their
+repositories.
+
 %package plugin-scmccase
 Summary: Clear Case plugin for FusionForge
 Group: Development/Tools
@@ -967,6 +976,10 @@ fi
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/scmhg/
 %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmhg.ini
 %{FORGE_DIR}/plugins/scmhg
+
+%files plugin-scmhook
+%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/scmhook.ini
+%{FORGE_DIR}/plugins/scmhook
 
 %files plugin-scmccase
 %config(noreplace) %{FORGE_CONF_DIR}/plugins/scmccase/
