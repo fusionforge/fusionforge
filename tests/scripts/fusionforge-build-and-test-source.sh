@@ -111,7 +111,8 @@ ssh root@$HOST "cd fusionforge-*; FFORGE_RPM_REPO=$FFORGE_RPM_REPO DAG_RPMFORGE_
 scp -p root@$HOST:/var/cache/yum/timedhosts.txt /tmp/timedhosts.txt || true
 ssh root@$HOST "(echo [core];echo use_ssl=no) > /etc/gforge/config.ini.d/zzz-zbuildbot.ini"
 ssh root@$HOST "cd /root/tests/func; CONFIGURED=true CONFIG_PHP=config.php.buildbot DB_NAME=$DB_NAME php db_reload.php"
-ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+#ssh root@$HOST "su - postgres -c \"pg_dump -Fc $DB_NAME\" > /root/dump"
+ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"
 #  Install a fake sendmail to catch all outgoing emails.
 # ssh root@$HOST "perl -spi -e s#/usr/sbin/sendmail#/opt/tests/scripts/catch_mail.php# /etc/gforge/local.inc"
 ssh root@$HOST "service crond stop" || true
