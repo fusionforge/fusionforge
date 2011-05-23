@@ -1979,6 +1979,8 @@ src/plugins/mediawiki/bin/mw-drop-wikis.php -text
 src/plugins/mediawiki/bin/mw-plugin-init.php -text
 src/plugins/mediawiki/bin/mw-wrapper.php -text
 src/plugins/mediawiki/common/MediaWikiPlugin.class.php -text
+src/plugins/mediawiki/common/MediaWikiPluginDescriptor.class.php -text
+src/plugins/mediawiki/common/MediaWikiPluginInfo.class.php -text
 src/plugins/mediawiki/common/mediawiki-init.php -text
 src/plugins/mediawiki/cronjobs/create-imagedirs.php -text
 src/plugins/mediawiki/cronjobs/create-wikis.php -text
