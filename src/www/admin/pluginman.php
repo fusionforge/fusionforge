@@ -40,7 +40,7 @@ $pm = plugin_manager_get_object();
 
 if (getStringFromRequest('update')) {
 	$pluginname = getStringFromRequest('update');
-	
+
 	if ((getStringFromRequest('action') == 'deactivate')) {
 
 		$res = db_query_params('DELETE FROM user_plugin WHERE plugin_id = (SELECT plugin_id FROM plugins WHERE plugin_name = $1)',
@@ -64,14 +64,14 @@ if (getStringFromRequest('update')) {
 			exit_error(db_error(), 'admin');
 		} else {
 			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
-			
+
 			// Load the plugin and now get information from it.
 			$plugin = $pm->GetPluginObject($pluginname);
 			if (!$plugin || $plugin->isError()) {
 				exit_error(_("Couldn't get plugin object"), 'admin');
 			}
 			$installdir = $plugin->getInstallDir();
-			
+
 			// Remove the symbolic links made if plugin has a www.
 			if (is_dir(forge_get_config('plugins_path') . '/' . $pluginname . '/www')) { // if the plugin has a www dir delete the link to it
 				if (file_exists('../'.$installdir)) {
@@ -124,7 +124,8 @@ $title_arr = array( _('Plugin Name'),
 		    _('Status'),
 		    _('Action'),
 		    _('Users Using it'),
-		    _('Projects Using it'),);
+		    _('Projects Using it'),
+		    _('Global Administration View'));
 echo $HTML->listTableTop($title_arr);
 
 // Get the activated plugins.
@@ -224,12 +225,18 @@ foreach ($filelist as $filename) {
 				$groups = _('None');
 			}
 		}
+		$adminlink = '';
+		$pluginObject = plugin_get_object($filename);
+		if (method_exists($pluginObject, 'getAdminOptionLink')) {
+			$adminlink = $pluginObject->getAdminOptionLink();
+		}
 	} else {
 		$msg = _('Inactive');
 		$status = "inactive";
 		$link = util_make_link("/admin/pluginman.php?update=$filename&amp;action=activate", _('Activate'));
 		$users = _('None');
 		$groups = _('None');
+		$adminlink = '';
 	}
 
 	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
@@ -238,8 +245,8 @@ foreach ($filelist as $filename) {
 		'<td class="'.$status.'" style="text-align:center">'. $msg .'</td>'.
 		'<td style="text-align:center;">'. $link .'</td>'.
 		'<td style="text-align:left;">'. $users .'</td>'.
-		'<td style="text-align:left;">'. $groups .'</td></tr>'."\n";
-
+		'<td style="text-align:left;">'. $groups .'</td>'.
+		'<td style="text-align:left;">'. $adminlink .'</td></tr>'."\n";
 	$j++;
 }
 
