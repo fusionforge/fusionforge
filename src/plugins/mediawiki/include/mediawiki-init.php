@@ -20,7 +20,7 @@
  */
 
 global $gfplugins;
-require_once $gfplugins.'mediawiki/common/mediawikiPlugin.class.php' ;
+require_once $gfplugins.'mediawiki/include/mediawikiPlugin.class.php' ;
 
 $MediaWikiPluginObject = new MediaWikiPlugin ;
 
