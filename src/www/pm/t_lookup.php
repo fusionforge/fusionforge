@@ -82,7 +82,7 @@ $tinfo['public'] = $ispublic;
 $tinfo['forge_base'] = forge_get_config ('web_host') ;
 $tinfo['forge_name'] = forge_get_config ('forge_name') ;
 
-header("Content-type: " . $asformat);
+sysdebug_off("Content-type: " . $asformat);
 setup_gettext_from_langname ('English') ;
 echo json_encode($tinfo) . "\n";
 exit;

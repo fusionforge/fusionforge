@@ -550,7 +550,9 @@ if ($art_arr && $art_cnt > 0) {
 		$title_arr[] = $title;
 	}
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	if ($start < $max) {
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	}
 
 	$then=(time()-$ath->getDuePeriod());
 
@@ -629,7 +631,9 @@ if ($art_arr && $art_cnt > 0) {
 		echo '</tr>';
 	}
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	if ($start < $max) {
+		echo $GLOBALS['HTML']->listTableBottom();
+	}
 	$pages = $art_cnt / $paging;
 	$currentpage = intval($start / $paging);
 

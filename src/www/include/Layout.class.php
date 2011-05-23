@@ -942,7 +942,9 @@ class Layout extends Error {
 			return '';
 		} else {
 			return '
-				<div class="error">'.strip_tags($msg, '<br>').'</div>';
+				<div class="error">' .
+			    util_pwrap(strip_tags($msg, '<br>')) .
+			    "</div>\n";
 		}
 	}
 

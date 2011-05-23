@@ -1,14 +1,12 @@
 <?php
-/**
+/*-
  * Project Admin Users Page
- *
- * This page contains administrative information for the project as well
- * as allows to manage it. This page should be accessible to all project
- * members, but only admins may perform most functions.
  *
  * Copyright 2004 GForge, LLC
  * Copyright 2006 federicot
- * http://fusionforge.org
+ * Copyright © 2011
+ *	Thorsten Glaser <t.glaser@tarent.de>
+ * All rights reserved.
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,6 +22,10 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *-
+ * This page contains administrative information for the project as well
+ * as allows to manage it. This page should be accessible to all project
+ * members, but only admins may perform most functions.
  */
 
 require_once('../../env.inc.php');
@@ -238,15 +240,18 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 				?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
 			method="post">
+		<input type="hidden" name="submit" value="y" />
+		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
+		<input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" />
 		<table width="100%">
 			<tr>
-				<td style="white-space: nowrap;"><input type="hidden" name="submit"
-					value="y" /> <input type="hidden" name="form_userid"
-					value="<?php echo $user->getId(); ?>" /> <input type="hidden"
-					name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><a
-					href="/users/<?php echo $user->getUnixName(); ?>"><?php echo $user->getRealName(); ?></a>
+				<td style="white-space: nowrap;"><a
+					href="/users/<?php
+						echo $user->getUnixName();
+					?>"><?php echo $user->getRealName(); ?></a>
 				</td>
-				<td style="white-space: nowrap; text-align: right;"><?php echo role_box($group_id,'role_id'); ?>
+				<td style="white-space: nowrap; text-align: right;"><?php
+					echo role_box($group_id,'role_id'); ?>
 				<input type="submit" name="acceptpending"
 					value="<?php echo _("Accept") ?>" />
 				<input type="submit" name="rejectpending"
@@ -272,18 +277,22 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 			 Add member form
 			 */
 			?>
-		<form
+		<div><form
 			action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>"
 			method="post">
-		<p><input type="hidden" name="submit" value="y" /> <input type="text"
-			name="form_unix_name" size="10" value="" /> <?php echo role_box($group_id,'role_id'); ?>
-		<input type="submit" name="adduser"
-			value="<?php echo _("Add Member") ?>" />
-		</p>
-		</form>
-		<p><a
-                        href="massadd.php?group_id=<?php echo $group_id; ?>"><?php echo _("Add Users From List"); ?></a></p>
-
+		<input type="hidden" name="submit" value="y" />
+		<div style="float:left;">
+			<input type="text" name="form_unix_name" size="16" value="" />
+		</div><div style="float:right;">
+			<?php echo role_box($group_id,'role_id'); ?>
+			<input type="submit" name="adduser" value="<?php echo _("Add Member") ?>" />
+		</div>
+		</form></div>
+		<div style="clear:both;">
+			<a href="massadd.php?group_id=<?php echo $group_id; ?>">
+				<?php echo _("Add Users From List"); ?>
+			</a>
+		</div>
 			<?php
 		}
 
@@ -300,7 +309,7 @@ $members = $group->getUsers() ;
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('User name').'</th>';
 echo '<th>'._('Role').'</th>';
-echo '<th>'._('Action').'</th>';
+echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
 foreach ($members as $user) {
@@ -317,42 +326,43 @@ foreach ($members as $user) {
 	foreach ($roles as $role) {
 		echo '<tr>' ;
 		if (!$seen) {
-			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'"><a href="/users/'.$user->getUnixName().'">';
+			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">
+			<a href="/users/'.$user->getUnixName().'">';
 			$display = $user->getRealName();
 			if (!empty($display)) {
 				echo $user->getRealName();
 			} else {
 				echo $user->getUnixName();
 			}
-			echo '</a></td>';
+			echo "</a></td>\n";
 			$seen = true ;
 		}
 
 		echo '
-		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-			  <input type="hidden" name="submit" value="y" />
-			  <input type="hidden" name="user_id" value="'.$user->getID().'" />
-			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
-
-		echo '<td style="white-space: nowrap;">';
-		echo $role->getName() ;
-		echo '<input type="hidden" name="role_id" value="'.$role->getID().'" />' ;
-		echo '</td><td><input type="submit" name="rmuser" value="'._("Remove").'" />
-                        </td>
-                </form></tr>';
+		<div style="float:left;">
+			' . $role->getName() . '
+		</div><div style="float:right;">
+			<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+			<input type="hidden" name="submit" value="y" />
+			<input type="hidden" name="user_id" value="'.$user->getID().'" />
+			<input type="hidden" name="group_id" value="'. $group_id .'" />
+			<input type="hidden" name="role_id" value="'.$role->getID().'" />
+			<input type="submit" name="rmuser" value="'._("Remove").'" />
+			</form>
+		</div></td></tr>';
 	}
 
 	echo '
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-			  <input type="hidden" name="submit" value="y" />
-			  <input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
-			  <input type="hidden" name="group_id" value="'. $group_id .'" />' ;
-
-	echo '<tr><td style="white-space: nowrap;">';
-	echo role_box($group_id,'role_id',$role->getID());
-	echo '</td><td><input type="submit" name="adduser" value="'._("Grant extra role").'" />
-                        </td>
-                </form></tr>';
+		<input type="hidden" name="submit" value="y" />
+		<input type="hidden" name="form_unix_name" value="'.$user->getUnixName().'" />
+		<input type="hidden" name="group_id" value="'. $group_id .'" />
+		<div style="float:left;">
+			' . role_box($group_id,'role_id',$role->getID()) . '
+		</div><div style="float:right;">
+			<input type="submit" name="adduser" value="'._("Grant extra role").'" />
+		</div>
+		</form></td></tr>';
 }
 echo '</tbody></table>';
 
@@ -371,10 +381,49 @@ echo '</tbody></table>';
 		//      RBAC Editing Functions
 		//
 		echo $HTML->boxTop(_("Edit Roles"));
+
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('Role name').'</th>';
-echo '<th>'._('Action').'</th>';
+echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
+
+$roles = $group->getRoles() ;
+sortRoleList ($roles, $group, 'composite') ;
+
+foreach ($roles as $r) {
+	/* this would work, but only here, not below the foreach */
+	//echo '<tr>
+	//	<td>'.$r->getDisplayableName($group).'</td>
+	//	<td><form action="roleedit.php?group_id='. $group_id .'" method="post">
+	//		<input type="hidden" name="role_id" value="'.$r->getID().'" />
+	//		<input type="submit" name="edit" value="'._("Edit Permissions").'" />
+	//	</form></td>
+	//</tr>';
+	/* but doesn't look as well as using the same method everywhere */
+	echo '<tr><td colspan="2">
+	<form action="roleedit.php?group_id='. $group_id .'" method="post">
+	<div style="float:left;">
+		'.$r->getDisplayableName($group).'
+	</div><div style="float:right;">
+		<input type="hidden" name="role_id" value="'.$r->getID().'" />
+		<input type="submit" name="edit" value="'._("Edit Permissions").'" />
+	</div>
+	</form>
+</td></tr>';
+}
+
+/* note: we cannot put the form outside of a td here */
+echo '<tr><td colspan="2">
+	<form action="roleedit.php?group_id='. $group_id .'" method="post">
+	<div style="float:left;">
+		<input type="text" name="role_name" size="10" value="" />
+	</div><div style="float:right;">
+		<input type="submit" name="add" value="'._("Create Role").'" />
+	</div>
+	</form>
+</td></tr>';
+
+echo '</table>' ;
 
 if (!USE_PFO_RBAC) {
 		echo '
@@ -383,42 +432,27 @@ if (!USE_PFO_RBAC) {
         </form>';
 }
 
-$roles = $group->getRoles() ;
-sortRoleList ($roles, $group, 'composite') ;
-
-foreach ($roles as $r) {
-	echo '<tr><form action="roleedit.php?group_id='. $group_id .'" method="post">' ;
-	echo '<input type="hidden" name="role_id" value="'.$r->getID().'" />' ;
-	echo '<td>'.$r->getDisplayableName($group).'</td>' ;
-	echo '<td><input type="submit" name="edit" value="'._("Edit Permissions").'" /></td>' ;
-	echo '</form></tr>' ;
-}
-
-echo '<tr>' ;
-echo '<form action="roleedit.php?group_id='. $group_id .'" method="post">';
-echo '<td><input type="text" name="role_name" size="10" value="" /></td>';
-echo '<td><input type="submit" name="add" value="'._("Create Role").'" /></td>' ;
-echo '</form></tr>';
-
-echo '</table>' ;
-
-
 if (USE_PFO_RBAC) {
 	if (count ($used_external_roles)) {
 		echo $HTML->boxMiddle(_("Currently used external roles"));
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('Role name').'</th>';
-echo '<th>'._('Action').'</th>';
+echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
 foreach ($used_external_roles as $r) {
-	echo '<tr><form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
-	echo '<input type="hidden" name="submit" value="y" />' ;
-	echo '<input type="hidden" name="role_id" value="'.$r->getID().'" />' ;
-	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
-	echo '<td>'.$r->getDisplayableName($group).'</td>' ;
-	echo '<td><input type="submit" name="unlinkrole" value="'._("Unlink Role").'" /></td>' ;
-	echo '</form></tr>' ;
+	echo '<tr><td colspan="2">
+	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+		<input type="hidden" name="submit" value="y" />
+		<input type="hidden" name="role_id" value="'.$r->getID().'" />
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+	<div style="float:left;">
+		' . $r->getDisplayableName($group) . '
+	</div><div style="float:right;">
+		<input type="submit" name="unlinkrole" value="'._("Unlink Role").'" />
+	</div>
+	</form>
+</td></tr>';
 }
 echo '</table>' ;
 	}
@@ -427,7 +461,7 @@ echo '</table>' ;
 		echo $HTML->boxMiddle(_("Available external roles"));
 echo '<table width="100%"><thead><tr>';
 echo '<th>'._('Role name').'</th>';
-echo '<th>'._('Action').'</th>';
+echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
 $ids = array () ;
@@ -436,16 +470,20 @@ foreach ($unused_external_roles as $r) {
 	$ids[] = $r->getID() ;
 	$names[] = $r->getDisplayableName($group) ;
 }
-echo '<tr><form action="'.getStringFromServer('PHP_SELF').'" method="post">' ;
-echo '<input type="hidden" name="submit" value="y" />' ;
-echo '<input type="hidden" name="group_id" value="'.$group_id.'" />' ;
-echo '<td>' ;
+echo '<tr><td colspan="2">
+	<form action="'.getStringFromServer('PHP_SELF').'" method="post">
+	<input type="hidden" name="submit" value="y" />
+	<input type="hidden" name="group_id" value="'.$group_id.'" />
+	<div style="float:left;">
+		';
 echo html_build_select_box_from_arrays($ids,$names,'role_id','',false,'',false,'');
-echo '</td><td>' ;
-echo '<input type="submit" name="linkrole" value="'._("Link external role").'" /></form><br />' ;
-echo '</td>' ;
-echo '</form></tr>';
-echo '</table>' ;
+echo '
+	</div><div style="float:right;">
+		<input type="submit" name="linkrole" value="'._("Link external role").'" />
+	</div>
+	</form>
+</td></tr>';
+echo '</tbody></table>' ;
 	}
 }
 
