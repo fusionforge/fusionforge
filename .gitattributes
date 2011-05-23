@@ -1972,6 +1972,7 @@ src/plugins/mantisbt/www/style.css -text
 src/plugins/mantisbt/www/user/index.php -text
 src/plugins/mediawiki/NAME -text
 src/plugins/mediawiki/README -text
+src/plugins/mediawiki/bin/create_links.sh -text
 src/plugins/mediawiki/bin/db-delete.pl -text
 src/plugins/mediawiki/bin/db-upgrade.pl -text
 src/plugins/mediawiki/bin/mw-drop-wikis.php -text
