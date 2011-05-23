@@ -20,39 +20,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-function son_box($group_id, $name, $selected = 'xzxzxz') {
-	global $son;
-	if (!$son) {
-		$family = get_family($group_id);
-		$cond = '';
-		$skipped = array();
-		if($family != NULL) {
-			
-			reset($family);
-			while (list($key, $val) = each($family)) {
-				$skipped[] = $val;
-			}
-		}
-		$son = db_query_params('SELECT group_id,group_name,register_time FROM groups 
-					WHERE status = $1
-					AND type_id = 1
-					AND group_id != $2
-					AND group_id <> ALL ($3)
-					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy WHERE link_type = $4)
-					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $5);',
-					array('A',
-						$group_id,
-						db_int_array_to_any_clause($skipped),
-						'shar',
-						'projects_hierarchy'));
-	}
-	return html_build_select_box($son, $name, $selected, false);
-}
-
 function link_box($group_id, $name, $selected = 'xzxzxz') {
 	global $link;
 	if (!$link) {
-		$link = db_query_params('SELECT group_id,group_name,register_time FROM groups 
+		$link = db_query_params('SELECT group_id,group_name,register_time FROM groups
 					WHERE status=$1
 					AND type_id=1
 					AND group_id != $2
@@ -78,7 +49,7 @@ document.formson.son.disabled=true
 </select>";
 }
 
-//search all the family,all ancestor 
+//search all the family,all ancestor
 function get_family($group_id, $family = '', $cpt = 0){
 	$res = db_query_params('SELECT project_id FROM plugin_projects_hierarchy WHERE sub_project_id = $1',
 				array($group_id))

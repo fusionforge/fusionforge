@@ -31,30 +31,32 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 }
 
 $type = getStringFromRequest('type');
-$id = getStringFromRequest('id');
 $projectsHierarchy = plugin_get_object('projects_hierarchy');
 
 if (!$type) {
 	exit_error("Cannot Process your request: No TYPE specified", 'home'); // you can create items in Base.tab and customize this messages
-} elseif (!$id) {
-	exit_error("Cannot Process your request: No ID specified", 'home');
 }
 
 switch ($type) {
 	case "group": {
+		$id = getStringFromRequest('id');
+		if (!$id) {
+			exit_error("Cannot Process your request: No ID specified", 'home');
+		}
 		$group = group_get_object($id);
 		if ( !$group) {
-			exit_error("Invalid Project", "Inexistent Project");
+			exit_error("Invalid Project", 'home');
 		}
 		if (!$group->usesPlugin($projectsHierarchy->name)) {//check if the group has the projects_hierarchy plugin active
 			exit_error(sprintf(_('First activate the %s plugin through the Project\'s Admin Interface'), $projectsHierarchy->name), 'home');
 		}
-		session_require_perm('project_admin',$id);
+		session_require_perm('project_admin', $id);
 
 		$action = getStringFromRequest('action');
 		global $gfplugins;
 		switch ($action) {
-			case "projectsHierarchyDocman": {
+			case "projectsHierarchyDocman":
+			case "addChild": {
 				include($gfplugins.$projectsHierarchy->name.'/actions/'.$action.'.php');
 				break;
 			}
@@ -63,6 +65,20 @@ switch ($type) {
 				break;
 			}
 		}
+		break;
+	}
+	case "globaladmin": {
+		$action = getStringFromRequest('action');
+		switch ($action) {
+			case 'updateGlobalConf': {
+				global $gfplugins;
+				include($gfplugins.$projectsHierarchy->name.'/actions/'.$action.'.php');
+				break;
+			}
+		}
+		$projectsHierarchy->getHeader('globaladmin');
+		$projectsHierarchy->getGlobalAdminView();
+		$projectsHierarchy->getFooter();
 		break;
 	}
 	default: {

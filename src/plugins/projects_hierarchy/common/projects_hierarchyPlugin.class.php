@@ -32,6 +32,8 @@ class projects_hierarchyPlugin extends Plugin {
 		$this->_addHook('hierarchy_views'); // include specific views
 		$this->_addHook('display_hierarchy'); // to see the tree of projects
 		$this->_addHook('group_delete'); // clean tables on delete
+		$this->_addHook('project_admin_plugins'); // to show up in the admin page fro group
+		$this->_addHook('site_admin_option_hook');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -67,7 +69,7 @@ class projects_hierarchyPlugin extends Plugin {
 			}
 			case "group_delete": {
 				if ($params['group']->usesPlugins($this->name)) {
-					if ($this->delete($params['group_id'])) {
+					if ($this->remove($params['group_id'])) {
 						$returned = true;
 					}
 				} else {
@@ -75,14 +77,25 @@ class projects_hierarchyPlugin extends Plugin {
 				}
 				break;
 			}
+			case "project_admin_plugins": {
+				// this displays the link in the project admin options page to it's  MantisBT administration
+				$group_id = $params['group_id'];
+				$group = group_get_object($group_id);
+				if ($group->usesPlugin($this->name)) {
+					echo '<p>';
+					echo util_make_link('/plugins/'.$this->name.'/?group_id='.$group_id.'&type=admin&pluginname='.$this->name, _('Hierarchy Admin'));
+					echo '</p>';
+				}
+				$returned = true;
+				break;
+			}
+			case "site_admin_option_hook": {
+				echo '<li>'.$this->getAdminOptionLink().'</li>';
+				$returned = true;
+				break;
+			}
 		}
 		return $returned;
-	}
-
-	function delete($group_id) {
-		$res_son = db_query_params('DELETE FROM plugin_projects_hierarchy WHERE project_id = $1 OR sub_project_id = $1 ',
-						array($group_id));
-		return true;
 	}
 
 	function displayHierarchy() {
@@ -182,13 +195,13 @@ class projects_hierarchyPlugin extends Plugin {
 		}
 		if ($res || db_numrows($res) > 1) {
 			while ($arr = db_fetch_array($res)) {
-				$localFamily[] = $arr['id'];
+				$localFamily[] = array($arr['id']);
 			}
 		}
 
 		if ($deep) {
 			for ( $i = 0; $i < count($localFamily); $i++) {
-				$localFamily[$i] = $this->getFamily($localFamily[$i], $order, $deep);
+				$localFamily[$i][] = $this->getFamily($localFamily[$i], $order, $deep);
 			}
 		}
 		return $localFamily;
@@ -248,6 +261,184 @@ class projects_hierarchyPlugin extends Plugin {
 			session_redirect($url.'&'.$type.'='.urlencode($message));
 		}
 		session_redirect($url.'?'.$type.'='.urlencode($message));
+	}
+
+	/**
+	 * override default groupisactivecheckboxpost function for init value in db
+	 */
+	function groupisactivecheckboxpost(&$params) {
+		// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
+		$group = group_get_object($params['group']);
+		$flag = strtolower('use_'.$this->name);
+		if ( getIntFromRequest($flag) == 1 ) {
+			$group->setPluginUse($this->name);
+			$this->add($group->getID());
+		} else {
+			$group->setPluginUse($this->name, false);
+			$this->remove($group->getID());
+		}
+		return true;
+	}
+
+	function add($group_id) {
+		if (!$this->exists($group_id)) {
+			$res = db_query_params('INSERT INTO plugin_projects_hierarchy (project_id) VALUES ($1)', array($group_id));
+			if (!$res)
+				return false;
+
+		}
+		return true;
+	}
+
+	function remove($group_id) {
+		if ($this->exists($group_id)) {
+			db_begin();
+			$res = db_query_params('DELETE FROM plugin_projects_hierarchy where project_id = $1', array($group_id));
+			if (!$res) {
+				db_rollback();
+				return false;
+			}
+
+			$res = db_query_params('DELETE FROM plugin_projects_hierarchy_relationship where project_id = $1 OR sub_project_id = $1',
+						array($group_id));
+			if (!$res) {
+				db_rollback();
+				return false;
+			}
+			db_commit();
+		}
+		return true;
+	}
+
+	function exists($group_id) {
+		$res = db_query_params('SELECT project_id FROM plugin_projects_hierarchy WHERE project_id = $1', array($group_id));
+		if (!$res)
+			return false;
+
+		if (db_numrows($res))
+			return true;
+
+		return false;
+	}
+
+	function getAdminOptionLink() {
+		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin&pluginname='.$this->name,_('Global Hierarchy admin'));
+	}
+
+	/**
+	 * getHeader - initialize header and js
+	 * @param	string	type : user, project (aka group)
+	 * @return	bool	success or not
+	 */
+	function getHeader($type) {
+		global $gfplugins;
+		$returned = false;
+		switch ($type) {
+			case 'globaladmin': {
+				session_require_global_perm('forge_admin');
+				global $gfwww;
+				require_once($gfwww.'admin/admin_utils.php');
+				site_admin_header(array('title'=>_('Site Global Hierarchy Admin'), 'toptab' => ''));
+				$returned = true;
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+		return $returned;
+	}
+
+	function getGlobalAdminView() {
+		global $gfplugins;
+		$user = session_get_user();
+		$use_tooltips = $user->usesTooltips();
+		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
+		return true;
+	}
+
+	/**
+	 * getGlobalconf - return the global configuration defined at forge level
+	 *
+	 * @return	array	the global configuration array
+	 */
+	function getGlobalconf() {
+		$resGlobConf = db_query_params('SELECT * from plugin_projects_hierarchy_global',array());
+		if (!$resGlobConf) {
+			return false;
+		}
+
+		$row = db_numrows($resGlobConf);
+
+		if ($row == null || count($row) > 2) {
+			return false;
+		}
+
+		$resArr = db_fetch_array($resGlobConf);
+		$returnArr = array();
+
+		foreach($resArr as $column => $value) {
+			if ($value == 't') {
+				$returnArr[$column] = true;
+			} else {
+				$returnArr[$column] = false;
+			}
+		}
+
+		return $returnArr;
+	}
+
+	function getFooter() {
+		site_admin_footer(array());
+	}
+
+	/**
+	 * updateGlobalConf - update the global configuration in database
+	 *
+	 * @param	array	configuration array (tree, docman, delegate)
+	 * @return	bool	true on success
+	 */
+	function updateGlobalConf($confArr) {
+		if (!isset($confArr['tree']) || !isset($confArr['docman']) || !isset($confArr['delegate']))
+			return false;
+
+		$res = db_query_params('truncate plugin_projects_hierarchy_global',array());
+		if (!$res)
+			return false;
+
+		$res = db_query_params('insert into plugin_projects_hierarchy_global (tree, docman, delegate)
+					values ($1, $2, $3)',
+					array(
+						$confArr['tree'],
+						$confArr['docman'],
+						$confArr['delegate'],
+					));
+		if (!$res)
+			return false;
+
+		return true;
+	}
+
+	function son_box($group_id, $name, $selected = 'xzxzxz') {
+		$family = $this->getFamily($group_id, 'child', true);
+		$skipped = array();
+		if($family != NULL) {
+			reset($family);
+			while (list($key, $val) = each($family)) {
+				$skipped[] = $val;
+			}
+		}
+		$son = db_query_params('SELECT group_id,group_name FROM groups
+					WHERE status = $1
+					AND group_id != $2
+					AND group_id <> ALL ($3)
+					AND group_id NOT IN (SELECT sub_project_id FROM plugin_projects_hierarchy_relationship)
+					AND group_id IN (select group_id from group_plugin,plugins where group_plugin.plugin_id = plugins.plugin_id and plugins.plugin_name = $4);',
+					array('A',
+						$group_id,
+						db_int_array_to_any_clause($skipped),
+						$this->name));
+		return html_build_select_box($son, $name, $selected, false);
 	}
 }
 // Local Variables:

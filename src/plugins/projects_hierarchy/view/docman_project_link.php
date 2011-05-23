@@ -47,6 +47,24 @@ if (sizeof($childs)) {
 		// display a tree ? with checkbox ? to limit scope of browsing
 		// include children of children ?
 		echo _('TO BE IMPLEMENTED VIEW');
+		echo '<table>';
+		echo '<thead>';
+		echo '<tr>';
+		echo '<th>'._('Subprojects').'</th>';
+		echo '<th>'._('Actions').'</th>';
+		echo '</thead>';
+		echo '<tbody>';
+		foreach ($childs as $child) {
+			$childGroup = group_get_object($child[0]);
+			if ($childGroup->usesDocman()) {
+				echo '<tr>';
+				echo '<td>'.$childGroup->getPublicName().'</td>';
+				echo '<td><label><input type="checkbox" />'._('Include in browsing').'</label></td>';
+				echo '</tr>';
+			}
+		}
+		echo '</tbody>';
+		echo '</table>';
 	}
 }
 ?>
