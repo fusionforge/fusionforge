@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: g 8071 2011-05-18 14:56:14Z vargenau $
+<?php // -*-php-*- $Id: g 8087 2011-05-20 14:29:42Z vargenau $
 
 /*
  * Copyright (C) 2008-2010 Alcatel-Lucent
@@ -56,6 +56,10 @@ if (!$group_id || !$project) {
 } else if (!($project->usesPlugin("wiki"))) {
     exit_disabled('home');
 } else {
+
+    global $robots;
+
+    $robots = "noindex,nofollow";
 
     $group_name = $project->getUnixName();
     $group_public_name = $project->getPublicName();
