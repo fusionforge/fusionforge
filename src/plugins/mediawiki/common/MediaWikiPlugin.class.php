@@ -34,22 +34,35 @@ forge_set_config_item_bool('use_frame', 'mediawiki');
 
 
 class MediaWikiPlugin extends Plugin {
-	function MediaWikiPlugin () {
+	function __construct ($id=0) {
 		$this->Plugin() ;
 		$this->name = "mediawiki" ;
 		$this->text = "Mediawiki" ; // To show in the tabs, use...
-		$this->hooks[] = "groupmenu" ;	// To put into the project tabs
-		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
-		$this->hooks[] = "project_public_area";
-		$this->hooks[] = "role_get";
-		$this->hooks[] = "role_normalize";
-		$this->hooks[] = "role_translate_strings";
-		$this->hooks[] = "role_has_permission";
-		$this->hooks[] = "role_get_setting";
-		$this->hooks[] = "list_roles_by_permission";
-		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page for group
-		$this->hooks[] = "clone_project_from_template" ;
+		$this->_addHook("groupmenu") ;	// To put into the project tabs
+		$this->_addHook("groupisactivecheckbox") ; // The "use ..." checkbox in editgroupinfo
+		$this->_addHook("groupisactivecheckboxpost") ; //
+		$this->_addHook("project_public_area");
+		$this->_addHook("role_get");
+		$this->_addHook("role_normalize");
+		$this->_addHook("role_translate_strings");
+		$this->_addHook("role_has_permission");
+		$this->_addHook("role_get_setting");
+		$this->_addHook("list_roles_by_permission");
+		$this->_addHook("project_admin_plugins"); // to show up in the admin page for group
+		$this->_addHook("clone_project_from_template") ;
+	}
+
+        function process() {
+		echo '<h1>Mediawiki</h1>';
+		echo $this->getPluginInfo()->getpropVal('answer');
+        }
+
+        function getPluginInfo() {
+		if (!is_a($this->pluginInfo, 'MediaWikiPluginInfo')) {
+			require_once('MediaWikiPluginInfo.class.php');
+			$this->pluginInfo =& new MediaWikiPluginInfo($this);
+		}
+		return $this->pluginInfo;
 	}
 
 	function CallHook ($hookname, &$params) {
