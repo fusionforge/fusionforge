@@ -50,6 +50,7 @@ class MediaWikiPlugin extends Plugin {
 		$this->_addHook("list_roles_by_permission");
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page for group
 		$this->_addHook("clone_project_from_template") ;
+		$this->_addHook("site_admin_option_hook");
 	}
 
         function process() {
@@ -57,7 +58,7 @@ class MediaWikiPlugin extends Plugin {
 		echo $this->getPluginInfo()->getpropVal('answer');
         }
 
-        function getPluginInfo() {
+        function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'MediaWikiPluginInfo')) {
 			require_once('MediaWikiPluginInfo.class.php');
 			$this->pluginInfo =& new MediaWikiPluginInfo($this);
@@ -348,7 +349,7 @@ class MediaWikiPlugin extends Plugin {
 				}
 				break ;
 			}
-		} else if ($hookname == "project_admin_plugins") {
+		} elseif ($hookname == "project_admin_plugins") {
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
 			if ($group->usesPlugin($this->name))
@@ -373,6 +374,8 @@ class MediaWikiPlugin extends Plugin {
 					}
 				}
 			}
+		} elseif ($hookname == "site_admin_option_hook") {
+			echo '<li><a href="'.$this->getPluginPath().'/">' . _('Mediawiki plugin') . '</a></li>';	
 		}
 	}
   }
