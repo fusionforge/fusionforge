@@ -1,6 +1,6 @@
 plugins/mediawiki/*                usr/share/gforge/plugins/mediawiki/
 plugins/mediawiki/bin/*            usr/share/gforge/plugins/mediawiki/bin/
-plugins/mediawiki/common/*         usr/share/gforge/plugins/mediawiki/common/
+plugins/mediawiki/include/*         usr/share/gforge/plugins/mediawiki/include/
 plugins/mediawiki/cronjobs/*       usr/share/gforge/plugins/mediawiki/cronjobs/
 plugins/mediawiki/db/*		   usr/share/gforge/plugins/mediawiki/lib/
 plugins/mediawiki/www/*            usr/share/gforge/plugins/mediawiki/www/
