@@ -180,13 +180,17 @@ class projects_hierarchyPlugin extends Plugin {
 		$localFamily = array();
 		switch ($order) {
 			case "parent": {
-				$res = db_query_params('SELECT project_id as id FROM plugin_projects_hierarchy WHERE sub_project_id = $1',
-							array($group_id));
+				$res = db_query_params('SELECT project_id as id FROM plugin_projects_hierarchy_relationship
+									WHERE sub_project_id = $1
+									AND status = $2',
+									array($group_id, 1));
 				break;
 			}
 			case "child": {
-				$res = db_query_params('SELECT sub_project_id as id FROM plugin_projects_hierarchy WHERE project_id = $1',
-							array($group_id));
+				$res = db_query_params('SELECT sub_project_id as id FROM plugin_projects_hierarchy_relationship
+									WHERE project_id = $1
+									AND status = $2',
+									array($group_id, 1));
 				break;
 			}
 			default: {
