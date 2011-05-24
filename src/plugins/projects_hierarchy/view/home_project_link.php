@@ -22,7 +22,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-echo $HTML->boxTop(_('Linked projects'));
+global $g; //group object
+global $group_id; // id of the group
+$projectsHierarchy = plugin_get_object('projects_hierarchy');
+
+$parent = $projectsHierarchy->getFamily($group_id, 'parent', false);
+$childs = $projectsHierarchy->getFamily($group_id, 'child', false);
+if (sizeof($parent) || sizeof($childs)) {
+	echo $HTML->boxTop(_('Linked projects'));
 // $cpt_project = 0 ;
 // // father request
 // $res = db_query_params('SELECT DISTINCT group_id,unix_group_name,group_name FROM groups,plugin_projects_hierarchy WHERE plugin_projects_hierarchy.link_type=$1 AND plugin_projects_hierarchy.activated=$2 AND groups.group_id=plugin_projects_hierarchy.project_id AND plugin_projects_hierarchy.sub_project_id=$3',
@@ -86,5 +93,6 @@ echo $HTML->boxTop(_('Linked projects'));
 // 	print '<hr size="1" />';
 // }
 
-echo $HTML->boxBottom();
+	echo $HTML->boxBottom();
+}
 ?>
