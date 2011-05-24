@@ -36,7 +36,7 @@ forge_set_config_item_bool('use_frame', 'mediawiki');
 
 class MediaWikiPlugin extends Plugin {
 	function __construct ($id=0) {
-		$this->Plugin() ;
+		$this->Plugin($id) ;
 		$this->name = "mediawiki" ;
 		$this->text = "Mediawiki" ; // To show in the tabs, use...
 		$this->_addHook("groupmenu") ;	// To put into the project tabs
