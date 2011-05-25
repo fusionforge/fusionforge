@@ -328,9 +328,9 @@ foreach ($members as $user) {
 
 	sortRoleList ($roles) ;
 
-	echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>' ;
 	$seen = false ;
 	foreach ($roles as $role) {
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '>' ;
 		if (!$seen) {
 			echo '<td style="white-space: nowrap;" rowspan="'.(count($roles)+1).'">
 			<a href="/users/'.$user->getUnixName().'">';

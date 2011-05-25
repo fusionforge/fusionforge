@@ -5,6 +5,8 @@
  * Copyright 2004 (c) GForge LLC
  * Copyright 2010, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright © 2011
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -163,12 +165,12 @@ if (USE_PFO_RBAC) {
 		echo '<p><strong>'._('Role Name').'</strong></p>' ;
 		echo $role->getDisplayableName ($group) ;
 	} else {
-		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"><br />' ;
+		echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /><br />' ;
 		echo '<input type="checkbox" name="public" value="1"' ;
 		if ($role->isPublic()) {
-			echo ' checked' ;
+			echo ' checked="checked"' ;
 		}
-		echo '> '._('Shared role (can be referenced by other projects)').'</p>' ;
+		echo ' /> '._('Shared role (can be referenced by other projects)').'</p>' ;
 	}
 } else {
 	if ($role_id != 'observer') {

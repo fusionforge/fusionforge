@@ -414,12 +414,12 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$return .= '
-		<option value=""'.(($checked_val=='') ? ' selected="selected"' : '').'>'. $text_any .'</option>';
+		<option value=""'.(($checked_val=='') ? ' selected="selected"' : '').'>'. util_html_secure($text_any) .'</option>';
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
 		$return .= '
-		<option value="100"'.(($checked_val==100) ? ' selected="selected"' : '').'>'. $text_100 .'</option>';
+		<option value="100"'.(($checked_val==100) ? ' selected="selected"' : '').'>'. util_html_secure($text_100) .'</option>';
 	}
 
 	$checked_found=false;
@@ -429,7 +429,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
-				<option value="'.$vals[$i].'"';
+				<option value="'.util_html_secure($vals[$i]).'"';
 			if ((string)$vals[$i] == (string)$checked_val) {
 				$checked_found=true;
 				$return .= ' selected="selected"';
@@ -437,7 +437,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
 				$return .= ' disabled="disabled" class="option_disabled"';
 			}
-			$return .= '>'./*htmlspecialchars(*/$texts[$i]/*)*/.'</option>';
+			$return .= '>'.util_html_secure($texts[$i]).'</option>';
 		}
 	}
 	//
@@ -446,7 +446,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	//
 	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
 		$return .= '
-		<option value="'.$checked_val.'" selected="selected">'._('No Change').'</option>';
+		<option value="'.util_html_secure($checked_val).'" selected="selected">'._('No Change').'</option>';
 	}
 
 	$return .= '
