@@ -1,4 +1,4 @@
-#! /usr/bin/php5
+#! /usr/bin/php
 <?php
 /**
  * This script will get mails and store it into artifact DB
@@ -29,6 +29,7 @@
  * This file is based on forum_gateway.php
  */
 
+require dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfwww.'include/squal_pre.php';
 require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'include/MailParser.class.php';
