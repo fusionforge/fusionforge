@@ -22,19 +22,15 @@
  */
 
 if(is_dir("/usr/share/mediawiki")){
-	forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
-}elseif(is_dir("/usr/share/mediawiki115")){
-	forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki115");
-}
-
+forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
 forge_define_config_item('mwdata_path', 'mediawiki', '$core/data_path/plugins/mediawiki');
 forge_define_config_item('projects_path', 'mediawiki', '$mediawiki/mwdata_path/projects');
 forge_define_config_item('master_path', 'mediawiki', '$mediawiki/mwdata_path/master');
-
 forge_define_config_item('enable_uploads', 'mediawiki', false);
 forge_set_config_item_bool('enable_uploads', 'mediawiki');
 forge_define_config_item('use_frame', 'mediawiki', false);
 forge_set_config_item_bool('use_frame', 'mediawiki');
+}
 
 class MediaWikiPlugin extends Plugin {
 	function __construct ($id=0) {
