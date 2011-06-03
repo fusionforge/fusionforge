@@ -87,3 +87,18 @@ sub write_array_file {
         }
         return 0;
 }      
+
+#######################
+# Display a backtrace #
+#######################
+sub
+debug_print_backtrace
+{
+	my $i = 1;
+
+	print "Call Trace:\n";
+	while ((my @call_details = (caller($i++)))) {
+		print " + " . $call_details[1] . ":" . $call_details[2] .
+		    " in function " . $call_details[3] . "\n";
+	}
+}
