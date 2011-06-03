@@ -1,5 +1,5 @@
 <?php // -*-php-*-
-// $Id: AllPages.php 8071 2011-05-18 14:56:14Z vargenau $
+// $Id: AllPages.php 8090 2011-06-01 12:33:26Z vargenau $
 /**
  * Copyright 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
  *
@@ -44,8 +44,7 @@ extends WikiPlugin
              PageList::supportedArgs(),
              array(
                    'noheader'      => false,
-                   'include_empty' => true, // is faster
-                   //'pages'         => false, // DONT, this would be ListPages then.
+                   'include_empty' => false,
                    'info'          => '',
                    'debug'         => false,
                    'userpages'     => false
