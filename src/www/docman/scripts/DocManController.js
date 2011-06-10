@@ -4,6 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Franck Villaume - TrivialDev
+ * Copyright 2011, Alain Peyrat
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -132,6 +133,7 @@ DocManListFileController.prototype =
 		} else {
 			this.params.divEditDirectory.hide();
 		}
+		return false;
 	},
 
 	/*! toggle add item view div visibility
@@ -143,6 +145,7 @@ DocManListFileController.prototype =
 		} else {
 			this.params.divAddItem.hide();
 		}
+		return false;
 	},
 
 	/*! toggle add file edit view div visibility and play with lock
@@ -175,6 +178,7 @@ DocManListFileController.prototype =
 
 			clearInterval(this.lockInterval[id]);
 		}
+		return false;
 	},
 
 	/*! build list of id, comma separated
