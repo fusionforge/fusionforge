@@ -49,6 +49,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 	$docname = urldecode($arr[5]);
 
 	$d = new Document($g, $docid);
+
 	if (!$d || !is_object($d)) {
 		exit_error(_('Document is not available.'), 'docman');
 	} elseif ($d->isError()) {
@@ -56,6 +57,19 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 	}
 
 	/**
+	 * except for active (1), we need more right access than just read
+	 */
+	switch ($d->getStateID()) {
+		case "2":
+		case "3":
+		case "4":
+		case "5": {
+			session_require_perm('docman', $group_id, 'approve');
+			break;
+		}
+	}
+
+	/** 
 	 * If the served document has wrong relative links, then
 	 * theses links may redirect to the same document with another
 	 * name, this way a search engine may loop and stress the
