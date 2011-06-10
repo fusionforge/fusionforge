@@ -77,6 +77,7 @@ DocManListFileController.prototype =
 		{
 			this.params.divAddDirectory.hide();
 		}
+		return false;
 	},
 
 	/*! toggle edit group view div visibility
@@ -93,6 +94,7 @@ DocManListFileController.prototype =
 		{
 			this.params.divEditDirectory.hide();
 		}
+		return false;
 	},
 
 	/*! toggle add file view div visibility
@@ -109,6 +111,7 @@ DocManListFileController.prototype =
 		{
 			this.params.divAddFile.hide();
 		}
+		return false;
 	},
 
 	/*! toggle add file edit view div visibility and play with lock
@@ -145,6 +148,7 @@ DocManListFileController.prototype =
 
 			clearInterval(this.lockInterval[id]);
 		}
+		return false;
 	},
 
 	computeDocumentsData: function() {
