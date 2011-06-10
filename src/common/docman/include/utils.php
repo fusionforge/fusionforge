@@ -28,8 +28,12 @@
  * tooling library
  */
 
-function doc_get_state_box($checkedval = 'xzxz') {
-	$res_states = db_query_params('select * from doc_states', array());
+function doc_get_state_box($checkedval = 'xzxz', $removedval = '') {
+	if (!empty($removedval)) {
+		$res_states = db_query_params('select * from doc_states where stateid not in ($1)', array($removedval));
+	} else {
+		$res_states = db_query_params('select * from doc_states', array());
+	}
 	echo html_build_select_box($res_states, 'stateid', $checkedval, false);
 }
 
