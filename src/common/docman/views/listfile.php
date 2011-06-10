@@ -159,6 +159,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				break;
 			}
 			case "application/vnd.oasis.opendocument.presentation":
+			case "application/vnd.ms-office":
 			case "application/vnd.ms-powerpoint": {
 				echo html_image('docman/file_type_presentation.png', '22', '22', array('alt'=>$d->getFileType()));
 				break;
