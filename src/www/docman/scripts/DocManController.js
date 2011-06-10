@@ -208,6 +208,11 @@ DocManListFileController.prototype =
 			jQuery('#checkall'+id).attr('checked', false);
 			jQuery('#massaction'+id).hide();
 		}
+		for (var h = 0; h < jQuery("input:checked").length; h++) {
+			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className == 'checkeddocid'+id ) {
+				jQuery('#massaction'+id).show();
+			}
+		}
 	},
 
 	computeDocumentsData: function() {

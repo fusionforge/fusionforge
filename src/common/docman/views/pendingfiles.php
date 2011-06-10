@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
 		groupId:		<?php echo $group_id ?>,
 		tipsyElements:		[
 						{selector: '.docman-pendingdownloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
-						{selector: '#docman-massactionpendingmessage', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-massactionpendingmessage', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-pendingactivate', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-pendingviewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-pendingeditfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
@@ -62,14 +62,14 @@ jQuery(document).ready(function() {
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
 		echo '<div class="docmanDiv">';
 		echo '<h4>'._('Pending files').'</h4>';
-		$tabletop = array('<input id="checkallpending" type="checkbox" onchange="controllerListPending.checkAll(\'checkeddocidPending\', \'pending\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+		$tabletop = array('<input id="checkallpending" type="checkbox" onchange="controllerListPending.checkAll(\'checkeddocidpending\', \'pending\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;
 		foreach ($nested_pending_docs[$dirid] as $d) {
 			echo '<tr>';
 			echo '<td>';
-			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidPending" onchange="controllerListPending.checkgeneral(\'pending\')" />';
+			echo '<input type="checkbox" value="'.$d->getID().'" class="checkeddocidpending" onchange="controllerListPending.checkgeneral(\'pending\')" />';
 			echo '</td>';
 			switch ($d->getFileType()) {
 				case "URL": {
@@ -151,12 +151,12 @@ jQuery(document).ready(function() {
 		echo _('Mass actions for selected pending files:');
 		echo '</span>';
 		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
-		echo '<a class="docman-pendingdownloadaszip" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'Pending\')" ';
+		echo '<a class="docman-pendingdownloadaszip" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" ';
 		if ($use_tooltips)
 			echo ' title="'. _('Download as a zip') . '" ';
 
 		echo '>' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
-		echo '<a class="docman-pendingactivate" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=validatefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListPending.buildUrlByCheckbox(\'Pending\')" ';
+		echo '<a class="docman-pendingactivate" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=validatefile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" ';
 		if ($use_tooltips)
 			echo ' title="'. _('Activate in this directory') . '" ';
 

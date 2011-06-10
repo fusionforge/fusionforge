@@ -99,6 +99,7 @@ jQuery(document).ready(function() {
 						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-deletedirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-trashdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
+						{selector: '#docman-massactionmessage', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-downloadaszip', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-viewfile', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-reserveddocument', options:{delayIn: 500, delayOut: 0, fade: true}},
@@ -348,8 +349,14 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
+	echo '<span id="docman-massactionmessage"';
+	if ($use_tooltips)
+		echo ' title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '" ';
+
+	echo '>';
 	echo _('Mass actions for selected files:');
-	echo '<span id="massactionactive" class="docman-massaction-hide" >';
+	echo '</span>';
+	echo '<span id="massactionactive" style="display: none;" >';
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		echo '<a class="docman-movetotrash" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" ';
 		if ($use_tooltips)
