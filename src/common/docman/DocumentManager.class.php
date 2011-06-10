@@ -143,6 +143,7 @@ class DocumentManager extends Error {
 		foreach ($subGroupIdArr as $subGroupIdValue) {
 			$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
 			echo '<li><a href="?group_id='.$this->Group->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'">'.$localDg->getName().'</a></il>';
+			$this->getTree($linkmenu, $subGroupIdValue);
 		}
 		echo '</ul>';
 	}

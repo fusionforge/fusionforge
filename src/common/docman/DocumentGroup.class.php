@@ -432,7 +432,7 @@ class DocumentGroup extends Error {
 
 	function getSubgroup($docGroupId, $stateId = 1) {
 		$returnArr = array();
-		$res = db_query_params('SELECT doc_group from doc_groups where parent_doc_group = $1 and stateid = $2 and group_id = $3',
+		$res = db_query_params('SELECT doc_group from doc_groups where parent_doc_group = $1 and stateid = $2 and group_id = $3 order by groupname',
 							array($docGroupId, $stateId, $this->Group->getID()));
 		if (!$res) {
 			return $returnArr;
