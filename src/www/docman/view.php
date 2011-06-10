@@ -134,42 +134,82 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 	}
 } elseif ($docid === 'zip') {
 	session_require_perm('docman', $group_id, 'read');
-	if ( $arr[5] === 'full' ) {
-		$dirid = $arr[6];
+	if (extension_loaded('zip')) {
+		if ( $arr[5] === 'full' ) {
+			$dirid = $arr[6];
 
-		$dg = new DocumentGroup($g, $dirid);
-		if ($dg->isError())
-			exit_error($dg->getErrorMessage(), 'docman');
+			$dg = new DocumentGroup($g, $dirid);
+			if ($dg->isError())
+				exit_error($dg->getErrorMessage(), 'docman');
 
-		$df = new DocumentFactory($g);
-		if ($df->isError())
-			exit_error($df->getErrorMessage(), 'docman');
+			$df = new DocumentFactory($g);
+			if ($df->isError())
+				exit_error($df->getErrorMessage(), 'docman');
 
-		$dgf = new DocumentGroupFactory($g);
-		if ($dgf->isError())
-			exit_error($dgf->getErrorMessage(), 'docman');
+			$dgf = new DocumentGroupFactory($g);
+			if ($dgf->isError())
+				exit_error($dgf->getErrorMessage(), 'docman');
 
-		$nested_groups = $dgf->getNested();
+			$nested_groups = $dgf->getNested();
 
-		if ($dg->hasDocuments($nested_groups, $df)) {
-			$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
+			if ($dg->hasDocuments($nested_groups, $df)) {
+				$filename = 'docman-'.$g->getUnixName().'-'.$dg->getID().'.zip';
+				$file = forge_get_config('data_path').'/'.$filename;
+				$zip = new ZipArchive;
+				if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
+					exit_error(_('Unable to open zip archive for download as zip'), 'docman');
+
+				// ugly workaround to get the files at doc_group_id level
+				$df->setDocGroupID($dg->getID());
+				$docs = $df->getDocuments(1);	// no caching
+				if (is_array($docs) && count($docs) > 0) {	// this group has documents
+					foreach ($docs as $doc) {
+						if ( !$zip->addFromString($doc->getFileName(),$doc->getFileData()))
+							return false;
+					}
+				}
+				if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID()))
+					exit_error(_('Unable to fill zip archive for download as zip'), 'docman');
+
+				if ( !$zip->close())
+					exit_error(_('Unable to close zip archive for download as zip'), 'docman');
+
+				header('Content-disposition: filename="'.$filename.'"');
+				header('Content-type: application/binary');
+
+				readfile($file);
+				unlink($file);
+			} else {
+				$warning_msg = _('This directory is empty.');
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			}
+		} elseif ( $arr[5] === 'selected' ) {
+			$dirid = $arr[6];
+			$arr_fileid = explode(',',$arr[7]);
+			$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
 			$file = forge_get_config('data_path').'/'.$filename;
 			$zip = new ZipArchive;
 			if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
 				exit_error(_('Unable to open zip archive for download as zip'), 'docman');
 
-			// ugly workaround to get the files at doc_group_id level
-			$df->setDocGroupID($dg->getID());
-			$docs = $df->getDocuments(1);	// no caching
-			if (is_array($docs) && count($docs) > 0) {	// this group has documents
-				foreach ($docs as $doc) {
-					if ( !$zip->addFromString($doc->getFileName(),$doc->getFileData()))
+			foreach($arr_fileid as $docid) {
+				if (!empty($docid)) {
+					$d = new Document($g, $docid);
+					if (!$d || !is_object($d)) {
+						exit_error(_('Document is not available.'), 'docman');
+					} elseif ($d->isError()) {
+						exit_error($d->getErrorMessage(), 'docman');
+					}
+
+					if ( !$zip->addFromString($d->getFileName(),$d->getFileData()))
 						return false;
+				} else {
+					$zip->close();
+					unlink($file);
+					$warning_msg = _('No action to perform');
+					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 				}
 			}
-			if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID()))
-				exit_error(_('Unable to fill zip archive for download as zip'), 'docman');
-
 			if ( !$zip->close())
 				exit_error(_('Unable to close zip archive for download as zip'), 'docman');
 
@@ -179,46 +219,10 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 			readfile($file);
 			unlink($file);
 		} else {
-			$warning_msg = _('This directory is empty.');
-			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
 		}
-	} elseif ( $arr[5] === 'selected' ) {
-		$dirid = $arr[6];
-		$arr_fileid = explode(',',$arr[7]);
-		$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
-		$file = forge_get_config('data_path').'/'.$filename;
-		$zip = new ZipArchive;
-		if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
-			exit_error(_('Unable to open zip archive for download as zip'), 'docman');
-
-		foreach($arr_fileid as $docid) {
-			if (!empty($docid)) {
-				$d = new Document($g, $docid);
-				if (!$d || !is_object($d)) {
-					exit_error(_('Document is not available.'), 'docman');
-				} elseif ($d->isError()) {
-					exit_error($d->getErrorMessage(), 'docman');
-				}
-
-				if ( !$zip->addFromString($d->getFileName(),$d->getFileData()))
-					return false;
-			} else {
-				$zip->close();
-				unlink($file);
-				$warning_msg = _('No action to perform');
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
-			}
-		}
-		if ( !$zip->close())
-			exit_error(_('Unable to close zip archive for download as zip'), 'docman');
-
-		header('Content-disposition: filename="'.$filename.'"');
-		header('Content-type: application/binary');
-
-		readfile($file);
-		unlink($file);
 	} else {
-		exit_error(_('No document to display - invalid or inactive document number.'), 'docman');
+		exit_error(_('PHP extension is missing.'), 'docman');
 	}
 } else {
 	exit_error(_('No document to display - invalid or inactive document number.'), 'docman');

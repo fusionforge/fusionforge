@@ -43,11 +43,13 @@ function doIt(formid) {
 }
 /* ]]> */</script>
 <?php
-echo '<form id="backup" name="backup" method="post" action="'. util_make_uri('/docman/view.php/'.$group_id.'/backup') .'" >';
-echo '<ul>';
-echo '<li><input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')"></li>';
-echo '</ul>';
-echo '</form>';
+if (extension_loaded('zip')) {
+	echo '<form id="backup" name="backup" method="post" action="'. util_make_uri('/docman/view.php/'.$group_id.'/backup') .'" >';
+	echo '<ul>';
+	echo '<li><input id="submitbackup" type="button" value="'. _('Extract documents and directories as an archive') .'" onclick="javascript:doIt(\'backup\')"></li>';
+	echo '</ul>';
+	echo '</form>';
+}
 
 echo '<form id="createonline" name="createonline" method="post" action="?group_id='.$group_id.'&action=updatecreateonline" >';
 echo '<ul>';
