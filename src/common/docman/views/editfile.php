@@ -101,7 +101,7 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 
 <?php
 
-	if ((!$d->isURL()) && ($d->isText())) {
+	if ((!$d->isURL()) && ($d->isText()) && $d->getStateID() != '2') {
 		if ($g->useCreateOnline()) {
 			echo '<tr>
 				<td>';
@@ -150,14 +150,16 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 	</tr>
 	<tr>
 		<td>
-		<?php if ($d->isURL()) { ?>
+		<?php	if ($d->getStateID() != '2') {
+				if ($d->isURL()) { ?>
 		<strong><?php echo _('Specify an outside URL where the file will be referenced') ?> :</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="file_url" size="50" value="<?php echo $d->getFileName() ?>" />
-		<?php } else { ?>
+		<?php 		} else { ?>
 		<strong><?php echo _('OPTIONAL: Upload new file') ?></strong><br />
 		<input type="file" name="uploaded_data" size="30" />
 		<?php
-		}
+				}
+			}
 		?>
 		</td>
 	</tr>
