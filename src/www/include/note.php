@@ -23,7 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once $gfwww.'include/html.php';
+require_once dirname(__FILE__).'/html.php';
 
 /**
  * editor_button_raw() - Open an Editor dialog window

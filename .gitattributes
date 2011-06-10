@@ -5075,6 +5075,7 @@ src/www/tracker/admin/form-customizelist.php -text
 src/www/tracker/admin/form-deleteextrafieldelement.php -text
 src/www/tracker/admin/form-workflow.php -text
 src/www/tracker/admin/form-workflow_roles.php -text
+src/www/tracker/build_submission_form.php -text
 src/www/tracker/include/ArtifactTypeFactoryHtml.class.php -text
 src/www/trove/TroveCategory.class.php -text
 src/www/trove/TroveCategoryAdmin.class.php -text
