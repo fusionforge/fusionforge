@@ -197,6 +197,7 @@ class Document extends Error {
 		}
 
 		if (!$this->fetchData($docid)) {
+			$this->setError(_('Error fetching Document'));
 			db_rollback();
 			return false;
 		}
@@ -679,8 +680,8 @@ class Document extends Error {
 		}
 
 		if ($filename) {
-			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 and doc_group = $2 and stateid = $3',
-						array($filename, $doc_group, $stateid));
+			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 AND doc_group = $2 AND stateid = $3 AND docid != $4',
+						array($filename, $doc_group, $stateid, $this->getID()));
 			if (!$result || db_numrows($result) > 0) {
 				$this->setError(_('Document already published in this directory'));
 				return false;
