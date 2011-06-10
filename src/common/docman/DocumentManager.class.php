@@ -22,6 +22,7 @@
  */
 
 require_once $gfcommon.'include/Error.class.php';
+require_once $gfcommon.'docman/DocumentGroup.class.php';
 
 class DocumentManager extends Error {
 
@@ -117,6 +118,33 @@ class DocumentManager extends Error {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
+	 *
+	 * @param	string	the type of link in the menu
+	 * @param	int		the doc_group to start: default 0
+	 */
+	function getTree($linkmenu, $docGroupId = 0) {
+		$dg = new DocumentGroup($this->Group);
+		switch ($linkmenu) {
+			case "listtrashfile": {
+				$stateId = 2;
+				break;
+			}
+			default: {
+				$stateId = 1;
+				break;
+			}
+		}
+		$subGroupIdArr = $dg->getSubgroup($docGroupId, $stateId);
+		echo '<ul>';
+		foreach ($subGroupIdArr as $subGroupIdValue) {
+			$localDg = new DocumentGroup($this->Group, $subGroupIdValue);
+			echo '<li><a href="?group_id='.$this->Group->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'">'.$localDg->getName().'</a></il>';
+		}
+		echo '</ul>';
 	}
 }
 

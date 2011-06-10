@@ -28,6 +28,7 @@
 global $group_id; // id of the group
 global $nested_docs;
 global $linkmenu;
+global $g; // the group object
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -66,5 +67,12 @@ echo '<div id="documenttree" style="height:100%">';
 /* ]]> */</script>
 
 <?php
+echo '<noscript>';
+echo '<ul id="0">';
+echo '<li><a href="?group_id='.$group_id.'&view='.$linkmenu.'">/</a></il>';
+$dm = new DocumentManager($g);
+$dm->getTree($linkmenu);
+echo '</ul>';
+echo '</noscript>';
 echo '</div>';
 ?>

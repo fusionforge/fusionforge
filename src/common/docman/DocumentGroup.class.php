@@ -234,7 +234,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function fetchData($id) {
-		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1',
+		$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group = $1',
 					array($id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('DocumentGroup: Invalid Document Directory ID'));
@@ -430,6 +430,20 @@ class DocumentGroup extends Error {
 		return false;
 	}
 
+	function getSubgroup($docGroupId, $stateId = 1) {
+		$returnArr = array();
+		$res = db_query_params('SELECT doc_group from doc_groups where parent_doc_group = $1 and stateid = $2 and group_id = $3',
+							array($docGroupId, $stateId, $this->Group->getID()));
+		if (!$res) {
+			return $returnArr;
+		}
+
+		while ($row = db_fetch_array($res)) {
+			$returnArr[] = $row['doc_group'];
+		}
+
+		return $returnArr;
+	}
 
 	/**
 	 * getPath - return the complete_path
@@ -440,7 +454,7 @@ class DocumentGroup extends Error {
 	function getPath() {
 		$returnPath = '';
 		if ($this->getParentID()) {
-			$parentDg = new DocumentGroup($this->Group,$this->getParentID());
+			$parentDg = new DocumentGroup($this->Group, $this->getParentID());
 			$returnPath = $parentDg->getPath();
 		}
 		return $returnPath.'/'.$this->getName();
@@ -454,7 +468,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function setStateID($stateid) {
-		return $this->__setValueinDB('stateid',$stateid);
+		return $this->__setValueinDB('stateid', $stateid);
 	}
 
 	/**
@@ -465,7 +479,7 @@ class DocumentGroup extends Error {
 	 * @access	public
 	 */
 	function setParentDocGroupId($parentDocGroupId) {
-		return $this->__setValueinDB('parent_doc_group',$parentDocGroupId);
+		return $this->__setValueinDB('parent_doc_group', $parentDocGroupId);
 	}
 
 	/**
