@@ -69,6 +69,7 @@ switch ($action) {
 	case "addfile":
 	case "addsubdocgroup":
 	case "deldir":
+	case "delfile":
 	case "editdocgroup":
 	case "editfile":
 	case "emptytrash":
@@ -83,7 +84,8 @@ switch ($action) {
 	case "trashfile":
 	case "updatecreateonline":
 	case "updateenginesearch":
-	case "updatewebdavinterface": {
+	case "updatewebdavinterface":
+	case "validatefile": {
 		include ($gfcommon."docman/actions/$action.php");
 		break;
 	}

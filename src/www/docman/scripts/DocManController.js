@@ -29,7 +29,7 @@
 DocManListFileController = function(params)
 {
 	this.lockInterval	= [];
-	this.params	= params;
+	this.params		= params;
 
 	if (typeof(jQuery(window).tipsy) == 'function') {
 		this.initTipsy();
@@ -62,8 +62,7 @@ DocManListFileController.prototype =
 {
 	/*! Binds the controls to the actions
 	 */
-	bindControls: function()
-	{
+	bindControls: function() {
 		if (typeof(this.params.buttonEditDirectory) != 'undefined') {
 			this.params.buttonEditDirectory.click(jQuery.proxy(this, "toggleEditDirectoryView"));
 		}
@@ -73,37 +72,35 @@ DocManListFileController.prototype =
 	},
 
 	resizableDiv:function() {
-		this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
-		var params = this.params;
-		var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
-		jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
-			if (typeof(isDragging) != 'undefined') {
-				if (isDragging) {
-					params.divLeft.css('width', e.pageX);
-					params.divRight.css('width', w - e.pageX);
-					jQuery.Storage.set("treesize",""+params.divLeft.width());
-								for(var i = 0; i < this.params.divsEdit.length; i++) {
-									jQuery('#editfile'+this.params.divsEdit[i]).css(this.params.divRight.width());
-								}
+		if (typeof(this.params.divHandle) != 'undefined') {
+			this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
+			var params = this.params;
+			var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
+			jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
+				if (typeof(isDragging) != 'undefined') {
+					if (isDragging) {
+						params.divLeft.css('width', e.pageX);
+						params.divRight.css('width', w - e.pageX);
+						jQuery.Storage.set("treesize",""+params.divLeft.width());
+					}
 				}
-			}
-		});
+			});
+		}
 	},
 
 	initSize:function() {
-		if (this.params.divLeft.height() > this.params.divRight.height()) {
-			this.params.divHandle.css('height', this.params.divLeft.height());
-		} else {
-			this.params.divHandle.css('height', this.params.divRight.height());
-		}
- 		if (jQuery.Storage.get("treesize") != 0) {
- 			this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
-			var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
-			this.params.divRight.css('width', w - this.params.divLeft.width());
-			for(var i = 0; i < this.params.divsEdit.length; i++) {
-				jQuery('#editfile'+this.params.divsEdit[i]).css(this.params.divRight.width());
+		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
+			if (this.params.divLeft.height() > this.params.divRight.height()) {
+				this.params.divHandle.css('height', this.params.divLeft.height());
+			} else {
+				this.params.divHandle.css('height', this.params.divRight.height());
 			}
- 		}
+			if (jQuery.Storage.get("treesize") != 0) {
+				this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
+				var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
+				this.params.divRight.css('width', w - this.params.divLeft.width());
+			}
+		}
 	},
 
 	dragging: function() {
@@ -112,10 +109,8 @@ DocManListFileController.prototype =
 
 	/*! initializes tipsy
 	 */
-	initTipsy: function()
-	{
-		for(var i = 0; i < this.params.tipsyElements.length; i++)
-		{
+	initTipsy: function() {
+		for(var i = 0; i < this.params.tipsyElements.length; i++) {
 			var el = this.params.tipsyElements[i];
 
 			jQuery(el.selector).tipsy({
@@ -128,10 +123,8 @@ DocManListFileController.prototype =
 
 	/*! toggle edit group view div visibility
 	 */
-	toggleEditDirectoryView: function()
-	{
-		if (!this.params.divEditDirectory.is(":visible"))
-		{
+	toggleEditDirectoryView: function() {
+		if (!this.params.divEditDirectory.is(":visible")) {
 			this.params.divEditDirectory.show();
 			if (typeof(this.params.divAddItem) != 'undefined') {
 				this.params.divAddItem.hide();
@@ -143,15 +136,11 @@ DocManListFileController.prototype =
 
 	/*! toggle add item view div visibility
 	 */
-	toggleAddItemView: function()
-	{
-		if (!this.params.divAddItem.is(":visible"))
-		{
+	toggleAddItemView: function() {
+		if (!this.params.divAddItem.is(":visible")) {
 			this.params.divAddItem.show();
 			this.params.divEditDirectory.hide();
-		}
-		else
-		{
+		} else {
 			this.params.divAddItem.hide();
 		}
 	},
@@ -160,13 +149,11 @@ DocManListFileController.prototype =
 	 *
 	 * @param	string	id of the div
 	 */
-	toggleEditFileView: function(id)
-	{
+	toggleEditFileView: function(id) {
 		var divid	= '#editfile'+id,
 		el		= jQuery(divid);
 
-		if (!el.is(":visible"))
-		{
+		if (!el.is(":visible")) {
 			el.show();
 
 			jQuery.get(this.params.docManURL, {
@@ -177,9 +164,7 @@ DocManListFileController.prototype =
 			});
 
 			this.lockInterval[id] = setInterval("jQuery.get('" + this.params.docManURL + "', {group_id:"+this.params.groupId+",action:'lockfile',lock:1,fileid:"+id+"})",this.params.lockIntervalDelay);
-		}
-		else
-		{
+		} else {
 			el.hide();
 			jQuery.get(this.params.docManURL, {
 				group_id:	this.params.groupId,
@@ -194,34 +179,34 @@ DocManListFileController.prototype =
 
 	/*! build list of id, comma separated
 	 */
-	buildUrlByCheckbox: function()
-	{
+	buildUrlByCheckbox: function(id) {
 		var CheckedBoxes = new Array();
 		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			if (jQuery("input:checked")[h].id == 'checkeddocid' ) {
+			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className == 'checkeddocid'+id ) {
 				CheckedBoxes.push(jQuery("input:checked")[h].value);
 			}
 		}
 		return CheckedBoxes;
 	},
 
-	checkAll: function()
-	{
-		if (jQuery('#checkall').is(':checked')) {
-			jQuery('.checkeddocid').each(function() {
-				jQuery(this).attr('checked',true);
+	checkAll: function(id, type) {
+		if (jQuery('#checkall'+type).is(':checked')) {
+			jQuery('.'+id).each(function() {
+				jQuery(this).attr('checked', true);
 				});
+			jQuery('#massaction'+type).show();
 		} else {
-			jQuery('.checkeddocid').each(function() {
-				jQuery(this).attr('checked',false);
+			jQuery('.'+id).each(function() {
+				jQuery(this).attr('checked', false);
 			});
+			jQuery('#massaction'+type).hide();
 		}
 	},
 
-	checkgeneral: function()
-	{
-		if (jQuery(this).attr('checked',false)) {
-			jQuery('#checkall').attr('checked',false);
+	checkgeneral: function(id) {
+		if (jQuery(this).attr('checked', false)) {
+			jQuery('#checkall'+id).attr('checked', false);
+			jQuery('#massaction'+id).hide();
 		}
 	},
 
@@ -240,53 +225,40 @@ DocManAddItemController.prototype =
 {
 	/*! Binds the controls to the actions
 	 */
-	bindControls: function()
-	{
+	bindControls: function() {
 		this.params.buttonDoc.click(jQuery.proxy(this, "toggleAddFileView"));
 		this.params.buttonDir.click(jQuery.proxy(this, "toggleAddDirectoryView"));
 		this.params.buttonZip.click(jQuery.proxy(this, "toggleInjectZipView"));
 	},
 
-	toggleAddDirectoryView: function()
-	{
-		if (!this.params.divCreateDir.is(":visible"))
-		{
+	toggleAddDirectoryView: function() {
+		if (!this.params.divCreateDir.is(":visible")) {
 			this.params.divCreateDir.show();
 			this.params.divCreateDoc.hide();
 			this.params.divZipInject.hide();
-		}
-		else
-		{
+		} else {
 			this.params.divCreateDoc.hide();
 			this.params.divZipInject.hide();
 		}
 	},
 
-	toggleInjectZipView: function()
-	{
-		if (!this.params.divZipInject.is(":visible"))
-		{
+	toggleInjectZipView: function() {
+		if (!this.params.divZipInject.is(":visible")) {
 			this.params.divZipInject.show();
 			this.params.divCreateDir.hide();
 			this.params.divCreateDoc.hide();
-		}
-		else
-		{
+		} else {
 			this.params.divCreateDir.hide();
 			this.params.divCreateDoc.hide();
 		}
 	},
 
-	toggleAddFileView: function()
-	{
-		if (!this.params.divCreateDoc.is(":visible"))
-		{
+	toggleAddFileView: function() {
+		if (!this.params.divCreateDoc.is(":visible")) {
 			this.params.divCreateDoc.show();
 			this.params.divCreateDir.hide();
 			this.params.divZipInject.hide();
-		}
-		else
-		{
+		} else {
 			this.params.divCreateDir.hide();
 			this.params.divZipInject.hide();
 		}
@@ -294,10 +266,8 @@ DocManAddItemController.prototype =
 
 	/*! initializes tipsy
 	 */
-	initTipsy: function()
-	{
-		for(var i = 0; i < this.params.tipsyElements.length; i++)
-		{
+	initTipsy: function() {
+		for(var i = 0; i < this.params.tipsyElements.length; i++) {
 			var el = this.params.tipsyElements[i];
 
 			jQuery(el.selector).tipsy({
@@ -313,10 +283,8 @@ DocManMenuController.prototype =
 {
 	/*! initializes tipsy
 	*/
-	initTipsy: function()
-	{
-		for(var i = 0; i < this.params.tipsyElements.length; i++)
-		{
+	initTipsy: function() {
+		for(var i = 0; i < this.params.tipsyElements.length; i++) {
 			var el = this.params.tipsyElements[i];
 
 			jQuery(el.selector).tipsy({

@@ -105,95 +105,6 @@ function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stat
 }
 
 /**
- * docman_display_trash - function to show the documents inside the groups tree with specific status : 2 = deleted
- *@todo: remove css code
- */
-function docman_display_trash(&$document_factory, $parent_group = 0) {
-	$nested_groups =& $document_factory->getNested(2);
-	$child_count = count($nested_groups["$parent_group"]);
-	echo "<ul style='list-style-type: none'>\n";
-	for ($i=0; $i < $child_count; $i++) {
-		$doc_group =& $nested_groups["$parent_group"][$i];
-		echo "<li>".$doc_group->getName()."</li>";
-	}
-	echo "</ul>";
-}
-
-/**
- * docman_display_documents - Recursive function to show the documents inside the groups tree
- * @todo : remove the css code
- * @todo : use the javascript controler
- * @todo : use jquery
- */
-function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid = 0, $parent_group = 0) {
-	global $group_id;
-	if (!array_key_exists("$parent_group", $nested_groups) || !is_array($nested_groups["$parent_group"])) {
-		return;
-	}
-	
-	echo '<script language="JavaScript" type="text/javascript">/* <![CDATA[ */';
-	echo 'var lockInterval = new Array();';
-	echo 'function EditData(iddiv) {';
-	echo '	if ( "none" == document.getElementById(\'editdata\'+iddiv).style.display ) {';
-	echo '		document.getElementById(\'editdata\'+iddiv).style.display = "block";';
-	echo '		jQuery.get(\''. util_make_uri('docman/') .'\',{group_id:'. $group_id.',action:\'lockfile\',lock:1,fileid:iddiv});';
-	echo '		lockInterval[iddiv] = setInterval("jQuery.get(\''. util_make_uri('docman') .'\',{group_id:'. $group_id .',action:\'lockfile\',lock:1,fileid:"+iddiv+"})",60000);';
-	echo '	} else {';
-	echo '		document.getElementById(\'editdata\'+iddiv).style.display = "none";';
-	echo '		jQuery.get(\''. util_make_uri('docman/') .'\',{group_id:'. $group_id .',action:\'lockfile\',lock:0,fileid:iddiv});';
-	echo '		clearInterval(lockInterval[iddiv]);';
-	echo '	}';
-	echo '}';
-	echo '/* ]]> */</script>';
-	echo '<ul style="list-style-type: none">';
-	$child_count = count($nested_groups["$parent_group"]);
-	
-	for ($i=0; $i < $child_count; $i++) {
-		$doc_group =& $nested_groups["$parent_group"][$i];
-		
-		if ($doc_group->hasDocuments($nested_groups, $document_factory, $stateid)) {
-			$icon = 'ofolder15.png';
-			echo '<li>'.html_image('docman/directory.png', '22', '22', array('border'=>'0'))."&nbsp;".$doc_group->getName()."</li>";
-			docman_display_documents($nested_groups, $document_factory, $is_editor, $stateid, $doc_group->getID());
-		}
-
-		// Display this group's documents
-		// Retrieve all the docs from this category
-		if ($stateid) {
-			$document_factory->setStateID($stateid);
-		}
-		$document_factory->setDocGroupID($doc_group->getID());
-		$docs = $document_factory->getDocuments();
-		if (is_array($docs)) {
-			$docs_count = count($docs);
-
-			echo "<ul style='list-style-type: none'>";
-			for ($j=0; $j < $docs_count; $j++) {
-				$tooltip = $docs[$j]->getFileName() . " (" .
-							($docs[$j]->getUpdated() ?
-							date(_('Y-m-d H:i'), $docs[$j]->getUpdated()) :
-							date(_('Y-m-d H:i'),$docs[$j]->getCreated())) .
-							") ";
-				if ($docs[$j]->getFileSize() > 1024) {
-					$tooltip .= floor($docs[$j]->getFileSize()/1024) . "KB";
-				} else {
-					$tooltip .= $docs[$j]->getFileSize() . "B";
-				}
-				$tooltip = htmlspecialchars($tooltip);
-				echo '<li>'.  html_image('docman/file_type_unknown.png', '22', '22', array("border"=>"0")). 
-					$docs[$j]->getName(). ' - ' . $tooltip . '&nbsp;<a href="#" onclick="javascript:EditData(\''.$docs[$j]->getID().'\')" >'. html_image('docman/edit-file.png', '22', '22', array('alt'=>'editfile')) .'</a></li>';
-				echo "<i>".$docs[$j]->getDescription()."</i><br/>";
-				echo '<div class="docman_div_include" id="editdata'.$docs[$j]->getID().'" style="display:none">';
-				document_editdata($docs[$j]);
-				echo '</div>';
-			}
-			echo "</ul>";
-		}
-	}
-	echo "</ul>";
-}
-
-/**
  * @todo - remove the css code
  */
 function document_editdata(&$document) {
@@ -207,10 +118,6 @@ function document_editdata(&$document) {
 		exit_error($dgf->getErrorMessage(), 'docman');
 
 	switch ($document->getStatename()) {
-		case "pending": {
-			$fromview = "listpendingfile";
-			break;
-		}
 		case "deleted": {
 			$fromview = "listtrashfile";
 			break;

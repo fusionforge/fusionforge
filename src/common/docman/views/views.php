@@ -33,7 +33,6 @@ switch ($view) {
 	case 'editfile':
 	case 'listfile':
 	case 'listtrashfile':
-	case 'listpendingfile':
 	case 'search': {
 		include ($gfcommon.'docman/views/'.$view.'.php');
 		break;

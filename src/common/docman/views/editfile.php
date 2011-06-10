@@ -31,13 +31,22 @@ global $dirid; // id of doc_group
 global $dgf; // document directory factory of this group
 global $dgh; // document directory html
 global $nested_docs; // flat docs array
+global $nested_pending_docs; // flat pending docs array
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-foreach ($nested_docs[$dirid] as $d) {
+// include pending files in list for edit.
+if (is_array($nested_pending_docs) && array_key_exists($dirid, $nested_pending_docs)) {
+	foreach ($nested_pending_docs[$dirid] as $d) {
+		$nested_docs[$dirid][] = $d;
+	}
+}
+
+if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
+	foreach ($nested_docs[$dirid] as $d) {
 
 ?>
 <script language="JavaScript" type="text/javascript">/* <![CDATA[ */
@@ -158,5 +167,6 @@ foreach ($nested_docs[$dirid] as $d) {
 </form>
 </div>
 <?php
+	}
 }
 ?>

@@ -52,7 +52,6 @@ jQuery(document).ready(function() {
 					{selector: '#listFileDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 					{selector: '#searchDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 					{selector: '#trashDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
-					{selector: '#pendingDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 					{selector: '#adminDocmanMenu', options:{gravity: 'nw', delayIn: 500, delayOut: 0, fade: true}},
 				],
 	});
@@ -100,16 +99,8 @@ if (session_loggedin()) {
 		} else {
 			$menu_attr[] = array();
 		}
-
-
-		$menu_text[] = _('Pending Files');
-		$menu_links[] = '/docman/?group_id='.$group_id.'&view=listpendingfile';
-		if ($use_tooltips) {
-			$menu_attr[] = array('title' => _('Validate files with pending status.'), 'id' => 'pendingDocmanMenu');
-		} else {
-			$menu_attr[] = array();
-		}
 	}
+
 	if (forge_check_perm('docman', $group_id, 'admin')) {
 		$menu_text[] = _('Admin');
 		$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';

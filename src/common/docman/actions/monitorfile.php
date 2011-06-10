@@ -38,29 +38,39 @@ $return_msg = _('Document(s)').' ';
 switch ($option) {
 	case "add": {
 		foreach ($arr_fileid as $fileid) {
-			$d = new Document($g, $fileid);
-			$return_msg .= $d->getFilename().' ';
+			if (!empty($fileid)) {
+				$d = new Document($g, $fileid);
+				$return_msg .= $d->getFilename().' ';
 
-			if ($d->isError())
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+				if ($d->isError())
+					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
-			if (!$d->addMonitoredBy($LUSER->getID()))
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+				if (!$d->addMonitoredBy($LUSER->getID()))
+					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+			} else {
+				$warning_msg = _('No action to perform');
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			}
 		}
 		$return_msg .= _('monitoring started');
 		break;
 	}
 	case "remove": {
 		foreach ($arr_fileid as $fileid) {
-			$d = new Document($g, $fileid);
-			$return_msg .= $d->getFilename().' ';
+			if (!empty($fileid)) {
+				$d = new Document($g, $fileid);
+				$return_msg .= $d->getFilename().' ';
 
-			if ($d->isError())
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+				if ($d->isError())
+					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
-			if (!$d->removeMonitoredBy($LUSER->getID()))
-				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
+				if (!$d->removeMonitoredBy($LUSER->getID()))
+					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
+			} else {
+				$warning_msg = _('No action to perform');
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			}
 		}
 		$return_msg .= _('monitoring stopped.');
 		break;

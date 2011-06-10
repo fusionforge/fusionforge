@@ -55,7 +55,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 		exit_error($d->getErrorMessage(), 'docman');
 	}
 
-	/** 
+	/**
 	 * If the served document has wrong relative links, then
 	 * theses links may redirect to the same document with another
 	 * name, this way a search engine may loop and stress the
@@ -156,7 +156,7 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 			$file = forge_get_config('data_path').'/'.$filename;
 			$zip = new ZipArchive;
 			if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
-				exit_error(_('Unable to open zip archive for download as zip'),'docman');
+				exit_error(_('Unable to open zip archive for download as zip'), 'docman');
 
 			// ugly workaround to get the files at doc_group_id level
 			$df->setDocGroupID($dg->getID());
@@ -183,23 +183,31 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 		}
 	} elseif ( $arr[5] === 'selected' ) {
-		$arr_fileid = explode(',',$arr[6]);
+		$dirid = $arr[6];
+		$arr_fileid = explode(',',$arr[7]);
 		$filename = 'docman-'.$g->getUnixName().'-selected-'.time().'.zip';
 		$file = forge_get_config('data_path').'/'.$filename;
 		$zip = new ZipArchive;
 		if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE))
-			exit_error(_('Unable to open zip archive for download as zip'),'docman');
+			exit_error(_('Unable to open zip archive for download as zip'), 'docman');
 
 		foreach($arr_fileid as $docid) {
-			$d = new Document($g, $docid);
-			if (!$d || !is_object($d)) {
-				exit_error(_('Document is not available.'), 'docman');
-			} elseif ($d->isError()) {
-				exit_error($d->getErrorMessage(), 'docman');
-			}
+			if (!empty($docid)) {
+				$d = new Document($g, $docid);
+				if (!$d || !is_object($d)) {
+					exit_error(_('Document is not available.'), 'docman');
+				} elseif ($d->isError()) {
+					exit_error($d->getErrorMessage(), 'docman');
+				}
 
-			if ( !$zip->addFromString($d->getFileName(),$d->getFileData()))
-				return false;
+				if ( !$zip->addFromString($d->getFileName(),$d->getFileData()))
+					return false;
+			} else {
+				$zip->close();
+				unlink($file);
+				$warning_msg = _('No action to perform');
+				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
+			}
 		}
 		if ( !$zip->close())
 			exit_error(_('Unable to close zip archive for download as zip'), 'docman');

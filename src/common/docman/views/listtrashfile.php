@@ -70,7 +70,7 @@ if ($d_arr != NULL ) {
 }
 
 // $nested_groups has a system directory : .trash => so count < 2
-if ((!$d_arr || count($d_arr) < 1) && (!$nested_groups || count($nested_groups) < 2)) {
+if ((!$d_arr || count($d_arr) < 1) && (!$nested_docs || count($nested_docs) < 2)) {
 	echo '<div class="warning">'._('Trash is empty').'</div>';
 } else {
 
@@ -80,7 +80,7 @@ var controllerListTrash;
 
 jQuery(document).ready(function() {
 	controllerListTrash = new DocManListFileController({
-		groupId:			<?php echo $group_id ?>,
+		groupId:		<?php echo $group_id ?>,
 		tipsyElements:		[
 						{selector: '#docman-editdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '.docman-delete', options:{delayIn: 500, delayOut: 0, fade: true}},
@@ -90,13 +90,13 @@ jQuery(document).ready(function() {
 						{selector: '.docman-editfile', options:{gravity: 'ne', delayIn: 500, delayOut: 0, fade: true}},
 						],
 
-		divEditDirectory:		jQuery('#editdocgroup'),
+		divEditDirectory:	jQuery('#editdocgroup'),
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
-		divLeft:			jQuery('#left'),
-		divHandle:			jQuery('#handle'),
-		divRight:			jQuery('#right'),
+		divLeft:		jQuery('#left'),
+		divHandle:		jQuery('#handle'),
+		divRight:		jQuery('#right'),
 	});
 });
 /* ]]> */</script>
@@ -206,7 +206,7 @@ jQuery(document).ready(function() {
 			}
 
 			echo '<td>';
-			echo '<a class="docman-delete" href="?group_id='.$group_id.'&action=deletefile&view=listfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
+			echo '<a class="docman-delete" href="?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid='.$d->getID().'" ';
 			if ($use_tooltips)
 				echo ' title="'. _('Delete permanently this document.') .'"';
 
@@ -221,9 +221,8 @@ jQuery(document).ready(function() {
 		}
 		echo '</tr>';
 		echo $HTML->listTableBottom();
-		echo '</div>';
-		echo '<div class="docmanDiv"><p>';
-		echo _('Mass Actions for selected files:');
+		echo '<p>';
+		echo _('Mass actions for selected files:');
 		echo '<a class="docman-delete" href="#" onClick="window.location.href=\'?group_id='.$group_id.'&action=delfile&view=listtrashfile&dirid='.$dirid.'&fileid=\'+controllerListTrash.buildUrlByCheckbox()" ';
 		if ($use_tooltips)
 			echo ' title="'. _('Delete permanently.') .'" ';
@@ -234,13 +233,16 @@ jQuery(document).ready(function() {
 			echo ' title="'. _('Download as a zip') . '" ';
 
 		echo '>' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
-		echo '</p></div>';
+		echo '</p>';
 		include ($gfcommon.'docman/views/editfile.php');
+		echo '</div>';
 	} else {
-		echo '<p class="warning">'._('No documents to display').'</p>';
+		if ($dirid) {
+			echo '<p class="warning">'._('No documents to display').'</p>';
+		}
 	}
 
 	echo '</div>';
-	echo '<div style="clear:both"; />';
+	echo '<div style="clear: both;" />';
 }
 ?>

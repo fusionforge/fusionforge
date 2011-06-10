@@ -2,9 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2000, Quentin Cregan/Sourceforge
- * Copyright 2002-2003, Tim Perdue/GForge, LLC
- * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2011, Franck Villaume - Capgemini
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +29,7 @@ global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
+	session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
 $arr_fileid = explode(',',getStringFromRequest('fileid'));
@@ -44,14 +42,13 @@ foreach ($arr_fileid as $fileid) {
 		if ($d->isError())
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 
-		if (!$d->trash())
+		if (!$d->delete())
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 	} else {
 		$warning_msg = _('No action to perform');
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 	}
 }
-$return_msg .= _('moved to trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
-
+$return_msg .= _('deleted successfully.');
+session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&dirid='.$dirid.'&feedback='.urlencode($return_msg));
 ?>
