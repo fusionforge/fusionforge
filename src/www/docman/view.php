@@ -93,39 +93,44 @@ if ($docid != 'backup' && $docid != 'webdav' && $docid != 'zip') {
 	echo $d->getFileData();
 
 } elseif ($docid === 'backup') {
-	session_require_perm('docman', $group_id, 'admin');
+	if (extension_loaded('zip')) {
+		session_require_perm('docman', $group_id, 'admin');
 
-	$df = new DocumentFactory($g);
-	if ($df->isError())
-		exit_error($df->getErrorMessage(), 'docman');
+		$df = new DocumentFactory($g);
+		if ($df->isError())
+			exit_error($df->getErrorMessage(), 'docman');
 
-	$dgf = new DocumentGroupFactory($g);
-	if ($dgf->isError())
-		exit_error($dgf->getErrorMessage(), 'docman');
+		$dgf = new DocumentGroupFactory($g);
+		if ($dgf->isError())
+			exit_error($dgf->getErrorMessage(), 'docman');
 
-	$nested_groups = $dgf->getNested();
+		$nested_groups = $dgf->getNested();
 
-	if ( $nested_groups != NULL ) {
-		$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
-		$file = forge_get_config('data_path').'/'.$filename;
-		$zip = new ZipArchive;
-		if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE)) {
-			exit_error(_('Unable to open zip archive for backup'),'docman');
+		if ( $nested_groups != NULL ) {
+			$filename = 'docman-'.$g->getUnixName().'-'.$docid.'.zip';
+			$file = forge_get_config('data_path').'/'.$filename;
+			$zip = new ZipArchive;
+			if ( !$zip->open($file, ZIPARCHIVE::OVERWRITE)) {
+				exit_error(_('Unable to open zip archive for backup'), 'docman');
+			}
+
+			if ( !docman_fill_zip($zip, $nested_groups, $df))
+				exit_error(_('Unable to fill zip archive for backup'), 'docman');
+
+			if ( !$zip->close())
+				exit_error(_('Unable to close zip archive for backup'), 'docman');
+
+			header('Content-disposition: filename="'.$filename.'"');
+			header('Content-type: application/binary');
+
+			readfile($file);
+			unlink($file);
+		} else {
+			$warning_msg = _('No documents to backup.');
+			session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 		}
-
-		if ( !docman_fill_zip($zip, $nested_groups, $df))
-			exit_error(_('Unable to fill zip archive for backup'), 'docman');
-
-		if ( !$zip->close())
-			exit_error(_('Unable to close zip archive for backup'), 'docman');
-
-		header('Content-disposition: filename="'.$filename.'"');
-		header('Content-type: application/binary');
-
-		readfile($file);
-		unlink($file);
 	} else {
-		$warning_msg = _('No documents to backup.');
+		$warning_msg = _('Zip extension is missing: no backup function');
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
 } elseif ($docid === 'webdav') {
