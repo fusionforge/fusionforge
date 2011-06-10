@@ -2003,6 +2003,8 @@ src/plugins/mediawiki/packaging/dirs/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/docs/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/install/plugin-mediawiki -text
 src/plugins/mediawiki/packaging/links/plugin-mediawiki -text
+src/plugins/mediawiki/www/DatabaseForgeMysql.php -text
+src/plugins/mediawiki/www/DatabaseForgePgsql.php -text
 src/plugins/mediawiki/www/LocalSettings.php -text
 src/plugins/mediawiki/www/frame.php -text
 src/plugins/mediawiki/www/plugin_admin.php -text

@@ -25,13 +25,16 @@
 
 require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
+require_once $gfcommon.'include/RBACEngine.class.php';
 sysdebug_lazymode(true);
 
 $IP = forge_get_config('master_path', 'mediawiki');
 
 if (!isset ($fusionforgeproject)) {
-	$fusionforgeproject = 'siteadmin' ;
+	$gr=new Group(1);
+	$fusionforgeproject=$gr->getUnixName();
 }
+
 $exppath = explode ('/', $_SERVER['PHP_SELF']) ;
 
 # determine $fusionforgeproject from the URL
@@ -53,7 +56,7 @@ $project_dir = forge_get_config('projects_path', 'mediawiki') . "/"
 	. $fusionforgeproject ;
 
 if (!is_dir($project_dir)) {
-	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject)) ;
+	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject.':'.$project_dir)) ;
 }
 
 
@@ -76,7 +79,13 @@ $wgPasswordSender = forge_get_config('admin_email');
 
 $wgDBtype           = "forge";
 $wgDBserver         = forge_get_config('database_host') ;
-$wgDBname           = forge_get_config('database_name');
+if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
+	// At the time writing schema in mysql is synonym for database
+	$wgDBname           = 'plugin_mediawiki_'.$fusionforgeproject;
+	$wgDBprefix         = 'mw';
+} else {
+	$wgDBname           = forge_get_config('database_name');
+}
 $wgDBuser           = forge_get_config('database_user') ;
 $wgDBpassword       = forge_get_config('database_password') ;
 $wgDBadminuser           = forge_get_config('database_user') ;
@@ -97,6 +106,24 @@ $wgShowExceptionDetails = true ;
 $wgLanguageCode = strtolower(forge_get_config('default_country_code'));
 
 $wgDefaultSkin = 'fusionforge';
+
+/* DEBUG
+$wgDebugLogFile         = '/tmp/wiki.log';
+$wgDebugLogPrefix       = '';
+$wgDebugRedirects       = true;
+$wgDebugRawPage         = true;
+$wgDebugComments        = true;
+$wgLogQueries           = true;
+$wgDebugDumpSql         = true;
+$wgDebugLogGroups       = array();
+$wgShowDebug            = true;
+$wgSpecialVersionShowHooks =  true;
+$wgShowSQLErrors        = true;
+$wgColorErrors          = true;
+$wgShowExceptionDetails = true;
+$wgShowHostnames = true;
+*/
+
 
 $GLOBALS['sys_dbhost'] = forge_get_config('database_host') ;
 $GLOBALS['sys_dbport'] = forge_get_config('database_port') ;
@@ -119,25 +146,10 @@ $GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
 require_once("$IP/includes/Exception.php");
 require_once("$IP/includes/db/Database.php");
-require_once("$IP/includes/db/DatabasePostgres.php");
-class DatabaseForge extends DatabasePostgres {
-	function DatabaseForge($server=false, $user=false, $password=false,
-			       $dbName=false, $failFunction=false, $flags=0) {
-		global $wgDBtype;
-		
-		$wgDBtype = "postgres";
-		return DatabasePostgres::DatabasePostgres($server, $user,
-							  $password, $dbName, $failFunction, $flags);
-	}
-	
-	function tableName($name) {
-		switch ($name) {
-		case 'interwiki':
-			return 'public.plugin_mediawiki_interwiki';
-		default:
-			return DatabasePostgres::tableName($name);
-		}
-	}
+if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
+	require_once("DatabaseForgeMysql.php");
+}else{
+	require_once("DatabaseForgePgsql.php");
 }
 
 function FusionForgeRoleToMediawikiGroupName ($role, $project) {

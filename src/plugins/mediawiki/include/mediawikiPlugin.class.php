@@ -21,6 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once 'plugins_utils.php';
 if(is_dir("/usr/share/mediawiki")){
 forge_define_config_item('src_path','mediawiki', "/usr/share/mediawiki");
 forge_define_config_item('mwdata_path', 'mediawiki', '$core/data_path/plugins/mediawiki');
