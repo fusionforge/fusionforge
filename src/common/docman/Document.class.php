@@ -710,6 +710,7 @@ class Document extends Error {
 			}
 			case "application/vnd.oasis.opendocument.presentation":
 			case "application/vnd.ms-powerpoint":
+			case "application/vnd.ms-office":
 			case "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
 				$image = 'docman/file_type_presentation.png';
 				break;
