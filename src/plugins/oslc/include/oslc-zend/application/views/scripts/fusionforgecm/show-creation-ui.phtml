@@ -3,75 +3,48 @@
 <?php 
 	$project = $this->data['project'];
 	$tracker = $this->data['tracker'];
-	$oauth_auth_header = $this->oauth_auth_header;
-	$build_url = $this->build_url;
-	$build_number = $this->build_number;
+
+	/* Instanciate group and ArtifatcTypeHTML objects */
+
+	$group = group_get_object($project);
+	$ath  = new ArtifactTypeHtml($group, $tracker);
+	
+	if(isset($this->oauth_auth_header)) {
+		$oauth_auth_header = $this->oauth_auth_header;
+	}
+	if(isset($this->build_url)) {
+		$build_url = $this->build_url;
+	}
+	if (isset($this->build_number)) {
+		$build_number = $this->build_number;
+	}
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>OSLC Creation UI</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<style type="text/css">
-		
-		body { 	font: 13px Myriad,Arial,Helvetica,clean,sans-serif; 	
-				*font-size: small;	
-				*font: x-small;}
-				
-		h1 {	font-size: 1.5em; 	
-				font-weight: normal;	
-				line-height: 1em; 	
-				margin-top: 1em;	
-				margin-bottom:0;}
-				
-		h2 { 	font-size: 1.1667em;
-				font-weight: bold; 	
-				line-height: 1.286em; 	
-				margin-top: 1.929em; 	
-				margin-bottom:0.643em;}
-		
-		h3, h4, h5, h6 {	font-size: 1em; 	
-							font-weight: bold; 	
-							line-height: 1.5em; 	
-							margin-top: 1.5em; 	
-							margin-bottom: 0;}
-							
-		p { 	font-size: 1em;
-				margin-top: 1.5em;
-				margin-bottom: 1.5em;
-				line-height: 1.5em;}
-		
-		body {
-			margin: 2em;
-		}
-		
-		table td {
-			padding: 2px;
-		}
-		
-		</style>
 
-        <script type="text/javascript" src="/scripts/jquery/jquery.js"></script>
-        <script type="text/javascript" src="/plugins/oslc/scripts/json.js"></script>
-	<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+		<script type="text/javascript" src="/scripts/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/plugins/oslc/scripts/json.js"></script>
+		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 
 jQuery(function(){
-
+	//remove warnings about authentication if any
+	jQuery("#warning_msg").empty();
+	
 	var project = "<?php echo $project;?>";
 	var tracker = "<?php echo $tracker;?>";
 	var URL = '<?php echo $this->baseUrl(); ?>'+"/cm/project/"+project+"/tracker/"+tracker;
-	var oauth_auth_header = '<?php echo $oauth_auth_header;?>';
-	var build_url = '<?php echo $build_url;?>';
-	var build_number = '<?php echo $build_number;?>';
-	var result
+	var oauth_auth_header = '<?php if (isset($oauth_auth_header)) echo $oauth_auth_header;?>';
+	var build_url = '<?php if (isset($build_url)) echo $build_url;?>';
+	var build_number = '<?php if(isset($build_number)) echo $build_number;?>';
 	var postdata;
-	var userpass;
 	var error = false;
 
-	jQuery("#titletext").val('Hudson Build #' + build_number + ' Failure');
-	jQuery("#descriptiontext").val('Follow the build url for more details about the failure: ' + build_url);
+	jQuery("#tracker-summary").val('Hudson Build #' + build_number + ' Failure');
+	jQuery("#tracker-description").val('Follow the build url for more details about the failure: ' + build_url);
 	
-	jQuery("#createbutton").click(function() {
+	$("#trackeraddform").submit(function(){
 		createBugData();
 		jQuery.ajax({
 			type: "POST",
@@ -79,12 +52,13 @@ jQuery(function(){
 			data: jQuery.toJSON(postdata),
 			dataType: 'json',
 			beforeSend: function(xhr) {
+				if (oauth_auth_header != '') {
+					xhr.setRequestHeader("Authorization", oauth_auth_header);
+				}
 				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
-				xhr.setRequestHeader("Authorization", oauth_auth_header);
 			},
-			success: function(jqXHR, textStatus, errorThrown) {
-				alert("The url of the bug just created is: "+jQuery.parseJSON(jqXHR.responsetext));                  	 	                        
-				//result = data;
+			success: function(data) {
+				alert("The url of the bug just created is: "+data);
 				refresh();
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -109,50 +83,6 @@ jQuery(function(){
 		});
 	});
 
-/*	jQuery("#creatensendbutton").click(function() {
-		createBugData();
-		jQuery.ajax({
-			type: "POST",
-			url: URL,
-			data: jQuery.toJSON(postdata),
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader("Content-Type","application/x-oslc-cm-change-request+json");
-			},
-			dataType: "json",
-			success: function(data, ioArgs) {
-				alert("The url of the bug just created is: "+data);                  	 	                        
-				result = data;
-				postdata['rdf:resource'] = result;
-				postdata['oslc_cm:label'] = postdata['dc:title'];
-				postdataArr = [];
-				postdataArr.push(postdata);
-				var datatosend = {'oslc_cm:results': postdataArr};
-				datatosend = datatosend.toSource();
-				refresh();
-				//alert(datatosend);
-				respondWithPostMessage(datatosend);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-               	var response = jQuery.parseJSON(jqXHR.responseText);
-               	var errmsg, errcode;
-				for (var key in response) {
-						var obj = response[key];						   
-						if(key=="oslc_cm:Error")   {
-							for (var i in obj) {
-								if(i=="oslc_cm:statusCode")	{
-									errcode = obj[i];
-								} else if(i=="oslc_cm:message")	{
-									errmsg = obj[i];
-								}
-							}
-						}
-						var errtext = "Error " + errcode + ": " + errmsg;
-						alert(errtext);
-				}
-			}
-		});
-	});			
-*/
 	var convertToByteArray = function(data) {
 		var bin=[] ;
 		for (var i=0; i<data.length; i++){
@@ -165,7 +95,7 @@ jQuery(function(){
 		error = false;
 
 		postdata = {};
-		var temp = jQuery("#titletext").val();
+		var temp = jQuery("#tracker-summary").val();
 		if(temp=="")	{
 			alert("Bug Title cannot be empty!");
 			error = true;
@@ -174,7 +104,7 @@ jQuery(function(){
 			postdata['dcterms:title'] = temp;
 		}
 
-		temp = jQuery("#descriptiontext").val();
+		temp = jQuery("#tracker-description").val();
 		if(temp=="")	{
 			alert("Bug description cannot be empty!");
 			error = true;
@@ -183,11 +113,10 @@ jQuery(function(){
 			postdata['dcterms:description'] = temp;
 		}
 
-		temp = jQuery("#prioritylist").val();
+		temp = jQuery("#tracker-priority").val();
 		if(temp!="none selected")	{
 			postdata['helios_bt:priority'] = temp;
 		}
-		//alert(postdata.toSource());
 	}
 
 	function respondWithPostMessage(/*string*/ response) {
@@ -210,66 +139,9 @@ jQuery(function(){
     <body bgcolor="#e8e6e6">
         <!--<h1><?php echo strtoupper($project); ?>: Creation UI for OSLC</h1><hr/>
          <p>some details of the query and blah blah to be added here</p> -->
-        
-        <br>
-        <p><b><?php echo $this->delegUrl.'/plugins/oslc/cm/project/'.$project.'/tracker/'.$tracker.'/ui/creation'; ?></b></p>
-        <table border-color>
-        	     		
-        </table>
-        <table border=1>        
-        <tr><td>
-	        <table CELLSPACING=2 CELLPADDING=2 id="main">
-        		<tr><td width=50% valign="top">
-	        	<fieldset>
-        		<legend><em>Title *</em></legend>
-		        <table>
-					<tr>
-						<td><input class="textclass" id="titletext" size="40" type=text></td>
-					</tr>
-				</table>
-				</fieldset>
-				</td>
-				<td width=50%>
-	        	<fieldset>
-        		<legend><em>Description *</em></legend>
-		        <table>
-					<tr>
-						<td><textarea class="textclass" id="descriptiontext" cols="40" rows="3"></textarea></td>
-					</tr>
-				</table>
-				</fieldset>
-				</td></tr>
-				<tr><td width=50%>
-	        	<fieldset>
-        		<legend><em>Priority</em></legend>
-		        <table>
-					<tr>
-						<td><select class="listclass" id="prioritylist">
-							<option value="none selected" selected="selected">Select</option>
-        					<option value="1">1 - <?php echo _('Lowest') ?></option>
-        					<option value="2">2</option>
-        					<option value="3" selected="selected">3</option>
-        					<option value="4">4</option>
-        					<option value="5">5 - <?php echo _('Highest') ?></option>
-							</select>
-						</td>
-					</tr>
-				</table>
-				</fieldset>
-				</td>
-				</tr>
-				<tr><td align="center">
-					<button id="createbutton">CREATE CHANGE REQUEST</button>
-				</td>
-				<!-- 
-				<td align="center">
-					<button id="creatensendbutton">CREATE CHANGE REQUEST AND ADD TO CLIENT</button>
-				</td>
-				-->
-				</tr>
-			</table>
-		</td>
-		</tr>
-		</table>
+<?php 
+	require_once 'tracker/build_submission_form.php';
+	artifact_submission_form($ath, $group);
+?>
     </body>
 </html>
