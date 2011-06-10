@@ -5,7 +5,8 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2009-2010, Franck Villaume - Capgemini
- * Copyright 2010, Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright (c) 2010, 2011
+ *	Thorsten Glaser <t.glaser@tarent.de>
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -1428,7 +1429,7 @@ function util_uri_grabber($unencoded_string, $tryaidtid=false) {
 	    $unencoded_string));
 	/* replace all URIs with ^AURI^A */
 	$s = preg_replace(
-	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$._!~*\'()%-]+)|',
+	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
 	    "\x01\$1\x01", $s);
 	if (!$s)
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
