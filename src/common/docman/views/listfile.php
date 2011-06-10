@@ -32,6 +32,20 @@ global $nested_docs; // flat docs array
 global $nested_groups; // flat document directories array
 global $HTML; // Layout object
 global $LUSER; // User object
+global $df;
+
+// we need to know if there is some pending docs for some actions such as delete empty directories
+$df->setStateID('3');
+$d_pending_arr =& $df->getDocuments();
+if ($d_pending_arr != NULL ) {
+	if (!$d_pending_arr || count($d_pending_arr) > 0) {
+		// Get the document groups info
+		//put the doc objects into an array keyed off the docgroup
+		foreach ($d_pending_arr as $doc) {
+			$nested_pending_docs[$doc->getDocGroupID()][] = $doc;
+		}
+	}
+}
 
 $DocGroupName = getNameDocGroup($dirid, $group_id);
 if (!$DocGroupName) {
@@ -44,7 +58,7 @@ var controller;
 
 jQuery(document).ready(function() {
 	controller = new DocManListFileController({
-		groupId:		<?php echo $group_id ?>, 
+		groupId:		<?php echo $group_id ?>,
 		tipsyElements:		[
 						{selector: '#docman-addnewfile', options:{delayIn: 500, delayOut: 0, fade: true}},
 						{selector: '#docman-addsubdirectory', options:{delayIn: 500, delayOut: 0, fade: true}},
@@ -79,7 +93,7 @@ if (forge_check_perm ('docman', $group_id, 'approve')) {
 	echo '<a href="#" id="docman-addsubdirectory" title="'._('Add a new subdirectory').'">'. html_image('docman/insert-directory.png',22,22,array('alt'=>'addsubdir')). '</a>';
 	// do not uncomment the line : trash directory is not correctly implemented
 	//echo '<a href="?group_id='.$group_id.'&amp;action=trashdir&amp;dirid='.$dirid.'">'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
-	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]))
+	if (!isset($nested_docs[$dirid]) && !isset($nested_groups[$dirid]) && !isset($nested_pending_docs[$dirid]))
 		echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Permanently delete this directory').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
 }
 
