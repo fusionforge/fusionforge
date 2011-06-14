@@ -105,12 +105,13 @@ class Document extends Error {
 	 *	@param	string	The filename of this document. Can be a URL.
 	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
 	 *	@param	string	The contents of this document.
-	 *	@param	int	The doc_group id of the doc_groups table.
+	 *	@param	int		The doc_group id of the doc_groups table.
 	 *	@param	string	The title of this document.
 	 *	@param	string	The description of this document.
+	 *	@param	int		The state id of the document. At creation, can not be deleted status.
 	 *	@return	boolean	success.
 	 */
-	function create($filename, $filetype, $data, $doc_group, $title, $description) {
+	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0) {
 		if (strlen($title) < 5) {
 			$this->setError(_('Title Must Be At Least 5 Characters'));
 			return false;
@@ -127,7 +128,11 @@ class Document extends Error {
 		if (session_loggedin()) {
 			$perm =& $this->Group->getPermission();
 			if ($perm && is_object($perm) && $perm->isDocEditor()) {
-				$doc_initstatus = '1';
+				if ($stateid && $stateid != 2) {
+					$doc_initstatus = $stateid;
+				} else {
+					$doc_initstatus = '1';
+				}
 			}
 		}
 

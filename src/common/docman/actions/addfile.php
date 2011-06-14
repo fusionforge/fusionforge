@@ -42,6 +42,7 @@ $uploaded_data = getUploadedFile('uploaded_data');
 $manual_path = getStringFromRequest('manual_path');
 $type = getStringFromRequest('type');
 $name = getStringFromRequest('name');
+$stateid = getIntFromRequest('stateid');
 
 if (!$doc_group || $doc_group == 100) {
 	//cannot add a doc unless an appropriate group is provided
@@ -142,7 +143,7 @@ switch ($type) {
 	}
 }
 
-if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $title, $description)) {
+if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $title, $description, $stateid)) {
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$doc_group.'&error_msg='.urlencode($d->getErrorMessage()));
 	} else {

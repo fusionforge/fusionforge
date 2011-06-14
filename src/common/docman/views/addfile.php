@@ -160,7 +160,6 @@ if ($dgf->getNested() == NULL) {
 	$params = array() ;
 	/* name must be details !!! if name = data then nothing is displayed */
 	$params['name'] = 'details';
-	$params['width'] = "800";
 	$params['height'] = "300";
 	$params['body'] = "";
 	$params['group'] = $group_id;
@@ -181,6 +180,17 @@ if ($dgf->getNested() == NULL) {
 						<strong>'. _('Directory that document belongs in').'</strong>
 					</td><td>';
 		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
+		echo '
+					</td>
+				</tr>';
+	}
+	if (forge_check_perm('docman', $group_id, 'approve')) {
+		echo '
+				<tr>
+					<td>
+						<strong>'. _('Status of that document').'</strong>
+					</td><td>';
+		doc_get_state_box('xzxz', 2); /**no direct deleted status */
 		echo '
 					</td>
 				</tr>';
