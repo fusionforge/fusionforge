@@ -112,7 +112,6 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 					$params = array() ;
 					/* name must be != data then nothing is displayed */
 					$params['name'] = 'details'.$d->getID();
-					$params['width'] = "800";
 					$params['height'] = "300";
 					$params['group'] = $group_id;
 					$params['body'] = $d->getFileData();
