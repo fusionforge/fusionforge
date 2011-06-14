@@ -144,7 +144,13 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 	<tr>
 		<td>
 			<strong><?php echo _('State') ?>:</strong><br />
-			<?php doc_get_state_box('xzxz', $d->getStateID()); ?>
+			<?php
+				if ($d->getStateID() == 2) {
+					doc_get_state_box('xzxz', $d->getStateID());
+				} else {
+					doc_get_state_box('xzxz');
+				}
+			?>
 		</td>
 	</tr>
 	<tr>
