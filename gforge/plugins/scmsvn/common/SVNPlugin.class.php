@@ -242,6 +242,9 @@ class SVNPlugin extends SCMPlugin {
 			if ( !$project->isActive()) {
 				continue;
 			}
+			if ( !$project->usesSCM()) {
+				continue;
+			}
 			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
 			$users = $project->getMembers () ;
 			foreach ($users as $user) {
