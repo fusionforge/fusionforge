@@ -242,17 +242,19 @@ class SVNPlugin extends SCMPlugin {
 			if ( !$project->isActive()) {
 				continue;
 			}
+			$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
 			$users = $project->getMembers () ;
 			foreach ($users as $user) {
-				$perm = $project->getPermission ($user) ;
-				if ($perm->isMember ('scm', 0)) {
+				$perm_data = $project->getPermission ($user)->getPermData() ;
+				$role = new Role($project,$perm_data['role_id']);
+				$svnlevel = $role->getVal('scm',0);
+				if ($svnlevel >= 0) {
 					$svnusers[$user->getID()] = $user ;
-				}
-				$access_data .= '[' . $project->getUnixName () . ":/]\n" ;
-				if ($perm->isMember ('scm', 1)) {
-					$access_data .= $user->getUnixName() . "= rw\n" ;
-				} elseif ($perm->isMember ('scm', 0)) {
-					$access_data .= $user->getUnixName() . "= r\n" ;
+					if ($svnlevel == 0) {
+						$access_data .= $user->getUnixName() . "= r\n" ;
+					} else {
+						$access_data .= $user->getUnixName() . "= rw\n" ;
+					}
 				}
 			}
 			if ( $project->enableAnonSCM() ) {
@@ -395,8 +397,8 @@ class SVNPlugin extends SCMPlugin {
 					continue;
 				}
 		
-				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
-				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
+				$uu = array_key_exists($user,$usr_updates) ? $usr_updates[$user] : 0 ;
+				$ua = array_key_exists($user,$usr_adds) ? $usr_adds[$user] : 0 ;
 				if ($uu > 0 || $ua > 0) {
 					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 							      array ($month_string,

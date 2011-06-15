@@ -55,7 +55,7 @@ class Role extends Error {
 	 */
 	function Role ($Group,$role_id=false) {
 		# Initialize the default group settings
-		if ($GLOBALS['default_roles']) {
+		if (array_key_exists('default_roles',$GLOBALS)) {
 			$this->defaults=$GLOBALS['default_roles'];
 		} else {
 			$this->defaults=array(
