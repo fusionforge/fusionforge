@@ -81,14 +81,6 @@ class FusionForgeTemplate extends QuickTemplate {
 		<meta http-equiv="Content-Type" content="<?php $this->text('mimetype') ?>; charset=<?php $this->text('charset') ?>" />
 		<?php $this->html('headlinks') ?>
 		<title><?php $this->text('pagetitle') ?></title>
-        	<!-- FUSIONFORGE Stylesheet BEGIN -->
-		<?php if (!$GLOBALS['sys_use_mwframe']){ 
-		$GLOBALS['HTML']->headerFavIcon();
-		$GLOBALS['HTML']->headerRSS();
-		$GLOBALS['HTML']->headerSearch();
-	} ?>
-		<?php if (!$GLOBALS['sys_use_mwframe']){ $GLOBALS['HTML']->headerCSS(); } ?>
-        	<!-- FUSIONFORGE Stylesheet END -->
 		<?php $this->html('csslinks') ?>
 
 		<!--[if lt IE 7]><script type="<?php $this->text('jsmimetype') ?>" src="<?php $this->text('stylepath') ?>/common/IEFixes.js?<?php echo $GLOBALS['wgStyleVersion'] ?>"></script>
@@ -115,6 +107,9 @@ class FusionForgeTemplate extends QuickTemplate {
 		<script type="<?php $this->text('jsmimetype') ?>"><?php $this->html('userjsprev') ?></script>
 <?php	}
 		if($this->data['trackbackhtml']) print $this->data['trackbackhtml']; ?>
+        	<!-- FUSIONFORGE Stylesheet BEGIN -->
+		<?php if (!$GLOBALS['sys_use_mwframe']){ $GLOBALS['HTML']->displayStylesheetElements(); } ?>
+        	<!-- FUSIONFORGE Stylesheet END -->
 	</head>
 <body id="mydoc" <?php if($this->data['body_ondblclick']) { ?> ondblclick="<?php $this->text('body_ondblclick') ?>"<?php } ?>
 <?php if($this->data['body_onload']) { ?> onload="<?php $this->text('body_onload') ?>"<?php } ?>
