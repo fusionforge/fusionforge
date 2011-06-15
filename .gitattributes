@@ -1982,6 +1982,7 @@ src/plugins/mediawiki/bin/mw-drop-wikis.php -text
 src/plugins/mediawiki/bin/mw-plugin-init.php -text
 src/plugins/mediawiki/bin/mw-wrapper.php -text
 src/plugins/mediawiki/cronjobs/create-imagedirs.php -text
+src/plugins/mediawiki/cronjobs/create-wikis-mysql.php -text
 src/plugins/mediawiki/cronjobs/create-wikis.php -text
 src/plugins/mediawiki/cronjobs/dump-wikis.php -text
 src/plugins/mediawiki/db/mediawiki-init.sql -text
