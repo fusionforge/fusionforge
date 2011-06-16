@@ -432,11 +432,11 @@ then
 fi
 if [ ! -e $hostkeydir ]
 then
-    mkdir $hostkeydir
+    mkdir -p $hostkeydir
 fi
 if [ ! -e $macdir ]
 then
-    mkdir $macdir
+    mkdir -p $macdir
 fi
 
 install_debian $rootfs
