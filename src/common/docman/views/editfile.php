@@ -137,8 +137,12 @@ if (array_key_exists($dirid,$nested_docs) && is_array($nested_docs[$dirid])) {
 		<td>
 			<strong><?php echo _('Directory that document belongs in') ?></strong><br />
 			<?php
-				$newdgf = new DocumentGroupFactory($g);
- 				$dgh->showSelectNestedGroups($newdgf->getNested(), 'doc_group', false, false);
+				if ($d->getStateID() == 2) {
+					$newdgf = new DocumentGroupFactory($g);
+					$dgh->showSelectNestedGroups($newdgf->getNested(), 'doc_group', false, false);
+				} else {
+					$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $d->getDocGroupID());
+				}
 		?></td>
 	</tr>
 	<tr>
