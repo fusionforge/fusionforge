@@ -1,0 +1,32 @@
+#
+# In this file you can find vars that are useable 
+# both as an include in a Makefile or
+# be sourced in a shell
+# So it should only be stuffs like VAR=value
+#
+VMENGINE=lxc
+REMOTESELENIUM=true
+KEEPVM=false
+DNSDOMAIN=local
+DEBMIRROR=http://atom330.bayle.eu/debian/
+DEBMIRRORSEC=http://atom330.bayle.eu/debian-security/
+
+# WIP: NEW WAY TO SET CONFIG (used by new start_vm script)
+
+# The following is for static ip config
+# hostname=vmengine:template:address/mask:gateway
+vzdebian6=vz:debian6:192.168.222.105/24:192.168.222.1
+vzdebian6src=vz:debian6:192.168.222.120/24:192.168.222.1
+vzcentos5=vz:centos5:192.168.222.110/24:192.168.222.1
+vzcentos5src=vz:centos5:192.168.222.115/24:192.168.222.1
+
+debian6=lxc:debian6:192.168.222.105/24:192.168.222.1
+debian6src=lxc:debian6:192.168.222.120/24:192.168.222.1
+centos5=lxc:centos5:192.168.222.110/24:192.168.222.1
+centos5src=lxc:centos5:192.168.222.115/24:192.168.222.1
+
+# For dhcpconfig
+dhdebian6=lxc:debian6::
+dhdebian6src=lxc:debian6::
+dhcentos5=lxc:centos5::
+dhcentos5src=lxc:centos5::
