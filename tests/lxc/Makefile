@@ -6,26 +6,29 @@ default: installtemplate
 help: 
 	@echo "read the Makefile to see available targets"
 
-/cgroup: beroot
-	[ ! -d /cgroup ] || mkdir /cgroup
+/cgroup:
+	[ -d /cgroup ] || ( if [ $(shell id -u) != "0" ] then; echo "you should be root to run this" ; else; mkdir /cgroup; fi
 
 checkmount: checkfstab /cgroup
-	grep -q 0 /cgroup/cpuset.cpu || mount /cgroup
+	grep -q 0 /cgroup/cpuset.cpus || mount /cgroup
 
 checkfstab:
-	grep ^cgroup /etc/fstab || (echo "You need to add cgroup entry to fstab \"cgroup        /cgroup        cgroup        defaults    0    0\"" && false)
+	@grep ^cgroup /etc/fstab || (echo "You need to add cgroup entry to fstab 'cgroup /cgroup cgroup defaults 0 0'" && false)
 
 /usr/lib/lxc:
 	@[ -d $@ ] || sudo apt-get install lxc
 
 /usr/share/bridge-utils:
-	apt-get install bridge-utils
+	@[ -d $@ ] || apt-get install bridge-utils
 
 /usr/bin/netmask:
-	@[ -d $@ ] || sudo apt-get install netmask
+	@[ -f $@ ] || sudo apt-get install netmask
 
 /usr/bin/rinse:
-	@[ -d $@ ] || sudo apt-get install rinse
+	@[ -f $@ ] || sudo apt-get install rinse
+
+/usr/sbin/tunctl:
+	@[ -f $@ ] || sudo apt-get install uml-utilities
 
 bridging:
 	@grep -q '^iface br0 inet' /etc/network/interfaces || (echo "Please setup network bridging" && false)
@@ -61,13 +64,13 @@ createdeb:
 createcos: /usr/bin/netmask /usr/bin/rinse
 	sudo /usr/bin/lxc-create -n centos5.local -f config.centos5 -t centos5
 
-startdeb:
+startdeb: checkmount
 	sudo LANG=C /usr/bin/lxc-start -n debian6.local -d
 
 stopdeb:
 	sudo LANG=C /usr/bin/lxc-stop -n debian6.local
 
-startcos:
+startcos: checkmount
 	sudo LANG=C /usr/bin/lxc-start -n centos5.local -d
 
 stopcos:
