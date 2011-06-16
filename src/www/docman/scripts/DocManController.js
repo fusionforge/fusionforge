@@ -98,7 +98,7 @@ DocManListFileController.prototype =
 			}
 			if (jQuery.Storage.get("treesize") != 0) {
 				this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
-				var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 18;
+				var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 70;
 				this.params.divRight.css('width', w - this.params.divLeft.width());
 			}
 		}
