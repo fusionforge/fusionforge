@@ -360,7 +360,7 @@ function html_get_tooltip_description($element_name) {
 }
 
 function html_use_jquery() {
-    use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
+	use_javascript('/scripts/jquery/jquery-1.4.2.min.js');
 }
 
 function html_use_tooltips() {
@@ -471,7 +471,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
-function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none',$show_any=false,$text_any='Select One') {
+function html_build_select_box ($result, $name, $checked_val="xzxz", $show_100=true, $text_100='none', $show_any=false, $text_any='Select One') {
 	if ($text_100=='none'){
 		$text_100=_('None');
 	}
