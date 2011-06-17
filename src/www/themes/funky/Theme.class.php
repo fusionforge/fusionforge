@@ -221,6 +221,16 @@ class Theme extends Layout {
 			$use_tooltips = $u->usesTooltips();
 		}
 
+		if ($use_tooltips) {
+			?>
+			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+				if (typeof(jQuery(window).tipsy) == 'function') {
+					jQuery(document).ready(function() {jQuery('.tabtitle').tipsy()});
+				}
+			/* ]]> */</script>
+			<?
+		}
+
 		$return = '<!-- start tabs -->';
 		$return .= '<table class="tabGenerator width-100p100" summary="" ';
 
@@ -239,11 +249,12 @@ class Theme extends Layout {
 			$return .= "\n";
 
 			// middle part
-			$return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;"><a href="'.$TABS_DIRS[$i].'">' . "\n";
-			$return .= '<span';
-
+			$return .= '<td class="tg-middle" style="width:'.$tabwidth.'%;"><a ';
+			$return .= 'id="'.md5($TABS_DIRS[$i]).'" ';
 			if ($use_tooltips)
-				$return .= ' title="'.$TABS_TOOLTIPS[$i].'"';
+				$return .= 'class="tabtitle" title="'.$TABS_TOOLTIPS[$i].'"';
+			$return .= 'href="'.$TABS_DIRS[$i].'">' . "\n";
+			$return .= '<span';
 
 			if ($selected == $i)
 				$return .= ' class="selected"';
@@ -259,7 +270,7 @@ class Theme extends Layout {
 			$return .= '</span>';
 			$return .= '</span>' . "\n";
 			$return .= '</a></td>' . "\n";
-		
+
 		}
 
 		$return .= '</tr></table><!-- end tabs -->';
@@ -377,8 +388,6 @@ class Theme extends Layout {
 	 */
 	function headerJS()
 	{
-		html_use_jquery();
-
 		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>';
@@ -386,9 +395,9 @@ class Theme extends Layout {
 		echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
 
-		plugin_hook("javascript_file",false);
+		plugin_hook("javascript_file", false);
 		echo $this->getJavascripts();
-		
+
 		// invoke the 'javascript' hook for custom javascript addition
 		$params = array('return' => false);
 		plugin_hook("javascript", $params);
@@ -398,6 +407,10 @@ class Theme extends Layout {
 			echo $javascript;
 			echo "\n/* ]]> */</script>\n";
 		}
+		echo '<script type="text/javascript" src="/scripts/jquery/jquery-1.4.2.min.js"></script>';
+		echo '<script type="text/javascript" src="/scripts/jquery-tipsy/src/javascripts/jquery.tipsy.js"></script>';
+		echo '<script type="text/javascript" src="/js/tooltips.js"></script>';
+		echo '<link rel="stylesheet" href="/scripts/jquery-tipsy/src/stylesheets/tipsy.css" type="text/css">';
 		?>
 		<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
 		jQuery.noConflict();
