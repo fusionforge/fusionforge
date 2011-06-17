@@ -27,7 +27,6 @@
 /* global variables used */
 global $g; //group object
 global $group_id; // id of the group
-global $d_arr; // documents array of this group
 
 if ( !forge_check_perm ('docman', $group_id, 'admin')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -80,13 +79,11 @@ echo '</ul>';
 echo '</form>';
 
 if ($g->useDocmanSearch()) {
-	if ($d_arr || count($d_arr) > 1) {
-		echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&amp;action=forcereindexenginesearch">';
-		echo '<ul>';
-		echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
-		echo '</ul>';
-		echo '</form>';
-	}
+	echo '<form id="reindexword" name="reindexword" method="post" action="?group_id='.$group_id.'&amp;action=forcereindexenginesearch">';
+	echo '<ul>';
+	echo '<li><input name="status" type="hidden" value="1"><input id="submitreindexword" type="button" value="'. _('Force reindexation search engine') .'" onclick="javascript:doIt(\'reindexword\')"></li>';
+	echo '</ul>';
+	echo '</form>';
 }
 
 if (forge_get_config('use_webdav')) {
