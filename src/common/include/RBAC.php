@@ -1402,8 +1402,8 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 
 	public function hasUser($user) {
 		$res = db_query_params ('SELECT user_id FROM pfo_user_role WHERE user_id=$1 AND role_id=$2',
-					array (db_int_array_to_any_clause($user->getID()), $this->getID())) ;
-		if ($res && $db_numrows($res)) {
+					array ($user->getID(), $this->getID())) ;
+		if ($res && db_numrows($res)) {
 			return true ;
 		} else {
 			return false ;
