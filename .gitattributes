@@ -5151,6 +5151,7 @@ tests/lxc/config.debian6 -text
 tests/lxc/lxc-centos5 -text
 tests/lxc/lxc-debian6 -text
 tests/lxc/start -text
+tests/lxc/stop -text
 tests/openvz/Makefile -text
 tests/openvz/README -text
 tests/openvz/interfaces.sample -text
@@ -5180,6 +5181,7 @@ tests/scripts/start_vm -text
 tests/scripts/start_vm.sh -text svneol=unset#text/x-sh
 tests/scripts/start_vz.sh -text svneol=unset#text/x-sh
 tests/scripts/stop_lxc.sh -text
+tests/scripts/stop_vm -text
 tests/scripts/stop_vm.sh -text svneol=unset#text/x-sh
 tests/scripts/stop_vz.sh -text svneol=unset#text/x-sh
 tests/unit/config/ConfigTest.php -text
