@@ -59,27 +59,28 @@ installtemplate: /usr/lib/lxc/templates/lxc-debian6 /usr/lib/lxc/templates/lxc-c
 	cp lxc-centos5 /usr/lib/lxc/templates/
 
 createdeb:
-	sudo /usr/bin/lxc-create -n debian6.local -f config.debian6 -t debian6
+	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6
 
 createcos: /usr/bin/netmask /usr/bin/rinse
-	sudo /usr/bin/lxc-create -n centos5.local -f config.centos5 -t centos5
+	sudo /usr/bin/lxc-create -n dhcentos5.local -f config.centos5 -t centos5
 
 startdeb: checkmount
-	sudo LANG=C /usr/bin/lxc-start -n debian6.local -d
+	sudo LANG=C /usr/bin/lxc-start -n dhdebian6.local -d
 
 stopdeb:
-	sudo LANG=C /usr/bin/lxc-stop -n debian6.local
+	sudo LANG=C /usr/bin/lxc-stop -n dhdebian6.local
 
 startcos: checkmount
-	sudo LANG=C /usr/bin/lxc-start -n centos5.local -d
+	sudo LANG=C /usr/bin/lxc-start -n dhcentos5.local -d
 
 stopcos:
-	sudo LANG=C /usr/bin/lxc-stop -n centos5.local
+	sudo LANG=C /usr/bin/lxc-stop -n dhcentos5.local
 
-destroydeb: beroot
-	sudo LANG=C /usr/bin/lxc-stop -n debian6.local
-	sudo LANG=C /usr/bin/lxc-destroy -n debian6.local
+destroydeb:
+	sudo LANG=C /usr/bin/lxc-stop -n dhdebian6.local
+	sudo LANG=C /usr/bin/lxc-destroy -n dhdebian6.local
 
-destroycos: beroot
-	sudo LANG=C /usr/bin/lxc-stop -n centos5.local
-	sudo LANG=C /usr/bin/lxc-destroy -n centos5.local
+destroycos:
+	sudo LANG=C /usr/bin/lxc-stop -n dhcentos5.local
+	sudo LANG=C /usr/bin/lxc-destroy -n dhcentos5.local
+
