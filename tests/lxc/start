@@ -1,6 +1,6 @@
 #! /bin/sh -x
 
-lxcdir=`dirname $0`/../lxc
+lxcdir=`dirname $0`
 
 IFS=: ; VARS=`eval echo \\\$$BASEHOST` ; unset IFS ; set $VARS
 VMENGINE=$1
@@ -23,7 +23,7 @@ else
 	# Next is a bit hacky, the only way I found to pass pubkey to the template
 	# LXC don't allow to pass extra args
 	echo "#lxc.pubkey = $SSHPUBKEY" >> $tmpconf
-	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $LXCTEMPLATE
+	sudo /usr/bin/lxc-create -n $HOST -f $tmpconf -t $TEMPLATE
 	rm -f $tmpconf
 	sudo /usr/bin/lxc-start -n $HOST -d
 fi
