@@ -86,13 +86,13 @@ then
 fi
 
 # Start script for this engine must exist
-if [ ! -x $scriptdir/${VMENGINE}/start ]
+if [ ! -x $scriptdir/../${VMENGINE}/start ]
 then 
 	echo "Don't know how to run ${VMENGINE} engine"
-	echo "$scriptdir/${VMENGINE}/start not found"
+	echo "$scriptdir/../${VMENGINE}/start not found"
 	exit 4
 else
-	$scriptdir/${VMENGINE}/start
+	$scriptdir/../${VMENGINE}/start
 fi
 
 # Loop until engine is up and ssh is running
